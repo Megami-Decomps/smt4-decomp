@@ -1,142 +1,149 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ad76c` (_code @ 0x3ad76c, 0x318 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initialises the battle UI block (sprite pools, four timer set, draw parameters, 16 skill tabs, 12 card rows, detail object); written from the decompilation, the draw-parameter chunk addresses and loop shapes not compared with retail */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
-extern "C" {
-
-int FUN_00199b9c(int, int);
-int FUN_001f50ac(int);
-int uiInitializeFourTimerSet(int);
-int uiSpriteSetImageKeyframe(...);
-int FUN_002bd954(...);
-int spriteStartAnimationByIndex(...);
-int asdOperatorNew(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int drawParameterBlockClear(void);
-
-typedef struct fn_003ad76c_arg0 fn_003ad76c_arg0;
-struct fn_003ad76c_arg0 {
-    unsigned char pad_0x0[0x20];
-    undefined4 field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x34];
-    undefined4 field_0x58; /* +0x58 */
-    undefined2 field_0x5c; /* +0x5c */
-    undefined2 field_0x5e; /* +0x5e */
-    undefined1 field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x26];
-    undefined1 field_0x87; /* +0x87 */
-    unsigned char pad_0x88[0x2];
-    undefined1 field_0x8a; /* +0x8a */
+struct BtlUiSprite {
+    /* 0x00 */ u8 data[0x8C];
 };
 
-/* stack frame of param_2: 10 slot(s), 40 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_2_stack;
+/* One of the 16 skill tabs (0x400 bytes): five entry sprites, two labels and a visibility flag. */
+struct BtlSkillTab {
+    /* 0x000 */ BtlUiSprite entries[5];
+    /* 0x2BC */ BtlUiSprite header;
+    /* 0x348 */ BtlUiSprite footer;
+    /* 0x3D4 */ u8 unk3D4[0xC];
+    /* 0x3E0 */ u8 visible;
+    /* 0x3E1 */ u8 unk3E1[0x1F];
+};
 
-extern unsigned char DAT_004019cc; /* 0x4019cc */
-extern unsigned char DAT_00401ac8; /* 0x401ac8 */
-extern unsigned char DAT_00401bac; /* 0x401bac */
-extern unsigned char DAT_00401c6c; /* 0x401c6c */
-extern int g_btlUiBlock; /* 0x439ca8 */
+/* One of the 16 command rows (0xA0 bytes). */
+struct BtlCommandRow {
+    /* 0x00 */ BtlUiSprite sprite;
+    /* 0x8C */ u8 unk8C[0xC];
+    /* 0x98 */ u8 enabled;
+    /* 0x99 */ u8 unk99[7];
+};
 
-/* Supplied declaration required: FUN_00199b9c. */
-/* Supplied declaration required: FUN_001f50ac. */
-/* Supplied declaration required: uiInitializeFourTimerSet. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: paramsInit. */
-extern unsigned int FUN_0033d3e4(void);
-/* Supplied declaration required: drawParameterBlockClear. */
+/* One of the 12 status rows (0x14C bytes). */
+struct BtlStatusRow {
+    /* 0x000 */ BtlUiSprite icon;
+    /* 0x08C */ BtlUiSprite label;
+    /* 0x118 */ u16 value;
+    /* 0x11A */ u8 unk11A[0x32];
+};
 
+struct BtlUiBlock {
+    /* 0x0000 */ u8 pool[8];          /* the sprite pool handed to FUN_001f50ac starts here */
+    /* 0x0008 */ u8 unk0008[0x21F8];
+    /* 0x2200 */ u8 timers[0x260];
+    /* 0x2460 */ u8 detail[0x3070];
+    /* 0x54D0 */ u8 skipIntro;
+    /* 0x54D1 */ u8 unk54D1[0xD5];
+    /* 0x55A6 */ u8 unk55A6[0x800];
+    /* 0x5DA6 */ u16 cardA;
+    /* 0x5DA8 */ u8 unk5DA8[0x602];
+    /* 0x63AA */ u16 cardB;
+    /* 0x63AC */ u8 unk63AC[0x602];
+    /* 0x69AE */ u16 cardC;
+    /* 0x69B0 */ u8 unk69B0[0x602];
+    /* 0x6FB2 */ u16 cardD;
+    /* 0x6FB4 */ u8 unk6FB4[0x602];
+    /* 0x75B6 */ u16 cardE;
+    /* 0x75B8 */ u8 unk75B8[0x868];
+    /* 0x7E20 */ void *detailObject;
+    /* 0x7E24 */ u8 unk7E24[0x14];
+    /* 0x7E38 */ u32 unk7E38;
+    /* 0x7E3C */ u32 unk7E3C;
+    /* 0x7E40 */ u8 unk7E40[0x5D];
+    /* 0x7E9D */ u8 unk7E9D;
+    /* 0x7E9E */ u8 unk7E9E;
+    /* 0x7E9F */ u8 unk7E9F;
+    /* 0x7EA0 */ UiResourceParameters resources;
+    /* 0x7EC0 */ BtlUiSprite cursor;
+    /* 0x7F4C */ BtlSkillTab tabs[16];
+    /* 0xBF4C */ BtlCommandRow commands[16];
+    /* 0xC94C */ u8 unkC94C[0x1760];
+    /* 0xE0AC */ BtlStatusRow status[12];
+};
 
-void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
+struct BtlSetupSource {
+    /* 0x00 */ u8 unk00[0xE0];
+    /* 0xE0 */ u32 flags;
+};
 
+#define BTL_UI_SKIP_INTRO_FLAG 0x40000
+
+extern "C" {
+extern BtlUiBlock *g_btlUiBlock;
+extern const u8 DAT_00401c6c[];   /* the draw-parameter chunks lie in front of it */
+
+void FUN_001f50ac(void *pool);
+void uiInitializeFourTimerSet(void *timers);
+void FUN_00199b9c(void *detail, BtlSetupSource *source);
+void drawParameterBlockClear(UiResourceParameters *resources);
+void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
+                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
+                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+void FUN_002bd954(BtlUiSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flags, f32 speed);
+void spriteStartAnimationByIndex(BtlUiSprite *sprite, s32 animation);
+void uiSpriteSetImageKeyframe(BtlUiSprite *sprite, s32 keyframe, s32 flag);
+void *asdOperatorNew(u32 size, BtlSetupSource *owner);
+void *FUN_0033d3e4(void *memory);
+
+void FUN_003ad76c(void *unused, BtlSetupSource *source)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = g_btlUiBlock;
-  *(unsigned int *)(g_btlUiBlock + 0x7e38) = 0;
-  *(unsigned int *)(temp_v0 + 0x7e3c) = 0;
-  *(unsigned char *)(temp_v0 + 0x7e9d) = 0;
-  *(unsigned char *)(temp_v0 + 0x7e9e) = 0;
-  FUN_001f50ac(temp_v0 + 8);
-  uiInitializeFourTimerSet(temp_v0 + 0x2200);
-  FUN_00199b9c(temp_v0 + 0x2460,param_2);
-  temp_v1 = g_btlUiBlock;
-  *(unsigned short *)(g_btlUiBlock + 0x5da6) = 0;
-  *(unsigned short *)(temp_v1 + 0x63aa) = 0;
-  *(unsigned short *)(temp_v1 + 0x69ae) = 0;
-  *(unsigned short *)(temp_v1 + 0x6fb2) = 0;
-  *(unsigned short *)(temp_v1 + 0x75b6) = 0;
-  temp_v1 = temp_v0 + 0x7ea0;
-  drawParameterBlockClear();
-  paramsInit(temp_v1,&DAT_004019cc,0xfc,&DAT_00401ac8,0xe4,&DAT_00401bac,0xc0,0,0,&DAT_00401c6c,
-               0x5b0);
-  temp_v6 = 0;
-  do {
-    temp_v4 = temp_v0 + temp_v6 * 0x400;
-    temp_v3 = 0;
-    *(unsigned char *)(temp_v4 + 0x832c) = 0;
-    do {
-      temp_v5 = temp_v4 + temp_v3 * 0x8c + 0x7f4c;
-      FUN_002bd954(temp_v5,0xd,2000,temp_v1,0xf1);
-      spriteStartAnimationByIndex(temp_v5,3);
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 5);
-    FUN_002bd954(temp_v4 + 0x8208,0x15,1000,temp_v1,0xf1);
-    spriteStartAnimationByIndex(temp_v4 + 0x8208,9);
-    FUN_002bd954(temp_v4 + 0x8294,0x15,0x3ea,temp_v1,0xf1);
-    spriteStartAnimationByIndex(temp_v4 + 0x8294,9);
-    temp_v3 = temp_v0 + temp_v6 * 0xa0;
-    *(unsigned char *)(temp_v3 + 0xbfe4) = 0;
-    temp_v3 = temp_v3 + 0xbf4c;
-    FUN_002bd954(temp_v3,0x15,0x3ee,temp_v1,0xf1);
-    spriteStartAnimationByIndex(temp_v3,10);
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0x10);
-  temp_v6 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v6 * 0x14c;
-    *(unsigned short *)(temp_v3 + 0xe1c4) = 0;
-    FUN_002bd954(temp_v3 + 0xe0ac,0x15,0xbba,temp_v0 + 0x7ea0,0xf1);
-    spriteStartAnimationByIndex(temp_v3 + 0xe0ac,0xb);
-    FUN_002bd954(temp_v3 + 0xe138,0x15,0xbbe,temp_v0 + 0x7ea0,0xf1);
-    spriteStartAnimationByIndex(temp_v3 + 0xe138,0xc);
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0xc);
-  temp_v6 = 0x3a4;
-  asdOperatorNew(0x3a4,param_2);
-  temp_v2 = 0;
-  if (temp_v6 != 0) {
-    temp_v2 = FUN_0033d3e4();
-  }
-  *(unsigned int *)(temp_v0 + 0x7e20) = temp_v2;
-  *(unsigned char *)(temp_v0 + 0x54d0) = 0;
-  if ((*(unsigned int *)(param_2 + 0xe0) & 0x40000) != 0) {
-    *(unsigned char *)(temp_v0 + 0x54d0) = 1;
-  }
-  FUN_002bd954(temp_v0 + 0x7ec0,0xe,0,temp_v1,1);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x7ec0,0xd,0);
-  return;
+    BtlUiBlock *block = g_btlUiBlock;
+    block->unk7E38 = 0;
+    block->unk7E3C = 0;
+    block->unk7E9D = 0;
+    block->unk7E9E = 0;
+    FUN_001f50ac(block->pool + 0);
+    uiInitializeFourTimerSet(block->timers);
+    FUN_00199b9c(block->detail, source);
+    block = g_btlUiBlock;
+    block->cardA = 0;
+    block->cardB = 0;
+    block->cardC = 0;
+    block->cardD = 0;
+    block->cardE = 0;
+
+    UiResourceParameters *resources = &block->resources;
+    drawParameterBlockClear(resources);
+    paramsInit(resources, DAT_00401c6c - 0x2A0, 0xFC, DAT_00401c6c - 0x1A4, 0xE4, DAT_00401c6c - 0xC0, 0xC0,
+               NULL, 0, DAT_00401c6c, 0x5B0);
+
+    for (s32 i = 0; i < 16; i++) {
+        BtlSkillTab *tab = &block->tabs[i];
+        tab->visible = 0;
+        for (s32 j = 0; j < 5; j++) {
+            FUN_002bd954(&tab->entries[j], 0xD, 2000, resources, 0xF1, 1.0f);
+            spriteStartAnimationByIndex(&tab->entries[j], 3);
+        }
+        FUN_002bd954(&tab->header, 0x15, 1000, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&tab->header, 9);
+        FUN_002bd954(&tab->footer, 0x15, 0x3EA, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&tab->footer, 9);
+
+        BtlCommandRow *row = &block->commands[i];
+        row->enabled = 0;
+        FUN_002bd954(&row->sprite, 0x15, 0x3EE, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&row->sprite, 10);
+    }
+    for (s32 i = 0; i < 12; i++) {
+        BtlStatusRow *row = &block->status[i];
+        row->value = 0;
+        FUN_002bd954(&row->icon, 0x15, 0xBBA, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&row->icon, 0xB);
+        FUN_002bd954(&row->label, 0x15, 0xBBE, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&row->label, 0xC);
+    }
+
+    void *memory = asdOperatorNew(0x3A4, source);
+    block->detailObject = memory != NULL ? FUN_0033d3e4(memory) : NULL;
+    block->skipIntro = 0;
+    if ((source->flags & BTL_UI_SKIP_INTRO_FLAG) != 0)
+        block->skipIntro = 1;
+    FUN_002bd954(&block->cursor, 0xE, 0, resources, 1, 1.0f);
+    uiSpriteSetImageKeyframe(&block->cursor, 0xD, 0);
 }
 
 } /* extern "C" */

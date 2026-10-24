@@ -1,160 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d13d4` (_code @ 0x3d13d4, 0x368 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the enemy action's target-marker setup (draft gotos removed); retail keeps the party/down flags in stack slots and shares the final tail by jumps, and armcc here orders the 64-bit bit scan and the marker offset arithmetic differently. */
+#include "common.h"
+
+#define WORK_PARTY 0x4000
+#define WORK_MARKED 0x2000000
+#define UNIT_PRESENT 1
+#define UNIT_TAKEN 0x1000000
+
+/* A battle unit (only the fields read here). */
+struct BattleUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0xD0];
+    /* 0x0D4 */ s16 slot;
+    /* 0x0D6 */ u8 unk0D6[0x1B2];
+};
+
+struct BattleSideInfo {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BattleUnit *units;
+    /* 0x1FC4 */ u8 unk1FC4[0xC];
+    /* 0x1FD0 */ u64 targetMask;
+    /* 0x1FD8 */ u8 unk1FD8[8];
+    /* 0x1FE0 */ s8 partyTargets[3];
+};
+
+struct BattleContext {
+    BattleSideInfo *side;
+};
+
+struct ActionWork {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x1C];
+    /* 0x20 */ u32 *actorFlags;     /* bit 4: the actor is down */
+    /* 0x24 */ u8 *actor;           /* +0x62: the actor's skill */
+    /* 0x28 */ u8 unk28[0x10];
+    /* 0x38 */ u8 allowed[0x6D];
+};
 
 extern "C" {
+u8 *gameGetSlotTable(void);
+s32 partyHasEligibleMember(BattleSideInfo *side);
+void FUN_00246454(s32 offset, ActionWork *work, BattleUnit *unit);
+void FUN_0024b888(s32 offset, ActionWork *work, s32 down, s32 pick, f32 scale, s32 zero);
+void FUN_002296f4(BattleContext *context, ActionWork *work, s32 skill, s32 base, s32 a, s32 b);
 
-int FUN_002296f4(...);
-int FUN_00246454(int, unsigned int *, unsigned int *);
-int FUN_0024b888(...);
-
-/* stack frame of param_7: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_7_stack;
-
-/* Supplied declaration required: FUN_002296f4. */
-/* Supplied declaration required: FUN_00246454. */
-/* Supplied declaration required: FUN_0024b888. */
-extern int gameGetSlotTable(void);
-extern int partyHasEligibleMember(int);
-
-
-unsigned int
-FUN_003d13d4(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
-            int param_6,int param_7)
-
+/* Sets up the target markers of an enemy action: marks the `count` targets the action covers (the
+ * allowed units, or the party members for a party action), resolves which one is the selected pick
+ * and places the cursor/marker, then reports the skill to the battle context. Returns 1. */
+u32 FUN_003d13d4(BattleContext *context, ActionWork *work, u32 a, u32 b, f32 scale, s32 base, s32 count)
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puVar8;
-  unsigned char temp_v7;
-  unsigned int temp_v8;
-  unsigned long long temp_v9;
-  int temp_v10;
-  unsigned int *temp_v11;
-  
-  temp_v2 = 0;
-  temp_v5 = 0;
-  temp_v4 = 0xffffffff;
-  temp_v9 = (unsigned long long)param_5;
-  temp_v7 = (*(unsigned int *)param_2[8] & 0x10) != 0;
-  temp_v10 = 7;
-  if ((*param_2 & 0x4000) == 0) {
-    temp_v10 = 0;
-  }
-  temp_v1 = 0;
-  if (!temp_v7) {
-    if ((*param_2 & 0x4000) != 0) {
-      if (param_7 < 3) {
-        temp_v2 = param_7;
-        do {
-          if (-1 < *(char *)(*param_1 + temp_v2 + 0x1fe0)) {
-            temp_v4 = (unsigned int)*(char *)(*param_1 + temp_v2 + 0x1fe0);
-            if (0 < (int)temp_v4) {
-              temp_v4 = temp_v4 - 1;
+    s32 selected = 0;
+    s32 pick = -1;
+    bool down = (*work->actorFlags & 0x10) != 0;
+    bool party = (work->flags & WORK_PARTY) != 0;
+    s32 step = party ? 7 : 0;
+    BattleUnit *chosen = NULL;
+    if (!down) {
+        if (party) {
+            for (s32 i = count; i < 3; i++) {
+                s8 id = context->side->partyTargets[i];
+                if (id >= 0) {
+                    pick = id > 0 ? id - 1 : id;
+                    break;
+                }
+            }
+        } else {
+            s32 seen = 0;
+            for (s32 bit = 0; bit < 64; bit++) {
+                if (context->side->targetMask & ((u64)1 << bit)) {
+                    if (count > seen) {
+                        seen = (s8)(seen + 1);
+                    } else {
+                        pick = bit > 0 ? bit - 1 : bit;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    s32 placed = 0;
+    for (s32 target = 0; target < 0x6D; target++) {
+        if (!work->allowed[target])
+            continue;
+        if (party) {
+            BattleUnit *unit = &context->side->units[target];
+            if (unit != NULL && (unit->flags & UNIT_PRESENT) && !(unit->flags & UNIT_TAKEN)) {
+                selected = 5;
+                FUN_00246454(step * placed + base + 5, work, unit);
+                placed = (s8)(placed + 1);
+                unit->flags |= UNIT_TAKEN;
+            }
+        } else if (placed < count) {
+            placed = (s8)(placed + 1);
+        } else {
+            BattleUnit *unit = &context->side->units[target];
+            if (unit != NULL && (unit->flags & UNIT_PRESENT)) {
+                selected = 5;
+                FUN_00246454(step * count + base + 5, work, unit);
+                chosen = unit;
             }
             break;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 3);
-      }
-    }
-    else {
-      do {
-        temp_v0 = 1 << (temp_v1 & 0xff);
-        if ((temp_v0 & *(unsigned int *)(*param_1 + 0x1fd0)) != 0 ||
-            (((int)temp_v0 >> 0x1f) & *(unsigned int *)(*param_1 + 0x1fd4)) != 0) {
-          if (param_7 <= temp_v2) {
-            temp_v4 = temp_v1;
-            if (0 < (int)temp_v1) {
-              temp_v4 = temp_v1 - 1;
-            }
-            break;
-          }
-          temp_v2 = (int)(char)((char)temp_v2 + '\x01');
         }
-        temp_v1 = temp_v1 + 1;
-      } while ((int)temp_v1 < 0x40);
     }
-  }
-  temp_v6 = 0;
-  temp_v3 = 0;
-  temp_v2 = param_6 + 5;
-  temp_v11 = (unsigned int *)0x0;
-  do {
-    temp_v8 = (unsigned int)temp_v9;
-    if (*(char *)((int)param_2 + temp_v3 + 0x38) != '\0') {
-      if ((*param_2 & 0x4000) != 0) {
-        puVar8 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v3 * 0x288);
-        if (((puVar8 != (unsigned int *)0x0) && ((*puVar8 & 1) != 0)) && ((*puVar8 & 0x1000000) == 0)) {
-          temp_v5 = 5;
-          FUN_00246454(temp_v10 * temp_v6 + temp_v2,param_2,puVar8);
-          temp_v6 = (int)(char)((char)temp_v6 + '\x01');
-          *puVar8 = *puVar8 | 0x1000000;
-        }
-      }
-      else {
-        if (param_7 <= temp_v6) {
-          puVar8 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v3 * 0x288);
-          if ((puVar8 == (unsigned int *)0x0) || ((*puVar8 & 1) == 0)) goto LAB_003d15ac;
-          temp_v5 = 5;
-          FUN_00246454(temp_v10 * param_7 + temp_v2,param_2,puVar8);
-          temp_v11 = puVar8;
-          break;
-        }
-        temp_v6 = (int)(char)((char)temp_v6 + '\x01');
-      }
+    if (party && partyHasEligibleMember(context->side) > 0)
+        selected = 5;
+    if (down) {
+        FUN_0024b888(step * count + base + selected, work, down, 0, scale, 0);
+        work->flags |= WORK_MARKED;
+    } else if (pick >= 0 &&
+               (chosen == NULL || chosen->slot < 0 || party || gameGetSlotTable()[0x90F0 + pick] != chosen->slot)) {
+        if (selected > 0)
+            selected += party ? 0x28 : 0x14;
+        FUN_0024b888(step * count + base + selected, work, 0, pick, scale, 0);
+        work->flags |= WORK_MARKED;
     }
-    temp_v8 = (unsigned int)temp_v9;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x6d);
-  if (((*param_2 & 0x4000) != 0) && (temp_v2 = partyHasEligibleMember(*param_1), 0 < temp_v2)) {
-    temp_v5 = 5;
-  }
-LAB_003d15ac:
-  if (temp_v11 != (unsigned int *)0x0) {
-    if (!temp_v7) {
-      if ((-1 < (short)temp_v11[0x35]) &&
-         (((int)temp_v4 < 0 ||
-          (((*param_2 & 0x4000) == 0 &&
-           (temp_v2 = gameGetSlotTable(),
-           (int)*(char *)(temp_v2 + temp_v4 + 0x90f0) == (int)(short)temp_v11[0x35])))))) {
-        FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),param_6,0xf,0x14);
-        return 1;
-      }
-LAB_003d16e4:
-      if (-1 < (int)temp_v4) {
-        if (temp_v5 != 0) {
-          if ((*param_2 & 0x4000) != 0) {
-            temp_v5 = temp_v5 + 0x28;
-          }
-          else {
-            temp_v5 = temp_v5 + 0x14;
-          }
-        }
-        FUN_0024b888(temp_v10 * param_7 + param_6 + temp_v5,param_2,0,temp_v4,temp_v8,0);
-        *param_2 = *param_2 | 0x2000000;
-      }
-      FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),param_6,0xf,0x14);
-      return 1;
-    }
-  }
-  else if (!temp_v7) goto LAB_003d16e4;
-  FUN_0024b888(temp_v10 * param_7 + param_6 + temp_v5,param_2,temp_v7,0,temp_v8,0);
-  *param_2 = *param_2 | 0x2000000;
-  FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),param_6,0xf,0x14);
-  return 1;
+    FUN_002296f4(context, work, *(s16 *)(work->actor + 0x62), base, 15, 20);
+    return 1;
 }
 
 } /* extern "C" */

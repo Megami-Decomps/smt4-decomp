@@ -1,193 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00152c00` (_code @ 0x152c00, 0x244 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the zero used by the later stores into r6 at function entry (we materialize it before the loop), so registers shift; otherwise the same instructions. */
+#include <algorithm>
+#include "gfx/LightRegistry.h"
+#include "shard/S1Light.h"
 
-extern "C" {
-
-int asdLightActivate(unsigned int);
-int sceneTraverserVisit(unsigned int, unsigned int);
-int nw_gfx_SceneNode_AttachChild(unsigned int, int);
-
-typedef struct fn_00152c00_arg0 fn_00152c00_arg0;
-struct fn_00152c00_arg0 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    void *field_0x14; /* +0x14 */
-    int field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x8];
-    undefined4 *field_0x24; /* +0x24 */
-    int field_0x28; /* +0x28 */
+/* A batch of registered lights attached to one scene group. */
+struct LightBatchOwner {
+    /* 0x00 */ LightRegistry *root;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 secondary; /* nonzero: lives in the second (group 4/5) scene */
 };
 
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b80; /* 0x464b80 */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern unsigned int DAT_00464b88; /* 0x464b88 */
-extern unsigned int sceneGroup1Root; /* 0x464b8c */
-extern int sceneGroup4Root; /* 0x464b90 */
-extern int sceneGroup2Root; /* 0x464b94 */
-extern int sceneGroup5Root; /* 0x464b98 */
-extern int g_asdLightCount; /* 0x4dad80 */
-extern unsigned char DAT_004dad84; /* 0x4dad84 */
-extern unsigned char DAT_004dad85; /* 0x4dad85 */
-extern int DAT_004dad98; /* 0x4dad98 */
+struct LightBatch {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 group;
+    /* 0x10 */ s32 lastGroup;
+    /* 0x14 */ LightBatchOwner *owner;
+    /* 0x18 */ LightBatchOwner *lastOwner;
+    /* 0x1C */ u8 unk1C[8];
+    /* 0x24 */ LightRegistration **lights;
+    /* 0x28 */ s32 lightCount;
+};
 
-/* Supplied declaration required: asdLightActivate. */
-/* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
-
-
-void FUN_00152c00(fn_00152c00_arg0 *param_1)
-
+/* Drops the light from the registry's list; true when it was listed. */
+static inline bool unregisterLight(LightRegistry *registry, LightRegistration *light)
 {
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar6;
-  int *piVar7;
-  void *pvVar8;
-  int temp_v4;
-  int *piVar10;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  piVar1 = (int *)param_1->field_0x14;
-  if (piVar1 == (int *)0x0) {
-    temp_v3 = param_1->field_0xc;
-    piVar1 = (int *)&sceneGroup1Root;
-    if (temp_v3 != 1) {
-      if (temp_v3 == 2) {
-        temp_v0 = 0;
-        temp_v5 = sceneGroup2Root;
-        asdLightActivate(temp_v0);
-      }
-      else {
-        temp_v5 = sceneGroup4Root;
-        if (temp_v3 != 4) {
-          if (temp_v3 != 5) {
-            return;
-          }
-          temp_v0 = 1;
-          temp_v5 = sceneGroup5Root;
-          asdLightActivate(temp_v0);
+    LightRegistration **newEnd = std::remove(registry->begin, registry->end, light);
+    bool removed = registry->end != newEnd;
+
+    registry->end = newEnd;
+    return removed;
+}
+
+extern "C" {
+extern LightRegistry *sceneGroup1Root[2];
+extern LightRegistry *sceneGroup2Root[2];
+extern void *g_asdModelTransformBuilder[2];
+extern void *DAT_00464b7c[2];
+extern LightCount g_asdLightCount[2];
+void asdLightActivate(s32 index);
+void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
+void sceneTraverserVisit(void *traverser, void *root);
+
+/* Removes every light of the batch from its registry, then leaves the scene group it was in. */
+void FUN_00152c00(LightBatch *batch)
+{
+    LightRegistry *selected;
+
+    if (batch->owner == NULL) {
+        switch (batch->group) {
+        case 1: selected = sceneGroup1Root[0]; break;
+        case 2: selected = sceneGroup2Root[0]; asdLightActivate(0); break;
+        case 4: selected = sceneGroup1Root[1]; break;
+        case 5: selected = sceneGroup2Root[1]; asdLightActivate(1); break;
+        default: return;
         }
-      }
+    } else {
+        selected = batch->owner->root;
     }
-    else {
-      temp_v5 = *piVar1;
+    if (selected == NULL)
+        return;
+    LightRegistry *registry = batch->lights[0]->registry;
+    s32 index = -1;
+    if (registry == sceneGroup2Root[0])
+        index = 0;
+    else if (registry == sceneGroup2Root[1])
+        index = 1;
+    for (s32 i = 0; i < batch->lightCount; i++) {
+        LightRegistration *light = batch->lights[i];
+        LightRegistry *owner = light->registry;
+        if (owner != NULL && unregisterLight(owner, light))
+            light->registry = NULL;
     }
-  }
-  else {
-    temp_v5 = *piVar1;
-  }
-  if (temp_v5 == 0) {
-    return;
-  }
-  temp_v3 = -1;
-  temp_v5 = *(int *)(*param_1->field_0x24 + 0xc);
-  if (sceneGroup2Root == temp_v5) {
-    temp_v3 = 0;
-  }
-  else if (sceneGroup5Root == temp_v5) {
-    temp_v3 = 1;
-  }
-  temp_v7 = 0;
-  if (temp_v7 < param_1->field_0x28) {
-    do {
-      temp_v4 = param_1->field_0x24[temp_v7];
-      temp_v1 = *(int *)(temp_v4 + 0xc);
-      if (temp_v1 != 0) {
-        piVar1 = *(int **)(temp_v1 + 0x18);
-        piVar10 = *(int **)(temp_v1 + 0x1c);
-        temp_v2 = temp_v1;
-        while( 1 ) {
-          if (piVar1 != piVar10) {
-            temp_v2 = *piVar1;
-          }
-          if (piVar1 == piVar10 || temp_v2 == temp_v4) break;
-          piVar1 = piVar1 + 1;
+    if (index >= 0 && registry->begin == registry->end) {
+        g_asdLightCount[index].render.active = 0;
+        g_asdLightCount[index].render.dirty = 0;
+        nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[index], sceneGroup2Root[index]);
+        sceneTraverserVisit(DAT_00464b7c[index], g_asdModelTransformBuilder[index]);
+    }
+    if (batch->owner != NULL) {
+        if (batch->owner->secondary == 0) {
+            sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+            --g_asdLightCount[0].count;
+        } else {
+            sceneTraverserVisit(DAT_00464b7c[1], g_asdModelTransformBuilder[1]);
+            --g_asdLightCount[1].count;
         }
-        if (piVar1 != piVar10) {
-          piVar6 = piVar1 + 1;
-          temp_v2 = (int)piVar10 - (int)piVar6;
-          if (0 < temp_v2 >> 2) {
-            piVar10 = piVar1;
-            if (temp_v2 * 0x20000000 < 0) {
-              temp_v6 = *piVar6;
-              piVar6 = piVar1 + 2;
-              if (temp_v6 != temp_v4) {
-                piVar10 = piVar1 + 1;
-                *piVar1 = temp_v6;
-              }
-            }
-            piVar1 = piVar10;
-            for (temp_v2 = temp_v2 >> 3; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-              piVar10 = piVar1;
-              if (*piVar6 != temp_v4) {
-                piVar10 = piVar1 + 1;
-                *piVar1 = *piVar6;
-              }
-              piVar7 = piVar6 + 1;
-              piVar6 = piVar6 + 2;
-              piVar1 = piVar10;
-              if (*piVar7 != temp_v4) {
-                piVar1 = piVar10 + 1;
-                *piVar10 = *piVar7;
-              }
-            }
-          }
-        }
-        piVar10 = *(int **)(temp_v1 + 0x1c);
-        *(int **)(temp_v1 + 0x1c) = piVar1;
-        if (piVar10 != piVar1) {
-          *(unsigned int *)(temp_v4 + 0xc) = 0;
-        }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < param_1->field_0x28);
-  }
-  if ((-1 < temp_v3) && (*(int *)(temp_v5 + 0x18) == *(int *)(temp_v5 + 0x1c))) {
-    (&DAT_004dad84)[temp_v3 * 0x18] = 0;
-    (&DAT_004dad85)[temp_v3 * 0x18] = 0;
-    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v3],(&sceneGroup2Root)[temp_v3]);
-    sceneTraverserVisit((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
-  }
-  if (param_1->field_0x14 != (void *)0x0) {
-    if (*(int *)((int)param_1->field_0x14 + 8) == 0) {
-      sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
-      g_asdLightCount = g_asdLightCount - 1;
+    } else if (batch->group < 3) {
+        sceneTraverserVisit(DAT_00464b7c[0], g_asdModelTransformBuilder[0]);
+        --g_asdLightCount[0].count;
+    } else {
+        sceneTraverserVisit(DAT_00464b7c[1], g_asdModelTransformBuilder[1]);
+        --g_asdLightCount[1].count;
     }
-    else {
-      sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
-      DAT_004dad98 = DAT_004dad98 - 1;
+    if (batch->owner != NULL) {
+        batch->lastGroup = -1;
+        batch->lastOwner = batch->owner;
+        batch->owner = NULL;
+        batch->group = -1;
+    } else {
+        s32 group = batch->group;
+        batch->lastOwner = NULL;
+        batch->group = -1;
+        batch->lastGroup = group;
     }
-  }
-  else if (param_1->field_0xc < 3) {
-    sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
-    g_asdLightCount = g_asdLightCount - 1;
-  }
-  else {
-    sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
-    DAT_004dad98 = DAT_004dad98 - 1;
-  }
-  pvVar8 = param_1->field_0x14;
-  if (pvVar8 != (void *)0x0) {
-    param_1->field_0x10 = 0xffffffff;
-    param_1->field_0x14 = (void *)0x0;
-    param_1->field_0xc = -1;
-    param_1->field_0x18 = (int)pvVar8;
-    return;
-  }
-  temp_v3 = param_1->field_0xc;
-  param_1->field_0x18 = 0;
-  param_1->field_0xc = -1;
-  param_1->field_0x10 = temp_v3;
-  return;
 }
 
 } /* extern "C" */

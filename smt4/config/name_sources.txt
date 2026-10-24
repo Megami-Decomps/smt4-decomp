@@ -3859,3 +3859,31 @@
 003ac794 sortKeyCompareKindId inferred [med] comparator: kind then id
 001e293c mapDepartStopJob inferred [med] jobStop(g_mapDepart->job, 0)
 001e0654 bibleStopTask inferred [med] jobStop(g_bible.work->task, 0)
+003955e4 _ZN9Obj4222ccC1Ev inferred constructor storing _ZTV9Obj4222cc+8; twin of smt4a Obj55c7d4
+00395e44 _ZN9Obj4222fcC1Ev inferred constructor storing _ZTV9Obj4222fc+8; twin of smt4a Obj55c804
+0038093c _ZN9Obj421f54C1Ev inferred constructor storing _ZTV9Obj421f54+8
+003bbe6c _ZN9Obj420a1cC1Ev inferred constructor storing _ZTV9Obj420a1c+8 (CEC init + two loads)
+00358c24 _ZN9Obj420e4cC1Ej inferred constructor storing _ZTV9Obj420e4c+8
+002375a0 _ZN9Obj4218b0C1Ejjj inferred constructor storing _ZTV9Obj4218b0+8
+0012b48c _ZN9Obj4211586createEPvP18AsdAllocatorObject inferred static factory; twin of smt4a Obj55b5a8::create
+001204b8 _ZN9Obj4217746createEPvP18AsdAllocatorObject inferred static factory (fog); twin
+0011d9c4 _ZN9Obj4210946createEPvP18AsdAllocatorObject inferred static factory; twin
+00120000 _ZN9Obj4212e86createEPvP18AsdAllocatorObject inferred static factory; twin
+0012abd0 _ZN9Obj4210586createEPvP18AsdAllocatorObject inferred static factory; twin
+002b52b4 _ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv inferred twin constructor (base Obj4218c0)
+002634f4 _ZN12CecMessageIdC1Ev inferred twin
+0036752c _ZN9Obj4212b46createEPK16Obj4212b4RequestP18AsdAllocatorObject inferred static factory: 0x168-byte scene object with no resource, copies its request
+002a5dc4 _ZN9Obj42111cC1Ej inferred twin constructor (base Obj421460)
+001393e4 _ZN9Obj420decC1Ev inferred constructor storing _ZTV9Obj420dec+8; embeds two Obj420f4c heap records
+00397200 _ZN9Obj422380C1Ev inferred constructor storing 0x422388 (= _ZTV9Obj422380+8): empty container with a self-linked anchor node
+00422380 _ZTV9Obj422380 evidence size:0x10 vtable stored by the container constructor at 0x397200 (address point 0x422388)
+00380298 _ZN14Obj421f54ListC1Ev inferred constructor of the sound frame heap's block list (head/tail link to the node at +8); returns this
+00380298 _ZN13Obj421f54ListC1Ev inferred correction: the class name Obj421f54List is 13 characters long
+003f76a4 _ZN9Obj4213b0D1Ev inferred destructor storing _ZTV9Obj4213b0+8: empties its 16-byte-element array and releases it through its allocator
+0049357c g_bibleDevilRows inferred size:0x1C8 ten-row stat table (values, colours, x, y, text, text colours) FUN_0022d1a8 uses as separate arrays
+00464d6c g_messageWindowCallbacks inferred size:0x8 skip/advance request callbacks used by FUN_00124324
+0043db58 g_colorRampTable inferred size:0xb4 20 rows of 9 bytes: three RGB colours blended by FUN_0025765c (row chosen by element type)
+00493c5c g_collisionPlaneTable inferred size:0xa800 FUN_00266c5c walks it as 0xa8-byte plane records (active byte at +8, kind +9, normal +0xc, distance +0x18) counted by the word at 0x446ffc; next .bss object starts at 0x49e45c (256 records)
+003c5384 talkCtrlDebugMenuBuild inferred [high] builds the TalkCtrl debug list (26 settings: toggles and number fields)
+001a8748 mapSystemLoadSharedFiles inferred [high] loads the field map system shared files then clears the departure data
+002d9384 statusDownCreate inferred [med] allocates/clears g_statusDown, starts TMD CALC/DDRAW tasks and builds its seven sprites

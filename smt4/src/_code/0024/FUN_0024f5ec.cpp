@@ -1,4 +1,4 @@
-/* NON_MATCHING: Render-stack base addresses hoist before state lookup; push argument/register schedules and the dirty-field load register differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 69 diff lines remain, scheduling/register allocation only. */
 #include "gfx/TiledIndexMesh.h"
 #include "camp/RenderCtx.h"
 #include "shard/W5_W5Match2_PlainData.h"
@@ -46,9 +46,9 @@ void FUN_0024f5ec(TiledMeshDrawWork *work, u32 mode)
     FUN_002571e8(mode);
     RenderCtx *context = g_titleScene;
     if ((work->flags & 0x100) != 0) {
-        renderStackPush(&context->stackA, FUN_002c5d80(5, 0));
+        renderCtxPushA(context, FUN_002c5d80(5, 0));
     } else {
-        renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
+        renderCtxPushA(context, FUN_002c5d80(1, 0));
     }
     if (work->dirty != 0) {
         FUN_00347198(work->mesh);

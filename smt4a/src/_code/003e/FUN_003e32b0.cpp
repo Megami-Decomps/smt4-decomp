@@ -1,199 +1,145 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e32b0` (_code @ 0x3e32b0, 0x380 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the NPC shop select script driver (step 0 lists up to three entries and starts the script entry for the count, steps 1-3 wait on the script); the stack frame matches retail (84 bytes) but armcc keeps the constants 0/1 in different registers (sl instead of r9) and orders the branch tests differently; the entry index passed in the unknown-selection case is assumed to be the found index. */
+#include "common.h"
+
+/* Record of one shop entry candidate (an id's table record). */
+struct ShopEntryRecord {
+    /* 0x00 */ u16 saveEntryId;
+    /* 0x02 */ u8 unk02[0x3A];
+    /* 0x3C */ u16 saveFlags;
+    /* 0x3E */ u16 requiredFlag;
+};
+
+struct ShopSlot {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ u16 id;
+};
+
+/* Driver state of the NPC shop select scene. */
+struct NpcShopSelect {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 state;
+    /* 0x08 */ s32 step;
+    /* 0x0C */ s32 previousState;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u32 scriptTable;
+    /* 0x18 */ u32 script;
+    /* 0x1C */ u8 unk1C[0x70];
+    /* 0x8C */ s32 choices[3];
+    /* 0x98 */ u8 fromCancel;
+    /* 0x99 */ u8 unk99[7];
+    /* 0xA0 */ s32 selected;
+};
 
 extern "C" {
+s32 scrRunOpcodesStub(u32 script);
+s32 panelIsMissingOrFlagClear(void);
+s32 messageGetChoiceResult(void);
+s32 tableGroupFindEntryIndex(u32 table, const char *name);
+void scrScriptProcessStartEntry(u32 script, s32 entry);
+void sysPlaySe(s32 se);
+void FUN_003c3e14(void);
+void FUN_003c1060(void);
+void fillThreeWordsWithByte(s32 *words, u32 value);
+ShopEntryRecord *FUN_00184310(u32 id);
+u32 FUN_00180118(u32 id);
+void FUN_003180c4(s32 index, u32 value);
+s32 gameFlagIsSet(u32 flag);
+s32 gameDataCopySaveEntry(u16 id, u8 *out);
 
-int sysPlaySe(int);
-int FUN_00180118(unsigned int);
-int FUN_00184310(void);
-int scrScriptProcessStartEntry(...);
-int FUN_003180c4(int, unsigned int);
-int FUN_003c1060(void);
-int FUN_003c3e14(void);
-int fillThreeWordsWithByte(int, unsigned int);
-
-/* stack frame of param_1: 2 slot(s), 6 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned short sp3A; /* 0x3a: local_3a */
-} param_1_stack;
-
-extern unsigned char LAB_003e3630; /* 0x3e3630 */
-extern unsigned char LAB_003e3644; /* 0x3e3644 */
-extern unsigned char LAB_003e3658; /* 0x3e3658 */
-extern unsigned char LAB_003e3670; /* 0x3e3670 */
-extern unsigned char LAB_003e3688; /* 0x3e3688 */
-extern unsigned char LAB_003e36a0; /* 0x3e36a0 */
-extern unsigned char LAB_003e36b8; /* 0x3e36b8 */
-extern unsigned char LAB_003e36cc; /* 0x3e36cc */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(void);
-extern int scrRunOpcodesStub(unsigned int);
-extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_003180c4. */
-extern int panelIsMissingOrFlagClear(void);
-extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_003c1060. */
-/* Supplied declaration required: FUN_003c3e14. */
-/* Supplied declaration required: fillThreeWordsWithByte. */
-
-
-void FUN_003e32b0(int param_1)
-
+/* Steps the shop select script: step 0 lists the (up to 3) available entries and starts the script
+ * entry for the count, steps 1..3 wait for the script and handle the chosen option. */
+void FUN_003e32b0(NpcShopSelect *scene)
 {
-/* irregular: 2 goto(s); 8 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned short *puVar3;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7 [54];
-  unsigned short temp_v8;
-  
-  temp_v1 = *(int *)(param_1 + 8);
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if (temp_v1 != 2) {
-        if ((temp_v1 == 3) && (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18)), temp_v1 == 2)) {
-          *(unsigned char *)(param_1 + 0x98) = 1;
-          *(unsigned int *)(param_1 + 8) = 0;
-        }
-      }
-      else {
-        temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
-        if (temp_v1 == 2) {
-          *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 4);
-          *(unsigned int *)(param_1 + 4) = 7;
-          *(unsigned int *)(param_1 + 8) = 0;
-          return;
-        }
-      }
-    }
-    else {
-      temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
-      if ((temp_v1 == 2) && (temp_v1 = panelIsMissingOrFlagClear(), temp_v1 != 0)) {
-        temp_v1 = messageGetChoiceResult();
-        if (!(temp_v1 == -1 || temp_v1 == 3)) {
-          temp_v1 = *(int *)(param_1 + temp_v1 * 4 + 0x8c);
-          *(int *)(param_1 + 0xa0) = temp_v1;
-          if (temp_v1 < 0) {
-            temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e36cc);
-            if (-1 < temp_v1) {
-              scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18));
+    switch (scene->step) {
+    case 0: {
+        s32 count = 0;
+        fillThreeWordsWithByte(scene->choices, 0xFFFFFFFF);
+        ShopSlot *slots = (ShopSlot *)scene;
+        for (s32 i = 0; i < 3; i++) {
+            ShopEntryRecord *record = FUN_00184310(slots[i].id);
+            if (record == NULL)
+                continue;
+            if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0)
+                continue;
+            if ((record->saveFlags & 1) != 0) {
+                u8 save[0x54];
+                s32 found;
+                if ((record->saveFlags & 0xFFFE) != 0)
+                    found = gameDataCopySaveEntry(record->saveFlags >> 1, save);
+                else
+                    found = gameDataCopySaveEntry(record->saveEntryId, save);
+                if (found == 0 || (*(u16 *)(save + 0x36) & 0xFC) == 0)
+                    continue;
             }
-            temp_v4 = 3;
-            *(unsigned int *)(param_1 + 8) = temp_v4;
+            FUN_003180c4(count, FUN_00180118(slots[i].id));
+            scene->choices[count] = i;
+            count++;
+        }
+        FUN_003c1060();
+
+        bool plain = scene->previousState == 5 || scene->previousState == 4 || scene->fromCancel != 0;
+        s32 entry;
+        if (count == 0) {
+            entry = tableGroupFindEntryIndex(scene->scriptTable, "npcShop_NoSelect");
+            if (entry > -1)
+                scrScriptProcessStartEntry(scene->script, entry);
+            scene->step = 2;
             return;
-          }
-          *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 4);
-          *(unsigned int *)(param_1 + 4) = 4;
-          *(unsigned int *)(param_1 + 8) = 0;
         }
-        else {
-          *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 4);
-          *(unsigned int *)(param_1 + 4) = 6;
-          *(unsigned int *)(param_1 + 8) = 0;
+        if (count == 1)
+            entry = tableGroupFindEntryIndex(scene->scriptTable, plain ? "npcShop_Select_01_01" : "npcShop_Select_00_01");
+        else if (count == 2)
+            entry = tableGroupFindEntryIndex(scene->scriptTable, plain ? "npcShop_Select_01_02" : "npcShop_Select_00_02");
+        else if (count == 3)
+            entry = tableGroupFindEntryIndex(scene->scriptTable, plain ? "npcShop_Select_01" : "npcShop_Select_00");
+        else
+            return;
+        if (entry < 0) {
+            scene->step = 1;
+            return;
         }
-        FUN_003c3e14();
-        sysPlaySe(0);
+        scrScriptProcessStartEntry(scene->script, entry);
+        scene->step = 1;
         return;
-      }
     }
-    return;
-  }
-  temp_v6 = 0;
-  fillThreeWordsWithByte(param_1 + 0x8c,0xffffffff);
-  temp_v1 = 0;
-  do {
-    temp_v5 = param_1 + temp_v1 * 0x24;
-    puVar3 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v5 + 0x22);
-    FUN_00184310();
-    if ((puVar3 != (unsigned short *)0x0) &&
-       ((puVar3[0x1f] == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
-      temp_v0 = puVar3[0x1e];
-      if ((temp_v0 & 1) != 0) {
-        if ((temp_v0 & 0xfffe) != 0) {
-          temp_v2 = gameDataCopySaveEntry(temp_v0 >> 1,temp_v7);
+    case 1:
+        if (scrRunOpcodesStub(scene->script) == 2 && panelIsMissingOrFlagClear() != 0) {
+            s32 choice = messageGetChoiceResult();
+            if (choice == -1 || choice == 3) {
+                scene->previousState = scene->state;
+                scene->state = 6;
+                scene->step = 0;
+            } else {
+                scene->selected = scene->choices[choice];
+                if (scene->selected < 0) {
+                    s32 entry = tableGroupFindEntryIndex(scene->scriptTable, "npcShop_Select_Unknwn");
+                    if (entry > -1)
+                        scrScriptProcessStartEntry(scene->script, entry);
+                    scene->step = 3;
+                    return;
+                }
+                scene->previousState = scene->state;
+                scene->state = 4;
+                scene->step = 0;
+            }
+            FUN_003c3e14();
+            sysPlaySe(0);
         }
-        else {
-          temp_v2 = gameDataCopySaveEntry(*puVar3,temp_v7);
-        }
-        if ((temp_v2 == 0) || ((temp_v8 & 0xfc) == 0)) goto LAB_003e33d0;
-      }
-      temp_v3 = (unsigned int)*(unsigned short *)(temp_v5 + 0x22);
-      FUN_00180118(temp_v3);
-      FUN_003180c4(temp_v6,temp_v3);
-      temp_v5 = temp_v6 * 4;
-      temp_v6 = temp_v6 + 1;
-      *(int *)(param_1 + temp_v5 + 0x8c) = temp_v1;
-    }
-LAB_003e33d0:
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  FUN_003c1060();
-  if (temp_v6 == 0) {
-    temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3644);
-    if (-1 < temp_v1) {
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18),temp_v1);
-    }
-    temp_v4 = 2;
-    *(unsigned int *)(param_1 + 8) = temp_v4;
-    return;
-  }
-  if (temp_v6 != 1) {
-    if (temp_v6 != 2) {
-      if (temp_v6 != 3) {
         return;
-      }
-      if ((*(int *)(param_1 + 0xc) == 5 || *(int *)(param_1 + 0xc) == 4) ||
-         (*(char *)(param_1 + 0x98) != '\0')) {
-        temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3630);
-      }
-      else {
-        temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e36b8);
-      }
+    case 2:
+        if (scrRunOpcodesStub(scene->script) == 2) {
+            scene->previousState = scene->state;
+            scene->state = 7;
+            scene->step = 0;
+        }
+        return;
+    case 3:
+        if (scrRunOpcodesStub(scene->script) == 2) {
+            scene->fromCancel = 1;
+            scene->step = 0;
+        }
+        return;
     }
-    else {
-      if ((*(int *)(param_1 + 0xc) != 5 && *(int *)(param_1 + 0xc) != 4) &&
-         (*(char *)(param_1 + 0x98) == '\0')) {
-        temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e36a0);
-        goto joined_r0x003e34b8;
-      }
-      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3688);
-    }
-    if (temp_v1 < 0) {
-      *(unsigned int *)(param_1 + 8) = 1;
-      return;
-    }
-    temp_v4 = *(unsigned int *)(param_1 + 0x18);
-  }
-  else {
-    if ((*(int *)(param_1 + 0xc) == 5 || *(int *)(param_1 + 0xc) == 4) ||
-       (*(char *)(param_1 + 0x98) != '\0')) {
-      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3658);
-    }
-    else {
-      temp_v1 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x14),&LAB_003e3670);
-    }
-joined_r0x003e34b8:
-    if (temp_v1 < 0) {
-      *(unsigned int *)(param_1 + 8) = 1;
-      return;
-    }
-    temp_v4 = *(unsigned int *)(param_1 + 0x18);
-  }
-  scrScriptProcessStartEntry(temp_v4,temp_v1);
-  *(unsigned int *)(param_1 + 8) = 1;
-  return;
 }
 
 } /* extern "C" */

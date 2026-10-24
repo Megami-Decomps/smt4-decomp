@@ -1,167 +1,135 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049fe58` (_code @ 0x49fe58, 0x28c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float register allocation and the HP clamp's conditional-store layout differ (retail keeps the percent damage in s23 and the group count in r5); logic and calls are identical. */
+#include "common.h"
 
-extern "C" {
+namespace {
+/* The player's save record (only the fields the damage touches). */
+struct PlayerRecord {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ s16 maxHp;
+    /* 0x1e */ u16 maxMp;
+    /* 0x20 */ u8 unk20[10];
+    /* 0x2a */ s16 hp;
+    /* 0x2c */ u16 mp;
+    /* 0x2e */ u8 unk2e[0x30];
+    /* 0x5e */ u16 status;
+};
 
-int FUN_00408184(int, int);
-int VectorSignedToFloat(int, int);
+/* A demon slot's record. */
+struct SlotRecord {
+    /* 0x00 */ u8 unk00[0xe];
+    /* 0x0e */ s16 maxHp;
+    /* 0x10 */ u16 maxMp;
+    /* 0x12 */ u8 unk12[0x18];
+    /* 0x2a */ s16 hp;
+    /* 0x2c */ u16 mp;
+    /* 0x2e */ u8 unk2e[0x32];
+    /* 0x60 */ u16 status;     /* 2: not affected, 0x400: never affected */
+    /* 0x62 */ u16 id;
+};
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int gameGetPlayerData(void);
-extern int FUN_0018416c(unsigned short);
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_00408184. */
+/* The slot table: which slots are in the party and their records. */
+struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x1c88];
+    /* 0x1c88 */ s8 party[0x18];
+    /* 0x1ca0 */ s8 reserve[3];
+};
 
-
-void FUN_0049fe58(unsigned int param_1)
-
-{
-/* irregular: irregular input(s): in_d11, in_fpscr, in_s0; 6 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  short temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned int in_fpscr;
-  unsigned int temp_v11;
-  float in_s0;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  int temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  unsigned long long in_d11;
-  
-  temp_v18 = 0.0f;
-  temp_v11 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == 0.0f) << 0x1e) | ((unsigned int)(0.0f <= in_s0) << 0x1d);
-  temp_v2 = (unsigned char)(temp_v11 >> 0x18);
-  if ((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) {
-    temp_v13 = (float)((unsigned long long)in_d11 >> 0x20);
-    temp_v19 = 0.01f;
-    temp_v17 = 1.0f;
-    if ((((param_1 == 0 || param_1 == 2) || param_1 == 3) &&
-        (temp_v4 = gameGetPlayerData(), (*(unsigned short *)(temp_v4 + 0x5e) & 2) == 0)) &&
-       (temp_v4 = gameGetPlayerData(), (*(unsigned short *)(temp_v4 + 0x5e) & 0x400) == 0)) {
-      temp_v4 = gameGetPlayerData();
-      temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 0x1c),(unsigned char)(temp_v11 >> 0x16) & 3);
-      temp_v4 = gameGetPlayerData();
-      temp_v13 = temp_v13 * in_s0 * temp_v19;
-      temp_v15 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 0x2a),(unsigned char)(temp_v11 >> 0x16) & 3);
-      if (temp_v13 <= temp_v18) {
-        temp_v13 = temp_v17;
-      }
-      temp_v14 = temp_v15 - temp_v13;
-      temp_v11 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v14 == temp_v18) << 0x1e) |
-               ((unsigned int)(temp_v18 <= temp_v14) << 0x1d);
-      temp_v2 = (unsigned char)(temp_v11 >> 0x18);
-      if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-        temp_v14 = temp_v17;
-      }
-      temp_v16 = (int)temp_v14;
-      temp_v0 = (short)temp_v16;
-      temp_v4 = gameGetPlayerData();
-      temp_v3 = *(short *)(temp_v4 + 0x1c);
-      if ((temp_v0 <= *(short *)(temp_v4 + 0x1c)) && (temp_v3 = temp_v0, temp_v0 < 1)) {
-        temp_v3 = 1;
-      }
-      temp_v14 = temp_v15 - temp_v14;
-      *(short *)(temp_v4 + 0x2a) = temp_v3;
-      temp_v1 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v14 < temp_v18) << 0x1f) |
-              ((unsigned int)(temp_v14 == temp_v18) << 0x1e);
-      temp_v11 = temp_v1 | ((unsigned int)((temp_v14 != temp_v14) || (temp_v18 != temp_v18)) << 0x1c);
-      temp_v2 = (unsigned char)(temp_v1 >> 0x18);
-      if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(temp_v11 >> 0x1c) & 1)) {
-        FUN_00408184(0x17,(int)temp_v15 - temp_v16);
-      }
-    }
-    if (param_1 >= 2) {
-      if (param_1 != 2 && param_1 != 3) {
-        return;
-      }
-      temp_v16 = 3;
-      temp_v4 = gameGetSlotTable();
-      temp_v4 = temp_v4 + 0x1ca0;
-    }
-    else {
-      temp_v16 = gameSlotTableFindFree();
-      temp_v4 = gameGetSlotTable();
-      temp_v4 = temp_v4 + 0x1c88;
-    }
-    if (0 < temp_v16) {
-      temp_v13 = 1.25f;
-    }
-    temp_v8 = 0;
-    if (temp_v8 < temp_v16) {
-      do {
-        if ((-1 < *(char *)(temp_v4 + temp_v8)) &&
-           (temp_v5 = gameGetSlotRecord(),
-           (*(unsigned short *)(temp_v5 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v5 + 0x60) & 0x400) == 0)) {
-          if (temp_v5 == 0) {
-            temp_v9 = 0;
-          }
-          else {
-            temp_v9 = (int)*(short *)(temp_v5 + 0xe);
-            temp_v6 = FUN_0018416c(*(unsigned short *)(temp_v5 + 0x62));
-            if (temp_v6 != 0) {
-              temp_v15 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(temp_v11 >> 0x16) & 3);
-              temp_v9 = (int)(short)(int)(temp_v15 * temp_v13);
-            }
-          }
-          temp_v15 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(temp_v11 >> 0x16) & 3);
-          temp_v14 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 0x2a),
-                                              (unsigned char)(temp_v11 >> 0x16) & 3);
-          temp_v15 = temp_v15 * in_s0 * temp_v19;
-          if (temp_v15 <= temp_v18) {
-            temp_v15 = temp_v17;
-          }
-          temp_v15 = temp_v14 - temp_v15;
-          temp_v11 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v15 == temp_v18) << 0x1e) |
-                   ((unsigned int)(temp_v18 <= temp_v15) << 0x1d);
-          temp_v2 = (unsigned char)(temp_v11 >> 0x18);
-          if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-            temp_v15 = temp_v17;
-          }
-          temp_v6 = (int)temp_v15;
-          temp_v9 = (int)(short)temp_v6;
-          if (temp_v5 != 0) {
-            temp_v10 = (int)*(short *)(temp_v5 + 0xe);
-            temp_v7 = FUN_0018416c(*(unsigned short *)(temp_v5 + 0x62));
-            if (temp_v7 != 0) {
-              temp_v12 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(temp_v11 >> 0x16) & 3);
-              temp_v10 = (int)(short)(int)(temp_v12 * temp_v13);
-            }
-            if ((temp_v9 <= temp_v10) && (temp_v10 = temp_v9, temp_v9 < 1)) {
-              temp_v10 = 1;
-            }
-            *(short *)(temp_v5 + 0x2a) = (short)temp_v10;
-          }
-          temp_v15 = temp_v14 - temp_v15;
-          temp_v1 = (temp_v11 & 0xfffffff) | ((unsigned int)(temp_v15 < temp_v18) << 0x1f) |
-                  ((unsigned int)(temp_v15 == temp_v18) << 0x1e);
-          temp_v11 = temp_v1 | ((unsigned int)((temp_v15 != temp_v15) || (temp_v18 != temp_v18)) << 0x1c);
-          temp_v2 = (unsigned char)(temp_v1 >> 0x18);
-          if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(temp_v11 >> 0x1c) & 1)) {
-            FUN_00408184(0x17,(int)temp_v14 - temp_v6);
-          }
-        }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < temp_v16);
-    }
-  }
-  return;
+const u16 STATUS_PROTECTED = 2;
+const u16 STATUS_NEVER = 0x400;
 }
 
-} /* extern "C" */
+extern "C" {
+PlayerRecord *gameGetPlayerData(void);
+SlotRecord *gameGetSlotRecord(s32 slot);
+SlotTable *gameGetSlotTable(void);
+s32 gameSlotTableFindFree(void);
+s32 FUN_0018416c(u16 id);
+void FUN_00408184(s32 kind, s32 amount);
+}
+
+/* The slot's HP limit (with the 1.25x bonus for ids FUN_0018416c accepts). */
+static __inline s32 slotHpLimit(const SlotRecord *record)
+{
+    s32 limit = record->maxHp;
+    if (FUN_0018416c(record->id) != 0) {
+        limit = (s16)(s32)((f32)limit * 1.25f);
+    }
+    return limit;
+}
+
+/* Damages the player and the demon slots of one group (mode 0 party and reserve member 0, 1 party, 2/3 reserve)
+   by `percent` of their maximum HP (at least 1, leaving at least 1 HP) and shows the total as a damage number. */
+extern "C" void FUN_0049fe58(u32 mode, f32 percent)
+{
+    if (!(percent > 0.0f)) {
+        return;
+    }
+    if ((mode == 0 || mode == 2 || mode == 3) && (gameGetPlayerData()->status & STATUS_PROTECTED) == 0 &&
+        (gameGetPlayerData()->status & STATUS_NEVER) == 0) {
+        f32 maxHp = (f32)gameGetPlayerData()->maxHp;
+        f32 hp = (f32)gameGetPlayerData()->hp;
+        f32 damage = maxHp * percent * 0.01f;
+        if (!(damage > 0.0f)) {
+            damage = 1.0f;
+        }
+        f32 remaining = hp - damage;
+        if (!(remaining > 0.0f)) {
+            remaining = 1.0f;
+        }
+        s16 newHp = (s16)(s32)remaining;
+        PlayerRecord *player = gameGetPlayerData();
+        if (newHp <= player->maxHp) {
+            if (newHp < 1) {
+                newHp = 1;
+            }
+            player->hp = newHp;
+        } else {
+            player->hp = player->maxHp;
+        }
+        if (hp - remaining > 0.0f) {
+            FUN_00408184(0x17, (s32)hp - (s32)remaining);
+        }
+    }
+    s32 count;
+    const s8 *slots;
+    if (mode == 0 || mode == 1) {
+        count = gameSlotTableFindFree();
+        slots = gameGetSlotTable()->party;
+    } else if (mode == 2 || mode == 3) {
+        count = 3;
+        slots = gameGetSlotTable()->reserve;
+    } else {
+        return;
+    }
+    for (s32 i = 0; i < count; i++) {
+        if (slots[i] >= 0) {
+            SlotRecord *record = gameGetSlotRecord(slots[i]);
+            if ((record->status & STATUS_PROTECTED) == 0 && (record->status & STATUS_NEVER) == 0) {
+                s32 limit = record == NULL ? 0 : slotHpLimit(record);
+                f32 hp = (f32)record->hp;
+                f32 damage = (f32)limit * percent * 0.01f;
+                if (!(damage > 0.0f)) {
+                    damage = 1.0f;
+                }
+                f32 remaining = hp - damage;
+                if (!(remaining > 0.0f)) {
+                    remaining = 1.0f;
+                }
+                s16 newHp = (s16)(s32)remaining;
+                if (record != NULL) {
+                    s32 cap = slotHpLimit(record);
+                    if (newHp <= cap) {
+                        cap = newHp;
+                        if (newHp < 1) {
+                            cap = 1;
+                        }
+                    }
+                    record->hp = cap;
+                }
+                if (hp - remaining > 0.0f) {
+                    FUN_00408184(0x17, (s32)hp - (s32)remaining);
+                }
+            }
+        }
+    }
+}

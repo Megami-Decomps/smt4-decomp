@@ -1,93 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c0404` (_code @ 0x1c0404, 0x2e4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail splits the 13-case state switch around state 7 and keeps constant 1 hoisted; the build orders the switch table and branches differently. */
+#include "common.h"
+
+/* The loading task's work: its state word is at +8. */
+struct LoadTask {
+    u8 unk00[8];
+    s32 state;
+};
 
 extern "C" {
+extern u32 g_btlUiBlock;
+extern u8 DAT_00446db4;
+void FUN_00192884(void);
+void configSettingsResetDefaults(void);
+void mapSystemLoadSharedFiles(void);
+void spriteTableRefAcquire(void);
+void texTableLoadWithEntries(void);
+void commonBgLoadSpritesOnFirstUse(void);
+void FUN_001ddb40(void);
+void texTableRefAcquire(void);
+void battleLoadCommonResources(void);
+void dataTable19ResolveVariants(void);
+void FUN_00201ac8(void);
+void FUN_00211d00(void);
+void statusBustUpAcquire(void);
+void FUN_0026f824(s32 value);
+void buttonHelpAcquireResources(void);
+void asdTMTexTableLoadSprites(s32 table);
+void FUN_002c5620(void);
+void asdSequenceRequest(s32 sequence, s32 argument);
+void FUN_002c58c8(s32 a, s32 b);
+void asdTMTexTableLoadTmx(s32 table, s32 flags);
+void FUN_002fc1a8(void);
+void FUN_00317e78(void);
+void FUN_00324a20(void);
+void fileSlotsPreloadShuffled(void);
+void FUN_0033f784(void);
+void spriteTables14And15Load(u32 block);
 
-int FUN_00192884(void);
-int configSettingsResetDefaults(void);
-int FUN_001a8748(void);
-int spriteTableRefAcquire(void);
-int texTableLoadWithEntries(void);
-int commonBgLoadSpritesOnFirstUse(void);
-int FUN_001ddb40(void);
-int texTableRefAcquire(void);
-int battleLoadCommonResources(void);
-int dataTable19ResolveVariants(void);
-int FUN_00201ac8(void);
-int FUN_00211d00(void);
-int statusBustUpAcquire(void);
-int FUN_0026f824(int);
-int buttonHelpAcquireResources(void);
-int asdTMTexTableLoadSprites(int);
-int FUN_002c5620(void);
-int asdSequenceRequest(int, int);
-int FUN_002c58c8(int, int);
-int asdTMTexTableLoadTmx(int, int);
-int FUN_002fc1a8(void);
-int FUN_00317e78(void);
-int FUN_00324a20(void);
-int fileSlotsPreloadShuffled(void);
-int FUN_0033f784(void);
-int spriteTables14And15Load(unsigned int);
-
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-extern unsigned char DAT_00446db4; /* 0x446db4 */
-
-/* Supplied declaration required: FUN_00192884. */
-/* Supplied declaration required: configSettingsResetDefaults. */
-/* Supplied declaration required: FUN_001a8748. */
-/* Supplied declaration required: spriteTableRefAcquire. */
-/* Supplied declaration required: texTableLoadWithEntries. */
-/* Supplied declaration required: commonBgLoadSpritesOnFirstUse. */
-/* Supplied declaration required: FUN_001ddb40. */
-/* Supplied declaration required: texTableRefAcquire. */
-/* Supplied declaration required: battleLoadCommonResources. */
-/* Supplied declaration required: dataTable19ResolveVariants. */
-/* Supplied declaration required: FUN_00201ac8. */
-/* Supplied declaration required: FUN_00211d00. */
-/* Supplied declaration required: statusBustUpAcquire. */
-/* Supplied declaration required: FUN_0026f824. */
-/* Supplied declaration required: buttonHelpAcquireResources. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_002c5620. */
-/* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_002fc1a8. */
-/* Supplied declaration required: FUN_00317e78. */
-/* Supplied declaration required: FUN_00324a20. */
-/* Supplied declaration required: fileSlotsPreloadShuffled. */
-/* Supplied declaration required: FUN_0033f784. */
-/* Supplied declaration required: spriteTables14And15Load. */
-
-
-unsigned int FUN_001c0404(int *param_1)
-
+/* Run one step of the boot-time resource loading sequence. Returns -1 once it is finished. */
+u32 FUN_001c0404(LoadTask **task)
 {
-/* irregular: 26 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *param_1;
-  temp_v0 = *(int *)(temp_v1 + 8);
-  if (temp_v0 == 7) {
-    texTableRefAcquire();
-    FUN_00211d00();
-    *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-    return 0;
-  }
-  if (temp_v0 >= 8) {
-    if (temp_v0 == 0xb) {
-      configSettingsResetDefaults();
-      FUN_0026f824(0);
-      FUN_002c5620();
-      FUN_001a8748();
-      *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-      return 0;
-    }
-    if (temp_v0 < 0xc) {
-      if (temp_v0 == 8) {
+    LoadTask *work = *task;
+    switch (work->state) {
+    case 0:
+        work->state = 1;
+        break;
+    case 1:
+        work->state = 2;
+        break;
+    case 2:
+        FUN_002fc1a8();
+        work->state++;
+        break;
+    case 3:
+        fileSlotsPreloadShuffled();
+        work->state++;
+        break;
+    case 4:
+        dataTable19ResolveVariants();
+        FUN_0033f784();
+        asdTMTexTableLoadTmx(0xC, 0);
+        asdTMTexTableLoadTmx(0x18, 0);
+        asdTMTexTableLoadTmx(2, 0);
+        asdTMTexTableLoadTmx(3, 0);
+        asdTMTexTableLoadTmx(4, 0);
+        asdTMTexTableLoadTmx(0x1F, 0);
+        asdTMTexTableLoadTmx(0x20, 0);
+        asdTMTexTableLoadTmx(0x26, 0);
+        asdTMTexTableLoadSprites(0x32);
+        asdTMTexTableLoadSprites(0x28);
+        asdTMTexTableLoadTmx(0x16, 0);
+        work->state++;
+        break;
+    case 5:
+        FUN_002c58c8(5, 2);
+        FUN_002c58c8(5, 3);
+        commonBgLoadSpritesOnFirstUse();
+        work->state++;
+        break;
+    case 6:
+        texTableLoadWithEntries();
+        work->state++;
+        break;
+    case 7:
+        texTableRefAcquire();
+        FUN_00211d00();
+        work->state++;
+        break;
+    case 8:
         buttonHelpAcquireResources();
         FUN_00192884();
         FUN_00201ac8();
@@ -96,82 +96,34 @@ unsigned int FUN_001c0404(int *param_1)
         FUN_001ddb40();
         spriteTables14And15Load(g_btlUiBlock);
         FUN_00317e78();
-        *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-        return 0;
-      }
-      if (temp_v0 != 9) {
-        if (temp_v0 != 10) {
-          return 0;
-        }
+        work->state++;
+        break;
+    case 9:
+        FUN_00324a20();
+        work->state++;
+        break;
+    case 10:
         battleLoadCommonResources();
-        *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-        return 0;
-      }
-      FUN_00324a20();
-      *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-      return 0;
+        work->state++;
+        break;
+    case 11:
+        configSettingsResetDefaults();
+        FUN_0026f824(0);
+        FUN_002c5620();
+        mapSystemLoadSharedFiles();
+        work->state++;
+        break;
+    case 12:
+        work->state = 100;
+        break;
+    case 100:
+        work->state = 0x65;
+        break;
+    case 0x65:
+        DAT_00446db4 = 1;
+        asdSequenceRequest(0x16, 0);
+        return 0xFFFFFFFF;
     }
-    if (temp_v0 != 0xc) {
-      if (temp_v0 == 100) {
-        *(unsigned int *)(temp_v1 + 8) = 0x65;
-        return 0;
-      }
-      if (temp_v0 != 0x65) {
-        return 0;
-      }
-      DAT_00446db4 = 1;
-      asdSequenceRequest(0x16,0);
-      return 0xffffffff;
-    }
-    temp_v0 = 100;
-    *(int *)(temp_v1 + 8) = temp_v0;
     return 0;
-  }
-  switch(temp_v0) {
-  case 0:
-    *(unsigned int *)(temp_v1 + 8) = 1;
-    break;
-  case 1:
-    temp_v0 = 2;
-    *(int *)(temp_v1 + 8) = temp_v0;
-    break;
-  case 2:
-    FUN_002fc1a8();
-    temp_v0 = *(int *)(temp_v1 + 8) + 1;
-    *(int *)(temp_v1 + 8) = temp_v0;
-    break;
-  case 3:
-    fileSlotsPreloadShuffled();
-    temp_v0 = *(int *)(temp_v1 + 8) + 1;
-    *(int *)(temp_v1 + 8) = temp_v0;
-    break;
-  case 4:
-    dataTable19ResolveVariants();
-    FUN_0033f784();
-    asdTMTexTableLoadTmx(0xc,0);
-    asdTMTexTableLoadTmx(0x18,0);
-    asdTMTexTableLoadTmx(2,0);
-    asdTMTexTableLoadTmx(3,0);
-    asdTMTexTableLoadTmx(4,0);
-    asdTMTexTableLoadTmx(0x1f,0);
-    asdTMTexTableLoadTmx(0x20,0);
-    asdTMTexTableLoadTmx(0x26,0);
-    asdTMTexTableLoadSprites(0x32);
-    asdTMTexTableLoadSprites(0x28);
-    asdTMTexTableLoadTmx(0x16,0);
-    *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-    break;
-  case 5:
-    FUN_002c58c8(5,2);
-    FUN_002c58c8(5,3);
-    commonBgLoadSpritesOnFirstUse();
-    *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-    break;
-  case 6:
-    texTableLoadWithEntries();
-    *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-  }
-  return 0;
 }
-
-} /* extern "C" */
+}

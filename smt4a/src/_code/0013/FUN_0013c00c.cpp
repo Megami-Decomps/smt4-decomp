@@ -1,4 +1,4 @@
-/* NON_MATCHING: inline render-stack scheduling, target-query hooks and VFP draw-argument scheduling differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 29 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_SlotState.h"
 
@@ -23,7 +23,7 @@ void FUN_0013c00c(s32 index)
             alpha = 255;
         color = (color & 0xFFFFFF00) | alpha;
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(1, false));
+        renderCtxPushA(context, FUN_001692ac(1, false));
         FUN_0016c4b8(g_renderCtx, NULL);
         f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_renderCtx->stereoMode));
         f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode));

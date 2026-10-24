@@ -1,171 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021af2c` (_code @ 0x21af2c, 0x274 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail re-reads g_gameGlobals.transition (a second literal-pool load of the global address) for the phase accesses and keeps the first object pointer for the other fields; the build merges the two loads, shifting registers throughout. */
+#include "common.h"
+
+/* The transition object behind g_gameGlobals (accessed fields). */
+struct TransitionState {
+    u8 unk0000[0x14];
+    s32 unk14;              // 0x14
+    u8 unk18[0x135C];
+    s32 phase;              // 0x1374
+    u8 unk1378[9];
+    u8 skipFinish;          // 0x1381
+    u8 unk1382[0xC8E];
+    u8 unk2010;             // 0x2010: alternate flow
+    u8 unk2011[3];
+    u8 requested;           // 0x2014
+    u8 unk2015[2];
+    u8 kind;                // 0x2017
+    u8 subKind;             // 0x2018
+};
+
+struct GameGlobals {
+    u32 unk00;
+    TransitionState *transition;    // 0x04
+};
 
 extern "C" {
+extern GameGlobals g_gameGlobals;
+void FUN_002c7ce8(s32 step);
 
-int FUN_002c7ce8(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-/* Supplied declaration required: FUN_002c7ce8. */
-
-
+/* Drive the transition object one step: start the phases of the requested transition kind. */
 void FUN_0021af2c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v2 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x14) = 0;
-  *(unsigned char *)(temp_v2 + 0x2014) = 1;
-  temp_v3 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  temp_v0 = *(char *)(temp_v2 + 0x2017);
-  if (temp_v0 == '\0') {
-    if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-      FUN_002c7ce8(0);
-    }
-    if (*(int *)(temp_v3 + 0x1374) == 1) {
-      FUN_002c7ce8(1);
-    }
-    temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1381);
-    temp_v5 = temp_v4 == 0;
-    if (temp_v5) {
-      temp_v4 = *(unsigned int *)(temp_v3 + 0x1374);
-    }
-    if (!temp_v5 || temp_v4 != 2) {
-      return;
-    }
-    FUN_002c7ce8(2);
-    return;
-  }
-  if (temp_v0 != '\a') {
-    if ((!(temp_v0 == '\t' || temp_v0 == '\n')) &&
-       (!((temp_v0 == '\v' || temp_v0 == '\f') || temp_v0 == '\b'))) {
-      if (temp_v0 == '\x0f') {
-        if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) != 0) {
-          return;
-        }
-        FUN_002c7ce8(0);
-        return;
-      }
-      if (temp_v0 != '\x0e') {
-        temp_v1 = *(char *)(temp_v2 + 0x2018);
-        if (temp_v0 != '\x04') {
-          if (temp_v1 != '\x06') {
-            if (temp_v1 != '\r') {
-              if (*(char *)(temp_v2 + 0x2010) == '\0') {
-                if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-                  FUN_002c7ce8(0);
-                }
-                if (*(int *)(temp_v3 + 0x1374) != 1) {
-                  return;
-                }
-                FUN_002c7ce8(1);
-                return;
-              }
-              if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-                FUN_002c7ce8(0);
-              }
-              if (*(int *)(temp_v3 + 0x1374) == 1) {
-                FUN_002c7ce8(1);
-              }
-              temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1381);
-              temp_v5 = temp_v4 == 0;
-              if (temp_v5) {
-                temp_v4 = *(unsigned int *)(temp_v3 + 0x1374);
-              }
-              if (!temp_v5 || temp_v4 != 2) {
-                return;
-              }
-            }
-            else {
-              if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-                FUN_002c7ce8(1);
-              }
-              if (*(int *)(temp_v3 + 0x1374) != 1) {
-                return;
-              }
-            }
-            FUN_002c7ce8(5);
-            return;
-          }
-          if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) != 0) {
-            return;
-          }
-        }
-        else if (!(temp_v1 == '\a' || temp_v1 == '\f')) {
-          if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
+    TransitionState *state = g_gameGlobals.transition;
+    state->unk14 = 0;
+    state->requested = 1;
+    TransitionState *current = g_gameGlobals.transition;
+    u8 kind = state->kind;
+    if (kind == 0) {
+        if (current->phase == 0)
             FUN_002c7ce8(0);
-          }
-          if (*(int *)(temp_v3 + 0x1374) != 1) {
-            return;
-          }
+        if (current->phase == 1)
+            FUN_002c7ce8(1);
+        if (state->skipFinish == 0 && current->phase == 2)
+            FUN_002c7ce8(2);
+        return;
+    }
+    if (kind == 7) {
+        if (state->unk2010 != 0) {
+            if (current->phase == 0)
+                FUN_002c7ce8(0);
+            if (current->phase == 1)
+                FUN_002c7ce8(1);
+            if (current->phase == 2)
+                FUN_002c7ce8(5);
+        } else {
+            if (current->phase == 0)
+                FUN_002c7ce8(0);
+            if (current->phase == 1)
+                FUN_002c7ce8(1);
         }
-        else if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) != 0) {
-          return;
+        return;
+    }
+    if (kind == 9 || kind == 10 || kind == 11 || kind == 12 || kind == 8) {
+        if (current->phase == 0)
+            FUN_002c7ce8(1);
+        if (current->phase == 1)
+            FUN_002c7ce8(5);
+        return;
+    }
+    if (kind == 15) {
+        if (current->phase == 0)
+            FUN_002c7ce8(0);
+        return;
+    }
+    if (kind == 14) {
+        if (current->phase == 0)
+            FUN_002c7ce8(0);
+        if (current->phase == 1)
+            FUN_002c7ce8(1);
+        if (state->skipFinish == 0 && current->phase == 2)
+            FUN_002c7ce8(5);
+        return;
+    }
+    u8 subKind = state->subKind;
+    if (kind == 4) {
+        if (subKind == 7 || subKind == 12) {
+            if (current->phase == 0)
+                FUN_002c7ce8(1);
+        } else {
+            if (current->phase == 0)
+                FUN_002c7ce8(0);
+            if (current->phase == 1)
+                FUN_002c7ce8(1);
         }
-        FUN_002c7ce8(1);
         return;
-      }
-      if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
+    }
+    if (subKind == 6) {
+        if (current->phase == 0)
+            FUN_002c7ce8(1);
+        return;
+    }
+    if (subKind == 13) {
+        if (current->phase == 0)
+            FUN_002c7ce8(1);
+        if (current->phase == 1)
+            FUN_002c7ce8(5);
+        return;
+    }
+    if (state->unk2010 == 0) {
+        if (current->phase == 0)
+            FUN_002c7ce8(0);
+        if (current->phase == 1)
+            FUN_002c7ce8(1);
+        return;
+    }
+    if (current->phase == 0)
         FUN_002c7ce8(0);
-      }
-      if (*(int *)(temp_v3 + 0x1374) == 1) {
+    if (current->phase == 1)
         FUN_002c7ce8(1);
-      }
-      temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x1381);
-      temp_v5 = temp_v4 == 0;
-      if (temp_v5) {
-        temp_v4 = *(unsigned int *)(temp_v3 + 0x1374);
-      }
-      if (!temp_v5 || temp_v4 != 2) {
-        return;
-      }
-    }
-    else {
-      if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-        FUN_002c7ce8(1);
-      }
-      if (*(int *)(temp_v3 + 0x1374) != 1) {
-        return;
-      }
-    }
-  }
-  else {
-    if (*(char *)(temp_v2 + 0x2010) == '\0') {
-      if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-        FUN_002c7ce8(0);
-      }
-      if (*(int *)(temp_v3 + 0x1374) != 1) {
-        return;
-      }
-      FUN_002c7ce8(1);
-      return;
-    }
-    if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1374) == 0) {
-      FUN_002c7ce8(0);
-    }
-    if (*(int *)(temp_v3 + 0x1374) == 1) {
-      FUN_002c7ce8(1);
-    }
-    if (*(int *)(temp_v3 + 0x1374) != 2) {
-      return;
-    }
-  }
-  FUN_002c7ce8(5);
-  return;
+    if (current->phase == 2)
+        FUN_002c7ce8(5);
 }
-
-} /* extern "C" */
+}

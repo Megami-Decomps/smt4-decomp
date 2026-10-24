@@ -1,193 +1,148 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f55cc` (_code @ 0x2f55cc, 0x304 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the file open/read/close helper; the on-stack file object is initialised by retail with address constants (0x420B78, 0x420BF0) written as separate stores, and the media dispatch is a chain of compares that armcc here compiles from the switches. */
+#include "common.h"
+
+/* A file object living on the caller's stack: a vtable pair and open state. */
+struct FileObject {
+    const void *vtable;
+    const void *vtableSecond;
+    u32 state[5];
+};
+
+typedef s32 FileResult;
 
 extern "C" {
+extern u8 DAT_00420b20;
+extern u8 DAT_004651e8;
 
-int FUN_002104c8(void);
-int fileObjSeekRead(unsigned char **, int, unsigned int, unsigned int);
-int FUN_00220438(void);
-int fileHandleClose(unsigned char **, int);
-int FUN_002cbf90(void);
-int FUN_002d5f90(void);
-int FUN_002e1458(void);
+FileResult FUN_0024ab94(FileObject *file, s32 path, u32 mode);
+FileResult FUN_001ff93c(FileObject *file);
+FileResult FUN_002cbfe8(FileObject *file);
+FileResult FUN_001ffaf0(void);
+FileResult FUN_002cbe94(FileObject *file, s32 path, u32 size);
+FileResult FUN_00220330(FileObject *file);
+FileResult FUN_002e1380(void);
+void FUN_002cbf90(void);
+void FUN_00220438(void);
+void FUN_002e1458(void);
+FileResult fileObjSeekRead(FileObject *file, s32 position, u32 buffer, u32 size);
+void FUN_002104c8(void);
+void FUN_002d5f90(void);
+FileResult fileOwnerCloseA(FileObject *file);
+FileResult fileOwnerCloseB(FileObject *file);
+FileResult fileOwnerCloseC(FileObject *file);
+FileResult fileOwnerCloseD(void);
+void fileHandleClose(FileObject *file, s32 arg);
 
-/* stack frame of param_4: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_4_stack;
+#define FILE_INVALID_MEDIA ((FileResult)0xE7E3FFFF)
 
-extern unsigned char DAT_00420b20; /* 0x420b20 */
-extern unsigned char DAT_004651e8; /* 0x4651e8 */
-
-extern unsigned char *FUN_001ff93c(unsigned char **);
-extern unsigned char *FUN_001ffaf0(void);
-/* Supplied declaration required: FUN_002104c8. */
-/* Supplied declaration required: fileObjSeekRead. */
-extern unsigned char *FUN_00220330(unsigned char **);
-/* Supplied declaration required: FUN_00220438. */
-extern unsigned char *fileOwnerCloseA(unsigned char **);
-extern unsigned char *fileOwnerCloseB(unsigned char **);
-extern unsigned char *fileOwnerCloseC(unsigned char **);
-extern unsigned char *fileOwnerCloseD(void);
-extern unsigned char *FUN_0024ab94(unsigned char **, int, unsigned int);
-/* Supplied declaration required: fileHandleClose. */
-extern unsigned char *FUN_002cbe94(unsigned char **, int, unsigned int);
-/* Supplied declaration required: FUN_002cbf90. */
-extern unsigned char *FUN_002cbfe8(unsigned char **);
-/* Supplied declaration required: FUN_002d5f90. */
-extern unsigned char *FUN_002e1380(void);
-/* Supplied declaration required: FUN_002e1458. */
-
-
-unsigned int FUN_002f55cc(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Whether a failed open is the retryable "file not yet available" error (module 0x11, range 100..179). */
+static bool isRetryable(FileResult result)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned char **ppuVar2;
-  unsigned char **ppuVar3;
-  unsigned char **ppuVar4;
-  unsigned char *puVar5;
-  unsigned char *temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  ppuVar3 = &temp_v0;
-  ppuVar4 = &temp_v0;
-  ppuVar2 = &temp_v0;
-  temp_v2 = 0;
-  temp_v3 = 0;
-  temp_v4 = 0;
-  temp_v5 = 0;
-  temp_v6 = 0;
-  puVar5 = (unsigned char *)0xe7e3ffff;
-  temp_v0 = &(*(unsigned char *)((unsigned char *)&DAT_00420b20 + 0x58));
-  temp_v1 = 0x420bf0;
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 != 2) {
-        puVar1 = puVar5;
-        if (param_1 == 3) {
-          puVar1 = (unsigned char *)FUN_001ffaf0();
+    return (result & 0x3FC00) == 0x4400 && (result & 0x3FF) >= 100 && (result & 0x3FF) < 0xB4;
+}
+
+/* Opens a file on one of the four media (`media`: 0 archive, 1 save, 2 extra, 3 raw), reads from it
+ * into `buffer` and closes it again; returns 1 on success and 0 on any error. */
+u32 FUN_002f55cc(s32 media, s32 path, u32 buffer, u32 size)
+{
+    FileObject file;
+    file.vtable = &DAT_00420b20 + 0x58;
+    file.vtableSecond = (const void *)0x420BF0;
+    for (s32 i = 0; i < 5; i++)
+        file.state[i] = 0;
+
+    FileResult result = FILE_INVALID_MEDIA;
+    switch (media) {
+    case 0:
+        result = FUN_0024ab94(&file, path, 1);
+        break;
+    case 1:
+        result = FUN_001ff93c(&file);
+        break;
+    case 2:
+        result = FUN_002cbfe8(&file);
+        break;
+    case 3:
+        result = FUN_001ffaf0();
+        break;
+    }
+    if (isRetryable(result) || result < 0) {
+        switch (media) {
+        case 0:
+            result = FUN_002cbe94(&file, path, size);
+            break;
+        case 1:
+            result = FUN_00220330(&file);
+            break;
+        case 2:
+            result = FUN_002e1380();
+            break;
+        default:
+            result = FILE_INVALID_MEDIA;
+            break;
         }
-      }
-      else {
-        puVar1 = (unsigned char *)FUN_002cbfe8(&temp_v0);
-      }
-    }
-    else {
-      puVar1 = (unsigned char *)FUN_001ff93c(&temp_v0);
-    }
-  }
-  else {
-    puVar1 = (unsigned char *)FUN_0024ab94(&temp_v0,param_2,1);
-  }
-  if ((((((unsigned int)puVar1 & 0x3fc00) == 0x4400) && (((unsigned int)puVar1 & 0x3ff) >= 100)) &&
-      (((unsigned int)puVar1 & 0x3ff) < 0xb4)) || ((int)puVar1 < 0)) {
-    if (param_1 != 0) {
-      if (param_1 != 1) {
-        puVar1 = puVar5;
-        if (param_1 == 2) {
-          puVar1 = (unsigned char *)FUN_002e1380();
-        }
-      }
-      else {
-        puVar1 = (unsigned char *)FUN_00220330(&temp_v0);
-      }
-    }
-    else {
-      puVar1 = (unsigned char *)FUN_002cbe94(&temp_v0,param_2,param_4);
-    }
-    if ((int)puVar1 < 0) {
-      if (param_2 != 0) {
-        if (param_1 != 0) {
-          if (param_1 != 1) {
-            if (param_1 == 2) {
-              FUN_002e1458();
+        if (result < 0) {
+            if (path != 0) {
+                if (media == 0)
+                    FUN_002cbf90();
+                else if (media == 1)
+                    FUN_00220438();
+                else if (media == 2)
+                    FUN_002e1458();
+            } else {
+                *(u32 *)(&DAT_004651e8 + 0x10) = 0xC8804464;
             }
-          }
-          else {
-            FUN_00220438();
-          }
-        }
-        else {
-          FUN_002cbf90();
-        }
-      }
-      else {
-        (*(unsigned int *)((unsigned char *)&DAT_004651e8 + 0x10)) = 0xc8804464;
-      }
-      if (param_1 != 0) {
-        if (param_1 != 1) {
-          puVar1 = puVar5;
-          if (param_1 == 2) {
-            puVar1 = (unsigned char *)FUN_002e1380();
-          }
-        }
-        else {
-          puVar1 = (unsigned char *)FUN_00220330(&temp_v0);
-        }
-      }
-      else {
-        puVar1 = (unsigned char *)FUN_002cbe94(&temp_v0,param_2,param_4);
-      }
-    }
-  }
-  if (-1 < (int)puVar1) {
-    if (param_1 != 0) {
-      if (param_1 != 1) {
-        ppuVar3 = (unsigned char **)puVar5;
-        if (param_1 == 2) {
-          FUN_002d5f90();
-          ppuVar3 = ppuVar2;
-        }
-      }
-      else {
-        FUN_002104c8();
-        ppuVar3 = ppuVar4;
-      }
-    }
-    else {
-      fileObjSeekRead(&temp_v0,0,param_3,param_4);
-    }
-    if (-1 < (int)ppuVar3) {
-      if (param_1 != 0) {
-        if (param_1 != 1) {
-          if (param_1 != 2) {
-            if (param_1 == 3) {
-              puVar5 = (unsigned char *)fileOwnerCloseD();
+            switch (media) {
+            case 0:
+                result = FUN_002cbe94(&file, path, size);
+                break;
+            case 1:
+                result = FUN_00220330(&file);
+                break;
+            case 2:
+                result = FUN_002e1380();
+                break;
+            default:
+                result = FILE_INVALID_MEDIA;
+                break;
             }
-          }
-          else {
-            puVar5 = (unsigned char *)fileOwnerCloseA(&temp_v0);
-          }
         }
-        else {
-          puVar5 = (unsigned char *)fileOwnerCloseB(&temp_v0);
-        }
-      }
-      else {
-        puVar5 = (unsigned char *)fileOwnerCloseC(&temp_v0);
-      }
-      if (-1 < (int)puVar5) {
-        fileHandleClose(&temp_v0,0);
-        return 1;
-      }
     }
-  }
-  fileHandleClose(&temp_v0,0);
-  return 0;
+    if (result >= 0) {
+        FileResult readResult = FILE_INVALID_MEDIA;
+        if (media == 0) {
+            readResult = fileObjSeekRead(&file, 0, buffer, size);
+        } else if (media == 1) {
+            FUN_002104c8();
+            readResult = 0;
+        } else if (media == 2) {
+            FUN_002d5f90();
+            readResult = 0;
+        }
+        if (readResult >= 0) {
+            FileResult closeResult = FILE_INVALID_MEDIA;
+            switch (media) {
+            case 0:
+                closeResult = fileOwnerCloseC(&file);
+                break;
+            case 1:
+                closeResult = fileOwnerCloseB(&file);
+                break;
+            case 2:
+                closeResult = fileOwnerCloseA(&file);
+                break;
+            case 3:
+                closeResult = fileOwnerCloseD();
+                break;
+            }
+            if (closeResult >= 0) {
+                fileHandleClose(&file, 0);
+                return 1;
+            }
+        }
+    }
+    fileHandleClose(&file, 0);
+    return 0;
 }
 
 } /* extern "C" */

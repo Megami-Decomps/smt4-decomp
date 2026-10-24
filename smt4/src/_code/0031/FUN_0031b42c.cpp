@@ -1,168 +1,133 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031b42c` (_code @ 0x31b42c, 0x328 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near-structure only: same maths (block colour x effect tint x part colour, packed back as ARGB bytes) but retail schedules the four-channel unpack/multiply with different VFP register allocation (s16 scale, s17-s20 saved product, s21 255.0, packed bytes assembled by rev/bit-field byte stores into the object colour) and a 68-byte frame, ours builds a 96-byte frame and a plain word store */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int CONCAT44(...);
-int matrixInitializeWithScaleAndOffset(...);
-int FUN_0024fcdc(...);
-int FUN_00256a50(...);
-int FUN_00269694(...);
-int VectorFloatToUnsigned(...);
-int VectorUnsignedToFloat(...);
-
-typedef struct fn_0031b42c_arg0 fn_0031b42c_arg0;
-typedef struct fn_0031b42c_arg0_p34 fn_0031b42c_arg0_p34;
-struct fn_0031b42c_arg0 {
-    unsigned char pad_0x0[0x24];
-    uint field_0x24; /* +0x24 */
-    int field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x4];
-    void *field_0x30; /* +0x30 */
-    fn_0031b42c_arg0_p34 *field_0x34; /* +0x34 */
-};
-struct fn_0031b42c_arg0_p34 {
-    unsigned char pad_0x0[0x24];
-    unsigned char field_0x24; /* +0x24 */
-    unsigned char pad_0x25[0x3];
-    undefined4 field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x4];
-    unsigned char field_0x30; /* +0x30 */
-    unsigned char pad_0x31[0x3];
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    unsigned char pad_0x3c[0x20];
-    byte field_0x5c; /* +0x5c */
+/* One 4-channel colour scratch pair used while tinting (the retail image keeps it in globals):
+ * `current` is the unpacked colour of the part being tinted, `tint` the tint it is multiplied by. */
+struct TintScratch {
+    f32 current[4];   /* 0x4EA91C */
+    f32 tint[4];      /* 0x4EA92C */
 };
 
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
+struct TintObject {
+    u16 flags;        /* 0x00: bit 0x100 = tinted */
+    u8 pad02[0x0E];
+    u8 transform[0x40]; /* 0x10 */
+    u32 color;        /* 0x50: packed colour, high byte first */
+};
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: matrixInitializeWithScaleAndOffset. */
-/* Supplied declaration required: FUN_0024fcdc. */
-/* Supplied declaration required: FUN_00256a50. */
-/* Supplied declaration required: FUN_00269694. */
+/* Entry of the part list, stride 0x10. */
+struct TintPart {
+    TintObject *object;   /* 0x00 */
+    s32 ready;            /* 0x04 */
+    u32 color;            /* 0x08 */
+    u32 pad0C;
+};
 
+struct TintList {
+    TintPart part[1];
+};
 
-void FUN_0031b42c(fn_0031b42c_arg0 *param_1)
+struct TintBlock {
+    u8 pad00[0x24];
+    u32 colorSource[1];   /* 0x24 */
+    u32 frameId;          /* 0x28 */
+    u8 pad2C[4];
+    u8 pad30[4];
+    s32 startFrame;       /* 0x34 */
+    s32 partCount;        /* 0x38 */
+    u8 pad3C[0x20];
+    u8 tinted;            /* 0x5C */
+};
 
+struct TintEffect {
+    u8 pad00[0x20];
+    f32 scale;            /* 0x20 */
+    u32 tint;             /* 0x24 */
+    s32 frame;            /* 0x28 */
+    u8 pad2C[4];
+    TintList **list;      /* 0x30 */
+    TintBlock *block;     /* 0x34 */
+};
+
+extern TintScratch DAT_004ea91c;
+
+u32 FUN_00269694(TintBlock *block, u32 *colorSource);
+void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
+void FUN_0024fcdc(u8 *transform, u8 *matrix, s32 flag);
+void FUN_00256a50(TintObject *object, u32 frame);
+
+/* Unpacks the four bytes of a packed colour (high byte first) into 0..1 floats. */
+static void unpackColor(u32 color, f32 *out)
 {
-/* irregular: irregular input(s): in_d10, in_fpscr; 8 native warning(s); review required */
-  unsigned short temp_v0;
-  fn_0031b42c_arg0_p34 *pfVar2;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  int temp_v2;
-  unsigned short *puVar6;
-  fn_0031b42c_arg0_p34 *pfVar7;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  unsigned long long temp_v12;
-  unsigned long long temp_v13;
-  unsigned long long in_d10;
-  unsigned int temp_v14;
-  unsigned long long temp_v15;
-  unsigned char temp_v16 [92];
-  
-  temp_v14 = (unsigned int)((unsigned long long)in_d10 >> 0x20);
-  pfVar7 = param_1->field_0x34;
-  puVar4 = *(unsigned int **)param_1->field_0x30;
-  if ((param_1->field_0x28 <= (int)pfVar7->field_0x34) || (pfVar7->field_0x34 == 0)) {
-    temp_v3 = pfVar7->field_0x38;
-    pfVar2 = pfVar7;
-    FUN_00269694(pfVar7,&pfVar7->field_0x24);
-    temp_v1 = param_1->field_0x24;
-    DAT_004ea92c = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea930 = (float)VectorUnsignedToFloat
-                                    ((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea934 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea938 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea92c = DAT_004ea92c * 0.003921569f;
-    DAT_004ea930 = DAT_004ea930 * 0.003921569f;
-    DAT_004ea934 = DAT_004ea934 * 0.003921569f;
-    DAT_004ea938 = DAT_004ea938 * 0.003921569f;
-    temp_v10 = (float)VectorUnsignedToFloat((unsigned int)pfVar2 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = (float)VectorUnsignedToFloat(((unsigned int)pfVar2 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorUnsignedToFloat((unsigned int)pfVar2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = (float)VectorUnsignedToFloat
-                              (((unsigned int)pfVar2 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea91c = temp_v10 * 0.003921569f * DAT_004ea92c;
-    DAT_004ea920 = temp_v9 * 0.003921569f * DAT_004ea930;
-    DAT_004ea924 = temp_v4 * 0.003921569f * DAT_004ea934;
-    DAT_004ea928 = temp_v8 * 0.003921569f * DAT_004ea938;
-    temp_v12 = CONCAT44(DAT_004ea91c,0x3b808081);
-    temp_v13 = CONCAT44(DAT_004ea924,DAT_004ea920);
-    temp_v15 = CONCAT44(temp_v14,DAT_004ea928);
-    matrixInitializeWithScaleAndOffset(temp_v16,param_1,0);
-    if (0 < temp_v3) {
-      temp_v15 = romwright_piece_4_4(0x437f0000,(int)temp_v15);
-    }
-    temp_v2 = 0;
-    if (temp_v2 < temp_v3) {
-      do {
-        if (0 < (int)puVar4[1]) {
-          puVar6 = (unsigned short *)*puVar4;
-          FUN_0024fcdc(puVar6 + 8,temp_v16,0);
-          temp_v1 = puVar4[2];
-          temp_v10 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v9 = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = (float)VectorUnsignedToFloat
-                                   ((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v8 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v11 = (float)temp_v12;
-          DAT_004ea92c = (float)((unsigned long long)temp_v12 >> 0x20);
-          DAT_004ea930 = (float)temp_v13;
-          DAT_004ea934 = (float)((unsigned long long)temp_v13 >> 0x20);
-          DAT_004ea938 = (float)temp_v15;
-          DAT_004ea91c = temp_v9 * temp_v11 * DAT_004ea92c;
-          DAT_004ea920 = temp_v4 * temp_v11 * DAT_004ea930;
-          DAT_004ea924 = temp_v10 * temp_v11 * DAT_004ea934;
-          DAT_004ea928 = temp_v8 * temp_v11 * DAT_004ea938;
-          temp_v4 = (float)((unsigned long long)temp_v15 >> 0x20);
-          temp_v6 = VectorFloatToUnsigned(DAT_004ea91c * temp_v4,3);
-          temp_v1 = VectorFloatToUnsigned(DAT_004ea920 * temp_v4,3);
-          temp_v7 = VectorFloatToUnsigned(DAT_004ea924 * temp_v4,3);
-          temp_v5 = VectorFloatToUnsigned(DAT_004ea928 * temp_v4,3);
-          *(unsigned int *)(puVar6 + 0x28) =
-               ((temp_v1 & 0xff) << 0x10) | (temp_v5 & 0xff) | ((temp_v7 & 0xff) << 8) |
-               (temp_v6 << 0x18);
-          if (pfVar7->field_0x5c != 0) {
-            temp_v0 = *puVar6 | 0x100;
-          }
-          else {
-            temp_v0 = *puVar6 & 0xfeff;
-          }
-          *puVar6 = temp_v0;
-          FUN_00256a50(puVar6,pfVar7->field_0x28 & 0xffff);
+    out[0] = (f32)(color >> 24) * 0.003921569f;
+    out[1] = (f32)((color & 0xFFFFFF) >> 16) * 0.003921569f;
+    out[2] = (f32)((color & 0xFFFF) >> 8) * 0.003921569f;
+    out[3] = (f32)(color & 0xFF) * 0.003921569f;
+}
+
+static void multiplyColor(f32 *color, const f32 *by)
+{
+    color[0] = color[0] * by[0];
+    color[1] = color[1] * by[1];
+    color[2] = color[2] * by[2];
+    color[3] = color[3] * by[3];
+}
+
+static void copyColor(f32 *to, const f32 *from)
+{
+    to[0] = from[0];
+    to[1] = from[1];
+    to[2] = from[2];
+    to[3] = from[3];
+}
+
+/* Tints every ready part of the effect by (block colour * effect tint * part colour), once the
+ * effect frame has reached the block's start frame. */
+void FUN_0031b42c(TintEffect *effect)
+{
+    TintBlock *block = effect->block;
+    TintList *list = *effect->list;
+
+    if (effect->frame <= block->startFrame || block->startFrame == 0) {
+        s32 partCount = block->partCount;
+        u32 blockColor = FUN_00269694(block, block->colorSource);
+        f32 saved[4];
+        u8 matrix[0x5C];
+
+        unpackColor(effect->tint, DAT_004ea91c.tint);
+        unpackColor(blockColor, DAT_004ea91c.current);
+        multiplyColor(DAT_004ea91c.current, DAT_004ea91c.tint);
+        copyColor(saved, DAT_004ea91c.current);
+        matrixInitializeWithScaleAndOffset(matrix, effect, 0, effect->scale);
+
+        for (s32 n = 0; n < partCount; n++) {
+            TintPart *part = &list->part[n];
+            if (part->ready > 0) {
+                TintObject *object = part->object;
+                FUN_0024fcdc(object->transform, matrix, 0);
+                unpackColor(part->color, DAT_004ea91c.current);
+                copyColor(DAT_004ea91c.tint, saved);
+                multiplyColor(DAT_004ea91c.current, DAT_004ea91c.tint);
+                u32 a = (u32)(DAT_004ea91c.current[0] * 255.0f);
+                u32 r = (u32)(DAT_004ea91c.current[1] * 255.0f);
+                u32 g = (u32)(DAT_004ea91c.current[2] * 255.0f);
+                u32 b = (u32)(DAT_004ea91c.current[3] * 255.0f);
+                object->color = (a << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+                if (block->tinted != 0) {
+                    object->flags = object->flags | 0x100;
+                } else {
+                    object->flags = object->flags & 0xFEFF;
+                }
+                FUN_00256a50(object, block->frameId & 0xFFFF);
+            }
         }
-        temp_v2 = temp_v2 + 1;
-        puVar4 = puVar4 + 4;
-      } while (temp_v2 < temp_v3);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

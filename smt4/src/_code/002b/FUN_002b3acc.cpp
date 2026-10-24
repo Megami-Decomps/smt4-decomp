@@ -45,7 +45,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 #endif
 /* Supplied declaration required: FUN_0013e238. */
 /* Supplied declaration required: FUN_0013e900. */
-extern int *FUN_002b52b4(int, int *, int, char *);
+extern int *_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(int, int *, int, char *);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -203,7 +203,7 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
     piVar9 = (int *)0x0;
   }
   else {
-    piVar9 = (int *)FUN_002b52b4(temp_v1,param_4,param_3,param_1);
+    piVar9 = (int *)_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(temp_v1,param_4,param_3,param_1);
     *piVar9 = (int)&DAT_004217ec;
     piVar9[0x52] = 0;
     piVar9[0x53] = 0;

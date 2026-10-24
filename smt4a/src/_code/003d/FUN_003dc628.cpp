@@ -30,7 +30,7 @@ int campReleaseRegisteredTouchRegions(void);
 int FUN_0023b45c(...);
 int campReleaseSlotTouchRegions(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
-int FUN_0028b088(...);
+int campShowSelectedEntryHelp(...);
 int scrollOwnerSelectIndex(...);
 int FUN_002a4cfc(void);
 int FUN_002a5cf4(void);
@@ -107,7 +107,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: campCecEditReset. */
 /* Supplied declaration required: recordGetModeForId. */
 /* Supplied declaration required: FUN_00284ee4. */
-/* Supplied declaration required: FUN_0028b088. */
+/* Supplied declaration required: campShowSelectedEntryHelp. */
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4cfc. */
@@ -574,7 +574,7 @@ LAB_003dcd84:
           FUN_002a4cfc();
           if ((*(char *)(temp_v5 + 2) == '\0') || (*(char *)(temp_v9 + 0x32a8) != '\0')) {
             if (*(int *)(temp_v9 + 0x1c) != 6) {
-              FUN_0028b088(0);
+              campShowSelectedEntryHelp(0);
               temp_v15 = (*(unsigned char *)(temp_v5 + 3) & 0xf0) != 0;
               temp_v12 = (unsigned int)*(unsigned char *)(temp_v5 + 3);
               if (temp_v15) {

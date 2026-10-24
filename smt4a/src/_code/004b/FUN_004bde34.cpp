@@ -1,139 +1,124 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bde34` (_code @ 0x4bde34, 0x384 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the argument forwarding of the number draw calls and register assignment differ from retail (224 vs 226 rows); the card drawing is the same. */
+#include "common.h"
 
 extern "C" {
 
-int efctSetSpeed(void);
-int FUN_00180310(...);
-int FUN_0018152c(...);
-int FUN_001835b4(...);
-int FUN_00183788(...);
-int FUN_00183bb0(void);
-int drawSetColorFromRGBA8(...);
-int FUN_004bda84(...);
-int __aeabi_idivmod(...);
+/* A party unit record (only the fields read here). */
+typedef struct PartnerCardUnit {
+    /* 0x00 */ u8 unk00[0x2A];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2c[0x34];
+    /* 0x60 */ u16 flags;               /* bit 1: dimmed; bits 1..13: owned marker kinds */
+    /* 0x62 */ s16 portrait;
+    /* 0x64 */ u16 level;
+} PartnerCardUnit;
 
-/* stack frame of param_5: 11 slot(s), 44 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_5_stack;
+typedef struct PartnerCardLayout {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} PartnerCardLayout;
 
-extern unsigned char LAB_004be1bc; /* 0x4be1bc */
+/* The partner screen (only the fields used here, by their offsets). */
+typedef struct PartnerCardScreen {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 mode;
+    /* 0x005 */ u8 unk005[0x333];
+    /* 0x338 */ u8 active[16];
+    /* 0x348 */ s32 cycle[12];          /* frames each slot's marker has been shown */
+    /* 0x388 */ s32 marker[12];         /* which owned marker each slot shows */
+} PartnerCardScreen;
 
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_0018152c. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183788. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-extern unsigned int markerKindGetColor(int);
-extern unsigned int FUN_002b4dcc(int);
-extern int valueAtMostFifthOfTotal(int, unsigned int);
-/* Supplied declaration required: FUN_004bda84. */
-/* Supplied declaration required: __aeabi_idivmod. */
+s32 FUN_002b4dcc(PartnerCardUnit *unit);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+PartnerCardLayout *FUN_001834a4(u32 group, u32 id);
+void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
+void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,
+                  u32 c);
+s32 valueAtMostFifthOfTotal(s32 value, s32 total);
+void drawSetColorFromRGBA8(u32 color);
+void FUN_00183bb0(void);
+u32 markerKindGetColor(s16 kind);
+void FUN_0018152c(s16 portrait, s32 x, s32 y, u32 id, u32 flag);
+s32 __aeabi_idivmod(s32 a, s32 b);
+void FUN_004bda84(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale);
 
-
-void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Draws partner card `slot` for `unit` at (`x`, `y`) with fade `scale`: the card frame, level, hp
+ * gauge and number, the cycling marker icon, then the extras. Several owned markers cycle every
+ * 24 frames. */
+void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale)
 {
-/* irregular: 10 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  short temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  
-  temp_v0 = *(short *)(param_2 + 0x62);
-  temp_v3 = (unsigned int)*(unsigned short *)(param_2 + 100);
-  temp_v8 = (int)*(short *)(param_2 + 0x2a);
-  temp_v4 = FUN_002b4dcc(param_2);
-  temp_v1 = *(unsigned short *)(param_2 + 0x60);
-  efctSetSpeed();
-  if ((temp_v1 & 2) != 0) {
-    efctSetSpeed();
-  }
-  FUN_001835b4(2,0x11,2000,param_4,param_5,0x65);
-  FUN_001835b4(2,0x11,2,param_4,param_5,0x65);
-  FUN_001835b4(2,0x11,0x99,param_4,param_5,0x6f);
-  FUN_001835b4(2,0x11,0x9a,param_4,param_5,0x6f);
-  FUN_001835b4(2,0x11,0x98,param_4,param_5,0x6f);
-  temp_v5 = FUN_001834a4(0x11,0x9d);
-  FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,1,3,0x79,
-               &LAB_004be1bc,temp_v3);
-  efctSetSpeed();
-  FUN_001835b4(2,0x11,0x9e,param_4,param_5,0x6f);
-  FUN_001835b4(2,0x11,0x77,param_4,param_5,0x79);
-  FUN_00183788(temp_v8,temp_v4,0,0,0x11,0x9f,0xa2,0xa0,0xa1,param_4,param_5,0x74,0);
-  temp_v5 = FUN_001834a4(0x11,0xaa);
-  temp_v2 = *(short *)(temp_v5 + 8);
-  temp_v5 = *(short *)(temp_v5 + 10) + param_5;
-  temp_v6 = valueAtMostFifthOfTotal(temp_v8,temp_v4);
-  if (temp_v6 != 0) {
-    drawSetColorFromRGBA8(0xdc0f14ff);
-  }
-  efctSetSpeed();
-  FUN_00180310(10,temp_v2 + param_4,temp_v5,1,4,0x79,&LAB_004be1bc,temp_v8);
-  FUN_00183bb0();
-  temp_v8 = FUN_001834a4(0x11,0xac);
-  temp_v4 = 0xffffffff;
-  temp_v5 = *(short *)(temp_v8 + 8) + param_4;
-  temp_v8 = *(short *)(temp_v8 + 10) + param_5;
-  temp_v3 = 1;
-  temp_v6 = 0;
-  do {
-    if (((unsigned int)temp_v1 & (1 << (temp_v3 & 0xff))) != 0) {
-      if (*(int *)(param_1 + param_3 * 4 + 0x378) == temp_v6) {
-        temp_v4 = markerKindGetColor((int)(short)temp_v3);
-        break;
-      }
-      temp_v6 = temp_v6 + 1;
+    s16 portrait = unit->portrait;
+    u32 level = unit->level;
+    s32 hp = unit->hp;
+    s32 maxHp = FUN_002b4dcc(unit);
+    u16 flags = unit->flags;
+
+    if (screen->mode == 2 && screen->active[slot] == 0) {
+        scale = scale * 0.5f;
     }
-    temp_v3 = temp_v3 + 1;
-  } while ((int)temp_v3 < 0xe);
-  drawSetColorFromRGBA8(temp_v4);
-  efctSetSpeed();
-  FUN_0018152c((int)temp_v0,temp_v5,temp_v8,0x9c,0);
-  FUN_00183bb0();
-  temp_v8 = 0;
-  temp_v3 = 1;
-  temp_v5 = 0xd;
-  do {
-    if (((unsigned int)*(unsigned short *)(param_2 + 0x60) & (1 << (temp_v3 & 0xff))) != 0) {
-      temp_v8 = temp_v8 + 1;
+    efctSetSpeed(scale);
+    if ((flags & 2) != 0) {
+        efctSetSpeed(scale * 0.5f);
     }
-    temp_v5 = temp_v5 - 1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v5 != 0);
-  if (temp_v8 >= 2) {
-    temp_v5 = param_1 + param_3 * 4;
-    temp_v8 = *(int *)(temp_v5 + 0x348) + 1;
-    *(int *)(temp_v5 + 0x348) = temp_v8;
-    if (temp_v8 >= 0x18) {
-      __aeabi_idivmod(*(int *)(temp_v5 + 0x378) + 1);
-      *(unsigned int *)(temp_v5 + 0x348) = 0;
-      *(unsigned int *)(temp_v5 + 0x378) = temp_v7;
+    FUN_001835b4(2, 0x11, 2000, x, y, 0x65);
+    FUN_001835b4(2, 0x11, 2, x, y, 0x65);
+    FUN_001835b4(2, 0x11, 0x99, x, y, 0x6F);
+    FUN_001835b4(2, 0x11, 0x9A, x, y, 0x6F);
+    FUN_001835b4(2, 0x11, 0x98, x, y, 0x6F);
+    PartnerCardLayout *levelBox = FUN_001834a4(0x11, 0x9D);
+
+    FUN_00180310(0, levelBox->x + x, levelBox->y + y, 1, 3, 0x79, "%d", level);
+    efctSetSpeed(scale);
+    FUN_001835b4(2, 0x11, 0x9E, x, y, 0x6F);
+    FUN_001835b4(2, 0x11, 0x77, x, y, 0x79);
+    FUN_00183788(hp, maxHp, 0, 0, 0x11, 0x9F, 0xA2, 0xA0, 0xA1, x, y, 0x74, 0);
+    PartnerCardLayout *hpBox = FUN_001834a4(0x11, 0xAA);
+    s32 hpX = hpBox->x + x;
+    s32 hpY = hpBox->y + y;
+
+    if (valueAtMostFifthOfTotal(hp, maxHp) != 0) {
+        drawSetColorFromRGBA8(0xDC0F14FF);
     }
-  }
-  FUN_004bda84(param_1,param_2,param_3,param_4,param_5);
-  efctSetSpeed();
-  return;
+    efctSetSpeed(scale);
+    FUN_00180310(10, hpX, hpY, 1, 4, 0x79, "%d", hp);
+    FUN_00183bb0();
+    PartnerCardLayout *markerBox = FUN_001834a4(0x11, 0xAC);
+    s32 markerX = markerBox->x + x;
+    s32 markerY = markerBox->y + y;
+    u32 color = 0xFFFFFFFF;
+    s32 owned = 0;
+
+    for (s32 kind = 1; kind < 14; kind++) {
+        if ((flags & (1 << kind)) != 0) {
+            if (screen->marker[slot] == owned) {
+                color = markerKindGetColor((s16)kind);
+                break;
+            }
+            owned++;
+        }
+    }
+    drawSetColorFromRGBA8(color);
+    efctSetSpeed(scale);
+    FUN_0018152c(portrait, markerX, markerY, 0x9C, 0);
+    FUN_00183bb0();
+    s32 count = 0;
+
+    for (s32 kind = 1; kind < 14; kind++) {
+        if ((unit->flags & (1 << kind)) != 0) {
+            count++;
+        }
+    }
+    if (count >= 2) {
+        screen->cycle[slot]++;
+        if (screen->cycle[slot] >= 24) {
+            screen->cycle[slot] = 0;
+            screen->marker[slot] = __aeabi_idivmod(screen->marker[slot] + 1, count);
+        }
+    }
+    FUN_004bda84(screen, unit, slot, x, y, scale);
+    efctSetSpeed(1.0f);
 }
 
-} /* extern "C" */
+}

@@ -55,7 +55,7 @@ extern "C" {
 extern DirectFileSystemGlobals g_titleContentFileSystem;
 extern UnitHeapModuleState g_titleContentAdapterHeap;
 DirectFileStream *FUN_001392fc();
-DirectFileStream *FUN_001393e4(DirectFileStream *);
+DirectFileStream *_ZN9Obj420decC1Ev(DirectFileStream *);
 s32 FUN_00138f14(DirectFileStream *, DirectFileAdapter *, u32, u32, u32, u32, u32);
 void memClear(void *, u32 bytes);
 void *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(UnitHeapModuleState *);
@@ -77,7 +77,7 @@ extern "C" u32 titleContentStreamCreate(u32 *output, const HandleRequest *reques
     DirectFileStream *stream = FUN_001392fc();
     if (stream != NULL) {
         memClear(stream, sizeof(*stream));
-        stream = FUN_001393e4(stream);
+        stream = _ZN9Obj420decC1Ev(stream);
         if (stream != NULL) {
             TitleArchivePath archivePath;
             archivePath.titleId = request->value;

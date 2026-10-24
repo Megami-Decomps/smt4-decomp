@@ -1,186 +1,189 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004009d0` (_code @ 0x4009d0, 0x390 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the target loops and the scope switch are laid out differently from retail (built 236 rows vs 228); the usability checks are the same. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable04FindById(void);
-int FUN_003ff998(...);
-int FUN_00400564(int, int, int);
-int SCARRY4(unsigned int, int);
+/* The skill record (only the fields read here). */
+typedef struct SkillRecord {
+    u8 unk00[0x23];
+    u8 type;                         /* 0x23 */
+    u8 unk24[4];
+    u32 bits;                        /* 0x28: scope in bits 5-8, kind in bits 9-10 */
+    u8 unk2C[0xD];
+    u8 flags39;                      /* 0x39: bit 6 set for skills the unit may use while stunned */
+    u8 unk3A[0xB];
+    u8 specialCheck;                 /* 0x45 */
+} SkillRecord;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
+typedef struct BattleUnit {
+    u8 unk00[0x274];
+    u16 status;                      /* 0x274 */
+} BattleUnit;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_00573c90; /* 0x573c90 */
-extern unsigned int DAT_00573c94; /* 0x573c94 */
-extern unsigned int DAT_00573c98; /* 0x573c98 */
-extern unsigned int DAT_00573c9c; /* 0x573c9c */
-extern unsigned int DAT_00573ca8; /* 0x573ca8 */
-extern unsigned int DAT_00573cac; /* 0x573cac */
-extern unsigned int DAT_00573cb8; /* 0x573cb8 */
-extern unsigned int DAT_00573cbc; /* 0x573cbc */
+typedef struct BtlUnitSlot {
+    u8 unk00[0x20];
+    BattleUnit *unit;                /* 0x20 */
+} BtlUnitSlot;
 
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-extern int btlGetMainState(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003ff998. */
-/* Supplied declaration required: FUN_00400564. */
-extern int btlUnitGet(unsigned int);
+/* A battle unit as the skill checks see it: two flag words first. */
+typedef struct BtlTarget {
+    u32 flagsLo;
+    u32 flagsHi;
+    u8 unk08[0x400];
+} BtlTarget;
 
+typedef struct BattleState {
+    u8 unk0000[0x1FFC];
+    BtlTarget *targets;              /* 0x1FFC */
+    u8 unk2000[0x25A8];
+    u32 blockedLo;                   /* 0x45A8 */
+    u32 blockedHi;                   /* 0x45AC */
+} BattleState;
 
-unsigned int FUN_004009d0(int param_1,int param_2)
+typedef struct SlotTable {
+    u8 unk0000[0x1CA3];
+    u8 partyCount;                   /* 0x1CA3 */
+} SlotTable;
 
+extern u32 g_btlScriptUnit;
+extern u32 g_maskStatusLo;           /* 0x573c90 */
+extern u32 g_maskStatusHi;           /* 0x573c94 */
+extern u32 g_maskAilmentLo;          /* 0x573c98 */
+extern u32 g_maskAilmentHi;          /* 0x573c9c */
+extern u32 g_maskExcludeLo;          /* 0x573ca8 */
+extern u32 g_maskExcludeHi;          /* 0x573cac */
+extern u32 g_maskBlockedLo;          /* 0x573cb8 */
+extern u32 g_maskBlockedHi;          /* 0x573cbc */
+
+SkillRecord *dataTable04FindById(s32 id);
+BattleState *btlGetMainState(s32 arg);
+BtlUnitSlot *btlUnitGet(u32 id);
+SlotTable *gameGetSlotTable(void);
+s32 FUN_003ff998(void *target, SkillRecord *skill, s32 flag);
+s32 FUN_00400564(s32 index, s32 arg, SkillRecord *skill);
+
+/* Tells whether the skill can be used in the current battle state: 1 for no skill, 2 for a
+ * kind that is never usable here, 3 when usable, 4 when only the stunned-use case applies and
+ * 0 when blocked. */
+u32 FUN_004009d0(s32 id, s32 flag)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int *puVar9;
-  unsigned char temp_v8;
-  
-  if ((param_1 == 0) || (dataTable04FindById(), param_1 == 0)) {
-    return 1;
-  }
-  temp_v3 = *(unsigned int *)(param_1 + 0x28);
-  temp_v7 = 2;
-  temp_v8 = (temp_v3 & 0x7ff) >> 9 != 2;
-  if (temp_v8) {
-    temp_v7 = 3;
-  }
-  if (temp_v8 && temp_v7 != (temp_v3 & 0x7ff) >> 9) {
-    return 2;
-  }
-  temp_v4 = btlGetMainState(temp_v3 << 0x15);
-  temp_v5 = btlUnitGet(g_btlScriptUnit);
-  temp_v6 = 0;
-  if (temp_v5 != 0) {
-    temp_v6 = *(int *)(temp_v5 + 0x20);
-  }
-  if (temp_v5 != 0 && temp_v6 != 0) {
-    if ((param_2 == 0) && ((*(unsigned short *)(temp_v6 + 0x274) & 0x2000) != 0)) {
-      if ((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573cb8) == 0 &&
-          (DAT_00573cbc & *(unsigned int *)(temp_v4 + 0x45ac)) == 0) {
-        return 4;
-      }
-      return 0;
+    SkillRecord *skill;
+
+    if (id == 0 || (skill = dataTable04FindById(id)) == NULL) {
+        return 1;
     }
-    if ((*(unsigned char *)(param_1 + 0x39) & 0x40) != 0) {
-      if ((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573cb8) != 0 ||
-          (*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573cbc) != 0) {
-        return 0;
-      }
-      if ((*(unsigned short *)(temp_v6 + 0x274) & 0x10) == 0) {
-        return 3;
-      }
+    u32 bits = skill->bits;
+    u32 kind = (bits & 0x7FF) >> 9;
+
+    if (kind != 2 && kind != 3) {
+        return 2;
     }
-  }
-  switch(*(unsigned char *)(param_1 + 0x23)) {
-  case 0:
-  case 1:
-  case 5:
-  case 6:
-  case 10:
-    return 0;
-  case 2:
-    if (*(char *)(param_1 + 0x45) == '\0') {
-      return 0;
-    }
-  }
-  if ((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573cbc) != 0 ||
-      (*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573cb8) != 0) {
-    return 0;
-  }
-  temp_v1 = 0;
-  temp_v8 = 0;
-  temp_v0 = 0;
-  temp_v2 = 0;
-  switch((*(unsigned int *)(param_1 + 0x28) & 0x1ff) >> 5) {
-  case 0:
-  case 1:
-    temp_v8 = 1;
-    temp_v1 = 0;
-    break;
-  case 2:
-  case 3:
-    temp_v1 = 1;
-    break;
-  case 4:
-    temp_v0 = 1;
-    temp_v1 = 0;
-    break;
-  case 5:
-  case 6:
-    temp_v8 = 1;
-    temp_v1 = 1;
-    break;
-  case 7:
-  case 8:
-    temp_v2 = 1;
-    temp_v1 = 1;
-  }
-  temp_v6 = 0;
-  if (temp_v1) {
-    do {
-      puVar9 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v6 * 0x408);
-      temp_v7 = *puVar9;
-      temp_v3 = puVar9[1];
-      if ((((DAT_00573c98 & temp_v7) != 0 || (DAT_00573c9c & temp_v3) != 0) ||
-          (((DAT_00573c90 & temp_v7) != 0 || (DAT_00573c94 & temp_v3) != 0 &&
-           ((temp_v7 & DAT_00573ca8) == 0 && (temp_v3 & DAT_00573cac) == 0)))) &&
-         (FUN_003ff998(puVar9,param_1,0), puVar9 == (unsigned int *)0x0)) {
-        return 0;
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 4);
-  }
-  if (temp_v8) {
-    temp_v6 = 4;
-    do {
-      puVar9 = (unsigned int *)(*(int *)(temp_v4 + 0x1ffc) + temp_v6 * 0x408);
-      if ((((DAT_00573c90 & *puVar9) != 0 || (DAT_00573c94 & puVar9[1]) != 0) &&
-          ((puVar9[1] & DAT_00573cac) == 0 && (*puVar9 & DAT_00573ca8) == 0)) &&
-         (FUN_003ff998(puVar9,param_1,0), puVar9 == (unsigned int *)0x0)) {
-        return 0;
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 0x36);
-  }
-  if (temp_v0) {
-    temp_v4 = btlUnitGet(g_btlScriptUnit);
-    temp_v6 = 0;
-    if (temp_v4 != 0) {
-      temp_v6 = *(int *)(temp_v4 + 0x20);
-    }
-    if ((temp_v4 != 0 && temp_v6 != 0) && (FUN_003ff998(temp_v6,param_1,1), temp_v6 == 0)) {
-      return 0;
-    }
-  }
-  if (temp_v2) {
-    temp_v6 = gameGetSlotTable();
-    temp_v4 = -1;
-    temp_v7 = (unsigned int)*(unsigned char *)(temp_v6 + 0x1ca3);
-    if (temp_v7 != 0xffffffff && !SCARRY4(temp_v7,1)) {
-      do {
-        temp_v5 = temp_v4;
-        FUN_00400564(temp_v4,0,param_1);
-        if (temp_v5 == 0) {
-          return 0;
+    BattleState *state = btlGetMainState(bits << 21);
+    BtlUnitSlot *slot = btlUnitGet(g_btlScriptUnit);
+    BattleUnit *unit = slot != NULL ? slot->unit : NULL;
+
+    if (slot != NULL && unit != NULL) {
+        if (flag == 0 && (unit->status & 0x2000) != 0) {
+            if ((state->blockedLo & g_maskBlockedLo) == 0 && (g_maskBlockedHi & state->blockedHi) == 0) {
+                return 4;
+            }
+            return 0;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v6 + 0x1ca3));
+        if ((skill->flags39 & 0x40) != 0) {
+            if ((state->blockedLo & g_maskBlockedLo) != 0 || (state->blockedHi & g_maskBlockedHi) != 0) {
+                return 0;
+            }
+            if ((unit->status & 0x10) == 0) {
+                return 3;
+            }
+        }
     }
-  }
-  return 3;
+    switch (skill->type) {
+    case 0:
+    case 1:
+    case 5:
+    case 6:
+    case 10:
+        return 0;
+    case 2:
+        if (skill->specialCheck == 0) {
+            return 0;
+        }
+    }
+    if ((state->blockedHi & g_maskBlockedHi) != 0 || (state->blockedLo & g_maskBlockedLo) != 0) {
+        return 0;
+    }
+    u8 checkAllies = 0;
+    u8 checkEnemies = 0;
+    u8 checkSelf = 0;
+    u8 checkParty = 0;
+
+    switch ((skill->bits & 0x1FF) >> 5) {
+    case 0:
+    case 1:
+        checkEnemies = 1;
+        checkAllies = 0;
+        break;
+    case 2:
+    case 3:
+        checkAllies = 1;
+        break;
+    case 4:
+        checkSelf = 1;
+        checkAllies = 0;
+        break;
+    case 5:
+    case 6:
+        checkEnemies = 1;
+        checkAllies = 1;
+        break;
+    case 7:
+    case 8:
+        checkParty = 1;
+        checkAllies = 1;
+    }
+    if (checkAllies) {
+        for (s32 i = 0; i < 4; i++) {
+            BtlTarget *target = &state->targets[i];
+            u32 lo = target->flagsLo;
+            u32 hi = target->flagsHi;
+
+            if ((((g_maskAilmentLo & lo) != 0 || (g_maskAilmentHi & hi) != 0) ||
+                 (((g_maskStatusLo & lo) != 0 || (g_maskStatusHi & hi) != 0) &&
+                  ((lo & g_maskExcludeLo) == 0 && (hi & g_maskExcludeHi) == 0))) &&
+                FUN_003ff998(target, skill, 0) == 0) {
+                return 0;
+            }
+        }
+    }
+    if (checkEnemies) {
+        for (s32 i = 4; i < 54; i++) {
+            BtlTarget *target = &state->targets[i];
+
+            if ((((g_maskStatusLo & target->flagsLo) != 0 || (g_maskStatusHi & target->flagsHi) != 0) &&
+                 ((target->flagsHi & g_maskExcludeHi) == 0 && (target->flagsLo & g_maskExcludeLo) == 0)) &&
+                FUN_003ff998(target, skill, 0) == 0) {
+                return 0;
+            }
+        }
+    }
+    if (checkSelf) {
+        slot = btlUnitGet(g_btlScriptUnit);
+        unit = slot != NULL ? slot->unit : NULL;
+        if (slot != NULL && unit != NULL && FUN_003ff998(unit, skill, 1) == 0) {
+            return 0;
+        }
+    }
+    if (checkParty) {
+        SlotTable *table = gameGetSlotTable();
+
+        for (s32 i = -1; i < (s32)table->partyCount; i++) {
+            if (FUN_00400564(i, 0, skill) == 0) {
+                return 0;
+            }
+        }
+    }
+    return 3;
 }
 
-} /* extern "C" */
+}

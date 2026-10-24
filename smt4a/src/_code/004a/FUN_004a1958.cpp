@@ -1,204 +1,198 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a1958` (_code @ 0x4a1958, 0x3a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA and lays the party branch out first; built differs in frame size (28 vs 52 bytes) and branch order (236 vs 235 rows); the list rebuild is the same. */
+#include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
-int jyoucyuGetTableEntry(...);
-int FUN_00184310(void);
-int FUN_002a4b28(...);
-int FUN_0032fbd0(void);
-int FUN_00389f0c(...);
-int slotPoolResetTrackedState(void);
-int inventoryListAppend(int, unsigned char [8]);
-int FUN_004a84e8(int, int);
-int FUN_004a8584(unsigned char [8], int, int);
-int FUN_004a8750(unsigned int, int, int);
-int FUN_004cfeb0(...);
-int FUN_004d05c4(...);
-int releaseEntriesA(void);
-int releaseEntriesB(unsigned int);
+/* The list panel object the screen drives through its virtual table. */
+class ListPanel {
+public:
+    virtual void v0();
+    virtual void v1();
+    virtual void rebuild(void *layout);
+    /* 0x04 */ u16 flags;
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
+/* A compendium entry record (only the fields read here). */
+typedef struct EntryRecord {
+    u16 id;
+    u8 unk02[8];
+    u16 flags;                       /* 0x0A: bit 0 set when the entry is listed */
+} EntryRecord;
 
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(unsigned int);
-extern int gameGetSlotTable(void);
-extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_002a4b28. */
-/* Supplied declaration required: FUN_0032fbd0. */
-/* Supplied declaration required: FUN_00389f0c. */
-/* Supplied declaration required: slotPoolResetTrackedState. */
-extern unsigned char gaugePercent(int, unsigned int);
-/* Supplied declaration required: inventoryListAppend. */
-/* Supplied declaration required: FUN_004a84e8. */
-extern unsigned char FUN_004a8544(int, int);
-/* Supplied declaration required: FUN_004a8584. */
-/* Supplied declaration required: FUN_004a8750. */
-/* Supplied declaration required: FUN_004cfeb0. */
-/* Supplied declaration required: FUN_004d05c4. */
-/* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: releaseEntriesB. */
+/* A party slot record (0x12C bytes; only the fields read here). */
+typedef struct PartySlot {
+    u8 unk00[0x68];
+    u8 unk68[0x62];
+    u16 entryId;                     /* 0xCA */
+    u8 unkCC[0x60];
+} PartySlot;
 
+typedef struct SlotTable {
+    u8 unk0000[0x1C88];
+    s8 party[0x1B];                  /* 0x1C88 */
+    u8 partyCount;                   /* 0x1CA3 */
+    u8 unk1CA4[0x24];
+} SlotTable;
 
-void FUN_004a1958(int param_1)
+typedef struct EntryList {
+    s16 count;
+    u8 unk02[0x62];
+} EntryList;
 
+/* The screen block (only the fields used here, by their offsets). */
+typedef struct EntryScreen {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u8 layout[8];
+    /* 0x0028 */ s32 selected;
+    /* 0x002C */ u8 unk002C;
+    /* 0x002D */ u8 dirty;
+    /* 0x002E */ u8 unk002E[0x66];
+    /* 0x0094 */ s8 percent;
+    /* 0x0095 */ u8 unk0095[0x783];
+    /* 0x0818 */ u8 header[0x10];
+    /* 0x0828 */ u8 headerShown;
+    /* 0x0829 */ u8 unk0829[0x23];
+    /* 0x084C */ ListPanel *panel;
+    /* 0x0850 */ u8 unk0850[0x10];
+    /* 0x0860 */ u8 mode;
+    /* 0x0861 */ u8 category;
+    /* 0x0862 */ u8 unk0862[2];
+    /* 0x0864 */ EntryList list;
+    /* 0x08C8 */ u8 unk08C8[0x9FA2];
+    /* 0xA86A */ s16 listedCount;
+    /* 0xA86C */ u8 unkA86C[0xA];
+    /* 0xA876 */ u8 showUnowned;
+} EntryScreen;
+
+void releaseEntriesB(void *panel);
+void releaseEntriesA(void);
+void slotPoolResetTrackedState(void);
+SlotTable *gameGetSlotTable(void);
+EntryRecord *FUN_00184310(u16 index);
+EntryRecord *FUN_00389f0c(u16 index);
+s32 FUN_0032fbd0(void *slot);
+s32 FUN_002a4b28(u16 id);
+void FUN_004a8584(u8 *out, u16 id, s32 flag);
+u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
+void inventoryListAppend(EntryList *list, u8 *entry);
+u8 *FUN_0026140c(void);
+void FUN_004a84e8(EntryList *list, s32 mode);
+void FUN_004cfeb0(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
+u8 gaugePercent(EntryList *list, s32 arg);
+u8 calcPercentClamped(s32 numerator, s32 denominator);
+void FUN_004d05c4(void *header, s32 a, s32 b, s32 count);
+s32 gameFlagIsSet(u32 flag);
+void jyoucyuGetTableEntry(s32 arg);
+
+/* Rebuilds the entry list for the screen: scans every record (or the party for mode 1), appends
+ * the listed ones with their display data, then updates the column layout, the completion
+ * percentage and the header count. */
+void FUN_004a1958(EntryScreen *screen)
 {
-/* irregular: 1 goto(s); 15 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  unsigned int temp_v3;
-  unsigned short *puVar6;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char *pbVar9;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  int temp_v8;
-  short temp_v9;
-  int temp_v10;
-  unsigned char temp_v11;
-  unsigned long long temp_v12;
-  unsigned char temp_v13 [8];
-  unsigned int temp_v14;
-  
-  releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
-  releaseEntriesA();
-  temp_v2 = param_1 + 0x864;
-  if (*(char *)(param_1 + 0x860) != '\x01') {
-    slotPoolResetTrackedState();
-    temp_v9 = 0;
-    temp_v8 = 0;
-LAB_004a19b4:
-    do {
-      puVar4 = (unsigned short *)((temp_v8 + 1U) & 0xffff);
-      FUN_00184310();
-      if ((puVar4 != (unsigned short *)0x0) && ((puVar4[5] & 1) != 0)) {
-        if ((temp_v8 == 9) && (temp_v4 = gameFlagIsSet(0x441), temp_v4 == 0)) {
-          temp_v8 = 10;
-          goto LAB_004a19b4;
+    releaseEntriesB(screen->panel);
+    releaseEntriesA();
+    if (screen->mode != 1) {
+        slotPoolResetTrackedState();
+        s16 listed = 0;
+        s32 index = 0;
+
+        do {
+            EntryRecord *record = FUN_00184310((u16)(index + 1));
+
+            if (record != NULL && (record->flags & 1) != 0) {
+                if (index == 9 && gameFlagIsSet(0x441) == 0) {
+                    index = 10;
+                    continue;
+                }
+                listed++;
+                if (FUN_002a4b28(record->id) != 0 || screen->showUnowned != 0) {
+                    u8 entry[8];
+
+                    FUN_004a8584(entry, record->id, 0);
+                    FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    inventoryListAppend(&screen->list, entry);
+                }
+            }
+            index++;
+        } while (index < 0x4FF);
+        screen->listedCount = listed;
+        if (screen->list.count != 0) {
+            u8 *flagsByte = FUN_0026140c() + 0xF;
+            s32 mode;
+
+            switch (*flagsByte & 0x7F) {
+            case 1:
+                mode = 6;
+                break;
+            case 2:
+                mode = 4;
+                break;
+            case 3:
+                mode = 22;
+                break;
+            case 7:
+                mode = 24;
+                break;
+            default:
+                mode = 6;
+                *flagsByte = (*flagsByte & 0x80) | 1;
+            }
+            if ((*flagsByte & 0x80) != 0) {
+                mode++;
+            }
+            FUN_004a84e8(&screen->list, mode);
         }
-        temp_v9 = temp_v9 + 1;
-        temp_v5 = FUN_002a4b28(*puVar4);
-        temp_v11 = temp_v5 == 0;
-        if (temp_v11) {
-          temp_v5 = (unsigned int)*(unsigned char *)(param_1 + 0xa876);
+        FUN_004cfeb0(screen->layout, 10, screen->list.count, 0, 1, 1);
+        asdDebugHookPtrInt(screen->layout, 1);
+        screen->dirty = 1;
+        screen->percent = gaugePercent(&screen->list, 1);
+        jyoucyuGetTableEntry(0);
+    } else {
+        slotPoolResetTrackedState();
+        SlotTable *table = gameGetSlotTable();
+
+        for (u32 i = 0; i < table->partyCount; i = (u16)(i + 1)) {
+            s32 member = table->party[i];
+
+            if (member >= 0) {
+                PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
+
+                if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
+                    EntryRecord *record = FUN_00184310(slot->entryId);
+                    u8 entry[8];
+
+                    FUN_004a8584(entry, record->id, 1);
+                    FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    inventoryListAppend(&screen->list, entry);
+                }
+            }
         }
-        if (!temp_v11 || temp_v5 != 0) {
-          FUN_004a8584(temp_v13,*puVar4,0);
-          temp_v5 = (unsigned int)*puVar4;
-          FUN_004a8750(temp_v5,*(unsigned char *)(param_1 + 0x861),0);
-          temp_v14 = temp_v5;
-          inventoryListAppend(temp_v2,temp_v13);
+        screen->listedCount = 24;
+        FUN_004cfeb0(screen->layout, 10, screen->list.count, 0, 1, 1);
+        asdDebugHookPtrInt(screen->layout, 1);
+        screen->dirty = 1;
+        s32 total = 0;
+        s32 owned = 0;
+
+        for (s32 index = 0; index < 0x4FF; index++) {
+            EntryRecord *record = FUN_00389f0c((u16)(index + 1));
+
+            if (record != NULL && (record->flags & 1) != 0) {
+                total++;
+                if (FUN_002a4b28(record->id) != 0) {
+                    owned++;
+                }
+            }
         }
-      }
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v8 < 0x4ff);
-    *(short *)(param_1 + 0xa86a) = temp_v9;
-    if (*(short *)(param_1 + 0x864) != 0) {
-      temp_v8 = FUN_0026140c();
-      pbVar9 = (unsigned char *)(temp_v8 + 0xf);
-      temp_v7 = *pbVar9 & 0x7f;
-      if (temp_v7 == 1) {
-        temp_v0 = '\x06';
-      }
-      else if (temp_v7 == 2) {
-        temp_v0 = '\x04';
-      }
-      else if (temp_v7 == 3) {
-        temp_v0 = '\x16';
-      }
-      else if (temp_v7 == 7) {
-        temp_v0 = '\x18';
-      }
-      else {
-        temp_v0 = '\x06';
-        *pbVar9 = (*pbVar9 & 0x80) | 1;
-      }
-      if ((*pbVar9 & 0x80) != 0) {
-        temp_v0 = temp_v0 + '\x01';
-      }
-      FUN_004a84e8(temp_v2,temp_v0);
+        screen->percent = calcPercentClamped(owned, total);
+        jyoucyuGetTableEntry(0);
     }
-    FUN_004cfeb0(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x864),0,1,1);
-    *(unsigned char *)(param_1 + 0x2d) = 1;
-    temp_v1 = gaugePercent(temp_v2,1);
-    *(unsigned char *)(param_1 + 0x94) = temp_v1;
+    screen->panel->rebuild(screen->layout);
+    screen->panel->flags |= 0x1000;
+    FUN_004d05c4(screen->header, 20, 0x40E, screen->selected > 10 ? 10 : screen->selected);
+    screen->headerShown = 1;
     jyoucyuGetTableEntry(0);
-  }
-  else {
-    slotPoolResetTrackedState();
-    temp_v8 = gameGetSlotTable();
-    temp_v5 = 0;
-    if (temp_v5 < *(unsigned char *)(temp_v8 + 0x1ca3)) {
-      do {
-        temp_v4 = (int)*(char *)(temp_v8 + temp_v5 + 0x1c88);
-        if (-1 < temp_v4) {
-          temp_v4 = temp_v8 + temp_v4 * 300;
-          temp_v10 = temp_v4 + 0x68;
-          FUN_0032fbd0();
-          if (temp_v10 == 0) {
-            puVar4 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v4 + 0xca);
-            FUN_00184310();
-            FUN_004a8584(temp_v13,*puVar4,1);
-            temp_v3 = (unsigned int)*puVar4;
-            FUN_004a8750(temp_v3,*(unsigned char *)(param_1 + 0x861),0);
-            temp_v14 = temp_v3;
-            inventoryListAppend(temp_v2,temp_v13);
-          }
-        }
-        temp_v5 = (temp_v5 + 1) & 0xffff;
-      } while (temp_v5 < *(unsigned char *)(temp_v8 + 0x1ca3));
-    }
-    *(unsigned short *)(param_1 + 0xa86a) = 0x18;
-    FUN_004cfeb0(param_1 + 0x20,10,(int)*(short *)(param_1 + 0x864),0,1,1);
-    temp_v5 = 1;
-    temp_v4 = 0;
-    *(unsigned char *)(param_1 + 0x2d) = 1;
-    temp_v8 = 0;
-    temp_v2 = 0;
-    do {
-      puVar6 = (unsigned short *)((temp_v2 + 1U) & 0xffff);
-      FUN_00389f0c(puVar6,temp_v5);
-      temp_v5 = temp_v6;
-      if ((puVar6 != (unsigned short *)0x0) && (temp_v5 = (unsigned int)(unsigned short)puVar6[5], (puVar6[5] & 1) != 0))
-      {
-        temp_v8 = temp_v8 + 1;
-        temp_v12 = FUN_002a4b28(*puVar6);
-        temp_v5 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
-        if ((int)temp_v12 != 0) {
-          temp_v4 = temp_v4 + 1;
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x4ff);
-    temp_v1 = FUN_004a8544(temp_v4,temp_v8);
-    *(unsigned char *)(param_1 + 0x94) = temp_v1;
-    jyoucyuGetTableEntry(0);
-  }
-  (**(romwright_code **)(**(int **)(param_1 + 0x84c) + 8))(*(int **)(param_1 + 0x84c),param_1 + 0x20);
-  puVar4 = (unsigned short *)(*(int *)(param_1 + 0x84c) + 4);
-  *puVar4 = *puVar4 | 0x1000;
-  temp_v2 = *(int *)(param_1 + 0x28);
-  if (temp_v2 >= 10) {
-    temp_v2 = 10;
-  }
-  FUN_004d05c4(param_1 + 0x818,0x14,0x40e,temp_v2);
-  *(unsigned char *)(param_1 + 0x828) = 1;
-  jyoucyuGetTableEntry(0);
-  return;
 }
 
-} /* extern "C" */
+}

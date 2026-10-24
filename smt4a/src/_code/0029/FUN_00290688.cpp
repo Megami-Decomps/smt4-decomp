@@ -1,4 +1,3 @@
-/* NON_MATCHING: render-state push hoists the new-top address into ip instead of reusing r3 after the previous-state load. */
 #include "camp/RenderCtx.h"
 
 extern "C" {

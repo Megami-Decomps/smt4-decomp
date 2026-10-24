@@ -1,183 +1,182 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041fe58` (_code @ 0x41fe58, 0x388 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the allocation/copy sequence and the slot-clearing loop are scheduled differently from retail; the screen setup is the same. */
+#include "common.h"
 
 extern "C" {
 
-int asdTMTexTableLoadSprites(...);
-int gameDataBlocksGetSaveData(void);
-int FUN_0014e188(...);
-int uiSpriteInitializeState(...);
-int paramsInit(...);
-int asdMemoryAlloc(...);
-int sysPlaySe(...);
-int gameFlagIsSet(...);
-int FUN_0019de98(...);
-int wordPairCopy(unsigned int, unsigned int);
-int asdTMTexLoadMainHeap(...);
-int FUN_00203b40(...);
-int asdLoadFileAsyncSimple(...);
-int scrollOwnerSetValue(...);
-int sysMemClear(...);
-int flaggedEntrySetValueA(...);
-int FUN_003f86f0(void);
-int loadSlotRequestAsync(...);
-int FUN_0041f020(...);
-int paramsClearPacket(void);
-int rt_memcpy_w(...);
+/* The save/load screen's work block (0x730+ bytes; only the fields set here, by their offsets). */
+typedef struct SaveLoadUI {
+    /* 0x000 */ u8 unk000[5];
+    /* 0x005 */ u8 isLoad;
+    /* 0x006 */ u8 option;
+    /* 0x007 */ u8 stage;
+    /* 0x008 */ u32 step;
+    /* 0x00C */ u8 stepCounter;
+    /* 0x00D */ u8 previousStage;
+    /* 0x00E */ u8 unk00e[5];
+    /* 0x013 */ u8 processState;
+    /* 0x014 */ u8 unk014[4];
+    /* 0x018 */ u32 mode;
+    /* 0x01C */ void *tableCopy;
+    /* 0x020 */ void *settingsCopy;
+    /* 0x024 */ void *saveCopy;
+    /* 0x028 */ u8 header[0x10];
+    /* 0x038 */ u32 uiScript;
+    /* 0x03C */ u32 uiMessages;
+    /* 0x040 */ u8 unk040[8];
+    /* 0x048 */ u32 flagId;
+    /* 0x04C */ u32 headerKind;
+    /* 0x050 */ u8 flagValue;
+    /* 0x051 */ u8 unk051[3];
+    /* 0x054 */ void *buffer;
+    /* 0x058 */ u8 unk058[8];
+    /* 0x060 */ s32 selected;
+    /* 0x064 */ u8 unk064[8];
+    /* 0x06C */ u8 slots[5][0x80];
+    /* 0x2EC */ u8 slotUsed[8];
+    /* 0x2F4 */ u32 unk2f4;
+    /* 0x2F8 */ s32 cursor;
+    /* 0x2FC */ s32 cursorEnd;
+    /* 0x300 */ u32 unk300;
+    /* 0x304 */ s32 scrollTop;
+    /* 0x308 */ s32 scrollRange;
+    /* 0x30C */ u8 unk30c;
+    /* 0x30D */ u8 unk30d[0xCB];
+    /* 0x3D8 */ u8 list[0x7C];
+    /* 0x454 */ u8 params[0x20];
+    /* 0x474 */ u8 sprite0[0x8C];
+    /* 0x500 */ u8 sprite1[0x8C];
+    /* 0x58C */ u8 sprite2[0x8C];
+    /* 0x618 */ u32 unk618;
+    /* 0x61C */ f32 unk61c;
+    /* 0x620 */ u8 unk620[0x10C];
+    /* 0x72C */ u8 unk72c;
+} SaveLoadUI;
 
-/* stack frame of param_3: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_3_stack;
+/* The screen's globals: two state bytes, the four unlock flags and the saved cursor. */
+typedef struct SaveLoadGlobals {
+    u8 state;
+    u8 unk01;
+    u8 flag470;
+    u8 flag471;
+    u8 flag558;
+    u8 flag559;
+    u8 unk06[0xE];
+    s32 savedCursor;
+} SaveLoadGlobals;
 
-extern unsigned char DAT_00533d50; /* 0x533d50 */
-extern unsigned char DAT_00533dc8; /* 0x533dc8 */
-extern unsigned char DAT_00533de0; /* 0x533de0 */
-extern unsigned char g_saveLoadUIBase; /* 0x588e14 */
-extern unsigned char DAT_00588e15; /* 0x588e15 */
-extern unsigned char DAT_00588e16; /* 0x588e16 */
-extern unsigned char DAT_00588e17; /* 0x588e17 */
-extern unsigned char DAT_00588e18; /* 0x588e18 */
-extern unsigned char DAT_00588e19; /* 0x588e19 */
-extern int DAT_00588e28; /* 0x588e28 */
+extern SaveLoadGlobals g_saveLoadUIBase;
+extern u8 DAT_00533d50[];
+extern u8 DAT_00533dc8[];
+extern u8 DAT_00533de0[];
 
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: gameDataBlocksGetSaveData. */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteInitializeState. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: wordPairCopy. */
-/* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_00203b40. */
-extern unsigned int configGetSettings(void);
-extern unsigned int gameDataBlocksGetTable(void);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: scrollOwnerSetValue. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: flaggedEntrySetValueA. */
-extern unsigned char saveLoadProcessGetState(void);
-/* Supplied declaration required: FUN_003f86f0. */
-/* Supplied declaration required: loadSlotRequestAsync. */
-/* Supplied declaration required: FUN_0041f020. */
-/* Supplied declaration required: paramsClearPacket. */
-/* Supplied declaration required: rt_memcpy_w. */
+void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 b, u32 c);
+void *gameDataBlocksGetTable(void);
+void *configGetSettings(void);
+void *gameDataBlocksGetSaveData(void);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void wordPairCopy(void *destination, const void *source);
+void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
+s32 gameFlagIsSet(u32 flag);
+void asdTMTexTableLoadSprites(u32 table);
+void asdTMTexLoadMainHeap(u32 table, u32 arg);
+void loadSlotRequestAsync(u32 slot, u32 arg);
+void FUN_003f86f0(void);
+void sysMemClear(void *block, u32 size);
+void paramsClearPacket(void *packet);
+void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
+                const void *f, u32 fSize);
+void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
+void uiSpriteInitializeState(void *sprite, u32 group, u32 id, u32 size, void *owner, u32 anim, f32 scale);
+u8 saveLoadProcessGetState(void);
+void sysPlaySe(u32 id);
+void FUN_0041f020(SaveLoadUI *ui, s32 arg);
+void FUN_00203b40(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
+void flaggedEntrySetValueA(void *list, s32 value);
+void scrollOwnerSetValue(void *list, s32 value);
+void FUN_0019de98(s32 a, u32 color);
 
-
-void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
-
+/* Opens the save/load screen: snapshots the game data, config and save data, starts loading its
+ * files and sprites, sets up the five slots and the cursor from the saved one, and enters the
+ * first step. */
+void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
 {
-/* irregular: 21 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  *(char *)(param_1 + 5) = (char)param_2;
-  *(unsigned char *)(param_1 + 6) = param_3;
-  temp_v1 = 0x10000;
-  asdMemoryAlloc(0x10000,0x100,0,0x80,1);
-  *(unsigned int *)(param_1 + 0x1c) = temp_v1;
-  temp_v1 = 0x10000;
-  asdMemoryAlloc(0x10000,0x100,0,8,1);
-  *(unsigned int *)(param_1 + 0x20) = temp_v1;
-  temp_v1 = 0x10000;
-  asdMemoryAlloc(0x10000,0x100,0,0x2a71c,1);
-  *(unsigned int *)(param_1 + 0x24) = temp_v1;
-  temp_v1 = gameDataBlocksGetTable();
-  rt_memcpy_w(*(unsigned int *)(param_1 + 0x1c),temp_v1,0x80);
-  temp_v1 = configGetSettings();
-  wordPairCopy(*(unsigned int *)(param_1 + 0x20),temp_v1);
-  temp_v1 = gameDataBlocksGetSaveData();
-  rt_memcpy_w(*(unsigned int *)(param_1 + 0x24),temp_v1,0x2a71c);
-  temp_v2 = gameDataBlocksGetSaveData();
-  rt_memcpy_w(param_1 + 0x28,temp_v2 + 8,0xe);
-  asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.bf",param_1 + 0x38,0);
-  asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.mbm",param_1 + 0x3c,0);
-  if (param_2 != 0) {
-    *(unsigned int *)(param_1 + 0x48) = 0x470;
-    *(unsigned int *)(param_1 + 0x4c) = 8;
-    temp_v0 = gameFlagIsSet();
-    *(unsigned char *)(param_1 + 0x50) = temp_v0;
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x4c) = 9;
-    *(unsigned int *)(param_1 + 0x48) = 0x471;
-    *(unsigned char *)(param_1 + 0x50) = 1;
-  }
-  DAT_00588e16 = gameFlagIsSet(0x470);
-  DAT_00588e17 = gameFlagIsSet(0x471);
-  DAT_00588e18 = gameFlagIsSet(0x558);
-  DAT_00588e19 = gameFlagIsSet(0x559);
-  asdTMTexTableLoadSprites(0x2b);
-  asdTMTexLoadMainHeap(0x2b,0);
-  loadSlotRequestAsync(0x3d,0);
-  FUN_003f86f0();
-  temp_v2 = 0;
-  do {
-    sysMemClear(param_1 + temp_v2 * 0x80 + 0x6c,0x80);
-    temp_v3 = param_1 + temp_v2;
-    temp_v2 = temp_v2 + 1;
-    *(unsigned char *)(temp_v3 + 0x2ec) = 0;
-  } while (temp_v2 < 5);
-  *(unsigned int *)(param_1 + 0x2f4) = 0;
-  temp_v1 = 0x100;
-  asdMemoryAlloc(0x100,0x100,0,100,1);
-  *(unsigned int *)(param_1 + 0x54) = temp_v1;
-  temp_v2 = param_1 + 0x454;
-  paramsClearPacket();
-  paramsInit(temp_v2,&DAT_00533d50,0x78,&DAT_00533dc8,0x18,0,0,0,0,&DAT_00533de0,0xe0);
-  FUN_0014e188(param_1 + 0x474,0x2b,1,temp_v2,0xc9);
-  uiSpriteInitializeState(param_1 + 0x500,0x2b,0x51,2,temp_v2,2);
-  uiSpriteInitializeState(param_1 + 0x58c,0x2b,0x52,2,temp_v2,2);
-  *(unsigned int *)(param_1 + 0x618) = 0;
-  *(unsigned int *)(param_1 + 0x61c) = 0;
-  *(unsigned char *)(param_1 + 0x30c) = 0;
-  *(unsigned char *)(param_1 + 0x72c) = 0;
-  temp_v0 = saveLoadProcessGetState();
-  *(unsigned char *)(param_1 + 0x13) = temp_v0;
-  *(unsigned int *)(param_1 + 0x18) = 2;
-  *(unsigned int *)(param_1 + 0x300) = 0;
-  sysPlaySe(0xaa);
-  *(unsigned int *)(param_1 + 0x308) = 0;
-  FUN_0041f020(param_1,1);
-  temp_v2 = DAT_00588e28;
-  temp_v3 = DAT_00588e28 - 1;
-  if (temp_v3 < 0) {
-    temp_v3 = 0;
-  }
-  *(int *)(param_1 + 0x2f8) = DAT_00588e28;
-  temp_v4 = temp_v2 - temp_v3;
-  *(int *)(param_1 + 0x2fc) = temp_v2;
-  *(int *)(param_1 + 0x60) = temp_v2;
-  if (temp_v4 < 0) {
-    temp_v4 = 0;
-  }
-  *(int *)(param_1 + 0x304) = temp_v3;
-  *(int *)(param_1 + 0x308) = temp_v4;
-  FUN_00203b40(param_1 + 0x3d8,5,2,1,1,1);
-  flaggedEntrySetValueA(param_1 + 0x3d8,temp_v4);
-  scrollOwnerSetValue(param_1 + 0x3d8,temp_v3);
-  FUN_0019de98(0,0xf4f4f4ff);
-  temp_v0 = *(unsigned char *)(param_1 + 7);
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned char *)(param_1 + 7) = 1;
-  *(unsigned char *)(param_1 + 0xd) = temp_v0;
-  *(unsigned char *)(param_1 + 0xc) = 0;
-  g_saveLoadUIBase = 0;
-  DAT_00588e15 = 0;
-  return;
+    ui->isLoad = (u8)isLoad;
+    ui->option = option;
+    ui->tableCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x80, 1);
+    ui->settingsCopy = asdMemoryAlloc(0x10000, 0x100, 0, 8, 1);
+    ui->saveCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x2A71C, 1);
+    rt_memcpy_w(ui->tableCopy, gameDataBlocksGetTable(), 0x80);
+    wordPairCopy(ui->settingsCopy, configGetSettings());
+    rt_memcpy_w(ui->saveCopy, gameDataBlocksGetSaveData(), 0x2A71C);
+    rt_memcpy_w(ui->header, (u8 *)gameDataBlocksGetSaveData() + 8, 0xE);
+    asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.bf", &ui->uiScript, 0);
+    asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.mbm", &ui->uiMessages, 0);
+    if (isLoad != 0) {
+        ui->flagId = 0x470;
+        ui->headerKind = 8;
+        ui->flagValue = (u8)gameFlagIsSet(0x470);
+    } else {
+        ui->headerKind = 9;
+        ui->flagId = 0x471;
+        ui->flagValue = 1;
+    }
+    g_saveLoadUIBase.flag470 = (u8)gameFlagIsSet(0x470);
+    g_saveLoadUIBase.flag471 = (u8)gameFlagIsSet(0x471);
+    g_saveLoadUIBase.flag558 = (u8)gameFlagIsSet(0x558);
+    g_saveLoadUIBase.flag559 = (u8)gameFlagIsSet(0x559);
+    asdTMTexTableLoadSprites(0x2B);
+    asdTMTexLoadMainHeap(0x2B, 0);
+    loadSlotRequestAsync(0x3D, 0);
+    FUN_003f86f0();
+    for (s32 i = 0; i < 5; i++) {
+        sysMemClear(ui->slots[i], 0x80);
+        ui->slotUsed[i] = 0;
+    }
+    ui->unk2f4 = 0;
+    ui->buffer = asdMemoryAlloc(0x100, 0x100, 0, 100, 1);
+    paramsClearPacket(ui->params);
+    paramsInit(ui->params, DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
+    FUN_0014e188(ui->sprite0, 0x2B, 1, ui->params, 0xC9, 1.0f);
+    uiSpriteInitializeState(ui->sprite1, 0x2B, 0x51, 2, ui->params, 2, 1.0f);
+    uiSpriteInitializeState(ui->sprite2, 0x2B, 0x52, 2, ui->params, 2, 1.0f);
+    ui->unk618 = 0;
+    ui->unk61c = 0.0f;
+    ui->unk30c = 0;
+    ui->unk72c = 0;
+    ui->processState = saveLoadProcessGetState();
+    ui->mode = 2;
+    ui->unk300 = 0;
+    sysPlaySe(0xAA);
+    ui->scrollRange = 0;
+    FUN_0041f020(ui, 1);
+    s32 cursor = g_saveLoadUIBase.savedCursor;
+    s32 top = cursor - 1;
+
+    if (top < 0) {
+        top = 0;
+    }
+    ui->cursor = cursor;
+    s32 range = cursor - top;
+
+    ui->cursorEnd = cursor;
+    ui->selected = cursor;
+    if (range < 0) {
+        range = 0;
+    }
+    ui->scrollTop = top;
+    ui->scrollRange = range;
+    FUN_00203b40(ui->list, 5, 2, 1, 1, 1);
+    flaggedEntrySetValueA(ui->list, range);
+    scrollOwnerSetValue(ui->list, top);
+    FUN_0019de98(0, 0xF4F4F4FF);
+    u8 stage = ui->stage;
+
+    ui->step = 0;
+    ui->stage = 1;
+    ui->previousStage = stage;
+    ui->stepCounter = 0;
+    g_saveLoadUIBase.state = 0;
+    g_saveLoadUIBase.unk01 = 0;
 }
 
-} /* extern "C" */
+}

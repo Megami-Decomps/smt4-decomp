@@ -1,158 +1,158 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031ce4c` (_code @ 0x31ce4c, 0x264 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: twin of smt4a FUN_003b8ecc; nw::gfx light-set registration with the inlined MoveArray push_back, grow path and parameter block scheduled differently from retail */
+#include "common.h"
+
+struct NwAllocator;
+
+struct NwAllocatorVtable {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void *unk04;
+    /* 0x08 */ void *(*allocate)(NwAllocator *allocator, u32 bytes, u32 alignment);
+    /* 0x0C */ void (*release)(NwAllocator *allocator, void *block);
+};
+
+struct NwAllocator {
+    NwAllocatorVtable *vtable;
+};
+
+struct SceneLightObject {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 owner;
+};
+
+/* nw::ut::MoveArray<SceneLightObject *>: allocator, begin, end, capacity (low 30 bits) and the
+ * allocation mode in the top two bits. */
+struct SceneLightArray {
+    /* 0x00 */ NwAllocator *allocator;
+    /* 0x04 */ SceneLightObject **begin;
+    /* 0x08 */ SceneLightObject **end;
+    /* 0x0C */ u32 capacityAndMode;
+};
+
+struct SceneLightSet {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ SceneLightObject *current;
+    /* 0x10 */ u32 id;
+    /* 0x14 */ SceneLightArray lights;
+};
+
+struct SceneLightParams {
+    /* 0x00 */ u8 enabled;
+    /* 0x01 */ u8 visible;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u32 wordSize;
+    /* 0x08 */ u32 elementSize;
+    /* 0x0C */ u32 count;
+    /* 0x10 */ u32 alignment;
+    /* 0x14 */ u32 unk14[3];
+};
+
+struct LightResource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 handle;
+};
+
+struct LightSource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ LightResource *resource;
+    /* 0x0C */ u8 unk0C[0x20];
+    /* 0x2C */ LightResource *data;
+};
+
+struct LightBinding {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 count;
+};
+
+struct EffAsdLight {
+    /* 0x00 */ u8 unk00[0x54];
+    /* 0x54 */ struct { u8 unk00[8]; LightSource *source; } *scene;
+    /* 0x58 */ u8 unk58[0x44];
+    /* 0x9C */ LightBinding *binding;
+    /* 0xA0 */ SceneLightObject **slots;   /* 0x1C-byte records, first word is the light */
+};
+
+#define NW_ARRAY_CAPACITY_MASK 0x3FFFFFFF
+#define NW_ARRAY_MODE_MASK 0xC0000000
+#define NW_ARRAY_MODE_ALLOCATOR 0x40000000
 
 extern "C" {
+extern u32 DAT_00464b7c;
+extern u32 g_asdModelTransformBuilder;
+extern s32 g_asdLightCount;
 
-int sceneTraverserVisit(unsigned int, unsigned int);
-int FUN_002b3acc(unsigned char *, int, unsigned int, unsigned int);
-int nw_gfx_SceneNode_IsCircularReference(void);
+void sceneTraverserVisit(u32 handle, u32 builder);
+u32 asdMemoryGetAllocatorA(void);
+SceneLightObject *FUN_002b3acc(SceneLightParams *params, u32 unused, u32 handle, u32 allocator);
+SceneLightSet *asdLightSelectActive(s32 index);
+s32 nw_gfx_SceneNode_IsCircularReference(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 12 slot(s), 42 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned char sp57; /* 0x57: local_57 */
-    unsigned char sp58; /* 0x58: local_58 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-} param_1_stack;
-
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern int g_asdLightCount; /* 0x4dad80 */
-
-extern int asdLightSelectActive(unsigned int);
-/* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: FUN_002b3acc. */
-extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
-
-
-void FUN_0031ce4c(int param_1)
-
+/* Builds one light per bound entry, registers each in the active light set and then walks the
+ * scene. */
+void FUN_0031ce4c(EffAsdLight *effect)
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned int *puVar6;
-  unsigned int *puVar7;
-  unsigned int *puVar8;
-  unsigned int *puVar9;
-  unsigned int temp_v3;
-  int *piVar11;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int *piVar14;
-  int temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8;
-  unsigned int temp_v9;
-  unsigned int uStack_50;
-  unsigned int uStack_4c;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  int temp_v14;
-  int temp_v15;
-  unsigned int temp_v16;
-  
-  if (*(int *)(param_1 + 0x54) == 0) {
-    return;
-  }
-  temp_v14 = *(int *)(*(int *)(*(int *)(param_1 + 0x54) + 8) + 0x2c);
-  temp_v15 = asdLightSelectActive(1);
-  piVar11 = *(int **)(param_1 + 0xa0);
-  temp_v4 = 0;
-  if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {
-    do {
-      temp_v5 = *(unsigned int *)(temp_v14 + 8);
-      temp_v2 = asdMemoryGetAllocatorA();
-      temp_v7 = 1;
-      temp_v11 = 0;
-      temp_v12 = 0;
-      temp_v13 = 0;
-      temp_v9 = 4;
-      uStack_50 = 8;
-      uStack_4c = 1;
-      temp_v10 = 4;
-      puVar4 = &temp_v7;
-      temp_v8 = temp_v7;
-      FUN_002b3acc(puVar4,0,temp_v5,temp_v2);
-      temp_v1 = temp_v15;
-      *piVar11 = (int)puVar4;
-      puVar5 = *(unsigned char **)(temp_v15 + 0xc);
-      if (((puVar5 == (unsigned char *)0x0) ||
-          ((puVar5 != puVar4 &&
-           (nw_gfx_SceneNode_IsCircularReference(), puVar5 == (unsigned char *)0x0)))) &&
-         (*(int *)(puVar4 + 0xc) == 0)) {
-        piVar14 = (int *)(temp_v1 + 0x14);
-        temp_v3 = *(unsigned int *)(temp_v1 + 0x20) & 0x3fffffff;
-        if ((*(int *)(temp_v1 + 0x1c) - *(int *)(temp_v1 + 0x18)) >> 2 >= (int)temp_v3) {
-          if (temp_v3 == 0) {
-            temp_v16 = 1;
-          }
-          else {
-            temp_v16 = temp_v3 << 1;
-          }
-          if (temp_v16 <= (*(unsigned int *)(temp_v1 + 0x20) & 0x3fffffff)) goto LAB_0031d040;
-          if ((*piVar14 != 0) && ((*(unsigned int *)(temp_v1 + 0x20) & 0xc0000000) == 0x40000000)) {
-            puVar6 = (unsigned int *)
-                     (**(romwright_code **)(*(int *)*piVar14 + 8))((int *)*piVar14,temp_v16 << 2,0x20);
-            puVar8 = *(unsigned int **)(temp_v1 + 0x18);
-            puVar9 = *(unsigned int **)(temp_v1 + 0x1c);
-            temp_v6 = 0;
-            puVar7 = puVar6;
-            if (puVar8 != puVar9) {
-              do {
-                if (puVar7 != (unsigned int *)0x0) {
-                  *puVar7 = *puVar8;
+    if (effect->scene == NULL)
+        return;
+    LightResource *resource = effect->scene->source->data;
+    SceneLightSet *set = asdLightSelectActive(1);
+    SceneLightObject **slot = effect->slots;
+    for (u32 i = 0; i < effect->binding->count; i++) {
+        SceneLightParams params;
+        params.enabled = 1;
+        params.visible = 1;
+        params.wordSize = 4;
+        params.elementSize = 8;
+        params.count = 1;
+        params.alignment = 4;
+        params.unk14[0] = 0;
+        params.unk14[1] = 0;
+        params.unk14[2] = 0;
+        SceneLightObject *light = FUN_002b3acc(&params, 0, resource->handle, asdMemoryGetAllocatorA());
+        *slot = light;
+
+        SceneLightObject *current = set->current;
+        if ((current == NULL || current == light
+             || (nw_gfx_SceneNode_IsCircularReference(), current == NULL))
+            && light->owner == 0) {
+            SceneLightArray *array = &set->lights;
+            u32 capacity = array->capacityAndMode & NW_ARRAY_CAPACITY_MASK;
+            s32 size = array->end - array->begin;
+            bool added = true;
+            if (size <= (s32)capacity) {
+                u32 grown = capacity == 0 ? 1 : capacity << 1;
+                if (grown > capacity) {
+                    added = false;
+                    if (array->allocator != NULL && (array->capacityAndMode & NW_ARRAY_MODE_MASK) == NW_ARRAY_MODE_ALLOCATOR) {
+                        SceneLightObject **block = (SceneLightObject **)
+                            array->allocator->vtable->allocate(array->allocator, grown << 2, 0x20);
+                        SceneLightObject **dst = block;
+                        u32 used = 0;
+                        for (SceneLightObject **src = array->begin; src != array->end; src++, dst++) {
+                            if (dst != NULL)
+                                *dst = *src;
+                        }
+                        if (array->begin != array->end)
+                            used = array->end - array->begin;
+                        if (array->begin != NULL)
+                            array->allocator->vtable->release(array->allocator, array->begin);
+                        array->end = block + used;
+                        array->begin = block;
+                        array->capacityAndMode = grown | (array->capacityAndMode & NW_ARRAY_MODE_MASK);
+                        added = true;
+                    }
                 }
-                puVar8 = puVar8 + 1;
-                puVar7 = puVar7 + 1;
-              } while (puVar8 != puVar9);
-              temp_v6 = (*(int *)(temp_v1 + 0x1c) - *(int *)(temp_v1 + 0x18)) >> 2;
             }
-            if (*(int *)(temp_v1 + 0x18) != 0) {
-              (**(romwright_code **)(*(int *)*piVar14 + 0xc))((int *)*piVar14);
+            if (added) {
+                if (array->end != NULL)
+                    *array->end = light;
+                array->end++;
             }
-            *(unsigned int **)(temp_v1 + 0x1c) = puVar6 + temp_v6;
-            *(unsigned int **)(temp_v1 + 0x18) = puVar6;
-            *(unsigned int *)(temp_v1 + 0x20) = temp_v16 | (*(unsigned int *)(temp_v1 + 0x20) & 0xc0000000);
-            goto LAB_0031d040;
-          }
-          temp_v0 = 0;
+            if (added)
+                light->owner = set->id;
         }
-        else {
-LAB_0031d040:
-          temp_v0 = 1;
-          if (*(int **)(temp_v1 + 0x1c) != (int *)0x0) {
-            **(int **)(temp_v1 + 0x1c) = (int)puVar4;
-          }
-          *(int *)(temp_v1 + 0x1c) = *(int *)(temp_v1 + 0x1c) + 4;
-        }
-        if (temp_v0) {
-          *(unsigned int *)(puVar4 + 0xc) = *(unsigned int *)(temp_v1 + 0x10);
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-      piVar11 = piVar11 + 7;
-      g_asdLightCount = g_asdLightCount + 1;
-    } while (temp_v4 < *(unsigned int *)(*(int *)(param_1 + 0x9c) + 8));
-  }
-  sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
-  return;
+        slot += 7;
+        g_asdLightCount++;
+    }
+    sceneTraverserVisit(DAT_00464b7c, g_asdModelTransformBuilder);
 }
 
 } /* extern "C" */

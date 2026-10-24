@@ -7,7 +7,9 @@
 
 /* A UI sprite instance of the menu (0x8C bytes); `mode` is the playback mode at 0x3A. */
 typedef struct GauntletSprite {
-    u8 unk00[0x3A];
+    u8 unk00[0x18];
+    /* 0x18 */ u16 unk18;
+    u8 unk1A[0x20];
     /* 0x3A */ u16 mode;
     u8 unk3C[0x50];
 } GauntletSprite;
@@ -18,7 +20,8 @@ typedef struct GauntletAppMenuWork {
         /* 0x004 */ u8 unk04[0x524];
         struct {
             /* 0x004 */ u32 drawTask;     /* the menu's draw task */
-            u8 unk008[8];
+            /* 0x008 */ u32 mode;    /* the screen shown */
+            /* 0x00C */ u32 unk00C;
             /* 0x010 */ u8 controller[0x64];
             /* 0x074 */ u32 entries[141];
             /* 0x2A8 */ u32 count;
@@ -31,6 +34,10 @@ typedef struct GauntletAppMenuWork {
             /* 0x2B8 */ u8 params[0x20];     /* draw parameter block shared by the sprites */
             /* 0x2D8 */ GauntletSprite sprites[4];
         } list;
+        struct {
+            u8 unk004[0x520];
+            /* 0x524 */ u16 touchRegionCount;
+        } touch;
     };
     /* 0x528 */ void *heapA;     /* heap block, freed on close */
     /* 0x52C */ void *heapB;     /* heap block, freed on close */

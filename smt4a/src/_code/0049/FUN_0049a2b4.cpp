@@ -1,164 +1,155 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049a2b4` (_code @ 0x49a2b4, 0x2c8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail writes the phase/step/previous-phase stores through one writeback pointer and loads the list count with a register-offset ldrh (mov r0,#0x1000; ldrh r1,[r0,r5]), and orders the sort-kind compare tree differently (beq/bge targets); this build uses separate stores, add+ldrh and a different branch layout. */
+#include "common.h"
+
+/* One page's sort list: its u32 entries followed by their count (the pages are 0x1002 bytes apart). */
+__packed struct SortList {
+    /* 0x0000 */ u8 entries[0x1000]; /* four-byte elements */
+    /* 0x1000 */ u16 count;
+};
+
+/* The sorted menu's state: the phase machine, the page holders and one sort list per page. */
+__packed struct SortMenu {
+    /* 0x0000 */ u8 unk0000[4];
+    /* 0x0004 */ s32 phase;
+    /* 0x0008 */ s32 step;
+    /* 0x000C */ u8 unk000C[4];
+    /* 0x0010 */ s32 previousPhase;
+    /* 0x0014 */ s32 reentered;
+    /* 0x0018 */ u8 unk0018[0xB40 - 0x18];
+    /* 0x0B40 */ s32 page;
+    /* 0x0B44 */ u8 unk0B44[0xB60 - 0xB44];
+    /* 0x0B60 */ u8 holders[8][0x74];
+    /* 0x0F00 */ u8 unk0F00[0xF74 - 0xF00];
+    /* 0x0F74 */ SortList lists[8];
+};
+
+typedef s32 (*SortCompare)(const void *, const void *);
 
 extern "C" {
+u8 useCounterIsFinished(void);
+void useCounterRelease(void);
+s32 useCounterGetValue(void);
+void FUN_003343f0(u8 value);
+void FUN_00498ff0(SortMenu *menu);
+u32 flaggedValueHolderGetTotal(const void *holder);
+u8 FUN_002c7c54(void);
+void arraySortQsort(void *entries, u32 count, u32 size, SortCompare compare);
+s32 FUN_004938d0(const void *, const void *);
+s32 halfDifference(const void *, const void *);
+s32 FUN_0049393c(const void *, const void *);
+s32 FUN_00493d38(const void *, const void *);
+s32 FUN_00493d88(const void *, const void *);
+s32 FUN_00493e94(const void *, const void *);
+s32 FUN_00493ee0(const void *, const void *);
+s32 FUN_004943bc(const void *, const void *);
+s32 FUN_00494448(const void *, const void *);
+s32 FUN_0049448c(const void *, const void *);
+s32 FUN_004944d0(const void *, const void *);
+s32 FUN_00494530(const void *, const void *);
+s32 recordCompareValues(const void *, const void *);
+s32 FUN_0049d0f0(const void *, const void *);
 
-int arraySortQsort(...);
-int FUN_003343f0(int);
-int useCounterRelease(void);
-int FUN_00498ff0(int);
-int flaggedValueHolderGetTotal(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int FUN_004938d0(...); /* 0x4938d0 */
-extern int halfDifference(...); /* 0x49391c */
-extern int FUN_0049393c(...); /* 0x49393c */
-extern int FUN_00493d88(...); /* 0x493d88 */
-extern int FUN_00493e94(...); /* 0x493e94 */
-extern int FUN_00493ee0(...); /* 0x493ee0 */
-extern int FUN_004943bc(...); /* 0x4943bc */
-extern int FUN_00494448(...); /* 0x494448 */
-extern int FUN_0049448c(...); /* 0x49448c */
-extern int FUN_004944d0(...); /* 0x4944d0 */
-extern int FUN_00494530(...); /* 0x494530 */
-extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
-
-extern int useCounterIsFinished(void);
-extern int useCounterGetValue(void);
-extern int FUN_002c7c54(void);
-/* Supplied declaration required: arraySortQsort. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: useCounterRelease. */
-/* Supplied declaration required: FUN_00498ff0. */
-/* Supplied declaration required: flaggedValueHolderGetTotal. */
-
-
-void FUN_0049a2b4(int param_1)
-
+/* Per frame: when the counter finishes, moves to the next phase; otherwise re-sorts the current page's list in the selected order. */
+void FUN_0049a2b4(SortMenu *menu)
 {
-/* irregular: 16 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = useCounterIsFinished();
-  if (temp_v0 != 0) {
-    useCounterRelease();
-    FUN_003343f0(0);
-    FUN_00498ff0(param_1);
-    temp_v0 = *(int *)(param_1 + 0xb40);
-    if (*(int *)(param_1 + 0x14) == 1) {
-      temp_v3 = *(unsigned int *)(param_1 + 4);
-      if (temp_v0 == 8) {
-        temp_v1 = 0x12;
-      }
-      else {
-        temp_v1 = 0x11;
-      }
-      *(unsigned int *)(param_1 + 4) = temp_v1;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned int *)(param_1 + 0x10) = temp_v3;
-      return;
-    }
-    if (temp_v0 == 7) {
-      temp_v3 = *(unsigned int *)(param_1 + 4);
-      *(unsigned int *)(param_1 + 4) = 8;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned int *)(param_1 + 0x10) = temp_v3;
-      return;
-    }
-    temp_v3 = *(unsigned int *)(param_1 + 4);
-    if (temp_v0 == 8) {
-      temp_v1 = 9;
-    }
-    else {
-      temp_v1 = 7;
-    }
-    *(unsigned int *)(param_1 + 4) = temp_v1;
-    *(unsigned int *)(param_1 + 8) = 0;
-    *(unsigned int *)(param_1 + 0x10) = temp_v3;
-  }
-  else {
-    temp_v2 = param_1 + *(int *)(param_1 + 0xb40) * 0x1002;
-    temp_v4 = temp_v2 + 0xf74;
-    flaggedValueHolderGetTotal(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb60);
-    temp_v0 = FUN_002c7c54();
-    if (temp_v0 == 0xf) {
-      temp_v0 = useCounterGetValue();
-      if (temp_v0 == 0) {
-        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004943bc);
-        return;
-      }
-      arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493d88);
-      return;
-    }
-    if (temp_v0 < 0xf) {
-      if (temp_v0 == 3) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493ee0);
-          return;
-        }
-        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049393c);
-        return;
-      }
-      if (temp_v0 == 7) {
-        if (*(int *)(param_1 + 0xb40) == 8) {
-          temp_v0 = useCounterGetValue();
-          if (temp_v0 == 0) {
-            arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494530);
+    if (useCounterIsFinished() != 0) {
+        useCounterRelease();
+        FUN_003343f0(0);
+        FUN_00498ff0(menu);
+        s32 page = menu->page;
+        if (menu->reentered == 1) {
+            s32 previous = menu->phase;
+            s32 next;
+            if (page == 8) {
+                next = 0x12;
+            } else {
+                next = 0x11;
+            }
+            menu->phase = next;
+            menu->step = 0;
+            menu->previousPhase = previous;
             return;
-          }
-          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049448c);
-          return;
         }
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004944d0);
-          return;
+        if (page == 7) {
+            s32 previous = menu->phase;
+            menu->phase = 8;
+            menu->step = 0;
+            menu->previousPhase = previous;
+            return;
         }
-        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00494448);
-        return;
-      }
-      if (temp_v0 == 0xc) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,halfDifference);
-          return;
+        s32 previous = menu->phase;
+        s32 next;
+        if (page == 8) {
+            next = 9;
+        } else {
+            next = 7;
         }
-        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,&LAB_0049cf3c);
-        return;
-      }
+        menu->phase = next;
+        menu->step = 0;
+        menu->previousPhase = previous;
+    } else {
+        SortList *list = &menu->lists[menu->page];
+        flaggedValueHolderGetTotal(menu->holders[menu->page]);
+        s32 order = FUN_002c7c54();
+        if (order == 0xf) {
+            if (useCounterGetValue() == 0) {
+                arraySortQsort(list->entries, list->count, 4, FUN_004943bc);
+                return;
+            }
+            arraySortQsort(list->entries, list->count, 4, FUN_00493d88);
+            return;
+        }
+        if (order < 0xf) {
+            if (order == 3) {
+                if (useCounterGetValue() == 0) {
+                    arraySortQsort(list->entries, list->count, 4, FUN_00493ee0);
+                    return;
+                }
+                arraySortQsort(list->entries, list->count, 4, FUN_0049393c);
+                return;
+            }
+            if (order == 7) {
+                if (menu->page == 8) {
+                    if (useCounterGetValue() == 0) {
+                        arraySortQsort(list->entries, list->count, 4, FUN_00494530);
+                        return;
+                    }
+                    arraySortQsort(list->entries, list->count, 4, FUN_0049448c);
+                    return;
+                }
+                if (useCounterGetValue() == 0) {
+                    arraySortQsort(list->entries, list->count, 4, FUN_004944d0);
+                    return;
+                }
+                arraySortQsort(list->entries, list->count, 4, FUN_00494448);
+                return;
+            }
+            if (order == 0xc) {
+                if (useCounterGetValue() == 0) {
+                    arraySortQsort(list->entries, list->count, 4, halfDifference);
+                    return;
+                }
+                arraySortQsort(list->entries, list->count, 4, recordCompareValues);
+                return;
+            }
+        } else {
+            if (order == 0x10) {
+                if (useCounterGetValue() == 0) {
+                    arraySortQsort(list->entries, list->count, 4, FUN_00493e94);
+                    return;
+                }
+                arraySortQsort(list->entries, list->count, 4, FUN_004938d0);
+                return;
+            }
+            if (order == 0x1c) {
+                if (useCounterGetValue() == 0) {
+                    arraySortQsort(list->entries, list->count, 4, FUN_00493d38);
+                    return;
+                }
+                arraySortQsort(list->entries, list->count, 4, FUN_0049d0f0);
+                return;
+            }
+        }
     }
-    else {
-      if (temp_v0 == 0x10) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_00493e94);
-          return;
-        }
-        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_004938d0);
-        return;
-      }
-      if (temp_v0 == 0x1c) {
-        temp_v0 = useCounterGetValue();
-        if (temp_v0 == 0) {
-          arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x493d38);
-          return;
-        }
-        arraySortQsort(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,0x49d0f0);
-        return;
-      }
-    }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

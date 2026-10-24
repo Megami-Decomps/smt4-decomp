@@ -1,220 +1,299 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a1110` (_code @ 0x1a1110, 0x3c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reaches the world and demon-range pointers through one base symbol (+4/+0xc), does not unroll the 24-slot init loop and keeps its world pointer in r4/r5 around the demon-table rebuild; this version unrolls the loop and keeps the world in r5, so the instruction count differs. The stores, calls and loop bounds are the same. */
+#include "common.h"
+
+namespace {
+/* The game world block: only the fields this reset writes are named by their offset. */
+struct GameWorld {
+    u8 pad00000[0x9194];
+    u8 unk09194;
+    u8 unk09195;
+    u8 unk09196;
+    u8 pad09197[0x6d5];
+    u32 unk0986c;
+    u32 unk09870;
+    u8 pad09874[0x104c];
+    u8 unk0a8c0;
+    u8 unk0a8c1;
+    u8 unk0a8c2;
+    u8 unk0a8c3;
+    f32 unk0a8c4;
+    f32 unk0a8c8;
+    f32 unk0a8cc;
+    f32 unk0a8d0;
+    f32 unk0a8d4;
+    u32 unk0a8d8;
+    u8 unk0a8dc;
+    u8 unk0a8dd;
+    u16 unk0a8de;
+    u16 unk0a8e0;
+    u16 unk0a8e2;
+    u8 pad0a8e4[0x16];
+    u8 unk0a8fa;
+    u8 unk0a8fb;
+    u8 pad0a8fc[0x708];
+    u32 unk0b004;
+    u32 unk0b008;
+    u32 unk0b00c;
+    u32 unk0b010;
+    u32 unk0b014;
+    u32 unk0b018;
+    u32 unk0b01c;
+    u32 unk0b020;
+    u32 unk0b024;
+    u32 unk0b028;
+    u32 unk0b02c;
+    u32 unk0b030;
+    u32 unk0b034;
+    u32 unk0b038;
+    u32 unk0b03c;
+    u32 unk0b040;
+    u32 unk0b044;
+    u32 unk0b048;
+    u32 unk0b04c;
+    u8 pad0b050[0x2];
+    u8 unk0b052;
+    u8 pad0b053[0x445];
+    u32 unk0b498;
+    u32 unk0b49c;
+    u32 unk0b4a0;
+    u32 unk0b4a4;
+    u32 unk0b4a8;
+    u32 unk0b4ac;
+    u32 unk0b4b0;
+    u32 unk0b4b4;
+    u32 unk0b4b8;
+    u32 unk0b4bc;
+    u32 unk0b4c0;
+    u32 unk0b4c4;
+    u32 unk0b4c8;
+    u32 unk0b4cc;
+    u32 unk0b4d0;
+    u32 unk0b4d4;
+    u8 pad0b4d8[0x100];
+    u32 unk0b5d8;
+    u32 unk0b5dc;
+    u32 unk0b5e0;
+    u32 unk0b5e4;
+    u32 unk0b5e8;
+    u32 unk0b5ec;
+    u32 unk0b5f0;
+    u32 unk0b5f4;
+    u32 unk0b5f8;
+    u32 unk0b5fc;
+    u32 unk0b600;
+    u32 unk0b604;
+    u32 unk0b608;
+    u32 unk0b60c;
+    u32 unk0b610;
+    u32 unk0b614;
+    u8 pad0b618[0x2];
+    u8 unk0b61a;
+    u8 unk0b61b;
+    u32 unk0b61c;
+    u32 unk0b620;
+    u32 unk0b624;
+    u32 unk0b628;
+    u32 unk0b62c;
+    u32 unk0b630;
+    u32 unk0b634;
+    u32 unk0b638;
+    u8 pad0b63c[0x18];
+    u32 unk0b654;
+    u32 unk0b658;
+    u32 unk0b65c;
+    u32 unk0b660;
+    u32 unk0b664;
+    u32 unk0b668;
+    u32 unk0b66c;
+    u8 pad0b670[0x10];
+    u32 unk0b680;
+    f32 unk0b684;
+    u8 unk0b688;
+    u8 pad0b689[0x17];
+    u8 unk0b6a0;
+    u8 unk0b6a1;
+    u8 unk0b6a2;
+    u8 unk0b6a3;
+    u8 pad0b6a4[0x70];
+    u32 unk0b714;
+};
+
+/* The id range the summonable demons span. */
+struct DemonRange {
+    u32 unk00[2];
+    u16 first;
+    u16 last;
+};
+
+/* A per-demon row of the world (0x34 bytes, read as halfwords). */
+struct DemonRow {
+    u16 v[26];
+};
+}
 
 extern "C" {
+extern GameWorld *DAT_0043e2ac;
+extern DemonRange *DAT_0043e2b4;
+void memClear(void *data, u32 size);
+void rt_memclr(void *data, u32 size);
+const u16 *devilGetRecord(u32 id);   /* a demon record, read as halfwords */
+void FUN_0033f81c(void);
+void FUN_002c4924(void);
+void inventoryResetSavedTableEntries(void);
+void FUN_003c25f0(void);
+void FUN_002cf3b4(void);
 
-int devilGetRecord(void);
-int rt_memclr(int, int);
-int FUN_002c4924(void);
-int memClear(int, int);
-int FUN_002cf3b4(void);
-int FUN_0033f81c(void);
-int inventoryResetSavedTableEntries(void);
-int FUN_003c25f0(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int DAT_0043e2ac; /* 0x43e2ac */
-extern unsigned int *DAT_0043e2b4; /* 0x43e2b4 */
-
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_002c4924. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002cf3b4. */
-/* Supplied declaration required: FUN_0033f81c. */
-/* Supplied declaration required: inventoryResetSavedTableEntries. */
-/* Supplied declaration required: FUN_003c25f0. */
-
-
+/* Resets the whole game world for a new game: clears the main blocks, restores the party slot defaults, rebuilds
+   the per-demon table from the demon records and zeroes the runtime state, then resets the dependent systems. */
 void FUN_001a1110(void)
-
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned short *puVar4;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar7;
-  unsigned int temp_v4;
-  
-  memClear(DAT_0043e2ac + 0x88,0x24d28);
-  puVar2 = DAT_0043e2b4;
-  temp_v3 = 0x18;
-  *DAT_0043e2b4 = 0;
-  puVar2[1] = 0;
-  puVar2[2] = 0;
-  temp_v0 = DAT_0043e2ac;
-  temp_v1 = 0;
-  temp_v2 = DAT_0043e2ac + 0x8c;
-  do {
-    *(unsigned char *)(temp_v2 + temp_v1 + 0x90f0) = 0xff;
-    *(char *)(temp_v2 + temp_v1 * 0x604 + 0xda) = (char)temp_v1;
-    temp_v3 = temp_v3 - 1;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v3 != 0);
-  *(unsigned char *)(temp_v0 + 0x9194) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x9195) = 0xff;
-  *(unsigned char *)(temp_v0 + 0x9196) = 0xff;
-  *(unsigned int *)(temp_v0 + 0x986c) = 0;
-  *(unsigned int *)(temp_v0 + 0x9870) = 0;
-  rt_memclr(temp_v0 + 0x981e,0x4c);
-  puVar2 = DAT_0043e2b4;
-  temp_v0 = DAT_0043e2ac;
-  temp_v1 = 0;
-  *(unsigned short *)(DAT_0043e2b4 + 2) = 0;
-  puVar7 = (unsigned short *)(temp_v0 + 0xc22c);
-  *(unsigned short *)((int)puVar2 + 10) = 0;
-  do {
-    puVar4 = (unsigned short *)((temp_v1 + 1U) & 0xffff);
-    devilGetRecord();
-    puVar2 = DAT_0043e2b4;
-    if (puVar4 != (unsigned short *)0x0) {
-      if ((puVar4[3] & 1) != 0) {
-        if (*(short *)(DAT_0043e2b4 + 2) == 0) {
-          *(unsigned short *)(DAT_0043e2b4 + 2) = *puVar4;
-        }
-        *(unsigned short *)((int)puVar2 + 10) = *puVar4;
-      }
-      *puVar7 = (unsigned short)*(unsigned char *)((int)puVar4 + 3);
-      puVar7[1] = puVar4[0xd];
-      puVar7[2] = puVar4[0xe];
-      puVar7[3] = puVar4[0xf];
-      puVar7[4] = puVar4[0x10];
-      puVar7[5] = puVar4[0x11];
-      puVar7[6] = puVar4[0xd];
-      puVar7[7] = puVar4[0xe];
-      puVar7[8] = puVar4[0xf];
-      puVar7[9] = puVar4[0x10];
-      puVar7[10] = puVar4[0x11];
-      puVar7[0xc] = puVar4[10];
-      puVar7[0xd] = puVar4[0xb];
-      puVar7[0xe] = puVar4[0x1e];
-      puVar7[0xf] = puVar4[0x1f];
-      puVar7[0x10] = puVar4[0x20];
-      puVar7[0x11] = puVar4[0x21];
-      puVar7[0x12] = puVar4[0x22];
-      puVar7[0x13] = puVar4[0x23];
-      puVar7[0x14] = puVar4[0x24];
-      puVar7[0x15] = puVar4[0x25];
-      puVar7[0x16] = 0;
-      puVar7[0x17] = puVar7[0x17] & 0xff00;
-      *(unsigned char *)(puVar7 + 0xb) = (unsigned char)puVar7[0xb] & 0xc1;
+    GameWorld *world = DAT_0043e2ac;
+    memClear(reinterpret_cast<u8 *>(world) + 0x88, 0x24d28);
+    DAT_0043e2b4->unk00[0] = 0;
+    DAT_0043e2b4->unk00[1] = 0;
+    DAT_0043e2b4->unk00[2] = 0;
+    for (s32 i = 0; i < 0x18; i++) {
+        reinterpret_cast<u8 *>(world)[0x8c + i + 0x90f0] = 0xff;
+        reinterpret_cast<s8 *>(world)[0x8c + i * 0x604 + 0xda] = (s8)i;
     }
-    temp_v0 = DAT_0043e2ac;
-    temp_v1 = temp_v1 + 1;
-    puVar7 = puVar7 + 0x1a;
-  } while (temp_v1 < 0x500);
-  temp_v4 = 0;
-  *(unsigned char *)(DAT_0043e2ac + 0xa8c0) = 0;
-  *(unsigned char *)(temp_v0 + 0xa8c1) = 0;
-  *(unsigned char *)(temp_v0 + 0xa8c2) = 0;
-  *(unsigned char *)(temp_v0 + 0xa8c3) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8c4) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8c8) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8cc) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8d0) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8d4) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8d8) = 0;
-  *(unsigned short *)(temp_v0 + 0xa8e0) = 0;
-  *(unsigned short *)(temp_v0 + 0xa8e2) = 0;
-  *(unsigned char *)(temp_v0 + 0xa8dc) = 0;
-  *(unsigned short *)(temp_v0 + 0xa8de) = 0xffff;
-  *(unsigned char *)(temp_v0 + 0xa8dd) = 0;
-  *(unsigned int *)(temp_v0 + 0xb004) = 0;
-  *(unsigned int *)(temp_v0 + 0xb008) = 0;
-  *(unsigned int *)(temp_v0 + 0xb00c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb010) = 0;
-  *(unsigned int *)(temp_v0 + 0xb014) = 0;
-  *(unsigned int *)(temp_v0 + 0xb018) = 0;
-  *(unsigned int *)(temp_v0 + 0xb01c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb020) = 0;
-  *(unsigned int *)(temp_v0 + 0xb024) = 0;
-  *(unsigned int *)(temp_v0 + 0xb028) = 0;
-  *(unsigned int *)(temp_v0 + 0xb02c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb030) = 0;
-  *(unsigned int *)(temp_v0 + 0xb034) = 0;
-  *(unsigned int *)(temp_v0 + 0xb038) = 0;
-  *(unsigned int *)(temp_v0 + 0xb03c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb040) = 0;
-  *(unsigned int *)(temp_v0 + 0xb044) = 0;
-  *(unsigned int *)(temp_v0 + 0xb048) = 0;
-  *(unsigned int *)(temp_v0 + 0xb04c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb498) = 0;
-  *(unsigned int *)(temp_v0 + 0xb49c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4a0) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4a4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4a8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4ac) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4b0) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4b4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4b8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4bc) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4c0) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4c4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4c8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4cc) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4d0) = 0;
-  *(unsigned int *)(temp_v0 + 0xb4d4) = 0;
-  memClear(temp_v0 + 0xb4d8,0x80);
-  *(unsigned int *)(temp_v0 + 0xb5d8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5dc) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5e0) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5e4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5e8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5ec) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5f0) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5f4) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5f8) = 0;
-  *(unsigned int *)(temp_v0 + 0xb5fc) = 0;
-  *(unsigned int *)(temp_v0 + 0xb600) = 0;
-  *(unsigned int *)(temp_v0 + 0xb604) = 0;
-  *(unsigned int *)(temp_v0 + 0xb608) = 0;
-  *(unsigned int *)(temp_v0 + 0xb60c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb610) = 0;
-  *(unsigned int *)(temp_v0 + 0xb614) = 0;
-  *(unsigned int *)(temp_v0 + 0xb61c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb620) = 0;
-  *(unsigned int *)(temp_v0 + 0xb624) = 0;
-  *(unsigned int *)(temp_v0 + 0xb628) = 0;
-  *(unsigned int *)(temp_v0 + 0xb62c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb630) = 0;
-  *(unsigned int *)(temp_v0 + 0xb634) = 0;
-  *(unsigned int *)(temp_v0 + 0xb638) = 0;
-  *(unsigned int *)(temp_v0 + 0xb65c) = 0;
-  *(unsigned int *)(temp_v0 + 0xb660) = 0;
-  *(unsigned int *)(temp_v0 + 0xb664) = 0;
-  *(unsigned int *)(temp_v0 + 0xb668) = 0;
-  *(unsigned int *)(temp_v0 + 0xb66c) = 0;
-  *(unsigned char *)(temp_v0 + 0xa8fa) = 1;
-  *(unsigned char *)(temp_v0 + 0xa8fb) = 1;
-  *(unsigned char *)(temp_v0 + 0xb052) = 0;
-  memClear(temp_v0 + 0xb720,0xc0);
-  *(unsigned char *)(temp_v0 + 0xb6a0) = 0;
-  *(unsigned char *)(temp_v0 + 0xb6a1) = 0;
-  *(unsigned char *)(temp_v0 + 0xb6a2) = 0;
-  *(unsigned char *)(temp_v0 + 0xb6a3) = 0;
-  *(unsigned int *)(temp_v0 + 0xb714) = 0xffffffff;
-  *(unsigned char *)(temp_v0 + 0xb61a) = 0xc;
-  *(unsigned int *)(temp_v0 + 0xb658) = 0xe10;
-  *(unsigned int *)(temp_v0 + 0xb654) = 0;
-  *(unsigned char *)(temp_v0 + 0xb61b) = 0;
-  *(unsigned int *)(temp_v0 + 0xb680) = 0;
-  *(unsigned int *)(temp_v0 + 0xb684) = temp_v4;
-  *(unsigned char *)(temp_v0 + 0xb688) = 0;
-  FUN_0033f81c();
-  FUN_002c4924();
-  inventoryResetSavedTableEntries();
-  FUN_003c25f0();
-  rt_memclr(DAT_0043e2ac + 0x1ec18,0x80);
-  FUN_002cf3b4();
-  return;
+    world->unk09194 = 0xff;
+    world->unk09195 = 0xff;
+    world->unk09196 = 0xff;
+    world->unk0986c = 0;
+    world->unk09870 = 0;
+    rt_memclr(reinterpret_cast<u8 *>(world) + 0x981e, 0x4c);
+    DAT_0043e2b4->first = 0;
+    DAT_0043e2b4->last = 0;
+    DemonRow *row = reinterpret_cast<DemonRow *>(reinterpret_cast<u8 *>(world) + 0xc22c);
+    for (s32 i = 0; i < 0x500; i++) {
+        const u16 *record = devilGetRecord((u16)(i + 1));
+        if (record != NULL) {
+            if ((record[3] & 1) != 0) {
+                if (DAT_0043e2b4->first == 0) {
+                    DAT_0043e2b4->first = record[0];
+                }
+                DAT_0043e2b4->last = record[0];
+            }
+            row->v[0] = reinterpret_cast<const u8 *>(record)[3];
+            for (s32 k = 0; k < 5; k++) {
+                row->v[1 + k] = record[0xd + k];
+            }
+            for (s32 k = 0; k < 5; k++) {
+                row->v[6 + k] = record[0xd + k];
+            }
+            row->v[0xc] = record[10];
+            row->v[0xd] = record[11];
+            for (s32 k = 0; k < 8; k++) {
+                row->v[0xe + k] = record[0x1e + k];
+            }
+            row->v[0x16] = 0;
+            row->v[0x17] = row->v[0x17] & 0xff00;
+            reinterpret_cast<u8 *>(&row->v[0xb])[0] = reinterpret_cast<u8 *>(&row->v[0xb])[0] & 0xc1;
+        }
+        row++;
+    }
+    world->unk0a8c0 = 0;
+    world->unk0a8c1 = 0;
+    world->unk0a8c2 = 0;
+    world->unk0a8c3 = 0;
+    world->unk0a8c4 = 0.0f;
+    world->unk0a8c8 = 0.0f;
+    world->unk0a8cc = 0.0f;
+    world->unk0a8d0 = 0.0f;
+    world->unk0a8d4 = 0.0f;
+    world->unk0a8d8 = 0;
+    world->unk0a8e0 = 0;
+    world->unk0a8e2 = 0;
+    world->unk0a8dc = 0;
+    world->unk0a8de = 0xffff;
+    world->unk0a8dd = 0;
+    world->unk0b004 = 0;
+    world->unk0b008 = 0;
+    world->unk0b00c = 0;
+    world->unk0b010 = 0;
+    world->unk0b014 = 0;
+    world->unk0b018 = 0;
+    world->unk0b01c = 0;
+    world->unk0b020 = 0;
+    world->unk0b024 = 0;
+    world->unk0b028 = 0;
+    world->unk0b02c = 0;
+    world->unk0b030 = 0;
+    world->unk0b034 = 0;
+    world->unk0b038 = 0;
+    world->unk0b03c = 0;
+    world->unk0b040 = 0;
+    world->unk0b044 = 0;
+    world->unk0b048 = 0;
+    world->unk0b04c = 0;
+    world->unk0b498 = 0;
+    world->unk0b49c = 0;
+    world->unk0b4a0 = 0;
+    world->unk0b4a4 = 0;
+    world->unk0b4a8 = 0;
+    world->unk0b4ac = 0;
+    world->unk0b4b0 = 0;
+    world->unk0b4b4 = 0;
+    world->unk0b4b8 = 0;
+    world->unk0b4bc = 0;
+    world->unk0b4c0 = 0;
+    world->unk0b4c4 = 0;
+    world->unk0b4c8 = 0;
+    world->unk0b4cc = 0;
+    world->unk0b4d0 = 0;
+    world->unk0b4d4 = 0;
+    memClear(reinterpret_cast<u8 *>(world) + 0xb4d8, 0x80);
+    world->unk0b5d8 = 0;
+    world->unk0b5dc = 0;
+    world->unk0b5e0 = 0;
+    world->unk0b5e4 = 0;
+    world->unk0b5e8 = 0;
+    world->unk0b5ec = 0;
+    world->unk0b5f0 = 0;
+    world->unk0b5f4 = 0;
+    world->unk0b5f8 = 0;
+    world->unk0b5fc = 0;
+    world->unk0b600 = 0;
+    world->unk0b604 = 0;
+    world->unk0b608 = 0;
+    world->unk0b60c = 0;
+    world->unk0b610 = 0;
+    world->unk0b614 = 0;
+    world->unk0b61c = 0;
+    world->unk0b620 = 0;
+    world->unk0b624 = 0;
+    world->unk0b628 = 0;
+    world->unk0b62c = 0;
+    world->unk0b630 = 0;
+    world->unk0b634 = 0;
+    world->unk0b638 = 0;
+    world->unk0b65c = 0;
+    world->unk0b660 = 0;
+    world->unk0b664 = 0;
+    world->unk0b668 = 0;
+    world->unk0b66c = 0;
+    world->unk0a8fa = 1;
+    world->unk0a8fb = 1;
+    world->unk0b052 = 0;
+    memClear(reinterpret_cast<u8 *>(world) + 0xb720, 0xc0);
+    world->unk0b6a0 = 0;
+    world->unk0b6a1 = 0;
+    world->unk0b6a2 = 0;
+    world->unk0b6a3 = 0;
+    world->unk0b714 = 0xffffffff;
+    world->unk0b61a = 0xc;
+    world->unk0b658 = 0xe10;
+    world->unk0b654 = 0;
+    world->unk0b61b = 0;
+    world->unk0b680 = 0;
+    world->unk0b684 = 0.0f;
+    world->unk0b688 = 0;
+    FUN_0033f81c();
+    FUN_002c4924();
+    inventoryResetSavedTableEntries();
+    FUN_003c25f0();
+    rt_memclr(reinterpret_cast<u8 *>(world) + 0x1ec18, 0x80);
+    FUN_002cf3b4();
 }
 
 } /* extern "C" */

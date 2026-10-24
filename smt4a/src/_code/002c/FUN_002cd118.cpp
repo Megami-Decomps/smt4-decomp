@@ -1,110 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cd118` (_code @ 0x2cd118, 0x2e8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail unrolls the 0xFFFF fill by two and keeps panel+0x2400 bases (r7/r8) in registers; the build's loop, constants and register use differ. */
+#include "common.h"
+
+/* A sprite widget (0x8C bytes). */
+struct SpriteWidget {
+    u8 data[0x8C];
+};
+
+/* The party status panel work (accessed fields). */
+struct StatusPanel {
+    u8 unk0000[0x20];
+    SpriteWidget faces[0x42];       // 0x20 (stride 0x8C; other rows interleave at +0x598, +0xB10, ...)
+};
+
+#define WIDGET(panel, offset, i) (reinterpret_cast<SpriteWidget *>(reinterpret_cast<u8 *>(panel) + (offset) + (i) * 0x8C))
+#define PANEL_HALF(panel, offset) (*reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(panel) + (offset)))
+#define PANEL_WORD(panel, offset) (*reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(panel) + (offset)))
 
 extern "C" {
+void uiSpriteSelectAnim(SpriteWidget *widget, s32 animation);
+void pairSetFirstResetSecond(SpriteWidget *widget, s32 value);
+s32 FUN_00291e14(void);
 
-int uiSpriteSelectAnim(...);
-int pairSetFirstResetSecond(...);
-
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-extern int FUN_00291e14(void);
-
-
-void FUN_002cd118(int param_1,int param_2,unsigned short param_3,unsigned short param_4)
-
+/* Reset the party panel's rows and set each row's sprites for the current display variant. */
+void FUN_002cd118(StatusPanel *panel, s32 variant, u16 rowCount, u16 selected)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  *(unsigned short *)(param_1 + 0x2448) = param_3;
-  *(unsigned short *)(param_1 + 0x244a) = param_4;
-  *(int *)(param_1 + 0x2440) = param_2;
-  temp_v1 = 0;
-  temp_v0 = 0;
-  do {
-    temp_v2 = temp_v1 + 1;
-    temp_v0 = temp_v0 + 2;
-    *(unsigned short *)(param_1 + temp_v1 * 2 + 0x24a0) = 0xffff;
-    temp_v1 = temp_v1 + 2;
-    *(unsigned short *)(param_1 + temp_v2 * 2 + 0x24a0) = 0xffff;
-  } while (temp_v0 < 10);
-  *(unsigned int *)(param_1 + 0x243c) = 2;
-  temp_v0 = 0;
-  *(unsigned int *)(param_1 + 0x2438) = 0;
-  do {
-    *(unsigned char *)(param_1 + temp_v0 * 0x8c + 0xa5) = 0;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x42);
-  temp_v0 = 0;
-  if (0 < *(short *)(param_1 + 0x2448)) {
-    temp_v1 = param_1 + 0x217c;
-    do {
-      if (*(int *)(param_1 + 0x2440) != 0) {
-        temp_v2 = param_1 + temp_v0 * 0x8c;
-        pairSetFirstResetSecond(temp_v2 + 0x20,1);
-        pairSetFirstResetSecond(temp_v2 + 0xb10,8);
-        pairSetFirstResetSecond(temp_v2 + 0x1088,3);
-        pairSetFirstResetSecond(temp_v2 + 0x1b78,0xfa7);
-        pairSetFirstResetSecond(temp_v2 + 0x1600,0xfa1);
-        if (temp_v0 < 4) {
-          if (temp_v0 == 0) {
-            pairSetFirstResetSecond(temp_v1,0xbd);
-          }
-          pairSetFirstResetSecond(temp_v2 + 0x2208,0xbc - temp_v0);
-        }
-      }
-      else {
-        temp_v2 = FUN_00291e14();
-        temp_v3 = param_1 + temp_v0 * 0x8c;
-        if (temp_v2 != 0) {
-          pairSetFirstResetSecond(temp_v3 + 0x20,0xa3);
-          pairSetFirstResetSecond(temp_v3 + 0xb10,0xa5);
-          pairSetFirstResetSecond(temp_v3 + 0x1088,0xa4);
-          pairSetFirstResetSecond(temp_v3 + 0x1b78,0xfa8);
-          pairSetFirstResetSecond(temp_v3 + 0x1600,0xfb0);
-          if (temp_v0 < 4) {
-            if (temp_v0 == 0) {
-              pairSetFirstResetSecond(temp_v1,0xc2);
+    PANEL_HALF(panel, 0x2448) = rowCount;
+    PANEL_HALF(panel, 0x244A) = selected;
+    PANEL_WORD(panel, 0x2440) = variant;
+    for (s32 i = 0; i < 10; i++)
+        PANEL_HALF(panel, 0x24A0 + i * 2) = 0xFFFF;
+    PANEL_WORD(panel, 0x243C) = 2;
+    PANEL_WORD(panel, 0x2438) = 0;
+    for (s32 i = 0; i < 0x42; i++)
+        reinterpret_cast<u8 *>(panel)[0xA5 + i * 0x8C] = 0;
+    SpriteWidget *header = reinterpret_cast<SpriteWidget *>(reinterpret_cast<u8 *>(panel) + 0x217C);
+    for (s32 i = 0; i < static_cast<s16>(PANEL_HALF(panel, 0x2448)); i++) {
+        if (PANEL_WORD(panel, 0x2440) != 0) {
+            pairSetFirstResetSecond(WIDGET(panel, 0x20, i), 1);
+            pairSetFirstResetSecond(WIDGET(panel, 0xB10, i), 8);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1088, i), 3);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1B78, i), 0xFA7);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1600, i), 0xFA1);
+            if (i < 4) {
+                if (i == 0)
+                    pairSetFirstResetSecond(header, 0xBD);
+                pairSetFirstResetSecond(WIDGET(panel, 0x2208, i), 0xBC - i);
             }
-            pairSetFirstResetSecond(temp_v3 + 0x2208,0xc1 - temp_v0);
-          }
-        }
-        else {
-          pairSetFirstResetSecond(temp_v3 + 0x20,0);
-          pairSetFirstResetSecond(temp_v3 + 0xb10,7);
-          pairSetFirstResetSecond(temp_v3 + 0x1088,2);
-          pairSetFirstResetSecond(temp_v3 + 0x1b78,0xfa6);
-          pairSetFirstResetSecond(temp_v3 + 0x1600,4000);
-          if (temp_v0 < 4) {
-            if (temp_v0 == 0) {
-              pairSetFirstResetSecond(temp_v1,0xb8);
+        } else if (FUN_00291e14() != 0) {
+            pairSetFirstResetSecond(WIDGET(panel, 0x20, i), 0xA3);
+            pairSetFirstResetSecond(WIDGET(panel, 0xB10, i), 0xA5);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1088, i), 0xA4);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1B78, i), 0xFA8);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1600, i), 0xFB0);
+            if (i < 4) {
+                if (i == 0)
+                    pairSetFirstResetSecond(header, 0xC2);
+                pairSetFirstResetSecond(WIDGET(panel, 0x2208, i), 0xC1 - i);
             }
-            pairSetFirstResetSecond(temp_v3 + 0x2208,0xb7 - temp_v0);
-          }
+        } else {
+            pairSetFirstResetSecond(WIDGET(panel, 0x20, i), 0);
+            pairSetFirstResetSecond(WIDGET(panel, 0xB10, i), 7);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1088, i), 2);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1B78, i), 0xFA6);
+            pairSetFirstResetSecond(WIDGET(panel, 0x1600, i), 4000);
+            if (i < 4) {
+                if (i == 0)
+                    pairSetFirstResetSecond(header, 0xB8);
+                pairSetFirstResetSecond(WIDGET(panel, 0x2208, i), 0xB7 - i);
+            }
         }
-      }
-      temp_v2 = param_1 + temp_v0 * 0x8c;
-      uiSpriteSelectAnim(temp_v2 + 0x20,2);
-      uiSpriteSelectAnim(temp_v2 + 0xb10,5);
-      uiSpriteSelectAnim(temp_v2 + 0x1088,3);
-      uiSpriteSelectAnim(temp_v2 + 0x1b78,10);
-      if (temp_v0 < 4) {
-        if (temp_v0 == 0) {
-          uiSpriteSelectAnim(temp_v1,0xc);
+        uiSpriteSelectAnim(WIDGET(panel, 0x20, i), 2);
+        uiSpriteSelectAnim(WIDGET(panel, 0xB10, i), 5);
+        uiSpriteSelectAnim(WIDGET(panel, 0x1088, i), 3);
+        uiSpriteSelectAnim(WIDGET(panel, 0x1B78, i), 10);
+        if (i < 4) {
+            if (i == 0)
+                uiSpriteSelectAnim(header, 0xC);
+            uiSpriteSelectAnim(WIDGET(panel, 0x2208, i), 0xC);
         }
-        uiSpriteSelectAnim(temp_v2 + 0x2208,0xc);
-      }
-      pairSetFirstResetSecond(temp_v2 + 0x598,6);
-      uiSpriteSelectAnim(temp_v2 + 0x598,1);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)(param_1 + 0x2448));
-  }
-  return;
+        pairSetFirstResetSecond(WIDGET(panel, 0x598, i), 6);
+        uiSpriteSelectAnim(WIDGET(panel, 0x598, i), 1);
+    }
 }
-
-} /* extern "C" */
+}

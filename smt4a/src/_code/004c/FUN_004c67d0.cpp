@@ -1,159 +1,101 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c67d0` (_code @ 0x4c67d0, 0x378 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the escape-chance calculation (the draft's lost result of FUN_003eebf4 restored as the sign test the asm makes); retail unrolls the four party slots and keeps the per-unit stat sums in registers, which armcc here emits from a helper over the unit pair. */
+#include "common.h"
+
+/* A battle unit slot (0x408 bytes; only the fields read here). */
+struct BattleUnitSlot {
+    /* 0x000 */ u64 flags;
+    /* 0x008 */ u8 unk008[0x266];
+    /* 0x26E */ s16 level;
+    /* 0x270 */ s16 agility;
+    /* 0x272 */ u8 unk272[0x196];
+};
+
+struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x10C];
+    /* 0x010C */ u32 rules;
+    /* 0x0110 */ u8 unk0110[0x1EEC];
+    /* 0x1FFC */ BattleUnitSlot *units;
+    /* 0x2000 */ u8 unk2000[0x25A0];
+    /* 0x45A0 */ u64 flags;
+    /* 0x45A8 */ u64 moreFlags;
+    /* 0x45B0 */ u8 unk45B0[0xA];
+    /* 0x45BA */ u8 escapeCount;
+};
 
 extern "C" {
+extern u64 DAT_005713f0;       /* a unit is present */
+extern u64 DAT_00571420;       /* a unit is out of the fight */
+extern u64 DAT_00571498;       /* the battle always lets the party escape */
+extern u64 DAT_005714c8;       /* the second state always lets the party escape */
+extern u64 DAT_005714d0;       /* the second state never lets the party escape */
 
-int FUN_003eebf4(int, int);
+BattleState *btlGetMainState(void);
+s32 gameProgressIsAdvanced(void);
+s32 gameDataBlocksGetTableFlag(void);
+s32 FUN_003eebf4(BattleState *battle, s32 flag);
+s32 __aeabi_idivmod(s32 a, s32 b);
 
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} void_stack;
-
-extern unsigned int DAT_005713f0; /* 0x5713f0 */
-extern unsigned int DAT_005713f4; /* 0x5713f4 */
-extern unsigned int DAT_00571420; /* 0x571420 */
-extern unsigned int DAT_00571424; /* 0x571424 */
-extern unsigned int DAT_00571498; /* 0x571498 */
-extern unsigned int DAT_0057149c; /* 0x57149c */
-extern unsigned int DAT_005714c8; /* 0x5714c8 */
-extern unsigned int DAT_005714cc; /* 0x5714cc */
-extern unsigned int DAT_005714d0; /* 0x5714d0 */
-extern unsigned int DAT_005714d4; /* 0x5714d4 */
-
-extern int btlGetMainState(void);
-extern int gameDataBlocksGetTableFlag(void);
-extern int gameProgressIsAdvanced(void);
-/* Supplied declaration required: FUN_003eebf4. */
-extern int __aeabi_idivmod(int, int);
-
-
-int FUN_004c67d0(void)
-
+/* Whether a unit slot is an active fighter. */
+static __inline bool isFighting(const BattleUnitSlot *unit)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int *puVar10;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  
-  temp_v3 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v3 + 0x10c) & 0x40000) != 0) {
-    return 0;
-  }
-  if ((DAT_00571498 & *(unsigned int *)(temp_v3 + 0x45a0)) != 0 ||
-      (DAT_0057149c & *(unsigned int *)(temp_v3 + 0x45a4)) != 0) {
-    return 100;
-  }
-  temp_v4 = gameProgressIsAdvanced();
-  temp_v2 = DAT_005713f4;
-  temp_v1 = DAT_005713f0;
-  if (temp_v4 != 0) {
-    return 0;
-  }
-  if ((DAT_005714c8 & *(unsigned int *)(temp_v3 + 0x45a8)) != 0 ||
-      (DAT_005714cc & *(unsigned int *)(temp_v3 + 0x45ac)) != 0) {
-    return 100;
-  }
-  if ((*(unsigned int *)(temp_v3 + 0x45a8) & DAT_005714d0) != 0 ||
-      (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_005714d4) != 0) {
-    return 0;
-  }
-  temp_v0 = *(unsigned char *)(temp_v3 + 0x45ba);
-  puVar6 = *(unsigned int **)(temp_v3 + 0x1ffc);
-  temp_v4 = 0;
-  temp_v8 = 0;
-  temp_v5 = 0;
-  temp_v7 = 0;
-  temp_v9 = 0;
-  temp_v10 = 0;
-  if (((*puVar6 & DAT_005713f0) != 0 || (puVar6[1] & DAT_005713f4) != 0) &&
-     ((*puVar6 & DAT_00571420) == 0 && (puVar6[1] & DAT_00571424) == 0)) {
-    temp_v7 = 1;
-    temp_v4 = (int)*(short *)((int)puVar6 + 0x26e);
-    temp_v5 = (int)(short)puVar6[0x9c];
-  }
-  if (((puVar6[0x102] & DAT_005713f0) != 0 || (puVar6[0x103] & DAT_005713f4) != 0) &&
-     ((puVar6[0x102] & DAT_00571420) == 0 && (puVar6[0x103] & DAT_00571424) == 0)) {
-    temp_v7 = temp_v7 + 1;
-    temp_v4 = temp_v4 + *(short *)((int)puVar6 + 0x676);
-    temp_v5 = temp_v5 + (short)puVar6[0x19e];
-  }
-  if (((puVar6[0x204] & DAT_005713f0) != 0 || (puVar6[0x205] & DAT_005713f4) != 0) &&
-     ((puVar6[0x204] & DAT_00571420) == 0 && (puVar6[0x205] & DAT_00571424) == 0)) {
-    temp_v7 = temp_v7 + 1;
-    temp_v4 = temp_v4 + *(short *)((int)puVar6 + 0xa7e);
-    temp_v5 = temp_v5 + (short)puVar6[0x2a0];
-  }
-  if (((puVar6[0x306] & DAT_005713f0) != 0 || (puVar6[0x307] & DAT_005713f4) != 0) &&
-     ((puVar6[0x306] & DAT_00571420) == 0 && (puVar6[0x307] & DAT_00571424) == 0)) {
-    temp_v7 = temp_v7 + 1;
-    temp_v4 = temp_v4 + *(short *)((int)puVar6 + 0xe86);
-    temp_v5 = temp_v5 + (short)puVar6[0x3a2];
-  }
-  temp_v4 = __aeabi_idivmod(temp_v4,temp_v7);
-  temp_v5 = __aeabi_idivmod(temp_v5,temp_v7);
-  temp_v6 = 0;
-  temp_v7 = 4;
-  do {
-    puVar10 = puVar6 + temp_v7 * 0x102;
-    if (((*puVar10 & temp_v1) != 0 || (puVar10[1] & temp_v2) != 0) &&
-       ((*puVar10 & DAT_00571420) == 0 && (puVar10[1] & DAT_00571424) == 0)) {
-      temp_v6 = temp_v6 + 1;
-      temp_v8 = temp_v8 + *(short *)((int)puVar10 + 0x26e);
-      temp_v9 = (short)puVar10[0x9c] + temp_v9;
-    }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 0x36);
-  temp_v7 = __aeabi_idivmod(temp_v8,temp_v6);
-  temp_v8 = __aeabi_idivmod(temp_v9,temp_v6);
-  FUN_003eebf4(temp_v3,1);
-  if (-1 < temp_v3) {
-    temp_v10 = -0x32;
-  }
-  temp_v3 = temp_v10 + (temp_v4 - temp_v7) + (temp_v5 - temp_v8) / 2 + (unsigned int)temp_v0 * 10 + 0x32;
-  temp_v4 = gameDataBlocksGetTableFlag();
-  if (temp_v4 != 1) {
-    if (temp_v4 == 2) {
-      temp_v3 = temp_v3 / 2;
-LAB_004c6b1c:
-      if (-1 < temp_v3) {
-        if (temp_v3 < 0x65) {
-          return temp_v3;
+    return (unit->flags & DAT_005713f0) != 0 && (unit->flags & DAT_00571420) == 0;
+}
+
+/* Returns the chance (0-100) that the party escapes: from the level and agility averages of the
+ * party against the enemies, the earlier escape attempts and the progress table. */
+s32 FUN_004c67d0(void)
+{
+    BattleState *battle = btlGetMainState();
+    if (battle->rules & 0x40000)
+        return 0;
+    if (battle->flags & DAT_00571498)
+        return 100;
+    if (gameProgressIsAdvanced() != 0)
+        return 0;
+    if (battle->moreFlags & DAT_005714c8)
+        return 100;
+    if (battle->moreFlags & DAT_005714d0)
+        return 0;
+    u8 escapes = battle->escapeCount;
+    BattleUnitSlot *units = battle->units;
+    s32 partyLevel = 0;
+    s32 partyAgility = 0;
+    s32 partyCount = 0;
+    for (s32 i = 0; i < 4; i++) {
+        if (isFighting(&units[i])) {
+            partyCount++;
+            partyLevel += units[i].level;
+            partyAgility += units[i].agility;
         }
-        temp_v3 = 100;
-        return temp_v3;
-      }
     }
-    else {
-      if (temp_v4 == 3) {
-        temp_v3 = 100;
-        return temp_v3;
-      }
-      if (temp_v4 != 4) goto LAB_004c6b1c;
+    partyLevel = __aeabi_idivmod(partyLevel, partyCount);
+    partyAgility = __aeabi_idivmod(partyAgility, partyCount);
+    s32 enemyLevel = 0;
+    s32 enemyAgility = 0;
+    s32 enemyCount = 0;
+    for (s32 i = 4; i < 0x36; i++) {
+        if (isFighting(&units[i])) {
+            enemyCount++;
+            enemyLevel += units[i].level;
+            enemyAgility += units[i].agility;
+        }
     }
-    temp_v3 = 0;
-  }
-  else {
-    temp_v3 = 100;
-  }
-  return temp_v3;
+    enemyLevel = __aeabi_idivmod(enemyLevel, enemyCount);
+    enemyAgility = __aeabi_idivmod(enemyAgility, enemyCount);
+    s32 bias = 0;
+    if (FUN_003eebf4(battle, 1) >= 0)
+        bias = -50;
+    s32 chance = bias + (partyLevel - enemyLevel) + (partyAgility - enemyAgility) / 2 + escapes * 10 + 50;
+    s32 table = gameDataBlocksGetTableFlag();
+    if (table == 1 || table == 3)
+        return 100;
+    if (table == 4)
+        return 0;
+    if (table == 2)
+        chance /= 2;
+    if (chance < 0)
+        return 0;
+    return chance < 101 ? chance : 100;
 }
 
 } /* extern "C" */

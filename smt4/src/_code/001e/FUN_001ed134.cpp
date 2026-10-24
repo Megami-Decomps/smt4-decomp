@@ -1,4 +1,3 @@
-/* NON_MATCHING: render-state stack push address scheduling differs from retail. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
 

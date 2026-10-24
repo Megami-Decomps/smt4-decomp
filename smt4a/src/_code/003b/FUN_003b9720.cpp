@@ -1,103 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b9720` (_code @ 0x3b9720, 0x214 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same loops and tests; retail recomputes the spawn-bit word address (`block + (i >> 5) * 4 + 0x7C8`) at every access and spills the random pick to the stack (push {r3,...}, no ip), while armcc here hoists block+0x7C8 into r9, keeps the pick in a register (push includes ip) and orders the bit-index arithmetic differently. */
+#include "common.h"
+
+/* A spawn record of table 49 (only the fields the refresh reads). */
+struct SpawnRecord {
+    /* 0x00 */ s8 area;
+    /* 0x01 */ s8 sub;
+    /* 0x02 */ u8 unk02[9];
+    /* 0x0B */ s8 kind;             /* 0, 6 and 14 take part in the random pick */
+    /* 0x0C */ u8 unk0C[0x1C];
+    /* 0x28 */ u16 gateFlag;        /* the record spawns only while this game flag is clear */
+    /* 0x2A */ u16 forceFlag;       /* nonzero: spawns regardless of the pick */
+};
+
+/* The game flag block: the spawn bits and the game flags. */
+struct GameFlagBlock {
+    /* 0x000 */ u8 unk000[0x7C8];
+    /* 0x7C8 */ u32 spawned[0x84];
+    /* 0xD4C */ u32 flags[1];
+};
+
+static inline void setBit(u32 *bits, s32 index) { bits[index / 32] |= 1 << (index % 32); }
+static inline void clearBit(u32 *bits, s32 index) { bits[index / 32] &= ~(1 << (index % 32)); }
+static inline bool testBit(const u32 *bits, s32 index) { return (bits[index / 32] & (1 << (index % 32))) != 0; }
 
 extern "C" {
+GameFlagBlock *gameFlagsGetBlock(void);
+s32 dataTableGetRecordFortyNine(void);
+SpawnRecord *FUN_003689d0(s32 index);
+s32 randRange(u32 limit);
 
-int FUN_003689d0(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int randRange(unsigned int);
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_003689d0. */
-extern int dataTableGetRecordFortyNine(void);
-
-
-void FUN_003b9720(int param_1,int param_2)
-
+static inline bool takesPartInPick(const SpawnRecord *record)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  char *pcVar5;
-  char *pcVar6;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v2 = gameFlagsGetBlock();
-  temp_v4 = 0;
-  pcVar6 = (char *)0x0;
-  temp_v3 = dataTableGetRecordFortyNine();
-  if (0 < temp_v3) {
-    do {
-      pcVar5 = pcVar6;
-      FUN_003689d0();
-      if (((*pcVar5 != -1) && (*pcVar5 == param_1)) && (pcVar5[1] == param_2)) {
-        temp_v3 = temp_v2 + ((int)(pcVar6 + ((unsigned int)((int)pcVar6 >> 0x1f) >> 0x1b)) >> 5) * 4;
-        *(unsigned int *)(temp_v3 + 0x7c8) = *(unsigned int *)(temp_v3 + 0x7c8) & ~(1 << (((int)pcVar6 % 0x20) & 0xffU))
-        ;
-        temp_v1 = pcVar5[0xb];
-        if ((temp_v1 == '\0') || (temp_v1 == '\x06' || temp_v1 == '\x0e')) {
-          temp_v4 = temp_v4 + 1;
+    return record->kind == 0 || record->kind == 6 || record->kind == 14;
+}
+
+/* Rebuilds the spawn bits of one area: every record of the area is cleared, then one of the
+ * candidates (kind 0, 6 or 14) picked at random is enabled, along with the records the game
+ * flags or their force flag allow. */
+void FUN_003b9720(s32 area, s32 sub)
+{
+    GameFlagBlock *block = gameFlagsGetBlock();
+    s32 candidates = 0;
+    for (s32 i = 0; i < dataTableGetRecordFortyNine(); i++) {
+        SpawnRecord *record = FUN_003689d0(i);
+        if (record->area != -1 && record->area == area && record->sub == sub) {
+            clearBit(block->spawned, i);
+            if (takesPartInPick(record))
+                candidates++;
         }
-      }
-      pcVar6 = pcVar6 + 1;
-      temp_v3 = dataTableGetRecordFortyNine();
-    } while ((int)pcVar6 < temp_v3);
-    if (temp_v4 != 0) {
-      if (temp_v4 == 1) {
-        temp_v3 = 0;
-      }
-      else {
-        temp_v3 = randRange((temp_v4 - 1U) & 0xffff);
-      }
-      temp_v5 = 0;
-      pcVar6 = (char *)0x0;
-      temp_v4 = dataTableGetRecordFortyNine();
-      if (0 < temp_v4) {
-        do {
-          pcVar5 = pcVar6;
-          FUN_003689d0();
-          if (((*pcVar5 != -1) && (*pcVar5 == param_1)) &&
-             ((pcVar5[1] == param_2 &&
-              ((temp_v1 = pcVar5[0xb], temp_v1 == '\0' || (temp_v1 == '\x06' || temp_v1 == '\x0e')))))) {
-            temp_v0 = (int)pcVar6 >> 0x1f;
-            if ((*(short *)(pcVar5 + 0x28) != 0) ||
-               ((temp_v5 == temp_v3 &&
-                (temp_v4 = temp_v2 + ((int)(pcVar6 + (temp_v0 >> 0x1b)) >> 5) * 4,
-                *(unsigned int *)(temp_v4 + 0x7c8) =
-                     *(unsigned int *)(temp_v4 + 0x7c8) | (1 << (((int)pcVar6 % 0x20) & 0xffU)),
-                *(short *)(pcVar5 + 0x28) != 0)))) {
-              temp_v6 = (int)*(short *)(pcVar5 + 0x28);
-              temp_v4 = gameFlagsGetBlock();
-              if ((*(unsigned int *)(temp_v4 + ((int)(temp_v6 + ((unsigned int)(temp_v6 >> 0x1f) >> 0x1b)) >> 5) * 4 +
-                            0xd4c) & (1 << ((temp_v6 % 0x20) & 0xffU))) == 0) {
-                temp_v4 = temp_v2 + ((int)(pcVar6 + (temp_v0 >> 0x1b)) >> 5) * 4;
-                *(unsigned int *)(temp_v4 + 0x7c8) =
-                     *(unsigned int *)(temp_v4 + 0x7c8) | (1 << (((int)pcVar6 % 0x20) & 0xffU));
-              }
-            }
-            if (*(short *)(pcVar5 + 0x2a) != 0) {
-              temp_v4 = temp_v2 + ((int)(pcVar6 + (temp_v0 >> 0x1b)) >> 5) * 4;
-              *(unsigned int *)(temp_v4 + 0x7c8) =
-                   *(unsigned int *)(temp_v4 + 0x7c8) | (1 << (((int)pcVar6 % 0x20) & 0xffU));
-            }
-            temp_v5 = temp_v5 + 1;
-          }
-          pcVar6 = pcVar6 + 1;
-          temp_v4 = dataTableGetRecordFortyNine();
-        } while ((int)pcVar6 < temp_v4);
-      }
     }
-  }
-  return;
+    if (candidates == 0)
+        return;
+    s32 pick = candidates == 1 ? 0 : randRange((u16)(candidates - 1));
+    s32 seen = 0;
+    for (s32 i = 0; i < dataTableGetRecordFortyNine(); i++) {
+        SpawnRecord *record = FUN_003689d0(i);
+        if (record->area == -1 || record->area != area || record->sub != sub || !takesPartInPick(record))
+            continue;
+        if (record->gateFlag != 0) {
+            if (!testBit(gameFlagsGetBlock()->flags, (s16)record->gateFlag))
+                setBit(block->spawned, i);
+        } else if (seen == pick) {
+            setBit(block->spawned, i);
+        }
+        if (record->forceFlag != 0)
+            setBit(block->spawned, i);
+        seen++;
+    }
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int nw_gfx_SceneNode_IsCircularReference(void);
 typedef int romwright_code(...);
 extern unsigned char DAT_004212f0; /* 0x4212f0 */
 
-extern int *FUN_002b52b4(int, int *, unsigned int *, unsigned int);
+extern int *_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(int, int *, unsigned int *, unsigned int);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
 
@@ -34,7 +34,7 @@ int * FUN_0012c424(int param_1,unsigned int *param_2,unsigned int param_3,int *p
   temp_v1 = (**(romwright_code **)(*param_4 + 8))(param_4,0x17c,4);
   piVar3 = (int *)0x0;
   if (temp_v1 != 0) {
-    piVar3 = (int *)FUN_002b52b4(temp_v1,param_4,param_2,param_3);
+    piVar3 = (int *)_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(temp_v1,param_4,param_2,param_3);
     piVar3[0x52] = 0;
     *piVar3 = (int)&DAT_004212f0;
     piVar3[0x5c] = 0;

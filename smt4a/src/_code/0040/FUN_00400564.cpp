@@ -1,164 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00400564` (_code @ 0x400564, 0x2c8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout only: retail resolves the member (gameGetSlotRecord inline path) after the shared checks, lays the 'status cure' tail (orr #4 / tst #1 / 0x1b test) out after the exit branch and sets up result/wanted in a different order. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_002b4e7c(void);
-int FUN_003ff524(unsigned short [2], unsigned int);
-
-typedef struct fn_00400564_arg2 fn_00400564_arg2;
-struct fn_00400564_arg2 {
-    unsigned char pad_0x0[0x23];
-    byte field_0x23; /* +0x23 */
-    unsigned char pad_0x24[0xb];
-    byte field_0x2f; /* +0x2f */
-    unsigned char pad_0x30[0x8];
-    byte field_0x38; /* +0x38 */
-    unsigned char pad_0x39[0x1];
-    ushort field_0x3a; /* +0x3a */
-    uint field_0x3c; /* +0x3c */
+/* A skill/item effect definition as the usability check reads it. */
+struct EffectDefinition {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+    /* 0x24 */ u8 unk24[0xB];
+    /* 0x2F */ u8 target;
+    /* 0x30 */ u8 unk30[8];
+    /* 0x38 */ u8 flags;
+    /* 0x39 */ u8 unk39;
+    /* 0x3A */ u16 healing;
+    /* 0x3C */ u32 condition;
 };
 
-/* stack frame of param_3: 2 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned short sp24; /* 0x24: local_24 */
-    unsigned short sp28; /* 0x28: local_28 */
-} param_3_stack;
+/* The player's own record: the status mask is at 0x5E. */
+struct PlayerRecord {
+    /* 0x00 */ u8 unk00[0x2A];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2C[0x32];
+    /* 0x5E */ u16 status;
+};
 
-extern int gameGetPlayerData(void);
-extern int gameGetSlotRecord(int);
-extern int gameGetSaveSlotData(void);
-extern int btlMainGetUnk14(void);
-extern int FUN_00291e14(void);
-extern int FUN_002b4dcc(int);
-/* Supplied declaration required: FUN_002b4e7c. */
-/* Supplied declaration required: FUN_003ff524. */
-extern int btlCanSelectReservePartyMember(unsigned int);
-extern int FUN_003ff888(void);
+/* A party member's record: the status mask is at 0x60. */
+struct MemberRecord {
+    /* 0x00 */ u8 unk00[0x2A];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2C[0x34];
+    /* 0x60 */ u16 status;
+};
 
+extern "C" {
+PlayerRecord *gameGetPlayerData(void);
+MemberRecord *gameGetSlotRecord(s32 slot);
+MemberRecord *gameGetSaveSlotData(s32 slot);
+MemberRecord *btlMainGetUnk14(void);
+u32 FUN_00291e14(void);
+s32 FUN_002b4e7c(PlayerRecord *record);
+s32 FUN_002b4dcc(MemberRecord *record);
+void FUN_003ff524(u16 *flags, s32 kind);
+u32 btlCanSelectReservePartyMember(const void *entry);
+s32 FUN_003ff888(void);
 
-unsigned int FUN_00400564(int param_1,int param_2,fn_00400564_arg2 *param_3)
-
+/* Checks whether the effect would do anything to the member: 0 when it would, 3 when it would not. */
+u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned short temp_v8 [2];
-  unsigned short temp_v9 [2];
-  
-  temp_v7 = 0;
-  temp_v6 = (unsigned int)((param_3->field_0x3a & 0xfff) != 0);
-  temp_v4 = 0;
-  if ((param_3->field_0x3c & 0x7f) != 0) {
-    temp_v6 = temp_v6 | 4;
-  }
-  if ((param_3->field_0x38 & 4) != 0) {
-    temp_v6 = temp_v6 | 0x2000000;
-  }
-  else if (param_3->field_0x23 == 7 || param_3->field_0x23 == 9) {
-    temp_v6 = temp_v6 | 0x1000000;
-  }
-  if (param_3->field_0x2f == 4) {
-    temp_v6 = temp_v6 | 0x4000000;
-  }
-  if ((param_1 >= 0) || (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
-    if ((param_1 < 0) && (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
-      temp_v2 = btlMainGetUnk14();
+    u32 result = 0;
+    u32 wanted = (effect->healing & 0xfff) != 0;
+    u32 useful = 0;
+    if ((effect->condition & 0x7f) != 0) {
+        wanted |= 4;
     }
-    else if (param_2 != 0) {
-      temp_v2 = gameGetSaveSlotData();
+    if ((effect->flags & 4) != 0) {
+        wanted |= 0x2000000;
+    } else if (effect->kind == 7 || effect->kind == 9) {
+        wanted |= 0x1000000;
     }
-    else {
-      temp_v2 = gameGetSlotRecord(param_1);
+    if (effect->target == 4) {
+        wanted |= 0x4000000;
     }
-    if (temp_v2 == 0) {
-      return 3;
-    }
-    if ((((temp_v6 & 1) != 0) && ((*(unsigned short *)(temp_v2 + 0x60) & 0x402) == 0)) &&
-       (temp_v3 = FUN_002b4dcc(temp_v2), temp_v3 != *(short *)(temp_v2 + 0x2a))) {
-      temp_v4 = 1;
-    }
-    if ((temp_v6 & 4) != 0) {
-      temp_v8[0] = 0;
-      FUN_003ff524(temp_v8,param_3->field_0x3c & 0x7f);
-      if ((temp_v8[0] & *(unsigned short *)(temp_v2 + 0x60)) != 0) {
-        temp_v4 = temp_v4 | 4;
-      }
-      if ((temp_v4 & 4) != 0) {
-        if ((temp_v6 & 1) != 0) {
-          temp_v4 = temp_v4 | 1;
+    u16 curable;
+    if (slot < 0 && FUN_00291e14() == 0) {
+        PlayerRecord *player = gameGetPlayerData();
+        if ((wanted & 1) != 0 && (player->status & 2) == 0 && FUN_002b4e7c(player) != player->hp) {
+            useful = 1;
         }
-      }
-      else if ((temp_v4 & 1) != 0) {
-        temp_v9[0] = 0;
-        FUN_003ff524(temp_v9,param_3->field_0x3c & 0x7f);
-        temp_v5 = temp_v4;
-        if ((((temp_v9[0] & 2) != 0) ||
-            (temp_v5 = temp_v4 | 4, temp_v1 = temp_v4 & 1, temp_v4 = temp_v5, temp_v1 != 0)) &&
-           (temp_v4 = temp_v5, (param_3->field_0x3c & 0x7f) == 0x1b)) {
-          temp_v4 = temp_v5 | 4;
+        if ((wanted & 4) != 0) {
+            curable = 0;
+            FUN_003ff524(&curable, effect->condition & 0x7f);
+            if ((curable & player->status) != 0) {
+                useful |= 4;
+            }
+            if ((useful & 4) != 0) {
+                if ((wanted & 1) != 0) {
+                    useful |= 1;
+                }
+            } else if ((useful & 1) != 0) {
+                u16 other = 0;
+                FUN_003ff524(&other, effect->condition & 0x7f);
+                if ((other & 2) != 0 || (useful |= 4, (useful & 1) != 0)) {
+                    if ((effect->condition & 0x7f) == 0x1b) {
+                        useful |= 4;
+                    }
+                }
+            }
         }
-      }
-    }
-    if ((temp_v6 & 0x4000000) != 0) {
-      temp_v0 = *(short *)(temp_v2 + 0x60);
-      if (temp_v0 == 0) {
-        temp_v4 = temp_v4 | 0x4000000;
-      }
-    }
-  }
-  else {
-    temp_v2 = gameGetPlayerData();
-    if ((((temp_v6 & 1) != 0) && ((*(unsigned short *)(temp_v2 + 0x5e) & 2) == 0)) &&
-       (temp_v3 = temp_v2, FUN_002b4e7c(), temp_v3 != *(short *)(temp_v2 + 0x2a))) {
-      temp_v4 = 1;
-    }
-    if ((temp_v6 & 4) != 0) {
-      temp_v8[0] = 0;
-      FUN_003ff524(temp_v8,param_3->field_0x3c & 0x7f);
-      if ((temp_v8[0] & *(unsigned short *)(temp_v2 + 0x5e)) != 0) {
-        temp_v4 = temp_v4 | 4;
-      }
-      if ((temp_v4 & 4) != 0) {
-        if ((temp_v6 & 1) != 0) {
-          temp_v4 = temp_v4 | 1;
+        if ((wanted & 0x4000000) != 0 && player->status == 0) {
+            useful |= 0x4000000;
         }
-      }
-      else if ((temp_v4 & 1) != 0) {
-        temp_v9[0] = 0;
-        FUN_003ff524(temp_v9,param_3->field_0x3c & 0x7f);
-        temp_v5 = temp_v4;
-        if ((((temp_v9[0] & 2) != 0) ||
-            (temp_v5 = temp_v4 | 4, temp_v1 = temp_v4 & 1, temp_v4 = temp_v5, temp_v1 != 0)) &&
-           (temp_v4 = temp_v5, (param_3->field_0x3c & 0x7f) == 0x1b)) {
-          temp_v4 = temp_v5 | 4;
+    } else {
+        MemberRecord *member;
+        if (slot < 0 && FUN_00291e14() != 0) {
+            member = btlMainGetUnk14();
+        } else if (fromSave != 0) {
+            member = gameGetSaveSlotData(slot);
+        } else {
+            member = gameGetSlotRecord(slot);
         }
-      }
+        if (member == 0) {
+            return 3;
+        }
+        if ((wanted & 1) != 0 && (member->status & 0x402) == 0 && FUN_002b4dcc(member) != member->hp) {
+            useful = 1;
+        }
+        if ((wanted & 4) != 0) {
+            curable = 0;
+            FUN_003ff524(&curable, effect->condition & 0x7f);
+            if ((curable & member->status) != 0) {
+                useful |= 4;
+            }
+            if ((useful & 4) != 0) {
+                if ((wanted & 1) != 0) {
+                    useful |= 1;
+                }
+            } else if ((useful & 1) != 0) {
+                u16 other = 0;
+                FUN_003ff524(&other, effect->condition & 0x7f);
+                if ((other & 2) != 0 || (useful |= 4, (useful & 1) != 0)) {
+                    if ((effect->condition & 0x7f) == 0x1b) {
+                        useful |= 4;
+                    }
+                }
+            }
+        }
+        if ((wanted & 0x4000000) != 0 && member->status == 0) {
+            useful |= 0x4000000;
+        }
     }
-    if ((temp_v6 & 0x4000000) != 0) {
-      temp_v0 = *(short *)(temp_v2 + 0x5e);
-      if (temp_v0 == 0) {
-        temp_v4 = temp_v4 | 0x4000000;
-      }
+    if ((wanted & 0x1000000) != 0 && btlCanSelectReservePartyMember(0) != 0) {
+        useful |= 0x1000000;
     }
-  }
-  if (((temp_v6 & 0x1000000) != 0) && (temp_v2 = btlCanSelectReservePartyMember(0), temp_v2 != 0)) {
-    temp_v4 = temp_v4 | 0x1000000;
-  }
-  if (((temp_v6 & 0x2000000) != 0) && (temp_v2 = FUN_003ff888(), temp_v2 != 0)) {
-    temp_v4 = temp_v4 | 0x2000000;
-  }
-  if (temp_v6 != temp_v4) {
-    temp_v7 = 3;
-  }
-  return temp_v7;
+    if ((wanted & 0x2000000) != 0 && FUN_003ff888() != 0) {
+        useful |= 0x2000000;
+    }
+    if (wanted != useful) {
+        result = 3;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -1,180 +1,132 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `stateSetterConstruct` (_code @ 0x484cb0, 0x378 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the name-entry state setter's constructor (handler table of function/adjust pairs, the name source by mode, the sprite and param packet setup); armcc here orders the handler-table stores and the unaligned 18-byte name copies differently. */
+#include "common.h"
 
-struct StateSetterSpriteWork;
+/* A name (18 bytes). */
+struct PlayerNameBuffer {
+    u8 bytes[0x12];
+};
+
+/* One state handler: a function and its this-adjustment. */
+struct StateHandler {
+    void (*function)(void *setter);
+    s32 adjust;
+};
 
 extern "C" {
+extern const u8 DAT_00532e94[];
+extern const u8 DAT_00532eac[];
+extern const u8 DAT_00532ed0[];
+extern u16 DAT_00588108;
 
-int asdTMTexTableLoadSprites(int);
-int FUN_0014afd0(int, int);
-int FUN_0014e188(...);
-int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
-int asdLoadFileSyncDefault(void);
-int FUN_00203b40(unsigned char *, int, int, int, int, int);
-int FUN_00275bc8(void);
-int campButtonHelpAcquire(void);
-int paramsClearPacket(unsigned char *);
+void rect48Init(void *setter);
+void FUN_004852a0(void *setter);
+void FUN_00483d34(void *setter);
+void FUN_004850e0(void *setter);
+void FUN_00484378(void *setter);
+void FUN_00485308(void *setter);
+void jobAt26CWaitDone(void *setter);
+void nameEntryMenuClearTarget(void *setter);
+void stateSetterStart9(void *setter);
+void FUN_00485ab8(void *setter);
+void FUN_004850c0(void *setter);
+void FUN_0048505c(void *setter);
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
+void asdTMTexTableLoadSprites(s32 table);
+void FUN_0014afd0(s32 a, s32 b);
+void FUN_0014e188(u8 *sprite, s32 table, s32 a, u8 *packet, s32 b);
+void paramsClearPacket(u8 *packet);
+void paramsInit(u8 *packet, const u8 *a, s32 aSize, const u8 *b, s32 bSize, s32 c, s32 d, s32 e, s32 f, const u8 *g,
+                s32 gSize);
+void uiSpriteSelectAnim(u8 *sprite, s32 anim);
+void uiSpriteSetKeyframe(u8 *sprite, s32 frame);
+void uiSpriteSetImageKeyframe(u8 *sprite, s32 frame);
+void FUN_00203b40(u8 *sprites, s32 a, s32 b, s32 c, s32 d, s32 e);
+u32 asdLoadFileSyncDefault(const char *path);
+u32 FUN_00275bc8(void);
+void campButtonHelpAcquire(void);
+PlayerNameBuffer *gameGetPlayerName(void);
+PlayerNameBuffer *gameDataGetPlayerName(void);
+PlayerNameBuffer *gameBlockGetArea221AA(void);
+PlayerNameBuffer *FUN_002840ac(void);
+u16 ifTouchGetButtonHelpValue(void);
 
-extern int jobAt26CWaitDone(...); /* 0x483d00 */
-extern int FUN_00483d34(...); /* 0x483d34 */
-extern int FUN_00484378(...); /* 0x484378 */
-extern unsigned char LAB_0048502c; /* 0x48502c */
-extern unsigned char LAB_0048503c; /* 0x48503c */
-extern int stateSetterStart9(...); /* 0x4850c4 */
-extern int rect48Init(...); /* 0x4850e4 */
-extern void FUN_004852a0(StateSetterSpriteWork*); /* 0x4852a0 */
-extern int FUN_00485308(...); /* 0x485308 */
-extern int nameEntryMenuClearTarget(...); /* 0x48550c */
-extern unsigned char DAT_00532e94; /* 0x532e94 */
-extern unsigned char DAT_00532eac; /* 0x532eac */
-extern unsigned char DAT_00532ed0; /* 0x532ed0 */
-extern unsigned short DAT_00588108; /* 0x588108 */
-
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-extern unsigned int *gameGetPlayerName(void);
-extern unsigned short ifTouchGetButtonHelpValue(void);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: FUN_00203b40. */
-extern unsigned int *gameDataGetPlayerName(void);
-/* Supplied declaration required: FUN_00275bc8. */
-extern unsigned int *FUN_002840ac(void);
-/* Supplied declaration required: campButtonHelpAcquire. */
-extern unsigned int *gameBlockGetArea221AA(void);
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
-
+/* Builds the name-entry state setter: installs its state handlers, loads the entry name for the
+ * `source` (0/-1 the player, 1 the saved player, 2 an area block, 4 another), then its sprites,
+ * resources and button help. */
+void stateSetterConstruct(u8 *setter, u8 source)
 {
-/* irregular: 20 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  *(romwright_code **)(param_1 + 0xd4) = rect48Init;
-  *(unsigned int *)(param_1 + 0xd8) = 0;
-  *(romwright_code **)(param_1 + 0xdc) = reinterpret_cast<romwright_code *>(FUN_004852a0);
-  *(unsigned int *)(param_1 + 0xe0) = 0;
-  *(romwright_code **)(param_1 + 0xe4) = FUN_00483d34;
-  *(unsigned int *)(param_1 + 0xe8) = 0;
-  *(unsigned int *)(param_1 + 0xec) = 0x4850e0;
-  *(unsigned int *)(param_1 + 0xf0) = 0;
-  *(romwright_code **)(param_1 + 0xf4) = FUN_00484378;
-  *(unsigned int *)(param_1 + 0xf8) = 0;
-  *(romwright_code **)(param_1 + 0xfc) = FUN_00485308;
-  *(unsigned int *)(param_1 + 0x100) = 0;
-  *(romwright_code **)(param_1 + 0x104) = jobAt26CWaitDone;
-  *(unsigned int *)(param_1 + 0x108) = 0;
-  *(romwright_code **)(param_1 + 0x10c) = nameEntryMenuClearTarget;
-  *(unsigned int *)(param_1 + 0x110) = 0;
-  *(romwright_code **)(param_1 + 0x114) = stateSetterStart9;
-  *(unsigned int *)(param_1 + 0x118) = 0;
-  *(unsigned int *)(param_1 + 0x11c) = 0x485ab8;
-  *(unsigned int *)(param_1 + 0x120) = 0;
-  *(unsigned int *)(param_1 + 0x124) = 0x4850c0;
-  *(unsigned int *)(param_1 + 0x128) = 0;
-  *(unsigned int *)(param_1 + 300) = 0x48505c;
-  *(unsigned int *)(param_1 + 0x130) = 0;
-  param_1[0x261] = param_2;
-  *param_1 = 0;
-  param_1[1] = 0;
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  param_1[0x20] = 0;
-  param_1[0x28] = 0;
-  param_1[0x29] = 0;
-  param_1[0x22] = 0;
-  *(unsigned short *)(param_1 + 0x2c) = 0;
-  *(unsigned short *)(param_1 + 0x2e) = 0;
-  param_1[0x2a] = 0;
-  param_1[0x2b] = 0;
-  *(unsigned int *)(param_1 + 0xa4) = 0;
-  *(unsigned int *)(param_1 + 0xa8) = 0;
-  *(unsigned int *)(param_1 + 0xac) = 0;
-  param_1[0x562] = 0;
-  if (param_1[0x261] == '\0' || param_1[0x261] == -1) {
-    puVar1 = (unsigned int *)gameGetPlayerName();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  if (param_1[0x261] == '\x01') {
-    puVar1 = (unsigned int *)gameDataGetPlayerName();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  if (param_1[0x261] == '\x02') {
-    puVar1 = (unsigned int *)gameBlockGetArea221AA();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  if (param_1[0x261] == '\x04') {
-    puVar1 = (unsigned int *)FUN_002840ac();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  *(unsigned int *)(param_1 + 0xc2) = *(unsigned int *)(param_1 + 0xb0);
-  *(unsigned int *)(param_1 + 0xc6) = *(unsigned int *)(param_1 + 0xb4);
-  *(unsigned int *)(param_1 + 0xca) = *(unsigned int *)(param_1 + 0xb8);
-  *(unsigned int *)(param_1 + 0xce) = *(unsigned int *)(param_1 + 0xbc);
-  *(unsigned short *)(param_1 + 0xd2) = *(unsigned short *)(param_1 + 0xc0);
-  asdTMTexTableLoadSprites(0x23);
-  FUN_0014afd0(0x23,0);
-  FUN_00203b40(param_1 + 0x198,0x69,7,0xf,1,1);
-  FUN_00203b40(param_1 + 0x1fc,4,1,4,1,1);
-  puVar2 = &LAB_0048502c;
-  asdLoadFileSyncDefault();
-  *(unsigned char **)(param_1 + 0x264) = puVar2;
-  puVar2 = &LAB_0048503c;
-  asdLoadFileSyncDefault();
-  *(unsigned char **)(param_1 + 0x268) = puVar2;
-  FUN_00275bc8();
-  *(unsigned char **)(param_1 + 0x26c) = puVar2;
-  paramsClearPacket(param_1 + 0x274);
-  paramsInit(param_1 + 0x274,&DAT_00532e94,0x18,&DAT_00532eac,0x24,0,0,0,0,&DAT_00532ed0,0x70);
-  FUN_0014e188(param_1 + 0x294,0x23,0,param_1 + 0x274,1);
-  uiSpriteSelectAnim(param_1 + 0x294,0);
-  FUN_0014e188(param_1 + 800,0x23,0,param_1 + 0x274,1);
-  uiSpriteSetKeyframe(param_1 + 800,0);
-  FUN_0014e188(param_1 + 0x3ac,0x23,0,param_1 + 0x274,1);
-  uiSpriteSetImageKeyframe(param_1 + 0x3ac,0);
-  campButtonHelpAcquire();
-  DAT_00588108 = ifTouchGetButtonHelpValue();
-  *(unsigned short *)(param_1 + 0x55e) = 0x97;
-  return;
+    StateHandler *handlers = (StateHandler *)(setter + 0xD4);
+    handlers[0].function = rect48Init;
+    handlers[0].adjust = 0;
+    handlers[1].function = FUN_004852a0;
+    handlers[1].adjust = 0;
+    handlers[2].function = FUN_00483d34;
+    handlers[2].adjust = 0;
+    handlers[3].function = FUN_004850e0;
+    handlers[3].adjust = 0;
+    handlers[4].function = FUN_00484378;
+    handlers[4].adjust = 0;
+    handlers[5].function = FUN_00485308;
+    handlers[5].adjust = 0;
+    handlers[6].function = jobAt26CWaitDone;
+    handlers[6].adjust = 0;
+    handlers[7].function = nameEntryMenuClearTarget;
+    handlers[7].adjust = 0;
+    handlers[8].function = stateSetterStart9;
+    handlers[8].adjust = 0;
+    handlers[9].function = FUN_00485ab8;
+    handlers[9].adjust = 0;
+    handlers[10].function = FUN_004850c0;
+    handlers[10].adjust = 0;
+    handlers[11].function = FUN_0048505c;
+    handlers[11].adjust = 0;
+    setter[0x261] = source;
+    setter[0] = 0;
+    setter[1] = 0;
+    *(u32 *)(setter + 4) = 0;
+    *(u32 *)(setter + 0x10) = 0;
+    *(u32 *)(setter + 0x14) = 0;
+    setter[0x20] = 0;
+    setter[0x28] = 0;
+    setter[0x29] = 0;
+    setter[0x22] = 0;
+    *(u16 *)(setter + 0x2C) = 0;
+    *(u16 *)(setter + 0x2E) = 0;
+    setter[0x2A] = 0;
+    setter[0x2B] = 0;
+    *(u32 *)(setter + 0xA4) = 0;
+    *(u32 *)(setter + 0xA8) = 0;
+    *(u32 *)(setter + 0xAC) = 0;
+    setter[0x562] = 0;
+    PlayerNameBuffer *name = (PlayerNameBuffer *)(setter + 0xB0);
+    if (setter[0x261] == 0 || setter[0x261] == 0xFF)
+        *name = *gameGetPlayerName();
+    if (setter[0x261] == 1)
+        *name = *gameDataGetPlayerName();
+    if (setter[0x261] == 2)
+        *name = *gameBlockGetArea221AA();
+    if (setter[0x261] == 4)
+        *name = *FUN_002840ac();
+    *(PlayerNameBuffer *)(setter + 0xC2) = *name;
+    asdTMTexTableLoadSprites(0x23);
+    FUN_0014afd0(0x23, 0);
+    FUN_00203b40(setter + 0x198, 0x69, 7, 0xF, 1, 1);
+    FUN_00203b40(setter + 0x1FC, 4, 1, 4, 1, 1);
+    *(u32 *)(setter + 0x264) = asdLoadFileSyncDefault("name/name.mbm");
+    *(u32 *)(setter + 0x268) = asdLoadFileSyncDefault("name/name.bf");
+    *(u32 *)(setter + 0x26C) = FUN_00275bc8();
+    u8 *packet = setter + 0x274;
+    paramsClearPacket(packet);
+    paramsInit(packet, DAT_00532e94, 0x18, DAT_00532eac, 0x24, 0, 0, 0, 0, DAT_00532ed0, 0x70);
+    FUN_0014e188(setter + 0x294, 0x23, 0, packet, 1);
+    uiSpriteSelectAnim(setter + 0x294, 0);
+    FUN_0014e188(setter + 0x320, 0x23, 0, packet, 1);
+    uiSpriteSetKeyframe(setter + 0x320, 0);
+    FUN_0014e188(setter + 0x3AC, 0x23, 0, packet, 1);
+    uiSpriteSetImageKeyframe(setter + 0x3AC, 0);
+    campButtonHelpAcquire();
+    DAT_00588108 = ifTouchGetButtonHelpValue();
+    *(u16 *)(setter + 0x55E) = 0x97;
 }
 
 } /* extern "C" */

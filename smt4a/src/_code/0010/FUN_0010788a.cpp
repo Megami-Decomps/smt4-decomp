@@ -51,7 +51,7 @@ extern int *arrayElementAddress_002efa50(int, int);
 /* Supplied declaration required: FUN_002efa58. */
 extern int bitFieldTest(unsigned int *);
 /* Supplied declaration required: _ZNSt6vectorIb12AsdAllocatorIbEE9referenceaSEb. */
-extern int *FUN_002eff58(int, unsigned int);
+extern int *_ZN9Obj5588ecC1Ej(int, unsigned int);
 extern int FUN_002eff84(void);
 extern int *FUN_002eff90(int, unsigned int);
 /* Supplied declaration required: FUN_002effdc. */
@@ -98,7 +98,7 @@ void FUN_0010788a(int param_1)
     if (temp_v1 == 0) {
       return;
     }
-    piVar3 = (int *)FUN_002eff58(temp_v1,0x80);
+    piVar3 = (int *)_ZN9Obj5588ecC1Ej(temp_v1,0x80);
     if (piVar3 == (int *)0x0) {
       return;
     }
@@ -200,7 +200,7 @@ void FUN_0010788a(int param_1)
       }
       if (temp_v16 != 0) {
         temp_v2 = FUN_002eb7d0(0x20,0);
-        if ((temp_v2 == 0) || (piVar4 = (int *)FUN_002eff58(temp_v2,0x80), piVar4 == (int *)0x0)) {
+        if ((temp_v2 == 0) || (piVar4 = (int *)_ZN9Obj5588ecC1Ej(temp_v2,0x80), piVar4 == (int *)0x0)) {
           FUN_001221a2(&temp_v8);
           return;
         }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: shared render-stack helpers choose different push temporaries from retail. */
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -15,7 +14,7 @@ u32 FUN_001aa4a8(void)
 {
     jobGetWork();
     RenderCtx *context = g_titleScene;
-    renderStackPush(&context->additional.stackC, FUN_002865c0(6, 0.0f));
+    renderCtxPushC(context, FUN_002865c0(6, 0.0f));
     context = g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 0));
     context = g_titleScene;

@@ -1,146 +1,131 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015493c` (_code @ 0x15493c, 0x268 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: twin of smt4 FUN_00119e54; retail inlines the shared-resource holder assign/swap which is written here as plain stores */
+#include "common.h"
+
+/* A resource owned through its allocator: finalize through vtable slot 0, free through the
+ * owner's vtable slot 3. */
+struct NwResource;
+
+struct NwResourceOwnerVtable {
+    void *slots[3];
+    void (*release)(void *owner, NwResource *resource);
+};
+
+struct NwResourceOwner {
+    NwResourceOwnerVtable *vtable;
+};
+
+struct NwResourceVtable {
+    void (*finalize)(NwResource *resource);
+    void *slots[3];
+    s32 (*editable)(NwResource *resource);   /* returns the writable data block */
+};
+
+struct NwResource {
+    NwResourceVtable *vtable;
+    NwResourceOwner *owner;
+    u8 owned;
+};
+
+struct NwVec3 {
+    f32 x, y, z;
+};
+
+struct NwVec2 {
+    f32 x, y;
+};
+
+/* The shared pointer the builder keeps its resources in. */
+struct NwResourceRef {
+    NwResource *resource;
+    u8 owns;
+};
+
+struct NwCameraBuilder {
+    /* 0x00 */ NwResourceRef projection;
+    /* 0x08 */ u8 enabled;
+    /* 0x09 */ u8 visible;
+    /* 0x0C */ u32 unk0C[2];
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ NwResourceRef transform;
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u8 unk24;
+};
+
+struct NwCamera {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ f32 viewX;
+    /* 0x5C */ u8 unk5C[0xC];
+    /* 0x68 */ f32 viewY;
+    /* 0x6C */ u8 unk6C[0xC];
+    /* 0x78 */ f32 viewZ;
+    /* 0x7C */ u8 unk7C[0xC];
+    /* 0x88 */ u32 flags;
+    /* 0x8C */ u8 unk8C[0x208];
+    /* 0x294 */ f32 distance;
+};
+
+#define NW_CAMERA_FLAG_DYNAMIC 0x800
 
 extern "C" {
+NwResource *FUN_0017250c(void);
+NwResource *FUN_001723f0(u32 id);
+NwCamera *FUN_0017314c(NwCameraBuilder *builder, u32 id);
 
-int FUN_0017314c(unsigned char *, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_5: 11 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned char sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned char sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned char sp4F; /* 0x4f: local_4f */
-    unsigned char sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_5_stack;
-
-#ifndef ROMWRIGHT_PIECE_3_1_DEFINED
-#define ROMWRIGHT_PIECE_3_1_DEFINED
-#define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
-#endif
-extern int *FUN_001723f0(unsigned int);
-extern int *FUN_0017250c(void);
-/* Supplied declaration required: FUN_0017314c. */
-
-
-unsigned char *
-FUN_0015493c(unsigned int param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,
-            unsigned char param_5)
-
+static __inline void nwResourceRelease(NwResourceRef *ref)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 1 native warning(s); review required */
-  char temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int *piVar4;
-  int *piVar5;
-  unsigned char *puVar6;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int temp_v4;
-  int *temp_v5;
-  char temp_v6;
-  unsigned int uStack_53;
-  unsigned char temp_v7;
-  unsigned char temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  int *temp_v12;
-  char temp_v13;
-  int *temp_v14;
-  char temp_v15;
-  
-  piVar2 = (int *)FUN_0017250c();
-  temp_v1 = (**(romwright_code **)(*piVar2 + 0x10))(piVar2);
-  temp_v2 = param_3[1];
-  temp_v3 = param_3[2];
-  temp_v4 = 0;
-  *(unsigned int *)(temp_v1 + 8) = *param_3;
-  *(unsigned int *)(temp_v1 + 0xc) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x10) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0x14) = 0;
-  *(unsigned int *)(temp_v1 + 0x18) = 0x3f800000;
-  *(unsigned int *)(temp_v1 + 0x1c) = 0;
-  piVar4 = (int *)FUN_001723f0(param_1);
-  *(unsigned char *)(piVar4 + 2) = param_5;
-  temp_v1 = (**(romwright_code **)(*piVar4 + 0x10))(piVar4);
-  puVar6 = &temp_v7;
-  *(unsigned int *)(temp_v1 + 4) = in_s0;
-  *(unsigned int *)(temp_v1 + 8) = in_s1;
-  temp_v2 = *param_4;
-  temp_v3 = param_4[1];
-  *(unsigned int *)(temp_v1 + 0x10) = in_s2;
-  *(unsigned int *)(temp_v1 + 0x14) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x18) = temp_v3;
-  temp_v7 = 1;
-  temp_v8 = 1;
-  temp_v12 = (int *)0x0;
-  temp_v11 = 1;
-  temp_v14 = (int *)0x0;
-  temp_v15 = '\x01';
-  temp_v10 = 0;
-  temp_v9 = 0;
-  temp_v6 = 1;
-  temp_v5 = piVar2;
-  if (&temp_v12 != &temp_v5) {
-    temp_v5 = (int *)0x0;
-    temp_v12 = piVar2;
-  }
-  piVar2 = temp_v5;
-  temp_v13 = '\x01';
-  if (temp_v5 != (int *)0x0) {
-    (**(romwright_code **)*temp_v5)(temp_v5);
-    piVar5 = (int *)piVar2[1];
-    (**(romwright_code **)(*piVar5 + 0xc))(piVar5,piVar2);
-  }
-  temp_v0 = temp_v15;
-  (*(unsigned int *)&temp_v6) = romwright_piece_3_1(uStack_53,1);
-  temp_v5 = piVar4;
-  if (&temp_v14 != &temp_v5) {
-    temp_v5 = temp_v14;
-    temp_v15 = '\x01';
-    (*(unsigned int *)&temp_v6) = romwright_piece_3_1(uStack_53,temp_v0);
-    temp_v14 = piVar4;
-  }
-  piVar2 = temp_v5;
-  if ((temp_v5 != (int *)0x0) && (temp_v6 != '\0')) {
-    (**(romwright_code **)*temp_v5)(temp_v5);
-    piVar4 = (int *)piVar2[1];
-    (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
-  }
-  FUN_0017314c(puVar6,param_1);
-  piVar2 = temp_v14;
-  if ((temp_v14 != (int *)0x0) && (temp_v15 != '\0')) {
-    (**(romwright_code **)*temp_v14)(temp_v14);
-    piVar4 = (int *)piVar2[1];
-    (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
-  }
-  piVar2 = temp_v12;
-  if ((temp_v12 != (int *)0x0) && (temp_v13 != '\0')) {
-    (**(romwright_code **)*temp_v12)(temp_v12);
-    piVar4 = (int *)piVar2[1];
-    (**(romwright_code **)(*piVar4 + 0xc))(piVar4,piVar2);
-  }
-  temp_v2 = param_2[1];
-  temp_v3 = param_2[2];
-  *(unsigned int *)(puVar6 + 0x58) = *param_2;
-  *(unsigned int *)(puVar6 + 0x68) = temp_v2;
-  *(unsigned int *)(puVar6 + 0x78) = temp_v3;
-  *(unsigned int *)(puVar6 + 0x88) = *(unsigned int *)(puVar6 + 0x88) | 0x800;
-  *(unsigned int *)(puVar6 + 0x294) = temp_v4;
-  return puVar6;
+    NwResource *resource = ref->resource;
+    if (resource != NULL && ref->owns != 0) {
+        resource->vtable->finalize(resource);
+        resource->owner->vtable->release(resource->owner, resource);
+    }
+}
+
+/* Creates a camera object: fills its projection and transform resources, wraps them in the
+ * dynamic builder and stamps the view vectors and the dynamic flag. */
+NwCamera *FUN_0015493c(u32 id, const NwVec3 *view, const NwVec3 *position, const NwVec2 *range,
+                       u8 mode, NwVec2 lens, f32 near)
+{
+    NwResource *transform = FUN_0017250c();
+    f32 *transformData = (f32 *)transform->vtable->editable(transform);
+    transformData[2] = position->x;
+    transformData[3] = position->y;
+    transformData[4] = position->z;
+    transformData[5] = 0.0f;
+    transformData[6] = 1.0f;
+    transformData[7] = 0.0f;
+
+    NwResource *projection = FUN_001723f0(id);
+    *((u8 *)projection + 8) = mode;
+    f32 *projectionData = (f32 *)projection->vtable->editable(projection);
+    projectionData[1] = lens.x;
+    projectionData[2] = lens.y;
+    projectionData[4] = near;
+    projectionData[5] = range->x;
+    projectionData[6] = range->y;
+
+    NwCameraBuilder builder;
+    builder.enabled = 1;
+    builder.visible = 1;
+    builder.unk0C[0] = 0;
+    builder.unk0C[1] = 0;
+    builder.unk14 = 0;
+    builder.unk20 = 0;
+    builder.projection.resource = transform;
+    builder.projection.owns = 1;
+    builder.transform.resource = projection;
+    builder.transform.owns = 1;
+    builder.unk24 = 1;
+
+    NwCamera *camera = FUN_0017314c(&builder, id);
+    nwResourceRelease(&builder.transform);
+    nwResourceRelease(&builder.projection);
+
+    camera->viewX = view->x;
+    camera->viewY = view->y;
+    camera->viewZ = view->z;
+    camera->flags |= NW_CAMERA_FLAG_DYNAMIC;
+    camera->distance = 0.0f;
+    return camera;
 }
 
 } /* extern "C" */

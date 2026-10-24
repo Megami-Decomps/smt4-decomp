@@ -1,127 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026faa4` (_code @ 0x26faa4, 0x344 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite with a per-slot roll helper compiles (218 vs 236 rows); the zone-to-slot assignment is inferred from the branch layout and retail shares the re-roll blocks differently */
+#include "common.h"
+
+// Current map block header: kind 1 carries the (area, floor) pair of the player's position.
+struct MapBlock {
+    s8 kind;        // 0x00
+    s8 area;        // 0x01
+    s8 floor;       // 0x02
+};
 
 extern "C" {
 
-int gameFlagSetValue(...);
-int randNextInRange(int);
+void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+s32 gameFlagIsSet(u32 flag);
+s32 randNextInRange(s32 range);
+MapBlock* gameGetMapBlock(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: gameFlagSetValue. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: randNextInRange. */
-extern char *gameGetMapBlock(void);
-
-
-void FUN_0026faa4(void)
-
+// Closes the slot's flag unless the roll hits 0 and the following flag is clear.
+static void rollSlot(u32 flag, bool inZone)
 {
-/* irregular: 5 goto(s); 2 native warning(s); review required */
-  char *pcVar1;
-  int temp_v0;
-  int temp_v1;
-  char temp_v2;
-  char temp_v3;
-  
-  pcVar1 = (char *)gameGetMapBlock();
-  temp_v2 = '\0';
-  temp_v3 = '\0';
-  temp_v1 = 0;
-  do {
-    randNextInRange(0xff);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x80);
-  if (*pcVar1 == '\x01') {
-    temp_v2 = pcVar1[1];
-    temp_v3 = pcVar1[2];
-    temp_v1 = randNextInRange(0xff);
-    if (temp_v2 != '\x0e' || temp_v3 != '\x01') goto LAB_0026fb0c;
-    temp_v1 = randNextInRange(0xff);
-LAB_0026fb74:
-    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x573), temp_v1 != 0)) {
-      gameFlagSetValue(0x572,0,1);
+    s32 roll = randNextInRange(0xff);
+    if (inZone) roll = randNextInRange(0xff);
+    if (roll != 0 || gameFlagIsSet(flag + 1) != 0) {
+        gameFlagSetValue(flag, 0, 1);
+    } else {
+        gameFlagSetValue(flag, 1, 1);
     }
-    else {
-      gameFlagSetValue(0x572,1);
+}
+
+// Closes or opens each random encounter flag slot with a roll; the zone's own slot rolls twice.
+void FUN_0026faa4(void)
+{
+    MapBlock* block = gameGetMapBlock();
+    s8 area = 0;
+    s8 floor = 0;
+    for (s32 i = 0; i < 0x80; i++) randNextInRange(0xff);
+    if (block->kind == 1) {
+        area = block->area;
+        floor = block->floor;
     }
-    temp_v1 = randNextInRange(0xff);
-    if (temp_v2 != '\x05' || temp_v3 != '\x06') goto LAB_0026fbe0;
-    temp_v1 = randNextInRange(0xff);
-LAB_0026fc4c:
-    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x577), temp_v1 != 0)) {
-      gameFlagSetValue(0x576,0,1);
+    rollSlot(0x570, area == 0x0e && floor == 1);
+    rollSlot(0x572, area == 3 && floor == 8);
+    rollSlot(0x574, area == 5 && floor == 6);
+    rollSlot(0x576, area == 7 && floor == 1);
+    rollSlot(0x578, area == 8 && floor == 1);
+    rollSlot(0x57a, area == 0x0c && floor == 1);
+
+    s32 roll = randNextInRange(0xff);
+    if (gameFlagIsSet(0x648) == 0) roll = 0xff;
+    if (area == 0x0d && floor == 1) return;
+    if (roll == 0 && gameFlagIsSet(0x57d) == 0) {
+        gameFlagSetValue(0x57c, 1, 1);
+        return;
     }
-    else {
-      gameFlagSetValue(0x576,1);
-    }
-    temp_v1 = randNextInRange(0xff);
-    if (temp_v2 != '\b' || temp_v3 != '\x01') goto LAB_0026fcb8;
-    temp_v1 = randNextInRange(0xff);
-    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x57b), temp_v1 != 0)) {
-      gameFlagSetValue(0x57a,0,1);
-    }
-    else {
-      gameFlagSetValue(0x57a,1);
-    }
-  }
-  else {
-    temp_v1 = randNextInRange(0xff);
-LAB_0026fb0c:
-    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x571), temp_v1 != 0)) {
-      gameFlagSetValue(0x570,0,1);
-    }
-    else {
-      gameFlagSetValue(0x570,1);
-    }
-    temp_v1 = randNextInRange(0xff);
-    if (temp_v2 != '\x03' || temp_v3 != '\b') goto LAB_0026fb74;
-    temp_v1 = randNextInRange(0xff);
-LAB_0026fbe0:
-    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x575), temp_v1 != 0)) {
-      gameFlagSetValue(0x574,0,1);
-    }
-    else {
-      gameFlagSetValue(0x574,1);
-    }
-    temp_v1 = randNextInRange(0xff);
-    if (temp_v2 != '\a' || temp_v3 != '\x01') goto LAB_0026fc4c;
-    temp_v1 = randNextInRange(0xff);
-LAB_0026fcb8:
-    if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x579), temp_v1 != 0)) {
-      gameFlagSetValue(0x578,0,1);
-    }
-    else {
-      gameFlagSetValue(0x578,1);
-    }
-    temp_v1 = randNextInRange(0xff);
-    if (!(temp_v2 == '\f' && temp_v3 == '\x01')) {
-      if ((temp_v1 != 0) || (temp_v1 = gameFlagIsSet(0x57b), temp_v1 != 0)) {
-        gameFlagSetValue(0x57a,0,1);
-      }
-      else {
-        gameFlagSetValue(0x57a,1);
-      }
-    }
-  }
-  temp_v1 = randNextInRange(0xff);
-  temp_v0 = gameFlagIsSet(0x648);
-  if (temp_v0 == 0) {
-    temp_v1 = 0xff;
-  }
-  if (temp_v2 == '\r' && temp_v3 == '\x01') {
-    return;
-  }
-  if ((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x57d), temp_v1 == 0)) {
-    gameFlagSetValue(0x57c,1);
-    return;
-  }
-  gameFlagSetValue(0x57c,0,1);
-  return;
+    gameFlagSetValue(0x57c, 0, 1);
 }
 
 } /* extern "C" */

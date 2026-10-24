@@ -3,6 +3,7 @@
 #define BATTLE_BTLEFFECTLOAD_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The effect names the battle recognises (g_btlEffect). */
 struct BtlEffectNames {
@@ -22,7 +23,8 @@ struct BtlEffectRequest {
 
 /* A loaded effect file of the battle's effect work. */
 struct BtlEffectSlot {
-    /* 0x00 */ u32 unk00;
+    /* 0x00 */ u8 handle;      /* keyed-record id, 0xFF while unregistered */
+    /* 0x01 */ u8 unk01[3];
     /* 0x04 */ void *file;
     /* 0x08 */ char name[0x80];
     /* 0x88 */ u8 flags;
@@ -50,5 +52,7 @@ struct BtlEffectWork {
     /* 0x3034 */ u32 numberedEffect;
     /* 0x3038 */ u8 numberedIndex;
 };
+
+typedef char BtlEffectSlotLayoutCheck[sizeof(BtlEffectSlot) == 0x8C && offsetof(BtlEffectSlot, flags) == 0x88 ? 1 : -1];
 
 #endif

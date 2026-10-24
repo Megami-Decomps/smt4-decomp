@@ -1,105 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025f954` (_code @ 0x25f954, 0x288 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP scheduling differs: retail loads each vertex component into its own s-register and passes the argument vectors from those registers; the build copies vertices as register pairs and keeps fewer constants live. */
+#include "shard/W6_W6Match6_CollisionQuad.h"
+
+struct CollisionModelVertex {
+    CollisionVector v;
+    f32 w;
+};
+
+struct CollisionModelTriangle {
+    s32 vertex[3];
+    s32 unk0C;
+    s32 normal;
+    s32 unk14;
+};
+
+/* Mesh the map collision is built from. */
+struct CollisionModel {
+    CollisionModelVertex *vertices; // 0x00
+    u32 unk04;
+    CollisionModelVertex *normals;  // 0x08
+    u32 unk0C;
+    CollisionModelTriangle *triangles; // 0x10
+    u32 triangleCount;              // 0x14
+};
+
+/* g_mapCollision as the triangle importer sees it: the queue state plus the mesh pointer after it. */
+struct MapCollisionMesh : CollisionQueueState {
+    u8 unk28[8];
+    CollisionModel *model; // 0x30
+};
 
 extern "C" {
+void FUN_0026e8a4(s32 axis, s32 count, f32 *minimum, f32 *maximum,
+                  CollisionVector first, CollisionVector second, CollisionVector third, CollisionVector fourth);
+void FUN_0026ea5c(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
 
-int FUN_00226e90(int, int, unsigned int *, unsigned int *);
-int FUN_00237438(int, int, unsigned int *, unsigned int *);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
-
-extern int DAT_00580208; /* 0x580208 */
-extern int DAT_0058021c; /* 0x58021c */
-extern int *DAT_00580234; /* 0x580234 */
-
-/* Supplied declaration required: FUN_00226e90. */
-/* Supplied declaration required: FUN_00237438. */
-
-
-void FUN_0025f954(unsigned int param_1)
-
+/* Turn every triangle of the loaded collision mesh into a collision quad record owned by `owner`. */
+void FUN_0025f954(u32 owner)
 {
-/* irregular: 2 native warning(s); review required */
-  float *pfVar1;
-  int *piVar2;
-  int temp_v0;
-  unsigned int *puVar4;
-  unsigned int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  unsigned long long temp_v14;
-  
-  temp_v1 = 0;
-  if (DAT_00580234[5] != 0) {
-    temp_v14 = 0x3eaaaaab;
-    do {
-      piVar2 = (int *)(DAT_00580234[4] + temp_v1 * 0x18);
-      puVar4 = (unsigned int *)(DAT_0058021c + DAT_00580208 * 0xa8);
-      temp_v0 = *DAT_00580234;
-      pfVar1 = (float *)(temp_v0 + *piVar2 * 0x10);
-      temp_v5 = *pfVar1;
-      temp_v7 = pfVar1[1];
-      temp_v6 = pfVar1[2];
-      pfVar1 = (float *)(temp_v0 + piVar2[1] * 0x10);
-      temp_v10 = *pfVar1;
-      temp_v13 = pfVar1[1];
-      temp_v11 = pfVar1[2];
-      pfVar1 = (float *)(temp_v0 + piVar2[2] * 0x10);
-      temp_v8 = *pfVar1;
-      temp_v12 = pfVar1[1];
-      temp_v9 = pfVar1[2];
-      pfVar1 = (float *)(DAT_00580234[2] + piVar2[4] * 0x10);
-      temp_v2 = *pfVar1;
-      temp_v3 = pfVar1[1];
-      temp_v4 = pfVar1[2];
-      *(float *)&puVar4[0x17] = temp_v5;
-      *(float *)&puVar4[0x18] = temp_v7;
-      *(float *)&puVar4[0x19] = temp_v6;
-      *(float *)&puVar4[0x1a] = temp_v10;
-      *(float *)&puVar4[0x1b] = temp_v13;
-      *(float *)&puVar4[0x1c] = temp_v11;
-      *(float *)&puVar4[0x1d] = temp_v8;
-      *(float *)&puVar4[0x1e] = temp_v12;
-      *(float *)&puVar4[0x1f] = temp_v9;
-      *(float *)&puVar4[3] = temp_v2;
-      *(float *)&puVar4[4] = temp_v3;
-      *(float *)&puVar4[5] = temp_v4;
-      puVar4[6] = temp_v2 * temp_v5 + temp_v3 * temp_v7 + temp_v4 * temp_v6;
-      temp_v2 = (float)temp_v14;
-      puVar4[0x23] = (temp_v5 + temp_v10 + temp_v8) * temp_v2;
-      puVar4[0x24] = (temp_v7 + temp_v13 + temp_v12) * temp_v2;
-      puVar4[0x25] = (temp_v6 + temp_v11 + temp_v9) * temp_v2;
-      *(unsigned char *)((int)puVar4 + 5) = 3;
-      *(unsigned char *)(puVar4 + 1) = 1;
-      *puVar4 = param_1;
-      *(unsigned short *)((int)puVar4 + 6) = 0;
-      *(unsigned char *)(puVar4 + 2) = 1;
-      *(unsigned char *)((int)puVar4 + 9) = 0;
-      *(unsigned short *)((int)puVar4 + 10) = 0;
-      FUN_00237438((int)*(char *)(puVar4 + 1),0,puVar4 + 7,puVar4 + 0x13);
-      FUN_00237438((int)*(char *)(puVar4 + 1),1,puVar4 + 10,puVar4 + 0x14);
-      FUN_00237438((int)*(char *)(puVar4 + 1),2,puVar4 + 0xd,puVar4 + 0x15);
-      FUN_00226e90((int)*(char *)(puVar4 + 1),(int)*(char *)((int)puVar4 + 5),puVar4 + 0x26,
-                   puVar4 + 0x28);
-      temp_v1 = temp_v1 + 1;
-      DAT_00580208 = DAT_00580208 + 1;
-    } while (temp_v1 < (unsigned int)DAT_00580234[5]);
-  }
-  return;
+    MapCollisionMesh &collision = (MapCollisionMesh &)g_mapCollision;
+    for (u32 i = 0; i < collision.model->triangleCount; i++) {
+        const CollisionModelTriangle *triangle = &collision.model->triangles[i];
+        CollisionQuad *quad = &collision.triangles[collision.geometry.triangleCount];
+        const CollisionModelVertex *p0 = &collision.model->vertices[triangle->vertex[0]];
+        const CollisionModelVertex *p1 = &collision.model->vertices[triangle->vertex[1]];
+        const CollisionModelVertex *p2 = &collision.model->vertices[triangle->vertex[2]];
+        const CollisionModelVertex *n = &collision.model->normals[triangle->normal];
+        CollisionVector a = {p0->v.x, p0->v.y, p0->v.z};
+        CollisionVector b = {p1->v.x, p1->v.y, p1->v.z};
+        CollisionVector c = {p2->v.x, p2->v.y, p2->v.z};
+        quad->vertices[0].x = a.x;
+        quad->vertices[0].y = a.y;
+        quad->vertices[0].z = a.z;
+        quad->vertices[1].x = b.x;
+        quad->vertices[1].y = b.y;
+        quad->vertices[1].z = b.z;
+        quad->vertices[2].x = c.x;
+        quad->vertices[2].y = c.y;
+        quad->vertices[2].z = c.z;
+        quad->normal = n->v;
+        quad->distance = quad->normal.x * a.x + quad->normal.y * a.y + quad->normal.z * a.z;
+        quad->center.x = (a.x + b.x + c.x) * (1.0f / 3.0f);
+        quad->center.y = (a.y + b.y + c.y) * (1.0f / 3.0f);
+        quad->center.z = (a.z + b.z + c.z) * (1.0f / 3.0f);
+        quad->vertexCount = 3;
+        quad->enabled = 1;
+        quad->unk00 = owner;
+        quad->material = 0;
+        quad->active = 1;
+        quad->queue = 0;
+        quad->tag = 0;
+        CollisionVector reference = {quad->center.x, 0.0f, quad->center.z};
+        FUN_0026ea5c(quad->enabled, 0, &quad->edgeNormals[0], &quad->edgeDistances[0], reference, a, b);
+        FUN_0026ea5c(quad->enabled, 1, &quad->edgeNormals[1], &quad->edgeDistances[1], reference, b, c);
+        FUN_0026ea5c(quad->enabled, 2, &quad->edgeNormals[2], &quad->edgeDistances[2], reference, c, a);
+        CollisionVector unused;
+        FUN_0026e8a4(quad->enabled, quad->vertexCount, (f32 *)&quad->unk98[0], (f32 *)&quad->unk98[8], a, b, c, unused);
+        collision.geometry.triangleCount++;
+    }
 }
-
-} /* extern "C" */
+}

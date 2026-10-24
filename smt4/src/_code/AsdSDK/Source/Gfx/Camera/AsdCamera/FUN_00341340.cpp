@@ -1,228 +1,192 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00341340` (_code @ 0x341340, 0x35c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (219 vs 211 rows); retail hoists the loop-invariant model/animation pointers into callee-saved registers and the relative-offset resolves differ; unnamed scene-builder types are file-local */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00298d50(int *);
-int FUN_002a5960(int *, int *, unsigned int, unsigned int, int);
-int FUN_002a5dc4(int *, int *);
-int FUN_002c159c(int *);
-int FUN_002c1e30(int *, int);
-int FUN_002c1edc(int *, int *, int *, int *);
-int FUN_002c2044(int *, int);
-int asdMemoryGetDefaultAllocator(void);
-int modelSelectionActivate(int *, int, unsigned int);
-int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
-
-typedef struct fn_00341340_arg1 fn_00341340_arg1;
-struct fn_00341340_arg1 {
-    unsigned char pad_0x0[0x44];
-    undefined4 field_0x44; /* +0x44 */
-    undefined4 field_0x48; /* +0x48 */
-    unsigned char pad_0x4c[0x30];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
+// Run-time type descriptor walked by the scene object casts.
+struct TypeInfo {
+    const TypeInfo* parent;
 };
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 13 slot(s), 49 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned char sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_2_stack;
+// Polymorphic scene object: vtable slot 2 returns its type, slot 3 takes the model it binds to.
+struct SceneObject;
+struct SceneObjectVtbl {
+    void* slot0;
+    void* slot1;
+    const TypeInfo* (*getTypeInfo)(SceneObject* self);
+    void (*bind)(SceneObject* self, void* model);
+};
+struct SceneObject {
+    const SceneObjectVtbl* vtbl;
+};
 
-#ifndef ROMWRIGHT_PIECE_3_1_DEFINED
-#define ROMWRIGHT_PIECE_3_1_DEFINED
-#define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
-#endif
-/* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002a5960. */
-/* Supplied declaration required: FUN_002a5dc4. */
-/* Supplied declaration required: FUN_002c159c. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
-extern unsigned int asdMemoryGetAllocatorA(void);
-extern int asdLoadFileSyncDefault(fn_00341340_arg1 *);
-/* Supplied declaration required: modelSelectionActivate. */
-/* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
+// Allocator vtable slot 2 allocates (size, alignment).
+struct Allocator;
+struct AllocatorVtbl {
+    void* slot0;
+    void* slot1;
+    void* (*allocate)(Allocator* self, u32 size, u32 alignment);
+};
+struct Allocator {
+    const AllocatorVtbl* vtbl;
+};
 
+// Options the scene builder takes when creating an object from a resource.
+struct SceneBuildDesc {
+    void* resource;         // 0x00
+    u8 enabled;             // 0x04
+    u32 unk08;              // 0x08
+    u32 unk0c;              // 0x0c
+    u32 unk10;              // 0x10
+    u32 unk14;              // 0x14
+    u32 unk18;              // 0x18
+    u32 unk1c;              // 0x1c
+    u32 unk20;              // 0x20
+    u8 unk24;               // 0x24
+};
 
-void FUN_00341340(int *param_1,fn_00341340_arg1 *param_2)
+struct AnimDesc {
+    void* resource;         // 0x00
+    f32 startTime;          // 0x04
+    u32 flags;              // 0x08
+    u8 enabled;             // 0x0c
+};
 
+// Model set: camera object, the created models and their animation slots.
+struct ModelSet {
+    s32 index;              // 0x000: next model slot
+    u32 unk004;
+    s32 animCount;          // 0x008
+    u8 unk00c[0x18 - 0xc];
+    u8* file;               // 0x018
+    u8 unk01c[0x2c - 0x1c];
+    u8 camera[0x534 - 0x2c];    // 0x02c
+    f32 position[3];        // 0x534
+    f32 target[3];          // 0x540
+    f32 reserved;           // 0x54c
+    f32 nearClip;           // 0x550
+    f32 aspect;             // 0x554
+    f32 farClip;            // 0x558
+    f32 up[3];              // 0x55c
+    f32 distance;           // 0x568
+};
+
+extern const TypeInfo DAT_0044e858;
+extern const TypeInfo DAT_0044e820;
+
+u8* asdLoadFileSyncDefault(void* path);
+Allocator* asdMemoryGetDefaultAllocator(void);
+Allocator* asdMemoryGetAllocatorA(void);
+SceneObject* nw_gfx_SceneBuilder_CreateObject(SceneBuildDesc* desc, Allocator* defaultAllocator, Allocator* allocatorA);
+void* _ZN9Obj42111cC1Ej(void* self, Allocator* allocator);
+void FUN_002a5960(void* self, AnimDesc* desc, f32 startTime, u32 flags, s32 enabled);
+void FUN_002c2044(void* camera, s32 arg);
+void FUN_002c159c(void* camera);
+void FUN_002c1edc(void* camera, f32* position, f32* target, f32* up);
+void FUN_002c1e30(void* camera, s32 arg, f32 a, f32 b, f32 c, f32 d);
+void FUN_00298d50(void* camera);
+void modelSelectionActivate(ModelSet* set, s32 a, s32 b);
+
+// Resolves a self-relative offset stored at `field` (0 means none).
+static inline void* resolveRelative(u8* field)
 {
-/* irregular: 2 goto(s); 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  int *piVar7;
-  int *piVar8;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int uStack_48;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned char temp_v18;
-  int temp_v19;
-  
-  temp_v0 = asdLoadFileSyncDefault(param_2);
-  param_1[6] = temp_v0;
-  temp_v9 = *(int *)(temp_v0 + 0x48);
-  temp_v8 = 0;
-  if (temp_v9 != 0) {
-    temp_v1 = temp_v0 + 0x48 + temp_v9;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  if (temp_v1 != 0) {
-    temp_v9 = temp_v1 + 0x1c;
-  }
-  if (temp_v1 == 0) {
-    temp_v9 = 0;
-  }
-  temp_v19 = temp_v9 + *(int *)(temp_v0 + 0x44) * 0x10;
-  if (temp_v9 != temp_v19) {
-    do {
-      temp_v1 = *(int *)(temp_v9 + 0xc);
-      if (temp_v1 != 0) {
-        temp_v1 = temp_v1 + temp_v9 + 0xc;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      temp_v2 = asdMemoryGetDefaultAllocator();
-      temp_v3 = asdMemoryGetAllocatorA();
-      temp_v11 = romwright_piece_3_1((((unsigned int)(temp_v11) >> 8) & 0xffffffU),1);
-      temp_v12 = 8;
-      temp_v13 = 4;
-      uStack_48 = 0;
-      temp_v14 = 0;
-      temp_v16 = 4;
-      piVar8 = &temp_v10;
-      temp_v15 = 0;
-      temp_v17 = 0;
-      temp_v10 = temp_v1;
-      temp_v18 = 1;
-      nw_gfx_SceneBuilder_CreateObject(piVar8,temp_v2,temp_v3);
-      if (piVar8 != (int *)0x0) {
-        piVar5 = (int *)(**(romwright_code **)(*piVar8 + 8))(piVar8);
-        do {
-          if (piVar5 == (int *)0x44e858) goto LAB_0034143c;
-          piVar5 = (int *)*piVar5;
-        } while (piVar5 != (int *)0x0);
-      }
-      piVar8 = (int *)0x0;
-LAB_0034143c:
-      if (piVar8 != (int *)0x0) {
-        piVar5 = (int *)(**(romwright_code **)(*piVar8 + 8))(piVar8);
-        do {
-          if (piVar5 == (int *)0x44e820) goto LAB_00341470;
-          piVar5 = (int *)*piVar5;
-        } while (piVar5 != (int *)0x0);
-      }
-      piVar8 = (int *)0x0;
-LAB_00341470:
-      param_1[*param_1 + 0x15b] = (int)piVar8;
-      temp_v1 = piVar8[0x9a];
-      temp_v6 = *(int *)(temp_v0 + 0x7c);
-      if (temp_v1 != 0) {
-        temp_v5 = 0;
-        temp_v2 = *(unsigned int *)(*(int *)(temp_v1 + 8) + 0x10);
-        if (0 < temp_v6) {
-          do {
-            if (*(int *)(temp_v0 + 0x80) != 0) {
-              temp_v4 = temp_v0 + 0x80 + *(int *)(temp_v0 + 0x80);
+    s32 offset = *reinterpret_cast<s32*>(field);
+    return offset != 0 ? field + offset : NULL;
+}
+
+// Walks the type chain of `object` looking for `type`.
+static SceneObject* castTo(SceneObject* object, const TypeInfo* type)
+{
+    if (object == NULL) return NULL;
+    for (const TypeInfo* t = object->vtbl->getTypeInfo(object); t != NULL; t = t->parent) {
+        if (t == type) return object;
+    }
+    return NULL;
+}
+
+// Loads a model-set file and instantiates every model in it with its animation slots,
+// then sets up the default camera and selects the first model.
+void FUN_00341340(ModelSet* set, void* path)
+{
+    u8* file = asdLoadFileSyncDefault(path);
+    set->file = file;
+    u8* models = static_cast<u8*>(resolveRelative(file + 0x48));
+    u8* entry = models != NULL ? models + 0x1c : NULL;
+    u8* end = entry + *reinterpret_cast<s32*>(file + 0x44) * 0x10;
+    for (; entry != end; entry += 0x10) {
+        SceneBuildDesc desc;
+        desc.resource = resolveRelative(entry + 0xc);
+        desc.enabled = 1;
+        desc.unk08 = 8;
+        desc.unk0c = 4;
+        desc.unk10 = 0;
+        desc.unk14 = 0;
+        desc.unk18 = 0;
+        desc.unk1c = 4;
+        desc.unk20 = 0;
+        desc.unk24 = 1;
+        SceneObject* object = nw_gfx_SceneBuilder_CreateObject(&desc, asdMemoryGetDefaultAllocator(), asdMemoryGetAllocatorA());
+        object = castTo(object, &DAT_0044e858);
+        object = castTo(object, &DAT_0044e820);
+        reinterpret_cast<SceneObject**>(reinterpret_cast<u8*>(set) + 0x56c)[set->index] = object;
+
+        u8* modelBytes = reinterpret_cast<u8*>(object);
+        u8* binding = *reinterpret_cast<u8**>(modelBytes + 0x268);
+        s32 animCount = *reinterpret_cast<s32*>(file + 0x7c);
+        if (binding != NULL) {
+            f32 startTime = *reinterpret_cast<f32*>(*reinterpret_cast<u8**>(binding + 8) + 0x10);
+            for (s32 i = 0; i < animCount; i++) {
+                u8* animTable = static_cast<u8*>(resolveRelative(file + 0x80));
+                void* animResource = NULL;
+                if (animTable != NULL) animResource = resolveRelative(animTable + i * 0x10 + 0x28);
+                AnimDesc desc2;
+                desc2.resource = animResource;
+                desc2.startTime = startTime;
+                desc2.flags = 0x40;
+                desc2.enabled = 1;
+                Allocator* allocator = asdMemoryGetDefaultAllocator();
+                void* memory = allocator->vtbl->allocate(allocator, 0x74, 4);
+                void* animator = NULL;
+                if (memory != NULL) {
+                    _ZN9Obj42111cC1Ej(memory, allocator);
+                    FUN_002a5960(memory, &desc2, startTime, 0x40, 1);
+                    animator = memory;
+                }
+                reinterpret_cast<void**>(set)[set->index * 0x20 + i + 0x17b] = animator;
+                (*reinterpret_cast<void (**)(void*, void*)>(*reinterpret_cast<u8**>(animator) + 0xc))(animator, binding);
+                u8* slot = reinterpret_cast<u8*>(reinterpret_cast<void**>(set)[set->index * 0x20 + i + 0x17b]);
+                u32 source = *reinterpret_cast<u32*>(slot + 0x44);
+                (*reinterpret_cast<void (**)(u32)>(slot + 0x4c))(*reinterpret_cast<u32*>(slot + 0x50));
+                u32 previous = *reinterpret_cast<u32*>(slot + 0x38);
+                *reinterpret_cast<u32*>(slot + 0x38) = source;
+                *reinterpret_cast<u32*>(slot + 0x3c) = previous;
+                *(slot + 0x58) = 1;
+                set->animCount++;
             }
-            else {
-              temp_v4 = 0;
-            }
-            temp_v10 = 0;
-            if (temp_v4 != 0) {
-              piVar8 = (int *)(temp_v4 + temp_v5 * 0x10 + 0x28);
-              temp_v10 = *piVar8;
-              if (temp_v10 == 0) {
-                temp_v10 = 0;
-              }
-              else {
-                temp_v10 = (int)piVar8 + temp_v10;
-              }
-            }
-            temp_v12 = 0x40;
-            temp_v13 = romwright_piece_3_1((((unsigned int)(temp_v13) >> 8) & 0xffffffU),1);
-            temp_v11 = temp_v2;
-            piVar5 = (int *)asdMemoryGetDefaultAllocator();
-            piVar7 = (int *)(**(romwright_code **)(*piVar5 + 8))(piVar5,0x74,4);
-            piVar8 = (int *)0x0;
-            if (piVar7 != (int *)0x0) {
-              FUN_002a5dc4(piVar7,piVar5);
-              FUN_002a5960(piVar7,&temp_v10,temp_v11,temp_v12,(int)(char)temp_v13);
-              piVar8 = piVar7;
-            }
-            param_1[*param_1 * 0x20 + temp_v5 + 0x17b] = (int)piVar8;
-            (**(romwright_code **)(*piVar8 + 0xc))(piVar8,temp_v1);
-            temp_v4 = param_1[*param_1 * 0x20 + temp_v5 + 0x17b];
-            temp_v3 = *(unsigned int *)(temp_v4 + 0x44);
-            (**(romwright_code **)(temp_v4 + 0x4c))(*(unsigned int *)(temp_v4 + 0x50));
-            temp_v7 = *(unsigned int *)(temp_v4 + 0x38);
-            temp_v5 = temp_v5 + 1;
-            *(unsigned int *)(temp_v4 + 0x38) = temp_v3;
-            *(unsigned int *)(temp_v4 + 0x3c) = temp_v7;
-            *(unsigned char *)(temp_v4 + 0x58) = 1;
-            param_1[2] = param_1[2] + 1;
-          } while (temp_v5 < temp_v6);
         }
-      }
-      *param_1 = *param_1 + 1;
-      temp_v9 = temp_v9 + 0x10;
-    } while (temp_v9 != temp_v19);
-  }
-  FUN_002c2044(param_1 + 0xb,1);
-  param_1[0x14d] = temp_v8;
-  param_1[0x14e] = temp_v8;
-  param_1[0x14f] = temp_v8;
-  param_1[0x150] = temp_v8;
-  param_1[0x151] = temp_v8;
-  param_1[0x152] = 0x40a00000;
-  param_1[0x153] = temp_v8;
-  param_1[0x154] = 0x41f00000;
-  param_1[0x155] = 0x3f800000;
-  param_1[0x156] = 0x461c4000;
-  param_1[0x157] = temp_v8;
-  param_1[0x158] = 0x3f800000;
-  param_1[0x159] = temp_v8;
-  param_1[0x15a] = 0x40a00000;
-  FUN_002c159c(param_1 + 0xb);
-  FUN_002c1edc(param_1 + 0xb,param_1 + 0x14d,param_1 + 0x150,param_1 + 0x157);
-  FUN_002c1e30(param_1 + 0xb,1);
-  FUN_00298d50(param_1 + 0xb);
-  modelSelectionActivate(param_1,0,0xffffffff);
-  return;
+        set->index++;
+    }
+
+    FUN_002c2044(set->camera, 1);
+    set->position[0] = 0.0f;
+    set->position[1] = 0.0f;
+    set->position[2] = 0.0f;
+    set->target[0] = 0.0f;
+    set->target[1] = 0.0f;
+    set->target[2] = 5.0f;
+    set->reserved = 0.0f;
+    set->nearClip = 30.0f;
+    set->aspect = 1.0f;
+    set->farClip = 10000.0f;
+    set->up[0] = 0.0f;
+    set->up[1] = 1.0f;
+    set->up[2] = 0.0f;
+    set->distance = 5.0f;
+    FUN_002c159c(set->camera);
+    FUN_002c1edc(set->camera, set->position, set->target, set->up);
+    FUN_002c1e30(set->camera, 1, set->nearClip, set->aspect, set->farClip, 1.6666666f);
+    FUN_00298d50(set->camera);
+    modelSelectionActivate(set, 0, -1);
 }
 
 } /* extern "C" */

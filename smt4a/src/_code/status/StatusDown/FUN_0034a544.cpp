@@ -1,151 +1,133 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034a544` (_code @ 0x34a544, 0x38c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the zeroed-field stores, the sprite setup scheduling and the pooled constants are laid out differently from retail (252 vs 249 rows); the screen setup is the same. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int FUN_0014e188(...);
-int uiSpriteInitializeState(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int positionStateSet(...);
-int taskCreateDraw(...);
-int FUN_001527d8(...);
-int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
-int __aeabi_memset4(...);
-int FUN_00230b9c(...);
-int asdLoadFileAsyncSimple(...);
-int sysMemClear(...);
-int FUN_003e4140(...);
-int fillTwoWordsWithByte(...);
-int paramsClearPacket(...);
+/* The status-down screen's work block (0x259C bytes; only the fields set here). */
+typedef struct StatusDown {
+    /* 0x0000 */ void *process;
+    /* 0x0004 */ void *drawTask;
+    /* 0x0008 */ u8 params[0x20];
+    /* 0x0028 */ u8 sprite0[0x8C];
+    /* 0x00B4 */ u8 sprite1[0x8C];
+    /* 0x0140 */ u8 sprite2[0x8C];
+    /* 0x01CC */ u8 sprite3[0x8C];
+    /* 0x0258 */ u8 sprite4[0x8C];
+    /* 0x02E4 */ u8 sprite5[0x8C];
+    /* 0x0370 */ u8 sprite6[0x8C];
+    /* 0x03FC */ u8 sprite7[0x8C];
+    /* 0x0488 */ u8 sprite8[0xBC];
+    /* 0x0544 */ u8 slots[0x1E74];
+    /* 0x23B8 */ u32 spriteHandle;
+    /* 0x23BC */ u8 unk23bc[0xEE];
+    /* 0x24AA */ u8 ready;
+    /* 0x24AB */ u8 unk24ab;
+    /* 0x24AC */ u32 cleared[16];
+    /* 0x24EC */ u8 unk24ec[4];
+    /* 0x24F0 */ u8 flag24f0;
+    /* 0x24F1 */ u8 unk24f1[3];
+    /* 0x24F4 */ u32 pair[2];
+    /* 0x24FC */ u32 unk24fc;
+    /* 0x2500 */ u8 unk2500[0x64];
+    /* 0x2564 */ u32 one;
+    /* 0x2568 */ u8 unk2568[4];
+    /* 0x256C */ u32 campMessages;
+    /* 0x2570 */ u32 campScript;
+    /* 0x2574 */ u32 unk2574;
+    /* 0x2578 */ u8 unk2578[8];
+    /* 0x2580 */ u8 unk2580[4];
+    /* 0x2584 */ u8 unk2584;
+    /* 0x2585 */ u8 unk2585[3];
+    /* 0x2588 */ u8 state[0x10];
+    /* 0x2598 */ u8 unk2598;
+} StatusDown;
 
-/* stack frame of void: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
+extern StatusDown *g_statusDown;
+extern u8 DAT_0053687c[];
+extern u8 DAT_00536924[];
+extern u8 DAT_005369b4[];
+extern u8 DAT_005369cc[];
 
-extern int FUN_00268770(...); /* 0x268770 */
-extern int FUN_0026b0e4(...); /* 0x26b0e4 */
-extern unsigned char LAB_0034a914; /* 0x34a914 */
-extern unsigned char LAB_0034a924; /* 0x34a924 */
-extern unsigned char LAB_0034a948; /* 0x34a948 */
-extern unsigned char DAT_0053687c; /* 0x53687c */
-extern unsigned char DAT_00536924; /* 0x536924 */
-extern unsigned char DAT_005369b4; /* 0x5369b4 */
-extern unsigned char DAT_005369cc; /* 0x5369cc */
-extern unsigned int *g_statusDown; /* 0x588fe8 */
+void *asdMemoryAllocTracked(u32 size, u32 alignment, u32 a, u32 b, u32 c);
+void sysMemClear(void *block, u32 size);
+void *asdProcessCreateSimple(const char *name, u32 priority, u32 a, u32 b, void (*update)(void *), u32 c, u32 d);
+void *taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);
+void paramsClearPacket(void *packet);
+void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
+                const void *f, u32 fSize);
+void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
+void FUN_00230b9c(s32 a, s32 b);
+void uiSpriteSelectAnim(void *sprite, u32 anim);
+void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 flag);
+void uiSpriteInitializeState(void *sprite, u32 group, s32 id, u32 size, void *owner, u32 anim, f32 scale);
+u32 spriteHandleCreate(u32 kind);
+void FUN_001527d8(u32 handle, s32 value);
+void positionStateSet(u32 handle, u32 a, u32 color, f32 value);
+void __aeabi_memset4(void *destination, u32 size, s32 value);
+void fillTwoWordsWithByte(u32 *words, s32 value);
+void FUN_003e4140(void *state);
+void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
+void FUN_00268770(void *process);
+void FUN_0026b0e4(void *process);
 
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteInitializeState. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00230b9c. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e4140. */
-/* Supplied declaration required: fillTwoWordsWithByte. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
+/* Creates the status-down screen: allocates and clears its work block, starts the update process
+ * and draw task, builds the sprite set and clears its state, then loads the camp message and
+ * script files. */
 void FUN_0034a544(void)
-
 {
-/* irregular: 19 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned int temp_v0;
-  unsigned int *puVar5;
-  
-  if (g_statusDown == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x259c,1);
-    g_statusDown = puVar1;
-  }
-  puVar1 = g_statusDown;
-  sysMemClear();
-  puVar2 = &LAB_0034a914;
-  asdProcessCreateSimple(&LAB_0034a914,4,0,0,FUN_00268770,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  puVar3 = &LAB_0034a924;
-  taskCreateDraw(&LAB_0034a924,0xeb,0,0,FUN_0026b0e4,0,0,puVar2);
-  puVar1[1] = (unsigned int)puVar3;
-  puVar1 = g_statusDown;
-  paramsClearPacket(g_statusDown + 2);
-  paramsInit(puVar1 + 2,&DAT_0053687c,0xa8,&DAT_00536924,0x90,&DAT_005369b4,0x18,0,0,&DAT_005369cc
-               ,0x1a4);
-  FUN_0014e188(puVar1 + 10,0x12,1000,puVar1 + 2,1);
-  FUN_00230b9c(0,0xffffffff);
-  FUN_0014e188(puVar1 + 0x2d,0x12,1000,puVar1 + 2,1);
-  uiSpriteSelectAnim(puVar1 + 0x2d,0);
-  FUN_0014e188(puVar1 + 0x50,0x12,1000,puVar1 + 2,1);
-  uiSpriteSelectAnim(puVar1 + 0x50,1);
-  FUN_0014e188(puVar1 + 0x73,0x12,1000,puVar1 + 2,1);
-  uiSpriteSelectAnim(puVar1 + 0x73,3);
-  FUN_0014e188(puVar1 + 0x96,0x12,1000,puVar1 + 2,1);
-  uiSpriteSelectAnim(puVar1 + 0x96,3);
-  FUN_0014e188(puVar1 + 0xb9,0x12,1000,puVar1 + 2,1);
-  uiSpriteSetKeyframe(puVar1 + 0xb9,1,0);
-  uiSpriteInitializeState(puVar1 + 0xdc,0x12,0xffffffff,0x1c,puVar1 + 2,0xc9);
-  uiSpriteSelectAnim(puVar1 + 0xdc,2);
-  *(unsigned short *)((int)puVar1 + 0x3aa) = 2;
-  FUN_0014e188(puVar1 + 0xff,0x12,0x556,puVar1 + 2,1);
-  FUN_0014e188(puVar1 + 0x122,0x12,0x556,puVar1 + 2,1);
-  temp_v0 = spriteHandleCreate(0);
-  puVar1[0x8ee] = temp_v0;
-  FUN_001527d8(temp_v0,0xffffffff);
-  positionStateSet(puVar1[0x8ee],0,0x91a2a2ff);
-  __aeabi_memset4(puVar1 + 0x151,0x2a,0xffffffff);
-  *(unsigned char *)((int)puVar1 + 0x24aa) = 1;
-  puVar5 = g_statusDown;
-  g_statusDown[0x92b] = 0;
-  puVar5[0x959] = 1;
-  puVar5[0x92c] = 0;
-  puVar5[0x92d] = 0;
-  puVar5[0x92e] = 0;
-  puVar5[0x92f] = 0;
-  puVar5[0x930] = 0;
-  puVar5[0x931] = 0;
-  puVar5[0x932] = 0;
-  puVar5[0x933] = 0;
-  puVar5[0x934] = 0;
-  puVar5[0x935] = 0;
-  puVar5[0x936] = 0;
-  puVar5[0x937] = 0;
-  puVar5[0x938] = 0;
-  puVar5[0x939] = 0;
-  puVar5[0x93a] = 0;
-  fillTwoWordsWithByte(puVar5 + 0x93d,0xffffffff);
-  *(unsigned char *)(puVar5 + 0x93c) = 0;
-  puVar5[0x93f] = 0;
-  puVar5 = g_statusDown + 0x962;
-  *(unsigned char *)(g_statusDown + 0x961) = 0;
-  FUN_003e4140(puVar5);
-  *(unsigned char *)(puVar1 + 0x966) = 0;
-  puVar1 = g_statusDown;
-  puVar5 = g_statusDown + 0x95b;
-  g_statusDown[0x95d] = 0;
-  asdLoadFileAsyncSimple(&LAB_0034a948,puVar5,0);
-  asdLoadFileAsyncSimple(0x34a958,puVar1 + 0x95c,0);
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\status\\StatusDown.cpp", 4860);
+    if (g_statusDown == NULL) {
+        g_statusDown = (StatusDown *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x259C, 1);
+    }
+    StatusDown *down = g_statusDown;
+
+    sysMemClear(down, 0x259C);
+    void *process = asdProcessCreateSimple("TMD CALC", 4, 0, 0, FUN_00268770, 0, 0);
+
+    down->process = process;
+    down->drawTask = taskCreateDraw("TMD DDRAW", 0xEB, 0, 0, FUN_0026b0e4, 0, 0, process);
+    down = g_statusDown;
+    paramsClearPacket(down->params);
+    paramsInit(down->params, DAT_0053687c, 0xA8, DAT_00536924, 0x90, DAT_005369b4, 0x18, 0, 0, DAT_005369cc, 0x1A4);
+    FUN_0014e188(down->sprite0, 0x12, 1000, down->params, 1, 1.0f);
+    FUN_00230b9c(0, -1);
+    FUN_0014e188(down->sprite1, 0x12, 1000, down->params, 1, 1.0f);
+    uiSpriteSelectAnim(down->sprite1, 0);
+    FUN_0014e188(down->sprite2, 0x12, 1000, down->params, 1, 1.0f);
+    uiSpriteSelectAnim(down->sprite2, 1);
+    FUN_0014e188(down->sprite3, 0x12, 1000, down->params, 1, 1.0f);
+    uiSpriteSelectAnim(down->sprite3, 3);
+    FUN_0014e188(down->sprite4, 0x12, 1000, down->params, 1, 1.0f);
+    uiSpriteSelectAnim(down->sprite4, 3);
+    FUN_0014e188(down->sprite5, 0x12, 1000, down->params, 1, 1.0f);
+    uiSpriteSetKeyframe(down->sprite5, 1, 0);
+    uiSpriteInitializeState(down->sprite6, 0x12, -1, 0x1C, down->params, 0xC9, 1.0f);
+    uiSpriteSelectAnim(down->sprite6, 2);
+    *(u16 *)(down->sprite6 + 0x3A) = 2;
+    FUN_0014e188(down->sprite7, 0x12, 0x556, down->params, 1, 1.0f);
+    FUN_0014e188(down->sprite8, 0x12, 0x556, down->params, 1, 1.0f);
+    down->spriteHandle = spriteHandleCreate(0);
+    FUN_001527d8(down->spriteHandle, -1);
+    positionStateSet(down->spriteHandle, 0, 0x91A2A2FF, 0.0f);
+    __aeabi_memset4(down->slots, 0x2A, -1);
+    down->ready = 1;
+    down = g_statusDown;
+    for (s32 i = 0; i < 16; i++) {
+        down->cleared[i] = 0;
+    }
+    down->one = 1;
+    fillTwoWordsWithByte(down->pair, -1);
+    down->flag24f0 = 0;
+    down->unk24fc = 0;
+    down = g_statusDown;
+    down->unk2584 = 0;
+    FUN_003e4140(down->state);
+    down->unk2598 = 0;
+    down = g_statusDown;
+    down->unk2574 = 0;
+    asdLoadFileAsyncSimple("camp/camp.mbm", &down->campMessages, 0);
+    asdLoadFileAsyncSimple("camp/camp.bf", &down->campScript, 0);
 }
 
-} /* extern "C" */
+}

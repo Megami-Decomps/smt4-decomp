@@ -102,7 +102,7 @@ int FUN_00215bbc(void);
 int configDestroy(void);
 int playLogDestroy(void);
 int FUN_00284ee4(...);
-int FUN_0028b088(...);
+int campShowSelectedEntryHelp(...);
 int menuItemPlaySe(...);
 int FUN_0031f718(...);
 int statusDisplayBindUnitRecord(...);
@@ -218,7 +218,7 @@ extern int gameDataBlocksGetTable(void);
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: uniteResetPreview. */
-/* Supplied declaration required: FUN_0028b088. */
+/* Supplied declaration required: campShowSelectedEntryHelp. */
 /* Supplied declaration required: processQueryChain. */
 extern int FUN_002a21e8(void);
 extern int FUN_002a2814(void);
@@ -707,14 +707,14 @@ unsigned int FUN_003d56dc(void)
       if (temp_v4 >= 1) {
         temp_v5 = 0x34;
         sysPlaySe(temp_v5);
-        FUN_0028b088(temp_v6);
+        campShowSelectedEntryHelp(temp_v6);
         temp_v4 = puVar2[9];
         campChangeState(temp_v4);
         break;
       }
       temp_v5 = 7;
       sysPlaySe(temp_v5);
-      FUN_0028b088(temp_v6);
+      campShowSelectedEntryHelp(temp_v6);
       temp_v4 = puVar2[9];
       campChangeState(temp_v4);
       break;
@@ -733,13 +733,13 @@ unsigned int FUN_003d56dc(void)
         else {
           if (temp_v4 != 0x2f) {
             if (temp_v4 == 0x30) {
-              FUN_0028b088(temp_v6);
+              campShowSelectedEntryHelp(temp_v6);
               temp_v4 = puVar2[9];
               campChangeState(temp_v4);
               break;
             }
             FUN_002add8c();
-            FUN_0028b088(temp_v6);
+            campShowSelectedEntryHelp(temp_v6);
             temp_v4 = puVar2[9];
             campChangeState(temp_v4);
             break;
@@ -762,7 +762,7 @@ unsigned int FUN_003d56dc(void)
     else {
       menuItemPlaySe(temp_v6);
     }
-    FUN_0028b088(temp_v6);
+    campShowSelectedEntryHelp(temp_v6);
     temp_v4 = puVar2[9];
     campChangeState(temp_v4);
     break;
@@ -1494,7 +1494,7 @@ LAB_003d6870:
         FUN_0020d700();
         *(unsigned char *)(puVar2 + 0xcaa) = 0;
       }
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       puVar2[9] = 6;
       campChangeState(5);
       FUN_0037c8e4(1,0);
@@ -1542,7 +1542,7 @@ LAB_003d6870:
         campChangeState(0x33);
       }
       else {
-        FUN_0028b088(0);
+        campShowSelectedEntryHelp(0);
         puVar2[9] = 6;
         campChangeState(5);
         FUN_0037c8e4(1,0);
@@ -1581,7 +1581,7 @@ LAB_003d6870:
       useCounterRelease();
       temp_v6 = FUN_002a4878(puVar12 + 0x10);
       FUN_003da8f4((int)*(char *)(puVar12 + 0x29),temp_v6);
-      FUN_0028b088();
+      campShowSelectedEntryHelp();
       sysPlaySe(*(unsigned short *)((int)puVar12 + 0x3a));
       if (puVar12[10] == 0x11) {
         FUN_0023b45c(0);
@@ -1615,7 +1615,7 @@ LAB_003d6870:
     temp_v4 = configIsClosed();
 joined_r0x003d7c38:
     if (temp_v4 != 0) {
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       FUN_0021b274(0,0xffffffff);
       puVar2[9] = 6;
       temp_v4 = 5;
@@ -2004,7 +2004,7 @@ LAB_003d801c:
     temp_v4 = recordValueIsZero();
     if (temp_v4 != 0) {
       FUN_003492dc();
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       FUN_0021b274(3,0xffffffff,0);
       puVar2[9] = 6;
       temp_v4 = 5;
@@ -2110,7 +2110,7 @@ LAB_003d801c:
       *(unsigned char *)((int)puVar12 + 0x32b3) = temp_v2;
       campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       puVar2[9] = 6;
       temp_v4 = 5;
       campChangeState(temp_v4);
@@ -2127,7 +2127,7 @@ LAB_003d801c:
       *(unsigned char *)((int)puVar12 + 0x32b3) = temp_v2;
       campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       puVar2[9] = 6;
       temp_v4 = 5;
       campChangeState(temp_v4);
@@ -2139,7 +2139,7 @@ LAB_003d801c:
       FUN_0031d088();
       campResetScreen();
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       puVar2[9] = 6;
       temp_v4 = 5;
       campChangeState(temp_v4);
@@ -2159,7 +2159,7 @@ LAB_003d801c:
       freeTexTable24();
       dataTableFree(0x3a);
       uiSpriteSetKeyframe(puVar2 + 0x1b9,3,0);
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       puVar2[9] = 6;
       temp_v4 = 5;
       campChangeState(temp_v4);

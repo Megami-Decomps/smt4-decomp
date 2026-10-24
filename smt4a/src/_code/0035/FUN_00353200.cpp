@@ -1,173 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00353200` (_code @ 0x353200, 0x254 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail has separate wide-area and normal-area branches that each hold their own step/distance constants in saved VFP registers and copies vectors with ldm/stm pairs; ours selects the step first (151 rows against 157). */
+#include "common.h"
+
+struct Vector3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+struct MapEnemyState {
+    /* 0x0000 */ u8 unk0000[0x3D84];
+    /* 0x3D84 */ s32 attempts;       /* spawn attempts made so far; later ones are tried further out and wider */
+};
+
+struct LmapViewState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ f32 heading;
+};
+
+struct LmapSceneState {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ Vector3 position;
+};
+
+/* The enemy being placed (observed fields). */
+struct EnemyPlacement {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Vector3 position;
+    /* 0x2C */ f32 heading;
+};
+
+struct GameStateWide {
+    /* 0x00 */ u8 unk00[0x82];
+    /* 0x82 */ s16 wideArea;
+};
 
 extern "C" {
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int FUN_0025ef68(float *, float *, int);
-int mathPositionHeadingDegrees(void);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+extern MapEnemyState *g_mapEnemy;
+extern LmapViewState *g_lmapView;
+extern LmapSceneState *g_lmapScene;
+extern GameStateWide DAT_005f17fc;
 
-/* stack frame of param_1: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_1_stack;
+u32 randRange(u32 limit);
+f32 FUN_001bc124(f32 radians);
+f32 FUN_001bbf0c(f32 radians);
+s32 FUN_0036d984(Vector3 *start, Vector3 *end, s32 flags);
+s32 FUN_0025ef68(Vector3 *position, Vector3 *ground, s32 flags);
+f32 mathPositionHeadingDegrees(Vector3 from, Vector3 to);
 
-extern int g_lmapView; /* 0x5806a4 */
-extern int g_mapEnemy; /* 0x5806d4 */
-extern int g_lmapScene; /* 0x581288 */
-extern short DAT_005f187e; /* 0x5f187e */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int randRange(unsigned int);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_0025ef68. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-extern int FUN_0036d984(unsigned int *, float *, unsigned int);
-
-
-unsigned int FUN_00353200(int param_1)
-
+/* Tries up to four spots around the player (alternating left/right of the view heading, further out and
+ * with a tighter spread after twelve attempts) and places the enemy on the first one the probe reaches
+ * and that has ground. */
+u32 FUN_00353200(EnemyPlacement *enemy)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  float *pfVar4;
-  unsigned int *puVar5;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  unsigned long long temp_v7;
-  unsigned long long temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  int temp_v16;
-  float temp_v17;
-  unsigned int temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float fStack_64;
-  float temp_v21;
-  float fStack_58;
-  float fStack_54;
-  
-  temp_v3 = 0;
-  temp_v10 = 250.0f;
-  temp_v11 = 560.0f;
-  temp_v12 = 500.0f;
-  temp_v9 = 900.0f;
-  temp_v7 = 0x3c8efa35420c0000;
-  temp_v8 = 0x40a0000041c80000;
-  puVar5 = (unsigned int *)(g_mapEnemy + 0x3d84);
-  do {
-    temp_v15 = *(float *)(g_lmapScene + 0x24);
-    temp_v13 = *(float *)(g_lmapScene + 0x1c);
-    temp_v14 = *(float *)(g_lmapScene + 0x20);
-    temp_v6 = *(float *)(g_lmapView + 0x18);
-    temp_v0 = *puVar5;
-    if (DAT_005f187e != 0) {
-      if (0 < (int)temp_v0) {
-        temp_v4 = (float)VectorSignedToFloat((int)(temp_v0 + 1) / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        if ((temp_v0 & 1) != 0) {
-          temp_v6 = temp_v6 - temp_v4 * (float)temp_v8;
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        Vector3 origin = g_lmapScene->position;
+        Vector3 end;
+        Vector3 ground;
+        Vector3 start;
+        f32 angle = g_lmapView->heading;
+        s32 attempt = g_mapEnemy->attempts;
+        f32 distance;
+        f32 step;
+        f32 radians;
+
+        if (DAT_005f17fc.wideArea != 0) {
+            step = 25.0f;
+        } else {
+            step = 35.0f;
         }
-        else {
-          temp_v6 = temp_v6 + temp_v4 * (float)temp_v8;
+        if (attempt > 0) {
+            f32 offset = (f32)((attempt + 1) / 2);
+
+            if ((attempt & 1) != 0) {
+                angle = angle - offset * step;
+            } else {
+                angle = angle + offset * step;
+            }
         }
-        if ((int)temp_v0 >= 0xd) {
-          temp_v1 = randRange(0x32);
-          temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = temp_v4 + temp_v12;
+        if (DAT_005f17fc.wideArea != 0) {
+            if (attempt > 12) {
+                distance = (f32)randRange(50) + 500.0f;
+            } else {
+                distance = (f32)randRange(50) + 900.0f;
+            }
+        } else if (attempt > 12) {
+            distance = (f32)randRange(50) + 250.0f;
+        } else {
+            distance = (f32)randRange(50) + 560.0f;
         }
-        else {
-          temp_v1 = randRange(0x32);
-          temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = temp_v4 + temp_v9;
+        radians = angle * 0.017453292f;
+        origin.x = origin.x + FUN_001bc124(radians) * distance;
+        origin.z = origin.z + FUN_001bbf0c(radians) * distance;
+        g_mapEnemy->attempts++;
+        end = origin;
+        ground = origin;
+        start = g_lmapScene->position;
+        end.y = end.y + 35.0f;
+        start.y = start.y + 35.0f;
+        if (FUN_0036d984(&start, &end, 0) == -1) {
+            origin.y = origin.y - 5.0f;
+            if (FUN_0025ef68(&origin, &ground, 0) != 0) {
+                enemy->position = ground;
+                enemy->heading = mathPositionHeadingDegrees(end, start);
+                return 1;
+            }
         }
-      }
-      else {
-        temp_v1 = randRange(0x32);
-        temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v4 = temp_v4 + temp_v9;
-      }
     }
-    else {
-      if (0 < (int)temp_v0) {
-        temp_v4 = (float)VectorSignedToFloat((int)(temp_v0 + 1) / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        if ((temp_v0 & 1) != 0) {
-          temp_v6 = temp_v6 - temp_v4 * (float)temp_v7;
-        }
-        else {
-          temp_v6 = temp_v6 + temp_v4 * (float)temp_v7;
-        }
-      }
-      if ((int)temp_v0 >= 0xd) {
-        temp_v1 = randRange(0x32);
-        temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v4 = temp_v4 + temp_v10;
-      }
-      else {
-        temp_v1 = randRange(0x32);
-        temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v4 = temp_v4 + temp_v11;
-      }
-    }
-    temp_v6 = temp_v6 * (float)((unsigned long long)temp_v7 >> 0x20);
-    temp_v5 = temp_v6;
-    FUN_001bc124();
-    temp_v13 = temp_v13 + temp_v6 * temp_v4;
-    FUN_001bbf0c();
-    temp_v15 = temp_v15 + temp_v5 * temp_v4;
-    *puVar5 = *puVar5 + 1;
-    temp_v19 = temp_v13;
-    temp_v21 = temp_v13;
-    fStack_58 = temp_v14;
-    temp_v18 = *(unsigned int *)(g_lmapScene + 0x24);
-    temp_v16 = *(unsigned int *)(g_lmapScene + 0x1c);
-    temp_v20 = temp_v14 + (float)temp_v7;
-    temp_v17 = *(float *)(g_lmapScene + 0x20) + (float)temp_v7;
-    fStack_64 = temp_v15;
-    fStack_54 = temp_v15;
-    temp_v2 = FUN_0036d984((unsigned int *)&temp_v16,&temp_v19,0);
-    if (temp_v2 == -1) {
-      temp_v14 = temp_v14 - (float)((unsigned long long)temp_v8 >> 0x20);
-      pfVar4 = &temp_v13;
-      FUN_0025ef68(&temp_v13,&temp_v21,0);
-      if (pfVar4 != (float *)0x0) {
-        *(float *)(param_1 + 0x20) = temp_v21;
-        *(float *)(param_1 + 0x24) = fStack_58;
-        *(float *)(param_1 + 0x28) = fStack_54;
-        mathPositionHeadingDegrees();
-        *(float *)(param_1 + 0x2c) = temp_v19;
-        return 1;
-      }
-    }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 4) {
-      return 0;
-    }
-  } while( 1 );
+    return 0;
 }
 
 } /* extern "C" */

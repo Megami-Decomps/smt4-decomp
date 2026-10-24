@@ -1,185 +1,147 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00270498` (_code @ 0x270498, 0x33c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (206 rows against 208): same flow, calls and bit extraction (resultPacked is read as one 64-bit word); retail keeps the two parent records in a stack pair with sl/r8 register choices where ours uses fp, takes the mode 0x12 call out of line after the common tail, and tests the FUN_004dc3a8 result with an extra cmp */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef short s16;
+typedef signed char s8;
+typedef unsigned int u32;
+typedef unsigned long long u64;
+typedef int s32;
 
 extern "C" {
 
-int gameGetSlotTable(void);
-int arrayContainsU16(int, int);
-int unitRecordBuild(unsigned int);
-int FUN_0034c340(short [16], int, int, int);
-int findSkillMetadataById(void);
-int FUN_004bcd90(int);
-int FUN_004da6e0(unsigned int, int, int, int, int);
-int wordAt1B0Clear(unsigned int);
+#define FUSION_PARENTS 2
+#define UNIT_SKILL_SLOTS 8
 
-/* stack frame of void: 11 slot(s), 44 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} void_stack;
+/* Demon fusion panel (observed fields only). */
+struct FusionPanel {
+    u8 pad0000[0x9B4];
+    u8 mode;                         /* 0x9B4: 10 skill-inherit fusion, 0x12 special fusion */
+    u8 pad9B5[0xE7C - 0x9B5];
+    u32 parentSlot[FUSION_PARENTS];  /* 0xE7C */
+    u8 padE84[0xE90 - 0xE84];
+    u64 resultPacked;                /* 0xE90: bits 0-14 first parent id, 15-29 second parent id, 34-48 result unit id */
+    u8 resultRecord[0xECC - 0xE98];  /* 0xE98 */
+    u16 resultSkills[UNIT_SKILL_SLOTS]; /* 0xECC */
+    u8 padEDC[0x107C - 0xEDC];
+    u32 fusionContext;               /* 0x107C */
+};
 
-extern int g_partyPanel; /* 0x57f268 */
+struct SlotRecord {
+    u8 pad00[0x34];
+    u16 skill[UNIT_SKILL_SLOTS];     /* 0x34 */
+    u8 pad44[0x62 - 0x44];
+    u16 id;                          /* 0x62 */
+};
 
-extern int slotRecordFindById(unsigned int);
-extern int gameGetSlotRecord(int);
-/* Supplied declaration required: gameGetSlotTable. */
-extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: arrayContainsU16. */
-/* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_0034c340. */
-/* Supplied declaration required: findSkillMetadataById. */
-/* Supplied declaration required: FUN_004bcd90. */
-extern int getUnlockedSlotCount(int);
-/* Supplied declaration required: FUN_004da6e0. */
-extern int FUN_004db650(unsigned int, int, int, int);
-/* Supplied declaration required: wordAt1B0Clear. */
-extern int FUN_004dc3a8(void);
+struct SkillMetadata {
+    u8 pad00[3];
+    u8 flags;                        /* 0x03: 0x20 = can be passed on */
+};
 
+struct SlotTable {
+    u8 pad0000[0x1C88];
+    s8 slot[1];                      /* 0x1C88 */
+};
 
-unsigned int FUN_00270498(void)
+extern FusionPanel *g_partyPanel;    /* 0x57f268 */
 
+SlotRecord *slotRecordFindById(u32 id);
+SlotTable *gameGetSlotTable(void);
+SlotRecord *gameGetSlotRecord(s32 slot);
+s32 gameSlotTableFindFree(void);
+s32 arrayContainsU16(u16 *array, s32 count, u16 value);
+SlotRecord *unitRecordBuild(u32 info);
+s32 FUN_0034c340(s16 skills[16], s32 count, u64 *packed, s32 flag);
+SkillMetadata *findSkillMetadataById(u32 id);
+s32 FUN_004bcd90(void *record);
+s32 FUN_004da6e0(u32 context, SlotRecord *a, SlotRecord *b, s32 flag, void *record);
+s32 wordAt1B0Clear(u32 context);
+s32 FUN_004db650(u32 context, SlotRecord *a, SlotRecord *b, u64 *packed);
+s32 FUN_004dc3a8(void);
+s32 getUnlockedSlotCount(void *record);
+
+/* Finds the party record whose id is `id` (first match over the free-slot count), else NULL. */
+static SlotRecord *partySlotRecordById(u32 id)
 {
-/* irregular: 2 goto(s); 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  short *psVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7 [2];
-  short temp_v8 [16];
-  
-  temp_v0 = g_partyPanel;
-  gameGetSlotTable();
-  temp_v3 = 0;
-  temp_v7[0] = 0;
-  temp_v7[1] = 0;
-  do {
-    temp_v1 = slotRecordFindById(*(unsigned int *)(temp_v0 + temp_v3 * 4 + 0xe7c) & 0xffff);
-    temp_v7[temp_v3] = temp_v1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 2);
-  temp_v3 = 0;
-  if (temp_v7[0] != 0) {
-    temp_v3 = temp_v7[1];
-  }
-  if (temp_v7[0] != 0 && temp_v3 != 0) {
-    wordAt1B0Clear(*(unsigned int *)(temp_v0 + 0x107c));
-    if (*(char *)(temp_v0 + 0x9b4) != '\x12') {
-      temp_v3 = FUN_004dc3a8();
-    }
-    else {
-      temp_v3 = FUN_004db650(*(unsigned int *)(temp_v0 + 0x107c),temp_v7[0],temp_v7[1],temp_v0 + 0xe90);
-    }
-    if (temp_v3 != 0) {
-      temp_v1 = temp_v0 + 0xe98;
-      unitRecordBuild((*(unsigned int *)(temp_v0 + 0xe94) & 0x1ffff) >> 2);
-      FUN_004da6e0(*(unsigned int *)(temp_v0 + 0x107c),temp_v7[0],temp_v7[1],0,temp_v1);
-      temp_v8[0] = 0;
-      temp_v8[1] = 0;
-      temp_v8[2] = 0;
-      temp_v8[3] = 0;
-      temp_v8[4] = 0;
-      temp_v8[5] = 0;
-      temp_v8[6] = 0;
-      temp_v8[7] = 0;
-      temp_v8[8] = 0;
-      temp_v8[9] = 0;
-      temp_v8[10] = 0;
-      temp_v8[0xb] = 0;
-      temp_v8[0xc] = 0;
-      temp_v8[0xd] = 0;
-      temp_v8[0xe] = 0;
-      temp_v8[0xf] = 0;
-      temp_v2 = *(unsigned int *)(temp_v0 + 0xe90);
-      temp_v5 = 0;
-      temp_v4 = 0;
-      temp_v3 = gameSlotTableFindFree();
-      if (0 < temp_v3) {
+    s32 i = 0;
+    if (0 < gameSlotTableFindFree()) {
         do {
-          temp_v3 = gameGetSlotTable();
-          temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
-          if ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == (temp_v2 & 0x7fff)) goto LAB_002705ec;
-          temp_v4 = temp_v4 + 1;
-          temp_v3 = gameSlotTableFindFree();
-        } while (temp_v4 < temp_v3);
-      }
-      temp_v3 = 0;
-LAB_002705ec:
-      temp_v4 = 0;
-      do {
-        temp_v6 = temp_v3 + temp_v4 * 2;
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x34);
-        if ((temp_v2 != 0) && ((findSkillMetadataById(), temp_v2 == 0 || ((*(unsigned char *)(temp_v2 + 3) & 0x20) != 0))))
-        {
-          psVar4 = temp_v8 + temp_v5;
-          temp_v5 = temp_v5 + 1;
-          *psVar4 = *(short *)(temp_v6 + 0x34);
+            SlotRecord *record = gameGetSlotRecord(gameGetSlotTable()->slot[i]);
+            if (record->id == id) {
+                return record;
+            }
+            i++;
+        } while (i < gameSlotTableFindFree());
+    }
+    return 0;
+}
+
+/* Appends the passable skills of `record` to `skills`; returns the new count. */
+static s32 addPassableSkills(s16 *skills, s32 count, SlotRecord *record)
+{
+    for (s32 i = 0; i < UNIT_SKILL_SLOTS; i++) {
+        u32 skill = record->skill[i];
+        if (skill != 0) {
+            SkillMetadata *meta = findSkillMetadataById(skill);
+            if (meta == 0 || (meta->flags & 0x20) != 0) {
+                skills[count++] = record->skill[i];
+            }
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 8);
-      temp_v2 = *(unsigned int *)(temp_v0 + 0xe90);
-      temp_v4 = 0;
-      temp_v3 = gameSlotTableFindFree();
-      if (0 < temp_v3) {
-        do {
-          temp_v3 = gameGetSlotTable();
-          temp_v3 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c88));
-          if ((unsigned int)*(unsigned short *)(temp_v3 + 0x62) == (temp_v2 & 0x3fffffff) >> 0xf) goto LAB_0027069c;
-          temp_v4 = temp_v4 + 1;
-          temp_v3 = gameSlotTableFindFree();
-        } while (temp_v4 < temp_v3);
-      }
-      temp_v3 = 0;
-LAB_0027069c:
-      temp_v4 = 0;
-      do {
-        temp_v6 = temp_v3 + temp_v4 * 2;
-        temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x34);
-        if ((temp_v2 != 0) && ((findSkillMetadataById(), temp_v2 == 0 || ((*(unsigned char *)(temp_v2 + 3) & 0x20) != 0))))
-        {
-          psVar4 = temp_v8 + temp_v5;
-          temp_v5 = temp_v5 + 1;
-          *psVar4 = *(short *)(temp_v6 + 0x34);
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 8);
-      if (*(char *)(temp_v0 + 0x9b4) == '\n') {
-        FUN_0034c340(temp_v8,temp_v5,temp_v0 + 0xe90,0);
-        temp_v3 = getUnlockedSlotCount(temp_v1);
-        temp_v4 = 0;
-        do {
-          if (((temp_v8[temp_v4] != 0) &&
-              (temp_v5 = temp_v0 + 0xecc, arrayContainsU16(temp_v0 + 0xecc,temp_v3), temp_v5 == 0)) &&
-             (temp_v5 = 0, 0 < temp_v3)) {
-            do {
-              if (*(short *)(temp_v0 + temp_v5 * 2 + 0xecc) == 0) {
-                *(short *)(temp_v0 + temp_v5 * 2 + 0xecc) = temp_v8[temp_v4];
-                break;
-              }
-              temp_v5 = temp_v5 + 1;
-            } while (temp_v5 < temp_v3);
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < 8);
-      }
-      FUN_004bcd90(temp_v1);
-      return 1;
     }
-  }
-  return 0;
+    return count;
+}
+
+/* Builds the fusion result of the two chosen parents; returns 1 when a result was produced. */
+u32 FUN_00270498(void)
+{
+    FusionPanel *panel = g_partyPanel;
+    SlotRecord *parent[FUSION_PARENTS];
+
+    gameGetSlotTable();
+    parent[0] = 0;
+    parent[1] = 0;
+    for (s32 i = 0; i < FUSION_PARENTS; i++) {
+        parent[i] = slotRecordFindById(panel->parentSlot[i] & 0xFFFF);
+    }
+
+    if (parent[0] != 0 && parent[1] != 0) {
+        s32 result;
+        wordAt1B0Clear(panel->fusionContext);
+        if (panel->mode != 0x12) {
+            result = FUN_004dc3a8();
+        } else {
+            result = FUN_004db650(panel->fusionContext, parent[0], parent[1], &panel->resultPacked);
+        }
+        if (result != 0) {
+            void *record = panel->resultRecord;
+            unitRecordBuild(((u32)(panel->resultPacked >> 17)) >> 17);
+            FUN_004da6e0(panel->fusionContext, parent[0], parent[1], 0, record);
+
+            s16 skills[16] = { 0 };
+            s32 count = 0;
+            u64 packed = panel->resultPacked;
+            count = addPassableSkills(skills, count, partySlotRecordById((u32)packed & 0x7FFF));
+            packed = panel->resultPacked;
+            count = addPassableSkills(skills, count, partySlotRecordById(((u32)packed & 0x3FFFFFFF) >> 15));
+            if (panel->mode == 10) {
+                FUN_0034c340(skills, count, &panel->resultPacked, 0);
+                s32 slots = getUnlockedSlotCount(record);
+                for (s32 i = 0; i < UNIT_SKILL_SLOTS; i++) {
+                    if (skills[i] != 0 && arrayContainsU16(panel->resultSkills, slots, skills[i]) == 0) {
+                        for (s32 j = 0; j < slots; j++) {
+                            if (panel->resultSkills[j] == 0) {
+                                panel->resultSkills[j] = skills[i];
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            FUN_004bcd90(record);
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

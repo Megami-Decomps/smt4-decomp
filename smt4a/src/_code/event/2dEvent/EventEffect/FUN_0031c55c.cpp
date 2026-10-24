@@ -1,4 +1,3 @@
-/* NON_MATCHING: the first two renderStackPush expansions schedule their next-entry address differently (ip instead of r3). */
 #include "camp/RenderCtx.h"
 
 struct BlinkFadeDrawState {

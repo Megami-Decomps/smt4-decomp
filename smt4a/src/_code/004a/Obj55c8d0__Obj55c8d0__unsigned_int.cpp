@@ -1,4 +1,3 @@
-/* NON_MATCHING: the constructor argument and returned this occupy r5/r4 instead of retail's r4/r5. */
 #include "classes/Obj55c8d0.h"
 
 /* Opens the flagged view with a pending preselected value. */

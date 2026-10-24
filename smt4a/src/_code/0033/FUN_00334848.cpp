@@ -1,4 +1,3 @@
-/* NON_MATCHING: the inlined renderStackPush is scheduled differently (retail loads the depth first and computes the next entry address before storing); the rest of the function matches */
 #include "camp/RenderCtx.h"
 
 struct FloatPair {

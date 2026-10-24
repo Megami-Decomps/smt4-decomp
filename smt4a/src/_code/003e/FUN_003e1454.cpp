@@ -1,132 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e1454` (_code @ 0x3e1454, 0x268 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: battle start request (formation file check, unit flag fix-up, state flags); draft shape, scheduling/registers not compared with retail */
+#include "common.h"
+
+#define BTL_UNIT_FIRST_ENEMY 4
+#define BTL_UNIT_COUNT 0x36
+#define BTL_UNIT_STRIDE 0x1D0
+
+struct BtlUnit {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[4];
+    /* 0x58 */ u32 state;
+    /* 0x5C */ u8 unk5C[4];
+    /* 0x60 */ u16 visual;
+    /* 0x62 */ u8 unk62[8];
+    /* 0x6A */ s16 resourceId;
+    /* 0x6C */ u8 unk6C[0x164];
+};
+
+struct BtlRequest {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+};
+
+struct BtlStartState {
+    /* 0x0000 */ u16 unk0000;
+    /* 0x0002 */ u16 formation;
+    /* 0x0004 */ u8 unk0004[0x00EC];
+    /* 0x00F0 */ s32 aocFlag;
+    /* 0x00F4 */ u8 unk00F4[0x1DE0];
+    /* 0x1ED4 */ BtlUnit *units;
+    /* 0x1ED8 */ u8 unk1ED8[0x26C8];
+    /* 0x45A0 */ u32 flagsA;
+    /* 0x45A4 */ u32 flagsB;
+};
+
+/* Battle flag masks (pairs for the two flag words) kept by the encounter setup. */
+struct BtlEncountMasks {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 formationA;
+    /* 0x54 */ u32 formationB;
+    /* 0x58 */ u8 unk58[8];
+    /* 0x60 */ u32 introA;
+    /* 0x64 */ u32 introB;
+    /* 0x68 */ u32 readyA;
+    /* 0x6C */ u32 readyB;
+};
+
+#define BTL_FILE_NAME_SIZE 0x80
+#define BTL_UNIT_STATE_RESPAWN 8
+#define BTL_UNIT_VISUAL_HIDDEN 0x800
 
 extern "C" {
+extern u32 g_aocSystem;
+extern u32 g_btlCamera;
+extern BtlEncountMasks g_btlEncount;
 
-int FUN_001568f8(int, int);
-int libc_strcpy(unsigned char [132], unsigned int);
-int FUN_002e5924(int);
-int sysMemClear(unsigned char [132], int);
-int FUN_003e0bb8(unsigned int *, int);
-int contentRequestStart(unsigned int *, int);
-int FUN_003ed6e8(int);
-int controllerClearVectorState(int);
-int FUN_003edbd0(int);
-int FUN_003f0b28(int);
-int FUN_003f0d50(int);
-int FUN_003f26d4(int);
-int words10CopyHighToLow(unsigned int);
-int FUN_004fb43c(int, int, int, int, int, int, int);
+s32 FUN_0046ebf0(u32 aocSystem);
+void sysMemClear(void *block, s32 size);
+u32 btlPosArrangeGetFileName(BtlStartState *state);
+char *libc_strcpy(char *destination, u32 source);
+s32 FUN_00240c34(const char *fileName);
+void FUN_003edbd0(BtlStartState *state);
+void FUN_003f0d50(BtlStartState *state);
+void controllerClearVectorState(BtlStartState *state);
+void FUN_003f0b28(BtlStartState *state);
+void words10CopyHighToLow(u32 camera);
+s32 FUN_003e0f94(BtlRequest *request, BtlStartState *state);
+void FUN_001568f8(BtlStartState *state, s32 resourceId);
+s32 pairedEntryTableContains(BtlStartState *state, u16 id);
+void FUN_004fb43c(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e, s32 f);
+void FUN_003ed6e8(BtlStartState *state);
+void FUN_003f26d4(BtlStartState *state);
+void FUN_002e5924(s32 mode);
+void FUN_003e0bb8(BtlRequest *request, BtlStartState *state);
+void contentRequestStart(BtlRequest *request, BtlStartState *state);
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spB8; /* 0xb8: local_b8 */
-} param_2_stack;
-
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern unsigned int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573878; /* 0x573878 */
-extern unsigned int DAT_0057387c; /* 0x57387c */
-extern unsigned int DAT_00573888; /* 0x573888 */
-extern unsigned int DAT_0057388c; /* 0x57388c */
-extern unsigned int DAT_00573890; /* 0x573890 */
-extern unsigned int DAT_00573894; /* 0x573894 */
-
-/* Supplied declaration required: FUN_001568f8. */
-extern int FUN_00240c34(unsigned char *);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e0bb8. */
-extern int FUN_003e0f94(unsigned int *, int);
-/* Supplied declaration required: contentRequestStart. */
-/* Supplied declaration required: FUN_003ed6e8. */
-/* Supplied declaration required: controllerClearVectorState. */
-/* Supplied declaration required: FUN_003edbd0. */
-extern unsigned int btlPosArrangeGetFileName(int);
-/* Supplied declaration required: FUN_003f0b28. */
-/* Supplied declaration required: FUN_003f0d50. */
-extern int pairedEntryTableContains(int, unsigned short);
-/* Supplied declaration required: FUN_003f26d4. */
-extern int FUN_0046ebf0(unsigned int);
-/* Supplied declaration required: words10CopyHighToLow. */
-/* Supplied declaration required: FUN_004fb43c. */
-
-
-void FUN_003e1454(unsigned int *param_1,int param_2)
-
+/* Prepares a battle start: when the formation file is available applies the formation, hides
+ * units whose resources the paired table lacks and raises the setup flags; otherwise defers to
+ * the content request. */
+void FUN_003e1454(BtlRequest *request, BtlStartState *state)
 {
-/* irregular: 14 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  unsigned char temp_v6 [132];
-  
-  temp_v0 = 0;
-  if ((0 < *(int *)(param_2 + 0xf0)) && (temp_v1 = FUN_0046ebf0(g_aocSystem), temp_v1 != 0)) {
-    temp_v0 = 1;
-  }
-  sysMemClear(temp_v6,0x80);
-  temp_v2 = btlPosArrangeGetFileName(param_2);
-  libc_strcpy(temp_v6,temp_v2);
-  if ((!temp_v0) && (temp_v1 = FUN_00240c34(temp_v6), temp_v1 == 0)) {
-    FUN_003edbd0(param_2);
-    FUN_003f0d50(param_2);
-    controllerClearVectorState(param_2);
-    FUN_003f0b28(param_2);
-    words10CopyHighToLow(g_btlCamera);
-    temp_v1 = FUN_003e0f94(param_1,param_2);
-    puVar7 = (unsigned int *)(param_2 + 0x45a0);
-    if ((temp_v1 == 1) || (temp_v1 == 2 || temp_v1 == 5)) {
-      temp_v1 = 4;
-      do {
-        temp_v5 = *(int *)(param_2 + 0x1ed4) + temp_v1 * 0x1d0;
-        if ((((*(unsigned int *)(temp_v5 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v5 + 0x50) & 2) != 0) &&
-            ((*(unsigned int *)(temp_v5 + 0x58) & 8) != 0)) &&
-           (*(unsigned int *)(temp_v5 + 0x58) = *(unsigned int *)(temp_v5 + 0x58) & 0xfffffff7,
-           (*(unsigned short *)(temp_v5 + 0x60) & 0x800) == 0)) {
-          temp_v3 = param_2;
-          FUN_001568f8(param_2,(int)*(short *)(temp_v5 + 0x6a));
-          temp_v3 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v3 + 2));
-          if (temp_v3 == 0) {
-            *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | 0x800;
-          }
+    char fileName[BTL_FILE_NAME_SIZE + 4];
+    bool aocFormation = false;
+    if (state->aocFlag > 0 && FUN_0046ebf0(g_aocSystem) != 0)
+        aocFormation = true;
+    sysMemClear(fileName, BTL_FILE_NAME_SIZE);
+    libc_strcpy(fileName, btlPosArrangeGetFileName(state));
+
+    if (!aocFormation && FUN_00240c34(fileName) == 0) {
+        FUN_003edbd0(state);
+        FUN_003f0d50(state);
+        controllerClearVectorState(state);
+        FUN_003f0b28(state);
+        words10CopyHighToLow(g_btlCamera);
+        s32 result = FUN_003e0f94(request, state);
+        if (result == 1 || result == 2 || result == 5) {
+            for (s32 i = BTL_UNIT_FIRST_ENEMY; i < BTL_UNIT_COUNT; i++) {
+                BtlUnit *unit = (BtlUnit *)((u8 *)state->units + i * BTL_UNIT_STRIDE);
+                if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->state & BTL_UNIT_STATE_RESPAWN) != 0) {
+                    unit->state &= ~BTL_UNIT_STATE_RESPAWN;
+                    if ((unit->visual & BTL_UNIT_VISUAL_HIDDEN) == 0) {
+                        FUN_001568f8(state, unit->resourceId);
+                        if (pairedEntryTableContains(state, state->formation) == 0)
+                            unit->visual |= BTL_UNIT_VISUAL_HIDDEN;
+                    }
+                }
+            }
+            FUN_004fb43c(0, 0, 0x100021B, 0, 0, 0, 0);
+            FUN_003ed6e8(state);
+            FUN_003f26d4(state);
+            state->flagsA |= g_btlEncount.formationA | g_btlEncount.readyA;
+            state->flagsB |= g_btlEncount.formationB | g_btlEncount.readyB;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x36);
-      FUN_004fb43c(0,0,0x100021b,0,0,0,0);
-      FUN_003ed6e8(param_2);
-      FUN_003f26d4(param_2);
-      temp_v4 = *puVar7 | DAT_00573878 | DAT_00573890;
-      *(unsigned int *)(param_2 + 0x45a4) = *(unsigned int *)(param_2 + 0x45a4) | DAT_0057387c | DAT_00573894;
-      *puVar7 = temp_v4;
+        request->unk10 = 0;
+        request->state = 0x17;
+        request->unk0C = 0;
+        result = FUN_003e0f94(request, state);
+        if (result != 2 && result != 5 && (state->flagsA & g_btlEncount.introA) == 0
+            && (g_btlEncount.introB & state->flagsB) == 0) {
+            FUN_002e5924(2);
+            state->flagsA |= g_btlEncount.introA;
+            state->flagsB |= g_btlEncount.introB;
+        }
+        FUN_003e0bb8(request, state);
+        return;
     }
-    param_1[4] = 0;
-    *param_1 = 0x17;
-    param_1[3] = 0;
-    temp_v1 = FUN_003e0f94(param_1,param_2);
-    if ((temp_v1 != 2 && temp_v1 != 5) &&
-       ((*puVar7 & DAT_00573888) == 0 && (DAT_0057388c & *(unsigned int *)(param_2 + 0x45a4)) == 0)) {
-      FUN_002e5924(2);
-      temp_v4 = *(unsigned int *)(param_2 + 0x45a4) | DAT_0057388c;
-      *puVar7 = *puVar7 | DAT_00573888;
-      *(unsigned int *)(param_2 + 0x45a4) = temp_v4;
-    }
-    FUN_003e0bb8(param_1,param_2);
-    return;
-  }
-  param_1[4] = 0;
-  *param_1 = 0x15;
-  param_1[3] = 0;
-  contentRequestStart(param_1,param_2);
-  return;
+    request->unk10 = 0;
+    request->state = 0x15;
+    request->unk0C = 0;
+    contentRequestStart(request, state);
 }
 
 } /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except the push's second entry address, which retail forms in r3 and this build in ip. */
 #include "camp/RenderCtx.h"
 
 struct DrawTarget;

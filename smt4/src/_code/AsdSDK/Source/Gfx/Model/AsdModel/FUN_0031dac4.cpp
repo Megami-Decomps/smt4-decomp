@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00154080(int ****, unsigned int);
 int FUN_002a5960(...);
-int FUN_002a5dc4(...);
+int _ZN9Obj42111cC1Ej(...);
 int asdMemoryGetDefaultAllocator(void);
 int libc_strlen(...);
 int asdMemAlloc(...);
@@ -41,7 +41,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_00154080. */
 /* Supplied declaration required: FUN_002a5960. */
-/* Supplied declaration required: FUN_002a5dc4. */
+/* Supplied declaration required: _ZN9Obj42111cC1Ej. */
 extern int FUN_002af294(int **, int);
 extern int libc_strncmp(int, int ***, int);
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
@@ -397,7 +397,7 @@ int * FUN_0031dac4(int *param_1)
                 piVar16 = (int *)asdMemoryGetDefaultAllocator();
                 piVar14 = (int *)(**(romwright_code **)(*piVar16 + 8))(piVar16,0x74,4);
                 if (piVar14 != (int *)0x0) {
-                  FUN_002a5dc4(piVar14,piVar16);
+                  _ZN9Obj42111cC1Ej(piVar14,piVar16);
                   temp_v11[0] = (int ***)(int)(char)temp_v19;
                   FUN_002a5960(piVar14,&temp_v16,temp_v17,temp_v18);
                   if (piVar14 != (int *)0x0) {

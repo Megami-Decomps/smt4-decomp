@@ -1,140 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040898c` (_code @ 0x40898c, 0x288 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the gauge fields (retail loads time/duration with one vldmia and shares the fill loops' tail) and the loop code shape differ; the logic is the same. */
+#include "common.h"
+
+namespace {
+/* A view of a float whose ordering the engine tests through its (signed) bit pattern. */
+union OrderedFloat {
+    f32 value;
+    s32 bits;
+};
+
+struct GaugeSegmentSource {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 widthAndFlag;         /* bit 15 is a flag; the rest is the segment width */
+};
+
+/* The segmented gauge's work block. */
+struct GaugeWork {
+    /* 0x00 */ u8 unk00[0x98];
+    /* 0x98 */ f32 span;                 /* length of the gauge */
+    /* 0x9c */ u8 unk9c[8];
+    /* 0xa4 */ u8 forward;               /* fills left to right (segment 0 first) */
+    /* 0xa5 */ u8 settled;
+    /* 0xa6 */ u8 unka6[2];
+    /* 0xa8 */ f32 time;
+    /* 0xac */ f32 duration;
+    /* 0xb0 */ f32 position;
+    /* 0xb4 */ f32 target;
+    /* 0xb8 */ f32 step;                 /* per-frame fill of the lit segments */
+    /* 0xbc */ s32 litCount;
+    /* 0xc0 */ f32 fill[8];
+    /* 0xe0 */ u8 unke0[4];
+    /* 0xe4 */ f32 scroll;
+    /* 0xe8 */ f32 angle;
+};
+}
 
 extern "C" {
+GaugeSegmentSource *FUN_001834a4(u32 group, u32 index);
 
-int VectorSignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-extern int FUN_001834a4(unsigned int, unsigned int);
-
-
-void FUN_0040898c(int param_1)
-
+/* Advances the gauge one frame: its scroll and spin, the position approaching the target and the fill of
+   the lit segments. */
+void FUN_0040898c(GaugeWork *gauge)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  
-  temp_v8 = 1.0f;
-  temp_v5 = *(float *)(param_1 + 0xe4) + 1.0f;
-  *(float *)(param_1 + 0xe4) = temp_v5;
-  if ((int)temp_v5 >= 0x41f00000) {
-    *(float *)(param_1 + 0xe4) = temp_v5 - 30.0f;
-  }
-  temp_v5 = *(float *)(param_1 + 0xe8) + 12.0f;
-  *(float *)(param_1 + 0xe8) = temp_v5;
-  if ((int)temp_v5 >= 0x43b40001) {
-    *(float *)(param_1 + 0xe8) = temp_v5 - 360.0f;
-  }
-  temp_v5 = *(float *)(param_1 + 0xa8);
-  temp_v6 = *(float *)(param_1 + 0xac);
-  if (*(char *)(param_1 + 0xa5) != '\0') {
-    if (temp_v5 < temp_v6) {
-      *(float *)(param_1 + 0xa8) = temp_v5 + 1.0f;
-      if (temp_v6 <= temp_v5 + 1.0f) {
-        *(unsigned int *)(param_1 + 0xa8) = 0;
-      }
+    OrderedFloat ordered;
+    ordered.value = gauge->scroll + 1.0f;
+    gauge->scroll = ordered.value;
+    if (ordered.bits >= 0x41f00000) {
+        gauge->scroll = ordered.value - 30.0f;
     }
-  }
-  else if (temp_v5 < temp_v6) {
-    temp_v5 = temp_v5 + 1.0f;
-    *(float *)(param_1 + 0xa8) = temp_v5;
-    temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-    temp_v3 = temp_v4 | ((unsigned int)((temp_v5 != temp_v5) || (temp_v6 != temp_v6)) << 0x1c);
-    if ((unsigned char)(temp_v4 >> 0x1f) == ((unsigned char)(temp_v3 >> 0x1c) & 1)) {
-      *(unsigned char *)(param_1 + 0xa5) = 1;
-      temp_v1 = 0;
-      *(unsigned int *)(param_1 + 0xb4) = 0x43c80000;
-      *(unsigned int *)(param_1 + 0xb0) = 0x43c80000;
-      temp_v0 = 0;
-      do {
-        temp_v2 = temp_v1 + 1;
-        temp_v0 = temp_v0 + 2;
-        *(unsigned int *)(param_1 + temp_v1 * 4 + 0xc0) = 0x3f800000;
-        temp_v1 = temp_v1 + 2;
-        *(unsigned int *)(param_1 + temp_v2 * 4 + 0xc0) = 0x3f800000;
-      } while (temp_v0 < 8);
-      *(unsigned int *)(param_1 + 0xa8) = 0;
-      *(unsigned int *)(param_1 + 0xac) = 0x42200000;
-      return;
+    ordered.value = gauge->angle + 12.0f;
+    gauge->angle = ordered.value;
+    if (ordered.bits > 0x43b40000) {
+        gauge->angle = ordered.value - 360.0f;
     }
-    temp_v7 = *(float *)(param_1 + 0xb4) / temp_v6 + *(float *)(param_1 + 0xb0);
-    *(float *)(param_1 + 0xb0) = temp_v7;
-    if (*(int *)(param_1 + 0xbc) != 0) {
-      temp_v0 = FUN_001834a4(0xc,0x37);
-      if (*(int *)(param_1 + 0xbc) < 8) {
-        temp_v6 = *(float *)(param_1 + 0xb4) - *(float *)(param_1 + 0xb0);
-        temp_v5 = (float)VectorSignedToFloat((*(unsigned short *)(temp_v0 + 4) & 0xffff7fff) *
-                                           *(int *)(param_1 + 0xbc),(unsigned char)(temp_v3 >> 0x16) & 3);
-        temp_v5 = *(float *)(param_1 + 0x98) - temp_v5;
-        temp_v4 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-        if (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == ((temp_v5 != temp_v5) || (temp_v6 != temp_v6))) {
-          do {
-            temp_v1 = *(int *)(param_1 + 0xbc) + 1;
-            *(int *)(param_1 + 0xbc) = temp_v1;
-            if (temp_v1 >= 8) break;
-            temp_v5 = (float)VectorSignedToFloat((*(unsigned short *)(temp_v0 + 4) & 0xffff7fff) * temp_v1,
-                                               (unsigned char)(temp_v4 >> 0x16) & 3);
-            temp_v5 = *(float *)(param_1 + 0x98) - temp_v5;
-            temp_v4 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-          } while (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == ((temp_v5 != temp_v5) || (temp_v6 != temp_v6)));
+    if (gauge->settled != 0) {
+        if (gauge->time < gauge->duration) {
+            gauge->time += 1.0f;
+            if (gauge->time >= gauge->duration) {
+                gauge->time = 0.0f;
+            }
         }
-      }
-    }
-    else if (*(float *)(param_1 + 0xb4) - temp_v7 <= *(float *)(param_1 + 0x98)) {
-      *(unsigned int *)(param_1 + 0xbc) = 1;
-      *(float *)(param_1 + 0xb8) = 1.0f / ((temp_v6 - temp_v5) * 0.125f);
-    }
-    temp_v0 = *(int *)(param_1 + 0xbc);
-    if (*(char *)(param_1 + 0xa4) != '\0') {
-      if (0 < temp_v0) {
-        temp_v1 = 0;
-        do {
-          temp_v2 = param_1 + temp_v1 * 4;
-          temp_v1 = temp_v1 + 1;
-          temp_v5 = *(float *)(temp_v2 + 0xc0) + *(float *)(param_1 + 0xb8);
-          *(float *)(temp_v2 + 0xc0) = temp_v5;
-          if ((int)temp_v5 >= 0x3f800001) {
-            temp_v5 = temp_v8;
-          }
-          temp_v0 = temp_v0 - 1;
-          *(float *)(temp_v2 + 0xc0) = temp_v5;
-        } while (temp_v0 != 0);
         return;
-      }
     }
-    else if (0 < temp_v0) {
-      temp_v1 = 0;
-      do {
-        temp_v2 = param_1 + (7 - temp_v1) * 4;
-        temp_v1 = temp_v1 + 1;
-        temp_v5 = *(float *)(temp_v2 + 0xc0) + *(float *)(param_1 + 0xb8);
-        *(float *)(temp_v2 + 0xc0) = temp_v5;
-        if ((int)temp_v5 >= 0x3f800001) {
-          temp_v5 = temp_v8;
+    if (!(gauge->time < gauge->duration)) {
+        return;
+    }
+    gauge->time += 1.0f;
+    if (gauge->time >= gauge->duration) {
+        gauge->settled = 1;
+        gauge->target = 400.0f;
+        gauge->position = 400.0f;
+        for (s32 i = 0; i < 8; i++) {
+            gauge->fill[i] = 1.0f;
         }
-        temp_v0 = temp_v0 - 1;
-        *(float *)(temp_v2 + 0xc0) = temp_v5;
-      } while (temp_v0 != 0);
-      return;
+        gauge->time = 0.0f;
+        gauge->duration = 40.0f;
+        return;
     }
-  }
-  return;
+    gauge->position = gauge->target / gauge->duration + gauge->position;
+    if (gauge->litCount != 0) {
+        GaugeSegmentSource *source = FUN_001834a4(12, 55);
+        if (gauge->litCount < 8) {
+            f32 remaining = gauge->target - gauge->position;
+            f32 reach = gauge->span - (f32)((source->widthAndFlag & ~0x8000) * gauge->litCount);
+            if (!(reach < remaining)) {
+                do {
+                    gauge->litCount++;
+                    if (gauge->litCount >= 8) {
+                        break;
+                    }
+                    reach = gauge->span - (f32)((source->widthAndFlag & ~0x8000) * gauge->litCount);
+                } while (!(reach < remaining));
+            }
+        }
+    } else if (!(gauge->target - gauge->position > gauge->span)) {
+        gauge->litCount = 1;
+        gauge->step = 1.0f / ((gauge->duration - gauge->time) * 0.125f);
+    }
+    s32 count = gauge->litCount;
+    if (gauge->forward != 0) {
+        for (s32 i = 0; i < count; i++) {
+            OrderedFloat level;
+            level.value = gauge->fill[i] + gauge->step;
+            if (level.bits > 0x3f800000) {
+                level.value = 1.0f;
+            }
+            gauge->fill[i] = level.value;
+        }
+    } else {
+        for (s32 i = 0; i < count; i++) {
+            OrderedFloat level;
+            level.value = gauge->fill[7 - i] + gauge->step;
+            if (level.bits > 0x3f800000) {
+                level.value = 1.0f;
+            }
+            gauge->fill[7 - i] = level.value;
+        }
+    }
 }
 
 } /* extern "C" */

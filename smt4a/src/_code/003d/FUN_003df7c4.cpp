@@ -1,189 +1,113 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df7c4` (_code @ 0x3df7c4, 0x30c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the player stat recompute; retail unrolls the five stat clamps in a fixed order (0x20, 0x24, 0x26, 0x28, 0x22) and interleaves the growth block copy, which armcc here emits from a loop and a struct copy. */
 #include "shard/W6_W6Match8_StatGrowth.h"
 
+/* The equipment record (only the fields read here). */
+struct EquipmentRecord {
+    /* 0x00 */ u8 unk00[0x31];
+    /* 0x31 */ s8 statBonus[5];
+    /* 0x36 */ u16 hpBonus;
+    /* 0x38 */ u16 mpBonus;
+    /* 0x3A */ u16 special;
+};
+
+/* The capped upgrade bonuses of one equipment piece. */
+struct UpgradeBonuses {
+    /* 0x00 */ u16 hp;
+    /* 0x02 */ u16 mp;
+    /* 0x04 */ u16 stats[5];
+    /* 0x0E */ u8 unk0E[6];
+};
+
+/* An extra block the growth step reads next to the stats. */
+struct GrowthExtra {
+    u32 word;
+    f32 vector[3];
+    u16 special;
+    u16 pad;
+};
+
+/* A player's stat record. */
+struct PlayerStats {
+    /* 0x00 */ u16 equipment[7];
+    /* 0x0E */ u16 base[7];        /* HP, MP, then the five stats */
+    /* 0x1C */ u16 total[7];       /* the same, with equipment and growth applied */
+    /* 0x2A */ u16 hp;
+    /* 0x2C */ u16 mp;
+    /* 0x2E */ u8 unk2E[6];
+    /* 0x34 */ u32 extraWord;
+    /* 0x38 */ f32 extraVector[3];
+    /* 0x44 */ u8 unk44[0x1E];
+    /* 0x62 */ u16 level;
+};
+
 extern "C" {
+PlayerStats *gameGetPlayerData(void);
+EquipmentRecord *dataTable08Sub2GetRecord(u32 id);
+void equipmentGetCappedUpgradeBonuses(u32 id, UpgradeBonuses *out);
+void FUN_004cceb8(StatGrowthParameters *out, s32 arg);
+void FUN_004cc6a4(s32 level, u16 *totals, const StatGrowthParameters *parameters);
+s16 FUN_003da998(s32 kind, const StatGrowthParameters *parameters);
+s16 FUN_003daaf4(s32 kind, const StatGrowthParameters *parameters);
+void FUN_0034cb50(u16 *totals, GrowthExtra *extra, s32 count);
 
-int dataTable08Sub2GetRecord(void);
-int FUN_0034cb50(unsigned short *, int *, int);
-int equipmentGetCappedUpgradeBonuses(unsigned int, int *);
-struct ValuePair;
-void FUN_004cc6a4(s32 level, ValuePair *output, const StatGrowthParameters *parameters);
-int FUN_004cceb8(int *, int);
-
-/* stack frame of param_1: 10 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned short sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned short sp50; /* 0x50: local_50 */
-    unsigned short sp52; /* 0x52: local_52 */
-    unsigned short sp54; /* 0x54: local_54 */
-    unsigned short sp56; /* 0x56: local_56 */
-    unsigned short sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-} param_1_stack;
-
-extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: FUN_0034cb50. */
-extern short FUN_003da998(unsigned int, unsigned int *);
-extern short FUN_003daaf4(unsigned int, unsigned int *);
-/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
-/* Supplied declaration required: FUN_004cceb8. */
-
-
-void FUN_003df7c4(unsigned short *param_1)
-
+/* Recomputes a player's stat totals (the hero when `stats` is null): base stats plus the seven
+ * equipment pieces and their upgrades, clamped to 1..999, then the level growth and the
+ * special-effect step, and caps current HP/MP at the new maximums. */
+void FUN_003df7c4(PlayerStats *stats)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  unsigned short temp_v3;
-  unsigned int temp_v4;
-  short temp_v5;
-  unsigned short temp_v6;
-  int temp_v7;
-  unsigned int unaff_r6;
-  short temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int uStack_4c;
-  int temp_v13;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  unsigned short temp_v16;
-  
-  if (param_1 == (unsigned short *)0x0) {
-    param_1 = (unsigned short *)gameGetPlayerData();
-  }
-  temp_v5 = 0;
-  temp_v1 = 0;
-  temp_v8 = 0;
-  temp_v7 = 0;
-  *(unsigned int *)(param_1 + 0xe) = *(unsigned int *)(param_1 + 7);
-  *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 9);
-  *(unsigned int *)(param_1 + 0x12) = *(unsigned int *)(param_1 + 0xb);
-  param_1[0x14] = param_1[0xd];
-  do {
-    switch(temp_v7) {
-    case 0:
-      unaff_r6 = (unsigned int)*param_1;
-      break;
-    case 1:
-      unaff_r6 = (unsigned int)param_1[1];
-      break;
-    case 2:
-      unaff_r6 = (unsigned int)param_1[2];
-      break;
-    case 3:
-      unaff_r6 = (unsigned int)param_1[3];
-      break;
-    case 4:
-      unaff_r6 = (unsigned int)param_1[4];
-      break;
-    case 5:
-      unaff_r6 = (unsigned int)param_1[5];
-      break;
-    case 6:
-      unaff_r6 = (unsigned int)param_1[6];
+    if (stats == NULL)
+        stats = gameGetPlayerData();
+    s16 hpBonus = 0;
+    s16 mpBonus = 0;
+    for (s32 i = 0; i < 7; i++)
+        stats->total[i] = stats->base[i];
+    for (s32 slot = 0; slot < 7; slot++) {
+        u32 id = stats->equipment[slot];
+        if (id == 0)
+            continue;
+        EquipmentRecord *record = dataTable08Sub2GetRecord(id);
+        if (record == NULL)
+            continue;
+        for (s32 i = 0; i < 5; i++)
+            stats->total[2 + i] += record->statBonus[i];
+        u16 recordHp = record->hpBonus;
+        u16 recordMp = record->mpBonus;
+        hpBonus += recordHp;
+        mpBonus += recordMp;
+        UpgradeBonuses upgrade;
+        equipmentGetCappedUpgradeBonuses(id, &upgrade);
+        for (s32 i = 0; i < 5; i++)
+            stats->total[2 + i] += upgrade.stats[i];
+        hpBonus = (s16)(upgrade.hp + hpBonus);
+        mpBonus = (s16)(upgrade.mp + mpBonus);
     }
-    if ((unaff_r6 != 0) && (temp_v4 = unaff_r6, dataTable08Sub2GetRecord(), temp_v4 != 0)) {
-      param_1[0x10] = param_1[0x10] + (short)*(char *)(temp_v4 + 0x31);
-      param_1[0x11] = param_1[0x11] + (short)*(char *)(temp_v4 + 0x32);
-      param_1[0x12] = param_1[0x12] + (short)*(char *)(temp_v4 + 0x33);
-      param_1[0x13] = param_1[0x13] + (short)*(char *)(temp_v4 + 0x34);
-      param_1[0x14] = param_1[0x14] + (short)*(char *)(temp_v4 + 0x35);
-      temp_v8 = *(short *)(temp_v4 + 0x36);
-      temp_v2 = *(short *)(temp_v4 + 0x38);
-      equipmentGetCappedUpgradeBonuses(unaff_r6,&temp_v9);
-      param_1[0x10] = (short)temp_v10 + param_1[0x10];
-      param_1[0x11] = (*(unsigned short *)((unsigned char *)&temp_v10 + 2)) + param_1[0x11];
-      param_1[0x12] = (short)temp_v11 + param_1[0x12];
-      param_1[0x13] = (*(unsigned short *)((unsigned char *)&temp_v11 + 2)) + param_1[0x13];
-      param_1[0x14] = (short)temp_v12 + param_1[0x14];
-      temp_v5 = (short)temp_v9 + temp_v5 + temp_v8;
-      temp_v8 = (*(unsigned short *)((unsigned char *)&temp_v9 + 2)) + temp_v1 + temp_v2;
-      temp_v1 = temp_v8;
+    for (s32 i = 2; i < 7; i++) {
+        s32 value = (s16)stats->total[i];
+        if (value > 999)
+            value = 999;
+        else if (value < 1)
+            value = 1;
+        stats->total[i] = (u16)value;
     }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 7);
-  temp_v0 = 999;
-  temp_v3 = param_1[0x10];
-  temp_v6 = temp_v0;
-  if (((short)temp_v3 < 1000) && (temp_v6 = temp_v3, (short)temp_v3 < 1)) {
-    temp_v6 = 1;
-  }
-  param_1[0x10] = temp_v6;
-  temp_v3 = param_1[0x12];
-  temp_v6 = temp_v0;
-  if (((short)temp_v3 < 1000) && (temp_v6 = temp_v3, (short)temp_v3 < 1)) {
-    temp_v6 = 1;
-  }
-  param_1[0x12] = temp_v6;
-  temp_v3 = param_1[0x13];
-  temp_v6 = temp_v0;
-  if (((short)temp_v3 < 1000) && (temp_v6 = temp_v3, (short)temp_v3 < 1)) {
-    temp_v6 = 1;
-  }
-  param_1[0x13] = temp_v6;
-  temp_v3 = param_1[0x14];
-  temp_v6 = temp_v0;
-  if (((short)temp_v3 < 1000) && (temp_v6 = temp_v3, (short)temp_v3 < 1)) {
-    temp_v6 = 1;
-  }
-  param_1[0x14] = temp_v6;
-  temp_v3 = param_1[0x11];
-  if (((short)temp_v3 < 1000) && (temp_v0 = temp_v3, (short)temp_v3 < 1)) {
-    temp_v0 = 1;
-  }
-  param_1[0x11] = temp_v0;
-  FUN_004cceb8(&temp_v9,0);
-  temp_v13 = temp_v9;
-  uStack_44 = temp_v10;
-  uStack_40 = temp_v11;
-  uStack_3c = temp_v12;
-  uStack_38 = uStack_4c;
-  FUN_004cc6a4(param_1[0x31],(ValuePair *)(param_1 + 0xe),
-                (const StatGrowthParameters *)&temp_v13);
-  temp_v1 = FUN_003da998(1,(unsigned int *)&temp_v13);
-  temp_v3 = param_1[7];
-  temp_v2 = FUN_003daaf4(1,(unsigned int *)&temp_v13);
-  temp_v15 = *(unsigned int *)(param_1 + 0x1c);
-  uStack_2c = *(unsigned int *)(param_1 + 0x1e);
-  uStack_28 = *(unsigned int *)(param_1 + 0x20);
-  temp_v14 = *(unsigned int *)(param_1 + 0x1a);
-  param_1[0xe] = param_1[0xe] + (temp_v3 - temp_v1) + temp_v5;
-  param_1[0xf] = (param_1[8] - temp_v2) + temp_v8 + param_1[0xf];
-  temp_v4 = (unsigned int)param_1[6];
-  dataTable08Sub2GetRecord();
-  temp_v16 = 0;
-  if (temp_v4 != 0) {
-    temp_v16 = *(unsigned short *)(temp_v4 + 0x3a);
-  }
-  FUN_0034cb50(param_1 + 0xe,&temp_v14,9);
-  temp_v3 = param_1[0x15];
-  if ((short)param_1[0xe] < (short)param_1[0x15]) {
-    temp_v3 = param_1[0xe];
-  }
-  param_1[0x15] = temp_v3;
-  temp_v3 = param_1[0xf];
-  if ((short)param_1[0x16] <= (short)param_1[0xf]) {
-    temp_v3 = param_1[0x16];
-  }
-  param_1[0x16] = temp_v3;
-  return;
+    StatGrowthParameters parameters;
+    FUN_004cceb8(&parameters, 0);
+    FUN_004cc6a4(stats->level, stats->total, &parameters);
+    s32 hpGrowth = stats->base[0] - FUN_003da998(1, &parameters);
+    s32 mpGrowth = stats->base[1] - FUN_003daaf4(1, &parameters);
+    stats->total[0] = stats->total[0] + hpGrowth + hpBonus;
+    stats->total[1] = stats->total[1] + mpGrowth + mpBonus;
+    GrowthExtra extra;
+    extra.word = stats->extraWord;
+    extra.vector[0] = stats->extraVector[0];
+    extra.vector[1] = stats->extraVector[1];
+    extra.vector[2] = stats->extraVector[2];
+    EquipmentRecord *last = dataTable08Sub2GetRecord(stats->equipment[6]);
+    extra.special = last != NULL ? last->special : 0;
+    FUN_0034cb50(stats->total, &extra, 9);
+    if ((s16)stats->hp > (s16)stats->total[0])
+        stats->hp = stats->total[0];
+    if ((s16)stats->mp > (s16)stats->total[1])
+        stats->mp = stats->total[1];
 }
 
 } /* extern "C" */

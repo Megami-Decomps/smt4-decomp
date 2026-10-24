@@ -1,196 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a0524` (_code @ 0x4a0524, 0x3c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: per-step recovery of the party's HP while walking (a percentage from the active flags, +2 more for one player id, applied to the player and, for the strongest flag, to the party slots; then a 2% bonus for slots that know skill 0x1c6); written from the decompilation, the slot-record getter's argument was lost and is assumed to be the slot id byte, and the skill scan covers the 8 stored skills (the ninth word the decompiler reads is zero) */
+#include "common.h"
+
+#define WALK_HEAL_SKIP_FLAG 2
+#define WALK_FLAG_STRONG_A 0x6B
+#define WALK_FLAG_STRONG_B 0x69
+#define WALK_FLAG_WEAK 0x68
+#define WALK_PERCENT_STRONG 5
+#define WALK_PERCENT_WEAK 2
+#define WALK_PLAYER_BONUS_ID 0x2A6
+#define WALK_PLAYER_BONUS_PERCENT 2
+#define WALK_SKILL_HEAL 0x1C6
+#define WALK_SKILL_HEAL_PERCENT 2
+#define WALK_PARTY_SLOTS 3
+#define WALK_SKILL_COUNT 8
+#define WALK_SLOT_TABLE_OFFSET 0x1CA0
+#define WALK_RECORD_BLOCKED_MASK 0x402
+#define WALK_HP_BOOST_SCALE 1.25f
+
+struct WalkPlayerData {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s16 id;
+    /* 0x0E */ u8 unk0E[0xE];
+    /* 0x1C */ s16 maxHp;
+    /* 0x1E */ u8 unk1E[0xC];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2C[0x32];
+    /* 0x5E */ u16 flags;
+};
+
+struct WalkSlotRecord {
+    /* 0x00 */ u8 unk00[0xE];
+    /* 0x0E */ s16 baseMaxHp;
+    /* 0x10 */ u8 unk10[0x1A];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ u8 unk2C[8];
+    /* 0x34 */ s16 skills[WALK_SKILL_COUNT];
+    /* 0x44 */ u8 unk44[0x1C];
+    /* 0x60 */ u16 flags;
+    /* 0x62 */ u16 boostId;
+};
 
 extern "C" {
+WalkPlayerData *gameGetPlayerData(void);
+s32 FUN_0018416c(u16 id);
+WalkSlotRecord *gameGetSlotRecord(s32 slot);
+s8 *gameGetSlotTable(void);
+s32 gameDataFlagTestBit(u32 flag);
 
-int VectorSignedToFloat(int, int);
+/* The record's maximum HP, boosted by 25% when its boost id is active. */
+static __inline s32 walkMaxHp(WalkSlotRecord *record)
+{
+    s32 maxHp = 0;
+    if (record != NULL) {
+        maxHp = record->baseMaxHp;
+        if (FUN_0018416c(record->boostId) != 0)
+            maxHp = (s16)(s32)((f32)record->baseMaxHp * WALK_HP_BOOST_SCALE);
+    }
+    return maxHp;
+}
 
-/* stack frame of void: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} void_stack;
+/* Heals the record by `percent` of its maximum HP, keeping 1 <= hp <= maximum. */
+static __inline void walkHealRecord(WalkSlotRecord *record, s32 percent)
+{
+    s32 maxHp = walkMaxHp(record);
+    s32 amount = maxHp * percent / 100;
+    if (amount < 0)
+        amount = 0;
+    s32 healed = record->hp + amount;
+    if (maxHp < healed)
+        healed = maxHp;
+    s32 limit = walkMaxHp(record);
+    if (record != NULL) {
+        s16 hp = (s16)healed;
+        if (hp > limit)
+            hp = (s16)limit;
+        else if (hp < 1)
+            hp = 1;
+        record->hp = hp;
+    }
+}
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameGetPlayerData(void);
-extern int FUN_0018416c(unsigned short);
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameDataFlagTestBit(unsigned int);
-
+static __inline bool walkSlotIsHealable(s8 *table, s32 slot, WalkSlotRecord **record)
+{
+    if (table[WALK_SLOT_TABLE_OFFSET + slot] < 0)
+        return false;
+    *record = gameGetSlotRecord(table[WALK_SLOT_TABLE_OFFSET + slot]);
+    return ((*record)->flags & WALK_RECORD_BLOCKED_MASK) == 0;
+}
 
 void FUN_004a0524(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  short temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int in_fpscr;
-  float temp_v9;
-  unsigned long long temp_v10;
-  int temp_v11;
-  int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  
-  temp_v7 = 0;
-  temp_v1 = gameGetPlayerData();
-  if ((*(unsigned short *)(temp_v1 + 0x5e) & 2) == 0) {
-    temp_v1 = gameDataFlagTestBit(0x6b);
-    if ((temp_v1 != 0) || (temp_v1 = gameDataFlagTestBit(0x69), temp_v1 != 0)) {
-      temp_v7 = 5;
+    s32 percent = 0;
+    if ((gameGetPlayerData()->flags & WALK_HEAL_SKIP_FLAG) != 0)
+        return;
+
+    if (gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0 || gameDataFlagTestBit(WALK_FLAG_STRONG_B) != 0)
+        percent = WALK_PERCENT_STRONG;
+    else if (gameDataFlagTestBit(WALK_FLAG_WEAK) != 0)
+        percent = WALK_PERCENT_WEAK;
+
+    s32 playerPercent = percent;
+    if (gameGetPlayerData()->id == WALK_PLAYER_BONUS_ID)
+        playerPercent += WALK_PLAYER_BONUS_PERCENT;
+    if (playerPercent != 0) {
+        s32 maxHp = gameGetPlayerData()->maxHp;
+        s32 amount = maxHp * playerPercent / 100;
+        if (amount < 0)
+            amount = 0;
+        WalkPlayerData *player = gameGetPlayerData();
+        s32 healed = amount + player->hp;
+        if (maxHp < healed)
+            healed = maxHp;
+        player = gameGetPlayerData();
+        s16 hp = (s16)healed;
+        if (hp > player->maxHp)
+            hp = player->maxHp;
+        else if (hp < 1)
+            hp = 1;
+        player->hp = hp;
     }
-    else {
-      temp_v1 = gameDataFlagTestBit(0x68);
-      if (temp_v1 != 0) {
-        temp_v7 = 2;
-      }
-    }
-    temp_v2 = gameGetPlayerData();
-    temp_v1 = temp_v7;
-    if (*(short *)(temp_v2 + 0xc) == 0x2a6) {
-      temp_v1 = temp_v7 + 2;
-    }
-    if (temp_v1 != 0) {
-      temp_v2 = gameGetPlayerData();
-      temp_v6 = (int)*(short *)(temp_v2 + 0x1c);
-      temp_v2 = gameGetPlayerData();
-      temp_v1 = (temp_v6 * temp_v1) / 100;
-      if (temp_v1 < 0) {
-        temp_v1 = 0;
-      }
-      temp_v1 = temp_v1 + *(short *)(temp_v2 + 0x2a);
-      if (temp_v6 < temp_v1) {
-        temp_v1 = temp_v6;
-      }
-      temp_v0 = (short)temp_v1;
-      temp_v1 = gameGetPlayerData();
-      temp_v5 = *(short *)(temp_v1 + 0x1c);
-      if ((temp_v0 <= *(short *)(temp_v1 + 0x1c)) && (temp_v5 = temp_v0, temp_v0 < 1)) {
-        temp_v5 = 1;
-      }
-      *(short *)(temp_v1 + 0x2a) = temp_v5;
-    }
-    temp_v10 = 0x3fa00000;
-    if ((temp_v7 != 0) && (temp_v1 = gameDataFlagTestBit(0x6b), temp_v1 != 0)) {
-      temp_v1 = gameGetSlotTable();
-      temp_v2 = 0;
-      do {
-        if ((-1 < *(char *)(temp_v1 + 0x1ca0 + temp_v2)) &&
-           (temp_v6 = gameGetSlotRecord(),
-           (*(unsigned short *)(temp_v6 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v6 + 0x60) & 0x400) == 0)) {
-          temp_v8 = 0;
-          if (temp_v6 != 0) {
-            temp_v0 = *(short *)(temp_v6 + 0xe);
-            temp_v3 = FUN_0018416c(*(unsigned short *)(temp_v6 + 0x62));
-            temp_v8 = (int)temp_v0;
-            if (temp_v3 != 0) {
-              temp_v9 = (float)VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v8 = (int)(short)(int)(temp_v9 * (float)temp_v10);
-            }
-          }
-          temp_v3 = (temp_v8 * temp_v7) / 100;
-          if (temp_v3 < 0) {
-            temp_v3 = 0;
-          }
-          temp_v3 = temp_v3 + *(short *)(temp_v6 + 0x2a);
-          if (temp_v8 < temp_v3) {
-            temp_v3 = temp_v8;
-          }
-          temp_v8 = (int)(short)temp_v3;
-          if (temp_v6 != 0) {
-            temp_v3 = (int)*(short *)(temp_v6 + 0xe);
-            temp_v4 = FUN_0018416c(*(unsigned short *)(temp_v6 + 0x62));
-            if (temp_v4 != 0) {
-              temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v3 = (int)(short)(int)(temp_v9 * (float)temp_v10);
-            }
-            if ((temp_v8 <= temp_v3) && (temp_v3 = temp_v8, temp_v8 < 1)) {
-              temp_v3 = 1;
-            }
-            *(short *)(temp_v6 + 0x2a) = (short)temp_v3;
-          }
+
+    if (percent != 0 && gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0) {
+        s8 *table = gameGetSlotTable();
+        for (s32 slot = 0; slot < WALK_PARTY_SLOTS; slot++) {
+            WalkSlotRecord *record;
+            if (walkSlotIsHealable(table, slot, &record))
+                walkHealRecord(record, percent);
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 3);
     }
-    temp_v1 = gameGetSlotTable();
-    temp_v7 = 0;
-    do {
-      if ((-1 < *(char *)(temp_v1 + 0x1ca0 + temp_v7)) &&
-         (temp_v2 = gameGetSlotRecord(),
-         (*(unsigned short *)(temp_v2 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v2 + 0x60) & 0x400) == 0)) {
-        temp_v12 = 0;
-        temp_v13 = 0;
-        temp_v14 = 0;
-        temp_v15 = 0;
-        temp_v16 = 0;
-        if (temp_v2 != 0) {
-          temp_v12 = *(unsigned int *)(temp_v2 + 0x34);
-          temp_v13 = *(unsigned int *)(temp_v2 + 0x38);
-          temp_v14 = *(unsigned int *)(temp_v2 + 0x3c);
-          temp_v15 = *(unsigned int *)(temp_v2 + 0x40);
+
+    s8 *table = gameGetSlotTable();
+    for (s32 slot = 0; slot < WALK_PARTY_SLOTS; slot++) {
+        WalkSlotRecord *record;
+        if (!walkSlotIsHealable(table, slot, &record))
+            continue;
+        for (s32 i = 0; i < WALK_SKILL_COUNT; i++) {
+            if (record->skills[i] == WALK_SKILL_HEAL) {
+                walkHealRecord(record, WALK_SKILL_HEAL_PERCENT);
+                break;
+            }
         }
-        temp_v6 = 0;
-        do {
-          temp_v0 = *(short *)((int)&temp_v12 + temp_v6 * 2);
-          if ((temp_v0 != 0) && (temp_v0 == 0x1c6)) {
-            temp_v6 = 0;
-            if (temp_v2 != 0) {
-              temp_v6 = (int)*(short *)(temp_v2 + 0xe);
-              temp_v8 = FUN_0018416c(*(unsigned short *)(temp_v2 + 0x62));
-              if (temp_v8 != 0) {
-                temp_v9 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-                temp_v6 = (int)(short)(int)(temp_v9 * (float)temp_v10);
-              }
-            }
-            temp_v8 = (temp_v6 * 2) / 100;
-            if (temp_v8 < 0) {
-              temp_v8 = 0;
-            }
-            temp_v8 = *(short *)(temp_v2 + 0x2a) + temp_v8;
-            if (temp_v6 < temp_v8) {
-              temp_v8 = temp_v6;
-            }
-            temp_v6 = (int)(short)temp_v8;
-            if (temp_v2 != 0) {
-              temp_v11 = (int)*(short *)(temp_v2 + 0xe);
-              temp_v8 = FUN_0018416c(*(unsigned short *)(temp_v2 + 0x62));
-              if (temp_v8 != 0) {
-                temp_v9 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-                temp_v11 = (int)(short)(int)(temp_v9 * (float)temp_v10);
-              }
-              if ((temp_v6 <= temp_v11) && (temp_v11 = temp_v6, temp_v6 < 1)) {
-                temp_v11 = 1;
-              }
-              *(short *)(temp_v2 + 0x2a) = (short)temp_v11;
-            }
-            break;
-          }
-          temp_v6 = temp_v6 + 1;
-        } while (temp_v6 < 9);
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < 3);
-  }
-  return;
+    }
 }
 
 } /* extern "C" */

@@ -1,118 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f9ce0` (_code @ 0x1f9ce0, 0x228 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the enemy-marker draw (field-of-view arrows on the map); the build keeps the float constants and the marker pointer in different registers and orders the colour/frame selects differently from retail. */
+#include "common.h"
+#include "map/mapDepart.h"
+
+// One enemy marker of the map enemy table (0x180 bytes); only the fields this draw reads or writes are named.
+struct EnemyMarker {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ u8 active;
+    /* 0x035 */ u8 unk035[0x7d];
+    /* 0x0b2 */ u8 hidden;
+    /* 0x0b3 */ u8 unk0b3;
+    /* 0x0b4 */ f32 heading;       // relative bearing to the player in degrees
+    /* 0x0b8 */ u8 unk0b8[0x7a];
+    /* 0x134 */ u8 unk134[0x3e];
+    /* 0x172 */ u8 tracking;
+    /* 0x173 */ u8 unk173;
+    /* 0x174 */ s32 blinkTimer;
+    /* 0x178 */ u8 shown;
+    /* 0x179 */ u8 unk179[3];
+    /* 0x17c */ f32 distance;
+    /* 0x180 */ u8 unk180[0x10];
+    /* 0x190 */ u8 arrowVisible;   // set when the arrow was drawn
+    /* 0x191 */ u8 unk191[3];
+    /* 0x194 */ f32 arrowX;
+    /* 0x198 */ f32 arrowY;
+    /* 0x19c */ u8 unk19c[4];
+};
+
+struct MapEnemyView {
+    u8 unk00[4];
+    s32 mode;  // 0x04
+};
+
+// An f32 viewed as its bits, for the threshold compares the original made on the raw representation.
+union FloatBits {
+    f32 value;
+    s32 bits;
+};
 
 extern "C" {
+extern MapEnemyView *g_mapEnemy;
+extern GameState g_gameState;
+void mapInterfaceForwardResource(void);
+void FUN_002aa18c(u32 c0, u32 c1, u32 c2, u32 c3, f32 x, f32 y, f32 w, f32 h, f32 u0, f32 v0, f32 u1, f32 v1, f32 angle);
 
-int mapInterfaceForwardResource(void);
-int FUN_002aa18c(...);
-
-extern int g_mapEnemy; /* 0x447600 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: mapInterfaceForwardResource. */
-/* Supplied declaration required: FUN_002aa18c. */
-
-
+// Draws a direction arrow at the screen edge for every tracked, hidden-from-view enemy marker while the map enemy
+// system is in mode 8. The arrow position follows the marker's bearing, its colours its distance.
 void FUN_001f9ce0(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  unsigned long long temp_v16;
-  float temp_v17;
-  
-  temp_v1 = g_mapEnemy;
-  if (((g_mapEnemy != 0) && (*(int *)(g_mapEnemy + 4) == 8)) && ((*(signed char *)((unsigned char *)&g_gameState + 0x20)) == '\0')) {
-    temp_v13 = 90.0f;
-    temp_v14 = 1.9888889f;
-    temp_v11 = 198.0f;
-    temp_v16 = 0x400ccccd;
-    temp_v12 = 358.0f;
-    temp_v6 = 0;
-    do {
-      temp_v7 = temp_v1 + temp_v6 * 0x180;
-      if (*(char *)(temp_v7 + 0x34) != '\0') {
-        *(unsigned char *)(temp_v7 + 400) = 0;
-        temp_v2 = temp_v7 + 0x134;
-        temp_v8 = *(char *)(temp_v7 + 0x172) != '\0';
-        temp_v0 = '\0';
-        if (temp_v8) {
-          temp_v0 = *(char *)(temp_v7 + 0x1b0);
+    MapEnemyView *view = g_mapEnemy;
+    if (view == NULL || view->mode != 8 || g_gameState.unk019[7] != 0) {
+        return;
+    }
+    EnemyMarker *markers = reinterpret_cast<EnemyMarker *>(view);
+    for (s32 i = 0; i < 32; i++) {
+        EnemyMarker *marker = &markers[i];
+        if (marker->active == 0) {
+            continue;
         }
-        if (temp_v8 && temp_v0 != '\0') {
-          temp_v2 = (unsigned int)*(unsigned char *)(temp_v7 + 0x178);
+        marker->arrowVisible = 0;
+        if (marker->tracking == 0 || marker->shown == 0) {
+            continue;
         }
-        if ((temp_v8 && temp_v0 != '\0') && temp_v2 != 0) {
-          mapInterfaceForwardResource();
-          temp_v3 = *(int *)(temp_v7 + 0x17c);
-          if (*(char *)(temp_v7 + 0xb2) == '\0') {
-            temp_v9 = *(float *)(temp_v7 + 0xb4);
-            temp_v15 = (float)temp_v16;
-            temp_v17 = 0.0f;
-            temp_v16 = temp_v16 & 0xffffffff;
-            temp_v10 = temp_v11;
-            if (temp_v9 > 0.0f) {
-              if ((int)temp_v9 >= 0x42b40001) {
-                temp_v17 = (temp_v9 - temp_v13) * temp_v14;
-              }
-              else {
-                temp_v10 = temp_v9 * temp_v15;
-              }
-            }
-            else {
-              temp_v9 = -temp_v9;
-              temp_v17 = temp_v12;
-              if ((int)temp_v9 >= 0x42b40001) {
-                temp_v17 = temp_v12 - (temp_v9 - temp_v13) * temp_v14;
-              }
-              else {
-                temp_v10 = temp_v9 * temp_v15;
-              }
-            }
-            temp_v4 = 0xef6c3eff;
-            temp_v5 = 0xfe0b22ff;
-            if (temp_v3 >= 0x43c80000) {
-              if (temp_v3 < 0x44480000) {
-                temp_v4 = 0xfbc30dff;
-                temp_v5 = 0xff6c2bff;
-              }
-              else if (temp_v3 < 0x44960000) {
-                temp_v4 = 0xfff2c0ff;
-                temp_v5 = 0xffd52dff;
-              }
-              else {
-                temp_v4 = 0xffffffff;
-                temp_v5 = 0x2db5ffff;
-              }
-            }
-            *(unsigned char *)(temp_v7 + 400) = 1;
-            *(float *)(temp_v7 + 0x194) = temp_v17 + 12.0f;
-            *(float *)(temp_v7 + 0x198) = temp_v10 + 12.0f;
-            FUN_002aa18c(temp_v4,temp_v5,temp_v4,temp_v5);
-            FUN_002aa18c(0xff,0xff,0xff);
-          }
+        mapInterfaceForwardResource();
+        if (marker->hidden != 0) {
+            continue;
         }
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 0x20);
-  }
-  return;
+        FloatBits bearing;
+        bearing.value = marker->heading;
+        f32 x = 0.0f;
+        f32 y;
+        if (bearing.value > 0.0f) {
+            y = 198.0f;
+            if (bearing.bits > 0x42b40000) {
+                x = (bearing.value - 90.0f) * 1.9888889f;
+            } else {
+                y = bearing.value * 2.2f;
+            }
+        } else {
+            bearing.value = -bearing.value;
+            y = 358.0f;
+            x = 0.0f;
+            if (bearing.bits > 0x42b40000) {
+                x = 358.0f - (bearing.value - 90.0f) * 1.9888889f;
+                y = 198.0f;
+            } else {
+                y = bearing.value * 2.2f;
+            }
+        }
+        FloatBits distance;
+        distance.value = marker->distance;
+        u32 first = 0xef6c3eff;
+        u32 second = 0xfe0b22ff;
+        if (distance.bits >= 0x43c80000) {
+            if (distance.bits < 0x44480000) {
+                first = 0xfbc30dff;
+                second = 0xff6c2bff;
+            } else if (distance.bits < 0x44960000) {
+                first = 0xfff2c0ff;
+                second = 0xffd52dff;
+            } else {
+                first = 0xffffffff;
+                second = 0x2db5ffff;
+            }
+        }
+        f32 left = (marker->blinkTimer % 20 >= 10) ? 0.328125f : 0.0f;
+        f32 right = (marker->blinkTimer % 20 >= 10) ? left : 0.328125f;
+        marker->arrowVisible = 1;
+        marker->arrowX = x + 12.0f;
+        marker->arrowY = y + 12.0f;
+        FUN_002aa18c(first, second, first, second, x, y, 42.0f, 42.0f, left, 0.0f, right, 0.65625f, 0.0f);
+        FUN_002aa18c(0xff, 0xff, 0xff, 0xff, x, y, 42.0f, 42.0f, left, 0.0f, 0.328125f, 0.65625f, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

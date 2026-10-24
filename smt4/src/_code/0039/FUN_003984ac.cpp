@@ -1,167 +1,138 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003984ac` (_code @ 0x3984ac, 0x358 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 204 rows); retail copies the 12-entry handler table with unrolled ldrd/ldm pairs and reads the string/table addresses through literal-pool constants */
+#include "common.h"
+
+// A player/partner name buffer: 16 bytes plus a terminator halfword, starts on a halfword.
+__packed struct NameBuffer {
+    u32 words[4];
+    u16 tail;
+};
+
+// Pointer-to-member style handler slot ({function, this-adjustment}).
+struct HandlerEntry {
+    void* function;
+    u32 adjust;
+};
+
+struct HandlerTable {
+    HandlerEntry entries[12];
+};
+
+// Name-entry form: only the members initialised here.
+struct NameForm {
+    /* 0x000 */ u8 unk000;
+    /* 0x001 */ u8 unk001;
+    /* 0x002 */ u8 unk002[2];
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ u8 unk008[8];
+    /* 0x010 */ u32 unk010;
+    /* 0x014 */ u32 unk014;
+    /* 0x018 */ u8 unk018[8];
+    /* 0x020 */ u8 unk020;
+    /* 0x021 */ u8 unk021;
+    /* 0x022 */ u8 unk022;
+    /* 0x023 */ u8 unk023[5];
+    /* 0x028 */ u8 unk028;
+    /* 0x029 */ u8 unk029;
+    /* 0x02a */ u8 unk02a;
+    /* 0x02b */ u8 unk02b;
+    /* 0x02c */ u16 unk02c;
+    /* 0x02e */ u16 unk02e;
+    /* 0x030 */ u8 unk030[0x74];
+    /* 0x0a4 */ u32 unk0a4;
+    /* 0x0a8 */ u32 unk0a8;
+    /* 0x0ac */ u32 unk0ac;
+    /* 0x0b0 */ NameBuffer name;
+    /* 0x0c2 */ NameBuffer originalName;
+    /* 0x0d4 */ HandlerTable handlers;
+    /* 0x134 */ u8 unk134[0x580 - 0x134];
+    /* 0x580 */ u8 keyboardGrid[0x64];
+    /* 0x5e4 */ u8 candidateGrid[0x64];
+    /* 0x648 */ u8 unk648;
+    /* 0x649 */ u8 mode;
+    /* 0x64a */ u8 unk64a[2];
+    /* 0x64c */ u32 layoutFile;
+    /* 0x650 */ u32 scriptFile;
+    /* 0x654 */ u32 resource;
+    /* 0x658 */ u32 unk658;
+    /* 0x65c */ u8 params[0x20];
+    /* 0x67c */ u8 cursorSprite[0x8c];
+    /* 0x708 */ u8 blinkSprite[0x8c];
+    /* 0x794 */ u8 frameSprite[0x8c];
+    /* 0x820 */ u8 unk820[0x940 - 0x820];
+    /* 0x940 */ u16 titleId;
+    /* 0x942 */ u8 unk942[2];
+    /* 0x944 */ u8 unk944;
+};
 
 extern "C" {
 
-int buttonHelpCreate(void);
-int FUN_00297060(unsigned int, unsigned int);
-int FUN_0029f848(unsigned char *, int, int, int, int, int);
-int uiSpriteSetImageKeyframe(...);
-int timerStart(...);
-int FUN_002bd954(...);
-int spriteStartAnimationByIndex(...);
-int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int asdTMTexTableLoadSprites(int);
-int FUN_002c58c8(int, int);
-int drawParameterBlockClear(void);
+extern HandlerTable DAT_00404f48;
+extern u8 DAT_004055d0[0x18];
+extern u8 DAT_004055e8[0x24];
+extern u8 DAT_0040560c[0x70];
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
+NameBuffer* gameGetPlayerName(void);
+NameBuffer* gameDataGetPlayerName(void);
+NameBuffer* gameDataGetSecondName(void);
+void asdTMTexTableLoadSprites(s32 id);
+void FUN_002c58c8(s32 id, s32 arg);
+void FUN_0029f848(void* grid, s32 a, s32 b, s32 c, s32 d, s32 e);
+u32 asdLoadFileSyncDefault(const char* path);
+u32 FUN_00297060(u32 scriptFile, u32 layoutFile);
+void drawParameterBlockClear(void);
+void paramsInit(void* block, void* a, s32 aSize, void* b, s32 bSize, s32 c, s32 d, s32 e, s32 f, void* g, s32 gSize);
+void FUN_002bd954(void* sprite, s32 sheet, s32 index, void* params, f32 scale, s32 flag);
+void spriteStartAnimationByIndex(void* sprite, s32 index);
+void timerStart(void* sprite, s32 a, s32 b);
+void uiSpriteSetImageKeyframe(void* sprite, s32 a, s32 b);
+void buttonHelpCreate(void);
 
-extern int scriptMenuTaskRunScript(...); /* 0x397470 */
-extern int FUN_00397514(...); /* 0x397514 */
-extern int FUN_00397580(...); /* 0x397580 */
-extern int FUN_00397b40(...); /* 0x397b40 */
-extern unsigned char LAB_00398808; /* 0x398808 */
-extern unsigned char LAB_00398818; /* 0x398818 */
-extern int FUN_00398830(...); /* 0x398830 */
-extern int FUN_00398874(...); /* 0x398874 */
-extern int FUN_00398920(...); /* 0x398920 */
-extern int FUN_00398940(...); /* 0x398940 */
-extern int FUN_00398964(...); /* 0x398964 */
-extern int nameFormApply(...); /* 0x3989d4 */
-extern unsigned char DAT_004055d0; /* 0x4055d0 */
-extern unsigned char DAT_004055e8; /* 0x4055e8 */
-extern unsigned char DAT_0040560c; /* 0x40560c */
-
-extern unsigned int *gameDataGetSecondName(void);
-extern unsigned int *gameDataGetPlayerName(void);
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_0029f848. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern unsigned int *gameGetPlayerName(void);
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_002c58c8. */
-extern unsigned int asdLoadFileSyncDefault(unsigned char *);
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
-
+// Sets up the name-entry form for the player (mode 0/-1), the main character (1) or the
+// second character (2): installs the handler table, copies the current name and creates
+// the keyboard/candidate grids, layout resources and the three cursor sprites.
+void FUN_003984ac(NameForm* form, u8 mode)
 {
-/* irregular: 21 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned char *puVar3;
-  
-  *(romwright_code **)(param_1 + 0xd4) = FUN_00398940;
-  *(unsigned int *)(param_1 + 0xd8) = 0;
-  *(romwright_code **)(param_1 + 0xdc) = FUN_00398964;
-  *(unsigned int *)(param_1 + 0xe0) = 0;
-  *(romwright_code **)(param_1 + 0xe4) = FUN_00397580;
-  *(unsigned int *)(param_1 + 0xe8) = 0;
-  *(unsigned int *)(param_1 + 0xec) = 0x39893c;
-  *(unsigned int *)(param_1 + 0xf0) = 0;
-  *(romwright_code **)(param_1 + 0xf4) = FUN_00397b40;
-  *(unsigned int *)(param_1 + 0xf8) = 0;
-  *(romwright_code **)(param_1 + 0xfc) = scriptMenuTaskRunScript;
-  *(unsigned int *)(param_1 + 0x100) = 0;
-  *(romwright_code **)(param_1 + 0x104) = FUN_00397514;
-  *(unsigned int *)(param_1 + 0x108) = 0;
-  *(romwright_code **)(param_1 + 0x10c) = nameFormApply;
-  *(unsigned int *)(param_1 + 0x110) = 0;
-  *(romwright_code **)(param_1 + 0x114) = FUN_00398920;
-  *(unsigned int *)(param_1 + 0x118) = 0;
-  *(unsigned int *)(param_1 + 0x11c) = 0x398f4c;
-  *(unsigned int *)(param_1 + 0x120) = 0;
-  *(romwright_code **)(param_1 + 0x124) = FUN_00398874;
-  *(unsigned int *)(param_1 + 0x128) = 0;
-  *(romwright_code **)(param_1 + 300) = FUN_00398830;
-  *(unsigned int *)(param_1 + 0x130) = 0;
-  param_1[0x649] = param_2;
-  *param_1 = 0;
-  param_1[1] = 0;
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  param_1[0x20] = 0;
-  param_1[0x28] = 0;
-  param_1[0x29] = 0;
-  param_1[0x22] = 0;
-  *(unsigned short *)(param_1 + 0x2c) = 0;
-  *(unsigned short *)(param_1 + 0x2e) = 0;
-  param_1[0x2a] = 0;
-  param_1[0x2b] = 0;
-  *(unsigned int *)(param_1 + 0xa4) = 0;
-  *(unsigned int *)(param_1 + 0xa8) = 0;
-  *(unsigned int *)(param_1 + 0xac) = 0;
-  param_1[0x944] = 0;
-  if (param_1[0x649] == '\0' || param_1[0x649] == -1) {
-    puVar1 = (unsigned int *)gameGetPlayerName();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  if (param_1[0x649] == '\x01') {
-    puVar1 = (unsigned int *)gameDataGetPlayerName();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  if (param_1[0x649] == '\x02') {
-    puVar1 = (unsigned int *)gameDataGetSecondName();
-    *(unsigned int *)(param_1 + 0xb0) = *puVar1;
-    *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
-    *(unsigned int *)(param_1 + 0xb8) = puVar1[2];
-    *(unsigned int *)(param_1 + 0xbc) = puVar1[3];
-    *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
-  }
-  *(unsigned int *)(param_1 + 0xc2) = *(unsigned int *)(param_1 + 0xb0);
-  *(unsigned int *)(param_1 + 0xc6) = *(unsigned int *)(param_1 + 0xb4);
-  *(unsigned int *)(param_1 + 0xca) = *(unsigned int *)(param_1 + 0xb8);
-  *(unsigned int *)(param_1 + 0xce) = *(unsigned int *)(param_1 + 0xbc);
-  *(unsigned short *)(param_1 + 0xd2) = *(unsigned short *)(param_1 + 0xc0);
-  asdTMTexTableLoadSprites(0x2e);
-  FUN_002c58c8(0x2e,0);
-  FUN_0029f848(param_1 + 0x580,0x69,7,0xf,1,1);
-  FUN_0029f848(param_1 + 0x5e4,3,1,3,1,1);
-  temp_v0 = asdLoadFileSyncDefault(&LAB_00398808);
-  *(unsigned int *)(param_1 + 0x64c) = temp_v0;
-  temp_v0 = asdLoadFileSyncDefault(&LAB_00398818);
-  *(unsigned int *)(param_1 + 0x650) = temp_v0;
-  FUN_00297060(temp_v0,*(unsigned int *)(param_1 + 0x64c));
-  *(unsigned int *)(param_1 + 0x654) = temp_v0;
-  puVar3 = param_1 + 0x65c;
-  drawParameterBlockClear();
-  paramsInit(puVar3,&DAT_004055d0,0x18,&DAT_004055e8,0x24,0,0,0,0,&DAT_0040560c,0x70);
-  FUN_002bd954(param_1 + 0x67c,0x2e,0,puVar3,1);
-  spriteStartAnimationByIndex(param_1 + 0x67c,0);
-  FUN_002bd954(param_1 + 0x708,0x2e,0,puVar3,1);
-  timerStart(param_1 + 0x708,0);
-  FUN_002bd954(param_1 + 0x794,0x2e,0,puVar3,1);
-  uiSpriteSetImageKeyframe(param_1 + 0x794,0);
-  buttonHelpCreate();
-  *(unsigned short *)(param_1 + 0x940) = 0x95;
-  return;
+    for (s32 i = 0; i < 12; i++) form->handlers.entries[i] = DAT_00404f48.entries[i];
+    form->mode = mode;
+    form->unk000 = 0;
+    form->unk001 = 0;
+    form->unk004 = 0;
+    form->unk010 = 0;
+    form->unk014 = 0;
+    form->unk020 = 0;
+    form->unk028 = 0;
+    form->unk029 = 0;
+    form->unk022 = 0;
+    form->unk02c = 0;
+    form->unk02e = 0;
+    form->unk02a = 0;
+    form->unk02b = 0;
+    form->unk0a4 = 0;
+    form->unk0a8 = 0;
+    form->unk0ac = 0;
+    form->unk944 = 0;
+    if (form->mode == 0 || (s8)form->mode == -1) form->name = *gameGetPlayerName();
+    if (form->mode == 1) form->name = *gameDataGetPlayerName();
+    if (form->mode == 2) form->name = *gameDataGetSecondName();
+    form->originalName = form->name;
+
+    asdTMTexTableLoadSprites(0x2e);
+    FUN_002c58c8(0x2e, 0);
+    FUN_0029f848(form->keyboardGrid, 0x69, 7, 0xf, 1, 1);
+    FUN_0029f848(form->candidateGrid, 3, 1, 3, 1, 1);
+    form->layoutFile = asdLoadFileSyncDefault("name/name.mbm");
+    form->scriptFile = asdLoadFileSyncDefault("name/name.bf");
+    form->resource = FUN_00297060(form->scriptFile, form->layoutFile);
+    drawParameterBlockClear();
+    paramsInit(form->params, DAT_004055d0, 0x18, DAT_004055e8, 0x24, 0, 0, 0, 0, DAT_0040560c, 0x70);
+    FUN_002bd954(form->cursorSprite, 0x2e, 0, form->params, 1.0f, 1);
+    spriteStartAnimationByIndex(form->cursorSprite, 0);
+    FUN_002bd954(form->blinkSprite, 0x2e, 0, form->params, 1.0f, 1);
+    timerStart(form->blinkSprite, 0, 0);
+    FUN_002bd954(form->frameSprite, 0x2e, 0, form->params, 1.0f, 1);
+    uiSpriteSetImageKeyframe(form->frameSprite, 0, 0);
+    buttonHelpCreate();
+    form->titleId = 0x95;
 }
 
 } /* extern "C" */

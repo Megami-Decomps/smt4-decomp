@@ -1,139 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a9740` (_code @ 0x4a9740, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills r0-r3 and the position vector at different frame offsets and merges the slot-field addressing into shared base registers; the logic is the same. */
+#include "common.h"
+#include "shard/S1Mover.h"
 
 extern "C" {
 
-int uiSpriteSelectAnim(int, int);
-int pairSetFirstResetSecond(int, int);
-int FUN_002a1850(float *, int, unsigned int);
-int FUN_00358e94(int, int, int);
-int FUN_00387240(int, int, int);
-int VectorSignedToFloat(...);
+/* One number popup of the battle UI (0x400 bytes, starting at 0x75B4 of the UI block): five digit
+ * sprites and the state that places them. */
+typedef struct BtlUiNumberSlot {
+    /* 0x000 */ u8 digitSprites[5][0x8C];
+    /* 0x2BC */ u8 unk2bc[0x118];
+    /* 0x3D4 */ Vec3f position;
+    /* 0x3E0 */ u8 active;
+    /* 0x3E1 */ u8 anchored;      /* whether the position was clamped on screen */
+    /* 0x3E2 */ u8 unk3e2[2];
+    /* 0x3E4 */ u32 digitTimers[5];
+    /* 0x3F8 */ s32 number;
+    /* 0x3FC */ u8 unk3fc;
+    /* 0x3FD */ u8 unk3fd[3];
+} BtlUiNumberSlot;
 
-/* stack frame of param_7: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_7_stack;
+typedef struct BtlUiNumberBlock {
+    /* 0x0000 */ u8 unk0000[0x75B4];
+    /* 0x75B4 */ BtlUiNumberSlot slots[1];
+} BtlUiNumberBlock;
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+typedef struct BtlUiGlobals {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ BtlUiNumberBlock *block;
+} BtlUiGlobals;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern unsigned int FUN_00152f54(void);
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: FUN_002a1850. */
-/* Supplied declaration required: FUN_00358e94. */
-/* Supplied declaration required: FUN_00387240. */
-extern unsigned int FUN_004aaff0(unsigned int, int);
-extern int __aeabi_idivmod(int, unsigned int);
+/* The sprite record whose first image's height is read to keep the popup on screen. */
+typedef struct BtlUiImage {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 height;
+} BtlUiImage;
 
+typedef struct BtlUiSprite {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ BtlUiImage *image;
+} BtlUiSprite;
 
-void FUN_004a9740(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,
-                 int param_6,int param_7)
+extern BtlUiGlobals g_btlUi;
 
+u32 FUN_00152f54(void);
+void FUN_002a1850(Vec3f *position, s32 arg, u32 value);
+BtlUiSprite *FUN_001834a4(u32 kind, u32 index);
+u32 FUN_004aaff0(u32 handle, s32 slot);
+void uiSpriteSelectAnim(void *sprite, s32 anim);
+void FUN_00387240(void *sprite, u32 kind, u32 index);
+void FUN_00358e94(void *sprite, s16 x, s16 y);
+void pairSetFirstResetSecond(void *sprite, s32 value);
+
+/* Starts a number popup in `slot`: places it at `position` (kept on screen when `anchored`), then
+ * sets up one sprite per decimal digit of `number`, most significant first. */
+void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, s32 small, s32 alt, s32 anchored)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0, in_s1, in_s2; 10 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int in_fpscr;
-  float in_s0;
-  float in_s1;
-  unsigned int in_s2;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  int iStack_30;
-  int iStack_2c;
-  unsigned int uStack_28;
-  
-  temp_v6 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  temp_v9 = in_s0;
-  temp_v8 = in_s1;
-  temp_v11 = in_s2;
-  temp_v12 = param_1;
-  iStack_30 = param_2;
-  iStack_2c = param_3;
-  uStack_28 = param_4;
-  if (param_7 != 0) {
-    temp_v10 = in_s1;
-    temp_v2 = FUN_00152f54();
-    FUN_002a1850(&temp_v9,0,temp_v2);
-    temp_v3 = FUN_001834a4(0xd,0x41a);
-    temp_v8 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v3 + 0xc) + 2) << 1,
-                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = 240.0f - temp_v8;
-    temp_v5 = in_fpscr & 0xfffffff;
-    temp_v0 = temp_v5 | ((unsigned int)(temp_v10 < temp_v8) << 0x1f) | ((unsigned int)(temp_v10 == temp_v8) << 0x1e);
-    in_fpscr = temp_v0 | ((unsigned int)((temp_v10 != temp_v10) || (temp_v8 != temp_v8)) << 0x1c);
-    temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-    if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-      temp_v5 = temp_v5 | ((unsigned int)(temp_v10 < 0.0f) << 0x1f) | ((unsigned int)(temp_v10 == 0.0f) << 0x1e);
-      in_fpscr = temp_v5 | ((unsigned int)(temp_v10 != temp_v10) << 0x1c);
-      temp_v1 = (unsigned char)(temp_v5 >> 0x18);
-      temp_v8 = temp_v10;
-      if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-        temp_v8 = 0.0f;
-      }
+    BtlUiNumberBlock *block = g_btlUi.block;
+    BtlUiNumberSlot *popup;
+
+    if (anchored != 0) {
+        FUN_002a1850(&position, 0, FUN_00152f54());
+        f32 maxY = 240.0f - (f32)(FUN_001834a4(13, 0x41A)->image->height << 1);
+
+        if (position.y > maxY) {
+            position.y = maxY;
+        } else if (position.y <= 0.0f) {
+            position.y = 0.0f;
+        }
     }
-  }
-  temp_v10 = temp_v8;
-  temp_v6 = temp_v6 + param_2 * 0x400;
-  *(unsigned char *)(temp_v6 + 0x7994) = 1;
-  *(char *)(temp_v6 + 0x7995) = (char)param_7;
-  *(int *)(temp_v6 + 0x79ac) = param_3;
-  *(float *)(temp_v6 + 0x7988) = temp_v9;
-  *(float *)(temp_v6 + 0x798c) = temp_v10;
-  *(unsigned int *)(temp_v6 + 0x7990) = temp_v11;
-  *(unsigned char *)(temp_v6 + 0x79b0) = 0;
-  temp_v2 = FUN_004aaff0(temp_v12,param_2);
-  temp_v5 = 10000;
-  temp_v3 = 4;
-  do {
-    *(unsigned int *)(temp_v6 + temp_v3 * 4 + 0x7998) = 0;
-    temp_v7 = temp_v6 + temp_v3 * 0x8c + 0x75b4;
-    uiSpriteSelectAnim(temp_v7,3);
-    FUN_00387240(temp_v7,0xd,temp_v3 + 0x41a);
-    temp_v8 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00358e94(temp_v7,(int)(short)(int)(temp_v9 + temp_v8),(int)(short)(int)temp_v10);
-    if (param_5 == 0) {
-      if (param_6 != 0) {
-        temp_v4 = __aeabi_idivmod(param_3,temp_v5);
-        temp_v4 = temp_v4 + 0x7f8;
-      }
-      else {
-        temp_v4 = __aeabi_idivmod(param_3,temp_v5);
-        temp_v4 = temp_v4 + 0x7e4;
-      }
+    popup = (BtlUiNumberSlot *)((u8 *)block + slot * 0x400 + 0x75B4);
+    popup->active = 1;
+    popup->anchored = anchored;
+    popup->number = number;
+    popup->position.x = position.x;
+    popup->position.y = position.y;
+    popup->position.z = position.z;
+    popup->unk3fc = 0;
+
+    u32 digitOffset = FUN_004aaff0(handle, slot);
+    s32 divisor = 10000;
+
+    for (s32 i = 4; i >= 0; i--) {
+        popup->digitTimers[i] = 0;
+        void *sprite = popup->digitSprites[i];
+
+        uiSpriteSelectAnim(sprite, 3);
+        FUN_00387240(sprite, 13, i + 0x41A);
+        FUN_00358e94(sprite, (s16)(position.x + (f32)digitOffset), (s16)position.y);
+
+        s32 base;
+        if (small == 0) {
+            base = alt != 0 ? 0x7F8 : 0x7E4;
+        } else {
+            base = alt != 0 ? 0x802 : 0x7EE;
+        }
+        pairSetFirstResetSecond(sprite, number / divisor + base);
+        number -= number / divisor * divisor;
+        divisor /= 10;
     }
-    else if (param_6 != 0) {
-      temp_v4 = __aeabi_idivmod(param_3,temp_v5);
-      temp_v4 = temp_v4 + 0x802;
-    }
-    else {
-      temp_v4 = __aeabi_idivmod(param_3,temp_v5);
-      temp_v4 = temp_v4 + 0x7ee;
-    }
-    pairSetFirstResetSecond(temp_v7,temp_v4);
-    temp_v7 = __aeabi_idivmod(param_3,temp_v5);
-    temp_v3 = temp_v3 - 1;
-    param_3 = param_3 - temp_v7 * temp_v5;
-    temp_v5 = temp_v5 / 10;
-  } while (-1 < temp_v3);
-  return;
 }
 
-} /* extern "C" */
+}

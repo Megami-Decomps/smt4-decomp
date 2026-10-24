@@ -1,203 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00415cd8` (_code @ 0x415cd8, 0x3a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/W6_W6Match3_FilterTexture.h"
+/* NON_MATCHING: builds the vertex ring of the X polygon filter (centre, first rim vertex and the rest by repeated rotation with the table sine/cosine); written from the decompilation and the retail disassembly, float to int conversions and the unused alignment argument of asdOperatorNewE are not compared with retail */
+#include "AsdSDK/AsdDebug.h"
+#include "nw/math/MTX44.h"
+
+struct XPolyVertex {
+    f32 x, y, z;
+    f32 u, v;
+};
+
+struct XPolyParams {
+    /* 0x00 */ s32 segments;
+    /* 0x04 */ f32 radius;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ f32 centerU, centerV;
+    /* 0x18 */ f32 oddU, oddV;
+    /* 0x20 */ f32 evenU, evenV;
+    /* 0x28 */ u8 unk28[4];
+    /* 0x2C */ u32 baseArgument;
+};
+
+struct XPolyFilter {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ XPolyVertex *vertices;
+    /* 0x08 */ u8 unk08[0x10];
+    /* 0x18 */ u8 matrix[0x40];
+    /* 0x58 */ f32 depth;
+    /* 0x5C */ f32 scale;
+    /* 0x60 */ XPolyParams *params;
+    /* 0x64 */ void *indices;
+};
+
+/* One entry of the sine table: value and slope for sine, then for cosine. */
+struct SinCosEntry {
+    f32 sinValue;
+    f32 cosValue;
+    f32 sinSlope;
+    f32 cosSlope;
+};
+
+#define XPOLY_UNITS_PER_DEGREE 0.7111111f
+#define XPOLY_SOURCE "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Filter\\FilterXPoly.cpp"
 
 extern "C" {
+extern SinCosEntry DAT_00536d14[256];
 
-int asdMemoryAlloc(void);
-int mtx44Copy(int, unsigned int *);
-int asdOperatorNewE(void);
-int VectorFloatToUnsigned(...);
-int VectorSignedToFloat(unsigned int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+void btlFilterLoadTexture(XPolyFilter *filter, u32 argument, u32 base);
+void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
+void *asdOperatorNewE(u32 size);
+void mtx44Copy(void *destination, const nw::math::MTX44 *source);
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern unsigned int DAT_00536d14; /* 0x536d14 */
-extern unsigned int DAT_00536d18; /* 0x536d18 */
-extern unsigned int DAT_00536d1c; /* 0x536d1c */
-extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern unsigned int _ZGVZN2nw4math5MTX448IdentityEvE8identity; /* 0x5c4c30 */
-extern unsigned int _ZZN2nw4math5MTX448IdentityEvE8identity; /* 0x64c084 */
-extern float DAT_0064c088; /* 0x64c088 */
-extern float DAT_0064c08c; /* 0x64c08c */
-extern float DAT_0064c090; /* 0x64c090 */
-extern float DAT_0064c094; /* 0x64c094 */
-extern unsigned int DAT_0064c098; /* 0x64c098 */
-extern float DAT_0064c09c; /* 0x64c09c */
-extern float DAT_0064c0a0; /* 0x64c0a0 */
-extern float DAT_0064c0a4; /* 0x64c0a4 */
-extern float DAT_0064c0a8; /* 0x64c0a8 */
-extern unsigned int DAT_0064c0ac; /* 0x64c0ac */
-extern float DAT_0064c0b0; /* 0x64c0b0 */
-extern float DAT_0064c0b4; /* 0x64c0b4 */
-extern float DAT_0064c0b8; /* 0x64c0b8 */
-extern float DAT_0064c0bc; /* 0x64c0bc */
-extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Sine and cosine of an angle given in table units (256 per turn, interpolated). */
+static __inline void sinCosUnits(f32 units, f32 *sinOut, f32 *cosOut)
 {
-    return value < (float)0 ? -value : value;
+    f32 magnitude = units < 0.0f ? -units : units;
+    while (magnitude >= 65536.0f)
+        magnitude -= 65536.0f;
+    u32 whole = (u32)magnitude;
+    const SinCosEntry *entry = &DAT_00536d14[(u8)whole];
+    f32 fraction = magnitude - (f32)(whole & 0xFFFF);
+    *sinOut = entry->sinValue + fraction * entry->sinSlope;
+    *cosOut = entry->cosValue + fraction * entry->cosSlope;
+    if (units < 0.0f)
+        *sinOut = -*sinOut;
 }
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: mtx44Copy. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: asdOperatorNewE. */
 
-
-/* WARNING: Removing unreachable block (ram,0x00415e74) */
-/* WARNING: Removing unreachable block (ram,0x00415e80) */
-
-void FUN_00415cd8(int param_1,int param_2,unsigned int param_3)
-
+void FUN_00415cd8(XPolyFilter *filter, XPolyParams *params, u32 argument)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  float *pfVar5;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned int in_fpscr;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  
-  *(int *)(param_1 + 0x60) = param_2;
-  btlFilterLoadTexture((Filter4Poly*)param_1,param_3,*(unsigned int *)(param_2 + 0x2c));
-  temp_v0 = 0x100;
-  asdMemoryAlloc();
-  *(unsigned int *)(param_1 + 4) = temp_v0;
-  temp_v1 = (**(int **)(param_1 + 0x60) + 1) * 0xc;
-  asdOperatorNewE();
-  *(int *)(param_1 + 100) = temp_v1;
-  temp_v19 = 0.0f;
-  temp_v10 = (float)VectorSignedToFloat(**(unsigned int **)(param_1 + 0x60),(unsigned char)(in_fpscr >> 0x16) & 3
-                                     );
-  temp_v10 = (360.0f / temp_v10) * 0.7111111f;
-  temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v10) << 0x1d);
-  for (temp_v10 = romwright_fabs_4(temp_v10); (int)temp_v10 >= 0x47800000; temp_v10 = temp_v10 - 65536.0f) {
-  }
-  temp_v5 = VectorFloatToUnsigned(0,3);
-  temp_v6 = VectorFloatToUnsigned(0,3);
-  temp_v7 = VectorFloatToUnsigned(temp_v10,3);
-  temp_v4 = temp_v5;
-  temp_v3 = temp_v7;
-  temp_v15 = (float)VectorUnsignedToFloat(temp_v5 & 0xffff,(unsigned char)(temp_v2 >> 0x16) & 3);
-  temp_v5 = temp_v6 & 0xff;
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v2 >> 0x16) & 3);
-  temp_v8 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v2 >> 0x16) & 3);
-  temp_v12 = (float)(&DAT_00536d14)[temp_v4 * 4] + (0.0f - temp_v15) * (float)(&DAT_00536d1c)[temp_v4 * 4];
-  temp_v16 = (float)(&DAT_00536d14)[temp_v3 * 4] + (temp_v10 - temp_v11) * (float)(&DAT_00536d1c)[temp_v3 * 4]
-  ;
-  temp_v14 = (float)(&DAT_00536d18)[temp_v4 * 4] + (0.0f - temp_v15) * (float)(&DAT_00536d20)[temp_v4 * 4];
-  temp_v15 = (float)(&DAT_00536d14)[temp_v5 * 4] + (0.0f - temp_v8) * (float)(&DAT_00536d1c)[temp_v5 * 4];
-  temp_v11 = (float)(&DAT_00536d18)[temp_v3 * 4] + (temp_v10 - temp_v11) * (float)(&DAT_00536d20)[temp_v3 * 4]
-  ;
-  temp_v10 = (float)(&DAT_00536d18)[temp_v5 * 4] + (0.0f - temp_v8) * (float)(&DAT_00536d20)[temp_v5 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) {
-    temp_v16 = -temp_v16;
-  }
-  temp_v13 = *(float *)(*(int *)(param_1 + 0x60) + 4);
-  puVar2 = *(unsigned int **)(param_1 + 4);
-  *puVar2 = 0;
-  puVar2[1] = 0;
-  puVar2[2] = 0;
-  temp_v1 = *(int *)(param_1 + 4);
-  temp_v0 = *(unsigned int *)(*(int *)(param_1 + 0x60) + 0x14);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(*(int *)(param_1 + 0x60) + 0x10);
-  *(unsigned int *)(temp_v1 + 0x10) = temp_v0;
-  temp_v1 = *(int *)(param_1 + 4);
-  *(float *)(temp_v1 + 0x14) = temp_v13;
-  *(unsigned int *)(temp_v1 + 0x18) = 0;
-  *(unsigned int *)(temp_v1 + 0x1c) = 0;
-  temp_v1 = *(int *)(param_1 + 4);
-  temp_v0 = *(unsigned int *)(*(int *)(param_1 + 0x60) + 0x1c);
-  *(unsigned int *)(temp_v1 + 0x20) = *(unsigned int *)(*(int *)(param_1 + 0x60) + 0x18);
-  *(unsigned int *)(temp_v1 + 0x24) = temp_v0;
-  temp_v2 = 2;
-  temp_v8 = temp_v19;
-  temp_v9 = temp_v19;
-  if (**(int **)(param_1 + 0x60) + 1 >= 3) {
-    do {
-      pfVar5 = (float *)(*(int *)(param_1 + 4) + temp_v2 * 0x14);
-      temp_v18 = -temp_v15 * temp_v13;
-      temp_v17 = temp_v16 * temp_v10 * temp_v13 + (temp_v14 * temp_v11 + temp_v12 * temp_v16 * temp_v15) * temp_v8 +
-               (temp_v14 * temp_v16 * temp_v15 - temp_v12 * temp_v11) * temp_v9;
-      temp_v13 = temp_v11 * temp_v10 * temp_v13 + (temp_v12 * temp_v11 * temp_v15 - temp_v14 * temp_v16) * temp_v8 +
-               (temp_v12 * temp_v16 + temp_v14 * temp_v11 * temp_v15) * temp_v9;
-      temp_v9 = temp_v18 + temp_v12 * temp_v10 * temp_v8 + temp_v14 * temp_v10 * temp_v9;
-      *pfVar5 = temp_v13;
-      pfVar5[1] = temp_v17;
-      pfVar5[2] = temp_v9;
-      temp_v1 = *(int *)(param_1 + 0x60);
-      if ((temp_v2 & 1) != 0) {
-        temp_v0 = *(unsigned int *)(temp_v1 + 0x1c);
-        puVar2 = (unsigned int *)(temp_v2 * 0x14 + 0xc + *(int *)(param_1 + 4));
-        *puVar2 = *(unsigned int *)(temp_v1 + 0x18);
-        puVar2[1] = temp_v0;
-      }
-      else {
-        temp_v0 = *(unsigned int *)(temp_v1 + 0x24);
-        puVar2 = (unsigned int *)(temp_v2 * 0x14 + 0xc + *(int *)(param_1 + 4));
-        *puVar2 = *(unsigned int *)(temp_v1 + 0x20);
-        puVar2[1] = temp_v0;
-      }
-      temp_v2 = temp_v2 + 1;
-      temp_v8 = temp_v17;
-    } while ((int)temp_v2 < **(int **)(param_1 + 0x60) + 1);
-  }
-  temp_v0 = 0x3f800000;
-  *(unsigned int *)(param_1 + 0x58) = 0;
-  *(unsigned int *)(param_1 + 0x5c) = 0x3f800000;
-  if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v1 != 0)) {
-    _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v0;
-    DAT_0064c088 = temp_v19;
-    DAT_0064c08c = temp_v19;
-    DAT_0064c090 = temp_v19;
-    DAT_0064c094 = temp_v19;
-    DAT_0064c098 = temp_v0;
-    DAT_0064c09c = temp_v19;
-    DAT_0064c0a0 = temp_v19;
-    DAT_0064c0a4 = temp_v19;
-    DAT_0064c0a8 = temp_v19;
-    DAT_0064c0ac = temp_v0;
-    DAT_0064c0b0 = temp_v19;
-    DAT_0064c0b4 = temp_v19;
-    DAT_0064c0b8 = temp_v19;
-    DAT_0064c0bc = temp_v19;
-    DAT_0064c0c0 = temp_v0;
-  }
-  mtx44Copy(param_1 + 0x18,&_ZZN2nw4math5MTX448IdentityEvE8identity);
-  return;
+    filter->params = params;
+    btlFilterLoadTexture(filter, argument, params->baseArgument);
+    asdDebugTrace(XPOLY_SOURCE, 48);
+    filter->vertices = static_cast<XPolyVertex *>(asdMemoryAlloc(0x100, 0x100, 0, (filter->params->segments + 1) * sizeof(XPolyVertex), 1));
+    filter->indices = asdOperatorNewE((filter->params->segments + 1) * 12);
+
+    f32 step = (360.0f / (f32)filter->params->segments) * XPOLY_UNITS_PER_DEGREE;
+    f32 sinA, cosA, sinB, cosB, sinC, cosC;
+    sinCosUnits(0.0f, &sinA, &cosA);
+    sinCosUnits(0.0f, &sinB, &cosB);
+    sinCosUnits(step, &sinC, &cosC);
+
+    f32 radius = filter->params->radius;
+    XPolyVertex *vertices = filter->vertices;
+    vertices[0].x = 0.0f;
+    vertices[0].y = 0.0f;
+    vertices[0].z = 0.0f;
+    vertices[0].u = filter->params->centerU;
+    vertices[0].v = filter->params->centerV;
+    vertices[1].x = radius;
+    vertices[1].y = 0.0f;
+    vertices[1].z = 0.0f;
+    vertices[1].u = filter->params->oddU;
+    vertices[1].v = filter->params->oddV;
+
+    f32 x = radius;
+    f32 y = 0.0f;
+    f32 z = 0.0f;
+    for (s32 i = 2; i < filter->params->segments + 1; i++) {
+        f32 newX = cosC * cosB * x + (sinA * cosC * sinB - cosA * sinC) * y + (sinA * sinC + cosA * cosC * sinB) * z;
+        f32 newY = sinC * cosB * x + (cosA * cosC + sinA * sinC * sinB) * y + (cosA * sinC * sinB - sinA * cosC) * z;
+        f32 newZ = -sinB * x + sinA * cosB * y + cosA * cosB * z;
+        x = newX;
+        y = newY;
+        z = newZ;
+        vertices[i].x = x;
+        vertices[i].y = y;
+        vertices[i].z = z;
+        if ((i & 1) != 0) {
+            vertices[i].u = filter->params->oddU;
+            vertices[i].v = filter->params->oddV;
+        } else {
+            vertices[i].u = filter->params->evenU;
+            vertices[i].v = filter->params->evenV;
+        }
+    }
+
+    filter->depth = 0.0f;
+    filter->scale = 1.0f;
+    mtx44Copy(filter->matrix, &nw::math::MTX44::Identity());
 }
 
 } /* extern "C" */

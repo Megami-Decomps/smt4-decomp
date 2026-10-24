@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail 63 vs built 60 rows; render-stack push/pop lowering and saved-register allocation differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 27 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -19,7 +19,7 @@ u32 FUN_001e9508(void)
     RenderCtx *context = g_titleScene;
     s32 id = g_mapMain->id;
     if (id >= 21 && id < 110 && static_cast<u32>(id - 84) >= 12 && id != 24) {
-        renderStackPush(&context->stackA, FUN_002c5d80(5, 0));
+        renderCtxPushA(context, FUN_002c5d80(5, 0));
         FUN_001f9f64();
         MapMain_DrawMinimapIcons();
         renderStackPop(&g_titleScene->stackA);

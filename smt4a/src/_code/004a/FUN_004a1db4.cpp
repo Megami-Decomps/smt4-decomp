@@ -1,170 +1,127 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a1db4` (_code @ 0x4a1db4, 0x2ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (172 vs 173 rows); retail uses a larger callee-saved set (push {r3-r9,lr}) and different register allocation */
+#include "common.h"
+
+// Selection state of the animated page UI.
+struct AnimatedPageSelection {
+    u8 selected;        // 0x00
+    u8 pad[3];
+    s32 page;           // 0x04
+};
+
+// Quest/status menu screen: only the members the update touches.
+struct StatusMenu {
+    u8 unk00[0x14];
+    u32 state;              // 0x14
+    u32 stateArg;           // 0x18
+    u8 unk1c[4];
+    u8 list[8];             // 0x20 (flagged value holder)
+    s32 itemCount;          // 0x28
+    u8 unk2c[0xc8 - 0x2c];
+    u8 pointer[0xdc - 0xc8];    // 0xc8
+    u8 rowSprite[0xa874 - 0xdc];// 0xdc
+    s16 mode;               // 0xa874
+};
 
 extern "C" {
 
-int ifTouchGetButtonHelpValue(void);
-int sysPlaySe(void);
-int FUN_00183f58(int, int, int, int);
-int uiSpriteBankApplyPreset(int, int);
-int panelSetTarget(unsigned int, int);
-int FUN_0037c8e4(int, int);
-int messageSetActiveMode(int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
-int FUN_004a3b48(int);
-int FUN_004a8750(unsigned int, int, int);
-int FUN_004cf8dc(int, int);
-int FUN_004d0100(int);
-int FUN_004d01f8(int);
-int sendEvent100020D(void);
-int sendEvent100020E(void);
+extern AnimatedPageSelection g_animatedPageSelection;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+s32 useCounterIsFinished(void);
+void FUN_004cf8dc(void* sprite, s32 mode);
+u32 vec2GetXInt(void* sprite);
+u32 vec2GetYInt(void* sprite);
+void pointConvertToFloat(void* pointer, u32 x, u32 y);
+s32 gameGetMode(void);
+s32 statusDownGetFlag(void);
+s32 FUN_0035db94(void);
+void uiSpriteBankApplyPreset(void* sprites, s32 preset);
+s32 flaggedValueHolderGetTotal(void* list);
+void FUN_004a8750(u32 id, s32 page, s32 arg);
+void FUN_0037c8e4(s32 a, s32 b);
+s32 FUN_002a4b28(u16 id);
+void panelSetTarget(s32 target, s32 arg);
+void messageSetActiveMode(s32 mode);
+s32 FUN_002a482c(void* list);
+s32 FUN_0031d174(void* list);
+s32 statusDownGetMode(void);
+s32 inputIsQuestConfirmPressed(void);
+void sendEvent100020D(void);
+void sendEvent100020E(void);
+void FUN_004a3b48(StatusMenu* menu);
+void ifTouchGetButtonHelpValue(void);
+void sysPlaySe(void);
+void FUN_004d0100(void* list);
+void FUN_004d01f8(void* list);
+void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
 
-extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
+#define MENU_BYTE(menu, offset) (*(reinterpret_cast<u8*>(menu) + (offset)))
 
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: ifTouchGetButtonHelpValue. */
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern int useCounterIsFinished(void);
-extern int FUN_002a482c(int);
-extern int FUN_002a4b28(unsigned short);
-extern int statusDownGetFlag(void);
-extern int gameGetMode(void);
-extern int FUN_0031d174(int);
-extern int FUN_0035db94(void);
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
-extern int statusDownGetMode(void);
-/* Supplied declaration required: messageSetActiveMode. */
-/* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_004a3b48. */
-/* Supplied declaration required: FUN_004a8750. */
-/* Supplied declaration required: FUN_004cf8dc. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_004d0100. */
-/* Supplied declaration required: FUN_004d01f8. */
-/* Supplied declaration required: sendEvent100020D. */
-/* Supplied declaration required: sendEvent100020E. */
-extern int inputIsQuestConfirmPressed(void);
-
-
-void FUN_004a1db4(int param_1)
-
+// Per-frame update of the status menu: follows the cursor, handles page changes and confirm.
+void FUN_004a1db4(StatusMenu* menu)
 {
-/* irregular: 15 native warning(s); review required */
-  unsigned short temp_v0;
-  char temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v3 = useCounterIsFinished();
-  if (temp_v3 == 0) {
-    return;
-  }
-  FUN_004cf8dc(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa874));
-  temp_v3 = param_1 + *(short *)(param_1 + 0xa874) * 0x8c + 0xfc;
-  temp_v4 = vec2GetYInt(temp_v3);
-  temp_v5 = vec2GetXInt(temp_v3);
-  pointConvertToFloat(param_1 + 200,temp_v5,temp_v4);
-  temp_v3 = gameGetMode();
-  if ((temp_v3 != 0) && (temp_v3 = statusDownGetFlag(), temp_v3 == 0)) {
-    *(unsigned int *)(param_1 + 0x14) = 0xc;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    temp_v3 = FUN_0035db94();
-    if (temp_v3 == 1) {
-      temp_v2 = 8;
-    }
-    else {
-      temp_v2 = 10;
-    }
-    *(unsigned short *)(param_1 + 0xa874) = temp_v2;
-    uiSpriteBankApplyPreset(param_1 + 0xdc,temp_v2);
-    if (*(char *)(param_1 + 0x860) != '\0') {
-      return;
-    }
-    temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v0 = *(unsigned short *)(param_1 + temp_v3 * 0x20 + 0x868);
-    temp_v8 = (unsigned int)temp_v0;
-    FUN_004a8750(temp_v8,*(unsigned char *)(param_1 + 0x861),0);
-    FUN_0037c8e4(1,0);
-    temp_v3 = FUN_002a4b28(temp_v0);
-    if (temp_v3 != 0) {
-      panelSetTarget(-temp_v8,0);
-      return;
-    }
-    messageSetActiveMode(1);
-    return;
-  }
-  temp_v3 = gameGetMode();
-  if (temp_v3 != 0) {
-    return;
-  }
-  if (*(int *)(param_1 + 0x28) < 1) {
-    return;
-  }
-  temp_v3 = FUN_002a482c(param_1 + 0x20);
-  temp_v6 = FUN_0031d174(param_1 + 0x20);
-  temp_v7 = statusDownGetMode();
-  if (temp_v7 != 1) {
-    temp_v7 = statusDownGetMode();
-    if (temp_v7 != -1) {
-      if (*(char *)(param_1 + 0x860) != '\x01') {
-        temp_v7 = FUN_002a482c(param_1 + 0x20);
-        if ((temp_v7 == temp_v3) && (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 == temp_v6)) {
-          return;
+    if (useCounterIsFinished() == 0) return;
+
+    FUN_004cf8dc(menu->rowSprite, menu->mode);
+    void* sprite = reinterpret_cast<u8*>(menu) + menu->mode * 0x8c + 0xfc;
+    u32 y = vec2GetYInt(sprite);
+    u32 x = vec2GetXInt(sprite);
+    pointConvertToFloat(menu->pointer, x, y);
+
+    if (gameGetMode() != 0 && statusDownGetFlag() == 0) {
+        menu->state = 0xc;
+        menu->stateArg = 0;
+        u16 mode = (FUN_0035db94() == 1) ? 8 : 10;
+        menu->mode = mode;
+        uiSpriteBankApplyPreset(menu->rowSprite, mode);
+        if (MENU_BYTE(menu, 0x860) != 0) return;
+        u16 id = *reinterpret_cast<u16*>(reinterpret_cast<u8*>(menu) + flaggedValueHolderGetTotal(menu->list) * 0x20 + 0x868);
+        FUN_004a8750(id, MENU_BYTE(menu, 0x861), 0);
+        FUN_0037c8e4(1, 0);
+        if (FUN_002a4b28(id) != 0) {
+            panelSetTarget(-(s32)id, 0);
+            return;
         }
-        sendEvent100020D();
+        messageSetActiveMode(1);
         return;
-      }
-      temp_v7 = inputIsQuestConfirmPressed();
-      if (temp_v7 != 0) {
-        temp_v1 = *(char *)(param_1 + 0x861) + '\x01';
-        *(char *)(param_1 + 0x861) = temp_v1;
-        if ('\x01' < temp_v1) {
-          *(unsigned char *)(param_1 + 0x861) = 0;
+    }
+    if (gameGetMode() != 0) return;
+    if (menu->itemCount < 1) return;
+
+    s32 cursor = FUN_002a482c(menu->list);
+    s32 page = FUN_0031d174(menu->list);
+    if (statusDownGetMode() != 1) {
+        if (statusDownGetMode() != -1) {
+            if (MENU_BYTE(menu, 0x860) != 1) {
+                if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
+                sendEvent100020D();
+                return;
+            }
+            if (inputIsQuestConfirmPressed() != 0) {
+                s8 next = MENU_BYTE(menu, 0x861) + 1;
+                MENU_BYTE(menu, 0x861) = next;
+                if (next > 1) MENU_BYTE(menu, 0x861) = 0;
+                sendEvent100020E();
+                MENU_BYTE(menu, 0x863) = 1;
+                g_animatedPageSelection.page = -1;
+                FUN_004a3b48(menu);
+                ifTouchGetButtonHelpValue();
+                sysPlaySe();
+            }
+        } else {
+            FUN_004d01f8(menu->list);
         }
-        sendEvent100020E();
-        *(unsigned char *)(param_1 + 0x863) = 1;
-        (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
-        FUN_004a3b48(param_1);
-        ifTouchGetButtonHelpValue();
-        sysPlaySe();
-      }
+    } else {
+        FUN_004d0100(menu->list);
     }
-    else {
-      FUN_004d01f8(param_1 + 0x20);
+    if (MENU_BYTE(menu, 0x860) == 1) {
+        if (MENU_BYTE(menu, 0x861) != 1) {
+            FUN_00183f58(2, 4, 0x41, 1);
+        } else {
+            FUN_00183f58(2, 4, 0x40, 1);
+        }
     }
-  }
-  else {
-    FUN_004d0100(param_1 + 0x20);
-  }
-  if (*(char *)(param_1 + 0x860) == '\x01') {
-    if (*(char *)(param_1 + 0x861) != '\x01') {
-      FUN_00183f58(2,4,0x41,1);
-    }
-    else {
-      FUN_00183f58(2,4,0x40,1);
-    }
-  }
-  temp_v7 = FUN_002a482c(param_1 + 0x20);
-  if ((temp_v7 == temp_v3) && (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 == temp_v6)) {
-    return;
-  }
-  sendEvent100020D();
-  return;
+    if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
+    sendEvent100020D();
 }
 
 } /* extern "C" */

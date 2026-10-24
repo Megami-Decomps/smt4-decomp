@@ -1,180 +1,135 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033f42c` (_code @ 0x33f42c, 0x384 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the fade request fields are loaded and the packed colour assembled in another order and the level update is scheduled differently from retail (221 vs 226 rows); the fade behaviour is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00283c54(...);
-int FUN_00283cf4(unsigned int, unsigned int, int, int);
-int FUN_00348c28(int);
-int FUN_00348c3c(...);
-int VectorSignedToFloat(...);
+/* The screen fade request: the mode, a position, a texture, the base alpha and the colour bytes. */
+typedef struct FadeRequest {
+    s32 mode;                        /* 0: off, 1: fade out, 2: fade in, other: timed */
+    s32 x;
+    s32 y;
+    u32 texture;
+    u32 alpha;
+    s32 additive;
+    s32 red;
+    s32 green;
+    s32 blue;
+} FadeRequest;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+/* The game state slice the fade reads: the progress word, the dim state and the fade request. */
+typedef struct FadeGameState {
+    /* 0x000 */ s32 progress;
+    /* 0x004 */ u8 unk004[0x254];
+    /* 0x258 */ s16 dimState;
+    /* 0x25A */ u8 unk25a[2];
+    /* 0x25C */ s8 dimOverride;
+    /* 0x25D */ u8 unk25d[3];
+    /* 0x260 */ s8 blocked;
+    /* 0x261 */ u8 unk261[0x3C7];
+    /* 0x628 */ FadeRequest fade;
+} FadeGameState;
 
-extern int DAT_005821fc; /* 0x5821fc */
-extern int g_gameState; /* 0x5f15fc */
-extern short DAT_005f1854; /* 0x5f1854 */
-extern signed char DAT_005f1858; /* 0x5f1858 */
-extern signed char DAT_005f185c; /* 0x5f185c */
-extern int DAT_005f1c24; /* 0x5f1c24 */
-extern unsigned int DAT_005f1c28; /* 0x5f1c28 */
-extern unsigned int DAT_005f1c2c; /* 0x5f1c2c */
-extern unsigned int DAT_005f1c30; /* 0x5f1c30 */
-extern unsigned int DAT_005f1c34; /* 0x5f1c34 */
-extern int DAT_005f1c38; /* 0x5f1c38 */
-extern int DAT_005f1c3c; /* 0x5f1c3c */
-extern int DAT_005f1c40; /* 0x5f1c40 */
-extern int DAT_005f1c44; /* 0x5f1c44 */
+extern s32 DAT_005821fc;
+extern FadeGameState g_gameState;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00283c54. */
-/* Supplied declaration required: FUN_00283cf4. */
-extern int frameTextureGetState(void);
-/* Supplied declaration required: FUN_00348c28. */
-/* Supplied declaration required: FUN_00348c3c. */
+s32 frameTextureGetState(void);
+void FUN_00348c28(s32 arg);
+void FUN_00348c3c(s32 arg);
+void FUN_00283cf4(f32 x, f32 y, u32 texture, u32 color, s32 additive, s32 flag);
+void FUN_00283c54(f32 x, f32 y, u32 texture, u32 color, s32 additive, s32 flag);
 
-
-void FUN_0033f42c(void)
-
+/* Moves the fade level by 2 towards `target` without overshooting it. */
+static __inline void approachLevel(s32 target)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  
-  if (DAT_005f185c != '\0') {
-    return;
-  }
-  temp_v0 = frameTextureGetState();
-  temp_v1 = DAT_005f1c34;
-  if ((temp_v0 != 0) || (DAT_005f1c24 == 0)) {
-    FUN_00348c28(0);
-    FUN_00348c3c(0);
-    return;
-  }
-  if (DAT_005f1c24 == 1) {
-    FUN_00348c3c(1);
-    VectorSignedToFloat(DAT_005f1c2c,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(DAT_005f1c28,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00283cf4(DAT_005f1c30,
-                 DAT_005f1c34 | (DAT_005f1c3c << 0x18) |
-                 (DAT_005f1c40 << 0x10) | (DAT_005f1c44 << 8),DAT_005f1c38 != 0,1);
-    FUN_00348c28(0);
-    return;
-  }
-  if (DAT_005f1c24 == 2) {
-    FUN_00348c28(1);
-    VectorSignedToFloat(DAT_005f1c2c,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(DAT_005f1c28,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00283c54(DAT_005f1c30,
-                 DAT_005f1c34 | (DAT_005f1c3c << 0x18) |
-                 (DAT_005f1c40 << 0x10) | (DAT_005f1c44 << 8),DAT_005f1c38 != 0,1);
-    FUN_00348c3c(0);
-    return;
-  }
-  temp_v0 = (int)DAT_005f1854;
-  temp_v2 = 2;
-  if (DAT_005f1858 != '\0') {
-    temp_v0 = -2;
-  }
-  FUN_00348c28(1);
-  if (g_gameState >= 100) {
-    VectorSignedToFloat(DAT_005f1c2c,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(DAT_005f1c28,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00283c54(DAT_005f1c30,
-                 (DAT_005f1c3c << 0x18) | (DAT_005f1c40 << 0x10) | (DAT_005f1c44 << 8) | temp_v1,1,
-                 temp_v2);
-    FUN_00348c3c(0);
-    return;
-  }
-  switch(temp_v0) {
-  case 0:
-    temp_v0 = 0;
-    if (DAT_005821fc < 0) {
-      DAT_005821fc = DAT_005821fc + 2;
-      if (0 < DAT_005821fc) {
-        DAT_005821fc = temp_v0;
-      }
+    if (DAT_005821fc < target) {
+        DAT_005821fc += 2;
+        if (DAT_005821fc > target) {
+            DAT_005821fc = target;
+        }
+    } else if (DAT_005821fc > target) {
+        DAT_005821fc -= 2;
+        if (DAT_005821fc < target) {
+            DAT_005821fc = target;
+        }
     }
-    else if ((0 < DAT_005821fc) && (DAT_005821fc = DAT_005821fc - 2, DAT_005821fc < 0)) {
-      DAT_005821fc = temp_v0;
-    }
-    temp_v2 = 3;
-    temp_v1 = temp_v1 + DAT_005821fc;
-    break;
-  case 1:
-    temp_v0 = 0x10;
-    if (DAT_005821fc < 0x10) {
-      DAT_005821fc = DAT_005821fc + 2;
-      if (DAT_005821fc >= 0x11) {
-        DAT_005821fc = temp_v0;
-      }
-    }
-    else if ((DAT_005821fc >= 0x11) && (DAT_005821fc = DAT_005821fc - 2, DAT_005821fc < 0x10)) {
-      DAT_005821fc = temp_v0;
-    }
-    temp_v2 = 3;
-    temp_v1 = temp_v1 + DAT_005821fc;
-    break;
-  case 2:
-    if (DAT_005821fc < 0x20) {
-      DAT_005821fc = DAT_005821fc + 2;
-      if (DAT_005821fc >= 0x21) {
-        DAT_005821fc = 0x20;
-      }
-    }
-    else if ((DAT_005821fc >= 0x21) && (DAT_005821fc = DAT_005821fc - 2, DAT_005821fc < 0x20)) {
-      DAT_005821fc = 0x20;
-    }
-    temp_v2 = 3;
-    temp_v1 = temp_v1 + DAT_005821fc;
-    break;
-  case -2:
-    if (DAT_005821fc < 0x20) {
-      DAT_005821fc = DAT_005821fc + 2;
-      if (DAT_005821fc >= 0x21) {
-        DAT_005821fc = 0x20;
-      }
-    }
-    else if ((DAT_005821fc >= 0x21) && (DAT_005821fc = DAT_005821fc - 2, DAT_005821fc < 0x20)) {
-      DAT_005821fc = 0x20;
-    }
-    temp_v1 = temp_v1 + DAT_005821fc;
-    break;
-  case -1:
-    if (DAT_005821fc < -0x10) {
-      temp_v0 = DAT_005821fc + 2;
-      temp_v3 = DAT_005821fc != -0x12;
-      DAT_005821fc = temp_v0;
-      if (temp_v3 && -0x11 < temp_v0) {
-        DAT_005821fc = -0x10;
-      }
-    }
-    else if ((-0x10 < DAT_005821fc) && (DAT_005821fc = DAT_005821fc - 2, DAT_005821fc < -0x10)) {
-      DAT_005821fc = -0x10;
-    }
-    temp_v1 = temp_v1 + DAT_005821fc;
-  default:
-  }
-  if ((int)temp_v1 < 0) {
-    temp_v1 = 0;
-  }
-  else if ((int)temp_v1 >= 0x100) {
-    temp_v1 = 0xff;
-  }
-  VectorSignedToFloat(DAT_005f1c2c,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(DAT_005f1c28,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00283c54(DAT_005f1c30,
-               (DAT_005f1c3c << 0x18) | (DAT_005f1c40 << 0x10) | (DAT_005f1c44 << 8) | temp_v1,1,temp_v2
-              );
-  FUN_00348c3c(0);
-  return;
 }
 
-} /* extern "C" */
+/* Draws the screen fade for the current request: nothing while blocked, a plain fade out or in
+ * for modes 1 and 2, and otherwise the timed fade whose level creeps towards the target of the
+ * current dim state. */
+void FUN_0033f42c(void)
+{
+    if (g_gameState.blocked != 0) {
+        return;
+    }
+    s32 busy = frameTextureGetState();
+    u32 alpha = g_gameState.fade.alpha;
+
+    if (busy != 0 || g_gameState.fade.mode == 0) {
+        FUN_00348c28(0);
+        FUN_00348c3c(0);
+        return;
+    }
+    u32 color = (g_gameState.fade.red << 24) | (g_gameState.fade.green << 16) | (g_gameState.fade.blue << 8);
+
+    if (g_gameState.fade.mode == 1) {
+        FUN_00348c3c(1);
+        FUN_00283cf4((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, alpha | color,
+                     g_gameState.fade.additive != 0, 1);
+        FUN_00348c28(0);
+        return;
+    }
+    if (g_gameState.fade.mode == 2) {
+        FUN_00348c28(1);
+        FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, alpha | color,
+                     g_gameState.fade.additive != 0, 1);
+        FUN_00348c3c(0);
+        return;
+    }
+    s32 state = g_gameState.dimState;
+    s32 flag = 2;
+
+    if (g_gameState.dimOverride != 0) {
+        state = -2;
+    }
+    FUN_00348c28(1);
+    if (g_gameState.progress >= 100) {
+        FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, color | alpha, 1, flag);
+        FUN_00348c3c(0);
+        return;
+    }
+    switch (state) {
+    case 0:
+        approachLevel(0);
+        flag = 3;
+        alpha += DAT_005821fc;
+        break;
+    case 1:
+        approachLevel(0x10);
+        flag = 3;
+        alpha += DAT_005821fc;
+        break;
+    case 2:
+        approachLevel(0x20);
+        flag = 3;
+        alpha += DAT_005821fc;
+        break;
+    case -2:
+        approachLevel(0x20);
+        alpha += DAT_005821fc;
+        break;
+    case -1:
+        approachLevel(-0x10);
+        alpha += DAT_005821fc;
+        break;
+    }
+    if ((s32)alpha < 0) {
+        alpha = 0;
+    } else if ((s32)alpha >= 0x100) {
+        alpha = 0xFF;
+    }
+    FUN_00283c54((f32)g_gameState.fade.x, (f32)g_gameState.fade.y, g_gameState.fade.texture, color | alpha, 1, flag);
+    FUN_00348c3c(0);
+}
+
+}

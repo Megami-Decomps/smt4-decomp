@@ -15,8 +15,8 @@ void asdMemFree(void *block);
 void *asdMemoryAllocTracked(s32 heap, s32 alignmentClass, s32 flags,
                            u32 size, s32 fromFront);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
-void *asdCecMessageIdInit(void *self);
-AsdCecMessageBox *FUN_0042fac4(AsdCecMessageBox *self, s32 mode);
+void *_ZN12CecMessageIdC1Ev(void *self);
+AsdCecMessageBox *_ZN9Obj558330C1Ej(AsdCecMessageBox *self, s32 mode);
 
 s32 asdCecInit(void)
 {
@@ -43,14 +43,14 @@ s32 asdCecInit(void)
     void *work = FUN_00178b04(
         8, "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 174);
     if (work != 0) {
-        work = asdCecMessageIdInit(work);
+        work = _ZN12CecMessageIdC1Ev(work);
     }
     g_asdCec.cec->work = work;
 
     AsdCecMessageBox *box = static_cast<AsdCecMessageBox *>(FUN_00178b04(
         0x8BC, "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 175));
     if (box != 0) {
-        box = FUN_0042fac4(box, 0);
+        box = _ZN9Obj558330C1Ej(box, 0);
     }
     g_asdCec.cec->box = box;
     return 1;

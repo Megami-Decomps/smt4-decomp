@@ -1,162 +1,137 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00250ec0` (_code @ 0x250ec0, 0x2bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the result flag into r9 before the record check, keeps the requirement base as record + 0x100 with the 0x6C field offset folded into the loads and shares one exit; the control flow is the same (about 185 diff lines). */
+#include "common.h"
+#include <stddef.h>
+
+/* One requirement of a quest record. */
+struct QuestRequirement {
+    /* 0x0 */ u16 kind; /* 1: counter, 2: party member/progress, 3: macca, 5: unit condition, 6: unit total, 7: AoC entry */
+    /* 0x2 */ u16 parameter;
+    /* 0x4 */ u32 value;
+};
+
+struct QuestRecord {
+    /* 0x000 */ u8 unk000[6];
+    /* 0x006 */ u8 type;
+    /* 0x007 */ u8 unk007[0x165];
+    /* 0x16C */ QuestRequirement requirements[6];
+};
+typedef char QuestRecordOffsets[offsetof(QuestRecord, requirements) == 0x16C ? 1 : -1];
+
+/* The party slot table: macca first, the slot of each unit at 0x90F0. */
+struct SlotTable {
+    /* 0x0000 */ u32 macca;
+    /* 0x0004 */ u8 unk0004[0x90EC];
+    /* 0x90F0 */ s8 unitSlots[1];
+};
+
+/* A unit record; the bitset of completed entries starts at 0x4C. */
+struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ u8 completed[1];
+};
 
 extern "C" {
+QuestRecord *dataTable1bOr1cGetRecord(u32 id);
+s32 gameGetOptionProgressStatus(void);
+s32 FUN_00287800(void);
+s32 FUN_0027d98c(void);
+s32 gameCountUnits(void);
+SlotTable *gameGetSlotTable(void);
+UnitRecord *gameGetUnitRecord(s32 slot);
+bool bitsetTestBit(const void *bits, u16 bit);
+u32 bitArrayCountSet1to500(const void *bits);
+u32 FUN_0028fb40(u16 id);
+s32 partyFindActiveSlotById(u16 id);
+u16 *FUN_00348b7c(u32 id);
+s32 aocEntryGetKind(u16 id);
+bool unlockFlagTest(u16 id);
 
-int bitArrayCountSet1to500(void);
-int FUN_0027d98c(void);
-int FUN_00287800(void);
-int FUN_0028fb40(int);
-int gameGetUnitRecord(void);
-int gameGetSlotTable(void);
-int dataTable1bOr1cGetRecord(void);
-
-/* Supplied declaration required: bitArrayCountSet1to500. */
-extern int unlockFlagTest(unsigned short);
-/* Supplied declaration required: FUN_0027d98c. */
-/* Supplied declaration required: FUN_00287800. */
-/* Supplied declaration required: FUN_0028fb40. */
-extern int partyFindActiveSlotById(unsigned short);
-/* Supplied declaration required: gameGetUnitRecord. */
-/* Supplied declaration required: gameGetSlotTable. */
-extern int gameCountUnits(void);
-extern int aocEntryGetKind(unsigned short);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int gameGetOptionProgressStatus(void);
-extern int FUN_00348b7c(int);
-extern int bitsetTestBit(unsigned int, unsigned short);
-
-
-void FUN_00250ec0(int param_1)
-
+/* Whether the quest `id` can be taken: the requirements of its record are all met. */
+u32 FUN_00250ec0(u32 id)
 {
-/* irregular: 7 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  
-  temp_v3 = param_1;
-  dataTable1bOr1cGetRecord();
-  if (temp_v3 != 0) {
-    temp_v0 = *(char *)(temp_v3 + 6);
-    if (temp_v0 == '\x04' || temp_v0 == '\x05') {
-      temp_v3 = gameGetOptionProgressStatus();
-      if (temp_v3 != 0) {
-        FUN_00287800();
-      }
+    QuestRecord *record = dataTable1bOr1cGetRecord(id);
+    if (record == NULL) {
+        return 0;
     }
-    else if (temp_v0 == '\x06') {
-      FUN_0027d98c();
-    }
-    else {
-      temp_v2 = gameGetOptionProgressStatus();
-      if ((temp_v2 != 2) || (temp_v2 = FUN_00287800(), temp_v2 == 0)) {
-        if (*(short *)(temp_v3 + 0x16c) == 5) {
-          temp_v2 = gameCountUnits();
-          temp_v10 = gameGetSlotTable();
-          temp_v9 = 0;
-          if (temp_v9 < temp_v2) {
-            do {
-              if (-1 < *(char *)(temp_v10 + 0x90f0 + temp_v9)) {
-                temp_v4 = gameGetUnitRecord();
-                temp_v8 = 0;
-                while( 1 ) {
-                  temp_v5 = temp_v3 + temp_v8 * 8;
-                  temp_v1 = *(short *)(temp_v5 + 0x16c);
-                  if (((temp_v1 != 0) && (temp_v1 == 5)) &&
-                     (temp_v5 = bitsetTestBit(temp_v4,*(unsigned short *)(temp_v5 + 0x16e)), temp_v5 == 0))
-                  break;
-                  temp_v8 = temp_v8 + 1;
-                  if (temp_v8 >= 6) {
-                    return;
-                  }
-                }
-              }
-              temp_v9 = temp_v9 + 1;
-            } while (temp_v9 < temp_v2);
-          }
+    u32 met = 1;
+    if (record->type == 4 || record->type == 5) {
+        if (gameGetOptionProgressStatus() == 0 || FUN_00287800() != 0) {
+            met = 0;
         }
-        else {
-          temp_v2 = 0;
-          do {
-            temp_v10 = temp_v3 + temp_v2 * 8;
-            switch(*(unsigned short *)(temp_v10 + 0x16c)) {
-            case 1:
-              temp_v7 = FUN_0028fb40(*(unsigned short *)(temp_v10 + 0x16e));
-              if (temp_v7 < *(unsigned int *)(temp_v10 + 0x170)) {
-                return;
-              }
-              break;
-            case 2:
-              if (*(char *)(temp_v3 + 6) == '\x01') {
-                temp_v9 = FUN_00348b7c(param_1);
-                if ((unsigned int)*(unsigned short *)(temp_v9 + temp_v2 * 2 + 2) < *(unsigned int *)(temp_v10 + 0x170)) {
-                  return;
-                }
-              }
-              else {
-                temp_v10 = partyFindActiveSlotById(*(unsigned short *)(temp_v10 + 0x16e));
-                if (temp_v10 < 0) {
-                  return;
-                }
-              }
-              break;
-            case 3:
-              puVar7 = (unsigned int *)gameGetSlotTable();
-              if (*puVar7 < *(unsigned int *)(temp_v10 + 0x170)) {
-                return;
-              }
-              break;
-            case 6:
-              temp_v9 = gameCountUnits();
-              temp_v8 = gameGetSlotTable();
-              temp_v5 = 0;
-              if (temp_v9 < 1) {
-                return;
-              }
-              do {
-                if (-1 < *(char *)(temp_v8 + 0x90f0 + temp_v5)) {
-                  temp_v6 = gameGetUnitRecord();
-                  temp_v7 = temp_v6 + 0x4c;
-                  bitArrayCountSet1to500();
-                  if (*(unsigned int *)(temp_v10 + 0x170) <= temp_v7) break;
-                }
-                temp_v5 = temp_v5 + 1;
-                if (temp_v9 <= temp_v5) {
-                  return;
-                }
-              } while( 1 );
-            case 7:
-              temp_v9 = aocEntryGetKind(*(unsigned short *)(temp_v10 + 0x16e));
-              if (temp_v9 != 0xb) {
-                return;
-              }
-              temp_v9 = unlockFlagTest(*(unsigned short *)(temp_v10 + 0x16e));
-              if (temp_v9 == 0) {
-                return;
-              }
-              temp_v10 = FUN_0028fb40(*(unsigned short *)(temp_v10 + 0x16e));
-              if (temp_v10 != 0) {
-                return;
-              }
+    } else if (record->type == 6) {
+        if (FUN_0027d98c() == 4) {
+            met = 0;
+        }
+    } else if (gameGetOptionProgressStatus() == 2 && FUN_00287800() != 0) {
+        met = 0;
+    } else if (record->requirements[0].kind == 5) {
+        s32 units = gameCountUnits();
+        SlotTable *slots = gameGetSlotTable();
+        met = 0;
+        for (s32 unit = 0; unit < units; unit++) {
+            if (slots->unitSlots[unit] < 0) {
+                continue;
             }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < 6);
+            UnitRecord *candidate = gameGetUnitRecord(slots->unitSlots[unit]);
+            s32 i;
+            for (i = 0; i < 6; i++) {
+                QuestRequirement *requirement = &record->requirements[i];
+                if (requirement->kind != 0 && requirement->kind == 5 &&
+                    !bitsetTestBit(candidate, requirement->parameter)) {
+                    break;
+                }
+            }
+            if (i == 6) {
+                met = 1;
+                break;
+            }
         }
-      }
+    } else {
+        for (s32 i = 0; i < 6 && met; i++) {
+            QuestRequirement *requirement = &record->requirements[i];
+            switch (requirement->kind) {
+            case 1:
+                if (requirement->value > FUN_0028fb40(requirement->parameter)) {
+                    met = 0;
+                }
+                break;
+            case 2:
+                if (record->type == 1) {
+                    if (requirement->value > FUN_00348b7c(id)[i + 1]) {
+                        met = 0;
+                    }
+                } else if (partyFindActiveSlotById(requirement->parameter) < 0) {
+                    met = 0;
+                }
+                break;
+            case 3:
+                if (gameGetSlotTable()->macca < requirement->value) {
+                    met = 0;
+                }
+                break;
+            case 6: {
+                s32 units = gameCountUnits();
+                SlotTable *slots = gameGetSlotTable();
+                met = 0;
+                for (s32 unit = 0; unit < units; unit++) {
+                    if (slots->unitSlots[unit] >= 0 &&
+                        requirement->value <=
+                            bitArrayCountSet1to500(gameGetUnitRecord(slots->unitSlots[unit])->completed)) {
+                        met = 1;
+                        break;
+                    }
+                }
+                break;
+            }
+            case 7:
+                if (aocEntryGetKind(requirement->parameter) != 11 || !unlockFlagTest(requirement->parameter) ||
+                    FUN_0028fb40(requirement->parameter) != 0) {
+                    met = 0;
+                }
+                break;
+            }
+        }
     }
-  }
-  return;
+    return met;
 }
-
-} /* extern "C" */
+}

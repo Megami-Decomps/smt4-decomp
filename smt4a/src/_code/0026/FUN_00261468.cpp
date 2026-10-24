@@ -1,111 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00261468` (_code @ 0x261468, 0x3c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: returns the rank-label text for a ranking table id (0x55-0x68 are fixed Shift-JIS strings kept in the function's literal pool, 0x3e is a block of the save data, 0x6a and above has none, everything else is looked up in data table 0x38); the compare chain, literal strings and out-of-line save-block return match retail, but retail copies the id into r4 only on the table-search path (after the compares) and stores the key after the table calls, the build stores it first and uses r4/r5 differently (116 vs 112 bytes of stack, one fewer pushed register) */
+#include "common.h"
+
+#define RANK_LABEL_SAVE_BLOCK 0x3E
+#define RANK_LABEL_SAVE_OFFSET 0x22220
+#define RANK_LABEL_LAST_ID 0x69
+#define RANK_LABEL_TABLE 0x38
+
+struct RankLabelSave {
+    /* 0x00000 */ u8 unk00000[RANK_LABEL_SAVE_OFFSET];
+    /* 0x22220 */ u16 block[1];
+};
+
+/* A record of data table 0x38 (0x68 bytes); `id` at 0 is the search key and the label follows it. */
+struct RankLabelRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 label[0x33];
+};
 
 extern "C" {
+extern RankLabelSave *DAT_0057f69c;
 
-int libc_bsearch(unsigned short *, unsigned int, unsigned int, int, unsigned char *);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 arrayCompareSignedHalfword(const void *a, const void *b);
+u32 dataTableGet(u32 table, u32 index);
+u32 dataTableGetCount(u32 table);
+void *dataTableGetEntries(u32 table);
 
-/* stack frame of param_1: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned short sp78; /* 0x78: local_78 */
-    unsigned int sp80; /* 0x80: local_80 */
-} param_1_stack;
-
-extern unsigned char LAB_002b2b24; /* 0x2b2b24 */
-extern int DAT_0057f69c; /* 0x57f69c */
-
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-
-
-unsigned short * FUN_00261468(unsigned int param_1)
-
+u16 *FUN_00261468(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned short temp_v2 [52];
-  
-  if (param_1 >= 0x6a) {
-    puVar1 = (unsigned short *)0x0;
-  }
-  else {
-    if (param_1 == 0x3e) {
-      return (unsigned short *)(DAT_0057f69c + 0x22220);
+    u16 *label;
+
+    if (id >= RANK_LABEL_LAST_ID + 1) {
+        label = NULL;
+    } else {
+        if (id == RANK_LABEL_SAVE_BLOCK)
+            return DAT_0057f69c->block;
+        if (id == 0x55)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\120\202\223\202\224\201\100\201\151\202\140\201\152";   /* 　　　　　　　　１ｓｔ　（Ａ） */
+        else if (id == 0x56)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\121\202\216\202\204\201\100\201\151\202\140\201\152";   /* 　　　　　　　　２ｎｄ　（Ａ） */
+        else if (id == 0x57)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\141\201\152";   /* 　　　　　　　　３ｒｄ　（Ｂ） */
+        else if (id == 0x58)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\123\202\224\202\210\201\100\201\151\202\140\201\152";   /* 　　　　　　　　４ｔｈ　（Ａ） */
+        else if (id == 0x5A)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\123\202\224\202\210\201\100\201\151\202\162\201\152";   /* 　　　　　　　　４ｔｈ　（Ｓ） */
+        else if (id == 0x5B)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\120\202\223\202\224\201\100\201\151\202\142\201\152";   /* 　　　　　　　　１ｓｔ　（Ｃ） */
+        else if (id == 0x5C)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\120\202\223\202\224\201\100\201\151\202\146\201\152";   /* 　　　　　　　　１ｓｔ　（Ｇ） */
+        else if (id == 0x5D)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\121\202\216\202\204\201\100\201\151\202\142\201\152";   /* 　　　　　　　　２ｎｄ　（Ｃ） */
+        else if (id == 0x5E)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\121\202\216\202\204\201\100\201\151\202\145\201\152";   /* 　　　　　　　　２ｎｄ　（Ｆ） */
+        else if (id == 0x5F)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\121\202\216\202\204\201\100\201\151\202\153\201\152";   /* 　　　　　　　　２ｎｄ　（Ｌ） */
+        else if (id == 0x60)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\142\201\152";   /* 　　　　　　　　３ｒｄ　（Ｃ） */
+        else if (id == 0x61)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\143\201\152";   /* 　　　　　　　　３ｒｄ　（Ｄ） */
+        else if (id == 0x62)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\144\201\152";   /* 　　　　　　　　３ｒｄ　（Ｅ） */
+        else if (id == 0x63)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\145\201\152";   /* 　　　　　　　　３ｒｄ　（Ｆ） */
+        else if (id == 0x64)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\123\202\224\202\210\201\100\201\151\202\142\201\152";   /* 　　　　　　　　４ｔｈ　（Ｃ） */
+        else if (id == 0x65)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\123\202\224\202\210\201\100\201\151\202\144\201\152";   /* 　　　　　　　　４ｔｈ　（Ｅ） */
+        else if (id == 0x66)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\123\202\224\202\210\201\100\201\151\202\145\201\152";   /* 　　　　　　　　４ｔｈ　（Ｆ） */
+        else if (id == 0x67)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\120\202\223\202\224\201\100\201\151\202\147\201\152";   /* 　　　　　　　　１ｓｔ　（Ｈ） */
+        else if (id == 0x68)
+            label = (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\146\201\152";   /* 　　　　　　　　３ｒｄ　（Ｇ） */
+        else {
+            RankLabelRecord key;
+            key.id = id;
+            u32 table = dataTableGet(RANK_LABEL_TABLE, 0);
+            void *entries = dataTableGetEntries(table);
+            u32 count = dataTableGetCount(table);
+            RankLabelRecord *record = (RankLabelRecord *)libc_bsearch(&key, entries, count, sizeof(RankLabelRecord), arrayCompareSignedHalfword);
+            label = record->label;
+        }
     }
-    if (param_1 == 0x55) {
-      puVar1 = (unsigned short *)0x2615b8;
-    }
-    else if (param_1 == 0x56) {
-      puVar1 = (unsigned short *)0x2615d8;
-    }
-    else if (param_1 == 0x57) {
-      puVar1 = (unsigned short *)0x2615f8;
-    }
-    else if (param_1 == 0x58) {
-      puVar1 = (unsigned short *)0x261618;
-    }
-    else if (param_1 == 0x5a) {
-      puVar1 = (unsigned short *)0x261638;
-    }
-    else if (param_1 == 0x5b) {
-      puVar1 = (unsigned short *)0x261658;
-    }
-    else if (param_1 == 0x5c) {
-      puVar1 = (unsigned short *)0x261678;
-    }
-    else if (param_1 == 0x5d) {
-      puVar1 = (unsigned short *)0x261698;
-    }
-    else if (param_1 == 0x5e) {
-      puVar1 = (unsigned short *)0x2616b8;
-    }
-    else if (param_1 == 0x5f) {
-      puVar1 = (unsigned short *)0x2616d8;
-    }
-    else if (param_1 == 0x60) {
-      puVar1 = (unsigned short *)0x2616f8;
-    }
-    else if (param_1 == 0x61) {
-      puVar1 = (unsigned short *)0x261718;
-    }
-    else if (param_1 == 0x62) {
-      puVar1 = (unsigned short *)0x261738;
-    }
-    else if (param_1 == 99) {
-      puVar1 = (unsigned short *)0x261758;
-    }
-    else if (param_1 == 100) {
-      puVar1 = (unsigned short *)0x261778;
-    }
-    else if (param_1 == 0x65) {
-      puVar1 = (unsigned short *)0x261798;
-    }
-    else if (param_1 == 0x66) {
-      puVar1 = (unsigned short *)0x2617b8;
-    }
-    else if (param_1 == 0x67) {
-      puVar1 = (unsigned short *)0x2617d8;
-    }
-    else if (param_1 == 0x68) {
-      puVar1 = (unsigned short *)0x2617f8;
-    }
-    else {
-      temp_v0 = dataTableGet(0x38,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v0 = dataTableGetCount(temp_v0);
-      puVar1 = temp_v2;
-      temp_v2[0] = (unsigned short)param_1;
-      libc_bsearch(puVar1,temp_v1,temp_v0,0x68,&LAB_002b2b24);
-      puVar1 = puVar1 + 1;
-    }
-  }
-  return puVar1;
+    return label;
 }
 
 } /* extern "C" */

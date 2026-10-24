@@ -1,128 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d03f8` (_code @ 0x3d03f8, 0x2e8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills its argument words (push r0-r3, args read via stack) and evaluates the skill kind/amount tests with different register use; logic equivalent. */
+#include "common.h"
+
+/* A battle unit (accessed fields). */
+struct BtlUnit {
+    u8 unk00[0x24];
+    struct BtlUnitSkill *skill;     // 0x24
+};
+struct BtlUnitSkill {
+    u8 unk00[0x50];
+    u32 flags;                      // 0x50
+    u8 unk54[0xE];
+    s16 kind;                       // 0x62
+};
+
+struct BtlTarget {
+    u8 unk00[0xB8];
+    s32 state;                      // 0xB8
+};
 
 extern "C" {
+s32 btlShowListedActionMessage(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 other);
+void FUN_00227d18(s32 kind);
+void FUN_00227fac(void);
+void FUN_002296f4(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 a, s32 b);
+void FUN_0023c0d0(s32 *state, BtlUnit *unit, s32 kind, s32 amount);
+void actionCreateKindSeventeen(s32 a, BtlUnit *unit, s32 b);
+void FUN_002505c0(s32 slot, BtlUnit *unit, u32 id, s32 a, s32 b, s32 c, s32 d);
+void FUN_002551ac(s32 slot, BtlUnit *unit, BtlUnitSkill *skill, s32 a, s32 amount, s32 b, s32 c, u32 d, s32 e,
+                  s32 f, s32 g, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m, s32 n, s32 o, s32 p, s32 q, s32 r,
+                  s32 s, s32 t, s32 u);
+void FUN_0027df30(s32 slot, BtlUnit *unit, BtlUnitSkill *skill, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g,
+                  s32 h, s32 i, s32 j);
+s32 FUN_00229914(s32 *state, BtlUnit *unit, s32 kind);
+s32 FUN_00293230(s32 target);
 
-int btlShowListedActionMessage(...);
-int FUN_00227d18(int);
-int FUN_00227fac(void);
-int FUN_002296f4(...);
-int FUN_0023c0d0(int *, int, int, int);
-int actionCreateKindSeventeen(int, int, int);
-int FUN_002505c0(...);
-int FUN_002551ac(...);
-int FUN_0027df30(...);
-
-/* stack frame of param_6: 17 slot(s), 68 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_6_stack;
-
-/* Supplied declaration required: btlShowListedActionMessage. */
-/* Supplied declaration required: FUN_00227d18. */
-/* Supplied declaration required: FUN_00227fac. */
-/* Supplied declaration required: FUN_002296f4. */
-extern int FUN_00229914(int *, int, int);
-/* Supplied declaration required: FUN_0023c0d0. */
-/* Supplied declaration required: actionCreateKindSeventeen. */
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_002551ac. */
-/* Supplied declaration required: FUN_0027df30. */
-extern int FUN_00293230(int);
-
-
-int FUN_003d03f8(int *param_1,int param_2,int param_3,int param_4,int param_5,unsigned int *param_6)
-
+/* Resolve the heal/damage action of a skill on a unit and queue its effects and messages. Returns whether it hit. */
+s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlUnitSkill *skill, u32 *context)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int *puVar9;
-  
-  temp_v4 = 0;
-  temp_v7 = 0xffffffff;
-  temp_v0 = (int)*(short *)(param_5 + 0x62);
-  FUN_00227fac();
-  puVar9 = param_6 + 0x40;
-  temp_v1 = temp_v0;
-  if (0 < temp_v0) {
-    temp_v1 = param_3;
-  }
-  if (0 < temp_v1) {
-    temp_v1 = param_2 + *(short *)(param_5 + 0x62) * 10;
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x9d4);
-    if ((int)temp_v2 <= param_3) {
-      param_3 = temp_v2 - 1;
-      if ((temp_v0 == 2) && ((*(unsigned short *)((int)param_6 + 0x1c6) & 8) == 0)) {
-        temp_v7 = (unsigned int)*(unsigned short *)(temp_v1 + 0x9d6);
-      }
-      actionCreateKindSeventeen(0,param_2,(int)*(short *)((int)param_6 + 0x6e));
-      FUN_00227d18((int)*(short *)(param_5 + 0x62));
+    s32 hit = 0;
+    s32 extraEffect = -1;
+    s32 kind = skill->kind;
+    FUN_00227fac();
+    u32 *view = context + 0x40;
+    s32 count = kind;
+    if (kind > 0)
+        count = amount;
+    if (count > 0) {
+        u8 *table = reinterpret_cast<u8 *>(unit) + skill->kind * 10;
+        u32 limit = *reinterpret_cast<u16 *>(table + 0x9D4);
+        if (static_cast<s32>(limit) <= amount) {
+            amount = limit - 1;
+            if (kind == 2 && (*reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(context) + 0x1C6) & 8) == 0)
+                extraEffect = *reinterpret_cast<u16 *>(table + 0x9D6);
+            actionCreateKindSeventeen(0, unit, *reinterpret_cast<s16 *>(reinterpret_cast<u8 *>(context) + 0x6E));
+            FUN_00227d18(skill->kind);
+        }
     }
-  }
-  FUN_0023c0d0(param_1,param_2,(int)*(short *)(param_5 + 0x62),-param_3);
-  temp_v1 = FUN_00229914(param_1,param_2,(int)*(short *)(param_5 + 0x62));
-  if (((temp_v1 != 0) && (temp_v4 = 1, (*param_6 & 0x10) != 0)) && (*(int *)(*param_1 + 0xb8) == 1)) {
-    *(unsigned int *)(*param_1 + 0x88) = 0xd;
-  }
-  temp_v3 = 0xffffffff;
-  temp_v5 = 0xffffffff;
-  temp_v6 = 0xffffffff;
-  if ((*param_6 & 0x10) == 0) {
-    temp_v3 = 0;
-    temp_v5 = 0xb;
-  }
-  temp_v1 = FUN_00293230(*param_1);
-  if (temp_v1 == 0) {
-    temp_v6 = 0;
-  }
-  FUN_002551ac(param_4,param_2,param_5,0,param_3,0xffffffff,0xffffffff,
-               *(unsigned short *)(param_2 + *(short *)(param_5 + 0x62) * 10 + 0x9d4),
-               (int)*(short *)((int)puVar9 + 0xb6),0,0,temp_v4,0,1,0,0x1e,0,temp_v3,temp_v6,temp_v5,
-               0xffffffff,1,0,1,1);
-  FUN_002505c0(param_4,param_2,0x1000185,0,0,0,0);
-  if (-1 < (int)temp_v7) {
-    FUN_0027df30(param_4,param_2,param_5,0,temp_v7,0xffffffff,0xffffffff,0,temp_v3,temp_v6,temp_v5,0,0);
-  }
-  if (temp_v4 != 0) {
-    if ((*(unsigned int *)(*(int *)(param_2 + 0x24) + 0x50) & 0x400) != 0) {
-      FUN_002296f4(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),param_4,0x3c,
-                   0x3c);
-      btlShowListedActionMessage(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),param_4 + 0x3c,0
-                  );
+    FUN_0023c0d0(state, unit, skill->kind, -amount);
+    if (FUN_00229914(state, unit, skill->kind) != 0) {
+        hit = 1;
+        if ((*context & 0x10) != 0 && reinterpret_cast<BtlTarget *>(*state)->state == 1)
+            *reinterpret_cast<u32 *>(*state + 0x88) = 0xD;
     }
-    else {
-      FUN_002296f4(param_1,param_2,(int)*(short *)(param_5 + 0x62),param_4,0x1e,0x1e);
-      btlShowListedActionMessage(param_1,param_2,(int)*(short *)(param_5 + 0x62),param_4 + 0x1e,param_4);
+    s32 a = -1;
+    s32 b = -1;
+    s32 c = -1;
+    if ((*context & 0x10) == 0) {
+        a = 0;
+        c = 0xB;
     }
-  }
-  else {
-    FUN_002296f4(param_1,param_2,(int)*(short *)(param_5 + 0x62),param_4,0x1e,0x1e);
-  }
-  return temp_v4;
+    if (FUN_00293230(*state) == 0)
+        b = 0;
+    FUN_002551ac(slot, unit, skill, 0, amount, -1, -1,
+                 *reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(unit) + skill->kind * 10 + 0x9D4),
+                 *reinterpret_cast<s16 *>(reinterpret_cast<u8 *>(view) + 0xB6), 0, 0, hit, 0, 1, 0, 0x1E, 0, a, b, c,
+                 -1, 1, 0, 1, 1);
+    FUN_002505c0(slot, unit, 0x1000185, 0, 0, 0, 0);
+    if (extraEffect >= 0)
+        FUN_0027df30(slot, unit, skill, 0, extraEffect, -1, -1, 0, a, b, c, 0, 0);
+    if (hit != 0) {
+        if ((unit->skill->flags & 0x400) != 0) {
+            FUN_002296f4(state, unit, unit->skill->kind, slot, 0x3C, 0x3C);
+            btlShowListedActionMessage(state, unit, unit->skill->kind, slot + 0x3C, 0);
+        } else {
+            FUN_002296f4(state, unit, skill->kind, slot, 0x1E, 0x1E);
+            btlShowListedActionMessage(state, unit, skill->kind, slot + 0x1E, slot);
+        }
+    } else {
+        FUN_002296f4(state, unit, skill->kind, slot, 0x1E, 0x1E);
+    }
+    return hit;
 }
-
-} /* extern "C" */
+}

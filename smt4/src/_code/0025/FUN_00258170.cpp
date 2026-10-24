@@ -1,179 +1,107 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00258170` (_code @ 0x258170, 0x290 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the retail unit inlines the NintendoWare resource accessors (relative-offset link resolution with null checks) with its own register scheduling; this version resolves the same links through one helper and a pointer-chasing helper, so the instruction count and allocation differ. */
+#include "common.h"
+
+namespace {
+/* Resource data stores most links as 32-bit offsets relative to the link itself (0 = none). */
+static inline u32 *relativeLink(u32 *link)
+{
+    return *link != 0 ? reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(link) + *link) : NULL;
+}
+
+/* A pair of indices (a model or material, and one of its attributes or mappers). */
+struct ScreenSlot {
+    s16 first;
+    s16 second;
+};
+
+/* Reads the pointer stored `offset` bytes into `base`. */
+static inline u8 *pointerAt(u8 *base, u32 offset)
+{
+    return *reinterpret_cast<u8 **>(base + offset);
+}
+
+/* The screen's work block: where its resources live and the slots that select what to scroll. */
+struct ScreenStateWork {
+    /* 0x000 */ u8 unk000[0x84];
+    /* 0x084 */ u8 *root;
+    /* 0x088 */ u8 unk088[0xc];
+    /* 0x094 */ ScreenSlot scrollSlots[64];   /* model, attribute usage minus 4 */
+    /* 0x194 */ s32 scrollCount;
+    /* 0x198 */ ScreenSlot mapperSlots[64];   /* material, texture mapper */
+    /* 0x298 */ s32 mapperCount;
+};
+}
 
 extern "C" {
+extern ScreenStateWork *g_screenStateWork;
+void FUN_003409f8(void *context, u8 buffer[16], f32 *offset);
+void FUN_002c2424(void *data, u32 size);
+void nw_gfx_res_ResTextureMapper_SetTexture(u32 **mapper, u32 texture);
 
-int FUN_002c2424(int, unsigned int);
-int FUN_003409f8(int, unsigned char [16], float *);
-int nw_gfx_res_ResTextureMapper_SetTexture(int *, unsigned int);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern int g_screenStateWork; /* 0x43dd90 */
-
-/* Supplied declaration required: FUN_002c2424. */
-/* Supplied declaration required: FUN_003409f8. */
-/* Supplied declaration required: nw_gfx_res_ResTextureMapper_SetTexture. */
-
-
-void FUN_00258170(int param_1)
-
+/* Applies the screen's scroll to the model data it draws with: every selected attribute of the selected
+   models gets the (u, v) offset FUN_003409f8 computes added to its first two floats, and the texture
+   mappers of the selected materials get the context's texture. */
+void FUN_00258170(u8 *context)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int *puVar4;
-  int temp_v2;
-  unsigned int *puVar6;
-  unsigned int temp_v3;
-  float *pfVar8;
-  int temp_v4;
-  unsigned int *puVar10;
-  unsigned int temp_v5;
-  int unaff_r11;
-  unsigned int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  unsigned long long temp_v9;
-  int temp_v10;
-  int temp_v11;
-  float temp_v12;
-  float temp_v13;
-  unsigned char temp_v14 [16];
-  int temp_v15;
-  
-  temp_v0 = g_screenStateWork;
-  temp_v15 = param_1;
-  FUN_003409f8(param_1,temp_v14,&temp_v12);
-  temp_v10 = 0;
-  if (0 < *(int *)(temp_v0 + 0x194)) {
-    temp_v9 = 0x3f000000;
-    do {
-      temp_v11 = temp_v0 + temp_v10 * 4;
-      piVar2 = (int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v0 + 0x84) + 8) + 0x2c) + 8) + 200);
-      temp_v2 = *piVar2;
-      if (temp_v2 != 0) {
-        temp_v2 = (int)piVar2 + temp_v2;
-      }
-      else {
-        temp_v2 = 0;
-      }
-      piVar2 = (int *)(temp_v2 + *(short *)(temp_v11 + 0x94) * 4);
-      temp_v2 = *piVar2;
-      if (temp_v2 != 0) {
-        puVar10 = (unsigned int *)(temp_v2 + (int)piVar2);
-      }
-      else {
-        puVar10 = (unsigned int *)0x0;
-      }
-      if ((puVar10 != (unsigned int *)0x0) && ((~*puVar10 & 0x10000001) != 0)) {
-        puVar10 = (unsigned int *)0x0;
-      }
-      if (puVar10 != (unsigned int *)0x0) {
-        temp_v5 = puVar10[0xe];
-        temp_v2 = 0;
-        if (temp_v2 < (int)temp_v5) {
-          do {
-            if (puVar10[0xf] != 0) {
-              temp_v1 = (int)puVar10 + puVar10[0xf] + 0x3c;
-            }
-            else {
-              temp_v1 = 0;
-            }
-            puVar4 = (unsigned int *)(temp_v1 + temp_v2 * 4);
-            puVar6 = (unsigned int *)*puVar4;
-            if (puVar6 != (unsigned int *)0x0) {
-              puVar6 = (unsigned int *)((int)puVar6 + (int)puVar4);
-            }
-            if ((puVar6 != (unsigned int *)0x0) && ((*puVar6 & 0x40000000) == 0)) {
-              puVar6 = (unsigned int *)0x0;
-            }
-            if (puVar6 != (unsigned int *)0x0) {
-              temp_v3 = puVar6[6];
-              if (temp_v3 != 0) {
-                unaff_r11 = (int)puVar6 + temp_v3 + 0x18;
-              }
-              temp_v6 = puVar6[5];
-              if (temp_v3 == 0) {
-                unaff_r11 = 0;
-              }
-              temp_v3 = 0;
-              if (puVar6[10] != 0) {
-                temp_v1 = 0;
-                do {
-                  if (puVar6[0xb] != 0) {
-                    temp_v4 = (int)puVar6 + puVar6[0xb] + 0x2c;
-                  }
-                  else {
-                    temp_v4 = 0;
-                  }
-                  piVar2 = (int *)(temp_v4 + temp_v3 * 4);
-                  temp_v4 = *piVar2;
-                  if (temp_v4 != 0) {
-                    temp_v4 = (int)piVar2 + temp_v4;
-                  }
-                  else {
-                    temp_v4 = 0;
-                  }
-                  if (*(int *)(temp_v4 + 4) == *(short *)(temp_v11 + 0x96) + 4) {
-                    if (-1 < *(int *)(temp_v4 + 0x30)) {
-                      temp_v3 = puVar6[9];
-                      for (pfVar8 = (float *)(*(int *)(temp_v4 + 0x30) + unaff_r11);
-                          pfVar8 < (float *)(unaff_r11 + temp_v6);
-                          pfVar8 = (float *)((int)pfVar8 + temp_v3)) {
-                        temp_v7 = (float)temp_v9;
-                        temp_v8 = (*pfVar8 - temp_v7) + temp_v7;
-                        temp_v7 = (pfVar8[1] - temp_v7) + temp_v7;
-                        *pfVar8 = temp_v8;
-                        pfVar8[1] = temp_v7;
-                        *pfVar8 = temp_v8 + temp_v12;
-                        pfVar8[1] = temp_v7 + temp_v13;
-                      }
-                      if (puVar6[6] != 0) {
-                        temp_v1 = (int)puVar6 + puVar6[6] + 0x18;
-                      }
-                      FUN_002c2424(temp_v1,puVar6[5]);
-                    }
-                    break;
-                  }
-                  temp_v3 = temp_v3 + 1;
-                } while (temp_v3 < puVar6[10]);
-              }
-            }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < (int)temp_v5);
+    ScreenStateWork *screen = g_screenStateWork;
+    u8 buffer[16];
+    f32 offset[2];
+    FUN_003409f8(context, buffer, offset);
+    u8 *resourceSet = pointerAt(pointerAt(screen->root, 8), 0x2c);
+    for (s32 i = 0; i < screen->scrollCount; i++) {
+        u32 *modelTable = relativeLink(reinterpret_cast<u32 *>(pointerAt(resourceSet, 8) + 200));
+        u32 *model = relativeLink(&modelTable[screen->scrollSlots[i].first]);
+        if (model != NULL && (~model[0] & 0x10000001) != 0) {
+            model = NULL;
         }
-      }
-      temp_v10 = temp_v10 + 1;
-    } while (temp_v10 < *(int *)(temp_v0 + 0x194));
-  }
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(temp_v0 + 0x298)) {
-    do {
-      temp_v1 = temp_v0 + temp_v2 * 4;
-      temp_v4 = *(int *)(*(int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v0 + 0x84) + 8) + 0x2c) +
-                                        0x164) + *(short *)(temp_v1 + 0x198) * 4) + 0x3c);
-      piVar2 = (int *)(*(short *)(temp_v1 + 0x19a) * 4 + 0x274 + temp_v4);
-      temp_v1 = *piVar2;
-      temp_v10 = 0;
-      if (temp_v1 != 0) {
-        temp_v10 = (int)piVar2 + temp_v1;
-      }
-      nw_gfx_res_ResTextureMapper_SetTexture(&temp_v10,*(unsigned int *)(temp_v15 + 0xc));
-      *(unsigned int *)(temp_v4 + 0x2b0) = 0;
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(temp_v0 + 0x298));
-  }
-  return;
+        if (model == NULL) {
+            continue;
+        }
+        u32 partCount = model[0xe];
+        for (u32 part = 0; part < partCount; part++) {
+            u32 *partTable = model[0xf] != 0
+                ? reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(model) + model[0xf] + 0x3c) : NULL;
+            u32 *node = relativeLink(&partTable[part]);
+            if (node != NULL && (node[0] & 0x40000000) == 0) {
+                node = NULL;
+            }
+            if (node == NULL) {
+                continue;
+            }
+            u8 *vertexData = node[6] != 0 ? reinterpret_cast<u8 *>(node) + node[6] + 0x18 : NULL;
+            u32 vertexBytes = node[5];
+            for (u32 a = 0; a < node[10]; a++) {
+                u32 *attributeTable = node[0xb] != 0
+                    ? reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(node) + node[0xb] + 0x2c) : NULL;
+                u32 *attribute = relativeLink(&attributeTable[a]);
+                if (static_cast<s32>(attribute[1]) != screen->scrollSlots[i].second + 4) {
+                    continue;
+                }
+                if (static_cast<s32>(attribute[0xc]) >= 0) {
+                    u32 stride = node[9];
+                    for (f32 *vertex = reinterpret_cast<f32 *>(vertexData + attribute[0xc]);
+                         vertex < reinterpret_cast<f32 *>(vertexData + vertexBytes);
+                         vertex = reinterpret_cast<f32 *>(reinterpret_cast<u8 *>(vertex) + stride)) {
+                        f32 u = (vertex[0] - 0.5f) + 0.5f;
+                        f32 v = (vertex[1] - 0.5f) + 0.5f;
+                        vertex[0] = u;
+                        vertex[1] = v;
+                        vertex[0] = u + offset[0];
+                        vertex[1] = v + offset[1];
+                    }
+                    FUN_002c2424(vertexData, node[5]);
+                }
+                break;
+            }
+        }
+    }
+    for (s32 i = 0; i < screen->mapperCount; i++) {
+        u8 *material = pointerAt(pointerAt(pointerAt(resourceSet, 0x164), screen->mapperSlots[i].first * 4), 0x3c);
+        u32 *link = reinterpret_cast<u32 *>(material + 0x274 + screen->mapperSlots[i].second * 4);
+        u32 *mapper = relativeLink(link);
+        nw_gfx_res_ResTextureMapper_SetTexture(&mapper, *reinterpret_cast<u32 *>(context + 0xc));
+        *reinterpret_cast<u32 *>(material + 0x2b0) = 0;
+    }
 }
 
 } /* extern "C" */

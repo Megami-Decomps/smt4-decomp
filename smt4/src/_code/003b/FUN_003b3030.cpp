@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00397200(void);
+int _ZN9Obj422380C1Ev(void);
 
 extern unsigned char DAT_00422364; /* 0x422364 */
 
-/* Supplied declaration required: FUN_00397200. */
+/* Supplied declaration required: _ZN9Obj422380C1Ev. */
 extern int _ZN4__rw9__rb_treeIjSt4pairIKjN6MoLive12ObjectHandleEENS_11__select1stIS5_jEESt4lessIjENS3_12StlAllocatorIS5_EEE11_C_get_linkEv(unsigned int *);
 
 
@@ -42,7 +42,7 @@ void FUN_003b3030(unsigned int *param_1,unsigned int param_2,unsigned int param_
   param_1[0x50f] = 0;
   param_1[0x510] = 0;
   param_1 = param_1 + 0x511;
-  FUN_00397200();
+  _ZN9Obj422380C1Ev();
   *param_1 = (unsigned int)&DAT_00422364;
   param_1[9] = param_2;
   param_1[10] = param_2;

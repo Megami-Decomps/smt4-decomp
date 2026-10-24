@@ -1,190 +1,145 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040d97c` (_code @ 0x40d97c, 0x34c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (213 vs 217 rows); retail keeps the shared marker call tail and the float offset adds in a different register order */
+#include "common.h"
+
+struct Vec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+// A battle side as seen by the marker code: flags, id and world position.
+struct BtlSide {
+    u64 flags;                  // 0x00
+    u8 unk08[0x30 - 8];
+    Vec3 position;              // 0x30
+    u8 unk3c[0x6a - 0x3c];
+    s16 index;                  // 0x6a
+    u8 unk6c[2];
+    s16 markerId;               // 0x6e
+};
+
+// Marker step state.
+struct MarkerStep {
+    u8 unk00[2];
+    u16 done;                   // 0x02
+    u8 unk04[0x10];
+    BtlSide* actor;             // 0x14
+    u8 unk18[8];
+    s8 phase;                   // 0x20
+    u8 unk21[5];
+    s16 handle;                 // 0x26
+    s32 kind;                   // 0x28
+    u8 unk2c[0x1c];
+    u16 doubled;                // 0x48
+};
 
 extern "C" {
 
-int btlGetMainState(void);
-int FUN_003e7fa4(unsigned int, int, int);
-int FUN_003f0e20(unsigned int *, int);
-int FUN_004aa0b0(...);
-int FUN_004aa1e8(int, int);
-int FUN_004aace8(...);
+extern u8* g_btlUiBlock;
+extern u8 g_btlActionReflect[];
+extern const Vec3 DAT_005e1c2c;
 
-typedef struct fn_0040d97c_arg1 fn_0040d97c_arg1;
-struct fn_0040d97c_arg1 {
-    unsigned char pad_0x0[0x2];
-    undefined2 field_0x2; /* +0x2 */
-    unsigned char pad_0x4[0x10];
-    void *field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x8];
-    char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x5];
-    short field_0x26; /* +0x26 */
-    int field_0x28; /* +0x28 */
-    unsigned char pad_0x2c[0x1c];
-    ushort field_0x48; /* +0x48 */
-};
+void* btlGetMainState(void);
+BtlSide* FUN_003f0e20(void* main, s32 index);
+Vec3 FUN_003e7fa4(void* main, s32 index, s32 arg);
+s16 FUN_004aa0b0(u8* ui, s32 a, s32 b, f32 x, f32 y, f32 z);
+s16 FUN_004aace8(u8* ui, s32 id, s32 a, s32 x, s32 y);
+s32 FUN_004aa1e8(u8* ui, s32 handle);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
+#define MASK64(offset) (*reinterpret_cast<u64*>(g_btlActionReflect + (offset)))
 
-extern unsigned int DAT_00571300; /* 0x571300 */
-extern unsigned int DAT_00571304; /* 0x571304 */
-extern unsigned int DAT_00571310; /* 0x571310 */
-extern unsigned int DAT_00571314; /* 0x571314 */
-extern unsigned int DAT_00571318; /* 0x571318 */
-extern unsigned int DAT_0057131c; /* 0x57131c */
-extern unsigned int DAT_00571320; /* 0x571320 */
-extern unsigned int DAT_00571324; /* 0x571324 */
-extern int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003e7fa4. */
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004aa0b0. */
-/* Supplied declaration required: FUN_004aa1e8. */
-/* Supplied declaration required: FUN_004aace8. */
-
-
-void FUN_0040d97c(unsigned int param_1,fn_0040d97c_arg1 *param_2)
-
+// Marker for the acting side: places the target marker above the side (or on the map) the
+// first time, then waits for the marker handle to finish before reporting done.
+void FUN_0040d97c(u32 unused, MarkerStep* step)
 {
-/* irregular: 6 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  
-  puVar3 = (unsigned int *)btlGetMainState();
-  FUN_003f0e20(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x6a));
-  if (puVar3 == (unsigned int *)0x0) {
-    param_2->field_0x2 = 0;
-    return;
-  }
-  if (param_2->field_0x20 != '\0') {
-    if ((param_2->field_0x20 == '\x01') &&
-       (temp_v4 = g_btlUiBlock, FUN_004aa1e8(g_btlUiBlock,(int)param_2->field_0x26), temp_v4 == 0)) {
-      param_2->field_0x2 = 0;
-      return;
-    }
-  }
-  else {
-    temp_v3 = *puVar3;
-    temp_v5 = puVar3[1];
-    if (!((DAT_00571318 & temp_v3) == 0 && (DAT_0057131c & temp_v5) == 0)) {
-      temp_v2 = btlGetMainState();
-      FUN_003e7fa4(temp_v2,(int)*(short *)((int)param_2->field_0x14 + 0x6a),0);
-      temp_v4 = param_2->field_0x28;
-      if (temp_v4 == 1) {
-        temp_v4 = g_btlUiBlock;
-        FUN_004aa0b0(g_btlUiBlock,1);
-        temp_v1 = (short)temp_v4;
-        param_2->field_0x26 = temp_v1;
-        param_2->field_0x20 = '\x01';
-        param_2->field_0x2 = 1;
+    void* main = btlGetMainState();
+    BtlSide* side = FUN_003f0e20(main, step->actor->index);
+    if (side == NULL) {
+        step->done = 0;
         return;
-      }
-      if (temp_v4 != 2) {
-        if (temp_v4 != 3) {
-          if (temp_v4 != 4) {
-            param_2->field_0x2 = 0;
+    }
+    if (step->phase != 0) {
+        if (step->phase == 1 && FUN_004aa1e8(g_btlUiBlock, step->handle) == 0) {
+            step->done = 0;
             return;
-          }
-          temp_v4 = g_btlUiBlock;
-          FUN_004aa0b0(g_btlUiBlock,2,1);
-          temp_v1 = (short)temp_v4;
         }
-        else {
-          temp_v4 = g_btlUiBlock;
-          FUN_004aa0b0(g_btlUiBlock,3,1);
-          temp_v1 = (short)temp_v4;
-        }
-        param_2->field_0x26 = temp_v1;
-        param_2->field_0x20 = '\x01';
-        param_2->field_0x2 = 1;
+        step->done = 1;
         return;
-      }
-      if (param_2->field_0x48 == 0) {
-        temp_v4 = g_btlUiBlock;
-        FUN_004aa0b0(g_btlUiBlock,0,1);
-        temp_v1 = (short)temp_v4;
-        param_2->field_0x26 = temp_v1;
-        param_2->field_0x20 = '\x01';
-        param_2->field_0x2 = 1;
-        return;
-      }
-      temp_v4 = g_btlUiBlock;
-      FUN_004aa0b0(g_btlUiBlock,0,1);
-      param_2->field_0x26 = (short)temp_v4;
-      FUN_004aa0b0(g_btlUiBlock,1);
     }
-    else {
-      if (((DAT_00571300 | DAT_00571310 | DAT_00571320) & temp_v3) == 0 &&
-          ((DAT_00571304 | DAT_00571314 | DAT_00571324) & temp_v5) == 0) {
-        param_2->field_0x2 = 0;
-        return;
-      }
-      temp_v7 = (int)*(short *)((int)puVar3 + 0x6e);
-      temp_v4 = param_2->field_0x28;
-      if ((temp_v3 & DAT_00571320) != 0 || (temp_v5 & DAT_00571324) != 0) {
-        temp_v7 = 4;
-      }
-      temp_v1 = (short)(int)*(float *)((int)param_2->field_0x14 + 0x30);
-      temp_v8 = (int)temp_v1;
-      temp_v0 = (short)(int)*(float *)((int)param_2->field_0x14 + 0x34);
-      temp_v6 = (int)temp_v0;
-      if (temp_v4 != 1) {
-        if (temp_v4 != 2) {
-          if (temp_v4 != 3) {
-            if (temp_v4 != 4) {
-              param_2->field_0x2 = 0;
-              return;
+
+    s16 result;
+    if ((side->flags & MASK64(0x28)) != 0) {
+        Vec3 offset = FUN_003e7fa4(btlGetMainState(), step->actor->index, 0);
+        Vec3 base = step->actor->position;
+        f32 x = offset.x + base.x;
+        f32 y = offset.y + base.y;
+        f32 z = offset.z + base.z;
+        switch (step->kind) {
+        case 1:
+            result = FUN_004aa0b0(g_btlUiBlock, 1, 1, x + DAT_005e1c2c.x, y + DAT_005e1c2c.y, z + DAT_005e1c2c.z);
+            break;
+        case 2:
+            x += DAT_005e1c2c.x;
+            y += DAT_005e1c2c.y;
+            z += DAT_005e1c2c.z;
+            if (step->doubled != 0) {
+                result = FUN_004aa0b0(g_btlUiBlock, 0, 1, x, y, z);
+                step->handle = result;
+                FUN_004aa0b0(g_btlUiBlock, 1, 1, x - 3.0f, y + 1.2f, z);
+                step->phase = 1;
+                step->done = 1;
+                return;
             }
-            temp_v4 = g_btlUiBlock;
-            FUN_004aace8(g_btlUiBlock,temp_v7,2,temp_v8,temp_v6);
-            temp_v1 = (short)temp_v4;
-          }
-          else {
-            temp_v4 = g_btlUiBlock;
-            FUN_004aace8(g_btlUiBlock,temp_v7,3,temp_v8,temp_v6);
-            temp_v1 = (short)temp_v4;
-          }
-        }
-        else {
-          if (param_2->field_0x48 != 0) {
-            temp_v4 = g_btlUiBlock;
-            FUN_004aace8(g_btlUiBlock,temp_v7,0,temp_v8,temp_v6);
-            param_2->field_0x26 = (short)temp_v4;
-            FUN_004aace8(g_btlUiBlock,temp_v7,1,(int)(short)(temp_v1 - 0x16),(int)(short)(temp_v0 - 0xd));
-            param_2->field_0x20 = '\x01';
-            param_2->field_0x2 = 1;
+            result = FUN_004aa0b0(g_btlUiBlock, 0, 1, x, y, z);
+            break;
+        case 3:
+            result = FUN_004aa0b0(g_btlUiBlock, 3, 1, x, y, z);
+            break;
+        case 4:
+            result = FUN_004aa0b0(g_btlUiBlock, 2, 1, x, y, z);
+            break;
+        default:
+            step->done = 0;
             return;
-          }
-          temp_v4 = g_btlUiBlock;
-          FUN_004aace8(g_btlUiBlock,temp_v7,0,temp_v8,temp_v6);
-          temp_v1 = (short)temp_v4;
         }
-      }
-      else {
-        temp_v4 = g_btlUiBlock;
-        FUN_004aace8(g_btlUiBlock,temp_v7,1,temp_v8,temp_v6);
-        temp_v1 = (short)temp_v4;
-      }
-      param_2->field_0x26 = temp_v1;
+    } else {
+        if (((MASK64(0x10) | MASK64(0x20) | MASK64(0x30)) & side->flags) == 0) {
+            step->done = 0;
+            return;
+        }
+        s32 id = side->markerId;
+        if ((side->flags & MASK64(0x30)) != 0) id = 4;
+        s16 x = (s16)(s32)step->actor->position.x;
+        s16 y = (s16)(s32)step->actor->position.y;
+        switch (step->kind) {
+        case 1:
+            result = FUN_004aace8(g_btlUiBlock, id, 1, x, y);
+            break;
+        case 2:
+            if (step->doubled != 0) {
+                result = FUN_004aace8(g_btlUiBlock, id, 0, x, y);
+                step->handle = result;
+                FUN_004aace8(g_btlUiBlock, id, 1, (s16)(x - 22), (s16)(y - 13));
+                step->phase = 1;
+                step->done = 1;
+                return;
+            }
+            result = FUN_004aace8(g_btlUiBlock, id, 0, x, y);
+            break;
+        case 3:
+            result = FUN_004aace8(g_btlUiBlock, id, 3, x, y);
+            break;
+        case 4:
+            result = FUN_004aace8(g_btlUiBlock, id, 2, x, y);
+            break;
+        default:
+            step->done = 0;
+            return;
+        }
     }
-    param_2->field_0x20 = '\x01';
-  }
-  param_2->field_0x2 = 1;
-  return;
+    step->handle = result;
+    step->phase = 1;
+    step->done = 1;
 }
 
 } /* extern "C" */

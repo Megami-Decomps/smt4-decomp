@@ -1,105 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003136e4` (_code @ 0x3136e4, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register allocation and the order of the matrix products differ; the effect position, the table-based rotation and the call sequence are the same. */
+#include "map/lmapMain.h"
+#include "map/mapDepart.h"
+#include "nw/math/MTX34.h"
+
+using nw::math::MTX34;
 
 extern "C" {
+f32 FUN_001bbf0c(f32 radians);
+f32 FUN_001bc124(f32 radians);
+void FUN_0027376c(s32 slot);
+void FUN_00294774(s32 slot, f32 x, f32 y, f32 z);
+void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
+void eplSlotApplyParameters(s32 slot, const MTX34 *matrix);
+extern LmapSceneA *g_lmapScene;
+extern GameStateA g_gameState;
+extern f32 DAT_00536d14[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int FUN_0027376c(int);
-int FUN_00294774(int);
-int eplSlotApplyParameters(int, unsigned char [72]);
-int nn_math_ARMv6_MTX34CopyAsm(unsigned char [72], int *);
+enum {
+    SIN_COS_TABLE_SIZE = 256,
+    SIN_COS_WRAP = 65536
+};
 
-/* stack frame of void: 12 slot(s), 48 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-} void_stack;
-
-extern int g_gameState; /* 0x5f15fc */
-extern signed char DAT_005f199f; /* 0x5f199f */
-
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_0027376c. */
-/* Supplied declaration required: FUN_00294774. */
-/* Supplied declaration required: eplSlotApplyParameters. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-
-
-void FUN_003136e4(void)
-
+/* Sine and cosine of an angle (radians) by linear interpolation of the 256-entry table. */
+static void sinCosFromTable(f32 radians, f32 *sine, f32 *cosine)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned char temp_v12 [72];
-  
-  FUN_001bc124();
-  FUN_001bbf0c();
-  FUN_0027376c(0);
-  if (DAT_005f199f != '\0') {
-    puVar1 = (unsigned int *)&g_gameState;
-    if (g_gameState == 0x26) {
-      puVar1 = (*(unsigned int * *)((unsigned char *)&g_gameState + 0x4));
+    f32 scaled = radians * 40.764328f;
+    f32 magnitude = scaled < 0.0f ? -scaled : scaled;
+
+    while (magnitude >= (f32)SIN_COS_WRAP) {
+        magnitude -= (f32)SIN_COS_WRAP;
     }
-    if (g_gameState == 0x26 && puVar1 == (unsigned int *)0x3) {
-      temp_v0 = 0x3f800000;
-      temp_v9 = 0x3e95b0ca;
-      temp_v4 = 0;
-      temp_v10 = 0x3f74cedd;
-      temp_v2 = 0;
-      temp_v5 = 0x3f74cedd;
-      temp_v1 = 0;
-      temp_v6 = 0xbe95b0ca;
-      temp_v3 = 0;
-      temp_v7 = 0;
-      temp_v11 = 0;
-      temp_v8 = 0x80000000;
-      nn_math_ARMv6_MTX34CopyAsm(temp_v12,&temp_v0);
-      eplSlotApplyParameters(0,temp_v12);
+    u32 whole = (u32)magnitude;
+    f32 fraction = magnitude - (f32)(whole & 0xFFFF);
+    const f32 *entry = &DAT_00536d14[(whole & 0xFF) * 4];
+
+    *sine = entry[0] + fraction * entry[2];
+    *cosine = entry[1] + fraction * entry[3];
+    if (scaled < 0.0f) {
+        *sine = -*sine;
     }
-  }
-  else {
-    temp_v0 = 0x3f800000;
-    temp_v4 = 0;
-    temp_v10 = 0x3f800000;
-    temp_v2 = 0;
-    temp_v5 = 0x3f800000;
-    temp_v1 = 0;
-    temp_v6 = 0;
-    temp_v3 = 0;
-    temp_v7 = 0;
-    temp_v11 = 0;
-    temp_v8 = 0x80000000;
-    temp_v9 = temp_v4;
-    nn_math_ARMv6_MTX34CopyAsm(temp_v12,&temp_v0);
-    eplSlotApplyParameters(0,temp_v12);
-  }
-  FUN_00294774(0);
-  return;
 }
 
-} /* extern "C" */
+/* Rotation matrix from the sines and cosines of the X, Y and Z angles. */
+static void rotationFromSinCos(MTX34 *matrix, f32 sinX, f32 cosX, f32 sinY, f32 cosY, f32 sinZ, f32 cosZ)
+{
+    matrix->m[0][0] = cosZ * cosY;
+    matrix->m[0][1] = sinX * cosZ * sinY - cosX * sinZ;
+    matrix->m[0][2] = sinX * sinZ + cosX * cosZ * sinY;
+    matrix->m[0][3] = 0.0f;
+    matrix->m[1][0] = sinZ * cosY;
+    matrix->m[1][1] = cosX * cosZ + sinX * sinZ * sinY;
+    matrix->m[1][2] = cosX * sinZ * sinY - sinX * cosZ;
+    matrix->m[1][3] = 0.0f;
+    matrix->m[2][0] = -sinY;
+    matrix->m[2][1] = sinX * cosY;
+    matrix->m[2][2] = cosX * cosY;
+    matrix->m[2][3] = 0.0f;
+}
+
+/* Places the map effect at a distance and bearing from the scene position and applies its
+ * orientation: a plain heading normally, tilted on the Y axis in the one scripted scene. */
+void FUN_003136e4(f32 angle, f32 distance)
+{
+    f32 x = g_lmapScene->transform.position[0];
+    f32 y = g_lmapScene->transform.position[1];
+    f32 z = g_lmapScene->transform.position[2];
+    f32 radians = (g_lmapScene->transform.headingDegrees + angle) * 0.017453292f;
+    x += FUN_001bc124(radians) * distance;
+    z += FUN_001bbf0c(radians) * distance;
+    y += 5.0f;
+    FUN_0027376c(0);
+
+    f32 sinX, cosX, sinY, cosY, sinZ, cosZ;
+    sinCosFromTable(0.0f, &sinX, &cosX);
+    MTX34 matrix;
+    MTX34 applied;
+
+    if (g_gameState.collision.unk3A3 != 0) {
+        if (g_gameState.mode == 38 && g_gameState.submode == 3) {
+            sinCosFromTable(0.29656f, &sinY, &cosY);
+            rotationFromSinCos(&matrix, sinX, cosX, sinY, cosY, sinX, cosX);
+            nn_math_ARMv6_MTX34CopyAsm(&applied, &matrix);
+            eplSlotApplyParameters(0, &applied);
+        }
+    } else {
+        rotationFromSinCos(&matrix, sinX, cosX, sinX, cosX, sinX, cosX);
+        nn_math_ARMv6_MTX34CopyAsm(&applied, &matrix);
+        eplSlotApplyParameters(0, &applied);
+    }
+    FUN_00294774(0, x, y, z);
+}
+}

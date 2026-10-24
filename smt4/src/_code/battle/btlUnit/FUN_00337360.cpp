@@ -1,189 +1,208 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00337360` (_code @ 0x337360, 0x3bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: steps the battle summon effect load/spawn (state 0 finds or loads the effect resource, state 1 waits for it and creates the effect objects); written from the decompilation, the descending free-slot searches and branch layout not compared with retail */
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
+#define SUMMON_CACHE_SLOTS 0x2A
+#define SUMMON_STATE_LOAD 0
+#define SUMMON_STATE_SPAWN 1
+#define SUMMON_NO_EFFECT -1
+#define SUMMON_RESOURCE_PARSED 1
+#define SUMMON_RESOURCE_READY 2
+#define SUMMON_OBJECT_STRIDE 0x288
+#define SUMMON_EFFECT_STRIDE 0x114
+#define SUMMON_FIRST_EFFECT 3
+#define SUMMON_LAST_SLOT 0x35
+
+struct SummonObject {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ u16 effectId;
+    /* 0x00A */ u8 unk00A[0xCE];
+    /* 0x0D8 */ s32 summonId;
+    /* 0x0DC */ u8 unk0DC[0x1AC];
+};
+
+struct SummonEffect {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ f32 height;
+    /* 0x18 */ u8 unk18[0x28];
+    /* 0x40 */ u32 unk40;
+    /* 0x44 */ u8 unk44[0xC];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[4];
+    /* 0x58 */ u16 flags58;
+    /* 0x5A */ u16 unk5A;
+    /* 0x5C */ u8 unk5C[4];
+    /* 0x60 */ s16 objectIndex;
+    /* 0x62 */ u16 id;
+    /* 0x64 */ u32 scaleX;
+    /* 0x68 */ u32 scaleY;
+    /* 0x6C */ u32 scaleZ;
+    /* 0x70 */ u8 unk70[0xA4];
+};
+
+struct SummonResource {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 id;
+};
+
+struct SummonRequest {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ s16 summonId;
+};
+
+struct SummonSlot {
+    u32 flags;
+    s32 id;
+};
+
+struct BtlSummonState {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ u8 *effects;
+    /* 0x1E9C */ u8 unk1E9C[0x124];
+    /* 0x1FC0 */ u8 *objects;
+    /* 0x1FC4 */ u8 unk1FC4[0x20];
+    /* 0x1FE4 */ SummonSlot slots[SUMMON_CACHE_SLOTS];   /* slots[0] also holds the current effect's flags and id */
+    /* 0x2134 */ SummonResource *cache[SUMMON_CACHE_SLOTS];
+    /* 0x21DC */ u8 unk21DC[0x2274];
+    /* 0x4450 */ s8 state;
+    /* 0x4451 */ u8 unk4451[3];
+    /* 0x4454 */ s32 spawned;
+    /* 0x4458 */ u32 resource;
+};
+
+struct BtlMainFlags {
+    /* 0x000 */ u8 unk000[0x634];
+    /* 0x634 */ u32 flags;
+};
+
+struct BtlMainEffectState {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ u8 *effects;
+};
+
 extern "C" {
+extern u32 g_btlScriptUnit;
+extern BtlMainFlags *g_btlMain;
+extern BattleVersionResources *DAT_00435d18;
+extern BtlMainEffectState *g_btlMainState;
+extern u32 DAT_00439a24, DAT_00439a28, DAT_00439a38, DAT_00439cf8;
 
-int modelAnimationEnsureData(unsigned int);
-int btlReflectInitKind9(int, unsigned int, int, unsigned int, int);
-int FUN_0024057c(int, int, int);
-int FUN_002451c4(int, unsigned int, int, int, int, int);
-int aocHandleButtons(unsigned int, int);
-int dataTable00FindById(void);
-int FUN_003c1964(int);
+void dataTable00FindById(u32 id);
+u32 FUN_0027d9e8(BtlSummonState *state, s32 id);
+s32 nkdwHeaderParse(u32 resource);
+void aocHandleButtons(u32 resource, s32 mode);
+s32 FUN_00294fe0(u32 resource);
+void modelAnimationEnsureData(u32 resource);
+SummonResource *FUN_00294090(s32 id, s32 flag);
+void FUN_0024057c(BtlSummonState *state, SummonEffect *effect, s32 flag);
+void FUN_002451c4(s32 a, u32 unit, SummonEffect *effect, s32 b, s32 c, s32 d);
+u32 btlUnitGet(u32 unit);
+void btlReflectInitKind9(s32 a, u32 unit, SummonEffect *effect, u32 b, s32 c);
+void FUN_003c1964(s32 flag);
+void FUN_00240614(BattleVersionResources *resources);
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned char LAB_00200001; /* 0x200001 */
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-extern int g_btlMain; /* 0x4342c8 */
-extern int DAT_00435d18; /* 0x435d18 */
-extern int g_btlMainState; /* 0x435d90 */
-extern unsigned int DAT_00439a24; /* 0x439a24 */
-extern unsigned int DAT_00439a28; /* 0x439a28 */
-extern unsigned int DAT_00439a38; /* 0x439a38 */
-extern unsigned int DAT_00439cf8; /* 0x439cf8 */
-
-/* Supplied declaration required: modelAnimationEnsureData. */
-/* Supplied declaration required: btlReflectInitKind9. */
-/* Supplied declaration required: FUN_0024057c. */
-/* Supplied declaration required: FUN_002451c4. */
-extern unsigned int FUN_0027d9e8(int, int);
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: aocHandleButtons. */
-extern unsigned int FUN_00294090(int, unsigned int);
-extern int FUN_00294fe0(unsigned int);
-extern int nkdwHeaderParse(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_003c1964. */
-
-
-unsigned int FUN_00337360(int param_1,unsigned int param_2)
-
+/* Returns 1 once the summon has been spawned. */
+u32 FUN_00337360(BtlSummonState *state, u32 request)
 {
-/* irregular: 1 goto(s); 8 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  unsigned int *puVar7;
-  int temp_v5;
-  int *piVar9;
-  int temp_v6;
-  char *pcVar11;
-  unsigned char temp_v7;
-  unsigned int temp_v8;
-  
-  if (*(int *)(param_1 + 0x4454) != -1) {
-    temp_v3 = 1;
-  }
-  else {
-    param_2 = param_2 & 0xffff;
-    dataTable00FindById();
-    pcVar11 = (char *)(param_1 + 0x4450);
-    piVar9 = (int *)(param_1 + 0x1fe8);
-    puVar7 = (unsigned int *)(param_1 + 0x1fe4);
-    if (*pcVar11 != '\0') {
-      if (*pcVar11 == '\x01') {
-        temp_v3 = FUN_0027d9e8(param_1,*piVar9);
-        if ((*puVar7 & 1) == 0) {
-          temp_v4 = nkdwHeaderParse(temp_v3);
-          if (temp_v4 == 0) {
-            return 0;
-          }
-          *puVar7 = *puVar7 | 1;
-          aocHandleButtons(temp_v3,7);
-        }
-        if ((*puVar7 & 2) == 0) {
-          temp_v4 = FUN_00294fe0(temp_v3);
-          if (temp_v4 == 0) {
-            return 0;
-          }
-          modelAnimationEnsureData(temp_v3);
-          *puVar7 = *puVar7 | 2;
-          *(unsigned int *)(param_1 + 0x4458) = temp_v3;
-        }
-        piVar9 = (int *)(param_1 + 0x1fc0);
-        temp_v4 = 0x35;
-        do {
-          temp_v7 = (*(unsigned int *)(*piVar9 + temp_v4 * 0x288) & 1) == 0;
-          if (!temp_v7) {
-            temp_v4 = temp_v4 - 1;
-          }
-        } while ((!temp_v7 && temp_v4 != -1) && (temp_v7 || -2 < temp_v4));
-        puVar6 = (unsigned int *)(*piVar9 + temp_v4 * 0x288);
-        *puVar6 = (unsigned int)&LAB_00200001;
-        puVar6[1] = 0;
-        temp_v5 = 0x35;
-        do {
-          temp_v7 = (*(unsigned int *)(*(int *)(param_1 + 0x1e98) + temp_v5 * 0x114 + 0x50) & 1) == 0;
-          if (!temp_v7) {
-            temp_v5 = temp_v5 - 1;
-          }
-        } while ((!temp_v7 && temp_v5 != 3) && (temp_v7 || temp_v5 >= 3));
-        temp_v8 = 0;
-        temp_v6 = *(int *)(g_btlMainState + 0x1e98) + temp_v5 * 0x114;
-        *(unsigned int *)(temp_v6 + 0x50) = 0x20483;
-        *(short *)(temp_v6 + 0x60) = (short)temp_v4;
-        *(unsigned int *)(temp_v6 + 0xc) = 0;
-        *(unsigned int *)(temp_v6 + 0x10) = 0;
-        *(unsigned int *)(temp_v6 + 0x14) = 0x41700000;
-        *(unsigned short *)(temp_v6 + 0x5a) = 0;
-        temp_v3 = DAT_00439cf8;
-        *(unsigned int *)(temp_v6 + 100) = DAT_00439cf8;
-        *(unsigned int *)(temp_v6 + 0x68) = temp_v3;
-        *(unsigned int *)(temp_v6 + 0x6c) = temp_v3;
-        FUN_003c1964(1);
-        *(unsigned int *)(temp_v6 + 0x40) = temp_v8;
-        *(unsigned short *)(temp_v6 + 0x58) = *(unsigned short *)(temp_v6 + 0x58) | 0x800;
-        *(int *)(*piVar9 + temp_v4 * 0x288 + 0xd8) = (int)*(short *)(param_2 + 0x88);
-        *(unsigned short *)(*piVar9 + temp_v4 * 0x288 + 8) = *(unsigned short *)(temp_v6 + 0x62);
-        *(int *)(param_1 + 0x4454) = temp_v5;
-        *pcVar11 = '\0';
-        temp_v0 = (short)DAT_00439a24;
-        temp_v1 = (short)DAT_00439a38;
-        temp_v2 = (short)DAT_00439a28;
-        FUN_0024057c(param_1,temp_v6,0);
-        temp_v3 = btlUnitGet(g_btlScriptUnit);
-        FUN_002451c4((int)temp_v1 + (int)temp_v0,temp_v3,temp_v6,0xff,(int)temp_v2,0);
-        temp_v3 = 6;
-        if ((*(unsigned int *)(temp_v6 + 0x50) & 0x10) != 0) {
-          temp_v3 = 7;
-        }
-        temp_v8 = btlUnitGet(g_btlScriptUnit);
-        btlReflectInitKind9((int)temp_v1,temp_v8,temp_v6,temp_v3,0xd);
+    if (state->spawned != SUMMON_NO_EFFECT)
         return 1;
-      }
-    }
-    else {
-      temp_v4 = 0;
-      temp_v5 = 0x2a;
-      do {
-        temp_v6 = param_1 + temp_v4 * 8;
-        *(unsigned int *)(temp_v6 + 0x1fe4) = 0;
-        temp_v5 = temp_v5 - 1;
-        temp_v4 = temp_v4 + 1;
-        *(unsigned int *)(temp_v6 + 0x1fe8) = 0xffffffff;
-      } while (temp_v5 != 0);
-      *(unsigned int *)(param_1 + 0x4458) = 0;
-      temp_v5 = (int)*(short *)(param_2 + 0x88);
-      temp_v4 = 0;
-      do {
-        temp_v6 = *(int *)(param_1 + temp_v4 * 4 + 0x2134);
-        if ((temp_v6 != 0) && (*(int *)(temp_v6 + 4) == temp_v5)) {
-          *piVar9 = temp_v5;
-          *puVar7 = *puVar7 | 3;
-          goto LAB_00337490;
+
+    u32 summon = request & 0xFFFF;
+    dataTable00FindById(summon);
+    SummonRequest *source = reinterpret_cast<SummonRequest *>(request);
+
+    if (state->state == SUMMON_STATE_LOAD) {
+        for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
+            state->slots[i].flags = 0;
+            state->slots[i].id = -1;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x2a);
-      temp_v3 = FUN_00294090(temp_v5,1);
-      temp_v4 = 0;
-      do {
-        if (*(int *)(param_1 + temp_v4 * 4 + 0x2134) == 0) {
-          *(unsigned int *)(param_1 + temp_v4 * 4 + 0x2134) = temp_v3;
-          break;
+        state->resource = 0;
+        s32 id = source->summonId;
+        s32 cached = 0;
+        for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
+            SummonResource *held = state->cache[i];
+            if (held != NULL && held->id == id) {
+                cached = 1;
+                break;
+            }
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x2a);
-      *piVar9 = (int)*(short *)(param_2 + 0x88);
-LAB_00337490:
-      *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
-      if ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0) {
-        FUN_00240614(reinterpret_cast<BattleVersionResources*>(DAT_00435d18));
-      }
-      *pcVar11 = '\x01';
+        if (cached != 0) {
+            state->slots[0].id = id;
+            state->slots[0].flags |= SUMMON_RESOURCE_PARSED | SUMMON_RESOURCE_READY;
+        } else {
+            SummonResource *loaded = FUN_00294090(id, 1);
+            SummonResource **table = state->cache;
+            for (s32 i = 0; i < SUMMON_CACHE_SLOTS; i++) {
+                if (table[i] == NULL) {
+                    table[i] = loaded;
+                    break;
+                }
+            }
+            state->slots[0].id = source->summonId;
+        }
+        g_btlMain->flags |= 0x4000;
+        if ((*reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(DAT_00435d18) + 0x3028) & 0x400) != 0)
+            FUN_00240614(DAT_00435d18);
+        state->state = SUMMON_STATE_SPAWN;
+        return 0;
     }
-    temp_v3 = 0;
-  }
-  return temp_v3;
+    if (state->state != SUMMON_STATE_SPAWN)
+        return 0;
+
+    u32 resource = FUN_0027d9e8(state, state->slots[0].id);
+    if ((state->slots[0].flags & SUMMON_RESOURCE_PARSED) == 0) {
+        if (nkdwHeaderParse(resource) == 0)
+            return 0;
+        state->slots[0].flags |= SUMMON_RESOURCE_PARSED;
+        aocHandleButtons(resource, 7);
+    }
+    if ((state->slots[0].flags & SUMMON_RESOURCE_READY) == 0) {
+        if (FUN_00294fe0(resource) == 0)
+            return 0;
+        modelAnimationEnsureData(resource);
+        state->slots[0].flags |= SUMMON_RESOURCE_READY;
+        state->resource = resource;
+    }
+
+    s32 objectIndex = SUMMON_LAST_SLOT;
+    while (objectIndex != -1 && (*reinterpret_cast<u32 *>(state->objects + objectIndex * SUMMON_OBJECT_STRIDE) & 1) != 0)
+        objectIndex--;
+    SummonObject *object = reinterpret_cast<SummonObject *>(state->objects + objectIndex * SUMMON_OBJECT_STRIDE);
+    object->flags = 0x200001;
+    object->unk004 = 0;
+
+    s32 effectIndex = SUMMON_LAST_SLOT;
+    while (effectIndex != SUMMON_FIRST_EFFECT
+           && (*reinterpret_cast<u32 *>(state->effects + effectIndex * SUMMON_EFFECT_STRIDE + 0x50) & 1) != 0)
+        effectIndex--;
+    SummonEffect *effect = reinterpret_cast<SummonEffect *>(g_btlMainState->effects + effectIndex * SUMMON_EFFECT_STRIDE);
+    effect->flags = 0x20483;
+    effect->objectIndex = (s16)objectIndex;
+    effect->unk0C = 0;
+    effect->unk10 = 0;
+    effect->height = 15.0f;
+    effect->unk5A = 0;
+    effect->scaleX = DAT_00439cf8;
+    effect->scaleY = DAT_00439cf8;
+    effect->scaleZ = DAT_00439cf8;
+    FUN_003c1964(1);
+    effect->unk40 = 0;
+    effect->flags58 |= 0x800;
+    object->summonId = source->summonId;
+    object->effectId = effect->id;
+    state->spawned = effectIndex;
+    state->state = SUMMON_STATE_LOAD;
+
+    s16 offsetA = (s16)DAT_00439a24;
+    s16 offsetB = (s16)DAT_00439a38;
+    s16 offsetC = (s16)DAT_00439a28;
+    FUN_0024057c(state, effect, 0);
+    FUN_002451c4(offsetB + offsetA, btlUnitGet(g_btlScriptUnit), effect, 0xFF, offsetC, 0);
+    u32 reflectKind = (effect->flags & 0x10) != 0 ? 7 : 6;
+    btlReflectInitKind9(offsetB, btlUnitGet(g_btlScriptUnit), effect, reflectKind, 0xD);
+    return 1;
 }
 
 } /* extern "C" */

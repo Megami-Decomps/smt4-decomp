@@ -1,149 +1,125 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00240c64` (_code @ 0x240c64, 0x300 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the battle main creation; armcc here lays out the 0x16-byte stack record and the allocation traces differently, and orders the force-flag merges (retail merges the two masks as separate 32-bit ors). */
+#include "AsdSDK/AsdDebug.h"
+#include "sys/Task.h"
+
+/* The battle main state (only the fields the creation sets). */
+struct BattleMainState {
+    /* 0x0000 */ u32 job;
+    /* 0x0004 */ u8 unk0004[0x7C];
+    /* 0x0080 */ u8 unk0080[4];
+    /* 0x0084 */ u8 transitionPending;
+    /* 0x0085 */ u8 unk0085[7];
+    /* 0x008C */ u32 phase;
+    /* 0x0090 */ u8 unk0090[0x1C];
+    /* 0x00AC */ s32 encounterKind;
+    /* 0x00B0 */ s32 encounterFlags;
+    /* 0x00B4 */ s32 encounterMode;
+    /* 0x00B8 */ u8 unk00B8[0x34];
+    /* 0x00EC */ s32 firstValue;
+    /* 0x00F0 */ s32 secondValue;
+    /* 0x00F4 */ u8 unk00F4[0x84];
+    /* 0x0178 */ s32 stats[4];
+    /* 0x0188 */ u8 statFlag;
+    /* 0x0189 */ u8 unk0189[3];
+    /* 0x018C */ s32 extraA;
+    /* 0x0190 */ s32 extraB;
+    /* 0x0194 */ u8 unk0194[0x4414];
+    /* 0x45A8 */ u64 forceFlags;
+};
+
+/* The battle main globals (Apocalypse): the state, copies of the slot table and flag storage, and masks. */
+struct BattleMainGlobals {
+    /* 0x000 */ BattleMainState *state;
+    /* 0x004 */ u8 *slotTableCopy;
+    /* 0x008 */ u8 *flagStorageCopy;
+    /* 0x00C */ u8 unk00C[0x1DC];
+    /* 0x1E8 */ u64 requiredMask;
+    /* 0x1F0 */ u8 unk1F0[0x10];
+    /* 0x200 */ u64 forcedMask;
+};
+
+/* The 0x16-byte start record. */
+struct BattleStartRecord {
+    /* 0x00 */ s8 second;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ s16 value;
+    /* 0x04 */ s16 stats[4];
+    /* 0x0C */ u8 statFlag;
+    /* 0x0D */ u8 unk0D;
+    /* 0x0E */ s16 extraA;
+    /* 0x10 */ s16 extraB;
+    /* 0x12 */ s16 mode;
+    /* 0x14 */ s16 kind;
+};
 
 extern "C" {
+extern BattleMainGlobals g_btlMain;
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int FUN_0024d9c4(...);
-int rt_memcpy(...);
-int rt_memcpy_w(...);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 mode, u32 size, u32 tracked);
+u32 asdProcessCreateSimple(const char *, s32, u32, u32, TaskFunc, TaskFunc, void *);
+u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
+u8 *gameGetSlotTable(void);
+u8 *flagValueGetStorage(void);
+void rt_memcpy_w(void *dest, const void *source, u32 size);
+void rt_memcpy(void *dest, const void *source, u32 size);
+void FUN_0024d9c4(BattleMainState *state);
+void FUN_0024bcd4(void *work);
+void FUN_002def6c(void *work);
+void FUN_0029853c(void *work);
+void FUN_002df4a8(void *work);
+void FUN_00298544(void *work);
+void FUN_002df4b0(void *work);
 
-/* stack frame of param_2: 6 slot(s), 22 byte(s) */
-typedef struct {
-    unsigned short sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned char LAB_00240fc0; /* 0x240fc0 */
-extern unsigned char LAB_00240fd0; /* 0x240fd0 */
-extern unsigned char LAB_00240fe0; /* 0x240fe0 */
-extern unsigned char LAB_00240ff0; /* 0x240ff0 */
-extern unsigned char LAB_00240ffc; /* 0x240ffc */
-extern unsigned char LAB_0024100c; /* 0x24100c */
-extern int FUN_0024bcd4(...); /* 0x24bcd4 */
-extern unsigned char LAB_0029853c; /* 0x29853c */
-extern unsigned char LAB_00298544; /* 0x298544 */
-extern unsigned char LAB_002def6c; /* 0x2def6c */
-extern unsigned char LAB_002df4a8; /* 0x2df4a8 */
-extern unsigned char LAB_002df4b0; /* 0x2df4b0 */
-extern unsigned int *g_btlMain; /* 0x573920 */
-extern unsigned int DAT_00573924; /* 0x573924 */
-extern unsigned int DAT_00573928; /* 0x573928 */
-extern unsigned int DAT_00573b08; /* 0x573b08 */
-extern unsigned int DAT_00573b0c; /* 0x573b0c */
-extern unsigned int DAT_00573b20; /* 0x573b20 */
-extern unsigned int DAT_00573b24; /* 0x573b24 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-extern unsigned int gameGetSlotTable(void);
-extern unsigned int flagValueGetStorage(void);
-/* Supplied declaration required: FUN_0024d9c4. */
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00240c64(unsigned int *param_1,int param_2)
-
+/* Creates the battle main: its state, copies of the slot table and flag storage, the start
+ * parameters (`start` of kind 4 or 0x16, or the default flags) and the main process with its draw tasks. */
+void FUN_00240c64(void *start, s32 kind)
 {
-/* irregular: 7 native warning(s); review required */
-  short temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char *puVar8;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  short temp_v8;
-  short sStack_26;
-  
-  puVar2 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x4e68,1);
-  temp_v1 = 0x100;
-  g_btlMain = puVar2;
-  asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
-  DAT_00573924 = temp_v1;
-  temp_v1 = gameGetSlotTable();
-  rt_memcpy_w(DAT_00573924,temp_v1,0x2d30);
-  temp_v1 = 0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x10b8,1);
-  DAT_00573928 = temp_v1;
-  temp_v1 = flagValueGetStorage();
-  rt_memcpy(DAT_00573928,temp_v1,0x10b8);
-  FUN_0024d9c4();
-  temp_v5 = 0;
-  if (param_1 != (unsigned int *)0x0) {
-    temp_v5 = param_2;
-  }
-  if (!((param_1 == (unsigned int *)0x0 || param_2 == 0) || temp_v5 < 0)) {
-    if (param_2 == 4) {
-      puVar2[0x3b] = *param_1;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x11F);
+    BattleMainState *state = (BattleMainState *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x4E68, 1);
+    g_btlMain.state = state;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x123);
+    g_btlMain.slotTableCopy = (u8 *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x2D30, 1);
+    rt_memcpy_w(g_btlMain.slotTableCopy, gameGetSlotTable(), 0x2D30);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x126);
+    g_btlMain.flagStorageCopy = (u8 *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x10B8, 1);
+    rt_memcpy(g_btlMain.flagStorageCopy, flagValueGetStorage(), 0x10B8);
+    FUN_0024d9c4(state);
+    if (start != NULL && kind > 0) {
+        if (kind == 4) {
+            state->firstValue = *(s32 *)start;
+        } else if (kind == 0x16) {
+            BattleStartRecord record = *(BattleStartRecord *)start;
+            if (record.second != 0)
+                state->secondValue = record.value;
+            else
+                state->firstValue = record.value;
+            state->stats[0] = record.stats[0];
+            state->stats[1] = record.stats[1];
+            state->stats[2] = record.stats[2];
+            state->stats[3] = record.stats[3];
+            state->statFlag = record.statFlag;
+            if (record.second != 0)
+                state->statFlag = 0;
+            state->extraA = record.extraA;
+            state->extraB = record.extraB;
+            state->encounterKind = record.mode;
+            state->encounterFlags = record.kind;
+            if (record.mode == 2)
+                state->encounterMode = 2;
+        }
+    } else {
+        if (g_btlMain.state != NULL)
+            g_btlMain.state->phase = 1;
+        state->forceFlags |= g_btlMain.requiredMask | g_btlMain.forcedMask;
     }
-    else if (param_2 == 0x16) {
-      temp_v1 = param_1[1];
-      temp_v2 = param_1[2];
-      temp_v3 = param_1[3];
-      temp_v4 = param_1[4];
-      temp_v0 = *(short *)(param_1 + 5);
-      temp_v7 = (char)*param_1 != '\0';
-      temp_v5 = (int)(short)((unsigned int)*param_1 >> 0x10);
-      if (temp_v7) {
-        puVar2[0x3c] = temp_v5;
-      }
-      else {
-        puVar2[0x3b] = temp_v5;
-      }
-      puVar2[0x5e] = (int)(short)temp_v1;
-      puVar2[0x5f] = (int)(short)((unsigned int)temp_v1 >> 0x10);
-      puVar2[0x60] = (int)(short)temp_v2;
-      puVar2[0x61] = (int)(short)((unsigned int)temp_v2 >> 0x10);
-      *(char *)(puVar2 + 0x62) = (char)temp_v3;
-      if (temp_v7) {
-        *(unsigned char *)(puVar2 + 0x62) = 0;
-      }
-      puVar2[99] = (int)(short)((unsigned int)temp_v3 >> 0x10);
-      temp_v8 = (short)temp_v4;
-      puVar2[100] = (int)temp_v8;
-      sStack_26 = (short)((unsigned int)temp_v4 >> 0x10);
-      puVar2[0x2b] = (int)sStack_26;
-      puVar2[0x2c] = (int)temp_v0;
-      if (sStack_26 == 2) {
-        puVar2[0x2d] = 2;
-      }
-    }
-  }
-  else {
-    if (g_btlMain != (unsigned int *)0x0) {
-      g_btlMain[0x23] = 1;
-    }
-    temp_v6 = DAT_00573b08 | puVar2[0x116a] | DAT_00573b20;
-    puVar2[0x116b] = puVar2[0x116b] | DAT_00573b0c | DAT_00573b24;
-    puVar2[0x116a] = temp_v6;
-  }
-  temp_v6 = DAT_00573b20 | puVar2[0x116a];
-  puVar2[0x116b] = puVar2[0x116b] | DAT_00573b24;
-  puVar2[0x116a] = temp_v6;
-  *(unsigned char *)(puVar2 + 0x21) = 0;
-  puVar8 = &LAB_00240fc0;
-  asdProcessCreateSimple(&LAB_00240fc0,4,0,0,FUN_0024bcd4,&LAB_002def6c,g_btlMain);
-  *puVar2 = (unsigned int)puVar8;
-  taskCreateDraw(&LAB_00240fd0,0x75,0,0,&LAB_0029853c,0,0,puVar8);
-  taskCreateDraw(&LAB_00240fe0,0xea,0,0,&LAB_002df4a8,0,0,*puVar2);
-  taskCreateDraw(&LAB_00240ff0,0x85,0,0,&LAB_00298544,0,0,*puVar2);
-  taskCreateDraw(&LAB_00240ffc,0xe1,0,0,&LAB_00298544,0,0,*puVar2);
-  taskCreateDraw(&LAB_0024100c,0xed,0,0,&LAB_002df4b0,0,0,*puVar2);
-  return;
+    state->forceFlags |= g_btlMain.forcedMask;
+    state->transitionPending = 0;
+    state->job = asdProcessCreateSimple("btlMain", 4, 0, 0, FUN_0024bcd4, FUN_002def6c, g_btlMain.state);
+    taskCreateDraw("BTLMAIN U", 0x75, 0, 0, FUN_0029853c, NULL, NULL, state->job);
+    taskCreateDraw("BTLMAIN D", 0xEA, 0, 0, FUN_002df4a8, NULL, NULL, state->job);
+    taskCreateDraw("BTLFADE UL", 0x85, 0, 0, FUN_00298544, NULL, NULL, state->job);
+    taskCreateDraw("BTLFADE UR", 0xE1, 0, 0, FUN_00298544, NULL, NULL, state->job);
+    taskCreateDraw("BTLFADE D", 0xED, 0, 0, FUN_002df4b0, NULL, NULL, state->job);
 }
 
 } /* extern "C" */

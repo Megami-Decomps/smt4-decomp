@@ -11,8 +11,8 @@ struct CallbackOwnerView {
 extern "C" {
 void* asdOperatorNew(u32 size);
 CallbackView* callbackOwnerInitialize(void* storage);
-CallbackView* FUN_00395e44(void* storage);
-CallbackView* FUN_003955e4(void* storage);
+CallbackView* _ZN9Obj4222fcC1Ev(void* storage);
+CallbackView* _ZN9Obj4222ccC1Ev(void* storage);
 void FUN_00395280(CallbackView* callback, CallbackOwnerView* owner);
 
 // Creates the selected callback, or reuses the existing one, and associates it with the owner.
@@ -26,12 +26,12 @@ void callbackOwnerCreateOrReuseAndAssociateCallback(CallbackOwnerView* owner, s3
     }
     case 1: {
         void* storage = asdOperatorNew(0x1c);
-        owner->unk68 = storage ? FUN_00395e44(storage) : 0;
+        owner->unk68 = storage ? _ZN9Obj4222fcC1Ev(storage) : 0;
         break;
     }
     case 2: {
         void* storage = asdOperatorNew(0x10);
-        owner->unk68 = storage ? FUN_003955e4(storage) : 0;
+        owner->unk68 = storage ? _ZN9Obj4222ccC1Ev(storage) : 0;
         break;
     }
     }

@@ -1,169 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00267d74` (_code @ 0x267d74, 0x3b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: resolves duplicate devils when a party slot is replaced (swap the displaced id into the matching slot, keep the reserve list sorted and de-duplicated, adjust the counters); written from the decompilation, the compiler-unrolled shift/zero loops are written as plain loops */
+#include "common.h"
+
+#define PARTY_SLOT_COUNT 8
+#define PARTY_NO_SLOT -1
+
+struct PartyIds {
+    /* 0x0000 */ u8 unk0000[0x76A4];
+    /* 0x76A4 */ s16 slots[PARTY_SLOT_COUNT];
+    /* 0x76B4 */ s16 slotMarks[PARTY_SLOT_COUNT];
+    /* 0x76C4 */ s16 reserve[PARTY_SLOT_COUNT];
+    /* 0x76D4 */ u8 unk76D4[0x17F];
+    /* 0x7853 */ u8 unk7853;
+    /* 0x7854 */ s32 reserveCount;
+    /* 0x7858 */ s32 filledCount;
+    /* 0x785C */ u8 unk785C[4];
+    /* 0x7860 */ u8 changed[PARTY_SLOT_COUNT];
+};
+
+struct PartyIncoming {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s16 ids[PARTY_SLOT_COUNT];
+};
 
 extern "C" {
+void qsort(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 FUN_00321c94(const void *a, const void *b);
+s32 FUN_003df4a4(u16 id);
+s32 recordContainsPairedId(u32 record, u16 id);
 
-int qsort(int, int, int, unsigned char *);
-
-/* stack frame of param_4: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_4_stack;
-
-extern unsigned char LAB_00321c94; /* 0x321c94 */
-
-/* Supplied declaration required: qsort. */
-extern int FUN_003df4a4(unsigned short);
-extern int recordContainsPairedId(unsigned int, unsigned short);
-
-
-/* WARNING: Removing unreachable block (ram,0x00268074) */
-
-void FUN_00267d74(int param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Removes the id at the head of the reserve from the rest of it and keeps it sorted. */
+static __inline void reserveRemoveHeadDuplicates(PartyIds *party)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int *puVar10;
-  int temp_v9;
-  int *piVar12;
-  int temp_v10;
-  
-  do {
-    temp_v1 = 0;
-    while( 1 ) {
-      temp_v6 = param_1 + temp_v1 * 2;
-      if (((*(short *)(temp_v6 + 0x76a4) != 0 && param_4 != -1) && temp_v1 != param_4) &&
-         (*(short *)(temp_v6 + 0x76a4) == *(short *)(param_3 + param_4 * 2 + 0x34))) break;
-      temp_v1 = temp_v1 + 1;
-      if (temp_v1 >= 8) {
-        return;
-      }
-    }
-    temp_v10 = param_3 + temp_v1 * 2;
-    temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 2 + 0x76a4);
-    *(unsigned short *)(temp_v6 + 0x76a4) = *(unsigned short *)(temp_v10 + 0x34);
-    *(unsigned char *)(param_1 + temp_v1 + 0x7860) = 1;
-    temp_v2 = param_1 + 0x76c4;
-    temp_v8 = 0;
-    temp_v9 = 7;
-    do {
-      temp_v3 = param_1 + temp_v8 * 2;
-      if (*(short *)(temp_v3 + 0x76c6) == *(short *)(param_1 + 0x76c4)) {
-        *(unsigned short *)(temp_v3 + 0x76c6) = 0;
-        qsort(temp_v2,8,2,&LAB_00321c94);
-      }
-      temp_v9 = temp_v9 - 1;
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v9 != 0);
-    puVar10 = (unsigned int *)(param_1 + 0x7854);
-    temp_v7 = *puVar10;
-    if (0 < (int)temp_v7) {
-      temp_v4 = temp_v7 & 1;
-      if (temp_v4 == 1) {
-        temp_v8 = param_1 + temp_v7 * 2;
-        *(unsigned short *)(temp_v8 + 0x76c4) = *(unsigned short *)(temp_v8 + 0x76c2);
-      }
-      temp_v7 = (unsigned int)(temp_v4 == 1);
-      if ((int)temp_v4 < (int)*puVar10) {
-        do {
-          temp_v4 = temp_v4 + 2;
-          temp_v9 = temp_v7 + 1;
-          temp_v8 = param_1 + (*puVar10 - temp_v7) * 2;
-          *(unsigned short *)(temp_v8 + 0x76c4) = *(unsigned short *)(temp_v8 + 0x76c2);
-          temp_v7 = temp_v7 + 2;
-          temp_v8 = param_1 + (*puVar10 - temp_v9) * 2;
-          *(unsigned short *)(temp_v8 + 0x76c4) = *(unsigned short *)(temp_v8 + 0x76c2);
-        } while ((int)temp_v4 < (int)*puVar10);
-      }
-    }
-    temp_v7 = *puVar10;
-    temp_v4 = 8 - temp_v7;
-    if (0 < (int)temp_v4) {
-      temp_v8 = 0;
-      if ((int)temp_v7 >= 8) {
-        temp_v5 = 0;
-      }
-      else {
-        temp_v5 = temp_v4 & 1;
-        if (temp_v5 == 1) {
-          temp_v8 = 1;
-          *(unsigned short *)(param_1 + temp_v7 * 2 + 0x76c4) = 0;
+    for (s32 k = 0; k < PARTY_SLOT_COUNT - 1; k++) {
+        if (party->reserve[k + 1] == party->reserve[0]) {
+            party->reserve[k + 1] = 0;
+            qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(s16), FUN_00321c94);
         }
-      }
-      for (; (int)temp_v5 < (int)temp_v4; temp_v5 = temp_v5 + 2) {
-        temp_v9 = temp_v8 + 1;
-        *(unsigned short *)(param_1 + (temp_v7 + temp_v8) * 2 + 0x76c4) = 0;
-        temp_v8 = temp_v8 + 2;
-        *(unsigned short *)(param_1 + (temp_v7 + temp_v9) * 2 + 0x76c4) = 0;
-      }
     }
-    temp_v8 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34));
-    if (temp_v8 != 0) {
-      if (*(short *)(param_1 + 0x76c6) == *(short *)(temp_v10 + 0x34)) {
-        *(unsigned short *)(param_1 + 0x76c4) = 0;
-      }
-      else {
-        temp_v8 = 0;
-        temp_v9 = 7;
-        *(short *)(param_1 + 0x76c4) = *(short *)(temp_v10 + 0x34);
-        do {
-          temp_v3 = param_1 + temp_v8 * 2;
-          if (*(short *)(temp_v3 + 0x76c6) == *(short *)(param_1 + 0x76c4)) {
-            *(unsigned short *)(temp_v3 + 0x76c6) = 0;
-            qsort(temp_v2,8,2,&LAB_00321c94);
-          }
-          temp_v9 = temp_v9 - 1;
-          temp_v8 = temp_v8 + 1;
-        } while (temp_v9 != 0);
-      }
-    }
-    else {
-      *(unsigned short *)(param_1 + 0x76c4) = 0;
-      qsort(temp_v2,8,2,&LAB_00321c94);
-    }
-    temp_v2 = FUN_003df4a4(temp_v0);
-    piVar12 = (int *)(param_1 + 0x7858);
-    param_4 = temp_v1;
-    if ((temp_v2 == 0) || (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v2 != 0))
-    {
-      temp_v2 = FUN_003df4a4(temp_v0);
-      if ((temp_v2 == 0) && (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v2 != 0)
-         ) {
-        *piVar12 = *piVar12 + 1;
-        *(unsigned short *)(temp_v6 + 0x76b4) = 1;
-      }
-      else {
-        temp_v6 = FUN_003df4a4(temp_v0);
-        if (((temp_v6 == 0) &&
-            (temp_v6 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v10 + 0x34)), temp_v6 == 0)) ||
-           (*(short *)(param_3 + temp_v1 * 2 + 0x34) == 0)) {
-          *puVar10 = *puVar10 - 1;
+}
+
+void FUN_00267d74(PartyIds *party, u32 record, PartyIncoming *incoming, s32 swapSlot)
+{
+    for (;;) {
+        /* Find the slot that currently holds the id the incoming slot wants. */
+        s32 slot;
+        for (slot = 0; slot < PARTY_SLOT_COUNT; slot++) {
+            if (party->slots[slot] != 0 && swapSlot != PARTY_NO_SLOT && slot != swapSlot
+                && party->slots[slot] == incoming->ids[swapSlot])
+                break;
         }
-      }
+        if (slot >= PARTY_SLOT_COUNT)
+            return;
+
+        u16 displaced = party->slots[slot];
+        party->slots[slot] = incoming->ids[slot];
+        party->changed[slot] = 1;
+        reserveRemoveHeadDuplicates(party);
+
+        /* Make room at the head of the reserve and clear its unused tail. */
+        for (s32 j = party->reserveCount; j > 0; j--)
+            party->reserve[j] = party->reserve[j - 1];
+        for (s32 j = party->reserveCount; j < PARTY_SLOT_COUNT; j++)
+            party->reserve[j] = 0;
+
+        if (recordContainsPairedId(record, incoming->ids[slot]) != 0) {
+            if (party->reserve[1] == incoming->ids[slot]) {
+                party->reserve[0] = 0;
+            } else {
+                party->reserve[0] = incoming->ids[slot];
+                reserveRemoveHeadDuplicates(party);
+            }
+        } else {
+            party->reserve[0] = 0;
+            qsort(party->reserve, PARTY_SLOT_COUNT, sizeof(s16), FUN_00321c94);
+        }
+
+        s32 displacedKnown = FUN_003df4a4(displaced);
+        s32 incomingPaired = recordContainsPairedId(record, incoming->ids[slot]);
+        if (displacedKnown == 0 || incomingPaired != 0) {
+            if (FUN_003df4a4(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) != 0) {
+                party->filledCount++;
+                party->slotMarks[slot] = 1;
+            } else if ((FUN_003df4a4(displaced) == 0 && recordContainsPairedId(record, incoming->ids[slot]) == 0)
+                       || incoming->ids[slot] == 0) {
+                party->reserveCount--;
+            }
+        } else {
+            if (incoming->ids[slot] != 0)
+                party->filledCount--;
+            party->reserveCount--;
+            party->slotMarks[slot] = 0;
+        }
+        swapSlot = slot;
     }
-    else {
-      if (*(short *)(param_3 + temp_v1 * 2 + 0x34) != 0) {
-        *piVar12 = *piVar12 - 1;
-      }
-      *puVar10 = *puVar10 - 1;
-      *(unsigned short *)(temp_v6 + 0x76b4) = 0;
-    }
-  } while( 1 );
 }
 
 } /* extern "C" */

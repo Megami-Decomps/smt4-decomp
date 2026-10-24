@@ -1,4 +1,3 @@
-/* NON_MATCHING: only r4/r5 swapped (retail keeps the resource in r4 and the size in r5) */
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"

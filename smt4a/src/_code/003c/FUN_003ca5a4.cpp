@@ -1,134 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca5a4` (_code @ 0x3ca5a4, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the visibility refresh; the build allocates the registers of the entry scan and of the slot loop differently (retail keeps the list holder in r5, g_lmapMainState in r7 and the visibility table in r9/sl). */
+#include "common.h"
+
+// One record of the 2D data table's sub-table 5: which slot is shown, and the flags that hide or show it.
+struct VisibilityEntry {
+    /* 0x00 */ s8 kind;       // -1: unused
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ s8 slot;       // index into the visibility table
+    /* 0x03 */ u8 secondary;  // selects the second half of the table
+    /* 0x04 */ s16 hideFlag;  // when set, the entry is skipped unless this flag is set
+    /* 0x06 */ s16 skipFlag;  // when set, the entry is skipped if this flag is set
+};
+
+// The list the map slots are registered from; its object sits at +8 and its length at +0x10.
+struct SlotSourceList {
+    u8 unk00[8];
+    struct {
+        u8 unk00[0x10];
+        u32 count;
+    } *source;
+};
+
+struct LmapSlotA {
+    u8 unk00[0x84];
+    u8 registered;  // 0x84
+    u8 unk85[3];
+};
+
+// The Apocalypse map state block, reduced to the fields this function touches.
+struct LmapStateAView {
+    u8 unk0000[0x4ef8];
+    SlotSourceList *sources;  // 0x4ef8
+    u8 unk4efc[4];
+    LmapSlotA slots[128];     // 0x4f00
+};
 
 extern "C" {
+extern LmapStateAView *g_lmapMainState;
+extern u32 g_handleRegistry;
+extern u8 DAT_005f0c54[0x28];       // slot visibility as last applied
+extern const u8 DAT_00531270[0xa0]; // default table (copied to a local that is not used afterwards)
 
-int ptrListRemoveClearOwner(unsigned int, int);
-int dataTable2dSub5GetCount(void);
-int FUN_003b5c54(unsigned int, int);
-int FUN_0040619c(int, unsigned int);
-int handleRegistryRegisterObject(unsigned int, int);
-int rt_memcpy(unsigned char *, int *, int);
-int rt_memcpy_w(unsigned char [160], unsigned char *, int);
+s32 dataTable2dSub5GetCount(void);
+VisibilityEntry *dataTable2DGetEntry(s32 index);
+s32 gameFlagIsSet(s32 flag);
+void rt_memcpy(void *destination, const void *source, u32 bytes);
+void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void *FUN_0040619c(void *source, u32 index);
+void ptrListRemoveClearOwner(u32 registry, void *object);
+void handleRegistryRegisterObject(u32 registry, void *object);
+void FUN_003b5c54(u32 index, s32 visible);
 
-/* stack frame of param_1: 10 slot(s), 40 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
-
-extern unsigned char DAT_00531270; /* 0x531270 */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_lmapMainState; /* 0x580238 */
-extern unsigned char DAT_005f0c54; /* 0x5f0c54 */
-
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-extern char *dataTable2DGetEntry(int);
-/* Supplied declaration required: dataTable2dSub5GetCount. */
-/* Supplied declaration required: FUN_003b5c54. */
-/* Supplied declaration required: FUN_0040619c. */
-/* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_003ca5a4(int param_1)
-
+// Recomputes which map slots are visible from the data table and the game flags, and registers or removes the slots
+// whose visibility changed.
+void FUN_003ca5a4(void)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  char *pcVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [160];
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  
-  temp_v2 = 0;
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v7 = 0;
-  temp_v8 = 0;
-  temp_v9 = 0;
-  temp_v10 = 0;
-  temp_v11 = 0;
-  temp_v12 = 0;
-  temp_v13 = 0;
-  temp_v14 = 0;
-  dataTable2dSub5GetCount();
-  if (0 < param_1) {
-    do {
-      pcVar1 = (char *)dataTable2DGetEntry(temp_v2);
-      temp_v0 = (int)*pcVar1;
-      if (temp_v0 != -1) {
-        if (*(short *)(pcVar1 + 4) != 0) {
-          temp_v1 = gameFlagIsSet();
-          temp_v0 = 0;
-          if (temp_v1 == 0) goto LAB_003ca648;
-        }
-        if ((*(short *)(pcVar1 + 6) == 0) || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)) {
-          temp_v0 = (int)pcVar1[2];
-          if (pcVar1[3] == '\0') {
-            *(unsigned char *)((int)&temp_v5 + temp_v0) = 1;
-          }
-          else {
-            *(unsigned char *)((int)&temp_v10 + temp_v0) = 1;
-          }
-        }
-      }
-LAB_003ca648:
-      temp_v2 = temp_v2 + 1;
-      dataTable2dSub5GetCount();
-    } while (temp_v2 < temp_v0);
-  }
-  rt_memcpy_w(temp_v4,&DAT_00531270,0xa0);
-  temp_v2 = g_lmapMainState;
-  rt_memcpy(&DAT_005f0c54,&temp_v5,0x28);
-  for (temp_v3 = 0; temp_v0 = *(int *)(*(int *)(temp_v2 + 0x4ef8) + 8), temp_v3 < *(unsigned int *)(temp_v0 + 0x10);
-      temp_v3 = temp_v3 + 1) {
-    if ((&DAT_005f0c54)[temp_v3] != '\x01') {
-      if ((g_lmapMainState != 0) && (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) != '\0')) {
-        FUN_0040619c(temp_v0,temp_v3);
-        ptrListRemoveClearOwner(g_handleRegistry,temp_v0);
-        if ((g_lmapMainState != 0) &&
-           (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) != '\0')) {
-          *(unsigned char *)(temp_v0 + 0x4f84) = 0;
-        }
-      }
-      FUN_003b5c54(temp_v3,0);
+    u8 localTable[0xa0];
+    u8 visible[0x28];
+    for (s32 i = 0; i < 0x28; i++) {
+        visible[i] = 0;
     }
-    else {
-      if ((g_lmapMainState == 0) || (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) == '\0')) {
-        FUN_0040619c(temp_v0,temp_v3);
-        handleRegistryRegisterObject(g_handleRegistry,temp_v0);
-        if ((g_lmapMainState != 0) &&
-           (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) == '\0')) {
-          *(unsigned char *)(temp_v0 + 0x4f84) = 1;
+    for (s32 i = 0; i < dataTable2dSub5GetCount(); i++) {
+        VisibilityEntry *entry = dataTable2DGetEntry(i);
+        if (entry->kind == -1) {
+            continue;
         }
-      }
-      FUN_003b5c54(temp_v3,1);
+        if (entry->hideFlag != 0 && gameFlagIsSet(entry->hideFlag) == 0) {
+            continue;
+        }
+        if (entry->skipFlag == 0 || gameFlagIsSet(entry->skipFlag) == 0) {
+            if (entry->secondary == 0) {
+                visible[entry->slot] = 1;
+            } else {
+                visible[0x14 + entry->slot] = 1;
+            }
+        }
     }
-  }
-  return;
-}
+    rt_memcpy_w(localTable, DAT_00531270, sizeof(localTable));
+    rt_memcpy(DAT_005f0c54, visible, sizeof(visible));
 
-} /* extern "C" */
+    LmapStateAView *state = g_lmapMainState;
+    for (u32 i = 0; i < state->sources->source->count; i++) {
+        void *source = state->sources->source;
+        if (DAT_005f0c54[i] != 1) {
+            if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered != 0) {
+                ptrListRemoveClearOwner(g_handleRegistry, FUN_0040619c(source, i));
+                if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered != 0) {
+                    g_lmapMainState->slots[i].registered = 0;
+                }
+            }
+            FUN_003b5c54(i, 0);
+        } else {
+            if (g_lmapMainState == NULL || g_lmapMainState->slots[i].registered == 0) {
+                handleRegistryRegisterObject(g_handleRegistry, FUN_0040619c(source, i));
+                if (g_lmapMainState != NULL && g_lmapMainState->slots[i].registered == 0) {
+                    g_lmapMainState->slots[i].registered = 1;
+                }
+            }
+            FUN_003b5c54(i, 1);
+        }
+    }
+}
+}

@@ -14,7 +14,7 @@ extern CecProcess *g_cecProcess;
 extern void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 extern void sysMemClear(void *block, u32 size);
 extern void *asdOperatorNew(u32 size);
-extern void *FUN_004bb440(void *object);
+extern void *_ZN9Obj557ec0C1Ev(void *object);
 
 /* Allocates and clears the cec process state, makes it the current one and builds its sub-object. */
 void cecProcessStart(void)
@@ -28,7 +28,7 @@ void cecProcessStart(void)
     g_cecProcess = process;
     sub = asdOperatorNew(20);
     if (sub != NULL) {
-        sub = FUN_004bb440(sub);
+        sub = _ZN9Obj557ec0C1Ev(sub);
     }
     process->sub = sub;
 }

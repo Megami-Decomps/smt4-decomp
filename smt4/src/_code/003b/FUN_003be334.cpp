@@ -1,175 +1,134 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003be334` (_code @ 0x3be334, 0x300 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the battle damage/value estimate for a skill or an item-like record; armcc here orders the local action-info block and the spilled arguments differently (retail pushes r0-r3 and d0 and reloads the stack arguments), and the 0.01f/25% scaling and the random bonus are scheduled differently. */
+#include "common.h"
+
+/* The skill record (only the fields read here). */
+struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+    /* 0x24 */ u8 unk24[8];
+    /* 0x2C */ u16 power;
+    /* 0x2E */ u8 unk2E[0xA];
+    /* 0x38 */ u32 flags;          /* 0x7F0000: cannot be used; 0x8000: halves the target's HP */
+};
+
+/* The item-like record (only the fields read here). */
+struct ValueRecord {
+    /* 0x00 */ u8 unk00[0x66];
+    /* 0x66 */ u16 fixedValue;
+    /* 0x68 */ u8 unk68;
+    /* 0x69 */ u8 percent;         /* percent of the target's stat */
+};
+
+/* The action a battle entry is about to use, as FUN_00247478 fills it. */
+struct ActionInfo {
+    /* 0x00 */ u8 unk00[0x1D];
+    /* 0x1D */ u8 flagA;
+    /* 0x1E */ u8 flagB;
+    /* 0x1F */ s8 rowArg;
+    /* 0x20 */ s8 columnArg;
+    /* 0x21 */ u8 unk21[3];
+};
+
+/* A battle entry (only the fields read here). */
+struct BattleEntry {
+    /* 0x000 */ u8 unk000[0x1B8];
+    /* 0x1B8 */ s16 maxHp;
+    /* 0x1BA */ u8 unk1BA[0xC];
+    /* 0x1C6 */ u16 flags;         /* 8: value capped at 1, 0x80: takes 25% more, 0x200: deals 25% less */
+};
+
+struct BattleState {
+    /* 0x0000 */ u8 unk0000[0xE0];
+    /* 0x00E0 */ u32 flagsE0;
+    /* 0x00E4 */ u8 unk00E4[0x43BC];
+    /* 0x44A0 */ u32 flags44A0;
+    /* 0x44A4 */ u8 unk44A4[8];
+    /* 0x44AC */ u32 flags44AC;
+};
+
+struct UnitStats {
+    /* 0x00 */ u8 unk00[0xEE];
+    /* 0xEE */ u16 stat;
+};
+
+struct UnitRecord {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u16 stat;
+};
 
 extern "C" {
+BattleState *btlGetMainState(void);
+SkillRecord *dataTable40FindById(s32 id);
+ValueRecord *dataTable08Sub1GetRecord(s32 id);
+BattleEntry *btlMainFindEntryByListedId(BattleState *battle, s32 id);
+void FUN_00247478(ActionInfo *info, BattleState *battle, BattleEntry *entry);
+s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
+UnitStats *FUN_0027da30(BattleState *battle, s32 id);
+UnitRecord *gameGetUnitRecord(s32 index);
+s32 flagWordTestBit(void *record, u32 bit);
+s32 randRange(u32 limit);
 
-int FUN_00247478(unsigned char [29], int, int);
-int FUN_0027da30(int, int);
-int btlMainFindEntryByListedId(...);
-int gameGetUnitRecord(int);
-int dataTable40FindById(void);
-int dataTable08Sub1GetRecord(void);
-int FUN_003be918(unsigned int, unsigned int, int, int, int);
-int SBORROW4(unsigned int, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_6: 8 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned char sp48; /* 0x48: local_48 */
-    unsigned char sp49; /* 0x49: local_49 */
-    unsigned char sp4A; /* 0x4a: local_4a */
-    unsigned char sp4B; /* 0x4b: local_4b */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_6_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-extern int flagWordTestBit(unsigned int, unsigned int);
-/* Supplied declaration required: gameGetUnitRecord. */
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_003be918. */
-
-
-unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned int param_5,
-                 int param_6)
-
+/* Estimates the effect of a skill (`wantDamage`) or of an item-like record on `target` by
+ * `attacker`: the damage with its random bonus for a skill, or the value change (a stat percentage
+ * or a fixed number) for the record. Returns -1 when nothing applies. */
+s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 multiplier, s32 attacker, s32 target)
 {
-/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8;
-  unsigned char temp_v9 [29];
-  char temp_v10;
-  char temp_v11;
-  char temp_v12;
-  char temp_v13;
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int uStack_2c;
-  int iStack_28;
-  
-  temp_v14 = param_1;
-  temp_v15 = param_2;
-  uStack_2c = param_3;
-  iStack_28 = param_4;
-  temp_v0 = btlGetMainState();
-  temp_v1 = temp_v15;
-  dataTable40FindById();
-  dataTable08Sub1GetRecord();
-  temp_v3 = temp_v0;
-  btlMainFindEntryByListedId(temp_v0,param_5);
-  temp_v2 = temp_v0;
-  btlMainFindEntryByListedId(temp_v0,param_6);
-  FUN_00247478(temp_v9,temp_v0,temp_v3);
-  temp_v5 = 0xffffffff;
-  temp_v6 = 1;
-  if ((temp_v11 != '\0') || (temp_v10 == '\0')) {
-    if (temp_v1 != 0) {
-      if ((*(unsigned int *)(temp_v1 + 0x38) & 0x7f0000) == 0) {
-        VectorUnsignedToFloat((unsigned int)*(unsigned short *)(temp_v1 + 0x2c),(unsigned char)(in_fpscr >> 0x16) & 3);
-        switch(*(unsigned char *)(temp_v1 + 0x23)) {
-        case 1:
-          if ((*(unsigned int *)(temp_v1 + 0x38) & 0x8000) != 0) {
-            temp_v6 = 0;
-            temp_v5 = (int)*(short *)(temp_v2 + 0x1b8) / 2;
-          }
-          else if (temp_v11 != '\0') {
-            temp_v5 = temp_v15;
-            FUN_003be918(temp_v15,param_5,param_6,(int)temp_v13,(int)temp_v12);
-            if ((temp_v11 != '\0') && (temp_v5 = (int)temp_v5 / 3, (int)temp_v5 >= 101)) {
-              temp_v5 = 100;
+    BattleState *battle = btlGetMainState();
+    SkillRecord *skill = dataTable40FindById(skillId);
+    ValueRecord *record = dataTable08Sub1GetRecord(recordId);
+    BattleEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);
+    BattleEntry *targetEntry = btlMainFindEntryByListedId(battle, target);
+    ActionInfo info;
+    FUN_00247478(&info, battle, attackerEntry);
+    s32 damage = -1;
+    s32 value = -1;
+    bool scaled = true;
+    if (!info.flagB && info.flagA)
+        return -1;
+    if (skill != NULL) {
+        if (skill->flags & 0x7F0000)
+            return -1;
+        f32 power = (f32)skill->power;
+        if (skill->kind == 1) {
+            if (skill->flags & 0x8000) {
+                scaled = false;
+                damage = targetEntry->maxHp / 2;
+            } else if (info.flagB) {
+                damage = FUN_003be918(skillId, attacker, target, info.columnArg, info.rowArg, power, multiplier);
+                if (info.flagB) {
+                    damage /= 3;
+                    if (damage > 100)
+                        damage = 100;
+                }
+                if (attackerEntry->flags & 0x200)
+                    damage -= damage * 25 / 100;
+                if (targetEntry->flags & 0x80)
+                    damage += damage * 25 / 100;
             }
-            if ((*(unsigned short *)(temp_v3 + 0x1c6) & 0x200) != 0) {
-              temp_v5 = temp_v5 - (int)(temp_v5 * 0x19) / 100;
-            }
-            if ((*(unsigned short *)(temp_v2 + 0x1c6) & 0x80) != 0) {
-              temp_v5 = temp_v5 + (int)(temp_v5 * 0x19) / 100;
-            }
-          }
         }
-        if (((((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40000) == 0) && (temp_v6)) && (0 < (int)temp_v5)) &&
-           (((*(unsigned int *)(temp_v0 + 0x44ac) & 0x40) == 0 &&
-            ((*(unsigned int *)(temp_v0 + 0xe0) & 0x20000000) == 0)))) {
-          temp_v3 = randRange(0xf);
-          temp_v5 = temp_v5 + temp_v3;
-        }
-        if (temp_v14 == 0) {
-          return 0xffffffff;
-        }
-        if (temp_v11 == '\0') {
-          return temp_v5;
-        }
-        if ((int)temp_v5 <= (int)*(short *)(temp_v2 + 0x1b8)) {
-          return temp_v5;
-        }
-        return (int)*(short *)(temp_v2 + 0x1b8);
-      }
+        if (!(battle->flags44A0 & 0x40000) && scaled && damage > 0 && !(battle->flags44AC & 0x40) &&
+            !(battle->flagsE0 & 0x20000000))
+            damage += randRange(15);
+        if (wantDamage == 0)
+            return value;
+        if (info.flagB && damage > targetEntry->maxHp)
+            damage = targetEntry->maxHp;
+        return damage;
     }
-    else if (param_4 != 0) {
-      temp_v5 = 0xffffffff;
-      if (*(unsigned short *)(param_4 + 0x66) != 0) {
-        temp_v5 = (unsigned int)*(unsigned short *)(param_4 + 0x66);
-      }
-      if (*(char *)(param_4 + 0x69) != '\0') {
-        temp_v8 = 0.01f;
-        if (param_6 < 0x6d) {
-          FUN_0027da30(temp_v0,param_6);
-          temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v0 + 0xee) *
-                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x69),
-                                             (unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v5 = (unsigned int)(temp_v7 * temp_v8);
-        }
-        else {
-          temp_v3 = gameGetUnitRecord(param_6 - 0x6d);
-          temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v3 + 0x10) *
-                                             (int)(short)(unsigned short)*(unsigned char *)(param_4 + 0x69),
-                                             (unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v5 = (unsigned int)(temp_v7 * temp_v8);
-        }
-      }
-      if (temp_v14 != 0) {
-        return 0xffffffff;
-      }
-      if (param_6 < 0x6d) {
-        if ((*(unsigned short *)(temp_v2 + 0x1c6) & 8) == 0 || (int)temp_v5 < 2) {
-          return temp_v5;
-        }
-      }
-      else {
-        temp_v4 = gameGetUnitRecord(param_6 - 0x6d);
-        temp_v3 = flagWordTestBit(temp_v4,3);
-        temp_v6 = temp_v3 != 0;
-        temp_v3 = 0;
-        if (temp_v6) {
-          temp_v3 = temp_v5 - 1;
-        }
-        if ((!temp_v6 || temp_v5 == 1) || temp_v3 < 0 != (temp_v6 && SBORROW4(temp_v5,1))) {
-          return temp_v5;
-        }
-      }
-      return 1;
+    if (record == NULL)
+        return -1;
+    if (record->fixedValue != 0)
+        value = record->fixedValue;
+    if (record->percent != 0) {
+        s32 base = target < 109 ? FUN_0027da30(battle, target)->stat : gameGetUnitRecord(target - 109)->stat;
+        value = (s32)((f32)(s16)(base * record->percent) * 0.01f);
     }
-  }
-  return 0xffffffff;
+    if (wantDamage != 0)
+        return damage;
+    bool capped = target < 109 ? (targetEntry->flags & 8) != 0 : flagWordTestBit(gameGetUnitRecord(target - 109), 3) != 0;
+    if (capped && value > 1)
+        value = 1;
+    return value;
 }
 
 } /* extern "C" */

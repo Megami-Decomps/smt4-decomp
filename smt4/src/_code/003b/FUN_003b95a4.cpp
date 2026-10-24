@@ -1,132 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b95a4` (_code @ 0x3b95a4, 0x24c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: two scheduling differences only: retail loads work->node (arg 2) before `mov r4, r0` and compares the model-set index in r1 (ours r0); the instruction multiset is identical (154 rows each). */
+#include "common.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+
+/* The record the info panel shows (observed prefix). */
+struct PanelRecord {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 text[0x3E];
+    /* 0x40 */ char name[0x20];
+    /* 0x60 */ s32 modelSet;       /* data table 33 entry, negative for none */
+    /* 0x64 */ u16 primaryFlag;
+    /* 0x66 */ u16 secondaryFlag;
+    /* 0x68 */ char altName[0x20];
+};
+
+/* The kind of entry the panel is showing. */
+struct PanelSelection {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ s16 kind;
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ s8 modelIndex;
+};
+
+struct PanelWork {
+    /* 0x0000 */ u8 unk0000[0x28];
+    /* 0x0028 */ u32 state;
+    /* 0x002C */ u32 phase;
+    /* 0x0030 */ u8 unk0030[0xC];
+    /* 0x003C */ s16 mode;
+    /* 0x003E */ u8 unk003E[0x52];
+    /* 0x0090 */ u32 node;
+    /* 0x0094 */ u8 unk0094[8];
+    /* 0x009C */ u8 selection[0xCC0];
+    /* 0x0D5C */ PanelRecord *record;
+    /* 0x0D60 */ u8 unk0D60[0xC];
+    /* 0x0D6C */ s32 loaded;
+    /* 0x0D70 */ s32 ready;
+    /* 0x0D74 */ u8 unk0D74[0x3C];
+    /* 0x0DB0 */ s32 textShown;
+    /* 0x0DB4 */ u8 unk0DB4[0xA4];
+    /* 0x0E58 */ u8 recordShown;
+    /* 0x0E59 */ u8 unk0E59[3];
+    /* 0x0E5C */ NodeEnableOwner *modelOwner;
+    /* 0x0E60 */ u32 files[10];
+    /* 0x0E88 */ u32 fileSizes[10];
+};
 
 extern "C" {
 
-int FUN_0022afb0(unsigned char *, unsigned int);
-int FUN_0022afc4(unsigned int, int, unsigned int);
-int modelSetVisible(...);
-int FUN_00234cd8(unsigned int, int, int);
-void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
-int FUN_00234f5c(...);
-int placeWinStartText(...);
-int objModelCreateFromSource(unsigned int, unsigned int, unsigned int);
-int textFormatBuffer(...);
-int FUN_003ba754(int);
-int dataTable33GetEntries(void);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void FUN_003ba754(PanelWork *work);
+void textFormatBuffer(char *destination, const char *format, ...);
+s32 gameFlagIsSet(u32 flag);
+void FUN_00234f5c(NodeEnableOwner *owner, const char *first, const char *second);
+PanelSelection *FUN_0022b8c0(void *selection);
+void FUN_0022afc4(NodeEnableOwner *owner, s32 a, s32 b);
+void FUN_00234cd8(NodeEnableOwner *owner, s32 kind, s32 flag);
+const char *dataTable33GetEntries(s32 *count);
+s32 FUN_0022afb0(s32 *count, s32 modelSet);
+u32 fileLoadSync(const char *path, u32 *size, u32 flags);
+void objModelCreateFromSource(NodeEnableOwner *owner, u32 file, u32 size);
+void modelSetVisible(NodeEnableOwner *owner, s32 visible);
+void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
+s32 placeWinStartText(void *text);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_1_stack;
-
-extern unsigned char LAB_003b97f0; /* 0x3b97f0 */
-extern unsigned char LAB_003b97fc; /* 0x3b97fc */
-
-/* Supplied declaration required: FUN_0022afb0. */
-/* Supplied declaration required: FUN_0022afc4. */
-/* Supplied declaration required: modelSetVisible. */
-extern int FUN_0022b8c0(int);
-/* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: nodeOwnerSetEnabled. */
-/* Supplied declaration required: FUN_00234f5c. */
-/* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: objModelCreateFromSource. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagIsSet(void);
-extern unsigned int fileLoadSync(unsigned char *, int, unsigned int);
-/* Supplied declaration required: FUN_003ba754. */
-/* Supplied declaration required: dataTable33GetEntries. */
-
-
-void FUN_003b95a4(int param_1)
-
+/* Builds the info panel once its textures and data are ready: formats the record's names, creates its
+ * model from the model set's files, shows or hides it for the current mode and starts the text. */
+void FUN_003b95a4(PanelWork *work)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char *puVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char *puVar6;
-  int temp_v4;
-  unsigned int *puVar8;
-  unsigned char temp_v5 [128];
-  unsigned char temp_v6 [128];
-  unsigned char temp_v7 [4];
-  
-  temp_v0 = asdTMTexTableNodeIsLoaded(0x21,*(unsigned int *)(param_1 + 0x90));
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = *(int *)(param_1 + 0xd6c);
-  }
-  if ((temp_v0 != 0 && temp_v1 != 0) && (*(int *)(param_1 + 0xd70) != 0)) {
-    FUN_003ba754(param_1);
-    *(unsigned int *)(param_1 + 0x28) = 3;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    if (*(char *)(*(int *)(param_1 + 0xd5c) + 0x40) != '0') {
-      *(unsigned char *)(param_1 + 0xe58) = 1;
-      textFormatBuffer(temp_v5,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x40);
-      puVar8 = (unsigned int *)(param_1 + 0xe5c);
-      if (((*(short *)(*(int *)(param_1 + 0xd5c) + 100) != 0) &&
-          (temp_v1 = gameFlagIsSet(), temp_v1 != 0)) ||
-         ((*(short *)(*(int *)(param_1 + 0xd5c) + 0x66) != 0 && (temp_v1 = gameFlagIsSet(), temp_v1 != 0)
-          ))) {
-        textFormatBuffer(temp_v6,&LAB_003b97f0,*(int *)(param_1 + 0xd5c) + 0x68);
-        FUN_00234f5c(*(unsigned int *)(param_1 + 0xe5c),temp_v5,temp_v6);
-      }
-      else {
-        FUN_00234f5c(*(unsigned int *)(param_1 + 0xe5c),temp_v5,0);
-      }
-      temp_v1 = FUN_0022b8c0(param_1 + 0x9c);
-      FUN_0022afc4(*(unsigned int *)(param_1 + 0xe5c),0,0xffffffff);
-      FUN_00234cd8(*puVar8,(int)*(short *)(temp_v1 + 0x28),1);
-      if (-1 < *(int *)(*(int *)(param_1 + 0xd5c) + 0x60)) {
-        puVar6 = temp_v7;
-        dataTable33GetEntries();
-        if (puVar6 != (unsigned char *)0x0) {
-          temp_v0 = 0;
-          puVar3 = temp_v7;
-          FUN_0022afb0(puVar3,*(unsigned int *)(*(int *)(param_1 + 0xd5c) + 0x60));
-          if (0 < (int)puVar3) {
-            do {
-              textFormatBuffer(temp_v5,&LAB_003b97fc,puVar6);
-              temp_v4 = param_1 + temp_v0 * 4;
-              temp_v2 = fileLoadSync(temp_v5,temp_v4 + 0xe88,1);
-              *(unsigned int *)(temp_v4 + 0xe60) = temp_v2;
-              puVar6 = puVar6 + 0x20;
-              temp_v0 = temp_v0 + 1;
-              puVar3 = temp_v7;
-              FUN_0022afb0(puVar3,*(unsigned int *)(*(int *)(param_1 + 0xd5c) + 0x60));
-            } while (temp_v0 < (int)puVar3);
-          }
-          temp_v0 = param_1 + *(char *)(temp_v1 + 0x2b) * 4;
-          objModelCreateFromSource(*(unsigned int *)(param_1 + 0xe5c),*(unsigned int *)(temp_v0 + 0xe60),
-                       *(unsigned int *)(temp_v0 + 0xe88));
+    if (asdTMTexTableNodeIsLoaded(0x21, work->node) == 0 || work->loaded == 0 || work->ready == 0) {
+        return;
+    }
+    FUN_003ba754(work);
+    work->state = 3;
+    work->phase = 0;
+    if (work->record->name[0] != '0') {
+        char name[128];
+        char altName[128];
+        PanelSelection *selection;
+
+        work->recordShown = 1;
+        textFormatBuffer(name, "mikado/%s", work->record->name);
+        if ((work->record->primaryFlag != 0 && gameFlagIsSet(work->record->primaryFlag) != 0) ||
+            (work->record->secondaryFlag != 0 && gameFlagIsSet(work->record->secondaryFlag) != 0)) {
+            textFormatBuffer(altName, "mikado/%s", work->record->altName);
+            FUN_00234f5c(work->modelOwner, name, altName);
+        } else {
+            FUN_00234f5c(work->modelOwner, name, NULL);
         }
-      }
-      if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||
-         (!(*(short *)(temp_v1 + 0x28) == 0 || *(short *)(temp_v1 + 0x28) == 6))) {
-        modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),0);
-        temp_v2 = *puVar8;
-        temp_v3 = 1;
-      }
-      else {
-        modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),1);
-        temp_v2 = *puVar8;
-        temp_v3 = 0;
-      }
-      nodeOwnerSetEnabled((NodeEnableOwner*)temp_v2,temp_v3);
+        selection = FUN_0022b8c0(work->selection);
+        FUN_0022afc4(work->modelOwner, 0, -1);
+        FUN_00234cd8(work->modelOwner, selection->kind, 1);
+        if (work->record->modelSet >= 0) {
+            s32 count;
+            const char *entries = dataTable33GetEntries(&count);
+
+            if (entries != NULL) {
+                s32 i;
+
+                for (i = 0; i < FUN_0022afb0(&count, work->record->modelSet); i++) {
+                    textFormatBuffer(name, "mikado/%s.bam", entries);
+                    work->files[i] = fileLoadSync(name, &work->fileSizes[i], 1);
+                    entries += 32;
+                }
+                objModelCreateFromSource(work->modelOwner, work->files[selection->modelIndex],
+                                         work->fileSizes[selection->modelIndex]);
+            }
+        }
+        if ((work->mode == 4 || work->mode == 3) && (selection->kind == 0 || selection->kind == 6)) {
+            modelSetVisible(work->modelOwner, 1);
+            nodeOwnerSetEnabled(work->modelOwner, 0);
+        } else {
+            modelSetVisible(work->modelOwner, 0);
+            nodeOwnerSetEnabled(work->modelOwner, 1);
+        }
     }
-    if (*(int *)(param_1 + 0xdb0) != 1) {
-      placeWinStartText(*(int *)(param_1 + 0xd5c) + 2);
-      return;
+    if (work->textShown != 1) {
+        placeWinStartText(work->record->text);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

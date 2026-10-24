@@ -1,129 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00182084` (_code @ 0x182084, 0x264 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the slot index in r5 and the work pointer in r4 (built swaps them), and derives the two-icon pair address after the first icon lookup; the if-chain, hoisted count pointer and call sequence are identical */
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobalsA g_buttonHelp;
 
-int uiSpriteSelectAnim(int, int);
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(int, int);
-int FUN_0019d890(int, int);
-int FUN_0019e330(int, int);
-int FUN_001a90e0(int);
-
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019d890. */
-/* Supplied declaration required: FUN_0019e330. */
-/* Supplied declaration required: FUN_001a90e0. */
-
-
-void FUN_00182084(void)
-
-{
-/* irregular: 6 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  temp_v3 = 0;
-  piVar5 = (int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5d0);
-  do {
-    uiSpriteSelectAnim(temp_v1 + temp_v3 * 0x8c + 0x34,0);
-    temp_v0 = *(char *)(temp_v1 + temp_v3 * 4 + 0x5ac);
-    if (temp_v0 != '\0') {
-      if (!(temp_v0 == '\a' || temp_v0 == '\x13')) {
-        if (temp_v0 != '\b') {
-          if (temp_v0 != '\t') {
-            if (!(temp_v0 == '\x15' || temp_v0 == '\x14')) {
-              if (((!(temp_v0 == '\n' || temp_v0 == '\v')) && (!(temp_v0 == '\f' || temp_v0 == '\r'))) &&
-                 (!((temp_v0 == '\x0e' || temp_v0 == '\x0f') || temp_v0 == '\x10'))) {
-                temp_v2 = FUN_0019d890(10,temp_v3 + 0x1f);
-                *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-                *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-              }
-              else {
-                switch(temp_v3) {
-                case 0:
-                case 1:
-                  temp_v2 = FUN_0019d890(10,0x73);
-                  *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-                  *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-                  break;
-                case 2:
-                case 3:
-                  temp_v2 = FUN_0019d890(10,0x85);
-                  *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-                  *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-                  break;
-                case 4:
-                case 5:
-                  temp_v2 = FUN_0019d890(10,0x8c);
-                  *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-                  *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-                }
-              }
-            }
-            else {
-              temp_v2 = FUN_0019d890(10,temp_v3 + 0x1f);
-              temp_v4 = temp_v1 + temp_v3 * 2;
-              *(unsigned short *)(temp_v4 + 0x5c4) = temp_v2;
-              *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-              temp_v2 = FUN_0019d890(10,temp_v3 + 0x20);
-              *(unsigned short *)(temp_v4 + 0x5c6) = temp_v2;
-              *piVar5 = *piVar5 + 1;
-            }
-          }
-          else {
-            temp_v2 = FUN_0019d890(10,0x85);
-            *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-            *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-          }
-        }
-        else {
-          temp_v2 = FUN_0019d890(10,0x59);
-          *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-          *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-        }
-      }
-      else {
-        temp_v2 = FUN_0019d890(10,0x73);
-        *(unsigned short *)(temp_v1 + temp_v3 * 2 + 0x5c4) = temp_v2;
-        *piVar5 = *(int *)(temp_v1 + 0x5d0) + 1;
-      }
-    }
-    temp_v3 = temp_v3 + 1;
-    if (temp_v3 >= 6) {
-      temp_v3 = 0;
-      do {
-        temp_v4 = temp_v1 + temp_v3 * 0x8c;
-        if (*(char *)(temp_v1 + 0x5e4) != '\x01') {
-          uiSpriteSetImageKeyframe(temp_v4 + 0x37c,0);
-          FUN_0019e330(temp_v4 + 0x37c,0);
-        }
-        else {
-          uiSpriteSetImageKeyframe(temp_v4 + 0x37c,0);
-          uiSpriteSetKeyframe(temp_v4 + 0x37c,2,0);
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 4);
-      *(unsigned int *)(temp_v1 + 0x5d4) = 0;
-      *(unsigned short *)(temp_v1 + 0x5d8) = 0;
-      FUN_001a90e0(temp_v1 + 0x5da);
-      *(unsigned char *)(temp_v1 + 0x5e2) = 1;
-      temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-      *(unsigned int *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0xc) = 0;
-      *(unsigned int *)(temp_v1 + 0x10) = 1;
-      return;
-    }
-  } while( 1 );
+void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
+void uiSpriteSetKeyframe(ButtonHelpUnit *unit, s32 keyframe, s32 flag);
+void uiSpriteSetImageKeyframe(ButtonHelpUnit *unit, s32 keyframe, s32 flag);
+u16 FUN_0019d890(s32 table, s32 id);
+void FUN_0019e330(ButtonHelpUnit *unit, s32 arg, s32 flag);
+void FUN_001a90e0(void *state);
 }
 
-} /* extern "C" */
+static __inline void buttonHelpAddIcon(ButtonHelpWorkA *work, s32 *count, s32 slot, s32 id)
+{
+    work->icons[slot] = FUN_0019d890(10, id);
+    *count = work->count + 1;
+}
+
+/* Prepares every button-help slot: resets its animation, looks up the icon of the kind it shows,
+ * then restarts the four selected-slot sprites and the cleared state. */
+extern "C" void FUN_00182084(void)
+{
+    ButtonHelpWorkA *work = g_buttonHelp.work;
+    s32 *count = &work->count;
+    for (s32 i = 0; i < 6; i++) {
+        uiSpriteSelectAnim(&work->units[i], 0);
+        s32 kind = work->kinds[i].kind;
+        if (kind != 0) {
+            if (kind == 7 || kind == 0x13) {
+                buttonHelpAddIcon(work, count, i, 0x73);
+            } else if (kind == 8) {
+                buttonHelpAddIcon(work, count, i, 0x59);
+            } else if (kind == 9) {
+                buttonHelpAddIcon(work, count, i, 0x85);
+            } else if (kind == 0x15 || kind == 0x14) {
+                u16 *icon = &work->icons[i];
+                icon[0] = FUN_0019d890(10, i + 0x1F);
+                *count = work->count + 1;
+                icon[1] = FUN_0019d890(10, i + 0x20);
+                *count = *count + 1;
+            } else if ((kind == 10 || kind == 11) || (kind == 12 || kind == 13) || ((kind == 14 || kind == 15) || kind == 16)) {
+                switch (i) {
+                case 0:
+                case 1:
+                    buttonHelpAddIcon(work, count, i, 0x73);
+                    break;
+                case 2:
+                case 3:
+                    buttonHelpAddIcon(work, count, i, 0x85);
+                    break;
+                case 4:
+                case 5:
+                    buttonHelpAddIcon(work, count, i, 0x8C);
+                    break;
+                }
+            } else {
+                buttonHelpAddIcon(work, count, i, i + 0x1F);
+            }
+        }
+    }
+    for (s32 i = 0; i < 4; i++) {
+        if (work->unk5E4 != 1) {
+            uiSpriteSetImageKeyframe(&work->selected[i], 0, 0);
+            FUN_0019e330(&work->selected[i], 0, 0);
+        } else {
+            uiSpriteSetImageKeyframe(&work->selected[i], 0, 0);
+            uiSpriteSetKeyframe(&work->selected[i], 2, 0);
+        }
+    }
+    work->cleared.low = 0;
+    work->cleared.high = 0;
+    FUN_001a90e0(work->clear.unk5DA);
+    work->unk5E2[0] = 1;
+    g_buttonHelp.work->unk0C = 0;
+    g_buttonHelp.work->state = 1;
+}

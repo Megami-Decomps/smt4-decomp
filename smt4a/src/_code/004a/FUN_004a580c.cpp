@@ -1,176 +1,149 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a580c` (_code @ 0x4a580c, 0x310 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: quest menu input step (list cursor, tab switch, open/close transitions); written from the decompilation, scheduling not compared with retail */
+#include "common.h"
+
+struct QuestListEntry {
+    /* 0x00 */ u8 tabsActive;   /* only meaningful in entry 0 */
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s16 questId;
+    /* 0x06 */ u8 unk06[0x1A];
+};
+
+struct QuestSpriteFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;
+};
+
+struct QuestMenu {
+    /* 0x0000 */ u8 unk0000[0x14];
+    /* 0x0014 */ s32 state;
+    /* 0x0018 */ s32 stateTimer;
+    /* 0x001C */ u8 unk001C[4];
+    /* 0x0020 */ u8 list[0x7F8];
+    /* 0x0818 */ u8 entriesA[0x34];
+    /* 0x084C */ u32 entriesB;
+    /* 0x0850 */ u8 unk0850[0x10];
+    /* 0x0860 */ QuestListEntry entries[1];
+    /* 0x0880 */ u8 unk0880[0xA9F2];
+    /* 0xA872 */ u16 preset;
+    /* 0xA874 */ s32 category;
+    /* 0xA878 */ u8 unkA878[2];
+    /* 0xA87A */ s16 categories[1];
+    /* 0xA87C */ u8 unkA87C[0xFE];
+    /* 0xA97A */ s16 categoryCount;
+    /* 0xA97C */ s16 categoryCursor;
+    /* 0xA97E */ s8 touchedCategory;
+};
 
 extern "C" {
+s32 flaggedValueHolderGetTotal(void *holder);
+void uiOpenStartAnimations(QuestMenu *menu);
+void FUN_0032d0c8(s32 a, s32 b, s32 questId);
+s32 inputIsQuestMenuPressed(void);
+s32 inputIsQuestCancelPressed(void);
+QuestSpriteFrame *FUN_0018349c(void *layout, s32 sprite);
+s32 FUN_004d03d8(s32 x, s32 y, s32 w, s32 h);
+s32 FUN_004d0420(s32 x, s32 y, s32 w, s32 h);
+void FUN_004a4848(QuestMenu *menu);
+s32 gameGetMode(void);
+s32 FUN_0035db94(void);
+void uiSpriteBankApplyPreset(void *bank, u32 preset);
+void releaseEntriesB(u32 entries);
+void releaseEntriesA(void *entries);
+void sortMenuAcquire(s32 a, s32 b);
+void FUN_0031f208(s32 value);
+void useCounterStart(void);
+void FUN_003343f0(s32 value);
+void FUN_0019de98(s32 a, u32 color);
+void sendEvent100020E(void);
+void sendEvent100020F(void);
+void FUN_0022e774(void);
+void FUN_00212724(void);
 
-int uiSpriteBankApplyPreset(...);
-int FUN_0019de98(int, unsigned int);
-int FUN_00212724(void);
-int FUN_0022e774(void);
-int useCounterStart(void);
-int FUN_0031f208(int);
-int sortMenuAcquire(int, int);
-int FUN_0032d0c8(int, int, int);
-int FUN_003343f0(...);
-int FUN_004a4848(int);
-int uiOpenStartAnimations(int);
-int FUN_004d03d8(int, int, int, int);
-int FUN_004d0420(int, int, int, int);
-int sendEvent100020F(void);
-int sendEvent100020E(void);
-int releaseEntriesA(int);
-int releaseEntriesB(unsigned int);
+#define QUEST_COLOR_FADE 0xF4F4F4FF
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern int FUN_0018349c(int, int);
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_00212724. */
-/* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: useCounterStart. */
-extern int gameGetMode(void);
-/* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: sortMenuAcquire. */
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_003343f0. */
-extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_004a4848. */
-/* Supplied declaration required: uiOpenStartAnimations. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_004d03d8. */
-/* Supplied declaration required: FUN_004d0420. */
-/* Supplied declaration required: sendEvent100020F. */
-/* Supplied declaration required: sendEvent100020E. */
-extern int inputIsQuestCancelPressed(void);
-extern int inputIsQuestMenuPressed(void);
-/* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: releaseEntriesB. */
-
-
-void FUN_004a580c(int param_1)
-
+/* One input step of the quest menu: tracks the highlighted quest, handles touch tab switching and
+ * then either leaves for the detail view, closes, or does nothing. */
+void FUN_004a580c(QuestMenu *menu)
 {
-/* irregular: 17 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  temp_v1 = *(short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-  uiOpenStartAnimations(param_1);
-  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  temp_v0 = *(short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-  if (temp_v0 != temp_v1) {
-    FUN_0032d0c8(0,1,temp_v0);
-  }
-  temp_v2 = inputIsQuestMenuPressed();
-  temp_v9 = 0;
-  if (0 < *(short *)(param_1 + 0x864)) {
-    temp_v9 = inputIsQuestCancelPressed();
-  }
-  if ((0 < *(short *)(param_1 + 0xa97a)) && (*(char *)(param_1 + 0x860) == '\x01')) {
-    temp_v5 = 0;
-    do {
-      temp_v3 = FUN_0018349c(param_1 + 200,temp_v5 + 0x1023);
-      temp_v6 = (int)*(short *)(temp_v3 + 8);
-      temp_v1 = *(short *)(temp_v3 + 10);
-      temp_v7 = (int)**(short **)(temp_v3 + 0xc);
-      temp_v8 = (int)(*(short **)(temp_v3 + 0xc))[1];
-      temp_v3 = temp_v6;
-      FUN_004d03d8(temp_v6,(int)temp_v1,temp_v7,temp_v8);
-      if (temp_v3 != 0) {
-        *(char *)(param_1 + 0xa97e) = (char)temp_v5;
-      }
-      FUN_004d0420(temp_v6,(int)temp_v1,temp_v7,temp_v8);
-      if (temp_v6 != 0) {
-        *(char *)(param_1 + 0xa97e) = (char)temp_v5;
-        if (temp_v5 != 0) {
-          temp_v1 = *(short *)(param_1 + 0xa97c) + 1;
-          *(short *)(param_1 + 0xa97c) = temp_v1;
-          if (*(short *)(param_1 + 0xa97a) <= temp_v1) {
-            temp_v1 = 0;
-            *(short *)(param_1 + 0xa97c) = temp_v1;
-          }
+    s16 previousQuest = menu->entries[flaggedValueHolderGetTotal(menu->list)].questId;
+    uiOpenStartAnimations(menu);
+    s16 quest = menu->entries[flaggedValueHolderGetTotal(menu->list)].questId;
+    if (quest != previousQuest)
+        FUN_0032d0c8(0, 1, quest);
+
+    s32 menuPressed = inputIsQuestMenuPressed();
+    s32 cancelPressed = 0;
+    if (menu->entries[0].questId > 0)
+        cancelPressed = inputIsQuestCancelPressed();
+
+    if (menu->categoryCount > 0 && menu->entries[0].tabsActive == 1) {
+        for (s32 i = 0; i < 2; i++) {
+            QuestSpriteFrame *tab = FUN_0018349c((u8 *)menu + 200, i + 0x1023);
+            s32 x = tab->x;
+            s16 y = tab->y;
+            s32 w = tab->size[0];
+            s32 h = tab->size[1];
+            s32 hit = FUN_004d03d8(x, y, w, h);
+            if (hit != 0)
+                menu->touchedCategory = (s8)i;
+            if (FUN_004d0420(x, y, w, h) != 0) {
+                menu->touchedCategory = (s8)i;
+                if (i != 0) {
+                    menu->categoryCursor++;
+                    if (menu->categoryCount <= menu->categoryCursor)
+                        menu->categoryCursor = 0;
+                } else {
+                    menu->categoryCursor--;
+                    if (menu->categoryCursor < 0)
+                        menu->categoryCursor = menu->categoryCount - 1;
+                }
+                s32 category = menu->categories[menu->categoryCursor];
+                if (menu->category != category) {
+                    menu->category = category;
+                    FUN_004a4848(menu);
+                }
+                break;
+            }
         }
-        else {
-          temp_v1 = *(short *)(param_1 + 0xa97c) - 1;
-          *(short *)(param_1 + 0xa97c) = temp_v1;
-          if (temp_v1 < 0) {
-            temp_v1 = *(short *)(param_1 + 0xa97a) - 1;
-            *(short *)(param_1 + 0xa97c) = temp_v1;
-          }
-        }
-        temp_v5 = (int)*(short *)(param_1 + *(short *)(param_1 + 0xa97c) * 2 + 0xa87a);
-        if (*(int *)(param_1 + 0xa874) != temp_v5) {
-          *(int *)(param_1 + 0xa874) = temp_v5;
-          FUN_004a4848(param_1);
-        }
-        break;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 2);
-  }
-  temp_v5 = gameGetMode();
-  if (temp_v5 != 0) {
-    *(unsigned int *)(param_1 + 0x14) = 4;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    temp_v2 = FUN_0035db94();
-    if (temp_v2 == 1) {
-      temp_v4 = 9;
     }
-    else {
-      temp_v4 = 0xb;
+
+    if (gameGetMode() != 0) {
+        menu->state = 4;
+        menu->stateTimer = 0;
+        menu->preset = (FUN_0035db94() == 1) ? 9 : 0xB;
+        uiSpriteBankApplyPreset((u8 *)menu + 0xDC, menu->preset);
+        releaseEntriesB(menu->entriesB);
+        releaseEntriesA(menu->entriesA);
+        return;
     }
-    *(unsigned short *)(param_1 + 0xa872) = temp_v4;
-    uiSpriteBankApplyPreset(param_1 + 0xdc,temp_v4);
-    releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
-    releaseEntriesA(param_1 + 0x818);
-    return;
-  }
-  if (temp_v2 == 0) {
-    if (temp_v9 == 0) {
-      return;
+    if (menuPressed == 0) {
+        if (cancelPressed == 0)
+            return;
+        sortMenuAcquire(0xC, 0);
+        FUN_0031f208(1);
+        FUN_0031f208(2);
+        FUN_0031f208(4);
+        FUN_0031f208(5);
+        FUN_0031f208(3);
+        useCounterStart();
+        FUN_003343f0(1);
+        menu->state = 3;
+        menu->stateTimer = 0;
+        FUN_0019de98(0, QUEST_COLOR_FADE);
+        sendEvent100020E();
+        return;
     }
-    sortMenuAcquire(0xc,0);
-    FUN_0031f208(1);
-    FUN_0031f208(2);
-    FUN_0031f208(4);
-    FUN_0031f208(5);
-    FUN_0031f208(3);
-    useCounterStart();
+    FUN_0022e774();
+    if (menu->entries[0].tabsActive == 0)
+        FUN_00212724();
+    FUN_0019de98(0, QUEST_COLOR_FADE);
+    uiSpriteBankApplyPreset((u8 *)menu + 0xDC, 1);
     FUN_003343f0(1);
-    *(unsigned int *)(param_1 + 0x14) = 3;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_0019de98(0,0xf4f4f4ff);
-    sendEvent100020E();
-    return;
-  }
-  FUN_0022e774();
-  if (*(char *)(param_1 + 0x860) == '\0') {
-    FUN_00212724();
-  }
-  FUN_0019de98(0,0xf4f4f4ff);
-  uiSpriteBankApplyPreset(param_1 + 0xdc,1);
-  FUN_003343f0(1);
-  *(unsigned int *)(param_1 + 0x14) = 6;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  sendEvent100020F();
-  return;
+    menu->state = 6;
+    menu->stateTimer = 0;
+    sendEvent100020F();
 }
 
 } /* extern "C" */

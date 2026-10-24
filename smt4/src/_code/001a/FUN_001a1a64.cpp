@@ -1,124 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a1a64` (_code @ 0x1a1a64, 0x280 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the adjacent stores of summary->unk50/unk54 differ: retail merges them into one stm, the build emits two str. */
+#include "common.h"
+
+/* The summary record kept for the save slot list (0x80 bytes, packed). */
+__packed struct SaveSummary {
+    u8 unk00[0x10];
+    u8 unk10;
+    u8 unk11;
+    u32 words12[3];     // 0x12
+    u16 unk1E;
+    u32 unk20;
+    u16 unk24;
+    u16 unk26;
+    u8 unk28[8];
+    u8 name30[0xE];     // 0x30
+    u32 words3E[3];     // 0x3E
+    u16 unk4A;
+    u8 unk4C;
+    u8 flagBits;        // 0x4D: poison-style progress flags
+    u16 slotId;         // 0x4E
+    u32 unk50;
+    u32 unk54;
+    u16 unk58;
+    u16 unk5A;
+    u16 partyLevel[3];  // 0x5C
+    u8 unk62;
+    u8 unk63;
+    u8 unk64;
+    u8 unk65;
+    u16 unk66;
+};
 
 extern "C" {
+extern u8 g_gameDataBlocks[];
+void rt_memcpy_w(void *dest, const void *src, u32 size);
+s32 FUN_00288f78(u8 value);
+s32 gameFlagIsSet(u32 flag);
 
-int rt_memcpy_w(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-extern int FUN_00288f78(unsigned char);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_001a1a64(unsigned short *param_1)
-
+/* Build the save-slot summary record from a save image and store it in the game data block. */
+void FUN_001a1a64(u16 *save)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
-  *(unsigned short *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x4e) = *param_1;
-  rt_memcpy_w(temp_v0,param_1 + 0x2a,0x12);
-  *(unsigned char *)(temp_v0 + 0x10) = 0;
-  *(unsigned int *)(temp_v0 + 0x12) = *(unsigned int *)(param_1 + 4);
-  *(unsigned int *)(temp_v0 + 0x16) = *(unsigned int *)(param_1 + 6);
-  *(unsigned int *)(temp_v0 + 0x1a) = *(unsigned int *)(param_1 + 8);
-  *(unsigned short *)(temp_v0 + 0x1e) = param_1[10];
-  *(unsigned int *)(temp_v0 + 0x20) = *(unsigned int *)(param_1 + 0x1c);
-  *(unsigned short *)(temp_v0 + 0x24) = param_1[0x19];
-  *(unsigned short *)(temp_v0 + 0x26) = param_1[0x1a];
-  rt_memcpy_w(temp_v0 + 0x30,param_1 + 0x12,0xe);
-  *(unsigned int *)(temp_v0 + 0x3e) = *(unsigned int *)(param_1 + 0xb);
-  *(unsigned int *)(temp_v0 + 0x42) = *(unsigned int *)(param_1 + 0xd);
-  *(unsigned int *)(temp_v0 + 0x46) = *(unsigned int *)(param_1 + 0xf);
-  *(unsigned short *)(temp_v0 + 0x4a) = param_1[0x11];
-  *(unsigned char *)(temp_v0 + 0x4c) = *(unsigned char *)(param_1 + 0x3f);
-  *(unsigned char *)(temp_v0 + 0x4d) = 0;
-  temp_v1 = gameFlagIsSet(0x67a);
-  if (temp_v1 != 0) {
-    *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 1;
-  }
-  temp_v1 = gameFlagIsSet(0x67b);
-  if (temp_v1 != 0) {
-    *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 2;
-  }
-  temp_v1 = gameFlagIsSet(0x679);
-  if (temp_v1 != 0) {
-    *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 4;
-  }
-  temp_v1 = gameFlagIsSet(0x678);
-  if (temp_v1 != 0) {
-    *(unsigned char *)(temp_v0 + 0x4d) = *(unsigned char *)(temp_v0 + 0x4d) | 8;
-  }
-  *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(param_1 + 0xfa2c);
-  *(unsigned int *)(temp_v0 + 0x54) = 0;
-  *(unsigned short *)(temp_v0 + 0x58) = (unsigned short)*(unsigned char *)((int)param_1 + 0xa839);
-  *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)(param_1 + 0x541d);
-  temp_v1 = FUN_00288f78(*(unsigned char *)((int)param_1 + 0xa839));
-  if (temp_v1 == 3) {
-    *(unsigned short *)(temp_v0 + 0x58) = 1000;
-  }
-  if (*(unsigned char *)((int)param_1 + 0xa83b) == 0) {
-    if (*(short *)(temp_v0 + 0x58) == 0x18) {
-      if (*(char *)(param_1 + 0x57e5) != '\0') {
-        *(short *)(temp_v0 + 0x58) = *(char *)(param_1 + 0x57e5) + 1000;
-      }
-      else {
-        *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)((int)param_1 + 0xa83b);
-      }
+    SaveSummary *summary = *reinterpret_cast<SaveSummary **>(g_gameDataBlocks + 4);
+    summary->slotId = save[0];
+    rt_memcpy_w(summary, save + 0x2A, 0x12);
+    summary->unk10 = 0;
+    summary->words12[0] = *reinterpret_cast<u32 *>(save + 4);
+    summary->words12[1] = *reinterpret_cast<u32 *>(save + 6);
+    summary->words12[2] = *reinterpret_cast<u32 *>(save + 8);
+    summary->unk1E = save[10];
+    summary->unk20 = *reinterpret_cast<u32 *>(save + 0x1C);
+    summary->unk24 = save[0x19];
+    summary->unk26 = save[0x1A];
+    rt_memcpy_w(summary->name30, save + 0x12, 0xE);
+    summary->words3E[0] = *reinterpret_cast<u32 *>(save + 0xB);
+    summary->words3E[1] = *reinterpret_cast<u32 *>(save + 0xD);
+    summary->words3E[2] = *reinterpret_cast<u32 *>(save + 0xF);
+    summary->unk4A = save[0x11];
+    summary->unk4C = *reinterpret_cast<u8 *>(save + 0x3F);
+    summary->flagBits = 0;
+    if (gameFlagIsSet(0x67A) != 0)
+        summary->flagBits |= 1;
+    if (gameFlagIsSet(0x67B) != 0)
+        summary->flagBits |= 2;
+    if (gameFlagIsSet(0x679) != 0)
+        summary->flagBits |= 4;
+    if (gameFlagIsSet(0x678) != 0)
+        summary->flagBits |= 8;
+    u8 *bytes = reinterpret_cast<u8 *>(save);
+    summary->unk50 = *reinterpret_cast<u32 *>(save + 0xFA2C);
+    summary->unk54 = 0;
+    summary->unk58 = bytes[0xA839];
+    summary->unk5A = *reinterpret_cast<u8 *>(save + 0x541D);
+    if (FUN_00288f78(bytes[0xA839]) == 3)
+        summary->unk58 = 1000;
+    if (bytes[0xA83B] == 0) {
+        if (summary->unk58 == 0x18) {
+            if (*reinterpret_cast<s8 *>(save + 0x57E5) != 0)
+                summary->unk58 = *reinterpret_cast<s8 *>(save + 0x57E5) + 1000;
+            else
+                summary->unk5A = bytes[0xA83B];
+        }
+    } else {
+        summary->unk5A = bytes[0xA83B];
     }
-  }
-  else {
-    *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)((int)param_1 + 0xa83b);
-  }
-  *(unsigned char *)(temp_v0 + 99) = *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24bb0);
-  temp_v1 = gameFlagIsSet(0x410);
-  if (temp_v1 != 0) {
-    *(unsigned char *)(temp_v0 + 100) = 1;
-  }
-  else {
-    *(unsigned char *)(temp_v0 + 100) = 0;
-  }
-  if (*(char *)(temp_v0 + 0x4d) == '\0') {
-    *(unsigned short *)(temp_v0 + 0x66) = 0;
-  }
-  *(unsigned char *)(temp_v0 + 0x62) = *(unsigned char *)(param_1 + 1);
-  if (*(char *)(param_1 + 1) != '\x02') {
-    if (*(char *)(param_1 + 0x4886) < 0) {
-      *(unsigned short *)(temp_v0 + 0x5c) = 0;
+    summary->unk63 = (*reinterpret_cast<u8 **>(g_gameDataBlocks + 4))[0x24BB0];
+    if (gameFlagIsSet(0x410) != 0)
+        summary->unk64 = 1;
+    else
+        summary->unk64 = 0;
+    if (summary->flagBits == 0)
+        summary->unk66 = 0;
+    summary->unk62 = *reinterpret_cast<u8 *>(save + 1);
+    if (*reinterpret_cast<s8 *>(save + 1) == 2) {
+        summary->partyLevel[0] = 0;
+        summary->partyLevel[1] = 0;
+        summary->partyLevel[2] = 0;
+    } else {
+        s8 first = *reinterpret_cast<s8 *>(save + 0x4886);
+        if (first < 0)
+            summary->partyLevel[0] = 0;
+        else
+            summary->partyLevel[0] = save[first * 0x302 + 0x6D];
+        s8 second = *reinterpret_cast<s8 *>(bytes + 0x910D);
+        if (second < 0)
+            summary->partyLevel[1] = 0;
+        else
+            summary->partyLevel[1] = save[second * 0x302 + 0x6D];
+        s8 third = *reinterpret_cast<s8 *>(save + 0x4887);
+        if (third < 0)
+            summary->partyLevel[2] = 0;
+        else
+            summary->partyLevel[2] = save[third * 0x302 + 0x6D];
     }
-    else {
-      *(unsigned short *)(temp_v0 + 0x5c) = param_1[*(char *)(param_1 + 0x4886) * 0x302 + 0x6d];
-    }
-    if (*(char *)((int)param_1 + 0x910d) < 0) {
-      *(unsigned short *)(temp_v0 + 0x5e) = 0;
-    }
-    else {
-      *(unsigned short *)(temp_v0 + 0x5e) = param_1[*(char *)((int)param_1 + 0x910d) * 0x302 + 0x6d];
-    }
-    if (*(char *)(param_1 + 0x4887) < 0) {
-      *(unsigned short *)(temp_v0 + 0x60) = 0;
-    }
-    else {
-      *(unsigned short *)(temp_v0 + 0x60) = param_1[*(char *)(param_1 + 0x4887) * 0x302 + 0x6d];
-    }
-  }
-  else {
-    *(unsigned short *)(temp_v0 + 0x5c) = 0;
-    *(unsigned short *)(temp_v0 + 0x5e) = 0;
-    *(unsigned short *)(temp_v0 + 0x60) = 0;
-  }
-  rt_memcpy_w((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x24794,temp_v0,0x80);
-  return;
+    rt_memcpy_w(*reinterpret_cast<u8 **>(g_gameDataBlocks + 4) + 0x24794, summary, 0x80);
 }
-
-} /* extern "C" */
+}

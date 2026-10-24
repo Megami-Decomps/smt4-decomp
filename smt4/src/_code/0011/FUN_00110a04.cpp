@@ -1,146 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00110a04` (_code @ 0x110a04, 0x304 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the sound system update (179 vs 193 rows); retail keeps one 128-bucket table per pass with compiler-generated LinkList constructor/destructor helpers (LAB_00123cd0 etc.) while armcc here emits its own helper functions for SortBucket. */
+#include "shard/S1NwSnd.h"
 
 extern "C" {
 
-int FUN_00140e78(void);
-int FUN_002bad74(...);
-int __aeabi_vec_ctor_nocookie_nodtor(...);
-int rt_vec_dtor(...);
-int UnsignedDoesSaturate(...);
-int UnsignedSaturate(...);
-int nw_snd_SoundPlayer_Update(unsigned int);
-int nw_ut_internal_LinkListImpl_erase_2BAE30(...);
-int nw_ut_internal_LinkListImpl_insert(...);
+void nw_snd_SoundPlayer_Update(SoundPlayer *player);
+void nw_ut_internal_LinkListImpl_erase_2BAE30(LinkList *list, ListNode *node);
+void nw_ut_internal_LinkListImpl_insert(LinkList *list, ListNode *pos, ListNode *node);
+void FUN_00140e78(void);
+u32 FUN_002baed8(void);
+void FUN_002bad74(u32 value, s32 flag);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+enum { PRIORITY_BUCKETS = 128 };
 
-extern unsigned char LAB_0011d9b8; /* 0x11d9b8 */
-extern unsigned char LAB_0011d9bc; /* 0x11d9bc */
-extern unsigned char LAB_0011d9c0; /* 0x11d9c0 */
-extern unsigned char LAB_00123cb8; /* 0x123cb8 */
-extern unsigned char LAB_00123cd0; /* 0x123cd0 */
-extern unsigned char LAB_00123ce8; /* 0x123ce8 */
+/* One priority bucket: an empty circular list when constructed. */
+struct SortBucket {
+    u32 count;
+    ListNode node;
 
-/* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
-/* Supplied declaration required: FUN_00140e78. */
-/* Supplied declaration required: FUN_002bad74. */
-extern unsigned int FUN_002baed8(void);
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: rt_vec_dtor. */
-/* Supplied declaration required: nw_snd_SoundPlayer_Update. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
+    SortBucket()
+    {
+        count = 0;
+        node.next = &node;
+        node.prev = &node;
+    }
+    ~SortBucket() {}
+};
 
+/* The sound system (only the lists the update sorts). */
+struct SoundSystem {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u32 playerCount;
+    /* 0x24 */ u8 *players;            /* 0x48 bytes each */
+    /* 0x28 */ u8 unk28[8];
+    /* 0x30 */ LinkList voiceList;
+    /* 0x3C */ u8 unk3C[0x14];
+    /* 0x50 */ LinkList streamList;
+    /* 0x5C */ u8 unk5C[0x14];
+    /* 0x70 */ LinkList effectList;
+};
 
-/* WARNING: Type propagation algorithm not settling */
-
-void FUN_00110a04(int param_1)
-
+/* The sound a sorting node belongs to (its node sits at 0xD4). */
+static PlayerSound *soundFromSortNode(ListNode *node)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int iStack_620;
-  unsigned int temp_v5 [383];
-  
-  temp_v4 = 0;
-  if (*(int *)(param_1 + 0x20) != 0) {
-    do {
-      nw_snd_SoundPlayer_Update(*(int *)(param_1 + 0x24) + (temp_v4 & 0xffffff) * 0x48);
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < *(unsigned int *)(param_1 + 0x20));
-  }
-  if (*(unsigned int *)(param_1 + 0x30) >= 2) {
-    __aeabi_vec_ctor_nocookie_nodtor(&iStack_620,&LAB_00123cd0,0xc,0x80);
-    temp_v0 = *(int *)(param_1 + 0x30);
-    while (temp_v0 != 0) {
-      temp_v2 = *(int *)(param_1 + 0x34);
-      nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x30);
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v2 - 0x3c) + *(int *)(temp_v2 - 0x84);
-      temp_v0 = UnsignedSaturate(temp_v1,7);
-      UnsignedDoesSaturate(temp_v1,7);
-      nw_ut_internal_LinkListImpl_insert
-                (&iStack_620 + temp_v0 * 3,(int)temp_v5 + temp_v0 * 0xc,temp_v2);
-      temp_v0 = *(int *)(param_1 + 0x30);
+    return (PlayerSound *)((u8 *)node - offsetof(PlayerSound, unkD4));
+}
+
+/* Re-sorts a list by sound priority: buckets the sounds by priority (clamped to 0..127) and gathers
+ * the buckets back in ascending order. */
+static __inline void sortByPriority(LinkList *list)
+{
+    if (list->count < 2)
+        return;
+    SortBucket buckets[PRIORITY_BUCKETS];
+    while (list->count != 0) {
+        ListNode *node = list->node.next;
+        PlayerSound *sound = soundFromSortNode(node);
+        nw_ut_internal_LinkListImpl_erase_2BAE30(list, node);
+        SortBucket *bucket = &buckets[__usat(sound->playerPriority + sound->priority, 7)];
+        nw_ut_internal_LinkListImpl_insert((LinkList *)bucket, &bucket->node, node);
     }
-    temp_v0 = 0;
-    do {
-      if ((&iStack_620)[temp_v0 * 3] != 0) {
-        do {
-          temp_v3 = *(unsigned int *)((int)temp_v5 + temp_v0 * 0xc);
-          nw_ut_internal_LinkListImpl_erase_2BAE30(&iStack_620 + temp_v0 * 3);
-          nw_ut_internal_LinkListImpl_insert(param_1 + 0x30,param_1 + 0x34,temp_v3);
-        } while ((&iStack_620)[temp_v0 * 3] != 0);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x80);
-    rt_vec_dtor(&iStack_620,&LAB_0011d9bc,0xc,0x80);
-  }
-  if (*(unsigned int *)(param_1 + 0x50) >= 2) {
-    __aeabi_vec_ctor_nocookie_nodtor(&iStack_620,&LAB_00123ce8,0xc,0x80);
-    temp_v0 = *(int *)(param_1 + 0x50);
-    while (temp_v0 != 0) {
-      temp_v2 = *(int *)(param_1 + 0x54);
-      nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x50);
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v2 - 0x3c) + *(int *)(temp_v2 - 0x84);
-      temp_v0 = UnsignedSaturate(temp_v1,7);
-      UnsignedDoesSaturate(temp_v1,7);
-      nw_ut_internal_LinkListImpl_insert
-                (&iStack_620 + temp_v0 * 3,(int)temp_v5 + temp_v0 * 0xc,temp_v2);
-      temp_v0 = *(int *)(param_1 + 0x50);
+    for (s32 i = 0; i < PRIORITY_BUCKETS; i++) {
+        while (buckets[i].count != 0) {
+            ListNode *node = buckets[i].node.next;
+            nw_ut_internal_LinkListImpl_erase_2BAE30((LinkList *)&buckets[i], node);
+            nw_ut_internal_LinkListImpl_insert(list, &list->node, node);
+        }
     }
-    temp_v0 = 0;
-    do {
-      if ((&iStack_620)[temp_v0 * 3] != 0) {
-        do {
-          temp_v3 = *(unsigned int *)((int)temp_v5 + temp_v0 * 0xc);
-          nw_ut_internal_LinkListImpl_erase_2BAE30(&iStack_620 + temp_v0 * 3);
-          nw_ut_internal_LinkListImpl_insert(param_1 + 0x50,param_1 + 0x54,temp_v3);
-        } while ((&iStack_620)[temp_v0 * 3] != 0);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x80);
-    rt_vec_dtor(&iStack_620,&LAB_0011d9c0,0xc,0x80);
-  }
-  if (*(unsigned int *)(param_1 + 0x70) >= 2) {
-    __aeabi_vec_ctor_nocookie_nodtor(&iStack_620,&LAB_00123cb8,0xc,0x80);
-    temp_v0 = *(int *)(param_1 + 0x70);
-    while (temp_v0 != 0) {
-      temp_v2 = *(int *)(param_1 + 0x74);
-      nw_ut_internal_LinkListImpl_erase_2BAE30(param_1 + 0x70);
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v2 - 0x3c) + *(int *)(temp_v2 - 0x84);
-      temp_v0 = UnsignedSaturate(temp_v1,7);
-      UnsignedDoesSaturate(temp_v1,7);
-      nw_ut_internal_LinkListImpl_insert
-                (&iStack_620 + temp_v0 * 3,(int)temp_v5 + temp_v0 * 0xc,temp_v2);
-      temp_v0 = *(int *)(param_1 + 0x70);
-    }
-    temp_v0 = 0;
-    do {
-      if ((&iStack_620)[temp_v0 * 3] != 0) {
-        do {
-          temp_v3 = *(unsigned int *)((int)temp_v5 + temp_v0 * 0xc);
-          nw_ut_internal_LinkListImpl_erase_2BAE30(&iStack_620 + temp_v0 * 3);
-          nw_ut_internal_LinkListImpl_insert(param_1 + 0x70,param_1 + 0x74,temp_v3);
-        } while ((&iStack_620)[temp_v0 * 3] != 0);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x80);
-    rt_vec_dtor(&iStack_620,&LAB_0011d9b8,0xc,0x80);
-  }
-  temp_v3 = FUN_002baed8();
-  FUN_00140e78();
-  FUN_002bad74(temp_v3,0);
-  return;
+}
+
+/* Updates every sound player, re-sorts the three voice lists by priority and runs the sound
+ * system's follow-up steps. */
+void FUN_00110a04(SoundSystem *system)
+{
+    for (u32 i = 0; i < system->playerCount; i++)
+        nw_snd_SoundPlayer_Update((SoundPlayer *)(system->players + (i & 0xFFFFFF) * 0x48));
+    sortByPriority(&system->voiceList);
+    sortByPriority(&system->streamList);
+    sortByPriority(&system->effectList);
+    u32 value = FUN_002baed8();
+    FUN_00140e78();
+    FUN_002bad74(value, 0);
 }
 
 } /* extern "C" */

@@ -48,8 +48,8 @@ typedef struct NaviMain {
 
 
 typedef struct NaviValuePair {
-    /* 0x00 */ u32 first;
-    /* 0x04 */ u32 second;
+    /* 0x00 */ f32 first;
+    /* 0x04 */ f32 second;
 } NaviValuePair;
 
 typedef struct NaviMapRequest {
@@ -60,7 +60,7 @@ typedef struct NaviMapRequest {
 
 typedef struct NaviMainA {
     /* 0x00000 */ u32 job;
-    /* 0x00004 */ u8 unk00004[4];
+    /* 0x00004 */ u32 drawTask; /* "NAVI DOWN" draw task */
     /* 0x00008 */ u8 closeRequested;
     /* 0x00009 */ u8 unk00009;
     /* 0x0000A */ u8 active;
@@ -68,19 +68,26 @@ typedef struct NaviMainA {
     /* 0x0000C */ u32 posX;
     /* 0x00010 */ u32 posY;
     /* 0x00014 */ u32 thirdValue;
-    /* 0x00018 */ u8 unk00018[0x10];
+    union {
+        /* 0x00018 */ u8 unk00018[0x10];
+        /* 0x00018 */ f32 argumentValue;
+    };
     /* 0x00028 */ u32 currentMap;
     /* 0x0002C */ u32 unk2C;
     /* 0x00030 */ NaviMapRequest mapRequest;
     /* 0x0003C */ u32 alternateMap;
     /* 0x00040 */ u8 unk00040[0x18];
     /* 0x00058 */ s32 busy;
-    /* 0x0005C */ u8 unk0005C[4];
+    /* 0x0005C */ f32 scale;
     /* 0x00060 */ NaviValuePair value;
     /* 0x00068 */ union {
         u8 panel[0x20654];
         u32 request[1];
         NaviTransitionState transition;
+        struct {
+            u8 unk0068BeforeFade[0x20650];
+            /* 0x206B8 */ u32 fadeTask; /* "NAVI FADE DRAW" draw task */
+        } tasks;
     };
     /* 0x206BC */ u8 slider[1];
 } NaviMainA;

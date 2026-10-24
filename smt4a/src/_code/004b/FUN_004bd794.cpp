@@ -1,152 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bd794` (_code @ 0x4bd794, 0x2d0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the entry-count quarter rounding, the partner-slot scan and the sound selection branches are scheduled and laid out differently; the setup sequence is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014e188(...);
-int paramsInit(...);
-int sysPlaySe(...);
-int FUN_00183f58(int, int, int);
-int __aeabi_memset4(int, int, unsigned int);
-int FUN_00203b40(...);
-int FUN_00215bd0(void);
-int asdLoadFileAsyncSimple(...);
-int FUN_002c8538(int);
-int FUN_004be990(...);
-int fillThreeWordsWithByte(int, int);
-int paramsClearPacket(int);
+/* A party record (only the fields read here): its id is the halfword at 0x12C and its flags the word at 0x130. */
+typedef struct PartnerUnit {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ s16 id;
+    /* 0x12E */ u8 unk12e[2];
+    /* 0x130 */ u32 flags;
+} PartnerUnit;
 
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
+/* The partner screen's work block (only the fields touched here). */
+typedef struct PartnerScreen {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 mode;            /* 1: view only, 2: with the help line */
+    /* 0x005 */ u8 unk005[3];
+    /* 0x008 */ s32 state;
+    /* 0x00C */ u8 unk00c[4];
+    /* 0x010 */ u8 params[0x250];
+    /* 0x260 */ u8 list[0x64];
+    /* 0x2C4 */ s32 partners[12];
+    /* 0x2F4 */ u8 unk2f4[0x20];
+    /* 0x314 */ u32 helpFile;
+    /* 0x318 */ u32 messageFile;
+    /* 0x31C */ u32 scriptFile;
+    /* 0x320 */ u8 unk320[4];
+    /* 0x324 */ s32 partnerCount;
+    /* 0x328 */ s32 current;
+    /* 0x32C */ s32 initial;
+    /* 0x330 */ u8 unk330[4];
+    /* 0x334 */ s32 unk334;
+    /* 0x338 */ u32 fill[3];
+    /* 0x344 */ s32 unk344;
+} PartnerScreen;
 
-extern unsigned char DAT_0052d780; /* 0x52d780 */
-extern unsigned char DAT_0052d7e0; /* 0x52d7e0 */
-extern unsigned char g_callbackOwnerSlots; /* 0x57f25c */
+extern const u8 DAT_0052d780[];
+extern const u8 DAT_0052d7e0[];
+extern u8 g_callbackOwnerSlots;
 
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-extern int saveSlotFindSelected(void);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183f58. */
-extern int FUN_00187068(int);
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_00215bd0. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern unsigned char FUN_002857b8(void);
-/* Supplied declaration required: FUN_002c8538. */
-extern int FUN_003e4d68(unsigned int);
-/* Supplied declaration required: FUN_004be990. */
-/* Supplied declaration required: fillThreeWordsWithByte. */
-/* Supplied declaration required: paramsClearPacket. */
+void fillThreeWordsWithByte(u32 *words, u8 value);
+PartnerUnit *saveSlotFindSelected(void);
+void __aeabi_memset4(void *destination, u32 size, s32 value);
+PartnerUnit *FUN_00187068(s32 index);
+PartnerUnit *FUN_003e4d68(u16 index);
+void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
+void FUN_00203b40(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
+void FUN_002c8538(s32 arg);
+void FUN_00215bd0(void);
+void sysPlaySe(u32 id);
+void FUN_00183f58(s32 a, s32 b, s32 c);
+void paramsClearPacket(void *packet);
+void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
+                const void *f, u32 fSize);
+void FUN_0014e188(void *sprite, s32 a, s32 b, void *packet, s32 c);
+void FUN_004be990(PartnerScreen *screen, s32 a, s32 b);
+u8 FUN_002857b8(void);
 
-
-void FUN_004bd794(int param_1,unsigned char param_2)
-
+/* Starts the partner screen in `mode`: lists the owned partners (their party slot, 0 when not in
+ * the party), finds the selected one, loads the help/message/script files, builds the list and
+ * plays the matching sound. */
+void FUN_004bd794(PartnerScreen *screen, u8 mode)
 {
-/* irregular: 1 goto(s); 12 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  short temp_v6;
-  
-  *(unsigned int *)(param_1 + 0x334) = 0;
-  *(unsigned char *)(param_1 + 4) = param_2;
-  fillThreeWordsWithByte(param_1 + 0x338,1);
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v0 = saveSlotFindSelected();
-  if (temp_v0 != 0) {
-    temp_v6 = *(short *)(temp_v0 + 300);
-  }
-  *(unsigned int *)(param_1 + 0x328) = 0xffffffff;
-  __aeabi_memset4(param_1 + 0x2c4,0x30,0xffffffff);
-  temp_v0 = 0;
-  do {
-    temp_v1 = FUN_00187068(temp_v0);
-    if ((*(unsigned int *)(temp_v1 + 0x130) & 1) != 0) {
-      if ((*(short *)(temp_v1 + 300) == temp_v6) && (temp_v6 != 0)) {
-        *(int *)(param_1 + 0x328) = temp_v5;
-      }
-      temp_v4 = 0;
-      do {
-        temp_v2 = FUN_003e4d68(temp_v4 & 0xffff);
-        if (*(short *)(temp_v2 + 300) == *(short *)(temp_v1 + 300)) goto LAB_004bd854;
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < 0xc);
-      temp_v4 = 0;
-LAB_004bd854:
-      temp_v1 = temp_v5 * 4;
-      temp_v5 = temp_v5 + 1;
-      *(unsigned int *)(param_1 + temp_v1 + 0x2c4) = temp_v4;
+    screen->unk334 = 0;
+    screen->mode = mode;
+    fillThreeWordsWithByte(screen->fill, 1);
+    s32 count = 0;
+    s16 selectedId = 0;
+    PartnerUnit *selected = saveSlotFindSelected();
+
+    if (selected != NULL) {
+        selectedId = selected->id;
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0xc);
-  *(int *)(param_1 + 0x324) = temp_v5;
-  asdLoadFileAsyncSimple("camp/partnerHelpMsg.mbm",param_1 + 0x314,0);
-  asdLoadFileAsyncSimple("camp/partnerMsg.mbm",param_1 + 0x318,0);
-  asdLoadFileAsyncSimple("camp/partnerScr.bf",param_1 + 0x31c,0);
-  if (*(char *)(param_1 + 4) != '\x01') {
-    temp_v0 = (int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2;
-    if (0 < temp_v5 % 4) {
-      temp_v0 = temp_v0 + 1;
-    }
-    FUN_00203b40(param_1 + 0x260,temp_v5,temp_v0,4,1,1);
-    FUN_002c8538(1);
-    FUN_00215bd0();
-    if (*(char *)(param_1 + 4) != '\x02') {
-      if (*(int *)(param_1 + 0x324) >= 1) {
-        if (*(int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) !=
-            *(int *)(param_1 + *(int *)(param_1 + 0x328) * 4 + 0x2c4)) {
-          temp_v3 = 0xf0;
-          sysPlaySe(temp_v3);
+    screen->current = -1;
+    __aeabi_memset4(screen->partners, 0x30, -1);
+    for (s32 i = 0; i < 12; i++) {
+        PartnerUnit *unit = FUN_00187068(i);
+
+        if ((unit->flags & 1) == 0) {
+            continue;
         }
-        else {
-          sysPlaySe(0x11b);
+        if (unit->id == selectedId && selectedId != 0) {
+            screen->current = count;
         }
-      }
-      else {
-        temp_v3 = 0x118;
-        sysPlaySe(temp_v3);
-      }
+        s32 slot = 0;
+
+        for (s32 j = 0; j < 12; j++) {
+            if (FUN_003e4d68((u16)j)->id == unit->id) {
+                slot = j;
+                break;
+            }
+        }
+        screen->partners[count++] = slot;
     }
-    else if (*(int *)(param_1 + 0x324) >= 1) {
-      sysPlaySe(0xf0);
-      FUN_00183f58(5,1,1);
+    screen->partnerCount = count;
+    asdLoadFileAsyncSimple("camp/partnerHelpMsg.mbm", &screen->helpFile, 0);
+    asdLoadFileAsyncSimple("camp/partnerMsg.mbm", &screen->messageFile, 0);
+    asdLoadFileAsyncSimple("camp/partnerScr.bf", &screen->scriptFile, 0);
+    if (screen->mode != 1) {
+        s32 rows = count / 4;
+
+        if (count % 4 > 0) {
+            rows++;
+        }
+        FUN_00203b40(screen->list, count, rows, 4, 1, 1);
+        FUN_002c8538(1);
+        FUN_00215bd0();
+        if (screen->mode != 2) {
+            if (screen->partnerCount >= 1) {
+                if (screen->partners[screen->initial] != screen->partners[screen->current]) {
+                    sysPlaySe(0xF0);
+                } else {
+                    sysPlaySe(0x11B);
+                }
+            } else {
+                sysPlaySe(0x118);
+            }
+        } else if (screen->partnerCount >= 1) {
+            sysPlaySe(0xF0);
+            FUN_00183f58(5, 1, 1);
+        } else {
+            sysPlaySe(0x118);
+        }
+        paramsClearPacket(screen->params);
+        paramsInit(screen->params, DAT_0052d780, 0x60, DAT_0052d7e0, 0x18, NULL, 0, 0, 0, NULL, 0);
+        for (s32 i = 0; i < 4; i++) {
+            FUN_0014e188((u8 *)screen + 0x30 + i * 0x8C, 0x11, 0, screen->params, 0x6A);
+        }
+        FUN_004be990(screen, 0, -1);
+        screen->unk344 = 0;
+    } else {
+        FUN_00203b40(screen->list, count, count, 1, 1, 1);
+        sysPlaySe(0x11F);
     }
-    else {
-      temp_v3 = 0x118;
-      sysPlaySe(temp_v3);
-    }
-    paramsClearPacket(param_1 + 0x10);
-    paramsInit(param_1 + 0x10,&DAT_0052d780,0x60,&DAT_0052d7e0,0x18,0,0,0,0,0,0);
-    temp_v0 = 0;
-    do {
-      FUN_0014e188(param_1 + temp_v0 * 0x8c + 0x30,0x11,0,param_1 + 0x10,0x6a);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-    FUN_004be990(param_1,0,0xffffffff);
-    *(unsigned int *)(param_1 + 0x344) = 0;
-  }
-  else {
-    FUN_00203b40(param_1 + 0x260,temp_v5,temp_v5,1,1,1);
-    sysPlaySe(0x11f);
-  }
-  *(unsigned int *)(param_1 + 8) = 1;
-  g_callbackOwnerSlots = FUN_002857b8();
-  return;
+    screen->state = 1;
+    g_callbackOwnerSlots = FUN_002857b8();
 }
 
-} /* extern "C" */
+}

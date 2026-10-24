@@ -1,134 +1,106 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010889c` (_code @ 0x10889c, 0x238 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register allocation of the easing temporaries, the table-copy (ldm/str pairs vs retail's grouped stm) and the early-return merging differ; the transition logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011340c(...);
-int FUN_002bf810(...);
-int FUN_002bf818(...);
-int builtin_strncpy(...);
+/* One animated item of the list (0x8C bytes). */
+typedef struct TransitionItem {
+    /* 0x00 */ u8 unk00[0x85];
+    /* 0x85 */ s8 shown;
+    /* 0x86 */ u8 unk86[4];
+    /* 0x8A */ s8 settled;
+    /* 0x8B */ u8 unk8b;
+} TransitionItem;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+/* The menu transition's work block (only the fields the tick touches). */
+typedef struct TransitionWork {
+    /* 0x000 */ u8 unk000[0x1C];
+    /* 0x01C */ s8 active;
+    /* 0x01D */ u8 unk01d[3];
+    /* 0x020 */ s32 frame;
+    /* 0x024 */ s8 closing;
+    /* 0x025 */ u8 unk025[3];
+    /* 0x028 */ f32 widthScale;
+    /* 0x02C */ f32 heightScale;
+    /* 0x030 */ f32 speed;
+    /* 0x034 */ u8 unk034[0x20];
+    /* 0x054 */ TransitionItem items[24];
+    /* 0xD74 */ u8 frameWidget[0x8C];
+    /* 0xE00 */ u8 closeWidget[0x8C];
+    /* 0xE8C */ u8 unke8c[0x9C];
+    /* 0xF28 */ s8 enabled;
+    /* 0xF29 */ u8 unkf29[2];
+    /* 0xF2B */ s8 ready;
+} TransitionWork;
 
-/* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-/* Supplied declaration required: FUN_0011340c. */
-/* Supplied declaration required: FUN_002bf810. */
-/* Supplied declaration required: FUN_002bf818. */
-extern int jobGetWork(void);
+TransitionWork *jobGetWork(void);
+s32 FUN_002bf818(void *widget);
+void FUN_002bf810(u32 sound);
+void FUN_0011340c(s32 arg);
 
-
-unsigned char FUN_0010889c(void)
-
+/* Ticks the menu's open/close transition: eases the two scales, steps the item animations and
+ * their widgets, and finishes by notifying the controller. Always returns 0. */
+u8 FUN_0010889c(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  char temp_v5 [24];
-  
-  temp_v0 = jobGetWork();
-  if (*(char *)(temp_v0 + 0xf28) == '\0') {
+    TransitionWork *work = jobGetWork();
+
+    if (work->enabled == 0) {
+        return 0;
+    }
+    if (work->ready == 0) {
+        return 0;
+    }
+    if (work->active == 0) {
+        return 0;
+    }
+    /* The frame at which each item appears or disappears. */
+    s8 frames[24] = {1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 8, 8, 9};
+    if (work->closing != 0) {
+        work->frame++;
+        if (work->widthScale > 0.25f) {
+            work->widthScale -= 0.13f / work->speed;
+        }
+        work->widthScale = work->widthScale > 0.25f ? work->widthScale : 0.25f;
+        if (work->heightScale > 0.25f) {
+            work->heightScale -= 0.11f / work->speed;
+        }
+        work->heightScale = work->heightScale > 0.25f ? work->heightScale : 0.25f;
+        for (s32 i = 0; i < 24; i++) {
+            if (work->frame >= frames[i]) {
+                work->items[i].shown = 0;
+            }
+        }
+        if (work->items[23].shown == 0) {
+            FUN_002bf818(work->frameWidget);
+        }
+    } else {
+        if (work->widthScale < 0.38f) {
+            work->widthScale += 0.13f / work->speed;
+        }
+        work->widthScale = work->widthScale > 0.38f ? 0.38f : work->widthScale;
+        if (work->heightScale < 0.36f) {
+            work->heightScale += 0.11f / work->speed;
+        }
+        work->heightScale = work->heightScale > 0.36f ? 0.36f : work->heightScale;
+        if (FUN_002bf818(work->frameWidget) == 0) {
+            FUN_0011340c(1);
+            return 0;
+        }
+        work->frame++;
+        if (work->frame == 1) {
+            FUN_002bf810(0x100025A);
+        }
+        for (s32 i = 0; i < 24; i++) {
+            if (work->frame >= frames[i]) {
+                FUN_002bf818(&work->items[i]);
+            }
+        }
+        if (work->items[23].settled != 0) {
+            FUN_002bf818(work->closeWidget);
+        }
+    }
+    FUN_0011340c(1);
     return 0;
-  }
-  if (*(char *)(temp_v0 + 0xf2b) == '\0') {
-    return 0;
-  }
-  if (*(char *)(temp_v0 + 0x1c) == '\0') {
-    return 0;
-  }
-  builtin_strncpy(temp_v5,
-                  "\x01\x02\x02\x03\x03\x03\x04\x04\x04\x04\x05\x05\x05\x05\x06\x06\x06\x06\a\a\a\b\b\t"
-                  ,0x18);
-  if (*(char *)(temp_v0 + 0x24) != '\0') {
-    temp_v2 = *(float *)(temp_v0 + 0x28);
-    *(int *)(temp_v0 + 0x20) = *(int *)(temp_v0 + 0x20) + 1;
-    if ((int)temp_v2 >= 0x3e800001) {
-      temp_v2 = temp_v2 - 0.13f / *(float *)(temp_v0 + 0x30);
-      *(float *)(temp_v0 + 0x28) = temp_v2;
-    }
-    if ((int)temp_v2 < 0x3e800001) {
-      temp_v2 = 0.25f;
-    }
-    temp_v3 = *(float *)(temp_v0 + 0x2c);
-    *(float *)(temp_v0 + 0x28) = temp_v2;
-    if ((int)temp_v3 >= 0x3e800001) {
-      temp_v3 = temp_v3 - 0.110000014f / *(float *)(temp_v0 + 0x30);
-      *(float *)(temp_v0 + 0x2c) = temp_v3;
-    }
-    temp_v1 = 0;
-    if ((int)temp_v3 < 0x3e800001) {
-      temp_v3 = 0.25f;
-    }
-    *(float *)(temp_v0 + 0x2c) = temp_v3;
-    do {
-      if ((int)temp_v5[temp_v1] <= *(int *)(temp_v0 + 0x20)) {
-        *(unsigned char *)(temp_v0 + temp_v1 * 0x8c + 0xd9) = 0;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-    if (*(char *)(temp_v0 + 0xd6d) != '\0') {
-      FUN_0011340c(1);
-      return 0;
-    }
-    temp_v0 = temp_v0 + 0xd74;
-  }
-  else {
-    temp_v2 = *(float *)(temp_v0 + 0x28);
-    if ((int)temp_v2 < 0x3ec28f5c) {
-      temp_v2 = 0.13f / *(float *)(temp_v0 + 0x30) + temp_v2;
-      *(float *)(temp_v0 + 0x28) = temp_v2;
-    }
-    temp_v3 = 0.13f;
-    if ((int)temp_v2 < 0x3ec28f5d) {
-      temp_v3 = temp_v2;
-    }
-    temp_v4 = *(float *)(temp_v0 + 0x2c);
-    if ((int)temp_v2 >= 0x3ec28f5d) {
-      temp_v3 = 0.38f;
-    }
-    *(float *)(temp_v0 + 0x28) = temp_v3;
-    if ((int)temp_v4 < 0x3eb851ec) {
-      temp_v4 = 0.110000014f / *(float *)(temp_v0 + 0x30) + temp_v4;
-      *(float *)(temp_v0 + 0x2c) = temp_v4;
-    }
-    if ((int)temp_v4 >= 0x3eb851ed) {
-      temp_v4 = 0.36f;
-    }
-    *(float *)(temp_v0 + 0x2c) = temp_v4;
-    temp_v1 = FUN_002bf818(temp_v0 + 0xd74);
-    if (temp_v1 == 0) {
-      FUN_0011340c(1);
-      return 0;
-    }
-    temp_v1 = *(int *)(temp_v0 + 0x20) + 1;
-    *(int *)(temp_v0 + 0x20) = temp_v1;
-    if (temp_v1 == 1) {
-      FUN_002bf810(0x100025a);
-    }
-    temp_v1 = 0;
-    do {
-      if ((int)temp_v5[temp_v1] <= *(int *)(temp_v0 + 0x20)) {
-        FUN_002bf818(temp_v0 + temp_v1 * 0x8c + 0x54);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-    if (*(char *)(temp_v0 + 0xd72) == '\0') {
-      FUN_0011340c(1);
-      return 0;
-    }
-    temp_v0 = temp_v0 + 0xe00;
-  }
-  FUN_002bf818(temp_v0);
-  FUN_0011340c(1);
-  return 0;
 }
 
-} /* extern "C" */
+}

@@ -32,8 +32,12 @@ struct Obj559edcVector {
 class Obj559edc {
 public:
     Obj559edc();
+    Obj559edc(const Obj559edc &);
     virtual ~Obj559edc();
-    /* 0x04 */ u8 unk04[0x14];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0c;
+    /* 0x10 */ u8 unk10[8];
     /* 0x18 */ Obj55aff4 address;
     /* 0x20 */ u32 unk20;
     /* 0x24 */ Obj55b104 buffer;

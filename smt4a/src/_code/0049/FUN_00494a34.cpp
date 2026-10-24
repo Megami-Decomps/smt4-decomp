@@ -1,162 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00494a34` (_code @ 0x494a34, 0x2e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two item-scan loops and the shared script-start tail are merged differently by armcc than retail, which keeps each copy; the shop step logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int sysPlaySe(int);
-int FUN_0019de98(int, int);
-int scrRunOpcodesStub(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int panelSetTarget(int);
-int FUN_0037c8e4(int, int);
-int FUN_0049a5b4(unsigned int *);
-int FUN_0049a9a8(void);
+/* The shop screen work block (only the fields used here). */
+typedef struct ShopMain {
+    /* 0x00000 */ u32 flags;            /* 4: opened */
+    /* 0x00004 */ u32 state;
+    /* 0x00008 */ u32 step;
+    /* 0x0000C */ u32 unk0c;
+    /* 0x00010 */ u32 previousState;
+    /* 0x00014 */ u32 unk14[2];
+    /* 0x0001C */ u32 kind;
+    /* 0x00020 */ u8 unk20;
+    /* 0x00021 */ u8 closeKind;
+    /* 0x00022 */ u8 unk22[0x162];
+    /* 0x00184 */ u32 scriptTable;
+    /* 0x00188 */ u32 unk188;
+    /* 0x0018C */ u32 script;
+    /* 0x00190 */ u8 unk190[0x15EBC];
+    /* 0x1604C */ u8 introMode;
+} ShopMain;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+extern u32 DAT_005f1990;
 
-extern unsigned char LAB_00494d28; /* 0x494d28 */
-extern unsigned char LAB_00494d34; /* 0x494d34 */
-extern unsigned char LAB_00494d4c; /* 0x494d4c */
-extern unsigned int DAT_005f1990; /* 0x5f1990 */
+s32 sysPlaySe(s32 id);
+void FUN_0019de98(s32 a, u32 color);
+s32 scrRunOpcodesStub(u32 script);
+void scrScriptProcessStartEntry(u32 script, u32 entry);
+void panelSetTarget(s32 target);
+void FUN_0037c8e4(s32 a, s32 b);
+void FUN_0049a5b4(ShopMain *shop);
+u32 FUN_0049a9a8(void);
+s32 gameFlagIsSet(u32 flag);
+s32 FUN_001ba3d4(u32 id);
+u32 tableGroupFindEntryIndex(u32 table, const char *name);
+s32 FUN_00481100(u32 id);
 
-/* Supplied declaration required: sysPlaySe. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
-extern int FUN_001ba3d4(unsigned int);
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0037c8e4. */
-extern int FUN_00481100(unsigned int);
-/* Supplied declaration required: FUN_0049a5b4. */
-/* Supplied declaration required: FUN_0049a9a8. */
-
-
-void FUN_00494a34(unsigned int *param_1)
-
+/* Whether any shop entry in the two id ranges is available. */
+static bool shopHasEntries(void)
 {
-/* irregular: 3 goto(s); 8 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v3 = 0x3b7;
-  temp_v0 = param_1[2];
-  temp_v4 = 0x47f;
-  if (temp_v0 != 0) {
-    if (temp_v0 == 1) {
-      temp_v1 = scrRunOpcodesStub(param_1[99]);
-      if (temp_v1 == 2) {
-        puVar4 = param_1;
-        FUN_0049a9a8();
-        *(char *)((int)param_1 + 0x21) = (char)(int)puVar4;
-        param_1[2] = 3;
-      }
-      return;
-    }
-    if (temp_v0 != 2) {
-      if (temp_v0 != 3) {
-        return;
-      }
-    }
-    else {
-      temp_v1 = scrRunOpcodesStub(param_1[99]);
-      if (temp_v1 != 2) {
-        return;
-      }
-      param_1[2] = 3;
-    }
-    FUN_0037c8e4(1,0);
-    panelSetTarget(0);
-    do {
-      temp_v1 = FUN_00481100(temp_v3);
-      if (temp_v1 != 0) goto LAB_00494cb0;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x47f);
-    do {
-      temp_v1 = FUN_00481100(temp_v4);
-      if (temp_v1 != 0) {
-LAB_00494cb0:
-        param_1[4] = param_1[1];
-        param_1[1] = 2;
-        param_1[2] = 0;
-        FUN_0049a5b4(param_1);
-        sysPlaySe(0x77);
-        FUN_0019de98(0,0x323232ff);
-        DAT_005f1990 = 0;
-        return;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x79f);
-  }
-  else {
-    *param_1 = *param_1 | 4;
-    if (param_1[7] != 9) {
-      if (((char)param_1[0x5813] == '\x01') && (temp_v1 = gameFlagIsSet(0x170), temp_v1 != 0)) {
-        temp_v1 = gameFlagIsSet(0x1cf);
-        if (temp_v1 == 0) {
-          temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d28);
-          scrScriptProcessStartEntry(param_1[99],temp_v2);
-          scrRunOpcodesStub(param_1[99]);
-          param_1[2] = 1;
-          sysPlaySe(0xa0);
-          return;
+    for (u32 id = 0x3B7; id < 0x47F; id++) {
+        if (FUN_00481100(id) != 0) {
+            return true;
         }
-      }
     }
-    else {
-      temp_v1 = FUN_001ba3d4(0x363);
-      if ((0 < temp_v1) && (temp_v1 = gameFlagIsSet(0x114), temp_v1 == 0)) goto LAB_00494b40;
-      temp_v1 = gameFlagIsSet(0x113);
-      if (temp_v1 == 0) {
-LAB_00494b40:
-        temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d28);
-        scrScriptProcessStartEntry(param_1[99],temp_v2);
-        scrRunOpcodesStub(param_1[99]);
-        param_1[2] = 1;
-        sysPlaySe(0xa0);
-        return;
-      }
+    for (u32 id = 0x47F; id < 0x79F; id++) {
+        if (FUN_00481100(id) != 0) {
+            return true;
+        }
     }
-    do {
-      temp_v1 = FUN_00481100(temp_v3);
-      if (temp_v1 != 0) goto LAB_00494bb0;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x47f);
-    do {
-      temp_v1 = FUN_00481100(temp_v4);
-      if (temp_v1 != 0) {
-LAB_00494bb0:
-        if (*(char *)((int)param_1 + 0x21) != '\0') {
-          temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d34);
-          scrScriptProcessStartEntry(param_1[99],temp_v2);
-        }
-        else {
-          temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d4c);
-          scrScriptProcessStartEntry(param_1[99],temp_v2);
-        }
-        scrRunOpcodesStub(param_1[99]);
-        param_1[2] = 2;
-        sysPlaySe(0xa0);
-        return;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x79f);
-    FUN_0037c8e4(1,0);
-    panelSetTarget(0);
-  }
-  param_1[4] = param_1[1];
-  param_1[1] = 5;
-  param_1[2] = 0;
-  return;
+    return false;
 }
 
-} /* extern "C" */
+/* Drives the shop screen's entry steps: step 0 decides whether the intro or the in-shop event
+ * runs, steps 1 and 2 wait for the script, and step 3 opens the shop or falls back. */
+void FUN_00494a34(ShopMain *shop)
+{
+    if (shop->step == 0) {
+        shop->flags |= 4;
+        if (shop->kind != 9) {
+            if (shop->introMode == 1 && gameFlagIsSet(0x170) != 0 && gameFlagIsSet(0x1CF) == 0) {
+                scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->scriptTable, "shop_event"));
+                scrRunOpcodesStub(shop->script);
+                shop->step = 1;
+                sysPlaySe(0xA0);
+                return;
+            }
+        } else if ((FUN_001ba3d4(0x363) > 0 && gameFlagIsSet(0x114) == 0) || gameFlagIsSet(0x113) == 0) {
+            scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->scriptTable, "shop_event"));
+            scrRunOpcodesStub(shop->script);
+            shop->step = 1;
+            sysPlaySe(0xA0);
+            return;
+        }
+        if (shopHasEntries()) {
+            scrScriptProcessStartEntry(
+                shop->script,
+                tableGroupFindEntryIndex(shop->scriptTable,
+                                         shop->closeKind != 0 ? "shop_in_sale_closewin" : "shop_in_closewin"));
+            scrRunOpcodesStub(shop->script);
+            shop->step = 2;
+            sysPlaySe(0xA0);
+            return;
+        }
+        FUN_0037c8e4(1, 0);
+        panelSetTarget(0);
+        shop->previousState = shop->state;
+        shop->state = 5;
+        shop->step = 0;
+        return;
+    }
+    if (shop->step == 1) {
+        if (scrRunOpcodesStub(shop->script) == 2) {
+            shop->closeKind = (u8)FUN_0049a9a8();
+            shop->step = 3;
+        }
+        return;
+    }
+    if (shop->step == 2) {
+        if (scrRunOpcodesStub(shop->script) != 2) {
+            return;
+        }
+        shop->step = 3;
+    } else if (shop->step != 3) {
+        return;
+    }
+    FUN_0037c8e4(1, 0);
+    panelSetTarget(0);
+    if (shopHasEntries()) {
+        shop->previousState = shop->state;
+        shop->state = 2;
+        shop->step = 0;
+        FUN_0049a5b4(shop);
+        sysPlaySe(0x77);
+        FUN_0019de98(0, 0x323232FF);
+        DAT_005f1990 = 0;
+    }
+}
+
+}

@@ -1,174 +1,158 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa3d4` (_code @ 0x4aa3d4, 0x334 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (205 rows against 209): same switch cases, strings (SJIS), constants and calls; retail reaches the battle UI block as `ldr r4,[base]; ldr r4,[r4,#16]` (a field of a larger global at 0x57a9b8, not the standalone g_btlUiBlock pointer), keeps `partyMember`/`recordId`/`guard` in r8/sl/r7 after the loads and the list pointer in r4 itself, ours loads the pointer straight and uses r0 for the list address */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_0015f858(unsigned int, int);
-int dataTableGetCategoryEntry(int, int);
-int FUN_00184310(void);
-int FUN_00227af0(unsigned char [64]);
-int FUN_0022fcb8(void);
-int menuStateReset(void);
-int FUN_002c13b0(int);
-int FUN_002c13d4(int, int);
-int FUN_002e4308(int, unsigned int, int);
-int menuStateSetMode4(int);
-int FUN_00388424(int, int);
-int dataRecordGetKindValue(unsigned int);
-int playerSecondaryGetKindValue(void);
-int playerPrimaryGetKindValue(void);
-int menuStateStartSelect(int);
+/* Battle UI block (observed fields only). */
+struct BtlUiBlock {
+    u32 scriptUnit;              /* 0x00000 */
+    u8 pad00004[0x6310 - 4];
+    u8 skillList[4];             /* 0x06310: list handed to the resource/count helpers */
+    u8 pad06314[0x74A4 - 0x6314];
+    u32 targetLocked;            /* 0x074A4 */
+    u8 pad074A8[0xC040 - 0x74A8];
+    u8 helpActive;               /* 0x0C040 */
+    u8 padC041[3];
+    u32 helpTimeout;             /* 0x0C044 */
+    u32 helpFlags;               /* 0x0C048 */
+    s32 helpKind;                /* 0x0C04C: help window kind 0..12 */
+    u16 helpValue;               /* 0x0C050 */
+};
 
-/* stack frame of param_6: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp60; /* 0x60: local_60 */
-} param_6_stack;
+struct UnitState {
+    u8 pad00[0x28];
+    u8 *action;                  /* 0x28 */
+};
 
-extern unsigned char LAB_004aa70c; /* 0x4aa70c */
-extern unsigned char LAB_004aa71c; /* 0x4aa71c */
-extern unsigned char LAB_004aa724; /* 0x4aa724 */
-extern unsigned char LAB_004aa734; /* 0x4aa734 */
-extern unsigned char LAB_004aa744; /* 0x4aa744 */
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int *g_btlUiBlock; /* 0x57a9c8 */
+struct DataRecord {
+    u8 pad00[0x0C];
+    u8 kind;                     /* 0x0C */
+};
 
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(unsigned short);
-/* Supplied declaration required: FUN_0015f858. */
-/* Supplied declaration required: dataTableGetCategoryEntry. */
-/* Supplied declaration required: FUN_00184310. */
-extern int gameGetOptions(void);
-extern int FUN_001ba3d4(unsigned short);
-/* Supplied declaration required: FUN_00227af0. */
-/* Supplied declaration required: FUN_0022fcb8. */
-/* Supplied declaration required: menuStateReset. */
-extern int resourceRunOperationIfUnblocked(unsigned int *);
-extern int FUN_002a4894(unsigned int *);
-/* Supplied declaration required: FUN_002c13b0. */
-/* Supplied declaration required: FUN_002c13d4. */
-/* Supplied declaration required: FUN_002e4308. */
-/* Supplied declaration required: menuStateSetMode4. */
-/* Supplied declaration required: FUN_00388424. */
-/* Supplied declaration required: dataRecordGetKindValue. */
-/* Supplied declaration required: playerSecondaryGetKindValue. */
-/* Supplied declaration required: playerPrimaryGetKindValue. */
-/* Supplied declaration required: menuStateStartSelect. */
-extern int playerHasFlagBit(unsigned int);
-extern int btlScriptUnitHasFlags(unsigned int);
-extern int FUN_003f2448(unsigned int);
-extern int btlUnitGet(unsigned int);
+extern BtlUiBlock *g_btlUiBlock;   /* 0x57a9c8 */
+extern u32 g_btlScriptUnit;        /* 0x57113c */
 
+s32 resourceRunOperationIfUnblocked(u8 *list);
+s32 FUN_002a4894(u8 *list);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+s32 playerPrimaryGetKindValue(void);
+s32 playerSecondaryGetKindValue(void);
+s32 menuStateSetMode4(s32 mode);
+s32 gameGetOptions(void);
+s32 dataTableGetCategoryEntry(s32 category, u32 entry);
+s32 FUN_0022fcb8(void);
+DataRecord *FUN_00184310(u32 id);
+s32 dataRecordGetKindValue(u32 id);
+u32 FUN_0014bd84(u16 id);
+s32 playerHasFlagBit(s32 bit);
+UnitState *btlUnitGet(u32 unit);
+s32 FUN_002e4308(s32 value, s32 mode, s32 flag);
+s32 FUN_00388424(s32 unit, s32 locked);
+u32 FUN_0015f858(u16 value, s32 arg);
+s32 FUN_002c13b0(s32 value);
+s32 FUN_003f2448(u32 unit);
+s32 btlScriptUnitHasFlags(u32 unit);
+s32 FUN_001ba3d4(u16 value);
+s32 FUN_002c13d4(s32 value, s32 amount);
+s32 menuStateReset(void);
+s32 FUN_00227af0(char *text);
+s32 menuStateStartSelect(s32 arg);
 
-void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
-                 int param_6)
-
+/* Opens the battle help window of kind `kind` for `value`: formats its label (attack / return /
+ * summon / flee text or the item/skill name), sets up the matching help entry and starts the
+ * selection. The flags choose between the party-member (`partyMember`), the guard (`guard`) and the
+ * default variants. */
+void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId, s32 guard)
 {
-/* irregular: 16 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  short temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7 [64];
-  
-  puVar2 = g_btlUiBlock;
-  *(unsigned char *)(g_btlUiBlock + 0x3010) = 1;
-  puVar2[0x3013] = param_2;
-  *(short *)(puVar2 + 0x3014) = (short)param_3;
-  puVar2[0x3012] = 0;
-  puVar2[0x3011] = 0x28;
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v7[0] = 0;
-  switch(puVar2[0x3013]) {
-  case 1:
-    if (param_4 != 0) {
-      temp_v4 = resourceRunOperationIfUnblocked(puVar2 + 0x18c4);
-      temp_v1 = FUN_002a4894(puVar2 + 0x18c4);
-      if (temp_v1 + temp_v4 != 0) {
-        if (temp_v1 + temp_v4 == 1) {
-          temp_v5 = (short)(int)temp_v7;
-          textFormatBuffer(temp_v7,&LAB_004aa70c);
-          playerSecondaryGetKindValue();
+    BtlUiBlock *ui = g_btlUiBlock;
+    char text[64];
+    s32 kindValue = 0;
+    u8 flag = 0;
+
+    ui->helpActive = 1;
+    ui->helpKind = kind;
+    ui->helpValue = (u16)value;
+    ui->helpFlags = 0;
+    ui->helpTimeout = 40;
+    text[0] = 0;
+
+    switch (ui->helpKind) {
+    case 1:
+        if (partyMember != 0) {
+            s32 count = resourceRunOperationIfUnblocked(ui->skillList) + FUN_002a4894(ui->skillList);
+            if (count == 0) {
+                textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+                kindValue = playerPrimaryGetKindValue();
+            } else if (count == 1) {
+                textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+                kindValue = playerSecondaryGetKindValue();
+            }
+        } else if (guard != 0) {
+            s32 options = gameGetOptions();
+            u16 entry = *(u16 *)(options + 0x12E);
+            options = gameGetOptions();
+            dataTableGetCategoryEntry(*(s16 *)(options + 0x12C), entry);
+            textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b");
+            kindValue = FUN_0022fcb8();
+        } else {
+            DataRecord *record = FUN_00184310(recordId);
+            textFormatBuffer(text, "\x82`\x82\x94\x82\x94\x82\x81\x82\x83\x82\x8b", record->kind);
+            kindValue = dataRecordGetKindValue(recordId);
         }
-      }
-      else {
-        temp_v5 = (short)(int)temp_v7;
-        textFormatBuffer(temp_v7,&LAB_004aa70c);
-        playerPrimaryGetKindValue();
-      }
+        menuStateSetMode4((s16)kindValue);
+        break;
+    case 2:
+    case 3: {
+        textFormatBuffer(text, "%s", FUN_0014bd84(ui->helpValue));
+        s32 mode;
+        if (partyMember != 0) {
+            if (playerHasFlagBit(4) != 0) {
+                flag = 1;
+            }
+            mode = 1;
+        } else {
+            if (guard == 0) {
+                UnitState *unit = btlUnitGet(g_btlScriptUnit);
+                if ((*(u16 *)(unit->action + 0x110) & 0x10) != 0) {
+                    flag = 1;
+                }
+            }
+            mode = 0;
+        }
+        FUN_002e4308((s16)ui->helpValue, mode, flag);
+        FUN_00388424((s16)recordId, ui->targetLocked == 0);
+        break;
     }
-    else if (param_6 != 0) {
-      temp_v4 = gameGetOptions();
-      temp_v0 = *(unsigned short *)(temp_v4 + 0x12e);
-      temp_v4 = gameGetOptions();
-      dataTableGetCategoryEntry((int)*(short *)(temp_v4 + 300),temp_v0);
-      temp_v5 = (short)(int)temp_v7;
-      textFormatBuffer(temp_v7,&LAB_004aa70c);
-      FUN_0022fcb8();
+    case 8:
+        textFormatBuffer(text, "%s", FUN_0015f858(ui->helpValue, 0));
+        FUN_002c13b0((s16)ui->helpValue);
+        if (FUN_003f2448(ui->scriptUnit) != 0 && btlScriptUnitHasFlags(ui->scriptUnit) == 0) {
+            FUN_002c13d4((s16)ui->helpValue, FUN_001ba3d4(ui->helpValue) + 1);
+        }
+        break;
+    case 9:
+    case 10:
+    case 12:
+        if (value != 0) {
+            textFormatBuffer(text, "\x82q\x82\x85\x82\x94\x82\x95\x82\x92\x82\x8e");
+        } else {
+            textFormatBuffer(text, "\x82r\x82\x95\x82\x8d\x82\x8d\x82\x8f\x82\x8e");
+        }
+        menuStateReset();
+        break;
+    case 11:
+        textFormatBuffer(text, "\x82""e\x82\x8c\x82\x85\x82\x85");
+        menuStateReset();
+        break;
+    default:
+        break;
     }
-    else {
-      FUN_00184310();
-      textFormatBuffer(temp_v7,&LAB_004aa70c);
-      dataRecordGetKindValue(param_5);
-      temp_v5 = (short)param_5;
-    }
-    menuStateSetMode4((int)temp_v5);
-    break;
-  case 2:
-  case 3:
-    temp_v2 = FUN_0014bd84(*(unsigned short *)(puVar2 + 0x3014));
-    textFormatBuffer(temp_v7,&LAB_004aa71c,temp_v2);
-    if (param_4 != 0) {
-      temp_v4 = playerHasFlagBit(4);
-      temp_v6 = temp_v4 != 0;
-      temp_v2 = 1;
-    }
-    else {
-      if ((param_6 == 0) &&
-         (temp_v4 = btlUnitGet(g_btlScriptUnit),
-         (*(unsigned short *)(*(int *)(temp_v4 + 0x28) + 0x110) & 0x10) != 0)) {
-        temp_v6 = 1;
-      }
-      temp_v2 = 0;
-    }
-    FUN_002e4308((int)*(short *)(puVar2 + 0x3014),temp_v2,temp_v6);
-    FUN_00388424((int)(short)param_5,puVar2[0x1d29] == 0);
-    break;
-  case 8:
-    temp_v3 = (unsigned int)*(unsigned short *)(puVar2 + 0x3014);
-    FUN_0015f858(temp_v3,0);
-    textFormatBuffer(temp_v7,&LAB_004aa71c,temp_v3);
-    FUN_002c13b0((int)*(short *)(puVar2 + 0x3014));
-    temp_v4 = FUN_003f2448(*puVar2);
-    if ((temp_v4 != 0) && (temp_v4 = btlScriptUnitHasFlags(*puVar2), temp_v4 == 0)) {
-      temp_v4 = FUN_001ba3d4(*(unsigned short *)(puVar2 + 0x3014));
-      FUN_002c13d4((int)*(short *)(puVar2 + 0x3014),temp_v4 + 1);
-    }
-    break;
-  case 9:
-  case 10:
-  case 0xc:
-    if (param_3 != 0) {
-      textFormatBuffer(temp_v7,&LAB_004aa724);
-    }
-    else {
-      textFormatBuffer(temp_v7,&LAB_004aa734);
-    }
-    menuStateReset();
-    break;
-  case 0xb:
-    textFormatBuffer(temp_v7,&LAB_004aa744);
-    menuStateReset();
-  }
-  FUN_00227af0(temp_v7);
-  menuStateStartSelect(0);
-  return;
+    FUN_00227af0(text);
+    menuStateStartSelect(0);
 }
 
 } /* extern "C" */

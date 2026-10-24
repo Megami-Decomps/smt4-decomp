@@ -46,7 +46,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-extern int *FUN_001b7420(int, int *, int, char *);
+extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, int, char *);
 /* Supplied declaration required: FUN_001b77a8. */
 /* Supplied declaration required: FUN_001b7e24. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -210,7 +210,7 @@ int * FUN_001b6d08(char *param_1,int param_2,int param_3,int *param_4)
     piVar13 = (int *)0x0;
   }
   else {
-    piVar13 = (int *)FUN_001b7420(temp_v2,param_4,param_3,param_1);
+    piVar13 = (int *)_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(temp_v2,param_4,param_3,param_1);
     temp_v9 = 0x3f800000;
     *piVar13 = (int)&DAT_0055bc08;
     piVar13[0x52] = 0;

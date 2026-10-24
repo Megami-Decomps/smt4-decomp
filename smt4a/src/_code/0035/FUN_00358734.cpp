@@ -1,4 +1,3 @@
-/* NON_MATCHING: three render-stack push address/register scheduling differences remain. */
 #include "camp/RenderCtx.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;

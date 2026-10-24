@@ -7,7 +7,7 @@ extern AsdCecGlobals g_asdCec;
 
 void asdCecMessageBoxClose(AsdCecMessageBox *box);
 s32 asdCecMessageBoxOpen(AsdCecMessageBox *box, u32 unk00, u32 unk04);
-void asdCecMessageIdInit(AsdCecMessageId *id);
+void _ZN12CecMessageIdC1Ev(AsdCecMessageId *id);
 void *asdMemFree(void *block);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdCecMessageGetBody(AsdCecMessage *message, void **body, u32 *bodySize);
@@ -31,7 +31,7 @@ u8 asdCecReadInboxMessage(u32 index, void *out)
     u32 bodySize;
 
     nn_cec_CTR_Message_Message_sub_object(&message);
-    asdCecMessageIdInit(&id);
+    _ZN12CecMessageIdC1Ev(&id);
     box = g_asdCec.cec->box;
     result = asdCecMessageBoxOpen(box, g_asdCec.cec->unk00, g_asdCec.cec->unk04);
     if (g_asdCec.cec->box->inboxCount != 0) {

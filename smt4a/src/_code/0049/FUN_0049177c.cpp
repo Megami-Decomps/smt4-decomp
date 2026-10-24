@@ -1,174 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049177c` (_code @ 0x49177c, 0x314 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
+#include "common.h"
+
+#define MAP_ICON_TYPE_OWNED -1
+#define MAP_ICON_TYPE_STORY -2
+#define MAP_ICON_TYPE_FLAG -3
+#define MAP_ID_FIELD 0x65
+#define MAP_CLIP_WIDTH 512.0f
+#define MAP_CLIP_HEIGHT 640.0f
+
+struct MapIcon {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ s8 unlockType;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u16 frame;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ f32 x;
+    /* 0x0C */ f32 y;
+    /* 0x10 */ f32 width;
+    /* 0x14 */ f32 height;
+    /* 0x18 */ u8 unk18[0x12];
+    /* 0x2A */ s16 unlockId;
+    /* 0x2C */ s16 requireFlag;      /* hidden unless this flag is set */
+    /* 0x2E */ s16 excludeFlag;      /* hidden while this flag is set */
+    /* 0x30 */ s16 visible;
+    /* 0x32 */ u16 drawFrame;
+    /* 0x34 */ s32 screenX;
+    /* 0x38 */ s32 screenY;
+    /* 0x3C */ s32 drawWidth;
+    /* 0x40 */ s32 drawHeight;
+    /* 0x44 */ s32 color;
+    /* 0x48 */ s32 unk48;
+    /* 0x4C */ u8 unk4C;
+    /* 0x4D */ u8 unk4D[0x17];
+};
+
+struct MapScreenWork {
+    /* 0x00000 */ u8 unk00000[0x4CC];
+    /* 0x004CC */ u8 scene[4];
+    /* 0x004D0 */ u8 scroll[8];
+    /* 0x004D8 */ u8 unk004D8[0x12B8];
+    /* 0x01790 */ MapIcon icons[0xFF];
+    /* 0x07B8C */ s32 iconCount;
+    /* 0x07B90 */ u8 unk07B90;
+    /* 0x07B91 */ u8 refreshed;
+    /* 0x07B92 */ u8 unk07B92[0x18AA2];
+    /* 0x20634 */ u8 hasOverride;
+    /* 0x20635 */ u8 unk20635[3];
+    /* 0x20638 */ s32 requestedX;
+    /* 0x2063C */ s32 requestedZ;
+    /* 0x20640 */ u8 unk20640[8];
+    /* 0x20648 */ s32 overrideX;
+    /* 0x2064C */ s32 overrideZ;
+};
 
 extern "C" {
+extern s8 DAT_005f1a5e;
+extern s32 DAT_005f1c5c;
 
-int gameFlagsGetBlock(void);
-int words2Copy(int, float *);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(...);
+s32 naviGetActiveStateValue(void);
+f32 *lmapSceneGetObj(void *scene);
+f32 *sub68OwnerGetBlock60(void *scene);
+void words2Copy(void *source, f32 *out);
+s32 naviMainGetRequestedMap(void *scene);
+s32 FUN_004083a8(u8 kind, s8 type);
+s32 gameFlagIsSet(s32 flag);
+s32 gameFlagsBitTest(s32 flag);
+s32 FUN_00384d34(s32 id);
+s32 gameOwnedBitTest2(s32 id);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern signed char DAT_005f1a5e; /* 0x5f1a5e */
-extern int DAT_005f1c5c; /* 0x5f1c5c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: gameFlagsGetBlock. */
-extern int gameFlagIsSet(void);
-extern int gameFlagsBitTest(int);
-extern int FUN_00384d34(int);
-extern int gameOwnedBitTest2(int);
-extern int FUN_004083a8(unsigned char, unsigned char);
-extern float *sub68OwnerGetBlock60(int);
-extern int naviGetActiveStateValue(void);
-extern float *lmapSceneGetObj(int);
-extern int naviMainGetRequestedMap(int);
-/* Supplied declaration required: words2Copy. */
-
-
-void FUN_0049177c(int param_1)
-
+void FUN_0049177c(MapScreenWork *work)
 {
-/* irregular: 2 goto(s); irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float *pfVar5;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  unsigned long long temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  unsigned long long temp_v18;
-  
-  gameFlagsGetBlock();
-  temp_v2 = param_1 + 0x4cc;
-  temp_v3 = naviGetActiveStateValue();
-  pfVar5 = (float *)lmapSceneGetObj(temp_v2);
-  temp_v14 = *pfVar5;
-  temp_v11 = pfVar5[2];
-  pfVar5 = (float *)sub68OwnerGetBlock60(temp_v2);
-  temp_v15 = 0.0f;
-  temp_v18 = 0;
-  temp_v12 = *pfVar5;
-  temp_v13 = pfVar5[1];
-  temp_v9 = temp_v15;
-  words2Copy(param_1 + 0x4d0,&temp_v16);
-  if (DAT_005f1a5e != '\0') {
-    temp_v3 = naviMainGetRequestedMap(temp_v2);
-    temp_v14 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20638),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v11 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2063c),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  if (*(char *)(param_1 + 0x20634) != '\0') {
-    temp_v14 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20648),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v11 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2064c),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  temp_v2 = *(int *)(param_1 + 0x7b8c);
-  if (temp_v3 == 0x65) {
-    temp_v15 = (temp_v14 - -25400.0f) * 0.0169705f;
-    temp_v9 = (temp_v11 - -16400.0f) * 0.016886543f;
-  }
-  temp_v3 = 0;
-  temp_v10 = romwright_piece_4_4((int)(temp_v13 - (temp_v9 - 120.0f)),(int)(temp_v12 - (temp_v15 - 160.0f)));
-  if (0 < temp_v2) {
-    do {
-      temp_v4 = param_1 + temp_v3 * 100;
-      if ((DAT_005f1c5c == 0) &&
-         (((temp_v5 = FUN_004083a8(*(unsigned char *)(temp_v4 + 0x1790),*(unsigned char *)(temp_v4 + 0x1791)),
-           temp_v5 == 0 || ((*(short *)(temp_v4 + 0x17bc) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))
-           ) || ((*(short *)(temp_v4 + 0x17be) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))))) {
-        *(unsigned short *)(temp_v4 + 0x17c0) = 0;
-      }
-      else {
-        *(unsigned short *)(temp_v4 + 0x17c0) = 1;
-      }
-      temp_v1 = *(char *)(temp_v4 + 0x1791);
-      if (temp_v1 != -1) {
-        if (temp_v1 != -2) {
-          if (temp_v1 == -3) {
-            temp_v5 = gameFlagsBitTest((int)*(short *)(temp_v4 + 0x17ba));
-            goto joined_r0x00491998;
-          }
+    void *scene = work->scene;
+    s32 map = naviGetActiveStateValue();
+    f32 *cameraObject = lmapSceneGetObj(scene);
+    f32 cameraX = cameraObject[0];
+    f32 cameraZ = cameraObject[2];
+    f32 *block = sub68OwnerGetBlock60(scene);
+    f32 originX = block[0];
+    f32 originY = block[1];
+    f32 scrollX = 0.0f;
+    f32 scrollY = 0.0f;
+    f32 offset[2];
+    words2Copy(work->scroll, offset);
+
+    if (DAT_005f1a5e != 0) {
+        map = naviMainGetRequestedMap(scene);
+        cameraX = (f32)work->requestedX;
+        cameraZ = (f32)work->requestedZ;
+    }
+    if (work->hasOverride != 0) {
+        cameraX = (f32)work->overrideX;
+        cameraZ = (f32)work->overrideZ;
+    }
+    s32 iconCount = work->iconCount;
+    if (map == MAP_ID_FIELD) {
+        scrollX = (cameraX - -25400.0f) * 0.0169705f;
+        scrollY = (cameraZ - -16400.0f) * 0.016886543f;
+    }
+    s32 shiftX = (s32)(originX - (scrollX - 160.0f));
+    s32 shiftY = (s32)(originY - (scrollY - 120.0f));
+
+    for (s32 i = 0; i < iconCount; i++) {
+        MapIcon *icon = &work->icons[i];
+        if (DAT_005f1c5c == 0
+            && (FUN_004083a8(icon->kind, icon->unlockType) == 0
+                || (icon->requireFlag != 0 && gameFlagIsSet(icon->requireFlag) == 0)
+                || (icon->excludeFlag != 0 && gameFlagIsSet(icon->excludeFlag) != 0)))
+            icon->visible = 0;
+        else
+            icon->visible = 1;
+
+        if (icon->unlockType == MAP_ICON_TYPE_OWNED)
+            icon->visible = (gameOwnedBitTest2(icon->unlockId) != 0 || DAT_005f1c5c != 0) ? 1 : 0;
+        else if (icon->unlockType == MAP_ICON_TYPE_STORY)
+            icon->visible = (FUN_00384d34(icon->unlockId) != 0 || DAT_005f1c5c != 0) ? 1 : 0;
+        else if (icon->unlockType == MAP_ICON_TYPE_FLAG)
+            icon->visible = gameFlagsBitTest(icon->unlockId) != 0 ? 1 : 0;
+
+        if (icon->visible != 0) {
+            f32 left = offset[0] + icon->x + (f32)shiftX;
+            f32 top = offset[1] + icon->y + (f32)shiftY;
+            icon->unk48 = 0;
+            icon->drawWidth = (s32)icon->width;
+            icon->drawHeight = (s32)icon->height;
+            icon->color = -1;
+            icon->drawFrame = icon->frame;
+            icon->unk4C = 0;
+            icon->screenX = (s32)left;
+            icon->screenY = (s32)top;
+            if (!(0.0f <= left + icon->width) || left > MAP_CLIP_WIDTH
+                || !(0.0f <= top + icon->height) || top > MAP_CLIP_HEIGHT)
+                icon->visible = 0;
         }
-        else {
-          temp_v6 = FUN_00384d34((int)*(short *)(temp_v4 + 0x17ba));
-          temp_v5 = DAT_005f1c5c;
-          if (temp_v6 == 0) {
-joined_r0x00491998:
-            if (temp_v5 == 0) goto LAB_004919bc;
-          }
-          *(unsigned short *)(temp_v4 + 0x17c0) = 1;
-        }
-      }
-      else {
-        temp_v5 = gameOwnedBitTest2((int)*(short *)(temp_v4 + 0x17ba));
-        if ((temp_v5 != 0) || (DAT_005f1c5c != 0)) {
-          *(unsigned short *)(temp_v4 + 0x17c0) = 1;
-        }
-        else {
-LAB_004919bc:
-          *(unsigned short *)(temp_v4 + 0x17c0) = 0;
-        }
-      }
-      if (*(short *)(temp_v4 + 0x17c0) != 0) {
-        temp_v9 = (float)VectorSignedToFloat((int)temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v15 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v10 >> 0x20),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v4 + 0x17d8) = 0;
-        temp_v8 = VectorFloatToUnsigned(*(float *)(temp_v4 + 0x17a0),3);
-        temp_v7 = VectorFloatToUnsigned(*(float *)(temp_v4 + 0x17a4),3);
-        *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffffff;
-        *(unsigned short *)(temp_v4 + 0x17c2) = *(unsigned short *)(temp_v4 + 0x1794);
-        *(unsigned char *)(temp_v4 + 0x17dc) = 0;
-        temp_v9 = temp_v16 + *(float *)(temp_v4 + 0x1798) + temp_v9;
-        temp_v15 = temp_v17 + *(float *)(temp_v4 + 0x179c) + temp_v15;
-        *(unsigned int *)(temp_v4 + 0x17cc) = temp_v8;
-        *(unsigned int *)(temp_v4 + 0x17d0) = temp_v7;
-        temp_v0 = in_fpscr & 0xfffffff;
-        in_fpscr = temp_v0 | ((unsigned int)((float)temp_v18 <= temp_v9 + *(float *)(temp_v4 + 0x17a0)) << 0x1d);
-        *(int *)(temp_v4 + 0x17c4) = (int)temp_v9;
-        *(int *)(temp_v4 + 0x17c8) = (int)temp_v15;
-        if ((((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) || ((int)temp_v9 >= 0x44000001)) ||
-            (in_fpscr = temp_v0 | ((unsigned int)((float)temp_v18 <= temp_v15 + *(float *)(temp_v4 + 0x17a4)) <<
-                                0x1d), !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) || ((int)temp_v15 >= 0x44200001)) {
-          *(unsigned short *)(temp_v4 + 0x17c0) = 0;
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v2);
-  }
-  *(unsigned char *)(param_1 + 0x7b91) = 0;
-  return;
+    }
+    work->refreshed = 0;
 }
 
 } /* extern "C" */

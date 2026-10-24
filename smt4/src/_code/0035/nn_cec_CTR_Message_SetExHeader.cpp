@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00238c80(...);
-int asdCecMessageIdInit(unsigned char [8]);
+int _ZN12CecMessageIdC1Ev(unsigned char [8]);
 int FUN_002ad8b4(unsigned char [8], unsigned int);
 int nn_cec_CTR_Message_SetExHeaderWithoutCalc(unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_00238c80. */
-/* Supplied declaration required: asdCecMessageIdInit. */
+/* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 /* Supplied declaration required: FUN_002ad8b4. */
 extern unsigned char nn_cec_CTR_MessageId_IsEmpty(unsigned int);
 /* Supplied declaration required: nn_cec_CTR_Message_SetExHeaderWithoutCalc. */
@@ -31,7 +31,7 @@ unsigned int nn_cec_CTR_Message_SetExHeader(unsigned int param_1,unsigned int pa
   unsigned char temp_v8 [8];
   unsigned char temp_v9 [12];
   
-  asdCecMessageIdInit(temp_v7);
+  _ZN12CecMessageIdC1Ev(temp_v7);
   temp_v2 = FUN_00238c80(temp_v9,param_1 + 0x20);
   FUN_002ad8b4(temp_v7,temp_v2);
   FUN_00238c80(temp_v8,param_1 + 0x20);

@@ -1,215 +1,169 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013af10` (_code @ 0x13af10, 0x32c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+/* NON_MATCHING: near (200 rows against 203): same slot walk, fade/loop state machine, constants and calls from the asm; retail indexes the sound-object table with an unsigned compare (movcs/bcs), keeps the table base in r4 (add r9,r4,#0 and sl = base+256 derived from it) and shares the `object->data` free path as a call-free block, ours takes the base from one literal with signed index compares (a u32 index variant moved the rows to 206) */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int asdSoundObjectRegister(unsigned int, int, int);
-int asdSoundObjectFadeOut(unsigned int);
+#define SOUND_OBJECTS 4
+
+#define OBJ_ACTIVE     0x01
+#define OBJ_STARTED    0x02
+#define OBJ_FADE_REQ   0x04
+#define OBJ_FADING     0x08
+
+struct AsdSndObject;
+
+/* One sound object slot, stride 0x78 (observed fields only). */
+struct SoundObject {
+    u8 kind;                   /* 0x00: 0 free, 1/2 in use */
+    u8 pad01[0x43];
+    u32 data;                  /* 0x44: loaded sound data */
+    AsdSndObject *handle;      /* 0x48 */
+    u32 option;                /* 0x4C */
+    s32 mode;                  /* 0x50: 3 halves the sound id, 4 never fades */
+    u8 pad54[4];
+    f32 gainRight;             /* 0x58 */
+    f32 gainLeft;              /* 0x5C */
+    u8 pad60[4];
+    s32 delay;                 /* 0x64 */
+    u32 flags;                 /* 0x68 */
+    u8 pad6C[4];
+    s32 fadeKind;              /* 0x70 */
+    u8 options;                /* 0x74: 2 replace, 4 no loop */
+    u8 soundId;                /* 0x75 */
+    s8 loop;                   /* 0x76 */
+    u8 stereo;                 /* 0x77 */
+};
+
+struct SoundObjectTable {
+    SoundObject object[SOUND_OBJECTS];   /* 0x61978C */
+    u8 pad1E0[0x1E6 - SOUND_OBJECTS * 0x78];
+    s8 enabled;                          /* 0x619972 */
+};
+
+extern SoundObjectTable DAT_0061978c;
+
+s32 jyoucyuGetTableEntry(u32 index);
+s32 FUN_001681a4(AsdSndObject *handle);
 AsdSndObject *asdSoundObjectCreate(u32 data, u32 option, u32 kind, f32 gain0, f32 gain1);
-void FUN_0014375c(AsdSndObject *sound, f32 leftGain, f32 rightGain);
-int FUN_001517b4(int, int);
-int FUN_00152bf8(unsigned int);
-int asdMemFree(void);
-int rt_aeabi_memclr(char *, int);
+void FUN_0014375c(AsdSndObject *handle, f32 leftGain, f32 rightGain);
+s32 asdSoundObjectRegister(AsdSndObject *handle, s32 id, s32 flag);
+s32 asdSoundObjectFadeOut(AsdSndObject *handle);
+s32 asdMemFree(u32 memory);
+s32 FUN_00152bf8(AsdSndObject *handle);
+void rt_aeabi_memclr(void *memory, s32 size);
+s32 FUN_00162ea4(void);
+s32 FUN_001517b4(s32 a, s32 b);
+s32 FUN_00163fd4(s32 a);
 
-extern unsigned char DAT_0061978c; /* 0x61978c */
-extern signed char DAT_00619972; /* 0x619972 */
-
-/* Supplied declaration required: asdSoundObjectRegister. */
-/* Supplied declaration required: asdSoundObjectFadeOut. */
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00152bf8. */
-extern int FUN_00162ea4(void);
-extern int FUN_00163fd4(unsigned int);
-extern int FUN_001681a4(unsigned int);
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-void FUN_0013af10(void)
-
+/* The sound object in slot `index`, or NULL when the index is out of range. */
+static __inline SoundObject *soundObjectAt(s32 index)
 {
-/* irregular: 6 unstructured edge(s); 7 goto(s); 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  char temp_v3;
-  unsigned char *puVar6;
-  unsigned int temp_v4;
-  char *pcVar8;
-  unsigned int temp_v5;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 != 0) {
-    return;
-  }
-  temp_v5 = 0;
-  pcVar8 = (char *)(&DAT_0061978c + temp_v5 * 0x78);
-LAB_0013af58:
-  if (*pcVar8 == '\x02') {
-    if ((*(unsigned int *)(pcVar8 + 0x68) & 1) != 0) {
-      if ((pcVar8[0x74] & 2U) == 0) {
-LAB_0013aff0:
-        temp_v1 = (unsigned int)asdSoundObjectCreate(*(unsigned int *)(pcVar8 + 0x44),
-            *(unsigned int *)(pcVar8 + 0x4c), (unsigned char)pcVar8[0x77] == 1 ? 3 : 1,
-            0.0f, 0.0f);
-        *(unsigned int *)(pcVar8 + 0x48) = temp_v1;
-        FUN_0014375c((AsdSndObject *)temp_v1, *(float *)(pcVar8 + 0x5c),
-            *(float *)(pcVar8 + 0x58));
-        if (*(int *)(pcVar8 + 0x50) != 3) {
-          asdSoundObjectRegister(*(unsigned int *)(pcVar8 + 0x48),pcVar8[0x75],0);
-        }
-        else {
-          asdSoundObjectRegister(*(unsigned int *)(pcVar8 + 0x48),(unsigned char)pcVar8[0x75] >> 1,0);
-        }
-        temp_v4 = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffffe) | 2;
-        goto LAB_0013b178;
-      }
-      temp_v4 = 0;
-      do {
-        puVar6 = &DAT_0061978c + temp_v4 * 0x78;
-        while( 1 ) {
-          temp_v0 = FUN_001681a4(*(unsigned int *)(puVar6 + 0x48));
-          if (temp_v0 != 0) {
-            if (puVar6 == (unsigned char *)0x0) goto LAB_0013afc4;
-            temp_v4 = 0;
-            do {
-              puVar6 = &DAT_0061978c + temp_v4 * 0x78;
-              while( 1 ) {
-                temp_v2 = FUN_001681a4(*(unsigned int *)(puVar6 + 0x48));
-                temp_v0 = 0;
-                if (temp_v2 != 0) {
-                  temp_v0 = *(int *)(puVar6 + 0x50);
-                }
-                if (temp_v2 != 0 && temp_v0 != 4) {
-                  *(unsigned int *)(puVar6 + 0x68) = *(unsigned int *)(puVar6 + 0x68) | 4;
-                  *(unsigned int *)(puVar6 + 0x70) = 0;
-                }
-                temp_v4 = temp_v4 + 1;
-                if ((int)temp_v4 >= 4) goto LAB_0013aff0;
-                if (3 >= temp_v4) break;
-                puVar6 = (unsigned char *)0x0;
-              }
-            } while( 1 );
-          }
-          temp_v4 = temp_v4 + 1;
-          if ((int)temp_v4 >= 4) goto LAB_0013afc4;
-          if (temp_v4 < 4) break;
-          puVar6 = (unsigned char *)0x0;
-        }
-      } while( 1 );
+    if (index >= SOUND_OBJECTS) {
+        return 0;
     }
-    if ((*(unsigned int *)(pcVar8 + 0x68) & 2) != 0) {
-      if (((DAT_00619972 != '\0') || (temp_v0 = FUN_00162ea4(), temp_v0 != 0)) &&
-         (*(int *)(pcVar8 + 0x50) != 4)) {
-        *(unsigned int *)(pcVar8 + 0x68) = *(unsigned int *)(pcVar8 + 0x68) | 4;
-        pcVar8[0x70] = '\0';
-        pcVar8[0x71] = '\0';
-        pcVar8[0x72] = '\0';
-        pcVar8[0x73] = '\0';
-      }
-      if ((*(unsigned int *)(pcVar8 + 0x68) & 4) != 0) {
-        pcVar8[0x70] = '\x03';
-        pcVar8[0x71] = '\0';
-        pcVar8[0x72] = '\0';
-        pcVar8[0x73] = '\0';
-        asdSoundObjectFadeOut(*(unsigned int *)(pcVar8 + 0x48));
-        *(unsigned int *)(pcVar8 + 0x68) = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffff9) | 8;
-      }
-      else {
-        temp_v0 = FUN_001681a4(*(unsigned int *)(pcVar8 + 0x48));
-        if ((temp_v0 == 0) && (*(int *)(pcVar8 + 100) >= 1)) {
-          pcVar8[0x76] = '\x01';
-          temp_v4 = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffff9) | 8;
-LAB_0013b178:
-          *(unsigned int *)(pcVar8 + 0x68) = temp_v4;
-        }
-        else {
-          *(int *)(pcVar8 + 100) = *(int *)(pcVar8 + 100) + 1;
-        }
-      }
+    return &DAT_0061978c.object[index];
+}
+
+/* Releases a finished sound object (data, handle) and clears its slot. */
+static void soundObjectRelease(SoundObject *object, s32 keepLoop)
+{
+    if (object->data != 0) {
+        asdMemFree(object->data);
     }
-    if (((*(unsigned int *)(pcVar8 + 0x68) & 8) != 0) &&
-       (temp_v0 = FUN_001681a4(*(unsigned int *)(pcVar8 + 0x48)), temp_v0 == 0)) {
-      temp_v3 = pcVar8[0x76];
-      if ((pcVar8[0x74] & 4U) != 0) {
-        temp_v3 = '\0';
-      }
-      if (*(int *)(pcVar8 + 0x44) != 0) {
-        asdMemFree();
-      }
-      pcVar8[0x44] = '\0';
-      pcVar8[0x45] = '\0';
-      pcVar8[0x46] = '\0';
-      pcVar8[0x47] = '\0';
-      FUN_00152bf8(*(unsigned int *)(pcVar8 + 0x48));
-      rt_aeabi_memclr(pcVar8,0x78);
-      if (temp_v3 != '\0') {
-        pcVar8[0x76] = '\x01';
-      }
-      pcVar8[0x68] = '\0';
-      pcVar8[0x69] = '\0';
-      pcVar8[0x6a] = '\0';
-      pcVar8[0x6b] = '\0';
-      *pcVar8 = '\0';
+    object->data = 0;
+    FUN_00152bf8(object->handle);
+    rt_aeabi_memclr(object, sizeof(SoundObject));
+    if (keepLoop != 0) {
+        object->loop = 1;
     }
-  }
-  goto LAB_0013b1f0;
-LAB_0013afc4:
-  temp_v4 = 0;
-  while( 1 ) {
-    if (temp_v4 >= 4) {
-      pcVar4 = (char *)0x0;
-    }
-    else {
-      pcVar4 = (char *)(&DAT_0061978c + temp_v4 * 0x78);
-    }
-    if (*pcVar4 == '\x01') break;
-    temp_v4 = temp_v4 + 1;
-    if ((int)temp_v4 >= 4) goto LAB_0013aff0;
-  }
-  if (*(int *)(pcVar8 + 0x44) != 0) {
-    asdMemFree();
-  }
-  pcVar8[0x44] = '\0';
-  pcVar8[0x45] = '\0';
-  pcVar8[0x46] = '\0';
-  pcVar8[0x47] = '\0';
-  rt_aeabi_memclr(pcVar8,0x78);
-  pcVar8[0x68] = '\0';
-  pcVar8[0x69] = '\0';
-  pcVar8[0x6a] = '\0';
-  pcVar8[0x6b] = '\0';
-  *pcVar8 = '\0';
-LAB_0013b1f0:
-  temp_v5 = temp_v5 + 1;
-  if ((int)temp_v5 >= 4) {
-    if (DAT_00619972 != '\x01') {
-      return;
-    }
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_00163fd4(6);
-      if (temp_v0 == 0) {
-        DAT_00619972 = 0;
+    object->flags = 0;
+    object->kind = 0;
+}
+
+/* Per-frame update of the four sound objects: starts pending ones (fading out the others when a
+ * replacement is requested), steps fade-out/loop state and releases finished objects. */
+void FUN_0013af10(void)
+{
+    if (jyoucyuGetTableEntry(1) != 0) {
         return;
-      }
-      return;
     }
-    return;
-  }
-  if (temp_v5 >= 4) {
-    pcVar8 = (char *)0x0;
-  }
-  else {
-    pcVar8 = (char *)(&DAT_0061978c + temp_v5 * 0x78);
-  }
-  goto LAB_0013af58;
+    for (s32 i = 0; i < SOUND_OBJECTS; i++) {
+        SoundObject *object = soundObjectAt(i);
+
+        if (object->kind != 2) {
+            continue;
+        }
+        if ((object->flags & OBJ_ACTIVE) != 0) {
+            s32 start = 1;
+            if ((object->options & 2) != 0) {
+                s32 anyPlaying = 0;
+                for (s32 j = 0; j < SOUND_OBJECTS; j++) {
+                    SoundObject *other = soundObjectAt(j);
+                    if (FUN_001681a4(other->handle) != 0) {
+                        anyPlaying = other != 0;
+                        break;
+                    }
+                }
+                if (anyPlaying) {
+                    for (s32 k = 0; k < SOUND_OBJECTS; k++) {
+                        SoundObject *other = soundObjectAt(k);
+                        if (FUN_001681a4(other->handle) != 0 && other->mode != 4) {
+                            other->flags = other->flags | OBJ_FADE_REQ;
+                            other->fadeKind = 0;
+                        }
+                    }
+                } else {
+                    for (s32 j = 0; j < SOUND_OBJECTS; j++) {
+                        if (soundObjectAt(j)->kind == 1) {
+                            soundObjectRelease(object, 0);
+                            start = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (start == 0) {
+                continue;
+            }
+            object->handle = asdSoundObjectCreate(object->data, object->option, object->stereo == 1 ? 3 : 1, 0.0f, 0.0f);
+            FUN_0014375c(object->handle, object->gainLeft, object->gainRight);
+            if (object->mode == 3) {
+                asdSoundObjectRegister(object->handle, object->soundId >> 1, 0);
+            } else {
+                asdSoundObjectRegister(object->handle, object->soundId, 0);
+            }
+            object->flags = (object->flags & ~OBJ_ACTIVE) | OBJ_STARTED;
+        } else if ((object->flags & OBJ_STARTED) != 0) {
+            if ((DAT_0061978c.enabled != 0 || FUN_00162ea4() != 0) && object->mode != 4) {
+                object->flags = object->flags | OBJ_FADE_REQ;
+                object->fadeKind = 0;
+            }
+            if ((object->flags & OBJ_FADE_REQ) != 0) {
+                object->fadeKind = 3;
+                asdSoundObjectFadeOut(object->handle);
+                object->flags = (object->flags & ~(OBJ_STARTED | OBJ_FADE_REQ)) | OBJ_FADING;
+            } else if (FUN_001681a4(object->handle) == 0 && object->delay >= 1) {
+                object->loop = 1;
+                object->flags = (object->flags & ~(OBJ_STARTED | OBJ_FADE_REQ)) | OBJ_FADING;
+            } else {
+                object->delay = object->delay + 1;
+            }
+        }
+        if ((object->flags & OBJ_FADING) != 0 && FUN_001681a4(object->handle) == 0) {
+            s32 loop = object->loop;
+            if ((object->options & 4) != 0) {
+                loop = 0;
+            }
+            soundObjectRelease(object, loop);
+        }
+    }
+    if (DAT_0061978c.enabled == 1 && FUN_001517b4(9, 2) == 0 && FUN_00163fd4(6) == 0) {
+        DAT_0061978c.enabled = 0;
+    }
 }
 
 } /* extern "C" */

@@ -1,184 +1,267 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00272970` (_code @ 0x272970, 0x320 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: creates and initialises the lmap main state (0x9370 bytes) and starts its calc and draw tasks; written from the decompilation, store order and constant materialisation not compared with retail */
+#include "AsdSDK/AsdDebug.h"
+
+/* One of the 0x88-byte lmap slots; the first three bytes are cleared here. The last slot of the
+ * first array also holds three words that are set separately. */
+struct LmapSlot {
+    /* 0x00 */ u8 flagA;
+    /* 0x01 */ u8 flagB;
+    /* 0x02 */ u8 flagC;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u32 word04;
+    /* 0x08 */ u32 word08;
+    /* 0x0C */ u32 word0C;
+    /* 0x10 */ u8 unk10[0x78];
+};
+
+struct LmapMainState {
+    /* 0x0000 */ u32 process;
+    /* 0x0004 */ u32 drawTask;
+    /* 0x0008 */ u8 unk08;
+    /* 0x0009 */ u8 unk09;
+    /* 0x000A */ u8 unk0A;
+    /* 0x000B */ u8 unk0B;
+    /* 0x000C */ u32 unk0C;
+    /* 0x0010 */ u32 unk10;
+    /* 0x0014 */ u8 unk0014[0x2C];
+    /* 0x0040 */ u32 mode;
+    /* 0x0044 */ u8 unk0044[0x4];
+    /* 0x0048 */ u32 unk48;
+    /* 0x004C */ u16 unk4C;
+    /* 0x004E */ u16 unk4E;
+    /* 0x0050 */ u8 unk0050[0x74];
+    /* 0x00C4 */ f32 scaleA;
+    /* 0x00C8 */ f32 scaleB;
+    /* 0x00CC */ u32 unkCC;
+    /* 0x00D0 */ u32 unkD0;
+    /* 0x00D4 */ u32 unkD4;
+    /* 0x00D8 */ u8 unk00D8[0x4];
+    /* 0x00DC */ u32 unkDC;
+    /* 0x00E0 */ u8 unkE0;
+    /* 0x00E1 */ u8 unkE1;
+    /* 0x00E2 */ u8 unk00E2[0x2];
+    /* 0x00E4 */ u32 unkE4;
+    /* 0x00E8 */ f32 unkE8;
+    /* 0x00EC */ u32 unkEC;
+    /* 0x00F0 */ u32 unkF0;
+    /* 0x00F4 */ u8 object;
+    /* 0x00F5 */ u8 unk00F5[0x8E3];
+    /* 0x09D8 */ u8 unk9D8;
+    /* 0x09D9 */ u8 unk09D9[0x3];
+    /* 0x09DC */ u32 unk9DC;
+    /* 0x09E0 */ u8 unk09E0[0x8];
+    /* 0x09E8 */ u8 unk9E8;
+    /* 0x09E9 */ u8 unk09E9[0x3];
+    /* 0x09EC */ u32 unk9EC;
+    /* 0x09F0 */ u32 unk9F0;
+    /* 0x09F4 */ u32 unk9F4;
+    /* 0x09F8 */ u32 unk9F8;
+    /* 0x09FC */ u32 unk9FC;
+    /* 0x0A00 */ u32 unkA00;
+    /* 0x0A04 */ u8 unk0A04[0x28];
+    /* 0x0A2C */ u32 unkA2C;
+    /* 0x0A30 */ u32 unkA30;
+    /* 0x0A34 */ u32 unkA34;
+    /* 0x0A38 */ u32 unkA38;
+    /* 0x0A3C */ u8 unk0A3C[0xC];
+    /* 0x0A48 */ u32 unkA48;
+    /* 0x0A4C */ u32 unkA4C;
+    /* 0x0A50 */ u32 unkA50;
+    /* 0x0A54 */ u32 unkA54[0x20];
+    /* 0x0AD4 */ u8 unkAD4;
+    /* 0x0AD5 */ u8 unk0AD5[0x3];
+    /* 0x0AD8 */ u32 unkAD8;
+    /* 0x0ADC */ u32 unkADC;
+    /* 0x0AE0 */ u32 unkAE0;
+    /* 0x0AE4 */ u32 unkAE4;
+    /* 0x0AE8 */ u8 unk0AE8[0x90];
+    /* 0x0B78 */ LmapSlot slotsA[0x80];
+    /* 0x4F78 */ u8 unk4F78[0xC];
+    /* 0x4F84 */ LmapSlot slotsB[0x7F];   /* the clearing loop runs to 0x80: the last entry's flags are at 0x92FC */
+    /* 0x92FC */ u8 unk92FC[4];
+    /* 0x9300 */ u32 unk9300;
+    /* 0x9304 */ f32 unk9304;
+    /* 0x9308 */ f32 unk9308;
+    /* 0x930C */ f32 unk930C;
+    /* 0x9310 */ u8 unk9310[0x44];
+    /* 0x9354 */ u32 unk9354;
+    /* 0x9358 */ u32 unk9358;
+    /* 0x935C */ u32 unk935C;
+    /* 0x9360 */ u8 unk9360;
+    /* 0x9361 */ u8 unk9361;
+    /* 0x9362 */ u8 unk9362;
+    /* 0x9363 */ u8 unk9363;
+    /* 0x9364 */ u8 unk9364;
+    /* 0x9365 */ u8 unk9365;
+    /* 0x9366 */ u8 unk9366;
+    /* 0x9367 */ u8 unk9367;
+    /* 0x9368 */ u8 unk9368;
+    /* 0x9369 */ u8 unk9369;
+    /* 0x936A */ u8 unk936A;
+    /* 0x936B */ u8 unk936B[0x1];
+    /* 0x936C */ u32 handleRegistry;
+};
+
+typedef char LmapMainStateSize[sizeof(LmapMainState) == 0x9370 ? 1 : -1];
+
+/* The lmap scene block: camera limits and clip distances. */
+struct LmapScene {
+    /* 0x000 */ u8 unk000[0x1C];
+    /* 0x01C */ f32 minX;
+    /* 0x020 */ f32 minXStep;
+    /* 0x024 */ f32 minZ;
+    /* 0x028 */ f32 unk28;
+    /* 0x02C */ f32 unk2C;
+    /* 0x030 */ f32 unk30;
+    /* 0x034 */ f32 unk34;
+    /* 0x038 */ f32 unk38;
+    /* 0x03C */ f32 unk3C;
+    /* 0x040 */ u8 unk040[0xC];
+    /* 0x04C */ f32 fovA;
+    /* 0x050 */ f32 fovB;
+    /* 0x054 */ u8 unk054[0x108];
+    /* 0x15C */ f32 nearClip;
+    /* 0x160 */ f32 farClip;
+};
+
+struct LmapGameBlock {
+    /* 0x000 */ u8 unk000[0x7C4];
+    /* 0x7C4 */ u8 unk7C4;
+    /* 0x7C5 */ u8 unk7C5[0xE0B];
+    /* 0x15D0 */ u32 unk15D0;
+};
 
 extern "C" {
+extern u32 g_handleRegistry;
+extern LmapMainState *g_lmapMainState;
+extern LmapScene *g_lmapScene;
+extern u8 DAT_005f161d;
+extern u8 DAT_005f185b;
 
-int asdProcessCreateSimple(...);
-int taskCreateDraw(...);
-int asdMemoryAllocTracked(...);
-int FUN_002442ac(...);
-int FUN_002c23cc(...);
-int FUN_00482ab0(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char LAB_00272d14; /* 0x272d14 */
-extern unsigned char LAB_00272d24; /* 0x272d24 */
-extern int FUN_00276264(...); /* 0x276264 */
-extern int FUN_002bc62c(...); /* 0x2bc62c */
-extern unsigned char LAB_00315cf4; /* 0x315cf4 */
-extern unsigned char LAB_0033feb4; /* 0x33feb4 */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned int *g_lmapMainState; /* 0x580238 */
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f161d; /* 0x5f161d */
-extern unsigned char DAT_005f185b; /* 0x5f185b */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_002442ac. */
-/* Supplied declaration required: FUN_002c23cc. */
-/* Supplied declaration required: FUN_00482ab0. */
-
+void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
+LmapGameBlock *gameFlagsGetBlock(void);
+void FUN_002c23cc(s32 value);
+void FUN_00482ab0(void *object);
+void FUN_002442ac(void);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 first, u32 second,
+                           void *update, void *end, u32 work);
+u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
+                   void *update, void *end, u32 work, u32 parent);
+s32 FUN_00276264(u32 handle);
+s32 FUN_002bc62c(u32 handle);
+void lmapRequest(u32 handle);
+void FUN_0033feb4(u32 handle);
 
 void FUN_00272970(void)
-
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar6;
-  unsigned char *puVar7;
-  int temp_v3;
-  
-  puVar3 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x9370,1);
-  g_lmapMainState = puVar3;
-  temp_v1 = gameFlagsGetBlock();
-  FUN_002c23cc(1);
-  *(unsigned char *)((int)puVar3 + 9) = 0;
-  *(unsigned char *)((int)puVar3 + 10) = 0;
-  *(unsigned char *)((int)puVar3 + 0xb) = 0;
-  puVar3[3] = 0;
-  puVar3[4] = 0;
-  puVar2 = g_lmapMainState;
-  if (g_lmapMainState[0x33] != 0) {
-    g_lmapMainState[0x33] = 0;
-    puVar2[0x34] = 0;
-    puVar2[0x35] = 0;
-  }
-  puVar3[0x32] = 0x3f800000;
-  puVar3[0x31] = 0x3f800000;
-  puVar3[0x10] = 0x65;
-  *(unsigned short *)(puVar3 + 0x13) = 0;
-  *(unsigned short *)((int)puVar3 + 0x4e) = 0;
-  puVar3[0x12] = 1;
-  temp_v3 = g_lmapScene;
-  *(unsigned int *)(g_lmapScene + 0x1c) = 0xc40a8000;
-  *(unsigned int *)(temp_v3 + 0x20) = 0x3c23d70a;
-  *(unsigned int *)(temp_v3 + 0x24) = 0xc5956000;
-  *(unsigned int *)(temp_v3 + 0x28) = 0xc40a8000;
-  *(unsigned int *)(temp_v3 + 0x2c) = 0x3c23d70a;
-  *(unsigned int *)(temp_v3 + 0x30) = *(unsigned int *)(temp_v3 + 0x24);
-  *(unsigned int *)(temp_v3 + 0x34) = 0xc40a8000;
-  *(unsigned int *)(temp_v3 + 0x38) = 0x3c23d70a;
-  *(unsigned int *)(temp_v3 + 0x3c) = *(unsigned int *)(temp_v3 + 0x24);
-  *(unsigned int *)(temp_v3 + 0x4c) = 0x43340000;
-  *(unsigned int *)(temp_v3 + 0x50) = 0x43340000;
-  *(unsigned int *)(temp_v3 + 0x15c) = 0x447a0000;
-  *(unsigned int *)(temp_v3 + 0x160) = 0x453b8000;
-  puVar3[0x277] = 0;
-  FUN_00482ab0(puVar3 + 0x3d);
-  puVar3[0x37] = 0;
-  *(unsigned char *)(puVar3 + 0x38) = 0;
-  puVar3[0x292] = 0;
-  puVar3[0x293] = 0;
-  puVar3[0x294] = 0;
-  puVar3[0x24c0] = 0;
-  puVar3[0x24c1] = 0x42c80000;
-  puVar3[0x24c2] = 0x469c4000;
-  puVar3[0x24c3] = 0x41200000;
-  puVar3[0x27b] = 0;
-  puVar3[0x27c] = 0;
-  puVar3[0x27d] = 0;
-  puVar3[0x27e] = 0;
-  puVar3[0x27f] = 0;
-  puVar3[0x280] = 0;
-  puVar3[0x28b] = 0;
-  puVar3[0x28c] = 0;
-  puVar3[0x28d] = 0;
-  puVar3[0x28e] = 0;
-  puVar3[0x2b6] = 0;
-  puVar3[0x2b7] = 0;
-  puVar3[0x13bd] = 0;
-  puVar3[0x2b9] = 0;
-  puVar3[0x13be] = 0;
-  temp_v2 = 0;
-  *(unsigned char *)(puVar3 + 0x2b5) = 0;
-  temp_v3 = 0;
-  do {
-    temp_v2 = temp_v2 + 2;
-    puVar3[temp_v3 + 0x295] = 0;
-    puVar3[temp_v3 + 0x296] = 0;
-    temp_v3 = temp_v3 + 2;
-  } while (temp_v2 < 0x20);
-  temp_v2 = 0x80;
-  temp_v3 = 0;
-  do {
-    temp_v2 = temp_v2 - 1;
-    *(unsigned char *)(puVar3 + temp_v3 * 0x22 + 0x2de) = 0;
-    *(unsigned char *)((int)puVar3 + temp_v3 * 0x88 + 0xb79) = 0;
-    *(unsigned char *)((int)puVar3 + temp_v3 * 0x88 + 0xb7a) = 0;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v2 != 0);
-  temp_v3 = 0;
-  temp_v2 = 0x80;
-  do {
-    temp_v2 = temp_v2 - 1;
-    temp_v0 = temp_v3 * 0x88;
-    *(unsigned char *)(puVar3 + temp_v3 * 0x22 + 0x13e1) = 0;
-    *(unsigned char *)((int)puVar3 + temp_v3 * 0x88 + 0x4f85) = 0;
-    temp_v3 = temp_v3 + 1;
-    *(unsigned char *)((int)puVar3 + temp_v0 + 0x4f86) = 0;
-  } while (temp_v2 != 0);
-  *(unsigned char *)(puVar3 + 0x276) = 0;
-  *(unsigned char *)(puVar3 + 0x27a) = 0;
-  puVar3[0x24d5] = 0;
-  *(unsigned char *)((int)puVar3 + 0xe1) = 0;
-  puVar3[0x39] = 0x38;
-  puVar3[0x3a] = 0x42200000;
-  puVar3[0x24d7] = 0;
-  puVar3[0x24d6] = 0;
-  FUN_002442ac();
-  *(unsigned char *)(temp_v1 + 0x7c4) = 0;
-  *(unsigned int *)(temp_v1 + 0x15d0) = 0;
-  DAT_005f185b = 0;
-  DAT_005f161d = 0;
-  *(unsigned char *)(puVar3 + 0x24d8) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9361) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9362) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9363) = 0;
-  *(unsigned char *)(puVar3 + 0x24d9) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9365) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9366) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9367) = 0;
-  *(unsigned char *)(puVar3 + 0x24da) = 0;
-  *(unsigned char *)((int)puVar3 + 0x9369) = 0;
-  *(unsigned char *)((int)puVar3 + 0x936a) = 0;
-  puVar3[0x3c] = 0;
-  puVar3[0x3b] = 0;
-  puVar3[0x24db] = g_handleRegistry;
-  puVar3[0x2b8] = 0;
-  puVar3[0x13bf] = 0;
-  *(unsigned char *)(puVar3 + 2) = 0;
-  puVar6 = &LAB_00272d14;
-  asdProcessCreateSimple(&LAB_00272d14,4,0,0,FUN_00276264,&LAB_00315cf4,0);
-  *puVar3 = (unsigned int)puVar6;
-  puVar7 = &LAB_00272d24;
-  taskCreateDraw(&LAB_00272d24,0x72,0,0,FUN_002bc62c,&LAB_0033feb4,0,puVar6);
-  puVar3[1] = (unsigned int)puVar7;
-  return;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp", 732);
+    LmapMainState *state = static_cast<LmapMainState *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(LmapMainState), 1));
+    g_lmapMainState = state;
+    LmapGameBlock *gameBlock = gameFlagsGetBlock();
+    FUN_002c23cc(1);
+    state->unk09 = 0;
+    state->unk0A = 0;
+    state->unk0B = 0;
+    state->unk0C = 0;
+    state->unk10 = 0;
+    if (g_lmapMainState->unkCC != 0) {
+        g_lmapMainState->unkCC = 0;
+        g_lmapMainState->unkD0 = 0;
+        g_lmapMainState->unkD4 = 0;
+    }
+    state->scaleB = 1.0f;
+    state->scaleA = 1.0f;
+    state->mode = 0x65;
+    state->unk4C = 0;
+    state->unk4E = 0;
+    state->unk48 = 1;
+
+    LmapScene *scene = g_lmapScene;
+    scene->minX = -554.0f;
+    scene->minXStep = 0.01f;
+    scene->minZ = -4780.0f;
+    scene->unk28 = -554.0f;
+    scene->unk2C = 0.01f;
+    scene->unk30 = scene->minZ;
+    scene->unk34 = -554.0f;
+    scene->unk38 = 0.01f;
+    scene->unk3C = scene->minZ;
+    scene->fovA = 180.0f;
+    scene->fovB = 180.0f;
+    scene->nearClip = 1000.0f;
+    scene->farClip = 3000.0f;
+
+    state->unk9DC = 0;
+    FUN_00482ab0(&state->object);
+    state->unkDC = 0;
+    state->unkE0 = 0;
+    state->unkA48 = 0;
+    state->unkA4C = 0;
+    state->unkA50 = 0;
+    state->unk9300 = 0;
+    state->unk9304 = 100.0f;
+    state->unk9308 = 20000.0f;
+    state->unk930C = 10.0f;
+    state->unk9EC = 0;
+    state->unk9F0 = 0;
+    state->unk9F4 = 0;
+    state->unk9F8 = 0;
+    state->unk9FC = 0;
+    state->unkA00 = 0;
+    state->unkA2C = 0;
+    state->unkA30 = 0;
+    state->unkA34 = 0;
+    state->unkA38 = 0;
+    state->unkAD8 = 0;
+    state->unkADC = 0;
+    state->slotsA[0x7F].word04 = 0;
+    state->unkAE4 = 0;
+    state->slotsA[0x7F].word08 = 0;
+    state->unkAD4 = 0;
+    for (s32 i = 0; i < 0x20; i++)
+        state->unkA54[i] = 0;
+    for (s32 i = 0; i < 0x80; i++) {
+        state->slotsA[i].flagA = 0;
+        state->slotsA[i].flagB = 0;
+        state->slotsA[i].flagC = 0;
+    }
+    for (s32 i = 0; i < 0x80; i++) {
+        state->slotsB[i].flagA = 0;
+        state->slotsB[i].flagB = 0;
+        state->slotsB[i].flagC = 0;
+    }
+    state->unk9D8 = 0;
+    state->unk9E8 = 0;
+    state->unk9354 = 0;
+    state->unkE1 = 0;
+    state->unkE4 = 0x38;
+    state->unkE8 = 40.0f;
+    state->unk935C = 0;
+    state->unk9358 = 0;
+    FUN_002442ac();
+    gameBlock->unk7C4 = 0;
+    gameBlock->unk15D0 = 0;
+    DAT_005f185b = 0;
+    DAT_005f161d = 0;
+    state->unk9360 = 0;
+    state->unk9361 = 0;
+    state->unk9362 = 0;
+    state->unk9363 = 0;
+    state->unk9364 = 0;
+    state->unk9365 = 0;
+    state->unk9366 = 0;
+    state->unk9367 = 0;
+    state->unk9368 = 0;
+    state->unk9369 = 0;
+    state->unk936A = 0;
+    state->unkF0 = 0;
+    state->unkEC = 0;
+    state->handleRegistry = g_handleRegistry;
+    state->unkAE0 = 0;
+    state->slotsA[0x7F].word0C = 0;
+    state->unk08 = 0;
+    state->process = asdProcessCreateSimple("LMAP C", 4, 0, 0, (void *)FUN_00276264, (void *)lmapRequest, 0);
+    state->drawTask = taskCreateDraw("LMAP U", 0x72, 0, 0, (void *)FUN_002bc62c, (void *)FUN_0033feb4, 0, state->process);
 }
 
 } /* extern "C" */

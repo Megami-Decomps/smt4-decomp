@@ -1,97 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bf6e0` (_code @ 0x4bf6e0, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the unit index in s17 (one vcvt) across all calls, builds the scale table addresses as (step + 3) * 4 instead of folding the +12 into the vldr, and orders the switch targets differently; the arithmetic and calls are the same. */
+#include "common.h"
+
+namespace {
+/* A battle unit record (only the fields the damage scale reads). */
+struct BtlUnitView {
+    /* 0x000 */ u8 unk000[0x74];
+    /* 0x074 */ s32 affinity[12];      /* indexed by attack kind (7..11 used): -3..3 resist/weak steps */
+    /* 0x0a4 */ s32 buffA4;
+    /* 0x0a8 */ s32 buffA8;
+    /* 0x0ac */ s32 buffAC;
+    /* 0x0b0 */ s32 buffB0;
+    /* 0x0b4 */ s32 buffB4;
+    /* 0x0b8 */ s32 buffB8;
+    /* 0x0bc */ s32 buffBC;
+    /* 0x0c0 */ u8 unk0c0[0x11c - 0xc0];
+    /* 0x11c */ s32 buff11C;
+    /* 0x120 */ u8 unk120[0x274 - 0x120];
+    /* 0x274 */ u16 statusFlags;
+};
+
+struct BtlCommandView {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 kind;
+    /* 0x04 */ u8 unk04[0x30];
+};
+}
 
 extern "C" {
+extern const f32 DAT_0057a6a8[7];       /* damage scale by affinity step, attacker side */
+extern const f32 DAT_0057a6c4[7];       /* damage scale by affinity step, defender side */
+extern u32 g_btlScriptUnit;
+void *btlGetMainState(void);
+BtlUnitView *FUN_003f0e20(void *state, s32 unit);
+u32 *btlUnitGet(u32 handle);
+void FUN_003e8bb0(BtlCommandView *command, void *state, BtlUnitView *unit);
 
-int btlGetMainState(void);
-int FUN_003e8bb0(unsigned char [68], unsigned int, int);
-int FUN_003f0e20(...);
-
-/* stack frame of param_1: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp5E; /* 0x5e: local_5e */
-} param_1_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int *btlUnitGet(unsigned int);
-
-
-void FUN_004bf6e0(int param_1)
-
+/* The damage multiplier of attack kind `kind` (7..11) against `unit`: the affinity step scale combined with
+   the attacker's and defender's buffs. */
+f32 FUN_004bf6e0(s32 kind, f32 unitValue)
 {
-/* irregular: irregular input(s): in_s0; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  int temp_v3;
-  float in_s0;
-  int temp_v4;
-  unsigned char temp_v5 [68];
-  
-  temp_v2 = (int)in_s0;
-  temp_v0 = btlGetMainState();
-  FUN_003f0e20(temp_v0,(int)in_s0);
-  temp_v1 = btlGetMainState();
-  FUN_003f0e20(temp_v1,temp_v2);
-  temp_v3 = temp_v2;
-  switch(param_1) {
-  case 7:
-  case 8:
-    if ((*(unsigned short *)(temp_v1 + 0x274) & 0x10) != 0) {
-      temp_v0 = btlGetMainState();
-      FUN_003f0e20(temp_v0,temp_v2);
+    s32 unit = (s32)unitValue;
+    f32 scale = 1.0f;
+    BtlUnitView *defender = FUN_003f0e20(btlGetMainState(), unit);
+    s32 step = 0;
+    if (defender != NULL) {
+        step = defender->affinity[kind];
     }
-    break;
-  case 9:
-    temp_v0 = btlGetMainState();
-    FUN_003f0e20(temp_v0,temp_v2);
-    break;
-  case 10:
-    break;
-  case 0xb:
-    temp_v0 = btlGetMainState();
-    FUN_003f0e20(temp_v0,temp_v2);
-  }
-  puVar3 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
-  if ((*puVar3 & 0x200) == 0) {
-    if (param_1 != 8) {
-      if (param_1 == 7) {
-        temp_v2 = temp_v3;
-        temp_v0 = btlGetMainState();
-        FUN_003f0e20(temp_v0,temp_v3);
-        temp_v0 = btlGetMainState();
-        FUN_003f0e20(temp_v0,temp_v2);
-      }
+    s32 inverse = -step;
+    BtlUnitView *target = FUN_003f0e20(btlGetMainState(), unit);
+    switch (kind) {
+    case 7:
+    case 8:
+        scale = DAT_0057a6a8[step + 3];
+        if ((target->statusFlags & 0x10) != 0) {
+            scale *= 1.2f;
+            BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buffBC > 0) {
+                scale *= 10.0f;
+            }
+        }
+        break;
+    case 9: {
+        scale = DAT_0057a6c4[inverse + 3];
+        BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+        s32 weak = 0;
+        if (other != NULL) {
+            weak = other->buffA4;
+        }
+        scale = DAT_0057a6c4[3 - weak] * scale;
+        break;
     }
-    else {
-      temp_v4 = temp_v3;
-      temp_v0 = btlGetMainState();
-      FUN_003f0e20(temp_v0,temp_v3);
-      temp_v2 = temp_v4;
-      temp_v0 = btlGetMainState();
-      FUN_003f0e20(temp_v0,temp_v4);
-      temp_v3 = temp_v2;
-      temp_v0 = btlGetMainState();
-      FUN_003f0e20(temp_v0,temp_v2);
-      temp_v2 = btlGetMainState();
-      FUN_003f0e20(temp_v2,temp_v3);
-      temp_v3 = 0;
-      if (temp_v2 != 0) {
-        temp_v3 = *(int *)(temp_v2 + 0x11c);
-      }
-      if ((temp_v2 != 0 && temp_v3 != 0) && -1 < temp_v3) {
-        temp_v0 = btlGetMainState();
-        FUN_003e8bb0(temp_v5,temp_v0,temp_v1);
-      }
+    case 10:
+        scale = DAT_0057a6a8[inverse + 3];
+        break;
+    case 11: {
+        scale = DAT_0057a6c4[step + 3];
+        BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+        s32 strong = 0;
+        if (other != NULL) {
+            strong = other->buffA4;
+        }
+        scale = DAT_0057a6c4[strong + 3] * scale;
+        break;
     }
-  }
-  return;
+    }
+    if ((*btlUnitGet(g_btlScriptUnit) & 0x200) == 0) {
+        if (kind == 8) {
+            BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buffB0 > 0) {
+                scale *= 2.2f;
+            }
+            other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buffA8 > 0) {
+                scale *= 1.25f;
+            }
+            other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buffB8 > 0) {
+                scale *= 3.0f;
+            }
+            other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buff11C > 0) {
+                BtlCommandView command;
+                FUN_003e8bb0(&command, btlGetMainState(), target);
+                if (command.kind == 2 || command.kind == 3 || command.kind == 20) {
+                    scale *= 2.2f;
+                }
+            }
+        } else if (kind == 7) {
+            BtlUnitView *other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buffAC > 0) {
+                scale *= 2.2f;
+            }
+            other = FUN_003f0e20(btlGetMainState(), unit);
+            if (other != NULL && other->buffB4 > 0) {
+                scale *= 3.0f;
+            }
+        }
+    }
+    return scale;
 }
 
 } /* extern "C" */

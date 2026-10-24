@@ -1,4 +1,3 @@
-/* NON_MATCHING: inline render-stack push schedules its new slot address differently. */
 #include "battle/Talk/btlTalkBustUp.h"
 #include "camp/RenderCtx.h"
 

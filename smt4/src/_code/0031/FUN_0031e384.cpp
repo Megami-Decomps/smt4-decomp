@@ -1,287 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031e384` (_code @ 0x31e384, 0x3c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies its constant direction tables onto the stack with integer ldm/stm in six pieces (mine uses vldmia pairs), reaches the work pointer and step counter through one base symbol (+4/+0x1c), and schedules the float window tests differently; the sequence logic is the same. */
+#include "common.h"
+
+namespace {
+/* The work block the toggle flag lives in (only the flags byte at 0x24baf is used). */
+struct CheatFlagsWork {
+    /* 0x00000 */ u8 unk00000[0x24baf];
+    /* 0x24baf */ u8 flags;              /* bit 1: the hidden mode */
+};
+}
 
 extern "C" {
+extern CheatFlagsWork *DAT_0043e2ac;
+extern s32 DAT_0043e2c4;                 /* how many steps of the input sequence have been entered */
+s32 FUN_002c15fc(u32 button);
+s32 padIsButtonPressed(u32 button);
+s32 padIsButtonRepeat(u32 button);
+void FUN_0027f958(f32 *angle, u8 buffer[16], s32 stick);
+s32 FUN_00281e34(void);
+void FUN_002bf810(u32 sound);
 
-int FUN_0027f958(float *, unsigned char [16], int);
-int FUN_00281e34(void);
-int FUN_002bf810(int);
-
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} void_stack;
-
-extern int DAT_0043e2ac; /* 0x43e2ac */
-extern int DAT_0043e2c4; /* 0x43e2c4 */
-
-/* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_00281e34. */
-extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_002bf810. */
-extern int padIsButtonPressed(unsigned int);
-extern int FUN_002c15fc(unsigned int);
-
-
-unsigned char FUN_0031e384(void)
-
+/* Abandons the sequence when any button outside it is pressed or held. */
+static s32 sequenceBroken(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10 [6];
-  unsigned int temp_v11;
-  unsigned int uStack_8c;
-  unsigned int uStack_88;
-  unsigned int uStack_84;
-  unsigned int uStack_80;
-  unsigned int uStack_7c;
-  unsigned int uStack_78;
-  unsigned int uStack_74;
-  unsigned int temp_v12;
-  unsigned int uStack_6c;
-  unsigned int uStack_68;
-  float afStack_64 [4];
-  unsigned int uStack_54;
-  unsigned int uStack_50;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int temp_v13;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int temp_v14;
-  float temp_v15;
-  unsigned char temp_v16 [16];
-  
-  temp_v10[0] = 45.0f;
-  temp_v10[1] = 90.0f;
-  temp_v10[2] = 135.0f;
-  temp_v10[3] = 180.0f;
-  temp_v10[4] = 225.0f;
-  temp_v10[5] = 270.0f;
-  temp_v11 = 0x43870000;
-  uStack_8c = 0x43610000;
-  uStack_88 = 0x43340000;
-  uStack_84 = 0x43070000;
-  uStack_80 = 0x42b40000;
-  uStack_7c = 0x42340000;
-  uStack_78 = 0x43870000;
-  uStack_74 = 0x43610000;
-  temp_v12 = 0x43340000;
-  uStack_6c = 0x43070000;
-  uStack_68 = 0x42b40000;
-  afStack_64[0] = 45.0f;
-  afStack_64[1] = 45.0f;
-  afStack_64[2] = 90.0f;
-  afStack_64[3] = 135.0f;
-  uStack_54 = 0x43340000;
-  uStack_50 = 0x43610000;
-  uStack_4c = 0x43870000;
-  uStack_48 = 0x42340000;
-  uStack_44 = 0x42b40000;
-  temp_v14 = 0x43870000;
-  temp_v13 = 0x43070000;
-  uStack_3c = 0x43340000;
-  uStack_38 = 0x43610000;
-  temp_v0 = *(unsigned char *)(DAT_0043e2ac + 0x24baf);
-  temp_v1 = FUN_002c15fc(7);
-  if (temp_v1 == 0) {
-    DAT_0043e2c4 = 0;
-    return temp_v0;
-  }
-  temp_v1 = FUN_002c15fc(8);
-  if (temp_v1 == 0) {
-    DAT_0043e2c4 = 0;
-    return temp_v0;
-  }
-  if (DAT_0043e2c4 < 0xc) {
-    FUN_0027f958(&temp_v15,temp_v16,0);
-    FUN_00281e34();
-    temp_v15 = temp_v15 * 57.295776f;
-    temp_v8 = -1.0f;
-    if (temp_v15 < 0.0f) {
-      temp_v15 = temp_v15 + 360.0f;
+    return padIsButtonRepeat(2) != 0 || padIsButtonRepeat(1) != 0 || padIsButtonRepeat(9) != 0 ||
+           padIsButtonRepeat(10) != 0 || padIsButtonRepeat(0) != 0;
+}
+
+/* Watches for the hidden-mode input: with both shoulder buttons held, the stick is swept through twelve of
+   the six 45-degree directions in order, then three buttons are pressed in turn; completing it toggles bit 1
+   of the flags byte (the sweep runs the other way round while the bit is set) and plays a sound. Returns the
+   flags byte as it was on entry. */
+u8 FUN_0031e384(void)
+{
+    const f32 directions[6] = { 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f };
+    /* The direction expected at each of the twelve steps, for the normal and the reversed sweep. */
+    const f32 forward[12] = { 270.0f, 225.0f, 180.0f, 135.0f, 90.0f, 45.0f,
+                              270.0f, 225.0f, 180.0f, 135.0f, 90.0f, 45.0f };
+    const f32 reverse[12] = { 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f,
+                              45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f };
+    u8 flags = DAT_0043e2ac->flags;
+    if (FUN_002c15fc(7) == 0) {
+        DAT_0043e2c4 = 0;
+        return flags;
     }
-    if ((temp_v0 & 2) != 0) {
-      temp_v6 = afStack_64[DAT_0043e2c4 + 1];
-      temp_v7 = afStack_64[DAT_0043e2c4];
+    if (FUN_002c15fc(8) == 0) {
+        DAT_0043e2c4 = 0;
+        return flags;
     }
-    else {
-      temp_v6 = temp_v10[DAT_0043e2c4 + 6];
-      temp_v7 = temp_v10[DAT_0043e2c4 + 5];
-    }
-    temp_v1 = 0;
-    temp_v5 = temp_v8;
-    if (DAT_0043e2c4 >= 1) {
-      do {
-        temp_v9 = temp_v10[temp_v1] - 10.0f;
-        temp_v3 = temp_v9 == temp_v15;
-        temp_v4 = temp_v15 <= temp_v9;
-        if (!temp_v4 || temp_v3) {
-          temp_v9 = temp_v10[temp_v1] + 10.0f;
-          temp_v3 = temp_v15 == temp_v9;
-          temp_v4 = temp_v9 <= temp_v15;
+    if (DAT_0043e2c4 < 12) {
+        f32 angle;
+        u8 buffer[16];
+        FUN_0027f958(&angle, buffer, 0);
+        FUN_00281e34();
+        angle = angle * 57.295776f;
+        if (angle < 0.0f) {
+            angle = angle + 360.0f;
         }
-        if (!temp_v4 || temp_v3) {
-          temp_v5 = temp_v10[temp_v1];
-          if (temp_v10[temp_v1] == temp_v7) {
-            temp_v5 = temp_v8;
-          }
-          break;
+        const f32 *sequence = (flags & 2) != 0 ? reverse : forward;
+        f32 expected = sequence[DAT_0043e2c4];
+        f32 held = sequence[DAT_0043e2c4 - 1];
+        f32 found = -1.0f;
+        for (s32 i = 0; i < 6; i++) {
+            if (directions[i] - 10.0f <= angle && angle <= directions[i] + 10.0f) {
+                found = directions[i];
+                if (DAT_0043e2c4 >= 1 && found == held) {
+                    found = -1.0f;
+                }
+                break;
+            }
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-    }
-    else {
-      do {
-        if ((temp_v10[temp_v1] - 10.0f <= temp_v15) && (temp_v15 <= temp_v10[temp_v1] + 10.0f)) {
-          temp_v5 = temp_v10[temp_v1];
-          break;
+        if (found < 0.0f) {
+            return flags;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-    }
-    if (temp_v5 < 0.0f) {
-      return temp_v0;
-    }
-    if (temp_v6 != temp_v5) {
-      DAT_0043e2c4 = 0;
-      return temp_v0;
-    }
-    DAT_0043e2c4 = DAT_0043e2c4 + 1;
-    return temp_v0;
-  }
-  if (DAT_0043e2c4 == 0xc) {
-    temp_v1 = padIsButtonPressed(10);
-    if (temp_v1 == 0) {
-      temp_v1 = padIsButtonRepeat(2);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(1);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(9);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(10);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(0);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-    }
-    else {
-      DAT_0043e2c4 = DAT_0043e2c4 + 1;
-    }
-  }
-  else if (DAT_0043e2c4 != 0xd) {
-    if (DAT_0043e2c4 == 0xe) {
-      temp_v1 = padIsButtonPressed(6);
-      if (temp_v1 != 0) {
+        if (expected != found) {
+            DAT_0043e2c4 = 0;
+            return flags;
+        }
         DAT_0043e2c4 = DAT_0043e2c4 + 1;
-      }
-      else {
-        temp_v1 = padIsButtonRepeat(2);
-        if (temp_v1 != 0) {
-          DAT_0043e2c4 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padIsButtonRepeat(1);
-        if (temp_v1 != 0) {
-          DAT_0043e2c4 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padIsButtonRepeat(9);
-        if (temp_v1 != 0) {
-          DAT_0043e2c4 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padIsButtonRepeat(10);
-        if (temp_v1 != 0) {
-          DAT_0043e2c4 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padIsButtonRepeat(0);
-        if (temp_v1 != 0) {
-          DAT_0043e2c4 = 0;
-          return temp_v0;
-        }
-      }
+        return flags;
     }
-  }
-  else {
-    temp_v1 = padIsButtonPressed(5);
-    if (temp_v1 == 0) {
-      temp_v1 = padIsButtonRepeat(2);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(1);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(9);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(10);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padIsButtonRepeat(0);
-      if (temp_v1 != 0) {
-        DAT_0043e2c4 = 0;
-        return temp_v0;
-      }
+    if (DAT_0043e2c4 == 12) {
+        if (padIsButtonPressed(10) == 0) {
+            if (sequenceBroken()) {
+                DAT_0043e2c4 = 0;
+                return flags;
+            }
+        } else {
+            DAT_0043e2c4 = DAT_0043e2c4 + 1;
+        }
+    } else if (DAT_0043e2c4 == 13) {
+        if (padIsButtonPressed(5) == 0) {
+            if (sequenceBroken()) {
+                DAT_0043e2c4 = 0;
+                return flags;
+            }
+        } else {
+            DAT_0043e2c4 = DAT_0043e2c4 + 1;
+        }
+    } else if (DAT_0043e2c4 == 14) {
+        if (padIsButtonPressed(6) != 0) {
+            DAT_0043e2c4 = DAT_0043e2c4 + 1;
+        } else if (sequenceBroken()) {
+            DAT_0043e2c4 = 0;
+            return flags;
+        }
     }
-    else {
-      DAT_0043e2c4 = DAT_0043e2c4 + 1;
+    if (DAT_0043e2c4 == 15) {
+        u8 current = DAT_0043e2ac->flags;
+        if ((flags & 2) == 0) {
+            current = current | 2;
+        } else {
+            current = current & 0xfd;
+        }
+        DAT_0043e2ac->flags = current;
+        FUN_002bf810(0x1000170);
+        DAT_0043e2c4 = 0;
     }
-  }
-  if (DAT_0043e2c4 == 0xf) {
-    temp_v2 = *(unsigned char *)(DAT_0043e2ac + 0x24baf);
-    if ((temp_v0 & 2) == 0) {
-      temp_v2 = temp_v2 | 2;
-    }
-    else {
-      temp_v2 = temp_v2 & 0xfd;
-    }
-    *(unsigned char *)(DAT_0043e2ac + 0x24baf) = temp_v2;
-    FUN_002bf810(0x1000170);
-    DAT_0043e2c4 = 0;
-    return temp_v0;
-  }
-  return temp_v0;
+    return flags;
 }
 
 } /* extern "C" */

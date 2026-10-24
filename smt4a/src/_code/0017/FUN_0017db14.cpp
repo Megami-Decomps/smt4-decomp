@@ -1,121 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017db14` (_code @ 0x17db14, 0x24c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-register assignment differs from retail (retail: global context r6, cursor r7, first-record flag r8; ours r7/r8/r6); the instruction sequence is otherwise the same (148 rows each). */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+
+/* A recorded command chunk: raw command bytes followed by their records. */
+struct AsdCmdChunk {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 dataBytes;
+    /* 0x0C */ u32 recordCount;
+    /* 0x10 */ u8 data[1];     /* dataBytes of commands, then recordCount AsdCmdRecords */
+};
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+extern u32 *g_commandBufferCursor;
+extern u32 *g_commandBufferEnd;
 
-int heapCloseOpenBlock(unsigned int *, unsigned int);
-int globalCriticalSectionEnterForward(void);
-int globalCriticalSectionLeaveForward(void);
-int FUN_001963e0(void);
-int rt_memcpy(unsigned int, int, unsigned int);
-int rt_memcpy_w(unsigned int, int, int);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void rt_memcpy(void *destination, const void *source, u32 size);
+void globalCriticalSectionEnterForward(void);
+void globalCriticalSectionLeaveForward(void);
+void heapCloseOpenBlock(AsdCmdBuffer *buffer, AsdCmdRecord *records);
+void FUN_001963e0(void);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-extern signed char DAT_0061a481; /* 0x61a481 */
-extern signed char DAT_0061a482; /* 0x61a482 */
-extern unsigned int *DAT_0061a50c; /* 0x61a50c */
-extern unsigned int *DAT_0061a510; /* 0x61a510 */
-
-/* Supplied declaration required: heapCloseOpenBlock. */
-/* Supplied declaration required: globalCriticalSectionEnterForward. */
-/* Supplied declaration required: globalCriticalSectionLeaveForward. */
-/* Supplied declaration required: FUN_001963e0. */
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0017db14(unsigned int param_1,int param_2)
-
+/* Appends a recorded command chunk to the command buffer named `handle`: copies its records into the
+ * buffer's list, places the commands after the data written so far (padding to keep copy records
+ * 8-byte aligned) and, for the active buffer, advances the write cursor and wakes the submitter. */
+void FUN_0017db14(u32 handle, AsdCmdChunk *chunk)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned char temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar6;
-  unsigned int temp_v4;
-  
-  temp_v0 = 1;
-  puVar6 = *(unsigned int **)((param_1 & 0x1f) * 4 + 0x61a48c);
-  if (puVar6 != (unsigned int *)0x0) {
-    do {
-      temp_v2 = *puVar6;
-      if (temp_v2 != param_1) {
-        puVar6 = (unsigned int *)puVar6[0x10];
-      }
-    } while (temp_v2 != param_1 && puVar6 != (unsigned int *)0x0);
-  }
-  if (DAT_0061a50c == puVar6) {
-    puVar6[3] = (int)g_commandBufferCursor - puVar6[1];
-  }
-  rt_memcpy_w(puVar6[6] + puVar6[8] * 0x1c,*(int *)(param_2 + 8) + param_2 + 0x10,
-              *(int *)(param_2 + 0xc) * 0x1c);
-  temp_v2 = 0;
-  if (*(int *)(param_2 + 0xc) != 0) {
-    do {
-      pcVar2 = (char *)(puVar6[6] + (puVar6[8] + temp_v2) * 0x1c);
-      if (*pcVar2 == '\x01') {
-        if (temp_v0) {
-          temp_v3 = puVar6[3];
-          if ((*(unsigned int *)(pcVar2 + 8) & 8) != (temp_v3 & 8)) {
-            if (DAT_0061a50c == puVar6) {
-              if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
-                *g_commandBufferCursor = 0;
-                g_commandBufferCursor[1] = 0x8025e;
-                g_commandBufferCursor = g_commandBufferCursor + 2;
-              }
+    // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
+    struct BufferNode { AsdCmdBuffer buffer; BufferNode *next; };
+    bool first = true;
+    BufferNode *node = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
+    AsdCmdBuffer *buffer;
+    u32 i;
+
+    if (node != NULL) {
+        u32 id;
+        do {
+            id = node->buffer.unk00;
+            if (id != handle) {
+                node = node->next;
             }
-            else {
-              temp_v4 = puVar6[1];
-              *(unsigned int *)(temp_v3 + temp_v4) = 0;
-              ((unsigned int *)(temp_v3 + temp_v4))[1] = 0x25e;
-            }
-            temp_v3 = puVar6[3] + 8;
-            puVar6[3] = temp_v3;
-          }
-          temp_v0 = 0;
-          *(unsigned int *)(pcVar2 + 8) = (temp_v3 - puVar6[5]) + *(int *)(pcVar2 + 8);
-        }
-        *(unsigned int *)(pcVar2 + 4) = puVar6[5] + puVar6[1];
-        puVar6[5] = puVar6[5] + *(int *)(pcVar2 + 8);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(unsigned int *)(param_2 + 0xc));
-  }
-  rt_memcpy(puVar6[1] + puVar6[3],param_2 + 0x10,*(unsigned int *)(param_2 + 8));
-  puVar6[3] = *(int *)(param_2 + 8) + puVar6[3];
-  temp_v1 = 0;
-  if (puVar6[0xd] != 0) {
-    temp_v1 = *(int *)(param_2 + 0xc);
-  }
-  if (puVar6[0xd] != 0 && temp_v1 != 0) {
-    heapCloseOpenBlock(puVar6,puVar6[6] + puVar6[8] * 0x1c);
-  }
-  if (DAT_0061a50c == puVar6) {
-    g_commandBufferCursor = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)g_commandBufferCursor);
-    if (*(int *)(param_2 + 0xc) != 0) {
-      globalCriticalSectionEnterForward();
-      puVar6[8] = *(int *)(param_2 + 0xc) + puVar6[8];
-      if (((DAT_0061a510 == puVar6) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
-        DAT_0061a481 = '\x01';
-        FUN_001963e0();
-      }
-      globalCriticalSectionLeaveForward();
-      return;
+        } while (id != handle && node != NULL);
     }
-  }
-  else {
-    puVar6[8] = *(int *)(param_2 + 0xc) + puVar6[8];
-  }
-  return;
+    buffer = &node->buffer;
+    if (g_asdGfxContext.cmdBuffer == buffer) {
+        buffer->writeOffset = (u8 *)g_commandBufferCursor - buffer->start;
+    }
+    rt_memcpy_w(&buffer->entries[buffer->listCount], chunk->data + chunk->dataBytes, chunk->recordCount * sizeof(AsdCmdRecord));
+    for (i = 0; i < chunk->recordCount; i++) {
+        AsdCmdRecord *record = &buffer->entries[buffer->listCount + i];
+
+        if (record->kind == 1) {
+            if (first) {
+                if ((record->byteCount & 8) != (buffer->writeOffset & 8)) {
+                    if (g_asdGfxContext.cmdBuffer == buffer) {
+                        if (g_commandBufferCursor < g_commandBufferEnd) {
+                            g_commandBufferCursor[0] = 0;
+                            g_commandBufferCursor[1] = 0x8025E;
+                            g_commandBufferCursor += 2;
+                        }
+                    } else {
+                        u32 *padding = (u32 *)(buffer->start + buffer->writeOffset);
+
+                        padding[0] = 0;
+                        padding[1] = 0x25E;
+                    }
+                    buffer->writeOffset += 8;
+                }
+                record->byteCount = (buffer->writeOffset - buffer->committedOffset) + record->byteCount;
+                first = false;
+            }
+            record->commands = buffer->start + buffer->committedOffset;
+            buffer->committedOffset += record->byteCount;
+        }
+    }
+    rt_memcpy(buffer->start + buffer->writeOffset, chunk->data, chunk->dataBytes);
+    buffer->writeOffset += chunk->dataBytes;
+    if (buffer->unk34 != 0 && chunk->recordCount != 0) {
+        heapCloseOpenBlock(buffer, &buffer->entries[buffer->listCount]);
+    }
+    if (g_asdGfxContext.cmdBuffer == buffer) {
+        g_commandBufferCursor = (u32 *)((u8 *)g_commandBufferCursor + (chunk->dataBytes & ~3u));
+        if (chunk->recordCount != 0) {
+            globalCriticalSectionEnterForward();
+            buffer->listCount += chunk->recordCount;
+            if (g_asdGfxContext.activeBuffer == buffer && g_asdGfxContext.submission.enabled != 0 &&
+                g_asdGfxContext.submission.pending == 0) {
+                g_asdGfxContext.submission.pending = 1;
+                FUN_001963e0();
+            }
+            globalCriticalSectionLeaveForward();
+        }
+    } else {
+        buffer->listCount += chunk->recordCount;
+    }
 }
 
 } /* extern "C" */

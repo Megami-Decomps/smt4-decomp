@@ -1,188 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026e8b8` (_code @ 0x26e8b8, 0x324 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the camp menu's "new" marker for a menu id when the matching notification flag is set; written from the decompilation and the retail disassembly, the id dispatch and render-stack scheduling not compared with retail */
+#include "camp/RenderCtx.h"
+
+struct CampNotice {
+    /* 0x0000 */ u8 unk0000[0x1AB4];
+    /* 0x1AB4 */ f32 iconSpeed;
+    /* 0x1AB8 */ u8 unk1AB8[0x17F8];
+    /* 0x32B0 */ u8 flags[7];       /* one new-entry flag per camp menu */
+};
+
+struct IconFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+#define CAMP_NOTICE_HEADER 0x14
+#define CAMP_NOTICE_ICON 0x5B0
+#define CAMP_NOTICE_FRAME_PLAIN 0x5B2
+#define CAMP_NOTICE_FRAME_ANIMATED 0x5B1
+#define CAMP_NOTICE_GLOW 0x5D6
 
 extern "C" {
+extern CampNotice *g_camp;
+extern RenderCtxA *g_renderCtx;
 
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, unsigned int);
-int jobGetScalarValue(void);
-int VectorUnsignedToFloat(unsigned int, int);
+s32 gameFlagIsSet(u32 flag);
+IconFrame *FUN_001834a4(u32 table, u32 index);
+void FUN_001835b4(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
+f32 jobGetScalarValue(void);
+void efctSetSpeed(f32 speed);
+s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 
-typedef int romwright_code(...);
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-extern int g_camp; /* 0x57f108 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: jobGetScalarValue. */
-
-
-void FUN_0026e8b8(int param_1,int param_2,int param_3,unsigned int param_4,int param_5)
-
+void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
 {
-/* irregular: 6 goto(s); irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  float in_s0;
-  
-  if (param_1 == 0x1e) {
-    temp_v0 = *(char *)(g_camp + 0x32b1);
-  }
-  else if (param_1 < 0x1e) {
-    if (param_1 != 0x11) {
-      if (0x11 >= param_1) {
-        if (param_1 != 3) {
-          if (param_1 == 6) {
-            temp_v0 = *(char *)(g_camp + 0x32b0);
-            temp_v6 = temp_v0 == '\0';
-            if (temp_v6) {
-              temp_v0 = *(char *)(g_camp + 0x32b1);
-            }
-            if (temp_v6 && temp_v0 == '\0') {
-              return;
-            }
-            goto LAB_0026e9d8;
-          }
-          if (param_1 != 8) {
-            return;
-          }
-          if (*(char *)(g_camp + 0x32b5) != '\0') goto LAB_0026e9d8;
-          temp_v1 = gameFlagIsSet(0x464);
-          if (temp_v1 == 0) {
-            return;
-          }
-          temp_v1 = gameFlagIsSet(0x4ca);
-          goto joined_r0x0026ea94;
-        }
-        temp_v0 = *(char *)(g_camp + 0x32b4);
-      }
-      else if (param_1 == 0x1c) {
-        temp_v0 = *(char *)(g_camp + 0x32b5);
-      }
-      else {
-        if (param_1 != 0x1d) {
-          return;
-        }
-        temp_v0 = *(char *)(g_camp + 0x32b0);
-      }
-    }
-    else {
-      temp_v0 = *(char *)(g_camp + 0x32b4);
-    }
-  }
-  else if (param_1 == 0x42) {
-    temp_v0 = *(char *)(g_camp + 0x32b2);
-  }
-  else {
-    if (param_1 < 0x42) {
-      if (param_1 != 0x33) {
-        if (param_1 != 0x38) {
-          if (param_1 != 0x3b) {
-            return;
-          }
-          temp_v0 = *(char *)(g_camp + 0x32b6);
-          goto LAB_0026e9d0;
-        }
-        temp_v1 = gameFlagIsSet(0x45b);
-        if (temp_v1 == 0) {
-          return;
-        }
-        temp_v1 = gameFlagIsSet(0x4c7);
-      }
-      else {
-        temp_v1 = gameFlagIsSet(0x464);
-        if (temp_v1 == 0) {
-          return;
-        }
-        temp_v1 = gameFlagIsSet(0x4ca);
-      }
-joined_r0x0026ea94:
-      if (temp_v1 == 0) {
+    const u8 *notice = g_camp->flags;
+    bool shown;
+    switch (menu) {
+    case 3:
+    case 0x11:
+        shown = notice[4] != 0;
+        break;
+    case 6:
+        shown = notice[0] != 0 || notice[1] != 0;
+        break;
+    case 8:
+        shown = notice[5] != 0 || (gameFlagIsSet(0x464) != 0 && gameFlagIsSet(0x4CA) != 0);
+        break;
+    case 0x1C:
+        shown = notice[5] != 0;
+        break;
+    case 0x1D:
+        shown = notice[0] != 0;
+        break;
+    case 0x1E:
+        shown = notice[1] != 0;
+        break;
+    case 0x33:
+        shown = gameFlagIsSet(0x464) != 0 && gameFlagIsSet(0x4CA) != 0;
+        break;
+    case 0x38:
+        shown = gameFlagIsSet(0x45B) != 0 && gameFlagIsSet(0x4C7) != 0;
+        break;
+    case 0x3B:
+        shown = notice[6] != 0;
+        break;
+    case 0x42:
+        shown = notice[2] != 0;
+        break;
+    case 0x43:
+        shown = notice[2] != 0 || notice[3] != 0;
+        break;
+    case 0x45:
+        shown = notice[3] != 0;
+        break;
+    default:
         return;
-      }
-      goto LAB_0026e9d8;
     }
-    if (param_1 == 0x43) {
-      temp_v0 = *(char *)(g_camp + 0x32b2);
-      temp_v6 = temp_v0 == '\0';
-      if (temp_v6) {
-        temp_v0 = *(char *)(g_camp + 0x32b3);
-      }
-      if (temp_v6 && temp_v0 == '\0') {
+    if (!shown)
         return;
-      }
-      goto LAB_0026e9d8;
+
+    if (plain != 0) {
+        IconFrame *frame = FUN_001834a4(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_PLAIN);
+        FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
+        return;
     }
-    if (param_1 != 0x45) {
-      return;
-    }
-    temp_v0 = *(char *)(g_camp + 0x32b3);
-  }
-LAB_0026e9d0:
-  if (temp_v0 == '\0') {
-    return;
-  }
-LAB_0026e9d8:
-  if (param_5 != 0) {
-    temp_v1 = FUN_001834a4(0x14,0x5b2);
-    FUN_001835b4(2,0x14,0x5b0,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,
-                 param_4);
-    return;
-  }
-  temp_v2 = FUN_001834a4(0x14,0x5b1);
-  FUN_001835b4(2,0x14,0x5b0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,param_4
-              );
-  jobGetScalarValue();
-  temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == 0.0f) << 0x1e);
-  temp_v5 = (unsigned int)!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0);
-  VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
-  efctSetSpeed();
-  temp_v1 = g_renderCtx;
-  temp_v3 = packNibblesAndByte(6,1,0);
-  piVar6 = (int *)(temp_v1 + 0x12b8);
-  temp_v4 = piVar6[*piVar6 + 2];
-  piVar6[*piVar6 + 2] = temp_v3;
-  if (*(char *)(temp_v1 + 0x12d0) != '\0' || temp_v4 != temp_v3) {
-    (**(romwright_code **)(temp_v1 + 0x12d4))();
-    *(unsigned char *)(temp_v1 + 0x12d0) = 0;
-  }
-  FUN_001835b4(2,0x14,0x5d6,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,param_4
-              );
-  temp_v1 = g_renderCtx;
-  temp_v2 = packNibblesAndByte(6,7,0);
-  piVar6 = (int *)(temp_v1 + 0x12b8);
-  temp_v3 = piVar6[*piVar6 + 2];
-  piVar6[*piVar6 + 2] = temp_v2;
-  if (*(char *)(temp_v1 + 0x12d0) != '\0' || temp_v3 != temp_v2) {
-    (**(romwright_code **)(temp_v1 + 0x12d4))();
-    *(unsigned char *)(temp_v1 + 0x12d0) = 0;
-  }
-  VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
-  efctSetSpeed();
-  return;
+
+    IconFrame *frame = FUN_001834a4(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
+    FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
+    u32 active = jobGetScalarValue() != 0.0f;
+    efctSetSpeed(g_camp->iconSpeed * (f32)active);
+    RenderCtxA *context = g_renderCtx;
+    s32 state = packNibblesAndByte(6, 1, 0);
+    renderStackSet(&context->stackB, state);
+    FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_GLOW, frame->x + x, frame->y + y, flags);
+    context = g_renderCtx;
+    state = packNibblesAndByte(6, 7, 0);
+    renderStackSet(&context->stackB, state);
+    efctSetSpeed((f32)active);
 }
 
 } /* extern "C" */

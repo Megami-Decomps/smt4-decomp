@@ -1,200 +1,170 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8450` (_code @ 0x3a8450, 0x370 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the devil compendium list's per-frame input handling (draft calls kept as read); retail keeps the selected entry pointer in the 0x84-byte text buffer's first word and shares the result tail by jumps, which armcc here builds from separate returns. */
+#include "common.h"
+
+/* One list entry (0x20 bytes at +0x5A8 of the view, indexed by the cursor). */
+struct DevilEntry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 devil;
+};
+
+/* The selected row's record (as the view reads it). */
+struct SelectedRow {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ s8 confirm;
+};
+
+/* The compendium view (only the fields read here). */
+struct DevilView {
+    /* 0x0000 */ u8 unk0000[0x14];
+    /* 0x0014 */ s32 state;
+    /* 0x0018 */ s32 subState;
+    /* 0x001C */ u8 unk001C[4];
+    /* 0x0020 */ u8 cursor[0x5C];
+    /* 0x007C */ u8 unk007C[0x60];
+    /* 0x00DC */ u8 status[0x480];
+    /* 0x055C */ SelectedRow row;
+    /* 0x056F */ u8 unk056F[0x21];
+    /* 0x0590 */ u32 touchRegion;
+    /* 0x0594 */ u8 unk0594[0xC];
+    /* 0x05A0 */ u32 script;
+    /* 0x05A4 */ u8 hideHelp;
+    /* 0x05A5 */ u8 listKind;
+    /* 0x05A6 */ u8 unk05A6[2];
+    /* 0x05A8 */ DevilEntry entries[1];
+};
 
 extern "C" {
+extern u8 DAT_0043d9c8[];
 
-int FUN_00232848(void);
-int FUN_002328b4(void);
-int FUN_00233240(...);
-int FUN_00233818(int);
-int ifTouchRegionClearAll(unsigned int);
-int messageMainSetTargetFlags(...);
-int uniteLoadPreviewRoomModel(void);
-int textEncodeFontSlot(int, int [33]);
-int scrScriptProcessStartEntry(...);
-int beginStatusPanelClose(void);
-int FUN_0029cc44(...);
-int FUN_0029ce60(unsigned int, int, int);
-int useCounterStart(void);
-int FUN_0029e328(...);
-int sortMenuCreate(...);
-int messageTargetSetValue(unsigned int, int);
-int FUN_0029ede8(int, unsigned int, unsigned int, int);
-int FUN_0029ee6c(...);
-int FUN_002a0cc8(...);
-int buttonHelpSetPreset(...);
-int FUN_002bd06c(unsigned int);
-int libc_strcpy(int [33], unsigned int);
-int FUN_003a7ec8(int, int);
+s32 flaggedValueHolderGetTotal(void *cursor);
+void FUN_0029ce60(u32 devil, s32 kind, s32 flag);
+void messageTargetSetValue(u32 value, s32 flag);
+s32 inputIsQuestMenuPressed(void);
+s32 inputIsQuestCancelPressed(void);
+s32 FUN_0027ee9c(void);
+s32 gameGetNavigationState(void);
+s32 gameGetFlagByte12e8(void);
+void FUN_00233240(void *status, s32 mode);
+void FUN_0029cc44(s32 flag);
+void ifTouchRegionClearAll(u32 region);
+void FUN_00233818(SelectedRow *row);
+void FUN_0029ede8(s32 a, u32 b, u32 c, s32 d);
+s32 FUN_003a7ec8(DevilView *view, u32 devil);
+void FUN_002bd06c(u32 devil);
+void libc_strcpy(char *dest, u32 source);
+void textEncodeFontSlot(s32 slot, char *text);
+u32 demonGetRaceLabel(u16 devil, u32 flag);
+void scrScriptProcessStartEntry(u32 script, s32 entry);
+void buttonHelpSetPreset(s32 preset);
+void messageMainSetTargetFlags(s32 flags);
+void FUN_002a0cc8(s32 flag);
+void FUN_002328b4(void);
+void sortMenuCreate(s32 a, s32 b);
+void FUN_0029e328(s32 a);
+void useCounterStart(void);
+void FUN_0029ee6c(s32 a, u32 color);
+void beginStatusPanelClose(void);
+void FUN_00232848(void);
+void uniteLoadPreviewRoomModel(void);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_1_stack;
-
-extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
-
-/* Supplied declaration required: FUN_00232848. */
-/* Supplied declaration required: FUN_002328b4. */
-/* Supplied declaration required: FUN_00233240. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: ifTouchRegionClearAll. */
-/* Supplied declaration required: messageMainSetTargetFlags. */
-extern int inputIsQuestCancelPressed(void);
-/* Supplied declaration required: uniteLoadPreviewRoomModel. */
-extern int gameGetNavigationState(void);
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_0027ee9c(void);
-/* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: beginStatusPanelClose. */
-/* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029ce60. */
-extern int gameGetFlagByte12e8(void);
-/* Supplied declaration required: useCounterStart. */
-/* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029ede8. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_003a7ec8. */
-
-
-void FUN_003a8450(int param_1)
-
+/* Handles one frame of the compendium list: refreshes the shown devil, then starts the status
+ * panel, the entry's script, the sort menu or the close, depending on the input. */
+void FUN_003a8450(DevilView *view)
 {
-/* irregular: 23 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7 [33];
-  
-  temp_v5 = 0;
-  temp_v6 = 0;
-  temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  temp_v7[0] = 0;
-  temp_v2 = (unsigned int)*(unsigned short *)(param_1 + 0x5a8 + temp_v1 * 0x20 + 4);
-  FUN_0029ce60(temp_v2,*(unsigned char *)(param_1 + 0x5a5),0);
-  messageTargetSetValue(-temp_v2,0);
-  temp_v1 = inputIsQuestMenuPressed();
-  temp_v7[0] = param_1 + 0x55c;
-  if (0 < *(short *)(param_1 + 0x5a8)) {
-    temp_v5 = FUN_0027ee9c();
-    temp_v6 = inputIsQuestCancelPressed();
-    if (temp_v5 == 0) {
-      temp_v5 = (int)*(char *)(temp_v7[0] + 0x12);
+    s32 confirm = 0;
+    s32 cancel = 0;
+    u32 devil = view->entries[flaggedValueHolderGetTotal(view->cursor)].devil;
+    FUN_0029ce60(devil, view->listKind, 0);
+    messageTargetSetValue(-devil, 0);
+    s32 menuPressed = inputIsQuestMenuPressed();
+    SelectedRow *row = &view->row;
+    if (*(s16 *)((u8 *)view + 0x5A8) > 0) {
+        confirm = FUN_0027ee9c();
+        cancel = inputIsQuestCancelPressed();
+        if (confirm == 0)
+            confirm = row->confirm;
     }
-  }
-  temp_v3 = gameGetNavigationState();
-  if (temp_v3 != 0) {
-    *(unsigned int *)(param_1 + 0x14) = 9;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    temp_v1 = gameGetFlagByte12e8();
-    if (temp_v1 == 1) {
-      *(unsigned short *)(param_1 + 0xa5b4) = 1;
+    if (gameGetNavigationState() != 0) {
+        view->state = 9;
+        view->subState = 0;
+        *(u16 *)((u8 *)view + 0xA5B4) = gameGetFlagByte12e8() == 1 ? 1 : 5;
+        FUN_00233240(view->status, *(s16 *)((u8 *)view + 0xA5B4));
+        if (view->hideHelp == 0)
+            FUN_0029cc44(1);
+        ifTouchRegionClearAll(view->touchRegion);
+        FUN_00233818(row);
+        return;
     }
-    else {
-      *(unsigned short *)(param_1 + 0xa5b4) = 5;
+    if (confirm != 0) {
+        u16 shown = view->entries[flaggedValueHolderGetTotal(view->cursor)].devil;
+        FUN_0029ce60(shown, view->listKind, 0);
+        FUN_0029ede8(0x18, shown, 0xFFFFFFFF, 0);
+        if (FUN_003a7ec8(view, shown) != 0) {
+            char text[0x84];
+            FUN_002bd06c(shown);
+            libc_strcpy(text, shown);
+            textEncodeFontSlot(8, text);
+            libc_strcpy(text, demonGetRaceLabel(shown, 1));
+            textEncodeFontSlot(0x10, text);
+            scrScriptProcessStartEntry(view->script, 0);
+            view->state = 3;
+            view->subState = 0;
+        } else {
+            s32 entry = 0;
+            switch (*((u8 *)view + 0xA5B0)) {
+            case 1:
+                entry = 2;
+                break;
+            case 2:
+                entry = 1;
+                break;
+            case 3:
+                entry = 3;
+                break;
+            case 4:
+                entry = 4;
+                break;
+            case 5:
+                entry = 5;
+                break;
+            }
+            scrScriptProcessStartEntry(view->script, entry);
+            view->state = 5;
+            view->subState = 0;
+            buttonHelpSetPreset(0x9E);
+        }
+        messageMainSetTargetFlags(1);
+        FUN_002a0cc8(1);
+        FUN_002328b4();
+        return;
     }
-    FUN_00233240(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
-    if (*(char *)(param_1 + 0x5a4) == '\0') {
-      FUN_0029cc44(1);
+    if (menuPressed == 0) {
+        if (cancel == 0)
+            return;
+        *(s32 *)(DAT_0043d9c8 + 4) = -1;
+        sortMenuCreate(0xF, 0);
+        FUN_0029e328(1);
+        FUN_0029e328(2);
+        FUN_0029e328(7);
+        FUN_0029e328(3);
+        useCounterStart();
+        FUN_002a0cc8(1);
+        view->state = 6;
+        view->subState = 0;
+        FUN_0029ee6c(0, 0x323232FF);
+        FUN_002328b4();
+        return;
     }
-    ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
-    FUN_00233818(temp_v7[0]);
-    return;
-  }
-  if (temp_v5 != 0) {
-    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v0 = *(unsigned short *)(param_1 + 0x5a8 + temp_v1 * 0x20 + 4);
-    temp_v7[0] = 0;
-    temp_v2 = (unsigned int)temp_v0;
-    FUN_0029ce60(temp_v2,*(unsigned char *)(param_1 + 0x5a5),0);
-    FUN_0029ede8(0x18,temp_v2,0xffffffff,0);
-    temp_v1 = param_1;
-    FUN_003a7ec8(param_1,temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = (unsigned int)temp_v0;
-      FUN_002bd06c(temp_v2);
-      libc_strcpy(temp_v7,temp_v2);
-      textEncodeFontSlot(8,temp_v7);
-      temp_v4 = demonGetRaceLabel(temp_v0,1);
-      libc_strcpy(temp_v7,temp_v4);
-      textEncodeFontSlot(0x10,temp_v7);
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),0);
-      *(unsigned int *)(param_1 + 0x14) = 3;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-    }
-    else {
-      temp_v4 = 0;
-      switch(*(unsigned char *)(param_1 + 0xa5b0)) {
-      case 1:
-        temp_v4 = 2;
-        break;
-      case 2:
-        temp_v4 = 1;
-        break;
-      case 3:
-        temp_v4 = 3;
-        break;
-      case 4:
-        temp_v4 = 4;
-        break;
-      case 5:
-        temp_v4 = 5;
-      }
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),temp_v4);
-      *(unsigned int *)(param_1 + 0x14) = 5;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      buttonHelpSetPreset(0x9e);
-    }
-    messageMainSetTargetFlags(1);
+    if (view->hideHelp == 0)
+        FUN_0029cc44(1);
+    FUN_0029ee6c(0, 0x323232FF);
+    beginStatusPanelClose();
+    FUN_00233240(view->status, 1);
     FUN_002a0cc8(1);
-    FUN_002328b4();
-    return;
-  }
-  if (temp_v1 == 0) {
-    if (temp_v6 == 0) {
-      return;
-    }
-    (*(unsigned int *)((unsigned char *)&DAT_0043d9c8 + 0x4)) = 0xffffffff;
-    sortMenuCreate(0xf,0);
-    FUN_0029e328(1);
-    FUN_0029e328(2);
-    FUN_0029e328(7);
-    FUN_0029e328(3);
-    useCounterStart();
-    FUN_002a0cc8(1);
-    *(unsigned int *)(param_1 + 0x14) = 6;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_0029ee6c(0,0x323232ff);
-    FUN_002328b4();
-    return;
-  }
-  if (*(char *)(param_1 + 0x5a4) == '\0') {
-    FUN_0029cc44(1);
-  }
-  FUN_0029ee6c(0,0x323232ff);
-  beginStatusPanelClose();
-  FUN_00233240(param_1 + 0xdc,1);
-  FUN_002a0cc8(1);
-  *(unsigned int *)(param_1 + 0x14) = 0xb;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  FUN_00232848();
-  uniteLoadPreviewRoomModel();
-  return;
+    view->state = 11;
+    view->subState = 0;
+    FUN_00232848();
+    uniteLoadPreviewRoomModel();
 }
 
 } /* extern "C" */

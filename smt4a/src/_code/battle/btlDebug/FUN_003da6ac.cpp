@@ -1,109 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003da6ac` (_code @ 0x3da6ac, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near: 137 rows against 146; retail keeps a constant-false guard (mov #0 / cmp / nop / bne) before the kind-9 test and re-tests the kind in the kind-3 chain, shows as dead compare/branch pairs ours omits; it also indexes the slot table as [selection, base] and loads the 64-bit button word with ldrd (ours ldm). Prologue, page base and logic match. */
+#include "common.h"
+#include "battle/BtlDebugMenuEntry.h"
+
+/* The debug menu (observed fields). */
+struct BtlDebugMenu {
+    /* 0x0000 */ u8 unk0000[0x3890];
+    /* 0x3890 */ s32 selection;
+    /* 0x3894 */ u8 unk3894[0x86C];
+    /* 0x4100 */ BtlDebugPage page;
+    /* 0x4210 */ s16 entryTable[1];
+};
+
+struct BtlDebugMasks {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u64 blocked;
+};
 
 extern "C" {
 
-int FUN_002cc228(char *, int);
+extern BtlDebugMasks DAT_00573bd8;
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
+s8 *gameGetSlotTable(void);
+u32 gameGetSlotRecord(void);
+BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
+s32 gameFlagIsSet(void);
+s32 gameDataFlagTestBit(void);
+BtlStateMasks *btlGetMainState(void);
+s32 idListHasFlaggedRecord(u32 record);
+s32 FUN_00291e14(void);
+s32 btlObjectHasEntryFlag(u32 record);
+s32 FUN_002b24fc(void);
 
-extern unsigned int DAT_00573be8; /* 0x573be8 */
-extern unsigned int DAT_00573bec; /* 0x573bec */
-
-extern int btlGetMainState(void);
-extern int gameFlagIsSet(void);
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int FUN_00291e14(void);
-extern int FUN_002b24fc(void);
-/* Supplied declaration required: FUN_002cc228. */
-extern int FUN_003bcf2c(int);
-extern int gameDataFlagTestBit(void);
-extern int idListHasFlaggedRecord(int);
-
-
-char FUN_003da6ac(int param_1,int param_2)
-
+/* Returns the kind of the `which`-th visible entry of the debug menu, or 0 when there are fewer. */
+u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
 {
-/* irregular: 2 goto(s); 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  char *pcVar3;
-  int temp_v2;
-  unsigned int temp_v3;
-  int *piVar6;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = 0;
-  temp_v1 = gameGetSlotTable();
-  temp_v3 = 0;
-  piVar6 = (int *)(param_1 + 0x3890);
-  do {
-    pcVar3 = (char *)(temp_v3 & 0xff);
-    FUN_002cc228(pcVar3,*piVar6 == 0);
-    temp_v2 = *piVar6;
-    temp_v4 = 0;
-    if ((temp_v2 != 4 && temp_v2 != 0) && (-1 < *(char *)(temp_v2 + temp_v1 + 0x1c9f))) {
-      temp_v4 = gameGetSlotRecord();
-    }
-    if ((((pcVar3 != (char *)0x0) && (pcVar3[1] == '\x01')) &&
-        ((*(short *)(pcVar3 + 0x5c) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
-       (((*(short *)(pcVar3 + 0x5e) == 0 || (temp_v2 = gameDataFlagTestBit(), temp_v2 != 0)) &&
-        ((pcVar3[0x5b] == '\0' ||
-         (temp_v2 = btlGetMainState(),
-         (*(unsigned int *)(temp_v2 + 0x45a0) & DAT_00573be8) == 0 &&
-         (*(unsigned int *)(temp_v2 + 0x45a4) & DAT_00573bec) == 0)))))) {
-      temp_v0 = *pcVar3;
-      if (temp_v0 != '\x05') {
-        if (temp_v0 != '\x02') {
-          if (temp_v0 == '\x03') {
-            if ((*(short *)(param_1 + *piVar6 * 2 + 0x4210) == -1) || (temp_v4 == 0))
-            goto LAB_003da878;
-            temp_v2 = idListHasFlaggedRecord(temp_v4);
-            if ((temp_v2 == 0) &&
-               ((((*pcVar3 != '\x03' || ((*(unsigned int *)(pcVar3 + 0x60) & 1) != 0)) ||
-                 (temp_v2 = FUN_00291e14(), temp_v2 == 0)) || (temp_v2 = FUN_003bcf2c(temp_v4), temp_v2 == 0))
-               )) {
-              temp_v3 = temp_v3 + 1;
-              if ((int)temp_v3 >= 10) {
-                return '\0';
-              }
-              continue;
-            }
-          }
-          if (*pcVar3 != '\x06' && *pcVar3 != '\b') goto LAB_003da878;
-          if (((*(unsigned int *)(pcVar3 + 0x60) & 1) == 0) || (temp_v2 = FUN_00291e14(), temp_v2 == 0)) {
-            if (temp_v5 == param_2) {
-              return *pcVar3;
-            }
-            temp_v5 = temp_v5 + 1;
-          }
+    u8 result = 0;
+    s32 found = 0;
+    s8 *slotFlags = gameGetSlotTable() + 0x1C9F;
+    BtlDebugPage *page = &menu->page;
+    s32 i;
+
+    for (i = 0; i < DEBUG_MENU_ENTRY_COUNT; i++) {
+        BtlDebugEntry *entry = FUN_002cc228(i, menu->selection == 0);
+        u32 record = 0;
+        s32 selection = menu->selection;
+
+        if (selection != 4 && selection != 0 && slotFlags[selection] >= 0) {
+            record = gameGetSlotRecord();
         }
-      }
-      else if ((*(short *)(param_1 + *piVar6 * 2 + 0x4210) == -1) ||
-              (*(char *)(param_1 + 0x41ed) == '\0')) {
-LAB_003da878:
-        if ((*pcVar3 != '\t') || (temp_v2 = FUN_002b24fc(), temp_v2 != 0)) {
-          if (((*(unsigned int *)(pcVar3 + 0x60) & 1) == 0) || (temp_v2 = FUN_00291e14(), temp_v2 == 0)) {
-            if (temp_v5 == param_2) {
-              return *pcVar3;
-            }
-            temp_v5 = temp_v5 + 1;
-          }
+        if (entry == NULL || entry->enabled != 1) {
+            continue;
         }
-      }
+        if (entry->flagId != 0 && gameFlagIsSet() == 0) {
+            continue;
+        }
+        if (entry->dataFlagId != 0 && gameDataFlagTestBit() == 0) {
+            continue;
+        }
+        if (entry->needsBattleState != 0 && (btlGetMainState()->held & DAT_00573bd8.blocked) != 0) {
+            continue;
+        }
+        if (entry->kind == 5) {
+            if (menu->entryTable[menu->selection] != -1 && page->pending != 0) {
+                continue;
+            }
+        } else if (entry->kind == 2) {
+            continue;
+        } else if (entry->kind == 3) {
+            if (menu->entryTable[menu->selection] != -1 && record != 0 && idListHasFlaggedRecord(record) == 0) {
+                if ((entry->flags & 1) != 0 || FUN_00291e14() == 0 || btlObjectHasEntryFlag(record) == 0) {
+                    continue;
+                }
+            }
+        }
+        if (entry->kind != 6 && entry->kind != 8) {
+            if (entry->kind == 9 && FUN_002b24fc() == 0) {
+                continue;
+            }
+        }
+        if ((entry->flags & 1) != 0 && FUN_00291e14() != 0) {
+            continue;
+        }
+        if (found == which) {
+            result = entry->kind;
+            break;
+        }
+        found++;
     }
-    temp_v3 = temp_v3 + 1;
-    if ((int)temp_v3 >= 10) {
-      return '\0';
-    }
-  } while( 1 );
+    return result;
 }
 
 } /* extern "C" */

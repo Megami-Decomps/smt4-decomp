@@ -1,165 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019514c` (_code @ 0x195150, 0x350 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 200 rows); retail hoists the 0x424 literal and keeps the per-row loops as separate counters */
+#include "common.h"
+
+// One animated row widget (0x8c bytes each).
+struct RowWidget {
+    u8 unk00[0x8c];
+};
+
+// Data table 0x37 record: only the leading id halfword (negative = unlocked flavour).
+struct TableRecord {
+    s16 id;                 // 0x00
+    u8 unk02[0x3e];
+};
 
 extern "C" {
 
-int FUN_0029efd8(int, int);
-int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, unsigned char [8], int, int);
-int FUN_002b8ee0(int, int);
-int eventQueueAddUniqueIfValid(int);
-int timerStart(int, int, int);
-int FUN_002bf818(int);
-int FUN_002c1658(void);
+#define SCREEN_FRAME(s) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(s) + 0x340))
+#define SCREEN_STATE(s) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(s) + 0x344))
 
-/* stack frame of param_1: 4 slot(s), 13 byte(s) */
-typedef struct {
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+void FUN_002b8ee0(void* widget, s32 arg);
+u16 FUN_002b8584(u32 group, u32 index);
+s32 FUN_0029ee54(void* list);
+s32 FUN_0029efc0(void* list);
+s32 FUN_0029efa8(void* list);
+s32 FUN_0029efd8(void* list, s32 arg);
+u32 dataTableGet(u32 table, u32 index);
+TableRecord* dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+u32 FUN_002907a8(void);
+u32 FUN_002bf4f8(u32 group, u32 index);
+s32 uiScrollHandleActionsOrTouch(void* list, u32 a, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
+s32 eventQueueAddUniqueIfValid(u32 event);
+s32 FUN_002c1658(s32 a, s32 b);
+void timerStart(void* widget, s32 a, s32 b);
+void FUN_002bf818(void* widget);
 
-extern unsigned int FUN_002907a8(void);
-extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
-/* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-extern unsigned short FUN_002b8584(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b8ee0. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bf818. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
-
-
-void FUN_0019514c(int *param_1)
-
+// Per-frame update of the animated scroll list: row fade-in, list input handling with
+// cursor events, then row fade-out when the list is dismissed.
+void FUN_0019514c(u8** screenRef)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  short *psVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8 [8];
-  
-  temp_v5 = *param_1;
-  temp_v1 = *(int *)(temp_v5 + 0x344);
-  if (temp_v1 == 0) {
-    temp_v1 = 0;
-    do {
-      if (temp_v1 <= *(int *)(temp_v5 + 0x340)) {
-        FUN_002b8ee0(temp_v5 + temp_v1 * 0x8c + 0x20,0);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 5);
-    if (*(char *)(temp_v5 + 0x2da) != '\0') {
-      temp_v0 = FUN_002b8584(0x30,0x1a);
-      *(unsigned short *)(temp_v5 + 0x348) = temp_v0;
-      temp_v0 = FUN_002b8584(0x30,0x1b);
-      *(unsigned short *)(temp_v5 + 0x34a) = temp_v0;
-      temp_v0 = FUN_002b8584(0x30,0x1c);
-      *(unsigned short *)(temp_v5 + 0x34c) = temp_v0;
-      *(short *)(temp_v5 + 0x358) = *(short *)(temp_v5 + 0x358) + 3;
-      *(unsigned int *)(temp_v5 + 0x344) = 1;
-    }
-  }
-  else if (temp_v1 != 1) {
-    if (temp_v1 != 2) {
-      *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;
-      return;
-    }
-    temp_v1 = 0;
-    do {
-      FUN_002bf818(temp_v5 + temp_v1 * 0x8c + 0x20);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 5);
-    if (*(char *)(temp_v5 + 0x2da) == '\0') {
-      *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;
-      return;
-    }
-    temp_v4 = 3;
-    *(unsigned int *)(temp_v5 + 0x344) = temp_v4;
-  }
-  else {
-    temp_v6 = 0;
-    temp_v1 = FUN_0029ee54(temp_v5 + 0x2dc);
-    if (0 < temp_v1) {
-      do {
-        temp_v7 = (unsigned int)*(short *)(temp_v5 + temp_v6 * 2 + 0x424);
-        temp_v4 = dataTableGet(0x37,0);
-        temp_v1 = dataTableGetEntries();
-        temp_v2 = dataTableGetCount(temp_v4);
-        if (((temp_v7 < temp_v2) && (psVar4 = (short *)(temp_v1 + temp_v7 * 0x40), psVar4 != (short *)0x0))
-           && (*psVar4 < 0)) {
-          temp_v4 = FUN_002907a8();
-          *(unsigned int *)(temp_v5 + temp_v6 * 4 + 0x35c) = temp_v4;
+    u8* screen = *screenRef;
+    RowWidget* rows = reinterpret_cast<RowWidget*>(screen + 0x20);
+    void* list = screen + 0x2dc;
+    s8 ready = *reinterpret_cast<s8*>(screen + 0x2da);
+    s32 frame = SCREEN_FRAME(screen);
+    switch (SCREEN_STATE(screen)) {
+    case 0:
+        for (s32 i = 0; i < 5; i++) {
+            if (i <= frame) FUN_002b8ee0(&rows[i], 0);
         }
-        temp_v6 = temp_v6 + 1;
-        temp_v1 = FUN_0029ee54(temp_v5 + 0x2dc);
-      } while (temp_v6 < temp_v1);
-    }
-    temp_v8[0] = 0;
-    temp_v4 = FUN_002bf4f8(0x30,0x1c);
-    temp_v1 = FUN_0029efc0(temp_v5 + 0x2dc);
-    temp_v6 = temp_v5 + 0x2dc;
-    uiScrollHandleActionsOrTouch(temp_v6,temp_v4,0,(int)*(short *)(temp_v5 + 0x34c),(int)*(short *)(temp_v5 + 0x348),
-                 (int)*(short *)(temp_v5 + 0x34a),temp_v8,0,0);
-    if (temp_v6 != 0) {
-      temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);
-    }
-    else {
-      temp_v6 = temp_v5 + 0x2dc;
-      FUN_0029efd8(temp_v6,0);
-      if (temp_v6 == 0) {
-        temp_v1 = 1;
-        FUN_002c1658();
-        if (temp_v1 == 0) {
-          *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;
-          return;
+        if (ready != 0) {
+            *reinterpret_cast<u16*>(screen + 0x348) = FUN_002b8584(0x30, 0x1a);
+            *reinterpret_cast<u16*>(screen + 0x34a) = FUN_002b8584(0x30, 0x1b);
+            *reinterpret_cast<u16*>(screen + 0x34c) = FUN_002b8584(0x30, 0x1c);
+            *reinterpret_cast<u16*>(screen + 0x358) += 3;
+            SCREEN_STATE(screen) = 1;
         }
-        eventQueueAddUniqueIfValid(0x100016e);
-        temp_v1 = 0;
-        do {
-          timerStart(temp_v5 + temp_v1 * 0x8c + 0x20,1,0);
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 5);
-        temp_v4 = 2;
-        *(unsigned int *)(temp_v5 + 0x344) = temp_v4;
-        *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;
-        return;
-      }
-      temp_v6 = FUN_0029ee54(temp_v5 + 0x2dc);
-      if (temp_v6 >= 6) {
-        temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);
-        while ((temp_v6 == temp_v1 &&
-               ((temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc), temp_v6 != 0 ||
-                (temp_v6 = FUN_0029efa8(temp_v5 + 0x2dc), temp_v6 != 0))))) {
-          temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);
-          temp_v3 = FUN_0029ee54(temp_v5 + 0x2dc);
-          if ((temp_v6 == temp_v3 - 5) && (temp_v6 = FUN_0029efa8(temp_v5 + 0x2dc), temp_v6 == 4)) break;
-          FUN_0029efd8(temp_v5 + 0x2dc,0);
-          temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);
+        break;
+    case 1: {
+        s32 count = FUN_0029ee54(list);
+        for (s32 i = 0; i < count; i = i + 1, count = FUN_0029ee54(list)) {
+            u32 id = reinterpret_cast<s16*>(screen + 0x424)[i];
+            u32 table = dataTableGet(0x37, 0);
+            TableRecord* entries = dataTableGetEntries();
+            if (id < dataTableGetCount(table) && &entries[id] != NULL && entries[id].id < 0) {
+                reinterpret_cast<u32*>(screen + 0x35c)[i] = FUN_002907a8();
+            }
         }
-      }
-      temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);
+        u8 flags = 0;
+        s32 previous = FUN_0029efc0(list);
+        s32 handled = uiScrollHandleActionsOrTouch(list, FUN_002bf4f8(0x30, 0x1c), 0,
+            *reinterpret_cast<s16*>(screen + 0x34c), *reinterpret_cast<s16*>(screen + 0x348),
+            *reinterpret_cast<s16*>(screen + 0x34a), &flags, 0, 0);
+        if (handled == 0) {
+            if (FUN_0029efd8(list, 0) != 0) {
+                if (FUN_0029ee54(list) > 5) {
+                    while (FUN_0029efc0(list) == previous) {
+                        if (FUN_0029efc0(list) != 0 && FUN_0029efa8(list) == 0) break;
+                        if (FUN_0029efc0(list) == FUN_0029ee54(list) - 5 && FUN_0029efa8(list) == 4) break;
+                        FUN_0029efd8(list, 0);
+                    }
+                }
+            } else {
+                if (FUN_002c1658(1, 1) != 0) {
+                    eventQueueAddUniqueIfValid(0x0100016e);
+                    for (s32 i = 0; i < 5; i++) timerStart(&rows[i], 1, 0);
+                    SCREEN_STATE(screen) = 2;
+                }
+                break;
+            }
+        }
+        if (FUN_0029efc0(list) != previous) eventQueueAddUniqueIfValid(0x0100016e);
+        break;
     }
-    if (temp_v6 != temp_v1) {
-      eventQueueAddUniqueIfValid(0x100016c);
+    case 2:
+        for (s32 i = 0; i < 5; i++) FUN_002bf818(&rows[i]);
+        if (ready != 0) SCREEN_STATE(screen) = 3;
+        break;
+    default:
+        break;
     }
-  }
-  *(int *)(temp_v5 + 0x340) = *(int *)(temp_v5 + 0x340) + 1;
-  return;
+    SCREEN_FRAME(screen) = SCREEN_FRAME(screen) + 1;
 }
 
 } /* extern "C" */

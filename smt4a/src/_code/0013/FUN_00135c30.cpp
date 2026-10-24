@@ -82,7 +82,7 @@ int FUN_0014afd0(...);
 int asdProcessCreateSimple(...);
 
 int FUN_00136df8(...);
-int FUN_00137454(...);
+int asdTextSystemInit(...);
 int asdProcessInit(...);
 int asdMemoryInit(...);
 int asdNgcInit(...);
@@ -281,7 +281,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00136df8. */
 /* Supplied declaration required: FUN_00137144. */
 /* Supplied declaration required: ifTouchAcquireUser. */
-/* Supplied declaration required: FUN_00137454. */
+/* Supplied declaration required: asdTextSystemInit. */
 /* Supplied declaration required: gameDataAllocBlocks. */
 /* Supplied declaration required: FUN_0013778c. */
 /* Supplied declaration required: FUN_00137848. */
@@ -529,7 +529,7 @@ void FUN_00135c30(void)
   DAT_0057ffd8 = temp_v3;
   asdGxCommandListCreate();
   DAT_0057ffdc = temp_v3;
-  FUN_00137454();
+  asdTextSystemInit();
   asdPrimInit(0x100000);
   asdProcessInit(0x163);
   FUN_00138a64();

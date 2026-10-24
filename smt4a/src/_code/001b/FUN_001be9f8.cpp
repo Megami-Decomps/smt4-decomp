@@ -41,7 +41,7 @@ extern int DAT_0064c078; /* 0x64c078 */
 extern int DAT_0064c07c; /* 0x64c07c */
 extern int DAT_0064c080; /* 0x64c080 */
 
-extern int *FUN_001b7420(int, int *, unsigned int *, int);
+extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, unsigned int *, int);
 /* Supplied declaration required: FUN_001c8248. */
 extern int FUN_001c940c(unsigned int *, unsigned int, int *, unsigned int);
 extern int __cxa_guard_acquire(unsigned int *);
@@ -91,7 +91,7 @@ int * FUN_001be9f8(int param_1,unsigned int *param_2,int param_3,int *param_4,un
   if (temp_v2 == 0) {
     return (int *)0x0;
   }
-  piVar4 = (int *)FUN_001b7420(temp_v2,temp_v13,puVar13,param_3);
+  piVar4 = (int *)_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(temp_v2,temp_v13,puVar13,param_3);
   temp_v0 = 0;
   puVar12 = &_ZGVZN2nw4math5MTX348IdentityEvE8identity;
   *piVar4 = (int)&DAT_0055bc08;

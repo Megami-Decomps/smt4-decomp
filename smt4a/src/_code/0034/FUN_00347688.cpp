@@ -1,112 +1,127 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00347688` (_code @ 0x347688, 0x234 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: taskCreate takes the priority float on the stack in retail (vstr s0,[sp] before the integer arguments); a plain f32 parameter goes in s0, which shifts every following stack argument; the rest of the setup matches in shape. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00213d1c(...);
-int taskCreate(...);
-int sysMemClear(...);
-int rt_memcpy_w(...);
+/* One corner of the effect quad (0x18 bytes). */
+typedef struct QuadCorner {
+    /* 0x00 */ f32 position[3];
+    /* 0x0C */ u32 unk0c;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 color;
+} QuadCorner;
 
-typedef int romwright_code(...);
-/* stack frame of param_11: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_11_stack;
+/* The effect task's work block (0x3F0 bytes). */
+typedef struct QuadEffectTask {
+    /* 0x000 */ u8 base[0x134];          /* copy of the caller's base record */
+    /* 0x134 */ u8 extra[0xB0];          /* copy of the caller's extra record when `hasExtra` is set */
+    /* 0x1E4 */ u8 unk1e4[0x84];
+    /* 0x268 */ f32 scale;
+    /* 0x26C */ QuadCorner corners[4];
+    /* 0x2CC */ u8 unk2cc[4];
+    /* 0x2D0 */ u16 unk2d0;
+    /* 0x2D4 */ f32 offset[3];
+    /* 0x2E0 */ u8 unk2e0[0x74];
+    /* 0x354 */ const u32 *config;
+    /* 0x358 */ u8 unk358[0x24];
+    /* 0x37C */ u32 owner;
+    /* 0x380 */ u8 hasExtra;
+    /* 0x381 */ u8 unk381[3];
+    /* 0x384 */ f32 fade;
+    /* 0x388 */ u8 unk388[0x61];
+    /* 0x3E9 */ u8 flag;
+    /* 0x3EA */ u16 timeA;
+    /* 0x3EC */ u16 timeB;
+    /* 0x3EE */ u8 unk3ee[2];
+} QuadEffectTask;
 
-extern int FUN_002129b8(...); /* 0x2129b8 */
-extern int FUN_00237dd0(...); /* 0x237dd0 */
-extern int FUN_00238490(...); /* 0x238490 */
+/* The config record that picks the update routine: flags at 0, a kind byte at 0x11. */
+typedef struct QuadEffectConfig {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0xD];
+    /* 0x11 */ u8 kind;
+} QuadEffectConfig;
 
-/* Supplied declaration required: FUN_00213d1c. */
-/* Supplied declaration required: taskCreate. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* The by-value tail of the argument list (it travels on the stack next to the integer arguments). */
+typedef struct QuadEffectParams {
+    f32 fade;
+    f32 priority;
+    u8 flag;
+    u32 unused;
+    u16 time;
+    f32 scale;
+} QuadEffectParams;
 
+void FUN_002129b8(QuadEffectTask *task);
+void FUN_00238490(QuadEffectTask *task);
+void FUN_00237dd0(QuadEffectTask *task);
+QuadEffectTask *taskCreate(void (*update)(QuadEffectTask *), void (*a)(QuadEffectTask *), void (*b)(QuadEffectTask *),
+                           void (*c)(QuadEffectTask *), f32 priority, u32 size, u32 list, u32 e, u32 f);
+void sysMemClear(void *block, s32 size);
+void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_00213d1c(QuadEffectTask *task);
 
-romwright_code * FUN_00347688(unsigned int param_1,unsigned int param_2,int param_3,unsigned char param_4,unsigned int *param_5,
-                   unsigned int param_6,unsigned int param_7,unsigned char param_8,unsigned int param_9,
-                   unsigned short param_10,unsigned int param_11)
-
+/* Creates the quad effect task: its update routines depend on the config's kind. Sets up the
+ * four colored corners, copies the caller's records in and starts it. */
+QuadEffectTask *FUN_00347688(u32 owner, const void *base, const u8 *extra, u8 hasExtra, QuadEffectConfig *config,
+                             QuadEffectParams params)
 {
-/* irregular: 7 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  romwright_code *unaff_r4;
-  long long temp_v2;
-  
-  temp_v0 = *(char *)((int)param_5 + 0x11);
-  temp_v1 = 3;
-  if ((((*param_5 & 2) != 0) || (temp_v0 == '\x03')) || (temp_v0 == '\x01')) {
-    temp_v1 = 4;
-  }
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 == '\x03') {
-        unaff_r4 = FUN_002129b8;
-        taskCreate(FUN_002129b8,0,0,FUN_00237dd0,param_7,0x3f0,temp_v1,0,0);
-      }
+    QuadEffectTask *task = NULL;
+    u8 kind = config->kind;
+    u32 list = 3;
+
+    if ((config->flags & 2) != 0 || kind == 3 || kind == 1) {
+        list = 4;
     }
-    else {
-      unaff_r4 = FUN_002129b8;
-      taskCreate(FUN_002129b8,0,FUN_00237dd0,0,param_7,0x3f0,temp_v1,0,0);
+    if (kind == 0) {
+        task = taskCreate(FUN_002129b8, FUN_00238490, NULL, NULL, params.priority, 0x3F0, list, 0, 0);
+    } else if (kind == 1) {
+        task = taskCreate(FUN_002129b8, NULL, FUN_00237dd0, NULL, params.priority, 0x3F0, list, 0, 0);
+    } else if (kind == 3) {
+        task = taskCreate(FUN_002129b8, NULL, NULL, FUN_00237dd0, params.priority, 0x3F0, list, 0, 0);
     }
-  }
-  else {
-    unaff_r4 = FUN_002129b8;
-    taskCreate(FUN_002129b8,FUN_00238490,0,0,param_7,0x3f0,temp_v1,0,0);
-  }
-  if (unaff_r4 != (romwright_code *)0x0) {
-    sysMemClear(unaff_r4,0x3f0);
-    temp_v2 = (unsigned long long)param_6 << 0x20;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x26c) = 0xbf000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x270) = 0xbf000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x274) = 0;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x280) = 0xff00ff;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x28c) = 0;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x284) = 0xbf000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x288) = 0x3f000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x298) = 0xff0000ff;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x29c) = 0x3f000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2a0) = 0xbf000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2a4) = 0;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2b0) = 0xffff;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2b4) = 0x3f000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2b8) = 0x3f000000;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 700) = 0;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2c8) = 0xffff00ff;
-    ((unsigned char *)unaff_r4)[0x380] = (unsigned char)param_4;
-    rt_memcpy_w(unaff_r4,param_2,0x134);
-    *(unsigned int **)((unsigned char *)unaff_r4 + 0x354) = param_5;
-    temp_v1 = (unsigned int)temp_v2;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2d4) = temp_v1;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2d8) = temp_v1;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x2dc) = temp_v1;
-    if (((unsigned char *)unaff_r4)[0x380] != (unsigned char)0x0) {
-      rt_memcpy_w((unsigned char *)unaff_r4 + 0x134,param_3,0xb0);
+    if (task != NULL) {
+        sysMemClear(task, 0x3F0);
+        task->corners[0].position[0] = -0.5f;
+        task->corners[0].position[1] = -0.5f;
+        task->corners[0].position[2] = 0.0f;
+        task->corners[0].color = 0x00FF00FF;
+        task->corners[1].position[0] = -0.5f;
+        task->corners[1].position[1] = 0.5f;
+        task->corners[1].position[2] = 0.0f;
+        task->corners[1].color = 0xFF0000FF;
+        task->corners[2].position[0] = 0.5f;
+        task->corners[2].position[1] = -0.5f;
+        task->corners[2].position[2] = 0.0f;
+        task->corners[2].color = 0x0000FFFF;
+        task->corners[3].position[0] = 0.5f;
+        task->corners[3].position[1] = 0.5f;
+        task->corners[3].position[2] = 0.0f;
+        task->corners[3].color = 0xFFFF00FF;
+        task->hasExtra = hasExtra;
+        rt_memcpy_w(task, base, 0x134);
+        task->config = (const u32 *)config;
+        task->offset[0] = 0.0f;
+        task->offset[1] = 0.0f;
+        task->offset[2] = 0.0f;
+        if (task->hasExtra != 0) {
+            rt_memcpy_w(task->extra, extra, 0xB0);
+        } else {
+            task->extra[0xA6] = extra[0xA6];
+            task->extra[0xA7] = extra[0xA7];
+            task->extra[0xA8] = extra[0xA8];
+            task->extra[0xA9] = extra[0xA9];
+        }
+        task->scale = params.scale;
+        task->unk2d0 = 0;
+        task->owner = owner;
+        FUN_00213d1c(task);
+        task->fade = params.fade;
+        task->flag = params.flag;
+        task->timeB = params.time;
+        task->timeA = params.time;
     }
-    else {
-      ((unsigned char *)unaff_r4)[0x1da] = *(unsigned char *)(param_3 + 0xa6);
-      ((unsigned char *)unaff_r4)[0x1db] = *(unsigned char *)(param_3 + 0xa7);
-      ((unsigned char *)unaff_r4)[0x1dc] = *(unsigned char *)(param_3 + 0xa8);
-      ((unsigned char *)unaff_r4)[0x1dd] = *(unsigned char *)(param_3 + 0xa9);
-    }
-    temp_v1 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x268) = param_11;
-    *(unsigned short *)((unsigned char *)unaff_r4 + 0x2d0) = 0;
-    *(unsigned int *)((unsigned char *)unaff_r4 + 0x37c) = param_1;
-    FUN_00213d1c(unaff_r4);
-    *(unsigned int *)((unsigned char *)unaff_r4 + 900) = temp_v1;
-    ((unsigned char *)unaff_r4)[0x3e9] = (unsigned char)param_8;
-    *(unsigned short *)((unsigned char *)unaff_r4 + 0x3ec) = param_10;
-    *(unsigned short *)((unsigned char *)unaff_r4 + 0x3ea) = param_10;
-  }
-  return unaff_r4;
+    return task;
 }
 
-} /* extern "C" */
+}

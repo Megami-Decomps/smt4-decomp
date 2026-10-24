@@ -1,166 +1,132 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sysPlaySe` (_code @ 0x1681cc, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and the channel scan differ - retail walks the six channel slots with two incrementing pointers and a down-counter and keeps different values in r5-r9; same stores and calls. */
+#include "common.h"
+
+namespace {
+/* A sound scene record (dataTable0e): the six channel entries and a flag. */
+struct SoundSceneEntry {
+    /* 0x00 */ u16 channel[6];
+    /* 0x0c */ u8 isLayered;
+};
+
+/* One of the six channel slots of the player: a kind and its value. */
+struct SoundChannel {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u16 value;
+};
+
+/* The sound player's work block (only the fields this switch reads). */
+struct SoundWork {
+    /* 0x000 */ u8 unk000[0x5ac];
+    /* 0x5ac */ SoundChannel channels[6];
+    /* 0x5c4 */ u8 unk5c4[0x10];
+    /* 0x5d4 */ u8 busy[6];              /* a channel is still fading */
+    /* 0x5da */ u8 unk5da[7];
+    /* 0x5e1 */ u8 sceneChanged;
+    /* 0x5e2 */ u8 unk5e2[4];
+    /* 0x5e6 */ u16 current;
+    /* 0x5e8 */ u16 previous;
+};
+
+/* The ButtonHelp global (g_buttonHelp): its work block holds six help-kind slots (+0x5ac), their active flags,
+   the selected entry id (+0x5e6) and a deferred selection (+0x10). */
+struct SoundPlayer {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ SoundWork *work;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ s32 pending;              /* scene requested while a channel was busy, or -1 */
+};
+
+}
 
 extern "C" {
+extern SoundPlayer g_buttonHelp;
+SoundSceneEntry *dataTableGetEntry0e(u32 id);
+void FUN_00183318(s32 mode);
+void FUN_00183e58(void);
+void FUN_00183f58(u32 channel, u32 kind, u32 value, u32 arg);
+void FUN_00183c0c(void);
+void FUN_00182084(void);
 
-int FUN_00182084(void);
-int FUN_00183318(int);
-int FUN_00183c0c(void);
-int FUN_00183e58(void);
-int FUN_00183f58(...);
-int dataTableGetEntry0e(...);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-extern unsigned int DAT_0057f0d4; /* 0x57f0d4 */
-
-/* Supplied declaration required: FUN_00182084. */
-/* Supplied declaration required: FUN_00183318. */
-/* Supplied declaration required: FUN_00183c0c. */
-/* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: dataTableGetEntry0e. */
-
-
-void sysPlaySe(unsigned int param_1)
-
+/* Selects the ButtonHelp entry `id` (a dataTable0e record): pushes its six per-slot values, links paired slots
+   and picks how the change is announced. Deferred while a slot is still active. (The sound-flavoured names in
+   this file are provisional; the object is the ButtonHelp global.) */
+void sysPlaySe(u32 id)
 {
-/* irregular: 7 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  char *pcVar7;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10 [12];
-  
-  temp_v1 = DAT_0057f0c8;
-  if (*(unsigned short *)(DAT_0057f0c8 + 0x5e6) != param_1) {
-    if ((int)DAT_0057f0d4 < 0) {
-      temp_v2 = 0;
-      do {
-        if (*(char *)(DAT_0057f0c8 + temp_v2 + 0x5d4) != '\0') {
-          DAT_0057f0d4 = param_1;
-          return;
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 6);
+    SoundWork *work = g_buttonHelp.work;
+    if (work->current == id) {
+        return;
     }
-    DAT_0057f0d4 = -1;
-    temp_v2 = dataTableGetEntry0e((unsigned int)*(unsigned short *)(DAT_0057f0c8 + 0x5e6));
-    temp_v3 = dataTableGetEntry0e(param_1);
-    if (temp_v2 != 0 && temp_v3 != 0) {
-      if ((*(char *)(temp_v2 + 0xc) == '\0') && (*(char *)(temp_v3 + 0xc) != '\0')) {
-        FUN_00183318(1);
-      }
-      else {
-        FUN_00183e58();
-      }
-    }
-    temp_v2 = dataTableGetEntry0e(*(unsigned short *)(temp_v1 + 0x5e6));
-    temp_v3 = dataTableGetEntry0e(param_1);
-    if (temp_v2 != 0 && temp_v3 != 0) {
-      *(unsigned short *)(temp_v1 + 0x5e8) = *(unsigned short *)(temp_v1 + 0x5e6);
-      *(short *)(temp_v1 + 0x5e6) = (short)param_1;
-      temp_v4 = 0x102;
-      temp_v8 = 0;
-      temp_v10[0] = 5;
-      temp_v10[1] = 6;
-      temp_v10[2] = 4;
-      temp_v10[3] = 3;
-      temp_v10[4] = 2;
-      temp_v10[5] = 1;
-      temp_v10[6] = 0;
-      temp_v10[7] = 0;
-      do {
-        temp_v9 = *(short *)(temp_v3 + temp_v8 * 2) != 0;
-        if (temp_v9) {
-          temp_v4 = (unsigned int)temp_v10[temp_v8];
-        }
-        if (!temp_v9) {
-          temp_v4 = 0x12;
-        }
-        FUN_00183f58(temp_v8 & 0xff,temp_v4);
-        temp_v8 = temp_v8 + 1;
-        temp_v4 = temp_v5;
-      } while ((int)temp_v8 < 6);
-      temp_v4 = 0;
-      temp_v8 = 0;
-      temp_v7 = 6;
-      pcVar7 = (char *)(temp_v1 + 0x5ac);
-      puVar5 = (unsigned short *)(temp_v1 + 0x5ae);
-      do {
-        temp_v0 = *pcVar7;
-        if (temp_v0 == '\x01') {
-          temp_v6 = (unsigned int)*puVar5;
-          temp_v4 = temp_v4 & 0xffff0000;
-          temp_v4 = temp_v4 | temp_v6;
-        }
-        else if (temp_v0 != '\x02') {
-          if (temp_v0 == '\x05') {
-            temp_v6 = (unsigned int)*puVar5;
-            temp_v8 = temp_v8 & 0xffff0000;
-            temp_v8 = temp_v8 | temp_v6;
-          }
-          else if (temp_v0 == '\x06') {
-            temp_v8 = temp_v8 & 0xffff;
-            temp_v6 = (unsigned int)*puVar5 << 0x10;
-            temp_v8 = temp_v8 | temp_v6;
-          }
-        }
-        else {
-          temp_v4 = temp_v4 & 0xffff;
-          temp_v6 = (unsigned int)*puVar5 << 0x10;
-          temp_v4 = temp_v4 | temp_v6;
-        }
-        temp_v7 = temp_v7 - 1;
-        pcVar7 = pcVar7 + 4;
-        puVar5 = puVar5 + 2;
-        if (temp_v7 == 0) {
-          temp_v6 = temp_v4 & 0xffff;
-          if (((temp_v6 != 0) && (temp_v4 = temp_v4 >> 0x10, temp_v4 != 0)) && (temp_v6 == temp_v4)) {
-            FUN_00183f58(5,0,0);
-            temp_v6 = 4;
-            FUN_00183f58(4,0x14,temp_v4 & 0xff,0);
-          }
-          temp_v9 = (temp_v8 & 0xffff) == 0;
-          if (!temp_v9) {
-            temp_v6 = temp_v8 >> 0x10;
-            temp_v9 = temp_v6 == 0;
-          }
-          if ((!temp_v9) && ((temp_v8 & 0xffff) == temp_v6)) {
-            FUN_00183f58(1,0,0);
-            FUN_00183f58(0,0x15,temp_v8 & 0xff);
-          }
-          if (*(char *)(temp_v2 + 0xc) != '\0') {
-            if (*(char *)(temp_v3 + 0xc) == '\0') {
-              *(unsigned char *)(DAT_0057f0c8 + 0x5e1) = 1;
-              FUN_00182084();
-              return;
+    if (g_buttonHelp.pending < 0) {
+        for (s32 i = 0; i < 6; i++) {
+            if (work->busy[i] != 0) {
+                g_buttonHelp.pending = id;
+                return;
             }
-            *(unsigned char *)(DAT_0057f0c8 + 0x5e1) = 0;
-          }
-          else {
-            *(unsigned char *)(DAT_0057f0c8 + 0x5e1) = 1;
-          }
-          FUN_00183c0c();
-          return;
         }
-      } while( 1 );
     }
-  }
-  return;
+    g_buttonHelp.pending = -1;
+    SoundSceneEntry *from = dataTableGetEntry0e(work->current);
+    SoundSceneEntry *to = dataTableGetEntry0e(id);
+    if (from != NULL && to != NULL) {
+        if (from->isLayered == 0 && to->isLayered != 0) {
+            FUN_00183318(1);
+        } else {
+            FUN_00183e58();
+        }
+    }
+    from = dataTableGetEntry0e(work->current);
+    to = dataTableGetEntry0e(id);
+    if (from == NULL || to == NULL) {
+        return;
+    }
+    work->previous = work->current;
+    work->current = id;
+    u8 kinds[8] = { 5, 6, 4, 3, 2, 1, 0, 0 };   /* volume kind of each channel */
+    for (s32 i = 0; i < 6; i++) {
+        if (to->channel[i] != 0) {
+            FUN_00183f58(i & 0xff, kinds[i], to->channel[i] & 0xff, 0);
+        } else {
+            FUN_00183f58(i & 0xff, 0x12, 0x51, 0);
+        }
+    }
+    u32 pairA = 0;
+    u32 pairB = 0;
+    for (s32 i = 0; i < 6; i++) {
+        SoundChannel *channel = &work->channels[i];
+        if (channel->kind == 1) {
+            pairA = (pairA & 0xffff0000) | channel->value;
+        } else if (channel->kind == 2) {
+            pairA = (pairA & 0xffff) | ((u32)channel->value << 16);
+        } else if (channel->kind == 5) {
+            pairB = (pairB & 0xffff0000) | channel->value;
+        } else if (channel->kind == 6) {
+            pairB = (pairB & 0xffff) | ((u32)channel->value << 16);
+        }
+    }
+    u32 lowA = pairA & 0xffff;
+    u32 highA = pairA >> 16;
+    if (lowA != 0 && highA != 0 && lowA == highA) {
+        FUN_00183f58(5, 0, 0, 0);
+        FUN_00183f58(4, 0x14, highA & 0xff, 0);
+    }
+    u32 lowB = pairB & 0xffff;
+    u32 highB = pairB >> 16;
+    if (lowB != 0 && highB != 0 && lowB == highB) {
+        FUN_00183f58(1, 0, 0, 0);
+        FUN_00183f58(0, 0x15, lowB & 0xff, 0);
+    }
+    if (from->isLayered != 0) {
+        if (to->isLayered == 0) {
+            g_buttonHelp.work->sceneChanged = 1;
+            FUN_00182084();
+            return;
+        }
+        g_buttonHelp.work->sceneChanged = 0;
+    } else {
+        g_buttonHelp.work->sceneChanged = 1;
+    }
+    FUN_00183c0c();
 }
 
 } /* extern "C" */

@@ -12,7 +12,7 @@ extern unsigned char DAT_0055bc3c; /* 0x55bc3c */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mtx44Copy. */
 extern unsigned int FUN_001a1e28(void);
-extern unsigned int *FUN_001b7420(void);
+extern unsigned int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -27,7 +27,7 @@ unsigned int * FUN_001a46c0(void)
   unsigned int *in_stack_00000004;
   unsigned char in_stack_00000008;
   
-  puVar1 = (unsigned int *)FUN_001b7420();
+  puVar1 = (unsigned int *)_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv();
   *puVar1 = (unsigned int)&DAT_0055bc3c;
   temp_v0 = FUN_001a1e28();
   nn_math_ARMv6_MTX34CopyAsm(puVar1 + 0x52,temp_v0);

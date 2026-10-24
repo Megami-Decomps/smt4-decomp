@@ -1,124 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00404f40` (_code @ 0x404f40, 0x30c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the party member card draw; armcc here keeps the offset pairs and the 0.5664f speed in different registers (retail holds the speed in s16 and the VFP conversions in d8/d9 across the calls), and the layout positions come from calls the draft passed through unchanged. */
+#include "common.h"
+
+/* A party card record (only the fields the draw reads). */
+struct CardRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 kind;       /* 2..0x12 even: the highlighted frame kinds */
+    /* 0x06 */ u16 hasBadge;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ char name[1];
+};
+
+/* A layout point (position in pixels). */
+struct CardPoint {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
 
 extern "C" {
+void FUN_0039b984(void);
+void sysMemClear(void *block, s32 bytes);
+void efctSetSpeed(f32 speed);
+u32 FUN_004038e0(u32 effect, u16 kind);
+CardPoint *FUN_001834a4(s32 group, s32 part);
+void FUN_001835b4(s32 a, s32 b, u32 sprite, s32 x, s32 y, s32 order);
+void drawSetColorFromRGBA8(u32 color);
+void FUN_00183bb0(void);
+s32 libc_strcmp(const char *a, const char *b);
+void *gameGetPlayerData(void);
+const char *gameGetPlayerName(void);
+void textFormatBuffer(u8 *buffer, const char *format, ...);
+void FUN_00162790(s32 a, u32 font, u8 *text, f32 x, f32 y);
+void efctPlayVariantSet(u32 effect, s32 x, s32 y, s32 sprite, u32 a, u32 b);
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int gameGetPlayerData(void);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
-int drawSetColorFromRGBA8(int);
-int sysMemClear(unsigned char [128], int);
-int libc_strcmp(...);
-int FUN_0039b984(void);
-int efctPlayVariantSet(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_7: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int spBC; /* 0xbc: local_bc */
-    unsigned int spC0; /* 0xc0: local_c0 */
-} param_7_stack;
-
-extern unsigned char LAB_00405258; /* 0x405258 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: gameGetPlayerData. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: FUN_0039b984. */
-extern unsigned int FUN_004038e0(unsigned int, unsigned short);
-/* Supplied declaration required: efctPlayVariantSet. */
-
-
-void FUN_00404f40(unsigned int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
-                 unsigned int param_6,unsigned int param_7)
-
+/* Draws one party member card at (x, y): its frame, name and optional badge. */
+void FUN_00404f40(u32 effect, CardRecord *card, s32 x, s32 y, u32 arg5, u32 arg6, u32 font)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  unsigned char temp_v4 [128];
-  unsigned int temp_v5;
-  
-  param_2 = param_2 & 0xffff;
-  FUN_0039b984();
-  if (param_2 != 0) {
-    sysMemClear(temp_v4,0x80);
-    efctSetSpeed();
-    temp_v5 = FUN_004038e0(param_1,*(unsigned short *)(param_2 + 4));
-    switch(*(unsigned short *)(param_2 + 4)) {
-    default:
-      temp_v2 = FUN_001834a4(0x32,0x97);
-      FUN_001835b4(2,0x32,1000,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x6a
-                  );
-      temp_v2 = FUN_001834a4(0x32,0x96);
-      FUN_001835b4(2,0x32,temp_v5,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,
-                   0x6b);
-      break;
-    case 2:
-    case 4:
-    case 6:
-    case 8:
-    case 10:
-    case 0xc:
-    case 0xe:
-    case 0x10:
-    case 0x12:
-      drawSetColorFromRGBA8(0x57d8ffff);
-      temp_v2 = FUN_001834a4(0x32,0x97);
-      FUN_001835b4(2,0x32,1000,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x6a
-                  );
-      temp_v2 = FUN_001834a4(0x32,0x96);
-      temp_v3 = *(short *)(temp_v2 + 8) + param_3;
-      temp_v2 = *(short *)(temp_v2 + 10) + param_4;
-      FUN_001835b4(2,0x32,temp_v5,temp_v3,temp_v2,0x6b);
-      FUN_001835b4(2,0x32,0x3f1,temp_v3,temp_v2,0x6b);
-      FUN_00183bb0();
+    u8 text[128];
+    FUN_0039b984();
+    if (card == NULL)
+        return;
+    sysMemClear(text, 0x80);
+    efctSetSpeed(0.56640625f);
+    u32 frameSprite = FUN_004038e0(effect, card->kind);
+    switch (card->kind) {
+    case 2: case 4: case 6: case 8: case 10: case 12: case 14: case 16: case 18: {
+        drawSetColorFromRGBA8(0x57D8FFFF);
+        CardPoint *shadow = FUN_001834a4(0x32, 0x97);
+        FUN_001835b4(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
+        CardPoint *frame = FUN_001834a4(0x32, 0x96);
+        s32 frameX = frame->x + x;
+        s32 frameY = frame->y + y;
+        FUN_001835b4(2, 0x32, frameSprite, frameX, frameY, 0x6B);
+        FUN_001835b4(2, 0x32, 0x3F1, frameX, frameY, 0x6B);
+        FUN_00183bb0();
+        break;
     }
-    temp_v2 = FUN_001834a4(0x32,0x98);
-    temp_v0 = *(short *)(temp_v2 + 8);
-    temp_v1 = *(short *)(temp_v2 + 10);
-    temp_v3 = param_2 + 0x10;
-    temp_v2 = temp_v3;
-    libc_strcmp(temp_v3,"<pc 0>");
-    if (temp_v2 == 0) {
-      gameGetPlayerData();
-      temp_v3 = gameGetPlayerName();
+    default: {
+        CardPoint *shadow = FUN_001834a4(0x32, 0x97);
+        FUN_001835b4(2, 0x32, 1000, shadow->x + x, shadow->y + y, 0x6A);
+        CardPoint *frame = FUN_001834a4(0x32, 0x96);
+        FUN_001835b4(2, 0x32, frameSprite, frame->x + x, frame->y + y, 0x6B);
+        break;
     }
-    textFormatBuffer(temp_v4,&LAB_00405258,temp_v3);
-    VectorSignedToFloat(temp_v1 + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(temp_v0 + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,param_7,temp_v4);
-    temp_v2 = FUN_001834a4(0x32,0x99);
-    efctPlayVariantSet(param_1,*(short *)(temp_v2 + 8) + param_3,*(short *)(temp_v2 + 10) + param_4,0x79,
-                 param_5,param_6);
-    if (*(short *)(param_2 + 6) != 0) {
-      efctSetSpeed();
-      temp_v2 = FUN_001834a4(0x32,0x9a);
-      param_3 = *(short *)(temp_v2 + 8) + param_3;
-      param_4 = *(short *)(temp_v2 + 10) + param_4;
-      FUN_001835b4(2,0x32,0x9c,param_3,param_4,0x79);
-      FUN_001835b4(2,0x32,0x9d,param_3,param_4,0x7a);
     }
-    efctSetSpeed();
-  }
-  return;
+    CardPoint *namePoint = FUN_001834a4(0x32, 0x98);
+    s16 nameX = namePoint->x;
+    s16 nameY = namePoint->y;
+    const char *name = card->name;
+    if (libc_strcmp(card->name, "<pc 0>") == 0) {
+        gameGetPlayerData();
+        name = gameGetPlayerName();
+    }
+    textFormatBuffer(text, "%s", name);
+    FUN_00162790(3, font, text, (f32)(nameX + x), (f32)(nameY + y));
+    CardPoint *badge = FUN_001834a4(0x32, 0x99);
+    efctPlayVariantSet(effect, badge->x + x, badge->y + y, 0x79, arg5, arg6);
+    if (card->hasBadge != 0) {
+        efctSetSpeed(0.56640625f);
+        CardPoint *mark = FUN_001834a4(0x32, 0x9A);
+        x += mark->x;
+        y += mark->y;
+        FUN_001835b4(2, 0x32, 0x9C, x, y, 0x79);
+        FUN_001835b4(2, 0x32, 0x9D, x, y, 0x7A);
+    }
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

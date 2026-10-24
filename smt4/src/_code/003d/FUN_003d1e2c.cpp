@@ -1,132 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d1e2c` (_code @ 0x3d1e2c, 0x310 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the battle target cursor step; retail repeats the clear-highlight loop inline for the forward and backward branches (unrolled by two) and scans with unsigned index tests, which armcc here compiles from the shared helper and signed loops. */
+#include "common.h"
+
+/* A battle side's unit records (0x114 bytes each); bit 8 of the flags at +0x50 marks a highlighted unit. */
+struct BattleSideUnits {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ u8 *unitRecords;
+};
+
+struct BattleSideRef {
+    BattleSideUnits *side;
+};
+
+/* The target selection work. */
+struct TargetSelectWork {
+    /* 0x000 */ u8 unk000[0x38];
+    /* 0x038 */ u8 selected[0x6D];
+    /* 0x0A5 */ u8 unk0A5[0x18];
+    /* 0x0BD */ u8 candidates[0x6D];  /* unit ids that can be picked, 0 for none */
+    /* 0x12A */ u8 unk12A[0x47A];
+    /* 0x5A4 */ u32 cursor;           /* the unit id under the cursor */
+};
 
 extern "C" {
+void eventQueueAddUnique(s32 event);
+void memClear(void *block, s32 bytes);
+s32 FUN_0029ae44(void);
+s32 padIsButtonRepeat(u32 button);
 
-int eventQueueAddUnique(int);
-int memClear(int, int);
-
-extern int FUN_0029ae44(void);
-extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: memClear. */
-
-
-unsigned int FUN_003d1e2c(int *param_1,int param_2)
-
+/* Un-highlights every unit of the side. */
+static void clearUnitHighlights(BattleSideRef *ref)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v7 = 0;
-  temp_v0 = 0;
-  do {
-    temp_v2 = temp_v0;
-    if (*(unsigned int *)(param_2 + 0x5a4) == (unsigned int)*(unsigned char *)(param_2 + temp_v0 + 0xbd)) break;
-    temp_v0 = temp_v0 + 1;
-    temp_v2 = 0xffffffff;
-  } while ((int)temp_v0 < 0x6d);
-  memClear(param_2 + 0x38,0x6d);
-  temp_v1 = padIsButtonRepeat(3);
-  temp_v6 = param_2 + 0x38;
-  if (((temp_v1 != 0) || (temp_v1 = padIsButtonRepeat(0xc), temp_v1 != 0)) ||
-     (temp_v1 = FUN_0029ae44(), temp_v1 >= 1)) {
-    temp_v1 = padIsButtonRepeat(3);
-    if ((temp_v1 != 0) || (temp_v1 = padIsButtonRepeat(0xc), temp_v1 != 0)) {
-      eventQueueAddUnique(0x100016c);
+    for (s32 i = 0; i < 0x6D; i++) {
+        u32 *flags = (u32 *)(ref->side->unitRecords + i * 0x114 + 0x50);
+        *flags &= ~8u;
     }
-    temp_v3 = 1;
-    temp_v1 = 1;
-    *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + 0x50) =
-         *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + 0x50) & 0xfffffff7;
-    do {
-      temp_v4 = temp_v3 + 1;
-      temp_v5 = temp_v3 * 0x114 + 0x50;
-      temp_v3 = temp_v3 + 2;
-      temp_v4 = temp_v4 * 0x114 + 0x50;
-      temp_v1 = temp_v1 + 2;
-      *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v5) =
-           *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v5) & 0xfffffff7;
-      *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v4) =
-           *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v4) & 0xfffffff7;
-    } while (temp_v1 < 0x6d);
-    do {
-      temp_v2 = temp_v2 + 1;
-      if ((int)temp_v2 >= 0x6d) {
-        temp_v0 = 0;
-        while (*(char *)(param_2 + temp_v0 + 0xbd) == '\0') {
-          temp_v0 = temp_v0 + 1;
-          if ((int)temp_v0 >= 0x6d) {
-            return 0;
-          }
+}
+
+/* Moves the target cursor to the next (or previous) candidate when the pad asks for it, wrapping
+ * around the candidate list, and keeps the current one selected otherwise. Returns 1 when the
+ * cursor moved without wrapping. */
+u32 FUN_003d1e2c(BattleSideRef *ref, TargetSelectWork *work)
+{
+    u32 moved = 0;
+    s32 current = -1;
+    for (s32 i = 0; i < 0x6D; i++) {
+        if (work->cursor == work->candidates[i]) {
+            current = i;
+            break;
         }
-        *(unsigned char *)((unsigned int)*(unsigned char *)(temp_v0 + param_2 + 0xbd) + temp_v6) = 1;
-        *(unsigned int *)(param_2 + 0x5a4) = (unsigned int)*(unsigned char *)(temp_v0 + param_2 + 0xbd);
+    }
+    memClear(work->selected, 0x6D);
+    if (padIsButtonRepeat(3) || padIsButtonRepeat(0xC) || FUN_0029ae44() > 0) {
+        if (padIsButtonRepeat(3) || padIsButtonRepeat(0xC))
+            eventQueueAddUnique(0x100016C);
+        clearUnitHighlights(ref);
+        for (s32 i = current + 1; i < 0x6D; i++) {
+            if (work->candidates[i] != 0) {
+                work->selected[work->candidates[i]] = 1;
+                work->cursor = work->candidates[i];
+                return 1;
+            }
+        }
+        for (s32 i = 0; i < 0x6D; i++) {
+            if (work->candidates[i] != 0) {
+                work->selected[work->candidates[i]] = 1;
+                work->cursor = work->candidates[i];
+                return 0;
+            }
+        }
         return 0;
-      }
-    } while (*(char *)(param_2 + temp_v2 + 0xbd) == '\0');
-    temp_v7 = 1;
-    *(unsigned char *)((unsigned int)*(unsigned char *)(temp_v2 + param_2 + 0xbd) + temp_v6) = 1;
-    *(unsigned int *)(param_2 + 0x5a4) = (unsigned int)*(unsigned char *)(temp_v2 + param_2 + 0xbd);
-  }
-  else {
-    temp_v1 = padIsButtonRepeat(4);
-    if (((temp_v1 == 0) && (temp_v1 = padIsButtonRepeat(0xd), temp_v1 == 0)) &&
-       (temp_v1 = FUN_0029ae44(), -1 < temp_v1)) {
-      *(unsigned char *)(*(int *)(param_2 + 0x5a4) + temp_v6) = 1;
     }
-    else {
-      temp_v1 = padIsButtonRepeat(4);
-      if ((temp_v1 != 0) || (temp_v1 = padIsButtonRepeat(0xd), temp_v1 != 0)) {
-        eventQueueAddUnique(0x100016c);
-      }
-      temp_v3 = 1;
-      temp_v1 = 1;
-      *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + 0x50) =
-           *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + 0x50) & 0xfffffff7;
-      do {
-        temp_v4 = temp_v3 + 1;
-        temp_v5 = temp_v3 * 0x114 + 0x50;
-        temp_v3 = temp_v3 + 2;
-        temp_v4 = temp_v4 * 0x114 + 0x50;
-        temp_v1 = temp_v1 + 2;
-        *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v5) =
-             *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v5) & 0xfffffff7;
-        *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v4) =
-             *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v4) & 0xfffffff7;
-      } while (temp_v1 < 0x6d);
-      temp_v2 = temp_v2 - 1;
-      if (-1 < (int)temp_v2) {
-        do {
-          if (*(char *)(param_2 + temp_v2 + 0xbd) != '\0') {
-            temp_v7 = 1;
-            *(unsigned char *)((unsigned int)*(unsigned char *)(temp_v2 + param_2 + 0xbd) + temp_v6) = 1;
-            *(unsigned int *)(param_2 + 0x5a4) = (unsigned int)*(unsigned char *)(temp_v2 + param_2 + 0xbd);
-            return temp_v7;
-          }
-          temp_v2 = temp_v2 - 1;
-        } while (temp_v2 < 0x80000000);
-      }
-      temp_v0 = 0x6c;
-      do {
-        if (*(char *)(param_2 + temp_v0 + 0xbd) != '\0') {
-          *(unsigned char *)((unsigned int)*(unsigned char *)(temp_v0 + param_2 + 0xbd) + temp_v6) = 1;
-          *(unsigned int *)(param_2 + 0x5a4) = (unsigned int)*(unsigned char *)(temp_v0 + param_2 + 0xbd);
-          return 0;
+    if (!padIsButtonRepeat(4) && !padIsButtonRepeat(0xD) && FUN_0029ae44() > -1) {
+        work->selected[work->cursor] = 1;
+        return moved;
+    }
+    if (padIsButtonRepeat(4) || padIsButtonRepeat(0xD))
+        eventQueueAddUnique(0x100016C);
+    clearUnitHighlights(ref);
+    for (s32 i = current - 1; i >= 0; i--) {
+        if (work->candidates[i] != 0) {
+            work->selected[work->candidates[i]] = 1;
+            work->cursor = work->candidates[i];
+            return 1;
         }
-        temp_v0 = temp_v0 - 1;
-      } while (temp_v0 < 0x80000000);
     }
-  }
-  return temp_v7;
+    for (s32 i = 0x6C; i >= 0; i--) {
+        if (work->candidates[i] != 0) {
+            work->selected[work->candidates[i]] = 1;
+            work->cursor = work->candidates[i];
+            return 0;
+        }
+    }
+    return moved;
 }
 
 } /* extern "C" */

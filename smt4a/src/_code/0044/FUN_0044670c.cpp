@@ -57,7 +57,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001c3fc8. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: FUN_00458a68. */
-extern unsigned int *FUN_00459870(int, int, fn_0044670c_arg0 *, int *);
+extern unsigned int *_ZN9Obj55bcccC1Ejjj(int, int, fn_0044670c_arg0 *, int *);
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
 
 
@@ -134,7 +134,7 @@ int FUN_0044670c(fn_0044670c_arg0 *param_1,int *param_2)
   ppiVar15 = (int **)((temp_v0 & 0xffffff00) | 1);
   temp_v1 = (**(romwright_code **)(*param_2 + 8))(param_2,0x68,4);
   if (temp_v1 != 0) {
-    puVar4 = (unsigned int *)FUN_00459870(temp_v1,temp_v4,param_1,param_2);
+    puVar4 = (unsigned int *)_ZN9Obj55bcccC1Ejjj(temp_v1,temp_v4,param_1,param_2);
     puVar5 = puVar4;
     FUN_00458a68(puVar4,1);
     if ((int)puVar5 >= 0) {

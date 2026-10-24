@@ -1,149 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc59c` (_code @ 0x3bc59c, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same as battleCountActionsByAttribute - the 64-bit candidate-mask tests schedule as ldm/scalar loads instead of retail's ldrd and the attribute shifts use r0 instead of r1; control flow and stack layout match. */
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "shard/W5_W5Match7_EntrySort.h"
+
+namespace {
+struct BattleActionDescriptor {
+    u16 unk00;
+    s16 kind;
+    s16 id;
+    u16 unk06;
+};
+struct BattleActionEquipment {
+    u8 unk00[4];
+    u16 id;
+};
+// Additional views into existing opaque bytes, without changing the combatant ABI.
+struct BattleActionCountView {
+    u8 unk000[0x328];
+    BattleActionDescriptor selected;
+    u8 unk330[8];
+    BattleActionDescriptor candidates[10]; // 0x338
+    u8 unk388[0x70];
+    BattleActionEquipment *equipment;      // 0x3f8
+};
+struct BattleActionSkill {
+    u8 unk00[0x28];
+    u32 unk28 : 11;
+    u32 attribute : 5;
+    u32 unkHigh : 16;
+};
+struct BattleActionItem {
+    u8 unk00[0x32];
+    u16 skillId;
+};
+struct EquipmentAttributeView {
+    u8 unk00[0x24];
+    u32 unk24 : 20;
+    u32 attribute : 12;
+};
+/* What FUN_00301a08 reports about a choice: its first combatant and how many follow. */
+struct BattleChoiceSpan {
+    s32 count[3];
+    s32 range[8];
+};
+/* The battle block's combatant table. */
+struct BattleCombatantTable {
+    u8 unk0000[0x1ffc];
+    BtlCombatantEntryA *entries;
+    u8 unk2000[0x4cd1 - 0x2000];
+    u8 selectionActive;                     // 0x4cd1
+};
+}
 
 extern "C" {
+BattleActionSkill *dataTable04FindById(u32 id);
+BattleActionItem *dataTable8FindRecord(s32 id);
+BattleCombatantTable *btlGetMainState(void);
+u32 scrGetArg(s32 index);
+void scrSetResult(s32 value);
+u32 btlResolveEntryChoice(void);
+void FUN_00301a08(u32 choice, s32 range[8], s32 count[3]);
+const BtlCombatantEntryA *FUN_003eaf20(BattleCombatantTable *state);
+s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute);
 
-int dataTable8FindRecord(void);
-int dataTable08Sub2GetRecord(void);
-int dataTable04FindById(void);
-int scrGetArg(int);
-int FUN_00301a08(unsigned int, int [8], int [3]);
-int scrSetResult(int);
-BtlCombatantEntryA *FUN_003eaf20(int state);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp50; /* 0x50: local_50 */
-} void_stack;
-
-extern unsigned int g_btlCandidateMasks; /* 0x570288 */
-extern unsigned int DAT_0057028c; /* 0x57028c */
-extern unsigned int DAT_005702a0; /* 0x5702a0 */
-extern unsigned int DAT_005702a4; /* 0x5702a4 */
-extern unsigned int DAT_005702a8; /* 0x5702a8 */
-extern unsigned int DAT_005702ac; /* 0x5702ac */
-extern unsigned int DAT_005702b0; /* 0x5702b0 */
-extern unsigned int DAT_005702b4; /* 0x5702b4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: dataTable04FindById. */
-extern unsigned int btlResolveEntryChoice(void);
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00301a08. */
-/* Supplied declaration required: scrSetResult. */
-extern int battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, unsigned int attribute);
-
-
-unsigned int FUN_003bc59c(void)
-
+/* Script command: counts the skills of one attribute (arg 0) among the actions of the chosen combatants,
+   plus the selected combatant's own. */
+s32 FUN_003bc59c(void)
 {
-/* irregular: 7 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int *puVar9;
-  int temp_v8;
-  int temp_v9;
-  unsigned char temp_v10;
-  int temp_v11 [3];
-  int temp_v12 [8];
-  
-  temp_v1 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v2 = btlResolveEntryChoice();
-  temp_v9 = 0;
-  FUN_00301a08(temp_v2,temp_v12,temp_v11);
-  temp_v8 = temp_v12[0];
-  if (temp_v12[0] < temp_v11[0] + temp_v12[0]) {
-    do {
-      temp_v3 = btlGetMainState();
-      puVar9 = (unsigned int *)(*(int *)(temp_v3 + 0x1ffc) + temp_v8 * 0x408);
-      temp_v4 = *puVar9;
-      temp_v6 = puVar9[1];
-      if ((((DAT_005702a0 & temp_v4) == 0 && (DAT_005702a4 & temp_v6) == 0) &&
-          ((g_btlCandidateMasks & temp_v4) != 0 || (DAT_0057028c & temp_v6) != 0)) &&
-         ((temp_v6 & DAT_005702b4) == 0 && (temp_v4 & DAT_005702b0) == 0)) {
-        temp_v3 = 0;
-        if (((DAT_005702a0 & temp_v4) == 0 && (DAT_005702a4 & temp_v6) == 0) &&
-           ((temp_v4 & DAT_005702a8) == 0 && (temp_v6 & DAT_005702ac) == 0)) {
-          temp_v7 = 0;
-          do {
-            temp_v0 = *(short *)((int)puVar9 + temp_v7 * 8 + 0x33a);
-            if (temp_v0 == 2 || temp_v0 == 3) {
-              temp_v5 = (int)(short)puVar9[temp_v7 * 2 + 0xcf];
-              dataTable04FindById();
-              if ((temp_v5 != 0) && (temp_v1 == (*(unsigned int *)(temp_v5 + 0x28) & 0xffff) >> 0xb)) {
-                temp_v3 = temp_v3 + 1;
-              }
+    u32 attribute = scrGetArg(0);
+    scrGetArg(1);
+    u32 choice = btlResolveEntryChoice();
+    s32 total = 0;
+    BattleChoiceSpan span;
+    FUN_00301a08(choice, span.range, span.count);
+    for (s32 index = span.range[0]; index < span.range[0] + span.count[0]; index++) {
+        const BtlCombatantEntryA *combatant = &btlGetMainState()->entries[index];
+        const BattleActionCountView *actions = reinterpret_cast<const BattleActionCountView *>(combatant);
+        u64 flags = combatant->flags;
+        if ((flags & g_btlCandidateMasks.unavailable) == 0 && (flags & g_btlCandidateMasks.required) != 0 &&
+            (flags & g_btlCandidateMasks.excluded) == 0) {
+            s32 found = 0;
+            if ((flags & g_btlCandidateMasks.unavailable) != 0 || (flags & g_btlCandidateMasks.singleAction) != 0) {
+                if (actions->selected.kind == 2 || actions->selected.kind == 3) {
+                    const BattleActionSkill *skill = dataTable04FindById(actions->selected.id);
+                    if (skill != NULL && attribute == skill->attribute) {
+                        found = 1;
+                    }
+                }
+                if (actions->selected.kind == 8) {
+                    const BattleActionItem *item = dataTable8FindRecord(actions->selected.id);
+                    if (item != NULL && item->skillId != 0) {
+                        const BattleActionSkill *skill = dataTable04FindById(item->skillId);
+                        if (skill != NULL && attribute == skill->attribute) {
+                            found++;
+                        }
+                    }
+                }
+            } else {
+                for (s32 slot = 0; slot < 10; slot++) {
+                    if (actions->candidates[slot].kind == 2 || actions->candidates[slot].kind == 3) {
+                        const BattleActionSkill *skill = dataTable04FindById(actions->candidates[slot].id);
+                        if (skill != NULL && attribute == skill->attribute) {
+                            found++;
+                        }
+                    }
+                    if (actions->candidates[slot].kind == 8) {
+                        const BattleActionItem *item = dataTable8FindRecord(actions->candidates[slot].id);
+                        if (item != NULL && item->skillId != 0) {
+                            const BattleActionSkill *skill = dataTable04FindById(item->skillId);
+                            if (skill != NULL && attribute == skill->attribute) {
+                                found++;
+                            }
+                        }
+                    }
+                    if (actions->candidates[slot].kind == 1 && actions->candidates[slot].id == 2 &&
+                        actions->equipment != NULL) {
+                        const EntrySortData *entry = dataTable08Sub2GetRecord(actions->equipment->id);
+                        if (entry != NULL &&
+                            attribute == reinterpret_cast<const EquipmentAttributeView *>(entry)->attribute) {
+                            found++;
+                        }
+                    }
+                }
             }
-            if (*(short *)((int)puVar9 + temp_v7 * 8 + 0x33a) == 8) {
-              temp_v5 = (int)(short)puVar9[temp_v7 * 2 + 0xcf];
-              dataTable8FindRecord();
-              if (((temp_v5 != 0) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v5 + 0x32), temp_v4 != 0)) &&
-                 ((dataTable04FindById(), temp_v4 != 0 &&
-                  (temp_v1 == (*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb)))) {
-                temp_v3 = temp_v3 + 1;
-              }
-            }
-            temp_v0 = *(short *)((int)puVar9 + temp_v7 * 8 + 0x33a);
-            temp_v10 = temp_v0 == 1;
-            if (temp_v10) {
-              temp_v0 = (short)puVar9[temp_v7 * 2 + 0xcf];
-            }
-            if ((temp_v10 && temp_v0 == 2) && (puVar9[0xfe] != 0)) {
-              temp_v4 = (unsigned int)*(unsigned short *)(puVar9[0xfe] + 4);
-              dataTable08Sub2GetRecord();
-              if ((temp_v4 != 0) && (temp_v1 == *(unsigned int *)(temp_v4 + 0x24) >> 0x14)) {
-                temp_v3 = temp_v3 + 1;
-              }
-            }
-            temp_v7 = temp_v7 + 1;
-          } while (temp_v7 < 10);
+            total += found;
         }
-        else {
-          if (*(short *)((int)puVar9 + 0x32a) == 2 || *(short *)((int)puVar9 + 0x32a) == 3) {
-            temp_v7 = (int)(short)puVar9[0xcb];
-            dataTable04FindById();
-            if ((temp_v7 != 0) && (temp_v1 == (*(unsigned int *)(temp_v7 + 0x28) & 0xffff) >> 0xb)) {
-              temp_v3 = 1;
-            }
-          }
-          if (*(short *)((int)puVar9 + 0x32a) == 8) {
-            temp_v7 = (int)(short)puVar9[0xcb];
-            dataTable8FindRecord();
-            if ((((temp_v7 != 0) && (temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + 0x32), temp_v4 != 0)) &&
-                (dataTable04FindById(), temp_v4 != 0)) &&
-               (temp_v1 == (*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb)) {
-              temp_v3 = temp_v3 + 1;
-            }
-          }
-        }
-        temp_v9 = temp_v9 + temp_v3;
-      }
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v8 < temp_v12[0] + temp_v11[0]);
-  }
-  temp_v8 = btlGetMainState();
-  if (*(char *)(temp_v8 + 0x4cd1) != '\0') {
-    temp_v8 = btlGetMainState();
-    const BtlCombatantEntryA *combatant = FUN_003eaf20(temp_v8);
-    if (combatant != 0) {
-      temp_v8 = battleCountActionsByAttribute(combatant,temp_v1);
-      temp_v9 = temp_v9 + temp_v8;
     }
-  }
-  scrSetResult(temp_v9);
-  return 1;
+    if (btlGetMainState()->selectionActive != 0) {
+        const BtlCombatantEntryA *selected = FUN_003eaf20(btlGetMainState());
+        if (selected != NULL) {
+            total += battleCountActionsByAttribute(selected, attribute);
+        }
+    }
+    scrSetResult(total);
+    return 1;
 }
 
 } /* extern "C" */

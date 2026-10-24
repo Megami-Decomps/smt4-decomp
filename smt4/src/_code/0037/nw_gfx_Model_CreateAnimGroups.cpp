@@ -32,7 +32,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002367c0. */
-extern unsigned int *FUN_002375a0(int, int, fn_0037122c_arg0 *, int *);
+extern unsigned int *_ZN9Obj4218b0C1Ejjj(int, int, fn_0037122c_arg0 *, int *);
 /* Supplied declaration required: FUN_00370fa8. */
 /* Supplied declaration required: nw_gfx_Model_BindVisibilityAnim. */
 
@@ -84,7 +84,7 @@ int nw_gfx_Model_CreateAnimGroups(fn_0037122c_arg0 *param_1,int *param_2)
 LAB_003712bc:
             temp_v2 = (**(romwright_code **)(*param_2 + 8))(param_2,0x68,4);
             if (temp_v2 != 0) {
-              puVar5 = (unsigned int *)FUN_002375a0(temp_v2,temp_v3,param_1,param_2);
+              puVar5 = (unsigned int *)_ZN9Obj4218b0C1Ejjj(temp_v2,temp_v3,param_1,param_2);
               puVar6 = puVar5;
               FUN_002367c0(puVar5,1);
               if ((int)puVar6 >= 0) {

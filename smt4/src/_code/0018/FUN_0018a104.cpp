@@ -1,115 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018a104` (_code @ 0x18a104, 0x2a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite; the axis is derived from the global matrix at DAT_00407ed0 in retail but is folded to the draft's constants here, and the scheduling of the float math differs. */
+#include "common.h"
+#include <math.h>
+
+struct Vec3f {
+    f32 x, y, z;
+};
+
+// Config/unite preview screen: only the orbit camera members set up here.
+struct OrbitScreen {
+    u8 unk000[0x20];
+    u8 camera[0x528 - 0x20];    // 0x20: camera node
+    Vec3f position;             // 0x528: camera position
+    Vec3f direction;            // 0x534: view direction (relative)
+    f32 distance;               // 0x540
+    f32 unk544;
+    f32 fov;                    // 0x548
+    f32 nearPlane;              // 0x54c
+};
 
 extern "C" {
 
-int FUN_00298d50(int);
-int FUN_002ad314(float *, float [6]);
-int FUN_002c159c(int);
-int FUN_002c1e30(int, int);
-int FUN_002c1edc(int, float *, float *, int *);
+void FUN_002ad314(f32* sine, f32* cosine);
+void FUN_002c159c(void* camera);
+void FUN_002c1edc(void* camera, Vec3f* position, Vec3f* target, s32* result);
+void FUN_002c1e30(void* camera, s32 flag);
+void FUN_00298d50(void* camera);
 
-/* stack frame of param_1: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+// Places the screen's camera at its default position and aims it by rotating the
+// default view direction around the screen axis.
+void FUN_0018a104(OrbitScreen* screen)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-/* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: FUN_002c159c. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
+    screen->fov = 35.0f;
+    screen->direction.x = 0.0f;
+    screen->position.x = 0.0f;
+    screen->direction.y = 0.0f;
+    screen->direction.z = -1.0f;
+    screen->position.y = 6.3f;
+    screen->position.z = 44.5f;
+    screen->distance = screen->position.z;
+    screen->unk544 = 0.0f;
+    screen->nearPlane = 5.0f;
 
+    s32 result = 0;
+    f32 sine, cosine;
+    Vec3f axis;
+    axis.x = 0.0f * screen->direction.x + 0.0f * screen->direction.y + 1.0f * screen->direction.z;
+    axis.y = -1.0f * screen->direction.x + 0.0f * screen->direction.y + 0.0f * screen->direction.z;
+    axis.z = 0.0f * screen->direction.x + 1.0f * screen->direction.y + 0.0f * screen->direction.z;
+    FUN_002ad314(&sine, &cosine);
 
-void FUN_0018a104(int param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  float *pfVar1;
-  float *pfVar2;
-  float temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  float temp_v17;
-  float temp_v18 [6];
-  
-  pfVar1 = (float *)(param_1 + 0x534);
-  *(unsigned int *)(param_1 + 0x548) = 0x420c0000;
-  *pfVar1 = 0.0f;
-  pfVar2 = (float *)(param_1 + 0x528);
-  *(unsigned int *)(param_1 + 0x538) = 0;
-  *(unsigned int *)(param_1 + 0x53c) = 0xbf800000;
-  *pfVar2 = 0.0f;
-  *(unsigned int *)(param_1 + 0x52c) = 0x40c9999a;
-  *(unsigned int *)(param_1 + 0x530) = 0x42320000;
-  temp_v10 = 1.0f;
-  *(unsigned int *)(param_1 + 0x540) = *(unsigned int *)(param_1 + 0x530);
-  *(unsigned int *)(param_1 + 0x544) = 0;
-  *(unsigned int *)(param_1 + 0x54c) = 0x40a00000;
-  temp_v14 = 0;
-  temp_v15 = 0x3f800000;
-  temp_v16 = 0;
-  temp_v4 = *(float *)(param_1 + 0x53c);
-  temp_v0 = *pfVar1;
-  temp_v1 = *(float *)(param_1 + 0x538);
-  temp_v9 = temp_v0 * 0.0f + temp_v1 * 0.0f + temp_v4 * 1.0f;
-  temp_v8 = temp_v0 * -1.0f + temp_v1 * 0.0f + temp_v4 * 0.0f;
-  temp_v1 = temp_v0 * 0.0f + temp_v1 * 1.0f + temp_v4 * 0.0f;
-  FUN_002ad314(&temp_v17,temp_v18);
-  temp_v5 = temp_v10 - temp_v18[0];
-  temp_v10 = temp_v10 / romwright_sqrt_4(temp_v9 * temp_v9 + temp_v1 * temp_v1 + temp_v8 * temp_v8);
-  temp_v1 = temp_v1 * temp_v10;
-  temp_v8 = temp_v8 * temp_v10;
-  temp_v9 = temp_v9 * temp_v10;
-  temp_v2 = temp_v5 * temp_v1 * temp_v8;
-  temp_v10 = temp_v5 * temp_v9 * temp_v8;
-  temp_v3 = temp_v5 * temp_v9 * temp_v1;
-  temp_v4 = *pfVar1;
-  temp_v6 = *(float *)(param_1 + 0x538);
-  temp_v7 = *(float *)(param_1 + 0x53c);
-  temp_v0 = *(float *)(param_1 + 0x540);
-  temp_v11 = ((temp_v18[0] + temp_v5 * temp_v9 * temp_v9) * temp_v4 + (temp_v3 - temp_v17 * temp_v8) * temp_v6
-             + (temp_v10 + temp_v17 * temp_v1) * temp_v7) * temp_v0 + *pfVar2;
-  temp_v12 = ((temp_v3 + temp_v17 * temp_v8) * temp_v4 + (temp_v18[0] + temp_v5 * temp_v1 * temp_v1) * temp_v6 +
-             (temp_v2 - temp_v17 * temp_v9) * temp_v7) * temp_v0 + *(float *)(param_1 + 0x52c);
-  temp_v13 = ((temp_v10 - temp_v17 * temp_v1) * temp_v4 + (temp_v2 + temp_v17 * temp_v9) * temp_v6 +
-             (temp_v18[0] + temp_v5 * temp_v8 * temp_v8) * temp_v7) * temp_v0 + *(float *)(param_1 + 0x530)
-  ;
-  FUN_002c159c(param_1 + 0x20);
-  FUN_002c1edc(param_1 + 0x20,pfVar2,&temp_v11,&temp_v14);
-  FUN_002c1e30(param_1 + 0x20,1);
-  FUN_00298d50(param_1 + 0x20);
-  return;
+    f32 complement = 1.0f - cosine;
+    f32 length = sqrtf(axis.x * axis.x + axis.z * axis.z + axis.y * axis.y);
+    f32 inverse = 1.0f / length;
+    axis.z *= inverse;
+    axis.y *= inverse;
+    axis.x *= inverse;
+    f32 yz = complement * axis.z * axis.y;
+    f32 xy = complement * axis.x * axis.y;
+    f32 xz = complement * axis.x * axis.z;
+    Vec3f target;
+    target.x = ((cosine + complement * axis.x * axis.x) * screen->direction.x + (xz - sine * axis.y) * screen->direction.y +
+                (xy + sine * axis.z) * screen->direction.z) * screen->distance + screen->position.x;
+    target.y = ((xz + sine * axis.y) * screen->direction.x + (cosine + complement * axis.z * axis.z) * screen->direction.y +
+                (yz - sine * axis.x) * screen->direction.z) * screen->distance + screen->position.y;
+    target.z = ((xy - sine * axis.z) * screen->direction.x + (yz + sine * axis.x) * screen->direction.y +
+                (cosine + complement * axis.y * axis.y) * screen->direction.z) * screen->distance + screen->position.z;
+    FUN_002c159c(screen->camera);
+    FUN_002c1edc(screen->camera, &screen->position, &target, &result);
+    FUN_002c1e30(screen->camera, 1);
+    FUN_00298d50(screen->camera);
 }
 
 } /* extern "C" */

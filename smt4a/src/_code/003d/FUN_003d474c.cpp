@@ -1,147 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d474c` (_code @ 0x3d474c, 0x238 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the remaining differences are branch layout and register allocation of the state selection (the two `mov r0, #0` stub calls use FUN_00284dbc as the nearest equivalent stub). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019de98(int, unsigned int);
-int FUN_001ad9b4(void);
-unsigned int questHasSpecialDetailPage(unsigned int);
-int partyEntryFlagsBit3(...);
-int FUN_004186e0(void);
+/* The quest screen's state block (only the fields this routine reads). */
+typedef struct QuestScreen {
+    /* 0x000 */ u8 unk000[0x90C];
+    /* 0x90C */ u8 mode;               /* 0: quest list, else the party-entry list */
+    /* 0x90D */ u8 unk90d[0x3B];
+    /* 0x948 */ u8 entryList[0x64];
+    /* 0x9AC */ u8 questList[0x64];
+    /* 0xA10 */ u16 entryIds[0x6B];
+    /* 0xAE6 */ u8 unkae6[0x8];
+} QuestScreen;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct QuestScreenView {
+    u8 unk0000[0xAD6];
+    u16 questIds[1];
+} QuestScreenView;
 
-extern int g_uiQuest; /* 0x57f28c */
+/* A quest record: its kind byte at 6. */
+typedef struct QuestRecord {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u8 kind;
+} QuestRecord;
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int resourceRunOperationIfUnblocked(void);
-extern int FUN_002a4894(int);
-extern int FUN_003de75c(unsigned int);
-/* Supplied declaration required: partyEntryFlagsBit3. */
-extern int partyEntryFlagsBit1(void);
-/* Supplied declaration required: FUN_004186e0. */
-extern int partyEntryBitsBit4(unsigned int);
+extern QuestScreen *g_uiQuest;
 
+s32 resourceRunOperationIfUnblocked(void *list);
+s32 FUN_002a4894(void *list);
+s32 partyEntryFlagsBit1(u32 id);
+s32 partyEntryFlagsBit3(u32 id);
+s32 partyEntryBitsBit4(u32 id);
+u32 questHasSpecialDetailPage(u32 id);
+u32 FUN_004186e0(void);
+QuestRecord *FUN_001ad9b4(u32 id);
+s32 FUN_003de75c(u32 id);
+s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
+void *dataTableGet(u32 table, u32 section);
+void *dataTableGetEntries(void *section);
+u32 dataTableGetCount(void *section);
+void FUN_0019de98(const char *text, u32 color);
 
-/* WARNING: Removing unreachable block (ram,0x003d485c) */
-
+/* Picks the description line (an entry of table 0x34) for the selected quest or party entry and
+ * shows it: the state depends on the entry's flags, bits and kind. */
 void FUN_003d474c(void)
-
 {
-/* irregular: 8 goto(s); 6 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v4 = g_uiQuest;
-  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
-    temp_v2 = g_uiQuest + 0x948;
-    temp_v3 = resourceRunOperationIfUnblocked();
-    temp_v2 = FUN_002a4894(temp_v2);
-    temp_v1 = *(unsigned short *)(temp_v4 + (temp_v2 + temp_v3) * 2 + 0xa10);
-  }
-  else {
-    temp_v2 = g_uiQuest + 0x9ac;
-    temp_v3 = resourceRunOperationIfUnblocked();
-    temp_v2 = FUN_002a4894(temp_v2);
-    temp_v1 = *(unsigned short *)(temp_v4 + (temp_v2 + temp_v3) * 2 + 0xad6);
-  }
-  temp_v8 = (unsigned int)temp_v1;
-  if (temp_v8 == 0) {
-    return;
-  }
-  if (*(char *)(temp_v4 + 0x90c) != '\0') {
-    temp_v4 = partyEntryFlagsBit1();
-    if (temp_v4 != 0) {
-      temp_v4 = FUN_004186e0();
-      if (temp_v4 == 0) goto LAB_003d48cc;
+    QuestScreen *screen = g_uiQuest;
+    u32 id;
+    u32 state;
+
+    if (screen->mode != 0) {
+        s32 operation = resourceRunOperationIfUnblocked(screen->entryList);
+        id = screen->entryIds[FUN_002a4894(screen->entryList) + operation];
+    } else {
+        s32 operation = resourceRunOperationIfUnblocked(screen->questList);
+        id = ((QuestScreenView *)screen)->questIds[FUN_002a4894(screen->questList) + operation];
     }
-    else {
-      temp_v4 = partyEntryFlagsBit3(temp_v8);
-      if (temp_v4 != 0) goto LAB_003d4938;
+    if (id == 0) {
+        return;
     }
-    temp_v8 = 6;
-  }
-  else {
-    temp_v7 = temp_v8;
-    FUN_001ad9b4();
-    temp_v0 = *(char *)(temp_v7 + 6);
-    if (!((temp_v0 == '\x06' || temp_v0 == '\t') || temp_v0 == '\v')) {
-      temp_v4 = partyEntryFlagsBit3();
-      if (temp_v4 != 0) {
-        temp_v4 = partyEntryBitsBit4(temp_v8);
-        if (temp_v4 == 0) {
-          temp_v4 = questHasSpecialDetailPage(temp_v8);
-joined_r0x003d4934:
-          if (temp_v4 != 0) {
-            temp_v8 = 10;
-            goto LAB_003d493c;
-          }
+    if (screen->mode != 0) {
+        if (partyEntryFlagsBit1(id) != 0) {
+            state = FUN_004186e0() == 0 ? 0 : 6;
+        } else {
+            state = partyEntryFlagsBit3(id) != 0 ? 3 : 6;
         }
-LAB_003d4938:
-        temp_v8 = 3;
-        goto LAB_003d493c;
-      }
+    } else {
+        QuestRecord *record = FUN_001ad9b4(id);
+
+        if (record->kind == 6 || record->kind == 9 || record->kind == 11) {
+            if (FUN_003de75c(id) == 0 && FUN_00284dbc(id) == 0) {
+                if (partyEntryFlagsBit3(id) == 0) {
+                    state = 5;
+                } else if (partyEntryBitsBit4(id) != 0) {
+                    state = 3;
+                } else if (questHasSpecialDetailPage(id) != 0) {
+                    state = 10;
+                } else {
+                    state = 3;
+                }
+            } else if (FUN_004186e0() == id) {
+                state = 0;
+            } else if (partyEntryFlagsBit3(id) != 0) {
+                state = 2;
+            } else {
+                state = record->kind == 11 ? 12 : 11;
+            }
+        } else if (partyEntryFlagsBit3(id) == 0) {
+            state = 0;
+        } else if (FUN_00284dbc(id) != 0) {
+            state = 4;
+        } else if (partyEntryBitsBit4(id) != 0) {
+            state = 3;
+        } else if (questHasSpecialDetailPage(id) != 0) {
+            state = 10;
+        } else {
+            state = 3;
+        }
     }
-    else {
-      temp_v4 = FUN_003de75c(temp_v8);
-      if (temp_v4 == 0) {
-        temp_v4 = partyEntryFlagsBit3(temp_v8);
-        if (temp_v4 == 0) {
-          temp_v8 = 5;
-          goto LAB_003d493c;
-        }
-        temp_v4 = partyEntryBitsBit4(temp_v8);
-        if (temp_v4 == 0) {
-          temp_v4 = questHasSpecialDetailPage(temp_v8);
-          goto joined_r0x003d4934;
-        }
-        goto LAB_003d4938;
-      }
-      temp_v5 = FUN_004186e0();
-      if (temp_v5 != temp_v8) {
-        temp_v4 = partyEntryFlagsBit3(temp_v8);
-        if (temp_v4 != 0) {
-          temp_v8 = 2;
-        }
-        else if (*(char *)(temp_v7 + 6) == '\v') {
-          temp_v8 = 0xc;
-        }
-        else {
-          temp_v8 = 0xb;
-        }
-        goto LAB_003d493c;
-      }
-    }
-LAB_003d48cc:
-    temp_v8 = 0;
-  }
-LAB_003d493c:
-  temp_v6 = dataTableGet(0x34,0);
-  temp_v4 = dataTableGetEntries();
-  temp_v7 = dataTableGetCount(temp_v6);
-  if (temp_v8 < temp_v7) {
-    temp_v4 = temp_v4 + temp_v8 * 0x60 + 1;
-  }
-  else {
-    temp_v4 = 0;
-  }
-  FUN_0019de98(temp_v4,0xf4f4f4ff);
-  return;
+    void *table = dataTableGet(0x34, 0);
+    u8 *entries = (u8 *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    const char *line = state < count ? (const char *)(entries + state * 0x60 + 1) : NULL;
+
+    FUN_0019de98(line, 0xF4F4F4FF);
 }
 
-} /* extern "C" */
+}

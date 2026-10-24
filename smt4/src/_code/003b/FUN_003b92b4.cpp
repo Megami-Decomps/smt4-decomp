@@ -1,189 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b92b4` (_code @ 0x3b92b4, 0x2e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment: retail keeps the payload pointer and the constants in different registers (r7/r8 vs r6-r9) and loads the zero words of the 12-byte payload with strd (185 vs 186 rows). */
+#include "common.h"
 
 extern "C" {
 
-int gameSynchronizeMapState(int);
-int FUN_0026f960(int);
-int bgmReleaseStopped(void);
-int gameCopyPersistentSave(void);
-int messageMainFinishWindow(void);
-int soundChannelStopAll(int);
-int FUN_002a03d8(int, int);
-int dataTable1bOr1cGetRecord(void);
-int libc_strcpy(...);
-int asdSequenceRequest(...);
+/* The scene record the work area points at (only the fields read here). */
+typedef struct SceneRecord {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ u32 id40;
+    /* 0x44 */ char name[0x10];
+    /* 0x54 */ u16 id;
+} SceneRecord;
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+/* The scene transition work area (only the fields used here). */
+typedef struct SceneWork {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u32 flags;
+    /* 0x024 */ u8 done;
+    /* 0x025 */ u8 unk025[3];
+    /* 0x028 */ u32 state;
+    /* 0x02C */ u32 unk02c;
+    /* 0x030 */ u8 unk030[0x18];
+    /* 0x048 */ u8 requestEvent8;
+    /* 0x049 */ u8 requestEvent6;
+    /* 0x04A */ u8 requestCounter;
+    /* 0x04B */ u8 requestEnding;
+    /* 0x04C */ u8 unk04c[0x50];
+    /* 0x09C */ u8 sprites[0xCC4];
+    /* 0xD60 */ SceneRecord *record;
+    /* 0xD64 */ u8 unkd64[0x48];
+    /* 0xDAC */ u8 returnToMap;
+} SceneWork;
 
-extern unsigned char LAB_0031305f; /* 0x31305f */
-extern unsigned char DAT_0049f950; /* 0x49f950 */
-extern unsigned int DAT_0049f970; /* 0x49f970 */
-extern unsigned int DAT_0049f978; /* 0x49f978 */
-extern int DAT_0049fd14; /* 0x49fd14 */
+/* The slice of the game state read and written here. */
+typedef struct SceneGameState {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u8 endingRequested;
+    /* 0x35 */ u8 unk35[0x1F];
+    /* 0x54 */ u32 saveId;
+    /* 0x58 */ u8 unk58[4];
+    /* 0x5C */ char saveName[0x10];
+} SceneGameState;
 
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-/* Supplied declaration required: gameSynchronizeMapState. */
-extern unsigned int FUN_0022b8c0(int);
-/* Supplied declaration required: FUN_0026f960. */
-/* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: gameCopyPersistentSave. */
-extern int FUN_00287894(void);
-extern int FUN_002903f0(void);
-/* Supplied declaration required: messageMainFinishWindow. */
-/* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: asdSequenceRequest. */
-extern int spriteTableFreeLoaded(int);
+extern SceneGameState g_gameState;
+extern s32 DAT_0049fd14;
 
+s32 spriteTableFreeLoaded(void *sprites);
+void asdSequenceRequest(u32 kind, void *payload, u32 size);
+void FUN_002a03d8(s32 a, s32 b);
+void gameCopyPersistentSave(void);
+char *libc_strcpy(char *destination, const char *source);
+void bgmReleaseStopped(void);
+void soundChannelStopAll(s32 channel);
+void *FUN_002903f0(void);
+s32 FUN_00287894(void);
+SceneRecord *FUN_0022b8c0(void *sprites);
+void gameSynchronizeMapState(SceneWork *work);
+u8 *dataTable1bOr1cGetRecord(void *entry);
+void FUN_0026f960(u32 id);
+void messageMainFinishWindow(void);
 
-void FUN_003b92b4(int param_1)
-
+/* Starts the sequence the scene transition asked for, from its request flags, then closes the
+ * message window and marks the transition done. */
+void FUN_003b92b4(SceneWork *work)
 {
-/* irregular: 12 unstructured edge(s); 1 goto(s); 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  unsigned int temp_v5 [3];
-  unsigned char *puStack_2c;
-  
-  puVar5 = temp_v5;
-  temp_v0 = spriteTableFreeLoaded(param_1 + 0x9c);
-  if (temp_v0 == 0) {
-    return;
-  }
-  temp_v1 = *(unsigned int *)(param_1 + 0x20);
-  if ((temp_v1 & 0x1000000) != 0) {
-    temp_v5[0] = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54);
-    asdSequenceRequest(10,temp_v5,4);
-  }
-  else if ((temp_v1 & 0x2000000) != 0) {
-    temp_v4 = 4;
-    temp_v5[0] = *(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54) + 100;
-    temp_v2 = 10;
-    puVar5 = temp_v5;
-    asdSequenceRequest(temp_v2,puVar5,temp_v4);
-  }
-  else if ((temp_v1 & 0x8000000) != 0) {
-    temp_v5[0] = romwright_piece_2_2((((unsigned int)(temp_v5[0]) >> 16) & 0xffffU),*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54));
-    asdSequenceRequest(0x12,temp_v5,2);
-    FUN_002a03d8(0,10);
-    FUN_002a03d8(1,10);
-  }
-  else if ((temp_v1 & 0x4000000) != 0) {
-    temp_v5[0] = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54);
-    temp_v5[1] = 0;
-    temp_v5[2] = 0;
-    temp_v4 = 0xc;
-    temp_v2 = 0x10;
-    puVar5 = temp_v5;
-    asdSequenceRequest(temp_v2,puVar5,temp_v4);
-  }
-  else {
-    if ((temp_v1 & 0x200000) != 0) {
-      gameCopyPersistentSave();
-      temp_v5[0] = *(unsigned int *)(*(int *)(param_1 + 0xd60) + 0x40);
-      temp_v5[1] = 0xffffffff;
-      libc_strcpy(temp_v5 + 2,*(int *)(param_1 + 0xd60) + 0x44);
-      temp_v4 = 0x20;
-      temp_v2 = 4;
-      puVar5 = temp_v5;
+    u32 payload[8];
+
+    if (spriteTableFreeLoaded(work->sprites) == 0) {
+        return;
     }
-    else if ((temp_v1 & 0x40000) != 0) {
-      gameCopyPersistentSave();
-      temp_v5[0] = DAT_0049f970;
-      temp_v5[1] = 0xffffffff;
-      libc_strcpy(temp_v5 + 2,&DAT_0049f978);
-      temp_v4 = 0x20;
-      temp_v2 = 4;
-      puVar5 = temp_v5;
-    }
-    else if ((temp_v1 & 0x800000) != 0) {
-      temp_v4 = 4;
-      temp_v5[0] = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0xd60) + 0x54);
-      temp_v2 = 0xd;
-      puVar5 = temp_v5;
-    }
-    else if ((temp_v1 & 0x20000000) != 0) {
-      temp_v4 = 4;
-      temp_v2 = 0x14;
-      temp_v5[0] = 0;
-      puVar5 = temp_v5;
-    }
-    else if (*(char *)(param_1 + 0x49) != '\0') {
-      temp_v4 = 0;
-      temp_v2 = 6;
-      puVar5 = (unsigned int *)(unsigned char *)0x0;
-    }
-    else if (*(char *)(param_1 + 0x48) != '\0') {
-      temp_v4 = 0;
-      temp_v2 = 8;
-      puVar5 = (unsigned int *)(unsigned char *)0x0;
-    }
-    else if (*(char *)(param_1 + 0x4a) != '\0') {
-      temp_v4 = 4;
-      temp_v5[0] = DAT_0049fd14 - 200;
-      temp_v2 = 0xe;
-      puVar5 = temp_v5;
-    }
-    else if (*(char *)(param_1 + 0xdac) != '\0') {
-      temp_v0 = FUN_002903f0();
-      if (temp_v0 != 0) {
-        temp_v3 = FUN_00287894();
-        if (temp_v3 == 6) {
-          temp_v2 = FUN_0022b8c0(param_1 + 0x9c);
-          *(unsigned int *)(param_1 + 0xd60) = temp_v2;
-          gameSynchronizeMapState(param_1);
-          dataTable1bOr1cGetRecord();
-          FUN_0026f960(*(unsigned short *)(temp_v0 + 0x148));
+    u32 flags = work->flags;
+
+    if ((flags & 0x1000000) != 0) {
+        payload[0] = work->record->id;
+        asdSequenceRequest(10, payload, 4);
+    } else if ((flags & 0x2000000) != 0) {
+        payload[0] = work->record->id + 100;
+        asdSequenceRequest(10, payload, 4);
+    } else if ((flags & 0x8000000) != 0) {
+        *(u16 *)payload = work->record->id;
+        asdSequenceRequest(0x12, payload, 2);
+        FUN_002a03d8(0, 10);
+        FUN_002a03d8(1, 10);
+    } else if ((flags & 0x4000000) != 0) {
+        payload[0] = work->record->id;
+        payload[1] = 0;
+        payload[2] = 0;
+        asdSequenceRequest(16, payload, 12);
+    } else if ((flags & 0x200000) != 0) {
+        gameCopyPersistentSave();
+        payload[0] = work->record->id40;
+        payload[1] = -1;
+        libc_strcpy((char *)&payload[2], work->record->name);
+        asdSequenceRequest(4, payload, 32);
+    } else if ((flags & 0x40000) != 0) {
+        gameCopyPersistentSave();
+        payload[0] = g_gameState.saveId;
+        payload[1] = -1;
+        libc_strcpy((char *)&payload[2], g_gameState.saveName);
+        asdSequenceRequest(4, payload, 32);
+    } else if ((flags & 0x800000) != 0) {
+        payload[0] = work->record->id;
+        asdSequenceRequest(13, payload, 4);
+    } else if ((flags & 0x20000000) != 0) {
+        payload[0] = 0;
+        asdSequenceRequest(20, payload, 4);
+    } else if (work->requestEvent6 != 0) {
+        asdSequenceRequest(6, NULL, 0);
+    } else if (work->requestEvent8 != 0) {
+        asdSequenceRequest(8, NULL, 0);
+    } else if (work->requestCounter != 0) {
+        payload[0] = DAT_0049fd14 - 200;
+        asdSequenceRequest(14, payload, 4);
+    } else if (work->returnToMap != 0) {
+        void *entry = FUN_002903f0();
+
+        if (entry != NULL && FUN_00287894() == 6) {
+            work->record = FUN_0022b8c0(work->sprites);
+            gameSynchronizeMapState(work);
+            FUN_0026f960(*(u16 *)(dataTable1bOr1cGetRecord(entry) + 0x148));
         }
-      }
-      if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
-        *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
+    } else if (work->requestEnding != 0) {
+        bgmReleaseStopped();
+        soundChannelStopAll(15);
+        g_gameState.endingRequested = 1;
+        payload[0] = 1;
+        payload[1] = -1;
+        libc_strcpy((char *)&payload[2], "e001_01");
+        asdSequenceRequest(4, payload, 32);
+    }
+    if ((work->flags & 0x40) != 0) {
+        work->flags &= ~0x40;
         messageMainFinishWindow();
-      }
-      *(unsigned char *)(param_1 + 0x24) = 1;
-      *(unsigned int *)(param_1 + 0x28) = 0x12;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      return;
     }
-    else {
-      if (*(char *)(param_1 + 0x4b) == '\0') goto LAB_003b9564;
-      bgmReleaseStopped();
-      soundChannelStopAll(0xf);
-      DAT_0049f950 = 1;
-      temp_v5[0] = 1;
-      temp_v5[1] = 0xffffffff;
-      temp_v5[2] = 0x31303065;
-      puStack_2c = &LAB_0031305f;
-      temp_v4 = 0x20;
-      temp_v2 = 4;
-    }
-    asdSequenceRequest(temp_v2,puVar5,temp_v4);
-  }
-LAB_003b9564:
-  if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
-    *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-    messageMainFinishWindow();
-  }
-  *(unsigned char *)(param_1 + 0x24) = 1;
-  *(unsigned int *)(param_1 + 0x28) = 0x12;
-  *(unsigned int *)(param_1 + 0x2c) = 0;
-  return;
+    work->done = 1;
+    work->state = 0x12;
+    work->unk02c = 0;
 }
 
-} /* extern "C" */
+}

@@ -1,173 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ad9f0` (_code @ 0x1ad9f0, 0x358 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (221 vs ~221 rows); frame size and register assignment of the helper-inlined ring operations differ */
+#include "common.h"
+
+// Render-state stack: the current entry is slots[index]; the flush callback runs when the
+// value changed (or a flush is already pending).
+struct DrawStateRing {
+    s32 index;              // 0x00
+    u32 unk04;
+    u32 slots[4];           // 0x08
+    u8 dirty;               // 0x18
+    u8 pad19[3];
+    void (*flush)(void);    // 0x1c
+};
+
+struct TitleScene {
+    u8 unk0000[0x124c];
+    DrawStateRing stateRing;    // 0x124c
+    u8 unk126c[0x12ac - 0x126c];
+    DrawStateRing blendRing;    // 0x12ac
+};
+
+// Quest screen: the state, the cursor vector and the shown skill category.
+struct QuestUi {
+    u8 unk000[4];
+    s32 state;              // 0x004
+    u8 unk008[0x408 - 8];
+    u8 pointer[8];          // 0x408
+    u8 unk410[0x5f0 - 0x410];
+    u8 revealed;            // 0x5f0
+    u8 unk5f1[0x97e - 0x5f1];
+    u16 category;           // 0x97e
+};
 
 extern "C" {
 
-int FUN_00186a48(void);
-int uiFadeDraw(int);
-int FUN_00197e34(void);
-void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
-int effectRenderTransformedInstance(...);
-int renderCtxCalculateStereoParallax(...);
-int FUN_002be5a4(...);
-int textFormatBuffer(...);
-int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c39a4(int);
-int VectorSignedToFloat(...);
+extern TitleScene* g_titleScene;
+extern QuestUi* g_uiQuest;
 
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} void_stack;
+void FUN_002c39a4(TitleScene* scene);
+u32 FUN_002c5d80(u32 a, u32 b);
+void FUN_00197e34(void);
+void FUN_00186a48(void);
+f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
+s32 vec2GetXInt(void* vec);
+s32 vec2GetYInt(void* vec);
+void uiFadeDraw(u32 id);
+void FUN_002bf288(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
+void* FUN_002bf4f8(u32 group, u32 index);
+void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
+u32 FUN_002bcddc(u16 id, u32 arg);
+void textFormatBuffer(char* out, const char* format, ...);
+void FUN_002be5a4(s32 a, s32 b, const char* text, f32 x, f32 y, f32 scale, f32 rotation, f32 alpha);
+void effectRenderTransformedInstance(void* vec, f32 amount);
+u32 packNibblesAndByte(u32 a, u32 b, u32 c);
+void FUN_002c198c(TitleScene* scene);
+void FUN_002c18e4(TitleScene* scene);
 
-extern unsigned char LAB_001add58; /* 0x1add58 */
-extern int g_uiQuest; /* 0x43dd50 */
-extern int g_titleScene; /* 0x44ea00 */
+struct SpriteRect {
+    u8 unk00[8];
+    s16 x;                  // 0x08
+    s16 y;                  // 0x0a
+};
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00186a48. */
-/* Supplied declaration required: uiFadeDraw. */
-/* Supplied declaration required: FUN_00197e34. */
-/* Supplied declaration required: drawSkillCategoryLabel. */
-/* Supplied declaration required: effectRenderTransformedInstance. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(void);
-/* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_001ad9f0(void)
-
+static void ringPush(DrawStateRing* ring, u32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 13 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int *piVar8;
-  unsigned int in_fpscr;
-  float temp_v7;
-  unsigned char temp_v8 [64];
-  int temp_v9;
-  
-  temp_v2 = g_uiQuest;
-  FUN_002c39a4(g_titleScene);
-  temp_v4 = g_titleScene;
-  temp_v1 = FUN_002c5d80(1,0);
-  piVar8 = (int *)(temp_v4 + 0x124c);
-  temp_v5 = *piVar8;
-  temp_v6 = piVar8[temp_v5 + 2];
-  *piVar8 = temp_v5 + 1;
-  piVar8[temp_v5 + 3] = temp_v1;
-  if (*(char *)(temp_v4 + 0x1264) != '\0' || temp_v6 != temp_v1) {
-    (**(romwright_code **)(temp_v4 + 0x1268))();
-    *(unsigned char *)(temp_v4 + 0x1264) = 0;
-  }
-  switch(*(unsigned int *)(temp_v2 + 4)) {
-  case 1:
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xc:
-  case 0xd:
-  case 0xe:
-  case 0xf:
-  case 0x10:
-  case 0x17:
-  case 0x18:
-  case 0x19:
-  case 0x1a:
-  case 0x1b:
-  case 0x1c:
-  case 0x1d:
-  case 0x1e:
-    FUN_00197e34();
-    break;
-  case 0x11:
-  case 0x12:
-  case 0x13:
-    FUN_00186a48();
-    break;
-  case 0x14:
-  case 0x15:
-  case 0x16:
-    if (*(char *)(temp_v2 + 0x5f0) == '\0') {
-      FUN_00197e34();
+    s32 index = ring->index;
+    u32 previous = ring->slots[index];
+    ring->index = index + 1;
+    ring->slots[index + 1] = value;
+    if (ring->dirty != 0 || previous != value) {
+        ring->flush();
+        ring->dirty = 0;
     }
-    temp_v2 = g_uiQuest;
-    temp_v7 = 0.3f;
-    renderCtxCalculateStereoParallax(g_titleScene);
-    temp_v9 = temp_v2 + 0x408;
-    temp_v4 = vec2GetXInt();
-    temp_v1 = vec2GetYInt(temp_v2 + 0x408);
-    temp_v0 = *(unsigned short *)(temp_v2 + 0x97e);
-    if (*(char *)(temp_v2 + 0x5f0) == '\0') {
-      uiFadeDraw(0x92);
+}
+
+static void ringPop(DrawStateRing* ring)
+{
+    s32 index = ring->index;
+    u32 previous = ring->slots[index];
+    ring->index = index - 1;
+    if (ring->dirty != 0 || previous != ring->slots[index - 1]) {
+        ring->flush();
+        ring->dirty = 0;
     }
-    temp_v4 = temp_v4 + (int)temp_v7;
-    FUN_002bf288(2,0x29,0x57,temp_v4,temp_v1,0x97);
-    FUN_002bf288(2,0x29,0x58,temp_v4,temp_v1,0x97);
-    FUN_002bf288(2,0x29,0x59,temp_v4,temp_v1,0x97);
-    FUN_002bf288(2,0x29,0x51,temp_v4,temp_v1,0xa1);
-    temp_v2 = FUN_002bf4f8(0x29,0x54);
-    drawSkillCategoryLabel(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
-    temp_v2 = FUN_002bf4f8(0x29,0x55);
-    temp_v3 = FUN_002bcddc(temp_v0,0);
-    textFormatBuffer(temp_v8,&LAB_001add58,temp_v3);
-    VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,0xffffffff,temp_v8);
-    temp_v7 = 0.28f;
-    renderCtxCalculateStereoParallax(g_titleScene);
-    VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    effectRenderTransformedInstance(temp_v9);
-  }
-  temp_v2 = g_titleScene;
-  piVar8 = (int *)(g_titleScene + 0x124c);
-  temp_v4 = *piVar8;
-  temp_v1 = piVar8[temp_v4 + 2];
-  *piVar8 = temp_v4 - 1;
-  if (*(char *)(temp_v2 + 0x1264) != '\0' || temp_v1 != piVar8[temp_v4 + 1]) {
-    (**(romwright_code **)(temp_v2 + 0x1268))();
-    *(unsigned char *)(temp_v2 + 0x1264) = 0;
-  }
-  temp_v2 = g_titleScene;
-  temp_v4 = packNibblesAndByte(6,7,0);
-  piVar8 = (int *)(temp_v2 + 0x12ac);
-  temp_v1 = piVar8[*piVar8 + 2];
-  piVar8[*piVar8 + 2] = temp_v4;
-  if (*(char *)(temp_v2 + 0x12c4) != '\0' || temp_v1 != temp_v4) {
-    (**(romwright_code **)(temp_v2 + 0x12c8))();
-    *(unsigned char *)(temp_v2 + 0x12c4) = 0;
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return 0;
+}
+
+static void ringReplace(DrawStateRing* ring, u32 value)
+{
+    u32 previous = ring->slots[ring->index];
+    ring->slots[ring->index] = value;
+    if (ring->dirty != 0 || previous != value) {
+        ring->flush();
+        ring->dirty = 0;
+    }
+}
+
+// Draws the quest screen's skill-category panel (states 0x14-0x16) or hands the other quest
+// states to their shared drawers, with the title scene's render state pushed around it.
+u32 FUN_001ad9f0(void)
+{
+    QuestUi* quest = g_uiQuest;
+    FUN_002c39a4(g_titleScene);
+    ringPush(&g_titleScene->stateRing, FUN_002c5d80(1, 0));
+    switch (quest->state) {
+    case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:
+    case 11: case 12: case 13: case 14: case 15: case 16:
+    case 23: case 24: case 25: case 26: case 27: case 28: case 29: case 30:
+        FUN_00197e34();
+        break;
+    case 17: case 18: case 19:
+        FUN_00186a48();
+        break;
+    case 20: case 21: case 22: {
+        if (quest->revealed == 0) FUN_00197e34();
+        quest = g_uiQuest;
+        s32 shift = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
+        void* pointer = quest->pointer;
+        s32 x = vec2GetXInt(pointer);
+        s32 y = vec2GetYInt(pointer);
+        u16 category = quest->category;
+        if (quest->revealed == 0) uiFadeDraw(0x92);
+        x += shift;
+        FUN_002bf288(2, 0x29, 0x57, x, y, 0x97);
+        FUN_002bf288(2, 0x29, 0x58, x, y, 0x97);
+        FUN_002bf288(2, 0x29, 0x59, x, y, 0x97);
+        FUN_002bf288(2, 0x29, 0x51, x, y, 0xa1);
+        SpriteRect* labelRect = static_cast<SpriteRect*>(FUN_002bf4f8(0x29, 0x54));
+        drawSkillCategoryLabel(category, labelRect->x + x, labelRect->y + y, 0xa6);
+        SpriteRect* nameRect = static_cast<SpriteRect*>(FUN_002bf4f8(0x29, 0x55));
+        char text[64];
+        textFormatBuffer(text, "%s", FUN_002bcddc(category, 0));
+        FUN_002be5a4(3, -1, text, (f32)(nameRect->x + x), (f32)(nameRect->y + y), 0.375f, 0.0f, 1.0f);
+        effectRenderTransformedInstance(pointer, (f32)(s32)renderCtxCalculateStereoParallax(g_titleScene, 0.28f));
+        break;
+    }
+    default:
+        break;
+    }
+    ringPop(&g_titleScene->stateRing);
+    ringReplace(&g_titleScene->blendRing, packNibblesAndByte(6, 7, 0));
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,113 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00294090` (_code @ 0x294090, 0x220 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the cache base in r4 from the prologue and builds the entry through the allocation result (r0) in a placement-new style constructor, then copies it to r6; the build allocates r4/r8/r9 differently and lays out the NPC/devil branches in a different order. */
+#include "common.h"
+
+// A cached texture/model resource (0x48 bytes, vtable _ZTV9Obj4206f8): which file it comes from, the file buffer being
+// loaded and a reference count.
+struct ResourceContent {
+    const u32 *vtable;  // 0x00
+    s32 id;             // 0x04 id as requested (negative: NPC texture)
+    u32 kind;           // 0x08 4: NPC texture, 12: devil model
+    s32 index;          // 0x0c
+    u32 unk10[6];       // 0x10
+    void *file;         // 0x28 file buffer, filled in by the loader
+    u32 unk2c[2];       // 0x2c
+    u32 unk34[2];       // 0x34
+    u8 unk3c;           // 0x3c
+    u8 unk3d;           // 0x3d
+    u8 unk3e[2];
+    s32 refCount;       // 0x40
+    u32 unk44;          // 0x44
+};
+
+// The 16-slot cache of loaded resources.
+struct ResourceCache {
+    u32 unk00;                   // 0x00
+    ResourceContent *slots[16];  // 0x04
+};
 
 extern "C" {
+extern ResourceCache DAT_0047e508;
+extern const u32 _ZTV9Obj4206f8[];
+extern const char DAT_003ff7c8[];
+extern const char DAT_003ff7e4[];
+extern u32 g_aocSystem;
 
-int asdLoadFileAsyncSimple(unsigned char [68], unsigned int *, int);
-int textFormatBuffer(...);
-int asdOperatorNew(int, unsigned int);
-int FUN_0033e7c4(unsigned int *, int);
-int FUN_0033f2b8(unsigned int *);
-int aocQueueType0c(unsigned int, int, unsigned int *, unsigned char [68]);
-int FUN_00389ed8(unsigned int, int, unsigned int *, unsigned char [68]);
+s32 textFormatBuffer(char *output, const char *format, ...);
+void *asdOperatorNew(u32 size, u32 heap);
+s32 asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
+void FUN_0033e7c4(ResourceContent *content, s32 id);
+void FUN_0033f2b8(ResourceContent *content);
+s32 FUN_0023e330(u32 system, s32 id, u32 flag);
+s32 FUN_0023e3a4(u32 system, s32 id, u32 flag);
+void aocQueueType0c(u32 system, s32 id, void **output, const char *name);
+void FUN_00389ed8(u32 system, s32 id, void **output, const char *name);
 
-extern unsigned char DAT_00420700; /* 0x420700 */
-extern unsigned int g_aocSystem; /* 0x433158 */
-
-extern int FUN_0023e330(unsigned int, int, unsigned int);
-extern int FUN_0023e3a4(unsigned int, int, unsigned int);
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_0033e7c4. */
-/* Supplied declaration required: FUN_0033f2b8. */
-/* Supplied declaration required: aocQueueType0c. */
-/* Supplied declaration required: FUN_00389ed8. */
-
-
-unsigned int * FUN_00294090(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Returns the cached resource for `id`, or creates one in a free slot; with `queueLoad` set its file starts loading
+// (from the AOC data when present, else from the base game).
+ResourceContent *FUN_00294090(s32 id, s32 queueLoad, u32 unused, u32 heap)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned char temp_v2 [68];
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = *(int *)(temp_v0 * 4 + 0x47e50c);
-    if ((temp_v1 != 0) && (*(int *)(temp_v1 + 4) == param_1)) {
-      *(int *)(temp_v1 + 0x40) = *(int *)(temp_v1 + 0x40) + 1;
-      return *(unsigned int **)(temp_v0 * 4 + 0x47e50c);
+    for (s32 i = 0; i < 16; i++) {
+        ResourceContent *cached = DAT_0047e508.slots[i];
+        if (cached != NULL && cached->id == id) {
+            cached->refCount++;
+            return DAT_0047e508.slots[i];
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x10);
-  temp_v0 = 0;
-  do {
-    if (*(int *)(temp_v0 * 4 + 0x47e50c) == 0) break;
-    if (*(int *)(temp_v0 * 4 + 0x47e510) == 0) {
-      temp_v0 = temp_v0 + 1;
-      break;
-    }
-    temp_v0 = temp_v0 + 2;
-  } while (temp_v0 < 0x10);
-  puVar2 = (unsigned int *)0x48;
-  asdOperatorNew(0x48,param_4);
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = (unsigned int)&DAT_00420700;
-    puVar2[1] = 0;
-    puVar2[4] = 0;
-    puVar2[5] = 0;
-    puVar2[6] = 0;
-    puVar2[7] = 0;
-    puVar2[8] = 0;
-    puVar2[9] = 0;
-    puVar2[10] = 0;
-    puVar2[0xb] = 0;
-    puVar2[0xc] = 0;
-    *(unsigned char *)(puVar2 + 0xf) = 0;
-    *(unsigned char *)((int)puVar2 + 0x3d) = 0;
-    puVar2[0x11] = 0;
-  }
-  *(unsigned int **)(temp_v0 * 4 + 0x47e50c) = puVar2;
-  temp_v0 = -param_1;
-  puVar2[0x10] = 1;
-  if (param_2 != 0) {
-    if (param_1 < 0) {
-      puVar2[1] = param_1;
-      textFormatBuffer(temp_v2,"event/npcgtix/npc%03d.bin",temp_v0);
-      puVar2[10] = 0;
-      puVar2[2] = 4;
-      puVar2[3] = temp_v0;
-      temp_v1 = FUN_0023e330(g_aocSystem,temp_v0,1);
-      if (temp_v1 != 0) {
-        aocQueueType0c(g_aocSystem,temp_v0,puVar2 + 10,temp_v2);
-        return puVar2;
-      }
-    }
-    else {
-      puVar2[1] = param_1;
-      textFormatBuffer(temp_v2,"battle/devil/en%03d.bin",param_1);
-      puVar2[10] = 0;
-      puVar2[2] = 0xc;
-      puVar2[3] = param_1 - 1;
-      temp_v0 = FUN_0023e3a4(g_aocSystem,param_1,1);
-      if (temp_v0 != 0) {
-        FUN_00389ed8(g_aocSystem,param_1,puVar2 + 10,temp_v2);
-        return puVar2;
-      }
-    }
-    asdLoadFileAsyncSimple(temp_v2,puVar2 + 10,0);
-  }
-  else if (param_1 < 0) {
-    FUN_0033f2b8(puVar2);
-  }
-  else {
-    FUN_0033e7c4(puVar2,param_1);
-  }
-  return puVar2;
-}
 
-} /* extern "C" */
+    s32 slot = 0;
+    while (slot < 16) {
+        if (DAT_0047e508.slots[slot] == NULL)
+            break;
+        if (DAT_0047e508.slots[slot + 1] == NULL) {
+            slot++;
+            break;
+        }
+        slot += 2;
+    }
+
+    ResourceContent *content = static_cast<ResourceContent *>(asdOperatorNew(sizeof(ResourceContent), heap));
+    if (content != NULL) {
+        content->vtable = _ZTV9Obj4206f8 + 2;
+        content->id = 0;
+        content->unk10[0] = 0;
+        content->unk10[1] = 0;
+        content->unk10[2] = 0;
+        content->unk10[3] = 0;
+        content->unk10[4] = 0;
+        content->unk10[5] = 0;
+        content->file = NULL;
+        content->unk2c[0] = 0;
+        content->unk2c[1] = 0;
+        content->unk3c = 0;
+        content->unk3d = 0;
+        content->unk44 = 0;
+    }
+    DAT_0047e508.slots[slot] = content;
+    content->refCount = 1;
+
+    if (queueLoad != 0) {
+        char name[0x44];
+        if (id < 0) {
+            s32 npcId = -id;
+            content->id = -npcId;
+            textFormatBuffer(name, DAT_003ff7c8, npcId);
+            content->file = NULL;
+            content->kind = 4;
+            content->index = npcId;
+            if (FUN_0023e330(g_aocSystem, npcId, 1) != 0) {
+                aocQueueType0c(g_aocSystem, npcId, &content->file, name);
+            } else {
+                asdLoadFileAsyncSimple(name, &content->file, 0);
+            }
+        } else {
+            content->id = id;
+            textFormatBuffer(name, DAT_003ff7e4, id);
+            content->file = NULL;
+            content->kind = 12;
+            content->index = id - 1;
+            if (FUN_0023e3a4(g_aocSystem, id, 1) != 0) {
+                FUN_00389ed8(g_aocSystem, id, &content->file, name);
+            } else {
+                asdLoadFileAsyncSimple(name, &content->file, 0);
+            }
+        }
+    } else if (id < 0) {
+        FUN_0033f2b8(content);
+    } else {
+        FUN_0033e7c4(content, id);
+    }
+    return content;
+}
+}

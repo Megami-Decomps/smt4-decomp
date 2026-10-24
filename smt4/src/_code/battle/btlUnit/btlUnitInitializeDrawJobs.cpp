@@ -45,7 +45,7 @@ s32 jobFrameCounterAdvance(u32);
 void *asdOperatorNew(u32);
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void *asdMemoryGetAllocatorA();
-BattleUnitDrawObject *FUN_0036752c(const BattleUnitDrawDescription *, void *);
+BattleUnitDrawObject *_ZN9Obj4212b46createEPK16Obj4212b4RequestP18AsdAllocatorObject(const BattleUnitDrawDescription *, void *);
 void FUN_001c0998(BattleUnitDrawObject *, u32);
 
 void btlUnitInitializeDrawJobs(BattleUnitDrawWork *work)
@@ -77,7 +77,7 @@ void btlUnitInitializeDrawJobs(BattleUnitDrawWork *work)
         description.layer = 0;
         description.pass = 0;
         description.callback = NULL;
-        BattleUnitDrawObject *object = FUN_0036752c(&description, asdMemoryGetAllocatorA());
+        BattleUnitDrawObject *object = _ZN9Obj4212b46createEPK16Obj4212b4RequestP18AsdAllocatorObject(&description, asdMemoryGetAllocatorA());
         DAT_0049356c[i].object = object;
         callback = DAT_0049356c[i].callback;
         if (object->callback)

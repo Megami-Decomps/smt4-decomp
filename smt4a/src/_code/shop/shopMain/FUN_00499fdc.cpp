@@ -1,155 +1,151 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00499fdc` (_code @ 0x499fdc, 0x2d0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the step/state stores merge differently (retail writes the previous state first and stores the new state and step with one strd) and the shop tab/item address arithmetic is evaluated in another order (182 vs 182 rows); the input handling is the same. */
+#include "common.h"
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-int uiSpriteBankApplyPreset(int, int);
-int FUN_0019de98(int, unsigned int);
-int scrRunOpcodesStub(unsigned int);
-int obj04Finish(void);
-int panelSetTarget(int);
-int FUN_0038b010(int);
-int messageMainSetFlag(int);
-int FUN_00496a0c(int, int);
-int menuOpenCommandList(int);
-int FUN_00498494(int, int);
-int messageChoiceShowCurrent(int);
-int sendEvent100020F(void);
-int sendEvent100020E(void);
-int sendEvent1000210(void);
-int releaseEntriesA(int);
-int releaseEntriesB(unsigned int);
+/* One tab's value holder (0x74 bytes; only the count word at +8 is read here). */
+typedef struct ShopTab {
+    /* 0x00 */ u8 holder[8];
+    /* 0x08 */ s32 count;
+    /* 0x0C */ u8 unk0c[0x68];
+} ShopTab;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+/* The shop screen work block (only the fields used here, by their offsets). */
+typedef struct ShopMainWork {
+    /* 0x00000 */ u8 unk00000[4];
+    /* 0x00004 */ s32 state;
+    /* 0x00008 */ s32 step;
+    /* 0x0000C */ u8 unk0000c[4];
+    /* 0x00010 */ s32 previousState;
+    /* 0x00014 */ u8 unk00014[4];
+    /* 0x00018 */ u8 kind;
+    /* 0x00019 */ u8 unk00019[0x173];
+    /* 0x0018C */ u32 script;
+    /* 0x00190 */ u8 unk00190[0x23C];
+    /* 0x003CC */ u8 sprites[0x73C];
+    /* 0x00B08 */ u8 entriesA[0x34];
+    /* 0x00B3C */ u32 entriesB;
+    /* 0x00B40 */ s32 tab;
+    /* 0x00B44 */ s32 cursor;
+    /* 0x00B48 */ u8 unk00b48[0x18];
+    /* 0x00B60 */ ShopTab tabs[9];
+    /* 0x00F74 */ u16 items[9][2049];   /* per tab: entries of two halfwords */
+    /* 0x09F86 */ u8 unk09f86[0x60A6];
+    /* 0x1602C */ s16 leftRecord;
+    /* 0x1602E */ s16 rightRecord;
+    /* 0x16030 */ s16 regionCount;
+    /* 0x16032 */ u8 unk16032[0xE];
+    /* 0x16040 */ u32 returnMode;
+} ShopMainWork;
 
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: FUN_0019de98. */
-extern int FUN_001ba3d0(unsigned short);
-/* Supplied declaration required: scrRunOpcodesStub. */
-extern int recordGetModeForId(int);
-/* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_0038b010. */
-/* Supplied declaration required: messageMainSetFlag. */
-extern int FUN_0047fe44(unsigned short);
-extern int FUN_004954e8(int);
-/* Supplied declaration required: FUN_00496a0c. */
-/* Supplied declaration required: menuOpenCommandList. */
-extern int FUN_00498408(int, unsigned short);
-/* Supplied declaration required: FUN_00498494. */
-/* Supplied declaration required: messageChoiceShowCurrent. */
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: sendEvent100020F. */
-/* Supplied declaration required: sendEvent100020E. */
-/* Supplied declaration required: sendEvent1000210. */
-extern int inputIsQuestRepeatRight(void);
-extern int FUN_004d0494(void);
-extern int inputIsQuestCancelPressed(void);
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
-/* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: releaseEntriesB. */
+/* The cursor jump table: for each cursor, the cursor reached by moving left and right. */
+typedef struct CursorLink {
+    s32 left;
+    s32 right;
+} CursorLink;
 
+extern CursorLink DAT_00588f78[];
 
-void FUN_00499fdc(int param_1)
+void messageMainSetFlag(s32 flag);
+s32 scrRunOpcodesStub(u32 script);
+void panelSetTarget(s32 target);
+s32 FUN_004954e8(ShopMainWork *work);
+void messageChoiceShowCurrent(ShopMainWork *work);
+s32 FUN_004d0584(void);
+s32 flaggedValueHolderGetTotal(void *holder);
+s32 FUN_00498408(ShopMainWork *work, u16 item);
+s32 FUN_001ba3d0(u16 item);
+s32 FUN_0047fe44(u16 item);
+void sendEvent100020E(void);
+void sendEvent100020F(void);
+void sendEvent1000210(void);
+void FUN_00498494(ShopMainWork *work, s32 mode);
+s32 inputIsQuestRepeatRight(void);
+s32 FUN_004d0494(void);
+s32 recordGetModeForId(s32 id);
+void FUN_00496a0c(ShopMainWork *work, s32 arg);
+s32 inputIsQuestMenuPressed(void);
+s32 inputIsQuestCancelPressed(void);
+void FUN_0038b010(s32 arg);
+void uiSpriteBankApplyPreset(void *sprites, s32 preset);
+void obj04Finish(void);
+void releaseEntriesB(u32 entries);
+void releaseEntriesA(void *entries);
+void ifTouchRegionRemove(void);
+void menuOpenCommandList(ShopMainWork *work);
+void FUN_0019de98(s32 a, u32 color);
 
+/* Updates the shop item list: waits for the intro script, then handles the item filter, moving
+ * between tabs, opening the menu or the command list, and the confirmation sounds. */
+void FUN_00499fdc(ShopMainWork *work)
 {
-/* irregular: 17 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    if ((*(int *)(param_1 + 8) == 1) &&
-       (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c)), temp_v1 == 2)) {
-      *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
-      *(unsigned int *)(param_1 + 4) = 5;
-      *(unsigned int *)(param_1 + 8) = 0;
-      FUN_0019de98(0,0xf4f4f4ff);
-      messageMainSetFlag(1);
-      return;
+    if (work->step != 0) {
+        if (work->step == 1 && scrRunOpcodesStub(work->script) == 2) {
+            work->previousState = work->state;
+            work->state = 5;
+            work->step = 0;
+            FUN_0019de98(0, 0xF4F4F4FF);
+            messageMainSetFlag(1);
+        }
+        return;
     }
-  }
-  else {
     messageMainSetFlag(0);
-    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
+    scrRunOpcodesStub(work->script);
     panelSetTarget(0);
-    temp_v1 = FUN_004954e8(param_1);
-    messageChoiceShowCurrent(param_1);
-    if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb68)) &&
-       (temp_v2 = FUN_004d0584(), temp_v2 != 0)) {
-      temp_v1 = 1;
+    s32 blocked = FUN_004954e8(work);
+
+    messageChoiceShowCurrent(work);
+    if (work->tabs[work->tab].count > 0 && FUN_004d0584() != 0) {
+        blocked = 1;
     }
-    temp_v2 = *(int *)(param_1 + 0xb40);
-    temp_v3 = flaggedValueHolderGetTotal(param_1 + temp_v2 * 0x74 + 0xb60);
-    temp_v0 = *(unsigned short *)(param_1 + temp_v2 * 0x1002 + 0xf74 + temp_v3 * 4);
-    if (((*(int *)(param_1 + 0xb40) != 8) ||
-        (((temp_v2 = FUN_00498408(param_1,temp_v0), temp_v2 == 0 ||
-          (temp_v2 = FUN_001ba3d0(temp_v0), temp_v2 >= 2)) && (temp_v2 = FUN_0047fe44(temp_v0), temp_v2 == 0))))
-       && (temp_v1 != 0)) {
-      sendEvent100020E();
-      FUN_00498494(param_1,0xd);
-      return;
-    }
-    temp_v1 = inputIsQuestRepeatRight();
-    if ((temp_v1 != 0) || (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602c)), temp_v1 == 6)) {
-      *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
-      FUN_00496a0c(param_1,1);
-      sendEvent1000210();
-      return;
-    }
-    temp_v1 = FUN_004d0494();
-    if ((temp_v1 != 0) || (temp_v1 = recordGetModeForId((int)*(short *)(param_1 + 0x1602e)), temp_v1 == 6)) {
-      *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f7c);
-      FUN_00496a0c(param_1,1);
-      sendEvent1000210();
-      return;
-    }
-    temp_v1 = inputIsQuestMenuPressed();
-    if (temp_v1 != 0) {
-      FUN_0038b010(0);
-      sendEvent100020F();
-      uiSpriteBankApplyPreset(param_1 + 0x3cc,1);
-      obj04Finish();
-      if (*(char *)(param_1 + 0x18) == '\x01') {
-        *(unsigned int *)(param_1 + 0x16040) = 1;
-      }
-      else {
-        *(unsigned int *)(param_1 + 0x16040) = 2;
-      }
-      releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
-      releaseEntriesA(param_1 + 0xb08);
-      temp_v1 = 0;
-      if (temp_v1 < *(short *)(param_1 + 0x16030)) {
-        do {
-          ifTouchRegionRemove();
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < *(short *)(param_1 + 0x16030));
-      }
-      *(unsigned int *)(param_1 + 8) = 1;
-    }
-    else {
-      temp_v1 = inputIsQuestCancelPressed();
-      if (temp_v1 != 0) {
+    s32 tab = work->tab;
+    s32 total = flaggedValueHolderGetTotal(&work->tabs[tab]);
+    u16 item = work->items[tab][total * 2];
+
+    if ((work->tab != 8 || ((FUN_00498408(work, item) == 0 || FUN_001ba3d0(item) > 1) && FUN_0047fe44(item) == 0))
+        && blocked != 0) {
         sendEvent100020E();
-        menuOpenCommandList(param_1);
+        FUN_00498494(work, 13);
         return;
-      }
-      temp_v1 = FUN_004d0584();
-      if (temp_v1 != 0) {
-        sendEvent100020F();
-        return;
-      }
     }
-  }
-  return;
+    if (inputIsQuestRepeatRight() != 0 || recordGetModeForId(work->leftRecord) == 6) {
+        work->cursor = DAT_00588f78[work->cursor].left;
+        FUN_00496a0c(work, 1);
+        sendEvent1000210();
+        return;
+    }
+    if (FUN_004d0494() != 0 || recordGetModeForId(work->rightRecord) == 6) {
+        work->cursor = DAT_00588f78[work->cursor].right;
+        FUN_00496a0c(work, 1);
+        sendEvent1000210();
+        return;
+    }
+    if (inputIsQuestMenuPressed() != 0) {
+        FUN_0038b010(0);
+        sendEvent100020F();
+        uiSpriteBankApplyPreset(work->sprites, 1);
+        obj04Finish();
+        if (work->kind == 1) {
+            work->returnMode = 1;
+        } else {
+            work->returnMode = 2;
+        }
+        releaseEntriesB(work->entriesB);
+        releaseEntriesA(work->entriesA);
+        for (s32 i = 0; i < work->regionCount; i++) {
+            ifTouchRegionRemove();
+        }
+        work->step = 1;
+        return;
+    }
+    if (inputIsQuestCancelPressed() != 0) {
+        sendEvent100020E();
+        menuOpenCommandList(work);
+        return;
+    }
+    if (FUN_004d0584() != 0) {
+        sendEvent100020F();
+    }
 }
 
-} /* extern "C" */
+}

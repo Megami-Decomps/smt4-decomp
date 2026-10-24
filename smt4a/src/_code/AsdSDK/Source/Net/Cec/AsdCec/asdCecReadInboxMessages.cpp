@@ -8,7 +8,7 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox *box, u32 unk00, u32 unk04);
 void asdCecMessageBoxClose(AsdCecMessageBox *box);
 void FUN_0042f318(AsdCecMessageBox *box, s32 unk);
 void FUN_0042e388(AsdCecMessageBox *box, s32 kind, AsdCecMessageId *id);
-void asdCecMessageIdInit(AsdCecMessageId *id);
+void _ZN12CecMessageIdC1Ev(AsdCecMessageId *id);
 void asdCecMessageGetBody(AsdCecMessage *message, void **body, u32 *bodySize);
 void FUN_002e59f8(const void *src, void *dst, u32 size);
 u32 asdCecMessageBoxGetMessageSize(AsdCecMessageBox *box, s32 kind, u32 index);
@@ -46,7 +46,7 @@ s32 asdCecReadInboxMessages(u32 first, s32 count, u8 *out, s32 deleteRead)
         end = box->inboxCount;
     }
     for (index = first; index < end; index++) {
-        asdCecMessageIdInit(&id);
+        _ZN12CecMessageIdC1Ev(&id);
         nn_cec_CTR_MessageBox_GetMessageId(box, &id, ASD_CEC_INBOX, index);
         size = asdCecMessageBoxGetMessageSize(box, ASD_CEC_INBOX, index);
         nn_cec_CTR_Message_Message_sub_object(&message);
@@ -70,7 +70,7 @@ s32 asdCecReadInboxMessages(u32 first, s32 count, u8 *out, s32 deleteRead)
         FUN_0042f318(box, 0);
     } else if (deleteRead != 0) {
         for (index = end - 1; (s32)first <= (s32)index; index--) {
-            asdCecMessageIdInit(&id);
+            _ZN12CecMessageIdC1Ev(&id);
             nn_cec_CTR_MessageBox_GetMessageId(box, &id, ASD_CEC_INBOX, index);
             FUN_0042e388(box, 0, &id);
         }

@@ -1,102 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002296b0` (_code @ 0x2296b0, 0x298 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc folds the (height - 2) row offset into the store displacement and addresses the start cell fields through a separate base; retail keeps `sub 2` before the row multiply and reads startX/startY directly. */
+#include "shard/W5_W5Match7_FlagBanks.h"
+
+namespace {
+/* The random-maze generator's state (module global). */
+struct RandomMazeState {
+    /* 0x000 */ u8 startX;
+    /* 0x001 */ u8 startY;
+    /* 0x002 */ u8 unk002[0x382];
+    /* 0x384 */ u32 active;
+    /* 0x388 */ u8 unk388[4];
+    /* 0x38c */ u32 unk38c;
+    /* 0x390 */ u32 unk390;
+    /* 0x394 */ u8 unk394;
+    /* 0x395 */ u8 unk395[3];
+    /* 0x398 */ u32 unk398;
+    /* 0x39c */ u8 unk39c[0x640];
+    /* 0x9dc */ u32 unk9dc;
+};
+}
 
 extern "C" {
+extern RandomMazeState g_mapRndMaze;
+u32 randRange(u16 max);
 
-int randRange(int);
-
-extern unsigned char g_mapRndMaze; /* 0x60fc08 */
-extern unsigned char DAT_0060fc09; /* 0x60fc09 */
-extern unsigned int DAT_0060ff8c; /* 0x60ff8c */
-extern unsigned int DAT_0060ff94; /* 0x60ff94 */
-extern unsigned int DAT_0060ff98; /* 0x60ff98 */
-extern unsigned char DAT_0060ff9c; /* 0x60ff9c */
-extern unsigned int DAT_0060ffa0; /* 0x60ffa0 */
-extern unsigned int DAT_006105e4; /* 0x6105e4 */
-
-/* Supplied declaration required: randRange. */
-extern int gameFlagsGetBlock(void);
-
-
-void FUN_002296b0(int param_1)
-
+/* Starts a new random maze: sizes it (11x11 unless `keepSize`), fills the cell grid with walls on the
+   border and every even lattice point, then opens the four border gates at random positions. */
+void FUN_002296b0(s32 keepSize)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  int temp_v5;
-  
-  temp_v1 = gameFlagsGetBlock();
-  if (param_1 == 0) {
-    *(unsigned char *)(temp_v1 + 0xe04) = 0xb;
-    *(unsigned char *)(temp_v1 + 0xe05) = 0xb;
-  }
-  *(unsigned char *)(temp_v1 + 0xe06) = 5;
-  *(unsigned char *)(temp_v1 + 0xe07) = 5;
-  DAT_0060ff94 = 0;
-  DAT_0060ff98 = 0;
-  DAT_0060ffa0 = 0;
-  DAT_0060ff9c = 0;
-  *(unsigned char *)(temp_v1 + 0xe08) = 0;
-  *(unsigned char *)(temp_v1 + 0xe09) = 0;
-  *(unsigned char *)(temp_v1 + 0xe0a) = 0;
-  *(unsigned char *)(temp_v1 + 0xe0b) = 0;
-  DAT_006105e4 = 0;
-  g_mapRndMaze = *(unsigned char *)(temp_v1 + 0xe06);
-  DAT_0060fc09 = *(unsigned char *)(temp_v1 + 0xe07);
-  temp_v3 = 0;
-  DAT_0060ff8c = 1;
-  if ('\0' < *(char *)(temp_v1 + 0xe05)) {
-    do {
-      temp_v2 = 0;
-      if ('\0' < *(char *)(temp_v1 + 0xe04)) {
-        do {
-          temp_v4 = 0;
-          if ((((temp_v3 == 0) || ((int)*(char *)(temp_v1 + 0xe05) - 1U == temp_v3 || temp_v2 == 0)) ||
-              ((int)*(char *)(temp_v1 + 0xe04) - 1U == temp_v2)) || (((temp_v3 | temp_v2) & 1) == 0)) {
-            temp_v4 = 1;
-          }
-          temp_v5 = temp_v1 + temp_v3 * 0x78 + temp_v2 * 8;
-          temp_v2 = temp_v2 + 1;
-          *(unsigned char *)(temp_v5 + 0x3c) = temp_v4;
-          *(unsigned char *)(temp_v5 + 0x3d) = 0;
-          *(unsigned char *)(temp_v5 + 0x3e) = 0;
-          *(unsigned char *)(temp_v5 + 0x3f) = 0;
-          *(unsigned char *)(temp_v5 + 0x41) = 0;
-        } while ((int)temp_v2 < (int)*(char *)(temp_v1 + 0xe04));
-      }
-      temp_v3 = temp_v3 + 1;
-    } while ((int)temp_v3 < (int)*(char *)(temp_v1 + 0xe05));
-  }
-  temp_v3 = randRange(100);
-  if (temp_v3 >= 0x32) {
-    temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 8);
-    *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0xb4) = 1;
-    temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 8);
-    *(unsigned char *)
-     (temp_v1 + (*(char *)(temp_v1 + 0xe05) - 2) * 0x78 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0x3c) = 1;
-    temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 4);
-    *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + 0x44) = 1;
-    temp_v0 = *(char *)(temp_v1 + 0xe04);
-    temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 4);
-    *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
-    return;
-  }
-  temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 4);
-  *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0xb4) = 1;
-  temp_v5 = randRange(*(char *)(temp_v1 + 0xe04) - 4);
-  *(unsigned char *)
-   (temp_v1 + (*(char *)(temp_v1 + 0xe05) - 2) * 0x78 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0x3c) = 1;
-  temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 8);
-  *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + 0x44) = 1;
-  temp_v0 = *(char *)(temp_v1 + 0xe04);
-  temp_v5 = randRange(*(char *)(temp_v1 + 0xe05) - 8);
-  *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
-  return;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    if (keepSize == 0) {
+        flags->gridSize.width = 11;
+        flags->gridSize.height = 11;
+    }
+    flags->gridSetup.startX = 5;
+    flags->gridSetup.startY = 5;
+    g_mapRndMaze.unk38c = 0;
+    g_mapRndMaze.unk390 = 0;
+    g_mapRndMaze.unk398 = 0;
+    g_mapRndMaze.unk394 = 0;
+    flags->gridSetup.specialCount = 0;
+    flags->gridSetup.ready = 0;
+    flags->gridSetup.displayX = 0;
+    flags->gridSetup.displayY = 0;
+    g_mapRndMaze.unk9dc = 0;
+    g_mapRndMaze.startX = flags->gridSetup.startX;
+    g_mapRndMaze.startY = flags->gridSetup.startY;
+    g_mapRndMaze.active = 1;
+    for (s32 y = 0; y < flags->gridSize.height; y++) {
+        for (s32 x = 0; x < flags->gridSize.width; x++) {
+            u8 wall = 0;
+            if (y == 0 || y == flags->gridSize.height - 1 || x == 0 || x == flags->gridSize.width - 1 ||
+                ((y | x) & 1) == 0) {
+                wall = 1;
+            }
+            MapCell *cell = &flags->mapCells.grid.cells[y][x];
+            cell->state = wall;
+            cell->unk01[0] = 0;
+            cell->markers.first = 0;
+            cell->markers.second = 0;
+            cell->autoTile.neighbors = 0;
+        }
+    }
+    if (randRange(100) < 50) {
+        flags->mapCells.grid.cells[1][(randRange(flags->gridSize.width - 4) + 2) & 0xfffefffe].state = 1;
+        flags->mapCells.grid.cells[flags->gridSize.height - 2][(randRange(flags->gridSize.width - 4) + 2) & 0xfffefffe].state = 1;
+        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 8) + 4) & 0xfffefffe][1].state = 1;
+        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 8) + 4) & 0xfffefffe][flags->gridSize.width - 2].state = 1;
+    } else {
+        flags->mapCells.grid.cells[1][(randRange(flags->gridSize.width - 8) + 4) & 0xfffefffe].state = 1;
+        flags->mapCells.grid.cells[flags->gridSize.height - 2][(randRange(flags->gridSize.width - 8) + 4) & 0xfffefffe].state = 1;
+        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 4) + 2) & 0xfffefffe][1].state = 1;
+        flags->mapCells.grid.cells[(randRange(flags->gridSize.height - 4) + 2) & 0xfffefffe][flags->gridSize.width - 2].state = 1;
+    }
 }
 
 } /* extern "C" */

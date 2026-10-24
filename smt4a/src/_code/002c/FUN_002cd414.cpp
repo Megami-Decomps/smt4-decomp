@@ -8,7 +8,7 @@ int FUN_00163aa4(int);
 int uiSpriteSelectAnim(int, int);
 int asdTMTexTableReleaseNode(int);
 int FUN_001b2d54(...);
-int FUN_0021ba5c(int);
+int uiSpriteScreenSetupForMode(int);
 int objectSetPosition(int);
 int FUN_003d44ac(...);
 int VectorSignedToFloat(int, int);
@@ -23,7 +23,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_001b2d54. */
-/* Supplied declaration required: FUN_0021ba5c. */
+/* Supplied declaration required: uiSpriteScreenSetupForMode. */
 /* Supplied declaration required: objectSetPosition. */
 /* Supplied declaration required: FUN_003d44ac. */
 
@@ -202,7 +202,7 @@ unsigned int FUN_002cd414(void)
       temp_v1 = g_btlTalkBustUp;
       if (*(char *)(temp_v0 + 0xaa) != '\0') {
         if (*(short *)(temp_v0 + 0x7c) != 10) {
-          FUN_0021ba5c(temp_v0);
+          uiSpriteScreenSetupForMode(temp_v0);
           *(unsigned char *)(temp_v0 + 0x2f5) = 1;
         }
         else if (g_btlTalkBustUp != 0) {

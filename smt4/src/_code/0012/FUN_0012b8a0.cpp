@@ -42,7 +42,7 @@ extern int DAT_004efd94; /* 0x4efd94 */
 extern int DAT_004efd98; /* 0x4efd98 */
 
 extern int FUN_0013e084(unsigned int *, unsigned int, int *, unsigned int);
-extern int *FUN_002b52b4(int, int *, unsigned int *, int);
+extern int *_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(int, int *, unsigned int *, int);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_ParticleSet_Create. */
@@ -92,7 +92,7 @@ int * FUN_0012b8a0(int param_1,unsigned int *param_2,int param_3,int *param_4,un
   if (temp_v2 == 0) {
     return (int *)0x0;
   }
-  piVar4 = (int *)FUN_002b52b4(temp_v2,temp_v13,puVar9,param_3);
+  piVar4 = (int *)_ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv(temp_v2,temp_v13,puVar9,param_3);
   puVar13 = &_ZGVZN2nw4math5MTX348IdentityEvE8identity;
   *piVar4 = (int)&DAT_004217ec;
   piVar4[0x52] = 0;

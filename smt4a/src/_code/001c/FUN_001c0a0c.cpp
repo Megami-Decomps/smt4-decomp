@@ -23,7 +23,7 @@ extern unsigned int DAT_0064c078; /* 0x64c078 */
 extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
-extern int *FUN_001b7420(int, int *, unsigned int *, int);
+extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, unsigned int *, int);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -56,7 +56,7 @@ int * FUN_001c0a0c(int param_1,unsigned int *param_2,int param_3,int *param_4)
     piVar11 = (int *)0x0;
   }
   else {
-    piVar11 = (int *)FUN_001b7420(temp_v1,param_4,param_2,param_3);
+    piVar11 = (int *)_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(temp_v1,param_4,param_2,param_3);
     temp_v6 = 0x3f800000;
     *piVar11 = (int)&DAT_0055bc08;
     piVar11[0x52] = 0;

@@ -1,226 +1,149 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00426acc` (_code @ 0x426acc, 0x2fc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the shop item table builder from asm (the draft was unstructured); the FUN_004396bc call takes 16 stack words laid out as read from the retail prologue, and the entry word is composed by bit-field masks that armcc here orders differently (retail: bic/orr pairs over one register). */
+#include "common.h"
+
+/* One column of a data row: a name and its value. */
+struct DataColumn {
+    const char *name;
+    u32 value;
+};
+
+/* One data row (0x30 bytes): two packed id words and its named columns. */
+struct DataRow {
+    /* 0x00 */ u32 word0;
+    /* 0x04 */ u32 word1;
+    /* 0x08 */ u8 unk08[0x10];
+    /* 0x18 */ DataColumn *columns;
+    /* 0x1C */ u32 columnCount;
+    /* 0x20 */ u8 unk20[0x10];
+};
+
+/* The rows of a loaded table. */
+struct DataRows {
+    /* 0x00 */ DataRow *rows;
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u32 unk08;
+};
+
+/* The table loader. */
+struct TableLoader {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ DataRows *rows;
+    /* 0x08 */ u32 sizeA;
+    /* 0x0C */ u32 sizeB;
+};
+
+/* The build configuration (a view over a larger block; null links fall back to the block itself). */
+struct TableBuildConfig {
+    /* 0x00 */ s32 *first;
+    /* 0x04 */ s32 second;
+    /* 0x08 */ s32 *third;
+    /* 0x0C */ s32 fourth;
+    /* 0x10 */ s32 sourceA;
+    /* 0x14 */ s32 sourceB;
+    /* 0x18 */ s32 *fifth;
+    /* 0x1C */ s32 *sixth;
+    /* 0x20 */ u8 unk20[8];
+    /* 0x28 */ u8 predicate;
+    /* 0x29 */ u8 unk29[3];
+    /* 0x2C */ s32 seventh;
+    /* 0x30 */ s32 eighth;
+};
+
+/* A parsed entry: the packed id and its flags. */
+struct TableEntry {
+    u32 id;
+    u32 flags;
+};
 
 extern "C" {
+extern u8 DAT_00642980;
+extern u8 DAT_00642b80;
+extern u32 DAT_005c0a8c;
+extern u32 DAT_005c0a90;
 
-int FUN_001029f4(unsigned int, int, int);
-int sysFatalBreak(void);
-int recordTableAppend(unsigned char *);
-int pricingSelectionBuildPredicate(int);
-int wordPairClear(void);
-int FUN_00428334(int, unsigned char **, unsigned int);
-int FUN_00428428(int, int, int);
-int FUN_004396bc(int, unsigned int, int *, int);
+s32 FUN_00428428(TableLoader *loader, s32 a, s32 b);
+u8 *dataGetBlockBase(TableLoader *loader);
+u32 FUN_004283e0(TableLoader *loader);
+void wordPairClear(void);
+void recordTableAppend(const char *name);
+void pricingSelectionBuildPredicate(s32 predicate);
+s32 FUN_004396bc(s32 a, u32 b, s32 *c, s32 d, u8 *s0, u32 s4, s32 *s8, s32 s12, u8 *s16, u32 s20, u8 *s24, u32 s28,
+                 s32 *s32w, u32 s36, s32 *s40, u32 s44, s32 s48, s32 s52, u32 *s56, u32 s60, u32 s64);
+s32 libc_strncmp(const char *a, const char *b, u32 count);
+u16 FUN_001029f4(u32 value, s32 a, s32 b);
+void sysFatalBreak(void);
+s32 FUN_00428334(TableLoader *loader, TableEntry *entry, u16 id);
 
-/* stack frame of param_4: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_4_stack;
+#define TABLE_BUILD_EMPTY ((s32)0xC8A13908)
 
-extern unsigned char LAB_00426dc8; /* 0x426dc8 */
-extern unsigned char LAB_00426dd0; /* 0x426dd0 */
-extern unsigned char LAB_00426dd8; /* 0x426dd8 */
-extern unsigned char LAB_00426de4; /* 0x426de4 */
-extern unsigned char LAB_00426df4; /* 0x426df4 */
-extern unsigned int DAT_005c0a8c; /* 0x5c0a8c */
-extern unsigned int DAT_005c0a90; /* 0x5c0a90 */
-extern unsigned char DAT_00642980; /* 0x642980 */
-extern unsigned char DAT_00642b80; /* 0x642b80 */
-
-/* Supplied declaration required: FUN_001029f4. */
-/* Supplied declaration required: sysFatalBreak. */
-extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: recordTableAppend. */
-/* Supplied declaration required: pricingSelectionBuildPredicate. */
-/* Supplied declaration required: wordPairClear. */
-/* Supplied declaration required: FUN_00428334. */
-extern unsigned char *dataGetBlockBase(int);
-extern unsigned int FUN_004283e0(int);
-/* Supplied declaration required: FUN_00428428. */
-/* Supplied declaration required: FUN_004396bc. */
-
-
-void FUN_00426acc(int param_1,int param_2,unsigned int param_3,int *param_4)
-
+/* Builds the shop item table: registers the column names, parses the source into the loader and then
+ * adds one entry per row (id, kind flags and the row's title version). Returns 0 or a negative error. */
+s32 FUN_00426acc(TableLoader *loader, u32 argA, u32 argB, TableBuildConfig *config)
 {
-/* irregular: 1 goto(s); 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  unsigned int *puVar5;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  unsigned char *temp_v9;
-  unsigned int temp_v10;
-  int *temp_v11;
-  int temp_v12;
-  unsigned char *puStack_68;
-  unsigned int temp_v13;
-  unsigned char *temp_v14;
-  unsigned int uStack_5c;
-  int *temp_v15;
-  unsigned int temp_v16;
-  int *temp_v17;
-  unsigned int uStack_4c;
-  int temp_v18;
-  int temp_v19;
-  int temp_v20;
-  unsigned int temp_v21;
-  unsigned int uStack_38;
-  int temp_v22;
-  unsigned int uStack_30;
-  int *temp_v23;
-  
-  temp_v0 = param_1;
-  FUN_00428428(param_1,param_4[4],param_4[5]);
-  if (-1 < temp_v0) {
-    temp_v22 = param_2;
-    uStack_30 = param_3;
-    temp_v9 = (unsigned char *)dataGetBlockBase(param_1);
-    temp_v10 = FUN_004283e0(param_1);
-    temp_v2 = *(unsigned int *)(param_1 + 8);
-    temp_v5 = *(unsigned int *)(param_1 + 0xc);
+    s32 result = FUN_00428428(loader, config->sourceA, config->sourceB);
+    if (result < 0)
+        return result;
+    u8 *base = dataGetBlockBase(loader);
+    u32 size = FUN_004283e0(loader);
     wordPairClear();
-    recordTableAppend(&LAB_00426dc8);
-    recordTableAppend(&LAB_00426dd0);
-    recordTableAppend(&LAB_00426dd8);
-    recordTableAppend(&LAB_00426de4);
-    recordTableAppend(&LAB_00426df4);
-    pricingSelectionBuildPredicate((char)param_4[10]);
-    temp_v23 = (int *)*param_4;
-    if ((int *)*param_4 == (int *)0x0) {
-      temp_v23 = param_4;
-    }
-    piVar4 = (int *)param_4[6];
-    temp_v11 = (int *)param_4[2];
-    if ((int *)param_4[2] == (int *)0x0) {
-      temp_v11 = param_4;
-    }
-    piVar3 = (int *)param_4[7];
-    temp_v15 = piVar4;
-    if (piVar4 == (int *)0x0) {
-      temp_v15 = param_4;
-    }
-    temp_v17 = piVar3;
-    if (piVar3 == (int *)0x0) {
-      temp_v17 = param_4;
-    }
-    temp_v18 = param_4[0xb];
-    temp_v19 = param_4[0xc];
-    uStack_4c = (unsigned int)(piVar3 != (int *)0x0);
-    temp_v16 = (unsigned int)(piVar4 != (int *)0x0);
-    temp_v13 = DAT_005c0a90;
-    temp_v14 = temp_v9;
-    uStack_5c = temp_v10;
-    temp_v12 = param_4[3];
-    temp_v10 = DAT_005c0a8c;
-    temp_v9 = &DAT_00642980;
-    puStack_68 = &DAT_00642b80;
-    temp_v0 = temp_v22;
-    temp_v20 = param_1 + 4;
-    temp_v21 = temp_v2;
-    uStack_38 = temp_v5;
-    FUN_004396bc(temp_v22,uStack_30,temp_v23,param_4[1]);
-    if (-1 < temp_v0) {
-      temp_v0 = 0;
-    }
-    if (-1 < temp_v0) {
-      temp_v6 = 0;
-      if ((*(int *)(param_1 + 4) != 0) && (*(int *)(*(int *)(param_1 + 4) + 4) != 0)) {
-        do {
-          piVar4 = *(int **)(param_1 + 4);
-          if ((piVar4 != (int *)0x0) && ((unsigned int)piVar4[1] >= temp_v6)) {
-            puVar5 = (unsigned int *)(*piVar4 + temp_v6 * 0x30);
-          }
-          else {
-            puVar5 = (unsigned int *)0x0;
-          }
-          temp_v7 = puVar5[7];
-          temp_v3 = 0;
-          if (temp_v3 < temp_v7) {
-            do {
-              temp_v0 = libc_strncmp(*(unsigned int *)(puVar5[6] + temp_v3 * 8),&LAB_00426de4,0x40);
-              if (temp_v0 == 0) {
-                temp_v3 = *(unsigned int *)(puVar5[6] + temp_v3 * 8 + 4);
-                goto LAB_00426cb8;
-              }
-              temp_v3 = temp_v3 + 1;
-            } while (temp_v3 < temp_v7);
-          }
-          temp_v3 = 0;
-LAB_00426cb8:
-          FUN_001029f4(temp_v3,0,10);
-          temp_v4 = *puVar5;
-          temp_v1 = puVar5[1];
-          temp_v7 = (temp_v4 >> 8) | (temp_v1 << 0x18);
-          temp_v8 = temp_v1 >> 0xe == 0x10;
-          if (temp_v8) {
-            temp_v7 = temp_v1 & 0xffff;
-          }
-          if (temp_v8 && temp_v7 == 0x8c) {
-            temp_v7 = 0;
-          }
-          else {
-            temp_v8 = temp_v1 >> 0xe == 0x10;
-            if (temp_v8) {
-              temp_v7 = temp_v1 & 0xffff;
+    recordTableAppend("Prices");
+    recordTableAppend("Ratings");
+    recordTableAppend("NewSince");
+    recordTableAppend("TitleVersion");
+    recordTableAppend("sys.ItemCode");
+    pricingSelectionBuildPredicate(config->predicate);
+    s32 *first = config->first != NULL ? config->first : (s32 *)config;
+    s32 *third = config->third != NULL ? config->third : (s32 *)config;
+    s32 *fifth = config->fifth != NULL ? config->fifth : (s32 *)config;
+    s32 *sixth = config->sixth != NULL ? config->sixth : (s32 *)config;
+    result = FUN_004396bc(argA, argB, first, config->second, &DAT_00642b80, DAT_005c0a90, third, config->fourth,
+                          &DAT_00642980, DAT_005c0a8c, base, size, fifth, config->fifth != NULL, sixth,
+                          config->sixth != NULL, config->seventh, config->eighth, (u32 *)&loader->rows,
+                          loader->sizeA, loader->sizeB);
+    if (result >= 0)
+        result = 0;
+    if (result < 0)
+        return result;
+    for (u32 i = 0; loader->rows != NULL && i < loader->rows->count; i++) {
+        DataRow *row = (loader->rows != NULL && i <= loader->rows->count) ? &loader->rows->rows[i] : NULL;
+        u32 titleVersion = 0;
+        for (u32 c = 0; c < row->columnCount; c++) {
+            if (libc_strncmp(row->columns[c].name, "TitleVersion", 64) == 0) {
+                titleVersion = row->columns[c].value;
+                break;
             }
-            if (temp_v8 && temp_v7 == 0xd) {
-              temp_v7 = 1;
-            }
-            else {
-              temp_v7 = 0xff;
-            }
-          }
-          temp_v1 = temp_v4 >> 0x1c;
-          if (temp_v1 == 0) {
-            temp_v0 = 0;
-          }
-          else if (temp_v1 == 2) {
-            temp_v0 = 1;
-          }
-          else {
+        }
+        u16 version = FUN_001029f4(titleVersion, 0, 10);
+        u32 word0 = row->word0;
+        u32 word1 = row->word1;
+        u32 id = ((word0 >> 8) | (word1 << 24)) & 0xFFFFF;
+        u32 category;
+        if ((word1 >> 14) == 0x10 && (u16)word1 == 0x8C)
+            category = 0;
+        else if ((word1 >> 14) == 0x10 && (u16)word1 == 0xD)
+            category = 1;
+        else
+            category = 0xFF;
+        u32 kind = ((word0 >> 28) | (word1 << 4)) & 15;
+        u32 premium;
+        if (kind == 0) {
+            premium = 0;
+        } else if (kind == 2) {
+            premium = 1;
+        } else {
             sysFatalBreak();
-            temp_v0 = 0;
-          }
-          temp_v10 = (temp_v1 & 0xff000000) | temp_v7 | ((temp_v4 & 0xff) << 8) | (temp_v0 << 0x10);
-          temp_v0 = param_1;
-          temp_v9 = (unsigned char *)((temp_v4 >> 8) & 0xfffff);
-          FUN_00428334(param_1,&temp_v9,temp_v3 & 0xffff);
-          if (temp_v0 < 0) {
-            return;
-          }
-          temp_v6 = temp_v6 + 1;
-          temp_v3 = 0;
-          if (*(int *)(param_1 + 4) != 0) {
-            temp_v3 = *(unsigned int *)(*(int *)(param_1 + 4) + 4);
-          }
-        } while (temp_v6 < temp_v3);
-      }
+            premium = 0;
+        }
+        TableEntry entry;
+        entry.id = id;
+        entry.flags = category | ((word0 & 0xFF) << 8) | (premium << 16);
+        result = FUN_00428334(loader, &entry, version);
+        if (result < 0)
+            return result;
     }
-  }
-  return;
+    if (loader->rows != NULL && loader->rows->unk08 != 0)
+        return 0;
+    return TABLE_BUILD_EMPTY;
 }
 
 } /* extern "C" */

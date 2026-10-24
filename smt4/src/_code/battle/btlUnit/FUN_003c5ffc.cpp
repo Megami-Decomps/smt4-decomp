@@ -1,226 +1,177 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5ffc` (_code @ 0x3c5ffc, 0x3ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: battle debug list box item-changed handler (copies the edited item into the matching debug setting); written from the decompilation, switch lowering not compared with retail */
+#include "common.h"
+
+struct BtlDebugMenu {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 listBox;
+};
+
+struct BtlMainDebug {
+    /* 0x000 */ u8 unk000[0x560];
+    /* 0x560 */ u32 debugTarget;
+    /* 0x564 */ u8 unk564[0xD0];
+    /* 0x634 */ u32 flags;
+};
+
+struct BtlUnitDebugFlags {
+    /* 0x0000 */ u8 unk0000[0x44A8];
+    /* 0x44A8 */ u32 flags;
+};
+
+#define BTL_MAIN_FLAG_DEBUG_OWNER 0x100
+#define BTL_UNIT_FLAG_DEBUG_OWNER 0x40000000
 
 extern "C" {
+extern BtlMainDebug *g_btlMain;
+extern u32 DAT_004342d4;
+extern u32 DAT_004342d8;
+extern u32 DAT_004342e0;
+extern u32 DAT_004342e4;
+extern u32 DAT_004342e8;
+extern u32 DAT_004342ec;
+extern u32 DAT_004342f0;
+extern u32 DAT_00434310;
+extern u32 DAT_00434314;
+extern u32 DAT_00434318;
+extern u32 DAT_0043431c;
+extern u32 DAT_00434320;
+extern u32 DAT_00434324;
+extern u32 DAT_00434328;
+extern u32 DAT_0043432c;
+extern u32 DAT_00434330;
+extern u32 DAT_00434334;
+extern u32 DAT_00434338;
+extern u32 DAT_0043433c;
+extern u32 DAT_00434340;
+extern u32 DAT_00434344;
+extern u32 DAT_00434348;
+extern u32 DAT_0043434c;
+extern u32 DAT_00434350;
+extern u32 DAT_00434354;
+extern u32 DAT_00439cec;
+extern u32 DAT_00493554;
+extern u32 DAT_0049355c;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
+u32 *asdListBoxGetItemText(u32 box);
+s32 listBoxItemHasOwner(u32 box);
+u32 *asdListBoxGetItemValuePtr(u32 box, u32 item);
 
-extern int g_btlMain; /* 0x4342c8 */
-extern unsigned int DAT_004342d4; /* 0x4342d4 */
-extern unsigned int DAT_004342d8; /* 0x4342d8 */
-extern unsigned int DAT_004342e0; /* 0x4342e0 */
-extern unsigned int DAT_004342e4; /* 0x4342e4 */
-extern unsigned int DAT_004342e8; /* 0x4342e8 */
-extern unsigned int DAT_004342ec; /* 0x4342ec */
-extern unsigned int DAT_004342f0; /* 0x4342f0 */
-extern unsigned int DAT_00434310; /* 0x434310 */
-extern unsigned int DAT_00434314; /* 0x434314 */
-extern unsigned int DAT_00434318; /* 0x434318 */
-extern unsigned int DAT_0043431c; /* 0x43431c */
-extern unsigned int DAT_00434320; /* 0x434320 */
-extern unsigned int DAT_00434324; /* 0x434324 */
-extern unsigned int DAT_00434328; /* 0x434328 */
-extern unsigned int DAT_0043432c; /* 0x43432c */
-extern unsigned int DAT_00434330; /* 0x434330 */
-extern unsigned int DAT_00434334; /* 0x434334 */
-extern unsigned int DAT_00434338; /* 0x434338 */
-extern unsigned int DAT_0043433c; /* 0x43433c */
-extern unsigned int DAT_00434340; /* 0x434340 */
-extern unsigned int DAT_00434344; /* 0x434344 */
-extern unsigned int DAT_00434348; /* 0x434348 */
-extern unsigned int DAT_0043434c; /* 0x43434c */
-extern unsigned int DAT_00434350; /* 0x434350 */
-extern unsigned int DAT_00434354; /* 0x434354 */
-extern unsigned int DAT_00439cec; /* 0x439cec */
-extern unsigned int DAT_00493554; /* 0x493554 */
-extern unsigned int DAT_0049355c; /* 0x49355c */
-
-extern unsigned int *asdListBoxGetItemText(unsigned int);
-extern int listBoxItemHasOwner(unsigned int);
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
-
-
-void FUN_003c5ffc(int param_1,int param_2,unsigned int param_3)
-
+static __inline void listBoxStoreText(u32 box, u32 *destination)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  switch(param_3) {
-  case 0:
-    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
-    if (temp_v0 != 0) {
-      temp_v2 = *(unsigned int *)(g_btlMain + 0x634) | 0x100;
+    *destination = *asdListBoxGetItemText(box);
+}
+
+static __inline void listBoxStoreValue(u32 box, u32 item, u32 *destination)
+{
+    *destination = *asdListBoxGetItemValuePtr(box, item);
+}
+
+void FUN_003c5ffc(BtlDebugMenu *menu, BtlUnitDebugFlags *unit, u32 index)
+{
+    u32 box = menu->listBox;
+    switch (index) {
+    case 0:
+        if (listBoxItemHasOwner(box) != 0)
+            g_btlMain->flags |= BTL_MAIN_FLAG_DEBUG_OWNER;
+        else
+            g_btlMain->flags &= ~BTL_MAIN_FLAG_DEBUG_OWNER;
+        break;
+    case 1:
+        g_btlMain->debugTarget = *asdListBoxGetItemText(box);
+        break;
+    case 2:
+        if (listBoxItemHasOwner(box) != 0)
+            unit->flags |= BTL_UNIT_FLAG_DEBUG_OWNER;
+        else
+            unit->flags &= ~BTL_UNIT_FLAG_DEBUG_OWNER;
+        break;
+    case 3:
+        DAT_00493554 = *asdListBoxGetItemText(box);
+        break;
+    case 4:
+        DAT_0049355c = *asdListBoxGetItemText(box);
+        break;
+    case 5:
+        listBoxStoreText(box, &DAT_00434310);
+        break;
+    case 6:
+        listBoxStoreText(box, &DAT_00434314);
+        break;
+    case 7:
+        listBoxStoreText(box, &DAT_00434318);
+        break;
+    case 8:
+        listBoxStoreValue(box, index, &DAT_0043431c);
+        break;
+    case 9:
+        listBoxStoreValue(box, index, &DAT_004342d4);
+        break;
+    case 10:
+        listBoxStoreValue(box, index, &DAT_004342d8);
+        break;
+    case 0xb:
+        listBoxStoreText(box, &DAT_00434320);
+        break;
+    case 0xc:
+        listBoxStoreValue(box, index, &DAT_00434324);
+        break;
+    case 0xd:
+        listBoxStoreValue(box, index, &DAT_004342e0);
+        break;
+    case 0xe:
+        listBoxStoreValue(box, index, &DAT_00434328);
+        break;
+    case 0xf:
+        listBoxStoreText(box, &DAT_0043432c);
+        break;
+    case 0x10:
+        listBoxStoreValue(box, index, &DAT_00434330);
+        break;
+    case 0x11:
+        listBoxStoreValue(box, index, &DAT_004342e4);
+        break;
+    case 0x12:
+        listBoxStoreValue(box, index, &DAT_00434334);
+        break;
+    case 0x13:
+        listBoxStoreValue(box, index, &DAT_00434338);
+        break;
+    case 0x14:
+        listBoxStoreValue(box, index, &DAT_004342e8);
+        break;
+    case 0x15:
+        listBoxStoreValue(box, index, &DAT_0043433c);
+        break;
+    case 0x16:
+        listBoxStoreValue(box, index, &DAT_00434340);
+        break;
+    case 0x17:
+        listBoxStoreValue(box, index, &DAT_004342ec);
+        break;
+    case 0x18:
+        listBoxStoreValue(box, index, &DAT_00434344);
+        break;
+    case 0x19:
+        listBoxStoreValue(box, index, &DAT_00434348);
+        break;
+    case 0x1a:
+        listBoxStoreValue(box, index, &DAT_0043434c);
+        break;
+    case 0x1b:
+        listBoxStoreValue(box, index, &DAT_00434350);
+        break;
+    case 0x1c:
+        listBoxStoreValue(box, index, &DAT_00434354);
+        break;
+    case 0x1d:
+        listBoxStoreValue(box, index, &DAT_00439cec);
+        break;
+    case 0x1e:
+        listBoxStoreValue(box, index, &DAT_004342f0);
+        break;
+    default:
+        break;
     }
-    else {
-      temp_v2 = *(unsigned int *)(g_btlMain + 0x634) & 0xfffffeff;
-    }
-    *(unsigned int *)(g_btlMain + 0x634) = temp_v2;
-    return;
-  case 1:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    *(unsigned int *)(g_btlMain + 0x560) = *puVar2;
-    return;
-  case 2:
-    temp_v0 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10));
-    temp_v2 = *(unsigned int *)(param_2 + 0x44a8);
-    if (temp_v0 != 0) {
-      temp_v2 = temp_v2 | 0x40000000;
-    }
-    else {
-      temp_v2 = temp_v2 & 0xbfffffff;
-    }
-    *(unsigned int *)(param_2 + 0x44a8) = temp_v2;
-    return;
-  case 3:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    DAT_00493554 = *puVar2;
-    return;
-  case 4:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    DAT_0049355c = *puVar2;
-    return;
-  case 5:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434310;
-    break;
-  case 6:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434314;
-    break;
-  case 7:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434318;
-    break;
-  case 8:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_0043431c;
-    break;
-  case 9:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342d4;
-    break;
-  case 10:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342d8;
-    break;
-  case 0xb:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434320;
-    break;
-  case 0xc:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434324;
-    break;
-  case 0xd:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342e0;
-    break;
-  case 0xe:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434328;
-    break;
-  case 0xf:
-    puVar2 = (unsigned int *)asdListBoxGetItemText(*(unsigned int *)(param_1 + 0x10));
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_0043432c;
-    break;
-  case 0x10:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434330;
-    break;
-  case 0x11:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342e4;
-    break;
-  case 0x12:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434334;
-    break;
-  case 0x13:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434338;
-    break;
-  case 0x14:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342e8;
-    break;
-  case 0x15:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_0043433c;
-    break;
-  case 0x16:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434340;
-    break;
-  case 0x17:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342ec;
-    break;
-  case 0x18:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434344;
-    break;
-  case 0x19:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434348;
-    break;
-  case 0x1a:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_0043434c;
-    break;
-  case 0x1b:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434350;
-    break;
-  case 0x1c:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00434354;
-    break;
-  case 0x1d:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_00439cec;
-    break;
-  case 0x1e:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
-    temp_v1 = *puVar2;
-    puVar2 = &DAT_004342f0;
-    break;
-  default:
-    return;
-  }
-  *puVar2 = temp_v1;
-  return;
 }
 
 } /* extern "C" */

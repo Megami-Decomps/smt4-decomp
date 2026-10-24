@@ -1,154 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a16c0` (_code @ 0x1a16c0, 0x394 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 108 diff lines remain, scheduling/register allocation only. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_002bf288(int, int, int, int, int, int);
-int efctSetSpeed(void);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-int FUN_002c39a4(int);
-int FUN_003b3388(int, unsigned int, unsigned int);
+/* The curtain panel inside the result screen: the curtain speed and a hold flag. */
+typedef struct ResultPanel {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ f32 curtainSpeed;
+    /* 0x24 */ u8 unk24[0x66];
+    /* 0x8A */ s8 hold;
+    /* 0x8B */ u8 unk8b;
+} ResultPanel;
 
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
+/* The result screen (only the fields used here, by their offsets). */
+typedef struct ResultScreen {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u8 position[0x8];
+    /* 0x0028 */ u8 unk0028[0x714];
+    /* 0x073C */ ResultPanel panel;
+    /* 0x07C8 */ u8 unk07c8[0x2D64];
+    /* 0x352C */ s32 phase;
+    /* 0x3530 */ u8 unk3530[4];
+    /* 0x3534 */ s32 step;
+    /* 0x3538 */ u8 unk3538[0xC];
+    /* 0x3544 */ s32 curtain;
+} ResultScreen;
 
-extern int g_result; /* 0x44dc20 */
-extern int g_titleScene; /* 0x44ea00 */
+extern ResultScreen *g_result;
+extern RenderCtx *g_titleScene;
 
-extern int modelPairTryBind(int);
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003b3388. */
+s32 modelPairTryBind(ResultScreen *result);
+void FUN_002c39a4(RenderCtx *context);
+s32 FUN_002c5d80(s32 a, s32 b);
+u32 packNibblesAndByte(u32 a, u32 b, u32 c);
+void FUN_002bf288(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+void efctSetSpeed(f32 speed);
+u32 vec2GetXInt(void *vector);
+u32 vec2GetYInt(void *vector);
+void FUN_003b3388(ResultScreen *result, u32 x, u32 y);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-
-unsigned int FUN_001a16c0(void)
-
+/* Draws the result screen: while the curtain closes after the results step, slides the curtain
+ * halves in and runs the effect speed; then draws the result sprites for phases below 9.
+ * Always returns 0. */
+u32 FUN_001a16c0(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int *piVar8;
-  
-  temp_v0 = g_result;
-  if ((g_result != 0) && (temp_v1 = modelPairTryBind(g_result), temp_v1 != 0)) {
-    FUN_002c39a4(g_titleScene);
-    temp_v1 = g_titleScene;
-    temp_v2 = FUN_002c5d80(1,0);
-    piVar8 = (int *)(temp_v1 + 0x124c);
-    temp_v5 = *piVar8;
-    temp_v6 = piVar8[temp_v5 + 2];
-    *piVar8 = temp_v5 + 1;
-    piVar8[temp_v5 + 3] = temp_v2;
-    if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v6 != temp_v2) {
-      (**(romwright_code **)(temp_v1 + 0x1268))();
-      *(unsigned char *)(temp_v1 + 0x1264) = 0;
+    ResultScreen *result = g_result;
+
+    if (result != NULL && modelPairTryBind(result) != 0) {
+        FUN_002c39a4(g_titleScene);
+        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        if (result->phase == 12 && result->step == 5 && result->panel.hold == 0) {
+            s32 curtain = result->curtain;
+
+            if (curtain < 16) {
+                curtain = curtain * -30;
+                if (curtain < -240) {
+                    curtain = -240;
+                }
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
+                if (curtain > -240) {
+                    FUN_002bf288(2, 0x28, 0x113, 0, curtain, 0xF1);
+                }
+                FUN_002bf288(2, 0x28, 0x114, 0, curtain + 240, 0xF1);
+                renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+            }
+            if (result->curtain >= 9) {
+                efctSetSpeed(result->panel.curtainSpeed);
+                FUN_002bf288(2, 0x28, 0x115, 0, 0, 0xF2);
+                efctSetSpeed(1.0f);
+            }
+        }
+        renderStackPop(&g_titleScene->stackA);
+        if (result->phase < 9) {
+            if (result->phase != 0) {
+                renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+                FUN_003b3388(result, vec2GetXInt(result->position), vec2GetYInt(result->position));
+                renderStackPop(&g_titleScene->stackA);
+            }
+            renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
+            FUN_002c198c(g_titleScene);
+            FUN_002c18e4(g_titleScene);
+        }
     }
-    temp_v1 = g_titleScene;
-    if (((*(int *)(temp_v0 + 0x352c) == 0xc) && (*(int *)(temp_v0 + 0x3534) == 5)) &&
-       (*(char *)(temp_v0 + 0x7c6) == '\0')) {
-      temp_v2 = *(int *)(temp_v0 + 0x3544);
-      if (temp_v2 < 0x10) {
-        temp_v2 = temp_v2 * -0x1e;
-        if (temp_v2 < -0xf0) {
-          temp_v2 = -0xf0;
-        }
-        temp_v5 = packNibblesAndByte(6,1,0);
-        piVar8 = (int *)(temp_v1 + 0x12ac);
-        temp_v6 = piVar8[*piVar8 + 2];
-        piVar8[*piVar8 + 2] = temp_v5;
-        if (*(char *)(temp_v1 + 0x12c4) != '\0' || temp_v6 != temp_v5) {
-          (**(romwright_code **)(temp_v1 + 0x12c8))();
-          *(unsigned char *)(temp_v1 + 0x12c4) = 0;
-        }
-        if (-0xf0 < temp_v2) {
-          FUN_002bf288(2,0x28,0x113,0,temp_v2,0xf1);
-        }
-        FUN_002bf288(2,0x28,0x114,0,temp_v2 + 0xf0,0xf1);
-        temp_v1 = g_titleScene;
-        temp_v2 = packNibblesAndByte(6,7,0);
-        piVar8 = (int *)(temp_v1 + 0x12ac);
-        temp_v5 = piVar8[*piVar8 + 2];
-        piVar8[*piVar8 + 2] = temp_v2;
-        if (*(char *)(temp_v1 + 0x12c4) != '\0' || temp_v5 != temp_v2) {
-          (**(romwright_code **)(temp_v1 + 0x12c8))();
-          *(unsigned char *)(temp_v1 + 0x12c4) = 0;
-        }
-      }
-      if (*(int *)(temp_v0 + 0x3544) >= 9) {
-        efctSetSpeed();
-        FUN_002bf288(2,0x28,0x115,0,0,0xf2);
-        efctSetSpeed();
-      }
-    }
-    temp_v1 = g_titleScene;
-    piVar8 = (int *)(g_titleScene + 0x124c);
-    temp_v2 = *piVar8;
-    temp_v5 = piVar8[temp_v2 + 2];
-    *piVar8 = temp_v2 - 1;
-    if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v5 != piVar8[temp_v2 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1268))(piVar8[temp_v2 + 1]);
-      *(unsigned char *)(temp_v1 + 0x1264) = 0;
-    }
-    temp_v1 = g_titleScene;
-    temp_v2 = *(int *)(temp_v0 + 0x352c);
-    if (temp_v2 < 9) {
-      if (temp_v2 != 0) {
-        temp_v2 = FUN_002c5d80(1,0);
-        piVar8 = (int *)(temp_v1 + 0x124c);
-        temp_v5 = *piVar8;
-        temp_v6 = piVar8[temp_v5 + 2];
-        *piVar8 = temp_v5 + 1;
-        piVar8[temp_v5 + 3] = temp_v2;
-        if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v6 != temp_v2) {
-          (**(romwright_code **)(temp_v1 + 0x1268))();
-          *(unsigned char *)(temp_v1 + 0x1264) = 0;
-        }
-        temp_v3 = vec2GetXInt(temp_v0 + 0x20);
-        temp_v4 = vec2GetYInt(temp_v0 + 0x20);
-        FUN_003b3388(temp_v0,temp_v3,temp_v4);
-        temp_v0 = g_titleScene;
-        piVar8 = (int *)(g_titleScene + 0x124c);
-        temp_v1 = *piVar8;
-        temp_v2 = piVar8[temp_v1 + 2];
-        *piVar8 = temp_v1 - 1;
-        if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v2 != piVar8[temp_v1 + 1]) {
-          (**(romwright_code **)(temp_v0 + 0x1268))();
-          *(unsigned char *)(temp_v0 + 0x1264) = 0;
-        }
-      }
-      temp_v0 = g_titleScene;
-      temp_v1 = packNibblesAndByte(6,7,0);
-      piVar8 = (int *)(temp_v0 + 0x12ac);
-      temp_v2 = piVar8[*piVar8 + 2];
-      piVar8[*piVar8 + 2] = temp_v1;
-      if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v2 != temp_v1) {
-        (**(romwright_code **)(temp_v0 + 0x12c8))();
-        *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-      }
-      FUN_002c198c(g_titleScene);
-      FUN_002c18e4(g_titleScene);
-      return 0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+}

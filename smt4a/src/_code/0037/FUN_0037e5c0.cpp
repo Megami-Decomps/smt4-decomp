@@ -1,107 +1,101 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037e5c0` (_code @ 0x37e5c0, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constant materialisation only - retail loads each layout entry id (0x576/0x577/0x578/0x579/0x57d) and the 0x598 field offset from the literal pool, while armcc here derives them from one register and folds the offset; control flow and calls are identical. */
+#include "common.h"
+
+namespace {
+/* A row of the status screen's demon list. */
+struct StatusDownRow {
+    u16 demon;      /* 0 when the row is empty */
+    u8 unk02[6];
+};
+
+/* The demon list: its rows and the selection. */
+struct StatusDownList {
+    /* 0x00 */ StatusDownRow rows[9];
+    /* 0x48 */ s32 selected;
+    /* 0x4c */ u8 unk4c[4];
+    /* 0x50 */ u32 compareDemon;
+};
+
+/* The status screen state (the part this row drawer reads). */
+struct StatusDownView {
+    /* 0x0000 */ u8 unk0000[0x544];
+    /* 0x0544 */ s16 entries[0x28];        /* the record id of each row */
+    /* 0x0594 */ u8 unk0594[4];
+    /* 0x0598 */ s16 compareCount;         /* > 0: the rows are drawn as a comparison */
+    /* 0x059a */ u8 unk059a[0x1f12];
+    /* 0x24ac */ StatusDownList list;
+};
+
+/* A layout entry: the offset of one element of the row. */
+struct LayoutEntry {
+    u8 unk00[8];
+    s16 x;
+    s16 y;
+};
+}
 
 extern "C" {
+extern StatusDownView *g_statusDown;
+void efctSetSpeed(f32 speed);
+s32 recordGetModeForId(s32 id);
+void statusDownCreatePanelEffects(s32 x, s32 y, s32 highlighted);
+void FUN_001835b4(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
+LayoutEntry *FUN_001834a4(u32 table, u32 entry);
+void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
+void statDrawClampedDelta(u32 demon, s32 other, s32 x, s32 y, u32 slot, s32 a);
+u32 FUN_003df57c(u32 demon, u32 flag);
+u32 FUN_004bcbb4(u32 demon, u32 other);
+u32 FUN_0014bd84(s32 demon);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 speed);
+void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_00180310(...);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00185e84(int, int, int, int, int, int);
-int statusDownCreatePanelEffects(int, int, int);
-int statDrawClampedDelta(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_3_stack;
-
-extern unsigned char LAB_0037e888; /* 0x37e888 */
-extern unsigned char LAB_0037e894; /* 0x37e894 */
-extern unsigned char LAB_0037e89c; /* 0x37e89c */
-extern int g_statusDown; /* 0x588fe8 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(short);
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180310. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00185e84. */
-extern int recordGetModeForId(int);
-/* Supplied declaration required: statusDownCreatePanelEffects. */
-/* Supplied declaration required: statDrawClampedDelta. */
-extern unsigned int FUN_003df57c(short, unsigned int);
-extern unsigned int FUN_004bcbb4(unsigned int, short);
-
-
-void FUN_0037e5c0(int param_1,int param_2,int param_3)
-
+/* Draws one demon row of the status list at (x, y): its panel, name, power and level readouts. */
+void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  unsigned char temp_v6 [84];
-  
-  temp_v3 = g_statusDown;
-  temp_v5 = 0x9fe7ffff;
-  temp_v0 = *(short *)(g_statusDown + 0x24ac + param_1 * 8);
-  efctSetSpeed();
-  temp_v1 = recordGetModeForId((int)*(short *)(temp_v3 + param_1 * 2 + 0x544));
-  if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
-    temp_v5 = 0xf5ff9fff;
-  }
-  if (*(int *)(temp_v3 + 0x24f4) == param_1) {
-    temp_v5 = 0x57d8ffff;
-  }
-  statusDownCreatePanelEffects(param_2,param_3,(temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6);
-  efctSetSpeed();
-  if (temp_v0 != 0) {
-    FUN_001835b4(2,0x12,0x576,param_2,param_3,0xce);
-    FUN_001835b4(2,0x12,0x577,param_2,param_3,0xce);
-    temp_v1 = FUN_001834a4(0x12,0x578);
-    if (*(short *)(temp_v3 + 0x598) < 1) {
-      FUN_00185e84((int)temp_v0,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0xd3,
-                   1,0);
-      temp_v2 = FUN_003df57c(temp_v0,1);
+    StatusDownView *status = g_statusDown;
+    StatusDownList *list = &status->list;
+    char text[64];
+    u32 color = 0x9fe7ffff;
+    u16 demon = list->rows[index].demon;
+    efctSetSpeed(speed);
+    s32 mode = recordGetModeForId(status->entries[index]);
+    s32 special = 0;
+    if (mode == 1 || mode == 2 || mode == 6) {
+        special = 1;
     }
-    else {
-      FUN_00185e84((int)temp_v0,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0xd3,
-                   0,0);
-      statDrawClampedDelta(*(unsigned int *)(temp_v3 + 0x24fc),(int)temp_v0,*(short *)(temp_v1 + 8) + param_2,
-                   *(short *)(temp_v1 + 10) + param_3,0xd3,0);
-      temp_v2 = FUN_004bcbb4(*(unsigned int *)(temp_v3 + 0x24fc),temp_v0);
+    if (special) {
+        color = 0xf5ff9fff;
     }
-    temp_v3 = FUN_001834a4(0x12,0x579);
-    temp_v4 = FUN_0014bd84(temp_v0);
-    textFormatBuffer(temp_v6,&LAB_0037e894,temp_v4);
-    VectorSignedToFloat(*(short *)(temp_v3 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(short *)(temp_v3 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,temp_v5,temp_v6);
-    temp_v3 = FUN_001834a4(0x12,0x57d);
-    FUN_00180310(1,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,1,4,0xdd,
-                 &LAB_0037e89c,temp_v2);
-    efctSetSpeed();
-    return;
-  }
-  temp_v3 = FUN_001834a4(0x12,0x579);
-  textFormatBuffer(temp_v6,&LAB_0037e888);
-  VectorSignedToFloat(*(short *)(temp_v3 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v3 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,temp_v5,temp_v6);
-  return;
+    if (list->selected == index) {
+        color = 0x57d8ffff;
+    }
+    statusDownCreatePanelEffects(x, y, special);
+    efctSetSpeed(speed);
+    if (demon == 0) {
+        LayoutEntry *name = FUN_001834a4(18, 0x579);
+        textFormatBuffer(text, "\x81| \x81| \x81|");
+        FUN_00162790(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+        return;
+    }
+    FUN_001835b4(2, 18, 0x576, x, y, 206);
+    FUN_001835b4(2, 18, 0x577, x, y, 206);
+    LayoutEntry *icon = FUN_001834a4(18, 0x578);
+    u32 power;
+    if (status->compareCount <= 0) {
+        FUN_00185e84(demon, icon->x + x, icon->y + y, 211, 1, 0);
+        power = FUN_003df57c(demon, 1);
+    } else {
+        FUN_00185e84(demon, icon->x + x, icon->y + y, 211, 0, 0);
+        statDrawClampedDelta(list->compareDemon, demon, icon->x + x, icon->y + y, 211, 0);
+        power = FUN_004bcbb4(list->compareDemon, demon);
+    }
+    LayoutEntry *name = FUN_001834a4(18, 0x579);
+    textFormatBuffer(text, "%s", FUN_0014bd84(demon));
+    FUN_00162790(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+    LayoutEntry *level = FUN_001834a4(18, 0x57d);
+    FUN_00180310(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

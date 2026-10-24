@@ -1,4 +1,3 @@
-/* NON_MATCHING: the mode argument and returned this still occupy different registers from retail. */
 #include "classes/Obj4223c4.h"
 
 /* Initializes the selected menu mode after constructing the selection base. */

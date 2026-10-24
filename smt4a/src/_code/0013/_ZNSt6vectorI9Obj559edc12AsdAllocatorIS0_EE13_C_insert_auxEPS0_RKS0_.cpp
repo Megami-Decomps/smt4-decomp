@@ -10,7 +10,7 @@ int FUN_00307c4a(...);
 int vectorCountxB8_00307c56(int *);
 int vectorCapacity184(...);
 int vectorDestroyRangeStride184(int *, int, int);
-int _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_(...);
+int _ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: vectorCountxB8_00307c56. */
 /* Supplied declaration required: vectorCapacity184. */
 /* Supplied declaration required: vectorDestroyRangeStride184. */
-/* Supplied declaration required: _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_. */
+/* Supplied declaration required: _ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_. */
 extern int allocElements184(int *, int, int);
 extern int bufGrowCapacity3(unsigned int, int *);
 extern int __aeabi_idivmod(int, unsigned int);
@@ -48,7 +48,7 @@ void _ZNSt6vectorI9Obj559edc12AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_(int *p
     temp_v5 = param_1[1];
     temp_v4 = temp_v5 - 0xb8;
     param_1[1] = temp_v5 + 0xb8;
-    _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_(param_1,temp_v5);
+    _ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_(param_1,temp_v5);
     while (param_2 != temp_v4) {
       temp_v4 = temp_v4 - 0xb8;
       temp_v5 = temp_v5 - 0xb8;
@@ -62,7 +62,7 @@ void _ZNSt6vectorI9Obj559edc12AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_(int *p
     temp_v5 = allocElements184(param_1,temp_v4,*param_1);
     FUN_00307c28(*param_1,param_2,temp_v5,param_1);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0xb8);
-    _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_(param_1,temp_v3 * 0xb8 + temp_v5,param_3);
+    _ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_(param_1,temp_v3 * 0xb8 + temp_v5,param_3);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0xb8);
     FUN_00307c28(param_2,param_1[1],temp_v3 * 0xb8 + temp_v5 + 0xb8,param_1);
     temp_v3 = vectorCountxB8_00307c56(param_1);

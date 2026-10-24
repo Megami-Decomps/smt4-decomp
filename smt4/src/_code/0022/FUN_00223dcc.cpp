@@ -1,161 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00223dcc` (_code @ 0x223dcc, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 171 vs 168 rows: retail's frame is 32 bytes (the two wait-result slots share the outgoing-argument area of the later FUN_00294834 call); ours allocates them separately (40 bytes). */
+#include "common.h"
+#include "nn/svc.h"
+
+// Fusion (unite) screen object: only the members its teardown touches.
+struct UniteScreen {
+    u8* buffer;                 // 0x0000
+    u8 unk0004[0x3f4];
+    s32 job;                    // 0x03f8
+    u8 unk03fc[0x20];
+    s32 startTime;              // 0x041c
+    u8 unk0420[4];
+    u8* scratchA;               // 0x0424
+    u8* scratchB;               // 0x0428
+    s32 scriptProcess;          // 0x042c
+    u8 unk0430[0x6660 - 0x430];
+    s16 pendingIds[4];          // 0x6660
+    u8 unk6668[0x95c8 - 0x6668];
+    s32 modelManagerA;          // 0x95c8
+    s32 modelManagerB;          // 0x95cc
+    s32 camera;                 // 0x95d0
+    u8 unk95d4[0x0c];
+    u8 stopRequested;           // 0x95e0
+    s32 stack;                  // 0x95e4
+    u32 thread;                 // 0x95e8
+    u8 threadDone;              // 0x95ec
+    s32 threadBuffer;           // 0x95f0
+};
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(int);
-int gfxObjectDestroy(int);
-int statusCameraDestroy(void);
-int FUN_00294834(int, int, int, int, int, int);
-int FUN_002958f8(int, int);
-int gameCounterAddSaturating(int, int);
-void FUN_0029c2cc(int, int);
-int fileSlotFree(...);
-int scrScriptProcessDestroy(int);
-int asdModelSlotRelease(int);
-int asdMdlManagerDestroy(int);
-int asdMemFreeNonNull(...);
-int FUN_002c3f5c(...);
-int FUN_002c40f8(int *, int [6], int, int, unsigned int, unsigned int);
-int asdMemFree(...);
-int jobStop(...);
-int FUN_002c526c(void);
-int mapMainCallIfFlag(...);
-int bufferArrayFree(void);
-int software_interrupt(int);
+extern UniteScreen* g_unite;
 
-/* stack frame of void: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+u32 FUN_002c40f8(s32* signalled, s32* unused, s32 count, s32 waitAll, s64 timeout, u32 handle);
+void FUN_002c526c(void);
+void nn_os_Thread_FinalizeImpl(u32* thread);
+void FUN_002c3f5c(s32 object);
+void asdMemFreeNonNull(s32 object);
+void asdMemFree(s32 object);
+s32 FUN_002907a8(void);
+void gameCounterAddSaturating(s32 counter, s32 amount);
+s32 lmapSceneGetScript(void);
+s32 lmapMainIsRunning(void);
+void FUN_00294834(s32 r0, s32 g0, s32 b0, s32 r1, s32 g1, s32 b1, s32 r2, s32 g2, s32 b2, s32 r3, s32 g3, s32 b3,
+                  f32 f0, f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6, f32 f7, f32 f8);
+void asdModelSlotRelease(s32 slot);
+void FUN_0029c2cc(s32 object, s32 arg);
+void gfxObjectDestroy(s32 object);
+void statusCameraDestroy(void);
+void asdMdlManagerMarkDestroy(s32 manager);
+void asdMdlManagerDestroy(s32 manager);
+void FUN_002958f8(s32 id, s32 arg);
+void scrScriptProcessDestroy(s32 process);
+void bufferArrayFree(void);
+void jobStop(s32 job, s32 arg);
+void fileSlotFree(s32 slot);
+void mapMainCallIfFlag(s32 flag);
 
-extern int *g_unite; /* 0x43dd68 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: gfxObjectDestroy. */
-/* Supplied declaration required: statusCameraDestroy. */
-extern int FUN_002907a8(void);
-/* Supplied declaration required: FUN_00294834. */
-/* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: gameCounterAddSaturating. */
-/* Supplied declaration required: FUN_0029c2cc. */
-extern int lmapSceneGetScript(void);
-/* Supplied declaration required: fileSlotFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdModelSlotRelease. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-extern int lmapMainIsRunning(void);
-/* Supplied declaration required: FUN_002c3f5c. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: mapMainCallIfFlag. */
-/* Supplied declaration required: bufferArrayFree. */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
-
-
-/* WARNING: Type propagation algorithm not settling */
-
+// Destroys the fusion screen: stops its worker thread, releases its models, scripts and buffers.
 void FUN_00223dcc(void)
-
 {
-/* irregular: 21 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  int *piVar4;
-  int temp_v1 [6];
-  
-  piVar1 = g_unite;
-  if (g_unite != (int *)0x0) {
-    piVar4 = g_unite + 0x257a;
-    *(unsigned char *)(g_unite + 0x2578) = 1;
-    temp_v1[0] = *piVar4;
-    piVar2 = temp_v1 + 1;
-    FUN_002c40f8(piVar2,temp_v1,1,0,0xffffffff,0xffffffff);
-    if ((int)piVar2 < 0) {
-      FUN_002c526c();
+    UniteScreen* screen = g_unite;
+    if (screen == NULL) return;
+
+    screen->stopRequested = 1;
+    s32 signalled;
+    s32 unused;
+    if (FUN_002c40f8(&signalled, &unused, 1, 0, -1LL, screen->thread) >> 31) FUN_002c526c();
+    screen->threadDone = 1;
+    nn_os_Thread_FinalizeImpl(&screen->thread);
+    if (screen->thread != 0) {
+        nn::svc::CloseHandle(screen->thread);
+        screen->thread = 0;
     }
-    *(unsigned char *)(piVar1 + 0x257b) = 1;
-    nn_os_Thread_FinalizeImpl((unsigned int)piVar4);
-    if (*piVar4 != 0) {
-      software_interrupt(0x23);
-      *piVar4 = 0;
+    FUN_002c3f5c(screen->stack);
+    s32 stack = screen->stack;
+    if (stack != 0) {
+        FUN_002c3f5c(stack);
+        asdMemFreeNonNull(stack);
     }
-    piVar2 = piVar1 + 0x2579;
-    FUN_002c3f5c(*piVar2);
-    temp_v0 = *piVar2;
-    if (temp_v0 != 0) {
-      FUN_002c3f5c();
-      asdMemFreeNonNull(temp_v0);
+    screen->stack = 0;
+    asdMemFree(screen->threadBuffer);
+    screen->threadBuffer = 0;
+
+    gameCounterAddSaturating(0x25, FUN_002907a8() - screen->startTime);
+    if (lmapSceneGetScript() != 0 || lmapMainIsRunning() != 0) {
+        FUN_00294834(200, 200, 200, 130, 130, 130, 30, 30, 30, 150, 150, 150, 90.0f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 30.0f, 1.5f);
+    } else {
+        asdModelSlotRelease(0);
     }
-    *piVar2 = 0;
-    asdMemFree(piVar1[0x257c]);
-    piVar1[0x257c] = 0;
-    temp_v0 = FUN_002907a8();
-    gameCounterAddSaturating(0x25,temp_v0 - piVar1[0x107]);
-    temp_v0 = lmapSceneGetScript();
-    if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
-      temp_v1[3] = 0x96;
-      temp_v1[4] = 0x96;
-      temp_v1[5] = 0x96;
-      temp_v1[2] = 0x1e;
-      temp_v1[0] = 0x1e;
-      temp_v1[1] = 0x1e;
-      FUN_00294834(200,200,200,0x82,0x82,0x82);
-    }
-    else {
-      asdModelSlotRelease(0);
-    }
-    piVar2 = piVar1 + 0x2574;
-    FUN_0029c2cc(*piVar2,0);
-    gfxObjectDestroy(*piVar2);
-    *piVar2 = 0;
+    FUN_0029c2cc(screen->camera, 0);
+    gfxObjectDestroy(screen->camera);
+    screen->camera = 0;
     statusCameraDestroy();
-    piVar2 = piVar1 + 0x2572;
-    asdMdlManagerMarkDestroy(*piVar2);
-    piVar4 = piVar1 + 0x2573;
-    asdMdlManagerMarkDestroy(*piVar4);
-    asdMdlManagerDestroy(*piVar2);
-    asdMdlManagerDestroy(*piVar4);
-    *piVar2 = 0;
-    temp_v0 = 0;
-    *piVar4 = 0;
-    do {
-      if (*(short *)((int)piVar1 + temp_v0 * 2 + 0x6660) != 0) {
-        FUN_002958f8((int)*(short *)((int)piVar1 + temp_v0 * 2 + 0x6660),1);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 4);
-    scrScriptProcessDestroy(piVar1[0x10b]);
-    asdMemFree(piVar1[0x10a]);
-    asdMemFree(piVar1[0x109]);
-    if (*piVar1 != 0) {
-      bufferArrayFree();
-      asdMemFreeNonNull();
+    asdMdlManagerMarkDestroy(screen->modelManagerA);
+    asdMdlManagerMarkDestroy(screen->modelManagerB);
+    asdMdlManagerDestroy(screen->modelManagerA);
+    asdMdlManagerDestroy(screen->modelManagerB);
+    screen->modelManagerA = 0;
+    screen->modelManagerB = 0;
+    for (s32 i = 0; i < 4; i++) {
+        if (screen->pendingIds[i] != 0) FUN_002958f8(screen->pendingIds[i], 1);
     }
-    *piVar1 = 0;
-    jobStop(piVar1[0xfe],0);
-    asdMemFree(piVar1);
-    g_unite = (int *)0x0;
+    scrScriptProcessDestroy(screen->scriptProcess);
+    asdMemFree((s32)screen->scratchB);
+    asdMemFree((s32)screen->scratchA);
+    if (screen->buffer != NULL) {
+        bufferArrayFree();
+        asdMemFreeNonNull((s32)screen->buffer);
+    }
+    screen->buffer = NULL;
+    jobStop(screen->job, 0);
+    asdMemFree((s32)screen);
+    g_unite = NULL;
     fileSlotFree(0x24);
     fileSlotFree(0x22);
     mapMainCallIfFlag(1);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

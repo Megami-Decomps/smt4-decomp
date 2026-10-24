@@ -1,129 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00399e20` (_code @ 0x399e20, 0x214 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the equipped-skill info panel; the Shift-JIS literals are written with hex escapes (decoded in the comments) and armcc here pools/orders them differently from retail's four-byte-aligned inline strings. */
+#include "common.h"
+
+/* A skill record as the panel reads it. */
+struct PanelSkill {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u32 attributeWord;     /* attribute id in the top twelve bits */
+    /* 0x28 */ u8 levelRange;         /* low nibble: minimum, high nibble: maximum */
+    /* 0x29 */ u8 target;
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ u8 effect;             /* the ailment/effect group shown in the last field */
+};
+
+struct PanelPlayerData {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 firstSkill;
+    /* 0x04 */ u16 secondSkill;
+};
+
+/* The button help block (g_buttonHelp) the panel is drawn through. */
+struct PanelBlock {
+    /* 0x000 */ u8 unk000[0x5EA];
+    /* 0x5EA */ u8 shown;
+    /* 0x5EB */ u8 unk5EB[0x8D];
+    /* 0x678 */ u32 directory;
+    /* 0x67C */ u8 visible;
+};
+struct PanelButtonHelp {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ PanelBlock *block;
+    /* 0x08 */ s32 defaultText;
+};
 
 extern "C" {
+extern PanelButtonHelp g_buttonHelp;
 
-int textFormatBuffer(...);
-int dataTable08Sub2GetRecord(void);
-int battleAttributeFormatName(unsigned char [132], unsigned int);
-int skillFormatTargetLabel(unsigned char [132], int);
-int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
-int FUN_002c0940(...);
-int FUN_003180c4(int, unsigned char [132]);
-int FUN_00359974(int, int, unsigned int, int);
+PanelPlayerData *gameGetPlayerData(void);
+PanelSkill *dataTable08Sub2GetRecord(u32 id);
+void FUN_002c0940(s32 *out, u32 value);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_003180c4(s32 slot, const char *text);
+void FUN_00359974(s32 slot, u32 level, s32 a, s32 b);
+void battleAttributeFormatName(char *buffer, u32 attribute);
+void skillFormatTargetLabel(char *buffer, u32 target);
+void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e, u32 f);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spB0; /* 0xb0: local_b0 */
-} param_2_stack;
-
-extern unsigned char LAB_0039a038; /* 0x39a038 */
-extern unsigned char LAB_0039a040; /* 0x39a040 */
-extern unsigned char LAB_0039a04c; /* 0x39a04c */
-extern unsigned char LAB_0039a068; /* 0x39a068 */
-extern unsigned char LAB_0039a078; /* 0x39a078 */
-extern unsigned char LAB_0039a084; /* 0x39a084 */
-extern unsigned char LAB_0039a090; /* 0x39a090 */
-extern unsigned char LAB_0039a09c; /* 0x39a09c */
-extern unsigned char LAB_0039a0a8; /* 0x39a0a8 */
-extern unsigned char LAB_0039a0b4; /* 0x39a0b4 */
-extern unsigned char LAB_0039a0c0; /* 0x39a0c0 */
-extern int DAT_0057f0c8; /* 0x57f0c8 */
-extern int DAT_0057f0cc; /* 0x57f0cc */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-/* Supplied declaration required: battleAttributeFormatName. */
-/* Supplied declaration required: skillFormatTargetLabel. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_002c0940. */
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_00359974. */
-
-
-void FUN_00399e20(int param_1,unsigned int param_2)
-
+/* Fills the skill info panel from the two equipped skill records: level range, attribute, target
+ * and the effect label, then draws it. */
+void FUN_00399e20(s32 textId, u32 flags)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int iStack_ac;
-  unsigned int temp_v6 [2];
-  unsigned char temp_v7 [132];
-  
-  temp_v1 = DAT_0057f0c8;
-  temp_v2 = gameGetPlayerData();
-  temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 2);
-  dataTable08Sub2GetRecord();
-  temp_v2 = gameGetPlayerData();
-  temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 4);
-  dataTable08Sub2GetRecord();
-  if (temp_v3 == 0 || temp_v4 == 0) {
-    *(unsigned char *)(temp_v1 + 0x5ea) = 0;
-  }
-  else {
-    *(unsigned char *)(temp_v1 + 0x67c) = 1;
-    *(unsigned char *)(temp_v1 + 0x5ea) = 1;
-    temp_v0 = *(unsigned char *)(temp_v3 + 0x28);
-    if ((temp_v0 & 0xf) == temp_v0 >> 4) {
-      FUN_00359974(0x25,temp_v0 & 0xf,0xffffffff,0);
+    PanelBlock *block = g_buttonHelp.block;
+    PanelSkill *first = dataTable08Sub2GetRecord(gameGetPlayerData()->firstSkill);
+    PanelSkill *second = dataTable08Sub2GetRecord(gameGetPlayerData()->secondSkill);
+    if (first == NULL || second == NULL) {
+        block->shown = 0;
+        return;
     }
-    else {
-      FUN_002c0940(&temp_v5,temp_v0 & 0xf);
-      FUN_002c0940(temp_v6,*(unsigned char *)(temp_v3 + 0x28) >> 4);
-      textFormatBuffer(temp_v7,&LAB_0039a038,&temp_v5,temp_v6);
-      FUN_003180c4(0x25,temp_v7);
+    block->visible = 1;
+    block->shown = 1;
+    s32 minimum[2];
+    s32 maximum[2];
+    char text[132];
+    u32 range = first->levelRange;
+    if ((range & 0xF) == range >> 4) {
+        FUN_00359974(0x25, range & 0xF, 0xFFFFFFFF, 0);
+    } else {
+        FUN_002c0940(minimum, range & 0xF);
+        FUN_002c0940(maximum, first->levelRange >> 4);
+        textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */
+        FUN_003180c4(0x25, text);
     }
-    battleAttributeFormatName(temp_v7,*(unsigned int *)(temp_v4 + 0x24) >> 0x14);
-    FUN_003180c4(0x26,temp_v7);
-    skillFormatTargetLabel(temp_v7,*(unsigned char *)(temp_v3 + 0x29));
-    FUN_003180c4(0x27,temp_v7);
-    if (*(char *)(temp_v4 + 0x2b) == '\0') {
-      textFormatBuffer(temp_v7,&LAB_0039a040);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\x01') {
-      textFormatBuffer(temp_v7,&LAB_0039a04c);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\x05') {
-      textFormatBuffer(temp_v7,&LAB_0039a068);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\x06') {
-      textFormatBuffer(temp_v7,&LAB_0039a078);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\a') {
-      textFormatBuffer(temp_v7,&LAB_0039a084);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\b') {
-      textFormatBuffer(temp_v7,&LAB_0039a090);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\t') {
-      textFormatBuffer(temp_v7,&LAB_0039a09c);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\v') {
-      textFormatBuffer(temp_v7,&LAB_0039a0a8);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\f') {
-      textFormatBuffer(temp_v7,&LAB_0039a0b4);
-    }
-    if (*(char *)(temp_v4 + 0x2b) == '\r') {
-      textFormatBuffer(temp_v7,&LAB_0039a0c0);
-    }
-    FUN_003180c4(0x28,temp_v7);
-    if (param_1 == 0) {
-      param_1 = DAT_0057f0cc;
-    }
-    temp_v5 = 3;
-    iStack_ac = param_1;
-    temp_v6[0] = param_2;
-    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0);
-  }
-  return;
+    battleAttributeFormatName(text, second->attributeWord >> 20);
+    FUN_003180c4(0x26, text);
+    skillFormatTargetLabel(text, first->target);
+    FUN_003180c4(0x27, text);
+    if (second->effect == 0)
+        textFormatBuffer(text, "\x82\x6D\x82\x8F\x82\x8E\x82\x85"); /* Ｎｏｎｅ */
+    if (second->effect == 1)
+        textFormatBuffer(text, "\x82\x68\x82\x8E\x82\x93\x82\x94\x82\x81\x82\x8E\x82\x94\x81\x40\x82\x6A\x82\x89\x82\x8C\x82\x8C"); /* Ｉｎｓｔａｎｔ　Ｋｉｌｌ */
+    if (second->effect == 5)
+        textFormatBuffer(text, "\x82\x6F\x82\x8F\x82\x89\x82\x93\x82\x8F\x82\x8E"); /* Ｐｏｉｓｏｎ */
+    if (second->effect == 6)
+        textFormatBuffer(text, "\x82\x6F\x82\x81\x82\x8E\x82\x89\x82\x83"); /* Ｐａｎｉｃ */
+    if (second->effect == 7)
+        textFormatBuffer(text, "\x82\x72\x82\x8C\x82\x85\x82\x85\x82\x90"); /* Ｓｌｅｅｐ */
+    if (second->effect == 8)
+        textFormatBuffer(text, "\x82\x61\x82\x89\x82\x8E\x82\x84"); /* Ｂｉｎｄ */
+    if (second->effect == 9)
+        textFormatBuffer(text, "\x82\x72\x82\x89\x82\x83\x82\x8B"); /* Ｓｉｃｋ */
+    if (second->effect == 11)
+        textFormatBuffer(text, "\x82\x62\x82\x88\x82\x81\x82\x92\x82\x8D"); /* Ｃｈａｒｍ */
+    if (second->effect == 12)
+        textFormatBuffer(text, "\x82\x63\x82\x81\x82\x9A\x82\x85"); /* Ｄａｚｅ */
+    if (second->effect == 13)
+        textFormatBuffer(text, "\x82\x6C\x82\x95\x82\x94\x82\x85"); /* Ｍｕｔｅ */
+    FUN_003180c4(0x28, text);
+    if (textId == 0)
+        textId = g_buttonHelp.defaultText;
+    asdTextDrawDirectoryEntry(block->directory, 2, -1, 0, 3, textId, flags);
 }
 
 } /* extern "C" */

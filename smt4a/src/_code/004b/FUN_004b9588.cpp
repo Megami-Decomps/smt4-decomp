@@ -1,4 +1,3 @@
-/* NON_MATCHING: stack base is calculated before the mode query and the new-entry address uses ip instead of r3. */
 #include "camp/RenderCtx.h"
 
 struct SkinDrawObject {
@@ -28,7 +27,7 @@ void FUN_004b9588(SkinDrawObject *object)
     FUN_00157558(g_renderCtx);
     FUN_00183bb0();
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     if (object->kind >= 3) {
         FUN_004bade0(object->skinState);
     }

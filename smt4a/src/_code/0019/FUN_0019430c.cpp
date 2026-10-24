@@ -1,268 +1,145 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019430c` (_code @ 0x19430c, 0x3c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: writes the GPU command stream that uploads a skinned mesh's bone matrices (per batch: either bone x bind-pose products, a plain copy of the bone matrices, or a single matrix, each as float24 uniform rows with reversed components, followed by the batch's trailing data); written from the decompilation, the matrix buffer is one array instead of the decompiler's split locals and the source/out parameters of gpuCmdWriteCopy are recovered from its call site */
+#include "common.h"
+
+#define BATCH_FLAG_PRODUCT 1
+#define BATCH_FLAG_COPY 2
+#define BATCH_MAX_BONES 0x4D
+#define MATRIX_WORDS 12
+#define MATRIX_ROWS 3
+#define MATRIX_BONE_STRIDE 0x30
+#define BIND_POSE_STRIDE 100
+#define BIND_POSE_OFFSET 0x2C
+#define CMD_HEADER_FLAG 0x80000000
+#define CMD_UNIFORM_INDEX 0xF02C0
+#define CMD_UNIFORM_DATA 0xF02C1
+#define CMD_UNIFORM_SINGLE_DATA 0xBF02C1
+#define CMD_ROW_COUNT_SHIFT_UNIT 0x400000
+#define CMD_ROW_COUNT_BIAS 0x100000
+
+/* One skinning batch of a mesh (observed fields, 0x34 bytes). */
+struct SkinBatch {
+    /* 0x00 */ u8 flags;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u16 boneCount;
+    /* 0x04 */ u16 bones[0x14];
+    /* 0x2C */ u32 trailingSize;
+    /* 0x30 */ u32 unk30;
+};
+
+struct SkinModel {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u8 *bindPoses;
+};
+
+struct SkinMesh {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 prefix;
+    /* 0x0C */ s32 prefixWords;
+    /* 0x10 */ SkinBatch *batches;
+    /* 0x14 */ s32 batchCount;
+    /* 0x18 */ u32 suffix;
+    /* 0x1C */ s32 suffixWords;
+    /* 0x20 */ u8 unk20[0xC];
+    /* 0x2C */ SkinModel *model;
+};
+
+struct SkinSkeleton {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u8 *bones;
+};
+
+struct SkinParams {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 unitId;
+};
+
+/* The command stream being written. */
+struct CmdStream {
+    /* 0x00 */ u32 *cursor;
+    /* 0x04 */ s32 base;
+    /* 0x08 */ s32 mark;
+    /* 0x0C */ u32 *lastMark;
+    /* 0x10 */ s32 firstSize;
+};
 
 extern "C" {
+void FUN_001a063c(CmdStream *stream, u32 commands, s32 bytes);
+void FUN_0019a270(u32 *out, const u8 *matrix, u32 command);
+void nn_math_ARMv6_MTX34MultAsm(f32 *out, const u8 *boneMatrix, const u8 *bindPose);
+s32 gpuCmdPadToAlign16(s32 cursor, s32 offset);
+s32 gpuCmdWriteCopy(s32 cursor, s32 *mark, s32 size);
 
-int FUN_0019a270(unsigned int *, unsigned int, int);
-int FUN_001a063c(int *, unsigned int, int);
-int nn_math_ARMv6_MTX34MultAsm(unsigned int *, unsigned int, unsigned int);
-
-typedef struct fn_0019430c_arg0 fn_0019430c_arg0;
-typedef struct fn_0019430c_arg0_p10 fn_0019430c_arg0_p10;
-struct fn_0019430c_arg0 {
-    unsigned char field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0x1];
-    unsigned char field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0x1];
-    unsigned char field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    unsigned char field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x3];
-    int field_0xc; /* +0xc */
-    fn_0019430c_arg0_p10 *field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
-    unsigned char field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x3];
-    int field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0xc];
-    void *field_0x2c; /* +0x2c */
-};
-struct fn_0019430c_arg0_p10 {
-    byte field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0x1];
-    ushort field_0x2; /* +0x2 */
-    ushort field_0x4; /* +0x4 */
-    unsigned char pad_0x6[0x2];
-    unsigned char field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x3];
-    unsigned char field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x3];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x3];
-    unsigned char field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    unsigned char field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x3];
-    unsigned char field_0x1c; /* +0x1c */
-    unsigned char pad_0x1d[0xf];
-    undefined4 field_0x2c; /* +0x2c */
-    undefined4 field_0x30; /* +0x30 */
-};
-
-/* stack frame of param_4: 11 slot(s), 44 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp40C; /* 0x40c: local_40c */
-    unsigned int sp410; /* 0x410: local_410 */
-    unsigned int sp414; /* 0x414: local_414 */
-    unsigned int sp418; /* 0x418: local_418 */
-    unsigned int sp7CC; /* 0x7cc: local_7cc */
-    unsigned int sp7D0; /* 0x7d0: local_7d0 */
-    unsigned int sp7D4; /* 0x7d4: local_7d4 */
-    unsigned int sp7D8; /* 0x7d8: local_7d8 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0019a270. */
-/* Supplied declaration required: FUN_001a063c. */
-extern int gpuCmdPadToAlign16(int, int);
-extern int gpuCmdWriteCopy(int, int *, int);
-/* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
-
-
-void FUN_0019430c(fn_0019430c_arg0 *param_1,int *param_2,int param_3,int param_4)
-
+/* Writes `rows` vec4 rows with their components reversed (w, z, y, x) after the two-word command header. */
+static __inline u32 *emitUniformRows(CmdStream *stream, u32 unitId, const u32 *rows, s32 rowCount)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  int temp_v2;
-  unsigned int *puVar8;
-  int temp_v3;
-  fn_0019430c_arg0_p10 *pfVar10;
-  unsigned int *unaff_r11;
-  unsigned int *puVar11;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14 [4];
-  unsigned int temp_v15 [238];
-  fn_0019430c_arg0_p10 *temp_v16;
-  int temp_v17 [5];
-  fn_0019430c_arg0 *pfStack_38;
-  int *piStack_34;
-  int iStack_30;
-  int temp_v18;
-  
-  pfStack_38 = param_1;
-  piStack_34 = param_2;
-  iStack_30 = param_3;
-  temp_v18 = param_4;
-  FUN_001a063c(param_2,*(unsigned int *)&param_1->field_0x8,param_1->field_0xc << 2);
-  pfVar10 = param_1->field_0x10;
-  temp_v16 = pfVar10 + param_1->field_0x14;
-  if (temp_v16 != pfVar10) {
-    unaff_r11 = &temp_v10;
-  }
-  if (temp_v16 != pfVar10) {
-    do {
-      if ((pfVar10->field_0x0 & 1) != 0) {
-        temp_v2 = 0;
-        temp_v1 = 0;
-        if (pfVar10->field_0x2 != 0) {
-          do {
-            nn_math_ARMv6_MTX34MultAsm
-                      (unaff_r11 + temp_v2 * 0xc,
-                       *(int *)(param_3 + 0x14) + (unsigned int)(&pfVar10->field_0x4)[temp_v2] * 0x30,
-                       *(int *)((int)param_1->field_0x2c + 0x70) +
-                       (unsigned int)(&pfVar10->field_0x4)[temp_v2] * 100 + 0x2c);
-            temp_v1 = (unsigned int)pfVar10->field_0x2;
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < (int)temp_v1);
+    u32 *out = stream->cursor;
+    out[0] = unitId | CMD_HEADER_FLAG;
+    out[1] = CMD_UNIFORM_INDEX;
+    out[2] = rows[3];
+    out[3] = (rowCount * CMD_ROW_COUNT_SHIFT_UNIT - CMD_ROW_COUNT_BIAS) | CMD_UNIFORM_DATA;
+    out[4] = rows[2];
+    out[5] = rows[1];
+    out[6] = rows[0];
+    u32 *tail = out + 7;
+    for (s32 row = 1; row < rowCount; row++) {
+        const u32 *src = rows + row * 4;
+        tail[0] = src[3];
+        tail[1] = src[2];
+        tail[2] = src[1];
+        tail[3] = src[0];
+        tail += 4;
+    }
+    *tail = 0;
+    return tail + 1;
+}
+
+void FUN_0019430c(SkinMesh *mesh, CmdStream *stream, SkinSkeleton *skeleton, SkinParams *params)
+{
+    FUN_001a063c(stream, mesh->prefix, mesh->prefixWords << 2);
+    SkinBatch *batch = mesh->batches;
+    SkinBatch *end = batch + mesh->batchCount;
+    s32 copyMark[5];
+    u32 matrices[BATCH_MAX_BONES * MATRIX_WORDS];
+
+    for (; batch != end; batch++) {
+        if ((batch->flags & BATCH_FLAG_PRODUCT) != 0) {
+            for (s32 i = 0; i < batch->boneCount; i++) {
+                nn_math_ARMv6_MTX34MultAsm(
+                    reinterpret_cast<f32 *>(matrices + i * MATRIX_WORDS),
+                    skeleton->bones + batch->bones[i] * MATRIX_BONE_STRIDE,
+                    mesh->model->bindPoses + batch->bones[i] * BIND_POSE_STRIDE + BIND_POSE_OFFSET);
+            }
+            stream->cursor = emitUniformRows(stream, params->unitId, matrices, batch->boneCount * MATRIX_ROWS);
+        } else if ((batch->flags & BATCH_FLAG_COPY) != 0) {
+            for (s32 i = 0; i < batch->boneCount; i++) {
+                const u32 *bone = reinterpret_cast<const u32 *>(skeleton->bones + batch->bones[i] * MATRIX_BONE_STRIDE);
+                for (s32 w = 0; w < MATRIX_WORDS; w++)
+                    matrices[i * MATRIX_WORDS + w] = bone[w];
+            }
+            stream->cursor = emitUniformRows(stream, params->unitId, matrices, batch->boneCount * MATRIX_ROWS);
+        } else {
+            u32 *out = stream->cursor;
+            out[0] = params->unitId | CMD_HEADER_FLAG;
+            out[1] = CMD_UNIFORM_INDEX;
+            FUN_0019a270(out + 2, skeleton->bones + batch->bones[0] * MATRIX_BONE_STRIDE, CMD_UNIFORM_SINGLE_DATA);
+            stream->cursor = out + 0x10;
         }
-        puVar3 = (unsigned int *)*param_2;
-        *puVar3 = *(unsigned char *)(temp_v18 + 2) | 0x80000000;
-        temp_v2 = temp_v1 * 3 - 1;
-        puVar3[1] = 0xf02c0;
-        puVar3[2] = temp_v13;
-        puVar3[3] = (temp_v1 * 0xc00000 - 0x100000) | 0xf02c1;
-        puVar3[4] = temp_v12;
-        puVar3[5] = temp_v11;
-        puVar4 = puVar3 + 7;
-        puVar3[6] = temp_v10;
-        if (0 < temp_v2) {
-          puVar6 = unaff_r11 + 7;
-          puVar11 = unaff_r11 + 6;
-          puVar8 = unaff_r11 + 5;
-          puVar5 = puVar4;
-          puVar3 = unaff_r11;
-          do {
-            puVar3 = puVar3 + 4;
-            temp_v2 = temp_v2 - 1;
-            *puVar5 = *puVar6;
-            puVar6 = puVar6 + 4;
-            puVar5[1] = *puVar11;
-            puVar11 = puVar11 + 4;
-            puVar5[2] = *puVar8;
-            puVar8 = puVar8 + 4;
-            puVar5[3] = *puVar3;
-            puVar5 = puVar5 + 4;
-          } while (temp_v2 != 0);
-          puVar4 = puVar4 + (temp_v1 * 0xc - 4);
+
+        s32 cursor = reinterpret_cast<s32>(stream->cursor);
+        if (cursor != 0 && batch->trailingSize != 0) {
+            cursor = gpuCmdPadToAlign16(cursor, ((cursor - stream->mark) & ~3) + 0x18);
+            stream->cursor = reinterpret_cast<u32 *>(cursor);
+            cursor = gpuCmdWriteCopy(cursor, copyMark, batch->trailingSize);
+            stream->cursor = reinterpret_cast<u32 *>(cursor);
+            if (stream->lastMark != NULL)
+                *stream->lastMark = (u32)(cursor - stream->mark) >> 3;
+            stream->mark = reinterpret_cast<s32>(stream->cursor);
+            stream->lastMark = reinterpret_cast<u32 *>(copyMark[0]);
+            if (stream->firstSize == 0)
+                stream->firstSize = (reinterpret_cast<s32>(stream->cursor) - stream->base) & ~3;
         }
-        puVar3 = puVar4 + 1;
-        *puVar4 = 0;
-        *param_2 = (int)puVar3;
-      }
-      else if ((pfVar10->field_0x0 & 2) != 0) {
-        temp_v2 = 0;
-        if (pfVar10->field_0x2 != 0) {
-          do {
-            temp_v3 = temp_v2 + 1;
-            puVar3 = (unsigned int *)(*(int *)(param_3 + 0x14) + (unsigned int)(&pfVar10->field_0x4)[temp_v2] * 0x30);
-            temp_v1 = puVar3[1];
-            temp_v4 = puVar3[2];
-            temp_v5 = puVar3[3];
-            temp_v6 = puVar3[4];
-            temp_v7 = puVar3[5];
-            temp_v8 = puVar3[6];
-            temp_v9 = puVar3[7];
-            temp_v14[temp_v2 * 0xc] = *puVar3;
-            temp_v14[temp_v2 * 0xc + 1] = temp_v1;
-            temp_v14[temp_v2 * 0xc + 2] = temp_v4;
-            temp_v14[temp_v2 * 0xc + 3] = temp_v5;
-            temp_v14[temp_v2 * 0xc + 4] = temp_v6;
-            temp_v14[temp_v2 * 0xc + 5] = temp_v7;
-            temp_v14[temp_v2 * 0xc + 6] = temp_v8;
-            temp_v14[temp_v2 * 0xc + 7] = temp_v9;
-            temp_v4 = puVar3[9];
-            temp_v5 = puVar3[10];
-            temp_v1 = puVar3[0xb];
-            temp_v14[temp_v2 * 0xc + 8] = puVar3[8];
-            temp_v14[temp_v2 * 0xc + 0xb] = temp_v1;
-            temp_v14[temp_v2 * 0xc + 9] = temp_v4;
-            temp_v14[temp_v2 * 0xc + 10] = temp_v5;
-            temp_v2 = temp_v3;
-          } while (temp_v3 < (int)(unsigned int)pfVar10->field_0x2);
-        }
-        temp_v1 = (unsigned int)pfVar10->field_0x2;
-        puVar3 = (unsigned int *)*param_2;
-        *puVar3 = *(unsigned char *)(temp_v18 + 2) | 0x80000000;
-        puVar3[1] = 0xf02c0;
-        temp_v2 = temp_v1 * 3 - 1;
-        puVar3[2] = temp_v14[3];
-        puVar3[3] = (temp_v1 * 0xc00000 - 0x100000) | 0xf02c1;
-        puVar3[4] = temp_v14[2];
-        puVar3[5] = temp_v14[1];
-        puVar4 = puVar3 + 7;
-        puVar3[6] = temp_v14[0];
-        if (0 < temp_v2) {
-          puVar6 = temp_v14 + 7;
-          puVar11 = temp_v14 + 6;
-          puVar8 = temp_v14 + 5;
-          puVar3 = temp_v14;
-          puVar5 = puVar4;
-          do {
-            puVar3 = puVar3 + 4;
-            temp_v2 = temp_v2 - 1;
-            *puVar5 = *puVar6;
-            puVar6 = puVar6 + 4;
-            puVar5[1] = *puVar11;
-            puVar11 = puVar11 + 4;
-            puVar5[2] = *puVar8;
-            puVar8 = puVar8 + 4;
-            puVar5[3] = *puVar3;
-            puVar5 = puVar5 + 4;
-          } while (temp_v2 != 0);
-          puVar4 = puVar4 + (temp_v1 * 0xc - 4);
-        }
-        *puVar4 = 0;
-        *param_2 = (int)(puVar4 + 1);
-      }
-      else {
-        puVar3 = (unsigned int *)*param_2;
-        temp_v2 = *(int *)(param_3 + 0x14);
-        temp_v0 = pfVar10->field_0x4;
-        *puVar3 = *(unsigned char *)(temp_v18 + 2) | 0x80000000;
-        puVar3[1] = 0xf02c0;
-        FUN_0019a270(puVar3 + 2,temp_v2 + (unsigned int)temp_v0 * 0x30,0xbf02c1);
-        puVar3 = puVar3 + 0x10;
-        *param_2 = (int)puVar3;
-      }
-      temp_v2 = *param_2;
-      temp_v3 = pfVar10->field_0x2c;
-      if (temp_v2 != 0 && temp_v3 != 0) {
-        temp_v2 = gpuCmdPadToAlign16(temp_v2,((temp_v2 - param_2[2]) & 0xfffffffcU) + 0x18);
-        *param_2 = temp_v2;
-        temp_v2 = gpuCmdWriteCopy(temp_v2,temp_v17,temp_v3);
-        *param_2 = temp_v2;
-        if ((unsigned int *)param_2[3] != (unsigned int *)0x0) {
-          *(unsigned int *)param_2[3] = (unsigned int)(temp_v2 - param_2[2]) >> 3;
-        }
-        param_2[2] = *param_2;
-        param_2[3] = temp_v17[0];
-        if (param_2[4] == 0) {
-          param_2[4] = (*param_2 - param_2[1]) & 0xfffffffc;
-        }
-      }
-      pfVar10 = pfVar10 + 1;
-    } while (temp_v16 != pfVar10);
-  }
-  FUN_001a063c(param_2,*(unsigned int *)&param_1->field_0x18,param_1->field_0x1c << 2);
-  return;
+    }
+    FUN_001a063c(stream, mesh->suffix, mesh->suffixWords << 2);
 }
 
 } /* extern "C" */

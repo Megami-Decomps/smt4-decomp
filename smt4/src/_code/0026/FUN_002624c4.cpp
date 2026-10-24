@@ -1,109 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002624c4` (_code @ 0x2624c4, 0x2a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bitfield stores into the result and register allocation of the skill-gathering loops differ from retail. */
+#include "common.h"
+
+// Result descriptor of a fusion: the two parent ids, the product and its summed cost.
+struct FusionResult {
+    u32 firstParent : 15;
+    u32 secondParent : 15;
+    u32 pad : 2;
+    u32 keep : 2;
+    u32 product : 15;
+    u32 cost : 15;
+};
+
+struct PairedKeyRecord {
+    u16 second; // 0x00
+    u16 first;  // 0x02
+    u32 value;  // 0x04
+};
+
+// The parts of a demon record read here.
+struct FusionDevilRecord {
+    u8 unk00[3];
+    u8 level;       // 0x03
+    u8 unk04[0x16];
+    u16 stat1a;     // 0x1a
+    u16 stat1c;     // 0x1c
+    u16 stat1e;     // 0x1e
+    u16 stat20;     // 0x20
+    u16 stat22;     // 0x22
+    u8 unk24[0x18];
+    u16 skills[8];  // 0x3c
+};
+
+struct SkillRecordView {
+    u8 unk00[3];
+    u8 flags;       // 0x03
+};
+
+// Demon being assembled by the fusion preview.
+struct FusionPreviewUnit {
+    u8 unk00[0x146];
+    u16 skills[0x18];   // 0x146
+    s32 skillCount;     // 0x178
+    u8 unk17c;
+    u8 hasCost;         // 0x17d
+};
 
 extern "C" {
 
-int dataTable06Sub1GetRecord(void);
-int devilIsAvailable(int, unsigned int);
-int FUN_002b7bca(int, unsigned int, int, unsigned char *);
-int devilGetRecord(void);
-int dataTable1fFindPairedKey(...);
-int FUN_003c9754(int, unsigned int, unsigned int, unsigned int);
-
-extern unsigned char LAB_002c6f08; /* 0x2c6f08 */
-
-/* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: devilIsAvailable. */
-/* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: dataTable1fFindPairedKey. */
-extern int FUN_003c8db4(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003c9754. */
-
-
-int FUN_002624c4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)
-
+PairedKeyRecord* dataTable1fFindPairedKey(u16 first, u16 second);
+FusionDevilRecord* devilGetRecord(u16 id);
+SkillRecordView* dataTable06Sub1GetRecord(u16 id);
+s32 devilIsAvailable(FusionPreviewUnit* unit, u16 id);
+void FUN_002b7bca(void* base, s32 count, s32 size, void* compare);
+s32 FUN_003c8db4(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);
+void FUN_003c9754(FusionPreviewUnit* unit, u32 first, u32 second, u32 product);
+extern u8 LAB_002c6f08;
+// Builds the fusion result of two demons: product, inherited skills and cost.
+FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, FusionResult* result)
 {
-/* irregular: 6 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = 0;
-  if (param_2 < param_3) {
-    temp_v2 = param_2;
-    dataTable1fFindPairedKey(param_2,param_3);
-  }
-  else {
-    temp_v2 = param_3;
-    dataTable1fFindPairedKey();
-  }
-  if (((temp_v2 != 0) && ((*(unsigned int *)(temp_v2 + 4) & 0xffff) != 0)) &&
-     (temp_v1 = param_1, devilIsAvailable(param_1,*(unsigned int *)(temp_v2 + 4) & 0xffff), temp_v1 != 0)) {
-    temp_v1 = FUN_003c8db4(param_1,param_2,param_3,*(unsigned int *)(temp_v2 + 4) & 0xffff);
-    temp_v4 = 0;
-    if (temp_v1 != 0) {
-      temp_v3 = param_4[1];
-      *param_4 = (((*param_4 & 0xffff8000) | (param_2 & 0xffff7fff)) & 0xc0007fff) |
-                 ((param_3 & 0x7fff) << 0xf);
-      param_4[1] = temp_v3;
-      param_4[1] = (temp_v3 & 3) | ((*(unsigned int *)(temp_v2 + 4) & 0x7fff) << 2);
-      temp_v2 = *(unsigned int *)(temp_v2 + 4) & 0xffff;
-      devilGetRecord();
-      temp_v4 = 0;
-      do {
-        temp_v0 = *(short *)(temp_v2 + 0x3c + temp_v4 * 2);
-        if (temp_v0 != 0) {
-          *(short *)(param_1 + *(int *)(param_1 + 0x178) * 2 + 0x146) = temp_v0;
-          *(int *)(param_1 + 0x178) = *(int *)(param_1 + 0x178) + 1;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 8);
-      if (*(int *)(param_1 + 0x178) < 0x18) {
-        *(unsigned short *)(param_1 + *(int *)(param_1 + 0x178) * 2 + 0x146) = 0;
-      }
-      temp_v4 = 0;
-      do {
-        temp_v1 = param_1 + temp_v4 * 2;
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x146);
-        if ((temp_v3 != 0) && (dataTable06Sub1GetRecord(), (*(unsigned char *)(temp_v3 + 3) & 0x20) == 0)) {
-          *(unsigned short *)(temp_v1 + 0x146) = 0;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x18);
-      FUN_002b7bca(param_1 + 0x146,*(unsigned int *)(param_1 + 0x178),2,&LAB_002c6f08);
-      temp_v1 = *(int *)(param_1 + 0x178);
-      temp_v4 = 0;
-      *(unsigned int *)(param_1 + 0x178) = 0;
-      if (0 < temp_v1) {
-        do {
-          if (*(short *)(param_1 + temp_v4 * 2 + 0x146) == 0) break;
-          temp_v4 = temp_v4 + 1;
-          *(int *)(param_1 + 0x178) = *(int *)(param_1 + 0x178) + 1;
-        } while (temp_v4 < temp_v1);
-      }
-      if (*(char *)(param_1 + 0x17d) != '\0') {
-        temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x1e) + (unsigned int)*(unsigned char *)(temp_v2 + 3) * 0x14 +
-                (unsigned int)*(unsigned short *)(temp_v2 + 0x1a) + (unsigned int)*(unsigned short *)(temp_v2 + 0x1c) +
-                (unsigned int)*(unsigned short *)(temp_v2 + 0x20) + (unsigned int)*(unsigned short *)(temp_v2 + 0x22);
-        temp_v4 = 0;
-        do {
-          temp_v2 = (unsigned int)*(unsigned short *)(param_1 + temp_v4 * 2 + 0x146);
-          if (temp_v2 == 0) break;
-          dataTable06Sub1GetRecord();
-          temp_v4 = temp_v4 + 1;
-          temp_v1 = temp_v1 + (*(unsigned char *)(temp_v2 + 3) & 0x1f) * 5;
-        } while (temp_v4 < 0x18);
-        param_4[1] = (param_4[1] & 0x1ffff) | (temp_v1 << 0x11);
-      }
-      FUN_003c9754(param_1,param_2,param_3,(param_4[1] & 0x1ffff) >> 2);
-      temp_v4 = param_1;
+    FusionPreviewUnit* ret = NULL;
+    PairedKeyRecord* pair;
+    if (first < second) {
+        pair = dataTable1fFindPairedKey(first, second);
+    } else {
+        pair = dataTable1fFindPairedKey(second, first);
     }
-  }
-  return temp_v4;
+    if (pair == NULL) return ret;
+    if ((pair->value & 0xffff) == 0) return ret;
+    if (!devilIsAvailable(unit, pair->value & 0xffff)) return ret;
+    if (!FUN_003c8db4(unit, first, second, pair->value & 0xffff)) return ret;
+
+    result->firstParent = first;
+    result->secondParent = second;
+    result->product = pair->value;
+
+    FusionDevilRecord* record = devilGetRecord(pair->value & 0xffff);
+    for (s32 i = 0; i < 8; i++) {
+        if (record->skills[i] != 0) {
+            unit->skills[unit->skillCount] = record->skills[i];
+            unit->skillCount++;
+        }
+    }
+    if (unit->skillCount < 0x18) unit->skills[unit->skillCount] = 0;
+    for (s32 i = 0; i < 0x18; i++) {
+        u16 id = unit->skills[i];
+        if (id != 0 && (dataTable06Sub1GetRecord(id)->flags & 0x20) == 0) unit->skills[i] = 0;
+    }
+    FUN_002b7bca(unit->skills, unit->skillCount, 2, &LAB_002c6f08);
+    s32 oldCount = unit->skillCount;
+    unit->skillCount = 0;
+    for (s32 i = 0; i < oldCount; i++) {
+        if (unit->skills[i] == 0) break;
+        unit->skillCount++;
+    }
+
+    if (unit->hasCost != 0) {
+        s32 cost = record->level * 0x14 + record->stat1a + record->stat1c + record->stat1e +
+                   record->stat20 + record->stat22;
+        for (s32 i = 0; i < 0x18; i++) {
+            u16 id = unit->skills[i];
+            if (id == 0) break;
+            cost += (dataTable06Sub1GetRecord(id)->flags & 0x1f) * 5;
+        }
+        result->cost = cost;
+    }
+    FUN_003c9754(unit, first, second, result->product);
+    ret = unit;
+    return ret;
 }
 
 } /* extern "C" */

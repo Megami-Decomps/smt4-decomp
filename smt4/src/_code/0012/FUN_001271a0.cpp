@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00138f14(int *, int *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_001392fc(void);
-int FUN_001393e4(void);
+int _ZN9Obj420decC1Ev(void);
 int memClear(void);
 int nn_fs_ipc_FileSystem_OpenFileDirectly(int *, int *, int, int, int, unsigned int *****, int, int, unsigned int, int, int, int);
 
@@ -31,7 +31,7 @@ extern unsigned int DAT_0044e660; /* 0x44e660 */
 
 /* Supplied declaration required: FUN_00138f14. */
 /* Supplied declaration required: FUN_001392fc. */
-/* Supplied declaration required: FUN_001393e4. */
+/* Supplied declaration required: _ZN9Obj420decC1Ev. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_fs_ipc_FileSystem_OpenFileDirectly. */
 
@@ -56,7 +56,7 @@ FUN_001271a0(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int
   FUN_001392fc();
   if (piVar1 != (int *)0x0) {
     memClear();
-    FUN_001393e4();
+    _ZN9Obj420decC1Ev();
     if (piVar1 != (int *)0x0) {
       temp_v4 = (unsigned int *****)&temp_v4;
       temp_v2 = 0;

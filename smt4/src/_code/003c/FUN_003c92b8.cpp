@@ -1,155 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c92b8` (_code @ 0x3c92b8, 0x2d8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the bitfield result stores, the level-search loops and the slot-table scan are scheduled and merged differently from retail; the fusion result selection is the same. */
+#include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+
+/* The per-race level lists: the table of level bounds at 0x104 and the race index at 0x33. */
+struct LevelLists {
+    /* 0x000 */ u8 unk000[0x33];
+    /* 0x033 */ u8 race;
+    /* 0x034 */ u8 unk034[0xD0];
+    /* 0x104 */ u16 *bounds;
+};
+
+struct PartySlotsView {
+    u8 unk0000[0x90F0];
+    u8 stock[0x18];
+};
 
 extern "C" {
+u32 uniteChooseAvailableDevilAtLevel(u32 first, u32 second, u32 result, u32 level);
+const u8 *dataTable05Sub0GetEntries(void);
+u32 demonFindClosestEligibleLevel(LevelLists *lists, s32 race, u32 level, s32 arg);
+s32 FUN_0029ea68(u16 id);
+struct UnitRecordView {
+    u8 unk00[0x46];
+    u16 id;
+};
+UnitRecordView *gameGetUnitRecord(s32 index);
+PartySlotsView *gameGetSlotTable(void);
+s32 partyMemberFindById(u32 id);
+u32 randNextInRange(u32 limit);
+s32 FUN_00311be4(void);
+u32 FUN_003c9b94(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *entry);
 
-unsigned int uniteChooseAvailableDevilAtLevel(unsigned int, unsigned int, unsigned int, unsigned int);
-const unsigned char *dataTable05Sub0GetEntries(void);
-int demonFindClosestEligibleLevel(unsigned short *, int, unsigned int, int);
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_4_stack;
-
-/* Supplied declaration required: dataTable05Sub0GetEntries. */
-extern int FUN_0029ea68(unsigned int);
-extern int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-extern int partyMemberFindById(unsigned int);
-extern unsigned int randNextInRange(unsigned int);
-extern int FUN_00311be4(void);
-/* Supplied declaration required: demonFindClosestEligibleLevel. */
-struct LeveledLists;
-struct UnitePairEntryIV;
-extern u32 FUN_003c9b94(LeveledLists *, u16, u16, UnitePairEntryIV *);
-
-
-unsigned int FUN_003c92b8(unsigned short *param_1,unsigned short *param_2,unsigned short *param_3,unsigned int *param_4)
-
+/* Picks the demon a fusion of `first` and `second` yields and stores it in `entry`: the pair's
+ * normal result level plus the owned-level bonus, with a small chance of the special demon, a
+ * level search over the race's eligible demons, and fallbacks above and below. Returns whether a
+ * result was found. */
+u32 FUN_003c92b8(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *entry)
 {
-/* irregular: 4 native warning(s); review required */
-  const unsigned char *levelBounds;
-  int temp_v1;
-  DevilSortRecord *baseRecord;
-  unsigned int temp_v2;
-  unsigned int chosenId;
-  unsigned int temp_v3;
-  DevilSortRecord *candidateRecord;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  
-  levelBounds = dataTable05Sub0GetEntries();
-  temp_v1 = FUN_003c9b94(reinterpret_cast<LeveledLists *>(param_1),
-      static_cast<u16>(reinterpret_cast<u32>(param_2)),
-      static_cast<u16>(reinterpret_cast<u32>(param_3)),
-      reinterpret_cast<UnitePairEntryIV *>(param_4));
-  if (temp_v1 == 0) {
-    return 0;
-  }
-  baseRecord = devilGetRecord((unsigned short)((param_4[1] & 0x1ffff) >> 2));
-  temp_v1 = FUN_00311be4();
-  temp_v7 = temp_v1 + baseRecord->level;
-  temp_v2 = randNextInRange(99);
-  if (temp_v2 < 5) {
-    temp_v1 = partyMemberFindById(0x218);
-    if (temp_v1 == 0) {
-      chosenId = 0x218;
-      *param_4 = *param_4;
-      param_4[1] = ((chosenId & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
-      return 1;
+    const u8 *levelBounds = dataTable05Sub0GetEntries();
+    u32 chosenId;
+
+    if (FUN_003c9b94(lists, first, second, entry) == 0) {
+        return 0;
     }
-    temp_v2 = 1;
-    if (temp_v2 < temp_v7) {
-      do {
-        chosenId = uniteChooseAvailableDevilAtLevel((unsigned int)param_2, (unsigned int)param_3, baseRecord->id, temp_v2);
-        if (chosenId != 0) {
-          *param_4 = *param_4;
-          param_4[1] = ((chosenId & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
-          return 1;
-        }
-        temp_v2 = (temp_v2 + 1) & 0xff;
-      } while (temp_v2 < temp_v7);
-    }
-  }
-  temp_v6 = 0x19;
-  temp_v2 = 0;
-  do {
-    candidateRecord = devilGetRecord((unsigned short)temp_v2);
-    if ((candidateRecord->race == 0x33) && (temp_v1 = FUN_0029ea68(temp_v2 & 0xffff), temp_v1 != 0)) {
-      temp_v6 = 10;
-      break;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x4b1);
-  temp_v3 = randNextInRange(99);
-  temp_v2 = temp_v7;
-  if (temp_v3 < temp_v6) {
-    do {
-      chosenId = demonFindClosestEligibleLevel(param_1,0x33,temp_v2,1);
-      candidateRecord = devilGetRecord((unsigned short)chosenId);
-      if (candidateRecord->id != baseRecord->id &&
-          candidateRecord->id != (unsigned int)param_2 &&
-          candidateRecord->id != (unsigned int)param_3 &&
-          candidateRecord->level <= temp_v2) {
-        temp_v1 = gameGetSlotTable();
-        temp_v5 = 0;
-        do {
-          if (*(unsigned char *)(temp_v1 + temp_v5 + 0x90f0) < 0x18) {
-            temp_v4 = gameGetSlotTable();
-            temp_v4 = gameGetUnitRecord((int)*(char *)(temp_v4 + temp_v5 + 0x90f0));
-            if (*(unsigned short *)(temp_v4 + 0x46) == candidateRecord->id) break;
-          }
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 0x18);
-        if (temp_v5 == 0x18) {
-          if (chosenId != 0) {
-            *param_4 = *param_4;
-            param_4[1] = ((chosenId & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
+    DevilSortRecord *baseRecord = devilGetRecord((u16)entry->resultId);
+    u32 level = FUN_00311be4() + baseRecord->level;
+
+    if (randNextInRange(99) < 5) {
+        if (partyMemberFindById(0x218) == 0) {
+            entry->resultId = 0x218;
             return 1;
-          }
-          break;
         }
-      }
-      temp_v2 = (candidateRecord->level - 1) & 0xff;
-    } while (*(unsigned short *)(*(int *)(param_1 + 0x82) + ((unsigned int)*(unsigned char *)((int)param_1 + 0x33) * 4 - 2))
-             < temp_v2);
-  }
-  chosenId = uniteChooseAvailableDevilAtLevel((unsigned int)param_2, (unsigned int)param_3, baseRecord->id, temp_v7);
-  if (chosenId == 0) {
-    temp_v2 = 1;
-    do {
-      if (temp_v7 + temp_v2 <= levelBounds[7]) {
-        chosenId = uniteChooseAvailableDevilAtLevel((unsigned int)param_2, (unsigned int)param_3,
-                               (param_4[1] & 0x1ffff) >> 2, (temp_v2 + temp_v7) & 0xff);
-        if (chosenId != 0) {
-          *param_4 = *param_4;
-          param_4[1] = ((chosenId & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
-          return 1;
+        for (u32 trial = 1; trial < level; trial = (trial + 1) & 0xFF) {
+            chosenId = uniteChooseAvailableDevilAtLevel(first, second, baseRecord->id, trial);
+            if (chosenId != 0) {
+                entry->resultId = chosenId;
+                return 1;
+            }
         }
-        break;
-      }
-      temp_v2 = (temp_v2 + 1) & 0xffff;
-    } while (temp_v2 < 6);
-    if ((int)(temp_v7 - baseRecord->level) < 1) {
-      return 0;
     }
-    chosenId = uniteChooseAvailableDevilAtLevel((unsigned int)param_2, (unsigned int)param_3,
-                           (param_4[1] & 0x1ffff) >> 2, (temp_v7 - 1) & 0xff);
+    u32 chance = 25;
+
+    for (u32 id = 0; id < 0x4B1; id++) {
+        if (devilGetRecord((u16)id)->race == 0x33 && FUN_0029ea68((u16)id) != 0) {
+            chance = 10;
+            break;
+        }
+    }
+    if (randNextInRange(99) < chance) {
+        u32 searchLevel = level;
+
+        do {
+            chosenId = demonFindClosestEligibleLevel(lists, 0x33, searchLevel, 1);
+            DevilSortRecord *candidate = devilGetRecord((u16)chosenId);
+
+            if (candidate->id != baseRecord->id && candidate->id != first && candidate->id != second
+                && candidate->level <= searchLevel) {
+                PartySlotsView *slots = gameGetSlotTable();
+                s32 i;
+
+                for (i = 0; i < 0x18; i++) {
+                    if (slots->stock[i] < 0x18 && gameGetUnitRecord((s8)slots->stock[i])->id == candidate->id) {
+                        break;
+                    }
+                }
+                if (i == 0x18) {
+                    if (chosenId != 0) {
+                        entry->resultId = chosenId;
+                        return 1;
+                    }
+                    break;
+                }
+            }
+            searchLevel = (candidate->level - 1) & 0xFF;
+        } while (lists->bounds[lists->race * 2 - 1] < searchLevel);
+    }
+    chosenId = uniteChooseAvailableDevilAtLevel(first, second, baseRecord->id, level);
     if (chosenId == 0) {
-      return 0;
+        for (u32 step = 1; step < 6; step = (step + 1) & 0xFFFF) {
+            if (level + step <= levelBounds[7]) {
+                chosenId = uniteChooseAvailableDevilAtLevel(first, second, entry->resultId, (step + level) & 0xFF);
+                if (chosenId != 0) {
+                    entry->resultId = chosenId;
+                    return 1;
+                }
+                break;
+            }
+        }
+        if ((s32)(level - baseRecord->level) < 1) {
+            return 0;
+        }
+        chosenId = uniteChooseAvailableDevilAtLevel(first, second, entry->resultId, (level - 1) & 0xFF);
+        if (chosenId == 0) {
+            return 0;
+        }
     }
-  }
-  *param_4 = *param_4;
-  param_4[1] = ((chosenId & 0x3fff7fff) << 2) | (param_4[1] & 0xfffe0003);
-  return 1;
+    entry->resultId = chosenId;
+    return 1;
 }
 
-} /* extern "C" */
+}

@@ -1,140 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034266c` (_code @ 0x34266c, 0x288 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near miss: retail loads phase/phaseEnd as one vldmia pair and orders the pool constants differently; the rest of the animation step is the same sequence. */
+#include "common.h"
 
-extern "C" {
+/* Sprite description returned by FUN_002bf4f8(group, id). */
+struct SpriteInfo {
+    u8 unk00[4];
+    u16 width;      // 0x04 (bit 15 is a flag)
+};
 
-int VectorSignedToFloat(unsigned int, int);
+/* The sliding banner animation state (accessed fields). */
+struct BannerAnim {
+    u8 unk00[0xD8];
+    f32 progress;           // 0xD8
+    u8 unkDC[8];
+    u8 reverse;             // 0xE4: letters reveal from the other end
+    u8 finished;            // 0xE5
+    u8 unkE6[2];
+    f32 phase;              // 0xE8
+    f32 phaseEnd;           // 0xEC
+    f32 position;           // 0xF0
+    f32 target;             // 0xF4
+    f32 step;               // 0xF8
+    s32 revealed;           // 0xFC
+    f32 fade[8];            // 0x100
+    u8 unk120[4];
+    f32 wave;               // 0x124
+    f32 angle;              // 0x128
+};
 
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern "C" SpriteInfo *FUN_002bf4f8(u32 group, u32 id);
 
-
-void FUN_0034266c(int param_1)
-
+/* Advance the banner animation: the wave timers, the sliding phase and the per-letter fade-ins. */
+extern "C" void FUN_0034266c(BannerAnim *anim)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  
-  temp_v8 = 1.0f;
-  temp_v5 = *(float *)(param_1 + 0x124) + 1.0f;
-  *(float *)(param_1 + 0x124) = temp_v5;
-  if ((int)temp_v5 >= 0x41f00000) {
-    *(float *)(param_1 + 0x124) = temp_v5 - 30.0f;
-  }
-  temp_v5 = *(float *)(param_1 + 0x128) + 12.0f;
-  *(float *)(param_1 + 0x128) = temp_v5;
-  if ((int)temp_v5 >= 0x43b40001) {
-    *(float *)(param_1 + 0x128) = temp_v5 - 360.0f;
-  }
-  temp_v5 = *(float *)(param_1 + 0xe8);
-  temp_v6 = *(float *)(param_1 + 0xec);
-  if (*(char *)(param_1 + 0xe5) != '\0') {
-    if (temp_v5 < temp_v6) {
-      *(float *)(param_1 + 0xe8) = temp_v5 + 1.0f;
-      if (temp_v6 <= temp_v5 + 1.0f) {
-        *(unsigned int *)(param_1 + 0xe8) = 0;
-      }
-    }
-  }
-  else if (temp_v5 < temp_v6) {
-    temp_v5 = temp_v5 + 1.0f;
-    *(float *)(param_1 + 0xe8) = temp_v5;
-    temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-    temp_v3 = temp_v4 | ((unsigned int)((temp_v5 != temp_v5) || (temp_v6 != temp_v6)) << 0x1c);
-    if ((unsigned char)(temp_v4 >> 0x1f) == ((unsigned char)(temp_v3 >> 0x1c) & 1)) {
-      *(unsigned char *)(param_1 + 0xe5) = 1;
-      temp_v1 = 0;
-      *(unsigned int *)(param_1 + 0xf4) = 0x43c80000;
-      *(unsigned int *)(param_1 + 0xf0) = 0x43c80000;
-      temp_v0 = 0;
-      do {
-        temp_v2 = temp_v1 + 1;
-        temp_v0 = temp_v0 + 2;
-        *(unsigned int *)(param_1 + temp_v1 * 4 + 0x100) = 0x3f800000;
-        temp_v1 = temp_v1 + 2;
-        *(unsigned int *)(param_1 + temp_v2 * 4 + 0x100) = 0x3f800000;
-      } while (temp_v0 < 8);
-      *(unsigned int *)(param_1 + 0xe8) = 0;
-      *(unsigned int *)(param_1 + 0xec) = 0x42200000;
-      return;
-    }
-    temp_v7 = *(float *)(param_1 + 0xf4) / temp_v6 + *(float *)(param_1 + 0xf0);
-    *(float *)(param_1 + 0xf0) = temp_v7;
-    if (*(int *)(param_1 + 0xfc) != 0) {
-      temp_v0 = FUN_002bf4f8(0x14,0x37);
-      if (*(int *)(param_1 + 0xfc) < 8) {
-        temp_v6 = *(float *)(param_1 + 0xf4) - *(float *)(param_1 + 0xf0);
-        temp_v5 = (float)VectorSignedToFloat((*(unsigned short *)(temp_v0 + 4) & 0xffff7fff) *
-                                           *(int *)(param_1 + 0xfc),(unsigned char)(temp_v3 >> 0x16) & 3);
-        temp_v5 = *(float *)(param_1 + 0xd8) - temp_v5;
-        temp_v4 = (temp_v3 & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-        if (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == ((temp_v5 != temp_v5) || (temp_v6 != temp_v6))) {
-          do {
-            temp_v1 = *(int *)(param_1 + 0xfc) + 1;
-            *(int *)(param_1 + 0xfc) = temp_v1;
-            if (temp_v1 >= 8) break;
-            temp_v5 = (float)VectorSignedToFloat((*(unsigned short *)(temp_v0 + 4) & 0xffff7fff) * temp_v1,
-                                               (unsigned char)(temp_v4 >> 0x16) & 3);
-            temp_v5 = *(float *)(param_1 + 0xd8) - temp_v5;
-            temp_v4 = (temp_v4 & 0xfffffff) | ((unsigned int)(temp_v5 < temp_v6) << 0x1f);
-          } while (romwright_subpiece_4_1_0(temp_v4 >> 0x1f,0) == ((temp_v5 != temp_v5) || (temp_v6 != temp_v6)));
+    anim->wave += 1.0f;
+    if (anim->wave >= 30.0f)
+        anim->wave -= 30.0f;
+    anim->angle += 12.0f;
+    if (anim->angle > 360.0f)
+        anim->angle -= 360.0f;
+    f32 phase = anim->phase;
+    f32 phaseEnd = anim->phaseEnd;
+    if (anim->finished != 0) {
+        if (phase < phaseEnd) {
+            anim->phase = phase + 1.0f;
+            if (anim->phase >= phaseEnd)
+                anim->phase = 0.0f;
         }
-      }
-    }
-    else if (*(float *)(param_1 + 0xf4) - temp_v7 <= *(float *)(param_1 + 0xd8)) {
-      *(unsigned int *)(param_1 + 0xfc) = 1;
-      *(float *)(param_1 + 0xf8) = 1.0f / ((temp_v6 - temp_v5) * 0.125f);
-    }
-    temp_v0 = *(int *)(param_1 + 0xfc);
-    if (*(char *)(param_1 + 0xe4) != '\0') {
-      if (0 < temp_v0) {
-        temp_v1 = 0;
-        do {
-          temp_v2 = param_1 + temp_v1 * 4;
-          temp_v1 = temp_v1 + 1;
-          temp_v5 = *(float *)(temp_v2 + 0x100) + *(float *)(param_1 + 0xf8);
-          *(float *)(temp_v2 + 0x100) = temp_v5;
-          if ((int)temp_v5 >= 0x3f800001) {
-            temp_v5 = temp_v8;
-          }
-          temp_v0 = temp_v0 - 1;
-          *(float *)(temp_v2 + 0x100) = temp_v5;
-        } while (temp_v0 != 0);
         return;
-      }
     }
-    else if (0 < temp_v0) {
-      temp_v1 = 0;
-      do {
-        temp_v2 = param_1 + (7 - temp_v1) * 4;
-        temp_v1 = temp_v1 + 1;
-        temp_v5 = *(float *)(temp_v2 + 0x100) + *(float *)(param_1 + 0xf8);
-        *(float *)(temp_v2 + 0x100) = temp_v5;
-        if ((int)temp_v5 >= 0x3f800001) {
-          temp_v5 = temp_v8;
+    if (!(phase < phaseEnd))
+        return;
+    anim->phase = phase + 1.0f;
+    if (anim->phase >= phaseEnd) {
+        anim->finished = 1;
+        anim->position = 400.0f;
+        anim->target = 400.0f;
+        for (s32 i = 0; i < 8; i++)
+            anim->fade[i] = 1.0f;
+        anim->phase = 0.0f;
+        anim->phaseEnd = 40.0f;
+        return;
+    }
+    anim->position = anim->target / phaseEnd + anim->position;
+    if (anim->revealed != 0) {
+        SpriteInfo *info = FUN_002bf4f8(20, 55);
+        if (anim->revealed < 8 &&
+            !(anim->progress - static_cast<f32>((info->width & 0x7FFF) * anim->revealed) < anim->target - anim->position)) {
+            do {
+                anim->revealed++;
+            } while (anim->revealed < 8 &&
+                     !(anim->progress - static_cast<f32>((info->width & 0x7FFF) * anim->revealed) <
+                       anim->target - anim->position));
         }
-        temp_v0 = temp_v0 - 1;
-        *(float *)(temp_v2 + 0x100) = temp_v5;
-      } while (temp_v0 != 0);
-      return;
+    } else if (!(anim->target - anim->position > anim->progress)) {
+        anim->revealed = 1;
+        anim->step = 1.0f / ((phaseEnd - phase) * 0.125f);
     }
-  }
-  return;
+    s32 count = anim->revealed;
+    if (anim->reverse != 0) {
+        for (s32 i = 0; i < count; i++) {
+            anim->fade[i] += anim->step;
+            if (anim->fade[i] > 1.0f)
+                anim->fade[i] = 1.0f;
+        }
+    } else {
+        for (s32 i = 0; i < count; i++) {
+            anim->fade[7 - i] += anim->step;
+            if (anim->fade[7 - i] > 1.0f)
+                anim->fade[7 - i] = 1.0f;
+        }
+    }
 }
-
-} /* extern "C" */

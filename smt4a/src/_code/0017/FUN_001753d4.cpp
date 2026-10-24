@@ -1,121 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001753d4` (_code @ 0x1753d4, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved-register assignment differs (retail: loadType r4, loader r5, flags fp, zero r9, one sl) and the per-case result moves/exit branches are shaped differently (retail 146 rows, built 142). */
+#include "shard/S3SoundArchiveLoader.h"
+
+/* The loader's recursion bookkeeping, past the vtable and archive pointer. */
+struct SoundArchiveLoaderState {
+    SoundArchiveLoader base;
+    /* 0x008 */ u8 unk008[0x200];
+    /* 0x208 */ u16 loadDepth; /* nested load calls in flight */
+    /* 0x20A */ u8 cancelled;  /* set to refuse loads until the outermost call returns */
+};
 
 extern "C" {
 
-int FUN_00174ebc(...);
-int FUN_00190c24(...);
-int nw_snd_SoundArchive_GetSoundType(...);
-int nw_snd_internal_SoundArchiveLoader_LoadImpl(...);
-int nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(...);
-int nw_snd_internal_SoundArchiveLoader_LoadSoundGroup(...);
-int nw_snd_internal_SoundArchiveLoader_LoadWaveSound(...);
+s32 nw_snd_SoundArchive_IsAvailable(void);
+s32 nw_snd_SoundArchive_GetSoundType(void *archive, u32 itemId);
+u32 FUN_00195024(void *archive, u32 itemId);
+u32 FUN_001a8e14(void *archive, u32 itemId);
+void *nw_snd_internal_SoundArchiveLoader_LoadImpl(SoundArchiveLoaderState *loader, u32 file, void *heap, u32 loadType, s32 isGroup);
+s32 nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(SoundArchiveLoaderState *loader, u32 itemId, void *heap, u32 flags, u32 loadType);
+s32 nw_snd_internal_SoundArchiveLoader_LoadSoundGroup(SoundArchiveLoaderState *loader, u32 itemId, void *heap, u32 flags, u32 loadType);
+s32 nw_snd_internal_SoundArchiveLoader_LoadWaveSound(SoundArchiveLoaderState *loader, u32 itemId, void *heap, u32 flags, u32 loadType, u32 index);
+s32 FUN_00190c24(SoundArchiveLoaderState *loader, u32 itemId, void *heap, u32 flags, u32 loadType);
+s32 FUN_00174ebc(SoundArchiveLoaderState *loader, void *data, void *heap, u32 loadType);
 
-typedef struct fn_001753d4_arg0 fn_001753d4_arg0;
-struct fn_001753d4_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x200];
-    ushort field_0x208; /* +0x208 */
-    byte field_0x20a; /* +0x20a */
-};
-
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-extern int nw_snd_SoundArchive_IsAvailable(void);
-/* Supplied declaration required: FUN_00174ebc. */
-/* Supplied declaration required: FUN_00190c24. */
-/* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
-extern unsigned int FUN_00195024(int, unsigned int);
-extern unsigned int FUN_001a8e14(int, unsigned int);
-/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadImpl. */
-/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadSequenceSound. */
-/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadSoundGroup. */
-/* Supplied declaration required: nw_snd_internal_SoundArchiveLoader_LoadWaveSound. */
-
-
-int FUN_001753d4(fn_001753d4_arg0 *param_1,unsigned int param_2,int param_3,unsigned int param_4,unsigned int param_5)
-
+/* Loads the data the sound archive item needs, dispatching on the item type in the id's top byte.
+ * Returns whether the item is loaded. */
+s32 FUN_001753d4(SoundArchiveLoaderState *loader, u32 itemId, void *heap, u32 flags, u32 loadType)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  fn_001753d4_arg0 *pfVar3;
-  unsigned short temp_v2;
-  fn_001753d4_arg0 *pfVar5;
-  
-  if ((param_1->field_0x4 == 0) ||
-     (temp_v0 = nw_snd_SoundArchive_IsAvailable(), (temp_v0 == 0 || param_2 == 0xffffffff) || param_3 == 0)) {
-    return 0;
-  }
-  pfVar5 = (fn_001753d4_arg0 *)0x0;
-  param_1->field_0x208 = param_1->field_0x208 + 1;
-  if (param_1->field_0x20a != 0) goto LAB_00175498;
-  switch(param_2 >> 0x18) {
-  case 1:
-    temp_v0 = param_1->field_0x4;
-    nw_snd_SoundArchive_GetSoundType(temp_v0,param_2);
-    if (temp_v0 == 1) {
-      pfVar5 = param_1;
-      nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(param_1,param_2,param_3,param_4,param_5);
-      break;
+    s32 result;
+
+    if (loader->base.archive == NULL || nw_snd_SoundArchive_IsAvailable() == 0 ||
+        itemId == SOUNDARCHIVE_ITEM_INVALID || heap == NULL) {
+        return 0;
     }
-    if (temp_v0 == 2) {
-      temp_v1 = FUN_00195024(param_1->field_0x4,param_2);
-      pfVar3 = param_1;
-      nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v1,param_3,param_5,0);
-      if (pfVar3 != (fn_001753d4_arg0 *)0x0) {
-        pfVar5 = (fn_001753d4_arg0 *)0x1;
-      }
-      break;
+    loader->loadDepth++;
+    if (loader->cancelled != 0) {
+        result = 0;
+    } else {
+        switch (SOUNDARCHIVE_ITEM_TYPE(itemId)) {
+        case 1: {
+            s32 soundType = nw_snd_SoundArchive_GetSoundType(loader->base.archive, itemId);
+
+            if (soundType == 1) {
+                result = nw_snd_internal_SoundArchiveLoader_LoadSequenceSound(loader, itemId, heap, flags, loadType);
+            } else if (soundType == 2) {
+                u32 file = FUN_00195024(loader->base.archive, itemId);
+
+                if (nw_snd_internal_SoundArchiveLoader_LoadImpl(loader, file, heap, loadType, 0) != 0) {
+                    result = 1;
+                } else {
+                    result = 0;
+                }
+            } else if (soundType == 3) {
+                result = nw_snd_internal_SoundArchiveLoader_LoadWaveSound(loader, itemId, heap, flags, loadType, 0xFFFFFFFF);
+            } else {
+                result = 0;
+            }
+            break;
+        }
+        case 2:
+            result = nw_snd_internal_SoundArchiveLoader_LoadSoundGroup(loader, itemId, heap, flags, loadType);
+            break;
+        case 3:
+            result = FUN_00190c24(loader, itemId, heap, flags, loadType);
+            break;
+        case 5:
+            if ((flags & SOUNDARCHIVE_LOAD_NOTEINFO) != 0) {
+                u32 file = FUN_001a8e14(loader->base.archive, itemId);
+
+                if (nw_snd_internal_SoundArchiveLoader_LoadImpl(loader, file, heap, loadType, 1) == 0) {
+                    result = 0;
+                    break;
+                }
+            }
+            result = 1;
+            break;
+        case 6: {
+            u32 file = FUN_001a8e14(loader->base.archive, itemId);
+            void *data = nw_snd_internal_SoundArchiveLoader_LoadImpl(loader, file, heap, loadType, 1);
+
+            if (data != NULL) {
+                result = FUN_00174ebc(loader, data, heap, loadType);
+            } else {
+                result = 0;
+            }
+            break;
+        }
+        default:
+            result = 0;
+            break;
+        }
     }
-    if (temp_v0 == 3) {
-      pfVar5 = param_1;
-      nw_snd_internal_SoundArchiveLoader_LoadWaveSound
-                (param_1,param_2,param_3,param_4,param_5,0xffffffff);
-      break;
+    loader->loadDepth--;
+    if (loader->loadDepth == 0) {
+        loader->cancelled = 0;
     }
-  default:
-LAB_00175498:
-    pfVar5 = (fn_001753d4_arg0 *)0x0;
-    break;
-  case 2:
-    pfVar5 = param_1;
-    nw_snd_internal_SoundArchiveLoader_LoadSoundGroup(param_1,param_2,param_3,param_4,param_5);
-    break;
-  case 3:
-    pfVar5 = param_1;
-    FUN_00190c24(param_1,param_2,param_3,param_4,param_5);
-    break;
-  case 5:
-    if ((param_4 & 8) != 0) {
-      temp_v1 = FUN_001a8e14(param_1->field_0x4,param_2);
-      pfVar3 = param_1;
-      nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v1,param_3,param_5,1);
-      if (pfVar3 == (fn_001753d4_arg0 *)0x0) break;
-    }
-    pfVar5 = (fn_001753d4_arg0 *)0x1;
-    break;
-  case 6:
-    temp_v1 = FUN_001a8e14(param_1->field_0x4,param_2);
-    pfVar3 = param_1;
-    nw_snd_internal_SoundArchiveLoader_LoadImpl(param_1,temp_v1,param_3,param_5,1);
-    if (pfVar3 != (fn_001753d4_arg0 *)0x0) {
-      pfVar5 = param_1;
-      FUN_00174ebc(param_1,pfVar3,param_3,param_5);
-    }
-  }
-  temp_v2 = param_1->field_0x208 - 1;
-  param_1->field_0x208 = temp_v2;
-  if (temp_v2 == 0) {
-    param_1->field_0x20a = 0;
-  }
-  return (int)pfVar5;
+    return result;
 }
 
 } /* extern "C" */

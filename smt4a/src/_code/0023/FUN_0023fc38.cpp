@@ -1,195 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023fc38` (_code @ 0x23fc38, 0x2c8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares one sysPlaySe call between the confirm leaves and leaves the row-not-0/1 cases through a direct branch to the button-help code (a goto in the decompile); this build tests the sound for zero instead and schedules the move/cancel branches differently. */
+#include "common.h"
+
+/* The party panel as the cursor-sound code reads it. */
+struct PartyPanelSounds {
+    /* 0x0000 */ u8 unk0000[0x1C];
+    /* 0x001C */ s32 screen;
+    /* 0x0020 */ u8 unk0020[0x22];
+    /* 0x0042 */ u8 secondColumn;
+    /* 0x0043 */ u8 unk0043[0x971];
+    /* 0x09B4 */ u8 page;
+    /* 0x09B5 */ u8 unk09B5[0x85B];
+    /* 0x1210 */ u8 holding;
+    /* 0x1211 */ u8 unk1211[7];
+    /* 0x1218 */ s32 row;
+};
 
 extern "C" {
+extern PartyPanelSounds *g_partyPanel;
 
-int sysPlaySe(unsigned int);
-int FUN_00183f58(int, int, int, int);
-int FUN_002c7e24(void);
+void sysPlaySe(u32 sound);
+void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+void FUN_002c7e24(void);
+s32 FUN_002cad18(void);
+s32 partyPanelGetSelectedDemonId(void);
+s32 FUN_0022e714(void);
+s32 campCecHasObject(void);
+s32 FUN_002f1964(void);
+s32 gameFlagIsSet(u32 flag);
+s32 buttonHelpGetEntryValue(u32 id);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_partyPanel; /* 0x57f268 */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183f58. */
-extern int gameFlagIsSet(unsigned int);
-extern int FUN_0022e714(void);
-extern int campCecHasObject(void);
-/* Supplied declaration required: FUN_002c7e24. */
-extern int partyPanelGetSelectedDemonId(void);
-extern int FUN_002cad18(void);
-extern int FUN_002f1964(void);
-extern int buttonHelpGetEntryValue(unsigned int);
-
-
+/* Plays the sound of the party panel's confirm / cancel / move input and updates the button help. */
 void FUN_0023fc38(void)
-
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = g_partyPanel;
-  FUN_002c7e24();
-  temp_v0 = *(unsigned char *)(temp_v5 + 0x9b4);
-  temp_v1 = 1;
-  if ((temp_v0 < 2) || ((temp_v0 == 0xc || temp_v0 == 0xd) || temp_v0 == 0xe)) {
-    temp_v1 = 0;
-  }
-  temp_v2 = FUN_002cad18();
-  temp_v3 = partyPanelGetSelectedDemonId();
-  if (temp_v2 != 0) {
-    if (temp_v1) {
-      if (*(char *)(temp_v5 + 0x9b4) != '\x10') {
-        if (*(char *)(temp_v5 + 0x42) == '\0') {
-          temp_v4 = 0x1d;
+    PartyPanelSounds *panel = g_partyPanel;
+    FUN_002c7e24();
+    u8 page = panel->page;
+    bool subPage = true;
+    if (page == 0 || page == 1 || page == 0xc || page == 0xd || page == 0xe) {
+        subPage = false;
+    }
+    s32 confirmed = FUN_002cad18();
+    s32 demonId = partyPanelGetSelectedDemonId();
+    if (confirmed != 0) {
+        u32 sound = 0;
+        if (subPage) {
+            if (panel->page != 0x10) {
+                sound = panel->secondColumn == 0 ? 0x1d : 0x1e;
+            } else {
+                sound = panel->secondColumn == 0 ? 0xb9 : 0xba;
+            }
+        } else if (panel->page == 0xc && gameFlagIsSet(0x401) != 0) {
+            sound = panel->secondColumn == 0 ? 0xc0 : 0xc1;
+        } else {
+            s32 row = panel->row;
+            if (panel->secondColumn != 0) {
+                if (row == 0) {
+                    sound = 0x1c;
+                } else if (row == 1) {
+                    sound = 0x28;
+                }
+            } else if (row == 0) {
+                sound = 0x1b;
+            } else if (row == 1) {
+                sound = 0x27;
+            }
         }
-        else {
-          temp_v4 = 0x1e;
+        if (sound != 0) {
+            sysPlaySe(sound);
         }
-      }
-      else if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xb9;
-      }
-      else {
-        temp_v4 = 0xba;
-      }
-    }
-    else if ((*(char *)(temp_v5 + 0x9b4) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xc0;
-      }
-      else {
-        temp_v4 = 0xc1;
-      }
-    }
-    else {
-      temp_v2 = *(int *)(temp_v5 + 0x1218);
-      if (*(char *)(temp_v5 + 0x42) != '\0') {
-        if (temp_v2 == 0) {
-          temp_v4 = 0x1c;
+    } else if (demonId < 0) {
+        u32 sound;
+        if (subPage) {
+            if (panel->page != 0x10) {
+                sound = panel->secondColumn == 0 ? 0x25 : 0x26;
+            } else {
+                sound = panel->secondColumn == 0 ? 0xbc : 0xbd;
+            }
+        } else if (panel->page == 0xc && gameFlagIsSet(0x401) != 0) {
+            sound = panel->secondColumn == 0 ? 0xc4 : 0xc5;
+        } else if (panel->secondColumn != 0) {
+            sound = 0x26;
+        } else {
+            sound = 0x25;
         }
-        else {
-          if (temp_v2 != 1) goto LAB_0023fea8;
-          temp_v4 = 0x28;
+        sysPlaySe(sound);
+    } else if (subPage) {
+        if (panel->screen != 0x19 || FUN_002f1964() == 0) {
+            sysPlaySe(panel->secondColumn == 0 ? 0x23 : 0x24);
         }
-      }
-      else if (temp_v2 == 0) {
-        temp_v4 = 0x1b;
-      }
-      else {
-        if (temp_v2 != 1) goto LAB_0023fea8;
-        temp_v4 = 0x27;
-      }
-    }
-    sysPlaySe(temp_v4);
-  }
-  else if (temp_v3 < 0) {
-    if (temp_v1) {
-      if (*(char *)(temp_v5 + 0x9b4) != '\x10') {
-        if (*(char *)(temp_v5 + 0x42) == '\0') {
-          temp_v4 = 0x25;
+    } else {
+        if (panel->page != 0xc) {
+            s32 row = panel->row;
+            if (panel->secondColumn != 0) {
+                if (row == 0) {
+                    sysPlaySe(0x22);
+                } else if (row == 1) {
+                    sysPlaySe(0x28);
+                }
+            } else if (row == 0) {
+                sysPlaySe(0x21);
+            } else if (row == 1) {
+                sysPlaySe(0x27);
+            }
+        } else {
+            sysPlaySe(panel->secondColumn == 0 ? 0xc2 : 0xc3);
         }
-        else {
-          temp_v4 = 0x26;
+        if (FUN_0022e714() != 0 && campCecHasObject() != 0) {
+            sysPlaySe(panel->secondColumn == 0 ? 0xe5 : 0xce);
         }
-      }
-      else if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xbc;
-      }
-      else {
-        temp_v4 = 0xbd;
-      }
     }
-    else if ((*(char *)(temp_v5 + 0x9b4) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xc4;
-      }
-      else {
-        temp_v4 = 0xc5;
-      }
+    if (panel->holding != 0) {
+        FUN_00183f58(3, 0x12, 0, 1);
+        return;
     }
-    else if (*(char *)(temp_v5 + 0x42) != '\0') {
-      temp_v4 = 0x26;
+    if (buttonHelpGetEntryValue(3) != 0) {
+        return;
     }
-    else {
-      temp_v4 = 0x25;
-    }
-    sysPlaySe(temp_v4);
-  }
-  else if (temp_v1) {
-    if ((*(int *)(temp_v5 + 0x1c) != 0x19) || (temp_v2 = FUN_002f1964(), temp_v2 == 0)) {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0x23;
-      }
-      else {
-        temp_v4 = 0x24;
-      }
-      sysPlaySe(temp_v4);
-    }
-  }
-  else {
-    if (*(char *)(temp_v5 + 0x9b4) != '\f') {
-      temp_v2 = *(int *)(temp_v5 + 0x1218);
-      if (*(char *)(temp_v5 + 0x42) != '\0') {
-        if (temp_v2 == 0) {
-          temp_v4 = 0x22;
-          sysPlaySe(temp_v4);
-        }
-        else if (temp_v2 == 1) {
-          temp_v4 = 0x28;
-          sysPlaySe(temp_v4);
-        }
-      }
-      else if (temp_v2 == 0) {
-        temp_v4 = 0x21;
-        sysPlaySe(temp_v4);
-      }
-      else if (temp_v2 == 1) {
-        temp_v4 = 0x27;
-        sysPlaySe(temp_v4);
-      }
-    }
-    else {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xc2;
-      }
-      else {
-        temp_v4 = 0xc3;
-      }
-      sysPlaySe(temp_v4);
-    }
-    temp_v2 = FUN_0022e714();
-    if ((temp_v2 != 0) && (temp_v2 = campCecHasObject(), temp_v2 != 0)) {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xe5;
-      }
-      else {
-        temp_v4 = 0xce;
-      }
-      sysPlaySe(temp_v4);
-    }
-  }
-LAB_0023fea8:
-  if (*(char *)(temp_v5 + 0x1210) != '\0') {
-    FUN_00183f58(3,0x12,0,1);
-    return;
-  }
-  temp_v5 = buttonHelpGetEntryValue(3);
-  if (temp_v5 != 0) {
-    return;
-  }
-  FUN_00183f58(3,3,0xb,1);
-  return;
+    FUN_00183f58(3, 3, 0xb, 1);
 }
-
-} /* extern "C" */
+}

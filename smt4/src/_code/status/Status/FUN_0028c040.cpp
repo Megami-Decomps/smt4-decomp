@@ -13,7 +13,7 @@ int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
-int FUN_002d9384(...);
+int statusDownCreate(...);
 int drawParameterBlockClear(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -51,7 +51,7 @@ extern unsigned int *DAT_0044e144; /* 0x44e144 */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_002d9384. */
+/* Supplied declaration required: statusDownCreate. */
 /* Supplied declaration required: drawParameterBlockClear. */
 
 
@@ -78,7 +78,7 @@ void FUN_0028c040(void)
     taskCreateDraw(&LAB_0028c48c,0xcc,0,0,FUN_001cdef8,0,0,*puVar1);
     taskCreateDraw(&LAB_0028c4a8,0x7d,0,0,FUN_001a321c,0,0,*puVar1);
     taskCreateDraw(&LAB_0028c4bc,0xdb,0,0,FUN_001a321c,0,0,*puVar1);
-    FUN_002d9384();
+    statusDownCreate();
     puVar1 = DAT_0044e144;
     *(unsigned short *)(DAT_0044e144 + 0x4bf) = 0;
     *(unsigned short *)((int)puVar1 + 0x12fe) = 0xffff;

@@ -1,110 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00411458` (_code @ 0x411458, 0x234 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the white color unfolded (1.0f * 255.0f converted four times per entry, constants hoisted into s16/s17); armcc folds the all-white pack to a constant here, so the loop body differs. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
-int FUN_003fba4c(int, unsigned int, unsigned int, int *, int, int);
-int VectorFloatToUnsigned(double, int);
+/* One drawn entry: the three words handed to the draw call and a placement record. */
+typedef struct DrawEntry {
+    /* 0x00 */ u32 model;
+    /* 0x04 */ u32 variant;
+    /* 0x08 */ u32 motion;
+    /* 0x0C */ u32 unk0c;
+} DrawEntry;
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
+/* A placement the entry is drawn with (0x1C bytes): two floats at 0xC and 0x10 are passed along. */
+typedef struct DrawPlacement {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ f32 x;
+    /* 0x10 */ f32 y;
+    /* 0x14 */ u8 unk14[8];
+} DrawPlacement;
 
-extern int g_renderCtx; /* 0x59dbb4 */
+/* The work record the entries and placements hang off. */
+typedef struct DrawGroup {
+    /* 0x00 */ s32 mode;
+    /* 0x04 */ u8 unk04[0x30];
+    /* 0x34 */ DrawPlacement placements[12];
+} DrawGroup;
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_00387580(unsigned int);
-/* Supplied declaration required: FUN_003fba4c. */
+/* The block holding the 12 entry slots at 0x4D78. */
+typedef struct DrawEntrySource {
+    /* 0x0000 */ u8 unk0000[0x4D78];
+    /* 0x4D78 */ DrawEntry entries[12];
+} DrawEntrySource;
 
+extern RenderCtxA *g_renderCtx;
 
-void FUN_00411458(int *param_1,int param_2)
+s32 FUN_001692ac(u32 kind, u32 arg);
+s32 FUN_00387580(u32 kind);
+void FUN_003fba4c(u32 model, u32 variant, u32 motion, DrawPlacement *placement, u32 color, u32 flags, f32 x, f32 y);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
+/* Packs four 0..1 components into a word, most significant byte first. */
+static u32 packColorBytes(f32 r, f32 g, f32 b, f32 a)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  
-  temp_v3 = g_renderCtx;
-  if (*param_1 != 1 && *param_1 != 2) {
-    temp_v0 = FUN_001692ac(5,1);
-    piVar4 = (int *)(temp_v3 + 0x1258);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1274))(temp_v0);
-      *(unsigned char *)(temp_v3 + 0x1270) = 0;
-    }
-    temp_v3 = g_renderCtx;
-    temp_v0 = FUN_00387580(6);
-    piVar4 = (int *)(temp_v3 + 0x1278);
-    temp_v1 = *piVar4;
-    temp_v2 = piVar4[temp_v1 + 2];
-    *piVar4 = temp_v1 + 1;
-    piVar4[temp_v1 + 3] = temp_v0;
-    if (*(char *)(temp_v3 + 0x1290) != '\0' || temp_v2 != temp_v0) {
-      (**(romwright_code **)(temp_v3 + 0x1294))(temp_v0);
-      *(unsigned char *)(temp_v3 + 0x1290) = 0;
-    }
-    temp_v0 = 0;
-    temp_v7 = 1.0f;
-    temp_v8 = 255.0f;
-    temp_v3 = 0;
-    do {
-      temp_v1 = param_2 + temp_v3 * 0x10;
-      if (*(int *)(temp_v1 + 0x4d78) != 0) {
-        temp_v2 = VectorFloatToUnsigned(temp_v7 * temp_v8,3);
-        temp_v6 = VectorFloatToUnsigned(temp_v7 * temp_v8,3);
-        temp_v4 = VectorFloatToUnsigned(temp_v7 * temp_v8,3);
-        temp_v5 = VectorFloatToUnsigned(temp_v7 * temp_v8,3);
-        FUN_003fba4c(*(int *)(temp_v1 + 0x4d78),*(unsigned int *)(temp_v1 + 0x4d7c),
-                     *(unsigned int *)(temp_v1 + 0x4d80),param_1 + temp_v0 * 7 + 0xd,
-                     temp_v5 + (temp_v4 + (temp_v6 + temp_v2 * 0x100) * 0x100) * 0x100,0);
-        temp_v0 = temp_v0 + 1;
-      }
-      temp_v1 = g_renderCtx;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0xc);
-    piVar4 = (int *)(g_renderCtx + 0x1278);
-    temp_v3 = *piVar4;
-    temp_v0 = piVar4[temp_v3 + 2];
-    *piVar4 = temp_v3 - 1;
-    if (*(char *)(temp_v1 + 0x1290) != '\0' || temp_v0 != piVar4[temp_v3 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1294))();
-      *(unsigned char *)(temp_v1 + 0x1290) = 0;
-    }
-    temp_v3 = g_renderCtx;
-    piVar4 = (int *)(g_renderCtx + 0x1258);
-    temp_v0 = *piVar4;
-    temp_v1 = piVar4[temp_v0 + 2];
-    *piVar4 = temp_v0 - 1;
-    if (*(char *)(temp_v3 + 0x1270) != '\0' || temp_v1 != piVar4[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x1274))();
-      *(unsigned char *)(temp_v3 + 0x1270) = 0;
-    }
-    skinObjectUpdateMatrices(g_renderCtx);
-    renderCtxResetColorScale(g_renderCtx);
-    return;
-  }
-  return;
+    u32 red = (u32)(r * 255.0f);
+    u32 green = (u32)(g * 255.0f);
+    u32 blue = (u32)(b * 255.0f);
+    u32 alpha = (u32)(a * 255.0f);
+
+    return alpha + (blue + (green + red * 256) * 256) * 256;
 }
 
-} /* extern "C" */
+/* Draws each present entry of the group with its placement, under the draw states pushed on the
+ * first and third render-state stacks, unless the group is in mode 1 or 2. */
+void FUN_00411458(DrawGroup *group, DrawEntrySource *source)
+{
+    RenderCtxA *context = g_renderCtx;
+
+    if (group->mode == 1 || group->mode == 2) {
+        return;
+    }
+    renderCtxPushA(context, FUN_001692ac(5, 1));
+    context = g_renderCtx;
+    renderStackPush(&context->additional.stackC, FUN_00387580(6));
+
+    s32 drawn = 0;
+    for (s32 i = 0; i < 12; i++) {
+        DrawEntry *entry = &source->entries[i];
+
+        if (entry->model != 0) {
+            FUN_003fba4c(entry->model, entry->variant, entry->motion, &group->placements[drawn],
+                         packColorBytes(1.0f, 1.0f, 1.0f, 1.0f), 0, group->placements[drawn].x,
+                         group->placements[drawn].y);
+            drawn++;
+        }
+    }
+    renderStackPop(&g_renderCtx->additional.stackC);
+    renderStackPop(&g_renderCtx->stackA);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
+}
+
+}

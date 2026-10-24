@@ -1,129 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d8910` (_code @ 0x2d8910, 0x2f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout differs: retail places the shared script-work reset after the phase tests and merges the message-state cases into one chain; also keeps weak-hook nops in different places. */
+#include "common.h"
 
 extern "C" {
+void FUN_00249b18(s32 a, s32 b);
+s32 scrWorkGetValue(s32 index);
+void scrWorkSetValue(s32 index, s32 value);
+s32 messageForwardDefaultMode(s32 buffer, s32 message, s32 line, s32 a, s32 b);
+void textEncodeFontSlot(s32 slot, u32 value);
+u8 *gameGetUnitRecord(s32 index);
+u32 FUN_002bd06c(u32 id);
+void FUN_002bff50(void);
+s32 scrGetCommandFrame(void);
+s8 *gameGetSlotTable(void);
+s32 gameCountUnits(void);
+s32 fileSlotGetBuffer(s32 slot);
+u32 gameGetPlayerName(void);
 
-int FUN_00249b18(int, int);
-int scrWorkGetValue(...);
-int scrWorkSetValue(...);
-int messageForwardDefaultMode(...);
-int textEncodeFontSlot(int, unsigned int);
-int gameGetUnitRecord(int);
-int FUN_002bd06c(unsigned int);
-int FUN_002bff50(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00249b18. */
-/* Supplied declaration required: scrWorkGetValue. */
-/* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: messageForwardDefaultMode. */
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: gameGetUnitRecord. */
-extern int gameGetSlotTable(void);
-extern int gameCountUnits(void);
-extern int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: FUN_002bd06c. */
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002bff50. */
-
-
-int FUN_002d8910(int param_1)
-
+/* Script command: show the party introduction messages — a header, the player's name, then every party member. */
+s32 FUN_002d8910(s32 phase)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  
-  if (param_1 != 0) {
-    if ((param_1 == 1) && (temp_v6 = scrGetCommandFrame(), temp_v6 == 0)) {
-      FUN_00249b18(0,1);
-      scrWorkSetValue(0);
-      scrWorkSetValue(1,0);
-      scrWorkSetValue(2,0);
+    if (phase == 0) {
+        if (scrGetCommandFrame() == 0) {
+            FUN_00249b18(0, 1);
+            scrWorkSetValue(0, 0);
+            scrWorkSetValue(1, 0);
+            scrWorkSetValue(2, 0);
+        }
+        s32 result = 0;
+        s32 buffer = fileSlotGetBuffer(30);
+        switch (scrWorkGetValue(0)) {
+        case 0: {
+            s32 message = 15;
+            if (gameCountUnits() == 0)
+                message = 14;
+            FUN_002bff50();
+            result = messageForwardDefaultMode(buffer, message, scrWorkGetValue(1), 6, 0);
+            scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+            break;
+        }
+        case 1:
+            textEncodeFontSlot(0x28, gameGetPlayerName());
+            result = messageForwardDefaultMode(buffer, 13, scrWorkGetValue(1), 6, 0);
+            scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+            break;
+        case 2: {
+            s32 count = gameCountUnits();
+            s8 *slots = gameGetSlotTable();
+            while (scrWorkGetValue(2) < count) {
+                gameGetUnitRecord(slots[0x90F0 + scrWorkGetValue(2)]);
+                scrWorkSetValue(2, scrWorkGetValue(2) + 1);
+            }
+            if (scrWorkGetValue(2) >= count) {
+                result = 1;
+                break;
+            }
+        }
+        /* fall through */
+        case 3: {
+            u8 *unit = gameGetUnitRecord(gameGetSlotTable()[0x90F0 + scrWorkGetValue(2)]);
+            textEncodeFontSlot(0x28, FUN_002bd06c(*reinterpret_cast<u16 *>(unit + 0x46)));
+            result = messageForwardDefaultMode(buffer, 13, scrWorkGetValue(1), 6, 0);
+            scrWorkSetValue(1, scrWorkGetValue(1) + 1);
+            if (result == 1) {
+                scrWorkSetValue(0, 2);
+                scrWorkSetValue(1, 0);
+                scrWorkSetValue(2, scrWorkGetValue(2) + 1);
+                result = 0;
+            }
+            break;
+        }
+        }
+        return result;
+    }
+    if (phase == 1 && scrGetCommandFrame() == 0) {
+        FUN_00249b18(0, 1);
+        scrWorkSetValue(0, 0);
+        scrWorkSetValue(1, 0);
+        scrWorkSetValue(2, 0);
     }
     return 1;
-  }
-  temp_v6 = scrGetCommandFrame();
-  if (temp_v6 == 0) {
-    FUN_00249b18(0,1);
-    scrWorkSetValue(0);
-    scrWorkSetValue(1,0);
-    scrWorkSetValue(2,0);
-  }
-  temp_v0 = fileSlotGetBuffer(0x1e);
-  temp_v6 = scrWorkGetValue(0);
-  if (temp_v6 != 0) {
-    if (temp_v6 != 1) {
-      if (temp_v6 != 2) {
-        if (temp_v6 != 3) {
-          return 0;
-        }
-      }
-      else {
-        temp_v6 = gameCountUnits();
-        temp_v3 = gameGetSlotTable();
-        while (temp_v2 = scrWorkGetValue(2), temp_v2 < temp_v6) {
-          temp_v2 = scrWorkGetValue(2);
-          gameGetUnitRecord((int)*(char *)(temp_v2 + temp_v3 + 0x90f0));
-          temp_v2 = scrWorkGetValue(2);
-          scrWorkSetValue(2,temp_v2 + 1);
-        }
-        temp_v3 = scrWorkGetValue(2);
-        if (temp_v6 <= temp_v3) {
-          return 1;
-        }
-      }
-      temp_v6 = gameGetSlotTable();
-      temp_v3 = scrWorkGetValue(2);
-      temp_v6 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v6 + 0x90f0));
-      temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + 0x46);
-      FUN_002bd06c(temp_v4);
-      textEncodeFontSlot(0x28,temp_v4);
-      temp_v5 = scrWorkGetValue(1);
-      messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
-      temp_v6 = scrWorkGetValue(1);
-      scrWorkSetValue(1,temp_v6 + 1);
-      if (temp_v0 == 1) {
-        scrWorkSetValue(0,2);
-        scrWorkSetValue(1,0);
-        temp_v6 = scrWorkGetValue(2);
-        scrWorkSetValue(2,temp_v6 + 1);
-        temp_v0 = 0;
-      }
-    }
-    else {
-      temp_v5 = gameGetPlayerName();
-      textEncodeFontSlot(0x28,temp_v5);
-      temp_v5 = scrWorkGetValue(1);
-      messageForwardDefaultMode(temp_v0,0xd,temp_v5,6,0);
-      temp_v6 = scrWorkGetValue(1);
-      scrWorkSetValue(1,temp_v6 + 1);
-    }
-  }
-  else {
-    temp_v5 = 0xf;
-    temp_v6 = gameCountUnits();
-    if (temp_v6 == 0) {
-      temp_v5 = 0xe;
-    }
-    FUN_002bff50();
-    temp_v1 = scrWorkGetValue(1);
-    messageForwardDefaultMode(temp_v0,temp_v5,temp_v1,6,0);
-    temp_v6 = scrWorkGetValue(1);
-    scrWorkSetValue(1,temp_v6 + 1);
-  }
-  return temp_v0;
 }
-
-} /* extern "C" */
+}

@@ -1,170 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00234f5c` (_code @ 0x234f5c, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (189 vs 210 rows); retail keeps the address of the 0x80-byte block at +0x56c in a register and schedules the field clears differently */
+#include "common.h"
+
+struct Vec3 {
+    u32 x, y, z;    // raw words, copied verbatim
+};
+
+// Scene viewer object: a model loaded from `<name>.bam` with a camera and
+// environment, plus the "Dum_" dummy nodes found in the model and two marker models.
+struct MikadoScene {
+    u32 unk00;
+    u32 unk04;
+    u32 unk08;
+    s32 dummyCount;         // 0x0c: number of "Dum_" nodes recorded
+    u32 unk10;
+    u8 unk14;
+    u8 hasMarkers;          // 0x15
+    u8 unk16[2];
+    u32 unk18;
+    u32 model;              // 0x1c
+    u32 pointModel;         // 0x20
+    u32 arrowModel;         // 0x24
+    u8 unk28[0x56c - 0x28];
+    u32 cameraBlock;        // 0x56c: 0x80-byte cleared block, first word is the camera node
+    u8 unk570[0x1604 - 0x570];
+    Vec3 viewStart;         // 0x1604
+    Vec3 viewCurrent;       // 0x1610
+    u8 unk161c[0x1634 - 0x161c];
+    Vec3 cameraPos;         // 0x1634
+    Vec3 cameraTarget;      // 0x1640
+    u8 unk164c[0x1658 - 0x164c];
+    Vec3 markerPos;         // 0x1658
+    u8 unk1664[0x1670 - 0x1664];
+    Vec3 dummies[1];        // 0x1670 (variable length)
+};
 
 extern "C" {
 
-int nodeSetTranslation(unsigned int, int, unsigned int *);
-int asdMdlManagerCreateLoaded(unsigned char [128], int);
-int FUN_002a0428(void);
-int FUN_002a04f0(int);
-int FUN_002a09b4(unsigned char [128], int);
-int textFormatBuffer(...);
-int memClear(unsigned int *, int);
-int FUN_00341340(unsigned int *, unsigned char [128]);
+void memClear(void* block, s32 size);
+void textFormatBuffer(char* out, const char* format, ...);
+u32 asdMdlManagerCreateLoaded(const char* name, s32 mode);
+void FUN_002a0428(u32 model, s32 arg);
+void FUN_00341340(MikadoScene* scene, const char* name);
+void FUN_002a09b4(const char* name, s32 arg);
+void FUN_002a04f0(s32 arg);
+u32* FUN_002a86a4(u32 node);
+s32 FUN_00100c4c(const char* name, const char* prefix);
+void nodeSetTranslation(u32 node, s32 index, Vec3* translation);
 
-extern unsigned char LAB_00235200; /* 0x235200 */
-extern unsigned char LAB_00235208; /* 0x235208 */
-extern unsigned char LAB_00235214; /* 0x235214 */
-extern unsigned char LAB_00235224; /* 0x235224 */
-extern unsigned char LAB_0023522c; /* 0x23522c */
-extern unsigned char LAB_0023523c; /* 0x23523c */
-
-extern int FUN_00100c4c(int, unsigned char *);
-/* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a04f0. */
-/* Supplied declaration required: FUN_002a09b4. */
-extern unsigned int *FUN_002a86a4(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_00341340. */
-
-
-void FUN_00234f5c(unsigned int *param_1,unsigned int param_2,int param_3)
-
+// Loads the scene model `name` (or `override` when given) with its camera and records its dummy nodes.
+void FUN_00234f5c(MikadoScene* scene, const char* name, const char* override)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v0;
-  unsigned char *puVar5;
-  unsigned char *puVar6;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int *piVar13;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9 [128];
-  
-  puVar1 = temp_v9;
-  puVar5 = temp_v9;
-  puVar6 = temp_v9;
-  param_1[7] = 0;
-  param_1[6] = 0;
-  *param_1 = 0;
-  param_1[2] = 0;
-  param_1[1] = 0;
-  param_1[3] = 0;
-  *(unsigned char *)((int)param_1 + 0x15) = 0;
-  memClear(param_1 + 0x15b,0x80);
-  if (param_3 != 0) {
-    textFormatBuffer(temp_v9,&LAB_00235200,param_3);
-  }
-  else {
-    textFormatBuffer(temp_v9,&LAB_00235200,param_2);
-  }
-  asdMdlManagerCreateLoaded(temp_v9,7);
-  param_1[7] = (unsigned int)puVar1;
-  FUN_002a0428();
-  textFormatBuffer(temp_v9,&LAB_00235208,param_2);
-  FUN_00341340(param_1,temp_v9);
-  textFormatBuffer(temp_v9,&LAB_00235214,param_2);
-  FUN_002a09b4(temp_v9,0);
-  FUN_002a04f0(0);
-  temp_v3 = param_1[0x15b];
-  temp_v1 = *(unsigned int *)(temp_v3 + 0x68);
-  temp_v4 = *(unsigned int *)(temp_v3 + 0x78);
-  param_1[0x58d] = *(unsigned int *)(temp_v3 + 0x58);
-  param_1[0x58e] = temp_v1;
-  param_1[0x58f] = temp_v4;
-  puVar2 = (unsigned int *)FUN_002a86a4(param_1[0x15b]);
-  temp_v1 = *puVar2;
-  temp_v4 = puVar2[1];
-  temp_v5 = puVar2[2];
-  param_1[0x590] = temp_v1;
-  param_1[0x591] = temp_v4;
-  param_1[0x592] = temp_v5;
-  param_1[0x584] = temp_v1;
-  param_1[0x585] = temp_v4;
-  param_1[0x586] = temp_v5;
-  param_1[0x581] = param_1[0x58d];
-  param_1[0x582] = param_1[0x58e];
-  param_1[0x583] = param_1[0x58f];
-  puVar3 = *(unsigned int **)(*(int *)(*(int *)(param_1[7] + 8) + 0x2c) + 8);
-  if ((puVar3 != (unsigned int *)0x0) && ((~*puVar3 & 0x40000092) != 0)) {
-    puVar3 = (unsigned int *)0x0;
-  }
-  temp_v3 = 0;
-  temp_v2 = puVar3[0x38];
-  if (temp_v2 != 0) {
-    temp_v8 = temp_v2 + (int)(puVar3 + 0x38);
-  }
-  else {
-    temp_v8 = 0;
-  }
-  temp_v7 = *(int *)(temp_v8 + 0x18);
-  if (0 < temp_v7) {
-    do {
-      if (*(int *)(temp_v8 + 0x1c) != 0) {
-        temp_v0 = temp_v8 + 0x1c + *(int *)(temp_v8 + 0x1c);
-      }
-      else {
-        temp_v0 = 0;
-      }
-      if (temp_v0 == 0) {
-        piVar13 = (int *)0x0;
-      }
-      else {
-        piVar13 = (int *)(temp_v0 + temp_v3 * 0x10 + 0x28);
-        temp_v0 = *piVar13;
-        if (temp_v0 != 0) {
-          piVar13 = (int *)(temp_v0 + (int)piVar13);
+    char path[128];
+    scene->model = 0;
+    scene->unk18 = 0;
+    scene->unk00 = 0;
+    scene->unk08 = 0;
+    scene->unk04 = 0;
+    scene->dummyCount = 0;
+    scene->hasMarkers = 0;
+    memClear(&scene->cameraBlock, 0x80);
+    if (override != NULL) {
+        textFormatBuffer(path, "%s.bam", override);
+    } else {
+        textFormatBuffer(path, "%s.bam", name);
+    }
+    scene->model = asdMdlManagerCreateLoaded(path, 7);
+    FUN_002a0428(scene->model, 1);
+    textFormatBuffer(path, "%s.bccam", name);
+    FUN_00341340(scene, path);
+    textFormatBuffer(path, "%s.bcenv", name);
+    FUN_002a09b4(path, 0);
+    FUN_002a04f0(0);
+
+    // Camera position and target come from the camera node and its look-at.
+    u32* camera = reinterpret_cast<u32*>(scene->cameraBlock);
+    scene->cameraPos.x = camera[0x58 / 4];
+    scene->cameraPos.y = camera[0x68 / 4];
+    scene->cameraPos.z = camera[0x78 / 4];
+    u32* target = FUN_002a86a4(scene->cameraBlock);
+    scene->cameraTarget.x = target[0];
+    scene->cameraTarget.y = target[1];
+    scene->cameraTarget.z = target[2];
+    scene->viewStart = scene->cameraPos;
+    scene->viewCurrent.x = target[0];
+    scene->viewCurrent.y = target[1];
+    scene->viewCurrent.z = target[2];
+
+    // Walk the model's node table and record every node named "Dum_*".
+    u32* resource = *reinterpret_cast<u32**>(*reinterpret_cast<s32*>(*reinterpret_cast<s32*>(scene->model + 8) + 0x2c) + 8);
+    if (resource != NULL && (~*resource & 0x40000092) != 0) resource = NULL;
+    u32 nodesOffset = resource[0x38];
+    s32* nodes = nodesOffset != 0 ? reinterpret_cast<s32*>(nodesOffset + (s32)(resource + 0x38)) : NULL;
+    s32 nodeCount = nodes[0x18 / 4];
+    for (s32 i = 0; i < nodeCount; i++) {
+        s32* table = nodes[0x1c / 4] != 0 ? reinterpret_cast<s32*>((s32)&nodes[0x1c / 4] + nodes[0x1c / 4]) : NULL;
+        s32* node = NULL;
+        if (table != NULL) {
+            s32* entry = reinterpret_cast<s32*>((s32)table + i * 0x10 + 0x28);
+            node = *entry != 0 ? reinterpret_cast<s32*>((s32)entry + *entry) : NULL;
         }
-        else {
-          piVar13 = (int *)0x0;
+        const char* nodeName = *node != 0 ? reinterpret_cast<const char*>((s32)node + *node) : NULL;
+        if (FUN_00100c4c(nodeName, "Dum_")) {
+            scene->dummies[scene->dummyCount].x = node[0xe];
+            scene->dummies[scene->dummyCount].y = node[0xf];
+            scene->dummies[scene->dummyCount].z = node[0x10];
+            scene->dummyCount++;
         }
-      }
-      if (*piVar13 != 0) {
-        temp_v0 = *piVar13 + (int)piVar13;
-      }
-      else {
-        temp_v0 = 0;
-      }
-      temp_v0 = FUN_00100c4c(temp_v0,&LAB_00235224);
-      if (temp_v0 != 0) {
-        temp_v0 = piVar13[0xf];
-        temp_v6 = piVar13[0x10];
-        param_1[param_1[3] * 3 + 0x59c] = piVar13[0xe];
-        param_1[param_1[3] * 3 + 0x59d] = temp_v0;
-        param_1[param_1[3] * 3 + 0x59e] = temp_v6;
-        param_1[3] = param_1[3] + 1;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v7);
-  }
-  if (0 < (int)param_1[3]) {
-    *(unsigned char *)((int)param_1 + 0x15) = 1;
-    textFormatBuffer(temp_v9,&LAB_0023522c);
-    asdMdlManagerCreateLoaded(temp_v9,7);
-    param_1[9] = (unsigned int)puVar5;
-    FUN_002a0428();
-    textFormatBuffer(temp_v9,&LAB_0023523c);
-    asdMdlManagerCreateLoaded(temp_v9,7);
-    param_1[8] = (unsigned int)puVar6;
-    FUN_002a0428();
-    param_1[0x596] = param_1[0x59c];
-    param_1[0x597] = param_1[0x59d];
-    param_1[0x598] = param_1[0x59e];
-    nodeSetTranslation(*(unsigned int *)(param_1[8] + 8),0,param_1 + 0x596);
-  }
-  return;
+    }
+    if (scene->dummyCount > 0) {
+        scene->hasMarkers = 1;
+        textFormatBuffer(path, "mikado/yaji.bam");
+        scene->arrowModel = asdMdlManagerCreateLoaded(path, 7);
+        FUN_002a0428(scene->arrowModel, 1);
+        textFormatBuffer(path, "mikado/point.bam");
+        scene->pointModel = asdMdlManagerCreateLoaded(path, 7);
+        FUN_002a0428(scene->pointModel, 1);
+        scene->markerPos = scene->dummies[0];
+        nodeSetTranslation(*reinterpret_cast<u32*>(scene->pointModel + 8), 0, &scene->markerPos);
+    }
 }
 
 } /* extern "C" */

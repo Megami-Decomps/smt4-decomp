@@ -1,109 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ecd4` (_code @ 0x20ecd4, 0x26c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
+#include "common.h"
+
+struct StatusEventRecord {
+    u32 id;
+    u32 type;
+    s16 requiredFlag;
+    s16 forbiddenFlag;
+    s16 chance;
+    u8 unk0E[0x12];
+};
+
+struct StatusPopupState {
+    s32 state;
+    s32 phase;
+    u8 unk08[0x0C];
+    char *content;
+    s32 value;
+    u8 unk1C[9];
+    char text[0x40];
+};
+
+struct SaveSlotView {
+    u8 unk00[0x12C];
+    u16 statusId;
+};
+
+struct GameStateView {
+    u8 unk00[0x390];
+    s32 statusTimer;
+};
 
 extern "C" {
+extern GameStateView g_gameState;
+extern StatusPopupState *g_popupState;
+u32 FUN_00152f44(void);
+s32 playerHasFlagBit(u32 bit);
+s32 saveSlotFindSelected(void);
+s32 gameFlagIsSet(u32 flag);
+s32 randRange(s32 max);
+u32 dataTableGet(u32 table, u32 index);
+StatusEventRecord *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+char *FUN_002d8b58(u32 kind, u32 id);
+void *rt_memcpy(void *dest, const void *src, u32 size);
+int textFormatBuffer(char *dest, const char *name, const char *format);
 
-int textFormatBuffer(int, unsigned char [72], unsigned char *);
-int FUN_00152f44(void);
-int gameFlagIsSet(...);
-int dataTableGetCount(unsigned int);
-int dataTableGetEntries(void);
-int rt_memcpy(unsigned char [72], int, int);
-
-extern unsigned char LAB_0020ef4c; /* 0x20ef4c */
-extern unsigned char LAB_0020ef5c; /* 0x20ef5c */
-extern int *g_popupState; /* 0x58104c */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00152f44. */
-extern int saveSlotFindSelected(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-extern int FUN_002d8b58(unsigned int, unsigned short);
-extern int playerHasFlagBit(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_0020ecd4(void)
-
+/* Tick the poison/sickness counter and start the status popup when a matching event record fires. */
+u32 FUN_0020ecd4(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar8;
-  unsigned char temp_v6 [72];
-  
-  FUN_00152f44();
-  temp_v0 = playerHasFlagBit(5);
-  if ((((temp_v0 != 0) || (temp_v0 = playerHasFlagBit(9), temp_v0 != 0)) && ((*(int *)((unsigned char *)&g_gameState + 0x390)) != 0)) &&
-     ((*(int *)((unsigned char *)&g_gameState + 0x390)) = (*(int *)((unsigned char *)&g_gameState + 0x390)) + 1, (*(int *)((unsigned char *)&g_gameState + 0x390)) >= 11)) {
-    (*(int *)((unsigned char *)&g_gameState + 0x390)) = 0;
-  }
-  if (*g_popupState == 0) {
-    temp_v0 = saveSlotFindSelected();
-    if (temp_v0 == 0) {
-      return 0;
+    char name[0x48];
+    FUN_00152f44();
+    if (playerHasFlagBit(5) != 0 || playerHasFlagBit(9) != 0) {
+        if (g_gameState.statusTimer != 0) {
+            g_gameState.statusTimer = g_gameState.statusTimer + 1;
+            if (g_gameState.statusTimer > 10)
+                g_gameState.statusTimer = 0;
+        }
     }
-    temp_v1 = gameFlagIsSet(0x1a2);
-    if ((((temp_v1 == 0) || (temp_v1 = randRange(99), temp_v1 + 1 >= 0x33)) &&
-        ((temp_v1 = playerHasFlagBit(5), temp_v1 != 0 || (temp_v1 = playerHasFlagBit(9), temp_v1 != 0)))) &&
-       ((*(int *)((unsigned char *)&g_gameState + 0x390)) == 0)) {
-      (*(int *)((unsigned char *)&g_gameState + 0x390)) = 1;
-      temp_v2 = dataTableGet(0x43,0);
-      dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      temp_v5 = 0;
-      if ((int)temp_v5 < temp_v1) {
-        do {
-          temp_v2 = dataTableGet(0x43,0);
-          temp_v3 = dataTableGetEntries();
-          temp_v4 = dataTableGetCount(temp_v2);
-          if (temp_v5 >= temp_v4) {
-            puVar8 = (unsigned int *)0x0;
-          }
-          else {
-            puVar8 = (unsigned int *)(temp_v3 + temp_v5 * 0x20);
-          }
-          if ((((puVar8[1] == 4) && (*puVar8 == (unsigned int)*(unsigned short *)(temp_v0 + 300))) &&
-              (((short)puVar8[2] == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))) &&
-             (((*(short *)((int)puVar8 + 10) == 0 || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) &&
-              (temp_v3 = randRange(99), piVar1 = g_popupState, temp_v3 + 1 <= (int)(short)puVar8[3]))
-             )) {
-            *g_popupState = 6;
-            piVar1[1] = 0;
-            piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
-            temp_v0 = FUN_002d8b58(4,*(unsigned short *)(temp_v0 + 300));
-            g_popupState[5] = temp_v0;
-            rt_memcpy(temp_v6,temp_v0,0x40);
-            temp_v0 = playerHasFlagBit(5);
-            if (temp_v0 != 0) {
-              textFormatBuffer((int)g_popupState + 0x25,temp_v6,&LAB_0020ef4c);
+    if (g_popupState->state == 0) {
+        SaveSlotView *slot = (SaveSlotView *)saveSlotFindSelected();
+        if (slot == 0)
+            return 0;
+        if ((gameFlagIsSet(0x1A2) == 0 || randRange(99) + 1 > 50) &&
+            (playerHasFlagBit(5) != 0 || playerHasFlagBit(9) != 0) && g_gameState.statusTimer == 0) {
+            g_gameState.statusTimer = 1;
+            u32 table = dataTableGet(0x43, 0);
+            dataTableGetEntries();
+            s32 count = dataTableGetCount(table);
+            for (u32 i = 0; (s32)i < count; i++) {
+                u32 recordTable = dataTableGet(0x43, 0);
+                StatusEventRecord *records = dataTableGetEntries();
+                StatusEventRecord *record = i < dataTableGetCount(recordTable) ? records + i : 0;
+                if (record->type != 4 || record->id != slot->statusId)
+                    continue;
+                if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0)
+                    continue;
+                if (record->forbiddenFlag != 0 && gameFlagIsSet(record->forbiddenFlag) != 0)
+                    continue;
+                if (randRange(99) + 1 > record->chance)
+                    continue;
+                g_popupState->state = 6;
+                g_popupState->phase = 0;
+                g_popupState->value = slot->statusId;
+                g_popupState->content = FUN_002d8b58(4, slot->statusId);
+                rt_memcpy(name, g_popupState->content, 0x40);
+                if (playerHasFlagBit(5) != 0)
+                    textFormatBuffer(g_popupState->text, name, "\x82\x6f\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
+                else if (playerHasFlagBit(9) != 0)
+                    textFormatBuffer(g_popupState->text, name, "\x82\x72\x82\x89\x82\x83\x82\x8b");
+                g_popupState->content = g_popupState->text;
+                return 1;
             }
-            else {
-              temp_v0 = playerHasFlagBit(9);
-              if (temp_v0 != 0) {
-                textFormatBuffer((int)g_popupState + 0x25,temp_v6,&LAB_0020ef5c);
-              }
-            }
-            g_popupState[5] = (int)g_popupState + 0x25;
-            return 1;
-          }
-          temp_v5 = temp_v5 + 1;
-        } while ((int)temp_v5 < temp_v1);
-      }
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,124 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156994` (_code @ 0x156994, 0x258 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tail-duplicates the whole animation/matrix block into both arms of the unk1B0 test (150 rows, r6/r7/r8/r9 saved); built keeps one copy */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
+struct MatrixSlot {
+    /* 0x00 */ u8 unk00[0x30];
+};
+
+struct AnimTrackInfo {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ s16 kind;
+};
+
+struct AnimTrackState {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ f32 time;
+    /* 0x08 */ u32 unk08;
+};
+
+struct AnimBinding {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ AnimTrackInfo **tracks;
+    /* 0x10 */ u32 trackCount;
+};
+
+struct ModelInstance {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ u32 flags;
+    /* 0x008 */ u8 unk008[0x14];
+    /* 0x01C */ s32 currentSlot;
+    /* 0x020 */ u8 unk020[0x10];
+    /* 0x030 */ AnimBinding *slots[1]; /* stride 0x30 */
+    /* 0x034 */ u8 unk034[0x50];
+    /* 0x084 */ AnimTrackState materialTrack;
+    /* 0x090 */ AnimBinding *materialAnim;
+    /* 0x094 */ u8 unk094[4];
+    /* 0x098 */ u8 materialBindings[0x10];
+    /* 0x0A8 */ u8 materialTrackKind[0xC];
+    /* 0x0B4 */ AnimTrackState uvTrack;
+    /* 0x0C0 */ AnimBinding *uvAnim;
+    /* 0x0C4 */ u8 unk0C4[4];
+    /* 0x0C8 */ u8 uvBindings[0x1C];
+    /* 0x0E4 */ u8 unk0E4[0x28];
+    /* 0x10C */ u8 materialStates[8];
+    /* 0x114 */ u8 uvStates[0xC];
+    /* 0x120 */ u8 normalMatrix[0x30];
+    /* 0x150 */ u8 worldMatrix[0x30];
+    /* 0x180 */ u8 normalWorld[0x30];
+    /* 0x1B0 */ u32 unk1B0;
+    /* 0x1B4 */ u8 unk1B4[0x4C];
+    /* 0x200 */ u8 unk200;
+    /* 0x201 */ u8 unk201[0x5B];
+    /* 0x25C */ s32 unk25C;
+};
+
 extern "C" {
+void FUN_0016a130(void *object);
+void FUN_0016a220(ModelInstance *model, f32 dt);
+void FUN_0017352c(void *flags, void *outMatrix, void *scratch);
+void FUN_001782c8(AnimBinding *anim, void *states, void *bindings, f32 time);
+void FUN_0017efa4(void *flags, void *out, s32 mode);
+void FUN_0017f87c(AnimBinding *anim, void *states, void *bindings, void *trackKind, f32 time);
+void trackAdvance(AnimTrackState *track, f32 dt);
+void FUN_001881c8(void);
+void FUN_00199f84(void *dest, void *source);
+void nn_math_ARMv6_MTX34CopyAsm(void *dest, const void *source);
+void nn_math_ARMv6_MTX34InvTransposeAsm(void *dest, const void *source);
+void nn_math_ARMv6_MTX34MultAsm(void *dest, const void *first, const void *second);
 
-int FUN_0016a130(int);
-int FUN_0016a220(int);
-int FUN_0017352c(...);
-int FUN_001782c8(int, int, int);
-int FUN_0017efa4(int, int, int);
-int FUN_0017f87c(int, int, int, int);
-int trackAdvance(int);
-int FUN_001881c8(void);
-int FUN_00199f84(...);
-int nn_math_ARMv6_MTX34CopyAsm(...);
-int nn_math_ARMv6_MTX34InvTransposeAsm(int, int);
-int nn_math_ARMv6_MTX34MultAsm(int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0016a130. */
-/* Supplied declaration required: FUN_0016a220. */
-/* Supplied declaration required: FUN_0017352c. */
-/* Supplied declaration required: FUN_001782c8. */
-/* Supplied declaration required: FUN_0017efa4. */
-/* Supplied declaration required: FUN_0017f87c. */
-/* Supplied declaration required: trackAdvance. */
-/* Supplied declaration required: FUN_001881c8. */
-/* Supplied declaration required: FUN_00199f84. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
-
-
-void FUN_00156994(int param_1,unsigned int param_2)
-
+/* Advances the material and UV animations of a model and rebuilds its world and normal matrices. */
+void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
 {
-/* irregular: 13 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3 [60];
-  
-  if ((*(unsigned int *)(param_1 + 4) & 2) == 0) {
-    FUN_0016a130(param_1);
-    if (*(int *)(param_1 + 0x1b0) != 0) {
-      temp_v2 = *(int *)(param_1 + 0x90);
-      if (temp_v2 != 0) {
-        temp_v1 = 0;
-        temp_v0 = 0;
-        if (temp_v0 < *(unsigned int *)(temp_v2 + 0x10)) {
-          do {
-            if (*(short *)(*(int *)(*(int *)(temp_v2 + 0xc) + temp_v0 * 4) + 6) == 6) {
-              temp_v1 = param_1 + 0xa8;
-              break;
+    u8 scratch[0x3C];
+
+    if (model->flags & 2)
+        return;
+
+    FUN_0016a130(model);
+    if (model->unk1B0 == 0)
+        FUN_0016a220(model, dt);
+
+    AnimBinding *anim = model->materialAnim;
+    if (anim != NULL) {
+        void *trackKind = NULL;
+        for (u32 i = 0; i < anim->trackCount; i++) {
+            if (anim->tracks[i]->kind == 6) {
+                trackKind = model->materialTrackKind;
+                break;
             }
-            temp_v0 = temp_v0 + 1;
-          } while (temp_v0 < *(unsigned int *)(temp_v2 + 0x10));
         }
-        FUN_0017f87c(temp_v2,param_1 + 0x10c,param_1 + 0x98,temp_v1);
-        gfxMarkMaterialAnimationCapabilities(reinterpret_cast<const MaterialFlagAnimation*>(*(unsigned int*)(param_1 + 0x90)),
-                     reinterpret_cast<MaterialFlagStateArray*>(param_1 + 0x10c),
-                     reinterpret_cast<const MaterialFlagBindingArray*>(param_1 + 0x98));
-        trackAdvance(param_1 + 0x84);
-      }
-      temp_v2 = *(int *)(param_1 + 0xc0);
+        FUN_0017f87c(anim, model->materialStates, model->materialBindings, trackKind, model->materialTrack.time);
+        gfxMarkMaterialAnimationCapabilities(
+            reinterpret_cast<const MaterialFlagAnimation *>(model->materialAnim),
+            reinterpret_cast<MaterialFlagStateArray *>(model->materialStates),
+            reinterpret_cast<const MaterialFlagBindingArray *>(model->materialBindings));
+        trackAdvance(&model->materialTrack, dt);
     }
-    else {
-      FUN_0016a220(param_1);
-      temp_v2 = *(int *)(param_1 + 0x90);
-      if (temp_v2 != 0) {
-        temp_v1 = 0;
-        temp_v0 = 0;
-        if (temp_v0 < *(unsigned int *)(temp_v2 + 0x10)) {
-          do {
-            if (*(short *)(*(int *)(*(int *)(temp_v2 + 0xc) + temp_v0 * 4) + 6) == 6) {
-              temp_v1 = param_1 + 0xa8;
-              break;
-            }
-            temp_v0 = temp_v0 + 1;
-          } while (temp_v0 < *(unsigned int *)(temp_v2 + 0x10));
-        }
-        FUN_0017f87c(temp_v2,param_1 + 0x10c,param_1 + 0x98,temp_v1);
-        gfxMarkMaterialAnimationCapabilities(reinterpret_cast<const MaterialFlagAnimation*>(*(unsigned int*)(param_1 + 0x90)),
-                     reinterpret_cast<MaterialFlagStateArray*>(param_1 + 0x10c),
-                     reinterpret_cast<const MaterialFlagBindingArray*>(param_1 + 0x98));
-        trackAdvance(param_1 + 0x84);
-      }
-      temp_v2 = *(int *)(param_1 + 0xc0);
+    if (model->uvAnim != NULL) {
+        FUN_001782c8(model->uvAnim, model->uvStates, model->uvBindings, model->uvTrack.time);
+        trackAdvance(&model->uvTrack, dt);
     }
-    if (temp_v2 != 0) {
-      FUN_001782c8(temp_v2,param_1 + 0x114,param_1 + 200);
-      trackAdvance(param_1 + 0xb4);
+
+    AnimBinding *slot = *(AnimBinding **)((u8 *)model + model->currentSlot * 0x30 + 0x30);
+    if (slot == NULL || (*slot->tracks)->kind != 9) {
+        FUN_0017efa4(model->unk0E4, model->normalMatrix, 0);
+        model->unk200 = 0;
+        nn_math_ARMv6_MTX34InvTransposeAsm(model->normalWorld, model->normalMatrix);
+        nn_math_ARMv6_MTX34MultAsm(model->normalWorld, model->worldMatrix, model->normalWorld);
+    } else {
+        model->unk200 = 1;
+        nn_math_ARMv6_MTX34CopyAsm(model->normalWorld, model->worldMatrix);
     }
-    temp_v2 = *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 0x30 + 0x30);
-    if ((temp_v2 == 0) || (*(short *)(**(int **)(temp_v2 + 0xc) + 6) != 9)) {
-      FUN_0017efa4(param_1 + 0xe4,param_1 + 0x120,0);
-      *(unsigned char *)(param_1 + 0x200) = 0;
-      nn_math_ARMv6_MTX34InvTransposeAsm(param_1 + 0x180,param_1 + 0x120);
-      nn_math_ARMv6_MTX34MultAsm(param_1 + 0x180,param_1 + 0x150,param_1 + 0x180);
-    }
-    else {
-      *(unsigned char *)(param_1 + 0x200) = 1;
-      nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x180,param_1 + 0x150);
-    }
-    FUN_00199f84(temp_v3,param_2);
-    if ((*(unsigned char *)(param_1 + 0xe4) & 1) != 0) {
-      FUN_0017352c(param_1 + 0xe4,param_2,temp_v3);
-    }
-    nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x150,param_2);
-    if (*(int *)(param_1 + 0x25c) != 0) {
-      FUN_001881c8();
-      return;
-    }
-  }
-  return;
+    FUN_00199f84(scratch, outMatrix);
+    if (model->unk0E4[0] & 1)
+        FUN_0017352c(model->unk0E4, outMatrix, scratch);
+    nn_math_ARMv6_MTX34CopyAsm(model->worldMatrix, outMatrix);
+    if (model->unk25C != 0)
+        FUN_001881c8();
 }
 
 } /* extern "C" */

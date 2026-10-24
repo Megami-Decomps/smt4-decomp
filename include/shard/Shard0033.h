@@ -41,6 +41,10 @@ typedef struct ObjB {
             /* 0x4A4 */ UiSpriteState headers[3];
         } spriteHeaders;
         struct {
+            u8 prefix[0x114];
+            /* 0x418 */ UiSpriteState status[7]; /* the status panel's sprites; the last is followed by primary[] */
+        } statusSprites;
+        struct {
             u8 prefix[0x4E8];
             /* 0x7EC */ UiSpriteState primary[10];
             /* 0xD64 */ UiSpriteState secondary[10];
@@ -111,7 +115,8 @@ typedef struct ObjB {
         } sessionEligibility;
     };
     /* 0x2034 */ u32 unk2034;
-    /* 0x2038 */ u8 unk2038[0x1C];
+    /* 0x2038 */ f32 statusModelPosition[3];
+    /* 0x2044 */ u8 unk2044[0x10];
     /* 0x2054 */ s32 statusCameraHeightOffset;
     /* 0x2058 */ u8 statusCameraHeightMode;
     /* 0x2059 */ u8 unk2059[0x3];
@@ -129,7 +134,9 @@ typedef struct ObjB {
     /* 0x20D1 */ u8 unk20D1;
     /* 0x20D2 */ u8 unk20D2[0x2];
     /* 0x20D4 */ u8 block20D4[4];
-    /* 0x20D8 */ u8 unk20D8[0x18];
+    /* 0x20D8 */ u8 unk20D8[0xE];
+    /* 0x20E6 */ u8 unk20E6;
+    /* 0x20E7 */ u8 unk20E7[9];
     /* 0x20F0 */ s8 unk20F0;
 } ObjB;
 
@@ -138,6 +145,8 @@ typedef char ObjBSessionOffsetsCheck[sizeof(ObjB) == 0x20F4 &&
     offsetof(ObjB, sessionDisplay.active) == 0x2010 &&
     offsetof(ObjB, sessionEligibility.allowed) == 0x2032 ? 1 : -1];
 typedef char ObjBMenuSpriteOffsetsCheck[
+    offsetof(ObjB, statusSprites.status) == 0x418 && offsetof(ObjB, statusModelPosition) == 0x2038 &&
+    offsetof(ObjB, unk20E6) == 0x20E6 &&
     offsetof(ObjB, menuReset.first) == 0x18 &&
     offsetof(ObjB, menuReset.second) == 0x1C &&
     offsetof(ObjB, menuReset.active) == 0x20 &&
@@ -148,7 +157,8 @@ typedef char ObjBMenuSpriteOffsetsCheck[
 typedef struct ObjBRef {
     /* 0x00 */ u8 unk00;
     /* 0x01 */ s8 spriteTableUsers;
-    /* 0x02 */ u8 unk02[2];
+    /* 0x02 */ u8 ownsStatusModel;
+    /* 0x03 */ u8 unk03;
     /* 0x04 */ ObjB *instance;
 } ObjBRef;
 
@@ -279,6 +289,6 @@ typedef struct InfoHolder {
 
 typedef char GameSessionLayoutCheck[sizeof(ObjB) == 0x20F4 && sizeof(ObjBRef) == 8 ? 1 : -1];
 
-typedef char GameSessionOffsets[offsetof(ObjB, activeState) == 0x1368 && offsetof(ObjB, snapshotSlot) == 0x19D0 && offsetof(ObjB, statusCameraHeightOffset) == 0x2054 && offsetof(ObjB, statusCameraHeightMode) == 0x2058 && offsetof(ObjBRef, spriteTableUsers) == 1 && offsetof(ObjBRef, instance) == 4 ? 1 : -1];
+typedef char GameSessionOffsets[offsetof(ObjB, activeState) == 0x1368 && offsetof(ObjB, snapshotSlot) == 0x19D0 && offsetof(ObjB, statusCameraHeightOffset) == 0x2054 && offsetof(ObjB, statusCameraHeightMode) == 0x2058 && offsetof(ObjBRef, spriteTableUsers) == 1 && offsetof(ObjBRef, ownsStatusModel) == 2 && offsetof(ObjBRef, instance) == 4 ? 1 : -1];
 
 #endif

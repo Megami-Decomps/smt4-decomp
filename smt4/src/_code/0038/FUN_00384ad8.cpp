@@ -1,4 +1,3 @@
-/* NON_MATCHING: in the push, retail reuses r3 for the new top's address after loading the old top; armcc computes it into ip beforehand. */
 #include "camp/RenderCtx.h"
 
 extern "C" {

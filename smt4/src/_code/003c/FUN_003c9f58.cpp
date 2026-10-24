@@ -1,166 +1,178 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c9f58` (_code @ 0x3c9f58, 0x3c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps 0/1 results in r6 with one shared return, reloads the battle block per access and orders the switch's per-case stores differently; the logic and calls are the same. */
+#include "common.h"
+
+namespace {
+/* The battle state block: its flags and the index of the acting unit. */
+struct BattleBlock {
+    /* 0x0000 */ u8 unk0000[0x84];
+    /* 0x0084 */ s32 actorIndex;
+    /* 0x0088 */ u8 unk0088[0x4418];
+    /* 0x44a0 */ u32 flags;               /* 0x40, 0x100: a command window is open; 0x8000: reflect effect running */
+};
+
+/* The battle unit table entry (0xf1c bytes each): only the current action kind is written. */
+struct BattleUnit {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 actionKind;
+    /* 0x0a */ u8 unk0a[0xf1c - 0xa];
+};
+
+/* The choice the player made in the command menu. */
+struct CommandSelection {
+    /* 0x000 */ u8 unk000[0x14c];
+    /* 0x14c */ s16 kind;
+    /* 0x14e */ s16 value;
+};
+
+/* The command controller's state. */
+struct CommandState {
+    /* 0x000 */ u32 flags;                /* 0x80: first window done, 0x1000: second window done */
+    /* 0x004 */ u8 unk004[0x1c];
+    /* 0x020 */ u32 *environment;         /* bit 1: the actor can use items */
+    /* 0x024 */ u8 unk024[4];
+    /* 0x028 */ CommandSelection *selection;
+    /* 0x02c */ u16 windowId;
+    /* 0x02e */ u8 unk02e[0x572];
+    /* 0x5a0 */ s32 itemSlot;
+};
+
+struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 linkedSkill;
+};
+}
 
 extern "C" {
+extern BattleUnit *g_btlScriptUnit;
+extern u32 g_btlActionReflect;
+extern u32 g_btlUiBlock;
+s32 nodeListCountActiveById(u32 id, u32 arg);
+void FUN_003adc20(u32 block);
+s32 battleUiIsFadeAndFieldReady(u32 block);
+void btlUiAdvanceFadeInTransition(u32 block);
+void FUN_00229c5c(u32 block, u32 window, s32 arg);
+s32 btlUiAcceptSelection(u32 block);
+void btlUiGetAcceptedSelection(u32 block, s16 *kind, s16 *value);
+s32 FUN_0023dcb8(void);
+void *dataTable40FindById(s32 id);
+SkillRecord *dataTable08Sub1GetRecord(s32 id);
+s32 FUN_002cf124(void *record);
+void battleSetActionKind(BattleBlock **block);
+void FUN_00229b10(BattleBlock **block, CommandState *state);
 
-int battleSetActionKind(int *);
-int FUN_00229b10(int *, unsigned int *);
-int FUN_00229c5c(unsigned int, int, int);
-int dataTable40FindById(...);
-int dataTable08Sub1GetRecord(void);
-int FUN_003adc20(unsigned int);
-int btlUiGetAcceptedSelection(unsigned int, unsigned int, unsigned int);
-int btlUiAdvanceFadeInTransition(unsigned int);
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int g_btlActionReflect; /* 0x434290 */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: battleSetActionKind. */
-/* Supplied declaration required: FUN_00229b10. */
-/* Supplied declaration required: FUN_00229c5c. */
-extern int FUN_0023dcb8(void);
-extern int battleUiIsFadeAndFieldReady(unsigned int);
-extern int nodeListCountActiveById(unsigned int, unsigned int);
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-extern int FUN_002cf124(void);
-/* Supplied declaration required: FUN_003adc20. */
-/* Supplied declaration required: btlUiGetAcceptedSelection. */
-extern int btlUiAcceptSelection(unsigned int);
-/* Supplied declaration required: btlUiAdvanceFadeInTransition. */
-
-
-unsigned int FUN_003c9f58(int *param_1,unsigned int *param_2)
-
+/* Sets the acting unit's action kind. */
+static __inline void setActorAction(BattleBlock **block, u8 kind)
 {
-/* irregular: 1 goto(s); 8 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x8000) != 0) {
-    temp_v1 = nodeListCountActiveById(g_btlActionReflect,0);
-    if (0 < temp_v1) {
-      return 0;
+    g_btlScriptUnit[(*block)->actorIndex].actionKind = kind;
+}
+
+/* Steps the command menu: opens the windows as the fade allows, takes the player's choice and sets the actor's
+   action kind from it. Returns 1 once a choice has been handled, 0 while waiting. */
+u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
+{
+    BattleBlock *battle = *block;
+    if ((battle->flags & 0x8000) != 0) {
+        if (nodeListCountActiveById(g_btlActionReflect, 0) > 0) {
+            return 0;
+        }
+        (*block)->flags = (*block)->flags & 0xffff7fff;
+        FUN_003adc20(g_btlUiBlock);
     }
-    *(unsigned int *)(*param_1 + 0x44a0) = *(unsigned int *)(*param_1 + 0x44a0) & 0xffff7fff;
-    FUN_003adc20(g_btlUiBlock);
-  }
-  temp_v1 = battleUiIsFadeAndFieldReady(g_btlUiBlock);
-  if (temp_v1 != 0) {
-    if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
-      if ((*param_2 & 0x80) == 0) {
-        *param_2 = *param_2 | 0x80;
-        btlUiAdvanceFadeInTransition(g_btlUiBlock);
-        FUN_00229c5c(g_btlUiBlock,(short)param_2[0xb],1);
-      }
+    if (battleUiIsFadeAndFieldReady(g_btlUiBlock) != 0) {
+        if (((*block)->flags & 0x40) != 0) {
+            if ((state->flags & 0x80) == 0) {
+                state->flags = state->flags | 0x80;
+                btlUiAdvanceFadeInTransition(g_btlUiBlock);
+                FUN_00229c5c(g_btlUiBlock, state->windowId, 1);
+            }
+        } else if (((*block)->flags & 0x100) != 0 && (state->flags & 0x1000) == 0) {
+            state->flags = state->flags | 0x1000;
+            btlUiAdvanceFadeInTransition(g_btlUiBlock);
+            FUN_00229c5c(g_btlUiBlock, state->windowId, 1);
+        }
     }
-    else if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) != 0) && ((*param_2 & 0x1000) == 0)) {
-      *param_2 = *param_2 | 0x1000;
-      btlUiAdvanceFadeInTransition(g_btlUiBlock);
-      FUN_00229c5c(g_btlUiBlock,(short)param_2[0xb],1);
+    if (btlUiAcceptSelection(g_btlUiBlock) == 0) {
+        return 0;
     }
-  }
-  temp_v1 = btlUiAcceptSelection(g_btlUiBlock);
-  if (temp_v1 == 0) {
-    return 0;
-  }
-  btlUiGetAcceptedSelection(g_btlUiBlock,param_2[10] + 0x14c,param_2[10] + 0x14e);
-  if ((*param_2 & 0x80) != 0) {
-    if ((*(unsigned int *)param_2[8] & 2) != 0) {
-      temp_v1 = FUN_0023dcb8();
-joined_r0x003ca0e4:
-      if (temp_v1 != 0) {
-        *(unsigned short *)(param_2[10] + 0x14c) = 6;
-        *(unsigned short *)(param_2[10] + 0x14e) = 0;
-      }
-      else {
-        *(unsigned short *)(param_2[10] + 0x14c) = 1;
-        *(unsigned short *)(param_2[10] + 0x14e) = 1;
-      }
+    CommandSelection *selection = state->selection;
+    btlUiGetAcceptedSelection(g_btlUiBlock, &selection->kind, &selection->value);
+    if ((state->flags & 0x80) != 0) {
+        if ((*state->environment & 2) != 0) {
+            if (FUN_0023dcb8() != 0) {
+                state->selection->kind = 6;
+                state->selection->value = 0;
+            } else {
+                state->selection->kind = 1;
+                state->selection->value = 1;
+            }
+        } else {
+            state->selection->kind = 1;
+            state->selection->value = 1;
+        }
+    } else if ((state->flags & 0x1000) != 0) {
+        if ((*state->environment & 2) != 0) {
+            if (FUN_0023dcb8() != 0) {
+                state->selection->kind = 6;
+                state->selection->value = 0;
+            } else {
+                state->selection->kind = 1;
+                state->selection->value = 1;
+            }
+        } else {
+            state->selection->kind = 1;
+            state->selection->value = 1;
+        }
     }
-    else {
-      *(unsigned short *)(param_2[10] + 0x14c) = 1;
-      *(unsigned short *)(param_2[10] + 0x14e) = 1;
+    switch (state->selection->kind) {
+    default:
+        return 1;
+    case 1:
+        setActorAction(block, 5);
+        return 1;
+    case 2:
+    case 3:
+        if (FUN_002cf124(dataTable40FindById(state->selection->value)) == 0) {
+            setActorAction(block, 7);
+        } else {
+            setActorAction(block, 5);
+        }
+        return 1;
+    case 4:
+    case 0xb:
+        battleSetActionKind(block);
+        return 1;
+    case 6:
+    case 0xf:
+        FUN_00229b10(block, state);
+        return 1;
+    case 7:
+        state->itemSlot = state->selection->value;
+        if (state->selection->value != 7) {
+            setActorAction(block, 5);
+        } else {
+            setActorAction(block, 0xb);
+        }
+        return 1;
+    case 8: {
+        SkillRecord *record = dataTable08Sub1GetRecord(state->selection->value);
+        if (record->linkedSkill != 0) {
+            if (FUN_002cf124(dataTable40FindById(record->linkedSkill)) != 0) {
+                setActorAction(block, 5);
+                return 1;
+            }
+        }
+        setActorAction(block, 7);
+        return 1;
     }
-  }
-  else if ((*param_2 & 0x1000) != 0) {
-    if ((*(unsigned int *)param_2[8] & 2) != 0) {
-      temp_v1 = FUN_0023dcb8();
-      goto joined_r0x003ca0e4;
+    case 9:
+    case 10:
+    case 0xd:
+        setActorAction(block, 7);
+        return 1;
+    case 0xe:
+        setActorAction(block, 5);
+        return 1;
     }
-    *(unsigned short *)(param_2[10] + 0x14c) = 1;
-    *(unsigned short *)(param_2[10] + 0x14e) = 1;
-  }
-  switch(*(unsigned short *)(param_2[10] + 0x14c)) {
-  default:
-    return 1;
-  case 1:
-    temp_v2 = 5;
-    temp_v1 = *(int *)(*param_1 + 0x84);
-    temp_v1 = g_btlScriptUnit + temp_v1 * 0xf1c;
-    break;
-  case 2:
-  case 3:
-    dataTable40FindById((int)*(short *)(param_2[10] + 0x14e));
-    temp_v1 = FUN_002cf124();
-    if (temp_v1 == 0) {
-      temp_v2 = 7;
-      temp_v1 = *(int *)(*param_1 + 0x84);
-      temp_v1 = g_btlScriptUnit + temp_v1 * 0xf1c;
-      break;
-    }
-    temp_v2 = 5;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 4:
-  case 0xb:
-    battleSetActionKind(param_1);
-    return 1;
-  case 6:
-  case 0xf:
-    FUN_00229b10(param_1,param_2);
-    return 1;
-  case 7:
-    temp_v0 = *(short *)(param_2[10] + 0x14e);
-    param_2[0x168] = (int)temp_v0;
-    if ((int)temp_v0 != 7) {
-      temp_v2 = 5;
-      temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-      break;
-    }
-    temp_v2 = 0xb;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 8:
-    temp_v1 = (int)*(short *)(param_2[10] + 0x14e);
-    dataTable08Sub1GetRecord();
-    if (*(short *)(temp_v1 + 0x62) != 0) {
-      dataTable40FindById();
-      temp_v1 = FUN_002cf124();
-      if (temp_v1 != 0) {
-        temp_v2 = 5;
-        temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-        break;
-      }
-    }
-    temp_v2 = 7;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 9:
-  case 10:
-  case 0xd:
-    temp_v2 = 7;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 0xe:
-    temp_v2 = 5;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-  }
-  *(unsigned char *)(temp_v1 + 9) = temp_v2;
-  return 1;
 }
 
 } /* extern "C" */

@@ -1,155 +1,126 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00227334` (_code @ 0x227334, 0x2cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the prologue differs: retail loads g_btlUi and the work pointer before materialising the constants 1, 40 and 0 and loads the stack arguments after them, this build hoists the constants first. */
+#include "common.h"
+
+/* The battle command window's state, reached through g_btlUi. */
+struct BtlCommandWindowWork {
+    /* 0x0000 */ u8 unk0000[0x5678];
+    /* 0x5678 */ u8 supportSelection[0x7360];
+    /* 0xC9D8 */ u8 active;
+    /* 0xC9D9 */ u8 unkC9D9[3];
+    /* 0xC9DC */ s32 unkC9DC;
+    /* 0xC9E0 */ s32 unkC9E0;
+    /* 0xC9E4 */ u32 kind;
+    /* 0xC9E8 */ u16 value;
+};
+
+struct BtlUi {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ BtlCommandWindowWork *work;
+};
+
+/* A support unit's table entry; its type sits in bits 17-21 of the flag word at 8. */
+struct SupportUnitEntry {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 low : 17;
+    /* 0x08 */ u32 type : 5;
+    /* 0x08 */ u32 high : 10;
+};
+
+struct DevilRecord {
+    /* 0x00 */ u8 unk00[10];
+    /* 0x0A */ u8 type;
+};
 
 extern "C" {
+extern BtlUi g_btlUi;
 
-int FUN_002009c4(int);
-int FUN_00211868(int, int);
-int devilGetCategoryTableId(int);
-int mapGetSelectedRecordCategoryTable(void);
-int playerGetMappedCategory(void);
-int communicationBeginTransition(int);
-int communicationSetResultPointer(void);
-void comWinSetText(const unsigned char* text);
-int devilGetRecord(void);
-int textFormatBuffer(...);
-int FUN_002be650(unsigned int, int);
-int FUN_002cd750(int);
-int gameGetSelectedSupportUnitTableId(void);
+s32 FUN_0029efc0(const u8 *object);
+s32 FUN_0029efa8(const u8 *object);
+s32 gameGetSupportUnitData(void);
+SupportUnitEntry *supportUnitGetEntry(s32 kind, u32 index);
+DevilRecord *devilGetRecord(s32 id);
+s32 devilGetCategoryTableId(s32 devilId);
+s32 mapGetSelectedRecordCategoryTable();
+u32 playerGetMappedCategory();
+u32 gameGetSelectedSupportUnitTableId(void);
+s32 textFormatBuffer(char *output, const char *format, ...);
+u32 aocIndexValueOrDefault(u32 index);
+void FUN_00211868(s16 value, u8 flag);
+u32 FUN_002be650(u32 value, s32 mode);
+void FUN_002009c4(s16 value);
+void FUN_002cd750(s16 value);
+void communicationSetResultPointer(void);
+void communicationBeginTransition(s32 mode);
+void comWinSetText(const u8 *text);
 
-/* stack frame of param_6: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp68; /* 0x68: local_68 */
-} param_6_stack;
-
-extern unsigned char LAB_00227608; /* 0x227608 */
-extern unsigned char LAB_00227610; /* 0x227610 */
-extern unsigned char LAB_00227618; /* 0x227618 */
-extern unsigned char LAB_0022761c; /* 0x22761c */
-extern unsigned char LAB_00227624; /* 0x227624 */
-extern unsigned char LAB_0022762c; /* 0x22762c */
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_002009c4. */
-/* Supplied declaration required: FUN_00211868. */
-/* Supplied declaration required: devilGetCategoryTableId. */
-/* Supplied declaration required: mapGetSelectedRecordCategoryTable. */
-/* Supplied declaration required: playerGetMappedCategory. */
-/* Supplied declaration required: communicationBeginTransition. */
-/* Supplied declaration required: communicationSetResultPointer. */
-extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
-extern int supportUnitGetEntry(int, unsigned short);
-extern int gameGetSupportUnitData(void);
-/* Supplied declaration required: devilGetRecord. */
-extern unsigned int aocIndexValueOrDefault(unsigned short);
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002be650. */
-/* Supplied declaration required: FUN_002cd750. */
-/* Supplied declaration required: gameGetSelectedSupportUnitTableId. */
-
-
-void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int param_4,int param_5,
-                 int param_6)
-
+/* Opens the battle command window for command `kind`, formatting its label text. */
+void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s32 isSummon)
 {
-/* irregular: 13 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  short temp_v5;
-  unsigned char temp_v6 [68];
-  
-  temp_v2 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
-  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0xc9e4);
-  *(unsigned char *)((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0xc9d8) = 1;
-  *puVar2 = param_2;
-  *(short *)(temp_v2 + 0xc9e8) = (short)param_3;
-  *(unsigned int *)(temp_v2 + 0xc9dc) = 0x28;
-  *(unsigned int *)(temp_v2 + 0xc9e0) = 0;
-  temp_v6[0] = 0;
-  temp_v5 = 0;
-  switch(*puVar2) {
-  case 1:
-    if (param_4 != 0) {
-      temp_v1 = FUN_0029efc0(temp_v2 + 0x5678);
-      temp_v2 = FUN_0029efa8(temp_v2 + 0x5678);
-      if (temp_v2 + temp_v1 != 0) {
-        if (temp_v2 + temp_v1 == 1) {
-          temp_v5 = (short)(int)temp_v6;
-          textFormatBuffer(temp_v6,&LAB_00227610);
-          mapGetSelectedRecordCategoryTable();
+    BtlCommandWindowWork *work = g_btlUi.work;
+    work->active = 1;
+    work->kind = kind;
+    work->value = value;
+    work->unkC9DC = 0x28;
+    work->unkC9E0 = 0;
+    char label[0x44];
+    label[0] = 0;
+    s32 tableId = 0;
+    switch (work->kind) {
+    case 1:
+        if (isSupport != 0) {
+            u8 *selection = work->supportSelection;
+            s32 count = FUN_0029efc0(selection) + FUN_0029efa8(selection);
+            if (count == 0) {
+                textFormatBuffer(label, "Attack");
+                tableId = playerGetMappedCategory();
+            } else if (count == 1) {
+                textFormatBuffer(label, "Shoot");
+                tableId = mapGetSelectedRecordCategoryTable();
+            }
+        } else if (isSummon != 0) {
+            u16 index = *(u16 *)(gameGetSupportUnitData() + 0x606);
+            SupportUnitEntry *entry = supportUnitGetEntry(*(s16 *)(gameGetSupportUnitData() + 0x604), index);
+            if (entry->type != 1) {
+                textFormatBuffer(label, "Attack");
+            } else {
+                textFormatBuffer(label, "Shoot");
+            }
+            tableId = gameGetSelectedSupportUnitTableId();
+        } else {
+            if (devilGetRecord(devilId)->type != 1) {
+                textFormatBuffer(label, "Attack");
+            } else {
+                textFormatBuffer(label, "Shoot");
+            }
+            tableId = devilGetCategoryTableId(devilId);
         }
-      }
-      else {
-        temp_v5 = (short)(int)temp_v6;
-        textFormatBuffer(temp_v6,&LAB_00227608);
-        playerGetMappedCategory();
-      }
+        FUN_002cd750(tableId);
+        break;
+    case 2:
+    case 3:
+        textFormatBuffer(label, "%s", aocIndexValueOrDefault(work->value));
+        FUN_00211868(work->value, isSupport != 0);
+        break;
+    case 8:
+        textFormatBuffer(label, "%s", FUN_002be650(work->value, 0));
+        FUN_002009c4(work->value);
+        break;
+    case 9:
+    case 10:
+    case 12:
+        if (value == 0) {
+            textFormatBuffer(label, "Summon");
+        } else {
+            textFormatBuffer(label, "Return");
+        }
+        communicationSetResultPointer();
+        break;
+    case 11:
+        textFormatBuffer(label, "Run");
+        communicationSetResultPointer();
+        break;
     }
-    else if (param_6 != 0) {
-      temp_v2 = gameGetSupportUnitData();
-      temp_v0 = *(unsigned short *)(temp_v2 + 0x606);
-      temp_v2 = gameGetSupportUnitData();
-      temp_v2 = supportUnitGetEntry((int)*(short *)(temp_v2 + 0x604),temp_v0);
-      if ((*(unsigned int *)(temp_v2 + 8) & 0x3fffff) >> 0x11 != 1) {
-        temp_v5 = (short)(int)temp_v6;
-        textFormatBuffer(temp_v6,&LAB_00227608);
-      }
-      else {
-        temp_v5 = (short)(int)temp_v6;
-        textFormatBuffer(temp_v6,&LAB_00227610);
-      }
-      gameGetSelectedSupportUnitTableId();
-    }
-    else {
-      temp_v2 = param_5;
-      devilGetRecord();
-      if (*(char *)(temp_v2 + 10) != '\x01') {
-        textFormatBuffer(temp_v6,&LAB_00227608);
-      }
-      else {
-        textFormatBuffer(temp_v6,&LAB_00227610);
-      }
-      devilGetCategoryTableId(param_5);
-      temp_v5 = (short)param_5;
-    }
-    FUN_002cd750((int)temp_v5);
-    break;
-  case 2:
-  case 3:
-    temp_v3 = aocIndexValueOrDefault(*(unsigned short *)(temp_v2 + 0xc9e8));
-    textFormatBuffer(temp_v6,&LAB_00227618,temp_v3);
-    FUN_00211868((int)*(short *)(temp_v2 + 0xc9e8),param_4 != 0);
-    break;
-  case 8:
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc9e8);
-    FUN_002be650(temp_v4,0);
-    textFormatBuffer(temp_v6,&LAB_00227618,temp_v4);
-    FUN_002009c4((int)*(short *)(temp_v2 + 0xc9e8));
-    break;
-  case 9:
-  case 10:
-  case 0xc:
-    if (param_3 != 0) {
-      textFormatBuffer(temp_v6,&LAB_0022761c);
-    }
-    else {
-      textFormatBuffer(temp_v6,&LAB_00227624);
-    }
-    communicationSetResultPointer();
-    break;
-  case 0xb:
-    textFormatBuffer(temp_v6,&LAB_0022762c);
-    communicationSetResultPointer();
-  }
-  comWinSetText(temp_v6);
-  communicationBeginTransition(0);
-  return;
+    comWinSetText((const u8 *)label);
+    communicationBeginTransition(0);
 }
-
-} /* extern "C" */
+}

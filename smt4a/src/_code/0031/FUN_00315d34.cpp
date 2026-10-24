@@ -1,198 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00315d34` (_code @ 0x315d34, 0x3b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the map interface notice (slides in, holds, slides out; frame sprites and the entry text) and the optional overlay layer; written from the decompilation, the data table scan and float argument order are not compared with retail */
+#include "camp/RenderCtx.h"
+
+#define NOTICE_STATE_IDLE 0
+#define NOTICE_STATE_SLIDE_IN 1
+#define NOTICE_STATE_HOLD 2
+#define NOTICE_STATE_SLIDE_OUT_LONG 3
+#define NOTICE_STATE_SLIDE_OUT_SHORT 4
+#define NOTICE_SLIDE_FRAMES 10
+#define NOTICE_SLIDE_SPEED 40.0f
+#define NOTICE_SLIDE_START -400.0f
+#define NOTICE_LONG_START 0x32
+#define NOTICE_LONG_END 0x3D
+#define NOTICE_SHORT_START 10
+#define NOTICE_SHORT_END 0x15
+#define NOTICE_ENTRY_NONE -1
+#define NOTICE_ENTRY_SPECIAL 0x18
+#define NOTICE_FRAME_FIRST 0x107
+#define NOTICE_FRAME_LAST 0x10A
+
+struct MapNoticeEntry {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s16 id;
+};
+
+struct NoticeFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+struct MapInterface {
+    /* 0x0000 */ u8 unk0000[0x3C];
+    /* 0x003C */ s32 overlayShown;
+    /* 0x0040 */ u32 overlayId;
+    /* 0x0044 */ u8 unk0044[0xCCA4];
+    /* 0xCCE8 */ s16 state;
+    /* 0xCCEA */ s16 frame;
+    /* 0xCCEC */ s16 entryId;
+    /* 0xCCEE */ s16 entrySub;
+};
 
 extern "C" {
+extern MapInterface *g_mapIf;
+extern RenderCtxA *g_renderCtx;
 
-int FUN_0014e314(unsigned int);
-int FUN_00157558(int);
-int FUN_00162790(int, unsigned int, unsigned char [144]);
-int FUN_0016c4b8(int, int);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_002371b0(void);
-int findKeyedRecord(int, int);
-int FUN_003849cc(int, int, int, unsigned char [144], unsigned int);
-int dataTable2ECount(...);
-int VectorSignedToFloat(int, int);
+s32 FUN_001692ac(u32 a, u32 b);
+void FUN_00157558(RenderCtxA *context);
+void FUN_0016c4b8(RenderCtxA *context, void *surface);
+void FUN_0014e314(u32 id);
+void FUN_002371b0(void);
+NoticeFrame *FUN_001834a4(u32 table, u32 index);
+void FUN_001835b4(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
+s32 dataTable2ECount(void);
+MapNoticeEntry *dataTable2EGetEntry(s32 index);
+s32 findKeyedRecord(s32 id, s32 sub);
+void FUN_003849cc(s32 id, s32 sub, s32 flag, u8 *buffer, u32 mask);
+void FUN_00162790(u32 layer, u32 mask, u8 *buffer, f32 x, f32 y);
 
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spB8; /* 0xb8: local_b8 */
-} void_stack;
-
-extern int g_mapIf; /* 0x58103c */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0014e314. */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
-extern unsigned long long FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_002371b0. */
-extern int dataTable2EGetEntry(int);
-/* Supplied declaration required: findKeyedRecord. */
-/* Supplied declaration required: FUN_003849cc. */
-/* Supplied declaration required: dataTable2ECount. */
-
-
-unsigned int FUN_00315d34(void)
-
+u32 FUN_00315d34(void)
 {
-/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  unsigned long long temp_v8;
-  long long temp_v9;
-  unsigned long long temp_v10;
-  unsigned char temp_v11 [144];
-  
-  temp_v2 = g_renderCtx;
-  temp_v8 = 0;
-  if (*(int *)(g_mapIf + 0x3c) != 0) {
-    temp_v6 = *(unsigned int *)(g_mapIf + 0x40);
-    temp_v1 = FUN_001692ac(5,1);
-    piVar7 = (int *)(temp_v2 + 0x1258);
-    temp_v3 = *piVar7;
-    temp_v4 = piVar7[temp_v3 + 2];
-    *piVar7 = temp_v3 + 1;
-    piVar7[temp_v3 + 3] = temp_v1;
-    if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v4 != temp_v1) {
-      (**(romwright_code **)(temp_v2 + 0x1274))();
-      *(unsigned char *)(temp_v2 + 0x1270) = 0;
+    MapInterface *screen = g_mapIf;
+    f32 offset = 0.0f;
+
+    if (screen->overlayShown != 0) {
+        u32 overlay = screen->overlayId;
+        RenderCtxA *context = g_renderCtx;
+        s32 state = FUN_001692ac(5, 1);
+        renderStackPush(&context->stackA, state);
+        FUN_00157558(g_renderCtx);
+        FUN_0016c4b8(g_renderCtx, NULL);
+        FUN_0014e314(overlay);
+        FUN_002371b0();
+        renderStackPop(&g_renderCtx->stackA);
     }
-    FUN_00157558(g_renderCtx);
-    FUN_0016c4b8(g_renderCtx,0);
-    FUN_0014e314(temp_v6);
-    FUN_002371b0();
-    temp_v2 = g_renderCtx;
-    piVar7 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar7;
-    temp_v3 = piVar7[temp_v1 + 2];
-    *piVar7 = temp_v1 - 1;
-    if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v3 != piVar7[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v2 + 0x1274))();
-      *(unsigned char *)(temp_v2 + 0x1270) = 0;
-    }
-  }
-  temp_v1 = g_mapIf;
-  temp_v10 = FUN_001834a4(8,0x10b);
-  temp_v2 = (int)((unsigned long long)temp_v10 >> 0x20);
-  temp_v8 = temp_v8 & 0xffffffff;
-  temp_v3 = (int)*(short *)(temp_v1 + 0xcce8);
-  switch(*(short *)(temp_v1 + 0xcce8)) {
-  case 0:
-    return 0;
-  case 1:
-    temp_v0 = *(short *)(temp_v1 + 0xccea) + 1;
-    temp_v3 = (int)temp_v0;
-    *(short *)(temp_v1 + 0xccea) = temp_v0;
-    temp_v2 = temp_v3 * 0x28;
-    temp_v7 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (unsigned long long)(unsigned int)(temp_v7 + -400.0f);
-    if (temp_v3 >= 10) {
-      temp_v3 = 2;
-      *(unsigned short *)(temp_v1 + 0xcce8) = 2;
-      *(unsigned short *)(temp_v1 + 0xccea) = 0;
-    }
-    break;
-  case 2:
-    temp_v3 = *(unsigned short *)(temp_v1 + 0xccea) + 1;
-    *(short *)(temp_v1 + 0xccea) = (short)temp_v3;
-    break;
-  case 3:
-    temp_v0 = *(short *)(temp_v1 + 0xccea) + 1;
-    temp_v3 = (int)temp_v0;
-    *(short *)(temp_v1 + 0xccea) = temp_v0;
-    if (temp_v3 >= 0x32) {
-      temp_v2 = (temp_v3 - 0x32) * 0x28;
-      temp_v7 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v8 = (unsigned long long)(unsigned int)-temp_v7;
-    }
-    if (temp_v3 >= 0x3d) {
-      *(unsigned short *)(temp_v1 + 0xcce8) = 0;
-      *(unsigned short *)(temp_v1 + 0xccea) = 0;
-      return 0;
-    }
-    break;
-  case 4:
-    temp_v0 = *(short *)(temp_v1 + 0xccea) + 1;
-    temp_v3 = (int)temp_v0;
-    *(short *)(temp_v1 + 0xccea) = temp_v0;
-    if (temp_v3 >= 10) {
-      temp_v2 = (temp_v3 - 10) * 0x28;
-      temp_v7 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v8 = (unsigned long long)(unsigned int)-temp_v7;
-    }
-    if (temp_v3 >= 0x15) {
-      *(unsigned short *)(temp_v1 + 0xcce8) = 0;
-      *(unsigned short *)(temp_v1 + 0xccea) = 0;
-      return 0;
-    }
-  }
-  temp_v4 = 0;
-  dataTable2ECount(temp_v3,temp_v2);
-  temp_v7 = (float)temp_v8;
-  if (0 < temp_v3) {
-    do {
-      temp_v2 = dataTable2EGetEntry(temp_v4);
-      temp_v7 = (float)temp_v8;
-      temp_v2 = (int)*(short *)(temp_v2 + 0x20);
-      if (temp_v2 == -1) {
+
+    screen = g_mapIf;
+    NoticeFrame *frame = FUN_001834a4(8, 0x10B);
+    s32 frameNumber = screen->state;
+    switch (screen->state) {
+    case NOTICE_STATE_IDLE:
         return 0;
-      }
-      if (temp_v2 == *(short *)(temp_v1 + 0xccec)) break;
-      temp_v4 = temp_v4 + 1;
-      dataTable2ECount();
-      temp_v7 = (float)temp_v8;
-    } while (temp_v4 < temp_v2);
-  }
-  temp_v2 = (int)*(short *)(temp_v1 + 0xccec);
-  if ((temp_v2 == 0x18) || (findKeyedRecord(temp_v2,(int)*(short *)(temp_v1 + 0xccee)), temp_v2 != 0)) {
-    temp_v2 = g_renderCtx;
-    temp_v3 = FUN_001692ac(1,0);
-    piVar7 = (int *)(temp_v2 + 0x1258);
-    temp_v4 = *piVar7;
-    temp_v5 = piVar7[temp_v4 + 2];
-    *piVar7 = temp_v4 + 1;
-    piVar7[temp_v4 + 3] = temp_v3;
-    if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v5 != temp_v3) {
-      (**(romwright_code **)(temp_v2 + 0x1274))();
-      *(unsigned char *)(temp_v2 + 0x1270) = 0;
+    case NOTICE_STATE_SLIDE_IN:
+        screen->frame++;
+        frameNumber = screen->frame;
+        offset = (f32)(frameNumber * (s32)NOTICE_SLIDE_SPEED) + NOTICE_SLIDE_START;
+        if (frameNumber >= NOTICE_SLIDE_FRAMES) {
+            screen->state = NOTICE_STATE_HOLD;
+            screen->frame = 0;
+        }
+        break;
+    case NOTICE_STATE_HOLD:
+        screen->frame++;
+        break;
+    case NOTICE_STATE_SLIDE_OUT_LONG:
+        screen->frame++;
+        frameNumber = screen->frame;
+        if (frameNumber >= NOTICE_LONG_START)
+            offset = -(f32)((frameNumber - NOTICE_LONG_START) * (s32)NOTICE_SLIDE_SPEED);
+        if (frameNumber >= NOTICE_LONG_END) {
+            screen->state = NOTICE_STATE_IDLE;
+            screen->frame = 0;
+            return 0;
+        }
+        break;
+    case NOTICE_STATE_SLIDE_OUT_SHORT:
+        screen->frame++;
+        frameNumber = screen->frame;
+        if (frameNumber >= NOTICE_SHORT_START)
+            offset = -(f32)((frameNumber - NOTICE_SHORT_START) * (s32)NOTICE_SLIDE_SPEED);
+        if (frameNumber >= NOTICE_SHORT_END) {
+            screen->state = NOTICE_STATE_IDLE;
+            screen->frame = 0;
+            return 0;
+        }
+        break;
     }
-    temp_v9 = (unsigned long long)(unsigned int)(int)temp_v7 << 0x20;
-    temp_v2 = 0x107;
-    do {
-      FUN_001835b4(2,8,temp_v2,(int)((unsigned long long)temp_v9 >> 0x20),0,0xb);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x10b);
-    FUN_003849cc((int)*(short *)(temp_v1 + 0xccec),(int)*(short *)(temp_v1 + 0xccee),0,temp_v11,
-                 0xffffffff);
-    VectorSignedToFloat((int)*(short *)((int)temp_v10 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)((int)temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,0xffffffff,temp_v11);
-    temp_v2 = g_renderCtx;
-    piVar7 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar7;
-    temp_v3 = piVar7[temp_v1 + 2];
-    *piVar7 = temp_v1 - 1;
-    if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v3 != piVar7[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v2 + 0x1274))();
-      *(unsigned char *)(temp_v2 + 0x1270) = 0;
+
+    s32 entryCount = dataTable2ECount();
+    for (s32 i = 0; i < entryCount; i++) {
+        s32 id = dataTable2EGetEntry(i)->id;
+        if (id == NOTICE_ENTRY_NONE)
+            return 0;
+        if (id == screen->entryId)
+            break;
+        entryCount = dataTable2ECount();
     }
-  }
-  return 0;
+
+    if (screen->entryId == NOTICE_ENTRY_SPECIAL || findKeyedRecord(screen->entryId, screen->entrySub) != 0) {
+        RenderCtxA *context = g_renderCtx;
+        s32 state = FUN_001692ac(1, 0);
+        renderStackPush(&context->stackA, state);
+        for (u32 sprite = NOTICE_FRAME_FIRST; sprite <= NOTICE_FRAME_LAST; sprite++)
+            FUN_001835b4(2, 8, sprite, (s32)offset, 0, 0xB);
+        u8 text[144];
+        FUN_003849cc(screen->entryId, screen->entrySub, 0, text, 0xFFFFFFFF);
+        FUN_00162790(3, 0xFFFFFFFF, text, (f32)frame->x, (f32)frame->y);
+        renderStackPop(&g_renderCtx->stackA);
+    }
+    return 0;
 }
 
 } /* extern "C" */

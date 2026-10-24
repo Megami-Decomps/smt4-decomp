@@ -1,214 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00106708` (_code @ 0x106708, 0x30c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the sound voice update; retail walks the four voices with an inlined bounds-checked accessor and shares the voice-start tail by jumps (the draft's gotos), and keeps the group base and the voice pointers in different registers than armcc here. */
+#include "common.h"
+
+#define VOICE_PENDING 0x1
+#define VOICE_PLAYING 0x2
+#define VOICE_STOP_REQUESTED 0x4
+#define VOICE_STOPPING 0x8
+
+/* One sound voice (0x78 bytes). */
+struct SoundVoice {
+    /* 0x00 */ u8 state;           /* 0 free, 1 reserved, 2 in use */
+    /* 0x01 */ u8 unk01[0x43];
+    /* 0x44 */ void *data;
+    /* 0x48 */ u32 handle;
+    /* 0x4C */ u32 sourceId;
+    /* 0x50 */ s32 mode;           /* 3: half volume, 4: never interrupted */
+    /* 0x54 */ u8 unk54[4];
+    /* 0x58 */ f32 mixB;
+    /* 0x5C */ f32 mixA;
+    /* 0x60 */ u8 unk60[4];
+    /* 0x64 */ s32 waitFrames;
+    /* 0x68 */ u32 flags;
+    /* 0x6C */ u8 unk6C[4];
+    /* 0x70 */ s32 fade;
+    /* 0x74 */ u8 options;         /* 2: interrupts the others, 4: drops the repeat */
+    /* 0x75 */ u8 volume;
+    /* 0x76 */ s8 repeat;
+    /* 0x77 */ u8 unk77;
+};
 
 extern "C" {
+extern SoundVoice DAT_004c5634[4];
+extern u8 DAT_004c581a;
 
-int FUN_0010b864(unsigned int, int, int);
-int FUN_0010b91c(unsigned int);
-int asdSoundWaveVoiceCreate(unsigned int, unsigned int, int);
-int FUN_0010c270(unsigned int);
-int voiceSetMixParam(void);
-int FUN_002c1658(int, int);
-int rt_aeabi_memclr(char *, int);
-int asdMemFree(void);
+s32 jyoucyuGetTableEntry(s32 index);
+s32 FUN_002c1850(u32 handle);
+s32 FUN_002c1d5c(void);
+s32 FUN_002c1658(s32 a, s32 b);
+s32 FUN_002c15fc(s32 a);
+u32 asdSoundWaveVoiceCreate(void *data, u32 sourceId, s32 flag);
+void voiceSetMixParam(f32 a, f32 b);
+void FUN_0010b864(u32 handle, s32 volume, s32 flag);
+void FUN_0010b91c(u32 handle);
+void FUN_0010c270(u32 handle);
+void asdMemFree(void *block);
+void rt_aeabi_memclr(void *block, s32 size);
 
-extern unsigned char DAT_004c5634; /* 0x4c5634 */
-extern signed char DAT_004c581a; /* 0x4c581a */
-
-/* Supplied declaration required: FUN_0010b864. */
-/* Supplied declaration required: FUN_0010b91c. */
-/* Supplied declaration required: asdSoundWaveVoiceCreate. */
-/* Supplied declaration required: FUN_0010c270. */
-/* Supplied declaration required: voiceSetMixParam. */
-extern int FUN_002c15fc(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
-extern int FUN_002c1850(unsigned int);
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: asdMemFree. */
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-void FUN_00106708(void)
-
+/* The voice at an index, or null past the last one. */
+static SoundVoice *voiceAt(s32 index)
 {
-/* irregular: 6 unstructured edge(s); 7 goto(s); 8 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  char temp_v3;
-  unsigned char *puVar6;
-  unsigned int temp_v4;
-  char *pcVar8;
-  unsigned int temp_v5;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 != 0) {
-    return;
-  }
-  temp_v5 = 0;
-  pcVar8 = (char *)(&DAT_004c5634 + temp_v5 * 0x78);
-LAB_00106748:
-  if (*pcVar8 == '\x02') {
-    if ((*(unsigned int *)(pcVar8 + 0x68) & 1) != 0) {
-      if ((pcVar8[0x74] & 2U) == 0) {
-LAB_001067e0:
-        temp_v1 = *(unsigned int *)(pcVar8 + 0x44);
-        asdSoundWaveVoiceCreate(temp_v1,*(unsigned int *)(pcVar8 + 0x4c),1);
-        *(unsigned int *)(pcVar8 + 0x48) = temp_v1;
-        voiceSetMixParam();
-        if (*(int *)(pcVar8 + 0x50) != 3) {
-          FUN_0010b864(*(unsigned int *)(pcVar8 + 0x48),pcVar8[0x75],0);
-        }
-        else {
-          FUN_0010b864(*(unsigned int *)(pcVar8 + 0x48),(unsigned char)pcVar8[0x75] >> 1,0);
-        }
-        if (*(int *)(pcVar8 + 0x44) != 0) {
-          asdMemFree();
-        }
-        pcVar8[0x44] = '\0';
-        pcVar8[0x45] = '\0';
-        pcVar8[0x46] = '\0';
-        pcVar8[0x47] = '\0';
-        temp_v4 = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffffe) | 2;
-        goto LAB_00106964;
-      }
-      temp_v4 = 0;
-      do {
-        puVar6 = &DAT_004c5634 + temp_v4 * 0x78;
-        while( 1 ) {
-          temp_v0 = FUN_002c1850(*(unsigned int *)(puVar6 + 0x48));
-          if (temp_v0 != 0) {
-            if (puVar6 == (unsigned char *)0x0) goto LAB_001067b4;
-            temp_v4 = 0;
-            do {
-              puVar6 = &DAT_004c5634 + temp_v4 * 0x78;
-              while( 1 ) {
-                temp_v2 = FUN_002c1850(*(unsigned int *)(puVar6 + 0x48));
-                temp_v0 = 0;
-                if (temp_v2 != 0) {
-                  temp_v0 = *(int *)(puVar6 + 0x50);
-                }
-                if (temp_v2 != 0 && temp_v0 != 4) {
-                  *(unsigned int *)(puVar6 + 0x68) = *(unsigned int *)(puVar6 + 0x68) | 4;
-                  *(unsigned int *)(puVar6 + 0x70) = 0;
-                }
-                temp_v4 = temp_v4 + 1;
-                if ((int)temp_v4 >= 4) goto LAB_001067e0;
-                if (3 >= temp_v4) break;
-                puVar6 = (unsigned char *)0x0;
-              }
-            } while( 1 );
-          }
-          temp_v4 = temp_v4 + 1;
-          if ((int)temp_v4 >= 4) goto LAB_001067b4;
-          if (temp_v4 < 4) break;
-          puVar6 = (unsigned char *)0x0;
-        }
-      } while( 1 );
-    }
-    if ((*(unsigned int *)(pcVar8 + 0x68) & 2) != 0) {
-      if (((DAT_004c581a != '\0') || (temp_v0 = FUN_002c1d5c(), temp_v0 != 0)) &&
-         (*(int *)(pcVar8 + 0x50) != 4)) {
-        *(unsigned int *)(pcVar8 + 0x68) = *(unsigned int *)(pcVar8 + 0x68) | 4;
-        pcVar8[0x70] = '\0';
-        pcVar8[0x71] = '\0';
-        pcVar8[0x72] = '\0';
-        pcVar8[0x73] = '\0';
-      }
-      if ((*(unsigned int *)(pcVar8 + 0x68) & 4) != 0) {
-        pcVar8[0x70] = '\x03';
-        pcVar8[0x71] = '\0';
-        pcVar8[0x72] = '\0';
-        pcVar8[0x73] = '\0';
-        FUN_0010b91c(*(unsigned int *)(pcVar8 + 0x48));
-        *(unsigned int *)(pcVar8 + 0x68) = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffff9) | 8;
-      }
-      else {
-        temp_v0 = FUN_002c1850(*(unsigned int *)(pcVar8 + 0x48));
-        if ((temp_v0 == 0) && (*(int *)(pcVar8 + 100) >= 1)) {
-          pcVar8[0x76] = '\x01';
-          temp_v4 = (*(unsigned int *)(pcVar8 + 0x68) & 0xfffffff9) | 8;
-LAB_00106964:
-          *(unsigned int *)(pcVar8 + 0x68) = temp_v4;
-        }
-        else {
-          *(int *)(pcVar8 + 100) = *(int *)(pcVar8 + 100) + 1;
-        }
-      }
-    }
-    if (((*(unsigned int *)(pcVar8 + 0x68) & 8) != 0) &&
-       (temp_v0 = FUN_002c1850(*(unsigned int *)(pcVar8 + 0x48)), temp_v0 == 0)) {
-      temp_v3 = pcVar8[0x76];
-      if ((pcVar8[0x74] & 4U) != 0) {
-        temp_v3 = '\0';
-      }
-      FUN_0010c270(*(unsigned int *)(pcVar8 + 0x48));
-      rt_aeabi_memclr(pcVar8,0x78);
-      if (temp_v3 != '\0') {
-        pcVar8[0x76] = '\x01';
-      }
-      pcVar8[0x68] = '\0';
-      pcVar8[0x69] = '\0';
-      pcVar8[0x6a] = '\0';
-      pcVar8[0x6b] = '\0';
-      *pcVar8 = '\0';
-    }
-  }
-  goto LAB_001069cc;
-LAB_001067b4:
-  temp_v4 = 0;
-  while( 1 ) {
-    if (temp_v4 >= 4) {
-      pcVar2 = (char *)0x0;
-    }
-    else {
-      pcVar2 = (char *)(&DAT_004c5634 + temp_v4 * 0x78);
-    }
-    if (*pcVar2 == '\x01') break;
-    temp_v4 = temp_v4 + 1;
-    if ((int)temp_v4 >= 4) goto LAB_001067e0;
-  }
-  if (*(int *)(pcVar8 + 0x44) != 0) {
-    asdMemFree();
-  }
-  pcVar8[0x44] = '\0';
-  pcVar8[0x45] = '\0';
-  pcVar8[0x46] = '\0';
-  pcVar8[0x47] = '\0';
-  rt_aeabi_memclr(pcVar8,0x78);
-  pcVar8[0x68] = '\0';
-  pcVar8[0x69] = '\0';
-  pcVar8[0x6a] = '\0';
-  pcVar8[0x6b] = '\0';
-  *pcVar8 = '\0';
-LAB_001069cc:
-  temp_v5 = temp_v5 + 1;
-  if ((int)temp_v5 >= 4) {
-    if (DAT_004c581a != '\x01') {
-      return;
-    }
-    temp_v0 = 9;
-    FUN_002c1658(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_002c15fc(6);
-      if (temp_v0 == 0) {
-        DAT_004c581a = 0;
+    return index < 4 ? &DAT_004c5634[index] : NULL;
+}
+
+/* Frees a voice's data block and clears its slot. */
+static void releaseVoice(SoundVoice *voice)
+{
+    if (voice->data != NULL)
+        asdMemFree(voice->data);
+    voice->data = NULL;
+    rt_aeabi_memclr(voice, 0x78);
+    voice->flags = 0;
+    voice->state = 0;
+}
+
+/* Starts a pending voice: creates its wave voice, applies the mix and volume and frees the data. */
+static void startVoice(SoundVoice *voice)
+{
+    u32 handle = asdSoundWaveVoiceCreate(voice->data, voice->sourceId, 1);
+    voice->handle = handle;
+    voiceSetMixParam(voice->mixA, voice->mixB);
+    s32 volume = voice->volume;
+    if (voice->mode == 3)
+        FUN_0010b864(voice->handle, volume >> 1, 0);
+    else
+        FUN_0010b864(voice->handle, volume, 0);
+    if (voice->data != NULL)
+        asdMemFree(voice->data);
+    voice->data = NULL;
+    voice->flags = (voice->flags & ~VOICE_PENDING) | VOICE_PLAYING;
+}
+
+/* Steps the four sound voices: starts pending ones (stopping the others when it interrupts),
+ * stops or ends playing ones and clears finished voices. */
+void FUN_00106708(void)
+{
+    if (jyoucyuGetTableEntry(1) != 0)
         return;
-      }
-      return;
+    for (s32 i = 0; i < 4; i++) {
+        SoundVoice *voice = voiceAt(i);
+        if (voice->state != 2)
+            continue;
+        if (voice->flags & VOICE_PENDING) {
+            if (voice->options & 2) {
+                bool busy = false;
+                for (s32 j = 0; j < 4; j++) {
+                    SoundVoice *other = voiceAt(j);
+                    if (FUN_002c1850(other->handle) != 0) {
+                        busy = true;
+                        break;
+                    }
+                }
+                if (busy) {
+                    for (s32 k = 0; k < 4; k++) {
+                        SoundVoice *other = voiceAt(k);
+                        if (FUN_002c1850(other->handle) != 0 && other->mode != 4) {
+                            other->flags |= VOICE_STOP_REQUESTED;
+                            other->fade = 0;
+                        }
+                    }
+                } else {
+                    bool reserved = false;
+                    for (s32 m = 0; m < 4; m++) {
+                        if (voiceAt(m)->state == 1) {
+                            reserved = true;
+                            break;
+                        }
+                    }
+                    if (reserved) {
+                        releaseVoice(voice);
+                        continue;
+                    }
+                }
+            }
+            startVoice(voice);
+        } else if (voice->flags & VOICE_PLAYING) {
+            if ((DAT_004c581a != 0 || FUN_002c1d5c() != 0) && voice->mode != 4) {
+                voice->flags |= VOICE_STOP_REQUESTED;
+                voice->fade = 0;
+            }
+            if (voice->flags & VOICE_STOP_REQUESTED) {
+                voice->fade = 3;
+                FUN_0010b91c(voice->handle);
+                voice->flags = (voice->flags & ~(VOICE_PLAYING | VOICE_STOP_REQUESTED)) | VOICE_STOPPING;
+            } else if (FUN_002c1850(voice->handle) == 0 && voice->waitFrames > 0) {
+                voice->repeat = 1;
+                voice->flags = (voice->flags & ~(VOICE_PLAYING | VOICE_STOP_REQUESTED)) | VOICE_STOPPING;
+            } else {
+                voice->waitFrames++;
+            }
+        }
+        if ((voice->flags & VOICE_STOPPING) && FUN_002c1850(voice->handle) == 0) {
+            s8 repeat = voice->repeat;
+            if (voice->options & 4)
+                repeat = 0;
+            FUN_0010c270(voice->handle);
+            rt_aeabi_memclr(voice, 0x78);
+            if (repeat != 0)
+                voice->repeat = 1;
+            voice->flags = 0;
+            voice->state = 0;
+        }
     }
-    return;
-  }
-  if (temp_v5 >= 4) {
-    pcVar8 = (char *)0x0;
-  }
-  else {
-    pcVar8 = (char *)(&DAT_004c5634 + temp_v5 * 0x78);
-  }
-  goto LAB_00106748;
+    if (DAT_004c581a == 1 && FUN_002c1658(9, 2) == 0 && FUN_002c15fc(6) == 0)
+        DAT_004c581a = 0;
 }
 
 } /* extern "C" */

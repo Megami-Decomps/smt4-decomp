@@ -1,180 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ccde8` (_code @ 0x2ccde8, 0x314 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: command-menu cursor to (action, argument) mapping; retail loads the blocked-command masks with ldr/ldm pairs instead of ldrd, keeps a 36-byte frame (9 words) and the work pointer in r6, and lowers the switch with a different jump table order */
+#include "common.h"
+
+struct BtlMenuCursor {
+    /* 0x00 */ u8 unk00[4];
+};
+
+struct BtlMenuWork {
+    /* 0x0000 */ u8 unk0000[0x3890];
+    /* 0x3890 */ s32 page;
+    /* 0x3894 */ u8 unk3894[8];
+    /* 0x389C */ u32 defaultArgument;
+    /* 0x38A0 */ u8 unk38A0[0x1AC];
+    /* 0x3A4C */ BtlMenuCursor commandCursor;
+    /* 0x3A50 */ u8 unk3A50[0xC4];
+    /* 0x3B14 */ BtlMenuCursor itemCursor;
+    /* 0x3B18 */ u8 unk3B18[0x60];
+    /* 0x3B78 */ BtlMenuCursor skillCursor;
+    /* 0x3B7C */ u8 unk3B7C[0x12C];
+    /* 0x3CA8 */ s16 itemIds[0x2B0];
+    /* 0x4208 */ u8 unk4208[8];
+    /* 0x4210 */ s16 pageEntries[1];
+};
+
+struct BtlBits {
+    u32 low;
+    u32 high;
+};
+
+struct BtlStateFlags {
+    /* 0x0000 */ u8 unk0000[0x45A0];
+    /* 0x45A0 */ BtlBits bitsA;
+    /* 0x45A8 */ BtlBits bitsB;
+};
+
+struct PlayerCommandState {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 available;
+    /* 0x04 */ u16 count;
+};
+
+#define BTL_MENU_ACTION_BLOCKED 7
+#define BTL_MENU_ARG_BLOCKED 4
 
 extern "C" {
+extern u32 DAT_00573b88[];   /* blocked-command masks; the entries used are at 8 and 18 */
 
-int resourceRunOperationIfUnblocked(...);
-int FUN_002a4894(int);
+BtlStateFlags *btlGetMainState(void);
+PlayerCommandState *gameGetPlayerData(void);
+s32 gameFlagIsSet(u32 flag);
+s32 gameDataFlagTestBit(u32 bit);
+s32 resourceRunOperationIfUnblocked(BtlMenuCursor *cursor);
+s32 FUN_002a4894(BtlMenuCursor *cursor);
+u32 FUN_002cc9e0(BtlMenuWork *work, u32 mode);
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-} param_3_stack;
-
-extern unsigned int DAT_00573ba8; /* 0x573ba8 */
-extern unsigned int DAT_00573bac; /* 0x573bac */
-extern unsigned int DAT_00573bd0; /* 0x573bd0 */
-extern unsigned int DAT_00573bd4; /* 0x573bd4 */
-
-extern int btlGetMainState(void);
-extern unsigned int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: resourceRunOperationIfUnblocked. */
-/* Supplied declaration required: FUN_002a4894. */
-extern unsigned int FUN_002cc9e0(int, unsigned int);
-extern int gameDataFlagTestBit(unsigned int);
-
-
-void FUN_002ccde8(int param_1,unsigned short *param_2,short *param_3)
-
+/* Maps the highlighted command to (action, argument). */
+void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  unsigned int temp_v10 [8];
-  
-  temp_v8 = 0;
-  temp_v3 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v3 + 0x45a4) & DAT_00573bac) != 0 ||
-      (*(unsigned int *)(temp_v3 + 0x45a0) & DAT_00573ba8) != 0) {
-    *param_2 = 7;
-    *param_3 = 4;
-    return;
-  }
-  temp_v4 = FUN_002cc9e0(param_1,1);
-  switch(temp_v4) {
-  case 0:
-  case 6:
-    temp_v2 = 0;
-    *param_2 = 1;
-    break;
-  case 1:
-    temp_v3 = resourceRunOperationIfUnblocked();
-    temp_v8 = FUN_002a4894(param_1 + 0x3a4c);
-    temp_v8 = temp_v8 + temp_v3;
-    if (*(short *)(param_1 + *(int *)(param_1 + 0x3890) * 2 + 0x4210) != -1) {
-      if (temp_v8 != 0) {
-        temp_v0 = 2;
-        *param_2 = temp_v0;
-        temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
-        break;
-      }
-      temp_v0 = 1;
+    s32 index = 0;
+    BtlStateFlags *state = btlGetMainState();
+    BtlBits bits = state->bitsA;
+    if (((bits.low & DAT_00573b88[8]) | (bits.high & DAT_00573b88[9])) != 0) {
+        *action = BTL_MENU_ACTION_BLOCKED;
+        *argument = BTL_MENU_ARG_BLOCKED;
+        return;
     }
-    else {
-      if (temp_v8 == 0) {
-        temp_v0 = 1;
-        *param_2 = temp_v0;
-        temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
+
+    s16 result;
+    switch (FUN_002cc9e0(work, 1)) {
+    case 0:
+    case 6:
+        result = 0;
+        *action = 1;
         break;
-      }
-      if ((temp_v8 == 1) && (temp_v3 = gameFlagIsSet(0x410), temp_v3 != 0)) {
-        temp_v5 = gameGetPlayerData();
-        temp_v9 = *(short *)(temp_v5 + 2) != 0;
-        if (temp_v9) {
-          temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
+    case 1: {
+        s32 entry = resourceRunOperationIfUnblocked(&work->commandCursor);
+        index = FUN_002a4894(&work->commandCursor) + entry;
+        u16 chosen;
+        if (work->pageEntries[work->page] != -1) {
+            chosen = index != 0 ? 2 : 1;
+        } else if (index == 0) {
+            chosen = 1;
+        } else if (index == 1 && gameFlagIsSet(0x410) != 0) {
+            PlayerCommandState *player = gameGetPlayerData();
+            bool hasCommand = player->available != 0;
+            chosen = (hasCommand && player->count != 0) ? 1 : 2;
+        } else {
+            chosen = 2;
         }
-        if (temp_v9 && temp_v5 != 0) {
-          temp_v0 = 1;
-          *param_2 = temp_v0;
-          temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
-          break;
-        }
-      }
-      temp_v0 = 2;
+        *action = chosen;
+        result = (s16)work->defaultArgument;
+        break;
     }
-    *param_2 = temp_v0;
-    temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
-    break;
-  case 2:
-    *param_2 = 3;
-    temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
-    break;
-  case 3:
-    *param_2 = 7;
-    temp_v3 = btlGetMainState();
-    if ((DAT_00573bd0 & *(unsigned int *)(temp_v3 + 0x45a8)) == 0 &&
-        (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bd4) == 0) {
-      temp_v10[3] = 0;
-      temp_v10[4] = 1;
-      temp_v10[5] = 2;
-      temp_v3 = 0;
-      temp_v10[2] = 0x33;
-      temp_v10[0] = 0x2e;
-      temp_v10[1] = 0x32;
-      do {
-        temp_v6 = gameDataFlagTestBit(temp_v10[temp_v3]);
-        if (temp_v6 != 0) {
-          temp_v6 = resourceRunOperationIfUnblocked(param_1 + 0x3b78);
-          temp_v7 = FUN_002a4894(param_1 + 0x3b78);
-          if (temp_v7 + temp_v6 == temp_v8) {
-            temp_v2 = (short)temp_v10[temp_v3 + 3];
-            *param_3 = temp_v2;
+    case 2:
+        *action = 3;
+        result = (s16)work->defaultArgument;
+        break;
+    case 3: {
+        *action = BTL_MENU_ACTION_BLOCKED;
+        state = btlGetMainState();
+        if ((state->bitsB.low & DAT_00573b88[18]) == 0 && (state->bitsB.high & DAT_00573b88[19]) == 0) {
+            struct {
+                s32 flagBits[3];
+                s32 entryArgs[3];
+            } entries = { { 0x2E, 0x32, 0x33 }, { 0, 1, 2 } };
+            for (s32 i = 0; i < 3; i++) {
+                if (gameDataFlagTestBit(entries.flagBits[i]) != 0) {
+                    s32 entry = resourceRunOperationIfUnblocked(&work->skillCursor);
+                    if (FUN_002a4894(&work->skillCursor) + entry == index) {
+                        *argument = entries.entryArgs[i];
+                        return;
+                    }
+                    index++;
+                }
+            }
             return;
-          }
-          temp_v8 = temp_v8 + 1;
         }
-        temp_v3 = temp_v3 + 1;
-        if (temp_v3 >= 3) {
-          return;
-        }
-      } while( 1 );
+        s32 entry = resourceRunOperationIfUnblocked(&work->skillCursor);
+        result = (s16)(FUN_002a4894(&work->skillCursor) + entry);
+        break;
     }
-    temp_v1 = resourceRunOperationIfUnblocked();
-    temp_v2 = FUN_002a4894(param_1 + 0x3b78);
-    temp_v2 = temp_v2 + temp_v1;
-    break;
-  case 4:
-    temp_v2 = 0;
-    *param_2 = 0xd;
-    break;
-  case 5:
-    temp_v2 = 0;
-    *param_2 = 6;
-    break;
-  case 7:
-    *param_2 = 8;
-    temp_v3 = resourceRunOperationIfUnblocked();
-    temp_v8 = FUN_002a4894(param_1 + 0x3b14);
-    temp_v2 = *(short *)(param_1 + (temp_v8 + temp_v3) * 2 + 0x3ca8);
-    break;
-  case 9:
-    temp_v2 = 0;
-    *param_2 = 4;
-    break;
-  case 10:
-    temp_v2 = 0;
-    *param_2 = 9;
-    break;
-  case 0xb:
-    *param_2 = 0xe;
-    *param_3 = 0;
-    return;
-  case 0xc:
-    *param_2 = 2;
-    temp_v2 = (short)*(unsigned int *)(param_1 + 0x389c);
-    break;
-  case 0xffffffff:
-  case 8:
-    temp_v2 = 0;
-    *param_2 = 5;
-    break;
-  default:
-    return;
-  }
-  *param_3 = temp_v2;
-  return;
+    case 4:
+        result = 0;
+        *action = 0xD;
+        break;
+    case 5:
+        result = 0;
+        *action = 6;
+        break;
+    case 7: {
+        *action = 8;
+        s32 entry = resourceRunOperationIfUnblocked(&work->itemCursor);
+        result = work->itemIds[FUN_002a4894(&work->itemCursor) + entry];
+        break;
+    }
+    case 9:
+        result = 0;
+        *action = 4;
+        break;
+    case 10:
+        result = 0;
+        *action = 9;
+        break;
+    case 0xB:
+        *action = 0xE;
+        *argument = 0;
+        return;
+    case 0xC:
+        *action = 2;
+        result = (s16)work->defaultArgument;
+        break;
+    case 0xFFFFFFFF:
+    case 8:
+        result = 0;
+        *action = 5;
+        break;
+    default:
+        return;
+    }
+    *argument = result;
 }
 
 } /* extern "C" */

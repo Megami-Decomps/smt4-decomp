@@ -1,187 +1,191 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fa83c` (_code @ 0x3fa83c, 0x300 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the network session state machine; retail's shared tail (`state = next; return 1`) and the case-8 fallthrough into the wait state are arranged by armcc here with separate returns. */
+#include "common.h"
+
+/* A network object the session owns (slot 1 of its vtable is its deleting destructor). */
+class SessionObject {
+public:
+    virtual ~SessionObject();
+};
+
+/* The online result record (an error code with two details). */
+struct OnlineResult {
+    s32 code;
+    u32 detailA;
+    u32 detailB;
+};
+
+/* The session, as the connect state machine reads it. */
+struct NetSession {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u32 nextState;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u8 failed;
+    /* 0x0D */ u8 failedA;
+    /* 0x0E */ u8 failedB;
+    /* 0x0F */ u8 unk0F;
+    /* 0x10 */ u32 failureStage;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ s32 result;
+    /* 0x1C */ OnlineResult onlineResult;
+    /* 0x28 */ u32 detail;
+    /* 0x2C */ u8 unk2C[4];
+    /* 0x30 */ s32 operation;
+    /* 0x34 */ SessionObject *requestObject;
+    /* 0x38 */ void *unk38;
+    /* 0x3C */ SessionObject *sessionObject;
+    /* 0x40 */ SessionObject *clientObject;
+    /* 0x44 */ u32 buffer;
+};
+
+struct RequestStatus {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 done;
+    /* 0x14 */ u8 unk14[0x24];
+    /* 0x38 */ s32 resultA;
+    /* 0x3C */ u32 resultB;
+    /* 0x40 */ u32 resultC;
+};
+
+struct FlagObject {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 *child;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u32 flags;
+};
 
 extern "C" {
+extern u8 DAT_00594968;
 
-int FUN_0010d300(void);
-int FUN_0010d35c(void);
-int asdOperatorDelete(void);
-int _ZN18OnlineResultRecordaSERKS_(unsigned int *, int *);
-int asyncOperationStartOrPoll(int, unsigned int *, unsigned int *);
-int FUN_003fa1c8(unsigned int *);
-int FUN_00414a24(void);
-int FUN_004321a0(void);
-int ctrNetInitialize(void);
-int FUN_00441f84(void);
-int FUN_00442630(void);
-int FUN_00442a94(void);
-int nexUtilInit(void);
-int nexUtilShutdown(void);
+void FUN_0010d300(void);
+void FUN_0010d35c(void);
+void asdOperatorDelete(void *block);
+void _ZN18OnlineResultRecordaSERKS_(OnlineResult *dest, const OnlineResult *source);
+s32 _ZNK18OnlineResultRecord7isValidEv(const OnlineResult *record);
+s32 asyncOperationStartOrPoll(s32 operation, s32 *result, u32 *detail);
+void FUN_003fa1c8(NetSession *session);
+NetSession *FUN_003fa580(NetSession *session);
+void FUN_00414a24(void);
+void FUN_004321a0(void);
+s32 ctrNetInitialize(s32 *result);
+s32 FUN_00441f84(void);
+void FUN_00442630(void);
+void FUN_00442a94(void);
+void nexUtilInit(void);
+void nexUtilShutdown(void);
+u32 FUN_00111800(OnlineResult *record);
+FlagObject *FUN_00122220(void);
+FlagObject *FUN_001224a0(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char DAT_00594968; /* 0x594968 */
-
-/* Supplied declaration required: FUN_0010d300. */
-/* Supplied declaration required: FUN_0010d35c. */
-extern unsigned int FUN_00111800(unsigned int *);
-extern int FUN_00122220(void);
-extern int FUN_001224a0(void);
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: _ZN18OnlineResultRecordaSERKS_. */
-extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
-/* Supplied declaration required: asyncOperationStartOrPoll. */
-/* Supplied declaration required: FUN_003fa1c8. */
-extern unsigned int *FUN_003fa580(unsigned int *);
-/* Supplied declaration required: FUN_00414a24. */
-/* Supplied declaration required: FUN_004321a0. */
-/* Supplied declaration required: ctrNetInitialize. */
-/* Supplied declaration required: FUN_00441f84. */
-/* Supplied declaration required: FUN_00442630. */
-/* Supplied declaration required: FUN_00442a94. */
-/* Supplied declaration required: nexUtilInit. */
-/* Supplied declaration required: nexUtilShutdown. */
-
-
-unsigned int * FUN_003fa83c(unsigned int *param_1)
-
+/* Steps the connect/disconnect state machine: initialise the network stack and its helpers, wait
+ * for the request, build the online result and on the way out release the objects it created.
+ * Returns 1 to be called again next frame. */
+NetSession *FUN_003fa83c(NetSession *session)
 {
-/* irregular: 14 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  unsigned int uStack_14;
-  unsigned int temp_v3;
-  
-  temp_v0 = *param_1;
-  puVar3 = (unsigned int *)0x1;
-  switch(temp_v0) {
-  case 0:
-    temp_v0 = 1;
-    break;
-  case 1:
-    temp_v1 = param_1[0xc];
-    asyncOperationStartOrPoll(temp_v1,param_1 + 6,param_1 + 10);
-    if (temp_v1 == 0) {
-      if ((int)param_1[6] < 0) {
-        *(unsigned char *)(param_1 + 3) = 1;
-        *(unsigned char *)((int)param_1 + 0xd) = 1;
-        *(unsigned char *)((int)param_1 + 0xe) = 1;
-        param_1[4] = 0xe;
-      }
-      puVar3 = (unsigned int *)0x0;
-      return puVar3;
-    }
-    temp_v0 = 2;
-    break;
-  case 2:
-    puVar3 = param_1 + 6;
-    ctrNetInitialize();
-    if (puVar3 == (unsigned int *)0x0) {
-      return (unsigned int *)0x1;
-    }
-    temp_v0 = 3;
-    break;
-  case 3:
-    nexUtilInit();
-    temp_v0 = 4;
-    break;
-  case 4:
-    FUN_00441f84();
-    param_1[1] = 5;
-    param_1[6] = temp_v0;
-    return (unsigned int *)0x1;
-  case 5:
-    FUN_0010d300();
-    DAT_00594968 = 2;
-    temp_v1 = FUN_00122220();
-    *(unsigned char *)(temp_v1 + 0x10) = 1;
-    temp_v1 = FUN_001224a0();
-    *(unsigned int *)(temp_v1 + 0x10) = *(unsigned int *)(temp_v1 + 0x10) | 1;
-    temp_v1 = FUN_00122220();
-    *(unsigned char *)(*(int *)(temp_v1 + 8) + 0xf) = 1;
-    temp_v1 = FUN_001224a0();
-    *(unsigned char *)(*(int *)(temp_v1 + 8) + 0xf) = 1;
-    temp_v0 = 6;
-    break;
-  case 6:
-    FUN_003fa1c8(param_1);
-    return param_1;
-  case 7:
-    puVar3 = (unsigned int *)FUN_003fa580(param_1);
-    return puVar3;
-  case 8:
-    temp_v1 = param_1[0xf];
-    if (*(char *)(temp_v1 + 0x10) != '\x01') {
-      temp_v3 = *(unsigned int *)(temp_v1 + 0x40);
-      temp_v2 = *(unsigned int *)(temp_v1 + 0x38);
-      uStack_14 = *(unsigned int *)(temp_v1 + 0x3c);
-      _ZN18OnlineResultRecordaSERKS_(param_1 + 7,&temp_v2);
-      temp_v1 = _ZNK18OnlineResultRecord7isValidEv(param_1 + 7);
-      if (temp_v1 != 0) {
-        temp_v0 = 9;
+    u32 next;
+    switch (session->state) {
+    case 0:
+        next = 1;
         break;
-      }
-      temp_v0 = FUN_00111800(param_1 + 7);
-      param_1[10] = temp_v0;
-      FUN_00442630();
-      *(unsigned char *)(param_1 + 3) = 1;
-      *(unsigned char *)((int)param_1 + 0xd) = 1;
-      *(unsigned char *)((int)param_1 + 0xe) = 1;
-      param_1[4] = 9;
+    case 1:
+        if (asyncOperationStartOrPoll(session->operation, &session->result, &session->detail) == 0) {
+            if (session->result < 0) {
+                session->failed = 1;
+                session->failedA = 1;
+                session->failedB = 1;
+                session->failureStage = 14;
+            }
+            return NULL;
+        }
+        next = 2;
+        break;
+    case 2:
+        if (ctrNetInitialize(&session->result) == 0)
+            return (NetSession *)1;
+        next = 3;
+        break;
+    case 3:
+        nexUtilInit();
+        next = 4;
+        break;
+    case 4:
+        session->result = FUN_00441f84();
+        session->nextState = 5;
+        return (NetSession *)1;
+    case 5:
+        FUN_0010d300();
+        DAT_00594968 = 2;
+        *(u8 *)&FUN_00122220()->flags = 1;
+        FUN_001224a0()->flags |= 1;
+        FUN_00122220()->child[0xF] = 1;
+        FUN_001224a0()->child[0xF] = 1;
+        next = 6;
+        break;
+    case 6:
+        FUN_003fa1c8(session);
+        return session;
+    case 7:
+        return FUN_003fa580(session);
+    case 8: {
+        RequestStatus *status = (RequestStatus *)session->sessionObject;
+        if (status->done != 1) {
+            OnlineResult fresh = { status->resultA, status->resultB, status->resultC };
+            _ZN18OnlineResultRecordaSERKS_(&session->onlineResult, &fresh);
+            if (_ZNK18OnlineResultRecord7isValidEv(&session->onlineResult)) {
+                next = 9;
+                break;
+            }
+            session->detail = FUN_00111800(&session->onlineResult);
+            FUN_00442630();
+            session->failed = 1;
+            session->failedA = 1;
+            session->failedB = 1;
+            session->failureStage = 9;
+        }
+        return NULL;
     }
-  case 0xe:
-    puVar3 = (unsigned int *)0x0;
-    return puVar3;
-  case 9:
-    if ((int *)param_1[0xf] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[0xf] + 4))();
-      param_1[0xf] = 0;
+    case 9:
+        if (session->sessionObject != NULL) {
+            delete session->sessionObject;
+            session->sessionObject = NULL;
+        }
+        if (session->clientObject != NULL) {
+            delete session->clientObject;
+            session->clientObject = NULL;
+        }
+        if (session->requestObject != NULL) {
+            delete session->requestObject;
+            session->requestObject = NULL;
+        }
+        if (session->buffer != 0) {
+            FUN_00414a24();
+            asdOperatorDelete((void *)session->buffer);
+            session->buffer = 0;
+        }
+        next = 10;
+        break;
+    case 10:
+        FUN_0010d35c();
+        next = 11;
+        break;
+    case 11:
+        FUN_00442a94();
+        next = 12;
+        break;
+    case 12:
+        nexUtilShutdown();
+        next = 13;
+        break;
+    case 13:
+        FUN_004321a0();
+        session->nextState = 14;
+        return (NetSession *)1;
+    case 14:
+        return NULL;
+    default:
+        return (NetSession *)1;
     }
-    if ((int *)param_1[0x10] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[0x10] + 4))();
-      param_1[0x10] = 0;
-    }
-    if ((int *)param_1[0xd] != (int *)0x0) {
-      (**(romwright_code **)(*(int *)param_1[0xd] + 4))();
-      param_1[0xd] = 0;
-    }
-    if (param_1[0x11] != 0) {
-      FUN_00414a24();
-      asdOperatorDelete();
-      param_1[0x11] = 0;
-    }
-    temp_v0 = 10;
-    break;
-  case 10:
-    FUN_0010d35c();
-    temp_v0 = 0xb;
-    break;
-  case 0xb:
-    FUN_00442a94();
-    temp_v0 = 0xc;
-    break;
-  case 0xc:
-    nexUtilShutdown();
-    temp_v0 = 0xd;
-    break;
-  case 0xd:
-    FUN_004321a0();
-    param_1[1] = 0xe;
-    return (unsigned int *)0x1;
-  default:
-    return puVar3;
-  }
-  puVar3 = (unsigned int *)0x1;
-  param_1[1] = temp_v0;
-  return puVar3;
+    session->nextState = next;
+    return (NetSession *)1;
 }
 
 } /* extern "C" */

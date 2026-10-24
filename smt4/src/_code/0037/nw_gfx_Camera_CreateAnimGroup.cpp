@@ -8,7 +8,7 @@ int FUN_002367c0(unsigned int *, int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002367c0. */
-extern unsigned int *FUN_002375a0(int, int, int, int *);
+extern unsigned int *_ZN9Obj4218b0C1Ejjj(int, int, int, int *);
 
 
 int nw_gfx_Camera_CreateAnimGroup(int param_1,int *param_2)
@@ -53,7 +53,7 @@ int nw_gfx_Camera_CreateAnimGroup(int param_1,int *param_2)
   }
   temp_v4 = (**(romwright_code **)(*param_2 + 8))(param_2,0x68,4);
   if (temp_v4 != 0) {
-    puVar2 = (unsigned int *)FUN_002375a0(temp_v4,temp_v5,param_1,param_2);
+    puVar2 = (unsigned int *)_ZN9Obj4218b0C1Ejjj(temp_v4,temp_v5,param_1,param_2);
     puVar3 = puVar2;
     FUN_002367c0(puVar2,1);
     if ((int)puVar3 >= 0) {

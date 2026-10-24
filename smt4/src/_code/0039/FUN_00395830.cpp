@@ -1,161 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00395830` (_code @ 0x395830, 0x2f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail converts the euler angles through integer/float conversions (index + fraction) and keeps the sqrt in the VFP, the build's float-only lookup compiles to a shorter sequence; logic equivalent. */
+#include "common.h"
+#include <math.h>
+
+/* The interpolated sine/cosine table: value and slope per entry. */
+struct SinCosEntry {
+    f32 sine;
+    f32 cosine;
+    f32 sineSlope;
+    f32 cosineSlope;
+};
+
+struct MapPosition {
+    f32 x, y, z;
+};
+
+/* An object with a world position (accessed fields). */
+struct PositionedObject {
+    u8 unk00[0x28];
+    MapPosition position;   // 0x28
+};
+
+/* A scene with a focus position (accessed field). */
+struct MapScene {
+    u8 unk00[0x1C];
+    MapPosition focus;      // 0x1C
+};
+
+/* A drifting effect: its owner and the velocity set here. */
+struct DriftEffect {
+    u8 unk00[0xC];
+    PositionedObject *owner;    // 0x0C
+    MapPosition velocity;       // 0x10
+};
 
 extern "C" {
-
-int randNextInRange(...);
-int VectorFloatToUnsigned(...);
-int VectorUnsignedToFloat(unsigned int, int);
-int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *);
-
-/* stack frame of param_1: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
-
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
-extern unsigned int DAT_00407ed4; /* 0x407ed4 */
-extern unsigned int DAT_00407ed8; /* 0x407ed8 */
-extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int g_lmapScene; /* 0x447e88 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
-{
-    return (float)sqrt((double)value);
-}
-#endif
-/* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
-
-/* WARNING: Removing unreachable block (ram,0x003959a8) */
-/* WARNING: Removing unreachable block (ram,0x003959b8) */
-/* WARNING: Removing unreachable block (ram,0x003958e8) */
-
-void FUN_00395830(int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  float temp_v20;
-  unsigned int temp_v21;
-  float temp_v22;
-  float temp_v23;
-  float temp_v24;
-  unsigned int temp_v25;
-  float temp_v26;
-  float temp_v27;
-  float temp_v28;
-  unsigned int temp_v29;
-  
-  temp_v0 = *(int *)(param_1 + 0xc);
-  temp_v14 = 40.0f;
-  temp_v1 = randNextInRange(99);
-  temp_v15 = 1.0f;
-  if (temp_v1 % 10 == 0) {
-    temp_v10 = *(float *)(g_lmapScene + 0x1c) - *(float *)(temp_v0 + 0x28);
-    temp_v5 = *(float *)(g_lmapScene + 0x20) - *(float *)(temp_v0 + 0x2c);
-    temp_v9 = *(float *)(g_lmapScene + 0x24) - *(float *)(temp_v0 + 0x30);
-    temp_v11 = 1.0f / romwright_sqrt_4(temp_v10 * temp_v10 + temp_v5 * temp_v5 + temp_v9 * temp_v9);
-    *(float *)(param_1 + 0x10) = temp_v10 * temp_v11 * temp_v14;
-    *(float *)(param_1 + 0x14) = temp_v5 * temp_v11 * temp_v14;
-    *(float *)(param_1 + 0x18) = temp_v9 * temp_v11 * temp_v14;
-    return;
-  }
-  temp_v2 = randNextInRange(0x168,(temp_v1 / 10) * -5,temp_v1 * -0x33333333);
-  temp_v5 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v5 * 0.7111111f) << 0x1d);
-  for (temp_v5 = romwright_fabs_4(temp_v5 * 0.7111111f); (int)temp_v5 >= 0x47800000; temp_v5 = temp_v5 - 65536.0f) {
-  }
-  temp_v6 = VectorFloatToUnsigned(0,3);
-  temp_v7 = VectorFloatToUnsigned(temp_v5,3);
-  temp_v8 = VectorFloatToUnsigned(0,3);
-  temp_v4 = temp_v7;
-  temp_v3 = temp_v6;
-  temp_v10 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v6 = temp_v8 & 0xff;
-  temp_v9 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v1 >> 0x16) & 3);
-  temp_v12 = (float)(&DAT_00407ed0)[temp_v4 * 4] + (temp_v5 - temp_v11) * (float)(&DAT_00407ed8)[temp_v4 * 4];
-  temp_v13 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407ed8)[temp_v3 * 4];
-  temp_v10 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (0.0f - temp_v10) * (float)(&DAT_00407edc)[temp_v3 * 4];
-  temp_v28 = (float)(&DAT_00407ed4)[temp_v4 * 4] +
-             (temp_v5 - temp_v11) * (float)(&DAT_00407edc)[temp_v4 * 4];
-  temp_v5 = (float)(&DAT_00407ed0)[temp_v6 * 4] + (0.0f - temp_v9) * (float)(&DAT_00407ed8)[temp_v6 * 4];
-  temp_v9 = (float)(&DAT_00407ed4)[temp_v6 * 4] + (0.0f - temp_v9) * (float)(&DAT_00407edc)[temp_v6 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v1 >> 0x1d,0)) {
-    temp_v12 = -temp_v12;
-  }
-  temp_v18 = temp_v9 * temp_v28;
-  temp_v26 = -temp_v12;
-  temp_v22 = temp_v5 * temp_v28;
-  temp_v27 = temp_v13 * temp_v28;
-  temp_v28 = temp_v10 * temp_v28;
-  temp_v19 = temp_v13 * temp_v9 * temp_v12 - temp_v10 * temp_v5;
-  temp_v24 = temp_v10 * temp_v5 * temp_v12 - temp_v13 * temp_v9;
-  temp_v20 = temp_v13 * temp_v5 + temp_v10 * temp_v9 * temp_v12;
-  temp_v23 = temp_v10 * temp_v9 + temp_v13 * temp_v5 * temp_v12;
-  temp_v21 = 0;
-  temp_v25 = 0;
-  temp_v29 = 0;
-  temp_v16 = 0.0f;
-  temp_v17 = 0.0f;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v15,&temp_v18);
-  *(float *)(param_1 + 0x10) = temp_v15 * temp_v14;
-  *(float *)(param_1 + 0x14) = temp_v16 * temp_v14;
-  *(float *)(param_1 + 0x18) = temp_v17 * temp_v14;
-  return;
+extern SinCosEntry DAT_00407ed0[];
+extern MapScene *g_lmapScene;
+u32 randNextInRange(u32 maximum);
+void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 (*matrix)[4]);
 }
 
-} /* extern "C" */
+/* Sine and cosine of an angle given in 1/256 turns, interpolated between table entries. */
+static __inline void lookupSinCos(f32 angle, f32 *sine, f32 *cosine)
+{
+    u32 whole = static_cast<u32>(angle);
+    const SinCosEntry *entry = &DAT_00407ed0[whole & 0xFF];
+    f32 fraction = angle - static_cast<f32>(whole & 0xFFFF);
+    *sine = entry->sine + fraction * entry->sineSlope;
+    *cosine = entry->cosine + fraction * entry->cosineSlope;
+}
+
+/* Give the effect a velocity: usually a random heading, one time in ten straight toward the scene focus. */
+extern "C" void FUN_00395830(DriftEffect *effect)
+{
+    PositionedObject *owner = effect->owner;
+    f32 speed = 40.0f;
+    u32 roll = randNextInRange(99);
+    if (roll % 10 == 0) {
+        f32 dx = g_lmapScene->focus.x - owner->position.x;
+        f32 dy = g_lmapScene->focus.y - owner->position.y;
+        f32 dz = g_lmapScene->focus.z - owner->position.z;
+        f32 inverseLength = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
+        effect->velocity.x = dx * inverseLength * speed;
+        effect->velocity.y = dy * inverseLength * speed;
+        effect->velocity.z = dz * inverseLength * speed;
+        return;
+    }
+    f32 turns = static_cast<f32>(randNextInRange(360)) * 0.7111111f;
+    f32 angle = turns < 0.0f ? -turns : turns;
+    while (angle >= 65536.0f)
+        angle -= 65536.0f;
+    f32 sx, cx, sy, cy, sz, cz;
+    lookupSinCos(0.0f, &sx, &cx);
+    lookupSinCos(angle, &sy, &cy);
+    lookupSinCos(0.0f, &sz, &cz);
+    if (!(turns >= 0.0f))
+        sy = -sy;
+    f32 matrix[3][4];
+    matrix[0][0] = cz * cy;
+    matrix[0][1] = sx * cz * sy - cx * sz;
+    matrix[0][2] = sx * sz + cx * cz * sy;
+    matrix[0][3] = 0.0f;
+    matrix[1][0] = sz * cy;
+    matrix[1][1] = cx * cz + sx * sz * sy;
+    matrix[1][2] = cx * sz * sy - sx * cz;
+    matrix[1][3] = 0.0f;
+    matrix[2][0] = -sy;
+    matrix[2][1] = sx * cy;
+    matrix[2][2] = cx * cy;
+    matrix[2][3] = 0.0f;
+    f32 direction[3] = {1.0f, 0.0f, 0.0f};
+    nn_math_ARMv6_VEC3TransformAsm_2AD44C(direction, matrix);
+    effect->velocity.x = direction[0] * speed;
+    effect->velocity.y = direction[1] * speed;
+    effect->velocity.z = direction[2] * speed;
+}

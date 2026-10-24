@@ -1,130 +1,70 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039723c` (_code @ 0x39723c, 0x22c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the title-scene panel draw; the build copies the speed into s16 before the call (retail loads s0 then copies), loads the scene pointer after packNibblesAndByte, and keeps the scene in r7/zero in r6 where retail uses r6/r7. */
+#include "camp/RenderCtx.h"
+
+// The panel's effect state (observed fields).
+struct TitlePanelEffect {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ f32 speed;
+};
+
+// A title-scene panel (observed fields).
+struct TitlePanel {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ s8 frame;
+    /* 0x021 */ u8 unk021[7];
+    /* 0x028 */ u8 highlighted;     // draws the highlighted frame variant
+    /* 0x029 */ u8 compact;         // draws the single combined element instead of two
+    /* 0x02A */ u8 unk02a[0x7a];
+    /* 0x0A4 */ s32 elementX;
+    /* 0x0A8 */ u8 unk0a8[4];
+    /* 0x0AC */ s32 frameX;
+    /* 0x0B0 */ u8 unk0b0[0x6e4];
+    /* 0x794 */ TitlePanelEffect effect;
+};
 
 extern "C" {
 
-int FUN_002bed3c(...);
-int FUN_002bf288(...);
-int FUN_002bf380(...);
-int efctSetSpeed(...);
-int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c1b64(...);
-int FUN_002c39a4(...);
-int FUN_00397db0(...);
+extern RenderCtx *g_titleScene;
 
-typedef struct fn_0039723c_arg0 fn_0039723c_arg0;
-struct fn_0039723c_arg0 {
-    unsigned char pad_0x0[0x20];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x7];
-    unsigned char field_0x28; /* +0x28 */
-    unsigned char field_0x29; /* +0x29 */
-    unsigned char pad_0x2a[0x7a];
-    unsigned char field_0xa4; /* +0xa4 */
-    unsigned char pad_0xa5[0x7];
-    unsigned char field_0xac; /* +0xac */
-    unsigned char pad_0xad[0x111f];
-    undefined4 field_0x11cc; /* +0x11cc */
-    undefined4 field_0x11d0; /* +0x11d0 */
-    undefined4 field_0x11d4; /* +0x11d4 */
-    undefined4 field_0x11d8; /* +0x11d8 */
-    undefined1 field_0x11dc; /* +0x11dc */
-};
+void FUN_002c39a4(RenderCtx *context);
+void FUN_002bed3c(void);
+void efctSetSpeed(f32 speed);
+s32 FUN_002c5d80(u32 first, u32 second);
+s32 packNibblesAndByte(u32 first, u32 second, u32 third);
+void FUN_002c1b64(RenderCtx *context, s32 value);
+void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
+void FUN_002bf288(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
+void FUN_00397db0(TitlePanel *panel, u8 frame, f32 speed);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00397db0. */
-
-
-void FUN_0039723c(fn_0039723c_arg0 *param_1)
-
+// Draws the panel: its frame and its one or two elements, then the animated body at the panel's frame.
+void FUN_0039723c(TitlePanel *panel)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  
-  FUN_002c39a4(g_titleScene);
-  FUN_002bed3c();
-  temp_v0 = g_titleScene;
-  temp_v2 = FUN_002c5d80(1,0);
-  piVar6 = (int *)(temp_v0 + 0x124c);
-  temp_v3 = *piVar6;
-  temp_v4 = piVar6[temp_v3 + 2];
-  *piVar6 = temp_v3 + 1;
-  piVar6[temp_v3 + 3] = temp_v2;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v4 != temp_v2) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  FUN_002c1b64(g_titleScene,0);
-  efctSetSpeed();
-  FUN_002bf380(2,0x2e,0,*(unsigned int *)&param_1->field_0xac,0,0xb);
-  temp_v0 = g_titleScene;
-  temp_v2 = packNibblesAndByte(6,1,0);
-  piVar6 = (int *)(temp_v0 + 0x12ac);
-  temp_v3 = piVar6[*piVar6 + 2];
-  piVar6[*piVar6 + 2] = temp_v2;
-  if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v3 != temp_v2) {
-    (**(romwright_code **)(temp_v0 + 0x12c8))();
-    *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-  }
-  if (param_1->field_0x29 != '\0') {
-    FUN_002bf288(2,0x2e,0x3f,*(unsigned int *)&param_1->field_0xa4,0,0xb);
-  }
-  else {
-    FUN_002bf288(2,0x2e,0x3d,*(unsigned int *)&param_1->field_0xa4,0,0xb);
-    FUN_002bf288(2,0x2e,0x3e,*(unsigned int *)&param_1->field_0xa4,0,0xb);
-  }
-  temp_v0 = g_titleScene;
-  temp_v2 = packNibblesAndByte(6,7,0);
-  piVar6 = (int *)(temp_v0 + 0x12ac);
-  temp_v3 = piVar6[*piVar6 + 2];
-  piVar6[*piVar6 + 2] = temp_v2;
-  if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v3 != temp_v2) {
-    (**(romwright_code **)(temp_v0 + 0x12c8))();
-    *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-  }
-  temp_v1 = param_1->field_0x20;
-  if (param_1->field_0x28 != '\0') {
-    temp_v1 = temp_v1 + '\x04';
-  }
-  FUN_00397db0(param_1,temp_v1);
-  efctSetSpeed();
-  temp_v0 = g_titleScene;
-  piVar6 = (int *)(g_titleScene + 0x124c);
-  temp_v2 = *piVar6;
-  temp_v3 = piVar6[temp_v2 + 2];
-  *piVar6 = temp_v2 - 1;
-  if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v3 != piVar6[temp_v2 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1268))();
-    *(unsigned char *)(temp_v0 + 0x1264) = 0;
-  }
-  FUN_002c198c(g_titleScene);
-  FUN_002c18e4(g_titleScene);
-  return;
+    FUN_002c39a4(g_titleScene);
+    FUN_002bed3c();
+    renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+    FUN_002c1b64(g_titleScene, 0);
+    f32 speed = panel->effect.speed;
+    efctSetSpeed(speed);
+    FUN_002bf380(2, 0x2e, 0, panel->frameX, 0, 0xb);
+    renderStackSet(&g_titleScene->stackB, packNibblesAndByte(6, 1, 0));
+    if (panel->compact != 0) {
+        FUN_002bf288(2, 0x2e, 0x3f, panel->elementX, 0, 0xb);
+    } else {
+        FUN_002bf288(2, 0x2e, 0x3d, panel->elementX, 0, 0xb);
+        FUN_002bf288(2, 0x2e, 0x3e, panel->elementX, 0, 0xb);
+    }
+    renderStackSet(&g_titleScene->stackB, packNibblesAndByte(6, 7, 0));
+    s8 frame = panel->frame;
+    if (panel->highlighted != 0) {
+        frame = frame + 4;
+    }
+    FUN_00397db0(panel, frame, speed);
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_titleScene->stackA);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
 }
 
-} /* extern "C" */
+}

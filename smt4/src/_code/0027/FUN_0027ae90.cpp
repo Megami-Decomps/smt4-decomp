@@ -1,73 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027ae90` (_code @ 0x27ae90, 0x2e4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near miss: only register allocation and constant load order differ (retail addresses the object relative to its active byte with writeback and loads the hoisted constants in another order). */
+#include "common.h"
+
+struct MapVec3 {
+    f32 x, y, z;
+};
+
+/* A map object slot (0x48 bytes, accessed fields). */
+struct MapObject {
+    u8 unk00[4];
+    MapVec3 position;       // 0x04
+    u8 unk10[4];
+    u8 active;              // 0x14
+    u8 unk15[7];
+    f32 heading;            // 0x1C (degrees)
+    u8 unk20[4];
+    s32 kind;               // 0x24
+    u8 unk28[0x20];
+};
 
 extern "C" {
-
-int FUN_002671f4(int);
-int FUN_00282390(void);
-int FUN_0028250c(void);
-
-extern int g_mapObj; /* 0x447e70 */
-extern int g_gameState; /* 0x49f91c */
-extern int DAT_0049f920; /* 0x49f920 */
-
-/* Supplied declaration required: FUN_002671f4. */
-/* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
-
-
-void FUN_0027ae90(void)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = g_mapObj + temp_v1 * 0x48;
-    if (*(char *)(temp_v0 + 0x14) != '\0') {
-      if ((g_gameState != 4) || (DAT_0049f920 != 1)) {
-        if (*(int *)(temp_v0 + 0x38) == 2) {
-          FUN_0028250c();
-          FUN_00282390();
-          FUN_002671f4(0);
-        }
-        if (*(int *)(temp_v0 + 0x38) == 10) {
-          FUN_0028250c();
-          FUN_00282390();
-          FUN_002671f4(0);
-        }
-      }
-      if (*(int *)(temp_v0 + 0x38) == 7) {
-        FUN_0028250c();
-        FUN_00282390();
-        FUN_002671f4(0);
-      }
-      if (*(int *)(temp_v0 + 0x38) == 9) {
-        FUN_0028250c();
-        FUN_00282390();
-        FUN_002671f4(0);
-      }
-      if (*(int *)(temp_v0 + 0x38) == 0xb) {
-        FUN_0028250c();
-        FUN_00282390();
-        FUN_002671f4(0);
-      }
-      if (*(int *)(temp_v0 + 0x38) == 0xf) {
-        FUN_002671f4(0);
-      }
-      if (*(int *)(temp_v0 + 0x38) == 0x10) {
-        FUN_002671f4(0);
-      }
-      if (*(int *)(temp_v0 + 0x38) == 0x11) {
-        FUN_002671f4(0);
-      }
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
+extern MapObject *g_mapObj;
+extern struct { s32 mode; s32 submode; } g_gameState;
+f32 FUN_0028250c(f32 radians);
+f32 FUN_00282390(f32 radians);
+void FUN_002671f4(s32 slot, MapVec3 position, f32 heading, f32 a, f32 b, f32 c);
 }
 
-} /* extern "C" */
+/* Spawn the effect of one map object kind, offset along its heading. */
+static __inline void spawnOffsetEffect(const MapObject *object, f32 height, f32 distance, f32 a, f32 b, f32 c)
+{
+    MapVec3 position = object->position;
+    position.y = object->position.y - height;
+    position.x += FUN_0028250c(object->heading * 0.017453292f) * distance;
+    position.z += FUN_00282390(object->heading * 0.017453292f) * distance;
+    FUN_002671f4(0, position, object->heading, a, b, c);
+}
+
+/* Spawn the ambient effects of every active map object, by kind. */
+extern "C" void FUN_0027ae90(void)
+{
+    for (s32 i = 0; i < 24; i++) {
+        MapObject *object = &g_mapObj[i];
+        if (object->active == 0)
+            continue;
+        if (g_gameState.mode != 4 || g_gameState.submode != 1) {
+            if (object->kind == 2)
+                spawnOffsetEffect(object, 400.0f, 20.0f, 80.0f, 350.0f, 50.0f);
+            if (object->kind == 10)
+                spawnOffsetEffect(object, 550.0f, 20.0f, 80.0f, 500.0f, 50.0f);
+        }
+        if (object->kind == 7)
+            spawnOffsetEffect(object, 0.0f, -17.5f, 200.0f, 300.0f, 50.0f);
+        if (object->kind == 9)
+            spawnOffsetEffect(object, 0.0f, -17.5f, 150.0f, 300.0f, 50.0f);
+        if (object->kind == 11)
+            spawnOffsetEffect(object, 0.0f, -17.5f, 200.0f, 300.0f, 50.0f);
+        if (object->kind == 15)
+            FUN_002671f4(0, object->position, object->heading, 50.0f, 50.0f, 50.0f);
+        if (object->kind == 16)
+            FUN_002671f4(0, object->position, object->heading, 50.0f, 50.0f, 50.0f);
+        if (object->kind == 17)
+            FUN_002671f4(0, object->position, object->heading, 100.0f, 50.0f, 60.0f);
+    }
+}

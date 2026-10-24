@@ -1,228 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00109b08` (_code @ 0x109b08, 0x3b8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the icon for an element/status index in one of three icon sets and returns its width; written from the decompilation, the case tables are written as data tables and the shared draw/return tail is merged */
+#include "common.h"
+
+#define ICON_TABLE 0x13
+#define ICON_LAYER 2
+#define ICON_FLAGS 0xB
+#define ICON_Y_OFFSET 2.0f
+#define ICON_WIDTH_MASK 0x7FFF
+
+/* A frame record of the icon table. */
+struct IconFrameRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 width;
+};
+
+/* Icon set 0: sprite and optional pre-composed icon (-1: draw the sprite itself). */
+struct IconEntry {
+    u16 sprite;
+    s16 composed;
+};
 
 extern "C" {
+IconFrameRecord *FUN_002bf4f8(u32 table, u32 sprite);
+void FUN_002bf288(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
+void FUN_002bf380(u32 layer, u32 table, u32 composed);
+void efctSetSpeed(f32 speed);
 
-int FUN_002bf288(int, int, unsigned int, int, int, int);
-int FUN_002bf380(int, int, int);
-int efctSetSpeed(void);
+static const IconEntry iconSetMain[0x16] = {
+    { 3000, 0 }, { 3000, 1 }, { 3000, 2 }, { 3000, 3 }, { 0xBB9, 4 }, { 0xBBA, 5 },
+    { 0xBBB, 7 }, { 0xBBB, 6 }, { 0xBBC, 8 }, { 0xBC1, -1 }, { 0xBC2, -1 }, { 0xBC3, -1 },
+    { 0xBC4, -1 }, { 0xBC5, -1 }, { 0xBBD, -1 }, { 0xBBE, -1 }, { 0xBC0, -1 }, { 0xBBF, -1 },
+    { 0xBBB, 0x1B }, { 0xBBB, 0x1C }, { 0xBBB, 0x1D }, { 0xBBB, 0x1E },
+};
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
+/* Icon set 1: 1000.. with a gap at 0x3F5. */
+static const u16 iconSetSecond[14] = {
+    1000, 0x3E9, 0x3EA, 0x3EB, 0x3EC, 0x3ED, 0x3EE, 0x3EF, 0x3F0, 0x3F1, 0x3F2, 0x3F3, 0x3F4, 0x3F6
+};
 
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: efctSetSpeed. */
+#define ICON_SET_THIRD_BASE 0x3F7
+#define ICON_SET_THIRD_COUNT 10
 
-
-unsigned short FUN_00109b08(int param_1,unsigned int param_2,int param_3)
-
+/* Draws icon `index` of `set` at (x, y) unless `skip` is set; returns its width (0 when nothing drawn). */
+u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned short temp_v3;
-  float in_s0;
-  float in_s1;
-  
-  efctSetSpeed();
-  temp_v1 = 0;
-  temp_v2 = -1;
-  temp_v3 = 0;
-  if (param_1 != 0) {
-    if (param_1 != 1) {
-      if (param_1 != 2) {
-        efctSetSpeed();
-        return temp_v3;
-      }
-      switch(param_2) {
-      case 0:
-        temp_v1 = 0x3f7;
-        break;
-      case 1:
-        temp_v1 = 0x3f8;
-        break;
-      case 2:
-        temp_v1 = 0x3f9;
-        break;
-      case 3:
-        temp_v1 = 0x3fa;
-        break;
-      case 4:
-        temp_v1 = 0x3fb;
-        break;
-      case 5:
-        temp_v1 = 0x3fc;
-        break;
-      case 6:
-        temp_v1 = 0x3fd;
-        break;
-      case 7:
-        temp_v1 = 0x3fe;
-        break;
-      case 8:
-        temp_v1 = 0x3ff;
-        break;
-      case 9:
-        temp_v1 = 0x400;
-      }
-      temp_v2 = FUN_002bf4f8(0x13,temp_v1);
+    efctSetSpeed(1.0f);
+    u32 sprite = 0;
+    s32 composed = -1;
+    u16 width = 0;
+
+    if (set == 0) {
+        if (index < 0x16) {
+            sprite = iconSetMain[index].sprite;
+            composed = iconSetMain[index].composed;
+        }
+        IconFrameRecord *frame = FUN_002bf4f8(ICON_TABLE, sprite);
+        if (frame != NULL && skip == 0) {
+            if (composed >= 0)
+                FUN_002bf380(ICON_LAYER, ICON_TABLE, composed);
+            else
+                FUN_002bf288(ICON_LAYER, ICON_TABLE, sprite, (s32)x, (s32)(y + ICON_Y_OFFSET), ICON_FLAGS);
+            width = frame->width & ICON_WIDTH_MASK;
+        }
+        efctSetSpeed(1.0f);
+        return width;
     }
-    else {
-      switch(param_2) {
-      case 0:
-        temp_v1 = 1000;
-        break;
-      case 1:
-        temp_v1 = 0x3e9;
-        break;
-      case 2:
-        temp_v1 = 0x3ea;
-        break;
-      case 3:
-        temp_v1 = 0x3eb;
-        break;
-      case 4:
-        temp_v1 = 0x3ec;
-        break;
-      case 5:
-        temp_v1 = 0x3ed;
-        break;
-      case 6:
-        temp_v1 = 0x3ee;
-        break;
-      case 7:
-        temp_v1 = 0x3ef;
-        break;
-      case 8:
-        temp_v1 = 0x3f0;
-        break;
-      case 9:
-        temp_v1 = 0x3f1;
-        break;
-      case 10:
-        temp_v1 = 0x3f2;
-        break;
-      case 0xb:
-        temp_v1 = 0x3f3;
-        break;
-      case 0xc:
-        temp_v1 = 0x3f4;
-        break;
-      case 0xd:
-        temp_v1 = 0x3f6;
-      }
-      temp_v2 = FUN_002bf4f8(0x13,temp_v1);
+
+    if (set == 1) {
+        if (index < 14)
+            sprite = iconSetSecond[index];
+    } else if (set == 2) {
+        if (index < ICON_SET_THIRD_COUNT)
+            sprite = ICON_SET_THIRD_BASE + index;
+    } else {
+        efctSetSpeed(1.0f);
+        return width;
     }
-    if ((temp_v2 == 0) || (param_3 != 0)) {
-      efctSetSpeed();
-      return temp_v3;
+    IconFrameRecord *frame = FUN_002bf4f8(ICON_TABLE, sprite);
+    if (frame == NULL || skip != 0) {
+        efctSetSpeed(1.0f);
+        return width;
     }
-    FUN_002bf288(2,0x13,temp_v1,(int)in_s0,(int)(in_s1 + 2.0f),0xb);
-    temp_v3 = *(unsigned short *)(temp_v2 + 4);
-    temp_v3 = temp_v3 & 0x7fff;
-    efctSetSpeed();
-    return temp_v3;
-  }
-  switch(param_2) {
-  case 0:
-    temp_v2 = 0;
-    temp_v1 = 3000;
-    break;
-  case 1:
-    temp_v2 = 1;
-    temp_v1 = 3000;
-    break;
-  case 2:
-    temp_v2 = 2;
-    temp_v1 = 3000;
-    break;
-  case 3:
-    temp_v2 = 3;
-    temp_v1 = 3000;
-    break;
-  case 4:
-    temp_v1 = 0xbb9;
-    temp_v2 = 4;
-    break;
-  case 5:
-    temp_v1 = 0xbba;
-    temp_v2 = 5;
-    break;
-  case 6:
-    temp_v2 = 7;
-    temp_v1 = 0xbbb;
-    break;
-  case 7:
-    temp_v2 = 6;
-    temp_v1 = 0xbbb;
-    break;
-  case 8:
-    temp_v1 = 0xbbc;
-    temp_v2 = 8;
-    break;
-  case 9:
-    temp_v1 = 0xbc1;
-    break;
-  case 10:
-    temp_v1 = 0xbc2;
-    break;
-  case 0xb:
-    temp_v1 = 0xbc3;
-    break;
-  case 0xc:
-    temp_v1 = 0xbc4;
-    break;
-  case 0xd:
-    temp_v1 = 0xbc5;
-    break;
-  case 0xe:
-    temp_v1 = 0xbbd;
-    break;
-  case 0xf:
-    temp_v1 = 0xbbe;
-    break;
-  case 0x10:
-    temp_v1 = 0xbc0;
-    break;
-  case 0x11:
-    temp_v1 = 0xbbf;
-    break;
-  case 0x12:
-    temp_v2 = 0x1b;
-    temp_v1 = 0xbbb;
-    break;
-  case 0x13:
-    temp_v2 = 0x1c;
-    temp_v1 = 0xbbb;
-    break;
-  case 0x14:
-    temp_v2 = 0x1d;
-    temp_v1 = 0xbbb;
-    break;
-  case 0x15:
-    temp_v2 = 0x1e;
-    temp_v1 = 0xbbb;
-  }
-  temp_v0 = FUN_002bf4f8(0x13,temp_v1);
-  if ((temp_v0 != 0) && (param_3 == 0)) {
-    if (temp_v2 >= 0) {
-      FUN_002bf380(2,0x13,temp_v2);
-    }
-    else {
-      FUN_002bf288(2,0x13,temp_v1,(int)in_s0,(int)(in_s1 + 2.0f),0xb);
-    }
-    temp_v3 = *(unsigned short *)(temp_v0 + 4);
-    temp_v3 = temp_v3 & 0x7fff;
-  }
-  efctSetSpeed();
-  return temp_v3;
+    FUN_002bf288(ICON_LAYER, ICON_TABLE, sprite, (s32)x, (s32)(y + ICON_Y_OFFSET), ICON_FLAGS);
+    width = frame->width & ICON_WIDTH_MASK;
+    efctSetSpeed(1.0f);
+    return width;
 }
 
 } /* extern "C" */

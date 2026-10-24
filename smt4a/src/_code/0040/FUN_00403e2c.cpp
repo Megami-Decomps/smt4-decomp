@@ -1,118 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00403e2c` (_code @ 0x403e2c, 0x218 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical calls and branches; retail keeps 0 in r7 (the touched flag) and 1 in r6 across the calls with a 28-byte frame, armcc here allocates r6 for the flag and re-materialises 1. */
+#include "common.h"
+
+/* The list menu scene (only the fields this update reads or writes). */
+struct ListMenu {
+    /* 0x000 */ u8 unk000[0x90];
+    /* 0x090 */ u8 list[0x64];
+    /* 0x0F4 */ s32 pageCount;
+    /* 0x0F8 */ s32 cursor;
+    /* 0x0FC */ u8 unk0FC[4];
+    /* 0x100 */ u32 selectedId;
+    /* 0x104 */ u8 unk104[8];
+    /* 0x10C */ u8 area[0x12];
+    /* 0x11E */ u8 unk11E[4];
+    /* 0x122 */ s16 areaY;
+    /* 0x124 */ s16 areaWidth;
+    /* 0x126 */ s16 areaX;
+    /* 0x128 */ u8 unk128[0x24];
+    /* 0x14C */ u8 confirmSprite[0x8C];
+    /* 0x1D8 */ u8 backSprite[0x8C];
+    /* 0x264 */ u8 unk264[0x8C];
+    /* 0x2F0 */ u8 scrollA[0x8C];
+    /* 0x37C */ u8 scrollB[0x8C];
+    /* 0x408 */ u16 ids[1];
+};
+
+struct ListMenuTail {
+    /* 0x664 */ u32 selectedCopy;
+};
 
 extern "C" {
+s32 FUN_001517b4(s32 button, s32 mode);
+void FUN_00163aa4(void *scroll, f32 amount);
+s32 eventQueueAddUniqueIfValid(u32 event);
+void uiSpriteSetKeyframe(void *sprite, s32 key, s32 arg);
+void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 arg);
+void FUN_0019de98(s32 a, u32 color);
+void FUN_00212724(void);
+void FUN_00228b04(void *list, s32 arg);
+void useCounterStart(void);
+void FUN_0031f208(s32 id);
+void sortMenuAcquire(s32 id, s32 arg);
+s32 FUN_003450d4(void *list, u32 handle, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
+u32 FUN_0039b984(void);
+void FUN_004029f4(ListMenu *menu, s32 a, s32 b);
+void FUN_00404974(ListMenu *menu);
+s32 ifTouchGetSelectionMode(void);
+u32 FUN_001834a4(u32 a, u32 b);
+s32 resourceRunOperationIfUnblocked(void *list);
+s32 FUN_002a4894(void *list);
 
-int FUN_001517b4(...);
-int FUN_00163aa4(int);
-int eventQueueAddUniqueIfValid(...);
-int uiSpriteSetKeyframe(int, int, int);
-int uiSpriteSetImageKeyframe(...);
-int FUN_0019de98(...);
-int FUN_00212724(void);
-int FUN_00228b04(int, int);
-int useCounterStart(void);
-int FUN_0031f208(...);
-int sortMenuAcquire(int, int);
-int FUN_003450d4(int, unsigned int, int, int, int, int, unsigned char [16], int, int);
-int FUN_0039b984(void);
-int FUN_004029f4(...);
-int FUN_00404974(int);
-
-/* stack frame of param_1: 5 slot(s), 17 byte(s) */
-typedef struct {
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int ifTouchGetSelectionMode(void);
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_00212724. */
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: useCounterStart. */
-extern unsigned int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: sortMenuAcquire. */
-/* Supplied declaration required: FUN_003450d4. */
-/* Supplied declaration required: FUN_0039b984. */
-/* Supplied declaration required: FUN_004029f4. */
-/* Supplied declaration required: FUN_00404974. */
-
-
-void FUN_00403e2c(int param_1)
-
+/* Updates the list menu: scrolls its panels, reads the page and cursor, and handles the touch list
+ * and the back/confirm/sort buttons. */
+void FUN_00403e2c(ListMenu *menu)
 {
-/* irregular: 15 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4 [16];
-  
-  FUN_00163aa4(param_1 + 0x2f0);
-  FUN_00163aa4(param_1 + 0x37c);
-  FUN_00228b04(param_1 + 0x90,1);
-  temp_v0 = resourceRunOperationIfUnblocked(param_1 + 0x90);
-  *(unsigned int *)(param_1 + 0xf8) = temp_v0;
-  temp_v1 = FUN_002a4894(param_1 + 0x90);
-  *(int *)(param_1 + 0xf4) = temp_v1;
-  temp_v2 = (unsigned int)*(unsigned short *)(param_1 + (temp_v1 + *(int *)(param_1 + 0xf8)) * 2 + 0x408);
-  *(unsigned int *)(param_1 + 0x100) = temp_v2;
-  FUN_0039b984();
-  *(unsigned int *)(param_1 + 0x664) = temp_v2;
-  temp_v4[0] = 0;
-  temp_v1 = ifTouchGetSelectionMode();
-  temp_v0 = FUN_001834a4(0x32,0x8b);
-  temp_v3 = param_1 + 0x90;
-  FUN_003450d4(temp_v3,temp_v0,param_1 + 0x10c,(int)*(short *)(param_1 + 0x126),
-               (int)*(short *)(param_1 + 0x122),(int)*(short *)(param_1 + 0x124),temp_v4,0,1);
-  if (temp_v3 == 0) {
-    temp_v3 = 0;
-    FUN_001517b4(0,1);
-    if ((temp_v3 != 0) || (temp_v1 == 6)) {
-      eventQueueAddUniqueIfValid(0x100020e);
-      FUN_00404974(param_1);
-      uiSpriteSetKeyframe(param_1 + 0x1d8,1,0);
-      uiSpriteSetImageKeyframe(param_1 + 0x1d8,0);
-      FUN_004029f4(param_1,5,7);
-      return;
-    }
-    temp_v1 = 1;
-    FUN_001517b4();
-    if (temp_v1 != 0) {
-      eventQueueAddUniqueIfValid(0x100020f);
-      uiSpriteSetKeyframe(param_1 + 0x14c,2,0);
-      uiSpriteSetImageKeyframe(param_1 + 0x14c,1,0);
-      FUN_00212724();
-      FUN_004029f4(param_1,2,0);
-    }
-    else {
-      temp_v1 = 9;
-      FUN_001517b4(9,1);
-      if (temp_v1 != 0) {
-        sortMenuAcquire(0x1e,0);
-        FUN_0031f208(0x34);
-        FUN_0031f208(0x1b);
-        useCounterStart();
-        FUN_0019de98(0,0xf4f4f4ff);
-        eventQueueAddUniqueIfValid(0x100020e);
-        FUN_004029f4(param_1,8,0);
+    FUN_00163aa4(menu->scrollA, 1.0f);
+    FUN_00163aa4(menu->scrollB, 1.0f);
+    FUN_00228b04(menu->list, 1);
+    menu->cursor = resourceRunOperationIfUnblocked(menu->list);
+    menu->pageCount = FUN_002a4894(menu->list);
+    menu->selectedId = menu->ids[menu->pageCount + menu->cursor];
+    ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = FUN_0039b984();
+    u8 touched = 0;
+    s32 mode = ifTouchGetSelectionMode();
+    u32 handle = FUN_001834a4(50, 139);
+    if (FUN_003450d4(menu->list, handle, menu->area, menu->areaX, menu->areaY, menu->areaWidth, &touched, 0, 1))
         return;
-      }
+    if (FUN_001517b4(0, 1) || mode == 6) {
+        eventQueueAddUniqueIfValid(0x0100020E);
+        FUN_00404974(menu);
+        uiSpriteSetKeyframe(menu->backSprite, 1, 0);
+        uiSpriteSetImageKeyframe(menu->backSprite, 0, 0);
+        FUN_004029f4(menu, 5, 7);
+        return;
     }
-  }
-  return;
+    if (FUN_001517b4(1, 1)) {
+        eventQueueAddUniqueIfValid(0x0100020E | 1);
+        uiSpriteSetKeyframe(menu->confirmSprite, 2, 0);
+        uiSpriteSetImageKeyframe(menu->confirmSprite, 1, 0);
+        FUN_00212724();
+        FUN_004029f4(menu, 2, 0);
+    } else if (FUN_001517b4(9, 1)) {
+        sortMenuAcquire(30, 0);
+        FUN_0031f208(52);
+        FUN_0031f208(27);
+        useCounterStart();
+        FUN_0019de98(0, 0xF4F4F4FF);
+        eventQueueAddUniqueIfValid(0x0100020E);
+        FUN_004029f4(menu, 8, 0);
+    }
 }
 
 } /* extern "C" */

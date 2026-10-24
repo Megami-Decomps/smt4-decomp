@@ -1,205 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039af94` (_code @ 0x39af94, 0x3b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the title map's location markers (16 entries, scaled into the view around the cursor, only the active ones); written from the decompilation, conversions of the s16 intermediates and the efctSetSpeed argument are not compared with retail */
+#include "camp/RenderCtx.h"
+
+struct MapMarkerEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 map;             /* map the marker belongs to (0: unused) */
+    /* 0x04 */ s8 slot;
+    /* 0x05 */ u8 active;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ s8 key;
+    /* 0x09 */ u8 unk09;
+    /* 0x0A */ s16 x;
+    /* 0x0C */ s16 y;
+    /* 0x0E */ u8 unk0E[2];
+};
+
+struct MapMarkerView {
+    s32 x;
+    s32 y;
+};
+
+struct MapMarkerScreen {
+    /* 0x000 */ u8 unk000[0x10];
+    /* 0x010 */ u32 flags;
+    /* 0x014 */ u8 unk014[0x4C];
+    /* 0x060 */ MapMarkerEntry entries[0x10];       /* the first byte doubles as the selected key */
+    /* 0x162 */ u8 navi[2];
+    /* 0x164 */ u8 originPair[8];
+    /* 0x16C */ u8 unk16C[0xA14];
+    /* 0xB80 */ MapMarkerView viewSize;
+    /* 0xB88 */ MapMarkerView slots[8];
+};
+
+struct MapBlockLayout {
+    /* 0x000 */ u8 unk000[0xD5A];
+    /* 0xD5A */ s8 layout;
+};
+
+#define MARKER_COUNT 0x10
+#define MARKER_LAYOUT_FULL 0xC
+#define MARKER_SPRITE_FULL 0x1B65
+#define MARKER_SPRITE_HALF 0x1B8D
+#define MARKER_FLAG_FIXED 0x20
 
 extern "C" {
+extern RenderCtx *g_titleScene;
 
-int pairCopy(int, float *);
-int uiGetEntrySize(int, unsigned int, int *, int *);
-int FUN_002b0750(...);
-int efctSetSpeed(void);
-int NaviMain_GetPosY(int);
-int VectorFloatToUnsigned(...);
-int VectorSignedToFloat(...);
+MapBlockLayout *gameGetMapBlock(void);
+f32 *NaviMain_GetCursorPos(void);
+void NaviMain_GetPosY(void *navi);
+s32 NaviMain_GetCurrentMap(void *navi);
+void pairCopy(void *source, f32 *destination);
+void uiGetEntrySize(u32 table, u32 sprite, s32 *width, s32 *height);
+void efctSetSpeed(f32 speed);
+s32 FUN_002c5d80(u32 a, u32 b);
+void FUN_002b0750(u32 layer, u32 table, u32 sprite, s32 x, s32 y, s32 width, s32 height, u32 flags);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-} param_1_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: uiGetEntrySize. */
-/* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int gameGetMapBlock(void);
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int NaviMain_GetCurrentMap(int);
-extern unsigned long long *NaviMain_GetCursorPos(void);
-/* Supplied declaration required: NaviMain_GetPosY. */
-
-
-void FUN_0039af94(int param_1)
-
+void FUN_0039af94(MapMarkerScreen *screen)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned long long *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int *piVar10;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned char temp_v10;
-  unsigned int in_fpscr;
-  float temp_v11;
-  float temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  float temp_v15;
-  float temp_v16;
-  unsigned long long temp_v17;
-  unsigned long long temp_v18;
-  unsigned long long temp_v19;
-  unsigned int temp_v20;
-  unsigned long long temp_v21;
-  float temp_v22;
-  float temp_v23;
-  unsigned long long temp_v24;
-  int temp_v25;
-  int temp_v26;
-  int temp_v27;
-  float temp_v28;
-  float temp_v29;
-  
-  temp_v2 = gameGetMapBlock();
-  temp_v27 = param_1 + 0x162;
-  puVar4 = (unsigned long long *)NaviMain_GetCursorPos();
-  temp_v17 = *puVar4;
-  if (*(char *)(temp_v2 + 0xd5a) == '\f') {
-    temp_v9 = 0x1b65;
-    temp_v18 = 0x40e000003cc49ba6;
-  }
-  else {
-    temp_v9 = 0x1b8d;
-    temp_v18 = 0x404000003c449ba6;
-  }
-  uiGetEntrySize(0x13,temp_v9,&temp_v25,&temp_v26);
-  temp_v3 = *(unsigned int *)(param_1 + 0x10);
-  NaviMain_GetPosY(temp_v27);
-  pairCopy(param_1 + 0x164,&temp_v28);
-  temp_v6 = 0;
-  temp_v22 = 160.0f;
-  temp_v23 = 120.0f;
-  temp_v24 = 0x3f000000;
-  do {
-    temp_v7 = param_1 + temp_v6 * 0x10;
-    if ((*(short *)(temp_v7 + 0x62) != 0) &&
-       (temp_v4 = NaviMain_GetCurrentMap(temp_v27), temp_v4 == *(short *)(temp_v7 + 0x62))) {
-      temp_v10 = *(char *)(temp_v2 + 0xd5a) == '\f';
-      temp_v4 = param_1 + *(char *)(temp_v7 + 100) * 8;
-      temp_v11 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0xb88),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v12 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0xb8c),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      if (!temp_v10) {
-        temp_v0 = (short)(int)(temp_v11 * (float)temp_v24);
-        temp_v1 = (short)(int)(temp_v12 * (float)temp_v24);
-      }
-      else {
-        temp_v0 = (short)(int)temp_v11;
-        temp_v1 = (short)(int)temp_v12;
-      }
-      temp_v15 = (float)VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v13 = VectorSignedToFloat(temp_v26,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 0x6a),(unsigned char)(in_fpscr >> 0x16) & 3
-                                         );
-      temp_v11 = (float)VectorSignedToFloat((int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v14 = VectorSignedToFloat(temp_v25,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v16 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 0x6c),(unsigned char)(in_fpscr >> 0x16) & 3
-                                         );
-      temp_v12 = (float)VectorSignedToFloat((int)(short)(int)(temp_v15 + temp_v12 * (float)temp_v18),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v11 = (float)VectorSignedToFloat((int)(short)(int)(temp_v11 + temp_v16 * (float)temp_v18),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v15 = (float)((unsigned long long)temp_v18 >> 0x20);
-      temp_v12 = (float)VectorSignedToFloat((int)(short)(int)(temp_v12 - temp_v15),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v11 = (float)VectorSignedToFloat((int)(short)(int)(temp_v11 - temp_v15),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      if (temp_v10) {
-        temp_v15 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0xb80),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v16 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0xb84),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-      }
-      else {
-        temp_v15 = (float)VectorSignedToFloat(*(int *)(param_1 + 0xb80) / 2,
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v16 = (float)VectorSignedToFloat(*(int *)(param_1 + 0xb84) / 2,
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-      }
-      temp_v20 = VectorFloatToUnsigned(temp_v13,3);
-      temp_v15 = (float)VectorSignedToFloat((int)(temp_v15 - (float)temp_v17),(unsigned char)(in_fpscr >> 0x16) & 3
-                                         );
-      temp_v13 = VectorFloatToUnsigned(temp_v14,3);
-      temp_v21 = romwright_piece_4_4(temp_v20,temp_v13);
-      temp_v16 = (float)VectorSignedToFloat((int)(temp_v16 - (float)((unsigned long long)temp_v17 >> 0x20)),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v19 = romwright_piece_4_4((int)(temp_v11 - (temp_v16 - temp_v23)),(int)(temp_v12 - (temp_v15 - temp_v22)));
-      if ((temp_v3 & 0x20) == 0) {
-        temp_v4 = NaviMain_GetCurrentMap(temp_v27);
-        if ((temp_v4 == *(short *)(temp_v7 + 0x62)) &&
-           (*(char *)(temp_v7 + 0x68) == *(char *)(param_1 + 0x60))) {
-          *(unsigned char *)(temp_v7 + 0x65) = 1;
-        }
-        else {
-          *(unsigned char *)(temp_v7 + 0x65) = 0;
-        }
-      }
-      if (*(char *)(temp_v7 + 0x65) != '\0') {
-        efctSetSpeed();
-        temp_v7 = g_titleScene;
-        temp_v4 = FUN_002c5d80(1,0);
-        piVar10 = (int *)(temp_v7 + 0x124c);
-        temp_v5 = *piVar10;
-        temp_v8 = piVar10[temp_v5 + 2];
-        *piVar10 = temp_v5 + 1;
-        piVar10[temp_v5 + 3] = temp_v4;
-        if (*(char *)(temp_v7 + 0x1264) != '\0' || temp_v8 != temp_v4) {
-          (**(romwright_code **)(temp_v7 + 0x1268))();
-          *(unsigned char *)(temp_v7 + 0x1264) = 0;
-        }
-        temp_v12 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v19 >> 0x20),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v11 = (float)VectorSignedToFloat((int)temp_v19,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002b0750(9,0x13,temp_v9,(int)(temp_v28 + temp_v11),(int)(temp_v29 + temp_v12),(int)temp_v21,
-                     (int)((unsigned long long)temp_v21 >> 0x20),0xb);
-        temp_v7 = g_titleScene;
-        piVar10 = (int *)(g_titleScene + 0x124c);
-        temp_v4 = *piVar10;
-        temp_v5 = piVar10[temp_v4 + 2];
-        *piVar10 = temp_v4 - 1;
-        if (*(char *)(temp_v7 + 0x1264) != '\0' || temp_v5 != piVar10[temp_v4 + 1]) {
-          (**(romwright_code **)(temp_v7 + 0x1268))();
-          *(unsigned char *)(temp_v7 + 0x1264) = 0;
-        }
-      }
+    MapBlockLayout *block = gameGetMapBlock();
+    void *navi = &screen->navi;
+    f32 *cursor = NaviMain_GetCursorPos();
+    f32 cursorX = cursor[0];
+    f32 cursorY = cursor[1];
+
+    u32 sprite;
+    f32 scale;
+    f32 offset;
+    if (block->layout == MARKER_LAYOUT_FULL) {
+        sprite = MARKER_SPRITE_FULL;
+        scale = 0.024f;
+        offset = 7.0f;
+    } else {
+        sprite = MARKER_SPRITE_HALF;
+        scale = 0.012f;
+        offset = 3.0f;
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0x10);
-  return;
+    s32 iconWidth, iconHeight;
+    uiGetEntrySize(0x13, sprite, &iconWidth, &iconHeight);
+    u32 flags = screen->flags;
+    NaviMain_GetPosY(navi);
+    f32 origin[2];
+    pairCopy(screen->originPair, origin);
+
+    for (u32 i = 0; i < MARKER_COUNT; i++) {
+        MapMarkerEntry *entry = &screen->entries[i];
+        if (entry->map == 0 || NaviMain_GetCurrentMap(navi) != entry->map)
+            continue;
+
+        bool full = block->layout == MARKER_LAYOUT_FULL;
+        MapMarkerView *slot = &screen->slots[entry->slot];
+        s16 slotX = full ? (s16)(f32)slot->x : (s16)((f32)slot->x * 0.5f);
+        s16 slotY = full ? (s16)(f32)slot->y : (s16)((f32)slot->y * 0.5f);
+        f32 markerX = (f32)(s16)(s32)((f32)slotX + (f32)entry->x * scale);
+        f32 markerY = (f32)(s16)(s32)((f32)slotY + (f32)entry->y * scale);
+        markerX = (f32)(s16)(s32)(markerX - offset);
+        markerY = (f32)(s16)(s32)(markerY - offset);
+
+        f32 viewX = full ? (f32)screen->viewSize.x : (f32)(screen->viewSize.x / 2);
+        f32 viewY = full ? (f32)screen->viewSize.y : (f32)(screen->viewSize.y / 2);
+        u32 drawHeight = (u32)(f32)iconHeight;
+        u32 drawWidth = (u32)(f32)iconWidth;
+        s32 viewShiftX = (s32)(viewX - cursorX);
+        s32 viewShiftY = (s32)(viewY - cursorY);
+        s32 drawX = (s32)(markerX - ((f32)viewShiftX - 160.0f));
+        s32 drawY = (s32)(markerY - ((f32)viewShiftY - 120.0f));
+
+        if ((flags & MARKER_FLAG_FIXED) == 0)
+            entry->active = (NaviMain_GetCurrentMap(navi) == entry->map && entry->key == *(s8 *)screen->entries) ? 1 : 0;
+
+        if (entry->active != 0) {
+            efctSetSpeed(1.0f);
+            RenderCtx *context = g_titleScene;
+            s32 state = FUN_002c5d80(1, 0);
+            renderStackPush(&context->stackA, state);
+            FUN_002b0750(9, 0x13, sprite, (s32)(origin[0] + (f32)drawX), (s32)(origin[1] + (f32)drawY),
+                         drawWidth, drawHeight, 0xB);
+            renderStackPop(&g_titleScene->stackA);
+        }
+    }
 }
 
 } /* extern "C" */

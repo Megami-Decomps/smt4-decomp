@@ -1,193 +1,150 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00107d28` (_code @ 0x107d2c, 0x344 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs 212 rows); retail loads the g_ifTouch address before the prologue and shares base-address adds differently */
+#include "common.h"
+#include <math.h>
+
+// Hit rectangle of one touch item (x, y, width, height); stored 8 bytes apart.
+struct TouchRect {
+    s16 x;
+    s16 y;
+    s16 w;
+    s16 h;
+};
+
+// Touch-driven list/scroll widget. Item rectangles start at +0x0a with an 8-byte stride.
+struct TouchWidget {
+    u8 unk00[8];
+    u8 state;                   // 0x008: 0 idle, 1 pressed, 2 dragging, 4/5 slide-out, 6 released
+    u8 unk09;
+    TouchRect items[1];         // 0x00a: indexed by 8-byte stride (see itemRect)
+    u8 unk12[0x64a - 0x12];
+    s16 itemCount;              // 0x64a
+    s16 hitLimit;               // 0x64c: items below this index are always hit-tested
+    s16 selected;               // 0x64e
+    s16 holdTime;               // 0x650
+    s16 unk652;
+    u16 frame;                  // 0x654
+    u8 unk656[2];
+    s32 startX;                 // 0x658
+    s32 startY;                 // 0x65c
+    s32 curX;                   // 0x660
+    s32 curY;                   // 0x664
+    s32 lastX;                  // 0x668
+    s32 lastY;                  // 0x66c
+    s32 velX;                   // 0x670
+    s32 velY;                   // 0x674
+    s32 unk678;
+};
+
+struct TouchOwner {
+    u8 unk00[4];
+    TouchWidget* widget;        // 0x04
+};
 
 extern "C" {
 
-int uiPointerHitsRect(int, int, int, int, int);
-int FUN_002bffe0(...);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
+extern TouchOwner g_ifTouch;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+s32 uiPointerHitsRect(s32 x, s32 y, s32 w, s32 h, s32 arg);
+s32 FUN_002bffe0(s32* x, s32* y, s32 mode);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SQRT_8_DEFINED
-#define ROMWRIGHT_SQRT_8_DEFINED
-double sqrt(double);
-static double romwright_sqrt_8(double value)
+static inline TouchRect* itemRect(TouchWidget* t, s32 index)
 {
-    return (double)sqrt((double)value);
+    return reinterpret_cast<TouchRect*>(reinterpret_cast<u8*>(t) + index * 8 + 10);
 }
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: uiPointerHitsRect. */
-/* Supplied declaration required: FUN_002bffe0. */
 
-
-unsigned int FUN_00107d28(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// One frame of the touch widget: press detection, drag, release and the kinetic slide-out.
+u32 FUN_00107d28(void)
 {
-/* irregular: 3 goto(s); irregular input(s): in_fpscr; 4 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  unsigned int in_fpscr;
-  unsigned int temp_v5;
-  double temp_v6;
-  
-  temp_v4 = *(int *)(param_1 + 4);
-  piVar5 = (int *)(temp_v4 + 0x664);
-  temp_v1 = temp_v4 + 0x658;
-  switch(*(unsigned char *)(temp_v4 + 8)) {
-  case 0:
-    FUN_002bffe0(temp_v1,temp_v4 + 0x65c,1,param_4,param_4);
-    if ((temp_v1 != 0) && (temp_v1 = 0, 0 < *(short *)(temp_v4 + 0x64a))) {
-      do {
-        if (*(short *)(temp_v4 + 0x64c) <= temp_v1) goto LAB_00107df4;
-        do {
-          temp_v2 = temp_v4 + temp_v1 * 8;
-          temp_v3 = (int)*(short *)(temp_v2 + 10);
-          uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v2 + 0xc),(int)*(short *)(temp_v2 + 0xe),
-                       (int)*(short *)(temp_v2 + 0x10),0);
-          if (temp_v3 != 0) {
-            *(unsigned char *)(temp_v4 + 8) = 1;
-            *(short *)(temp_v4 + 0x64e) = (short)temp_v1;
-            *(unsigned short *)(temp_v4 + 0x650) = 0;
-            *(unsigned short *)(temp_v4 + 0x652) = 0;
-          }
-LAB_00107df4:
-          temp_v1 = (int)(short)((short)temp_v1 + 1);
-          if (*(short *)(temp_v4 + 0x64a) <= temp_v1) goto LAB_00107e14;
-        } while (temp_v1 >= 10);
-      } while( 1 );
-    }
-LAB_00107e14:
-    *(unsigned int *)(temp_v4 + 0x668) = *(unsigned int *)(temp_v4 + 0x658);
-    *(unsigned int *)(temp_v4 + 0x66c) = *(unsigned int *)(temp_v4 + 0x65c);
-    *(unsigned int *)(temp_v4 + 0x678) = 0;
-    *(unsigned int *)(temp_v4 + 0x660) = *(unsigned int *)(temp_v4 + 0x658);
-    *(unsigned int *)(temp_v4 + 0x664) = *(unsigned int *)(temp_v4 + 0x65c);
-    break;
-  case 1:
-    temp_v0 = *(short *)(temp_v4 + 0x650) + 1;
-    *(short *)(temp_v4 + 0x650) = temp_v0;
-    if (temp_v0 < 10) {
-      temp_v1 = temp_v4 + 0x660;
-      FUN_002bffe0(temp_v1,piVar5,0,param_4,param_4);
-      if (temp_v1 != 0) {
-        temp_v1 = *(int *)(temp_v4 + 0x660) - *(int *)(temp_v4 + 0x658);
-        temp_v2 = *(int *)(temp_v4 + 0x664) - *(int *)(temp_v4 + 0x65c);
-        temp_v6 = (double)VectorSignedToFloat(temp_v2 * temp_v2 + temp_v1 * temp_v1,
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v5 = VectorFloatToUnsigned(romwright_sqrt_8(temp_v6),3);
-        if (temp_v5 >= 9) {
-          *(unsigned char *)(temp_v4 + 8) = 2;
+    TouchWidget* t = g_ifTouch.widget;
+    switch (t->state) {
+    case 0:
+        if (FUN_002bffe0(&t->startX, &t->startY, 1) != 0) {
+            for (s16 i = 0; i < t->itemCount; i++) {
+                if (i >= 10 || i < t->hitLimit) {
+                    TouchRect* r = itemRect(t, i);
+                    if (uiPointerHitsRect(r->x, r->y, r->w, r->h, 0) != 0) {
+                        t->state = 1;
+                        t->selected = i;
+                        t->holdTime = 0;
+                        t->unk652 = 0;
+                    }
+                }
+            }
         }
-      }
-    }
-    else {
-      *(unsigned char *)(temp_v4 + 8) = 2;
-    }
-    temp_v1 = 0;
-    FUN_002bffe0(0,0,3);
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    *(unsigned char *)(temp_v4 + 8) = 6;
-    *(unsigned short *)(temp_v4 + 0x650) = 0;
-    break;
-  case 2:
-    *(short *)(temp_v4 + 0x650) = *(short *)(temp_v4 + 0x650) + 1;
-    temp_v1 = temp_v4 + 0x660;
-    FUN_002bffe0(temp_v1,piVar5,0,param_4,param_4);
-    if (temp_v1 != 0) {
-      temp_v1 = 0;
-      if (*(short *)(temp_v4 + 0x64a) < 1) {
-        return 0;
-      }
-      do {
-        if (*(short *)(temp_v4 + 0x64c) <= temp_v1) goto LAB_00107f48;
-        do {
-          temp_v2 = temp_v4 + temp_v1 * 8;
-          temp_v3 = (int)*(short *)(temp_v2 + 10);
-          uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v2 + 0xc),(int)*(short *)(temp_v2 + 0xe),
-                       (int)*(short *)(temp_v2 + 0x10),0);
-          if (temp_v3 != 0) {
-            *(unsigned char *)(temp_v4 + 8) = 2;
-            *(short *)(temp_v4 + 0x64e) = (short)temp_v1;
-          }
-LAB_00107f48:
-          temp_v1 = (int)(short)((short)temp_v1 + 1);
-          if (*(short *)(temp_v4 + 0x64a) <= temp_v1) {
-            return 0;
-          }
-        } while (temp_v1 >= 10);
-      } while( 1 );
-    }
-    *(unsigned char *)(temp_v4 + 8) = 0;
-    *(unsigned short *)(temp_v4 + 0x650) = 0;
-    break;
-  case 4:
-    temp_v1 = *(int *)(temp_v4 + 0x670);
-    *(int *)(temp_v4 + 0x660) = *(int *)(temp_v4 + 0x660) + temp_v1;
-    if (temp_v1 < 0) {
-      if ((*(unsigned short *)(temp_v4 + 0x654) & 1) == 0) {
-        *(int *)(temp_v4 + 0x670) = temp_v1 + 1;
-      }
-      temp_v1 = *(int *)(temp_v4 + 0x670);
-      if (-5 < temp_v1) {
-        temp_v1 = -5;
-      }
-      *(int *)(temp_v4 + 0x670) = temp_v1;
-      if ((short)((short)*(unsigned int *)(temp_v4 + 0x660) - (short)*(unsigned int *)(temp_v4 + 0x658)) <
-          -0x140) {
-        *(unsigned char *)(temp_v4 + 8) = 0;
-      }
-    }
-    if (0 < *(int *)(temp_v4 + 0x670)) {
-      if ((*(unsigned short *)(temp_v4 + 0x654) & 1) == 0) {
-        *(int *)(temp_v4 + 0x670) = *(int *)(temp_v4 + 0x670) - 1;
-      }
-      temp_v1 = *(int *)(temp_v4 + 0x670);
-      if (temp_v1 < 6) {
-        temp_v1 = 5;
-      }
-      *(int *)(temp_v4 + 0x670) = temp_v1;
-      if ((short)((short)*(unsigned int *)(temp_v4 + 0x660) -
-                         (short)*(unsigned int *)(temp_v4 + 0x658)) >= 0x141) {
-        *(unsigned char *)(temp_v4 + 8) = 0;
-      }
-    }
-    *(short *)(temp_v4 + 0x654) = *(short *)(temp_v4 + 0x654) + 1;
-    break;
-  case 5:
-    *piVar5 = *(int *)(temp_v4 + 0x664) + *(int *)(temp_v4 + 0x674);
-    if (*(int *)(temp_v4 + 0x674) < 0) {
-      temp_v1 = *(int *)(temp_v4 + 0x674) + 1;
-      *(int *)(temp_v4 + 0x674) = temp_v1;
-      if (temp_v1 < 0) {
-        *(short *)(temp_v4 + 0x654) = *(short *)(temp_v4 + 0x654) + 1;
+        t->lastX = t->startX;
+        t->lastY = t->startY;
+        t->unk678 = 0;
+        t->curX = t->startX;
+        t->curY = t->startY;
         break;
-      }
-      *(unsigned char *)(temp_v4 + 8) = 0;
+    case 1:
+        t->holdTime = t->holdTime + 1;
+        if (t->holdTime >= 10) {
+            t->state = 2;
+        } else if (FUN_002bffe0(&t->curX, &t->curY, 0) != 0) {
+            s32 dx = t->curX - t->startX;
+            s32 dy = t->curY - t->startY;
+            if ((u32)sqrt((double)(dx * dx + dy * dy)) > 8) {
+                t->state = 2;
+            }
+        }
+        if (FUN_002bffe0(0, 0, 3) != 0) {
+            t->state = 6;
+            t->holdTime = 0;
+        }
+        break;
+    case 2:
+        t->holdTime = t->holdTime + 1;
+        if (FUN_002bffe0(&t->curX, &t->curY, 0) == 0) {
+            t->state = 0;
+            t->holdTime = 0;
+        } else {
+            for (s16 i = 0; i < t->itemCount; i++) {
+                if (i >= 10 || i < t->hitLimit) {
+                    TouchRect* r = itemRect(t, i);
+                    if (uiPointerHitsRect(r->x, r->y, r->w, r->h, 0) != 0) {
+                        t->state = 2;
+                        t->selected = i;
+                    }
+                }
+            }
+        }
+        break;
+    case 4:
+        t->curX += t->velX;
+        if (t->velX < 0) {
+            if ((t->frame & 1) == 0) t->velX++;
+            if (t->velX > -5) t->velX = -5;
+            if ((s16)(t->curX - t->startX) < -320) t->state = 0;
+        }
+        if (t->velX > 0) {
+            if ((t->frame & 1) == 0) t->velX--;
+            if (t->velX <= 5) t->velX = 5;
+            if ((s16)(t->curX - t->startX) > 320) t->state = 0;
+        }
+        t->frame++;
+        break;
+    case 5:
+        t->curY += t->velY;
+        if (t->velY < 0) {
+            t->velY++;
+            if (t->velY < 0) {
+                t->frame++;
+                break;
+            }
+            t->state = 0;
+        }
+        if (t->velY > 0) {
+            t->velY--;
+            if (t->velY <= 0) t->state = 0;
+        }
+        t->frame++;
+        break;
+    case 6:
+        t->state = 0;
+        break;
     }
-    if ((0 < *(int *)(temp_v4 + 0x674)) &&
-       (temp_v1 = *(int *)(temp_v4 + 0x674) - 1, *(int *)(temp_v4 + 0x674) = temp_v1, temp_v1 < 1)) {
-      *(unsigned char *)(temp_v4 + 8) = 0;
-    }
-    *(short *)(temp_v4 + 0x654) = *(short *)(temp_v4 + 0x654) + 1;
-    break;
-  case 6:
-    *(unsigned char *)(temp_v4 + 8) = 0;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

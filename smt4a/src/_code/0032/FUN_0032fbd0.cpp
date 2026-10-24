@@ -1,235 +1,170 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032fbd0` (_code @ 0x32fbd0, 0x2d0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail unrolls the live-skill search and keeps the rebuilt record base in r7 (156 vs 180 rows); the save-entry comparison is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(int);
-int gameDataCopySaveEntry(...);
-int sysMemClear(short *, int);
-int FUN_004bcd90(short *);
-int rt_memcpy_w(char [22], unsigned char [20], int);
+/* A saved party entry as gameDataCopySaveEntry fills it (0x40 bytes; word offsets as used). */
+typedef struct SkillList {
+    u16 id[12];
+} SkillList;
 
-/* stack frame of param_1: 40 slot(s), 90 byte(s) */
-typedef struct {
-    unsigned char sp6D; /* 0x6d: local_6d */
-    unsigned short sp134; /* 0x134: local_134 */
-    unsigned short sp136; /* 0x136: local_136 */
-    unsigned int sp154; /* 0x154: local_154 */
-    unsigned int sp164; /* 0x164: local_164 */
-    unsigned int sp168; /* 0x168: local_168 */
-    unsigned short sp16C; /* 0x16c: local_16c */
-    unsigned short sp16E; /* 0x16e: local_16e */
-    unsigned short sp170; /* 0x170: local_170 */
-    unsigned short sp172; /* 0x172: local_172 */
-    unsigned short sp174; /* 0x174: local_174 */
-    unsigned short sp176; /* 0x176: local_176 */
-    unsigned short sp178; /* 0x178: local_178 */
-    unsigned short sp17A; /* 0x17a: local_17a */
-    unsigned short sp17C; /* 0x17c: local_17c */
-    unsigned short sp188; /* 0x188: local_188 */
-    unsigned short sp18C; /* 0x18c: local_18c */
-    unsigned short sp18E; /* 0x18e: local_18e */
-    unsigned short sp190; /* 0x190: local_190 */
-    unsigned short sp192; /* 0x192: local_192 */
-    unsigned short sp194; /* 0x194: local_194 */
-    unsigned short sp196; /* 0x196: local_196 */
-    unsigned short sp198; /* 0x198: local_198 */
-    unsigned int sp1B0; /* 0x1b0: local_1b0 */
-    unsigned int sp1BC; /* 0x1bc: local_1bc */
-    unsigned int sp1CC; /* 0x1cc: local_1cc */
-    unsigned short sp1CE; /* 0x1ce: local_1ce */
-    unsigned short sp1D0; /* 0x1d0: local_1d0 */
-    unsigned char sp1D2; /* 0x1d2: local_1d2 */
-    unsigned short sp1D4; /* 0x1d4: local_1d4 */
-    unsigned short sp1D6; /* 0x1d6: local_1d6 */
-    unsigned short sp1D8; /* 0x1d8: local_1d8 */
-    unsigned short sp1DA; /* 0x1da: local_1da */
-    unsigned short sp1DC; /* 0x1dc: local_1dc */
-    unsigned short sp1DE; /* 0x1de: local_1de */
-    unsigned short sp1E0; /* 0x1e0: local_1e0 */
-    unsigned short sp1E2; /* 0x1e2: local_1e2 */
-    unsigned short sp1E4; /* 0x1e4: local_1e4 */
-    unsigned short sp1E6; /* 0x1e6: local_1e6 */
-    unsigned short sp1E8; /* 0x1e8: local_1e8 */
-} param_1_stack;
+typedef struct SaveEntry {
+    /* 0x00 */ u16 key;
+    /* 0x02 */ u16 w02;
+    /* 0x04 */ u16 w04;
+    /* 0x06 */ u16 w06;
+    /* 0x08 */ u16 w08;
+    /* 0x0A */ u16 w0a;
+    /* 0x0C */ u16 w0c;
+    /* 0x0E */ u16 w0e;
+    /* 0x10 */ u16 w10;
+    /* 0x12 */ u16 w12;
+    /* 0x14 */ u16 w14;
+    /* 0x16 */ u8 flags;                /* bits 2..5: a count carried into the record */
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u16 w18;
+    /* 0x1A */ u16 w1a;
+    /* 0x1C */ SkillList skills;
+    /* 0x34 */ u8 unk34[4];
+    /* 0x38 */ u32 experience;
+    /* 0x3C */ char name[0x12];
+} SaveEntry;
 
-extern unsigned short recordGetScaledMaximum(short *);
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: gameDataCopySaveEntry. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_004bcd90. */
-extern unsigned int getUnlockedSlotCount(short *);
-/* Supplied declaration required: rt_memcpy_w. */
+/* The record rebuilt from a save entry (0x12C bytes; the fields compared below). */
+typedef struct RebuiltRecord {
+    /* 0x000 */ s16 hp;
+    /* 0x002 */ s16 mp;
+    /* 0x004 */ s16 strength;
+    /* 0x006 */ s16 magic;
+    /* 0x008 */ s16 vitality;
+    /* 0x00A */ s16 agility;
+    /* 0x00C */ s16 luck;
+    /* 0x00E */ u8 unk00e[2];
+    /* 0x010 */ u16 w10;
+    /* 0x012 */ u8 unk012[0x0A];
+    /* 0x01C */ u16 w1c;
+    /* 0x01E */ u16 w1e;
+    /* 0x020 */ u16 w20;
+    /* 0x022 */ u16 w22;
+    /* 0x024 */ u16 w24;
+    /* 0x026 */ u16 w26;
+    /* 0x028 */ u16 w28;
+    /* 0x02A */ u16 scaledMaximum;
+    /* 0x02C */ u16 copy10;
+    /* 0x02E */ u8 unk02e[2];
+    /* 0x030 */ u32 experience;
+    /* 0x034 */ SkillList skills;
+    /* 0x04C */ char name[0x12];
+    /* 0x05E */ u8 unk05e[4];
+    /* 0x062 */ u16 id;
+    /* 0x064 */ u16 key;
+    /* 0x066 */ u8 unk066[0xC5];
+    /* 0x12B */ u8 count;
+} RebuiltRecord;
 
+/* The live party unit record (only the compared fields). */
+typedef struct LiveUnit {
+    /* 0x000 */ s16 hp;
+    /* 0x002 */ s16 mp;
+    /* 0x004 */ s16 base[5];
+    /* 0x00E */ u8 unk00e[0x22];
+    /* 0x030 */ u32 experience;
+    /* 0x034 */ u16 skills[12];
+    /* 0x04C */ char name[0x12];
+    /* 0x05E */ u8 unk05e[4];
+    /* 0x062 */ u16 id;
+    /* 0x064 */ u16 key;
+    /* 0x066 */ u8 unk066[0x46];
+    /* 0x0AC */ u16 bonus[5];
+} LiveUnit;
 
-unsigned int FUN_0032fbd0(short *param_1)
+s32 gameDataCopySaveEntry(u16 id, void *destination);
+void FUN_00184310(u32 id);
+void sysMemClear(void *block, u32 size);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_004bcd90(RebuiltRecord *record);
+u16 recordGetScaledMaximum(RebuiltRecord *record);
+s32 getUnlockedSlotCount(LiveUnit *unit);
 
+/* Whether the live unit still matches its saved entry: the entry is rebuilt into a record and
+ * the key, experience, the base stats plus bonuses, every live skill and the name must agree.
+ * Returns 1 when they do (or when the entry cannot be read), else 0. */
+s32 FUN_0032fbd0(LiveUnit *unit)
 {
-/* irregular: 3 unstructured edge(s); 1 goto(s); 5 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  short temp_v7;
-  short temp_v8;
-  short temp_v9;
-  short temp_v10;
-  short temp_v11;
-  short temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned short temp_v15;
-  unsigned short temp_v16;
-  unsigned short temp_v17;
-  unsigned char temp_v18;
-  short temp_v19;
-  short temp_v20;
-  unsigned int temp_v21;
-  unsigned int uStack_1c8;
-  unsigned int uStack_1c4;
-  unsigned int uStack_1c0;
-  unsigned int temp_v22;
-  unsigned int uStack_1b8;
-  int temp_v23;
-  unsigned char temp_v24 [20];
-  short temp_v25;
-  short temp_v26;
-  short temp_v27;
-  short temp_v28;
-  short temp_v29;
-  short temp_v30;
-  short temp_v31;
-  unsigned short temp_v32;
-  unsigned short temp_v33;
-  unsigned short temp_v34;
-  unsigned short temp_v35;
-  unsigned short temp_v36;
-  unsigned short temp_v37;
-  unsigned short temp_v38;
-  unsigned short temp_v39;
-  unsigned short temp_v40;
-  unsigned short temp_v41;
-  int temp_v42;
-  int temp_v43;
-  unsigned int uStack_160;
-  unsigned int uStack_15c;
-  unsigned int uStack_158;
-  unsigned int temp_v44;
-  unsigned int uStack_150;
-  char acStack_14c [22];
-  short temp_v45;
-  short temp_v46;
-  unsigned char temp_v47;
-  unsigned char temp_v48 [80];
-  
-  temp_v0 = param_1[0x31];
-  temp_v3 = gameDataCopySaveEntry(temp_v0,temp_v48);
-  temp_v6 = 0;
-  if (temp_v3 != 0) {
-    FUN_00184310(temp_v0);
-    gameDataCopySaveEntry(temp_v0,&temp_v7);
-    sysMemClear(&temp_v25,300);
-    temp_v46 = temp_v7;
-    temp_v25 = temp_v19;
-    temp_v26 = temp_v20;
-    temp_v27 = temp_v8;
-    temp_v29 = temp_v10;
-    temp_v28 = temp_v9;
-    temp_v30 = temp_v11;
-    temp_v31 = temp_v12;
-    temp_v33 = 0;
-    temp_v34 = 0;
-    temp_v35 = temp_v13;
-    temp_v37 = temp_v15;
-    temp_v38 = temp_v16;
-    temp_v39 = temp_v17;
-    temp_v36 = temp_v14;
-    temp_v45 = temp_v0;
-    rt_memcpy_w(acStack_14c,temp_v24,0x12);
-    temp_v43 = temp_v21;
-    uStack_160 = uStack_1c8;
-    uStack_15c = uStack_1c4;
-    uStack_158 = uStack_1c0;
-    temp_v44 = temp_v22;
-    uStack_150 = uStack_1b8;
-    temp_v42 = temp_v23;
-    temp_v47 = (unsigned char)(((unsigned int)temp_v18 << 0x1a) >> 0x1c);
-    FUN_004bcd90(&temp_v25);
-    temp_v40 = recordGetScaledMaximum(&temp_v25);
-    temp_v41 = temp_v32;
-    if ((temp_v46 != param_1[0x32]) || (temp_v6 = 1, temp_v42 != *(int *)(param_1 + 0x18))) {
-      temp_v6 = 0;
+    u16 id = unit->id;
+    s32 matches = 1;
+    u8 saved[0x50];
+    SaveEntry entry;
+    RebuiltRecord record;
+
+    if (gameDataCopySaveEntry(id, saved) == 0) {
+        return matches;
     }
-    if (temp_v25 != *param_1) {
-      temp_v6 = 0;
+    FUN_00184310(id);
+    gameDataCopySaveEntry(id, &entry);
+    sysMemClear(&record, 300);
+    record.key = entry.key;
+    record.id = id;
+    record.hp = entry.w18;
+    record.mp = entry.w1a;
+    record.strength = entry.w02;
+    record.magic = entry.w04;
+    record.vitality = entry.w06;
+    record.agility = entry.w08;
+    record.luck = entry.w0a;
+    record.w1c = 0;
+    record.w1e = 0;
+    record.w20 = entry.w0c;
+    record.w28 = entry.w14;
+    record.w24 = entry.w10;
+    record.w26 = entry.w12;
+    record.w22 = entry.w0e;
+    rt_memcpy_w(record.name, entry.name, 18);
+    record.skills = entry.skills;
+    record.experience = entry.experience;
+    record.count = (entry.flags >> 2) & 0xF;
+    FUN_004bcd90(&record);
+    record.scaledMaximum = recordGetScaledMaximum(&record);
+    record.copy10 = record.w10;
+    if (record.key != unit->key || record.experience != unit->experience) {
+        matches = 0;
     }
-    if (temp_v26 != param_1[1]) {
-      temp_v6 = 0;
+    if (unit->hp != record.hp) {
+        matches = 0;
     }
-    if ((int)param_1[2] + (unsigned int)(unsigned short)param_1[0x56] != (int)temp_v27) {
-      temp_v6 = 0;
+    if (unit->mp != record.mp) {
+        matches = 0;
     }
-    if ((int)param_1[3] + (unsigned int)(unsigned short)param_1[0x57] != (int)temp_v28) {
-      temp_v6 = 0;
-    }
-    if ((int)param_1[4] + (unsigned int)(unsigned short)param_1[0x58] != (int)temp_v29) {
-      temp_v6 = 0;
-    }
-    if ((int)param_1[5] + (unsigned int)(unsigned short)param_1[0x59] != (int)temp_v30) {
-      temp_v6 = 0;
-    }
-    if ((int)param_1[6] + (unsigned int)(unsigned short)param_1[0x5a] != (int)temp_v31) {
-      temp_v6 = 0;
-    }
-    temp_v4 = getUnlockedSlotCount(param_1);
-    temp_v3 = 0;
-    if (temp_v3 < (int)temp_v4) {
-      do {
-        temp_v0 = param_1[temp_v3 + 0x1a];
-        if (temp_v0 != 0) {
-          temp_v1 = temp_v4 & 1;
-          temp_v2 = temp_v4 & 1;
-          if ((int)temp_v4 < 1) {
-            temp_v1 = temp_v4;
-            temp_v2 = 0;
-          }
-          temp_v5 = 0;
-          if (0 < (int)temp_v1) {
-            do {
-              if (temp_v0 == *(short *)((int)&temp_v43 + temp_v5 * 2)) goto LAB_0032fe48;
-              temp_v5 = temp_v5 + 1;
-            } while ((int)temp_v5 < (int)temp_v2);
-          }
-          while ((temp_v5 = temp_v2, (int)temp_v4 > (int)temp_v5 &&
-                 (temp_v0 != *(short *)((int)&temp_v43 + temp_v5 * 2)))) {
-            if (temp_v0 == *(short *)((int)&temp_v43 + temp_v5 * 2 + 2)) {
-              temp_v5 = temp_v5 + 1;
-              break;
-            }
-            temp_v2 = temp_v5 + 2;
-          }
-LAB_0032fe48:
-          if (temp_v5 == temp_v4) {
-            temp_v6 = 0;
-            break;
-          }
+    for (s32 i = 0; i < 5; i++) {
+        if (unit->base[i] + unit->bonus[i] != (&record.strength)[i]) {
+            matches = 0;
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < (int)temp_v4);
     }
-    temp_v3 = 0;
-    do {
-      if (*(char *)((int)param_1 + temp_v3 + 0x4c) != acStack_14c[temp_v3]) {
-        return 0;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x12);
-  }
-  return temp_v6;
+    s32 count = getUnlockedSlotCount(unit);
+
+    for (s32 i = 0; i < count; i++) {
+        u16 skill = unit->skills[i];
+
+        if (skill == 0) {
+            continue;
+        }
+        s32 found = 0;
+
+        while (found < count && record.skills.id[found] != skill) {
+            found++;
+        }
+        if (found == count) {
+            matches = 0;
+            break;
+        }
+    }
+    for (s32 i = 0; i < 18; i++) {
+        if (unit->name[i] != record.name[i]) {
+            matches = 0;
+            break;
+        }
+    }
+    return matches;
 }
 
-} /* extern "C" */
+}

@@ -1,149 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ac078` (_code @ 0x2ac078, 0x228 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the shake job update; the build fuses the old-offset loads into one vldmia, hoists the 0.01f constant and keeps the sign selects in different registers than retail, so the three-way branch layout also differs. */
+#include "common.h"
+
+// The work of a screen-shake job: its timing, amplitude, current offset and the two cells it writes the offset to.
+struct ShakeJobWork {
+    /* 0x00 */ f32 elapsed;
+    /* 0x04 */ f32 duration;
+    /* 0x08 */ f32 fadeStart;   // the amplitude fades out from here to the duration
+    /* 0x0c */ f32 amplitudeX;
+    /* 0x10 */ f32 amplitudeY;
+    /* 0x14 */ f32 offsetX;
+    /* 0x18 */ f32 offsetY;
+    /* 0x1c */ f32 *outputX;
+    /* 0x20 */ f32 *outputY;
+    /* 0x24 */ u8 endless;      // never ends: no timing, no fade
+};
 
 extern "C" {
+ShakeJobWork *jobGetWork(void);
+s32 FUN_00184964(s32 minimum, s32 maximum);
 
-int CONCAT44(unsigned int, double);
-int FUN_00184964(int, int);
-int VectorSignedToFloat(...);
-
-#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
-#define ROMWRIGHT_FLOAT_BITS_DEFINED
-static unsigned int romwright_f2u(float value)
+// Picks a new random shake offset (opposing the old direction while it is moving), publishes it and advances the timer;
+// returns -1 once the duration is over and the offset has been cleared.
+s32 FUN_002ac078(void)
 {
-    union { float f; unsigned int u; } bits;
-    bits.f = value;
-    return bits.u;
-}
-static float romwright_u2f(unsigned int value)
-{
-    union { float f; unsigned int u; } bits;
-    bits.u = value;
-    return bits.f;
-}
-#endif
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-extern float *jobGetWork(void);
-/* Supplied declaration required: FUN_00184964. */
-
-
-unsigned int FUN_002ac078(void)
-
-{
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  float *pfVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  unsigned int temp_v12;
-  unsigned long long temp_v13;
-  float temp_v14;
-  
-  pfVar2 = (float *)jobGetWork();
-  temp_v12 = 0x3f800000;
-  temp_v8 = pfVar2[3];
-  temp_v11 = pfVar2[4];
-  if (*(char *)(pfVar2 + 9) == '\0') {
-    temp_v10 = *pfVar2;
-    temp_v9 = pfVar2[2];
-    temp_v0 = in_fpscr & 0xfffffff;
-    temp_v7 = temp_v0 | ((unsigned int)(temp_v10 < temp_v9) << 0x1f);
-    in_fpscr = temp_v7 | ((unsigned int)((temp_v10 != temp_v10) || (temp_v9 != temp_v9)) << 0x1c);
-    if ((unsigned char)(temp_v7 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-      in_fpscr = temp_v0 | ((unsigned int)(pfVar2[1] <= temp_v9) << 0x1d);
-      if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-        temp_v9 = 1.0f - (temp_v10 - temp_v9) / (pfVar2[1] - temp_v9);
-        temp_v8 = temp_v8 * temp_v9;
-        temp_v11 = temp_v11 * temp_v9;
-      }
+    ShakeJobWork *work = jobGetWork();
+    f32 one = 1.0f;
+    f32 amplitudeX = work->amplitudeX;
+    f32 amplitudeY = work->amplitudeY;
+    if (work->endless == 0) {
+        if (work->elapsed >= work->fadeStart && work->fadeStart < work->duration) {
+            f32 remaining = one - (work->elapsed - work->fadeStart) / (work->duration - work->fadeStart);
+            amplitudeX = amplitudeX * remaining;
+            amplitudeY = amplitudeY * remaining;
+        }
     }
-  }
-  temp_v14 = 0.5f;
-  temp_v10 = 100.0f;
-  temp_v1 = FUN_00184964((int)(temp_v8 * 0.5f * 100.0f),(int)(temp_v8 * 100.0f));
-  temp_v9 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_00184964((int)(temp_v11 * temp_v14 * temp_v10),(int)(temp_v11 * temp_v10));
-  temp_v9 = temp_v9 * 0.01f;
-  temp_v8 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v13 = CONCAT44(temp_v12,temp_v8 * 0.01f);
-  temp_v2 = FUN_00184964(0,1);
-  temp_v4 = temp_v2 * 2 - 1;
-  temp_v2 = FUN_00184964(0,1);
-  temp_v8 = pfVar2[5];
-  temp_v12 = 0;
-  temp_v2 = temp_v2 * 2 - 1;
-  temp_v11 = pfVar2[6];
-  if (0.0f < temp_v8) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 0xffffffff;
-  }
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 == 0.0f) << 0x1e);
-  if (0.0f < temp_v11) {
-    temp_v5 = 1;
-  }
-  else {
-    temp_v5 = 0xffffffff;
-  }
-  temp_v6 = 0;
-  if (romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0)) {
-    temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 == 0.0f) << 0x1e);
-    temp_v6 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-  }
-  if (temp_v6) {
-    temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v8 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v9 = temp_v9 * temp_v8;
-    pfVar2[5] = temp_v9;
-    pfVar2[6] = (float)temp_v13 * temp_v11;
-  }
-  else {
-    temp_v7 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v8 == 0.0f) << 0x1e);
-    if ((!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0)) &&
-       ((temp_v7 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v11 == 0.0f) << 0x1e), romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0) ||
-        (temp_v3 = FUN_00184964(0,1), temp_v3 != 0)))) {
-      temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v7 >> 0x16) & 3);
-      temp_v8 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(temp_v7 >> 0x16) & 3);
-      temp_v9 = temp_v9 * temp_v8;
-      pfVar2[5] = temp_v9;
-      pfVar2[6] = (float)temp_v13 * temp_v11;
+    f32 rolledX = (f32)FUN_00184964((s32)(amplitudeX * 0.5f * 100.0f), (s32)(amplitudeX * 100.0f));
+    f32 rolledY = (f32)FUN_00184964((s32)(amplitudeY * 0.5f * 100.0f), (s32)(amplitudeY * 100.0f));
+    f32 magnitudeX = rolledX * 0.01f;
+    f32 magnitudeY = rolledY * 0.01f;
+    s32 randomX = FUN_00184964(0, 1) * 2 - 1;
+    s32 randomY = FUN_00184964(0, 1) * 2 - 1;
+    f32 zero = 0.0f;
+    s32 keepX = work->offsetX > zero ? 1 : -1;
+    s32 keepY = work->offsetY > zero ? 1 : -1;
+    if (work->offsetX == zero && work->offsetY == zero) {
+        work->offsetX = magnitudeX * (f32)randomX;
+        work->offsetY = magnitudeY * (f32)randomY;
+    } else if (work->offsetX != zero && (work->offsetY == zero || FUN_00184964(0, 1) != 0)) {
+        work->offsetX = magnitudeX * (f32)keepX;
+        work->offsetY = magnitudeY * (f32)randomY;
+    } else {
+        work->offsetX = magnitudeX * (f32)randomX;
+        work->offsetY = magnitudeY * (f32)keepY;
     }
-    else {
-      temp_v11 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
-      temp_v8 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v7 >> 0x16) & 3);
-      temp_v9 = temp_v9 * temp_v8;
-      pfVar2[5] = temp_v9;
-      pfVar2[6] = (float)temp_v13 * temp_v11;
+    *work->outputX = work->offsetX;
+    *work->outputY = work->offsetY;
+    if (work->endless == 0) {
+        work->elapsed = work->elapsed + one;
+        if (work->elapsed >= work->duration) {
+            *work->outputX = zero;
+            *work->outputY = zero;
+            return -1;
+        }
     }
-  }
-  *(float *)romwright_f2u((float)(pfVar2[7])) = temp_v9;
-  *(float *)romwright_f2u((float)(pfVar2[8])) = pfVar2[6];
-  if ((*(char *)(pfVar2 + 9) == '\0') &&
-     (temp_v8 = *pfVar2 + (float)((unsigned long long)temp_v13 >> 0x20), *pfVar2 = temp_v8, pfVar2[1] <= temp_v8))
-  {
-    *(unsigned int *)romwright_f2u((float)(pfVar2[7])) = temp_v12;
-    *(unsigned int *)romwright_f2u((float)(pfVar2[8])) = temp_v12;
-    return 0xffffffff;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

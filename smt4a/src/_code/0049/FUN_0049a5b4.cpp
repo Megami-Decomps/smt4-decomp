@@ -1,157 +1,124 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049a5b4` (_code @ 0x49a5b4, 0x2f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the item-sale list builder; retail hoists the list base (+0x9FFC), the counter address and the price accumulator address into callee-saved registers and builds the packed item word in a stack slot with piece moves, which armcc here allocates differently. */
+#include "common.h"
+
+/* The sale list window: slot 2 of its vtable attaches a list. */
+class SaleWindow {
+public:
+    virtual ~SaleWindow();
+    virtual void unk04();
+    virtual void attach(void *list);
+    /* 0x04 */ u16 flags;
+    /* 0x06 */ u8 unk06[0x5E];
+    /* 0x64 */ void *owner;
+};
+
+/* One sale entry: item, chosen result and quantity (6 bytes). */
+struct SaleEntry {
+    u16 item;
+    u16 result;
+    u16 count;
+};
+
+/* The sale menu's work area (only the fields the list builder touches). */
+struct SaleMenu {
+    /* 0x00000 */ u8 unk00000[0x18];
+    /* 0x00018 */ u8 rank;
+    /* 0x00019 */ u8 unk00019[3];
+    /* 0x0001C */ u32 seed;
+    /* 0x00020 */ u8 unk00020[0xA88];
+    /* 0x00AA8 */ u8 unk0AA8[0x60];
+    /* 0x00B08 */ u8 unk0B08[0x10];
+    /* 0x00B18 */ u8 unk0B18;
+    /* 0x00B19 */ u8 unk0B19[0x23];
+    /* 0x00B3C */ SaleWindow *window;
+    /* 0x00B40 */ u8 unk0B40[0x9448];
+    /* 0x09F88 */ u8 list[0x74];
+    /* 0x09FFC */ SaleEntry entries[0x2000];
+    /* 0x15FFC */ u16 entryCount;
+    /* 0x15FFE */ u8 unk15FFE[2];
+    /* 0x16000 */ s32 total;
+};
+
+/* A packed item word: id, flags (bit 1: percentage priced) and the percentage. */
+struct PackedItem {
+    u16 id;
+    u16 flags;
+};
 
 extern "C" {
+extern u8 LAB_00494398;
 
-int qsort(int, int, int, unsigned char *);
-int sysMemClear(int, int);
-int aocRecordLookup83(unsigned int);
-int FUN_0049cd18(unsigned int *, int, int);
-int FUN_004cfeb0(int, int, int, int);
-int listCursorSetPage(int, int);
-int FUN_004d05c4(int, int, int, int);
+void sysMemClear(void *block, u32 bytes);
+u16 *FUN_00145f04(u8 rank, u32 seed);
+s32 FUN_00481100(u32 flag);
+s32 FUN_001ba3d0(u32 flag);
+void aocRecordLookup83(u32 flag);
+u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
+s32 FUN_0049cab8(u32 item);
+s32 aocItemGetPrice(PackedItem *item);
+void FUN_0049cd18(PackedItem *item, s32 count, s32 charge);
+void qsort(void *base, u32 count, u32 size, void *compare);
+void FUN_004cfeb0(void *list, s32 a, u32 b, s32 c);
+void listCursorSetPage(void *list, s32 page);
+void FUN_004d05c4(void *p, s32 a, s32 b, s32 c);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_1_stack;
-
-extern unsigned char LAB_00494398; /* 0x494398 */
-
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-/* Supplied declaration required: qsort. */
-extern unsigned short *FUN_00145f04(unsigned char, unsigned int);
-extern int FUN_001ba3d0(unsigned int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: aocRecordLookup83. */
-extern int FUN_00481100(unsigned int);
-extern unsigned int resolveWeightedItemChoice(unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_0049cab8(unsigned int);
-extern int aocItemGetPrice(unsigned int *);
-/* Supplied declaration required: FUN_0049cd18. */
-/* Supplied declaration required: FUN_004cfeb0. */
-/* Supplied declaration required: listCursorSetPage. */
-/* Supplied declaration required: FUN_004d05c4. */
-
-
-void FUN_0049a5b4(int param_1)
-
+/* Builds the sale list: every owned item between flags 0x3B7 and 0x47E is turned into a resolved
+ * choice (counting duplicates), priced and removed from the inventory, then the list is sorted and
+ * shown. */
+void FUN_0049a5b4(SaleMenu *menu)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned short *puVar7;
-  unsigned int temp_v6;
-  int temp_v7;
-  int *piVar10;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned short *puVar13;
-  unsigned int temp_v10;
-  unsigned char temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned short *temp_v14;
-  int *temp_v15;
-  int temp_v16;
-  
-  temp_v9 = param_1 + 0x9ffc;
-  *(unsigned short *)(param_1 + 0x15ffc) = 0;
-  *(unsigned int *)(param_1 + 0x16000) = 0;
-  temp_v16 = param_1;
-  sysMemClear(temp_v9,0xc000);
-  temp_v14 = (unsigned short *)
-             FUN_00145f04(*(unsigned char *)(temp_v16 + 0x18),*(unsigned int *)(temp_v16 + 0x1c));
-  temp_v8 = 0x3b7;
-  puVar13 = (unsigned short *)(param_1 + 0x15ffc);
-  temp_v15 = (int *)(temp_v16 + 0x16000);
-  do {
-    temp_v3 = FUN_00481100(temp_v8);
-    if (temp_v3 != 0) {
-      temp_v3 = FUN_001ba3d0(temp_v8);
-      temp_v7 = 0;
-      if (temp_v7 < temp_v3) {
-        do {
-          aocRecordLookup83(temp_v8);
-          temp_v4 = resolveWeightedItemChoice(temp_v8,0xffff,0xffff,1);
-          if (temp_v4 != 0) {
-            temp_v1 = temp_v8;
-            temp_v2 = (unsigned short)temp_v4;
-            if (temp_v1 != 0) {
-              temp_v6 = (unsigned int)*puVar13;
-              temp_v5 = 0;
-              if (temp_v6 != 0) {
-                do {
-                  puVar7 = (unsigned short *)(temp_v9 + temp_v5 * 6);
-                  temp_v10 = (unsigned int)*puVar7;
-                  temp_v11 = temp_v10 == temp_v1;
-                  if (temp_v11) {
-                    temp_v10 = (unsigned int)puVar7[1];
-                  }
-                  if (temp_v11 && temp_v10 == (temp_v4 & 0xffff)) {
-                    puVar7[2] = *(short *)(temp_v9 + temp_v5 * 6 + 4) + 1;
-                    goto LAB_0049a714;
-                  }
-                  temp_v5 = temp_v5 + 1;
-                } while (temp_v5 < (int)temp_v6);
-              }
-              *(short *)(temp_v9 + temp_v6 * 6) = (short)temp_v8;
-              *(unsigned short *)(temp_v9 + (unsigned int)*puVar13 * 6 + 2) = temp_v2;
-              temp_v5 = temp_v9 + (unsigned int)*puVar13 * 6;
-              *(short *)(temp_v5 + 4) = *(short *)(temp_v5 + 4) + 1;
-              *puVar13 = *puVar13 + 1;
+    menu->entryCount = 0;
+    menu->total = 0;
+    sysMemClear(menu->entries, 0xC000);
+    u16 *discount = FUN_00145f04(menu->rank, menu->seed);
+    for (u32 flag = 0x3B7; flag < 0x47F; flag++) {
+        if (!FUN_00481100(flag))
+            continue;
+        s32 owned = FUN_001ba3d0(flag);
+        for (s32 n = 0; n < owned; n++) {
+            aocRecordLookup83(flag);
+            u32 choice = resolveWeightedItemChoice(flag, 0xFFFF, 0xFFFF, 1);
+            if (choice == 0)
+                continue;
+            u16 result = (u16)choice;
+            if ((u16)flag != 0) {
+                u32 index = 0;
+                for (; index < menu->entryCount; index++) {
+                    if (menu->entries[index].item == (u16)flag && menu->entries[index].result == result) {
+                        menu->entries[index].count++;
+                        break;
+                    }
+                }
+                if (index == menu->entryCount) {
+                    menu->entries[menu->entryCount].item = (u16)flag;
+                    menu->entries[menu->entryCount].result = result;
+                    menu->entries[menu->entryCount].count++;
+                    menu->entryCount++;
+                }
             }
-LAB_0049a714:
-            temp_v5 = FUN_0049cab8(temp_v4);
-            if (temp_v5 != 0) {
-              temp_v0 = (*(unsigned short *)((unsigned char *)&temp_v12 + 2)) & 0xfc00;
-              temp_v12 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v12 + 2)),temp_v2) & 0xfc00ffff;
-              if (*temp_v14 != 0) {
-                temp_v12 = romwright_piece_2_2(temp_v0 | 2 | ((*temp_v14 & 0xff) << 2),temp_v2);
-              }
-              temp_v5 = aocItemGetPrice(&temp_v12);
-              *temp_v15 = *temp_v15 + temp_v5;
+            if (FUN_0049cab8(choice)) {
+                PackedItem packed;
+                packed.id = result;
+                packed.flags = 0;
+                if (*discount != 0)
+                    packed.flags = 2 | ((*discount & 0xFF) << 2);
+                menu->total += aocItemGetPrice(&packed);
             }
-          }
-          temp_v7 = temp_v7 + 1;
-        } while (temp_v7 < temp_v3);
-      }
-      temp_v12 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v12 + 2)),(short)temp_v8) & 0xfc00ffff;
-      FUN_0049cd18(&temp_v12,-temp_v3,0);
+        }
+        PackedItem removed;
+        removed.id = (u16)flag;
+        removed.flags = 0;
+        FUN_0049cd18(&removed, -owned, 0);
     }
-    temp_v3 = temp_v16;
-    temp_v8 = temp_v8 + 1;
-    if (temp_v8 >= 0x47f) {
-      qsort(temp_v9,*(unsigned short *)(temp_v16 + 0x15ffc),6,&LAB_00494398);
-      temp_v12 = 1;
-      temp_v9 = temp_v16 + 0x9f88;
-      temp_v13 = 1;
-      FUN_004cfeb0(temp_v9,10,*(unsigned short *)(temp_v3 + 0x15ffc),0);
-      *(unsigned char *)(temp_v16 + 0x9f95) = 1;
-      listCursorSetPage(temp_v9,1);
-      piVar10 = (int *)(temp_v16 + 0xb3c);
-      (**(romwright_code **)(**(int **)(temp_v16 + 0xb3c) + 8))(*(int **)(temp_v16 + 0xb3c),temp_v9);
-      puVar13 = (unsigned short *)(*piVar10 + 4);
-      *puVar13 = *puVar13 | 0x1000;
-      *(int *)(*(int *)(temp_v16 + 0xb3c) + 100) = temp_v16 + 0x3a4;
-      FUN_004d05c4(temp_v16 + 0xb08,0x20,0x28,10);
-      *(unsigned char *)(temp_v16 + 0xb18) = 1;
-      return;
-    }
-  } while( 1 );
+    qsort(menu->entries, menu->entryCount, 6, &LAB_00494398);
+    FUN_004cfeb0(menu->list, 10, menu->entryCount, 0);
+    ((u8 *)menu)[0x9F95] = 1;
+    listCursorSetPage(menu->list, 1);
+    menu->window->attach(menu->list);
+    menu->window->flags |= 0x1000;
+    menu->window->owner = (u8 *)menu + 0x3A4;
+    FUN_004d05c4((u8 *)menu + 0xB08, 0x20, 0x28, 10);
+    menu->unk0B18 = 1;
 }
 
 } /* extern "C" */

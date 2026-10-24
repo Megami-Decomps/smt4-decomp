@@ -1,189 +1,185 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00410f84` (_code @ 0x410f84, 0x32c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (197 rows against 198): same switch cases, calls and constants; retail keeps the stage-mode index in r5 through a conditional move (cmp; movge; blt) where ours uses `subs`, hoists the party count/offset pair loads differently in case 4, copies the camera position as three plain words with swapped r0/r1, and holds the battle block in r8/r4 differently in case 6 */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int asdMemFree(void);
-int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
-int FUN_003e503c(void);
-int FUN_003eaf20(void);
-int FUN_003ecfb4(int, int, unsigned int, int);
-int FUN_003f14a0(...);
-int controllerGroupSetPosition(unsigned int);
-int FUN_004102d8(...);
-int FUN_004116a0(unsigned int *);
-int btlSpawnStageHeightEffects(unsigned int *);
-int FUN_00411c04(unsigned int *, int);
-int FUN_00411cec(...);
-int FUN_00412488(...);
-int mathVectorClear(unsigned int *);
-int FUN_004fe7e4(int, int, int);
-int FUN_004fea10(int, int, int);
+/* Battle stage setup state (observed fields only). */
+struct Vec2 {
+    f32 x;
+    f32 y;
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+struct StageUnitSlot {
+    u32 pad00;
+    Vec2 pos;                /* 0x04 */
+    u8 pad0C[0x1C - 0x0C];
+};
 
-extern unsigned char DAT_00529834; /* 0x529834 */
-extern int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int *g_btlCamera; /* 0x571508 */
-extern unsigned int g_btlStageModel; /* 0x57a4f8 */
+/* Battle main state (observed field only). */
+struct BtlMainView {
+    u8 pad0000[0x4D68];
+    u32 activeRecord;        /* 0x4D68 */
+};
 
-extern int btlGetMainState(void);
-extern unsigned int saveSlotFindSelected(void);
-extern int FUN_00187168(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
-extern int partyCountActiveSlots(void);
-extern unsigned int partyFindActiveRecordById(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_003ecfb4. */
-/* Supplied declaration required: FUN_003f14a0. */
-/* Supplied declaration required: controllerGroupSetPosition. */
-/* Supplied declaration required: FUN_004102d8. */
-/* Supplied declaration required: FUN_004116a0. */
-/* Supplied declaration required: btlSpawnStageHeightEffects. */
-extern int btlStageGetModeIndex(unsigned int *);
-/* Supplied declaration required: FUN_00411c04. */
-/* Supplied declaration required: FUN_00411cec. */
-/* Supplied declaration required: FUN_00412488. */
-/* Supplied declaration required: mathVectorClear. */
-/* Supplied declaration required: FUN_004fe7e4. */
-/* Supplied declaration required: FUN_004fea10. */
+struct StageState {
+    u32 step;                /* 0x000: setup step 1..9 */
+    u8 pad004[0x1C - 4];
+    s32 value;               /* 0x01C */
+    s32 id;                  /* 0x020 */
+    u8 pad024[0x34 - 0x24];
+    StageUnitSlot slot[1];   /* 0x034: one per active party slot, stride 0x1C */
+    u8 pad050[0x184 - 0x50];
+    void *file;              /* 0x184: loaded stage file */
+};
 
+/* Per-stage-mode camera/formation table, stride 0x1C. */
+struct StageModeParams {
+    f32 cameraPos[3];        /* 0x00 */
+    Vec2 slotOffset;         /* 0x0C */
+    f32 groupScale;          /* 0x14 */
+    f32 pad18;
+};
 
-void FUN_00410f84(unsigned int *param_1)
+struct BattleUnitBlock {
+    u8 pad000[0x268];
+    s16 totalA;              /* 0x268 */
+    s16 totalB;              /* 0x26A */
+    u8 pad26C[0x400 - 0x26C];
+    u32 activeRecord;        /* 0x400 */
+};
 
+extern const StageModeParams DAT_00529780[];   /* 0x529780 */
+extern const u8 DAT_00529834;                  /* 0x529834: stage file name */
+extern f32 *g_btlCamera;                       /* 0x571508 */
+extern u32 g_btlStageModel;                    /* 0x57a4f8 */
+
+s32 FUN_004116a0(StageState *state);
+s32 btlSpawnStageHeightEffects(StageState *state);
+s32 asdMemFree(void *memory);
+s32 asdLoadFileAsyncSimple(const u8 *name, void **destination, s32 flag);
+s32 mathVectorClear(f32 *vector);
+s32 btlStageGetModeIndex(StageState *state);
+s32 FUN_00411c04(StageState *state, s32 flag);
+s32 partyCountActiveSlots(void);
+s32 controllerGroupSetPosition(u32 model, f32 x, f32 y, f32 z);
+BtlMainView *btlGetMainState(void);
+BattleUnitBlock *FUN_003eaf20(void);
+u32 partyFindActiveRecordById(u32 id);
+u32 saveSlotFindSelected(void);
+s32 FUN_003ecfb4(BtlMainView *mainState, void *unit, u32 record, s32 flag);
+s32 FUN_004fea10(s32 a, s32 b, s32 c);
+s32 FUN_004fe7e4(s32 a, s32 b, s32 c);
+s32 FUN_003f14a0(BtlMainView *mainState);
+u32 FUN_003e503c(u32 index);
+s32 FUN_00187168(u32 record);
+s32 FUN_004fef44(s32 a, s32 b, s32 c);
+s32 FUN_00412488(StageState *state);
+s32 FUN_00411cec(StageState *state);
+
+/* Runs one setup step of the battle stage (`state->step`): spawn effects, load the stage file and
+ * set the camera, place the party slots, or apply the stage's results. */
+void FUN_00410f84(StageState *state)
 {
-/* irregular: irregular input(s): in_lr; 17 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  short temp_v5;
-  short temp_v6;
-  unsigned int unaff_r4;
-  unsigned int temp_v7;
-  short temp_v8;
-  unsigned int in_lr;
-  float temp_v9;
-  float temp_v10;
-  
-  switch(*param_1) {
-  case 1:
-    FUN_004116a0(param_1);
-    return;
-  case 2:
-    btlSpawnStageHeightEffects(param_1);
-    return;
-  case 3:
-    if (param_1[0x61] != 0) {
-      asdMemFree();
-      param_1[0x61] = 0;
+    switch (state->step) {
+    case 1:
+        FUN_004116a0(state);
+        return;
+    case 2:
+        btlSpawnStageHeightEffects(state);
+        return;
+    case 3: {
+        if (state->file != 0) {
+            asdMemFree(state->file);
+            state->file = 0;
+        }
+        asdLoadFileAsyncSimple(&DAT_00529834, &state->file, 0);
+        mathVectorClear(g_btlCamera);
+        g_btlCamera[3] = 0.0f;
+        g_btlCamera[4] = 0.0f;
+        s32 mode = btlStageGetModeIndex(state);
+        if (mode >= 0) {
+            g_btlCamera[0] = DAT_00529780[mode].cameraPos[0];
+            g_btlCamera[1] = DAT_00529780[mode].cameraPos[1];
+            g_btlCamera[2] = DAT_00529780[mode].cameraPos[2];
+        }
+        return;
     }
-    asdLoadFileAsyncSimple(&DAT_00529834,param_1 + 0x61,0);
-    mathVectorClear(g_btlCamera);
-    puVar1 = g_btlCamera;
-    g_btlCamera[3] = 0;
-    puVar1[4] = 0;
-    temp_v0 = btlStageGetModeIndex(param_1);
-    puVar1 = g_btlCamera;
-    if (-1 < temp_v0) {
-      temp_v0 = temp_v0 * 0x1c;
-      *g_btlCamera = *(unsigned int *)(temp_v0 + 0x529780);
-      puVar1[1] = *(unsigned int *)(temp_v0 + 0x529784);
-      puVar1[2] = *(unsigned int *)(temp_v0 + 0x529788);
-      return;
+    case 4: {
+        state->value = 0;
+        state->id = -1;
+        FUN_00411c04(state, 1);
+        s32 mode = btlStageGetModeIndex(state);
+        if (mode >= 0) {
+            s32 count = partyCountActiveSlots();
+            const StageModeParams *params = &DAT_00529780[mode];
+            Vec2 offset = params->slotOffset;
+            for (s32 i = 0; i < count; i++) {
+                Vec2 pos = state->slot[i].pos;
+                pos.x = pos.x + offset.x;
+                pos.y = pos.y + offset.y;
+                state->slot[i].pos = pos;
+            }
+            controllerGroupSetPosition(g_btlStageModel, params->groupScale, params->groupScale, params->groupScale);
+        }
+        return;
     }
-    break;
-  case 4:
-    param_1[7] = 0;
-    param_1[8] = 0xffffffff;
-    FUN_00411c04(param_1,1);
-    temp_v0 = btlStageGetModeIndex(param_1);
-    if (-1 < temp_v0) {
-      temp_v1 = partyCountActiveSlots();
-      temp_v9 = *(float *)(temp_v0 * 0x1c + 0x52978c);
-      temp_v10 = *(float *)(temp_v0 * 0x1c + 0x529790);
-      temp_v0 = 0;
-      if (0 < temp_v1) {
-        do {
-          temp_v4 = temp_v0 + 1;
-          param_1[temp_v0 * 7 + 0xe] = (float)param_1[temp_v0 * 7 + 0xe] + temp_v9;
-          param_1[temp_v0 * 7 + 0xf] = (float)param_1[temp_v0 * 7 + 0xf] + temp_v10;
-          temp_v0 = temp_v4;
-        } while (temp_v4 < temp_v1);
-      }
-      controllerGroupSetPosition(g_btlStageModel);
-      return;
+    case 5: {
+        BtlMainView *mainState = btlGetMainState();
+        BattleUnitBlock *block = FUN_003eaf20();
+        u32 record = partyFindActiveRecordById((u16)state->value);
+        FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 1);
+        block->activeRecord = record;
+        mainState->activeRecord = record;
+        FUN_004fea10(0, 0, 1);
+        FUN_004fe7e4(0, 0, 1);
+        FUN_003f14a0(mainState);
+        return;
     }
-    break;
-  case 5:
-    temp_v1 = btlGetMainState();
-    temp_v0 = temp_v1;
-    FUN_003eaf20();
-    temp_v2 = partyFindActiveRecordById(param_1[7] & 0xffff);
-    FUN_003ecfb4(temp_v1,temp_v0 + 0x164,temp_v2,1);
-    *(unsigned int *)(temp_v0 + 0x400) = temp_v2;
-    *(unsigned int *)(temp_v1 + 0x4d68) = temp_v2;
-    FUN_004fea10(0,0,1);
-    FUN_004fe7e4(0,0,1);
-    FUN_003f14a0(temp_v1);
-    return;
-  case 6:
-    temp_v1 = btlGetMainState();
-    temp_v0 = temp_v1;
-    FUN_003eaf20();
-    temp_v2 = saveSlotFindSelected();
-    FUN_003ecfb4(temp_v1,temp_v0 + 0x164,temp_v2,0);
-    temp_v5 = 0;
-    *(unsigned int *)(temp_v0 + 0x400) = temp_v2;
-    temp_v8 = 0;
-    temp_v7 = 1;
-    do {
-      temp_v3 = temp_v7;
-      FUN_003e503c();
-      temp_v4 = FUN_00187168();
-      if (temp_v4 != 0) {
-        temp_v5 = *(short *)(temp_v3 + 0x12) + temp_v5;
-        temp_v8 = *(short *)(temp_v3 + 0x14) + temp_v8;
-      }
-      temp_v7 = temp_v7 + 1;
-    } while ((int)temp_v7 < 0xc);
-    temp_v5 = *(short *)(temp_v0 + 0x268) + temp_v5;
-    temp_v8 = *(short *)(temp_v0 + 0x26a) + temp_v8;
-    *(short *)(temp_v0 + 0x268) = temp_v5;
-    temp_v6 = temp_v5;
-    if (temp_v5 >= 1000) {
-      temp_v6 = 999;
+    case 6: {
+        BtlMainView *mainState = btlGetMainState();
+        BattleUnitBlock *block = FUN_003eaf20();
+        u32 record = saveSlotFindSelected();
+        FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 0);
+        block->activeRecord = record;
+        s16 sumA = 0;
+        s16 sumB = 0;
+        for (s32 i = 1; i < 12; i++) {
+            u8 *slot = (u8 *)FUN_003e503c((u16)i);
+            if (FUN_00187168((u32)slot) != 0) {
+                sumA = (s16)(*(u16 *)(slot + 0x12) + sumA);
+                sumB = (s16)(*(u16 *)(slot + 0x14) + sumB);
+            }
+        }
+        s16 totalA = (s16)(block->totalA + sumA);
+        s16 totalB = (s16)(block->totalB + sumB);
+        block->totalA = totalA;
+        block->totalB = totalB;
+        if (totalA >= 1000) {
+            block->totalA = 999;
+        }
+        if (totalB >= 1000) {
+            block->totalB = 999;
+        }
+        FUN_004fea10(0, 0, 1);
+        FUN_004fe7e4(0, 0, 1);
+        FUN_003f14a0(mainState);
+        FUN_004fef44(0, 0, 0);
+        return;
     }
-    *(short *)(temp_v0 + 0x26a) = temp_v8;
-    if (temp_v5 >= 1000) {
-      *(short *)(temp_v0 + 0x268) = temp_v6;
+    case 8:
+        FUN_00412488(state);
+        return;
+    case 9:
+        FUN_00411cec(state);
+        return;
+    default:
+        return;
     }
-    if (temp_v8 >= 1000) {
-      *(unsigned short *)(temp_v0 + 0x26a) = 999;
-    }
-    FUN_004fea10(0,0,1);
-    FUN_004fe7e4(0,0,1);
-    FUN_003f14a0(temp_v1);
-    temp_v0 = g_btlActionReflect;
-    FUN_004102d8(g_btlActionReflect,0,0,0,unaff_r4,in_lr);
-    *(unsigned char *)(temp_v0 + 4) = 0xd;
-    return;
-  case 8:
-    FUN_00412488(param_1);
-    return;
-  case 9:
-    FUN_00411cec(param_1);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

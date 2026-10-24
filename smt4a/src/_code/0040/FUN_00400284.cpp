@@ -1,160 +1,137 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00400284` (_code @ 0x400284, 0x2e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail evaluates the two target kinds (player, slot unit) with the combination logic inlined twice in a different order and keeps the status mask in a packed local; the result is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b4e7c(void);
-int FUN_003ff524(unsigned int *, int);
+/* The item record (only the fields read here). */
+typedef struct UseItem {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u16 hpAmount;
+    /* 0x36 */ u16 mpAmount;
+    /* 0x38 */ u8 hpPercent;
+    /* 0x39 */ u8 mpPercent;
+    /* 0x3A */ u8 statusKind;           /* low 7 bits: the status cured */
+    /* 0x3B */ u8 unk3b[0x2D];
+    /* 0x68 */ u32 flags;               /* 4: revives (everything) */
+} UseItem;
 
-typedef struct fn_00400284_arg2 fn_00400284_arg2;
-struct fn_00400284_arg2 {
-    unsigned char pad_0x0[0x34];
-    ushort field_0x34; /* +0x34 */
-    ushort field_0x36; /* +0x36 */
-    byte field_0x38; /* +0x38 */
-    byte field_0x39; /* +0x39 */
-    byte field_0x3a; /* +0x3a */
-    unsigned char pad_0x3b[0x2d];
-    uint field_0x68; /* +0x68 */
-};
+/* A target unit (a party slot record or the player): the fields that differ are given per kind. */
+typedef struct SlotUnit {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s16 maxMp;
+    /* 0x12 */ u8 unk12[0x18];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2e[0x32];
+    /* 0x60 */ u16 flags;               /* 0x400/0x402: cannot be healed */
+} SlotUnit;
 
-/* stack frame of param_4: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short sp28; /* 0x28: local_28 */
-} param_4_stack;
+typedef struct PlayerUnit {
+    /* 0x00 */ u8 unk00[0x1E];
+    /* 0x1E */ s16 maxMp;
+    /* 0x20 */ u8 unk20[0xA];
+    /* 0x2A */ s16 hp;
+    /* 0x2C */ s16 mp;
+    /* 0x2E */ u8 unk2e[0x30];
+    /* 0x5E */ u16 flags;
+} PlayerUnit;
 
-extern int gameGetPlayerData(void);
-extern int gameGetSlotRecord(int);
-extern int gameGetSaveSlotData(void);
-extern int btlMainGetUnk14(void);
-extern int FUN_00291e14(void);
-extern int FUN_002b4dcc(int);
-/* Supplied declaration required: FUN_002b4e7c. */
-/* Supplied declaration required: FUN_003ff524. */
+PlayerUnit *gameGetPlayerData(void);
+SlotUnit *gameGetSlotRecord(s32 index);
+SlotUnit *gameGetSaveSlotData(void);
+SlotUnit *btlMainGetUnk14(void);
+s32 FUN_00291e14(void);
+s16 FUN_002b4dcc(SlotUnit *unit);
+s16 FUN_002b4e7c(void);
+void FUN_003ff524(u32 *mask, s32 kind);
 
-
-unsigned int FUN_00400284(int param_1,int param_2,fn_00400284_arg2 *param_3,unsigned int param_4)
-
+/* Evens out what the item gives (bit 1 hp, bit 2 mp, bit 4 status) against what the unit can
+ * use: returns 3 when they differ, so the item would be wasted, else 0. `unit` is the slot index
+ * (negative: the player, or the battle unit), `fromSave` selects the save slot data. */
+u32 FUN_00400284(s32 unit, s32 fromSave, UseItem *item, u32 statusMask)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v5 = 0;
-  temp_v4 = 0;
-  temp_v2 = 0;
-  if (param_4 != 0) {
-    temp_v4 = param_3->field_0x38 != 0 || param_3->field_0x34 != 0;
-    if (param_3->field_0x36 != 0) {
-      temp_v4 = temp_v4 | 2;
+    u32 gives = 0;
+    u32 can = 0;
+
+    if (statusMask != 0) {
+        gives = item->hpPercent != 0 || item->hpAmount != 0;
+        if (item->mpAmount != 0) {
+            gives |= 2;
+        }
+        if (item->mpPercent != 0) {
+            gives |= 2;
+        }
+        if ((item->statusKind & 0x7F) != 0) {
+            gives |= 4;
+        }
     }
-    if (param_3->field_0x39 != 0) {
-      temp_v4 = temp_v4 | 2;
+    if ((item->flags & 4) != 0) {
+        gives = 7;
     }
-    if ((param_3->field_0x3a & 0x7f) != 0) {
-      temp_v4 = temp_v4 | 4;
+    if ((item->statusKind & 0x7F) == 1) {
+        gives |= 4;
     }
-  }
-  if ((param_3->field_0x68 & 4) != 0) {
-    temp_v4 = 7;
-  }
-  if ((param_3->field_0x3a & 0x7f) == 1) {
-    temp_v4 = temp_v4 | 4;
-  }
-  temp_v6 = param_4;
-  if ((param_1 >= 0) || (temp_v0 = FUN_00291e14(), temp_v0 != 0)) {
-    if ((param_1 < 0) && (temp_v0 = FUN_00291e14(), temp_v0 != 0)) {
-      temp_v0 = btlMainGetUnk14();
+    u32 mask = statusMask;
+
+    if (unit >= 0 || FUN_00291e14() != 0) {
+        SlotUnit *target;
+
+        if (unit < 0 && FUN_00291e14() != 0) {
+            target = btlMainGetUnk14();
+        } else if (fromSave != 0) {
+            target = gameGetSaveSlotData();
+        } else {
+            target = gameGetSlotRecord(unit);
+        }
+        if (target == NULL) {
+            return 3;
+        }
+        if ((gives & 1) != 0 && (target->flags & 0x402) == 0 && FUN_002b4dcc(target) != target->hp) {
+            can = 1;
+        }
+        if ((gives & 2) != 0 && (target->flags & 0x402) == 0 && target->mp != target->maxMp) {
+            can |= 2;
+        }
+        if ((gives & 3) == 3 && (can & 3) != 0) {
+            can |= 3;
+        }
+        if ((gives & 4) == 0) {
+            if ((item->flags & 4) != 0 && can != 0) {
+                can = 7;
+            }
+            return gives != can ? 3 : 0;
+        }
+        mask &= 0xFFFF0000;
+        FUN_003ff524(&mask, (item->flags & 4) != 0 ? 0x25 : (item->statusKind & 0x7F));
+        mask = (u16)mask & target->flags;
+        if ((u16)mask != 0) {
+            can |= 4;
+        }
+    } else {
+        PlayerUnit *player = gameGetPlayerData();
+
+        if ((gives & 1) != 0 && (player->flags & 2) == 0 && (u32)FUN_002b4e7c() != (u16)player->hp) {
+            can = 1;
+        }
+        if ((gives & 2) != 0 && (player->flags & 2) == 0 && player->mp != player->maxMp) {
+            can |= 2;
+        }
+        if ((gives & 3) == 3 && (can & 3) != 0) {
+            can |= 3;
+        }
+        if ((gives & 4) != 0) {
+            mask &= 0xFFFF0000;
+            FUN_003ff524(&mask, (item->flags & 4) != 0 ? 0x25 : (item->statusKind & 0x7F));
+            mask = (u16)mask & player->flags;
+            if ((u16)mask != 0) {
+                can |= 4;
+            }
+        }
     }
-    else if (param_2 != 0) {
-      temp_v0 = gameGetSaveSlotData();
+    if ((item->flags & 4) != 0 && can != 0) {
+        can = 7;
     }
-    else {
-      temp_v0 = gameGetSlotRecord(param_1);
-    }
-    if (temp_v0 == 0) {
-      return 3;
-    }
-    if ((((temp_v4 & 1) != 0) && ((*(unsigned short *)(temp_v0 + 0x60) & 0x402) == 0)) &&
-       (temp_v1 = FUN_002b4dcc(temp_v0), temp_v1 != *(short *)(temp_v0 + 0x2a))) {
-      temp_v2 = 1;
-    }
-    if ((((temp_v4 & 2) != 0) && ((*(unsigned short *)(temp_v0 + 0x60) & 0x402) == 0)) &&
-       (*(short *)(temp_v0 + 0x2c) != *(short *)(temp_v0 + 0x10))) {
-      temp_v2 = temp_v2 | 2;
-    }
-    temp_v3 = temp_v2;
-    if (((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) &&
-       ((((temp_v2 & 1) == 0 || (((temp_v2 & 2) == 0 && (temp_v3 = temp_v2 | 2, (temp_v2 & 1) == 0)))) &&
-        ((temp_v3 & 2) != 0)))) {
-      temp_v3 = temp_v3 | 1;
-    }
-    if ((temp_v4 & 4) == 0) {
-      if ((param_3->field_0x68 & 4) != 0 && temp_v3 != 0) {
-        temp_v3 = 7;
-      }
-      if (temp_v4 != temp_v3) {
-        temp_v5 = 3;
-      }
-      return temp_v5;
-    }
-    temp_v6 = temp_v6 & 0xffff0000;
-    if ((param_3->field_0x68 & 4) != 0) {
-      FUN_003ff524(&temp_v6,0x25);
-      (*(unsigned short *)((unsigned char *)&temp_v6 + 0)) = (unsigned short)temp_v6 & *(unsigned short *)(temp_v0 + 0x60);
-    }
-    else {
-      FUN_003ff524(&temp_v6,param_3->field_0x3a & 0x7f);
-      (*(unsigned short *)((unsigned char *)&temp_v6 + 0)) = (unsigned short)temp_v6 & *(unsigned short *)(temp_v0 + 0x60);
-    }
-    if ((unsigned short)temp_v6 != 0) {
-      temp_v3 = temp_v3 | 4;
-    }
-  }
-  else {
-    temp_v0 = gameGetPlayerData();
-    if ((((temp_v4 & 1) != 0) && ((*(unsigned short *)(temp_v0 + 0x5e) & 2) == 0)) &&
-       (temp_v1 = temp_v0, FUN_002b4e7c(), temp_v1 != *(short *)(temp_v0 + 0x2a))) {
-      temp_v2 = 1;
-    }
-    if ((((temp_v4 & 2) != 0) && ((*(unsigned short *)(temp_v0 + 0x5e) & 2) == 0)) &&
-       (*(short *)(temp_v0 + 0x2c) != *(short *)(temp_v0 + 0x1e))) {
-      temp_v2 = temp_v2 | 2;
-    }
-    temp_v3 = temp_v2;
-    if ((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) &&
-        (((temp_v2 & 1) == 0 || (((temp_v2 & 2) == 0 && (temp_v3 = temp_v2 | 2, (temp_v2 & 1) == 0)))))) &&
-       ((temp_v3 & 2) != 0)) {
-      temp_v3 = temp_v3 | 1;
-    }
-    if ((temp_v4 & 4) != 0) {
-      temp_v6 = temp_v6 & 0xffff0000;
-      if ((param_3->field_0x68 & 4) != 0) {
-        FUN_003ff524(&temp_v6,0x25);
-        (*(unsigned short *)((unsigned char *)&temp_v6 + 0)) = (unsigned short)temp_v6 & *(unsigned short *)(temp_v0 + 0x5e);
-      }
-      else {
-        FUN_003ff524(&temp_v6,param_3->field_0x3a & 0x7f);
-        (*(unsigned short *)((unsigned char *)&temp_v6 + 0)) = (unsigned short)temp_v6 & *(unsigned short *)(temp_v0 + 0x5e);
-      }
-      if ((unsigned short)temp_v6 != 0) {
-        temp_v3 = temp_v3 | 4;
-      }
-    }
-  }
-  if ((param_3->field_0x68 & 4) != 0 && temp_v3 != 0) {
-    temp_v3 = 7;
-  }
-  if (temp_v4 != temp_v3) {
-    temp_v5 = 3;
-  }
-  return temp_v5;
+    return gives != can ? 3 : 0;
 }
 
-} /* extern "C" */
+}

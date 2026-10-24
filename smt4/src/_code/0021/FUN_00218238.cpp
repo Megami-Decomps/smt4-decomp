@@ -1,89 +1,63 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00218238` (_code @ 0x218238, 0x220 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
-
-int FUN_00224ce0(unsigned int, int *, int *, int);
-int FUN_002bf288(...);
-int efctSetSpeed(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_5: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_00224ce0. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_00218238(int param_1,unsigned int param_2,int param_3,int param_4,int param_5)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v5 = 0;
-  temp_v6 = 0;
-  FUN_00224ce0(param_2,&temp_v5,&temp_v6,param_5);
-  if (param_5 != 0) {
-    temp_v4 = 0;
-    temp_v1 = 0;
-    if (*(int *)(param_1 + 0x3048) == 1) {
-      temp_v4 = vec2GetXInt(param_1 + 0xac);
-      temp_v1 = vec2GetYInt(param_1 + 0xac);
-    }
-    temp_v1 = param_4 + temp_v1;
-    temp_v4 = param_3 + temp_v4;
-    FUN_002bf288(2,0x15,0xde,temp_v4,temp_v1,0x35);
-    if (*(int *)(param_1 + 0x3048) == 1) {
-      efctSetSpeed();
-      temp_v0 = g_titleScene;
-      temp_v2 = packNibblesAndByte(6,1,0);
-      piVar5 = (int *)(temp_v0 + 0x12ac);
-      temp_v3 = piVar5[*piVar5 + 2];
-      piVar5[*piVar5 + 2] = temp_v2;
-      if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v3 != temp_v2) {
-        (**(romwright_code **)(temp_v0 + 0x12c8))();
-        *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-      }
-      FUN_002bf288(2,0x15,0xde,temp_v4,temp_v1,0x36);
-      temp_v0 = g_titleScene;
-      temp_v2 = packNibblesAndByte(6,7,0);
-      piVar5 = (int *)(temp_v0 + 0x12ac);
-      temp_v3 = piVar5[*piVar5 + 2];
-      piVar5[*piVar5 + 2] = temp_v2;
-      if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v3 != temp_v2) {
-        (**(romwright_code **)(temp_v0 + 0x12c8))();
-        *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-      }
-      efctSetSpeed();
-    }
-    FUN_002bf288(2,0x15,temp_v6,param_3,param_4,0x37);
-    FUN_002bf288(2,0x15,temp_v5,temp_v4,temp_v1,0x38);
-    return;
-  }
-  FUN_002bf288(2,0x15,0xdd,param_3,param_4,0x2c);
-  FUN_002bf288(2,0x15,temp_v6,param_3,param_4,0x2d);
-  FUN_002bf288(2,0x15,temp_v5,param_3,param_4,0x2e);
-  return;
+extern RenderCtx *g_titleScene;
+void FUN_00224ce0(u32 id, s32 *firstOut, s32 *secondOut, s32 flag);
+void FUN_002bf288(u32 kind, u32 layer, u32 spriteId, s32 x, s32 y, u32 order);
+void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(void *vec);
+s32 vec2GetXInt(void *vec);
+s32 vec2GetYInt(void *vec);
+s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 }
 
-} /* extern "C" */
+// The panel being drawn: an offset vector at 0xac and a mode word at 0x3048.
+struct SpritePanel {
+    u8 unk0000[0xac];
+    u8 offset[0x34];   // 0x0ac vec2 object
+    u8 unk00e0[0x2f68];
+    s32 mode;          // 0x3048
+};
+
+static __inline void setTitleRenderState(RenderCtx *context, s32 state)
+{
+    RenderStateStack *stack = &context->stackB;
+    s32 previous = stack->entries[stack->count];
+    stack->entries[stack->count] = state;
+    if (stack->dirty || previous != state) {
+        stack->apply(state);
+        stack->dirty = 0;
+    }
+}
+
+// Draws the three sprites of a panel entry at (x, y); with `shadow` set, they are drawn at an animated offset with
+// the title render state switched around the shadow sprite.
+extern "C" void FUN_00218238(SpritePanel *panel, u32 id, s32 x, s32 y, s32 shadow)
+{
+    s32 first = 0;
+    s32 second = 0;
+    FUN_00224ce0(id, &first, &second, shadow);
+    if (shadow != 0) {
+        s32 offsetX = 0;
+        s32 offsetY = 0;
+        if (panel->mode == 1) {
+            offsetX = vec2GetXInt(panel->offset);
+            offsetY = vec2GetYInt(panel->offset);
+        }
+        FUN_002bf288(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x35);
+        if (panel->mode == 1) {
+            efctSetSpeed(vec2GetSpeed(panel->offset));
+            setTitleRenderState(g_titleScene, packNibblesAndByte(6, 1, 0));
+            FUN_002bf288(2, 0x15, 0xde, x + offsetX, y + offsetY, 0x36);
+            setTitleRenderState(g_titleScene, packNibblesAndByte(6, 7, 0));
+            efctSetSpeed(1.0f);
+        }
+        FUN_002bf288(2, 0x15, second, x, y, 0x37);
+        FUN_002bf288(2, 0x15, first, x + offsetX, y + offsetY, 0x38);
+        return;
+    }
+    FUN_002bf288(2, 0x15, 0xdd, x, y, 0x2c);
+    FUN_002bf288(2, 0x15, second, x, y, 0x2d);
+    FUN_002bf288(2, 0x15, first, x, y, 0x2e);
+}

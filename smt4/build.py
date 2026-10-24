@@ -32,6 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 PROJECT = json.loads((ROOT / "config" / "project.json").read_text())
+UNITS_BY_FUNCTION = {unit["function"]: unit for unit in PROJECT["units"]}
 BUILD = ROOT / "build"
 # Headers both games share (the engine, the SDK and most game code are one build tree).
 SHARED_INCLUDE = ROOT.parent / "include"
@@ -99,16 +100,27 @@ def command(compiler, unit, source, obj):
     # A unit may carry its own "cflags" in config/project.json: code the original build compiled
     # differently (e.g. -Ospace, which calls __aeabi_idivmod where -Otime multiplies). Needs evidence.
     cflags = unit.get("cflags", COMPILER["cflags"])
+    # A unit may also name, in "multifile", functions the original compiled in the same armcc
+    # --multifile run: armcc then knows which registers those callees really clobber and keeps
+    # values in caller-saved registers across the calls, without inlining them across files
+    # (--no_autoinline). Their unit sources are compiled alongside; carve keeps the unit's own
+    # function. Needs evidence like "cflags": IDENTICAL with the list, not without.
+    together = [ROOT / UNITS_BY_FUNCTION[name]["source"] for name in unit.get("multifile", ()) if name in UNITS_BY_FUNCTION]
     if FAMILY == "armcc":
         system = Path(compiler).resolve().parent.parent / "include"
         includes = ["-J", str(system)] if system.is_dir() else []
+        # armcc --multifile checks declarations across the files it compiles together (#1171, which
+        # cannot be downgraded): a unit's local callee declarations must agree with the callees' sources.
+        multifile = ["--multifile", "--no_autoinline", "--split_sections"] if together else []
         return (
             launcher()
             + [compiler, "-c"]
             + cflags
+            + multifile
             + mode
             + includes
             + ["-I", str(ROOT / "include"), "-I", str(SHARED_INCLUDE), "-o", str(obj), str(source)]
+            + [str(path) for path in together]
         )
     return (
         [compiler, f"--target={COMPILER['target']}"]

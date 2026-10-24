@@ -1,103 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a3238` (_code @ 0x4a3238, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the window variant as add-immediates plus a displaced ldrsb and anchors the three case-5 tables (cf8/d20/d48) on one pool word (d20 +- 0x28); ours loads separate pool words, so case 0 shrinks and the switch offsets shift. */
+#include "common.h"
+
+/* Style block of an entry window. */
+struct EntryStyle {
+    /* 0x00 */ u8 unk00[0x11];
+    /* 0x11 */ s8 variant;
+};
+
+/* The menu window as the entry drawer reads it. */
+struct EntryWindow {
+    /* 0x000 */ u8 unk000[0xC8];
+    /* 0x0C8 */ u8 textArea[0x750];
+    /* 0x818 */ EntryStyle style;
+    /* 0x82A */ u8 unk82A[0x26];
+    /* 0x850 */ u32 color;
+    /* 0x854 */ u8 unk854[0xC];
+    /* 0x860 */ u8 hidden;
+};
+
+/* Per-entry label records (0x20 bytes each). */
+struct EntryLabel {
+    /* 0x00 */ u8 unk00[0x20];
+};
 
 extern "C" {
 
-int efctSetSpeed(void);
-int drawSetColorFromRGBA8(...);
-int FUN_002a4b28(unsigned int);
-int FUN_002e7284(...);
-int drawTextAtRelativePosition(...);
-int FUN_004a7814(int, unsigned int, int, int, unsigned int, unsigned int);
-int FUN_004a7a50(int, int, unsigned int, int, int, unsigned int);
-int FUN_004a7ba0(int, unsigned int, int, int, unsigned int);
-void FUN_004a7cb0(void *, unsigned int, int, int, int, float scale);
-int FUN_004a80d8(int, int, unsigned int, int);
+void efctSetSpeed(f32 speed);
+void drawSetColorFromRGBA8(u32 color);
+s32 FUN_002a4b28(u32 text);
+void FUN_002e7284(void *textArea, u32 x, u32 y, u32 color, EntryLabel *label);
+void drawTextAtRelativePosition(void *textArea, s32 a, u32 x, u32 y, s32 b, s32 c, u32 d, u32 color, const char *text);
+void FUN_004a7814(EntryWindow *window, u32 first, s32 index, s32 enabled, u32 color, u32 second);
+void FUN_004a7a50(EntryWindow *window, s32 flag, u32 text, s32 index, s32 enabled, u32 color);
+void FUN_004a7ba0(EntryWindow *window, u32 text, s32 index, s32 enabled, u32 color, f32 scale);
+void FUN_004a7cb0(EntryWindow *window, u32 text, s32 index, s32 enabled, u32 color, f32 scale);
+void FUN_004a80d8(EntryWindow *window, s32 index, u32 color, s32 variant, f32 scale);
 
-/* stack frame of param_5: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_5_stack;
+extern u32 DAT_005e1ca8[10];
+extern u32 DAT_005e1cd0[10];
+extern u32 DAT_005e1cf8[10];
+extern u32 DAT_005e1d20[10];
+extern EntryLabel DAT_005e1d48[10];
+extern u32 DAT_005e1e88[];
 
-extern unsigned char LAB_004a3494; /* 0x4a3494 */
-extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
-
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002a4b28. */
-/* Supplied declaration required: FUN_002e7284. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: FUN_004a7814. */
-/* Supplied declaration required: FUN_004a7a50. */
-/* Supplied declaration required: FUN_004a7ba0. */
-/* Supplied declaration required: FUN_004a7cb0. */
-/* Supplied declaration required: FUN_004a80d8. */
-
-
-void FUN_004a3238(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,float scale)
-
+/* Draws one entry of the window in the style `mode` selects (plain, flagged, scaled text, ...),
+ * with text drawn at half size unless the label is single-byte. */
+void FUN_004a3238(EntryWindow *window, s32 index, u32 mode, s32 enabled, u32 text, f32 scale)
 {
-/* irregular: 10 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  float textScale;
-  
-  temp_v2 = *(unsigned int *)(param_1 + 0x850);
-  textScale = FUN_002a4b28(param_5 & 0xffff) != 0 ? 1.0f : 0.5f;
-  switch(param_3) {
-  case 0:
-    if (param_4 != 0) {
-      FUN_004a80d8(param_1,param_2,temp_v2,(int)*(char *)(param_1 + 0x829));
-      return;
+    u32 color = window->color;
+    f32 textScale = 1.0f;
+
+    if (FUN_002a4b28(text & 0xFFFF) == 0) {
+        textScale = 0.5f;
     }
-    break;
-  case 1:
-    temp_v0 = *(char *)(param_1 + 0x860);
-    efctSetSpeed();
-    FUN_004a7a50(param_1,temp_v0 == '\0',param_5,param_2,param_4,temp_v2);
-    efctSetSpeed();
-    return;
-  case 2:
-    FUN_004a7cb0(reinterpret_cast<void *>(param_1),param_5,param_2,param_4,temp_v2,scale * textScale);
-    break;
-  case 3:
-    FUN_004a7ba0(param_1,param_5,param_2,param_4,temp_v2);
-    return;
-  case 4:
-    efctSetSpeed();
-    FUN_004a7814(param_1,*(unsigned int *)(param_2 * 4 + 0x5e1ca8),param_2,param_4,temp_v2,
-                 *(unsigned int *)(param_2 * 4 + 0x5e1cd0));
-    efctSetSpeed();
-    return;
-  case 5:
-    if (param_2 != 0) {
-      if (*(int *)(param_2 * 4 + 0x5e1e84) != (&DAT_005e1e88)[param_2]) {
-        drawSetColorFromRGBA8();
-      }
+
+    switch (mode) {
+    case 0:
+        if (enabled != 0) {
+            EntryStyle *style = &window->style;
+
+            FUN_004a80d8(window, index, color, style->variant, scale);
+            return;
+        }
+        break;
+    case 1: {
+        bool visible = window->hidden == 0;
+
+        efctSetSpeed(scale * textScale);
+        FUN_004a7a50(window, visible, text, index, enabled, color);
+        efctSetSpeed(1.0f);
+        return;
     }
-    else {
-      drawSetColorFromRGBA8(DAT_005e1e88);
+    case 2:
+        FUN_004a7cb0(window, text, index, enabled, color, scale * textScale);
+        break;
+    case 3:
+        FUN_004a7ba0(window, text, index, enabled, color, scale * textScale);
+        return;
+    case 4:
+        efctSetSpeed(scale * textScale);
+        FUN_004a7814(window, DAT_005e1ca8[index], index, enabled, color, DAT_005e1cd0[index]);
+        efctSetSpeed(1.0f);
+        return;
+    case 5:
+        if (index == 0) {
+            drawSetColorFromRGBA8(DAT_005e1e88[0]);
+        } else if (DAT_005e1e88[index - 1] != DAT_005e1e88[index]) {
+            drawSetColorFromRGBA8(DAT_005e1e88[index]);
+        }
+        efctSetSpeed(scale * textScale);
+        if (FUN_002a4b28(text & 0xFFFF) != 0) {
+            FUN_002e7284(window->textArea, DAT_005e1cf8[index], DAT_005e1d20[index], color, &DAT_005e1d48[index]);
+        } else {
+            drawTextAtRelativePosition(window->textArea, 0, DAT_005e1cf8[index], DAT_005e1d20[index], 0, 0, 0xFFFFFFFF, color, "     ???");
+        }
+        efctSetSpeed(1.0f);
+        return;
     }
-    efctSetSpeed();
-    temp_v1 = FUN_002a4b28(param_5 & 0xffff);
-    if (temp_v1 != 0) {
-      FUN_002e7284(param_1 + 200,*(unsigned int *)(param_2 * 4 + 0x5e1cf8),
-                   *(unsigned int *)(param_2 * 4 + 0x5e1d20),temp_v2,param_2 * 0x20 + 0x5e1d48);
-    }
-    else {
-      drawTextAtRelativePosition(param_1 + 200,0,*(unsigned int *)(param_2 * 4 + 0x5e1cf8),
-                   *(unsigned int *)(param_2 * 4 + 0x5e1d20),0,0,0xffffffff,temp_v2,&LAB_004a3494);
-    }
-    efctSetSpeed();
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

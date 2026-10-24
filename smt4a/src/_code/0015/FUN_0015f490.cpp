@@ -1,225 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015f490` (_code @ 0x15f490, 0x3c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: plays a demon's voice/motion line: picks the name slot of the 0x7c-byte record for the requested kind (with the random variants), copies the 10-character name, patches its trailing digits / suffix letter from the kind-specific override table, and starts it; written from the decompilation, the argument of FUN_00184310, the field read from its result and the base offset of the name slots inside the record are recovered from lost arguments, and the float scale arrives in s0 (VFP argument) */
+#include "common.h"
+
+#define LINE_TABLE 0x3E
+#define LINE_TABLE_OVERRIDES 1
+#define LINE_NAME_LENGTH 10
+#define LINE_KIND_COUNT 11
+#define LINE_RECORD_SIZE 0x7C
+#define LINE_OVERRIDE_STRIDE 8
+#define LINE_KIND_SLOT_A 5
+#define LINE_KIND_SLOT_B 6
+#define LINE_OWNER_KEY_OFFSET 0x9E
+#define LINE_SUFFIX_NONE 0
+#define LINE_SUFFIX_A 1
+#define LINE_SUFFIX_B 2
+#define LINE_ASCII_ZERO 0x30
+#define LINE_START_ARG 4
+
+/* A voice-line record: ten-character names, one per slot, followed by the data (observed fields). */
+struct LineRecord {
+    /* 0x00 */ u16 key;
+    /* 0x02 */ char names[12][LINE_NAME_LENGTH];
+    /* 0x7A */ u8 unk7A[2];
+};
+
+/* An override entry: which owner/index pair it applies to and how it patches the name. */
+struct LineOverride {
+    /* 0x00 */ u16 owner;
+    /* 0x02 */ u16 index;
+    /* 0x04 */ u8 unk04;
+    /* 0x05 */ u8 suffix;        /* 0: terminate the name, 1: 'a', 2: 'b' */
+    /* 0x06 */ u8 chance;        /* percent */
+    /* 0x07 */ u8 unk07;
+};
 
 extern "C" {
+void dataTableGet(s32 table, s32 sub);
+s32 dataTableGetCount(void);
+void *dataTableGetEntries(void);
+u8 *FUN_00184310(u32 id);
+s32 lcgRandomRange(s32 max);
+void rt_memcpy(void *destination, const void *source, s32 size);
+void rt_aeabi_memclr(void *block, s32 size);
+u32 FUN_0014af98(void);
+void FUN_001628c0(const char *name, u32 value, s32 mode, u32 argument);
 
-int FUN_001628c0(char *, unsigned int, int, unsigned int);
-int lcgRandomRange(int);
-int FUN_00184310(void);
-int dataTableGet(int, int);
-int rt_aeabi_memclr(char *, int);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-int rt_memcpy(unsigned char [4], int, int);
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern unsigned int FUN_0014af98(void);
-/* Supplied declaration required: FUN_001628c0. */
-/* Supplied declaration required: lcgRandomRange. */
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTableGet. */
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Chooses the record slot for a line kind (randomised for several kinds). */
+static __inline s32 lineSlot(s32 kind)
 {
-/* irregular: 13 unstructured edge(s); 1 goto(s); irregular input(s): in_fpscr, in_s0; 8 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned short *puVar9;
-  unsigned char temp_v8;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v9;
-  unsigned char temp_v10 [4];
-  char acStack_ac [140];
-  
-  dataTableGet(0x3e,0);
-  temp_v1 = dataTableGetEntries();
-  if (param_2 >= 11) {
-    return;
-  }
-  dataTableGet(0x3e,0);
-  temp_v2 = dataTableGetCount();
-  temp_v3 = param_1 & 0xffff;
-  FUN_00184310();
-  if (temp_v3 == 0) {
-    return;
-  }
-  if (0 < temp_v2) {
-    temp_v3 = (unsigned int)*(unsigned char *)(temp_v3 + 0x9e);
-  }
-  temp_v4 = 0;
-  temp_v7 = 0;
-  if (temp_v4 < temp_v2) {
-    do {
-      temp_v7 = temp_v4;
-      if (*(unsigned short *)(temp_v1 + temp_v4 * 0x7c) == temp_v3) break;
-      temp_v4 = temp_v4 + 1;
-      temp_v7 = 0;
-    } while (temp_v4 < temp_v2);
-  }
-  rt_memcpy(temp_v10,temp_v1 + temp_v7 * 0x7c,0x7c);
-  temp_v1 = 0;
-  switch(param_2) {
-  case 0:
-    temp_v2 = lcgRandomRange(2);
-    if (temp_v2 != 0) {
-      if (temp_v2 != 1) {
-        temp_v1 = 2;
+    s32 slot = 0;
+    switch (kind) {
+    case 0: {
+        s32 r = lcgRandomRange(2);
+        slot = r == 0 ? 0 : r == 1 ? 1 : 2;
         break;
-      }
-      temp_v1 = 1;
     }
-    break;
-  case 1:
-    temp_v1 = lcgRandomRange(2);
-    if (temp_v1 != 0) {
-      if (temp_v1 == 1) {
-        temp_v1 = 5;
+    case 1: {
+        s32 r = lcgRandomRange(2);
+        slot = r == 0 ? 4 : r == 1 ? 5 : 6;
         break;
-      }
-      temp_v1 = 6;
-      break;
     }
-    temp_v1 = 4;
-    break;
-  case 2:
-    temp_v1 = 0xb;
-    break;
-  case 3:
-    temp_v1 = lcgRandomRange(1);
-    if (temp_v1 != 0) {
-      temp_v1 = 5;
-      break;
+    case 2: slot = 0xB; break;
+    case 3: slot = lcgRandomRange(1) != 0 ? 5 : 4; break;
+    case 4: {
+        u32 r = lcgRandomRange(9);
+        slot = r <= 5 ? 3 : r >= 8 ? 6 : 4;
+        break;
     }
-    temp_v1 = 4;
-    break;
-  case 4:
-    temp_v3 = lcgRandomRange(9);
-    if (5 >= temp_v3) {
-      temp_v1 = 3;
-      break;
+    case 5: slot = lcgRandomRange(1) != 0 ? 9 : 8; break;
+    case 6: slot = 2; break;
+    case 7: slot = 10; break;
+    case 8: slot = 1; break;
+    case 9: slot = lcgRandomRange(1) != 0 ? 10 : 0; break;
+    case 10: slot = 7; break;
     }
-    if (temp_v3 >= 8) {
-      temp_v1 = 6;
-      break;
-    }
-    temp_v1 = 4;
-    break;
-  case 5:
-    temp_v1 = lcgRandomRange(1);
-    if (temp_v1 != 0) {
-      temp_v1 = 9;
-      break;
-    }
-    temp_v1 = 8;
-    break;
-  case 6:
-    temp_v1 = 2;
-    break;
-  case 7:
-    temp_v1 = 10;
-    break;
-  case 8:
-    temp_v1 = 1;
-    break;
-  case 9:
-    temp_v2 = lcgRandomRange(1);
-    if (temp_v2 == 0) break;
-    temp_v1 = 10;
-    break;
-  case 10:
-    temp_v1 = 7;
-  }
-LAB_0015f650:
-  rt_aeabi_memclr(acStack_ac + 0x78,10);
-  temp_v2 = 0;
-  do {
-    temp_v0 = acStack_ac[temp_v2 + temp_v1 * 10];
-    acStack_ac[temp_v2 + 0x78] = temp_v0;
-    if (temp_v0 == '\0') break;
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 10);
-  if ((param_2 == 5 || param_2 == 6) && (param_4 != 0)) {
-    dataTableGet(0x3e,1);
-    temp_v1 = dataTableGetEntries();
-    dataTableGet(0x3e,1);
-    temp_v2 = dataTableGetCount();
-    temp_v7 = 0;
-    if (temp_v7 < temp_v2) {
-      do {
-        puVar9 = (unsigned short *)(temp_v1 + temp_v7 * 8);
-        temp_v3 = (unsigned int)*puVar9;
-        temp_v8 = temp_v3 == param_1;
-        if (temp_v8) {
-          temp_v3 = (unsigned int)puVar9[1];
+    return slot;
+}
+
+static __inline bool lineIsDigit(char c)
+{
+    return (u32)(c - LINE_ASCII_ZERO) < 10;
+}
+
+void FUN_0015f490(u32 id, s32 kind, u32 argument, u32 variant, f32 scale)
+{
+    dataTableGet(LINE_TABLE, 0);
+    LineRecord *records = static_cast<LineRecord *>(dataTableGetEntries());
+    if (kind >= LINE_KIND_COUNT)
+        return;
+    dataTableGet(LINE_TABLE, 0);
+    s32 recordCount = dataTableGetCount();
+    u32 owner = id & 0xFFFF;
+    u8 *source = FUN_00184310(owner);
+    if (owner == 0)
+        return;
+    u32 key = owner;
+    if (recordCount > 0)
+        key = source[LINE_OWNER_KEY_OFFSET];
+
+    s32 found = 0;
+    for (s32 i = 0; i < recordCount; i++) {
+        if (reinterpret_cast<LineRecord *>(reinterpret_cast<u8 *>(records) + i * LINE_RECORD_SIZE)->key == key) {
+            found = i;
+            break;
         }
-        if (temp_v8 && temp_v3 == param_4) {
-          temp_v3 = lcgRandomRange(99);
-          if (temp_v3 < *(unsigned char *)(temp_v1 + temp_v7 * 8 + 6)) {
-            temp_v3 = 0xffffffff;
-            temp_v1 = -1;
-            temp_v5 = 9;
-            do {
-              if ((int)acStack_ac[temp_v5 + 0x78] - 0x30U < 10) {
-                if (-1 < (int)temp_v3) goto LAB_0015f760;
-                temp_v3 = temp_v5;
-                if ((int)(temp_v5 + 1) < 10) {
-                  temp_v1 = temp_v5 + 1;
-                }
-              }
-              temp_v5 = temp_v5 - 1;
-            } while (temp_v5 < 0x80000000);
-            temp_v5 = 0xffffffff;
-            if (-1 < (int)temp_v3) {
-LAB_0015f760:
-              acStack_ac[temp_v3 + 0x78] = (unsigned char)puVar9[2] % 10 + 0x30;
-            }
-            if (-1 < (int)temp_v5) {
-              temp_v3 = (unsigned int)((short)(unsigned short)(unsigned char)puVar9[2] * 0xcd) >> 0xb;
-              acStack_ac[temp_v5 + 0x78] = (char)temp_v3 + (char)(temp_v3 / 10) * -10 + '0';
-            }
-            if (-1 < temp_v1) {
-              temp_v0 = *(char *)((int)puVar9 + 5);
-              if (temp_v0 == '\0') {
-                acStack_ac[temp_v1 + 0x78] = '\0';
-              }
-              else {
-                if (temp_v0 == '\x01') {
-                  temp_v0 = 'a';
-                }
-                else {
-                  if (temp_v0 != '\x02') break;
-                  temp_v0 = 'b';
-                }
-                acStack_ac[temp_v1 + 0x78] = temp_v0;
-              }
-            }
-          }
-          break;
-        }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < temp_v2);
     }
-  }
-  temp_v6 = FUN_0014af98();
-  temp_v9 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = VectorFloatToUnsigned(temp_v9 * in_s0,3);
-  FUN_001628c0(acStack_ac + 0x78,temp_v3 & 0xff,4,param_3);
-  return;
+    LineRecord record;
+    rt_memcpy(&record, reinterpret_cast<u8 *>(records) + found * LINE_RECORD_SIZE, LINE_RECORD_SIZE);
+
+    char name[LINE_NAME_LENGTH];
+    rt_aeabi_memclr(name, LINE_NAME_LENGTH);
+    s32 slot = lineSlot(kind);
+    for (s32 i = 0; i < LINE_NAME_LENGTH; i++) {
+        name[i] = record.names[slot][i];
+        if (name[i] == 0)
+            break;
+    }
+
+    if ((kind == LINE_KIND_SLOT_A || kind == LINE_KIND_SLOT_B) && variant != 0) {
+        dataTableGet(LINE_TABLE, LINE_TABLE_OVERRIDES);
+        LineOverride *overrides = static_cast<LineOverride *>(dataTableGetEntries());
+        dataTableGet(LINE_TABLE, LINE_TABLE_OVERRIDES);
+        s32 count = dataTableGetCount();
+        for (s32 i = 0; i < count; i++) {
+            LineOverride *entry = &overrides[i];
+            if (entry->owner != id || entry->index != variant)
+                continue;
+            if ((u32)lcgRandomRange(99) < entry->chance) {
+                s32 units = -1;
+                s32 tens = -1;
+                s32 suffix = -1;
+                for (s32 pos = LINE_NAME_LENGTH - 1; pos >= 0; pos--) {
+                    if (!lineIsDigit(name[pos]))
+                        continue;
+                    if (units >= 0) {
+                        tens = pos;
+                        break;
+                    }
+                    units = pos;
+                    if (pos + 1 < LINE_NAME_LENGTH)
+                        suffix = pos + 1;
+                }
+                if (units >= 0)
+                    name[units] = (u8)entry->index % 10 + LINE_ASCII_ZERO;
+                if (tens >= 0)
+                    name[tens] = (u8)entry->index / 10 % 10 + LINE_ASCII_ZERO;
+                if (suffix >= 0) {
+                    if (entry->suffix == LINE_SUFFIX_NONE)
+                        name[suffix] = 0;
+                    else if (entry->suffix == LINE_SUFFIX_A)
+                        name[suffix] = 'a';
+                    else if (entry->suffix == LINE_SUFFIX_B)
+                        name[suffix] = 'b';
+                }
+            }
+            break;
+        }
+    }
+
+    FUN_001628c0(name, (u32)((f32)FUN_0014af98() * scale) & 0xFF, LINE_START_ARG, argument);
 }
 
 } /* extern "C" */

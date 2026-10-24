@@ -1,136 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d1df4` (_code @ 0x1d1df4, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles; retail holds the output block as a separate pointer (r5) and schedules the colour unpacking differently (172 vs 156 rows) */
+#include "common.h"
+#include <math.h>
+
+// Animated placed-effect object: keyed colour/scale curves evaluated per frame.
+struct PlacedEffect {
+    f32 position[3];        // 0x00
+    u8 unk0c[0x18];
+    u32 baseColor;          // 0x24
+    u8 unk28[4];
+    s32 frame;              // 0x2c
+    u8 colorCurve[0x24];    // 0x30
+    u8 unk54[0x30];
+    u8 unk84[0x28];
+    u8 unkAC[0x10];
+    s32 duration;           // 0xbc
+    u8 loops;               // 0xc0
+    u8 unkC1[0x0f];
+    f32 velocity[3];        // 0xd0
+    f32 speed;              // 0xdc
+    f32 gravity;            // 0xe0
+    f32 out[0x0a];          // 0xe4: position, 1.0, colour rgb + a, two curve values
+};
+
+struct EffectDefaults {
+    s8 enabled;
+    f32 scale;
+};
 
 extern "C" {
 
-int placedModelApplyLook(float *);
-int FUN_00269508(float *, double, double);
-int FUN_00269694(float *, float *, double, double);
-int VectorSignedToFloat(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
+extern EffectDefaults DAT_00472398;
+extern f32 DAT_004ea91c[4];
+extern f32 DAT_004ea92c[4];
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+s32 effGetFrameCounter(void);
+u32 FUN_00269694(void* curve, void* keys, s32 frame, s32 duration);
+f32 FUN_00269508(void* curve, s32 frame, s32 duration);
+void placedModelApplyLook(PlacedEffect* effect);
 
-extern signed char DAT_00472398; /* 0x472398 */
-extern float DAT_0047239c; /* 0x47239c */
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+// Advances the effect by the frame counter and recomputes its output position and colour.
+void FUN_001d1df4(PlacedEffect* effect)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-/* Supplied declaration required: placedModelApplyLook. */
-/* Supplied declaration required: FUN_00269508. */
-/* Supplied declaration required: FUN_00269694. */
-extern int effGetFrameCounter(void);
-
-
-void FUN_001d1df4(float *param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  float *pfVar2;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  if ((param_1[0xb] == 0.0f) && (DAT_00472398 != '\0')) {
-    param_1[0xe] = DAT_0047239c;
-  }
-  temp_v0 = effGetFrameCounter();
-  temp_v3 = param_1[0x2f];
-  temp_v2 = (float)(temp_v0 + (int)param_1[0xb]);
-  param_1[0xb] = temp_v2;
-  if (temp_v2 == 0.0f) {
-    return;
-  }
-  temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (((int)temp_v3 <= (int)temp_v2) && (0 < (int)temp_v3)) {
-    if (*(char *)(param_1 + 0x30) == '\0') {
-      return;
+    if (effect->frame == 0 && DAT_00472398.enabled != 0) {
+        *(f32*)((u8*)effect + 0x38) = DAT_00472398.scale;
     }
-    temp_v2 = 0.0f;
-    param_1[0xb] = 0.0f;
-  }
-  pfVar2 = param_1 + 0xc;
-  FUN_00269694(pfVar2,param_1 + 0x15,temp_v2,temp_v3);
-  temp_v1 = param_1[9];
-  DAT_004ea92c = (float)VectorUnsignedToFloat((unsigned int)temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea930 = (float)VectorUnsignedToFloat
-                                  (((unsigned int)temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea934 = (float)VectorUnsignedToFloat
-                                  (((unsigned int)temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea938 = (float)VectorUnsignedToFloat((unsigned int)temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea92c = DAT_004ea92c * 0.003921569f;
-  DAT_004ea930 = DAT_004ea930 * 0.003921569f;
-  DAT_004ea934 = DAT_004ea934 * 0.003921569f;
-  DAT_004ea938 = DAT_004ea938 * 0.003921569f;
-  temp_v1 = (float)VectorUnsignedToFloat((unsigned int)pfVar2 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = (float)VectorUnsignedToFloat
-                           (((unsigned int)pfVar2 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = (float)VectorUnsignedToFloat(((unsigned int)pfVar2 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = (float)VectorUnsignedToFloat((unsigned int)pfVar2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = temp_v1 * 0.003921569f * DAT_004ea92c;
-  temp_v6 = temp_v6 * 0.003921569f * DAT_004ea930;
-  temp_v4 = temp_v4 * 0.003921569f * DAT_004ea934;
-  temp_v5 = temp_v5 * 0.003921569f * DAT_004ea938;
-  DAT_004ea91c = temp_v1;
-  DAT_004ea920 = temp_v6;
-  DAT_004ea924 = temp_v4;
-  DAT_004ea928 = temp_v5;
-  param_1[0x40] = temp_v5;
-  param_1[0x3d] = temp_v1;
-  param_1[0x3e] = temp_v6;
-  param_1[0x3f] = temp_v4;
-  FUN_00269508(param_1 + 0x19,temp_v2,temp_v3);
-  param_1[0x41] = temp_v5;
-  FUN_00269508(param_1 + 0x24,temp_v2,temp_v3);
-  param_1[0x42] = temp_v5;
-  temp_v2 = 0.0f;
-  temp_v3 = param_1[0x34];
-  temp_v1 = param_1[0x35];
-  temp_v6 = param_1[0x36];
-  if ((temp_v3 != 0.0f || temp_v1 != 0.0f) || (temp_v4 = temp_v2, temp_v5 = temp_v2, temp_v6 != 0.0f)) {
-    temp_v5 = 1.0f / romwright_sqrt_4(temp_v3 * temp_v3 + temp_v1 * temp_v1 + temp_v6 * temp_v6);
-    temp_v2 = temp_v3 * temp_v5;
-    temp_v4 = temp_v1 * temp_v5;
-    temp_v5 = temp_v6 * temp_v5;
-  }
-  temp_v7 = param_1[0x37];
-  temp_v8 = temp_v9 * 0.5f;
-  param_1[0x39] = *param_1 + (temp_v3 + temp_v2 * temp_v7 * temp_v8) * temp_v9;
-  param_1[0x3a] =
-       param_1[1] +
-       ((temp_v1 + temp_v4 * temp_v7 * temp_v8) * temp_v9 - param_1[0x38] * temp_v9 * temp_v9 * 0.5f);
-  param_1[0x3b] = param_1[2] + (temp_v6 + temp_v5 * temp_v7 * temp_v8) * temp_v9;
-  param_1[0x3c] = 1.0f;
-  placedModelApplyLook(param_1);
-  return;
+    s32 frame = effGetFrameCounter() + effect->frame;
+    s32 duration = effect->duration;
+    effect->frame = frame;
+    if (frame == 0) return;
+    f32 t = (f32)frame;
+    if (frame >= duration && duration > 0) {
+        if (effect->loops == 0) return;
+        frame = 0;
+        effect->frame = 0;
+    }
+
+    u32 tint = FUN_00269694(&effect->colorCurve, &effect->unk84, frame, duration);
+    u32 base = effect->baseColor;
+    DAT_004ea92c[0] = (f32)(base >> 24) * 0.003921569f;
+    DAT_004ea92c[1] = (f32)((base >> 16) & 0xff) * 0.003921569f;
+    DAT_004ea92c[2] = (f32)((base >> 8) & 0xff) * 0.003921569f;
+    DAT_004ea92c[3] = (f32)(base & 0xff) * 0.003921569f;
+    DAT_004ea91c[0] = (f32)(tint >> 24) * 0.003921569f;
+    DAT_004ea91c[1] = (f32)((tint >> 16) & 0xff) * 0.003921569f;
+    DAT_004ea91c[2] = (f32)((tint >> 8) & 0xff) * 0.003921569f;
+    DAT_004ea91c[3] = (f32)(tint & 0xff) * 0.003921569f;
+    for (s32 i = 0; i < 4; i++) DAT_004ea91c[i] *= DAT_004ea92c[i];
+    effect->out[4] = DAT_004ea91c[0];
+    effect->out[5] = DAT_004ea91c[1];
+    effect->out[6] = DAT_004ea91c[2];
+    effect->out[7] = DAT_004ea91c[3];
+    effect->out[8] = FUN_00269508(&effect->unk54[0x10], frame, duration);
+    effect->out[9] = FUN_00269508(&effect->unk84[0xc], frame, duration);
+
+    f32 vx = effect->velocity[0];
+    f32 vy = effect->velocity[1];
+    f32 vz = effect->velocity[2];
+    f32 dx = 0.0f, dy = 0.0f, dz = 0.0f;
+    if (vx != 0.0f || vy != 0.0f || vz != 0.0f) {
+        f32 inv = 1.0f / sqrtf(vx * vx + vy * vy + vz * vz);
+        dx = vx * inv;
+        dy = vy * inv;
+        dz = vz * inv;
+    }
+    f32 half = t * 0.5f;
+    effect->out[0] = effect->position[0] + (vx + dx * effect->speed * half) * t;
+    effect->out[1] = effect->position[1] + ((vy + dy * effect->speed * half) * t - effect->gravity * t * t * 0.5f);
+    effect->out[2] = effect->position[2] + (vz + dz * effect->speed * half) * t;
+    effect->out[3] = 1.0f;
+    placedModelApplyLook(effect);
 }
 
 } /* extern "C" */

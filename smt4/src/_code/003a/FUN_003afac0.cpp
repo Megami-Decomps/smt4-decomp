@@ -1,162 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003afac0` (_code @ 0x3afac0, 0x258 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: transfer-queue pop with the inlined ring iterators (position/wrap computations, begin==end tests) and list unlink written as plain helpers; instruction scheduling and the iterator temporaries are not reproduced */
+#include "common.h"
+
+/* A queued transfer: its payload size is at +0xC of the payload. */
+struct TransferPayloadView {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 size;
+};
+
+struct TransferDescriptorView {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ TransferPayloadView *payload;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+};
+
+/* A ring of descriptors (16 bytes each): begin, capacity, head index, used count, in-use flag. */
+struct DescriptorRing {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ TransferDescriptorView *items;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 capacity;
+    /* 0x10 */ u32 head;
+    /* 0x14 */ u32 count;
+    /* 0x18 */ u8 inUse;
+    /* 0x19 */ u8 unk19[3];
+};
+
+/* The byte ring the payloads live in. */
+struct ByteRing {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 *base;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 capacity;
+    /* 0x10 */ u32 start;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u8 inUse;
+    /* 0x19 */ u8 unk19[3];
+};
+
+struct TransferListNodeOwner {
+    /* 0x00 */ void **vtable;
+};
+
+/* The intrusive node the active transfer hangs on (self-linked when empty). */
+struct TransferNode {
+    /* 0x00 */ TransferListNodeOwner *owner;
+    /* 0x04 */ TransferNode *queued;
+    /* 0x08 */ TransferNode *next;
+    /* 0x0C */ TransferNode *previous;
+};
+
+struct TransferQueueView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ByteRing bytes;
+    /* 0x20 */ u8 output[0x10];
+    /* 0x30 */ DescriptorRing descriptors;
+    /* 0x4C */ TransferNode node;
+    /* 0x5C */ u8 unk5C[4];
+};
+
+struct ActiveTransfer {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ TransferPayloadView *current;
+};
 
 extern "C" {
+s32 FUN_003fbc38(void *output, TransferNode *node);
+void FUN_003fb848(void *out, ByteRing *ring, ByteRing *ring2, u8 *p0, u32 i0, ByteRing *ring3, u8 *p1, u32 i1);
 
-int FUN_003fb848(unsigned char [12], int, int, unsigned int, int, int, unsigned int, int);
-int FUN_003fbc38(int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_003fb848. */
-/* Supplied declaration required: FUN_003fbc38. */
-
-
-void FUN_003afac0(int param_1,int param_2)
-
+/* Releases the transfer at the head of the queue: sums the payload bytes ahead of it in the ring,
+ * drops its byte range and resets the node. Returns 1. */
+u32 FUN_003afac0(TransferQueueView *queue)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned int *puVar7;
-  unsigned int unaff_r6;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8 [12];
-  
-  if (*(int *)(param_1 + 0x50) != 0) {
-    temp_v6 = *(unsigned int *)(param_1 + 0x40);
-    temp_v7 = *(int *)(param_1 + 0x48) != 0;
-    if (temp_v7) {
-      temp_v0 = *(int *)(param_1 + 0x34);
+    TransferPayloadView *current = *(TransferPayloadView **)((u8 *)queue + 0x50);
+    if (current == NULL)
+        return 1;
+
+    DescriptorRing *ring = &queue->descriptors;
+    u32 total = 0;
+    u32 count = ring->inUse ? ring->count : 0;
+    for (u32 k = 0; k < count; k++) {
+        u32 index = ring->head + k;
+        if (index >= ring->capacity)
+            index -= ring->capacity;
+        total += ring->items[index].payload->size;
     }
-    else {
-      param_2 = 0;
-      temp_v0 = 0;
-    }
-    temp_v4 = 0;
-    if (temp_v7) {
-      param_2 = temp_v0 + temp_v6 * 0x10;
-    }
-    if (*(int *)(param_1 + 0x48) == 0) {
-      temp_v1 = *(unsigned int *)(param_1 + 0x44);
-      temp_v0 = 0;
-    }
-    else {
-      temp_v1 = *(unsigned int *)(param_1 + 0x44);
-      if (temp_v1 != 0) {
-        unaff_r6 = *(unsigned int *)(param_1 + 0x3c);
-      }
-      if (!(temp_v1 != 0 && temp_v1 != unaff_r6)) {
-        temp_v0 = *(int *)(param_1 + 0x34);
-        temp_v1 = *(unsigned int *)(param_1 + 0x3c);
-      }
-      else {
-        temp_v0 = *(int *)(param_1 + 0x34) + temp_v1 * 0x10;
-        if (temp_v1 <= *(unsigned int *)(param_1 + 0x40)) {
-          temp_v1 = temp_v1 + unaff_r6;
+
+    if (FUN_003fbc38(queue->output, &queue->node) != 0) {
+        ByteRing *bytes = &queue->bytes;
+        u32 start = bytes->inUse ? bytes->start : 0;
+        u32 first = start + total;
+        if (first >= bytes->capacity)
+            first -= bytes->capacity;
+        u32 last = first + current->size;
+        if (last >= bytes->capacity)
+            last -= bytes->capacity;
+        u8 *base = bytes->base;
+        u8 range[16];
+        FUN_003fb848(range, bytes, bytes, base + (bytes->inUse ? bytes->start : 0) + total,
+                     bytes->start + total, bytes, base + last, bytes->start + total + current->size);
+
+        TransferNode *node = &queue->node;
+        if (node->next == NULL || node->next == node) {
+            if (node->queued != NULL)
+                ((void (*)(TransferListNodeOwner *))node->owner->vtable[1])(node->owner);
+        } else {
+            node->previous->next = node->next;
+            node->next->previous = node->previous;
+            node->next = NULL;
+            node->previous = NULL;
         }
-      }
+        node->queued = NULL;
+        node->previous = node;
+        node->next = node;
     }
-    if (param_2 != temp_v0 || temp_v6 != temp_v1) {
-      do {
-        temp_v0 = param_2 + 0x10;
-        temp_v6 = temp_v6 + 1;
-        temp_v4 = temp_v4 + *(int *)(*(int *)(param_2 + 4) + 0xc);
-        param_2 = temp_v0;
-        if (*(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x3c) * 0x10 == temp_v0) {
-          param_2 = *(int *)(param_1 + 0x34);
-        }
-        temp_v1 = *(unsigned int *)(param_1 + 0x44);
-        if (*(int *)(param_1 + 0x48) == 0) {
-          temp_v0 = 0;
-        }
-        else {
-          if (temp_v1 != 0) {
-            unaff_r6 = *(unsigned int *)(param_1 + 0x3c);
-          }
-          if (!(temp_v1 != 0 && temp_v1 != unaff_r6)) {
-            temp_v0 = *(int *)(param_1 + 0x34);
-            temp_v1 = *(unsigned int *)(param_1 + 0x3c);
-          }
-          else if (*(unsigned int *)(param_1 + 0x40) < temp_v1) {
-            unaff_r6 = *(unsigned int *)(param_1 + 0x34);
-            temp_v0 = unaff_r6 + temp_v1 * 0x10;
-          }
-          else {
-            temp_v0 = *(int *)(param_1 + 0x34) + temp_v1 * 0x10;
-            temp_v1 = temp_v1 + unaff_r6;
-          }
-        }
-      } while (param_2 != temp_v0 || temp_v6 != temp_v1);
-    }
-    temp_v0 = param_1 + 0x20;
-    FUN_003fbc38(temp_v0,param_1 + 0x4c);
-    if (temp_v0 != 0) {
-      temp_v2 = param_1 + 4;
-      temp_v7 = *(int *)(param_1 + 0x1c) != 0;
-      temp_v0 = 0;
-      if (temp_v7) {
-        temp_v0 = *(int *)(param_1 + 8);
-      }
-      if (!temp_v7) {
-        temp_v0 = 0;
-      }
-      else {
-        temp_v0 = temp_v0 + *(int *)(param_1 + 0x14);
-      }
-      temp_v6 = temp_v0 + temp_v4;
-      if ((unsigned int)(*(int *)(param_1 + 8) + *(int *)(param_1 + 0x10)) <= temp_v6) {
-        temp_v6 = temp_v6 - *(int *)(param_1 + 0x10);
-      }
-      temp_v5 = *(int *)(param_1 + 8);
-      temp_v0 = *(int *)(*(int *)(param_1 + 0x50) + 0xc);
-      temp_v6 = temp_v6 + temp_v0;
-      if ((unsigned int)(temp_v5 + *(int *)(param_1 + 0x10)) <= temp_v6) {
-        temp_v6 = temp_v6 - *(int *)(param_1 + 0x10);
-      }
-      if (*(int *)(param_1 + 0x1c) == 0) {
-        temp_v3 = 0;
-      }
-      else {
-        temp_v3 = temp_v5 + *(int *)(param_1 + 0x14);
-      }
-      temp_v1 = temp_v3 + temp_v4;
-      if ((unsigned int)(temp_v5 + *(int *)(param_1 + 0x10)) <= temp_v1) {
-        temp_v1 = temp_v1 - *(int *)(param_1 + 0x10);
-      }
-      FUN_003fb848(temp_v8,temp_v2,temp_v2,temp_v1,*(int *)(param_1 + 0x14) + temp_v4,temp_v2,temp_v6,
-                   *(int *)(param_1 + 0x14) + temp_v4 + temp_v0);
-      puVar7 = (unsigned int *)(param_1 + 0x4c);
-      puVar4 = *(unsigned int **)(param_1 + 0x54);
-      if (puVar4 == (unsigned int *)0x0 || puVar4 == puVar7) {
-        if (*(int *)(param_1 + 0x50) != 0) {
-          (**(romwright_code **)(*(int *)*puVar7 + 4))();
-        }
-      }
-      else {
-        puVar4[3] = *(unsigned int *)(param_1 + 0x58);
-        *(unsigned int *)(*(int *)(param_1 + 0x58) + 8) = *(unsigned int *)(param_1 + 0x54);
-        *(unsigned int *)(param_1 + 0x54) = 0;
-        *(unsigned int *)(param_1 + 0x58) = 0;
-      }
-      *(unsigned int *)(param_1 + 0x50) = 0;
-      *(unsigned int **)(param_1 + 0x58) = puVar7;
-      *(unsigned int **)(param_1 + 0x54) = puVar7;
-    }
-  }
-  return;
+    return 1;
 }
 
 } /* extern "C" */

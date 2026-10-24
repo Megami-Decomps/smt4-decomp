@@ -1,4 +1,3 @@
-/* NON_MATCHING: State-stack push destination calculation and load/store scheduling differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 

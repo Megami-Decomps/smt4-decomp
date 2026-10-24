@@ -1,151 +1,133 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00417234` (_code @ 0x417234, 0x254 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near: retail does not hoist the constants 5/6 into registers (uses mov r0 each time, and stores mode+step with one stm), ours keeps 5/6/7 in r7/r8/r9 and pushes more saved registers (147 rows against 150). */
+#include "common.h"
+
+/* The status-down (cure) menu task (observed fields). */
+struct StatusDownTask {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 nextMode;
+    /* 0x0C */ u32 step;
+    /* 0x10 */ u32 nextStep;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u32 script;
+    /* 0x20 */ u8 unk20[0x1A];
+    /* 0x3A */ u16 targetEntry;
+    /* 0x3C */ s32 targetIndex;
+    /* 0x40 */ s8 useAltSe;
+};
 
 extern "C" {
 
-int sysPlaySe(...);
-int scrRunOpcodesStub(unsigned int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_00333dc8(int);
-int obj04Finish(void);
-int FUN_0037e078(void);
-int stateHolderEnterState7(void);
-int statusDownEnterStateSeven(void);
-int FUN_003a7b74(void);
-int FUN_003b0744(void);
+void sysPlaySe(u32 id);
+s32 scrRunOpcodesStub(u32 script);
+void scrScriptProcessStartEntry(u32 script, u32 entry);
+void FUN_00333dc8(s32 value);
+void obj04Finish(void);
+void FUN_0037e078(void);
+void stateHolderEnterState7(void);
+void statusDownEnterStateSeven(void);
+s32 FUN_003a7b74(void);
+void FUN_003b0744(void);
+s32 messageMainIsIdle(void);
+s32 messageGetChoiceResult(void);
+s32 stateHolderCountMinus1(void);
+s32 stateHolderStateIs8Or10(void);
+u16 stateHolderGetCurrentEntry(void);
+s32 stateHolderStateIs0xD(void);
+s32 statusDownIsStateEleven(void);
 
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: scrRunOpcodesStub. */
-extern int messageMainIsIdle(void);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: obj04Finish. */
-extern int stateHolderCountMinus1(void);
-extern int stateHolderStateIs8Or10(void);
-/* Supplied declaration required: FUN_0037e078. */
-/* Supplied declaration required: stateHolderEnterState7. */
-extern unsigned short stateHolderGetCurrentEntry(void);
-extern int stateHolderStateIs0xD(void);
-/* Supplied declaration required: statusDownEnterStateSeven. */
-/* Supplied declaration required: FUN_003a7b74. */
-extern int statusDownIsStateEleven(void);
-/* Supplied declaration required: FUN_003b0744. */
-
-
-unsigned int FUN_00417234(int param_1)
-
+/* Runs one frame of the status-down menu: pick the target, confirm with a choice, then either apply
+ * the cure or fall back to the previous menu. Always returns 0. */
+u32 FUN_00417234(StatusDownTask *task)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  switch(*(unsigned int *)(param_1 + 0xc)) {
-  case 0:
-    statusDownEnterStateSeven();
-    *(unsigned int *)(param_1 + 0xc) = 1;
-  case 1:
-    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0xf);
-    *(unsigned short *)(param_1 + 0x3a) = 0;
-    sysPlaySe(0x69);
-    *(unsigned int *)(param_1 + 0xc) = 2;
-  case 2:
-    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
-    temp_v3 = stateHolderStateIs8Or10();
-    if (temp_v3 != 0) {
-      *(unsigned int *)(param_1 + 0xc) = 3;
+    switch (task->step) {
+    case 0:
+        statusDownEnterStateSeven();
+        task->step = 1;
+    case 1:
+        scrScriptProcessStartEntry(task->script, 0xF);
+        task->targetEntry = 0;
+        sysPlaySe(0x69);
+        task->step = 2;
+    case 2:
+        scrRunOpcodesStub(task->script);
+        if (stateHolderStateIs8Or10() != 0) {
+            task->step = 3;
+        } else {
+            if (statusDownIsStateEleven() == 0) {
+                break;
+            }
+            task->step = 7;
+        }
+        obj04Finish();
+        sysPlaySe(0x9C);
+        break;
+    case 3:
+        if (messageMainIsIdle() == 0) {
+            break;
+        }
+        if (FUN_003a7b74() == stateHolderCountMinus1()) {
+            task->step = 7;
+            task->targetIndex = -1;
+            break;
+        }
+        task->targetIndex = FUN_003a7b74();
+        task->targetEntry = stateHolderGetCurrentEntry();
+        scrScriptProcessStartEntry(task->script, 0x11);
+        task->step = 4;
+    case 4:
+        if (scrRunOpcodesStub(task->script) != 2) {
+            break;
+        }
+        FUN_00333dc8(0);
+        if (messageGetChoiceResult() == 0) {
+            FUN_003b0744();
+            task->step = 5;
+        } else {
+            stateHolderEnterState7();
+            task->step = 1;
+        }
+        break;
+    case 5:
+        if (stateHolderStateIs0xD() == 0) {
+            break;
+        }
+        FUN_0037e078();
+        task->step = 6;
+    case 6:
+        task->nextStep = 0;
+        task->nextMode = 5;
+        task->step = 0;
+        if (task->useAltSe == 0) {
+            sysPlaySe(0x67);
+        } else {
+            sysPlaySe(0x11D);
+        }
+        break;
+    case 7:
+        if (messageMainIsIdle() == 0) {
+            break;
+        }
+        task->targetIndex = -1;
+        scrScriptProcessStartEntry(task->script, 0x10);
+        task->step = 8;
+    case 8:
+        if (scrRunOpcodesStub(task->script) != 2) {
+            break;
+        }
+        FUN_00333dc8(0);
+        if (messageGetChoiceResult() == 0) {
+            task->nextStep = 0;
+            task->nextMode = 6;
+            task->step = 0;
+        } else {
+            stateHolderEnterState7();
+            task->step = 1;
+        }
+        break;
+    default:
+        break;
     }
-    else {
-      temp_v3 = statusDownIsStateEleven();
-      if (temp_v3 == 0) {
-        return 0;
-      }
-      *(unsigned int *)(param_1 + 0xc) = 7;
-    }
-    obj04Finish();
-    sysPlaySe(0x9c);
     return 0;
-  case 3:
-    temp_v3 = messageMainIsIdle();
-    if (temp_v3 == 0) {
-      return 0;
-    }
-    temp_v3 = FUN_003a7b74();
-    temp_v1 = stateHolderCountMinus1();
-    if (temp_v3 == temp_v1) {
-      *(unsigned int *)(param_1 + 0xc) = 7;
-      *(unsigned int *)(param_1 + 0x3c) = 0xffffffff;
-      return 0;
-    }
-    temp_v2 = FUN_003a7b74();
-    *(unsigned int *)(param_1 + 0x3c) = temp_v2;
-    temp_v0 = stateHolderGetCurrentEntry();
-    *(unsigned short *)(param_1 + 0x3a) = temp_v0;
-    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x11);
-    *(unsigned int *)(param_1 + 0xc) = 4;
-  case 4:
-    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
-    if (temp_v3 != 2) {
-      return 0;
-    }
-    FUN_00333dc8(0);
-    temp_v3 = messageGetChoiceResult();
-    if (temp_v3 == 0) {
-      FUN_003b0744();
-      *(unsigned int *)(param_1 + 0xc) = 5;
-      return 0;
-    }
-    break;
-  case 5:
-    temp_v3 = stateHolderStateIs0xD();
-    if (temp_v3 == 0) {
-      return 0;
-    }
-    FUN_0037e078();
-    *(unsigned int *)(param_1 + 0xc) = 6;
-  case 6:
-    *(unsigned int *)(param_1 + 0x10) = 0;
-    *(unsigned int *)(param_1 + 8) = 5;
-    *(unsigned int *)(param_1 + 0xc) = 0;
-    if (*(char *)(param_1 + 0x40) == '\0') {
-      temp_v2 = 0x67;
-    }
-    else {
-      temp_v2 = 0x11d;
-    }
-    sysPlaySe(temp_v2);
-    return 0;
-  case 7:
-    temp_v3 = messageMainIsIdle();
-    if (temp_v3 == 0) {
-      return 0;
-    }
-    *(unsigned int *)(param_1 + 0x3c) = 0xffffffff;
-    scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x10);
-    *(unsigned int *)(param_1 + 0xc) = 8;
-  case 8:
-    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
-    if (temp_v3 != 2) {
-      return 0;
-    }
-    FUN_00333dc8(0);
-    temp_v3 = messageGetChoiceResult();
-    if (temp_v3 == 0) {
-      *(unsigned int *)(param_1 + 0x10) = 0;
-      *(unsigned int *)(param_1 + 8) = 6;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-      return 0;
-    }
-    break;
-  default:
-    return 0;
-  }
-  stateHolderEnterState7();
-  *(unsigned int *)(param_1 + 0xc) = 1;
-  return 0;
 }
 
 } /* extern "C" */

@@ -1,7 +1,8 @@
 # Leaf functions armlink inlined (--inline) at every call and then removed as unreferenced, so no
 # copy is left in the image. Each line: <symbol> = 0x<the one ARM instruction>; // retail call sites.
 # The call sites must show the call's argument setup (e.g. mov r0, rN) before the instruction.
-gauntletSpriteSetMode = 0xe1c013ba; // 0x2e26f0 (FUN_002e24c8, after mov r1, #2; mov r0, r5)
+spriteSetLayer = 0xe1c013ba; // 0x2e26f0 (FUN_002e24c8, after mov r1, #2; mov r0, r5) 0x2d95b8 (FUN_002d9384, after mov r1, #2; add r0, r4, #880)
+spriteSetVisible = 0xe5c0103c; // 0x38a37c 0x38a388 (FUN_0038a1e0, after mov r1, #1; add r0, r4, #1088 / mov r0, r5)
 vec2GetSpeed = 0xed900a08; // 0x1a765c 0x1a76b0 (FUN_001a75d0, after add r0, r6, #316)
 numberPanelGetValue = 0xe1d005f8; // 0x3913e0 (FUN_003912a4, after mov r0, r4 at 0x3913dc; NumberPanelWork.value)
 numberPanelGetFirst = 0xe1d005f4; // 0x3913ec (FUN_003912a4, after mov r0, r4 at 0x3913e8; NumberPanelWork.first)
@@ -11,3 +12,7 @@ scrollListGetTop = 0xe5900024; // 0x298d80 0x29e8d4 0x29eb78 (FUN_00298d64/FUN_0
 scrollListGetOffset = 0xe5900020; // 0x29e8e0 0x29eb84 (FUN_0029e8b8/FUN_0029eb5c, after add r0, r4, #40 / mov r0, r4)
 asdListBoxGetCursor = 0xe590001c; // 0x2271cc (asdListBoxAddItem, after add r0, r4, #12)
 svcSetThreadPriority = 0xef00000c; // 0x103578 (FUN_00103504, after mov r1, r0; ldr r0, [r5]): the SDK wrapper svc 0xc; bx lr, inlined then removed
+partyWidgetSetValue = 0xe5801040; // 0x26d2e0 0x26d3b4 (FUN_0026d144, after ldr r1, [sp]; ldr r0, [r4, #N])
+partyWidgetSetCost = 0xe5801044; // 0x26d1d4 0x26d210 0x26d24c (FUN_0026d144, value in r1, widget loaded into r0)
+partyWidgetGetCost = 0xe5900044; // 0x26d2e8 0x26d3c0 (FUN_0026d144, widget reloaded into r0 right after the previous call)
+btlLoaderGetLock = 0xe2800c4a; // 0x339b6c (FUN_00339b64: mov r5, r0 then the add in r0 and mov r7, r0 keeping the result)

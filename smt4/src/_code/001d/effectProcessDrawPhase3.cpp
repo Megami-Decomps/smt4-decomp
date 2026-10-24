@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the three renderStackPush address/scratch-register schedules differ; an optimization flag may explain them. */
 #include "camp/RenderCtx.h"
 
 extern "C" {

@@ -1068,7 +1068,7 @@
 0x0011786c FUN_0011786c between
 0x001178e2 FUN_001178e2 between
 0x00117906 FUN_00117906 between
-0x00117b3c FUN_00117b3c between
+0x00117b3c _ZN9Obj559edcC1Ev between
 0x00117bc8 FUN_00117bc8 callers
 0x00117c7c FUN_00117c7c between
 0x00117cf6 FUN_00117cf6 between
@@ -4279,7 +4279,7 @@
 0x002eca10 FUN_002eca10 between
 0x002eca44 FUN_002eca44 between
 0x002ecac4 FUN_002ecac4 between
-0x002ecad4 FUN_002ecad4 between
+0x002ecad4 _ZN9Obj55af4c4initEjh between
 0x002ecaee FUN_002ecaee between
 0x002ecb04 FUN_002ecb04 between
 0x002ecb32 FUN_002ecb32 between
@@ -5705,6 +5705,13 @@
 0x00430e0c nn_cec_CTR_Message_Message_sub_object name
 0x00430e58 FUN_00430e58 between
 0x00430e84 nn_cec_CTR_Message_GetMessageId name
+0x00430ec8 releaseOrCopyHandle between
+0x00430ef0 releaseOrCopyHandle2 between
+0x00430f2c handlerRefForward between
+0x00430f5c FUN_00430f5c between
+0x00430f98 FUN_00430f98 between
+0x00431140 lookupTable5B47D0 between
+0x00431158 lookupTable5B44A4 between
 0x00431170 nn_cfg_CTR_IsRestrictP2pCec name
 0x004311a8 lookupTable5B47A0 between
 0x004311c0 FUN_004311c0 between

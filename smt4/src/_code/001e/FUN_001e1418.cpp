@@ -1,4 +1,3 @@
-/* NON_MATCHING: render-stack push address scheduling differs; remaining title draw sequence matches. */
 #include "camp/RenderCtx.h"
 
 extern "C" {

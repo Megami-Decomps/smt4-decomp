@@ -1,162 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f66dc` (_code @ 0x3f66dc, 0x3d8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 232 diff lines remain, scheduling/register allocation only. */
+#include "camp/RenderCtx.h"
+
+namespace {
+/* A layout record: its position at +8/+10. */
+struct LayoutRecord {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0a */ s16 y;
+};
+
+/* An entry of the list (0x34 bytes): a flags halfword and a packed kind/value halfword. */
+struct ListEntry {
+    /* 0x00 */ u16 flags;
+    /* 0x02 */ u16 kindAndValue;        /* high byte 10: no value */
+    /* 0x04 */ u8 unk04[0x30];
+};
+
+/* The list menu's work block (only the fields this draw reads). */
+struct ListMenu {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ ListEntry *entries;
+    /* 0x024 */ u8 unk024[0x20];
+    /* 0x044 */ s32 cursor;
+    /* 0x048 */ u8 unk048[0x10];
+    /* 0x058 */ u8 frame[0xee];
+    /* 0x146 */ u8 unk146[0x500];
+};
+}
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+void efctSetSpeed(f32 speed);
+LayoutRecord *FUN_001834a4(u32 group, u32 id);
+void FUN_001835b4(u32 layer, u32 group, u32 id, s32 x, s32 y, u32 slot);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
+void FUN_003f7164(ListMenu *menu, ListEntry *entry, s32 index, u32 kind, s32 x, s32 y, u32 slot, f32 speed);
+void FUN_003f6424(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);
+s32 flagsBGetBit1(u32 flags);
+void FUN_00344cd0(void *frame, s32 x, s32 y, u32 group, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g,
+                  s32 h, s32 i, s32 j, u32 k, u32 l);
 
-int efctSetSpeed(void);
-int FUN_001834a4(...);
-int FUN_001835b4(...);
-int FUN_00344cd0(...);
-int FUN_003f6424(...);
-int FUN_003f7164(int, unsigned short *, int, unsigned int, int, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_3_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00344cd0. */
-/* Supplied declaration required: FUN_003f6424. */
-/* Supplied declaration required: FUN_003f7164. */
-extern unsigned long long flagsBGetBit1(unsigned short);
-
-
-void FUN_003f66dc(int param_1,int param_2,int param_3)
-
+/* Draws the four list slots: the highlighted one with its animated frame, the others plain, each with its optional
+   marker, then the surrounding frame. `speed` scales the effect speed of the highlighted slot. */
+void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
 {
-/* irregular: 9 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int *piVar8;
-  unsigned short *puVar9;
-  int temp_v10;
-  unsigned char temp_v11;
-  unsigned long long temp_v12;
-  unsigned int temp_v13;
-  
-  efctSetSpeed();
-  temp_v10 = 0;
-  temp_v6 = temp_v5;
-  do {
-    temp_v2 = *(int *)(param_1 + temp_v10 * 4 + 0x6c8);
-    temp_v11 = temp_v2 == 0;
-    if (-1 < temp_v2) {
-      temp_v6 = *(int *)(param_1 + 0x6b0);
-      temp_v11 = temp_v6 == temp_v2;
+    efctSetSpeed(speed);
+    u8 *base = reinterpret_cast<u8 *>(menu);
+    s32 count = *reinterpret_cast<s32 *>(base + 0x6b0);
+    for (s32 slot = 0; slot < 4; slot++) {
+        s32 id = *reinterpret_cast<s32 *>(base + 0x6c8 + slot * 4);
+        if (id < 0 || count <= id) {
+            continue;
+        }
+        u32 entryIndex = *reinterpret_cast<u16 *>(base + id * 2 + 0x5e6);
+        if (entryIndex == 0) {
+            continue;
+        }
+        ListEntry *entry = &menu->entries[entryIndex];
+        u32 kind = (entry->kindAndValue >> 8) == 10 ? 0 : (entry->kindAndValue & 0xff);
+        if (menu->cursor == slot) {
+            LayoutRecord *record = FUN_001834a4(0x31, slot + 0x91);
+            s32 frameX = record->x + x;
+            s32 frameY = record->y + y;
+            efctSetSpeed(*reinterpret_cast<f32 *>(base + 0x330 + 0x20) * speed);
+            renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+            for (s32 k = 0; k < 4; k++) {
+                FUN_001835b4(2, 0x31, k + 0x8c, frameX, frameY, 0x83);
+            }
+            efctSetSpeed(speed);
+            renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 7, 0));
+            efctSetSpeed(1.0f);
+            record = FUN_001834a4(0x31, slot + 0x88);
+            s32 iconX = record->x + x;
+            s32 iconY = record->y + y;
+            FUN_003f7164(menu, entry, slot, kind, x, y, 0x8d, speed);
+            if (flagsBGetBit1(entry->flags) != 0) {
+                record = FUN_001834a4(0x31, 0x87);
+                iconX = iconX + record->x;
+                efctSetSpeed(speed);
+                for (s32 k = 0; k < 3; k++) {
+                    FUN_001835b4(2, 0x31, k + 0x9d, iconX, iconY + record->y, 0x97 + k);
+                }
+            }
+        } else {
+            LayoutRecord *record = FUN_001834a4(0x31, slot + 0x88);
+            s32 iconX = record->x + x;
+            s32 iconY = record->y + y;
+            FUN_003f6424(menu, entry, kind, iconX, iconY, 0x8d);
+            if (flagsBGetBit1(entry->flags) != 0) {
+                record = FUN_001834a4(0x31, 0x87);
+                iconX = iconX + record->x;
+                efctSetSpeed(speed);
+                for (s32 k = 0; k < 3; k++) {
+                    FUN_001835b4(2, 0x31, k + 0x9d, iconX, record->y + iconY, 0x97 + k);
+                }
+            }
+        }
     }
-    if ((!temp_v11 && (-1 < temp_v2 && temp_v2 <= temp_v6)) &&
-       (temp_v3 = (unsigned int)*(unsigned short *)(param_1 + temp_v2 * 2 + 0x5e6), temp_v3 != 0)) {
-      puVar9 = (unsigned short *)(*(int *)(param_1 + 0x20) + temp_v3 * 0x34);
-      if ((unsigned short)puVar9[1] >> 8 == 10) {
-        temp_v3 = 0;
-      }
-      else {
-        temp_v3 = (unsigned short)puVar9[1] & 0xff;
-      }
-      if (*(int *)(param_1 + 0x44) == temp_v10) {
-        temp_v6 = FUN_001834a4(0x31,temp_v10 + 0x91);
-        temp_v0 = *(short *)(temp_v6 + 10);
-        temp_v2 = *(short *)(temp_v6 + 8) + param_2;
-        efctSetSpeed();
-        temp_v6 = g_renderCtx;
-        temp_v4 = packNibblesAndByte(6,1,0);
-        piVar8 = (int *)(temp_v6 + 0x12b8);
-        temp_v7 = piVar8[*piVar8 + 2];
-        piVar8[*piVar8 + 2] = temp_v4;
-        if (*(char *)(temp_v6 + 0x12d0) != '\0' || temp_v7 != temp_v4) {
-          (**(romwright_code **)(temp_v6 + 0x12d4))();
-          *(unsigned char *)(temp_v6 + 0x12d0) = 0;
-        }
-        temp_v6 = 0;
-        do {
-          FUN_001835b4(2,0x31,temp_v6 + 0x8c,temp_v2,temp_v0 + param_3,0x83);
-          temp_v6 = temp_v6 + 1;
-        } while (temp_v6 < 4);
-        efctSetSpeed();
-        temp_v6 = g_renderCtx;
-        temp_v2 = packNibblesAndByte(6,7,0);
-        piVar8 = (int *)(temp_v6 + 0x12b8);
-        temp_v4 = piVar8[*piVar8 + 2];
-        piVar8[*piVar8 + 2] = temp_v2;
-        if (*(char *)(temp_v6 + 0x12d0) != '\0' || temp_v4 != temp_v2) {
-          (**(romwright_code **)(temp_v6 + 0x12d4))();
-          *(unsigned char *)(temp_v6 + 0x12d0) = 0;
-        }
-        efctSetSpeed();
-        temp_v6 = FUN_001834a4(0x31,temp_v10 + 0x88);
-        temp_v0 = *(short *)(temp_v6 + 10);
-        temp_v2 = *(short *)(temp_v6 + 8) + param_2;
-        FUN_003f7164(param_1,puVar9,temp_v10,temp_v3,param_2,param_3,0x8d);
-        temp_v13 = 0x87;
-        temp_v12 = flagsBGetBit1(*puVar9);
-        temp_v6 = (int)((unsigned long long)temp_v12 >> 0x20);
-        if ((int)temp_v12 != 0) {
-          temp_v6 = FUN_001834a4(0x31,temp_v13);
-          temp_v1 = *(short *)(temp_v6 + 10);
-          temp_v2 = temp_v2 + *(short *)(temp_v6 + 8);
-          efctSetSpeed();
-          temp_v4 = 0;
-          do {
-            FUN_001835b4(2,0x31,temp_v4 + 0x9d,temp_v2,(int)temp_v1 + temp_v0 + param_3,temp_v4 + 0x97);
-            temp_v4 = temp_v4 + 1;
-            temp_v6 = temp_v8;
-          } while (temp_v4 < 3);
-        }
-      }
-      else {
-        temp_v6 = FUN_001834a4(0x31,temp_v10 + 0x88);
-        temp_v2 = *(short *)(temp_v6 + 8) + param_2;
-        temp_v4 = *(short *)(temp_v6 + 10) + param_3;
-        FUN_003f6424(param_1,puVar9,temp_v3,temp_v2,temp_v4,0x8d);
-        temp_v13 = 0x87;
-        temp_v12 = flagsBGetBit1(*puVar9);
-        temp_v6 = (int)((unsigned long long)temp_v12 >> 0x20);
-        if ((int)temp_v12 != 0) {
-          temp_v6 = FUN_001834a4(0x31,temp_v13);
-          temp_v0 = *(short *)(temp_v6 + 10);
-          temp_v2 = temp_v2 + *(short *)(temp_v6 + 8);
-          efctSetSpeed();
-          temp_v7 = 0;
-          do {
-            FUN_001835b4(2,0x31,temp_v7 + 0x9d,temp_v2,temp_v0 + temp_v4,temp_v7 + 0x97);
-            temp_v7 = temp_v7 + 1;
-            temp_v6 = temp_v9;
-          } while (temp_v7 < 3);
-        }
-      }
-    }
-    temp_v10 = temp_v10 + 1;
-  } while (temp_v10 < 4);
-  efctSetSpeed();
-  FUN_001835b4(2,0x31,0x9a,param_2,param_3,0x83);
-  FUN_00344cd0(param_1 + 0x58,param_2,param_3,0x31,0x99,0x9b,0x9c,0x95,0x96,0x97,0x98,
-               (int)*(short *)(param_1 + 0x146),(int)*(short *)(param_1 + 0x142),
-               (int)*(short *)(param_1 + 0x144),0x6a,0);
-  efctSetSpeed();
-  return;
+    efctSetSpeed(speed);
+    FUN_001835b4(2, 0x31, 0x9a, x, y, 0x83);
+    s16 *frameWords = reinterpret_cast<s16 *>(base + 0x100);
+    FUN_00344cd0(menu->frame, x, y, 0x31, 0x99, 0x9b, 0x9c, 0x95, 0x96, 0x97, 0x98, frameWords[0x46 / 2],
+                 frameWords[0x42 / 2], frameWords[0x44 / 2], 0x6a, 0);
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

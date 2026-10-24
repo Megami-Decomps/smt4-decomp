@@ -1,154 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ee6f8` (_code @ 0x2ee6f8, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 178 vs 173 rows; same instruction sequence except callee-saved register numbering (retail keeps the constant 1 in r5 and the global's address in r6) and the job-ordering loops. Twin of the other game's 2dEventTex creator. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+// Manager of the 2D event texture layer: the update process plus the jobs it owns.
+struct EventTexManager {
+    u32 process;        // 0x00
+    u32 jobs[10];       // 0x04: parented jobs, ordered by status
+    s32 jobCount;       // 0x2c: slots in use
+    u8 unk30[0x2c];
+    u8 active;          // 0x5c
+    u8 unk5d[3];
+    u8 unk60[8];
+};
 
 extern "C" {
 
-int FUN_0026e68c(...);
-int jobGetStatus(...);
-int jobSetParent(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
+extern EventTexManager* g_eventTex;
+extern u32 g_eventTexHandles[4];
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+void* asdMemAlloc(u32 size, u32 alignment, u32 arg, u32 memoryType, u32 flag);
+void memClear(void* block, u32 size);
+u32 asdProcessCreateSimple(const char* name, s32 priority, s32 a, s32 b, void (*update)(void*),
+                           void (*release)(void*), void* owner);
+void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, void (*draw)(void*), s32 c,
+                    void* owner, u32 parent);
+void eventTexUpdateScreenShake(void* owner);
+void eventTextureRelease(void* owner);
+void FUN_001f42d4(void* owner);
+s32 jobIsValid(u32 job);
+void FUN_0026e68c(u32 job, s32 arg);
+void jobSetParent(u32 parent, u32 job);
+s32 jobGetStatus(u32 job);
 
-extern int eventTexUpdateScreenShake(...); /* 0x1f4264 */
-extern int FUN_001f42d4(...); /* 0x1f42d4 */
-extern unsigned char LAB_002e36d8; /* 0x2e36d8 */
-extern unsigned char LAB_002ee9e0; /* 0x2ee9e0 */
-extern unsigned char LAB_002ee9f0; /* 0x2ee9f0 */
-extern unsigned int *g_eventTex; /* 0x43ded0 */
-
-/* Supplied declaration required: FUN_0026e68c. */
-/* Supplied declaration required: jobGetStatus. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: jobSetParent. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
-unsigned int FUN_002ee6f8(void)
-
+// Creates the event texture manager once and adopts the valid event jobs, returning its process.
+u32 FUN_002ee6f8(void)
 {
-/* irregular: 3 goto(s); 9 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int *puVar2;
-  unsigned char *puVar3;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  
-  if (g_eventTex != (unsigned int *)0x0) {
-    return *g_eventTex;
-  }
-  puVar2 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0x68,1);
-  memClear();
-  g_eventTex = puVar2;
-  *(unsigned char *)(puVar2 + 0x17) = 1;
-  puVar3 = &LAB_002ee9e0;
-  asdProcessCreateSimple(&LAB_002ee9e0,2,0,0,eventTexUpdateScreenShake,&LAB_002e36d8,puVar2);
-  *puVar2 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002ee9f0,0x7d,0,0,FUN_001f42d4,0,puVar2,puVar3);
-  taskCreateDraw(&LAB_002ee9f0,0xdb,0,0,FUN_001f42d4,0,puVar2,*puVar2);
-  temp_v6 = 0;
-LAB_002ee7d0:
-  temp_v1 = jobIsValid(*(unsigned int *)(temp_v6 * 4 + 0x493790));
-  if (temp_v1 != 0) {
-    FUN_0026e68c(*(unsigned int *)(temp_v6 * 4 + 0x493790),1);
-    jobSetParent(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x493790));
-    puVar2 = g_eventTex;
-    temp_v5 = *(unsigned int *)(temp_v6 * 4 + 0x493790);
-    temp_v1 = 0;
-    if (0 < (int)g_eventTex[0xb]) {
-      do {
-        temp_v2 = jobIsValid(puVar2[temp_v1 + 1]);
-        if (temp_v2 == 0) {
-          puVar2[temp_v1 + 1] = 0;
+    if (g_eventTex == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\event\\2dEvent\\2dEventTex.cpp", 133);
+        EventTexManager* manager = static_cast<EventTexManager*>(asdMemAlloc(0x100, 0x100, 0, 0x68, 1));
+        memClear(manager, 0x68);
+        g_eventTex = manager;
+        manager->active = 1;
+        manager->process = asdProcessCreateSimple("EVE_2dTex", 2, 0, 0, eventTexUpdateScreenShake,
+                                                  eventTextureRelease, manager);
+        taskCreateDraw("EVE_2dTexDraw", 0x7d, 0, 0, FUN_001f42d4, 0, manager, manager->process);
+        taskCreateDraw("EVE_2dTexDraw", 0xdb, 0, 0, FUN_001f42d4, 0, manager, manager->process);
+
+        for (s32 n = 0; n < 4; n++) {
+            if (!jobIsValid(g_eventTexHandles[n])) continue;
+            FUN_0026e68c(g_eventTexHandles[n], 1);
+            jobSetParent(g_eventTex->process, g_eventTexHandles[n]);
+
+            manager = g_eventTex;
+            u32 job = g_eventTexHandles[n];
+            for (s32 i = 0; i < manager->jobCount; i++) {
+                if (!jobIsValid(manager->jobs[i])) manager->jobs[i] = 0;
+            }
+            for (s32 i = 0; i < 10; i++) {
+                if (manager->jobs[i] == 0) {
+                    manager->jobs[i] = job;
+                    break;
+                }
+            }
+            // Close the gaps left by released jobs.
+            s32 hole = -1;
+            for (s32 i = 0; i < 10; i++) {
+                if (manager->jobs[i] == 0) {
+                    if (hole < 0) hole = i;
+                } else if (hole >= 0) {
+                    manager->jobs[hole] = manager->jobs[i];
+                    manager->jobs[i] = 0;
+                    hole = i;
+                }
+            }
+            manager->jobCount = 0;
+            while (manager->jobCount < 10 && manager->jobs[manager->jobCount] != 0) manager->jobCount++;
+
+            // Order the jobs by ascending status.
+            bool swapped;
+            do {
+                swapped = false;
+                for (s32 i = 0; i < manager->jobCount - 1; i++) {
+                    if (manager->jobs[i] != 0) {
+                        if (manager->jobs[i + 1] != 0 && jobGetStatus(manager->jobs[i + 1]) < jobGetStatus(manager->jobs[i])) {
+                            u32 swap = manager->jobs[i];
+                            manager->jobs[i] = manager->jobs[i + 1];
+                            manager->jobs[i + 1] = swap;
+                            swapped = true;
+                        }
+                    } else if (manager->jobs[i + 1] != 0) {
+                        manager->jobs[i] = manager->jobs[i + 1];
+                        swapped = true;
+                    }
+                }
+            } while (swapped);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)puVar2[0xb]);
     }
-    temp_v1 = 0;
-    do {
-      if (puVar2[temp_v1 + 1] == 0) {
-        puVar2[temp_v1 + 1] = temp_v5;
-        break;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 10);
-    temp_v2 = -1;
-    temp_v1 = 0;
-    temp_v4 = 10;
-    do {
-      if (puVar2[temp_v1 + 1] == 0) {
-        temp_v2 = temp_v1;
-      }
-      while( 1 ) {
-        temp_v3 = temp_v1;
-        temp_v4 = temp_v4 - 1;
-        temp_v1 = temp_v3 + 1;
-        if (temp_v4 == 0) {
-          puVar2[0xb] = 0;
-          goto LAB_002ee8c8;
-        }
-        if (temp_v2 < 0) break;
-        if (puVar2[temp_v3 + 2] != 0) {
-          puVar2[temp_v2 + 1] = puVar2[temp_v3 + 2];
-          puVar2[temp_v3 + 2] = 0;
-          temp_v2 = temp_v1;
-        }
-      }
-    } while( 1 );
-  }
-  goto LAB_002ee968;
-  while (temp_v1 = puVar2[0xb] + 1, puVar2[0xb] = temp_v1, temp_v1 < 10) {
-LAB_002ee8c8:
-    if (puVar2[puVar2[0xb] + 1] == 0) break;
-  }
-  do {
-    temp_v0 = 0;
-    temp_v1 = 0;
-    if (puVar2[0xb] - 1 < 1) break;
-    do {
-      if (puVar2[temp_v1 + 1] != 0) {
-        if (puVar2[temp_v1 + 2] != 0) {
-          temp_v2 = jobGetStatus();
-          temp_v4 = jobGetStatus(puVar2[temp_v1 + 2]);
-          if (temp_v4 < temp_v2) {
-            temp_v5 = puVar2[temp_v1 + 1];
-            temp_v0 = 1;
-            puVar2[temp_v1 + 1] = puVar2[temp_v1 + 2];
-            puVar2[temp_v1 + 2] = temp_v5;
-          }
-        }
-      }
-      else if (puVar2[temp_v1 + 2] != 0) {
-        temp_v0 = 1;
-        puVar2[temp_v1 + 1] = puVar2[temp_v1 + 2];
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < puVar2[0xb] - 1);
-  } while (temp_v0);
-LAB_002ee968:
-  temp_v6 = temp_v6 + 1;
-  if (temp_v6 >= 4) {
-    return *g_eventTex;
-  }
-  goto LAB_002ee7d0;
+    return g_eventTex->process;
 }
 
 } /* extern "C" */

@@ -1,267 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025ef68` (_code @ 0x25ef68, 0x3c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: pushes a sphere out of four lists of collision planes (two passes with radius 25, two with 50 or 60 depending on `shortReach`), recording which planes were touched and which wall plane was hit last, and returns whether the motion was changed; written from the decompilation, the packed 64-bit float pairs are plain locals, the sphere centre starts 15 above the position and the final write-back subtracts the decompiler's shared constant (25); build is 245 rows against 246 retail */
+#include "common.h"
+
+#define PASS_COUNT 4
+#define PLANE_STRIDE 0xA8
+#define PLANE_TYPE_WALL 1
+#define SPHERE_LIFT 15.0f
+#define SPHERE_RADIUS 25.0f
+#define SPHERE_RADIUS_SHORT 50.0f
+#define SPHERE_RADIUS_LONG 60.0f
+#define MOTION_EPSILON 0.01f
+#define PASS_WALLS_A 0
+#define PASS_WALLS_B 1
+#define PASS_FLOORS_A 2
+#define PASS_FLOORS_B 3
+
+/* A collision plane (observed fields, 0xA8 bytes). */
+struct CollisionPlane {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s8 type;
+    /* 0x05 */ s8 sub;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u8 active;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ f32 nx;
+    /* 0x10 */ f32 ny;
+    /* 0x14 */ f32 nz;
+    /* 0x18 */ f32 d;
+    /* 0x1C */ u8 unk1C[0x8C];
+};
 
 extern "C" {
+extern s32 DAT_00580208;      /* wall plane count A */
+extern s32 DAT_0058020c;      /* wall plane count B */
+extern s32 DAT_00580210;      /* floor plane count A */
+extern s32 DAT_00580214;      /* floor plane count B */
+extern CollisionPlane *DAT_0058021c;
+extern CollisionPlane *DAT_00580220;
+extern CollisionPlane *DAT_00580224;
+extern CollisionPlane *DAT_00580228;
+extern u8 DAT_005ecf14[];     /* touched flags, wall list A */
+extern u8 DAT_005ed114[];     /* touched flags, wall list B */
+extern u8 DAT_005ed294[];     /* touched flags, floor list A */
+extern u8 DAT_005ed334[];     /* touched flags, floor list B */
+extern s32 DAT_005f1c4c;      /* pass of the last wall hit */
+extern s32 DAT_005f1c50;      /* plane index of the last wall hit */
 
-int CONCAT44(...);
-int collisionTestProjectedSpherePlanes(float *, int, int, int);
+void collisionTestProjectedSpherePlanes(f32 *reach, s32 type, s32 sub, CollisionPlane *plane);
+f32 sqrtf(f32 value);
 
-/* stack frame of param_3: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_3_stack;
-
-extern unsigned int DAT_00580208; /* 0x580208 */
-extern unsigned int DAT_0058020c; /* 0x58020c */
-extern unsigned int DAT_00580210; /* 0x580210 */
-extern unsigned int DAT_00580214; /* 0x580214 */
-extern int DAT_0058021c; /* 0x58021c */
-extern int DAT_00580220; /* 0x580220 */
-extern int DAT_00580224; /* 0x580224 */
-extern int DAT_00580228; /* 0x580228 */
-extern unsigned char DAT_005ecf14; /* 0x5ecf14 */
-extern unsigned char DAT_005ed114; /* 0x5ed114 */
-extern unsigned char DAT_005ed294; /* 0x5ed294 */
-extern unsigned char DAT_005ed334; /* 0x5ed334 */
-extern int DAT_005f1c4c; /* 0x5f1c4c */
-extern int DAT_005f1c50; /* 0x5f1c50 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+static __inline void clearFlags(u8 *flags, s32 count)
 {
-    return (float)sqrt((double)value);
+    for (s32 i = 0; i < count; i++)
+        flags[i] = 0;
 }
-#endif
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+
+u32 FUN_0025ef68(f32 *position, f32 *previous, s32 shortReach)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
+    s32 lastWall = -1;
+    u32 changed = 0;
+    f32 startX = position[0];
+    f32 startY = position[1];
+    f32 startZ = position[2];
+    f32 dx = startX - previous[0];
+    f32 dy = startY - previous[1];
+    f32 dz = startZ - previous[2];
+    DAT_005f1c4c = -1;
+    DAT_005f1c50 = -1;
 
+    clearFlags(DAT_005ecf14, DAT_00580208);
+    clearFlags(DAT_005ed114, DAT_0058020c);
+    clearFlags(DAT_005ed294, DAT_00580210);
+    clearFlags(DAT_005ed334, DAT_00580214);
 
-unsigned int FUN_0025ef68(float *param_1,float *param_2,int param_3)
+    if (sqrtf(dx * dx + dy * dy + dz * dz) < MOTION_EPSILON)
+        return 1;
 
-{
-/* irregular: 1 goto(s); 2 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  long long temp_v12;
-  float temp_v13;
-  unsigned long long temp_v14;
-  unsigned long long temp_v15;
-  unsigned long long temp_v16;
-  float temp_v17;
-  unsigned int temp_v18;
-  float temp_v19;
-  float *temp_v20;
-  float *temp_v21;
-  int temp_v22;
-  
-  temp_v4 = -1;
-  temp_v18 = 0;
-  temp_v6 = *param_2;
-  temp_v8 = param_2[1];
-  temp_v9 = param_2[2];
-  temp_v19 = *param_1;
-  temp_v12 = (unsigned long long)(unsigned int)temp_v19 << 0x20;
-  temp_v5 = param_1[1];
-  temp_v13 = param_1[2];
-  temp_v16 = romwright_piece_4_4(param_1[1],param_1[2]);
-  DAT_005f1c4c = -1;
-  DAT_005f1c50 = -1;
-  if (0 < (int)DAT_00580208) {
-    puVar1 = (unsigned char *)0x5ecf13;
-    if ((DAT_00580208 & 1) != 0) {
-      DAT_005ecf14 = 0;
-      puVar1 = &DAT_005ecf14;
-    }
-    for (temp_v0 = (int)DAT_00580208 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  if (0 < (int)DAT_0058020c) {
-    puVar1 = (unsigned char *)0x5ed113;
-    if ((DAT_0058020c & 1) != 0) {
-      DAT_005ed114 = 0;
-      puVar1 = &DAT_005ed114;
-    }
-    for (temp_v0 = (int)DAT_0058020c >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  if (0 < (int)DAT_00580210) {
-    puVar1 = (unsigned char *)0x5ed293;
-    if ((DAT_00580210 & 1) != 0) {
-      DAT_005ed294 = 0;
-      puVar1 = &DAT_005ed294;
-    }
-    for (temp_v0 = (int)DAT_00580210 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  if (0 < (int)DAT_00580214) {
-    puVar1 = (unsigned char *)0x5ed333;
-    if ((DAT_00580214 & 1) != 0) {
-      DAT_005ed334 = 0;
-      puVar1 = &DAT_005ed334;
-    }
-    for (temp_v0 = (int)DAT_00580214 >> 1; temp_v0 != 0; temp_v0 = temp_v0 - 1) {
-      puVar1[1] = 0;
-      puVar1 = puVar1 + 2;
-      *puVar1 = 0;
-    }
-  }
-  temp_v8 = temp_v5 - temp_v8;
-  temp_v9 = temp_v13 - temp_v9;
-  if ((int)romwright_sqrt_4((temp_v19 - temp_v6) * (temp_v19 - temp_v6) + temp_v8 * temp_v8 + temp_v9 * temp_v9) <
-      0x3c23d70a) {
-    return 1;
-  }
-  temp_v0 = 0;
-  temp_v6 = 25.0f;
-  temp_v14 = CONCAT44(temp_v5 + 15.0f,temp_v13);
-  temp_v15 = 0x4270000042480000;
-  temp_v5 = 0.0f;
-  temp_v20 = param_1;
-  temp_v21 = param_2;
-  temp_v22 = param_3;
-  do {
-    temp_v12 = CONCAT44((int)((unsigned long long)temp_v12 >> 0x20),temp_v6);
-    temp_v1 = DAT_0058021c;
-    temp_v3 = DAT_00580208;
-LAB_0025f158:
-    temp_v2 = 0;
-    if (0 < (int)temp_v3) {
-      do {
-        if (*(char *)(temp_v1 + 8) != '\0') {
-          temp_v9 = ((float)((unsigned long long)temp_v12 >> 0x20) * *(float *)(temp_v1 + 0xc) +
-                    (float)((unsigned long long)temp_v14 >> 0x20) * *(float *)(temp_v1 + 0x10) +
-                   (float)temp_v14 * *(float *)(temp_v1 + 0x14)) - *(float *)(temp_v1 + 0x18);
-          temp_v8 = romwright_fabs_4(temp_v9);
-          if ((temp_v8 < (float)temp_v12) &&
-             (collisionTestProjectedSpherePlanes(&temp_v17,(int)*(char *)(temp_v1 + 4),(int)*(char *)(temp_v1 + 5),temp_v1),
-             temp_v5 <= temp_v17)) {
-            temp_v10 = (float)temp_v14 - *(float *)(temp_v1 + 0x14) * temp_v9;
-            temp_v13 = (float)((unsigned long long)temp_v12 >> 0x20) - *(float *)(temp_v1 + 0xc) * temp_v9;
-            temp_v7 = (float)((unsigned long long)temp_v14 >> 0x20) - *(float *)(temp_v1 + 0x10) * temp_v9;
-            temp_v11 = (float)temp_v12;
-            if (*(char *)(temp_v1 + 4) != '\x01') {
-              if (temp_v0 == 2) {
-                (&DAT_005ed294)[temp_v2] = 1;
-              }
-              else if (temp_v0 == 3) {
-                (&DAT_005ed334)[temp_v2] = 1;
-              }
-              if (temp_v5 <= temp_v9) {
-                if (temp_v17 < temp_v8) {
-                  temp_v17 = temp_v8;
-                }
-                temp_v12 = CONCAT44(temp_v13 + *(float *)(temp_v1 + 0xc) * temp_v17,temp_v11);
-                temp_v14 = CONCAT44(temp_v7 + *(float *)(temp_v1 + 0x10) * temp_v17,
-                                  temp_v10 + *(float *)(temp_v1 + 0x14) * temp_v17);
-              }
-            }
-            else {
-              DAT_005f1c4c = temp_v0;
-              DAT_005f1c50 = temp_v2;
-              if (temp_v0 == 0) {
-                puVar1 = &DAT_005ecf14;
-                puVar1[temp_v2] = 1;
-              }
-              else if (temp_v0 == 1) {
-                puVar1 = &DAT_005ed114;
-                puVar1[temp_v2] = 1;
-              }
-              if ((-1 < temp_v4) && (temp_v17 < temp_v8)) {
-                temp_v17 = temp_v8;
-              }
-              temp_v18 = 1;
-              temp_v12 = CONCAT44(temp_v13 + *(float *)(temp_v1 + 0xc) * temp_v17,temp_v11);
-              temp_v14 = CONCAT44(temp_v7 + *(float *)(temp_v1 + 0x10) * temp_v17,
-                                temp_v10 + *(float *)(temp_v1 + 0x14) * temp_v17);
-              if (temp_v17 == temp_v11) {
-                temp_v4 = temp_v2;
-              }
-            }
-          }
+    f32 x = startX;
+    f32 y = startY + SPHERE_LIFT;
+    f32 z = startZ;
+    f32 radius = SPHERE_RADIUS;
+    f32 farRadius = shortReach != 0 ? SPHERE_RADIUS_SHORT : SPHERE_RADIUS_LONG;
+
+    for (s32 pass = 0; pass < PASS_COUNT; pass++) {
+        CollisionPlane *planes;
+        s32 count;
+        switch (pass) {
+        case PASS_WALLS_A:
+            planes = DAT_0058021c;
+            count = DAT_00580208;
+            break;
+        case PASS_WALLS_B:
+            planes = DAT_00580220;
+            count = DAT_0058020c;
+            break;
+        case PASS_FLOORS_A:
+            planes = DAT_00580224;
+            count = DAT_00580210;
+            radius = farRadius;
+            break;
+        default:
+            planes = DAT_00580228;
+            count = DAT_00580214;
+            radius = farRadius;
+            break;
         }
-        temp_v2 = temp_v2 + 1;
-        temp_v1 = temp_v1 + 0xa8;
-      } while (temp_v2 < (int)temp_v3);
+
+        for (s32 i = 0; i < count; i++, planes++) {
+            if (planes->active == 0)
+                continue;
+            f32 signedDistance = x * planes->nx + y * planes->ny + z * planes->nz - planes->d;
+            f32 distance = signedDistance < 0.0f ? -signedDistance : signedDistance;
+            f32 reach;
+            if (!(distance < radius))
+                continue;
+            collisionTestProjectedSpherePlanes(&reach, planes->type, planes->sub, planes);
+            if (!(0.0f <= reach))
+                continue;
+
+            f32 footX = x - planes->nx * signedDistance;
+            f32 footY = y - planes->ny * signedDistance;
+            f32 footZ = z - planes->nz * signedDistance;
+            if (planes->type != PLANE_TYPE_WALL) {
+                if (pass == PASS_FLOORS_A)
+                    DAT_005ed294[i] = 1;
+                else if (pass == PASS_FLOORS_B)
+                    DAT_005ed334[i] = 1;
+                if (0.0f <= signedDistance) {
+                    if (reach < distance)
+                        reach = distance;
+                    x = footX + planes->nx * reach;
+                    y = footY + planes->ny * reach;
+                    z = footZ + planes->nz * reach;
+                }
+            } else {
+                DAT_005f1c4c = pass;
+                DAT_005f1c50 = i;
+                if (pass == PASS_WALLS_A)
+                    DAT_005ecf14[i] = 1;
+                else if (pass == PASS_WALLS_B)
+                    DAT_005ed114[i] = 1;
+                if (lastWall >= 0 && reach < distance)
+                    reach = distance;
+                changed = 1;
+                x = footX + planes->nx * reach;
+                y = footY + planes->ny * reach;
+                z = footZ + planes->nz * reach;
+                if (reach == radius)
+                    lastWall = i;
+            }
+        }
     }
-    temp_v0 = temp_v0 + 1;
-    temp_v9 = (float)((unsigned long long)temp_v12 >> 0x20);
-    if (temp_v0 >= 4) {
-      *temp_v20 = temp_v9;
-      temp_v20[1] = (float)((unsigned long long)temp_v14 >> 0x20) - temp_v6;
-      temp_v20[2] = (float)temp_v14;
-      *temp_v21 = temp_v19;
-      temp_v21[1] = (float)((unsigned long long)temp_v16 >> 0x20);
-      temp_v21[2] = (float)temp_v16;
-      return temp_v18;
-    }
-  } while (temp_v0 == 0);
-  if (temp_v0 != 1) {
-    if (temp_v0 != 2) {
-      temp_v1 = DAT_00580228;
-      temp_v3 = DAT_00580214;
-      if (temp_v22 != 0) {
-        temp_v12 = CONCAT44(temp_v9,(int)temp_v15);
-      }
-      else {
-        temp_v12 = CONCAT44(temp_v9,(int)((unsigned long long)temp_v15 >> 0x20));
-      }
-    }
-    else {
-      temp_v1 = DAT_00580224;
-      temp_v3 = DAT_00580210;
-      if (temp_v22 != 0) {
-        temp_v12 = CONCAT44(temp_v9,(int)temp_v15);
-      }
-      else {
-        temp_v12 = CONCAT44(temp_v9,(int)((unsigned long long)temp_v15 >> 0x20));
-      }
-    }
-  }
-  else {
-    temp_v12 = CONCAT44(temp_v9,temp_v6);
-    temp_v1 = DAT_00580220;
-    temp_v3 = DAT_0058020c;
-  }
-  goto LAB_0025f158;
+
+    position[0] = x;
+    position[1] = y - SPHERE_RADIUS;
+    position[2] = z;
+    previous[0] = startX;
+    previous[1] = startY;
+    previous[2] = startZ;
+    return changed;
 }
 
 } /* extern "C" */

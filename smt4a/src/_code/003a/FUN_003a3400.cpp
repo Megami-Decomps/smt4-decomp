@@ -1,4 +1,4 @@
-/* NON_MATCHING: palette-copy registers, render-state push scheduling and bounds-registry base caching differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 81 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include <string.h>
 
@@ -21,7 +21,7 @@ void FUN_003a3400(f32 height)
     memcpy(colors, DAT_00532240.colors, sizeof(colors));
     if (DAT_006160e0.count != 0) {
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(5, 1));
+        renderCtxPushA(context, FUN_001692ac(5, 1));
         FUN_0016c4b8(g_renderCtx, 0);
         if (DAT_006160e0.count > 0) {
             height += 100.0f;

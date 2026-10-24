@@ -1,166 +1,113 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00418960` (_code @ 0x418960, 0x2cc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses each marker as panel + i*16 with the fields at +4..+0x13 (no folded +4 base) and keeps the constants 0x41/2 in registers across the loop (179 vs 181 rows). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001835b4(...);
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_003d3020(int, int, int);
-int VectorSignedToFloat(...);
+/* One map marker (0x10 bytes). */
+typedef struct MapMarker {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ u8 shown;
+    /* 0x09 */ u8 kind;
+    /* 0x0A */ s8 flagA;
+    /* 0x0B */ s8 flagB;
+    /* 0x0C */ s8 flagC;
+    /* 0x0D */ s8 flagD;
+    /* 0x0E */ s8 flagE;
+    /* 0x0F */ u8 visible;
+} MapMarker;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+/* The marker panel (only the fields used here). */
+typedef struct MarkerPanel {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ MapMarker markers[5];
+    /* 0x54 */ s32 page;
+    /* 0x58 */ f32 scale[2];
+} MarkerPanel;
 
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern u32 g_renderCtx;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_003d3020. */
+f32 renderCtxCalculateStereoParallax(u32 context, f32 depth);
+void FUN_003d3020(u32 id, s32 a, s32 b, f32 x, f32 y, f32 scaleX, f32 scaleY);
+void FUN_001835b4(u32 a, u32 b, u32 icon, s32 x, s32 y, u32 tag);
 
-
-void FUN_00418960(int param_1)
-
+/* Draws the five map markers of the panel: the marker body, an icon picked from its kind and
+ * flags, and the extra overlay icons for the kinds that have them. The x position is shifted by
+ * the stereo parallax. */
+void FUN_00418960(MarkerPanel *panel)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  unsigned long long temp_v6;
-  
-  temp_v5 = 0.7f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v6 = (unsigned long long)(unsigned int)(int)temp_v5;
-  temp_v4 = 0;
-  do {
-    temp_v3 = param_1 + temp_v4 * 0x10;
-    temp_v0 = *(char *)(temp_v3 + 0x13);
-    if (temp_v0 != '\0') {
-      temp_v1 = (int)*(char *)(temp_v3 + 0xf);
-      if (temp_v1 == 0) {
-        temp_v0 = *(char *)(temp_v3 + 0x10);
-      }
-      if (temp_v1 != 0 || temp_v0 != '\0') {
-        VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_003d3020(0x41,temp_v1,(int)*(char *)(temp_v3 + 0x10));
-      }
-      if (*(char *)(temp_v3 + 0xc) == '\0') {
-        temp_v1 = 3;
-      }
-      else {
-        switch(*(unsigned char *)(temp_v3 + 0xd)) {
-        case 0:
-        case 5:
-          if (*(char *)(temp_v3 + 0xe) == '\0') {
-            temp_v1 = 0;
-            break;
-          }
-          temp_v1 = 1;
-          break;
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.7f);
+
+    for (s32 i = 0; i < 5; i++) {
+        MapMarker *marker = &panel->markers[i];
+        s32 look;
+        u32 icon;
+
+        if (marker->visible == 0) {
+            continue;
+        }
+        if (marker->flagB != 0 || marker->flagC != 0) {
+            FUN_003d3020(0x41, marker->flagB, marker->flagC, marker->x + (f32)parallax, marker->y, panel->scale[0],
+                         panel->scale[1]);
+        }
+        if (marker->shown == 0) {
+            look = 3;
+        } else {
+            switch (marker->kind) {
+            case 0:
+            case 5:
+                look = marker->flagA != 0 ? 1 : 0;
+                break;
+            case 1:
+                look = marker->flagE != 0 ? 8 : 4;
+                break;
+            case 2:
+                look = marker->flagD != 0 ? 7 : 2;
+                break;
+            case 3:
+                look = 5;
+                break;
+            case 4:
+                look = marker->flagE != 0 ? 9 : 6;
+                break;
+            default:
+                look = 0;
+                break;
+            }
+        }
+        icon = 0x33;
+        switch (look) {
         case 1:
-          if (*(char *)(temp_v3 + 0x12) == '\0') {
-            temp_v1 = 4;
-          }
-          else {
-            temp_v1 = 8;
-          }
-          break;
+            icon = 0x34;
+            break;
         case 2:
-          if (*(char *)(temp_v3 + 0x11) == '\0') {
-            temp_v1 = 2;
-          }
-          else {
-            temp_v1 = 7;
-          }
-          break;
+            icon = panel->page > 0 ? 0x72 : 0x71;
+            break;
         case 3:
-          temp_v1 = 5;
-          break;
+            icon = panel->page > 0 ? 0x74 : 0x73;
+            break;
         case 4:
-          if (*(char *)(temp_v3 + 0x12) == '\0') {
-            temp_v1 = 6;
-          }
-          else {
-            temp_v1 = 9;
-          }
-          break;
-        default:
-          temp_v1 = 0;
+        case 5:
+        case 6:
+            icon = panel->page > 0 ? 0x76 : 0x75;
+            break;
+        case 7:
+            icon = panel->page > 0 ? 0x7B : 0x7A;
+            break;
+        case 8:
+            icon = panel->page > 0 ? 0x7D : 0x7C;
+            break;
         }
-      }
-      temp_v2 = 0x33;
-                    /* WARNING: Switch table taken from the stored dispatch table */
-                    /* WARNING: Could not find normalized switch variable to match jumptable */
-      switch(temp_v1) {
-      case 1:
-        temp_v2 = 0x34;
-        break;
-      case 2:
-        temp_v2 = 0x71;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x72;
+        FUN_001835b4(2, 12, icon, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x42);
+        if (look == 4 || look == 8) {
+            FUN_001835b4(2, 12, 0x77, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
         }
-        break;
-      case 3:
-        temp_v2 = 0x73;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x74;
+        if (look == 5) {
+            FUN_001835b4(2, 12, 0x78, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
+        } else if (look == 6 || look == 9) {
+            FUN_001835b4(2, 12, 0x79, (s32)(marker->x + (f32)parallax), (s32)marker->y, 0x43);
         }
-        break;
-      case 4:
-      case 5:
-      case 6:
-        temp_v2 = 0x75;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x76;
-        }
-        break;
-      case 7:
-        temp_v2 = 0x7a;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x7b;
-        }
-        break;
-      case 8:
-        temp_v2 = 0x7c;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x7d;
-        }
-      }
-      temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_001835b4(2,0xc,temp_v2,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),0x42)
-      ;
-      if (temp_v1 == 4 || temp_v1 == 8) {
-        temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001835b4(2,0xc,0x77,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),0x43
-                    );
-      }
-      if (temp_v1 != 5) {
-        if (temp_v1 == 6 || temp_v1 == 9) {
-          temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001835b4(2,0xc,0x79,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),
-                       0x43);
-        }
-      }
-      else {
-        temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_001835b4(2,0xc,0x78,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),0x43
-                    );
-      }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 5) {
-      return;
-    }
-  } while( 1 );
 }
 
-} /* extern "C" */
+}

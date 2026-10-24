@@ -7,8 +7,8 @@ struct SceneLight;
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 AsdAllocatorObject *asdMemoryGetDefaultAllocator();
-AsdSceneLightObject *FUN_0011d9c4(const AsdSceneLightDescription *, AsdAllocatorObject *);
-AsdSceneLightObject *FUN_00120000(const AsdSceneLightDescription *, AsdAllocatorObject *);
+AsdSceneLightObject *_ZN9Obj4210946createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
+AsdSceneLightObject *_ZN9Obj4212e86createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
 u32 nw_ut_FloatColor_ToPicaU32(const f32 *);
 AsdSceneLight *FUN_0011877c();
 SceneLight *FUN_00118d50();
@@ -51,7 +51,7 @@ void FUN_0010e614()
         description.unk04 = 0;
         description.unk08 = 0;
         description.count = 1;
-        ambient->object = FUN_0011d9c4(&description, allocator);
+        ambient->object = _ZN9Obj4210946createEPvP18AsdAllocatorObject(&description, allocator);
         ambient->parameters = ambient->object->parameters;
         f32 *color = ((AmbientParameters *)ambient->parameters)->color;
         color[0] = 0.2f;
@@ -73,7 +73,7 @@ void FUN_0010e614()
         description.unk04 = 0;
         description.unk08 = 0;
         description.count = 1;
-        hemisphere->object = FUN_00120000(&description, allocator);
+        hemisphere->object = _ZN9Obj4212e86createEPvP18AsdAllocatorObject(&description, allocator);
         hemisphere->parameters = hemisphere->object->parameters;
         f32 *diffuse = ((HemisphereParameters *)hemisphere->parameters)->diffuse;
         diffuse[0] = 0.9f;

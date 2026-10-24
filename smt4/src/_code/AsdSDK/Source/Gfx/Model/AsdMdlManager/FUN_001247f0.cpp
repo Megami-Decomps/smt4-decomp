@@ -1,221 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001247f0` (_code @ 0x1247f0, 0x3bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: per-frame update of the model manager (advance model blends and swap finished ones, run node handlers, refresh the animation tables, then move finished loads from the pending list to the active list); written from the decompilation, the per-frame weight update of the animation node reached through an RTTI cast (blend ratio and its inverse written into the node's two weight pairs) is not reproduced, only the blend timing and the finish swap */
+#include "common.h"
+
+#define MDL_FLAG_HIDDEN_MASK 0x200002
+#define MDL_FLAG_FORCE_UPDATE 8
+#define MDL_BODY_FLAG_BLENDING 1
+#define MDL_NODE_FLAG_HAS_HANDLER 2
+
+struct MdlNode {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 owner;
+};
+
+struct MdlBody {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x3C];
+    /* 0x40 */ f32 blendTime;
+    /* 0x44 */ f32 blendDuration;
+    /* 0x48 */ u8 unk48[4];
+    /* 0x4C */ u32 owner;
+    /* 0x50 */ u32 finishedHandle;
+    /* 0x54 */ u32 nextHandle;
+    /* 0x58 */ u32 unk58;
+    /* 0x5C */ u8 unk5C[0x4C];
+    /* 0xA0 */ s32 nodeCount;
+    /* 0xA4 */ MdlNode *nodes;       /* 0xC bytes each */
+};
+
+struct MdlModel {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u32 requestHandle;
+    /* 0x08 */ MdlBody *body;
+    /* 0x0C */ u8 unk0C[0xC];
+    /* 0x18 */ u32 tables;             /* per-node instance tables (0x1C bytes each) */
+};
+
+struct MdlListEntry {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ MdlModel *model;
+    /* 0x0C */ u8 unk0C[0xC];
+    /* 0x18 */ MdlListEntry *next;
+};
 
 extern "C" {
+extern MdlListEntry *g_asdMdlList;
+extern MdlListEntry *g_asdMdlList2;
+extern s32 DAT_004dae28;                  /* models accepted from the pending list per frame */
 
-int FUN_00138c14(void);
-int FUN_00138d0c(unsigned int, unsigned int *, int, unsigned int);
-int FUN_0014ed58(unsigned int *, unsigned int);
-int asdMdlNodeInit(int, unsigned int);
-int asdListAdd(int *, int, int);
-int FUN_002b26d4(int *, int);
-int asdMdlObjectBuildBounds(int);
-int FUN_002b2988(unsigned int, int);
-int FUN_002b2ae8(unsigned int, int, int *);
-int resOwnerRunNodeHandlers(unsigned int);
+void FUN_00138c14(void);
+void FUN_00138d0c(u32 instance, MdlModel *model, s32 node, u32 index);
+void FUN_0014ed58(MdlBody *body, u32 argument);
+void asdMdlNodeInit(s32 owner, u32 index);
+void asdListAdd(MdlListEntry **list, MdlListEntry *entry, s32 flag);
+void FUN_002b26d4(MdlListEntry **list, MdlListEntry *entry);
+void asdMdlObjectBuildBounds(MdlListEntry *entry);
+void FUN_002b2988(u32 result, s32 size);
+void FUN_002b2ae8(u32 owner, s32 node, s32 *out);
+void resOwnerRunNodeHandlers(u32 owner);
+u32 FUN_002b2b64(MdlBody *body);
+u32 asdFileRequestGetResult(u32 handle, s32 *size);
+s32 asdFileRequestIsFinished(void);
 
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern int g_asdMdlList; /* 0x4dad60 */
-extern int g_asdMdlList2; /* 0x4dad6c */
-extern int DAT_004dae28; /* 0x4dae28 */
-
-extern unsigned int asdFileRequestGetResult(unsigned int, int *);
-extern int asdFileRequestIsFinished(void);
-/* Supplied declaration required: FUN_00138c14. */
-/* Supplied declaration required: FUN_00138d0c. */
-/* Supplied declaration required: FUN_0014ed58. */
-/* Supplied declaration required: asdMdlNodeInit. */
-/* Supplied declaration required: asdListAdd. */
-/* Supplied declaration required: FUN_002b26d4. */
-/* Supplied declaration required: asdMdlObjectBuildBounds. */
-/* Supplied declaration required: FUN_002b2988. */
-/* Supplied declaration required: FUN_002b2ae8. */
-/* Supplied declaration required: resOwnerRunNodeHandlers. */
-extern unsigned int FUN_002b2b64(unsigned int *);
-
+static __inline bool mdlUpdatable(const MdlModel *model)
+{
+    return model != NULL && ((model->flags & MDL_FLAG_HIDDEN_MASK) == 0 || (model->flags & MDL_FLAG_FORCE_UPDATE) != 0);
+}
 
 void FUN_001247f0(void)
-
 {
-/* irregular: irregular input(s): in_s0; 10 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int *piVar7;
-  int temp_v4;
-  unsigned int *puVar9;
-  int temp_v5;
-  unsigned int *puVar11;
-  int temp_v6;
-  unsigned int *puVar13;
-  int temp_v7;
-  unsigned char temp_v8;
-  float in_s0;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  int temp_v13;
-  int iStack_3c;
-  int iStack_38;
-  
-  temp_v4 = g_asdMdlList;
-  if (g_asdMdlList != 0) {
-    temp_v12 = 1.0f;
-    temp_v11 = 0.0f;
-    temp_v7 = g_asdMdlList;
-    do {
-      puVar13 = *(unsigned int **)(temp_v7 + 8);
-      temp_v7 = *(int *)(temp_v7 + 0x18);
-      if ((puVar13 != (unsigned int *)0x0) && (((*puVar13 & 0x200002) == 0 || ((*puVar13 & 8) != 0)))) {
-        puVar9 = (unsigned int *)puVar13[2];
-        if ((*puVar9 & 1) != 0) {
-          in_s0 = (float)puVar9[0x10] + temp_v12;
-          puVar9[0x10] = (unsigned int)in_s0;
-          if (((float)puVar9[0x11] == temp_v11) ||
-             (temp_v9 = in_s0 / (float)puVar9[0x11], (int)temp_v9 >= 0x3f800001)) {
-            temp_v9 = temp_v12;
-          }
-          temp_v0 = puVar9[0xb];
-          temp_v10 = temp_v12 - temp_v9;
-          if (*(int *)(temp_v0 + 0x228) == 0) {
-            piVar7 = (int *)0x0;
-          }
-          else {
-            piVar7 = *(int **)(*(int *)(*(int *)(temp_v0 + 0x28) + 0x1c) +
-                              *(int *)(temp_v0 + 0x22c) * *(int *)(*(int *)(temp_v0 + 0x28) + 0x28) * 4)
-            ;
-          }
-          if (piVar7 != (int *)0x0) {
-            piVar2 = (int *)(**(romwright_code **)(*piVar7 + 8))(piVar7);
-            do {
-              if (piVar2 == (int *)0x4722a0) {
-                if (piVar7 != (int *)0x0) {
-                  if ((int)temp_v9 >= 0x3f800000) {
-                    *(float *)piVar7[9] = temp_v9;
-                    *(float *)piVar7[0xd] = temp_v9;
-                    *(float *)(piVar7[9] + 4) = temp_v11;
-                    *(float *)(piVar7[0xd] + 4) = temp_v11;
-                    *(unsigned char *)((int)piVar7 + 0x41) = 1;
-                    temp_v0 = puVar9[0x14];
-                    puVar11 = (unsigned int *)puVar9[0x13];
-                    puVar9[0x14] = 0;
-                    puVar9[0x13] = temp_v0;
-                    *(unsigned int *)piVar7[5] = temp_v0;
-                    *(unsigned int *)(piVar7[5] + 4) = 0;
-                    in_s0 = temp_v11;
-                    if (puVar11 != (unsigned int *)0x0) {
-                      temp_v9 = temp_v11;
-                      (**(romwright_code **)*puVar11)(puVar11);
-                      (**(romwright_code **)(*(int *)puVar11[1] + 0xc))((int *)puVar11[1],puVar11);
-                      in_s0 = temp_v11;
-                      temp_v11 = temp_v9;
-                    }
-                    *puVar9 = *puVar9 & 0xfffffffe;
-                    FUN_0014ed58(puVar9,puVar9[0xe]);
-                  }
-                  else {
-                    *(float *)piVar7[9] = temp_v10;
-                    *(float *)piVar7[0xd] = temp_v10;
-                    *(float *)(piVar7[9] + 4) = temp_v9;
-                    *(float *)(piVar7[0xd] + 4) = temp_v9;
-                    *(unsigned char *)((int)piVar7 + 0x41) = 1;
-                  }
-                }
-                break;
-              }
-              piVar2 = (int *)*piVar2;
-            } while (piVar2 != (int *)0x0);
-          }
-        }
-        temp_v0 = FUN_002b2b64(puVar9);
-        if (in_s0 == temp_v11) {
-          temp_v0 = puVar9[0x28];
-          temp_v4 = 0;
-          if (temp_v4 < (int)temp_v0) {
-            do {
-              puVar3 = (unsigned int *)(puVar9[0x29] + temp_v4 * 0xc);
-              if ((*puVar3 & 2) != 0) {
-                resOwnerRunNodeHandlers(puVar3[2]);
-              }
-              temp_v0 = puVar9[0x28];
-              temp_v4 = temp_v4 + 1;
-            } while (temp_v4 < (int)temp_v0);
-          }
-        }
-        if (puVar13 != (unsigned int *)0x0) {
-          temp_v0 = puVar13[2];
-        }
-        if (puVar13 != (unsigned int *)0x0 && temp_v0 != 0) {
-          temp_v8 = *(int *)(temp_v0 + 4) != 0;
-          temp_v3 = 0;
-          if (temp_v8) {
-            temp_v3 = puVar13[6];
-          }
-          if (temp_v8 && temp_v3 != 0) {
-            temp_v4 = *(int *)(temp_v0 + 0x28);
-            temp_v6 = 0;
-            if (temp_v6 < temp_v4) {
-              do {
-                temp_v0 = 0;
-                piVar7 = (int *)(puVar13[6] + temp_v6 * 0x1c);
-                if (piVar7[1] != 0) {
-                  do {
-                    FUN_00138d0c(*piVar7 + temp_v0 * 0x84,puVar13,temp_v6,temp_v0);
-                    temp_v0 = temp_v0 + 1;
-                  } while (temp_v0 < (unsigned int)piVar7[1]);
-                }
-                FUN_002b2ae8(puVar13[2],temp_v6,&temp_v13);
-                temp_v6 = temp_v6 + 1;
-                piVar7[2] = temp_v13;
-                piVar7[3] = iStack_3c;
-                piVar7[4] = iStack_38;
-              } while (temp_v6 < temp_v4);
+    for (MdlListEntry *entry = g_asdMdlList; entry != NULL;) {
+        MdlModel *model = entry->model;
+        entry = entry->next;
+        if (!mdlUpdatable(model))
+            continue;
+        MdlBody *body = model->body;
+
+        if ((body->flags & MDL_BODY_FLAG_BLENDING) != 0) {
+            body->blendTime += 1.0f;
+            f32 ratio = 1.0f;
+            if (body->blendDuration != 0.0f) {
+                ratio = body->blendTime / body->blendDuration;
+                if (ratio > 1.0f)
+                    ratio = 1.0f;
             }
-          }
+            if (ratio >= 1.0f) {
+                u32 next = body->nextHandle;
+                body->nextHandle = 0;
+                body->finishedHandle = next;
+                body->flags &= ~MDL_BODY_FLAG_BLENDING;
+                FUN_0014ed58(body, body->unk58);
+            }
         }
-      }
-      temp_v4 = g_asdMdlList;
-    } while (temp_v7 != 0);
-  }
-  while (temp_v4 != 0) {
-    piVar7 = (int *)(temp_v4 + 8);
-    temp_v4 = *(int *)(temp_v4 + 0x18);
-    if (((unsigned int *)*piVar7 != (unsigned int *)0x0) &&
-       ((temp_v0 = *(unsigned int *)*piVar7, (temp_v0 & 0x200002) == 0 || ((temp_v0 & 8) != 0)))) {
-      FUN_00138c14();
+        FUN_002b2b64(body);
+        for (s32 node = 0; node < body->nodeCount; node++) {
+            if ((body->nodes[node].flags & MDL_NODE_FLAG_HAS_HANDLER) != 0)
+                resOwnerRunNodeHandlers(body->nodes[node].owner);
+        }
+
+        if (model->body != NULL && model->body->owner != 0 && model->tables != 0) {
+            s32 nodeCount = body->nodeCount;
+            for (s32 node = 0; node < nodeCount; node++) {
+                u32 *table = reinterpret_cast<u32 *>(model->tables + node * 0x1C);
+                for (u32 index = 0; index < table[1]; index++)
+                    FUN_00138d0c(table[0] + index * 0x84, model, node, index);
+                s32 bounds[3];
+                FUN_002b2ae8(model->body->owner, node, bounds);
+                table[2] = bounds[0];
+                table[3] = bounds[1];
+                table[4] = bounds[2];
+            }
+        }
     }
-  }
-  temp_v4 = 0;
-  temp_v7 = g_asdMdlList2;
-  do {
-    do {
-      temp_v6 = temp_v7;
-      if (temp_v6 == 0) {
-        return;
-      }
-      temp_v5 = *(int *)(temp_v6 + 8);
-      temp_v7 = *(int *)(temp_v6 + 0x18);
-    } while ((*(int *)(temp_v5 + 4) == 0) || (temp_v1 = asdFileRequestIsFinished(), temp_v1 == 0));
-    temp_v2 = asdFileRequestGetResult(*(unsigned int *)(temp_v5 + 4),&temp_v13);
-    FUN_002b2988(temp_v2,temp_v13);
-    *(unsigned int *)(*(int *)(temp_v5 + 8) + 4) = temp_v2;
-    asdMdlNodeInit(*(int *)(temp_v5 + 8),*(unsigned int *)(*(int *)(temp_v5 + 8) + 8) & 0xffff);
-    asdMdlObjectBuildBounds(temp_v5);
-    FUN_002b26d4(&g_asdMdlList2,temp_v6);
-    asdListAdd(&g_asdMdlList,temp_v5,0);
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < DAT_004dae28);
-  return;
+
+    for (MdlListEntry *entry = g_asdMdlList; entry != NULL; entry = entry->next) {
+        if (mdlUpdatable(entry->model))
+            FUN_00138c14();
+    }
+
+    s32 accepted = 0;
+    MdlListEntry *pending = g_asdMdlList2;
+    while (pending != NULL && accepted < DAT_004dae28) {
+        MdlListEntry *entry = pending;
+        MdlModel *model = entry->model;
+        pending = entry->next;
+        if (model->requestHandle == 0 || asdFileRequestIsFinished() == 0)
+            continue;
+        s32 size;
+        u32 result = asdFileRequestGetResult(model->requestHandle, &size);
+        FUN_002b2988(result, size);
+        *reinterpret_cast<u32 *>(model->body->owner + 4) = result;
+        asdMdlNodeInit(model->body->owner, *reinterpret_cast<u32 *>(model->body->owner + 8) & 0xFFFF);
+        asdMdlObjectBuildBounds(entry);
+        FUN_002b26d4(&g_asdMdlList2, entry);
+        asdListAdd(&g_asdMdlList, entry, 0);
+        accepted++;
+    }
 }
 
 } /* extern "C" */

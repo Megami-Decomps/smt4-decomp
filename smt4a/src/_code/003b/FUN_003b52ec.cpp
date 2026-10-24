@@ -1,163 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b52ec` (_code @ 0x3b52ec, 0x32c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (199 rows against 203): same table walk, flag tests and constants; retail keeps the table id in a stack slot (push {r3,...}), hoists 0xFFFFFFFF into r8 and the match-test constant in fp, evaluates dataTableGet(0x23,7) args in the other order inside the size test and splits the flagB test differently */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
 
 extern "C" {
 
-int dataTableGet(int, int);
-int gameFlagIsSet(...);
-int dataTableGetCount(...);
+/* Event table entry, stride 12 (observed fields only). */
+struct EventEntry {
+    u8 kind;          /* 0x00: 1 matches the current game state, 2 matches the spawn index */
+    s8 stateA;        /* 0x01 */
+    s8 stateB;        /* 0x02 (kind 1) */
+    s8 spawn;         /* 0x03 (kind 2) */
+    s16 flagA;        /* 0x04: must be set */
+    u16 flagB;        /* 0x06: must be clear */
+    u16 partyEntry;   /* 0x08 */
+    u16 needSpecial;  /* 0x0A: 1 requires a special enemy kind on the map */
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+struct AocSystem {
+    u8 pad000[0x41C];
+    s32 extraCount;               /* 0x41C */
+    EventEntry *extraEntries;     /* 0x420 */
+};
 
-extern int g_aocSystem; /* 0x570280 */
-extern int g_gameState; /* 0x5f15fc */
-extern int DAT_005f1600; /* 0x5f1600 */
-extern signed char DAT_005f1623; /* 0x5f1623 */
+struct GameFlagsBlock {
+    u8 pad000[0xE88];
+    u32 lastEvent;                /* 0xE88 */
+};
 
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-extern int mapEnemyHasSpecialKind(void);
-extern unsigned int lmapGetSpawnIndex(void);
-extern int partyEntryFlagsBit1(short);
+extern AocSystem *g_aocSystem;    /* 0x570280 */
+struct GameStateBlock {
+    s32 state;                    /* 0x00 */
+    s32 area;                     /* 0x04 */
+    u8 pad08[31];
+    s8 spawnMode;                 /* 0x27: non-zero selects the spawn-point entries */
+};
 
+extern GameStateBlock g_gameState;           /* 0x5f15fc */
 
-unsigned char * FUN_003b52ec(void)
+GameFlagsBlock *gameFlagsGetBlock(void);
+s32 mapEnemyHasSpecialKind(void);
+u32 lmapGetSpawnIndex(void);
+u32 dataTableGet(s32 table, s32 sub);
+s32 dataTableGetCount(u32 table);
+EventEntry *dataTableGetEntries(void);
+s32 gameFlagIsSet(s32 flag);
+s32 partyEntryFlagsBit1(u16 entry);
 
+/* Entry `index` of the event table: the built-in entries first, then the extra ones. */
+static EventEntry *eventTableEntry(u32 index)
 {
-/* irregular: 3 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned char *pbVar8;
-  unsigned char temp_v7;
-  
-  temp_v0 = gameFlagsGetBlock();
-  temp_v1 = mapEnemyHasSpecialKind();
-  if (DAT_005f1623 != '\0') {
-    temp_v2 = lmapGetSpawnIndex();
-    if (temp_v2 != 0) {
-      temp_v6 = 0;
-      dataTableGet(0x23,7);
-      temp_v3 = dataTableGetCount();
-      if (0 < temp_v3 + *(int *)(g_aocSystem + 0x41c)) {
-        do {
-          temp_v4 = dataTableGet(0x23,7);
-          temp_v3 = dataTableGetEntries();
-          temp_v5 = dataTableGetCount(temp_v4);
-          if (temp_v6 < temp_v5) {
-            pbVar8 = (unsigned char *)(temp_v3 + temp_v6 * 0xc);
-          }
-          else if (temp_v6 >= temp_v5 + *(int *)(g_aocSystem + 0x41c)) {
-            pbVar8 = (unsigned char *)0x0;
-          }
-          else {
-            pbVar8 = (unsigned char *)(*(int *)(g_aocSystem + 0x420) + (temp_v6 - temp_v5) * 0xc);
-          }
-          temp_v5 = (unsigned int)*pbVar8;
-          temp_v7 = temp_v5 == 2;
-          if (temp_v7) {
-            temp_v5 = (unsigned int)(char)pbVar8[3];
-          }
-          if (temp_v7 && temp_v5 == temp_v2) {
-            if (*(short *)(pbVar8 + 4) != 0) {
-              temp_v3 = gameFlagIsSet();
-              if (temp_v3 != 0) {
-                if (*(short *)(pbVar8 + 6) != 0) goto LAB_003b53e8;
-                if (((*(short *)(pbVar8 + 8) == 0) ||
-                    (temp_v3 = partyEntryFlagsBit1(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
-                   (*(short *)(pbVar8 + 10) != 1 || temp_v1 != 0)) {
-                  if (*(unsigned int *)(temp_v0 + 0xe88) == temp_v6) {
-                    return (unsigned char *)0x0;
-                  }
-                  *(unsigned int *)(temp_v0 + 0xe88) = temp_v6;
-                  return pbVar8;
-                }
-              }
-            }
-            else if (*(short *)(pbVar8 + 6) != 0) {
-LAB_003b53e8:
-              temp_v3 = gameFlagIsSet((int)*(short *)(pbVar8 + 6));
-              if (temp_v3 == 0) {
-                if (((*(short *)(pbVar8 + 8) == 0) ||
-                    (temp_v3 = partyEntryFlagsBit1(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
-                   (*(short *)(pbVar8 + 10) != 1 || temp_v1 != 0)) {
-                  if (*(unsigned int *)(temp_v0 + 0xe88) == temp_v6) {
-                    return (unsigned char *)0x0;
-                  }
-                  *(unsigned int *)(temp_v0 + 0xe88) = temp_v6;
-                  return pbVar8;
-                }
-              }
-            }
-          }
-          temp_v6 = temp_v6 + 1;
-          dataTableGet(0x23,7);
-          temp_v3 = dataTableGetCount();
-        } while ((int)temp_v6 < temp_v3 + *(int *)(g_aocSystem + 0x41c));
-      }
+    u32 table = dataTableGet(0x23, 7);
+    EventEntry *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+    if (index < count) {
+        return &entries[index];
     }
-  }
-  else {
-    temp_v6 = 0;
-    dataTableGet(0x23,7);
-    temp_v3 = dataTableGetCount();
-    if (0 < temp_v3 + *(int *)(g_aocSystem + 0x41c)) {
-      do {
-        temp_v4 = dataTableGet(0x23,7);
-        temp_v3 = dataTableGetEntries();
-        temp_v2 = dataTableGetCount(temp_v4);
-        if (temp_v6 < temp_v2) {
-          pbVar8 = (unsigned char *)(temp_v3 + temp_v6 * 0xc);
-        }
-        else if (temp_v6 >= temp_v2 + *(int *)(g_aocSystem + 0x41c)) {
-          pbVar8 = (unsigned char *)0x0;
-        }
-        else {
-          pbVar8 = (unsigned char *)(*(int *)(g_aocSystem + 0x420) + (temp_v6 - temp_v2) * 0xc);
-        }
-        if (((*pbVar8 == 1) && ((char)pbVar8[1] == g_gameState)) &&
-           ((char)pbVar8[2] == DAT_005f1600)) {
-          if (*(short *)(pbVar8 + 4) != 0) {
-            temp_v3 = gameFlagIsSet();
-            if (temp_v3 != 0) {
-              if (*(short *)(pbVar8 + 6) != 0) goto LAB_003b5564;
-LAB_003b558c:
-              if (((*(short *)(pbVar8 + 8) == 0) ||
-                  (temp_v3 = partyEntryFlagsBit1(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
-                 (*(short *)(pbVar8 + 10) != 1 || temp_v1 != 0)) {
-                if (*(unsigned int *)(temp_v0 + 0xe88) == temp_v6) {
-                  return (unsigned char *)0x0;
-                }
-                *(unsigned int *)(temp_v0 + 0xe88) = temp_v6;
-                return pbVar8;
-              }
-            }
-          }
-          else if (*(short *)(pbVar8 + 6) != 0) {
-LAB_003b5564:
-            temp_v3 = gameFlagIsSet((int)*(short *)(pbVar8 + 6));
-            if (temp_v3 == 0) goto LAB_003b558c;
-          }
-        }
-        temp_v6 = temp_v6 + 1;
-        dataTableGet(0x23,7);
-        temp_v3 = dataTableGetCount();
-      } while ((int)temp_v6 < temp_v3 + *(int *)(g_aocSystem + 0x41c));
+    if (index < count + g_aocSystem->extraCount) {
+        return &g_aocSystem->extraEntries[index - count];
     }
-  }
-  *(unsigned int *)(temp_v0 + 0xe88) = 0xffffffff;
-  return (unsigned char *)0x0;
+    return 0;
+}
+
+static s32 eventTableSize(void)
+{
+    return dataTableGetCount(dataTableGet(0x23, 7)) + g_aocSystem->extraCount;
+}
+
+/* The flag requirements of an event entry: flagA (when given) must be set, flagB (when given) clear. */
+static s32 eventFlagsAllow(const EventEntry *entry)
+{
+    if (entry->flagA != 0) {
+        if (gameFlagIsSet(entry->flagA) == 0) {
+            return 0;
+        }
+        if (entry->flagB == 0) {
+            return 1;
+        }
+    } else if (entry->flagB == 0) {
+        return 0;
+    }
+    return gameFlagIsSet((s16)entry->flagB) == 0;
+}
+
+/* The flag and party requirements of an event entry are met. */
+static s32 eventEntryAvailable(const EventEntry *entry, s32 hasSpecial)
+{
+    return eventFlagsAllow(entry) != 0 &&
+           (entry->partyEntry == 0 || partyEntryFlagsBit1(entry->partyEntry) != 0) &&
+           (entry->needSpecial != 1 || hasSpecial != 0);
+}
+
+/* Picks the next event table entry that applies to the current spawn point / game state and is
+ * available, remembers it in the flags block, and returns it (NULL when none, or when it is the
+ * one picked last time). */
+EventEntry *FUN_003b52ec(void)
+{
+    GameFlagsBlock *flags = gameFlagsGetBlock();
+    s32 hasSpecial = mapEnemyHasSpecialKind();
+
+    if (g_gameState.spawnMode != 0) {
+        u32 spawn = lmapGetSpawnIndex();
+        if (spawn != 0) {
+            for (s32 i = 0; i < eventTableSize(); i++) {
+                EventEntry *entry = eventTableEntry(i);
+                if (entry->kind == 2 && entry->spawn == (s32)spawn && eventEntryAvailable(entry, hasSpecial)) {
+                    if (flags->lastEvent == (u32)i) {
+                        return 0;
+                    }
+                    flags->lastEvent = i;
+                    return entry;
+                }
+            }
+        }
+    } else {
+        for (s32 i = 0; i < eventTableSize(); i++) {
+            EventEntry *entry = eventTableEntry(i);
+            if (entry->kind == 1 && entry->stateA == g_gameState.state && entry->stateB == g_gameState.area &&
+                eventEntryAvailable(entry, hasSpecial)) {
+                if (flags->lastEvent == (u32)i) {
+                    return 0;
+                }
+                flags->lastEvent = i;
+                return entry;
+            }
+        }
+    }
+    flags->lastEvent = 0xFFFFFFFF;
+    return 0;
 }
 
 } /* extern "C" */

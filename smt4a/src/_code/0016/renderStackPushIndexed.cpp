@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical renderStackPush inlining changes prologue/address scheduling and depth/previous-value register allocation. */
 #include "camp/RenderCtx.h"
 
 struct RenderStateBankA {

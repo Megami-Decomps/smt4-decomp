@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-state push address scheduling and null/return control flow differ; stereo draw body matches. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 19 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "battle/Talk/btlTalkBustUp.h"
 
@@ -20,7 +20,7 @@ u32 FUN_00321544()
     if (portrait != NULL) {
         FUN_00157558(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         if (portrait->unk2F4 != 0 && portrait->state == 2) {
             s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
             if (aocJobIsValid() != 0 || btlMainIsSecondJobValid() != 0) {

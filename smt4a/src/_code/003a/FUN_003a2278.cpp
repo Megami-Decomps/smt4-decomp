@@ -1,119 +1,72 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a2278` (_code @ 0x3a2278, 0x214 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild; retail duplicates the 0x104/0x105 sound branches and keeps the game state base in r4 with the flag number 0x49A in r5, which armcc here shares differently. */
+#include "common.h"
+
+/* The part of the game state this reads. */
+struct PauseGameState {
+    /* 0x000 */ s32 mode;
+    /* 0x004 */ s32 subMode;
+    /* 0x008 */ u8 unk008[0x28D];
+    /* 0x295 */ s8 menuOpen;
+};
 
 extern "C" {
+extern PauseGameState g_gameState;
 
-int sysPlaySe(...);
-int FUN_00183f58(...);
-int sub68OwnerCall3(void);
-int FUN_00379be8(void);
-int FUN_003b61ec(void);
-int commonBgReset(void);
+void sysPlaySe(u32 id);
+void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+s32 gameFlagIsSet(u32 flag);
+s32 sub68OwnerCall2(void);
+void sub68OwnerCall3(void);
+void FUN_00379be8(void);
+void FUN_003b61ec(void);
+void commonBgReset(void);
+s32 FUN_004a0404(void);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern int g_gameState; /* 0x5f15fc */
-extern int DAT_005f1600; /* 0x5f1600 */
-extern signed char DAT_005f1891; /* 0x5f1891 */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183f58. */
-extern int gameFlagIsSet(unsigned int);
-extern int sub68OwnerCall2(void);
-/* Supplied declaration required: sub68OwnerCall3. */
-/* Supplied declaration required: FUN_00379be8. */
-/* Supplied declaration required: FUN_003b61ec. */
-/* Supplied declaration required: commonBgReset. */
-extern int FUN_004a0404(void);
-
-
-void FUN_003a2278(int param_1)
-
+/* Opens (nonzero) or updates/closes (zero) the map pause menu: plays the matching sound, resets the
+ * background and restores the field when the menu closes. */
+void FUN_003a2278(s32 open)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_1 != 0) {
-    if (DAT_005f1891 != '\0') {
-      return;
+    if (open) {
+        if (g_gameState.menuOpen)
+            return;
+        g_gameState.menuOpen = 1;
+        FUN_00379be8();
+        FUN_003b61ec();
+        sysPlaySe(0x92);
+        return;
     }
-    DAT_005f1891 = 1;
-    FUN_00379be8();
-    FUN_003b61ec();
-    sysPlaySe(0x92);
-    return;
-  }
-  if (DAT_005f1891 != '\0') {
-    DAT_005f1891 = 0;
-    temp_v0 = gameFlagIsSet(0x49a);
-    if (temp_v0 != 0) {
-      commonBgReset();
+    if (g_gameState.menuOpen) {
+        g_gameState.menuOpen = 0;
+        if (gameFlagIsSet(0x49A))
+            commonBgReset();
+        else
+            FUN_003b61ec();
+        if (gameFlagIsSet(12) && !gameFlagIsSet(16))
+            FUN_003b61ec();
+        sub68OwnerCall3();
+        return;
     }
-    else {
-      FUN_003b61ec();
-    }
-    temp_v0 = gameFlagIsSet(0xc);
-    if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)) {
-      FUN_003b61ec();
-    }
-    sub68OwnerCall3();
-    return;
-  }
-  temp_v0 = sub68OwnerCall2();
-  if (temp_v0 != 0) {
-    sub68OwnerCall3();
-  }
-  else {
-    temp_v0 = g_gameState;
-    if (g_gameState == 5) {
-      temp_v0 = DAT_005f1600;
-    }
-    if ((!(g_gameState == 5 && temp_v0 == 0xc)) && (temp_v0 = gameFlagIsSet(0x49a), temp_v0 != 0)) {
-      temp_v0 = gameFlagIsSet(0xc);
-      if ((temp_v0 == 0) || (temp_v0 = gameFlagIsSet(0x10), temp_v0 != 0)) {
-        temp_v0 = FUN_004a0404();
-        if (temp_v0 != 0) {
-          if (g_gameState != 0x65) {
-            sysPlaySe(0x104);
-            FUN_00183f58(0,0x13,0x59,1);
-            FUN_00183f58(1,0);
-          }
-          else {
-            sysPlaySe(0x105);
-            FUN_00183f58(0,0x13,0x59,1);
-            FUN_00183f58(1,0);
-          }
+    if (sub68OwnerCall2()) {
+        sub68OwnerCall3();
+    } else {
+        s32 sub = g_gameState.mode == 5 ? g_gameState.subMode : 0;
+        if ((g_gameState.mode == 5 && sub == 12) || !gameFlagIsSet(0x49A)) {
+            sysPlaySe(0xD3);
+        } else if (gameFlagIsSet(12) && !gameFlagIsSet(16)) {
+            sysPlaySe(0xD3);
+        } else if (FUN_004a0404()) {
+            if (g_gameState.mode != 0x65)
+                sysPlaySe(0x104);
+            else
+                sysPlaySe(0x105);
+            FUN_00183f58(0, 0x13, 0x59, 1);
+            FUN_00183f58(1, 0, 0, 1);
+        } else {
+            sysPlaySe(g_gameState.mode < 100 ? 0x41 : 0xD2);
         }
-        else {
-          if (g_gameState < 100) {
-            temp_v1 = 0x41;
-          }
-          else {
-            temp_v1 = 0xd2;
-          }
-          sysPlaySe(temp_v1);
-        }
-      }
-      else {
-        sysPlaySe(0xd3);
-      }
     }
-    else {
-      temp_v1 = 0xd3;
-      sysPlaySe(temp_v1);
-    }
-  }
-  temp_v0 = gameFlagIsSet(0xc);
-  if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x10), temp_v0 == 0)) {
-    FUN_003b61ec();
-    return;
-  }
-  return;
+    if (gameFlagIsSet(12) && !gameFlagIsSet(16))
+        FUN_003b61ec();
 }
 
 } /* extern "C" */

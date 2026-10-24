@@ -1,154 +1,133 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `MapIf_Register` (_code @ 0x18aca8, 0x230 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the map-interface registration (allocate and clear the state, create its four tasks, set up the three marker quads); retail also loads two debug arguments (a source-path string and a line number) that asdMemAlloc discards, and schedules the quad stores in a different order with the state fields interleaved. */
+#include "common.h"
+
+// A map-interface marker quad: four corners of (x, y, z).
+struct MapIfQuad {
+    f32 corner[4][3];
+};
+
+// One marker slot (0x630 bytes): its quad followed by data this function does not touch.
+struct MapIfMarkerSlot {
+    MapIfQuad quad;
+    u8 unk30[0x600];
+};
+
+// The map interface's state block, as far as registration initialises it.
+struct MapIfRegisterView {
+    /* 0x0000 */ u32 updateTask;
+    /* 0x0004 */ u32 drawUpTask;
+    /* 0x0008 */ u32 meshTask;
+    /* 0x000C */ u8 unk0c[8];
+    /* 0x0014 */ u8 unk14;
+    /* 0x0015 */ u8 variant;
+    /* 0x0016 */ u8 unk16;
+    /* 0x0017 */ u8 unk17;
+    /* 0x0018 */ u8 unk18;
+    /* 0x0019 */ u8 unk19[3];
+    /* 0x001C */ s32 unk1c;
+    /* 0x0020 */ u8 unk20;
+    /* 0x0021 */ u8 unk21[0xf];
+    /* 0x0030 */ s32 unk30;
+    /* 0x0034 */ s32 unk34;
+    /* 0x0038 */ s32 unk38;
+    /* 0x003C */ u8 unk3c[0xcb94];
+    /* 0xCBD0 */ u8 unkcbd0;
+    /* 0xCBD1 */ u8 unkcbd1[0xe7];
+    /* 0xCCB8 */ s16 unkccb8;
+    /* 0xCCBA */ s16 unkccba;
+    /* 0xCCBC */ u8 unkccbc[4];
+    /* 0xCCC0 */ u8 unkccc0;
+    /* 0xCCC1 */ u8 unkccc1[0xb];
+    /* 0xCCCC */ f32 unkcccc;
+    /* 0xCCD0 */ f32 unkccd0;
+    /* 0xCCD4 */ f32 unkccd4;
+    /* 0xCCD8 */ u8 unkccd8;
+    /* 0xCCD9 */ u8 unkccd9[7];
+    /* 0xCCE0 */ u8 unkcce0;
+    /* 0xCCE1 */ u8 unkcce1[3];
+    /* 0xCCE4 */ s32 unkcce4;
+};
 
 extern "C" {
+extern MapIfRegisterView *g_mapIf;
+extern MapIfMarkerSlot DAT_004b5d30[3];
 
-int FUN_00297a00(void);
-int asdMemAlloc(int, int, int, int, int);
-int taskCreateDraw(...);
+void *asdMemAlloc(s32 heap, s32 align, s32 flags, s32 size, s32 mode);
+u32 taskCreateDraw(const char *name, s32 priority, s32 workSize, s32 flags, void (*update)(void), void (*draw)(void),
+                   void *owner, u32 parent);
+void mapRegisterDefaultInterface(void);
+void mapIfFreeWork(void);
+void MAPIF_DrawUp(void);
+void FUN_0021ef10(void);
+void FUN_001e84f0(void);
+void FUN_00297a00(void);
 
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned char LAB_0018af1c; /* 0x18af1c */
-extern unsigned char LAB_0018af28; /* 0x18af28 */
-extern unsigned char LAB_0018af34; /* 0x18af34 */
-extern unsigned char LAB_0018af44; /* 0x18af44 */
-extern unsigned char LAB_0019fa80; /* 0x19fa80 */
-extern unsigned char LAB_001e5e50; /* 0x1e5e50 */
-extern int MAPIF_DrawUp(...); /* 0x1e8484 */
-extern unsigned char LAB_001e84f0; /* 0x1e84f0 */
-extern int FUN_0021ef10(...); /* 0x21ef10 */
-extern unsigned int *g_mapIf; /* 0x447a78 */
-extern unsigned int DAT_004b5d30; /* 0x4b5d30 */
-extern unsigned int DAT_004b5d34; /* 0x4b5d34 */
-extern unsigned int DAT_004b5d38; /* 0x4b5d38 */
-extern unsigned int DAT_004b5d3c; /* 0x4b5d3c */
-extern unsigned int DAT_004b5d40; /* 0x4b5d40 */
-extern unsigned int DAT_004b5d44; /* 0x4b5d44 */
-extern unsigned int DAT_004b5d48; /* 0x4b5d48 */
-extern unsigned int DAT_004b5d4c; /* 0x4b5d4c */
-extern unsigned int DAT_004b5d50; /* 0x4b5d50 */
-extern unsigned int DAT_004b5d54; /* 0x4b5d54 */
-extern unsigned int DAT_004b5d58; /* 0x4b5d58 */
-extern unsigned int DAT_004b5d5c; /* 0x4b5d5c */
-extern unsigned int DAT_004b6360; /* 0x4b6360 */
-extern unsigned int DAT_004b6364; /* 0x4b6364 */
-extern unsigned int DAT_004b6368; /* 0x4b6368 */
-extern unsigned int DAT_004b636c; /* 0x4b636c */
-extern unsigned int DAT_004b6370; /* 0x4b6370 */
-extern unsigned int DAT_004b6374; /* 0x4b6374 */
-extern unsigned int DAT_004b6378; /* 0x4b6378 */
-extern unsigned int DAT_004b637c; /* 0x4b637c */
-extern unsigned int DAT_004b6380; /* 0x4b6380 */
-extern unsigned int DAT_004b6384; /* 0x4b6384 */
-extern unsigned int DAT_004b6388; /* 0x4b6388 */
-extern unsigned int DAT_004b638c; /* 0x4b638c */
-extern unsigned int DAT_004b6990; /* 0x4b6990 */
-extern unsigned int DAT_004b6994; /* 0x4b6994 */
-extern unsigned int DAT_004b6998; /* 0x4b6998 */
-extern unsigned int DAT_004b699c; /* 0x4b699c */
-extern unsigned int DAT_004b69a0; /* 0x4b69a0 */
-extern unsigned int DAT_004b69a4; /* 0x4b69a4 */
-extern unsigned int DAT_004b69a8; /* 0x4b69a8 */
-extern unsigned int DAT_004b69ac; /* 0x4b69ac */
-extern unsigned int DAT_004b69b0; /* 0x4b69b0 */
-extern unsigned int DAT_004b69b4; /* 0x4b69b4 */
-extern unsigned int DAT_004b69b8; /* 0x4b69b8 */
-extern unsigned int DAT_004b69bc; /* 0x4b69bc */
-
-/* Supplied declaration required: FUN_00297a00. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-
-
-void MapIf_Register(unsigned int param_1,unsigned char param_2)
-
+// Registers the map interface: allocates its state, clears it, creates the update, draw-up, fade and mesh tasks and
+// fills the three marker quads (one facing the camera, two lying on the ground plane).
+void MapIf_Register(u32 parent, u8 variant)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  unsigned int temp_v0;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemAlloc(0x100,0x100,0,0xcce8,1);
-  g_mapIf = puVar1;
-  *(unsigned char *)(puVar1 + 5) = 0;
-  *(unsigned char *)((int)puVar1 + 0x16) = 0;
-  *(unsigned char *)(puVar1 + 6) = 0;
-  puVar1[7] = 0;
-  *(unsigned char *)(puVar1 + 8) = 0;
-  puVar1[0xc] = 0;
-  puVar1[0xd] = 0;
-  puVar1[0xe] = 0;
-  *(unsigned char *)(puVar1 + 0x32f4) = 0;
-  *(unsigned short *)(puVar1 + 0x332e) = 0;
-  *(unsigned short *)((int)puVar1 + 0xccba) = 0;
-  *(unsigned char *)(puVar1 + 0x3330) = 0;
-  temp_v0 = 0;
-  puVar1[0x3333] = 0;
-  puVar1[0x3334] = 0;
-  puVar1[0x3335] = 0;
-  *(unsigned char *)(puVar1 + 0x3336) = 0;
-  *(unsigned char *)(puVar1 + 0x3338) = 0;
-  puVar1[0x3339] = 0;
-  puVar2 = &LAB_0018af1c;
-  taskCreateDraw(&LAB_0018af1c,2,0,0,&LAB_0019fa80,&LAB_001e5e50,0,param_1);
-  *puVar1 = (unsigned int)puVar2;
-  puVar3 = &LAB_0018af28;
-  taskCreateDraw(&LAB_0018af28,0x73,0,0,MAPIF_DrawUp,0,0,puVar2);
-  puVar1[1] = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_0018af34,0x85,0,0,FUN_0021ef10,0,0,*puVar1);
-  puVar2 = &LAB_0018af44;
-  taskCreateDraw(&LAB_0018af44,0x6f,0,0,&LAB_001e84f0,0,0,*puVar1);
-  puVar1[2] = (unsigned int)puVar2;
-  DAT_004b5d30 = 0xc2800000;
-  DAT_004b5d34 = 0x41800000;
-  DAT_004b5d3c = 0xc2800000;
-  DAT_004b5d40 = 0xc1800000;
-  DAT_004b5d48 = 0x42800000;
-  DAT_004b5d4c = 0x41800000;
-  DAT_004b5d54 = 0x42800000;
-  DAT_004b5d58 = 0xc1800000;
-  DAT_004b6360 = 0xc2800000;
-  DAT_004b6368 = 0x41800000;
-  DAT_004b636c = 0xc2800000;
-  DAT_004b6380 = 0x41800000;
-  DAT_004b6374 = 0xc1800000;
-  DAT_004b6378 = 0x42800000;
-  DAT_004b6384 = 0x42800000;
-  DAT_004b638c = 0xc1800000;
-  DAT_004b6990 = 0xc2800000;
-  DAT_004b6998 = 0xc1800000;
-  DAT_004b699c = 0xc2800000;
-  DAT_004b69a4 = 0x41800000;
-  DAT_004b69a8 = 0x42800000;
-  DAT_004b69bc = 0x41800000;
-  DAT_004b69b0 = 0xc1800000;
-  DAT_004b69b4 = 0x42800000;
-  DAT_004b5d38 = temp_v0;
-  DAT_004b5d44 = temp_v0;
-  DAT_004b5d50 = temp_v0;
-  DAT_004b5d5c = temp_v0;
-  DAT_004b6364 = temp_v0;
-  DAT_004b6370 = temp_v0;
-  DAT_004b637c = temp_v0;
-  DAT_004b6388 = temp_v0;
-  DAT_004b6994 = temp_v0;
-  DAT_004b69a0 = temp_v0;
-  DAT_004b69ac = temp_v0;
-  DAT_004b69b8 = temp_v0;
-  *(unsigned char *)((int)puVar1 + 0x15) = param_2;
-  FUN_00297a00();
-  return;
+    MapIfRegisterView *state = (MapIfRegisterView *)asdMemAlloc(0x100, 0x100, 0, 0xcce8, 1);
+    g_mapIf = state;
+    state->unk14 = 0;
+    state->unk16 = 0;
+    state->unk18 = 0;
+    state->unk1c = 0;
+    state->unk20 = 0;
+    state->unk30 = 0;
+    state->unk34 = 0;
+    state->unk38 = 0;
+    state->unkcbd0 = 0;
+    state->unkccb8 = 0;
+    state->unkccba = 0;
+    state->unkccc0 = 0;
+    state->unkcccc = 0.0f;
+    state->unkccd0 = 0.0f;
+    state->unkccd4 = 0.0f;
+    state->unkccd8 = 0;
+    state->unkcce0 = 0;
+    state->unkcce4 = 0;
+    state->updateTask = taskCreateDraw("MAPIF C", 2, 0, 0, mapRegisterDefaultInterface, mapIfFreeWork, 0, parent);
+    state->drawUpTask = taskCreateDraw("MAPIF U", 0x73, 0, 0, MAPIF_DrawUp, 0, 0, state->updateTask);
+    taskCreateDraw("MAP FADE", 0x85, 0, 0, FUN_0021ef10, 0, 0, state->updateTask);
+    state->meshTask = taskCreateDraw("MIF3DL", 0x6f, 0, 0, FUN_001e84f0, 0, 0, state->updateTask);
+    // The facing quad spans x -64..64, y -16..16; the two ground quads span x -64..64, z -16..16.
+    DAT_004b5d30[0].quad.corner[0][0] = -64.0f;
+    DAT_004b5d30[0].quad.corner[0][1] = 16.0f;
+    DAT_004b5d30[0].quad.corner[0][2] = 0.0f;
+    DAT_004b5d30[0].quad.corner[1][0] = -64.0f;
+    DAT_004b5d30[0].quad.corner[1][1] = -16.0f;
+    DAT_004b5d30[0].quad.corner[1][2] = 0.0f;
+    DAT_004b5d30[0].quad.corner[2][0] = 64.0f;
+    DAT_004b5d30[0].quad.corner[2][1] = 16.0f;
+    DAT_004b5d30[0].quad.corner[2][2] = 0.0f;
+    DAT_004b5d30[0].quad.corner[3][0] = 64.0f;
+    DAT_004b5d30[0].quad.corner[3][1] = -16.0f;
+    DAT_004b5d30[0].quad.corner[3][2] = 0.0f;
+    DAT_004b5d30[1].quad.corner[0][0] = -64.0f;
+    DAT_004b5d30[1].quad.corner[0][1] = 0.0f;
+    DAT_004b5d30[1].quad.corner[0][2] = 16.0f;
+    DAT_004b5d30[1].quad.corner[1][0] = -64.0f;
+    DAT_004b5d30[1].quad.corner[1][1] = 0.0f;
+    DAT_004b5d30[1].quad.corner[1][2] = -16.0f;
+    DAT_004b5d30[1].quad.corner[2][0] = 64.0f;
+    DAT_004b5d30[1].quad.corner[2][1] = 0.0f;
+    DAT_004b5d30[1].quad.corner[2][2] = 16.0f;
+    DAT_004b5d30[1].quad.corner[3][0] = 64.0f;
+    DAT_004b5d30[1].quad.corner[3][1] = 0.0f;
+    DAT_004b5d30[1].quad.corner[3][2] = -16.0f;
+    DAT_004b5d30[2].quad.corner[0][0] = -64.0f;
+    DAT_004b5d30[2].quad.corner[0][1] = 0.0f;
+    DAT_004b5d30[2].quad.corner[0][2] = -16.0f;
+    DAT_004b5d30[2].quad.corner[1][0] = -64.0f;
+    DAT_004b5d30[2].quad.corner[1][1] = 0.0f;
+    DAT_004b5d30[2].quad.corner[1][2] = 16.0f;
+    DAT_004b5d30[2].quad.corner[2][0] = 64.0f;
+    DAT_004b5d30[2].quad.corner[2][1] = 0.0f;
+    DAT_004b5d30[2].quad.corner[2][2] = -16.0f;
+    DAT_004b5d30[2].quad.corner[3][0] = 64.0f;
+    DAT_004b5d30[2].quad.corner[3][1] = 0.0f;
+    DAT_004b5d30[2].quad.corner[3][2] = 16.0f;
+    state->variant = variant;
+    FUN_00297a00();
 }
-
-} /* extern "C" */
+}

@@ -1,180 +1,132 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025b754` (_code @ 0x25b754, 0x32c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (207 rows against 204): same overlay kinds, blink offset easing (two steps towards 0/16/32/-16), colour packing and the +2.0 float offsets; retail expands the easing separately in every switch case with the target held in a register and switches through `__switch$$` with different register assignment (r4 colour, r5 mode, r6 selector, r7 state block), ours differs in register choice and case layout */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int FUN_001dd140(...);
-int FUN_001dd1e0(unsigned int, unsigned int, int, int);
-int FUN_0024ac68(...);
-int FUN_0024ac7c(int);
-int VectorSignedToFloat(...);
+/* Game state block with the screen fade/blink overlay request (observed fields only). */
+struct GameStateBlock {
+    s32 state;                    /* 0x000 */
+    u8 pad004[0x224 - 4];
+    s16 blinkSelector;            /* 0x224: -2..2 selects the blink pattern */
+    u8 pad226[2];
+    s8 blinkInvert;               /* 0x228 */
+    u8 pad229[3];
+    s8 overlayLocked;             /* 0x22C: nonzero hides the overlay */
+    u8 pad22D[0x3A8 - 0x22D];
+    s32 overlayKind;              /* 0x3A8: 0 none, 1 and 2 plain overlays, else blink overlay */
+    s32 x;                        /* 0x3AC */
+    s32 y;                        /* 0x3B0 */
+    u32 target;                   /* 0x3B4 */
+    u32 colorB;                   /* 0x3B8 */
+    s32 flag;                     /* 0x3BC */
+    u32 colorA;                   /* 0x3C0 */
+    u32 colorR;                   /* 0x3C4 */
+    u32 colorG;                   /* 0x3C8 */
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+extern GameStateBlock g_gameState;   /* 0x49f91c */
+extern s32 DAT_00448c90;             /* 0x448c90: current blink offset */
 
-extern int DAT_00448c90; /* 0x448c90 */
-extern int g_gameState; /* 0x49f91c */
-extern short DAT_0049fb40; /* 0x49fb40 */
-extern signed char DAT_0049fb44; /* 0x49fb44 */
-extern signed char DAT_0049fb48; /* 0x49fb48 */
-extern int DAT_0049fcc4; /* 0x49fcc4 */
-extern unsigned int DAT_0049fcc8; /* 0x49fcc8 */
-extern unsigned int DAT_0049fccc; /* 0x49fccc */
-extern unsigned int DAT_0049fcd0; /* 0x49fcd0 */
-extern unsigned int DAT_0049fcd4; /* 0x49fcd4 */
-extern int DAT_0049fcd8; /* 0x49fcd8 */
-extern int DAT_0049fcdc; /* 0x49fcdc */
-extern int DAT_0049fce0; /* 0x49fce0 */
-extern int DAT_0049fce4; /* 0x49fce4 */
+s32 frameTextureGetState(void);
+void FUN_0024ac7c(s32 enable);
+void FUN_0024ac68(s32 enable);
+void FUN_001dd1e0(u32 target, u32 color, s32 flag, s32 mode, f32 x, f32 y);
+void FUN_001dd140(u32 target, u32 color, s32 flag, s32 mode, f32 x, f32 y);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001dd140. */
-/* Supplied declaration required: FUN_001dd1e0. */
-/* Supplied declaration required: FUN_0024ac68. */
-/* Supplied declaration required: FUN_0024ac7c. */
-extern int frameTextureGetState(void);
-
-
-void FUN_0025b754(void)
-
+/* Moves the blink offset two steps towards `target`, without overshooting it. */
+static __inline void approachBlinkOffset(s32 target)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  
-  if (DAT_0049fb48 != '\0') {
-    return;
-  }
-  temp_v0 = frameTextureGetState();
-  temp_v1 = DAT_0049fcd4;
-  if ((temp_v0 != 0) || (DAT_0049fcc4 == 0)) {
-    FUN_0024ac7c(0);
-    FUN_0024ac68(0);
-    return;
-  }
-  if (DAT_0049fcc4 == 1) {
-    FUN_0024ac68(1);
-    VectorSignedToFloat(DAT_0049fcc8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(DAT_0049fccc,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001dd1e0(DAT_0049fcd0,
-                 DAT_0049fcd4 | (DAT_0049fcdc << 0x18) |
-                 (DAT_0049fce0 << 0x10) | (DAT_0049fce4 << 8),DAT_0049fcd8 != 0,1);
-    FUN_0024ac7c(0);
-    return;
-  }
-  if (DAT_0049fcc4 == 2) {
+    if (DAT_00448c90 < target) {
+        DAT_00448c90 = DAT_00448c90 + 2;
+        if (DAT_00448c90 > target) {
+            DAT_00448c90 = target;
+        }
+    } else if (DAT_00448c90 > target) {
+        DAT_00448c90 = DAT_00448c90 - 2;
+        if (DAT_00448c90 < target) {
+            DAT_00448c90 = target;
+        }
+    }
+}
+
+/* Draws the screen overlay requested in the game state block (fade/flash, or a pulsing blink). */
+void FUN_0025b754(void)
+{
+    if (g_gameState.overlayLocked != 0) {
+        return;
+    }
+    if (frameTextureGetState() != 0 || g_gameState.overlayKind == 0) {
+        FUN_0024ac7c(0);
+        FUN_0024ac68(0);
+        return;
+    }
+    if (g_gameState.overlayKind == 1) {
+        FUN_0024ac68(1);
+        FUN_001dd1e0(g_gameState.target,
+                     g_gameState.colorB | (g_gameState.colorA << 24) | (g_gameState.colorR << 16) | (g_gameState.colorG << 8),
+                     g_gameState.flag != 0, 1, (f32)g_gameState.x, (f32)g_gameState.y);
+        FUN_0024ac7c(0);
+        return;
+    }
+    if (g_gameState.overlayKind == 2) {
+        FUN_0024ac7c(1);
+        FUN_001dd140(g_gameState.target,
+                     g_gameState.colorB | (g_gameState.colorA << 24) | (g_gameState.colorR << 16) | (g_gameState.colorG << 8),
+                     g_gameState.flag != 0, 1, (f32)g_gameState.x, (f32)g_gameState.y);
+        FUN_0024ac68(0);
+        return;
+    }
+
+    s32 selector = g_gameState.blinkSelector;
+    s32 mode = 2;
+    u32 color = g_gameState.colorB;
+    if (g_gameState.blinkInvert != 0) {
+        selector = -2;
+    }
     FUN_0024ac7c(1);
-    VectorSignedToFloat(DAT_0049fcc8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(DAT_0049fccc,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001dd140(DAT_0049fcd0,
-                 DAT_0049fcd4 | (DAT_0049fcdc << 0x18) |
-                 (DAT_0049fce0 << 0x10) | (DAT_0049fce4 << 8),DAT_0049fcd8 != 0,1);
+    if (g_gameState.state < 100) {
+        switch (selector) {
+        case 0:
+            approachBlinkOffset(0);
+            mode = 3;
+            color = color + DAT_00448c90;
+            break;
+        case 1:
+            approachBlinkOffset(16);
+            mode = 3;
+            color = color + DAT_00448c90;
+            break;
+        case 2:
+            approachBlinkOffset(32);
+            mode = 3;
+            color = color + DAT_00448c90;
+            break;
+        case -2:
+            approachBlinkOffset(32);
+            color = color + DAT_00448c90;
+            break;
+        case -1:
+            approachBlinkOffset(-16);
+            color = color + DAT_00448c90;
+            break;
+        default:
+            break;
+        }
+        if ((s32)color < 0) {
+            color = 0;
+        } else if ((s32)color >= 0x100) {
+            color = 0xFF;
+        }
+    }
+    FUN_001dd140(g_gameState.target,
+                 (g_gameState.colorA << 24) | (g_gameState.colorR << 16) | (g_gameState.colorG << 8) | color,
+                 1, mode, (f32)g_gameState.x + 2.0f, (f32)g_gameState.y + 2.0f);
     FUN_0024ac68(0);
-    return;
-  }
-  temp_v0 = (int)DAT_0049fb40;
-  temp_v2 = 2;
-  if (DAT_0049fb44 != '\0') {
-    temp_v0 = -2;
-  }
-  FUN_0024ac7c(1);
-  if (g_gameState >= 100) {
-    VectorSignedToFloat(DAT_0049fccc,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(DAT_0049fcc8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001dd140(DAT_0049fcd0,
-                 (DAT_0049fcdc << 0x18) | (DAT_0049fce0 << 0x10) | (DAT_0049fce4 << 8) | temp_v1,1,
-                 temp_v2);
-    FUN_0024ac68(0);
-    return;
-  }
-  switch(temp_v0) {
-  case 0:
-    temp_v0 = 0;
-    if (DAT_00448c90 < 0) {
-      DAT_00448c90 = DAT_00448c90 + 2;
-      if (0 < DAT_00448c90) {
-        DAT_00448c90 = temp_v0;
-      }
-    }
-    else if ((0 < DAT_00448c90) && (DAT_00448c90 = DAT_00448c90 - 2, DAT_00448c90 < 0)) {
-      DAT_00448c90 = temp_v0;
-    }
-    temp_v2 = 3;
-    temp_v1 = temp_v1 + DAT_00448c90;
-    break;
-  case 1:
-    temp_v0 = 0x10;
-    if (DAT_00448c90 < 0x10) {
-      DAT_00448c90 = DAT_00448c90 + 2;
-      if (DAT_00448c90 >= 0x11) {
-        DAT_00448c90 = temp_v0;
-      }
-    }
-    else if ((DAT_00448c90 >= 0x11) && (DAT_00448c90 = DAT_00448c90 - 2, DAT_00448c90 < 0x10)) {
-      DAT_00448c90 = temp_v0;
-    }
-    temp_v2 = 3;
-    temp_v1 = temp_v1 + DAT_00448c90;
-    break;
-  case 2:
-    if (DAT_00448c90 < 0x20) {
-      DAT_00448c90 = DAT_00448c90 + 2;
-      if (DAT_00448c90 >= 0x21) {
-        DAT_00448c90 = 0x20;
-      }
-    }
-    else if ((DAT_00448c90 >= 0x21) && (DAT_00448c90 = DAT_00448c90 - 2, DAT_00448c90 < 0x20)) {
-      DAT_00448c90 = 0x20;
-    }
-    temp_v2 = 3;
-    temp_v1 = temp_v1 + DAT_00448c90;
-    break;
-  case -2:
-    if (DAT_00448c90 < 0x20) {
-      DAT_00448c90 = DAT_00448c90 + 2;
-      if (DAT_00448c90 >= 0x21) {
-        DAT_00448c90 = 0x20;
-      }
-    }
-    else if ((DAT_00448c90 >= 0x21) && (DAT_00448c90 = DAT_00448c90 - 2, DAT_00448c90 < 0x20)) {
-      DAT_00448c90 = 0x20;
-    }
-    temp_v1 = temp_v1 + DAT_00448c90;
-    break;
-  case -1:
-    if (DAT_00448c90 < -0x10) {
-      temp_v0 = DAT_00448c90 + 2;
-      temp_v3 = DAT_00448c90 != -0x12;
-      DAT_00448c90 = temp_v0;
-      if (temp_v3 && -0x11 < temp_v0) {
-        DAT_00448c90 = -0x10;
-      }
-    }
-    else if ((-0x10 < DAT_00448c90) && (DAT_00448c90 = DAT_00448c90 - 2, DAT_00448c90 < -0x10)) {
-      DAT_00448c90 = -0x10;
-    }
-    temp_v1 = temp_v1 + DAT_00448c90;
-  default:
-  }
-  if ((int)temp_v1 < 0) {
-    temp_v1 = 0;
-  }
-  else if ((int)temp_v1 >= 0x100) {
-    temp_v1 = 0xff;
-  }
-  VectorSignedToFloat(DAT_0049fccc,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(DAT_0049fcc8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001dd140(DAT_0049fcd0,
-               (DAT_0049fcdc << 0x18) | (DAT_0049fce0 << 0x10) | (DAT_0049fce4 << 8) | temp_v1,1,temp_v2
-              );
-  FUN_0024ac68(0);
-  return;
 }
 
 } /* extern "C" */

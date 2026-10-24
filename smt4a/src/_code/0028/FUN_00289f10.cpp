@@ -1,134 +1,75 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00289f10` (_code @ 0x289f10, 0x314 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the job's sprite with a grey level and alpha (special sprite ids draw twice, the second pass additive); written from the decompilation, render-stack push scheduling and the float to byte conversions not compared with retail */
+#include "camp/RenderCtx.h"
+
+struct SpriteJobWork {
+    /* 0x00 */ s32 spriteId;
+    /* 0x04 */ s32 blocked;
+    /* 0x08 */ f32 level;       /* grey level 0..1 */
+    /* 0x0C */ f32 alpha;       /* alpha 0..1 */
+    /* 0x10 */ u8 unk10[5];
+    /* 0x15 */ u8 prepared;
+    /* 0x16 */ u8 visible;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ s32 origin[7];   /* origin handed to the draw calls */
+    /* 0x34 */ s32 sprite;
+    /* 0x38 */ u8 unk38[8];
+    /* 0x40 */ s32 frame;
+};
+
+#define SPRITE_ID_FADE_A 0xFE49
+#define SPRITE_ID_FADE_B 0xFE4C
+#define SPRITE_ID_FADE_C 0xFFF2
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
 
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
-int FUN_00230038(int *);
-int spriteDrawWithOrigin(int, int, int *, int, int, int);
-int FUN_003fba4c(int, int, int, int *, int, int);
-int VectorFloatToUnsigned(double, int);
+SpriteJobWork *jobGetWork(void);
+void FUN_00230038(SpriteJobWork *work);
+s32 FUN_001692ac(u32 a, u32 b);
+s32 FUN_00387580(u32 mode);
+void spriteDrawWithOrigin(s32 sprite, s32 layer, s32 *origin, u32 color, s32 flag, s32 mode);
+void FUN_003fba4c(s32 sprite, s32 layer, s32 frame, s32 *origin, u32 color, s32 mode);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int *jobGetWork(void);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_00230038. */
-extern int FUN_00387580(unsigned int);
-/* Supplied declaration required: spriteDrawWithOrigin. */
-/* Supplied declaration required: FUN_003fba4c. */
-
-
-unsigned int FUN_00289f10(void)
-
+/* Packs a grey level and alpha (0..1) into RGBA with the level in all three colour bytes. */
+static __inline u32 spriteColorPack(f32 level, f32 alpha)
 {
-/* irregular: 6 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar6;
-  unsigned char temp_v4;
-  float temp_v5;
-  float temp_v6;
-  unsigned long long temp_v7;
-  float temp_v8;
-  
-  piVar1 = (int *)jobGetWork();
-  if ((piVar1[1] == 0) && (*(char *)((int)piVar1 + 0x16) != '\0')) {
-    if (*(char *)((int)piVar1 + 0x15) == '\0') {
-      FUN_00230038(piVar1);
-      *(unsigned char *)((int)piVar1 + 0x15) = 1;
+    u32 grey = (u32)(level * 255.0f);
+    u32 a = (u32)(alpha * 255.0f);
+    return (((grey * 0x100 + grey) * 0x100) + grey) * 0x100 + a;
+}
+
+u32 FUN_00289f10(void)
+{
+    SpriteJobWork *work = jobGetWork();
+    if (work->blocked == 0 && work->visible != 0) {
+        if (work->prepared == 0) {
+            FUN_00230038(work);
+            work->prepared = 1;
+        }
+        RenderCtxA *context = g_renderCtx;
+        renderStackPush(&context->stackA, FUN_001692ac(5, 1));
+        context = g_renderCtx;
+        renderStackPush(&context->additional.stackC, FUN_00387580(6));
+
+        bool twoPass = work->spriteId == SPRITE_ID_FADE_A || work->spriteId == SPRITE_ID_FADE_B
+                       || work->spriteId == SPRITE_ID_FADE_C;
+        if (!twoPass) {
+            FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, work->origin,
+                         spriteColorPack(work->level, work->alpha), 0);
+        } else {
+            spriteDrawWithOrigin(work->sprite, 0, work->origin, spriteColorPack(work->level, work->alpha), 1, 0);
+            FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, work->origin,
+                         spriteColorPack(work->level, work->alpha), 2);
+        }
+
+        renderStackPop(&g_renderCtx->additional.stackC);
+        renderStackPop(&g_renderCtx->stackA);
+        skinObjectUpdateMatrices(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
     }
-    temp_v1 = g_renderCtx;
-    temp_v0 = FUN_001692ac(5,1);
-    piVar6 = (int *)(temp_v1 + 0x1258);
-    temp_v2 = *piVar6;
-    temp_v3 = piVar6[temp_v2 + 2];
-    *piVar6 = temp_v2 + 1;
-    piVar6[temp_v2 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v3 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
-    }
-    temp_v1 = g_renderCtx;
-    temp_v0 = FUN_00387580(6);
-    piVar6 = (int *)(temp_v1 + 0x1278);
-    temp_v2 = *piVar6;
-    temp_v3 = piVar6[temp_v2 + 2];
-    *piVar6 = temp_v2 + 1;
-    piVar6[temp_v2 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1290) != '\0' || temp_v3 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1294))();
-      *(unsigned char *)(temp_v1 + 0x1290) = 0;
-    }
-    temp_v8 = 255.0f;
-    temp_v7 = *(unsigned long long *)(piVar1 + 2);
-    temp_v1 = *piVar1;
-    temp_v5 = (float)temp_v7;
-    temp_v4 = temp_v1 == 0xfe49 || temp_v1 == 0xfe4c;
-    if (temp_v1 != 0xfe49 && temp_v1 != 0xfe4c) {
-      temp_v4 = temp_v1 == 0xfff2;
-    }
-    temp_v6 = (float)((unsigned long long)temp_v7 >> 0x20);
-    if (!temp_v4) {
-      temp_v1 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
-      temp_v2 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
-      temp_v3 = VectorFloatToUnsigned(temp_v6 * 255.0f,3);
-      temp_v0 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
-      FUN_003fba4c(piVar1[0xd],0,(int)(float)piVar1[0x10],piVar1 + 6,
-                   temp_v3 + (temp_v2 + (temp_v0 + temp_v1 * 0x100) * 0x100) * 0x100,0);
-    }
-    else {
-      temp_v1 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
-      temp_v3 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
-      temp_v0 = VectorFloatToUnsigned(temp_v5 * 255.0f,3);
-      temp_v2 = VectorFloatToUnsigned(temp_v6 * 255.0f,3);
-      spriteDrawWithOrigin(piVar1[0xd],0,piVar1 + 6,
-                   temp_v2 + (temp_v0 + (temp_v3 + temp_v1 * 0x100) * 0x100) * 0x100,1,0);
-      temp_v5 = (float)temp_v7;
-      temp_v1 = VectorFloatToUnsigned(temp_v5 * temp_v8,3);
-      temp_v3 = VectorFloatToUnsigned(temp_v5 * temp_v8,3);
-      temp_v0 = VectorFloatToUnsigned(temp_v5 * temp_v8,3);
-      temp_v2 = VectorFloatToUnsigned((float)((unsigned long long)temp_v7 >> 0x20) * temp_v8,3);
-      FUN_003fba4c(piVar1[0xd],0,(int)(float)piVar1[0x10],piVar1 + 6,
-                   temp_v2 + (temp_v0 + (temp_v3 + temp_v1 * 0x100) * 0x100) * 0x100,2);
-    }
-    temp_v1 = g_renderCtx;
-    piVar1 = (int *)(g_renderCtx + 0x1278);
-    temp_v0 = *piVar1;
-    temp_v2 = piVar1[temp_v0 + 2];
-    *piVar1 = temp_v0 - 1;
-    if (*(char *)(temp_v1 + 0x1290) != '\0' || temp_v2 != piVar1[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1294))();
-      *(unsigned char *)(temp_v1 + 0x1290) = 0;
-    }
-    temp_v1 = g_renderCtx;
-    piVar1 = (int *)(g_renderCtx + 0x1258);
-    temp_v0 = *piVar1;
-    temp_v2 = piVar1[temp_v0 + 2];
-    *piVar1 = temp_v0 - 1;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v2 != piVar1[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
-    }
-    skinObjectUpdateMatrices(g_renderCtx);
-    renderCtxResetColorScale(g_renderCtx);
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

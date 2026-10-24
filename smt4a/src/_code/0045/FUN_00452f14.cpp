@@ -8,7 +8,7 @@ int FUN_00458a68(unsigned int *, int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00458a68. */
-extern unsigned int *FUN_00459870(int, int, unsigned int *, int *);
+extern unsigned int *_ZN9Obj55bcccC1Ejjj(int, int, unsigned int *, int *);
 
 
 int FUN_00452f14(unsigned int *param_1,int *param_2)
@@ -51,7 +51,7 @@ int FUN_00452f14(unsigned int *param_1,int *param_2)
   }
   temp_v1 = (**(romwright_code **)(*param_2 + 8))(param_2,0x68,4);
   if (temp_v1 != 0) {
-    puVar1 = (unsigned int *)FUN_00459870(temp_v1,temp_v4,param_1,param_2);
+    puVar1 = (unsigned int *)_ZN9Obj55bcccC1Ejjj(temp_v1,temp_v4,param_1,param_2);
     puVar2 = puVar1;
     FUN_00458a68(puVar1,1);
     if ((int)puVar2 >= 0) {

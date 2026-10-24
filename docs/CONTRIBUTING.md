@@ -48,6 +48,13 @@ Every match must be one a programmer could have written for a reason.
     never call the helper by hand;
   - `--cpu=5TE` (Thumb register moves written `movs rd, rm` where MPCore armcc writes `mov`: runtime
     and library code), `-O2`: only when the function is IDENTICAL with the flag and not without it.
+- **The original was built with armcc `--multifile`.** A caller knew which registers its callees
+  really clobber: retail keeps a value in a caller-saved register (`r1`-`r3`, `ip`) across a `bl`,
+  or pushes fewer registers than a unit compiled alone does, yet the callees stay out of line. A
+  unit can name those callees in a `multifile` list in `config/project.json`; `build.py` and
+  `fdiff` then compile it in one `--multifile --no_autoinline` run with the callees' unit sources
+  and keep only the unit's function. Same evidence rule as `cflags`, and the callees' own sources
+  must clobber what retail's do (matched callees are best).
 - **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
   armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
   so write the call:

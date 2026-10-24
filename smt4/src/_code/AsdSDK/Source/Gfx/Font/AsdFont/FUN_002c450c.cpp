@@ -1,213 +1,185 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c450c` (_code @ 0x2c450c, 0x384 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of AsdFont's glyph-set load (releases the slot's old font, then wraps the new BFFNT file: finds its FINF block, allocates one texture per glyph sheet and fills them from the sheet table); armcc here lays out the format switch (retail stores the three format words per case) and the loop variables differently. */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "shard/W6_W6Match7_FontResource.h"
 
+/* A BFFNT glyph sheet descriptor (TGLP). */
+struct GlyphSheetInfo {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 sheetBytes;
+    /* 0x08 */ u16 sheetCount;
+    /* 0x0A */ u16 format;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u16 width;
+    /* 0x12 */ u16 height;
+    /* 0x14 */ u8 *data;
+};
+
+/* The font info block (FINF) body: its glyph sheet descriptor is the third word. */
+struct FontInfoBody {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ GlyphSheetInfo *sheets;
+};
+
+/* A font object whose second virtual function destroys it. */
+class GlyphFont {
+public:
+    virtual void vfunc00();
+    virtual void destroy();
+};
+
+/* One glyph set of the font table (0x2C bytes). */
+struct GlyphSet {
+    /* 0x00 */ NwFontFileHeader *file;
+    /* 0x04 */ FontInfoBody *info;
+    /* 0x08 */ GlyphFont *font;
+    /* 0x0C */ AsdTexture **textures;
+    /* 0x10 */ u32 sheetCount;
+    /* 0x14 */ u16 format;
+    /* 0x16 */ u8 unk16[2];
+    /* 0x18 */ u32 glFormat;
+    /* 0x1C */ u32 glType;
+    /* 0x20 */ u32 bitsPerTexel;
+    /* 0x24 */ u8 mode;           /* 2 for the 0x6756 format, else 1 */
+    /* 0x25 */ u8 unk25[3];
+    /* 0x28 */ u32 unk28;
+};
+
+struct AsdFontTable {
+    GlyphSet *items;
+    u32 count;
+};
+
 extern "C" {
+extern AsdFontTable DAT_00464a70;
 
-AsdTexture* asdTextureCreate(s32 shared);
-int asdTextureRelease(unsigned int);
-int asdOperatorNew(void);
-int asdMemFree(...);
-int asdMemoryAlloc(int, int, int, unsigned int, int);
+AsdTexture *asdTextureCreate(s32 shared);
+void asdTextureRelease(AsdTexture *texture);
+void *asdOperatorNew(u32 bytes);
+void asdMemFree(void *block);
+void *asdMemoryAlloc(s32 heap, s32 alignClass, s32 unk, u32 size, s32 fromFront);
+GlyphFont *FUN_00121e38(void *memory);
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int DAT_00464a70; /* 0x464a70 */
-extern unsigned int *DAT_00464a74; /* 0x464a74 */
-
-extern int FUN_00121e38(void);
-/* Supplied declaration required: asdTextureRelease. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
-
+/* Loads font file `file` into glyph set `index`: returns 1 when the slot exists. */
+u32 FUN_002c450c(u32 index, NwFontFileHeader *file)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  int temp_v4;
-  int *piVar7;
-  int temp_v5;
-  int *piVar9;
-  int temp_v6;
-  int *piVar11;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  
-  puVar4 = (unsigned int *)&DAT_00464a70;
-  if (DAT_00464a70 != 0) {
-    puVar4 = DAT_00464a74;
-  }
-  if ((DAT_00464a70 != 0 && param_1 < puVar4) &&
-     (piVar11 = (int *)(DAT_00464a70 + (int)param_1 * 0x2c), piVar11 != (int *)0x0)) {
-    if (*piVar11 != 0) {
-      if (piVar11[3] != 0) {
-        if (piVar11[4] != 0) {
-          temp_v7 = 0;
-          do {
-            *(unsigned int *)(*(int *)(piVar11[3] + temp_v7 * 4) + 0x24) = 0;
-            asdTextureRelease(*(unsigned int *)(piVar11[3] + temp_v7 * 4));
-            temp_v7 = temp_v7 + 1;
-          } while (temp_v7 < (unsigned int)piVar11[4]);
+    GlyphSet *set = DAT_00464a70.items != NULL && index < DAT_00464a70.count ? &DAT_00464a70.items[index] : NULL;
+    if (set == NULL)
+        return 0;
+    if (set->file != NULL) {
+        if (set->textures != NULL) {
+            for (u32 i = 0; i < set->sheetCount; i++) {
+                set->textures[i]->storage.pixels = NULL;
+                asdTextureRelease(set->textures[i]);
+            }
+            asdMemFree(set->textures);
+            set->textures = NULL;
         }
-        asdMemFree(piVar11[3]);
-        piVar11[3] = 0;
-      }
-      if ((int *)piVar11[2] != (int *)0x0) {
-        (**(romwright_code **)(*(int *)piVar11[2] + 4))();
-        piVar11[2] = 0;
-      }
-      if (*piVar11 != 0) {
-        asdMemFree();
-        *piVar11 = 0;
-      }
-      piVar11[1] = 0;
+        if (set->font != NULL) {
+            set->font->destroy();
+            set->font = NULL;
+        }
+        if (set->file != NULL) {
+            asdMemFree(set->file);
+            set->file = NULL;
+        }
+        set->info = NULL;
     }
-    temp_v3 = 0x18;
-    *piVar11 = param_2;
-    asdOperatorNew();
-    temp_v4 = 0;
-    if (temp_v3 != 0) {
-      temp_v4 = FUN_00121e38();
-    }
-    piVar11[2] = temp_v4;
-    temp_v4 = nw_font_ResFontSetResource(
-        reinterpret_cast<NwResFontBase*>(piVar11[2]),
-        reinterpret_cast<NwFontFileHeader*>(*piVar11));
-    if (temp_v4 != 0) {
-      temp_v4 = *piVar11;
-      piVar9 = (int *)0x0;
-      temp_v3 = 0;
-      piVar7 = (int *)(temp_v4 + (unsigned int)*(unsigned short *)(temp_v4 + 6));
-      if (*(unsigned short *)(temp_v4 + 0x10) != 0) {
-        do {
-          temp_v3 = temp_v3 + 1;
-          if (*piVar7 == 0x464e4946) {
-            piVar9 = piVar7 + 2;
-          }
-          piVar7 = (int *)((int)piVar7 + piVar7[1]);
-        } while (temp_v3 < (int)(unsigned int)*(unsigned short *)(temp_v4 + 0x10));
-      }
-      piVar11[1] = (int)piVar9;
-      temp_v3 = piVar9[2];
-      temp_v4 = 0x100;
-      asdMemoryAlloc(0x100,0x100,0,(unsigned int)*(unsigned short *)(temp_v3 + 8) << 2,1);
-      piVar11[3] = temp_v4;
-      piVar11[4] = (unsigned int)*(unsigned short *)(temp_v3 + 8);
-      piVar11[10] = 0;
-      temp_v0 = *(unsigned short *)(temp_v3 + 10);
-      *(unsigned short *)(piVar11 + 5) = temp_v0;
-      switch(temp_v0) {
-      case 0:
-        temp_v4 = 0x6752;
-        piVar11[8] = 0x20;
-        piVar11[7] = 0x1401;
-        piVar11[6] = 0x6752;
-        break;
-      case 1:
-        temp_v4 = 0x6754;
-        piVar11[8] = 0x18;
-        piVar11[7] = 0x1401;
-        piVar11[6] = 0x6754;
-        break;
-      case 2:
-        temp_v4 = 0x6752;
-        piVar11[8] = 0x10;
-        piVar11[7] = 0x8034;
-        piVar11[6] = 0x6752;
-        break;
-      case 3:
-        temp_v4 = 0x6754;
-        piVar11[8] = 0x10;
-        piVar11[7] = 0x8363;
-        piVar11[6] = 0x6754;
-        break;
-      case 4:
-        temp_v4 = 0x6752;
-        piVar11[8] = 0x10;
-        piVar11[7] = 0x8033;
-        piVar11[6] = 0x6752;
-        break;
-      case 5:
-        temp_v4 = 0x6758;
-        piVar11[8] = 0x10;
-        piVar11[7] = 0x1401;
-        piVar11[6] = 0x6758;
-        break;
-      default:
-        piVar11[6] = 0x6756;
-        piVar11[7] = 0x1401;
-        piVar11[8] = 0;
+    set->file = file;
+    void *memory = asdOperatorNew(0x18);
+    GlyphFont *font = NULL;
+    if (memory != NULL)
+        font = FUN_00121e38(memory);
+    set->font = font;
+    if (!nw_font_ResFontSetResource((NwResFontBase *)set->font, set->file))
         return 1;
-      case 8:
-        temp_v4 = 0x6756;
-        piVar11[8] = 8;
-        piVar11[7] = 0x1401;
-        piVar11[6] = 0x6756;
+    NwFontFileHeader *header = set->file;
+    u32 *finf = NULL;
+    u32 *block = (u32 *)((u8 *)header + header->headerSize);
+    for (s32 i = 0; i < header->blockCount; i++) {
+        if (block[0] == 0x464E4946)
+            finf = block + 2;
+        block = (u32 *)((u8 *)block + block[1]);
+    }
+    set->info = (FontInfoBody *)finf;
+    GlyphSheetInfo *sheets = set->info->sheets;
+    set->textures = (AsdTexture **)asdMemoryAlloc(0x100, 0x100, 0, (u32)sheets->sheetCount << 2, 1);
+    set->sheetCount = sheets->sheetCount;
+    set->unk28 = 0;
+    set->format = sheets->format;
+    switch (sheets->format) {
+    case 0:
+        set->glFormat = 0x6752;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 0x20;
         break;
-      case 9:
-        temp_v4 = 0x6758;
-        piVar11[8] = 8;
-        piVar11[7] = 0x6760;
-        piVar11[6] = 0x6758;
+    case 1:
+        set->glFormat = 0x6754;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 0x18;
         break;
-      case 0xb:
-        temp_v4 = 0x6756;
-        piVar11[8] = 4;
-        piVar11[7] = 0x6761;
-        piVar11[6] = 0x6756;
-      }
-      if (temp_v4 != 0x6756) {
-        *(unsigned char *)(piVar11 + 9) = 1;
-      }
-      else {
-        *(unsigned char *)(piVar11 + 9) = 2;
-      }
-      temp_v4 = 0;
-      temp_v7 = 0;
-      if (temp_v7 < (unsigned int)piVar11[4]) {
-        do {
-          temp_v5 = (int)asdTextureCreate(0);
-          *(int *)(piVar11[3] + temp_v7 * 4) = temp_v5;
-          temp_v6 = *(int *)(temp_v3 + 0x14);
-          temp_v1 = *(unsigned short *)(temp_v3 + 0x10);
-          temp_v2 = *(unsigned short *)(temp_v3 + 0x12);
-          temp_v8 = piVar11[6];
-          temp_v9 = piVar11[7];
-          temp_v10 = *(unsigned int *)(temp_v3 + 4);
-          *(unsigned int *)(temp_v5 + 0x10) = 0;
-          *(unsigned int *)(temp_v5 + 0x14) = (unsigned int)temp_v1;
-          *(unsigned int *)(temp_v5 + 0x18) = (unsigned int)temp_v2;
-          *(int *)(temp_v5 + 0x1c) = temp_v8;
-          *(unsigned int *)(temp_v5 + 4) = 0xde1;
-          *(unsigned int *)(temp_v5 + 8) = 0x10000;
-          *(unsigned int *)(temp_v5 + 0xc) = 0x2000000;
-          *(int *)(temp_v5 + 0x20) = temp_v9;
-          *(int *)(temp_v5 + 0x24) = temp_v6 + temp_v4;
-          *(unsigned int *)(temp_v5 + 0x28) = temp_v10;
-          asdTextureSetImage((AsdTexture*)temp_v5);
-          temp_v7 = temp_v7 + 1;
-          temp_v4 = temp_v4 + *(int *)(temp_v3 + 4);
-        } while (temp_v7 < (unsigned int)piVar11[4]);
-      }
+    case 2:
+        set->glFormat = 0x6752;
+        set->glType = 0x8034;
+        set->bitsPerTexel = 0x10;
+        break;
+    case 3:
+        set->glFormat = 0x6754;
+        set->glType = 0x8363;
+        set->bitsPerTexel = 0x10;
+        break;
+    case 4:
+        set->glFormat = 0x6752;
+        set->glType = 0x8033;
+        set->bitsPerTexel = 0x10;
+        break;
+    case 5:
+        set->glFormat = 0x6758;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 0x10;
+        break;
+    case 8:
+        set->glFormat = 0x6756;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 8;
+        break;
+    case 9:
+        set->glFormat = 0x6758;
+        set->glType = 0x6760;
+        set->bitsPerTexel = 8;
+        break;
+    case 11:
+        set->glFormat = 0x6756;
+        set->glType = 0x6761;
+        set->bitsPerTexel = 4;
+        break;
+    default:
+        set->glFormat = 0x6756;
+        set->glType = 0x1401;
+        set->bitsPerTexel = 0;
+        return 1;
+    }
+    set->mode = set->glFormat != 0x6756 ? 1 : 2;
+    u32 offset = 0;
+    for (u32 i = 0; i < set->sheetCount; i++) {
+        AsdTexture *texture = asdTextureCreate(0);
+        set->textures[i] = texture;
+        u8 *data = sheets->data;
+        u16 width = sheets->width;
+        u16 height = sheets->height;
+        texture->image.mip.level = 0;
+        texture->dimensions.width = width;
+        texture->dimensions.height = height;
+        texture->image.format = set->glFormat;
+        texture->target = ASDTEXTURE_TARGET_2D;
+        texture->unk08 = 0x10000;
+        texture->image.flags = 0x2000000;
+        texture->image.type = set->glType;
+        texture->storage.pixels = data + offset;
+        texture->storage.unk28 = sheets->sheetBytes;
+        asdTextureSetImage(texture);
+        offset += sheets->sheetBytes;
     }
     return 1;
-  }
-  return 0;
 }
 
 } /* extern "C" */

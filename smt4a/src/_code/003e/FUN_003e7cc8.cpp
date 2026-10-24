@@ -1,137 +1,111 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e7cc8` (_code @ 0x3e7cc8, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same code size and shape as retail, but armcc lays out the group-insertion block and allocates registers differently in the two grouping loops (twin of smt4 FUN_003364d0). */
+#include "common.h"
+
+// The fields of an action record (0x1d0 bytes in Apocalypse) the grouping reads and writes.
+struct ActionRecordA {
+    u8 unk00[0x14];
+    f32 positionZ;      // 0x14
+    u8 unk18[0x2c];
+    s8 category;        // 0x44 group number, set below
+    u8 unk45[0xb];
+    u32 status;         // 0x50 bit 0: present, 0x10: player side, 0x80: active
+    u8 unk54[0x16];
+    s16 memberId;       // 0x6a
+    u8 unk6c[0xa4];
+    u32 groupKey;       // 0x110 key shared by a player-side group
+    u8 unk114[0xbc];
+};
+
+struct ActionStateA {
+    u8 unk0000[0x1ed4];
+    ActionRecordA *actions;  // 0x1ed4
+    u8 groupCount;           // 0x1ed8
+};
+
+typedef char ActionRecordALayoutCheck[sizeof(ActionRecordA) == 0x1d0 ? 1 : -1];
 
 extern "C" {
-
-int qsort(short [2], int, int, unsigned char *);
-
-extern unsigned char LAB_003d4ec0; /* 0x3d4ec0 */
-
-/* Supplied declaration required: qsort. */
-
-
-void FUN_003e7cc8(int param_1,unsigned int param_2)
-
-{
-/* irregular: 2 goto(s); 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned short *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  short *psVar9;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned short temp_v8 [2];
-  int uStack_74;
-  short asStack_70 [2];
-  unsigned int uStack_6c;
-  unsigned short temp_v9 [2];
-  unsigned int temp_v10 [17];
-  
-  temp_v5 = 0;
-  temp_v3 = 5;
-  puVar3 = temp_v8;
-  puVar1 = (unsigned int *)&uStack_74;
-  do {
-    puVar3[4] = 0xffff;
-    puVar1[2] = 0;
-    puVar1 = puVar1 + 4;
-    puVar3 = puVar3 + 8;
-    *puVar3 = 0xffff;
-    temp_v3 = temp_v3 - 1;
-    *puVar1 = 0;
-  } while (temp_v3 != 0);
-  if ((param_2 & 0x400) == 0) {
-    return;
-  }
-  temp_v3 = 4;
-LAB_003e7d24:
-  temp_v7 = *(int *)(param_1 + 0x1ed4);
-  temp_v0 = temp_v7 + temp_v3 * 0x1d0;
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x50);
-  if ((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) {
-    temp_v2 = 0;
-    if ((temp_v1 & 0x10) != 0) {
-      temp_v2 = 0;
-      do {
-        psVar9 = asStack_70 + temp_v2 * 4;
-        if (*psVar9 < 0) {
-          temp_v5 = temp_v5 + 1;
-          asStack_70[temp_v2 * 4] = *(short *)(temp_v0 + 0x6a);
-          *(unsigned int *)(psVar9 + 2) = *(unsigned int *)(temp_v0 + 0x14);
-          break;
-        }
-        temp_v4 = temp_v7 + *psVar9 * 0x1d0;
-      } while ((((*(unsigned int *)(temp_v4 + 0x50) & 0x10) == 0) ||
-               (*(int *)(temp_v4 + 0x110) != *(int *)(temp_v0 + 0x110))) &&
-              (temp_v2 = temp_v2 + 1, temp_v2 < 10));
-    }
-    else {
-      do {
-        psVar9 = asStack_70 + temp_v2 * 4;
-        if (*psVar9 < 0) {
-          temp_v5 = temp_v5 + 1;
-          asStack_70[temp_v2 * 4] = *(short *)(temp_v0 + 0x6a);
-          *(unsigned int *)(psVar9 + 2) = *(unsigned int *)(temp_v0 + 0x14);
-          break;
-        }
-        temp_v4 = temp_v7 + *psVar9 * 0x1d0;
-      } while ((((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) ||
-               (*(float *)(temp_v4 + 0x14) != *(float *)(temp_v0 + 0x14))) &&
-              (temp_v2 = temp_v2 + 1, temp_v2 < 10));
-    }
-  }
-  goto LAB_003e7dfc;
-  temp_v5 = temp_v5 + 1;
-  asStack_70[temp_v2 * 4] = *(short *)(temp_v0 + 0x6a);
-  *(unsigned int *)(psVar9 + 2) = *(unsigned int *)(temp_v0 + 0x14);
-LAB_003e7dfc:
-  temp_v3 = temp_v3 + 1;
-  if (temp_v3 >= 0x36) {
-    qsort(asStack_70,temp_v5,8,&LAB_003d4ec0);
-    temp_v3 = 4;
-    do {
-      temp_v7 = *(int *)(param_1 + 0x1ed4);
-      temp_v0 = temp_v7 + temp_v3 * 0x1d0;
-      temp_v1 = *(unsigned int *)(temp_v0 + 0x50);
-      if ((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) {
-        temp_v2 = 0;
-        do {
-          temp_v4 = (int)asStack_70[temp_v2 * 4];
-          if (temp_v4 >= 0) {
-            if (*(short *)(temp_v0 + 0x6a) == temp_v4) {
-              *(char *)(temp_v0 + 0x44) = (char)temp_v2;
-              break;
-            }
-            temp_v4 = temp_v7 + temp_v4 * 0x1d0;
-            temp_v6 = *(unsigned int *)(temp_v4 + 0x50) & 0x10;
-            if ((temp_v1 & 0x10) != 0) {
-              if ((temp_v6 != 0) && (*(int *)(temp_v4 + 0x110) == *(int *)(temp_v0 + 0x110))) {
-                *(char *)(temp_v0 + 0x44) = (char)temp_v2;
-                break;
-              }
-            }
-            else if ((temp_v6 == 0) && (*(float *)(temp_v4 + 0x14) == *(float *)(temp_v0 + 0x14))) {
-              *(char *)(temp_v0 + 0x44) = (char)temp_v2;
-              break;
-            }
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 10);
-      }
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 0x36) {
-        *(char *)(param_1 + 0x1ed8) = (char)temp_v5;
-        return;
-      }
-    } while( 1 );
-  }
-  goto LAB_003e7d24;
+void qsort(void *base, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
+s32 FUN_003d4ec0(const void *a, const void *b);
 }
 
-} /* extern "C" */
+// One group of actions that share a key (player-side actions: the group key word; others: the Z position).
+struct ActionGroup {
+    s16 member;  // 0x00 first action of the group, -1 when unused
+    u16 pad02;
+    union {
+        f32 position;  // 0x04 key of an enemy-side group
+        u32 bits;      // 0x04 the key as stored
+    };
+};
+
+// True when `other` belongs to the same group as `action`.
+static __inline bool sameGroup(ActionRecordA *other, ActionRecordA *action)
+{
+    if (action->status & 0x10) {
+        return (other->status & 0x10) != 0 && other->groupKey == action->groupKey;
+    }
+    return (other->status & 0x10) == 0 && other->positionZ == action->positionZ;
+}
+
+// Groups the active actions of a battle (indices 4..53) by their key, sorts the groups and stores each action's group
+// number; with the 0x400 flag clear nothing is done.
+extern "C" void FUN_003e7cc8(ActionStateA *state, u32 flags)
+{
+    ActionGroup groups[10];
+    u32 groupCount = 0;
+    for (s32 i = 0; i < 10; i++) {
+        groups[i].member = -1;
+        groups[i].position = 0.0f;
+    }
+    if (!(flags & 0x400))
+        return;
+
+    for (s32 index = 4; index < 54; index++) {
+        ActionRecordA *action = &state->actions[index];
+        if ((action->status & 1) && (action->status & 0x80)) {
+            if (action->status & 0x10) {
+                for (s32 g = 0; g < 10; g++) {
+                    if (groups[g].member < 0) {
+                        groupCount++;
+                        groups[g].member = action->memberId;
+                        groups[g].bits = *reinterpret_cast<u32 *>(&action->positionZ);
+                        break;
+                    }
+                    ActionRecordA *other = &state->actions[groups[g].member];
+                    if ((other->status & 0x10) && other->groupKey == action->groupKey)
+                        break;
+                }
+            } else {
+                for (s32 g = 0; g < 10; g++) {
+                    if (groups[g].member < 0) {
+                        groupCount++;
+                        groups[g].member = action->memberId;
+                        groups[g].bits = *reinterpret_cast<u32 *>(&action->positionZ);
+                        break;
+                    }
+                    ActionRecordA *other = &state->actions[groups[g].member];
+                    if (!(other->status & 0x10) && other->positionZ == action->positionZ)
+                        break;
+                }
+            }
+        }
+    }
+    qsort(groups, groupCount, sizeof(ActionGroup), FUN_003d4ec0);
+
+    for (s32 index = 4; index < 54; index++) {
+        ActionRecordA *action = &state->actions[index];
+        if ((action->status & 1) && (action->status & 0x80)) {
+            for (s32 g = 0; g < 10; g++) {
+                if (groups[g].member < 0)
+                    continue;
+                if (action->memberId == groups[g].member ||
+                    sameGroup(&state->actions[groups[g].member], action)) {
+                    action->category = g;
+                    break;
+                }
+            }
+        }
+    }
+    state->groupCount = groupCount;
+}

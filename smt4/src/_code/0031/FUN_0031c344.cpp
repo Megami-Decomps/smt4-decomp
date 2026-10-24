@@ -1,229 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c344` (_code @ 0x31c344, 0x354 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (214 vs 144 rows); retail expands each stat case with its own copies of the clamp/add code and keeps the player/unit pointers in callee-saved registers */
+#include "common.h"
+
+struct ItemEffect {
+    u8 unk00[0x60];
+    u16 effectId;           // 0x60: 0x1f..0x23 raise one of the five stats by 3
+};
 
 extern "C" {
 
-int FUN_00299370(int);
-int unitRecalculateEffectiveStats(int);
+s32 playerPadTestBit(u32 bit);
+s32 flagWordTestBit(void* unit, u32 bit);
+void* gameGetUnitRecord(void);
+void* gameGetPlayerData(void);
+void FUN_00299370(s32 arg);
+void unitRecalculateEffectiveStats(void* unit);
 
-extern int playerPadTestBit(unsigned int);
-/* Supplied declaration required: FUN_00299370. */
-/* Supplied declaration required: unitRecalculateEffectiveStats. */
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(void);
-extern int gameGetPlayerData(void);
-
-
-unsigned char FUN_0031c344(int param_1,int param_2,int param_3)
-
+static s16* statAt(void* base, u32 offset)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = 0;
-  temp_v1 = 0;
-  if (param_1 < 0) {
-    temp_v2 = gameGetPlayerData();
-    temp_v0 = playerPadTestBit(1);
-  }
-  else {
-    temp_v1 = gameGetUnitRecord();
-    if (temp_v1 == 0) {
-      return 1;
+    return reinterpret_cast<s16*>(reinterpret_cast<u8*>(base) + offset);
+}
+
+// Adds 3 (unless this is only a dry run) and keeps the stat below 1000.
+static void raiseStat(s16* stat, s32 dryRun)
+{
+    if (dryRun == 0) *stat = *stat + 3;
+    if (*stat >= 1000) *stat = 999;
+}
+
+// Raises one stat: the player's, or a unit's base and current value. Returns 1 when already capped.
+static inline u8 raiseStatPair(void* player, void* unit, u32 playerOffset, u32 baseOffset, u32 currentOffset, s32 dryRun)
+{
+    u8 noEffect = 0;
+    if (player != NULL) {
+        s16* value = statAt(player, playerOffset);
+        if (*value < 999) {
+            raiseStat(value, dryRun);
+        } else {
+            noEffect = 1;
+        }
+    } else {
+        s16* base = statAt(unit, baseOffset);
+        noEffect = *base >= 0x3e7;
+        if (!noEffect) raiseStat(base, dryRun);
+        s16* current = statAt(unit, currentOffset);
+        if (*current < 999) {
+            raiseStat(current, dryRun);
+        } else {
+            noEffect = 1;
+        }
     }
-    temp_v0 = flagWordTestBit(temp_v1,1);
-  }
-  if (temp_v0 != 0) {
-    return 1;
-  }
-  temp_v3 = 0;
-  switch(*(unsigned short *)(param_2 + 0x60)) {
-  case 0x1f:
-    if (temp_v2 != 0) {
-      if (*(short *)(temp_v2 + 0x12) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v2 + 0x12) = *(short *)(temp_v2 + 0x12) + 3;
-        }
-        if (*(short *)(temp_v2 + 0x12) >= 1000) {
-          *(unsigned short *)(temp_v2 + 0x12) = 999;
-        }
+    return noEffect;
+}
+
+// Applies a stat-raising item to a party member (player when `member` < 0). Returns 1 when it
+// had no effect (target unusable or stat already at the cap); `dryRun` only checks.
+u8 FUN_0031c344(s32 member, ItemEffect* item, s32 dryRun)
+{
+    void* player = NULL;
+    void* unit = NULL;
+    s32 blocked;
+    if (member < 0) {
+        player = gameGetPlayerData();
+        blocked = playerPadTestBit(1);
+    } else {
+        unit = gameGetUnitRecord();
+        if (unit == NULL) return 1;
+        blocked = flagWordTestBit(unit, 1);
+    }
+    if (blocked != 0) return 1;
+
+    u8 noEffect = 0;
+    switch (item->effectId) {
+    case 0x1f:
+        noEffect = raiseStatPair(player, unit, 0x12, 0x04, 0x20, dryRun);
         break;
-      }
-    }
-    else {
-      temp_v3 = *(short *)(temp_v1 + 4) >= 0x3e7;
-      if (!temp_v3) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 4) = *(short *)(temp_v1 + 4) + 3;
-        }
-        if (*(short *)(temp_v1 + 4) >= 1000) {
-          *(unsigned short *)(temp_v1 + 4) = 999;
-        }
-      }
-      if (*(short *)(temp_v1 + 0x20) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 0x20) = *(short *)(temp_v1 + 0x20) + 3;
-        }
-        if (*(short *)(temp_v1 + 0x20) >= 1000) {
-          *(unsigned short *)(temp_v1 + 0x20) = 999;
-        }
+    case 0x20:
+        noEffect = raiseStatPair(player, unit, 0x16, 0x08, 0x24, dryRun);
         break;
-      }
-    }
-    temp_v3 = 1;
-    break;
-  case 0x20:
-    if (temp_v2 != 0) {
-      if (*(short *)(temp_v2 + 0x16) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v2 + 0x16) = *(short *)(temp_v2 + 0x16) + 3;
-        }
-        if (*(short *)(temp_v2 + 0x16) >= 1000) {
-          *(unsigned short *)(temp_v2 + 0x16) = 999;
-        }
+    case 0x21:
+        noEffect = raiseStatPair(player, unit, 0x14, 0x06, 0x22, dryRun);
         break;
-      }
-    }
-    else {
-      temp_v3 = *(short *)(temp_v1 + 8) >= 0x3e7;
-      if (!temp_v3) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 8) = *(short *)(temp_v1 + 8) + 3;
-        }
-        if (*(short *)(temp_v1 + 8) >= 1000) {
-          *(unsigned short *)(temp_v1 + 8) = 999;
-        }
-      }
-      if (*(short *)(temp_v1 + 0x24) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 0x24) = *(short *)(temp_v1 + 0x24) + 3;
-        }
-        if (*(short *)(temp_v1 + 0x24) >= 1000) {
-          *(unsigned short *)(temp_v1 + 0x24) = 999;
-        }
+    case 0x22:
+        noEffect = raiseStatPair(player, unit, 0x18, 0x0a, 0x26, dryRun);
         break;
-      }
-    }
-    temp_v3 = 1;
-    break;
-  case 0x21:
-    if (temp_v2 != 0) {
-      if (*(short *)(temp_v2 + 0x14) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v2 + 0x14) = *(short *)(temp_v2 + 0x14) + 3;
-        }
-        if (*(short *)(temp_v2 + 0x14) >= 1000) {
-          *(unsigned short *)(temp_v2 + 0x14) = 999;
-        }
+    case 0x23:
+        noEffect = raiseStatPair(player, unit, 0x1a, 0x0c, 0x28, dryRun);
         break;
-      }
+    default:
+        return 1;
     }
-    else {
-      temp_v3 = *(short *)(temp_v1 + 6) >= 0x3e7;
-      if (!temp_v3) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 6) = *(short *)(temp_v1 + 6) + 3;
+    if (dryRun == 0 && noEffect == 0) {
+        if (player != NULL) {
+            FUN_00299370(0);
+        } else {
+            unitRecalculateEffectiveStats(unit);
         }
-        if (*(short *)(temp_v1 + 6) >= 1000) {
-          *(unsigned short *)(temp_v1 + 6) = 999;
-        }
-      }
-      if (*(short *)(temp_v1 + 0x22) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 0x22) = *(short *)(temp_v1 + 0x22) + 3;
-        }
-        if (*(short *)(temp_v1 + 0x22) >= 1000) {
-          *(unsigned short *)(temp_v1 + 0x22) = 999;
-        }
-        break;
-      }
     }
-    temp_v3 = 1;
-    break;
-  case 0x22:
-    if (temp_v2 != 0) {
-      if (*(short *)(temp_v2 + 0x18) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v2 + 0x18) = *(short *)(temp_v2 + 0x18) + 3;
-        }
-        if (*(short *)(temp_v2 + 0x18) >= 1000) {
-          *(unsigned short *)(temp_v2 + 0x18) = 999;
-        }
-        break;
-      }
-    }
-    else {
-      temp_v3 = *(short *)(temp_v1 + 10) >= 0x3e7;
-      if (!temp_v3) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 10) = *(short *)(temp_v1 + 10) + 3;
-        }
-        if (*(short *)(temp_v1 + 10) >= 1000) {
-          *(unsigned short *)(temp_v1 + 10) = 999;
-        }
-      }
-      if (*(short *)(temp_v1 + 0x26) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 0x26) = *(short *)(temp_v1 + 0x26) + 3;
-        }
-        if (*(short *)(temp_v1 + 0x26) >= 1000) {
-          *(unsigned short *)(temp_v1 + 0x26) = 999;
-        }
-        break;
-      }
-    }
-    temp_v3 = 1;
-    break;
-  case 0x23:
-    if (temp_v2 != 0) {
-      if (*(short *)(temp_v2 + 0x1a) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v2 + 0x1a) = *(short *)(temp_v2 + 0x1a) + 3;
-        }
-        if (*(short *)(temp_v2 + 0x1a) >= 1000) {
-          *(unsigned short *)(temp_v2 + 0x1a) = 999;
-        }
-        break;
-      }
-    }
-    else {
-      temp_v3 = *(short *)(temp_v1 + 0xc) >= 0x3e7;
-      if (!temp_v3) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 0xc) = *(short *)(temp_v1 + 0xc) + 3;
-        }
-        if (*(short *)(temp_v1 + 0xc) >= 1000) {
-          *(unsigned short *)(temp_v1 + 0xc) = 999;
-        }
-      }
-      if (*(short *)(temp_v1 + 0x28) < 999) {
-        if (param_3 == 0) {
-          *(short *)(temp_v1 + 0x28) = *(short *)(temp_v1 + 0x28) + 3;
-        }
-        if (*(short *)(temp_v1 + 0x28) >= 1000) {
-          *(unsigned short *)(temp_v1 + 0x28) = 999;
-        }
-        break;
-      }
-    }
-    temp_v3 = 1;
-    break;
-  default:
-    return 1;
-  }
-  if (param_3 == 0 && temp_v3 == 0) {
-    if (temp_v2 != 0) {
-      FUN_00299370(0);
-    }
-    else {
-      unitRecalculateEffectiveStats(temp_v1);
-    }
-  }
-  return temp_v3;
+    return noEffect;
 }
 
 } /* extern "C" */

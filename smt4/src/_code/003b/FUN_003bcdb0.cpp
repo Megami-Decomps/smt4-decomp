@@ -1,139 +1,172 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bcdb0` (_code @ 0x3bcdb0, 0x338 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests the nine ailment bits one by one (tst/tsteq chains after a bic of the alternate bit, repeated at both uses) and keeps the status as an unreduced halfword (uxth at each use); armcc folds our mask test into one bic/bics pair (174 rows against 206). Logic, offsets and the linked-record updates follow retail. */
+#include "common.h"
+
+#define STATUS_BIT_ALT 0x10
+#define STATUS_BIT_SLEEP 0x2
+#define STATUS_BIT_A 0x40
+#define STATUS_BIT_B 0x80
+#define STATUS_BIT_C 0x100
+#define STATUS_BIT_D 0x8
+#define STATUS_CLEAR_ON_ENTRY 0x400
+#define ENTRY_FLAG_DOWN 0x20
+#define ENTRY_FLAG_SLEEPING 0x2
+#define ENTRY_FLAG_WOKEN 0x1
+#define ENTRY_FLAG_ASLEEP_LOCKED 0x10
+
+/* A status word kept in a linked record. */
+struct BtlStatusRecord {
+    u8 unk00[0x44];
+    u16 status;
+};
+
+struct BtlStatusRecordB {
+    u8 unk00[0x72];
+    u16 status;
+};
+
+/* The part of a battle entry from 0x100 on (observed field). */
+struct BtlEntryLower {
+    /* 0x00 */ u8 unk00[0xC6];
+    /* 0xC6 */ u16 status;
+};
+
+/* A battle entry (observed fields). */
+struct BtlEntry {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0xFC];
+    /* 0x100 */ BtlEntryLower lower;
+    /* 0x1C8 */ u8 unk1C8[0xB0];
+    /* 0x278 */ BtlStatusRecordB *linkedA;
+    /* 0x27C */ BtlStatusRecord *linkedB;
+    /* 0x280 */ BtlStatusRecord *linkedC;
+};
+
+/* Per-entry records and counters of the battle state (observed fields). */
+struct BtlStateRecords {
+    /* 0x0000 */ u8 unk0000[0x1E98];
+    /* 0x1E98 */ u8 *records;
+    /* 0x1E9C */ u8 unk1E9C[0x128];
+    /* 0x1FC4 */ u16 woken;
+};
+
+/* The ailment bits of a status word (everything but the alternate bit and bit 0). */
+#define STATUS_AILMENT_MASK 0x7EE
 
 extern "C" {
 
-int btlTargetSetFlag10(unsigned int *, int, int);
-int btlMainFindEntryByListedId(...);
-int btlGetMainState(void);
-int FUN_0033b1ac(unsigned int *, int);
+void btlTargetSetFlag10(BtlStateRecords *state, s32 id, s32 value);
+BtlEntry *btlMainFindEntryByListedId(BtlStateRecords *state, s32 id);
+BtlStateRecords *btlGetMainState(void);
+BtlStatusRecord *gameGetUnitRecord(s32 index);
+u16 FUN_00245cc0(s32 kind);
+void FUN_0033b1ac(BtlStateRecords *state, s32 value);
 
-/* Supplied declaration required: btlTargetSetFlag10. */
-extern unsigned short FUN_00245cc0(unsigned int);
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: btlGetMainState. */
-extern int gameGetUnitRecord(void);
-/* Supplied declaration required: FUN_0033b1ac. */
-
-
-void FUN_003bcdb0(int param_1,int param_2,unsigned short param_3)
-
+/* Sets (set != 0) or clears the status bits `status` on the entry with the listed id, mirroring them
+ * to its linked records; entries past 0x6D are unit records. */
+void FUN_003bcdb0(s32 id, s32 set, u16 status)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  puVar3 = (unsigned int *)btlGetMainState();
-  puVar4 = puVar3;
-  btlMainFindEntryByListedId(puVar3,param_1);
-  if (puVar4 != (unsigned int *)0x0) {
-    if ((*puVar4 & 0x20) == 0) {
-      if (param_2 != 0) {
-        if ((((param_3 & 2) != 0 || (param_3 & 0x20) != 0) ||
-            ((param_3 & 0x40) != 0 || (param_3 & 0x80) != 0)) ||
-           (((param_3 & 0x100) != 0 || (param_3 & 0x200) != 0 ||
-            (((param_3 & 0x400) != 0 || (param_3 & 4) != 0) || (param_3 & 8) != 0)))) {
-          btlTargetSetFlag10(puVar3,param_1,0);
+    BtlStateRecords *state = btlGetMainState();
+    BtlEntry *entry = btlMainFindEntryByListedId(state, id);
+
+    if (entry != NULL) {
+        if ((entry->flags & ENTRY_FLAG_DOWN) == 0) {
+            if (set != 0) {
+                if ((status & ~STATUS_BIT_ALT & STATUS_AILMENT_MASK) != 0) {
+                    btlTargetSetFlag10(state, id, 0);
+                }
+                entry->lower.status = entry->lower.status | status;
+                if (entry->linkedA != NULL) {
+                    u16 value = entry->linkedA->status | status;
+
+                    entry->linkedA->status = value;
+                    entry->linkedA->status = value & ~STATUS_CLEAR_ON_ENTRY;
+                }
+                if (entry->linkedB != NULL) {
+                    entry->linkedB->status = entry->linkedB->status | status;
+                }
+                if (entry->linkedC != NULL) {
+                    entry->linkedC->status = entry->linkedC->status | status;
+                }
+                if ((entry->flags & ENTRY_FLAG_SLEEPING) != 0) {
+                    entry->lower.status = entry->lower.status & ~STATUS_CLEAR_ON_ENTRY;
+                }
+                if ((entry->flags & ENTRY_FLAG_ASLEEP_LOCKED) != 0) {
+                    entry->lower.status = entry->lower.status & ~STATUS_CLEAR_ON_ENTRY;
+                    return;
+                }
+            } else {
+                entry->lower.status = entry->lower.status & ~status;
+                if (entry->linkedA != NULL) {
+                    entry->linkedA->status = entry->linkedA->status & ~status;
+                }
+                if (entry->linkedB != NULL) {
+                    entry->linkedB->status = entry->linkedB->status & ~status;
+                }
+                if (entry->linkedC != NULL) {
+                    entry->linkedC->status = entry->linkedC->status & ~status;
+                }
+                if ((status & STATUS_BIT_B) != 0) {
+                    u16 value = FUN_00245cc0(22);
+                    BtlStateRecords *other = btlGetMainState();
+                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+
+                    if (target != NULL) {
+                        *(u16 *)((u8 *)target + 0x9E) = value;
+                    }
+                }
+                if ((status & STATUS_BIT_A) != 0) {
+                    u16 value = FUN_00245cc0(23);
+                    BtlStateRecords *other = btlGetMainState();
+                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+
+                    if (target != NULL) {
+                        *(u16 *)((u8 *)target + 0xA0) = value;
+                    }
+                }
+                if ((status & STATUS_BIT_C) != 0) {
+                    u16 value = FUN_00245cc0(24);
+                    BtlStateRecords *other = btlGetMainState();
+                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+
+                    if (target != NULL) {
+                        *(u16 *)((u8 *)target + 0xA2) = value;
+                    }
+                }
+                if ((status & STATUS_BIT_D) != 0) {
+                    u16 value = FUN_00245cc0(25);
+                    BtlStateRecords *other = btlGetMainState();
+                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+
+                    if (target != NULL) {
+                        *(u16 *)((u8 *)target + 0xA4) = value;
+                    }
+                }
+                if ((status & STATUS_BIT_SLEEP) != 0 && (entry->flags & ENTRY_FLAG_SLEEPING) != 0) {
+                    u8 *record;
+
+                    entry->flags |= ENTRY_FLAG_WOKEN;
+                    record = btlGetMainState()->records + id * 0x114;
+                    *(u32 *)(record + 0x50) |= 0x81;
+                    FUN_0033b1ac(state, *(s16 *)(record + 0x62));
+                    state->woken++;
+                    return;
+                }
+            }
         }
-        *(unsigned short *)((int)puVar4 + 0x1c6) = *(unsigned short *)((int)puVar4 + 0x1c6) | param_3;
-        if (puVar4[0x9e] != 0) {
-          temp_v0 = *(unsigned short *)(puVar4[0x9e] + 0x72) | param_3;
-          *(unsigned short *)(puVar4[0x9e] + 0x72) = temp_v0;
-          *(unsigned short *)(puVar4[0x9e] + 0x72) = temp_v0 & 0xfbff;
+    } else if (id - 0x6D >= 0) {
+        BtlStatusRecord *record = gameGetUnitRecord(id - 0x6D);
+
+        if (record != NULL) {
+            if (set == 0) {
+                record->status = record->status & ~status;
+            } else {
+                if ((status & ~STATUS_BIT_ALT & STATUS_AILMENT_MASK) != 0) {
+                    record->status = record->status & ~STATUS_BIT_ALT;
+                }
+                record->status = record->status | status;
+            }
         }
-        if (puVar4[0x9f] != 0) {
-          *(unsigned short *)(puVar4[0x9f] + 0x44) = *(unsigned short *)(puVar4[0x9f] + 0x44) | param_3;
-        }
-        if (puVar4[0xa0] != 0) {
-          *(unsigned short *)(puVar4[0xa0] + 0x44) = *(unsigned short *)(puVar4[0xa0] + 0x44) | param_3;
-        }
-        if ((*puVar4 & 2) != 0) {
-          *(unsigned short *)((int)puVar4 + 0x1c6) = *(unsigned short *)((int)puVar4 + 0x1c6) & 0xfbff;
-        }
-        if ((*puVar4 & 0x10) != 0) {
-          *(unsigned short *)((int)puVar4 + 0x1c6) = *(unsigned short *)((int)puVar4 + 0x1c6) & 0xfbff;
-          return;
-        }
-      }
-      else {
-        *(unsigned short *)((int)puVar4 + 0x1c6) = *(unsigned short *)((int)puVar4 + 0x1c6) & ~param_3;
-        temp_v2 = puVar4[0x9e];
-        if (temp_v2 != 0) {
-          *(unsigned short *)(temp_v2 + 0x72) = *(unsigned short *)(temp_v2 + 0x72) & ~param_3;
-        }
-        temp_v2 = puVar4[0x9f];
-        if (temp_v2 != 0) {
-          *(unsigned short *)(temp_v2 + 0x44) = *(unsigned short *)(temp_v2 + 0x44) & ~param_3;
-        }
-        temp_v2 = puVar4[0xa0];
-        if (temp_v2 != 0) {
-          *(unsigned short *)(temp_v2 + 0x44) = *(unsigned short *)(temp_v2 + 0x44) & ~param_3;
-        }
-        if ((param_3 & 0x80) != 0) {
-          temp_v1 = FUN_00245cc0(0x16);
-          temp_v3 = btlGetMainState();
-          btlMainFindEntryByListedId(temp_v3,param_1);
-          if (temp_v3 != 0) {
-            *(unsigned short *)(temp_v3 + 0x9e) = temp_v1;
-          }
-        }
-        if ((param_3 & 0x40) != 0) {
-          temp_v1 = FUN_00245cc0(0x17);
-          temp_v3 = btlGetMainState();
-          btlMainFindEntryByListedId(temp_v3,param_1);
-          if (temp_v3 != 0) {
-            *(unsigned short *)(temp_v3 + 0xa0) = temp_v1;
-          }
-        }
-        if ((param_3 & 0x100) != 0) {
-          temp_v1 = FUN_00245cc0(0x18);
-          temp_v3 = btlGetMainState();
-          btlMainFindEntryByListedId(temp_v3,param_1);
-          if (temp_v3 != 0) {
-            *(unsigned short *)(temp_v3 + 0xa2) = temp_v1;
-          }
-        }
-        if ((param_3 & 8) != 0) {
-          temp_v1 = FUN_00245cc0(0x19);
-          temp_v3 = btlGetMainState();
-          btlMainFindEntryByListedId(temp_v3,param_1);
-          if (temp_v3 != 0) {
-            *(unsigned short *)(temp_v3 + 0xa4) = temp_v1;
-          }
-        }
-        if (((param_3 & 2) != 0) && ((*puVar4 & 2) != 0)) {
-          *puVar4 = *puVar4 | 1;
-          temp_v3 = btlGetMainState();
-          temp_v3 = *(int *)(temp_v3 + 0x1e98) + param_1 * 0x114;
-          *(unsigned int *)(temp_v3 + 0x50) = *(unsigned int *)(temp_v3 + 0x50) | 0x81;
-          FUN_0033b1ac(puVar3,(int)*(short *)(temp_v3 + 0x62));
-          *(short *)(puVar3 + 0x7f1) = (short)puVar3[0x7f1] + 1;
-          return;
-        }
-      }
     }
-  }
-  else if ((-1 < param_1 - 0x6d) && (temp_v3 = gameGetUnitRecord(), temp_v3 != 0)) {
-    if (param_2 == 0) {
-      param_3 = *(unsigned short *)(temp_v3 + 0x44) & ~param_3;
-    }
-    else {
-      if (((((param_3 & 2) != 0 || (param_3 & 0x20) != 0) ||
-           ((param_3 & 0x40) != 0 || (param_3 & 0x80) != 0)) ||
-          ((param_3 & 0x100) != 0 || (param_3 & 0x200) != 0)) ||
-         (((param_3 & 0x400) != 0 || (param_3 & 4) != 0) || (param_3 & 8) != 0)) {
-        *(unsigned short *)(temp_v3 + 0x44) = *(unsigned short *)(temp_v3 + 0x44) & 0xffef;
-      }
-      param_3 = *(unsigned short *)(temp_v3 + 0x44) | param_3;
-    }
-    *(unsigned short *)(temp_v3 + 0x44) = param_3;
-  }
-  return;
 }
 
 } /* extern "C" */

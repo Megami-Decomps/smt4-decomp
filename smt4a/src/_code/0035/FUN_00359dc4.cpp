@@ -1,131 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00359dc4` (_code @ 0x359dc4, 0x25c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail emits two nop {0} hints after most calls, tail-calls nothing (returns 0 through r7) and splits the timer loop float arguments into hoisted s16/s17; built tail-calls overlayIsNotBusy/linkHolderApplyFlag and lacks the hints */
+#include "common.h"
+
+struct StatusScene {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 resources;
+};
+
+struct LinkHolder {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u8 controller[0x10];
+    /* 0x1C */ u32 handle;
+};
+
+struct StatusCharacter {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ u8 ready;
+    /* 0x23 */ u8 unk23[0x1F];
+    /* 0x42 */ u8 preset;
+};
+
+struct StatusDevil {
+    /* 0x00 */ u8 unk00[0x90];
+    /* 0x90 */ s16 modelId;
+};
+
+struct StatusResource {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ u32 state;
+};
+
+struct StatusTimer {
+    /* 0x00 */ u8 work[0x0C];
+    /* 0x0C */ s32 frame;
+    /* 0x10 */ u32 unk10;
+};
+
+struct StatusScreen {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ LinkHolder *links;
+    /* 0x008 */ StatusCharacter *character;
+    /* 0x00C */ StatusDevil *devil;
+    /* 0x010 */ StatusTimer timers[2];
+    /* 0x038 */ u8 unk038[0x14];
+    /* 0x04C */ StatusResource *active;
+    /* 0x050 */ StatusResource *resource;
+    /* 0x054 */ u32 resourceSize;
+    /* 0x058 */ u32 resourceExtra;
+    /* 0x05C */ u8 unk05C[0x9C];
+    /* 0x0F8 */ s32 state;
+    /* 0x0FC */ s32 stateArg;
+    /* 0x100 */ u8 unk100[0xE];
+    /* 0x10E */ u8 ready;
+    /* 0x10F */ u8 unk10F[4];
+    /* 0x113 */ u8 confirmSe;
+    /* 0x114 */ u8 unk114[0x80];
+    /* 0x194 */ u8 resourcesReleased;
+};
 
 extern "C" {
+void sysPlaySe(s32 id);
+void FUN_00182054(void);
+void FUN_00275bc8(StatusResource *resource, u32 size);
+void linkHolderApplyFlag(LinkHolder *links, s32 flag);
+void FUN_002e1c94(void *work, s32 count, u32 frame, f32 start, f32 end);
+void FUN_002e207c(void);
+void FUN_002e2114(void);
+void FUN_002e2184(StatusScene *scene, u32 playerData);
+StatusScene *overlayGetStatusScene(void);
+u32 overlayGetBuffer1(void);
+s32 buttonHelpGetPanelMode(void);
+void overlayIsNotBusy(void);
+void controllerApplyPreset(LinkHolder *links, s32 preset);
+void screenStartOrClear(u32 buffer, s32 frames);
+void characterInfoPanelPopulate(StatusDevil *devil, StatusCharacter *character, u32 extra);
+s32 devilIsTextureLoaded(s32 modelId, s32 arg);
+void resourceEntryMarkReleased(u32 resources, s32 index);
+void FUN_003e5c68(u32 handle, void *controller);
+u32 gameGetPlayerData(void);
 
-int sysPlaySe(int);
-int FUN_00182054(void);
-int FUN_00275bc8(int, unsigned int);
-int linkHolderApplyFlag(...);
-int FUN_002e1c94(int, int, unsigned int);
-int FUN_002e207c(void);
-int FUN_002e2114(void);
-int FUN_002e2184(unsigned int, unsigned int);
-int overlayGetStatusScene(void);
-int overlayIsNotBusy(void);
-int controllerApplyPreset(unsigned int, int);
-int screenStartOrClear(unsigned int, int);
-int characterInfoPanelPopulate(unsigned int, unsigned int, unsigned int);
-int devilIsTextureLoaded(int, int);
-int resourceEntryMarkReleased(unsigned int, int);
-int FUN_003e5c68(unsigned int, int);
-
-/* Supplied declaration required: sysPlaySe. */
-extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00182054. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: linkHolderApplyFlag. */
-/* Supplied declaration required: FUN_002e1c94. */
-/* Supplied declaration required: FUN_002e207c. */
-/* Supplied declaration required: FUN_002e2114. */
-/* Supplied declaration required: FUN_002e2184. */
-/* Supplied declaration required: overlayGetStatusScene. */
-extern int buttonHelpGetPanelMode(void);
-extern unsigned int overlayGetBuffer1(void);
-/* Supplied declaration required: overlayIsNotBusy. */
-/* Supplied declaration required: controllerApplyPreset. */
-/* Supplied declaration required: screenStartOrClear. */
-/* Supplied declaration required: characterInfoPanelPopulate. */
-/* Supplied declaration required: devilIsTextureLoaded. */
-/* Supplied declaration required: resourceEntryMarkReleased. */
-/* Supplied declaration required: FUN_003e5c68. */
-
-
-void FUN_00359dc4(int param_1)
-
+/* Once the demon model and the panel resources are loaded, populates the character info panel and
+ * starts its screen; otherwise clears the link holder's flag. */
+u32 FUN_00359dc4(StatusScreen *screen)
 {
-/* irregular: 16 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  if ((*(char *)(param_1 + 0x10e) == '\0') &&
-     ((temp_v0 = (int)*(short *)(*(int *)(param_1 + 0xc) + 0x90), temp_v0 == 0 ||
-      (devilIsTextureLoaded(temp_v0,1), temp_v0 != 0)))) {
-    if (*(char *)(param_1 + 0x194) == '\0') {
-      temp_v0 = overlayGetStatusScene();
-      resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),0);
-      temp_v0 = overlayGetStatusScene();
-      resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),1);
-      temp_v0 = overlayGetStatusScene();
-      resourceEntryMarkReleased(*(unsigned int *)(temp_v0 + 0x1c),2);
-      temp_v1 = gameGetPlayerData();
-      temp_v2 = overlayGetStatusScene();
-      FUN_002e2184(temp_v2,temp_v1);
-      overlayGetStatusScene();
-      FUN_002e207c();
-      *(unsigned char *)(param_1 + 0x194) = 1;
+    if (screen->ready != 0)
+        return 0;
+    s32 modelId = screen->devil->modelId;
+    if (modelId != 0) {
+        devilIsTextureLoaded(modelId, 1);
+        if (modelId == 0)
+            return 0;
     }
-    temp_v3 = *(int *)(param_1 + 4);
+
+    if (screen->resourcesReleased == 0) {
+        resourceEntryMarkReleased(overlayGetStatusScene()->resources, 0);
+        resourceEntryMarkReleased(overlayGetStatusScene()->resources, 1);
+        resourceEntryMarkReleased(overlayGetStatusScene()->resources, 2);
+        u32 playerData = gameGetPlayerData();
+        FUN_002e2184(overlayGetStatusScene(), playerData);
+        overlayGetStatusScene();
+        FUN_002e207c();
+        screen->resourcesReleased = 1;
+    }
+    LinkHolder *links = screen->links;
     FUN_002e2114();
-    temp_v0 = 0;
-    if (temp_v3 != 0) {
-      temp_v0 = *(int *)(param_1 + 0x50);
-    }
-    if (temp_v3 != 0 && temp_v0 != 0) {
-      temp_v5 = *(int *)(param_1 + 0x54) != 0;
-      temp_v0 = 0;
-      if (temp_v5) {
-        temp_v0 = *(int *)(param_1 + 0x58);
-      }
-      if (temp_v5 && temp_v0 != 0) {
-        temp_v4 = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 8) + 0x22);
+    if (links != NULL && screen->resource != NULL && screen->resourceSize != 0 && screen->resourceExtra != 0) {
+        u32 ready = screen->character->ready;
         FUN_00182054();
-        if ((temp_v4 != 0) &&
-           ((temp_v0 = (int)*(short *)(*(int *)(param_1 + 0xc) + 0x90), temp_v0 == 0 ||
-            (devilIsTextureLoaded(temp_v0,1), temp_v0 != 0)))) {
-          temp_v0 = *(int *)(param_1 + 0x50);
-          FUN_00275bc8(temp_v0,*(unsigned int *)(param_1 + 0x54));
-          *(int *)(param_1 + 0x4c) = temp_v0;
-          *(unsigned int *)(temp_v0 + 0x108) = 2;
-          *(unsigned char *)(param_1 + 0x10e) = 1;
-          linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),1);
-          controllerApplyPreset(*(unsigned int *)(param_1 + 4),*(unsigned char *)(*(int *)(param_1 + 8) + 0x42));
-          characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
-                       *(unsigned int *)(param_1 + 0x58));
-          temp_v0 = buttonHelpGetPanelMode();
-          if (temp_v0 == 0) {
-            temp_v1 = overlayGetBuffer1();
-            screenStartOrClear(temp_v1,0xf);
-          }
-          if (*(char *)(param_1 + 0x113) != '\0') {
-            sysPlaySe(0xe4);
-            *(unsigned int *)(param_1 + 0xf8) = 2;
-          }
-          else {
-            *(unsigned int *)(param_1 + 0xf8) = 5;
-            *(unsigned int *)(param_1 + 0xfc) = 1;
-            FUN_003e5c68(*(unsigned int *)(*(int *)(param_1 + 4) + 0x1c),*(int *)(param_1 + 4) + 0xc);
-          }
-          temp_v0 = 0;
-          do {
-            temp_v3 = param_1 + temp_v0 * 0x14;
-            FUN_002e1c94(temp_v3 + 0x10,4,*(unsigned int *)(temp_v3 + 0x1c));
-            temp_v0 = temp_v0 + 1;
-            *(int *)(temp_v3 + 0x1c) = *(int *)(temp_v3 + 0x1c) + 1;
-          } while (temp_v0 < 2);
-          overlayIsNotBusy();
-          return;
+        if (ready != 0) {
+            modelId = screen->devil->modelId;
+            if (modelId == 0 || (devilIsTextureLoaded(modelId, 1), modelId != 0)) {
+                StatusResource *resource = screen->resource;
+                FUN_00275bc8(resource, screen->resourceSize);
+                screen->active = resource;
+                resource->state = 2;
+                screen->ready = 1;
+                linkHolderApplyFlag(screen->links, 1);
+                controllerApplyPreset(screen->links, screen->character->preset);
+                characterInfoPanelPopulate(screen->devil, screen->character, screen->resourceExtra);
+                if (buttonHelpGetPanelMode() == 0)
+                    screenStartOrClear(overlayGetBuffer1(), 0xF);
+                if (screen->confirmSe != 0) {
+                    sysPlaySe(0xE4);
+                    screen->state = 2;
+                } else {
+                    screen->state = 5;
+                    screen->stateArg = 1;
+                    FUN_003e5c68(screen->links->handle, screen->links->controller);
+                }
+                for (s32 i = 0; i < 2; i++) {
+                    FUN_002e1c94(screen->timers[i].work, 4, screen->timers[i].frame, 0.0f, 1.0f);
+                    screen->timers[i].frame++;
+                }
+                overlayIsNotBusy();
+                return 0;
+            }
         }
-      }
     }
-    linkHolderApplyFlag(*(unsigned int *)(param_1 + 4),0);
-  }
-  return;
+    linkHolderApplyFlag(screen->links, 0);
+    return 0;
 }
 
 } /* extern "C" */

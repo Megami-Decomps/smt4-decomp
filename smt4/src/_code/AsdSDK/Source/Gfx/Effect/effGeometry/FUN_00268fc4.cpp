@@ -1,117 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00268fc4` (_code @ 0x268fc4, 0x208 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same code and calls; retail keeps the memAlloc stack constants 1 and 16 in r5/r8 stored with two str under a 12-byte frame (push without sl), armcc here uses sl/r5 with one stm and an 8-byte frame, and in the buffer path loads the default tint with ldm/stm after the pointer add while armcc adds the pointer first. */
+#include "classes/EffGeomRecord.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct EffGeomTintRgb { u32 value[3]; };
+
+/* A geometry buffer object (referenced by a buffer-style handle). */
+struct EffGeomBuffer {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 vertexCount;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ u32 flags;      /* 0x80000: carries the default tint */
+    /* 0x18 */ u8 unk18[0x28];
+    /* 0x40 */ EffGeomTintRgb tint;
+    /* 0x4C */ u32 tintW;
+    /* 0x50 */ u8 unk50[0x10];
+    /* 0x60 */ u32 unk60;
+    /* 0x64 */ u8 unk64[0x50];
+    /* 0xB4 */ void *shared;   /* reference counted */
+};
+
+/* A geometry handle as the clone sees it: a record-style handle (record at +8) or a buffer-style one
+ * (tag bit 0x200, buffer at +12). */
+struct EffGeomCloneHandle {
+    /* 0x00 */ u16 tag;
+    /* 0x02 */ u16 vertexCount;
+    /* 0x04 */ void *shared;   /* reference counted */
+    /* 0x08 */ EffGeomRecord *record;
+    /* 0x0C */ EffGeomBuffer *buffer;
+    /* 0x10 */ u8 unk10[0x44];
+    /* 0x54 */ u32 unk54;
+};
+
+/* The default tint of a buffer-style geometry. */
+struct EffGeomDefaultTint {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ EffGeomTintRgb tint;
+    /* 0x1C */ u32 w;
+};
 
 extern "C" {
+extern const char DAT_00414954[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
+extern EffGeomDefaultTint DAT_004737f8;
 
-int effGeomBufferCreate(unsigned int, unsigned int, int);
-int recordPrepareActive(unsigned int, int, int, unsigned int);
-int refCountIncrement(void);
-int asdOperatorNew(int, unsigned short *);
-int memAlloc(int, int, int, int, int, int);
+void *memAlloc(int, int, int, s32 size, int align, int);
+EffGeomBuffer *effGeomBufferCreate(u32 vertexCount, u32 flags, s32 arg);
+void recordPrepareActive(EffGeomRecord *record, u32 first, u32 second, u32 third);
+void refCountIncrement(void *shared);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned int DAT_00473808; /* 0x473808 */
-extern unsigned int DAT_0047380c; /* 0x47380c */
-extern unsigned int DAT_00473810; /* 0x473810 */
-extern unsigned int DAT_00473814; /* 0x473814 */
-
-/* Supplied declaration required: effGeomBufferCreate. */
-/* Supplied declaration required: recordPrepareActive. */
-extern unsigned int _ZN13EffGeomRecordC1Ev(void);
-/* Supplied declaration required: refCountIncrement. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memAlloc. */
-
-
-unsigned short * FUN_00268fc4(unsigned short *param_1)
-
+/* Makes a copy of a geometry handle: buffer-style handles get a new buffer with the same size and
+ * flags, record-style handles a new record with the same index list. Shared data is referenced again. */
+EffGeomCloneHandle *FUN_00268fc4(EffGeomCloneHandle *source)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  
-  temp_v0 = *param_1;
-  if ((temp_v0 & 0x200) != 0) {
-    temp_v4 = *(unsigned int *)(*(int *)(param_1 + 6) + 0x14);
-    temp_v5 = *(unsigned int *)(*(int *)(param_1 + 6) + 4) & 0xffff;
-    puVar3 = (unsigned short *)0x10000;
-    memAlloc(0x10000,0x100,0,0x58,0x10,1);
-    *puVar3 = 0x300;
-    puVar3[1] = 0;
-    effGeomBufferCreate(temp_v5,temp_v4,0);
-    *(unsigned int *)(puVar3 + 6) = temp_v5;
-    temp_v1 = DAT_00473810;
-    temp_v7 = DAT_0047380c;
-    temp_v6 = DAT_00473808;
-    if ((temp_v4 & 0x80000) != 0) {
-      *(unsigned int *)(temp_v5 + 0x4c) = DAT_00473814;
-      *(unsigned int *)(temp_v5 + 0x40) = temp_v6;
-      *(unsigned int *)(temp_v5 + 0x44) = temp_v7;
-      *(unsigned int *)(temp_v5 + 0x48) = temp_v1;
+    u16 tag = source->tag;
+    EffGeomCloneHandle *copy;
+    if ((tag & 0x200) != 0) {
+        EffGeomBuffer *original = source->buffer;
+        u16 vertexCount = original->vertexCount;
+        u32 flags = original->flags;
+        asdDebugTrace(DAT_00414954, 221);
+        copy = (EffGeomCloneHandle *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
+        copy->tag = 0x300;
+        copy->vertexCount = 0;
+        EffGeomBuffer *buffer = effGeomBufferCreate(vertexCount, flags, 0);
+        copy->buffer = buffer;
+        if ((flags & 0x80000) != 0) {
+            buffer->tint = DAT_004737f8.tint;
+            buffer->tintW = DAT_004737f8.w;
+        }
+        copy->buffer->unk60 = 0;
+        void *shared = source->buffer->shared;
+        if (shared != NULL) {
+            copy->buffer->shared = shared;
+            refCountIncrement(shared);
+        }
+    } else {
+        EffGeomRecord *original = source->record;
+        u32 vertexCount = original->state.unk0C;
+        u32 triangles = original->state.unk14;
+        asdDebugTrace(DAT_00414954, 112);
+        copy = (EffGeomCloneHandle *)memAlloc(0x10000, 0x100, 0, 0x58, 0x10, 1);
+        EffGeomRecord *record = new ((s32)source) EffGeomRecord;
+        recordPrepareActive(record, 0x25, triangles * 3, vertexCount);
+        copy->tag = tag;
+        copy->record = record;
+        copy->vertexCount = vertexCount;
+        copy->unk54 = 0xA5;
+        void *shared = source->shared;
+        if (shared != NULL) {
+            copy->shared = shared;
+            refCountIncrement(shared);
+        }
+        for (u32 i = 0; i < source->record->state.unk18; i++)
+            copy->record->vertices[i] = source->record->vertices[i];
     }
-    *(unsigned int *)(*(int *)(puVar3 + 6) + 0x60) = 0;
-    if (*(int *)(*(int *)(param_1 + 6) + 0xb4) != 0) {
-      *(int *)(*(int *)(puVar3 + 6) + 0xb4) = *(int *)(*(int *)(param_1 + 6) + 0xb4);
-      refCountIncrement();
-    }
-  }
-  else {
-    temp_v6 = *(unsigned int *)(*(int *)(param_1 + 4) + 0xc);
-    temp_v8 = *(int *)(*(int *)(param_1 + 4) + 0x14);
-    puVar3 = (unsigned short *)0x10000;
-    memAlloc(0x10000,0x100,0,0x58,0x10,1);
-    temp_v2 = 0x7e8;
-    asdOperatorNew(0x7e8,param_1);
-    if (temp_v2 == 0) {
-      temp_v7 = 0;
-    }
-    else {
-      temp_v7 = _ZN13EffGeomRecordC1Ev();
-    }
-    recordPrepareActive(temp_v7,0x25,temp_v8 * 3,temp_v6);
-    *puVar3 = temp_v0;
-    *(unsigned int *)(puVar3 + 4) = temp_v7;
-    puVar3[1] = (unsigned short)temp_v6;
-    puVar3[0x2a] = 0xa5;
-    puVar3[0x2b] = 0;
-    if (*(int *)(param_1 + 2) != 0) {
-      *(int *)(puVar3 + 2) = *(int *)(param_1 + 2);
-      refCountIncrement();
-    }
-    temp_v4 = *(unsigned int *)(*(int *)(param_1 + 4) + 0x18);
-    temp_v5 = 0;
-    if ((temp_v4 != 0) && (temp_v5 = temp_v4 & 1, temp_v5 == 1)) {
-      **(unsigned short **)(*(int *)(puVar3 + 4) + 0x48) =
-           **(unsigned short **)(*(int *)(param_1 + 4) + 0x48);
-    }
-    if (temp_v5 < *(unsigned int *)(*(int *)(param_1 + 4) + 0x18)) {
-      do {
-        temp_v3 = temp_v5 * 2 + 2;
-        temp_v2 = temp_v5 * 2;
-        temp_v8 = temp_v5 * 2;
-        temp_v5 = temp_v5 + 2;
-        *(unsigned short *)(*(int *)(*(int *)(puVar3 + 4) + 0x48) + temp_v8) =
-             *(unsigned short *)(*(int *)(*(int *)(param_1 + 4) + 0x48) + temp_v2);
-        *(unsigned short *)(*(int *)(*(int *)(puVar3 + 4) + 0x48) + temp_v3) =
-             *(unsigned short *)(*(int *)(*(int *)(param_1 + 4) + 0x48) + temp_v3);
-      } while (temp_v5 < *(unsigned int *)(*(int *)(param_1 + 4) + 0x18));
-    }
-  }
-  return puVar3;
+    return copy;
 }
 
 } /* extern "C" */

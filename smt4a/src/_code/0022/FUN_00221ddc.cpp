@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail 63 vs built 62 rows; packed-color construction and rectangle argument scheduling differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 17 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -22,7 +22,7 @@ void FUN_00221ddc(const void *rectangle)
                 (((packed >> 16) & 0xff) << 8) | alpha;
     FUN_0016c4b8(g_renderCtx, 0);
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     FUN_0014e314(color, color, color, color,
                 box->left, box->top, box->right - box->left, box->bottom - box->top, 1.0f);
     renderStackPop(&g_renderCtx->stackA);

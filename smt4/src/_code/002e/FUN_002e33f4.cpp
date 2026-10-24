@@ -1,179 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e33f4` (_code @ 0x2e33f4, 0x2e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the player/unit duplicated accessors are expanded in another order than retail and the status-bit scan branches differ; the item effect logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002485d4(int, unsigned short [8]);
-int objectFlagSetBit(int, int);
-int FUN_0026e630(void);
-int passiveSkillLookupRecord(void);
-int FUN_00283f30(unsigned short [8], int);
-int FUN_00295c60(int, int);
-int dataTable9EntryOrZero(int);
-int playerPadSetBit(int);
+/* The skill/item effect record (only the fields read here). */
+typedef struct EffectRecord {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u16 kind;                /* 0xB: ailment guard, 0xC: halve value */
+    /* 0x62 */ u8 unk62[0x12];
+    /* 0x74 */ u16 percentGain;
+    /* 0x76 */ u16 unk76;
+} EffectRecord;
 
-typedef struct fn_002e33f4_arg0 fn_002e33f4_arg0;
-typedef struct fn_002e33f4_arg1 fn_002e33f4_arg1;
-struct fn_002e33f4_arg0 {
-    unsigned char pad_0x0[0x2c];
-    short field_0x2c; /* +0x2c */
-    unsigned char pad_0x2e[0x2];
-    undefined4 field_0x30; /* +0x30 */
-    unsigned char pad_0x34[0x12];
-    ushort field_0x46; /* +0x46 */
-    byte field_0x48; /* +0x48 */
-    unsigned char pad_0x49[0x17];
-    unsigned char field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x13];
-    unsigned char field_0x74; /* +0x74 */
-    unsigned char pad_0x75[0x1];
-    byte field_0x76; /* +0x76 */
-};
-struct fn_002e33f4_arg1 {
-    unsigned char pad_0x0[0x60];
-    ushort field_0x60; /* +0x60 */
-    unsigned char pad_0x62[0x12];
-    ushort field_0x74; /* +0x74 */
-    ushort field_0x76; /* +0x76 */
-};
+typedef struct PassiveSkill {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 flags;               /* 0x1000000: blocks the guard */
+} PassiveSkill;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
+/* A party unit (only the fields used here). */
+typedef struct EffectUnit {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ s16 value;
+    /* 0x2E */ u8 unk2e[2];
+    /* 0x30 */ u32 gauge;
+    /* 0x34 */ u8 unk34[0x12];
+    /* 0x46 */ u16 id;
+    /* 0x48 */ u8 level;
+    /* 0x49 */ u8 unk49[0x2D];
+    /* 0x76 */ u8 tier;
+} EffectUnit;
 
-/* Supplied declaration required: FUN_002485d4. */
-/* Supplied declaration required: objectFlagSetBit. */
-/* Supplied declaration required: FUN_0026e630. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: FUN_00283f30. */
-/* Supplied declaration required: FUN_00295c60. */
-extern int FUN_00295cec(void);
-extern int playerPadTestBit(unsigned int);
-/* Supplied declaration required: dataTable9EntryOrZero. */
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(void);
-extern int gameGetPlayerData(void);
-extern unsigned int randNextInRange(unsigned int);
-/* Supplied declaration required: playerPadSetBit. */
+s32 randNextInRange(u32 limit);
+EffectUnit *gameGetUnitRecord(void);
+EffectUnit *gameGetPlayerData(void);
+void FUN_00283f30(u16 skills[8], s32 arg);
+void FUN_002485d4(EffectUnit *unit, u16 skills[8]);
+s32 playerPadTestBit(u32 bit);
+s32 flagWordTestBit(EffectUnit *unit, u32 bit);
+void playerPadSetBit(u32 bit);
+void objectFlagSetBit(EffectUnit *unit, u32 bit);
+PassiveSkill *passiveSkillLookupRecord(u32 id);
+u32 dataTable9EntryOrZero(u32 tier);
+u32 FUN_00295c60(u32 id, u32 level);
+s32 FUN_00295cec(void);
+void FUN_0026e630(void);
 
-
-unsigned int FUN_002e33f4(fn_002e33f4_arg0 *param_1,fn_002e33f4_arg1 *param_2,int param_3,int param_4)
-
+/* Applies (or, with `dryRun`, only tests) the effect record `effect` on the unit `index` (a
+ * negative index is the player): halving the value, guarding with a status bit, growing the gauge
+ * by a percent of its cap. Returns 0 when something changed (or would), 1 otherwise. */
+u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
 {
-/* irregular: 1 goto(s); 8 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned short temp_v6 [8];
-  int temp_v7;
-  
-  temp_v4 = 0;
-  temp_v3 = 0;
-  if ((int)param_1 < 0) {
-    temp_v4 = gameGetPlayerData();
-  }
-  else {
-    temp_v3 = gameGetUnitRecord();
-    if (temp_v3 == 0) {
-      return 1;
+    EffectUnit *player = NULL;
+    EffectUnit *unit = NULL;
+    u32 result = 1;
+
+    if (index < 0) {
+        player = gameGetPlayerData();
+    } else {
+        unit = gameGetUnitRecord();
+        if (unit == NULL) {
+            return 1;
+        }
     }
-  }
-  temp_v5 = 1;
-  if (param_4 == 0) {
-    if (param_2->field_0x60 != 0xb) {
-      if ((!(param_2->field_0x60 != 0xc || param_3 != 0)) &&
-         (temp_v2 = randNextInRange(99), 0x18 >= temp_v2)) {
-        if (temp_v4 != 0) {
-          temp_v0 = *(short *)(temp_v4 + 0x2c);
+    if (dryRun == 0) {
+        if (effect->kind == 0xB) {
+            if (previewOnly == 0 && randNextInRange(99) <= 24) {
+                u16 skills[8];
+                s32 guarded;
+
+                if (player != NULL) {
+                    FUN_00283f30(skills, 0);
+                    guarded = playerPadTestBit(5);
+                } else {
+                    FUN_002485d4(unit, skills);
+                    guarded = flagWordTestBit(unit, 5);
+                }
+                if (guarded == 0) {
+                    bool blocked = false;
+
+                    for (s32 i = 0; i < 8; i++) {
+                        PassiveSkill *skill = passiveSkillLookupRecord(skills[i]);
+
+                        if (skill != NULL && (skill->flags & 0x1000000) != 0) {
+                            blocked = true;
+                            break;
+                        }
+                    }
+                    if (!blocked) {
+                        if (player != NULL) {
+                            playerPadSetBit(5);
+                        } else {
+                            objectFlagSetBit(unit, 5);
+                        }
+                        result = 0;
+                    }
+                }
+            }
+        } else if (effect->kind == 0xC && previewOnly == 0 && randNextInRange(99) <= 24) {
+            EffectUnit *target = player != NULL ? player : unit;
+
+            target->value = target->value / 2;
+            result = 0;
         }
-        else {
-          temp_v0 = *(short *)(temp_v3 + 0x2c);
-        }
-        if (temp_v4 != 0) {
-          *(short *)(temp_v4 + 0x2c) = temp_v0 / 2;
-        }
-        else {
-          *(short *)(temp_v3 + 0x2c) = temp_v0 / 2;
-        }
-        temp_v5 = 0;
-      }
     }
-    else if ((param_3 == 0) && (temp_v2 = randNextInRange(99), 0x18 >= temp_v2)) {
-      if (temp_v4 != 0) {
-        FUN_00283f30(temp_v6,0);
-        temp_v1 = playerPadTestBit(5);
-      }
-      else {
-        FUN_002485d4(temp_v3,temp_v6);
-        temp_v1 = flagWordTestBit(temp_v3,5);
-      }
-      if (temp_v1 == 0) {
-        temp_v1 = 0;
-        temp_v7 = 1;
-        do {
-          temp_v2 = (unsigned int)temp_v6[temp_v1];
-          passiveSkillLookupRecord();
-          if ((temp_v2 != 0) && ((*(unsigned int *)(temp_v2 + 0x38) & 0x1000000) != 0)) goto LAB_002e354c;
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 8);
-        if (temp_v7 != 0) {
-          if (temp_v4 != 0) {
-            playerPadSetBit(5);
-          }
-          else {
-            objectFlagSetBit(temp_v3,5);
-          }
-          temp_v5 = 0;
+    if (effect->percentGain != 0
+        && ((player != NULL && dataTable9EntryOrZero(player->tier) != player->gauge)
+            || (unit != NULL && FUN_00295c60(unit->id, unit->level) != unit->gauge))) {
+        if (dryRun == 0) {
+            if (player != NULL) {
+                player->gauge += (s32)(effect->percentGain * dataTable9EntryOrZero(player->tier)) / 100;
+                if (dataTable9EntryOrZero(player->tier) < player->gauge) {
+                    player->gauge = dataTable9EntryOrZero(player->tier);
+                }
+            } else if (unit != NULL) {
+                unit->gauge += (s32)(effect->percentGain * FUN_00295c60(unit->id, unit->level)) / 100;
+                if (FUN_00295c60(unit->id, unit->level) < unit->gauge) {
+                    unit->gauge = FUN_00295c60(unit->id, unit->level);
+                }
+            }
         }
-      }
+        result = 0;
     }
-  }
-LAB_002e354c:
-  if ((param_2->field_0x74 != 0) &&
-     (((temp_v4 != 0 &&
-       (temp_v1 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76)), temp_v1 != *(int *)(temp_v4 + 0x30))) ||
-      ((temp_v3 != 0 &&
-       (temp_v1 = FUN_00295c60(*(unsigned short *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x48)),
-       temp_v1 != *(int *)(temp_v3 + 0x30))))))) {
-    if (param_4 == 0) {
-      if (temp_v4 != 0) {
-        temp_v3 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76));
-        *(int *)(temp_v4 + 0x30) =
-             (int)((unsigned int)param_2->field_0x74 * temp_v3) / 100 + *(int *)(temp_v4 + 0x30);
-        temp_v2 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76));
-        if (temp_v2 < *(unsigned int *)(temp_v4 + 0x30)) {
-          temp_v5 = dataTable9EntryOrZero(*(unsigned char *)(temp_v4 + 0x76));
-          *(unsigned int *)(temp_v4 + 0x30) = temp_v5;
+    if (effect->unk76 != 0 && player != NULL && FUN_00295cec() != 9999) {
+        if (dryRun == 0) {
+            FUN_0026e630();
         }
-      }
-      else if (temp_v3 != 0) {
-        temp_v1 = FUN_00295c60(*(unsigned short *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x48));
-        *(int *)(temp_v3 + 0x30) =
-             *(int *)(temp_v3 + 0x30) + (int)((unsigned int)param_2->field_0x74 * temp_v1) / 100;
-        temp_v2 = FUN_00295c60(*(unsigned short *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x48));
-        if (temp_v2 < *(unsigned int *)(temp_v3 + 0x30)) {
-          temp_v5 = FUN_00295c60(*(unsigned short *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x48));
-          *(unsigned int *)(temp_v3 + 0x30) = temp_v5;
-        }
-      }
+        result = 0;
     }
-    temp_v5 = 0;
-  }
-  if ((param_2->field_0x76 != 0 && temp_v4 != 0) && (temp_v4 = FUN_00295cec(), temp_v4 != 9999)) {
-    if (param_4 == 0) {
-      FUN_0026e630();
+    if (previewOnly == 0) {
+        result = 0;
     }
-    temp_v5 = 0;
-  }
-  if (param_3 == 0) {
-    temp_v5 = 0;
-  }
-  return temp_v5;
+    return result;
 }
 
-} /* extern "C" */
+}

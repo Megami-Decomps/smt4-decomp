@@ -1,142 +1,131 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d2ea0` (_code @ 0x3d2ea0, 0x2c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the constants 1, 30 and 27 into r9/r7/sl, reads g_btlScriptUnit as the word after g_btlAction (r8 + 4), and shares the FUN_0022a5d8 call between the 0x80 and entry-flag branches while keeping the 0x100 branch's own call; this build gives each branch the same shape. */
+#include "common.h"
+
+/* The combatant record of an action: its id is at 0x62. */
+struct ActionRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ s16 id;
+};
+
+/* The combatant entry of an action; the first flag word says what state it is in. */
+struct ActionEntry {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u32 flagsHigh;
+};
+
+struct ActionActor {
+    /* 0x00 */ u8 unk00[0xFA];
+    /* 0xFA */ u16 pending;
+};
+
+/* What a combatant is about to do. */
+struct ActionWork {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x1C];
+    /* 0x20 */ ActionEntry *entry;
+    /* 0x24 */ ActionRecord *record;
+    /* 0x28 */ ActionActor *actor;
+    /* 0x2C */ s32 member;
+};
+
+struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x84];
+    /* 0x0084 */ s32 actorIndex;
+    /* 0x0088 */ u8 unk0088[0x4418];
+    /* 0x44A0 */ u32 stateFlags;
+    /* 0x44A4 */ u8 unk44A4[0x524];
+    /* 0x49C8 */ s32 retreating;
+};
+
+struct BattleTurn {
+    /* 0x00 */ BattleState *state;
+};
+
+/* One script slot of the battle (0xF1C bytes each); the byte at 9 is its command. */
+struct ScriptSlot {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 command;
+    /* 0x0A */ u8 unk0A[0xF12];
+};
 
 extern "C" {
+extern ScriptSlot *g_btlScriptUnit; /* directly after g_btlAction */
+extern void *g_btlUiBlock;
 
-int btlEntryValuesCopy(int *, unsigned int *);
-int FUN_00227b14(...);
-int FUN_002296f4(...);
-int FUN_0022a5d8(...);
-int FUN_002550d8(...);
-int FUN_002569ac(int *, unsigned int);
-int FUN_0026beb4(...);
-int FUN_003c0484(...);
+void FUN_002569ac(BattleTurn *turn, s32 bank);
+void btlEntryValuesCopy(BattleTurn *turn, ActionWork *work);
+void FUN_00227b14(void *ui, u16 member, s32 mode);
+void FUN_0022a5d8(s32 effect, ActionEntry *entry, s32 mode);
+void FUN_0026beb4(s32 chance, ActionWork *work, s32 a, ActionRecord *record, s32 b);
+void FUN_002296f4(BattleTurn *turn, ActionWork *work, s32 id, s32 a, s32 b, s32 c);
+s32 battleGetEntryHalfword(s32 id, s32 index);
+void FUN_002550d8(s32 id, s32 stat, s32 delta, s32 preview);
+s32 randRange(s32 range);
+void FUN_003c0484(ActionEntry *entry, s32 conditions, s32 context);
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: btlEntryValuesCopy. */
-/* Supplied declaration required: FUN_00227b14. */
-/* Supplied declaration required: FUN_002296f4. */
-/* Supplied declaration required: FUN_0022a5d8. */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_002550d8. */
-extern int battleGetEntryHalfword(int, unsigned int);
-/* Supplied declaration required: FUN_002569ac. */
-/* Supplied declaration required: FUN_0026beb4. */
-/* Supplied declaration required: FUN_003c0484. */
-
-
-unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
-
+/* Starts the action of a combatant whose turn came: picks the response its pending flags call for. */
+u32 FUN_003d2ea0(BattleTurn *turn, ActionWork *work)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  unsigned int *puVar7;
-  unsigned int temp_v5;
-  
-  FUN_002569ac(param_1,*(unsigned int *)(*param_1 + 0x84));
-  btlEntryValuesCopy(param_1,param_2);
-  temp_v0 = *(unsigned short *)(param_2[10] + 0xfa);
-  if ((*param_2 & 0x1080) == 0) {
-    temp_v5 = 0x32;
-  }
-  else {
-    temp_v5 = 0;
-  }
-  if ((temp_v0 & 0x80) != 0) {
-    if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
-      FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
+    FUN_002569ac(turn, turn->state->actorIndex);
+    btlEntryValuesCopy(turn, work);
+    u16 pending = work->actor->pending;
+    s32 chance = 0;
+    if ((work->flags & 0x1080) == 0) {
+        chance = 0x32;
     }
-    puVar5 = (unsigned int *)param_2[8];
-    temp_v1 = 0xb;
-    FUN_0022a5d8(temp_v1,puVar5,1);
-    FUN_0026beb4(temp_v5,param_2,0,param_2[9],1);
-    FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),0,0x1e,0x1e);
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
-  }
-  else if ((temp_v0 & 0x100) != 0) {
-    if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
-      FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
-    }
-    puVar5 = (unsigned int *)param_2[8];
-    temp_v1 = 0xc;
-    FUN_0022a5d8(temp_v1,puVar5,1);
-    FUN_0026beb4(temp_v5,param_2,0,param_2[9],1);
-    FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),0,0x1e,0x1e);
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
-  }
-  else if ((*(unsigned int *)param_2[8] & 0x60000) != 0) {
-    if ((*(unsigned int *)param_2[8] & 0x30) == 0) {
-      FUN_00227b14(g_btlUiBlock,(short)param_2[0xb],0);
-    }
-    temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x15);
-    puVar5 = (unsigned int *)param_2[8];
-    if ((*puVar5 & 0x20000) != 0) {
-      FUN_0022a5d8(0xd,puVar5,1);
-    }
-    else {
-      if (temp_v2 == 2) {
-        temp_v1 = 0xe;
-      }
-      else {
-        temp_v1 = 0xf;
-      }
-      FUN_0022a5d8(temp_v1,puVar5,1);
-    }
-    FUN_0026beb4(temp_v5,param_2,0,param_2[9],1);
-    FUN_002296f4(param_1,param_2,(int)*(short *)(param_2[9] + 0x62),0,0x1e,0x1e);
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1b;
-  }
-  else {
-    if ((temp_v0 & 0x40) == 0) {
-      return 1;
-    }
-    temp_v2 = randRange(99);
-    if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x40000) == 0) && (temp_v2 < 0x32)) {
-      FUN_003c0484(param_2[8],0,1);
-      if ((*(unsigned int *)param_2[8] & 0x30) != 0) {
-        if (*(int *)(*param_1 + 0x49c8) == 0) {
-          temp_v3 = 2;
+    s32 effect = 0;
+    if (pending & 0x80) {
+        if ((work->entry->flags & 0x30) == 0) {
+            FUN_00227b14(g_btlUiBlock, (u16)work->member, 0);
         }
-        else {
-          temp_v3 = 3;
+        effect = 0xb;
+    } else if (pending & 0x100) {
+        if ((work->entry->flags & 0x30) == 0) {
+            FUN_00227b14(g_btlUiBlock, (u16)work->member, 0);
         }
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = temp_v3;
-      }
-      else {
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 1;
-      }
+        effect = 0xc;
+    } else if (work->entry->flags & 0x60000) {
+        if ((work->entry->flags & 0x30) == 0) {
+            FUN_00227b14(g_btlUiBlock, (u16)work->member, 0);
+        }
+        s32 value = battleGetEntryHalfword(work->record->id, 0x15);
+        if (work->entry->flags & 0x20000) {
+            effect = 0xd;
+        } else {
+            effect = value == 2 ? 0xe : 0xf;
+        }
     }
-    else {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x11;
+    if (effect != 0) {
+        FUN_0022a5d8(effect, work->entry, 1);
+        FUN_0026beb4(chance, work, 0, work->record, 1);
+        FUN_002296f4(turn, work, work->record->id, 0, 0x1e, 0x1e);
+        g_btlScriptUnit[turn->state->actorIndex].command = 0x1b;
+    } else {
+        if ((pending & 0x40) == 0) {
+            return 1;
+        }
+        s32 roll = randRange(99);
+        if ((turn->state->stateFlags & 0x40000) == 0 && roll < 0x32) {
+            FUN_003c0484(work->entry, 0, 1);
+            if (work->entry->flags & 0x30) {
+                g_btlScriptUnit[turn->state->actorIndex].command = turn->state->retreating == 0 ? 2 : 3;
+            } else {
+                g_btlScriptUnit[turn->state->actorIndex].command = 1;
+            }
+        } else {
+            g_btlScriptUnit[turn->state->actorIndex].command = 0x11;
+        }
     }
-  }
-  if ((*(unsigned int *)param_2[8] & 0x60000) != 0) {
-    FUN_002550d8((int)*(short *)(param_2[9] + 0x62),0x15,0xffffffff,0);
-    temp_v2 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x15);
-    if (temp_v2 == 0) {
-      puVar7 = (unsigned int *)param_2[8];
-      temp_v4 = *puVar7;
-      *puVar7 = temp_v4 & 0xfffdffff;
-      puVar5 = (unsigned int *)param_2[8];
-      puVar5[1] = puVar7[1];
-      *puVar5 = temp_v4 & 0xfff9ffff;
+    if (work->entry->flags & 0x60000) {
+        FUN_002550d8(work->record->id, 0x15, -1, 0);
+        if (battleGetEntryHalfword(work->record->id, 0x15) == 0) {
+            ActionEntry *entry = work->entry;
+            u32 flags = entry->flags;
+            entry->flags = flags & 0xfffdffff;
+            work->entry->flagsHigh = entry->flagsHigh;
+            work->entry->flags = flags & 0xfff9ffff;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

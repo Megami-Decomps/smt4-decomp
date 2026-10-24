@@ -1,138 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cb64c` (_code @ 0x4cb64c, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail rewrites the untouched high word of the 64-bit entry flags (ldr/str of +0x5C) around every flag update and keeps the battle state in r5/the id table in r7; ours updates only the low word (146 rows against 147). */
+#include "common.h"
+
+#define ENTRY_PENDING_SPAWN 0x01
+#define ENTRY_ACTIVE 0x02
+#define ENTRY_DELAY 0x04
+#define ENTRY_DELAY_HELD 0x08
+#define ENTRY_REGISTER_ID 0x10
+#define ENTRY_ID_KNOWN 0x100
+#define ENTRY_ID_SHOWN 0x200
+#define ENTRY_ID_BOTH 0x300
+
+/* A combatant slot in the battle state (0x1D0 bytes). */
+struct BtlSlotFlags {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[4];
+    /* 0x58 */ u32 state;
+    /* 0x5C */ u8 unk5C[0x174];
+};
+
+struct BtlSlotBattle {
+    /* 0x0000 */ u8 unk0000[0x1ED4];
+    /* 0x1ED4 */ BtlSlotFlags *slots;
+};
+
+/* A battle entry being spawned (observed prefix). */
+struct BtlSpawnEntry {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u32 delay;
+    /* 0x4C */ u8 unk4C[0xC];
+    /* 0x58 */ u64 flags;
+    /* 0x60 */ u8 unk60[0xA];
+    /* 0x6A */ s16 tableIndex;
+};
+
+/* The id table the entry's subject is looked up in. */
+struct BtlIdTable {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 requestId;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 ids[1];
+};
 
 extern "C" {
 
-int FUN_001568f8(...);
-int uiInsertIdInFirstFreeSlot(...);
-int valueSlotsInsert(...);
-int aocHandleButtons(...);
-int btlEnsureEnemyDrawResources(...);
-int btlUiAddRequest(...);
-int battleEffectInitializeVariant(...);
-int FUN_004f7924(...);
-int FUN_004f7fe8(...);
+extern void *g_btlUiBlock;
+extern void *g_btlAux;
 
-typedef struct fn_004cb64c_arg1 fn_004cb64c_arg1;
-struct fn_004cb64c_arg1 {
-    unsigned char pad_0x0[0x48];
-    undefined4 field_0x48; /* +0x48 */
-    unsigned char pad_0x4c[0xc];
-    void *field_0x58; /* +0x58 */
-    undefined4 field_0x5c; /* +0x5c */
-    unsigned char pad_0x60[0xa];
-    short field_0x6a; /* +0x6a */
-};
+s32 idSetFindSubjectIndex(BtlSlotBattle *battle, BtlSpawnEntry *entry);
+BtlIdTable *FUN_001568f8(BtlSlotBattle *battle, s32 index);
+s32 uiHasEntryId(BtlSlotBattle *battle, u32 id);
+u32 FUN_00409fe8(u32 id, s32 flag);
+void valueSlotsInsert(BtlSlotBattle *battle, u32 value);
+void uiInsertIdInFirstFreeSlot(BtlSlotBattle *battle, s32 id);
+u32 stateEntryFindById(BtlSlotBattle *battle, u32 id);
+s32 nkdwLoaderParse(u32 state);
+void aocHandleButtons(u32 state, s32 mode);
+s32 FUN_003fce08(u32 state, s32 flag);
+void btlEnsureEnemyDrawResources(u32 state, s32 flag);
+void btlUiAddRequest(void *block, u32 request);
+void FUN_004f7fe8(void *aux, BtlSpawnEntry *entry, u32 id);
+void FUN_004f7924(void *aux, BtlSpawnEntry *entry);
+void battleEffectInitializeVariant(BtlSlotBattle *battle, BtlSpawnEntry *entry);
 
-extern unsigned int g_btlAux; /* 0x573808 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: FUN_001568f8. */
-extern unsigned int stateEntryFindById(int, unsigned int);
-/* Supplied declaration required: uiInsertIdInFirstFreeSlot. */
-extern int idSetFindSubjectIndex(int, fn_004cb64c_arg1 *);
-extern int uiHasEntryId(int, unsigned int);
-/* Supplied declaration required: valueSlotsInsert. */
-/* Supplied declaration required: aocHandleButtons. */
-extern int FUN_003fce08(unsigned int, unsigned int);
-/* Supplied declaration required: btlEnsureEnemyDrawResources. */
-extern int nkdwLoaderParse(unsigned int);
-extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
-/* Supplied declaration required: btlUiAddRequest. */
-/* Supplied declaration required: battleEffectInitializeVariant. */
-/* Supplied declaration required: FUN_004f7924. */
-/* Supplied declaration required: FUN_004f7fe8. */
-
-
-void FUN_004cb64c(int param_1,fn_004cb64c_arg1 *param_2)
-
+/* Drops the delay flag once the entry no longer has to wait. */
+static inline void releaseDelay(BtlSpawnEntry *entry)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  if (((unsigned int)param_2->field_0x58 & 1) != 0) {
-    temp_v0 = 0;
-    do {
-      temp_v3 = *(int *)(param_1 + 0x1ed4) + temp_v0 * 0x1d0;
-      if (((*(unsigned int *)(temp_v3 + 0x50) & 1) != 0) && ((*(unsigned int *)(temp_v3 + 0x58) & 2) != 0)) {
-        return;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x6d);
-    param_2->field_0x58 = (void *)(((unsigned int)param_2->field_0x58 & 0xfffffffe) | 0x12);
-  }
-  if (((unsigned int)param_2->field_0x58 & 2) != 0) {
-    if (((unsigned int)param_2->field_0x58 & 0x10) != 0) {
-      temp_v0 = idSetFindSubjectIndex(param_1,param_2);
-      if (temp_v0 < 0) {
-        temp_v0 = 0;
-      }
-      temp_v3 = param_1;
-      FUN_001568f8(param_1,(int)param_2->field_0x6a);
-      temp_v3 = temp_v3 + temp_v0 * 4;
-      temp_v0 = uiHasEntryId(param_1,*(unsigned int *)(temp_v3 + 0xc));
-      if (temp_v0 != 0) {
-        param_2->field_0x5c = param_2->field_0x5c;
-        param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x300);
-      }
-      else {
-        param_2->field_0x5c = param_2->field_0x5c;
-        param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 & 0xfffffcff);
-        temp_v1 = FUN_00409fe8(*(unsigned int *)(temp_v3 + 0xc),1);
-        valueSlotsInsert(param_1,temp_v1);
-        uiInsertIdInFirstFreeSlot(param_1,(int)(short)*(unsigned int *)(temp_v3 + 0xc));
-      }
-      param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 & 0xffffffef);
+    if ((entry->flags & ENTRY_DELAY) != 0 && (entry->flags & ENTRY_DELAY_HELD) == 0) {
+        entry->delay = 0;
+        entry->flags &= ~(u64)ENTRY_DELAY;
     }
-    temp_v0 = idSetFindSubjectIndex(param_1,param_2);
-    if (temp_v0 < 0) {
-      temp_v0 = 0;
-    }
-    temp_v3 = param_1;
-    FUN_001568f8(param_1,(int)param_2->field_0x6a);
-    temp_v0 = temp_v3 + temp_v0 * 4;
-    temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v0 + 0xc));
-    if (((unsigned int)param_2->field_0x58 & 0x100) == 0) {
-      temp_v2 = nkdwLoaderParse(temp_v1);
-      if (temp_v2 == 0) {
-        if ((((unsigned int)param_2->field_0x58 & 4) != 0) && (((unsigned int)param_2->field_0x58 & 8) == 0)) {
-          param_2->field_0x48 = 0;
-          param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 & 0xfffffffb);
+}
+
+/* Advances a battle entry spawn: waits for the battle's slots, registers the subject's id, loads
+ * its data and draw resources, then starts its request and effect. */
+void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
+{
+    BtlIdTable *table;
+    u32 id;
+    u32 state;
+    s32 index;
+    s32 i;
+
+    if ((entry->flags & ENTRY_PENDING_SPAWN) != 0) {
+        for (i = 0; i < 0x6D; i++) {
+            BtlSlotFlags *slot = &battle->slots[i];
+
+            if ((slot->flags & 1) != 0 && (slot->state & 2) != 0) {
+                return;
+            }
         }
-        return;
-      }
-      param_2->field_0x5c = param_2->field_0x5c;
-      param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x100);
-      aocHandleButtons(temp_v1,7);
+        entry->flags = (entry->flags & ~(u64)ENTRY_PENDING_SPAWN) | 0x12;
     }
-    if (((unsigned int)param_2->field_0x58 & 0x200) == 0) {
-      temp_v2 = FUN_003fce08(temp_v1,1);
-      if (temp_v2 != 0) {
-        btlEnsureEnemyDrawResources(temp_v1,1);
-        param_2->field_0x5c = param_2->field_0x5c;
-        param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 | 0x200);
-        btlUiAddRequest(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
-        FUN_004f7fe8(g_btlAux,param_2,*(unsigned int *)(temp_v0 + 0xc));
-        FUN_004f7924(g_btlAux,param_2);
-        battleEffectInitializeVariant(param_1,param_2);
-      }
+    if ((entry->flags & ENTRY_ACTIVE) != 0) {
+        if ((entry->flags & ENTRY_REGISTER_ID) != 0) {
+            index = idSetFindSubjectIndex(battle, entry);
+            if (index < 0) {
+                index = 0;
+            }
+            table = FUN_001568f8(battle, entry->tableIndex);
+            id = table->ids[index];
+            if (uiHasEntryId(battle, id) != 0) {
+                entry->flags |= ENTRY_ID_BOTH;
+            } else {
+                entry->flags &= ~(u64)ENTRY_ID_BOTH;
+                valueSlotsInsert(battle, FUN_00409fe8(id, 1));
+                uiInsertIdInFirstFreeSlot(battle, (s16)id);
+            }
+            entry->flags &= ~(u64)ENTRY_REGISTER_ID;
+        }
+        index = idSetFindSubjectIndex(battle, entry);
+        if (index < 0) {
+            index = 0;
+        }
+        table = FUN_001568f8(battle, entry->tableIndex);
+        id = table->ids[index];
+        state = stateEntryFindById(battle, id);
+        if ((entry->flags & ENTRY_ID_KNOWN) == 0) {
+            if (nkdwLoaderParse(state) == 0) {
+                releaseDelay(entry);
+                return;
+            }
+            entry->flags |= ENTRY_ID_KNOWN;
+            aocHandleButtons(state, 7);
+        }
+        if ((entry->flags & ENTRY_ID_SHOWN) == 0) {
+            if (FUN_003fce08(state, 1) == 0) {
+                releaseDelay(entry);
+                return;
+            }
+            btlEnsureEnemyDrawResources(state, 1);
+            entry->flags |= ENTRY_ID_SHOWN;
+        }
+        btlUiAddRequest(g_btlUiBlock, table->requestId);
+        FUN_004f7fe8(g_btlAux, entry, id);
+        FUN_004f7924(g_btlAux, entry);
+        battleEffectInitializeVariant(battle, entry);
     }
-    else {
-      btlUiAddRequest(g_btlUiBlock,*(unsigned short *)(temp_v3 + 2));
-      FUN_004f7fe8(g_btlAux,param_2,*(unsigned int *)(temp_v0 + 0xc));
-      FUN_004f7924(g_btlAux,param_2);
-      battleEffectInitializeVariant(param_1,param_2);
-    }
-  }
-  if ((((unsigned int)param_2->field_0x58 & 4) != 0) && (((unsigned int)param_2->field_0x58 & 8) == 0)) {
-    param_2->field_0x48 = 0;
-    param_2->field_0x58 = (void *)((unsigned int)param_2->field_0x58 & 0xfffffffb);
-  }
-  return;
+    releaseDelay(entry);
 }
 
 } /* extern "C" */

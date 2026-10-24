@@ -37,7 +37,7 @@ extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002ed258. */
 /* Supplied declaration required: strHolderAssignU32. */
 /* Supplied declaration required: strHolderAssignOneWide. */
-extern int *FUN_002eff58(int, int);
+extern int *_ZN9Obj5588ecC1Ej(int, int);
 extern int FUN_002eff84(void);
 
 
@@ -58,7 +58,7 @@ int * FUN_002f3624(int param_1,unsigned int param_2,int param_3)
     if (temp_v0 == 0) {
       return (int *)0x0;
     }
-    piVar2 = (int *)FUN_002eff58(temp_v0,*(int *)(param_1 + 0x10) + 6);
+    piVar2 = (int *)_ZN9Obj5588ecC1Ej(temp_v0,*(int *)(param_1 + 0x10) + 6);
     if (piVar2 == (int *)0x0) {
       return (int *)0x0;
     }

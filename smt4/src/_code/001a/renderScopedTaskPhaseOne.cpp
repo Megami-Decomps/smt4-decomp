@@ -1,4 +1,3 @@
-/* NON_MATCHING: shared render-stack push entry-address scheduling and scratch allocation differ; -O2 candidate. */
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
 

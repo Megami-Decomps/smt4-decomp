@@ -27,7 +27,7 @@ extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
 /* Supplied declaration required: strHolderAssignOneWide. */
 extern int *arrayElementAddress_002efa50(int, unsigned int);
-extern int *FUN_002eff58(int, unsigned int);
+extern int *_ZN9Obj5588ecC1Ej(int, unsigned int);
 extern int FUN_002eff84(void);
 extern int *FUN_002eff90(int, unsigned int);
 /* Supplied declaration required: FUN_002effdc. */
@@ -75,7 +75,7 @@ void FUN_00107b28(int param_1)
     if (temp_v4 == 0) {
       return;
     }
-    piVar7 = (int *)FUN_002eff58(temp_v4,0xfe);
+    piVar7 = (int *)_ZN9Obj5588ecC1Ej(temp_v4,0xfe);
     if (piVar7 == (int *)0x0) {
       return;
     }
@@ -126,7 +126,7 @@ void FUN_00107b28(int param_1)
         if (temp_v5 == 0) {
           return;
         }
-        piVar7 = (int *)FUN_002eff58(temp_v5,0xfe);
+        piVar7 = (int *)_ZN9Obj5588ecC1Ej(temp_v5,0xfe);
         if (piVar7 == (int *)0x0) {
           return;
         }

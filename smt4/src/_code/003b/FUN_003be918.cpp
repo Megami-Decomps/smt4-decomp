@@ -1,187 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003be918` (_code @ 0x3be918, 0x224 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same operations and call order as retail; retail keeps the 0.0f term in s22, the attacker/target ids in r6/r8 and the skill bonus in r8 across the attack-info copy, and moves base/rate with one vmov.f64; the build allocates r6-r9/fp and s17-s21 differently. */
+#include "common.h"
 
-extern "C" {
-
-int CONCAT44(double, unsigned int);
-int FUN_0022a690(...);
-int selectionCopySupportedValue(...);
-int FUN_0023ea94(...);
-int FUN_00247478(...);
-int FUN_0027da30(...);
-int btlMainFindEntryByListedId(...);
-int FUN_00283ebc(...);
-int btlGetMainState(...);
-int dataTable40FindById(...);
-int FUN_003be670(...);
-int VectorSignedToFloat(...);
-int VectorUnsignedToFloat(...);
-
-typedef struct fn_003be918_arg0 fn_003be918_arg0;
-struct fn_003be918_arg0 {
-    byte field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0xf3];
-    short field_0xf4; /* +0xf4 */
-    unsigned char pad_0xf6[0x55];
-    byte field_0x14b; /* +0x14b */
-    unsigned char pad_0x14c[0x4354];
-    undefined4 field_0x44a0; /* +0x44a0 */
+// A combatant entry of the battle state (the part this formula reads).
+struct BattleEntryView {
+    /* 0x000 */ u8 flags;            // bit 2: second-side combatant
+    /* 0x001 */ u8 unk001[0xf3];
+    /* 0x0f4 */ s16 level;
+    /* 0x0f6 */ u8 unk0f6[0x55];
+    /* 0x14b */ u8 resistanceSlot;   // index into the attack info's resistance bytes
 };
 
-/* stack frame of param_5: 6 slot(s), 22 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned short sp88; /* 0x88: local_88 */
-    unsigned int sp90; /* 0x90: local_90 */
-} param_5_stack;
+struct BattleMainView {
+    u8 unk0000[0x44a0];
+    u32 flags;  // 0x44a0 bit 0x40000: fixed-rate battle
+};
 
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0022a690. */
-/* Supplied declaration required: selectionCopySupportedValue. */
-/* Supplied declaration required: FUN_0023ea94. */
-/* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283ebc. */
-/* Supplied declaration required: btlGetMainState. */
-extern unsigned int playerGetSkillRank(fn_003be918_arg0 *);
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: FUN_003be670. */
+// What FUN_00247478 collects about an attack (0x24 bytes).
+struct AttackInfo {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 supportedValue;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ u16 powerPercent;
+    /* 0x0a */ u8 unk0a[4];
+    /* 0x0e */ u8 resistance[0x16];  // percent per resistance slot, 0: not set
+};
 
+extern "C" {
+BattleMainView *btlGetMainState(void);
+BattleEntryView *FUN_0027da30(BattleMainView *state, s32 id);
+void *btlMainFindEntryByListedId(BattleMainView *state, s32 id);
+f32 FUN_0022a690(s32 kind, f32 value);
+f32 FUN_003be670(s32 attacker, s32 target);
+AttackInfo FUN_00247478(BattleMainView *state, void *entry);
+void selectionCopySupportedValue(u16 value, u32 *output);
+void *dataTable40FindById(void *player);
+u32 playerGetSkillRank(void *player);
+s32 FUN_00283ebc(void *record, u32 rank, s32 flag);
+f32 *FUN_0023ea94(void);
 
-int FUN_003be918(fn_003be918_arg0 *param_1,unsigned int param_2,unsigned int param_3,int param_4,
-                int param_5)
-
+// Damage of an attack by `attackerId` on `targetId`: the level-scaled base power through the combatants' stat
+// factors, the attack's power percent, the skill bonus and the target's resistance for the attack.
+s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base, f32 rate, s32 second)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0, in_s1; 15 native warning(s); review required */
-  unsigned char *pbVar1;
-  unsigned char *pbVar2;
-  unsigned char *pbVar3;
-  unsigned char *pbVar4;
-  unsigned int *puVar5;
-  fn_003be918_arg0 *pfVar6;
-  float *pfVar7;
-  unsigned int temp_v0;
-  int temp_v1;
-  fn_003be918_arg0 *pfVar10;
-  unsigned int in_fpscr;
-  unsigned int in_s0;
-  float temp_v2;
-  float temp_v3;
-  unsigned int in_s1;
-  float temp_v4;
-  unsigned int temp_v5;
-  unsigned long long temp_v6;
-  float temp_v7;
-  float temp_v8;
-  unsigned long long temp_v9;
-  float temp_v10;
-  int uStack_84;
-  unsigned int uStack_80;
-  unsigned int uStack_7c;
-  unsigned int uStack_78;
-  unsigned int uStack_74;
-  unsigned int temp_v11;
-  unsigned char temp_v12 [2];
-  unsigned short uStack_6a;
-  unsigned int uStack_64;
-  unsigned int uStack_60;
-  unsigned int uStack_5c;
-  unsigned int uStack_58;
-  unsigned int uStack_54;
-  unsigned int uStack_50;
-  unsigned int temp_v13;
-  unsigned int temp_v14 [9];
-  
-  temp_v9 = romwright_piece_4_4(in_s1,in_s0);
-  temp_v10 = 0.0f;
-  temp_v5 = 0x3f800000;
-  pbVar1 = (unsigned char *)btlGetMainState();
-  pbVar2 = pbVar1;
-  FUN_0027da30(pbVar1,param_2);
-  pbVar3 = pbVar1;
-  FUN_0027da30(pbVar1,param_3);
-  if ((*pbVar2 & 4) != 0) {
-    temp_v5 = 0x3f4ccccd;
-  }
-  temp_v7 = (float)VectorSignedToFloat((int)*(short *)(pbVar2 + 0xf4),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0022a690(8);
-  temp_v3 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0022a690(10);
-  temp_v4 = temp_v3;
-  FUN_003be670(param_2,param_3);
-  temp_v6 = CONCAT44(temp_v2 * temp_v4 * temp_v3,temp_v5);
-  pbVar4 = pbVar1;
-  btlMainFindEntryByListedId(pbVar1,param_2);
-  FUN_00247478(temp_v12,pbVar1,pbVar4);
-  uStack_84 = uStack_60;
-  uStack_80 = uStack_5c;
-  uStack_7c = uStack_58;
-  uStack_78 = uStack_54;
-  uStack_74 = uStack_50;
-  temp_v11 = temp_v13;
-  temp_v14[0] = 0;
-  selectionCopySupportedValue(uStack_6a,temp_v14);
-  puVar5 = (unsigned int *)btlGetMainState();
-  btlMainFindEntryByListedId(puVar5,param_2);
-  pfVar10 = (fn_003be918_arg0 *)0x0;
-  if (((*puVar5 & 2) != 0) && (pfVar6 = param_1, dataTable40FindById(), pfVar6 != (fn_003be918_arg0 *)0x0))
-  {
-    temp_v5 = playerGetSkillRank(param_1);
-    FUN_00283ebc(pfVar6,temp_v5,1);
-    pfVar10 = pfVar6;
-  }
-  temp_v8 = 0.01f;
-  temp_v3 = (float)VectorUnsignedToFloat(uStack_64 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = (float)VectorSignedToFloat(param_4 + param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (float)VectorSignedToFloat(pfVar10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (((float)temp_v9 + temp_v7 * 4.5f) * 0.33333334f * (float)((unsigned long long)temp_v9 >> 0x20) *
-            (float)((unsigned long long)temp_v6 >> 0x20) * (float)temp_v6 * temp_v3 * 0.01f) / (temp_v4 * 0.5f) +
-           temp_v10 + temp_v2;
-  if ((*(unsigned int *)(pbVar1 + 0x44a0) & 0x40000) != 0) {
-    temp_v0 = (unsigned int)*(unsigned char *)((int)&uStack_84 + pbVar3[0x14b] + 2);
-    if (temp_v0 != 0) {
-      temp_v10 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v2 = temp_v2 * temp_v10 * temp_v8;
+    f32 zero = 0.0f;
+    f32 sideFactor = 1.0f;
+    BattleMainView *state = btlGetMainState();
+    BattleEntryView *attacker = FUN_0027da30(state, attackerId);
+    BattleEntryView *target = FUN_0027da30(state, targetId);
+    f32 level = (f32)attacker->level;
+    if (attacker->flags & 4) {
+        sideFactor = 0.8f;
     }
-    return (int)temp_v2;
-  }
-  if ((*pbVar2 & 4) != 0) {
-    if ((*pbVar3 & 4) != 0) {
-      pfVar7 = (float *)FUN_0023ea94();
-      temp_v10 = *pfVar7;
-    }
-    else {
-      temp_v1 = FUN_0023ea94();
-      temp_v10 = *(float *)(temp_v1 + 8);
-    }
-  }
-  else if ((*pbVar3 & 4) != 0) {
-    pfVar7 = (float *)FUN_0023ea94();
-    temp_v10 = *pfVar7;
-  }
-  else {
-    temp_v1 = FUN_0023ea94();
-    temp_v10 = *(float *)(temp_v1 + 8);
-  }
-  temp_v2 = temp_v10 * temp_v2;
-  temp_v0 = (unsigned int)*(unsigned char *)((int)&uStack_84 + pbVar3[0x14b] + 2);
-  if (temp_v0 != 0) {
-    temp_v10 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = temp_v2 * temp_v10 * temp_v8;
-  }
-  return (int)temp_v2;
-}
+    f32 attackerStat = FUN_0022a690(8, (f32)attackerId);
+    f32 targetStat = FUN_0022a690(10, (f32)targetId);
+    f32 stats = attackerStat * targetStat * FUN_003be670(attackerId, targetId);
 
-} /* extern "C" */
+    AttackInfo info = FUN_00247478(state, btlMainFindEntryByListedId(state, attackerId));
+    u32 supported = 0;
+    selectionCopySupportedValue(info.supportedValue, &supported);
+
+    s32 skillBonus = 0;
+    if ((*(u32 *)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
+        void *record = dataTable40FindById(player);
+        if (record != NULL) {
+            skillBonus = FUN_00283ebc(record, playerGetSkillRank(player), 1);
+        }
+    }
+
+    f32 damage = (base + level * 4.5f) * 0.33333334f * rate * stats * sideFactor * ((f32)info.powerPercent * 0.01f) /
+                     ((f32)(first + second) * 0.5f) +
+                 zero + (f32)skillBonus;
+    if ((state->flags & 0x40000) == 0) {
+        if (attacker->flags & 4) {
+            if ((target->flags & 4) != 0) {
+                damage = *FUN_0023ea94() * damage;
+            } else {
+                damage = FUN_0023ea94()[2] * damage;
+            }
+        } else if ((target->flags & 4) != 0) {
+            damage = *FUN_0023ea94() * damage;
+        } else {
+            damage = FUN_0023ea94()[2] * damage;
+        }
+    }
+    u32 resistance = info.resistance[target->resistanceSlot];
+    if (resistance != 0) {
+        damage = damage * ((f32)resistance * 0.01f);
+    }
+    return (s32)damage;
+}
+}

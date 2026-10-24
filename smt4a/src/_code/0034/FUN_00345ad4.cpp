@@ -1,4 +1,3 @@
-/* NON_MATCHING: shared render-stack push computes the new entry address into ip early instead of reusing r3. */
 #include "camp/RenderCtx.h"
 
 extern "C" {

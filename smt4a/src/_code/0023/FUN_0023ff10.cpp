@@ -1,144 +1,160 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023ff10` (_code @ 0x23ff10, 0x250 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the list sub-object comes from the one-instruction accessor questUiGetList (inlined by armlink, config/inlined.txt) and is passed to resourceRunOperationIfUnblocked; the remaining differences are armcc keeping the list in r7 and the offset in r6 (retail the reverse) plus a nop armcc emits before that call (151 rows against 150). */
+#include "common.h"
+
+/* The quest screen's state (observed fields). */
+struct QuestUiLower {
+    /* 0x000 */ u8 unk000[0x10C];
+};
+
+struct QuestUi {
+    /* 0x000 */ u8 unk000[0x800];
+    /* 0x800 */ QuestUiLower lower;
+    /* 0x90C */ u8 detailView;
+    /* 0x90D */ u8 unk90D[3];
+    /* 0x910 */ s32 column;
+    /* 0x914 */ u8 unk914[4];
+    /* 0x918 */ s32 page;
+    /* 0x91C */ u8 unk91C[0x21];
+    /* 0x93D */ u8 unk93D;
+    /* 0x93E */ u8 unk93E[6];
+    /* 0x944 */ u8 unk944;
+    /* 0x945 */ u8 unk945[0x67];
+    /* 0x9AC */ u8 list[0x12A];
+    /* 0xAD6 */ u16 ids[1];
+};
+
+/* The part of the quest screen state from 0x900 on that holds the lock flags. */
+struct QuestUiFlags {
+    /* 0x00 */ u8 unk00[0x3D];
+    /* 0x3D */ u8 locked;
+    /* 0x3E */ u8 unk3E[6];
+    /* 0x44 */ u8 altRow;
+};
+
+/* The game state flag the screen reads (observed field). */
+struct GameStateView {
+    /* 0x000 */ u8 unk000[0x460];
+    /* 0x460 */ u8 sceneStateEnabled;
+};
+
+/* A party/model record (observed field). */
+struct EntryKindRecord {
+    /* 0x0 */ u8 unk0[6];
+    /* 0x6 */ u8 kind;
+};
 
 extern "C" {
 
-int sysPlaySe(...);
-int FUN_00183f58(...);
-int FUN_001ad9b4(void);
+extern QuestUi *g_uiQuest;
+extern GameStateView g_gameState;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+void sysPlaySe(u32 id);
+void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
+EntryKindRecord *FUN_001ad9b4(u32 id);
+s32 resourceRunOperationIfUnblocked(void *list);
+void *questUiGetList(QuestUiLower *lower);
+s32 FUN_002a4894(void *list);
+s32 partyEntryFlagsBit3(u32 id);
+u32 FUN_004186e0(void);
 
-extern int g_uiQuest; /* 0x57f28c */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int resourceRunOperationIfUnblocked(void);
-extern int FUN_002a4894(int);
-extern int partyEntryFlagsBit3(unsigned int);
-extern unsigned int FUN_004186e0(void);
-
-
+/* Plays the cursor sound for the quest screen's current page/column and sets up the help buttons for the
+ * selected entry. */
 void FUN_0023ff10(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v4 = g_uiQuest;
-  temp_v1 = *(int *)(g_uiQuest + 0x918);
-  if (*(char *)(g_uiQuest + 0x90c) != '\0') {
-    if ((*(signed char *)((unsigned char *)&g_gameState + 0x460)) != '\0') {
-      if (temp_v1 == 1) {
-        sysPlaySe(0x10e);
-      }
-      if (*(int *)(temp_v4 + 0x918) == 2) {
-        if (*(int *)(temp_v4 + 0x910) == 0) {
-          sysPlaySe(0x10f);
+    QuestUi *ui = g_uiQuest;
+    QuestUiFlags *flags = (QuestUiFlags *)((u8 *)ui + 0x900);
+    u32 id;
+    s32 pageOffset;
+    s32 row;
+    EntryKindRecord *record;
+
+    if (ui->detailView != 0) {
+        if (g_gameState.sceneStateEnabled != 0) {
+            if (ui->page == 1) {
+                sysPlaySe(0x10E);
+            }
+            if (ui->page == 2) {
+                if (ui->column == 0) {
+                    sysPlaySe(0x10F);
+                }
+                if (ui->column == 1) {
+                    sysPlaySe(0x110);
+                    return;
+                }
+            }
+        } else {
+            if (ui->page == 1) {
+                sysPlaySe(0x6E);
+            }
+            if (ui->page == 2) {
+                if (ui->column == 0) {
+                    sysPlaySe(0x6F);
+                }
+                if (ui->column == 1) {
+                    sysPlaySe(0x70);
+                    return;
+                }
+            }
         }
-        if (*(int *)(temp_v4 + 0x910) == 1) {
-          sysPlaySe(0x110);
-          return;
-        }
-      }
-    }
-    else {
-      if (temp_v1 == 1) {
-        sysPlaySe(0x6e);
-      }
-      if (*(int *)(temp_v4 + 0x918) == 2) {
-        if (*(int *)(temp_v4 + 0x910) == 0) {
-          sysPlaySe(0x6f);
-        }
-        if (*(int *)(temp_v4 + 0x910) == 1) {
-          sysPlaySe(0x70);
-          return;
-        }
-      }
-    }
-    return;
-  }
-  if (temp_v1 == 1) {
-    sysPlaySe(0x71);
-  }
-  if (*(int *)(temp_v4 + 0x918) == 2) {
-    if (*(char *)(temp_v4 + 0x944) != '\0') {
-      if (*(int *)(temp_v4 + 0x910) == 0) {
-        sysPlaySe(0xf7);
-      }
-      if (*(int *)(temp_v4 + 0x910) == 1) {
-        temp_v2 = 0xf8;
-        sysPlaySe(temp_v2);
-      }
-    }
-    else {
-      if (*(int *)(temp_v4 + 0x910) == 0) {
-        sysPlaySe(0x72);
-      }
-      if (*(int *)(temp_v4 + 0x910) == 1) {
-        temp_v2 = 0x73;
-        sysPlaySe(temp_v2);
-      }
-    }
-  }
-  if (*(int *)(temp_v4 + 0x918) == 3) {
-    if (*(int *)(temp_v4 + 0x910) == 0) {
-      sysPlaySe(0x74);
-    }
-    if (*(int *)(temp_v4 + 0x910) == 1) {
-      sysPlaySe(0x75);
-    }
-    if (*(int *)(temp_v4 + 0x910) == 2) {
-      sysPlaySe(0x76);
-    }
-  }
-  temp_v1 = resourceRunOperationIfUnblocked();
-  temp_v3 = FUN_002a4894(temp_v4 + 0x9ac);
-  temp_v8 = (unsigned int)*(unsigned short *)(temp_v4 + (temp_v3 + temp_v1) * 2 + 0xad6);
-  temp_v5 = temp_v8;
-  FUN_001ad9b4();
-  if (*(char *)(temp_v4 + 0x93d) != '\0') {
-    FUN_00183f58(5,1,0x32);
-    temp_v7 = 0;
-    temp_v6 = 0x12;
-    temp_v2 = 2;
-    FUN_00183f58(temp_v2,temp_v6,temp_v7,1);
-  }
-  else {
-    if ((temp_v5 != 0) &&
-       (temp_v0 = *(char *)(temp_v5 + 6), (temp_v0 == '\x06' || temp_v0 == '\t') || temp_v0 == '\v')) {
-      temp_v4 = partyEntryFlagsBit3(temp_v8);
-      temp_v0 = '\0';
-      if (temp_v4 != 0) {
-        temp_v0 = *(char *)(temp_v5 + 6);
-      }
-      if ((temp_v4 == 0 || temp_v0 == '\t') && (temp_v5 = FUN_004186e0(), temp_v5 != temp_v8)) {
-        temp_v7 = 0x31;
-        temp_v6 = 1;
-        temp_v2 = 5;
-        FUN_00183f58(temp_v2,temp_v6,temp_v7,1);
-        FUN_00183f58(2,0x12,0,1);
         return;
-      }
     }
-    FUN_00183f58(5,0x12,0,1);
-  }
-  FUN_00183f58(2,0x12,0,1);
-  return;
+    if (ui->page == 1) {
+        sysPlaySe(0x71);
+    }
+    if (ui->page == 2) {
+        if (flags->altRow != 0) {
+            if (ui->column == 0) {
+                sysPlaySe(0xF7);
+            }
+            if (ui->column == 1) {
+                sysPlaySe(0xF8);
+            }
+        } else {
+            if (ui->column == 0) {
+                sysPlaySe(0x72);
+            }
+            if (ui->column == 1) {
+                sysPlaySe(0x73);
+            }
+        }
+    }
+    if (ui->page == 3) {
+        if (ui->column == 0) {
+            sysPlaySe(0x74);
+        }
+        if (ui->column == 1) {
+            sysPlaySe(0x75);
+        }
+        if (ui->column == 2) {
+            sysPlaySe(0x76);
+        }
+    }
+    void *list = questUiGetList(&ui->lower);
+
+    pageOffset = resourceRunOperationIfUnblocked(list);
+    row = FUN_002a4894(list);
+    id = ui->ids[pageOffset + row];
+    record = FUN_001ad9b4(id);
+    if (flags->locked != 0) {
+        FUN_00183f58(5, 1, 0x32, 1);
+        FUN_00183f58(2, 0x12, 0, 1);
+    } else {
+        if (record != NULL && (record->kind == 6 || record->kind == 9 || record->kind == 11)) {
+            s32 hasBit = partyEntryFlagsBit3(id);
+            u8 kind = 0;
+
+            if (hasBit != 0) {
+                kind = record->kind;
+            }
+            if ((hasBit == 0 || kind == 9) && FUN_004186e0() != id) {
+                FUN_00183f58(5, 1, 0x31, 1);
+                FUN_00183f58(2, 0x12, 0, 1);
+                return;
+            }
+        }
+        FUN_00183f58(5, 0x12, 0, 1);
+    }
+    FUN_00183f58(2, 0x12, 0, 1);
 }
 
 } /* extern "C" */

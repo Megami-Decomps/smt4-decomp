@@ -1,189 +1,129 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bd410` (_code @ 0x4bd410, 0x2a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite with slot helpers compiles; inlined slot-search loops are shaped differently from retail (168 vs 194 rows) */
+#include "common.h"
+
+// Party/demon slot (0x134 bytes): only the fields used here.
+struct PartySlot {
+    u8 unk00[0x34];
+    u16 skills[8];      // 0x34
+    u8 skillRank[0x18]; // 0x44: per-skill-slot rank, then per-skill-type ranks from 0x4c
+    u8 unk5c[8];
+    u16 level;          // 0x64 (read as a halfword)
+    u8 unk66[0x12c - 0x66];
+    u16 id;             // 0x12c
+    u16 index;          // 0x12e
+    u32 flags;          // 0x130, bit 0: in use
+};
+
+struct PartySlotTable {
+    u8 unk0000[0x1ddc];
+    PartySlot slots[12];    // 0x1ddc
+};
+
+struct DevilGrowth {
+    u8 unk00[0x26];
+    u16 skillType;      // 0x26
+};
+
+struct ParentLink {
+    u8 unk00[4];
+    u16 parentId;       // 0x04
+};
 
 extern "C" {
 
-int dataTable04FindById(void);
-int FUN_0035e458(void);
-int FUN_003e4b2c(unsigned int);
-int battleRecordInitializeFromDefinition(int, int);
+PartySlotTable* gameGetSlotTable(void);
+void battleRecordInitializeFromDefinition(PartySlot* slot, s32 mode);
+ParentLink* FUN_00370ecc(u32 id);
+void FUN_003e4b2c(u32 id);
+u32 dataTable0aSub0GetValueById(u32 id);
+DevilGrowth* dataTable04FindById(u32 id);
+s32 FUN_0035e458(u32 skill);
+s32 FUN_0035d89c(u32 skill);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable04FindById. */
-extern int FUN_0035d89c(unsigned int);
-/* Supplied declaration required: FUN_0035e458. */
-extern int FUN_00370ecc(unsigned int);
-extern unsigned int dataTable0aSub0GetValueById(unsigned int);
-/* Supplied declaration required: FUN_003e4b2c. */
-/* Supplied declaration required: battleRecordInitializeFromDefinition. */
-
-
-void FUN_004bd410(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+static __inline PartySlot* getSlot(u16 index)
 {
-/* irregular: 7 unstructured edge(s); 2 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int unaff_r9;
-  unsigned char temp_v6;
-  
-  temp_v5 = 0xffffffff;
-  temp_v4 = 0;
-  do {
-    if ((temp_v4 & 0xffff) >= 0xc) {
-      temp_v3 = 0;
+    if (index >= 12) return NULL;
+    return &gameGetSlotTable()->slots[index];
+}
+
+static __inline PartySlot* findSlotById(u32 id)
+{
+    for (s32 i = 0; i < 12; i++) {
+        PartySlot* slot = getSlot(i);
+        if (slot->id == id) return slot;
     }
-    else {
-      temp_v3 = gameGetSlotTable();
-      temp_v3 = temp_v3 + (temp_v4 & 0xffff) * 0x134 + 0x1ddc;
+    return NULL;
+}
+
+static __inline bool hasSkill(PartySlot* slot, u32 skill)
+{
+    for (s32 i = 0; i < 8; i++) {
+        if (slot->skills[i] == skill) return true;
     }
-    if (*(unsigned short *)(temp_v3 + 300) == param_1) {
-      *(unsigned int *)(temp_v3 + 0x130) = *(unsigned int *)(temp_v3 + 0x130) | 1;
-      break;
-    }
-    if (((int)temp_v5 < 0) && (*(unsigned short *)(temp_v3 + 300) == 0)) {
-      temp_v5 = temp_v4;
-    }
-    temp_v4 = temp_v4 + 1;
-  } while ((int)temp_v4 < 0xc);
-  if (-1 < (int)temp_v5) {
-    if ((temp_v5 & 0xffff) >= 0xc) {
-      temp_v3 = 0;
-    }
-    else {
-      temp_v3 = gameGetSlotTable();
-      temp_v3 = temp_v3 + (temp_v5 & 0xffff) * 0x134 + 0x1ddc;
-    }
-    *(short *)(temp_v3 + 300) = (short)param_1;
-    *(unsigned int *)(temp_v3 + 0x130) = *(unsigned int *)(temp_v3 + 0x130) | 1;
-    *(short *)(temp_v3 + 0x12e) = (short)temp_v5;
-    battleRecordInitializeFromDefinition(temp_v3,0);
-  }
-  temp_v0 = FUN_00370ecc(param_1);
-  if (temp_v0 != 0) {
-    unaff_r9 = (unsigned int)*(unsigned short *)(temp_v0 + 4);
-  }
-  if (temp_v0 == 0 || param_1 == unaff_r9) {
-    return;
-  }
-  temp_v5 = 0;
-  do {
-    if ((temp_v5 & 0xffff) >= 0xc) {
-      temp_v0 = 0;
-    }
-    else {
-      temp_v0 = gameGetSlotTable();
-      temp_v0 = temp_v0 + (temp_v5 & 0xffff) * 0x134 + 0x1ddc;
-    }
-    if ((unsigned int)*(unsigned short *)(temp_v0 + 300) == (unaff_r9 & 0xffff)) {
-      if (temp_v0 == 0) break;
-      temp_v5 = 0;
-      while( 1 ) {
-        if ((temp_v5 & 0xffff) >= 0xc) {
-          temp_v1 = 0;
-        }
-        else {
-          temp_v1 = gameGetSlotTable();
-          temp_v1 = temp_v1 + (temp_v5 & 0xffff) * 0x134 + 0x1ddc;
-        }
-        if (*(unsigned short *)(temp_v1 + 300) == param_1) break;
-        temp_v5 = temp_v5 + 1;
-        if ((int)temp_v5 >= 0xc) goto LAB_004bd598;
-      }
-      if (temp_v1 == 0) break;
-      if (-1 >= (int)((unsigned int)*(unsigned short *)(temp_v0 + 100) - (unsigned int)*(unsigned short *)(temp_v1 + 100))) break;
-      FUN_003e4b2c(param_1);
-      break;
-    }
-    temp_v5 = temp_v5 + 1;
-  } while ((int)temp_v5 < 0xc);
-LAB_004bd598:
-  temp_v5 = 0;
-LAB_004bd5a0:
-  if ((temp_v5 & 0xffff) >= 0xc) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = gameGetSlotTable();
-    temp_v0 = temp_v0 + (temp_v5 & 0xffff) * 0x134 + 0x1ddc;
-  }
-  if ((unsigned int)*(unsigned short *)(temp_v0 + 300) != (unaff_r9 & 0xffff)) {
-    temp_v5 = temp_v5 + 1;
-    if ((int)temp_v5 < 0xc) goto LAB_004bd5a0;
-    temp_v0 = 0;
-  }
-  temp_v5 = dataTable0aSub0GetValueById(unaff_r9 & 0xffff);
-  if (temp_v0 == 0 || temp_v5 == 0) {
-    return;
-  }
-  temp_v1 = 0;
-  while( 1 ) {
-    temp_v2 = temp_v0 + temp_v1 * 2;
-    temp_v6 = *(unsigned short *)(temp_v2 + 0x34) == temp_v5;
-    if (!temp_v6) {
-      param_4 = (unsigned int)*(unsigned short *)(temp_v2 + 0x36);
-    }
-    if (temp_v6 || param_4 == temp_v5) break;
-    temp_v1 = temp_v1 + 2;
-    if (temp_v1 >= 8) {
-      return;
-    }
-  }
-  if (temp_v3 != 0) {
-    temp_v0 = 0;
+    return false;
+}
+
+// Makes sure the slot for `id` exists and is in use, then lets it inherit the
+// first skill of the demon it was derived from.
+void FUN_004bd410(u32 id)
+{
+    s32 freeIndex = -1;
+    PartySlot* slot;
+    s32 i = 0;
     do {
-      temp_v4 = temp_v3 + temp_v0 * 2;
-      temp_v6 = *(unsigned short *)(temp_v4 + 0x34) == temp_v5;
-      if (!temp_v6) {
-        temp_v4 = (unsigned int)*(unsigned short *)(temp_v4 + 0x36);
-      }
-      if (temp_v6 || temp_v4 == temp_v5) {
-        return;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while (temp_v0 < 8);
-  }
-  temp_v0 = 0;
-  temp_v1 = 0;
-  do {
-    if (*(short *)(temp_v3 + temp_v1 * 2 + 0x34) == 0) break;
-    temp_v1 = temp_v1 + 1;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v1 < 8);
-  if (temp_v3 == 0) {
-    return;
-  }
-  if (temp_v0 >= 8) {
-    return;
-  }
-  *(short *)(temp_v3 + temp_v0 * 2 + 0x34) = (short)temp_v5;
-  temp_v4 = temp_v5;
-  dataTable04FindById();
-  temp_v1 = 0;
-  if ((temp_v4 != 0) && (*(unsigned short *)(temp_v4 + 0x26) < 0x12)) {
-    temp_v1 = (int)*(char *)((unsigned int)*(unsigned short *)(temp_v4 + 0x26) + temp_v3 + 0x4c);
-  }
-  temp_v4 = temp_v5;
-  FUN_0035e458();
-  temp_v2 = FUN_0035d89c(temp_v5);
-  if ((int)temp_v4 < temp_v1) {
-    temp_v1 = (int)(char)temp_v4;
-  }
-  else if (temp_v1 < temp_v2) {
-    temp_v1 = (int)(char)temp_v2;
-  }
-  *(char *)(temp_v3 + temp_v0 + 0x44) = (char)temp_v1;
-  return;
+        slot = getSlot(i);
+        if (slot->id == id) {
+            slot->flags |= 1;
+            break;
+        }
+        if (freeIndex < 0 && slot->id == 0) freeIndex = i;
+        i++;
+    } while (i < 12);
+    if (freeIndex >= 0) {
+        slot = getSlot(freeIndex);
+        slot->id = id;
+        slot->flags |= 1;
+        slot->index = freeIndex;
+        battleRecordInitializeFromDefinition(slot, 0);
+    }
+
+    ParentLink* link = FUN_00370ecc(id);
+    if (link == NULL || id == link->parentId) return;
+    u32 parentId = link->parentId;
+
+    PartySlot* parent = findSlotById(parentId);
+    if (parent != NULL) {
+        PartySlot* own = findSlotById(id);
+        if (own != NULL && (s32)(parent->level - own->level) > -1) FUN_003e4b2c(id);
+    }
+
+    parent = findSlotById(parentId);
+    u32 skill = dataTable0aSub0GetValueById(parentId);
+    if (parent == NULL || skill == 0) return;
+    if (!hasSkill(parent, skill)) return;
+    if (slot != NULL && hasSkill(slot, skill)) return;
+
+    s32 empty = 0;
+    for (s32 j = 0; j < 8; j++) {
+        if (slot->skills[j] == 0) break;
+        empty++;
+    }
+    if (slot == NULL || empty >= 8) return;
+    slot->skills[empty] = skill;
+
+    DevilGrowth* growth = dataTable04FindById(skill);
+    s32 rank = 0;
+    if (growth != NULL && growth->skillType < 0x12) {
+        rank = (s8)slot->skillRank[8 + growth->skillType];
+    }
+    s32 maxRank = FUN_0035e458(skill);
+    s32 minRank = FUN_0035d89c(skill);
+    if (maxRank < rank) {
+        rank = (s8)maxRank;
+    } else if (rank < minRank) {
+        rank = (s8)minRank;
+    }
+    slot->skillRank[empty] = rank;
 }
 
 } /* extern "C" */

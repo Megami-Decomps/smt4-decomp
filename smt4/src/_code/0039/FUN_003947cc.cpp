@@ -1,141 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003947cc` (_code @ 0x3947cc, 0x254 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail zeroes the 32-byte name buffer twice per iteration (155 rows) and keeps the name pointer in r7 / table cursor in r5 across the search; ours zero-fills once and loads the entry address per iteration (148 rows). */
+#include "common.h"
+
+/* An entry of the battle effect name table (0x24 bytes): the effect's file name and up to two sub-effects. */
+struct BtlEffectEntry {
+    /* 0x00 */ char name[0x10];
+    /* 0x10 */ s32 firstCount;
+    /* 0x14 */ u16 firstHandle;
+    /* 0x16 */ u8 unk16[2];
+    /* 0x18 */ s32 secondCount;
+    /* 0x1C */ u16 secondHandle;
+    /* 0x1E */ u8 unk1E[2];
+    /* 0x20 */ u32 value;
+};
+
+/* The battle main state (observed fields). */
+struct BtlMainPosition {
+    /* 0x000 */ u8 unk000[0x574];
+    /* 0x574 */ f32 centerX;
+};
+
+/* The battle state the chosen effect value is stored in (observed field). */
+struct BtlStateEffect {
+    /* 0x0000 */ u8 unk0000[0x49E4];
+    /* 0x49E4 */ u32 effectValue;
+};
+
+#define BTL_EFFECT_ENTRIES 0x191
 
 extern "C" {
 
-int FUN_002505c0(int, unsigned int, int, int);
-int libc_strcmp(int *, unsigned int);
-int textFormatBuffer(int *, unsigned char *, char *);
+extern BtlEffectEntry s_ef_e_atk01_00436028[];
+extern BtlMainPosition *g_btlMain;
 
-/* stack frame of param_3: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
+s32 jyoucyuGetTableEntry(u32 index);
+void textFormatBuffer(char *destination, const char *format, ...);
+s32 libc_strcmp(const char *first, const char *second);
+BtlStateEffect *btlGetMainState(void);
+void FUN_002505c0(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 c);
 
-extern unsigned char LAB_00394a24; /* 0x394a24 */
-extern int g_btlMain; /* 0x4342c8 */
-extern char s_ef_e_atk01_00436028[11]; /* 0x436028 */
-
-/* Supplied declaration required: FUN_002505c0. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-unsigned int FUN_003947cc(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Starts the named battle effect for `owner`: finds its table entry by file name and plays its sub-effects
+ * on the side (1-5) the horizontal position `x` falls on. */
+u32 FUN_003947cc(const char *effectName, s32 owner, u32 kind, f32 x)
 {
-/* irregular: 9 goto(s); irregular input(s): in_s0; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  float temp_v1;
-  unsigned int temp_v2;
-  char *pcVar5;
-  unsigned int in_s0;
-  float temp_v3;
-  unsigned long long temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  
-  temp_v4 = (unsigned long long)in_s0;
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 != 0) {
-    return 0;
-  }
-  temp_v0 = 0;
-  do {
-    temp_v5 = 0;
-    pcVar5 = s_ef_e_atk01_00436028 + temp_v0 * 0x24;
-    temp_v6 = 0;
-    temp_v7 = 0;
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v10 = 0;
-    temp_v11 = 0;
-    temp_v12 = 0;
-    textFormatBuffer(&temp_v5,&LAB_00394a24,pcVar5);
-    puVar2 = (unsigned int *)&temp_v5;
-    libc_strcmp(&temp_v5,param_1);
-    temp_v3 = (float)temp_v4;
-    if (puVar2 == (unsigned int *)0x0) goto LAB_0039488c;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x191);
-  pcVar5 = (char *)0x0;
-LAB_0039488c:
-  temp_v0 = btlGetMainState();
-  switch(param_3) {
-  case 2:
-  case 5:
-  case 8:
-  case 9:
-  case 0xc:
-    if (temp_v3 < -2.9650002f) {
-LAB_00394938:
-      temp_v2 = 5;
-      goto LAB_00394998;
+    BtlEffectEntry *entry = NULL;
+    BtlStateEffect *state;
+    s32 side;
+    s32 i;
+
+    if (jyoucyuGetTableEntry(1) != 0) {
+        return 0;
     }
-    if (temp_v3 < -0.99f) {
-LAB_00394954:
-      temp_v2 = 4;
-      goto LAB_00394998;
+    for (i = 0; i < BTL_EFFECT_ENTRIES; i++) {
+        char name[0x20] = { 0 };
+
+        textFormatBuffer(name, "%s.eft", s_ef_e_atk01_00436028[i].name);
+        if (libc_strcmp(name, effectName) == 0) {
+            entry = &s_ef_e_atk01_00436028[i];
+            break;
+        }
     }
-    if (2.94f < temp_v3) {
-LAB_00394970:
-      temp_v2 = 1;
-      goto LAB_00394998;
+    state = btlGetMainState();
+    switch (kind) {
+    case 2:
+    case 5:
+    case 8:
+    case 9:
+    case 0xC:
+        if (x < -2.965f) {
+            side = 5;
+        } else if (x < -0.99f) {
+            side = 4;
+        } else if (x > 2.94f) {
+            side = 1;
+        } else if (x > 0.965f) {
+            side = 2;
+        } else {
+            side = 3;
+        }
+        break;
+    case 6:
+    case 7:
+    case 0xB:
+        side = 3;
+        break;
+    default: {
+        f32 center = g_btlMain->centerX;
+
+        if (x < center + -17.0f) {
+            side = 5;
+        } else if (x < center + -9.0f) {
+            side = 4;
+        } else if (x > center + 17.0f) {
+            side = 1;
+        } else if (x > center + 9.0f) {
+            side = 2;
+        } else {
+            side = 3;
+        }
+        break;
     }
-    if (0.96500003f < temp_v3) {
-LAB_0039498c:
-      temp_v2 = 2;
-      goto LAB_00394998;
     }
-    break;
-  default:
-    temp_v1 = *(float *)(g_btlMain + 0x574);
-    if (temp_v3 < temp_v1 + -17.0f) goto LAB_00394938;
-    if (temp_v3 < temp_v1 + -9.0f) goto LAB_00394954;
-    if (temp_v1 + 17.0f < temp_v3) goto LAB_00394970;
-    if (temp_v1 + 9.0f < temp_v3) goto LAB_0039498c;
-    break;
-  case 6:
-  case 7:
-  case 0xb:
-    break;
-  }
-  temp_v2 = 3;
-LAB_00394998:
-  if (pcVar5 == (char *)0x0) {
-    return 0;
-  }
-  if (*(int *)(pcVar5 + 0x10) != 0) {
-    temp_v5 = 0;
-    temp_v7 = 0;
-    temp_v6 = temp_v2;
-    FUN_002505c0(*(unsigned short *)(pcVar5 + 0x14),param_2,*(int *)(pcVar5 + 0x10),0);
-  }
-  if (*(int *)(pcVar5 + 0x18) != 0) {
-    temp_v5 = 0;
-    temp_v7 = 0;
-    temp_v6 = temp_v2;
-    FUN_002505c0(*(unsigned short *)(pcVar5 + 0x1c),param_2,*(int *)(pcVar5 + 0x18),0);
-  }
-  *(unsigned int *)(temp_v0 + 0x49e4) = *(unsigned int *)(pcVar5 + 0x20);
-  return 1;
+    if (entry == NULL) {
+        return 0;
+    }
+    if (entry->firstCount != 0) {
+        FUN_002505c0(entry->firstHandle, owner, entry->firstCount, 0, 0, side, 0);
+    }
+    if (entry->secondCount != 0) {
+        FUN_002505c0(entry->secondHandle, owner, entry->secondCount, 0, 0, side, 0);
+    }
+    state->effectValue = entry->value;
+    return 1;
 }
 
 } /* extern "C" */

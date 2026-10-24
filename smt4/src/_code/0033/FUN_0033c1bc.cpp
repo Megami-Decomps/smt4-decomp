@@ -1,174 +1,117 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033c1bc` (_code @ 0x33c1bc, 0x2a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 171 vs 177 rows: retail calls __aeabi_idivmod for `% count` (unit built -Ospace-style; needs a cflags trial from Main) and keeps the loop counters in different registers */
+#include "common.h"
+
+// Draw-state stack embedded in the title scene.
+struct DrawRing {
+    s32 index;              // 0x00
+    s32 unk04;
+    s32 slots[4];           // 0x08
+    u8 dirty;               // 0x18
+    u8 unk19[3];
+    void (*flush)(void);    // 0x1c
+};
+
+struct TitleScene {
+    u8 unk0000[0x130c];
+    DrawRing ring;          // 0x130c
+};
+
+// Status icon strip of one party member: only the fields used here.
+struct StatusStrip {
+    u8 unk00[0x18];
+    s32 scroll;             // 0x18
+    s32 cursor;             // 0x1c
+    u8 unk20[2];
+    u8 isPlayerVariant;     // 0x22
+    u8 unk23[9];
+    s32 originX;            // 0x2c
+    s32 originY;            // 0x30
+    s32 member;             // 0x34: unit index, negative for the player
+};
+
+struct LayoutEntry {
+    u8 unk00[8];
+    s16 x;                  // 0x08
+    s16 y;                  // 0x0a
+    s16* size;              // 0x0c
+};
+
+struct UnitStatus {
+    u8 unk00[0x44];
+    u16 ailments;           // 0x44
+};
+
+struct PlayerStatus {
+    u8 unk00[0x72];
+    u16 ailments;           // 0x72
+};
 
 extern "C" {
 
-int messageKindForward(int, int, int, int);
-int FUN_0029a17c(int, int, int, int, int);
-int __aeabi_idivmod(int, int);
+extern TitleScene* g_titleScene;
 
-typedef struct fn_0033c1bc_arg0 fn_0033c1bc_arg0;
-struct fn_0033c1bc_arg0 {
-    unsigned char pad_0x0[0x18];
-    int field_0x18; /* +0x18 */
-    int field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x2];
-    byte field_0x22; /* +0x22 */
-    unsigned char pad_0x23[0x9];
-    unsigned char field_0x2c; /* +0x2c */
-    unsigned char pad_0x2d[0x3];
-    unsigned char field_0x30; /* +0x30 */
-    unsigned char pad_0x31[0x3];
-    void *field_0x34; /* +0x34 */
-};
+LayoutEntry* FUN_002bf4f8(u32 group, u32 index);
+UnitStatus* gameGetUnitRecord(s32 unit);
+PlayerStatus* gameGetPlayerData(void);
+void messageKindForward(s32 icon, s32 x, s32 y, s32 kind);
+void FUN_0029a17c(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_3_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: messageKindForward. */
-/* Supplied declaration required: FUN_0029a17c. */
-extern int gameGetUnitRecord(void);
-extern int gameGetPlayerData(void);
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-void FUN_0033c1bc(fn_0033c1bc_arg0 *param_1,int param_2,int param_3)
-
+static void setDrawState(s32 value)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  short temp_v9;
-  unsigned int temp_v10;
-  int *piVar10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  
-  temp_v5 = 0x12;
-  if (param_1->field_0x22 != 0) {
-    temp_v5 = 0x50;
-  }
-  temp_v3 = FUN_002bf4f8(0x19,temp_v5);
-  temp_v11 = 0;
-  temp_v13 = 0;
-  temp_v9 = 0;
-  temp_v2 = 0;
-  if ((int)param_1->field_0x34 < 0) {
-    temp_v4 = gameGetPlayerData();
-    temp_v0 = *(unsigned short *)(temp_v4 + 0x72);
-  }
-  else {
-    temp_v4 = gameGetUnitRecord();
-    temp_v0 = *(unsigned short *)(temp_v4 + 0x44);
-  }
-  temp_v10 = (unsigned int)temp_v0;
-  temp_v6 = 1;
-  temp_v1 = 0;
-  temp_v4 = 5;
-  do {
-    temp_v12 = temp_v11;
-    if ((temp_v10 & (1 << (temp_v6 & 0xff))) != 0) {
-      temp_v12 = temp_v11 + 1;
-      if (param_1->field_0x1c == temp_v11) {
-        temp_v9 = temp_v1 + 1;
-        temp_v12 = temp_v11 + 1;
-      }
+    DrawRing* ring = &g_titleScene->ring;
+    s32 previous = ring->slots[ring->index];
+    ring->slots[ring->index] = value;
+    if (ring->dirty != 0 || previous != value) {
+        ring->flush();
+        ring->dirty = 0;
     }
-    temp_v11 = temp_v12;
-    if ((temp_v10 & (1 << ((temp_v6 + 1) & 0xff))) != 0) {
-      temp_v11 = temp_v12 + 1;
-      if (param_1->field_0x1c == temp_v12) {
-        temp_v9 = temp_v1 + 2;
-        temp_v11 = temp_v12 + 1;
-      }
+}
+
+// Draws the status ailment icons of a member; with two or more it also draws the
+// icon that follows the highlighted one, offset by the scroll position.
+void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
+{
+    u32 slot = 0x12;
+    if (strip->isPlayerVariant != 0) slot = 0x50;
+    LayoutEntry* layout = FUN_002bf4f8(0x19, slot);
+    s32 count = 0;
+    s16 current = 0;
+    s16 following = 0;
+    u32 ailments;
+    if (strip->member < 0) {
+        ailments = gameGetPlayerData()->ailments;
+    } else {
+        ailments = gameGetUnitRecord(strip->member)->ailments;
     }
-    temp_v4 = temp_v4 - 1;
-    temp_v6 = temp_v6 + 2;
-    temp_v1 = temp_v1 + 2;
-  } while (temp_v4 != 0);
-  if (temp_v11 == 1) {
-    messageKindForward((int)temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x7e);
-    return;
-  }
-  if (temp_v11 >= 2) {
-    if (param_1->field_0x18 < 0x14) {
-      messageKindForward((int)temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x7e)
-      ;
-      return;
-    }
-    temp_v6 = 1;
-    temp_v1 = 0;
-    temp_v4 = 5;
-    do {
-      temp_v12 = temp_v13;
-      if ((temp_v10 & (1 << (temp_v6 & 0xff))) != 0) {
-        __aeabi_idivmod(param_1->field_0x1c + 1,temp_v11);
-        temp_v12 = temp_v13 + 1;
-        if (temp_v7 == temp_v13) {
-          temp_v2 = temp_v1 + 1;
-          temp_v12 = temp_v13 + 1;
+    for (s32 bit = 1; bit <= 10; bit++) {
+        if ((ailments & (1 << bit)) != 0) {
+            if (strip->cursor == count) current = bit;
+            count++;
         }
-      }
-      temp_v13 = temp_v12;
-      if ((temp_v10 & (1 << ((temp_v6 + 1) & 0xff))) != 0) {
-        __aeabi_idivmod(param_1->field_0x1c + 1,temp_v11);
-        temp_v13 = temp_v12 + 1;
-        if (temp_v8 == temp_v12) {
-          temp_v2 = temp_v1 + 2;
-          temp_v13 = temp_v12 + 1;
+    }
+    if (count == 1) {
+        messageKindForward(current, layout->x + x, layout->y + y, 0x7e);
+        return;
+    }
+    if (count > 1) {
+        if (strip->scroll < 0x14) {
+            messageKindForward(current, layout->x + x, layout->y + y, 0x7e);
+            return;
         }
-      }
-      temp_v12 = g_titleScene;
-      temp_v4 = temp_v4 - 1;
-      temp_v6 = temp_v6 + 2;
-      temp_v1 = temp_v1 + 2;
-    } while (temp_v4 != 0);
-    piVar10 = (int *)(g_titleScene + 0x130c);
-    temp_v11 = piVar10[*piVar10 + 2];
-    piVar10[*piVar10 + 2] = 3;
-    if (*(char *)(temp_v12 + 0x1324) != '\0' || temp_v11 != 3) {
-      (**(romwright_code **)(temp_v12 + 0x1328))();
-      *(unsigned char *)(temp_v12 + 0x1324) = 0;
+        s32 n = 0;
+        for (s32 bit = 1; bit <= 10; bit++) {
+            if ((ailments & (1 << bit)) != 0) {
+                if ((strip->cursor + 1) % count == n) following = bit;
+                n++;
+            }
+        }
+        setDrawState(3);
+        FUN_0029a17c(strip->originX + layout->x, strip->originY + layout->y, layout->size[0], layout->size[1], 1);
+        s32 shift = (strip->scroll - 0x14) * -3;
+        messageKindForward(current, layout->x + shift + x, layout->y + y, 0x7e);
+        messageKindForward(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);
+        setDrawState(0);
     }
-    FUN_0029a17c(*(int *)&param_1->field_0x2c + (int)*(short *)(temp_v3 + 8),
-                 *(int *)&param_1->field_0x30 + (int)*(short *)(temp_v3 + 10),
-                 (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1],1);
-    temp_v11 = (param_1->field_0x18 - 0x14) * -3;
-    messageKindForward((int)temp_v9,(int)*(short *)(temp_v3 + 8) + temp_v11 + param_2,
-                 *(short *)(temp_v3 + 10) + param_3,0x7e);
-    messageKindForward((int)temp_v2,(int)*(short *)(temp_v3 + 8) + param_2 + temp_v11 + 0xd,
-                 *(short *)(temp_v3 + 10) + param_3,0x7e);
-    temp_v11 = g_titleScene;
-    piVar10 = (int *)(g_titleScene + 0x130c);
-    temp_v13 = piVar10[*piVar10 + 2];
-    piVar10[*piVar10 + 2] = 0;
-    if (*(char *)(temp_v11 + 0x1324) != '\0' || temp_v13 != 0) {
-      (**(romwright_code **)(temp_v11 + 0x1328))();
-      *(unsigned char *)(temp_v11 + 0x1324) = 0;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,113 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00297ca4` (_code @ 0x297ca4, 0x278 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail lays the per-kind availability checks out as a goto web (kind 5 locked check first, kind 3 jumping into the shared FUN_0023dcb8 tail) and keeps menu+0x3000 in r5; the equivalent nested ifs compile to a different block order and register assignment. */
+#include "battle/BattleCommandMenu.h"
 
 extern "C" {
+BattleCommandEntry *FUN_00292960(u8 index, int primary);
+s32 FUN_00293988(void);
+s32 FUN_0023dcb8(void);
+s32 idOwnerHasActiveObject(void *unit);
+s8 *gameGetSlotTable(void);
+void *gameGetUnitRecord(s32 id);
+s32 objectPartRunUnlessLocked(CommandCounter *counter);
 
-int FUN_00292960(char *, int);
-int btlGetMainState(void);
-int gameGetSlotTable(...);
-
-extern int FUN_0023dcb8(void);
-extern int idOwnerHasActiveObject(int);
-/* Supplied declaration required: FUN_00292960. */
-extern int flagBitIsSet(void);
-extern int FUN_00293988(void);
-/* Supplied declaration required: btlGetMainState. */
-extern int objectPartRunUnlessLocked(int);
-extern int gameGetUnitRecord(int);
-/* Supplied declaration required: gameGetSlotTable. */
-extern int gameFlagIsSet(void);
-
-
-unsigned int FUN_00297ca4(int param_1,int param_2)
-
+/* Find the command the cursor selects among the available ones and return its menu action code. */
+u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
 {
-/* irregular: 8 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = param_1;
-  if ((param_2 != 0) && (temp_v0 = *(int *)(param_1 + 0x3048), temp_v0 == 6)) {
-    return 0xb;
-  }
-  temp_v0 = gameGetSlotTable(temp_v0);
-  temp_v4 = 0;
-  temp_v2 = 0;
-  do {
-    pcVar2 = (char *)(temp_v2 & 0xff);
-    FUN_00292960(pcVar2,*(int *)(param_1 + 0x305c) == 0);
-    temp_v3 = 0;
-    if ((*(int *)(param_1 + 0x305c) != 0) &&
-       (-1 < *(char *)(*(int *)(param_1 + 0x305c) + temp_v0 + 0x9107))) {
-      temp_v3 = gameGetSlotTable();
-      temp_v3 = gameGetUnitRecord((int)*(char *)(*(int *)(param_1 + 0x305c) + temp_v3 + 0x9107));
+    if (confirm != 0 && menu->mode == 6)
+        return 11;
+    s8 *slotTable = gameGetSlotTable();
+    CommandMenuState *state = &menu->state;
+    BattleCommandEntry *command;
+    s32 count = 0;
+    for (s32 i = 0; i < 9; i++) {
+        command = FUN_00292960(i, menu->cursor == 0);
+        void *unit = 0;
+        if (menu->cursor != 0 && slotTable[0x9107 + menu->cursor] >= 0)
+            unit = gameGetUnitRecord(gameGetSlotTable()[0x9107 + menu->cursor]);
+        if (!battleCommandIsAvailable(command))
+            continue;
+        if (command->kind != 5) {
+            if (command->kind == 2) {
+                btlGetMainState();
+                if (FUN_00293988() == 0)
+                    continue;
+                if ((btlGetMainState()->flags & 0x40000) != 0)
+                    continue;
+            }
+            if (command->kind == 3) {
+                if (menu->cursor == 0) {
+                    if (FUN_0023dcb8() != 0)
+                        continue;
+                } else if (unit != 0) {
+                    if (idOwnerHasActiveObject(unit) == 0)
+                        continue;
+                }
+            } else if (command->kind != 6 && command->kind != 8) {
+                if (menu->cursor == 0) {
+                    if (FUN_0023dcb8() != 0)
+                        continue;
+                }
+            }
+        } else {
+            if (state->slotCommandLocked != 0)
+                continue;
+            if (menu->cursor == 0) {
+                if (FUN_0023dcb8() != 0)
+                    continue;
+            }
+        }
+        if (objectPartRunUnlessLocked(&menu->counters[menu->cursor]) == count)
+            break;
+        count++;
     }
-    if (((((pcVar2 != (char *)0x0) && (pcVar2[1] == '\x01')) &&
-         ((*(short *)(pcVar2 + 0x5c) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
-        ((*(short *)(pcVar2 + 0x5e) == 0 || (temp_v1 = flagBitIsSet(), temp_v1 != 0)))) &&
-       ((pcVar2[0x5b] == '\0' ||
-        (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) == 0)))) {
-      if (*pcVar2 != '\x05') {
-        if (*pcVar2 == '\x02') {
-          btlGetMainState();
-          temp_v1 = FUN_00293988();
-          if ((temp_v1 == 0) || (temp_v1 = btlGetMainState(), (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) != 0))
-          goto LAB_00297e6c;
+    if (command != 0) {
+        switch (command->kind) {
+        case 1:
+            return 1;
+        case 2:
+            return 2;
+        case 3:
+            return 7;
+        case 4:
+            return 3;
+        case 5:
+            return 10;
+        case 6:
+            return 9;
+        case 7:
+            return 4;
         }
-        if (*pcVar2 == '\x03') {
-          if (*(int *)(param_1 + 0x305c) == 0) goto LAB_00297e5c;
-          if (temp_v3 != 0) {
-            temp_v3 = idOwnerHasActiveObject(temp_v3);
-            if (temp_v3 == 0) goto LAB_00297e6c;
-            goto LAB_00297e3c;
-          }
-        }
-        else {
-LAB_00297e3c:
-          if (*pcVar2 != '\x06' && *pcVar2 != '\b') goto LAB_00297e4c;
-        }
-      }
-      else {
-        if (*(char *)(param_1 + 0x38d1) != '\0') goto LAB_00297e6c;
-LAB_00297e4c:
-        if (*(int *)(param_1 + 0x305c) == 0) {
-LAB_00297e5c:
-          temp_v3 = FUN_0023dcb8();
-          if (temp_v3 != 0) goto LAB_00297e6c;
-        }
-      }
-      temp_v3 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
-      if (temp_v3 == temp_v4) goto LAB_00297e80;
-      temp_v4 = temp_v4 + 1;
     }
-LAB_00297e6c:
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 9);
-  if (pcVar2 != (char *)0x0) {
-LAB_00297e80:
-    switch(*pcVar2) {
-    case '\x01':
-      return 1;
-    case '\x02':
-      return 2;
-    case '\x03':
-      return 7;
-    case '\x04':
-      return 3;
-    case '\x05':
-      return 10;
-    case '\x06':
-      return 9;
-    case '\a':
-      return 4;
-    }
-  }
-  return 5;
+    return 5;
 }
-
-} /* extern "C" */
+}

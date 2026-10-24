@@ -7,9 +7,9 @@ extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 BtlMainStateA *btlGetMainState(void);
-s32 FUN_00221754(BtlCombatantEntryA *entry, u32 first, u32 second);
+s32 battleUnitHasElementEntry(BtlCombatantEntryA *entry, u32 first, u32 second);
 
-/* Script command: count the eligible battle entries that pass FUN_00221754 with the two arguments. */
+/* Script command: count the eligible battle entries that pass battleUnitHasElementEntry with the two arguments. */
 u32 btlScriptCountMatchingCandidates(void)
 {
     u32 first = scrGetArg(0);
@@ -22,7 +22,7 @@ u32 btlScriptCountMatchingCandidates(void)
         if (entry != NULL && (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             (entry->flags & g_btlCandidateMasks.unavailable) &&
-            FUN_00221754(entry, first, second)) {
+            battleUnitHasElementEntry(entry, first, second)) {
             count++;
         }
     }

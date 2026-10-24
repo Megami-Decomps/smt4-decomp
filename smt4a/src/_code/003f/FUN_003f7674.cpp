@@ -1,126 +1,87 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f7674` (_code @ 0x3f7674, 0x268 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: item detail panel draw; call sequence follows retail, float scheduling and register use not compared */
+#include "common.h"
+
+/* The item shown in the panel: its kind in the high byte of +2, its name text at +4. */
+struct DetailItem {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 kindAndValue;
+    /* 0x04 */ char name[1];
+};
+
+struct DetailPanel {
+    /* 0x000 */ u8 unk000[0x5E0];
+    /* 0x5E0 */ DetailItem *item;
+};
+
+struct DetailSpriteFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
 
 extern "C" {
+extern void *g_renderCtx;
 
-int textFormatBuffer(unsigned char [76], unsigned char *, int);
-int FUN_00162790(int, int, int, int);
-int efctSetSpeed(void);
-int FUN_0018408c(int, int);
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_0019e52c(unsigned int);
-int FUN_003f533c(...);
-int uiDrawStereoKindIcon(...);
-int FUN_003f707c(int, int, int, int, int, int, int, int);
-int FUN_003f74a8(int, int);
-int FUN_003f757c(...);
-int VectorSignedToFloat(int, int);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_00162790(u32 layer, u32 flags, const char *text, f32 x, f32 y);
+void efctSetSpeed(f32 speed);
+DetailSpriteFrame *FUN_001834a4(u32 bank, u32 sprite);
+s32 FUN_0018408c(const char *text, s32 mode);
+f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
+void FUN_0019e52c(u32 soundId);
+void FUN_003f533c(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 value, u32 a, u32 b, u32 c, u32 color, u32 flags);
+void uiDrawStereoKindIcon(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 kind, u32 sprite);
+void FUN_003f707c(DetailPanel *panel, s32 x, s32 y, u32 a, u32 b, u32 c, u32 d, u32 e);
+const char *FUN_003f74a8(DetailPanel *panel, DetailItem *item);
+void FUN_003f757c(DetailPanel *panel, s32 x, s32 y, u32 layer, const char *text, u32 a, u32 b, u32 c, u32 d);
 
-/* stack frame of param_3: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_3_stack;
+#define DETAIL_KIND_NONE_SOUND (-1)
+#define DETAIL_KIND_SPECIAL 9
+#define DETAIL_KIND_NO_VALUE 10
+#define DETAIL_STEREO_SCALE 0.26f
 
-extern unsigned char LAB_003f78ec; /* 0x3f78ec */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_0019e52c. */
-/* Supplied declaration required: FUN_003f533c. */
-/* Supplied declaration required: uiDrawStereoKindIcon. */
-/* Supplied declaration required: FUN_003f707c. */
-/* Supplied declaration required: FUN_003f74a8. */
-/* Supplied declaration required: FUN_003f757c. */
-
-
-void FUN_003f7674(int param_1,int param_2,int param_3)
-
+/* Draws the detail panel of the selected item: its kind sound and frame, the name and the kind
+ * icon. */
+void FUN_003f7674(DetailPanel *panel, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  unsigned char temp_v6 [76];
-  
-  temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x5e0) + 2) >> 8;
-  switch(temp_v0) {
-  case 0:
-    temp_v1 = 0xae;
-    break;
-  case 1:
-    temp_v1 = 0xb2;
-    break;
-  case 2:
-    temp_v1 = 0xb0;
-    break;
-  case 3:
-    temp_v1 = 0xb1;
-    break;
-  case 4:
-    temp_v1 = 0xb3;
-    break;
-  case 5:
-    temp_v1 = 5;
-    break;
-  case 6:
-    temp_v1 = 0xba;
-    break;
-  case 7:
-    temp_v1 = 0xb9;
-    break;
-  case 8:
-    temp_v1 = 0xaf;
-    break;
-  case 9:
-    temp_v1 = 0xbb;
-    break;
-  default:
-    temp_v1 = 0xffffffff;
-  }
-  if ((-1 < (int)temp_v1) && (temp_v0 != 9)) {
-    FUN_0019e52c(temp_v1 & 0xffff);
-  }
-  FUN_003f707c(param_1,param_2,param_3,0xd3,0x3e,0x47,0x4c,0x4f);
-  temp_v5 = 0.26f;
-  temp_v4 = *(int *)(param_1 + 0x5e0) + 4;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  efctSetSpeed();
-  temp_v2 = FUN_001834a4(0x31,0x46);
-  FUN_0018408c(temp_v4,3);
-  temp_v3 = (int)*(short *)(temp_v2 + 8) + param_2 + (int)temp_v5;
-  VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0xff,temp_v4,temp_v3);
-  temp_v2 = param_1;
-  FUN_003f74a8(param_1,*(int *)(param_1 + 0x5e0));
-  textFormatBuffer(temp_v6,&LAB_003f78ec,temp_v2);
-  FUN_003f757c(param_1,param_2,param_3,0xd8,temp_v6,0x4b,0x4a,1,0);
-  temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x5e0) + 2);
-  if (temp_v0 >> 8 == 10) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = temp_v0 & 0xff;
-  }
-  FUN_003f533c(param_1,param_2,param_3,0xd8,temp_v0,0x78,0x79,0x7a,0xa6d2e3ff,0);
-  uiDrawStereoKindIcon(param_1,param_2,param_3,0xd8,*(unsigned short *)(*(int *)(param_1 + 0x5e0) + 2) >> 8,0x4a);
-  efctSetSpeed();
-  return;
+    u32 kind = panel->item->kindAndValue >> 8;
+    s32 sound;
+    switch (kind) {
+    case 0: sound = 0xAE; break;
+    case 1: sound = 0xB2; break;
+    case 2: sound = 0xB0; break;
+    case 3: sound = 0xB1; break;
+    case 4: sound = 0xB3; break;
+    case 5: sound = 5; break;
+    case 6: sound = 0xBA; break;
+    case 7: sound = 0xB9; break;
+    case 8: sound = 0xAF; break;
+    case 9: sound = 0xBB; break;
+    default: sound = DETAIL_KIND_NONE_SOUND; break;
+    }
+    if (sound >= 0 && kind != DETAIL_KIND_SPECIAL)
+        FUN_0019e52c(sound & 0xFFFF);
+
+    FUN_003f707c(panel, x, y, 0xD3, 0x3E, 0x47, 0x4C, 0x4F);
+    char *name = panel->item->name;
+    s32 stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, DETAIL_STEREO_SCALE);
+    efctSetSpeed(0.15625f);
+    DetailSpriteFrame *frame = FUN_001834a4(0x31, 0x46);
+    FUN_0018408c(name, 3);
+    s32 nameX = frame->x + x + stereo;
+    FUN_00162790(3, 0xFF, name, (f32)nameX, (f32)(frame->y + y));
+
+    char label[76];
+    textFormatBuffer(label, "%s", FUN_003f74a8(panel, panel->item));
+    FUN_003f757c(panel, x, y, 0xD8, label, 0x4B, 0x4A, 1, 0);
+    u16 value = panel->item->kindAndValue;
+    if (value >> 8 == DETAIL_KIND_NO_VALUE)
+        value = 0;
+    else
+        value = value & 0xFF;
+    FUN_003f533c(panel, x, y, 0xD8, value, 0x78, 0x79, 0x7A, 0xA6D2E3FF, 0);
+    uiDrawStereoKindIcon(panel, x, y, 0xD8, panel->item->kindAndValue >> 8, 0x4A);
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

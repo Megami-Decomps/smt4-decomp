@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push scheduling, adjacent selection-field load merging and footer argument registers differ; -O2 candidate. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 42 diff lines remain, scheduling/register allocation only. */
 #include "camp/CampCec/CampCecView.h"
 #include "camp/RenderCtx.h"
 #include "shard/Shard0032.h"
@@ -51,7 +51,7 @@ u32 campCecViewDrawEntries()
     CecViewDrawState *draw = (CecViewDrawState *)view;
     FUN_00157558(g_renderCtx);
     RenderCtxA *render = g_renderCtx;
-    renderStackPush(&render->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(render, FUN_001692ac(1, 0));
     uiDrawNumberFrame(draw->header, 0, 0, gameDataBlocksGetWord27E90(), 0);
     for (s32 i = 0; i < 3; ++i) {
         const CecViewMarkEntry *entry = gameDataGetMarkEntry(draw->top + i);

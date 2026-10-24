@@ -1,143 +1,111 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00349520` (_code @ 0x349520, 0x2e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the stack frame differs (retail 300 bytes with the 40-byte state above the 256-byte tile buffer, built 376) and the tile index arithmetic is scheduled differently (174 vs 185 rows). */
+#include "common.h"
 
 extern "C" {
 
-int textureConvertLinearTile(unsigned char [256], unsigned int, int, int *);
-int FUN_0023b260(unsigned char [256], int, int, int *);
-int gfxTexFormatGetBitsPerPixel(int, int);
-int rt_memcpy(...);
+/* The conversion state handed to the per-format hooks and tile converters. */
+typedef struct TexTileState {
+    /* 0x00 */ u32 format;
+    /* 0x04 */ u32 type;
+    /* 0x08 */ s32 tilesX;
+    /* 0x0C */ s32 tilesY;
+    /* 0x10 */ u8 *source;
+    /* 0x14 */ u8 *destination;
+    /* 0x18 */ u32 width;
+    /* 0x1C */ u32 height;
+    /* 0x20 */ u32 flipVertical;
+    /* 0x24 */ s32 mode;
+} TexTileState;
 
-typedef int romwright_code(...);
-/* stack frame of param_9: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_9_stack;
+typedef void (*TexFormatHook)(TexTileState *state);
 
-extern romwright_code *DAT_00472990; /* 0x472990 */
-extern romwright_code *pcRam00472994; /* 0x472994 */
-extern romwright_code *pcRam00472998; /* 0x472998 */
-extern romwright_code *pcRam0047299c; /* 0x47299c */
+extern TexFormatHook DAT_00472990[4];
 
-/* Supplied declaration required: textureConvertLinearTile. */
-/* Supplied declaration required: FUN_0023b260. */
-/* Supplied declaration required: gfxTexFormatGetBitsPerPixel. */
-extern unsigned long long __aeabi_uidivmod(int, unsigned int);
-/* Supplied declaration required: rt_memcpy. */
+s32 gfxTexFormatGetBitsPerPixel(u32 format, u32 type);
+void rt_memcpy(void *destination, const void *source, u32 size);
+s32 textureConvertLinearTile(u8 tile[256], u32 destination, s32 rows, TexTileState *state);
+s32 FUN_0023b260(u8 tile[256], s32 destination, s32 rows, TexTileState *state);
 
-
-unsigned int
-FUN_00349520(int param_1,int param_2,int param_3,unsigned int param_4,unsigned int param_5,int param_6,int param_7,
-            int param_8,int param_9)
-
+/* Converts a texture between the linear and 8x8-tiled layouts, one tile at a time through a
+ * 256-byte buffer. `mode` 1 converts between the two tiled variants, `flipVertical` mirrors the
+ * rows and `useHook` runs the per-format fixup first (GL_UNSIGNED_BYTE data only). Sizes must be
+ * multiples of 4. Returns 1 on success, 0 on a bad size. */
+u32 FUN_00349520(s32 mode, u32 format, u32 type, u32 width, u32 height, u8 *source, u8 *destination,
+                 s32 flipVertical, s32 useHook)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  romwright_code *pcVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned char *puVar7;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned long long temp_v8;
-  unsigned char temp_v9 [256];
-  int temp_v10;
-  int iStack_4c;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  int temp_v13;
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int uStack_34;
-  unsigned int temp_v16;
-  int temp_v17;
-  
-  if (((param_4 | param_5) & 3) != 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v11 = param_4 >> 3;
-    uStack_34 = param_5;
-    temp_v12 = param_5 >> 3;
-    temp_v13 = param_6;
-    temp_v14 = param_7;
-    temp_v16 = (unsigned int)(param_8 != 0);
-    temp_v10 = param_2;
-    iStack_4c = param_3;
-    temp_v15 = param_4;
-    temp_v17 = param_1;
-    if (((param_9 != 0) && (param_3 == 0x1401)) &&
-       ((pcVar4 = DAT_00472990, param_2 == 0x6752 ||
-        (((pcVar4 = pcRam00472994, param_2 == 0x6754 || (pcVar4 = pcRam00472998, param_2 == 0x6758))
-         || (pcVar4 = pcRam0047299c, param_2 != 0x6756)))))) {
-      (*pcVar4)(&temp_v10);
+    u8 tile[256];
+    TexTileState state;
+
+    if (((width | height) & 3) != 0) {
+        return 0;
     }
-    temp_v7 = 0;
-    if (temp_v7 < (int)temp_v12) {
-      do {
-        temp_v6 = 0;
-        if (temp_v6 < (int)temp_v11) {
-          do {
-            temp_v4 = temp_v7 * temp_v11 + temp_v6;
-            temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
-            temp_v1 = gfxTexFormatGetBitsPerPixel(temp_v10,iStack_4c);
-            if (temp_v17 != 1) {
-              temp_v4 = 0;
-              temp_v5 = (temp_v11 * (int)temp_v8 * 0x40 * temp_v1 >> 3) +
-                      (((int)((unsigned long long)temp_v8 >> 0x20) * temp_v1) & 0x1fffffff) + temp_v13;
-              puVar7 = temp_v9;
-              do {
-                rt_memcpy(puVar7,temp_v5,temp_v1 & 0x1fffffff);
-                temp_v4 = temp_v4 + 1;
-                puVar7 = puVar7 + (temp_v1 & 0x1fffffff);
-                temp_v5 = temp_v5 + (temp_v15 * temp_v1 >> 3);
-              } while (temp_v4 < 8);
-            }
-            else {
-              rt_memcpy(temp_v9,temp_v13 + ((temp_v4 * temp_v1) & 0x3ffffff) * 8,
-                        (temp_v1 & 0x3ffffff) << 3);
-            }
-            temp_v4 = temp_v7 * temp_v11 + temp_v6;
-            temp_v8 = __aeabi_uidivmod(temp_v4,temp_v11);
-            temp_v3 = (int)((unsigned long long)temp_v8 >> 0x20);
-            temp_v5 = (int)temp_v8;
-            temp_v2 = gfxTexFormatGetBitsPerPixel(temp_v10,iStack_4c);
-            if (temp_v17 != 1) {
-              if (temp_v16 != 0) {
-                temp_v4 = ((temp_v12 - temp_v5) - 1) * temp_v11 + temp_v3;
-              }
-              textureConvertLinearTile(temp_v9,temp_v14 + ((temp_v4 * temp_v2) & 0x3ffffffU) * 8,8,&temp_v10);
-            }
-            else {
-              if (temp_v16 != 0) {
-                temp_v4 = (((temp_v12 - temp_v5) - 1) * temp_v11 * 0x40 * temp_v2 >> 3) +
-                        ((temp_v3 * temp_v2) & 0x1fffffffU);
-              }
-              else {
-                temp_v4 = (temp_v11 * temp_v5 * 0x40 * temp_v2 >> 3) + ((temp_v3 * temp_v2) & 0x1fffffffU);
-              }
-              FUN_0023b260(temp_v9,temp_v4 + temp_v14,8,&temp_v10);
-            }
-            temp_v6 = temp_v6 + 1;
-          } while (temp_v6 < (int)temp_v11);
+    state.format = format;
+    state.type = type;
+    state.tilesX = width >> 3;
+    state.tilesY = height >> 3;
+    state.source = source;
+    state.destination = destination;
+    state.width = width;
+    state.height = height;
+    state.flipVertical = flipVertical != 0;
+    state.mode = mode;
+    if (useHook != 0 && type == 0x1401) {
+        TexFormatHook hook;
+
+        if (format == 0x6752) {
+            hook = DAT_00472990[0];
+        } else if (format == 0x6754) {
+            hook = DAT_00472990[1];
+        } else if (format == 0x6758) {
+            hook = DAT_00472990[2];
+        } else if (format != 0x6756) {
+            hook = DAT_00472990[3];
         }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < (int)temp_v12);
+        if (format != 0x6756) {
+            hook(&state);
+        }
     }
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    for (s32 y = 0; y < state.tilesY; y++) {
+        for (s32 x = 0; x < state.tilesX; x++) {
+            u32 index = y * state.tilesX + x;
+            u32 row = index / state.tilesX;
+            u32 column = index % state.tilesX;
+            s32 bpp = gfxTexFormatGetBitsPerPixel(state.format, state.type);
+
+            if (state.mode != 1) {
+                u8 *line = state.source + (state.tilesX * row * 64 * bpp) / 8 + (column * bpp * 8) / 8;
+                u8 *out = tile;
+
+                for (s32 k = 0; k < 8; k++) {
+                    rt_memcpy(out, line, (bpp * 8) / 8);
+                    out += (bpp * 8) / 8;
+                    line += (state.width * bpp) / 8;
+                }
+            } else {
+                rt_memcpy(tile, state.source + (index * bpp * 64) / 8, (bpp * 64) / 8);
+            }
+            index = y * state.tilesX + x;
+            row = index / state.tilesX;
+            column = index % state.tilesX;
+            bpp = gfxTexFormatGetBitsPerPixel(state.format, state.type);
+            if (state.mode != 1) {
+                if (state.flipVertical != 0) {
+                    index = (state.tilesY - row - 1) * state.tilesX + column;
+                }
+                textureConvertLinearTile(tile, (u32)(state.destination + (index * bpp * 64) / 8), 8, &state);
+            } else {
+                u32 offset;
+
+                if (state.flipVertical != 0) {
+                    offset = ((state.tilesY - row - 1) * state.tilesX * 64 * bpp) / 8 + (column * bpp * 8) / 8;
+                } else {
+                    offset = (state.tilesX * row * 64 * bpp) / 8 + (column * bpp * 8) / 8;
+                }
+                FUN_0023b260(tile, (s32)(state.destination + offset), 8, &state);
+            }
+        }
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

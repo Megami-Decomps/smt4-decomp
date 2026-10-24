@@ -1,287 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba65c` (_code @ 0x3ba65c, 0x3bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: input-sequence detector (hold both shoulder buttons, move the stick through twelve 45-degree sectors, press three buttons in order, then toggle a save flag and play a voice); written from the decompilation, the two 12-entry sector tables are reconstructed from the decompiler's stack stores (two clockwise / counter-clockwise laps) and the sector search is a shared helper */
+#include "common.h"
+
+#define SEQ_STICK_STEPS 12
+#define SEQ_STEP_PRESS_A 12
+#define SEQ_STEP_PRESS_B 13
+#define SEQ_STEP_PRESS_C 14
+#define SEQ_STEP_DONE 15
+#define SEQ_SECTOR_TOLERANCE 10.0f
+#define SEQ_SECTOR_COUNT 6
+#define SEQ_RAD_TO_DEG 57.295776f
+#define SEQ_NO_SECTOR (-1.0f)
+#define SEQ_FLAG_REVERSED 2
+#define SEQ_SAVE_FLAG_OFFSET 0x27E97
+#define SEQ_VOICE 0x1000211
+#define SEQ_BUTTON_SHOULDER_A 7
+#define SEQ_BUTTON_SHOULDER_B 8
+
+struct SeqSave {
+    /* 0x00000 */ u8 unk00000[0x27E97];
+    /* 0x27E97 */ u8 flags;
+};
 
 extern "C" {
+extern SeqSave *DAT_0057f69c;
+extern s32 DAT_0057f6b8;      /* progress through the sequence */
 
-int FUN_00317af8(float *, unsigned char [16], int);
-int sysPlayVoice(int);
-int FUN_0050d8e4(void);
+s32 FUN_00163fd4(u32 button);
+s32 padButtonRepeat(u32 button);
+s32 padButtonIsPressed(u32 button);
+void FUN_00317af8(f32 *angle, u8 buffer[16], s32 flag);
+void FUN_0050d8e4(void);
+void sysPlayVoice(u32 voice);
 
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp90; /* 0x90: local_90 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} void_stack;
+/* Sector centres the stick has to pass through, in order, for both lap directions. */
+static const f32 SEQUENCE_DEFAULT[SEQ_STICK_STEPS] = {
+    270.0f, 225.0f, 180.0f, 135.0f, 90.0f, 45.0f, 270.0f, 225.0f, 180.0f, 135.0f, 90.0f, 45.0f
+};
+static const f32 SEQUENCE_REVERSED[SEQ_STICK_STEPS] = {
+    45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f, 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f
+};
+static const f32 SECTORS[SEQ_SECTOR_COUNT] = { 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f };
 
-extern int DAT_0057f69c; /* 0x57f69c */
-extern int DAT_0057f6b8; /* 0x57f6b8 */
-
-extern int FUN_00163fd4(unsigned int);
-extern int padButtonRepeat(unsigned int);
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_0050d8e4. */
-
-
-unsigned char FUN_003ba65c(void)
-
+/* True when any of the buttons that must stay untouched during the final presses is repeating. */
+static __inline bool seqWrongButtonRepeating(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10 [6];
-  unsigned int temp_v11;
-  unsigned int uStack_8c;
-  unsigned int uStack_88;
-  unsigned int uStack_84;
-  unsigned int uStack_80;
-  unsigned int uStack_7c;
-  unsigned int uStack_78;
-  unsigned int uStack_74;
-  unsigned int temp_v12;
-  unsigned int uStack_6c;
-  unsigned int uStack_68;
-  float afStack_64 [4];
-  unsigned int uStack_54;
-  unsigned int uStack_50;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int temp_v13;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int temp_v14;
-  float temp_v15;
-  unsigned char temp_v16 [16];
-  
-  temp_v0 = *(unsigned char *)(DAT_0057f69c + 0x27e97);
-  temp_v10[0] = 45.0f;
-  temp_v10[1] = 90.0f;
-  temp_v10[2] = 135.0f;
-  temp_v10[3] = 180.0f;
-  temp_v10[4] = 225.0f;
-  temp_v10[5] = 270.0f;
-  temp_v11 = 0x43870000;
-  uStack_8c = 0x43610000;
-  uStack_88 = 0x43340000;
-  uStack_84 = 0x43070000;
-  uStack_80 = 0x42b40000;
-  uStack_7c = 0x42340000;
-  uStack_78 = 0x43870000;
-  uStack_74 = 0x43610000;
-  temp_v12 = 0x43340000;
-  uStack_6c = 0x43070000;
-  uStack_68 = 0x42b40000;
-  afStack_64[0] = 45.0f;
-  afStack_64[1] = 45.0f;
-  afStack_64[2] = 90.0f;
-  afStack_64[3] = 135.0f;
-  uStack_54 = 0x43340000;
-  uStack_50 = 0x43610000;
-  uStack_4c = 0x43870000;
-  uStack_48 = 0x42340000;
-  uStack_44 = 0x42b40000;
-  temp_v14 = 0x43870000;
-  temp_v13 = 0x43070000;
-  uStack_3c = 0x43340000;
-  uStack_38 = 0x43610000;
-  temp_v1 = FUN_00163fd4(7);
-  if (temp_v1 == 0) {
-    DAT_0057f6b8 = 0;
-    return temp_v0;
-  }
-  temp_v1 = FUN_00163fd4(8);
-  if (temp_v1 == 0) {
-    DAT_0057f6b8 = 0;
-    return temp_v0;
-  }
-  if (DAT_0057f6b8 < 0xc) {
-    FUN_00317af8(&temp_v15,temp_v16,0);
-    FUN_0050d8e4();
-    temp_v15 = temp_v15 * 57.295776f;
-    temp_v9 = -1.0f;
-    if (temp_v15 < 0.0f) {
-      temp_v15 = temp_v15 + 360.0f;
+    return padButtonRepeat(2) != 0 || padButtonRepeat(1) != 0 || padButtonRepeat(9) != 0
+        || padButtonRepeat(10) != 0 || padButtonRepeat(0) != 0;
+}
+
+/* The sector centre the stick angle is within the tolerance of, or SEQ_NO_SECTOR. */
+static __inline f32 seqSectorOf(f32 angle)
+{
+    for (s32 i = 0; i < SEQ_SECTOR_COUNT; i++) {
+        if (SECTORS[i] - SEQ_SECTOR_TOLERANCE <= angle && angle <= SECTORS[i] + SEQ_SECTOR_TOLERANCE)
+            return SECTORS[i];
     }
-    if ((temp_v0 & 2) != 0) {
-      temp_v6 = afStack_64[DAT_0057f6b8 + 1];
-      temp_v7 = afStack_64[DAT_0057f6b8];
+    return SEQ_NO_SECTOR;
+}
+
+u8 FUN_003ba65c(void)
+{
+    u8 flags = DAT_0057f69c->flags;
+    const f32 *sequence = (flags & SEQ_FLAG_REVERSED) != 0 ? SEQUENCE_REVERSED : SEQUENCE_DEFAULT;
+
+    if (FUN_00163fd4(SEQ_BUTTON_SHOULDER_A) == 0 || FUN_00163fd4(SEQ_BUTTON_SHOULDER_B) == 0) {
+        DAT_0057f6b8 = 0;
+        return flags;
     }
-    else {
-      temp_v6 = temp_v10[DAT_0057f6b8 + 6];
-      temp_v7 = temp_v10[DAT_0057f6b8 + 5];
-    }
-    temp_v1 = 0;
-    temp_v5 = temp_v9;
-    if (DAT_0057f6b8 >= 1) {
-      do {
-        temp_v8 = temp_v10[temp_v1] - 10.0f;
-        temp_v3 = temp_v8 == temp_v15;
-        temp_v4 = temp_v15 <= temp_v8;
-        if (!temp_v4 || temp_v3) {
-          temp_v8 = temp_v10[temp_v1] + 10.0f;
-          temp_v3 = temp_v15 == temp_v8;
-          temp_v4 = temp_v8 <= temp_v15;
+
+    if (DAT_0057f6b8 < SEQ_STICK_STEPS) {
+        f32 angle;
+        u8 buffer[16];
+        FUN_00317af8(&angle, buffer, 0);
+        FUN_0050d8e4();
+        angle *= SEQ_RAD_TO_DEG;
+        if (angle < 0.0f)
+            angle += 360.0f;
+
+        f32 sector = seqSectorOf(angle);
+        if (DAT_0057f6b8 >= 1 && sector == sequence[DAT_0057f6b8 - 1])
+            sector = SEQ_NO_SECTOR;
+        if (sector < 0.0f)
+            return flags;
+        if (sequence[DAT_0057f6b8] != sector) {
+            DAT_0057f6b8 = 0;
+            return flags;
         }
-        if (!temp_v4 || temp_v3) {
-          temp_v5 = temp_v10[temp_v1];
-          if (temp_v10[temp_v1] == temp_v7) {
-            temp_v5 = temp_v9;
-          }
-          break;
+        DAT_0057f6b8++;
+        return flags;
+    }
+
+    if (DAT_0057f6b8 == SEQ_STEP_PRESS_A || DAT_0057f6b8 == SEQ_STEP_PRESS_B || DAT_0057f6b8 == SEQ_STEP_PRESS_C) {
+        u32 expected = DAT_0057f6b8 == SEQ_STEP_PRESS_A ? 10 : DAT_0057f6b8 == SEQ_STEP_PRESS_B ? 5 : 6;
+        if (padButtonIsPressed(expected) != 0) {
+            DAT_0057f6b8++;
+        } else if (seqWrongButtonRepeating()) {
+            DAT_0057f6b8 = 0;
+            return flags;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
     }
-    else {
-      do {
-        if ((temp_v10[temp_v1] - 10.0f <= temp_v15) && (temp_v15 <= temp_v10[temp_v1] + 10.0f)) {
-          temp_v5 = temp_v10[temp_v1];
-          break;
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-    }
-    if (temp_v5 < 0.0f) {
-      return temp_v0;
-    }
-    if (temp_v6 != temp_v5) {
-      DAT_0057f6b8 = 0;
-      return temp_v0;
-    }
-    DAT_0057f6b8 = DAT_0057f6b8 + 1;
-    return temp_v0;
-  }
-  if (DAT_0057f6b8 == 0xc) {
-    temp_v1 = padButtonIsPressed(10);
-    if (temp_v1 == 0) {
-      temp_v1 = padButtonRepeat(2);
-      if (temp_v1 != 0) {
+
+    if (DAT_0057f6b8 == SEQ_STEP_DONE) {
+        u8 saved = DAT_0057f69c->flags;
+        if ((flags & SEQ_FLAG_REVERSED) == 0)
+            saved |= SEQ_FLAG_REVERSED;
+        else
+            saved &= ~SEQ_FLAG_REVERSED;
+        DAT_0057f69c->flags = saved;
+        sysPlayVoice(SEQ_VOICE);
         DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(1);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(9);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(10);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(0);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
     }
-    else {
-      DAT_0057f6b8 = DAT_0057f6b8 + 1;
-    }
-  }
-  else if (DAT_0057f6b8 != 0xd) {
-    if (DAT_0057f6b8 == 0xe) {
-      temp_v1 = padButtonIsPressed(6);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = DAT_0057f6b8 + 1;
-      }
-      else {
-        temp_v1 = padButtonRepeat(2);
-        if (temp_v1 != 0) {
-          DAT_0057f6b8 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padButtonRepeat(1);
-        if (temp_v1 != 0) {
-          DAT_0057f6b8 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padButtonRepeat(9);
-        if (temp_v1 != 0) {
-          DAT_0057f6b8 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padButtonRepeat(10);
-        if (temp_v1 != 0) {
-          DAT_0057f6b8 = 0;
-          return temp_v0;
-        }
-        temp_v1 = padButtonRepeat(0);
-        if (temp_v1 != 0) {
-          DAT_0057f6b8 = 0;
-          return temp_v0;
-        }
-      }
-    }
-  }
-  else {
-    temp_v1 = padButtonIsPressed(5);
-    if (temp_v1 == 0) {
-      temp_v1 = padButtonRepeat(2);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(1);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(9);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(10);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-      temp_v1 = padButtonRepeat(0);
-      if (temp_v1 != 0) {
-        DAT_0057f6b8 = 0;
-        return temp_v0;
-      }
-    }
-    else {
-      DAT_0057f6b8 = DAT_0057f6b8 + 1;
-    }
-  }
-  if (DAT_0057f6b8 == 0xf) {
-    temp_v2 = *(unsigned char *)(DAT_0057f69c + 0x27e97);
-    if ((temp_v0 & 2) == 0) {
-      temp_v2 = temp_v2 | 2;
-    }
-    else {
-      temp_v2 = temp_v2 & 0xfd;
-    }
-    *(unsigned char *)(DAT_0057f69c + 0x27e97) = temp_v2;
-    sysPlayVoice(0x1000211);
-    DAT_0057f6b8 = 0;
-    return temp_v0;
-  }
-  return temp_v0;
+    return flags;
 }
 
 } /* extern "C" */

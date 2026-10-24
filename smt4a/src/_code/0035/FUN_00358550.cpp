@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the three stack pushes' old/new entry address registers and load scheduling differ; 119 instructions each. */
 #include "camp/RenderCtx.h"
 namespace {
 inline void pushRasterState(RenderCtxA *context, s32 state)

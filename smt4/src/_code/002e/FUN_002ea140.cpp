@@ -1,221 +1,185 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ea140` (_code @ 0x2ea140, 0x3c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: per-frame step of the lmap intro/exit scene (eases the camera, then a state machine: set up the camera behind the player, wait, hand to the map, and the exit steps that switch back to scene 1 / 0x10); written from the decompilation, the arguments of mathDistanceBetweenPoints / mathPositionHeadingDegrees / the trig helpers are not recovered (called with the angle where one is visible) and the u32 copies of the float targets are kept */
+#include "common.h"
+
+#define LMAP_STATE_SETUP 0
+#define LMAP_STATE_SETTLE 1
+#define LMAP_STATE_WAIT 2
+#define LMAP_STATE_ENTER 10
+#define LMAP_STATE_ENTER_WAIT 0xB
+#define LMAP_STATE_EXIT_A 0x5A
+#define LMAP_STATE_EXIT_B 0x5B
+#define LMAP_STATE_EXIT_WAIT 0x5C
+#define LMAP_NEAR_DISTANCE 60.0f
+#define LMAP_BEHIND_DISTANCE 100.0f
+#define LMAP_DEG_TO_RAD 0.017453292f
+#define LMAP_HALF_TURN 180.0f
+#define LMAP_SETTLE_FRAMES 3
+#define LMAP_ENTER_FRAMES 0x10
+#define LMAP_EXIT_FRAMES 4
+#define LMAP_SCENE_MAP 1
+#define LMAP_SCENE_ENTER 0x10
+#define LMAP_BUTTON_ACCEPT 5
+#define LMAP_BUTTON_HELP_PRESET 0xDB
+
+struct LmapScene {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 state;
+    /* 0x08 */ s32 frame;
+    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x1C */ f32 camX;
+    /* 0x20 */ f32 camY;
+    /* 0x24 */ f32 camZ;
+    /* 0x28 */ f32 targetX;
+    /* 0x2C */ f32 targetY;
+    /* 0x30 */ f32 targetZ;
+    /* 0x34 */ u8 unk34[0x18];
+    /* 0x4C */ f32 heading;
+    /* 0x50 */ f32 savedHeading;
+    /* 0x54 */ u32 easeMode;
+    /* 0x58 */ f32 easeValue;
+    /* 0x5C */ u8 unk5C[0x10];
+    /* 0x6C */ u8 flag;
+};
+
+struct LmapView {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ f32 heading;
+    /* 0x1C */ u8 unk1C[0x90];
+    /* 0xAC */ s32 selection;
+};
 
 extern "C" {
+extern LmapView *DAT_004474f4;
+extern LmapScene *g_lmapScene;
+extern u32 DAT_0049f99c;      /* interface record activated while the scene runs */
+extern u32 DAT_0049f9a0;      /* spawn position x */
+extern u32 DAT_0049f9a4;      /* spawn position y */
+extern u32 DAT_0049f9a8;      /* spawn position z */
+extern u8 DAT_0049fb46;
 
-int mapIfActivateRecord(int, unsigned int);
-int lmapSetSceneId(unsigned int);
-int FUN_0027fc14(int);
-int FUN_0027fca0(int);
-int mapSelectContainingRegions(void);
-int FUN_002804ec(int);
-int mapEaseSceneHeading(void);
-int FUN_00282390(void);
-int FUN_0028250c(void);
-int mathDistanceBetweenPoints(void);
-int mathPositionHeadingDegrees(void);
-int buttonHelpSetPreset(int);
+void mapIfActivateRecord(s32 active, u32 record);
+void lmapSetSceneId(u32 scene);
+void FUN_0027fc14(s32 mode);
+void FUN_0027fca0(s32 mode);
+void mapSelectContainingRegions(void);
+void FUN_002804ec(f32 *position);
+void mapEaseSceneHeading(void);
+f32 FUN_00282390(f32 angle);
+f32 FUN_0028250c(f32 angle);
+f32 mathDistanceBetweenPoints(void);
+f32 mathPositionHeadingDegrees(void);
+void buttonHelpSetPreset(s32 preset);
+s32 inputIsQuestMenuPressed(void);
+s32 FUN_0027ee9c(void);
+s32 padIsButtonPressed(u32 button);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int DAT_004474f4; /* 0x4474f4 */
-extern int g_lmapScene; /* 0x447e88 */
-extern unsigned int DAT_0049f99c; /* 0x49f99c */
-extern unsigned int DAT_0049f9a0; /* 0x49f9a0 */
-extern unsigned int DAT_0049f9a4; /* 0x49f9a4 */
-extern unsigned int DAT_0049f9a8; /* 0x49f9a8 */
-extern unsigned char DAT_0049fb46; /* 0x49fb46 */
-
-/* Supplied declaration required: mapIfActivateRecord. */
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_0027ee9c(void);
-/* Supplied declaration required: lmapSetSceneId. */
-/* Supplied declaration required: FUN_0027fc14. */
-/* Supplied declaration required: FUN_0027fca0. */
-/* Supplied declaration required: mapSelectContainingRegions. */
-/* Supplied declaration required: FUN_002804ec. */
-/* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_00282390. */
-/* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern int padIsButtonPressed(unsigned int);
-
+/* Moves the target to the spawn position, pushed out behind `heading`. */
+static __inline void lmapPlaceBehind(LmapScene *scene, f32 heading)
+{
+    scene->targetX = *reinterpret_cast<f32 *>(&DAT_0049f9a0);
+    scene->targetY = *reinterpret_cast<f32 *>(&DAT_0049f9a4);
+    scene->targetZ = *reinterpret_cast<f32 *>(&DAT_0049f9a8);
+    f32 angle = (heading + LMAP_HALF_TURN) * LMAP_DEG_TO_RAD;
+    scene->targetX += FUN_0028250c(angle) * LMAP_BEHIND_DISTANCE;
+    scene->targetZ += FUN_00282390(angle) * LMAP_BEHIND_DISTANCE;
+}
 
 void FUN_002ea140(void)
-
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  mapEaseSceneHeading();
-  temp_v1 = g_lmapScene;
-  temp_v3 = *(float *)(g_lmapScene + 0x1c) +
-          (*(float *)(g_lmapScene + 0x28) - *(float *)(g_lmapScene + 0x1c)) * 0.33333334f;
-  *(float *)(g_lmapScene + 0x1c) = temp_v3;
-  *(float *)(temp_v1 + 0x20) =
-       *(float *)(temp_v1 + 0x20) + (*(float *)(temp_v1 + 0x2c) - *(float *)(temp_v1 + 0x20)) * 0.16666667f
-  ;
-  *(float *)(temp_v1 + 0x24) =
-       *(float *)(temp_v1 + 0x24) + (*(float *)(temp_v1 + 0x30) - *(float *)(temp_v1 + 0x24)) * 0.33333334f
-  ;
-  temp_v2 = *(int *)(temp_v1 + 4);
-  if (temp_v2 != 0xb) {
-    if (temp_v2 < 0xc) {
-      if (temp_v2 != 0) {
-        if (temp_v2 == 1) {
-          *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-          mapIfActivateRecord(1,DAT_0049f99c);
-          temp_v1 = g_lmapScene;
-          if (*(int *)(g_lmapScene + 8) >= 3) {
-            temp_v2 = *(int *)(g_lmapScene + 4);
-            *(unsigned int *)(g_lmapScene + 0x54) = 0x1d;
-            *(unsigned int *)(temp_v1 + 0x58) = 0x40000000;
-            *(int *)(temp_v1 + 4) = temp_v2 + 1;
-            *(unsigned int *)(temp_v1 + 8) = 0;
-          }
-          FUN_002804ec(g_lmapScene + 0x28);
-          mapSelectContainingRegions();
-          return;
-        }
-        temp_v4 = 0x40a00000;
-        if (temp_v2 == 2) {
-          *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-          mapIfActivateRecord(1,DAT_0049f99c);
-          temp_v2 = FUN_0027ee9c();
-          temp_v1 = g_lmapScene;
-          if (temp_v2 != 0) {
-            *(unsigned int *)(g_lmapScene + 4) = 10;
-            *(unsigned int *)(temp_v1 + 8) = 0;
-          }
-          else {
-            temp_v1 = padIsButtonPressed(5);
-            if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-              temp_v1 = DAT_004474f4;
-              *(unsigned int *)(DAT_004474f4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
-              *(unsigned int *)(temp_v1 + 0xac) = 0;
-              FUN_0027fc14(0);
-              temp_v1 = g_lmapScene;
-              *(unsigned int *)(g_lmapScene + 0x54) = 0;
-              *(unsigned int *)(temp_v1 + 0x58) = temp_v4;
-              mapIfActivateRecord(0,DAT_0049f99c);
-              temp_v1 = g_lmapScene;
-              *(unsigned int *)(g_lmapScene + 4) = 0x5a;
-              *(unsigned int *)(temp_v1 + 8) = 0;
-            }
-          }
-          FUN_002804ec(g_lmapScene + 0x28);
-          mapSelectContainingRegions();
-          return;
-        }
-        if (temp_v2 != 10) {
-          FUN_002804ec(g_lmapScene + 0x28);
-          mapSelectContainingRegions();
-          return;
-        }
-        DAT_0049fb46 = 0;
-        *(unsigned int *)(temp_v1 + 0x54) = 8;
-        *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
-        FUN_0027fca0(1);
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
-      else {
-        *(unsigned int *)(temp_v1 + 0x54) = 0;
-        *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
-        *(unsigned char *)(temp_v1 + 0x6c) = 0;
-        mathDistanceBetweenPoints();
-        temp_v0 = DAT_0049f9a8;
-        temp_v4 = DAT_0049f9a4;
-        temp_v1 = g_lmapScene;
-        temp_v6 = 180.0f;
-        temp_v5 = 0.017453292f;
-        temp_v7 = 100.0f;
-        if ((int)temp_v3 < 0x42700000) {
-          *(unsigned int *)(g_lmapScene + 0x28) = DAT_0049f9a0;
-          *(unsigned int *)(temp_v1 + 0x2c) = temp_v4;
-          *(unsigned int *)(temp_v1 + 0x30) = temp_v0;
-          temp_v3 = (*(float *)(temp_v1 + 0x4c) + 180.0f) * 0.017453292f;
-          FUN_0028250c();
-          temp_v1 = g_lmapScene;
-          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * temp_v7;
-          temp_v5 = (*(float *)(temp_v1 + 0x4c) + temp_v6) * temp_v5;
-          FUN_00282390();
-          temp_v1 = g_lmapScene;
-          *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v7;
-          temp_v4 = *(unsigned int *)(temp_v1 + 0x28);
-          mathPositionHeadingDegrees();
-          *(unsigned int *)(g_lmapScene + 0x50) = temp_v4;
-        }
-        else {
-          temp_v3 = *(float *)(g_lmapScene + 0x28);
-          mathPositionHeadingDegrees();
-          temp_v1 = g_lmapScene;
-          *(float *)(g_lmapScene + 0x50) = temp_v3;
-          temp_v0 = DAT_0049f9a8;
-          temp_v4 = DAT_0049f9a4;
-          *(unsigned int *)(temp_v1 + 0x28) = DAT_0049f9a0;
-          *(unsigned int *)(temp_v1 + 0x2c) = temp_v4;
-          *(unsigned int *)(temp_v1 + 0x30) = temp_v0;
-          temp_v3 = (temp_v3 + temp_v6) * temp_v5;
-          FUN_0028250c();
-          temp_v1 = g_lmapScene;
-          *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * temp_v7;
-          temp_v5 = (*(float *)(temp_v1 + 0x50) + temp_v6) * temp_v5;
-          FUN_00282390();
-          *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v7;
+    mapEaseSceneHeading();
+    LmapScene *scene = g_lmapScene;
+    scene->camX += (scene->targetX - scene->camX) * 0.33333334f;
+    scene->camY += (scene->targetY - scene->camY) * 0.16666667f;
+    scene->camZ += (scene->targetZ - scene->camZ) * 0.33333334f;
+
+    switch (scene->state) {
+    case LMAP_STATE_SETUP:
+        scene->easeMode = 0;
+        scene->easeValue = 3.0f;
+        scene->flag = 0;
+        if (mathDistanceBetweenPoints() < LMAP_NEAR_DISTANCE) {
+            lmapPlaceBehind(scene, scene->heading);
+            scene = g_lmapScene;
+            scene->savedHeading = mathPositionHeadingDegrees();
+        } else {
+            scene->savedHeading = mathPositionHeadingDegrees();
+            lmapPlaceBehind(scene, scene->savedHeading);
         }
         FUN_0027fc14(10);
-        *(unsigned int *)(DAT_004474f4 + 0xac) = 0xffffffff;
-        buttonHelpSetPreset(0xdb);
-        mapIfActivateRecord(1,DAT_0049f99c);
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
+        DAT_004474f4->selection = -1;
+        buttonHelpSetPreset(LMAP_BUTTON_HELP_PRESET);
+        mapIfActivateRecord(1, DAT_0049f99c);
+        scene = g_lmapScene;
+        scene->state++;
+        scene->frame = 0;
+        break;
+
+    case LMAP_STATE_SETTLE:
+        scene->frame++;
+        mapIfActivateRecord(1, DAT_0049f99c);
+        scene = g_lmapScene;
+        if (scene->frame >= LMAP_SETTLE_FRAMES) {
+            scene->easeMode = 0x1D;
+            scene->easeValue = 2.0f;
+            scene->state++;
+            scene->frame = 0;
+        }
+        break;
+
+    case LMAP_STATE_WAIT:
+        scene->frame++;
+        mapIfActivateRecord(1, DAT_0049f99c);
+        if (FUN_0027ee9c() != 0) {
+            g_lmapScene->state = LMAP_STATE_ENTER;
+            g_lmapScene->frame = 0;
+        } else if (padIsButtonPressed(LMAP_BUTTON_ACCEPT) != 0 || inputIsQuestMenuPressed() != 0) {
+            DAT_004474f4->heading = g_lmapScene->savedHeading;
+            DAT_004474f4->selection = 0;
+            FUN_0027fc14(0);
+            g_lmapScene->easeMode = 0;
+            g_lmapScene->easeValue = 5.0f;
+            mapIfActivateRecord(0, DAT_0049f99c);
+            g_lmapScene->state = LMAP_STATE_EXIT_A;
+            g_lmapScene->frame = 0;
+        }
+        break;
+
+    case LMAP_STATE_ENTER:
+        DAT_0049fb46 = 0;
+        scene->easeMode = 8;
+        scene->easeValue = 5.0f;
+        FUN_0027fca0(1);
+        scene = g_lmapScene;
+        scene->state++;
+        scene->frame = 0;
+        break;
+
+    case LMAP_STATE_ENTER_WAIT:
+        scene->frame++;
+        if (scene->frame >= LMAP_ENTER_FRAMES)
+            lmapSetSceneId(LMAP_SCENE_ENTER);
+        break;
+
+    case LMAP_STATE_EXIT_A:
+    case LMAP_STATE_EXIT_B:
+        scene->state++;
+        scene->frame = 0;
+        break;
+
+    case LMAP_STATE_EXIT_WAIT:
+        scene->frame++;
+        if (scene->frame >= LMAP_EXIT_FRAMES) {
+            FUN_0027fca0(0);
+            lmapSetSceneId(LMAP_SCENE_MAP);
+        }
+        break;
+
+    default:
+        break;
     }
-    else if (temp_v2 != 0x5a && temp_v2 != 0x5b) {
-      if ((temp_v2 != 0x5c) ||
-         (temp_v2 = *(int *)(temp_v1 + 8) + 1, *(int *)(temp_v1 + 8) = temp_v2, temp_v2 < 4)) {
-        FUN_002804ec(g_lmapScene + 0x28);
-        mapSelectContainingRegions();
-        return;
-      }
-      FUN_0027fca0(0);
-      temp_v4 = 1;
-      lmapSetSceneId(temp_v4);
-      FUN_002804ec(g_lmapScene + 0x28);
-      mapSelectContainingRegions();
-      return;
-    }
-    *(int *)(temp_v1 + 4) = temp_v2 + 1;
-    *(unsigned int *)(temp_v1 + 8) = 0;
-  }
-  else {
-    temp_v2 = *(int *)(temp_v1 + 8) + 1;
-    *(int *)(temp_v1 + 8) = temp_v2;
-    if (temp_v2 < 0x10) {
-      FUN_002804ec(g_lmapScene + 0x28);
-      mapSelectContainingRegions();
-      return;
-    }
-    temp_v4 = 0x10;
-    lmapSetSceneId(temp_v4);
-  }
-  FUN_002804ec(g_lmapScene + 0x28);
-  mapSelectContainingRegions();
-  return;
+
+    FUN_002804ec(&g_lmapScene->targetX);
+    mapSelectContainingRegions();
 }
 
 } /* extern "C" */

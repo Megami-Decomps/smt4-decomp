@@ -1,182 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f79c` (_code @ 0x23f79c, 0x328 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-struct BtlMainState;
+/* NON_MATCHING: first rewrite from the asm (185 rows against 202): retail spills both parameters (push {r0,r1}, reloads state/flags with ldrd) and keeps the two 3-float tables as stack copies of one 24-byte rodata block, merging the unit stride/index math into sl, which the one-pass loop here does not reproduce */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int CONCAT44(double, double);
-int FUN_0027da30(int, int);
-void btlAssignGroupedActionOrder(BtlMainState *, unsigned int);
-int FUN_003364d0(int, unsigned int);
-int FUN_003c1964(int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+#define FORMATION_ROWS 3
+#define FIRST_FORMATION_SLOT 4
+#define END_FORMATION_SLOT 54
+#define MODEL_TABLE_SIZE 42
 
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_2_stack;
+struct ModelData {
+    u8 pad00[0x24];
+    u16 width;                      /* 0x24: horizontal space the model takes */
+};
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_003364d0. */
-/* Supplied declaration required: FUN_003c1964. */
+struct ModelEntry {
+    u8 pad00[4];
+    s32 key;                        /* 0x04 */
+    u8 pad08[8];
+    ModelData *data;                /* 0x10 */
+};
 
+struct PartnerRef {
+    u8 pad00[0x0C];
+    s32 key;                        /* 0x0C */
+};
 
-void FUN_0023f79c(int param_1,unsigned int param_2)
+/* One formation unit, stride 0x114 (observed fields only). */
+struct FormationUnit {
+    f32 position[3];                /* 0x00 */
+    f32 target[3];                  /* 0x0C */
+    u8 pad18[0x24];
+    s8 row;                         /* 0x3C */
+    u8 pad3D[3];
+    f32 spacing;                    /* 0x40 */
+    u8 pad44[0x0C];
+    u32 flags;                      /* 0x50: 1 present, 0x10 hidden, 0x80 placed */
+    u8 pad54[0x0E];
+    s16 partnerId;                  /* 0x62 */
+    u8 pad64[0x114 - 0x64];
+};
 
+struct BtlMainState {
+    u8 pad0000[0x1E98];
+    FormationUnit **units;          /* 0x1E98: points at the unit array base */
+    u8 pad1E9C[0x2134 - 0x1E9C];
+    ModelEntry *models[MODEL_TABLE_SIZE]; /* 0x2134 */
+};
+
+PartnerRef *FUN_0027da30(BtlMainState *state, s32 id);
+int FUN_003c1964(s32 row);
+int FUN_003364d0(BtlMainState *state, u32 flags);
+void btlAssignGroupedActionOrder(BtlMainState *state, u32 flags);
+
+/* Width model of the partner behind formation unit `unit`: found in the model table by key. */
+static ModelData *formationUnitModel(BtlMainState *state, const FormationUnit *unit)
 {
-/* irregular: 2 goto(s); irregular input(s): in_fpscr, in_s0; 8 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float *pfVar5;
-  unsigned int temp_v4;
-  int temp_v5;
-  int *piVar8;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  unsigned long long temp_v12;
-  float temp_v13;
-  unsigned long long temp_v14;
-  unsigned long long temp_v15;
-  float temp_v16 [13];
-  int temp_v17;
-  unsigned int temp_v18;
-  
-  temp_v7 = 0;
-  temp_v12 = 0;
-  temp_v16[3] = 35.0f;
-  temp_v16[4] = 20.0f;
-  temp_v16[5] = 50.0f;
-  temp_v16[2] = -20.0f;
-  temp_v16[0] = 0.0f;
-  temp_v16[1] = 15.0f;
-  if ((param_2 & 0x400) != 0) {
-    temp_v15 = 0xbf00000000000000;
-    temp_v14 = 0x402000003f000000;
-    temp_v6 = 0;
-    piVar8 = (int *)(param_1 + 0x1e98);
-    temp_v17 = param_1;
-    temp_v18 = param_2;
-    do {
-      temp_v8 = 4;
-      temp_v11 = (float)temp_v12;
-      temp_v13 = temp_v16[temp_v6 + 3];
-      do {
-        temp_v3 = temp_v17;
-        temp_v1 = *piVar8;
-        temp_v4 = *(unsigned int *)(temp_v1 + temp_v8 * 0x114 + 0x50);
-        if ((((temp_v4 & 1) != 0 && (temp_v4 & 0x80) != 0) && ((temp_v4 & 0x10) == 0)) &&
-           (*(char *)(temp_v1 + temp_v8 * 0x114 + 0x3c) == temp_v6)) {
-          temp_v2 = temp_v17;
-          FUN_0027da30(temp_v17,(int)*(short *)(temp_v1 + temp_v8 * 0x114 + 0x62));
-          temp_v1 = 0;
-          do {
-            temp_v5 = *(int *)(temp_v3 + temp_v1 * 4 + 0x2134);
-            if ((temp_v5 != 0) && (*(int *)(temp_v5 + 4) == *(int *)(temp_v2 + 0xc))) {
-              temp_v3 = *(int *)(temp_v3 + temp_v1 * 4 + 0x2134);
-              goto LAB_0023f8b0;
+    PartnerRef *partner = FUN_0027da30(state, unit->partnerId);
+    for (s32 i = 0; i < MODEL_TABLE_SIZE; i++) {
+        ModelEntry *entry = state->models[i];
+        if (entry != 0 && entry->key == partner->key) {
+            return entry->data;
+        }
+    }
+    return 0;
+}
+
+static s32 formationUnitInRow(const FormationUnit *unit, s32 row)
+{
+    return (unit->flags & 1) != 0 && (unit->flags & 0x80) != 0 && (unit->flags & 0x10) == 0 && unit->row == row;
+}
+
+/* Lines the placed units of each of the three formation rows up side by side, centred on x = 0 of the
+ * row (at the row's depth), then assigns the grouped action order. Runs only when `flags` has 0x400. */
+void FUN_0023f79c(BtlMainState *state, u32 flags)
+{
+    s32 count = 0;
+    f32 span[FORMATION_ROWS] = { 35.0f, 20.0f, 50.0f };
+    f32 depth[FORMATION_ROWS] = { 0.0f, 15.0f, -20.0f };
+
+    if ((flags & 0x400) != 0) {
+        for (s32 row = 0; row < FORMATION_ROWS; row++) {
+            f32 total = 0.0f;
+            f32 width = 0.0f;
+
+            for (s32 i = FIRST_FORMATION_SLOT; i < END_FORMATION_SLOT; i++) {
+                FormationUnit *unit = &(*state->units)[i];
+                if (formationUnitInRow(unit, row)) {
+                    ModelData *model = formationUnitModel(state, unit);
+                    count++;
+                    width = (f32)model->width;
+                    total += width * (*state->units)[i].spacing;
+                }
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 0x2a);
-          temp_v3 = 0;
-LAB_0023f8b0:
-          temp_v7 = temp_v7 + 1;
-          in_s0 = (float)VectorUnsignedToFloat
-                                   ((unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 0x10) + 0x24),
-                                    (unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v11 = temp_v11 + in_s0 * *(float *)(temp_v8 * 0x114 + 0x40 + *piVar8);
-        }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < 0x36);
-      FUN_003c1964(temp_v6);
-      temp_v9 = (float)VectorSignedToFloat(temp_v7 - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v11 = temp_v11 + temp_v9 * in_s0 * (float)((unsigned long long)temp_v14 >> 0x20);
-      temp_v12 = CONCAT44(temp_v13,temp_v11);
-      temp_v11 = temp_v13 - temp_v11;
-      temp_v9 = (float)temp_v15;
-      if (temp_v7 != 1) {
-        temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v11) << 0x1f) |
-                ((unsigned int)(temp_v9 == temp_v11) << 0x1e);
-        in_fpscr = temp_v4 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v11 != temp_v11)) << 0x1c);
-        temp_v0 = (unsigned char)(temp_v4 >> 0x18);
-        temp_v10 = temp_v16[temp_v6];
-        if ((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-          in_s0 = temp_v11 * (float)temp_v14 - temp_v13 * (float)temp_v14;
-        }
-        else {
-          in_s0 = temp_v13 * (float)((unsigned long long)temp_v15 >> 0x20);
-        }
-      }
-      else {
-        temp_v10 = temp_v16[temp_v6];
-        in_s0 = temp_v9;
-      }
-      temp_v8 = 4;
-      do {
-        temp_v3 = temp_v17;
-        temp_v1 = *piVar8;
-        temp_v4 = *(unsigned int *)(temp_v1 + temp_v8 * 0x114 + 0x50);
-        if ((((temp_v4 & 1) != 0 && (temp_v4 & 0x80) != 0) && ((temp_v4 & 0x10) == 0)) &&
-           (*(char *)(temp_v1 + temp_v8 * 0x114 + 0x3c) == temp_v6)) {
-          temp_v2 = temp_v17;
-          temp_v11 = in_s0;
-          FUN_0027da30(temp_v17,(int)*(short *)(temp_v1 + temp_v8 * 0x114 + 0x62));
-          temp_v1 = 0;
-          do {
-            temp_v5 = *(int *)(temp_v3 + temp_v1 * 4 + 0x2134);
-            if ((temp_v5 != 0) && (*(int *)(temp_v5 + 4) == *(int *)(temp_v2 + 0xc))) {
-              temp_v3 = *(int *)(temp_v3 + temp_v1 * 4 + 0x2134);
-              goto LAB_0023f9ec;
+            FUN_003c1964(row);
+            total += (f32)(count - 1) * (width * 2.5f);
+            f32 free = span[row] - total;
+            f32 cursor;
+            if (count != 1) {
+                if (free > 0.0f) {
+                    cursor = span[row] * -0.5f;
+                } else {
+                    cursor = free * 0.5f - span[row] * 0.5f;
+                }
+            } else {
+                cursor = 0.0f;
             }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 0x2a);
-          temp_v3 = 0;
-LAB_0023f9ec:
-          temp_v3 = *(int *)(temp_v3 + 0x10);
-          if (temp_v7 != 1) {
-            temp_v13 = (float)VectorUnsignedToFloat
-                                      ((unsigned int)*(unsigned short *)(temp_v3 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3)
-            ;
-            temp_v11 = temp_v11 + *(float *)(temp_v8 * 0x114 + 0x40 + *piVar8) * temp_v13 * (float)temp_v14;
-          }
-          pfVar5 = (float *)(*piVar8 + temp_v8 * 0x114);
-          *pfVar5 = temp_v11;
-          pfVar5[1] = temp_v9;
-          pfVar5[2] = temp_v10;
-          pfVar5 = (float *)(*piVar8 + temp_v8 * 0x114 + 0xc);
-          *pfVar5 = temp_v11;
-          pfVar5[1] = temp_v9;
-          pfVar5[2] = temp_v10;
-          temp_v11 = *(float *)(*piVar8 + temp_v8 * 0x114 + 0x40);
-          temp_v13 = (float)VectorUnsignedToFloat
-                                    ((unsigned int)*(unsigned short *)(temp_v3 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-          in_s0 = temp_v11 * temp_v13 + temp_v11 * (float)((unsigned long long)temp_v14 >> 0x20) + in_s0;
+
+            for (s32 i = FIRST_FORMATION_SLOT; i < END_FORMATION_SLOT; i++) {
+                FormationUnit *unit = &(*state->units)[i];
+                if (formationUnitInRow(unit, row)) {
+                    ModelData *model = formationUnitModel(state, unit);
+                    f32 x = cursor;
+                    if (count != 1) {
+                        x += (*state->units)[i].spacing * ((f32)model->width * 0.5f);
+                    }
+                    unit = &(*state->units)[i];
+                    unit->position[0] = x;
+                    unit->position[1] = 0.0f;
+                    unit->position[2] = depth[row];
+                    unit = &(*state->units)[i];
+                    unit->target[0] = x;
+                    unit->target[1] = 0.0f;
+                    unit->target[2] = depth[row];
+                    f32 spacing = (*state->units)[i].spacing;
+                    cursor = spacing * (f32)model->width + spacing * 2.5f + cursor;
+                }
+            }
         }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < 0x36);
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < 3);
-    FUN_003364d0(temp_v17,temp_v18);
-    btlAssignGroupedActionOrder((BtlMainState *)temp_v17, temp_v18);
-  }
-  return;
+        FUN_003364d0(state, flags);
+        btlAssignGroupedActionOrder(state, flags);
+    }
 }
 
 } /* extern "C" */

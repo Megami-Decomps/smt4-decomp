@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack pointer calculation and parameter/color load scheduling differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 12 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "event/2dEvent/EventEffect.h"
 #include "event/EffectQuadParameters.h"
@@ -23,7 +23,7 @@ u32 FUN_00261254(void)
     const EffectColorView *effect = reinterpret_cast<const EffectColorView *>(g_eventEffect.effect);
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     EffectQuadParameters parameters;
     parameters.weight = 1.0f;
     parameters.u = 0.0f;

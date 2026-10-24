@@ -1,186 +1,177 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003de464` (_code @ 0x3de464, 0x2d0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001ad9b4(void);
+/* A record (only the fields read here): a kind byte at 6, a flags byte at 7 and four 8-byte
+ * slots starting at 0x100 whose first halfword says whether the slot is used. */
+typedef struct KindRecord {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u8 kind;
+    /* 0x07 */ u8 flags;           /* 8: unavailable, 0x10: needs the mask */
+    /* 0x08 */ u8 unk08[0xF8];
+    struct {
+        /* 0x100 */ u16 id;
+        /* 0x102 */ u8 unk102[6];
+    } slots[4];
+} KindRecord;
 
-typedef struct fn_003de464_arg0 fn_003de464_arg0;
-struct fn_003de464_arg0 {
-    unsigned char pad_0x0[0x2];
-    byte field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0x3];
-    byte field_0x6; /* +0x6 */
-    byte field_0x7; /* +0x7 */
-    unsigned char pad_0x8[0xf8];
-    ushort field_0x100; /* +0x100 */
-    unsigned char pad_0x102[0x6];
-    ushort field_0x108; /* +0x108 */
-    unsigned char pad_0x10a[0x6];
-    ushort field_0x110; /* +0x110 */
-    unsigned char pad_0x112[0x6];
-    ushort field_0x118; /* +0x118 */
-};
+typedef struct FlagEntry {
+    u8 unk00[2];
+    u8 mask;
+} FlagEntry;
 
-extern int gameFlagBlockGetEntry(void);
-/* Supplied declaration required: FUN_001ad9b4. */
+FlagEntry *gameFlagBlockGetEntry(void);
+KindRecord *FUN_001ad9b4(u32 id);
 
-
-/* WARNING: Type propagation algorithm not settling */
-
-unsigned int FUN_003de464(fn_003de464_arg0 *param_1,unsigned char param_2)
-
+/* The message id describing record `id`: by its kind, the id of its first slot and how many of
+ * its four slots are used. Returns -1 when there is none. */
+s32 FUN_003de464(u32 id, u8 mask)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  char temp_v3;
-  
-  temp_v2 = gameFlagBlockGetEntry();
-  FUN_001ad9b4();
-  if (param_1 != (fn_003de464_arg0 *)0x0) {
-    if (((*(unsigned char *)(temp_v2 + 2) & param_2) == 0) && ((param_1->field_0x7 & 0x10) != 0)) {
-      return 0x11;
+    FlagEntry *entry = gameFlagBlockGetEntry();
+    KindRecord *record = FUN_001ad9b4(id);
+
+    if (record == NULL) {
+        return -1;
     }
-    if ((param_1->field_0x7 & 8) != 0) {
-      return 0xffffffff;
+    if ((entry->mask & mask) == 0 && (record->flags & 0x10) != 0) {
+        return 0x11;
     }
-    temp_v1 = param_1->field_0x100;
-    temp_v0 = param_1->field_0x6;
-    temp_v3 = temp_v1 != 0;
-    if (param_1->field_0x108 != 0) {
-      temp_v3 = temp_v3 + '\x01';
+    if ((record->flags & 8) != 0) {
+        return -1;
     }
-    if (param_1->field_0x110 != 0) {
-      temp_v3 = temp_v3 + '\x01';
+    u16 first = record->slots[0].id;
+    u8 kind = record->kind;
+    u8 used = first != 0;
+
+    if (record->slots[1].id != 0) {
+        used++;
     }
-    if (param_1->field_0x118 != 0) {
-      temp_v3 = temp_v3 + '\x01';
+    if (record->slots[2].id != 0) {
+        used++;
     }
-    if (temp_v0 != 3) {
-      if (temp_v0 >= 3) {
-        if (temp_v0 != 7) {
-          if (temp_v0 == 10 && temp_v1 == 8) {
-            return 0x42;
-          }
-          return 0xffffffff;
-        }
-        if (temp_v3 == '\x01') {
-          return 0x34;
-        }
-        if (temp_v3 != '\x02') {
-          if (temp_v3 == '\x03') {
-            return 0x36;
-          }
-          if (temp_v3 == '\x04') {
-            return 0x37;
-          }
-          return 0xffffffff;
-        }
-        return 0x35;
-      }
-      if (temp_v0 != 0) {
-        if (temp_v0 != 1) {
-          return 0xffffffff;
-        }
-        if (temp_v3 == '\x01') {
-          return 0x16;
-        }
-        if (temp_v3 == '\x02') {
-          return 0x17;
-        }
-        if (temp_v3 != '\x03') {
-          if (temp_v3 == '\x04') {
-            return 0x19;
-          }
-          return 0xffffffff;
-        }
-        return 0x18;
-      }
-      if ((temp_v1 == 1) || (temp_v1 == 7)) {
-        if (temp_v3 == '\x01') {
-          return 0x12;
-        }
-        if (temp_v3 == '\x02') {
-          return 0x13;
-        }
-        if (temp_v3 == '\x03') {
-          return 0x14;
-        }
-        if (temp_v3 == '\x04') {
-          return 0x15;
-        }
-        return 0xffffffff;
-      }
-      if (temp_v1 == 2) {
-        if (temp_v3 == '\x01') {
-          return 0x2e;
-        }
-        if (temp_v3 == '\x02') {
-          return 0x2f;
-        }
-        if (temp_v3 == '\x03') {
-          return 0x30;
-        }
-        if (temp_v3 == '\x04') {
-          return 0x31;
-        }
-        return 0xffffffff;
-      }
+    if (record->slots[3].id != 0) {
+        used++;
     }
-    else {
-      if ((temp_v1 == 1) || (temp_v1 == 7)) {
-        if (temp_v3 == '\x01') {
-          return 0x1a;
+    if (kind != 3) {
+        if (kind >= 3) {
+            if (kind != 7) {
+                if (kind == 10 && first == 8) {
+                    return 0x42;
+                }
+                return -1;
+            }
+            if (used == 1) {
+                return 0x34;
+            }
+            if (used != 2) {
+                if (used == 3) {
+                    return 0x36;
+                }
+                if (used == 4) {
+                    return 0x37;
+                }
+                return -1;
+            }
+            return 0x35;
         }
-        if (temp_v3 == '\x02') {
-          return 0x1b;
+        if (kind != 0) {
+            if (kind != 1) {
+                return -1;
+            }
+            if (used == 1) {
+                return 0x16;
+            }
+            if (used == 2) {
+                return 0x17;
+            }
+            if (used != 3) {
+                if (used == 4) {
+                    return 0x19;
+                }
+                return -1;
+            }
+            return 0x18;
         }
-        if (temp_v3 == '\x03') {
-          return 0x1c;
+        if (first == 1 || first == 7) {
+            if (used == 1) {
+                return 0x12;
+            }
+            if (used == 2) {
+                return 0x13;
+            }
+            if (used == 3) {
+                return 0x14;
+            }
+            if (used == 4) {
+                return 0x15;
+            }
+            return -1;
         }
-        if (temp_v3 == '\x04') {
-          return 0x1d;
+        if (first == 2) {
+            if (used == 1) {
+                return 0x2E;
+            }
+            if (used == 2) {
+                return 0x2F;
+            }
+            if (used == 3) {
+                return 0x30;
+            }
+            if (used == 4) {
+                return 0x31;
+            }
+            return -1;
         }
-        return 0xffffffff;
-      }
-      if (temp_v1 == 2) {
-        if (temp_v3 == '\x01') {
-          return 0x1e;
+    } else {
+        if (first == 1 || first == 7) {
+            if (used == 1) {
+                return 0x1A;
+            }
+            if (used == 2) {
+                return 0x1B;
+            }
+            if (used == 3) {
+                return 0x1C;
+            }
+            if (used == 4) {
+                return 0x1D;
+            }
+            return -1;
         }
-        if (temp_v3 == '\x02') {
-          return 0x1f;
+        if (first == 2) {
+            if (used == 1) {
+                return 0x1E;
+            }
+            if (used == 2) {
+                return 0x1F;
+            }
+            if (used == 3) {
+                return 0x20;
+            }
+            if (used == 4) {
+                return 0x21;
+            }
+            return -1;
         }
-        if (temp_v3 == '\x03') {
-          return 0x20;
-        }
-        if (temp_v3 == '\x04') {
-          return 0x21;
-        }
-        return 0xffffffff;
-      }
     }
-    if (temp_v1 == 6) {
-      return 0x29;
+    if (first == 6) {
+        return 0x29;
     }
-    if (temp_v1 == 5) {
-      if (temp_v3 == '\x01') {
-        return 0x2a;
-      }
-      if (temp_v3 == '\x02') {
-        return 0x2b;
-      }
-      if (temp_v3 == '\x03') {
-        return 0x2c;
-      }
-      if (temp_v3 == '\x04') {
-        return 0x2d;
-      }
+    if (first == 5) {
+        if (used == 1) {
+            return 0x2A;
+        }
+        if (used == 2) {
+            return 0x2B;
+        }
+        if (used == 3) {
+            return 0x2C;
+        }
+        if (used == 4) {
+            return 0x2D;
+        }
     }
-  }
-  return 0xffffffff;
+    return -1;
 }
 
-} /* extern "C" */
+}

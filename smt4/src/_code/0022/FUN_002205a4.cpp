@@ -1,203 +1,193 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002205a4` (_code @ 0x2205a4, 0x3bc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: starts a bust-up cut transition to a new entry (picks the side and index from the id, snapshots the running jobs, re-evaluates the new nodes and sets the ease function and offsets); written from the decompilation, the repeated node-refresh loops are merged into a helper and the float constants are not compared with retail */
+#include "common.h"
+
+#define CUT_ID_SPECIAL 200
+#define CUT_ID_SPLIT 100
+#define CUT_SPECIAL_INDEX 0xB
+#define CUT_STATE_IDLE_START 2
+#define CUT_STATE_SWITCHING 5
+#define CUT_OFFSET 75.0f
+#define CUT_JOB_COUNT 4
+
+#define CUT_EASE_NONE 0
+#define CUT_EASE_A 1
+#define CUT_EASE_B 2
+
+struct CutNodeData {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 count;
+};
+
+struct CutNodeHead {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ struct { u8 unk[8]; CutNodeData *data; } *inner;
+};
+
+struct CutRef {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ CutNodeHead *nodes;
+    /* 0x08 */ u32 object;
+};
+
+struct CutNodeOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ struct { u8 unk[0x4C]; CutNodeHead *first; CutNodeHead *second; } *extra;
+};
+
+struct BustupCutAnim {
+    /* 0x000 */ u8 unk000[0x50C];
+    /* 0x50C */ u8 camera[0x44];
+    /* 0x550 */ u8 cameraCopy[0x44];
+    /* 0x594 */ u8 unk594[0x44];
+    /* 0x5D8 */ f32 duration;
+    /* 0x5DC */ f32 elapsed;
+    /* 0x5E0 */ s32 (*ease)();
+    /* 0x5E4 */ CutNodeOwner *node;
+    /* 0x5E8 */ CutRef *ref;
+    /* 0x5EC */ s32 state;
+    /* 0x5F0 */ u8 started;
+    /* 0x5F1 */ u8 dirty;
+    /* 0x5F2 */ u8 unk5F2[2];
+    /* 0x5F4 */ s32 side;
+    /* 0x5F8 */ s32 previousSide;
+    /* 0x5FC */ s32 previousId;
+    /* 0x600 */ s32 id;
+    /* 0x604 */ s32 index;
+    /* 0x608 */ u8 unk608[0x28];
+    /* 0x630 */ u32 jobs[CUT_JOB_COUNT];
+    /* 0x640 */ f32 offsetA;
+    /* 0x644 */ f32 savedOffsetA;
+    /* 0x648 */ f32 offsetB;
+    /* 0x64C */ f32 offsetC;
+    /* 0x650 */ f32 offsetD;
+    /* 0x654 */ f32 offsetE;
+    /* 0x658 */ CutNodeOwner *nodes[12];
+    /* 0x688 */ u8 unk688[0x40];
+    /* 0x6C8 */ CutRef *refs[12];
+    /* 0x6F8 */ u8 unk6F8[0x48];
+    /* 0x740 */ u32 savedJob;
+};
 
 extern "C" {
+extern BustupCutAnim *g_bustupCutAnim;
 
-int jobSavePositionSnapshot(unsigned int);
-int FUN_0024ecc0(...);
-int FUN_0024edd4(int, int);
-int FUN_0028703c(unsigned int);
-int FUN_0029bb14(unsigned int);
-void FUN_0029c2cc(unsigned int, int);
-int cameraExportParameters(int, unsigned int);
-int VectorSignedToFloat(unsigned int, int);
-int rt_memcpy_w(int, int, int);
+s32 FUN_0026e70c();
+s32 FUN_00247f0c();
+s32 FUN_001241a8();
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
+void cameraExportParameters(void *camera, CutRef *ref);
+void FUN_0029c2cc(CutRef *ref, s32 flag);
+void FUN_0024edd4(CutNodeHead *node, s32 index);
+void FUN_0028703c(u32 object);
+void FUN_0029bb14(u32 object);
+s32 jobIsValid(u32 job);
+void jobSavePositionSnapshot(u32 job);
+void FUN_0024ecc0(u32 job, s32 index);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-extern int FUN_001241a8(...); /* 0x1241a8 */
-extern int FUN_00247f0c(...); /* 0x247f0c */
-extern int FUN_0026e70c(...); /* 0x26e70c */
-extern int g_bustupCutAnim; /* 0x43dfc0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: jobSavePositionSnapshot. */
-/* Supplied declaration required: FUN_0024ecc0. */
-/* Supplied declaration required: FUN_0024edd4. */
-/* Supplied declaration required: FUN_0028703c. */
-/* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: cameraExportParameters. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_002205a4(int param_1,int param_2,unsigned int param_3)
-
+/* Refreshes every sub-node of a node head, last to first. */
+static __inline void cutRefreshNodes(CutNodeHead *head)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  romwright_code *pcVar4;
-  int *piVar5;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v0 = g_bustupCutAnim;
-  if (g_bustupCutAnim == 0) {
-    return;
-  }
-  *(unsigned int *)(g_bustupCutAnim + 0x5f8) = *(unsigned int *)(g_bustupCutAnim + 0x5f4);
-  temp_v3 = *(unsigned int *)(temp_v0 + 0x600);
-  *(int *)(temp_v0 + 0x600) = param_1;
-  *(unsigned int *)(temp_v0 + 0x5fc) = temp_v3;
-  piVar5 = (int *)(g_bustupCutAnim + 0x604);
-  if (param_1 != 200) {
-    temp_v1 = *(int *)(temp_v0 + 0x600);
-    if (param_1 < 100) {
-      *(unsigned int *)(temp_v0 + 0x5f4) = 0;
+    if (head != NULL) {
+        for (s32 i = head->inner->data->count - 1; i >= 0; i--)
+            FUN_0024edd4(head, i);
     }
-    else {
-      *(unsigned int *)(temp_v0 + 0x5f4) = 1;
-      temp_v1 = temp_v1 - 100;
+}
+
+void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
+{
+    BustupCutAnim *anim = g_bustupCutAnim;
+    if (anim == NULL)
+        return;
+
+    anim->previousSide = anim->side;
+    anim->previousId = anim->id;
+    anim->id = id;
+    if (id != CUT_ID_SPECIAL) {
+        s32 index = anim->id;
+        if (id < CUT_ID_SPLIT) {
+            anim->side = 0;
+        } else {
+            anim->side = 1;
+            index -= CUT_ID_SPLIT;
+        }
+        anim->index = index;
+    } else {
+        anim->index = CUT_SPECIAL_INDEX;
+        anim->side = 1;
     }
-    *(int *)(temp_v0 + 0x604) = temp_v1;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0x604) = 0xb;
-    *(unsigned int *)(temp_v0 + 0x5f4) = 1;
-  }
-  temp_v3 = 0;
-  temp_v6 = 0x42960000;
-  if (*(char *)(temp_v0 + 0x5f0) == '\0') {
-    *(unsigned int *)(temp_v0 + 0x5e8) = *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x604) * 4 + 0x6c8);
-    *(unsigned int *)(temp_v0 + 0x5e4) = *(unsigned int *)(temp_v0 + *piVar5 * 4 + 0x658);
-    *(unsigned char *)(temp_v0 + 0x5f1) = 0;
-    if (*(int *)(temp_v0 + 0x600) == 200) {
-      *(unsigned int *)(temp_v0 + 0x740) = *(unsigned int *)(temp_v0 + 0x630);
-      FUN_0024ecc0(0);
+
+    if (anim->started == 0) {
+        anim->ref = anim->refs[anim->index];
+        anim->node = anim->nodes[anim->index];
+        anim->dirty = 0;
+        if (anim->id == CUT_ID_SPECIAL) {
+            anim->savedJob = anim->jobs[0];
+            FUN_0024ecc0(0, 0);
+        }
+        anim->state = CUT_STATE_IDLE_START;
+        anim->offsetA = anim->side == 0 ? 0.0f : CUT_OFFSET;
+        anim->offsetC = 0.0f;
+        anim->previousSide = anim->side;
+        anim->previousId = anim->id;
+        return;
     }
-    *(unsigned int *)(temp_v0 + 0x5ec) = 2;
-    if (*(int *)(temp_v0 + 0x5f4) == 0) {
-      *(unsigned int *)(temp_v0 + 0x640) = temp_v3;
+
+    cameraExportParameters(anim->camera, anim->ref);
+    if (anim->dirty != 0)
+        FUN_0029c2cc(anim->ref, 0);
+    cutRefreshNodes(anim->ref->nodes);
+    FUN_0028703c((u32)anim->node->extra);
+    FUN_0029bb14((u32)anim->node->extra);
+
+    s32 (*ease)() = FUN_0026e70c;
+    if (easeKind == CUT_EASE_A)
+        ease = FUN_00247f0c;
+    else if (easeKind == CUT_EASE_B)
+        ease = FUN_001241a8;
+    anim->duration = (f32)frames;
+    anim->elapsed = 0.0f;
+    anim->ease = ease;
+    anim->savedOffsetA = anim->offsetA;
+    rt_memcpy_w(anim->cameraCopy, anim->camera, 0x44);
+    anim->offsetE = 0.0f;
+    anim->offsetD = 0.0f;
+    anim->offsetC = 0.0f;
+    anim->offsetA = 0.0f;
+    if (anim->side != 0) {
+        anim->offsetB = CUT_OFFSET;
+        if (anim->previousSide == 0)
+            anim->offsetD = -CUT_OFFSET;
+    } else {
+        anim->offsetB = 0.0f;
+        if (anim->previousSide == 1)
+            anim->offsetD = CUT_OFFSET;
     }
-    else {
-      *(unsigned int *)(temp_v0 + 0x640) = temp_v6;
+
+    for (s32 i = 0; i < CUT_JOB_COUNT; i++) {
+        if (jobIsValid(anim->jobs[i]) != 0)
+            jobSavePositionSnapshot(anim->jobs[i]);
     }
-    *(unsigned int *)(temp_v0 + 0x64c) = temp_v3;
-    *(int *)(temp_v0 + 0x5f8) = *(int *)(temp_v0 + 0x5f4);
-    *(unsigned int *)(temp_v0 + 0x5fc) = *(unsigned int *)(temp_v0 + 0x600);
-    return;
-  }
-  cameraExportParameters(temp_v0 + 0x50c,*(unsigned int *)(temp_v0 + 0x5e8));
-  if (*(char *)(temp_v0 + 0x5f1) != '\0') {
-    FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x5e8),0);
-  }
-  temp_v1 = *(int *)(*(int *)(temp_v0 + 0x5e8) + 4);
-  if (temp_v1 != 0) {
-    temp_v2 = *(int *)(*(int *)(*(int *)(temp_v1 + 8) + 8) + 0x10);
-    while (temp_v2 = temp_v2 - 1, -1 < temp_v2) {
-      FUN_0024edd4(temp_v1,temp_v2);
+
+    anim->ref = anim->refs[anim->index];
+    anim->node = anim->nodes[anim->index];
+    anim->dirty = 0;
+    cutRefreshNodes(anim->ref->nodes);
+    FUN_0028703c((u32)anim->node->extra);
+    FUN_0029bb14((u32)anim->node->extra);
+    cutRefreshNodes(anim->node->extra->first);
+    cutRefreshNodes(anim->node->extra->second);
+    anim->state = CUT_STATE_SWITCHING;
+
+    if (anim->id != CUT_ID_SPECIAL) {
+        if (anim->previousId == CUT_ID_SPECIAL)
+            FUN_0024ecc0(anim->savedJob, 0);
+        return;
     }
-  }
-  piVar5 = (int *)(temp_v0 + 0x5e4);
-  FUN_0028703c(*(unsigned int *)(*(int *)(temp_v0 + 0x5e4) + 8));
-  pcVar4 = (romwright_code *)FUN_0029bb14(*(unsigned int *)(*piVar5 + 8));
-  if (param_2 == 0) {
-    pcVar4 = FUN_0026e70c;
-  }
-  temp_v5 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(temp_v0 + 0x5d8) = temp_v5;
-  *(unsigned int *)(temp_v0 + 0x5dc) = temp_v3;
-  if (param_2 != 0) {
-    if (param_2 == 1) {
-      pcVar4 = FUN_00247f0c;
-      *(romwright_code **)(temp_v0 + 0x5e0) = pcVar4;
-    }
-    else if (param_2 == 2) {
-      *(romwright_code **)(temp_v0 + 0x5e0) = FUN_001241a8;
-    }
-  }
-  else {
-    *(romwright_code **)(temp_v0 + 0x5e0) = pcVar4;
-  }
-  *(unsigned int *)(temp_v0 + 0x644) = *(unsigned int *)(temp_v0 + 0x640);
-  rt_memcpy_w(temp_v0 + 0x550,temp_v0 + 0x50c,0x44);
-  *(unsigned int *)(temp_v0 + 0x654) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x650) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x64c) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x640) = temp_v3;
-  if (*(int *)(temp_v0 + 0x5f4) != 0) {
-    *(unsigned int *)(temp_v0 + 0x648) = temp_v6;
-    if (*(int *)(temp_v0 + 0x5f8) == 0) {
-      *(unsigned int *)(temp_v0 + 0x650) = 0xc2960000;
-    }
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0x648) = temp_v3;
-    if (*(int *)(temp_v0 + 0x5f8) == 1) {
-      *(unsigned int *)(temp_v0 + 0x650) = temp_v6;
-    }
-  }
-  temp_v1 = 0;
-  do {
-    temp_v4 = temp_v0 + temp_v1 * 4;
-    temp_v2 = jobIsValid(*(unsigned int *)(temp_v4 + 0x630));
-    if (temp_v2 != 0) {
-      jobSavePositionSnapshot(*(unsigned int *)(temp_v4 + 0x630));
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  temp_v2 = temp_v0 + *(int *)(temp_v0 + 0x604) * 4;
-  temp_v1 = *(int *)(temp_v2 + 0x6c8);
-  *(int *)(temp_v0 + 0x5e8) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x5e4) = *(unsigned int *)(temp_v2 + 0x658);
-  *(unsigned char *)(temp_v0 + 0x5f1) = 0;
-  temp_v1 = *(int *)(temp_v1 + 4);
-  if (temp_v1 != 0) {
-    temp_v2 = *(int *)(*(int *)(*(int *)(temp_v1 + 8) + 8) + 0x10);
-    while (temp_v2 = temp_v2 - 1, -1 < temp_v2) {
-      FUN_0024edd4(temp_v1,temp_v2);
-    }
-  }
-  FUN_0028703c(*(unsigned int *)(*(int *)(temp_v0 + 0x5e4) + 8));
-  FUN_0029bb14(*(unsigned int *)(*piVar5 + 8));
-  temp_v1 = *(int *)(*(int *)(*piVar5 + 8) + 0x4c);
-  if (temp_v1 != 0) {
-    temp_v2 = *(int *)(*(int *)(*(int *)(temp_v1 + 8) + 8) + 0x10);
-    while (temp_v2 = temp_v2 - 1, -1 < temp_v2) {
-      FUN_0024edd4(temp_v1,temp_v2);
-    }
-  }
-  temp_v1 = *(int *)(*(int *)(*(int *)(temp_v0 + 0x5e4) + 8) + 0x50);
-  if (temp_v1 != 0) {
-    temp_v2 = *(int *)(*(int *)(*(int *)(temp_v1 + 8) + 8) + 0x10);
-    while (temp_v2 = temp_v2 - 1, -1 < temp_v2) {
-      FUN_0024edd4(temp_v1,temp_v2);
-    }
-  }
-  *(unsigned int *)(temp_v0 + 0x5ec) = 5;
-  if (*(int *)(temp_v0 + 0x600) != 200) {
-    if (*(int *)(temp_v0 + 0x5fc) != 200) {
-      return;
-    }
-    FUN_0024ecc0(*(unsigned int *)(temp_v0 + 0x740),0);
-    return;
-  }
-  *(unsigned int *)(temp_v0 + 0x740) = *(unsigned int *)(temp_v0 + 0x630);
-  FUN_0024ecc0(0,1);
-  FUN_0024ecc0(0,2);
-  FUN_0024ecc0(0,3);
-  return;
+    anim->savedJob = anim->jobs[0];
+    FUN_0024ecc0(0, 1);
+    FUN_0024ecc0(0, 2);
+    FUN_0024ecc0(0, 3);
 }
 
 } /* extern "C" */

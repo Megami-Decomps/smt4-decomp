@@ -1,184 +1,134 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f034c` (_code @ 0x3f034c, 0x368 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of a battle phase step that clears the phase's flag masks and advances to the next sub-phase; armcc here schedules the 64-bit mask updates (retail loads each mask half separately and uses bic/mvn chains) and the saturating counters differently. */
+#include "common.h"
+
+/* The battle main state (only the fields this step reads). */
+struct BattleMainState {
+    /* 0x0000 */ u8 unk0000[0x8C];
+    /* 0x008C */ u32 phase;
+};
+
+struct BattleFlagsState {
+    /* 0x0000 */ u8 unk0000[0xAC];
+    /* 0x00AC */ s32 encounterKind;
+    /* 0x00B0 */ u8 unk00B0[4];
+    /* 0x00B4 */ s32 encounterTimer;
+    /* 0x00B8 */ u8 unk00B8[0x44E8];
+    /* 0x45A0 */ u64 flags;
+    /* 0x45A8 */ u8 unk45A8[0x10];
+    /* 0x45B8 */ u8 counterA;
+    /* 0x45B9 */ u8 counterB;
+    /* 0x45BA */ u8 unk45BA[0x716];
+    /* 0x4CD0 */ u8 hasExtra;
+    /* 0x4CD1 */ u8 unk4CD1[0xF];
+    /* 0x4CE0 */ s32 counterC;
+    /* 0x4CE4 */ u8 unk4CE4[0x84];
+    /* 0x4D68 */ u32 extra;
+    /* 0x4D6C */ u8 unk4D6C[0xE2];
+    /* 0x4E4E */ u16 counterD;
+};
+
+/* The battle main globals: the state pointer and the flag masks the phases test. */
+struct BattleMainGlobals {
+    /* 0x000 */ BattleMainState *state;
+    /* 0x004 */ u8 unk004[0xCC];
+    /* 0x0D0 */ u64 pendingMask;
+    /* 0x0D8 */ u8 unk0D8[0x18];
+    /* 0x0F0 */ u64 clearMaskA;
+    /* 0x0F8 */ u8 unk0F8[0x10];
+    /* 0x108 */ u64 clearMaskB;
+    /* 0x110 */ u64 clearMaskC;
+    /* 0x118 */ u8 unk118[0x38];
+    /* 0x150 */ u64 clearMaskD;
+    /* 0x158 */ u8 unk158[0x40];
+    /* 0x198 */ u64 clearMaskE;
+    /* 0x1A0 */ u64 clearMaskF;
+    /* 0x1A8 */ u8 unk1A8[0x10];
+    /* 0x1B8 */ u64 resolveMask;
+    /* 0x1C0 */ u64 clearMaskG;
+    /* 0x1C8 */ u8 unk1C8[8];
+    /* 0x1D0 */ u64 clearMaskH;
+};
 
 extern "C" {
+extern BattleMainGlobals g_btlMain;
+extern u32 g_btlUiBlock;
 
-int FUN_003eaf20(void);
-int FUN_003eafa0(int, int);
-int FUN_003eb0cc(int, int);
-int FUN_003f22fc(int, int);
-int FUN_003f26d4(int);
-int gameFlagSetValue(int, int);
-int FUN_004a9d1c(unsigned int);
-int btlUiIdsRefresh(unsigned int);
-int FUN_004fbf90(int);
+void gameFlagSetValue(s32 flag, s32 value);
+u32 *FUN_003eaf20(BattleFlagsState *battle);
+void FUN_003f26d4(BattleFlagsState *battle);
+void btlUiIdsRefresh(u32 block);
+void FUN_004a9d1c(u32 block);
+void FUN_004fbf90(s32 arg);
+void FUN_003eafa0(BattleFlagsState *battle, s32 arg);
+void FUN_003f22fc(BattleFlagsState *battle, s32 arg);
+void FUN_003eb0cc(BattleFlagsState *battle, s32 arg);
+void FUN_004c6294(void);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int g_btlMain; /* 0x573920 */
-extern unsigned int DAT_005739f0; /* 0x5739f0 */
-extern unsigned int DAT_005739f4; /* 0x5739f4 */
-extern unsigned int DAT_00573a10; /* 0x573a10 */
-extern unsigned int DAT_00573a14; /* 0x573a14 */
-extern unsigned int DAT_00573a28; /* 0x573a28 */
-extern unsigned int DAT_00573a2c; /* 0x573a2c */
-extern unsigned int DAT_00573a30; /* 0x573a30 */
-extern unsigned int DAT_00573a34; /* 0x573a34 */
-extern unsigned int DAT_00573a70; /* 0x573a70 */
-extern unsigned int DAT_00573a74; /* 0x573a74 */
-extern unsigned int DAT_00573ab8; /* 0x573ab8 */
-extern unsigned int DAT_00573abc; /* 0x573abc */
-extern unsigned int DAT_00573ac0; /* 0x573ac0 */
-extern unsigned int DAT_00573ac4; /* 0x573ac4 */
-extern unsigned int DAT_00573ad8; /* 0x573ad8 */
-extern unsigned int DAT_00573adc; /* 0x573adc */
-extern unsigned int DAT_00573ae0; /* 0x573ae0 */
-extern unsigned int DAT_00573ae4; /* 0x573ae4 */
-extern unsigned int DAT_00573af0; /* 0x573af0 */
-extern unsigned int DAT_00573af4; /* 0x573af4 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: FUN_003eaf20. */
-/* Supplied declaration required: FUN_003eafa0. */
-/* Supplied declaration required: FUN_003eb0cc. */
-/* Supplied declaration required: FUN_003f22fc. */
-/* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_004a9d1c. */
-/* Supplied declaration required: btlUiIdsRefresh. */
-/* Supplied declaration required: FUN_004fbf90. */
-
-
-void FUN_003f034c(int param_1)
-
+/* Clamps a byte counter's increment at 255. */
+static void bumpByte(u8 *counter)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  char temp_v1;
-  unsigned short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  unsigned int temp_v6;
-  int *piVar9;
-  char *pcVar10;
-  char *pcVar11;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  
-  gameFlagSetValue(0x591,0);
-  puVar7 = (unsigned int *)(param_1 + 0x45a0);
-  temp_v0 = ~DAT_00573a30;
-  temp_v7 = ~DAT_00573a70;
-  temp_v3 = ~DAT_00573a10;
-  temp_v5 = ~DAT_00573af0;
-  *(unsigned int *)(param_1 + 0x45a4) =
-       *(unsigned int *)(param_1 + 0x45a4) & ~DAT_00573a34 & ~DAT_00573a14 & ~DAT_00573a74 & ~DAT_00573af4;
-  *puVar7 = *puVar7 & temp_v0 & temp_v3 & temp_v7 & temp_v5;
-  if (*(char *)(param_1 + 0x4cd0) != '\0') {
-    temp_v4 = param_1;
-    FUN_003eaf20();
-    *(unsigned int *)(param_1 + 0x4d68) = *(unsigned int *)(temp_v4 + 0x400);
-  }
-  temp_v3 = *puVar7 & ~DAT_00573ab8 & ~DAT_00573ac0;
-  temp_v5 = *(unsigned int *)(param_1 + 0x45a4) & ~DAT_00573abc & ~DAT_00573ac4;
-  *puVar7 = temp_v3;
-  *(unsigned int *)(param_1 + 0x45a4) = temp_v5;
-  temp_v8 = temp_v3 & DAT_00573ad8;
-  temp_v6 = temp_v5 & DAT_00573adc;
-  temp_v7 = ~DAT_00573adc;
-  temp_v0 = ~DAT_00573ae4;
-  *puVar7 = temp_v3 & ~DAT_00573ad8 & ~DAT_00573ae0;
-  *(unsigned int *)(param_1 + 0x45a4) = temp_v5 & temp_v7 & temp_v0;
-  if (temp_v8 == 0 && temp_v6 == 0) {
+    u32 value = (u8)(*counter + 1);
+    if (value >= 255)
+        value = 255;
+    *counter = (u8)value;
+}
+
+/* Runs one step of the battle phase: clears the masks of the phases that just ended and, depending on
+ * whether the phase resolved, starts the next sub-phase. */
+void FUN_003f034c(BattleFlagsState *battle)
+{
+    gameFlagSetValue(0x591, 0);
+    battle->flags &= ~g_btlMain.clearMaskC & ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD & ~g_btlMain.clearMaskH;
+    if (battle->hasExtra)
+        battle->extra = FUN_003eaf20(battle)[0x100];
+    battle->flags &= ~g_btlMain.clearMaskE & ~g_btlMain.clearMaskF;
+    bool resolved = (battle->flags & g_btlMain.resolveMask) != 0;
+    battle->flags &= ~g_btlMain.resolveMask & ~g_btlMain.clearMaskG;
+    if (resolved) {
+        FUN_003f26d4(battle);
+        btlUiIdsRefresh(g_btlUiBlock);
+        battle->flags &= ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD;
+        if (g_btlMain.state != NULL)
+            g_btlMain.state->phase = 12;
+        return;
+    }
     FUN_004a9d1c(g_btlUiBlock);
-    piVar9 = (int *)(param_1 + 0x4ce0);
-    pcVar10 = (char *)(param_1 + 0x45b9);
-    if ((*puVar7 & DAT_005739f0) != 0 || (*(unsigned int *)(param_1 + 0x45a4) & DAT_005739f4) != 0) {
-      temp_v3 = ~DAT_005739f4;
-      pcVar11 = (char *)(param_1 + 0x45b8);
-      temp_v0 = ~DAT_00573a2c;
-      *puVar7 = *puVar7 & ~DAT_005739f0 & ~DAT_00573a28;
-      *(unsigned int *)(param_1 + 0x45a4) = *(unsigned int *)(param_1 + 0x45a4) & temp_v3 & temp_v0;
-      temp_v1 = *pcVar11 + '\x01';
-      *pcVar11 = temp_v1;
-      if (temp_v1 == -1) {
-        temp_v1 = -1;
-      }
-      *pcVar11 = temp_v1;
-      temp_v1 = *pcVar10 + '\x01';
-      *pcVar10 = temp_v1;
-      if (temp_v1 == -1) {
-        temp_v1 = -1;
-      }
-      *pcVar10 = temp_v1;
-      if (-1 < *piVar9) {
-        temp_v4 = *piVar9 + 1;
-        *piVar9 = temp_v4;
-        if (temp_v4 >= 0xff) {
-          temp_v4 = 0xff;
+    if (battle->flags & g_btlMain.pendingMask) {
+        battle->flags &= ~g_btlMain.pendingMask & ~g_btlMain.clearMaskB;
+        bumpByte(&battle->counterA);
+        bumpByte(&battle->counterB);
+        if (battle->counterC >= 0) {
+            battle->counterC++;
+            if (battle->counterC >= 255)
+                battle->counterC = 255;
         }
-        *piVar9 = temp_v4;
-      }
-      if (g_btlMain != 0) {
-        *(unsigned int *)(g_btlMain + 0x8c) = 0x18;
-      }
-      FUN_003eafa0(param_1,0);
-      FUN_003f22fc(param_1,1);
-      FUN_003eb0cc(param_1,0);
-      return;
+        if (g_btlMain.state != NULL)
+            g_btlMain.state->phase = 24;
+        FUN_003eafa0(battle, 0);
+        FUN_003f22fc(battle, 1);
+        FUN_003eb0cc(battle, 0);
+        FUN_004c6294();
+        return;
     }
-    if ((*(int *)(param_1 + 0xac) == 2) && (0 < *(int *)(param_1 + 0xb4))) {
-      *(int *)(param_1 + 0xb4) = *(int *)(param_1 + 0xb4) - 1;
-    }
+    if (battle->encounterKind == 2 && battle->encounterTimer > 0)
+        battle->encounterTimer--;
     FUN_004fbf90(0);
-    temp_v3 = *(unsigned int *)(param_1 + 0x45a4) | DAT_005739f4;
-    temp_v0 = ~DAT_00573a2c;
-    *puVar7 = (*puVar7 | DAT_005739f0) & ~DAT_00573a28;
-    *(unsigned int *)(param_1 + 0x45a4) = temp_v3 & temp_v0;
-    temp_v1 = *pcVar10 + '\x01';
-    *pcVar10 = temp_v1;
-    if (temp_v1 == -1) {
-      temp_v1 = -1;
+    battle->flags = (battle->flags | g_btlMain.pendingMask) & ~g_btlMain.clearMaskB;
+    bumpByte(&battle->counterB);
+    if (battle->counterC >= 0) {
+        battle->counterC++;
+        if (battle->counterC >= 255)
+            battle->counterC = 255;
     }
-    *pcVar10 = temp_v1;
-    if (-1 < *piVar9) {
-      temp_v4 = *piVar9 + 1;
-      *piVar9 = temp_v4;
-      if (temp_v4 >= 0xff) {
-        temp_v4 = 0xff;
-      }
-      *piVar9 = temp_v4;
-    }
-    if (g_btlMain != 0) {
-      *(unsigned int *)(g_btlMain + 0x8c) = 0x18;
-    }
-    FUN_003eafa0(param_1,1);
-    FUN_003f22fc(param_1,0);
-    FUN_003eb0cc(param_1,1);
-    temp_v2 = *(short *)(param_1 + 0x4e4e) + 1;
-    *(unsigned short *)(param_1 + 0x4e4e) = temp_v2;
-    if (temp_v2 >= 0xff) {
-      temp_v2 = 0xff;
-    }
-    *(unsigned short *)(param_1 + 0x4e4e) = temp_v2;
-    return;
-  }
-  FUN_003f26d4(param_1);
-  btlUiIdsRefresh(g_btlUiBlock);
-  temp_v3 = ~DAT_00573a14;
-  temp_v0 = ~DAT_00573a74;
-  *puVar7 = *puVar7 & ~DAT_00573a10 & ~DAT_00573a70;
-  *(unsigned int *)(param_1 + 0x45a4) = *(unsigned int *)(param_1 + 0x45a4) & temp_v3 & temp_v0;
-  if (g_btlMain != 0) {
-    *(unsigned int *)(g_btlMain + 0x8c) = 0xc;
-  }
-  return;
+    if (g_btlMain.state != NULL)
+        g_btlMain.state->phase = 24;
+    FUN_003eafa0(battle, 1);
+    FUN_003f22fc(battle, 0);
+    FUN_003eb0cc(battle, 1);
+    u32 value = battle->counterD + 1;
+    if ((u16)value >= 255)
+        value = 255;
+    battle->counterD = (u16)value;
 }
 
 } /* extern "C" */

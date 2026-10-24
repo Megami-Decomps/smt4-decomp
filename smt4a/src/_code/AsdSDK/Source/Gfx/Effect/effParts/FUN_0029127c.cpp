@@ -1,151 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029127c` (_code @ 0x29127c, 0x238 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same instruction sequence as retail; only the register assignment of the file/list/node/source/entry pointers differs (retail: file r8, list r5, node r6, source r9, entry r4). */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 
 extern "C" {
 
-int FUN_001642e4(unsigned int *, unsigned char [4], int, int);
-int memAlloc(int, int, int, int, int, int);
-int asdMemFree(unsigned int *);
-int FUN_001b4ddc(...);
-int FUN_00290edc(void);
-int libc_strcpy(int, int);
-int sysMemClear(...);
-int FUN_003007a0(void);
-int FUN_003c2df0(unsigned int *, int, int);
-int rt_memcpy_w(...);
+extern const char g_effPartsSourcePath[]; /* __FILE__ of effParts.cpp */
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+struct EffPartNode;
 
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001b4ddc. */
-/* Supplied declaration required: FUN_00290edc. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003007a0. */
-/* Supplied declaration required: FUN_003c2df0. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* The 16-byte header words the list and the file both start with. */
+typedef struct EffPartHeader {
+    u32 words[4];
+} EffPartHeader;
 
+/* The part list an effect parts file builds: its header words, a node count and the list ends. */
+typedef struct EffPartList {
+    /* 0x00 */ EffPartHeader header;
+    /* 0x10 */ EffPartHeader header2;
+    /* 0x20 */ u8 unk20[0x48];
+    /* 0x68 */ u32 unk68;
+    /* 0x6C */ u8 unk6c[8];
+    /* 0x74 */ u32 unk74;
+    /* 0x78 */ u8 unk78[8];
+    /* 0x80 */ u32 count;
+    /* 0x84 */ u32 unk84;
+    /* 0x88 */ struct EffPartNode *tail;
+    /* 0x8C */ struct EffPartNode *head;
+} EffPartList;
 
-unsigned int * FUN_0029127c(unsigned int *param_1)
+/* One node of the list (0xC0 bytes): its payload, the block it draws from and its links. */
+typedef struct EffPartNode {
+    /* 0x00 */ u8 payload[0x84];
+    /* 0x84 */ u32 unk84;
+    /* 0x88 */ u8 unk88;
+    /* 0x89 */ u8 unk89;
+    /* 0x8A */ u8 unk8a;
+    /* 0x8B */ u8 unk8b[5];
+    /* 0x90 */ void *block;               /* the block this node draws from (or its file index) */
+    /* 0x94 */ u32 parentIndex;           /* index of the node this one is attached to (flag 2) */
+    /* 0x98 */ u32 flags;                 /* 1: copy of an earlier node, 2: attached to a parent */
+    /* 0x9C */ char name[0x10];
+    /* 0xAC */ struct EffPartNode *next;
+    /* 0xB0 */ struct EffPartNode *prev;
+    /* 0xB4 */ u8 unkb4[0xC];
+} EffPartNode;
 
+/* The file image: a header, its node count at 0x80 and the node array at the offset in 0x88. */
+typedef struct EffPartsFile {
+    /* 0x00 */ EffPartHeader header;
+    /* 0x10 */ u8 unk10[0x58];
+    /* 0x68 */ u32 unk68;
+    /* 0x6C */ u8 unk6c[8];
+    /* 0x74 */ u32 unk74;
+    /* 0x78 */ u8 unk78[8];
+    /* 0x80 */ u32 count;
+    /* 0x84 */ u32 unk84;
+    /* 0x88 */ u32 nodesOffset;
+} EffPartsFile;
+
+void *FUN_001642e4(const char *path, u8 *size, u32 a, u32 b);
+void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
+void sysMemClear(void *block, s32 size);
+void FUN_001b4ddc(void *part);
+EffPartNode *FUN_003007a0(void);
+void FUN_003c2df0(EffPartList *list, EffPartNode *node, EffPartNode *parent);
+EffBlock *FUN_00290edc(EffBlock *src);
+void *rt_memcpy_w(void *destination, const void *source, u32 size);
+char *libc_strcpy(char *destination, const char *source);
+void asdMemFree(void *block);
+
+/* The index'th node of the list, or NULL. */
+static EffPartNode *effPartListNth(EffPartList *list, s32 index)
 {
-/* irregular: 2 goto(s); 10 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  unsigned char temp_v9 [4];
-  
-  FUN_001642e4(param_1,temp_v9,1,0x80);
-  puVar2 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x90,0x10,1);
-  sysMemClear();
-  puVar2[0x20] = 0;
-  puVar2[0x21] = 0;
-  FUN_001b4ddc(puVar2);
-  temp_v2 = param_1[1];
-  temp_v3 = param_1[2];
-  temp_v4 = param_1[3];
-  temp_v6 = 0;
-  *puVar2 = *param_1;
-  puVar2[1] = temp_v2;
-  puVar2[2] = temp_v3;
-  puVar2[3] = temp_v4;
-  temp_v2 = param_1[1];
-  temp_v3 = param_1[2];
-  temp_v4 = param_1[3];
-  puVar2[4] = *param_1;
-  puVar2[5] = temp_v2;
-  puVar2[6] = temp_v3;
-  puVar2[7] = temp_v4;
-  puVar2[0x1d] = param_1[0x1d];
-  puVar2[0x1a] = param_1[0x1a];
-  temp_v5 = param_1[0x22] + (int)param_1;
-  if (param_1[0x20] != 0) {
-    do {
-      temp_v0 = *(int *)(temp_v5 + 0x90);
-      if ((*(unsigned int *)(temp_v5 + 0x98) & 1) != 0) {
-        for (temp_v7 = puVar2[0x23]; temp_v7 != 0; temp_v7 = *(int *)(temp_v7 + 0xac)) {
-          temp_v8 = temp_v0 == 0;
-          temp_v0 = temp_v0 - 1;
-          if (temp_v8) goto LAB_00291358;
+    for (EffPartNode *node = list->head; node != NULL; node = node->next) {
+        if (index-- == 0) {
+            return node;
         }
-        temp_v7 = 0;
-LAB_00291358:
-        FUN_003007a0();
-        rt_memcpy_w();
-        sysMemClear(temp_v0,0x90);
-        *(unsigned int *)(temp_v0 + 0x84) = 1;
-        *(unsigned char *)(temp_v0 + 0x88) = 8;
-        *(unsigned char *)(temp_v0 + 0x89) = 0;
-        *(unsigned char *)(temp_v0 + 0x8a) = 0;
-        FUN_001b4ddc(temp_v0);
-        *(unsigned int *)(temp_v0 + 0x98) = *(unsigned int *)(temp_v0 + 0x98) | 1;
-        *(unsigned int *)(temp_v0 + 0x90) = *(unsigned int *)(temp_v7 + 0x90);
-        if (*(int *)(temp_v7 + 0xac) != 0) {
-          *(int *)(*(int *)(temp_v7 + 0xac) + 0xb0) = temp_v0;
-          *(unsigned int *)(temp_v0 + 0xac) = *(unsigned int *)(temp_v7 + 0xac);
-        }
-        else {
-          *(unsigned int *)(temp_v0 + 0xac) = 0;
-          puVar2[0x22] = temp_v0;
-        }
-        *(int *)(temp_v7 + 0xac) = temp_v0;
-        *(int *)(temp_v0 + 0xb0) = temp_v7;
-        puVar2[0x20] = puVar2[0x20] + 1;
-      }
-      else {
-        temp_v7 = temp_v0 + (int)param_1;
-        FUN_00290edc();
-        temp_v0 = temp_v7;
-        FUN_003007a0();
-        *(int *)(temp_v0 + 0x90) = temp_v7;
-        *(unsigned int *)(temp_v0 + 0xac) = 0;
-        if (puVar2[0x22] != 0) {
-          *(int *)(puVar2[0x22] + 0xac) = temp_v0;
-          *(unsigned int *)(temp_v0 + 0xb0) = puVar2[0x22];
-        }
-        else {
-          puVar2[0x23] = temp_v0;
-          *(unsigned int *)(temp_v0 + 0xb0) = 0;
-        }
-        puVar2[0x22] = temp_v0;
-        puVar2[0x20] = puVar2[0x20] + 1;
-      }
-      if ((*(unsigned int *)(temp_v5 + 0x98) & 2) != 0) {
-        temp_v1 = *(int *)(temp_v5 + 0x94);
-        for (temp_v7 = puVar2[0x23]; temp_v7 != 0; temp_v7 = *(int *)(temp_v7 + 0xac)) {
-          temp_v8 = temp_v1 == 0;
-          temp_v1 = temp_v1 - 1;
-          if (temp_v8) goto LAB_0029145c;
-        }
-        temp_v7 = 0;
-LAB_0029145c:
-        FUN_003c2df0(puVar2,temp_v0,temp_v7);
-      }
-      rt_memcpy_w(temp_v0,temp_v5);
-      libc_strcpy(temp_v0 + 0x9c,temp_v5 + 0x9c);
-      puVar1 = (unsigned int *)(temp_v5 + 0x98);
-      temp_v6 = temp_v6 + 1;
-      temp_v5 = temp_v5 + 0xc0;
-      *(unsigned int *)(temp_v0 + 0x98) = *puVar1;
-    } while (temp_v6 < (unsigned int)param_1[0x20]);
-  }
-  asdMemFree(param_1);
-  return puVar2;
+    }
+    return NULL;
 }
 
-} /* extern "C" */
+/* Loads an effect parts file into a part list: node blocks are cloned, copy nodes are spliced in
+ * after the node they copy, and attached nodes are linked to their parent. */
+EffPartList *FUN_0029127c(const char *path)
+{
+    u8 size;
+    EffPartsFile *file = (EffPartsFile *)FUN_001642e4(path, &size, 1, 0x80);
+    asdDebugTrace(g_effPartsSourcePath, 1443);
+    EffPartList *list = (EffPartList *)memAlloc(0x10000, 0x100, 0, 0x90, 0x10, 1);
+
+    sysMemClear(list, 0x90);
+    list->count = 0;
+    list->unk84 = 0;
+    FUN_001b4ddc(list);
+    list->header = file->header;
+    list->header2 = file->header;
+    list->unk74 = file->unk74;
+    list->unk68 = file->unk68;
+
+    EffPartNode *entry = (EffPartNode *)((u8 *)file + file->nodesOffset);
+
+    for (u32 i = 0; i < file->count; i++, entry++) {
+        EffPartNode *node;
+
+        if ((entry->flags & 1) != 0) {
+            EffPartNode *source = effPartListNth(list, (s32)entry->block);
+
+            node = FUN_003007a0();
+            rt_memcpy_w(node, source, 0xC0);
+            sysMemClear(node, 0x90);
+            node->unk84 = 1;
+            node->unk88 = 8;
+            node->unk89 = 0;
+            node->unk8a = 0;
+            FUN_001b4ddc(node);
+            node->flags |= 1;
+            node->block = source->block;
+            if (source->next != NULL) {
+                source->next->prev = node;
+                node->next = source->next;
+            } else {
+                node->next = NULL;
+                list->tail = node;
+            }
+            source->next = node;
+            node->prev = source;
+            list->count++;
+        } else {
+            void *block = FUN_00290edc((EffBlock *)((u8 *)file + (u32)entry->block));
+
+            node = FUN_003007a0();
+            node->block = block;
+            node->next = NULL;
+            if (list->tail != NULL) {
+                list->tail->next = node;
+                node->prev = list->tail;
+            } else {
+                list->head = node;
+                node->prev = NULL;
+            }
+            list->tail = node;
+            list->count++;
+        }
+        if ((entry->flags & 2) != 0) {
+            FUN_003c2df0(list, node, effPartListNth(list, entry->parentIndex));
+        }
+        rt_memcpy_w(node, entry, 0x90);
+        libc_strcpy(node->name, entry->name);
+        node->flags = entry->flags;
+    }
+    asdMemFree(file);
+    return list;
+}
+
+}

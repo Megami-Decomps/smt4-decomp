@@ -1,100 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f78f8` (_code @ 0x3f78f8, 0x23c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills the incoming float and the stack arguments to different frame slots and keeps 0.26f/0.15625f/1.0f in s17-s19; the formatted-title sequence and draw calls are the same. */
+#include "common.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_0018408c(unsigned char *, int);
-int renderCtxCalculateStereoParallax(...);
-int uiDrawStereoKindIcon(...);
-int FUN_003f707c(int, int, int, int, int, int, int, int);
-int FUN_003f757c(...);
-int VectorSignedToFloat(...);
+/* The notice panel's work block: its first tab flag is the byte at 0xC. */
+typedef struct NoticeWork {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 restored;
+} NoticeWork;
 
-/* stack frame of param_3: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp11C; /* 0x11c: local_11c */
-    unsigned int sp120; /* 0x120: local_120 */
-    unsigned int sp124; /* 0x124: local_124 */
-    unsigned int sp128; /* 0x128: local_128 */
-} param_3_stack;
+/* A layout record: a position at 8 and 10. */
+typedef struct NoticeLayout {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} NoticeLayout;
 
-extern unsigned char LAB_003f7b34; /* 0x3f7b34 */
-extern unsigned char LAB_003f7b60; /* 0x3f7b60 */
-extern unsigned char LAB_003f7b64; /* 0x3f7b64 */
-extern unsigned char LAB_003f7ba0; /* 0x3f7ba0 */
-extern unsigned char LAB_003f7bac; /* 0x3f7bac */
-extern unsigned char LAB_003f7be0; /* 0x3f7be0 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
+extern void *g_renderCtx;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: uiDrawStereoKindIcon. */
-/* Supplied declaration required: FUN_003f707c. */
-/* Supplied declaration required: FUN_003f757c. */
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_003f707c(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, s32 d, s32 e, f32 speed);
+f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
+void efctSetSpeed(f32 speed);
+NoticeLayout *FUN_001834a4(u32 kind, u32 index);
+void FUN_0018408c(const char *text, s32 mode);
+void FUN_00162790(s32 a, s32 color, const char *text, f32 x, f32 y, f32 sx, f32 sy, f32 speed);
+void FUN_003f757c(NoticeWork *work, s32 x, s32 y, s32 a, const char *text, s32 b, s32 c, s32 d, s32 e, f32 speed);
+void uiDrawStereoKindIcon(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, f32 speed);
 
-
-void FUN_003f78f8(int param_1,int param_2,int param_3)
-
+/* Draws a notice entry: its header, the heading text with its stereo-depth offset, the body line
+ * and the kind icon, and the info tag. The wording depends on whether the terminal was restored. */
+void FUN_003f78f8(NoticeWork *work, s32 x, s32 y, f32 speed)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  float temp_v2;
-  float temp_v3;
-  unsigned char *puVar5;
-  unsigned char temp_v4 [64];
-  unsigned char temp_v5 [64];
-  unsigned char temp_v6 [96];
-  int temp_v7;
-  int iStack_2c;
-  int iStack_28;
-  
-  temp_v7 = param_1;
-  iStack_2c = param_2;
-  iStack_28 = param_3;
-  FUN_003f707c(param_1,param_2,param_3,0xd3,0xe9,0xf2,0xf7,0xf5);
-  if (*(char *)(temp_v7 + 0xc) != '\0') {
-    textFormatBuffer(temp_v6,&LAB_003f7b60,&LAB_003f7b34);
-    textFormatBuffer(temp_v4,&LAB_003f7b60,&LAB_003f7b64);
-    textFormatBuffer(temp_v5,&LAB_003f7b60,&LAB_003f7ba0);
-  }
-  else {
-    textFormatBuffer(temp_v6,&LAB_003f7b60,&LAB_003f7bac);
-    textFormatBuffer(temp_v4,&LAB_003f7b60,&LAB_003f7be0);
-    textFormatBuffer(temp_v5,&LAB_003f7b60,&LAB_003f7ba0);
-  }
-  temp_v3 = 0.26f;
-  puVar5 = temp_v6;
-  temp_v2 = temp_v3;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  efctSetSpeed();
-  temp_v0 = FUN_001834a4(0x31,0xf1);
-  FUN_0018408c(puVar5,3);
-  temp_v1 = (int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v3;
-  VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0xff,puVar5,temp_v1);
-  FUN_003f757c(temp_v7,param_2,param_3,0xd8,temp_v4,0xf6,0xf5,0,1);
-  uiDrawStereoKindIcon(temp_v7,param_2,param_3,0xd8,0xb,0x106);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v0 = FUN_001834a4(0x31,0xfb);
-  temp_v1 = (int)*(short *)(temp_v0 + 8) + param_2 + (int)temp_v2;
-  VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0xffffffff,temp_v5,temp_v1);
-  efctSetSpeed();
-  return;
+    char heading[64];
+    char body[64];
+    char tag[96];
+
+    FUN_003f707c(work, x, y, 0xD3, 0xE9, 0xF2, 0xF7, 0xF5, speed);
+    if (work->restored != 0) {
+        /* "Terminal use restored", "Hunter Association Management", "Info" (full-width) */
+        textFormatBuffer(tag, "%s", "\x82s\x82\x85\x82\x92\x82\x8d\x82\x89\x82\x8e\x82\x81\x82\x8c\x81@\x82\x95\x82\x93\x82\x85\x81@\x82\x92\x82\x85\x82\x93\x82\x94\x82\x8f\x82\x92\x82\x85\x82\x84");
+        textFormatBuffer(heading, "%s", "\x82g\x82\x95\x82\x8e\x82\x94\x82\x85\x82\x92\x81@\x82`\x82\x93\x82\x93\x82\x8f\x82\x83\x82\x89\x82\x81\x82\x94\x82\x89\x82\x8f\x82\x8e\x81@\x82l\x82\x81\x82\x8e\x82\x81\x82\x87\x82\x85\x82\x8d\x82\x85\x82\x8e\x82\x94");
+    } else {
+        /* "Construction Notification", "Road Maintenance Division" */
+        textFormatBuffer(tag, "%s", "\x82""b\x82\x8f\x82\x8e\x82\x93\x82\x94\x82\x92\x82\x95\x82\x83\x82\x94\x82\x89\x82\x8f\x82\x8e\x81@\x82m\x82\x8f\x82\x94\x82\x89\x82\x86\x82\x89\x82\x83\x82\x81\x82\x94\x82\x89\x82\x8f\x82\x8e");
+        textFormatBuffer(heading, "%s", "\x82q\x82\x8f\x82\x81\x82\x84\x81@\x82l\x82\x81\x82\x89\x82\x8e\x82\x94\x82\x85\x82\x8e\x82\x81\x82\x8e\x82\x83\x82\x85\x81@\x82""c\x82\x89\x82\x96\x82\x89\x82\x93\x82\x89\x82\x8f\x82\x8e");
+    }
+    /* "Info" (full-width) */
+    textFormatBuffer(body, "%s", "\x82h\x82\x8e\x82\x86\x82\x8f");
+
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+
+    efctSetSpeed(speed);
+    NoticeLayout *layout = FUN_001834a4(0x31, 0xF1);
+
+    FUN_0018408c(tag, 3);
+    FUN_00162790(3, 0xFF, tag, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
+    FUN_003f757c(work, x, y, 0xD8, heading, 0xF6, 0xF5, 0, 1, speed);
+    uiDrawStereoKindIcon(work, x, y, 0xD8, 0xB, 0x106, speed);
+    parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    layout = FUN_001834a4(0x31, 0xFB);
+    FUN_00162790(3, -1, body, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
+    efctSetSpeed(1.0f);
 }
 
-} /* extern "C" */
+}

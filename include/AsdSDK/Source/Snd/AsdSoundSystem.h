@@ -56,7 +56,8 @@ typedef struct AsdSndSlotC {
 typedef struct AsdSndAuxSlot {
     /* 0x00 */ u8 heap[0x10];         /* nw::snd::SoundHeap */
     /* 0x10 */ void *heapBase;        /* the heap's buffer, NULL until it is created */
-    /* 0x14 */ u8 unk14[0x18];
+    /* 0x14 */ u8 unk14[0x14];
+    /* 0x28 */ void *heapBuffer;      /* what the heap manages */
     /* 0x2c */ s32 savedState;        /* SoundHeap::SaveState result */
     /* 0x30 */ u8 unk30[4];
     /* 0x34 */ u32 unk34;

@@ -50,7 +50,8 @@ struct DisplayModeContext {
             u8 unk00c[5];
             u8 enabled; // 0x011
             u8 pending; // 0x012
-            u8 unk013[5];
+            u8 unk013;
+            u32 replayLimit; // 0x014: commands to replay beyond the queue's base entry
             u8 ready; // 0x018
             u8 unk019[0x83];
             GraphicsQueue *writeQueue; // 0x09c

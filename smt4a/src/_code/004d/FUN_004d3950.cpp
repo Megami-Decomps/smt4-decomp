@@ -1,81 +1,104 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d3950` (_code @ 0x4d3950, 0x31c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: builds the "btl Stage Menu" debug list box; only the sign-bit test of item 10 (retail: and 0x80000000 / cmp / movlt, built: lsr 31), the 50000 limits (retail loads each from its own pool word) and the literal pool layout differ */
+#include "common.h"
+
+struct BtlStageVec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+struct BtlStageModel {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ s32 mode;
+    /* 0x5C */ s32 colorR;
+    /* 0x60 */ s32 colorG;
+    /* 0x64 */ s32 colorB;
+    /* 0x68 */ s32 rangeNear;
+    /* 0x6C */ s32 rangeFar;
+    /* 0x70 */ f32 fogDensity;
+    /* 0x74 */ f32 lightX;
+    /* 0x78 */ f32 lightY;
+    /* 0x7C */ s32 ambientR;
+    /* 0x80 */ s32 ambientG;
+    /* 0x84 */ s32 ambientB;
+    /* 0x88 */ s32 lightR;
+    /* 0x8C */ s32 lightG;
+    /* 0x90 */ s32 lightB;
+    /* 0x94 */ u8 unk94[0x1C];
+    /* 0xB0 */ BtlStageVec3 position;
+};
+
+struct HandleRegistryEntry {
+    /* 0x00 */ u8 unk00[0xCC];
+    /* 0xCC */ s32 flags;
+};
+
+struct HandleRegistry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ HandleRegistryEntry *first;
+};
+
+struct StageMenuOwner {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 listBox;
+};
+
+struct StageMenuParent {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ u32 parentJob;
+};
+
+#define STAGE_MENU_ITEM_COUNT 20
+#define STAGE_MENU_FLAG_HIDDEN ((s32)0x80000000)
 
 extern "C" {
+extern HandleRegistry *g_handleRegistry;
+extern BtlStageModel *g_btlStageModel;
+extern u8 DAT_00572800[];   /* item descriptions */
 
-int jobStop(unsigned int, int);
-int asdListBoxCreateDefaultFlags(unsigned int, int, int);
-int jobSetText(unsigned int, unsigned char *);
-int asdListBoxSetIntItem(...);
-int asdListBoxSetByteValue(unsigned int, int);
-int asdListBoxAddItems(void);
-int asdListBoxSetFloatItem(...);
-int FUN_003592dc(unsigned int);
+s32 jobIsValid(u32 job);
+void FUN_003592dc(u32 job);
+void jobStop(u32 job, s32 arg);
+u32 asdListBoxCreateDefaultFlags(u32 parent, s32 type, s32 flags, s32 extra);
+void asdListBoxAddItems(u32 box, const void *items, s32 count);
+void asdListBoxSetByteValue(u32 box, s32 value);
+void jobSetText(u32 job, const char *text);
+void asdListBoxSetFloatItem(u32 box, s32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetIntItem(u32 box, s32 index, s32 value, s32 minimum, s32 maximum, s32 flags);
+s32 FUN_00400d68(BtlStageModel *model);
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned char LAB_004d3c70; /* 0x4d3c70 */
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern int g_btlStageModel; /* 0x57a4f8 */
-
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
-/* Supplied declaration required: jobSetText. */
-/* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxSetFloatItem. */
-/* Supplied declaration required: FUN_003592dc. */
-extern int FUN_00400d68(int);
-
-
-void FUN_004d3950(int param_1,int param_2)
-
+void FUN_004d3950(StageMenuOwner *owner, StageMenuParent *parent)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = jobIsValid(*(unsigned int *)(param_1 + 0x10));
-  if (temp_v0 != 0) {
-    FUN_003592dc(*(unsigned int *)(param_1 + 0x10));
-    jobStop(*(unsigned int *)(param_1 + 0x10),0);
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x80);
-  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
-  *(unsigned int *)(param_1 + 0x10) = temp_v1;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d3c70);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0,0xfffffc19,999);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),1,0xfffffc19,999);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)(g_btlStageModel + 0x58),0,2,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)(g_btlStageModel + 0x5c),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),5,*(unsigned int *)(g_btlStageModel + 0x60),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),6,*(unsigned int *)(g_btlStageModel + 100),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),7,*(unsigned int *)(g_btlStageModel + 0x68),0,10000,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,*(unsigned int *)(g_btlStageModel + 0x6c),0,10000,0);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),9,0,10);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),10,
-               (*(unsigned int *)(*(int *)(g_handleRegistry + 4) + 0xcc) & 0x80000000) != 0,0,1,0);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xb,0xffff3cb0,50000);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xc,0xffff3cb0,50000);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,*(unsigned int *)(g_btlStageModel + 0x7c),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xe,*(unsigned int *)(g_btlStageModel + 0x80),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xf,*(unsigned int *)(g_btlStageModel + 0x84),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x10,*(unsigned int *)(g_btlStageModel + 0x88),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x11,*(unsigned int *)(g_btlStageModel + 0x8c),0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x12,*(unsigned int *)(g_btlStageModel + 0x90),0,0xff,0);
-  temp_v0 = FUN_00400d68(g_btlStageModel);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x13,0,0,temp_v0 - 1,0);
-  return;
+    if (jobIsValid(owner->listBox) != 0) {
+        FUN_003592dc(owner->listBox);
+        jobStop(owner->listBox, 0);
+    }
+    owner->listBox = asdListBoxCreateDefaultFlags(parent->parentJob, 0x75, 0, 0);
+    asdListBoxAddItems(owner->listBox, DAT_00572800, STAGE_MENU_ITEM_COUNT);
+    asdListBoxSetByteValue(owner->listBox, 1);
+    jobSetText(owner->listBox, "btl Stage Menu");
+
+    BtlStageVec3 *position = &g_btlStageModel->position;
+    asdListBoxSetFloatItem(owner->listBox, 0, -999, 999, position->x);
+    asdListBoxSetFloatItem(owner->listBox, 1, -999, 999, position->y);
+    asdListBoxSetFloatItem(owner->listBox, 2, -999, 999, position->z);
+    asdListBoxSetIntItem(owner->listBox, 3, g_btlStageModel->mode, 0, 2, 0);
+    asdListBoxSetIntItem(owner->listBox, 4, g_btlStageModel->colorR, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 5, g_btlStageModel->colorG, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 6, g_btlStageModel->colorB, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 7, g_btlStageModel->rangeNear, 0, 10000, 0);
+    asdListBoxSetIntItem(owner->listBox, 8, g_btlStageModel->rangeFar, 0, 10000, 0);
+    asdListBoxSetFloatItem(owner->listBox, 9, 0, 10, g_btlStageModel->fogDensity);
+    asdListBoxSetIntItem(owner->listBox, 10, (g_handleRegistry->first->flags & STAGE_MENU_FLAG_HIDDEN) < 0, 0, 1, 0);
+    asdListBoxSetFloatItem(owner->listBox, 11, -50000, 50000, g_btlStageModel->lightX);
+    asdListBoxSetFloatItem(owner->listBox, 12, -50000, 50000, g_btlStageModel->lightY);
+    asdListBoxSetIntItem(owner->listBox, 13, g_btlStageModel->ambientR, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 14, g_btlStageModel->ambientG, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 15, g_btlStageModel->ambientB, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 16, g_btlStageModel->lightR, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 17, g_btlStageModel->lightG, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 18, g_btlStageModel->lightB, 0, 0xFF, 0);
+    asdListBoxSetIntItem(owner->listBox, 19, 0, 0, FUN_00400d68(g_btlStageModel) - 1, 0);
 }
 
 } /* extern "C" */

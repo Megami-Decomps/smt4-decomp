@@ -1,161 +1,152 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00398fa8` (_code @ 0x398fa8, 0x3c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: touch handling of the pick-list screen (maps the touched region to a row/column in the grid or the side tabs, posts the selection event when it changed, and scrolls via the arrow and slider regions); written from the decompilation, the lost arguments of the flaggedEntry getters and of some scroll helpers are guessed from the surrounding calls and the 14/15-wide division is the compiler's magic-multiply form */
+#include "common.h"
+
+#define PICK_REGION_FIRST_GRID 3
+#define PICK_REGION_END_GRID 0x8A
+#define PICK_REGION_FIRST_TAB 0x8B
+#define PICK_REGION_END_TAB 0x8E
+#define PICK_REGION_SCROLL_UP 0
+#define PICK_REGION_SCROLL_DOWN 1
+#define PICK_REGION_SLIDER 2
+#define PICK_COLUMNS_PAGED 14
+#define PICK_COLUMNS_PLAIN 15
+#define PICK_TAB_SELECTED_ROW 6
+#define PICK_SCROLL_MIN_WIDTH 0x7F
+#define PICK_SELECTION_TOUCH 1
+#define PICK_SELECTION_DRAG 2
+#define PICK_SELECTION_HOLD 6
+#define PICK_EVENT_SELECTION_CHANGED 0x100016C
+
+struct PickList {
+    /* 0x00 */ u8 unk00[0x10];
+};
+
+struct PickScreen {
+    /* 0x000 */ u8 unk000[0x10];
+    /* 0x010 */ s32 column;
+    /* 0x014 */ s32 row;
+    /* 0x018 */ s32 previousColumn;
+    /* 0x01C */ s32 previousRow;
+    /* 0x020 */ u8 unk020[9];
+    /* 0x029 */ u8 paged;
+    /* 0x02A */ u8 unk02A[2];
+    /* 0x02C */ s16 sliderWidth;
+    /* 0x02E */ u8 unk02E[0x4EE];
+    /* 0x51C */ PickList pagedList;
+    /* 0x52C */ u8 unk52C[0x54];
+    /* 0x580 */ PickList plainList;
+    /* 0x590 */ u8 unk590[0x54];
+    /* 0x5E4 */ PickList tabList;
+    /* 0x5F4 */ u8 unk5F4[0x54];
+    /* 0x648 */ u8 tabSelected;
+    /* 0x649 */ u8 unk649[0x1D7];
+    /* 0x820 */ s16 regions[0x80];
+};
+
+struct PickSliderInfo {
+    /* 0x00 */ u8 unk00[0xA];
+    /* 0x0A */ s16 first;
+    /* 0x0C */ struct { u8 unk00[2]; s16 count; } *range;
+};
 
 extern "C" {
+s32 ifTouchGetSelectionMode(void);
+s32 ifTouchGetSelectedRegion(void);
+s32 ifTouchIsInitialSelection(s32 region);
+s32 flaggedEntryGetValueA(PickList *list);
+s32 flaggedEntryGetValueB(PickList *list);
+void flaggedEntrySetValueA(PickList *list, s32 value);
+void flaggedEntrySetValueB(PickList *list, s32 value);
+void eventQueueAddUniqueIfValid(u32 event);
+s32 FUN_0029ee54(PickList *list);
+s32 FUN_0029efa8(PickList *list);
+s32 FUN_0029efc0(PickList *list);
+void FUN_0029eb5c(PickList *list, s32 position);
+PickSliderInfo *FUN_002bf4f8(u32 group, u32 id);
+s16 FUN_001c36a0(void);
+s32 __aeabi_idivmod(s32 a, s32 b);
 
-int flaggedEntryGetValueB(...);
-int flaggedEntrySetValueB(...);
-int flaggedEntrySetValueA(int, int);
-int flaggedEntryGetValueA(int);
-int FUN_0029eb5c(...);
-int eventQueueAddUniqueIfValid(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern short FUN_001c36a0(void);
-/* Supplied declaration required: flaggedEntryGetValueB. */
-/* Supplied declaration required: flaggedEntrySetValueB. */
-/* Supplied declaration required: flaggedEntrySetValueA. */
-/* Supplied declaration required: flaggedEntryGetValueA. */
-/* Supplied declaration required: FUN_0029eb5c. */
-extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
-extern int ifTouchIsInitialSelection(int);
-extern int ifTouchGetSelectionMode(void);
-extern int ifTouchGetSelectedRegion(void);
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern short __aeabi_idivmod(int);
-
-
-void FUN_00398fa8(int param_1)
-
+void FUN_00398fa8(PickScreen *screen)
 {
-/* irregular: 6 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  
-  temp_v1 = ifTouchGetSelectionMode();
-  if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
-    temp_v2 = ifTouchGetSelectedRegion();
-    temp_v5 = param_1 + 0x51c;
-    temp_v3 = 3;
-    do {
-      if ((*(short *)(param_1 + temp_v3 * 2 + 0x820) == temp_v2) && (0 < temp_v2)) {
-        temp_v6 = temp_v3 - 3;
-        if (*(char *)(param_1 + 0x29) != '\0') {
-          temp_v3 = ifTouchIsInitialSelection(temp_v2);
-          if (temp_v3 != 0) {
-            *(unsigned int *)(param_1 + 0x18) = *(unsigned int *)(param_1 + 0x10);
-            *(unsigned int *)(param_1 + 0x1c) = *(unsigned int *)(param_1 + 0x14);
-          }
-          temp_v3 = (int)(((long long)(int)temp_v6 * -0x6db6db6d + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-          temp_v7 = *(int *)(param_1 + 0x10);
-          temp_v8 = *(int *)(param_1 + 0x14);
-          flaggedEntrySetValueB(temp_v5,temp_v6 + ((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xe);
-          temp_v3 = (int)(((long long)(int)temp_v6 * -0x6db6db6d + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-          flaggedEntrySetValueA(temp_v5,(temp_v3 >> 3) - (temp_v3 >> 0x1f));
-          temp_v4 = flaggedEntryGetValueB(temp_v5);
-          *(unsigned int *)(param_1 + 0x10) = temp_v4;
-          temp_v3 = flaggedEntryGetValueA(temp_v5);
-          *(int *)(param_1 + 0x14) = temp_v3;
-          if (*(int *)(param_1 + 0x10) == temp_v7 && temp_v3 == temp_v8) break;
+    s32 selection = ifTouchGetSelectionMode();
+    if (selection != PICK_SELECTION_TOUCH && selection != PICK_SELECTION_DRAG && selection != PICK_SELECTION_HOLD)
+        return;
+
+    s32 region = ifTouchGetSelectedRegion();
+    PickList *pagedList = &screen->pagedList;
+
+    for (s32 i = PICK_REGION_FIRST_GRID; i < PICK_REGION_END_GRID; i++) {
+        if (screen->regions[i] != region || region <= 0)
+            continue;
+        s32 cell = i - PICK_REGION_FIRST_GRID;
+        if (screen->paged != 0) {
+            if (ifTouchIsInitialSelection(region) != 0) {
+                screen->previousColumn = screen->column;
+                screen->previousRow = screen->row;
+            }
+            s32 oldColumn = screen->column;
+            s32 oldRow = screen->row;
+            flaggedEntrySetValueB(pagedList, cell % PICK_COLUMNS_PAGED);
+            flaggedEntrySetValueA(pagedList, cell / PICK_COLUMNS_PAGED);
+            screen->column = flaggedEntryGetValueB(pagedList);
+            screen->row = flaggedEntryGetValueA(pagedList);
+            if (screen->column == oldColumn && screen->row == oldRow)
+                break;
+        } else {
+            s32 oldColumn = screen->column;
+            s32 oldRow = screen->row;
+            screen->tabSelected = 0;
+            flaggedEntrySetValueB(&screen->plainList, cell % PICK_COLUMNS_PLAIN);
+            flaggedEntrySetValueA(&screen->plainList, cell / PICK_COLUMNS_PLAIN);
+            screen->column = flaggedEntryGetValueB(&screen->plainList);
+            screen->row = flaggedEntryGetValueA(&screen->plainList);
+            if (screen->column == oldColumn && screen->row == oldRow)
+                break;
         }
-        else {
-          temp_v3 = (int)(((long long)(int)temp_v6 * -0x77777777 + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-          temp_v7 = *(int *)(param_1 + 0x10);
-          temp_v8 = *(int *)(param_1 + 0x14);
-          *(unsigned char *)(param_1 + 0x648) = 0;
-          flaggedEntrySetValueB(param_1 + 0x580,((temp_v3 >> 3) - (temp_v3 >> 0x1f)) * -0xf + temp_v6);
-          temp_v3 = (int)(((long long)(int)temp_v6 * -0x77777777 + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
-          flaggedEntrySetValueA(param_1 + 0x580,(temp_v3 >> 3) - (temp_v3 >> 0x1f));
-          temp_v4 = flaggedEntryGetValueB(param_1 + 0x580);
-          *(unsigned int *)(param_1 + 0x10) = temp_v4;
-          temp_v3 = flaggedEntryGetValueA(param_1 + 0x580);
-          *(int *)(param_1 + 0x14) = temp_v3;
-          if (*(int *)(param_1 + 0x10) == temp_v7 && temp_v3 == temp_v8) break;
-        }
-        eventQueueAddUniqueIfValid(0x100016c);
+        eventQueueAddUniqueIfValid(PICK_EVENT_SELECTION_CHANGED);
         break;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x8a);
-    temp_v3 = 0x8b;
-    do {
-      if (*(short *)(param_1 + temp_v3 * 2 + 0x820) == temp_v2) {
-        temp_v7 = param_1 + 0x5e4;
-        temp_v8 = flaggedEntryGetValueB();
-        flaggedEntryGetValueA(temp_v7);
-        temp_v0 = flaggedEntryGetValueA(param_1 + 0x580);
-        if (*(char *)(param_1 + 0x29) == '\0') {
-          *(unsigned char *)(param_1 + 0x648) = 1;
-          flaggedEntrySetValueA(param_1 + 0x580,6);
-          flaggedEntrySetValueB(temp_v7,temp_v3 - 0x8b);
-          temp_v4 = flaggedEntryGetValueB(param_1 + 0x580);
-          *(unsigned int *)(param_1 + 0x10) = temp_v4;
-          temp_v4 = flaggedEntryGetValueA(param_1 + 0x580);
-          *(unsigned int *)(param_1 + 0x14) = temp_v4;
+    }
+
+    for (s32 i = PICK_REGION_FIRST_TAB; i < PICK_REGION_END_TAB; i++) {
+        if (screen->regions[i] != region)
+            continue;
+        PickList *tabs = &screen->tabList;
+        s32 oldTab = flaggedEntryGetValueB(tabs);
+        flaggedEntryGetValueA(tabs);
+        s32 oldRow = flaggedEntryGetValueA(&screen->plainList);
+        if (screen->paged == 0) {
+            screen->tabSelected = 1;
+            flaggedEntrySetValueA(&screen->plainList, PICK_TAB_SELECTED_ROW);
+            flaggedEntrySetValueB(tabs, i - PICK_REGION_FIRST_TAB);
+            screen->column = flaggedEntryGetValueB(&screen->plainList);
+            screen->row = flaggedEntryGetValueA(&screen->plainList);
         }
-        if (temp_v1 != 2) {
-          if ((temp_v1 == 6) || (temp_v1 = ifTouchIsInitialSelection(temp_v2), temp_v1 == 0)) break;
+        if (selection != PICK_SELECTION_DRAG) {
+            if (selection == PICK_SELECTION_HOLD || ifTouchIsInitialSelection(region) == 0)
+                break;
+        } else if (flaggedEntryGetValueB(tabs) == oldTab && flaggedEntryGetValueA(&screen->plainList) == oldRow) {
+            break;
         }
-        else {
-          temp_v1 = flaggedEntryGetValueB(temp_v7);
-          if ((temp_v1 == temp_v8) && (temp_v1 = flaggedEntryGetValueA(param_1 + 0x580), temp_v1 == temp_v0)) break;
-        }
-        eventQueueAddUniqueIfValid(0x100016c);
+        eventQueueAddUniqueIfValid(PICK_EVENT_SELECTION_CHANGED);
         break;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x8e);
-    temp_v9 = *(char *)(param_1 + 0x29) != '\0';
-    temp_v0 = 0;
-    if (temp_v9) {
-      temp_v0 = *(short *)(param_1 + 0x2c);
     }
-    if (temp_v9 && temp_v0 >= 0x7f) {
-      if (*(short *)(param_1 + 0x820) == temp_v2) {
-        temp_v1 = FUN_0029efc0(temp_v5);
-        temp_v2 = FUN_0029efa8(temp_v5);
-        if (-1 < (temp_v2 + temp_v1) - 1) {
-          FUN_0029eb5c(temp_v5);
+
+    if (screen->paged != 0 && screen->sliderWidth >= PICK_SCROLL_MIN_WIDTH) {
+        if (screen->regions[PICK_REGION_SCROLL_UP] == region) {
+            if (FUN_0029efa8(pagedList) + FUN_0029efc0(pagedList) - 1 >= 0)
+                FUN_0029eb5c(pagedList, 0);
+        } else if (screen->regions[PICK_REGION_SCROLL_DOWN] == region) {
+            s32 next = FUN_0029efa8(pagedList) + FUN_0029efc0(pagedList) + 1;
+            if (next < FUN_0029ee54(pagedList))
+                FUN_0029eb5c(pagedList, next);
+        } else if (screen->regions[PICK_REGION_SLIDER] == region) {
+            s32 total = FUN_0029ee54(pagedList);
+            PickSliderInfo *slider = FUN_002bf4f8(0x2E, 0x14E);
+            s32 offset = (s16)(FUN_001c36a0() - slider->first);
+            if (offset >= 0 && offset < slider->range->count)
+                FUN_0029eb5c(pagedList, __aeabi_idivmod(offset * total, slider->range->count));
         }
-      }
-      else if (*(short *)(param_1 + 0x822) == temp_v2) {
-        temp_v1 = FUN_0029efc0(temp_v5);
-        temp_v2 = FUN_0029efa8(temp_v5);
-        temp_v2 = temp_v2 + temp_v1 + 1;
-        temp_v1 = FUN_0029ee54(temp_v5);
-        if (temp_v2 < temp_v1) {
-          FUN_0029eb5c(temp_v5,temp_v2);
-        }
-      }
-      else if (*(short *)(param_1 + 0x824) == temp_v2) {
-        temp_v1 = FUN_0029ee54(temp_v5);
-        temp_v2 = FUN_002bf4f8(0x2e,0x14e);
-        temp_v0 = FUN_001c36a0();
-        temp_v3 = (int)(short)(temp_v0 - *(short *)(temp_v2 + 10));
-        if ((-1 < temp_v3) && (temp_v3 < *(short *)(*(int *)(temp_v2 + 0xc) + 2))) {
-          temp_v0 = __aeabi_idivmod(temp_v3 * temp_v1);
-          FUN_0029eb5c(temp_v5,(int)temp_v0);
-        }
-      }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

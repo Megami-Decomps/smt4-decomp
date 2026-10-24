@@ -1,147 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023af68` (_code @ 0x23af68, 0x2e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the fade record selection is inlined per phase with different register allocation and the float constants sit in other registers (187 vs 185 rows); the fade logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int mathInterpolateTimed(...);
-int slotSetRequest(int, int, unsigned int);
-int FUN_003d54f8(...);
-int VectorSignedToFloat(int, int);
+/* One fade timing record (0x10 bytes): the fade-in length, the overlap and the fade-out times. */
+typedef struct SmokeFadeRecord {
+    /* 0x00 */ s32 inLength;
+    /* 0x04 */ s32 inOverlap;
+    /* 0x08 */ s32 outLength;
+    /* 0x0C */ s32 outOverlap;
+} SmokeFadeRecord;
 
-extern int g_smokeFadeState; /* 0x57f47c */
-extern unsigned int g_smokeFadeImages; /* 0x57f480 */
-extern unsigned int DAT_0057f484; /* 0x57f484 */
+/* The smoke fade state: the phase, the timing records, the frame counter and the two fade levels. */
+typedef struct SmokeFade {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ SmokeFadeRecord *records;
+    /* 0x0C */ u32 phase;               /* 0: start, 1: fading in, 2: fading out, 3: done */
+    /* 0x10 */ s32 index;
+    /* 0x14 */ s32 skipIn;
+    /* 0x18 */ s32 elapsed;
+    /* 0x1C */ f32 levelA;
+    /* 0x20 */ f32 levelB;
+    /* 0x24 */ u8 active;
+    /* 0x25 */ u8 useDefault;
+} SmokeFade;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: mathInterpolateTimed. */
-extern int FUN_00162ea4(void);
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: slotSetRequest. */
-extern int FUN_00203d74(void);
-/* Supplied declaration required: FUN_003d54f8. */
+/* The pointer to the state followed by the two images the fade needs loaded. */
+typedef struct SmokeFadeGlobals {
+    SmokeFade *state;
+    struct {
+        u32 table;
+        u32 node;
+        u32 unk08;
+    } images[2];
+} SmokeFadeGlobals;
 
+extern SmokeFadeGlobals g_smokeFadeState;
+extern SmokeFadeRecord DAT_0057f498;
 
-unsigned int FUN_0023af68(void)
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+s32 FUN_00162ea4(void);
+s32 FUN_00203d74(void);
+f32 mathInterpolateTimed(f32 from, f32 to, s32 duration, s32 elapsed);
+void slotSetRequest(s32 slot, s32 value, s32 flag);
+void FUN_003d54f8(s32 slot, s32 value);
 
+/* Whether both fade images are loaded. */
+static __inline s32 smokeFadeImagesLoaded(void)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned int in_fpscr;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  
-  temp_v0 = g_smokeFadeState;
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    temp_v1 = asdTMTexTableNodeIsLoaded((&g_smokeFadeImages)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
-    if (temp_v1 != 0) {
-      temp_v3 = temp_v3 + 1;
+    s32 loaded = 0;
+
+    for (s32 i = 0; i < 2; i++) {
+        if (asdTMTexTableNodeIsLoaded(g_smokeFadeState.images[i].table, g_smokeFadeState.images[i].node) != 0) {
+            loaded++;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
-  if (((temp_v3 == 2) && (*(int *)(temp_v0 + 8) != 0)) && (temp_v2 = FUN_00162ea4(), temp_v2 != 0)) {
-    *(unsigned char *)(temp_v0 + 0x24) = 0;
-    *(unsigned int *)(temp_v0 + 0xc) = 3;
-  }
-  piVar5 = (int *)0x57f498;
-  temp_v6 = 0.0f;
-  temp_v5 = 1.0f;
-  switch(*(unsigned int *)(temp_v0 + 0xc)) {
-  case 0:
-    temp_v3 = 0;
-    temp_v2 = 0;
-    do {
-      temp_v1 = asdTMTexTableNodeIsLoaded((&g_smokeFadeImages)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
-      if (temp_v1 != 0) {
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 2);
-    if (temp_v3 != 2) {
-      return 0;
-    }
-    if (*(int *)(temp_v0 + 8) == 0) {
-      return 0;
-    }
-    temp_v2 = FUN_00203d74();
-    if (temp_v2 != 0) {
-      *(unsigned char *)(temp_v0 + 0x25) = 1;
-    }
-    else {
-      *(unsigned char *)(temp_v0 + 0x25) = 0;
-    }
-    if ((*(char *)(g_smokeFadeState + 0x25) == '\0') &&
-       (piVar5 = (int *)0x0, *(int *)(g_smokeFadeState + 8) != 0)) {
-      piVar5 = (int *)(*(int *)(g_smokeFadeState + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
-    }
-    if (*(int *)(temp_v0 + 0x14) != 0) {
-      *(float *)(temp_v0 + 0x20) = temp_v6;
-      *(float *)(temp_v0 + 0x1c) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0xc) = 2;
-      slotSetRequest(1,piVar5[2] + 1,0xffffffff);
-    }
-    else {
-      FUN_003d54f8(0);
-      FUN_003d54f8(1,*piVar5 + 1);
-      *(float *)(temp_v0 + 0x20) = temp_v5;
-      *(float *)(temp_v0 + 0x1c) = temp_v5;
-      *(unsigned int *)(temp_v0 + 0xc) = 1;
-    }
-    *(unsigned char *)(temp_v0 + 0x24) = 1;
-    return 0;
-  case 1:
-    if ((*(char *)(g_smokeFadeState + 0x25) == '\0') &&
-       (piVar5 = (int *)0x0, *(int *)(g_smokeFadeState + 8) != 0)) {
-      piVar5 = (int *)(*(int *)(g_smokeFadeState + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
-    }
-    temp_v4 = temp_v5;
-    mathInterpolateTimed(*piVar5,*(unsigned int *)(temp_v0 + 0x18));
-    *(float *)(temp_v0 + 0x1c) = temp_v5;
-    temp_v2 = piVar5[1];
-    if (temp_v2 <= *(int *)(temp_v0 + 0x18)) {
-      mathInterpolateTimed(*piVar5 - temp_v2,*(int *)(temp_v0 + 0x18) - temp_v2);
-      *(float *)(temp_v0 + 0x20) = temp_v4;
-    }
-    *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
-    if (*(float *)(temp_v0 + 0x20) != temp_v6) {
-      return 0;
-    }
-    break;
-  case 2:
-    if ((*(char *)(g_smokeFadeState + 0x25) == '\0') &&
-       (piVar5 = (int *)0x0, *(int *)(g_smokeFadeState + 8) != 0)) {
-      piVar5 = (int *)(*(int *)(g_smokeFadeState + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
-    }
-    temp_v4 = temp_v6;
-    mathInterpolateTimed(piVar5[2],*(unsigned int *)(temp_v0 + 0x18));
-    *(float *)(temp_v0 + 0x1c) = temp_v6;
-    if (piVar5[3] <= *(int *)(temp_v0 + 0x18)) {
-      mathInterpolateTimed(piVar5[2] - piVar5[3],*(int *)(temp_v0 + 0x18) - piVar5[1]);
-      *(float *)(temp_v0 + 0x20) = temp_v4;
-    }
-    *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
-    temp_v6 = (float)VectorSignedToFloat((piVar5[2] - piVar5[3]) - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    if (temp_v5 - temp_v5 / temp_v6 <= *(float *)(temp_v0 + 0x20)) {
-      slotSetRequest(0,0,0xffffffff);
-    }
-    if (*(int *)(temp_v0 + 0x20) != 0x3f800000) {
-      return 0;
-    }
-    break;
-  default:
-    return 0;
-  }
-  *(unsigned int *)(temp_v0 + 0xc) = 3;
-  *(unsigned char *)(temp_v0 + 0x24) = 0;
-  *(unsigned int *)(temp_v0 + 0x18) = 0;
-  return 0;
+    return loaded;
 }
 
-} /* extern "C" */
+/* The fade's current timing record: the default one, or the indexed record of the loaded set. */
+static __inline SmokeFadeRecord *smokeFadeRecord(SmokeFade *state)
+{
+    SmokeFadeRecord *record = &DAT_0057f498;
+
+    if (g_smokeFadeState.state->useDefault == 0) {
+        record = NULL;
+        if (g_smokeFadeState.state->records != NULL) {
+            record = &g_smokeFadeState.state->records[state->index];
+        }
+    }
+    return record;
+}
+
+/* Advances the smoke fade one frame: waits for its images, then fades the two levels in
+ * (record timing), holds, and fades them out, finishing at phase 3. Always returns 0. */
+u32 FUN_0023af68(void)
+{
+    SmokeFade *state = g_smokeFadeState.state;
+    SmokeFadeRecord *record;
+
+    if (smokeFadeImagesLoaded() == 2 && state->records != NULL && FUN_00162ea4() != 0) {
+        state->active = 0;
+        state->phase = 3;
+    }
+    switch (state->phase) {
+    case 0:
+        if (smokeFadeImagesLoaded() != 2) {
+            return 0;
+        }
+        if (state->records == NULL) {
+            return 0;
+        }
+        state->useDefault = FUN_00203d74() != 0;
+        record = smokeFadeRecord(state);
+        if (state->skipIn != 0) {
+            state->levelB = 0.0f;
+            state->levelA = 0.0f;
+            state->phase = 2;
+            slotSetRequest(1, record->outLength + 1, -1);
+        } else {
+            FUN_003d54f8(0, 0);
+            FUN_003d54f8(1, record->inLength + 1);
+            state->levelB = 1.0f;
+            state->levelA = 1.0f;
+            state->phase = 1;
+        }
+        state->active = 1;
+        return 0;
+    case 1:
+        record = smokeFadeRecord(state);
+        state->levelA = mathInterpolateTimed(1.0f, 0.0f, record->inLength, state->elapsed);
+        if (state->elapsed >= record->inOverlap) {
+            state->levelB = mathInterpolateTimed(1.0f, 0.0f, record->inLength - record->inOverlap,
+                                                 state->elapsed - record->inOverlap);
+        }
+        state->elapsed++;
+        if (state->levelB != 0.0f) {
+            return 0;
+        }
+        break;
+    case 2:
+        record = smokeFadeRecord(state);
+        state->levelA = mathInterpolateTimed(0.0f, 1.0f, record->outLength, state->elapsed);
+        if (state->elapsed >= record->outOverlap) {
+            state->levelB = mathInterpolateTimed(0.0f, 1.0f, record->outLength - record->outOverlap,
+                                                 state->elapsed - record->inOverlap);
+        }
+        state->elapsed++;
+        if (!(1.0f - 1.0f / (f32)(record->outLength - record->outOverlap - 1) > state->levelB)) {
+            slotSetRequest(0, 0, -1);
+        }
+        if (*(s32 *)&state->levelB != 0x3F800000) {
+            return 0;
+        }
+        break;
+    default:
+        return 0;
+    }
+    state->phase = 3;
+    state->active = 0;
+    state->elapsed = 0;
+    return 0;
+}
+
+}

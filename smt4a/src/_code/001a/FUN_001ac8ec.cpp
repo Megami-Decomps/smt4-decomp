@@ -1,104 +1,148 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ac8ec` (_code @ 0x1ac8ec, 0x250 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail evaluates the handler call's vector argument (add r1, sp, #16) before the null test and then conditionally executes the call (ldrne/blxne), copies the 4th vector component back from the scratch memory, and keeps the globals in r8/r9; ours branches around the call and uses r6/r7. */
+#include "common.h"
+
+struct Vec4 {
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
+};
+
+/* A particle emitter's engine-side object: its type indexes the handler table. */
+struct EmitterObject {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 type;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u32 handle;
+};
+
+/* One particle of an emitter set (a linked list through `next`). */
+struct Particle {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Vec4 color;
+    /* 0x30 */ u8 unk30[0x10];
+    /* 0x40 */ Vec4 velocity;
+    /* 0x50 */ u8 unk50[0x10];
+    /* 0x60 */ f32 intensity;
+    /* 0x64 */ u8 unk64[4];
+    /* 0x68 */ u32 flags;
+    /* 0x6C */ u8 unk6C[0x18];
+    /* 0x84 */ u32 flags2;
+    /* 0x88 */ u8 unk88[8];
+    /* 0x90 */ EmitterObject *emitter;
+    /* 0x94 */ u8 unk94[0x18];
+    /* 0xAC */ Particle *next;
+};
+
+#define PARTICLE_HAS_COLOR 0x100
+#define PARTICLE_HAS_OFFSET 0x80
+#define PARTICLE_FIXED_HEIGHT 0x04
+#define PARTICLE_TIME_SCALED 0x01
+
+/* The set of particles one effect owns. */
+struct EmitterSet {
+    /* 0x00 */ Vec4 origin;
+    /* 0x10 */ u8 unk10[0x30];
+    /* 0x40 */ Vec4 offset;
+    /* 0x50 */ u8 unk50[0x10];
+    /* 0x60 */ f32 time;
+    /* 0x64 */ u8 unk64[0x10];
+    /* 0x74 */ f32 timeScale;
+    /* 0x78 */ u8 unk78[0x14];
+    /* 0x8C */ Particle *first;
+};
+
+/* Per-emitter-type callbacks (0x44 bytes each). */
+struct EmitterHandler {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ void (*placed)(u32 handle, const Vec4 *position);
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ void (*plain)(u32 handle, f32 intensity);
+    /* 0x2C */ void (*colored)(u32 handle, const Vec4 *color);
+    /* 0x30 */ u8 unk30[0x14];
+};
+
+/* Scratch vectors shared by the update functions (starting at 0x6471DC). */
+struct EmitterScratch {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ Vec4 first;
+    /* 0x110 */ Vec4 second;
+};
 
 extern "C" {
 
-int CONCAT44(int, double);
+extern EmitterHandler g_handlerTable[];
+extern EmitterScratch DAT_006471dc;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-extern float DAT_006472ec; /* 0x6472ec */
-extern float DAT_006472f0; /* 0x6472f0 */
-extern float DAT_006472f4; /* 0x6472f4 */
-extern float DAT_006472f8; /* 0x6472f8 */
-
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-
-
-void FUN_001ac8ec(float *param_1)
-
+/* Multiplies each component of the vector by `factor`. */
+static inline void scale(Vec4 &vector, f32 factor)
 {
-/* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
-  romwright_code *pcVar1;
-  float temp_v0;
-  float in_s0;
-  unsigned long long temp_v1;
-  float temp_v2;
-  float fStack_44;
-  float fStack_40;
-  float fStack_3c;
-  float temp_v3;
-  float fStack_34;
-  float fStack_30;
-  float temp_v4;
-  
-  param_1[0x18] = in_s0;
-  temp_v0 = param_1[0x23];
-  if (temp_v0 != 0.0f) {
-    temp_v1 = CONCAT44(0x40a00000,param_1[0x1d] * in_s0);
-    do {
-      if ((*(unsigned int *)((int)temp_v0 + 0x68) & 0x100) != 0) {
-        temp_v4 = *(float *)((int)temp_v0 + 0x60);
-        if ((*(unsigned int *)((int)temp_v0 + 0x84) & 1) != 0) {
-          temp_v4 = temp_v4 * (float)temp_v1;
+    vector.x = vector.x * factor;
+    vector.y = vector.y * factor;
+    vector.z = vector.z * factor;
+    vector.w = vector.w * factor;
+}
+
+/* Adds `other` to the vector component-wise. */
+static inline void add(Vec4 &vector, const Vec4 &other)
+{
+    vector.x = vector.x + other.x;
+    vector.y = vector.y + other.y;
+    vector.z = vector.z + other.z;
+    vector.w = vector.w + other.w;
+}
+
+/* Advances every particle of the set by `deltaTime`: calls the emitter type's handler with the
+ * particle's color, and (when it has an offset) its position. */
+void FUN_001ac8ec(EmitterSet *set, f32 deltaTime)
+{
+    f32 scaledTime = set->timeScale * deltaTime;
+    Particle *particle;
+
+    set->time = deltaTime;
+    for (particle = set->first; particle != NULL; particle = particle->next) {
+        if ((particle->flags & PARTICLE_HAS_COLOR) == 0) {
+            f32 factor = particle->intensity;
+
+            if ((particle->flags2 & PARTICLE_TIME_SCALED) != 0) {
+                factor = factor * scaledTime;
+            }
+            if (g_handlerTable[particle->emitter->type].plain != NULL) {
+                g_handlerTable[particle->emitter->type].plain(particle->emitter->handle, factor);
+            }
+        } else {
+            Vec4 color;
+            f32 factor;
+
+            DAT_006471dc.first = particle->color;
+            factor = particle->intensity;
+            if ((particle->flags2 & PARTICLE_TIME_SCALED) != 0) {
+                factor = factor * scaledTime;
+            }
+            scale(DAT_006471dc.first, factor);
+            color = DAT_006471dc.first;
+            if (g_handlerTable[particle->emitter->type].colored != NULL) {
+                g_handlerTable[particle->emitter->type].colored(particle->emitter->handle, &color);
+            }
         }
-        temp_v3 = *(float *)((int)temp_v0 + 0x20) * temp_v4;
-        fStack_34 = *(float *)((int)temp_v0 + 0x24) * temp_v4;
-        fStack_30 = *(float *)((int)temp_v0 + 0x28) * temp_v4;
-        temp_v4 = *(float *)((int)temp_v0 + 0x2c) * temp_v4;
-        pcVar1 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)((int)temp_v0 + 0x90) + 4) * 0x44 + 0x5b32a0);
-        DAT_006472dc = temp_v3;
-        DAT_006472e0 = fStack_34;
-        DAT_006472e4 = fStack_30;
-        DAT_006472e8 = temp_v4;
-        if (pcVar1 != (romwright_code *)0x0) {
-          (*pcVar1)(*(unsigned int *)(*(int *)((int)temp_v0 + 0x90) + 8),&temp_v3);
+        if ((particle->flags & PARTICLE_HAS_OFFSET) != 0) {
+            Vec4 position;
+
+            DAT_006471dc.first = set->offset;
+            DAT_006471dc.second = set->origin;
+            add(DAT_006471dc.first, DAT_006471dc.second);
+            if ((particle->flags & PARTICLE_FIXED_HEIGHT) != 0) {
+                DAT_006471dc.first.y = 5.0f;
+            }
+            DAT_006471dc.second = particle->velocity;
+            scale(DAT_006471dc.second, scaledTime);
+            add(DAT_006471dc.first, DAT_006471dc.second);
+            position = DAT_006471dc.first;
+            if (g_handlerTable[particle->emitter->type].placed != NULL) {
+                g_handlerTable[particle->emitter->type].placed(particle->emitter->handle, &position);
+            }
         }
-      }
-      else {
-        pcVar1 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)((int)temp_v0 + 0x90) + 4) * 0x44 + 0x5b329c);
-        if (pcVar1 != (romwright_code *)0x0) {
-          (*pcVar1)(*(unsigned int *)(*(int *)((int)temp_v0 + 0x90) + 8));
-        }
-      }
-      if ((*(unsigned int *)((int)temp_v0 + 0x68) & 0x80) != 0) {
-        DAT_006472e0 = param_1[0x11] + param_1[1];
-        if ((*(unsigned int *)((int)temp_v0 + 0x68) & 4) != 0) {
-          DAT_006472e0 = (float)((unsigned long long)temp_v1 >> 0x20);
-        }
-        DAT_006472f8 = (float)temp_v1;
-        DAT_006472ec = *(float *)((int)temp_v0 + 0x40) * DAT_006472f8;
-        DAT_006472f0 = *(float *)((int)temp_v0 + 0x44) * DAT_006472f8;
-        DAT_006472f4 = *(float *)((int)temp_v0 + 0x48) * DAT_006472f8;
-        DAT_006472f8 = *(float *)((int)temp_v0 + 0x4c) * DAT_006472f8;
-        temp_v2 = param_1[0x10] + *param_1 + DAT_006472ec;
-        fStack_44 = DAT_006472e0 + DAT_006472f0;
-        fStack_40 = param_1[0x12] + param_1[2] + DAT_006472f4;
-        fStack_3c = param_1[0x13] + param_1[3] + DAT_006472f8;
-        pcVar1 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)((int)temp_v0 + 0x90) + 4) * 0x44 + 0x5b3294);
-        DAT_006472dc = temp_v2;
-        DAT_006472e0 = fStack_44;
-        DAT_006472e4 = fStack_40;
-        DAT_006472e8 = fStack_3c;
-        if (pcVar1 != (romwright_code *)0x0) {
-          (*pcVar1)(*(unsigned int *)(*(int *)((int)temp_v0 + 0x90) + 8),&temp_v2);
-        }
-      }
-      temp_v0 = *(float *)((int)temp_v0 + 0xac);
-    } while (temp_v0 != 0.0f);
-  }
-  return;
+    }
 }
 
 } /* extern "C" */

@@ -1,143 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003217d0` (_code @ 0x3217d0, 0x2b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 170 rows); retail keeps the panel's 0x400 flags base in r7 and uses a larger callee-saved set */
+#include "common.h"
+
+struct DrawRing {
+    s32 index;              // 0x00
+    s32 unk04;
+    s32 slots[4];           // 0x08
+    u8 dirty;               // 0x18
+    u8 unk19[3];
+    void (*flush)(void);    // 0x1c
+};
+
+struct RenderCtx {
+    u8 unk0000[0x12b8];
+    DrawRing ring;          // 0x12b8
+};
+
+struct UiSprite {
+    u8 unk00[0x20];
+    f32 alpha;              // 0x20
+};
+
+// Battle result panel: only the sprites and flags this draw touches.
+struct ResultPanel {
+    u8 unk00[0x20];
+    UiSprite header;        // 0x20
+    u8 unk44[0x138 - 0x44];
+    UiSprite body;          // 0x138
+    u8 unk15c[0x2dc - 0x15c];
+    u8 mask;                // 0x2dc
+    u8 unk2dd[0x400 - 0x2dd];
+    u8 showHeader;          // 0x400
+    u8 showBody;            // 0x401
+    u8 unk402;
+    u8 skip;                // 0x403
+};
 
 extern "C" {
 
-int CONCAT44(double, int);
-int FUN_001634b4(int);
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, int);
-int renderCtxCalculateStereoParallax(int);
-int FUN_003b21a4(int);
-int VectorSignedToFloat(int, int);
+extern RenderCtx* g_renderCtx;
+extern u64 DAT_0057a9b0;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
+void* btlGetMainState(void);
+void FUN_001634b4(void* sprite, f32 offset);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
+void FUN_003b21a4(ResultPanel* panel);
 
-extern unsigned int DAT_0057a9b0; /* 0x57a9b0 */
-extern unsigned int DAT_0057a9b4; /* 0x57a9b4 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001634b4. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_003b21a4. */
-
-
-void FUN_003217d0(int param_1)
-
+static void setDrawState(s32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  unsigned long long temp_v8;
-  
-  if (*(char *)(param_1 + 0x403) != '\0') {
-    FUN_003b21a4(param_1);
-    return;
-  }
-  temp_v7 = 0.29f;
-  temp_v6 = temp_v7;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v8 = CONCAT44(temp_v6,(int)temp_v7);
-  temp_v3 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v3 + 0x45a0) & DAT_0057a9b0) == 0 &&
-      (DAT_0057a9b4 & *(unsigned int *)(temp_v3 + 0x45a4)) == 0) {
-    VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(param_1 + 0x2dc);
-  }
-  temp_v6 = (float)((unsigned long long)temp_v8 >> 0x20);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v3 = (int)temp_v6;
-  if (*(char *)(param_1 + 0x400) != '\0') {
-    temp_v7 = 0.0f;
-    temp_v6 = *(float *)(param_1 + 0x40);
-    temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < 0.0f) << 0x1f) | ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
-    in_fpscr = temp_v0 | ((unsigned int)(temp_v6 != temp_v6) << 0x1c);
-    temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-    if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-      efctSetSpeed();
-      FUN_001835b4(2,0xc,1000,temp_v3,0,0x1f);
-      temp_v6 = *(float *)(param_1 + 0x158);
-      temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 < temp_v7) << 0x1f) |
-              ((unsigned int)(temp_v6 == temp_v7) << 0x1e);
-      in_fpscr = temp_v0 | ((unsigned int)((temp_v6 != temp_v6) || (temp_v7 != temp_v7)) << 0x1c);
-      temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-      if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-        efctSetSpeed();
-        temp_v2 = g_renderCtx;
-        temp_v4 = packNibblesAndByte(6,1,0);
-        piVar7 = (int *)(temp_v2 + 0x12b8);
-        temp_v5 = piVar7[*piVar7 + 2];
-        piVar7[*piVar7 + 2] = temp_v4;
-        if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-          (**(romwright_code **)(temp_v2 + 0x12d4))();
-          *(unsigned char *)(temp_v2 + 0x12d0) = 0;
+    DrawRing* ring = &g_renderCtx->ring;
+    s32 previous = ring->slots[ring->index];
+    ring->slots[ring->index] = value;
+    if (ring->dirty != 0 || previous != value) {
+        ring->flush();
+        ring->dirty = 0;
+    }
+}
+
+// Draws the result panel: the header and body frames, shifted by the stereo parallax.
+void FUN_003217d0(ResultPanel* panel)
+{
+    if (panel->skip != 0) {
+        FUN_003b21a4(panel);
+        return;
+    }
+    s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
+    u64 mask = *reinterpret_cast<u64*>(reinterpret_cast<u8*>(btlGetMainState()) + 0x45a0);
+    if ((mask & DAT_0057a9b0) == 0) FUN_001634b4(&panel->mask, (f32)shift);
+
+    s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
+    if (panel->showHeader != 0 && panel->header.alpha > 1.0f) {
+        efctSetSpeed(panel->header.alpha);
+        FUN_001835b4(2, 12, 1000, x, 0, 31);
+        if (panel->body.alpha > 1.0f) {
+            efctSetSpeed(panel->body.alpha);
+            setDrawState(packNibblesAndByte(6, 1, 0));
+            FUN_001835b4(2, 12, 0x3e9, x, 0, 36);
+            setDrawState(packNibblesAndByte(6, 7, 0));
         }
-        FUN_001835b4(2,0xc,0x3e9,temp_v3,0,0x24);
-        temp_v2 = g_renderCtx;
-        temp_v4 = packNibblesAndByte(6,7,0);
-        piVar7 = (int *)(temp_v2 + 0x12b8);
-        temp_v5 = piVar7[*piVar7 + 2];
-        piVar7[*piVar7 + 2] = temp_v4;
-        if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-          (**(romwright_code **)(temp_v2 + 0x12d4))();
-          *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-        }
-      }
-      efctSetSpeed();
+        efctSetSpeed(1.0f);
     }
-  }
-  if (*(char *)(param_1 + 0x401) != '\0') {
-    VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(param_1 + 0x20);
-    VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(param_1 + 0x1c4);
-    temp_v2 = g_renderCtx;
-    temp_v4 = packNibblesAndByte(6,1,0);
-    piVar7 = (int *)(temp_v2 + 0x12b8);
-    temp_v5 = piVar7[*piVar7 + 2];
-    piVar7[*piVar7 + 2] = temp_v4;
-    if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-      (**(romwright_code **)(temp_v2 + 0x12d4))();
-      *(unsigned char *)(temp_v2 + 0x12d0) = 0;
+    if (panel->showBody != 0) {
+        FUN_001634b4(&panel->header, (f32)x);
+        FUN_001634b4(reinterpret_cast<u8*>(panel) + 452, (f32)x);
+        setDrawState(packNibblesAndByte(6, 1, 0));
+        FUN_001634b4(&panel->body, (f32)x);
+        setDrawState(packNibblesAndByte(6, 7, 0));
+        FUN_001634b4(reinterpret_cast<u8*>(panel) + 172, (f32)x);
     }
-    VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(param_1 + 0x138);
-    temp_v2 = g_renderCtx;
-    temp_v4 = packNibblesAndByte(6,7,0);
-    piVar7 = (int *)(temp_v2 + 0x12b8);
-    temp_v5 = piVar7[*piVar7 + 2];
-    piVar7[*piVar7 + 2] = temp_v4;
-    if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-      (**(romwright_code **)(temp_v2 + 0x12d4))();
-      *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-    }
-    VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(param_1 + 0xac);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

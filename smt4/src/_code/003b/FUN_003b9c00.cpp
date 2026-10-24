@@ -1,173 +1,133 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b9c00` (_code @ 0x3b9c00, 0x3d0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail inlines the availability check three times with separate stack buffers, keeps the script and group in stack slots and holds the three scan results in r8/r9/fp; this version shares one helper, so register allocation and frame size differ. The scan logic and calls are the same. */
+#include "common.h"
+
+namespace {
+/* A row of the list window (the entry type, its script name and the two flags gating it). */
+struct ListEntry {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2c */ char name[0x10];          /* script name; "0" means none */
+    /* 0x3c */ u16 requiredFlag;         /* must be set, when non-zero */
+    /* 0x3e */ u16 forbiddenFlag;        /* must not be set, when non-zero */
+    /* 0x40 */ u8 unk40[0x14];
+    /* 0x54 */ u16 type;                 /* 2, 3, 4: which scan the row belongs to */
+};
+
+/* The list window's state block (only the fields this check reads and writes). */
+struct ListWindow {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u32 flags;               /* 0x10, 0x40, 0x40000000, 0x10000000: window state bits */
+    /* 0x024 */ u8 unk024[4];
+    /* 0x028 */ u32 mode;
+    /* 0x02c */ u32 counter;
+    /* 0x030 */ u8 unk030[0xc];
+    /* 0x03c */ s16 selected;
+    /* 0x03e */ u8 unk03e[4];
+    /* 0x042 */ u8 cursor[0x5a];         /* handed to FUN_002bd808 */
+    /* 0x09c */ u8 list[0x52c];
+    /* 0x5c8 */ s32 entryCount;
+    /* 0x5cc */ u8 unk5cc[0x102];
+    /* 0x6ce */ u8 closeRequested;
+    /* 0x6cf */ u8 unk6cf[0x695];
+    /* 0xd64 */ u32 state;
+    /* 0xd68 */ u8 unkd68[0x20];
+    /* 0xd88 */ u32 scriptGroup;
+    /* 0xd8c */ u8 unkd8c[4];
+    /* 0xd90 */ u32 script;
+    /* 0xd94 */ u8 unkd94[0xc8];
+    /* 0xe5c */ u32 animation;
+};
+}
 
 extern "C" {
+extern s32 DAT_0044cfb8;                 /* set by the script when it rejects the entry */
+ListEntry *FUN_0022b238(void *list, s32 index);
+void textFormatBuffer(char *buffer, const char *format, ...);
+u32 tableGroupFindEntryIndex(u32 group, const char *name);
+void scrScriptProcessStartEntry(u32 script, u32 entry);
+s32 scrRunOpcodesStub(u32 script);
+s32 gameFlagIsSet(u32 flag);
+void listScrollToId(void *list, s32 id);
+void FUN_002bd808(void *cursor, u16 *vector);
+void messageMainFinishWindow(void);
+void FUN_0022b29c(ListWindow *window, s32 selected, s32 kind);
+void FUN_0022afc4(u32 animation, s32 a, s32 b);
 
-int FUN_0022afc4(unsigned int, int, unsigned int);
-int FUN_0022b29c(int, int, int);
-int listScrollToId(int, int);
-int messageMainFinishWindow(void);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_002bd808(int, unsigned short *);
-int textFormatBuffer(...);
-int gameFlagIsSet(...);
-
-/* stack frame of param_1: 6 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned short sp60; /* 0x60: local_60 */
-    unsigned short sp62; /* 0x62: local_62 */
-    unsigned short sp64; /* 0x64: local_64 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_1_stack;
-
-extern unsigned char DAT_00404e04; /* 0x404e04 */
-extern int DAT_0044cfb8; /* 0x44cfb8 */
-
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022afc4. */
-extern int FUN_0022b238(int, int);
-/* Supplied declaration required: FUN_0022b29c. */
-/* Supplied declaration required: listScrollToId. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: messageMainFinishWindow. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002bd808. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: gameFlagIsSet. */
-
-
-void FUN_003b9c00(int param_1)
-
+/* Runs the entry's availability script and reports whether the entry is currently available. */
+static s32 entryIsAvailable(ListWindow *window, ListEntry *entry)
 {
-/* irregular: 1 goto(s); 8 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned short temp_v8;
-  unsigned short temp_v9;
-  unsigned short temp_v10;
-  unsigned int temp_v11;
-  unsigned char temp_v12 [8];
-  unsigned char temp_v13 [36];
-  
-  temp_v0 = 1;
-  temp_v1 = *(int *)(param_1 + 0x5c8);
-  temp_v7 = 0;
-  if (temp_v7 < temp_v1) {
-    do {
-      temp_v2 = FUN_0022b238(param_1 + 0x9c,temp_v7);
-      if (*(short *)(temp_v2 + 0x54) == 3) {
-        if (*(char *)(temp_v2 + 0x2c) != '0') {
-          temp_v3 = *(unsigned int *)(param_1 + 0xd90);
-          temp_v4 = *(unsigned int *)(param_1 + 0xd88);
-          DAT_0044cfb8 = 0;
-          textFormatBuffer(temp_v13,&DAT_00404e04,temp_v2 + 0x2c);
-          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v13);
-          scrScriptProcessStartEntry(temp_v3,temp_v4);
-          do {
-            temp_v5 = scrRunOpcodesStub(temp_v3);
-          } while (temp_v5 != 2);
-          if (((DAT_0044cfb8 != 0) ||
-              ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) ||
-             ((*(short *)(temp_v2 + 0x3e) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 != 0))))
-          goto LAB_003b9cf0;
-          break;
-        }
-      }
-      else {
-LAB_003b9cf0:
-        if ((*(short *)(temp_v2 + 0x54) == 4) && (*(char *)(temp_v2 + 0x2c) != '0')) {
-          temp_v3 = *(unsigned int *)(param_1 + 0xd90);
-          temp_v11 = *(unsigned int *)(param_1 + 0xd88);
-          DAT_0044cfb8 = 0;
-          textFormatBuffer(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
-          temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
-          scrScriptProcessStartEntry(temp_v3,temp_v4);
-          do {
-            temp_v5 = scrRunOpcodesStub(temp_v3);
-          } while (temp_v5 != 2);
-          if (((DAT_0044cfb8 == 0) &&
-              ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
-             ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
-            temp_v0 = 0;
+    char name[36];
+    u32 script = window->script;
+    u32 group = window->scriptGroup;
+    DAT_0044cfb8 = 0;
+    textFormatBuffer(name, "%s", entry->name);
+    scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
+    while (scrRunOpcodesStub(script) != 2) {
+    }
+    return DAT_0044cfb8 == 0 && (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+           (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0);
+}
+
+/* Checks which kinds of entries are currently available (type 4 rows gate the window, type 3 and 2 rows
+   only run their scripts) and then updates the window for its state: open, close or show the selection. */
+void FUN_003b9c00(ListWindow *window)
+{
+    s32 noPassingEntry = 1;
+    s32 count = window->entryCount;
+    for (s32 i = 0; i < count; i++) {
+        ListEntry *entry = FUN_0022b238(window->list, i);
+        if (entry->type == 3 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {
             break;
-          }
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v1);
-  }
-  temp_v7 = 0;
-  if (temp_v7 < temp_v1) {
-    do {
-      temp_v2 = FUN_0022b238(param_1 + 0x9c,temp_v7);
-      if ((*(short *)(temp_v2 + 0x54) == 2) && (*(char *)(temp_v2 + 0x2c) != '0')) {
-        temp_v3 = *(unsigned int *)(param_1 + 0xd90);
-        temp_v11 = *(unsigned int *)(param_1 + 0xd88);
-        DAT_0044cfb8 = 0;
-        textFormatBuffer(temp_v12,&DAT_00404e04,temp_v2 + 0x2c);
-        temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
-        scrScriptProcessStartEntry(temp_v3,temp_v4);
-        do {
-          temp_v5 = scrRunOpcodesStub(temp_v3);
-        } while (temp_v5 != 2);
-        if (((DAT_0044cfb8 == 0) &&
-            ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
-           ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) break;
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < temp_v1);
-  }
-  temp_v8 = 0;
-  temp_v9 = 0;
-  temp_v10 = 0;
-  switch(*(unsigned int *)(param_1 + 0xd64)) {
-  case 0:
-    if ((temp_v0) && (temp_v1 = gameFlagIsSet(0x15), temp_v1 != 0)) {
-      temp_v8 = 4;
-      listScrollToId(param_1 + 0x9c,0xff);
-      FUN_002bd808(param_1 + 0x42,&temp_v8);
-      temp_v6 = *(unsigned int *)(param_1 + 0x20);
-      *(unsigned int *)(param_1 + 0x20) = temp_v6 | 0x10;
-      if ((temp_v6 & 0x40) != 0) {
-        *(unsigned int *)(param_1 + 0x20) = (temp_v6 & 0xffffffbf) | 0x10;
-        messageMainFinishWindow();
+        if (entry->type == 4 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {
+            noPassingEntry = 0;
+            break;
+        }
+    }
+    for (s32 i = 0; i < count; i++) {
+        ListEntry *entry = FUN_0022b238(window->list, i);
+        if (entry->type == 2 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {
+            break;
+        }
+    }
+    u16 vector[3] = { 0, 0, 0 };
+    switch (window->state) {
+    case 0:
+        if (noPassingEntry != 0 && gameFlagIsSet(0x15) != 0) {
+            vector[0] = 4;
+            listScrollToId(window->list, 0xff);
+            FUN_002bd808(window->cursor, vector);
+            u32 flags = window->flags | 0x10;
+            window->flags = flags;
+            if ((flags & 0x40) != 0) {
+                window->flags = flags & ~0x40u;
+                messageMainFinishWindow();
+                return;
+            }
+        }
+        break;
+    case 5:
+        if (noPassingEntry == 0) {
+            return;
+        }
+        /* fall through */
+    case 1:
+    case 2:
+        listScrollToId(window->list, 0xff);
+        window->flags = window->flags | 0x40000000;
+        window->closeRequested = 1;
+        break;
+    case 6:
+    case 7:
+        if ((window->flags & 0x10000000) != 0) {
+            FUN_0022b29c(window, window->selected, 4);
+        } else {
+            FUN_0022b29c(window, window->selected, 3);
+        }
+        window->counter = 0;
+        window->mode = 4;
+        FUN_0022afc4(window->animation, 0, -1);
         return;
-      }
     }
-    break;
-  case 5:
-    if (!temp_v0) {
-      return;
-    }
-  case 1:
-  case 2:
-    listScrollToId(param_1 + 0x9c,0xff);
-    *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x40000000;
-    *(unsigned char *)(param_1 + 0x6ce) = 1;
-    break;
-  case 6:
-  case 7:
-    if ((*(unsigned int *)(param_1 + 0x20) & 0x10000000) != 0) {
-      FUN_0022b29c(param_1,(int)*(short *)(param_1 + 0x3c),4);
-    }
-    else {
-      FUN_0022b29c(param_1,(int)*(short *)(param_1 + 0x3c),3);
-    }
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    *(unsigned int *)(param_1 + 0x28) = 4;
-    FUN_0022afc4(*(unsigned int *)(param_1 + 0xe5c),0,0xffffffff);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

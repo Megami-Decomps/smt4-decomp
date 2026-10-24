@@ -1,154 +1,145 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a880c` (_code @ 0x2a880c, 0x230 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the texture-slot effect setup (nine fade/hold modes with their default durations); retail shares the tail of cases 2 and 7 and loads the 0.0f/1.0f constants through different VFP registers, which the build schedules differently. */
+#include "common.h"
+
+// A texture entry returned by the sprite table lookup (observed field).
+struct TextureEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 id;
+};
+
+// A sprite texture slot with a timed fade effect (observed fields).
+struct TextureSlot {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 sprite;
+    /* 0x08 */ s32 source;
+    /* 0x0C */ s32 busy;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ s32 pending;     // -1 when no replacement is pending
+    /* 0x18 */ u8 unk18[0xc];
+    /* 0x24 */ u32 mode;
+    /* 0x28 */ f32 fade;
+    /* 0x2C */ f32 fadeAux;
+    /* 0x30 */ u8 active;
+    /* 0x31 */ u8 unk31[3];
+    /* 0x34 */ u8 state[0x24];
+    /* 0x58 */ f32 offsetX;
+    /* 0x5C */ f32 offsetY;
+    /* 0x60 */ f32 offsetZ;
+    /* 0x64 */ u8 unk64[0x10];
+    /* 0x74 */ f32 duration;
+    /* 0x78 */ u8 unk78[0x10];
+    /* 0x88 */ f32 hold;
+    /* 0x8C */ u8 unk8c;
+    /* 0x8D */ u8 holdActive;
+};
 
 extern "C" {
+void FUN_002a4e18(u8 *state, s32 source);
+void aocSlotRelease(TextureSlot *slot);
+TextureEntry *FUN_002aecd8(s32 sprite, s32 index);
+void uiSpriteReplaceTextureEntry(TextureSlot *slot, u16 id, s32 mode);
 
-int FUN_002a4e18(int, unsigned int);
-int FUN_002a86d4(int);
-int uiSpriteReplaceTextureEntry(int, int, unsigned int);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002a4e18. */
-/* Supplied declaration required: FUN_002a86d4. */
-/* Supplied declaration required: uiSpriteReplaceTextureEntry. */
-extern int FUN_002aecd8(int, unsigned int);
-
-
-void FUN_002a880c(int param_1,unsigned int param_2,int param_3)
-
+// Starts the slot's effect `mode` (1..9) with `requested` frames (0 selects the mode's default), then queues the
+// texture replacement when the slot is active and idle.
+void FUN_002a880c(TextureSlot *slot, u32 mode, s32 requested)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0, in_s1; 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned int in_fpscr;
-  int in_s0;
-  unsigned int temp_v2;
-  unsigned int in_s1;
-  
-  *(unsigned int *)(param_1 + 0x24) = param_2;
-  switch(param_2) {
-  case 1:
-    if (param_3 == 0) {
-      temp_v2 = 0x40800000;
+    slot->mode = mode;
+    switch (mode) {
+    case 1:
+        if (requested == 0) {
+            slot->duration = 4.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->fade = 1.0f;
+        slot->active = 0;
+        break;
+    case 2:
+        if (requested == 0) {
+            slot->duration = 12.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->fade = 0.0f;
+        slot->active = 1;
+        aocSlotRelease(slot);
+        break;
+    case 3:
+        slot->holdActive = 1;
+        if (requested == 0) {
+            slot->duration = 6.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->fade = 1.0f;
+        slot->hold = 1.0f;
+        break;
+    case 4:
+        if (requested == 0) {
+            slot->duration = 12.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->fade = 0.0f;
+        slot->hold = 1.0f;
+        break;
+    case 5:
+        if (requested == 0) {
+            slot->duration = 10.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        break;
+    case 6:
+        if (requested == 0) {
+            slot->duration = 10.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        FUN_002a4e18(slot->state, slot->source);
+        slot->active = 1;
+        slot->offsetY = 0.0f;
+        slot->offsetX = 0.0f;
+        slot->offsetZ = 0.0f;
+        slot->fade = 0.0f;
+        aocSlotRelease(slot);
+        break;
+    case 7:
+        if (requested == 0) {
+            slot->duration = 4.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->fade = 0.0f;
+        slot->active = 1;
+        aocSlotRelease(slot);
+        break;
+    case 8:
+        if (requested == 0) {
+            slot->duration = 120.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->active = 1;
+        slot->fade = 0.0f;
+        slot->fadeAux = 0.0f;
+        aocSlotRelease(slot);
+        break;
+    case 9:
+        if (requested == 0) {
+            slot->duration = 120.0f;
+        } else {
+            slot->duration = (f32)requested;
+        }
+        slot->fade = 1.0f;
+        slot->active = 1;
+        slot->fadeAux = 0.0f;
+        aocSlotRelease(slot);
+        break;
     }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
+    if (slot->active != 0 && slot->busy == 0 && slot->pending == -1 && slot->sprite != 0) {
+        TextureEntry *entry = FUN_002aecd8(slot->sprite, 1);
+        uiSpriteReplaceTextureEntry(slot, entry->id, -1);
     }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0x3f800000;
-    *(unsigned char *)(param_1 + 0x30) = 0;
-    break;
-  case 2:
-    if (param_3 == 0) {
-      temp_v2 = 0x41400000;
-    }
-    else {
-LAB_002a8970:
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    FUN_002a86d4(param_1);
-    break;
-  case 3:
-    temp_v1 = param_3 != 0;
-    if (!temp_v1) {
-      in_s1 = 0x40c00000;
-      param_3 = in_s0;
-    }
-    *(unsigned char *)(param_1 + 0x8d) = 1;
-    if (temp_v1) {
-      in_s1 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = in_s1;
-    *(unsigned int *)(param_1 + 0x28) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x88) = 0x3f800000;
-    break;
-  case 4:
-    if (param_3 == 0) {
-      temp_v2 = 0x41400000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned int *)(param_1 + 0x88) = 0x3f800000;
-    break;
-  case 5:
-    if (param_3 == 0) {
-      temp_v2 = 0x41200000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    break;
-  case 6:
-    if (param_3 == 0) {
-      temp_v2 = 0x41200000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    FUN_002a4e18(param_1 + 0x34,*(unsigned int *)(param_1 + 8));
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    *(unsigned int *)(param_1 + 0x5c) = 0;
-    *(unsigned int *)(param_1 + 0x58) = 0;
-    *(unsigned int *)(param_1 + 0x60) = 0;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    FUN_002a86d4(param_1);
-    break;
-  case 7:
-    if (param_3 != 0) goto LAB_002a8970;
-    temp_v2 = 0x40800000;
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    FUN_002a86d4(param_1);
-    break;
-  case 8:
-    if (param_3 == 0) {
-      temp_v2 = 0x42f00000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    FUN_002a86d4(param_1);
-    break;
-  case 9:
-    if (param_3 == 0) {
-      temp_v2 = 0x42f00000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0x3f800000;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    FUN_002a86d4(param_1);
-  }
-  if ((((*(char *)(param_1 + 0x30) != '\0') && (*(int *)(param_1 + 0xc) == 0)) &&
-      (*(int *)(param_1 + 0x14) == -1)) && (*(int *)(param_1 + 4) != 0)) {
-    temp_v0 = FUN_002aecd8(*(int *)(param_1 + 4),1);
-    uiSpriteReplaceTextureEntry(param_1,*(unsigned short *)(temp_v0 + 2),0xffffffff);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

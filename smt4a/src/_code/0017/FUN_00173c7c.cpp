@@ -1,141 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00173c7c` (_code @ 0x173c7c, 0x2a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the NintendoWare sound player teardown (175 vs ~180 rows); register allocation and the order of the pool loops differ from retail */
+#include "common.h"
+
+struct Polymorphic {
+    void (**vtable)(Polymorphic* self);     // slot 1 destroys the object
+};
+
+// nw::snd::SoundArchivePlayer-like state: sound instance pools with their free lists.
+struct SoundPlayerPools {
+    u32 unk00;
+    u32 unk04;                  // 0x04
+    u8 unk08[0x10];
+    u32 commandCount;           // 0x18
+    u32 commandBuffer;          // 0x1c
+    Polymorphic* soundPool;     // 0x20
+    u32 soundPoolBytes;         // 0x24
+    u8 soundActiveList[8];      // 0x28
+    u8 soundFreeList[8];        // 0x34 (head at 0x38)
+    u8 unk40[0x0c];
+    s32 unk4c;                  // 0x4c
+    u32 unk50;                  // 0x50
+    u8 unk54[0x18];
+    Polymorphic* playerPool;    // 0x6c
+    u32 playerPoolBytes;        // 0x70
+    u8 unk74[0x8c - 0x74];
+    s32 unk8c;                  // 0x8c
+    u8 unk90[8];
+    s32 unk98;                  // 0x98
+    u32 unk9c;                  // 0x9c
+    u8 unka0[0x18];
+    Polymorphic* streamPool;    // 0xb8
+    u32 streamPoolBytes;        // 0xbc
+    u8 unkc0[0x34];
+    u8 streamBufferPool[0x10];  // 0xf4
+    u32 initialized;            // 0x104
+    u32 unk108;                 // 0x108
+};
 
 extern "C" {
 
-int FUN_0018fe70(unsigned int, int);
-int FUN_001912cc(unsigned int, unsigned int);
-int constructObj0055c19c(...);
-int FUN_00191518(...);
-int FUN_001915bc(int, unsigned int, unsigned int);
-int nw_snd_internal_driver_StreamBufferPool_Finalize(...);
-int nw_ut_internal_LinkListImpl_erase_2AC900(...);
+void FUN_0018fe70(u32 command, s32 arg);
+u32 objectCommandQueueGet(void);
+u32 FUN_001911a4(u32 queue, u32 arg);
+void FUN_001912cc(u32 queue, u32 value);
+void constructObj0055c19c(s32 object, u32 arg);
+void nw_ut_internal_LinkListImpl_erase_2AC900(void* list, u32 head, void* headPtr);
+u32 _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
+void FUN_00191518(u32 thread, void* callback);
+void FUN_001915bc(void* pool, u32 a, u32 b);
+void nw_snd_internal_driver_StreamBufferPool_Finalize(void* pool);
 
-typedef int romwright_code(...);
-extern unsigned int objectCommandQueueGet(void);
-/* Supplied declaration required: FUN_0018fe70. */
-extern unsigned int FUN_001911a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001912cc. */
-/* Supplied declaration required: constructObj0055c19c. */
-/* Supplied declaration required: FUN_00191518. */
-/* Supplied declaration required: FUN_001915bc. */
-extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
-/* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Finalize. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2AC900. */
-
-
-void FUN_00173c7c(int param_1)
-
+static void destroyArray(Polymorphic* first, u32 count, u32 stride)
 {
-/* irregular: 9 native warning(s); review required */
-  long long temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int *piVar5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 0xf0) = 0;
-  temp_v5 = 0;
-  if (*(int *)(param_1 + 0x18) != 0) {
-    do {
-      FUN_0018fe70(*(int *)(param_1 + 0x1c) + temp_v5 * 0x5c,0);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(unsigned int *)(param_1 + 0x18));
-  }
-  temp_v1 = objectCommandQueueGet();
-  temp_v2 = FUN_001911a4(temp_v1,1);
-  FUN_001912cc(temp_v1,temp_v2);
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  *(unsigned int *)(param_1 + 0x1c) = 0;
-  if (*(int *)(param_1 + 0x104) != 0) {
-    piVar5 = *(int **)(param_1 + 0x20);
-    temp_v8 = 0;
-    temp_v5 = (unsigned int)(((unsigned long long)*(unsigned int *)(param_1 + 0x24) * 0x2d02d02d + 0x2d02d02d) >> 0x27);
-    if (temp_v5 != 0) {
-      do {
-        (**(romwright_code **)(*piVar5 + 4))(piVar5);
-        temp_v8 = temp_v8 + 1;
-        piVar5 = piVar5 + 0xb6;
-      } while (temp_v8 < temp_v5);
+    for (u32 i = 0; i < count; i++) {
+        first->vtable[1](first);
+        first = reinterpret_cast<Polymorphic*>(reinterpret_cast<u8*>(first) + stride);
     }
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0x34,*(unsigned int *)(param_1 + 0x38),param_1 + 0x38);
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0x28,*(unsigned int *)(param_1 + 0x2c),param_1 + 0x2c);
-    temp_v6 = *(int *)(param_1 + 0x4c);
-    temp_v8 = 0;
-    temp_v7 = *(unsigned int *)(param_1 + 0x50) * -0xf0f0f0f;
-    temp_v5 = *(unsigned int *)(param_1 + 0x50) / 0x88;
-    if (temp_v5 != 0) {
-      do {
-        constructObj0055c19c(temp_v6,temp_v7);
-        temp_v8 = temp_v8 + 1;
-        temp_v6 = temp_v6 + 0x88;
-        temp_v7 = temp_v3;
-      } while (temp_v8 < temp_v5);
+}
+
+#define FIELD(player, offset, type) (*reinterpret_cast<type*>(reinterpret_cast<u8*>(player) + (offset)))
+#define LIST_ERASE(player, listOffset) \
+    nw_ut_internal_LinkListImpl_erase_2AC900(reinterpret_cast<u8*>(player) + (listOffset), \
+                                             FIELD(player, (listOffset) + 4, u32), \
+                                             reinterpret_cast<u8*>(player) + (listOffset) + 4)
+
+// Finalizes the sound player: ends every pending command, destroys the pooled
+// sound, player and stream instances and releases the pools.
+void FUN_00173c7c(SoundPlayerPools* player)
+{
+    player->unk04 = 0;
+    FIELD(player, 0xf0, u32) = 0;
+    for (u32 i = 0; i < player->commandCount; i++) {
+        FUN_0018fe70(player->commandBuffer + i * 0x5c, 0);
     }
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0x54,*(unsigned int *)(param_1 + 0x58),param_1 + 0x58);
-    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-    FUN_00191518(temp_v1,param_1 + 0x40);
-    FUN_001915bc(param_1 + 0xf4,*(unsigned int *)(param_1 + 0x104),*(unsigned int *)(param_1 + 0x108));
-    piVar5 = *(int **)(param_1 + 0x6c);
-    temp_v8 = 0;
-    temp_v5 = *(unsigned int *)(param_1 + 0x70) / 0x1e8;
-    if (temp_v5 != 0) {
-      do {
-        (**(romwright_code **)(*piVar5 + 4))(piVar5);
-        temp_v8 = temp_v8 + 1;
-        piVar5 = piVar5 + 0x7a;
-      } while (temp_v8 < temp_v5);
+    u32 queue = objectCommandQueueGet();
+    FUN_001912cc(queue, FUN_001911a4(queue, 1));
+    player->commandCount = 0;
+    player->commandBuffer = 0;
+
+    if (player->initialized != 0) {
+        destroyArray(player->soundPool, player->soundPoolBytes / 0x2d8, 0x2d8);
+        LIST_ERASE(player, 0x34);
+        LIST_ERASE(player, 0x28);
+
+        s32 object = player->unk4c;
+        for (u32 i = 0; i < player->unk50 / 0x88; i++) {
+            constructObj0055c19c(object, 0);
+            object += 0x88;
+        }
+        LIST_ERASE(player, 0x54);
+        FUN_00191518(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), reinterpret_cast<u8*>(player) + 0x40);
+        FUN_001915bc(reinterpret_cast<u8*>(player) + 0xf4, player->initialized, player->unk108);
+
+        destroyArray(player->playerPool, player->playerPoolBytes / 0x1e8, 0x1e8);
+        LIST_ERASE(player, 0x80);
+        LIST_ERASE(player, 0x74);
+
+        s32 stream = player->unk98;
+        for (u32 i = 0; i < player->unk9c / 0x4c; i++) {
+            constructObj0055c19c(stream, 0);
+            stream += 0x4c;
+        }
+        LIST_ERASE(player, 0xa0);
+        FUN_00191518(_ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(), reinterpret_cast<u8*>(player) + 0x8c);
+        nw_snd_internal_driver_StreamBufferPool_Finalize(reinterpret_cast<u8*>(player) + 0xd8);
+
+        destroyArray(player->streamPool, player->streamPoolBytes / 0x3298, 0x3298);
+        LIST_ERASE(player, 0xcc);
+        LIST_ERASE(player, 0xc0);
+        player->initialized = 0;
+        player->unk108 = 0;
     }
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0x80,*(unsigned int *)(param_1 + 0x84),param_1 + 0x84);
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0x74,*(unsigned int *)(param_1 + 0x78),param_1 + 0x78);
-    temp_v7 = *(int *)(param_1 + 0x98);
-    temp_v0 = (unsigned long long)*(unsigned int *)(param_1 + 0x9c) * 0xd79435e5 + 0xd79435e5;
-    temp_v1 = (unsigned int)temp_v0;
-    temp_v8 = 0;
-    temp_v5 = (unsigned int)((unsigned long long)temp_v0 >> 0x26);
-    if (temp_v5 != 0) {
-      do {
-        constructObj0055c19c(temp_v7,temp_v1);
-        temp_v8 = temp_v8 + 1;
-        temp_v7 = temp_v7 + 0x4c;
-        temp_v1 = temp_v4;
-      } while (temp_v8 < temp_v5);
-    }
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0xa0,*(unsigned int *)(param_1 + 0xa4),param_1 + 0xa4);
-    temp_v1 = _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv();
-    FUN_00191518(temp_v1,param_1 + 0x8c);
-    nw_snd_internal_driver_StreamBufferPool_Finalize(param_1 + 0xd8);
-    piVar5 = *(int **)(param_1 + 0xb8);
-    temp_v8 = 0;
-    temp_v5 = *(unsigned int *)(param_1 + 0xbc) / 0x3298;
-    if (temp_v5 != 0) {
-      do {
-        (**(romwright_code **)(*piVar5 + 4))(piVar5);
-        temp_v8 = temp_v8 + 1;
-        piVar5 = piVar5 + 0xca6;
-      } while (temp_v8 < temp_v5);
-    }
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0xcc,*(unsigned int *)(param_1 + 0xd0),param_1 + 0xd0);
-    nw_ut_internal_LinkListImpl_erase_2AC900
-              (param_1 + 0xc0,*(unsigned int *)(param_1 + 0xc4),param_1 + 0xc4);
-    *(unsigned int *)(param_1 + 0x104) = 0;
-    *(unsigned int *)(param_1 + 0x108) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

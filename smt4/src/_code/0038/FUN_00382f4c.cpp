@@ -1,194 +1,151 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00382f4c` (_code @ 0x382f4c, 0x374 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of a shop/menu choice handler (the draft's lost return of FUN_002c1658 restored as its condition; the two small byte tables it indexes are read as the draft's raw addresses); armcc here shares the result tail and the choice-result reloads differently. */
+#include "common.h"
+
+/* The choice menu (only the fields the handler reads). */
+struct ChoiceMenu {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 subState;
+    /* 0x00C */ u8 unk00C[0xC];
+    /* 0x018 */ u8 inTown;
+    /* 0x019 */ u8 unk019[7];
+    /* 0x020 */ u8 table[0x5A4];
+    /* 0x5C4 */ u32 **script;
+    /* 0x5C8 */ u8 unk5C8[0x78D];
+    /* 0xD55 */ u8 closed;
+    /* 0xD56 */ u8 unkD56[0x266];
+    /* 0xFBC */ s32 result;
+};
 
 extern "C" {
+extern const u8 DAT_00405718[];
+extern const u8 DAT_0040571b[];
 
-int FUN_00223cf0(void);
-int messageBannerBeginClose(void);
-int messageMainSetTargetFlags(int);
-int FUN_002355ac(int);
-int FUN_002636b0(void);
-int FUN_00269dc8(void);
-int messageTargetGetValue(void);
-int messageMainGetChoiceResult(void);
-int FUN_0029cc44(int);
-int messageTargetSetValue(unsigned int, int);
-int FUN_0029e648(int, int);
-int FUN_0029ee6c(unsigned int, int);
-int eventQueueAddUnique(int);
-int FUN_002c1658(int, int);
-int FUN_002f6208(void);
+s32 scrRunOpcodesStub(u32 script);
+s32 messageWindowIsState1(void);
+s32 messageTargetGetValue(void);
+u32 dataTable28Sub1GetRecord(void *table, u8 index);
+void FUN_0029ee6c(u32 record, u32 color);
+s32 FUN_002d8e10(void);
+s32 FUN_002485b8(void);
+void FUN_0029cc44(s32 flag);
+void FUN_0029e648(s32 a, s32 b);
+void messageTargetSetValue(u32 value, s32 flag);
+void messageMainSetTargetFlags(s32 flags);
+s32 FUN_002c1658(s32 a, s32 b);
+s32 gameFlagIsSet(u32 flag);
+void eventQueueAddUnique(s32 event);
+void FUN_00269dc8(void);
+void FUN_00223cf0(void);
+void FUN_002636b0(void);
+void FUN_002f6208(void);
+void FUN_002355ac(s32 flag);
+s32 messageMainGetChoiceResult(void);
+void messageBannerBeginClose(void);
 
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00223cf0. */
-/* Supplied declaration required: messageBannerBeginClose. */
-/* Supplied declaration required: messageMainSetTargetFlags. */
-/* Supplied declaration required: FUN_002355ac. */
-extern int FUN_002485b8(void);
-/* Supplied declaration required: FUN_002636b0. */
-/* Supplied declaration required: FUN_00269dc8. */
-/* Supplied declaration required: messageTargetGetValue. */
-extern int messageWindowIsState1(void);
-/* Supplied declaration required: messageMainGetChoiceResult. */
-/* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: eventQueueAddUnique. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
-extern int FUN_002d8e10(void);
-/* Supplied declaration required: FUN_002f6208. */
-extern unsigned int dataTable28Sub1GetRecord(int, unsigned char);
-
-
-void FUN_00382f4c(int param_1)
-
+/* Handles the choice window: while its script runs it previews the highlighted record and, once
+ * the choice is made, starts the matching sub-state (or closes). Records the choice in `result`. */
+void FUN_00382f4c(ChoiceMenu *menu)
 {
-/* irregular: 15 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrRunOpcodesStub(**(unsigned int **)(param_1 + 0x5c4));
-  if (temp_v0 != 2) {
-    temp_v0 = messageWindowIsState1();
-    if (temp_v0 != 0) {
-      temp_v0 = messageTargetGetValue();
-      if (*(char *)(param_1 + 0x18) == '\0') {
-        temp_v1 = 0x405718;
-      }
-      else {
-        temp_v1 = 0x40571b;
-      }
-      temp_v2 = dataTable28Sub1GetRecord(param_1 + 0x20,*(unsigned char *)(temp_v1 + temp_v0));
-      FUN_0029ee6c(temp_v2,0x323232ff);
-      if (temp_v0 != -1) {
-        if (*(char *)(param_1 + 0x18) != '\0') {
-          if (temp_v0 != 0) {
-            temp_v0 = FUN_002d8e10();
-            if (temp_v0 != 0) {
-              FUN_0029cc44(0);
+    if (scrRunOpcodesStub(**menu->script) != 2) {
+        if (messageWindowIsState1() != 0) {
+            s32 value = messageTargetGetValue();
+            const u8 *table = menu->inTown == 0 ? DAT_00405718 : DAT_0040571b;
+            FUN_0029ee6c(dataTable28Sub1GetRecord(menu->table, table[value]), 0x323232FF);
+            if (value != -1) {
+                if (menu->inTown != 0) {
+                    if (value != 0) {
+                        if (FUN_002d8e10() != 0)
+                            FUN_0029cc44(0);
+                    } else if (FUN_002485b8() == 0) {
+                        FUN_0029e648(1, 0);
+                        messageTargetSetValue(0xFFFFFF9C, 0);
+                        messageMainSetTargetFlags(1);
+                    }
+                }
+                if (FUN_002c1658(10, 1) != 0 && gameFlagIsSet(0x24) != 0) {
+                    eventQueueAddUnique(0x100016F);
+                    FUN_00269dc8();
+                    FUN_00223cf0();
+                    FUN_002636b0();
+                    menu->closed = 0;
+                    menu->result = messageTargetGetValue();
+                    if (menu->inTown != 0 && messageTargetGetValue() == 0) {
+                        menu->closed = 1;
+                        FUN_0029cc44(0);
+                    }
+                    FUN_002f6208();
+                    menu->state = 11;
+                    menu->subState = 0;
+                }
             }
-          }
-          else {
-            temp_v0 = FUN_002485b8();
-            if (temp_v0 == 0) {
-              FUN_0029e648(1,0);
-              messageTargetSetValue(0xffffff9c,0);
-              messageMainSetTargetFlags(1);
-            }
-          }
         }
-        temp_v0 = 10;
-        FUN_002c1658(10,1);
-        if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x24), temp_v0 != 0)) {
-          eventQueueAddUnique(0x100016f);
-          FUN_00269dc8();
-          FUN_00223cf0();
-          FUN_002636b0();
-          *(unsigned char *)(param_1 + 0xd55) = 0;
-          temp_v2 = messageTargetGetValue();
-          *(unsigned int *)(param_1 + 0xfbc) = temp_v2;
-          if ((*(char *)(param_1 + 0x18) != '\0') && (temp_v0 = messageTargetGetValue(), temp_v0 == 0)) {
-            *(unsigned char *)(param_1 + 0xd55) = 1;
-            FUN_0029cc44(0);
-          }
-          FUN_002f6208();
-          *(unsigned int *)(param_1 + 4) = 0xb;
-          *(unsigned int *)(param_1 + 8) = 0;
-        }
-      }
+        return;
     }
-    return;
-  }
-  if (*(char *)(param_1 + 0x18) != '\0') {
     FUN_002355ac(0);
-    temp_v2 = messageMainGetChoiceResult();
-    switch(temp_v2) {
-    case 0:
-      FUN_002636b0();
-      *(unsigned int *)(param_1 + 4) = 7;
-      *(unsigned int *)(param_1 + 8) = 0;
-      break;
-    case 1:
-      temp_v0 = FUN_002485b8();
-      if (temp_v0 != 0) {
-        FUN_0029cc44(0);
-      }
-      FUN_002636b0();
-      *(unsigned int *)(param_1 + 4) = 8;
-      *(unsigned int *)(param_1 + 8) = 0;
-      break;
-    case 2:
-      temp_v0 = FUN_002485b8();
-      if (temp_v0 != 0) {
-        FUN_0029cc44(0);
-      }
-      FUN_002636b0();
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned int *)(param_1 + 4) = 9;
-      break;
-    case 3:
-      temp_v0 = FUN_002485b8();
-      if (temp_v0 != 0) {
-        FUN_0029cc44(0);
-      }
-      FUN_002636b0();
-      *(unsigned int *)(param_1 + 4) = 10;
-      *(unsigned int *)(param_1 + 8) = 0;
-      FUN_0029cc44(0);
-      break;
-    case 0xffffffff:
-      temp_v0 = FUN_002485b8();
-      if (temp_v0 != 0) {
-        FUN_0029cc44(0);
-      }
-      messageBannerBeginClose();
-      *(unsigned int *)(param_1 + 4) = 0xf;
-      *(unsigned int *)(param_1 + 8) = 0;
-    }
-    temp_v0 = messageMainGetChoiceResult();
-  }
-  else {
-    FUN_002355ac(0);
-    temp_v0 = messageMainGetChoiceResult();
-    if (temp_v0 != -1) {
-      if (temp_v0 != 0) {
-        if (temp_v0 != 1) {
-          if (temp_v0 == 2) {
+    s32 choice = messageMainGetChoiceResult();
+    if (menu->inTown != 0) {
+        switch (choice) {
+        case 0:
             FUN_002636b0();
-            *(unsigned int *)(param_1 + 4) = 10;
-            *(unsigned int *)(param_1 + 8) = 0;
-          }
+            menu->state = 7;
+            menu->subState = 0;
+            break;
+        case 1:
+            if (FUN_002485b8() != 0)
+                FUN_0029cc44(0);
+            FUN_002636b0();
+            menu->state = 8;
+            menu->subState = 0;
+            break;
+        case 2:
+            if (FUN_002485b8() != 0)
+                FUN_0029cc44(0);
+            FUN_002636b0();
+            menu->subState = 0;
+            menu->state = 9;
+            break;
+        case 3:
+            if (FUN_002485b8() != 0)
+                FUN_0029cc44(0);
+            FUN_002636b0();
+            menu->state = 10;
+            menu->subState = 0;
+            FUN_0029cc44(0);
+            break;
+        case -1:
+            if (FUN_002485b8() != 0)
+                FUN_0029cc44(0);
+            messageBannerBeginClose();
+            menu->state = 15;
+            menu->subState = 0;
+            break;
         }
-        else {
-          FUN_002636b0();
-          *(unsigned int *)(param_1 + 4) = 9;
-          *(unsigned int *)(param_1 + 8) = 0;
+    } else {
+        if (choice != -1) {
+            if (choice == 0) {
+                FUN_002636b0();
+                menu->state = 8;
+                menu->subState = 0;
+            } else if (choice == 1) {
+                FUN_002636b0();
+                menu->state = 9;
+                menu->subState = 0;
+            } else if (choice == 2) {
+                FUN_002636b0();
+                menu->state = 10;
+                menu->subState = 0;
+            }
+        } else {
+            menu->subState = 0;
+            menu->state = 15;
+            messageBannerBeginClose();
         }
-      }
-      else {
-        FUN_002636b0();
-        *(unsigned int *)(param_1 + 4) = 8;
-        *(unsigned int *)(param_1 + 8) = 0;
-      }
     }
-    else {
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned int *)(param_1 + 4) = 0xf;
-      messageBannerBeginClose();
-    }
-    temp_v0 = messageMainGetChoiceResult();
-  }
-  if (temp_v0 != -1) {
-    temp_v2 = messageMainGetChoiceResult();
-    *(unsigned int *)(param_1 + 0xfbc) = temp_v2;
-    return;
-  }
-  *(unsigned int *)(param_1 + 0xfbc) = 0;
-  return;
+    if (messageMainGetChoiceResult() != -1)
+        menu->result = messageMainGetChoiceResult();
+    else
+        menu->result = 0;
 }
 
 } /* extern "C" */

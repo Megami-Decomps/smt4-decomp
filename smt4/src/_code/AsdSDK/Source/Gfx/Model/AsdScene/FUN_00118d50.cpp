@@ -5,7 +5,7 @@
 extern "C" {
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 AsdAllocatorObject *asdMemoryGetDefaultAllocator();
-AsdSceneLightObject *FUN_0012b48c(const AsdSceneLightDescription *description, AsdAllocatorObject *allocator);
+AsdSceneLightObject *_ZN9Obj4211586createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *description, AsdAllocatorObject *allocator);
 u32 nw_ut_FloatColor_ToPicaU32(const f32 *color);
 
 // Create a single enabled scene light with the standard four colors and normalized direction.
@@ -34,7 +34,7 @@ AsdSceneLight *FUN_00118d50()
     description.unk04 = 0;
     description.unk08 = 0;
     description.count = 1;
-    light->object = FUN_0012b48c(&description, allocator);
+    light->object = _ZN9Obj4211586createEPvP18AsdAllocatorObject(&description, allocator);
     light->parameters = light->object->parameters;
     reinterpret_cast<LightColorView *>(light->parameters)->kind = 0;
     LightColorView *parameters = reinterpret_cast<LightColorView *>(light->parameters);

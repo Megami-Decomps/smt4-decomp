@@ -1,108 +1,77 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003581bc` (_code @ 0x3581bc, 0x298 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling only - retail interleaves the slot constants with the panel offset loads of the five element calls and loads the third scale constant from the pool; everything else matches. */
+#include "camp/RenderCtx.h"
+
+namespace {
+/* The map departure screen's state (the part drawn here). */
+struct MapDepartView {
+    /* 0x000 */ u8 unk000[0x48];
+    /* 0x048 */ s32 state;              /* 11: the counter panel is shown */
+    /* 0x04c */ u8 unk04c[0xfc];
+    /* 0x148 */ u8 position[8];         /* the panel's screen position */
+    /* 0x150 */ u8 unk150[0x344];
+    /* 0x494 */ s32 counter;            /* 20.12 fixed point */
+};
+
+/* A layout entry of a UI table: the offset of one element. */
+struct LayoutEntry {
+    u8 unk00[8];
+    s16 x;
+    s16 y;
+};
+}
 
 extern "C" {
+extern MapDepartView *g_mapDepart;
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *context);
+s32 FUN_001692ac(u32 a, u32 b);
+void efctSetSpeed(f32 speed);
+void FUN_00183bb0(void);
+s32 vec2GetXInt(const void *vector);
+s32 vec2GetYInt(const void *vector);
+LayoutEntry *FUN_001834a4(u32 table, u32 entry);
+void FUN_001835b4(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
+void FUN_002c0940(u8 text[64], s32 value);
+f32 FUN_00168594(u8 text[64], u32 style, f32 scale);
+void FUN_00162790(u32 layer, u32 color, u8 text[64], f32 x, f32 y, f32 a, f32 b, f32 c);
 
-int FUN_00157558(int);
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_00168594(...);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
-int FUN_002c0940(...);
-int VectorSignedToFloat(...);
-
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp70; /* 0x70: local_70 */
-} void_stack;
-
-extern int g_mapDepart; /* 0x5806c4 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
-extern int vec2GetXInt(int);
-extern int vec2GetYInt(int);
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00168594. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_002c0940. */
-
-
-unsigned int FUN_003581bc(void)
-
+/* Draws the departure screen's counter panel under a temporary render-state preset. */
+u32 FUN_003581bc(void)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  unsigned char temp_v7 [72];
-  
-  temp_v2 = g_mapDepart;
-  if (*(int *)(g_mapDepart + 0x48) == 0xb) {
-    FUN_00157558(g_renderCtx);
-    temp_v1 = g_renderCtx;
-    temp_v0 = FUN_001692ac(1,0);
-    piVar6 = (int *)(temp_v1 + 0x1258);
-    temp_v3 = *piVar6;
-    temp_v4 = piVar6[temp_v3 + 2];
-    *piVar6 = temp_v3 + 1;
-    piVar6[temp_v3 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v4 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
+    MapDepartView *depart = g_mapDepart;
+    if (depart->state == 11) {
+        FUN_00157558(g_renderCtx);
+        RenderCtxA *context = g_renderCtx;
+        s32 preset = FUN_001692ac(1, 0);
+        renderStackPush(&context->stackA, preset);
+        efctSetSpeed(1.0f);
+        FUN_00183bb0();
+        if (depart->state == 11) {
+            s32 x = vec2GetXInt(depart->position);
+            s32 y = vec2GetYInt(depart->position);
+            depart = g_mapDepart;
+            LayoutEntry *panel = FUN_001834a4(29, 202);
+            FUN_001835b4(2, 29, 194, panel->x + x, panel->y + y, 101);
+            FUN_001835b4(2, 29, 195, panel->x + x, panel->y + y, 106);
+            FUN_001835b4(2, 29, 196, panel->x + x, panel->y + y, 111);
+            FUN_001835b4(2, 29, 197, panel->x + x, panel->y + y, 116);
+            FUN_001835b4(2, 29, 198, panel->x + x, panel->y + y, 121);
+            u32 counter = depart->counter >> 12;
+            if (counter > 9999) {
+                counter = 9999;
+            }
+            LayoutEntry *digits = FUN_001834a4(29, 203);
+            u8 text[64];
+            FUN_002c0940(text, counter);
+            f32 width = FUN_00168594(text, 3, 1.0f);
+            FUN_00162790(3, 0x57d8ffff, text,
+                         panel->x + digits->x + x + (56 - (s32)width) / 2,
+                         panel->y + digits->y + y, 1.0f, 1.0f, 1.0f);
+            FUN_00183bb0();
+        }
+        renderStackPop(&g_renderCtx->stackA);
     }
-    temp_v6 = 1.0f;
-    efctSetSpeed();
-    FUN_00183bb0();
-    if (*(int *)(temp_v2 + 0x48) == 0xb) {
-      temp_v1 = vec2GetXInt(temp_v2 + 0x148);
-      temp_v0 = vec2GetYInt(temp_v2 + 0x148);
-      temp_v2 = g_mapDepart;
-      temp_v3 = FUN_001834a4(0x1d,0xca);
-      FUN_001835b4(2,0x1d,0xc2,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x65);
-      FUN_001835b4(2,0x1d,0xc3,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x6a);
-      FUN_001835b4(2,0x1d,0xc4,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x6f);
-      FUN_001835b4(2,0x1d,0xc5,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x74);
-      FUN_001835b4(2,0x1d,0xc6,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0,0x79);
-      temp_v5 = *(int *)(temp_v2 + 0x494) >> 0xc;
-      if (temp_v5 >= 10000) {
-        temp_v5 = 9999;
-      }
-      temp_v2 = FUN_001834a4(0x1d,0xcb);
-      FUN_002c0940(temp_v7,temp_v5);
-      FUN_00168594(temp_v7,3);
-      temp_v4 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8);
-      VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v2 + 10) + temp_v0,
-                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      VectorSignedToFloat(temp_v4 + temp_v1 + (0x38 - (int)temp_v6) / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00162790(3,0x57d8ffff,temp_v7,temp_v4);
-      FUN_00183bb0();
-    }
-    temp_v2 = g_renderCtx;
-    piVar6 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar6;
-    temp_v0 = piVar6[temp_v1 + 2];
-    *piVar6 = temp_v1 - 1;
-    if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v0 != piVar6[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v2 + 0x1274))();
-      *(unsigned char *)(temp_v2 + 0x1270) = 0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

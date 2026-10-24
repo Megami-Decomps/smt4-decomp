@@ -1,185 +1,132 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156bfc` (_code @ 0x156bfc, 0x298 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register allocation and block order differ (retail hoists the eye/target subtractions into vldmia pairs, emits the general basis before the fixed one, and writes the zeroed projection entries with vstmia pairs); same arithmetic. */
+#include "common.h"
+#include <math.h>
 
-extern "C" {
-
-int FUN_0018a924(float *, float [13]);
-
-typedef struct fn_00156bfc_arg1 fn_00156bfc_arg1;
-struct fn_00156bfc_arg1 {
-    unsigned char pad_0x0[0x48];
-    byte field_0x48; /* +0x48 */
-    unsigned char pad_0x49[0x33];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    undefined4 field_0x84; /* +0x84 */
-    undefined4 field_0x88; /* +0x88 */
-    undefined4 field_0x8c; /* +0x8c */
-    undefined4 field_0x90; /* +0x90 */
-    undefined4 field_0x94; /* +0x94 */
-    undefined4 field_0x98; /* +0x98 */
-    undefined4 field_0x9c; /* +0x9c */
-    undefined4 field_0xa0; /* +0xa0 */
-    undefined4 field_0xa4; /* +0xa4 */
-    undefined4 field_0xa8; /* +0xa8 */
-    unsigned char pad_0xac[0x28];
-    undefined4 field_0xd4; /* +0xd4 */
+namespace {
+/* A camera: the view matrix (3x4, rows of the basis plus the translation) is rebuilt from the eye and the target,
+   the perspective matrix from the clip planes and the field of view. */
+struct CameraState {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u32 roll;
+    /* 0x24 */ f32 nearPlane;
+    /* 0x28 */ f32 farPlane;
+    /* 0x2c */ f32 fieldOfView;
+    /* 0x30 */ u8 unk30[4];
+    /* 0x34 */ f32 aspect;
+    /* 0x38 */ u8 unk38[4];
+    /* 0x3c */ f32 projection[16];
+    /* 0x7c */ f32 view[12];
+    /* 0xac */ f32 eye[3];
+    /* 0xb8 */ f32 target[3];
 };
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
-{
-    return (float)sqrt((double)value);
+/* The render-side copy of the camera. */
+struct CameraOut {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u8 flags;                 /* bit 0: view matrix changed */
+    /* 0x49 */ u8 unk49[0x33];
+    /* 0x7c */ f32 view[12];
+    /* 0xac */ u8 unkac[0x28];
+    /* 0xd4 */ u32 roll;
+};
 }
-#endif
-/* Supplied declaration required: FUN_0018a924. */
 
+extern "C" {
+void FUN_0018a924(f32 angle, f32 *sine, f32 *cosine);
 
-void FUN_00156bfc(int param_1,fn_00156bfc_arg1 *param_2)
-
+/* Rebuilds the camera's look-at view matrix (from eye and target, looking down the eye-to-target axis with no
+   roll), copies it to the render side and rebuilds the perspective matrix. */
+void FUN_00156bfc(CameraState *camera, CameraOut *out)
 {
-/* irregular: 1 native warning(s); review required */
-  float temp_v0;
-  unsigned int temp_v1;
-  float temp_v2;
-  unsigned int temp_v3;
-  float temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  unsigned int temp_v20;
-  float temp_v21;
-  unsigned int temp_v22;
-  float temp_v23;
-  float afStack_44 [13];
-  
-  temp_v20 = 0;
-  temp_v22 = 0xbf800000;
-  param_2->field_0xd4 = *(unsigned int *)(param_1 + 0x20);
-  temp_v21 = 1.0f;
-  temp_v2 = *(float *)(param_1 + 0xac) - *(float *)(param_1 + 0xb8);
-  temp_v4 = *(float *)(param_1 + 0xb0) - *(float *)(param_1 + 0xbc);
-  temp_v0 = *(float *)(param_1 + 0xb4) - *(float *)(param_1 + 0xc0);
-  if (temp_v2 == 0.0f && temp_v0 == 0.0f) {
-    *(float *)(param_1 + 0x7c) = 1.0f;
-    *(unsigned int *)(param_1 + 0x80) = 0;
-    *(unsigned int *)(param_1 + 0x84) = 0;
-    *(float *)(param_1 + 0x88) = -*(float *)(param_1 + 0xac);
-    *(unsigned int *)(param_1 + 0x8c) = 0;
-    *(unsigned int *)(param_1 + 0x90) = 0;
-    *(unsigned int *)(param_1 + 0x9c) = 0;
-    *(unsigned int *)(param_1 + 0xa4) = 0;
-    if (0.0f >= temp_v4) {
-      *(unsigned int *)(param_1 + 0x94) = 0x3f800000;
-      *(float *)(param_1 + 0x98) = -*(float *)(param_1 + 0xb4);
-      *(unsigned int *)(param_1 + 0xa0) = 0xbf800000;
-      *(unsigned int *)(param_1 + 0xa8) = *(unsigned int *)(param_1 + 0xb0);
+    out->roll = camera->roll;
+    f32 dx = camera->eye[0] - camera->target[0];
+    f32 dy = camera->eye[1] - camera->target[1];
+    f32 dz = camera->eye[2] - camera->target[2];
+    f32 *view = camera->view;
+    if (dx == 0.0f && dz == 0.0f) {
+        /* Looking straight up or down: the basis is fixed. */
+        view[0] = 1.0f;
+        view[1] = 0.0f;
+        view[2] = 0.0f;
+        view[3] = -camera->eye[0];
+        view[4] = 0.0f;
+        view[5] = 0.0f;
+        view[8] = 0.0f;
+        view[10] = 0.0f;
+        if (0.0f >= dy) {
+            view[6] = 1.0f;
+            view[7] = -camera->eye[2];
+            view[9] = -1.0f;
+            view[11] = camera->eye[1];
+        } else {
+            view[6] = -1.0f;
+            view[7] = camera->eye[2];
+            view[9] = 1.0f;
+            view[11] = -camera->eye[1];
+        }
+    } else {
+        f32 forwardScale = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
+        f32 fx = dx * forwardScale;
+        f32 fy = dy * forwardScale;
+        f32 fz = dz * forwardScale;
+        f32 rightScale = 1.0f / sqrtf(dz * dz + dx * dx);
+        f32 rx = dz * rightScale;
+        f32 rz = -(dx * rightScale);
+        f32 ux = fx * 0.0f - fy * rx;
+        f32 uy = fz * rx - fx * rz;
+        f32 uz = fy * rz - fz * 0.0f;
+        f32 sine;
+        f32 cosine;
+        FUN_0018a924(0.0f, &sine, &cosine);
+        f32 ex = camera->eye[0];
+        f32 ey = camera->eye[1];
+        f32 ez = camera->eye[2];
+        f32 a0 = sine * uz + cosine * rx;
+        f32 a2 = sine * ux + cosine * rz;
+        f32 b0 = cosine * uz - sine * rx;
+        f32 b2 = cosine * ux - sine * rz;
+        view[0] = a0;
+        view[1] = sine * uy;
+        view[2] = a2;
+        view[3] = -(ex * a0 + ey * sine * uy + ez * a2);
+        view[4] = b0;
+        view[5] = cosine * uy;
+        view[6] = b2;
+        view[7] = -(ex * b0 + ey * cosine * uy + ez * b2);
+        view[8] = fx;
+        view[9] = fy;
+        view[10] = fz;
+        view[11] = -(ex * fx + ey * fy + ez * fz);
     }
-    else {
-      *(unsigned int *)(param_1 + 0x94) = 0xbf800000;
-      *(unsigned int *)(param_1 + 0x98) = *(unsigned int *)(param_1 + 0xb4);
-      *(unsigned int *)(param_1 + 0xa0) = 0x3f800000;
-      *(float *)(param_1 + 0xa8) = -*(float *)(param_1 + 0xb0);
+    for (s32 i = 0; i < 12; i++) {
+        out->view[i] = camera->view[i];
     }
-  }
-  else {
-    temp_v6 = 1.0f / romwright_sqrt_4(temp_v2 * temp_v2 + temp_v4 * temp_v4 + temp_v0 * temp_v0);
-    temp_v4 = temp_v4 * temp_v6;
-    temp_v17 = temp_v2 * temp_v6;
-    temp_v6 = temp_v0 * temp_v6;
-    temp_v8 = 1.0f / romwright_sqrt_4(temp_v0 * temp_v0 + temp_v2 * temp_v2);
-    temp_v0 = temp_v0 * temp_v8;
-    temp_v16 = -(temp_v2 * temp_v8);
-    temp_v18 = temp_v17 * 0.0f - temp_v4 * temp_v0;
-    temp_v19 = temp_v6 * temp_v0 - temp_v17 * temp_v16;
-    temp_v8 = temp_v4 * temp_v16 - temp_v6 * 0.0f;
-    FUN_0018a924(&temp_v23,afStack_44);
-    temp_v13 = *(float *)(param_1 + 0xac);
-    temp_v15 = *(float *)(param_1 + 0xb0);
-    temp_v14 = *(float *)(param_1 + 0xb4);
-    temp_v2 = temp_v23 * temp_v8 + afStack_44[0] * temp_v0;
-    temp_v9 = afStack_44[0] * temp_v8 - temp_v23 * temp_v0;
-    temp_v8 = afStack_44[0] * temp_v18 - temp_v23 * temp_v16;
-    temp_v0 = temp_v23 * temp_v18 + afStack_44[0] * temp_v16;
-    *(float *)(param_1 + 0x7c) = temp_v2;
-    *(float *)(param_1 + 0x80) = temp_v23 * temp_v19;
-    *(float *)(param_1 + 0x84) = temp_v0;
-    *(float *)(param_1 + 0x88) = -(temp_v13 * temp_v2 + temp_v15 * temp_v23 * temp_v19 + temp_v14 * temp_v0);
-    *(float *)(param_1 + 0x8c) = temp_v9;
-    *(float *)(param_1 + 0x90) = afStack_44[0] * temp_v19;
-    *(float *)(param_1 + 0x94) = temp_v8;
-    *(float *)(param_1 + 0x98) =
-         -(temp_v13 * temp_v9 + temp_v15 * afStack_44[0] * temp_v19 + temp_v14 * temp_v8);
-    *(float *)(param_1 + 0x9c) = temp_v17;
-    *(float *)(param_1 + 0xa0) = temp_v4;
-    *(float *)(param_1 + 0xa4) = temp_v6;
-    *(float *)(param_1 + 0xa8) = -(temp_v13 * temp_v17 + temp_v15 * temp_v4 + temp_v14 * temp_v6);
-  }
-  temp_v1 = *(unsigned int *)(param_1 + 0x80);
-  temp_v3 = *(unsigned int *)(param_1 + 0x84);
-  temp_v5 = *(unsigned int *)(param_1 + 0x88);
-  temp_v7 = *(unsigned int *)(param_1 + 0x8c);
-  temp_v10 = *(unsigned int *)(param_1 + 0x90);
-  temp_v11 = *(unsigned int *)(param_1 + 0x94);
-  temp_v12 = *(unsigned int *)(param_1 + 0x98);
-  param_2->field_0x7c = *(unsigned int *)(param_1 + 0x7c);
-  param_2->field_0x80 = temp_v1;
-  param_2->field_0x84 = temp_v3;
-  param_2->field_0x88 = temp_v5;
-  param_2->field_0x8c = temp_v7;
-  param_2->field_0x90 = temp_v10;
-  param_2->field_0x94 = temp_v11;
-  param_2->field_0x98 = temp_v12;
-  temp_v1 = *(unsigned int *)(param_1 + 0xa0);
-  temp_v3 = *(unsigned int *)(param_1 + 0xa4);
-  temp_v5 = *(unsigned int *)(param_1 + 0xa8);
-  param_2->field_0x9c = *(unsigned int *)(param_1 + 0x9c);
-  param_2->field_0xa0 = temp_v1;
-  param_2->field_0xa4 = temp_v3;
-  param_2->field_0xa8 = temp_v5;
-  param_2->field_0x48 = param_2->field_0x48 | 1;
-  temp_v4 = *(float *)(param_1 + 0x34);
-  temp_v2 = *(float *)(param_1 + 0x24);
-  temp_v0 = *(float *)(param_1 + 0x28);
-  FUN_0018a924(&temp_v23,afStack_44);
-  *(unsigned int *)(param_1 + 0x40) = temp_v20;
-  *(unsigned int *)(param_1 + 0x44) = temp_v20;
-  *(unsigned int *)(param_1 + 0x48) = temp_v20;
-  *(unsigned int *)(param_1 + 0x4c) = temp_v20;
-  *(unsigned int *)(param_1 + 0x54) = temp_v20;
-  *(unsigned int *)(param_1 + 0x58) = temp_v20;
-  *(unsigned int *)(param_1 + 0x5c) = temp_v20;
-  *(unsigned int *)(param_1 + 0x60) = temp_v20;
-  *(unsigned int *)(param_1 + 0x6c) = temp_v20;
-  *(unsigned int *)(param_1 + 0x70) = temp_v20;
-  *(unsigned int *)(param_1 + 0x74) = temp_v22;
-  *(unsigned int *)(param_1 + 0x78) = temp_v20;
-  temp_v21 = temp_v21 / (temp_v0 - temp_v2);
-  *(float *)(param_1 + 0x3c) = (afStack_44[0] / temp_v23) / temp_v4;
-  *(float *)(param_1 + 0x50) = afStack_44[0] / temp_v23;
-  *(float *)(param_1 + 100) = temp_v0 * temp_v21;
-  *(float *)(param_1 + 0x68) = temp_v0 * temp_v2 * temp_v21;
-  return;
+    out->flags |= 1;
+    f32 nearPlane = camera->nearPlane;
+    f32 farPlane = camera->farPlane;
+    f32 aspect = camera->aspect;
+    f32 sine;
+    f32 cosine;
+    FUN_0018a924(camera->fieldOfView * 0.5f * 40.743664f, &sine, &cosine);
+    f32 cotangent = cosine / sine;
+    f32 range = 1.0f / (farPlane - nearPlane);
+    f32 *projection = camera->projection;
+    projection[1] = 0.0f;
+    projection[2] = 0.0f;
+    projection[3] = 0.0f;
+    projection[4] = 0.0f;
+    projection[6] = 0.0f;
+    projection[7] = 0.0f;
+    projection[8] = 0.0f;
+    projection[9] = 0.0f;
+    projection[12] = 0.0f;
+    projection[13] = 0.0f;
+    projection[14] = -1.0f;
+    projection[15] = 0.0f;
+    projection[0] = cotangent / aspect;
+    projection[5] = cotangent;
+    projection[10] = farPlane * range;
+    projection[11] = farPlane * nearPlane * range;
 }
 
 } /* extern "C" */

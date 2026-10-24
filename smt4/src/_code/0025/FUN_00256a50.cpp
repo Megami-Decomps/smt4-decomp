@@ -1,154 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00256a50` (_code @ 0x256a50, 0x238 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 4x4 matrix copy loads and stores through different VFP register groups (retail copies two eight-float blocks with vldmia/vstmia and patches the last column), and the two inlined state pops lay out differently. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_001f6b74(unsigned int);
-int FUN_002571e8(unsigned int);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-int FUN_002c1b64(int, unsigned int);
-int camSetMatrixB(int, int *);
-int FUN_00343810(int, unsigned int, unsigned int, unsigned int);
-int FUN_00347198(unsigned int);
-int FUN_0034724c(unsigned int);
-int VectorUnsignedToFloat(unsigned int, int);
+/* A draw packet (0x58 bytes): a flags word, two handles, a 4x4 matrix, an RGBA color and a pending
+ * word that is cleared once consumed. */
+typedef struct DrawPacket {
+    /* 0x00 */ u16 flags;      /* 0x100: draw with state 5 instead of 1, 0x200: only the handle */
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u32 handle;
+    /* 0x08 */ u32 object;
+    /* 0x0C */ u32 aux;
+    /* 0x10 */ f32 matrix[16];
+    /* 0x50 */ u8 color[4];
+    /* 0x54 */ u32 pending;
+} DrawPacket;
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
+extern RenderCtx *g_titleScene;
 
-extern int g_titleScene; /* 0x44ea00 */
+s32 FUN_002c5d80(u32 kind, u32 arg);
+void FUN_001f6b74(u32 aux);
+void FUN_002c1b64(RenderCtx *ctx, u32 handle);
+void camSetMatrixB(RenderCtx *ctx, const f32 *matrix);
+void FUN_00343810(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
+void FUN_002571e8(u32 mode);
+void FUN_00347198(u32 object);
+void FUN_0034724c(u32 object);
+void FUN_002c18e4(RenderCtx *ctx);
+void FUN_002c198c(RenderCtx *ctx);
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001f6b74. */
-/* Supplied declaration required: FUN_002571e8. */
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: camSetMatrixB. */
-/* Supplied declaration required: FUN_00343810. */
-/* Supplied declaration required: FUN_00347198. */
-/* Supplied declaration required: FUN_0034724c. */
-
-
-void FUN_00256a50(unsigned short *param_1,unsigned int param_2)
-
+/* Draws one packet under a pushed render state (5 or 1 by its flags): sets its camera matrix and
+ * color, runs the draw and pops the state. */
+void FUN_00256a50(DrawPacket *packet, u32 mode)
 {
-/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned int in_fpscr;
-  int temp_v4;
-  unsigned int uStack_54;
-  unsigned int uStack_50;
-  unsigned int temp_v5;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int temp_v6;
-  unsigned int uStack_38;
-  unsigned int uStack_34;
-  unsigned int uStack_30;
-  unsigned int temp_v7;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  unsigned int temp_v8;
-  
-  temp_v0 = g_titleScene;
-  if ((*param_1 & 0x100) != 0) {
-    temp_v1 = FUN_002c5d80(5,0);
-    piVar5 = (int *)(temp_v0 + 0x124c);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (!(*(char *)(temp_v0 + 0x1264) == '\0' && temp_v3 == temp_v1)) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
+    RenderCtx *ctx = g_titleScene;
+
+    if ((packet->flags & 0x100) != 0) {
+        renderCtxPushA(ctx, FUN_002c5d80(5, 0));
+    } else {
+        renderCtxPushA(ctx, FUN_002c5d80(1, 0));
     }
-  }
-  else {
-    temp_v1 = FUN_002c5d80(1,0);
-    piVar5 = (int *)(temp_v0 + 0x124c);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (!(*(char *)(temp_v0 + 0x1264) == '\0' && temp_v3 == temp_v1)) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
+    if ((packet->flags & 0x200) != 0) {
+        FUN_001f6b74(packet->aux);
+        renderStackPop(&g_titleScene->stackA);
+    } else {
+        FUN_002c1b64(g_titleScene, packet->handle);
+
+        f32 matrix[16];
+        for (s32 i = 0; i < 16; i++) {
+            matrix[i] = packet->matrix[i];
+        }
+        matrix[3] = 0.0f;
+        matrix[7] = 0.0f;
+        matrix[11] = 0.0f;
+        matrix[15] = 1.0f;
+        camSetMatrixB(g_titleScene, matrix);
+
+        f32 r = (f32)packet->color[3] * (1.0f / 255.0f);
+        f32 g = (f32)packet->color[2] * (1.0f / 255.0f);
+        f32 b = (f32)packet->color[1] * (1.0f / 255.0f);
+        f32 a = (f32)packet->color[0] * (1.0f / 255.0f);
+        FUN_00343810(g_titleScene, r * (1.0f / 255.0f), g * (1.0f / 255.0f), b * (1.0f / 255.0f),
+                     a * (1.0f / 255.0f));
+        FUN_002571e8(mode);
+        if (packet->pending != 0) {
+            FUN_00347198(packet->object);
+            packet->pending = 0;
+        }
+        FUN_0034724c(packet->object);
+        FUN_002c18e4(g_titleScene);
+        FUN_002c198c(g_titleScene);
+        renderStackPop(&g_titleScene->stackA);
     }
-  }
-  if ((*param_1 & 0x200) != 0) {
-    FUN_001f6b74(*(unsigned int *)(param_1 + 6));
-    temp_v0 = g_titleScene;
-    piVar5 = (int *)(g_titleScene + 0x124c);
-    temp_v1 = *piVar5;
-    temp_v2 = piVar5[temp_v1 + 2];
-    *piVar5 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1264) == '\0' && temp_v2 == piVar5[temp_v1 + 1]) {
-      return;
-    }
-  }
-  else {
-    FUN_002c1b64(g_titleScene,*(unsigned int *)(param_1 + 2));
-    temp_v4 = *(unsigned int *)(param_1 + 8);
-    uStack_54 = *(unsigned int *)(param_1 + 10);
-    uStack_50 = *(unsigned int *)(param_1 + 0xc);
-    uStack_48 = *(unsigned int *)(param_1 + 0x10);
-    uStack_44 = *(unsigned int *)(param_1 + 0x12);
-    uStack_40 = *(unsigned int *)(param_1 + 0x14);
-    uStack_38 = *(unsigned int *)(param_1 + 0x18);
-    uStack_34 = *(unsigned int *)(param_1 + 0x1a);
-    uStack_30 = *(unsigned int *)(param_1 + 0x1c);
-    uStack_28 = *(unsigned int *)(param_1 + 0x20);
-    uStack_24 = *(unsigned int *)(param_1 + 0x22);
-    uStack_20 = *(unsigned int *)(param_1 + 0x24);
-    temp_v5 = 0;
-    temp_v6 = 0;
-    temp_v7 = 0;
-    temp_v8 = 0x3f800000;
-    camSetMatrixB(g_titleScene,&temp_v4);
-    VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)param_1 + 0x53),(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorUnsignedToFloat((unsigned int)(unsigned char)param_1[0x29],(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)param_1 + 0x51),(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorUnsignedToFloat((unsigned int)(unsigned char)param_1[0x28],(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00343810(g_titleScene,(unsigned int)(unsigned char)param_1[0x29],(unsigned int)*(unsigned char *)((int)param_1 + 0x51),
-                 (unsigned int)(unsigned char)param_1[0x28]);
-    FUN_002571e8(param_2);
-    if (*(int *)(param_1 + 0x2a) != 0) {
-      FUN_00347198(*(unsigned int *)(param_1 + 4));
-      param_1[0x2a] = 0;
-      param_1[0x2b] = 0;
-    }
-    FUN_0034724c(*(unsigned int *)(param_1 + 4));
-    FUN_002c18e4(g_titleScene);
-    FUN_002c198c(g_titleScene);
-    temp_v0 = g_titleScene;
-    piVar5 = (int *)(g_titleScene + 0x124c);
-    temp_v1 = *piVar5;
-    temp_v2 = piVar5[temp_v1 + 2];
-    *piVar5 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1264) == '\0' && temp_v2 == piVar5[temp_v1 + 1]) {
-      return;
-    }
-  }
-  (*(romwright_code *)piVar5[7])();
-  *(unsigned char *)(piVar5 + 6) = 0;
-  return;
 }
 
-} /* extern "C" */
+}

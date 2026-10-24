@@ -1,167 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00402ab8` (_code @ 0x402ab8, 0x350 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 194 rows); retail interleaves the float conversions with the rect loads, repeats the parallax call per cell and unrolls the row/mark scans differently */
+#include "common.h"
+
+// Placement record of a sprite part: position and a pointer to its extra metrics.
+struct SpriteRect {
+    u8 unk00[8];
+    s16 x;                  // 0x08
+    s16 y;                  // 0x0a
+    s16* extra;             // 0x0c
+};
+
+// A named record whose id marks are tested for the highlighted entries.
+struct NameRecord {
+    u8 unk00[0x36];
+    char name[0x32];        // 0x36
+    u16 marks[10];          // 0x68
+};
+
+// Range table row: values in [low, high) belong to this row.
+struct RangeRow {
+    s32 low;
+    s32 high;
+};
+
+// Status caption panel: caption text, mark icons and the value strip.
+struct CaptionPanel {
+    u8 unk000[0x8c];
+    s32 value;              // 0x08c
+    u8 unk090[0x664 - 0x90];
+    NameRecord* record;     // 0x664
+    u8 unk668[4];
+    u32 icons[7];           // 0x66c
+    RangeRow rows[6];       // 0x688
+};
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int FUN_00164168(...);
-int efctSetSpeed(...);
-int gameGetPlayerData(...);
-int FUN_001834a4(...);
-int FUN_001835b4(...);
-int FUN_0018408c(...);
-int renderCtxCalculateStereoParallax(...);
-int libc_strcmp(...);
-int SBORROW4(...);
-int VectorSignedToFloat(...);
+extern u8* g_renderCtx;
+extern const char DAT_0052d134[];
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-} param_3_stack;
+f32 renderCtxCalculateStereoParallax(u8* ctx, f32 amount);
+void efctSetSpeed(f32 speed);
+s32 libc_strcmp(const char* a, const char* b);
+void gameGetPlayerData(void);
+const char* gameGetPlayerName(void);
+void textFormatBuffer(char* out, const char* format, ...);
+s32 FUN_0018408c(const char* text, s32 font);
+SpriteRect* FUN_001834a4(s32 group, s32 index);
+void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 speed);
+void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
+void FUN_00164168(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
 
-extern unsigned char LAB_00402e14; /* 0x402e14 */
-extern unsigned char LAB_00402e20; /* 0x402e20 */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00164168. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: libc_strcmp. */
-
-
-void FUN_00402ab8(int param_1,int param_2,int param_3)
-
+// Draws the caption panel at (x, y): "<name>" and a second caption string side by side with
+// their frame, then the eight value cells with their mark icons.
+void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
 {
-/* irregular: 1 unstructured edge(s); 1 goto(s); irregular input(s): in_fpscr; 12 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  unsigned int in_fpscr;
-  float temp_v9;
-  int temp_v10;
-  unsigned long long temp_v11;
-  unsigned int temp_v12;
-  unsigned char temp_v13 [84];
-  
-  temp_v11 = 0x3e851eb800000000;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v12 = 0xffffffff;
-  efctSetSpeed();
-  temp_v6 = *(int *)(param_1 + 0x664) + 0x36;
-  temp_v0 = temp_v6;
-  libc_strcmp(temp_v6,"<pc 0>");
-  if (temp_v0 == 0) {
-    gameGetPlayerData();
-    temp_v6 = gameGetPlayerName();
-  }
-  textFormatBuffer(temp_v13,&LAB_00402e14,temp_v6);
-  puVar1 = temp_v13;
-  FUN_0018408c(puVar1,2);
-  temp_v0 = FUN_001834a4(0x32,9);
-  temp_v9 = (float)((unsigned long long)temp_v11 >> 0x20);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v10 = (int)temp_v9;
-  temp_v6 = *(short *)(temp_v0 + 10) + param_3;
-  VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(((int)*(short *)(temp_v0 + 8) - (int)puVar1) + param_2 + temp_v10,
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,temp_v12,temp_v13,temp_v6);
-  textFormatBuffer(temp_v13,&LAB_00402e20);
-  puVar3 = temp_v13;
-  FUN_0018408c(puVar3,2);
-  temp_v6 = FUN_001834a4(0x32,10);
-  temp_v5 = *(short *)(temp_v0 + 10) + param_3;
-  VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(((((int)*(short *)(temp_v0 + 8) - (int)puVar1) - (int)**(short **)(temp_v6 + 0xc))
-                      - (int)puVar3) + param_2 + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,temp_v12,temp_v13,temp_v5,temp_v12,puVar3);
-  temp_v6 = (((int)*(short *)(temp_v0 + 8) - (int)puVar1) - (int)**(short **)(temp_v6 + 0xc)) + param_2 +
-          temp_v10;
-  FUN_001835b4(2,0x32,10,temp_v6,*(short *)(temp_v0 + 10) + param_3,0xc9);
-  temp_v0 = 0;
-  do {
-    temp_v7 = 0;
-    temp_v5 = *(int *)(param_1 + 0x8c) + temp_v0;
-    do {
-      temp_v1 = param_1 + temp_v7 * 8;
-      temp_v3 = *(int *)(temp_v1 + 0x688);
-      temp_v8 = SBORROW4(temp_v3,temp_v5);
-      temp_v2 = temp_v3 - temp_v5;
-      if (temp_v3 <= temp_v5) {
-        temp_v2 = *(int *)(temp_v1 + 0x68c);
-        temp_v8 = SBORROW4(temp_v5,temp_v2);
-        temp_v2 = temp_v5 - temp_v2;
-      }
-      if (temp_v2 < 0 != temp_v8) {
-        temp_v2 = *(int *)(param_1 + temp_v7 * 8 + 0x688);
-        if (-1 < temp_v7) {
-          temp_v6 = *(int *)(param_1 + 0x664);
-        }
-        if (-1 < temp_v7) {
-          temp_v1 = 0;
-          do {
-            temp_v4 = (unsigned int)*(unsigned short *)(temp_v6 + temp_v1 * 2 + 0x68);
-            if ((temp_v4 != 0) && (temp_v4 - 1 == temp_v5)) {
-              temp_v8 = 1;
-              goto LAB_00402d00;
-            }
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 10);
-          temp_v8 = 0;
-LAB_00402d00:
-          temp_v1 = 0;
-          if (temp_v8) {
-            temp_v6 = FUN_001834a4(0x32,temp_v0 + 0x3a);
-            temp_v9 = (float)((unsigned long long)temp_v11 >> 0x20);
-            renderCtxCalculateStereoParallax(g_renderCtx);
-            FUN_001835b4(2,0x32,0x39,(int)*(short *)(temp_v6 + 8) + (int)temp_v9 + temp_v10 + param_2,
-                         *(short *)(temp_v6 + 10) + param_3,0xc9);
-            temp_v3 = FUN_001834a4(0x32,temp_v0 + 0x42);
-            temp_v9 = (float)((unsigned long long)temp_v11 >> 0x20);
-            renderCtxCalculateStereoParallax(g_renderCtx);
-            temp_v1 = 6;
-          }
-          else {
-            temp_v3 = FUN_001834a4(0x32,temp_v0 + 0x12);
-            temp_v9 = (float)((unsigned long long)temp_v11 >> 0x20);
-            renderCtxCalculateStereoParallax(g_renderCtx);
-          }
-          temp_v6 = 0xc9;
-          FUN_00164168(*(unsigned int *)(param_1 + temp_v7 * 4 + 0x66c),
-                       (int)temp_v9 + temp_v1 + (int)*(short *)(temp_v3 + 8) + temp_v10 + param_2,
-                       *(short *)(temp_v3 + 10) + param_3,0xc9,6,temp_v5 - temp_v2);
-        }
-        break;
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < 6);
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 8) {
-      efctSetSpeed();
-      return;
+    char text[64];
+    s32 color = -1;
+    renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    efctSetSpeed(speed);
+    const char* name = panel->record->name;
+    if (libc_strcmp(name, DAT_0052d134) == 0) {
+        gameGetPlayerData();
+        name = gameGetPlayerName();
     }
-  } while( 1 );
+    textFormatBuffer(text, "%s", name);
+    s32 nameWidth = FUN_0018408c(text, 2);
+    SpriteRect* frame = FUN_001834a4(50, 9);
+    s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    FUN_00162790(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
+
+    textFormatBuffer(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
+    s32 suffixWidth = FUN_0018408c(text, 2);
+    SpriteRect* suffix = FUN_001834a4(50, 10);
+    s32 suffixOffset = *suffix->extra;
+    FUN_00162790(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
+    FUN_001835b4(2, 50, 10, frame->x - nameWidth - suffixOffset + x + shift, frame->y + y, 201);
+
+    s32 baseX = shift + x;
+    for (s32 i = 0; i < 8; i++) {
+        s32 value = panel->value + i;
+        s32 row;
+        s32 offset = 0;
+        bool found = false;
+        for (row = 0; row < 6; row++) {
+            if (panel->rows[row].low <= value && value < panel->rows[row].high) {
+                offset = value - panel->rows[row].low;
+                break;
+            }
+        }
+        if (row == 6) continue;
+        for (s32 j = 0; j < 10; j++) {
+            u16 mark = panel->record->marks[j];
+            if (mark != 0 && (s32)(mark - 1) == value) {
+                found = true;
+                break;
+            }
+        }
+        SpriteRect* iconRect;
+        s32 iconShift;
+        if (found) {
+            SpriteRect* markRect = FUN_001834a4(50, 58 + i);
+            FUN_001835b4(2, 50, 57, markRect->x + baseX, markRect->y + y, 201);
+            iconRect = FUN_001834a4(50, 66 + i);
+            iconShift = 6;
+        } else {
+            iconRect = FUN_001834a4(50, 18 + i);
+            iconShift = 0;
+        }
+        s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+        FUN_00164168(panel->icons[row], parallax + iconShift + iconRect->x + baseX, iconRect->y + y, 201, speed, 6, offset);
+    }
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

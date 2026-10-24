@@ -1,138 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4250` (_code @ 0x3c4250, 0x398 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the gauge width helper is inlined with different register allocation and the stack argument stores differ from retail (238 vs 231 rows); the gauge drawing is the same. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int efctSetSpeed(void);
-int FUN_00185dd4(...);
-int jobGetScalarValue(void);
+typedef struct GaugeLayout {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;               /* width, height */
+} GaugeLayout;
 
-typedef int romwright_code(...);
-/* stack frame of param_6: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_6_stack;
+/* The battle window (only the fields used here). */
+typedef struct GaugeOwner {
+    /* 0x0000 */ u8 unk0000[0x17C];
+    /* 0x017C */ f32 closingSpeed;
+    /* 0x0180 */ u8 unk0180[0x1E98];
+    /* 0x2018 */ u8 mode;
+} GaugeOwner;
 
-extern int g_renderCtx; /* 0x59dbb4 */
+extern u8 *g_renderCtx;
 
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00185dd4. */
-/* Supplied declaration required: jobGetScalarValue. */
-extern int __aeabi_idivmod(int, unsigned int);
+f32 jobGetScalarValue(void);
+void efctSetSpeed(f32 speed);
+GaugeLayout *FUN_001834a4(u32 group, u32 id);
+void FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
+u32 packNibblesAndByte(u32 a, u32 b, u32 c);
+s32 __aeabi_idivmod(s32 a, s32 b);
 
-
-void FUN_003c4250(int param_1,int param_2,unsigned int param_3,int param_4,int param_5,int param_6)
-
+/* The width of the gauge part `id` for `value` out of 200 (at least 1 for a positive value),
+ * with the part's height in `height`. */
+static __inline s32 gaugeWidth(u32 id, s32 value, s32 *height)
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int *piVar8;
-  short *psVar9;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  
-  temp_v6 = 0;
-  jobGetScalarValue();
-  if (param_5 >= 200) {
-    param_5 = 199;
-  }
-  temp_v8 = 200;
-  temp_v0 = (short)param_5;
-  temp_v2 = FUN_001834a4(0x12,0x6e);
-  psVar9 = *(short **)(temp_v2 + 0xc);
-  temp_v2 = __aeabi_idivmod((int)*psVar9 << 0xc,temp_v8);
-  temp_v2 = temp_v2 * temp_v0 >> 0xc;
-  if ((0 < temp_v0) && (temp_v2 < 1)) {
-    temp_v2 = 1;
-  }
-  temp_v9 = (int)psVar9[1];
-  if ((0 < param_6) && (*(char *)(param_1 + 0x2018) != '\x03')) {
-    temp_v1 = (short)param_6;
-    temp_v6 = FUN_001834a4(0x12,0x6e);
-    psVar9 = *(short **)(temp_v6 + 0xc);
-    temp_v6 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
-    temp_v2 = temp_v6 * (short)(temp_v0 - temp_v1) >> 0xc;
-    if ((0 < (short)(temp_v0 - temp_v1)) && (temp_v2 < 1)) {
-      temp_v2 = 1;
+    GaugeLayout *layout = FUN_001834a4(0x12, id);
+    s32 width = (__aeabi_idivmod(layout->size[0] << 12, 200) * value) >> 12;
+
+    if (value > 0 && width < 1) {
+        width = 1;
     }
-    temp_v9 = (int)psVar9[1];
-    temp_v6 = FUN_001834a4(0x12,0x76);
-    psVar9 = *(short **)(temp_v6 + 0xc);
-    temp_v6 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
-    temp_v6 = temp_v6 * temp_v1 >> 0xc;
-    if ((0 < temp_v1) && (temp_v6 < 1)) {
-      temp_v6 = 1;
-    }
-    temp_v7 = (int)psVar9[1];
-    FUN_00185dd4(2,0x12,0x76,param_2 + temp_v2,param_3,temp_v6,temp_v7,0xdd);
-    efctSetSpeed();
-    temp_v4 = g_renderCtx;
-    temp_v3 = packNibblesAndByte(6,1,0);
-    piVar8 = (int *)(temp_v4 + 0x12b8);
-    temp_v5 = piVar8[*piVar8 + 2];
-    piVar8[*piVar8 + 2] = temp_v3;
-    if (*(char *)(temp_v4 + 0x12d0) != '\0' || temp_v5 != temp_v3) {
-      (**(romwright_code **)(temp_v4 + 0x12d4))();
-      *(unsigned char *)(temp_v4 + 0x12d0) = 0;
-    }
-    FUN_00185dd4(2,0x12,0x77,param_2 + temp_v2,param_3,temp_v6,temp_v7,0xde);
-    temp_v4 = g_renderCtx;
-    temp_v3 = packNibblesAndByte(6,7,0);
-    piVar8 = (int *)(temp_v4 + 0x12b8);
-    temp_v5 = piVar8[*piVar8 + 2];
-    piVar8[*piVar8 + 2] = temp_v3;
-    if (*(char *)(temp_v4 + 0x12d0) != '\0' || temp_v5 != temp_v3) {
-      (**(romwright_code **)(temp_v4 + 0x12d4))();
-      *(unsigned char *)(temp_v4 + 0x12d0) = 0;
-    }
-    efctSetSpeed();
-  }
-  FUN_00185dd4(2,0x12,0x6e,param_2,param_3,temp_v2,temp_v9,0xdd);
-  if (param_5 < param_4) {
-    temp_v3 = (int)(short)((short)param_4 - temp_v0);
-    temp_v4 = FUN_001834a4(0x12,0x6f);
-    psVar9 = *(short **)(temp_v4 + 0xc);
-    temp_v4 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
-    temp_v4 = temp_v4 * temp_v3 >> 0xc;
-    if ((0 < temp_v3) && (temp_v4 < 1)) {
-      temp_v4 = 1;
-    }
-    FUN_00185dd4(2,0x12,0x6f,param_2 + temp_v2 + temp_v6,param_3,temp_v4,(int)psVar9[1],0xdd);
-  }
-  else if (param_4 < param_5) {
-    temp_v3 = (int)(short)(temp_v0 - (short)param_4);
-    temp_v4 = FUN_001834a4(0x12,0x71);
-    psVar9 = *(short **)(temp_v4 + 0xc);
-    temp_v4 = __aeabi_idivmod((int)*psVar9 << 0xc,200);
-    temp_v4 = temp_v4 * temp_v3 >> 0xc;
-    if ((0 < temp_v3) && (temp_v4 < 1)) {
-      temp_v4 = 1;
-    }
-    temp_v0 = psVar9[1];
-    temp_v3 = FUN_001834a4(0x12,0x6e);
-    temp_v5 = FUN_001834a4(0x12,0x71);
-    FUN_00185dd4(2,0x12,0x71,
-                 (temp_v2 - temp_v4) + temp_v6 + param_2 +
-                 ((int)*(short *)(temp_v3 + 8) - (int)*(short *)(temp_v5 + 8)),param_3,temp_v4,(int)temp_v0,
-                 0xdd);
-  }
-  return;
+    *height = layout->size[1];
+    return width;
 }
 
-} /* extern "C" */
+/* Draws a two-part HP gauge at (`x`, `y`): the filled bar up to `current`, and either the
+ * recovering part (when `target` is higher) or the damage part (when it is lower); `chunk` draws
+ * the recent-damage flash. */
+void FUN_003c4250(GaugeOwner *owner, s32 x, s32 y, s32 target, s32 current, s32 chunk)
+{
+    f32 scale = jobGetScalarValue();
+    s32 flash = 0;
+    s32 height;
+
+    if (current >= 200) {
+        current = 199;
+    }
+    s16 value = (s16)current;
+    s32 width = gaugeWidth(0x6E, value, &height);
+
+    if (chunk > 0 && owner->mode != 3) {
+        s16 rest = (s16)(value - (s16)chunk);
+
+        width = gaugeWidth(0x6E, rest, &height);
+        s32 flashHeight;
+
+        flash = gaugeWidth(0x76, (s16)chunk, &flashHeight);
+        FUN_00185dd4(2, 0x12, 0x76, x + width, y, flash, flashHeight, 0xDD);
+        efctSetSpeed(owner->closingSpeed * scale);
+        renderStackSet((RenderStateStack *)(g_renderCtx + 0x12B8), packNibblesAndByte(6, 1, 0));
+        FUN_00185dd4(2, 0x12, 0x77, x + width, y, flash, flashHeight, 0xDE);
+        renderStackSet((RenderStateStack *)(g_renderCtx + 0x12B8), packNibblesAndByte(6, 7, 0));
+        efctSetSpeed(scale);
+    }
+    FUN_00185dd4(2, 0x12, 0x6E, x, y, width, height, 0xDD);
+    if (current < target) {
+        s32 partHeight;
+        s32 part = gaugeWidth(0x6F, (s16)((s16)target - value), &partHeight);
+
+        FUN_00185dd4(2, 0x12, 0x6F, x + width + flash, y, part, partHeight, 0xDD);
+    } else if (target < current) {
+        s32 partHeight;
+        s32 part = gaugeWidth(0x71, (s16)(value - (s16)target), &partHeight);
+        GaugeLayout *bar = FUN_001834a4(0x12, 0x6E);
+        GaugeLayout *damage = FUN_001834a4(0x12, 0x71);
+
+        FUN_00185dd4(2, 0x12, 0x71, (width - part) + flash + x + (bar->x - damage->x), y, part, partHeight, 0xDD);
+    }
+}
+
+}

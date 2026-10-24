@@ -1,112 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037e8a4` (_code @ 0x37e8a4, 0x2ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 164 rows); register allocation and constant hoisting (0.26f parallax depth, layer ids) differ */
+#include "common.h"
+
+// Draw-state stack embedded in the render context.
+struct DrawRing {
+    s32 index;              // 0x00
+    s32 unk04;
+    s32 slots[4];           // 0x08
+    u8 dirty;               // 0x18
+    u8 unk19[3];
+    void (*flush)(void);    // 0x1c
+};
+
+struct RenderCtx {
+    u8 unk0000[0x12b8];
+    DrawRing ring;          // 0x12b8
+};
+
+struct LayoutEntry {
+    u8 unk00[8];
+    s16 x;                  // 0x08
+    s16 y;                  // 0x0a
+};
+
+// UI sprite header: only the animation scale read here.
+struct UiSprite {
+    u8 unk00[0x20];
+    f32 scale;              // 0x20
+};
+
+struct SaveSlotHud {
+    u8 unk0000[0xe8c];
+    u8 titleSprite[0xf18 - 0xe8c];      // 0xe8c
+    u8 cardSprite[0xfa2 - 0xf18];       // 0xf18
+    s8 cardVisible;                     // 0xfa2
+    u8 unkfa3[0x197c - 0xfa3];
+    UiSprite haloSprite;                // 0x197c
+};
 
 extern "C" {
 
-int vec2GetXInt(...);
-int vec2GetYInt(int);
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int renderCtxCalculateStereoParallax(int);
+extern RenderCtx* g_renderCtx;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
+s32 vec2GetXInt(void* sprite);
+s32 vec2GetYInt(void* sprite);
+f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
+LayoutEntry* FUN_001834a4(u32 group, u32 index);
+void* saveSlotFindSelected(void);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 
-extern int g_renderCtx; /* 0x59dbb4 */
-
-extern int saveSlotFindSelected(void);
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_0037e8a4(int param_1)
-
+static void setDrawState(s32 value)
 {
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int *piVar9;
-  float temp_v8;
-  unsigned long long temp_v9;
-  float temp_v10;
-  
-  temp_v2 = vec2GetXInt();
-  temp_v3 = vec2GetYInt(param_1 + 0xe8c);
-  temp_v10 = 0.26f;
-  temp_v9 = 0x3e851eb800000000;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  efctSetSpeed();
-  temp_v7 = 0;
-  do {
-    FUN_001835b4(2,0x14,temp_v7 + 0xc08,temp_v2 + (int)temp_v10,temp_v3,0xbf);
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 3);
-  temp_v10 = (float)((unsigned long long)temp_v9 >> 0x20);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  FUN_001835b4(2,0x14,0xbe1,temp_v2 + (int)temp_v10,temp_v3,0xc4);
-  temp_v2 = param_1 + 0xf18;
-  if ((*(char *)(param_1 + 0xfa2) != '\0') && (temp_v7 = saveSlotFindSelected(), temp_v7 != 0)) {
-    temp_v7 = vec2GetXInt(temp_v2);
-    temp_v4 = vec2GetYInt(temp_v2);
-    temp_v5 = FUN_001834a4(0x14,0xbd9);
-    temp_v10 = (float)((unsigned long long)temp_v9 >> 0x20);
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v2 = g_renderCtx;
-    temp_v0 = *(short *)(temp_v5 + 8);
-    temp_v1 = *(short *)(temp_v5 + 10);
-    temp_v5 = packNibblesAndByte(6,1,0);
-    piVar9 = (int *)(temp_v2 + 0x12b8);
-    temp_v6 = piVar9[*piVar9 + 2];
-    piVar9[*piVar9 + 2] = temp_v5;
-    if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v6 != temp_v5) {
-      (**(romwright_code **)(temp_v2 + 0x12d4))();
-      *(unsigned char *)(temp_v2 + 0x12d0) = 0;
+    DrawRing* ring = &g_renderCtx->ring;
+    s32 previous = ring->slots[ring->index];
+    ring->slots[ring->index] = value;
+    if (ring->dirty != 0 || previous != value) {
+        ring->flush();
+        ring->dirty = 0;
     }
-    temp_v2 = 0;
-    do {
-      FUN_001835b4(2,0x14,temp_v2 + 0xbe2,(int)temp_v10 + temp_v7 + (int)temp_v0,temp_v1 + temp_v4,0xbf);
-      temp_v8 = (float)((unsigned long long)temp_v9 >> 0x20);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 3);
-    temp_v2 = FUN_001834a4(0x14,0xc16);
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v0 = *(short *)(temp_v2 + 8);
-    temp_v1 = *(short *)(temp_v2 + 10);
-    efctSetSpeed();
-    temp_v2 = 0;
-    do {
-      FUN_001835b4(2,0x14,temp_v2 + 0xc01,(int)temp_v0 + (int)temp_v8 + temp_v7,temp_v1 + temp_v4,0xc4);
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 3);
-    efctSetSpeed();
-    temp_v2 = g_renderCtx;
-    temp_v7 = packNibblesAndByte(6,7,0);
-    piVar9 = (int *)(temp_v2 + 0x12b8);
-    temp_v4 = piVar9[*piVar9 + 2];
-    piVar9[*piVar9 + 2] = temp_v7;
-    if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v4 != temp_v7) {
-      (**(romwright_code **)(temp_v2 + 0x12d4))();
-      *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-    }
-  }
-  return;
+}
+
+// Draws the save slot panel (three-part frames at the title sprite) and, when a
+// card is shown for the selected slot, the card's frame and highlight.
+void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
+{
+    void* titleSprite = hud->titleSprite;
+    s32 baseX = vec2GetXInt(titleSprite);
+    s32 baseY = vec2GetYInt(titleSprite);
+    s32 x = baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    efctSetSpeed(reinterpret_cast<UiSprite*>(titleSprite)->scale * alpha);
+    for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xc08 + i, x, baseY, 0xbf);
+    FUN_001835b4(2, 0x14, 0xbe1, baseX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f), baseY, 0xc4);
+
+    void* cardSprite = hud->cardSprite;
+    if (hud->cardVisible == 0 || saveSlotFindSelected() == NULL) return;
+
+    s32 cardX = vec2GetXInt(cardSprite);
+    s32 cardY = vec2GetYInt(cardSprite);
+    LayoutEntry* frame = FUN_001834a4(0x14, 0xbd9);
+    s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
+    s32 frameY = frame->y + cardY;
+    setDrawState(packNibblesAndByte(6, 1, 0));
+    for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
+
+    LayoutEntry* marker = FUN_001834a4(0x14, 0xc16);
+    s32 markerX = marker->x + cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 markerY = marker->y + cardY;
+    efctSetSpeed(hud->haloSprite.scale * alpha);
+    for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xc01 + i, markerX, markerY, 0xc4);
+    efctSetSpeed(alpha);
+    setDrawState(packNibblesAndByte(6, 7, 0));
 }
 
 } /* extern "C" */

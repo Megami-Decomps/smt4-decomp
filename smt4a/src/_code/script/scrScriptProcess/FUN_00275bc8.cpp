@@ -1,202 +1,182 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00275bc8` (_code @ 0x275bc8, 0x338 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the script file and owner in r0/r1 through the section scan and spills the owner and strings pointer to the stack at the first use (the 11-register push is 9 and the 12-byte frame is 4 here), and returns through one shared epilogue; ours moves the file to r5 up front (202 rows against 208). The section parse, field setup and list append follow retail. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "script/scrScriptProcess.h"
+
+#define SCRIPT_SECTION_NAMES 0
+#define SCRIPT_SECTION_LABELS 1
+#define SCRIPT_SECTION_CODE 2
+#define SCRIPT_SECTION_DATA 3
+#define SCRIPT_SECTION_STRINGS 4
+
+/* A section table entry of a script file (0x10 bytes). */
+struct ScriptFileSection {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ s32 size;
+    /* 0x0C */ u32 offset;          /* from the start of the file */
+};
+
+/* A script file ("FLW0"): header, then the section table (observed fields). */
+struct ScriptFile {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ char magic[4];
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s32 sectionCount;
+    /* 0x14 */ s16 localCount;       /* integer locals */
+    /* 0x16 */ s16 floatCount;       /* float locals */
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ ScriptFileSection section[1];
+};
+
+/* A name table entry (0x20 bytes, observed fields). */
+struct ScriptName {
+    /* 0x00 */ s8 name[0x18];
+    /* 0x18 */ u32 value;
+    /* 0x1C */ u8 unk1C[4];
+};
+
+/* A running script (0x10C bytes, observed fields). */
+struct ScriptProcessWork {
+    /* 0x000 */ s8 name[0x18];
+    /* 0x018 */ u32 nameValue;
+    /* 0x01C */ u32 zero1C[8];
+    /* 0x03C */ u8 state[0x70];
+    /* 0x0AC */ ScriptFile *file;
+    /* 0x0B0 */ ScriptFileSection *sections;
+    /* 0x0B4 */ ScriptName *names;
+    /* 0x0B8 */ u8 *labels;
+    /* 0x0BC */ u8 *code;
+    /* 0x0C0 */ u32 owner;
+    /* 0x0C4 */ u8 *strings;
+    /* 0x0C8 */ s32 nameIndex;
+    /* 0x0CC */ u32 unk0CC;
+    /* 0x0D0 */ u32 unk0D0;
+    /* 0x0D4 */ u8 unk0D4[4];
+    /* 0x0D8 */ u32 unk0D8;
+    /* 0x0DC */ u32 unk0DC;
+    /* 0x0E0 */ u32 unk0E0;
+    /* 0x0E4 */ u32 unk0E4;
+    /* 0x0E8 */ s32 *locals;
+    /* 0x0EC */ f32 *floatLocals;
+    /* 0x0F0 */ ScriptProcessWork *prev;
+    /* 0x0F4 */ ScriptProcessWork *next;
+    /* 0x0F8 */ u32 unk0F8;
+    /* 0x0FC */ u8 unk0FC[0x10];
+};
+
+struct ScriptProcessList {
+    s32 count;
+    ScriptProcessWork *head;
+    ScriptProcessWork *tail;
+};
 
 extern "C" {
 
-int asdMemoryAlloc(int, int, int, int, int);
-int sysMemClear(...);
+extern ScriptProcessList g_scrScriptResources;
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 enabled);
+void sysMemClear(void *memory, u32 size);
 
-extern int g_scrScriptResources; /* 0x588e30 */
-extern int DAT_00588e34; /* 0x588e34 */
-extern int DAT_00588e38; /* 0x588e38 */
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: sysMemClear. */
-
-
-int FUN_00275bc8(int param_1,unsigned int param_2)
-
+/* Creates a script process from a loaded script file: finds the file's sections, copies the first
+ * name, allocates the local tables and appends the process to the process list. Returns the process,
+ * or NULL when the file is not a usable script. */
+ScriptProcessWork *FUN_00275bc8(ScriptFile *file, u32 owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  char temp_v3;
-  int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned char temp_v11;
-  
-  temp_v6 = param_1 + 0x20;
-  temp_v5 = 0;
-  temp_v3 = *(char *)(param_1 + 8);
-  temp_v7 = 0;
-  temp_v9 = 0;
-  temp_v11 = temp_v3 == 'F';
-  if (temp_v11) {
-    temp_v3 = *(char *)(param_1 + 9);
-  }
-  temp_v8 = 0;
-  temp_v10 = 0;
-  if (temp_v11 && temp_v3 == 'L') {
-    temp_v3 = *(char *)(param_1 + 10);
-    temp_v11 = temp_v3 == 'W';
-    if (temp_v11) {
-      temp_v3 = *(char *)(param_1 + 0xb);
+    ScriptProcessWork *process = NULL;
+    ScriptFileSection *sections = file->section;
+    ScriptName *names = NULL;
+    u8 *labels = NULL;
+    u8 *code = NULL;
+    u8 *strings = NULL;
+    s32 nameIndex = 0;
+    s32 i;
+
+    if (file->magic[0] != 'F' || file->magic[1] != 'L' || file->magic[2] != 'W' || file->magic[3] != '0') {
+        return process;
     }
-    if (temp_v11 && temp_v3 == '0') {
-      temp_v4 = 0;
-      if (temp_v4 < *(int *)(param_1 + 0x10)) {
-        do {
-          puVar6 = (unsigned int *)(temp_v6 + temp_v4 * 0x10);
-          switch(*puVar6) {
-          case 0:
-            temp_v7 = puVar6[3] + param_1;
+    for (i = 0; i < file->sectionCount; i++) {
+        switch (sections[i].type) {
+        case SCRIPT_SECTION_NAMES:
+            names = (ScriptName *)((u8 *)file + sections[i].offset);
             break;
-          case 1:
-            temp_v9 = puVar6[3] + param_1;
+        case SCRIPT_SECTION_LABELS:
+            labels = (u8 *)file + sections[i].offset;
             break;
-          case 2:
-            temp_v8 = puVar6[3] + param_1;
+        case SCRIPT_SECTION_CODE:
+            code = (u8 *)file + sections[i].offset;
             break;
-          case 3:
+        case SCRIPT_SECTION_DATA:
             break;
-          case 4:
-            temp_v10 = puVar6[3] + param_1;
+        case SCRIPT_SECTION_STRINGS:
+            strings = (u8 *)file + sections[i].offset;
             break;
-          default:
-            return temp_v5;
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < *(int *)(param_1 + 0x10));
-      }
-      if (param_1 != 0 && temp_v6 != 0) {
-        temp_v11 = temp_v7 != 0;
-        temp_v4 = 0;
-        if (temp_v11) {
-          temp_v4 = temp_v8;
+        default:
+            return process;
         }
-        temp_v0 = param_1;
-        if (temp_v11 && temp_v8 != 0) {
-          temp_v4 = *(int *)(param_1 + 0x28);
-          temp_v0 = temp_v4;
-        }
-        if (((temp_v11 && temp_v8 != 0) && temp_v0 != 0) && -1 < temp_v4) {
-          temp_v5 = 0x100;
-          asdMemoryAlloc(0x100,0x100,0,0x10c,0);
-          sysMemClear();
-          if (temp_v5 == 0) {
-            temp_v5 = 0;
-          }
-          else {
-            for (temp_v4 = 0; temp_v3 = *(char *)(temp_v7 + temp_v4), *(char *)(temp_v5 + temp_v4) = temp_v3,
-                temp_v3 != '\0'; temp_v4 = temp_v4 + 1) {
-            }
-            *(unsigned int *)(temp_v5 + 0x18) = *(unsigned int *)(temp_v7 + 0x18);
-            *(unsigned int *)(temp_v5 + 0x1c) = 0;
-            *(unsigned int *)(temp_v5 + 0x20) = 0;
-            *(unsigned int *)(temp_v5 + 0x24) = 0;
-            *(unsigned int *)(temp_v5 + 0x28) = 0;
-            *(unsigned int *)(temp_v5 + 0x2c) = 0;
-            *(unsigned int *)(temp_v5 + 0x30) = 0;
-            *(unsigned int *)(temp_v5 + 0x34) = 0;
-            *(unsigned int *)(temp_v5 + 0x38) = 0;
-            sysMemClear(temp_v5 + 0x3c,0x70);
-            *(int *)(temp_v5 + 0xbc) = temp_v8;
-            *(int *)(temp_v5 + 0xac) = param_1;
-            *(int *)(temp_v5 + 0xb0) = temp_v6;
-            *(int *)(temp_v5 + 0xb4) = temp_v7;
-            *(int *)(temp_v5 + 0xb8) = temp_v9;
-            *(unsigned int *)(temp_v5 + 0xc0) = param_2;
-            *(int *)(temp_v5 + 0xc4) = temp_v10;
-            *(unsigned int *)(temp_v5 + 200) = 0;
-            *(unsigned int *)(temp_v5 + 0xcc) = 0;
-            *(unsigned int *)(temp_v5 + 0xd0) = 0;
-            *(unsigned int *)(temp_v5 + 0xe8) = 0;
-            *(unsigned int *)(temp_v5 + 0xec) = 0;
-            *(unsigned int *)(temp_v5 + 0xf0) = 0;
-            *(unsigned int *)(temp_v5 + 0xf4) = 0;
-            *(unsigned int *)(temp_v5 + 0xf8) = 0;
-            *(unsigned int *)(temp_v5 + 0xe4) = 0;
-            *(unsigned int *)(temp_v5 + 0xe0) = 0;
-            *(unsigned int *)(temp_v5 + 0xdc) = 0;
-            *(unsigned int *)(temp_v5 + 0xd8) = 0;
-            if (0 < *(short *)(param_1 + 0x14)) {
-              puVar6 = (unsigned int *)0x100;
-              asdMemoryAlloc(0x100,0x100,0,(int)*(short *)(param_1 + 0x14) << 2,0);
-              *(unsigned int **)(temp_v5 + 0xe8) = puVar6;
-              if (0 < *(short *)(param_1 + 0x14)) {
-                temp_v1 = (int)*(short *)(param_1 + 0x14) & 1;
-                if (temp_v1 == 1) {
-                  *puVar6 = 0;
-                }
-                temp_v2 = (unsigned int)(temp_v1 == 1);
-                if ((int)temp_v1 < (int)*(short *)(param_1 + 0x14)) {
-                  do {
-                    temp_v1 = temp_v1 + 2;
-                    *(unsigned int *)(*(int *)(temp_v5 + 0xe8) + temp_v2 * 4) = 0;
-                    *(unsigned int *)(*(int *)(temp_v5 + 0xe8) + (temp_v2 + 1) * 4) = 0;
-                    temp_v2 = temp_v2 + 2;
-                  } while ((int)temp_v1 < (int)*(short *)(param_1 + 0x14));
-                }
-              }
-            }
-            if (*(short *)(param_1 + 0x16) < 1) {
-              *(unsigned int *)(temp_v5 + 0xec) = 0;
-            }
-            else {
-              puVar6 = (unsigned int *)0x100;
-              asdMemoryAlloc(0x100,0x100,0,(int)*(short *)(param_1 + 0x16) << 2,0);
-              *(unsigned int **)(temp_v5 + 0xec) = puVar6;
-              if (0 < *(short *)(param_1 + 0x16)) {
-                temp_v1 = (int)*(short *)(param_1 + 0x16) & 1;
-                if (temp_v1 == 1) {
-                  *puVar6 = 0;
-                }
-                temp_v2 = (unsigned int)(temp_v1 == 1);
-                if ((int)temp_v1 < (int)*(short *)(param_1 + 0x16)) {
-                  do {
-                    temp_v1 = temp_v1 + 2;
-                    temp_v6 = temp_v2 + 1;
-                    *(unsigned int *)(*(int *)(temp_v5 + 0xec) + temp_v2 * 4) = 0;
-                    temp_v2 = temp_v2 + 2;
-                    *(unsigned int *)(*(int *)(temp_v5 + 0xec) + temp_v6 * 4) = 0;
-                  } while ((int)temp_v1 < (int)*(short *)(param_1 + 0x16));
-                }
-              }
-            }
-            if (DAT_00588e38 != 0) {
-              *(int *)(temp_v5 + 0xf0) = DAT_00588e38;
-              *(int *)(DAT_00588e38 + 0xf4) = temp_v5;
-              *(unsigned int *)(temp_v5 + 0xf4) = 0;
-              DAT_00588e38 = temp_v5;
-            }
-            else {
-              DAT_00588e34 = temp_v5;
-              DAT_00588e38 = temp_v5;
-              *(unsigned int *)(temp_v5 + 0xf0) = 0;
-              *(unsigned int *)(temp_v5 + 0xf4) = 0;
-            }
-            g_scrScriptResources = g_scrScriptResources + 1;
-          }
-        }
-      }
     }
-  }
-  return temp_v5;
+    if (file != NULL && sections != NULL && names != NULL && code != NULL && sections[0].size > 0) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\script\\scrScriptProcess.cpp", 139);
+        process = (ScriptProcessWork *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(ScriptProcessWork), 0);
+        sysMemClear(process, sizeof(ScriptProcessWork));
+        if (process != NULL) {
+            for (i = 0; (process->name[i] = names[nameIndex].name[i]) != 0; i++) {
+            }
+            process->nameValue = names[nameIndex].value;
+            for (i = 0; i < 8; i++) {
+                process->zero1C[i] = 0;
+            }
+            sysMemClear(process->state, 0x70);
+            process->code = code;
+            process->file = file;
+            process->sections = sections;
+            process->names = names;
+            process->labels = labels;
+            process->owner = owner;
+            process->strings = strings;
+            process->nameIndex = nameIndex;
+            process->unk0CC = 0;
+            process->unk0D0 = 0;
+            process->locals = NULL;
+            process->floatLocals = NULL;
+            process->prev = NULL;
+            process->next = NULL;
+            process->unk0F8 = 0;
+            process->unk0E4 = 0;
+            process->unk0E0 = 0;
+            process->unk0DC = 0;
+            process->unk0D8 = 0;
+            if (file->localCount > 0) {
+                asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\script\\scrScriptProcess.cpp", 182);
+                process->locals = (s32 *)asdMemoryAlloc(0x100, 0x100, 0, file->localCount << 2, 0);
+                for (i = 0; i < file->localCount; i++) {
+                    process->locals[i] = 0;
+                }
+            }
+            if (file->floatCount <= 0) {
+                process->floatLocals = NULL;
+            } else {
+                asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\script\\scrScriptProcess.cpp", 191);
+                process->floatLocals = (f32 *)asdMemoryAlloc(0x100, 0x100, 0, file->floatCount << 2, 0);
+                for (i = 0; i < file->floatCount; i++) {
+                    process->floatLocals[i] = 0.0f;
+                }
+            }
+            if (g_scrScriptResources.tail != NULL) {
+                process->prev = g_scrScriptResources.tail;
+                g_scrScriptResources.tail->next = process;
+                process->next = NULL;
+                g_scrScriptResources.tail = process;
+            } else {
+                g_scrScriptResources.head = process;
+                g_scrScriptResources.tail = process;
+                process->prev = NULL;
+                process->next = NULL;
+            }
+                g_scrScriptResources.count++;
+        }
+    }
+    return process;
 }
 
 } /* extern "C" */

@@ -1,141 +1,154 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e169c` (_code @ 0x2e169c, 0x348 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~205 rows); retail loads the render-context pointer before the ring-push value call and spills differently */
+#include "common.h"
+
+// Render-state stack: the current entry is slots[index]; the flush callback runs when the
+// value changed (or a flush is already pending).
+struct DrawStateRing {
+    s32 index;              // 0x00
+    u32 unk04;
+    u32 slots[4];           // 0x08
+    u8 dirty;               // 0x18
+    u8 pad19[3];
+    void (*flush)(void);    // 0x1c
+};
+
+struct RenderCtx {
+    u8 unk0000[0x1258];
+    DrawStateRing stateRing;    // 0x1258
+};
+
+// Sprite placement record: x/y of the label (halfwords at +8/+10).
+struct SpriteRect {
+    u8 unk00[8];
+    s16 x;                  // 0x08
+    s16 y;                  // 0x0a
+};
+
+// Button-help overlay: the two prompts (confirm/cancel icons) with their fade states.
+struct ButtonHelp {
+    u8 unk000[0x10];
+    u32 state;              // 0x010
+    u8 unk014[0x37c - 0x14];
+    u8 fadeA[0x2c];         // 0x37c: fade object, also the label position vector
+    s32 fadeBits;           // 0x3a8: fade progress (compared as raw float bits)
+    u8 unk3ac[0x408 - 0x3ac];
+    u8 fadeB[0x8c];         // 0x408
+    u8 fadeC[0x8c];         // 0x494
+    u8 fadeD[0x8c];         // 0x520
+    u8 unk5ac[0x5e0 - 0x5ac];
+    u8 visible;             // 0x5e0
+    u8 shown;               // 0x5e1
+    u8 unk5e2[2];
+    u8 mode;                // 0x5e4
+    u8 unk5e5[5];
+    u8 enabled;             // 0x5ea
+    u8 unk5eb;
+    u32 spriteSet;          // 0x5ec
+    u8 labelA[0x40];        // 0x5f0
+    u8 labelB[0x44];        // 0x630
+    u8 useIcons;            // 0x674
+    u8 unk675[3];
+    u32 iconSet;            // 0x678
+    u8 useIconSet;          // 0x67c
+};
+
+// Global slot holding the active overlay.
+struct ButtonHelpHolder {
+    u32 unk00;
+    ButtonHelp* help;       // 0x04
+};
 
 extern "C" {
 
-int FUN_00157558(int);
-int FUN_00162790(...);
-int FUN_00164168(...);
-int renderCtxResetColorScale(...);
-int skinObjectUpdateMatrices(...);
-int FUN_001835b4(int, int, int, unsigned int, unsigned int, int);
-int FUN_0020bd54(void);
-int fadeObjectResetIfActive(...);
-int FUN_002acfc8(...);
-int VectorSignedToFloat(...);
+extern ButtonHelpHolder g_buttonHelp;
+extern RenderCtx* g_renderCtx;
 
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+void FUN_00157558(RenderCtx* ctx);
+u32 FUN_001692ac(u32 a, u32 b);
+void FUN_0020bd54(void);
+void fadeObjectResetIfActive(void* fade);
+s32 vec2GetXInt(void* vec);
+s32 vec2GetYInt(void* vec);
+void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
+SpriteRect* FUN_001834a4(s32 group, s32 index);
+void FUN_00164168(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);
+void FUN_00162790(s32 a, u32 spriteSet, void* label, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 scaleC);
+void FUN_002acfc8(void* label, s32 x, s32 y);
+void skinObjectUpdateMatrices(RenderCtx* ctx);
+void renderCtxResetColorScale(RenderCtx* ctx);
 
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00164168. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0020bd54. */
-/* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: FUN_002acfc8. */
-
-
-unsigned char FUN_002e169c(void)
-
+static void ringPush(DrawStateRing* ring, u32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int *piVar10;
-  unsigned char temp_v9;
-  unsigned int in_fpscr;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  if (*(char *)((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) + 0x5e0) != '\0') {
+    s32 index = ring->index;
+    u32 previous = ring->slots[index];
+    ring->index = index + 1;
+    ring->slots[index + 1] = value;
+    if (ring->dirty != 0 || previous != value) {
+        ring->flush();
+        ring->dirty = 0;
+    }
+}
+
+static void ringPop(DrawStateRing* ring)
+{
+    s32 index = ring->index;
+    u32 previous = ring->slots[index];
+    ring->index = index - 1;
+    if (ring->dirty != 0 || previous != ring->slots[index - 1]) {
+        ring->flush();
+        ring->dirty = 0;
+    }
+}
+
+// Draws the button-help overlay (confirm/cancel prompts) while the owning menu is in one of
+// its first four states.
+u8 FUN_002e169c(void)
+{
+    ButtonHelp* help = g_buttonHelp.help;
+    if (help->visible == 0) return 0;
+
     FUN_00157558(g_renderCtx);
-    temp_v4 = g_renderCtx;
-    temp_v2 = FUN_001692ac(1,0);
-    piVar10 = (int *)(temp_v4 + 0x1258);
-    temp_v8 = *piVar10;
-    temp_v7 = piVar10[temp_v8 + 2];
-    *piVar10 = temp_v8 + 1;
-    piVar10[temp_v8 + 3] = temp_v2;
-    if (*(char *)(temp_v4 + 0x1270) != '\0' || temp_v7 != temp_v2) {
-      (**(romwright_code **)(temp_v4 + 0x1274))();
-      *(unsigned char *)(temp_v4 + 0x1270) = 0;
+    ringPush(&g_renderCtx->stateRing, FUN_001692ac(1, 0));
+    if (help->state == 0 || help->state == 1 || help->state == 2 || help->state == 3) {
+        FUN_0020bd54();
+        if (help->shown != 0) {
+            if (help->mode != 1) {
+                fadeObjectResetIfActive(help->fadeA);
+                fadeObjectResetIfActive(help->fadeC);
+                fadeObjectResetIfActive(help->fadeD);
+                fadeObjectResetIfActive(help->fadeB);
+            } else {
+                s32 x = vec2GetXInt(help->fadeA);
+                s32 y = vec2GetYInt(help->fadeA);
+                FUN_001835b4(2, 10, 0, x, y, 16);
+                FUN_001835b4(2, 10, 1, x, y, 16);
+                FUN_001835b4(2, 10, 163, x, y, 16);
+                FUN_001835b4(2, 10, 164, x, y, 16);
+            }
+            if (help->shown != 0 && help->enabled != 0 && help->fadeBits >= 0x3f800000) {
+                SpriteRect* rect = FUN_001834a4(10, 29);
+                if (help->useIconSet != 0) {
+                    FUN_00164168(help->iconSet, rect->x, rect->y, 21, 1.0f, 6, 0);
+                } else if (help->useIcons != 0) {
+                    FUN_00162790(2, help->spriteSet, help->labelA, (f32)rect->x, (f32)rect->y, 0.93f, 0.0f, 1.0f);
+                } else {
+                    FUN_002acfc8(help->labelA, rect->x, rect->y);
+                }
+                rect = FUN_001834a4(10, 30);
+                if (help->useIconSet != 0) {
+                    FUN_00164168(help->iconSet, rect->x, rect->y, 21, 1.0f, 6, 1);
+                } else if (help->useIcons != 1) {
+                    FUN_00162790(2, help->spriteSet, help->labelB, (f32)rect->x, (f32)rect->y, 0.93f, 0.0f, 1.0f);
+                } else {
+                    FUN_002acfc8(help->labelB, rect->x, rect->y);
+                }
+            }
+        }
     }
-    temp_v3 = *(unsigned int *)(temp_v1 + 0x10);
-    if (((temp_v3 < 2) || (temp_v3 == 2 || temp_v3 == 3)) &&
-       (FUN_0020bd54(), *(char *)(temp_v1 + 0x5e1) != '\0')) {
-      if (*(char *)(temp_v1 + 0x5e4) != '\x01') {
-        fadeObjectResetIfActive();
-        fadeObjectResetIfActive(temp_v1 + 0x494);
-        fadeObjectResetIfActive(temp_v1 + 0x520);
-        fadeObjectResetIfActive(temp_v1 + 0x408);
-      }
-      else {
-        temp_v5 = vec2GetXInt(temp_v1 + 0x37c);
-        temp_v6 = vec2GetYInt(temp_v1 + 0x37c);
-        FUN_001835b4(2,10,0,temp_v5,temp_v6,0x10);
-        FUN_001835b4(2,10,1,temp_v5,temp_v6,0x10);
-        FUN_001835b4(2,10,0xa3,temp_v5,temp_v6,0x10);
-        FUN_001835b4(2,10,0xa4,temp_v5,temp_v6,0x10);
-      }
-      temp_v9 = *(char *)(temp_v1 + 0x5e1) != '\0';
-      temp_v0 = '\0';
-      if (temp_v9) {
-        temp_v0 = *(char *)(temp_v1 + 0x5ea);
-      }
-      if ((temp_v9 && temp_v0 != '\0') && (*(int *)(temp_v1 + 0x3a8) >= 0x3f800000)) {
-        temp_v4 = FUN_001834a4(10,0x1d);
-        if (*(char *)(temp_v1 + 0x67c) != '\0') {
-          FUN_00164168(*(unsigned int *)(temp_v1 + 0x678),(int)*(short *)(temp_v4 + 8),
-                       (int)*(short *)(temp_v4 + 10),0x15,6,0);
-        }
-        else if (*(char *)(temp_v1 + 0x674) != '\0') {
-          VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(2,*(unsigned int *)(temp_v1 + 0x5ec),temp_v1 + 0x5f0);
-        }
-        else {
-          FUN_002acfc8(temp_v1 + 0x5f0,(int)*(short *)(temp_v4 + 8),(int)*(short *)(temp_v4 + 10));
-        }
-        temp_v4 = FUN_001834a4(10,0x1e);
-        if (*(char *)(temp_v1 + 0x67c) != '\0') {
-          FUN_00164168(*(unsigned int *)(temp_v1 + 0x678),(int)*(short *)(temp_v4 + 8),
-                       (int)*(short *)(temp_v4 + 10),0x15,6,1);
-        }
-        else if (*(char *)(temp_v1 + 0x674) != '\x01') {
-          VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(2,*(unsigned int *)(temp_v1 + 0x5ec),temp_v1 + 0x630);
-        }
-        else {
-          FUN_002acfc8(temp_v1 + 0x630,(int)*(short *)(temp_v4 + 8),(int)*(short *)(temp_v4 + 10));
-        }
-      }
-    }
-    temp_v1 = g_renderCtx;
-    piVar10 = (int *)(g_renderCtx + 0x1258);
-    temp_v4 = *piVar10;
-    temp_v2 = piVar10[temp_v4 + 2];
-    *piVar10 = temp_v4 - 1;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v2 != piVar10[temp_v4 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
-    }
+    ringPop(&g_renderCtx->stateRing);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

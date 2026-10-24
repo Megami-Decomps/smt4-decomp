@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push scheduling, coordinate conversion order, and VFP literal ordering differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 26 diff lines remain, scheduling/register allocation only. */
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
 
@@ -35,7 +35,7 @@ s32 messageWindowDrawJob(void *)
         s32 y = vec2GetYInt(window);
         FUN_002c39a4(g_titleScene);
         RenderCtx *context = g_titleScene;
-        renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
+        renderCtxPushA(context, FUN_002c5d80(1, 0));
         FUN_002bf380(2, 0x3A, 6, x, y, 0x81);
         u16 strings[8][64];
         const void *entry = FUN_0023478c(table, 0x65);

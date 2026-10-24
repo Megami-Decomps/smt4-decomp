@@ -1,195 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00270104` (_code @ 0x270104, 0x388 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the repeated page query, the 64-bit battle mask tests and the nested help-selection branches are laid out differently from retail (220 vs 227 rows); the help shown per page is the same. */
+#include "common.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int FUN_0019de98(unsigned int, unsigned int);
-int FUN_0032d0c8(unsigned int, int, int, unsigned int);
-int screenShowMessage(int);
-int FUN_00359b6c(unsigned int);
-int FUN_00399e20(unsigned int, int);
-int FUN_003aeb18(unsigned int, int);
+typedef struct HelpPlayerView {
+    u8 unk00[2];
+    u16 flag;
+    u16 value;
+} HelpPlayerView;
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+typedef struct HelpRecordView {
+    u8 unk00[0x62];
+    u16 id;
+} HelpRecordView;
 
-extern unsigned char DAT_00573b88; /* 0x573b88 */
-extern unsigned int DAT_00573bcc; /* 0x573bcc */
+/* The battle state's flag words (only the mask word read here). */
+typedef struct HelpBattleView {
+    u8 unk0000[0x45A8];
+    u64 flags;
+} HelpBattleView;
 
-/* Supplied declaration required: btlGetMainState. */
-extern unsigned int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
-extern unsigned int slotRecordFindById(unsigned short);
-extern int gameGetSlotRecord(void);
-extern int btlMainGetUnk14(void);
-extern int resourceRunOperationIfUnblocked(unsigned int);
-extern int FUN_002a4894(unsigned int);
-extern int FUN_002cc9e0(int, unsigned int);
-extern unsigned int FUN_002f8e14(unsigned int);
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: screenShowMessage. */
-/* Supplied declaration required: FUN_00359b6c. */
-/* Supplied declaration required: FUN_00399e20. */
-/* Supplied declaration required: FUN_003aeb18. */
-extern int gameDataFlagTestBit(unsigned int);
-extern unsigned int halfTableGet(unsigned int, unsigned int);
+/* The skill menu's work block (only the fields read here, by their offsets). */
+typedef struct SkillMenuWork {
+    /* 0x0000 */ u8 unk0000[0x3890];
+    /* 0x3890 */ s32 page;
+    /* 0x3894 */ u8 unk3894[0x3AC];
+    /* 0x3C40 */ u32 list;
+    /* 0x3C44 */ u8 unk3c44[0x64];
+    /* 0x3CA8 */ u16 plainIds[1];
+    /* 0x3CAA */ u8 unk3caa[0x146];
+    /* 0x3DF0 */ u8 unk3df0[0x28];
+    /* 0x3E18 */ u32 activeSkill;
+    /* 0x3E1C */ u8 unk3e1c[0x3F4];
+    /* 0x4210 */ s16 pageSkills[1];
+} SkillMenuWork;
 
+extern u64 DAT_00573bc8;
 
-void FUN_00270104(int param_1)
+s32 resourceRunOperationIfUnblocked(u32 list);
+s32 FUN_002a4894(u32 list);
+s32 FUN_002cc9e0(SkillMenuWork *work, s32 arg);
+void screenShowMessage(u32 id);
+HelpBattleView *btlGetMainState(void);
+s32 gameDataFlagTestBit(u32 bit);
+u32 FUN_002f8e14(u32 index);
+void FUN_0019de98(u32 text, u32 color);
+u32 halfTableGet(HelpBattleView *state, u32 index);
+HelpRecordView *btlMainGetUnk14(void);
+HelpRecordView *gameGetSlotRecord(void);
+u32 slotRecordFindById(u16 id);
+void FUN_0032d0c8(u32 panel, s32 a, u32 id, u32 member);
+void FUN_00359b6c(u32 id);
+void FUN_003aeb18(u32 panel, s32 arg);
+void FUN_00399e20(u32 panel, s32 arg);
+s32 gameFlagIsSet(u32 flag);
+HelpPlayerView *gameGetPlayerData(void);
 
+/* Shows the help for the skill menu's current entry, by page. */
+void FUN_00270104(SkillMenuWork *work)
 {
-/* irregular: 7 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  unsigned int temp_v5;
-  int *piVar8;
-  unsigned char temp_v6;
-  unsigned int temp_v7 [8];
-  
-  temp_v1 = resourceRunOperationIfUnblocked(*(unsigned int *)(param_1 + 0x3c40));
-  temp_v2 = FUN_002a4894(*(unsigned int *)(param_1 + 0x3c40));
-  temp_v4 = temp_v1 + temp_v2;
-  temp_v1 = FUN_002cc9e0(param_1,0);
-  if (temp_v1 != 1) {
-    temp_v1 = FUN_002cc9e0(param_1,0);
-    if (temp_v1 != 2) {
-      temp_v1 = FUN_002cc9e0(param_1,0);
-      if (temp_v1 == 7) {
-        screenShowMessage(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x3ca8));
-        return;
-      }
-      temp_v1 = FUN_002cc9e0(param_1,0);
-      if (temp_v1 == 3) {
-        temp_v5 = 0;
-        temp_v7[3] = 0;
-        temp_v7[4] = 1;
-        temp_v7[5] = 2;
-        temp_v1 = 0;
-        temp_v7[2] = 0x33;
-        temp_v7[0] = 0x2e;
-        temp_v7[1] = 0x32;
-        do {
-          temp_v2 = gameDataFlagTestBit(temp_v7[temp_v1]);
-          if (temp_v2 != 0) {
-            if (temp_v5 == temp_v4) {
-              temp_v3 = FUN_002f8e14(temp_v7[temp_v1 + 3] & 0xff);
-              FUN_0019de98(temp_v3,0xf4f4f4ff);
-              return;
+    u32 *panel = (u32 *)((u8 *)work + 0x4B98);
+    u32 index = resourceRunOperationIfUnblocked(work->list) + FUN_002a4894(work->list);
+
+    if (FUN_002cc9e0(work, 0) != 1) {
+        if (FUN_002cc9e0(work, 0) != 2) {
+            if (FUN_002cc9e0(work, 0) == 7) {
+                screenShowMessage(work->plainIds[index]);
+                return;
             }
-            temp_v5 = temp_v5 + 1;
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 3);
-        return;
-      }
-      temp_v1 = FUN_002cc9e0(param_1,0);
-      if (temp_v1 != 0xc) {
-        return;
-      }
-      temp_v4 = *(unsigned int *)(param_1 + 0x3e18);
-      if (temp_v4 == 0) {
-        return;
-      }
-    }
-    else {
-      temp_v1 = btlGetMainState();
-      if (!((*(unsigned int *)(temp_v1 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) == 0 &&
-           (*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573bcc) == 0)) {
-        temp_v3 = btlGetMainState();
-        temp_v4 = halfTableGet(temp_v3,temp_v4);
-      }
-      else {
-        btlGetMainState();
-        temp_v4 = 0;
-      }
-      if (temp_v4 == 0) {
-        return;
-      }
-    }
-  }
-  else {
-    piVar8 = (int *)(param_1 + 0x3890);
-    puVar6 = (unsigned int *)(param_1 + 0x4b98);
-    temp_v0 = *(short *)(param_1 + *piVar8 * 2 + 0x4210);
-    if (temp_v0 != -1) {
-      if (temp_v4 == 0) {
-        if (temp_v0 == -2) {
-          temp_v1 = btlMainGetUnk14();
-          temp_v3 = slotRecordFindById(*(unsigned short *)(temp_v1 + 0x62));
-          FUN_0032d0c8(*puVar6,2,*(unsigned short *)(temp_v1 + 0x62),temp_v3);
-          return;
+            if (FUN_002cc9e0(work, 0) == 3) {
+                u32 flagIds[3] = {0x2E, 0x32, 0x33};
+                u32 helpIds[3] = {0, 1, 2};
+                s32 shown = 0;
+
+                for (s32 i = 0; i < 3; i++) {
+                    if (gameDataFlagTestBit(flagIds[i]) != 0) {
+                        if (shown == (s32)index) {
+                            FUN_0019de98(FUN_002f8e14(helpIds[i] & 0xFF), 0xF4F4F4FF);
+                            return;
+                        }
+                        shown++;
+                    }
+                }
+                return;
+            }
+            if (FUN_002cc9e0(work, 0) != 12) {
+                return;
+            }
+            index = work->activeSkill;
+            if (index == 0) {
+                return;
+            }
+        } else {
+            if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
+                index = halfTableGet(btlGetMainState(), index);
+            } else {
+                btlGetMainState();
+                index = 0;
+            }
+            if (index == 0) {
+                return;
+            }
         }
-        temp_v1 = gameGetSlotRecord();
-        temp_v3 = slotRecordFindById(*(unsigned short *)(temp_v1 + 0x62));
-        FUN_0032d0c8(*puVar6,2,*(unsigned short *)(temp_v1 + 0x62),temp_v3);
-        return;
-      }
-      temp_v1 = btlGetMainState();
-      if ((*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573bcc) != 0 ||
-          (*(unsigned int *)(temp_v1 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) != 0) {
-        FUN_00359b6c(temp_v4);
-        return;
-      }
-      temp_v4 = (unsigned int)*(unsigned short *)(param_1 + *piVar8 * 0x10 + temp_v4 * 2 + 0x3c42);
+    } else {
+        s16 pageSkill = work->pageSkills[work->page];
+
+        if (pageSkill != -1) {
+            if (index == 0) {
+                HelpRecordView *record = pageSkill == -2 ? btlMainGetUnk14() : gameGetSlotRecord();
+
+                FUN_0032d0c8(*panel, 2, record->id, slotRecordFindById(record->id));
+                return;
+            }
+            if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
+                FUN_00359b6c(index);
+                return;
+            }
+            index = *(u16 *)((u8 *)work + work->page * 0x10 + index * 2 + 0x3C42);
+        } else {
+            if (index == 0) {
+                FUN_003aeb18(*panel, 0);
+                return;
+            }
+            if (index == 1 && gameFlagIsSet(0x410) != 0) {
+                HelpPlayerView *player = gameGetPlayerData();
+
+                if (player->flag != 0 && player->value != 0) {
+                    FUN_00399e20(*panel, 1);
+                    return;
+                }
+            }
+            s32 adjust = -2;
+
+            if (gameFlagIsSet(0x410) != 0) {
+                HelpPlayerView *player = gameGetPlayerData();
+
+                if (player->flag == 0 || player->value == 0) {
+                    adjust = -1;
+                }
+            } else {
+                adjust = -1;
+            }
+            if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
+                index = index + adjust + 1;
+            } else {
+                index = *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x3C44);
+            }
+        }
+        if (index == 0) {
+            return;
+        }
     }
-    else {
-      if (temp_v4 == 0) {
-        FUN_003aeb18(*puVar6,0);
-        return;
-      }
-      if ((temp_v4 == 1) && (temp_v1 = gameFlagIsSet(0x410), temp_v1 != 0)) {
-        temp_v5 = gameGetPlayerData();
-        temp_v6 = *(short *)(temp_v5 + 2) != 0;
-        if (temp_v6) {
-          temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
-        }
-        if (temp_v6 && temp_v5 != 0) {
-          FUN_00399e20(*puVar6,1);
-          return;
-        }
-      }
-      temp_v1 = -2;
-      temp_v2 = gameFlagIsSet(0x410);
-      if (temp_v2 != 0) {
-        temp_v5 = gameGetPlayerData();
-        temp_v6 = *(short *)(temp_v5 + 2) != 0;
-        if (temp_v6) {
-          temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
-        }
-        if (!temp_v6 || temp_v5 == 0) {
-          temp_v1 = -1;
-        }
-      }
-      else {
-        temp_v1 = -1;
-      }
-      temp_v2 = btlGetMainState();
-      if (!((*(unsigned int *)(temp_v2 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) == 0 &&
-           (*(unsigned int *)(temp_v2 + 0x45ac) & DAT_00573bcc) == 0)) {
-        temp_v4 = temp_v4 + temp_v1 + 1;
-      }
-      else {
-        temp_v4 = (unsigned int)*(unsigned short *)(param_1 + *piVar8 * 0x10 + (temp_v4 + temp_v1) * 2 + 0x3c44);
-      }
-    }
-    if (temp_v4 == 0) {
-      return;
-    }
-  }
-  FUN_00359b6c(temp_v4);
-  return;
+    FUN_00359b6c(index);
 }
 
-} /* extern "C" */
+}

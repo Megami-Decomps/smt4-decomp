@@ -1,140 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003adca8` (_code @ 0x3adca8, 0x36c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the battle UI's number popup setup (five digit sprites plus two label sprites); the draft's floats arrive in s0-s2 (x, y, z) ahead of three stack ints, which armcc here places the same way, but the digit loop's divisor update and the per-digit sprite id selection are scheduled differently. */
+#include "common.h"
+
+/* A layout rectangle's size words (the high bit is a flag). */
+struct LayoutSize {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 width;
+    /* 0x06 */ u16 height;
+};
+
+/* The battle UI's global: a pointer to the popup block at +0x20. */
+struct BattleUiGlobal {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 *block;
+};
 
 extern "C" {
+extern BattleUiGlobal g_btlUi;
 
-int FUN_002630e0(float *, int, unsigned int);
-int FUN_00295eb0(...);
-int FUN_002963ec(...);
-int pairSetFirstResetSecond(...);
-int spriteStartAnimationByIndex(int, int);
+u32 FUN_002c501c(void);
+void FUN_002630e0(f32 *vector, s32 a, u32 stereo);
+void spriteStartAnimationByIndex(u8 *sprite, s32 animation);
+void FUN_00295eb0(u8 *sprite, s32 group, s32 part);
+void FUN_002963ec(u8 *sprite, s32 x, s32 y);
+void pairSetFirstResetSecond(u8 *sprite, s32 id);
+LayoutSize *FUN_002bf4f8(s32 group, u32 part);
+s32 __aeabi_idivmod(s32 a, s32 b);
 
-/* stack frame of param_7: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_7_stack;
-
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_002630e0. */
-/* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_002963ec. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern unsigned int FUN_002c501c(void);
-extern int __aeabi_idivmod(int, unsigned int);
-
-
-void FUN_003adca8(unsigned int param_1,int param_2,int param_3,unsigned int param_4,int param_5,
-                 int param_6,int param_7)
-
+/* Sets up popup slot `slot`: shows `value` as five digit sprites (the sprite set depends on
+ * `negative` and `kind`) and two label sprites, all placed at (x, y). `stereo` shifts the position
+ * for the 3D depth. */
+void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f32 z, s32 negative, s32 kind,
+                  s32 stereo)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 8 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  float in_s0;
-  float in_s1;
-  unsigned int in_s2;
-  float temp_v6;
-  float temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  
-  temp_v4 = (*(int *)((unsigned char *)&g_btlUi + 0x20));
-  temp_v6 = in_s0;
-  temp_v7 = in_s1;
-  temp_v8 = in_s2;
-  if (param_7 != 0) {
-    temp_v0 = FUN_002c501c();
-    FUN_002630e0(&temp_v6,0,temp_v0);
-  }
-  temp_v4 = temp_v4 + param_2 * 0x400;
-  temp_v9 = temp_v4 + 0x8000;
-  *(unsigned char *)(temp_v4 + 0x832c) = 1;
-  *(char *)(temp_v4 + 0x832d) = (char)param_7;
-  *(int *)(temp_v4 + 0x8344) = param_3;
-  temp_v3 = 10000;
-  *(float *)(temp_v4 + 0x8320) = temp_v6;
-  temp_v2 = 4;
-  *(float *)(temp_v4 + 0x8324) = temp_v7;
-  *(unsigned char *)(temp_v4 + 0x8348) = 0;
-  *(unsigned int *)(temp_v4 + 0x8328) = temp_v8;
-  do {
-    *(unsigned int *)(temp_v4 + temp_v2 * 4 + 0x8330) = 0;
-    temp_v5 = temp_v4 + temp_v2 * 0x8c + 0x7f4c;
-    spriteStartAnimationByIndex(temp_v5,3);
-    FUN_00295eb0(temp_v5,0x15,temp_v2 + 0x41a);
-    FUN_002963ec(temp_v5,(int)(short)(int)temp_v6,(int)(short)(int)temp_v7);
-    if (param_5 == 0) {
-      if (param_6 != 0) {
-        temp_v1 = __aeabi_idivmod(param_3,temp_v3);
-        temp_v1 = temp_v1 + 0x7f8;
-      }
-      else {
-        temp_v1 = __aeabi_idivmod(param_3,temp_v3);
-        temp_v1 = temp_v1 + 0x7e4;
-      }
+    f32 position[3] = { x, y, z };
+    u8 *block = g_btlUi.block;
+    if (stereo != 0)
+        FUN_002630e0(position, 0, FUN_002c501c());
+    u8 *popup = block + slot * 0x400;
+    popup[0x832C] = 1;
+    popup[0x832D] = (u8)stereo;
+    *(s32 *)(popup + 0x8344) = value;
+    *(f32 *)(popup + 0x8320) = position[0];
+    *(f32 *)(popup + 0x8324) = position[1];
+    *(f32 *)(popup + 0x8328) = position[2];
+    popup[0x8348] = 0;
+    s32 divisor = 10000;
+    for (s32 digit = 4; digit >= 0; digit--) {
+        *(u32 *)(popup + digit * 4 + 0x8330) = 0;
+        u8 *sprite = popup + digit * 0x8C + 0x7F4C;
+        spriteStartAnimationByIndex(sprite, 3);
+        FUN_00295eb0(sprite, 0x15, digit + 0x41A);
+        FUN_002963ec(sprite, (s16)(s32)position[0], (s16)(s32)position[1]);
+        s32 base;
+        if (negative == 0)
+            base = kind != 0 ? 0x7F8 : 0x7E4;
+        else
+            base = kind != 0 ? 0x802 : 0x7EE;
+        pairSetFirstResetSecond(sprite, __aeabi_idivmod(value, divisor) + base);
+        value -= __aeabi_idivmod(value, divisor) * divisor;
+        divisor /= 10;
     }
-    else if (param_6 != 0) {
-      temp_v1 = __aeabi_idivmod(param_3,temp_v3);
-      temp_v1 = temp_v1 + 0x802;
+    u8 *first = popup + 0x8208;
+    u8 *second = popup + 0x8294;
+    spriteStartAnimationByIndex(first, 9);
+    spriteStartAnimationByIndex(second, 9);
+    if (negative == 0) {
+        if (kind == 0) {
+            pairSetFirstResetSecond(first, 1000);
+            pairSetFirstResetSecond(second, 0x3EA);
+        } else if (kind == 1) {
+            pairSetFirstResetSecond(first, 0x420);
+            pairSetFirstResetSecond(second, 0x3EB);
+        }
+    } else {
+        if (kind == 0) {
+            pairSetFirstResetSecond(first, 0x3E9);
+            pairSetFirstResetSecond(second, 0x3EC);
+        } else if (kind == 1) {
+            pairSetFirstResetSecond(first, 0x421);
+            pairSetFirstResetSecond(second, 0x3ED);
+        }
     }
-    else {
-      temp_v1 = __aeabi_idivmod(param_3,temp_v3);
-      temp_v1 = temp_v1 + 0x7ee;
-    }
-    pairSetFirstResetSecond(temp_v5,temp_v1);
-    temp_v5 = __aeabi_idivmod(param_3,temp_v3);
-    temp_v2 = temp_v2 - 1;
-    param_3 = param_3 - temp_v5 * temp_v3;
-    temp_v3 = temp_v3 / 10;
-  } while (-1 < temp_v2);
-  temp_v2 = temp_v4 + 0x8208;
-  spriteStartAnimationByIndex(temp_v2,9);
-  temp_v4 = temp_v4 + 0x8294;
-  spriteStartAnimationByIndex(temp_v4,9);
-  if (param_5 == 0) {
-    if (param_6 != 0) {
-      if (param_6 == 1) {
-        pairSetFirstResetSecond(temp_v2,0x420);
-        pairSetFirstResetSecond(temp_v4,0x3eb);
-      }
-    }
-    else {
-      pairSetFirstResetSecond(temp_v2,1000);
-      pairSetFirstResetSecond(temp_v4,0x3ea);
-    }
-  }
-  else if (param_6 != 0) {
-    if (param_6 == 1) {
-      pairSetFirstResetSecond(temp_v2,0x421);
-      pairSetFirstResetSecond(temp_v4,0x3ed);
-    }
-  }
-  else {
-    pairSetFirstResetSecond(temp_v2,0x3e9);
-    pairSetFirstResetSecond(temp_v4,0x3ec);
-  }
-  FUN_00295eb0(temp_v2,0x15,0x419);
-  FUN_00295eb0(temp_v4,0x15,0x418);
-  temp_v5 = FUN_002bf4f8(0x15,*(unsigned int *)(temp_v9 + 0x20c));
-  FUN_002963ec(temp_v2,-((*(unsigned short *)(temp_v5 + 4) & 0xffff7fff) >> 1),
-               -((*(unsigned short *)(temp_v5 + 6) & 0xffff7fff) >> 1));
-  FUN_002963ec(temp_v2,(int)(short)(int)temp_v6,(int)(short)(int)temp_v7);
-  temp_v2 = FUN_002bf4f8(0x15,*(unsigned int *)(temp_v9 + 0x298));
-  FUN_002963ec(temp_v4,-((*(unsigned short *)(temp_v2 + 4) & 0xffff7fff) >> 1),
-               -((*(unsigned short *)(temp_v2 + 6) & 0xffff7fff) >> 1));
-  FUN_002963ec(temp_v4,(int)(short)(int)temp_v6,(int)(short)(int)temp_v7);
-  return;
+    FUN_00295eb0(first, 0x15, 0x419);
+    FUN_00295eb0(second, 0x15, 0x418);
+    LayoutSize *size = FUN_002bf4f8(0x15, *(u32 *)(popup + 0x820C));
+    FUN_002963ec(first, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
+    FUN_002963ec(first, (s16)(s32)position[0], (s16)(s32)position[1]);
+    size = FUN_002bf4f8(0x15, *(u32 *)(popup + 0x8298));
+    FUN_002963ec(second, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
+    FUN_002963ec(second, (s16)(s32)position[0], (s16)(s32)position[1]);
 }
 
 } /* extern "C" */

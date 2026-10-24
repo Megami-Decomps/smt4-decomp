@@ -1,126 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021dbc0` (_code @ 0x21dbc0, 0x2dc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment (retail keeps map/area in r7/r9 and the -1 spawn mode in sl; built uses r8/sl/r7) and the stack-argument store order (187 vs 186 rows); the placement logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0024f24c(...);
-int dataTable29GetEntryWithAoc(void);
-int VectorSignedToFloat(...);
+/* A map effect placement (only the fields read here). */
+typedef struct MapEffectEntry {
+    /* 0x00 */ s8 map;                  /* -1: unused */
+    /* 0x01 */ s8 area;
+    /* 0x02 */ s16 horizontal;
+    /* 0x04 */ s16 vertical;
+    /* 0x06 */ s16 z;
+    /* 0x08 */ s16 y;
+    /* 0x0A */ s16 x;
+    /* 0x0C */ u8 unk0c[4];
+    /* 0x10 */ s16 flag;                /* a story flag that changes the spawn chance */
+    /* 0x12 */ s8 chanceUnflagged;
+    /* 0x13 */ s8 chance;
+} MapEffectEntry;
 
-/* stack frame of param_3: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_3_stack;
+/* The map block's effect list (only the fields used here). */
+typedef struct MapEffectBlock {
+    /* 0x000 */ u8 unk000[0xDE3];
+    /* 0xDE3 */ s8 count;
+    /* 0xDE4 */ u8 kind[8];
+    /* 0xDEC */ s8 entry[8];
+    /* 0xDF4 */ u16 flag[8];
+    /* 0xE04 */ u16 token[8];
+} MapEffectBlock;
 
-extern unsigned char LAB_0021dea0; /* 0x21dea0 */
+MapEffectBlock *gameGetMapBlock(void);
+s32 FUN_00323538(void);
+MapEffectEntry *dataTable29GetEntryWithAoc(s32 index);
+s32 gameFlagIsSet(s32 flag);
+s32 randNextInRange(u32 limit);
+void FUN_0024f24c(u32 resource, u32 kind, u32 owner, u32 appearance, u32 spawnGroup, u32 spawnMode, u8 color0, u8 color1,
+                  u8 color2, u8 color3, u8 color4, u8 color5, u8 channel, u8 mode, u8 flags, u32 scaleX, u32 scaleY,
+                  u32 scaleZ, u32 spawnArgument, f32 x, f32 y, f32 z, f32 vertical, f32 horizontal, f32 heading);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0024f24c. */
-/* Supplied declaration required: dataTable29GetEntryWithAoc. */
-extern int gameFlagIsSet(void);
-extern int randNextInRange(unsigned int);
-extern int gameGetMapBlock(void);
-extern int FUN_00323538(void);
-
-
-void FUN_0021dbc0(int param_1,int param_2,int param_3)
-
+/* Starts the map effect for placement `entry` (its index is also the effect's scale token). */
+static __inline void spawnEntryEffect(MapEffectEntry *entry, s32 index)
 {
-/* irregular: 2 goto(s); irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  char *pcVar5;
-  int temp_v3;
-  unsigned short temp_v4;
-  unsigned int in_fpscr;
-  
-  temp_v0 = gameGetMapBlock();
-  if (param_3 != 0) {
-    temp_v2 = 0;
-    if ('\0' < *(char *)(temp_v0 + 0xde3)) {
-      do {
-        if (*(char *)(temp_v0 + temp_v2 + 0xde4) == '\x02') {
-          temp_v3 = (int)*(char *)(temp_v0 + temp_v2 + 0xdec);
-          temp_v1 = temp_v3;
-          dataTable29GetEntryWithAoc();
-          VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)*(short *)(temp_v1 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_0024f24c(5,0,&LAB_0021dea0,0x3a,0,0xffffffff,0,0,0,0,0,0,0,0,1,temp_v3,temp_v3 + 0x1300,0,
-                       0);
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < *(char *)(temp_v0 + 0xde3));
-      return;
-    }
-  }
-  else {
-    pcVar5 = (char *)0x0;
-    temp_v2 = FUN_00323538();
-    if (0 < temp_v2) {
-      do {
-        pcVar2 = pcVar5;
-        dataTable29GetEntryWithAoc();
-        if (((*pcVar2 != -1) && (*pcVar2 == param_1)) && (pcVar2[1] == param_2)) {
-          temp_v4 = 0;
-          if (*(short *)(pcVar2 + 0x10) != 0) {
-            temp_v2 = gameFlagIsSet();
-            if (temp_v2 != 0) {
-              temp_v2 = randNextInRange(99);
-              if (temp_v2 <= pcVar2[0x13]) {
-LAB_0021dce0:
-                VectorSignedToFloat((int)*(short *)(pcVar2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-                VectorSignedToFloat((int)*(short *)(pcVar2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-                VectorSignedToFloat((int)*(short *)(pcVar2 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-                VectorSignedToFloat((int)*(short *)(pcVar2 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-                VectorSignedToFloat((int)*(short *)(pcVar2 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-                FUN_0024f24c(5,0,&LAB_0021dea0,0x3a,0,0xffffffff,0,0,0,0,0,0,0,0,1,pcVar5,
-                             pcVar5 + 0x1300,0,0);
-                *(unsigned char *)((int)*(char *)(temp_v0 + 0xde3) + temp_v0 + 0xde4) = 2;
-                *(char *)((int)*(char *)(temp_v0 + 0xde3) + temp_v0 + 0xdec) = (char)(int)pcVar5;
-                *(unsigned short *)(temp_v0 + *(char *)(temp_v0 + 0xde3) * 2 + 0xdf4) = temp_v4;
-                *(short *)(temp_v0 + *(char *)(temp_v0 + 0xde3) * 2 + 0xe04) = (short)(int)(pcVar5 + 0x1300);
-                *(char *)(temp_v0 + 0xde3) = *(char *)(temp_v0 + 0xde3) + '\x01';
-              }
-            }
-            else {
-              temp_v2 = randNextInRange(99);
-              if (temp_v2 <= pcVar2[0x12]) {
-                temp_v4 = *(unsigned short *)(pcVar2 + 0x10);
-                goto LAB_0021dce0;
-              }
-            }
-          }
-          else {
-            temp_v2 = randNextInRange(99);
-            if (temp_v2 <= pcVar2[0x13]) goto LAB_0021dce0;
-          }
-        }
-        pcVar5 = pcVar5 + 1;
-        temp_v2 = FUN_00323538();
-      } while ((int)pcVar5 < temp_v2);
-    }
-  }
-  return;
+    FUN_0024f24c(5, 0, (u32) "POLY", 0x3A, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 1, index, index + 0x1300, 0, 0, entry->x,
+                 entry->y, entry->z, entry->vertical, entry->horizontal, 200.0f);
 }
 
-} /* extern "C" */
+/* With `replay` set, restarts the effects already registered in the map block; otherwise rolls
+ * every placement of the current map/area, spawning those that succeed and registering them. */
+void FUN_0021dbc0(s32 map, s32 area, s32 replay)
+{
+    MapEffectBlock *block = gameGetMapBlock();
+
+    if (replay != 0) {
+        for (s32 i = 0; i < block->count; i++) {
+            if (block->kind[i] == 2) {
+                s32 index = block->entry[i];
+
+                spawnEntryEffect(dataTable29GetEntryWithAoc(index), index);
+            }
+        }
+        return;
+    }
+    for (s32 i = 0; i < FUN_00323538(); i++) {
+        MapEffectEntry *entry = dataTable29GetEntryWithAoc(i);
+        u16 flag = 0;
+
+        if (entry->map == -1 || entry->map != map || entry->area != area) {
+            continue;
+        }
+        if (entry->flag != 0) {
+            if (gameFlagIsSet(entry->flag) != 0) {
+                if (randNextInRange(99) > entry->chance) {
+                    continue;
+                }
+            } else {
+                if (randNextInRange(99) > entry->chanceUnflagged) {
+                    continue;
+                }
+                flag = entry->flag;
+            }
+        } else if (randNextInRange(99) > entry->chance) {
+            continue;
+        }
+        spawnEntryEffect(entry, i);
+        block->kind[block->count] = 2;
+        block->entry[block->count] = i;
+        block->flag[block->count] = flag;
+        block->token[block->count] = i + 0x1300;
+        block->count++;
+    }
+}
+
+}

@@ -1,4 +1,3 @@
-/* NON_MATCHING: camp menu switch lowering and render-state stack register scheduling differ. */
 #include "camp/CampState.h"
 #include "camp/RenderCtx.h"
 

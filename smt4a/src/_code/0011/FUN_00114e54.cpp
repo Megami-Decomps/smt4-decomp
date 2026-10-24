@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e9acc(int *, int);
 int FUN_002f3b58(unsigned int, int, unsigned int);
-int FUN_00300b18(int, int);
+int _ZN9Obj55a94cC1Ej(int, int);
 int systemAcquireHandleList(void);
 
 typedef struct fn_00114e54_arg0 fn_00114e54_arg0;
@@ -36,7 +36,7 @@ extern int _Znwj(unsigned int);
 extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(fn_00114e54_arg0 *, unsigned int);
-/* Supplied declaration required: FUN_00300b18. */
+/* Supplied declaration required: _ZN9Obj55a94cC1Ej. */
 /* Supplied declaration required: systemAcquireHandleList. */
 
 
@@ -76,7 +76,7 @@ FUN_00114e54(fn_00114e54_arg0 *param_1,unsigned int param_2,unsigned int param_3
   temp_v2 = _Znwj(0x44);
   temp_v0 = 0;
   if (temp_v2 != 0) {
-    temp_v0 = FUN_00300b18(temp_v2,0);
+    temp_v0 = _ZN9Obj55a94cC1Ej(temp_v2,0);
   }
   puVar1[4] = temp_v0;
   *(unsigned short *)(temp_v0 + 0x20) = 10;
@@ -88,7 +88,7 @@ FUN_00114e54(fn_00114e54_arg0 *param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = _Znwj(0x44);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_00300b18(temp_v0,0);
+    temp_v1 = _ZN9Obj55a94cC1Ej(temp_v0,0);
   }
   temp_v0 = FUN_002ecf28();
   FUN_002f3b58(*(unsigned int *)(temp_v0 + 0xc),10,temp_v1);

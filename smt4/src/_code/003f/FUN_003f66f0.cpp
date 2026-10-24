@@ -1,123 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f66f0` (_code @ 0x3f66f0, 0x1fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite; retail keeps both allocator hooks behind one base register, tests the owner allocation before storing it and reaches the session fields through large literal offsets; built differs in branch layout and addressing */
+#include "common.h"
+
+/* The 8-byte handle handed to the caller: the owner object and the session built on it. */
+struct SessionHandle {
+    /* 0x00 */ void *owner;
+    /* 0x04 */ u8 *session;
+};
+
+typedef void *(*SessionAllocFn)(u32 bytes);
+typedef void (*SessionFreeFn)(void *block);
+
+/* The allocator hooks the application registers. */
+struct SessionHooks {
+    SessionAllocFn alloc;
+    SessionFreeFn free;
+};
 
 extern "C" {
+extern SessionHooks DAT_0044e990;
+extern const u8 DAT_00420740[];       /* vtable of the session object (_ZTV9Obj420738 + 8) */
+extern const u8 DAT_0042091c[];       /* vtable of the owner object (_ZTV9Obj42091c) */
+u8 *FUN_003b3030(void *storage, void *owner, u32 unk);
+s32 FUN_003b21e4(u8 *session, u8 *callbackTable);
+void FUN_003b3160(u8 *session);
 
-int FUN_003b3160(unsigned int);
-
-typedef int romwright_code(...);
-extern unsigned char DAT_00420740; /* 0x420740 */
-extern romwright_code *DAT_0044e990; /* 0x44e990 */
-extern romwright_code *DAT_0044e994; /* 0x44e994 */
-
-extern int FUN_003b21e4(int, int);
-extern int FUN_003b3030(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003b3160. */
-
-
-unsigned int FUN_003f66f0(romwright_code *param_1,unsigned int param_2,unsigned int param_3)
-
+/* Maps the session setup's error code to the public result code. */
+static u32 sessionTranslateError(s32 code)
 {
-/* irregular: 1 native warning(s); review required */
-  romwright_code *pcVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v0;
-  int temp_v1;
-  
-  pcVar1 = param_1;
-  if (DAT_0044e990 != (romwright_code *)0x0) {
-    pcVar1 = DAT_0044e994;
-  }
-  if (DAT_0044e990 == (romwright_code *)0x0 || pcVar1 == (romwright_code *)0x0) {
-    return 0x12;
-  }
-  puVar2 = (unsigned int *)(*DAT_0044e990)(8);
-  if (puVar2 == (unsigned int *)0x0) {
+    switch (code) {
+    case 0x00: return 0x00;
+    case 0x01: return 0x03;
+    case 0x02: return 0x10;
+    case 0x03: return 0x11;
+    case 0x40: return 0x01;
+    case 0x42: return 0x05;
+    case 0x43: return 0x06;
+    case 0x44: return 0x09;
+    case 0x45: return 0x06;
+    case 0x46: return 0x0c;
+    case 0x47: return 0x0e;
+    case 0x48: return 0x0f;
+    case 0x49: return 0x06;
+    default: return 0x04;
+    }
+}
+
+/* Creates a session through the registered allocator hooks and stores its handle in *handle; returns 0 or a result code. */
+u32 FUN_003f66f0(SessionHandle **handle, u32 callback, u32 userData)
+{
+    if (DAT_0044e990.alloc == NULL || DAT_0044e990.free == NULL) {
+        return 0x12;
+    }
+    SessionHandle *created = (SessionHandle *)DAT_0044e990.alloc(8);
+    if (created == NULL) {
+        return 9;
+    }
+    const void **owner = (const void **)DAT_0044e990.alloc(4);
+    if (owner != NULL) {
+        *owner = DAT_0042091c + 8;
+    }
+    created->owner = owner;
+    if (owner != NULL) {
+        void *storage = DAT_0044e990.alloc(0x1498);
+        u8 *session = NULL;
+        if (storage != NULL) {
+            session = FUN_003b3030(storage, created->owner, 0);
+            *(const u8 **)(session + 0x148c) = DAT_00420740;
+        }
+        created->session = session;
+        if (session != NULL) {
+            *(u32 *)(session + 0x1494) = callback;
+            *(u32 *)(created->session + 0x1490) = userData;
+            s32 error = FUN_003b21e4(created->session, created->session + 0x148c);
+            if (error == 0) {
+                *handle = created;
+                return 0;
+            }
+            FUN_003b3160(created->session);
+            DAT_0044e990.free(created->session);
+            DAT_0044e990.free(created->owner);
+            DAT_0044e990.free(created);
+            return sessionTranslateError(error);
+        }
+        DAT_0044e990.free(created->owner);
+    }
+    DAT_0044e990.free(created);
     return 9;
-  }
-  puVar3 = (unsigned int *)(*DAT_0044e990)(4);
-  if (puVar3 != (unsigned int *)0x0) {
-    *puVar3 = (unsigned int)"녨4녈4녤4";
-  }
-  *puVar2 = (unsigned int)puVar3;
-  if (puVar3 != (unsigned int *)0x0) {
-    temp_v0 = (*DAT_0044e990)(0x1498);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = FUN_003b3030(temp_v0,*puVar2,0);
-      *(unsigned char **)(temp_v1 + 0x148c) = &DAT_00420740;
-    }
-    puVar2[1] = temp_v1;
-    if (temp_v1 != 0) {
-      *(unsigned int *)(temp_v1 + 0x1494) = param_2;
-      *(unsigned int *)(puVar2[1] + 0x1490) = param_3;
-      temp_v1 = FUN_003b21e4(puVar2[1],puVar2[1] + 0x148c);
-      if (temp_v1 == 0) {
-        *(unsigned int **)param_1 = puVar2;
-        return 0;
-      }
-      FUN_003b3160(puVar2[1]);
-      (*DAT_0044e994)(puVar2[1]);
-      (*DAT_0044e994)(*puVar2);
-      (*DAT_0044e994)(puVar2);
-      if (temp_v1 == 0x46) {
-        return 0xc;
-      }
-      if (temp_v1 < 0x47) {
-        if (temp_v1 != 0x41) {
-          if (temp_v1 < 0x42) {
-            if (temp_v1 == 2) {
-              return 0x10;
-            }
-            if (temp_v1 >= 3) {
-              if (temp_v1 == 3) {
-                return 0x11;
-              }
-              if (temp_v1 == 0x40) {
-                return 1;
-              }
-              return 4;
-            }
-            if (temp_v1 == 0) {
-              return 0;
-            }
-            if (temp_v1 == 1) {
-              return 3;
-            }
-            return 4;
-          }
-          if (temp_v1 == 0x42) {
-            return 5;
-          }
-          if (temp_v1 != 0x43) {
-            if (temp_v1 == 0x44) {
-              return 9;
-            }
-            if (temp_v1 != 0x45) {
-              return 4;
-            }
-          }
-          return 6;
-        }
-      }
-      else if (temp_v1 < 0x4c) {
-        switch(temp_v1) {
-        case 0x47:
-          return 0xe;
-        case 0x48:
-          return 0xf;
-        case 0x49:
-          return 6;
-        }
-      }
-      return 4;
-    }
-    (*DAT_0044e994)(*puVar2);
-  }
-  (*DAT_0044e994)(puVar2);
-  return 9;
 }
 
 } /* extern "C" */

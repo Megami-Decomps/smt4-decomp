@@ -1,156 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229324` (_code @ 0x229328, 0x37c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations and keeps the scene pointer in other registers than retail. */
+#include "gfx/TitleSceneStack.h"
+
+/* The render context: two render-state stacks. */
+struct RenderCtx {
+    /* 0x0000 */ u8 unk0000[0x1258];
+    /* 0x1258 */ StateStack firstStack;
+    /* 0x1278 */ u8 unk1278[0x40];
+    /* 0x12B8 */ StateStack secondStack;
+};
+
+/* The overlay's scene (only the fields the draw reads). */
+struct OverlayScene {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ f32 position[2];
+    /* 0x0028 */ u8 unk0028[0x8B6];
+    /* 0x08DE */ u8 hidden;
+    /* 0x08DF */ u8 unk08DF[0x3A85];
+    /* 0x4364 */ s32 state;
+    /* 0x4368 */ u8 unk4368[4];
+    /* 0x436C */ s32 step;
+    /* 0x4370 */ u8 unk4370[0xC];
+    /* 0x437C */ s32 timer;
+};
+
+/* The engine cleanup owner global: the overlay's scene and its banner alpha. */
+struct OverlayOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ OverlayScene *scene;
+    /* 0x08 */ u8 unk08[0x18];
+    /* 0x20 */ f32 alpha;
+};
 
 extern "C" {
+extern RenderCtx *g_renderCtx;
+extern OverlayOwner g_engineCleanupOwner;
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_004b0164(int, unsigned int, unsigned int);
+s32 scriptProcessCreateWhenReady(OverlayScene *scene);
+void FUN_00157558(RenderCtx *ctx);
+u32 FUN_001692ac(s32 a, s32 b);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
+void FUN_001835b4(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void efctSetSpeed(f32 speed);
+u32 vec2GetXInt(void *vec);
+u32 vec2GetYInt(void *vec);
+void FUN_004b0164(OverlayScene *scene, u32 x, u32 y);
+void skinObjectUpdateMatrices(RenderCtx *ctx);
+void renderCtxResetColorScale(RenderCtx *ctx);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_004b0164. */
-extern int scriptProcessCreateWhenReady(int);
-
-
-unsigned int FUN_00229324(int param_1)
-
+/* Draws the overlay when its scene is ready: the sliding banner while the scene is in the intro
+ * step, then the scene's own parts. Always returns 0. */
+u32 FUN_00229324(void)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v6 = *(int *)(param_1 + 4);
-  if ((temp_v6 != 0) && (temp_v0 = scriptProcessCreateWhenReady(temp_v6), temp_v0 != 0)) {
+    OverlayScene *scene = g_engineCleanupOwner.scene;
+    if (scene == NULL || scriptProcessCreateWhenReady(scene) == 0)
+        return 0;
     FUN_00157558(g_renderCtx);
-    temp_v0 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
-    piVar7 = (int *)(temp_v0 + 0x1258);
-    temp_v4 = *piVar7;
-    temp_v5 = piVar7[temp_v4 + 2];
-    *piVar7 = temp_v4 + 1;
-    piVar7[temp_v4 + 3] = temp_v1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v5 != temp_v1) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
+    RenderCtx *ctx = g_renderCtx;
+    u32 firstState = FUN_001692ac(1, 0);
+    stateStackPush(&ctx->firstStack, firstState);
+    ctx = g_renderCtx;
+    if (scene->state == 13 && scene->step == 5 && scene->hidden == 0) {
+        if (scene->timer < 16) {
+            s32 offset = scene->timer * -30;
+            if (offset < -240)
+                offset = -240;
+            stateStackReplaceTop(&ctx->secondStack, packNibblesAndByte(6, 1, 0));
+            if (offset > -240)
+                FUN_001835b4(2, 0x1D, 0x113, 0, offset, 0xF1);
+            FUN_001835b4(2, 0x1D, 0x114, 0, offset + 240, 0xF1);
+            stateStackReplaceTop(&g_renderCtx->secondStack, packNibblesAndByte(6, 7, 0));
+        }
+        if (scene->timer >= 9) {
+            efctSetSpeed(g_engineCleanupOwner.alpha);
+            FUN_001835b4(2, 0x1D, 0x115, 0, 0, 0xF2);
+            efctSetSpeed(1.0f);
+        }
     }
-    temp_v1 = g_renderCtx;
-    temp_v0 = *(int *)(temp_v6 + 0x4364);
-    temp_v7 = temp_v0 == 0xd;
-    if (temp_v7) {
-      temp_v0 = *(int *)(temp_v6 + 0x436c);
+    stateStackPop(&g_renderCtx->firstStack);
+    ctx = g_renderCtx;
+    if (scene->state < 10) {
+        if (scene->state != 0) {
+            u32 secondState = FUN_001692ac(1, 0);
+            stateStackPush(&ctx->firstStack, secondState);
+            FUN_004b0164(scene, vec2GetXInt(scene->position), vec2GetYInt(scene->position));
+            stateStackPop(&g_renderCtx->firstStack);
+        }
+        stateStackReplaceTop(&g_renderCtx->secondStack, packNibblesAndByte(6, 7, 0));
+        skinObjectUpdateMatrices(g_renderCtx);
+        renderCtxResetColorScale(g_renderCtx);
     }
-    if ((temp_v7 && temp_v0 == 5) && (*(char *)(temp_v6 + 0x8de) == '\0')) {
-      if (*(int *)(temp_v6 + 0x437c) < 0x10) {
-        temp_v0 = *(int *)(temp_v6 + 0x437c) * -0x1e;
-        if (temp_v0 < -0xf0) {
-          temp_v0 = -0xf0;
-        }
-        temp_v4 = packNibblesAndByte(6,1,0);
-        piVar7 = (int *)(temp_v1 + 0x12b8);
-        temp_v5 = piVar7[*piVar7 + 2];
-        piVar7[*piVar7 + 2] = temp_v4;
-        if (*(char *)(temp_v1 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-          (**(romwright_code **)(temp_v1 + 0x12d4))();
-          *(unsigned char *)(temp_v1 + 0x12d0) = 0;
-        }
-        if (-0xf0 < temp_v0) {
-          FUN_001835b4(2,0x1d,0x113,0,temp_v0,0xf1);
-        }
-        FUN_001835b4(2,0x1d,0x114,0,temp_v0 + 0xf0,0xf1);
-        temp_v0 = g_renderCtx;
-        temp_v1 = packNibblesAndByte(6,7,0);
-        piVar7 = (int *)(temp_v0 + 0x12b8);
-        temp_v4 = piVar7[*piVar7 + 2];
-        piVar7[*piVar7 + 2] = temp_v1;
-        if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v4 != temp_v1) {
-          (**(romwright_code **)(temp_v0 + 0x12d4))();
-          *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-        }
-      }
-      if (*(int *)(temp_v6 + 0x437c) >= 9) {
-        efctSetSpeed();
-        FUN_001835b4(2,0x1d,0x115,0,0,0xf2);
-        efctSetSpeed();
-      }
-    }
-    temp_v0 = g_renderCtx;
-    piVar7 = (int *)(g_renderCtx + 0x1258);
-    temp_v1 = *piVar7;
-    temp_v4 = piVar7[temp_v1 + 2];
-    *piVar7 = temp_v1 - 1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v4 != piVar7[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1274))(piVar7[temp_v1 + 1]);
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-    temp_v0 = g_renderCtx;
-    if (*(int *)(temp_v6 + 0x4364) < 10) {
-      if (*(int *)(temp_v6 + 0x4364) != 0) {
-        temp_v1 = FUN_001692ac(1,0);
-        piVar7 = (int *)(temp_v0 + 0x1258);
-        temp_v4 = *piVar7;
-        temp_v5 = piVar7[temp_v4 + 2];
-        *piVar7 = temp_v4 + 1;
-        piVar7[temp_v4 + 3] = temp_v1;
-        if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v5 != temp_v1) {
-          (**(romwright_code **)(temp_v0 + 0x1274))();
-          *(unsigned char *)(temp_v0 + 0x1270) = 0;
-        }
-        temp_v2 = vec2GetXInt(temp_v6 + 0x20);
-        temp_v3 = vec2GetYInt(temp_v6 + 0x20);
-        FUN_004b0164(temp_v6,temp_v2,temp_v3);
-        temp_v6 = g_renderCtx;
-        piVar7 = (int *)(g_renderCtx + 0x1258);
-        temp_v0 = *piVar7;
-        temp_v1 = piVar7[temp_v0 + 2];
-        *piVar7 = temp_v0 - 1;
-        if (*(char *)(temp_v6 + 0x1270) != '\0' || temp_v1 != piVar7[temp_v0 + 1]) {
-          (**(romwright_code **)(temp_v6 + 0x1274))();
-          *(unsigned char *)(temp_v6 + 0x1270) = 0;
-        }
-      }
-      temp_v6 = g_renderCtx;
-      temp_v0 = packNibblesAndByte(6,7,0);
-      piVar7 = (int *)(temp_v6 + 0x12b8);
-      temp_v1 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v0;
-      if (*(char *)(temp_v6 + 0x12d0) != '\0' || temp_v1 != temp_v0) {
-        (**(romwright_code **)(temp_v6 + 0x12d4))();
-        *(unsigned char *)(temp_v6 + 0x12d0) = 0;
-      }
-      skinObjectUpdateMatrices(g_renderCtx);
-      renderCtxResetColorScale(g_renderCtx);
-      return 0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack address hoisting/push scheduling differ, and retail retains an unreferenced0x43dd50 pool word after the return; no dummy literal is added. -O2 candidate for scheduling only. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 16 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 
 struct QuestDrawWorkIV {
@@ -17,7 +17,7 @@ u32 FUN_001ddc7c(QuestDrawWorkIV **context)
     QuestDrawWorkIV *work = *context;
     if (!work->hidden) {
         RenderCtx *render = g_titleScene;
-        renderStackPush(&render->stackA, FUN_002c5d80(1, 0));
+        renderCtxPushA(render, FUN_002c5d80(1, 0));
         switch (work->mode) {
         case 1:
         case 2:

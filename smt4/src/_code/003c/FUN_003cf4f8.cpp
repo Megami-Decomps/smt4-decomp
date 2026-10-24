@@ -1,173 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cf4f8` (_code @ 0x3cf4f8, 0x300 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the enemy target-candidate builder; the local action-info block (29 bytes in retail) and the duplicated candidate array are laid out differently by armcc, and retail's 0x85-entry clear loop pairs two stores per iteration. */
+#include "common.h"
+
+/* The action a battle unit is about to use (as FUN_00247478 fills it). */
+struct BattleActionInfo {
+    /* 0x00 */ s16 kind;
+    /* 0x02 */ u8 unk02[0x14];
+    /* 0x16 */ s16 skill;          /* skill id, 0 when none */
+    /* 0x18 */ u8 unk18[7];
+    /* 0x1F */ s8 powerMin;
+    /* 0x20 */ s8 powerMax;
+    /* 0x21 */ u8 unk21[3];
+};
+
+/* One candidate: a target id and a weight. */
+struct TargetCandidate {
+    s16 id;
+    s16 weight;
+};
+
+/* The enemy's per-turn work (only the fields the builder reads). */
+struct EnemyTurnWork {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u32 unit;
+    /* 0x024 */ u8 unk024[0x14];
+    /* 0x038 */ s8 allowed[0x85];    /* targets this enemy may pick */
+    /* 0x0BD */ u8 unk0BD[0x4B3];
+    /* 0x570 */ s32 disabled;
+};
+
+struct BattleUnitView {
+    /* 0x000 */ u32 flags;           /* 0x40: cannot be targeted, 0x100: guarding */
+    /* 0x004 */ u8 unk004[0x284];
+};
+
+struct BattleSideInfo {
+    /* 0x000 */ u8 unk000[0x80];
+    /* 0x080 */ s8 firstBonus;
+    /* 0x081 */ s8 secondBonus;
+    /* 0x082 */ u8 unk082[0x1E16];
+    /* 0x1E98 */ u8 *slotRecords;    /* 0x114-byte records, target slot at +0x60 */
+    /* 0x1E9C */ u8 unk1E9C[0x124];
+    /* 0x1FC0 */ BattleUnitView *units;
+    /* 0x1FC4 */ u8 unk1FC4[0x24DC];
+    /* 0x44A0 */ u32 stateFlags;
+};
+
+struct EnemyAiContext {
+    /* 0x00 */ BattleSideInfo *battle;
+};
+
+struct SkillRecord40 {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+    /* 0x24 */ u8 unk24[0xE];
+    /* 0x32 */ u8 splash;
+    /* 0x33 */ u8 hitsAll;
+    /* 0x34 */ u8 hitsRow;
+    /* 0x35 */ u8 flags;
+};
 
 extern "C" {
+BattleSideInfo *btlGetMainState(void);
+void FUN_00247478(BattleActionInfo *info, BattleSideInfo *battle, u32 unit);
+SkillRecord40 *dataTable40FindById(s16 id);
+s32 FUN_00229914(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
+s32 randRange(u32 limit);
 
-int FUN_00247478(short [11], unsigned int, unsigned int);
-int dataTable40FindById(void);
-
-/* stack frame of param_3: 7 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned char sp248; /* 0x248: local_248 */
-    unsigned char sp249; /* 0x249: local_249 */
-    unsigned short sp252; /* 0x252: local_252 */
-    unsigned short sp268; /* 0x268: local_268 */
-} param_3_stack;
-
-extern int FUN_00229914(int *, int, int);
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00247478. */
-extern unsigned int btlGetMainState(void);
-/* Supplied declaration required: dataTable40FindById. */
-
-
-void FUN_003cf4f8(int *param_1,int param_2,short *param_3)
-
+/* Fills `out` (0x85 id/weight pairs, ids -1 when unused) with the targets the enemy may pick this
+ * turn: one random allowed target for a single-target heal-like action, or every allowed target
+ * weighted by the power roll, and raises the enemy's stat bonuses when guarding targets are hit. */
+void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *out)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  short *psVar4;
-  short *psVar5;
-  char *pcVar6;
-  unsigned int *puVar7;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  short temp_v9 [11];
-  short temp_v10;
-  char temp_v11;
-  char temp_v12;
-  short asStack_244 [266];
-  int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  
-  temp_v2 = btlGetMainState();
-  FUN_00247478(temp_v9,temp_v2,*(unsigned int *)(param_2 + 0x20));
-  psVar5 = asStack_244;
-  temp_v4 = 0x85;
-  psVar4 = param_3;
-  do {
-    *psVar4 = -1;
-    psVar4[1] = 0;
-    *psVar5 = -1;
-    psVar5[1] = 0;
-    temp_v4 = temp_v4 - 1;
-    psVar4 = psVar4 + 2;
-    psVar5 = psVar5 + 2;
-  } while (temp_v4 != 0);
-  if (*(int *)(param_2 + 0x570) != 0) {
-    return;
-  }
-  temp_v4 = (int)temp_v10;
-  temp_v13 = 0;
-  temp_v14 = 0;
-  temp_v15 = 0;
-  if ((temp_v4 != 0) && (dataTable40FindById(), temp_v4 != 0)) {
-    if ((*(char *)(temp_v4 + 0x23) != '\x04') && (*(char *)(temp_v4 + 0x32) == '\0')) {
-      temp_v0 = *(char *)(temp_v4 + 0x33);
-      temp_v8 = temp_v0 == '\0';
-      if (temp_v8) {
-        temp_v0 = *(char *)(temp_v4 + 0x34);
-      }
-      if ((!(temp_v8 && temp_v0 == '\0')) || ((*(unsigned char *)(temp_v4 + 0x35) & 2) != 0)) {
-        temp_v15 = 1;
-      }
+    BattleActionInfo info;
+    TargetCandidate scratch[0x85];
+    BattleSideInfo *battle = btlGetMainState();
+    FUN_00247478(&info, battle, work->unit);
+    for (s32 i = 0; i < 0x85; i++) {
+        out[i].id = -1;
+        out[i].weight = 0;
+        scratch[i].id = -1;
+        scratch[i].weight = 0;
     }
-    else {
-      temp_v15 = 1;
-    }
-  }
-  temp_v6 = (int)temp_v11;
-  temp_v4 = (int)temp_v12;
-  if (temp_v9[0] == 6) {
-    temp_v13 = 1;
-  }
-  else if (temp_v9[0] == 1) {
-    temp_v14 = 1;
-  }
-  temp_v5 = 0;
-  temp_v7 = temp_v4;
-  if (((*(unsigned int *)(*param_1 + 0x44a0) & 0x40000) == 0) && (temp_v7 = temp_v6, temp_v6 < temp_v4)) {
-    temp_v4 = randRange((temp_v4 - temp_v6) & 0xffff);
-    temp_v7 = temp_v6 + temp_v4;
-  }
-  do {
-    if ((*(char *)(param_2 + temp_v5 + 0x38) != '\0') &&
-       (((*(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v5 * 0x288) & 0x40) != 0 ||
-        (temp_v4 = FUN_00229914(param_1,param_2,temp_v5), temp_v4 != 0)))) {
-      *(unsigned char *)(param_2 + temp_v5 + 0x38) = 0;
-    }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x6d);
-  temp_v0 = (char)temp_v7;
-  if (temp_v13 != 0) {
-    temp_v1 = 0;
-    temp_v6 = 0x85;
-    pcVar6 = (char *)(param_2 + 0x38);
-    temp_v4 = 0;
-    do {
-      temp_v5 = temp_v4;
-      if (*pcVar6 != '\0') {
-        temp_v5 = temp_v4 + 1;
-        asStack_244[temp_v4 * 2] = temp_v1;
-        asStack_244[temp_v4 * 2 + 1] = 0;
-      }
-      temp_v6 = temp_v6 - 1;
-      temp_v1 = temp_v1 + 1;
-      pcVar6 = pcVar6 + 1;
-      temp_v4 = temp_v5;
-    } while (temp_v6 != 0);
-    if (temp_v5 != 0) {
-      temp_v4 = randRange((temp_v5 - 1U) & 0xffff);
-      temp_v1 = asStack_244[temp_v4 * 2];
-      asStack_244[temp_v4 * 2 + 1] = asStack_244[temp_v4 * 2 + 1] + 1;
-      param_3[1] = 1;
-      *param_3 = temp_v1;
-      if (*(char *)(*param_1 + 0x80) < '\0') {
-        *(char *)(*param_1 + 0x80) = temp_v0;
-      }
-      if (*(char *)(*param_1 + 0x81) < '\0') {
-        *(char *)(*param_1 + 0x81) = temp_v0;
-      }
-    }
-    return;
-  }
-  temp_v6 = 0;
-  temp_v4 = 0;
-  do {
-    if (*(char *)(param_2 + temp_v4 + 0x38) != '\0') {
-      temp_v3 = 0;
-      temp_v5 = (int)*(short *)(*(int *)(*param_1 + 0x1e98) + temp_v4 * 0x114 + 0x60);
-      if (((-1 < temp_v5) &&
-          (puVar7 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v5 * 0x288), puVar7 != (unsigned int *)0x0))
-         && ((*puVar7 & 0x100) != 0)) {
-        temp_v3 = 1;
-      }
-      param_3[temp_v6 * 2] = (short)temp_v4;
-      (param_3 + temp_v6 * 2)[1] = (short)temp_v7;
-      if ((temp_v3 & temp_v14 & ~temp_v15) != 0) {
-        if (*(char *)(*param_1 + 0x80) < '\0') {
-          *(char *)(*param_1 + 0x80) = temp_v0 * '\x03';
+    if (work->disabled != 0)
+        return;
+    bool broadSkill = false;
+    if (info.skill != 0) {
+        SkillRecord40 *skill = dataTable40FindById(info.skill);
+        if (skill != NULL) {
+            if (skill->kind != 4 && skill->splash == 0) {
+                if (skill->hitsAll != 0 || skill->hitsRow != 0 || (skill->flags & 2))
+                    broadSkill = true;
+            } else {
+                broadSkill = true;
+            }
         }
-        if (*(char *)(*param_1 + 0x81) < '\0') {
-          *(char *)(*param_1 + 0x81) = temp_v0 * '\x03';
-        }
-      }
-      temp_v6 = temp_v6 + 1;
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x85);
-  return;
+    bool pickOne = false;
+    bool favourGuarding = false;
+    if (info.kind == 6)
+        pickOne = true;
+    else if (info.kind == 1)
+        favourGuarding = true;
+    s32 power = info.powerMax;
+    if (!(context->battle->stateFlags & 0x40000) && info.powerMin < info.powerMax)
+        power = info.powerMin + randRange((u16)(info.powerMax - info.powerMin));
+    else if (!(context->battle->stateFlags & 0x40000))
+        power = info.powerMin;
+    for (s32 target = 0; target < 0x6D; target++) {
+        if (work->allowed[target] &&
+            ((context->battle->units[target].flags & 0x40) || FUN_00229914(context, work, target)))
+            work->allowed[target] = 0;
+    }
+    if (pickOne) {
+        s32 count = 0;
+        for (s32 target = 0; target < 0x85; target++) {
+            if (work->allowed[target]) {
+                scratch[count].id = target;
+                scratch[count].weight = 0;
+                count++;
+            }
+        }
+        if (count != 0) {
+            s32 pick = randRange((u16)(count - 1));
+            out[0].id = scratch[pick].id;
+            out[0].weight = 1;
+            if (context->battle->firstBonus < 0)
+                context->battle->firstBonus = (s8)power;
+            if (context->battle->secondBonus < 0)
+                context->battle->secondBonus = (s8)power;
+        }
+        return;
+    }
+    s32 count = 0;
+    for (s32 target = 0; target < 0x85; target++) {
+        if (!work->allowed[target])
+            continue;
+        bool guarding = false;
+        s32 slot = *(s16 *)(context->battle->slotRecords + target * 0x114 + 0x60);
+        if (slot >= 0) {
+            BattleUnitView *unit = &context->battle->units[slot];
+            if (unit != NULL && (unit->flags & 0x100))
+                guarding = true;
+        }
+        out[count].id = (s16)target;
+        out[count].weight = (s16)power;
+        if (guarding && favourGuarding && !broadSkill) {
+            if (context->battle->firstBonus < 0)
+                context->battle->firstBonus = (s8)power * 3;
+            if (context->battle->secondBonus < 0)
+                context->battle->secondBonus = (s8)power * 3;
+        }
+        count++;
+    }
 }
 
 } /* extern "C" */

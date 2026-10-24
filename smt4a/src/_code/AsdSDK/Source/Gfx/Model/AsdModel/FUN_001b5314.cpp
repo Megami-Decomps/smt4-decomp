@@ -1,155 +1,164 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b5314` (_code @ 0x1b5314, 0x2d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment and the order of the combiner stage field updates differ from retail (178 vs 182 rows); the material setup is otherwise the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001931d8(...);
-int FUN_001c0544(int *[6]);
-int nw_gfx_res_ResTextureMapper_SetTexture(int *, unsigned int);
-int nw_gfx_res_ResTextureSampler_GetOwnerCommand(unsigned char [4], unsigned int **);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_2_stack;
-
-extern signed char DAT_005b3bf9; /* 0x5b3bf9 */
-extern unsigned int DAT_005b3c74; /* 0x5b3c74 */
-
-/* Supplied declaration required: FUN_001931d8. */
-/* Supplied declaration required: FUN_001c0544. */
-/* Supplied declaration required: nw_gfx_res_ResTextureMapper_SetTexture. */
-/* Supplied declaration required: nw_gfx_res_ResTextureSampler_GetOwnerCommand. */
-
-
-void FUN_001b5314(int param_1,int param_2)
-
+/* A self-relative pointer: the word at `field` holds the distance to the target, 0 for none. */
+static __inline u8 *relPtr(u8 *field)
 {
-/* irregular: 1 goto(s); irregular input(s): in_s0; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int in_s0;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int *temp_v8;
-  int temp_v9;
-  unsigned char temp_v10 [4];
-  int temp_v11;
-  int *temp_v12 [6];
-  
-  temp_v5 = *(int *)(param_1 + 8);
-  temp_v7 = 0x3f800000;
-  *(unsigned int *)(temp_v5 + 0x2a8) = 0;
-  *(unsigned int *)(temp_v5 + 0x2b0) = 0;
-  *(unsigned int *)(temp_v5 + 0x2c8) = 0;
-  *(unsigned int *)(temp_v5 + 0x2b4) = 0;
-  *(unsigned int *)(temp_v5 + 0x174) = 2;
-  *(unsigned int *)(temp_v5 + 0x170) = 4;
-  *(unsigned int *)(temp_v5 + 0x2ac) = 0;
-  if (*(int *)(temp_v5 + 0x274) != 0) {
-    temp_v9 = temp_v5 + 0x274 + *(int *)(temp_v5 + 0x274);
-  }
-  else {
-    temp_v9 = 0;
-  }
-  if (param_2 == 0) {
-    temp_v2 = *(int *)(temp_v9 + 8);
-    if (temp_v2 != 0) {
-      temp_v12[0] = (int *)(temp_v9 + 8 + temp_v2);
-    }
-    else {
-      temp_v12[0] = (int *)0x0;
-    }
-    if (*temp_v12[0] == 0x20000004) {
-      temp_v2 = temp_v12[0][7];
-      if (temp_v2 != 0) {
-        temp_v12[0] = (int *)((int)(temp_v12[0] + 7) + temp_v2);
-      }
-      else {
-        temp_v12[0] = (int *)0x0;
-      }
-    }
-    FUN_001c0544(temp_v12);
-    nw_gfx_res_ResTextureMapper_SetTexture(&temp_v9,DAT_005b3c74);
-    temp_v2 = *(int *)(temp_v9 + 0xc);
-    if (temp_v2 != 0) {
-      temp_v8 = (unsigned int *)(temp_v9 + 0xc + temp_v2);
-    }
-    else {
-      temp_v8 = (unsigned int *)0x0;
-    }
-    if ((temp_v8 != (unsigned int *)0x0) && ((*temp_v8 & 0x80000000) == 0)) {
-      temp_v8 = (unsigned int *)0x0;
-    }
-    nw_gfx_res_ResTextureSampler_GetOwnerCommand(temp_v10,&temp_v8);
-    *(unsigned int *)(temp_v11 + 0x14) = (*(unsigned int *)(temp_v11 + 0x14) & 0xffff8fff) | 0x1000;
-    nw_gfx_res_ResTextureSampler_GetOwnerCommand(temp_v10,&temp_v8);
-    *(unsigned int *)(temp_v11 + 0x14) = (*(unsigned int *)(temp_v11 + 0x14) & 0xfffff8ff) | 0x100;
-    temp_v6 = temp_v7;
-    if (DAT_005b3bf9 != '\0') {
-      temp_v6 = 0;
-    }
-    temp_v8[3] = temp_v6;
-    temp_v8[4] = temp_v6;
-    temp_v8[5] = temp_v6;
-    temp_v8[6] = temp_v7;
-    temp_v0 = FUN_001931d8(temp_v8 + 3);
-    nw_gfx_res_ResTextureSampler_GetOwnerCommand(temp_v10,&temp_v8);
-    temp_v2 = 0;
-    *(unsigned int *)(temp_v11 + 8) = temp_v0;
-    if (*(int *)(temp_v5 + 0x288) != 0) {
-      temp_v4 = *(int *)(temp_v5 + 0x288) + temp_v5 + 0x288;
-    }
-    else {
-      temp_v4 = 0;
-    }
-    temp_v3 = 5;
-    do {
-      temp_v1 = temp_v4 + temp_v3 * 0x1c;
-      if (((*(unsigned int *)(temp_v1 + 0x3c) & 0xf) != 0) || ((*(unsigned int *)(temp_v1 + 0x30) & 0xf) != 0xf)) {
-        temp_v2 = temp_v3;
-        if (temp_v3 >= 4) goto LAB_001b5378;
-        break;
-      }
-      temp_v3 = temp_v3 - 1;
-    } while (-1 < temp_v3);
-    temp_v6 = 1 << ((temp_v2 + 8U) & 0xff);
-    *(unsigned int *)(temp_v4 + 0xe4) = (*(unsigned int *)(temp_v4 + 0xe4) & ~temp_v6) | temp_v6;
-    temp_v3 = temp_v4 + (temp_v2 + 1) * 0x1c;
-    *(unsigned int *)(temp_v3 + 0x30) = (*(unsigned int *)(temp_v3 + 0x30) & 0xffffff00) | 0xe3;
-    *(unsigned int *)(temp_v3 + 0x38) = (*(unsigned int *)(temp_v3 + 0x38) & 0xffffff00) | 1;
-    *(unsigned int *)(temp_v3 + 0x2c) = 5;
-    *(unsigned int *)(temp_v3 + 0x3c) = (*(unsigned int *)(temp_v3 + 0x3c) & 0xfffffff0) | 1;
-    temp_v4 = temp_v4 + (temp_v2 + 2) * 0x1c;
-    *(unsigned int *)(temp_v4 + 0x30) = (*(unsigned int *)(temp_v4 + 0x30) & 0xffffff00) | 0xfd;
-    *(unsigned int *)(temp_v4 + 0x38) = (*(unsigned int *)(temp_v4 + 0x38) & 0xffffff00) | 0x10;
-    *(unsigned int *)(temp_v4 + 0x3c) = (*(unsigned int *)(temp_v4 + 0x3c) & 0xfffffff0) | 1;
-  }
-LAB_001b5378:
-  if (0 < (*(int *)(param_1 + 0x14) - (int)*(int **)(param_1 + 0x10)) >> 2) {
-    if (*(int *)(param_1 + 0x24) >= 1) {
-      temp_v5 = **(int **)(param_1 + 0x10);
-    }
-    else {
-      temp_v5 = 0;
-    }
-    *(unsigned int *)(temp_v5 + 0x2b4) = 0;
-  }
-  *(unsigned int *)(temp_v5 + 0xc4) = in_s0;
-  *(unsigned int *)(temp_v5 + 200) = in_s0;
-  *(unsigned int *)(temp_v5 + 0xcc) = in_s0;
-  *(unsigned int *)(temp_v5 + 0xd0) = temp_v7;
-  temp_v0 = FUN_001931d8(temp_v5 + 0xc4);
-  *(unsigned int *)(temp_v5 + 0xfc) = temp_v0;
-  return;
+    s32 offset = *(s32 *)field;
+
+    return offset != 0 ? field + offset : NULL;
 }
 
-} /* extern "C" */
+/* One texture-combiner stage (0x1C bytes) inside the material's stage table. */
+typedef struct CombinerStage {
+    /* 0x00 */ u32 source;
+    /* 0x04 */ u32 operandA;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 operandB;
+    /* 0x10 */ u32 mode;
+    /* 0x14 */ u8 unk14[8];
+} CombinerStage;
+
+/* The material of a model (only the fields used here). */
+typedef struct ModelMaterial {
+    /* 0x000 */ u8 unk000[0x24];
+    /* 0x024 */ u8 state[0x14C];        /* the colour block starts at state + 0xA0 */
+    /* 0x170 */ s32 blendKind;
+    /* 0x174 */ s32 blendFactor;
+    /* 0x178 */ u8 unk178[0x6C];
+    /* 0x1E4 */ u8 unk1e4[0x4];
+    /* 0x1E8 */ u8 unk1e8[0x8C];
+    /* 0x274 */ s32 textureOffset;
+    /* 0x278 */ u8 unk278[0x10];
+    /* 0x288 */ s32 combinerOffset;
+    /* 0x28C */ u8 unk28c[0x1C];
+    /* 0x2A8 */ u32 unk2a8;
+    /* 0x2AC */ u32 unk2ac;
+    /* 0x2B0 */ u32 unk2b0;
+    /* 0x2B4 */ u32 unk2b4;
+    /* 0x2B8 */ u8 unk2b8[0x10];
+    /* 0x2C8 */ u32 unk2c8;
+} ModelMaterial;
+
+typedef struct ModelLink {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ModelMaterial *material;
+    /* 0x0C */ u8 unk0c[4];
+    /* 0x10 */ ModelMaterial **begin;
+    /* 0x14 */ ModelMaterial **end;
+    /* 0x18 */ u8 unk18[0xC];
+    /* 0x24 */ s32 count;
+} ModelLink;
+
+typedef struct OwnerCommand {
+    u32 unk0;
+    u32 *words;
+} OwnerCommand;
+
+typedef struct GfxSettings {
+    u8 unk0[5];
+    s8 flat;
+} GfxSettings;
+
+extern u32 DAT_005b3c74;
+extern GfxSettings g_gfxSettings;
+
+u32 FUN_001931d8(f32 *color);
+void FUN_001c0544(u8 **block);
+void nw_gfx_res_ResTextureMapper_SetTexture(u8 **handle, u32 texture);
+OwnerCommand nw_gfx_res_ResTextureSampler_GetOwnerCommand(u32 **sampler);
+
+/* Prepares the model's material for the flat-colour pass: clears the blend state, binds the
+ * texture mapper and sampler when `useTexture` is zero (colouring it white, or black in the
+ * flat setting), claims the first free combiner stages for it, and then writes `intensity` as the
+ * material colour. */
+void FUN_001b5314(ModelLink *model, s32 useTexture, f32 intensity)
+{
+    ModelMaterial *material = model->material;
+
+    material->unk2a8 = 0;
+    material->unk2b0 = 0;
+    material->unk2c8 = 0;
+    material->unk2b4 = 0;
+    material->blendFactor = 2;
+    material->blendKind = 4;
+    material->unk2ac = 0;
+    u8 *textureBlock = relPtr((u8 *)&material->textureOffset);
+
+    if (useTexture == 0) {
+        u8 *resource = relPtr(textureBlock + 8);
+
+        if (*(u32 *)resource == 0x20000004) {
+            resource = relPtr(resource + 0x1C);
+        }
+        FUN_001c0544(&resource);
+        nw_gfx_res_ResTextureMapper_SetTexture(&textureBlock, DAT_005b3c74);
+        u32 *sampler = (u32 *)relPtr(textureBlock + 12);
+
+        if (sampler != NULL && (*sampler & 0x80000000) == 0) {
+            sampler = NULL;
+        }
+        OwnerCommand command = nw_gfx_res_ResTextureSampler_GetOwnerCommand(&sampler);
+
+        command.words[5] = (command.words[5] & ~0x7000) | 0x1000;
+        command = nw_gfx_res_ResTextureSampler_GetOwnerCommand(&sampler);
+        command.words[5] = (command.words[5] & ~0x700) | 0x100;
+        f32 level = g_gfxSettings.flat != 0 ? 0.0f : 1.0f;
+        f32 *color = (f32 *)(sampler + 3);
+
+        color[0] = level;
+        color[1] = level;
+        color[2] = level;
+        color[3] = 1.0f;
+        u32 packed = FUN_001931d8(color);
+
+        command = nw_gfx_res_ResTextureSampler_GetOwnerCommand(&sampler);
+        command.words[2] = packed;
+        CombinerStage *stages = (CombinerStage *)(relPtr((u8 *)&material->combinerOffset) + 0x2C);
+        s32 stage;
+
+        for (stage = 5; stage >= 0; stage--) {
+            if ((stages[stage].mode & 0xF) != 0 || (stages[stage].operandA & 0xF) != 0xF) {
+                break;
+            }
+        }
+        if (stage < 4) {
+            u32 *used = (u32 *)((u8 *)relPtr((u8 *)&material->combinerOffset) + 0xE4);
+
+            if (stage < 0) {
+                stage = 0;
+            }
+            *used |= 1u << (stage + 8);
+            stages[stage + 1].operandA = (stages[stage + 1].operandA & ~0xFF) | 0xE3;
+            stages[stage + 1].operandB = (stages[stage + 1].operandB & ~0xFF) | 1;
+            stages[stage + 1].source = 5;
+            stages[stage + 1].mode = (stages[stage + 1].mode & ~0xF) | 1;
+            stages[stage + 2].operandA = (stages[stage + 2].operandA & ~0xFF) | 0xFD;
+            stages[stage + 2].operandB = (stages[stage + 2].operandB & ~0xFF) | 0x10;
+            stages[stage + 2].mode = (stages[stage + 2].mode & ~0xF) | 1;
+        }
+    }
+    ModelMaterial *target;
+
+    if (model->end - model->begin > 0) {
+        if (model->count > 0) {
+            target = *model->begin;
+        } else {
+            target = NULL;
+        }
+        target->unk2b4 = 0;
+    } else {
+        target = material;
+    }
+    f32 *color = (f32 *)((u8 *)target + 0xC4);
+
+    color[0] = intensity;
+    color[1] = intensity;
+    color[2] = intensity;
+    color[3] = 1.0f;
+    *(u32 *)((u8 *)target + 0xFC) = FUN_001931d8(color);
+}
+
+}

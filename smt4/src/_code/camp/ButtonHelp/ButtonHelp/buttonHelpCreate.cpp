@@ -1,127 +1,83 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `buttonHelpCreate` (_code @ 0x28d6d0, 0x258 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the unit loop keeps one &units[i] pointer where retail recomputes base+892 for each store and the call, and g_buttonHelp is reloaded instead of living in r9 */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
+extern ButtonHelpGlobals g_buttonHelp;
+extern const u8 DAT_00402550;
 
-int FUN_00262210(...);
-int FUN_00295eb0(...);
-int FUN_00297060(...);
-int positionStateSet(...);
-int FUN_002bd82c(...);
-int FUN_002bd954(...);
-int paramsInit(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int drawParameterBlockClear(...);
+void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
+void memClear(void *block, s32 size);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
+void drawParameterBlockClear(UiResourceParameters *resources);
+void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
+                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
+                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+void FUN_002bd954(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, UiResourceParameters *resources,
+                  u16 flags, f32 speed);
+void FUN_00262210(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, s32 mode);
+void FUN_00295eb0(ButtonHelpDisplayUnit *unit, s32 kind, s32 count);
+u32 asdTextCreate(s32 arg);
+void FUN_002bd82c(u32 text, u32 color);
+void positionStateSet(u32 text, s32 arg, u32 color, f32 value);
+u32 FUN_00297060(s32 bf, s32 mbm);
+void buttonHelpNotifyNoop(u32 handle);
+s32 FUN_001c0c38(u32 handle);
+s32 FUN_002109cc(u32 handle);
 
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern int FUN_001c0c38(...); /* 0x1c0c38 */
-extern unsigned char LAB_002109c8; /* 0x2109c8 */
-extern int FUN_002109cc(...); /* 0x2109cc */
-extern unsigned char LAB_0028d974; /* 0x28d974 */
-extern unsigned char LAB_0028d988; /* 0x28d988 */
-extern unsigned char DAT_00402538; /* 0x402538 */
-extern unsigned char DAT_00402544; /* 0x402544 */
-extern unsigned char DAT_00402550; /* 0x402550 */
-extern signed char g_buttonHelp; /* 0x43da28 */
-extern unsigned int *DAT_0043da2c; /* 0x43da2c */
-extern unsigned int DAT_0043da30; /* 0x43da30 */
-extern unsigned int DAT_0043da34; /* 0x43da34 */
-
-/* Supplied declaration required: FUN_00262210. */
-/* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: FUN_002bd82c. */
-extern unsigned int asdTextCreate(unsigned int);
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
+/* Allocates the button-help work on first use: calc process, draw task, the six selection
+ * animations and the two display units, then bumps the reference count. */
 void buttonHelpCreate(void)
-
 {
-/* irregular: 14 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (g_buttonHelp < '\x01') {
-    if (DAT_0043da2c == (unsigned int *)0x0) {
-      puVar3 = (unsigned int *)0x100;
-      asdMemAlloc(0x100,0x100,0,0x564,1);
-      DAT_0043da2c = puVar3;
+    if (g_buttonHelp.references <= 0) {
+        if (g_buttonHelp.work == NULL) {
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\ButtonHelp\\ButtonHelp.cpp", 832);
+            g_buttonHelp.work = (ButtonHelpWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(ButtonHelpWork), 1);
+        }
+        ButtonHelpWork *work = g_buttonHelp.work;
+        memClear(work, sizeof(ButtonHelpWork));
+        work->jobs.process = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0,
+                                                    FUN_001c0c38, buttonHelpNotifyNoop, 0);
+        work->jobs.drawTask = taskCreateDraw((const s8 *)"ButtonHelp DRAW", 0xE6, 0, 0, FUN_002109cc,
+                                             NULL, 0, work->jobs.process);
+
+        ButtonHelpWork *help = g_buttonHelp.work;
+        drawParameterBlockClear(&help->ui.parameters);
+        paramsInit(&help->ui.parameters, &DAT_00402550 - 0x4A, 0x30, &DAT_00402550 - 0x18, 0xC,
+                   &DAT_00402550 - 0xC, 0xC, NULL, 0, &DAT_00402550, 0xA8);
+        for (s32 i = 0; i < 6; i++) {
+            FUN_002bd954(&help->ui.selection[i], 0x12, 3, &help->ui.parameters, 0x10, 1.0f);
+            FUN_00262210(&help->ui.selection[i], 0x12, i + 0x11, 3);
+        }
+        FUN_002bd954(&help->units[0], 0x12, 0, &help->ui.parameters, 0x10, 1.0f);
+        FUN_002bd954(&help->units[1], 0x12, 1, &help->ui.parameters, 0x10, 1.0f);
+
+        ButtonHelpWork *units = g_buttonHelp.work;
+        units->mode = 0;
+        for (s32 i = 0; i < 2; i++) {
+            ButtonHelpDisplayUnit *unit = &units->units[i];
+            unit->value = 2;
+            FUN_00295eb0(unit, 0x12, 0);
+            unit->active = 1;
+            unit->unk0C = 0;
+            unit->unk10 = 0;
+            unit->unk14 = 0;
+        }
+        help->unk4C5 = 0;
+        help->unk04C6[0] = 1;
+        help->unk4C4 = 1;
+        help->unk04C6[1] = 0;
+
+        work->unk558 = asdTextCreate(0);
+        FUN_002bd82c(work->unk558, 0x323232FF);
+        positionStateSet(work->unk558, 0, 0x646464FF, 0.0f);
+        work->unk560 = FUN_00297060(g_buttonHelp.bf, g_buttonHelp.mbm);
     }
-    puVar3 = DAT_0043da2c;
-    memClear();
-    puVar4 = &LAB_0028d974;
-    asdProcessCreateSimple(&LAB_0028d974,1,0,0,FUN_001c0c38,&LAB_002109c8,0);
-    *puVar3 = (unsigned int)puVar4;
-    puVar5 = &LAB_0028d988;
-    taskCreateDraw(&LAB_0028d988,0xe6,0,0,FUN_002109cc,0,0,puVar4);
-    puVar3[2] = (unsigned int)puVar5;
-    puVar1 = DAT_0043da2c;
-    drawParameterBlockClear(DAT_0043da2c + 5);
-    paramsInit(puVar1 + 5,0x402506,0x30,&DAT_00402538,0xc,&DAT_00402544,0xc,0,0,&DAT_00402550,0xa8
-                );
-    temp_v1 = 0;
-    do {
-      FUN_002bd954(puVar1 + temp_v1 * 0x23 + 0xd,0x12,3,puVar1 + 5,0x10);
-      FUN_00262210(puVar1 + temp_v1 * 0x23 + 0xd,0x12,temp_v1 + 0x11,3);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 6);
-    FUN_002bd954(puVar1 + 0xdf,0x12,0,puVar1 + 5,0x10);
-    FUN_002bd954(puVar1 + 0x102,0x12,1,puVar1 + 5,0x10);
-    puVar2 = DAT_0043da2c;
-    *(unsigned char *)(DAT_0043da2c + 0x132) = 0;
-    temp_v1 = 0;
-    do {
-      *(unsigned short *)((int)puVar2 + temp_v1 * 0x8c + 0x3b6) = 2;
-      FUN_00295eb0(puVar2 + temp_v1 * 0x23 + 0xdf,0x12,0);
-      *(unsigned char *)(puVar2 + temp_v1 * 0x23 + 0xee) = 1;
-      puVar2[temp_v1 * 0x23 + 0xe2] = 0;
-      temp_v2 = temp_v1 + 1;
-      puVar2[temp_v1 * 0x23 + 0xe3] = 0;
-      puVar2[temp_v1 * 0x23 + 0xe4] = 0;
-      temp_v1 = temp_v2;
-    } while (temp_v2 < 2);
-    *(unsigned char *)((int)puVar1 + 0x4c5) = 0;
-    *(unsigned char *)((int)puVar1 + 0x4c6) = 1;
-    *(unsigned char *)(puVar1 + 0x131) = 1;
-    *(unsigned char *)((int)puVar1 + 0x4c7) = 0;
-    temp_v0 = asdTextCreate(0);
-    puVar3[0x156] = temp_v0;
-    FUN_002bd82c(temp_v0,0x323232ff);
-    positionStateSet(puVar3[0x156],0,0x646464ff);
-    temp_v0 = DAT_0043da34;
-    FUN_00297060(DAT_0043da34,DAT_0043da30);
-    puVar3[0x158] = temp_v0;
-  }
-  g_buttonHelp = g_buttonHelp + '\x01';
-  return;
+    g_buttonHelp.references++;
 }
 
 } /* extern "C" */

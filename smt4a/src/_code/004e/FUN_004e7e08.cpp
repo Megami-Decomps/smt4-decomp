@@ -1,147 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e7e08` (_code @ 0x4e7e08, 0x380 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of a battle action's reflect-skill step machine (draft: the returned value of FUN_004f6d34 and the two effect names restored from the code pool); armcc here shares the property comparison and the state-store tail differently. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_004aa3d4(...);
-int FUN_004c8284(...);
-int FUN_004f6d34(...);
-int FUN_004f7b84(...);
-int FUN_004fbeac(...);
-int FUN_004fdc0c(...);
-int FUN_004fdcd8(...);
-
-typedef struct fn_004e7e08_arg1 fn_004e7e08_arg1;
-struct fn_004e7e08_arg1 {
-    unsigned char pad_0x0[0x8];
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x14];
-    void *field_0x20; /* +0x20 */
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
+/* A script unit slot (0x1254 bytes each); byte +9 is its phase. */
+struct ScriptUnit {
+    /* 0x0000 */ u8 unk0000[9];
+    /* 0x0009 */ u8 phase;
+    /* 0x000A */ u8 unk000A[0x124A];
 };
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
+/* The acting battle entry (its actor id at +0xA4). */
+struct ActionOwner {
+    /* 0x00 */ u8 unk00[0xA4];
+    /* 0xA4 */ s32 unitIndex;
+};
 
-extern unsigned char LAB_004e8190; /* 0x4e8190 */
-extern unsigned char LAB_004e81a0; /* 0x4e81a0 */
-extern int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_00571168; /* 0x571168 */
-extern unsigned int DAT_0057116c; /* 0x57116c */
-extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern int g_btlAux; /* 0x573808 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
+struct ActionContext {
+    ActionOwner *owner;
+};
 
-extern int btlScriptUnitHasFlags(int);
-extern int chainCountIdUnflagged(unsigned int, fn_004e7e08_arg1 *);
-/* Supplied declaration required: FUN_004aa3d4. */
-extern int btlFindEntryValue(int, unsigned int);
-extern int btlGetPropertyMaximum(unsigned int);
-/* Supplied declaration required: FUN_004c8284. */
-/* Supplied declaration required: FUN_004f6d34. */
-/* Supplied declaration required: FUN_004f7b84. */
-/* Supplied declaration required: FUN_004fbeac. */
-/* Supplied declaration required: FUN_004fdc0c. */
-/* Supplied declaration required: FUN_004fdcd8. */
+/* The reflect action being stepped (only the fields read here). */
+struct ReflectAction {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 step;
+    /* 0x0C */ u8 unk0C[0x14];
+    /* 0x20 */ u8 *attacker;           /* +0: flag word, +0x3F8: effect id */
+    /* 0x24 */ u8 *target;             /* +0x6A: target entry id */
+    /* 0x28 */ u8 *skill;              /* +2: skill id */
+};
 
+extern "C" {
+extern ScriptUnit g_btlScriptUnit[];
+extern u64 DAT_00571168;
+extern s32 g_btlAux;
+extern u32 g_btlUiBlock;
+extern u32 g_btlActionReflect;
 
-unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
+s32 btlScriptUnitHasFlags(ActionOwner *owner);
+s32 btlFindEntryValue(s32 entry, u32 property);
+s32 btlGetPropertyMaximum(u32 property);
+void FUN_004c8284(s32 entry, s32 a, s32 b, s32 c);
+s32 FUN_004f6d34(s32 aux);
+s32 chainCountIdUnflagged(u32 chain, ReflectAction *action);
+void FUN_004fdcd8(s32 a, ReflectAction *action, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
+void FUN_004aa3d4(u32 block, s32 a, s32 b, u32 effect, u32 skill, s32 c);
+void FUN_004fdc0c(s32 a, ReflectAction *action, s32 b, u8 *attacker, s32 c);
+void FUN_004fbeac(s32 a, ReflectAction *action, s32 b, s32 c, s32 d);
+void FUN_004f7b84(s32 aux, const char *name);
 
+/* Whether every defence property of the entry is at its maximum. */
+static bool propertiesAtMaximum(s32 entry)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  
-  temp_v0 = btlScriptUnitHasFlags(*param_1);
-  if (temp_v0 != 0) {
-    temp_v0 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),7);
-    temp_v1 = btlGetPropertyMaximum(7);
-    temp_v2 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),8);
-    temp_v3 = btlGetPropertyMaximum(8);
-    temp_v4 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),9);
-    temp_v5 = btlGetPropertyMaximum(9);
-    temp_v6 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),10);
-    temp_v7 = btlGetPropertyMaximum(10);
-    if ((temp_v6 != temp_v7) || (temp_v4 != temp_v5 || (temp_v2 != temp_v3 || temp_v0 != temp_v1))) {
-      FUN_004c8284((int)*(short *)((int)param_2->field_0x24 + 0x6a),3,1,0);
+    s32 a = btlFindEntryValue(entry, 7);
+    s32 maxA = btlGetPropertyMaximum(7);
+    s32 b = btlFindEntryValue(entry, 8);
+    s32 maxB = btlGetPropertyMaximum(8);
+    s32 c = btlFindEntryValue(entry, 9);
+    s32 maxC = btlGetPropertyMaximum(9);
+    s32 d = btlFindEntryValue(entry, 10);
+    s32 maxD = btlGetPropertyMaximum(10);
+    return d == maxD && c == maxC && b == maxB && a == maxA;
+}
+
+/* Steps the reflect action: 0 starts the effect, 1 waits for it, 2 plays the reflect, 3 waits for the
+ * chain to finish. Returns 1 when the action is over. */
+u32 FUN_004e7e08(ActionContext *context, ReflectAction *action)
+{
+    if (btlScriptUnitHasFlags(context->owner) != 0) {
+        if (!propertiesAtMaximum(*(s16 *)(action->target + 0x6A)))
+            FUN_004c8284(*(s16 *)(action->target + 0x6A), 3, 1, 0);
+        g_btlScriptUnit[context->owner->unitIndex].phase = 0x1D;
+        return 1;
     }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-    return 1;
-  }
-  temp_v0 = param_2->field_0x8;
-  if (temp_v0 != 0) {
-    if (temp_v0 == 1) {
-      temp_v0 = g_btlAux;
-      FUN_004f6d34();
-      if (temp_v0 == 0) {
+    s32 next;
+    if (action->step == 0) {
+        if (*(u64 *)action->attacker & DAT_00571168)
+            FUN_004f7b84(g_btlAux, "ef_e_rastcand_c");
+        else
+            FUN_004f7b84(g_btlAux, "ef_d_rastcand");
+        next = 1;
+    } else if (action->step == 1) {
+        if (FUN_004f6d34(g_btlAux) == 0)
+            return 0;
+        action->step = 2;
         return 0;
-      }
-      param_2->field_0x8 = 2;
-      return 0;
-    }
-    if (temp_v0 != 2) {
-      if (temp_v0 != 3) {
+    } else if (action->step == 2) {
+        s32 entry = *(s16 *)(action->target + 0x6A);
+        if (*(u64 *)action->attacker & DAT_00571168)
+            FUN_004fdcd8(0, action, entry, entry, 7, 0, 0, 0);
+        else
+            FUN_004fdcd8(0, action, entry, entry, 7, 0, 2, 0);
+        FUN_004aa3d4(g_btlUiBlock, 2, 0x1CC, *(u32 *)(action->attacker + 0x3F8), *(u16 *)(action->skill + 2), 0);
+        if (propertiesAtMaximum(*(s16 *)(action->target + 0x6A))) {
+            FUN_004fdc0c(10, action, 0x40, action->attacker, 0);
+        } else {
+            FUN_004c8284(*(s16 *)(action->target + 0x6A), 3, 1, 0);
+            FUN_004fbeac(10, action, 0, 0x3F, 0);
+        }
+        next = 3;
+    } else if (action->step == 3) {
+        if (chainCountIdUnflagged(g_btlActionReflect, action) > 0)
+            return 0;
+        g_btlScriptUnit[context->owner->unitIndex].phase = 0x1D;
+        return 1;
+    } else {
         return 0;
-      }
-      temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
-      if (0 < temp_v0) {
-        return 0;
-      }
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-      return 1;
     }
-    if (!((DAT_0057116c & *(unsigned int *)((int)param_2->field_0x20 + 4)) == 0 &&
-         (*(unsigned int *)param_2->field_0x20 & DAT_00571168) == 0)) {
-      temp_v0 = (int)*(short *)((int)param_2->field_0x24 + 0x6a);
-      FUN_004fdcd8(0,param_2,temp_v0,temp_v0,7,0,0,0);
-    }
-    else {
-      temp_v0 = (int)*(short *)((int)param_2->field_0x24 + 0x6a);
-      FUN_004fdcd8(0,param_2,temp_v0,temp_v0,7,0,2,0);
-    }
-    FUN_004aa3d4(g_btlUiBlock,2,0x1cc,*(unsigned int *)((int)param_2->field_0x20 + 0x3f8),
-                 *(unsigned short *)((int)param_2->field_0x28 + 2),0);
-    temp_v0 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),7);
-    temp_v1 = btlGetPropertyMaximum(7);
-    temp_v2 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),8);
-    temp_v3 = btlGetPropertyMaximum(8);
-    temp_v4 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),9);
-    temp_v5 = btlGetPropertyMaximum(9);
-    temp_v6 = btlFindEntryValue((int)*(short *)((int)param_2->field_0x24 + 0x6a),10);
-    temp_v7 = btlGetPropertyMaximum(10);
-    if ((temp_v6 == temp_v7) && (temp_v4 == temp_v5 && (temp_v2 == temp_v3 && temp_v0 == temp_v1))) {
-      FUN_004fdc0c(10,param_2,0x40,param_2->field_0x20,0);
-    }
-    else {
-      FUN_004c8284((int)*(short *)((int)param_2->field_0x24 + 0x6a),3,1,0);
-      FUN_004fbeac(10,param_2,0,0x3f,0);
-    }
-    temp_v0 = 3;
-  }
-  else {
-    if (!((*(unsigned int *)param_2->field_0x20 & DAT_00571168) == 0 &&
-         (*(unsigned int *)((int)param_2->field_0x20 + 4) & DAT_0057116c) == 0)) {
-      FUN_004f7b84(g_btlAux,&LAB_004e8190);
-    }
-    else {
-      FUN_004f7b84(g_btlAux,&LAB_004e81a0);
-    }
-    temp_v0 = 1;
-  }
-  param_2->field_0x8 = temp_v0;
-  return 0;
+    action->step = next;
+    return 0;
 }
 
 } /* extern "C" */

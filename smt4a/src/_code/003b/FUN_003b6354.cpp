@@ -1,107 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6354` (_code @ 0x3b6354, 0x2d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the 0.2 factor in s17 and the shared draw tail laid out differently (190 vs 184 rows); the row drawing logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int efctSetSpeed(...);
-int FUN_001835b4(int, int, int, int, int, int);
-int VectorSignedToFloat(int, int);
+/* The list menu's work area (only the fields used here, by their offsets). */
+typedef struct ListMenuWork {
+    /* 0x0000 */ u8 unk0000[0x2E0];
+    /* 0x02E0 */ u8 slide[0x20];
+    /* 0x0300 */ f32 slideSpeed;
+    /* 0x0304 */ u8 unk0304[0xF8];
+    /* 0x03FC */ s32 scroll;
+    /* 0x0400 */ u8 unk0400[0x8760];
+    /* 0x8B60 */ u16 pageIds[8];
+    /* 0x8B70 */ u16 slotIds[0x100];
+    /* 0x8D70 */ u8 unk8d70[0xA4];
+    /* 0x8E14 */ u8 list[0x68];
+    /* 0x8E7C */ s32 selected;
+    /* 0x8E80 */ u8 unk8e80[8];
+    /* 0x8E88 */ s32 rowIds[1];
+} ListMenuWork;
 
-/* stack frame of param_9: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_9_stack;
+s32 FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+s32 objectApplyIfUnblocked(void *list);
+s32 resourceRunOperationIfUnblocked(void *list);
+s32 FUN_002a4894(void *list);
+s32 vec2GetXInt(const void *vector);
+s32 vec2GetYInt(const void *vector);
+void efctSetSpeed(f32 speed);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int vec2GetXInt(int);
-extern int vec2GetYInt(int);
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001835b4. */
-extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
-extern int objectApplyIfUnblocked(void);
-
-
-void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
-                 int *param_7,int *param_8,char *param_9)
-
+/* Draws one row of the list menu at the offset (`*x`, `*y`) + (`offsetX`, `offsetY`): a plain row
+ * far from the selection, otherwise the highlighted row, nudged and animated at `scale` by the
+ * scroll position and by the current layout mode `mode`. */
+void FUN_003b6354(f32 scale, ListMenuWork *work, s32 row, s32 mode, s32 selectedRow, s32 offsetX, s32 offsetY, s32 *x,
+                  s32 *y, s8 *shifted)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  
-  piVar1 = (int *)(param_1 + 0x8e7c);
-  if (param_2 < param_4 - *piVar1) {
-    FUN_001835b4(2,0x1a,0x172,*param_7 + param_5,*param_8 + param_6,0x65);
-    return;
-  }
-  temp_v0 = param_1 + 0x8e14;
-  temp_v1 = objectApplyIfUnblocked();
-  if ((*piVar1 < temp_v1) && (param_2 == param_4)) {
-    if (param_3 != 1) {
-      if ((param_3 == 2 || param_3 == 3) && (*param_9 != '\0')) {
-        temp_v0 = *(int *)(param_1 + 0x3fc) * -3 + *param_8;
-        *param_8 = temp_v0;
-        FUN_001835b4(2,0x1a,0x171,*param_7 + param_5,temp_v0 + param_6,0x65);
+    if (selectedRow - work->selected > row) {
+        FUN_001835b4(2, 0x1A, 0x172, *x + offsetX, *y + offsetY, 0x65);
         return;
-      }
     }
-    else if (*(int *)(param_1 + 0x3fc) < 1) {
-      temp_v0 = 1 - *(int *)(param_1 + 0x3fc);
-      VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-      efctSetSpeed(temp_v0);
-    }
-  }
-  else {
-    temp_v1 = param_1 + param_2 * 2;
-    if (param_3 != 1) {
-      if (param_3 != 2) {
-        if ((param_3 == 3) && (*(int *)(param_1 + 0x3fc) < 6)) {
-          if (*param_9 != '\0') {
-            *param_8 = *(int *)(param_1 + 0x3fc) * -3 + *param_8;
-          }
-          if (param_2 == *(int *)(param_1 + *piVar1 * 4 + 0x8e88)) {
-            temp_v0 = 5 - *(int *)(param_1 + 0x3fc);
-            VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-            efctSetSpeed(temp_v0);
-          }
+    if (work->selected < objectApplyIfUnblocked(work->list) && row == selectedRow) {
+        if (mode != 1) {
+            if ((mode == 2 || mode == 3) && *shifted != 0) {
+                *y = work->scroll * -3 + *y;
+                FUN_001835b4(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
+                return;
+            }
+        } else if (work->scroll < 1) {
+            efctSetSpeed((f32)(1 - work->scroll) * scale);
         }
-      }
-      else if (*(int *)(param_1 + 0x3fc) < 6) {
-        temp_v2 = resourceRunOperationIfUnblocked(temp_v0);
-        temp_v0 = FUN_002a4894(temp_v0);
-        if (*param_9 != '\0') {
-          *param_8 = *(int *)(param_1 + 0x3fc) * -3 + *param_8;
+    } else if (mode != 1) {
+        if (mode != 2) {
+            if (mode == 3 && work->scroll < 6) {
+                if (*shifted != 0) {
+                    *y = work->scroll * -3 + *y;
+                }
+                if (row == work->rowIds[work->selected]) {
+                    efctSetSpeed((f32)(5 - work->scroll) * 0.2f * scale);
+                }
+            }
+        } else if (work->scroll < 6) {
+            s32 base = resourceRunOperationIfUnblocked(work->list);
+            s32 index = FUN_002a4894(work->list);
+
+            if (*shifted != 0) {
+                *y = work->scroll * -3 + *y;
+            }
+            if (work->pageIds[row] == work->slotIds[index + base]) {
+                efctSetSpeed((f32)(5 - work->scroll) * 0.2f * scale);
+            }
         }
-        if (*(short *)(temp_v1 + 0x8b60) == *(short *)(param_1 + (temp_v0 + temp_v2) * 2 + 0x8b70)) {
-          temp_v0 = 5 - *(int *)(param_1 + 0x3fc);
-          VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          efctSetSpeed(temp_v0);
+    } else if (work->scroll > 0) {
+        s32 base = resourceRunOperationIfUnblocked(work->list);
+        s32 index = FUN_002a4894(work->list);
+
+        if (work->pageIds[row] == work->slotIds[index + base]) {
+            *x = vec2GetXInt(work->slide) + *x;
+            *y = vec2GetYInt(work->slide) + *y;
+            efctSetSpeed(work->slideSpeed * scale);
         }
-      }
     }
-    else if (0 < *(int *)(param_1 + 0x3fc)) {
-      temp_v2 = resourceRunOperationIfUnblocked(temp_v0);
-      temp_v0 = FUN_002a4894(temp_v0);
-      if (*(short *)(temp_v1 + 0x8b60) == *(short *)(param_1 + (temp_v0 + temp_v2) * 2 + 0x8b70)) {
-        temp_v0 = vec2GetXInt(param_1 + 0x2e0);
-        *param_7 = temp_v0 + *param_7;
-        temp_v0 = vec2GetYInt(param_1 + 0x2e0);
-        *param_8 = temp_v0 + *param_8;
-        efctSetSpeed();
-      }
-    }
-  }
-  temp_v0 = *param_8;
-  FUN_001835b4(2,0x1a,0x171,*param_7 + param_5,temp_v0 + param_6,0x65);
-  return;
+    FUN_001835b4(2, 0x1A, 0x171, *x + offsetX, *y + offsetY, 0x65);
 }
 
-} /* extern "C" */
+}

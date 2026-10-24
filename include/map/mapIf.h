@@ -33,6 +33,10 @@ typedef struct MapIfRecord {
             u8 unk14[8];
             u32 second; // 0x1c
         } initialization;
+        struct {
+            u8 unk08[0x18];
+            s32 destination; // 0x20 map or special code (-1, -2, -3) the entry leads to
+        } navigation;
     };
     /* 0x24 */ u32 handle;
     /* 0x28 */ union {

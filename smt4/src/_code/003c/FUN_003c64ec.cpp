@@ -20,7 +20,7 @@ int btlDebugCreateStageMenu(...);
 int FUN_003c49bc(...);
 int FUN_003c4ac4(...);
 int FUN_003c4f38(...);
-int FUN_003c5384(...);
+int talkCtrlDebugMenuBuild(...);
 int FUN_003c56d8(...);
 int FUN_003c59fc(...);
 int FUN_003c5eb0(...);
@@ -112,7 +112,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: FUN_003c49bc. */
 /* Supplied declaration required: FUN_003c4ac4. */
 /* Supplied declaration required: FUN_003c4f38. */
-/* Supplied declaration required: FUN_003c5384. */
+/* Supplied declaration required: talkCtrlDebugMenuBuild. */
 /* Supplied declaration required: FUN_003c56d8. */
 /* Supplied declaration required: FUN_003c59fc. */
 /* Supplied declaration required: FUN_003c5eb0. */
@@ -735,7 +735,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v4 = padIsButtonPressed(0);
     goto joined_r0x003c7184;
   case 0x15:
-    FUN_003c5384(param_1);
+    talkCtrlDebugMenuBuild(param_1);
     temp_v5 = 0x16;
     break;
   case 0x16:

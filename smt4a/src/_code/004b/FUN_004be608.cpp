@@ -1,208 +1,170 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004be608` (_code @ 0x4be608, 0x370 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the main-partner select menu's state machine (draft args completed from the surrounding calls: the entry index passed to the script start, the destroyed script and the lost return of FUN_001517b4); armcc here shares the state-store tail and the script reload differently. */
+#include "common.h"
+
+/* The partner select menu (only the fields the state machine reads). */
+struct PartnerMenuFull {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 fromTitle;
+    /* 0x005 */ u8 unk005[3];
+    /* 0x008 */ s32 state;
+    /* 0x00C */ s32 returnState;
+    /* 0x010 */ u8 unk010[0x20];
+    /* 0x030 */ u8 panel[0x8A];
+    /* 0x0BA */ u8 panelClosed;
+    /* 0x0BB */ u8 unk0BB[0x1A5];
+    /* 0x260 */ u8 list[0x94];
+    /* 0x2F4 */ u32 selection;
+    /* 0x2F8 */ u8 unk2F8[0x1C];
+    /* 0x314 */ u8 unk314[8];
+    /* 0x31C */ u32 scriptTable;
+    /* 0x320 */ u32 script;
+    /* 0x324 */ u8 unk324[4];
+    /* 0x328 */ s32 shownDevil;
+    /* 0x32C */ s32 cursor;
+    /* 0x330 */ u8 unk330[0x14];
+    /* 0x344 */ u32 mode;
+};
 
 extern "C" {
+extern s8 g_callbackOwnerSlots;
 
-int FUN_001517b4(int, int);
-int FUN_00163aa4(int);
-int eventQueueAddUniqueIfValid(int);
-int sysPlaySe(...);
-int scrScriptProcessDestroy(void);
-int dialogClose(int);
-int FUN_00228b04(int, int);
-int FUN_0022e774(void);
-int scrScriptProcessStartEntry(unsigned int);
-int FUN_002c8538(int);
-int FUN_003343f0(int);
-int messageBannerRestartOrClear(void);
-int FUN_0035d03c(int);
-int FUN_003e4e4c(int);
-int FUN_004be1c8(int);
-int FUN_004bea0c(int);
-int FUN_004bf174(int);
+s32 FUN_004be1c8(PartnerMenuFull *menu);
+s32 FUN_004bea0c(PartnerMenuFull *menu);
+s32 FUN_004bf174(PartnerMenuFull *menu);
+void FUN_003343f0(s32 owner);
+void FUN_00163aa4(void *panel);
+s32 scrRunOpcodesStub(u32 script);
+void messageBannerRestartOrClear(void);
+s32 messageMainGetValue(void);
+void sysPlaySe(s32 id);
+void *FUN_003e4d68(u32 devil);
+void FUN_003e4e4c(u32 devil);
+void FUN_0035d03c(s32 flag);
+void FUN_00228b04(void *list, s32 flag);
+u32 FUN_002a4894(void *list);
+s32 FUN_001517b4(s32 a, s32 b);
+void dialogClose(s32 flag);
+void eventQueueAddUniqueIfValid(s32 event);
+s32 tableGroupFindEntryIndex(u32 group, const char *name);
+void scrScriptProcessStartEntry(u32 script, s32 entry);
+void scrScriptProcessDestroy(u32 script);
+void FUN_002c8538(s32 flag);
+void FUN_0022e774(void);
 
-extern signed char g_callbackOwnerSlots; /* 0x57f25c */
-
-/* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: dialogClose. */
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int FUN_002a4894(int);
-extern int messageMainGetValue(void);
-/* Supplied declaration required: FUN_002c8538. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: messageBannerRestartOrClear. */
-extern int tableGroupFindEntryIndex(unsigned int, char *);
-/* Supplied declaration required: FUN_0035d03c. */
-extern int FUN_003e4d68(unsigned int);
-/* Supplied declaration required: FUN_003e4e4c. */
-/* Supplied declaration required: FUN_004be1c8. */
-/* Supplied declaration required: FUN_004bea0c. */
-/* Supplied declaration required: FUN_004bf174. */
-
-
-unsigned int FUN_004be608(int param_1)
-
+/* Steps the partner select menu: hands the list and confirm states to their handlers and runs the
+ * confirm/cancel scripts. Always returns 0. */
+u32 FUN_004be608(PartnerMenuFull *menu)
 {
-/* irregular: 17 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  switch(*(unsigned int *)(param_1 + 8)) {
-  case 1:
-    FUN_004be1c8(param_1);
-    break;
-  case 2:
-    FUN_003343f0(1);
-    FUN_00163aa4(param_1 + 0x30);
-    if (*(char *)(param_1 + 0xba) != '\0') {
-      FUN_003343f0(0);
-      temp_v0 = *(int *)(param_1 + 0xc);
-      *(int *)(param_1 + 8) = temp_v0;
-      if (temp_v0 == 3) {
-        temp_v1 = 1;
-      }
-      else {
-        if (temp_v0 != 4) {
-          return 0;
+    switch (menu->state) {
+    case 1:
+        FUN_004be1c8(menu);
+        break;
+    case 2:
+        FUN_003343f0(1);
+        FUN_00163aa4(menu->panel);
+        if (menu->panelClosed != 0) {
+            FUN_003343f0(0);
+            menu->state = menu->returnState;
+            if (menu->state == 3)
+                menu->mode = 1;
+            else if (menu->state == 4)
+                menu->mode = 2;
+            else
+                return 0;
         }
-        temp_v1 = 2;
-      }
-      *(unsigned int *)(param_1 + 0x344) = temp_v1;
+        break;
+    case 3:
+        FUN_004bea0c(menu);
+        break;
+    case 4:
+        FUN_004bf174(menu);
+        break;
+    case 5:
+        if (scrRunOpcodesStub(menu->script) != 2)
+            return 0;
+        if (menu->fromTitle == 1)
+            messageBannerRestartOrClear();
+        if (messageMainGetValue() != 0) {
+            if (menu->fromTitle != 1) {
+                menu->state = 3;
+                FUN_003343f0(0);
+                sysPlaySe(0xF0);
+                return 0;
+            }
+            menu->state = 9;
+            sysPlaySe(0x11F);
+            return 0;
+        }
+        menu->state = 6;
+        break;
+    case 6: {
+        u8 *devil = (u8 *)FUN_003e4d68(*(u32 *)((u8 *)menu + 0x2C4 + menu->cursor * 4) & 0xFFFF);
+        if (devil == NULL)
+            return 0;
+        FUN_003e4e4c(*(u16 *)(devil + 300));
+        menu->shownDevil = menu->cursor;
+        FUN_0035d03c(0);
+        if (menu->fromTitle == 1) {
+            menu->state = 11;
+        } else {
+            FUN_003343f0(0);
+            sysPlaySe(0x11B);
+            menu->state = 3;
+        }
+        break;
     }
-    break;
-  case 3:
-    FUN_004bea0c(param_1);
-    break;
-  case 4:
-    FUN_004bf174(param_1);
-    break;
-  case 5:
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 800));
-    if (temp_v0 != 2) {
-      return 0;
+    case 7:
+        if (scrRunOpcodesStub(menu->script) != 2)
+            return 0;
+        if (messageMainGetValue() != 0) {
+            menu->state = 3;
+            sysPlaySe(0xF0);
+            return 0;
+        }
+        menu->state = 8;
+        break;
+    case 8:
+        FUN_003e4e4c(0);
+        menu->shownDevil = -1;
+        FUN_0035d03c(0);
+        sysPlaySe(0xF0);
+        menu->state = 3;
+        break;
+    case 9:
+        FUN_00228b04(menu->list, 1);
+        menu->selection = FUN_002a4894(menu->list);
+        menu->cursor = menu->selection;
+        if (FUN_001517b4(0, 1) != 0) {
+            dialogClose(1);
+            eventQueueAddUniqueIfValid(0x100020E);
+            menu->state = 10;
+            menu->returnState = 6;
+            s32 entry = tableGroupFindEntryIndex(menu->scriptTable, "SetMainPartner2");
+            if (entry >= 0)
+                scrScriptProcessStartEntry(menu->script, entry);
+        }
+        break;
+    case 10:
+        if (scrRunOpcodesStub(menu->script) != 2)
+            return 0;
+        messageBannerRestartOrClear();
+        menu->state = menu->returnState;
+        break;
+    case 11:
+    case 13:
+        if (menu->fromTitle != 1) {
+            FUN_002c8538(0);
+            FUN_0022e774();
+        }
+        if (menu->script != 0) {
+            scrScriptProcessDestroy(menu->script);
+            menu->script = 0;
+        }
+        FUN_003343f0(g_callbackOwnerSlots);
+        menu->state = 0;
+        break;
     }
-    if (*(char *)(param_1 + 4) == '\x01') {
-      messageBannerRestartOrClear();
-    }
-    temp_v0 = messageMainGetValue();
-    if (temp_v0 != 0) {
-      if (*(char *)(param_1 + 4) != '\x01') {
-        *(unsigned int *)(param_1 + 8) = 3;
-        FUN_003343f0(0);
-        sysPlaySe(0xf0);
-        return 0;
-      }
-      *(unsigned int *)(param_1 + 8) = 9;
-      temp_v1 = 0x11f;
-      sysPlaySe(temp_v1);
-      return 0;
-    }
-    temp_v1 = 6;
-    *(unsigned int *)(param_1 + 8) = temp_v1;
-    break;
-  case 6:
-    temp_v0 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff);
-    if (temp_v0 == 0) {
-      return 0;
-    }
-    FUN_003e4e4c(*(unsigned short *)(temp_v0 + 300));
-    *(unsigned int *)(param_1 + 0x328) = *(unsigned int *)(param_1 + 0x32c);
-    FUN_0035d03c(0);
-    if (*(char *)(param_1 + 4) == '\x01') {
-      temp_v1 = 0xb;
-    }
-    else {
-      FUN_003343f0(0);
-      sysPlaySe(0x11b);
-      temp_v1 = 3;
-    }
-    *(unsigned int *)(param_1 + 8) = temp_v1;
-    break;
-  case 7:
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 800));
-    if (temp_v0 != 2) {
-      return 0;
-    }
-    temp_v0 = messageMainGetValue();
-    if (temp_v0 != 0) {
-      *(unsigned int *)(param_1 + 8) = 3;
-      temp_v1 = 0xf0;
-      sysPlaySe(temp_v1);
-      return 0;
-    }
-    temp_v1 = 8;
-    *(unsigned int *)(param_1 + 8) = temp_v1;
-    break;
-  case 8:
-    FUN_003e4e4c(0);
-    *(unsigned int *)(param_1 + 0x328) = 0xffffffff;
-    FUN_0035d03c(0);
-    sysPlaySe(0xf0);
-    temp_v1 = 3;
-    *(unsigned int *)(param_1 + 8) = temp_v1;
-    break;
-  case 9:
-    FUN_00228b04(param_1 + 0x260,1);
-    temp_v1 = FUN_002a4894(param_1 + 0x260);
-    *(unsigned int *)(param_1 + 0x2f4) = temp_v1;
-    *(unsigned int *)(param_1 + 0x32c) = temp_v1;
-    temp_v0 = 0;
-    FUN_001517b4(0,1);
-    if (temp_v0 != 0) {
-      dialogClose(1);
-      eventQueueAddUniqueIfValid(0x100020e);
-      *(unsigned int *)(param_1 + 8) = 10;
-      *(unsigned int *)(param_1 + 0xc) = 6;
-      temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x31c),"SetMainPartner2");
-      if (-1 < temp_v0) {
-        scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 800));
-      }
-    }
-    break;
-  case 10:
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 800));
-    if (temp_v0 != 2) {
-      return 0;
-    }
-    messageBannerRestartOrClear();
-    temp_v1 = *(unsigned int *)(param_1 + 0xc);
-    *(unsigned int *)(param_1 + 8) = temp_v1;
-    break;
-  case 0xb:
-    if (*(char *)(param_1 + 4) != '\x01') {
-      FUN_002c8538(0);
-      FUN_0022e774();
-    }
-    temp_v0 = *(int *)(param_1 + 800);
-    if (temp_v0 != 0) {
-      scrScriptProcessDestroy();
-      *(unsigned int *)(param_1 + 800) = 0;
-    }
-    FUN_003343f0((int)g_callbackOwnerSlots);
-    *(unsigned int *)(param_1 + 8) = 0;
-    break;
-  case 0xd:
-    if (*(char *)(param_1 + 4) != '\x01') {
-      FUN_002c8538(0);
-      FUN_0022e774();
-    }
-    temp_v0 = *(int *)(param_1 + 800);
-    if (temp_v0 != 0) {
-      scrScriptProcessDestroy();
-      *(unsigned int *)(param_1 + 800) = 0;
-    }
-    FUN_003343f0((int)g_callbackOwnerSlots);
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

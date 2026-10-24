@@ -1,116 +1,118 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003efc40` (_code @ 0x3efc40, 0x234 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 64-bit flag-mask tests (ldrd/ldm pairs and the orrs combine) and the register allocation of the two loops differ from retail; the candidate selection logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_003f2aec(int, int);
+/* One combatant entry of the battle state (0x408 bytes); only the fields read here. */
+typedef struct CandidateEntry {
+    /* 0x000 */ u64 flags;
+    /* 0x008 */ u8 unk008[0x66];
+    /* 0x06E */ u16 id;
+    /* 0x070 */ u8 unk070[0x320];
+    /* 0x390 */ u16 value;
+    /* 0x392 */ u8 unk392[0x76];
+} CandidateEntry;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+/* The slice of the battle state this function reads and writes. */
+typedef struct CandidateState {
+    /* 0x0000 */ u8 unk0000[0x1FFC];
+    /* 0x1FFC */ CandidateEntry *entries;
+    /* 0x2000 */ u8 unk2000[4];
+    /* 0x2004 */ u16 result;
+    /* 0x2006 */ u8 unk2006[0x1000];
+    /* 0x3006 */ u16 candidates[12];
+    /* 0x301E */ s16 chosen;
+    /* 0x3020 */ u8 unk3020[0x1580];
+    /* 0x45A0 */ u64 flags;
+    /* 0x45A8 */ u8 unk45a8[0x7C4];
+    /* 0x4D6C */ s32 count;
+} CandidateState;
 
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573980; /* 0x573980 */
-extern unsigned int DAT_00573984; /* 0x573984 */
-extern unsigned int DAT_005739a0; /* 0x5739a0 */
-extern unsigned int DAT_005739a4; /* 0x5739a4 */
-extern unsigned int DAT_005739f0; /* 0x5739f0 */
-extern unsigned int DAT_005739f4; /* 0x5739f4 */
-extern unsigned int DAT_00573a28; /* 0x573a28 */
-extern unsigned int DAT_00573a2c; /* 0x573a2c */
-extern unsigned int DAT_00573a50; /* 0x573a50 */
-extern unsigned int DAT_00573a54; /* 0x573a54 */
+/* The slice of g_btlMain holding the masks tested against the flag words. */
+typedef struct CandidateMasks {
+    /* 0x000 */ u8 unk000[0x58];
+    /* 0x058 */ u64 eligibleMask;
+    /* 0x060 */ u64 boostMask;
+    /* 0x068 */ u8 unk068[0x18];
+    /* 0x080 */ u64 excludedMask;
+    /* 0x088 */ u8 unk088[0x48];
+    /* 0x0D0 */ u64 bossStateMask;
+    /* 0x0D8 */ u8 unk0d8[0x30];
+    /* 0x108 */ u64 reserveStateMask;
+    /* 0x110 */ u8 unk110[0x20];
+    /* 0x130 */ u64 noJitterMask;
+} CandidateMasks;
 
-extern short FUN_0034ef58(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003f2aec. */
+extern CandidateMasks g_btlMain;
 
+void FUN_003f2aec(CandidateState *state, s32 count);
+s16 FUN_0034ef58(s32 low, s32 high);
 
-void FUN_003efc40(int param_1)
+enum {
+    SPECIAL_ENTRY = 54      /* the entry that stands in for the whole party */
+};
 
+/* Whether the entry flags pass the eligibility masks. */
+static __inline bool entryEligible(u64 flags)
 {
-/* irregular: 1 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int *piVar9;
-  unsigned int temp_v7;
-  int temp_v8;
-  
-  piVar9 = (int *)(param_1 + 0x1ffc);
-  temp_v2 = *piVar9;
-  if ((((*(unsigned int *)(temp_v2 + 0xd9b4) & DAT_0057397c) != 0 ||
-        (*(unsigned int *)(temp_v2 + 0xd9b0) & DAT_00573978) != 0) &&
-      ((*(unsigned int *)(temp_v2 + 0xd9b4) & DAT_005739a4) == 0 &&
-       (DAT_005739a0 & *(unsigned int *)(temp_v2 + 0xd9b0)) == 0)) && (0 < *(int *)(param_1 + 0x4d6c))) {
-    temp_v6 = 0;
-    do {
-      *(unsigned short *)(param_1 + temp_v6 * 2 + 0x3006) = *(unsigned short *)(temp_v2 + 0xda1e);
-      *(unsigned short *)(temp_v2 + 0xdd40) = 0;
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < *(int *)(param_1 + 0x4d6c));
-    temp_v3 = *(unsigned int *)(param_1 + 0x45a0);
-    if (!((DAT_005739f0 & temp_v3) == 0 && (DAT_005739f4 & *(unsigned int *)(param_1 + 0x45a4)) == 0)) {
-      temp_v3 = 4;
-      temp_v2 = 0x32;
-    }
-    else if (!((temp_v3 & DAT_00573a28) == 0 && (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a2c) == 0)) {
-      temp_v3 = 0x36;
-      temp_v2 = 1;
-    }
-    else {
-      temp_v3 = 0;
-      temp_v2 = 4;
-    }
-    temp_v7 = temp_v3 + temp_v2;
-    temp_v2 = temp_v6;
-    if (temp_v3 < temp_v7) {
-      do {
-        puVar5 = (unsigned int *)(*piVar9 + temp_v3 * 0x408);
-        temp_v5 = *puVar5;
-        temp_v4 = puVar5[1];
-        if (((DAT_00573978 & temp_v5) != 0 || (DAT_0057397c & temp_v4) != 0) &&
-           ((temp_v4 & DAT_005739a4) == 0 && (temp_v5 & DAT_005739a0) == 0)) {
-          *(unsigned short *)(param_1 + temp_v2 * 2 + 0x3006) =
-               *(unsigned short *)(*piVar9 + temp_v3 * 0x408 + 0x6e);
-          temp_v8 = temp_v3 * 0x408 + 0x390;
-          *(unsigned short *)(*piVar9 + temp_v8) = 0;
-          puVar5 = (unsigned int *)(*piVar9 + temp_v3 * 0x408);
-          if ((puVar5[1] & DAT_00573984) != 0 || (DAT_00573980 & *puVar5) != 0) {
-            *(unsigned short *)(*piVar9 + temp_v8) = 5;
-          }
-          if ((*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a54) == 0 &&
-              (*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a50) == 0) {
-            temp_v0 = FUN_0034ef58(0xfffffffd,3);
-            *(short *)(*piVar9 + temp_v8) = temp_v0 + *(short *)(*piVar9 + temp_v8);
-          }
-          temp_v2 = temp_v2 + 1;
-        }
-        temp_v3 = temp_v3 + 1;
-      } while ((int)temp_v3 < (int)temp_v7);
-    }
-    if (temp_v2 < 1) {
-      temp_v1 = 0xffff;
-    }
-    else {
-      temp_v1 = 0;
-    }
-    *(unsigned short *)(param_1 + 0x301e) = temp_v1;
-    if (0 < temp_v2) {
-      FUN_003f2aec(param_1,temp_v6);
-      temp_v1 = *(unsigned short *)(param_1 + *(short *)(param_1 + 0x301e) * 2 + 0x3006);
-    }
-    *(unsigned short *)(param_1 + 0x2004) = temp_v1;
-  }
-  return;
+    return (flags & g_btlMain.eligibleMask) != 0 && (flags & g_btlMain.excludedMask) == 0;
 }
 
-} /* extern "C" */
+/* Collects the entries that may act into the candidate list and picks the first one. */
+void FUN_003efc40(CandidateState *state)
+{
+    CandidateEntry *special = &state->entries[SPECIAL_ENTRY];
+
+    if (!entryEligible(special->flags)) {
+        return;
+    }
+    if (state->count <= 0) {
+        return;
+    }
+    s32 i = 0;
+    do {
+        state->candidates[i] = special->id;
+        special->value = 0;
+        i++;
+    } while (i < state->count);
+
+    s32 start;
+    s32 length;
+    if ((g_btlMain.bossStateMask & state->flags) != 0) {
+        start = 4;
+        length = 50;
+    } else if ((state->flags & g_btlMain.reserveStateMask) != 0) {
+        start = 54;
+        length = 1;
+    } else {
+        start = 0;
+        length = 4;
+    }
+    s32 end = start + length;
+    s32 found = i;
+
+    for (s32 j = start; j < end; j++) {
+        CandidateEntry *entry = &state->entries[j];
+
+        if (entryEligible(entry->flags)) {
+            state->candidates[found] = entry->id;
+            entry->value = 0;
+            if ((entry->flags & g_btlMain.boostMask) != 0) {
+                entry->value = 5;
+            }
+            if ((state->flags & g_btlMain.noJitterMask) == 0) {
+                entry->value += FUN_0034ef58(-3, 3);
+            }
+            found++;
+        }
+    }
+    u16 result = found > 0 ? 0 : 0xFFFF;
+    state->chosen = result;
+    if (found > 0) {
+        FUN_003f2aec(state, i);
+        result = state->candidates[state->chosen];
+    }
+    state->result = result;
+}
+
+}

@@ -1,129 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c80a0` (_code @ 0x3c80a0, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail writes the 32-bit vertex colours as byte stores through rev/lsr extraction of a register value (an unaligned store; `__packed` stores of the same values still compile to plain str here) and keeps the loop-invariant fade bounds in the stack; this version stores the colour bytes directly. */
+#include "effect/FadeStrip.h"
 
 extern "C" {
-
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-int rt_memcpy(unsigned char *, unsigned char *, unsigned int);
-int rt_memcpy_w(unsigned int *, unsigned int *, unsigned int);
-
-typedef struct fn_003c80a0_arg1 fn_003c80a0_arg1;
-struct fn_003c80a0_arg1 {
-    unsigned char pad_0x0[0x38];
-    uint field_0x38; /* +0x38 */
-    unsigned char pad_0x3c[0x3c];
-    float field_0x78; /* +0x78 */
-    float field_0x7c; /* +0x7c */
-    unsigned char pad_0x80[0xc];
-    int field_0x8c; /* +0x8c */
-    float field_0x90; /* +0x90 */
-};
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_003c80a0(int param_1,fn_003c80a0_arg1 *param_2)
-
-{
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  unsigned char *puVar3;
-  unsigned char *puVar4;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v1 = param_2->field_0x38;
-  if (temp_v1 != 0) {
-    piVar1 = *(int **)(param_1 + 4);
-    puVar3 = *(unsigned char **)(*piVar1 + 0x38);
-    puVar5 = *(unsigned int **)(*piVar1 + 0x3c);
-    piVar1[0x16] = piVar1[0x16] | 0x24;
-    temp_v3 = param_2->field_0x8c;
-    temp_v2 = temp_v3 + 1;
-    temp_v0 = 0;
-    temp_v7 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = (int)(param_2->field_0x78 * temp_v7);
-    temp_v4 = (int)(param_2->field_0x7c * temp_v8);
-    temp_v7 = param_2->field_0x90 * 0.33333334f;
-    puVar4 = puVar3;
-    puVar6 = puVar5;
-    if (temp_v2 != 0) {
-      do {
-        if ((int)temp_v0 < temp_v5) {
-          temp_v9 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v8 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v8 = temp_v9 / temp_v8;
-        }
-        else {
-          temp_v8 = 1.0f;
-          if (temp_v4 < (int)temp_v0) {
-            temp_v9 = (float)VectorSignedToFloat(temp_v3 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v8 = (float)VectorUnsignedToFloat(temp_v3 - temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v8 = temp_v8 / temp_v9;
-          }
-        }
-        *puVar4 = 0xff;
-        puVar4[1] = 0xff;
-        puVar4[2] = 0xff;
-        temp_v0 = temp_v0 + 1;
-        puVar4[3] = 0;
-        temp_v6 = VectorFloatToUnsigned(temp_v8 * 255.0f,3);
-        puVar4[4] = 0xff;
-        puVar4[5] = 0xff;
-        puVar4[6] = 0xff;
-        puVar4[7] = (char)temp_v6;
-        *(unsigned int *)(puVar4 + 8) = *(unsigned int *)(puVar4 + 4);
-        puVar4[0xc] = 0xff;
-        puVar4[0xd] = 0xff;
-        puVar4[0xe] = 0xff;
-        puVar4[0xf] = 0;
-        *puVar6 = 0;
-        *(float *)&puVar6[2] = temp_v7;
-        *(float *)&puVar6[4] = temp_v7 * 2.0f;
-        *(float *)&puVar6[6] = temp_v7 * 3.0f;
-        puVar4 = puVar4 + 0x10;
-        puVar6 = puVar6 + 8;
-      } while (temp_v0 < temp_v2);
-    }
-    temp_v0 = 1;
-    if (temp_v0 < temp_v1) {
-      do {
-        rt_memcpy(puVar4,puVar3,temp_v2 * 0x10);
-        puVar4 = puVar4 + temp_v2 * 0x10;
-        rt_memcpy_w(puVar6,puVar5,temp_v2 * 0x20);
-        temp_v0 = temp_v0 + 1;
-        puVar6 = puVar6 + temp_v2 * 8;
-      } while (temp_v0 < temp_v1);
-    }
-  }
-  return;
+void rt_memcpy(void *destination, const void *source, u32 bytes);
+void rt_memcpy_w(void *destination, const void *source, u32 bytes);
 }
 
-} /* extern "C" */
+// Builds a fading vertex strip: one base strip with `segments + 1` vertices whose alpha ramps in and out, then copies
+// of it for each further repeat.
+extern "C" void FUN_003c80a0(StripOwnerView *owner, StripParameters *params)
+{
+    u32 repeatCount = params->repeatCount;
+    if (repeatCount == 0)
+        return;
+
+    StripGeometry *geometry = owner->geometry;
+    StripColor *baseColors = geometry->description->colors;
+    StripCoords *baseCoords = geometry->description->coords;
+    geometry->flags |= 0x24;
+
+    s32 segments = params->segments;
+    u32 vertexCount = segments + 1;
+    s32 fadeInEnd = static_cast<s32>(params->fadeInEnd * static_cast<f32>(segments));
+    s32 fadeOutStart = static_cast<s32>(params->fadeOutStart * static_cast<f32>(segments));
+    f32 step = params->spacing * 0.33333334f;
+
+    StripColor *color = baseColors;
+    StripCoords *coords = baseCoords;
+    for (u32 i = 0; i < vertexCount; i++) {
+        f32 fade;
+        if (static_cast<s32>(i) < fadeInEnd) {
+            fade = static_cast<f32>(i) / static_cast<f32>(fadeInEnd);
+        } else {
+            fade = 1.0f;
+            if (fadeOutStart < static_cast<s32>(i)) {
+                fade = static_cast<f32>(segments - i) / static_cast<f32>(segments - fadeOutStart);
+            }
+        }
+        color->first[0] = 0xff;
+        color->first[1] = 0xff;
+        color->first[2] = 0xff;
+        color->first[3] = 0;
+        u32 alpha = static_cast<u32>(fade * 255.0f);
+        color->second[0] = 0xff;
+        color->second[1] = 0xff;
+        color->second[2] = 0xff;
+        color->second[3] = static_cast<u8>(alpha);
+        color->third = *reinterpret_cast<u32 *>(color->second);
+        color->fourth[0] = 0xff;
+        color->fourth[1] = 0xff;
+        color->fourth[2] = 0xff;
+        color->fourth[3] = 0;
+        coords->v0 = 0.0f;
+        coords->v1 = step;
+        coords->v2 = step * 2.0f;
+        coords->v3 = step * 3.0f;
+        color++;
+        coords++;
+    }
+    for (u32 repeat = 1; repeat < repeatCount; repeat++) {
+        rt_memcpy(color, baseColors, vertexCount * sizeof(StripColor));
+        color += vertexCount;
+        rt_memcpy_w(coords, baseCoords, vertexCount * sizeof(StripCoords));
+        coords += vertexCount;
+    }
+}

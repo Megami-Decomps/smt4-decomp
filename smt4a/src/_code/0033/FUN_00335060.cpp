@@ -1,131 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335060` (_code @ 0x335060, 0x314 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the save list (selected slot first, then the other slots, then the optional extra rows and the footer); written from the decompilation, render-stack push scheduling not compared with retail */
+#include "camp/RenderCtx.h"
+
+struct SaveRowSprite {
+    /* 0x00 */ u8 data[0x8C];
+};
+
+struct SaveListWork {
+    /* 0x000 */ u8 unk000[0xF18];
+    /* 0xF18 */ SaveRowSprite rows[1];   /* row 0 is the selected slot, the rest follow */
+};
+
+struct SaveSlotEntry {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ u16 id;
+};
+
+struct SaveRowFrame {
+    /* 0x00 */ u8 unk00[0xA];
+    /* 0x0A */ s16 height;
+    /* 0x0C */ struct SaveRowImage *image;
+};
+
+struct SaveRowImage {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 offset;
+};
+
+#define SAVE_LIST_SLOT_COUNT 12
+#define SAVE_ROW_NO_SELECTION 0xFFFFFFFFu
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
 
-int vec2GetYInt(int);
-int efctSetSpeed(void);
-int FUN_001834a4(int, int);
-int FUN_00183bb0(void);
-int FUN_002ca878(int, unsigned int, int);
-int FUN_003721b0(int, int, int, unsigned int, unsigned int);
-int FUN_0037e8a4(int);
-int FUN_0037eb64(int, unsigned int, unsigned int);
+SaveSlotEntry *saveSlotFindSelected(void);
+s32 FUN_001692ac(u32 a, u32 b);
+void FUN_00183bb0(void);
+void efctSetSpeed(f32 speed);
+SaveRowFrame *FUN_001834a4(u32 table, u32 index);
+SaveSlotEntry *FUN_00187068(s32 index);
+s32 FUN_00187168(void);
+s32 gameFlagIsSet(u32 flag);
+s32 flagSelectVariant(void);
+s32 vec2GetXInt(SaveRowSprite *sprite);
+s32 vec2GetYInt(SaveRowSprite *sprite);
+void FUN_0037e8a4(SaveListWork *work);
+void FUN_003721b0(SaveListWork *work, SaveSlotEntry *entry, s32 row, s32 x, s32 y);
+void FUN_002ca878(SaveListWork *work, s32 x, s32 y);
+void FUN_0037eb64(SaveListWork *work, s32 x, s32 y);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-extern int saveSlotFindSelected(void);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_00183bb0. */
-extern int FUN_00187068(int);
-extern int FUN_00187168(void);
-extern int gameFlagIsSet(unsigned int);
-extern int flagSelectVariant(void);
-/* Supplied declaration required: FUN_002ca878. */
-/* Supplied declaration required: FUN_003721b0. */
-/* Supplied declaration required: FUN_0037e8a4. */
-/* Supplied declaration required: FUN_0037eb64. */
-
-
-void FUN_00335060(int param_1)
-
+void FUN_00335060(SaveListWork *work)
 {
-/* irregular: 8 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int *piVar10;
-  unsigned int temp_v9;
-  
-  temp_v4 = g_renderCtx;
-  temp_v3 = FUN_001692ac(1,0);
-  piVar10 = (int *)(temp_v4 + 0x1258);
-  temp_v7 = *piVar10;
-  temp_v8 = piVar10[temp_v7 + 2];
-  *piVar10 = temp_v7 + 1;
-  piVar10[temp_v7 + 3] = temp_v3;
-  if (*(char *)(temp_v4 + 0x1270) != '\0' || temp_v8 != temp_v3) {
-    (**(romwright_code **)(temp_v4 + 0x1274))();
-    *(unsigned char *)(temp_v4 + 0x1270) = 0;
-  }
-  FUN_00183bb0();
-  FUN_0037e8a4(param_1);
-  temp_v3 = 1;
-  temp_v9 = 0xffffffff;
-  temp_v4 = saveSlotFindSelected();
-  if (temp_v4 != 0) {
-    temp_v4 = saveSlotFindSelected();
-    temp_v9 = (unsigned int)*(unsigned short *)(temp_v4 + 300);
-  }
-  temp_v4 = 0;
-  do {
-    temp_v7 = FUN_00187068(temp_v4);
-    temp_v8 = FUN_00187168();
-    if (temp_v8 != 0) {
-      temp_v8 = param_1 + temp_v3 * 0x8c + 0xf18;
-      temp_v5 = vec2GetXInt(temp_v8);
-      temp_v6 = vec2GetYInt(temp_v8);
-      if (*(unsigned short *)(temp_v7 + 300) == temp_v9) {
-        temp_v5 = vec2GetXInt(param_1 + 0xf18);
-        temp_v6 = vec2GetYInt(param_1 + 0xf18);
-        FUN_003721b0(param_1,temp_v7,0,temp_v5,temp_v6);
-      }
-      else {
-        FUN_003721b0(param_1,temp_v7,temp_v3,temp_v5,temp_v6);
-        temp_v3 = temp_v3 + 1;
-      }
+    RenderCtxA *context = g_renderCtx;
+    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    FUN_00183bb0();
+    FUN_0037e8a4(work);
+
+    s32 row = 1;
+    u32 selectedId = SAVE_ROW_NO_SELECTION;
+    if (saveSlotFindSelected() != NULL)
+        selectedId = saveSlotFindSelected()->id;
+
+    for (s32 slot = 0; slot < SAVE_LIST_SLOT_COUNT; slot++) {
+        SaveSlotEntry *entry = FUN_00187068(slot);
+        if (FUN_00187168() != 0) {
+            SaveRowSprite *sprite = &work->rows[row];
+            s32 x = vec2GetXInt(sprite);
+            s32 y = vec2GetYInt(sprite);
+            if (entry->id == selectedId) {
+                x = vec2GetXInt(&work->rows[0]);
+                y = vec2GetYInt(&work->rows[0]);
+                FUN_003721b0(work, entry, 0, x, y);
+            } else {
+                FUN_003721b0(work, entry, row, x, y);
+                row++;
+            }
+        }
     }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0xc);
-  temp_v4 = gameFlagIsSet(0x4d0);
-  if ((temp_v4 != 0) ||
-     ((temp_v4 = flagSelectVariant(), temp_v4 == 2 && (temp_v4 = gameFlagIsSet(0x4db), temp_v4 != 0)))) {
-    temp_v4 = FUN_001834a4(0x14,temp_v3 + 0xbba);
-    temp_v7 = FUN_001834a4(0x14,0xc17);
-    temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = *(short *)(*(int *)(temp_v7 + 0xc) + 2);
-    temp_v2 = *(short *)(*(int *)(temp_v4 + 0xc) + 2);
-    temp_v4 = param_1 + temp_v3 * 0x8c + 0xf18;
-    temp_v5 = vec2GetXInt(temp_v4);
-    temp_v4 = vec2GetYInt(temp_v4);
-    FUN_002ca878(param_1,temp_v5,temp_v4 + (int)temp_v1 + (int)temp_v0 + temp_v2 + 1);
-    temp_v3 = temp_v3 + 1;
-  }
-  temp_v4 = param_1 + temp_v3 * 0x8c + 0xf18;
-  temp_v5 = vec2GetXInt(temp_v4);
-  temp_v6 = vec2GetYInt(temp_v4);
-  FUN_0037eb64(param_1,temp_v5,temp_v6);
-  FUN_00183bb0();
-  efctSetSpeed();
-  temp_v4 = g_renderCtx;
-  piVar10 = (int *)(g_renderCtx + 0x1258);
-  temp_v3 = *piVar10;
-  temp_v7 = piVar10[temp_v3 + 2];
-  *piVar10 = temp_v3 - 1;
-  if (*(char *)(temp_v4 + 0x1270) != '\0' || temp_v7 != piVar10[temp_v3 + 1]) {
-    (**(romwright_code **)(temp_v4 + 0x1274))();
-    *(unsigned char *)(temp_v4 + 0x1270) = 0;
-  }
-  return;
+
+    if (gameFlagIsSet(0x4D0) != 0 || (flagSelectVariant() == 2 && gameFlagIsSet(0x4DB) != 0)) {
+        SaveRowFrame *rowFrame = FUN_001834a4(0x14, row + 0xBBA);
+        SaveRowFrame *footerFrame = FUN_001834a4(0x14, 0xC17);
+        s16 rowHeight = rowFrame->height;
+        s16 footerOffset = footerFrame->image->offset;
+        s16 rowOffset = rowFrame->image->offset;
+        SaveRowSprite *sprite = &work->rows[row];
+        s32 x = vec2GetXInt(sprite);
+        s32 y = vec2GetYInt(sprite);
+        FUN_002ca878(work, x, y + footerOffset + rowHeight + rowOffset + 1);
+        row++;
+    }
+
+    SaveRowSprite *sprite = &work->rows[row];
+    s32 x = vec2GetXInt(sprite);
+    s32 y = vec2GetYInt(sprite);
+    FUN_0037eb64(work, x, y);
+    FUN_00183bb0();
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_renderCtx->stackA);
 }
 
 } /* extern "C" */

@@ -1,153 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a8ef4` (_code @ 0x4a8ef4, 0x390 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the sprite grid loops are strength-reduced differently from retail (226 vs 234 rows: retail keeps separate row base registers per grid); the reset sequence is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014e188(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int asdOperatorNew(...);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetImageKeyframe(...);
-int FUN_0021c45c(int, int);
-int FUN_002b14c8(int);
-int FUN_002cdad4(int);
-int paramsClearPacket(void);
+/* The battle UI block (0x13000+ bytes). Only the regions initialised here are named; each region
+ * is addressed by its byte offset because the layout is a set of sprite grids. */
+typedef struct BtlUi {
+    u8 raw[1];
+} BtlUi;
 
-typedef struct fn_004a8ef4_arg0 fn_004a8ef4_arg0;
-struct fn_004a8ef4_arg0 {
-    unsigned char pad_0x0[0x20];
-    undefined4 field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x34];
-    undefined4 field_0x58; /* +0x58 */
-    undefined2 field_0x5c; /* +0x5c */
-    undefined2 field_0x5e; /* +0x5e */
-    undefined1 field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x26];
-    undefined1 field_0x87; /* +0x87 */
-    unsigned char pad_0x88[0x2];
-    undefined1 field_0x8a; /* +0x8a */
-};
+typedef struct BtlUiGlobals {
+    u8 unk00[0x10];
+    BtlUi *block;
+} BtlUiGlobals;
 
-/* stack frame of param_2: 10 slot(s), 40 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_2_stack;
+/* The battle owner record (only the flag word read here). */
+typedef struct BtlOwner {
+    u8 unk00[0x10C];
+    u32 flags;                       /* 0x40000: show the extra guide */
+} BtlOwner;
 
-extern unsigned char DAT_0052ac1c; /* 0x52ac1c */
-extern unsigned char DAT_0052ad3c; /* 0x52ad3c */
-extern unsigned char DAT_0052ae44; /* 0x52ae44 */
-extern unsigned char DAT_0052af04; /* 0x52af04 */
-extern int g_btlUiBlock; /* 0x57a9c8 */
+extern BtlUiGlobals g_btlUi;
+extern u8 DAT_0052ac1c[];
+extern u8 DAT_0052ad3c[];
+extern u8 DAT_0052ae44[];
+extern u8 DAT_0052af04[];
 
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0021c45c. */
-/* Supplied declaration required: FUN_002b14c8. */
-/* Supplied declaration required: FUN_002cdad4. */
-extern unsigned int FUN_003f9ab0(void);
-/* Supplied declaration required: paramsClearPacket. */
+void FUN_002b14c8(void *state);
+void FUN_002cdad4(void *state);
+void FUN_0021c45c(void *state, BtlOwner *owner);
+void paramsClearPacket(void *packet);
+void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
+                const void *f, u32 fSize);
+void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
+void uiSpriteSelectAnim(void *sprite, u32 anim);
+void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 flag);
+void *asdOperatorNew(u32 size, BtlOwner *allocator);
+void *FUN_003f9ab0(void *object);
 
+/* The address `offset` bytes into the block. */
+#define BTL_UI(block, offset) ((u8 *)(block) + (offset))
 
-void FUN_004a8ef4(fn_004a8ef4_arg0 *param_1,int param_2)
-
+/* Resets the battle UI for `owner`: clears the counters, builds the parameter packet and the
+ * sprite grids (cursor rows, name plates, gauges, number sprites), allocates the result window
+ * object and sets the guide flag. */
+void FUN_004a8ef4(void *unused, BtlOwner *owner)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = g_btlUiBlock;
-  *(unsigned int *)(g_btlUiBlock + 0x74a0) = 0;
-  *(unsigned int *)(temp_v0 + 0x74a4) = 0;
-  *(unsigned char *)(temp_v0 + 0x7505) = 0;
-  *(unsigned char *)(temp_v0 + 0x7506) = 0;
-  FUN_002b14c8(temp_v0 + 8);
-  FUN_002cdad4(temp_v0 + 0x24bc);
-  FUN_0021c45c(temp_v0 + 0x28c4,param_2);
-  temp_v1 = g_btlUiBlock;
-  *(unsigned short *)(g_btlUiBlock + 0x6b56) = 0;
-  *(unsigned short *)(temp_v1 + 0x6c82) = 0;
-  *(unsigned short *)(temp_v1 + 0x6dae) = 0;
-  *(unsigned short *)(temp_v1 + 0x6eda) = 0;
-  *(unsigned short *)(temp_v1 + 0x7006) = 0;
-  temp_v1 = temp_v0 + 0x7508;
-  paramsClearPacket();
-  paramsInit(temp_v1,&DAT_0052ac1c,0x120,&DAT_0052ad3c,0x108,&DAT_0052ae44,0xc0,0,0,&DAT_0052af04,
-               0x5b0);
-  temp_v6 = 0;
-  do {
-    temp_v4 = temp_v0 + temp_v6 * 0x400;
-    temp_v3 = 0;
-    *(unsigned char *)(temp_v4 + 0x7994) = 0;
-    do {
-      temp_v5 = temp_v4 + temp_v3 * 0x8c + 0x75b4;
-      FUN_0014e188(temp_v5,7,2000,temp_v1,0xf1);
-      uiSpriteSelectAnim(temp_v5,3);
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 5);
-    FUN_0014e188(temp_v4 + 0x7870,0xd,1000,temp_v1,0xf1);
-    uiSpriteSelectAnim(temp_v4 + 0x7870,8);
-    FUN_0014e188(temp_v4 + 0x78fc,0xd,0x3ea,temp_v1,0xf1);
-    uiSpriteSelectAnim(temp_v4 + 0x78fc,8);
-    temp_v3 = temp_v0 + temp_v6 * 0xa0;
-    *(unsigned char *)(temp_v3 + 0xb64c) = 0;
-    temp_v3 = temp_v3 + 0xb5b4;
-    FUN_0014e188(temp_v3,0xd,0x3ee,temp_v1,0xf1);
-    uiSpriteSelectAnim(temp_v3,9);
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0x10);
-  temp_v6 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v6 * 0x14c;
-    *(unsigned short *)(temp_v3 + 0x11a2c) = 0;
-    FUN_0014e188(temp_v3 + 0x11914,0xd,0xbba,temp_v0 + 0x7508,0xf1);
-    uiSpriteSelectAnim(temp_v3 + 0x11914,10);
-    FUN_0014e188(temp_v3 + 0x119a0,0xd,0xbbe,temp_v0 + 0x7508,0xf1);
-    uiSpriteSelectAnim(temp_v3 + 0x119a0,0xb);
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0xc);
-  temp_v6 = 0x420;
-  asdOperatorNew(0x420,param_2);
-  temp_v2 = 0;
-  if (temp_v6 != 0) {
-    temp_v2 = FUN_003f9ab0();
-  }
-  temp_v6 = 0;
-  *(unsigned int *)(temp_v0 + 0x7488) = temp_v2;
-  do {
-    temp_v3 = temp_v0 + temp_v6 * 0xc;
-    *(unsigned short *)(temp_v3 + 0x12f3c) = 0;
-    *(unsigned int *)(temp_v3 + 0x12f40) = 0;
-    *(unsigned int *)(temp_v3 + 0x12f44) = 0;
-    temp_v3 = temp_v0 + temp_v6 * 0x8c + 0x128ac;
-    FUN_0014e188(temp_v3,0xc,0x84,temp_v0 + 0x7508,0xb);
-    uiSpriteSelectAnim(temp_v3,0xd);
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 0xc);
-  *(unsigned char *)(temp_v0 + 0x6168) = 0;
-  if ((*(unsigned int *)(param_2 + 0x10c) & 0x40000) != 0) {
-    *(unsigned char *)(temp_v0 + 0x6168) = 1;
-  }
-  FUN_0014e188(temp_v0 + 0x7528,8,0,temp_v1,1);
-  uiSpriteSetImageKeyframe(temp_v0 + 0x7528,0xd,0);
-  return;
+    u8 *ui = (u8 *)g_btlUi.block;
+
+    *(u32 *)BTL_UI(ui, 0x74A0) = 0;
+    *(u32 *)BTL_UI(ui, 0x74A4) = 0;
+    *BTL_UI(ui, 0x7505) = 0;
+    *BTL_UI(ui, 0x7506) = 0;
+    FUN_002b14c8(ui + 8);
+    FUN_002cdad4(BTL_UI(ui, 0x24BC));
+    FUN_0021c45c(BTL_UI(ui, 0x28C4), owner);
+    ui = (u8 *)g_btlUi.block;
+    *(u16 *)BTL_UI(ui, 0x6B56) = 0;
+    *(u16 *)BTL_UI(ui, 0x6C82) = 0;
+    *(u16 *)BTL_UI(ui, 0x6DAE) = 0;
+    *(u16 *)BTL_UI(ui, 0x6EDA) = 0;
+    *(u16 *)BTL_UI(ui, 0x7006) = 0;
+    void *params = BTL_UI(ui, 0x7508);
+
+    paramsClearPacket(params);
+    paramsInit(params, DAT_0052ac1c, 0x120, DAT_0052ad3c, 0x108, DAT_0052ae44, 0xC0, 0, 0, DAT_0052af04, 0x5B0);
+    for (s32 row = 0; row < 16; row++) {
+        u8 *base = ui + row * 0x400;
+
+        *BTL_UI(base, 0x7994) = 0;
+        for (s32 i = 0; i < 5; i++) {
+            u8 *sprite = BTL_UI(base, 0x75B4 + i * 0x8C);
+
+            FUN_0014e188(sprite, 7, 2000, params, 0xF1, 1.0f);
+            uiSpriteSelectAnim(sprite, 3);
+        }
+        FUN_0014e188(BTL_UI(base, 0x7870), 0xD, 1000, params, 0xF1, 1.0f);
+        uiSpriteSelectAnim(BTL_UI(base, 0x7870), 8);
+        FUN_0014e188(BTL_UI(base, 0x78FC), 0xD, 0x3EA, params, 0xF1, 1.0f);
+        uiSpriteSelectAnim(BTL_UI(base, 0x78FC), 8);
+        u8 *plate = ui + row * 0xA0;
+
+        *BTL_UI(plate, 0xB64C) = 0;
+        FUN_0014e188(BTL_UI(plate, 0xB5B4), 0xD, 0x3EE, params, 0xF1, 1.0f);
+        uiSpriteSelectAnim(BTL_UI(plate, 0xB5B4), 9);
+    }
+    for (s32 i = 0; i < 12; i++) {
+        u8 *entry = ui + i * 0x14C;
+
+        *(u16 *)BTL_UI(entry, 0x11A2C) = 0;
+        FUN_0014e188(BTL_UI(entry, 0x11914), 0xD, 0xBBA, ui + 0x7508, 0xF1, 1.0f);
+        uiSpriteSelectAnim(BTL_UI(entry, 0x11914), 10);
+        FUN_0014e188(BTL_UI(entry, 0x119A0), 0xD, 0xBBE, ui + 0x7508, 0xF1, 1.0f);
+        uiSpriteSelectAnim(BTL_UI(entry, 0x119A0), 11);
+    }
+    void *window = asdOperatorNew(0x420, owner);
+
+    if (window != NULL) {
+        window = FUN_003f9ab0(window);
+    }
+    *(void **)BTL_UI(ui, 0x7488) = window;
+    for (s32 i = 0; i < 12; i++) {
+        u8 *slot = ui + i * 0xC;
+        u8 *sprite = BTL_UI(ui, 0x128AC + i * 0x8C);
+
+        *(u16 *)BTL_UI(slot, 0x12F3C) = 0;
+        *(u32 *)BTL_UI(slot, 0x12F40) = 0;
+        *(u32 *)BTL_UI(slot, 0x12F44) = 0;
+        FUN_0014e188(sprite, 0xC, 0x84, ui + 0x7508, 0xB, 1.0f);
+        uiSpriteSelectAnim(sprite, 13);
+    }
+    *BTL_UI(ui, 0x6168) = 0;
+    if ((owner->flags & 0x40000) != 0) {
+        *BTL_UI(ui, 0x6168) = 1;
+    }
+    FUN_0014e188(BTL_UI(ui, 0x7528), 8, 0, params, 1, 1.0f);
+    uiSpriteSetImageKeyframe(BTL_UI(ui, 0x7528), 13, 0);
 }
 
-} /* extern "C" */
+}

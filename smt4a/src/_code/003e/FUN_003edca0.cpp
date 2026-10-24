@@ -1,171 +1,152 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003edca0` (_code @ 0x3edca0, 0x320 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: decides whether a battle enemy can be recruited (state flags, hp ratio, chance from slot space and level); written from the decompilation, the 64-bit mask tests and branch layout not compared with retail */
+#include "common.h"
+
+struct BtlMask {
+    u32 low;
+    u32 high;
+};
+
+static __inline bool btlMaskHit(const BtlMask &flags, const BtlMask &mask)
+{
+    return (flags.low & mask.low) != 0 || (flags.high & mask.high) != 0;
+}
+
+struct BtlRecruitState {
+    /* 0x0000 */ u8 unk0000[0x1FFC];
+    /* 0x1FFC */ u8 *units;
+    /* 0x2000 */ u8 unk2000[2];
+    /* 0x2002 */ s16 enemyCount;
+    /* 0x2004 */ u8 unk2004[0x259C];
+    /* 0x45A0 */ BtlMask stateA;
+    /* 0x45A8 */ BtlMask stateB;
+};
+
+struct DevilRecord {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u16 level;          /* bit 15 is a flag */
+    /* 0x04 */ u8 unk04[0x12];
+    /* 0x16 */ u16 flags;
+};
+
+struct SaveDataView {
+    /* 0x00000 */ u8 unk00000[0x27E3E];
+    /* 0x27E3E */ u8 recruitStage;
+};
+
+struct SlotTableView {
+    /* 0x000 */ u8 unk000[0x1CA3];
+    /* 0x1CA3 */ u8 capacity;
+};
+
+struct PlayerLevelView {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 level;
+};
+
+#define BTL_UNIT_STRIDE 0x408
+#define BTL_FIRST_ENEMY 4
+#define BTL_UNIT_END 0x36
+#define BTL_DEVIL_FLAG_NO_RECRUIT 2
+#define BTL_UNIT_FLAG_FIXED 0x80
 
 extern "C" {
+extern BtlMask DAT_00573978;   /* candidate unit */
+extern BtlMask DAT_00573990;   /* enemy side */
+extern BtlMask DAT_005739a0;   /* excluded units */
+extern BtlMask DAT_005739b0;   /* flags set after a successful roll */
+extern BtlMask DAT_005739c0;   /* flags set when the roll starts */
+extern BtlMask DAT_00573a50;
+extern BtlMask DAT_00573b40;
 
-int dataTable00FindById(void);
+s32 playerHasFlagBit(s32 bit);
+SaveDataView *gameDataBlocksGetSaveData(void);
+s32 gameFlagIsSet(s32 flag);
+s32 lcgRandomRange(u32 maximum);
+DevilRecord *dataTable00FindById(u32 id);
+SlotTableView *gameGetSlotTable(void);
+s32 gameSlotTableFindFree(void);
+PlayerLevelView *gameGetPlayerData(void);
+s32 gameDataFlagTestBit(s32 bit);
 
-extern unsigned int DAT_00573978; /* 0x573978 */
-extern unsigned int DAT_0057397c; /* 0x57397c */
-extern unsigned int DAT_00573990; /* 0x573990 */
-extern unsigned int DAT_00573994; /* 0x573994 */
-extern unsigned int DAT_005739a0; /* 0x5739a0 */
-extern unsigned int DAT_005739a4; /* 0x5739a4 */
-extern unsigned int DAT_005739b0; /* 0x5739b0 */
-extern unsigned int DAT_005739b4; /* 0x5739b4 */
-extern unsigned int DAT_005739c0; /* 0x5739c0 */
-extern unsigned int DAT_005739c4; /* 0x5739c4 */
-extern unsigned int DAT_00573a50; /* 0x573a50 */
-extern unsigned int DAT_00573a54; /* 0x573a54 */
-extern unsigned int DAT_00573b40; /* 0x573b40 */
-extern unsigned int DAT_00573b44; /* 0x573b44 */
+#define RECRUIT_BIT_BONUS 0x3E
 
-extern int gameDataBlocksGetSaveData(void);
-extern int lcgRandomRange(unsigned int);
-extern int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-extern int playerHasFlagBit(unsigned int);
-extern int gameDataFlagTestBit(unsigned int);
-extern int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned int FUN_003edca0(int param_1)
-
+/* Chance (percent) from the player/devil level gap, limited by `ceiling`. */
+static __inline s32 recruitLevelChance(s32 ceiling, const DevilRecord *record)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  unsigned int *puVar8;
-  int temp_v6;
-  
-  temp_v1 = playerHasFlagBit(1);
-  if ((temp_v1 == 0) &&
-     ((*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a50) == 0 &&
-      (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a54) == 0)) {
-    temp_v1 = gameDataBlocksGetSaveData();
-    puVar8 = (unsigned int *)(param_1 + 0x45a8);
-    if (((*(unsigned char *)(temp_v1 + 0x27e3e) >= 6) ||
-        ((*(unsigned int *)(param_1 + 0x45ac) & DAT_00573b44) != 0 || (DAT_00573b40 & *puVar8) != 0)) &&
-       ((((temp_v1 = gameFlagIsSet(0x416), temp_v1 == 0 ||
-          ((*(unsigned int *)(param_1 + 0x45ac) & DAT_00573b44) != 0 || (DAT_00573b40 & *puVar8) != 0)) &&
-         (*(short *)(param_1 + 0x2002) < 2)) && (*(short *)(param_1 + 0x2002) != 0)))) {
-      temp_v1 = 4;
-      do {
-        puVar7 = (unsigned int *)(*(int *)(param_1 + 0x1ffc) + temp_v1 * 0x408);
-        temp_v5 = *puVar7;
-        temp_v2 = puVar7[1];
-        if ((((temp_v2 & DAT_0057397c) != 0 || (temp_v5 & DAT_00573978) != 0) &&
-            ((DAT_005739a0 & temp_v5) == 0 && (DAT_005739a4 & temp_v2) == 0)) &&
-           ((temp_v2 & DAT_00573994) != 0 || (temp_v5 & DAT_00573990) != 0)) {
-          if (puVar7 == (unsigned int *)0x0) {
+    s32 chance = ((s32)gameGetPlayerData()->level - (s32)(record->level & 0x7FFF)) / 2 + 5;
+    if (chance < 0)
+        return 0;
+    if (chance >= ceiling + 1)
+        return ceiling;
+    return chance;
+}
+
+u32 FUN_003edca0(BtlRecruitState *state)
+{
+    if (playerHasFlagBit(1) != 0 || btlMaskHit(state->stateA, DAT_00573a50))
+        return 0;
+
+    SaveDataView *save = gameDataBlocksGetSaveData();
+    bool stateBHit = btlMaskHit(state->stateB, DAT_00573b40);
+    if (save->recruitStage < 6 && !stateBHit)
+        return 0;
+    if (gameFlagIsSet(0x416) != 0 && !stateBHit)
+        return 0;
+    if (state->enemyCount >= 2 || state->enemyCount == 0)
+        return 0;
+
+    for (s32 index = BTL_FIRST_ENEMY; index < BTL_UNIT_END; index++) {
+        BtlMask *flags = (BtlMask *)(state->units + index * BTL_UNIT_STRIDE);
+        BtlMask current = *flags;
+        if (!btlMaskHit(current, DAT_00573978) || btlMaskHit(current, DAT_005739a0) || !btlMaskHit(current, DAT_00573990))
+            continue;
+
+        u32 *unitWords = (u32 *)flags;
+        u16 devilId = *(u16 *)((u8 *)flags + 0x166);
+        DevilRecord *record = dataTable00FindById(devilId);
+        if ((record->flags & BTL_DEVIL_FLAG_NO_RECRUIT) != 0)
             return 0;
-          }
-          temp_v2 = (unsigned int)*(unsigned short *)((int)puVar7 + 0x166);
-          dataTable00FindById();
-          if ((*(unsigned short *)(temp_v2 + 0x16) & 2) != 0) {
+        if (btlMaskHit(*flags, DAT_005739b0) || btlMaskHit(*flags, DAT_005739c0))
             return 0;
-          }
-          temp_v5 = *puVar7;
-          temp_v4 = puVar7[1];
-          if ((DAT_005739b0 & temp_v5) != 0 || (DAT_005739b4 & temp_v4) != 0) {
+        if ((unitWords[0x9D] & BTL_UNIT_FLAG_FIXED) != 0)
             return 0;
-          }
-          if ((temp_v5 & DAT_005739c0) != 0 || (temp_v4 & DAT_005739c4) != 0) {
-            return 0;
-          }
-          if ((puVar7[0x9d] & 0x80) != 0) {
-            return 0;
-          }
-          if (!((*(unsigned int *)(param_1 + 0x45ac) & DAT_00573b44) != 0 || (*puVar8 & DAT_00573b40) != 0))
-          {
-            temp_v1 = __aeabi_idivmod(puVar7[0x96] * 100,puVar7[0x97]);
-            temp_v6 = 0xf;
-            temp_v3 = gameDataFlagTestBit(0x3e);
-            if (temp_v3 != 0) {
-              temp_v6 = 0x19;
-            }
-            if (temp_v6 <= temp_v1) {
-              return 0;
-            }
-            temp_v5 = puVar7[1] | DAT_005739c4;
-            *puVar7 = *puVar7 | DAT_005739c0;
-            puVar7[1] = temp_v5;
-            temp_v1 = gameGetSlotTable();
-            temp_v0 = *(unsigned char *)(temp_v1 + 0x1ca3);
-            temp_v1 = gameSlotTableFindFree();
-            if (temp_v1 >= 4) {
-              if (temp_v1 == 4) {
-                temp_v1 = 0x19;
-              }
-              else if (temp_v1 == 5) {
-                temp_v1 = 0x14;
-              }
-              else if (temp_v1 != 6) {
-                if ((int)((unsigned int)temp_v0 - temp_v1) >= 3) {
-                  temp_v1 = gameGetPlayerData();
-                  temp_v1 = (int)((unsigned int)*(unsigned short *)(temp_v1 + 0x62) -
-                               (*(unsigned short *)(temp_v2 + 2) & 0xffff7fff)) / 2 + 5;
-                  if (temp_v1 >= 0) {
-                    if (temp_v1 >= 0x10) {
-                      temp_v1 = 0xf;
-                    }
-                  }
-                  else {
-                    temp_v1 = 0;
-                  }
-                }
-                else {
-                  temp_v1 = gameGetPlayerData();
-                  temp_v1 = (int)((unsigned int)*(unsigned short *)(temp_v1 + 0x62) -
-                               (*(unsigned short *)(temp_v2 + 2) & 0xffff7fff)) / 2 + 5;
-                  if (temp_v1 < 0) {
-                    temp_v1 = 0;
-                  }
-                  else if (temp_v1 >= 11) {
-                    temp_v1 = 10;
-                  }
-                }
-              }
-              else {
-                temp_v1 = 0xf;
-              }
-            }
-            else {
-              temp_v1 = 0xf;
-            }
-            temp_v3 = gameDataFlagTestBit(0x3e);
-            if (temp_v3 != 0) {
-              temp_v1 = temp_v1 + 0x14;
-            }
-            temp_v3 = lcgRandomRange(99);
-            if (temp_v1 < temp_v3) {
-              return 0;
-            }
-          }
-          else {
-            temp_v4 = temp_v4 | DAT_005739c4;
-            *puVar7 = temp_v5 | DAT_005739c0;
-            puVar7[1] = temp_v4;
-          }
-          temp_v2 = DAT_005739b0 | *puVar7;
-          puVar7[1] = DAT_005739b4 | puVar7[1];
-          *puVar7 = temp_v2;
-          return 1;
+
+        if (!btlMaskHit(state->stateB, DAT_00573b40)) {
+            s32 hpPercent = (s32)(unitWords[0x96] * 100) / (s32)unitWords[0x97];
+            s32 hpLimit = gameDataFlagTestBit(RECRUIT_BIT_BONUS) != 0 ? 0x19 : 0xF;
+            if (hpLimit <= hpPercent)
+                return 0;
+            flags->low |= DAT_005739c0.low;
+            flags->high |= DAT_005739c0.high;
+
+            u8 capacity = gameGetSlotTable()->capacity;
+            s32 freeSlot = gameSlotTableFindFree();
+            s32 chance;
+            if (freeSlot < 4)
+                chance = 0xF;
+            else if (freeSlot == 4)
+                chance = 0x19;
+            else if (freeSlot == 5)
+                chance = 0x14;
+            else if (freeSlot == 6)
+                chance = 0xF;
+            else if ((s32)capacity - freeSlot >= 3)
+                chance = recruitLevelChance(0xF, record);
+            else
+                chance = recruitLevelChance(10, record);
+            if (gameDataFlagTestBit(RECRUIT_BIT_BONUS) != 0)
+                chance += 0x14;
+            if (chance < lcgRandomRange(99))
+                return 0;
+        } else {
+            flags->low |= DAT_005739c0.low;
+            flags->high |= DAT_005739c0.high;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x36);
+        flags->low |= DAT_005739b0.low;
+        flags->high |= DAT_005739b0.high;
+        return 1;
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

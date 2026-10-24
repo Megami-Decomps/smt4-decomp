@@ -1,164 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c8a7c` (_code @ 0x1c8a7c, 0x3a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the pool shift and clear loops compile plainly (230 rows) where retail unrolls them by two (235 rows); the swap logic and the repeated paired-id checks are the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b7bca(int, int, int, unsigned char *);
+/* The skill slot state inside the demon screen block (only the fields used here). */
+typedef struct SkillSlots {
+    /* 0x0000 */ u8 unk0000[0xD114];
+    /* 0xD114 */ u16 active[8];         /* the demon's current skills */
+    /* 0xD124 */ u16 passiveFlag[8];    /* 1 when the slot holds a counted passive */
+    /* 0xD134 */ u16 pool[8];           /* the pending list; pool[0] is the slot being edited */
+    /* 0xD144 */ u8 unkD144[0x180];
+    /* 0xD2C4 */ s32 poolCount;
+    /* 0xD2C8 */ s32 passiveCount;
+    /* 0xD2CC */ u8 unkD2CC[4];
+    /* 0xD2D0 */ u8 dirty[8];
+} SkillSlots;
 
-/* stack frame of param_4: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_4_stack;
+/* The candidate record (only the skill list is read). */
+typedef struct SkillSource {
+    u8 unk00[0x34];
+    u16 skills[8];
+} SkillSource;
 
-extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
+void FUN_002b7bca(void *base, s32 count, s32 size, s32 (*compare)(const u16 *, const u16 *));
+s32 FUN_002c6e64(const u16 *left, const u16 *right);
+s32 FUN_0026b738(u16 skill);
+s32 recordContainsPairedId(u32 record, u16 skill);
 
-extern int FUN_0026b738(unsigned short);
-extern int recordContainsPairedId(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_002b7bca. */
-
-
-/* WARNING: Removing unreachable block (ram,0x001c8d6c) */
-
-void FUN_001c8a7c(int param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Removes the entry equal to pool[0] from the rest of the pool (it moved to the front). */
+static void poolDropDuplicate(SkillSlots *slots)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  
-  do {
-    temp_v1 = 0;
-    while( 1 ) {
-      temp_v5 = param_1 + temp_v1 * 2;
-      if (((*(short *)(temp_v5 + 0xd114) != 0 && param_4 != -1) && temp_v1 != param_4) &&
-         (*(short *)(temp_v5 + 0xd114) == *(short *)(param_3 + param_4 * 2 + 0x34))) break;
-      temp_v1 = temp_v1 + 1;
-      if (temp_v1 >= 8) {
-        return;
-      }
-    }
-    temp_v9 = param_3 + temp_v1 * 2;
-    temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 2 + 0xd114);
-    *(unsigned short *)(temp_v5 + 0xd114) = *(unsigned short *)(temp_v9 + 0x34);
-    *(unsigned char *)(param_1 + temp_v1 + 0xd2d0) = 1;
-    temp_v2 = param_1 + 0xd134;
-    temp_v7 = 0;
-    temp_v8 = 7;
-    do {
-      temp_v3 = param_1 + temp_v7 * 2;
-      if (*(short *)(temp_v3 + 0xd136) == *(short *)(param_1 + 0xd134)) {
-        *(unsigned short *)(temp_v3 + 0xd136) = 0;
-        FUN_002b7bca(temp_v2,8,2,&LAB_002c6e64);
-      }
-      temp_v8 = temp_v8 - 1;
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v8 != 0);
-    temp_v6 = *(unsigned int *)(param_1 + 0xd2c4);
-    if (0 < (int)temp_v6) {
-      temp_v4 = temp_v6 & 1;
-      if (temp_v4 == 1) {
-        temp_v7 = param_1 + temp_v6 * 2;
-        *(unsigned short *)(temp_v7 + 0xd134) = *(unsigned short *)(temp_v7 + 0xd132);
-      }
-      temp_v6 = (unsigned int)(temp_v4 == 1);
-      if ((int)temp_v4 < *(int *)(param_1 + 0xd2c4)) {
-        do {
-          temp_v4 = temp_v4 + 2;
-          temp_v8 = temp_v6 + 1;
-          temp_v7 = param_1 + (*(int *)(param_1 + 0xd2c4) - temp_v6) * 2;
-          *(unsigned short *)(temp_v7 + 0xd134) = *(unsigned short *)(temp_v7 + 0xd132);
-          temp_v6 = temp_v6 + 2;
-          temp_v7 = param_1 + (*(int *)(param_1 + 0xd2c4) - temp_v8) * 2;
-          *(unsigned short *)(temp_v7 + 0xd134) = *(unsigned short *)(temp_v7 + 0xd132);
-        } while ((int)temp_v4 < *(int *)(param_1 + 0xd2c4));
-      }
-    }
-    temp_v7 = *(int *)(param_1 + 0xd2c4);
-    temp_v6 = 8 - temp_v7;
-    if (0 < (int)temp_v6) {
-      temp_v8 = 0;
-      if (temp_v7 >= 8) {
-        temp_v4 = 0;
-      }
-      else {
-        temp_v4 = temp_v6 & 1;
-        if (temp_v4 == 1) {
-          temp_v8 = 1;
-          *(unsigned short *)(param_1 + temp_v7 * 2 + 0xd134) = 0;
+    for (s32 i = 0; i < 7; i++) {
+        if (slots->pool[1 + i] == slots->pool[0]) {
+            slots->pool[1 + i] = 0;
+            FUN_002b7bca(slots->pool, 8, 2, FUN_002c6e64);
         }
-      }
-      for (; (int)temp_v4 < (int)temp_v6; temp_v4 = temp_v4 + 2) {
-        temp_v3 = temp_v8 + 1;
-        *(unsigned short *)(param_1 + (temp_v7 + temp_v8) * 2 + 0xd134) = 0;
-        temp_v8 = temp_v8 + 2;
-        *(unsigned short *)(param_1 + (temp_v7 + temp_v3) * 2 + 0xd134) = 0;
-      }
     }
-    temp_v7 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34));
-    if (temp_v7 != 0) {
-      if (*(short *)(param_1 + 0xd136) == *(short *)(temp_v9 + 0x34)) {
-        *(unsigned short *)(param_1 + 0xd134) = 0;
-      }
-      else {
-        temp_v7 = 0;
-        temp_v8 = 7;
-        *(short *)(param_1 + 0xd134) = *(short *)(temp_v9 + 0x34);
-        do {
-          temp_v3 = param_1 + temp_v7 * 2;
-          if (*(short *)(temp_v3 + 0xd136) == *(short *)(param_1 + 0xd134)) {
-            *(unsigned short *)(temp_v3 + 0xd136) = 0;
-            FUN_002b7bca(temp_v2,8,2,&LAB_002c6e64);
-          }
-          temp_v8 = temp_v8 - 1;
-          temp_v7 = temp_v7 + 1;
-        } while (temp_v8 != 0);
-      }
-    }
-    else {
-      *(unsigned short *)(param_1 + 0xd134) = 0;
-      FUN_002b7bca(temp_v2,8,2,&LAB_002c6e64);
-    }
-    temp_v2 = FUN_0026b738(temp_v0);
-    param_4 = temp_v1;
-    if ((temp_v2 == 0) || (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v2 != 0))
-    {
-      temp_v2 = FUN_0026b738(temp_v0);
-      if ((temp_v2 == 0) && (temp_v2 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v2 != 0)
-         ) {
-        *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) + 1;
-        *(unsigned short *)(temp_v5 + 0xd124) = 1;
-      }
-      else {
-        temp_v5 = FUN_0026b738(temp_v0);
-        if (((temp_v5 == 0) &&
-            (temp_v5 = recordContainsPairedId(param_2,*(unsigned short *)(temp_v9 + 0x34)), temp_v5 == 0)) ||
-           (*(short *)(param_3 + temp_v1 * 2 + 0x34) == 0)) {
-          *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) - 1;
-        }
-      }
-    }
-    else {
-      if (*(short *)(param_3 + temp_v1 * 2 + 0x34) != 0) {
-        *(int *)(param_1 + 0xd2c8) = *(int *)(param_1 + 0xd2c8) - 1;
-      }
-      *(int *)(param_1 + 0xd2c4) = *(int *)(param_1 + 0xd2c4) - 1;
-      *(unsigned short *)(temp_v5 + 0xd124) = 0;
-    }
-  } while( 1 );
 }
 
-} /* extern "C" */
+/* Swaps skills between the demon's slots and the source record's list: whenever an active slot
+ * already holds the skill the source has at `swapIndex`, that slot takes the source's skill
+ * instead, the pool is shifted to make room for the displaced one, and the counters are fixed up. */
+void FUN_001c8a7c(SkillSlots *slots, u32 record, SkillSource *source, s32 swapIndex)
+{
+    for (;;) {
+        s32 slot = 0;
+
+        while (!(slots->active[slot] != 0 && swapIndex != -1 && slot != swapIndex &&
+                 slots->active[slot] == source->skills[swapIndex])) {
+            slot++;
+            if (slot >= 8) {
+                return;
+            }
+        }
+        u16 replaced = slots->active[slot];
+
+        slots->active[slot] = source->skills[slot];
+        slots->dirty[slot] = 1;
+        poolDropDuplicate(slots);
+        for (s32 i = slots->poolCount; i > 0; i--) {
+            slots->pool[i] = slots->pool[i - 1];
+        }
+        for (s32 i = slots->poolCount; i < 8; i++) {
+            slots->pool[i] = 0;
+        }
+        if (recordContainsPairedId(record, source->skills[slot]) != 0) {
+            if (slots->pool[1] == source->skills[slot]) {
+                slots->pool[0] = 0;
+            } else {
+                slots->pool[0] = source->skills[slot];
+                poolDropDuplicate(slots);
+            }
+        } else {
+            slots->pool[0] = 0;
+            FUN_002b7bca(slots->pool, 8, 2, FUN_002c6e64);
+        }
+        swapIndex = slot;
+        if (FUN_0026b738(replaced) == 0 || recordContainsPairedId(record, source->skills[slot]) != 0) {
+            if (FUN_0026b738(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) != 0) {
+                slots->passiveCount++;
+                slots->passiveFlag[slot] = 1;
+            } else if ((FUN_0026b738(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) == 0) ||
+                       source->skills[slot] == 0) {
+                slots->poolCount--;
+            }
+        } else {
+            if (source->skills[slot] != 0) {
+                slots->passiveCount--;
+            }
+            slots->poolCount--;
+            slots->passiveFlag[slot] = 0;
+        }
+    }
+}
+
+}

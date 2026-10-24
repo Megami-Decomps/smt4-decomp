@@ -1,135 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dbc1c` (_code @ 0x3dbc1c, 0x238 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the string-test chain compiles with different null-check placement and the "VER" prefix test and slot addressing use other registers; the lookup logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00249e54(...);
-int libc_strcmp(...);
-int libc_strncmp(...);
-int textFormatBuffer(...);
-int libc_strcpy(...);
-int libc_strlen(...);
-int memClear(...);
+/* One effect slot (0x8C bytes). */
+typedef struct EffectSlot {
+    /* 0x00 */ u8 id;               /* the resolved effect id */
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ const char *name;    /* the effect's name */
+    /* 0x08 */ u8 record[0x84];     /* the record keyedRecordRegisterName fills */
+} EffectSlot;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_1_stack;
+/* The battle effect work block (only the name table pointer and the slot array). */
+typedef struct EffectWork {
+    /* 0x0000 */ u8 unk0000[0x1CFC];
+    /* 0x1CFC */ const char (*names)[22];   /* four 22-byte names */
+    /* 0x1D00 */ EffectSlot slots[27];
+} EffectWork;
 
-extern unsigned char LAB_003dbe5c; /* 0x3dbe5c */
-#ifndef ROMWRIGHT_STORAGE_s__B_B_B_B_B_B_00435d00_25_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__B_B_B_B_B_B_00435d00_25_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 {
-    char whole[25];
-    unsigned char u1[25];
-    signed char s1[25];
-};
-typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_size_check[(sizeof(union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1) == 25) ? 1 : -1];
-typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_u1_width_check[(sizeof(((union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_s1_width_check[(sizeof(((union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435d00; /* 0x435d00 */
+extern const char *g_btlEffect[];           /* name prefixes and special names the table skips */
+extern const char DAT_00400664[11][32];     /* "ef_e_ref..." reference names, one per reference slot */
+extern const char DAT_0040090c[];           /* "NOT_EFT" */
+extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 
-/* Supplied declaration required: FUN_00249e54. */
-extern unsigned int keyedRecordRegisterName(int);
-/* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: libc_strncmp. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: libc_strlen. */
-/* Supplied declaration required: memClear. */
+u32 libc_strlen(const char *s);
+s32 libc_strcmp(const char *a, const char *b);
+s32 libc_strncmp(const char *a, const char *b, u32 n);
+char *libc_strcpy(char *destination, const char *source);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+void memClear(void *block, s32 size);
+u32 keyedRecordRegisterName(void *record);
+u32 FUN_00249e54(u32 id, const char *name);
 
-
-void FUN_003dbc1c(int param_1)
-
+/* Resolves each of the four effect names to an effect id: names that are empty or special are
+ * skipped, names naming a reference slot copy that slot's id, and names starting with "VER"
+ * register a record. */
+void FUN_003dbc1c(EffectWork *work)
 {
-/* irregular: 3 goto(s); 7 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  char *pcVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7 [128];
-  int temp_v8 [33];
-  
-  if (*(int *)(param_1 + 0x1cfc) != 0) {
-    temp_v4 = 0;
-    do {
-      temp_v3 = *(int *)(param_1 + 0x1cfc) + temp_v4 * 0x16;
-      temp_v1 = libc_strlen(temp_v3);
-      if ((temp_v1 != 0) && (temp_v1 = temp_v3, libc_strcmp(temp_v3,&LAB_003dbe5c), temp_v1 != 0)) {
-        pcVar3 = "NOT_EFT";
-        libc_strcmp("NOT_EFT",temp_v3);
-        if (pcVar3 != (char *)0x0) {
-          if (temp_v3 != 0) {
-            temp_v2 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]));
-            temp_v1 = libc_strncmp(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[0]),temp_v2);
-            if (temp_v1 == 0) goto LAB_003dbe40;
-          }
-          if ((temp_v3 == 0) ||
-             (temp_v1 = temp_v3, libc_strcmp(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[16])), temp_v1 != 0)) {
-            if (temp_v3 != 0) {
-              temp_v2 = libc_strlen((*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[12]));
-              temp_v1 = libc_strncmp(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[12]),temp_v2);
-              if (temp_v1 == 0) goto LAB_003dbe40;
-            }
-            if ((temp_v3 == 0) ||
-               (temp_v1 = temp_v3, libc_strcmp(temp_v3,(*(unsigned int *)&s__B_B_B_B_B_B_00435d00.u1[20])), temp_v1 != 0)) {
-              memClear(temp_v7,0x80);
-              memClear(temp_v8,0x80);
-              textFormatBuffer(temp_v8,"battle/effect/%s.eft",temp_v3);
-              libc_strcpy(temp_v7,temp_v8);
-              temp_v1 = libc_strlen(temp_v7);
-              if (temp_v1 != 0) {
-                temp_v8[0] = temp_v3;
-                if (temp_v3 != 0) {
-                  temp_v1 = 0;
-                  do {
-                    temp_v2 = libc_strlen("ef_e_ref" + temp_v1 * 0x20);
-                    temp_v3 = libc_strncmp(temp_v8[0],"ef_e_ref" + temp_v1 * 0x20,temp_v2);
-                    if (temp_v3 == 0) {
-                      if (-1 < temp_v1) {
-                        *(unsigned char *)(param_1 + temp_v4 * 0x8c + 0x1d00) =
-                             *(unsigned char *)(param_1 + temp_v1 * 0x8c + 0x25c0);
-                        goto LAB_003dbe40;
-                      }
-                      break;
-                    }
-                    temp_v1 = temp_v1 + 1;
-                  } while (temp_v1 < 0xb);
-                }
-                temp_v1 = param_1 + temp_v4 * 0x8c;
-                pcVar3 = *(char **)(temp_v1 + 0x1d04);
-                temp_v0 = *pcVar3;
-                temp_v5 = temp_v0 == 'V';
-                if (temp_v5) {
-                  temp_v0 = pcVar3[1];
-                }
-                temp_v6 = temp_v5 && temp_v0 == 'E';
-                if (temp_v5 && temp_v0 == 'E') {
-                  temp_v6 = pcVar3[2] == 'R';
-                }
-                if (temp_v6) {
-                  temp_v2 = keyedRecordRegisterName(temp_v1 + 0x1d08);
-                  *(char *)(temp_v1 + 0x1d00) = (char)temp_v2;
-                  FUN_00249e54(temp_v2,pcVar3);
-                  *(char *)(temp_v1 + 0x1d00) = (char)temp_v2;
-                }
-              }
-            }
-          }
+    if (work->names == NULL) {
+        return;
+    }
+    for (s32 i = 0; i < 4; i++) {
+        const char *name = work->names[i];
+
+        if (libc_strlen(name) == 0) {
+            continue;
         }
-      }
-LAB_003dbe40:
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 4);
-  }
-  return;
+        if (libc_strcmp(name, "0") == 0) {
+            continue;
+        }
+        if (libc_strcmp(DAT_0040090c, name) == 0) {
+            continue;
+        }
+        if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
+            continue;
+        }
+        if (name != NULL && libc_strcmp(name, g_btlEffect[4]) == 0) {
+            continue;
+        }
+        if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
+            continue;
+        }
+        if (name != NULL && libc_strcmp(name, g_btlEffect[5]) == 0) {
+            continue;
+        }
+        char path[128];
+        char formatted[128];
+
+        memClear(path, 0x80);
+        memClear(formatted, 0x80);
+        textFormatBuffer(formatted, DAT_004008c4, name);
+        libc_strcpy(path, formatted);
+        if (libc_strlen(path) == 0) {
+            continue;
+        }
+        const char *key = name;
+        s32 match = -1;
+
+        if (key != NULL) {
+            for (s32 k = 0; k < 11; k++) {
+                if (libc_strncmp(key, DAT_00400664[k], libc_strlen(DAT_00400664[k])) == 0) {
+                    match = k;
+                    break;
+                }
+            }
+        }
+        if (match >= 0) {
+            work->slots[i].id = work->slots[16 + match].id;
+            continue;
+        }
+        EffectSlot *slot = &work->slots[i];
+        const char *slotName = slot->name;
+
+        if (slotName[0] == 'V' && slotName[1] == 'E' && slotName[2] == 'R') {
+            slot->id = (u8)keyedRecordRegisterName(slot->record);
+            slot->id = (u8)FUN_00249e54(slot->id, slotName);
+        }
+    }
 }
 
-} /* extern "C" */
+}

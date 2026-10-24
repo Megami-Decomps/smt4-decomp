@@ -1,4 +1,3 @@
-/* NON_MATCHING: in the inlined render-state push the new entry's address is computed into ip instead of reusing r3 */
 /* Draws the fade overlay while its alpha is above zero. */
 #include "common.h"
 #include "camp/RenderCtx.h"

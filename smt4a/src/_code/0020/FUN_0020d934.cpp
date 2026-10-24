@@ -1,170 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020d934` (_code @ 0x20d934, 0x2dc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the repeated table-section lookups (get, entries, count) are not merged the way retail's per-case calls are, and the switch layout differs; the help text chosen for each panel kind is the same. */
+#include "common.h"
+#include "gamedata/DataTable.h"
 
-extern "C" {
+/* One line of table 0x39 (0x5C bytes): the help text starts at byte 1. */
+struct HelpLine {
+    u8 unk00;
+    char text[0x5B];
+};
 
-int FUN_0019de98(int, unsigned int);
-int FUN_0023f900(void);
-int screenShowMessage(int);
-int FUN_00359b6c(int);
+/* The party panel (only the fields read here). */
+struct PartyPanelView {
+    u8 unk000[0x36];
+    u16 id;
+    u8 unk038[0x97C];
+    u8 kind;
+    u8 unk9b5[0x4CF];
+    s32 mode;
+    u8 unke88[0x1EC];
+    u32 flags;
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern "C" void FUN_0019de98(const char *text, u32 color);
 
-extern int g_partyPanel; /* 0x57f268 */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0023f900. */
-/* Supplied declaration required: screenShowMessage. */
-/* Supplied declaration required: FUN_00359b6c. */
-
-
-void FUN_0020d934(void)
-
+/* Shows line `line` of table 0x39 when the table has it. */
+static __inline void showHelpLine(u32 line)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  if (g_partyPanel == 0) {
-    return;
-  }
-  temp_v0 = 0;
-  switch(*(unsigned char *)(g_partyPanel + 0x9b4)) {
-  default:
-    if (temp_v0 == 0) {
-      return;
+    DataTableView<HelpLine> help(0x39, 0);
+    HelpLine *entry = help.at(line);
+
+    if (entry != NULL) {
+        FUN_0019de98(entry->text, 0xF4F4F4FF);
     }
-    FUN_0019de98(temp_v0,0xf4f4f4ff);
-    return;
-  case 2:
-  case 3:
-  case 4:
-  case 0xc:
-  case 0xd:
-  case 0xe:
-  case 0xf:
-  case 0x10:
-  case 0x11:
-  case 0x13:
-  case 0x14:
-    FUN_0023f900();
-    return;
-  case 5:
-  case 6:
-  case 7:
-    FUN_00359b6c(*(unsigned short *)(g_partyPanel + 0x36));
-    return;
-  case 8:
-  case 9:
-    screenShowMessage(*(unsigned short *)(g_partyPanel + 0x36));
-    return;
-  case 10:
-  case 0x12:
-    if (*(int *)(g_partyPanel + 0xe84) == 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 4) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x115;
-      if (temp_v0 == 0) {
-        return;
-      }
-      FUN_0019de98(temp_v0,0xf4f4f4ff);
-      return;
-    }
-    if (*(int *)(g_partyPanel + 0xe84) != 1) {
-      return;
-    }
-    temp_v1 = *(unsigned int *)(g_partyPanel + 0x1074);
-    if ((temp_v1 & 8) != 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 0xf) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x508;
-    }
-    else if ((temp_v1 & 0x40) != 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 0xc) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x3f4;
-    }
-    else if ((temp_v1 & 2) != 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 0xd) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x450;
-    }
-    else if ((temp_v1 & 4) != 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 0xe) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x4ac;
-    }
-    else if ((temp_v1 & 0x20) != 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 0x10) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x564;
-    }
-    else if ((temp_v1 & 0x80) != 0) {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 0x11) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x5c0;
-    }
-    else {
-      temp_v2 = dataTableGet(0x39,0);
-      temp_v0 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v2);
-      if (temp_v1 < 5) {
-        return;
-      }
-      temp_v0 = temp_v0 + 0x170;
-    }
-    break;
-  case 0xb:
-    temp_v2 = dataTableGet(0x39,0);
-    temp_v0 = dataTableGetEntries();
-    temp_v1 = dataTableGetCount(temp_v2);
-    if (temp_v1 < 6) {
-      return;
-    }
-    temp_v0 = temp_v0 + 0x1cc;
-  }
-  temp_v0 = temp_v0 + 1;
-  if (temp_v0 == 0) {
-    return;
-  }
-  FUN_0019de98(temp_v0,0xf4f4f4ff);
-  return;
 }
 
-} /* extern "C" */
+extern "C" {
+extern PartyPanelView *g_partyPanel;
+void FUN_0023f900(void);
+void screenShowMessage(u32 id);
+void FUN_00359b6c(u32 id);
+
+/* Shows the help line for the party panel's current screen: the page-specific handlers, or a
+ * line of table 0x39 picked by the panel kind and its flags. */
+void FUN_0020d934(void)
+{
+    if (g_partyPanel == NULL) {
+        return;
+    }
+    switch (g_partyPanel->kind) {
+    default:
+        return;
+    case 2:
+    case 3:
+    case 4:
+    case 0xC:
+    case 0xD:
+    case 0xE:
+    case 0xF:
+    case 0x10:
+    case 0x11:
+    case 0x13:
+    case 0x14:
+        FUN_0023f900();
+        return;
+    case 5:
+    case 6:
+    case 7:
+        FUN_00359b6c(g_partyPanel->id);
+        return;
+    case 8:
+    case 9:
+        screenShowMessage(g_partyPanel->id);
+        return;
+    case 10:
+    case 0x12:
+        if (g_partyPanel->mode == 0) {
+            showHelpLine(3);
+            return;
+        } else if (g_partyPanel->mode != 1) {
+            return;
+        } else if ((g_partyPanel->flags & 8) != 0) {
+            showHelpLine(14);
+            return;
+        } else if ((g_partyPanel->flags & 0x40) != 0) {
+            showHelpLine(11);
+            return;
+        } else if ((g_partyPanel->flags & 2) != 0) {
+            showHelpLine(12);
+            return;
+        } else if ((g_partyPanel->flags & 4) != 0) {
+            showHelpLine(13);
+            return;
+        } else if ((g_partyPanel->flags & 0x20) != 0) {
+            showHelpLine(15);
+            return;
+        } else if ((g_partyPanel->flags & 0x80) != 0) {
+            showHelpLine(16);
+            return;
+        } else {
+            showHelpLine(4);
+            return;
+        }
+    case 0xB:
+        showHelpLine(5);
+        return;
+    }
+}
+}

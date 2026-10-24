@@ -1,151 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fd140` (_code @ 0x3fd140, 0x308 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the keyframe lookup that plays an animation at a time; retail zero-initialises the two result vectors on the stack up front and keeps the interpolation in s-registers across the compares, and the scan/compare of the frame time (int to float per key) is scheduled differently by armcc. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_003fad14(...);
-int FUN_004ff058(...);
-int VectorSignedToFloat(...);
-
-typedef struct fn_003fd140_arg0 fn_003fd140_arg0;
-struct fn_003fd140_arg0 {
-    unsigned char pad_0x0[0x10];
-    void *field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0xc];
-    int field_0x20; /* +0x20 */
-    int field_0x24; /* +0x24 */
+/* One keyframe (0x18 bytes). */
+struct AnimKey {
+    /* 0x00 */ s32 id;
+    /* 0x04 */ s32 time;
+    /* 0x08 */ f32 position[2];
+    /* 0x10 */ f32 scale[2];     /* percent */
 };
 
-/* stack frame of param_7: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_7_stack;
+/* The first key and key count of one animation. */
+struct AnimRange {
+    u16 first;
+    u16 count;
+};
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: FUN_003fad14. */
-/* Supplied declaration required: FUN_004ff058. */
+struct AnimSetInfo {
+    /* 0x00 */ u8 unk00[0xE];
+    /* 0x0E */ u16 animCount;
+};
 
+/* An animation set. */
+struct AnimSet {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ AnimSetInfo *info;
+    /* 0x14 */ u8 unk14[0xC];
+    /* 0x20 */ AnimKey *keys;
+    /* 0x24 */ AnimRange *ranges;
+};
 
-void FUN_003fd140(fn_003fd140_arg0 *param_1,int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,int param_6,unsigned int param_7)
+extern "C" {
+void FUN_004ff058(AnimSet *set, s32 key, u32 a, u32 b, f32 c);
+void FUN_003fad14(AnimSet *set, s32 key, u32 a, u32 b, f32 c, f32 *position, f32 *scale, f32 d);
 
+/* Looks up animation `index` of the set at `time` (interpolating between the two surrounding keys)
+ * and plays the resulting key, with the interpolated position and scale when `placed` is set. */
+void FUN_003fd140(AnimSet *set, s32 index, u32 a, u32 b, f32 time, f32 c, s32 placed, f32 d)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  unsigned char temp_v12;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  fn_003fd140_arg0 *pfStack_34;
-  int iStack_30;
-  unsigned int temp_v19;
-  unsigned int uStack_28;
-  
-  if (param_2 < (int)(unsigned int)*(unsigned short *)((int)param_1->field_0x10 + 0xe)) {
-    temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x24 + param_2 * 4);
-    temp_v11 = (unsigned int)*(unsigned short *)(param_1->field_0x24 + param_2 * 4 + 2) + (temp_v4 - 1);
-    if ((int)temp_v4 < temp_v11 + 1) {
-      temp_v9 = param_1->field_0x20;
-      temp_v6 = temp_v4;
-      do {
-        temp_v13 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v9 + temp_v6 * 0x18 + 4),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = in_fpscr & 0xfffffff;
-        in_fpscr = temp_v0 | ((unsigned int)(in_s0 == temp_v13) << 0x1e) | ((unsigned int)(temp_v13 <= in_s0) << 0x1d);
-        temp_v1 = (unsigned char)(in_fpscr >> 0x18);
-        if (!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) {
-          temp_v2 = *(int *)(temp_v9 + temp_v6 * 0x18 + 4);
-          temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v0 = temp_v0 | ((unsigned int)(temp_v13 == in_s0) << 0x1e);
-          temp_v12 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-          if (!temp_v12) {
-            temp_v12 = temp_v4 == temp_v6;
-          }
-          if (temp_v12) {
-            temp_v3 = *(int *)(temp_v9 + temp_v6 * 0x18);
-            temp_v17 = *(float *)(temp_v9 + temp_v6 * 0x18 + 8);
-            temp_v18 = *(float *)(temp_v6 * 0x18 + 0xc + temp_v9);
-            temp_v15 = *(float *)(param_1->field_0x20 + temp_v6 * 0x18 + 0x10);
-            temp_v16 = *(float *)(param_1->field_0x20 + temp_v6 * 0x18 + 0x14);
-          }
-          else {
-            temp_v7 = *(int *)(temp_v9 + (temp_v6 * 0x18 - 0x14));
-            temp_v5 = temp_v6 * 0x18 - 0x10;
-            temp_v14 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(temp_v0 >> 0x16) & 3);
-            temp_v3 = *(int *)(temp_v9 + (temp_v6 * 0x18 - 0x18));
-            temp_v8 = temp_v6 * 0x18 - 0xc;
-            temp_v13 = (float)VectorSignedToFloat(temp_v2 - temp_v7,(unsigned char)(temp_v0 >> 0x16) & 3);
-            temp_v2 = temp_v6 * 0x18 - 8;
-            temp_v13 = (in_s0 - temp_v14) / temp_v13;
-            temp_v7 = temp_v6 * 0x18 - 4;
-            temp_v10 = param_1->field_0x20;
-            temp_v17 = *(float *)(temp_v5 + param_1->field_0x20) +
-                       temp_v13 * (*(float *)(temp_v6 * 0x18 + 8 + temp_v9) - *(float *)(temp_v9 + temp_v5))
-            ;
-            temp_v18 = *(float *)(param_1->field_0x20 + temp_v8) +
-                       temp_v13 * (*(float *)(temp_v6 * 0x18 + 0xc + temp_v9) -
-                                *(float *)(temp_v9 + temp_v8));
-            temp_v15 = *(float *)(param_1->field_0x20 + temp_v2) +
-                       temp_v13 * (*(float *)(temp_v6 * 0x18 + 0x10 + temp_v10) -
-                                *(float *)(temp_v10 + temp_v2));
-            temp_v16 = *(float *)(param_1->field_0x20 + temp_v7) +
-                       temp_v13 * (*(float *)(temp_v6 * 0x18 + 0x14 + temp_v10) -
-                                *(float *)(temp_v10 + temp_v7));
-          }
-          if (-1 < temp_v3) goto LAB_003fd3d0;
-          break;
+    if (index >= set->info->animCount)
+        return;
+    f32 position[2] = { 0.0f, 0.0f };
+    f32 scale[2] = { 0.0f, 0.0f };
+    s32 first = set->ranges[index].first;
+    s32 last = first + set->ranges[index].count - 1;
+    s32 key = 0;
+    bool found = false;
+    for (s32 i = first; i <= last; i++) {
+        AnimKey *current = &set->keys[i];
+        if (time > (f32)current->time)
+            continue;
+        if (time == (f32)current->time || i == first) {
+            key = current->id;
+            position[0] = current->position[0];
+            position[1] = current->position[1];
+            scale[0] = current->scale[0];
+            scale[1] = current->scale[1];
+        } else {
+            AnimKey *previous = current - 1;
+            f32 ratio = (time - (f32)previous->time) / (f32)(current->time - previous->time);
+            key = previous->id;
+            position[0] = previous->position[0] + ratio * (current->position[0] - previous->position[0]);
+            position[1] = previous->position[1] + ratio * (current->position[1] - previous->position[1]);
+            scale[0] = previous->scale[0] + ratio * (current->scale[0] - previous->scale[0]);
+            scale[1] = previous->scale[1] + ratio * (current->scale[1] - previous->scale[1]);
         }
-        temp_v6 = temp_v6 + 1;
-      } while ((int)temp_v6 < temp_v11 + 1);
+        found = key >= 0;
+        break;
     }
-    temp_v9 = param_1->field_0x20;
-    temp_v17 = *(float *)(temp_v9 + temp_v11 * 0x18 + 8);
-    temp_v3 = *(int *)(temp_v9 + temp_v11 * 0x18);
-    temp_v18 = *(float *)(temp_v11 * 0x18 + 0xc + temp_v9);
-    temp_v15 = *(float *)(param_1->field_0x20 + temp_v11 * 0x18 + 0x10);
-    temp_v16 = *(float *)(param_1->field_0x20 + temp_v11 * 0x18 + 0x14);
-LAB_003fd3d0:
-    temp_v15 = temp_v15 * 0.01f;
-    temp_v16 = temp_v16 * 0.01f;
-    pfStack_34 = param_1;
-    iStack_30 = param_2;
-    temp_v19 = param_3;
-    uStack_28 = param_4;
-    if (param_6 == 0) {
-      FUN_004ff058(param_1,temp_v3,param_3,param_4,param_5);
-      return;
+    if (!found) {
+        AnimKey *end = &set->keys[last];
+        key = end->id;
+        position[0] = end->position[0];
+        position[1] = end->position[1];
+        scale[0] = end->scale[0];
+        scale[1] = end->scale[1];
     }
-    FUN_003fad14(param_1,temp_v3,param_3,param_4,param_5,&temp_v17,&temp_v15,param_7);
-  }
-  return;
+    scale[0] *= 0.01f;
+    scale[1] *= 0.01f;
+    if (placed == 0)
+        FUN_004ff058(set, key, a, b, c);
+    else
+        FUN_003fad14(set, key, a, b, c, position, scale, d);
 }
 
 } /* extern "C" */

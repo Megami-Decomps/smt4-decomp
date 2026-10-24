@@ -1,197 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e6b64` (_code @ 0x4e6b64, 0x364 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the Apocalypse enemy target-candidate builder (twin of smt4 FUN_003cf4f8 with 64-bit unit flags and a weighted pick); the local action-info block and candidate array are laid out differently by armcc, and retail's 0x85-entry clear loop pairs two stores per iteration. */
+#include "common.h"
 
-extern "C" {
-
-int dataTable04FindById(...);
-int FUN_003e8bb0(...);
-int FUN_004de7a0(...);
-
-typedef struct fn_004e6b64_arg1 fn_004e6b64_arg1;
-struct fn_004e6b64_arg1 {
-    unsigned char pad_0x0[0x20];
-    void *field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x14];
-    byte field_0x38; /* +0x38 */
-    unsigned char pad_0x39[0x537];
-    int field_0x570; /* +0x570 */
+/* The action a battle unit is about to use (as FUN_003e8bb0 fills it). */
+struct BattleActionInfo {
+    /* 0x00 */ s16 kind;
+    /* 0x02 */ u8 unk02[0x14];
+    /* 0x16 */ s16 skill;
+    /* 0x18 */ u8 unk18[7];
+    /* 0x1F */ s8 powerMin;
+    /* 0x20 */ s8 powerMax;
+    /* 0x21 */ u8 unk21[3];
 };
 
-/* stack frame of param_3: 7 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned char sp258; /* 0x258: local_258 */
-    unsigned char sp259; /* 0x259: local_259 */
-    unsigned short sp262; /* 0x262: local_262 */
-    unsigned short sp278; /* 0x278: local_278 */
-} param_3_stack;
+/* One candidate: a target id and a weight. */
+struct TargetCandidate {
+    s16 id;
+    s16 weight;
+};
 
-extern unsigned int DAT_00571168; /* 0x571168 */
-extern unsigned int DAT_0057116c; /* 0x57116c */
-extern unsigned int DAT_00571178; /* 0x571178 */
-extern unsigned int DAT_0057117c; /* 0x57117c */
-extern unsigned int DAT_00571188; /* 0x571188 */
-extern unsigned int DAT_0057118c; /* 0x57118c */
-extern unsigned int DAT_00571260; /* 0x571260 */
-extern unsigned int DAT_00571264; /* 0x571264 */
+/* The enemy's per-turn work (only the fields the builder reads). */
+struct EnemyTurnWork {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u64 *unitFlags;     /* the acting unit's flag word */
+    /* 0x024 */ u8 unk024[0x14];
+    /* 0x038 */ s8 allowed[0x85];
+    /* 0x0BD */ u8 unk0BD[0x4B3];
+    /* 0x570 */ s32 disabled;
+};
 
-extern unsigned int btlGetMainState(void);
-extern int lcgRandomRange(unsigned int);
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_004de7a0. */
-extern int FUN_004e83ac(int *, fn_004e6b64_arg1 *, int);
+struct BattleUnitView {
+    /* 0x000 */ u64 flags;
+    /* 0x008 */ u8 unk008[0x400];
+};
 
+struct BattleSideInfo {
+    /* 0x0000 */ u8 unk0000[0xA0];
+    /* 0x00A0 */ s8 firstBonus;
+    /* 0x00A1 */ s8 secondBonus;
+    /* 0x00A2 */ u8 unk00A2[0x1E32];
+    /* 0x1ED4 */ u8 *slotRecords;   /* 0x1D0-byte records, target slot at +0x68 */
+    /* 0x1ED8 */ u8 unk1ED8[0x124];
+    /* 0x1FFC */ BattleUnitView *units;
+    /* 0x2000 */ u8 unk2000[0x25A0];
+    /* 0x45A0 */ u64 stateFlags;
+};
 
-void FUN_004e6b64(int *param_1,fn_004e6b64_arg1 *param_2,short *param_3)
+struct EnemyAiContext {
+    /* 0x00 */ BattleSideInfo *battle;
+};
 
+struct SkillRecord04 {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+    /* 0x24 */ u8 unk24[0xB];
+    /* 0x2F */ u8 splash;
+};
+
+extern "C" {
+extern u64 DAT_00571168;
+extern u64 DAT_00571178;
+extern u64 DAT_00571188;
+extern u64 DAT_00571260;
+
+BattleSideInfo *btlGetMainState(void);
+void FUN_003e8bb0(BattleActionInfo *info, BattleSideInfo *battle, u64 *unitFlags);
+SkillRecord04 *dataTable04FindById(s16 id);
+s32 FUN_004e83ac(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
+s32 FUN_004de7a0(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *candidates, s32 count);
+s32 lcgRandomRange(u32 limit);
+
+/* Fills `out` (0x85 id/weight pairs, ids -1 when unused) with the targets the enemy may pick this
+ * turn: one weighted pick for a single-target action, or every allowed target weighted by the
+ * power roll, and raises the enemy's stat bonuses when guarding targets are hit. */
+void FUN_004e6b64(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *out)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  short temp_v3;
-  unsigned int temp_v4;
-  short *psVar6;
-  int *piVar7;
-  short *psVar8;
-  unsigned int *puVar9;
-  unsigned char *pbVar10;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  short temp_v10 [11];
-  short temp_v11;
-  char temp_v12;
-  char temp_v13;
-  short asStack_244 [266];
-  int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  
-  temp_v4 = btlGetMainState();
-  FUN_003e8bb0(temp_v10,temp_v4,param_2->field_0x20);
-  psVar8 = asStack_244;
-  temp_v6 = 0x85;
-  psVar6 = param_3;
-  do {
-    *psVar6 = -1;
-    psVar6[1] = 0;
-    *psVar8 = -1;
-    psVar8[1] = 0;
-    temp_v6 = temp_v6 - 1;
-    psVar6 = psVar6 + 2;
-    psVar8 = psVar8 + 2;
-  } while (temp_v6 != 0);
-  if (param_2->field_0x570 == 0) {
-    temp_v6 = (int)temp_v11;
-    temp_v14 = 0;
-    temp_v15 = 0;
-    temp_v16 = 0;
-    if ((((temp_v6 != 0) && (dataTable04FindById(), temp_v6 != 0)) && (*(char *)(temp_v6 + 0x23) == '\x04'))
-       && (*(char *)(temp_v6 + 0x2f) == '\0')) {
-      temp_v16 = 1;
+    BattleActionInfo info;
+    TargetCandidate scratch[0x85];
+    BattleSideInfo *battle = btlGetMainState();
+    FUN_003e8bb0(&info, battle, work->unitFlags);
+    for (s32 i = 0; i < 0x85; i++) {
+        out[i].id = -1;
+        out[i].weight = 0;
+        scratch[i].id = -1;
+        scratch[i].weight = 0;
     }
-    temp_v8 = (int)temp_v12;
-    temp_v6 = (int)temp_v13;
-    if (temp_v10[0] == 6) {
-      temp_v14 = 1;
+    if (work->disabled != 0)
+        return;
+    bool pickOne = false;
+    bool favourGuarding = false;
+    bool plainSkill = false;
+    if (info.skill != 0) {
+        SkillRecord04 *skill = dataTable04FindById(info.skill);
+        if (skill != NULL && skill->kind == 4 && skill->splash == 0)
+            plainSkill = true;
     }
-    else if (temp_v10[0] == 1) {
-      temp_v15 = 1;
-    }
-    temp_v7 = 0;
-    temp_v9 = temp_v6;
-    if (((*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0 &&
-         (*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0) && (temp_v9 = temp_v8, temp_v8 < temp_v6))
-    {
-      temp_v6 = lcgRandomRange((temp_v6 - temp_v8) & 0xffff);
-      temp_v9 = temp_v8 + temp_v6;
-    }
-    do {
-      if (((&param_2->field_0x38)[temp_v7] != 0) &&
-         ((puVar9 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v7 * 0x408),
-          (DAT_0057117c & puVar9[1]) != 0 || (DAT_00571178 & *puVar9) != 0 ||
-          (temp_v6 = FUN_004e83ac(param_1,param_2,temp_v7), temp_v6 != 0)))) {
-        (&param_2->field_0x38)[temp_v7] = 0;
-      }
-      temp_v2 = DAT_0057118c;
-      temp_v1 = DAT_00571188;
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < 0x6d);
-    temp_v0 = (char)temp_v9;
-    if (temp_v14 == 0) {
-      temp_v8 = 0;
-      temp_v6 = 0;
-      do {
-        if ((&param_2->field_0x38)[temp_v6] != 0) {
-          temp_v5 = 0;
-          temp_v7 = (int)*(short *)(*(int *)(*param_1 + 0x1ed4) + temp_v6 * 0x1d0 + 0x68);
-          if (((-1 < temp_v7) &&
-              (puVar9 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v7 * 0x408),
-              puVar9 != (unsigned int *)0x0)) && ((*puVar9 & temp_v1) != 0 || (puVar9[1] & temp_v2) != 0)) {
-            temp_v5 = 1;
-          }
-          param_3[temp_v8 * 2] = (short)temp_v6;
-          (param_3 + temp_v8 * 2)[1] = (short)temp_v9;
-          if ((temp_v5 & temp_v15 & ~temp_v16) != 0) {
-            if (*(char *)(*param_1 + 0xa0) < '\0') {
-              *(char *)(*param_1 + 0xa0) = temp_v0 * '\x03';
-            }
-            if (*(char *)(*param_1 + 0xa1) < '\0') {
-              *(char *)(*param_1 + 0xa1) = temp_v0 * '\x03';
-            }
-          }
-          temp_v8 = temp_v8 + 1;
+    if (info.kind == 6)
+        pickOne = true;
+    else if (info.kind == 1)
+        favourGuarding = true;
+    s32 power = info.powerMax;
+    if (!(context->battle->stateFlags & DAT_00571260) && info.powerMin < info.powerMax)
+        power = info.powerMin + lcgRandomRange((u16)(info.powerMax - info.powerMin));
+    else if (!(context->battle->stateFlags & DAT_00571260))
+        power = info.powerMin;
+    for (s32 target = 0; target < 0x6D; target++) {
+        if (work->allowed[target]) {
+            BattleUnitView *unit = &context->battle->units[target];
+            if ((unit->flags & DAT_00571178) || FUN_004e83ac(context, work, target))
+                work->allowed[target] = 0;
         }
-        temp_v6 = temp_v6 + 1;
-      } while (temp_v6 < 0x85);
-      return;
     }
-    temp_v3 = 0;
-    temp_v8 = 0x85;
-    pbVar10 = &param_2->field_0x38;
-    temp_v6 = 0;
-    do {
-      temp_v7 = temp_v6;
-      if (*pbVar10 != 0) {
-        temp_v7 = temp_v6 + 1;
-        asStack_244[temp_v6 * 2] = temp_v3;
-        asStack_244[temp_v6 * 2 + 1] = 0;
-      }
-      temp_v8 = temp_v8 - 1;
-      temp_v3 = temp_v3 + 1;
-      pbVar10 = pbVar10 + 1;
-      temp_v6 = temp_v7;
-    } while (temp_v8 != 0);
-    if (temp_v7 != 0) {
-      if ((!((*(unsigned int *)((int)param_2->field_0x20 + 4) & DAT_0057116c) == 0 &&
-            (DAT_00571168 & *(unsigned int *)param_2->field_0x20) == 0)) && (temp_v7 >= 2)) {
-        piVar7 = param_1;
-        FUN_004de7a0(param_1,param_2,asStack_244,temp_v7);
-        temp_v3 = (short)(int)piVar7;
-      }
-      else {
-        temp_v6 = lcgRandomRange((temp_v7 - 1U) & 0xffff);
-        temp_v3 = asStack_244[temp_v6 * 2];
-        asStack_244[temp_v6 * 2 + 1] = asStack_244[temp_v6 * 2 + 1] + 1;
-      }
-      param_3[1] = 1;
-      *param_3 = temp_v3;
-      if (*(char *)(*param_1 + 0xa0) < '\0') {
-        *(char *)(*param_1 + 0xa0) = temp_v0;
-      }
-      if (*(char *)(*param_1 + 0xa1) < '\0') {
-        *(char *)(*param_1 + 0xa1) = temp_v0;
-      }
+    if (!pickOne) {
+        s32 count = 0;
+        for (s32 target = 0; target < 0x85; target++) {
+            if (!work->allowed[target])
+                continue;
+            bool guarding = false;
+            s32 slot = *(s16 *)(context->battle->slotRecords + target * 0x1D0 + 0x68);
+            if (slot >= 0) {
+                BattleUnitView *unit = &context->battle->units[slot];
+                if (unit != NULL && (unit->flags & DAT_00571188))
+                    guarding = true;
+            }
+            out[count].id = (s16)target;
+            out[count].weight = (s16)power;
+            if (guarding && favourGuarding && !plainSkill) {
+                if (context->battle->firstBonus < 0)
+                    context->battle->firstBonus = (s8)power * 3;
+                if (context->battle->secondBonus < 0)
+                    context->battle->secondBonus = (s8)power * 3;
+            }
+            count++;
+        }
+        return;
     }
-  }
-  return;
+    s32 count = 0;
+    for (s32 target = 0; target < 0x85; target++) {
+        if (work->allowed[target]) {
+            scratch[count].id = target;
+            scratch[count].weight = 0;
+            count++;
+        }
+    }
+    if (count == 0)
+        return;
+    s16 pick;
+    if ((*work->unitFlags & DAT_00571168) && count >= 2) {
+        pick = (s16)FUN_004de7a0(context, work, scratch, count);
+    } else {
+        s32 index = lcgRandomRange((u16)(count - 1));
+        pick = scratch[index].id;
+        scratch[index].weight++;
+    }
+    out[0].weight = 1;
+    out[0].id = pick;
+    if (context->battle->firstBonus < 0)
+        context->battle->firstBonus = (s8)power;
+    if (context->battle->secondBonus < 0)
+        context->battle->secondBonus = (s8)power;
 }
 
 } /* extern "C" */

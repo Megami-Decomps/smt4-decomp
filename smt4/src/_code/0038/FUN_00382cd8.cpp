@@ -1,154 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00382cd8` (_code @ 0x382cd8, 0x250 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the byte stores (map-changed, secondary state, saved state, message flag) from the work pointer and every read/halfword access from a separate +0xD00 base in r5; a single member struct can't produce both bases (6 diff lines, 157 rows each). */
+#include "common.h"
+
+/* The pending quest/event update the scene works from (0xD00..0xD56 of the controller). */
+struct FieldScenePending {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u8 savedPrimaryState;
+    /* 0x49 */ u8 unk49;
+    /* 0x4A */ u8 secondaryState;
+    /* 0x4B */ u8 unk4B;
+    /* 0x4C */ u8 mapChanged;
+    /* 0x4D */ u8 unk4D;
+    /* 0x4E */ u16 placeId;
+    /* 0x50 */ u16 eventId;
+    /* 0x52 */ u8 unk52[3];
+    /* 0x55 */ u8 messageActive;
+    /* 0x56 */ u8 unk56;
+};
+
+/* The field scene's controller (observed fields). */
+struct FieldSceneWork {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u32 state;
+    /* 0x008 */ u32 phase;
+    /* 0x00C */ u8 unk00C[0xCF4];
+    /* 0xD00 */ FieldScenePending pending;
+};
+
+/* The current map block (observed fields). */
+struct MapBlock {
+    /* 0x00 */ u8 unk00[0x1E];
+    /* 0x1E */ u16 placeId;
+    /* 0x20 */ u8 unk20[2];
+    /* 0x22 */ u16 pendingEntry;
+};
+
+/* A word of the quest state block. */
+struct QuestStateWord {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ u16 secondaryDone;
+};
 
 extern "C" {
 
-int messageMainSetTargetFlags(int);
-int FUN_002355ac(int);
-int FUN_00273c54(void);
-int FUN_00273d34(void);
-int FUN_00273f5c(void);
-int mapClearPendingEntries(void);
-int gameFlagSetValue(...);
-int FUN_00289c98(int);
-int FUN_00296934(void);
-int messageTargetSetValue(unsigned int, int);
-int FUN_0029e648(int, int);
-int FUN_0029ee6c(int, int);
+extern QuestStateWord DAT_0049fa1c;
 
-typedef struct fn_00382cd8_arg0 fn_00382cd8_arg0;
-struct fn_00382cd8_arg0 {
-    unsigned char pad_0x0[0x1];
-    unsigned char field_0x1; /* +0x1 */
-    unsigned char pad_0x2[0x2];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0xd3c];
-    unsigned char field_0xd48; /* +0xd48 */
-    unsigned char pad_0xd49[0x1];
-    byte field_0xd4a; /* +0xd4a */
-    unsigned char pad_0xd4b[0x1];
-    byte field_0xd4c; /* +0xd4c */
-    unsigned char pad_0xd4d[0x1];
-    ushort field_0xd4e; /* +0xd4e */
-    ushort field_0xd50; /* +0xd50 */
-};
+s32 FUN_00241990(void);
+u8 FUN_002cf750(void);
+u16 uiQuestProcessPendingUpdate(void);
+u16 FUN_002eff34(void);
+s32 questGetPrimaryState(void);
+u8 questGetSecondaryState(void);
+s32 FUN_002cf738(void);
+void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+MapBlock *gameGetMapBlock(void);
+void FUN_00273f5c(void);
+void mapClearPendingEntries(void);
+void FUN_00273d34(void);
+void FUN_00273c54(void);
+void FUN_00296934(void);
+void FUN_0029e648(s32 a, s32 b);
+void messageTargetSetValue(s32 target, s32 value);
+s32 questCenterGetHealingFee(void);
+void messageMainSetTargetFlags(s32 flags);
+void FUN_0029ee6c(s32 a, u32 color);
+void FUN_00289c98(s32 value);
+void FUN_002355ac(s32 value);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+#define EVENT_FIRST_ENDING 0xCA
+#define EVENT_SECOND_ENDING 0xC3
 
-extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
-
-extern int questGetPrimaryState(void);
-extern unsigned char questGetSecondaryState(void);
-/* Supplied declaration required: messageMainSetTargetFlags. */
-/* Supplied declaration required: FUN_002355ac. */
-extern int FUN_00241990(void);
-/* Supplied declaration required: FUN_00273c54. */
-/* Supplied declaration required: FUN_00273d34. */
-/* Supplied declaration required: FUN_00273f5c. */
-/* Supplied declaration required: mapClearPendingEntries. */
-/* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_00289c98. */
-/* Supplied declaration required: FUN_00296934. */
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_0029ee6c. */
-extern int gameGetMapBlock(void);
-extern int FUN_002cf738(void);
-extern unsigned char FUN_002cf750(void);
-extern unsigned short FUN_002eff34(void);
-extern unsigned short uiQuestProcessPendingUpdate(void);
-
-
-void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
-
+/* Reads the pending quest/event result and updates the field scene accordingly: clears the ending
+ * flags, resets the map entries and selects the scene's next state. */
+void FUN_00382cd8(FieldSceneWork *work)
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v2 = FUN_00241990();
-  if (temp_v2 == 0) {
-    return;
-  }
-  temp_v0 = FUN_002cf750();
-  param_1->field_0xd4c = temp_v0;
-  temp_v1 = uiQuestProcessPendingUpdate();
-  param_1->field_0xd4e = temp_v1;
-  temp_v1 = FUN_002eff34();
-  param_1->field_0xd50 = temp_v1;
-  temp_v2 = questGetPrimaryState();
-  temp_v0 = questGetSecondaryState();
-  param_1->field_0xd4a = temp_v0;
-  temp_v3 = FUN_002cf738();
-  if (temp_v3 != 0) {
-    if (param_1->field_0xd50 != 0xca) {
-      if (param_1->field_0xd50 == 0xc3) {
-        gameFlagSetValue(0x24c,0,1);
-        gameFlagSetValue(0x24e,0,1);
-        gameFlagSetValue(0x24d,0);
-        gameFlagSetValue(0x24f,0,1);
-        gameFlagSetValue(0x250,0,1);
-        gameFlagSetValue(0x252,0,1);
-        gameFlagSetValue(0x251,0);
-        temp_v4 = 0x253;
-        gameFlagSetValue(temp_v4,0,1);
-      }
+    s32 primaryState;
+
+    if (FUN_00241990() == 0) {
+        return;
     }
-    else {
-      gameFlagSetValue(0x246,0,1);
-      gameFlagSetValue(0x274,0,1);
-      gameFlagSetValue(0x26b,0,1);
-      gameFlagSetValue(0x248,0,1);
-      temp_v4 = 0x247;
-      gameFlagSetValue(temp_v4,0,1);
+    work->pending.mapChanged = FUN_002cf750();
+    u16 placeId = uiQuestProcessPendingUpdate();
+    FieldScenePending *pending = (FieldScenePending *)((u8 *)work + 0xD00);
+    work->pending.placeId = placeId;
+    work->pending.eventId = FUN_002eff34();
+    primaryState = questGetPrimaryState();
+    work->pending.secondaryState = questGetSecondaryState();
+    if (FUN_002cf738() != 0) {
+        if (work->pending.eventId == EVENT_FIRST_ENDING) {
+            gameFlagSetValue(0x246, 0, 1);
+            gameFlagSetValue(0x274, 0, 1);
+            gameFlagSetValue(0x26B, 0, 1);
+            gameFlagSetValue(0x248, 0, 1);
+            gameFlagSetValue(0x247, 0, 1);
+        } else if (work->pending.eventId == EVENT_SECOND_ENDING) {
+            gameFlagSetValue(0x24C, 0, 1);
+            gameFlagSetValue(0x24E, 0, 1);
+            gameFlagSetValue(0x24D, 0, 1);
+            gameFlagSetValue(0x24F, 0, 1);
+            gameFlagSetValue(0x250, 0, 1);
+            gameFlagSetValue(0x252, 0, 1);
+            gameFlagSetValue(0x251, 0, 1);
+            gameFlagSetValue(0x253, 0, 1);
+        }
     }
-  }
-  if (param_1->field_0xd4c != 0) {
-    temp_v3 = gameGetMapBlock();
-    *(unsigned short *)(temp_v3 + 0x22) = 0;
-    FUN_00273f5c();
-    mapClearPendingEntries();
-    if (temp_v2 == 0) {
-      *(unsigned short *)(temp_v3 + 0x1e) = param_1->field_0xd4e;
-      FUN_00273d34();
-      FUN_00273c54();
+    if (work->pending.mapChanged != 0) {
+        MapBlock *map = gameGetMapBlock();
+
+        map->pendingEntry = 0;
+        FUN_00273f5c();
+        mapClearPendingEntries();
+        if (primaryState == 0) {
+            map->placeId = work->pending.placeId;
+            FUN_00273d34();
+            FUN_00273c54();
+        }
     }
-  }
-  FUN_00296934();
-  if (param_1->field_0xd4a == 0) {
-    if (temp_v2 == 0) {
-      if (param_1[1].field_0x1 != '\0') {
-        FUN_0029e648(1,0);
-        messageTargetSetValue(0xffffff9c,0);
+    FUN_00296934();
+    if (work->pending.secondaryState != 0) {
+        DAT_0049fa1c.secondaryDone = 1;
+        work->state = 0xF;
+        work->phase = 0;
+        FUN_002355ac(0);
+        return;
+    }
+    if (primaryState != 0) {
+        work->pending.savedPrimaryState = primaryState;
+        FUN_0029ee6c(0, 0x323232FF);
+        FUN_00289c98(1);
+        work->state = 0xC;
+        work->phase = 0;
+        FUN_002355ac(0);
+        return;
+    }
+    if (work->pending.messageActive != 0) {
+        FUN_0029e648(1, 0);
+        messageTargetSetValue(-questCenterGetHealingFee(), 0);
         messageMainSetTargetFlags(1);
-        param_1[1].field_0x1 = 0;
-      }
-      FUN_00296934();
-      param_1->field_0x4 = 5;
-      param_1->field_0x8 = 0;
-      return;
+        work->pending.messageActive = 0;
     }
-    param_1->field_0xd48 = (char)temp_v2;
-    FUN_0029ee6c(0,0x323232ff);
-    FUN_00289c98(1);
-    param_1->field_0x4 = 0xc;
-    param_1->field_0x8 = 0;
-    FUN_002355ac(0);
-    return;
-  }
-  (*(unsigned short *)((unsigned char *)&DAT_0049fa1c + 0x78)) = 1;
-  param_1->field_0x4 = 0xf;
-  param_1->field_0x8 = 0;
-  FUN_002355ac(0);
-  return;
+    FUN_00296934();
+    work->state = 5;
+    work->phase = 0;
 }
 
 } /* extern "C" */

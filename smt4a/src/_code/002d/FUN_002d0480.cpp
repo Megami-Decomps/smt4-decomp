@@ -1,159 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d0480` (_code @ 0x2d0480, 0x24c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack frame is 80 bytes against retail's 48 (armcc copies the by-value Vector3 arguments of distSpatial/mathPositionHeadingDegrees through temporaries; retail loads them straight from the probe locals with vldmia), and the step-sign compare is emitted with swapped operands. */
+#include "common.h"
+
+struct Vector3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+/* The battle/map view state: where the camera stands and which way it faces. */
+struct ViewState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ Vector3 position;
+    /* 0x24 */ f32 heading;      /* degrees */
+};
+
+/* The map view the scan reads. */
+struct MapViewState {
+    /* 0x000 */ u8 unk000[0x50];
+    /* 0x050 */ Vector3 target;
+    /* 0x05C */ u8 unk05C[0x1BC];
+    /* 0x218 */ f32 raised;      /* nonzero while the camera is raised */
+};
+
+/* The ray the collision test works on: from the camera position outwards. */
+struct CameraRay {
+    /* 0x00 */ Vector3 start;
+    /* 0x0C */ Vector3 end;
+};
+
+struct CameraScratch {
+    /* 0x000 */ u8 unk000[0x110];
+    /* 0x110 */ CameraRay ray;
+};
 
 extern "C" {
 
-int CONCAT44(unsigned int, double);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int calcHeadingRoundedToCardinalDirection(void);
-int distSpatial(void);
-int mathAngleDeltaDegrees(void);
-int FUN_00330108(float *, float *, unsigned char [56]);
-int mathPositionHeadingDegrees(void);
+extern ViewState g_battleViewState;
+extern MapViewState *g_lmapView;
+extern CameraScratch g_gameState;
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
+f32 FUN_001bc124(f32 radians);
+f32 FUN_001bbf0c(f32 radians);
+s32 FUN_00330108(Vector3 *end, Vector3 *start, u8 *hit);
+f32 distSpatial(Vector3 start, Vector3 end);
+f32 mathPositionHeadingDegrees(Vector3 from, Vector3 to);
+f32 mathAngleDeltaDegrees(f32 from, f32 to);
+f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 
-extern int g_lmapView; /* 0x5806a4 */
-extern float DAT_005f0c94; /* 0x5f0c94 */
-extern float DAT_005f0c98; /* 0x5f0c98 */
-extern float DAT_005f0c9c; /* 0x5f0c9c */
-extern float DAT_005f0ca0; /* 0x5f0ca0 */
-extern float DAT_005f170c; /* 0x5f170c */
-extern float DAT_005f1710; /* 0x5f1710 */
-extern float DAT_005f1714; /* 0x5f1714 */
-extern float DAT_005f1718; /* 0x5f1718 */
-extern float DAT_005f171c; /* 0x5f171c */
-extern float DAT_005f1720; /* 0x5f1720 */
-
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
-/* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: mathAngleDeltaDegrees. */
-/* Supplied declaration required: FUN_00330108. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-
-
-void FUN_002d0480(int param_1)
-
+/* When enabled, probes the view for obstacles in front of the camera and, if the line of sight is
+ * blocked, tries the four cardinal headings around the current one and keeps the one whose probe
+ * reaches furthest (or the first one that is not blocked). */
+void FUN_002d0480(s32 enabled)
 {
-/* irregular: 8 native warning(s); review required */
-  unsigned char temp_v0;
-  float *pfVar2;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  unsigned int temp_v9;
-  unsigned long long temp_v10;
-  float temp_v11;
-  float fStack_5c;
-  float temp_v12;
-  float temp_v13;
-  float fStack_50;
-  float fStack_4c;
-  unsigned char temp_v14 [56];
-  long long temp_v15;
-  
-  temp_v5 = 0.0f;
-  temp_v6 = 400.0f;
-  if (param_1 != 0) {
-    temp_v0 = *(float *)(g_lmapView + 0x218) != 0.0f;
-    DAT_005f170c = DAT_005f0c94;
-    temp_v2 = temp_v5;
-    if (temp_v0) {
-      temp_v2 = 60.0f;
+    f32 extra = 0.0f;
+    f32 distance = 400.0f;
+    f32 bestHeading;
+    f32 bestDistance;
+    f32 step;
+    f32 offset;
+    f32 radians;
+    f32 height;
+    Vector3 start;
+    Vector3 end;
+    u8 hit[16];
+    s32 i;
+
+    if (enabled == 0) {
+        return;
     }
-    temp_v10 = 0x3c8efa35;
-    if (temp_v0) {
-      temp_v6 = 150.0f;
+    bestHeading = g_battleViewState.heading;
+    g_gameState.ray.start.x = g_battleViewState.position.x;
+    if (g_lmapView->raised != 0.0f) {
+        extra = 60.0f;
+        distance = 150.0f;
     }
-    temp_v15 = (unsigned long long)(unsigned int)(temp_v2 + 100.0f) << 0x20;
-    DAT_005f1710 = DAT_005f0c98 + temp_v2 + 100.0f;
-    temp_v3 = DAT_005f0ca0 * 0.017453292f;
-    DAT_005f1714 = DAT_005f0c9c;
-    temp_v2 = temp_v3;
-    temp_v4 = DAT_005f0ca0;
-    FUN_001bc124();
-    DAT_005f1718 = DAT_005f0c94 + temp_v3 * temp_v6;
-    DAT_005f171c = DAT_005f0c98 + (float)((unsigned long long)temp_v15 >> 0x20);
-    FUN_001bbf0c();
-    temp_v12 = DAT_005f0c9c + temp_v2 * temp_v6;
-    temp_v13 = DAT_005f170c;
-    fStack_50 = DAT_005f1710;
-    fStack_4c = DAT_005f1714;
-    temp_v11 = DAT_005f1718;
-    fStack_5c = DAT_005f171c;
-    pfVar2 = &temp_v11;
-    DAT_005f1720 = temp_v12;
-    FUN_00330108(pfVar2,&temp_v13,temp_v14);
-    if (pfVar2 != (float *)0xffffffff) {
-      temp_v2 = temp_v13;
-      distSpatial();
-      temp_v7 = 90.0f;
-      mathPositionHeadingDegrees();
-      temp_v3 = temp_v4;
-      mathAngleDeltaDegrees();
-      temp_v1 = 0;
-      if (temp_v4 < temp_v5) {
-        temp_v7 = -90.0f;
-      }
-      do {
-        temp_v9 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
-        temp_v4 = DAT_005f0ca0 + temp_v5;
-        calcHeadingRoundedToCardinalDirection();
-        temp_v8 = temp_v4 * (float)temp_v10;
-        temp_v15 = CONCAT44(temp_v9,temp_v8);
-        FUN_001bc124();
-        DAT_005f1718 = DAT_005f0c94 + temp_v8 * temp_v6;
-        temp_v8 = (float)temp_v15;
-        FUN_001bbf0c();
-        temp_v12 = DAT_005f0c9c + temp_v8 * temp_v6;
-        temp_v13 = DAT_005f170c;
-        fStack_50 = DAT_005f1710;
-        fStack_4c = DAT_005f1714;
-        temp_v11 = DAT_005f1718;
-        fStack_5c = DAT_005f171c;
-        pfVar2 = &temp_v11;
-        DAT_005f1720 = temp_v12;
-        FUN_00330108(pfVar2,&temp_v13,temp_v14);
-        if (pfVar2 == (float *)0xffffffff) {
-          DAT_005f0ca0 = temp_v4;
-          return;
+    height = extra + 100.0f;
+    g_gameState.ray.start.y = g_battleViewState.position.y + height;
+    g_gameState.ray.start.z = g_battleViewState.position.z;
+    radians = bestHeading * 0.017453292f;
+    g_gameState.ray.end.x = g_battleViewState.position.x + FUN_001bc124(radians) * distance;
+    g_gameState.ray.end.y = g_battleViewState.position.y + height;
+    g_gameState.ray.end.z = g_battleViewState.position.z + FUN_001bbf0c(radians) * distance;
+    start = g_gameState.ray.start;
+    end = g_gameState.ray.end;
+    if (FUN_00330108(&end, &start, hit) == -1) {
+        return;
+    }
+    bestDistance = distSpatial(start, end);
+    step = 90.0f;
+    if (mathAngleDeltaDegrees(bestHeading, mathPositionHeadingDegrees(g_battleViewState.position, g_lmapView->target)) < 0.0f) {
+        step = -90.0f;
+    }
+    offset = 0.0f;
+    for (i = 0; i < 4; i++) {
+        f32 heading = calcHeadingRoundedToCardinalDirection(g_battleViewState.heading + offset);
+        f32 candidate;
+
+        radians = heading * 0.017453292f;
+        g_gameState.ray.end.x = g_battleViewState.position.x + FUN_001bc124(radians) * distance;
+        g_gameState.ray.end.z = g_battleViewState.position.z + FUN_001bbf0c(radians) * distance;
+        start = g_gameState.ray.start;
+        end = g_gameState.ray.end;
+        if (FUN_00330108(&end, &start, hit) == -1) {
+            g_battleViewState.heading = heading;
+            return;
         }
-        temp_v8 = temp_v13;
-        distSpatial();
-        if (temp_v8 < temp_v2) {
-          temp_v2 = temp_v13;
-          temp_v3 = temp_v4;
-          distSpatial();
+        candidate = distSpatial(start, end);
+        if (candidate < bestDistance) {
+            bestHeading = heading;
+            bestDistance = distSpatial(start, end);
         }
-        temp_v4 = (float)((unsigned long long)temp_v15 >> 0x20);
-        temp_v5 = temp_v5 + temp_v7;
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 4);
-      temp_v3 = temp_v3 * (float)temp_v10;
-      temp_v5 = temp_v3;
-      FUN_001bc124();
-      DAT_005f1718 = DAT_005f0c94 + temp_v3 * temp_v6;
-      DAT_005f171c = DAT_005f0c98 + temp_v4;
-      FUN_001bbf0c();
-      DAT_005f1720 = DAT_005f0c9c + temp_v5 * temp_v6;
+        offset += step;
     }
-  }
-  return;
+    radians = bestHeading * 0.017453292f;
+    g_gameState.ray.end.x = g_battleViewState.position.x + FUN_001bc124(radians) * distance;
+    g_gameState.ray.end.y = g_battleViewState.position.y + height;
+    g_gameState.ray.end.z = g_battleViewState.position.z + FUN_001bbf0c(radians) * distance;
 }
 
 } /* extern "C" */

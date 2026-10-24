@@ -1,158 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00193f38` (_code @ 0x193f38, 0x340 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near: 207 rows against 208; retail loads the effect and argument into r0/r1 before each channel's mode test (r5/r6 swapped with ours) and rebuilds the counter compare as limit >= counter+1 through a spare register; the channel blocks, offsets and callees agree. */
+#include "common.h"
+
+#define COLOR_KEY_CHANNELS 9
+#define COLOR_KEY_VALUES 11
+#define COLOR_KEY_ACTIVE_MODES 4
+
+/* A colour-key effect (observed fields): nine channels (the first is RGB: three values), each with a
+ * mode, a frame counter, a frame limit, and per-value current/target numbers. */
+struct ColorKeyEffect {
+    /* 0x000 */ u8 unk000[0x1E4];
+    /* 0x1E4 */ f32 value[COLOR_KEY_VALUES];
+    /* 0x210 */ f32 param[COLOR_KEY_VALUES];
+    /* 0x23C */ f32 target[COLOR_KEY_VALUES];
+    /* 0x268 */ u8 unk268[0x79];
+    /* 0x2E1 */ s8 mode[COLOR_KEY_CHANNELS];
+    /* 0x2EA */ u8 unk2EA[2];
+    /* 0x2EC */ s32 counter[COLOR_KEY_CHANNELS];
+    /* 0x310 */ u8 unk310[4];
+    /* 0x314 */ s32 limit[COLOR_KEY_CHANNELS];
+};
 
 extern "C" {
 
-int colorKeyTrackAdvanceRgb(int);
-int FUN_001dd974(void);
-int FUN_001dda40(void);
-int FUN_001ee200(void);
-int FUN_001ee2bc(void);
-int FUN_001ee3dc(void);
-int FUN_002030bc(void);
-int FUN_002031dc(void);
-int FUN_002032fc(void);
-int FUN_00291008(...);
+void colorKeyTrackAdvanceRgb(ColorKeyEffect *effect);
+void FUN_001dd974(ColorKeyEffect *effect, u32 arg);
+void FUN_001dda40(ColorKeyEffect *effect, u32 arg);
+void FUN_001ee200(ColorKeyEffect *effect, u32 arg);
+void FUN_001ee3dc(ColorKeyEffect *effect, u32 arg);
+void FUN_001ee2bc(ColorKeyEffect *effect, u32 arg);
+void FUN_002030bc(ColorKeyEffect *effect, u32 arg);
+void FUN_002031dc(ColorKeyEffect *effect, u32 arg);
+void FUN_002032fc(ColorKeyEffect *effect, u32 arg);
+void FUN_00291008(f32 *output, f32 from, f32 to);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: colorKeyTrackAdvanceRgb. */
-/* Supplied declaration required: FUN_001dd974. */
-/* Supplied declaration required: FUN_001dda40. */
-/* Supplied declaration required: FUN_001ee200. */
-/* Supplied declaration required: FUN_001ee2bc. */
-/* Supplied declaration required: FUN_001ee3dc. */
-/* Supplied declaration required: FUN_002030bc. */
-/* Supplied declaration required: FUN_002031dc. */
-/* Supplied declaration required: FUN_002032fc. */
-/* Supplied declaration required: FUN_00291008. */
-
-
-void FUN_00193f38(int param_1,unsigned int param_2)
-
+/* Advances each active channel of the colour-key effect by one frame: steps its values towards the
+ * targets, or restarts it when its frame limit has passed. */
+void FUN_00193f38(ColorKeyEffect *effect, u32 arg)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if (*(char *)(param_1 + 0x2e1) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x2ec) + 1;
-    *(int *)(param_1 + 0x2ec) = temp_v0;
-    if (*(int *)(param_1 + 0x314) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x2ec) = 0;
-      *(unsigned int *)(param_1 + 0x210) = 0;
-      *(unsigned int *)(param_1 + 0x214) = 0;
-      *(unsigned int *)(param_1 + 0x218) = 0;
-      colorKeyTrackAdvanceRgb(param_1);
+    if (effect->mode[0] < 4) {
+        effect->counter[0]++;
+        if (effect->limit[0] < effect->counter[0]) {
+            effect->counter[0] = 0;
+            effect->param[0] = 0.0f;
+            effect->param[1] = 0.0f;
+            effect->param[2] = 0.0f;
+            colorKeyTrackAdvanceRgb(effect);
+        } else {
+            FUN_00291008(&effect->value[0], effect->param[0], effect->target[0]);
+            FUN_00291008(&effect->value[1], effect->param[1], effect->target[1]);
+            FUN_00291008(&effect->value[2], effect->param[2], effect->target[2]);
+        }
     }
-    else {
-      FUN_00291008(param_1 + 0x1e4);
-      FUN_00291008(param_1 + 0x1e8);
-      FUN_00291008(param_1 + 0x1ec);
+    if (effect->mode[1] < 4) {
+        effect->counter[1]++;
+        if (effect->limit[1] < effect->counter[1]) {
+            effect->counter[1] = 0;
+            effect->param[3] = 0.0f;
+            FUN_001dd974(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[3], effect->param[3], effect->target[3]);
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x2e2) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x2f0) + 1;
-    *(int *)(param_1 + 0x2f0) = temp_v0;
-    if (*(int *)(param_1 + 0x318) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x2f0) = 0;
-      *(unsigned int *)(param_1 + 0x21c) = temp_v1;
-      FUN_001dd974();
+    if (effect->mode[2] < 4) {
+        effect->counter[2]++;
+        if (effect->limit[2] < effect->counter[2]) {
+            effect->counter[2] = 0;
+            effect->param[4] = 0.0f;
+            FUN_001dda40(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[4], effect->param[4], effect->target[4]);
+        }
     }
-    else {
-      FUN_00291008(param_1 + 0x1f0,param_2);
+    if (effect->mode[3] < 4) {
+        effect->counter[3]++;
+        if (effect->limit[3] < effect->counter[3]) {
+            effect->counter[3] = 0;
+            effect->param[5] = 0.0f;
+            FUN_001ee200(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[5], effect->param[5], effect->target[5]);
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x2e3) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x2f4) + 1;
-    *(int *)(param_1 + 0x2f4) = temp_v0;
-    if (*(int *)(param_1 + 0x31c) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x2f4) = 0;
-      *(unsigned int *)(param_1 + 0x220) = temp_v1;
-      FUN_001dda40();
+    if (effect->mode[4] < 4) {
+        effect->counter[4]++;
+        if (effect->limit[4] < effect->counter[4]) {
+            effect->counter[4] = 0;
+            effect->param[6] = 0.0f;
+            FUN_001ee3dc(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[6], effect->param[6], effect->target[6]);
+        }
     }
-    else {
-      FUN_00291008(param_1 + 500,param_2);
+    if (effect->mode[5] < 4) {
+        effect->counter[5]++;
+        if (effect->limit[5] < effect->counter[5]) {
+            effect->counter[5] = 0;
+            effect->param[7] = 0.0f;
+            FUN_001ee2bc(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[7], effect->param[7], effect->target[7]);
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x2e4) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x2f8) + 1;
-    *(int *)(param_1 + 0x2f8) = temp_v0;
-    if (*(int *)(param_1 + 800) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x2f8) = 0;
-      *(unsigned int *)(param_1 + 0x224) = temp_v1;
-      FUN_001ee200();
+    if (effect->mode[6] < 4) {
+        effect->counter[6]++;
+        if (effect->limit[6] < effect->counter[6]) {
+            effect->counter[6] = 0;
+            effect->param[8] = 0.0f;
+            FUN_002030bc(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[8], effect->param[8], effect->target[8]);
+        }
     }
-    else {
-      FUN_00291008(param_1 + 0x1f8,param_2);
+    if (effect->mode[7] < 4) {
+        effect->counter[7]++;
+        if (effect->limit[7] < effect->counter[7]) {
+            effect->counter[7] = 0;
+            effect->param[9] = 0.0f;
+            FUN_002031dc(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[9], effect->param[9], effect->target[9]);
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x2e5) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x2fc) + 1;
-    *(int *)(param_1 + 0x2fc) = temp_v0;
-    if (*(int *)(param_1 + 0x324) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x2fc) = 0;
-      *(unsigned int *)(param_1 + 0x228) = temp_v1;
-      FUN_001ee3dc();
+    if (effect->mode[8] < 4) {
+        effect->counter[8]++;
+        if (effect->limit[8] < effect->counter[8]) {
+            effect->counter[8] = 0;
+            effect->param[10] = 0.0f;
+            FUN_002032fc(effect, arg);
+        } else {
+            FUN_00291008(&effect->value[10], effect->param[10], effect->target[10]);
+        }
     }
-    else {
-      FUN_00291008(param_1 + 0x1fc,param_2);
-    }
-  }
-  if (*(char *)(param_1 + 0x2e6) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x300) + 1;
-    *(int *)(param_1 + 0x300) = temp_v0;
-    if (*(int *)(param_1 + 0x328) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x300) = 0;
-      *(unsigned int *)(param_1 + 0x22c) = temp_v1;
-      FUN_001ee2bc();
-    }
-    else {
-      FUN_00291008(param_1 + 0x200,param_2);
-    }
-  }
-  if (*(char *)(param_1 + 0x2e7) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x304) + 1;
-    *(int *)(param_1 + 0x304) = temp_v0;
-    if (*(int *)(param_1 + 0x32c) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x304) = 0;
-      *(unsigned int *)(param_1 + 0x230) = temp_v1;
-      FUN_002030bc();
-    }
-    else {
-      FUN_00291008(param_1 + 0x204,param_2);
-    }
-  }
-  if (*(char *)(param_1 + 0x2e8) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x308) + 1;
-    *(int *)(param_1 + 0x308) = temp_v0;
-    if (*(int *)(param_1 + 0x330) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x308) = 0;
-      *(unsigned int *)(param_1 + 0x234) = temp_v1;
-      FUN_002031dc();
-    }
-    else {
-      FUN_00291008(param_1 + 0x208,param_2);
-    }
-  }
-  if (*(char *)(param_1 + 0x2e9) < '\x04') {
-    temp_v0 = *(int *)(param_1 + 0x30c) + 1;
-    *(int *)(param_1 + 0x30c) = temp_v0;
-    if (*(int *)(param_1 + 0x334) < temp_v0) {
-      *(unsigned int *)(param_1 + 0x30c) = 0;
-      *(unsigned int *)(param_1 + 0x238) = temp_v1;
-      FUN_002032fc();
-      return;
-    }
-    FUN_00291008(param_1 + 0x20c,param_2);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

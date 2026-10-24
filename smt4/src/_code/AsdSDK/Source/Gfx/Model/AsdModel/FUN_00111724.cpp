@@ -1,183 +1,162 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00111724` (_code @ 0x111724, 0x320 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: creates the graphics resource context (pool, three handlers, arena, float state); written from the decompilation and the retail disassembly, the handler/arena classes are stand-ins for retail's unnamed classes (their vtables and the arena constructor's dead capacity loop are not reproduced) */
+#include "classes/FloatState.h"
+#include <new>
+
+class GfxAllocator {
+public:
+    virtual ~GfxAllocator();
+    virtual void *allocate(u32 size, u32 alignment);   /* +0x08 */
+    virtual void release(void *block);
+};
+
+/* Three 8-byte handler objects that share the allocator they were made from. */
+class GfxHandlerA {
+public:
+    GfxHandlerA(GfxAllocator *owner) : vtable(NULL), allocator(owner) {}
+    static void *operator new(u32 size, GfxAllocator *owner) throw() { return owner->allocate(size, 4); }
+    /* 0x00 */ void *vtable;      /* class not recovered: its virtual table is not reproduced */
+    /* 0x04 */ GfxAllocator *allocator;
+};
+
+class GfxHandlerB {
+public:
+    GfxHandlerB(GfxAllocator *owner) : vtable(NULL), allocator(owner) {}
+    static void *operator new(u32 size, GfxAllocator *owner) throw() { return owner->allocate(size, 4); }
+    /* 0x00 */ void *vtable;      /* class not recovered: its virtual table is not reproduced */
+    /* 0x04 */ GfxAllocator *allocator;
+};
+
+class GfxHandlerC {
+public:
+    GfxHandlerC(GfxAllocator *owner) : vtable(NULL), allocator(owner) {}
+    static void *operator new(u32 size, GfxAllocator *owner) throw() { return owner->allocate(size, 4); }
+    /* 0x00 */ void *vtable;      /* class not recovered: its virtual table is not reproduced */
+    /* 0x04 */ GfxAllocator *allocator;
+};
+
+/* The 0x2C-byte arena: a block of `count` 16-byte slots and the handlers that serve it. */
+class GfxArena {
+public:
+    GfxArena(GfxAllocator *owner, u32 slotCount)
+        : vtable(NULL), owner(owner), allocator(owner), slots(NULL), slotsEnd(NULL), count(slotCount & 0x3FFFFFFF)
+    {
+        if (slotCount != 0)
+            slots = owner->allocate(slotCount << 4, 0x20);
+        slotsEnd = slots;
+        handlerC = NULL;
+        handlerB = NULL;
+        handlerA = NULL;
+        handlerA2 = NULL;
+        locked = 0;
+    }
+    static void *operator new(u32 size, GfxAllocator *owner) throw() { return owner->allocate(size, 4); }
+
+    /* 0x00 */ void *vtable;      /* class not recovered: its virtual table is not reproduced */
+    /* 0x04 */ GfxAllocator *owner;
+    /* 0x08 */ GfxAllocator *allocator;
+    /* 0x0C */ void *slots;
+    /* 0x10 */ void *slotsEnd;
+    /* 0x14 */ u32 count;
+    /* 0x18 */ GfxHandlerC *handlerC;
+    /* 0x1C */ GfxHandlerB *handlerB;
+    /* 0x20 */ GfxHandlerA *handlerA;
+    /* 0x24 */ GfxHandlerA *handlerA2;
+    /* 0x28 */ u8 locked;
+};
+
+/* The graphics context: pool, handlers, arena, scalar state. */
+struct GfxContext {
+    /* 0x00 */ GfxAllocator *allocator;
+    /* 0x04 */ void *pool;
+    /* 0x08 */ GfxHandlerA *handlerA;
+    /* 0x0C */ GfxHandlerB *handlerB;
+    /* 0x10 */ GfxHandlerC *handlerC;
+    /* 0x14 */ GfxArena *arena;
+    /* 0x18 */ void *scene;
+    /* 0x1C */ u8 unk1C;
+    /* 0x1D */ u8 unk1D[3];
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u32 unk24;
+    /* 0x28 */ u32 unk28;
+    /* 0x2C */ u32 unk2C;
+    /* 0x30 */ u8 unk30;
+    /* 0x31 */ u8 unk31[7];
+    /* 0x38 */ u32 unk38[2];
+    /* 0x40 */ f32 values[10];
+    /* 0x68 */ u32 unk68;
+    /* 0x6C */ u32 unk6C;
+    /* 0x70 */ FloatState *floatState;
+    /* 0x74 */ u32 unk74;
+};
+
+typedef char GfxContextSize[sizeof(GfxContext) == 0x78 ? 1 : -1];
+
+struct GfxPoolRequest {
+    u32 alignment;
+    u32 size;
+    u32 count;
+    u32 slotSize;
+    u32 flags;
+};
 
 extern "C" {
+extern u32 DAT_004dae2c;   /* number of arena slots */
 
-int FUN_0011cfb4(unsigned int);
-int FUN_0011f9d0(int *, int *);
+void *FUN_0011f9d0(GfxPoolRequest *request, GfxAllocator *allocator);
+void *resourceCreateOwnedObject(GfxAllocator *allocator);
+void FUN_0011cfb4(FloatState *state);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char DAT_004213b8; /* 0x4213b8 */
-extern unsigned char DAT_00421688; /* 0x421688 */
-extern unsigned char DAT_00421728; /* 0x421728 */
-extern unsigned char DAT_00421740; /* 0x421740 */
-extern unsigned int DAT_004dae2c; /* 0x4dae2c */
-
-/* Supplied declaration required: FUN_0011cfb4. */
-extern int resourceCreateOwnedObject(int *);
-/* Supplied declaration required: FUN_0011f9d0. */
-extern unsigned int _ZN10FloatStateC1Ev(void);
-
-
-/* WARNING: Removing unreachable block (ram,0x00111928) */
-/* WARNING: Removing unreachable block (ram,0x00111930) */
-
-unsigned int * FUN_00111724(int *param_1)
-
+GfxContext *FUN_00111724(GfxAllocator *allocator)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned char *puVar3;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int uStack_34;
-  unsigned int temp_v9;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  
-  puVar2 = (unsigned int *)&temp_v8;
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,0x78,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    puVar1[2] = 0;
-    puVar1[5] = 0;
-    puVar1[6] = 0;
-    *(unsigned char *)(puVar1 + 7) = 0;
-    puVar1[8] = 0;
-    puVar1[9] = 0;
-    puVar1[10] = 0;
-    puVar1[0xb] = 0;
-    *(unsigned char *)(puVar1 + 0xc) = 0;
-    puVar1[0xe] = 0;
-    puVar1[0xf] = 0;
-    puVar1[0x10] = 0;
-    puVar1[0x11] = 0;
-    puVar1[0x12] = 0;
-    puVar1[0x13] = 0;
-    puVar1[0x14] = 0;
-    puVar1[0x15] = 0;
-    puVar1[0x16] = 0;
-    puVar1[0x17] = 0;
-    puVar1[0x18] = 0;
-    puVar1[0x19] = 0;
-    puVar1[0x1a] = 0;
-    puVar1[0x1c] = 0;
-  }
-  temp_v8 = 0x20;
-  uStack_34 = 0x80;
-  temp_v9 = 0x20;
-  uStack_2c = 4;
-  uStack_28 = 0;
-  FUN_0011f9d0(&temp_v8,param_1);
-  puVar1[1] = (unsigned int)puVar2;
-  puVar2 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,8,4);
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = (unsigned int)&DAT_00421728;
-    puVar2[1] = (unsigned int)param_1;
-  }
-  puVar1[2] = (unsigned int)puVar2;
-  puVar2 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,8,4);
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = (unsigned int)&DAT_00421740;
-    puVar2[1] = (unsigned int)param_1;
-  }
-  puVar1[3] = (unsigned int)puVar2;
-  puVar2 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,8,4);
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = (unsigned int)&DAT_00421688;
-    puVar2[1] = (unsigned int)param_1;
-  }
-  puVar1[4] = (unsigned int)puVar2;
-  temp_v3 = DAT_004dae2c;
-  puVar2 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,0x2c,4);
-  puVar3 = &DAT_004213b8;
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = (unsigned int)&DAT_004213b8;
-    puVar2[1] = (unsigned int)param_1;
-    puVar2[2] = (unsigned int)param_1;
-    if (temp_v3 == 0) {
-      temp_v0 = 0;
-      puVar2[3] = 0;
+    GfxContext *context = static_cast<GfxContext *>(allocator->allocate(sizeof(GfxContext), 4));
+    if (context != NULL) {
+        context->allocator = NULL;
+        context->pool = NULL;
+        context->handlerA = NULL;
+        context->arena = NULL;
+        context->scene = NULL;
+        context->unk1C = 0;
+        context->unk20 = 0;
+        context->unk24 = 0;
+        context->unk28 = 0;
+        context->unk2C = 0;
+        context->unk30 = 0;
+        context->unk38[0] = 0;
+        context->unk38[1] = 0;
+        for (s32 i = 0; i < 10; i++)
+            context->values[i] = 0.0f;
+        context->unk68 = 0;
+        context->floatState = NULL;
     }
-    else {
-      temp_v0 = (**(romwright_code **)(*param_1 + 8))(param_1,temp_v3 << 4,0x20);
-      puVar2[3] = temp_v0;
+
+    GfxPoolRequest request = { 0x20, 0x80, 0x20, 4, 0 };
+    context->pool = FUN_0011f9d0(&request, allocator);
+    context->handlerA = new (allocator) GfxHandlerA(allocator);
+    context->handlerB = new (allocator) GfxHandlerB(allocator);
+    context->handlerC = new (allocator) GfxHandlerC(allocator);
+    context->arena = new (allocator) GfxArena(allocator, DAT_004dae2c);
+
+    GfxArena *arena = context->arena;
+    arena->slotsEnd = arena->slots;
+    arena->locked = 0;
+    if (context->handlerC != NULL)
+        arena->handlerC = context->handlerC;
+    if (context->handlerB != NULL)
+        arena->handlerB = context->handlerB;
+    if (context->handlerA != NULL) {
+        arena->handlerA = context->handlerA;
+        arena->handlerA2 = context->handlerA;
     }
-    puVar2[4] = temp_v0;
-    puVar3 = (unsigned char *)(temp_v3 & 0x3fffffff);
-    puVar2[5] = (unsigned int)puVar3;
-    puVar2[6] = 0;
-    puVar2[7] = 0;
-    puVar2[8] = 0;
-    puVar2[9] = 0;
-    *(unsigned char *)(puVar2 + 10) = 0;
-  }
-  puVar1[5] = (unsigned int)puVar2;
-  temp_v3 = puVar2[3];
-  temp_v6 = puVar2[4];
-  temp_v5 = puVar1[4];
-  temp_v4 = puVar1[2];
-  temp_v7 = puVar1[3];
-  if (temp_v3 < temp_v6) {
-    puVar3 = (unsigned char *)(temp_v6 - temp_v3);
-  }
-  if (temp_v3 < temp_v6) {
-    puVar3 = (unsigned char *)((int)puVar3 << 0x1b);
-  }
-  if (temp_v3 < temp_v6) {
-    temp_v1 = (unsigned int)puVar3 >> 0x1f;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  temp_v2 = temp_v1 + 1;
-  if (temp_v2 < ((int)(temp_v6 - temp_v3) >> 4) + 1) {
-    do {
-      temp_v2 = temp_v2 + 2;
-    } while (temp_v2 < ((int)(temp_v6 - temp_v3) >> 4) + 1);
-  }
-  puVar2[4] = temp_v3;
-  *(unsigned char *)(puVar2 + 10) = 0;
-  if (temp_v5 != 0) {
-    puVar2[6] = temp_v5;
-  }
-  if (temp_v7 != 0) {
-    puVar2[7] = temp_v7;
-  }
-  if (temp_v4 != 0) {
-    puVar2[8] = temp_v4;
-    puVar2[9] = temp_v4;
-  }
-  temp_v4 = resourceCreateOwnedObject(param_1);
-  puVar1[6] = temp_v4;
-  *(unsigned int *)(temp_v4 + 8) = puVar1[1];
-  temp_v4 = (**(romwright_code **)(*param_1 + 8))(param_1,0x60,4);
-  if (temp_v4 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = _ZN10FloatStateC1Ev();
-  }
-  FUN_0011cfb4(temp_v0);
-  puVar1[0x1c] = temp_v0;
-  *puVar1 = (unsigned int)param_1;
-  return puVar1;
+
+    context->scene = resourceCreateOwnedObject(allocator);
+    *(void **)((u8 *)context->scene + 8) = context->pool;
+
+    void *block = allocator->allocate(0x60, 4);
+    FloatState *floatState = block != NULL ? new (block) FloatState() : NULL;
+    FUN_0011cfb4(floatState);
+    context->floatState = floatState;
+    context->allocator = allocator;
+    return context;
 }
 
 } /* extern "C" */

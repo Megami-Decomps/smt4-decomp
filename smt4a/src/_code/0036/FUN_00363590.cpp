@@ -1,130 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00363590` (_code @ 0x363590, 0x258 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail materialises the zero constant (r7) before the first search loop, built after it; everything else is identical */
+#include "shard/W5_W5Match2_LinkedItems.h"
+#include "shard/Resource.h"
 
 extern "C" {
+void FUN_003c2df0(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
+int asdMemFree(void *block);
 
-int asdMemFree(...);
-int FUN_003c2df0(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00363590. */
-/* Supplied declaration required: FUN_003c2df0. */
-
-
-void FUN_00363590(int param_1,int param_2)
-
+static LinkedItem *findSharer(LinkedItems *items, void *resource)
 {
-/* irregular: 6 unstructured edge(s); 5 goto(s); 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  if (*(int *)(param_2 + 0xb0) != 0) {
-    *(unsigned int *)(*(int *)(param_2 + 0xb0) + 0xac) = *(unsigned int *)(param_2 + 0xac);
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x8c) = *(unsigned int *)(param_2 + 0xac);
-  }
-  if (*(int *)(param_2 + 0xac) != 0) {
-    *(unsigned int *)(*(int *)(param_2 + 0xac) + 0xb0) = *(unsigned int *)(param_2 + 0xb0);
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x88) = *(unsigned int *)(param_2 + 0xb0);
-  }
-  *(int *)(param_1 + 0x80) = *(int *)(param_1 + 0x80) - 1;
-  if ((*(unsigned int *)(param_2 + 0x98) & 1) == 0) {
-    for (temp_v0 = *(int *)(param_1 + 0x8c); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0xac)) {
-      if (((*(unsigned int *)(temp_v0 + 0x98) & 1) != 0) &&
-         (*(int *)(temp_v0 + 0x90) == *(int *)(param_2 + 0x90))) {
-        do {
-          if (temp_v0 == 0) goto LAB_0036366c;
-          FUN_00363590(param_1, /* unrecovered */ 0);
-          temp_v0 = *(int *)(param_1 + 0x8c);
-          while( 1 ) {
-            if (temp_v0 == 0) goto LAB_0036366c;
-            if (((*(unsigned int *)(temp_v0 + 0x98) & 1) != 0) &&
-               (*(int *)(temp_v0 + 0x90) == *(int *)(param_2 + 0x90))) break;
-            temp_v0 = *(int *)(temp_v0 + 0xac);
-          }
-        } while( 1 );
-      }
+    for (LinkedItem *item = items->head; item != NULL; item = item->next) {
+        if ((item->reference.flags & 1) && item->resource == resource)
+            return item;
     }
-LAB_0036366c:
-    if ((*(unsigned int *)(param_2 + 0x98) & 2) == 0) {
-      temp_v0 = *(int *)(param_1 + 0x8c);
-      while( 1 ) {
-        if (temp_v0 == 0) goto LAB_00363768;
-        temp_v1 = *(unsigned int *)(temp_v0 + 0x98) & 3;
-        temp_v3 = temp_v1 == 2;
-        if (temp_v3) {
-          temp_v1 = *(unsigned int *)(temp_v0 + 0x94);
-        }
-        if (temp_v3 && temp_v1 == *(unsigned int *)(param_2 + 0x90)) break;
-        temp_v0 = *(int *)(temp_v0 + 0xac);
-      }
-      if (temp_v0 != 0) {
-        *(unsigned int *)(temp_v0 + 0x98) = *(unsigned int *)(temp_v0 + 0x98) & 0xfffffffd;
-        *(unsigned int *)(temp_v0 + 0x94) = 0;
-        FUN_003c2df0(param_1,temp_v0);
-        temp_v2 = *(int *)(param_1 + 0x8c);
-        while( 1 ) {
-          if (temp_v2 == 0) goto LAB_00363768;
-          temp_v1 = *(unsigned int *)(temp_v2 + 0x98) & 3;
-          temp_v3 = temp_v1 == 2;
-          if (temp_v3) {
-            temp_v1 = *(unsigned int *)(temp_v2 + 0x94);
-          }
-          if (temp_v3 && temp_v1 == *(unsigned int *)(param_2 + 0x90)) break;
-          temp_v2 = *(int *)(temp_v2 + 0xac);
-        }
-        do {
-          if (temp_v2 == 0) break;
-          FUN_003c2df0(param_1,temp_v2,temp_v0);
-          temp_v2 = *(int *)(param_1 + 0x8c);
-          while( 1 ) {
-            if (temp_v2 == 0) goto LAB_00363768;
-            temp_v1 = *(unsigned int *)(temp_v2 + 0x98) & 3;
-            temp_v3 = temp_v1 == 2;
-            if (temp_v3) {
-              temp_v1 = *(unsigned int *)(temp_v2 + 0x94);
+    return NULL;
+}
+
+static LinkedItem *findReference(LinkedItems *items, void *resource)
+{
+    for (LinkedItem *item = items->head; item != NULL; item = item->next) {
+        if ((item->reference.flags & 3) == 2 && item->reference.source == resource)
+            return item;
+    }
+    return NULL;
+}
+
+/* Unlinks an item, releases the items sharing its resource, hands its references to the first
+ * dependent and frees the resource when the item owned it. */
+void FUN_00363590(LinkedItems *items, LinkedItem *item)
+{
+    if (item->previous != NULL)
+        item->previous->next = item->next;
+    else
+        items->head = item->next;
+    if (item->next != NULL)
+        item->next->previous = item->previous;
+    else
+        items->tail = item->previous;
+    items->count--;
+
+    if (!(item->reference.flags & 1)) {
+        for (LinkedItem *sharer = findSharer(items, item->resource); sharer != NULL;
+             sharer = findSharer(items, item->resource))
+            FUN_00363590(items, sharer);
+
+        if (!(item->reference.flags & 2)) {
+            LinkedItem *replacement = findReference(items, item->resource);
+            if (replacement != NULL) {
+                replacement->reference.flags &= ~2u;
+                replacement->reference.source = NULL;
+                FUN_003c2df0(items, replacement, replacement);
+                for (LinkedItem *reference = findReference(items, item->resource); reference != NULL;
+                     reference = findReference(items, item->resource))
+                    FUN_003c2df0(items, reference, replacement);
             }
-            if (temp_v3 && temp_v1 == *(unsigned int *)(param_2 + 0x90)) break;
-            temp_v2 = *(int *)(temp_v2 + 0xac);
-          }
-        } while( 1 );
-      }
+        }
+        if (!(item->reference.flags & 1)) {
+            Resource *resource = (Resource *)item->resource;
+            if (resource->data != NULL)
+                g_handlerTable[resource->type].release(resource->data);
+            if (resource->bufferA != NULL) {
+                asdMemFree(resource->bufferA);
+                resource->sizeA = 0;
+                resource->countA = 0;
+                resource->bufferA = NULL;
+            }
+            if (resource->bufferB != NULL) {
+                asdMemFree(resource->bufferB);
+                resource->sizeB = 0;
+                resource->countB = 0;
+                resource->bufferB = NULL;
+            }
+            asdMemFree(resource);
+        }
     }
-LAB_00363768:
-    if ((*(unsigned int *)(param_2 + 0x98) & 1) == 0) {
-      temp_v0 = *(int *)(param_2 + 0x90);
-      if (*(int *)(temp_v0 + 8) != 0) {
-        (**(romwright_code **)((unsigned int)*(unsigned short *)(temp_v0 + 4) * 0x44 + 0x5b3284))();
-      }
-      if (*(int *)(temp_v0 + 0x18) != 0) {
-        asdMemFree();
-        *(unsigned int *)(temp_v0 + 0x10) = 0;
-        *(unsigned int *)(temp_v0 + 0x14) = 0;
-        *(unsigned int *)(temp_v0 + 0x18) = 0;
-      }
-      if (*(int *)(temp_v0 + 0x28) != 0) {
-        asdMemFree();
-        *(unsigned int *)(temp_v0 + 0x20) = 0;
-        *(unsigned int *)(temp_v0 + 0x24) = 0;
-        *(unsigned int *)(temp_v0 + 0x28) = 0;
-      }
-      asdMemFree(temp_v0);
-    }
-  }
-  asdMemFree(param_2);
-  return;
+    asdMemFree(item);
 }
 
 } /* extern "C" */

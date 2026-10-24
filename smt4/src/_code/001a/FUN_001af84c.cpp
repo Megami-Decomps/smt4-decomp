@@ -1,168 +1,129 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001af84c` (_code @ 0x1af84c, 0x3ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the status icon of a quest list row (new, in progress, done, locked, selected) and returns the row text colour; written from the decompilation, the dataTable1bOr1cGetRecord argument is inferred and branch layout not compared with retail */
+#include "common.h"
+
+#define QUEST_ICON_LAYER 2
+#define QUEST_ICON_TABLE 0x29
+#define QUEST_ICON_NEW 0xE
+#define QUEST_ICON_SELECTED 0xD
+#define QUEST_ICON_ACTIVE 0xC
+#define QUEST_ICON_AVAILABLE_ENTRY 0xC2
+#define QUEST_ICON_LOCKED 0x91
+#define QUEST_ICON_ACTIVE_LOCKED 0x92
+#define QUEST_ICON_DONE 0x93
+
+#define QUEST_COLOR_NORMAL_PLAIN 0xFF
+#define QUEST_COLOR_NORMAL_FULL 0xFFFFFFFF
+#define QUEST_COLOR_DIM_PLAIN 0x5A5A5AFF
+#define QUEST_COLOR_DIM_FULL 0x787878FF
+#define QUEST_COLOR_SELECTED_PLAIN 0x8400FF
+#define QUEST_COLOR_SELECTED_FULL 0x72E027FF
+
+#define QUEST_STEP_COUNT 6
+
+struct QuestRecord {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u8 oneShot;       /* set for quests that are offered rather than tracked */
+};
+
+struct QuestUi {
+    /* 0x000 */ u8 unk000[0x5C4];
+    /* 0x5C4 */ u8 detailOpen;
+};
 
 extern "C" {
+extern QuestUi *g_uiQuest;
 
-int dataTable1bOr1cGetRecord(void);
-int FUN_002bf288(...);
-int FUN_002bf380(int, int, int, unsigned int, unsigned int, unsigned int);
+QuestRecord *dataTable1bOr1cGetRecord(s32 quest);
+s32 questPassesAvailabilityConditions(s32 quest);
+s32 questIsOfferable(u16 quest);
+s32 questIsCompleted(s32 quest);
+s32 FUN_002903f0(void);
+s32 FUN_00298dc8(void);
+s32 FUN_00298e00(s32 quest);
+s32 FUN_00298e40(s32 quest, s32 step, s32 *progress);
+s32 FUN_00333aac(s32 quest);
+void FUN_002bf288(u32 layer, u32 table, u32 sprite, u32 x, u32 y, u32 flags);
+void FUN_002bf380(u32 layer, u32 table, u32 sprite, u32 x, u32 y, u32 flags);
 
-/* stack frame of param_5: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_5_stack;
-
-extern int g_uiQuest; /* 0x43dd50 */
-
-extern int questPassesAvailabilityConditions(int);
-extern bool questIsOfferable(unsigned short);
-extern int FUN_002903f0(void);
-extern int FUN_00298dc8(void);
-extern int FUN_00298e00(int);
-extern int questIsCompleted(int);
-extern int FUN_00298e40(int, int, int *);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_00333aac(int);
-
-
-unsigned int
-FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,int param_5)
-
+static __inline u32 questColorDim(s32 full)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4 [3];
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  
-  if (param_5 == 0) {
-    temp_v3 = 0xff;
-  }
-  else {
-    temp_v3 = 0xffffffff;
-  }
-  temp_v5 = param_1;
-  temp_v6 = param_2;
-  uStack_2c = param_3;
-  uStack_28 = param_4;
-  if (*(char *)(g_uiQuest + 0x5c4) == '\0') {
-    dataTable1bOr1cGetRecord();
-    if (param_1 == 0) {
-      return temp_v3;
+    return full != 0 ? QUEST_COLOR_DIM_FULL : QUEST_COLOR_DIM_PLAIN;
+}
+
+static __inline u32 questColorSelected(s32 full)
+{
+    return full != 0 ? QUEST_COLOR_SELECTED_FULL : QUEST_COLOR_SELECTED_PLAIN;
+}
+
+/* Draws the icon of `quest` at (x, y) and returns the colour for its row. */
+u32 FUN_001af84c(s32 quest, u32 x, u32 y, u32 flags, s32 full)
+{
+    u32 normal = full != 0 ? QUEST_COLOR_NORMAL_FULL : QUEST_COLOR_NORMAL_PLAIN;
+
+    if (g_uiQuest->detailOpen == 0) {
+        QuestRecord *record = dataTable1bOr1cGetRecord(quest);
+        if (record == NULL)
+            return normal;
+
+        if (record->oneShot == 0) {
+            bool allDone = true;
+            for (s32 step = 0; step < QUEST_STEP_COUNT; step++) {
+                s32 progress[3];
+                if (FUN_00298e40(quest, step, progress) != 0
+                    && ((questIsCompleted(quest) != 0 && FUN_00298e00(quest) == 0) || progress[0] > 0)) {
+                    allDone = false;
+                    break;
+                }
+            }
+            if (questPassesAvailabilityConditions(quest) != 0) {
+                if (allDone) {
+                    FUN_002bf380(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_NEW, x, y, flags);
+                    return normal;
+                }
+                if (questIsCompleted(quest) == 0)
+                    return normal;
+                FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+                if (FUN_00298e00(quest) != 0)
+                    return normal;
+                return questColorDim(full);
+            }
+            if (FUN_00298e00(quest) != 0 || questIsCompleted(quest) == 0) {
+                FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_AVAILABLE_ENTRY, x, y, flags);
+                return normal;
+            }
+        } else {
+            if (questIsOfferable((u16)quest) == 0) {
+                if (FUN_00333aac(quest) != 0)
+                    FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
+                else if (questIsCompleted(quest) != 0)
+                    FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+                else
+                    FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_LOCKED, x, y, flags);
+                return questColorDim(full);
+            }
+            if (FUN_002903f0() == quest) {
+                FUN_002bf380(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_SELECTED, x, y, flags);
+                return questColorSelected(full);
+            }
+            if (questIsCompleted(quest) == 0)
+                return normal;
+        }
+        FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
+        return normal;
     }
-    if (*(char *)(param_1 + 6) == '\0') {
-      temp_v0 = 1;
-      temp_v1 = 0;
-      do {
-        temp_v2 = FUN_00298e40(temp_v5,temp_v1,temp_v4);
-        if ((temp_v2 != 0) &&
-           (((temp_v2 = questIsCompleted(temp_v5), temp_v2 != 0 &&
-             (temp_v2 = FUN_00298e00(temp_v5), temp_v2 == 0)) || (0 < temp_v4[0])))) {
-          temp_v0 = 0;
-          break;
+
+    if (FUN_00298dc8() != 0) {
+        if (FUN_002903f0() == 0) {
+            FUN_002bf380(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE, x, y, flags);
+            return questColorSelected(full);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-      temp_v1 = questPassesAvailabilityConditions(temp_v5);
-      if (temp_v1 != 0) {
-        if (temp_v0) {
-          FUN_002bf380(2,0x29,0xe,temp_v6,param_3,param_4);
-          return temp_v3;
-        }
-        temp_v1 = questIsCompleted(temp_v5);
-        if (temp_v1 == 0) {
-          return temp_v3;
-        }
-        FUN_002bf288(2,0x29,0x93,temp_v6,param_3,param_4);
-        temp_v1 = FUN_00298e00(temp_v5);
-        if (temp_v1 != 0) {
-          if (param_5 != 0) {
-            return temp_v3;
-          }
-          return 0xff;
-        }
-        if (param_5 != 0) {
-          return 0x787878ff;
-        }
-        return 0x5a5a5aff;
-      }
-      temp_v1 = FUN_00298e00(temp_v5);
-      if ((temp_v1 != 0) || (temp_v1 = questIsCompleted(temp_v5), temp_v1 == 0)) {
-        FUN_002bf288(2,0x29,0xc2,temp_v6,param_3,param_4);
-        return temp_v3;
-      }
+        FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_ACTIVE_LOCKED, x, y, flags);
+    } else {
+        if (questIsCompleted(quest) == 0)
+            return normal;
+        FUN_002bf288(QUEST_ICON_LAYER, QUEST_ICON_TABLE, QUEST_ICON_DONE, x, y, flags);
     }
-    else {
-      temp_v1 = questIsOfferable(temp_v5);
-      if (temp_v1 == 0) {
-        temp_v1 = FUN_00333aac(temp_v5);
-        if (temp_v1 != 0) {
-          FUN_002bf288(2,0x29,0x91,temp_v6,param_3,param_4);
-        }
-        else {
-          temp_v1 = questIsCompleted(temp_v5);
-          if (temp_v1 != 0) {
-            FUN_002bf288(2,0x29,0x93,temp_v6,param_3,param_4);
-          }
-          else {
-            FUN_002bf288(2,0x29,0x91,temp_v6,param_3,param_4);
-          }
-        }
-        if (param_5 != 0) {
-          return 0x787878ff;
-        }
-        return 0x5a5a5aff;
-      }
-      temp_v1 = FUN_002903f0();
-      if (temp_v1 == temp_v5) {
-        FUN_002bf380(2,0x29,0xd,temp_v6,param_3,param_4);
-        if (param_5 != 0) {
-          return 0x72e027ff;
-        }
-        return 0x8400ff;
-      }
-      temp_v1 = questIsCompleted(temp_v5);
-      if (temp_v1 == 0) {
-        return temp_v3;
-      }
-    }
-    FUN_002bf288(2,0x29,0x93,temp_v6,param_3,param_4);
-    return temp_v3;
-  }
-  temp_v1 = FUN_00298dc8();
-  if (temp_v1 != 0) {
-    temp_v1 = FUN_002903f0();
-    if (temp_v1 == 0) {
-      FUN_002bf380(2,0x29,0xc,temp_v6,param_3,param_4);
-      if (param_5 != 0) {
-        return 0x72e027ff;
-      }
-      return 0x8400ff;
-    }
-    FUN_002bf288(2,0x29,0x92);
-  }
-  else {
-    temp_v1 = questIsCompleted(temp_v5);
-    if (temp_v1 == 0) {
-      return temp_v3;
-    }
-    FUN_002bf288(2,0x29,0x93,temp_v6,param_3,param_4);
-  }
-  if (param_5 != 0) {
-    return 0x787878ff;
-  }
-  return 0x5a5a5aff;
+    return questColorDim(full);
 }
 
 } /* extern "C" */

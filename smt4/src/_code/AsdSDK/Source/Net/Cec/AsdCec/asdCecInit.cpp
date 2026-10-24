@@ -9,8 +9,8 @@ void asdMemFreeNonNull(void *work);
 void asdMemFree(void *block);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdOperatorNew(u32 size);
-void *asdCecMessageIdInit(void *self);
-AsdCecMessageBox *FUN_00358c24(AsdCecMessageBox *self, int unk);
+void *_ZN12CecMessageIdC1Ev(void *self);
+AsdCecMessageBox *_ZN9Obj420e4cC1Ej(AsdCecMessageBox *self, int unk);
 
 /* (Re)creates the AsdCec object and its message box. Always returns 1. */
 s32 asdCecInit(void)
@@ -37,13 +37,13 @@ s32 asdCecInit(void)
 
     work = asdOperatorNew(8);
     if (work != NULL) {
-        work = asdCecMessageIdInit(work);
+        work = _ZN12CecMessageIdC1Ev(work);
     }
     g_asdCec.cec->work = work;
 
     box = (AsdCecMessageBox *)asdOperatorNew(sizeof(AsdCecMessageBox));
     if (box != NULL) {
-        box = FUN_00358c24(box, 0);
+        box = _ZN9Obj420e4cC1Ej(box, 0);
     }
     g_asdCec.cec->box = box;
     return 1;

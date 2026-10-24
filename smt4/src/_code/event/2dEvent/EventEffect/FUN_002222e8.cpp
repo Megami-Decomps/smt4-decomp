@@ -1,4 +1,3 @@
-/* NON_MATCHING: the first two renderStackPush expansions schedule their next-entry address differently (ip instead of r3) and the saved global/zero registers are swapped (r6/r7). */
 #include "event/2dEvent/BlinkFade.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"

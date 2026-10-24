@@ -1,132 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d0d1c` (_code @ 0x3d0d1c, 0x2ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (172 vs 185 rows); retail unrolls the selection loops and keeps constants in different registers */
+#include "common.h"
+
+// Candidate party member for the battle formation: slot index, rank and race.
+struct FormationCandidate {
+    u8 slot;        // 0x00
+    u8 rank;        // 0x01
+    u8 race;        // 0x02
+    u8 pad;
+};
+
+struct PartyUnit {
+    u8 unk00[0x46];
+    u16 id;         // 0x46
+    u8 rank;        // 0x48
+};
+
+struct SlotTable {
+    u8 unk0000[0x90f0];
+    s8 party[0x1b];         // 0x90f0 (slot ids; 0x910b holds the count below)
+};
+
+struct BattleFormation {
+    u8 unk0000[0x1fc0];
+    u8* units;              // 0x1fc0 (0x288 bytes each)
+    u8 unk1fc4[0x1fd0 - 0x1fc4];
+    u64 selectedMask;       // 0x1fd0
+    u8 unk1fd8[8];
+    u8 selected[4];         // 0x1fe0 (written with 0xff fill for 3 entries)
+};
+
+struct BattleSetup {
+    u8 unk00[0x38];
+    u8 present[4];          // 0x38
+};
+
+struct DevilRaceRecord {
+    u8 unk00[2];
+    u8 race;                // 0x02
+};
 
 extern "C" {
 
-int asdMemFreeIfNotNull(unsigned char *);
-int FUN_002b7bca(unsigned char *, unsigned int, int, unsigned char *);
-int devilGetRecord(void);
-int __aeabi_memset4(int, int, unsigned int);
-int asdOperatorNewC(void);
+void __aeabi_memset4(void* block, u32 size, s32 value);
+SlotTable* gameGetSlotTable(void);
+u8* asdOperatorNewC(u32 size);
+PartyUnit* gameGetUnitRecord(s32 slot);
+s32 flagWordTestBit(PartyUnit* unit, u32 bit);
+DevilRaceRecord* devilGetRecord(u32 id);
+void FUN_002b7bca(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
+s32 sortCompareRankThenOrder(const void* a, const void* b);
+void asdMemFreeIfNotNull(void* block);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern unsigned char LAB_0032b34c; /* 0x32b34c */
-
-/* Supplied declaration required: asdMemFreeIfNotNull. */
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: asdOperatorNewC. */
-
-
-void FUN_003d0d1c(int *param_1,int param_2)
-
+// Picks up to three party members for the battle formation: marks the living
+// slots present, ranks the eligible members and records the chosen ones.
+void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
 {
-/* irregular: 1 unstructured edge(s); 5 native warning(s); review required */
-  int temp_v0;
-  unsigned char *pbVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *pbVar5;
-  unsigned int temp_v3;
-  unsigned char *pbVar7;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char *pbVar10;
-  
-  temp_v0 = 0;
-  do {
-    temp_v3 = *(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v0 * 0x288);
-    if (((temp_v3 & 2) == 0 && (temp_v3 & 0x20) == 0) && ((temp_v3 & 0x10) == 0)) {
-      *(unsigned char *)(param_2 + temp_v0 + 0x38) = 1;
+    for (s32 i = 0; i < 4; i++) {
+        u32 flags = *reinterpret_cast<u32*>((*formation)->units + i * 0x288);
+        if ((flags & 2) == 0 && (flags & 0x20) == 0 && (flags & 0x10) == 0) setup->present[i] = 1;
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 4);
-  __aeabi_memset4(*param_1 + 0x1fe0,3,0xffffffff);
-  temp_v0 = gameGetSlotTable();
-  temp_v5 = (unsigned int)*(unsigned char *)(temp_v0 + 0x910b);
-  pbVar2 = (unsigned char *)(temp_v5 << 2);
-  asdOperatorNewC();
-  temp_v3 = 0;
-  if (temp_v5 != 0) {
-    pbVar10 = pbVar2;
-    pbVar5 = pbVar2 + 1;
-    pbVar7 = pbVar2 + 2;
-    temp_v4 = temp_v5;
-    do {
-      *pbVar10 = 0xff;
-      *pbVar5 = 0;
-      temp_v4 = temp_v4 - 1;
-      *pbVar7 = 0;
-      pbVar10 = pbVar10 + 4;
-      pbVar5 = pbVar5 + 4;
-      pbVar7 = pbVar7 + 4;
-    } while (temp_v4 != 0);
-  }
-  temp_v0 = 0;
-  if (temp_v5 != 0) {
-    do {
-      temp_v1 = gameGetSlotTable();
-      if (-1 < *(char *)(temp_v1 + temp_v0 + 0x90f0)) {
-        temp_v1 = gameGetSlotTable();
-        temp_v1 = gameGetUnitRecord((int)*(char *)(temp_v1 + temp_v0 + 0x90f0));
-        if ((((temp_v1 != 0) && (temp_v2 = flagWordTestBit(temp_v1,1), temp_v2 == 0)) &&
-            (temp_v2 = flagWordTestBit(temp_v1,10), temp_v2 == 0)) &&
-           (temp_v2 = flagWordTestBit(temp_v1,2), temp_v2 == 0)) {
-          pbVar10 = pbVar2 + temp_v3 * 4;
-          *pbVar10 = (unsigned char)temp_v0;
-          pbVar10[1] = *(unsigned char *)(temp_v1 + 0x48);
-          temp_v4 = (unsigned int)*(unsigned short *)(temp_v1 + 0x46);
-          devilGetRecord();
-          temp_v3 = temp_v3 + 1;
-          pbVar10[2] = *(unsigned char *)(temp_v4 + 2);
-        }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (int)temp_v5);
-    if (temp_v3 != 0) {
-      FUN_002b7bca(pbVar2,temp_v3,4,&LAB_0032b34c);
-      if ((int)temp_v3 >= 4) {
-        temp_v3 = 3;
-      }
-      if (0 >= (int)temp_v3) {
-        temp_v5 = 0;
-      }
-      else {
-        temp_v5 = temp_v3 & 1;
-        if (temp_v5 == 1) {
-          temp_v0 = *param_1;
-          temp_v4 = 1 << ((*pbVar2 + 1) & 0xff);
-          *(unsigned int *)(temp_v0 + 0x1fd4) = *(unsigned int *)(temp_v0 + 0x1fd4) | ((int)temp_v4 >> 0x1f);
-          *(unsigned int *)(temp_v0 + 0x1fd0) = *(unsigned int *)(temp_v0 + 0x1fd0) | temp_v4;
-          *(unsigned char *)(*param_1 + 0x1fe0) = *pbVar2 + 1;
-        }
-      }
-      for (; (int)temp_v5 < (int)temp_v3; temp_v5 = temp_v5 + 2) {
-        pbVar10 = pbVar2 + temp_v5 * 4;
-        temp_v0 = *param_1;
-        temp_v4 = 1 << ((*pbVar10 + 1) & 0xff);
-        *(unsigned int *)(temp_v0 + 0x1fd0) = temp_v4 | *(unsigned int *)(temp_v0 + 0x1fd0);
-        *(unsigned int *)(temp_v0 + 0x1fd4) = *(unsigned int *)(temp_v0 + 0x1fd4) | ((int)temp_v4 >> 0x1f);
-        *(unsigned char *)(*param_1 + temp_v5 + 0x1fe0) = *pbVar10 + 1;
-        temp_v0 = *param_1;
-        temp_v4 = 1 << ((pbVar10[4] + 1) & 0xff);
-        *(unsigned int *)(temp_v0 + 0x1fd0) = temp_v4 | *(unsigned int *)(temp_v0 + 0x1fd0);
-        *(unsigned int *)(temp_v0 + 0x1fd4) = *(unsigned int *)(temp_v0 + 0x1fd4) | ((int)temp_v4 >> 0x1f);
-        *(unsigned char *)(*param_1 + temp_v5 + 0x1fe1) = pbVar10[4] + 1;
-      }
+    __aeabi_memset4(&(*formation)->selected, 3, -1);
+
+    u32 slotLimit = *reinterpret_cast<u8*>(reinterpret_cast<u8*>(gameGetSlotTable()) + 0x910b);
+    FormationCandidate* candidates = reinterpret_cast<FormationCandidate*>(asdOperatorNewC(slotLimit * 4));
+    for (u32 i = 0; i < slotLimit; i++) {
+        candidates[i].slot = 0xff;
+        candidates[i].rank = 0;
+        candidates[i].race = 0;
     }
-  }
-  asdMemFreeIfNotNull(pbVar2);
-  return;
+
+    u32 count = 0;
+    for (u32 i = 0; i < slotLimit; i++) {
+        s8 slotId = gameGetSlotTable()->party[i];
+        if (slotId < 0) continue;
+        PartyUnit* unit = gameGetUnitRecord(gameGetSlotTable()->party[i]);
+        if (unit != NULL && flagWordTestBit(unit, 1) == 0 && flagWordTestBit(unit, 10) == 0 &&
+            flagWordTestBit(unit, 2) == 0) {
+            candidates[count].slot = i;
+            candidates[count].rank = unit->rank;
+            candidates[count].race = devilGetRecord(unit->id)->race;
+            count++;
+        }
+    }
+    if (count != 0) {
+        FUN_002b7bca(candidates, count, 4, sortCompareRankThenOrder);
+        if ((s32)count >= 4) count = 3;
+        s32 next = 0;
+        if ((s32)count > 0) {
+            next = count & 1;
+            if (next == 1) {
+                BattleFormation* f = *formation;
+                u64 bit = 1ull << ((candidates[0].slot + 1) & 0xff);
+                f->selectedMask |= bit;
+                (*formation)->selected[0] = candidates[0].slot + 1;
+            }
+        }
+        for (; next < (s32)count; next += 2) {
+            BattleFormation* f = *formation;
+            u64 bitA = 1ull << ((candidates[next].slot + 1) & 0xff);
+            f->selectedMask |= bitA;
+            (*formation)->selected[next] = candidates[next].slot + 1;
+            f = *formation;
+            u64 bitB = 1ull << ((candidates[next + 1].slot + 1) & 0xff);
+            f->selectedMask |= bitB;
+            (*formation)->selected[next + 1] = candidates[next + 1].slot + 1;
+        }
+    }
+    asdMemFreeIfNotNull(candidates);
 }
 
 } /* extern "C" */

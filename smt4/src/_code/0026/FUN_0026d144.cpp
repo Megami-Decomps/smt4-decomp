@@ -1,129 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026d144` (_code @ 0x26d144, 0x290 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same block-ordering difference as FUN_0026d3e0: retail lays out the stock and active-party `unk42 == 0` arms after the non-stock path; armcc here keeps each pair adjacent. */
+#include "ui/PartyPanelState.h"
+#include "shard/W7_W7Match2_PartyDamage.h"
 
-extern "C" {
+namespace {
+struct BtlUnitExtra {
+    u8 unk000[0x14c];
+    u16 kind;
+};
 
-int FUN_002621b4(...);
-int FUN_00298d28(int, unsigned int);
-int objectPartRunUnlessLocked(...);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern int g_partyPanel; /* 0x43dcf0 */
-
-/* Supplied declaration required: FUN_002621b4. */
-extern int btlUnitGet(void);
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00298d28. */
-extern int FUN_0029a924(unsigned short);
-extern int FUN_0029a9d4(unsigned short, unsigned int);
-/* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029efa8(unsigned int);
-extern int gameGetSlotTable(void);
-
-
-void FUN_0026d144(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v5 = g_partyPanel;
-  temp_v6 = param_4;
-  temp_v2 = gameGetSlotTable();
-  temp_v6 = 0;
-  if (((*(short *)(temp_v5 + 0x36) == 0x7d) && (temp_v3 = btlGetMainState(), temp_v3 != 0)) &&
-     (g_btlScriptUnit != 0)) {
-    temp_v3 = btlUnitGet();
-    if ((*(int *)(temp_v3 + 0x28) != 0) && (*(short *)(*(int *)(temp_v3 + 0x28) + 0x14c) == 8))
-    goto LAB_0026d25c;
-  }
-  if (*(short *)(temp_v5 + 0x38) >= 0) {
-    temp_v3 = 0;
-    do {
-      if ((int)*(char *)(temp_v2 + temp_v3 + 0x9108) == (int)*(short *)(temp_v5 + 0x38)) {
-        temp_v4 = FUN_0029a924(*(unsigned short *)(temp_v5 + 0x36));
-        *(int *)(*(int *)(temp_v5 + temp_v3 * 4 + 0x6cc) + 0x44) = -temp_v4;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 3);
-    temp_v3 = 0;
-    do {
-      if (*(int *)(temp_v5 + temp_v3 * 8 + 0x738) == (int)*(short *)(temp_v5 + 0x38)) {
-        temp_v4 = FUN_0029a924(*(unsigned short *)(temp_v5 + 0x36));
-        *(int *)(*(int *)(temp_v5 + temp_v3 * 4 + 0x6d8) + 0x44) = -temp_v4;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x18);
-  }
-  else {
-    temp_v3 = FUN_0029a9d4(*(unsigned short *)(temp_v5 + 0x36),1);
-    *(int *)(*(int *)(temp_v5 + 0x6c8) + 0x44) = -temp_v3;
-  }
-LAB_0026d25c:
-  if (param_2 != 0) {
-    if (*(char *)(temp_v5 + 0x42) != '\0') {
-      temp_v2 = objectPartRunUnlessLocked();
-      temp_v3 = FUN_0029efa8(param_1);
-      temp_v2 = temp_v2 + temp_v3 * 4;
-    }
-    else {
-      temp_v3 = FUN_0029efa8(param_1);
-      temp_v4 = *(int *)(temp_v5 + 0x2c);
-      temp_v2 = objectPartRunUnlessLocked(param_1);
-      temp_v2 = temp_v3 * 4 + temp_v4 * 0xc + temp_v2;
-    }
-  }
-  else {
-    temp_v3 = FUN_0029efa8(param_1);
-    if (temp_v3 < 1) {
-      temp_v3 = objectPartRunUnlessLocked(param_1);
-      if (temp_v3 != 0) {
-        temp_v0 = *(unsigned short *)(temp_v5 + 0x36);
-        temp_v2 = (int)*(char *)(temp_v2 + temp_v3 + 0x9107);
-        temp_v1 = *(short *)(temp_v5 + 0x38);
-      }
-      else {
-        temp_v0 = *(unsigned short *)(temp_v5 + 0x36);
-        temp_v1 = *(short *)(temp_v5 + 0x38);
-        temp_v2 = -1;
-      }
-      FUN_002621b4((int)temp_v1,temp_v2,temp_v0,&temp_v6);
-      temp_v5 = temp_v5 + temp_v3 * 4;
-      *(unsigned int *)(*(int *)(temp_v5 + 0x6c8) + 0x40) = temp_v6;
-      FUN_00298d28(temp_v6,*(unsigned int *)(*(int *)(temp_v5 + 0x6c8) + 0x44));
-      return;
-    }
-    if (*(char *)(temp_v5 + 0x42) != '\0') {
-      temp_v2 = objectPartRunUnlessLocked();
-      temp_v3 = FUN_0029efa8(param_1);
-      temp_v2 = temp_v2 + temp_v3 * 4;
-    }
-    else {
-      temp_v3 = FUN_0029efa8(param_1);
-      temp_v4 = *(int *)(temp_v5 + 0x2c);
-      temp_v2 = objectPartRunUnlessLocked(param_1);
-      temp_v2 = temp_v2 + temp_v3 * 4 + temp_v4 * 0xc;
-    }
-    temp_v2 = temp_v2 - 4;
-  }
-  FUN_002621b4((int)*(short *)(temp_v5 + 0x38),*(unsigned int *)(temp_v5 + temp_v2 * 8 + 0x738),
-               *(unsigned short *)(temp_v5 + 0x36),&temp_v6);
-  temp_v5 = temp_v5 + temp_v2 * 4;
-  *(unsigned int *)(*(int *)(temp_v5 + 0x6d8) + 0x40) = temp_v6;
-  FUN_00298d28(temp_v6,*(unsigned int *)(*(int *)(temp_v5 + 0x6d8) + 0x44));
-  return;
+struct BtlUnitView {
+    u8 unk00[0x28];
+    BtlUnitExtra *extra;
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern PartyPanelState *g_partyPanel;
+extern u32 g_btlScriptUnit;
+PartyDamageSlotsIV *gameGetSlotTable();
+void *btlGetMainState(void);
+BtlUnitView *btlUnitGet(void);
+s32 FUN_0029a924(u16 item);
+s32 FUN_0029a9d4(u16 item, u32 flag);
+s32 FUN_0029efa8(void *selection);
+s32 objectPartRunUnlessLocked(void *selection);
+void FUN_002621b4(s32 selection, s32 unit, u16 item, s32 *value);
+void FUN_00298d28(s32 first, s32 second);
+void partyWidgetSetValue(PartyPanelWidget *widget, s32 value);
+void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);
+s32 partyWidgetGetCost(PartyPanelWidget *widget);
+
+// Set the price shown beside every preview widget affected by the selected item, then compute the
+// value for the selected active-party or stock unit and publish it on that unit's widget.
+void FUN_0026d144(void *selection, s32 stockOnly)
+{
+    PartyPanelState *panel = g_partyPanel;
+    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    s32 value = 0;
+    s32 index;
+
+    bool scripted = false;
+    if (panel->previewItem == 0x7d && btlGetMainState() != NULL && g_btlScriptUnit != 0) {
+        BtlUnitExtra *extra = btlUnitGet()->extra;
+        scripted = extra != NULL && extra->kind == 8;
+    }
+    if (!scripted) {
+        if (panel->pendingSelection.selection < 0) {
+            partyWidgetSetCost(panel->characters[0], -FUN_0029a9d4(panel->previewItem, 1));
+        } else {
+            for (s32 i = 0; i < 3; i++) {
+                if (slots->active[i] == panel->pendingSelection.selection) {
+                    partyWidgetSetCost(panel->characters[i + 1], -FUN_0029a924(panel->previewItem));
+                }
+            }
+            for (s32 i = 0; i < 24; i++) {
+                if (panel->previewUnits[i].packedIndex == panel->pendingSelection.selection) {
+                    partyWidgetSetCost(panel->demons[i], -FUN_0029a924(panel->previewItem));
+                }
+            }
+        }
+    }
+
+    if (stockOnly) {
+        if (panel->unk42) {
+            index = objectPartRunUnlessLocked(selection);
+            index += FUN_0029efa8(selection) * 4;
+        } else {
+            index = FUN_0029efa8(selection) * 4 + panel->unk2C * 12;
+            index += objectPartRunUnlessLocked(selection);
+        }
+    } else {
+        if (FUN_0029efa8(selection) < 1) {
+            index = objectPartRunUnlessLocked(selection);
+            s32 unit;
+            if (index != 0) {
+                unit = slots->active[index - 1];
+            } else {
+                unit = -1;
+            }
+            FUN_002621b4(panel->pendingSelection.selection, unit, panel->previewItem, &value);
+            partyWidgetSetValue(panel->characters[index], value);
+            FUN_00298d28(value, partyWidgetGetCost(panel->characters[index]));
+            return;
+        }
+        if (panel->unk42) {
+            index = objectPartRunUnlessLocked(selection);
+            index += FUN_0029efa8(selection) * 4;
+        } else {
+            index = FUN_0029efa8(selection) * 4 + panel->unk2C * 12;
+            index += objectPartRunUnlessLocked(selection);
+        }
+        index -= 4;
+    }
+    FUN_002621b4(panel->pendingSelection.selection, panel->previewUnits[index].packedIndex,
+                 panel->previewItem, &value);
+    partyWidgetSetValue(panel->demons[index], value);
+    FUN_00298d28(value, partyWidgetGetCost(panel->demons[index]));
+}
+}

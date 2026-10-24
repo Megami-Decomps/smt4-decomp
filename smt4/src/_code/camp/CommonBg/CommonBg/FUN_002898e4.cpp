@@ -1,169 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002898e4` (_code @ 0x2898e4, 0x314 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: common camp background creation (allocate once, spawn the two particle sets); float constant materialisation and the random-to-float conversions are not compared with retail */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+
+#define COMMON_BG_DRIFT_COUNT 5
+#define COMMON_BG_RISE_COUNT 5
+
+/* A drifting particle: position, velocity and size. */
+struct CommonBgDrift {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 velocityX;
+    /* 0x0C */ f32 velocityY;
+    /* 0x10 */ f32 size;
+};
+
+/* A rising particle: column, speed, size, extent and a wobble pair. */
+struct CommonBgRise {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 speed;
+    /* 0x08 */ f32 size;
+    /* 0x0C */ f32 extent;
+    /* 0x10 */ s16 wobbleA;
+    /* 0x12 */ s16 wobbleB;
+};
+
+struct CommonBgWork {
+    /* 0x00 */ u32 process;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 active;
+    /* 0x0C */ u32 mode;
+    /* 0x10 */ f32 phase;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ CommonBgDrift drift[COMMON_BG_DRIFT_COUNT];
+    /* 0x7C */ CommonBgRise rise[COMMON_BG_RISE_COUNT];
+    /* 0xE0 */ u8 end[1];
+};
 
 extern "C" {
+extern s8 g_commonBg;
+extern CommonBgWork *DAT_0043dc24;
 
-int uiFadeOpen(...);
-int randNextInRange(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int VectorUnsignedToFloat(...);
+void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
+void memClear(void *block, s32 size);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
+void uiFadeOpen(void);
+u32 randNextInRange(u32 maximum);
+s32 gameFlagIsSet(u32 flag);
+s32 FUN_001a0a1c(u32 handle);
+void campNotifyNoop(u32 handle);
+s32 FUN_001ecd68(u32 handle);
+s32 FUN_001ed134(u32 handle);
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} void_stack;
+#define COMMON_BG_SPEED_STEP 0.1f
 
-extern int FUN_001a0a1c(...); /* 0x1a0a1c */
-extern unsigned char LAB_001ecd64; /* 0x1ecd64 */
-extern int FUN_001ecd68(...); /* 0x1ecd68 */
-extern unsigned char LAB_001ed134; /* 0x1ed134 */
-extern unsigned char LAB_00289c44; /* 0x289c44 */
-extern unsigned char LAB_00289c54; /* 0x289c54 */
-extern unsigned char LAB_00289c68; /* 0x289c68 */
-extern signed char g_commonBg; /* 0x43dc20 */
-extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: uiFadeOpen. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-
-
+/* Creates the common background on the first use: allocates its work, starts the calc process
+ * and the two draw tasks and scatters the particles; later uses only re-arm it. */
 void FUN_002898e4(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  unsigned int temp_v0;
-  short temp_v1;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  unsigned int temp_v10;
-  unsigned long long temp_v11;
-  
-  temp_v10 = 0x3f800000;
-  if (g_commonBg < '\x01') {
-    if (DAT_0043dc24 == (unsigned int *)0x0) {
-      puVar3 = (unsigned int *)0x100;
-      asdMemAlloc(0x100,0x100,0,0xe0,1);
-      DAT_0043dc24 = puVar3;
+    if (g_commonBg <= 0) {
+        if (DAT_0043dc24 == NULL) {
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\CommonBg\\CommonBg.cpp", 570);
+            DAT_0043dc24 = (CommonBgWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(CommonBgWork), 1);
+        }
+        CommonBgWork *work = DAT_0043dc24;
+        memClear(work, sizeof(CommonBgWork));
+        work->process = asdProcessCreateSimple((const s8 *)"COMBG CALC", 2, 0, 0, FUN_001a0a1c, campNotifyNoop, 0);
+        taskCreateDraw((const s8 *)"COMBG DDRAW", 0xE5, 0, 0, FUN_001ecd68, NULL, 0, work->process);
+        taskCreateDraw((const s8 *)"COMBG DDRAW FADE", 0x15F, 0, 0, FUN_001ed134, NULL, 0, work->process);
+        uiFadeOpen();
+
+        work = DAT_0043dc24;
+        for (s32 i = 0; i < COMMON_BG_DRIFT_COUNT; i++) {
+            CommonBgDrift *p = &work->drift[i];
+            p->x = (f32)randNextInRange(0x131);
+            p->y = (f32)randNextInRange(0xE1);
+            p->velocityX = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
+            p->velocityY = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
+            p->size = (f32)(randNextInRange(0x14) + 0x14) * COMMON_BG_SPEED_STEP;
+            if (p->velocityX == 0.0f)
+                p->velocityX = 1.0f;
+            if (p->velocityY == 0.0f)
+                p->velocityY = 1.0f;
+        }
+        for (s32 i = 0; i < COMMON_BG_RISE_COUNT; i++) {
+            CommonBgRise *p = &work->rise[i];
+            p->x = (f32)randNextInRange(0xF0);
+            p->speed = -COMMON_BG_SPEED_STEP + (f32)(randNextInRange(0x13) + 1) * COMMON_BG_SPEED_STEP;
+            p->extent = 100.0f;
+            p->wobbleA = 0;
+            p->wobbleB = 0xF0;
+            p->size = (f32)(randNextInRange(0x14) + 0x14) * COMMON_BG_SPEED_STEP;
+            if (randNextInRange(2) == 0) {
+                p->wobbleA -= (s16)randNextInRange(0x1E);
+                p->wobbleB += (s16)randNextInRange(0x1E);
+            }
+            if (p->speed == 0.0f)
+                p->speed = 1.0f;
+            if (p->speed < COMMON_BG_SPEED_STEP && p->speed > -COMMON_BG_SPEED_STEP)
+                p->speed *= 10.0f;
+        }
+        work->phase = 0.0f;
+        work->active = 0;
+        work->unk14 = 0;
     }
-    puVar3 = DAT_0043dc24;
-    memClear();
-    puVar4 = &LAB_00289c44;
-    asdProcessCreateSimple(&LAB_00289c44,2,0,0,FUN_001a0a1c,&LAB_001ecd64,0);
-    *puVar3 = (unsigned int)puVar4;
-    taskCreateDraw(&LAB_00289c54,0xe5,0,0,FUN_001ecd68,0,0,puVar4);
-    taskCreateDraw(&LAB_00289c68,0x15f,0,0,&LAB_001ed134,0,0,*puVar3);
-    uiFadeOpen();
-    puVar3 = DAT_0043dc24;
-    temp_v7 = 0.1f;
-    temp_v8 = -0.1f;
-    temp_v9 = 0.0f;
-    temp_v5 = 0;
-    do {
-      temp_v2 = randNextInRange(0x131);
-      temp_v2 = VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 6] = temp_v2;
-      temp_v2 = randNextInRange(0xe1);
-      temp_v2 = VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 7] = temp_v2;
-      temp_v3 = randNextInRange(0x13);
-      temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 8] = temp_v8 + temp_v6 * temp_v7;
-      temp_v3 = randNextInRange(0x13);
-      temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 9] = temp_v8 + temp_v6 * temp_v7;
-      temp_v3 = randNextInRange(0x14);
-      temp_v4 = temp_v5 + 1;
-      temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)puVar3[temp_v5 * 5 + 8] == temp_v9) << 0x1e);
-      temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(temp_v0 >> 0x16) & 3);
-      *(float *)&puVar3[temp_v5 * 5 + 10] = temp_v6 * temp_v7;
-      if (romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0)) {
-        puVar3[temp_v5 * 5 + 8] = temp_v10;
-      }
-      in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)((float)puVar3[temp_v5 * 5 + 9] == temp_v9) << 0x1e);
-      if (romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
-        puVar3[temp_v5 * 5 + 9] = temp_v10;
-      }
-      temp_v5 = temp_v4;
-    } while (temp_v4 < 5);
-    temp_v11 = 0x4120000042cc0000;
-    temp_v5 = 0;
-    do {
-      temp_v2 = randNextInRange(0xf0);
-      temp_v2 = VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 0x1f] = temp_v2;
-      temp_v3 = randNextInRange(0x13);
-      temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      puVar3[temp_v5 * 5 + 0x20] = temp_v8 + temp_v6 * temp_v7;
-      temp_v3 = randNextInRange(0x14);
-      puVar3[temp_v5 * 5 + 0x22] = (int)temp_v11;
-      *(unsigned short *)(puVar3 + temp_v5 * 5 + 0x23) = 0;
-      *(unsigned short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e) = 0xf0;
-      temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)&puVar3[temp_v5 * 5 + 0x21] = temp_v6 * temp_v7;
-      temp_v3 = randNextInRange(2);
-      if (temp_v3 == 0) {
-        temp_v1 = randNextInRange(0x1e);
-        *(short *)(puVar3 + temp_v5 * 5 + 0x23) = *(short *)(puVar3 + temp_v5 * 5 + 0x23) - temp_v1;
-        temp_v1 = randNextInRange(0x1e);
-        *(short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e) =
-             temp_v1 + *(short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e);
-      }
-      in_fpscr = (in_fpscr & 0xfffffff) |
-                 ((unsigned int)((float)puVar3[temp_v5 * 5 + 0x20] == temp_v9) << 0x1e);
-      if (romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
-        puVar3[temp_v5 * 5 + 0x20] = temp_v10;
-      }
-      temp_v6 = (float)puVar3[temp_v5 * 5 + 0x20];
-      if (((int)temp_v6 < 0x3dcccccd) && ((unsigned int)temp_v6 < 0xbdcccccd)) {
-        *(float *)&puVar3[temp_v5 * 5 + 0x20] = temp_v6 * (float)((unsigned long long)temp_v11 >> 0x20);
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 5);
-    *(float *)&puVar3[4] = temp_v9;
-    puVar3[2] = 0;
-    puVar3[5] = 0;
-  }
-  puVar3 = DAT_0043dc24;
-  if ((DAT_0043dc24 != (unsigned int *)0x0) && (DAT_0043dc24[2] == 0)) {
-    temp_v5 = gameFlagIsSet(0x400);
-    if (temp_v5 != 0) {
-      puVar3[3] = 0;
+
+    CommonBgWork *work = DAT_0043dc24;
+    if (work != NULL && work->active == 0) {
+        work->mode = gameFlagIsSet(0x400) != 0 ? 0 : 1;
+        work->active = 1;
+        work->phase = 1.0f;
+        work->unk14 = 0;
     }
-    else {
-      puVar3[3] = 1;
-    }
-    puVar3[2] = 1;
-    puVar3[4] = temp_v10;
-    puVar3[5] = 0;
-  }
-  g_commonBg = g_commonBg + '\x01';
-  return;
+    g_commonBg++;
 }
 
 } /* extern "C" */

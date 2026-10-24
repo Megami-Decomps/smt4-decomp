@@ -1,193 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003beba8` (_code @ 0x3beba8, 0x2a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float register allocation differs (retail keeps scale in s16, power in s17) and the 0x44a0 flag word is addressed through a separate add. */
+#include "common.h"
+
+struct BattleMain {
+    u8 unk0000[0x44a0];
+    u32 flags;          // 0x44a0, bit 18: skip the side multiplier
+};
+
+// Combatant record: only the fields the damage formula reads.
+struct BattleCombatant {
+    u8 flags;           // 0x00, bit 2: boosted/charged side
+    u8 unk01[0xef];
+    s16 strength;       // 0xf0
+    s16 magic;          // 0xf2
+    u8 unkF4[0x57];
+    u8 affinityIndex;   // 0x14b
+};
+
+struct BattleListEntry;
+
+// Per-affinity rates (percent) of an attacker, by value as retail copies it.
+struct AffinityRates {
+    u8 unk00[2];
+    u16 skillId;        // 0x02
+    u8 unk04[4];
+    u16 critRate;       // 0x08
+    u8 unk0a[4];
+    u8 percent[22];     // 0x0e
+};
 
 extern "C" {
 
-int CONCAT44(unsigned int, double);
-int FUN_0022a690(...);
-int selectionCopySupportedValue(int, unsigned int [12]);
-int FUN_0023ea94(void);
-int FUN_00247478(unsigned char [2], unsigned char *, unsigned char *);
-int FUN_0027da30(unsigned char *, unsigned int);
-int btlMainFindEntryByListedId(...);
-int FUN_00283ebc(int, unsigned int, int);
-int btlGetMainState(void);
-int dataTable40FindById(void);
-int FUN_003be670(unsigned int, unsigned int);
-int VectorSignedToFloat(...);
-int VectorUnsignedToFloat(...);
+BattleMain* btlGetMainState(void);
+BattleCombatant* FUN_0027da30(BattleMain* main, s32 id);
+BattleListEntry* btlMainFindEntryByListedId(BattleMain* main, s32 id);
+f32 FUN_0022a690(s32 kind, f32 value);
+f32 FUN_003be670(s32 attacker, s32 defender);
+AffinityRates FUN_00247478(BattleMain* main, BattleListEntry* entry);
+void selectionCopySupportedValue(u32 id, u32* out);
+u32* dataTable40FindById(s32 id);
+s32 playerGetSkillRank(s32 id);
+s32 FUN_00283ebc(u32* record, s32 rank, s32 mode);
+f32* FUN_0023ea94(void);
 
-/* stack frame of param_7: 7 slot(s), 26 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned short sp94; /* 0x94: local_94 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-} param_7_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0022a690. */
-/* Supplied declaration required: selectionCopySupportedValue. */
-/* Supplied declaration required: FUN_0023ea94. */
-/* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283ebc. */
-/* Supplied declaration required: btlGetMainState. */
-extern unsigned int playerGetSkillRank(int);
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: FUN_003be670. */
-
-
-int FUN_003beba8(int param_1,int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
-                int param_6,int param_7)
-
+// Computes a damage amount for an attack by `attackerId` on `defenderId` from
+// the attacker's stats, the party's skill rank bonus and the defender's affinity.
+s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 power, f32 modifier,
+                 s32 baseStat, s32 bonusA, s32 bonusB)
 {
-/* irregular: irregular input(s): in_fpscr, in_s0, in_s1; 13 native warning(s); review required */
-  unsigned char *pbVar1;
-  unsigned char *pbVar2;
-  unsigned char *pbVar3;
-  unsigned char *pbVar4;
-  unsigned int *puVar5;
-  int temp_v0;
-  float *pfVar7;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float in_s0;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  unsigned int in_s1;
-  float temp_v6;
-  unsigned long long temp_v7;
-  float temp_v8;
-  unsigned int temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  int uStack_90;
-  unsigned int uStack_8c;
-  unsigned int uStack_88;
-  unsigned int uStack_84;
-  unsigned int uStack_80;
-  unsigned int temp_v13;
-  unsigned char temp_v14 [2];
-  unsigned short uStack_76;
-  unsigned int uStack_70;
-  unsigned int uStack_6c;
-  unsigned int uStack_68;
-  unsigned int uStack_64;
-  unsigned int uStack_60;
-  unsigned int uStack_5c;
-  unsigned int temp_v15;
-  unsigned int temp_v16 [12];
-  unsigned long long temp_v17;
-  
-  temp_v12 = 0.0f;
-  temp_v6 = 1.0f;
-  pbVar1 = (unsigned char *)btlGetMainState();
-  pbVar2 = pbVar1;
-  FUN_0027da30(pbVar1,param_3);
-  pbVar3 = pbVar1;
-  FUN_0027da30(pbVar1,param_4);
-  if ((*pbVar2 & 4) != 0) {
-    temp_v6 = 0.8f;
-  }
-  temp_v9 = VectorSignedToFloat((int)*(short *)(pbVar2 + 0xf2),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v17 = romwright_piece_4_4(param_5,temp_v9);
-  temp_v10 = (float)VectorSignedToFloat((int)*(short *)(pbVar2 + 0xf0),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0022a690(7,(int)*(short *)(pbVar2 + 0xf0));
-  temp_v4 = (float)VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0022a690(10);
-  temp_v5 = temp_v4;
-  FUN_003be670(param_3,param_4);
-  temp_v7 = CONCAT44(in_s1,temp_v3 * temp_v5 * temp_v4);
-  pbVar4 = pbVar1;
-  btlMainFindEntryByListedId(pbVar1,param_3);
-  FUN_00247478(temp_v14,pbVar1,pbVar4);
-  uStack_90 = uStack_6c;
-  uStack_8c = uStack_68;
-  uStack_88 = uStack_64;
-  uStack_84 = uStack_60;
-  uStack_80 = uStack_5c;
-  temp_v13 = temp_v15;
-  temp_v16[0] = 0;
-  selectionCopySupportedValue(uStack_76,temp_v16);
-  puVar5 = (unsigned int *)btlGetMainState();
-  btlMainFindEntryByListedId(puVar5,param_3);
-  temp_v2 = 0;
-  if (((*puVar5 & 2) != 0) && (temp_v0 = param_1, dataTable40FindById(), temp_v0 != 0)) {
-    temp_v9 = playerGetSkillRank(param_1);
-    FUN_00283ebc(temp_v0,temp_v9,1);
-    temp_v2 = temp_v0;
-  }
-  temp_v11 = 0.01f;
-  temp_v3 = (float)VectorSignedToFloat(param_6 + param_7,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = (float)VectorUnsignedToFloat(uStack_70 & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v5 = temp_v5 * 0.01f;
-  temp_v4 = (float)temp_v7;
-  temp_v8 = (float)((unsigned long long)temp_v7 >> 0x20);
-  if (param_1 < 1) {
-    temp_v3 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v17 >> 0x20),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    if (param_2 != 1) {
-      temp_v5 = ((float)temp_v17 + temp_v3) * 0.33333334f * in_s0 * temp_v8 * temp_v4 * temp_v6 * temp_v5;
+    f32 adjust = 0.0f;
+    f32 scale = 1.0f;
+    BattleMain* main = btlGetMainState();
+    BattleCombatant* attacker = FUN_0027da30(main, attackerId);
+    BattleCombatant* defender = FUN_0027da30(main, defenderId);
+    if (attacker->flags & 4) scale = 0.8f;
+
+    f32 magic = (f32)attacker->magic;
+    f32 strength = (f32)attacker->strength;
+    f32 rateA = FUN_0022a690(7, (f32)attackerId);
+    f32 rateB = FUN_0022a690(10, (f32)defenderId);
+    f32 base = rateA * rateB * FUN_003be670(attackerId, defenderId);
+
+    AffinityRates rates = FUN_00247478(main, btlMainFindEntryByListedId(main, attackerId));
+    u32 supported = 0;
+    selectionCopySupportedValue(rates.skillId, &supported);
+
+    s32 rankBonus = 0;
+    if ((*(u32*)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
+        u32* record = dataTable40FindById(partyId);
+        if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
     }
-    else {
-      temp_v5 = (temp_v10 + temp_v3) * 0.33333334f * in_s0 * temp_v8 * temp_v4 * temp_v6 * temp_v5;
+
+    f32 percent = (f32)(u32)rates.critRate * 0.01f;
+    f32 divisor = (f32)(bonusA + bonusB) * 0.5f;
+    f32 damage;
+    if (partyId > 0) {
+        f32 stat = magic + strength * 0.5f;
+        damage = (power + stat * 4.5f) * 0.33333334f * modifier * base * scale * percent / divisor;
+    } else if (mode != 1) {
+        damage = (magic + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
+    } else {
+        damage = (strength + (f32)baseStat) * 0.33333334f * power * modifier * base * scale * percent;
     }
-  }
-  else {
-    temp_v5 = ((in_s0 + ((float)temp_v17 + temp_v10 * 0.5f) * 4.5f) * 0.33333334f * temp_v8 * temp_v4 * temp_v6
-             * temp_v5) / (temp_v3 * 0.5f);
-  }
-  temp_v6 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = temp_v5 + temp_v12 + temp_v6;
-  if ((*(unsigned int *)(pbVar1 + 0x44a0) & 0x40000) != 0) {
-    temp_v1 = (unsigned int)*(unsigned char *)((int)&uStack_90 + pbVar3[0x14b] + 2);
-    if (temp_v1 != 0) {
-      temp_v12 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v6 = temp_v6 * temp_v12 * temp_v11;
+    damage = damage + adjust + (f32)rankBonus;
+
+    if ((main->flags & 0x40000) == 0) {
+        if (attacker->flags & 4) {
+            if (defender->flags & 4) {
+                adjust = FUN_0023ea94()[0];
+            } else {
+                adjust = FUN_0023ea94()[2];
+            }
+        } else if (defender->flags & 4) {
+            adjust = FUN_0023ea94()[0];
+        } else {
+            adjust = FUN_0023ea94()[2];
+        }
+        damage = adjust * damage;
     }
-    return (int)temp_v6;
-  }
-  if ((*pbVar2 & 4) != 0) {
-    if ((*pbVar3 & 4) != 0) {
-      pfVar7 = (float *)FUN_0023ea94();
-      temp_v12 = *pfVar7;
-    }
-    else {
-      temp_v2 = FUN_0023ea94();
-      temp_v12 = *(float *)(temp_v2 + 8);
-    }
-  }
-  else if ((*pbVar3 & 4) != 0) {
-    pfVar7 = (float *)FUN_0023ea94();
-    temp_v12 = *pfVar7;
-  }
-  else {
-    temp_v2 = FUN_0023ea94();
-    temp_v12 = *(float *)(temp_v2 + 8);
-  }
-  temp_v6 = temp_v12 * temp_v6;
-  temp_v1 = (unsigned int)*(unsigned char *)((int)&uStack_90 + pbVar3[0x14b] + 2);
-  if (temp_v1 != 0) {
-    temp_v12 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = temp_v6 * temp_v12 * temp_v11;
-  }
-  return (int)temp_v6;
+    u32 resist = rates.percent[defender->affinityIndex];
+    if (resist != 0) damage = damage * ((f32)resist * 0.01f);
+    return (s32)damage;
 }
 
 } /* extern "C" */

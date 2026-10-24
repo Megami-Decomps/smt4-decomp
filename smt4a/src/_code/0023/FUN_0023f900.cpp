@@ -1,180 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f900` (_code @ 0x23f900, 0x330 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (206 rows each): in the last help-text case retail tail-calls FUN_0019de98 straight from the add/movls result (ours routes it through r6), and in the demon branch retail keeps the record pointer in r3 (movs) while ours keeps it in r0 and loads the mode into r1. */
+#include "common.h"
+
+#define HELP_TEXT_TABLE 0x39
+#define HELP_TEXT_COLOR 0xF4F4F4FF
+
+/* The party panel (observed fields). */
+struct PartyHelpPanel {
+    /* 0x0000 */ u8 unk0000[0x9B4];
+    /* 0x09B4 */ u8 screen;
+    /* 0x09B5 */ u8 unk09B5[0x863];
+    /* 0x1218 */ s32 mode;
+};
+
+/* A unit record (observed field). */
+struct HelpUnitRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 demonId;
+};
 
 extern "C" {
 
-int dataTableGetCount(unsigned int);
-int FUN_0019de98(int, unsigned int);
-int FUN_0032d0c8(...);
-int unitRecordBuild(unsigned int, unsigned char [304]);
-int FUN_003aeb18(int);
+extern PartyHelpPanel *g_partyPanel;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+u32 dataTableGet(u32 table, u32 index);
+u8 *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+void FUN_0019de98(u8 *text, u32 color);
+s32 FUN_002cad18(void);
+u32 partyPanelGetSelectedDemonId(void);
+void *btlMainGetUnk14(void);
+void FUN_003aeb18(s32 value, s32 other);
+HelpUnitRecord *slotRecordFindById(u16 id);
+void unitRecordBuild(u16 id, u8 *record);
+void FUN_0032d0c8(s32 a, s32 b, u16 id);
 
-extern int g_partyPanel; /* 0x57f268 */
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
-extern unsigned char *slotRecordFindById(unsigned int);
-extern int btlMainGetUnk14(void);
-extern unsigned int partyPanelGetSelectedDemonId(void);
-extern int FUN_002cad18(void);
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_003aeb18. */
-
-
-void FUN_0023f900(void)
-
+/* The help-text entry at `offset`, or NULL when the help table has no more than `lastIndex` entries. */
+static __inline u8 *partyHelpTextEntry(u32 lastIndex, u32 offset)
 {
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char *puVar7;
-  unsigned char temp_v6;
-  unsigned char temp_v7 [304];
-  
-  temp_v5 = g_partyPanel;
-  temp_v1 = FUN_002cad18();
-  temp_v2 = partyPanelGetSelectedDemonId();
-  if (*(int *)(temp_v5 + 0x1218) != 1) {
-    if (temp_v1 != 0) {
-      FUN_003aeb18(0);
-      return;
+    u32 table = dataTableGet(HELP_TEXT_TABLE, 0);
+    u8 *entries = dataTableGetEntries();
+
+    if (dataTableGetCount(table) > lastIndex) {
+        return entries + offset;
     }
-  }
-  else if ((temp_v1 != 0) && (temp_v1 = btlMainGetUnk14(), temp_v1 != 0)) {
-    temp_v2 = (unsigned int)*(short *)(temp_v1 + 0x62);
-  }
-  if ((int)temp_v2 < 0) {
-    if (*(char *)(temp_v5 + 0x9b4) == '\f' || *(char *)(temp_v5 + 0x9b4) == '\r') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 7) {
-        temp_v1 = temp_v1 + 0x229;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      FUN_0019de98(temp_v1,0xf4f4f4ff);
+    return NULL;
+}
+
+/* Shows the help text of the party panel's current screen when no demon is selected, otherwise opens
+ * the selected demon's detail (a special view for a few demons in the second mode). */
+void FUN_0023f900(void)
+{
+    PartyHelpPanel *panel = g_partyPanel;
+    s32 hasSelection = FUN_002cad18();
+    s32 selected = (s32)partyPanelGetSelectedDemonId();
+
+    if (panel->mode != 1) {
+        if (hasSelection != 0) {
+            FUN_003aeb18(0, 0);
+            return;
+        }
+    } else if (hasSelection != 0) {
+        HelpUnitRecord *linked = (HelpUnitRecord *)btlMainGetUnk14();
+
+        if (linked != NULL) {
+            selected = (s16)linked->demonId;
+        }
     }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x0e') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 8) {
-        temp_v1 = temp_v1 + 0x285;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      FUN_0019de98(temp_v1,0xf4f4f4ff);
+    if (selected < 0) {
+        if (panel->screen == 12 || panel->screen == 13) {
+            FUN_0019de98(partyHelpTextEntry(6, 0x229), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 14) {
+            FUN_0019de98(partyHelpTextEntry(7, 0x285), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 4) {
+            FUN_0019de98(partyHelpTextEntry(2, 0xB9), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 15) {
+            FUN_0019de98(partyHelpTextEntry(8, 0x2E1), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 2) {
+            FUN_0019de98(partyHelpTextEntry(0, 1), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 3) {
+            FUN_0019de98(partyHelpTextEntry(1, 0x5D), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 17) {
+            FUN_0019de98(partyHelpTextEntry(9, 0x33D), HELP_TEXT_COLOR);
+        }
+        if (panel->screen == 19) {
+            FUN_0019de98(partyHelpTextEntry(10, 0x399), HELP_TEXT_COLOR);
+            return;
+        }
+    } else {
+        u8 buffer[0x130];
+        HelpUnitRecord *record = slotRecordFindById((u16)selected);
+        if (record == NULL) {
+            unitRecordBuild((u16)selected, buffer);
+            record = (HelpUnitRecord *)buffer;
+        }
+        if (panel->mode == 1) {
+            if (record->demonId == 0x29D || record->demonId == 0x29E || record->demonId == 0x317) {
+                FUN_0032d0c8(0, 11, (u16)selected);
+                return;
+            }
+        }
+        FUN_0032d0c8(0, 1, (u16)selected);
     }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x04') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 3) {
-        temp_v1 = temp_v1 + 0xb9;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      FUN_0019de98(temp_v1,0xf4f4f4ff);
-    }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x0f') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 9) {
-        temp_v1 = temp_v1 + 0x2e1;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      FUN_0019de98(temp_v1,0xf4f4f4ff);
-    }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x02') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v4 = dataTableGetEntries();
-      temp_v1 = dataTableGetCount(temp_v3);
-      if (temp_v1 != 0) {
-        temp_v4 = temp_v4 + 1;
-      }
-      else {
-        temp_v4 = 0;
-      }
-      FUN_0019de98(temp_v4,0xf4f4f4ff);
-    }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x03') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 2) {
-        temp_v1 = temp_v1 + 0x5d;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      FUN_0019de98(temp_v1,0xf4f4f4ff);
-    }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x11') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v1 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 10) {
-        temp_v1 = temp_v1 + 0x33d;
-      }
-      else {
-        temp_v1 = 0;
-      }
-      FUN_0019de98(temp_v1,0xf4f4f4ff);
-    }
-    if (*(char *)(temp_v5 + 0x9b4) == '\x13') {
-      temp_v3 = dataTableGet(0x39,0);
-      temp_v5 = dataTableGetEntries();
-      temp_v2 = dataTableGetCount(temp_v3);
-      if (temp_v2 >= 0xb) {
-        temp_v5 = temp_v5 + 0x399;
-      }
-      else {
-        temp_v5 = 0;
-      }
-      FUN_0019de98(temp_v5,0xf4f4f4ff);
-      return;
-    }
-  }
-  else {
-    puVar7 = (unsigned char *)slotRecordFindById(temp_v2 & 0xffff);
-    if (puVar7 == (unsigned char *)0x0) {
-      unitRecordBuild(temp_v2 & 0xffff,temp_v7);
-      puVar7 = temp_v7;
-    }
-    if (*(int *)(temp_v5 + 0x1218) == 1) {
-      temp_v0 = *(short *)(puVar7 + 0x62);
-      temp_v6 = temp_v0 == 0x29d || temp_v0 == 0x29e;
-      if (temp_v0 != 0x29d && temp_v0 != 0x29e) {
-        temp_v6 = temp_v0 == 0x317;
-      }
-      if (temp_v6) {
-        FUN_0032d0c8(0,0xb,temp_v2 & 0xffff);
-        return;
-      }
-    }
-    FUN_0032d0c8(0,1,temp_v2 & 0xffff);
-  }
-  return;
 }
 
 } /* extern "C" */

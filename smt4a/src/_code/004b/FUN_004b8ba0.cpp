@@ -1,149 +1,113 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b8ba0` (_code @ 0x4b8ba0, 0x370 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the menu's entry-availability scan and mode switch (the draft's three copies of the availability script run are one helper here, inlined by retail); armcc here orders the entry loops, the 36-byte name buffer and the mode switch differently. */
+#include "common.h"
+
+/* One menu entry (only the fields read here). */
+struct MenuEntry {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ char name[0x10];     /* "0" for an empty entry */
+    /* 0x3C */ s16 requiredFlag;    /* must be set (0: none) */
+    /* 0x3E */ s16 forbiddenFlag;   /* must not be set (0: none) */
+    /* 0x40 */ u8 unk40[0x14];
+    /* 0x54 */ s16 kind;
+};
+
+/* The menu (only the fields read here). */
+struct ScriptMenu {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u32 flags;
+    /* 0x0024 */ u8 unk0024[4];
+    /* 0x0028 */ s32 state;
+    /* 0x002C */ s32 subState;
+    /* 0x0030 */ u8 unk0030[0xC];
+    /* 0x003C */ s16 selected;
+    /* 0x003E */ u8 unk003E[0x5E];
+    /* 0x009C */ u8 entries[0x7E8];
+    /* 0x0884 */ s32 entryCount;
+    /* 0x0888 */ u8 unk0888[0x202];
+    /* 0x0A8A */ u8 scrolled;
+    /* 0x0A8B */ u8 unk0A8B[0x695];
+    /* 0x1120 */ s32 mode;
+    /* 0x1124 */ u8 unk1124[0x20];
+    /* 0x1144 */ u32 scriptTable;
+    /* 0x1148 */ u8 unk1148[4];
+    /* 0x114C */ u32 script;
+    /* 0x1150 */ u8 unk1150[0xC8];
+    /* 0x1218 */ u32 sound;
+};
 
 extern "C" {
+extern const char DAT_005328fc[];
+extern s32 DAT_0058800c;
 
-int textFormatBuffer(...);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int FUN_004080bc(unsigned int, int, unsigned int);
-int FUN_004b6bc4(int, int, int);
-int menu4CScrollToKind(int, int);
+void textFormatBuffer(char *buffer, const char *format, const char *name);
+u32 tableGroupFindEntryIndex(u32 group, const char *name);
+void scrScriptProcessStartEntry(u32 script, u32 entry);
+s32 scrRunOpcodesStub(u32 script);
+s32 gameFlagIsSet(s32 flag);
+MenuEntry *menu4CGetEntry(void *entries, s32 index);
+void menu4CScrollToKind(void *entries, s32 kind);
+void FUN_004b6bc4(ScriptMenu *menu, s32 selected, s32 mode);
+void FUN_004080bc(u32 sound, s32 a, u32 b);
 
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_1_stack;
-
-extern unsigned char DAT_005328fc; /* 0x5328fc */
-extern int DAT_0058800c; /* 0x58800c */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagIsSet(void);
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_004080bc. */
-/* Supplied declaration required: FUN_004b6bc4. */
-extern int menu4CGetEntry(int, int);
-/* Supplied declaration required: menu4CScrollToKind. */
-
-
-void FUN_004b8ba0(int param_1)
-
+/* Runs an entry's availability script and tests its flags: true when it is available. */
+static bool entryAvailable(ScriptMenu *menu, MenuEntry *entry)
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7 [8];
-  unsigned char temp_v8 [36];
-  
-  temp_v0 = 1;
-  temp_v1 = *(int *)(param_1 + 0x884);
-  temp_v6 = 0;
-  if (temp_v6 < temp_v1) {
-    do {
-      temp_v2 = menu4CGetEntry(param_1 + 0x9c,temp_v6);
-      if (*(short *)(temp_v2 + 0x54) == 3) {
-        if (*(char *)(temp_v2 + 0x2c) != '0') {
-          temp_v3 = *(unsigned int *)(param_1 + 0x114c);
-          temp_v4 = *(unsigned int *)(param_1 + 0x1144);
-          DAT_0058800c = 0;
-          textFormatBuffer(temp_v8,&DAT_005328fc,temp_v2 + 0x2c);
-          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v8);
-          scrScriptProcessStartEntry(temp_v3,temp_v4);
-          do {
-            temp_v5 = scrRunOpcodesStub(temp_v3);
-          } while (temp_v5 != 2);
-          if (((DAT_0058800c != 0) ||
-              ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) ||
-             ((*(short *)(temp_v2 + 0x3e) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 != 0))))
-          goto LAB_004b8c94;
-          break;
+    char buffer[36];
+    u32 script = menu->script;
+    u32 table = menu->scriptTable;
+    DAT_0058800c = 0;
+    textFormatBuffer(buffer, DAT_005328fc, entry->name);
+    scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(table, buffer));
+    while (scrRunOpcodesStub(script) != 2) {
+    }
+    return DAT_0058800c == 0 && (entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+           (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0);
+}
+
+/* Scans the entries for available ones (kinds 3, 4 and 2) and then, by menu mode, either scrolls to
+ * the first entry or opens the selected entry's detail. */
+void FUN_004b8ba0(ScriptMenu *menu)
+{
+    bool noFourthKind = true;
+    s32 count = menu->entryCount;
+    for (s32 i = 0; i < count; i++) {
+        MenuEntry *entry = menu4CGetEntry(menu->entries, i);
+        if (entry->kind == 3 && entry->name[0] != '0') {
+            if (entryAvailable(menu, entry))
+                break;
+        } else if (entry->kind == 4 && entry->name[0] != '0') {
+            if (entryAvailable(menu, entry)) {
+                noFourthKind = false;
+                break;
+            }
         }
-      }
-      else {
-LAB_004b8c94:
-        if ((*(short *)(temp_v2 + 0x54) == 4) && (*(char *)(temp_v2 + 0x2c) != '0')) {
-          temp_v3 = *(unsigned int *)(param_1 + 0x114c);
-          temp_v4 = *(unsigned int *)(param_1 + 0x1144);
-          DAT_0058800c = 0;
-          textFormatBuffer(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
-          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
-          scrScriptProcessStartEntry(temp_v3,temp_v4);
-          do {
-            temp_v5 = scrRunOpcodesStub(temp_v3);
-          } while (temp_v5 != 2);
-          if (((DAT_0058800c == 0) &&
-              ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
-             ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
-            temp_v0 = 0;
+    }
+    for (s32 i = 0; i < count; i++) {
+        MenuEntry *entry = menu4CGetEntry(menu->entries, i);
+        if (entry->kind == 2 && entry->name[0] != '0' && entryAvailable(menu, entry))
             break;
-          }
-        }
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < temp_v1);
-  }
-  temp_v6 = 0;
-  if (temp_v6 < temp_v1) {
-    do {
-      temp_v2 = menu4CGetEntry(param_1 + 0x9c,temp_v6);
-      if ((*(short *)(temp_v2 + 0x54) == 2) && (*(char *)(temp_v2 + 0x2c) != '0')) {
-        temp_v3 = *(unsigned int *)(param_1 + 0x114c);
-        temp_v4 = *(unsigned int *)(param_1 + 0x1144);
-        DAT_0058800c = 0;
-        textFormatBuffer(temp_v7,&DAT_005328fc,temp_v2 + 0x2c);
-        temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
-        scrScriptProcessStartEntry(temp_v3,temp_v4);
-        do {
-          temp_v5 = scrRunOpcodesStub(temp_v3);
-        } while (temp_v5 != 2);
-        if (((DAT_0058800c == 0) &&
-            ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
-           ((*(short *)(temp_v2 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) break;
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < temp_v1);
-  }
-  switch(*(unsigned int *)(param_1 + 0x1120)) {
-  default:
-    return;
-  case 1:
-    break;
-  case 2:
-    break;
-  case 5:
-    if (!temp_v0) {
-      return;
     }
-    break;
-  case 6:
-  case 7:
-    if ((*(unsigned int *)(param_1 + 0x20) & 0x10000000) != 0) {
-      FUN_004b6bc4(param_1,(int)*(short *)(param_1 + 0x3c),4);
+    switch (menu->mode) {
+    case 1:
+    case 2:
+        break;
+    case 5:
+        if (!noFourthKind)
+            return;
+        break;
+    case 6:
+    case 7:
+        FUN_004b6bc4(menu, menu->selected, (menu->flags & 0x10000000) != 0 ? 4 : 3);
+        menu->state = 4;
+        menu->subState = 0;
+        FUN_004080bc(menu->sound, 0, 0xFFFFFFFF);
+        return;
+    default:
+        return;
     }
-    else {
-      FUN_004b6bc4(param_1,(int)*(short *)(param_1 + 0x3c),3);
-    }
-    *(unsigned int *)(param_1 + 0x28) = 4;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),0,0xffffffff);
-    return;
-  }
-  menu4CScrollToKind(param_1 + 0x9c,0xff);
-  *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x40000000;
-  *(unsigned char *)(param_1 + 0xa8a) = 1;
-  return;
+    menu4CScrollToKind(menu->entries, 0xFF);
+    menu->flags |= 0x40000000;
+    menu->scrolled = 1;
 }
 
 } /* extern "C" */

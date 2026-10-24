@@ -1,137 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021a6c8` (_code @ 0x21a6c8, 0x318 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sorts the list entries and assigns each its two row ids (one or two groups, centred); written from the decompilation, the loop retail unrolls by two and the group index handling are not compared with retail */
+#include "common.h"
+
+struct ListEntry {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ f32 key;         /* entries are sorted by this */
+    /* 0x14 */ u8 unk14[0x20];
+    /* 0x34 */ s32 rowA;
+    /* 0x38 */ s32 rowB;
+    /* 0x3C */ u8 unk3C[4];
+};
+
+struct ListWork {
+    /* 0x0000 */ u8 unk0000[0x4850];
+    /* 0x4850 */ s32 count;
+    /* 0x4854 */ u8 unk4854[2];
+    /* 0x4856 */ u8 layoutChosen;
+    /* 0x4857 */ u8 singleGroup;
+    /* 0x4858 */ ListEntry entries[1];
+};
+
+#define LIST_ENTRY_STRIDE 0x40
 
 extern "C" {
+s32 qsort(void *base, u32 count, s32 size, s32 (*compare)(const void *, const void *));
+s32 FUN_00270d30(const void *a, const void *b);
 
-int qsort(int, unsigned int, int, unsigned char *);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char LAB_00270d30; /* 0x270d30 */
-
-/* Supplied declaration required: qsort. */
-
-
-void FUN_0021a6c8(int param_1)
-
+/* Centres `size` entries on five slots: `local` is the index inside the block. */
+static __inline s32 listCentreSlot(s32 local, s32 size)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int temp_v7 [3];
-  
-  puVar4 = (unsigned int *)(param_1 + 0x4850);
-  qsort(param_1 + 0x4858,*puVar4,0x40,&LAB_00270d30);
-  temp_v7[0] = 0;
-  temp_v7[1] = 0;
-  temp_v2 = *puVar4;
-  temp_v0 = 0;
-  if (0 < (int)temp_v2) {
-    temp_v6 = (temp_v2 & 1) != 0;
-    temp_v1 = param_1 + 0x4828;
-    temp_v4 = param_1 + 0x47e8;
-    if (temp_v6) {
-      temp_v1 = param_1 + 0x4868;
-      temp_v4 = param_1 + 0x4828;
-      temp_v7[0] = 1;
+    return (size & 1) != 0 ? local + (5 - size) / 2 : local + (4 - size) / 2;
+}
+
+void FUN_0021a6c8(ListWork *work)
+{
+    qsort(work->entries, work->count, LIST_ENTRY_STRIDE, FUN_00270d30);
+
+    s32 groupSize[2] = { 0, 0 };
+    s32 group = 0;
+    for (s32 i = 0; i < work->count; i++) {
+        ListEntry *entry = (ListEntry *)((u8 *)work->entries + i * LIST_ENTRY_STRIDE);
+        ListEntry *previous = (ListEntry *)((u8 *)entry - LIST_ENTRY_STRIDE);
+        if (i > 0 && previous->key < entry->key && group < 1)
+            group++;
+        groupSize[group]++;
     }
-    temp_v7[0] = (unsigned int)temp_v6;
-    temp_v5 = (unsigned int)temp_v6;
-    for (temp_v3 = (int)temp_v2 >> 1; temp_v3 != 0; temp_v3 = temp_v3 - 1) {
-      if (((0 < (int)temp_v5) && (*(float *)(temp_v4 + 0x40) < *(float *)(temp_v1 + 0x40))) && (temp_v0 < 1)
-         ) {
-        temp_v0 = temp_v0 + 1;
-      }
-      temp_v7[temp_v0] = temp_v7[temp_v0] + 1;
-      if (((0 < (int)(temp_v5 + 1)) && (*(float *)(temp_v4 + 0x80) < *(float *)(temp_v1 + 0x80))) &&
-         (temp_v0 < 1)) {
-        temp_v0 = temp_v0 + 1;
-      }
-      temp_v1 = temp_v1 + 0x80;
-      temp_v4 = temp_v4 + 0x80;
-      temp_v5 = temp_v5 + 2;
-      temp_v7[temp_v0] = temp_v7[temp_v0] + 1;
+
+    if (work->layoutChosen == 0) {
+        if (groupSize[0] > 0) {
+            work->singleGroup = groupSize[1] >= 1 ? 0 : 1;
+            work->layoutChosen = 1;
+        } else if (groupSize[1] >= 1) {
+            work->singleGroup = 1;
+            work->layoutChosen = 1;
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x4856) == '\0') {
-    if ((int)temp_v7[0] < 1) {
-      if ((int)temp_v7[1] >= 1) {
-        *(unsigned char *)(param_1 + 0x4857) = 1;
-        *(unsigned char *)(param_1 + 0x4856) = 1;
-      }
+
+    for (s32 i = 0; i < work->count; i++) {
+        ListEntry *entry = (ListEntry *)((u8 *)work->entries + i * LIST_ENTRY_STRIDE);
+        if (work->singleGroup != 0) {
+            s32 size = groupSize[0] > i ? groupSize[0] : groupSize[1];
+            s32 slot = listCentreSlot(i, size);
+            if ((size & 1) != 0) {
+                entry->rowA = slot + 0x1A1;
+                entry->rowB = slot + 0x1AA;
+            } else {
+                entry->rowA = slot + 0x1A6;
+                entry->rowB = slot + 0x1AF;
+            }
+        } else if (i < groupSize[0]) {
+            s32 slot = listCentreSlot(i, groupSize[0]);
+            if ((groupSize[0] & 1) != 0) {
+                entry->rowA = slot + 0x14A;
+                entry->rowB = slot + 0x154;
+            } else {
+                entry->rowA = slot + 0x165;
+                entry->rowB = slot + 0x16D;
+            }
+        } else {
+            s32 slot = listCentreSlot(i - groupSize[0], groupSize[1]);
+            if ((groupSize[1] & 1) != 0) {
+                entry->rowA = slot + 0x13B;
+                entry->rowB = slot + 0x145;
+            } else {
+                entry->rowA = slot + 0x159;
+                entry->rowB = slot + 0x161;
+            }
+        }
     }
-    else {
-      if ((int)temp_v7[1] >= 1) {
-        *(unsigned char *)(param_1 + 0x4857) = 0;
-      }
-      else {
-        *(unsigned char *)(param_1 + 0x4857) = 1;
-      }
-      *(unsigned char *)(param_1 + 0x4856) = 1;
-    }
-  }
-  temp_v0 = 0;
-  if (0 < (int)temp_v2) {
-    do {
-      if (*(char *)(param_1 + 0x4857) != '\0') {
-        temp_v2 = temp_v7[0];
-        if ((int)temp_v7[0] <= temp_v0) {
-          temp_v2 = temp_v7[1];
-        }
-        if ((temp_v2 & 1) != 0) {
-          temp_v4 = temp_v0 + (int)(5 - temp_v2) / 2;
-          temp_v1 = param_1 + temp_v0 * 0x40;
-          *(int *)(temp_v1 + 0x488c) = temp_v4 + 0x1a1;
-          *(int *)(temp_v1 + 0x4890) = temp_v4 + 0x1aa;
-        }
-        else {
-          temp_v4 = param_1 + temp_v0 * 0x40;
-          temp_v1 = temp_v0 + (int)(4 - temp_v2) / 2;
-          *(int *)(temp_v4 + 0x488c) = temp_v1 + 0x1a6;
-          *(int *)(temp_v4 + 0x4890) = temp_v1 + 0x1af;
-        }
-      }
-      else if (temp_v0 < (int)temp_v7[0]) {
-        if ((temp_v7[0] & 1) != 0) {
-          temp_v4 = param_1 + temp_v0 * 0x40;
-          temp_v1 = temp_v0 + (int)(5 - temp_v7[0]) / 2;
-          *(int *)(temp_v4 + 0x488c) = temp_v1 + 0x14a;
-          *(int *)(temp_v4 + 0x4890) = temp_v1 + 0x154;
-        }
-        else {
-          temp_v4 = temp_v0 + (int)(4 - temp_v7[0]) / 2;
-          temp_v1 = param_1 + temp_v0 * 0x40;
-          *(int *)(temp_v1 + 0x488c) = temp_v4 + 0x165;
-          *(int *)(temp_v1 + 0x4890) = temp_v4 + 0x16d;
-        }
-      }
-      else if ((temp_v7[1] & 1) != 0) {
-        temp_v4 = (temp_v0 - temp_v7[0]) + (int)(5 - temp_v7[1]) / 2;
-        temp_v1 = param_1 + temp_v0 * 0x40;
-        *(int *)(temp_v1 + 0x488c) = temp_v4 + 0x13b;
-        *(int *)(temp_v1 + 0x4890) = temp_v4 + 0x145;
-      }
-      else {
-        temp_v1 = (temp_v0 - temp_v7[0]) + (int)(4 - temp_v7[1]) / 2;
-        temp_v4 = param_1 + temp_v0 * 0x40;
-        *(int *)(temp_v4 + 0x488c) = temp_v1 + 0x159;
-        *(int *)(temp_v4 + 0x4890) = temp_v1 + 0x161;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (int)*puVar4);
-  }
-  return;
 }
 
 } /* extern "C" */

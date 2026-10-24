@@ -1,121 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025f358` (_code @ 0x25f358, 0x30c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the mesh-to-collision conversion; retail loads the three vertices with 64-bit pair loads and keeps the 1/3 constant and the centroid sums in VFP registers across the edge-normal calls, which armcc here schedules differently. */
+#include "gfx/CollisionPlaneView.h"
+
+/* A mesh of vertex positions, normals and triangles. */
+struct MapMeshTriangle {
+    /* 0x00 */ s32 vertex[3];
+    /* 0x0C */ s32 unk0C;
+    /* 0x10 */ s32 normal;
+    /* 0x14 */ s32 unk14;
+};
+struct MapMeshVector {
+    f32 x, y, z, w;
+};
+struct MapMesh {
+    /* 0x00 */ MapMeshVector *vertices;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ MapMeshVector *normals;
+    /* 0x0C */ u8 unk0C[0x14];
+    /* 0x20 */ MapMeshTriangle *triangles;
+    /* 0x24 */ u32 triangleCount;
+};
 
 extern "C" {
 
-int FUN_00226e90(int, int, unsigned int *, unsigned int *);
-int FUN_00237438(int, int, unsigned int *, unsigned int *);
+void FUN_00226e90(s32 axis, s32 kind, f32 *edgeNormal, f32 *edgeDistance);
+void FUN_00237438(s32 axis, s32 vertex, f32 *edgeNormal, f32 *edgeDistance);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
-
-extern int DAT_00580210; /* 0x580210 */
-extern int DAT_00580224; /* 0x580224 */
-extern int *DAT_00580234; /* 0x580234 */
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Appends every triangle of the mesh to the map's second collision list as a tagged plane: the
+ * plane equation, the three vertices and their centroid, the dominant axis, and the edge planes. */
+void FUN_0025f358(u32 tag)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: FUN_00226e90. */
-/* Supplied declaration required: FUN_00237438. */
-
-
-void FUN_0025f358(unsigned int param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned long long temp_v0;
-  unsigned long long temp_v1;
-  unsigned long long temp_v2;
-  unsigned long long *puVar4;
-  float *pfVar5;
-  int *piVar6;
-  int temp_v3;
-  unsigned int *puVar8;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  unsigned long long temp_v15;
-  
-  temp_v4 = 0;
-  if (DAT_00580234[9] != 0) {
-    temp_v15 = 0x3eaaaaab;
-    do {
-      piVar6 = (int *)(DAT_00580234[8] + temp_v4 * 0x18);
-      puVar8 = (unsigned int *)(DAT_00580224 + DAT_00580210 * 0xa8);
-      temp_v3 = *DAT_00580234;
-      puVar4 = (unsigned long long *)(temp_v3 + *piVar6 * 0x10);
-      temp_v0 = *puVar4;
-      temp_v10 = *(float *)(puVar4 + 1);
-      puVar4 = (unsigned long long *)(temp_v3 + piVar6[1] * 0x10);
-      temp_v1 = *puVar4;
-      temp_v13 = *(float *)(puVar4 + 1);
-      pfVar5 = (float *)(temp_v3 + piVar6[2] * 0x10);
-      temp_v11 = *pfVar5;
-      temp_v2 = *(unsigned long long *)(pfVar5 + 1);
-      pfVar5 = (float *)(DAT_00580234[2] + piVar6[4] * 0x10);
-      temp_v5 = *pfVar5;
-      temp_v6 = pfVar5[1];
-      temp_v7 = pfVar5[2];
-      *(float *)&puVar8[3] = temp_v5;
-      *(float *)&puVar8[4] = temp_v6;
-      *(float *)&puVar8[5] = temp_v7;
-      temp_v8 = (float)temp_v0;
-      temp_v9 = (float)((unsigned long long)temp_v0 >> 0x20);
-      temp_v12 = (float)((unsigned long long)temp_v1 >> 0x20);
-      puVar8[6] = temp_v5 * temp_v8 + temp_v6 * temp_v9 + temp_v7 * temp_v10;
-      temp_v7 = (float)temp_v1;
-      temp_v5 = (float)temp_v2;
-      temp_v6 = (float)((unsigned long long)temp_v2 >> 0x20);
-      temp_v14 = (float)temp_v15;
-      puVar8[0x23] = (temp_v8 + temp_v7 + temp_v11) * temp_v14;
-      puVar8[0x24] = (temp_v9 + temp_v12 + temp_v5) * temp_v14;
-      puVar8[0x25] = (temp_v10 + temp_v13 + temp_v6) * temp_v14;
-      *(float *)&puVar8[0x17] = temp_v8;
-      *(float *)&puVar8[0x18] = temp_v9;
-      *(float *)&puVar8[0x19] = temp_v10;
-      *(float *)&puVar8[0x1d] = temp_v11;
-      *(float *)&puVar8[0x1e] = temp_v5;
-      *(float *)&puVar8[0x1f] = temp_v6;
-      *(float *)&puVar8[0x1a] = temp_v7;
-      *(float *)&puVar8[0x1b] = temp_v12;
-      *(float *)&puVar8[0x1c] = temp_v13;
-      *(unsigned char *)((int)puVar8 + 5) = 3;
-      *puVar8 = param_1;
-      *(unsigned short *)((int)puVar8 + 6) = 0;
-      *(unsigned char *)(puVar8 + 2) = 1;
-      *(unsigned char *)((int)puVar8 + 9) = 0;
-      if (romwright_fabs_4((float)puVar8[5]) <= romwright_fabs_4((float)puVar8[3])) {
-        *(unsigned char *)(puVar8 + 1) = 0;
-      }
-      else {
-        *(unsigned char *)(puVar8 + 1) = 2;
-      }
-      FUN_00237438((int)*(char *)(puVar8 + 1),0,puVar8 + 7,puVar8 + 0x13);
-      FUN_00237438((int)*(char *)(puVar8 + 1),1,puVar8 + 10,puVar8 + 0x14);
-      FUN_00237438((int)*(char *)(puVar8 + 1),2,puVar8 + 0xd,puVar8 + 0x15);
-      FUN_00226e90((int)*(char *)(puVar8 + 1),(int)*(char *)((int)puVar8 + 5),puVar8 + 0x26,
-                   puVar8 + 0x28);
-      temp_v4 = temp_v4 + 1;
-      DAT_00580210 = DAT_00580210 + 1;
-    } while (temp_v4 < (unsigned int)DAT_00580234[9]);
-  }
-  return;
+    MapMesh *mesh = *(MapMesh **)((u8 *)&g_mapCollision + 0x30);
+    for (u32 i = 0; i < mesh->triangleCount; i++) {
+        MapMeshTriangle *triangle = &mesh->triangles[i];
+        CollisionQuad *quad = &g_mapCollision.second[g_mapCollision.segmentCounts[0]];
+        MapMeshVector *a = &mesh->vertices[triangle->vertex[0]];
+        MapMeshVector *b = &mesh->vertices[triangle->vertex[1]];
+        MapMeshVector *c = &mesh->vertices[triangle->vertex[2]];
+        MapMeshVector *n = &mesh->normals[triangle->normal];
+        quad->normal.x = n->x;
+        quad->normal.y = n->y;
+        quad->normal.z = n->z;
+        quad->distance = n->x * a->x + n->y * a->y + n->z * a->z;
+        const f32 third = 1.0f / 3.0f;
+        quad->center.x = (a->x + b->x + c->x) * third;
+        quad->center.y = (a->y + b->y + c->y) * third;
+        quad->center.z = (a->z + b->z + c->z) * third;
+        quad->vertices[0].x = a->x;
+        quad->vertices[0].y = a->y;
+        quad->vertices[0].z = a->z;
+        quad->vertices[2].x = c->x;
+        quad->vertices[2].y = c->y;
+        quad->vertices[2].z = c->z;
+        quad->vertices[1].x = b->x;
+        quad->vertices[1].y = b->y;
+        quad->vertices[1].z = b->z;
+        quad->vertexCount = 3;
+        quad->unk00 = tag;
+        quad->material = 0;
+        quad->active = 1;
+        quad->queue = 0;
+        f32 nx = quad->normal.x < 0.0f ? -quad->normal.x : quad->normal.x;
+        f32 nz = quad->normal.z < 0.0f ? -quad->normal.z : quad->normal.z;
+        quad->enabled = nz <= nx ? 0 : 2; /* the axis the plane is projected along */
+        FUN_00237438(quad->enabled, 0, &quad->edgeNormals[0].x, &quad->edgeDistances[0]);
+        FUN_00237438(quad->enabled, 1, &quad->edgeNormals[1].x, &quad->edgeDistances[1]);
+        FUN_00237438(quad->enabled, 2, &quad->edgeNormals[2].x, &quad->edgeDistances[2]);
+        FUN_00226e90(quad->enabled, quad->vertexCount, &quad->edgeNormals[3].x, &quad->edgeDistances[3]);
+        g_mapCollision.segmentCounts[0]++;
+    }
 }
 
 } /* extern "C" */

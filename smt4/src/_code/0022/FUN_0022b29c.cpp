@@ -1,189 +1,180 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022b29c` (_code @ 0x22b29c, 0x3d0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail inlines the entry check twice (once per source) sharing one stack buffer for the script name and the iteration state (frame 300 vs 340 here) and orders the header-search/state selection blocks differently; the calls and stores are the same. */
+#include "common.h"
+
+namespace {
+/* A selectable entry (0xd0 bytes): the bucket it belongs to, its availability script and the flags gating it. */
+struct MenuEntry {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 bucket;                /* only one entry of a non-zero bucket is listed */
+    /* 0x21 */ u8 unk21[0xb];
+    /* 0x2c */ char name[0x10];          /* script name; "0" means none */
+    /* 0x3c */ u16 requiredFlag;         /* must be set, when non-zero */
+    /* 0x3e */ u16 forbiddenFlag;        /* must not be set, when non-zero */
+    /* 0x40 */ u8 unk40[0x90];
+};
+
+/* A row of the first table (0x88 bytes): its id and the group it opens. */
+struct GroupHeader {
+    /* 0x00 */ s8 id;
+    /* 0x01 */ s8 group;
+    /* 0x02 */ u8 unk02[0x86];
+};
+
+/* An iteration state the table getters fill in. */
+struct TableView {
+    u8 data[44];
+};
+
+/* The selected row of the list: its position. */
+struct ListRow {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ s16 x;
+    /* 0x24 */ s16 y;
+};
+
+/* The menu window's state block. */
+struct MenuWindow {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u32 flags;
+    /* 0x024 */ u8 unk024[0x1c];
+    /* 0x040 */ s16 forcedId;            /* list id to scroll to, when non-zero */
+    /* 0x042 */ u8 unk042[0x16];
+    /* 0x058 */ f32 originX;
+    /* 0x05c */ f32 originY;
+    /* 0x060 */ f32 viewX;
+    /* 0x064 */ f32 viewY;
+    /* 0x068 */ f32 cornerX;
+    /* 0x06c */ f32 cornerY;
+    /* 0x070 */ f32 sizeX;
+    /* 0x074 */ f32 sizeY;
+    /* 0x078 */ f32 sizeCopyX;
+    /* 0x07c */ f32 sizeCopyY;
+    /* 0x080 */ f32 targetX;
+    /* 0x084 */ f32 targetY;
+    /* 0x088 */ u32 unk088;
+    /* 0x08c */ u32 unk08c;
+    /* 0x090 */ u8 unk090[0xc];
+    /* 0x09c */ u8 list[0xcc0];
+    /* 0xd5c */ GroupHeader *header;
+    /* 0xd60 */ u8 unkd60[4];
+    /* 0xd64 */ s32 state;
+    /* 0xd68 */ u8 unkd68[0x20];
+    /* 0xd88 */ u32 scriptGroup;
+    /* 0xd8c */ u8 unkd8c[4];
+    /* 0xd90 */ u32 script;
+};
+}
 
 extern "C" {
+extern s32 DAT_0044cfb8;                 /* set by the script when it rejects the entry */
+extern s32 g_aocSystem;
+extern u8 g_gameState;
+GroupHeader *dataTable33Sub0GetRecord(TableView *view, u32 index);
+s32 dataTable33Sub0GetCount(TableView *view);
+MenuEntry *dataTable33GroupGetRecord(TableView *view, u32 group, u32 index);
+s32 dataTable33GroupGetCount(TableView *view, u32 group);
+void entryListReset(void *list);
+void entryListAppend(void *list, MenuEntry *entry);
+void memClear(void *data, u32 size);
+void textFormatBuffer(char *buffer, const char *format, ...);
+u32 tableGroupFindEntryIndex(u32 group, const char *name);
+void scrScriptProcessStartEntry(u32 script, u32 entry);
+s32 scrRunOpcodesStub(u32 script);
+s32 gameFlagIsSet(u32 flag);
+s32 FUN_00387f88(s32 system, s32 kind);
+MenuEntry *contentEntryGetFromFilesByKind(s32 system, s32 kind, s32 index);
+void FUN_003bb9d4(void *list);
+s32 gameStateIsFlagSetAndLarge(void);
+void listScrollToId(void *list, s32 id);
+ListRow *FUN_0022b8c0(void *list);
+void FUN_0022b83c(MenuWindow *window, f32 *pair);
+void FUN_0022b778(MenuWindow *window);
+void FUN_0022b6c4(void *list);
 
-int FUN_0022b6c4(...);
-int FUN_0022b778(...);
-int FUN_0022b83c(...);
-int listScrollToId(int, int);
-int scrScriptProcessStartEntry(unsigned int, unsigned int);
-int textFormatBuffer(unsigned char [36], unsigned char *, int);
-int memClear(char [256], int);
-int FUN_00387f88(int, int);
-int contentEntryGetFromFilesByKind(int, int, int);
-int entryListReset(int);
-int entryListAppend(int, int);
-int FUN_003bb9d4(int);
-int dataTable33Sub0GetCount(void);
-int dataTable33GroupGetCount(unsigned char *, unsigned int);
-int VectorSignedToFloat(...);
-
-extern unsigned char DAT_00404e04; /* 0x404e04 */
-extern int g_aocSystem; /* 0x433158 */
-extern int DAT_0044cfb8; /* 0x44cfb8 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0022b6c4. */
-/* Supplied declaration required: FUN_0022b778. */
-/* Supplied declaration required: FUN_0022b83c. */
-extern int FUN_0022b8c0(int);
-/* Supplied declaration required: listScrollToId. */
-extern int gameStateIsFlagSetAndLarge(void);
-extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_00387f88. */
-/* Supplied declaration required: contentEntryGetFromFilesByKind. */
-/* Supplied declaration required: entryListReset. */
-/* Supplied declaration required: entryListAppend. */
-/* Supplied declaration required: FUN_003bb9d4. */
-extern int dataTable33Sub0GetRecord(unsigned char *, unsigned int);
-extern int dataTable33GroupGetRecord(unsigned char *, unsigned int, unsigned int);
-/* Supplied declaration required: dataTable33Sub0GetCount. */
-/* Supplied declaration required: dataTable33GroupGetCount. */
-
-
-void FUN_0022b29c(int param_1,int param_2,int param_3)
-
+/* Runs the entry's availability script and, when the entry passes its flags, lists it and marks its bucket. */
+static void listIfAvailable(MenuWindow *window, MenuEntry *entry, char *buckets, u32 group, u32 script)
 {
-/* irregular: 2 goto(s); irregular input(s): in_fpscr; 15 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  char acStack_150 [256];
-  unsigned char temp_v8 [8];
-  unsigned char temp_v9 [36];
-  
-  temp_v0 = dataTable33Sub0GetRecord(temp_v8,0);
-  puVar2 = temp_v8;
-  dataTable33Sub0GetCount();
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0xd5c) = 0;
-  if (0 < (int)puVar2) {
-    do {
-      if (*(char *)(temp_v0 + temp_v1 * 0x88) == param_2) {
-        *(int *)(param_1 + 0xd5c) = temp_v0 + temp_v1 * 0x88;
-        break;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < (int)puVar2);
-  }
-  entryListReset(param_1 + 0x9c);
-  if (param_3 != -1) {
-    *(int *)(param_1 + 0xd64) = param_3;
-  }
-  else {
-    *(int *)(param_1 + 0xd64) = (int)*(char *)(*(int *)(param_1 + 0xd5c) + 1);
-  }
-  temp_v0 = dataTable33GroupGetRecord(temp_v8,*(unsigned int *)(param_1 + 0xd64),0);
-  puVar2 = temp_v8;
-  dataTable33GroupGetCount(puVar2,*(unsigned int *)(param_1 + 0xd64));
-  memClear(acStack_150,0x100);
-  temp_v1 = 0;
-  if (temp_v1 < (int)puVar2) {
-    do {
-      temp_v3 = temp_v0 + temp_v1 * 0xd0;
-      if ((*(unsigned char *)(temp_v3 + 0x20) == 0) || (acStack_150[*(unsigned char *)(temp_v3 + 0x20)] == '\0')) {
-        temp_v4 = *(unsigned int *)(param_1 + 0xd88);
-        temp_v5 = *(unsigned int *)(param_1 + 0xd90);
-        if (*(char *)(temp_v3 + 0x2c) != '0') {
-          DAT_0044cfb8 = 0;
-          textFormatBuffer(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
-          temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v9);
-          scrScriptProcessStartEntry(temp_v5,temp_v4);
-          do {
-            temp_v2 = scrRunOpcodesStub(temp_v5);
-          } while (temp_v2 != 2);
-          if (DAT_0044cfb8 != 0) goto LAB_0022b450;
+    char name[36];
+    if (entry->bucket == 0 || buckets[entry->bucket] == '\0') {
+        if (entry->name[0] != '0') {
+            DAT_0044cfb8 = 0;
+            textFormatBuffer(name, "%s", entry->name);
+            scrScriptProcessStartEntry(script, tableGroupFindEntryIndex(group, name));
+            while (scrRunOpcodesStub(script) != 2) {
+            }
+            if (DAT_0044cfb8 != 0) {
+                return;
+            }
         }
-        if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
-           ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
-          acStack_150[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
-          entryListAppend(param_1 + 0x9c,temp_v3);
+        if ((entry->requiredFlag == 0 || gameFlagIsSet(entry->requiredFlag) != 0) &&
+            (entry->forbiddenFlag == 0 || gameFlagIsSet(entry->forbiddenFlag) == 0)) {
+            buckets[entry->bucket] = 1;
+            entryListAppend(window->list, entry);
         }
-      }
-LAB_0022b450:
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < (int)puVar2);
-  }
-  temp_v0 = g_aocSystem;
-  FUN_00387f88(g_aocSystem,*(int *)(param_1 + 0xd64) + 1);
-  temp_v1 = 0;
-  if (temp_v1 < temp_v0) {
-    do {
-      temp_v3 = g_aocSystem;
-      contentEntryGetFromFilesByKind(g_aocSystem,*(int *)(param_1 + 0xd64) + 1,temp_v1);
-      if ((*(unsigned char *)(temp_v3 + 0x20) == 0) || (acStack_150[*(unsigned char *)(temp_v3 + 0x20)] == '\0')) {
-        temp_v4 = *(unsigned int *)(param_1 + 0xd90);
-        temp_v5 = *(unsigned int *)(param_1 + 0xd88);
-        if (*(char *)(temp_v3 + 0x2c) != '0') {
-          DAT_0044cfb8 = 0;
-          textFormatBuffer(temp_v9,&DAT_00404e04,temp_v3 + 0x2c);
-          temp_v5 = tableGroupFindEntryIndex(temp_v5,temp_v9);
-          scrScriptProcessStartEntry(temp_v4,temp_v5);
-          do {
-            temp_v2 = scrRunOpcodesStub(temp_v4);
-          } while (temp_v2 != 2);
-          if (DAT_0044cfb8 != 0) goto LAB_0022b560;
+    }
+}
+
+/* Rebuilds the menu for row `selected` of the first table: lists the entries of the opened group (and the extra
+   content entries of that kind) that pass their scripts and flags, restores the cursor and lays out the view. */
+void FUN_0022b29c(MenuWindow *window, s32 selected, s32 state)
+{
+    TableView view;
+    GroupHeader *rows = dataTable33Sub0GetRecord(&view, 0);
+    s32 rowCount = dataTable33Sub0GetCount(&view);
+    window->header = NULL;
+    for (s32 i = 0; i < rowCount; i++) {
+        if (rows[i].id == selected) {
+            window->header = &rows[i];
+            break;
         }
-        if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
-           ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
-          acStack_150[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
-          entryListAppend(param_1 + 0x9c,temp_v3);
-        }
-      }
-LAB_0022b560:
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v0);
-  }
-  FUN_003bb9d4(param_1 + 0x9c);
-  temp_v1 = gameStateIsFlagSetAndLarge();
-  temp_v0 = -1;
-  if (temp_v1 != 0) {
-    temp_v0 = (*(int *)((unsigned char *)&g_gameState + 0x300));
-  }
-  if (*(short *)(param_1 + 0x40) != 0) {
-    temp_v0 = (int)*(short *)(param_1 + 0x40);
-  }
-  if (temp_v0 != -1) {
-    listScrollToId(param_1 + 0x9c,temp_v0);
-  }
-  temp_v0 = FUN_0022b8c0(param_1 + 0x9c);
-  temp_v1 = (int)*(short *)(temp_v0 + 0x24);
-  temp_v0 = (int)*(short *)(temp_v0 + 0x22);
-  *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x1000;
-  temp_v7 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(param_1 + 0x60) = *(unsigned int *)(param_1 + 0x58);
-  *(unsigned int *)(param_1 + 100) = *(unsigned int *)(param_1 + 0x5c);
-  *(float *)(param_1 + 0x68) = temp_v6 - 200.0f;
-  *(float *)(param_1 + 0x6c) = temp_v7 - 120.0f;
-  FUN_0022b83c(param_1,param_1 + 0x60);
-  FUN_0022b83c(param_1,param_1 + 0x68);
-  *(unsigned int *)(param_1 + 0x78) = *(unsigned int *)(param_1 + 0x70);
-  temp_v5 = VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(param_1 + 0x7c) = *(unsigned int *)(param_1 + 0x74);
-  *(unsigned int *)(param_1 + 0x80) = temp_v4;
-  *(unsigned int *)(param_1 + 0x84) = temp_v5;
-  *(unsigned int *)(param_1 + 0x88) = 0;
-  *(unsigned int *)(param_1 + 0x8c) = 1;
-  FUN_0022b778(param_1);
-  FUN_0022b6c4(param_1 + 0x9c);
-  return;
+    }
+    entryListReset(window->list);
+    if (state != -1) {
+        window->state = state;
+    } else {
+        window->state = window->header->group;
+    }
+    MenuEntry *entries = dataTable33GroupGetRecord(&view, window->state, 0);
+    s32 entryCount = dataTable33GroupGetCount(&view, window->state);
+    char buckets[256];
+    memClear(buckets, 0x100);
+    for (s32 i = 0; i < entryCount; i++) {
+        listIfAvailable(window, &entries[i], buckets, window->scriptGroup, window->script);
+    }
+    s32 extraCount = FUN_00387f88(g_aocSystem, window->state + 1);
+    for (s32 i = 0; i < extraCount; i++) {
+        listIfAvailable(window, contentEntryGetFromFilesByKind(g_aocSystem, window->state + 1, i), buckets,
+                        window->scriptGroup, window->script);
+    }
+    FUN_003bb9d4(window->list);
+    s32 id = -1;
+    if (gameStateIsFlagSetAndLarge() != 0) {
+        id = *reinterpret_cast<s32 *>(&g_gameState + 0x300);
+    }
+    if (window->forcedId != 0) {
+        id = window->forcedId;
+    }
+    if (id != -1) {
+        listScrollToId(window->list, id);
+    }
+    ListRow *row = FUN_0022b8c0(window->list);
+    s32 y = row->y;
+    s32 x = row->x;
+    window->flags = window->flags | 0x1000;
+    window->viewX = window->originX;
+    window->viewY = window->originY;
+    window->cornerX = (f32)x - 200.0f;
+    window->cornerY = (f32)y - 120.0f;
+    FUN_0022b83c(window, &window->viewX);
+    FUN_0022b83c(window, &window->cornerX);
+    window->sizeCopyX = window->sizeX;
+    window->sizeCopyY = window->sizeY;
+    window->targetX = (f32)x;
+    window->targetY = (f32)y;
+    window->unk088 = 0;
+    window->unk08c = 1;
+    FUN_0022b778(window);
+    FUN_0022b6c4(window->list);
 }
 
 } /* extern "C" */

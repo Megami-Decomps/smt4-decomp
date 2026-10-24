@@ -1,161 +1,95 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001acdd8` (_code @ 0x1acdd8, 0x37c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the search window's loading-dots draw (title-scene variant of FUN_001acdd8); armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
+#include "gfx/TitleSceneStack.h"
+
+/* The title scene (its state stacks live at 0x124C and 0x12AC). */
+struct TitleScene {
+    /* 0x0000 */ u8 unk0000[0x124C];
+    /* 0x124C */ StateStack firstStack;
+    /* 0x126C */ u8 unk126C[0x40];
+    /* 0x12AC */ StateStack secondStack;
+};
+
+/* The run window (only the fields read here). */
+struct RunWin {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 active;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s32 frame;
+    /* 0x14 */ u8 visible;
+    /* 0x15 */ u8 unk15[0x23];
+    /* 0x38 */ u8 anchor[0x20];
+    /* 0x58 */ f32 alpha;
+    /* 0x5C */ u8 unk5C[0x68];
+    /* 0xC4 */ u8 label[1];
+};
+
+struct LayoutPoint {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
 
 extern "C" {
+extern RunWin *DAT_0043e170;
+extern TitleScene *g_titleScene;
 
-int renderCtxCalculateStereoParallax(int);
-int FUN_002be5a4(int, unsigned int, int);
-int FUN_002bed3c(void);
-int FUN_002bf288(...);
-int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(int, int);
-int efctSetSpeed(void);
-int FUN_002c39a4(int);
-int VectorSignedToFloat(int, int);
+void FUN_002c39a4(TitleScene *scene);
+void FUN_002bf288(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void FUN_002bf380(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
+void FUN_002be5a4(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
+void FUN_002bed3c(void);
+s32 vec2GetXInt(void *vec);
+s32 vec2GetYInt(void *vec);
+f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 depth);
+void efctSetSpeed(f32 alpha);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
+u32 FUN_002c5d80(s32 a, s32 b);
 
-typedef int romwright_code(...);
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern int DAT_0043e170; /* 0x43e170 */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bed3c. */
-extern int vec2GetYInt(int);
-extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c39a4. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-char FUN_001acdd8(void)
-
+/* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
+ * predecessors dimmed, advancing every 5 frames) and the label. Returns 0. */
+u8 FUN_001acdd8(void)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int *piVar10;
-  int temp_v9;
-  int temp_v10;
-  unsigned char temp_v11;
-  unsigned int in_fpscr;
-  float temp_v12;
-  
-  temp_v10 = DAT_0043e170;
-  temp_v11 = *(int *)(DAT_0043e170 + 8) != 0;
-  temp_v1 = '\0';
-  if (temp_v11) {
-    temp_v1 = *(char *)(DAT_0043e170 + 0x14);
-  }
-  if (temp_v11 && temp_v1 != '\0') {
-    FUN_002c39a4(g_titleScene);
-    temp_v3 = g_titleScene;
-    temp_v2 = FUN_002c5d80(1,0);
-    piVar10 = (int *)(temp_v3 + 0x124c);
-    temp_v4 = *piVar10;
-    temp_v5 = piVar10[temp_v4 + 2];
-    *piVar10 = temp_v4 + 1;
-    piVar10[temp_v4 + 3] = temp_v2;
-    if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v5 != temp_v2) {
-      (**(romwright_code **)(temp_v3 + 0x1268))();
-      *(unsigned char *)(temp_v3 + 0x1264) = 0;
-    }
-    temp_v2 = vec2GetXInt(temp_v10 + 0x38);
-    temp_v12 = 0.27f;
-    renderCtxCalculateStereoParallax(g_titleScene);
-    temp_v2 = temp_v2 + (int)temp_v12;
-    temp_v4 = vec2GetYInt(temp_v10 + 0x38);
-    efctSetSpeed();
-    FUN_002bf380(2,0xe,0x14,temp_v2,temp_v4,0x65);
-    temp_v3 = g_titleScene;
-    temp_v5 = packNibblesAndByte(6,1,0);
-    piVar10 = (int *)(temp_v3 + 0x12ac);
-    temp_v6 = *piVar10;
-    temp_v7 = piVar10[temp_v6 + 2];
-    *piVar10 = temp_v6 + 1;
-    piVar10[temp_v6 + 3] = temp_v5;
-    if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v7 != temp_v5) {
-      (**(romwright_code **)(temp_v3 + 0x12c8))();
-      *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-    }
-    FUN_002bf380(2,0xe,0x15,temp_v2,temp_v4,0x66);
-    temp_v3 = g_titleScene;
-    piVar10 = (int *)(g_titleScene + 0x12ac);
-    temp_v5 = *piVar10;
-    temp_v6 = piVar10[temp_v5 + 2];
-    *piVar10 = temp_v5 - 1;
-    if (*(char *)(temp_v3 + 0x12c4) != '\0' || temp_v6 != piVar10[temp_v5 + 1]) {
-      (**(romwright_code **)(temp_v3 + 0x12c8))(piVar10[temp_v5 + 1]);
-      *(unsigned char *)(temp_v3 + 0x12c4) = 0;
-    }
-    temp_v3 = FUN_002bf4f8(0xe,0x16f);
-    VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(4,0xf49800ff,temp_v10 + 0xc4);
-    temp_v5 = 0;
-    temp_v10 = *(int *)(temp_v10 + 0x10) / 5;
-    temp_v4 = temp_v10 % 8;
-    temp_v3 = (temp_v4 + 7) % 8;
-    temp_v10 = (temp_v10 + 4) % 8;
-    do {
-      temp_v6 = 0;
-      do {
-        temp_v9 = temp_v5 * 3 + temp_v6;
-        temp_v7 = FUN_002bf4f8(0xe,temp_v9 + 0x170);
-        if (temp_v4 == temp_v9 || temp_v10 == temp_v9) {
-          FUN_002bf288(2,0xe,0x155,*(short *)(temp_v7 + 8) + temp_v2,(int)*(short *)(temp_v7 + 10),0x6f);
+    RunWin *win = DAT_0043e170;
+    if (win->active != 0 && win->visible != 0) {
+        FUN_002c39a4(g_titleScene);
+        TitleScene *first = g_titleScene;
+        u32 firstState = FUN_002c5d80(1, 0);
+        stateStackPush(&first->firstStack, firstState);
+        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
+        s32 y = vec2GetYInt(win->anchor);
+        efctSetSpeed(win->alpha);
+        FUN_002bf380(2, 14, 0x14, x, y, 101);
+        TitleScene *scene = g_titleScene;
+        s32 state = packNibblesAndByte(6, 1, 0);
+        stateStackPush(&scene->secondStack, state);
+        FUN_002bf380(2, 14, 0x15, x, y, 102);
+        stateStackPop(&g_titleScene->secondStack);
+        LayoutPoint *labelPoint = FUN_002bf4f8(14, 0x16F);
+        FUN_002be5a4(4, 0xF49800FF, win->label, (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
+                     win->alpha);
+        s32 step = win->frame / 5;
+        s32 lit = step % 8;
+        s32 litPrevious = (lit + 7) % 8;
+        s32 lit2 = (step + 4) % 8;
+        s32 lit2Previous = (lit2 + 7) % 8;
+        for (s32 row = 0; row < 3; row++) {
+            for (s32 column = 0; column < 3; column++) {
+                s32 index = row * 3 + column;
+                LayoutPoint *dot = FUN_002bf4f8(14, 0x170 + index);
+                if (lit == index || lit2 == index)
+                    FUN_002bf288(2, 14, 0x155, dot->x + x, dot->y, 111);
+                else if (litPrevious == index || lit2Previous == index)
+                    FUN_002bf288(2, 14, 0x156, dot->x + x, dot->y, 111);
+                else
+                    FUN_002bf288(2, 14, 0x154, dot->x + x, dot->y, 111);
+            }
         }
-        else {
-          temp_v0 = temp_v3;
-          if (temp_v3 != temp_v9) {
-            temp_v0 = (temp_v10 + 7) % 8;
-          }
-          temp_v8 = *(short *)(temp_v7 + 8) + temp_v2;
-          if (!(temp_v3 != temp_v9 && temp_v0 != temp_v9)) {
-            FUN_002bf288(2,0xe,0x156,temp_v8,(int)*(short *)(temp_v7 + 10),0x6f);
-          }
-          else {
-            FUN_002bf288(2,0xe,0x154,temp_v8,(int)*(short *)(temp_v7 + 10),0x6f);
-          }
-        }
-        temp_v6 = temp_v6 + 1;
-      } while (temp_v6 < 3);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 3);
-    FUN_002bed3c();
-    efctSetSpeed();
-    temp_v10 = g_titleScene;
-    piVar10 = (int *)(g_titleScene + 0x124c);
-    temp_v3 = *piVar10;
-    temp_v2 = piVar10[temp_v3 + 2];
-    *piVar10 = temp_v3 - 1;
-    if (*(char *)(temp_v10 + 0x1264) != '\0' || temp_v2 != piVar10[temp_v3 + 1]) {
-      (**(romwright_code **)(temp_v10 + 0x1268))();
-      *(unsigned char *)(temp_v10 + 0x1264) = 0;
+        FUN_002bed3c();
+        efctSetSpeed(1.0f);
+        stateStackPop(&g_titleScene->firstStack);
     }
-    temp_v1 = '\0';
-  }
-  return temp_v1;
+    return 0;
 }
 
 } /* extern "C" */

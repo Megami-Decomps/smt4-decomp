@@ -1,187 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6404` (_code @ 0x3a6404, 0x38c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail's kind-to-row switches are jump tables starting at 0 (built subtracts the first case) and the colour interpolation is scheduled differently (211 vs 229 rows); the gradient colour lookup is the same. */
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+/* One gradient row (9 bytes): three RGB stops. */
+typedef struct GradientRow {
+    u8 stop[3][3];
+} GradientRow;
 
+extern GradientRow DAT_0057f138[];
 
-int FUN_003a6404(int param_1,unsigned int param_2)
-
+/* The colour channel from `from` to `to` at `step` of `divisor` (12-bit fixed point). */
+static __inline s32 channel7(s32 from, s32 to, s32 step)
 {
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  short temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  
-  temp_v4 = 0;
-  if (param_1 == 0xc) {
-    temp_v4 = 0xb;
-  }
-  else if (param_1 < 0xc) {
-    switch(param_1) {
-    case 2:
-      temp_v4 = 1;
-      break;
-    case 3:
-      temp_v4 = 2;
-      break;
-    case 4:
-      temp_v4 = 3;
-      break;
-    case 5:
-      temp_v4 = 4;
-      break;
-    case 6:
-      temp_v4 = 5;
-      break;
-    case 7:
-      temp_v4 = 6;
-      break;
-    case 8:
-      temp_v4 = 7;
-      break;
-    case 9:
-      temp_v4 = 8;
-      break;
-    case 10:
-      temp_v4 = 9;
-      break;
-    case 0xb:
-      temp_v4 = 10;
-    }
-  }
-  else if (param_1 == 0x12) {
-    temp_v4 = 0x16;
-  }
-  else if (param_1 < 0x12) {
-    switch(param_1) {
-    case 0xd:
-      temp_v4 = 0xc;
-      break;
-    case 0xe:
-      temp_v4 = 0xd;
-      break;
-    case 0xf:
-      temp_v4 = 0xe;
-      break;
-    case 0x10:
-      temp_v4 = 0x14;
-      break;
-    case 0x11:
-      temp_v4 = 0x15;
-    }
-  }
-  else if (param_1 == 0x15) {
-    temp_v4 = 0x11;
-  }
-  else if (param_1 < 0x15) {
-    if (param_1 == 0x13) {
-      temp_v4 = 0xf;
-    }
-    else if (param_1 == 0x14) {
-      temp_v4 = 0x10;
-    }
-  }
-  else if (param_1 == 0x16) {
-    temp_v4 = 0x13;
-  }
-  else if (param_1 == 0xff) {
-    temp_v4 = 0x12;
-  }
-  temp_v5 = 0;
-  temp_v2 = 0;
-  temp_v10 = 0;
-  if (param_1 != 0xff) {
-    if ((int)param_2 < 7) {
-      temp_v4 = temp_v4 * 9;
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f138);
-      temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f139);
-      temp_v10 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13a);
-      temp_v11 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13b);
-      temp_v6 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13c);
-      temp_v8 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13d);
-    }
-    else {
-      temp_v4 = temp_v4 * 9;
-      if ((int)param_2 < 0xe) {
-        temp_v2 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13b);
-        temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13c);
-        temp_v10 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13d);
-        temp_v11 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13e);
-        temp_v6 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13f);
-        temp_v8 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f140);
-      }
-      else {
-        temp_v11 = 0;
-        temp_v2 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13e);
-        temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13f);
-        temp_v10 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f140);
-        temp_v6 = 0;
-        temp_v8 = 0;
-      }
-    }
-    temp_v11 = (temp_v11 - temp_v2) * 0x1000;
-    temp_v4 = (int)(((long long)(int)temp_v11 * -0x6db6db6d + ((unsigned long long)temp_v11 << 0x20)) >> 0x20);
-    temp_v9 = (int)(((long long)(int)param_2 * -0x6db6db6d + ((unsigned long long)param_2 << 0x20)) >> 0x20);
-    temp_v0 = (short)temp_v2 +
-            (short)((int)(((temp_v4 >> 2) - (temp_v4 >> 0x1f)) *
-                         (((temp_v9 >> 2) - (temp_v9 >> 0x1f)) * -7 + param_2)) >> 0xc);
-    temp_v4 = (int)(((long long)(int)param_2 * -0x6db6db6d + ((unsigned long long)param_2 << 0x20)) >> 0x20);
-    temp_v2 = (temp_v6 - temp_v5) * 0x1000;
-    temp_v7 = (int)(((long long)(int)temp_v2 * -0x6db6db6d + ((unsigned long long)temp_v2 << 0x20)) >> 0x20);
-    temp_v9 = (int)(((long long)(int)param_2 * -0x6db6db6d + ((unsigned long long)param_2 << 0x20)) >> 0x20);
-    temp_v1 = (short)temp_v5 +
-            (short)((int)(((temp_v7 >> 2) - (temp_v7 >> 0x1f)) *
-                         (((temp_v4 >> 2) - (temp_v4 >> 0x1f)) * -7 + param_2)) >> 0xc);
-    temp_v2 = (temp_v8 - temp_v10) * 0x1000;
-    temp_v4 = (int)(((long long)(int)temp_v2 * -0x6db6db6d + ((unsigned long long)temp_v2 << 0x20)) >> 0x20);
-    temp_v3 = (short)temp_v10 +
-            (short)((int)(((temp_v4 >> 2) - (temp_v4 >> 0x1f)) *
-                         (param_2 + ((temp_v9 >> 2) - (temp_v9 >> 0x1f)) * -7)) >> 0xc);
-  }
-  else {
-    if ((int)param_2 < 9) {
-      temp_v4 = temp_v4 * 9;
-      temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f138);
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f139);
-      temp_v10 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13a);
-      temp_v11 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13b);
-      temp_v8 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13c);
-      temp_v6 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13d);
-    }
-    else if ((int)param_2 < 0xe) {
-      temp_v4 = temp_v4 * 9;
-      temp_v11 = 0;
-      temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13b);
-      temp_v2 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13c);
-      temp_v10 = (unsigned int)*(unsigned char *)(temp_v4 + 0x57f13d);
-      temp_v8 = 0;
-      temp_v6 = 0;
-    }
-    else {
-      temp_v11 = 0;
-      temp_v8 = 0;
-      temp_v6 = 0;
-    }
-    temp_v4 = (int)param_2 % 9;
-    temp_v0 = (short)temp_v5 + (short)(((int)((temp_v11 - temp_v5) * 0x1000) / 9) * temp_v4 >> 0xc);
-    temp_v1 = (short)temp_v2 + (short)(((int)((temp_v8 - temp_v2) * 0x1000) / 9) * temp_v4 >> 0xc);
-    temp_v3 = (short)temp_v10 + (short)(((int)((temp_v6 - temp_v10) * 0x1000) / 9) * temp_v4 >> 0xc);
-  }
-  return temp_v0 * 0x1000000 + temp_v1 * 0x10000 + temp_v3 * 0x100 + 0xff;
+    return (s16)from + (s16)((((to - from) * 0x1000) / 7 * step) >> 12);
 }
 
-} /* extern "C" */
+static __inline s32 channel9(s32 from, s32 to, s32 step)
+{
+    return (s16)from + (s16)((((to - from) * 0x1000) / 9 * step) >> 12);
+}
+
+/* The gradient colour (RGBA, alpha 0xFF) for colour kind `kind` at `level`: kinds map to rows of a
+ * three-stop table, 7 levels per stop (9 for the special kind 0xFF). */
+s32 FUN_003a6404(s32 kind, s32 level)
+{
+    s32 row = 0;
+
+    if (kind == 12) {
+        row = 11;
+    } else if (kind < 12) {
+        switch (kind) {
+        case 2: row = 1; break;
+        case 3: row = 2; break;
+        case 4: row = 3; break;
+        case 5: row = 4; break;
+        case 6: row = 5; break;
+        case 7: row = 6; break;
+        case 8: row = 7; break;
+        case 9: row = 8; break;
+        case 10: row = 9; break;
+        case 11: row = 10; break;
+        }
+    } else if (kind == 18) {
+        row = 0x16;
+    } else if (kind < 18) {
+        switch (kind) {
+        case 13: row = 12; break;
+        case 14: row = 13; break;
+        case 15: row = 14; break;
+        case 16: row = 0x14; break;
+        case 17: row = 0x15; break;
+        }
+    } else if (kind == 21) {
+        row = 0x11;
+    } else if (kind < 21) {
+        if (kind == 19) {
+            row = 15;
+        } else if (kind == 20) {
+            row = 0x10;
+        }
+    } else if (kind == 22) {
+        row = 0x13;
+    } else if (kind == 0xFF) {
+        row = 0x12;
+    }
+    const u8 *bytes = (const u8 *)&DAT_0057f138[row];
+    s32 r0 = 0, g0 = 0, b0 = 0, r1 = 0, g1 = 0, b1 = 0;
+    s16 red;
+    s16 green;
+    s16 blue;
+
+    if (kind != 0xFF) {
+        if (level < 7) {
+            r0 = bytes[0]; g0 = bytes[1]; b0 = bytes[2];
+            r1 = bytes[3]; g1 = bytes[4]; b1 = bytes[5];
+        } else if (level < 14) {
+            r0 = bytes[3]; g0 = bytes[4]; b0 = bytes[5];
+            r1 = bytes[6]; g1 = bytes[7]; b1 = bytes[8];
+        } else {
+            r0 = bytes[6]; g0 = bytes[7]; b0 = bytes[8];
+        }
+        s32 step = level % 7;
+
+        red = channel7(r0, r1, step);
+        green = channel7(g0, g1, step);
+        blue = channel7(b0, b1, step);
+    } else {
+        if (level < 9) {
+            r0 = bytes[0]; g0 = bytes[1]; b0 = bytes[2];
+            r1 = bytes[3]; g1 = bytes[4]; b1 = bytes[5];
+        } else if (level < 14) {
+            r0 = bytes[3]; g0 = bytes[4]; b0 = bytes[5];
+        }
+        s32 step = level % 9;
+
+        red = channel9(r0, r1, step);
+        green = channel9(g0, g1, step);
+        blue = channel9(b0, b1, step);
+    }
+    return red * 0x1000000 + green * 0x10000 + blue * 0x100 + 0xFF;
+}
+
+}

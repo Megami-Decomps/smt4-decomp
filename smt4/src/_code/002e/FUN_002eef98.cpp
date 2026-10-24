@@ -1,179 +1,106 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002eef98` (_code @ 0x2eef98, 0x2b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (175 vs 136 rows); retail inlines the angle lookups three times with unrolled wrap loops and keeps the angle flags in r3-r5 */
+#include "common.h"
+#include <math.h>
+
+// Interpolated sine/cosine table entry: value and slope for each, indexed by the whole angle byte.
+struct TrigEntry {
+    f32 sine;       // 0x00
+    f32 cosine;     // 0x04
+    f32 sineSlope;  // 0x08
+    f32 cosineSlope;// 0x0c
+};
+
+struct SinCos {
+    f32 sine;
+    f32 cosine;
+};
+
+// Camera parameters set by the script command.
+struct FieldCameraSetup {
+    u8 unk000[0xc4];
+    f32 eye[3];             // 0xc4
+    f32 target[3];          // 0xd0
+    f32 fov;                // 0xdc
+};
+
+struct SceneState {
+    s32 sceneId;            // 0x00
+    u8 unk04[0xa4 - 4];
+    u8 changed;             // 0xa4
+};
 
 extern "C" {
 
-int FUN_00273840(int);
-int lmapSetSceneId(int);
-int FUN_0027fc14(int);
-int VectorFloatToUnsigned(...);
-int VectorSignedToFloat(unsigned int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *);
+extern TrigEntry DAT_00407ed0[];
+extern FieldCameraSetup g_gameState;
+extern SceneState* DAT_004474f4;
 
-/* stack frame of void: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
+u32 scrGetArg(u32 index);
+void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32* dst, f32* matrix, f32* src);
+void FUN_0027fc14(s32 mode);
+void lmapSetSceneId(s32 id);
+void FUN_00273840(s32 arg);
 
-extern unsigned int DAT_00407ed0; /* 0x407ed0 */
-extern unsigned int DAT_00407ed4; /* 0x407ed4 */
-extern unsigned int DAT_00407ed8; /* 0x407ed8 */
-extern unsigned int DAT_00407edc; /* 0x407edc */
-extern int *DAT_004474f4; /* 0x4474f4 */
-extern float DAT_0049f9e0; /* 0x49f9e0 */
-extern float DAT_0049f9e4; /* 0x49f9e4 */
-extern float DAT_0049f9e8; /* 0x49f9e8 */
-extern float DAT_0049f9ec; /* 0x49f9ec */
-extern float DAT_0049f9f0; /* 0x49f9f0 */
-extern float DAT_0049f9f4; /* 0x49f9f4 */
-extern unsigned int DAT_0049f9f8; /* 0x49f9f8 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+// Looks up sine and cosine of an angle given in 256ths of a turn with a fractional part.
+static inline SinCos lookupSinCos(f32 angle, bool negate)
 {
-    return value < (float)0 ? -value : value;
+    f32 a = angle;
+    while (a >= 65536.0f) a -= 65536.0f;
+    u32 whole = (u32)a;
+    f32 fraction = a - (f32)(whole & 0xffff);
+    const TrigEntry* entry = &DAT_00407ed0[whole & 0xff];
+    SinCos result;
+    result.sine = entry->sine + fraction * entry->sineSlope;
+    result.cosine = entry->cosine + fraction * entry->cosineSlope;
+    if (negate) result.sine = -result.sine;
+    return result;
 }
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00273840. */
-/* Supplied declaration required: lmapSetSceneId. */
-/* Supplied declaration required: FUN_0027fc14. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
-
-/* WARNING: Removing unreachable block (ram,0x002ef10c) */
-/* WARNING: Removing unreachable block (ram,0x002ef12c) */
-/* WARNING: Removing unreachable block (ram,0x002ef05c) */
-
-unsigned int FUN_002eef98(void)
-
+// Script command: aims the field camera at (x, y, z) from `distance` behind it, pitched by an angle.
+u32 FUN_002eef98(void)
 {
-/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  unsigned int temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float temp_v21;
-  float temp_v22;
-  float temp_v23;
-  float temp_v24;
-  unsigned int temp_v25;
-  float temp_v26;
-  float temp_v27;
-  float temp_v28;
-  unsigned int temp_v29;
-  float temp_v30;
-  float temp_v31;
-  float temp_v32;
-  unsigned int temp_v33;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v15 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = scrGetArg(1);
-  temp_v16 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = scrGetArg(2);
-  temp_v17 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = scrGetArg(3);
-  temp_v18 = 0x42200000;
-  temp_v14 = 500.0f;
-  temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v19 = 0.0f;
-  temp_v20 = 0.0f;
-  temp_v21 = -1.0f;
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v4 * 0.7111111f) << 0x1d);
-  for (temp_v4 = romwright_fabs_4(temp_v4 * 0.7111111f); (int)temp_v4 >= 0x47800000; temp_v4 = temp_v4 - 65536.0f) {
-  }
-  temp_v5 = VectorFloatToUnsigned(0,3);
-  temp_v6 = VectorFloatToUnsigned(temp_v4,3);
-  temp_v7 = VectorFloatToUnsigned(0,3);
-  temp_v2 = temp_v5;
-  temp_v3 = temp_v7;
-  temp_v9 = (float)VectorUnsignedToFloat(temp_v5 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v5 = temp_v6 & 0xff;
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v8 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v10 = (float)(&DAT_00407ed0)[temp_v2 * 4] + (0.0f - temp_v9) * (float)(&DAT_00407ed8)[temp_v2 * 4];
-  temp_v13 = (float)(&DAT_00407ed4)[temp_v2 * 4] + (0.0f - temp_v9) * (float)(&DAT_00407edc)[temp_v2 * 4];
-  temp_v12 = (float)(&DAT_00407ed0)[temp_v3 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407ed8)[temp_v3 * 4];
-  temp_v9 = (float)(&DAT_00407ed0)[temp_v5 * 4] + (temp_v4 - temp_v11) * (float)(&DAT_00407ed8)[temp_v5 * 4];
-  temp_v8 = (float)(&DAT_00407ed4)[temp_v3 * 4] + (0.0f - temp_v8) * (float)(&DAT_00407edc)[temp_v3 * 4];
-  temp_v32 = (float)(&DAT_00407ed4)[temp_v5 * 4] +
-             (temp_v4 - temp_v11) * (float)(&DAT_00407edc)[temp_v5 * 4];
-  if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
-    temp_v9 = -temp_v9;
-  }
-  temp_v22 = temp_v8 * temp_v32;
-  temp_v30 = -temp_v9;
-  temp_v26 = temp_v12 * temp_v32;
-  temp_v31 = temp_v10 * temp_v32;
-  temp_v32 = temp_v13 * temp_v32;
-  temp_v24 = temp_v10 * temp_v12 + temp_v13 * temp_v8 * temp_v9;
-  temp_v27 = temp_v13 * temp_v8 + temp_v10 * temp_v12 * temp_v9;
-  temp_v23 = temp_v10 * temp_v8 * temp_v9 - temp_v13 * temp_v12;
-  temp_v28 = temp_v13 * temp_v12 * temp_v9 - temp_v10 * temp_v8;
-  temp_v25 = 0;
-  temp_v29 = 0;
-  temp_v33 = 0;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v19,&temp_v22);
-  temp_v19 = temp_v15 - temp_v19 * temp_v14;
-  temp_v20 = temp_v16 - temp_v20 * temp_v14;
-  temp_v21 = temp_v17 - temp_v21 * temp_v14;
-  DAT_0049f9e0 = temp_v19;
-  DAT_0049f9e4 = temp_v20;
-  DAT_0049f9e8 = temp_v21;
-  DAT_0049f9ec = temp_v15;
-  DAT_0049f9f0 = temp_v16;
-  DAT_0049f9f4 = temp_v17;
-  DAT_0049f9f8 = temp_v18;
-  if (*DAT_004474f4 != 3) {
-    *(unsigned char *)(DAT_004474f4 + 0x29) = 1;
-    FUN_0027fc14(3);
-    lmapSetSceneId(0x1d);
-  }
-  FUN_00273840(1);
-  return 1;
+    f32 x = (f32)(s32)scrGetArg(0);
+    f32 y = (f32)(s32)scrGetArg(1);
+    f32 z = (f32)(s32)scrGetArg(2);
+    f32 pitch = (f32)(s32)scrGetArg(3) * 0.7111111f;
+    f32 fov = 40.0f;
+    f32 distance = 500.0f;
+
+    f32 direction[3] = { 0.0f, 0.0f, -1.0f };
+    SinCos rx = lookupSinCos(0.0f, false);
+    SinCos ry = lookupSinCos(fabsf(pitch), pitch < 0.0f);
+    SinCos rz = lookupSinCos(0.0f, false);
+
+    f32 matrix[12];
+    matrix[0] = rz.cosine * ry.cosine;
+    matrix[1] = rx.cosine * rz.sine - rx.sine * rz.cosine * ry.sine;
+    matrix[2] = rx.sine * rz.sine + rx.cosine * rz.cosine * ry.sine;
+    matrix[3] = 0.0f;
+    matrix[4] = rz.sine * ry.cosine;
+    matrix[5] = rx.cosine * rz.cosine + rx.sine * rz.sine * ry.sine;
+    matrix[6] = rx.sine * rz.cosine - rx.cosine * rz.sine * ry.sine;
+    matrix[7] = 0.0f;
+    matrix[8] = -ry.sine;
+    matrix[9] = rx.sine * ry.cosine;
+    matrix[10] = rx.cosine * ry.cosine;
+    matrix[11] = 0.0f;
+    nn_math_ARMv6_VEC3TransformAsm_2AD44C(direction, matrix, direction);
+
+    g_gameState.eye[0] = x - direction[0] * distance;
+    g_gameState.eye[1] = y - direction[1] * distance;
+    g_gameState.eye[2] = z - direction[2] * distance;
+    g_gameState.target[0] = x;
+    g_gameState.target[1] = y;
+    g_gameState.target[2] = z;
+    g_gameState.fov = fov;
+
+    if (DAT_004474f4->sceneId != 3) {
+        DAT_004474f4->changed = 1;
+        FUN_0027fc14(3);
+        lmapSetSceneId(0x1d);
+    }
+    FUN_00273840(1);
+    return 1;
 }
 
 } /* extern "C" */

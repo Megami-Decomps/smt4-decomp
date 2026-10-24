@@ -1,122 +1,130 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00484378` (_code @ 0x484378, 0x22c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the name-entry confirm step; retail tail-calls sysPlaySe/stateSetterEnterState with a 20-byte frame, reads the target through a +0x200 base register and uses sxtb/uxtab for the signed character index, while the build uses a 24-byte frame, plain calls and a pointer-induction loop. */
+#include "common.h"
 
 struct NameEntryMenu;
-struct NameBuffer;
+struct NameBuffer {
+    u32 w0;
+    u32 w1;
+    u32 w2;
+    u32 w3;
+    u16 w4;
+};
+
+// Character conversion tables used when a typed name is confirmed: each character that appears in a source list is
+// replaced by the matching entry of its mapped list.
+struct NameConversionTables {
+    /* 0x000 */ s16 firstSource[0x77];
+    /* 0x0EE */ u16 firstMapped[0x77];
+    /* 0x1DC */ s16 secondSource[0x2a];
+    /* 0x230 */ u16 secondMapped[0x2a];
+};
+
+// The name-entry menu (observed fields).
+struct NameInputView {
+    u8 unk000[0xb0];
+    s8 text[18];                 // 0x0B0: the typed name, nine two-byte characters
+    u8 unk0c2[0x19f];
+    s8 target;                   // 0x261: which name is being edited
+    u8 unk262[10];
+    u32 script;                  // 0x26C
+    u8 confirming;               // 0x270
+    u8 unk271[0x13b];
+    u8 sprite[0x20];             // 0x3AC
+    u8 unk3cc[0x1a2];
+    s8 confirmed[1];             // 0x56E: the name as stored once confirmed
+
+    s16 characterAt(s8 index) const
+    {
+        if (index < 0) {
+            return (s16)0x8140;
+        }
+        u16 high = (u8)text[index * 2];
+        high <<= 8;
+        return (s16)(high + (u8)text[index * 2 + 1]);
+    }
+};
 
 extern "C" {
+extern NameConversionTables DAT_00532c10;
 
-int sysPlaySe(int);
-int FUN_00183e58(void);
-int uiSpriteSetImageKeyframe(int, int, int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_003180c4(int, int *);
-int logFormatBuffer(int *, int, int);
-void nameEntryCopyEditedName(NameEntryMenu*, NameBuffer*);
-int stateSetterEnterState(int, int);
+void sysPlaySe(s32 id);
+void FUN_00183e58(void);
+void uiSpriteSetImageKeyframe(u8 *sprite, s32 frame, s32 flag);
+void scrScriptProcessStartEntry(u32 script, s32 entry);
+void FUN_003180c4(s32 id, NameBuffer *name);
+s32 *logFormatBuffer(NameBuffer *name, s8 *destination, s32 mode);
+void nameEntryCopyEditedName(NameEntryMenu *menu, NameBuffer *name);
+void stateSetterEnterState(NameEntryMenu *menu, s32 state);
+s32 scrRunOpcodesStub(u32 script);
+s32 messageMainIsIdle(void);
+s32 messageGetChoiceResult(void);
+s32 convertToBufferAndStore(NameBuffer *name, s8 *destination);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-} param_1_stack;
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int scrRunOpcodesStub(unsigned int);
-extern int messageMainIsIdle(void);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: logFormatBuffer. */
-extern int convertToBufferAndStore(unsigned int *, int);
-/* Supplied declaration required: stateSetterEnterState. */
-
-
-void FUN_00484378(int param_1)
-
+// Steps the name-entry confirmation: first asks the question, then, on the answer, either goes back to editing (state 2)
+// or converts the typed name and checks its length before accepting it (state 6) or rejecting it (state 7).
+void FUN_00484378(NameInputView *menu)
 {
-/* irregular: 1 goto(s); 8 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int temp_v2;
-  short temp_v3;
-  int uStack_30;
-  
-  piVar3 = &uStack_30;
-  if (*(char *)(param_1 + 0x270) != '\0') {
-    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
-    if (temp_v1 == 2) {
-      temp_v1 = messageGetChoiceResult();
-      if (temp_v1 != 0) {
-        stateSetterEnterState(param_1,2);
+    NameBuffer storage;
+    NameBuffer *name = &storage;
+    u8 *buffer = reinterpret_cast<u8 *>(&storage);
+    if (menu->confirming == 0) {
+        if (messageMainIsIdle() != 0) {
+            nameEntryCopyEditedName(reinterpret_cast<NameEntryMenu *>(menu), name);
+            FUN_003180c4(0x32, name);
+            scrScriptProcessStartEntry(menu->script, 1);
+            menu->confirming = 1;
+            sysPlaySe(0x9c);
+        }
+        return;
+    }
+    if (scrRunOpcodesStub(menu->script) != 2) {
+        return;
+    }
+    if (messageGetChoiceResult() != 0) {
+        stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 2);
         sysPlaySe(0x97);
         return;
-      }
-      uiSpriteSetImageKeyframe(param_1 + 0x3ac,0,1);
-      if (*(unsigned char *)(param_1 + 0x261) >= 2 && *(unsigned char *)(param_1 + 0x261) != 4) {
+    }
+    uiSpriteSetImageKeyframe(menu->sprite, 0, 1);
+    if (menu->target != 0 && menu->target != 1 && menu->target != 4) {
         FUN_00183e58();
-        stateSetterEnterState(param_1,7);
+        stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 7);
         return;
-      }
-      nameEntryCopyEditedName((NameEntryMenu*)param_1,(NameBuffer*)&uStack_30);
-      temp_v1 = 0;
-      do {
-        temp_v3 = -0x7ec0;
-        if (-1 < (char)temp_v1) {
-          temp_v2 = param_1 + (char)temp_v1 * 2;
-          temp_v3 = (unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1);
-        }
-        temp_v2 = 0;
-        do {
-          if (*(short *)(temp_v2 * 2 + 0x532c10) == temp_v3) {
-            temp_v0 = *(unsigned short *)(temp_v2 * 2 + 0x532cfe);
-            *(char *)((int)&uStack_30 + temp_v1 * 2) = (char)(temp_v0 >> 8);
-            *(char *)((int)&uStack_30 + temp_v1 * 2 + 1) = (char)temp_v0;
-            goto LAB_00484524;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 0x77);
-        temp_v2 = 0;
-        do {
-          if (*(short *)(temp_v2 * 2 + 0x532dec) == temp_v3) {
-            temp_v0 = *(unsigned short *)(temp_v2 * 2 + 0x532e40);
-            *(char *)((int)&uStack_30 + temp_v1 * 2) = (char)(temp_v0 >> 8);
-            *(char *)((int)&uStack_30 + temp_v1 * 2 + 1) = (char)temp_v0;
-            break;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 0x2a);
-LAB_00484524:
-        temp_v1 = temp_v1 + 1;
-        if (temp_v1 >= 9) {
-          logFormatBuffer(&uStack_30,param_1 + 0x56e,1);
-          temp_v1 = convertToBufferAndStore((unsigned int *)&uStack_30,param_1 + 0x56e);
-          if ((*piVar3 == 0) && (temp_v1 < 6)) {
-            FUN_00183e58();
-            stateSetterEnterState(param_1,7);
-            return;
-          }
-          stateSetterEnterState(param_1,6);
-          scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),4);
-          return;
-        }
-      } while( 1 );
     }
-  }
-  else {
-    temp_v1 = messageMainIsIdle();
-    if (temp_v1 != 0) {
-      nameEntryCopyEditedName((NameEntryMenu*)param_1,(NameBuffer*)&uStack_30);
-      FUN_003180c4(0x32,&uStack_30);
-      scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),1);
-      *(unsigned char *)(param_1 + 0x270) = 1;
-      sysPlaySe(0x9c);
+    nameEntryCopyEditedName(reinterpret_cast<NameEntryMenu *>(menu), name);
+    for (s32 index = 0; index < 9; index++) {
+        s16 character = menu->characterAt((s8)index);
+        u16 converted;
+        bool found = false;
+        for (s32 entry = 0; entry < 0x77; entry++) {
+            if (DAT_00532c10.firstSource[entry] == character) {
+                converted = DAT_00532c10.firstMapped[entry];
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            for (s32 entry = 0; entry < 0x2a; entry++) {
+                if (DAT_00532c10.secondSource[entry] == character) {
+                    converted = DAT_00532c10.secondMapped[entry];
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if (found) {
+            buffer[index * 2] = (u8)(converted >> 8);
+            buffer[index * 2 + 1] = (u8)converted;
+        }
     }
-  }
-  return;
+    s32 *status = logFormatBuffer(name, menu->confirmed, 1);
+    s32 length = convertToBufferAndStore(name, menu->confirmed);
+    if (*status == 0 && length < 6) {
+        FUN_00183e58();
+        stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 7);
+        return;
+    }
+    stateSetterEnterState(reinterpret_cast<NameEntryMenu *>(menu), 6);
+    scrScriptProcessStartEntry(menu->script, 4);
 }
-
-} /* extern "C" */
+}

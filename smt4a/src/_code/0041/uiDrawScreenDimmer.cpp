@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; render-stack address hoisting, zero/global registers and two push/color-store schedules differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 2 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 
@@ -13,7 +13,7 @@ void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 alpha);
 void uiDrawScreenDimmer(u32 unused, s32 topScreen)
 {
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     efctSetSpeed(0.5f);
     EffectColor black;
     black.red = 0.0f;

@@ -1,133 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021e224` (_code @ 0x21e224, 0x218 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the path mover step; retail keeps the distance, the direction components and the new heading in s16..s20 across the atan2/angle calls and lays the waypoint-advance block before the move, which armcc here orders differently. */
+#include "common.h"
+
+struct PathVec3 {
+    f32 x, y, z;
+};
+
+/* One waypoint of a queue (0x28 bytes). */
+struct PathPoint {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ PathVec3 position;
+    /* 0x10 */ u8 unk10[0x18];
+};
+
+/* A queue of waypoints (0x284 bytes). */
+struct PathQueue {
+    /* 0x000 */ PathPoint points[16];
+    /* 0x280 */ s32 count;
+};
+
+/* Something that walks along a waypoint queue. */
+struct PathMover {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 reached;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ s32 queue;
+    /* 0x08 */ s32 waypoint;      /* index of the waypoint walked from */
+    /* 0x0C */ PathVec3 position;
+    /* 0x18 */ PathVec3 target;
+    /* 0x24 */ f32 speed;
+    /* 0x28 */ f32 heading;       /* degrees */
+};
 
 extern "C" {
+extern PathQueue *g_vectorQueueWork;
 
-int FUN_00281e34(void);
-int mathDistanceBetweenPoints(void);
-int mathGetShortestAngleDelta(void);
+f32 mathDistanceBetweenPoints(f32 ax, f32 ay, f32 az, f32 bx, f32 by, f32 bz);
+f32 FUN_00281e34(f32 y, f32 x); /* atan2f */
+f32 mathGetShortestAngleDelta(f32 from, f32 to);
 
-extern int g_vectorQueueWork; /* 0x447e40 */
-
-/* Supplied declaration required: FUN_00281e34. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: mathGetShortestAngleDelta. */
-
-
-void FUN_0021e224(char *param_1)
-
+/* Moves the walker one step toward its target waypoint, turning its heading gradually; when the
+ * waypoint is reached it advances to the next pair, wrapping to the start at the end. */
+void FUN_0021e224(PathMover *mover)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  unsigned int temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  
-  if ((*param_1 != '\0') && (param_1[1] == '\0')) {
-    temp_v3 = *(float *)(param_1 + 0xc);
-    mathDistanceBetweenPoints();
-    temp_v14 = 0.0f;
-    if (temp_v3 < 0.0f) {
-      temp_v3 = -temp_v3;
-    }
-    if (*(float *)(param_1 + 0x24) <= temp_v3) {
-      temp_v5 = *(float *)(param_1 + 0x18) - *(float *)(param_1 + 0xc);
-      temp_v8 = *(float *)(param_1 + 0x20) - *(float *)(param_1 + 0x14);
-      temp_v13 = *(float *)(param_1 + 0x1c) - *(float *)(param_1 + 0x10);
-      if (temp_v3 != 0.0f) {
-        temp_v11 = temp_v5;
-        FUN_00281e34();
-        temp_v12 = temp_v5 * 57.32484f;
-        temp_v6 = *(float *)(param_1 + 0x28);
-        mathGetShortestAngleDelta();
-        temp_v5 = temp_v6;
-        if (temp_v6 < temp_v14) {
-          temp_v5 = -temp_v6;
+    if (!mover->active || mover->reached)
+        return;
+    f32 distance = mathDistanceBetweenPoints(mover->position.x, mover->position.y, mover->position.z,
+                                             mover->target.x, mover->target.y, mover->target.z);
+    if (distance < 0.0f)
+        distance = -distance;
+    if (mover->speed > distance) {
+        s32 next = ++mover->waypoint;
+        PathQueue *queue = &g_vectorQueueWork[mover->queue];
+        if (next + 1 < queue->count) {
+            mover->position = queue->points[next].position;
+            mover->target = queue->points[next + 1].position;
+            return;
         }
-        temp_v10 = temp_v5 * 0.16666667f;
-        if ((int)(temp_v5 * 0.16666667f) < 0x3f800000) {
-          temp_v10 = 1.0f;
-        }
-        if (temp_v10 < temp_v5) {
-          if (temp_v14 <= temp_v6) {
-            temp_v12 = *(float *)(param_1 + 0x28) + temp_v10;
-          }
-          else {
-            temp_v12 = *(float *)(param_1 + 0x28) - temp_v10;
-          }
-        }
-        temp_v3 = 1.0f / temp_v3;
-        temp_v5 = temp_v11 * temp_v3;
-        temp_v13 = temp_v13 * temp_v3;
-        temp_v8 = temp_v8 * temp_v3;
-        *(float *)(param_1 + 0x28) = temp_v12;
-      }
-      temp_v3 = *(float *)(param_1 + 0x24);
-      *(float *)(param_1 + 0xc) = *(float *)(param_1 + 0xc) + temp_v5 * temp_v3;
-      *(float *)(param_1 + 0x10) = *(float *)(param_1 + 0x10) + temp_v13 * temp_v3;
-      *(float *)(param_1 + 0x14) = *(float *)(param_1 + 0x14) + temp_v8 * temp_v3;
-      return;
+        mover->waypoint = queue->count - 1;
+        mover->reached = 1;
+        mover->target = queue->points[queue->count - 1].position;
+        mover->position = queue->points[queue->count - 1].position;
+        mover->reached = 0;
+        mover->waypoint = 0;
+        mover->position = queue->points[0].position;
+        mover->target = queue->points[1].position;
+        return;
     }
-    temp_v0 = *(int *)(param_1 + 8);
-    temp_v2 = temp_v0 + 1;
-    *(int *)(param_1 + 8) = temp_v2;
-    temp_v1 = g_vectorQueueWork + *(int *)(param_1 + 4) * 0x284;
-    if (temp_v0 + 2 < *(int *)(temp_v1 + 0x280)) {
-      temp_v1 = temp_v1 + temp_v2 * 0x28;
-      temp_v4 = *(unsigned int *)(temp_v1 + 8);
-      temp_v7 = *(unsigned int *)(temp_v1 + 0xc);
-      *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(temp_v1 + 4);
-      *(unsigned int *)(param_1 + 0x10) = temp_v4;
-      *(unsigned int *)(param_1 + 0x14) = temp_v7;
-      temp_v4 = *(unsigned int *)(temp_v1 + 0x2c);
-      temp_v7 = *(unsigned int *)(temp_v1 + 0x30);
-      *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(temp_v1 + 0x34);
-      *(unsigned int *)(param_1 + 0x18) = temp_v4;
-      *(unsigned int *)(param_1 + 0x1c) = temp_v7;
-      return;
+
+    f32 dx = mover->target.x - mover->position.x;
+    f32 dz = mover->target.z - mover->position.z;
+    f32 dy = mover->target.y - mover->position.y;
+    if (distance != 0.0f) {
+        f32 wanted = FUN_00281e34(dx, dz) * 57.32484f;
+        f32 delta = mathGetShortestAngleDelta(mover->heading, wanted);
+        f32 turn = delta;
+        if (turn < 0.0f)
+            turn = -turn;
+        f32 step = turn * (1.0f / 6.0f);
+        if (step < 1.0f)
+            step = 1.0f;
+        f32 heading = wanted;
+        if (turn > step)
+            heading = delta >= 0.0f ? mover->heading + step : mover->heading - step;
+        f32 inverse = 1.0f / distance;
+        dx *= inverse;
+        dy *= inverse;
+        dz *= inverse;
+        mover->heading = heading;
     }
-    temp_v0 = *(int *)(temp_v1 + 0x280) - 1;
-    *(int *)(param_1 + 8) = temp_v0;
-    param_1[1] = '\x01';
-    temp_v0 = temp_v1 + temp_v0 * 0x28;
-    temp_v4 = *(unsigned int *)(temp_v0 + 4);
-    temp_v7 = *(unsigned int *)(temp_v0 + 8);
-    temp_v9 = *(unsigned int *)(temp_v0 + 0xc);
-    *(unsigned int *)(param_1 + 0x18) = temp_v4;
-    *(unsigned int *)(param_1 + 0x1c) = temp_v7;
-    *(unsigned int *)(param_1 + 0x20) = temp_v9;
-    *(unsigned int *)(param_1 + 0xc) = temp_v4;
-    *(unsigned int *)(param_1 + 0x10) = temp_v7;
-    *(unsigned int *)(param_1 + 0x14) = temp_v9;
-    param_1[1] = '\0';
-    param_1[8] = '\0';
-    param_1[9] = '\0';
-    param_1[10] = '\0';
-    param_1[0xb] = '\0';
-    temp_v4 = *(unsigned int *)(temp_v1 + 4);
-    temp_v7 = *(unsigned int *)(temp_v1 + 8);
-    *(unsigned int *)(param_1 + 0x14) = *(unsigned int *)(temp_v1 + 0xc);
-    *(unsigned int *)(param_1 + 0xc) = temp_v4;
-    *(unsigned int *)(param_1 + 0x10) = temp_v7;
-    temp_v4 = *(unsigned int *)(temp_v1 + 0x30);
-    temp_v7 = *(unsigned int *)(temp_v1 + 0x34);
-    *(unsigned int *)(param_1 + 0x18) = *(unsigned int *)(temp_v1 + 0x2c);
-    *(unsigned int *)(param_1 + 0x1c) = temp_v4;
-    *(unsigned int *)(param_1 + 0x20) = temp_v7;
-  }
-  return;
+    mover->position.x += dx * mover->speed;
+    mover->position.y += dy * mover->speed;
+    mover->position.z += dz * mover->speed;
 }
 
 } /* extern "C" */

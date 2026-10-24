@@ -1,144 +1,111 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00165088` (_code @ 0x165088, 0x318 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: HUD panel state reset by state id (hide or reset the sprites depending on the open/lock checks); written from the decompilation, branch/tail-call layout not compared with retail */
+#include "common.h"
+
+struct PanelSprite {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ f32 progress;
+    /* 0x24 */ u8 unk24[0x61];
+    /* 0x85 */ u8 hidden;
+    /* 0x86 */ u8 unk86[6];
+};
+
+struct PanelWork {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ s32 cursorBusy;
+    /* 0x02C */ u8 unk02C[0xB];
+    /* 0x037 */ u8 rowActive[5];
+    /* 0x03C */ u8 unk03C[0x1A];
+    /* 0x056 */ s16 selectedRow;
+    /* 0x058 */ u8 unk058[4];
+    /* 0x05C */ u8 selectedRowActive;
+    /* 0x05D */ u8 unk05D[0x157];
+    /* 0x1B4 */ PanelSprite sprites[0x2B];   /* the panel's sprites; indices below name the ones used */
+};
+
+#define PANEL_SPRITE_MAIN 0
+#define PANEL_SPRITE_SECOND 1
+#define PANEL_SPRITE_SIDE 2
+#define PANEL_SPRITE_FOURTH 3
+#define PANEL_SPRITE_SIXTH 5
+#define PANEL_SPRITE_SEVENTH 6
+#define PANEL_SPRITE_ROWS 7      /* five row sprites start here */
+#define PANEL_SPRITE_CURSORS 12  /* per-row cursor sprites */
+#define PANEL_SPRITE_LAST 42
 
 extern "C" {
+s32 FUN_001517b4(s32 a, s32 b);
+s32 FUN_00163fd4(s32 a);
+void uiSpriteSetImageKeyframe(PanelSprite *sprite, s32 keyframe, s32 flag);
+void uiSpriteSelectAnim(PanelSprite *sprite, s32 animation);
+void workSetStateByte(PanelSprite *sprite, s32 value);
 
-int FUN_001517b4(...);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetImageKeyframe(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_001517b4. */
-extern int FUN_00163fd4(unsigned int);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-
-
-void FUN_00165088(int param_1,unsigned int param_2)
-
+/* Closes the panel parts that belong to the state; when the panel may stay open the sprites are
+ * re-keyed instead of hidden. */
+void FUN_00165088(PanelWork *panel, u32 state)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  switch(param_2) {
-  default:
-    return;
-  case 1:
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_00163fd4(6);
-      if (temp_v0 == 0) {
-        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
+    PanelSprite *sprites = panel->sprites;
+    switch (state) {
+    default:
         return;
-      }
-    }
-    break;
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 0x11:
-  case 0x12:
-  case 0x13:
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if ((temp_v0 != 0) || (temp_v0 = FUN_00163fd4(6), temp_v0 != 0)) {
-      *(unsigned char *)(param_1 + 0x239) = 0;
-      *(unsigned char *)(param_1 + 0x351) = 0;
-      param_1 = param_1 + 0x240;
-    }
-    else {
-      uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
-      uiSpriteSetImageKeyframe(param_1 + 0x2cc,2,0);
-      param_1 = param_1 + 0x240;
-    }
-    *(unsigned char *)(param_1 + 0x85) = 0;
-    return;
-  case 6:
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if ((temp_v0 == 0) && (temp_v0 = FUN_00163fd4(6), temp_v0 == 0)) {
-      if (*(int *)(param_1 + 0x1d4) != 0x3f800000) {
+    case 1:
+    case 10:
+        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0)
+            workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
+        else
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
         return;
-      }
-      uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
-      return;
-    }
-    break;
-  case 7:
-  case 8:
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_00163fd4(6);
-      if (temp_v0 == 0) {
-        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
-        uiSpriteSetImageKeyframe(param_1 + 0x4fc,2,0);
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 0x11:
+    case 0x12:
+    case 0x13:
+        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0) {
+            sprites[PANEL_SPRITE_MAIN].hidden = 0;
+            sprites[PANEL_SPRITE_SIDE].hidden = 0;
+        } else {
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_SIDE], 2, 0);
+        }
+        workSetStateByte(&sprites[PANEL_SPRITE_SECOND], 0);
         return;
-      }
-    }
-    *(unsigned char *)(param_1 + 0x239) = 0;
-    param_1 = param_1 + 0x4fc;
-    *(unsigned char *)(param_1 + 0x85) = 0;
-    return;
-  case 9:
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_00163fd4(6);
-      if (temp_v0 == 0) {
-        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
-        uiSpriteSetImageKeyframe(param_1 + 0x4fc,2,0);
+    case 6:
+        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0)
+            workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
+        else if (*(s32 *)&sprites[PANEL_SPRITE_MAIN].progress == 0x3F800000)
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
         return;
-      }
-    }
-    *(unsigned char *)(param_1 + 0x239) = 0;
-    param_1 = param_1 + 0x4fc;
-    *(unsigned char *)(param_1 + 0x85) = 0;
-    return;
-  case 10:
-    temp_v0 = 9;
-    FUN_001517b4(9,2);
-    if (temp_v0 == 0) {
-      temp_v0 = FUN_00163fd4(6);
-      if (temp_v0 == 0) {
-        uiSpriteSetImageKeyframe(param_1 + 0x1b4,2,0);
+    case 7:
+    case 8:
+    case 9:
+        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0) {
+            sprites[PANEL_SPRITE_MAIN].hidden = 0;
+            workSetStateByte(&sprites[PANEL_SPRITE_SEVENTH], 0);
+        } else {
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_SEVENTH], 2, 0);
+        }
         return;
-      }
+    case 0xB:
+        uiSpriteSelectAnim(&sprites[PANEL_SPRITE_MAIN], 7);
+        uiSpriteSelectAnim(&sprites[PANEL_SPRITE_FOURTH], 7);
+        sprites[PANEL_SPRITE_SIXTH].hidden = 0;
+        uiSpriteSelectAnim(&sprites[PANEL_SPRITE_LAST], 7);
+        return;
+    case 0xC:
+        for (s32 i = 0; i < 5; i++) {
+            if (panel->rowActive[i] != 0)
+                uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_ROWS + i], 5, 0);
+        }
+        panel->cursorBusy = 0;
+        return;
+    case 0xD:
+        if (panel->selectedRowActive != 0)
+            uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_CURSORS + panel->selectedRow], 5, 0);
+        panel->cursorBusy = 0;
+        return;
     }
-    break;
-  case 0xb:
-    uiSpriteSelectAnim(param_1 + 0x1b4,7);
-    uiSpriteSelectAnim(param_1 + 0x358,7);
-    *(unsigned char *)(param_1 + 0x4f5) = 0;
-    uiSpriteSelectAnim(param_1 + 0x18ac,7);
-    return;
-  case 0xc:
-    temp_v0 = 0;
-    do {
-      if (*(char *)(param_1 + temp_v0 + 0x37) != '\0') {
-        uiSpriteSetImageKeyframe(param_1 + temp_v0 * 0x8c + 0x588,5,0);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 5);
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    return;
-  case 0xd:
-    if (*(char *)(param_1 + 0x5c) != '\0') {
-      uiSpriteSetImageKeyframe(param_1 + *(short *)(param_1 + 0x56) * 0x8c + 0x844,5,0);
-    }
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    return;
-  }
-  param_1 = param_1 + 0x1b4;
-  *(unsigned char *)(param_1 + 0x85) = 0;
-  return;
 }
 
 } /* extern "C" */

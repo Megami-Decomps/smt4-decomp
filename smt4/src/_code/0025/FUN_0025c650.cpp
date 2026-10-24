@@ -1,117 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025c650` (_code @ 0x25c650, 0x220 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the two list-position counters differ: retail counts the replacement in r2 and the item in r1, the build uses r1 then r2 (the resource compare order now matches). */
+#include "shard/W5_W5Match2_LinkedItems.h"
+#include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 
 extern "C" {
-
-int effBlockSetBlobB(unsigned int, unsigned int, unsigned int, int);
-int asdMemFree(void);
-
-/* Supplied declaration required: FUN_0025c650. */
-/* Supplied declaration required: effBlockSetBlobB. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_0025c650(int param_1,int param_2,int param_3)
-
-{
-/* irregular: 5 goto(s); 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-LAB_0025c654:
-  do {
-    temp_v1 = param_3;
-    if ((*(unsigned int *)(param_2 + 0x98) & 1) == 0) {
-      for (temp_v3 = *(int *)(param_1 + 0x8c); temp_v3 != 0; temp_v3 = *(int *)(temp_v3 + 0xac)) {
-        if (((*(unsigned int *)(temp_v3 + 0x98) & 1) != 0) &&
-           (*(int *)(temp_v3 + 0x90) == *(int *)(param_2 + 0x90))) {
-          FUN_0025c650(param_1,temp_v3,temp_v1);
-        }
-      }
-    }
-    if (param_2 == temp_v1) {
-      return;
-    }
-    if ((*(unsigned int *)(param_2 + 0x98) & 1) == 0) {
-      temp_v3 = *(int *)(param_2 + 0x90);
-      if (*(int *)(temp_v3 + 0x28) != 0) {
-        asdMemFree();
-        *(unsigned int *)(temp_v3 + 0x20) = 0;
-        *(unsigned int *)(temp_v3 + 0x24) = 0;
-        *(unsigned int *)(temp_v3 + 0x28) = 0;
-      }
-      temp_v3 = *(int *)(temp_v1 + 0x90);
-      effBlockSetBlobB(*(unsigned int *)(param_2 + 0x90),*(unsigned int *)(temp_v3 + 0x20),
-                   *(unsigned int *)(temp_v3 + 0x24),*(unsigned short *)(temp_v3 + 0x1c));
-    }
-    temp_v2 = 0;
-    *(unsigned int *)(param_2 + 0x98) = *(unsigned int *)(param_2 + 0x98) | 2;
-    *(unsigned int *)(param_2 + 0x94) = *(unsigned int *)(temp_v1 + 0x90);
-    param_3 = *(int *)(param_1 + 0x8c);
-    for (temp_v3 = param_3; temp_v3 != 0; temp_v3 = *(int *)(temp_v3 + 0xac)) {
-      if (temp_v3 == temp_v1) goto LAB_0025c744;
-      temp_v2 = temp_v2 + 1;
-    }
-    temp_v2 = 0;
-LAB_0025c744:
-    temp_v0 = 0;
-    for (temp_v3 = param_3; temp_v3 != 0; temp_v3 = *(int *)(temp_v3 + 0xac)) {
-      if (temp_v3 == param_2) goto LAB_0025c76c;
-      temp_v0 = temp_v0 + 1;
-    }
-    temp_v0 = 0;
-LAB_0025c76c:
-    if (temp_v2 <= temp_v0) {
-      return;
-    }
-    while( 1 ) {
-      if (param_3 == 0) {
-        return;
-      }
-      temp_v2 = *(unsigned int *)(param_3 + 0x98) & 3;
-      temp_v4 = temp_v2 == 2;
-      if (temp_v4) {
-        temp_v2 = *(unsigned int *)(param_3 + 0x94);
-      }
-      if (temp_v4 && temp_v2 == *(unsigned int *)(temp_v1 + 0x90)) break;
-      param_3 = *(int *)(param_3 + 0xac);
-    }
-    if (param_3 == 0) {
-      return;
-    }
-    *(unsigned int *)(param_3 + 0x98) = *(unsigned int *)(param_3 + 0x98) & 0xfffffffd;
-    *(unsigned int *)(param_3 + 0x94) = 0;
-    FUN_0025c650(param_1,param_3, /* unrecovered */ 0);
-    for (temp_v3 = *(int *)(param_1 + 0x8c); param_2 = temp_v1, temp_v3 != 0;
-        temp_v3 = *(int *)(temp_v3 + 0xac)) {
-      temp_v2 = *(unsigned int *)(temp_v3 + 0x98) & 3;
-      temp_v4 = temp_v2 == 2;
-      if (temp_v4) {
-        temp_v2 = *(unsigned int *)(temp_v3 + 0x94);
-      }
-      if (temp_v4 && temp_v2 == *(unsigned int *)(temp_v1 + 0x90)) goto joined_r0x0025c7ec;
-    }
-  } while( 1 );
-joined_r0x0025c7ec:
-  while (temp_v3 != 0) {
-    FUN_0025c650(param_1,temp_v3,param_3);
-    temp_v3 = *(int *)(param_1 + 0x8c);
-    while( 1 ) {
-      if (temp_v3 == 0) goto LAB_0025c654;
-      temp_v2 = *(unsigned int *)(temp_v3 + 0x98) & 3;
-      temp_v4 = temp_v2 == 2;
-      if (temp_v4) {
-        temp_v2 = *(unsigned int *)(temp_v3 + 0x94);
-      }
-      if (temp_v4 && temp_v2 == *(unsigned int *)(temp_v1 + 0x90)) break;
-      temp_v3 = *(int *)(temp_v3 + 0xac);
-    }
-  }
-  goto LAB_0025c654;
+void asdMemFree(void *block);
+void effBlockSetBlobB(EffBlock *block, const void *data, s32 size, u16 tag);
+void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
 }
 
-} /* extern "C" */
+// Position of `item` in the list (0 when it is not linked).
+static u32 linkedIndexOf(LinkedItems *items, LinkedItem *item)
+{
+    u32 index = 0;
+    for (LinkedItem *current = items->head; current != NULL; current = current->next) {
+        if (current == item)
+            return index;
+        index++;
+    }
+    return 0;
+}
+
+// First item that was redirected to `resource`.
+static LinkedItem *findReference(LinkedItems *items, void *resource)
+{
+    for (LinkedItem *item = items->head; item != NULL; item = item->next) {
+        if ((item->reference.flags & 3) == 2 && item->reference.source == resource)
+            return item;
+    }
+    return NULL;
+}
+
+// Redirect `item` to share `replacement`'s resource: items that referenced item's resource are moved first, item's own
+// blob B is replaced by the replacement's, and any items already redirected to the replacement are promoted.
+extern "C" void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement)
+{
+    if (!(item->reference.flags & 1)) {
+        for (LinkedItem *other = items->head; other != NULL; other = other->next) {
+            if ((other->reference.flags & 1) && other->resource == item->resource)
+                FUN_0025c650(items, other, replacement);
+        }
+    }
+    if (item == replacement)
+        return;
+    if (!(item->reference.flags & 1)) {
+        EffBlock *block = static_cast<EffBlock *>(item->resource);
+        if (block->ownedB != NULL) {
+            asdMemFree(block->ownedB);
+            block->dataB = NULL;
+            block->sizeB = 0;
+            block->ownedB = NULL;
+        }
+        EffBlock *source = static_cast<EffBlock *>(replacement->resource);
+        effBlockSetBlobB(static_cast<EffBlock *>(item->resource), source->dataB, source->sizeB, source->tagB);
+    }
+    item->reference.flags |= 2;
+    item->reference.source = replacement->resource;
+
+    u32 replacementIndex = linkedIndexOf(items, replacement);
+    u32 itemIndex = linkedIndexOf(items, item);
+    if (itemIndex >= replacementIndex)
+        return;
+    LinkedItem *promoted = findReference(items, replacement->resource);
+    if (promoted == NULL)
+        return;
+    promoted->reference.flags &= ~2u;
+    promoted->reference.source = NULL;
+    FUN_0025c650(items, promoted, promoted);
+    for (LinkedItem *reference = findReference(items, replacement->resource); reference != NULL;
+         reference = findReference(items, replacement->resource))
+        FUN_0025c650(items, reference, promoted);
+    FUN_0025c650(items, replacement, promoted);
+}

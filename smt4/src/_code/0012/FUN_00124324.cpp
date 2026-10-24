@@ -1,151 +1,160 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00124324` (_code @ 0x124324, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: message window step; state machine written as one switch, retail's per-case jump to the shared callback tail-call and the s32 compares schedule differently */
+#include "AsdSDK/Source/Gfx/Text/TextDefaults.h"
+
+struct MessageWindow;
+
+typedef s32 (*MessageWindowPoll)(MessageWindow *window);
+
+/* The two input callbacks the message layer installs. */
+struct MessageWindowCallbacks {
+    MessageWindowPoll skipRequested;      /* [0]: 1 when the player asks to skip the line */
+    MessageWindowPoll advanceRequested;   /* [1]: nonzero when the player advances the page */
+};
+
+#define MESSAGE_WINDOW_PAUSED 0x08
+#define MESSAGE_WINDOW_LAST_PAGE 0x20
+#define MESSAGE_WINDOW_FINISHED 0x40
+#define MESSAGE_WINDOW_NO_INPUT 0x80
+#define MESSAGE_WINDOW_AUTO_ADVANCE 0x02
+#define MESSAGE_WINDOW_CLOSING 0x10
+#define MESSAGE_WINDOW_NOTIFY_FIRST 0x400
+
+enum MessageWindowState {
+    MESSAGE_WINDOW_PRINTING = 1,
+    MESSAGE_WINDOW_WAIT_INPUT = 2,
+    MESSAGE_WINDOW_WAIT_PAD = 3,
+    MESSAGE_WINDOW_HOLD = 4,
+    MESSAGE_WINDOW_IDLE = 5
+};
+
+/* One page entry: first halfword is the page id (-1 ends the message), 0x20 bytes each. */
+struct MessagePage {
+    s16 id;
+    u8 unk02[0x1E];
+};
+
+struct MessageWindow {
+    /* 0x00 */ MessagePage *pages;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 page;
+    /* 0x0C */ s32 shownPage;
+    /* 0x10 */ s32 shownChars;
+    /* 0x14 */ u8 unk14[0x0C];
+    /* 0x20 */ s32 speed;           /* characters per step; -1: show the whole line at once */
+    /* 0x24 */ s32 progress;
+    /* 0x28 */ s32 holdCounter;
+    /* 0x2C */ s32 holdFrames;
+    /* 0x30 */ s32 frame;
+    /* 0x34 */ u32 flags;
+    /* 0x38 */ u8 unk38[0x0C];
+    /* 0x44 */ u8 state;
+    /* 0x45 */ u8 unk45[3];
+    /* 0x48 */ u8 unk48[0x65];
+    /* 0xAD */ u8 lineDone;
+};
 
 extern "C" {
+extern AsdTextDefaults g_asdTextDefaults;
+extern MessageWindowCallbacks g_messageWindowCallbacks; /* 0x464d6c */
 
-int FUN_002b31b4(int *);
+s32 FUN_002b31b4(MessageWindow *window);
+s32 padIsButtonPressed(u32 button);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char g_asdTextDefaults; /* 0x464d48 */
-#ifndef ROMWRIGHT_STORAGE_s__2_2_2_00464d6c_13_1_DEFINED
-#define ROMWRIGHT_STORAGE_s__2_2_2_00464d6c_13_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s__2_2_2_00464d6c_13_1 {
-    char whole[13];
-    unsigned char u1[13];
-    signed char s1[13];
-};
-typedef char romwright_storage_s__2_2_2_00464d6c_13_1_size_check[(sizeof(union romwright_storage_s__2_2_2_00464d6c_13_1) == 13) ? 1 : -1];
-typedef char romwright_storage_s__2_2_2_00464d6c_13_1_u1_width_check[(sizeof(((union romwright_storage_s__2_2_2_00464d6c_13_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s__2_2_2_00464d6c_13_1_s1_width_check[(sizeof(((union romwright_storage_s__2_2_2_00464d6c_13_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s__2_2_2_00464d6c_13_1 s__2_2_2_00464d6c; /* 0x464d6c */
-
-/* Supplied declaration required: FUN_002b31b4. */
-extern int padIsButtonPressed(unsigned int);
-
-
-void FUN_00124324(int *param_1)
-
+/* Advances one frame of a message window: prints characters, waits for the player and moves on
+ * through pages. */
+void FUN_00124324(MessageWindow *window)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  int temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v0 = param_1[0xd];
-  if ((temp_v0 & 8) == 0) {
-    switch((char)param_1[0x11]) {
-    case 1:
-      temp_v4 = 0;
-      if (((temp_v0 & 0x80) != 0) || (temp_v2 = (*(romwright_code *)(*(unsigned int *)&s__2_2_2_00464d6c.u1[0]))(param_1), temp_v2 == 1)
-         ) {
-        temp_v4 = 1;
-      }
-      if ((param_1[8] == -1) || ((temp_v4 && ((param_1[0xd] & 2U) != 0)))) {
-        do {
-          temp_v2 = FUN_002b31b4(param_1);
-        } while (temp_v2 == 0);
-        *(unsigned char *)((int)param_1 + 0xad) = 1;
+    u32 flags = window->flags;
+    if (flags & MESSAGE_WINDOW_PAUSED)
         return;
-      }
-      temp_v2 = param_1[8];
-      *(unsigned char *)((int)param_1 + 0xad) = 0;
-      if (temp_v2 < -1) {
-        temp_v3 = 0;
-        if (temp_v2 != 0 && -1 < -temp_v2) {
-          do {
-            temp_v1 = FUN_002b31b4(param_1);
-            if (temp_v1 != 0) break;
-            temp_v3 = temp_v3 + 1;
-          } while (temp_v3 < -temp_v2);
-        }
-        param_1[9] = 0;
-        return;
-      }
-      temp_v2 = param_1[9];
-      param_1[9] = temp_v2 + 1;
-      if (param_1[8] < temp_v2 + 1) {
-        FUN_002b31b4(param_1);
-        param_1[9] = 0;
-        return;
-      }
-      break;
-    case 2:
-      param_1[0xc] = param_1[0xc] + 1;
-      if ((temp_v0 & 0x20) != 0) {
-        if (*(short *)(*param_1 + param_1[2] * 0x20) == -1) {
-          param_1[0xd] = temp_v0 | 0x40;
-        }
-        else if (((temp_v0 & 0x80) == 0) &&
-                (temp_v2 = (*(romwright_code *)(*(unsigned int *)&s__2_2_2_00464d6c.u1[4]))(param_1), temp_v2 != 0)) {
-          *(unsigned char *)(param_1 + 0x11) = 1;
-          param_1[3] = param_1[2];
-          param_1[4] = 0;
-          if (temp_v2 == 1) {
-            temp_v4 = (param_1[0xd] & 0x400U) != 0;
-            UNRECOVERED_JUMPTABLE = (romwright_code *)param_1[2];
-            if (temp_v4) {
-              UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&g_asdTextDefaults + 0x18));
+    switch (window->state) {
+    case MESSAGE_WINDOW_PRINTING: {
+        bool skip = false;
+        if ((flags & MESSAGE_WINDOW_NO_INPUT) || g_messageWindowCallbacks.skipRequested(window) == 1)
+            skip = true;
+        if (window->speed == -1 || (skip && (window->flags & MESSAGE_WINDOW_AUTO_ADVANCE))) {
+            while (FUN_002b31b4(window) == 0) {
             }
-            if (temp_v4 && UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x00124554. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-              (*UNRECOVERED_JUMPTABLE)(0);
-              return;
+            window->lineDone = 1;
+            return;
+        }
+        s32 speed = window->speed;
+        window->lineDone = 0;
+        if (speed < -1) {
+            s32 i = 0;
+            if (speed != 0 && -speed >= 0) {
+                do {
+                    if (FUN_002b31b4(window) != 0)
+                        break;
+                    i++;
+                } while (i < -speed);
             }
-          }
+            window->progress = 0;
+            return;
         }
-      }
-      else if (((temp_v0 & 0x80) == 0) &&
-              (temp_v2 = (*(romwright_code *)(*(unsigned int *)&s__2_2_2_00464d6c.u1[4]))(param_1), temp_v2 != 0)) {
-        if (*(short *)(*param_1 + param_1[2] * 0x20) == -1) {
-          *(unsigned char *)(param_1 + 0x11) = 5;
-          param_1[0xd] = param_1[0xd] | 0x10;
+        s32 progress = window->progress;
+        window->progress = progress + 1;
+        if (window->speed < progress + 1) {
+            FUN_002b31b4(window);
+            window->progress = 0;
+            return;
         }
-        else {
-          *(unsigned char *)(param_1 + 0x11) = 1;
-          param_1[3] = param_1[2];
-          param_1[4] = 0;
-        }
-        if (((temp_v2 == 1) && ((param_1[0xd] & 0x400U) != 0)) &&
-           (UNRECOVERED_JUMPTABLE = (*(romwright_code * *)((unsigned char *)&g_asdTextDefaults + 0x18)), (*(romwright_code * *)((unsigned char *)&g_asdTextDefaults + 0x18)) != (romwright_code *)0x0)) {
-          (*UNRECOVERED_JUMPTABLE)(0);
-          return;
-        }
-      }
-      break;
-    case 3:
-      temp_v2 = padIsButtonPressed(0);
-      if (temp_v2 != 0) {
-        *(unsigned char *)(param_1 + 0x11) = 1;
-      }
-      return;
-    case 4:
-      if (param_1[10] < param_1[0xb]) {
-        param_1[10] = param_1[10] + 1;
-      }
-      else {
-        param_1[10] = 0;
-        *(unsigned char *)(param_1 + 0x11) = 1;
-        param_1[0xb] = 0;
-      }
-      return;
-    case 5:
-      param_1[0xc] = param_1[0xc] + 1;
-      return;
+        break;
     }
-  }
-  return;
+    case MESSAGE_WINDOW_WAIT_INPUT:
+        window->frame++;
+        if (flags & MESSAGE_WINDOW_LAST_PAGE) {
+            if (window->pages[window->page].id == -1) {
+                window->flags = flags | MESSAGE_WINDOW_FINISHED;
+            } else if (!(flags & MESSAGE_WINDOW_NO_INPUT)) {
+                s32 request = g_messageWindowCallbacks.advanceRequested(window);
+                if (request != 0) {
+                    window->state = MESSAGE_WINDOW_PRINTING;
+                    window->shownPage = window->page;
+                    window->shownChars = 0;
+                    if (request == 1 && (window->flags & MESSAGE_WINDOW_NOTIFY_FIRST)
+                        && g_asdTextDefaults.unk18 != 0) {
+                        ((void (*)(s32))g_asdTextDefaults.unk18)(0);
+                        return;
+                    }
+                }
+            }
+        } else if (!(flags & MESSAGE_WINDOW_NO_INPUT)) {
+            s32 request = g_messageWindowCallbacks.advanceRequested(window);
+            if (request != 0) {
+                if (window->pages[window->page].id == -1) {
+                    window->state = MESSAGE_WINDOW_IDLE;
+                    window->flags |= MESSAGE_WINDOW_CLOSING;
+                } else {
+                    window->state = MESSAGE_WINDOW_PRINTING;
+                    window->shownPage = window->page;
+                    window->shownChars = 0;
+                }
+                if (request == 1 && (window->flags & MESSAGE_WINDOW_NOTIFY_FIRST)
+                    && g_asdTextDefaults.unk18 != 0) {
+                    ((void (*)(s32))g_asdTextDefaults.unk18)(0);
+                    return;
+                }
+            }
+        }
+        break;
+    case MESSAGE_WINDOW_WAIT_PAD:
+        if (padIsButtonPressed(0) != 0)
+            window->state = MESSAGE_WINDOW_PRINTING;
+        return;
+    case MESSAGE_WINDOW_HOLD:
+        if (window->holdCounter < window->holdFrames) {
+            window->holdCounter++;
+        } else {
+            window->holdCounter = 0;
+            window->state = MESSAGE_WINDOW_PRINTING;
+            window->holdFrames = 0;
+        }
+        return;
+    case MESSAGE_WINDOW_IDLE:
+        window->frame++;
+        return;
+    }
 }
 
 } /* extern "C" */

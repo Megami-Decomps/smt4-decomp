@@ -1,125 +1,104 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048144c` (_code @ 0x48144c, 0x23c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the early-return merging and the two lookup loops use different registers and branch layout (retail keeps the slot table in r5 and re-tests the previous call result for unused stock slots); the checks are the same. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable8FindRecord(void);
-int FUN_00287790(...);
+/* A table-8 record: a kind byte at 0x41, a flag byte at 0x3A, a flags word at 0x68 and a short at 0x48. */
+typedef struct Table8Record {
+    /* 0x00 */ u8 unk00[0x3A];
+    /* 0x3A */ u8 flagsA;               /* bit 7: counted over the whole party */
+    /* 0x3B */ u8 unk3b[5];
+    /* 0x40 */ u8 unk40;
+    /* 0x41 */ u8 kind;                 /* 1 or 3: recordable */
+    /* 0x42 */ u8 unk42[6];
+    /* 0x48 */ u16 value;
+    /* 0x4A */ u8 unk4a[0x1E];
+    /* 0x68 */ u32 flags;               /* bit 5: needs a matching party member */
+} Table8Record;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
+/* A party member: its two keys are the short at 0x64 and the word at 0x30. */
+typedef struct PartyMember {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ s32 expected;
+    /* 0x34 */ u8 unk34[0x30];
+    /* 0x64 */ u16 key;
+} PartyMember;
 
-extern int FUN_00187168(void);
-/* Supplied declaration required: dataTable8FindRecord. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_00287790. */
-extern int FUN_003e4d68(unsigned int);
-extern int FUN_004ccbf0(unsigned short);
+/* The party slot table: the stock order (24 slots) is at 0x1C88. */
+typedef struct StockSlots {
+    u8 unk0000[0x1C88];
+    s8 stock[24];
+} StockSlots;
 
+Table8Record *dataTable8FindRecord(s32 id);
+PartyMember *FUN_003e4d68(u16 index);
+s32 FUN_00187168(PartyMember *member);
+s32 FUN_004ccbf0(u16 key);
+s32 FUN_00287790(s32 member, Table8Record *record, s32 a, s32 b, s32 c);
+StockSlots *gameGetSlotTable(void);
 
-unsigned int FUN_0048144c(unsigned int param_1)
-
+/* Whether the record `id` (ids 1-60 and 0x7A0-0x7DF) can still be used: for a member-bound record,
+ * whether a matching party member holds a different value; for a whole-party record, whether
+ * any member lacks it; otherwise whether the stock check fails for the pool or any slot. */
+u32 FUN_0048144c(s32 id)
 {
-/* irregular: 2 goto(s); 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = param_1 - 1;
-  temp_v7 = temp_v0 >= 0x3b;
-  temp_v6 = temp_v0 == 0x3b;
-  if (temp_v0 >= 0x3c) {
-    temp_v7 = param_1 - 0x79f >= 0x3f;
-    temp_v6 = param_1 - 0x79f == 0x3f;
-  }
-  if ((!temp_v7 || temp_v6) &&
-     (temp_v0 = param_1, dataTable8FindRecord(),
-     *(char *)(temp_v0 + 0x41) == '\x01' || *(char *)(temp_v0 + 0x41) == '\x03')) {
-    if ((*(unsigned int *)(temp_v0 + 0x68) & 0x20) != 0) {
-      temp_v0 = 0;
-      do {
-        temp_v1 = FUN_003e4d68(temp_v0 & 0xffff);
-        if (((temp_v1 != 0) && (temp_v2 = FUN_00187168(), temp_v2 != 0)) &&
-           (temp_v3 = param_1, dataTable8FindRecord(), temp_v3 != 0)) {
-          temp_v6 = (*(unsigned int *)(temp_v3 + 0x68) & 0x20) != 0;
-          if (temp_v6) {
-            temp_v3 = (unsigned int)*(unsigned short *)(temp_v3 + 0x48);
-          }
-          if ((temp_v6 && temp_v3 != 0) &&
-             (temp_v2 = FUN_004ccbf0(*(unsigned short *)(temp_v1 + 100)), temp_v2 != *(int *)(temp_v1 + 0x30)))
-          {
-            return 1;
-          }
-        }
-        temp_v0 = temp_v0 + 1;
-      } while ((int)temp_v0 < 0xc);
+    if ((u32)(id - 1) > 59 && (u32)(id - 0x79F) > 63) {
+        return 0;
     }
-    else {
-      if ((*(unsigned char *)(temp_v0 + 0x3a) & 0x80) == 0) {
-        temp_v2 = gameGetSlotTable();
-        temp_v1 = -1;
-LAB_004815d0:
-        temp_v0 = param_1;
-        dataTable8FindRecord();
-        if (temp_v0 == 0) goto LAB_00481668;
-        temp_v4 = -1;
-        FUN_00287790(0xffffffff,temp_v0,1,0,0);
-        do {
-          if (temp_v4 == 0) {
-            return 1;
-          }
-          while( 1 ) {
-            while( 1 ) {
-              temp_v1 = temp_v1 + 1;
-              if (temp_v1 >= 0x18) {
-                return 0;
-              }
-              if (temp_v1 < 0) goto LAB_004815d0;
-              temp_v5 = (int)*(char *)(temp_v2 + temp_v1 + 0x1c88);
-              if (-1 < temp_v5) break;
-              if (temp_v4 == 0) {
-                return 1;
-              }
+    Table8Record *record = dataTable8FindRecord(id);
+
+    if (record->kind != 1 && record->kind != 3) {
+        return 0;
+    }
+    if ((record->flags & 0x20) != 0) {
+        for (s32 i = 0; i < 12; i++) {
+            PartyMember *member = FUN_003e4d68((u16)i);
+
+            if (member == NULL || FUN_00187168(member) == 0) {
+                continue;
             }
-            temp_v0 = param_1;
-            dataTable8FindRecord();
-            if (temp_v0 != 0) break;
-LAB_00481668:
-            temp_v4 = 1;
-          }
-          FUN_00287790(temp_v5,temp_v0,1,0,0);
-          temp_v4 = temp_v5;
-        } while( 1 );
-      }
-      dataTable8FindRecord();
-      if (param_1 != 0) {
-        temp_v1 = -1;
-        FUN_00287790(0xffffffff,param_1,1,0,0);
-        temp_v6 = temp_v1 == 0;
-        temp_v1 = gameGetSlotTable();
-        temp_v2 = 0;
-        do {
-          temp_v4 = (int)*(char *)(temp_v1 + temp_v2 + 0x1c88);
-          if ((-1 < temp_v4) && (FUN_00287790(temp_v4,param_1,1,0,0), temp_v4 == 0)) {
-            temp_v6 = 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 0x18);
-        if (temp_v6) {
-          return 1;
+            Table8Record *again = dataTable8FindRecord(id);
+
+            if (again != NULL && (again->flags & 0x20) != 0 && again->value != 0
+                && FUN_004ccbf0(member->key) != member->expected) {
+                return 1;
+            }
         }
-      }
+    } else if ((record->flagsA & 0x80) != 0) {
+        Table8Record *item = dataTable8FindRecord(id);
+
+        if (item != NULL) {
+            s32 missing = FUN_00287790(-1, item, 1, 0, 0) == 0;
+            StockSlots *slots = gameGetSlotTable();
+
+            for (s32 i = 0; i < 24; i++) {
+                s32 slot = slots->stock[i];
+
+                if (slot >= 0 && FUN_00287790(slot, item, 1, 0, 0) == 0) {
+                    missing = 1;
+                }
+            }
+            if (missing) {
+                return 1;
+            }
+        }
+    } else {
+        StockSlots *slots = gameGetSlotTable();
+
+        for (s32 i = -1; i < 24; i++) {
+            s32 slot = i < 0 ? -1 : slots->stock[i];
+
+            if (i >= 0 && slot < 0) {
+                continue;
+            }
+            Table8Record *item = dataTable8FindRecord(id);
+
+            if (item == NULL || FUN_00287790(slot, item, 1, 0, 0) == 0) {
+                return 1;
+            }
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
-} /* extern "C" */
+}

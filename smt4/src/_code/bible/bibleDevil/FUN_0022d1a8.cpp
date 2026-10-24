@@ -1,150 +1,138 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022d1a8` (_code @ 0x22d1a8, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bible devil stat rows; the stat lookup is one inline helper here while retail expands separate branch trees per use, and the row arrays are addressed through one struct instead of six literal bases */
+#include "common.h"
+
+#define BIBLE_STAT_ROWS 10
+#define BIBLE_COLOR_NONE 0xFFFFFFFF
+#define BIBLE_COLOR_HIGHER 0x72E027FF   /* better than the compared devil */
+#define BIBLE_COLOR_LOWER 0xDC0F14FF    /* worse than the compared devil */
+
+struct BibleDevilEntry {
+    /* 0x00 */ u16 devilId;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ u8 statA;
+    /* 0x09 */ u8 statB;
+    /* 0x0A */ u8 unk0A[0x16];
+};
+
+struct DevilRecordStat {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 level;
+};
+
+struct BibleDevilWork {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ u8 list[8];
+    /* 0x028 */ s32 count;
+    /* 0x02C */ u8 unk02C[0x9C];
+    /* 0x0C8 */ u8 layout[0x4DC];
+    /* 0x5A4 */ s8 mode;            /* 0: per-devil columns, 1: compare two devils, other: detail */
+    /* 0x5A5 */ s8 column;
+    /* 0x5A6 */ u8 unk5A6[6];
+    /* 0x5AC */ BibleDevilEntry entries[1];
+};
+
+/* The stat rows the screen draws. */
+struct BibleDevilRows {
+    /* 0x00 */ u32 value[BIBLE_STAT_ROWS];
+    /* 0x28 */ u32 color[BIBLE_STAT_ROWS];
+    /* 0x50 */ s32 x[BIBLE_STAT_ROWS];
+    /* 0x78 */ s32 y[BIBLE_STAT_ROWS];
+    /* 0xA0 */ char text[BIBLE_STAT_ROWS][0x20];
+    /* 0x1E0 */ u32 textColor[BIBLE_STAT_ROWS];
+};
+
+struct BibleLayoutPoint {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
 
 extern "C" {
+extern s32 DAT_0043d9cc;
+extern BibleDevilRows g_bibleDevilRows;
 
-int FUN_0029ce60(unsigned int, int, int);
-int devilGetRecord(void);
-int textFormatBuffer(int, unsigned char *, unsigned int);
-int FUN_002bf4f0(int, int);
+s32 FUN_0029e924(void *list);
+s32 rangeLimitMin(void *list);
+DevilRecordStat *devilGetRecord(u32 id);
+void textFormatBuffer(char *buffer, const char *format, u32 value);
+u32 FUN_0029ce60(u32 devilId, s32 column, s32 flag);
+BibleLayoutPoint *FUN_002bf4f0(void *layout, s32 id);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned char LAB_0022d42c; /* 0x22d42c */
-extern int DAT_0043d9cc; /* 0x43d9cc */
-extern unsigned int DAT_0049375c; /* 0x49375c */
-
-extern int rangeLimitMin(int);
-/* Supplied declaration required: FUN_0029ce60. */
-extern int FUN_0029e924(int);
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf4f0. */
-
-
-void FUN_0022d1a8(int param_1)
-
+/* The shown stat of the entry at `index`: 0 when the column has none. */
+static __inline u32 bibleStatOf(const BibleDevilEntry *entry, bool perDevil, s32 column)
 {
-/* irregular: 4 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  short temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned char temp_v14;
-  unsigned char temp_v15;
-  
-  if (*(int *)(param_1 + 0x28) != 0) {
-    temp_v5 = FUN_0029e924(param_1 + 0x20);
-    temp_v6 = rangeLimitMin(param_1 + 0x20);
-    if ((temp_v5 != DAT_0043d9cc) && (temp_v9 = 0, DAT_0043d9cc = temp_v5, 0 < temp_v6)) {
-      do {
-        temp_v13 = 0xffffffff;
-        temp_v1 = *(unsigned short *)(param_1 + (temp_v5 + temp_v9) * 0x20 + 0x5ac);
-        temp_v14 = *(char *)(param_1 + 0x5a4) == '\0';
-        temp_v7 = FUN_0029e924(param_1 + 0x20);
-        temp_v0 = *(char *)(param_1 + 0x5a5);
-        temp_v7 = param_1 + (temp_v7 + temp_v9) * 0x20;
-        temp_v12 = 0;
-        if (!temp_v14) {
-          if (temp_v0 != '\0') {
-            if (temp_v0 == '\x01') {
-              temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x5b9);
-            }
-          }
-          else {
-            temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x5b8);
-          }
-        }
-        else if (temp_v0 != '\0') {
-          if (temp_v0 != '\x01') {
-            if (temp_v0 == '\x02') {
-              temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x5b9);
-            }
-          }
-          else {
-            temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x5b8);
-          }
-        }
-        else {
-          temp_v10 = (unsigned int)*(unsigned short *)(temp_v7 + 0x5ac);
-          devilGetRecord();
-          if (temp_v10 != 0) {
-            temp_v12 = (unsigned int)*(unsigned char *)(temp_v10 + 3);
-          }
-        }
-        temp_v0 = *(char *)(param_1 + 0x5a4);
-        temp_v15 = temp_v0 == '\x01';
-        if (temp_v15) {
-          temp_v0 = *(char *)(param_1 + 0x5a5);
-        }
-        if (temp_v15 && temp_v0 == '\x01') {
-          temp_v7 = FUN_0029e924(param_1 + 0x20);
-          temp_v7 = param_1 + (temp_v7 + temp_v9) * 0x20;
-          temp_v10 = 0;
-          if (!temp_v14) {
-            temp_v10 = (unsigned int)*(unsigned char *)(temp_v7 + 0x5b8);
-          }
-          else {
-            temp_v8 = (unsigned int)*(unsigned short *)(temp_v7 + 0x5ac);
-            devilGetRecord();
-            if (temp_v8 != 0) {
-              temp_v10 = (unsigned int)*(unsigned char *)(temp_v8 + 3);
-            }
-          }
-          if (temp_v12 >= temp_v10 && temp_v12 != temp_v10) {
-            temp_v13 = 0x72e027ff;
-          }
-          if (temp_v12 < temp_v10) {
-            temp_v13 = 0xdc0f14ff;
-          }
-        }
-        temp_v11 = 0xffffffff;
-        *(unsigned int *)(temp_v9 * 4 + 0x49357c) = temp_v12;
-        *(unsigned int *)(temp_v9 * 4 + 0x4935a4) = temp_v13;
-        temp_v14 = *(char *)(param_1 + 0x5a4) != '\0';
-        temp_v7 = FUN_002bf4f0(param_1 + 200,temp_v9 + 0x42f);
-        temp_v2 = *(short *)(temp_v7 + 8);
-        temp_v3 = *(short *)(temp_v7 + 10);
-        temp_v12 = (unsigned int)temp_v1;
-        FUN_0029ce60(temp_v12,*(unsigned char *)(param_1 + 0x5a5),temp_v14);
-        if (*(char *)(param_1 + 0x5a4) == '\x01') {
-          temp_v10 = (unsigned int)temp_v1;
-          FUN_0029ce60(temp_v10,0,temp_v14);
-          if (temp_v12 < temp_v10) {
-            temp_v11 = 0xdc0f14ff;
-          }
-          if (temp_v10 < temp_v12) {
-            temp_v11 = 0x72e027ff;
-          }
-        }
-        temp_v7 = FUN_002bf4f0(param_1 + 200,0x4c6);
-        temp_v4 = *(short *)(temp_v7 + 10);
-        *(int *)(temp_v9 * 4 + 0x4935cc) = (int)*(short *)(temp_v7 + 8) + (int)temp_v2;
-        *(int *)(temp_v9 * 4 + 0x4935f4) = (int)temp_v4 + (int)temp_v3;
-        textFormatBuffer(temp_v9 * 0x20 + 0x49361c,&LAB_0022d42c,temp_v12);
-        (&DAT_0049375c)[temp_v9] = temp_v11;
-        temp_v9 = temp_v9 + 1;
-      } while (temp_v9 < temp_v6);
+    u32 stat = 0;
+    if (!perDevil) {
+        if (column == 0)
+            stat = entry->statA;
+        else if (column == 1)
+            stat = entry->statB;
+    } else if (column != 0) {
+        if (column == 1)
+            stat = entry->statA;
+        else if (column == 2)
+            stat = entry->statB;
+    } else {
+        DevilRecordStat *record = devilGetRecord(entry->devilId);
+        if (entry->devilId != 0)
+            stat = record->level;
     }
-  }
-  return;
+    return stat;
+}
+
+/* Refreshes the ten stat rows of the bible's devil page when the visible window moved: value,
+ * comparison colour, screen position and text of each row. */
+void FUN_0022d1a8(BibleDevilWork *work)
+{
+    if (work->count == 0)
+        return;
+    s32 first = FUN_0029e924(work->list);
+    s32 rows = rangeLimitMin(work->list);
+    if (first == DAT_0043d9cc)
+        return;
+    DAT_0043d9cc = first;
+    for (s32 i = 0; i < rows; i++) {
+        u32 color = BIBLE_COLOR_NONE;
+        u16 devilId = work->entries[first + i].devilId;
+        bool perDevil = work->mode == 0;
+        const BibleDevilEntry *entry = &work->entries[FUN_0029e924(work->list) + i];
+        u32 value = bibleStatOf(entry, perDevil, work->column);
+        if (work->mode == 1 && work->column == 1) {
+            entry = &work->entries[FUN_0029e924(work->list) + i];
+            u32 compare = 0;
+            if (!perDevil) {
+                compare = entry->statA;
+            } else {
+                DevilRecordStat *record = devilGetRecord(entry->devilId);
+                if (entry->devilId != 0)
+                    compare = record->level;
+            }
+            if (value > compare)
+                color = BIBLE_COLOR_HIGHER;
+            if (value < compare)
+                color = BIBLE_COLOR_LOWER;
+        }
+        g_bibleDevilRows.value[i] = value;
+        g_bibleDevilRows.color[i] = color;
+
+        u32 textColor = BIBLE_COLOR_NONE;
+        BibleLayoutPoint *label = FUN_002bf4f0(work->layout, i + 0x42F);
+        s32 labelX = label->x;
+        s32 labelY = label->y;
+        u32 shown = FUN_0029ce60(devilId, work->column, work->mode != 0);
+        if (work->mode == 1) {
+            u32 baseline = FUN_0029ce60(devilId, 0, work->mode != 0);
+            if (shown < baseline)
+                textColor = BIBLE_COLOR_LOWER;
+            if (baseline < shown)
+                textColor = BIBLE_COLOR_HIGHER;
+        }
+        BibleLayoutPoint *value2 = FUN_002bf4f0(work->layout, 0x4C6);
+        g_bibleDevilRows.x[i] = value2->x + labelX;
+        g_bibleDevilRows.y[i] = value2->y + labelY;
+        textFormatBuffer(g_bibleDevilRows.text[i], "%d", shown);
+        g_bibleDevilRows.textColor[i] = textColor;
+    }
 }
 
 } /* extern "C" */

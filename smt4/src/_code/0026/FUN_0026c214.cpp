@@ -1,168 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026c214` (_code @ 0x26c214, 0x244 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares one buttonHelpSetPreset call across the leaves and places the help-pin tail after it (field 0x17F0 via a literal-pool offset); ours reaches the tail with an add-immediate pair and emits extra nop hints. */
+#include "ui/PartyPanelState.h"
 
 extern "C" {
 
 int FUN_0029acb0(void);
-int FUN_002b8454(int, int, int, int);
-int buttonHelpSetPreset(unsigned int);
+int FUN_00282ccc(void);
+int FUN_00282e70(void);
+int FUN_0029dfa8(void);
+int FUN_002b8454(s32, s32, s32, s32);
+int buttonHelpSetPreset(u32 preset);
+int buttonHelpGetEntryValue(u32 entry);
+int campCecIsActive(void);
+int gameFlagIsSet(u32 flag);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern PartyPanelState *g_partyPanel;
 
-extern int g_partyPanel; /* 0x43dcf0 */
+#define PARTY_MODE_FIELD 0xC
+#define PARTY_MODE_DIALOG 0x10
+#define GAME_FLAG_PARTY_HELP_VARIANT 0x401
 
-extern int campCecIsActive(void);
-extern int FUN_00282ccc(void);
-extern int FUN_00282e70(void);
-extern int buttonHelpGetEntryValue(unsigned int);
-/* Supplied declaration required: FUN_0029acb0. */
-extern int FUN_0029dfa8(void);
-/* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern int gameFlagIsSet(unsigned int);
-
-
+/* Chooses the button-help preset for the party panel from its mode and which side the cursor is
+ * on, then keeps the help window entry in the matching state. */
 void FUN_0026c214(void)
-
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = g_partyPanel;
-  FUN_0029acb0();
-  temp_v0 = *(unsigned char *)(temp_v5 + 0x66c);
-  temp_v1 = 1;
-  if ((temp_v0 < 2) || ((temp_v0 == 0xc || temp_v0 == 0xd) || temp_v0 == 0xe)) {
-    temp_v1 = 0;
-  }
-  temp_v2 = FUN_00282e70();
-  temp_v3 = FUN_00282ccc();
-  if (temp_v2 != 0) {
-    if (temp_v1) {
-      if (*(char *)(temp_v5 + 0x66c) != '\x10') {
-        if (*(char *)(temp_v5 + 0x42) == '\0') {
-          temp_v4 = 0x1d;
+    PartyPanelState *panel = g_partyPanel;
+    FUN_0029acb0();
+    u8 mode = panel->panelState;
+    bool plain = true;
+    if (mode == 0 || mode == 1 || mode == 0xC || mode == 0xD || mode == 0xE) {
+        plain = false;
+    }
+    s32 a = FUN_00282e70();
+    s32 b = FUN_00282ccc();
+    u32 preset;
+
+    if (a != 0) {
+        if (plain) {
+            if (panel->panelState != PARTY_MODE_DIALOG) {
+                preset = panel->unk42 != 0 ? 0x1E : 0x1D;
+            } else {
+                preset = panel->unk42 != 0 ? 0xB8 : 0xB7;
+            }
+        } else if (panel->panelState == PARTY_MODE_FIELD && gameFlagIsSet(GAME_FLAG_PARTY_HELP_VARIANT) != 0) {
+            preset = panel->unk42 != 0 ? 0xBF : 0xBE;
+        } else {
+            preset = panel->unk42 != 0 ? 0x1C : 0x1B;
         }
-        else {
-          temp_v4 = 0x1e;
+        buttonHelpSetPreset(preset);
+    } else if (b < 0) {
+        if (plain) {
+            if (panel->panelState != PARTY_MODE_DIALOG) {
+                preset = panel->unk42 != 0 ? 4 : 3;
+            } else {
+                preset = panel->unk42 != 0 ? 0xBB : 0xBA;
+            }
+        } else if (panel->panelState == PARTY_MODE_FIELD && gameFlagIsSet(GAME_FLAG_PARTY_HELP_VARIANT) != 0) {
+            preset = panel->unk42 != 0 ? 0xC3 : 0xC2;
+        } else {
+            preset = panel->unk42 != 0 ? 0x26 : 0x25;
         }
-      }
-      else if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xb7;
-      }
-      else {
-        temp_v4 = 0xb8;
-      }
-    }
-    else if ((*(char *)(temp_v5 + 0x66c) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xbe;
-      }
-      else {
-        temp_v4 = 0xbf;
-      }
-    }
-    else if (*(char *)(temp_v5 + 0x42) == '\0') {
-      temp_v4 = 0x1b;
-    }
-    else {
-      temp_v4 = 0x1c;
-    }
-  }
-  else if (temp_v3 < 0) {
-    if (temp_v1) {
-      if (*(char *)(temp_v5 + 0x66c) != '\x10') {
-        if (*(char *)(temp_v5 + 0x42) == '\0') {
-          temp_v4 = 3;
+        buttonHelpSetPreset(preset);
+    } else if (plain) {
+        if (panel->panelState != PARTY_MODE_DIALOG) {
+            preset = panel->unk42 != 0 ? 0x24 : 0x23;
+        } else {
+            preset = panel->unk42 != 0 ? 0xB6 : 0xB5;
         }
-        else {
-          temp_v4 = 4;
+        buttonHelpSetPreset(preset);
+    } else {
+        if (panel->panelState != PARTY_MODE_FIELD) {
+            preset = panel->unk42 != 0 ? 0x22 : 0x21;
+        } else {
+            preset = panel->unk42 != 0 ? 0xC1 : 0xC0;
         }
-      }
-      else if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xba;
-      }
-      else {
-        temp_v4 = 0xbb;
-      }
+        buttonHelpSetPreset(preset);
+        if (FUN_0029dfa8() != 0 && campCecIsActive() != 0) {
+            buttonHelpSetPreset(panel->unk42 == 0 ? 0xE3 : 0xCC);
+        }
     }
-    else if ((*(char *)(temp_v5 + 0x66c) == '\f') && (temp_v2 = gameFlagIsSet(0x401), temp_v2 != 0)) {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0xc2;
-      }
-      else {
-        temp_v4 = 0xc3;
-      }
+    if (panel->unk17F0 != 0) {
+        FUN_002b8454(3, 0x12, 0, 1);
+        return;
     }
-    else if (*(char *)(temp_v5 + 0x42) == '\0') {
-      temp_v4 = 0x25;
+    if (buttonHelpGetEntryValue(3) != 0) {
+        return;
     }
-    else {
-      temp_v4 = 0x26;
-    }
-  }
-  else if (temp_v1) {
-    if (*(char *)(temp_v5 + 0x66c) != '\x10') {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0x23;
-      }
-      else {
-        temp_v4 = 0x24;
-      }
-    }
-    else if (*(char *)(temp_v5 + 0x42) == '\0') {
-      temp_v4 = 0xb5;
-    }
-    else {
-      temp_v4 = 0xb6;
-    }
-  }
-  else {
-    if (*(char *)(temp_v5 + 0x66c) != '\f') {
-      if (*(char *)(temp_v5 + 0x42) == '\0') {
-        temp_v4 = 0x21;
-      }
-      else {
-        temp_v4 = 0x22;
-      }
-    }
-    else if (*(char *)(temp_v5 + 0x42) == '\0') {
-      temp_v4 = 0xc0;
-    }
-    else {
-      temp_v4 = 0xc1;
-    }
-    buttonHelpSetPreset(temp_v4);
-    temp_v2 = FUN_0029dfa8();
-    if ((temp_v2 == 0) || (temp_v2 = campCecIsActive(), temp_v2 == 0)) goto LAB_0026c400;
-    if (*(char *)(temp_v5 + 0x42) == '\0') {
-      temp_v4 = 0xe3;
-    }
-    else {
-      temp_v4 = 0xcc;
-    }
-  }
-  buttonHelpSetPreset(temp_v4);
-LAB_0026c400:
-  if (*(char *)(temp_v5 + 0x17f0) != '\0') {
-    FUN_002b8454(3,0x12,0,1);
-    return;
-  }
-  temp_v5 = buttonHelpGetEntryValue(3);
-  if (temp_v5 != 0) {
-    return;
-  }
-  FUN_002b8454(3,3,0xb,1);
-  return;
+    FUN_002b8454(3, 3, 0xB, 1);
 }
 
 } /* extern "C" */

@@ -1,115 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0044b5f4` (_code @ 0x44b5f4, 0x224 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the three phase lookups schedule with different register pressure than retail (same situation as FUN_00236350: extra saves of r8/r9 and d8-d9, table loads not paired as retail's); retail also copies the position and translation as 3-word struct copies (ldm/stm) where this writes float stores. */
+#include "shard/W6_W6Match6_PhaseTrig.h"
+
+/* A node transform: three rows of rotation plus translation, then the node position and the dirty flags. */
+struct EulerTransform {
+    /* 0x00 */ f32 rotation00, rotation01, rotation02;
+    /* 0x0C */ f32 translationX;
+    /* 0x10 */ f32 rotation10, rotation11, rotation12;
+    /* 0x1C */ f32 translationY;
+    /* 0x20 */ f32 rotation20, rotation21, rotation22;
+    /* 0x2C */ f32 translationZ;
+    /* 0x30 */ f32 position[3];
+    /* 0x3C */ u32 flags;
+};
+
+/* Description of a placement: position, XYZ Euler angles (radians) and translation. */
+struct EulerPlacement {
+    /* 0x00 */ f32 position[3];
+    /* 0x0C */ f32 angles[3];
+    /* 0x18 */ f32 translation[3];
+};
 
 extern "C" {
+extern const PhaseTrigEntry DAT_00536d14[];
 
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int DAT_00536d14; /* 0x536d14 */
-extern unsigned int DAT_00536d18; /* 0x536d18 */
-extern unsigned int DAT_00536d1c; /* 0x536d1c */
-extern unsigned int DAT_00536d20; /* 0x536d20 */
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Builds a rotation matrix from XYZ Euler angles and sets its translation and position. */
+void FUN_0044b5f4(EulerTransform *matrix, const EulerPlacement *placement)
 {
-    return value < (float)0 ? -value : value;
+    matrix->position[0] = placement->position[0];
+    matrix->position[1] = placement->position[1];
+    matrix->position[2] = placement->position[2];
+
+    f32 xPhase = placement->angles[0] * 40.743664f;
+    f32 yPhase = placement->angles[1] * 40.743664f;
+    f32 zPhase = placement->angles[2] * 40.743664f;
+    bool xNegative = xPhase < 0.0f;
+    f32 xMagnitude = fabsf(xPhase);
+    bool yNegative = yPhase < 0.0f;
+    f32 yMagnitude = fabsf(yPhase);
+    bool zNegative = zPhase < 0.0f;
+    f32 zMagnitude = fabsf(zPhase);
+    xMagnitude = wrapPhase(xMagnitude);
+    yMagnitude = wrapPhase(yMagnitude);
+    zMagnitude = wrapPhase(zMagnitude);
+    u16 xWhole = (u32)xMagnitude;
+    u16 yWhole = (u32)yMagnitude;
+    u16 zWhole = (u32)zMagnitude;
+    const PhaseTrigEntry *xEntry = &DAT_00536d14[(u8)xWhole];
+    const PhaseTrigEntry *yEntry = &DAT_00536d14[(u8)yWhole];
+    const PhaseTrigEntry *zEntry = &DAT_00536d14[(u8)zWhole];
+    f32 xFraction = xMagnitude - (f32)xWhole;
+    f32 yFraction = yMagnitude - (f32)yWhole;
+    f32 zFraction = zMagnitude - (f32)zWhole;
+    PhaseSinCos x, y, z;
+    x.sine = xEntry->sine + xFraction * xEntry->sineDelta;
+    x.cosine = xEntry->cosine + xFraction * xEntry->cosineDelta;
+    y.sine = yEntry->sine + yFraction * yEntry->sineDelta;
+    y.cosine = yEntry->cosine + yFraction * yEntry->cosineDelta;
+    z.sine = zEntry->sine + zFraction * zEntry->sineDelta;
+    z.cosine = zEntry->cosine + zFraction * zEntry->cosineDelta;
+    if (xNegative)
+        x.sine = -x.sine;
+    if (yNegative)
+        y.sine = -y.sine;
+    if (zNegative)
+        z.sine = -z.sine;
+    matrix->rotation20 = -y.sine;
+    matrix->rotation00 = z.cosine * y.cosine;
+    matrix->rotation10 = z.sine * y.cosine;
+    matrix->rotation01 = x.sine * z.cosine * y.sine - x.cosine * z.sine;
+    matrix->rotation12 = x.cosine * z.sine * y.sine - x.sine * z.cosine;
+    matrix->rotation02 = x.sine * z.sine + x.cosine * z.cosine * y.sine;
+    matrix->rotation11 = x.cosine * z.cosine + x.sine * z.sine * y.sine;
+    matrix->rotation21 = x.sine * y.cosine;
+    matrix->rotation22 = x.cosine * y.cosine;
+    matrix->translationX = 0.0f;
+    matrix->translationY = 0.0f;
+    matrix->translationZ = 0.0f;
+    matrix->translationX = placement->translation[0];
+    matrix->translationY = placement->translation[1];
+    matrix->translationZ = placement->translation[2];
+    matrix->flags |= 0x800;
 }
-#endif
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-
-
-void FUN_0044b5f4(float *param_1,float *param_2)
-
-{
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int temp_v0;
-  float temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  float temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  
-  temp_v1 = param_2[1];
-  temp_v4 = param_2[2];
-  param_1[0xc] = *param_2;
-  param_1[0xd] = temp_v1;
-  param_1[0xe] = temp_v4;
-  temp_v4 = romwright_fabs_4(param_2[4] * 40.743664f);
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= param_2[5] * 40.743664f) << 0x1d);
-  temp_v5 = romwright_fabs_4(param_2[5] * 40.743664f);
-  for (temp_v1 = romwright_fabs_4(param_2[3] * 40.743664f); (int)temp_v1 >= 0x47800000; temp_v1 = temp_v1 - 65536.0f) {
-  }
-  for (; (int)temp_v4 >= 0x47800000; temp_v4 = temp_v4 - 65536.0f) {
-  }
-  for (; (int)temp_v5 >= 0x47800000; temp_v5 = temp_v5 - 65536.0f) {
-  }
-  temp_v6 = VectorFloatToUnsigned(temp_v1,3);
-  temp_v7 = VectorFloatToUnsigned(temp_v4,3);
-  temp_v8 = VectorFloatToUnsigned(temp_v5,3);
-  temp_v2 = temp_v7;
-  temp_v12 = (float)VectorUnsignedToFloat(temp_v7 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v7 = temp_v6 & 0xff;
-  temp_v3 = temp_v8;
-  temp_v9 = (float)VectorUnsignedToFloat(temp_v6 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v8 & 0xffff,(unsigned char)(temp_v0 >> 0x16) & 3);
-  temp_v13 = (float)(&DAT_00536d14)[temp_v7 * 4] + (temp_v1 - temp_v9) * (float)(&DAT_00536d1c)[temp_v7 * 4];
-  temp_v10 = (float)(&DAT_00536d14)[temp_v2 * 4] + (temp_v4 - temp_v12) * (float)(&DAT_00536d1c)[temp_v2 * 4];
-  temp_v14 = (float)(&DAT_00536d18)[temp_v7 * 4] + (temp_v1 - temp_v9) * (float)(&DAT_00536d20)[temp_v7 * 4];
-  temp_v9 = (float)(&DAT_00536d18)[temp_v2 * 4] + (temp_v4 - temp_v12) * (float)(&DAT_00536d20)[temp_v2 * 4];
-  temp_v4 = (float)(&DAT_00536d14)[temp_v3 * 4] + (temp_v5 - temp_v11) * (float)(&DAT_00536d1c)[temp_v3 * 4];
-  temp_v1 = (float)(&DAT_00536d18)[temp_v3 * 4] + (temp_v5 - temp_v11) * (float)(&DAT_00536d20)[temp_v3 * 4];
-  if (param_2[3] * 40.743664f < 0.0f) {
-    temp_v13 = -temp_v13;
-  }
-  if (param_2[4] * 40.743664f < 0.0f) {
-    temp_v10 = -temp_v10;
-  }
-  if (!romwright_subpiece_4_1_0(temp_v0 >> 0x1d,0)) {
-    temp_v4 = -temp_v4;
-  }
-  param_1[8] = -temp_v10;
-  *param_1 = temp_v1 * temp_v9;
-  param_1[4] = temp_v4 * temp_v9;
-  param_1[9] = temp_v13 * temp_v9;
-  param_1[10] = temp_v14 * temp_v9;
-  param_1[1] = temp_v13 * temp_v1 * temp_v10 - temp_v14 * temp_v4;
-  param_1[6] = temp_v14 * temp_v4 * temp_v10 - temp_v13 * temp_v1;
-  param_1[2] = temp_v13 * temp_v4 + temp_v14 * temp_v1 * temp_v10;
-  param_1[5] = temp_v14 * temp_v1 + temp_v13 * temp_v4 * temp_v10;
-  param_1[3] = 0.0f;
-  param_1[7] = 0.0f;
-  param_1[0xb] = 0.0f;
-  temp_v1 = param_2[6];
-  temp_v4 = param_2[7];
-  param_1[0xb] = param_2[8];
-  param_1[3] = temp_v1;
-  param_1[7] = temp_v4;
-  param_1[0xf] = (float)((unsigned int)param_1[0xf] | 0x800);
-  return;
 }
-
-} /* extern "C" */

@@ -1,137 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00194b14` (_code @ 0x194b14, 0x3b4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: draws the camp play log list rows (cursor frame, entry name and its value as text, number or play time h/m); written from the decompilation, argument evaluation and the float conversions of the text positions not compared with retail */
+#include "gamedata/DataTable.h"
+
+struct PlayLogFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;
+};
+
+struct PlayLogEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ char name[0x35];
+    /* 0x37 */ char unit[8];          /* the unit suffix; "0" means none */
+    /* 0x3F */ u8 kind;               /* 1: play time in seconds */
+};
+
+struct PlayLogRow {
+    /* 0x00 */ u8 data[0x8C];
+};
+
+/* The list widget sits at 0x2DC of the play log; its scroll state follows. */
+struct PlayLogView {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ PlayLogRow rows[5];
+    /* 0x2DC */ u8 list[0x6C];
+    /* 0x348 */ s16 barA;
+    /* 0x34A */ s16 barB;
+    /* 0x34C */ s16 barC;
+    /* 0x34E */ u8 unk34E[0xE];
+    /* 0x35C */ u32 values[0x40];        /* indexed by entry id */
+    /* 0x45C */ u8 unk45C[1];
+};
+
+#define PLAYLOG_FONT_TABLE 0x30
+#define PLAYLOG_ENTRY_TABLE 0x37
+#define PLAYLOG_ENTRY_SIZE 0x40
+#define PLAYLOG_IDS_OFFSET 0x424
+#define PLAYLOG_NAME_COLOR 0xE09800FF
+#define PLAYLOG_VALUE_COLOR 0xFF
+#define PLAYLOG_SECONDS_PER_HOUR 0xE10
 
 extern "C" {
+extern PlayLogView *g_playLog;
 
-int FUN_002907c4(...);
-int FUN_00290994(int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_002b6dd8(...);
-int FUN_002be5a4(...);
-int textFormatBuffer(...);
-int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of void: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spC0; /* 0xc0: local_c0 */
-} void_stack;
-
-extern unsigned char LAB_00194e60; /* 0x194e60 */
-extern unsigned char LAB_00194e68; /* 0x194e68 */
-extern unsigned char LAB_00194e78; /* 0x194e78 */
-extern int g_playLog; /* 0x43dd08 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002907c4. */
-/* Supplied declaration required: FUN_00290994. */
-extern int FUN_0029d644(int);
-extern int FUN_0029efc0(int);
-/* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
+s32 FUN_0029d644(void *list);
+s32 FUN_0029efc0(void *list);
+void FUN_00290994(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s32 s3, s32 s4, s32 s5, s32 s6,
+                  s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
+void FUN_002907c4(char *out, u32 value);
+void FUN_002bf380(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
+PlayLogFrame *FUN_002bf4f8(u32 table, u32 index);
+s32 vec2GetXInt(void *row);
+void textFormatBuffer(char *out, const char *format, ...);
+void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y);
+s32 FUN_002b6dd8(const char *text, u32 font);
 
 void FUN_00194b14(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char *puVar9;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned int in_fpscr;
-  unsigned char temp_v10 [64];
-  unsigned char temp_v11 [16];
-  unsigned char temp_v12 [28];
-  
-  temp_v0 = g_playLog;
-  temp_v8 = 0;
-  temp_v1 = FUN_0029d644(g_playLog + 0x2dc);
-  if (0 < temp_v1) {
-    do {
-      temp_v1 = vec2GetXInt(temp_v0 + temp_v8 * 0x8c + 0x20);
-      if (temp_v8 == 0) {
-        FUN_002bf380(2,0x30,0,temp_v1,0,0xb);
-      }
-      temp_v2 = FUN_0029d644(temp_v0 + 0x2dc);
-      if (temp_v2 - 1 == temp_v8) {
-        FUN_00290994(temp_v0 + 0x2dc,temp_v1,0,0x30,7,8,9,3,5,4,6,(int)*(short *)(temp_v0 + 0x34c),
-                     (int)*(short *)(temp_v0 + 0x348),(int)*(short *)(temp_v0 + 0x34a),0xb,0);
-      }
-      temp_v2 = FUN_002bf4f8(0x30,temp_v8 + 0x15);
-      FUN_002bf380(2,0x30,1,*(short *)(temp_v2 + 8) + temp_v1,(int)*(short *)(temp_v2 + 10),0xb);
-      temp_v3 = FUN_0029efc0(temp_v0 + 0x2dc);
-      temp_v9 = (unsigned int)*(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424);
-      temp_v4 = dataTableGet(0x37,0);
-      temp_v3 = dataTableGetEntries();
-      temp_v5 = dataTableGetCount(temp_v4);
-      if ((temp_v9 < temp_v5) && (temp_v3 = temp_v3 + temp_v9 * 0x40, temp_v3 != 0)) {
-        temp_v6 = FUN_002bf4f8(0x30,0x13);
-        textFormatBuffer(temp_v10,&LAB_00194e60,temp_v3 + 2);
-        VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10),
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(2,0xe09800ff,temp_v10,(int)*(short *)(temp_v2 + 10));
-        temp_v6 = FUN_002bf4f8(0x30,0x14);
-        if (*(char *)(temp_v3 + 0x3f) != '\x01') {
-          if (*(char *)(temp_v3 + 0x37) != '0') {
-            temp_v7 = FUN_0029efc0(temp_v0 + 0x2dc);
-            FUN_002907c4(temp_v11,
-                         *(unsigned int *)
-                          (temp_v0 + *(short *)(temp_v0 + (temp_v7 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
-            textFormatBuffer(temp_v10,&LAB_00194e68,temp_v11,temp_v3 + 0x37);
-          }
-          else {
-            temp_v3 = FUN_0029efc0(temp_v0 + 0x2dc);
-            FUN_002907c4(temp_v11,
-                         *(unsigned int *)
-                          (temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
-            textFormatBuffer(temp_v10,&LAB_00194e60,temp_v11);
-          }
+    PlayLogView *log = g_playLog;
+    for (s32 row = 0; row < FUN_0029d644(log->list); row++) {
+        s32 x = vec2GetXInt(&log->rows[row]);
+        if (row == 0)
+            FUN_002bf380(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
+        if (FUN_0029d644(log->list) - 1 == row) {
+            FUN_00290994(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
         }
-        else {
-          temp_v3 = FUN_0029efc0(temp_v0 + 0x2dc);
-          temp_v5 = *(unsigned int *)(temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c);
-          temp_v9 = temp_v5 % 0xe10;
-          FUN_002907c4(temp_v11,temp_v5 / 0xe10,temp_v9 * -0x77777777);
-          FUN_002907c4(temp_v12,temp_v9 / 0x3c);
-          textFormatBuffer(temp_v10,&LAB_00194e78,temp_v11,temp_v12);
+        PlayLogFrame *frame = FUN_002bf4f8(PLAYLOG_FONT_TABLE, row + 0x15);
+        FUN_002bf380(2, PLAYLOG_FONT_TABLE, 1, frame->x + x, frame->y, 0xB);
+
+        u32 entryId = *(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2);
+        DataTableView<PlayLogEntry> table(PLAYLOG_ENTRY_TABLE, 0);
+        PlayLogEntry *entry = NULL;
+        if (entryId < table.count)
+            entry = reinterpret_cast<PlayLogEntry *>(reinterpret_cast<u8 *>(table.entries) + entryId * PLAYLOG_ENTRY_SIZE);
+        if (entry == NULL)
+            continue;
+
+        PlayLogFrame *nameFrame = FUN_002bf4f8(PLAYLOG_FONT_TABLE, 0x13);
+        char text[64];
+        textFormatBuffer(text, "%s", entry->name);
+        FUN_002be5a4(2, PLAYLOG_NAME_COLOR, text, (f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y));
+
+        PlayLogFrame *valueFrame = FUN_002bf4f8(PLAYLOG_FONT_TABLE, 0x14);
+        char first[16];
+        char second[28];
+        if (entry->kind != 1) {
+            u32 value = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2)];
+            if (entry->unit[0] != '0') {
+                FUN_002907c4(first, value);
+                textFormatBuffer(text, "%s\x81@%s", first, entry->unit);
+            } else {
+                FUN_002907c4(first, value);
+                textFormatBuffer(text, "%s", first);
+            }
+        } else {
+            u32 seconds = log->values[*(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2)];
+            u32 rest = seconds % PLAYLOG_SECONDS_PER_HOUR;
+            FUN_002907c4(first, seconds / PLAYLOG_SECONDS_PER_HOUR);
+            FUN_002907c4(second, rest / 60);
+            textFormatBuffer(text, "%s\x82g\x81@%s\x82l", first, second);
         }
-        puVar9 = temp_v10;
-        FUN_002b6dd8(puVar9,2);
-        VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10),
-                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v2 + 8) +
-                            temp_v1 + (((int)*(short *)(temp_v6 + 8) + (int)**(short **)(temp_v6 + 0xc)) -
-                                    (int)puVar9),(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(2,0xff,temp_v10,(int)*(short *)(temp_v2 + 8));
-      }
-      temp_v8 = temp_v8 + 1;
-      temp_v1 = FUN_0029d644(temp_v0 + 0x2dc);
-    } while (temp_v8 < temp_v1);
-  }
-  return;
+        s32 width = FUN_002b6dd8(text, 2);
+        FUN_002be5a4(2, PLAYLOG_VALUE_COLOR, text,
+                     (f32)(frame->x + x + (valueFrame->x + *valueFrame->size - width)),
+                     (f32)(frame->y + valueFrame->y));
+    }
 }
 
 } /* extern "C" */

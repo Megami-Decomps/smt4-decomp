@@ -1,191 +1,147 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033adf8` (_code @ 0x33adf8, 0x2ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail call sites compiles (173 vs ~180 rows); scenario copy loops and register allocation differ from retail */
+#include "common.h"
+
+// Row of the debug scenario table (0x74 bytes): the state the game is set to.
+struct ScenarioRow {
+    u16 mapId;              // 0x00
+    u16 spawnId;            // 0x02
+    u32 macca;              // 0x04
+    u16 look[7];            // 0x08: player appearance words
+    s16 hp;                 // 0x16
+    s16 mp;                 // 0x18
+    u16 stats[5];           // 0x1a
+    u16 itemIds[8];         // 0x24
+    u8 playerKind;          // 0x34
+    u8 unk35;
+    u16 unk36;
+    u16 skills[8];          // 0x38
+    u16 partyIds[3];        // 0x48
+    u16 slotIds[8];         // 0x4e
+    u16 unk5e_[1];          // 0x5e
+    struct { u16 id; u16 count; } stock[5];   // 0x60
+};
+
+struct UnitRecord {
+    u8 unk00[0x46];
+    u16 id;                 // 0x46
+};
+
+struct PlayerData {
+    u8 unk00[0x12];
+    u16 stats[5];           // 0x12
+    u16 hp;                 // 0x1c
+    u16 mp;                 // 0x1e
+    u8 unk20[0x0a];
+    u16 hpMax;              // 0x2a
+    u16 mpMax;              // 0x2c
+};
+
+struct SlotTable {
+    u32 macca;              // 0x00
+    u8 unk04[0x90f0 - 4];
+    u8 slotClear[0x18];     // 0x90f0
+    u8 party[3];            // 0x9108
+    u8 slotLimit;           // 0x910b
+};
+
+struct BattleMainBlock {
+    u8 unk0000[0xb8];
+    u32 mapId;              // 0xb8
+    u32 spawnId;            // 0xbc
+    u8 unk00c0[0x223c - 0xc0];
+    s32 scenarioFile;       // 0x223c
+    u8 unk2240[0x44a0 - 0x2240];
+    u32 flags;              // 0x44a0
+};
 
 extern "C" {
 
-int FUN_001dd930(void);
-int playerSkillInsertFirstFree(void);
-int FUN_00295a18(int);
-int FUN_00299370(int);
-int FUN_0029c1c8(int, int, int);
-int libc_strcpy(unsigned char [20], unsigned int);
-int rt_memclr(unsigned int, int);
-int __aeabi_memset4(unsigned int *, int, unsigned int);
-int FUN_00333ef8(int, unsigned char [20], unsigned short *);
-int FUN_00334058(void);
+void FUN_001dd930(void);
+void playerSkillInsertFirstFree(u32 skill);
+void FUN_00295a18(u32 id, u32 count);
+void FUN_00299370(s32 arg);
+void FUN_0029c1c8(s32 slot, u32 id, s32 arg);
+void libc_strcpy(char* dst, const char* src);
+void rt_memclr(void* block, u32 size);
+void __aeabi_memset4(void* block, u32 size, s32 value);
+void FUN_00333ef8(s32 kind, char* name, u16* look);
+void FUN_00334058(u32 id);
+u8 gameSlotFindByCategory(UnitRecord* record);
+void* FUN_00282be4(void);
+UnitRecord* gameGetUnitRecord(s32 index);
+SlotTable* gameGetSlotTable(void);
+u32 dataTableFileGetTable(s32 file, u32 arg);
+PlayerData* gameGetPlayerData(void);
+const char* gameGetPlayerName(void);
+s32 dataTableGetCount(u32 table);
+ScenarioRow* dataTableGetEntries(u32 table);
 
-typedef struct fn_0033adf8_arg0 fn_0033adf8_arg0;
-struct fn_0033adf8_arg0 {
-    unsigned char pad_0x0[0xb8];
-    uint field_0xb8; /* +0xb8 */
-    uint field_0xbc; /* +0xbc */
-    unsigned char pad_0xc0[0x217c];
-    unsigned char field_0x223c; /* +0x223c */
-    unsigned char pad_0x223d[0x2263];
-    uint field_0x44a0; /* +0x44a0 */
-};
-
-/* stack frame of param_2: 7 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned short sp3C; /* 0x3c: local_3c */
-    unsigned short sp3E; /* 0x3e: local_3e */
-    unsigned short sp40; /* 0x40: local_40 */
-    unsigned short sp42; /* 0x42: local_42 */
-    unsigned short sp44; /* 0x44: local_44 */
-    unsigned short sp46; /* 0x46: local_46 */
-    unsigned short sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_001dd930. */
-extern unsigned char gameSlotFindByCategory(void);
-extern unsigned int FUN_00282be4(void);
-/* Supplied declaration required: playerSkillInsertFirstFree. */
-/* Supplied declaration required: FUN_00295a18. */
-/* Supplied declaration required: FUN_00299370. */
-/* Supplied declaration required: FUN_0029c1c8. */
-extern int gameGetUnitRecord(int);
-extern unsigned int *gameGetSlotTable(void);
-extern unsigned int dataTableFileGetTable(int, unsigned int);
-extern int gameGetPlayerData(void);
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: libc_strcpy. */
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(unsigned int);
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00333ef8. */
-/* Supplied declaration required: FUN_00334058. */
-
-
-void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
-
+// Debug: loads scenario row `row` into the running game (player, party, skills, stock).
+void FUN_0033adf8(BattleMainBlock* battle, u32 row)
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned short *puVar10;
-  unsigned short temp_v10;
-  unsigned short temp_v11;
-  unsigned short temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned short temp_v15;
-  unsigned short temp_v16;
-  unsigned char temp_v17 [20];
-  
-  if ((param_1->field_0x44a0 & 0x40000) != 0 && param_2 != 0) {
-    if (*(int *)&param_1->field_0x223c == 0) {
-      temp_v9 = 0;
+    if ((battle->flags & 0x40000) == 0 || row == 0) return;
+
+    u32 table = 0;
+    if (battle->scenarioFile != 0) table = dataTableFileGetTable(battle->scenarioFile, 0);
+    ScenarioRow* rows = dataTableGetEntries(table);
+    s32 count = dataTableGetCount(table);
+    if (row > (u32)(count - 1)) return;
+    ScenarioRow* scenario = &rows[row];
+
+    SlotTable* slots = gameGetSlotTable();
+    char name[20];
+    libc_strcpy(name, gameGetPlayerName());
+    u16 look[7];
+    for (s32 i = 0; i < 7; i++) look[i] = scenario->look[i];
+    FUN_00333ef8((s8)scenario->playerKind, name, look);
+
+    PlayerData* player = gameGetPlayerData();
+    for (s32 i = 0; i < 5; i++) player->stats[i] = scenario->stats[i];
+    FUN_00299370(0);
+    if (scenario->hp > 0) {
+        player->hp = scenario->hp;
+        player->hpMax = scenario->hp;
     }
-    else {
-      temp_v9 = dataTableFileGetTable(*(int *)&param_1->field_0x223c,0);
+    if (scenario->mp > 0) {
+        player->mp = scenario->mp;
+        player->mpMax = scenario->mp;
     }
-    temp_v2 = dataTableGetEntries(temp_v9);
-    temp_v3 = dataTableGetCount(temp_v9);
-    if (param_2 <= temp_v3 - 1U) {
-      puVar10 = (unsigned short *)(temp_v2 + param_2 * 0x74);
-      puVar5 = (unsigned int *)gameGetSlotTable();
-      temp_v3 = 0;
-      temp_v9 = gameGetPlayerName();
-      libc_strcpy(temp_v17,temp_v9);
-      temp_v10 = puVar10[4];
-      temp_v11 = puVar10[5];
-      temp_v12 = puVar10[6];
-      temp_v13 = puVar10[7];
-      temp_v14 = puVar10[8];
-      temp_v15 = puVar10[9];
-      temp_v16 = puVar10[10];
-      FUN_00333ef8((char)puVar10[0x1a],temp_v17,&temp_v10);
-      temp_v2 = gameGetPlayerData();
-      *(unsigned short *)(temp_v2 + 0x12) = puVar10[0xd];
-      *(unsigned short *)(temp_v2 + 0x14) = puVar10[0xe];
-      *(unsigned short *)(temp_v2 + 0x16) = puVar10[0xf];
-      *(unsigned short *)(temp_v2 + 0x18) = puVar10[0x10];
-      *(unsigned short *)(temp_v2 + 0x1a) = puVar10[0x11];
-      FUN_00299370(0);
-      temp_v0 = puVar10[0xb];
-      if (0 < (short)temp_v0) {
-        *(unsigned short *)(temp_v2 + 0x1c) = temp_v0;
-        *(unsigned short *)(temp_v2 + 0x2a) = temp_v0;
-      }
-      temp_v0 = puVar10[0xc];
-      if (0 < (short)temp_v0) {
-        *(unsigned short *)(temp_v2 + 0x1e) = temp_v0;
-        *(unsigned short *)(temp_v2 + 0x2c) = temp_v0;
-      }
-      do {
-        if (puVar10[temp_v3 + 0x12] != 0) {
-          FUN_00334058();
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 8);
-      __aeabi_memset4(puVar5 + 0x243c,0x18,0xffffffff);
-      *(unsigned short *)(puVar5 + 0x2442) = 0xffff;
-      *(unsigned char *)((int)puVar5 + 0x910a) = 0xff;
-      temp_v2 = 0;
-      temp_v3 = 0;
-      *(unsigned char *)((int)puVar5 + 0x910b) = 8;
-      do {
-        if (puVar10[temp_v3 + 0x27] != 0) {
-          FUN_0029c1c8(temp_v3,puVar10[temp_v3 + 0x27],0);
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < (int)(unsigned int)*(unsigned char *)((int)puVar5 + 0x910b));
-      temp_v3 = 0;
-      do {
-        if ((puVar10[temp_v3 + 0x24] != 0) && (temp_v8 = 0, *(char *)((int)puVar5 + 0x910b) != '\0')) {
-          do {
-            temp_v4 = gameGetUnitRecord(temp_v8);
-            if (*(unsigned short *)(temp_v4 + 0x46) == puVar10[temp_v3 + 0x24]) {
-              temp_v1 = gameSlotFindByCategory();
-              *(unsigned char *)((int)puVar5 + temp_v2 + 0x9108) = temp_v1;
-              temp_v2 = temp_v2 + 1;
-              break;
+    for (s32 i = 0; i < 8; i++) {
+        if (scenario->itemIds[i] != 0) FUN_00334058(scenario->itemIds[i]);
+    }
+
+    __aeabi_memset4(slots->slotClear, 0x18, -1);
+    slots->party[0] = 0xff;
+    slots->party[1] = 0xff;
+    slots->party[2] = 0xff;
+    slots->slotLimit = 8;
+    for (s32 i = 0; i < slots->slotLimit; i++) {
+        if (scenario->slotIds[i] != 0) FUN_0029c1c8(i, scenario->slotIds[i], 0);
+    }
+    s32 partyCount = 0;
+    for (s32 i = 0; i < 3; i++) {
+        if (scenario->partyIds[i] == 0) continue;
+        for (s32 slot = 0; slot < slots->slotLimit; slot++) {
+            if (gameGetUnitRecord(slot)->id == scenario->partyIds[i]) {
+                slots->party[partyCount] = gameSlotFindByCategory(gameGetUnitRecord(slot));
+                partyCount++;
+                break;
             }
-            temp_v8 = temp_v8 + 1;
-          } while (temp_v8 < (int)(unsigned int)*(unsigned char *)((int)puVar5 + 0x910b));
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 3);
-      temp_v9 = FUN_00282be4();
-      rt_memclr(temp_v9,0x104a);
-      temp_v2 = 0;
-      temp_v6 = temp_v5;
-      do {
-        temp_v0 = puVar10[temp_v2 * 2 + 0x30];
-        if (temp_v0 != 0) {
-          temp_v6 = (unsigned int)puVar10[temp_v2 * 2 + 0x31];
-        }
-        if (temp_v0 != 0 && temp_v6 != 0) {
-          FUN_00295a18(temp_v0);
-          temp_v6 = temp_v7;
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 5);
-      temp_v2 = 0;
-      do {
-        if (puVar10[temp_v2 + 0x1c] != 0) {
-          playerSkillInsertFirstFree();
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 8);
-      FUN_001dd930();
-      *puVar5 = *(unsigned int *)(puVar10 + 2);
-      param_1->field_0xb8 = (unsigned int)*puVar10;
-      param_1->field_0xbc = (unsigned int)puVar10[1];
     }
-  }
-  return;
+    rt_memclr(FUN_00282be4(), 0x104a);
+    for (s32 i = 0; i < 5; i++) {
+        if (scenario->stock[i].id != 0 && scenario->stock[i].count != 0) {
+            FUN_00295a18(scenario->stock[i].id, scenario->stock[i].count);
+        }
+    }
+    for (s32 i = 0; i < 8; i++) {
+        if (scenario->skills[i] != 0) playerSkillInsertFirstFree(scenario->skills[i]);
+    }
+    FUN_001dd930();
+    slots->macca = scenario->macca;
+    battle->mapId = scenario->mapId;
+    battle->spawnId = scenario->spawnId;
 }
 
 } /* extern "C" */

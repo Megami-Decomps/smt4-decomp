@@ -1,94 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cdd18` (_code @ 0x2cdd18, 0x2c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail writes each {frame = 0, state = N} pair with one stm from fresh constants and ends case 3/9 with its own inlined epilogue, and indexes the switch from 0; this build hoists the zero into r6, stores the pair with two str and subtracts 2 before the table. */
+#include "common.h"
+#include "ui/UiSpriteState.h"
+
+struct PanelTimer {
+    s32 frame; /* frames spent in the current state */
+    s32 state;
+};
+
+/* A panel of seven animated sprites driven by a small state machine. */
+struct SpritePanel {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ UiSpriteState sprites[7];
+    /* 0x3F4 */ PanelTimer timer;
+    /* 0x3FC */ u8 unk3FC[8];
+    /* 0x404 */ s32 countdown;
+};
+typedef char SpritePanelOffsets[sizeof(SpritePanel) == 0x408 ? 1 : -1];
 
 extern "C" {
-
-int FUN_00163aa4(int);
-int uiSpriteSelectAnim(int, int);
-int slotSetRequest(int, int, unsigned int);
-int FUN_00212204(int);
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_00163e84(unsigned int);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_00212204. */
-
-
-void FUN_002cdd18(int param_1)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  if (0 < *(int *)(param_1 + 0x3f8)) {
-    FUN_00163aa4(param_1 + 0x2dc);
-  }
-  switch(*(unsigned int *)(param_1 + 0x3f8)) {
-  case 2:
-    FUN_00163aa4(param_1 + 0x1c4);
-    temp_v0 = FUN_00163aa4(param_1 + 0x20);
-    if (((temp_v0 != 0) && (temp_v0 = FUN_00163aa4(param_1 + 0xac), temp_v0 != 0)) &&
-       (temp_v0 = FUN_00163aa4(param_1 + 0x138), temp_v0 != 0)) {
-      uiSpriteSelectAnim(param_1 + 0x20,3);
-      uiSpriteSelectAnim(param_1 + 0xac,3);
-      uiSpriteSelectAnim(param_1 + 0x1c4,3);
-      *(unsigned int *)(param_1 + 0x3f4) = 0;
-      *(unsigned int *)(param_1 + 0x3f8) = 3;
-    }
-    break;
-  case 3:
-    FUN_00163aa4(param_1 + 0x20);
-    FUN_00163aa4(param_1 + 0xac);
-    FUN_00163aa4(param_1 + 0x1c4);
-    if ((*(char *)(param_1 + 0xaa) == '\0') || (*(char *)(param_1 + 0x136) == '\0')) break;
-    *(unsigned char *)(param_1 + 0xa5) = 0;
-    *(unsigned char *)(param_1 + 0x131) = 0;
-    *(unsigned char *)(param_1 + 0x1bd) = 0;
-    *(unsigned char *)(param_1 + 0x249) = 0;
-  case 9:
-    *(unsigned int *)(param_1 + 0x3f4) = 0;
-    *(unsigned int *)(param_1 + 0x3f8) = 1;
-    break;
-  case 4:
-    FUN_00163aa4(param_1 + 0x1c4);
-    temp_v0 = FUN_00163aa4(param_1 + 0x20);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_00163aa4(param_1 + 0xac), temp_v0 != 0)) {
-      *(unsigned int *)(param_1 + 0x3f4) = 0;
-      *(unsigned int *)(param_1 + 0x3f8) = 6;
-    }
-    break;
-  case 5:
-    temp_v0 = FUN_00163aa4(param_1 + 0x368);
-    if (temp_v0 != 0) {
-      *(unsigned int *)(param_1 + 0x3f4) = 0;
-      *(unsigned int *)(param_1 + 0x3f8) = 7;
-    }
-    break;
-  case 7:
-    if (*(int *)(param_1 + 0x404) < 0) {
-      slotSetRequest(0,2,0xff0000ff);
-      *(unsigned int *)(param_1 + 0x3f4) = 0;
-      *(unsigned int *)(param_1 + 0x3f8) = 8;
-    }
-    *(int *)(param_1 + 0x404) = *(int *)(param_1 + 0x404) - 1;
-    break;
-  case 8:
-    temp_v0 = FUN_00163e84(0);
-    if (temp_v0 != 0) {
-      *(unsigned char *)(param_1 + 0xa5) = 0;
-      *(unsigned char *)(param_1 + 0x131) = 0;
-      *(unsigned char *)(param_1 + 0x1bd) = 0;
-      *(unsigned char *)(param_1 + 0x3ed) = 0;
-      *(unsigned char *)(param_1 + 0x249) = 0;
-      FUN_00212204(0);
-      *(unsigned int *)(param_1 + 0x3f4) = 0;
-      *(unsigned int *)(param_1 + 0x3f8) = 9;
-    }
-  }
-  *(int *)(param_1 + 0x3f4) = *(int *)(param_1 + 0x3f4) + 1;
-  return;
+s32 FUN_00163aa4(UiSpriteState *sprite, f32 step);
+s32 FUN_00163e84(s32 index);
+void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
+void slotSetRequest(u32 index, u32 value, u32 extra);
+void FUN_00212204(u32 index);
+/* Sets the sprite's visibility.active byte / reads its signed completion flag. */
+void workSetStateByte(UiSpriteState *sprite, u8 state);
+s32 objectGetSignedFlag(const UiSpriteState *sprite);
 }
 
-} /* extern "C" */
+static __inline PanelTimer panelStartState(s32 state)
+{
+    PanelTimer timer = {0, state};
+    return timer;
+}
+
+/* Advances the panel's state machine by one frame. */
+extern "C" void FUN_002cdd18(SpritePanel *panel)
+{
+    if (panel->timer.state > 0) {
+        FUN_00163aa4(&panel->sprites[5], 1.0f);
+    }
+    switch (panel->timer.state) {
+    case 2:
+        FUN_00163aa4(&panel->sprites[3], 1.0f);
+        if (FUN_00163aa4(&panel->sprites[0], 1.0f) && FUN_00163aa4(&panel->sprites[1], 1.0f) &&
+            FUN_00163aa4(&panel->sprites[2], 1.0f)) {
+            uiSpriteSelectAnim(&panel->sprites[0], 3);
+            uiSpriteSelectAnim(&panel->sprites[1], 3);
+            uiSpriteSelectAnim(&panel->sprites[3], 3);
+            panel->timer = panelStartState(3);
+        }
+        break;
+    case 3:
+        FUN_00163aa4(&panel->sprites[0], 1.0f);
+        FUN_00163aa4(&panel->sprites[1], 1.0f);
+        FUN_00163aa4(&panel->sprites[3], 1.0f);
+        if (objectGetSignedFlag(&panel->sprites[0]) == 0 ||
+            objectGetSignedFlag(&panel->sprites[1]) == 0)
+            break;
+        workSetStateByte(&panel->sprites[0], 0);
+        workSetStateByte(&panel->sprites[1], 0);
+        workSetStateByte(&panel->sprites[2], 0);
+        workSetStateByte(&panel->sprites[3], 0);
+        /* fall through */
+    case 9:
+        panel->timer = panelStartState(1);
+        break;
+    case 4:
+        FUN_00163aa4(&panel->sprites[3], 1.0f);
+        if (FUN_00163aa4(&panel->sprites[0], 1.0f) && FUN_00163aa4(&panel->sprites[1], 1.0f)) {
+            panel->timer = panelStartState(6);
+        }
+        break;
+    case 5:
+        if (FUN_00163aa4(&panel->sprites[6], 1.0f)) {
+            panel->timer = panelStartState(7);
+        }
+        break;
+    case 7:
+        if (panel->countdown < 0) {
+            slotSetRequest(0, 2, 0xff0000ff);
+            panel->timer = panelStartState(8);
+        }
+        panel->countdown--;
+        break;
+    case 8:
+        if (FUN_00163e84(0)) {
+            workSetStateByte(&panel->sprites[0], 0);
+            workSetStateByte(&panel->sprites[1], 0);
+            workSetStateByte(&panel->sprites[2], 0);
+            workSetStateByte(&panel->sprites[6], 0);
+            workSetStateByte(&panel->sprites[3], 0);
+            FUN_00212204(0);
+            panel->timer = panelStartState(9);
+        }
+        break;
+    }
+    panel->timer.frame++;
+}

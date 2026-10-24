@@ -1,136 +1,114 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cfe14` (_code @ 0x3cfe14, 0x344 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (211 vs 213 rows); register allocation of the action context and flag constants differs */
+#include "common.h"
+
+struct ActionTarget {
+    u8 unk00[0x50];
+    u32 flags;                  // 0x50, bit 10: boosted
+    u8 unk54[0x0e];
+    s16 listedId;               // 0x62
+};
+
+struct ActionActor {
+    u32 flags;                  // 0x00, bit 4: player side
+    u8 unk04[0x68];
+    s16 unk6c;
+    s16 actionId;               // 0x6e
+    u8 unk70[0x156];
+    u16 status;                 // 0x1c6, bit 3: immune
+};
+
+struct ActionSlotRow {          // 10-byte rows from 0x9d4 of the action
+    u16 minPower;               // +0
+    u16 value;                  // +2
+    u8 unk04[6];
+};
+
+struct ActionContext {
+    u8 unk00[0x20];
+    ActionActor* actor;         // 0x20
+    ActionTarget* target;       // 0x24
+    u8* source;                 // 0x28
+};
+
+struct BattleSide {
+    u8 unk00[0x88];
+    u32 phase;                  // 0x88
+    u8 unk8c[0x2c];
+    s32 mode;                   // 0xb8
+};
 
 extern "C" {
 
-int btlShowListedActionMessage(...);
-int FUN_00227d18(int);
-int FUN_00227fac(void);
-int FUN_002296f4(...);
-int FUN_0023c0d0(int *, int, int, int);
-int actionCreateKindSeventeen(int, int, int);
-int FUN_002505c0(...);
-int FUN_002551ac(...);
-int FUN_0027df30(...);
+void btlShowListedActionMessage(s32* battle, ActionContext* ctx, s32 id, s32 value, s32 arg);
+void FUN_00227d18(s32 id);
+void FUN_00227fac(void);
+void FUN_002296f4(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
+s32 FUN_00229914(s32* battle, ActionContext* ctx, s32 id);
+void FUN_0023c0d0(s32* battle, ActionContext* ctx, s32 id, s32 amount);
+void actionCreateKindSeventeen(s32 kind, ActionContext* ctx, s32 arg);
+void FUN_002505c0(s32 a, ActionContext* ctx, s32 b, s32 c, s32 d, s32 e, s32 f);
+void FUN_002551ac(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, s32 amount, s32 b, s32 c, s32 d, s32 e,
+                  s32 f, s32 g, u8 h, s32 i, s32 j, s32 k, s32 l, s32 m, s32 n, s32 o, s32 p, s32 q, s32 r, s32 s, s32 t, s32 u);
+void FUN_0027df30(s32 kind, ActionContext* ctx, ActionTarget* target, s32 a, u32 value, s32 b, s32 c, s32 d, u32 e, u32 f, u32 g, s32 h, s32 i);
+s32 FUN_00293230(s32 battle);
 
-/* stack frame of param_3: 17 slot(s), 68 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_3_stack;
-
-/* Supplied declaration required: btlShowListedActionMessage. */
-/* Supplied declaration required: FUN_00227d18. */
-/* Supplied declaration required: FUN_00227fac. */
-/* Supplied declaration required: FUN_002296f4. */
-extern int FUN_00229914(int *, int, int);
-/* Supplied declaration required: FUN_0023c0d0. */
-/* Supplied declaration required: actionCreateKindSeventeen. */
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_002551ac. */
-/* Supplied declaration required: FUN_0027df30. */
-extern int FUN_00293230(int);
-
-
-unsigned char FUN_003cfe14(int *param_1,int param_2,int param_3)
-
+// Applies a heal/damage change of `amount` to the target and queues its effects; returns
+// whether the target was left needing a follow-up message.
+u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v2 = 0xffffffff;
-  *(unsigned int *)(*(int *)(param_2 + 0x20) + 200) = 0;
-  temp_v0 = (int)*(short *)(*(int *)(param_2 + 0x24) + 0x62);
-  FUN_00227fac();
-  temp_v1 = temp_v0;
-  if (0 < temp_v0) {
-    temp_v1 = param_3;
-  }
-  if ((temp_v1 >= 1) &&
-     (temp_v1 = param_2 + *(short *)(*(int *)(param_2 + 0x24) + 0x62) * 10,
-     param_3 >= (int)(unsigned int)*(unsigned short *)(temp_v1 + 0x9d4))) {
-    if (temp_v0 != 2) {
-      if (temp_v0 == 1) {
-        temp_v2 = 1;
-      }
+    u32 value = 0xffffffff;
+    *reinterpret_cast<u32*>(reinterpret_cast<u8*>(ctx->actor) + 200) = 0;
+    s32 id = ctx->target->listedId;
+    FUN_00227fac();
+    s32 positive = id;
+    if (0 < id) positive = amount;
+    ActionSlotRow* row = reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4);
+    if (positive >= 1 && amount >= (s32)row->minPower) {
+        if (id != 2) {
+            if (id == 1) value = 1;
+        } else if ((ctx->actor->status & 8) == 0) {
+            value = row->value;
+        } else {
+            value = 1;
+        }
+        actionCreateKindSeventeen(0x1e, ctx, ctx->actor->actionId);
+        FUN_00227d18(ctx->target->listedId);
     }
-    else if ((*(unsigned short *)(*(int *)(param_2 + 0x20) + 0x1c6) & 8) == 0) {
-      temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x9d6);
+    FUN_0023c0d0(battle, ctx, ctx->target->listedId, -amount);
+    s32 followUp = FUN_00229914(battle, ctx, ctx->target->listedId);
+    u8 result = followUp != 0;
+    BattleSide* side = reinterpret_cast<BattleSide*>(*battle);
+    if ((s32)value >= 1) {
+        result = 0;
+    } else if (result && (ctx->actor->flags & 0x10) != 0 && side->mode == 1) {
+        side->phase = 0xd;
     }
-    else {
-      temp_v2 = 1;
+    u32 a = 0xffffffff, b = 0xffffffff, c = 0xffffffff;
+    if ((ctx->actor->flags & 0x10) == 0) {
+        a = 0;
+        b = 0xb;
     }
-    actionCreateKindSeventeen(0x1e,param_2,(int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e));
-    FUN_00227d18((int)*(short *)(*(int *)(param_2 + 0x24) + 0x62));
-  }
-  FUN_0023c0d0(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),-param_3);
-  temp_v1 = FUN_00229914(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62));
-  temp_v6 = temp_v1 != 0;
-  if ((int)temp_v2 >= 1) {
-    temp_v6 = 0;
-  }
-  else if (((temp_v6) && ((**(unsigned int **)(param_2 + 0x20) & 0x10) != 0)) &&
-          (*(int *)(*param_1 + 0xb8) == 1)) {
-    *(unsigned int *)(*param_1 + 0x88) = 0xd;
-  }
-  temp_v3 = 0xffffffff;
-  temp_v4 = 0xffffffff;
-  temp_v5 = 0xffffffff;
-  if ((**(unsigned int **)(param_2 + 0x20) & 0x10) == 0) {
-    temp_v3 = 0;
-    temp_v4 = 0xb;
-  }
-  temp_v1 = FUN_00293230(*param_1);
-  if (temp_v1 == 0) {
-    temp_v5 = 0;
-  }
-  FUN_002551ac(10,param_2,*(int *)(param_2 + 0x24),0,param_3,0xffffffff,0xffffffff,
-               *(unsigned short *)(param_2 + *(short *)(*(int *)(param_2 + 0x24) + 0x62) * 10 + 0x9d4),
-               (int)*(short *)(*(int *)(param_2 + 0x28) + 0xea),0,0,temp_v6,0,1,0,0x1e,0,temp_v3,temp_v5,
-               temp_v4,0xffffffff,1,0,1,1);
-  FUN_002505c0(10,param_2,0x1000185,0,0,0,0);
-  if (-1 < (int)temp_v2) {
-    FUN_0027df30(0x1e,param_2,*(unsigned int *)(param_2 + 0x24),0,temp_v2,0xffffffff,0xffffffff,0,temp_v3,
-                 temp_v5,temp_v4,0,1);
-    FUN_002505c0(0x1e,param_2,0x10001c5,0,1,0,0);
-  }
-  if (temp_v6 != 0) {
-    temp_v1 = *(int *)(param_2 + 0x24);
-    if ((*(unsigned int *)(temp_v1 + 0x50) & 0x400) != 0) {
-      FUN_002296f4(param_1,param_2,(int)*(short *)(temp_v1 + 0x62),10,0x3c,0x3c);
-      btlShowListedActionMessage(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),0x46,0);
+    if (FUN_00293230(*battle) == 0) c = 0;
+    FUN_002551ac(10, ctx, ctx->target, 0, amount, -1, -1,
+                 reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4)->minPower,
+                 *reinterpret_cast<s16*>(ctx->source + 0xea), 0, 0, result, 0, 1, 0, 0x1e, 0, a, c, b, -1, 1, 0, 1, 1);
+    FUN_002505c0(10, ctx, 0x1000185, 0, 0, 0, 0);
+    if ((s32)value >= 0) {
+        FUN_0027df30(0x1e, ctx, ctx->target, 0, value, -1, -1, 0, a, c, b, 0, 1);
+        FUN_002505c0(0x1e, ctx, 0x10001c5, 0, 1, 0, 0);
     }
-    else {
-      FUN_002296f4(param_1,param_2,(int)*(short *)(temp_v1 + 0x62),10,0x1e,0x1e);
-      btlShowListedActionMessage(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),0x28,0);
+    if (result != 0) {
+        if ((ctx->target->flags & 0x400) != 0) {
+            FUN_002296f4(battle, ctx, ctx->target->listedId, 10, 0x3c, 0x3c);
+            btlShowListedActionMessage(battle, ctx, ctx->target->listedId, 0x46, 0);
+        } else {
+            FUN_002296f4(battle, ctx, ctx->target->listedId, 10, 0x1e, 0x1e);
+            btlShowListedActionMessage(battle, ctx, ctx->target->listedId, 0x28, 0);
+        }
+    } else {
+        FUN_002296f4(battle, ctx, ctx->target->listedId, 10, 0x1e, 0x1e);
     }
-  }
-  else {
-    FUN_002296f4(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),10,0x1e,0x1e);
-  }
-  return temp_v6;
+    return result;
 }
 
 } /* extern "C" */

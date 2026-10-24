@@ -24,7 +24,7 @@ s32 paramsInit(u8 *block, const u8 *a, s32 aSize, const u8 *b, s32 bSize, const 
 void FUN_002bd954(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 scale, s32 layer);
 void timerStart(GauntletSprite *sprite, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
-void gauntletSpriteSetMode(GauntletSprite *sprite, u16 mode);
+void spriteSetLayer(GauntletSprite *sprite, u16 mode);
 u32 asdLoadFileSyncDefault(const char *path);
 u32 FUN_00297060(u32 data, u32 archive);
 u32 FUN_003291dc();
@@ -79,7 +79,7 @@ u32 FUN_002e24c8(void)
     FUN_002bd954(&menu->list.sprites[2], 29, 0, menu->list.params, 1.0f, 201);
     timerStart(&menu->list.sprites[2], 2, 0);
     FUN_002bd954(&menu->list.sprites[3], 29, 0x59F, menu->list.params, 1.0f, 181);
-    gauntletSpriteSetMode(&menu->list.sprites[3], 2);
+    spriteSetLayer(&menu->list.sprites[3], 2);
     spriteStartAnimationByIndex(&menu->list.sprites[3], 1);
     menu->heapA = (void *)asdLoadFileSyncDefault("camp/gauntletApp.mbm");
     menu->heapB = (void *)asdLoadFileSyncDefault("camp/gauntletApp.bf");

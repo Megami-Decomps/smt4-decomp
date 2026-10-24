@@ -1,140 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035f2f4` (_code @ 0x35f2f4, 0x2b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (173 vs 173 rows); retail reads the battle mask presets through one base pointer into a global struct (g_battleMaskPresets + 24) and orders the argument stores differently */
+#include "common.h"
+
+struct BattleSide {
+    u64 flags;              // 0x000
+    s32 unitIndex;          // 0x008 (low halfword)
+    u8 unk0c[0x25c - 0x0c];
+    u32 spriteA;            // 0x25c
+    u8 unk260[4];
+    u32 spriteB;            // 0x264
+    u8 unk268[0x408 - 0x268];
+};
+
+struct BattleMain {
+    u8 unk0000[0x12c];
+    s32 effectCount;        // 0x12c
+    u8 unk130[0x1ed4 - 0x130];
+    u8* units;              // 0x1ed4 (0x1d0 bytes each)
+    u8 unk1ed8[0x1ffc - 0x1ed8];
+    BattleSide* sides;      // 0x1ffc
+};
+
+struct SlotTable {
+    u8 unk0000[0x68];
+    u8 records[1];          // 0x68: 300 bytes each
+};
 
 extern "C" {
 
-int btlEffectsRelease(...);
-int saveSlotApplySelected(...);
-int btlClearMode4D74(...);
-int FUN_004bcb54(...);
-int bitsAt60Test(...);
-int bitsAt60Set(...);
-int FUN_004fb798(...);
+struct BattleMaskPresets {
+    u64 present;            // 0x00: sides that take part
+    u8 unk08[0x10];
+    u64 excluded;           // 0x18: sides left out
+};
+extern BattleMaskPresets g_battleMaskPresets;
 
-/* stack frame of void: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} void_stack;
+BattleMain* btlGetMainState(void);
+u32 FUN_003e0154(void);
+u32 FUN_003e0164(void);
+void FUN_004fb798(s32 a, s32 b, s32 c, u8* unit, s32 d, u32 e, u32 f, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
+s32 gameDataBlocksGetTableFlag(void);
+s32 gameDataFlagTestBit(u32 bit);
+u8* gameGetSlotTable(void);
+s32 bitsAt60Test(u8* record, u32 bit);
+void bitsAt60Set(u8* record, u32 bit);
+void FUN_004bcb54(u8* record);
+void* saveSlotFindSelected(void);
+void saveSlotApplySelected(BattleMain* battle);
+void btlClearMode4D74(BattleMain* battle);
+void btlEffectsRelease(BattleMain* battle);
 
-extern unsigned int g_battleMaskPresets; /* 0x570d78 */
-extern unsigned int DAT_00570d7c; /* 0x570d7c */
-extern unsigned int DAT_00570d90; /* 0x570d90 */
-extern unsigned int DAT_00570d94; /* 0x570d94 */
-
-extern int btlGetMainState(void);
-extern int saveSlotFindSelected(void);
-extern int gameGetSlotTable(void);
-extern int gameDataBlocksGetTableFlag(void);
-extern unsigned int FUN_003e0154(void);
-extern unsigned int FUN_003e0164(void);
-extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: btlEffectsRelease. */
-/* Supplied declaration required: saveSlotApplySelected. */
-/* Supplied declaration required: btlClearMode4D74. */
-/* Supplied declaration required: FUN_004bcb54. */
-/* Supplied declaration required: bitsAt60Test. */
-/* Supplied declaration required: bitsAt60Set. */
-/* Supplied declaration required: FUN_004fb798. */
-
-
-unsigned int FUN_0035f2f4(void)
-
+// Refreshes the battle unit visuals after a state change and re-normalises the party records.
+u32 FUN_0035f2f4(void)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  char temp_v9 [8];
-  
-  temp_v1 = btlGetMainState();
-  temp_v2 = FUN_003e0154();
-  temp_v3 = FUN_003e0164();
-  FUN_004fb798(0,0,0,*(int *)(temp_v1 + 0x1ed4),0,temp_v2,temp_v3,0xffffffff,2,0,0,9,0,0,1);
-  temp_v4 = gameDataBlocksGetTableFlag();
-  if ((temp_v4 == 4) || (temp_v4 = gameDataFlagTestBit(0x80), temp_v4 != 0)) {
-    temp_v4 = 1;
-    do {
-      puVar7 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v4 * 0x408);
-      if (((g_battleMaskPresets & *puVar7) != 0 || (DAT_00570d7c & puVar7[1]) != 0) &&
-         ((puVar7[1] & DAT_00570d94) == 0 && (*puVar7 & DAT_00570d90) == 0)) {
-        temp_v7 = 0;
-        temp_v5 = 0;
-        temp_v6 = 0xd;
-        do {
-          temp_v7 = temp_v7 | (1 << ((temp_v5 + 1U) & 0xff));
-          do {
-            temp_v6 = temp_v6 - 1;
-            temp_v5 = temp_v5 + 1;
-            if (temp_v6 == 0) {
-              FUN_004fb798(0,0,0,*(int *)(temp_v1 + 0x1ed4) + (short)puVar7[2] * 0x1d0,0,puVar7[0x97],
-                           puVar7[0x99],0xffffffff,temp_v7,0,0,9,0,0,1);
-              goto LAB_0035f460;
+    BattleMain* battle = btlGetMainState();
+    u32 first = FUN_003e0154();
+    u32 second = FUN_003e0164();
+    FUN_004fb798(0, 0, 0, *reinterpret_cast<u8**>(reinterpret_cast<u8*>(battle) + 0x1ed4), 0, first, second, -1, 2, 0, 0, 9, 0, 0, 1);
+
+    s32 tableFlag = gameDataBlocksGetTableFlag();
+    if (tableFlag == 4 || gameDataFlagTestBit(0x80) != 0) {
+        for (s32 i = 1; i < 4; i++) {
+            BattleSide* side = &battle->sides[i];
+            if ((g_battleMaskPresets.present & side->flags) != 0 && (side->flags & g_battleMaskPresets.excluded) == 0) {
+                u32 mask = 0;
+                for (s32 bit = 0; bit < 13; bit++) {
+                    if (bit == 1 || bit == 3) continue;
+                    mask |= 1 << (bit + 1);
+                }
+                FUN_004fb798(0, 0, 0, battle->units + (s16)side->unitIndex * 0x1d0, 0, side->spriteA, side->spriteB, -1, mask, 0, 0, 9, 0, 0, 1);
             }
-          } while (temp_v5 == 1 || temp_v5 == 3);
-        } while( 1 );
-      }
-LAB_0035f460:
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 4);
-  }
-  temp_v4 = gameGetSlotTable();
-  temp_v5 = 0;
-  temp_v9[0] = '\0';
-  temp_v9[1] = '\0';
-  temp_v9[2] = '\0';
-  temp_v9[3] = '\0';
-  do {
-    temp_v6 = (int)*(char *)(temp_v4 + temp_v5 + 0x1ca0);
-    if (-1 < temp_v6) {
-      temp_v0 = bitsAt60Test(temp_v4 + temp_v6 * 300 + 0x68,4);
-      temp_v9[temp_v5] = temp_v0;
+        }
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 3);
-  temp_v5 = 0;
-  do {
-    temp_v8 = temp_v4 + temp_v5 * 300 + 0x68;
-    temp_v6 = bitsAt60Test(temp_v8,2);
-    FUN_004bcb54(temp_v8);
-    if (temp_v6 != 0) {
-      bitsAt60Set(temp_v8,2);
+
+    u8* table = gameGetSlotTable();
+    s8 hadFlag[4] = { 0, 0, 0, 0 };
+    for (s32 i = 0; i < 3; i++) {
+        s32 record = static_cast<s8>(table[i + 0x1ca0]);
+        if (record >= 0) hadFlag[i] = bitsAt60Test(table + record * 300 + 0x68, 4);
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x18);
-  temp_v5 = 0;
-  do {
-    temp_v6 = (int)*(char *)(temp_v4 + temp_v5 + 0x1ca0);
-    if ((-1 < temp_v6) && (temp_v9[temp_v5] != '\0')) {
-      bitsAt60Set(temp_v4 + temp_v6 * 300 + 0x68,4);
+    for (s32 i = 0; i < 0x18; i++) {
+        u8* record = table + i * 300 + 0x68;
+        s32 marked = bitsAt60Test(record, 2);
+        FUN_004bcb54(record);
+        if (marked != 0) bitsAt60Set(record, 2);
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 3);
-  temp_v4 = saveSlotFindSelected();
-  if (temp_v4 != 0) {
-    FUN_004bcb54();
-    saveSlotApplySelected(temp_v1);
-    btlClearMode4D74(temp_v1);
-  }
-  if (0 < *(int *)(temp_v1 + 300)) {
-    btlEffectsRelease(temp_v1);
-  }
-  return 1;
+    for (s32 i = 0; i < 3; i++) {
+        s32 record = static_cast<s8>(table[i + 0x1ca0]);
+        if (record >= 0 && hadFlag[i] != 0) bitsAt60Set(table + record * 300 + 0x68, 4);
+    }
+    if (saveSlotFindSelected() != NULL) {
+        FUN_004bcb54(NULL);
+        saveSlotApplySelected(battle);
+        btlClearMode4D74(battle);
+    }
+    if (battle->effectCount > 0) btlEffectsRelease(battle);
+    return 1;
 }
 
 } /* extern "C" */

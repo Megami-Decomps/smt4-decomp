@@ -6,7 +6,7 @@
 extern "C" {
 
 int asdListBoxSetFloatItem(...);
-int FUN_004d2628(...);
+int placementEditorSync(...);
 int btlReserveEditorOpenList(...);
 int FUN_004d3c94(...);
 
@@ -27,8 +27,8 @@ int btlDebugCreatePanelMenu(...);
 int FUN_004d3950(...);
 int FUN_004d3df0(...);
 int FUN_004d463c(...);
-int FUN_004d4ba4(...);
-int FUN_004d4f54(...);
+int talkCtrlDebugMenuBuild(...);
+int debugOptionPageApplySelected(...);
 int FUN_004d5290(...);
 int FUN_004d542c(...);
 int FUN_004d5578(...);
@@ -134,7 +134,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d1af8. */
 /* Supplied declaration required: FUN_004d2124. */
 /* Supplied declaration required: FUN_004d229c. */
-/* Supplied declaration required: FUN_004d2628. */
+/* Supplied declaration required: placementEditorSync. */
 /* Supplied declaration required: FUN_004d290c. */
 /* Supplied declaration required: FUN_004d3360. */
 /* Supplied declaration required: btlReserveEditorOpenList. */
@@ -143,8 +143,8 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d3c94. */
 /* Supplied declaration required: FUN_004d3df0. */
 /* Supplied declaration required: FUN_004d463c. */
-/* Supplied declaration required: FUN_004d4ba4. */
-/* Supplied declaration required: FUN_004d4f54. */
+/* Supplied declaration required: talkCtrlDebugMenuBuild. */
+/* Supplied declaration required: debugOptionPageApplySelected. */
 /* Supplied declaration required: FUN_004d5290. */
 /* Supplied declaration required: FUN_004d542c. */
 /* Supplied declaration required: FUN_004d5578. */
@@ -929,11 +929,11 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 0x15:
-    FUN_004d4ba4(param_1);
+    talkCtrlDebugMenuBuild(param_1);
     temp_v6 = 0x16;
     break;
   case 0x16:
-    FUN_004d4f54(param_1);
+    debugOptionPageApplySelected(param_1);
     temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;
@@ -1084,7 +1084,7 @@ LAB_004d729c:
     param_1[7] = 0;
     break;
   case 0x1e:
-    FUN_004d2628(param_1);
+    placementEditorSync(param_1);
     temp_v5 = padButtonIsPressed(0);
     if (temp_v5 == 0) {
       return 0;

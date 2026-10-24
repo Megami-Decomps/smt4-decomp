@@ -1,198 +1,138 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00435bd4` (_code @ 0x435bd4, 0x348 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs ~208 rows); the list node helpers are local stand-ins for an unrecovered intrusive list/pool container, so retail's inlined cleanup loops and register use differ */
+#include "common.h"
+
+// Doubly-linked node with a variant payload at +8 (sentinel nodes carry the pool pointer).
+struct LinkNode {
+    LinkNode* prev;         // 0x00
+    LinkNode* next;         // 0x04
+    u32 payload[1];         // 0x08: variant slot
+};
+
+// A list head: sentinel links plus the owning node pool (pool at +0x10 of the owner object).
+struct LinkList {
+    LinkNode* prev;         // 0x00
+    LinkNode* next;         // 0x04
+    void* pool;             // 0x08
+};
+
+// Owner of a LinkList: the list head lives at +8 and its node pool at +0x10.
+struct ListOwner {
+    u8 unk00[8];
+    LinkNode head;          // 0x08 (payload unused)
+    void* pool;             // 0x10
+};
+
+// Step cursor shared by the walkers: ids and the chain pointer.
+struct StepCursor {
+    u8 unk00[4];
+    StepCursor* chain;      // 0x04
+    u8 unk08[2];
+    u16 minSteps;           // 0x0a
+    u16 maxSteps;           // 0x0c
+};
+
+// Walker state (the caller's iterator holds a cursor at [0], a scratch list at [1] and the pool at [5]).
+struct StepWalker {
+    StepCursor* cursor;     // 0x00
+    LinkList scratch;       // 0x04
+    u8 unk10[4];
+    void* pool;             // 0x14
+};
 
 extern "C" {
 
-int FUN_004352b0(unsigned char **, int *);
-int FUN_00438434(unsigned char **, int *, int *, int *);
-int FUN_0043865c(int [3], unsigned char **, int *);
-int FUN_004386a4(unsigned char **, int *, int);
-int FUN_004387bc(...);
-int FUN_004387f0(int *, int);
-int variantSetPlain(...);
-int FUN_00515598(void);
-int FUN_00515618(...);
+void FUN_004352b0(LinkNode** out, StepWalker* walker);
+void FUN_004386a4(LinkList* list, LinkList* source, void* pool);
+LinkNode* FUN_00438434(LinkList* list, u32* a, u32* b, u32* c);
+void FUN_0043865c(LinkNode** out, LinkList* list, u32* key);
+void* FUN_004387f0(void* pool, s32 count);
+void FUN_004387bc(void* pool, LinkNode* node, s32 count);
+void FUN_00515598(void);
+void FUN_00515618(LinkNode** out, void* location);
+void variantSetPlain(void* variant, u32* value);
 
-/* stack frame of param_4: 11 slot(s), 44 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_004352b0. */
-/* Supplied declaration required: FUN_00438434. */
-/* Supplied declaration required: FUN_0043865c. */
-/* Supplied declaration required: FUN_004386a4. */
-/* Supplied declaration required: FUN_004387bc. */
-/* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: variantSetPlain. */
-/* Supplied declaration required: FUN_00515598. */
-/* Supplied declaration required: FUN_00515618. */
-
-
-unsigned int FUN_00435bd4(int *param_1,unsigned int *param_2,int *param_3,int *param_4)
-
+// Frees every node of a scratch list and resets it to empty.
+static void clearList(LinkList* list)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned char **ppuVar1;
-  int *piVar2;
-  unsigned char *puVar3;
-  unsigned char *puVar4;
-  int *piVar5;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char *temp_v2;
-  unsigned char *temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char *temp_v8;
-  unsigned char *temp_v9;
-  int temp_v10;
-  int temp_v11 [3];
-  int *piStack_34;
-  unsigned int *temp_v12;
-  int *piStack_2c;
-  int *piStack_28;
-  
-  piStack_34 = param_1;
-  temp_v12 = param_2;
-  piStack_2c = param_3;
-  piStack_28 = param_4;
-  FUN_004352b0(&temp_v9,param_1);
-  if (temp_v9 == (unsigned char *)0x0) {
-    return 2;
-  }
-  temp_v1 = *param_4;
-  temp_v0 = 1;
-  if (temp_v0 < *(unsigned short *)(*param_1 + 0xc)) {
-    do {
-      FUN_004386a4(&temp_v2,param_1 + 1,param_1[5]);
-      temp_v7 = 0;
-      temp_v10 = *param_3;
-      temp_v6 = *param_4;
-      ppuVar1 = &temp_v2;
-      FUN_00438434(&temp_v2,&temp_v7,&temp_v10,&temp_v6);
-      if (ppuVar1 == (unsigned char **)0x0) {
-        if (temp_v4 == 0) {
-          return 2;
-        }
-        puVar4 = temp_v3;
-        if ((unsigned char **)temp_v3 == &temp_v2) {
-          return 2;
-        }
-        do {
-          puVar3 = *(unsigned char **)(puVar4 + 4);
-          FUN_004387bc(temp_v4,puVar4,1);
-          puVar4 = puVar3;
-        } while ((unsigned char **)puVar3 != &temp_v2);
-        return 2;
-      }
-      piVar2 = *(int **)(temp_v1 + 0x10);
-      piVar5 = (int *)(temp_v1 + 8);
-      FUN_004387f0(piVar2,2);
-      if (piVar2 == (int *)0x0) {
-        if (temp_v4 == 0) {
-          return 2;
-        }
-        puVar4 = temp_v3;
-        if ((unsigned char **)temp_v3 == &temp_v2) {
-          return 2;
-        }
-        do {
-          puVar3 = *(unsigned char **)(puVar4 + 4);
-          FUN_004387bc(temp_v4,puVar4,1);
-          puVar4 = puVar3;
-        } while ((unsigned char **)puVar3 != &temp_v2);
-        return 2;
-      }
-      if (piVar2 != (int *)0xfffffff8) {
-        FUN_00515598();
-      }
-      *piVar2 = *piVar5;
-      piVar2[1] = (int)piVar5;
-      *piVar5 = (int)piVar2;
-      *(int **)(*piVar2 + 4) = piVar2;
-      temp_v5 = temp_v7;
-      variantSetPlain(piVar2 + 2,&temp_v5);
-      temp_v6 = *param_4;
-      FUN_0043865c(temp_v11,&temp_v2,&temp_v6);
-      temp_v1 = *(int *)(temp_v11[0] + 0xc);
-      if ((unsigned int)*(unsigned short *)(*param_1 + 10) <= temp_v0 + 1) {
-        piVar2 = *(int **)(temp_v1 + 0x10);
-        piVar5 = (int *)(temp_v1 + 8);
-        FUN_004387f0(piVar2,2);
-        if (piVar2 == (int *)0x0) {
-          if (temp_v4 == 0) {
-            return 2;
-          }
-          puVar4 = temp_v3;
-          if ((unsigned char **)temp_v3 == &temp_v2) {
-            return 2;
-          }
-          do {
-            puVar3 = *(unsigned char **)(puVar4 + 4);
-            FUN_004387bc(temp_v4,puVar4,1);
-            puVar4 = puVar3;
-          } while ((unsigned char **)puVar3 != &temp_v2);
-          return 2;
-        }
-        if (piVar2 != (int *)0xfffffff8) {
-          FUN_00515598();
-        }
-        *piVar2 = *piVar5;
-        piVar2[1] = (int)piVar5;
-        *piVar5 = (int)piVar2;
-        *(int **)(*piVar2 + 4) = piVar2;
-        temp_v8 = temp_v9;
-        variantSetPlain(piVar2 + 2,&temp_v8);
-      }
-      if (temp_v4 != 0) {
-        puVar4 = temp_v3;
-        if ((unsigned char **)temp_v3 != &temp_v2) {
-          do {
-            puVar3 = *(unsigned char **)(puVar4 + 4);
-            FUN_004387bc(temp_v4,puVar4,1);
-            puVar4 = puVar3;
-          } while ((unsigned char **)puVar3 != &temp_v2);
-        }
-        temp_v4 = 0;
-        temp_v2 = (unsigned char *)&temp_v2;
-        temp_v3 = (unsigned char *)&temp_v2;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(unsigned short *)(*param_1 + 0xc));
-  }
-  if (*(short *)(*param_1 + 10) == 0) {
-    FUN_00515618(&temp_v3,*param_3 + 8);
-    if (temp_v3 == (unsigned char *)0x0) {
-      return 2;
+    if (list->pool == NULL) return;
+    LinkNode* node = list->next;
+    while (node != reinterpret_cast<LinkNode*>(list)) {
+        LinkNode* following = node->next;
+        FUN_004387bc(list->pool, node, 1);
+        node = following;
     }
-    temp_v2 = temp_v9;
-    variantSetPlain(temp_v3 + 8,&temp_v2);
-  }
-  if ((*(unsigned short *)(*param_1 + 10) < 2) && (*(short *)(*param_1 + 0xc) != 0)) {
-    FUN_00515618(&temp_v3,*param_4 + 8);
-    if (temp_v3 == (unsigned char *)0x0) {
-      return 2;
+    list->pool = NULL;
+    list->prev = reinterpret_cast<LinkNode*>(list);
+    list->next = reinterpret_cast<LinkNode*>(list);
+}
+
+// Appends a node carrying `value` to the owner's list; returns false when the pool is exhausted.
+static bool appendNode(ListOwner* owner, u32 value)
+{
+    LinkNode* node = static_cast<LinkNode*>(FUN_004387f0(owner->pool, 2));
+    if (node == NULL) return false;
+    if (node != reinterpret_cast<LinkNode*>(0xfffffff8)) FUN_00515598();
+    node->prev = owner->head.prev;
+    node->next = &owner->head;
+    owner->head.prev = node;
+    node->prev->next = node;
+    u32 copy = value;
+    variantSetPlain(node->payload, &copy);
+    return true;
+}
+
+// Links the walked node `root` into the owner lists of the two endpoints (and the middle steps
+// in between). Returns 0 on success, 2 when the lookup or an allocation fails.
+u32 FUN_00435bd4(StepWalker* walker, u32* result, u32* startHandle, u32* endHandle)
+{
+    LinkNode* root;
+    FUN_004352b0(&root, walker);
+    if (root == NULL) return 2;
+
+    ListOwner* owner = reinterpret_cast<ListOwner*>(*endHandle);
+    for (u32 step = 1; step < walker->cursor->maxSteps; step++) {
+        LinkList scratch;
+        FUN_004386a4(&scratch, &walker->scratch, walker->pool);
+        u32 zero = 0;
+        u32 start = *startHandle;
+        u32 end = *endHandle;
+        if (FUN_00438434(&scratch, &zero, &start, &end) == NULL) {
+            clearList(&scratch);
+            return 2;
+        }
+        if (!appendNode(owner, zero)) {
+            clearList(&scratch);
+            return 2;
+        }
+        LinkNode* position[3];
+        u32 key = *endHandle;
+        FUN_0043865c(position, &scratch, &key);
+        owner = *reinterpret_cast<ListOwner**>(reinterpret_cast<u8*>(position[0]) + 0xc);
+        if (walker->cursor->minSteps <= step + 1) {
+            if (!appendNode(owner, reinterpret_cast<u32>(root))) {
+                clearList(&scratch);
+                return 2;
+            }
+        }
+        clearList(&scratch);
     }
-    temp_v2 = temp_v9;
-    variantSetPlain(temp_v3 + 8,&temp_v2);
-  }
-  *temp_v12 = (unsigned int)temp_v9;
-  *param_1 = *(int *)(*param_1 + 4);
-  return 0;
+    if (walker->cursor->minSteps == 0) {
+        LinkNode* location;
+        FUN_00515618(&location, reinterpret_cast<u8*>(*startHandle) + 8);
+        if (location == NULL) return 2;
+        u32 value = reinterpret_cast<u32>(root);
+        variantSetPlain(location->payload, &value);
+    }
+    if (walker->cursor->minSteps < 2 && walker->cursor->maxSteps != 0) {
+        LinkNode* location;
+        FUN_00515618(&location, reinterpret_cast<u8*>(*endHandle) + 8);
+        if (location == NULL) return 2;
+        u32 value = reinterpret_cast<u32>(root);
+        variantSetPlain(location->payload, &value);
+    }
+    *result = reinterpret_cast<u32>(root);
+    walker->cursor = walker->cursor->chain;
+    return 0;
 }
 
 } /* extern "C" */

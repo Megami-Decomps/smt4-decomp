@@ -1,133 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dce1c` (_code @ 0x4dce1c, 0x294 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the u64 battle flag tests/updates schedule their loads and register use differently (retail loads each mask as ldm pairs and pairs the word ORs), the escape-state tail is laid out in a different branch order, and the g_btlAux flag word is read through a pool constant offset. */
+#include "common.h"
+
+namespace {
+struct BtlBattleData {
+    /* 0x0000 */ u8 unk0000[0xa8];
+    /* 0x00a8 */ s32 uiState;
+    /* 0x00ac */ u8 unk00ac[0x60];
+    /* 0x010c */ u32 stateFlags;
+    /* 0x0110 */ u8 unk0110[0x2248];
+    /* 0x2358 */ s32 phase;
+    /* 0x235c */ u8 unk235c[0x225e];
+    /* 0x45ba */ u8 attempts;
+};
+
+struct BtlUnitHandle {
+    /* 0x00 */ BtlBattleData *data;
+};
+
+struct BtlAiAction {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x20];
+    /* 0x024 */ u32 uiIndex;
+    /* 0x028 */ u8 unk028[0x544];
+    /* 0x56c */ u32 unk56c;
+};
+
+struct BtlCamera {
+    /* 0x000 */ u8 unk000[0x7cc];
+    /* 0x7cc */ s32 unk7cc;
+};
+
+struct BtlAuxBlock {
+    /* 0x0000 */ u8 unk0000[0x339c];
+    /* 0x339c */ u32 flags;
+};
+
+/* The u64 flag masks kept in the battle action block. */
+struct BtlActionMasks {
+    /* 0x000 */ u8 unk000[0x110];
+    /* 0x110 */ u64 mask110;
+    /* 0x118 */ u8 unk118[0x10];
+    /* 0x128 */ u64 mask128;
+    /* 0x130 */ u8 unk130[0x20];
+    /* 0x150 */ u64 mask150;
+};
+
+/* The battle's unit flags that live in the data block at 0x45a0. */
+struct BtlFlagsData {
+    u8 unk000[0x45a0];
+    u64 flags;
+};
+}
 
 extern "C" {
+extern BtlActionMasks g_btlAction;
+extern BtlCamera *g_btlCamera;
+extern u32 g_btlAux;
+extern s32 g_btlEvent;
 
-int FUN_00408184(int, int);
-int FUN_004c67d0(void);
-int FUN_004d7a70(int, int, unsigned int, int);
-int FUN_004d7fe4(int);
-int nameEntriesRegisterVerNames(void);
-int FUN_004fb670(int, int);
-int FUN_004fbeac(...);
-int FUN_004fd508(int, unsigned int *, int, unsigned int);
-int FUN_004feecc(int, int);
+void FUN_00408184(s32 kind, s32 flag);
+s32 FUN_004c67d0(void);
+s32 FUN_004d7a70(s32 event, s32 kind, s32 arg, s32 flag);
+void FUN_004d7fe4(s32 event);
+void nameEntriesRegisterVerNames(void);
+void FUN_004fb670(s32 a, s32 b, s32 c);
+void FUN_004fbeac(s32 a, BtlAiAction *action, s32 b, s32 c, s32 d);
+void FUN_004fd508(s32 a, BtlAiAction *action, s32 kind, u32 uiIndex, s32 flag);
+void FUN_004feecc(s32 a, s32 b);
+s32 FUN_004f2708(BtlCamera *camera, BtlBattleData *data, s32 flag);
+s32 isEntryUsable(s32 event);
+s32 gameProgressIsAdvanced(void);
+s32 lcgRandomRange(u32 limit);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern unsigned int DAT_00571248; /* 0x571248 */
-extern unsigned int DAT_0057124c; /* 0x57124c */
-extern unsigned int DAT_00571260; /* 0x571260 */
-extern unsigned int DAT_00571264; /* 0x571264 */
-extern unsigned int DAT_00571288; /* 0x571288 */
-extern unsigned int DAT_0057128c; /* 0x57128c */
-extern int g_btlCamera; /* 0x571508 */
-extern int g_btlAux; /* 0x573808 */
-extern int g_btlEvent; /* 0x573898 */
-
-extern int lcgRandomRange(unsigned int);
-extern int gameProgressIsAdvanced(void);
-/* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_004c67d0. */
-/* Supplied declaration required: FUN_004d7a70. */
-/* Supplied declaration required: FUN_004d7fe4. */
-extern int isEntryUsable(int);
-extern int FUN_004f2708(int, int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: nameEntriesRegisterVerNames. */
-/* Supplied declaration required: FUN_004fb670. */
-/* Supplied declaration required: FUN_004fbeac. */
-/* Supplied declaration required: FUN_004fd508. */
-/* Supplied declaration required: FUN_004feecc. */
-
-
-void FUN_004dce1c(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+/* Battle escape attempt: rolls against the escape chance, then moves the unit's UI state to the
+   "escaped" or the "failed" branch and queues the matching command. */
+void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
 {
-/* irregular: 1 goto(s); 9 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  param_2[0x15b] = 0;
-  temp_v5 = *param_1;
-  temp_v7 = DAT_00571264 & *(unsigned int *)(temp_v5 + 0x45a4);
-  if (((DAT_00571260 & *(unsigned int *)(temp_v5 + 0x45a0)) == 0 && temp_v7 == 0) &&
-     ((*(unsigned int *)(temp_v5 + 0x10c) & 0x40000) != 0)) {
-    if ((*param_2 & 0x2000) == 0) {
-      FUN_004fbeac(0,param_2,0,5,0);
-      return;
+    action->unk56c = 0;
+    BtlFlagsData *flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+    if ((flagsData->flags & g_btlAction.mask128) == 0 && (handle->data->stateFlags & 0x40000) != 0) {
+        if ((action->flags & 0x2000) == 0) {
+            FUN_004fbeac(0, action, 0, 5, 0);
+            return;
+        }
+    } else if ((action->flags & 0x2000) == 0) {
+        if (g_btlCamera->unk7cc >= 0 && FUN_004f2708(g_btlCamera, handle->data, 1) != 0) {
+            FUN_004fb670(0, 0, 0);
+        }
+        FUN_004feecc(1, 0);
     }
-  }
-  else if ((*param_2 & 0x2000) == 0) {
-    if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
-       (temp_v5 = FUN_004f2708(g_btlCamera,temp_v5,1,temp_v7,param_4), temp_v5 != 0)) {
-      FUN_004fb670(0,0);
+    FUN_004fd508(0, action, 15, action->uiIndex, 1);
+    s32 chance = FUN_004c67d0();
+    s32 escaped = lcgRandomRange(99) < chance;
+    u8 attempts = handle->data->attempts + 1;
+    handle->data->attempts = attempts;
+    handle->data->attempts = attempts < 255 ? attempts : 255;
+    if ((reinterpret_cast<BtlAuxBlock *>(g_btlAux)->flags & 0x400) != 0) {
+        nameEntriesRegisterVerNames();
     }
-    FUN_004feecc(1,0);
-  }
-  temp_v5 = 0;
-  FUN_004fd508(0,param_2,0xf,param_2[9]);
-  FUN_004c67d0();
-  temp_v1 = lcgRandomRange(99);
-  temp_v0 = *(char *)(*param_1 + 0x45ba) + '\x01';
-  *(char *)(*param_1 + 0x45ba) = temp_v0;
-  if (temp_v0 == -1) {
-    temp_v0 = -1;
-  }
-  *(char *)(*param_1 + 0x45ba) = temp_v0;
-  if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
-    nameEntriesRegisterVerNames();
-  }
-  temp_v2 = *(int *)(*param_1 + 0x2358);
-  temp_v3 = gameProgressIsAdvanced();
-  temp_v4 = *param_1;
-  if (*(int *)(temp_v4 + 0xa8) != 4) {
-    if (((*(unsigned int *)(temp_v4 + 0x45a4) & DAT_00571264) == 0 &&
-        (*(unsigned int *)(temp_v4 + 0x45a0) & DAT_00571260) == 0) &&
-        (temp_v3 != 0 || (temp_v2 != 3 && temp_v5 <= temp_v1))) {
-LAB_004dd034:
-      FUN_00408184(5,1);
-      *(unsigned int *)(*param_1 + 0xa8) = 0;
-      temp_v5 = *param_1;
-      temp_v6 = DAT_00571248 | *(unsigned int *)(temp_v5 + 0x45a0);
-      temp_v7 = DAT_0057124c | *(unsigned int *)(temp_v5 + 0x45a4);
-      *(unsigned int *)(temp_v5 + 0x45a4) = temp_v7;
-      *(unsigned int *)(temp_v5 + 0x45a0) = temp_v6;
-      temp_v5 = *param_1;
-      temp_v6 = temp_v6 | DAT_00571288;
-      *(unsigned int *)(temp_v5 + 0x45a4) = temp_v7 | DAT_0057128c;
-      *(unsigned int *)(temp_v5 + 0x45a0) = temp_v6;
-      FUN_004fbeac(0,param_2,0,1,0);
-      return;
+    if (handle->data->phase == 3) {
+        escaped = 1;
     }
-  }
-  else if ((*(unsigned int *)(temp_v4 + 0x10c) & 0x40000) != 0) {
-    *(unsigned int *)(temp_v4 + 0xa8) = 0;
-    goto LAB_004dd034;
-  }
-  FUN_00408184(4,1);
-  *(unsigned int *)(*param_1 + 0xa8) = 4;
-  temp_v5 = isEntryUsable(g_btlEvent);
-  if (temp_v5 != 0) {
-    return;
-  }
-  temp_v5 = g_btlEvent;
-  FUN_004d7a70(g_btlEvent,6,0xffffffff,0);
-  if (temp_v5 != 0) {
-    FUN_004d7fe4(g_btlEvent);
-    return;
-  }
-  FUN_004fbeac(0,param_2,0,1,0);
-  return;
+    if (gameProgressIsAdvanced() != 0) {
+        escaped = 0;
+    }
+    flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+    if ((flagsData->flags & g_btlAction.mask128) != 0) {
+        escaped = 1;
+    }
+    if (handle->data->uiState == 4) {
+        if ((handle->data->stateFlags & 0x40000) != 0) {
+            handle->data->uiState = 0;
+        } else {
+            escaped = 1;
+        }
+    }
+    if (escaped) {
+        FUN_00408184(4, 1);
+        handle->data->uiState = 4;
+        if (isEntryUsable(g_btlEvent) != 0) {
+            return;
+        }
+        if (FUN_004d7a70(g_btlEvent, 6, -1, 0) != 0) {
+            FUN_004d7fe4(g_btlEvent);
+            return;
+        }
+    } else {
+        FUN_00408184(5, 1);
+        handle->data->uiState = 0;
+        flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+        flagsData->flags |= g_btlAction.mask110;
+        flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
+        flagsData->flags |= g_btlAction.mask150;
+    }
+    FUN_004fbeac(0, action, 0, 1, 0);
 }
 
 } /* extern "C" */

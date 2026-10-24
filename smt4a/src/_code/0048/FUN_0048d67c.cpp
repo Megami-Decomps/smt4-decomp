@@ -1,153 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048d67c` (_code @ 0x48d67c, 0x300 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the map marker screen-position update; the VFP conversion order (the draft's per-marker int/float round trips) and the half-scale constant 0.5f are scheduled differently by armcc, and the two float x/y sources of the first branch (0x850C/0x8510 for placed markers) are kept as the draft read them. */
+#include "common.h"
+
+/* One map marker (0x30 bytes at +0x84F8 of the map view). */
+struct MapMarker {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 visible;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ s32 id;           /* -1 for a free marker */
+    /* 0x0C */ f32 x;
+    /* 0x10 */ f32 y;
+    /* 0x14 */ f32 width;
+    /* 0x18 */ f32 height;
+    /* 0x1C */ s32 screenX;
+    /* 0x20 */ s32 screenY;
+    /* 0x24 */ u32 screenWidth;
+    /* 0x28 */ u32 screenHeight;
+    /* 0x2C */ u8 unk2C[4];
+};
+
+/* The map view, as the marker update reads it. */
+struct MapView {
+    /* 0x00000 */ u8 unk00000[0x4CC];
+    /* 0x004CC */ u8 cameraOwner[4];
+    /* 0x004D0 */ u8 unk004D0[0xFB4];
+    /* 0x01484 */ s32 viewWidth;
+    /* 0x01488 */ s32 viewHeight;
+    /* 0x0148C */ u8 unk0148C[0x706C];
+    /* 0x084F8 */ MapMarker markers[1];   /* markerCount entries */
+    /* 0x08528 */ u8 unk08528[0x17FD0];
+    /* 0x204F8 */ s32 markerCount;
+    /* 0x204FC */ s32 markerRadius;
+};
 
 extern "C" {
+extern s8 DAT_005f1c60;
+u8 *gameFlagsGetBlock(void);
+f32 *sub68OwnerGetBlock60(void *owner);
 
-int VectorFloatToUnsigned(...);
-int VectorSignedToFloat(...);
-
-extern signed char DAT_005f1c60; /* 0x5f1c60 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
-extern float *sub68OwnerGetBlock60(int);
-
-
-void FUN_0048d67c(int param_1)
-
+/* Converts every marker's map position to screen position and size around the camera. */
+void FUN_0048d67c(MapView *view)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  float *pfVar3;
-  int temp_v2;
-  int temp_v3;
-  int *piVar6;
-  int *piVar7;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  int temp_v7;
-  int temp_v8;
-  float temp_v9;
-  float temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  float temp_v13;
-  
-  temp_v1 = gameFlagsGetBlock();
-  pfVar3 = (float *)sub68OwnerGetBlock60(param_1 + 0x4cc);
-  piVar7 = (int *)(param_1 + 0x204f8);
-  piVar6 = (int *)(param_1 + 0x204fc);
-  if (*(char *)(temp_v1 + 0xd8e) != '\f') {
-    temp_v1 = 0;
-    temp_v6 = (float)VectorSignedToFloat(*(int *)(param_1 + 0x1484) / 2,(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v9 = (float)VectorSignedToFloat(*(int *)(param_1 + 0x1488) / 2,(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v7 = (int)(temp_v6 - *pfVar3);
-    temp_v6 = temp_v9 - pfVar3[1];
-    if (0 < *piVar7) {
-      temp_v9 = 0.5f;
+    u8 *flags = gameFlagsGetBlock();
+    f32 *camera = sub68OwnerGetBlock60(view->cameraOwner);
+    MapMarker *markers = (MapMarker *)((u8 *)view + 0x84F8);
+    s32 count = view->markerCount;
+    s32 radius = view->markerRadius;
+    if (flags[0xD8E] != 0xC) {
+        s32 dx = (s32)((f32)(view->viewWidth / 2) - camera[0]);
+        s32 dy = (s32)((f32)(view->viewHeight / 2) - camera[1]);
+        for (s32 i = 0; i < count; i++) {
+            MapMarker *marker = &markers[i];
+            if (!((marker->active && marker->visible) || DAT_005f1c60 != 0))
+                continue;
+            if (marker->id != -1) {
+                marker->screenX = (s32)((marker->width - ((f32)dx - 160.0f)) - (f32)(radius / 2));
+                marker->screenY = (s32)((marker->height - ((f32)dy - 120.0f)) - (f32)(radius / 2));
+                marker->screenWidth = radius + 0xC;
+                marker->screenHeight = radius + 0xC;
+            } else {
+                u32 width = (u32)(marker->width * 0.5f);
+                u32 height = (u32)(marker->height * 0.5f);
+                marker->screenX = (s32)(marker->x * 0.5f - ((f32)dx - 160.0f));
+                marker->screenY = (s32)(marker->y * 0.5f - ((f32)dy - 120.0f));
+                marker->screenWidth = width;
+                marker->screenHeight = height;
+            }
+        }
+    } else {
+        s32 dx = (s32)((f32)view->viewWidth - camera[0]);
+        s32 dy = (s32)((f32)view->viewHeight - camera[1]);
+        for (s32 i = 0; i < count; i++) {
+            MapMarker *marker = &markers[i];
+            if (!((marker->active && marker->visible) || DAT_005f1c60 != 0))
+                continue;
+            if (marker->id != -1) {
+                marker->screenX = (s32)((marker->x - ((f32)dx - 160.0f)) - (f32)radius);
+                marker->screenY = (s32)((marker->y - ((f32)dy - 120.0f)) - (f32)radius);
+                marker->screenWidth = 0x18 + radius * 2;
+                marker->screenHeight = 0x18 + radius * 2;
+            } else {
+                u32 width = (u32)marker->width;
+                u32 height = (u32)marker->height;
+                marker->screenWidth = width;
+                marker->screenHeight = height;
+                marker->screenX = (s32)(marker->x - ((f32)dx - 160.0f));
+                marker->screenY = (s32)(marker->y - ((f32)dy - 120.0f));
+            }
+        }
     }
-    temp_v8 = (int)temp_v6;
-    if (0 < *piVar7) {
-      do {
-        temp_v2 = param_1 + temp_v1 * 0x30;
-        temp_v4 = *(char *)(temp_v2 + 0x84f8) == '\0';
-        temp_v0 = '\0';
-        if (!temp_v4) {
-          temp_v0 = *(char *)(temp_v2 + 0x84f9);
-        }
-        temp_v5 = temp_v4 || temp_v0 == '\0';
-        if (temp_v4 || temp_v0 == '\0') {
-          temp_v5 = DAT_005f1c60 == '\0';
-        }
-        if (!temp_v5) {
-          if (*(int *)(temp_v2 + 0x8500) != -1) {
-            temp_v6 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v13 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v10 = (float)VectorSignedToFloat(*piVar6 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(int *)(temp_v2 + 0x8514) =
-                 (int)((*(float *)(temp_v2 + 0x850c) - (temp_v6 - 160.0f)) - temp_v10);
-            temp_v6 = (float)VectorSignedToFloat(*piVar6 / 2,(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(int *)(temp_v2 + 0x8518) =
-                 (int)((*(float *)(temp_v2 + 0x8510) - (temp_v13 - 120.0f)) - temp_v6);
-            *(int *)(temp_v2 + 0x851c) = *piVar6 + 0xc;
-            *(int *)(temp_v2 + 0x8520) = *piVar6 + 0xc;
-          }
-          else {
-            temp_v6 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v2 + 0x850c) * temp_v9,3);
-            temp_v12 = VectorFloatToUnsigned(*(float *)(temp_v2 + 0x8510) * temp_v9,3);
-            *(int *)(temp_v2 + 0x8514) = (int)(*(float *)(temp_v2 + 0x8504) * temp_v9 - (temp_v6 - 160.0f))
-            ;
-            *(int *)(temp_v2 + 0x8518) = (int)(*(float *)(temp_v2 + 0x8508) * temp_v9 - (temp_v10 - 120.0f))
-            ;
-            *(unsigned int *)(temp_v2 + 0x851c) = temp_v11;
-            *(unsigned int *)(temp_v2 + 0x8520) = temp_v12;
-          }
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < *piVar7);
-    }
-  }
-  else {
-    temp_v9 = (float)VectorSignedToFloat(*(int *)(param_1 + 0x1484),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorSignedToFloat(*(int *)(param_1 + 0x1488),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v7 = 0;
-    temp_v1 = 0xc;
-    if (0 < *piVar7) {
-      temp_v1 = 0x18;
-    }
-    temp_v8 = (int)(temp_v9 - *pfVar3);
-    temp_v2 = (int)(temp_v6 - pfVar3[1]);
-    if (0 < *piVar7) {
-      do {
-        temp_v3 = param_1 + temp_v7 * 0x30;
-        temp_v4 = *(char *)(temp_v3 + 0x84f8) == '\0';
-        temp_v0 = '\0';
-        if (!temp_v4) {
-          temp_v0 = *(char *)(temp_v3 + 0x84f9);
-        }
-        temp_v5 = temp_v4 || temp_v0 == '\0';
-        if (temp_v4 || temp_v0 == '\0') {
-          temp_v5 = DAT_005f1c60 == '\0';
-        }
-        if (!temp_v5) {
-          if (*(int *)(temp_v3 + 0x8500) != -1) {
-            temp_v9 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v10 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v6 = (float)VectorSignedToFloat(*piVar6,(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(int *)(temp_v3 + 0x8514) =
-                 (int)((*(float *)(temp_v3 + 0x8504) - (temp_v9 - 160.0f)) - temp_v6);
-            temp_v6 = (float)VectorSignedToFloat(*piVar6,(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(int *)(temp_v3 + 0x8518) =
-                 (int)((*(float *)(temp_v3 + 0x8508) - (temp_v10 - 120.0f)) - temp_v6);
-            *(int *)(temp_v3 + 0x851c) = temp_v1 + *piVar6 * 2;
-            *(int *)(temp_v3 + 0x8520) = temp_v1 + *piVar6 * 2;
-          }
-          else {
-            temp_v6 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v12 = VectorFloatToUnsigned(*(unsigned int *)(temp_v3 + 0x850c),3);
-            temp_v11 = VectorFloatToUnsigned(*(unsigned int *)(temp_v3 + 0x8510),3);
-            *(unsigned int *)(temp_v3 + 0x851c) = temp_v12;
-            *(unsigned int *)(temp_v3 + 0x8520) = temp_v11;
-            *(int *)(temp_v3 + 0x8514) = (int)(*(float *)(temp_v3 + 0x8504) - (temp_v6 - 160.0f));
-            *(int *)(temp_v3 + 0x8518) = (int)(*(float *)(temp_v3 + 0x8508) - (temp_v9 - 120.0f));
-          }
-        }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < *piVar7);
-    }
-  }
-  *(unsigned char *)(param_1 + 0x7b93) = 0;
-  return;
+    *((u8 *)view + 0x7B93) = 0;
 }
 
 } /* extern "C" */

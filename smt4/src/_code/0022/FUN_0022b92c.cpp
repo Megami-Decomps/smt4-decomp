@@ -1,185 +1,93 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022b92c` (_code @ 0x22b92c, 0x324 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: opens a gap of `count` bytes at `position` in a MoLive byte vector (shifting the tail in place, or reallocating with the grown capacity); written from the decompilation, the inlined copy loops (unrolled by two) and the allocation retry layout not compared with retail */
+#include "mobiclip/MoLiveContainers.h"
+
+/* A byte vector that draws its storage from a MoLive allocator. */
+struct MoLiveByteVector {
+    /* 0x00 */ MoLive::Allocator *allocator;
+    /* 0x04 */ u8 *data;
+    /* 0x08 */ u32 capacity;
+    /* 0x0C */ u32 size;
+};
 
 extern "C" {
+u32 containerGrowCapacity(u32 capacity, u32 required, u32 count, u32 extraA, u32 extraB);
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int containerGrowCapacity(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-unsigned int FUN_0022b92c(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Moves `length` bytes from `source` to `destination`, front to back. */
+static __inline void copyForward(u8 *destination, const u8 *source, u32 length)
 {
-/* irregular: 2 goto(s) */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned char *puVar6;
-  unsigned int temp_v3;
-  unsigned char *puVar8;
-  int *piVar9;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v5 = param_2 + param_3;
-  temp_v2 = param_1[3];
-  temp_v4 = temp_v2 + param_3;
-  if ((unsigned int)param_1[2] >= temp_v4) {
-    temp_v0 = temp_v2 - param_2;
-    if (temp_v0 < param_3) {
-      param_3 = temp_v0;
-    }
-    puVar8 = (unsigned char *)((temp_v2 + param_1[1]) - param_3);
-    temp_v0 = temp_v0 - param_3;
-    if (param_3 != 0) {
-      puVar4 = (unsigned char *)(param_1[1] + (temp_v4 - param_3));
-      do {
-        if (puVar4 != (unsigned char *)0x0) {
-          *puVar4 = *puVar8;
+    for (u32 i = 0; i < length; i++)
+        destination[i] = source[i];
+}
+
+/* Moves `length` bytes from `source` to `destination`, back to front (for overlapping ranges). */
+static __inline void copyBackward(u8 *destination, const u8 *source, u32 length)
+{
+    for (u32 i = length; i != 0; i--)
+        destination[i - 1] = source[i - 1];
+}
+
+/* Allocates `bytes`; reports a failure and gives the caller NULL. */
+static __inline u8 *byteVectorAllocate(MoLive::Allocator *allocator, u32 bytes)
+{
+    u8 *memory = static_cast<u8 *>(allocator->allocate(bytes));
+    if (memory == NULL)
+        allocator->report(MoLive::g_moLiveOutOfMemoryMessage, bytes);
+    return memory;
+}
+
+/* Returns 1 on success, 0 when the storage could not be allocated. */
+u32 FUN_0022b92c(MoLiveByteVector *vector, u32 position, u32 count, u32 growHint)
+{
+    u32 gapEnd = position + count;
+    u32 newSize = vector->size + count;
+
+    if (vector->capacity >= newSize) {
+        /* Enough room: the bytes behind the gap move up, the part that lands on unused storage
+         * first, then the overlapping rest. */
+        u32 tail = vector->size - position;
+        u32 beyond = count < tail ? count : tail;
+        u8 *source = vector->data + vector->size - beyond;
+        u32 inside = tail - beyond;
+        copyForward(vector->data + newSize - beyond, source, beyond);
+        if (inside != 0) {
+            if (position >= gapEnd)
+                copyForward(vector->data + gapEnd, vector->data + position, inside);
+            else
+                copyBackward(vector->data + gapEnd, vector->data + position, inside);
         }
-        puVar4 = puVar4 + 1;
-        puVar8 = puVar8 + 1;
-        param_3 = param_3 - 1;
-      } while (param_3 != 0);
-    }
-    if (temp_v0 != 0) {
-      if (param_2 >= temp_v5) {
-        puVar4 = (unsigned char *)(param_1[1] + temp_v5);
-        puVar8 = (unsigned char *)(param_1[1] + param_2);
-        if (temp_v0 >= 0x80000000) {
-          do {
-            temp_v0 = temp_v0 - 1;
-            *puVar4 = *puVar8;
-            puVar8 = puVar8 + 1;
-            puVar4 = puVar4 + 1;
-          } while (temp_v0 != 0);
+    } else {
+        u32 newCapacity = containerGrowCapacity(vector->capacity, newSize, count, growHint, growHint);
+        MoLive::Allocator *allocator = vector->allocator;
+        u8 *memory = NULL;
+        u32 usable = 0;
+        if (newCapacity != 0) {
+            memory = byteVectorAllocate(allocator, newCapacity);
+            usable = newCapacity;
+            if (memory == NULL) {
+                if (newSize == newCapacity) {
+                    allocator->release(NULL);
+                    return 0;
+                }
+                usable = 0;
+                if (newSize != 0) {
+                    memory = byteVectorAllocate(allocator, newSize);
+                    usable = newSize;
+                    if (memory == NULL) {
+                        allocator->release(NULL);
+                        return 0;
+                    }
+                }
+            }
         }
-        else {
-          if ((int)temp_v0 < 2) {
-            temp_v0 = 1;
-          }
-          else if ((int)temp_v0 < 1) goto LAB_0022ba94;
-          puVar5 = puVar8 + -1;
-          puVar6 = puVar4 + -1;
-          if ((temp_v0 & 1) != 0) {
-            *puVar4 = *puVar8;
-            puVar5 = puVar8;
-            puVar6 = puVar4;
-          }
-          for (temp_v2 = (int)temp_v0 >> 1; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-            puVar6[1] = puVar5[1];
-            puVar5 = puVar5 + 2;
-            puVar6 = puVar6 + 2;
-            *puVar6 = *puVar5;
-          }
-        }
-      }
-      else {
-        puVar4 = (unsigned char *)(temp_v5 + temp_v0 + param_1[1]);
-        puVar8 = (unsigned char *)(param_1[1] + param_2 + temp_v0);
-        if (temp_v0 >= 0x80000000) {
-          do {
-            puVar8 = puVar8 + -1;
-            temp_v0 = temp_v0 - 1;
-            puVar4 = puVar4 + -1;
-            *puVar4 = *puVar8;
-          } while (temp_v0 != 0);
-        }
-        else {
-          if ((int)temp_v0 < 2) {
-            temp_v0 = 1;
-          }
-          else if ((int)temp_v0 < 1) goto LAB_0022ba94;
-          if ((temp_v0 & 1) != 0) {
-            puVar8 = puVar8 + -1;
-            puVar4 = puVar4 + -1;
-            *puVar4 = *puVar8;
-          }
-          for (temp_v2 = (int)temp_v0 >> 1; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-            puVar4[-1] = puVar8[-1];
-            puVar8 = puVar8 + -2;
-            puVar4 = puVar4 + -2;
-            *puVar4 = *puVar8;
-          }
-        }
-      }
+        copyForward(memory, vector->data, position);
+        copyForward(memory + gapEnd, vector->data + position, vector->size - position);
+        u8 *oldData = vector->data;
+        vector->data = memory;
+        vector->capacity = usable;
+        allocator->release(oldData);
     }
-LAB_0022ba94:
-    if ((unsigned int)param_1[3] <= temp_v5) {
-      temp_v5 = param_1[3];
-    }
-    temp_v2 = (param_1[1] + temp_v5) - (param_1[1] + param_2);
-    if (0 < temp_v2) {
-      for (temp_v2 = temp_v2 >> 1; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-      }
-    }
-  }
-  else {
-    temp_v1 = containerGrowCapacity(param_1[2],temp_v4,param_3,param_4,param_4);
-    piVar9 = (int *)*param_1;
-    puVar8 = (unsigned char *)0x0;
-    temp_v0 = 0;
-    if ((temp_v1 != 0) &&
-       (temp_v6 = temp_v1, puVar8 = (unsigned char *)(**(romwright_code **)*piVar9)(piVar9,temp_v1), temp_v0 = temp_v1,
-       puVar8 == (unsigned char *)0x0)) {
-      (**(romwright_code **)(*piVar9 + 8))
-                (piVar9,"MoLive::Allocator: not enough memory to allocate %d bytes !!!\n",temp_v6);
-      if (temp_v4 == temp_v1) {
-        (**(romwright_code **)(*piVar9 + 4))(piVar9);
-        return 0;
-      }
-      temp_v0 = 0;
-      if ((temp_v4 != 0) &&
-         (puVar8 = (unsigned char *)(**(romwright_code **)*piVar9)(piVar9,temp_v4), temp_v0 = temp_v4,
-         puVar8 == (unsigned char *)0x0)) {
-        (**(romwright_code **)(*piVar9 + 8))
-                  (piVar9,"MoLive::Allocator: not enough memory to allocate %d bytes !!!\n",temp_v4);
-        (**(romwright_code **)(*piVar9 + 4))(piVar9);
-        return 0;
-      }
-    }
-    puVar4 = (unsigned char *)param_1[1];
-    puVar5 = puVar8;
-    for (temp_v1 = param_2; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
-      if (puVar5 != (unsigned char *)0x0) {
-        *puVar5 = *puVar4;
-      }
-      puVar5 = puVar5 + 1;
-      puVar4 = puVar4 + 1;
-    }
-    temp_v2 = param_1[3] - param_2;
-    puVar4 = (unsigned char *)(param_1[1] + param_2);
-    if (temp_v2 != 0) {
-      puVar5 = puVar8 + temp_v5;
-      do {
-        if (puVar5 != (unsigned char *)0x0) {
-          *puVar5 = *puVar4;
-        }
-        puVar5 = puVar5 + 1;
-        puVar4 = puVar4 + 1;
-        temp_v2 = temp_v2 - 1;
-      } while (temp_v2 != 0);
-    }
-    temp_v3 = param_1[1];
-    param_1[1] = (unsigned int)puVar8;
-    param_1[2] = temp_v0;
-    if (0 < (int)param_1[3]) {
-      for (temp_v2 = (int)param_1[3] >> 1; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-      }
-    }
-    (**(romwright_code **)(*piVar9 + 4))(piVar9,temp_v3);
-  }
-  param_1[3] = temp_v4;
-  return 1;
+    vector->size = newSize;
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,210 +1,164 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0794` (_code @ 0x3f0794, 0x35c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 217 rows, three small differences): retail copies the 3 handles through r2, loads the g_btlMain base before the 0x4d64 offset literal and loads the flags halfword before bumping the step in the final case */
+#include "common.h"
+
+// Battle resource loader: the step counter, its critical section and the resource slots.
+struct BattleLoader {
+    u8 unk0000[0x2268];
+    u32 slot2268;           // 0x2268
+    u32 slot226c;           // 0x226c
+    u32 slot2270;           // 0x2270
+    u32 slot2274;           // 0x2274
+    u32 slot2278;           // 0x2278
+    u32 slot227c;           // 0x227c
+    u32 slot2280;           // 0x2280
+    u32 slot2284;           // 0x2284
+    u32 slot2288;           // 0x2288
+    u32 process;            // 0x228c
+    u8 unk2290[0x4d08 - 0x2290];
+    u16 flags;              // 0x4d08: bit 0 = finished
+    u16 step;               // 0x4d0a
+    u8 lock[0x58];          // 0x4d0c: critical section
+    u32 slot4d64;           // 0x4d64
+};
+
+// Files loaded by the battle (handles at 0x28..0x4c of the global table).
+struct BtlLoadTable {
+    u8 unk00[0x28];
+    u32 files[10];          // 0x28
+};
 
 extern "C" {
 
-int asdLoadFileSyncDefault(void);
-int btlStageLoadTable(void);
-int FUN_00275bc8(void);
-int battleMapAccessoryLoad(void);
-int FUN_003cdb28(void);
-int FUN_003ce360(void);
-int loadSlotEnsureLoaded(int);
-int FUN_00470e64(unsigned int);
-int jyoucyuEnsureResidentEntry(void);
-int callJyoucyuGetTableEntry1B(void);
+extern BtlLoadTable g_btlMain;
+extern u32 g_aocSystem;
+extern const char DAT_0052887c[];
+extern const char DAT_00528858[];
+extern const char DAT_0052883c[];
+extern const char DAT_00528820[];
+extern const char DAT_00528804[];
+extern const char DAT_005287e4[];
+extern const char DAT_005287cc[];
+extern const char DAT_005287ac[];
+extern const char DAT_00528790[];
+extern const char DAT_00528774[];
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+void nn_os_CriticalSection_Enter(void* section);
+void nn_os_CriticalSection_Leave(void* section);
+void callJyoucyuGetTableEntry1B(void);
+void loadSlotEnsureLoaded(s32 slot);
+void FUN_00470e64(u32 aoc);
+u32 asdLoadFileSyncDefault(const char* path);
+void btlStageLoadTable(void);
+void battleMapAccessoryLoad(void);
+s32 jyoucyuEnsureResidentEntry(void);
+u32 FUN_00275bc8(void);
+void FUN_003cdb28(void);
+void FUN_003ce360(void);
 
-extern unsigned int g_aocSystem; /* 0x570280 */
-extern char *DAT_00573948; /* 0x573948 */
-extern char *DAT_0057394c; /* 0x57394c */
-extern char *DAT_00573950; /* 0x573950 */
-extern char *DAT_00573954; /* 0x573954 */
-extern char *DAT_00573958; /* 0x573958 */
-extern char *DAT_0057395c; /* 0x57395c */
-extern char *DAT_00573960; /* 0x573960 */
-extern char *DAT_00573964; /* 0x573964 */
-extern char *DAT_00573968; /* 0x573968 */
-extern char *DAT_0057396c; /* 0x57396c */
+#define BATTLE_WORD(base, offset) (*reinterpret_cast<u32*>(reinterpret_cast<u8*>(base) + (offset)))
 
-/* Supplied declaration required: asdLoadFileSyncDefault. */
-/* Supplied declaration required: btlStageLoadTable. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: battleMapAccessoryLoad. */
-/* Supplied declaration required: FUN_003cdb28. */
-/* Supplied declaration required: FUN_003ce360. */
-/* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: FUN_00470e64. */
-/* Supplied declaration required: jyoucyuEnsureResidentEntry. */
-/* Supplied declaration required: callJyoucyuGetTableEntry1B. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-void FUN_003f0794(int param_1)
-
+// Runs the battle resource loading steps under the loader's critical section: each case
+// waits for the previous resource to be ready, publishes the next one, and falls through to
+// the following step until the whole sequence is finished.
+void FUN_003f0794(BattleLoader* loader)
 {
-/* irregular: 7 unstructured edge(s); 8 goto(s); 10 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  char *pcVar3;
-  char *pcVar4;
-  
-  nn_os_CriticalSection_Enter(param_1 + 0x4d0c);
-  do {
-    temp_v0 = *(unsigned short *)(param_1 + 0x4d0a);
-    temp_v1 = (unsigned int)temp_v0;
-    switch(temp_v1) {
-    case 0:
-      callJyoucyuGetTableEntry1B();
-      loadSlotEnsureLoaded(7);
-      loadSlotEnsureLoaded(0x3e);
-      loadSlotEnsureLoaded(0x3b);
-      loadSlotEnsureLoaded(0x16);
-      loadSlotEnsureLoaded(0x13);
-      loadSlotEnsureLoaded(0x48);
-      FUN_00470e64(g_aocSystem);
-      pcVar3 = "battle/Legion/LegionMsg.mbm";
-      asdLoadFileSyncDefault();
-      pcVar4 = "battle/Legion/LegionMsgTable.tbb";
-      DAT_00573948 = pcVar3;
-      asdLoadFileSyncDefault();
-      pcVar3 = "battle/Legion/LegionScr.bf";
-      DAT_0057394c = pcVar4;
-      asdLoadFileSyncDefault();
-      pcVar4 = "battle/Common/common.mbm";
-      DAT_00573950 = pcVar3;
-      asdLoadFileSyncDefault();
-      pcVar3 = "battle/talk/TalkSystem.mbm";
-      DAT_00573954 = pcVar4;
-      asdLoadFileSyncDefault();
-      pcVar4 = "battle/talk/TalkBaseData.tbb";
-      DAT_00573958 = pcVar3;
-      asdLoadFileSyncDefault();
-      pcVar3 = "battle/Systematic.tbb";
-      DAT_0057395c = pcVar4;
-      asdLoadFileSyncDefault();
-      pcVar4 = "event/quest/SubQuestGuest.mbm";
-      DAT_00573960 = pcVar3;
-      asdLoadFileSyncDefault();
-      pcVar3 = "battle/BossDeadTable.tbb";
-      DAT_00573964 = pcVar4;
-      asdLoadFileSyncDefault();
-      pcVar4 = "battle/PartnerAttack.mbm";
-      DAT_00573968 = pcVar3;
-      asdLoadFileSyncDefault();
-      DAT_0057396c = pcVar4;
-      btlStageLoadTable();
-      battleMapAccessoryLoad();
-      temp_v1 = *(unsigned short *)(param_1 + 0x4d0a) + 1;
-      *(short *)(param_1 + 0x4d0a) = (short)temp_v1;
-    case 1:
-      jyoucyuEnsureResidentEntry();
-      if (temp_v1 != 0) {
-        *(char **)(param_1 + 0x2280) = DAT_00573948;
-        *(char **)(param_1 + 0x2284) = DAT_0057394c;
-        pcVar3 = DAT_00573950;
-        *(char **)(param_1 + 0x2288) = DAT_00573950;
-        FUN_00275bc8();
-        *(char **)(param_1 + 0x228c) = pcVar3;
-        pcVar3[0x108] = '\0';
-        pcVar3[0x109] = '\0';
-        pcVar3[0x10a] = '\0';
-        pcVar3[0x10b] = '\0';
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f0948;
-      }
-      break;
-    case 2:
-LAB_003f0948:
-      if (*(int *)(param_1 + 0x2288) != 0) {
-        *(char **)(param_1 + 0x2268) = DAT_00573954;
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f0970;
-      }
-      break;
-    case 3:
-LAB_003f0970:
-      if (*(int *)(param_1 + 0x2268) != 0) {
-        *(char **)(param_1 + 0x226c) = DAT_00573958;
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f0998;
-      }
-      break;
-    case 4:
-LAB_003f0998:
-      if (*(int *)(param_1 + 0x226c) != 0) {
-        *(char **)(param_1 + 0x2270) = DAT_0057395c;
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f09c0;
-      }
-      break;
-    case 5:
-LAB_003f09c0:
-      if (*(int *)(param_1 + 0x2270) != 0) {
-        *(char **)(param_1 + 0x2278) = DAT_00573964;
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f09e8;
-      }
-      break;
-    case 6:
-LAB_003f09e8:
-      if (*(int *)(param_1 + 0x2278) != 0) {
-        *(char **)(param_1 + 0x2274) = DAT_00573960;
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f0a10;
-      }
-      break;
-    case 7:
-LAB_003f0a10:
-      if (*(int *)(param_1 + 0x2274) != 0) {
-        *(char **)(param_1 + 0x227c) = DAT_00573968;
-        *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-        goto LAB_003f0a38;
-      }
-      break;
-    case 8:
-LAB_003f0a38:
-      if (*(int *)(param_1 + 0x227c) != 0) {
-        temp_v0 = *(short *)(param_1 + 0x4d0a) + 1;
-        *(unsigned short *)(param_1 + 0x4d0a) = temp_v0;
-        goto LAB_003f0a54;
-      }
-      break;
-    case 9:
-LAB_003f0a54:
-      *(unsigned short *)(param_1 + 0x4d0a) = temp_v0 + 1;
-    case 10:
-      FUN_003cdb28();
-      *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-    case 0xb:
-      FUN_003ce360();
-      *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-    case 0xc:
-      *(char **)(param_1 + 0x4d64) = DAT_0057396c;
-      *(short *)(param_1 + 0x4d0a) = *(short *)(param_1 + 0x4d0a) + 1;
-    case 0xd:
-      if (*(int *)(param_1 + 0x4d64) != 0) {
-        temp_v0 = *(short *)(param_1 + 0x4d0a) + 1;
-        *(unsigned short *)(param_1 + 0x4d0a) = temp_v0;
-        *(unsigned short *)(param_1 + 0x4d0a) = temp_v0 + 1;
-        *(unsigned short *)(param_1 + 0x4d08) = *(unsigned short *)(param_1 + 0x4d08) | 1;
-      }
-      break;
-    case 0xe:
-      *(unsigned short *)(param_1 + 0x4d0a) = temp_v0 + 1;
-      *(unsigned short *)(param_1 + 0x4d08) = *(unsigned short *)(param_1 + 0x4d08) | 1;
-    }
-    if ((*(unsigned short *)(param_1 + 0x4d08) & 1) != 0) {
-      nn_os_CriticalSection_Leave(param_1 + 0x4d0c);
-      return;
-    }
-  } while( 1 );
+    nn_os_CriticalSection_Enter(loader->lock);
+    do {
+        switch (loader->step) {
+        case 0:
+            callJyoucyuGetTableEntry1B();
+            loadSlotEnsureLoaded(7);
+            loadSlotEnsureLoaded(62);
+            loadSlotEnsureLoaded(59);
+            loadSlotEnsureLoaded(22);
+            loadSlotEnsureLoaded(19);
+            loadSlotEnsureLoaded(72);
+            FUN_00470e64(g_aocSystem);
+            g_btlMain.files[0] = asdLoadFileSyncDefault(DAT_0052887c);
+            g_btlMain.files[1] = asdLoadFileSyncDefault(DAT_00528858);
+            g_btlMain.files[2] = asdLoadFileSyncDefault(DAT_0052883c);
+            g_btlMain.files[3] = asdLoadFileSyncDefault(DAT_00528820);
+            g_btlMain.files[4] = asdLoadFileSyncDefault(DAT_00528804);
+            g_btlMain.files[5] = asdLoadFileSyncDefault(DAT_005287e4);
+            g_btlMain.files[6] = asdLoadFileSyncDefault(DAT_005287cc);
+            g_btlMain.files[7] = asdLoadFileSyncDefault(DAT_005287ac);
+            g_btlMain.files[8] = asdLoadFileSyncDefault(DAT_00528790);
+            g_btlMain.files[9] = asdLoadFileSyncDefault(DAT_00528774);
+            btlStageLoadTable();
+            battleMapAccessoryLoad();
+            loader->step++;
+            /* fall through */
+        case 1:
+            if (jyoucyuEnsureResidentEntry() == 0) break;
+            loader->slot2280 = g_btlMain.files[0];
+            loader->slot2284 = g_btlMain.files[1];
+            loader->slot2288 = g_btlMain.files[2];
+            loader->process = FUN_00275bc8();
+            BATTLE_WORD(loader->process, 264) = 0;
+            loader->step++;
+            /* fall through */
+        case 2:
+            if (loader->slot2288 == 0) break;
+            loader->slot2268 = g_btlMain.files[3];
+            loader->step++;
+            /* fall through */
+        case 3:
+            if (loader->slot2268 == 0) break;
+            loader->slot226c = g_btlMain.files[4];
+            loader->step++;
+            /* fall through */
+        case 4:
+            if (loader->slot226c == 0) break;
+            loader->slot2270 = g_btlMain.files[5];
+            loader->step++;
+            /* fall through */
+        case 5:
+            if (loader->slot2270 == 0) break;
+            loader->slot2278 = g_btlMain.files[7];
+            loader->step++;
+            /* fall through */
+        case 6:
+            if (loader->slot2278 == 0) break;
+            loader->slot2274 = g_btlMain.files[6];
+            loader->step++;
+            /* fall through */
+        case 7:
+            if (loader->slot2274 == 0) break;
+            loader->slot227c = g_btlMain.files[8];
+            loader->step++;
+            /* fall through */
+        case 8:
+            if (loader->slot227c == 0) break;
+            loader->step++;
+            /* fall through */
+        case 9:
+            loader->step++;
+            /* fall through */
+        case 10:
+            FUN_003cdb28();
+            loader->step++;
+            /* fall through */
+        case 11:
+            FUN_003ce360();
+            loader->step++;
+            /* fall through */
+        case 12:
+            loader->slot4d64 = g_btlMain.files[9];
+            loader->step++;
+            /* fall through */
+        case 13:
+            if (loader->slot4d64 == 0) break;
+            loader->step++;
+            /* fall through */
+        case 14:
+            loader->step++;
+            loader->flags |= 1;
+            break;
+        default:
+            break;
+        }
+    } while ((loader->flags & 1) == 0);
+    nn_os_CriticalSection_Leave(loader->lock);
 }
 
 } /* extern "C" */

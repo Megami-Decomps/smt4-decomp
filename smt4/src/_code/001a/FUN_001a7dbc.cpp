@@ -1,179 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a7dbc` (_code @ 0x1a7dbc, 0x280 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mode dispatch layout differs: retail tests 0, 1, 3 in order with the data-record copy placed straight after the compares and a shared tail; the build orders the blocks differently and schedules the slot store earlier. */
+#include "common.h"
+
+/* A unit record (0x604 bytes, accessed fields). */
+struct UnitRecord {
+    u16 stat[7];            // 0x00..0x0C
+    u16 current0E;          // 0x0E
+    u16 current10;          // 0x10
+    u8 unk12[0x0A];
+    u16 base1C;             // 0x1C
+    u16 base1E;             // 0x1E
+    u16 base20;             // 0x20
+    u16 base22;             // 0x22
+    u16 base24;             // 0x24
+    u16 base26;             // 0x26
+    u16 base28;             // 0x28
+    u16 current2A;          // 0x2A
+    u16 current2C;          // 0x2C
+    u8 unk2E[2];
+    u32 extra30;            // 0x30
+    u16 resist[8];          // 0x34
+    u8 unk44[2];
+    u16 id;                 // 0x46
+    u8 level;               // 0x48
+    u8 unk49;
+    u8 slot;                // 0x4A
+    u8 unk4B;
+    u8 learnedBits[0x5B5];  // 0x4C
+    u8 unk601;              // 0x601: high nibble bits of the copy's flags
+    u8 unk602[2];
+};
+
+/* The fixed devil data record (accessed fields). */
+struct DevilRecord {
+    u8 unk00[3];
+    u8 level;               // 0x03
+    u8 unk04[0x10];
+    u16 stat[7];            // 0x14..0x20 (non-contiguous ids: see copies below)
+    u8 unk22[0x16];
+    u16 learnIndex;         // 0x38
+    u8 unk3A[2];
+    u16 resist[8];          // 0x3C
+};
+
+/* The copy of a unit's saved devil data. */
+struct DevilCopy {
+    u16 level;              // 0x00
+    u16 stat[6];            // 0x02..0x0C -> unit stats 2.. (see FUN_001a7dbc)
+    u16 stat0E;             // 0x0E
+    u16 current[3];         // 0x10..0x14
+    u8 flags;               // 0x16: bits 2..5 are copied to unit->unk601
+    u8 unk17;
+    u16 first;              // 0x18
+    u16 second;             // 0x1A
+    u16 resist[8];          // 0x1C
+    u16 unk2C[2];
+    u32 extra30;            // 0x30
+};
 
 extern "C" {
+s8 *gameGetSlotTable(void);
+void memClear(void *buffer, s32 size);
+void gameDataSetItemFlag(u16 id, s32 value);
+void gameDataSlotSetFlag(u16 id, s32 value);
+DevilRecord *devilGetRecord(u16 id);
+void gameRecordCopy(u16 id, DevilCopy *copy);
+void unitRecalculateEffectiveStats(UnitRecord *unit);
+void FUN_0029bde4(UnitRecord *unit);
 
-int gameDataSlotSetFlag(int, int);
-int gameDataSetItemFlag(int, int);
-int gameRecordCopy(int, unsigned char [2]);
-int FUN_0029bde4(unsigned short *);
-int unitRecalculateEffectiveStats(unsigned short *);
-int devilGetRecord(void);
-int memClear(unsigned short *, int);
-
-/* stack frame of param_4: 24 slot(s), 51 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned short sp26; /* 0x26: local_26 */
-    unsigned short sp28; /* 0x28: local_28 */
-    unsigned short sp2A; /* 0x2a: local_2a */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned short sp2E; /* 0x2e: local_2e */
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned short sp32; /* 0x32: local_32 */
-    unsigned short sp34; /* 0x34: local_34 */
-    unsigned short sp36; /* 0x36: local_36 */
-    unsigned short sp38; /* 0x38: local_38 */
-    unsigned char sp3A; /* 0x3a: local_3a */
-    unsigned short sp3C; /* 0x3c: local_3c */
-    unsigned short sp3E; /* 0x3e: local_3e */
-    unsigned short sp40; /* 0x40: local_40 */
-    unsigned short sp42; /* 0x42: local_42 */
-    unsigned short sp44; /* 0x44: local_44 */
-    unsigned short sp46; /* 0x46: local_46 */
-    unsigned short sp48; /* 0x48: local_48 */
-    unsigned short sp4A; /* 0x4a: local_4a */
-    unsigned short sp4C; /* 0x4c: local_4c */
-    unsigned short sp4E; /* 0x4e: local_4e */
-    unsigned short sp50; /* 0x50: local_50 */
-} param_4_stack;
-
-/* Supplied declaration required: gameDataSlotSetFlag. */
-/* Supplied declaration required: gameDataSetItemFlag. */
-/* Supplied declaration required: gameRecordCopy. */
-/* Supplied declaration required: FUN_0029bde4. */
-/* Supplied declaration required: unitRecalculateEffectiveStats. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: memClear. */
-
-
-void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short param_3,int param_4)
-
+/* Initialise a unit record for a devil: from the data record (mode 0/3) or from a saved copy (mode 1). */
+void FUN_001a7dbc(UnitRecord *unit, u8 slot, u32 id, s32 mode)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [2];
-  unsigned short temp_v5;
-  unsigned short temp_v6;
-  unsigned short temp_v7;
-  unsigned short temp_v8;
-  unsigned short temp_v9;
-  unsigned short temp_v10;
-  unsigned short temp_v11;
-  unsigned short temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned char temp_v15;
-  unsigned short temp_v16;
-  unsigned short temp_v17;
-  unsigned short temp_v18;
-  unsigned short temp_v19;
-  unsigned short temp_v20;
-  unsigned short temp_v21;
-  unsigned short temp_v22;
-  unsigned short temp_v23;
-  unsigned short temp_v24;
-  unsigned short temp_v25;
-  unsigned int temp_v26;
-  
-  memClear(param_1,0x604);
-  param_1[0x23] = param_3;
-  *(unsigned char *)(param_1 + 0x25) = param_2;
-  if (param_4 != 3) {
-    temp_v1 = gameGetSlotTable();
-    temp_v2 = 0;
-    do {
-      if (*(char *)(temp_v1 + 0x90f0 + temp_v2) < '\0') {
-        *(unsigned char *)(temp_v1 + 0x90f0 + temp_v2) = param_2;
-        break;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x18);
-    gameDataSetItemFlag(param_3,1);
-    gameDataSlotSetFlag(param_3,1);
-  }
-  temp_v3 = (unsigned int)param_3;
-  devilGetRecord();
-  if (param_4 != 0) {
-    if (param_4 != 1) {
-      if (param_4 != 3) {
-        unitRecalculateEffectiveStats(param_1);
-        param_1[0x15] = param_1[7];
-        param_1[0x16] = param_1[8];
-        FUN_0029bde4(param_1);
-        return;
-      }
-      goto LAB_001a7e60;
+    memClear(unit, 0x604);
+    unit->id = id;
+    unit->slot = slot;
+    if (mode != 3) {
+        s8 *slots = gameGetSlotTable() + 0x90F0;
+        for (s32 i = 0; i < 24; i++) {
+            if (slots[i] < 0) {
+                slots[i] = slot;
+                break;
+            }
+        }
+        gameDataSetItemFlag(id, 1);
+        gameDataSlotSetFlag(id, 1);
     }
-    gameRecordCopy(param_3,temp_v4);
-    *(unsigned char *)(param_1 + 0x24) = temp_v4[0];
-    *param_1 = temp_v16;
-    param_1[1] = temp_v17;
-    param_1[2] = temp_v5;
-    param_1[4] = temp_v7;
-    param_1[5] = temp_v8;
-    param_1[6] = temp_v9;
-    param_1[3] = temp_v6;
-    param_1[0xe] = 0;
-    param_1[0xf] = 0;
-    param_1[0x10] = temp_v10;
-    param_1[0x12] = temp_v12;
-    param_1[0x13] = temp_v13;
-    param_1[0x14] = temp_v14;
-    param_1[0x11] = temp_v11;
-    param_1[0x1a] = temp_v18;
-    param_1[0x1b] = temp_v19;
-    param_1[0x1c] = temp_v20;
-    param_1[0x1d] = temp_v21;
-    param_1[0x1e] = temp_v22;
-    param_1[0x1f] = temp_v23;
-    param_1[0x20] = temp_v24;
-    param_1[0x21] = temp_v25;
-    *(unsigned int *)(param_1 + 0x18) = temp_v26;
-    *(unsigned char *)((int)param_1 + 0x601) = (unsigned char)(((unsigned int)temp_v15 << 0x1a) >> 0x1c);
-    temp_v1 = (int)param_1 + (unsigned int)(*(unsigned short *)(temp_v3 + 0x38) >> 3);
-    temp_v0 = *(unsigned char *)(temp_v1 + 0x4c) | (unsigned char)(1 << (*(unsigned short *)(temp_v3 + 0x38) & 7));
-  }
-  else {
-LAB_001a7e60:
-    *(unsigned char *)(param_1 + 0x24) = *(unsigned char *)(temp_v3 + 3);
-    *param_1 = *(unsigned short *)(temp_v3 + 0x14);
-    param_1[1] = *(unsigned short *)(temp_v3 + 0x16);
-    param_1[2] = *(unsigned short *)(temp_v3 + 0x1a);
-    param_1[4] = *(unsigned short *)(temp_v3 + 0x1e);
-    param_1[5] = *(unsigned short *)(temp_v3 + 0x20);
-    param_1[6] = *(unsigned short *)(temp_v3 + 0x22);
-    param_1[3] = *(unsigned short *)(temp_v3 + 0x1c);
-    param_1[0xe] = 0;
-    param_1[0xf] = 0;
-    param_1[0x10] = *(unsigned short *)(temp_v3 + 0x1a);
-    param_1[0x12] = *(unsigned short *)(temp_v3 + 0x1e);
-    param_1[0x13] = *(unsigned short *)(temp_v3 + 0x20);
-    param_1[0x14] = *(unsigned short *)(temp_v3 + 0x22);
-    param_1[0x11] = *(unsigned short *)(temp_v3 + 0x1c);
-    param_1[0x1a] = *(unsigned short *)(temp_v3 + 0x3c);
-    param_1[0x1b] = *(unsigned short *)(temp_v3 + 0x3e);
-    param_1[0x1c] = *(unsigned short *)(temp_v3 + 0x40);
-    param_1[0x1d] = *(unsigned short *)(temp_v3 + 0x42);
-    param_1[0x1e] = *(unsigned short *)(temp_v3 + 0x44);
-    param_1[0x1f] = *(unsigned short *)(temp_v3 + 0x46);
-    param_1[0x20] = *(unsigned short *)(temp_v3 + 0x48);
-    param_1[0x21] = *(unsigned short *)(temp_v3 + 0x4a);
-    temp_v1 = (int)param_1 + (unsigned int)(*(unsigned short *)(temp_v3 + 0x38) >> 3);
-    temp_v0 = *(unsigned char *)(temp_v1 + 0x4c) | (unsigned char)(1 << (*(unsigned short *)(temp_v3 + 0x38) & 7));
-  }
-  *(unsigned char *)(temp_v1 + 0x4c) = temp_v0;
-  unitRecalculateEffectiveStats(param_1);
-  param_1[0x15] = param_1[7];
-  param_1[0x16] = param_1[8];
-  FUN_0029bde4(param_1);
-  return;
+    DevilRecord *record = devilGetRecord(id);
+    switch (mode) {
+    case 0:
+    case 3: {
+        const u16 *fields = reinterpret_cast<const u16 *>(reinterpret_cast<const u8 *>(record) + 0x14);
+        unit->level = record->level;
+        unit->stat[0] = fields[0];
+        unit->stat[1] = fields[1];
+        unit->stat[2] = fields[3];
+        unit->stat[4] = fields[5];
+        unit->stat[5] = fields[6];
+        unit->stat[6] = fields[7];
+        unit->stat[3] = fields[4];
+        unit->current0E = 0;
+        unit->current10 = 0;
+        unit->base1C = fields[3];
+        unit->base20 = fields[5];
+        unit->base22 = fields[6];
+        unit->base24 = fields[7];
+        unit->base1E = fields[4];
+        for (s32 i = 0; i < 8; i++)
+            unit->resist[i] = record->resist[i];
+        unit->learnedBits[record->learnIndex >> 3] |= 1 << (record->learnIndex & 7);
+        break;
+    }
+    case 1: {
+        DevilCopy copy;
+        gameRecordCopy(id, &copy);
+        unit->level = copy.level;
+        unit->stat[0] = copy.current[1];
+        unit->stat[1] = copy.current[2];
+        unit->stat[2] = copy.stat[0];
+        unit->stat[4] = copy.stat[2];
+        unit->stat[5] = copy.stat[3];
+        unit->stat[6] = copy.stat[4];
+        unit->stat[3] = copy.stat[1];
+        unit->current0E = 0;
+        unit->current10 = 0;
+        unit->base1C = copy.stat[5];
+        unit->base20 = copy.resist[0];
+        unit->base22 = copy.resist[1];
+        unit->base24 = copy.resist[2];
+        unit->base1E = copy.stat[6];
+        for (s32 i = 0; i < 8; i++)
+            unit->resist[i] = copy.resist[i + 2];
+        unit->extra30 = copy.extra30;
+        unit->unk601 = (copy.flags << 26) >> 28;
+        unit->learnedBits[record->learnIndex >> 3] |= 1 << (record->learnIndex & 7);
+        break;
+    }
+    }
+    unitRecalculateEffectiveStats(unit);
+    unit->current2A = unit->stat[0];
+    unit->current2C = unit->stat[1];
+    FUN_0029bde4(unit);
 }
-
-} /* extern "C" */
+}

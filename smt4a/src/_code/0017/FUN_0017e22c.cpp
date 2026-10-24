@@ -1,177 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017e22c` (_code @ 0x17e22c, 0x2a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from the decompiler draft, not yet compared against retail. */
+#include "common.h"
 
 extern "C" {
 
-int globalCriticalSectionEnterForward(void);
-int globalCriticalSectionLeaveForward(void);
-int FUN_001963e0(void);
+void globalCriticalSectionEnterForward(void);
+void globalCriticalSectionLeaveForward(void);
+void FUN_001963e0(void);
 
-/* stack frame of param_12: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-} param_12_stack;
+extern s8 DAT_0061a481;
+extern s8 DAT_0061a482;
+extern void* DAT_0061a510;
 
-extern signed char DAT_0061a481; /* 0x61a481 */
-extern signed char DAT_0061a482; /* 0x61a482 */
-extern int DAT_0061a510; /* 0x61a510 */
+// One queued sprite blit of a command list (0x1c bytes).
+struct BlitCommand {
+    u8 kind;        // 0x00: 3 = blit
+    u8 unk01[3];
+    u32 source;     // 0x04
+    s32 dest;       // 0x08
+    u16 srcW;       // 0x0c
+    u16 srcH;       // 0x0e
+    u16 dstW;       // 0x10
+    u16 dstH;       // 0x12
+    u32 flags;      // 0x14: 0-2 source format, 3-5 dest format, 6 clip, 7-8 alignment, 9 wide
+    u8 unk18[4];
+};
 
-/* Supplied declaration required: globalCriticalSectionEnterForward. */
-/* Supplied declaration required: globalCriticalSectionLeaveForward. */
-/* Supplied declaration required: FUN_001963e0. */
+struct BlitList {
+    u8 unk00[0x18];
+    BlitCommand* commands;  // 0x18
+    u8 unk1c[4];
+    s32 count;              // 0x20
+};
 
-
-void FUN_0017e22c(int param_1,unsigned int param_2,int param_3,int param_4,int param_5,int param_6,
-                 int param_7,int param_8,int param_9,int param_10,int param_11,int param_12)
-
+// Queues a blit command with the given source/destination texture formats.
+void FUN_0017e22c(BlitList* list, u32 source, s32 width, s32 height, s32 srcFormat, s32 dest,
+                  s32 cols, s32 rows, s32 dstFormat, s32 layout, s32 clip, s32 pitch)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar4;
-  short temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  
-  if (param_10 == 0x500) {
-    temp_v9 = 0;
-    temp_v0 = 1;
-    temp_v3 = 1;
-  }
-  else if (param_10 == 0x501) {
-    temp_v9 = 1;
-    temp_v0 = 2;
-    temp_v3 = 1;
-  }
-  else {
-    if (param_10 != 0x502) {
-      return;
-    }
-    temp_v9 = 2;
-    temp_v0 = 2;
-    temp_v3 = 2;
-  }
-  if (param_5 == 0x8057) {
-    temp_v2 = 3;
-  }
-  else if (param_5 < 0x8057) {
-    if (param_5 == 0x8051) {
-      temp_v2 = 1;
-    }
-    else {
-      if (param_5 != 0x8056) {
+    u32 alignment, scaleW, scaleH;
+    if (layout == 0x500) {
+        alignment = 0; scaleW = 1; scaleH = 1;
+    } else if (layout == 0x501) {
+        alignment = 1; scaleW = 2; scaleH = 1;
+    } else if (layout == 0x502) {
+        alignment = 2; scaleW = 2; scaleH = 2;
+    } else {
         return;
-      }
-      temp_v2 = 4;
     }
-  }
-  else if (param_5 == 0x8058) {
-    temp_v2 = 0;
-  }
-  else {
-    if (param_5 != 0x8d62) {
-      return;
-    }
-    temp_v2 = 2;
-  }
-  if (param_9 == 0x8057) {
-    temp_v6 = 3;
-    temp_v1 = 2;
-  }
-  else if (param_9 < 0x8057) {
-    if (param_9 == 0x8051) {
-      temp_v6 = 1;
-      temp_v1 = 3;
-    }
-    else {
-      if (param_9 != 0x8056) {
-        return;
-      }
-      temp_v6 = 4;
-      temp_v1 = 2;
-    }
-  }
-  else if (param_9 == 0x8058) {
-    temp_v6 = 0;
-    temp_v1 = 4;
-  }
-  else {
-    if (param_9 != 0x8d62) {
-      return;
-    }
-    temp_v6 = 2;
-    temp_v1 = temp_v6;
-  }
-  if ((param_3 != 0 && param_4 != 0) && (param_7 != 0 && param_8 != 0)) {
-    temp_v8 = param_7 * temp_v0;
-    puVar4 = (unsigned char *)(*(int *)(param_1 + 0x18) + *(int *)(param_1 + 0x20) * 0x1c);
-    *puVar4 = 3;
-    *(unsigned int *)(puVar4 + 4) = param_2;
-    *(int *)(puVar4 + 8) = param_6;
-    temp_v4 = *(unsigned int *)(puVar4 + 0x14);
-    temp_v5 = (temp_v4 & 0xffffffc0) | temp_v2 | (temp_v6 << 3);
-    *(unsigned int *)(puVar4 + 0x14) = temp_v5;
-    *(short *)(puVar4 + 0xc) = (short)param_3;
-    *(short *)(puVar4 + 0xe) = (short)param_4;
-    *(short *)(puVar4 + 0x10) = (short)temp_v8;
-    if (param_11 == 0) {
-      temp_v0 = (temp_v4 & 0xffffff80) | temp_v2 | (temp_v6 << 3);
-    }
-    *(short *)(puVar4 + 0x12) = (short)param_8 * temp_v3;
-    if (param_11 != 0) {
-      temp_v7 = *(unsigned int *)(puVar4 + 0x10);
-      temp_v4 = temp_v7 & 0xffff;
-      temp_v2 = *(unsigned int *)(puVar4 + 0xc) & 0xffff;
-      if (temp_v2 <= temp_v4) {
-        temp_v8 = temp_v7 >> 0x10;
-      }
-      if (temp_v2 > temp_v4 || temp_v8 < *(unsigned int *)(puVar4 + 0xc) >> 0x10) {
-        if (temp_v0 != 2) {
-          temp_v1 = (temp_v2 - temp_v4) * ((temp_v7 >> 0x10) - 1) * temp_v1;
+
+    u32 srcCode;
+    if (srcFormat == 0x8057) srcCode = 3;
+    else if (srcFormat == 0x8051) srcCode = 1;
+    else if (srcFormat == 0x8056) srcCode = 4;
+    else if (srcFormat == 0x8058) srcCode = 0;
+    else if (srcFormat == 0x8d62) srcCode = 2;
+    else return;
+
+    s32 dstCode, dstBytes;
+    if (dstFormat == 0x8057) { dstCode = 3; dstBytes = 2; }
+    else if (dstFormat == 0x8051) { dstCode = 1; dstBytes = 3; }
+    else if (dstFormat == 0x8056) { dstCode = 4; dstBytes = 2; }
+    else if (dstFormat == 0x8058) { dstCode = 0; dstBytes = 4; }
+    else if (dstFormat == 0x8d62) { dstCode = 2; dstBytes = 2; }
+    else return;
+
+    if (width != 0 && height != 0 && cols != 0 && rows != 0) {
+        BlitCommand* cmd = &list->commands[list->count];
+        cmd->kind = 3;
+        cmd->source = source;
+        cmd->dest = dest;
+        u32 flags = (cmd->flags & ~0x3f) | srcCode | (dstCode << 3);
+        cmd->flags = flags;
+        cmd->srcW = width;
+        cmd->srcH = height;
+        cmd->dstW = cols * scaleW;
+        cmd->dstH = rows * scaleH;
+        if (clip == 0) {
+            flags &= ~0x40;
+        } else {
+            u32 x = cmd->srcW;
+            u32 w = cmd->dstW;
+            u32 h = cmd->dstH;
+            if (x > w || h < cmd->srcH) {
+                s32 adjust;
+                if (scaleW != 2) {
+                    adjust = (x - w) * (h - 1) * dstBytes;
+                } else {
+                    u32 d = x - w;
+                    u32 mask = (dstBytes == 3) ? 0x10 : 8;
+                    if ((d & mask) != 0) d -= mask;
+                    adjust = (s32)(d * (rows - 1) * dstBytes) / 2;
+                }
+                cmd->dest = dest - adjust;
+            }
+            flags |= 0x40;
         }
-        else {
-          temp_v2 = temp_v2 - temp_v4;
-          if (temp_v1 == 3) {
-            temp_v0 = 0x10;
-          }
-          else {
-            temp_v0 = 8;
-          }
-          if ((temp_v2 & temp_v0) != 0) {
-            temp_v2 = temp_v2 - temp_v0;
-          }
-          temp_v1 = (int)(temp_v2 * (param_8 - 1) * temp_v1) / 2;
+        flags = (flags & ~0x180) | (alignment << 7);
+        if (pitch == 0x20) {
+            flags |= 0x200;
+        } else {
+            flags &= ~0x200;
         }
-        *(int *)(puVar4 + 8) = param_6 - temp_v1;
-      }
-      temp_v0 = temp_v5 | 0x40;
+        cmd->flags = flags & ~0xc00;
+
+        globalCriticalSectionEnterForward();
+        list->count++;
+        if (DAT_0061a510 == list && DAT_0061a482 != 0 && DAT_0061a481 == 0) {
+            DAT_0061a481 = 1;
+            FUN_001963e0();
+        }
+        globalCriticalSectionLeaveForward();
     }
-    temp_v2 = (temp_v0 & 0xfffffe7f) | (temp_v9 << 7);
-    *(unsigned int *)(puVar4 + 0x14) = temp_v2;
-    if (param_12 == 0x20) {
-      temp_v2 = temp_v2 | 0x200;
-    }
-    else {
-      temp_v2 = (temp_v0 & 0xfffffc7f) | (temp_v9 << 7);
-    }
-    *(unsigned int *)(puVar4 + 0x14) = temp_v2 & 0xfffff3ff;
-    globalCriticalSectionEnterForward();
-    *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
-    if (((DAT_0061a510 == param_1) && (DAT_0061a482 != '\0')) && (DAT_0061a481 == '\0')) {
-      DAT_0061a481 = '\x01';
-      FUN_001963e0();
-    }
-    globalCriticalSectionLeaveForward();
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

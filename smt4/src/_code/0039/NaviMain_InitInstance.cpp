@@ -1,133 +1,185 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `NaviMain_InitInstance` (_code @ 0x399378, 0x28c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps -1 in one register for the byte at +0xc and the halfword at +0x121c0, merges nothing in the 0xb7c..0xb84 stores (here two are fused into an stm), and refers to its key tables through DAT_00404a9c rather than .constdata; the same stores and calls in the same order. */
+#include "shard/W6_W6Match7_DrawParameters.h"
+#include "common.h"
+
+/* A 0x8C-byte UI sprite. */
+struct NaviSprite {
+    u8 unk00[0x8c];
+};
+
+struct NaviPair {
+    u32 first;
+    u32 second;
+};
+
+struct NaviHalves {
+    u16 first;
+    u16 second;
+};
+
+/* The map block returned by gameGetMapBlock (only the byte this initializer defaults). */
+struct NaviMapBlock {
+    /* 0x000 */ u8 unk000[0xd5a];
+    /* 0xd5a */ u8 naviIcon;
+};
+
+/* The navigation screen's work area as this initializer lays it out; only written offsets are named. */
+struct NaviMainWork {
+    /* 0x00000 */ u8 unk00;
+    /* 0x00001 */ u8 unk00001[0x3];
+    /* 0x00004 */ u32 unk04;
+    /* 0x00008 */ u32 unk08;
+    /* 0x0000c */ s8 unk0c;
+    /* 0x0000d */ u8 unk0000d[0x3];
+    /* 0x00010 */ u32 unk10;
+    /* 0x00014 */ u32 unk14;
+    /* 0x00018 */ u8 unk00018[0x3d];
+    /* 0x00055 */ u8 unk55;
+    /* 0x00056 */ u8 selectionState[0xa];
+    /* 0x00060 */ u8 unk60;
+    /* 0x00061 */ u8 unk00061[0x1];
+    /* 0x00062 */ u8 unk62[0x100];
+    /* 0x00162 */ u8 unk00162[0x2];
+    /* 0x00164 */ u8 selection[0x14];
+    /* 0x00178 */ u8 timers[0x480];
+    /* 0x005f8 */ Params002c312c packet;
+    /* 0x00618 */ NaviSprite sprites[5];
+    /* 0x008d4 */ u8 unk008d4[0x118];
+    /* 0x009ec */ u8 unk9ec[3];
+    /* 0x009ef */ u8 unk009ef[0x1];
+    /* 0x009f0 */ u32 unk9f0;
+    /* 0x009f4 */ u8 unk009f4[0x4];
+    /* 0x009f8 */ NaviSprite spriteA;
+    /* 0x00a84 */ u8 unkA84[3];
+    /* 0x00a87 */ u8 unk00a87[0x1];
+    /* 0x00a88 */ NaviSprite spriteB;
+    /* 0x00b14 */ u8 unk00b14[0x68];
+    /* 0x00b7c */ u32 unkB7C;
+    /* 0x00b80 */ u32 unkB80;
+    /* 0x00b84 */ u32 unkB84;
+    /* 0x00b88 */ NaviPair pairsA[32];
+    /* 0x00c88 */ NaviPair pairsB[32];
+    /* 0x00d88 */ u8 unk00d88[0x4d00];
+    /* 0x05a88 */ u32 unk5A88;
+    /* 0x05a8c */ u8 unk5A8C[4];
+    /* 0x05a90 */ u8 unk05a90[0x720];
+    /* 0x061b0 */ u32 unk61B0;
+    /* 0x061b4 */ u8 unk061b4[0xc008];
+    /* 0x121bc */ u8 unk121BC;
+    /* 0x121bd */ u8 unk121bd[0x1];
+    /* 0x121be */ u16 unk121BE;
+    /* 0x121c0 */ u16 unk121C0;
+    /* 0x121c2 */ u8 unk121c2[0xa];
+    /* 0x121cc */ u32 unk121CC;
+    /* 0x121d0 */ u8 unk121d0[0x14];
+    /* 0x121e4 */ NaviHalves halves[32];
+    /* 0x12264 */ u32 unk12264;
+    /* 0x12268 */ u8 unk12268;
+    /* 0x12269 */ u8 unk12269[0x7f];
+    /* 0x122e8 */ u8 unk122E8[8];
+};
+
+/* Animation tables for paramsInit; the original file defined them statically. */
+static const s32 sKeysFirst[21] = {
+    210, 0, 65572, 20, 0, 8, 655360, -131072,
+    4, -131072, 0, 10, 30, 0, 10, 320,
+    0, 8, 0, 65216, 8,
+};
+static const s32 sKeysSecond[9] = {
+    0, 1065353216, 4,
+    1065353216, 0, 4,
+    0, 1065353216, 8,
+};
+static const s32 sKeysFifth[35] = {
+    -3, 0, -3, 0, 0, -3, 0, -1, 0, -1, -1, 0,
+    -1, 0, 2, 0, -3, 0, 0, -3, 0, 3, 0, -3,
+    -3, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
+};
 
 extern "C" {
+NaviMapBlock *gameGetMapBlock(void);
+void NaviMain_InitCallbacks(NaviMainWork *work);
+void asdTMTexTableLoadTmx(s32 id, s32 arg);
+void rt_memclr(void *data, u32 size);
+void rectangleInitializeSelection(void *selection, s32 x, s32 y, s32 size);
+void FUN_003eb068(void *state);
+void drawParameterBlockClear(Params002c312c *packet);
+void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
+                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
+                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void FUN_002bd954(NaviSprite *sprite, u32 group, u32 image, Params002c312c *owner, u16 id, f32 scale);
+void timerStart(NaviSprite *sprite, s32 id, s32 arg);
+void uiInitializeEightTimerSet(void *timers);
+void memFill8(void *data, s32 value);
+void uiSpriteInitializeState(NaviSprite *sprite, u32 group, s32 image, s32 kind,
+                             Params002c312c *owner, u16 id, f32 scale);
 
-int rectangleInitializeSelection(unsigned char *, int, int, int);
-int uiInitializeEightTimerSet(unsigned char *);
-int memFill8(unsigned char *, int);
-int timerStart(...);
-int FUN_002bd954(unsigned char *, int, int, unsigned char *, int);
-int uiSpriteInitializeState(...);
-int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int rt_memclr(unsigned char *, int);
-int asdTMTexTableLoadTmx(int, int);
-int FUN_003eb068(unsigned char *);
-int NaviMain_InitCallbacks(unsigned char *);
-int drawParameterBlockClear(void);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern unsigned char DAT_00404a24; /* 0x404a24 */
-extern unsigned char DAT_00404a78; /* 0x404a78 */
-extern unsigned char DAT_00404a9c; /* 0x404a9c */
-
-/* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: uiInitializeEightTimerSet. */
-/* Supplied declaration required: memFill8. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: uiSpriteInitializeState. */
-extern int gameGetMapBlock(void);
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_003eb068. */
-/* Supplied declaration required: NaviMain_InitCallbacks. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void NaviMain_InitInstance(unsigned char *param_1)
-
+/* Resets the navigation screen's work area: its callbacks and icon texture, the selection and timer sets,
+   the five header sprites and the two animated sprites. */
+void NaviMain_InitInstance(NaviMainWork *work)
 {
-/* irregular: 12 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  
-  temp_v0 = gameGetMapBlock();
-  NaviMain_InitCallbacks(param_1);
-  asdTMTexTableLoadTmx(0x33,0);
-  param_1[0xc] = 0xff;
-  *(unsigned int *)(param_1 + 0x14) = 0;
-  *param_1 = 0;
-  param_1[0x55] = 0;
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  rt_memclr(param_1 + 0x62,0x100);
-  param_1[0x60] = 0;
-  rectangleInitializeSelection(param_1 + 0x164,0,0,0x1c);
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 8) = 0;
-  FUN_003eb068(param_1 + 0x56);
-  puVar2 = param_1 + 0x5f8;
-  drawParameterBlockClear();
-  paramsInit(puVar2,&DAT_00404a24,0x54,&DAT_00404a78,0x24,0,0,0,0,&DAT_00404a9c,0x8c);
-  temp_v1 = 0;
-  do {
-    FUN_002bd954(param_1 + temp_v1 * 0x8c + 0x618,0x1c,0xfa1,puVar2,0x15);
-    timerStart(param_1 + temp_v1 * 0x8c + 0x618,4,0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 5);
-  uiInitializeEightTimerSet(param_1 + 0x178);
-  *(unsigned int *)(param_1 + 0xb84) = 0x78;
-  *(unsigned int *)(param_1 + 0xb80) = 0xa0;
-  *(unsigned int *)(param_1 + 0xb7c) = 0;
-  if (*(char *)(temp_v0 + 0xd5a) == '\0') {
-    *(unsigned char *)(temp_v0 + 0xd5a) = 0xc;
-  }
-  *(unsigned int *)(param_1 + 0x5a88) = 0;
-  *(unsigned int *)(param_1 + 0x61b0) = 0;
-  param_1[0x5a8c] = 0;
-  param_1[0x5a8d] = 0;
-  param_1[0x5a8e] = 0;
-  param_1[0x5a8f] = 0;
-  temp_v1 = 0x20;
-  temp_v0 = 0;
-  do {
-    temp_v1 = temp_v1 - 1;
-    *(unsigned int *)(param_1 + temp_v0 * 8 + 0xb88) = 0;
-    *(unsigned int *)(param_1 + temp_v0 * 8 + 0xb8c) = 0;
-    *(unsigned int *)(param_1 + temp_v0 * 8 + 0xc88) = 0;
-    *(unsigned int *)(param_1 + temp_v0 * 8 + 0xc8c) = 0;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v1 != 0);
-  *(unsigned int *)(param_1 + 0x121cc) = 0;
-  param_1[0x12268] = 0;
-  param_1[0x121bc] = 0;
-  *(unsigned short *)(param_1 + 0x121be) = 0;
-  *(unsigned short *)(param_1 + 0x121c0) = 0xffff;
-  memFill8(param_1 + 0x122e8,1);
-  temp_v1 = 0x20;
-  temp_v0 = 0;
-  do {
-    temp_v1 = temp_v1 - 1;
-    *(unsigned short *)(param_1 + temp_v0 * 4 + 0x121e4) = 0;
-    *(unsigned short *)(param_1 + temp_v0 * 4 + 0x121e6) = 0;
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v1 != 0);
-  *(unsigned int *)(param_1 + 0x12264) = 0;
-  param_1[0x9ec] = 0;
-  param_1[0x9ed] = 0;
-  param_1[0x9ee] = 0;
-  *(unsigned int *)(param_1 + 0x9f0) = 0;
-  uiSpriteInitializeState(param_1 + 0x9f8,0x1c,0x1121,0x1d,puVar2,0x15);
-  timerStart(param_1 + 0x9f8,0);
-  param_1[0xa84] = 0;
-  param_1[0xa85] = 0;
-  param_1[0xa86] = 0;
-  uiSpriteInitializeState(param_1 + 0xa88,0x1c,0x111a,0x1c,puVar2,0x15);
-  timerStart(param_1 + 0xa88,5,0);
-  return;
+    NaviMapBlock *mapBlock = gameGetMapBlock();
+    NaviMain_InitCallbacks(work);
+    asdTMTexTableLoadTmx(0x33, 0);
+    work->unk0c = -1;
+    work->unk14 = 0;
+    work->unk00 = 0;
+    work->unk55 = 0;
+    work->unk10 = 0;
+    rt_memclr(work->unk62, 0x100);
+    work->unk60 = 0;
+    rectangleInitializeSelection(work->selection, 0, 0, 0x1c);
+    work->unk04 = 0;
+    work->unk08 = 0;
+    FUN_003eb068(work->selectionState);
+    drawParameterBlockClear(&work->packet);
+    paramsInit(&work->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
+               NULL, 0, NULL, 0, sKeysFifth, sizeof(sKeysFifth));
+    for (s32 i = 0; i < 5; i++) {
+        FUN_002bd954(&work->sprites[i], 0x1c, 0xfa1, &work->packet, 0x15, 1.0f);
+        timerStart(&work->sprites[i], 4, 0);
+    }
+    uiInitializeEightTimerSet(work->timers);
+    work->unkB84 = 0x78;
+    work->unkB80 = 0xa0;
+    work->unkB7C = 0;
+    if (mapBlock->naviIcon == 0) {
+        mapBlock->naviIcon = 0xc;
+    }
+    work->unk5A88 = 0;
+    work->unk61B0 = 0;
+    work->unk5A8C[0] = 0;
+    work->unk5A8C[1] = 0;
+    work->unk5A8C[2] = 0;
+    work->unk5A8C[3] = 0;
+    for (s32 i = 0; i < 32; i++) {
+        work->pairsA[i].first = 0;
+        work->pairsA[i].second = 0;
+        work->pairsB[i].first = 0;
+        work->pairsB[i].second = 0;
+    }
+    work->unk121CC = 0;
+    work->unk12268 = 0;
+    work->unk121BC = 0;
+    work->unk121BE = 0;
+    work->unk121C0 = -1;
+    memFill8(work->unk122E8, 1);
+    for (s32 i = 0; i < 32; i++) {
+        work->halves[i].first = 0;
+        work->halves[i].second = 0;
+    }
+    work->unk12264 = 0;
+    work->unk9ec[0] = 0;
+    work->unk9ec[1] = 0;
+    work->unk9ec[2] = 0;
+    work->unk9f0 = 0;
+    uiSpriteInitializeState(&work->spriteA, 0x1c, 0x1121, 0x1d, &work->packet, 0x15, 1.0f);
+    timerStart(&work->spriteA, 0, 0);
+    work->unkA84[0] = 0;
+    work->unkA84[1] = 0;
+    work->unkA84[2] = 0;
+    uiSpriteInitializeState(&work->spriteB, 0x1c, 0x111a, 0x1c, &work->packet, 0x15, 1.0f);
+    timerStart(&work->spriteB, 5, 0);
 }
 
 } /* extern "C" */

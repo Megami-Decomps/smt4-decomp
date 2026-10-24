@@ -55,7 +55,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002367c0. */
-extern unsigned int *FUN_002375a0(int, int, fn_003653dc_arg0 *, int *);
+extern unsigned int *_ZN9Obj4218b0C1Ejjj(int, int, fn_003653dc_arg0 *, int *);
 /* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: nw_gfx_SkeletalModel_SetupAnimGroup. */
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
@@ -132,7 +132,7 @@ int nw_gfx_SkeletalModel_CreateSkeletalAnimGroup(fn_003653dc_arg0 *param_1,int *
   ppiVar14 = (int **)0x1;
   temp_v0 = (**(romwright_code **)(*param_2 + 8))(param_2,0x68,4);
   if (temp_v0 != 0) {
-    puVar4 = (unsigned int *)FUN_002375a0(temp_v0,temp_v3,param_1,param_2);
+    puVar4 = (unsigned int *)_ZN9Obj4218b0C1Ejjj(temp_v0,temp_v3,param_1,param_2);
     puVar5 = puVar4;
     FUN_002367c0(puVar4,1);
     if ((int)puVar5 >= 0) {

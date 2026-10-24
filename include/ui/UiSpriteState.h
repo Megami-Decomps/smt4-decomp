@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "ui/UiSpriteKeyframes.h"
 
 struct UiSpriteFrameKey {
     s16 image;
@@ -70,11 +71,18 @@ struct UiSpriteState {
     /* 0x38 */ u16 unk38;
     /* 0x3A */ u8 unk3A[0xE];
     /* 0x48 */ UiSpriteSource *source;
-    /* 0x4C */ u32 unk4C;
+    union {
+        /* 0x4C */ u32 unk4C;
+        /* 0x4C */ UiSpriteKeyframe *keyframes;
+    };
     /* 0x50 */ s16 animation;
     union {
         /* 0x52 */ u8 unk52[6];
         /* 0x52 */ s16 motionFrame;
+        struct {
+            /* 0x52 */ u16 elapsed;
+            /* 0x54 */ u8 alternate;
+        } keyframeTrack;
     };
     union {
         /* 0x58 */ u32 unk58;
@@ -105,6 +113,7 @@ struct UiSpriteState {
         /* 0x78 */ u32 unk78;
         /* 0x78 */ UiSpriteSequenceStep *sequenceSteps;
         /* 0x78 */ UiSpriteFrameSequenceStep *frameSequence;
+        /* 0x78 */ UiSpriteKeyframeStep *keyframeSteps;
     };
     /* 0x7C */ union {
         u8 unk7C[0xA];
@@ -123,6 +132,11 @@ struct UiSpriteState {
             /* 0x82 */ s16 step;
             /* 0x84 */ u8 enabled;
         } frameSequenceState;
+        struct {
+            /* 0x7C */ s16 step;
+            u8 unk7E[6];
+            /* 0x84 */ u8 enabled;
+        } keyframeSequence;
     };
     /* 0x86 */ union {
         u8 unk86[5];

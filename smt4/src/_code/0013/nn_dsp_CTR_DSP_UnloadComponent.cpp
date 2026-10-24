@@ -8,7 +8,7 @@ int coproc_movefrom_User_R_Thread_and_Process_ID(void);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
-extern int FUN_00120000(...); /* 0x120000 */
+extern int _ZN9Obj4212e86createEPvP18AsdAllocatorObject(...); /* 0x120000 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -22,7 +22,7 @@ unsigned int nn_dsp_CTR_DSP_UnloadComponent(unsigned int *param_1)
   int temp_v1;
   
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(romwright_code **)(temp_v1 + 0x80) = FUN_00120000;
+  *(romwright_code **)(temp_v1 + 0x80) = _ZN9Obj4212e86createEPvP18AsdAllocatorObject;
   temp_v0 = *param_1;
   software_interrupt(0x32);
   if ((temp_v0 & 0x80000000) == 0) {

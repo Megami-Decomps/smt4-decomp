@@ -1,199 +1,130 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026beb4` (_code @ 0x26beb4, 0x354 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 175 rows); retail spills r0-r3 and reloads the second argument from the stack and lays the per-kind cases out as shared tails */
+#include "common.h"
+
+// Battle main state: the cursor extents and the flag word are the only fields read here.
+struct BtlMainState {
+    u8 unk0000[0x44a0];
+    u32 flags;              // 0x44a0: 0x400 = wide cursor, 0x1000 = input locked
+    u8 unk44a4[0x4968 - 0x44a4];
+    s16 cursor;             // 0x4968
+    s16 limit;              // 0x496a
+};
+
+// Queued reflect action descriptor: only the movement payload.
+struct ReflectAction {
+    u8 unk00[4];
+    u8 type;                // 0x04
+    u8 unk05[0x1f];
+    s16 moveX;              // 0x24
+    s16 moveY;              // 0x26
+    f32 speed;              // 0x28
+};
 
 extern "C" {
 
-int btlQueueReflectAction(...);
-int FUN_002505c0(unsigned int, unsigned int, int, int, int, int, int);
-int VectorSignedToFloat(...);
+extern ReflectAction* g_btlActionReflect;
 
-/* stack frame of param_5: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_5_stack;
+BtlMainState* btlGetMainState(void);
+s32 FUN_00293230(BtlMainState* state);
+ReflectAction* btlQueueReflectAction(ReflectAction* queue, s32 id, s32 flag, u32 arg);
+void FUN_002505c0(u32 a, u32 b, u32 event, s32 c, s32 d, s32 e, s32 f);
 
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: btlQueueReflectAction. */
-/* Supplied declaration required: FUN_002505c0. */
-extern int FUN_00293230(int);
-extern int btlGetMainState(void);
-
-
-unsigned int
-FUN_0026beb4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-            unsigned int param_5)
-
+// Menu cursor step for the given direction `kind`: works out how far the two cursors move
+// (clamped to the row limit), optionally sends the "cannot move" notice, then queues the
+// movement as a reflect action. Always returns 1.
+u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
 {
-/* irregular: 2 goto(s); irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int in_fpscr;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v5 = 0;
-  temp_v4 = 0;
-  temp_v1 = btlGetMainState();
-  temp_v2 = (unsigned int)((*(unsigned int *)(temp_v1 + 0x44a0) & 0x400) != 0);
-  temp_v1 = btlGetMainState();
-  temp_v6 = (int)*(short *)(temp_v1 + 0x4968);
-  temp_v7 = (int)*(short *)(temp_v1 + 0x496a);
-  temp_v0 = temp_v7 <= temp_v6;
-  switch(param_3) {
-  case 0:
-  case 4:
-  case 9:
-  case 0xc:
-  case 0xd:
-    if (!temp_v0) {
-      temp_v4 = -1;
+    s32 moveX = 0;
+    s32 moveY = 0;
+    bool wide = (btlGetMainState()->flags & 0x400) != 0;
+    BtlMainState* state = btlGetMainState();
+    s32 cursor = state->cursor;
+    s32 limit = state->limit;
+    bool atStart = cursor == 0;
+    bool canAdvance = cursor < limit;
+    bool check = false;
+
+    switch (kind) {
+    case 0: case 4: case 9: case 12: case 13: case 20:
+        if (!canAdvance) moveX = -1;
+        moveY = -1;
+        break;
+    case 1: case 11:
+        if (canAdvance) moveY = -1;
+        else moveX = -1;
+        break;
+    case 2: case 3:
+        if (!atStart) moveX = -1;
+        else moveY = -1;
+        break;
+    case 5: case 6:
+        if (canAdvance) {
+            s32 room = limit - (wide ? 1 : 0);
+            moveY = -2 - (wide ? 1 : 0);
+            if (room - 2 < cursor) moveX = room - cursor - 2;
+        } else {
+            moveY = -2 - (wide ? 1 : 0);
+            moveX = moveY;
+        }
+        check = true;
+        break;
+    case 7: case 8: case 14: case 15:
+        moveY = -10;
+        moveX = moveY;
+        check = true;
+        break;
+    case 16: moveY = 1; break;
+    case 17: moveY = 2; break;
+    case 18: moveY = 3; break;
+    case 19: moveY = 4; break;
+    case 21:
+        if (!canAdvance) {
+            moveY = -2;
+            moveX = moveY;
+        } else {
+            moveY = -2;
+            if (cursor > limit - 2) moveX = limit - cursor - 2;
+        }
+        check = true;
+        break;
+    case 22:
+        if (!canAdvance) {
+            moveY = -3;
+            moveX = moveY;
+        } else {
+            moveY = -3;
+            if (cursor > limit - 3) moveX = limit - cursor - 3;
+        }
+        check = true;
+        break;
+    case 23:
+        if (!canAdvance) {
+            moveY = -4;
+            moveX = moveY;
+        } else {
+            moveY = -4;
+            if (cursor > limit - 4) moveX = limit - cursor - 4;
+        }
+        check = true;
+        break;
+    default:
+        break;
     }
-    else {
-      temp_v5 = -1;
-      temp_v4 = -1;
+
+    if (check && FUN_00293230(state) == 0 && (*reinterpret_cast<u32*>(reinterpret_cast<u8*>(state) + 0x44a0) & 0x1000) == 0) {
+        FUN_002505c0(id, arg, 0x01000175, 0, 0, 0, 0);
     }
-    break;
-  case 1:
-  case 0xb:
-    goto joined_r0x0026bfb8;
-  case 2:
-  case 3:
-    temp_v0 = temp_v6 != 0;
-joined_r0x0026bfb8:
-    if (temp_v0) {
-      temp_v5 = -1;
-      break;
-    }
-    temp_v4 = -1;
-    break;
-  case 5:
-  case 6:
-    if (!temp_v0) {
-      temp_v7 = temp_v7 - temp_v2;
-      temp_v3 = temp_v7 - 2;
-      if (temp_v3 < temp_v6) {
-        temp_v7 = temp_v7 - temp_v6;
-      }
-      temp_v4 = -2 - temp_v2;
-      if (temp_v3 < temp_v6) {
-        temp_v5 = temp_v7 - 2;
-      }
-    }
-    else {
-      temp_v4 = -2 - temp_v2;
-      temp_v5 = temp_v4;
-    }
-    temp_v7 = FUN_00293230(temp_v1);
-    if (temp_v7 != 0) break;
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
-    if ((temp_v2 & 0x1000) == 0) {
-      FUN_002505c0(param_1,param_2,0x1000175,0,0,0,0);
-    }
-    break;
-  case 7:
-  case 8:
-  case 0xe:
-  case 0xf:
-    temp_v4 = -10;
-    temp_v5 = -10;
-    temp_v7 = FUN_00293230(temp_v1);
-    if (temp_v7 != 0) break;
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
-    temp_v5 = temp_v4;
-    goto joined_r0x0026c0e8;
-  case 0x10:
-    temp_v4 = 1;
-    break;
-  case 0x11:
-    temp_v4 = 2;
-    break;
-  case 0x12:
-    temp_v4 = 3;
-    break;
-  case 0x13:
-    temp_v4 = 4;
-    break;
-  case 0x14:
-    if (!temp_v0) {
-      temp_v4 = -1;
-    }
-    else {
-      temp_v5 = -1;
-      temp_v4 = -1;
-    }
-    break;
-  case 0x15:
-    if (temp_v0) {
-      temp_v5 = -2;
-    }
-    else if (temp_v7 - 2 < temp_v6) {
-      temp_v5 = (temp_v7 - temp_v6) - 2;
-    }
-    temp_v4 = -2;
-    temp_v7 = FUN_00293230(temp_v1);
-    if (temp_v7 != 0) break;
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
-joined_r0x0026c0e8:
-    if ((temp_v2 & 0x1000) != 0) break;
-    FUN_002505c0(param_1,param_2,0x1000175,0,0,0,0);
-    break;
-  case 0x16:
-    if (temp_v0) {
-      temp_v5 = -3;
-    }
-    else if (temp_v7 - 3 < temp_v6) {
-      temp_v5 = (temp_v7 - temp_v6) - 3;
-    }
-    temp_v4 = -3;
-    temp_v7 = FUN_00293230(temp_v1);
-    if (temp_v7 != 0) break;
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
-    if ((temp_v2 & 0x1000) == 0) {
-      FUN_002505c0(param_1,param_2,0x1000175,0,0,0,0);
-    }
-    break;
-  case 0x17:
-    if (temp_v0) {
-      temp_v5 = -4;
-    }
-    else if (temp_v7 - 4 < temp_v6) {
-      temp_v5 = (temp_v7 - temp_v6) - 4;
-    }
-    temp_v4 = -4;
-    temp_v7 = FUN_00293230(temp_v1);
-    if (temp_v7 != 0) break;
-    temp_v2 = *(unsigned int *)(temp_v1 + 0x44a0);
-    if ((temp_v2 & 0x1000) == 0) {
-      FUN_002505c0(param_1,param_2,0x1000175,0,0,0,0);
-    }
-  }
-  if (*(short *)(temp_v1 + 0x4968) + temp_v5 >= 10) {
-    temp_v5 = 9 - *(short *)(temp_v1 + 0x4968);
-  }
-  if (*(short *)(temp_v1 + 0x496a) + temp_v4 >= 10) {
-    temp_v4 = 9 - *(short *)(temp_v1 + 0x496a);
-  }
-  temp_v8 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = g_btlActionReflect;
-  btlQueueReflectAction(g_btlActionReflect,(int)(short)param_1,0,param_2);
-  *(unsigned char *)(temp_v4 + 4) = 0x1e;
-  *(short *)(temp_v4 + 0x24) = (short)(int)temp_v8;
-  *(short *)(temp_v4 + 0x26) = (short)(int)temp_v9;
-  *(unsigned int *)(temp_v4 + 0x28) = param_5;
-  return 1;
+
+    if (state->cursor + moveX > 9) moveX = 9 - state->cursor;
+    if (state->limit + moveY > 9) moveY = 9 - state->limit;
+    f32 stepX = (f32)moveX;
+    f32 stepY = (f32)moveY;
+    ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, arg);
+    action->type = 30;
+    action->moveX = (s16)(s32)stepX;
+    action->moveY = (s16)(s32)stepY;
+    action->speed = speed;
+    return 1;
 }
 
 } /* extern "C" */

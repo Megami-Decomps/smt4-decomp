@@ -1,136 +1,71 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00257e74` (_code @ 0x257e74, 0x228 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the shaking particle update; retail clears the first five words with integer stores before loading the 0.0f constant and keeps different sign/scale values in s17-s20/r5-r8 than the build. */
+#include "common.h"
+
+// A particle that jitters around its anchor: amplitude range, current velocity, and its lifetime counters.
+struct ShakeParticle {
+    /* 0x00 */ f32 amplitudeX;
+    /* 0x04 */ f32 amplitudeY;
+    /* 0x08 */ f32 velocityX;
+    /* 0x0c */ f32 velocityY;
+    /* 0x10 */ s16 lifetime;   // frames to live, -1: forever
+    /* 0x12 */ s16 frame;      // frames elapsed (negative: delay before it starts)
+};
 
 extern "C" {
+s32 randBetween(s32 minimum, s32 maximum);
 
-int randBetween(int, int);
-int SBORROW4(int, int);
-int SCARRY4(int, int);
-int VectorSignedToFloat(...);
-
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: randBetween. */
-
-
-void FUN_00257e74(float *param_1)
-
+// Advances the particle one frame: picks a new random velocity (opposing the old direction when it is moving), fades
+// the amplitude out over the last three frames of its life and clears it once the lifetime is over.
+void FUN_00257e74(ShakeParticle *particle)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  
-  temp_v1 = (int)*(short *)(param_1 + 4);
-  temp_v4 = (int)*(short *)((int)param_1 + 0x12);
-  if ((temp_v1 != -1) && (temp_v1 <= temp_v4)) {
-    if (param_1 != (float *)0x0) {
-      *param_1 = 0.0f;
-      param_1[1] = 0.0f;
-      param_1[2] = 0.0f;
-      param_1[3] = 0.0f;
-      param_1[4] = 0.0f;
+    s32 lifetime = particle->lifetime;
+    s32 frame = particle->frame;
+    if (lifetime != -1 && lifetime <= frame) {
+        if (particle != NULL) {
+            particle->amplitudeX = 0.0f;
+            particle->amplitudeY = 0.0f;
+            particle->velocityX = 0.0f;
+            particle->velocityY = 0.0f;
+            *reinterpret_cast<u32 *>(&particle->lifetime) = 0;
+        }
+        return;
     }
-    return;
-  }
-  temp_v11 = 0.0f;
-  if (temp_v4 < 0) {
-    *(short *)((int)param_1 + 0x12) = *(short *)((int)param_1 + 0x12) + 1;
-    param_1[2] = 0.0f;
-    param_1[3] = 0.0f;
-    return;
-  }
-  temp_v6 = SCARRY4(temp_v1,1);
-  temp_v3 = temp_v1 + 1;
-  temp_v9 = *param_1;
-  temp_v12 = param_1[1];
-  if (temp_v1 != -1) {
-    temp_v6 = SBORROW4(temp_v1,3);
-    temp_v3 = temp_v1 - 3;
-  }
-  if (((temp_v1 != -1 && temp_v1 != 3) && temp_v3 < 0 == temp_v6) && (temp_v1 = temp_v1 - temp_v4, temp_v1 < 4)) {
-    temp_v10 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = temp_v10 * temp_v9 * 0.25f;
-    temp_v12 = temp_v8 * temp_v12 * 0.25f;
-  }
-  temp_v13 = 0.5f;
-  temp_v8 = 100.0f;
-  temp_v2 = randBetween((int)(temp_v9 * 0.5f * 100.0f),(int)(temp_v9 * 100.0f));
-  temp_v10 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = randBetween((int)(temp_v12 * temp_v13 * temp_v8),(int)(temp_v12 * temp_v8));
-  temp_v10 = temp_v10 * 0.01f;
-  temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v9 = temp_v9 * 0.01f;
-  temp_v1 = randBetween(0,1);
-  temp_v4 = temp_v1 * 2 - 1;
-  temp_v1 = randBetween(0,1);
-  temp_v8 = param_1[2];
-  temp_v1 = temp_v1 * 2 - 1;
-  temp_v12 = param_1[3];
-  if (temp_v11 < temp_v8) {
-    temp_v2 = 1;
-  }
-  else {
-    temp_v2 = 0xffffffff;
-  }
-  temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 == temp_v11) << 0x1e);
-  if (temp_v11 < temp_v12) {
-    temp_v5 = 1;
-  }
-  else {
-    temp_v5 = 0xffffffff;
-  }
-  temp_v6 = 0;
-  if (romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0)) {
-    temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 == temp_v11) << 0x1e);
-    temp_v6 = romwright_subpiece_4_1_0(temp_v0 >> 0x1e,0);
-  }
-  if (temp_v6) {
-    temp_v12 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(temp_v0 >> 0x16) & 3);
-    temp_v11 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v0 >> 0x16) & 3);
-    param_1[2] = temp_v10 * temp_v11;
-    param_1[3] = temp_v9 * temp_v12;
-  }
-  else {
-    temp_v7 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v8 == temp_v11) << 0x1e);
-    if ((!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0)) &&
-       ((temp_v7 = (temp_v0 & 0xfffffff) | ((unsigned int)(temp_v12 == temp_v11) << 0x1e), romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0) ||
-        (temp_v3 = randBetween(0,1), temp_v3 != 0)))) {
-      temp_v12 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(temp_v7 >> 0x16) & 3);
-      temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v7 >> 0x16) & 3);
-      param_1[2] = temp_v10 * temp_v11;
-      param_1[3] = temp_v9 * temp_v12;
+    f32 zero = 0.0f;
+    if (frame < 0) {
+        particle->frame = frame + 1;
+        particle->velocityX = zero;
+        particle->velocityY = zero;
+        return;
     }
-    else {
-      temp_v12 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
-      temp_v11 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v7 >> 0x16) & 3);
-      param_1[2] = temp_v10 * temp_v11;
-      param_1[3] = temp_v9 * temp_v12;
+    f32 amplitudeX = particle->amplitudeX;
+    f32 amplitudeY = particle->amplitudeY;
+    if (lifetime != -1 && lifetime > 3) {
+        s32 remaining = lifetime - frame;
+        if (remaining <= 3) {
+            amplitudeX = (f32)remaining * amplitudeX * 0.25f;
+            amplitudeY = (f32)remaining * amplitudeY * 0.25f;
+        }
     }
-  }
-  if (*(short *)((int)param_1 + 0x12) < 0x7ffe) {
-    *(short *)((int)param_1 + 0x12) = *(short *)((int)param_1 + 0x12) + 1;
-  }
-  return;
+    f32 magnitudeX = (f32)randBetween((s32)(amplitudeX * 0.5f * 100.0f), (s32)(amplitudeX * 100.0f)) * 0.01f;
+    f32 magnitudeY = (f32)randBetween((s32)(amplitudeY * 0.5f * 100.0f), (s32)(amplitudeY * 100.0f)) * 0.01f;
+    s32 randomX = randBetween(0, 1) * 2 - 1;
+    s32 randomY = randBetween(0, 1) * 2 - 1;
+    f32 oldX = particle->velocityX;
+    f32 oldY = particle->velocityY;
+    s32 keepX = oldX > zero ? 1 : -1;
+    s32 keepY = oldY > zero ? 1 : -1;
+    if (oldX == zero && oldY == zero) {
+        particle->velocityX = magnitudeX * (f32)randomX;
+        particle->velocityY = magnitudeY * (f32)randomY;
+    } else if (oldX != zero && (oldY == zero || randBetween(0, 1) != 0)) {
+        particle->velocityX = magnitudeX * (f32)keepX;
+        particle->velocityY = magnitudeY * (f32)randomY;
+    } else {
+        particle->velocityX = magnitudeX * (f32)randomX;
+        particle->velocityY = magnitudeY * (f32)keepY;
+    }
+    if (particle->frame < 0x7ffe) {
+        particle->frame++;
+    }
 }
-
-} /* extern "C" */
+}

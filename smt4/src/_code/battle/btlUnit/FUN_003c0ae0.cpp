@@ -1,176 +1,156 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0ae0` (_code @ 0x3c0ae0, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: battle unit action timing setup; float chain and the shared hit-type branch (retail jumps back into the first case) are written plainly and not compared with retail */
+#include "common.h"
 
-extern "C" {
-
-int FUN_0027da30(int, int);
-int FUN_0027e6f4(int, int);
-int FUN_002881bc(void);
-int asdAnimGetTrackLastFrame(unsigned int, int);
-int dataTable00FindById(void);
-
-typedef struct fn_003c0ae0_arg1 fn_003c0ae0_arg1;
-struct fn_003c0ae0_arg1 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x24];
-    char field_0x3c; /* +0x3c */
-    unsigned char pad_0x3d[0x3];
-    float field_0x40; /* +0x40 */
-    unsigned char pad_0x44[0xc];
-    uint field_0x50; /* +0x50 */
-    uint field_0x54; /* +0x54 */
-    ushort field_0x58; /* +0x58 */
-    undefined2 field_0x5a; /* +0x5a */
-    unsigned char pad_0x5c[0x6];
-    short field_0x62; /* +0x62 */
-    undefined4 field_0x64; /* +0x64 */
-    uint field_0x68; /* +0x68 */
-    uint field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0x10];
-    undefined4 field_0x80; /* +0x80 */
-    uint field_0x84; /* +0x84 */
-    unsigned char field_0x88; /* +0x88 */
-    unsigned char pad_0x89[0x3];
-    uint field_0x8c; /* +0x8c */
-    uint field_0x90; /* +0x90 */
+/* The camera/animation parameters of the action camera, read from the battle main state. */
+struct BtlCameraState {
+    /* 0x000 */ u8 unk000[0x570];
+    /* 0x570 */ f32 frameBase;
+    /* 0x574 */ u8 unk574[0x34];
+    /* 0x5A8 */ f32 fovDegrees;
 };
 
-extern int g_btlMain; /* 0x4342c8 */
-extern int DAT_00439ce8; /* 0x439ce8 */
-extern unsigned int DAT_00439cf8; /* 0x439cf8 */
+struct BtlCameraStateB {
+    /* 0x000 */ u8 unk000[0x598];
+    /* 0x598 */ f32 distance;
+};
 
-extern unsigned int FUN_0027d9e8(int, unsigned int);
-/* Supplied declaration required: FUN_0027da30. */
-extern int FUN_0027dab0(int, fn_003c0ae0_arg1 *);
-/* Supplied declaration required: FUN_0027e6f4. */
-/* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: asdAnimGetTrackLastFrame. */
-/* Supplied declaration required: dataTable00FindById. */
-extern unsigned short randNextInRange(unsigned int);
+/* One unit action's camera/timing record. */
+struct BtlUnitAction {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u8 unk18[0x24];
+    /* 0x3C */ s8 cameraKind;      /* 0: near, 1: mid, 2: far */
+    /* 0x3D */ u8 unk3D[3];
+    /* 0x40 */ f32 cameraSpeed;
+    /* 0x44 */ u8 unk44[0x0C];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u32 flags2;
+    /* 0x58 */ u16 effectFlags;
+    /* 0x5A */ u16 delay;
+    /* 0x5C */ u8 unk5C[6];
+    /* 0x62 */ s16 animation;
+    /* 0x64 */ u32 color;
+    /* 0x68 */ u32 colorB;
+    /* 0x6C */ u32 colorC;
+    /* 0x70 */ u8 unk70[0x10];
+    /* 0x80 */ u32 alpha;
+    /* 0x84 */ u32 colorD;
+    /* 0x88 */ u32 colorE;
+    /* 0x8C */ u32 colorF;
+    /* 0x90 */ u32 colorG;
+};
 
+struct BtlUnitRecord {
+    /* 0x00 */ u8 unk00[0x9E];
+    /* 0x9E */ u8 attackType;
+};
 
-void FUN_003c0ae0(int param_1,fn_003c0ae0_arg1 *param_2)
+#define ACTION_FLAG_FIXED_COLOR 0x8000
+#define ACTION_FLAG_SKIP_CAMERA 0x10
+#define ACTION_FLAG_ACTIVE 0x2
 
+extern "C" {
+extern BtlCameraState *g_btlMain;
+extern s32 DAT_00439ce8;     /* debug override of the camera kind, negative: none */
+extern u32 DAT_00439cf8;     /* action tint colour */
+
+u32 FUN_0027d9e8(void *unit, u32 trackId);
+void FUN_0027da30(void *unit, s32 animation);
+s32 FUN_0027dab0(void *unit, BtlUnitAction *action);
+s32 FUN_0027e6f4(void *unit, s32 arg);
+f32 FUN_002881bc(void);
+s32 asdAnimGetTrackLastFrame(u32 track, s32 index);
+BtlUnitRecord *dataTable00FindById(u32 id);
+u16 randNextInRange(u32 maximum);
+
+/* Starts an action on a battle unit: picks the camera kind and its speed, then the action's
+ * delay and tint colours. */
+void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
 {
-/* irregular: 1 goto(s); irregular input(s): in_s0; 5 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  float in_s0;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v2 = param_2->field_0x50;
-  param_2->field_0x50 = temp_v2 | 2;
-  if ((temp_v2 & 0x10) == 0) {
-    if ((temp_v2 & 0x8000) == 0) {
-      if (DAT_00439ce8 < 0) {
-        temp_v0 = *(char *)(param_1 + 0xe6);
-        if (temp_v0 >= '\0') {
-          if (temp_v0 != '\0') {
-            if (temp_v0 != '\x01') {
-              if (temp_v0 == '\x02') {
-                param_2->field_0x3c = '\x02';
-              }
+    u32 flags = action->flags;
+    action->flags = flags | ACTION_FLAG_ACTIVE;
+    f32 frames = 0.0f;
+    if ((flags & ACTION_FLAG_SKIP_CAMERA) == 0) {
+        if ((flags & ACTION_FLAG_FIXED_COLOR) == 0) {
+            if (DAT_00439ce8 < 0) {
+                s8 unitKind = *(s8 *)(unit + 0xE6);
+                if (unitKind >= 0) {
+                    if (unitKind == 0)
+                        action->cameraKind = 1;
+                    else if (unitKind == 1)
+                        action->cameraKind = 0;
+                    else if (unitKind == 2)
+                        action->cameraKind = 2;
+                } else {
+                    s32 slot = FUN_0027e6f4(unit, 1);
+                    bool near = false;
+                    if (slot >= 0) {
+                        slot = FUN_0027e6f4(unit, 1);
+                        u16 recordId = *(u16 *)(*(u8 **)(unit + 0x1FC0) + slot * 0x288 + 0xCE);
+                        BtlUnitRecord *record = dataTable00FindById(recordId);
+                        if (record->attackType == 1 || record->attackType == 3)
+                            near = true;
+                    }
+                    action->cameraKind = near ? 1 : 0;
+                }
+            } else if (DAT_00439ce8 == 0) {
+                action->cameraKind = 0;
+            } else if (DAT_00439ce8 == 1) {
+                action->cameraKind = 1;
+            } else if (DAT_00439ce8 == 2) {
+                action->cameraKind = 2;
             }
-            else {
-              param_2->field_0x3c = '\0';
+            action->unk0C = 0;
+            action->unk10 = 0;
+            action->unk14 = 0;
+
+            BtlCameraState *camera = g_btlMain;
+            frames = camera->frameBase;
+            s8 kind = action->cameraKind;
+            f32 fov = camera->fovDegrees * 0.5f * 0.0055555557f * 3.1415927f;
+            FUN_002881bc();
+            frames = frames / (120.0f / fov);
+            f32 speed = frames;
+            if (kind != 0) {
+                if (kind == 1) {
+                    f32 distance = ((BtlCameraStateB *)camera)->distance;
+                    speed = frames / distance * (distance - 15.0f);
+                } else {
+                    speed = 0.1f;
+                    if (kind == 2) {
+                        f32 distance = ((BtlCameraStateB *)camera)->distance;
+                        speed = frames / distance * (distance - -20.0f);
+                    }
+                }
             }
-          }
-          else {
-LAB_003c0ba0:
-            param_2->field_0x3c = '\x01';
-          }
+            action->cameraSpeed = speed;
         }
-        else {
-          temp_v3 = param_1;
-          FUN_0027e6f4(param_1,1);
-          if (-1 < temp_v3) {
-            temp_v3 = param_1;
-            FUN_0027e6f4(param_1,1);
-            temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x1fc0) + temp_v3 * 0x288 + 0xce);
-            dataTable00FindById();
-            if (*(char *)(temp_v2 + 0x9e) == '\x01' || *(char *)(temp_v2 + 0x9e) == '\x03')
-            goto LAB_003c0ba0;
-          }
-          param_2->field_0x3c = '\0';
-        }
-      }
-      else if (DAT_00439ce8 == 0) {
-        param_2->field_0x3c = '\0';
-      }
-      else if (DAT_00439ce8 == 1) {
-        param_2->field_0x3c = '\x01';
-      }
-      else if (DAT_00439ce8 == 2) {
-        param_2->field_0x3c = '\x02';
-      }
-      param_2->field_0xc = 0;
-      param_2->field_0x10 = 0;
-      param_2->field_0x14 = 0;
-      temp_v3 = g_btlMain;
-      in_s0 = *(float *)(g_btlMain + 0x570);
-      temp_v0 = param_2->field_0x3c;
-      temp_v7 = 0.1f;
-      temp_v6 = *(float *)(g_btlMain + 0x5a8) * 0.5f * 0.0055555557f * 3.1415927f;
-      FUN_002881bc();
-      in_s0 = in_s0 / (120.0f / temp_v6);
-      temp_v6 = in_s0;
-      if (temp_v0 != '\0') {
-        if (temp_v0 != '\x01') {
-          temp_v6 = temp_v7;
-          if (temp_v0 == '\x02') {
-            temp_v6 = *(float *)(temp_v3 + 0x598);
-            temp_v7 = in_s0 / temp_v6;
-            in_s0 = temp_v6 - -20.0f;
-            temp_v6 = temp_v7 * in_s0;
-          }
-        }
-        else {
-          temp_v6 = *(float *)(temp_v3 + 0x598);
-          temp_v7 = in_s0 / temp_v6;
-          in_s0 = temp_v6 - 15.0f;
-          temp_v6 = temp_v7 * in_s0;
-        }
-      }
-      param_2->field_0x40 = temp_v6;
+        action->color = DAT_00439cf8;
+        action->colorB = DAT_00439cf8;
+        s32 track = FUN_0027dab0(unit, action);
+        if (track < 0)
+            track = 0;
+        FUN_0027da30(unit, action->animation);
+        u32 trackId = FUN_0027d9e8(unit, *(u32 *)(unit + track * 4 + 0xC));
+        asdAnimGetTrackLastFrame(trackId, 0);
+        action->delay = randNextInRange(((s32)frames - 1U) & 0xFFFF);
     }
-    temp_v2 = DAT_00439cf8;
-    param_2->field_0x64 = DAT_00439cf8;
-    param_2->field_0x68 = temp_v2;
-    temp_v3 = FUN_0027dab0(param_1,param_2);
-    if (temp_v3 < 0) {
-      temp_v3 = 0;
+    u32 tint = DAT_00439cf8;
+    if ((action->flags & ACTION_FLAG_FIXED_COLOR) != 0) {
+        u32 packed = (tint & 0xFF000000) + (tint & 0xFF0000) + (tint & 0xFF00);
+        action->color = packed;
+        action->colorD = tint;
+        action->colorE = packed;
+        action->effectFlags |= 0x800;
     }
-    temp_v4 = param_1;
-    FUN_0027da30(param_1,(int)param_2->field_0x62);
-    temp_v5 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v4 + temp_v3 * 4 + 0xc));
-    asdAnimGetTrackLastFrame(temp_v5,0);
-    temp_v1 = randNextInRange(((int)in_s0 - 1U) & 0xffff);
-    param_2->field_0x5a = temp_v1;
-  }
-  temp_v2 = DAT_00439cf8;
-  if ((param_2->field_0x50 & 0x8000) != 0) {
-    temp_v3 = (DAT_00439cf8 & 0xff000000) + (DAT_00439cf8 & 0xff0000) + (DAT_00439cf8 & 0xff00);
-    param_2->field_0x64 = temp_v3;
-    param_2->field_0x84 = temp_v2;
-    *(int *)&param_2->field_0x88 = temp_v3;
-    param_2->field_0x58 = param_2->field_0x58 | 0x800;
-  }
-  param_2->field_0x80 = 0xff;
-  temp_v2 = DAT_00439cf8;
-  param_2->field_0x6c = DAT_00439cf8;
-  param_2->field_0x8c = temp_v2;
-  param_2->field_0x90 = temp_v2;
-  param_2->field_0x54 = (param_2->field_0x54 & 0xfffffffd) | 4;
-  return;
+    action->alpha = 0xFF;
+    tint = DAT_00439cf8;
+    action->colorC = tint;
+    action->colorF = tint;
+    action->colorG = tint;
+    action->flags2 = (action->flags2 & ~2u) | 4;
 }
 
 } /* extern "C" */

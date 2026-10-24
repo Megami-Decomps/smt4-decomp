@@ -1,96 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003038a8` (_code @ 0x3038a8, 0x234 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores each unpacked component separately and re-reads the product from memory; armcc groups the stores into VSTM and keeps the product in registers, so the VFP schedule and the color-pack register allocation differ. */
+#include "gfx/RenderSubmission.h"
+#include "gfx/EffectColorUnpack.h"
 
 extern "C" {
+void FUN_00246afc(RenderSubmissionPacket* packet, const f32* position, const f32* rotation, const f32* scale);
+void FUN_00256a50(RenderSubmissionPacket* packet, u32 mode);
+u32 FUN_00269694(RenderSubmissionOwner* owner, const u32* color);
+extern EffectColorProductState DAT_004ea81c;
 
-int FUN_00246afc(unsigned short *, int, int, int);
-int FUN_00256a50(unsigned short *, unsigned int);
-int FUN_00269694(unsigned int, unsigned int);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00246afc. */
-/* Supplied declaration required: FUN_00256a50. */
-/* Supplied declaration required: FUN_00269694. */
-
-
-void FUN_003038a8(int param_1)
-
+// Apply the owner's color and draw settings to a current-frame submission (colors inlined).
+void FUN_003038a8(RenderSubmission* submission)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v2 = *(unsigned int *)(param_1 + 0x40);
-  puVar3 = (unsigned short *)**(unsigned int **)(param_1 + 0x3c);
-  if ((*(unsigned int *)(param_1 + 0x34) <= *(unsigned int *)(temp_v2 + 0x34)) || (*(unsigned int *)(temp_v2 + 0x34) == 0)) {
-    temp_v3 = temp_v2;
-    FUN_00269694(temp_v2,temp_v2 + 0x24);
-    temp_v1 = *(unsigned int *)(param_1 + 0x30);
-    DAT_004ea92c = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea930 = (float)VectorUnsignedToFloat
-                                    ((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea934 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea938 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea92c = DAT_004ea92c * 0.003921569f;
-    DAT_004ea930 = DAT_004ea930 * 0.003921569f;
-    DAT_004ea934 = DAT_004ea934 * 0.003921569f;
-    DAT_004ea938 = DAT_004ea938 * 0.003921569f;
-    temp_v7 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorUnsignedToFloat((temp_v3 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorUnsignedToFloat((temp_v3 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea91c = temp_v9 * 0.003921569f * DAT_004ea92c;
-    DAT_004ea920 = temp_v8 * 0.003921569f * DAT_004ea930;
-    DAT_004ea924 = temp_v6 * 0.003921569f * DAT_004ea934;
-    DAT_004ea928 = temp_v7 * 0.003921569f * DAT_004ea938;
-    temp_v4 = VectorFloatToUnsigned(DAT_004ea91c * 255.0f,3);
-    temp_v3 = VectorFloatToUnsigned(DAT_004ea920 * 255.0f,3);
-    temp_v5 = VectorFloatToUnsigned(DAT_004ea924 * 255.0f,3);
-    temp_v1 = VectorFloatToUnsigned(DAT_004ea928 * 255.0f,3);
-    *(unsigned int *)(puVar3 + 0x28) =
-         (temp_v1 & 0xff) | ((temp_v5 & 0xff) << 8) | ((temp_v3 & 0xff) << 0x10) | (temp_v4 << 0x18);
-    if (*(char *)((int)puVar3 + 0x53) != '\0') {
-      FUN_00246afc(puVar3,param_1,param_1 + 0x10,param_1 + 0x20);
-      if (*(char *)(temp_v2 + 0x3c) == '\0') {
-        temp_v0 = *puVar3 & 0xfeff;
-      }
-      else {
-        temp_v0 = *puVar3 | 0x100;
-      }
-      *puVar3 = temp_v0;
-      FUN_00256a50(puVar3,*(unsigned int *)(temp_v2 + 0x28) & 0xffff);
-      return;
-    }
-  }
-  return;
-}
+    RenderSubmissionOwner* owner = submission->owner;
+    // In this variant the resource's first word is the packet pointer.
+    RenderSubmissionPacket* packet = (RenderSubmissionPacket*)submission->resource->unk00;
+    if (submission->frame > owner->frame && owner->frame != 0)
+        return;
 
-} /* extern "C" */
+    u32 ownerColor = FUN_00269694(owner, &owner->color);
+    effectColorUnpack(submission->color, &DAT_004ea81c.factor);
+    effectColorUnpack(ownerColor, &DAT_004ea81c.color);
+    DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
+    DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
+    DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
+    DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
+    u32 color = effectColorPack(&DAT_004ea81c.color);
+    RenderSubmissionColor packed;
+    packed.channels.red = __rev(color) >> 24;
+    packed.channels.green = __rev(color) >> 16;
+    packed.channels.blue = __rev(color) >> 8;
+    packed.channels.alpha = __rev(color);
+    packet->color = packed.value;
+    if (packed.channels.alpha != 0) {
+        FUN_00246afc(packet, submission->position, submission->rotation, submission->scale);
+        if (owner->depthEnabled)
+            packet->flags |= 0x100;
+        else
+            packet->flags &= ~0x100;
+        FUN_00256a50(packet, (u16)owner->drawMode);
+    }
+}
+}

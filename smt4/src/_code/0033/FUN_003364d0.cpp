@@ -1,137 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003364d0` (_code @ 0x3364d0, 0x220 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same code size and shape as retail, but armcc lays out the group-insertion block and allocates r8/ip/r1 differently in the two grouping loops (retail puts the shared insertion block first and keeps the action table pointer in ip). */
+#include "battle/BattleActionHistory.h"
+#include "battle/btlAction.h"
 
 extern "C" {
-
-int FUN_002b7bca(short [2], int, int, unsigned char *);
-
-extern unsigned char LAB_0032c700; /* 0x32c700 */
-
-/* Supplied declaration required: FUN_002b7bca. */
-
-
-void FUN_003364d0(int param_1,unsigned int param_2)
-
-{
-/* irregular: 2 goto(s); 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned short *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  short *psVar9;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned short temp_v8 [2];
-  int uStack_74;
-  short asStack_70 [2];
-  unsigned int uStack_6c;
-  unsigned short temp_v9 [2];
-  unsigned int temp_v10 [17];
-  
-  temp_v5 = 0;
-  temp_v3 = 5;
-  puVar3 = temp_v8;
-  puVar1 = (unsigned int *)&uStack_74;
-  do {
-    puVar3[4] = 0xffff;
-    puVar1[2] = 0;
-    puVar1 = puVar1 + 4;
-    puVar3 = puVar3 + 8;
-    *puVar3 = 0xffff;
-    temp_v3 = temp_v3 - 1;
-    *puVar1 = 0;
-  } while (temp_v3 != 0);
-  if ((param_2 & 0x400) == 0) {
-    return;
-  }
-  temp_v3 = 4;
-LAB_0033652c:
-  temp_v7 = *(int *)(param_1 + 0x1e98);
-  temp_v0 = temp_v7 + temp_v3 * 0x114;
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x50);
-  if ((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) {
-    temp_v2 = 0;
-    if ((temp_v1 & 0x10) != 0) {
-      temp_v2 = 0;
-      do {
-        psVar9 = asStack_70 + temp_v2 * 4;
-        if (*psVar9 < 0) {
-          temp_v5 = temp_v5 + 1;
-          asStack_70[temp_v2 * 4] = *(short *)(temp_v0 + 0x62);
-          *(unsigned int *)(psVar9 + 2) = *(unsigned int *)(temp_v0 + 0x14);
-          break;
-        }
-        temp_v4 = temp_v7 + *psVar9 * 0x114;
-      } while ((((*(unsigned int *)(temp_v4 + 0x50) & 0x10) == 0) ||
-               (*(int *)(temp_v4 + 0xfc) != *(int *)(temp_v0 + 0xfc))) &&
-              (temp_v2 = temp_v2 + 1, temp_v2 < 10));
-    }
-    else {
-      do {
-        psVar9 = asStack_70 + temp_v2 * 4;
-        if (*psVar9 < 0) {
-          temp_v5 = temp_v5 + 1;
-          asStack_70[temp_v2 * 4] = *(short *)(temp_v0 + 0x62);
-          *(unsigned int *)(psVar9 + 2) = *(unsigned int *)(temp_v0 + 0x14);
-          break;
-        }
-        temp_v4 = temp_v7 + *psVar9 * 0x114;
-      } while ((((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) ||
-               (*(float *)(temp_v4 + 0x14) != *(float *)(temp_v0 + 0x14))) &&
-              (temp_v2 = temp_v2 + 1, temp_v2 < 10));
-    }
-  }
-  goto LAB_00336604;
-  temp_v5 = temp_v5 + 1;
-  asStack_70[temp_v2 * 4] = *(short *)(temp_v0 + 0x62);
-  *(unsigned int *)(psVar9 + 2) = *(unsigned int *)(temp_v0 + 0x14);
-LAB_00336604:
-  temp_v3 = temp_v3 + 1;
-  if (temp_v3 >= 0x36) {
-    FUN_002b7bca(asStack_70,temp_v5,8,&LAB_0032c700);
-    temp_v3 = 4;
-    do {
-      temp_v7 = *(int *)(param_1 + 0x1e98);
-      temp_v0 = temp_v7 + temp_v3 * 0x114;
-      temp_v1 = *(unsigned int *)(temp_v0 + 0x50);
-      if ((temp_v1 & 1) != 0 && (temp_v1 & 0x80) != 0) {
-        temp_v2 = 0;
-        do {
-          temp_v4 = (int)asStack_70[temp_v2 * 4];
-          if (temp_v4 >= 0) {
-            if (*(short *)(temp_v0 + 0x62) == temp_v4) {
-              *(char *)(temp_v0 + 0x44) = (char)temp_v2;
-              break;
-            }
-            temp_v4 = temp_v7 + temp_v4 * 0x114;
-            temp_v6 = *(unsigned int *)(temp_v4 + 0x50) & 0x10;
-            if ((temp_v1 & 0x10) != 0) {
-              if ((temp_v6 != 0) && (*(int *)(temp_v4 + 0xfc) == *(int *)(temp_v0 + 0xfc))) {
-                *(char *)(temp_v0 + 0x44) = (char)temp_v2;
-                break;
-              }
-            }
-            else if ((temp_v6 == 0) && (*(float *)(temp_v4 + 0x14) == *(float *)(temp_v0 + 0x14))) {
-              *(char *)(temp_v0 + 0x44) = (char)temp_v2;
-              break;
-            }
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 10);
-      }
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 0x36) {
-        *(char *)(param_1 + 0x1e9c) = (char)temp_v5;
-        return;
-      }
-    } while( 1 );
-  }
-  goto LAB_0033652c;
+void FUN_002b7bca(void *base, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
+s32 sortCompareWeightDescending(const void *a, const void *b);
 }
 
-} /* extern "C" */
+// One group of actions that share a key (player-side actions: the group key word; others: the Z position).
+struct ActionGroup {
+    s16 member;  // 0x00 first action of the group, -1 when unused
+    u16 pad02;
+    union {
+        f32 position;  // 0x04 key of an enemy-side group
+        u32 bits;      // 0x04 the key as stored
+    };
+};
+
+// True when `other` belongs to the same group as `action`.
+static __inline bool sameGroup(BtlActionRecord *other, BtlActionRecord *action)
+{
+    if (action->status & 0x10) {
+        return (other->status & 0x10) != 0 && other->groupKey == action->groupKey;
+    }
+    return (other->status & 0x10) == 0 && other->geometry.position[2] == action->geometry.position[2];
+}
+
+// Groups the active actions of a battle (indices 4..53) by their key, sorts the groups and stores each action's group
+// number; with the 0x400 flag clear nothing is done.
+extern "C" void FUN_003364d0(BattleActionHistoryState *state, u32 flags)
+{
+    ActionGroup groups[10];
+    u32 groupCount = 0;
+    for (s32 i = 0; i < 10; i++) {
+        groups[i].member = -1;
+        groups[i].position = 0.0f;
+    }
+    if (!(flags & 0x400))
+        return;
+
+    for (s32 index = 4; index < 54; index++) {
+        BtlActionRecord *action = &state->actions[index];
+        if ((action->status & 1) && (action->status & 0x80)) {
+            if (action->status & 0x10) {
+                for (s32 g = 0; g < 10; g++) {
+                    if (groups[g].member < 0) {
+                        groupCount++;
+                        groups[g].member = action->memberId;
+                        groups[g].bits = *reinterpret_cast<u32 *>(&action->geometry.position[2]);
+                        break;
+                    }
+                    BtlActionRecord *other = &state->actions[groups[g].member];
+                    if ((other->status & 0x10) && other->groupKey == action->groupKey)
+                        break;
+                }
+            } else {
+                for (s32 g = 0; g < 10; g++) {
+                    if (groups[g].member < 0) {
+                        groupCount++;
+                        groups[g].member = action->memberId;
+                        groups[g].bits = *reinterpret_cast<u32 *>(&action->geometry.position[2]);
+                        break;
+                    }
+                    BtlActionRecord *other = &state->actions[groups[g].member];
+                    if (!(other->status & 0x10) && other->geometry.position[2] == action->geometry.position[2])
+                        break;
+                }
+            }
+        }
+    }
+    FUN_002b7bca(groups, groupCount, sizeof(ActionGroup), sortCompareWeightDescending);
+
+    for (s32 index = 4; index < 54; index++) {
+        BtlActionRecord *action = &state->actions[index];
+        if ((action->status & 1) && (action->status & 0x80)) {
+            for (s32 g = 0; g < 10; g++) {
+                if (groups[g].member < 0)
+                    continue;
+                if (action->memberId == groups[g].member ||
+                    sameGroup(&state->actions[groups[g].member], action)) {
+                    action->identity.category = g;
+                    break;
+                }
+            }
+        }
+    }
+    state->groupCount = groupCount;
+}

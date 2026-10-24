@@ -1,175 +1,168 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004eaa68` (_code @ 0x4eaa68, 0x3c0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: schedules the hit effects of a battle command on its targets (group attacks hit every flagged target and claim it, single attacks hit the target after `skip` ones, immune actors get the reflect animation) and extends the animation window; written from the decompilation, the two gotos into the final calls are rebuilt as explicit tail cases and the actor/command views only name the observed fields */
 #include "shard/W6_W6Match3_BattleTiming.h"
 
+#define CMD_GROUP 0x4000
+#define CMD_HIT_QUEUED 0x2000000
+#define TARGET_SLOTS 0x6D
+#define OBJECT_STRIDE 0x408
+#define PARTY_SLOTS 3
+#define MASK_BITS 0x40
+#define GROUP_HIT_SPACING 4
+#define HIT_LEAD_FRAMES 5
+#define HIT_EXTRA_GROUP 0x28
+#define HIT_EXTRA_SINGLE 0x14
+#define SLOT_ID_TABLE_OFFSET 0x1C88
+#define EXTEND_START 0xF
+#define EXTEND_END 0x14
+
+/* A battle object slot (observed fields). */
+struct BtlObject {
+    /* 0x000 */ u32 flagsLow;
+    /* 0x004 */ u32 flagsHigh;
+    /* 0x008 */ u8 unk008[0x164];
+    /* 0x16C */ s32 linkedSlot;
+};
+
+struct BtlTargetInfo {
+    /* 0x00 */ u32 flagsLow;
+    /* 0x04 */ u32 flagsHigh;
+};
+
+struct BtlAnimInfo {
+    /* 0x00 */ u8 unk00[0x6A];
+    /* 0x6A */ s16 animation;
+};
+
+struct BtlActorState {
+    /* 0x0000 */ u8 unk0000[0x1FFC];
+    /* 0x1FFC */ u8 *objects;
+    /* 0x2000 */ u8 unk2000[8];
+    /* 0x2008 */ u32 maskLow;
+    /* 0x200C */ u32 maskHigh;
+    /* 0x2010 */ u8 unk2010[8];
+    /* 0x2018 */ s8 slotIds[PARTY_SLOTS];
+};
+
+struct BtlActorRef {
+    /* 0x00 */ BtlActorState *state;
+};
+
+struct BtlCommand {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x1C];
+    /* 0x20 */ BtlTargetInfo *target;
+    /* 0x24 */ BtlAnimInfo *anim;
+    /* 0x28 */ u8 unk28[0x10];
+    /* 0x38 */ u8 active[TARGET_SLOTS];
+};
+
 extern "C" {
+extern u32 DAT_00571148, DAT_0057114c;     /* in-use mask of an object */
+extern u32 DAT_00571168, DAT_0057116c;     /* immune mask of a target */
+extern u32 DAT_005711b8, DAT_005711bc;     /* claimed mask of an object */
 
-int FUN_004fcde0(int, unsigned int *, unsigned int *);
-int FUN_004fcf0c(...);
+s8 *gameGetSlotTable(void);
+s32 gameSlotsCountValidIds(BtlActorState *state);
+void FUN_004fcde0(s32 frame, BtlCommand *command, BtlObject *object);
+void FUN_004fcf0c(s32 frame, BtlCommand *command, s32 immune, s32 victim, u32 argument, s32 flag);
 
-/* stack frame of param_7: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_7_stack;
-
-extern unsigned int DAT_00571148; /* 0x571148 */
-extern unsigned int DAT_0057114c; /* 0x57114c */
-extern unsigned int DAT_00571168; /* 0x571168 */
-extern unsigned int DAT_0057116c; /* 0x57116c */
-extern unsigned int DAT_005711b8; /* 0x5711b8 */
-extern unsigned int DAT_005711bc; /* 0x5711bc */
-
-extern int gameGetSlotTable(void);
-extern int gameSlotsCountValidIds(int);
-/* Supplied declaration required: FUN_004fcde0. */
-/* Supplied declaration required: FUN_004fcf0c. */
-
-
-unsigned int
-FUN_004eaa68(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
-            int param_6,int param_7)
-
+static __inline bool objectInUse(const BtlObject *object)
 {
-/* irregular: 2 goto(s); 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int *puVar10;
-  unsigned int temp_v9;
-  unsigned long long temp_v10;
-  int temp_v11;
-  unsigned int *temp_v12;
-  
-  temp_v7 = 0;
-  temp_v6 = 0xffffffff;
-  temp_v10 = (unsigned long long)param_5;
-  temp_v1 = (*(unsigned int *)param_2[8] & DAT_00571168) != 0;
-  temp_v2 = (((unsigned int *)param_2[8])[1] & DAT_0057116c) != 0;
-  temp_v11 = 4;
-  if ((*param_2 & 0x4000) == 0) {
-    temp_v11 = 0;
-  }
-  temp_v4 = 0;
-  temp_v3 = 0;
-  if (!temp_v1 && !temp_v2) {
-    if ((*param_2 & 0x4000) != 0) {
-      if (param_7 < 3) {
-        temp_v4 = param_7;
-        do {
-          if (-1 < *(char *)(*param_1 + temp_v4 + 0x2018)) {
-            temp_v6 = (unsigned int)*(char *)(*param_1 + temp_v4 + 0x2018);
-            if (0 < (int)temp_v6) {
-              temp_v6 = temp_v6 - 1;
+    return (DAT_00571148 & object->flagsLow) != 0 || (DAT_0057114c & object->flagsHigh) != 0;
+}
+
+static __inline bool objectClaimed(const BtlObject *object)
+{
+    return (object->flagsLow & DAT_005711b8) != 0 || (object->flagsHigh & DAT_005711bc) != 0;
+}
+
+u32 FUN_004eaa68(BtlActorRef *actor, BtlCommand *command, u32 unused, u32 unusedB, u32 argument, s32 baseFrame, s32 skip)
+{
+    BtlActorState *state = actor->state;
+    bool immune = (command->target->flagsLow & DAT_00571168) != 0 || (command->target->flagsHigh & DAT_0057116c) != 0;
+    bool group = (command->flags & CMD_GROUP) != 0;
+    s32 spacing = group ? GROUP_HIT_SPACING : 0;
+    s32 pending = 0;
+    s32 firstVictim = -1;
+    s32 hitCount = 0;
+    BtlObject *single = NULL;
+
+    if (!immune) {
+        if (group) {
+            for (s32 i = skip; i < PARTY_SLOTS; i++) {
+                if (state->slotIds[i] >= 0) {
+                    firstVictim = state->slotIds[i];
+                    if (firstVictim > 0)
+                        firstVictim--;
+                    break;
+                }
             }
-            break;
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < 3);
-      }
-    }
-    else {
-      do {
-        temp_v0 = 1 << (temp_v3 & 0xff);
-        if ((temp_v0 & *(unsigned int *)(*param_1 + 0x2008)) != 0 ||
-            (((int)temp_v0 >> 0x1f) & *(unsigned int *)(*param_1 + 0x200c)) != 0) {
-          if (param_7 <= temp_v4) {
-            temp_v6 = temp_v3;
-            if (0 < (int)temp_v3) {
-              temp_v6 = temp_v3 - 1;
+        } else {
+            s32 counted = 0;
+            for (s32 bit = 0; bit < MASK_BITS; bit++) {
+                u32 mask = 1u << bit;
+                if ((mask & state->maskLow) != 0 || ((s32)mask >> 31 & state->maskHigh) != 0) {
+                    if (skip <= counted) {
+                        firstVictim = bit > 0 ? bit - 1 : bit;
+                        break;
+                    }
+                    counted = (s8)(counted + 1);
+                }
             }
+        }
+    }
+
+    for (s32 i = 0; i < TARGET_SLOTS; i++) {
+        if (command->active[i] == 0)
+            continue;
+        BtlObject *object = reinterpret_cast<BtlObject *>(state->objects + i * OBJECT_STRIDE);
+        if (group) {
+            if (object != NULL && objectInUse(object) && !objectClaimed(object)) {
+                pending = HIT_LEAD_FRAMES;
+                FUN_004fcde0(spacing * hitCount + baseFrame + HIT_LEAD_FRAMES, command, object);
+                hitCount = (s8)(hitCount + 1);
+                object->flagsLow |= DAT_005711b8;
+                object->flagsHigh |= DAT_005711bc;
+            }
+        } else if (skip <= hitCount) {
+            if (object == NULL || !objectInUse(object))
+                break;
+            pending = HIT_LEAD_FRAMES;
+            FUN_004fcde0(spacing * skip + baseFrame + HIT_LEAD_FRAMES, command, object);
+            single = object;
             break;
-          }
-          temp_v4 = (int)(char)((char)temp_v4 + '\x01');
+        } else {
+            hitCount = (s8)(hitCount + 1);
         }
-        temp_v3 = temp_v3 + 1;
-      } while ((int)temp_v3 < 0x40);
     }
-  }
-  temp_v8 = 0;
-  temp_v5 = 0;
-  temp_v4 = param_6 + 5;
-  temp_v12 = (unsigned int *)0x0;
-  do {
-    temp_v9 = (unsigned int)temp_v10;
-    if (*(char *)((int)param_2 + temp_v5 + 0x38) != '\0') {
-      if ((*param_2 & 0x4000) != 0) {
-        puVar10 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v5 * 0x408);
-        if (puVar10 != (unsigned int *)0x0) {
-          if (((DAT_00571148 & *puVar10) != 0 || (DAT_0057114c & puVar10[1]) != 0) &&
-             ((puVar10[1] & DAT_005711bc) == 0 && (*puVar10 & DAT_005711b8) == 0)) {
-            temp_v7 = 5;
-            FUN_004fcde0(temp_v11 * temp_v8 + temp_v4,param_2,puVar10);
-            temp_v8 = (int)(char)((char)temp_v8 + '\x01');
-            temp_v3 = puVar10[1] | DAT_005711bc;
-            *puVar10 = *puVar10 | DAT_005711b8;
-            puVar10[1] = temp_v3;
-          }
+    if (group && gameSlotsCountValidIds(state) > 0)
+        pending = HIT_LEAD_FRAMES;
+
+    bool victimHit = false;
+    if (single != NULL && !immune) {
+        bool linked = (s16)single->linkedSlot >= 0;
+        if (linked && (firstVictim < 0 || (!group && gameGetSlotTable()[firstVictim + SLOT_ID_TABLE_OFFSET] == (s16)single->linkedSlot))) {
+            btlCommandExtendAnimationWindow(actor, command, command->anim->animation, baseFrame, EXTEND_START, EXTEND_END);
+            return 1;
         }
-      }
-      else {
-        if (param_7 <= temp_v8) {
-          puVar10 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v5 * 0x408);
-          if ((puVar10 == (unsigned int *)0x0) ||
-             ((*puVar10 & DAT_00571148) == 0 && (puVar10[1] & DAT_0057114c) == 0))
-          goto LAB_004eac84;
-          temp_v7 = 5;
-          FUN_004fcde0(temp_v11 * param_7 + temp_v4,param_2,puVar10);
-          temp_v12 = puVar10;
-          break;
-        }
-        temp_v8 = (int)(char)((char)temp_v8 + '\x01');
-      }
+        victimHit = true;
+    } else if (single == NULL && !immune) {
+        victimHit = true;
     }
-    temp_v9 = (unsigned int)temp_v10;
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x6d);
-  if (((*param_2 & 0x4000) != 0) && (temp_v4 = gameSlotsCountValidIds(*param_1), 0 < temp_v4)) {
-    temp_v7 = 5;
-  }
-LAB_004eac84:
-  if (temp_v12 != (unsigned int *)0x0) {
-    if (!temp_v1 && !temp_v2) {
-      if ((-1 < (short)temp_v12[0x5b]) &&
-         (((int)temp_v6 < 0 ||
-          (((*param_2 & 0x4000) == 0 &&
-           (temp_v4 = gameGetSlotTable(),
-           (int)*(char *)(temp_v4 + temp_v6 + 0x1c88) == (int)(short)temp_v12[0x5b])))))) {
-        btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
-        return 1;
-      }
-LAB_004eadd0:
-      if (-1 < (int)temp_v6) {
-        if (temp_v7 != 0) {
-          if ((*param_2 & 0x4000) != 0) {
-            temp_v7 = temp_v7 + 0x28;
-          }
-          else {
-            temp_v7 = temp_v7 + 0x14;
-          }
+
+    if (victimHit) {
+        if (firstVictim >= 0) {
+            if (pending != 0)
+                pending += group ? HIT_EXTRA_GROUP : HIT_EXTRA_SINGLE;
+            FUN_004fcf0c(spacing * skip + baseFrame + pending, command, 0, firstVictim, argument, 0);
+            command->flags |= CMD_HIT_QUEUED;
         }
-        FUN_004fcf0c(temp_v11 * param_7 + param_6 + temp_v7,param_2,0,temp_v6,temp_v9,0);
-        *param_2 = *param_2 | 0x2000000;
-      }
-    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
-      return 1;
+    } else {
+        FUN_004fcf0c(spacing * skip + baseFrame + pending, command, 1, 0, argument, 0);
+        command->flags |= CMD_HIT_QUEUED;
     }
-  }
-  else if (!temp_v1 && !temp_v2) goto LAB_004eadd0;
-  FUN_004fcf0c(temp_v11 * param_7 + param_6 + temp_v7,param_2,temp_v1 || temp_v2,0,temp_v9,0);
-  *param_2 = *param_2 | 0x2000000;
-    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
-  return 1;
+    btlCommandExtendAnimationWindow(actor, command, command->anim->animation, baseFrame, EXTEND_START, EXTEND_END);
+    return 1;
 }
 
 } /* extern "C" */

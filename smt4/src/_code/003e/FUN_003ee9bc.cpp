@@ -1,179 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ee9bc` (_code @ 0x3ee9bc, 0x21c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores the three 64/32-bit "-1" words with ldrexd/strexd/ldrex/strex loops (atomic stores of an SDK atomic type) and builds the first record with strb/stm sequences; this version uses plain stores and a struct copy, so the schedule and register use differ. */
+#include "common.h"
+
+// Parameter record copied to its twin below (0x14 bytes).
+struct RecordParams {
+    u8 a;      // 0x00
+    u8 b;      // 0x01
+    u8 c;      // 0x02
+    u8 d;      // 0x03
+    u32 e;     // 0x04
+    u32 f;     // 0x08
+    u32 g;     // 0x0c
+    u8 h;      // 0x10
+    u8 i;      // 0x11
+    u8 j;      // 0x12
+    u8 pad13;
+};
+
+// 0x18-byte slot cleared by FUN_00361934 (its constructor).
+struct SlotRecord {
+    u32 first;    // 0x00
+    u32 second;   // 0x04
+    u32 third;    // 0x08
+    u8 flagA;     // 0x0c
+    u8 flagB;     // 0x0d
+    u16 shorts[4]; // 0x10
+};
+
+// Object with a vtable and four zeroed words (0x14 bytes).
+struct VtableObject {
+    const void *vtable; // 0x00
+    u32 unk04[4];       // 0x04
+};
+
+struct AtomicRegistry {
+    s64 first;        // 0x00
+    s64 second;       // 0x08
+    s32 third;        // 0x10
+    u32 pad14;
+    SlotRecord slot;  // 0x18
+    SlotRecord slots[8]; // 0x30
+};
+
+// Timing state at 0x473888.
+struct TimerState {
+    u8 unk00[0x20];
+    s32 ticksPerFrame; // 0x20
+    u32 flagWord;      // 0x24 (object with a static destructor)
+    u8 flag;           // 0x28
+    u8 unk29[0x0f];
+    s64 limits[5];     // 0x38
+    s32 invalidA;      // 0x60
+    s32 invalidB;      // 0x64
+    u32 clearedA;      // 0x68
+    u32 clearedB;      // 0x6c
+};
 
 extern "C" {
+extern RecordParams DAT_004ef430;
+extern RecordParams DAT_004ef444;
+extern AtomicRegistry DAT_004ef858;
+extern VtableObject DAT_004ef960;
+extern VtableObject DAT_004ef974;
+extern TimerState DAT_00473888;
+extern const u8 DAT_00420fd8[];
+extern u32 DAT_004738b4;
+extern u32 DAT_004738b8;
 
-int FUN_002ad314(float *, float [2], int);
-int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
-int hasExclusiveAccess(int);
+void FUN_00361934(void *);
+void FUN_00360260(void *);
+void FUN_003573a0(void *);
+void nn_os_Thread_Thread_sub_object(void *);
+void entry(void);
+void __aeabi_vec_ctor_nocookie_nodtor(void *, void (*ctor)(void *), u32 elementSize, u32 count);
+void FUN_002ad314(f32 *numerator, f32 *denominator, u32 mode);
+__weak s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *handle);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern unsigned char LAB_00361934; /* 0x361934 */
-extern unsigned char DAT_00420fd8; /* 0x420fd8 */
-extern int DAT_004738a8; /* 0x4738a8 */
-extern unsigned int DAT_004738ac; /* 0x4738ac */
-extern unsigned char DAT_004738b0; /* 0x4738b0 */
-extern unsigned int DAT_004738b4; /* 0x4738b4 */
-extern unsigned int DAT_004738b8; /* 0x4738b8 */
-extern unsigned int DAT_004738c0; /* 0x4738c0 */
-extern unsigned int DAT_004738c4; /* 0x4738c4 */
-extern unsigned int DAT_004738c8; /* 0x4738c8 */
-extern unsigned int DAT_004738cc; /* 0x4738cc */
-extern unsigned int DAT_004738d0; /* 0x4738d0 */
-extern unsigned int DAT_004738d4; /* 0x4738d4 */
-extern unsigned int DAT_004738d8; /* 0x4738d8 */
-extern unsigned int DAT_004738dc; /* 0x4738dc */
-extern unsigned int DAT_004738e0; /* 0x4738e0 */
-extern unsigned int DAT_004738e4; /* 0x4738e4 */
-extern unsigned int DAT_004738e8; /* 0x4738e8 */
-extern unsigned int DAT_004738ec; /* 0x4738ec */
-extern unsigned int DAT_004738f0; /* 0x4738f0 */
-extern unsigned int DAT_004738f4; /* 0x4738f4 */
-extern unsigned int DAT_004ef430; /* 0x4ef430 */
-extern unsigned int DAT_004ef434; /* 0x4ef434 */
-extern unsigned int DAT_004ef438; /* 0x4ef438 */
-extern unsigned int DAT_004ef43c; /* 0x4ef43c */
-#ifndef ROMWRIGHT_STORAGE_DAT_004ef440_4_4_DEFINED
-#define ROMWRIGHT_STORAGE_DAT_004ef440_4_4_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_DAT_004ef440_4_4 {
-    unsigned int whole;
-    unsigned char u1[4];
-    signed char s1[4];
-    unsigned short u2[2];
-    short s2[2];
-    unsigned int u4[1];
-    int s4[1];
-    float f4[1];
-};
-typedef char romwright_storage_DAT_004ef440_4_4_size_check[(sizeof(union romwright_storage_DAT_004ef440_4_4) == 4) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_u1_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_s1_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->s1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_u2_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->u2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_s2_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->s2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_u4_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->u4[0]) == 4) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_s4_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->s4[0]) == 4) ? 1 : -1];
-typedef char romwright_storage_DAT_004ef440_4_4_f4_width_check[(sizeof(((union romwright_storage_DAT_004ef440_4_4 *)0)->f4[0]) == 4) ? 1 : -1];
-#endif
-extern union romwright_storage_DAT_004ef440_4_4 DAT_004ef440; /* 0x4ef440 */
-extern unsigned int DAT_004ef444; /* 0x4ef444 */
-extern unsigned int DAT_004ef448; /* 0x4ef448 */
-extern unsigned int DAT_004ef44c; /* 0x4ef44c */
-extern unsigned int DAT_004ef450; /* 0x4ef450 */
-extern unsigned int DAT_004ef454; /* 0x4ef454 */
-extern unsigned int DAT_004ef858; /* 0x4ef858 */
-extern unsigned int DAT_004ef85c; /* 0x4ef85c */
-extern unsigned int DAT_004ef860; /* 0x4ef860 */
-extern unsigned int DAT_004ef864; /* 0x4ef864 */
-extern unsigned int DAT_004ef868; /* 0x4ef868 */
-extern unsigned int DAT_004ef870; /* 0x4ef870 */
-extern unsigned int DAT_004ef874; /* 0x4ef874 */
-extern unsigned int DAT_004ef878; /* 0x4ef878 */
-extern unsigned char DAT_004ef87c; /* 0x4ef87c */
-extern unsigned char DAT_004ef87d; /* 0x4ef87d */
-extern unsigned short DAT_004ef880; /* 0x4ef880 */
-extern unsigned short DAT_004ef882; /* 0x4ef882 */
-extern unsigned short DAT_004ef884; /* 0x4ef884 */
-extern unsigned short DAT_004ef886; /* 0x4ef886 */
-extern unsigned char DAT_004ef888; /* 0x4ef888 */
-extern unsigned char *DAT_004ef960; /* 0x4ef960 */
-extern unsigned int DAT_004ef964; /* 0x4ef964 */
-extern unsigned int DAT_004ef968; /* 0x4ef968 */
-extern unsigned int DAT_004ef96c; /* 0x4ef96c */
-extern unsigned int DAT_004ef970; /* 0x4ef970 */
-extern unsigned char *DAT_004ef974; /* 0x4ef974 */
-extern unsigned int DAT_004ef978; /* 0x4ef978 */
-extern unsigned int DAT_004ef97c; /* 0x4ef97c */
-extern unsigned int DAT_004ef980; /* 0x4ef980 */
-extern unsigned int DAT_004ef984; /* 0x4ef984 */
-
-#ifndef ROMWRIGHT_PIECE_1_3_DEFINED
-#define ROMWRIGHT_PIECE_1_3_DEFINED
-#define romwright_piece_1_3(upper, lower) ((unsigned int)(((unsigned int)(unsigned char)(upper) << 24) | ((unsigned int)(lower) & 0xffffffULL)))
-#endif
-/* Unsupported intrinsic, declaration required: hasExclusiveAccess (CALLOTHER). */
-/* Supplied declaration required: FUN_002ad314. */
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-
-
+// Initialises the timing globals: limits, parameter records, the atomic registry and its slots, two vtable objects and
+// the ticks-per-frame scale; registers their static destructors.
 void FUN_003ee9bc(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  float temp_v1;
-  float afStack_24 [2];
-  
-  DAT_004738e8 = 0xffffffff;
-  DAT_004738ec = 0xffffffff;
-  DAT_004738f0 = 0;
-  DAT_004738f4 = 0;
-  DAT_004ef430 = 0x20a0887;
-  DAT_004ef434 = 10;
-  DAT_004ef438 = 0xe;
-  DAT_004ef43c = 4;
-  DAT_004ef440.whole = romwright_piece_1_3(DAT_004ef440.u1[3],0xa6404);
-  DAT_004ef444 = 0x20a0887;
-  DAT_004ef448 = 10;
-  DAT_004ef44c = 0xe;
-  DAT_004ef450 = 4;
-  DAT_004ef454 = DAT_004ef440.whole;
-  DAT_004738ac = 0;
-  DAT_004738b0 = 1;
-  do {
-    temp_v0 = (unsigned char)hasExclusiveAccess(0x4ef858);
-  } while (!temp_v0);
-  DAT_004ef858 = 0xffffffff;
-  DAT_004ef85c = 0xffffffff;
-  do {
-    temp_v0 = (unsigned char)hasExclusiveAccess(0x4ef860);
-  } while (!temp_v0);
-  DAT_004ef860 = 0xffffffff;
-  DAT_004ef864 = 0xffffffff;
-  do {
-    temp_v0 = (unsigned char)hasExclusiveAccess(0x4ef868);
-  } while (!temp_v0);
-  DAT_004ef868 = 0xffffffff;
-  DAT_004ef870 = 0;
-  DAT_004ef874 = 0;
-  DAT_004ef878 = 0;
-  DAT_004ef87c = 0;
-  DAT_004ef87d = 0;
-  DAT_004ef880 = 0;
-  DAT_004ef882 = 0;
-  DAT_004ef884 = 0;
-  DAT_004ef886 = 0;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004ef888,&LAB_00361934,0x18,8);
-  DAT_004ef964 = 0;
-  DAT_004ef968 = 0;
-  DAT_004ef96c = 0;
-  DAT_004ef960 = &DAT_00420fd8;
-  DAT_004ef970 = 0;
-  DAT_004ef978 = 0;
-  DAT_004ef97c = 0;
-  DAT_004ef980 = 0;
-  DAT_004ef974 = &DAT_00420fd8;
-  DAT_004ef984 = 0;
-  DAT_004738b4 = 0;
-  DAT_004738b8 = 0;
-  DAT_004738c0 = 1000000000;
-  DAT_004738c4 = 0;
-  DAT_004738c8 = 20000000;
-  DAT_004738cc = 0;
-  DAT_004738d0 = 450000000;
-  DAT_004738d4 = 0;
-  DAT_004738d8 = 2000000000;
-  DAT_004738dc = 0;
-  DAT_004738e0 = 100000000;
-  DAT_004738e4 = 0;
-  FUN_002ad314(&temp_v1,afStack_24,0x100000);
-  DAT_004738a8 = (int)((temp_v1 / afStack_24[0]) * 256.0f);
-  return;
-}
+    DAT_00473888.invalidA = -1;
+    DAT_00473888.invalidB = -1;
+    DAT_00473888.clearedA = 0;
+    DAT_00473888.clearedB = 0;
 
-} /* extern "C" */
+    DAT_004ef430.a = 0x87;
+    DAT_004ef430.b = 8;
+    DAT_004ef430.c = 10;
+    DAT_004ef430.d = 2;
+    DAT_004ef430.e = 10;
+    DAT_004ef430.f = 14;
+    DAT_004ef430.g = 4;
+    DAT_004ef430.h = 4;
+    DAT_004ef430.i = 100;
+    DAT_004ef430.j = 10;
+    DAT_004ef444 = DAT_004ef430;
+
+    DAT_00473888.flagWord = 0;
+    DAT_00473888.flag = 1;
+    __aeabi_atexit(&DAT_00473888.flagWord, nn_os_Thread_Thread_sub_object, (void *)entry);
+
+    DAT_004ef858.first = -1;
+    DAT_004ef858.second = -1;
+    DAT_004ef858.third = -1;
+    DAT_004ef858.slot.first = 0;
+    DAT_004ef858.slot.second = 0;
+    DAT_004ef858.slot.third = 0;
+    DAT_004ef858.slot.flagA = 0;
+    DAT_004ef858.slot.flagB = 0;
+    DAT_004ef858.slot.shorts[0] = 0;
+    DAT_004ef858.slot.shorts[1] = 0;
+    DAT_004ef858.slot.shorts[2] = 0;
+    DAT_004ef858.slot.shorts[3] = 0;
+    __aeabi_vec_ctor_nocookie_nodtor(DAT_004ef858.slots, FUN_00361934, sizeof(SlotRecord), 8);
+
+    DAT_004ef960.vtable = DAT_00420fd8;
+    DAT_004ef960.unk04[0] = 0;
+    DAT_004ef960.unk04[1] = 0;
+    DAT_004ef960.unk04[2] = 0;
+    DAT_004ef960.unk04[3] = 0;
+    __aeabi_atexit(&DAT_004ef960, FUN_00360260, (void *)entry);
+
+    DAT_004ef974.vtable = DAT_00420fd8;
+    DAT_004ef974.unk04[0] = 0;
+    DAT_004ef974.unk04[1] = 0;
+    DAT_004ef974.unk04[2] = 0;
+    DAT_004ef974.unk04[3] = 0;
+    __aeabi_atexit(&DAT_004ef974, FUN_00360260, (void *)entry);
+
+    DAT_004738b4 = 0;
+    DAT_004738b8 = 0;
+    __aeabi_atexit(&DAT_004738b4, FUN_003573a0, (void *)entry);
+
+    DAT_00473888.limits[0] = 1000000000;
+    DAT_00473888.limits[1] = 20000000;
+    DAT_00473888.limits[2] = 450000000;
+    DAT_00473888.limits[3] = 2000000000;
+    DAT_00473888.limits[4] = 100000000;
+
+    f32 counts[2];
+    f32 base;
+    FUN_002ad314(&base, counts, 0x100000);
+    DAT_00473888.ticksPerFrame = (s32)((base / counts[0]) * 256.0f);
+}
+}

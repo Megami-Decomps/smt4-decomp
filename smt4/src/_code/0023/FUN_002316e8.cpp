@@ -1,145 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002316e8` (_code @ 0x2316e8, 0x270 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near miss: register assignment and constant load order differ (retail keeps work in r9, the zero reserved word in the stack frame at sp+12 and hoists the 0.5/317/400 constants differently). */
+#include "common.h"
+
+/* A record of data table 0x2B sub-table 1: a map marker. */
+struct MapMarkerRecord {
+    s8 kind;            // 0x00: the map region it belongs to
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    u16 showFlag;       // 0x04
+    u16 hideFlag;       // 0x06
+    s16 type;           // 0x08
+    u8 unk0A[4];
+    s16 x;              // 0x0E
+    s16 y;              // 0x10
+};
+
+/* A marker draw entry (0x4C bytes, at 0xE88 of the map work). */
+struct MapMarkerEntry {
+    u32 group;          // 0x00
+    u8 unk04;
+    u8 unk05;
+    u16 unk06;
+    u16 spriteId;       // 0x08
+    u8 unk0A[2];
+    f32 x;              // 0x0C
+    f32 y;              // 0x10
+    f32 width;          // 0x14
+    f32 height;         // 0x18
+    u8 unk1C[0x10];
+    u16 type;           // 0x2C
+    u16 unk2E;
+    u16 showFlag;       // 0x30
+    u16 hideFlag;       // 0x32
+    u16 unk34;
+    u8 unk36[0x12];
+    s32 unk48;          // 0x48
+};
+
+struct MapMarkerWork {
+    u8 unk0000[0xE88];
+    MapMarkerEntry entries[1];
+};
 
 extern "C" {
-
-int dataTable2bSub1GetCount(void);
-int uiGetEntrySize(int, int, int *, int *);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern char *dataTable2bSub1GetRecord(unsigned char *, int);
-/* Supplied declaration required: dataTable2bSub1GetCount. */
-/* Supplied declaration required: uiGetEntrySize. */
-extern int gameFlagIsSet(void);
-
-
-void FUN_002316e8(int param_1,int param_2)
-
-{
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  short temp_v0;
-  unsigned char *puVar2;
-  char *pcVar3;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned short temp_v5;
-  unsigned int in_fpscr;
-  unsigned int temp_v6;
-  float temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  float temp_v10;
-  unsigned long long temp_v11;
-  unsigned long long temp_v12;
-  unsigned long long temp_v13;
-  unsigned long long temp_v14;
-  unsigned char temp_v15 [4];
-  int temp_v16;
-  int temp_v17;
-  unsigned int temp_v18;
-  
-  temp_v4 = 0;
-  puVar2 = temp_v15;
-  temp_v18 = 0;
-  temp_v12 = 0;
-  temp_v11 = 0;
-  if (param_2 != 0x65) {
-    if (param_2 != 0x66) {
-      if (param_2 == 0x67) {
-        temp_v12 = 0xc694700046ea6000;
-        temp_v11 = 0x47108800c684d000;
-      }
-    }
-    else {
-      temp_v12 = 0xc68ca00046f23000;
-      temp_v11 = 0x47108800c684d000;
-    }
-  }
-  else {
-    temp_v12 = 0xc690880046e67800;
-    temp_v11 = 0x47147000c6c73800;
-  }
-  temp_v3 = 0;
-  dataTable2bSub1GetCount();
-  if (0 < (int)puVar2) {
-    temp_v13 = 0x439e80003f000000;
-    temp_v14 = 0x43c80000;
-    temp_v2 = temp_v4;
-    do {
-      pcVar3 = (char *)dataTable2bSub1GetRecord(temp_v15,temp_v3);
-      temp_v4 = temp_v2;
-      if (((*pcVar3 == param_2) &&
-          ((*(short *)(pcVar3 + 4) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
-         ((*(short *)(pcVar3 + 6) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)))) {
-        if (*(short *)(pcVar3 + 8) == 5) {
-          temp_v5 = 0x1bc3;
-        }
-        else if (*(short *)(pcVar3 + 8) == 6) {
-          temp_v5 = 0x1bc4;
-        }
-        else {
-          temp_v5 = 0x1bc5;
-        }
-        uiGetEntrySize(0x13,temp_v5,&temp_v16,&temp_v17);
-        temp_v0 = *(short *)(pcVar3 + 0x10);
-        temp_v4 = temp_v2 + 1;
-        temp_v2 = param_1 + temp_v2 * 0x4c;
-        temp_v9 = (float)VectorSignedToFloat((int)*(short *)(pcVar3 + 0xe),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0xe88) = 0x13;
-        *(char *)(temp_v2 + 0xe8c) = pcVar3[1];
-        temp_v7 = (float)VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned short *)(temp_v2 + 0xeb4) = *(unsigned short *)(pcVar3 + 8);
-        *(char *)(temp_v2 + 0xe8d) = pcVar3[2];
-        *(unsigned short *)(temp_v2 + 0xeb6) = 0;
-        *(unsigned short *)(temp_v2 + 0xe8e) = 0;
-        temp_v10 = (float)VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v6 = VectorSignedToFloat(temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned short *)(temp_v2 + 0xeb8) = *(unsigned short *)(pcVar3 + 4);
-        *(unsigned short *)(temp_v2 + 0xeba) = *(unsigned short *)(pcVar3 + 6);
-        *(unsigned short *)(temp_v2 + 0xe90) = temp_v5;
-        temp_v10 = temp_v10 * (float)temp_v13;
-        *(unsigned int *)(temp_v2 + 0xe9c) = temp_v6;
-        temp_v9 = (float)VectorSignedToFloat((int)(short)(int)(((float)((unsigned long long)temp_v13 >> 0x20) /
-                                                              (float)temp_v12) *
-                                                             (temp_v9 - (float)temp_v11)),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v7 = (float)VectorSignedToFloat((int)(short)(int)(((float)temp_v14 /
-                                                              (float)((unsigned long long)temp_v11 >> 0x20)) *
-                                                             (temp_v7 - (float)((unsigned long long)temp_v12 >>
-                                                                              0x20))),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v6 = VectorSignedToFloat((int)(short)(int)(temp_v9 - temp_v10),(unsigned char)(in_fpscr >> 0x16) & 3)
-        ;
-        temp_v8 = VectorSignedToFloat((int)(short)(int)(temp_v7 - temp_v10),(unsigned char)(in_fpscr >> 0x16) & 3
-                                    );
-        *(unsigned int *)(temp_v2 + 0xe94) = temp_v6;
-        *(unsigned int *)(temp_v2 + 0xe98) = temp_v8;
-        temp_v6 = VectorSignedToFloat(temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0xea0) = temp_v6;
-        *(unsigned short *)(temp_v2 + 0xebc) = 0;
-        *(unsigned int *)(temp_v2 + 0xed0) = 0xffffffff;
-      }
-      temp_v3 = temp_v3 + 1;
-      puVar2 = temp_v15;
-      dataTable2bSub1GetCount();
-      temp_v2 = temp_v4;
-    } while (temp_v3 < (int)puVar2);
-  }
-  *(int *)(param_1 + 0x5a88) = temp_v4;
-  *(unsigned int *)(param_1 + 0x61b0) = temp_v18;
-  return;
+s32 dataTable2bSub1GetCount(void *iterator);
+MapMarkerRecord *dataTable2bSub1GetRecord(void *iterator, s32 index);
+s32 gameFlagIsSet(u32 flag);
+void uiGetEntrySize(u32 group, u32 sprite, s32 *width, s32 *height);
 }
 
-} /* extern "C" */
+#define MARKER_COUNT(work) (*reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(work) + 0x5A88))
+#define MARKER_RESERVED(work) (*reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(work) + 0x61B0))
+
+/* Build the marker draw entries of one map region, projecting world positions onto the 317x400 map image. */
+extern "C" void FUN_002316e8(MapMarkerWork *work, s32 region)
+{
+    s32 count = 0;
+    s32 reserved = 0;
+    f32 left = 0.0f;
+    f32 right = 0.0f;
+    f32 top = 0.0f;
+    f32 bottom = 0.0f;
+    if (region == 101) {
+        left = -25500.0f;
+        top = -18500.0f;
+        right = 29500.0f;
+        bottom = 38000.0f;
+    } else if (region == 102) {
+        left = -17000.0f;
+        top = -18000.0f;
+        right = 31000.0f;
+        bottom = 37000.0f;
+    } else if (region == 103) {
+        left = -17000.0f;
+        top = -19000.0f;
+        right = 30000.0f;
+        bottom = 37000.0f;
+    }
+    u8 iterator[4];
+    for (s32 i = 0; i < dataTable2bSub1GetCount(iterator); i++) {
+        MapMarkerRecord *record = dataTable2bSub1GetRecord(iterator, i);
+        if (record->kind != region)
+            continue;
+        if (record->showFlag != 0 && gameFlagIsSet(record->showFlag) == 0)
+            continue;
+        if (record->hideFlag != 0 && gameFlagIsSet(record->hideFlag) != 0)
+            continue;
+        u32 sprite;
+        if (record->type == 5)
+            sprite = 0x1BC3;
+        else if (record->type == 6)
+            sprite = 0x1BC4;
+        else
+            sprite = 0x1BC5;
+        s32 width;
+        s32 height;
+        uiGetEntrySize(0x13, sprite, &width, &height);
+        MapMarkerEntry *entry = &work->entries[count++];
+        f32 scaleX = 317.0f / right;
+        f32 scaleY = 400.0f / bottom;
+        s16 projectedX = static_cast<s16>(static_cast<s32>(scaleX * (static_cast<f32>(record->x) - left)));
+        s16 projectedY = static_cast<s16>(static_cast<s32>(scaleY * (static_cast<f32>(record->y) - top)));
+        f32 halfWidth = static_cast<f32>(width) * 0.5f;
+        entry->group = 0x13;
+        entry->unk04 = reinterpret_cast<u8 *>(record)[1];
+        entry->unk05 = reinterpret_cast<u8 *>(record)[2];
+        entry->unk06 = 0;
+        entry->spriteId = sprite;
+        entry->type = record->type;
+        entry->unk2E = 0;
+        entry->showFlag = record->showFlag;
+        entry->hideFlag = record->hideFlag;
+        entry->width = static_cast<f32>(width);
+        entry->x = static_cast<f32>(static_cast<s16>(static_cast<s32>(static_cast<f32>(projectedX) - halfWidth)));
+        entry->y = static_cast<f32>(static_cast<s16>(static_cast<s32>(static_cast<f32>(projectedY) - halfWidth)));
+        entry->height = static_cast<f32>(height);
+        entry->unk34 = 0;
+        entry->unk48 = -1;
+    }
+    MARKER_COUNT(work) = count;
+    MARKER_RESERVED(work) = reserved;
+}

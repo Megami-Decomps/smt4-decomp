@@ -1,123 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f50ac` (_code @ 0x1f50ac, 0x314 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sprite pool initialisation; same row count as retail, differs only in the paramsInit chunk addresses (retail derives all five from the single 0x4013d4 literal with subs and one stm, built loads each from its own literal pool word) */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+
+struct SpriteSlot {
+    /* 0x00 */ u8 data[0x8C];
+};
+
+/* The sprite pool: draw parameters, 60 sprites and the selection state that follows. */
+struct SpritePool {
+    /* 0x0000 */ UiResourceParameters resources;
+    /* 0x0020 */ SpriteSlot sprites[0x3D];   /* the last one is the cursor sprite */
+    /* 0x217C */ u32 unk217C;
+    /* 0x2180 */ u32 unk2180;
+    /* 0x2184 */ u32 unk2184;
+    /* 0x2188 */ f32 unk2188;
+    /* 0x218C */ u16 unk218C;
+    /* 0x218E */ u16 unk218E;
+    /* 0x2190 */ u8 unk2190[4];
+    /* 0x2194 */ s16 slotIds[10];
+    /* 0x21A8 */ u16 slotValues[10];
+    /* 0x21BC */ f32 slotScales[10];
+    /* 0x21E4 */ s16 pageIds[10];
+};
 
 extern "C" {
+extern const u8 DAT_00401298[];
+extern const u8 DAT_004012a4[];
+extern const u8 DAT_00401328[];
+extern const u8 DAT_004013b8[];
+extern const u8 DAT_004013d4[];
 
-int FUN_00295eb0(...);
-int FUN_002a9fdc(int, int, int);
-int FUN_002bd954(...);
-int spriteStartAnimationByIndex(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int);
-int drawParameterBlockClear(int);
+void drawParameterBlockClear(UiResourceParameters *resources);
+void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
+                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
+                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+void FUN_002bd954(SpriteSlot *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void FUN_00295eb0(SpriteSlot *sprite, s32 kind, s32 count);
+void FUN_002a9fdc(SpriteSlot *sprite, s32 arg, s32 flag);
+void spriteStartAnimationByIndex(SpriteSlot *sprite, s32 animation);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
+#define SPRITE_KIND 0x14
 
-extern unsigned char DAT_00401298; /* 0x401298 */
-extern unsigned char DAT_004012a4; /* 0x4012a4 */
-extern unsigned char DAT_00401328; /* 0x401328 */
-extern unsigned char DAT_004013b8; /* 0x4013b8 */
-extern unsigned char DAT_004013d4; /* 0x4013d4 */
-
-/* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
-void FUN_001f50ac(int param_1)
-
+/* Clears the pool state, loads the draw parameters and initialises all 60 sprites by group:
+ * 0-9 buttons, 10-19, 20-29, 30-39, 40-49 and 50-59, each with its own animation. */
+void FUN_001f50ac(SpritePool *pool)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  *(unsigned int *)(param_1 + 0x2180) = 0;
-  *(unsigned int *)(param_1 + 0x217c) = 0;
-  *(unsigned int *)(param_1 + 0x2188) = 0;
-  *(unsigned short *)(param_1 + 0x218c) = 0;
-  *(unsigned short *)(param_1 + 0x218e) = 0;
-  *(unsigned int *)(param_1 + 0x2184) = 0;
-  temp_v1 = 0;
-  temp_v0 = 0;
-  do {
-    temp_v2 = temp_v1 + 1;
-    temp_v0 = temp_v0 + 2;
-    *(unsigned short *)(param_1 + temp_v1 * 2 + 0x21e4) = 0xffff;
-    temp_v1 = temp_v1 + 2;
-    *(unsigned short *)(param_1 + temp_v2 * 2 + 0x21e4) = 0xffff;
-  } while (temp_v0 < 10);
-  temp_v0 = 0;
-  temp_v1 = 10;
-  do {
-    temp_v3 = param_1 + temp_v0 * 2;
-    temp_v2 = temp_v0 * 4;
-    *(unsigned short *)(temp_v3 + 0x2194) = 0xffff;
-    *(unsigned short *)(temp_v3 + 0x21a8) = 0;
-    temp_v1 = temp_v1 - 1;
-    temp_v0 = temp_v0 + 1;
-    *(unsigned int *)(param_1 + temp_v2 + 0x21bc) = 0;
-  } while (temp_v1 != 0);
-  drawParameterBlockClear(param_1);
-  paramsInit(param_1,&DAT_00401298,0xc,&DAT_004012a4,0x84,&DAT_00401328,0x90,&DAT_004013b8,0x1c,
-               &DAT_004013d4,0x39c);
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002bd954(temp_v1 + 0x20,0x14,0,param_1,2);
-    FUN_00295eb0(temp_v1 + 0x20,0x14,temp_v0 + 0xb);
-    FUN_002a9fdc(temp_v1 + 0x20,5,0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 10);
-  temp_v0 = 10;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002bd954(temp_v1 + 0x20,0x14,4,param_1,2);
-    FUN_00295eb0(temp_v1 + 0x20,0x14,temp_v0 + 0x15);
-    spriteStartAnimationByIndex(temp_v1 + 0x20,2);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x14);
-  temp_v0 = 0x14;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002bd954(temp_v1 + 0x20,0x14,7,param_1,2);
-    FUN_00295eb0(temp_v1 + 0x20,0x14,temp_v0 + 1);
-    spriteStartAnimationByIndex(temp_v1 + 0x20,5);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x1e);
-  temp_v0 = 0x1e;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002bd954(temp_v1 + 0x20,0x14,2,param_1,2);
-    FUN_00295eb0(temp_v1 + 0x20,0x14,temp_v0 - 9);
-    spriteStartAnimationByIndex(temp_v1 + 0x20,3);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x28);
-  temp_v0 = 0x28;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002bd954(temp_v1 + 0x20,0x14,4000,param_1,2);
-    FUN_00295eb0(temp_v1 + 0x20,0x14,temp_v0 - 0x13);
-    spriteStartAnimationByIndex(temp_v1 + 0x20,0xb);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x32);
-  temp_v0 = 0x32;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_002bd954(temp_v1 + 0x20,0x14,0xfa6,param_1,2);
-    FUN_00295eb0(temp_v1 + 0x20,0x14,temp_v0 - 0x1d);
-    spriteStartAnimationByIndex(temp_v1 + 0x20,10);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x3c);
-  FUN_002bd954(param_1 + 0x20f0,0x14,0,param_1,1);
-  return;
+    pool->unk2180 = 0;
+    pool->unk217C = 0;
+    pool->unk2188 = 0.0f;
+    pool->unk218C = 0;
+    pool->unk218E = 0;
+    pool->unk2184 = 0;
+    for (s32 i = 0; i < 10; i++)
+        pool->pageIds[i] = -1;
+    for (s32 i = 0; i < 10; i++) {
+        pool->slotIds[i] = -1;
+        pool->slotValues[i] = 0;
+        pool->slotScales[i] = 0.0f;
+    }
+
+    drawParameterBlockClear(&pool->resources);
+    paramsInit(&pool->resources, DAT_00401298, 0xC, DAT_004012a4, 0x84, DAT_00401328, 0x90,
+               DAT_004013b8, 0x1C, DAT_004013d4, 0x39C);
+
+    for (s32 i = 0; i <= 9; i++) {
+        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 0, &pool->resources, 2, 1.0f);
+        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i + 0xB);
+        FUN_002a9fdc(&pool->sprites[i], 5, 0);
+    }
+    for (s32 i = 10; i <= 19; i++) {
+        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 4, &pool->resources, 2, 1.0f);
+        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i + 0x15);
+        spriteStartAnimationByIndex(&pool->sprites[i], 2);
+    }
+    for (s32 i = 0x14; i <= 29; i++) {
+        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 7, &pool->resources, 2, 1.0f);
+        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i + 1);
+        spriteStartAnimationByIndex(&pool->sprites[i], 5);
+    }
+    for (s32 i = 0x1E; i <= 39; i++) {
+        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 2, &pool->resources, 2, 1.0f);
+        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i - 9);
+        spriteStartAnimationByIndex(&pool->sprites[i], 3);
+    }
+    for (s32 i = 0x28; i <= 49; i++) {
+        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 4000, &pool->resources, 2, 1.0f);
+        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i - 0x13);
+        spriteStartAnimationByIndex(&pool->sprites[i], 0xB);
+    }
+    for (s32 i = 0x32; i <= 59; i++) {
+        FUN_002bd954(&pool->sprites[i], SPRITE_KIND, 0xFA6, &pool->resources, 2, 1.0f);
+        FUN_00295eb0(&pool->sprites[i], SPRITE_KIND, i - 0x1D);
+        spriteStartAnimationByIndex(&pool->sprites[i], 10);
+    }
+    FUN_002bd954(&pool->sprites[0x3C], SPRITE_KIND, 0, &pool->resources, 1, 1.0f);
 }
 
 } /* extern "C" */

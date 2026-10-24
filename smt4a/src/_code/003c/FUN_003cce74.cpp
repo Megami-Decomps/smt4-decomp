@@ -1,126 +1,78 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cce74` (_code @ 0x3cce74, 0x310 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: grid slot detail draw (name, detail value and stat delta); written from the decompilation, scheduling not compared with retail */
+#include "common.h"
+
+/* A placed sprite frame: offset of the sprite relative to its parent. */
+struct GridSpriteFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+struct GridDetailView {
+    /* 0x0000 */ u8 unk0000[0x438];
+    /* 0x0438 */ s16 slotIds[1];
+    /* 0x043A */ u8 unk043A[0x7726];
+    /* 0x8B60 */ s16 entryIds[1];
+    /* 0x8B62 */ u8 unk8B62[0x24E];
+    /* 0x8DB0 */ u8 cursor[1];
+};
 
 extern "C" {
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y);
+void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *format, u32 value);
+GridSpriteFrame *FUN_001834a4(u32 bank, u32 sprite);
+void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
+void FUN_00185e84(s32 id, s32 x, s32 y, u32 flags, s32 a, s32 b);
+void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot);
+void statDrawClampedDelta(void *owner, s32 id, s32 x, s32 y, u32 flags, s32 arg);
+u32 FUN_0014bd84(u16 id);
+s32 recordGetModeForId(s32 id);
+s32 FUN_002a4894(void *cursor);
+s32 recordContainsPairedId(void *owner, u16 id);
+u32 FUN_004bcbb4(void *owner, u16 id);
+void FUN_004bd6b0(void *owner, u16 id, s32 slot);
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int FUN_00180310(...);
-int FUN_001834a4(...);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00185e84(...);
-int largeGridDrawButtonStrip(int, int, int, int);
-int statDrawClampedDelta(...);
-int FUN_004bd6b0(...);
-int VectorSignedToFloat(...);
+#define GRID_COLOR_NORMAL 0x9FE7FFFF
+#define GRID_COLOR_SPECIAL 0xF5FF9FFF
 
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp98; /* 0x98: local_98 */
-} param_4_stack;
-
-extern unsigned char LAB_003cd194; /* 0x3cd194 */
-extern unsigned char LAB_003cd1a0; /* 0x3cd1a0 */
-extern unsigned char LAB_003cd1b0; /* 0x3cd1b0 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(unsigned short);
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00185e84. */
-extern int recordGetModeForId(int);
-extern int FUN_002a4894(int);
-/* Supplied declaration required: largeGridDrawButtonStrip. */
-/* Supplied declaration required: statDrawClampedDelta. */
-extern int recordContainsPairedId(unsigned int, unsigned short);
-extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_004bd6b0. */
-
-
-void FUN_003cce74(int param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Draws the detail of the grid slot under the cursor at (x, y): the entry name, its value and
+ * the clamped stat delta, or a placeholder line when the slot is empty. */
+void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 10 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  unsigned char temp_v7 [84];
-  int iStack_34;
-  unsigned int temp_v8;
-  int iStack_2c;
-  int iStack_28;
-  
-  iStack_34 = param_1;
-  temp_v8 = param_2;
-  iStack_2c = param_3;
-  iStack_28 = param_4;
-  temp_v0 = FUN_002a4894(param_1 + 0x8db0);
-  temp_v1 = FUN_001834a4(0x1a,temp_v0 + 0x23c);
-  temp_v2 = FUN_002a4894(param_1 + 0x8db0);
-  temp_v2 = temp_v2 + 0x20;
-  largeGridDrawButtonStrip(param_1,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,temp_v2);
-  temp_v3 = param_1 + temp_v0 * 2;
-  temp_v6 = 0x9fe7ffff;
-  if (*(short *)(temp_v3 + 0x8b60) != 0) {
-    FUN_001835b4(2,0x1a,0x19f,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,0x83)
-    ;
-    FUN_001835b4(2,0x1a,0x1a0,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,0x83)
-    ;
-    temp_v2 = recordGetModeForId((int)*(short *)(param_1 + temp_v2 * 2 + 0x438));
-    if ((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6) {
-      temp_v6 = 0xf5ff9fff;
+    char text[84];
+    s32 slot = FUN_002a4894(view->cursor);
+    GridSpriteFrame *frame = FUN_001834a4(0x1A, slot + 0x23C);
+    s32 button = FUN_002a4894(view->cursor) + 0x20;
+    largeGridDrawButtonStrip(view, frame->x + x, frame->y + y, button);
+
+    u32 color = GRID_COLOR_NORMAL;
+    s16 entry = view->entryIds[slot];
+    if (entry != 0) {
+        FUN_001835b4(2, 0x1A, 0x19F, frame->x + x, frame->y + y, 0x83);
+        FUN_001835b4(2, 0x1A, 0x1A0, frame->x + x, frame->y + y, 0x83);
+        s32 mode = recordGetModeForId(view->slotIds[button]);
+        if (mode == 1 || mode == 2 || mode == 6)
+            color = GRID_COLOR_SPECIAL;
+        textFormatBuffer(text, "%s", FUN_0014bd84(entry));
+        GridSpriteFrame *label = FUN_001834a4(0x1A, 0x1A2);
+        FUN_00162790(2, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y));
+        GridSpriteFrame *icon = FUN_001834a4(0x1A, 0x1A1);
+        FUN_00185e84(entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0, 0);
+        if (recordContainsPairedId(owner, entry) == 0)
+            FUN_004bd6b0(owner, entry, slot);
+        statDrawClampedDelta(owner, entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0);
+        GridSpriteFrame *value = FUN_001834a4(0x1A, 0x1A6);
+        u32 amount = FUN_004bcbb4(owner, entry);
+        FUN_00180310(1, frame->x + value->x + x, value->y + frame->y + y, 1, 4, 0x79, "%d", amount);
+    } else {
+        s32 mode = recordGetModeForId(view->slotIds[button]);
+        if (mode == 1 || mode == 2 || mode == 6)
+            color = GRID_COLOR_SPECIAL;
+        textFormatBuffer(text, "\x81\x7C \x81\x7C \x81\x7C");
+        GridSpriteFrame *label = FUN_001834a4(0x1A, 0x1A2);
+        FUN_00162790(3, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y));
     }
-    temp_v4 = FUN_0014bd84(*(unsigned short *)(temp_v3 + 0x8b60));
-    textFormatBuffer(temp_v7,&LAB_003cd194,temp_v4);
-    temp_v2 = FUN_001834a4(0x1a,0x1a2);
-    VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_4,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_3,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,temp_v6,temp_v7,(int)*(short *)(temp_v1 + 8));
-    temp_v2 = FUN_001834a4(0x1a,0x1a1);
-    FUN_00185e84((int)*(short *)(temp_v3 + 0x8b60),
-                 (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_3,
-                 (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_4,0x74,0,0);
-    temp_v5 = recordContainsPairedId(temp_v8,*(unsigned short *)(temp_v3 + 0x8b60));
-    if (temp_v5 == 0) {
-      FUN_004bd6b0(temp_v8,*(unsigned short *)(temp_v3 + 0x8b60),temp_v0);
-    }
-    statDrawClampedDelta(temp_v8,(int)*(short *)(temp_v3 + 0x8b60),
-                 (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_3,
-                 (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_4,0x74,0);
-    temp_v0 = FUN_001834a4(0x1a,0x1a6);
-    temp_v6 = FUN_004bcbb4(temp_v8,*(unsigned short *)(temp_v3 + 0x8b60));
-    FUN_00180310(1,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v0 + 8) + param_3,
-                 (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v1 + 10) + param_4,1,4,0x79,
-                 &LAB_003cd1b0,temp_v6);
-  }
-  else {
-    temp_v0 = recordGetModeForId((int)*(short *)(param_1 + temp_v2 * 2 + 0x438));
-    if ((temp_v0 == 1 || temp_v0 == 2) || temp_v0 == 6) {
-      temp_v6 = 0xf5ff9fff;
-    }
-    textFormatBuffer(temp_v7,&LAB_003cd1a0);
-    temp_v0 = FUN_001834a4(0x1a,0x1a2);
-    VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v0 + 10) + param_4,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v0 + 8) + param_3,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,temp_v6,temp_v7,(int)*(short *)(temp_v0 + 10));
-  }
-  return;
 }
 
 } /* extern "C" */

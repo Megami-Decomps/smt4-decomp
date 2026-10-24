@@ -17,7 +17,7 @@ int FUN_0019de98(...);
 int campChangeState(...);
 int FUN_0021b274(...);
 int FUN_00228b04(int, int);
-int FUN_0028b088(...);
+int campShowSelectedEntryHelp(...);
 int campTouchRegionsRemoveGroup(...);
 int FUN_002cb278(int, int);
 int buttonHelpScriptStart(...);
@@ -50,7 +50,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int messageMainIsIdle(void);
-/* Supplied declaration required: FUN_0028b088. */
+/* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int FUN_002a21e8(void);
 extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002a4878(int);
@@ -113,7 +113,7 @@ void FUN_003daf0c(int param_1)
     if ((temp_v6 != 0) || (temp_v6 = temp_v7, FUN_00228b04(temp_v7,1), temp_v6 != 0)) {
       temp_v2 = FUN_002a4878(temp_v5 + 0x40);
       FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v2);
-      FUN_0028b088();
+      campShowSelectedEntryHelp();
       return;
     }
     temp_v6 = 0;
@@ -123,7 +123,7 @@ void FUN_003daf0c(int param_1)
       temp_v6 = 1;
       FUN_001517b4();
       if (temp_v6 != 0) {
-        FUN_0028b088(0);
+        campShowSelectedEntryHelp(0);
         FUN_0021b274(3,0xffffffff,0);
         *(unsigned int *)(temp_v5 + 0x24) = 6;
         campChangeState(5);

@@ -1,129 +1,67 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ff22c` (_code @ 0x3ff22c, 0x2f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near miss: retail inlines the per-property change test as branch chains jumping to a shared set-bit tail (no bool result); register assignment differs. */
+#include "common.h"
+
+struct BtlEntryRef {
+    u8 unk00[8];
+    s16 entry;      // 0x08
+};
 
 extern "C" {
-
-int btlFindEntryValue(...);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_6_stack;
-
-/* Supplied declaration required: btlFindEntryValue. */
-extern short btlGetPropertyMaximum(unsigned int);
-extern short FUN_004c53fc(unsigned int);
-
-
-unsigned char FUN_003ff22c(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
-
-{
-/* irregular: 12 goto(s); 1 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v3 = param_6 != 0;
-  temp_v2 = 0;
-  if (temp_v3 || param_2 != 0) {
-    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),7,param_3,param_4,param_1,param_2,param_3);
-    if (param_2 != -7) {
-      if (param_2 != -6) {
-        if (param_2 != -5) {
-          if (param_2 >= 1) {
-            temp_v1 = btlGetPropertyMaximum(7);
-            if (temp_v0 < temp_v1) {
-LAB_003ff30c:
-              if ((param_6 == 0) || (temp_v0 != 0)) {
-                temp_v2 = 8;
-              }
-            }
-          }
-          else if ((-1 < param_2) || (temp_v1 = FUN_004c53fc(7), temp_v1 < temp_v0)) goto LAB_003ff30c;
-        }
-        else if (0 < temp_v0) goto LAB_003ff30c;
-      }
-      else if (temp_v0 < 0) goto LAB_003ff30c;
-    }
-    else if (temp_v0 != 0) goto LAB_003ff30c;
-  }
-  if (temp_v3 || param_3 != 0) {
-    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),8);
-    if (param_3 != -7) {
-      if (param_3 != -6) {
-        if (param_3 != -5) {
-          if (param_3 >= 1) {
-            temp_v1 = btlGetPropertyMaximum(8);
-            if (temp_v0 < temp_v1) {
-LAB_003ff3b0:
-              if ((param_6 == 0) || (temp_v0 != 0)) {
-                temp_v2 = temp_v2 | 0x10;
-              }
-            }
-          }
-          else if ((-1 < param_3) || (temp_v1 = FUN_004c53fc(8), temp_v1 < temp_v0)) goto LAB_003ff3b0;
-        }
-        else if (0 < temp_v0) goto LAB_003ff3b0;
-      }
-      else if (temp_v0 < 0) goto LAB_003ff3b0;
-    }
-    else if (temp_v0 != 0) goto LAB_003ff3b0;
-  }
-  if (temp_v3 || param_4 != 0) {
-    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),10);
-    if (param_4 != -7) {
-      if (param_4 != -6) {
-        if (param_4 != -5) {
-          if (param_4 >= 1) {
-            temp_v1 = btlGetPropertyMaximum(10);
-            if (temp_v0 < temp_v1) {
-LAB_003ff458:
-              if ((param_6 == 0) || (temp_v0 != 0)) {
-                temp_v2 = temp_v2 | 0x20;
-              }
-            }
-          }
-          else if ((-1 < param_4) || (temp_v1 = FUN_004c53fc(10), temp_v1 < temp_v0)) goto LAB_003ff458;
-        }
-        else if (0 < temp_v0) goto LAB_003ff458;
-      }
-      else if (temp_v0 < 0) goto LAB_003ff458;
-    }
-    else if (temp_v0 != 0) goto LAB_003ff458;
-  }
-  if (temp_v3 || param_5 != 0) {
-    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),0xb);
-    if (param_5 != -7) {
-      if (param_5 != -6) {
-        if (param_5 != -5) {
-          if (param_5 >= 1) {
-            temp_v1 = btlGetPropertyMaximum(0xb);
-            if (temp_v1 <= temp_v0) {
-              return temp_v2 == 0;
-            }
-          }
-          else if ((param_5 < 0) && (temp_v1 = FUN_004c53fc(0xb), temp_v0 <= temp_v1)) {
-            return temp_v2 == 0;
-          }
-        }
-        else if (temp_v0 < 1) {
-          return temp_v2 == 0;
-        }
-      }
-      else if (-1 < temp_v0) {
-        return temp_v2 == 0;
-      }
-    }
-    else if (temp_v0 == 0) {
-      return temp_v2 == 0;
-    }
-    if ((param_6 == 0) || (temp_v0 != 0)) {
-      temp_v2 = temp_v2 | 0x40;
-    }
-  }
-  return temp_v2 == 0;
+s16 btlFindEntryValue(s32 entry, s32 property);
+s16 btlGetPropertyMaximum(s32 property);
+s16 FUN_004c53fc(s32 property);
 }
 
-} /* extern "C" */
+/* Whether a stat-change request (`change`) can take effect on a property whose current value is `value`. */
+static __inline bool statChangeApplies(s32 property, s32 change, s32 value)
+{
+    if (change == -7)
+        return value != 0;
+    if (change == -6)
+        return value < 0;
+    if (change == -5)
+        return value > 0;
+    if (change >= 1)
+        return value < btlGetPropertyMaximum(property);
+    if (change >= 0)
+        return true;
+    return FUN_004c53fc(property) < value;
+}
+
+/* Returns whether none of the requested stat changes (properties 7, 8, 10, 11) would have any effect. */
+extern "C" u8 FUN_003ff22c(BtlEntryRef *target, s32 change7, s32 change8, s32 change10, s32 change11, s32 requireNonZero)
+{
+    u32 wanted = 0;
+    if (change7 != 0)
+        wanted = 8;
+    if (change8 != 0)
+        wanted |= 0x10;
+    if (change10 != 0)
+        wanted |= 0x20;
+    if (change11 != 0)
+        wanted |= 0x40;
+    if (requireNonZero != 0)
+        wanted |= 0x78;
+    u32 applicable = 0;
+    if ((wanted & 8) != 0) {
+        s32 value = btlFindEntryValue(target->entry, 7);
+        if (statChangeApplies(7, change7, value) && (requireNonZero == 0 || value != 0))
+            applicable = 8;
+    }
+    if ((wanted & 0x10) != 0) {
+        s32 value = btlFindEntryValue(target->entry, 8);
+        if (statChangeApplies(8, change8, value) && (requireNonZero == 0 || value != 0))
+            applicable |= 0x10;
+    }
+    if ((wanted & 0x20) != 0) {
+        s32 value = btlFindEntryValue(target->entry, 10);
+        if (statChangeApplies(10, change10, value) && (requireNonZero == 0 || value != 0))
+            applicable |= 0x20;
+    }
+    if ((wanted & 0x40) != 0) {
+        s32 value = btlFindEntryValue(target->entry, 11);
+        if (statChangeApplies(11, change11, value) && (requireNonZero == 0 || value != 0))
+            applicable |= 0x40;
+    }
+    return applicable == 0;
+}

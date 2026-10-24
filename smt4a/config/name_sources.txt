@@ -6184,3 +6184,42 @@
 0030e2b0 zlibBiWindup inferred [high] zlib bi_windup
 0030e2f4 zlibPqDownHeap inferred [high] zlib pqdownheap
 0030dce8 bufferAppendU16BigEndian inferred [med] appends a 16-bit value high byte first to a byte buffer
+00481b80 _ZN9Obj55c7d4C1Ev inferred size:0x10 constructor storing _ZTV9Obj55c7d4+8; callback controller kind 2
+004823ec _ZN9Obj55c804C1Ev inferred constructor storing _ZTV9Obj55c804+8; callback controller kind 1
+00481b3c _ZN9Obj55c7b0C1Ev inferred class named after its vtable like all others; stores _ZTV9Obj55c7b0+8 after Obj55c81c base
+00482a5c _ZN9Obj55c840C1Ev inferred class named after its vtable; stores _ZTV9Obj55c840+8 after Obj55c81c base
+00300b18 _ZN9Obj55a94cC1Ej inferred constructor storing _ZTV9Obj55a94c+8; takes a 32-bit id
+00303208 _ZN9Obj55abd4C1Ej inferred constructor storing _ZTV9Obj55abd4+8; takes a 32-bit id
+004bb440 _ZN9Obj557ec0C1Ev inferred constructor storing _ZTV9Obj557ec0+8; twin of smt4 Obj420a1c
+0042fac4 _ZN9Obj558330C1Ej inferred constructor storing _ZTV9Obj558330+8; twin of smt4 Obj420e4c
+00459870 _ZN9Obj55bcccC1Ejjj inferred constructor storing _ZTV9Obj55bccc+8; twin of smt4 Obj4218b0
+003054a4 _ZN9Obj558d20C1Ej inferred constructor storing _ZTV9Obj558d20+8 after the FUN_002f4f3c base; base of Obj55a94c/Obj55abd4
+0055a7e0 _ZTV9Obj55a7e0 evidence size:0x10 vtable of the abstract record base: construct stores its address point (+8) before the Obj559bb0 one
+00171d7c _ZN9Obj55b5a86createEPvP18AsdAllocatorObject inferred static factory: default resource, 0x188-byte light, initialize
+0015d814 _ZN9Obj55bb906createEPvP18AsdAllocatorObject inferred static factory (fog); twin
+0015add8 _ZN9Obj55b4e46createEPvP18AsdAllocatorObject inferred static factory
+0015d35c _ZN9Obj55b7046createEPvP18AsdAllocatorObject inferred static factory
+00171acc _ZN9Obj55b4a86createEPvP18AsdAllocatorObject inferred static factory
+001b7420 _ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv inferred size:0x148 constructor storing _ZTV9Obj55b680+8 after the Obj55bcdc base
+002eff58 _ZN9Obj5588ecC1Ej inferred constructor: Obj5593b8 base then Obj55af4c (init capacity,4) then own vtable
+002ecad4 _ZN9Obj55af4c4initEjh inferred inline-constructor tail of Obj55af4c: capacity, flag, buffer allocation
+00430f18 _ZN12CecMessageIdC1Ev inferred constructor of a cec message id: clears it and returns this
+00311490 _ZN9Obj55950cC1Ev evidence constructor storing _ZTV9Obj55950c+8 after the Obj559edc base; the class derived from Obj559edc (copy-constructed by the vector allocator)
+00117b3c _ZN9Obj559edcC1Ev inferred default constructor storing _ZTV9Obj559edc+8 (base of Obj55950c); apply after the previous row
+00117a90 _ZN9Obj559edcC1ERKS_ inferred copy constructor storing _ZTV9Obj559edc+8
+00311458 _ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_ evidence copy-constructs an Obj55950c (stores _ZTV9Obj55950c+8)
+001b12a4 _ZN9Obj55b56cC1Ej inferred constructor: Obj55b87c base (inlined) then own words, final vtable _ZTV9Obj55b56c+8
+00581050 g_lmapPopupMessages inferred size:0x220 array of 8 {char text[0x40]; s32 param;} popup message rows (stride 0x44) read by FUN_00295434
+00617c44 g_mobiclipSlots inferred size:0x210 array of 6 {u32 state; const void* tag; u32 words[6]; u8 rest[0x38]} (stride 0x58) zeroed by FUN_00510084
+0057a7d8 g_btlTalkToneNames inferred size:0x100 array of 64 char* tone names (Boy, Young, Gentle, ...) indexed by the demon talk tone byte; used by FUN_004c97cc
+00573e68 g_btlEffectSetTable inferred size:0x65f8 502 entries of 0x34 bytes: char name[0x10], four {effect,u16 actor} slots at +0x10, main effect at +0x30; FUN_0047ed10 searches it by '%s.eft' (ef_e_atk01 first, ef_d_godvoic2 last)
+0057a460 g_btlAssistEffectSetNames inferred size:0xc three const char* (ef_Assist_03, ef_Assist_06, ef_Assist_07) FUN_0047ed10 compares against to skip tracking the set
+00137454 asdTextSystemInit inferred [high] loads UI fonts, registers text slots and callbacks
+0039c9f0 statRowDrawValue inferred [med] draws a stat value ("999"/"??"/number) and its signed difference at a list row
+004d2628 placementEditorSync inferred [med] syncs the placement list box with the placement table entry
+004d4ba4 talkCtrlDebugMenuBuild inferred [high] builds the TalkCtrl debug list box with 27 toggle/number items
+0021ba5c uiSpriteScreenSetupForMode inferred [med] selects each sprite's animation and shown value for the screen's current mode
+003683c8 uiScreenIdToLayoutSet inferred [med] maps a screen id to its layout/help set id (some ids depend on the game scene state)
+004d4f54 debugOptionPageApplySelected inferred [med] copies the selected debug list entry into the options block
+00221754 battleUnitHasElementEntry inferred [med] true if the unit's equipment, demon skills or skill list hold an entry of the given element (12 also takes the special flag); restricted mode only counts kind-2 skills
+0028b088 campShowSelectedEntryHelp inferred [med] shows the help message of the selected entry of the camp menu page

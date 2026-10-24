@@ -1,175 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039e56c` (_code @ 0x39e56c, 0x34c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (207 vs 144 rows); retail duplicates the whole entry loop per layout and per related-kind branch, which source-level structure does not reproduce */
+#include "common.h"
+
+// Selectable tile of the two-list picker (0x4c bytes each).
+struct PickerEntry {
+    u8 unk00[4];
+    u8 kind;                // 0x04
+    u8 unk05[3];
+    u16 altSprite;          // 0x08
+    u16 sprite;             // 0x0a
+    f32 altRect[4];         // 0x0c: rectangle used on the map-block 12 layout
+    f32 rect[4];            // 0x1c: normal layout rectangle
+    u16 state;              // 0x2c
+    u8 unk2e[6];
+    u16 active;             // 0x34
+    u16 shownSprite;        // 0x36
+    s32 screenX;            // 0x38
+    s32 screenY;            // 0x3c
+    u32 width;              // 0x40
+    u32 height;             // 0x44
+    u32 tint;               // 0x48
+};
+
+// Picker screen: two entry lists (counts at 0x5a88 / 0x61b0).
+struct PickerScreen {
+    u8 unk0000[0xb80];
+    s32 pointerX;           // 0xb80
+    s32 pointerY;           // 0xb84
+    u8 unk0b88[0xc48 - 0xb88];
+    PickerEntry lists0[1];  // 0xc48
+};
+
+struct GameStateHead {
+    u8 unk00[8];
+    u32 selectedKind;       // 0x08
+};
 
 extern "C" {
 
-int VectorFloatToUnsigned(unsigned int, int);
-int VectorSignedToFloat(...);
+extern GameStateHead g_gameState;
 
-extern unsigned char g_gameState; /* 0x49f91c */
+u8* gameGetMapBlock(void);
+f32* NaviMain_GetCursorPos(void* navi);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int gameGetMapBlock(void);
-extern float *NaviMain_GetCursorPos(int);
+#define PICKER_WORD(screen, offset) (*reinterpret_cast<s32*>(reinterpret_cast<u8*>(screen) + (offset)))
 
-
-void FUN_0039e56c(int param_1)
-
+// Kinds that pair with each other (left/right and up/down variants highlight together).
+static inline bool kindsRelated(u32 a, u32 b)
 {
-/* irregular: 8 goto(s); irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  float *pfVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  unsigned int temp_v10;
-  float temp_v11;
-  unsigned int temp_v12;
-  float temp_v13;
-  
-  temp_v0 = gameGetMapBlock();
-  pfVar2 = (float *)NaviMain_GetCursorPos(param_1 + 0x162);
-  temp_v6 = *pfVar2;
-  temp_v7 = pfVar2[1];
-  temp_v2 = 0;
-  temp_v3 = *(int *)(param_1 + 0x5a88);
-  do {
-    if (*(char *)(temp_v0 + 0xd5a) != '\f') {
-      temp_v4 = 0;
-      temp_v8 = (float)VectorSignedToFloat(*(int *)(param_1 + 0xb80) / 2,(unsigned char)(in_fpscr >> 0x16) & 3
-                                         );
-      temp_v9 = (float)VectorSignedToFloat(*(int *)(param_1 + 0xb84) / 2,(unsigned char)(in_fpscr >> 0x16) & 3
-                                         );
-      if (0 < temp_v3) {
-        do {
-          temp_v1 = param_1 + temp_v4 * 0x4c;
-          if (temp_v2 == 0) {
-            temp_v1 = temp_v1 + 0xe88;
-          }
-          else {
-            temp_v1 = temp_v1 + 0x5a90;
-          }
-          if (*(short *)(temp_v1 + 0x34) != 0) {
-            temp_v11 = (float)VectorSignedToFloat((int)(temp_v8 - temp_v6),(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v13 = (float)VectorSignedToFloat((int)(temp_v9 - temp_v7),(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(unsigned short *)(temp_v1 + 0x36) = *(unsigned short *)(temp_v1 + 10);
-            temp_v12 = VectorFloatToUnsigned(*(unsigned int *)(temp_v1 + 0x24),3);
-            temp_v10 = VectorFloatToUnsigned(*(unsigned int *)(temp_v1 + 0x28),3);
-            *(int *)(temp_v1 + 0x38) = (int)(*(float *)(temp_v1 + 0x1c) - (temp_v11 - 160.0f));
-            *(int *)(temp_v1 + 0x3c) = (int)(*(float *)(temp_v1 + 0x20) - (temp_v13 - 120.0f));
-            *(unsigned int *)(temp_v1 + 0x40) = temp_v12;
-            *(unsigned int *)(temp_v1 + 0x44) = temp_v10;
-            temp_v5 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
-            if (temp_v5 != (*(unsigned int *)((unsigned char *)&g_gameState + 0x8))) {
-              if (temp_v5 != 0x8d) {
-                if (temp_v5 != 0x8e) {
-                  if (temp_v5 != 0x5c) {
-                    if ((temp_v5 == 0x5d) && ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5c)) goto LAB_0039e8a0;
-                  }
-                  else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5d) goto LAB_0039e8a0;
-                }
-                else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8d) goto LAB_0039e8a0;
-              }
-              else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8e) goto LAB_0039e8a0;
-              if (*(short *)(temp_v1 + 0x2c) == 0 || *(short *)(temp_v1 + 0x2c) == 4) {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xffffff99;
-              }
-              else {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xffffffff;
-              }
+    if (a == b) return true;
+    if (a == 141) return b == 142;
+    if (a == 142) return b == 141;
+    if (a == 92) return b == 93;
+    if (a == 93) return b == 92;
+    return false;
+}
+
+// Recomputes the on-screen rectangles of both entry lists from the pointer position and
+// tints the entries matching the current selection.
+void FUN_0039e56c(PickerScreen* screen)
+{
+    u8* mapBlock = gameGetMapBlock();
+    f32* cursor = NaviMain_GetCursorPos(reinterpret_cast<u8*>(screen) + 0x162);
+    f32 cursorX = cursor[0];
+    f32 cursorY = cursor[1];
+    for (s32 list = 0; list < 2; list++) {
+        s32 count = PICKER_WORD(screen, list == 0 ? 0x5a88 : 0x61b0);
+        bool alt = mapBlock[0xd5a] == 12;
+        s32 dx;
+        s32 dy;
+        if (!alt) {
+            dx = (s32)((f32)(screen->pointerX / 2) - cursorX);
+            dy = (s32)((f32)(screen->pointerY / 2) - cursorY);
+        } else {
+            dx = (s32)((f32)screen->pointerX - cursorX);
+            dy = (s32)((f32)screen->pointerY - cursorY);
+        }
+        for (s32 i = 0; i < count; i++) {
+            PickerEntry* entry = reinterpret_cast<PickerEntry*>(reinterpret_cast<u8*>(screen) + (list == 0 ? 0xc48 : 0x5a90) + i * 0x4c);
+            if (entry->active == 0) continue;
+            const f32* rect = alt ? entry->altRect : entry->rect;
+            entry->shownSprite = alt ? entry->altSprite : entry->sprite;
+            entry->screenX = (s32)(rect[0] - ((f32)dx - 160.0f));
+            entry->screenY = (s32)(rect[1] - ((f32)dy - 120.0f));
+            entry->width = (u32)rect[2];
+            entry->height = (u32)rect[3];
+            bool related = kindsRelated(entry->kind, g_gameState.selectedKind);
+            bool idle = entry->state == 0 || entry->state == 4;
+            if (related) {
+                entry->tint = idle ? 0xb4ff83ff : 0xffffffff;
+            } else {
+                entry->tint = idle ? 0xffffff99 : 0xffffffff;
             }
-            else {
-LAB_0039e8a0:
-              if (*(short *)(temp_v1 + 0x2c) != 0 && *(short *)(temp_v1 + 0x2c) != 4) {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xffffffff;
-              }
-              else {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xb4ff83ff;
-              }
-            }
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < temp_v3);
-      }
+        }
     }
-    else {
-      temp_v4 = 0;
-      temp_v9 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0xb80),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v8 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0xb84),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      if (0 < temp_v3) {
-        do {
-          temp_v1 = param_1 + temp_v4 * 0x4c;
-          if (temp_v2 == 0) {
-            temp_v1 = temp_v1 + 0xe88;
-          }
-          else {
-            temp_v1 = temp_v1 + 0x5a90;
-          }
-          if (*(short *)(temp_v1 + 0x34) != 0) {
-            temp_v11 = (float)VectorSignedToFloat((int)(temp_v9 - temp_v6),(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v13 = (float)VectorSignedToFloat((int)(temp_v8 - temp_v7),(unsigned char)(in_fpscr >> 0x16) & 3);
-            *(unsigned short *)(temp_v1 + 0x36) = *(unsigned short *)(temp_v1 + 8);
-            temp_v12 = VectorFloatToUnsigned(*(unsigned int *)(temp_v1 + 0x14),3);
-            temp_v10 = VectorFloatToUnsigned(*(unsigned int *)(temp_v1 + 0x18),3);
-            *(int *)(temp_v1 + 0x38) = (int)(*(float *)(temp_v1 + 0xc) - (temp_v11 - 160.0f));
-            *(int *)(temp_v1 + 0x3c) = (int)(*(float *)(temp_v1 + 0x10) - (temp_v13 - 120.0f));
-            *(unsigned int *)(temp_v1 + 0x40) = temp_v12;
-            *(unsigned int *)(temp_v1 + 0x44) = temp_v10;
-            temp_v5 = (unsigned int)*(unsigned char *)(temp_v1 + 4);
-            if (temp_v5 != (*(unsigned int *)((unsigned char *)&g_gameState + 0x8))) {
-              if (temp_v5 != 0x8d) {
-                if (temp_v5 != 0x8e) {
-                  if (temp_v5 != 0x5c) {
-                    if ((temp_v5 == 0x5d) && ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5c)) goto LAB_0039e808;
-                  }
-                  else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x5d) goto LAB_0039e808;
-                }
-                else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8d) goto LAB_0039e808;
-              }
-              else if ((*(unsigned int *)((unsigned char *)&g_gameState + 0x8)) == 0x8e) goto LAB_0039e808;
-              if (*(short *)(temp_v1 + 0x2c) == 0 || *(short *)(temp_v1 + 0x2c) == 4) {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xffffff99;
-              }
-              else {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xffffffff;
-              }
-            }
-            else {
-LAB_0039e808:
-              if (*(short *)(temp_v1 + 0x2c) != 0 && *(short *)(temp_v1 + 0x2c) != 4) {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xffffffff;
-              }
-              else {
-                *(unsigned int *)(temp_v1 + 0x48) = 0xb4ff83ff;
-              }
-            }
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < temp_v3);
-      }
-    }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 2) {
-      *(unsigned char *)(param_1 + 0x5a8d) = 0;
-      return;
-    }
-    if (temp_v2 == 0) {
-      temp_v3 = *(int *)(param_1 + 0x5a88);
-      continue;
-    }
-    temp_v3 = *(int *)(param_1 + 0x61b0);
-  } while( 1 );
+    *(reinterpret_cast<u8*>(screen) + 0x5a8d) = 0;
 }
 
 } /* extern "C" */

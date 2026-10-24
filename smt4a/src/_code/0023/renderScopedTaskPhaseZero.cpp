@@ -1,4 +1,3 @@
-/* NON_MATCHING: inlined render-stack pushes schedule entry addresses and scratch registers differently; -O2 candidate. */
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
 

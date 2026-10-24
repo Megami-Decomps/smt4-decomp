@@ -1,210 +1,187 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049c3c0` (_code @ 0x49c3c0, 0x380 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the Apocalypse selection scene's constructor (twin of smt4 FUN_003a5e30; the window class with the vtable at 0x55C880 is declared by its destructor only); the member arrays are default-constructed by loops here where retail calls the vector constructor helper with compiler-generated constructors. */
+#include "classes/SelectionState.h"
+#include "classes/Obj422594.h"
+#include "classes/Obj55ca08.h"
+
+inline void *operator new(unsigned int, void *place) { return place; }
+
+/* The scene's window (vtable at 0x55C880). */
+class Obj55c880 : public Obj422594 {
+public:
+    virtual ~Obj55c880();
+};
+
+/* One selection entry (0x74 bytes). */
+struct SceneEntry {
+    SelectionFlags flags;
+    u8 unk10[0x74 - sizeof(SelectionFlags)];
+};
+
+/* One page of selections (0x1002 bytes). */
+struct ScenePage {
+    u8 data[0x1002];
+};
+
+/* A selection scene (only the fields the constructor sets). */
+struct SelectionScene {
+    /* 0x00000 */ u32 unk00000;
+    /* 0x00004 */ s32 stepA;
+    /* 0x00008 */ s32 stepB;
+    /* 0x0000C */ u8 unk0000C[4];
+    /* 0x00010 */ s32 previousStepA;
+    /* 0x00014 */ s32 mode;
+    /* 0x00018 */ s8 kind;
+    /* 0x00019 */ u8 unk00019[3];
+    /* 0x0001C */ s32 subKind;
+    /* 0x00020 */ u8 hasProgress;
+    /* 0x00021 */ u8 shown;
+    /* 0x00022 */ u8 unk00022[0x162];
+    /* 0x00184 */ u32 unk00184[3];
+    /* 0x00190 */ u8 unk00190[0x204];
+    /* 0x00394 */ u32 unk00394[3];
+    /* 0x003A0 */ s32 buttonSprite;
+    /* 0x003A4 */ SelectionRectangle firstRectangle;
+    /* 0x003B8 */ SelectionRectangle secondRectangle;
+    /* 0x003CC */ u8 timers[0x28];
+    /* 0x003F4 */ u8 unk003F4[0x714];
+    /* 0x00B08 */ Obj55ca08 touch;
+    /* 0x00B44 */ u8 unk00B44[0x1C];
+    /* 0x00B60 */ SceneEntry entries[9];
+    /* 0x00F74 */ ScenePage pages[9];
+    /* 0x09F86 */ u8 unk09F86[2];
+    /* 0x09F88 */ SelectionFlags flags;
+    /* 0x09F98 */ u8 unk09F98[0x606C];
+    /* 0x16004 */ u32 tail[10];
+    /* 0x1602C */ u8 unk1602C[0x28];
+    /* 0x16054 */ u32 tailA;
+    /* 0x16058 */ u32 tailB;
+};
 
 extern "C" {
+void FUN_0049a8b8(SelectionScene *scene);
+void FUN_0049669c(SelectionScene *scene);
+void FUN_0049a9a8(void);
+void FUN_0031e198(void);
+void FUN_004cf7cc(void *timers);
+void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
+void campButtonHelpLoad(void);
+void campButtonHelpAcquire(void);
+void asdTMTexTableLoadSprites(s32 table);
+void FUN_0014afd0(s32 a, s32 b);
+void FUN_00148bb8(s32 a, s32 b);
+s16 *FUN_00145f04(u8 kind, u32 sub);
+void FUN_0040a640(void);
+void FUN_0040a42c(s32 index, s32 value);
+void statsSetFirstBankFlag(s32 index, s32 value);
+s32 bgmGetStateById(u32 id);
+void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
+void FUN_0022677c(s32 channel, s32 value);
+void FUN_003d54f8(s32 a, s32 b);
+void FUN_0040a710(u32 id, s32 value);
+void FUN_00408184(s32 a, s32 b);
 
-int asdTMTexTableLoadSprites(int);
-int FUN_00148bb8(int, int);
-int FUN_0014afd0(int, int);
-int asdOperatorNew(void);
-int FUN_0022677c(int, int);
-int campButtonHelpLoad(void);
-int __aeabi_vec_ctor_nocookie_nodtor(...);
-int FUN_0031e198(void);
-int campButtonHelpAcquire(void);
-int soundChannelRequestIfEnabled(...);
-int FUN_003d54f8(...);
-int FUN_00408184(...);
-int FUN_0040a42c(...);
-int statsSetFirstBankFlag(...);
-int FUN_0040a640(void);
-int FUN_0040a710(...);
-int rectangleInitializeSelection(int, int, int, int);
-int _ZN18SelectionRectangleC1Ev(...);
-int FUN_0049669c(unsigned int *);
-int FUN_0049a8b8(unsigned int *);
-int FUN_0049a9a8(void);
-int FUN_004cf7cc(int);
-
-extern unsigned char LAB_00493e80; /* 0x493e80 */
-extern unsigned char DAT_0055c888; /* 0x55c888 */
-extern unsigned char DAT_0055ca10; /* 0x55ca10 */
-
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-extern short *FUN_00145f04(unsigned char, unsigned int);
-/* Supplied declaration required: FUN_00148bb8. */
-/* Supplied declaration required: FUN_0014afd0. */
-/* Supplied declaration required: asdOperatorNew. */
-extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: campButtonHelpLoad. */
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_0031e198. */
-/* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_0040a42c. */
-/* Supplied declaration required: statsSetFirstBankFlag. */
-/* Supplied declaration required: FUN_0040a640. */
-/* Supplied declaration required: FUN_0040a710. */
-/* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: _ZN18SelectionRectangleC1Ev. */
-/* Supplied declaration required: FUN_0049669c. */
-/* Supplied declaration required: FUN_0049a8b8. */
-/* Supplied declaration required: FUN_0049a9a8. */
-/* Supplied declaration required: FUN_004cf7cc. */
-extern int _ZN14SelectionFlagsC1Ev(int);
-extern unsigned int *_ZN9Obj422594C1Ev(void);
-
-
-unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Builds the Apocalypse selection scene: constructs its rectangles, entries and pages, clears its
+ * state, creates its window and, when opened with `mode` 1, its button help; otherwise starts the
+ * music for the kind and registers every flagged selection. */
+SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subKind)
 {
-/* irregular: 23 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  short *psVar5;
-  unsigned int temp_v3;
-  unsigned int *puVar7;
-  
-  *param_1 = 0;
-  temp_v1 = _ZN18SelectionRectangleC1Ev(param_1 + 0xe9);
-  temp_v1 = _ZN18SelectionRectangleC1Ev(temp_v1 + 0x14);
-  *(unsigned char **)(temp_v1 + 0x750) = &DAT_0055ca10;
-  temp_v1 = temp_v1 + 0x7a8;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,_ZN14SelectionFlagsC1Ev,0x74,9);
-  temp_v1 = temp_v1 + 0x414;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_00493e80,0x1002,9);
-  temp_v1 = _ZN14SelectionFlagsC1Ev(temp_v1 + 0x9014);
-  puVar7 = (unsigned int *)(temp_v1 - 0x9f88);
-  FUN_0049a8b8(puVar7);
-  *(unsigned int *)(temp_v1 - 0x9f74) = param_2;
-  *puVar7 = 0;
-  *(char *)(temp_v1 - 0x9f70) = (char)param_3;
-  *(int *)(temp_v1 - 0x9f6c) = param_4;
-  *(unsigned int *)(temp_v1 - 0x9448) = 0xffffffff;
-  *(unsigned int *)(temp_v1 - 0x9444) = 0;
-  *(unsigned int *)(temp_v1 + 0xc07c) = 0;
-  *(unsigned int *)(temp_v1 + 0xc080) = 0;
-  *(unsigned int *)(temp_v1 + 0xc098) = 0;
-  *(unsigned int *)(temp_v1 + 0xc09c) = 0;
-  *(unsigned int *)(temp_v1 + 0xc0a0) = 0;
-  *(unsigned int *)(temp_v1 - 0x9e04) = 0;
-  *(unsigned int *)(temp_v1 - 0x9e00) = 0;
-  *(unsigned int *)(temp_v1 - 0x9dfc) = 0;
-  *(unsigned int *)(temp_v1 - 0x9bf4) = 0;
-  *(unsigned int *)(temp_v1 - 0x9bf0) = 0;
-  *(unsigned int *)(temp_v1 - 0x9bec) = 0;
-  *(unsigned char *)(temp_v1 - 0x9f68) = 0;
-  *(unsigned char *)(temp_v1 - 0x9f67) = 0;
-  FUN_004cf7cc(temp_v1 - 0x9bbc);
-  rectangleInitializeSelection(temp_v1 - 0x9be4,0x140,0,0x20);
-  rectangleInitializeSelection(temp_v1 - 0x9bd0,0x140,0,0x20);
-  temp_v2 = 0x68;
-  asdOperatorNew();
-  puVar4 = (unsigned int *)0x0;
-  if (temp_v2 != 0) {
-    puVar4 = (unsigned int *)_ZN9Obj422594C1Ev();
-    *puVar4 = (unsigned int)&DAT_0055c888;
-  }
-  *(unsigned int **)(temp_v1 - 0x944c) = puVar4;
-  *(unsigned int *)(temp_v1 + 0xc0cc) = 0;
-  *(unsigned int *)(temp_v1 + 0xc0d0) = 0;
-  FUN_0031e198();
-  psVar5 = (short *)FUN_00145f04(*(unsigned char *)(temp_v1 - 0x9f70),*(unsigned int *)(temp_v1 - 0x9f6c));
-  temp_v2 = *(int *)(temp_v1 - 0x9f6c);
-  FUN_00148bb8(temp_v2,*(unsigned char *)(temp_v1 - 0x9f70));
-  if (temp_v2 == 0) {
-    FUN_0040a640();
-  }
-  if (*psVar5 != 0) {
-    *(unsigned char *)(temp_v1 - 0x9f68) = 1;
-  }
-  if (*(int *)(temp_v1 - 0x9f74) == 1) {
-    *(unsigned int *)(temp_v1 - 0x9f78) = *(unsigned int *)(temp_v1 - 0x9f84);
-    *(unsigned int *)(temp_v1 - 0x9f84) = 0xf;
-    *(unsigned int *)(temp_v1 - 0x9f80) = 0;
-    campButtonHelpLoad();
-    campButtonHelpAcquire();
-    asdTMTexTableLoadSprites(0x20);
-    FUN_0014afd0(0x20,0);
-    *(unsigned int *)(temp_v1 - 0x9be8) = 0x83;
-    puVar4 = puVar7;
+    scene->unk00000 = 0;
+    new (&scene->firstRectangle) SelectionRectangle();
+    new (&scene->secondRectangle) SelectionRectangle();
+    new (&scene->touch) Obj55ca08();
+    for (s32 i = 0; i < 9; i++)
+        new (&scene->entries[i].flags) SelectionFlags();
+    new (&scene->flags) SelectionFlags();
+    FUN_0049a8b8(scene);
+    scene->mode = mode;
+    scene->unk00000 = 0;
+    scene->kind = (s8)kind;
+    scene->subKind = subKind;
+    *(s32 *)scene->touch.unk38 = -1;
+    ((u32 *)scene)[0xB44 / 4] = 0;
+    scene->tail[0] = 0;
+    scene->tail[1] = 0;
+    scene->tail[7] = 0;
+    scene->tail[8] = 0;
+    scene->tail[9] = 0;
+    scene->unk00184[0] = 0;
+    scene->unk00184[1] = 0;
+    scene->unk00184[2] = 0;
+    scene->unk00394[0] = 0;
+    scene->unk00394[1] = 0;
+    scene->unk00394[2] = 0;
+    scene->hasProgress = 0;
+    scene->shown = 0;
+    FUN_004cf7cc(scene->timers);
+    rectangleInitializeSelection(&scene->firstRectangle, 0x140, 0, 0x20);
+    rectangleInitializeSelection(&scene->secondRectangle, 0x140, 0, 0x20);
+    Obj55c880 *window = new Obj55c880;
+    scene->touch.unk34 = (u32)window;
+    scene->tailA = 0;
+    scene->tailB = 0;
+    FUN_0031e198();
+    s16 *progress = FUN_00145f04((u8)scene->kind, scene->subKind);
+    s32 sub = scene->subKind;
+    FUN_00148bb8(sub, (u8)scene->kind);
+    if (sub == 0)
+        FUN_0040a640();
+    if (*progress != 0)
+        scene->hasProgress = 1;
+    if (scene->mode == 1) {
+        scene->previousStepA = scene->stepA;
+        scene->stepA = 15;
+        scene->stepB = 0;
+        campButtonHelpLoad();
+        campButtonHelpAcquire();
+        asdTMTexTableLoadSprites(0x20);
+        FUN_0014afd0(0x20, 0);
+        scene->buttonSprite = 0x83;
+        FUN_0049a9a8();
+        scene->shown = 1;
+        FUN_003d54f8(0, 1);
+        FUN_003d54f8(1, 0);
+        return scene;
+    }
+    scene->buttonSprite = 0x1F;
+    scene->previousStepA = scene->stepA;
+    scene->stepA = 0;
+    scene->stepB = 0;
+    FUN_0049669c(scene);
+    FUN_0022677c(0, 0xFF);
+    FUN_0022677c(1, 0xFF);
+    u32 music = 0x1000047;
+    if (kind == 0) {
+        statsSetFirstBankFlag(subKind, 1);
+        if (subKind == 6 || subKind == 7 || subKind == 9) {
+            if (bgmGetStateById(0x1000047) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        } else if (subKind != 8) {
+            music = 0x1000042;
+            if (bgmGetStateById(music) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        }
+    } else if (kind == 1) {
+        FUN_0040a42c(subKind, 1);
+        if (subKind == 5) {
+            if (bgmGetStateById(0x1000047) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        } else if (subKind != 9) {
+            music = 0x1000043;
+            if (bgmGetStateById(music) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        }
+    }
     FUN_0049a9a8();
-    *(char *)(temp_v1 - 0x9f67) = (char)(int)puVar4;
-    FUN_003d54f8(0,1);
-    FUN_003d54f8(1);
-    return puVar7;
-  }
-  *(unsigned int *)(temp_v1 - 0x9be8) = 0x1f;
-  *(unsigned int *)(temp_v1 - 0x9f78) = *(unsigned int *)(temp_v1 - 0x9f84);
-  *(unsigned int *)(temp_v1 - 0x9f84) = 0;
-  *(unsigned int *)(temp_v1 - 0x9f80) = 0;
-  FUN_0049669c(puVar7);
-  FUN_0022677c(0,0xff);
-  FUN_0022677c(1,0xff);
-  temp_v3 = 0x1000047;
-  if (param_3 != 0) {
-    if (param_3 == 1) {
-      FUN_0040a42c(param_4,1);
-      if (param_4 != 5) {
-        if (param_4 != 9) {
-          temp_v3 = 0x1000043;
-          temp_v2 = bgmGetStateById(0x1000043);
-          if (temp_v2 != 1) {
-            soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-          }
+    scene->shown = 1;
+    for (s32 page = 0; page < 9; page++) {
+        u8 *base = (u8 *)scene->pages + page * 0x1002;
+        for (s32 i = 0; i < *(u16 *)(base + 0x1000); i++) {
+            if (*(u16 *)(base + i * 4 + 2) & 1)
+                FUN_0040a710(*(u16 *)(base + i * 4), 1);
         }
-      }
-      else {
-        temp_v2 = bgmGetStateById(0x1000047);
-        if (temp_v2 != 1) {
-          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-        }
-      }
     }
-  }
-  else {
-    statsSetFirstBankFlag(param_4,1);
-    if (!((param_4 == 6 || param_4 == 7) || param_4 == 9)) {
-      if (param_4 != 8) {
-        temp_v3 = 0x1000042;
-        temp_v2 = bgmGetStateById(0x1000042);
-        if (temp_v2 != 1) {
-          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-        }
-      }
-    }
-    else {
-      temp_v2 = bgmGetStateById(0x1000047);
-      if (temp_v2 != 1) {
-        soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-      }
-    }
-  }
-  puVar4 = puVar7;
-  FUN_0049a9a8();
-  temp_v2 = 0;
-  *(char *)(temp_v1 - 0x9f67) = (char)(int)puVar4;
-  do {
-    temp_v1 = 0;
-    if (*(short *)((int)puVar7 + temp_v2 * 0x1002 + 0x1f74) != 0) {
-      do {
-        temp_v0 = temp_v1 * 4 + temp_v2 * 0x1002;
-        if ((*(unsigned short *)((int)puVar7 + temp_v0 + 0xf76) & 1) != 0) {
-          FUN_0040a710(*(unsigned short *)((int)puVar7 + temp_v0 + 0xf74),1);
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)(unsigned int)*(unsigned short *)((int)puVar7 + temp_v2 * 0x1002 + 0x1f74));
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 9);
-  FUN_00408184(0x1c,1);
-  return puVar7;
+    FUN_00408184(0x1C, 1);
+    return scene;
 }
 
 } /* extern "C" */

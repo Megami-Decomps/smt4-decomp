@@ -1,173 +1,152 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00292f4c` (_code @ 0x292f4c, 0x2dc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the repeated page query and the nested help-selection branches are laid out differently from retail, and the local id table is built in another order; the help shown for each page is the same. */
+#include "common.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
 
-int FUN_0029212c(int);
-int btlGetMainState(void);
-int buttonHelpShowSkillDetails(unsigned int);
-int FUN_0029da34(unsigned int, int, int, unsigned int);
-int FUN_0029ee6c(unsigned int, int);
-int FUN_00309bc8(unsigned int, int);
-void updateEquippedWeaponHelp(RelativeDirectory *, unsigned int);
+/* The skill menu's work block (only the fields read here). */
+typedef struct SkillMenuWork {
+    /* 0x0000 */ u8 unk0000[0x305C];
+    /* 0x305C */ s32 page;
+    /* 0x3060 */ u8 unk3060[0x394];
+    /* 0x33F4 */ u8 unk33f4[0x26];
+    /* 0x341A */ u16 pageSkills[1];
+} SkillMenuWork;
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+typedef struct SkillMenuView {
+    u8 unk0000[0x340C];
+    u32 list;
+    u8 unk3410[0x70];
+    u16 ids[1];                      /* 0x3480: the plain list of ids */
+} SkillMenuView;
 
-extern unsigned int dataTable16Sub2GetRecord(unsigned int);
-extern unsigned int FUN_0028d24c(void);
-extern unsigned int listGetU16OrZero(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0029212c. */
-extern int flagBitIsSet(int);
-/* Supplied declaration required: btlGetMainState. */
-extern int FUN_00297ca4(int, unsigned int);
-/* Supplied declaration required: buttonHelpShowSkillDetails. */
-/* Supplied declaration required: FUN_0029da34. */
-/* Supplied declaration required: FUN_0029ee6c. */
-extern int FUN_0029efa8(unsigned int);
-extern int FUN_0029efc0(unsigned int);
-extern int gameGetUnitRecord(int);
-extern unsigned int partyMemberFindById(unsigned short);
-extern unsigned int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00309bc8. */
-/* Supplied declaration required: updateEquippedWeaponHelp. */
+typedef struct BattleHelpView {
+    u8 unk0000[0x44A8];
+    u32 flags;                       /* 0x40: show the effect help */
+} BattleHelpView;
 
+typedef struct PlayerView {
+    u8 unk00[2];
+    u16 flag;
+    u16 value;
+} PlayerView;
 
-void FUN_00292f4c(int param_1)
+typedef struct UnitView {
+    u8 unk00[0x46];
+    u16 id;
+} UnitView;
 
+s32 FUN_0029efc0(u32 list);
+s32 FUN_0029efa8(u32 list);
+s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
+void FUN_0029212c(u32 id);
+BattleHelpView *btlGetMainState(void);
+u32 listGetU16OrZero(void *state, u32 index);
+u32 FUN_0028d24c(void);
+void buttonHelpShowSkillDetails(u32 id);
+s32 flagBitIsSet(s32 flag);
+u32 dataTable16Sub2GetRecord(u32 index);
+void FUN_0029ee6c(u32 record, u32 color);
+UnitView *gameGetUnitRecord(s32 index);
+u32 partyMemberFindById(u16 id);
+void FUN_0029da34(u32 a, s32 b, s32 id, u32 member);
+void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 arg);
+s32 gameFlagIsSet(u32 flag);
+PlayerView *gameGetPlayerData(void);
+void FUN_00309bc8(u32 a, s32 b);
+
+/* Shows the help for the skill menu's current entry, by page: the unit panel, the skill detail
+ * help, the plain list, or the equipped-weapon / skill lines. */
+void FUN_00292f4c(SkillMenuWork *work)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  unsigned char temp_v5;
-  unsigned int temp_v6 [7];
-  
-  temp_v0 = FUN_0029efc0(*(unsigned int *)(param_1 + 0x340c));
-  temp_v1 = FUN_0029efa8(*(unsigned int *)(param_1 + 0x340c));
-  temp_v3 = temp_v0 + temp_v1;
-  temp_v0 = FUN_00297ca4(param_1,0);
-  if (temp_v0 != 1) {
-    temp_v0 = FUN_00297ca4(param_1,0);
-    if (temp_v0 != 2) {
-      temp_v0 = FUN_00297ca4(param_1,0);
-      if (temp_v0 == 7) {
-        FUN_0029212c(*(unsigned short *)(param_1 + temp_v3 * 2 + 0x3480));
-        return;
-      }
-      temp_v0 = FUN_00297ca4(param_1,0);
-      if (temp_v0 == 3) {
-        temp_v4 = 0;
-        temp_v6[4] = 4;
-        temp_v6[0] = 0;
-        temp_v6[1] = 1;
-        temp_v6[2] = 2;
-        temp_v6[3] = 3;
-        temp_v6[5] = 5;
-        temp_v0 = 0;
-        do {
-          temp_v1 = flagBitIsSet(temp_v0 + 0x2e);
-          if (temp_v1 != 0) {
-            if (temp_v4 == temp_v3) {
-              temp_v2 = dataTable16Sub2GetRecord(temp_v6[temp_v0] & 0xff);
-              FUN_0029ee6c(temp_v2,0x323232ff);
-              return;
+    SkillMenuView *view = (SkillMenuView *)work;
+    u32 *panel = (u32 *)((u8 *)work + 0x59BC);
+    u32 index = FUN_0029efc0(view->list) + FUN_0029efa8(view->list);
+
+    if (FUN_00297ca4(work, 0) != 1) {
+        if (FUN_00297ca4(work, 0) != 2) {
+            if (FUN_00297ca4(work, 0) == 7) {
+                FUN_0029212c(view->ids[index]);
+                return;
             }
-            temp_v4 = temp_v4 + 1;
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 6);
+            if (FUN_00297ca4(work, 0) == 3) {
+                u8 order[6];
+                s32 shown = 0;
+
+                order[4] = 4;
+                order[0] = 0;
+                order[1] = 1;
+                order[2] = 2;
+                order[3] = 3;
+                order[5] = 5;
+                for (s32 i = 0; i < 6; i++) {
+                    if (flagBitIsSet(i + 0x2E) != 0) {
+                        if (shown == (s32)index) {
+                            FUN_0029ee6c(dataTable16Sub2GetRecord(order[i]), 0x323232FF);
+                            return;
+                        }
+                        shown++;
+                    }
+                }
+            }
+            return;
+        }
+        if ((btlGetMainState()->flags & 0x40) != 0) {
+            index = listGetU16OrZero(btlGetMainState(), index);
+        } else {
+            btlGetMainState();
+            index = FUN_0028d24c();
+        }
+        if (index != 0) {
+            buttonHelpShowSkillDetails(index);
+        }
         return;
-      }
     }
-    else {
-      temp_v0 = btlGetMainState();
-      if ((*(unsigned int *)(temp_v0 + 0x44a8) & 0x40) != 0) {
-        temp_v2 = btlGetMainState();
-        temp_v3 = listGetU16OrZero(temp_v2,temp_v3);
-      }
-      else {
-        btlGetMainState();
-        temp_v3 = FUN_0028d24c();
-      }
-      if (temp_v3 != 0) {
-        buttonHelpShowSkillDetails(temp_v3);
-        return;
-      }
+    if (work->page != 0) {
+        if (index == 0) {
+            UnitView *unit = gameGetUnitRecord(*(s16 *)((u8 *)work + work->page * 2 + 0x38F4));
+
+            FUN_0029da34(*panel, 2, unit->id, partyMemberFindById(unit->id));
+            return;
+        }
+        if ((btlGetMainState()->flags & 0x40) != 0) {
+            buttonHelpShowSkillDetails(index);
+            return;
+        }
+        index = *(u16 *)((u8 *)work + work->page * 0x10 + index * 2 + 0x341A);
+    } else {
+        if (index == 0) {
+            updateEquippedWeaponHelp((RelativeDirectory *)*panel, 0);
+            return;
+        }
+        if (index == 1 && gameFlagIsSet(0x410) != 0) {
+            PlayerView *player = gameGetPlayerData();
+
+            if (player->flag != 0 && player->value != 0) {
+                FUN_00309bc8(*panel, 1);
+                return;
+            }
+        }
+        s32 adjust = -2;
+
+        if (gameFlagIsSet(0x410) != 0) {
+            PlayerView *player = gameGetPlayerData();
+
+            if (player->flag == 0 || player->value == 0) {
+                adjust = -1;
+            }
+        } else {
+            adjust = -1;
+        }
+        if ((btlGetMainState()->flags & 0x40) != 0) {
+            index = index + adjust + 1;
+        } else {
+            index = *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x341C);
+        }
     }
-    return;
-  }
-  puVar6 = (unsigned int *)(param_1 + 0x59bc);
-  if (*(int *)(param_1 + 0x305c) != 0) {
-    if (temp_v3 == 0) {
-      temp_v0 = gameGetUnitRecord((int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 2 + 0x38f4));
-      temp_v2 = partyMemberFindById(*(unsigned short *)(temp_v0 + 0x46));
-      FUN_0029da34(*puVar6,2,*(unsigned short *)(temp_v0 + 0x46),temp_v2);
-      return;
+    if (index != 0) {
+        buttonHelpShowSkillDetails(index);
     }
-    temp_v0 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v0 + 0x44a8) & 0x40) != 0) {
-      buttonHelpShowSkillDetails(temp_v3);
-      return;
-    }
-    temp_v3 = (unsigned int)*(unsigned short *)(param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v3 * 2 + 0x341a);
-  }
-  else {
-    if (temp_v3 == 0) {
-      updateEquippedWeaponHelp((RelativeDirectory *)*puVar6,0);
-      return;
-    }
-    if ((temp_v3 == 1) && (temp_v0 = gameFlagIsSet(0x410), temp_v0 != 0)) {
-      temp_v4 = gameGetPlayerData();
-      temp_v5 = *(short *)(temp_v4 + 2) != 0;
-      if (temp_v5) {
-        temp_v4 = (unsigned int)*(unsigned short *)(temp_v4 + 4);
-      }
-      if (temp_v5 && temp_v4 != 0) {
-        FUN_00309bc8(*puVar6,1);
-        return;
-      }
-    }
-    temp_v0 = -2;
-    temp_v1 = gameFlagIsSet(0x410);
-    if (temp_v1 != 0) {
-      temp_v4 = gameGetPlayerData();
-      temp_v5 = *(short *)(temp_v4 + 2) != 0;
-      if (temp_v5) {
-        temp_v4 = (unsigned int)*(unsigned short *)(temp_v4 + 4);
-      }
-      if (!temp_v5 || temp_v4 == 0) {
-        temp_v0 = -1;
-      }
-    }
-    else {
-      temp_v0 = -1;
-    }
-    temp_v1 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x40) != 0) {
-      temp_v3 = temp_v3 + temp_v0 + 1;
-    }
-    else {
-      temp_v3 = (unsigned int)*(unsigned short *)
-                     (param_1 + *(int *)(param_1 + 0x305c) * 0x10 + (temp_v3 + temp_v0) * 2 + 0x341c);
-    }
-  }
-  if (temp_v3 == 0) {
-    return;
-  }
-  buttonHelpShowSkillDetails(temp_v3);
-  return;
 }
 
-} /* extern "C" */
+}

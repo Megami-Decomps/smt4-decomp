@@ -1,135 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021e4bc` (_code @ 0x21e4bc, 0x28c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout and register allocation differ - retail shares one `return 0` epilogue between the states, finds the free slot inside the entry scan with the slot index in r0, and reuses the g_mapObj pointer loaded for the entry test. */
+#include "common.h"
+
+namespace {
+/* A placement entry of the map's object table. */
+struct MapObjEntry {
+    /* 0x00 */ s16 mapId;       /* < 0: unused */
+    /* 0x02 */ s16 areaId;
+    /* 0x04 */ s16 kind;        /* < 100: a loadable object model */
+    /* 0x06 */ s16 x;
+    /* 0x08 */ s16 y;
+    /* 0x0a */ s16 z;
+    /* 0x0c */ s16 yaw;
+    /* 0x0e */ s16 altY;
+    /* 0x10 */ char name[1];    /* optional override name */
+};
+
+/* A loaded map object. */
+struct MapObjSlot {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 visible;
+    /* 0x02 */ u8 enabled;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ f32 x;
+    /* 0x08 */ f32 y;
+    /* 0x0c */ f32 z;
+    /* 0x10 */ f32 scaleX;
+    /* 0x14 */ f32 scaleY;
+    /* 0x18 */ f32 scaleZ;
+    /* 0x1c */ f32 yaw;
+    /* 0x20 */ u8 unk20[4];
+    /* 0x24 */ s32 kind;
+    /* 0x28 */ u32 model;       /* model list created for the kind */
+    /* 0x2c */ char name[0x18];
+    /* 0x44 */ s32 entryIndex;
+};
+
+/* The loader's work block: the state machine header, then the 24 object slots. */
+struct MapObjWork {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s16 mapId;
+    /* 0x06 */ s16 areaId;
+    /* 0x08 */ s16 state;
+    /* 0x0a */ s16 entryIndex;
+    /* 0x0c */ s16 slot;
+    /* 0x0e */ u8 unk0e[2];
+    /* 0x10 */ s32 loadedCount;
+    /* 0x14 */ MapObjSlot slots[24];
+};
+}
+
+static __inline s32 findFreeSlot(const MapObjWork *work)
+{
+    for (s32 i = 0; i < 24; i++) {
+        if (work->slots[i].active == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
 
 extern "C" {
+extern MapObjWork *g_mapObj;
+s32 dataTableGetRecordFortyFive(void);
+MapObjEntry *mapObjGetCombinedEntry(s32 index);
+void textFormatBuffer(char buffer[128], const char *format, s32 kind);
+u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
+s32 FUN_002adee0(u32 model);
+void FUN_002a0428(u32 model, s32 flag);
+char *libc_strcpy(char *destination, const char *source);
 
-int mapObjGetCombinedEntry(void);
-int FUN_002a0428(unsigned int, int);
-int textFormatBuffer(unsigned char [128], unsigned char *, int);
-int libc_strcpy(int, int);
-int VectorSignedToFloat(int, int);
-
-extern unsigned char LAB_0021e74c; /* 0x21e74c */
-extern int g_mapObj; /* 0x447e70 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int dataTableGetRecordFortyFive(void);
-/* Supplied declaration required: mapObjGetCombinedEntry. */
-extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002a0428. */
-extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: libc_strcpy. */
-
-
-unsigned int FUN_0021e4bc(void)
-
+/* Loads the map's object table one step per call: scans for the next entry placed on this map (state 10),
+   creates its model list (11), then places it once the model is ready (12). Returns 1 when finished. */
+u32 FUN_0021e4bc(void)
 {
-/* irregular: 1 unstructured edge(s); 1 goto(s); irregular input(s): in_fpscr; 5 native warning(s); review required */
-  short temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short *psVar6;
-  unsigned int in_fpscr;
-  unsigned int temp_v4;
-  unsigned char temp_v5 [128];
-  
-  temp_v0 = *(short *)(g_mapObj + 8);
-  if (temp_v0 != 10) {
-    if (temp_v0 != 0xb) {
-      if (temp_v0 != 0xc) {
-        if (temp_v0 == 99) {
-          return 1;
+    switch (g_mapObj->state) {
+    case 10: {
+        s32 index = g_mapObj->entryIndex;
+        if (dataTableGetRecordFortyFive() > index) {
+            do {
+                MapObjEntry *entry = mapObjGetCombinedEntry(index);
+                if (entry->mapId >= 0) {
+                    MapObjWork *work = g_mapObj;
+                    if (entry->mapId == work->mapId && entry->areaId == work->areaId && entry->kind < 100) {
+                        work->entryIndex = index;
+                        work->slot = findFreeSlot(work);
+                        if (work->slot == -1) {
+                            work->state = 99;
+                            return 1;
+                        }
+                        work->state = 11;
+                        return 0;
+                    }
+                }
+                index++;
+            } while (index < dataTableGetRecordFortyFive());
         }
-      }
-      else {
-        temp_v1 = (int)*(short *)(g_mapObj + 10);
-        mapObjGetCombinedEntry();
-        temp_v2 = g_mapObj + *(short *)(g_mapObj + 0xc) * 0x48;
-        temp_v3 = FUN_002adee0(*(unsigned int *)(temp_v2 + 0x3c));
-        if (temp_v3 != 0) {
-          FUN_002a0428(*(unsigned int *)(temp_v2 + 0x3c),1);
-          temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x18) = temp_v4;
-          temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x1c) = temp_v4;
-          temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x20) = temp_v4;
-          temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x30) = temp_v4;
-          temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x24) = temp_v4;
-          if (*(int *)(temp_v2 + 0x38) == 6) {
-            temp_v0 = *(short *)(temp_v1 + 0xe);
-          }
-          else {
-            temp_v0 = *(short *)(temp_v1 + 8);
-          }
-          temp_v4 = VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x28) = temp_v4;
-          temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(temp_v2 + 0x2c) = temp_v4;
-          *(int *)(g_mapObj + 0x10) = *(int *)(g_mapObj + 0x10) + 1;
-          *(unsigned char *)(temp_v2 + 0x14) = 1;
-          *(unsigned char *)(temp_v2 + 0x15) = 1;
-          *(unsigned char *)(temp_v2 + 0x16) = 1;
-          *(int *)(temp_v2 + 0x58) = (int)*(short *)(g_mapObj + 10);
-          if (*(char *)(temp_v1 + 0x10) != '\0') {
-            libc_strcpy(temp_v2 + 0x40,temp_v1 + 0x10);
-          }
-          temp_v1 = g_mapObj;
-          *(short *)(g_mapObj + 10) = *(short *)(g_mapObj + 10) + 1;
-          *(unsigned short *)(temp_v1 + 8) = 10;
-        }
-      }
+        g_mapObj->state = 99;
+        return 1;
     }
-    else {
-      temp_v1 = (int)*(short *)(g_mapObj + 10);
-      mapObjGetCombinedEntry();
-      temp_v2 = g_mapObj + *(short *)(g_mapObj + 0xc) * 0x48;
-      *(int *)(temp_v2 + 0x38) = (int)*(short *)(temp_v1 + 4);
-      *(unsigned char *)(temp_v2 + 0x40) = 0;
-      textFormatBuffer(temp_v5,&LAB_0021e74c,(int)*(short *)(temp_v1 + 4));
-      temp_v4 = asdMdlManagerCreateSecondList(temp_v5,7);
-      *(unsigned int *)(temp_v2 + 0x3c) = temp_v4;
-      *(unsigned short *)(g_mapObj + 8) = 0xc;
+    case 11: {
+        MapObjEntry *entry = mapObjGetCombinedEntry(g_mapObj->entryIndex);
+        MapObjSlot *slot = &g_mapObj->slots[g_mapObj->slot];
+        char path[128];
+        slot->kind = entry->kind;
+        slot->name[0] = 0;
+        textFormatBuffer(path, "map/obj/obj_%02d.bam", entry->kind);
+        slot->model = asdMdlManagerCreateSecondList(path, 7);
+        g_mapObj->state = 12;
+        return 0;
+    }
+    case 12: {
+        MapObjEntry *entry = mapObjGetCombinedEntry(g_mapObj->entryIndex);
+        MapObjSlot *slot = &g_mapObj->slots[g_mapObj->slot];
+        if (FUN_002adee0(slot->model) != 0) {
+            FUN_002a0428(slot->model, 1);
+            slot->x = entry->x;
+            slot->y = entry->y;
+            slot->z = entry->z;
+            slot->yaw = entry->yaw;
+            slot->scaleX = entry->x;
+            slot->scaleY = slot->kind == 6 ? entry->altY : entry->y;
+            slot->scaleZ = entry->z;
+            g_mapObj->loadedCount++;
+            slot->active = 1;
+            slot->visible = 1;
+            slot->enabled = 1;
+            slot->entryIndex = g_mapObj->entryIndex;
+            if (entry->name[0] != 0) {
+                libc_strcpy(slot->name, entry->name);
+            }
+            g_mapObj->entryIndex++;
+            g_mapObj->state = 10;
+        }
+        return 0;
+    }
+    case 99:
+        return 1;
     }
     return 0;
-  }
-  psVar6 = (short *)(int)*(short *)(g_mapObj + 10);
-  temp_v1 = dataTableGetRecordFortyFive();
-  if ((int)psVar6 < temp_v1) {
-    do {
-      psVar2 = psVar6;
-      mapObjGetCombinedEntry();
-      temp_v1 = g_mapObj;
-      if ((((-1 < *psVar2) && (*psVar2 == *(short *)(g_mapObj + 4))) &&
-          (psVar2[1] == *(short *)(g_mapObj + 6))) && (psVar2[2] < 100)) {
-        temp_v2 = 0;
-        *(short *)(g_mapObj + 10) = (short)(int)psVar6;
-LAB_0021e550:
-        if (*(char *)(temp_v1 + temp_v2 * 0x48 + 0x14) != '\0') {
-          temp_v2 = temp_v2 + 1;
-          if (temp_v2 < 0x18) goto LAB_0021e550;
-          temp_v2 = -1;
-        }
-        *(short *)(temp_v1 + 0xc) = (short)temp_v2;
-        if ((short)temp_v2 != -1) {
-          *(unsigned short *)(temp_v1 + 8) = 0xb;
-          return 0;
-        }
-        *(unsigned short *)(temp_v1 + 8) = 99;
-        return 1;
-      }
-      psVar6 = (short *)((int)psVar6 + 1);
-      temp_v1 = dataTableGetRecordFortyFive();
-    } while ((int)psVar6 < temp_v1);
-  }
-  *(unsigned short *)(g_mapObj + 8) = 99;
-  return 1;
 }
 
 } /* extern "C" */

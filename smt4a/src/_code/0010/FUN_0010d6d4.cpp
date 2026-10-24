@@ -9,7 +9,7 @@ int streamReaderReadU32(unsigned char [8], unsigned char [8]);
 int _ZN12OnlineResultC1ERKj(unsigned int *, int *);
 int FUN_002e9ff4(int *);
 int strDestroy(unsigned char [32]);
-int FUN_002ecad4(unsigned int *, unsigned int, int);
+int _ZN9Obj55af4c4initEjh(unsigned int *, unsigned int, int);
 int FUN_002f4e14(unsigned char [8], int *);
 int FUN_002f4e90(unsigned char [8], unsigned char [32]);
 int FUN_002f4f00(unsigned char [8]);
@@ -32,7 +32,7 @@ extern unsigned char DAT_0055af54; /* 0x55af54 */
 extern unsigned int *_ZN9Obj5593b8C1Ev(unsigned char *, int, int *);
 /* Supplied declaration required: FUN_002e9ff4. */
 /* Supplied declaration required: strDestroy. */
-/* Supplied declaration required: FUN_002ecad4. */
+/* Supplied declaration required: _ZN9Obj55af4c4initEjh. */
 /* Supplied declaration required: FUN_002f4e14. */
 extern int FUN_002f4e70(unsigned char *);
 extern int _ZNK18OnlineResultRecord7isValidEv(unsigned int *);
@@ -67,7 +67,7 @@ void FUN_0010d6d4(unsigned int *param_1,int param_2,int *param_3)
   else {
     puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev(temp_v9,param_3[1],param_3 + 2);
     *puVar1 = (unsigned int)&DAT_0055af54;
-    FUN_002ecad4(puVar1,temp_v2,0);
+    _ZN9Obj55af4c4initEjh(puVar1,temp_v2,0);
     strAssign(temp_v9,*param_3,param_3[1] - *param_3,0xffffffff);
     FUN_002f4e90(temp_v3,temp_v9);
     FUN_002e9ff4(&temp_v7);

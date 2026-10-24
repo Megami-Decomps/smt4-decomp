@@ -5,7 +5,7 @@
 extern "C" {
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 AsdAllocator *asdMemoryGetDefaultAllocator();
-AsdFogObject *FUN_0015d814(const AsdFogCreateInfo *info, AsdAllocator *allocator);
+AsdFogObject *_ZN9Obj55bb906createEPvP18AsdAllocatorObject(const AsdFogCreateInfo *info, AsdAllocator *allocator);
 extern AsdSceneFogRegistry DAT_005b3cd8;
 extern const char DAT_0053d1e4[];
 
@@ -28,7 +28,7 @@ void FUN_00141724()
         info.unk04 = 0;
         info.unk08 = 0;
         info.unk0C = 0;
-        fog->object = FUN_0015d814(&info, allocator);
+        fog->object = _ZN9Obj55bb906createEPvP18AsdAllocatorObject(&info, allocator);
         fog->resource = fog->object->resource;
         f32 *color = fog->resource->color;
         color[0] = 0.3f;

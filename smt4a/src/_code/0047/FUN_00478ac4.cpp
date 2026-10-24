@@ -1,139 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00478ac4` (_code @ 0x478ac4, 0x2e0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment and the unrolled dot-grid index arithmetic differ from retail (181 vs 188 rows); the loading message drawing is the same. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_00157558(int);
-int FUN_00162790(int, int, unsigned char [1024], int);
-int FUN_00164b5c(int, int, int, int, int, int);
-int FUN_001834a4(...);
-int FUN_001835b4(...);
-int FUN_00473754(unsigned int, unsigned int, unsigned char [1024]);
-int FUN_00473910(unsigned int, unsigned int);
-int VectorSignedToFloat(int, int);
+/* A layout record (only the fields read here). */
+typedef struct LoadingLayout {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;               /* width, height */
+} LoadingLayout;
 
-typedef int romwright_code(...);
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp448; /* 0x448: local_448 */
-} void_stack;
+/* The job work area (only the fields read here). */
+typedef struct LoadingWork {
+    /* 0x0000 */ u8 unk0000[0x1798];
+    /* 0x1798 */ u32 frame;
+    /* 0x179C */ s32 messageIndex;
+} LoadingWork;
 
-extern unsigned int g_aocMain; /* 0x570260 */
-extern int g_renderCtx; /* 0x59dbb4 */
+extern u8 *g_renderCtx;
+extern u8 *g_aocMain;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00473754. */
-/* Supplied declaration required: FUN_00473910. */
-extern int curveEvaluateStandard(unsigned char *, unsigned int);
+LoadingWork *jobGetWork(void);
+void FUN_00157558(u8 *context);
+s32 FUN_001692ac(s32 a, s32 b);
+void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+s32 FUN_00473910(u8 *aoc, u32 id);
+void FUN_00473754(u8 *aoc, s32 text, u8 buffer[1024]);
+s32 curveEvaluateStandard(u8 *buffer, u32 kind);
+LoadingLayout *FUN_001834a4(u32 group, u32 id);
+void FUN_00162790(u32 first, u32 second, const u16 *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 
-
-unsigned int FUN_00478ac4(void)
-
+/* Draws the loading message with its spinning marker: the message text for the current index,
+ * centred in its frame, and a 3x3 grid of dots where the lit pair rotates every five frames.
+ * Always returns 0. */
+u32 FUN_00478ac4(void)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int *piVar11;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int in_fpscr;
-  unsigned char temp_v13 [1024];
-  unsigned int temp_v14 [5];
-  unsigned int temp_v15;
-  
-  temp_v3 = jobGetWork();
-  temp_v2 = g_aocMain;
-  temp_v11 = *(unsigned int *)(temp_v3 + 0x1798);
-  FUN_00157558(g_renderCtx);
-  temp_v6 = g_renderCtx;
-  temp_v4 = FUN_001692ac(1,0);
-  piVar11 = (int *)(temp_v6 + 0x1258);
-  temp_v8 = *piVar11;
-  temp_v9 = piVar11[temp_v8 + 2];
-  *piVar11 = temp_v8 + 1;
-  piVar11[temp_v8 + 3] = temp_v4;
-  if (*(char *)(temp_v6 + 0x1270) != '\0' || temp_v9 != temp_v4) {
-    (**(romwright_code **)(temp_v6 + 0x1274))();
-    *(unsigned char *)(temp_v6 + 0x1270) = 0;
-  }
-  FUN_00164b5c(2,0x2f,5,0,0,0x81);
-  temp_v14[0] = 0x6e;
-  temp_v14[1] = 0x6f;
-  temp_v14[2] = 0x70;
-  temp_v14[3] = 0x71;
-  temp_v5 = temp_v2;
-  FUN_00473910(temp_v2,temp_v14[*(int *)(temp_v3 + 0x179c)]);
-  FUN_00473754(temp_v2,temp_v5,temp_v13);
-  temp_v6 = curveEvaluateStandard(temp_v13,3);
-  temp_v3 = FUN_001834a4(0x2f,0x2d);
-  temp_v4 = (((int)*(short *)(temp_v3 + 8) + ((int)**(short **)(temp_v3 + 0xc) >> 1)) - (temp_v6 >> 1)) - 9;
-  VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0x57d8ffff,temp_v13,(int)*(short *)(temp_v3 + 10));
-  temp_v3 = 0;
-  temp_v11 = temp_v11 / 5;
-  temp_v12 = temp_v11 - (temp_v11 & 0xfffffff8);
-  temp_v14[4] = (int)(temp_v12 + 7) % 8;
-  temp_v11 = (temp_v11 + 4) % 8;
-  temp_v15 = (temp_v11 + 7) % 8;
-  do {
-    temp_v8 = 0;
-    do {
-      temp_v10 = temp_v3 * 3 + temp_v8;
-      temp_v9 = FUN_001834a4(0x2f,0x31);
-      temp_v0 = *(short *)(temp_v9 + 8);
-      temp_v9 = FUN_001834a4(0x2f,temp_v10 + 0x31);
-      temp_v7 = (int)*(short *)(temp_v9 + 10);
-      temp_v9 = ((int)*(short *)(temp_v9 + 8) - (int)temp_v0) + temp_v4 + temp_v6 + 4;
-      if (temp_v12 == temp_v10 || temp_v11 == temp_v10) {
-        FUN_001835b4(2,8,0x155,temp_v9,temp_v7,0x81);
-      }
-      else {
-        temp_v1 = temp_v14[4];
-        if (temp_v14[4] != temp_v10) {
-          temp_v1 = temp_v15;
+    LoadingWork *work = jobGetWork();
+    u8 *aoc = g_aocMain;
+    u32 frame = work->frame;
+    u8 text[1024];
+    u32 messageIds[4] = {0x6E, 0x6F, 0x70, 0x71};
+
+    FUN_00157558(g_renderCtx);
+    renderStackPush((RenderStateStack *)(g_renderCtx + 0x1258), FUN_001692ac(1, 0));
+    FUN_00164b5c(2, 0x2F, 5, 0, 0, 0x81);
+    s32 body = FUN_00473910(aoc, messageIds[work->messageIndex]);
+
+    FUN_00473754(aoc, body, text);
+    s32 width = curveEvaluateStandard(text, 3);
+    LoadingLayout *frameLayout = FUN_001834a4(0x2F, 0x2D);
+    s32 left = (frameLayout->x + (frameLayout->size[0] >> 1) - (width >> 1)) - 9;
+
+    FUN_00162790(3, 0x57D8FFFF, (const u16 *)text, (f32)left, (f32)frameLayout->y, 0.5f, 0.0f, 1.0f);
+    u32 step = frame / 5;
+    u32 first = step % 8;
+    u32 second = (step + 4) % 8;
+    u32 firstTrail = (first + 7) % 8;
+    u32 secondTrail = (second + 7) % 8;
+
+    for (s32 row = 0; row < 3; row++) {
+        for (s32 column = 0; column < 3; column++) {
+            u32 index = row * 3 + column;
+            LoadingLayout *origin = FUN_001834a4(0x2F, 0x31);
+            LoadingLayout *dot = FUN_001834a4(0x2F, index + 0x31);
+            s32 x = (dot->x - origin->x) + left + width + 4;
+
+            if (index == first || index == second) {
+                FUN_001835b4(2, 8, 0x155, x, dot->y, 0x81);
+            } else if (index == firstTrail || index == secondTrail) {
+                FUN_001835b4(2, 8, 0x156, x, dot->y, 0x81);
+            } else {
+                FUN_001835b4(2, 8, 0x154, x, dot->y, 0x81);
+            }
         }
-        if (!(temp_v14[4] != temp_v10 && temp_v1 != temp_v10)) {
-          FUN_001835b4(2,8,0x156,temp_v9,temp_v7,0x81);
-        }
-        else {
-          FUN_001835b4(2,8,0x154,temp_v9,temp_v7,0x81);
-        }
-      }
-      temp_v9 = g_renderCtx;
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v8 < 3);
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  piVar11 = (int *)(g_renderCtx + 0x1258);
-  temp_v6 = *piVar11;
-  temp_v3 = piVar11[temp_v6 + 2];
-  *piVar11 = temp_v6 - 1;
-  if (*(char *)(temp_v9 + 0x1270) != '\0' || temp_v3 != piVar11[temp_v6 + 1]) {
-    (**(romwright_code **)(temp_v9 + 0x1274))();
-    *(unsigned char *)(temp_v9 + 0x1270) = 0;
-  }
-  return 0;
+    }
+    renderStackPop((RenderStateStack *)(g_renderCtx + 0x1258));
+    return 0;
 }
 
-} /* extern "C" */
+}

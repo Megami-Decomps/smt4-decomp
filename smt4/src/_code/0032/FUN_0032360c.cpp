@@ -1,196 +1,155 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032360c` (_code @ 0x32360c, 0x2c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail walks the offset tables with the three arguments saved in r4-r6, rebuilds the self-relative pointers inline per step and keeps the UV transform in s-registers across the walk; this build recomputes them in a different order (about 250 diff lines). */
+#include "common.h"
 
-extern "C" {
-
-int FUN_002c2424(int, unsigned int);
-int FUN_003409f8(int, float *, float *);
-int nw_gfx_res_ResTextureMapper_SetTexture(int *, unsigned int);
-
-/* stack frame of param_3: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_002c2424. */
-/* Supplied declaration required: FUN_003409f8. */
-/* Supplied declaration required: nw_gfx_res_ResTextureMapper_SetTexture. */
-
-
-void FUN_0032360c(int param_1,int param_2,int param_3)
-
+/* Resolves a self-relative offset field of the model resource format (0 = absent). */
+static __inline void *resolveOffset(const s32 *field)
 {
-/* irregular: 3 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  float *pfVar6;
-  unsigned int temp_v3;
-  unsigned int *puVar8;
-  unsigned int temp_v4;
-  unsigned int unaff_r7;
-  unsigned int temp_v5;
-  int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  unsigned long long temp_v9;
-  int temp_v10;
-  short *temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  int temp_v16;
-  int temp_v17;
-  int temp_v18;
-  
-  temp_v16 = param_1;
-  temp_v17 = param_2;
-  temp_v18 = param_3;
-  FUN_003409f8(param_2,&temp_v12,&temp_v14);
-  temp_v10 = 0;
-  if (0 < *(int *)(temp_v18 + 0x100)) {
-    temp_v9 = 0x3f000000;
-    do {
-      temp_v11 = (short *)(temp_v18 + temp_v10 * 4);
-      piVar1 = (int *)(*(int *)(*(int *)(*(int *)(temp_v16 + 8) + 0x2c) + 8) + 200);
-      temp_v2 = *piVar1;
-      if (temp_v2 != 0) {
-        temp_v2 = (int)piVar1 + temp_v2;
-      }
-      else {
-        temp_v2 = 0;
-      }
-      piVar1 = (int *)(temp_v2 + *temp_v11 * 4);
-      temp_v2 = *piVar1;
-      if (temp_v2 != 0) {
-        puVar8 = (unsigned int *)(temp_v2 + (int)piVar1);
-      }
-      else {
-        puVar8 = (unsigned int *)0x0;
-      }
-      if ((puVar8 != (unsigned int *)0x0) && ((~*puVar8 & 0x10000001) != 0)) {
-        puVar8 = (unsigned int *)0x0;
-      }
-      if (puVar8 != (unsigned int *)0x0) {
-        temp_v4 = puVar8[0xe];
-        temp_v2 = 0;
-        if (temp_v2 < (int)temp_v4) {
-          do {
-            if (puVar8[0xf] != 0) {
-              temp_v0 = (int)puVar8 + puVar8[0xf] + 0x3c;
-            }
-            else {
-              temp_v0 = 0;
-            }
-            piVar1 = (int *)(temp_v0 + temp_v2 * 4);
-            temp_v0 = *piVar1;
-            if (temp_v0 != 0) {
-              puVar3 = (unsigned int *)((int)piVar1 + temp_v0);
-            }
-            else {
-              puVar3 = (unsigned int *)0x0;
-            }
-            if ((puVar3 != (unsigned int *)0x0) && ((*puVar3 & 0x40000000) == 0)) {
-              puVar3 = (unsigned int *)0x0;
-            }
-            if (puVar3 != (unsigned int *)0x0) {
-              temp_v5 = puVar3[10];
-              if (puVar3[6] != 0) {
-                temp_v0 = (int)puVar3 + puVar3[6] + 0x18;
-              }
-              else {
-                temp_v0 = 0;
-              }
-              if (temp_v5 != 0) {
-                unaff_r7 = puVar3[0xb];
-              }
-              temp_v3 = 0;
-              temp_v1 = puVar3[5];
-              if (temp_v5 != 0) {
-                do {
-                  if (unaff_r7 != 0) {
-                    temp_v6 = (int)puVar3 + unaff_r7 + 0x2c;
-                  }
-                  else {
-                    temp_v6 = 0;
-                  }
-                  piVar1 = (int *)(temp_v6 + temp_v3 * 4);
-                  temp_v6 = *piVar1;
-                  if (temp_v6 != 0) {
-                    temp_v6 = (int)piVar1 + temp_v6;
-                  }
-                  else {
-                    temp_v6 = 0;
-                  }
-                  if (*(int *)(temp_v6 + 4) == temp_v11[1] + 4) {
-                    if (-1 < *(int *)(temp_v6 + 0x30)) {
-                      temp_v5 = puVar3[9];
-                      for (pfVar6 = (float *)(*(int *)(temp_v6 + 0x30) + temp_v0);
-                          pfVar6 < (float *)(temp_v0 + temp_v1);
-                          pfVar6 = (float *)((int)pfVar6 + temp_v5)) {
-                        temp_v8 = (float)temp_v9;
-                        temp_v7 = temp_v8 + (*pfVar6 - temp_v8) * temp_v12;
-                        *pfVar6 = temp_v7;
-                        temp_v8 = temp_v8 + (pfVar6[1] - temp_v8) * temp_v13;
-                        pfVar6[1] = temp_v8;
-                        *pfVar6 = temp_v7 + temp_v14;
-                        pfVar6[1] = temp_v8 + temp_v15;
-                      }
-                      temp_v5 = puVar3[6];
-                      temp_v0 = 0;
-                      if (temp_v5 != 0) {
-                        temp_v0 = (int)puVar3 + temp_v5 + 0x18;
-                      }
-                      if (temp_v5 == 0) {
-                        temp_v0 = 0;
-                      }
-                      FUN_002c2424(temp_v0,puVar3[5]);
-                    }
-                    break;
-                  }
-                  temp_v3 = temp_v3 + 1;
-                } while (temp_v3 < temp_v5);
-              }
-            }
-            temp_v2 = temp_v2 + 1;
-          } while (temp_v2 < (int)temp_v4);
-        }
-      }
-      temp_v10 = temp_v10 + 1;
-    } while (temp_v10 < *(int *)(temp_v18 + 0x100));
-  }
-  temp_v2 = 0;
-  if (temp_v2 < *(int *)(temp_v18 + 0x204)) {
-    do {
-      temp_v0 = temp_v18 + temp_v2 * 4;
-      temp_v6 = *(int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v16 + 8) + 0x2c) + 0x164) +
-                                *(short *)(temp_v0 + 0x104) * 4) + 0x3c);
-      piVar1 = (int *)(*(short *)(temp_v0 + 0x106) * 4 + 0x274 + temp_v6);
-      temp_v10 = *piVar1;
-      if (temp_v10 != 0) {
-        temp_v10 = (int)piVar1 + temp_v10;
-      }
-      else {
-        temp_v10 = 0;
-      }
-      nw_gfx_res_ResTextureMapper_SetTexture(&temp_v10,*(unsigned int *)(temp_v17 + 0xc));
-      *(unsigned int *)(temp_v6 + 0x2b0) = 0;
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(temp_v18 + 0x204));
-  }
-  return;
+    return *field != 0 ? (u8 *)field + *field : NULL;
 }
 
-} /* extern "C" */
+/* Layout of the texture-coordinate data of a model resource as this function walks it. */
+struct ResUvDescriptor {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 key;
+    /* 0x08 */ u8 unk08[0x28];
+    /* 0x30 */ s32 dataOffset; /* byte offset of the descriptor's texture coordinates, negative = none */
+};
+
+struct ResUvBlock {
+    /* 0x00 */ u32 flags; /* 0x40000000: carries texture coordinates */
+    /* 0x04 */ u8 unk04[0x10];
+    /* 0x14 */ u32 dataSize;
+    /* 0x18 */ s32 dataOffset;
+    /* 0x1C */ u8 unk1C[8];
+    /* 0x24 */ u32 stride;
+    /* 0x28 */ u32 descriptorCount;
+    /* 0x2C */ s32 descriptorOffset;
+};
+
+struct ResMaterial {
+    /* 0x00 */ u32 flags; /* 0x10000001: a material that has blocks */
+    /* 0x04 */ u8 unk04[0x34];
+    /* 0x38 */ u32 blockCount;
+    /* 0x3C */ s32 blockOffset;
+};
+
+struct ResMapperSlots {
+    /* 0x000 */ u8 unk000[0x274];
+    /* 0x274 */ s32 mappers[14]; /* offsets to the texture mappers */
+    /* 0x2AC */ u8 unk2AC[4];
+    /* 0x2B0 */ u32 textureBound;
+};
+
+struct ResMeshSlots {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ ResMapperSlots *slots;
+};
+
+struct ResModelBody {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ struct ResMaterialTable *materials;
+    /* 0x00C */ u8 unk00C[0x158];
+    /* 0x164 */ ResMeshSlots **meshes;
+};
+
+struct ResMaterialTable {
+    /* 0x00 */ u8 unk00[0xC8];
+    /* 0xC8 */ s32 tableOffset;
+};
+
+struct ResModel {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ ResModelBody *body;
+};
+
+struct ResModelOwner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ResModel *model;
+};
+
+struct UvRequest {
+    s16 material; /* index into the model's material table */
+    s16 key; /* matches ResUvDescriptor::key - 4 */
+};
+
+struct TextureRequest {
+    s16 mesh;
+    s16 slot;
+};
+
+struct UvTextureRequests {
+    /* 0x000 */ UvRequest uv[0x40];
+    /* 0x100 */ s32 uvCount;
+    /* 0x104 */ TextureRequest textures[0x40];
+    /* 0x204 */ s32 textureCount;
+};
+
+struct UvTransform {
+    f32 scaleU, scaleV, offsetU, offsetV;
+};
+
+struct TextureSource {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 texture;
+};
+
+extern "C" {
+void FUN_002c2424(void *data, u32 size);
+void FUN_003409f8(TextureSource *source, f32 *scale, f32 *offset);
+void nw_gfx_res_ResTextureMapper_SetTexture(void **mapper, u32 texture);
+
+/* Applies the texture-coordinate scale/offset of `source` to the model's UV data for each request, then binds its
+ * texture to the requested mapper slots. */
+void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests *requests)
+{
+    UvTransform transform;
+    FUN_003409f8(source, &transform.scaleU, &transform.offsetU);
+    for (s32 i = 0; i < requests->uvCount; i++) {
+        UvRequest *request = &requests->uv[i];
+        ResModelBody *body = owner->model->body;
+        s32 *materialTable = (s32 *)resolveOffset(&body->materials->tableOffset);
+        ResMaterial *material = (ResMaterial *)resolveOffset(&materialTable[request->material]);
+        if (material != NULL && (~material->flags & 0x10000001) != 0) {
+            material = NULL;
+        }
+        if (material == NULL) {
+            continue;
+        }
+        for (s32 b = 0; b < (s32)material->blockCount; b++) {
+            s32 *blocks = (s32 *)resolveOffset(&material->blockOffset);
+            ResUvBlock *block = (ResUvBlock *)resolveOffset(&blocks[b]);
+            if (block != NULL && (block->flags & 0x40000000) == 0) {
+                block = NULL;
+            }
+            if (block == NULL) {
+                continue;
+            }
+            u8 *data = (u8 *)resolveOffset(&block->dataOffset);
+            for (u32 d = 0; d < block->descriptorCount; d++) {
+                s32 *descriptors = (s32 *)resolveOffset(&block->descriptorOffset);
+                ResUvDescriptor *descriptor = (ResUvDescriptor *)resolveOffset(&descriptors[d]);
+                if (descriptor->key == request->key + 4) {
+                    if (descriptor->dataOffset >= 0) {
+                        for (f32 *uv = (f32 *)(data + descriptor->dataOffset); uv < (f32 *)(data + block->dataSize);
+                             uv = (f32 *)((u8 *)uv + block->stride)) {
+                            uv[0] = 0.5f + (uv[0] - 0.5f) * transform.scaleU;
+                            uv[1] = 0.5f + (uv[1] - 0.5f) * transform.scaleV;
+                            uv[0] += transform.offsetU;
+                            uv[1] += transform.offsetV;
+                        }
+                        FUN_002c2424(resolveOffset(&block->dataOffset), block->dataSize);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+    for (s32 i = 0; i < requests->textureCount; i++) {
+        TextureRequest *request = &requests->textures[i];
+        ResMeshSlots *mesh = owner->model->body->meshes[request->mesh];
+        void *mapper = resolveOffset(&mesh->slots->mappers[request->slot]);
+        nw_gfx_res_ResTextureMapper_SetTexture(&mapper, source->texture);
+        mesh->slots->textureBound = 0;
+    }
+}
+}

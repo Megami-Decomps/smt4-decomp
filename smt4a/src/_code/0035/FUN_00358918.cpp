@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack pointer evaluation, state registers and paired float-to-int load scheduling differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 32 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "StaffRoll/StaffRollMain.h"
 
@@ -21,7 +21,7 @@ u32 FUN_00358918()
     FUN_00183bb0();
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     for (u32 index = 0; index < 12; ++index) {
         FUN_001835b4(2, 0x29, index * 1000, static_cast<s32>(roll->points[index].x),
                      static_cast<s32>(roll->points[index].y), 2);

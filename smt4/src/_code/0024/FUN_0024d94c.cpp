@@ -1,164 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024d94c` (_code @ 0x24d94c, 0x250 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scheduling only: retail loads the experience, hp-low and hp-high words together before the first store (and hoists the 0x500 memClear size and zero constant earlier); ours interleaves each load with its store. Same instruction multiset, 148 rows each. */
+#include "common.h"
+
+/* Seven halfwords, copied around as a unit. */
+__packed struct HalfwordGroup {
+    u16 values[7];
+};
+
+/* A party demon record in save format (fields are not naturally aligned). */
+__packed struct DemonSaveRecord {
+    /* 0x00 */ HalfwordGroup skills;       /* the first three are looked up for their effects */
+    /* 0x0E */ HalfwordGroup groupB;
+    /* 0x1C */ HalfwordGroup stats;        /* values 2..6 are clamped to 999 in the snapshot */
+    /* 0x2A */ u16 hpLow;
+    /* 0x2C */ u16 hpHigh;
+    /* 0x2E */ u8 unk2E[2];
+    /* 0x30 */ s32 experience;
+    /* 0x34 */ u16 learned[8];             /* count given by FUN_0029aafc */
+    /* 0x44 */ u8 unk44[0x2E];
+    /* 0x72 */ u16 variant;
+    /* 0x74 */ u8 unk74[2];
+    /* 0x76 */ u8 kind;
+};
+
+/* The per-stat grade words (top six bits hold the grade) and the rest of the record the grader fills. */
+struct StatGrades {
+    u16 values[8];
+    u8 unk10[0x18];
+};
+
+/* The snapshot the battle log keeps of a demon (0x5B0 bytes). */
+__packed struct DemonSnapshot {
+    /* 0x000 */ s16 slot;
+    /* 0x002 */ u16 kind;
+    /* 0x004 */ s32 experienceToNext;
+    /* 0x008 */ u16 hpLow;
+    /* 0x00A */ u16 hpHigh;
+    /* 0x00C */ u16 maxHp;
+    /* 0x00E */ u16 statOffset;
+    /* 0x010 */ u16 skillEffectA;
+    /* 0x012 */ u16 skillEffectB;
+    /* 0x014 */ u16 variant;
+    /* 0x016 */ HalfwordGroup stats;
+    /* 0x024 */ HalfwordGroup groupB;
+    /* 0x032 */ u8 statGrades[8];          /* top six bits of the grade halfwords */
+    /* 0x03A */ HalfwordGroup skills;
+    /* 0x048 */ u16 learned[8];
+    /* 0x058 */ u32 cleared[16];
+    /* 0x098 */ u8 tail[0x500];
+    /* 0x598 */ s32 marker;
+    /* 0x59C */ u16 playerName[10];
+};
 
 extern "C" {
 
-int FUN_00253d60(unsigned char *, unsigned short *);
-int FUN_00253f94(void);
-int btlSourceGetMaxHp(void);
-int dataTable08Sub2GetRecord(void);
-int libc_strcpy(unsigned short *, unsigned int);
-int memClear(unsigned short *, int);
-int rt_memcpy_w(unsigned short *, unsigned short *, int);
+void memClear(void *memory, s32 size);
+s32 dataTable9EntryOrZero(u8 index);
+s32 btlSourceGetMaxHp(DemonSaveRecord *record);
+s32 FUN_0029aafc(void);
+void rt_memcpy_w(void *destination, const void *source, s32 size);
+u32 gameGetPlayerName(void);
+void libc_strcpy(void *destination, u32 source);
+void *dataTable08Sub2GetRecord(u16 skill);
+u16 FUN_00253f94(void);
+void FUN_00253d60(StatGrades *grades, DemonSaveRecord *record);
 
-/* stack frame of param_2: 8 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned short sp2A; /* 0x2a: local_2a */
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned short sp2E; /* 0x2e: local_2e */
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned short sp32; /* 0x32: local_32 */
-    unsigned short sp34; /* 0x34: local_34 */
-    unsigned short sp36; /* 0x36: local_36 */
-    unsigned short sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00253d60. */
-/* Supplied declaration required: FUN_00253f94. */
-/* Supplied declaration required: btlSourceGetMaxHp. */
-extern int dataTable9EntryOrZero(unsigned char);
-extern int FUN_0029aafc(void);
-/* Supplied declaration required: dataTable08Sub2GetRecord. */
-extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0024d94c(unsigned short *param_1,unsigned short *param_2)
-
+/* Builds the battle log's snapshot of a party demon from its save record. */
+void FUN_0024d94c(DemonSnapshot *snapshot, DemonSaveRecord *record)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  short temp_v3;
-  int temp_v4;
-  unsigned short *puVar6;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  unsigned char bStack_37;
-  unsigned short temp_v8;
-  unsigned char bStack_35;
-  unsigned short temp_v9;
-  unsigned char bStack_33;
-  unsigned short temp_v10;
-  unsigned char bStack_31;
-  unsigned short temp_v11;
-  unsigned char bStack_2f;
-  unsigned short temp_v12;
-  unsigned char bStack_2d;
-  unsigned short temp_v13;
-  unsigned char bStack_2b;
-  unsigned short temp_v14;
-  unsigned char bStack_29;
-  
-  memClear(param_1,0x5b0);
-  temp_v1 = param_2[0x3b];
-  *param_1 = 0xffff;
-  param_1[1] = (unsigned short)(unsigned char)temp_v1;
-  temp_v4 = dataTable9EntryOrZero((char)param_2[0x3b]);
-  temp_v1 = param_2[0x15];
-  temp_v0 = param_2[0x16];
-  *(int *)(param_1 + 2) = temp_v4 - *(int *)(param_2 + 0x18);
-  param_1[4] = temp_v1;
-  param_1[5] = temp_v0;
-  puVar6 = param_2;
-  btlSourceGetMaxHp();
-  temp_v1 = param_2[0xf];
-  temp_v0 = param_2[0x39];
-  param_1[6] = (short)(int)puVar6;
-  param_1[7] = temp_v1;
-  *(unsigned int *)(param_1 + 0x2cc) = 0xffffffff;
-  param_1[10] = temp_v0;
-  *(unsigned int *)(param_1 + 0xb) = *(unsigned int *)(param_2 + 0xe);
-  *(unsigned int *)(param_1 + 0xd) = *(unsigned int *)(param_2 + 0x10);
-  *(unsigned int *)(param_1 + 0xf) = *(unsigned int *)(param_2 + 0x12);
-  param_1[0x11] = param_2[0x14];
-  *(unsigned int *)(param_1 + 0x12) = *(unsigned int *)(param_2 + 7);
-  *(unsigned int *)(param_1 + 0x14) = *(unsigned int *)(param_2 + 9);
-  *(unsigned int *)(param_1 + 0x16) = *(unsigned int *)(param_2 + 0xb);
-  param_1[0x18] = param_2[0xd];
-  *(unsigned int *)(param_1 + 0x1d) = *(unsigned int *)param_2;
-  *(unsigned int *)(param_1 + 0x1f) = *(unsigned int *)(param_2 + 2);
-  *(unsigned int *)(param_1 + 0x21) = *(unsigned int *)(param_2 + 4);
-  param_1[0x23] = param_2[6];
-  temp_v4 = FUN_0029aafc();
-  rt_memcpy_w(param_1 + 0x24,param_2 + 0x1a,temp_v4 << 1);
-  temp_v5 = gameGetPlayerName();
-  libc_strcpy(param_1 + 0x2ce,temp_v5);
-  if ((short)param_1[0xd] >= 1000) {
-    param_1[0xd] = 999;
-  }
-  if ((short)param_1[0xe] >= 1000) {
-    param_1[0xe] = 999;
-  }
-  if ((short)param_1[0xf] >= 1000) {
-    param_1[0xf] = 999;
-  }
-  if ((short)param_1[0x10] >= 1000) {
-    param_1[0x10] = 999;
-  }
-  if ((short)param_1[0x11] >= 1000) {
-    param_1[0x11] = 999;
-  }
-  temp_v6 = (unsigned int)*param_2;
-  dataTable08Sub2GetRecord();
-  if (temp_v6 != 0) {
-    temp_v2 = FUN_00253f94();
-    param_1[8] = temp_v2;
-  }
-  temp_v6 = (unsigned int)param_2[1];
-  dataTable08Sub2GetRecord();
-  if (temp_v6 != 0) {
-    temp_v2 = FUN_00253f94();
-    param_1[9] = temp_v2;
-  }
-  temp_v6 = (unsigned int)param_2[2];
-  dataTable08Sub2GetRecord();
-  if (temp_v6 != 0) {
-    temp_v3 = FUN_00253f94();
-    param_1[9] = temp_v3 + param_1[9];
-  }
-  FUN_00253d60(&temp_v7,param_2);
-  *(unsigned char *)(param_1 + 0x19) = bStack_37 >> 2;
-  *(unsigned char *)((int)param_1 + 0x33) = bStack_35 >> 2;
-  *(unsigned char *)(param_1 + 0x1a) = bStack_33 >> 2;
-  *(unsigned char *)((int)param_1 + 0x35) = bStack_31 >> 2;
-  *(unsigned char *)(param_1 + 0x1b) = bStack_2f >> 2;
-  *(unsigned char *)((int)param_1 + 0x37) = bStack_2d >> 2;
-  *(unsigned char *)(param_1 + 0x1c) = bStack_2b >> 2;
-  *(unsigned char *)((int)param_1 + 0x39) = bStack_29 >> 2;
-  *(unsigned int *)(param_1 + 0x2c) = 0;
-  *(unsigned int *)(param_1 + 0x2e) = 0;
-  *(unsigned int *)(param_1 + 0x30) = 0;
-  *(unsigned int *)(param_1 + 0x32) = 0;
-  *(unsigned int *)(param_1 + 0x34) = 0;
-  *(unsigned int *)(param_1 + 0x36) = 0;
-  *(unsigned int *)(param_1 + 0x38) = 0;
-  *(unsigned int *)(param_1 + 0x3a) = 0;
-  *(unsigned int *)(param_1 + 0x3c) = 0;
-  *(unsigned int *)(param_1 + 0x3e) = 0;
-  *(unsigned int *)(param_1 + 0x40) = 0;
-  *(unsigned int *)(param_1 + 0x42) = 0;
-  *(unsigned int *)(param_1 + 0x44) = 0;
-  *(unsigned int *)(param_1 + 0x46) = 0;
-  *(unsigned int *)(param_1 + 0x48) = 0;
-  *(unsigned int *)(param_1 + 0x4a) = 0;
-  memClear(param_1 + 0x4c,0x500);
-  return;
+    StatGrades grades;
+
+    memClear(snapshot, 0x5B0);
+    snapshot->slot = -1;
+    snapshot->kind = record->kind;
+    snapshot->experienceToNext = dataTable9EntryOrZero(record->kind) - record->experience;
+    snapshot->hpLow = record->hpLow;
+    snapshot->hpHigh = record->hpHigh;
+    snapshot->maxHp = btlSourceGetMaxHp(record);
+    snapshot->statOffset = record->stats.values[1];
+    snapshot->marker = -1;
+    snapshot->variant = record->variant;
+    snapshot->stats = record->stats;
+    snapshot->groupB = record->groupB;
+    snapshot->skills = record->skills;
+    rt_memcpy_w((void *)snapshot->learned, (void *)record->learned, FUN_0029aafc() * 2);
+    libc_strcpy((void *)snapshot->playerName, gameGetPlayerName());
+    if ((s16)snapshot->stats.values[2] >= 1000) {
+        snapshot->stats.values[2] = 999;
+    }
+    if ((s16)snapshot->stats.values[3] >= 1000) {
+        snapshot->stats.values[3] = 999;
+    }
+    if ((s16)snapshot->stats.values[4] >= 1000) {
+        snapshot->stats.values[4] = 999;
+    }
+    if ((s16)snapshot->stats.values[5] >= 1000) {
+        snapshot->stats.values[5] = 999;
+    }
+    if ((s16)snapshot->stats.values[6] >= 1000) {
+        snapshot->stats.values[6] = 999;
+    }
+    if (dataTable08Sub2GetRecord(record->skills.values[0]) != NULL) {
+        snapshot->skillEffectA = FUN_00253f94();
+    }
+    if (dataTable08Sub2GetRecord(record->skills.values[1]) != NULL) {
+        snapshot->skillEffectB = FUN_00253f94();
+    }
+    if (dataTable08Sub2GetRecord(record->skills.values[2]) != NULL) {
+        snapshot->skillEffectB = FUN_00253f94() + snapshot->skillEffectB;
+    }
+    FUN_00253d60(&grades, record);
+    snapshot->statGrades[0] = grades.values[0] >> 10;
+    snapshot->statGrades[1] = grades.values[1] >> 10;
+    snapshot->statGrades[2] = grades.values[2] >> 10;
+    snapshot->statGrades[3] = grades.values[3] >> 10;
+    snapshot->statGrades[4] = grades.values[4] >> 10;
+    snapshot->statGrades[5] = grades.values[5] >> 10;
+    snapshot->statGrades[6] = grades.values[6] >> 10;
+    snapshot->statGrades[7] = grades.values[7] >> 10;
+    snapshot->cleared[0] = 0;
+    snapshot->cleared[1] = 0;
+    snapshot->cleared[2] = 0;
+    snapshot->cleared[3] = 0;
+    snapshot->cleared[4] = 0;
+    snapshot->cleared[5] = 0;
+    snapshot->cleared[6] = 0;
+    snapshot->cleared[7] = 0;
+    snapshot->cleared[8] = 0;
+    snapshot->cleared[9] = 0;
+    snapshot->cleared[10] = 0;
+    snapshot->cleared[11] = 0;
+    snapshot->cleared[12] = 0;
+    snapshot->cleared[13] = 0;
+    snapshot->cleared[14] = 0;
+    snapshot->cleared[15] = 0;
+    memClear((void *)snapshot->tail, 0x500);
 }
 
 } /* extern "C" */

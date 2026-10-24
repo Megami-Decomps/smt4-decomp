@@ -1,166 +1,139 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003928b4` (_code @ 0x3928b4, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: content-menu update with a second query handler (kind 4) and the 0x66/0x67 result tails; written like FUN_0038e374, retail also copies the polled result through two stack temporaries before the checks (20 more rows) */
+#include "addon/aocMain.h"
+
+/* What a status operation reports: a kind byte and four words of detail. */
+struct AocStatusResult {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 detail[4];
+};
+
+/* The query operation the menu is polling (its deleting destructor is vtable slot 1). */
+class AocQueryHandler {
+public:
+    virtual ~AocQueryHandler();
+    virtual void vfunc08();
+    virtual AocStatusResult poll();
+};
+
+/* A queried slot record: the 16-bit value read for a slot (+0x9AA of each 0x9C8-byte record). */
+struct AocSlotRecord {
+    /* 0x000 */ u8 unk000[0x9AA];
+    /* 0x9AA */ u16 value;
+    /* 0x9AC */ u8 unk9AC[0x1C];
+};
+
+struct AocSlotTable {
+    /* 0x00 */ u8 unk00[0x678];
+    /* 0x678 */ AocSlotRecord *records;
+};
+
+/* A handler's own state: only the word the menu fills in after creating it. */
+struct AocQueryHandlerState {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 slotValue;
+};
+
+struct AocQueryMenu {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 step;
+    /* 0x00C */ s32 counter;
+    /* 0x010 */ u8 unk010[0x1F8];
+    /* 0x208 */ AocQueryHandler *handler;
+    /* 0x20C */ u8 handlerStorage[4];
+    /* 0x210 */ AocStatusResult result;
+    /* 0x224 */ u8 unk224[0x1C];
+    /* 0x240 */ u8 slotHolder[0x74];
+};
 
 extern "C" {
+extern AocSlotTable *g_aocMain;
 
-int FUN_00233e70(int, int, int);
-int FUN_00233fcc(int, int);
-int timeInitializeActiveState(unsigned int *);
-int FUN_00234124(int, unsigned int *);
+void FUN_00233e70(AocQueryMenu *menu, s32 first, s32 second);
+AocQueryHandler *FUN_00233fcc(u8 *storage, s32 kind);
+void timeInitializeActiveState(AocStatusResult *result);
+void FUN_00234124(AocQueryMenu *menu, AocStatusResult *result);
+s32 strIsEmpty(const AocStatusResult *result);
+s32 byteIsAtLeast100(const AocStatusResult *result);
+s32 flaggedValueHolderGetTotal(void *holder);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_1_stack;
+#define AOC_RESULT_RETRY 0x66
+#define AOC_RESULT_DONE 0x67
 
-extern int g_aocMain; /* 0x432fc8 */
-
-extern int flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_00233e70. */
-/* Supplied declaration required: FUN_00233fcc. */
-/* Supplied declaration required: timeInitializeActiveState. */
-/* Supplied declaration required: FUN_00234124. */
-extern int strIsEmpty(unsigned int *);
-extern int byteIsAtLeast100(unsigned int *);
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-void FUN_003928b4(int param_1)
-
+/* Per-frame update of the content menu: starts its query handlers, polls them and reports the
+ * result (first query at step 0..2, slot query at step 2..3). */
+void FUN_003928b4(AocQueryMenu *menu)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  unsigned int temp_v3;
-  unsigned int uStack_54;
-  unsigned int uStack_50;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
-  unsigned int temp_v4;
-  unsigned int uStack_40;
-  unsigned int uStack_3c;
-  unsigned int uStack_38;
-  unsigned int uStack_34;
-  unsigned int temp_v5;
-  unsigned int uStack_2c;
-  unsigned int uStack_28;
-  unsigned int uStack_24;
-  unsigned int uStack_20;
-  
-  timeInitializeActiveState(&temp_v3);
-  temp_v2 = g_aocMain;
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 3) {
-    if (temp_v0 >= 3) {
-      if (temp_v0 != 4) {
-        if (temp_v0 != 9999) {
-          return;
+    AocStatusResult result;
+    timeInitializeActiveState(&result);
+    AocSlotTable *aocMain = g_aocMain;
+
+    switch (menu->step) {
+    case 3:
+    case 1: {
+        AocStatusResult polled = menu->handler->poll();
+        result = polled;
+        if (strIsEmpty(&result) != 0) {
+            if (menu->step == 3) {
+                menu->state = 10;
+                menu->step = 0;
+                if (menu->handler != NULL) {
+                    delete menu->handler;
+                    menu->handler = NULL;
+                }
+            } else {
+                menu->step = 2;
+            }
+            return;
         }
-        FUN_00233e70(param_1,5,3);
+        if (byteIsAtLeast100(&result) == 0)
+            return;
+        if (result.kind == AOC_RESULT_RETRY) {
+            AocStatusResult copy = result;
+            FUN_00234124(menu, &copy);
+            return;
+        }
+        if (result.kind != AOC_RESULT_DONE) {
+            menu->step = 9999;
+            menu->result = result;
+            return;
+        }
+        menu->step = 4;
+        menu->counter = 3;
         return;
-      }
-      temp_v2 = *(int *)(param_1 + 0xc) - 1;
-      *(int *)(param_1 + 0xc) = temp_v2;
-      if (0 < temp_v2) {
+    }
+    case 0: {
+        AocQueryHandler *created = FUN_00233fcc(menu->handlerStorage, 0);
+        menu->step = 1;
+        menu->handler = created;
         return;
-      }
-      piVar4 = *(int **)(param_1 + 0x208);
-      *(unsigned int *)(param_1 + 4) = 6;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (piVar4 == (int *)0x0) {
+    }
+    case 2: {
+        if (menu->handler != NULL)
+            delete menu->handler;
+        AocQueryHandler *created = FUN_00233fcc(menu->handlerStorage, 4);
+        menu->handler = created;
+        s32 slot = flaggedValueHolderGetTotal(menu->slotHolder);
+        ((AocQueryHandlerState *)created)->slotValue = aocMain->records[slot].value;
+        menu->step = 3;
         return;
-      }
-      (**(romwright_code **)(*piVar4 + 4))();
-      *(unsigned int *)(param_1 + 0x208) = 0;
-      return;
     }
-    if (temp_v0 == 0) {
-      temp_v2 = param_1 + 0x20c;
-      FUN_00233fcc(temp_v2,0);
-      *(unsigned int *)(param_1 + 8) = 1;
-      *(int *)(param_1 + 0x208) = temp_v2;
-      return;
-    }
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
+    case 4:
+        menu->counter--;
+        if (menu->counter > 0)
+            return;
+        menu->state = 6;
+        menu->step = 0;
+        if (menu->handler != NULL) {
+            delete menu->handler;
+            menu->handler = NULL;
+        }
         return;
-      }
-      if (*(int **)(param_1 + 0x208) != (int *)0x0) {
-        (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
-      }
-      temp_v0 = param_1 + 0x20c;
-      FUN_00233fcc(temp_v0,4);
-      *(int *)(param_1 + 0x208) = temp_v0;
-      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x240);
-      *(unsigned int *)(temp_v0 + 0x14) = (unsigned int)*(unsigned short *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9aa);
-      *(unsigned int *)(param_1 + 8) = 3;
-      return;
-    }
-    (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v4);
-    temp_v3 = temp_v4;
-    uStack_54 = uStack_40;
-    uStack_50 = uStack_3c;
-    uStack_4c = uStack_38;
-    uStack_48 = uStack_34;
-    temp_v2 = strIsEmpty(&temp_v3);
-    if (temp_v2 != 0) {
-      *(unsigned int *)(param_1 + 8) = 2;
-      return;
-    }
-    temp_v2 = byteIsAtLeast100(&temp_v3);
-  }
-  else {
-    (**(romwright_code **)(**(int **)(param_1 + 0x208) + 0xc))(&temp_v4);
-    temp_v3 = temp_v4;
-    uStack_54 = uStack_40;
-    uStack_50 = uStack_3c;
-    uStack_4c = uStack_38;
-    uStack_48 = uStack_34;
-    temp_v2 = strIsEmpty(&temp_v3);
-    if (temp_v2 != 0) {
-      piVar4 = *(int **)(param_1 + 0x208);
-      *(unsigned int *)(param_1 + 4) = 10;
-      *(unsigned int *)(param_1 + 8) = 0;
-      if (piVar4 == (int *)0x0) {
+    case 9999:
+        FUN_00233e70(menu, 5, 3);
         return;
-      }
-      (**(romwright_code **)(*piVar4 + 4))();
-      *(unsigned int *)(param_1 + 0x208) = 0;
-      return;
     }
-    temp_v2 = byteIsAtLeast100(&temp_v3);
-  }
-  if (temp_v2 == 0) {
-    return;
-  }
-  if ((temp_v3 & 0xff) != 0x66) {
-    if ((temp_v3 & 0xff) != 0x67) {
-      *(unsigned int *)(param_1 + 8) = 9999;
-      *(unsigned int *)(param_1 + 0x210) = temp_v3;
-      *(unsigned int *)(param_1 + 0x214) = uStack_54;
-      *(unsigned int *)(param_1 + 0x218) = uStack_50;
-      *(unsigned int *)(param_1 + 0x21c) = uStack_4c;
-      *(unsigned int *)(param_1 + 0x220) = uStack_48;
-      return;
-    }
-    *(unsigned int *)(param_1 + 8) = 4;
-    *(unsigned int *)(param_1 + 0xc) = 3;
-    return;
-  }
-  temp_v5 = temp_v3;
-  uStack_2c = uStack_54;
-  uStack_28 = uStack_50;
-  uStack_24 = uStack_4c;
-  uStack_20 = uStack_48;
-  FUN_00234124(param_1,&temp_v5);
-  return;
 }
 
-} /* extern "C" */
+}

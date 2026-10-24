@@ -1,166 +1,126 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00193130` (_code @ 0x193130, 0x300 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the particle emitter update; the float/int mixed emitter block is typed here by its use (retail passes its address to the parameter helpers), and armcc here keeps the ring indices, 10.0f and 0.01f in different registers across the helper calls. */
+#include "common.h"
+
+/* A spawned particle node (only the fields the emitter sets). */
+struct ParticleNode {
+    /* 0x000 */ u8 unk000[0x120];
+    /* 0x120 */ f32 life;
+    /* 0x124 */ u8 unk124[0xD0];
+    /* 0x1F4 */ f32 size;
+    /* 0x1F8 */ u8 unk1F8[0x144];
+    /* 0x33C */ f32 origin;
+    /* 0x340 */ f32 offsetA;
+    /* 0x344 */ f32 offsetB;
+    /* 0x348 */ u8 unk348[4];
+    /* 0x34C */ f32 tint;
+};
+
+#define EMITTER_RING 50
+
+/* A particle emitter. */
+struct ParticleEmitter {
+    /* 0x000 */ f32 count;              /* particles to have spawned by the end of the frame */
+    /* 0x004 */ u32 state[8];
+    /* 0x024 */ s32 frame;
+    /* 0x028 */ u32 spawnA;
+    /* 0x02C */ u32 spawnB;
+    /* 0x030 */ u32 spawnC;
+    /* 0x034 */ s32 spawned;
+    /* 0x038 */ u8 position[0x134];
+    /* 0x16C */ s32 colorValue;
+    /* 0x170 */ s32 offsetBase;
+    /* 0x174 */ s32 offsetRange;
+    /* 0x178 */ u8 unk178[4];
+    /* 0x17C */ f32 lifeSeconds;
+    /* 0x180 */ s32 lifeJitter;
+    /* 0x184 */ s32 duration;
+    /* 0x188 */ s32 tintValue;
+    /* 0x18C */ u8 unk18C[0x90];
+    /* 0x21C */ u32 contextB;
+    /* 0x220 */ u32 contextC;
+    /* 0x224 */ u32 context;
+    /* 0x228 */ u32 *owner;
+    /* 0x22C */ u8 flag;
+    /* 0x22D */ u8 unk22D[3];
+    /* 0x230 */ s32 head;
+    /* 0x234 */ s32 tail;
+    /* 0x238 */ ParticleNode *nodes[EMITTER_RING];
+    /* 0x300 */ s16 repeats;
+};
 
 extern "C" {
+void nodeTreeReleaseItemClearOwner(ParticleNode *node);
+void nodeTreeReleaseItem(void *item);
+ParticleNode *FUN_00291310(u32 context, void *position, void *params, s32 two, u32 contextB, ParticleNode **slot,
+                           u32 index, u32 flag, s32 one, u32 contextC);
+f32 FUN_00291620(s32 a, s32 b, s32 c);
+f32 FUN_00291234(s32 a, u32 b, s32 c);
+f32 FUN_0029118c(s32 a, s32 b, s32 c);
+void FUN_00291340(void *params, void *a, void *b, void *c, void *d);
+void FUN_00291060(void *params, void *a, void *b, void *c, void *d, void *e, void *f, void *g);
 
-int FUN_00291060(float *, float *, float *, float *, float *, float *, float *, float *);
-int FUN_0029118c(int, double, int);
-int FUN_00291234(int, double, int);
-int FUN_00291310(double, float *, float *, int, double, float *, unsigned int, int, int, double);
-int FUN_00291340(float *, float *, float *, float *, float *);
-int nodeTreeReleaseItemClearOwner(double);
-int FUN_00291620(int, double, int);
-int nodeTreeReleaseItem(...);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(double, int);
-
-#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
-#define ROMWRIGHT_FLOAT_BITS_DEFINED
-static unsigned int romwright_f2u(float value)
+/* Advances a particle emitter by one frame: spawns the particles due this frame into its ring of
+ * nodes, or at the end of its duration restarts it (while repeats remain) or releases it. */
+void FUN_00193130(ParticleEmitter *emitter)
 {
-    union { float f; unsigned int u; } bits;
-    bits.f = value;
-    return bits.u;
-}
-static float romwright_u2f(unsigned int value)
-{
-    union { float f; unsigned int u; } bits;
-    bits.u = value;
-    return bits.f;
-}
-#endif
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00291060. */
-/* Supplied declaration required: FUN_0029118c. */
-/* Supplied declaration required: FUN_00291234. */
-/* Supplied declaration required: FUN_00291310. */
-/* Supplied declaration required: FUN_00291340. */
-/* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
-/* Supplied declaration required: FUN_00291620. */
-/* Supplied declaration required: nodeTreeReleaseItem. */
-
-
-void FUN_00193130(float *param_1)
-
-{
-/* irregular: irregular input(s): in_d8, in_fpscr; 11 native warning(s); review required */
-  short temp_v0;
-  float temp_v1;
-  float temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  float temp_v6;
-  unsigned long long in_d8;
-  long long temp_v7;
-  unsigned int temp_v8;
-  unsigned long long temp_v9;
-  
-  temp_v8 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
-  if (param_1[0x61] == param_1[9]) {
-    temp_v0 = *(short *)(param_1 + 0xc0) - 1;
-    *(short *)(param_1 + 0xc0) = temp_v0;
-    param_1[9] = 0.0f;
-    if (temp_v0 < 1) {
-      temp_v3 = 0;
-      if (param_1 != (float *)0x0) {
-        do {
-          nodeTreeReleaseItemClearOwner(param_1[temp_v3 + 0x8e]);
-          temp_v3 = temp_v3 + 1;
-        } while (temp_v3 < 0x32);
-        param_1[9] = 0.0f;
-        param_1[10] = 0.0f;
-        param_1[0xb] = 0.0f;
-        param_1[0xc] = 0.0f;
-        if ((unsigned int *)romwright_f2u((float)(param_1[0x8a])) != (unsigned int *)0x0) {
-          *(unsigned int *)romwright_f2u((float)(param_1[0x8a])) = 0;
+    if (emitter->duration == emitter->frame) {
+        emitter->repeats--;
+        emitter->frame = 0;
+        if (emitter->repeats <= 0) {
+            if (emitter != NULL) {
+                for (s32 i = 0; i < EMITTER_RING; i++)
+                    nodeTreeReleaseItemClearOwner(emitter->nodes[i]);
+                emitter->frame = 0;
+                emitter->spawnA = 0;
+                emitter->spawnB = 0;
+                emitter->spawnC = 0;
+                if (emitter->owner != NULL)
+                    *emitter->owner = 0;
+                nodeTreeReleaseItem(emitter);
+            }
+        } else {
+            for (s32 i = 0; i < 9; i++)
+                ((u32 *)emitter)[i] = 0;
+            emitter->spawnA = 0;
+            emitter->spawnB = 0;
+            emitter->spawnC = 0;
+            emitter->spawned = 0;
+            FUN_00291340(&emitter->colorValue, &emitter->spawnA, &emitter->spawnC, &emitter->state[2],
+                         &emitter->state[5]);
         }
-        nodeTreeReleaseItem(param_1);
         return;
-      }
     }
-    else {
-      *param_1 = 0.0f;
-      param_1[1] = 0.0f;
-      param_1[2] = 0.0f;
-      param_1[3] = 0.0f;
-      param_1[4] = 0.0f;
-      param_1[5] = 0.0f;
-      param_1[6] = 0.0f;
-      param_1[7] = 0.0f;
-      param_1[8] = 0.0f;
-      param_1[10] = 0.0f;
-      param_1[0xb] = 0.0f;
-      param_1[0xc] = 0.0f;
-      param_1[0xd] = 0.0f;
-      FUN_00291340(param_1 + 0x5b,param_1 + 10,param_1 + 0xc,param_1 + 3,param_1 + 6);
+    if (emitter->head >= 0 && emitter->nodes[emitter->head] == NULL) {
+        do {
+            if (emitter->tail == emitter->head)
+                break;
+            emitter->head = (emitter->head + 1) % EMITTER_RING;
+        } while (emitter->nodes[emitter->head] == NULL);
     }
-    return;
-  }
-  if ((-1 < (int)param_1[0x8c]) && (param_1[(int)param_1[0x8c] + 0x8e] == 0.0f)) {
-    do {
-      if (param_1[0x8d] == param_1[0x8c]) break;
-      temp_v1 = (float)(((int)param_1[0x8c] + 1) % 0x32);
-      param_1[0x8c] = temp_v1;
-    } while (param_1[(int)temp_v1 + 0x8e] == 0.0f);
-  }
-  temp_v3 = 0;
-  temp_v4 = (int)*param_1 - (int)param_1[0xd];
-  if (0 < temp_v4) {
-    temp_v8 = 0x41200000;
-  }
-  temp_v7 = (unsigned long long)temp_v8 << 0x20;
-  if (0 < temp_v4) {
-    temp_v9 = 0x3c23d70a;
-    do {
-      temp_v1 = (float)(((int)param_1[0x8d] + 1) % 0x32);
-      if ((int)param_1[0x8c] < 0) {
-        param_1[0x8c] = 0.0f;
-      }
-      else if (param_1[(int)temp_v1 + 0x8e] != 0.0f) {
-        nodeTreeReleaseItem();
-      }
-      temp_v5 = (float)VectorFloatToUnsigned(param_1[0x5f] * (float)((unsigned long long)temp_v7 >> 0x20),3);
-      temp_v2 = param_1[0x89];
-      temp_v6 = temp_v5;
-      FUN_00291310(temp_v2,param_1 + 0xe,param_1 + 0x5b,2,param_1[0x87],param_1 + (int)temp_v1 + 0x8e,
-                   (unsigned int)temp_v1 & 0xff,*(unsigned char *)(param_1 + 0x8b),1,param_1[0x88]);
-      param_1[(int)temp_v1 + 0x8e] = temp_v2;
-      FUN_00291620(2,param_1[0x60],100);
-      temp_v6 = temp_v6 + *(float *)((int)temp_v2 + 0x120);
-      *(float *)((int)temp_v2 + 0x120) = temp_v6;
-      FUN_00291234(0,temp_v5,10);
-      *(float *)((int)temp_v2 + 500) = temp_v6 * *(float *)((int)temp_v2 + 500);
-      temp_v6 = (float)VectorSignedToFloat(param_1[0x62],(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)((int)temp_v2 + 0x34c) = temp_v6;
-      FUN_00291620(0,param_1[0x5c],100);
-      temp_v5 = (float)VectorSignedToFloat(param_1[0x5b],(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v6 = temp_v6 + temp_v5 * (float)temp_v9;
-      *(float *)((int)temp_v2 + 0x340) = temp_v6;
-      *(int *)((int)temp_v2 + 0x33c) = (int)temp_v7;
-      FUN_0029118c(2,param_1[0x5d],100);
-      *(float *)((int)temp_v2 + 0x344) = temp_v6;
-      temp_v3 = temp_v3 + 1;
-      param_1[0xd] = (float)((int)param_1[0xd] + 1);
-      param_1[0x8d] = temp_v1;
-    } while (temp_v3 < temp_v4);
-  }
-  FUN_00291060(param_1 + 0x5b,param_1 + 0xb,param_1 + 10,param_1 + 0xc,param_1,param_1 + 3,
-               param_1 + 6,param_1 + 0xd);
-  param_1[9] = (float)((int)param_1[9] + 1);
-  return;
+    s32 due = (s32)emitter->count - emitter->spawned;
+    for (s32 n = 0; n < due; n++) {
+        s32 index = (emitter->tail + 1) % EMITTER_RING;
+        if (emitter->head < 0)
+            emitter->head = 0;
+        else if (emitter->nodes[index] != NULL)
+            nodeTreeReleaseItem(emitter->nodes[index]);
+        u32 life = (u32)(emitter->lifeSeconds * 10.0f);
+        ParticleNode *node = FUN_00291310(emitter->context, emitter->position, &emitter->colorValue, 2,
+                                          emitter->contextB, &emitter->nodes[index], (u8)index, emitter->flag, 1,
+                                          emitter->contextC);
+        emitter->nodes[index] = node;
+        node->life = FUN_00291620(2, emitter->lifeJitter, 100) + node->life;
+        node->size = FUN_00291234(0, life, 10) * node->size;
+        node->tint = (f32)emitter->tintValue;
+        node->offsetA = FUN_00291620(0, emitter->offsetBase, 100) + (f32)emitter->colorValue * 0.01f;
+        node->origin = 0.0f;
+        node->offsetB = FUN_0029118c(2, emitter->offsetRange, 100);
+        emitter->spawned++;
+        emitter->tail = index;
+    }
+    FUN_00291060(&emitter->colorValue, &emitter->spawnB, &emitter->spawnA, &emitter->spawnC, emitter,
+                 &emitter->state[2], &emitter->state[5], &emitter->spawned);
+    emitter->frame++;
 }
 
 } /* extern "C" */

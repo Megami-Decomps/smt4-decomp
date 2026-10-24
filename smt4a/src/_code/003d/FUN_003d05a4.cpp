@@ -1,171 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d05a4` (_code @ 0x3d05a4, 0x314 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: builds the 3-5 entry choice menu (entries 0 and 4 depend on flags 0x558 / 0x559) and its sprites; written from the decompilation, branch layout not compared with retail */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+
+struct MenuSprite {
+    /* 0x00 */ u8 data[0x8C];
+};
+
+struct MenuChoice {
+    /* 0x00 */ s32 icon;
+    /* 0x04 */ s32 index;
+};
+
+struct ChoiceMenuWork {
+    /* 0x000 */ u8 unk000[0x88];
+    /* 0x088 */ s32 selected;
+    /* 0x08C */ s32 frameTop;
+    /* 0x090 */ s32 frameBottom;
+    /* 0x094 */ MenuChoice choices[5];
+    /* 0x0BC */ s32 end;
+    /* 0x0C0 */ u8 unk0C0[8];
+    /* 0x0C8 */ UiResourceParameters resources;
+    /* 0x0E8 */ MenuSprite header;
+    /* 0x174 */ MenuSprite entries[5];
+    /* 0x430 */ MenuSprite cursor;
+    /* 0x4BC */ s32 cursorShown;
+};
+
+#define MENU_FLAG_EXTRA_TOP 0x558
+#define MENU_FLAG_EXTRA_BOTTOM 0x559
+#define MENU_CHOICE_COUNT 5
 
 extern "C" {
+extern const u8 DAT_0052c83c;
+extern const u8 DAT_0052c854;
+extern const u8 DAT_0052c884;
 
-int FUN_0014e188(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(...);
-int gameFlagIsSet(int);
-int FUN_00203b40(int, int, int, int, int, int);
-int FUN_002a4964(int, unsigned int);
-int paramsClearPacket(int);
+s32 gameFlagIsSet(s32 flag);
+void FUN_00203b40(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
+void FUN_002a4964(ChoiceMenuWork *work, s32 selected);
+void paramsClearPacket(UiResourceParameters *resources);
+void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
+                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
+                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+void FUN_0014e188(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flag);
+void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe);
+void uiSpriteSetImageKeyframe(MenuSprite *sprite, s32 keyframe);
+void uiSpriteSelectAnim(MenuSprite *sprite, s32 animation);
 
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-extern unsigned char DAT_0052c83c; /* 0x52c83c */
-extern unsigned char DAT_0052c854; /* 0x52c854 */
-extern unsigned char DAT_0052c884; /* 0x52c884 */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_003d05a4(int param_1,unsigned short param_2)
-
+/* Sets up the menu: frame size by entry count, the visible entries (icon, slot), the initial
+ * selection from `initial` and the sprites. */
+void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
 {
-/* irregular: 1 goto(s); 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = 3;
-  temp_v0 = gameFlagIsSet(0x558);
-  if (temp_v0 != 0) {
-    temp_v5 = 4;
-  }
-  temp_v0 = gameFlagIsSet(0x559);
-  if (temp_v0 != 0) {
-    temp_v5 = temp_v5 + 1;
-  }
-  if (temp_v5 != 3) {
-    if (temp_v5 == 4) {
-      temp_v1 = 0x7b;
-      temp_v3 = 0x7f;
+    s32 count = 3;
+    if (gameFlagIsSet(MENU_FLAG_EXTRA_TOP) != 0)
+        count = 4;
+    if (gameFlagIsSet(MENU_FLAG_EXTRA_BOTTOM) != 0)
+        count++;
+
+    if (count == 3) {
+        work->frameTop = 0x75;
+        work->frameBottom = 0x78;
+    } else if (count == 4) {
+        work->frameTop = 0x7B;
+        work->frameBottom = 0x7F;
+    } else {
+        work->frameTop = 0x83;
+        work->frameBottom = 0x88;
     }
-    else {
-      temp_v1 = 0x83;
-      temp_v3 = 0x88;
+
+    s32 shown = 0;
+    for (s32 slot = 0; slot < MENU_CHOICE_COUNT; slot++) {
+        work->choices[slot].icon = -1;
+        work->choices[slot].index = -1;
+        if (slot == 0 && gameFlagIsSet(MENU_FLAG_EXTRA_TOP) == 0)
+            continue;
+        if (slot == 4 && gameFlagIsSet(MENU_FLAG_EXTRA_BOTTOM) == 0)
+            break;
+        s32 icon;
+        switch (slot) {
+        case 0: icon = 3; break;
+        case 1: icon = 1; break;
+        case 2: icon = 0; break;
+        case 3: icon = 2; break;
+        case 4: icon = 4; break;
+        default: icon = -1; break;
+        }
+        work->choices[shown].icon = icon;
+        work->choices[shown].index = slot;
+        shown++;
     }
-    *(unsigned int *)(param_1 + 0x8c) = temp_v1;
-    *(unsigned int *)(param_1 + 0x90) = temp_v3;
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x8c) = 0x75;
-    *(unsigned int *)(param_1 + 0x90) = 0x78;
-  }
-  temp_v4 = 0;
-  temp_v0 = 0;
-  do {
-    temp_v2 = param_1 + temp_v0 * 8;
-    *(unsigned int *)(temp_v2 + 0x94) = 0xffffffff;
-    *(unsigned int *)(temp_v2 + 0x98) = 0xffffffff;
-    if (temp_v0 != 0) {
-      if ((temp_v0 == 4) && (temp_v2 = gameFlagIsSet(0x559), temp_v2 == 0)) goto LAB_003d06d4;
+
+    work->end = -1;
+    s32 selected;
+    switch (initial) {
+    case 0: selected = 2; break;
+    case 1: selected = 1; break;
+    case 2: selected = 3; break;
+    case 3: selected = 0; break;
+    case 4: selected = 4; break;
+    default: selected = -1; break;
     }
-    else {
-      temp_v2 = gameFlagIsSet(0x558);
-      if (temp_v2 == 0) {
-        temp_v0 = 1;
-        continue;
-      }
+    if (gameFlagIsSet(MENU_FLAG_EXTRA_TOP) == 0)
+        selected--;
+    work->selected = selected;
+
+    FUN_00203b40(work, count, count, 1, 0, 1);
+    FUN_002a4964(work, work->selected);
+    paramsClearPacket(&work->resources);
+    paramsInit(&work->resources, &DAT_0052c83c, 0x18, &DAT_0052c854, 0x30, NULL, 0, NULL, 0, &DAT_0052c884, 0x70);
+    FUN_0014e188(&work->header, 0x24, 0x57, &work->resources, 1);
+    uiSpriteSetKeyframe(&work->header, 0);
+    uiSpriteSetImageKeyframe(&work->header, 0);
+    for (s32 i = 0; i < MENU_CHOICE_COUNT; i++) {
+        FUN_0014e188(&work->entries[i], 0x24, 0x57, &work->resources, 1);
+        uiSpriteSetKeyframe(&work->entries[i], 0);
+        uiSpriteSetImageKeyframe(&work->entries[i], 0);
     }
-    switch(temp_v0) {
-    case 0:
-      temp_v1 = 3;
-      break;
-    case 1:
-      temp_v1 = 1;
-      break;
-    case 2:
-      temp_v1 = 0;
-      break;
-    case 3:
-      temp_v1 = 2;
-      break;
-    case 4:
-      temp_v1 = 4;
-      break;
-    default:
-      temp_v1 = 0xffffffff;
-    }
-    temp_v2 = param_1 + temp_v4 * 8;
-    temp_v4 = temp_v4 + 1;
-    *(unsigned int *)(temp_v2 + 0x94) = temp_v1;
-    *(int *)(temp_v2 + 0x98) = temp_v0;
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 5) {
-LAB_003d06d4:
-      *(unsigned int *)(param_1 + 0xbc) = 0xffffffff;
-      switch(param_2) {
-      case 0:
-        temp_v0 = 2;
-        break;
-      case 1:
-        temp_v0 = 1;
-        break;
-      case 2:
-        temp_v0 = 3;
-        break;
-      case 3:
-        temp_v0 = 0;
-        break;
-      case 4:
-        temp_v0 = 4;
-        break;
-      default:
-        temp_v0 = -1;
-      }
-      temp_v4 = gameFlagIsSet(0x558);
-      if (((temp_v4 == 0) || (temp_v4 = gameFlagIsSet(0x559), temp_v4 == 0)) &&
-         (temp_v4 = gameFlagIsSet(0x558), temp_v4 == 0)) {
-        gameFlagIsSet(0x559);
-        temp_v0 = temp_v0 - 1;
-      }
-      *(int *)(param_1 + 0x88) = temp_v0;
-      FUN_00203b40(param_1,temp_v5,temp_v5,1,0,1);
-      FUN_002a4964(param_1,*(unsigned int *)(param_1 + 0x88));
-      paramsClearPacket(param_1 + 200);
-      paramsInit(param_1 + 200,&DAT_0052c83c,0x18,&DAT_0052c854,0x30,0,0,0,0,&DAT_0052c884,0x70);
-      FUN_0014e188(param_1 + 0xe8,0x24,0x57,param_1 + 200,1);
-      uiSpriteSetKeyframe(param_1 + 0xe8,0);
-      uiSpriteSetImageKeyframe(param_1 + 0xe8,0);
-      temp_v0 = 0;
-      do {
-        temp_v5 = param_1 + temp_v0 * 0x8c;
-        FUN_0014e188(temp_v5 + 0x174,0x24,0x57,param_1 + 200,1);
-        uiSpriteSetKeyframe(temp_v5 + 0x174,0);
-        uiSpriteSetImageKeyframe(temp_v5 + 0x174,0);
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 5);
-      FUN_0014e188(param_1 + 0x430,0x24,1,param_1 + 200,1);
-      uiSpriteSelectAnim(param_1 + 0x430,0);
-      *(unsigned int *)(param_1 + 0x4bc) = 0;
-      return;
-    }
-  } while( 1 );
+    FUN_0014e188(&work->cursor, 0x24, 1, &work->resources, 1);
+    uiSpriteSelectAnim(&work->cursor, 0);
+    work->cursorShown = 0;
 }
 
 } /* extern "C" */

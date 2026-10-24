@@ -1,202 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001079d8` (_code @ 0x1079d8, 0x320 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: creates the model scene cameras (two default dynamic cameras, the lens camera chosen by the lens mode, a look-at camera) and attaches them to the scene roots; written from the decompilation and the retail disassembly, the inlined shared-resource release and vector set-up are not compared with retail */
+#include "common.h"
+
+struct NwResource;
+
+struct NwResourceOwnerVtable {
+    void *slots[3];
+    void (*release)(void *owner, NwResource *resource);
+};
+
+struct NwResourceOwner {
+    NwResourceOwnerVtable *vtable;
+};
+
+struct NwResourceVtable {
+    void (*finalize)(NwResource *resource);
+};
+
+struct NwResource {
+    NwResourceVtable *vtable;
+    NwResourceOwner *owner;
+    u8 owned;
+};
+
+struct NwVec3 {
+    NwVec3(f32 vx, f32 vy, f32 vz) : x(vx), y(vy), z(vz) {}
+    void set(f32 vx, f32 vy, f32 vz) { x = vx; y = vy; z = vz; }
+    f32 x, y, z;
+};
+
+struct NwVec2 {
+    f32 x, y;
+};
+
+/* The shared pointer a builder keeps its resources in. */
+struct NwResourceRef {
+    NwResource *resource;
+    u8 owns;
+};
+
+struct NwCameraBuilder {
+    /* 0x00 */ u8 enabled;
+    /* 0x01 */ u8 visible;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ NwResourceRef transform;
+    /* 0x18 */ NwResourceRef projection;
+};
+
+struct NwCamera {
+    /* 0x000 */ u8 unk000[0x294];
+    /* 0x294 */ f32 distance;
+};
+
+#define MODEL_CAMERA_LENS_ORTHOGRAPHIC 0
+#define MODEL_CAMERA_LENS_CUSTOM 2
 
 extern "C" {
+extern u8 DAT_00464af4;             /* lens mode */
+extern u32 DAT_00464b10;            /* look-at camera */
+extern NwCamera *DAT_00464b14;      /* default camera A */
+extern NwCamera *DAT_00464b18;      /* default camera B */
+extern NwCamera *DAT_00464b1c;      /* preview camera */
+extern NwCamera *DAT_00464b34;      /* lens camera */
+extern NwVec2 DAT_00464b3c;         /* lens x, y */
+extern u32 g_asdModelSlotArray0;
+extern u32 DAT_00464ba0;
 
-int FUN_00119e54(int, int *, unsigned int **, unsigned int **, int);
-int drawableSetRectangle(void);
-int FUN_002c05f4(...);
-int asdMemoryGetDefaultAllocator(void);
-int VectorUnsignedToFloat(unsigned int, int);
-int nw_gfx_Camera_DynamicBuilder_Create(unsigned char *, unsigned int);
-int nw_gfx_SceneNode_AttachChild(...);
+u32 asdMemoryGetDefaultAllocator(void);
+NwCamera *FUN_002c05f4(u32 allocator, const NwVec3 *eye, const NwVec3 *target, u32 flags, NwVec2 lens, f32 near);
+NwCamera *FUN_00119e54(u32 allocator, const NwVec3 *eye, const NwVec3 *target, const NwVec3 *up, u8 mode,
+                       NwVec2 lens, f32 near);
+NwCamera *nw_gfx_Camera_DynamicBuilder_Create(NwCameraBuilder *builder, u32 allocator);
+void nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
+void drawableSetRectangle(NwCamera *camera, NwVec2 rectangle, f32 aspect);
 
-typedef int romwright_code(...);
-/* stack frame of void: 17 slot(s), 59 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned char sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned char sp87; /* 0x87: local_87 */
-    unsigned char sp88; /* 0x88: local_88 */
-    unsigned int sp90; /* 0x90: local_90 */
-} void_stack;
+static __inline void nwResourceRelease(NwResourceRef *ref)
+{
+    NwResource *resource = ref->resource;
+    if (resource != NULL && ref->owns != 0) {
+        resource->vtable->finalize(resource);
+        resource->owner->vtable->release(resource->owner, resource);
+    }
+}
 
-extern unsigned char DAT_00464af4; /* 0x464af4 */
-extern unsigned int DAT_00464b10; /* 0x464b10 */
-extern unsigned char *DAT_00464b14; /* 0x464b14 */
-extern unsigned char *DAT_00464b18; /* 0x464b18 */
-extern unsigned int DAT_00464b1c; /* 0x464b1c */
-extern int DAT_00464b34; /* 0x464b34 */
-extern float DAT_00464b40; /* 0x464b40 */
-extern unsigned int g_asdModelSlotArray0; /* 0x464b9c */
-extern unsigned int DAT_00464ba0; /* 0x464ba0 */
-
-#ifndef ROMWRIGHT_PIECE_3_1_DEFINED
-#define ROMWRIGHT_PIECE_3_1_DEFINED
-#define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00119e54. */
-/* Supplied declaration required: drawableSetRectangle. */
-/* Supplied declaration required: FUN_002c05f4. */
-/* Supplied declaration required: asdMemoryGetDefaultAllocator. */
-/* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
-/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
-
+/* A camera made from an empty dynamic builder. */
+static __inline NwCamera *modelDefaultCamera(u32 allocator)
+{
+    NwCameraBuilder builder;
+    builder.enabled = 1;
+    builder.visible = 1;
+    builder.unk04 = 0;
+    builder.unk08 = 0;
+    builder.unk0C = 1;
+    builder.transform.resource = NULL;
+    builder.transform.owns = 1;
+    builder.projection.resource = NULL;
+    builder.projection.owns = 1;
+    NwCamera *camera = nw_gfx_Camera_DynamicBuilder_Create(&builder, allocator);
+    nwResourceRelease(&builder.transform);
+    nwResourceRelease(&builder.projection);
+    return camera;
+}
 
 void FUN_001079d8(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  int *piVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int in_fpscr;
-  unsigned long long temp_v3;
-  unsigned int *puVar7;
-  float temp_v4;
-  unsigned int *puVar9;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  int temp_v8;
-  unsigned int *temp_v9;
-  int temp_v10;
-  unsigned int *temp_v11;
-  unsigned int temp_v12;
-  unsigned int *temp_v13;
-  unsigned int temp_v14;
-  unsigned int *temp_v15;
-  int temp_v16;
-  unsigned int uStack_5c;
-  unsigned int temp_v17;
-  unsigned int *temp_v18;
-  unsigned int uStack_50;
-  unsigned int *temp_v19;
-  unsigned int *temp_v20;
-  unsigned int *temp_v21;
-  
-  temp_v0 = asdMemoryGetDefaultAllocator();
-  temp_v3 = 0x4170000041a00000;
-  temp_v4 = 1.0f;
-  puVar9 = (unsigned int *)0x0;
-  temp_v5 = 0x41200000;
-  temp_v18 = (unsigned int *)0x41a00000;
-  uStack_50 = 0x41700000;
-  temp_v19 = (unsigned int *)0x41a00000;
-  temp_v16 = 0;
-  uStack_5c = 0x41200000;
-  temp_v17 = 0;
-  temp_v2 = temp_v0;
-  FUN_002c05f4();
-  temp_v6 = 1;
-  temp_v7 = 1;
-  temp_v10 = 1;
-  temp_v11 = (unsigned int *)0x0;
-  puVar2 = &temp_v6;
-  temp_v13 = (unsigned int *)0x0;
-  temp_v14 = romwright_piece_3_1((((unsigned int)(temp_v14) >> 8) & 0xffffffU),1);
-  temp_v12 = romwright_piece_3_1((((unsigned int)(temp_v12) >> 8) & 0xffffffU),1);
-  temp_v9 = (unsigned int *)0x0;
-  temp_v8 = 0;
-  DAT_00464b10 = temp_v2;
-  nw_gfx_Camera_DynamicBuilder_Create(puVar2,temp_v0);
-  puVar7 = temp_v13;
-  DAT_00464b14 = puVar2;
-  if ((temp_v13 != (unsigned int *)0x0) && ((char)temp_v14 != '\0')) {
-    (**(romwright_code **)*temp_v13)(temp_v13);
-    piVar3 = (int *)puVar7[1];
-    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
-  }
-  puVar7 = temp_v11;
-  if ((temp_v11 != (unsigned int *)0x0) && ((char)temp_v12 != '\0')) {
-    (**(romwright_code **)*temp_v11)(temp_v11);
-    piVar3 = (int *)puVar7[1];
-    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
-  }
-  temp_v6 = 1;
-  temp_v7 = 1;
-  temp_v10 = 1;
-  temp_v11 = (unsigned int *)0x0;
-  puVar2 = &temp_v6;
-  temp_v13 = (unsigned int *)0x0;
-  temp_v14 = romwright_piece_3_1((((unsigned int)(temp_v14) >> 8) & 0xffffffU),1);
-  temp_v12 = romwright_piece_3_1((((unsigned int)(temp_v12) >> 8) & 0xffffffU),1);
-  temp_v9 = (unsigned int *)0x0;
-  temp_v8 = 0;
-  nw_gfx_Camera_DynamicBuilder_Create(puVar2,temp_v0);
-  puVar7 = temp_v13;
-  DAT_00464b18 = puVar2;
-  if ((temp_v13 != (unsigned int *)0x0) && ((char)temp_v14 != '\0')) {
-    (**(romwright_code **)*temp_v13)(temp_v13);
-    piVar3 = (int *)puVar7[1];
-    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
-  }
-  puVar7 = temp_v11;
-  if ((temp_v11 != (unsigned int *)0x0) && ((char)temp_v12 != '\0')) {
-    (**(romwright_code **)*temp_v11)(temp_v11);
-    piVar3 = (int *)puVar7[1];
-    (**(romwright_code **)(*piVar3 + 0xc))(piVar3,puVar7);
-  }
-  nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0,DAT_00464b10);
-  puVar7 = (unsigned int *)((unsigned long long)temp_v3 >> 0x20);
-  temp_v2 = (unsigned int)temp_v3;
-  if (DAT_00464af4 != 0) {
-    if (DAT_00464af4 == 2) {
-      temp_v10 = temp_v2;
-      temp_v11 = puVar7;
-      temp_v12 = temp_v2;
-      temp_v13 = puVar9;
-      temp_v14 = temp_v5;
-      temp_v15 = puVar9;
-      temp_v20 = puVar9;
-      temp_v21 = puVar9;
-      temp_v1 = asdMemoryGetDefaultAllocator();
-      VectorUnsignedToFloat((unsigned int)DAT_00464af4,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00119e54(temp_v1,&temp_v10,&temp_v13,&temp_v20,0);
-      DAT_00464b34 = temp_v1;
+    NwVec3 eye(20.0f, 15.0f, 20.0f);
+    NwVec3 target(0.0f, 10.0f, 0.0f);
+    NwVec2 defaultLens = { 1.0f, 5000.0f };
+    const f32 lensNear = 0.66f;
+
+    u32 allocator = asdMemoryGetDefaultAllocator();
+    DAT_00464b10 = (u32)FUN_002c05f4(allocator, &eye, &target, 0, defaultLens, lensNear);
+    DAT_00464b14 = modelDefaultCamera(allocator);
+    DAT_00464b18 = modelDefaultCamera(allocator);
+    nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0, DAT_00464b10);
+
+    if (DAT_00464af4 == MODEL_CAMERA_LENS_ORTHOGRAPHIC) {
+        eye.set(20.0f, 15.0f, 20.0f);
+        target.set(0.0f, 10.0f, 0.0f);
+        NwCamera *camera = FUN_002c05f4(asdMemoryGetDefaultAllocator(), &eye, &target, 0, DAT_00464b3c, lensNear);
+        DAT_00464b34 = camera;
+        camera->distance = 1.0f / DAT_00464b3c.y;
+        drawableSetRectangle(camera, DAT_00464b3c, 1.6666666f);
+    } else if (DAT_00464af4 == MODEL_CAMERA_LENS_CUSTOM) {
+        eye.set(20.0f, 15.0f, 20.0f);
+        target.set(0.0f, 10.0f, 0.0f);
+        NwVec3 up(0.0f, 0.0f, 0.0f);
+        DAT_00464b34 = FUN_00119e54(asdMemoryGetDefaultAllocator(), &eye, &target, &up, DAT_00464af4,
+                                    DAT_00464b3c, 0.0f);
     }
-  }
-  else {
-    temp_v8 = temp_v2;
-    temp_v9 = puVar7;
-    temp_v10 = temp_v2;
-    temp_v11 = puVar9;
-    temp_v12 = temp_v5;
-    temp_v13 = puVar9;
-    temp_v1 = asdMemoryGetDefaultAllocator();
-    FUN_002c05f4(temp_v1,&temp_v8,&temp_v11,0);
-    DAT_00464b34 = temp_v1;
-    *(float *)(temp_v1 + 0x294) = temp_v4 / DAT_00464b40;
-    drawableSetRectangle();
-  }
-  nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0,DAT_00464b34);
-  temp_v16 = (unsigned int)temp_v3;
-  uStack_5c = (unsigned int)((unsigned long long)temp_v3 >> 0x20);
-  temp_v17 = temp_v16;
-  temp_v18 = puVar9;
-  uStack_50 = temp_v5;
-  temp_v19 = puVar9;
-  temp_v2 = asdMemoryGetDefaultAllocator();
-  FUN_002c05f4(temp_v2,&temp_v16,&temp_v18,0);
-  DAT_00464b1c = temp_v2;
-  nw_gfx_SceneNode_AttachChild(DAT_00464ba0,temp_v2);
-  return;
+    nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0, (u32)DAT_00464b34);
+
+    eye.set(20.0f, 15.0f, 20.0f);
+    target.set(0.0f, 10.0f, 0.0f);
+    DAT_00464b1c = FUN_002c05f4(asdMemoryGetDefaultAllocator(), &eye, &target, 0, defaultLens, lensNear);
+    nw_gfx_SceneNode_AttachChild(DAT_00464ba0, (u32)DAT_00464b1c);
 }
 
 } /* extern "C" */

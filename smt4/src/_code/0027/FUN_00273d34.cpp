@@ -1,128 +1,127 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273d34` (_code @ 0x273d34, 0x224 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite; the build allocates the registers of the two table scans differently from retail. */
+#include "common.h"
+
+// A location record of the type-50 table (the part this function reads).
+struct LocationRecord {
+    /* 0x00 */ s8 first;
+    /* 0x01 */ s8 second;
+    /* 0x02 */ s16 v0;
+    /* 0x04 */ s16 v1;
+    /* 0x06 */ s16 v2;
+    /* 0x08 */ u16 v3;
+    /* 0x0a */ u8 unk0a[2];
+    /* 0x0c */ u16 contentId;  // content entry to show, 0: use the record's own values
+    /* 0x0e */ u8 unk0e;
+    /* 0x0f */ s8 kind;        // 2 and 3 are shown
+    /* 0x10 */ u8 unk10[2];
+    /* 0x12 */ u16 mapId;
+};
+
+// An entry of the content table 0x32 (the part this function reads).
+struct ContentEntry {
+    /* 0x00 */ s32 id;         // -1: unused
+    /* 0x04 */ s8 first;
+    /* 0x05 */ s8 second;
+    /* 0x06 */ s16 v0;
+    /* 0x08 */ s16 v1;
+    /* 0x0a */ s16 v2;
+    /* 0x0c */ u16 v3;
+    /* 0x0e */ u16 minutes;
+    /* 0x10 */ u8 third;
+    /* 0x11 */ u8 fourth;
+};
+
+// One of the 16 location markers kept in the map block (0x14 bytes).
+struct MapMarkerSlot {
+    /* 0x00 */ u8 flags;       // bit 0: used, bit 1: shows a content entry
+    /* 0x01 */ s8 first;
+    /* 0x02 */ s8 second;
+    /* 0x03 */ u8 stage;
+    /* 0x04 */ s16 contentIndex;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ s16 duration;   // content minutes * 0x708
+    /* 0x0a */ u8 third;
+    /* 0x0b */ u8 fourth;
+    /* 0x0c */ s16 v0;
+    /* 0x0e */ s16 v1;
+    /* 0x10 */ s16 v2;
+    /* 0x12 */ s16 v3;
+};
+
+struct MapBlockView {
+    u8 unk0000[0xf20];
+    MapMarkerSlot markers[16];  // 0xf20
+};
 
 extern "C" {
+MapBlockView *gameGetMapBlock(void);
+s32 dataTableGetRecordFifty(void);
+LocationRecord *FUN_00267144(s32 index);
+s32 FUN_0027d968(void);
+s32 FUN_00326e44(void);
+ContentEntry *contentEntryGetE(s32 index);
+void FUN_00267074(u32 kind, u32 argument, u32 first, u32 second, u32 third, u32 fourth, u32 fifth);
 
-int FUN_00267074(int);
-int contentEntryGetE(void);
-int FUN_00267144(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00267074. */
-/* Supplied declaration required: contentEntryGetE. */
-/* Supplied declaration required: FUN_00267144. */
-extern int dataTableGetRecordFifty(void);
-extern int FUN_0027d968(void);
-extern int gameGetMapBlock(void);
-extern int FUN_00326e44(void);
-
-
+// Fills the map's location markers from the records that belong to the current map.
 void FUN_00273d34(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  char *pcVar5;
-  unsigned int temp_v4;
-  int *piVar7;
-  int temp_v5;
-  int temp_v6;
-  int *piVar10;
-  int *piVar11;
-  char *pcVar12;
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v7 = 0;
-  temp_v2 = gameGetMapBlock();
-  temp_v3 = 0;
-  temp_v5 = 0x10;
-  do {
-    temp_v5 = temp_v5 - 1;
-    temp_v6 = temp_v2 + temp_v3 * 0x14;
-    *(unsigned char *)(temp_v6 + 0xf20) = 0;
-    *(unsigned short *)(temp_v6 + 0xf24) = 0;
-    *(unsigned char *)(temp_v6 + 0xf23) = 0;
-    temp_v3 = temp_v3 + 1;
-    *(unsigned short *)(temp_v6 + 0xf28) = 0;
-  } while (temp_v5 != 0);
-  pcVar12 = (char *)0x0;
-  temp_v2 = dataTableGetRecordFifty();
-  if (0 < temp_v2) {
-    do {
-      pcVar5 = pcVar12;
-      FUN_00267144();
-      temp_v4 = (unsigned int)*pcVar5;
-      temp_v8 = temp_v4 != 0xffffffff;
-      if (temp_v8) {
-        temp_v4 = (unsigned int)*(unsigned short *)(pcVar5 + 0x12);
-      }
-      if ((temp_v8 && temp_v4 != 0) && (temp_v2 = FUN_0027d968(), temp_v2 == *(short *)(pcVar5 + 0x12))) {
-        if (*(short *)(pcVar5 + 0xc) != 0) {
-          temp_v2 = temp_v1 + temp_v7 * 0x14;
-          *(unsigned char *)(temp_v2 + 0xf20) = (*(unsigned char *)(temp_v2 + 0xf20) & 0xfb) | 3;
-          temp_v0 = *(short *)(pcVar5 + 0xc);
-          piVar10 = (int *)0x0;
-          temp_v3 = FUN_00326e44();
-          piVar11 = (int *)0xffffffff;
-          if (0 < temp_v3) {
-            do {
-              piVar7 = piVar10;
-              contentEntryGetE();
-              if ((*piVar7 != -1) && (piVar11 = piVar10, *piVar7 == (int)temp_v0)) break;
-              piVar10 = (int *)((int)piVar10 + 1);
-              temp_v3 = FUN_00326e44();
-              piVar11 = (int *)0xffffffff;
-            } while ((int)piVar10 < temp_v3);
-          }
-          temp_v3 = (int)(short)(int)piVar11;
-          *(short *)(temp_v2 + 0xf24) = (short)(int)piVar11;
-          contentEntryGetE();
-          *(unsigned char *)(temp_v2 + 0xf23) = 0;
-          *(short *)(temp_v2 + 0xf28) = *(short *)(temp_v3 + 0xe) * 0x708;
-          *(unsigned char *)(temp_v2 + 0xf21) = *(unsigned char *)(temp_v3 + 4);
-          *(unsigned char *)(temp_v2 + 0xf22) = *(unsigned char *)(temp_v3 + 5);
-          *(unsigned short *)(temp_v2 + 0xf2c) = *(unsigned short *)(temp_v3 + 6);
-          *(unsigned short *)(temp_v2 + 0xf2e) = *(unsigned short *)(temp_v3 + 8);
-          *(unsigned short *)(temp_v2 + 0xf30) = *(unsigned short *)(temp_v3 + 10);
-          *(unsigned short *)(temp_v2 + 0xf32) = *(unsigned short *)(temp_v3 + 0xc);
-          *(unsigned char *)(temp_v2 + 0xf2a) = *(unsigned char *)(temp_v3 + 0x10);
-          *(unsigned char *)(temp_v2 + 0xf2b) = *(unsigned char *)(temp_v3 + 0x11);
-          FUN_00267074(temp_v7);
+    MapBlockView *block = gameGetMapBlock();
+    s32 used = 0;
+    MapBlockView *cleared = gameGetMapBlock();
+    for (s32 i = 0; i < 16; i++) {
+        cleared->markers[i].flags = 0;
+        cleared->markers[i].contentIndex = 0;
+        cleared->markers[i].stage = 0;
+        cleared->markers[i].duration = 0;
+    }
+    for (s32 i = 0; i < dataTableGetRecordFifty(); i++) {
+        LocationRecord *record = FUN_00267144(i);
+        if (record->first == -1 || record->mapId == 0 || FUN_0027d968() != (s16)record->mapId) {
+            continue;
         }
-        else if (pcVar5[0xf] == '\x02' || pcVar5[0xf] == '\x03') {
-          temp_v2 = temp_v1 + temp_v7 * 0x14;
-          *(unsigned char *)(temp_v2 + 0xf20) = (*(unsigned char *)(temp_v2 + 0xf20) & 0xf9) | 1;
-          *(unsigned short *)(temp_v2 + 0xf24) = 0;
-          *(unsigned char *)(temp_v2 + 0xf23) = 0;
-          *(unsigned short *)(temp_v2 + 0xf28) = 0;
-          *(char *)(temp_v2 + 0xf21) = *pcVar5;
-          *(char *)(temp_v2 + 0xf22) = pcVar5[1];
-          *(unsigned short *)(temp_v2 + 0xf2c) = *(unsigned short *)(pcVar5 + 2);
-          *(unsigned short *)(temp_v2 + 0xf2e) = *(unsigned short *)(pcVar5 + 4);
-          *(unsigned short *)(temp_v2 + 0xf30) = *(unsigned short *)(pcVar5 + 6);
-          *(unsigned short *)(temp_v2 + 0xf32) = *(unsigned short *)(pcVar5 + 8);
-          *(unsigned char *)(temp_v2 + 0xf2a) = 0;
-          *(unsigned char *)(temp_v2 + 0xf2b) = 0;
-          FUN_00267074(temp_v7);
+        MapMarkerSlot *marker = &block->markers[used];
+        if (record->contentId != 0) {
+            marker->flags = (marker->flags & ~4) | 3;
+            s16 id = (s16)record->contentId;
+            s32 found = -1;
+            for (s32 j = 0; j < FUN_00326e44(); j++) {
+                ContentEntry *entry = contentEntryGetE(j);
+                if (entry->id != -1 && entry->id == id) {
+                    found = j;
+                    break;
+                }
+            }
+            marker->contentIndex = (s16)found;
+            ContentEntry *entry = contentEntryGetE((s16)found);
+            marker->stage = 0;
+            marker->duration = entry->minutes * 0x708;
+            marker->first = entry->first;
+            marker->second = entry->second;
+            marker->v0 = entry->v0;
+            marker->v1 = entry->v1;
+            marker->v2 = entry->v2;
+            marker->v3 = entry->v3;
+            marker->third = entry->third;
+            marker->fourth = entry->fourth;
+        } else if (record->kind == 2 || record->kind == 3) {
+            marker->flags = (marker->flags & ~6) | 1;
+            marker->contentIndex = 0;
+            marker->stage = 0;
+            marker->duration = 0;
+            marker->first = record->first;
+            marker->second = record->second;
+            marker->v0 = record->v0;
+            marker->v1 = record->v1;
+            marker->v2 = record->v2;
+            marker->v3 = record->v3;
+            marker->third = 0;
+            marker->fourth = 0;
+        } else {
+            used++;
+            continue;
         }
-        temp_v7 = temp_v7 + 1;
-      }
-      pcVar12 = pcVar12 + 1;
-      temp_v2 = dataTableGetRecordFifty();
-    } while ((int)pcVar12 < temp_v2);
-  }
-  return;
+        FUN_00267074(used, marker->first, marker->second, marker->v0, marker->v1, marker->v2, 0);
+        used++;
+    }
 }
-
-} /* extern "C" */
+}

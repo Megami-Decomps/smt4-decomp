@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_CollisionQuad.h"
 
 extern "C" {
-extern CollisionQuad DAT_00493c5c[];
+extern CollisionQuad g_collisionPlaneTable[];
 void FUN_0026e80c(s32, CollisionVector *, CollisionVector, CollisionVector, CollisionVector, CollisionVector);
 void FUN_0026ea5c(s32, s32, CollisionVector *, f32 *, CollisionVector, CollisionVector, CollisionVector);
 
@@ -11,7 +11,7 @@ void mapCollisionQueueQuad(s32 queue, u16 tag, u16 material, CollisionVector a, 
 {
     CollisionQuad *quad;
     if (queue)
-        quad = &DAT_00493c5c[g_mapCollision.secondCount++];
+        quad = &g_collisionPlaneTable[g_mapCollision.secondCount++];
     else
         quad = &g_mapCollision.first[g_mapCollision.firstCount++];
     quad->normal = normal;

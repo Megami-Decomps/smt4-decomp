@@ -1,184 +1,125 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d978c` (_code @ 0x2d978c, 0x3b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: steps the lmap intro camera (hold, ease in, announce the area with its event and voice, ease out) and smooths the camera towards its target; written from the decompilation, the two duplicated announce blocks are merged into a helper and switch layout not compared with retail */
+#include "common.h"
+
+#define LMAP_INTRO_START 0
+#define LMAP_INTRO_FIRST_HOLD 1
+#define LMAP_INTRO_ZOOM 2
+#define LMAP_INTRO_DONE 3
+#define LMAP_FIRST_HOLD_FRAMES 10
+#define LMAP_ZOOM_FRAMES 0x13
+#define LMAP_AREA_COUNT 6
+#define LMAP_VOICE_FIRST 0x10002E5
+#define LMAP_VOICE_SECOND 0x10002E6
+
+struct LmapIntroScene {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 timer;
+    /* 0x00C */ u8 unk00C[0x10];
+    /* 0x01C */ f32 cameraX;
+    /* 0x020 */ f32 cameraY;
+    /* 0x024 */ f32 cameraZ;
+    /* 0x028 */ f32 targetX;
+    /* 0x02C */ f32 targetY;
+    /* 0x030 */ f32 targetZ;
+    /* 0x034 */ u8 unk034[0x20];
+    /* 0x054 */ u32 mode;
+    /* 0x058 */ f32 speed;
+    /* 0x05C */ u8 unk05C[0xDC];
+    /* 0x138 */ f32 startX;
+    /* 0x13C */ f32 startY;
+    /* 0x140 */ f32 startZ;
+    /* 0x144 */ u8 unk144[0xC];
+    /* 0x150 */ f32 stepX;
+    /* 0x154 */ f32 stepY;
+    /* 0x158 */ f32 stepZ;
+};
+
+struct IntroGameState {
+    /* 0x00 */ u8 unk00[0x32];
+    /* 0x32 */ u8 area;
+};
 
 extern "C" {
+extern LmapIntroScene *g_lmapScene;
+extern IntroGameState g_gameState;
 
-int soundVolumeSettingSet(...);
-int FUN_0014af98(void);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int mapEaseSceneHeading(void);
-int FUN_002e364c(int);
-int FUN_00324e38(unsigned int);
-int FUN_00327ee8(void);
-int FUN_0033abd4(void);
-int sysPlayVoice(int);
-int FUN_003d4ed8(unsigned int);
-int VectorSignedToFloat(int, int);
+void mapEaseSceneHeading(void);
+u32 soundVolumeSettingGet(void);
+void soundVolumeSettingSet(u32 volume);
+void FUN_0033abd4(void);
+void FUN_003d4ed8(u32 event);
+void FUN_00324e38(u32 value);
+void FUN_001bc124(void);
+void FUN_001bbf0c(void);
+void FUN_0014af98(void);
+void sysPlayVoice(u32 voice);
+void FUN_002e364c(f32 *target);
+void FUN_00327ee8(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+static const u32 lmapIntroEventsFirst[LMAP_AREA_COUNT] = {
+    0x10002C4, 0x10002C6, 0x10002C8, 0x10002CA, 0x10002CC, 0x10002D9
+};
+static const u32 lmapIntroEventsSecond[LMAP_AREA_COUNT] = {
+    0x10002C5, 0x10002C7, 0x10002C9, 0x10002CB, 0x10002CD, 0x10002DA
+};
 
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: soundVolumeSettingSet. */
-extern unsigned int soundVolumeSettingGet(void);
-/* Supplied declaration required: FUN_0014af98. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00324e38. */
-/* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_0033abd4. */
-/* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003d4ed8. */
-
+/* Raises the area's event and plays the voice with the volume restored afterwards, then moves on. */
+static __inline void lmapIntroAnnounce(const u32 *events, u32 voice, u32 volume)
+{
+    FUN_0033abd4();
+    if (g_gameState.area < LMAP_AREA_COUNT)
+        FUN_003d4ed8(events[g_gameState.area]);
+    FUN_00324e38(0xFFFFFFFF);
+    FUN_001bc124();
+    FUN_001bbf0c();
+    FUN_0014af98();
+    soundVolumeSettingSet(0);
+    sysPlayVoice(voice);
+    soundVolumeSettingSet(volume);
+    g_lmapScene->state++;
+    g_lmapScene->timer = 0;
+}
 
 void FUN_002d978c(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  
-  mapEaseSceneHeading();
-  temp_v0 = soundVolumeSettingGet();
-  temp_v3 = g_lmapScene;
-  temp_v2 = *(int *)(g_lmapScene + 4);
-  if (temp_v2 != 0) {
-    if (temp_v2 != 1) {
-      if (temp_v2 != 2) {
-        if (temp_v2 == 3) {
-          *(unsigned int *)(g_lmapScene + 0x58) = 0x40a00000;
+    mapEaseSceneHeading();
+    u32 volume = soundVolumeSettingGet();
+    LmapIntroScene *scene = g_lmapScene;
+    switch (scene->state) {
+    case LMAP_INTRO_START:
+        scene->mode = 0xD;
+        scene->speed = 3.0f;
+        scene->state = LMAP_INTRO_FIRST_HOLD;
+        scene->timer = 0;
+        break;
+    case LMAP_INTRO_FIRST_HOLD:
+        scene->timer++;
+        if (scene->timer >= LMAP_FIRST_HOLD_FRAMES)
+            lmapIntroAnnounce(lmapIntroEventsFirst, LMAP_VOICE_FIRST, volume);
+        break;
+    case LMAP_INTRO_ZOOM:
+        scene->timer++;
+        if (scene->timer < LMAP_ZOOM_FRAMES) {
+            f32 t = (f32)scene->timer;
+            scene->targetZ = scene->startZ + scene->stepZ * t;
+            scene->targetX = scene->startX + scene->stepX * t;
+            scene->targetY = scene->startY + scene->stepY * t;
+        } else {
+            lmapIntroAnnounce(lmapIntroEventsSecond, LMAP_VOICE_SECOND, volume);
         }
-      }
-      else {
-        temp_v2 = *(int *)(g_lmapScene + 8) + 1;
-        *(int *)(g_lmapScene + 8) = temp_v2;
-        if (temp_v2 < 0x13) {
-          temp_v4 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(float *)(temp_v3 + 0x30) = *(float *)(temp_v3 + 0x140) + *(float *)(temp_v3 + 0x158) * temp_v4;
-          *(float *)(temp_v3 + 0x28) = *(float *)(temp_v3 + 0x138) + *(float *)(temp_v3 + 0x150) * temp_v4;
-          *(float *)(temp_v3 + 0x2c) = *(float *)(temp_v3 + 0x13c) + *(float *)(temp_v3 + 0x154) * temp_v4;
-        }
-        else {
-          FUN_0033abd4();
-          switch((*(unsigned char *)((unsigned char *)&g_gameState + 0x32))) {
-          case 0:
-            temp_v1 = 0x10002c5;
-            FUN_003d4ed8(temp_v1);
-            break;
-          case 1:
-            temp_v1 = 0x10002c7;
-            FUN_003d4ed8(temp_v1);
-            break;
-          case 2:
-            temp_v1 = 0x10002c9;
-            FUN_003d4ed8(temp_v1);
-            break;
-          case 3:
-            temp_v1 = 0x10002cb;
-            FUN_003d4ed8(temp_v1);
-            break;
-          case 4:
-            temp_v1 = 0x10002cd;
-            FUN_003d4ed8(temp_v1);
-            break;
-          case 5:
-            temp_v1 = 0x10002da;
-            FUN_003d4ed8(temp_v1);
-            break;
-          default:
-          }
-LAB_002d99dc:
-          FUN_00324e38(0xffffffff);
-          FUN_001bc124();
-          FUN_001bbf0c();
-          FUN_0014af98();
-          soundVolumeSettingSet();
-          sysPlayVoice(0x10002e6);
-          soundVolumeSettingSet(temp_v0);
-          temp_v3 = g_lmapScene;
-          *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
-          *(unsigned int *)(temp_v3 + 8) = 0;
-        }
-      }
+        break;
+    case LMAP_INTRO_DONE:
+        scene->speed = 5.0f;
+        break;
     }
-    else {
-      temp_v3 = *(int *)(g_lmapScene + 8) + 1;
-      *(int *)(g_lmapScene + 8) = temp_v3;
-      if (temp_v3 >= 10) {
-        FUN_0033abd4();
-        switch((*(unsigned char *)((unsigned char *)&g_gameState + 0x32))) {
-        case 0:
-          temp_v1 = 0x10002c4;
-          FUN_003d4ed8(temp_v1);
-          break;
-        case 1:
-          temp_v1 = 0x10002c6;
-          FUN_003d4ed8(temp_v1);
-          break;
-        case 2:
-          temp_v1 = 0x10002c8;
-          FUN_003d4ed8(temp_v1);
-          break;
-        case 3:
-          temp_v1 = 0x10002ca;
-          FUN_003d4ed8(temp_v1);
-          break;
-        case 4:
-          temp_v1 = 0x10002cc;
-          FUN_003d4ed8(temp_v1);
-          break;
-        case 5:
-          temp_v1 = 0x10002d9;
-          FUN_003d4ed8(temp_v1);
-          break;
-        default:
-        }
-LAB_002d9870:
-        FUN_00324e38(0xffffffff);
-        FUN_001bc124();
-        FUN_001bbf0c();
-        FUN_0014af98();
-        soundVolumeSettingSet();
-        sysPlayVoice(0x10002e5);
-        soundVolumeSettingSet(temp_v0);
-        temp_v3 = g_lmapScene;
-        *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
-        *(unsigned int *)(temp_v3 + 8) = 0;
-      }
-    }
-  }
-  else {
-    *(unsigned int *)(g_lmapScene + 0x54) = 0xd;
-    *(unsigned int *)(temp_v3 + 0x58) = 0x40400000;
-    *(unsigned int *)(temp_v3 + 4) = 1;
-    *(unsigned int *)(temp_v3 + 8) = 0;
-  }
-  temp_v3 = g_lmapScene;
-  *(float *)(g_lmapScene + 0x1c) =
-       *(float *)(g_lmapScene + 0x1c) +
-       (*(float *)(g_lmapScene + 0x28) - *(float *)(g_lmapScene + 0x1c)) * 0.33333334f;
-  *(float *)(temp_v3 + 0x20) =
-       *(float *)(temp_v3 + 0x20) + (*(float *)(temp_v3 + 0x2c) - *(float *)(temp_v3 + 0x20)) * 0.16666667f
-  ;
-  *(float *)(temp_v3 + 0x24) =
-       *(float *)(temp_v3 + 0x24) + (*(float *)(temp_v3 + 0x30) - *(float *)(temp_v3 + 0x24)) * 0.33333334f
-  ;
-  FUN_002e364c(temp_v3 + 0x28);
-  FUN_00327ee8();
-  return;
+
+    scene = g_lmapScene;
+    scene->cameraX += (scene->targetX - scene->cameraX) * (1.0f / 3.0f);
+    scene->cameraY += (scene->targetY - scene->cameraY) * (1.0f / 6.0f);
+    scene->cameraZ += (scene->targetZ - scene->cameraZ) * (1.0f / 3.0f);
+    FUN_002e364c(&scene->targetX);
+    FUN_00327ee8();
 }
 
 } /* extern "C" */

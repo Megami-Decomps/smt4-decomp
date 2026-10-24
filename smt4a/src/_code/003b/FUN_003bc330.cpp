@@ -6,7 +6,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 BtlMainStateA *btlGetMainState(void);
-s32 FUN_00221754(BtlCombatantEntryA *entry, u32 first, u32 second);
+s32 battleUnitHasElementEntry(BtlCombatantEntryA *entry, u32 first, u32 second);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
@@ -25,14 +25,14 @@ u32 FUN_003bc330(void)
                 (g_btlCandidateMasks.excluded & flags) == 0 &&
                 (g_btlCandidateMasks.unavailable & flags) == 0 &&
                 (flags & g_btlCandidateMasks.singleAction) == 0 &&
-                FUN_00221754(entry, first, second)) {
+                battleUnitHasElementEntry(entry, first, second)) {
                 ++count;
             }
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
-        if (entry != NULL && FUN_00221754(entry, first, second)) {
+        if (entry != NULL && battleUnitHasElementEntry(entry, first, second)) {
             scrSetResult(1);
             return 1;
         }

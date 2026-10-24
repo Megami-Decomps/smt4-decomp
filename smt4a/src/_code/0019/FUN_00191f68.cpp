@@ -1,232 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00191f68` (_code @ 0x191f68, 0x314 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: releases the pooled blocks of a record (26 length words cleared, 31 heap blocks freed); written from the decompilation, store/branch scheduling not compared with retail */
+#include "common.h"
 
-extern "C" {
-
-int asdOperatorDeleteB(void);
-
-typedef struct fn_00191f68_arg0 fn_00191f68_arg0;
-struct fn_00191f68_arg0 {
-    unsigned char pad_0x0[0x35c];
-    undefined4 field_0x35c; /* +0x35c */
-    int field_0x360; /* +0x360 */
-    undefined4 field_0x364; /* +0x364 */
-    int field_0x368; /* +0x368 */
-    undefined4 field_0x36c; /* +0x36c */
-    int field_0x370; /* +0x370 */
-    undefined4 field_0x374; /* +0x374 */
-    int field_0x378; /* +0x378 */
-    undefined4 field_0x37c; /* +0x37c */
-    int field_0x380; /* +0x380 */
-    undefined4 field_0x384; /* +0x384 */
-    int field_0x388; /* +0x388 */
-    undefined4 field_0x38c; /* +0x38c */
-    int field_0x390; /* +0x390 */
-    undefined4 field_0x394; /* +0x394 */
-    int field_0x398; /* +0x398 */
-    undefined4 field_0x39c; /* +0x39c */
-    int field_0x3a0; /* +0x3a0 */
-    int field_0x3a4; /* +0x3a4 */
-    undefined4 field_0x3a8; /* +0x3a8 */
-    int field_0x3ac; /* +0x3ac */
-    int field_0x3b0; /* +0x3b0 */
-    undefined4 field_0x3b4; /* +0x3b4 */
-    int field_0x3b8; /* +0x3b8 */
-    int field_0x3bc; /* +0x3bc */
-    undefined4 field_0x3c0; /* +0x3c0 */
-    int field_0x3c4; /* +0x3c4 */
-    int field_0x3c8; /* +0x3c8 */
-    undefined4 field_0x3cc; /* +0x3cc */
-    int field_0x3d0; /* +0x3d0 */
-    int field_0x3d4; /* +0x3d4 */
-    undefined4 field_0x3d8; /* +0x3d8 */
-    int field_0x3dc; /* +0x3dc */
-    int field_0x3e0; /* +0x3e0 */
-    undefined4 field_0x3e4; /* +0x3e4 */
-    int field_0x3e8; /* +0x3e8 */
-    undefined4 field_0x3ec; /* +0x3ec */
-    int field_0x3f0; /* +0x3f0 */
-    undefined4 field_0x3f4; /* +0x3f4 */
-    int field_0x3f8; /* +0x3f8 */
-    undefined4 field_0x3fc; /* +0x3fc */
-    int field_0x400; /* +0x400 */
-    undefined4 field_0x404; /* +0x404 */
-    int field_0x408; /* +0x408 */
-    undefined4 field_0x40c; /* +0x40c */
-    int field_0x410; /* +0x410 */
-    undefined4 field_0x414; /* +0x414 */
-    int field_0x418; /* +0x418 */
-    undefined4 field_0x41c; /* +0x41c */
-    unsigned char pad_0x420[0x4];
-    undefined4 field_0x424; /* +0x424 */
-    int field_0x428; /* +0x428 */
-    undefined4 field_0x42c; /* +0x42c */
-    int field_0x430; /* +0x430 */
-    undefined4 field_0x434; /* +0x434 */
-    int field_0x438; /* +0x438 */
-    undefined4 field_0x43c; /* +0x43c */
-    int field_0x440; /* +0x440 */
+/* Tail of an object that keeps its tables as (count, heap block) pairs. */
+struct PooledTables {
+    /* 0x000 */ u8 unk000[0x35C];
+    /* 0x35C */ u32 count35c;
+    /* 0x360 */ void *data360;
+    /* 0x364 */ u32 count364;
+    /* 0x368 */ void *data368;
+    /* 0x36C */ u32 count36c;
+    /* 0x370 */ void *data370;
+    /* 0x374 */ u32 count374;
+    /* 0x378 */ void *data378;
+    /* 0x37C */ u32 count37c;
+    /* 0x380 */ void *data380;
+    /* 0x384 */ u32 count384;
+    /* 0x388 */ void *data388;
+    /* 0x38C */ u32 count38c;
+    /* 0x390 */ void *data390;
+    /* 0x394 */ u32 count394;
+    /* 0x398 */ void *data398;
+    /* 0x39C */ u32 count39c;
+    /* 0x3A0 */ void *data3a0;
+    /* 0x3A4 */ void *data3a4;
+    /* 0x3A8 */ u32 count3a8;
+    /* 0x3AC */ void *data3ac;
+    /* 0x3B0 */ void *data3b0;
+    /* 0x3B4 */ u32 count3b4;
+    /* 0x3B8 */ void *data3b8;
+    /* 0x3BC */ void *data3bc;
+    /* 0x3C0 */ u32 count3c0;
+    /* 0x3C4 */ void *data3c4;
+    /* 0x3C8 */ void *data3c8;
+    /* 0x3CC */ u32 count3cc;
+    /* 0x3D0 */ void *data3d0;
+    /* 0x3D4 */ void *data3d4;
+    /* 0x3D8 */ u32 count3d8;
+    /* 0x3DC */ void *data3dc;
+    /* 0x3E0 */ void *data3e0;
+    /* 0x3E4 */ u32 count3e4;
+    /* 0x3E8 */ void *data3e8;
+    /* 0x3EC */ u32 count3ec;
+    /* 0x3F0 */ void *data3f0;
+    /* 0x3F4 */ u32 count3f4;
+    /* 0x3F8 */ void *data3f8;
+    /* 0x3FC */ u32 count3fc;
+    /* 0x400 */ void *data400;
+    /* 0x404 */ u32 count404;
+    /* 0x408 */ void *data408;
+    /* 0x40C */ u32 count40c;
+    /* 0x410 */ void *data410;
+    /* 0x414 */ u32 count414;
+    /* 0x418 */ void *data418;
+    /* 0x41C */ u32 count41c;
+    /* 0x420 */ u8 unk420[0x4];
+    /* 0x424 */ u32 count424;
+    /* 0x428 */ void *data428;
+    /* 0x42C */ u32 count42c;
+    /* 0x430 */ void *data430;
+    /* 0x434 */ u32 count434;
+    /* 0x438 */ void *data438;
+    /* 0x43C */ u32 count43c;
+    /* 0x440 */ void *data440;
 };
 
-/* Supplied declaration required: asdOperatorDeleteB. */
+extern "C" {
+void asdOperatorDeleteB(void *block);
 
-
-void FUN_00191f68(fn_00191f68_arg0 *param_1)
-
+static __inline void pooledBlockRelease(void **block)
 {
-/* irregular: 1 native warning(s); review required */
-  param_1->field_0x35c = 0;
-  param_1->field_0x364 = 0;
-  param_1->field_0x36c = 0;
-  param_1->field_0x374 = 0;
-  param_1->field_0x37c = 0;
-  param_1->field_0x384 = 0;
-  param_1->field_0x38c = 0;
-  param_1->field_0x394 = 0;
-  param_1->field_0x39c = 0;
-  param_1->field_0x3a8 = 0;
-  param_1->field_0x3b4 = 0;
-  param_1->field_0x3c0 = 0;
-  param_1->field_0x3cc = 0;
-  param_1->field_0x3d8 = 0;
-  param_1->field_0x3e4 = 0;
-  param_1->field_0x3ec = 0;
-  param_1->field_0x3f4 = 0;
-  param_1->field_0x3fc = 0;
-  param_1->field_0x404 = 0;
-  param_1->field_0x40c = 0;
-  param_1->field_0x414 = 0;
-  param_1->field_0x41c = 0;
-  param_1->field_0x424 = 0;
-  param_1->field_0x42c = 0;
-  param_1->field_0x434 = 0;
-  param_1->field_0x43c = 0;
-  if (param_1->field_0x360 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x360 = 0;
-  }
-  if (param_1->field_0x368 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x368 = 0;
-  }
-  if (param_1->field_0x370 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x370 = 0;
-  }
-  if (param_1->field_0x378 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x378 = 0;
-  }
-  if (param_1->field_0x380 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x380 = 0;
-  }
-  if (param_1->field_0x388 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x388 = 0;
-  }
-  if (param_1->field_0x390 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x390 = 0;
-  }
-  if (param_1->field_0x398 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x398 = 0;
-  }
-  if (param_1->field_0x3a0 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3a0 = 0;
-  }
-  if (param_1->field_0x3a4 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3a4 = 0;
-  }
-  if (param_1->field_0x3ac != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3ac = 0;
-  }
-  if (param_1->field_0x3b0 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3b0 = 0;
-  }
-  if (param_1->field_0x3b8 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3b8 = 0;
-  }
-  if (param_1->field_0x3bc != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3bc = 0;
-  }
-  if (param_1->field_0x3c4 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3c4 = 0;
-  }
-  if (param_1->field_0x3c8 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3c8 = 0;
-  }
-  if (param_1->field_0x3d0 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3d0 = 0;
-  }
-  if (param_1->field_0x3d4 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3d4 = 0;
-  }
-  if (param_1->field_0x3dc != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3dc = 0;
-  }
-  if (param_1->field_0x3e0 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3e0 = 0;
-  }
-  if (param_1->field_0x3e8 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3e8 = 0;
-  }
-  if (param_1->field_0x3f0 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3f0 = 0;
-  }
-  if (param_1->field_0x3f8 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x3f8 = 0;
-  }
-  if (param_1->field_0x400 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x400 = 0;
-  }
-  if (param_1->field_0x408 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x408 = 0;
-  }
-  if (param_1->field_0x410 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x410 = 0;
-  }
-  if (param_1->field_0x418 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x418 = 0;
-  }
-  if (param_1->field_0x428 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x428 = 0;
-  }
-  if (param_1->field_0x430 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x430 = 0;
-  }
-  if (param_1->field_0x438 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x438 = 0;
-  }
-  if (param_1->field_0x440 != 0) {
-    asdOperatorDeleteB();
-    param_1->field_0x440 = 0;
-  }
-  return;
+    if (*block != NULL) {
+        asdOperatorDeleteB(*block);
+        *block = NULL;
+    }
+}
+
+/* Clears every table's count and frees its heap block. */
+void FUN_00191f68(PooledTables *tables)
+{
+    tables->count35c = 0;
+    tables->count364 = 0;
+    tables->count36c = 0;
+    tables->count374 = 0;
+    tables->count37c = 0;
+    tables->count384 = 0;
+    tables->count38c = 0;
+    tables->count394 = 0;
+    tables->count39c = 0;
+    tables->count3a8 = 0;
+    tables->count3b4 = 0;
+    tables->count3c0 = 0;
+    tables->count3cc = 0;
+    tables->count3d8 = 0;
+    tables->count3e4 = 0;
+    tables->count3ec = 0;
+    tables->count3f4 = 0;
+    tables->count3fc = 0;
+    tables->count404 = 0;
+    tables->count40c = 0;
+    tables->count414 = 0;
+    tables->count41c = 0;
+    tables->count424 = 0;
+    tables->count42c = 0;
+    tables->count434 = 0;
+    tables->count43c = 0;
+    pooledBlockRelease(&tables->data360);
+    pooledBlockRelease(&tables->data368);
+    pooledBlockRelease(&tables->data370);
+    pooledBlockRelease(&tables->data378);
+    pooledBlockRelease(&tables->data380);
+    pooledBlockRelease(&tables->data388);
+    pooledBlockRelease(&tables->data390);
+    pooledBlockRelease(&tables->data398);
+    pooledBlockRelease(&tables->data3a0);
+    pooledBlockRelease(&tables->data3a4);
+    pooledBlockRelease(&tables->data3ac);
+    pooledBlockRelease(&tables->data3b0);
+    pooledBlockRelease(&tables->data3b8);
+    pooledBlockRelease(&tables->data3bc);
+    pooledBlockRelease(&tables->data3c4);
+    pooledBlockRelease(&tables->data3c8);
+    pooledBlockRelease(&tables->data3d0);
+    pooledBlockRelease(&tables->data3d4);
+    pooledBlockRelease(&tables->data3dc);
+    pooledBlockRelease(&tables->data3e0);
+    pooledBlockRelease(&tables->data3e8);
+    pooledBlockRelease(&tables->data3f0);
+    pooledBlockRelease(&tables->data3f8);
+    pooledBlockRelease(&tables->data400);
+    pooledBlockRelease(&tables->data408);
+    pooledBlockRelease(&tables->data410);
+    pooledBlockRelease(&tables->data418);
+    pooledBlockRelease(&tables->data428);
+    pooledBlockRelease(&tables->data430);
+    pooledBlockRelease(&tables->data438);
+    pooledBlockRelease(&tables->data440);
 }
 
 } /* extern "C" */

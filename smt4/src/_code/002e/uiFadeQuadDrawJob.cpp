@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack address hoisting, VFP scheduling, and retail target-query NOP slots differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 37 diff lines remain, scheduling/register allocation only. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_FadeQuad.h"
@@ -26,7 +26,7 @@ u32 uiFadeQuadDrawJob(u32 job)
             alpha = 255;
         }
         color = (color & 0xffffff00) | alpha;
-        renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
+        renderCtxPushA(context, FUN_002c5d80(1, 0));
         FUN_002c1b64(g_titleScene, 0);
         f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_titleScene->unk0528));
         f32 width = static_cast<f32>(FUN_002c15ac(g_titleScene->unk0528));

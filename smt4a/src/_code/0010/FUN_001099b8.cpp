@@ -91,7 +91,7 @@ extern int FUN_002eba9c(unsigned int *, unsigned int *);
 extern int *FUN_002ed258(int, int *);
 /* Supplied declaration required: streamReset. */
 /* Supplied declaration required: strHolderAssignOneWide. */
-extern int *FUN_002eff58(int, unsigned int);
+extern int *_ZN9Obj5588ecC1Ej(int, unsigned int);
 extern int FUN_002eff84(int *);
 extern int FUN_002f14a8(int, unsigned int);
 /* Supplied declaration required: FUN_002f2aa0. */
@@ -177,14 +177,14 @@ int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int para
       (temp_v1 = FUN_002f14a8(*(int *)(temp_v3 + 0xd8),4), temp_v1 != 0)) && (temp_v0 != '\0')) {
     temp_v1 = FUN_002eb7d0(0x20,0);
     if (temp_v1 != 0) {
-      piVar3 = (int *)FUN_002eff58(temp_v1,temp_v28);
+      piVar3 = (int *)_ZN9Obj5588ecC1Ej(temp_v1,temp_v28);
     }
     else {
       piVar3 = (int *)0x0;
     }
     temp_v1 = FUN_002eb7d0(0x20,0);
     if (temp_v1 != 0) {
-      piVar4 = (int *)FUN_002eff58(temp_v1,temp_v28);
+      piVar4 = (int *)_ZN9Obj5588ecC1Ej(temp_v1,temp_v28);
     }
     else {
       piVar4 = (int *)0x0;

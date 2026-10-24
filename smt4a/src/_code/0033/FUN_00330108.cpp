@@ -1,177 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00330108` (_code @ 0x330108, 0x2d8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the per-quad plane tests and the sphere extension are scheduled differently (retail keeps the target in s19-s21 and the snapshot in s28-s30; 176 vs 185 rows); the sweep logic is the same. */
+#include "common.h"
+#include <math.h>
 
 extern "C" {
 
-int CONCAT44(double, double);
-int collisionTestProjectedSpherePlanes(float [18], int);
-int FUN_002c2a58(int, int);
+typedef struct SweepVec3 {
+    f32 x, y, z;
+} SweepVec3;
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_3_stack;
+/* One collision quad (0xA8 bytes; only the fields read here). */
+typedef struct SweepQuad {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s8 shape;
+    /* 0x05 */ s8 kind;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u8 active;
+    /* 0x09 */ u8 unk09[3];
+    /* 0x0C */ SweepVec3 normal;
+    /* 0x18 */ f32 planeD;
+    /* 0x1C */ u8 unk1c[0x8C];
+} SweepQuad;
 
-extern int DAT_00580210; /* 0x580210 */
-extern int DAT_00580214; /* 0x580214 */
-extern int DAT_00580218; /* 0x580218 */
-extern int DAT_00580224; /* 0x580224 */
-extern int DAT_00580228; /* 0x580228 */
+/* The map collision lists: two fixed-size sets and the quad list built from the mesh. */
+typedef struct MapCollision {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 wallCount;
+    /* 0x10 */ s32 quadCount;
+    /* 0x14 */ s32 floorCount;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ SweepQuad *walls;
+    /* 0x24 */ SweepQuad *quads;
+} MapCollision;
 
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+extern MapCollision g_mapCollision;
+extern SweepQuad DAT_005e2714[];
+
+f32 FUN_002c2a58(s32 kind, s32 shape, SweepQuad *quad, SweepVec3 point, f32 radius);
+void collisionTestProjectedSpherePlanes(f32 out[18], s32 kind, s32 shape, SweepQuad *quad, SweepVec3 point, f32 radius);
+
+/* Sweeps a sphere from `from` towards `to` against the three collision lists. The sphere starts
+ * pushed back along the path by its radius; the first quad plane the path crosses (and the
+ * sphere's contact with it) stops it. Writes the stop position to `out` (or `from` when nothing
+ * is hit) and returns the index of the quad hit, or -1. */
+s32 FUN_00330108(const SweepVec3 *from, const SweepVec3 *to, SweepVec3 *out)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
-/* Supplied declaration required: FUN_002c2a58. */
+    SweepVec3 current = *from;
+    s32 hit = -1;
 
+    for (s32 pass = 0; pass < 3; pass++) {
+        SweepQuad *list;
+        s32 count;
+        f32 radius;
 
-int FUN_00330108(float *param_1,float *param_2,float *param_3)
+        if (pass == 0) {
+            list = DAT_005e2714;
+            count = g_mapCollision.floorCount;
+            radius = 28.0f;
+            if (hit == -1) {
+                f32 dx = current.x - to->x;
+                f32 dy = current.y - to->y;
+                f32 dz = current.z - to->z;
+                f32 scale = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
 
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  unsigned long long temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  unsigned long long temp_v15;
-  unsigned long long temp_v16;
-  unsigned long long temp_v17;
-  unsigned long long temp_v18;
-  float temp_v19 [18];
-  float *pfStack_30;
-  float *pfStack_2c;
-  float *temp_v20;
-  
-  temp_v3 = 0;
-  temp_v4 = -1;
-  temp_v16 = 0;
-  temp_v14 = *param_2;
-  temp_v9 = *(unsigned long long *)param_1;
-  temp_v11 = param_1[2];
-  temp_v12 = param_2[1];
-  temp_v13 = param_2[2];
-  pfStack_30 = param_1;
-  pfStack_2c = param_2;
-  temp_v20 = param_3;
-  do {
-    temp_v0 = 0x5e2714;
-    temp_v2 = DAT_00580218;
-    if (temp_v4 == -1) {
-      temp_v7 = (float)temp_v9 - temp_v14;
-      temp_v10 = (float)((unsigned long long)temp_v9 >> 0x20);
-      temp_v5 = temp_v10 - temp_v12;
-      temp_v6 = temp_v11 - temp_v13;
-      temp_v8 = 1.0f / romwright_sqrt_4(temp_v7 * temp_v7 + temp_v5 * temp_v5 + temp_v6 * temp_v6);
-      temp_v9 = CONCAT44(temp_v10 + temp_v5 * temp_v8 * 28.0f,(float)temp_v9 + temp_v7 * temp_v8 * 28.0f);
-      temp_v11 = temp_v11 + temp_v6 * temp_v8 * 28.0f;
-    }
-    while( 1 ) {
-      temp_v1 = 0;
-      if (temp_v1 < temp_v2) {
-        do {
-          if (*(char *)(temp_v0 + 8) != '\0') {
-            temp_v6 = (float)temp_v9;
-            temp_v8 = (float)((unsigned long long)temp_v9 >> 0x20);
-            temp_v7 = (temp_v6 * *(float *)(temp_v0 + 0xc) + temp_v8 * *(float *)(temp_v0 + 0x10) +
-                    temp_v11 * *(float *)(temp_v0 + 0x14)) - *(float *)(temp_v0 + 0x18);
-            temp_v10 = (float)temp_v16;
-            temp_v5 = (temp_v14 * *(float *)(temp_v0 + 0xc) + temp_v12 * *(float *)(temp_v0 + 0x10) +
-                    temp_v13 * *(float *)(temp_v0 + 0x14)) - *(float *)(temp_v0 + 0x18);
-            if (((temp_v7 < temp_v10) && (temp_v10 <= temp_v5)) || ((temp_v5 < temp_v10 && (temp_v10 <= temp_v7))))
-            {
-              temp_v7 = romwright_fabs_4(temp_v7);
-              temp_v17 = CONCAT44(temp_v7 + romwright_fabs_4(temp_v5),temp_v7);
-              temp_v15 = CONCAT44(temp_v14 - temp_v6,temp_v12 - temp_v8);
-              temp_v16 = CONCAT44(temp_v13 - temp_v11,temp_v10);
-              temp_v6 = temp_v6 + (temp_v14 - temp_v6) * (temp_v7 / (temp_v7 + romwright_fabs_4(temp_v5)));
-              temp_v18 = temp_v9;
-              temp_v5 = temp_v11;
-              if (temp_v3 != 0) {
-                FUN_002c2a58((int)*(char *)(temp_v0 + 4),(int)*(char *)(temp_v0 + 5));
-                temp_v19[0] = temp_v6;
-              }
-              else {
-                collisionTestProjectedSpherePlanes(temp_v19,(int)*(char *)(temp_v0 + 4));
-              }
-              if ((float)temp_v16 <= temp_v19[0]) {
-                temp_v11 = ((float)temp_v17 + temp_v19[0]) / (float)((unsigned long long)temp_v17 >> 0x20);
-                temp_v7 = (float)((unsigned long long)temp_v16 >> 0x20);
-                temp_v6 = (float)((unsigned long long)temp_v15 >> 0x20);
-                temp_v4 = temp_v1;
-                if ((int)temp_v11 < 0x3f800000) {
-                  temp_v9 = CONCAT44((float)((unsigned long long)temp_v18 >> 0x20) + (float)temp_v15 * temp_v11,
-                                    (float)temp_v18 + temp_v6 * temp_v11);
-                  temp_v11 = temp_v5 + temp_v7 * temp_v11;
-                }
-                else {
-                  temp_v9 = CONCAT44(temp_v12 + (float)temp_v15 * -24.0f,temp_v14 + temp_v6 * -24.0f);
-                  temp_v11 = temp_v13 + temp_v7 * -24.0f;
-                }
-              }
+                current.x += dx * scale * radius;
+                current.y += dy * scale * radius;
+                current.z += dz * scale * radius;
             }
-          }
-          temp_v1 = temp_v1 + 1;
-          temp_v0 = temp_v0 + 0xa8;
-        } while (temp_v1 < temp_v2);
-      }
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 3) {
-        if (temp_v4 == -1) {
-          temp_v11 = param_1[1];
-          temp_v12 = param_1[2];
-          *temp_v20 = *param_1;
-          temp_v20[1] = temp_v11;
-          temp_v20[2] = temp_v12;
+        } else if (pass == 1) {
+            list = g_mapCollision.walls;
+            count = g_mapCollision.wallCount;
+            radius = 8.0f;
+            if (hit == -1) {
+                f32 dx = from->x - to->x;
+                f32 dy = from->y - to->y;
+                f32 dz = from->z - to->z;
+                f32 scale = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
+
+                current.x = from->x + dx * scale * radius;
+                current.y = from->y + dy * scale * radius;
+                current.z = from->z + dz * scale * radius;
+            }
+        } else {
+            list = g_mapCollision.quads;
+            count = g_mapCollision.quadCount;
+            radius = 8.0f;
         }
-        else {
-          *temp_v20 = (float)temp_v9;
-          temp_v20[1] = (float)((unsigned long long)temp_v9 >> 0x20);
-          temp_v20[2] = temp_v11;
+        for (s32 i = 0; i < count; i++, list++) {
+            if (list->active == 0) {
+                continue;
+            }
+            SweepVec3 start = current;
+            f32 startSide = current.x * list->normal.x + current.y * list->normal.y + current.z * list->normal.z - list->planeD;
+            f32 endSide = to->x * list->normal.x + to->y * list->normal.y + to->z * list->normal.z - list->planeD;
+
+            if (!((startSide < 0.0f && 0.0f <= endSide) || (endSide < 0.0f && 0.0f <= startSide))) {
+                continue;
+            }
+            f32 startDistance = fabsf(startSide);
+            f32 total = startDistance + fabsf(endSide);
+            f32 ratio = startDistance / total;
+            SweepVec3 delta;
+            SweepVec3 crossing;
+
+            delta.x = to->x - start.x;
+            delta.y = to->y - start.y;
+            delta.z = to->z - start.z;
+            crossing.x = start.x + delta.x * ratio;
+            crossing.y = start.y + delta.y * ratio;
+            crossing.z = start.z + delta.z * ratio;
+            f32 contact;
+
+            if (pass != 0) {
+                contact = FUN_002c2a58(list->kind, list->shape, list, crossing, radius);
+            } else {
+                f32 results[18];
+
+                collisionTestProjectedSpherePlanes(results, list->kind, list->shape, list, crossing, radius);
+                contact = results[0];
+            }
+            if (contact < 0.0f) {
+                continue;
+            }
+            f32 reach = (startDistance + contact) / total;
+
+            if (reach < 1.0f) {
+                current.x = start.x + delta.x * reach;
+                current.y = start.y + delta.y * reach;
+                current.z = start.z + delta.z * reach;
+            } else {
+                current.x = to->x + delta.x * -6.0f;
+                current.y = to->y + delta.y * -6.0f;
+                current.z = to->z + delta.z * -6.0f;
+            }
+            hit = i;
         }
-        return temp_v4;
-      }
-      if (temp_v3 == 0) break;
-      temp_v0 = DAT_00580228;
-      temp_v2 = DAT_00580214;
-      if ((temp_v3 == 1) && (temp_v0 = DAT_00580224, temp_v2 = DAT_00580210, temp_v4 == -1)) {
-        temp_v14 = *param_2;
-        temp_v12 = param_2[1];
-        temp_v6 = *param_1 - temp_v14;
-        temp_v5 = param_1[1] - temp_v12;
-        temp_v13 = param_2[2];
-        temp_v11 = param_1[2] - temp_v13;
-        temp_v7 = 1.0f / romwright_sqrt_4(temp_v6 * temp_v6 + temp_v5 * temp_v5 + temp_v11 * temp_v11);
-        temp_v9 = CONCAT44(param_1[1] + temp_v5 * temp_v7 * 8.0f,*param_1 + temp_v6 * temp_v7 * 8.0f);
-        temp_v11 = param_1[2] + temp_v11 * temp_v7 * 8.0f;
-      }
     }
-  } while( 1 );
+    if (hit == -1) {
+        *out = *from;
+    } else {
+        *out = current;
+    }
+    return hit;
 }
 
-} /* extern "C" */
+}

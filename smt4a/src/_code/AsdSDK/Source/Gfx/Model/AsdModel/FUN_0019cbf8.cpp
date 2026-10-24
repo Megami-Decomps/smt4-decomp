@@ -9,7 +9,7 @@ int FUN_001ac2d4(...);
 int FUN_001ac524(...);
 int FUN_001ad8c4(...);
 int FUN_001b0e44(...);
-int FUN_001b12a4(...);
+int _ZN9Obj55b56cC1Ej(...);
 int FUN_001b25c0(...);
 
 typedef struct fn_0019cbf8_arg0 fn_0019cbf8_arg0;
@@ -137,7 +137,7 @@ extern int *asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_001ac524. */
 /* Supplied declaration required: FUN_001ad8c4. */
 /* Supplied declaration required: FUN_001b0e44. */
-/* Supplied declaration required: FUN_001b12a4. */
+/* Supplied declaration required: _ZN9Obj55b56cC1Ej. */
 /* Supplied declaration required: FUN_001b25c0. */
 
 
@@ -292,7 +292,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
         piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar7 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar7 != (int *)0x0) {
-          FUN_001b12a4(piVar7,piVar3);
+          _ZN9Obj55b56cC1Ej(piVar7,piVar3);
           FUN_001b0e44(piVar7,&temp_v6,temp_v7,temp_v8,(int)temp_v9);
           if ((piVar7 != (int *)0x0) &&
              ((**(romwright_code **)(*piVar7 + 0xc))(piVar7,temp_v4), *(int *)&pfVar11->field_0x148 != 0)) {
@@ -361,7 +361,7 @@ void FUN_0019cbf8(fn_0019cbf8_arg0 *param_1)
         piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar7 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar7 != (int *)0x0) {
-          FUN_001b12a4(piVar7,piVar3);
+          _ZN9Obj55b56cC1Ej(piVar7,piVar3);
           FUN_001b0e44(piVar7,&temp_v6,temp_v7,temp_v8,(int)temp_v9);
           if ((piVar7 != (int *)0x0) &&
              ((**(romwright_code **)(*piVar7 + 0xc))(piVar7,temp_v4), pfVar11->field_0x150 != 0)) {

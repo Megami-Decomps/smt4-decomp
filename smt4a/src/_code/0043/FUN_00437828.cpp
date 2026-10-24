@@ -1,139 +1,118 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00437828` (_code @ 0x437828, 0x25c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: list/mask-work builder; inlined intrusive-list helpers of retail are written out as loops and the three embedded-list emptiness tests schedule differently */
+#include "common.h"
 
-extern "C" {
-
-int FUN_00434d9c(void);
-int FUN_00436d04(int *, int);
-int FUN_00436d88(int *, int **);
-int FUN_004372bc(int *, int **);
-int maskWorkProcessGroupedActions(int *, int **);
-int FUN_004387f0(...);
-
-typedef struct fn_00437828_arg1 fn_00437828_arg1;
-struct fn_00437828_arg1 {
-    void *field_0x0; /* +0x0 */
-    undefined4 field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x1c];
-    undefined1 *field_0x24; /* +0x24 */
+/* A doubly linked list node: next at +0, previous at +4 in the callee's view; here the source list
+ * uses +4 as the forward link. */
+struct SourceNode {
+    /* 0x00 */ SourceNode *previous;
+    /* 0x04 */ SourceNode *next;
 };
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+struct MaskNode {
+    /* 0x00 */ MaskNode *next;
+    /* 0x04 */ MaskNode *previous;
+    /* 0x08 */ u8 body[0x1C];
+    /* 0x24 */ u8 *flags;          /* one flag per source entry */
+    /* 0x28 */ u8 unk28[4];
+    /* 0x2C */ u8 selected;
+};
 
-extern int FUN_00434d04(int *, int, int, unsigned int);
-/* Supplied declaration required: FUN_00434d9c. */
-/* Supplied declaration required: FUN_00436d04. */
-/* Supplied declaration required: FUN_00436d88. */
-/* Supplied declaration required: FUN_004372bc. */
-extern int FUN_0043756c(int *, int **);
-/* Supplied declaration required: maskWorkProcessGroupedActions. */
-/* Supplied declaration required: FUN_004387f0. */
+struct MaskLinks {
+    MaskNode *next;
+    MaskNode *previous;
+};
 
+struct MaskWork {
+    /* 0x00 */ void *arena;
+    /* 0x04 */ MaskLinks sentinel;  /* list of masks */
+    /* 0x0C */ void *arenaCopy;
+    /* 0x10 */ u32 sourceCount;
+    /* 0x14 */ SourceNode **sources;
+};
 
-unsigned int FUN_00437828(int *param_1,fn_00437828_arg1 *param_2,int param_3,int *param_4)
+extern "C" {
+void FUN_004387f0(void *block, u32 units);
+void FUN_00434d9c(void);
+s32 FUN_00434d04(void *body, void *arena, u32 count, s32 flag);
+void FUN_00436d04(MaskWork *work, u8 *flags);
+s32 FUN_0043756c(MaskWork *work, MaskNode **node);
+void FUN_004372bc(MaskWork *work, MaskNode **node);
+void FUN_00436d88(MaskWork *work, MaskNode **node);
+void maskWorkProcessGroupedActions(MaskWork *work, MaskNode **node);
 
+/* Builds the mask work for a list of sources: allocates its per-source table and first mask,
+ * propagates the grouped actions over every mask and marks the masks that contain the chosen
+ * source. Returns 1 on success. */
+u32 FUN_00437828(MaskWork *work, void *arena, SourceNode *list, SourceNode **chosen)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  unsigned int temp_v2;
-  int *piVar5;
-  int temp_v3;
-  unsigned char temp_v4;
-  int *temp_v5;
-  int *temp_v6;
-  
-  *param_1 = (int)param_2;
-  temp_v3 = 0;
-  for (temp_v1 = *(int *)(param_3 + 4); temp_v1 != param_3; temp_v1 = *(int *)(temp_v1 + 4)) {
-    temp_v3 = temp_v3 + 1;
-  }
-  param_1[4] = temp_v3;
-  FUN_004387f0(param_2,(temp_v3 * 4 + 0xfU) >> 4);
-  param_1[5] = (int)param_2;
-  if (param_2 != (fn_00437828_arg1 *)0x0) {
-    temp_v3 = 0;
-    for (temp_v1 = *(int *)(param_3 + 4); temp_v1 != param_3; temp_v1 = *(int *)(temp_v1 + 4)) {
-      temp_v0 = temp_v3 * 4;
-      temp_v3 = temp_v3 + 1;
-      *(int *)(param_1[5] + temp_v0) = temp_v1;
-    }
-    piVar3 = (int *)*param_1;
-    piVar5 = param_1 + 1;
-    param_1[3] = (int)piVar3;
-    FUN_004387f0(piVar3,3);
-    if (piVar3 != (int *)0x0) {
-      if (piVar3 != (int *)0xfffffff8) {
+    work->arena = arena;
+    u32 count = 0;
+    for (SourceNode *n = list->next; n != list; n = n->next)
+        count++;
+    work->sourceCount = count;
+    FUN_004387f0(arena, (count * 4 + 0xF) >> 4);
+    work->sources = (SourceNode **)arena;
+    if (arena == NULL)
+        return 0;
+
+    count = 0;
+    for (SourceNode *n = list->next; n != list; n = n->next)
+        work->sources[count++] = n;
+
+    MaskNode *mask = (MaskNode *)work->arena;
+    work->arenaCopy = mask;
+    MaskNode *sentinel = (MaskNode *)&work->sentinel;
+    FUN_004387f0(mask, 3);
+    if (mask == NULL)
+        return 0;
+    if ((s32)mask != -8)
         FUN_00434d9c();
-      }
-      *piVar3 = *piVar5;
-      piVar3[1] = (int)piVar5;
-      *piVar5 = (int)piVar3;
-      *(int **)(*piVar3 + 4) = piVar3;
-      temp_v1 = FUN_00434d04(piVar3 + 2,*param_1,param_1[4],1);
-      if (temp_v1 != 0) {
-        *(unsigned char *)piVar3[9] = 1;
-        FUN_00436d04(param_1,piVar3[9]);
-        temp_v6 = piVar3;
-        temp_v1 = FUN_0043756c(param_1,&temp_v6);
-        if (temp_v1 != 0) {
-          for (piVar3 = (int *)param_1[2]; piVar3 != param_1 + 1; piVar3 = (int *)piVar3[1]) {
-            if ((int *)piVar3[6] != piVar3 + 5) {
-              piVar5 = param_1;
-              temp_v5 = piVar3;
-              FUN_004372bc(param_1,&temp_v5);
-              if (piVar5 == (int *)0x0) {
+    mask->next = sentinel->next;
+    mask->previous = sentinel;
+    sentinel->next = mask;
+    mask->next->previous = mask;
+    if (FUN_00434d04(mask->body, work->arena, work->sourceCount, 1) == 0)
+        return 0;
+    *mask->flags = 1;
+    FUN_00436d04(work, mask->flags);
+    MaskNode *current = mask;
+    if (FUN_0043756c(work, &current) == 0)
+        return 0;
+
+    for (MaskNode *n = work->sentinel.previous; n != sentinel; n = n->previous) {
+        MaskNode *arg;
+        if (n->flags != (u8 *)(n + 0) + 0x14) {
+            arg = n;
+            FUN_004372bc(work, &arg);
+            if (arg == NULL)
                 return 0;
-              }
-              if ((int *)piVar3[6] != piVar3 + 5) {
-                piVar5 = param_1;
-                temp_v5 = piVar3;
-                FUN_00436d88(param_1,&temp_v5);
-                if (piVar5 == (int *)0x0) {
-                  return 0;
+            if (n->flags != (u8 *)(n + 0) + 0x14) {
+                arg = n;
+                FUN_00436d88(work, &arg);
+                if (arg == NULL)
+                    return 0;
+                if (n->flags != (u8 *)(n + 0) + 0x14) {
+                    arg = n;
+                    maskWorkProcessGroupedActions(work, &arg);
+                    if (arg == NULL)
+                        return 0;
                 }
-                if (((int *)piVar3[6] != piVar3 + 5) &&
-                   (piVar5 = param_1, temp_v5 = piVar3, maskWorkProcessGroupedActions(param_1,&temp_v5),
-                   piVar5 == (int *)0x0)) {
-                  return 0;
-                }
-              }
             }
-          }
-          piVar5 = (int *)param_1[2];
-          for (piVar3 = piVar5; piVar3 != param_1 + 1; piVar3 = (int *)piVar3[1]) {
-          }
-          temp_v1 = *param_4;
-          do {
-            if (piVar5 == param_1 + 1) {
-              return 1;
-            }
-            temp_v4 = 0;
-            temp_v2 = 0;
-            if (temp_v2 < (unsigned int)param_1[4]) {
-              do {
-                if ((*(char *)(piVar5[9] + temp_v2) != '\0') &&
-                   (*(int *)(param_1[5] + temp_v2 * 4) == temp_v1)) {
-                  temp_v4 = 1;
-                  break;
-                }
-                temp_v2 = temp_v2 + 1;
-              } while (temp_v2 < (unsigned int)param_1[4]);
-            }
-            *(unsigned char *)(piVar5 + 0xb) = temp_v4;
-            piVar5 = (int *)piVar5[1];
-          } while( 1 );
         }
-      }
     }
-  }
-  return 0;
+
+    SourceNode *target = *chosen;
+    for (MaskNode *n = work->sentinel.previous; n != sentinel; n = n->previous) {
+        u8 found = 0;
+        for (u32 i = 0; i < work->sourceCount; i++) {
+            if (n->flags[i] != 0 && work->sources[i] == target) {
+                found = 1;
+                break;
+            }
+        }
+        n->selected = found;
+    }
+    return 1;
 }
 
 } /* extern "C" */

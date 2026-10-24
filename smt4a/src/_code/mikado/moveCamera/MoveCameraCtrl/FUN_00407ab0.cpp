@@ -1,191 +1,169 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00407ab0` (_code @ 0x407ab0, 0x3a4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sets up the mikado move-camera controller (camera model, camera data, named points and the two marker models); written from the decompilation, allocation tracing and register scheduling not compared with retail */
+#include "common.h"
+
+struct McVec3 {
+    u32 x, y, z;
+};
+
+struct McModelList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 object;          /* the registered scene object */
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u8 *data;
+};
+
+struct McNameTable {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ u8 *entries;         /* 0xC bytes each, the name pointer at 0x14 relative to 0x78 base */
+};
+
+struct McSceneObject {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ struct { u8 unk[8]; s32 count; } *nameList;
+    /* 0x10C */ u8 unk10C[0x104];
+    /* 0x210 */ McNameTable *table;
+};
+
+struct McOwner {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ struct { u8 unk[0x48]; u32 **cameraData; } *scene;
+};
+
+struct MoveCameraCtrl {
+    /* 0x000 */ u32 unk00;
+    /* 0x004 */ u32 unk04;
+    /* 0x008 */ u32 unk08;
+    /* 0x00C */ s32 pointCount;
+    /* 0x010 */ u8 unk10[5];
+    /* 0x015 */ u8 hasPoints;
+    /* 0x016 */ u8 unk16[2];
+    /* 0x018 */ McModelList *cameraModel;
+    /* 0x01C */ McModelList *pointModel;
+    /* 0x020 */ McModelList *arrowModel;
+    /* 0x024 */ u8 unk24[0x570];
+    /* 0x594 */ McOwner *owner;
+    /* 0x598 */ u8 unk598[0x1C];
+    /* 0x5B4 */ McVec3 position;
+    /* 0x5C0 */ McVec3 target;
+    /* 0x5CC */ u8 unk5CC[0x18];
+    /* 0x5E4 */ McVec3 positionB;
+    /* 0x5F0 */ McVec3 targetB;
+    /* 0x5FC */ u8 unk5FC[0xC];
+    /* 0x608 */ McVec3 pointStart;
+    /* 0x614 */ u8 unk614[0xC];
+    /* 0x620 */ McVec3 points[0x20];
+};
 
 extern "C" {
+extern u32 g_handleRegistry;
 
-int textFormatBuffer(...);
-int FUN_00178b04(...);
-int lookupNameEntry(int, int, int *);
-int controllerSetPosition(...);
-int FUN_003fd7b4(...);
-int FUN_003fe86c(...);
-int FUN_00407110(unsigned int *, unsigned char [128]);
-int FUN_0040aa6c(void);
-int FUN_0040aad4(...);
-int FUN_0040ab7c(...);
-int handleRegistryRegisterObject(...);
-int FUN_0040ae70(unsigned int, int);
-int resourceOwnerLoadNamed(unsigned int, unsigned char [128]);
-int FUN_0045b538(int);
+void textFormatBuffer(char *out, const char *format, ...);
+void *FUN_00178b04(u32 size, const char *file, u32 line);
+McModelList *modelListInit(void *memory);
+void FUN_0040aa6c(void);
+void FUN_0040aad4(McModelList *list, s32 flag);
+void FUN_0040ab7c(McModelList *list, s32 flag);
+void handleRegistryRegisterObject(u32 registry, u32 object);
+void FUN_003fe86c(u32 object, s32 a, s32 b);
+void controllerSetPosition(u32 object);
+void FUN_003fd7b4(u32 object);
+void FUN_00407110(MoveCameraCtrl *ctrl, const char *name);
+void resourceOwnerLoadNamed(u32 registry, const char *name);
+s32 FUN_0040af60(u32 registry);
+void FUN_0040ae70(u32 registry, s32 flag);
+void FUN_0045b538(u8 *data);
+const char *FUN_00102c30(const void *name, const char *prefix);
+void lookupNameEntry(McSceneObject *object, const char *entry, McVec3 *out);
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_3_stack;
+#define MC_SOURCE "c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp"
 
-extern unsigned char LAB_00407e54; /* 0x407e54 */
-extern unsigned char LAB_00407e6c; /* 0x407e6c */
-extern unsigned char LAB_00407e78; /* 0x407e78 */
-extern unsigned char LAB_00407e80; /* 0x407e80 */
-extern unsigned char LAB_00407e88; /* 0x407e88 */
-extern unsigned char LAB_00407e9c; /* 0x407e9c */
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00102c30(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: lookupNameEntry. */
-/* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fd7b4. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_00407110. */
-/* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aad4. */
-/* Supplied declaration required: FUN_0040ab7c. */
-extern unsigned int modelListInit(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0040ae70. */
-extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: resourceOwnerLoadNamed. */
-/* Supplied declaration required: FUN_0045b538. */
-
-
-void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
-
+/* Allocates and constructs one model list. */
+static __inline McModelList *mcCreateModelList(u32 line)
 {
-/* irregular: 14 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned char temp_v11 [128];
-  int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  
-  param_1[6] = 0;
-  *param_1 = 0;
-  param_1[2] = 0;
-  param_1[1] = 0;
-  param_1[3] = 0;
-  if (param_3 == 0) {
-    param_3 = param_2;
-  }
-  *(unsigned char *)((int)param_1 + 0x15) = 0;
-  textFormatBuffer(temp_v11,&LAB_00407e54,param_3);
-  temp_v0 = 0x20;
-  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",0xf5)
-  ;
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = modelListInit();
-  }
-  param_1[6] = temp_v1;
-  FUN_0040aa6c();
-  FUN_0040aad4(param_1[6],0);
-  FUN_0045b538(*(int *)(param_1[6] + 0xc) + 0xc);
-  temp_v9 = *(int *)(param_1[6] + 4);
-  handleRegistryRegisterObject(g_handleRegistry,temp_v9);
-  FUN_003fe86c(temp_v9,0,1);
-  controllerSetPosition(temp_v9);
-  FUN_003fd7b4(temp_v9);
-  textFormatBuffer(temp_v11,&LAB_00407e6c,param_2);
-  FUN_00407110(param_1,temp_v11);
-  textFormatBuffer(temp_v11,&LAB_00407e78,param_2);
-  temp_v1 = g_handleRegistry;
-  resourceOwnerLoadNamed(g_handleRegistry,temp_v11);
-  temp_v0 = FUN_0040af60(temp_v1);
-  if (temp_v0 != 0) {
-    FUN_0040ae70(temp_v1,1);
-  }
-  temp_v0 = **(int **)(*(int *)(param_1[0x165] + 0x34) + 0x48);
-  puVar7 = *(unsigned int **)(temp_v0 + 0x30);
-  temp_v3 = *(unsigned int *)(temp_v0 + 0x1c);
-  temp_v4 = *(unsigned int *)(temp_v0 + 0x20);
-  temp_v5 = *(unsigned int *)(temp_v0 + 0x24);
-  param_1[0x179] = temp_v3;
-  param_1[0x17a] = temp_v4;
-  param_1[0x17b] = temp_v5;
-  temp_v1 = *puVar7;
-  temp_v10 = puVar7[1];
-  temp_v6 = puVar7[2];
-  param_1[0x17e] = temp_v6;
-  param_1[0x17c] = temp_v1;
-  param_1[0x17d] = temp_v10;
-  param_1[0x172] = temp_v6;
-  param_1[0x170] = temp_v1;
-  param_1[0x171] = temp_v10;
-  temp_v0 = 0;
-  param_1[0x16d] = temp_v3;
-  param_1[0x16e] = temp_v4;
-  param_1[0x16f] = temp_v5;
-  temp_v7 = *(int *)(*(int *)(temp_v9 + 0x108) + 8);
-  temp_v8 = *(int *)(*(int *)(temp_v9 + 0x210) + 0x78);
-  if (0 < temp_v7) {
-    do {
-      temp_v2 = FUN_00102c30(*(unsigned int *)(temp_v8 + temp_v0 * 0xc + 0x14),&LAB_00407e80);
-      if (temp_v2 != 0) {
-        lookupNameEntry(temp_v9,temp_v2,&temp_v12);
-        param_1[param_1[3] * 3 + 0x188] = temp_v12;
-        param_1[param_1[3] * 3 + 0x189] = temp_v13;
-        param_1[param_1[3] * 3 + 0x18a] = temp_v14;
-        param_1[3] = param_1[3] + 1;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < temp_v7);
-  }
-  if (0 < (int)param_1[3]) {
-    *(unsigned char *)((int)param_1 + 0x15) = 1;
-    textFormatBuffer(temp_v11,&LAB_00407e88);
-    temp_v0 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",
-                 0x15e);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = modelListInit();
-    }
-    param_1[8] = temp_v1;
+    void *memory = FUN_00178b04(0x20, MC_SOURCE, line);
+    return memory != NULL ? modelListInit(memory) : NULL;
+}
+
+void FUN_00407ab0(MoveCameraCtrl *ctrl, const char *cameraName, const char *dataName)
+{
+    ctrl->cameraModel = NULL;
+    ctrl->unk00 = 0;
+    ctrl->unk08 = 0;
+    ctrl->unk04 = 0;
+    ctrl->pointCount = 0;
+    if (dataName == NULL)
+        dataName = cameraName;
+    ctrl->hasPoints = 0;
+
+    char path[128];
+    textFormatBuffer(path, "%s.bam", dataName);
+    ctrl->cameraModel = mcCreateModelList(0xF5);
     FUN_0040aa6c();
-    FUN_0040ab7c(param_1[8],0);
-    FUN_0040aad4(param_1[8],0);
-    temp_v1 = *(unsigned int *)(param_1[8] + 4);
-    handleRegistryRegisterObject(g_handleRegistry,temp_v1);
-    FUN_003fe86c(temp_v1,0,1);
-    controllerSetPosition(temp_v1);
-    FUN_003fd7b4(temp_v1);
-    textFormatBuffer(temp_v11,&LAB_00407e9c);
-    temp_v0 = 0x20;
-    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\moveCamera\\MoveCameraCtrl.cpp",
-                 0x16c);
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      temp_v1 = modelListInit();
+    FUN_0040aad4(ctrl->cameraModel, 0);
+    FUN_0045b538(ctrl->cameraModel->data + 0xC);
+    u32 object = ctrl->cameraModel->object;
+    handleRegistryRegisterObject(g_handleRegistry, object);
+    FUN_003fe86c(object, 0, 1);
+    controllerSetPosition(object);
+    FUN_003fd7b4(object);
+
+    textFormatBuffer(path, "%s_cam.bch", cameraName);
+    FUN_00407110(ctrl, path);
+    textFormatBuffer(path, "%s.bch", cameraName);
+    u32 registry = g_handleRegistry;
+    resourceOwnerLoadNamed(registry, path);
+    if (FUN_0040af60(registry) != 0)
+        FUN_0040ae70(registry, 1);
+
+    u32 *cameraData = *ctrl->owner->scene->cameraData;
+    u32 *cameraPose = reinterpret_cast<u32 *>(cameraData[0x30 / 4]);
+    ctrl->positionB.x = cameraData[0x1C / 4];
+    ctrl->positionB.y = cameraData[0x20 / 4];
+    ctrl->positionB.z = cameraData[0x24 / 4];
+    ctrl->targetB.x = cameraPose[0];
+    ctrl->targetB.y = cameraPose[1];
+    ctrl->targetB.z = cameraPose[2];
+    ctrl->target = ctrl->targetB;
+    ctrl->position = ctrl->positionB;
+
+    McSceneObject *sceneObject = reinterpret_cast<McSceneObject *>(object);
+    s32 nodeCount = sceneObject->nameList->count;
+    u8 *nodes = sceneObject->table->entries;
+    for (s32 i = 0; i < nodeCount; i++) {
+        const char *entry = FUN_00102c30(*reinterpret_cast<void **>(nodes + i * 0xC + 0x14), "Dum_");
+        if (entry != NULL) {
+            McVec3 point;
+            lookupNameEntry(sceneObject, entry, &point);
+            ctrl->points[ctrl->pointCount] = point;
+            ctrl->pointCount++;
+        }
     }
-    param_1[7] = temp_v1;
-    FUN_0040aa6c();
-    FUN_0040ab7c(param_1[7],0);
-    FUN_0040aad4(param_1[7],0);
-    temp_v1 = *(unsigned int *)(param_1[7] + 4);
-    handleRegistryRegisterObject(g_handleRegistry,temp_v1);
-    FUN_003fe86c(temp_v1,0,1);
-    controllerSetPosition(temp_v1);
-    param_1[0x182] = param_1[0x188];
-    param_1[0x183] = param_1[0x189];
-    param_1[0x184] = param_1[0x18a];
-    FUN_003fd7b4(temp_v1);
-  }
-  return;
+
+    if (ctrl->pointCount > 0) {
+        ctrl->hasPoints = 1;
+        textFormatBuffer(path, "mikado/yaji.bam");
+        ctrl->arrowModel = mcCreateModelList(0x15E);
+        FUN_0040aa6c();
+        FUN_0040ab7c(ctrl->arrowModel, 0);
+        FUN_0040aad4(ctrl->arrowModel, 0);
+        u32 arrow = ctrl->arrowModel->object;
+        handleRegistryRegisterObject(g_handleRegistry, arrow);
+        FUN_003fe86c(arrow, 0, 1);
+        controllerSetPosition(arrow);
+        FUN_003fd7b4(arrow);
+
+        textFormatBuffer(path, "mikado/point.bam");
+        ctrl->pointModel = mcCreateModelList(0x16C);
+        FUN_0040aa6c();
+        FUN_0040ab7c(ctrl->pointModel, 0);
+        FUN_0040aad4(ctrl->pointModel, 0);
+        u32 marker = ctrl->pointModel->object;
+        handleRegistryRegisterObject(g_handleRegistry, marker);
+        FUN_003fe86c(marker, 0, 1);
+        controllerSetPosition(marker);
+        ctrl->pointStart = ctrl->points[0];
+        FUN_003fd7b4(marker);
+    }
 }
 
 } /* extern "C" */

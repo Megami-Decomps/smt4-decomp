@@ -1,140 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cffd0` (_code @ 0x1cffd0, 0x21c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the skill candidate pick; retail keeps the best score in s17 and the running score in s16, with the 1.0 and 0.01 constants in s18/s19 loaded under the first loop test, which armcc here schedules differently. */
+#include "common.h"
 
-extern "C" {
-
-int idMapLookup(void);
-int passiveSkillLookupRecord(void);
-int dataTable06Sub1GetRecord(...);
-int dataTable40FindById(void);
-int VectorUnsignedToFloat(int, int);
-
-typedef struct fn_001cffd0_arg0 fn_001cffd0_arg0;
-struct fn_001cffd0_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x8];
-    int field_0x1c; /* +0x1c */
-    int field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x8];
-    byte field_0x2c; /* +0x2c */
+/* A skill-learning candidate pool: pick the best candidate and move it to the chosen list. */
+struct SkillPicker {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 *candidates;
+    /* 0x08 */ s32 candidateCount;
+    /* 0x0C */ u16 *passives;       /* skills the demon already holds */
+    /* 0x10 */ s32 passiveCount;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u16 *chosen;
+    /* 0x20 */ s32 chosenCount;
+    /* 0x24 */ u8 unk24[8];
+    /* 0x2C */ u8 wantedKind;
 };
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-extern int FUN_0026a604(void);
-/* Supplied declaration required: idMapLookup. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: dataTable40FindById. */
+struct SkillRecord06 {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 element;
+    /* 0x03 */ u8 power;            /* low five bits */
+};
 
+extern "C" {
+s32 idMapLookup(u32 id);
+SkillRecord06 *dataTable06Sub1GetRecord(u32 id);
+void *dataTable40FindById(u32 id);
+void *passiveSkillLookupRecord(u32 id);
+s32 FUN_0026a604(void *passive, void *skill);
 
-unsigned int FUN_001cffd0(fn_001cffd0_arg0 *param_1)
-
+/* Scores every candidate (power, plus a bonus for the wanted kind and for a held passive that
+ * boosts it, minus a penalty for kinds and elements already chosen), moves the best one (the lower id
+ * on a tie) to the chosen list and returns whether there was one. */
+u32 FUN_001cffd0(SkillPicker *picker)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int in_fpscr;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  
-  temp_v6 = 0;
-  temp_v7 = -1;
-  temp_v9 = 0.0f;
-  if (0 < param_1->field_0x8) {
-    temp_v11 = 0.01f;
-    temp_v10 = 1.0f;
-    do {
-      temp_v1 = (unsigned int)*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2);
-      if ((temp_v1 != 0) && (idMapLookup(), temp_v1 == 6)) {
-        dataTable06Sub1GetRecord(*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2));
-        temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2);
-        temp_v1 = temp_v4;
-        dataTable06Sub1GetRecord();
-        temp_v8 = (float)VectorUnsignedToFloat
-                                 (*(unsigned char *)(temp_v1 + 3) & 0x1f,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = temp_v8 + temp_v8 * temp_v11;
-        temp_v2 = temp_v4;
-        idMapLookup();
-        if (param_1->field_0x2c == temp_v2) {
-          temp_v8 = temp_v8 + temp_v10;
-        }
-        dataTable40FindById();
-        if ((temp_v4 != 0) && (temp_v5 = 0, 0 < param_1->field_0x10)) {
-          do {
-            if (*(short *)(param_1->field_0xc + temp_v5 * 2) != 0) {
-              passiveSkillLookupRecord();
-              temp_v3 = FUN_0026a604();
-              if (temp_v3 != 0) {
-                temp_v8 = temp_v8 + temp_v10;
-                break;
-              }
+    s32 best = -1;
+    f32 bestScore = 0.0f;
+    for (s32 i = 0; i < picker->candidateCount; i++) {
+        u32 id = picker->candidates[i];
+        if (id == 0 || idMapLookup(id) != 6)
+            continue;
+        dataTable06Sub1GetRecord(picker->candidates[i]);
+        u32 skill = picker->candidates[i];
+        SkillRecord06 *record = dataTable06Sub1GetRecord(skill);
+        f32 power = (f32)(record->power & 0x1F);
+        f32 score = power + power * 0.01f;
+        s32 kind = idMapLookup(skill);
+        if (picker->wantedKind == kind)
+            score += 1.0f;
+        void *skillData = dataTable40FindById(skill);
+        if (skillData != NULL) {
+            for (s32 j = 0; j < picker->passiveCount; j++) {
+                if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), skillData)) {
+                    score += 1.0f;
+                    break;
+                }
             }
-            temp_v5 = temp_v5 + 1;
-          } while (temp_v5 < param_1->field_0x10);
         }
-        temp_v5 = 0;
-        if (temp_v5 < param_1->field_0x20) {
-          do {
-            temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x1c + temp_v5 * 2);
-            idMapLookup();
-            if (temp_v4 == temp_v2) {
-              temp_v8 = temp_v8 - temp_v10;
-            }
-            temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x1c + temp_v5 * 2);
-            dataTable06Sub1GetRecord();
-            temp_v5 = temp_v5 + 1;
-            if (*(char *)(temp_v1 + 2) == *(char *)(temp_v4 + 2)) {
-              temp_v8 = temp_v8 - temp_v10;
-            }
-          } while (temp_v5 < param_1->field_0x20);
+        for (s32 j = 0; j < picker->chosenCount; j++) {
+            if (idMapLookup(picker->chosen[j]) == kind)
+                score -= 1.0f;
+            if (record->element == dataTable06Sub1GetRecord(picker->chosen[j])->element)
+                score -= 1.0f;
         }
-        if (-1 >= temp_v7) {
-          temp_v7 = temp_v6;
-          temp_v9 = temp_v8;
+        if (best < 0 || score > bestScore ||
+            (score == bestScore && picker->candidates[i] <= picker->candidates[best])) {
+            best = i;
+            bestScore = score;
         }
-        else {
-          temp_v1 = in_fpscr & 0xfffffff;
-          temp_v2 = temp_v1 | ((unsigned int)(temp_v9 < temp_v8) << 0x1f) | ((unsigned int)(temp_v9 == temp_v8) << 0x1e);
-          in_fpscr = temp_v2 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v8 != temp_v8)) << 0x1c);
-          temp_v0 = (unsigned char)(temp_v2 >> 0x18);
-          if ((!(!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1))) &&
-             ((in_fpscr = temp_v1 | ((unsigned int)(temp_v9 == temp_v8) << 0x1e), !romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0) ||
-              (*(unsigned short *)(param_1->field_0x4 + temp_v7 * 2) >=
-               *(unsigned short *)(param_1->field_0x4 + temp_v6 * 2))))) {
-            temp_v7 = temp_v6;
-            temp_v9 = temp_v8;
-          }
-        }
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < param_1->field_0x8);
-    if (-1 < temp_v7) {
-      *(unsigned short *)(param_1->field_0x1c + param_1->field_0x20 * 2) =
-           *(unsigned short *)(param_1->field_0x4 + temp_v7 * 2);
-      param_1->field_0x20 = param_1->field_0x20 + 1;
-      *(unsigned short *)(param_1->field_0x4 + temp_v7 * 2) = 0;
-      return 1;
     }
-  }
-  return 0;
+    if (best < 0)
+        return 0;
+    picker->chosen[picker->chosenCount] = picker->candidates[best];
+    picker->chosenCount++;
+    picker->candidates[best] = 0;
+    return 1;
 }
 
 } /* extern "C" */

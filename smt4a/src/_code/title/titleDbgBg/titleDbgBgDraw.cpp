@@ -1,4 +1,4 @@
-/* NON_MATCHING: state-stack address setup and zero-return placement differ; O3 hoists shared text float arguments across the branch, possibly an O2 difference. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 50 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 
 struct TitleDebugBackground {
@@ -25,7 +25,7 @@ u32 titleDbgBgDraw(void)
     TitleDebugBackground *background = DAT_00589168;
     if (background->state == 1) {
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         efctSetSpeed(1.0f);
         FUN_00183bb0();
         renderStackPop(&g_renderCtx->stackA);

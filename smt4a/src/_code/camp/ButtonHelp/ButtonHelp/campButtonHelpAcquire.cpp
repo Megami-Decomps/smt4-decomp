@@ -1,131 +1,118 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `campButtonHelpAcquire` (_code @ 0x342010, 0x298 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the zero constant of the selected-sprite reset loop differs (retail materialises it with a fresh mov r0,#0 instead of reusing the register holding 0, shifting the literal pool by one word) and the stm base register of the process arguments. */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "ui/ButtonHelp.h"
+
+namespace {
+/* Animation keys handed to paramsInit. */
+struct ButtonHelpKey {
+    f32 first;
+    f32 last;
+    s32 mode;
+};
+
+/* g_buttonHelp as this function sees it: the reference count, the work area and the two resource files. */
+struct ButtonHelpAcquireGlobals {
+    ButtonHelpGlobalsA prefix;
+    s32 mbm;
+    s32 bf;
+};
+
+/* Animation tables for paramsInit; the original file defined them statically. */
+static const s32 sKeysFirst[12] = {
+    0, 0, 0, 0, 0, 0,
+    320, 0, 8, 0, 65216, 4,
+};
+static const ButtonHelpKey sKeysSecond[2] = {
+    {1.0f, 1.0f, 0},
+    {0.4f, 0.0f, 3},
+};
+static const ButtonHelpKey sKeysThird[2] = {
+    {0.0f, 1.0f, 4},
+    {1.0f, 1.0f, 3},
+};
+static const s32 sKeysFifth[42] = {
+    0, 0, -3, 0, 0, -3, 0, 1, 0, -3, -3, 0,
+    -3, 0, -1, 0, -1, -1, 0, -1, 0, 1, 1, -3,
+    0, 1, -3, 0, 0, 1, -3, -3, 0, -3, 0, -1,
+    0, -1, -1, 0, -1, 0,
+};
+}
 
 extern "C" {
+extern ButtonHelpAcquireGlobals g_buttonHelp;
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void sysMemClear(void *data, u32 size);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcFunc update, AsdProcFunc destroy, void *work);
+u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
+void FUN_002e1698(u32 job);
+s32 FUN_002e169c(u32 job);
+void FUN_0025ccc0(u32 job);
+void paramsClearPacket(UiResourceParameters *packet);
+void paramsInit(UiResourceParameters *packet, const void *first, u32 firstBytes,
+                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
+                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void FUN_0014e188(ButtonHelpUnit *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
+void FUN_003872b8(ButtonHelpUnit *sprite, u32 group, u32 image, s32 kind);
+void FUN_00387240(ButtonHelpUnit *sprite, u32 group, s32 arg);
+void spriteSetLayer(ButtonHelpUnit *sprite, u16 layer);
+void spriteSetVisible(ButtonHelpUnit *sprite, u8 visible);
+u32 spriteHandleCreate(u32 arg);
+void FUN_001527d8(u32 handle, u32 color);
+void positionStateSet(u32 handle, s32 arg, u32 color, f32 value);
+u32 FUN_00275bc8(s32 bf, s32 mbm);
 
-int FUN_0014e188(...);
-int asdProcessCreateSimple(...);
-int paramsInit(...);
-int positionStateSet(...);
-int taskCreateDraw(...);
-int FUN_001527d8(...);
-int asdMemoryAllocTracked(...);
-int FUN_00275bc8(...);
-int sysMemClear(...);
-int FUN_00387240(...);
-int FUN_003872b8(...);
-int paramsClearPacket(...);
-
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern int FUN_0025ccc0(...); /* 0x25ccc0 */
-extern unsigned char LAB_002e1698; /* 0x2e1698 */
-extern int FUN_002e169c(...); /* 0x2e169c */
-extern unsigned char LAB_003422f8; /* 0x3422f8 */
-extern unsigned char LAB_0034230c; /* 0x34230c */
-extern unsigned char DAT_0052b740; /* 0x52b740 */
-extern unsigned char DAT_0052b770; /* 0x52b770 */
-extern unsigned char DAT_0052b788; /* 0x52b788 */
-extern unsigned char DAT_0052b7a0; /* 0x52b7a0 */
-extern signed char g_buttonHelp; /* 0x57f0c4 */
-extern unsigned int *DAT_0057f0c8; /* 0x57f0c8 */
-extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
-extern unsigned int DAT_0057f0d0; /* 0x57f0d0 */
-
-extern unsigned int spriteHandleCreate(unsigned int);
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001527d8. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: FUN_003872b8. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
+/* Takes a reference on the button help; the first one builds its work area, jobs and sprites. */
 void campButtonHelpAcquire(void)
-
 {
-/* irregular: 14 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (g_buttonHelp < '\x01') {
-    if (DAT_0057f0c8 == (unsigned int *)0x0) {
-      puVar3 = (unsigned int *)0x100;
-      asdMemoryAllocTracked(0x100,0x100,0,0x684,1);
-      DAT_0057f0c8 = puVar3;
+    if (g_buttonHelp.prefix.references <= 0) {
+        if (g_buttonHelp.prefix.work == NULL) {
+            asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\ButtonHelp\\ButtonHelp.cpp", 0x42a);
+            g_buttonHelp.prefix.work = static_cast<ButtonHelpWorkA *>(asdMemoryAllocTracked(
+                ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(ButtonHelpWorkA), 1));
+        }
+        ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
+        sysMemClear(work, sizeof(ButtonHelpWorkA));
+        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0,
+                                           FUN_002e1698, FUN_0025ccc0, NULL);
+        work->jobs.drawTask = taskCreateDraw(reinterpret_cast<const s8 *>("ButtonHelp DRAW"), 234, 0, 0,
+                                        FUN_002e169c, NULL, NULL, work->job);
+        ButtonHelpWorkA *panel = g_buttonHelp.prefix.work;
+        paramsClearPacket(&panel->packet);
+        paramsInit(&panel->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
+                   sKeysThird, sizeof(sKeysThird), NULL, 0, sKeysFifth, sizeof(sKeysFifth));
+        for (s32 i = 0; i < 6; i++) {
+            FUN_0014e188(&panel->units[i], 10, 3, &panel->packet, 16, 1.0f);
+            FUN_003872b8(&panel->units[i], 10, 17 + i, 3);
+        }
+        FUN_0014e188(&panel->selected[0], 10, 0, &panel->packet, 16, 1.0f);
+        FUN_0014e188(&panel->selected[1], 10, 1, &panel->packet, 16, 1.0f);
+        FUN_0014e188(&panel->selected[2], 10, 163, &panel->packet, 16, 1.0f);
+        FUN_0014e188(&panel->selected[3], 10, 164, &panel->packet, 16, 1.0f);
+        ButtonHelpWorkA *current = g_buttonHelp.prefix.work;
+        current->unk5E4 = 0;
+        for (s32 i = 0; i < 4; i++) {
+            spriteSetLayer(&current->selected[i], 2);
+            FUN_00387240(&current->selected[i], 10, 0);
+            spriteSetVisible(&current->selected[i], 1);
+            current->selected[i].x = 0;
+            current->selected[i].y = 0;
+            current->selected[i].z = 0;
+        }
+        panel->panelState = 0;
+        panel->unk5E2[0] = 1;
+        panel->unk5E0 = 1;
+        panel->unk5E2[1] = 0;
+        panel->count = 0;
+        work->unk678 = spriteHandleCreate(0);
+        FUN_001527d8(work->unk678, 0xf4f4f4ff);
+        positionStateSet(work->unk678, 0, 0x646464ff, 0.0f);
+        work->process = FUN_00275bc8(g_buttonHelp.bf, g_buttonHelp.mbm);
     }
-    puVar3 = DAT_0057f0c8;
-    sysMemClear();
-    puVar4 = &LAB_003422f8;
-    asdProcessCreateSimple(&LAB_003422f8,3,0,0,FUN_0025ccc0,&LAB_002e1698,0);
-    *puVar3 = (unsigned int)puVar4;
-    puVar5 = &LAB_0034230c;
-    taskCreateDraw(&LAB_0034230c,0xea,0,0,FUN_002e169c,0,0,puVar4);
-    puVar3[2] = (unsigned int)puVar5;
-    puVar1 = DAT_0057f0c8;
-    paramsClearPacket(DAT_0057f0c8 + 5);
-    paramsInit(puVar1 + 5,&DAT_0052b740,0x30,&DAT_0052b770,0x18,&DAT_0052b788,0x18,0,0,
-                 &DAT_0052b7a0,0xa8);
-    temp_v1 = 0;
-    do {
-      FUN_0014e188(puVar1 + temp_v1 * 0x23 + 0xd,10,3,puVar1 + 5,0x10);
-      FUN_003872b8(puVar1 + temp_v1 * 0x23 + 0xd,10,temp_v1 + 0x11,3);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 6);
-    FUN_0014e188(puVar1 + 0xdf,10,0,puVar1 + 5,0x10);
-    FUN_0014e188(puVar1 + 0x102,10,1,puVar1 + 5,0x10);
-    FUN_0014e188(puVar1 + 0x125,10,0xa3,puVar1 + 5,0x10);
-    FUN_0014e188(puVar1 + 0x148,10,0xa4,puVar1 + 5,0x10);
-    puVar2 = DAT_0057f0c8;
-    *(unsigned char *)(DAT_0057f0c8 + 0x179) = 0;
-    temp_v1 = 0;
-    do {
-      *(unsigned short *)((int)puVar2 + temp_v1 * 0x8c + 0x3b6) = 2;
-      FUN_00387240(puVar2 + temp_v1 * 0x23 + 0xdf,10,0);
-      *(unsigned char *)(puVar2 + temp_v1 * 0x23 + 0xee) = 1;
-      puVar2[temp_v1 * 0x23 + 0xe2] = 0;
-      temp_v2 = temp_v1 + 1;
-      puVar2[temp_v1 * 0x23 + 0xe3] = 0;
-      puVar2[temp_v1 * 0x23 + 0xe4] = 0;
-      temp_v1 = temp_v2;
-    } while (temp_v2 < 4);
-    *(unsigned char *)((int)puVar1 + 0x5e1) = 0;
-    *(unsigned char *)((int)puVar1 + 0x5e2) = 1;
-    *(unsigned char *)(puVar1 + 0x178) = 1;
-    *(unsigned char *)((int)puVar1 + 0x5e3) = 0;
-    puVar1[0x174] = 0;
-    temp_v0 = spriteHandleCreate(0);
-    puVar3[0x19e] = temp_v0;
-    FUN_001527d8(temp_v0,0xf4f4f4ff);
-    positionStateSet(puVar3[0x19e],0,0x646464ff);
-    temp_v0 = DAT_0057f0d0;
-    FUN_00275bc8(DAT_0057f0d0,DAT_0057f0cc);
-    puVar3[0x1a0] = temp_v0;
-  }
-  g_buttonHelp = g_buttonHelp + '\x01';
-  return;
+    g_buttonHelp.prefix.references++;
 }
 
 } /* extern "C" */

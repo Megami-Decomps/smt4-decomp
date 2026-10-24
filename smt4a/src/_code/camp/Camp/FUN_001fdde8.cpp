@@ -23,7 +23,7 @@ int messageRestoreBanner(void);
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_00228b04(...);
-int FUN_0028b088(...);
+int campShowSelectedEntryHelp(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int stateAtF4Apply(void);
@@ -91,7 +91,7 @@ extern int FUN_0022e714(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: campSelectorRebuildList. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_0028b088. */
+/* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int resourceRunOperationIfUnblocked(int);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
@@ -379,7 +379,7 @@ void FUN_001fdde8(int param_1)
                  (int)*(short *)(temp_v5 + 0x1b38),temp_v14,0,1);
     temp_v2 = (unsigned short)((unsigned int)temp_v8 >> 0x10);
     if (temp_v4 != 0) {
-      FUN_0028b088(param_1);
+      campShowSelectedEntryHelp(param_1);
       if (temp_v10 != 0) {
         return;
       }
@@ -389,7 +389,7 @@ void FUN_001fdde8(int param_1)
     temp_v4 = temp_v13;
     FUN_00228b04(temp_v13,1);
     if (temp_v4 != 0) {
-      FUN_0028b088(param_1);
+      campShowSelectedEntryHelp(param_1);
       if (temp_v10 != 0) {
         return;
       }
@@ -635,7 +635,7 @@ void FUN_001fdde8(int param_1)
     return;
   case 4:
     if (temp_v10 != 0) {
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
       campChangeState(5);
       campTouchRegionsRemoveGroup(temp_v13,0);
@@ -647,7 +647,7 @@ void FUN_001fdde8(int param_1)
       FUN_0033449c(0);
       FUN_0022e774();
       FUN_002c85b0(0);
-      FUN_0028b088(0);
+      campShowSelectedEntryHelp(0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
       campChangeState(5);
@@ -669,7 +669,7 @@ LAB_001fea60:
   flaggedEntrySetValueB(temp_v5 + 0x40,temp_v9);
   temp_v3 = FUN_002a4878(temp_v5 + 0x40);
   param_1 = FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v3);
-  FUN_0028b088();
+  campShowSelectedEntryHelp();
   campTouchRegionsRemoveGroup(temp_v13,0);
   *(unsigned int *)(temp_v5 + 0x20) = 2;
   menuItemPlaySe(param_1);
@@ -764,7 +764,7 @@ LAB_001fe40c:
 LAB_001fe410:
   *(unsigned char *)(temp_v5 + 0x3d) = 0;
   FUN_002cb278(temp_v13,0);
-  FUN_0028b088(param_1);
+  campShowSelectedEntryHelp(param_1);
   if (temp_v12 == 0 && temp_v10 == 0) {
     campPreviewSelectedEquipment(param_1);
   }

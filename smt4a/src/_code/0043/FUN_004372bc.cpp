@@ -1,157 +1,151 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004372bc` (_code @ 0x4372bc, 0x2b0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the graph pointer's address in the stack frame (push {r0, r1, ...}) and reloads it, holds the id as u16 and the list sentinel in r7/fp, and lays the entry scan out as a separate loop; this build fuses the scan and keeps everything in registers (about 270 diff lines). */
+#include "common.h"
+
+/* Doubly linked circular list link; every node and list head starts with one. */
+struct ListLink {
+    ListLink *prev;
+    ListLink *next;
+};
+
+/* The target a node refers to: `slot` is the bit/byte it owns in the occupancy mask. */
+struct NodeTarget {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 slot;
+};
+
+struct NodeRef {
+    NodeTarget *target;
+};
+
+/* A node of the graph's entry list; kind 2 nodes are single entries, kind 3 nodes own a list of children. */
+struct EntryNode {
+    /* 0x00 */ ListLink link;
+    /* 0x08 */ NodeRef ref;
+    /* 0x0C */ u8 kind;
+    /* 0x0D */ u8 unk0D;
+    /* 0x0E */ u16 id;
+    /* 0x10 */ ListLink children;
+    /* 0x18 */ u8 unk18[8];
+};
+typedef char EntryNodeSizeCheck[sizeof(EntryNode) == 0x20 ? 1 : -1];
+
+struct EntryGraph {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ListLink merged; /* the merged entries are appended here */
+    /* 0x10 */ void *nodePool;
+    /* 0x14 */ ListLink entries; /* sentinel of the entry list */
+    /* 0x1C */ void *releasePool;
+};
+
+struct MaskBuilder {
+    /* 0x00 */ void *pool; /* block allocator the mask comes from */
+    /* 0x04 */ u8 unk04[0xC];
+    /* 0x10 */ u32 size; /* mask size in bytes */
+};
 
 extern "C" {
+void *FUN_004387f0(void *pool, u32 units);
+void FUN_004387bc(void *pool, void *block, u32 units);
+void FUN_00436d04(MaskBuilder *builder, u8 *mask);
+void FUN_00436c10(u32 *result, MaskBuilder *builder, u8 *mask);
+s32 FUN_00437bc0(ListLink *children, s16 id);
+s32 FUN_005228c8(NodeRef *ref, s16 id);
+void FUN_005155bc(NodeRef *ref);
+void FUN_005153cc(NodeRef *ref);
+void variantSetHalfA(NodeRef *ref, u32 *value, s16 id);
 
-int FUN_00436c10(int *, unsigned int *, unsigned char *);
-int FUN_00436d04(unsigned int *, unsigned char *);
-int FUN_004387bc(...);
-int FUN_004387f0(...);
-int variantSetHalfA(int *, int *, int);
-int FUN_005153cc(void);
-int FUN_005155bc(int *);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00436c10. */
-/* Supplied declaration required: FUN_00436d04. */
-extern int FUN_00437bc0(int *, short);
-/* Supplied declaration required: FUN_004387bc. */
-/* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: variantSetHalfA. */
-/* Supplied declaration required: FUN_005153cc. */
-/* Supplied declaration required: FUN_005155bc. */
-extern int FUN_005228c8(int *, short);
-
-
-unsigned int FUN_004372bc(unsigned int *param_1,int *param_2)
-
+static __inline void unlinkNode(EntryNode *node)
 {
-/* irregular: 7 native warning(s); review required */
-  short temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar5;
-  unsigned char *puVar6;
-  int temp_v3;
-  int *piVar8;
-  unsigned int temp_v4;
-  int *piVar10;
-  int temp_v5;
-  int temp_v6;
-  unsigned int *puStack_2c;
-  int *temp_v7;
-  
-  temp_v1 = *param_2;
-  piVar2 = *(int **)(temp_v1 + 0x18);
-  temp_v7 = param_2;
-  puStack_2c = param_1;
-  do {
-    while( 1 ) {
-      if (piVar2 == (int *)(temp_v1 + 0x14)) {
-        return 1;
-      }
-      if ((char)piVar2[3] == '\x02') break;
-      piVar2 = (int *)piVar2[1];
-    }
-    temp_v2 = param_1[4];
-    temp_v0 = *(short *)((int)piVar2 + 0xe);
-    puVar5 = (unsigned char *)*param_1;
-    FUN_004387f0();
-    if (puVar5 == (unsigned char *)0x0) {
-      return 0;
-    }
-    if (param_1[4] != 0) {
-      puVar6 = puVar5 + -1;
-      if ((param_1[4] & 1) != 0) {
-        *puVar5 = 0;
-        puVar6 = puVar5;
-      }
-      for (temp_v4 = (unsigned int)param_1[4] >> 1; temp_v4 != 0; temp_v4 = temp_v4 - 1) {
-        puVar6[1] = 0;
-        puVar6 = puVar6 + 2;
-        *puVar6 = 0;
-      }
-    }
-    puVar5[*(int *)(piVar2[2] + 0x14)] = 1;
-    piVar8 = *(int **)(temp_v1 + 0x18);
-    while (piVar8 != (int *)(temp_v1 + 0x14)) {
-      if (piVar8 != piVar2) {
-        if ((char)piVar8[3] != '\x02') {
-          if (((char)piVar8[3] != '\x03') || (temp_v3 = FUN_005228c8(piVar8 + 2,temp_v0), temp_v3 == 0)) {
-            piVar8 = (int *)piVar8[1];
-            continue;
-          }
-          temp_v3 = FUN_00437bc0(piVar8 + 4,temp_v0);
-          if (temp_v3 == 0) {
-            return 0;
-          }
-          puVar5[*(int *)(piVar8[2] + 0x14)] = 1;
-          if ((int *)piVar8[5] != piVar8 + 4) {
-            piVar8 = (int *)piVar8[1];
-            continue;
-          }
-          piVar10 = (int *)piVar8[1];
-          *(int **)(*piVar8 + 4) = piVar10;
-          *(int *)piVar8[1] = *piVar8;
-          FUN_005155bc(piVar8 + 2);
-          FUN_004387bc(*(unsigned int *)(temp_v1 + 0x1c),piVar8,2);
-          piVar8 = piVar10;
-        }
-        else {
-          if (*(short *)((int)piVar8 + 0xe) != temp_v0) {
-            piVar8 = (int *)piVar8[1];
-            continue;
-          }
-          puVar5[*(int *)(piVar8[2] + 0x14)] = 1;
-          piVar10 = (int *)piVar8[1];
-          *(int **)(*piVar8 + 4) = piVar10;
-          *(int *)piVar8[1] = *piVar8;
-          FUN_005155bc(piVar8 + 2);
-          FUN_004387bc(*(unsigned int *)(temp_v1 + 0x1c),piVar8,2);
-          piVar8 = piVar10;
-        }
-      }
-      else {
-        piVar8 = (int *)piVar8[1];
-      }
-    }
-    FUN_00436d04(param_1,puVar5);
-    FUN_00436c10(&temp_v5,param_1,puVar5);
-    if (temp_v5 == 0) {
-      return 0;
-    }
-    FUN_004387bc(*param_1,puVar5,(temp_v2 + 0xfU) >> 4);
-    piVar10 = (int *)(*temp_v7 + 8);
-    piVar8 = *(int **)(*temp_v7 + 0x10);
-    FUN_004387f0(piVar8,2);
-    if (piVar8 == (int *)0x0) {
-      return 0;
-    }
-    if (piVar8 != (int *)0xfffffff8) {
-      FUN_005153cc();
-    }
-    *piVar8 = *piVar10;
-    piVar8[1] = (int)piVar10;
-    *piVar10 = (int)piVar8;
-    *(int **)(*piVar8 + 4) = piVar8;
-    temp_v6 = temp_v5;
-    variantSetHalfA(piVar8 + 2,&temp_v6,temp_v0);
-    piVar8 = (int *)piVar2[1];
-    *(int **)(*piVar2 + 4) = piVar8;
-    *(int *)piVar2[1] = *piVar2;
-    FUN_005155bc(piVar2 + 2);
-    FUN_004387bc(*(unsigned int *)(temp_v1 + 0x1c),piVar2);
-    piVar2 = piVar8;
-  } while( 1 );
+    node->link.prev->next = node->link.next;
+    node->link.next->prev = node->link.prev;
 }
 
-} /* extern "C" */
+/* Merges every kind 2 entry of the graph with the entries (and child lists) that share its id: the targets they use are
+ * collected in an occupancy mask, the merged nodes are released and a single replacement node is appended to the merged
+ * list. Returns 0 when an allocation or a child merge fails. */
+u32 FUN_004372bc(MaskBuilder *builder, EntryGraph **graphRef)
+{
+    EntryGraph *graph = *graphRef;
+    ListLink *end = &graph->entries;
+    EntryNode *entry = (EntryNode *)graph->entries.next;
+    for (;;) {
+        while ((ListLink *)entry != end && entry->kind != 2) {
+            entry = (EntryNode *)entry->link.next;
+        }
+        if ((ListLink *)entry == end) {
+            return 1;
+        }
+        u32 units = (builder->size + 15) >> 4;
+        s16 id = entry->id;
+        u8 *mask = (u8 *)FUN_004387f0(builder->pool, units);
+        if (mask == NULL) {
+            return 0;
+        }
+        for (u32 i = 0; i < builder->size; i++) {
+            mask[i] = 0;
+        }
+        mask[entry->ref.target->slot] = 1;
+        EntryNode *other = (EntryNode *)end->next;
+        while ((ListLink *)other != end) {
+            if (other == entry) {
+                other = (EntryNode *)other->link.next;
+                continue;
+            }
+            if (other->kind == 2) {
+                if (other->id != id) {
+                    other = (EntryNode *)other->link.next;
+                    continue;
+                }
+                mask[other->ref.target->slot] = 1;
+                EntryNode *next = (EntryNode *)other->link.next;
+                unlinkNode(other);
+                FUN_005155bc(&other->ref);
+                FUN_004387bc(graph->releasePool, other, 2);
+                other = next;
+            } else if (other->kind == 3 && FUN_005228c8(&other->ref, id)) {
+                if (!FUN_00437bc0(&other->children, id)) {
+                    return 0;
+                }
+                mask[other->ref.target->slot] = 1;
+                if (other->children.next == &other->children) {
+                    EntryNode *next = (EntryNode *)other->link.next;
+                    unlinkNode(other);
+                    FUN_005155bc(&other->ref);
+                    FUN_004387bc(graph->releasePool, other, 2);
+                    other = next;
+                } else {
+                    other = (EntryNode *)other->link.next;
+                }
+            } else {
+                other = (EntryNode *)other->link.next;
+            }
+        }
+        FUN_00436d04(builder, mask);
+        u32 result;
+        FUN_00436c10(&result, builder, mask);
+        if (result == 0) {
+            return 0;
+        }
+        FUN_004387bc(builder->pool, mask, units);
+        ListLink *merged = &graph->merged;
+        EntryNode *created = (EntryNode *)FUN_004387f0(graph->nodePool, 2);
+        if (created == NULL) {
+            return 0;
+        }
+        if (&created->ref != NULL) {
+            FUN_005153cc(&created->ref);
+        }
+        created->link.prev = merged->prev;
+        created->link.next = merged;
+        merged->prev = &created->link;
+        created->link.prev->next = &created->link;
+        u32 value = result;
+        variantSetHalfA(&created->ref, &value, id);
+        EntryNode *next = (EntryNode *)entry->link.next;
+        unlinkNode(entry);
+        FUN_005155bc(&entry->ref);
+        FUN_004387bc(graph->releasePool, entry, 2);
+        entry = next;
+    }
+}
+}

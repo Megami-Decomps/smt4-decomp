@@ -1,169 +1,138 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036aa04` (_code @ 0x36aa04, 0x35c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (222 vs 195 rows); the state-3 call arguments and the compare constants (fade > 0.1f) are inferred; retail shares the visibility updates differently */
+#include "common.h"
+
+// Controller node: its hidden bits live in the word at +4.
+struct ControllerNode {
+    u32 unk00;
+    u32 flags;              // 0x04: bits 0-1 = hidden
+};
+
+struct ControllerHandle {
+    u32 unk00;
+    ControllerNode* node;   // 0x04
+};
+
+struct Vec3f {
+    f32 x, y, z;
+};
+
+// Party follower display: three controller handles and the follow state machine.
+struct FollowerDisplay {
+    u8 unk00[0x0b];
+    u8 hideAll;                 // 0x0b
+    u8 unk0c[0xbc - 0x0c];
+    ControllerHandle* near;     // 0xbc
+    u8 unkc0[8];
+    f32 fade;                   // 0xc8
+    u8 unkcc[0xd8 - 0xcc];
+    ControllerHandle* mid;      // 0xd8
+    u8 unkdc[0x10];
+    ControllerHandle* far;      // 0xec
+    s32 delay;                  // 0xf0
+    u8 unkf4[0x93ca - 0xf4];
+    u8 flag93ca;                // 0x93ca
+};
+
+struct LmapScene {
+    u8 unk00[0x1c];
+    Vec3f position;             // 0x1c
+};
+
+struct GameFlagsBlock {
+    u8 unk0000[0xdf4];
+    s32 pending;                // 0xdf4
+    u8 unkdf8[0x15b4 - 0xdf8];
+    s32 followState;            // 0x15b4
+};
 
 extern "C" {
 
-int controllerSetDestination(...);
-int controllerSetPosition(int);
-int FUN_003fd7c0(int, int, int);
-int FUN_003fe86c(...);
+extern LmapScene* g_lmapScene;
+extern u8 g_gameState[0x24];
 
-typedef struct fn_0036aa04_arg0 fn_0036aa04_arg0;
-struct fn_0036aa04_arg0 {
-    unsigned char pad_0x0[0xb];
-    unsigned char field_0xb; /* +0xb */
-    unsigned char pad_0xc[0x2e];
-    unsigned char field_0x3a; /* +0x3a */
-    unsigned char pad_0x3b[0x81];
-    void *field_0xbc; /* +0xbc */
-    unsigned char pad_0xc0[0x8];
-    unsigned char field_0xc8; /* +0xc8 */
-    unsigned char pad_0xc9[0xf];
-    void *field_0xd8; /* +0xd8 */
-    unsigned char pad_0xdc[0x10];
-    void *field_0xec; /* +0xec */
-};
+GameFlagsBlock* gameFlagsGetBlock(void);
+void controllerSetDestination(ControllerNode* node, const void* destination);
+void controllerSetPosition(ControllerNode* node);
+s32 slots4FGetActiveValue(ControllerNode* node);
+void FUN_003fe86c(ControllerNode* node, s32 a, s32 b);
+void FUN_003fd7c0(ControllerNode* node, s32 a, s32 b);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+static const u32 kHiddenBits = 3;
 
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fd7c0. */
-/* Supplied declaration required: FUN_003fe86c. */
-extern int slots4FGetActiveValue(int);
-
-
-void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
-
+// Shows or hides one follower node depending on the fade value.
+static void setFadeVisibility(ControllerNode* node, f32 fade)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  float temp_v5;
-  unsigned int uStack_30;
-  
-  temp_v0 = *(int *)((int)param_1->field_0xd8 + 4);
-  temp_v2 = *(int *)((int)param_1->field_0xec + 4);
-  temp_v3 = *(int *)((int)param_1->field_0xbc + 4);
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0x23)) != '\0') {
-    *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-  }
-  else {
-    if (*(int *)&param_1->field_0xc8 >= 0x3dccccce) {
-      *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) & 0xfffffffc;
-    }
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) & 0xfffffffc;
-    if (*(int *)&param_1->field_0xc8 >= 0x3dccccce) {
-      *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) & 0xfffffffc;
-    }
-    if (param_1->field_0xb != '\0') {
-      *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
-      *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) & 0xfffffffc;
-      *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-    }
-    else {
-      if (*(int *)&param_1->field_0xc8 >= 0x3dccccce) {
-        temp_v1 = *(unsigned int *)(temp_v3 + 4) & 0xfffffffc;
-      }
-      else {
-        temp_v1 = *(unsigned int *)(temp_v3 + 4) | 3;
-      }
-      *(unsigned int *)(temp_v3 + 4) = temp_v1;
-      *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-      if (*(int *)&param_1->field_0xc8 >= 0x3dccccce) {
-        temp_v1 = *(unsigned int *)(temp_v2 + 4) & 0xfffffffc;
-      }
-      else {
-        temp_v1 = *(unsigned int *)(temp_v2 + 4) | 3;
-      }
-      *(unsigned int *)(temp_v2 + 4) = temp_v1;
-    }
-    controllerSetDestination(temp_v3,g_lmapScene + 0x1c);
-    controllerSetPosition(temp_v3);
-    temp_v0 = slots4FGetActiveValue(temp_v3);
-    if (temp_v0 != 0) {
-      FUN_003fe86c(temp_v3,0,2);
-    }
-    temp_v0 = gameFlagsGetBlock();
-    if (param_1->field_0xec != (void *)0x0) {
-      if (*(int *)(temp_v0 + 0xdf4) == 0) {
-        temp_v3 = *(int *)(temp_v0 + 0x15b4);
-        if ((temp_v3 != 3) && (temp_v3 != 4)) {
-          *(int *)(temp_v0 + 0x15b4) = 0;
-          *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-          return;
-        }
-      }
-      if (*(int *)&param_1->field_0xc8 >= 0x3dccccce) {
-        temp_v1 = *(unsigned int *)(temp_v2 + 4) & 0xfffffffc;
-      }
-      else {
-        temp_v1 = *(unsigned int *)(temp_v2 + 4) | 3;
-      }
-      *(unsigned int *)(temp_v2 + 4) = temp_v1;
-      temp_v4 = *(unsigned int *)(g_lmapScene + 0x1c);
-      uStack_30 = *(unsigned int *)(g_lmapScene + 0x24);
-      temp_v5 = *(float *)(g_lmapScene + 0x20) + 20.0f;
-      controllerSetDestination(temp_v2,&temp_v4);
-      controllerSetPosition(temp_v2);
-      piVar5 = (int *)(temp_v0 + 0x15b4);
-      temp_v0 = *piVar5;
-      if (temp_v0 == 0) {
-        FUN_003fe86c(temp_v2,0,2);
-        *piVar5 = 1;
-        *(unsigned int *)(param_1 + 1) = 0;
+    if (fade > 0.1f) node->flags &= ~kHiddenBits;
+    else node->flags |= kHiddenBits;
+}
+
+// Updates the follower display: visibility of its three nodes, placement at the player and the intro states.
+void FUN_0036aa04(FollowerDisplay* display)
+{
+    ControllerNode* mid = display->mid->node;
+    ControllerNode* far = display->far->node;
+    ControllerNode* near = display->near->node;
+    if (g_gameState[0x23] != 0) {
+        near->flags |= kHiddenBits;
+        mid->flags |= kHiddenBits;
+        far->flags |= kHiddenBits;
         return;
-      }
-      if (temp_v0 != 1) {
-        if (temp_v0 != 2) {
-          if (temp_v0 == 3) {
-            FUN_003fe86c(temp_v2,2);
-            *piVar5 = 4;
-            *(unsigned int *)(param_1 + 1) = 0;
-            return;
-          }
-          if (temp_v0 == 4) {
-            *(unsigned int *)(param_1 + 1) = 0;
-            *piVar5 = 0;
-            *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-            return;
-          }
-        }
-        else if (param_1[0x9d].field_0x3a == '\0') {
-          FUN_003fd7c0(temp_v2,1,2);
-          param_1[0x9d].field_0x3a = 1;
-          return;
-        }
-      }
-      else {
-        temp_v0 = *(int *)(param_1 + 1);
-        *(int *)(param_1 + 1) = temp_v0 + 1;
-        if (temp_v0 + 1 >= 11) {
-          FUN_003fd7c0(temp_v2,1,2);
-          *piVar5 = 2;
-          param_1[0x9d].field_0x3a = 1;
-          *(unsigned int *)(param_1 + 1) = 0;
-          return;
-        }
-      }
     }
-  }
-  return;
+
+    if (display->fade > 0.1f) near->flags &= ~kHiddenBits;
+    mid->flags &= ~kHiddenBits;
+    if (display->fade > 0.1f) far->flags &= ~kHiddenBits;
+    if (display->hideAll != 0) {
+        near->flags |= kHiddenBits;
+        mid->flags &= ~kHiddenBits;
+        far->flags |= kHiddenBits;
+    } else {
+        setFadeVisibility(near, display->fade);
+        mid->flags |= kHiddenBits;
+        setFadeVisibility(far, display->fade);
+    }
+    controllerSetDestination(near, &g_lmapScene->position);
+    controllerSetPosition(near);
+    if (slots4FGetActiveValue(near) != 0) FUN_003fe86c(near, 0, 2);
+
+    GameFlagsBlock* block = gameFlagsGetBlock();
+    if (display->far == NULL) return;
+    if (block->pending == 0 && block->followState != 3 && block->followState != 4) {
+        block->followState = 0;
+        far->flags |= kHiddenBits;
+        return;
+    }
+    setFadeVisibility(far, display->fade);
+    Vec3f target = g_lmapScene->position;
+    target.y = g_lmapScene->position.y + 20.0f;
+    controllerSetDestination(far, &target);
+    controllerSetPosition(far);
+    s32 state = block->followState;
+    if (state == 0) {
+        FUN_003fe86c(far, 0, 2);
+        block->followState = 1;
+        display->delay = 0;
+    } else if (state == 1) {
+        if (++display->delay >= 11) {
+            FUN_003fd7c0(far, 1, 2);
+            block->followState = 2;
+            display->flag93ca = 1;
+            display->delay = 0;
+        }
+    } else if (state == 2) {
+        if (display->flag93ca == 0) {
+            FUN_003fd7c0(far, 1, 2);
+            display->flag93ca = 1;
+        }
+    } else if (state == 3) {
+        FUN_003fe86c(far, 2, 0);
+        block->followState = 4;
+        display->delay = 0;
+    } else if (state == 4) {
+        display->delay = 0;
+        block->followState = 0;
+        far->flags |= kHiddenBits;
+    }
 }
 
 } /* extern "C" */

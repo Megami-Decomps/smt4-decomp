@@ -24,6 +24,10 @@ typedef struct BtlGameOverA {
             u8 unk00[8];
             /* 0x08 */ u32 frameCounter;
         } timing;
+        struct {
+            u8 unk00[0xC];
+            /* 0x0C */ u32 phase;       /* step within the script-driven states */
+        } step;
     };
     /* 0x10 */ void *dataA;
     /* 0x14 */ void *process;

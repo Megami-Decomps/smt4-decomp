@@ -5,7 +5,7 @@
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 AsdAllocatorObject *asdMemoryGetDefaultAllocator(void);
-AsdSceneLightObject *FUN_0012abd0(const AsdSceneLightDescription *, AsdAllocatorObject *);
+AsdSceneLightObject *_ZN9Obj4210586createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
 
 // Allocate a point light with default color, position, attenuation and cone parameters.
 AsdSceneLight *FUN_0011877c(void)
@@ -22,7 +22,7 @@ AsdSceneLight *FUN_0011877c(void)
     description.unk04 = 0;
     description.unk08 = 0;
     description.count = 1;
-    light->object = FUN_0012abd0(&description, allocator);
+    light->object = _ZN9Obj4210586createEPvP18AsdAllocatorObject(&description, allocator);
     light->parameters = light->object->parameters;
     light->parameters->kind = 2;
     f32 *position = light->parameters->position;

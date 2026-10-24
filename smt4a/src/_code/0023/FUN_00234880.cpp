@@ -1,147 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00234880` (_code @ 0x234880, 0x2a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same instruction sequence as retail except callee-saved register numbering (retail keeps HP total/max/slot count in r5-r7, the entry in r4) and the placement of the 100.0f pool load. */
+#include "common.h"
+
+struct PopupState {
+    s32 state;      // 0x00
+    s32 arg;        // 0x04
+    u8 unk08[0x0c];
+    s32 message;    // 0x14
+};
+
+struct SaveSlot {
+    u8 unk00[0x12c];
+    u16 id;         // 0x12c
+};
+
+// Row of data table 0x43: a message shown when the party's HP/MP ratio crosses `threshold`.
+struct RatioMessage {
+    u32 id;             // 0x00: slot id the row applies to
+    u32 kind;           // 0x04: 8 = at most, 9 = at least
+    s16 requiredFlag;   // 0x08
+    s16 forbiddenFlag;  // 0x0a
+    s16 threshold;      // 0x0c: percent
+    u8 unk0e[0x12];
+};
 
 extern "C" {
 
-int FUN_00152f44(void);
-int gameFlagIsSet(...);
-int dataTableGetCount(unsigned int);
-int dataTableGetEntries(void);
-int FUN_002d8b58(int, int);
-int VectorSignedToFloat(int, int);
+extern PopupState* g_popupState;
+extern s32 g_gameState;
 
-extern int *g_popupState; /* 0x58104c */
-extern int g_gameState; /* 0x5f15fc */
+void FUN_00152f44(void);
+SaveSlot* saveSlotFindSelected(void);
+s32 gameFlagIsSet(s32 flag);
+s32 randRange(s32 range);
+s32 FUN_003e0024(void);
+s32 FUN_003e0154(void);
+s32 gameSlotTableFindFree(void);
+s8* gameGetSlotTable(void);
+s32 gameGetSlotRecord(s32 slot);
+s32 recordGetScaledMaximum(s32 record);
+u32 dataTableGet(u32 table, u32 arg);
+RatioMessage* dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+s32 FUN_002d8b58(s32 kind, s32 id);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_00152f44. */
-extern int saveSlotFindSelected(void);
-extern int recordGetScaledMaximum(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_002d8b58. */
-extern int FUN_003e0024(void);
-extern int FUN_003e0154(void);
-
-
+// Opens the popup for the first ratio message matching the selected slot.
 void FUN_00234880(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int *piVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  int temp_v10;
-  unsigned int *puVar13;
-  unsigned int temp_v11;
-  unsigned int in_fpscr;
-  float temp_v12;
-  float temp_v13;
-  unsigned long long temp_v14;
-  
-  FUN_00152f44();
-  if ((*g_popupState == 0) && (temp_v2 = saveSlotFindSelected(), temp_v2 != 0)) {
-    temp_v1 = 0;
-    temp_v3 = gameFlagIsSet(0x1a2);
-    if (((temp_v3 != 0) && (temp_v3 = randRange(99), temp_v3 + 1 < 0x33)) &&
-       ((g_gameState == 0x1c || g_gameState == 0x1d ||
-        ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)))) {
-      temp_v1 = 1;
+    FUN_00152f44();
+    if (g_popupState->state != 0) return;
+    SaveSlot* slot = saveSlotFindSelected();
+    if (slot == NULL) return;
+
+    bool special = false;
+    if (gameFlagIsSet(0x1a2) && randRange(99) + 1 <= 50 &&
+        (g_gameState == 0x1c || g_gameState == 0x1d || g_gameState == 0x1e ||
+         g_gameState == 0x1f || g_gameState == 0x20)) {
+        special = true;
     }
-    temp_v3 = FUN_003e0024();
-    temp_v4 = FUN_003e0154();
-    temp_v5 = gameSlotTableFindFree();
-    temp_v6 = gameGetSlotTable();
-    temp_v10 = 0;
-    if (temp_v10 < temp_v5) {
-      do {
-        if (-1 < *(char *)(temp_v6 + 0x1c88 + temp_v10)) {
-          temp_v7 = gameGetSlotRecord();
-          temp_v3 = temp_v3 + *(short *)(temp_v7 + 0x2a);
-          temp_v7 = recordGetScaledMaximum();
-          temp_v4 = temp_v4 + temp_v7;
+
+    s32 current = FUN_003e0024();
+    s32 maximum = FUN_003e0154();
+    s32 slotCount = gameSlotTableFindFree();
+    s8* status = gameGetSlotTable() + 0x1c88;
+    for (s32 i = 0; i < slotCount; i++) {
+        if (status[i] >= 0) {
+            s32 record = gameGetSlotRecord(status[i]);
+            current += *(s16*)(record + 0x2a);
+            maximum += recordGetScaledMaximum(record);
         }
-        temp_v10 = temp_v10 + 1;
-      } while (temp_v10 < temp_v5);
     }
-    temp_v12 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v13 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v14 = (unsigned long long)(unsigned int)((temp_v12 / temp_v13) * 100.0f);
-    temp_v8 = dataTableGet(0x43,0);
+    f32 percent = (f32)current / (f32)maximum * 100.0f;
+
+    u32 table = dataTableGet(0x43, 0);
     dataTableGetEntries();
-    temp_v3 = dataTableGetCount(temp_v8);
-    temp_v11 = 0;
-    if (0 < temp_v3) {
-      do {
-        temp_v8 = dataTableGet(0x43,0);
-        temp_v4 = dataTableGetEntries();
-        temp_v9 = dataTableGetCount(temp_v8);
-        puVar13 = (unsigned int *)0x0;
-        if (temp_v11 < temp_v9) {
-          puVar13 = (unsigned int *)(temp_v4 + temp_v11 * 0x20);
-        }
-        if ((((puVar13[1] == 8 || puVar13[1] == 9) && (*puVar13 == (unsigned int)*(unsigned short *)(temp_v2 + 300)))
-            && (((short)puVar13[2] == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 != 0)))) &&
-           ((*(short *)((int)puVar13 + 10) == 0 || (temp_v4 = gameFlagIsSet(), temp_v4 == 0)))) {
-          piVar3 = g_popupState;
-          temp_v12 = (float)VectorSignedToFloat((int)(short)puVar13[3],(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v13 = (float)temp_v14;
-          if (puVar13[1] != 8) {
-            in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13 == temp_v12) << 0x1e) |
-                       ((unsigned int)(temp_v12 <= temp_v13) << 0x1d);
-            temp_v0 = (unsigned char)(in_fpscr >> 0x18);
-            if (!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) {
-              *g_popupState = 5;
-              piVar3[1] = 0;
-              if (temp_v1) {
-                temp_v2 = FUN_002d8b58(9,0xad);
-                g_popupState[5] = temp_v2;
+    s32 count = dataTableGetCount(table);
+    for (u32 i = 0; (s32)i < count; i++) {
+        table = dataTableGet(0x43, 0);
+            RatioMessage* row = dataTableGetEntries();
+        if (i >= dataTableGetCount(table)) row = NULL; else row += i;
+        if (row->kind != 8 && row->kind != 9) continue;
+        if (row->id != slot->id) continue;
+        if (row->requiredFlag != 0 && !gameFlagIsSet(row->requiredFlag)) continue;
+        if (row->forbiddenFlag != 0 && gameFlagIsSet(row->forbiddenFlag)) continue;
+        f32 threshold = (f32)row->threshold;
+        if (row->kind == 8) {
+            if (threshold <= percent) {
+                g_popupState->state = 5;
+                g_popupState->arg = 0;
+                if (special) {
+                    g_popupState->message = FUN_002d8b58(8, 0xad);
+                    return;
+                }
+                g_popupState->message = FUN_002d8b58(8, slot->id);
                 return;
-              }
-              temp_v2 = FUN_002d8b58(9,*(unsigned short *)(temp_v2 + 300));
-              g_popupState[5] = temp_v2;
-              return;
             }
-          }
-          else {
-            in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 == temp_v13) << 0x1e) |
-                       ((unsigned int)(temp_v13 <= temp_v12) << 0x1d);
-            temp_v0 = (unsigned char)(in_fpscr >> 0x18);
-            if (!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) {
-              *g_popupState = 5;
-              piVar3[1] = 0;
-              if (temp_v1) {
-                temp_v2 = FUN_002d8b58(8,0xad);
-                g_popupState[5] = temp_v2;
+        } else if (percent <= threshold) {
+            g_popupState->state = 5;
+            g_popupState->arg = 0;
+            if (special) {
+                g_popupState->message = FUN_002d8b58(9, 0xad);
                 return;
-              }
-              temp_v2 = FUN_002d8b58(8,*(unsigned short *)(temp_v2 + 300));
-              g_popupState[5] = temp_v2;
-              return;
             }
-          }
+            g_popupState->message = FUN_002d8b58(9, slot->id);
+            return;
         }
-        temp_v11 = temp_v11 + 1;
-      } while ((int)temp_v11 < temp_v3);
-      return;
     }
-  }
-  return;
 }
 
 } /* extern "C" */

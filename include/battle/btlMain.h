@@ -437,6 +437,14 @@ typedef struct BtlMainGlobalsA {
             u8 prefix[0x70];
             /* 0x100 */ u64 blocked;
         } voiceBlocking;
+        struct {
+            u8 prefix[0x40];
+            /* 0x0D0 */ u64 mask;
+        } partyTarget;
+        struct {
+            u8 prefix[0xA0];
+            /* 0x130 */ u64 mask;
+        } fixedScore;
     };
     /* 0x138 */ u64 suppressionMask;
     union {
@@ -453,6 +461,14 @@ typedef struct BtlMainGlobalsA {
             u8 prefix[0x28];
             /* 0x168 */ u64 attempted;
         } voiceState;
+        struct {
+            u8 prefix[0x68];
+            /* 0x1A8 */ u64 mask;
+        } randomTarget;
+        struct {
+            u8 prefix[0x80];
+            /* 0x1C0 */ u64 mask;
+        } fullRoster;
     };
     /* 0x1C8 */ u64 suppressDefeat;
 } BtlMainGlobalsA;

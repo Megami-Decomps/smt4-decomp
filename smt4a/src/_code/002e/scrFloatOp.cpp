@@ -1,192 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrFloatOp` (_code @ 0x2e2b50, 0x368 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the script VM's binary arithmetic/compare opcode (integer or float, picked by the operand types); the draft's shared push tails are one helper here, and armcc orders the global temporaries (the VM keeps its operands and result in file statics) and the compare branches differently. */
+#include "common.h"
+
+#define SCR_TYPE_INT 0
+#define SCR_TYPE_FLOAT 1
+#define SCR_TYPE_ADDRESS 2
+
+/* The script VM context: a typed value stack. */
+struct ScrContext {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s32 sp;
+    /* 0x20 */ u8 types[0x1C];
+    /* 0x3C */ u32 values[1];
+};
 
 extern "C" {
+extern s32 g_scrContext;       /* left integer operand */
+extern s32 DAT_00588e40;       /* right integer operand */
+extern s32 DAT_00588e44;       /* integer result */
+extern f32 DAT_00588e48;       /* left float operand */
+extern f32 DAT_00588e4c;       /* right float operand */
+extern f32 DAT_00588e50;       /* float result */
+extern u32 DAT_00588e54;       /* type of the top of the stack */
+extern u32 DAT_00588e58;       /* type of the one below */
 
-int scrPopFloat(int);
+f32 scrPopFloat(ScrContext *context);
+s32 FUN_003d2004(ScrContext *context);
+s32 __aeabi_idivmod(s32 a, s32 b);
 
-extern int g_scrContext; /* 0x588e3c */
-extern int DAT_00588e40; /* 0x588e40 */
-extern int DAT_00588e44; /* 0x588e44 */
-extern float DAT_00588e48; /* 0x588e48 */
-extern float DAT_00588e4c; /* 0x588e4c */
-extern float DAT_00588e50; /* 0x588e50 */
-extern unsigned int DAT_00588e54; /* 0x588e54 */
-extern unsigned int DAT_00588e58; /* 0x588e58 */
-
-extern int FUN_003d2004(int);
-/* Supplied declaration required: scrPopFloat. */
-extern int __aeabi_idivmod(int, int);
-
-
-void scrFloatOp(int param_1,unsigned int param_2)
-
+/* Pushes a typed value. */
+static void scrPush(ScrContext *context, u8 type, u32 value)
 {
-/* irregular: 14 goto(s); irregular input(s): in_s0; 1 native warning(s); review required */
-  int temp_v0;
-  float temp_v1;
-  int temp_v2;
-  int temp_v3;
-  float in_s0;
-  
-  DAT_00588e54 = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x1f);
-  temp_v3 = param_1 + 0x20;
-  DAT_00588e58 = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 0x1c) + param_1 + 0x1e);
-  if ((DAT_00588e54 != 0 && DAT_00588e54 != 2) || (DAT_00588e58 != 0 && DAT_00588e58 != 2)) {
-    scrPopFloat(param_1);
-    DAT_00588e48 = in_s0;
-    scrPopFloat(param_1);
-    DAT_00588e4c = in_s0;
-    switch(param_2) {
-    case 0:
-      DAT_00588e50 = DAT_00588e48 + in_s0;
-    default:
-      temp_v1 = DAT_00588e50;
-      *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 1;
-      *(float *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v1;
-      *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-      return;
-    case 1:
-      DAT_00588e50 = DAT_00588e48 - in_s0;
-      temp_v1 = DAT_00588e50;
-      *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 1;
-      *(float *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v1;
-      *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-      return;
-    case 2:
-      DAT_00588e50 = DAT_00588e48 * in_s0;
-      temp_v1 = DAT_00588e50;
-      *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 1;
-      *(float *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v1;
-      *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-      return;
-    case 3:
-      DAT_00588e50 = DAT_00588e48 / in_s0;
-      temp_v1 = DAT_00588e50;
-      *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 1;
-      *(float *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v1;
-      *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-      return;
-    case 4:
-      if (DAT_00588e48 != 0.0f || in_s0 != 0.0f) {
-LAB_002e2ea8:
-        temp_v2 = 1;
-        DAT_00588e44 = temp_v2;
-        *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-        *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v2;
-        *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
+    context->types[context->sp] = type;
+    context->values[context->sp] = value;
+    context->sp++;
+}
+
+/* Pops two values and pushes the result of operation `op`: 0 add, 1 subtract, 2 multiply, 3 divide
+ * (modulo for integers), 4 or, 5 and, 6 equal, 7 not equal, 8 less, 9 greater, 10 less or equal,
+ * 11 greater or equal. The comparison and logic results are integers. */
+void scrFloatOp(ScrContext *context, u32 op)
+{
+    DAT_00588e54 = context->types[context->sp - 1];
+    DAT_00588e58 = context->types[context->sp - 2];
+    if ((DAT_00588e54 != SCR_TYPE_INT && DAT_00588e54 != SCR_TYPE_ADDRESS) ||
+        (DAT_00588e58 != SCR_TYPE_INT && DAT_00588e58 != SCR_TYPE_ADDRESS)) {
+        DAT_00588e48 = scrPopFloat(context);
+        DAT_00588e4c = scrPopFloat(context);
+        switch (op) {
+        case 0:
+            DAT_00588e50 = DAT_00588e48 + DAT_00588e4c;
+            break;
+        case 1:
+            DAT_00588e50 = DAT_00588e48 - DAT_00588e4c;
+            break;
+        case 2:
+            DAT_00588e50 = DAT_00588e48 * DAT_00588e4c;
+            break;
+        case 3:
+            DAT_00588e50 = DAT_00588e48 / DAT_00588e4c;
+            break;
+        case 4:
+            DAT_00588e44 = DAT_00588e48 != 0.0f || DAT_00588e4c != 0.0f;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 5:
+            DAT_00588e44 = DAT_00588e48 != 0.0f && DAT_00588e4c != 0.0f;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 6:
+            DAT_00588e44 = DAT_00588e48 == DAT_00588e4c;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 7:
+            DAT_00588e44 = DAT_00588e48 != DAT_00588e4c;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 8:
+            DAT_00588e44 = DAT_00588e48 < DAT_00588e4c;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 9:
+            DAT_00588e44 = DAT_00588e4c < DAT_00588e48;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 10:
+            DAT_00588e44 = DAT_00588e48 <= DAT_00588e4c;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        case 11:
+            DAT_00588e44 = DAT_00588e4c <= DAT_00588e48;
+            scrPush(context, SCR_TYPE_INT, DAT_00588e44);
+            return;
+        }
+        scrPush(context, SCR_TYPE_FLOAT, *(u32 *)&DAT_00588e50);
         return;
-      }
-      break;
+    }
+    g_scrContext = FUN_003d2004(context);
+    DAT_00588e40 = FUN_003d2004(context);
+    switch (op) {
+    case 0:
+        DAT_00588e44 = g_scrContext + DAT_00588e40;
+        break;
+    case 1:
+        DAT_00588e44 = g_scrContext - DAT_00588e40;
+        break;
+    case 2:
+        DAT_00588e44 = g_scrContext * DAT_00588e40;
+        break;
+    case 3:
+        DAT_00588e44 = __aeabi_idivmod(g_scrContext, DAT_00588e40);
+        break;
+    case 4:
+        DAT_00588e44 = g_scrContext != 0 || DAT_00588e40 != 0;
+        break;
     case 5:
-      if (DAT_00588e48 != 0.0f && in_s0 != 0.0f) goto LAB_002e2ea8;
-      break;
+        DAT_00588e44 = g_scrContext != 0 && DAT_00588e40 != 0;
+        break;
     case 6:
-      if (DAT_00588e48 == in_s0) goto LAB_002e2ea8;
-      break;
+        DAT_00588e44 = g_scrContext == DAT_00588e40;
+        break;
     case 7:
-      if (DAT_00588e48 != in_s0) goto LAB_002e2ea8;
-      break;
+        DAT_00588e44 = g_scrContext != DAT_00588e40;
+        break;
     case 8:
-      if (DAT_00588e48 < in_s0) goto LAB_002e2ea8;
-      break;
+        DAT_00588e44 = g_scrContext < DAT_00588e40;
+        break;
     case 9:
-      if (in_s0 < DAT_00588e48) goto LAB_002e2ea8;
-      break;
+        DAT_00588e44 = DAT_00588e40 < g_scrContext;
+        break;
     case 10:
-      if (DAT_00588e48 <= in_s0) goto LAB_002e2ea8;
-      break;
-    case 0xb:
-      if (in_s0 <= DAT_00588e48) goto LAB_002e2ea8;
+        DAT_00588e44 = g_scrContext <= DAT_00588e40;
+        break;
+    case 11:
+        DAT_00588e44 = DAT_00588e40 <= g_scrContext;
+        break;
     }
-    temp_v2 = 0;
-    DAT_00588e44 = temp_v2;
-    *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-    *(unsigned int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v2;
-    *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-    return;
-  }
-  g_scrContext = FUN_003d2004(param_1);
-  DAT_00588e40 = FUN_003d2004(param_1);
-  switch(param_2) {
-  case 0:
-    DAT_00588e44 = g_scrContext + DAT_00588e40;
-    temp_v0 = DAT_00588e44;
-    *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-    *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-    *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-    return;
-  case 1:
-    DAT_00588e44 = g_scrContext - DAT_00588e40;
-    temp_v0 = DAT_00588e44;
-    *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-    *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-    *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-    return;
-  case 2:
-    DAT_00588e44 = g_scrContext * DAT_00588e40;
-    temp_v0 = DAT_00588e44;
-    *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-    *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-    *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-    return;
-  case 3:
-    DAT_00588e44 = __aeabi_idivmod(g_scrContext,DAT_00588e40);
-    temp_v0 = DAT_00588e44;
-    *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-    *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-    *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-    return;
-  case 4:
-    if (g_scrContext != 0 || DAT_00588e40 != 0) {
-LAB_002e2cc4:
-      DAT_00588e44 = 1;
-      temp_v0 = DAT_00588e44;
-      *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-      *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-      *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-      return;
-    }
-    break;
-  case 5:
-    temp_v0 = 0;
-    if (g_scrContext != 0) {
-      temp_v0 = DAT_00588e40;
-    }
-    if (g_scrContext != 0 && temp_v0 != 0) goto LAB_002e2cc4;
-    break;
-  case 6:
-    if (g_scrContext == DAT_00588e40) goto LAB_002e2cc4;
-    break;
-  case 7:
-    if (g_scrContext != DAT_00588e40) goto LAB_002e2cc4;
-    break;
-  case 8:
-    if (g_scrContext < DAT_00588e40) goto LAB_002e2cc4;
-    break;
-  case 9:
-    if (DAT_00588e40 < g_scrContext) goto LAB_002e2cc4;
-    break;
-  case 10:
-    if (g_scrContext <= DAT_00588e40) goto LAB_002e2cc4;
-    break;
-  case 0xb:
-    if (DAT_00588e40 <= g_scrContext) goto LAB_002e2cc4;
-    break;
-  default:
-    temp_v0 = DAT_00588e44;
-    *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-    *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-    *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-    return;
-  }
-  DAT_00588e44 = 0;
-  temp_v0 = DAT_00588e44;
-  *(unsigned char *)(*(int *)(param_1 + 0x1c) + temp_v3) = 0;
-  *(int *)(param_1 + *(int *)(param_1 + 0x1c) * 4 + 0x3c) = temp_v0;
-  *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-  return;
+    scrPush(context, SCR_TYPE_INT, DAT_00588e44);
 }
 
 } /* extern "C" */

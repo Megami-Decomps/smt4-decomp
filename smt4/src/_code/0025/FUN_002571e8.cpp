@@ -1,4 +1,3 @@
-/* NON_MATCHING: only mode 2 swaps the old-state and current-slot address registers. */
 #include "camp/RenderCtx.h"
 
 static __inline void renderCtxSetBlend(RenderCtx *context, s32 state)

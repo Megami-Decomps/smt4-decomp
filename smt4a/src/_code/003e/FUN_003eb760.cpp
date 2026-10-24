@@ -1,167 +1,150 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eb760` (_code @ 0x3eb760, 0x2ac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite with packed ten/six-bit slots compiles (171 vs 173 rows); register allocation of the loop-carried pointers differs */
+#include "common.h"
+
+// A ten-bit value with a six-bit companion packed into one halfword.
+struct TenSix {
+    u16 low : 10;
+    u16 high : 6;
+};
+
+// Battle entry being initialised (only the members written here).
+struct BattleEntry {
+    u8 kind;                // 0x00
+    u8 unk01;
+    u16 id;                 // 0x02
+    u16 category;           // 0x04
+    u16 variant;            // 0x06
+    u16 unk08;              // 0x08
+    u8 unk0a[0xca];
+    u8 flags[4];            // 0xd4
+    s32 stats[4];           // 0xd8
+    u16 growth[5];          // 0xe8
+    u8 unkf2[2];
+    s32 baseStats[4];       // 0xf4
+    s32 growthCopy[3];      // 0x104
+    u16 level;              // 0x110
+    u16 unk112;             // 0x112
+    u16 unk114;             // 0x114
+    u16 exp;                // 0x116
+    u8 unk118[0x10];
+    TenSix slotsA[0x15];    // 0x128
+    TenSix slotsB[0x15];    // 0x152
+    u8 slotsC[0x15];        // 0x1a6 (six-bit value of each)
+    u8 unk1bb_[1];
+    u8 unk1bc_[1];
+    u8 unk1bd;
+    u8 clear[0x228 - 0x1be];
+    u32 unk228;             // 0x228
+};
+
+// Party member record the entry is created from (only the members read).
+struct MemberSource {
+    u8 unk00[0x0e];
+    s16 hpRate;             // 0x0e
+    s16 mpRate;             // 0x10
+    u16 growth[5];          // 0x12
+    u8 unk1c[0x0e];
+    s16 strength;           // 0x2a
+    s16 magic;              // 0x2c
+    u8 unk2e[0x32];
+    u16 levelWord;          // 0x60
+    u16 id;                 // 0x62
+    u16 expWord;            // 0x64
+    u8 unk66[0xc6];
+    u16 category;           // 0x12c
+    u16 variant;            // 0x12e
+};
+
+struct CategoryEntry {
+    u8 unk00[0x0c];
+    u32 value;              // 0x0c
+};
+
+struct DevilInfo {
+    u8 unk00[9];
+    s8 type;                // 0x09
+    u8 unk0a[0x31];
+    u8 rate;                // 0x3b
+};
 
 extern "C" {
 
-int FUN_00184310(void);
-int rt_memclr(unsigned char *, int);
-int randomGetLowerTenBits(unsigned int, unsigned int);
-int randomGetUpperSixBits(unsigned int, unsigned int);
-int FUN_004da024(void);
-int FUN_004da0b4(void);
-int clearTwoWords(unsigned char *);
+s32 FUN_00177654(void);
+u32 FUN_004da024(u32 index);
+u32 FUN_004da0b4(u32 index);
+u32 randomGetLowerTenBits(MemberSource* member, u32 index);
+u32 randomGetUpperSixBits(MemberSource* member, u32 index);
+CategoryEntry* dataTableGetCategoryEntry(s32 category, u16 variant);
+DevilInfo* FUN_00184310(u16 id);
+void clearTwoWords(void* words);
+void rt_memclr(void* block, u32 size);
 
-typedef struct fn_003eb760_arg0 fn_003eb760_arg0;
-struct fn_003eb760_arg0 {
-    unsigned char pad_0x0[0x3c];
-    undefined1 field_0x3c; /* +0x3c */
-    unsigned char pad_0x3d[0x2];
-    undefined1 field_0x3f; /* +0x3f */
-    undefined1 field_0x40; /* +0x40 */
-    undefined1 field_0x41; /* +0x41 */
-};
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-extern int dataTableGetCategoryEntry(int, unsigned short);
-extern int FUN_00177654(void);
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: randomGetLowerTenBits. */
-/* Supplied declaration required: randomGetUpperSixBits. */
-/* Supplied declaration required: FUN_004da024. */
-/* Supplied declaration required: FUN_004da0b4. */
-/* Supplied declaration required: clearTwoWords. */
-
-
-void FUN_003eb760(fn_003eb760_arg0 *param_1,unsigned char *param_2,unsigned int param_3)
-
+// Builds a battle entry from a party member, rolling its random slots unless saved data exists.
+void FUN_003eb760(void* unused, BattleEntry* entry, MemberSource* member)
 {
-/* irregular: 7 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  short temp_v4;
-  unsigned char temp_v5;
-  unsigned short temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  
-  temp_v7 = FUN_00177654();
-  *(unsigned short *)(param_2 + 2) = *(unsigned short *)(param_3 + 0x62);
-  *param_2 = 8;
-  *(unsigned short *)(param_2 + 8) = 0xffff;
-  *(unsigned short *)(param_2 + 4) = 0xffff;
-  *(unsigned short *)(param_2 + 6) = 0xffff;
-  param_2[0xd4] = 0;
-  param_2[0xd5] = 0;
-  param_2[0xd6] = 0;
-  param_2[0xd7] = 0;
-  temp_v1 = *(short *)(param_3 + 0x2a);
-  *(int *)(param_2 + 0xd8) = (int)temp_v1;
-  temp_v2 = *(short *)(param_3 + 0xe);
-  *(int *)(param_2 + 0xdc) = (int)temp_v2;
-  temp_v3 = *(short *)(param_3 + 0x2c);
-  *(int *)(param_2 + 0xe0) = (int)temp_v3;
-  temp_v4 = *(short *)(param_3 + 0x10);
-  *(int *)(param_2 + 0xe4) = (int)temp_v4;
-  *(unsigned short *)(param_2 + 0xe8) = *(unsigned short *)(param_3 + 0x12);
-  *(unsigned short *)(param_2 + 0xea) = *(unsigned short *)(param_3 + 0x14);
-  *(unsigned short *)(param_2 + 0xec) = *(unsigned short *)(param_3 + 0x16);
-  *(unsigned short *)(param_2 + 0xee) = *(unsigned short *)(param_3 + 0x18);
-  *(unsigned short *)(param_2 + 0xf0) = *(unsigned short *)(param_3 + 0x1a);
-  *(int *)(param_2 + 0xf4) = (int)temp_v1;
-  *(int *)(param_2 + 0xf8) = (int)temp_v2;
-  *(int *)(param_2 + 0xfc) = (int)temp_v3;
-  *(int *)(param_2 + 0x100) = (int)temp_v4;
-  *(unsigned int *)(param_2 + 0x104) = *(unsigned int *)(param_2 + 0xe8);
-  *(unsigned int *)(param_2 + 0x108) = *(unsigned int *)(param_2 + 0xec);
-  *(unsigned int *)(param_2 + 0x10c) = *(unsigned int *)(param_2 + 0xf0);
-  *(unsigned short *)(param_2 + 0x110) = *(unsigned short *)(param_3 + 0x60);
-  *(unsigned short *)(param_2 + 0x116) = *(unsigned short *)(param_3 + 100);
-  temp_v9 = 0;
-  if (temp_v7 != 0) {
-    *(unsigned short *)(param_2 + 4) = *(unsigned short *)(param_3 + 300);
-    *(unsigned short *)(param_2 + 6) = *(unsigned short *)(param_3 + 0x12e);
-    do {
-      temp_v6 = (unsigned short)temp_v9 & 0xff;
-      FUN_004da024();
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
-           (temp_v6 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0xfc00);
-      temp_v8 = temp_v9 & 0xff;
-      FUN_004da0b4();
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
-           (unsigned short)(temp_v8 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0x3ff);
-      temp_v6 = (unsigned short)temp_v9 & 0xff;
-      FUN_004da024();
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
-           (temp_v6 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0xfc00);
-      temp_v8 = temp_v9 & 0xff;
-      FUN_004da0b4();
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
-           (unsigned short)((temp_v8 & 0x3f) << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0x3ff);
-      temp_v10 = temp_v9 + 1;
-      param_2[temp_v9 + 0x1a6] = (char)(temp_v8 & 0x3f);
-      temp_v9 = temp_v10;
-    } while ((int)temp_v10 < 0x15);
-    temp_v7 = dataTableGetCategoryEntry((int)*(short *)(param_3 + 300),*(unsigned short *)(param_3 + 0x12e));
-    param_2[0x1bb] = (char)*(unsigned int *)(temp_v7 + 0xc);
-  }
-  else {
-    do {
-      temp_v8 = param_3;
-      randomGetLowerTenBits(param_3,temp_v9 & 0xff);
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
-           ((unsigned short)temp_v8 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0xfc00);
-      temp_v8 = param_3;
-      randomGetUpperSixBits(param_3,temp_v9 & 0xff);
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
-           (unsigned short)(temp_v8 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0x3ff);
-      temp_v8 = param_3;
-      randomGetLowerTenBits(param_3,temp_v9 & 0xff);
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
-           ((unsigned short)temp_v8 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0xfc00);
-      temp_v8 = param_3;
-      randomGetUpperSixBits(param_3,temp_v9 & 0xff);
-      *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
-           (unsigned short)((temp_v8 & 0x3f) << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0x3ff);
-      temp_v10 = temp_v9 + 1;
-      param_2[temp_v9 + 0x1a6] = (char)(temp_v8 & 0x3f);
-      temp_v9 = temp_v10;
-    } while ((int)temp_v10 < 0x15);
-    temp_v9 = (unsigned int)*(unsigned short *)(param_2 + 2);
-    FUN_00184310();
-    param_2[0x1bb] = *(unsigned char *)(temp_v9 + 0x3b);
-    temp_v0 = *(char *)(temp_v9 + 9);
-    temp_v5 = 1;
-    if (temp_v0 != '\x01') {
-      if (temp_v0 == '\x04') {
-        param_2[0x1bc] = 0;
-      }
-      else if (temp_v0 == '\x05') {
-        temp_v5 = 2;
-        param_2[0x1bc] = temp_v5;
-      }
+    s32 hasSaved = FUN_00177654();
+    entry->id = member->id;
+    entry->kind = 8;
+    entry->unk08 = 0xffff;
+    entry->category = 0xffff;
+    entry->variant = 0xffff;
+    entry->flags[0] = 0;
+    entry->flags[1] = 0;
+    entry->flags[2] = 0;
+    entry->flags[3] = 0;
+    entry->stats[0] = member->strength;
+    entry->stats[1] = member->hpRate;
+    entry->stats[2] = member->magic;
+    entry->stats[3] = member->mpRate;
+    for (s32 i = 0; i < 5; i++) entry->growth[i] = member->growth[i];
+    entry->baseStats[0] = entry->stats[0];
+    entry->baseStats[1] = entry->stats[1];
+    entry->baseStats[2] = entry->stats[2];
+    entry->baseStats[3] = entry->stats[3];
+    entry->growthCopy[0] = *reinterpret_cast<u32*>(&entry->growth[0]);
+    entry->growthCopy[1] = *reinterpret_cast<u32*>(&entry->growth[2]);
+    entry->growthCopy[2] = *reinterpret_cast<u32*>(&entry->growth[4]);
+    entry->level = member->levelWord;
+    entry->exp = member->expWord;
+
+    if (hasSaved != 0) {
+        entry->category = member->category;
+        entry->variant = member->variant;
+        for (s32 i = 0; i < 0x15; i++) {
+            entry->slotsA[i].low = FUN_004da024(i & 0xff);
+            entry->slotsA[i].high = FUN_004da0b4(i & 0xff);
+            entry->slotsB[i].low = FUN_004da024(i & 0xff);
+            u32 six = FUN_004da0b4(i & 0xff);
+            entry->slotsB[i].high = six;
+            entry->slotsC[i] = six & 0x3f;
+        }
+        entry->unk1bb_[0] = dataTableGetCategoryEntry((s16)member->category, member->variant)->value;
+    } else {
+        for (s32 i = 0; i < 0x15; i++) {
+            entry->slotsA[i].low = randomGetLowerTenBits(member, i & 0xff);
+            entry->slotsA[i].high = randomGetUpperSixBits(member, i & 0xff);
+            entry->slotsB[i].low = randomGetLowerTenBits(member, i & 0xff);
+            u32 six = randomGetUpperSixBits(member, i & 0xff);
+            entry->slotsB[i].high = six;
+            entry->slotsC[i] = six & 0x3f;
+        }
+        DevilInfo* info = FUN_00184310(entry->id);
+        entry->unk1bb_[0] = info->rate;
+        if (info->type == 1) {
+            entry->unk1bc_[0] = 1;
+        } else if (info->type == 4) {
+            entry->unk1bc_[0] = 0;
+        } else if (info->type == 5) {
+            entry->unk1bc_[0] = 2;
+        }
     }
-    else {
-      param_2[0x1bc] = temp_v5;
-    }
-  }
-  *(unsigned short *)(param_2 + 0x112) = 0;
-  *(unsigned short *)(param_2 + 0x114) = 0;
-  *(unsigned int *)(param_2 + 0x228) = 0;
-  clearTwoWords(param_2 + 0x1be);
-  clearTwoWords(param_2 + 0x1c6);
-  clearTwoWords(param_2 + 0x1ce);
-  rt_memclr(param_2 + 0x1d6,0x50);
-  return;
+    entry->unk112 = 0;
+    entry->unk114 = 0;
+    entry->unk228 = 0;
+    clearTwoWords(reinterpret_cast<u8*>(entry) + 0x1be);
+    clearTwoWords(reinterpret_cast<u8*>(entry) + 0x1c6);
+    clearTwoWords(reinterpret_cast<u8*>(entry) + 0x1ce);
+    rt_memclr(reinterpret_cast<u8*>(entry) + 0x1d6, 0x50);
 }
 
 } /* extern "C" */

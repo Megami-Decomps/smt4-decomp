@@ -1,139 +1,97 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00263e50` (_code @ 0x263e50, 0x250 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the registry removal differs (retail walks the vector with begin/end loaded together via ldrd from a base at registry+0x14 and materializes the removed flag; LightRegistry::remove loads them separately), plus saved-register assignment in the owned-object loops (r6/r7 swapped); the destroy loops and tail otherwise match. */
+#include "gfx/LightRegistry.h"
+#include "classes/AsdAllocatorObject.h"
+
+/* An object with a virtual destructor in slot 0 that is handed back to the allocator it came from. */
+struct OwnedObject {
+    /* 0x00 */ void (**vtable)(OwnedObject *self);
+    /* 0x04 */ AsdAllocatorObject *allocator;
+};
+
+/* The graphics resource file the set was loaded from. */
+struct ResGraphicsHandle {
+    /* 0x00 */ s32 file;
+};
+
+/* Everything a light group owns: registrations, objects and loaded resources. */
+struct LightResourceSet {
+    /* 0x00 */ LightRegistration **lights;
+    /* 0x04 */ s32 lightCount;
+    /* 0x08 */ void *lightData;
+    /* 0x0C */ s32 emitterCount;
+    /* 0x10 */ OwnedObject **emitters;
+    /* 0x14 */ void *emitterData;
+    /* 0x18 */ s32 effectCount;
+    /* 0x1C */ OwnedObject **effects;
+    /* 0x20 */ ResGraphicsHandle *resource;
+    /* 0x24 */ void *extra;
+};
 
 extern "C" {
+extern u32 DAT_00464b7c;
+extern u32 g_asdModelTransformBuilder;
 
-int sceneTraverserVisit(unsigned int, unsigned int);
-int asdMemFreeNonNull(int);
-int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(unsigned int **, unsigned int **, unsigned int **);
-int asdMemFree(...);
-int nw_gfx_res_ResGraphicsFile_Cleanup(int [2]);
+void sceneTraverserVisit(u32 traverser, u32 root);
+void asdMemFreeNonNull(void *memory);
+void asdMemFree(void *memory);
+void nw_gfx_res_ResGraphicsFile_Cleanup(s32 *file);
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_4_stack;
-
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-
-/* Supplied declaration required: sceneTraverserVisit. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
-
-
-void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int ****param_4)
-
+/* Destroys an object in an owned-object array and clears its slot. */
+static inline void destroyOwned(OwnedObject *&slot)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int ***pppuVar1;
-  unsigned int **ppuVar2;
-  unsigned int **ppuVar3;
-  unsigned int **ppuVar4;
-  unsigned int ****ppppuVar5;
-  int temp_v0;
-  unsigned int *puVar7;
-  unsigned int *puVar8;
-  int temp_v1 [2];
-  unsigned int ***temp_v2 [4];
-  
-  temp_v0 = 0;
-  if (temp_v0 < param_1[1]) {
-    do {
-      ppppuVar5 = *(unsigned int *****)(*param_1 + temp_v0 * 4);
-      pppuVar1 = ppppuVar5[3];
-      if (pppuVar1 != (unsigned int ***)0x0) {
-        ppuVar2 = pppuVar1[6];
-        ppuVar4 = pppuVar1[7];
-        while( 1 ) {
-          if (ppuVar2 != ppuVar4) {
-            param_4 = (unsigned int ****)*ppuVar2;
-          }
-          if (ppuVar2 == ppuVar4 || param_4 == ppppuVar5) break;
-          ppuVar2 = ppuVar2 + 1;
-        }
-        ppuVar3 = ppuVar2;
-        temp_v2[0] = (unsigned int ***)ppppuVar5;
-        if (ppuVar2 != ppuVar4) {
-          ppuVar3 = ppuVar2 + 1;
-          param_4 = temp_v2;
-          _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(ppuVar3,ppuVar4,ppuVar2);
-        }
-        ppuVar2 = pppuVar1[7];
-        pppuVar1[7] = ppuVar3;
-        if (ppuVar2 != ppuVar3) {
-          temp_v2[0][3] = (unsigned int **)0x0;
-        }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < param_1[1]);
-  }
-  if (param_1[2] != 0) {
-    asdMemFree();
-  }
-  if (param_1[4] != 0) {
-    temp_v0 = 0;
-    if (temp_v0 < param_1[3]) {
-      do {
-        puVar7 = (unsigned int *)(param_1[4] + temp_v0 * 4);
-        puVar8 = (unsigned int *)*puVar7;
-        if (puVar8 != (unsigned int *)0x0) {
-          (**(romwright_code **)*puVar8)(puVar8);
-          (**(romwright_code **)(*(int *)puVar8[1] + 0xc))((int *)puVar8[1],puVar8);
-          *puVar7 = 0;
-        }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < param_1[3]);
+    OwnedObject *object = slot;
+
+    if (object != NULL) {
+        object->vtable[0](object);
+        object->allocator->release(object);
+        slot = NULL;
     }
-    asdMemFree(param_1[4]);
-  }
-  if (param_1[5] != 0) {
-    asdMemFree();
-  }
-  if (param_1[7] != 0) {
-    temp_v0 = 0;
-    if (temp_v0 < param_1[6]) {
-      do {
-        puVar7 = (unsigned int *)(param_1[7] + temp_v0 * 4);
-        puVar8 = (unsigned int *)*puVar7;
-        if (puVar8 != (unsigned int *)0x0) {
-          (**(romwright_code **)*puVar8)(puVar8);
-          (**(romwright_code **)(*(int *)puVar8[1] + 0xc))((int *)puVar8[1],puVar8);
-          *puVar7 = 0;
+}
+
+/* Unregisters the group's lights and releases every object and buffer it owns. */
+void FUN_00263e50(LightResourceSet *set)
+{
+    s32 i;
+    s32 handle;
+
+    for (i = 0; i < set->lightCount; i++) {
+        LightRegistration *light = set->lights[i];
+        LightRegistry *registry = light->registry;
+
+        if (registry != NULL && registry->remove(light)) {
+            light->registry = NULL;
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < param_1[6]);
     }
-    asdMemFree(param_1[7]);
-  }
-  temp_v0 = 0;
-  if (temp_v0 < param_1[1]) {
-    do {
-      puVar7 = (unsigned int *)(*param_1 + temp_v0 * 4);
-      puVar8 = (unsigned int *)*puVar7;
-      if (puVar8 != (unsigned int *)0x0) {
-        (**(romwright_code **)*puVar8)(puVar8);
-        (**(romwright_code **)(*(int *)puVar8[1] + 0xc))((int *)puVar8[1],puVar8);
-        *puVar7 = 0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < param_1[1]);
-  }
-  asdMemFree(*param_1);
-  temp_v1[0] = *(int *)param_1[8];
-  if (temp_v1[0] != 0) {
-    nw_gfx_res_ResGraphicsFile_Cleanup(temp_v1);
-  }
-  asdMemFreeNonNull(param_1[8]);
-  asdMemFree(param_1[9]);
-  asdMemFree(param_1);
-  sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
-  return;
+    if (set->lightData != NULL) {
+        asdMemFree(set->lightData);
+    }
+    if (set->emitters != NULL) {
+        for (i = 0; i < set->emitterCount; i++) {
+            destroyOwned(set->emitters[i]);
+        }
+        asdMemFree(set->emitters);
+    }
+    if (set->emitterData != NULL) {
+        asdMemFree(set->emitterData);
+    }
+    if (set->effects != NULL) {
+        for (i = 0; i < set->effectCount; i++) {
+            destroyOwned(set->effects[i]);
+        }
+        asdMemFree(set->effects);
+    }
+    for (i = 0; i < set->lightCount; i++) {
+        destroyOwned(reinterpret_cast<OwnedObject *&>(set->lights[i]));
+    }
+    asdMemFree(set->lights);
+    handle = set->resource->file;
+    if (handle != 0) {
+        nw_gfx_res_ResGraphicsFile_Cleanup(&handle);
+    }
+    asdMemFreeNonNull(set->resource);
+    asdMemFree(set->extra);
+    asdMemFree(set);
+    sceneTraverserVisit(DAT_00464b7c, g_asdModelTransformBuilder);
 }
 
 } /* extern "C" */

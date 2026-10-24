@@ -11026,22 +11026,22 @@
     },
     {
       "address": "0x117a90",
-      "function": "FUN_00117a90",
+      "function": "_ZN9Obj559edcC1ERKS_",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00117a90.o",
+      "object": "build/obj/_code/0011/Obj559edc__Obj559edc__const_Obj559edc__.o",
       "size": 168,
-      "source": "src/_code/0011/FUN_00117a90.cpp",
-      "target": "orig/target/_code/0011/FUN_00117a90.o",
+      "source": "src/_code/0011/Obj559edc__Obj559edc__const_Obj559edc__.cpp",
+      "target": "orig/target/_code/0011/Obj559edc__Obj559edc__const_Obj559edc__.o",
       "thumb": true
     },
     {
       "address": "0x117b3c",
-      "function": "FUN_00117b3c",
+      "function": "_ZN9Obj559edcC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_00117b3c.o",
+      "object": "build/obj/_code/0011/Obj559edc__Obj559edc.o",
       "size": 136,
-      "source": "src/_code/0011/FUN_00117b3c.cpp",
-      "target": "orig/target/_code/0011/FUN_00117b3c.o",
+      "source": "src/_code/0011/Obj559edc__Obj559edc.cpp",
+      "target": "orig/target/_code/0011/Obj559edc__Obj559edc.o",
       "thumb": true
     },
     {
@@ -23348,12 +23348,12 @@
     },
     {
       "address": "0x137454",
-      "function": "FUN_00137454",
+      "function": "asdTextSystemInit",
       "module": "_code",
-      "object": "build/obj/_code/0013/FUN_00137454.o",
+      "object": "build/obj/_code/0013/asdTextSystemInit.o",
       "size": 532,
-      "source": "src/_code/0013/FUN_00137454.cpp",
-      "target": "orig/target/_code/0013/FUN_00137454.o",
+      "source": "src/_code/0013/asdTextSystemInit.cpp",
+      "target": "orig/target/_code/0013/asdTextSystemInit.o",
       "thumb": false
     },
     {
@@ -29809,12 +29809,12 @@
     },
     {
       "address": "0x15add8",
-      "function": "FUN_0015add8",
+      "function": "_ZN9Obj55b4e46createEPvP18AsdAllocatorObject",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_0015add8.o",
+      "object": "build/obj/_code/0015/Obj55b4e4__create.o",
       "size": 212,
-      "source": "src/_code/0015/FUN_0015add8.cpp",
-      "target": "orig/target/_code/0015/FUN_0015add8.o",
+      "source": "src/_code/0015/Obj55b4e4__create.cpp",
+      "target": "orig/target/_code/0015/Obj55b4e4__create.o",
       "thumb": false
     },
     {
@@ -29879,12 +29879,12 @@
     },
     {
       "address": "0x15d35c",
-      "function": "FUN_0015d35c",
+      "function": "_ZN9Obj55b7046createEPvP18AsdAllocatorObject",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_0015d35c.o",
+      "object": "build/obj/_code/0015/Obj55b704__create.o",
       "size": 212,
-      "source": "src/_code/0015/FUN_0015d35c.cpp",
-      "target": "orig/target/_code/0015/FUN_0015d35c.o",
+      "source": "src/_code/0015/Obj55b704__create.cpp",
+      "target": "orig/target/_code/0015/Obj55b704__create.o",
       "thumb": false
     },
     {
@@ -29919,12 +29919,12 @@
     },
     {
       "address": "0x15d814",
-      "function": "FUN_0015d814",
+      "function": "_ZN9Obj55bb906createEPvP18AsdAllocatorObject",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_0015d814.o",
+      "object": "build/obj/_code/0015/Obj55bb90__create.o",
       "size": 196,
-      "source": "src/_code/0015/FUN_0015d814.cpp",
-      "target": "orig/target/_code/0015/FUN_0015d814.o",
+      "source": "src/_code/0015/Obj55bb90__create.cpp",
+      "target": "orig/target/_code/0015/Obj55bb90__create.o",
       "thumb": false
     },
     {
@@ -34263,12 +34263,12 @@
     },
     {
       "address": "0x171acc",
-      "function": "FUN_00171acc",
+      "function": "_ZN9Obj55b4a86createEPvP18AsdAllocatorObject",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_00171acc.o",
+      "object": "build/obj/_code/0017/Obj55b4a8__create.o",
       "size": 236,
-      "source": "src/_code/0017/FUN_00171acc.cpp",
-      "target": "orig/target/_code/0017/FUN_00171acc.o",
+      "source": "src/_code/0017/Obj55b4a8__create.cpp",
+      "target": "orig/target/_code/0017/Obj55b4a8__create.o",
       "thumb": false
     },
     {
@@ -34283,12 +34283,12 @@
     },
     {
       "address": "0x171d7c",
-      "function": "FUN_00171d7c",
+      "function": "_ZN9Obj55b5a86createEPvP18AsdAllocatorObject",
       "module": "_code",
-      "object": "build/obj/_code/0017/FUN_00171d7c.o",
+      "object": "build/obj/_code/0017/Obj55b5a8__create.o",
       "size": 196,
-      "source": "src/_code/0017/FUN_00171d7c.cpp",
-      "target": "orig/target/_code/0017/FUN_00171d7c.o",
+      "source": "src/_code/0017/Obj55b5a8__create.cpp",
+      "target": "orig/target/_code/0017/Obj55b5a8__create.o",
       "thumb": false
     },
     {
@@ -46023,12 +46023,12 @@
     },
     {
       "address": "0x1b12a4",
-      "function": "FUN_001b12a4",
+      "function": "_ZN9Obj55b56cC1Ej",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b12a4.o",
+      "object": "build/obj/_code/001b/Obj55b56c__Obj55b56c__unsigned_int.o",
       "size": 212,
-      "source": "src/_code/001b/FUN_001b12a4.cpp",
-      "target": "orig/target/_code/001b/FUN_001b12a4.o",
+      "source": "src/_code/001b/Obj55b56c__Obj55b56c__unsigned_int.cpp",
+      "target": "orig/target/_code/001b/Obj55b56c__Obj55b56c__unsigned_int.o",
       "thumb": false
     },
     {
@@ -47564,12 +47564,12 @@
     },
     {
       "address": "0x1b7420",
-      "function": "FUN_001b7420",
+      "function": "_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b7420.o",
+      "object": "build/obj/_code/001b/Obj55b680__Obj55b680__AsdAllocatorObject____Obj55b680Res____void__.o",
       "size": 868,
-      "source": "src/_code/001b/FUN_001b7420.cpp",
-      "target": "orig/target/_code/001b/FUN_001b7420.o",
+      "source": "src/_code/001b/Obj55b680__Obj55b680__AsdAllocatorObject____Obj55b680Res____void__.cpp",
+      "target": "orig/target/_code/001b/Obj55b680__Obj55b680__AsdAllocatorObject____Obj55b680Res____void__.o",
       "thumb": false
     },
     {
@@ -55812,12 +55812,12 @@
     },
     {
       "address": "0x21ba5c",
-      "function": "FUN_0021ba5c",
+      "function": "uiSpriteScreenSetupForMode",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_0021ba5c.o",
+      "object": "build/obj/_code/0021/uiSpriteScreenSetupForMode.o",
       "size": 824,
-      "source": "src/_code/0021/FUN_0021ba5c.cpp",
-      "target": "orig/target/_code/0021/FUN_0021ba5c.o",
+      "source": "src/_code/0021/uiSpriteScreenSetupForMode.cpp",
+      "target": "orig/target/_code/0021/uiSpriteScreenSetupForMode.o",
       "thumb": false
     },
     {
@@ -55914,12 +55914,12 @@
     },
     {
       "address": "0x221754",
-      "function": "FUN_00221754",
+      "function": "battleUnitHasElementEntry",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00221754.o",
+      "object": "build/obj/_code/0022/battleUnitHasElementEntry.o",
       "size": 656,
-      "source": "src/_code/0022/FUN_00221754.cpp",
-      "target": "orig/target/_code/0022/FUN_00221754.o",
+      "source": "src/_code/0022/battleUnitHasElementEntry.cpp",
+      "target": "orig/target/_code/0022/battleUnitHasElementEntry.o",
       "thumb": false
     },
     {
@@ -63206,12 +63206,12 @@
     },
     {
       "address": "0x28b088",
-      "function": "FUN_0028b088",
+      "function": "campShowSelectedEntryHelp",
       "module": "_code",
-      "object": "build/obj/_code/0028/FUN_0028b088.o",
+      "object": "build/obj/_code/0028/campShowSelectedEntryHelp.o",
       "size": 708,
-      "source": "src/_code/0028/FUN_0028b088.cpp",
-      "target": "orig/target/_code/0028/FUN_0028b088.o",
+      "source": "src/_code/0028/campShowSelectedEntryHelp.cpp",
+      "target": "orig/target/_code/0028/campShowSelectedEntryHelp.o",
       "thumb": false
     },
     {
@@ -67304,6 +67304,26 @@
       "thumb": false
     },
     {
+      "address": "0x2ba700",
+      "function": "FUN_002ba700",
+      "module": "_code",
+      "object": "build/obj/_code/002b/FUN_002ba700.o",
+      "size": 40,
+      "source": "src/_code/002b/FUN_002ba700.cpp",
+      "target": "orig/target/_code/002b/FUN_002ba700.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2ba728",
+      "function": "FUN_002ba728",
+      "module": "_code",
+      "object": "build/obj/_code/002b/FUN_002ba728.o",
+      "size": 44,
+      "source": "src/_code/002b/FUN_002ba728.cpp",
+      "target": "orig/target/_code/002b/FUN_002ba728.o",
+      "thumb": false
+    },
+    {
       "address": "0x2ba754",
       "function": "naviMainPollResourcesAndUpdatePanel",
       "module": "_code",
@@ -71310,6 +71330,16 @@
       "size": 128,
       "source": "src/_code/002e/FUN_002e1614.cpp",
       "target": "orig/target/_code/002e/FUN_002e1614.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2e1698",
+      "function": "FUN_002e1698",
+      "module": "_code",
+      "object": "build/obj/_code/002e/FUN_002e1698.o",
+      "size": 4,
+      "source": "src/_code/002e/FUN_002e1698.cpp",
+      "target": "orig/target/_code/002e/FUN_002e1698.o",
       "thumb": false
     },
     {
@@ -76294,12 +76324,12 @@
     },
     {
       "address": "0x2ecad4",
-      "function": "FUN_002ecad4",
+      "function": "_ZN9Obj55af4c4initEjh",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002ecad4.o",
+      "object": "build/obj/_code/002e/Obj55af4c__init.o",
       "size": 26,
-      "source": "src/_code/002e/FUN_002ecad4.cpp",
-      "target": "orig/target/_code/002e/FUN_002ecad4.o",
+      "source": "src/_code/002e/Obj55af4c__init.cpp",
+      "target": "orig/target/_code/002e/Obj55af4c__init.o",
       "thumb": true
     },
     {
@@ -78017,12 +78047,12 @@
     },
     {
       "address": "0x2eff58",
-      "function": "FUN_002eff58",
+      "function": "_ZN9Obj5588ecC1Ej",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002eff58.o",
+      "object": "build/obj/_code/002e/Obj5588ec__Obj5588ec__unsigned_int.o",
       "size": 34,
-      "source": "src/_code/002e/FUN_002eff58.cpp",
-      "target": "orig/target/_code/002e/FUN_002eff58.o",
+      "source": "src/_code/002e/Obj5588ec__Obj5588ec__unsigned_int.cpp",
+      "target": "orig/target/_code/002e/Obj5588ec__Obj5588ec__unsigned_int.o",
       "thumb": true
     },
     {
@@ -84637,12 +84667,12 @@
     },
     {
       "address": "0x300b18",
-      "function": "FUN_00300b18",
+      "function": "_ZN9Obj55a94cC1Ej",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_00300b18.o",
+      "object": "build/obj/_code/0030/Obj55a94c__Obj55a94c__unsigned_int.o",
       "size": 46,
-      "source": "src/_code/0030/FUN_00300b18.cpp",
-      "target": "orig/target/_code/0030/FUN_00300b18.o",
+      "source": "src/_code/0030/Obj55a94c__Obj55a94c__unsigned_int.cpp",
+      "target": "orig/target/_code/0030/Obj55a94c__Obj55a94c__unsigned_int.o",
       "thumb": true
     },
     {
@@ -85622,12 +85652,12 @@
     },
     {
       "address": "0x303208",
-      "function": "FUN_00303208",
+      "function": "_ZN9Obj55abd4C1Ej",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_00303208.o",
+      "object": "build/obj/_code/0030/Obj55abd4__Obj55abd4__unsigned_int.o",
       "size": 46,
-      "source": "src/_code/0030/FUN_00303208.cpp",
-      "target": "orig/target/_code/0030/FUN_00303208.o",
+      "source": "src/_code/0030/Obj55abd4__Obj55abd4__unsigned_int.cpp",
+      "target": "orig/target/_code/0030/Obj55abd4__Obj55abd4__unsigned_int.o",
       "thumb": true
     },
     {
@@ -86314,12 +86344,12 @@
     },
     {
       "address": "0x3054a4",
-      "function": "FUN_003054a4",
+      "function": "_ZN9Obj558d20C1Ej",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_003054a4.o",
+      "object": "build/obj/_code/0030/Obj558d20__Obj558d20__unsigned_int.o",
       "size": 16,
-      "source": "src/_code/0030/FUN_003054a4.cpp",
-      "target": "orig/target/_code/0030/FUN_003054a4.o",
+      "source": "src/_code/0030/Obj558d20__Obj558d20__unsigned_int.cpp",
+      "target": "orig/target/_code/0030/Obj558d20__Obj558d20__unsigned_int.o",
       "thumb": true
     },
     {
@@ -93485,12 +93515,12 @@
     },
     {
       "address": "0x311458",
-      "function": "_ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_",
+      "function": "_ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_",
       "module": "_code",
-      "object": "build/obj/_code/0031/_ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_.o",
+      "object": "build/obj/_code/0031/_ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_.o",
       "size": 18,
-      "source": "src/_code/0031/_ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_.cpp",
-      "target": "orig/target/_code/0031/_ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_.o",
+      "source": "src/_code/0031/_ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_.cpp",
+      "target": "orig/target/_code/0031/_ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_.o",
       "thumb": true
     },
     {
@@ -93515,12 +93545,12 @@
     },
     {
       "address": "0x311490",
-      "function": "_ZN9Obj559edcC1Ev",
+      "function": "_ZN9Obj55950cC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0031/Obj559edc__Obj559edc.o",
+      "object": "build/obj/_code/0031/Obj55950c__Obj55950c.o",
       "size": 18,
-      "source": "src/_code/0031/Obj559edc__Obj559edc.cpp",
-      "target": "orig/target/_code/0031/Obj559edc__Obj559edc.o",
+      "source": "src/_code/0031/Obj55950c__Obj55950c.cpp",
+      "target": "orig/target/_code/0031/Obj55950c__Obj55950c.o",
       "thumb": true
     },
     {
@@ -106950,12 +106980,12 @@
     },
     {
       "address": "0x3683c8",
-      "function": "FUN_003683c8",
+      "function": "uiScreenIdToLayoutSet",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_003683c8.o",
+      "object": "build/obj/_code/0036/uiScreenIdToLayoutSet.o",
       "size": 808,
-      "source": "src/_code/0036/FUN_003683c8.cpp",
-      "target": "orig/target/_code/0036/FUN_003683c8.o",
+      "source": "src/_code/0036/uiScreenIdToLayoutSet.cpp",
+      "target": "orig/target/_code/0036/uiScreenIdToLayoutSet.o",
       "thumb": false
     },
     {
@@ -116287,12 +116317,12 @@
     },
     {
       "address": "0x39c9f0",
-      "function": "FUN_0039c9f0",
+      "function": "statRowDrawValue",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_0039c9f0.o",
+      "object": "build/obj/_code/0039/statRowDrawValue.o",
       "size": 728,
-      "source": "src/_code/0039/FUN_0039c9f0.cpp",
-      "target": "orig/target/_code/0039/FUN_0039c9f0.o",
+      "source": "src/_code/0039/statRowDrawValue.cpp",
+      "target": "orig/target/_code/0039/statRowDrawValue.o",
       "thumb": false
     },
     {
@@ -140256,12 +140286,12 @@
     },
     {
       "address": "0x42fac4",
-      "function": "FUN_0042fac4",
+      "function": "_ZN9Obj558330C1Ej",
       "module": "_code",
-      "object": "build/obj/_code/0042/FUN_0042fac4.o",
+      "object": "build/obj/_code/0042/Obj558330__Obj558330__unsigned_int.o",
       "size": 200,
-      "source": "src/_code/0042/FUN_0042fac4.cpp",
-      "target": "orig/target/_code/0042/FUN_0042fac4.o",
+      "source": "src/_code/0042/Obj558330__Obj558330__unsigned_int.cpp",
+      "target": "orig/target/_code/0042/Obj558330__Obj558330__unsigned_int.o",
       "thumb": false
     },
     {
@@ -140826,12 +140856,12 @@
     },
     {
       "address": "0x430f18",
-      "function": "asdCecMessageIdInit",
+      "function": "_ZN12CecMessageIdC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0043/asdCecMessageIdInit.o",
+      "object": "build/obj/_code/0043/CecMessageId__CecMessageId.o",
       "size": 20,
-      "source": "src/_code/0043/asdCecMessageIdInit.cpp",
-      "target": "orig/target/_code/0043/asdCecMessageIdInit.o",
+      "source": "src/_code/0043/CecMessageId__CecMessageId.cpp",
+      "target": "orig/target/_code/0043/CecMessageId__CecMessageId.o",
       "thumb": false
     },
     {
@@ -147929,12 +147959,12 @@
     },
     {
       "address": "0x459870",
-      "function": "FUN_00459870",
+      "function": "_ZN9Obj55bcccC1Ejjj",
       "module": "_code",
-      "object": "build/obj/_code/0045/FUN_00459870.o",
+      "object": "build/obj/_code/0045/Obj55bccc__Obj55bccc__unsigned_int__unsigned_int__unsigned_int.o",
       "size": 168,
-      "source": "src/_code/0045/FUN_00459870.cpp",
-      "target": "orig/target/_code/0045/FUN_00459870.o",
+      "source": "src/_code/0045/Obj55bccc__Obj55bccc__unsigned_int__unsigned_int__unsigned_int.cpp",
+      "target": "orig/target/_code/0045/Obj55bccc__Obj55bccc__unsigned_int__unsigned_int__unsigned_int.o",
       "thumb": false
     },
     {
@@ -153958,9 +153988,19 @@
       "function": "FUN_0047a480",
       "module": "_code",
       "object": "build/obj/_code/0047/FUN_0047a480.o",
-      "size": 616,
+      "size": 4,
       "source": "src/_code/0047/FUN_0047a480.cpp",
       "target": "orig/target/_code/0047/FUN_0047a480.o",
+      "thumb": false
+    },
+    {
+      "address": "0x47a484",
+      "function": "FUN_0047a484",
+      "module": "_code",
+      "object": "build/obj/_code/0047/FUN_0047a484.o",
+      "size": 612,
+      "source": "src/_code/0047/FUN_0047a484.cpp",
+      "target": "orig/target/_code/0047/FUN_0047a484.o",
       "thumb": false
     },
     {
@@ -155128,13 +155168,16 @@
     },
     {
       "address": "0x481b3c",
-      "function": "_ZN19ControllerFirstKindC1Ev",
+      "function": "_ZN9Obj55c7b0C1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0048/ControllerFirstKind__ControllerFirstKind.o",
+      "object": "build/obj/_code/0048/Obj55c7b0__Obj55c7b0.o",
       "size": 40,
-      "source": "src/_code/0048/ControllerFirstKind__ControllerFirstKind.cpp",
-      "target": "orig/target/_code/0048/ControllerFirstKind__ControllerFirstKind.o",
-      "thumb": false
+      "source": "src/_code/0048/Obj55c7b0__Obj55c7b0.cpp",
+      "target": "orig/target/_code/0048/Obj55c7b0__Obj55c7b0.o",
+      "thumb": false,
+      "multifile": [
+        "_ZN9Obj55c81cC1Ej"
+      ]
     },
     {
       "address": "0x481b68",
@@ -155168,12 +155211,12 @@
     },
     {
       "address": "0x481b80",
-      "function": "FUN_00481b80",
+      "function": "_ZN9Obj55c7d4C1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_00481b80.o",
+      "object": "build/obj/_code/0048/Obj55c7d4__Obj55c7d4.o",
       "size": 32,
-      "source": "src/_code/0048/FUN_00481b80.cpp",
-      "target": "orig/target/_code/0048/FUN_00481b80.o",
+      "source": "src/_code/0048/Obj55c7d4__Obj55c7d4.cpp",
+      "target": "orig/target/_code/0048/Obj55c7d4__Obj55c7d4.o",
       "thumb": false
     },
     {
@@ -155298,12 +155341,12 @@
     },
     {
       "address": "0x4823ec",
-      "function": "FUN_004823ec",
+      "function": "_ZN9Obj55c804C1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0048/FUN_004823ec.o",
+      "object": "build/obj/_code/0048/Obj55c804__Obj55c804.o",
       "size": 32,
-      "source": "src/_code/0048/FUN_004823ec.cpp",
-      "target": "orig/target/_code/0048/FUN_004823ec.o",
+      "source": "src/_code/0048/Obj55c804__Obj55c804.cpp",
+      "target": "orig/target/_code/0048/Obj55c804__Obj55c804.o",
       "thumb": false
     },
     {
@@ -155479,12 +155522,12 @@
     },
     {
       "address": "0x482a5c",
-      "function": "_ZN20ControllerSecondKindC1Ev",
+      "function": "_ZN9Obj55c840C1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0048/ControllerSecondKind__ControllerSecondKind.o",
+      "object": "build/obj/_code/0048/Obj55c840__Obj55c840.o",
       "size": 64,
-      "source": "src/_code/0048/ControllerSecondKind__ControllerSecondKind.cpp",
-      "target": "orig/target/_code/0048/ControllerSecondKind__ControllerSecondKind.o",
+      "source": "src/_code/0048/Obj55c840__Obj55c840.cpp",
+      "target": "orig/target/_code/0048/Obj55c840__Obj55c840.o",
       "thumb": false
     },
     {
@@ -158975,7 +159018,11 @@
       "size": 40,
       "source": "src/_code/004a/Obj55c89c__Obj55c89c__unsigned_int.cpp",
       "target": "orig/target/_code/004a/Obj55c89c__Obj55c89c__unsigned_int.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "_ZN9Obj55c920C1Ev",
+        "_ZN9Obj55c89c13resetHandlersEv"
+      ]
     },
     {
       "address": "0x4a45b4",
@@ -159249,7 +159296,11 @@
       "size": 68,
       "source": "src/_code/004a/Obj55c8d0__Obj55c8d0__unsigned_int.cpp",
       "target": "orig/target/_code/004a/Obj55c8d0__Obj55c8d0__unsigned_int.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "_ZN9Obj55c920C1Ev",
+        "_ZN9Obj55c8d013resetHandlersEv"
+      ]
     },
     {
       "address": "0x4a68cc",
@@ -162183,12 +162234,12 @@
     },
     {
       "address": "0x4bb440",
-      "function": "FUN_004bb440",
+      "function": "_ZN9Obj557ec0C1Ev",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004bb440.o",
+      "object": "build/obj/_code/004b/Obj557ec0__Obj557ec0.o",
       "size": 96,
-      "source": "src/_code/004b/FUN_004bb440.cpp",
-      "target": "orig/target/_code/004b/FUN_004bb440.o",
+      "source": "src/_code/004b/Obj557ec0__Obj557ec0.cpp",
+      "target": "orig/target/_code/004b/Obj557ec0__Obj557ec0.o",
       "thumb": false
     },
     {
@@ -165104,12 +165155,12 @@
     },
     {
       "address": "0x4d2628",
-      "function": "FUN_004d2628",
+      "function": "placementEditorSync",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004d2628.o",
+      "object": "build/obj/_code/004d/placementEditorSync.o",
       "size": 736,
-      "source": "src/_code/004d/FUN_004d2628.cpp",
-      "target": "orig/target/_code/004d/FUN_004d2628.o",
+      "source": "src/_code/004d/placementEditorSync.cpp",
+      "target": "orig/target/_code/004d/placementEditorSync.o",
       "thumb": false
     },
     {
@@ -165209,22 +165260,22 @@
     },
     {
       "address": "0x4d4ba4",
-      "function": "FUN_004d4ba4",
+      "function": "talkCtrlDebugMenuBuild",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004d4ba4.o",
+      "object": "build/obj/_code/004d/talkCtrlDebugMenuBuild.o",
       "size": 912,
-      "source": "src/_code/004d/FUN_004d4ba4.cpp",
-      "target": "orig/target/_code/004d/FUN_004d4ba4.o",
+      "source": "src/_code/004d/talkCtrlDebugMenuBuild.cpp",
+      "target": "orig/target/_code/004d/talkCtrlDebugMenuBuild.o",
       "thumb": false
     },
     {
       "address": "0x4d4f54",
-      "function": "FUN_004d4f54",
+      "function": "debugOptionPageApplySelected",
       "module": "_code",
-      "object": "build/obj/_code/004d/FUN_004d4f54.o",
+      "object": "build/obj/_code/004d/debugOptionPageApplySelected.o",
       "size": 740,
-      "source": "src/_code/004d/FUN_004d4f54.cpp",
-      "target": "orig/target/_code/004d/FUN_004d4f54.o",
+      "source": "src/_code/004d/debugOptionPageApplySelected.cpp",
+      "target": "orig/target/_code/004d/debugOptionPageApplySelected.o",
       "thumb": false
     },
     {
@@ -173642,14 +173693,14 @@
       "thumb": false
     },
     {
-      "address": "0x50e798",
+      "address": "0x50e788",
       "file": "AsdSDK/Source/Gfx/Model/AsdModel",
-      "function": "FUN_0050e798",
+      "function": "FUN_0050e788",
       "module": "_code",
-      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0050e798.o",
-      "size": 168,
-      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0050e798.cpp",
-      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0050e798.o",
+      "object": "build/obj/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0050e788.o",
+      "size": 184,
+      "source": "src/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0050e788.cpp",
+      "target": "orig/target/_code/AsdSDK/Source/Gfx/Model/AsdModel/FUN_0050e788.o",
       "thumb": false
     },
     {
@@ -173704,13 +173755,13 @@
       "thumb": false
     },
     {
-      "address": "0x50f808",
-      "function": "FUN_0050f808",
+      "address": "0x50f804",
+      "function": "FUN_0050f804",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_0050f808.o",
-      "size": 84,
-      "source": "src/_code/0050/FUN_0050f808.cpp",
-      "target": "orig/target/_code/0050/FUN_0050f808.o",
+      "object": "build/obj/_code/0050/FUN_0050f804.o",
+      "size": 88,
+      "source": "src/_code/0050/FUN_0050f804.cpp",
+      "target": "orig/target/_code/0050/FUN_0050f804.o",
       "thumb": false
     },
     {
@@ -173836,13 +173887,13 @@
       "thumb": false
     },
     {
-      "address": "0x5116f8",
-      "function": "FUN_005116f8",
+      "address": "0x5116f4",
+      "function": "FUN_005116f4",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_005116f8.o",
-      "size": 104,
-      "source": "src/_code/0051/FUN_005116f8.cpp",
-      "target": "orig/target/_code/0051/FUN_005116f8.o",
+      "object": "build/obj/_code/0051/FUN_005116f4.o",
+      "size": 108,
+      "source": "src/_code/0051/FUN_005116f4.cpp",
+      "target": "orig/target/_code/0051/FUN_005116f4.o",
       "thumb": false
     },
     {
@@ -173916,13 +173967,13 @@
       "thumb": false
     },
     {
-      "address": "0x511fb8",
-      "function": "FUN_00511fb8",
+      "address": "0x511fb4",
+      "function": "FUN_00511fb4",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_00511fb8.o",
-      "size": 216,
-      "source": "src/_code/0051/FUN_00511fb8.cpp",
-      "target": "orig/target/_code/0051/FUN_00511fb8.o",
+      "object": "build/obj/_code/0051/FUN_00511fb4.o",
+      "size": 220,
+      "source": "src/_code/0051/FUN_00511fb4.cpp",
+      "target": "orig/target/_code/0051/FUN_00511fb4.o",
       "thumb": false
     },
     {
@@ -173957,13 +174008,13 @@
       "thumb": false
     },
     {
-      "address": "0x512398",
-      "function": "FUN_00512398",
+      "address": "0x512388",
+      "function": "FUN_00512388",
       "module": "_code",
-      "object": "build/obj/_code/0051/FUN_00512398.o",
-      "size": 160,
-      "source": "src/_code/0051/FUN_00512398.cpp",
-      "target": "orig/target/_code/0051/FUN_00512398.o",
+      "object": "build/obj/_code/0051/FUN_00512388.o",
+      "size": 176,
+      "source": "src/_code/0051/FUN_00512388.cpp",
+      "target": "orig/target/_code/0051/FUN_00512388.o",
       "thumb": false
     },
     {

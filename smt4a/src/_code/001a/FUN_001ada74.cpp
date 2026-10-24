@@ -1,159 +1,129 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ada74` (_code @ 0x1ada74, 0x2a8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly (170 vs ~168 rows); differs in the slot-scan loop (retail keeps a loop-invariant flag in r6) and compare operand order */
+#include "common.h"
+
+// One requirement of a goal: a kind and its argument/threshold.
+struct GoalCondition {
+    u16 kind;       // 0x00
+    u16 arg;        // 0x02
+    u32 value;      // 0x04
+};
+
+// Goal (achievement-like) definition: only the fields read here.
+struct GoalDefinition {
+    u8 unk00[6];
+    u8 category;                // 0x06
+    u8 unk07[0xf9];
+    GoalCondition conditions[4];    // 0x100
+};
+
+struct SlotTable {
+    u32 firstWord;              // 0x00
+    u8 unk04[0x1c88 - 4];
+    s8 slotIds[1];              // 0x1c88
+};
+
+struct RosterEntry {
+    u8 unk00[4];
+    u16 counts[4];              // 0x04
+};
 
 extern "C" {
 
-int gameGetSlotRecord(void);
-int gameGetSlotTable(void);
-int FUN_001ad9b4(void);
-int bitArrayCountSet1to500(void);
+GoalDefinition* FUN_001ad9b4(s32 id);
+s32 gameOptionsClassifyMode(void);
+s32 FUN_001ba570(void);
+s32 gameDataTableGetFlag(void);
+s32 gameSlotTableFindFree(void);
+SlotTable* gameGetSlotTable(void);
+u8* gameGetSlotRecord(s32 slot);
+s32 bitSetTest(u8* record, u16 bit);
+s32 bitArrayCountSet1to500(u8* bits);
+u32 gameCountersGetWord(u16 counter);
+u32 FUN_001ba3d4(u16 arg);
+s32 partyFindSlotById(u16 id);
+RosterEntry* gameFindRosterEntry(s32 id);
 
-/* Supplied declaration required: gameGetSlotRecord. */
-/* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int gameSlotTableFindFree(void);
-extern int gameOptionsClassifyMode(void);
-extern int gameDataTableGetFlag(void);
-/* Supplied declaration required: bitArrayCountSet1to500. */
-extern unsigned int gameCountersGetWord(unsigned short);
-extern int gameFindRosterEntry(int);
-extern unsigned int FUN_001ba3d4(unsigned short);
-extern int bitSetTest(unsigned int, unsigned short);
-extern int partyFindSlotById(unsigned short);
-extern int FUN_001ba570(void);
-
-
-void FUN_001ada74(int param_1)
-
+// Returns whether every condition of goal `id` is currently satisfied.
+s32 FUN_001ada74(s32 id)
 {
-/* irregular: 1 goto(s); 4 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  
-  temp_v3 = param_1;
-  FUN_001ad9b4();
-  if (temp_v3 != 0) {
-    temp_v0 = *(char *)(temp_v3 + 6);
-    if (!(temp_v0 == '\x04' || temp_v0 == '\x05')) {
-      if (temp_v0 != '\x06') {
-        temp_v2 = gameOptionsClassifyMode();
-        if ((temp_v2 != 2) || (temp_v2 = FUN_001ba570(), temp_v2 == 0)) {
-          if (*(short *)(temp_v3 + 0x100) == 5) {
-            temp_v2 = gameSlotTableFindFree();
-            temp_v10 = gameGetSlotTable();
-            temp_v9 = 0;
-            if (temp_v2 < 1) {
-              return;
+    GoalDefinition* goal = FUN_001ad9b4(id);
+    s32 result = 1;
+    if (goal == NULL) return 0;
+
+    if (goal->category == 4 || goal->category == 5) {
+        if (gameOptionsClassifyMode() == 0) {
+            result = 0;
+        } else if (FUN_001ba570() != 0) {
+            result = 0;
+        }
+    } else if (goal->category == 6) {
+        if (gameDataTableGetFlag() == 4) result = 0;
+    } else if (gameOptionsClassifyMode() == 2 && FUN_001ba570() != 0) {
+        result = 0;
+    } else if (goal->conditions[0].kind == 5) {
+        // Needs one filled slot whose record satisfies every listed bit.
+        s32 slotCount = gameSlotTableFindFree();
+        s8* slotIds = gameGetSlotTable()->slotIds;
+        result = 0;
+        for (s32 slot = 0; slot < slotCount; slot++) {
+            if (slotIds[slot] < 0) continue;
+            u8* record = gameGetSlotRecord(slotIds[slot]);
+            s32 i;
+            for (i = 0; i < 4; i++) {
+                GoalCondition* condition = &goal->conditions[i];
+                if (condition->kind == 5 && !bitSetTest(record, condition->arg)) break;
             }
-            do {
-              if (-1 < *(char *)(temp_v10 + 0x1c88 + temp_v9)) {
-                temp_v4 = gameGetSlotRecord();
-                temp_v8 = 0;
-                while( 1 ) {
-                  temp_v5 = temp_v3 + temp_v8 * 8;
-                  temp_v1 = *(short *)(temp_v5 + 0x100);
-                  if (((temp_v1 != 0) && (temp_v1 == 5)) &&
-                     (temp_v5 = bitSetTest(temp_v4,*(unsigned short *)(temp_v5 + 0x102)), temp_v5 == 0))
-                  break;
-                  temp_v8 = temp_v8 + 1;
-                  if (temp_v8 >= 4) {
-                    return;
-                  }
-                }
-              }
-              temp_v9 = temp_v9 + 1;
-            } while (temp_v9 < temp_v2);
-            return;
-          }
-          temp_v2 = 0;
-          do {
-            temp_v10 = temp_v3 + temp_v2 * 8;
-            switch(*(unsigned short *)(temp_v10 + 0x100)) {
+            if (i >= 4) {
+                result = 1;
+                break;
+            }
+        }
+    } else {
+        for (s32 i = 0; i < 4; i++) {
+            switch (goal->conditions[i].kind) {
             case 1:
-              temp_v7 = FUN_001ba3d4(*(unsigned short *)(temp_v10 + 0x102));
-              if (temp_v7 < *(unsigned int *)(temp_v10 + 0x104)) {
-                return;
-              }
-              break;
+                if (FUN_001ba3d4(goal->conditions[i].arg) < goal->conditions[i].value) result = 0;
+                break;
             case 2:
-              if (*(char *)(temp_v3 + 6) != '\x01') {
-                temp_v10 = partyFindSlotById(*(unsigned short *)(temp_v10 + 0x102));
-                if (temp_v10 < 0) {
-                  return;
+                if (goal->category != 1) {
+                    if (partyFindSlotById(goal->conditions[i].arg) < 0) result = 0;
+                } else {
+                    RosterEntry* roster = gameFindRosterEntry(id);
+                    if (roster == NULL || goal->conditions[i].value > roster->counts[i]) result = 0;
                 }
-              }
-              else {
-                temp_v9 = gameFindRosterEntry(param_1);
-                if ((temp_v9 == 0) ||
-                   ((unsigned int)*(unsigned short *)(temp_v9 + temp_v2 * 2 + 4) < *(unsigned int *)(temp_v10 + 0x104))) {
-                  return;
-                }
-              }
-              break;
+                break;
             case 3:
-              puVar7 = (unsigned int *)gameGetSlotTable();
-              if (*puVar7 < *(unsigned int *)(temp_v10 + 0x104)) {
-                return;
-              }
-              break;
-            case 6:
-              temp_v9 = gameSlotTableFindFree();
-              temp_v8 = gameGetSlotTable();
-              temp_v5 = 0;
-              if (0 < temp_v9) {
-                do {
-                  if (-1 < *(char *)(temp_v8 + 0x1c88 + temp_v5)) {
-                    temp_v6 = gameGetSlotRecord();
-                    temp_v7 = temp_v6 + 0x68;
-                    bitArrayCountSet1to500();
-                    if (*(unsigned int *)(temp_v10 + 0x104) <= temp_v7) goto LAB_001add08;
-                  }
-                  temp_v5 = temp_v5 + 1;
-                  if (temp_v9 <= temp_v5) break;
-                } while( 1 );
-              }
+                if (gameGetSlotTable()->firstWord < goal->conditions[i].value) result = 0;
+                break;
+            case 6: {
+                s32 slotCount = gameSlotTableFindFree();
+                s8* slotIds = gameGetSlotTable()->slotIds;
+                s32 found = 0;
+                for (s32 slot = 0; slot < slotCount; slot++) {
+                    if (slotIds[slot] >= 0) {
+                        u8* record = gameGetSlotRecord(slotIds[slot]);
+                        if ((u32)bitArrayCountSet1to500(record + 0x68) >= goal->conditions[i].value) {
+                            found = 1;
+                            break;
+                        }
+                    }
+                }
+                if (!found) result = 0;
+                break;
+            }
             case 7:
-              return;
+                result = 0;
+                break;
             case 8:
-              temp_v7 = gameCountersGetWord(*(unsigned short *)(temp_v10 + 0x102) & 0xff);
-              if (temp_v7 < *(unsigned int *)(temp_v10 + 0x104)) {
-                return;
-              }
+                if (gameCountersGetWord(goal->conditions[i].arg & 0xff) < goal->conditions[i].value) result = 0;
+                break;
+            default:
+                break;
             }
-LAB_001add08:
-            temp_v2 = temp_v2 + 1;
-            if (temp_v2 >= 4) {
-              return;
-            }
-          } while( 1 );
+            if (result == 0) break;
         }
-      }
-      else {
-        temp_v3 = gameDataTableGetFlag();
-        if (temp_v3 != 4) {
-          return;
-        }
-      }
     }
-    else {
-      temp_v3 = gameOptionsClassifyMode();
-      if ((temp_v3 != 0) && (temp_v3 = FUN_001ba570(), temp_v3 == 0)) {
-        return;
-      }
-    }
-  }
-  return;
+    return result;
 }
 
 } /* extern "C" */

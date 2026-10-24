@@ -1,216 +1,131 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c3a14` (_code @ 0x2c3a14, 0x3e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail compares the colour scale and identity matrix with vcmp against a register copy of 1.0 and does not unroll the stack-dirty loop; this version compares equality of the float bit patterns (armcc turns == 1.0f into an integer compare), so the instruction counts differ. The stores, calls and loops are the same. */
+#include "camp/RenderCtx.h"
+
+namespace {
+/* One combiner stage (24 bytes) of the texture combiner setup. */
+struct CombinerStage {
+    u8 data[24];
+};
+
+/* The context's shared header bytes and floats, addressed by offset. */
+static inline u32 &ctxWord(RenderCtx *ctx, u32 offset)
+{
+    return *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(ctx) + offset);
+}
+
+static inline u8 &ctxByte(RenderCtx *ctx, u32 offset)
+{
+    return *(reinterpret_cast<u8 *>(ctx) + offset);
+}
+
+static inline f32 &ctxFloat(RenderCtx *ctx, u32 offset)
+{
+    return *reinterpret_cast<f32 *>(reinterpret_cast<u8 *>(ctx) + offset);
+}
+
+/* Whether the 4x4 matrix is the identity. */
+static bool isIdentity(const f32 *m)
+{
+    return m[0] == 1.0f && m[1] == 0.0f && m[2] == 0.0f && m[3] == 0.0f && m[4] == 0.0f && m[5] == 1.0f &&
+           m[6] == 0.0f && m[7] == 0.0f && m[8] == 0.0f && m[9] == 0.0f && m[10] == 1.0f && m[11] == 0.0f &&
+           m[12] == 0.0f && m[13] == 0.0f && m[14] == 0.0f && m[15] == 1.0f;
+}
+}
 
 extern "C" {
+void FUN_00126d14(u32 shader);
+void FUN_002b634c(u32 shader, void *colors);
+void modelCmdAppendPacked(u32 a, u32 b, u32 c, u32 d);
+void FUN_002bbe30(void *matrix);
+void FUN_002bbbc8(RenderCtx *ctx, void *a, void *b, void *matrix);
+void FUN_002bbb74(u32 shader, void *block);
+void FUN_002b612c(CombinerStage *stages);
+void nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(CombinerStage *stage);
+void nn_gr_CTR_Combiner_Stage_SetupPrevious(CombinerStage *stage);
+u32 FUN_002b7148(void);
+u32 nn_gr_CTR_Combiner_MakeCommand(CombinerStage *stages, u32 buffer);
+void FUN_002af390(u32 buffer, u32 command);
 
-int modelCmdAppendPacked(int, int, int, int);
-int FUN_00126d14(unsigned int);
-int FUN_002af390(unsigned int, unsigned char *);
-int FUN_002b612c(unsigned char [24]);
-int FUN_002b634c(unsigned int, int);
-int FUN_002b7148(void);
-int FUN_002bbb74(unsigned int, int);
-int FUN_002bbbc8(int, int, int, int);
-int FUN_002bbe30(int);
-int nn_gr_CTR_Combiner_MakeCommand(unsigned char [24], unsigned int);
-int nn_gr_CTR_Combiner_Stage_SetupPrevious(...);
-int nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(unsigned char [24]);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: modelCmdAppendPacked. */
-/* Supplied declaration required: FUN_00126d14. */
-/* Supplied declaration required: FUN_002af390. */
-/* Supplied declaration required: FUN_002b612c. */
-/* Supplied declaration required: FUN_002b634c. */
-/* Supplied declaration required: FUN_002b7148. */
-/* Supplied declaration required: FUN_002bbb74. */
-/* Supplied declaration required: FUN_002bbbc8. */
-/* Supplied declaration required: FUN_002bbe30. */
-/* Supplied declaration required: nn_gr_CTR_Combiner_MakeCommand. */
-/* Supplied declaration required: nn_gr_CTR_Combiner_Stage_SetupPrevious. */
-/* Supplied declaration required: nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0. */
-
-
-void FUN_002c3a14(int param_1)
-
+/* Prepares the draw context for a frame: resets the colour scale and the model matrices when they changed,
+   rebuilds the six-stage texture combiner (primary modulated by texture 0, the rest passing the previous stage
+   through) and re-applies the twelve render-state stacks' current states. */
+void FUN_002c3a14(RenderCtx *ctx)
 {
-/* irregular: 1 goto(s); 12 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned char *puVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int *piVar8;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8 [24];
-  unsigned char temp_v9 [24];
-  unsigned char temp_v10 [24];
-  unsigned char temp_v11 [24];
-  unsigned char temp_v12 [24];
-  unsigned char temp_v13 [28];
-  
-  puVar3 = temp_v8;
-  *(unsigned char *)(param_1 + 0x11e8) = 1;
-  *(unsigned char *)(param_1 + 0x11e9) = 3;
-  *(unsigned char *)(param_1 + 0x5b0) = 1;
-  *(unsigned char *)(param_1 + 0x11dc) = 1;
-  *(unsigned char *)(param_1 + 0x11e1) = 1;
-  temp_v3 = 0;
-  temp_v2 = 0;
-  *(unsigned char *)(param_1 + 0x5f4) = 0;
-  do {
-    temp_v4 = temp_v3 + 1;
-    temp_v2 = temp_v2 + 2;
-    *(unsigned char *)(param_1 + temp_v3 * 0x20 + 0x1204) = 1;
-    temp_v3 = temp_v3 + 2;
-    *(unsigned char *)(param_1 + temp_v4 * 0x20 + 0x1204) = 1;
-  } while (temp_v2 < 0xc);
-  FUN_00126d14(*(unsigned int *)(param_1 + 0x52c));
-  if ((((*(char *)(param_1 + 0x11dc) != '\0') || (*(float *)(param_1 + 0x11cc) != 1.0f)) ||
-      (*(float *)(param_1 + 0x11d0) != 1.0f)) ||
-     ((*(float *)(param_1 + 0x11d4) != 1.0f || (*(float *)(param_1 + 0x11d8) != 1.0f)))) {
-    *(unsigned int *)(param_1 + 0x11cc) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x11d0) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x11d4) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x11d8) = 0x3f800000;
-    FUN_002b634c(*(unsigned int *)(param_1 + 0x52c),param_1 + 0x11cc);
-  }
-  *(unsigned char *)(param_1 + 0x11dc) = 0;
-  temp_v0 = *(char *)(param_1 + 0x11e1);
-  temp_v6 = temp_v0 != '\0';
-  if (!temp_v6) {
-    temp_v0 = *(char *)(param_1 + 0x11dd);
-  }
-  if (!(temp_v6 || temp_v0 != '\0')) {
-    temp_v0 = *(char *)(param_1 + 0x11de);
-    temp_v6 = temp_v0 == '\0';
-    if (temp_v6) {
-      temp_v0 = *(char *)(param_1 + 0x11df);
+    CombinerStage stages[6];
+    ctxByte(ctx, 0x11e8) = 1;
+    ctxByte(ctx, 0x11e9) = 3;
+    ctxByte(ctx, 0x5b0) = 1;
+    ctxByte(ctx, 0x11dc) = 1;
+    ctxByte(ctx, 0x11e1) = 1;
+    ctxByte(ctx, 0x5f4) = 0;
+    for (s32 i = 0; i < 12; i++) {
+        ctxByte(ctx, i * 0x20 + 0x1204) = 1;
     }
-    temp_v7 = temp_v6 && temp_v0 == '\0';
-    if (temp_v6 && temp_v0 == '\0') {
-      temp_v7 = *(char *)(param_1 + 0x11e0) == '\0';
+    FUN_00126d14(ctxWord(ctx, 0x52c));
+    if (ctxByte(ctx, 0x11dc) != 0 || ctxFloat(ctx, 0x11cc) != 1.0f || ctxFloat(ctx, 0x11d0) != 1.0f ||
+        ctxFloat(ctx, 0x11d4) != 1.0f || ctxFloat(ctx, 0x11d8) != 1.0f) {
+        ctxFloat(ctx, 0x11cc) = 1.0f;
+        ctxFloat(ctx, 0x11d0) = 1.0f;
+        ctxFloat(ctx, 0x11d4) = 1.0f;
+        ctxFloat(ctx, 0x11d8) = 1.0f;
+        FUN_002b634c(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x11cc);
     }
-    if (!temp_v7) {
-      modelCmdAppendPacked(0,0,0,0);
+    ctxByte(ctx, 0x11dc) = 0;
+    if (ctxByte(ctx, 0x11e1) != 0 || ctxByte(ctx, 0x11dd) != 0 || ctxByte(ctx, 0x11de) != 0 ||
+        ctxByte(ctx, 0x11df) != 0 || ctxByte(ctx, 0x11e0) != 0) {
+        modelCmdAppendPacked(0, 0, 0, 0);
     }
-  }
-  else {
-    modelCmdAppendPacked(0,0,0,0);
-  }
-  if ((*(char *)(param_1 + 0x5b0) == '\0') && (*(int *)(param_1 + 0x530) == 0x3f800000)) {
-    temp_v6 = 0;
-    if (*(float *)(param_1 + 0x534) == 0.0f) {
-      temp_v6 = *(float *)(param_1 + 0x538) == 0.0f;
+    if (ctxByte(ctx, 0x5b0) != 0 || !isIdentity(&ctxFloat(ctx, 0x530))) {
+        FUN_002bbe30(reinterpret_cast<u8 *>(ctx) + 0x530);
+        FUN_002bbe30(reinterpret_cast<u8 *>(ctx) + 0x570);
+        FUN_002bbbc8(ctx, reinterpret_cast<u8 *>(ctx) + 0x114c, reinterpret_cast<u8 *>(ctx) + 0x110c,
+                     reinterpret_cast<u8 *>(ctx) + 0x530);
+        FUN_002bbb74(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x118c);
+        ctxByte(ctx, 0x5b0) = 0;
     }
-    if (temp_v6) {
-      temp_v6 = 0;
-      if (*(float *)(param_1 + 0x53c) == 0.0f) {
-        temp_v6 = *(float *)(param_1 + 0x540) == 0.0f;
-      }
-      if (temp_v6) {
-        temp_v6 = 0;
-        if (*(int *)(param_1 + 0x544) == 0x3f800000) {
-          temp_v6 = *(float *)(param_1 + 0x548) == 0.0f;
-        }
-        if (temp_v6) {
-          temp_v6 = 0;
-          if (*(float *)(param_1 + 0x54c) == 0.0f) {
-            temp_v6 = *(float *)(param_1 + 0x550) == 0.0f;
-          }
-          if (temp_v6) {
-            temp_v6 = 0;
-            if (*(float *)(param_1 + 0x554) == 0.0f) {
-              temp_v6 = *(int *)(param_1 + 0x558) == 0x3f800000;
-            }
-            if (temp_v6) {
-              temp_v6 = 0;
-              if (*(float *)(param_1 + 0x55c) == 0.0f) {
-                temp_v6 = *(float *)(param_1 + 0x560) == 0.0f;
-              }
-              if (temp_v6) {
-                temp_v6 = 0;
-                if (*(float *)(param_1 + 0x564) == 0.0f) {
-                  temp_v6 = *(float *)(param_1 + 0x568) == 0.0f;
-                }
-                temp_v7 = 0;
-                if (temp_v6) {
-                  temp_v7 = *(int *)(param_1 + 0x56c) == 0x3f800000;
-                }
-                if (temp_v7) goto LAB_002c3c84;
-              }
-            }
-          }
-        }
-      }
+    ctxWord(ctx, 0x1128) = ctxWord(ctx, 0x5d0);
+    ctxWord(ctx, 0x1114) = ctxWord(ctx, 0x5bc);
+    ctxWord(ctx, 0x1118) = ctxWord(ctx, 0x5c0);
+    ctxWord(ctx, 0x111c) = ctxWord(ctx, 0x5c4);
+    ctxWord(ctx, 0x1120) = ctxWord(ctx, 0x5c8);
+    ctxWord(ctx, 0x1124) = ctxWord(ctx, 0x5cc);
+    ctxWord(ctx, 0x110c) = ctxWord(ctx, 0x5b4);
+    ctxWord(ctx, 0x1110) = ctxWord(ctx, 0x5b8);
+    ctxWord(ctx, 0x112c) = ctxWord(ctx, 0x5d4);
+    ctxWord(ctx, 0x1130) = ctxWord(ctx, 0x5d8);
+    ctxWord(ctx, 0x1134) = ctxWord(ctx, 0x5dc);
+    ctxWord(ctx, 0x1138) = ctxWord(ctx, 0x5e0);
+    ctxWord(ctx, 0x113c) = ctxWord(ctx, 0x5e4);
+    ctxWord(ctx, 0x1140) = ctxWord(ctx, 0x5e8);
+    ctxWord(ctx, 0x114c) = ctxWord(ctx, 0x5b4);
+    ctxWord(ctx, 0x1150) = ctxWord(ctx, 0x5b8);
+    ctxWord(ctx, 0x1144) = ctxWord(ctx, 0x5ec);
+    ctxWord(ctx, 0x1148) = ctxWord(ctx, 0x5f0);
+    ctxWord(ctx, 0x1154) = ctxWord(ctx, 0x5bc);
+    ctxWord(ctx, 0x1158) = ctxWord(ctx, 0x5c0);
+    ctxWord(ctx, 0x115c) = ctxWord(ctx, 0x5c4);
+    ctxWord(ctx, 0x1160) = ctxWord(ctx, 0x5c8);
+    ctxWord(ctx, 0x1168) = ctxWord(ctx, 0x5d0);
+    ctxWord(ctx, 0x1164) = ctxWord(ctx, 0x5cc);
+    ctxWord(ctx, 0x116c) = ctxWord(ctx, 0x5d4);
+    ctxWord(ctx, 0x1170) = ctxWord(ctx, 0x5d8);
+    ctxWord(ctx, 0x1174) = ctxWord(ctx, 0x5dc);
+    ctxWord(ctx, 0x1178) = ctxWord(ctx, 0x5e0);
+    ctxWord(ctx, 0x117c) = ctxWord(ctx, 0x5e4);
+    ctxWord(ctx, 0x1180) = ctxWord(ctx, 0x5e8);
+    ctxWord(ctx, 0x1184) = ctxWord(ctx, 0x5ec);
+    ctxWord(ctx, 0x1188) = ctxWord(ctx, 0x5f0);
+    FUN_002b612c(stages);
+    nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(&stages[0]);
+    for (s32 i = 1; i < 6; i++) {
+        nn_gr_CTR_Combiner_Stage_SetupPrevious(&stages[i]);
     }
-  }
-  FUN_002bbe30(param_1 + 0x530);
-  FUN_002bbe30(param_1 + 0x570);
-  FUN_002bbbc8(param_1,param_1 + 0x114c,param_1 + 0x110c,param_1 + 0x530);
-  FUN_002bbb74(*(unsigned int *)(param_1 + 0x52c),param_1 + 0x118c);
-  *(unsigned char *)(param_1 + 0x5b0) = 0;
-LAB_002c3c84:
-  *(unsigned int *)(param_1 + 0x1128) = *(unsigned int *)(param_1 + 0x5d0);
-  *(unsigned int *)(param_1 + 0x1114) = *(unsigned int *)(param_1 + 0x5bc);
-  *(unsigned int *)(param_1 + 0x1118) = *(unsigned int *)(param_1 + 0x5c0);
-  *(unsigned int *)(param_1 + 0x111c) = *(unsigned int *)(param_1 + 0x5c4);
-  *(unsigned int *)(param_1 + 0x1120) = *(unsigned int *)(param_1 + 0x5c8);
-  *(unsigned int *)(param_1 + 0x1124) = *(unsigned int *)(param_1 + 0x5cc);
-  *(unsigned int *)(param_1 + 0x110c) = *(unsigned int *)(param_1 + 0x5b4);
-  *(unsigned int *)(param_1 + 0x1110) = *(unsigned int *)(param_1 + 0x5b8);
-  *(unsigned int *)(param_1 + 0x112c) = *(unsigned int *)(param_1 + 0x5d4);
-  *(unsigned int *)(param_1 + 0x1130) = *(unsigned int *)(param_1 + 0x5d8);
-  *(unsigned int *)(param_1 + 0x1134) = *(unsigned int *)(param_1 + 0x5dc);
-  *(unsigned int *)(param_1 + 0x1138) = *(unsigned int *)(param_1 + 0x5e0);
-  *(unsigned int *)(param_1 + 0x113c) = *(unsigned int *)(param_1 + 0x5e4);
-  *(unsigned int *)(param_1 + 0x1140) = *(unsigned int *)(param_1 + 0x5e8);
-  *(unsigned int *)(param_1 + 0x114c) = *(unsigned int *)(param_1 + 0x5b4);
-  *(unsigned int *)(param_1 + 0x1150) = *(unsigned int *)(param_1 + 0x5b8);
-  *(unsigned int *)(param_1 + 0x1144) = *(unsigned int *)(param_1 + 0x5ec);
-  *(unsigned int *)(param_1 + 0x1148) = *(unsigned int *)(param_1 + 0x5f0);
-  *(unsigned int *)(param_1 + 0x1154) = *(unsigned int *)(param_1 + 0x5bc);
-  *(unsigned int *)(param_1 + 0x1158) = *(unsigned int *)(param_1 + 0x5c0);
-  *(unsigned int *)(param_1 + 0x115c) = *(unsigned int *)(param_1 + 0x5c4);
-  *(unsigned int *)(param_1 + 0x1160) = *(unsigned int *)(param_1 + 0x5c8);
-  *(unsigned int *)(param_1 + 0x1168) = *(unsigned int *)(param_1 + 0x5d0);
-  *(unsigned int *)(param_1 + 0x1164) = *(unsigned int *)(param_1 + 0x5cc);
-  *(unsigned int *)(param_1 + 0x116c) = *(unsigned int *)(param_1 + 0x5d4);
-  *(unsigned int *)(param_1 + 0x1170) = *(unsigned int *)(param_1 + 0x5d8);
-  *(unsigned int *)(param_1 + 0x1174) = *(unsigned int *)(param_1 + 0x5dc);
-  *(unsigned int *)(param_1 + 0x1178) = *(unsigned int *)(param_1 + 0x5e0);
-  *(unsigned int *)(param_1 + 0x117c) = *(unsigned int *)(param_1 + 0x5e4);
-  *(unsigned int *)(param_1 + 0x1180) = *(unsigned int *)(param_1 + 0x5e8);
-  *(unsigned int *)(param_1 + 0x1184) = *(unsigned int *)(param_1 + 0x5ec);
-  *(unsigned int *)(param_1 + 0x1188) = *(unsigned int *)(param_1 + 0x5f0);
-  FUN_002b612c(temp_v8);
-  nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(temp_v8);
-  nn_gr_CTR_Combiner_Stage_SetupPrevious(temp_v9);
-  nn_gr_CTR_Combiner_Stage_SetupPrevious(temp_v10);
-  nn_gr_CTR_Combiner_Stage_SetupPrevious(temp_v11);
-  nn_gr_CTR_Combiner_Stage_SetupPrevious(temp_v12);
-  temp_v1 = nn_gr_CTR_Combiner_Stage_SetupPrevious(temp_v13);
-  FUN_002b7148();
-  nn_gr_CTR_Combiner_MakeCommand(temp_v8,temp_v1);
-  FUN_002af390(temp_v1,puVar3);
-  temp_v5 = 0;
-  do {
-    temp_v4 = param_1 + (temp_v5 & 0xff) * 0x20;
-    piVar8 = (int *)(temp_v4 + 0x11ec);
-    temp_v2 = *(int *)(param_1 + temp_v5 * 4 + 0x136c);
-    temp_v3 = piVar8[*piVar8 + 2];
-    piVar8[*piVar8 + 2] = temp_v2;
-    if (*(char *)(temp_v4 + 0x1204) != '\0' || temp_v3 != temp_v2) {
-      (**(romwright_code **)(temp_v4 + 0x1208))();
-      *(unsigned char *)(temp_v4 + 0x1204) = 0;
+    u32 buffer = FUN_002b7148();
+    FUN_002af390(buffer, nn_gr_CTR_Combiner_MakeCommand(stages, buffer));
+    RenderStateStack *stacks = reinterpret_cast<RenderStateStack *>(reinterpret_cast<u8 *>(ctx) + 0x11ec);
+    for (s32 i = 0; i < 12; i++) {
+        renderStackSet(&stacks[i], ctxWord(ctx, 0x136c + i * 4));
     }
-    temp_v5 = temp_v5 + 1;
-  } while ((int)temp_v5 < 0xc);
-  return;
 }
 
 } /* extern "C" */

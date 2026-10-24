@@ -1,173 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00223360` (_code @ 0x223360, 0x328 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (197 rows against 204): same math and order; retail inlines the return-0 stub questQueryFalse as `mov r0,#0` (ours keeps the call in a single-file compile), and keeps the first unit record, second record, active flag and level in stack slots with a different register split (r9 totals, sl exp, fp magic) where ours keeps them in r5-r9/fp */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int passiveSkillLookupRecord(void);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
+#define REWARD_ITEM_SLOTS 6
+#define PARTY_SLOTS 24
 
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
+/* Battle reward (observed fields only). */
+struct BattleReward {
+    s32 exp;                        /* 0x00: base experience */
+    s32 level;                      /* 0x04: level used for the experience table */
+    s32 money;                      /* 0x08 */
+    s32 itemId[REWARD_ITEM_SLOTS];  /* 0x0C */
+    s32 itemCount[REWARD_ITEM_SLOTS]; /* 0x24 */
+};
 
-extern int g_result; /* 0x44dc20 */
+/* Totals collected by the result screen (observed fields only). */
+struct ResultTotals {
+    u8 pad0000[0x35B4];
+    s32 totalExp;                   /* 0x35B4 */
+    s32 expByMember[PARTY_SLOTS];   /* 0x35B8 */
+    s32 itemId[REWARD_ITEM_SLOTS];  /* 0x3618 */
+    s32 itemCount[REWARD_ITEM_SLOTS]; /* 0x3630 */
+    s32 pad3648[2];
+    s32 totalMoney;                 /* 0x3650 */
+};
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int dataTable09Sub3GetRecord(unsigned char, int);
-/* Supplied declaration required: passiveSkillLookupRecord. */
-extern int playerPadTestBit(unsigned int);
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-extern int gameGetPlayerData(void);
+struct PlayerData {
+    u8 pad00[0x76];
+    u8 expTable;                    /* 0x76 */
+};
 
+struct SlotTable {
+    u8 pad0000[0x90F0];
+    s8 member[PARTY_SLOTS];         /* 0x90F0 */
+};
 
-/* WARNING: Removing unreachable block (ram,0x002233a4) */
-/* WARNING: Removing unreachable block (ram,0x002233b0) */
-/* WARNING: Removing unreachable block (ram,0x002233b4) */
+struct UnitRecord {
+    u8 pad00[0x34];
+    u16 passive[8];                 /* 0x34 */
+    u8 pad44[4];
+    u8 expTable;                    /* 0x48 */
+    u8 pad49[1];
+    u8 memberIndex;                 /* 0x4A */
+};
 
-void FUN_00223360(int *param_1)
+struct PassiveSkill {
+    u8 pad00[0x2F];
+    u8 expBonusPercent;             /* 0x2F */
+};
 
+extern ResultTotals *g_result;      /* 0x44dc20 */
+
+s32 dataTable09Sub3GetRecord(u8 table, s32 level);
+PassiveSkill *passiveSkillLookupRecord(u32 skill);
+s32 playerPadTestBit(u32 bit);
+s32 flagWordTestBit(UnitRecord *record, u32 bit);
+UnitRecord *gameGetUnitRecord(s32 member);
+SlotTable *gameGetSlotTable(void);
+PlayerData *gameGetPlayerData(void);
+s32 questQueryFalse(void);
+
+/* Adds one battle reward (money, items, experience) into the result screen totals and splits the
+ * experience over the party members that are in the party, reduced for members not in the active slots. */
+void FUN_00223360(BattleReward *reward)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  unsigned char temp_v14;
-  unsigned int in_fpscr;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  unsigned long long temp_v18;
-  unsigned long long temp_v19;
-  
-  temp_v2 = g_result;
-  temp_v3 = gameGetSlotTable();
-  temp_v4 = gameGetPlayerData();
-  temp_v12 = param_1[2];
-  temp_v13 = 0;
-  *(int *)(temp_v2 + 0x3650) = *(int *)(temp_v2 + 0x3650) + temp_v12;
-  do {
-    temp_v9 = param_1[temp_v13 + 3];
-    if (temp_v9 != 0) {
-      temp_v12 = param_1[temp_v13 + 9];
+    ResultTotals *totals = g_result;
+    SlotTable *slots = gameGetSlotTable();
+    PlayerData *player = gameGetPlayerData();
+
+    u32 money = reward->money;
+    u32 bonusPercent = questQueryFalse();
+    if (money != 0 && bonusPercent != 0) {
+        u32 bonus = money * bonusPercent / 100;
+        if (bonus == 0) {
+            bonus = 1;
+        }
+        money += bonus;
     }
-    if (temp_v9 != 0 && temp_v12 != 0) {
-      temp_v5 = 0;
-      do {
-        temp_v10 = temp_v2 + temp_v5 * 4;
-        temp_v11 = *(int *)(temp_v10 + 0x3618);
-        if (temp_v11 == temp_v9) {
-          piVar7 = (int *)(temp_v2 + temp_v5 * 4 + 0x3630);
-          *piVar7 = *piVar7 + temp_v12;
-          break;
+    totals->totalMoney += money;
+
+    for (s32 i = 0; i < REWARD_ITEM_SLOTS; i++) {
+        s32 id = reward->itemId[i];
+        s32 count = 0;
+        if (id != 0) {
+            count = reward->itemCount[i];
         }
-        if (temp_v11 == 0) {
-          *(int *)(temp_v2 + temp_v5 * 4 + 0x3618) = temp_v9;
-          *(int *)(temp_v10 + 0x3630) = temp_v12;
-          break;
-        }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 6);
-    }
-    temp_v13 = temp_v13 + 1;
-  } while (temp_v13 < 6);
-  temp_v13 = param_1[1];
-  temp_v9 = *param_1;
-  temp_v12 = dataTable09Sub3GetRecord(*(unsigned char *)(temp_v4 + 0x76),temp_v13);
-  temp_v12 = (temp_v9 * temp_v12) / 100;
-  if ((temp_v12 < 1) && (temp_v9 != 0)) {
-    temp_v12 = 1;
-  }
-  temp_v4 = playerPadTestBit(1);
-  if ((temp_v4 == 0) && (temp_v4 = playerPadTestBit(10), temp_v4 == 0)) {
-    *(int *)(temp_v2 + 0x35b4) = *(int *)(temp_v2 + 0x35b4) + temp_v12;
-  }
-  temp_v17 = 1.0f;
-  temp_v18 = 0x42c800003c23d70a;
-  temp_v19 = 0x3e99999a;
-  temp_v12 = 0;
-  do {
-    if (-1 < *(char *)(temp_v3 + temp_v12 + 0x90f0)) {
-      temp_v4 = gameGetUnitRecord();
-      temp_v5 = flagWordTestBit(temp_v4,1);
-      if (((temp_v5 == 0) && (temp_v5 = flagWordTestBit(temp_v4,10), temp_v5 == 0)) &&
-         (temp_v5 = flagWordTestBit(temp_v4,2), temp_v5 == 0)) {
-        temp_v0 = *(char *)(temp_v3 + temp_v12 + 0x90f0);
-        temp_v8 = 0;
-        if (*(char *)(temp_v3 + 0x9108) != temp_v0) {
-          temp_v1 = *(char *)(temp_v3 + 0x9109);
-          temp_v14 = temp_v1 != temp_v0;
-          if (temp_v14) {
-            temp_v1 = *(char *)(temp_v3 + 0x910a);
-          }
-          if (!temp_v14 || temp_v1 == temp_v0) {
-            temp_v8 = 1;
-          }
-        }
-        else {
-          temp_v8 = 1;
-        }
-        temp_v5 = gameGetUnitRecord();
-        temp_v10 = 0;
-        temp_v16 = temp_v17;
-        do {
-          temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + 0x34 + temp_v10 * 2);
-          if (temp_v6 != 0) {
-            passiveSkillLookupRecord();
-            temp_v7 = 0;
-            if (temp_v6 != 0) {
-              temp_v7 = (unsigned int)*(unsigned char *)(temp_v6 + 0x2f);
+        if (id != 0 && count != 0) {
+            for (s32 j = 0; j < REWARD_ITEM_SLOTS; j++) {
+                if (totals->itemId[j] == id) {
+                    totals->itemCount[j] += count;
+                    break;
+                }
+                if (totals->itemId[j] == 0) {
+                    totals->itemId[j] = id;
+                    totals->itemCount[j] = count;
+                    break;
+                }
             }
-            if (temp_v6 != 0 && temp_v7 != 0) {
-              temp_v15 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v16 = temp_v15 * (float)temp_v18 * temp_v16;
+        }
+    }
+
+    s32 level = reward->level;
+    s32 exp = reward->exp;
+    s32 partyExp = exp * dataTable09Sub3GetRecord(player->expTable, level) / 100;
+    if (partyExp <= 0 && exp != 0) {
+        partyExp = 1;
+    }
+    if (playerPadTestBit(1) == 0 && playerPadTestBit(10) == 0) {
+        totals->totalExp += partyExp;
+    }
+
+    for (s32 i = 0; i < PARTY_SLOTS; i++) {
+        if (slots->member[i] < 0) {
+            continue;
+        }
+        UnitRecord *unit = gameGetUnitRecord(slots->member[i]);
+        if (flagWordTestBit(unit, 1) != 0 || flagWordTestBit(unit, 10) != 0 || flagWordTestBit(unit, 2) != 0) {
+            continue;
+        }
+        s32 member = slots->member[i];
+        s32 active = 0;
+        if (slots->member[8] == member || slots->member[9] == member || slots->member[10] == member) {
+            active = 1;
+        }
+        unit = gameGetUnitRecord(member);
+        f32 scale = 1.0f;
+        for (s32 k = 0; k < 8; k++) {
+            if (unit->passive[k] != 0) {
+                PassiveSkill *skill = passiveSkillLookupRecord(unit->passive[k]);
+                if (skill != 0 && skill->expBonusPercent != 0) {
+                    scale = (f32)skill->expBonusPercent * 0.01f * scale;
+                }
             }
-          }
-          temp_v10 = temp_v10 + 1;
-        } while (temp_v10 < 8);
-        temp_v6 = (unsigned int)(temp_v9 * (int)(temp_v16 * (float)((unsigned long long)temp_v18 >> 0x20))) / 100;
-        temp_v5 = dataTable09Sub3GetRecord(*(unsigned char *)(temp_v5 + 0x48),temp_v13);
-        temp_v7 = (temp_v6 * temp_v5) / 100;
-        if ((temp_v7 == 0) && (temp_v6 != 0)) {
-          temp_v7 = 1;
         }
-        temp_v16 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-        if (!temp_v8) {
-          temp_v7 = VectorFloatToUnsigned(temp_v16 * (float)temp_v19,3);
+        u32 share = (u32)exp * (s32)(scale * 100.0f) / 100;
+        u32 value = share * dataTable09Sub3GetRecord(unit->expTable, level) / 100;
+        if (value == 0 && share != 0) {
+            value = 1;
         }
-        if (((int)temp_v7 < 1) && (temp_v9 != 0)) {
-          temp_v7 = 1;
+        if (active == 0) {
+            value = (u32)((f32)value * 0.3f);
         }
-        piVar7 = (int *)(temp_v2 + (unsigned int)*(unsigned char *)(temp_v4 + 0x4a) * 4 + 0x35b8);
-        *piVar7 = temp_v7 + *piVar7;
-      }
+        if ((s32)value <= 0 && exp != 0) {
+            value = 1;
+        }
+        totals->expByMember[unit->memberIndex] += value;
     }
-    temp_v12 = temp_v12 + 1;
-    if (temp_v12 >= 0x18) {
-      return;
-    }
-  } while( 1 );
 }
 
 } /* extern "C" */

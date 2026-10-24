@@ -1,161 +1,144 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df168` (_code @ 0x3df168, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: identical instruction sequence to retail except for register numbering (retail keeps the result in r6, the reward record in r7 and the loop counter in r1; the build uses r8/r6/r2 and reorders the parameter moves). */
+#include "common.h"
 
-extern "C" {
-
-int dataTableGetCount(...);
-int gameFlagBlockGetEntry(...);
-int FUN_001ad9b4(...);
-int gameGetUnlockedCountLimit(...);
-int FUN_004ccbf0(...);
-
-typedef struct fn_003df168_arg1 fn_003df168_arg1;
-struct fn_003df168_arg1 {
-    unsigned char pad_0x0[0xf0];
-    ushort field_0xf0; /* +0xf0 */
-    ushort field_0xf2; /* +0xf2 */
-    undefined4 field_0xf4; /* +0xf4 */
-    unsigned char pad_0xf8[0x2];
-    ushort field_0xfa; /* +0xfa */
-    void *field_0xfc; /* +0xfc */
+// One roll slot of a drop table entry: the item and its weight.
+struct DropSlot {
+    u16 item;
+    u16 weight;
 };
 
-extern int g_aocSystem; /* 0x570280 */
+// A drop table entry (0x40 bytes); only the roll slots are known.
+struct DropEntry {
+    u8 unk00[0x20];
+    DropSlot slots[8];  // 0x20
+};
 
-extern int randRange(short);
-extern int gameGetPlayerData(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: gameFlagBlockGetEntry. */
-/* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: gameGetUnlockedCountLimit. */
-/* Supplied declaration required: FUN_004ccbf0. */
+// An entry that comes from the add-on content: its id followed by the body.
+struct AocDropEntry {
+    u32 id;
+    DropEntry body;  // 0x04
+};
 
+struct AocDropSource {
+    u8 unk000[0x38c];
+    u32 entryCount;         // 0x38c
+    AocDropEntry *entries;  // 0x390
+};
 
-void FUN_003df168(unsigned int *param_1,fn_003df168_arg1 *param_2)
+// The reward an encounter grants.
+struct RewardRecord {
+    u16 kind;      // 1: one item, 3: money, 4: rolls on a drop table
+    u16 id;        // item id, or the drop table entry
+    u32 count;     // amount, or number of rolls
+    u8 unk08[2];
+    u16 percent;   // share of the level-scaled value, 0: use `base`
+    u32 base;
+};
 
+// An encounter record; its reward starts at 0xf0.
+struct EncounterRecord {
+    u8 unk00[0xf0];
+    RewardRecord reward;
+};
+
+// What a reward roll produced.
+struct RewardResult {
+    u32 items[6];   // 0x00
+    u32 counts[6];  // 0x18
+    u32 money;      // 0x30
+    u32 value;      // 0x34
+    s16 source;     // 0x38 the encounter index the reward came from
+};
+
+struct PlayerLevelView {
+    u8 unk00[0x62];
+    u16 level;
+};
+
+extern "C" {
+extern AocDropSource *g_aocSystem;
+
+s32 randRange(u16 maximum);
+PlayerLevelView *gameGetPlayerData(void);
+u32 gameGetUnlockedCountLimit(void);
+u32 FUN_004ccbf0(u32 level);
+EncounterRecord *FUN_001ad9b4(s32 index);
+void gameFlagBlockGetEntry(s32 index);
+void *dataTableGet(u32 kind, u32 flag);
+DropEntry *dataTableGetEntries(void);
+s32 dataTableGetCount(void *table);
+
+// The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
+static __inline DropEntry *findDropEntry(u16 id)
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  fn_003df168_arg1 *pfVar4;
-  unsigned int *puVar5;
-  unsigned int temp_v3;
-  short *psVar7;
-  int temp_v4;
-  int temp_v5;
-  void *pvVar10;
-  int temp_v6;
-  unsigned int temp_v7;
-  short temp_v8;
-  int temp_v9;
-  short temp_v10;
-  
-  pfVar4 = param_2;
-  FUN_001ad9b4();
-  if (pfVar4 != (fn_003df168_arg1 *)0x0) {
-    gameFlagBlockGetEntry(param_2);
-    temp_v0 = pfVar4->field_0xf0;
-    if (temp_v0 != 1) {
-      if (temp_v0 == 3) {
-        param_1[0xc] = pfVar4->field_0xf4;
-      }
-      else if (temp_v0 == 4) {
-        temp_v0 = pfVar4->field_0xf2;
-        puVar5 = *(unsigned int **)(g_aocSystem + 0x390);
-        if (puVar5 != (unsigned int *)0x0) {
-          temp_v7 = 0;
-          if (temp_v7 < *(unsigned int *)(g_aocSystem + 0x38c)) {
-            do {
-              if (*puVar5 == (unsigned int)temp_v0) {
-                puVar5 = puVar5 + 1;
-                goto LAB_003df23c;
-              }
-              temp_v7 = temp_v7 + 1;
-              puVar5 = puVar5 + 0x11;
-            } while (temp_v7 < *(unsigned int *)(g_aocSystem + 0x38c));
-          }
+    AocDropEntry *aoc = g_aocSystem->entries;
+    if (aoc != NULL) {
+        for (u32 i = 0; i < g_aocSystem->entryCount; i++, aoc++) {
+            if (aoc->id == id) {
+                return reinterpret_cast<DropEntry *>(&aoc->id + 1);
+            }
         }
-        temp_v3 = dataTableGet(0x1c,1);
-        temp_v6 = dataTableGetEntries();
-        dataTableGetCount(temp_v3);
-        puVar5 = (unsigned int *)(temp_v6 + (unsigned int)temp_v0 * 0x40);
-LAB_003df23c:
-        temp_v8 = 0;
-        temp_v10 = 0;
-        if (*(short *)((int)puVar5 + 0x22) != 0) {
-          temp_v10 = *(short *)((int)puVar5 + 0x22);
-        }
-        temp_v1 = *(short *)((int)puVar5 + 0x26);
-        temp_v6 = 3;
-        psVar7 = (short *)((int)puVar5 + 0x22);
-        do {
-          temp_v2 = psVar7[4];
-          if (temp_v1 != 0) {
-            temp_v10 = temp_v10 + temp_v1;
-          }
-          temp_v1 = psVar7[6];
-          if (temp_v2 != 0) {
-            temp_v8 = temp_v8 + temp_v2;
-          }
-          temp_v6 = temp_v6 - 1;
-          psVar7 = psVar7 + 4;
-        } while (temp_v6 != 0);
-        temp_v10 = temp_v10 + temp_v8;
-        temp_v6 = pfVar4->field_0xf4;
-        if (*(short *)((int)puVar5 + 0x3e) != 0) {
-          temp_v10 = temp_v10 + *(short *)((int)puVar5 + 0x3e);
-        }
-        temp_v9 = 0;
-        if (temp_v6 != 0) {
-          do {
-            temp_v4 = randRange(temp_v10 - 1);
-            temp_v5 = 0;
-            do {
-              temp_v7 = (unsigned int)*(unsigned short *)((int)puVar5 + temp_v5 * 4 + 0x22);
-              if ((temp_v7 != 0) && (temp_v4 = temp_v4 - temp_v7, temp_v4 < 0)) {
-                if ((temp_v9 < 6) && ((unsigned short)puVar5[temp_v5 + 8] != 0)) {
-                  param_1[temp_v9] = (unsigned int)(unsigned short)puVar5[temp_v5 + 8];
-                  param_1[temp_v9 + 6] = 1;
-                  temp_v9 = temp_v9 + 1;
-                }
-                break;
-              }
-              temp_v5 = temp_v5 + 1;
-            } while (temp_v5 < 8);
-            temp_v6 = temp_v6 - 1;
-          } while (temp_v6 != 0);
-        }
-      }
     }
-    else {
-      *param_1 = (unsigned int)pfVar4->field_0xf2;
-      param_1[6] = pfVar4->field_0xf4;
-    }
-    if (pfVar4->field_0xfa == 0) {
-      pvVar10 = pfVar4->field_0xfc;
-    }
-    else {
-      temp_v6 = gameGetPlayerData();
-      temp_v7 = gameGetUnlockedCountLimit();
-      if (*(unsigned short *)(temp_v6 + 0x62) >= temp_v7) {
-        temp_v6 = gameGetUnlockedCountLimit();
-        temp_v7 = FUN_004ccbf0(temp_v6 - 1);
-        param_1[0xd] = temp_v7;
-      }
-      else {
-        temp_v7 = FUN_004ccbf0();
-        param_1[0xd] = temp_v7;
-      }
-      pvVar10 = (void *)((temp_v7 * pfVar4->field_0xfa) / 100);
-    }
-    param_1[0xd] = (unsigned int)pvVar10;
-    *(short *)(param_1 + 0xe) = (short)(int)param_2;
-  }
-  return;
+    void *table = dataTableGet(0x1c, 1);
+    DropEntry *entries = dataTableGetEntries();
+    dataTableGetCount(table);
+    return &entries[id];
 }
 
-} /* extern "C" */
+// Rolls the reward of encounter `index` into `result`.
+void FUN_003df168(RewardResult *result, s32 index)
+{
+    EncounterRecord *encounter = FUN_001ad9b4(index);
+    if (encounter == NULL) {
+        return;
+    }
+    gameFlagBlockGetEntry(index);
+    RewardRecord *record = &encounter->reward;
+    if (record->kind == 1) {
+        result->items[0] = record->id;
+        result->counts[0] = record->count;
+    } else if (record->kind == 3) {
+        result->money = record->count;
+    } else if (record->kind == 4) {
+        DropEntry *entry = findDropEntry(record->id);
+
+        s32 total = 0;
+        for (s32 j = 0; j < 8; j++) {
+            if (entry->slots[j].weight != 0) {
+                total += entry->slots[j].weight;
+            }
+        }
+
+        s32 added = 0;
+        for (u32 roll = record->count; roll != 0; roll--) {
+            s32 remaining = randRange(total - 1);
+            for (s32 j = 0; j < 8; j++) {
+                u32 weight = entry->slots[j].weight;
+                if (weight != 0 && (remaining -= weight) < 0) {
+                    if (added < 6 && entry->slots[j].item != 0) {
+                        result->items[added] = entry->slots[j].item;
+                        result->counts[added] = 1;
+                        added++;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    if (record->percent == 0) {
+        result->value = record->base;
+    } else {
+        PlayerLevelView *player = gameGetPlayerData();
+        u32 scaled;
+        if (gameGetUnlockedCountLimit() > player->level) {
+            scaled = FUN_004ccbf0(player->level);
+        } else {
+            scaled = FUN_004ccbf0(gameGetUnlockedCountLimit() - 1);
+        }
+        result->value = scaled;
+        result->value = scaled * record->percent / 100;
+    }
+    result->source = index;
+}
+}

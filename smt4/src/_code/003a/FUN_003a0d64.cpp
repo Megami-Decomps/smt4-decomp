@@ -1,143 +1,110 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a0d64` (_code @ 0x3a0d64, 0x214 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the place window start-up; retail keeps the constant 2 in r1 for the two window stores, scales the record index with a shifted add chain and shares the exit, which armcc here allocates differently. */
+#include "common.h"
 
-extern "C" {
-
-int dataTable17Sub1GetCount(...);
-int dataTable17Sub1GetRecord(...);
-int placeWinStartText(...);
-int FUN_00297060(...);
-int messageTargetSetValue(...);
-int FUN_0029e648(...);
-int FUN_0029ee6c(...);
-int FUN_002a03d8(...);
-int buttonHelpSetPreset(...);
-int FUN_003a4210(...);
-
-typedef struct fn_003a0d64_arg0 fn_003a0d64_arg0;
-struct fn_003a0d64_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x8];
-    byte field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    int field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x144];
-    void *field_0x160; /* +0x160 */
-    int field_0x164; /* +0x164 */
-    int field_0x168; /* +0x168 */
-    int field_0x16c; /* +0x16c */
-    unsigned char pad_0x170[0x15bd0];
-    undefined4 field_0x15d40; /* +0x15d40 */
-    undefined4 field_0x15d44; /* +0x15d44 */
+/* A place-window scene (only the fields the start-up touches). */
+struct PlaceScene {
+    /* 0x00000 */ u8 unk00000[4];
+    /* 0x00004 */ s32 state;
+    /* 0x00008 */ s32 substate;
+    /* 0x0000C */ u8 unk0000C[8];
+    /* 0x00014 */ u8 placeKind;
+    /* 0x00015 */ u8 unk00015[3];
+    /* 0x00018 */ s32 placeKey;
+    /* 0x0001C */ u8 unk0001C[0x144];
+    /* 0x00160 */ void *windowPool;
+    /* 0x00164 */ s32 windowSize;
+    /* 0x00168 */ u8 *windowA;
+    /* 0x0016C */ u8 *windowB;
+    /* 0x00170 */ u8 unk00170[0x15BD0];
+    /* 0x15D40 */ u32 jobA;
+    /* 0x15D44 */ u32 jobB;
 };
 
-extern int eventTexJobSlotsDone(unsigned int);
-/* Supplied declaration required: dataTable17Sub1GetCount. */
-/* Supplied declaration required: dataTable17Sub1GetRecord. */
-/* Supplied declaration required: placeWinStartText. */
-extern int FUN_0028e9d0(unsigned int);
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029e648. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a03d8. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_003a4210. */
+/* A record of data table 0x17/1 (0x68 bytes). */
+struct PlaceRecord {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s32 key;
+    /* 0x24 */ u16 kind;
+    /* 0x26 */ u8 unk26[0x42];
+};
 
+extern "C" {
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+s32 jobIsValid(u32 job);
+s32 eventTexJobSlotsDone(u32 job);
+u8 *FUN_00297060(void *pool, s32 size);
+void FUN_002a03d8(s32 a, s32 b);
+void FUN_0029e648(s32 a, s32 b);
+void messageTargetSetValue(s32 value, s32 arg);
+PlaceRecord *dataTable17Sub1GetRecord(u32 *ignored, u32 index);
+s32 dataTable17Sub1GetCount(u32 *ignored);
+void placeWinStartText(void);
+s32 FUN_0028e9d0(u32 flag);
+void FUN_003a4210(PlaceScene *scene);
+void buttonHelpSetPreset(s32 preset);
+void FUN_0029ee6c(s32 slot, u32 color);
 
-void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
-
+/* Whether any flag of the place's two flag ranges is set. */
+static bool placeFlagsAnySet()
 {
-/* irregular: 1 goto(s); 10 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  void *pvVar3;
-  int temp_v2;
-  unsigned char *puVar5;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  unsigned char temp_v8 [4];
-  unsigned char temp_v9 [8];
-  
-  puVar5 = temp_v8;
-  temp_v7 = param_1->field_0x160 != (void *)0x0;
-  temp_v1 = 0;
-  if (temp_v7) {
-    temp_v1 = param_1->field_0x164;
-  }
-  if ((temp_v7 && temp_v1 != 0) && (temp_v1 = asdTMTexTableNodeIsLoaded(0x2b,0), temp_v1 != 0)) {
-    temp_v1 = jobIsValid(param_1->field_0x15d40);
-    if ((temp_v1 == 0) || (temp_v1 = eventTexJobSlotsDone(param_1->field_0x15d40), temp_v1 != 0)) {
-      temp_v1 = jobIsValid(param_1->field_0x15d44);
-      if ((temp_v1 == 0) || (temp_v1 = eventTexJobSlotsDone(param_1->field_0x15d44), temp_v1 != 0)) {
-        pvVar3 = param_1->field_0x160;
-        FUN_00297060(pvVar3,param_1->field_0x164);
-        param_1->field_0x168 = (int)pvVar3;
-        *(unsigned int *)((int)pvVar3 + 0x108) = 2;
-        pvVar3 = param_1->field_0x160;
-        FUN_00297060(pvVar3,param_1->field_0x164);
-        param_1->field_0x16c = (int)pvVar3;
-        *(unsigned int *)((int)pvVar3 + 0x108) = 2;
-        FUN_002a03d8(0,10);
-        FUN_002a03d8(1,10);
-        FUN_0029e648(1,0);
-        messageTargetSetValue(0);
-        temp_v0 = param_1->field_0x14;
-        temp_v6 = param_1->field_0x18;
-        temp_v2 = dataTable17Sub1GetRecord(temp_v8,0);
-        temp_v4 = 0;
-        dataTable17Sub1GetCount();
-        temp_v1 = -1;
-        if (0 < (int)puVar5) {
-          do {
-            temp_v3 = temp_v2 + temp_v4 * 0x68;
-            temp_v7 = *(unsigned short *)(temp_v3 + 0x24) == (unsigned short)temp_v0;
-            if (temp_v7) {
-              temp_v3 = *(int *)(temp_v3 + 0x20);
-            }
-            temp_v1 = temp_v4;
-            if (temp_v7 && temp_v3 == temp_v6) break;
-            temp_v4 = temp_v4 + 1;
-            puVar5 = temp_v8;
-            dataTable17Sub1GetCount();
-            temp_v1 = -1;
-          } while (temp_v4 < (int)puVar5);
-        }
-        dataTable17Sub1GetRecord(temp_v9,temp_v1);
-        placeWinStartText();
-        temp_v5 = 0x3b7;
-        do {
-          temp_v1 = FUN_0028e9d0(temp_v5);
-          if (temp_v1 != 0) goto LAB_003a0f28;
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 0x47f);
-        temp_v5 = 0x47f;
-        while (temp_v1 = FUN_0028e9d0(temp_v5), temp_v1 == 0) {
-          temp_v5 = temp_v5 + 1;
-          if (temp_v5 >= 0x79f) {
-            param_1->field_0x4 = 3;
-            param_1->field_0x8 = 0;
-            return;
-          }
-        }
-LAB_003a0f28:
-        param_1->field_0x8 = 0;
-        param_1->field_0x4 = 1;
-        FUN_003a4210(param_1);
-        buttonHelpSetPreset(0x75);
-        FUN_0029ee6c(0,0x323232ff);
-      }
+    for (u32 flag = 0x3B7; flag <= 0x47E; flag++) {
+        if (FUN_0028e9d0(flag))
+            return true;
     }
-  }
-  return;
+    for (u32 flag = 0x47F; flag <= 0x79E; flag++) {
+        if (FUN_0028e9d0(flag))
+            return true;
+    }
+    return false;
+}
+
+/* Waits for the place window's textures and jobs, then builds its two windows, starts the place's
+ * text and switches to state 1 when any of the place flags is set (state 3 when none is). */
+void FUN_003a0d64(PlaceScene *scene)
+{
+    if (scene->windowPool == NULL || scene->windowSize == 0)
+        return;
+    if (!asdTMTexTableNodeIsLoaded(0x2B, 0))
+        return;
+    if (jobIsValid(scene->jobA) && !eventTexJobSlotsDone(scene->jobA))
+        return;
+    if (jobIsValid(scene->jobB) && !eventTexJobSlotsDone(scene->jobB))
+        return;
+
+    scene->windowA = FUN_00297060(scene->windowPool, scene->windowSize);
+    *(u32 *)(scene->windowA + 0x108) = 2;
+    scene->windowB = FUN_00297060(scene->windowPool, scene->windowSize);
+    *(u32 *)(scene->windowB + 0x108) = 2;
+    FUN_002a03d8(0, 10);
+    FUN_002a03d8(1, 10);
+    FUN_0029e648(1, 0);
+    messageTargetSetValue(0, 0);
+
+    u32 kind = scene->placeKind;
+    s32 key = scene->placeKey;
+    s32 found = -1;
+    u32 ignored;
+    PlaceRecord *records = dataTable17Sub1GetRecord(&ignored, 0);
+    for (s32 i = 0; i < dataTable17Sub1GetCount(&ignored); i++) {
+        if (records[i].kind == kind && records[i].key == key) {
+            found = i;
+            break;
+        }
+    }
+    u32 ignoredSecond;
+    dataTable17Sub1GetRecord(&ignoredSecond, found);
+    placeWinStartText();
+
+    if (placeFlagsAnySet()) {
+        scene->state = 1;
+        scene->substate = 0;
+        FUN_003a4210(scene);
+        buttonHelpSetPreset(0x75);
+        FUN_0029ee6c(0, 0x323232FF);
+    } else {
+        scene->state = 3;
+        scene->substate = 0;
+    }
 }
 
 } /* extern "C" */

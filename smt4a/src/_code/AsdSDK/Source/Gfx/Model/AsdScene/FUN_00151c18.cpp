@@ -4,7 +4,7 @@
 extern "C" {
 void *asdMemoryAlloc(u32 alignment, u32 pool, u32 flags, u32 size, u32 count);
 AsdAllocatorObject *asdMemoryGetDefaultAllocator(void);
-AsdSceneLightObject *FUN_00171acc(const AsdSceneLightDescription *description, AsdAllocatorObject *allocator);
+AsdSceneLightObject *_ZN9Obj55b4a86createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *description, AsdAllocatorObject *allocator);
 
 // Create the default point light used by a newly initialized scene.
 AsdSceneLight *FUN_00151c18(void)
@@ -21,7 +21,7 @@ AsdSceneLight *FUN_00151c18(void)
     description.unk04 = 0;
     description.unk08 = 0;
     description.count = 1;
-    light->object = FUN_00171acc(&description, allocator);
+    light->object = _ZN9Obj55b4a86createEPvP18AsdAllocatorObject(&description, allocator);
     light->parameters = light->object->parameters;
     light->parameters->kind = 2;
     f32 *position = light->parameters->position;

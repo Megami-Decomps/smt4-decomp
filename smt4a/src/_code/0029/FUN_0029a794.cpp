@@ -1,156 +1,195 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029a794` (_code @ 0x29a794, 0x290 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the second cleared record through a base at DAT_005f1cbc+0xb8 and keeps the fourth key table's address in ip (stack-argument stm grouping differs); stores and calls otherwise identical. */
+#include "shard/W5_W5Match7_SceneState.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+#include "shard/W6_W6Match7_DrawParameters.h"
+
+/* A 0x8C-byte UI sprite; only the data the initializers below pass around. */
+struct SceneSprite {
+    u8 unk00[0x8c];
+};
+
+/* Animation key rows handed to paramsInit (frame, scale pair, count/mode). */
+struct SceneScaleKey {
+    f32 first;
+    f32 last;
+    s32 mode;
+};
+
+/* The object this resets; its packet (+0x128) and sprites (+0x148, +0x1d4) are built at the end. */
+struct SceneWork {
+    /* 0x000 */ u8 unk000[0x48];
+    /* 0x048 */ u32 unk048;
+    /* 0x04c */ u32 unk04c;
+    /* 0x050 */ u8 unk050;
+    /* 0x051 */ u8 unk051[3];
+    /* 0x054 */ u32 unk054;
+    /* 0x058 */ u32 unk058;
+    /* 0x05c */ u32 unk05c;
+    /* 0x060 */ u8 unk060;
+    /* 0x061 */ u8 unk061;
+    /* 0x062 */ u8 unk062[2];
+    /* 0x064 */ u32 unk064;
+    /* 0x068 */ u8 unk068;
+    /* 0x069 */ u8 unk069[3];
+    /* 0x06c */ u32 unk06c;
+    /* 0x070 */ u8 unk070;
+    /* 0x071 */ u8 unk071[3];
+    /* 0x074 */ u32 unk074;
+    /* 0x078 */ u32 unk078;
+    /* 0x07c */ u8 unk07c[0x10];
+    /* 0x08c */ u8 unk08c;
+    /* 0x08d */ u8 unk08d;
+    /* 0x08e */ u8 unk08e;
+    /* 0x08f */ u8 unk08f;
+    /* 0x090 */ u32 unk090;
+    /* 0x094 */ u32 unk094;
+    /* 0x098 */ u32 unk098;
+    /* 0x09c */ u32 unk09c;
+    /* 0x0a0 */ u8 unk0a0;
+    /* 0x0a1 */ u8 unk0a1;
+    /* 0x0a2 */ u8 unk0a2[2];
+    /* 0x0a4 */ u32 unk0a4;
+    /* 0x0a8 */ u32 unk0a8;
+    /* 0x0ac */ u8 unk0ac;
+    /* 0x0ad */ u8 unk0ad[3];
+    /* 0x0b0 */ u32 unk0b0[20];
+    /* 0x100 */ u8 unk100[0x28];
+    /* 0x128 */ Params002c312c packet;
+    /* 0x148 */ SceneSprite sprite;
+    /* 0x1d4 */ SceneSprite sprites[5];
+    /* 0x490 */ u32 unk490;
+    /* 0x494 */ u8 unk494[0xc];
+    /* 0x4a0 */ u32 unk4a0[10];
+};
+
+/* Two blocks of cleared globals at the start of the scene state. */
+struct SceneRecordA {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ s32 unk50;
+    /* 0x54 */ u8 unk54[0x60];
+    /* 0xb4 */ s16 unkb4;
+    /* 0xb6 */ s16 unkb6;
+};
+struct SceneRecordB {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ s32 unk50;
+    /* 0x54 */ u8 unk54[0x50];
+    /* 0xa4 */ s16 unka4;
+    /* 0xa6 */ s16 unka6;
+    /* 0xa8 */ u8 unka8[0x10];
+};
+struct SceneRecords {
+    SceneRecordA first;
+    SceneRecordB second;
+};
+
+/* Key tables for paramsInit; the original file defined them statically. */
+static const s32 sKeysFourth[2] = {0xfffe, 0xffff};
+static const s32 sKeysFirst[6] = {400, 0, 8, 0, 0xfe70, 4};
+static const SceneScaleKey sKeysThird[2] = {{1.0f, 1.0f, 1}, {1.0f, 1.0f, 5}};
+static const SceneScaleKey sKeysSecond[2] = {{0.0f, 1.0f, 2}, {1.0f, 0.0f, 0x12}};
+static const s32 sKeysFifth[21] = {
+    -3, 0, -3, 0, 0, 0, 0, -3, 0, -3, 1, 0, 1, 0, -1, 0, -1, -1, 0, -1, 0};
 
 extern "C" {
+extern SceneRecords DAT_005f1cbc;
+FlagWorkBanks *gameFlagsGetBlock(void);
+void mapProbePositionDownward(MapVector *position);
+void FUN_00352eec(void);
+void paramsClearPacket(Params002c312c *packet);
+void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
+                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
+                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void FUN_0014e188(SceneSprite *sprite, u32 group, u32 image, Params002c312c *owner, u16 id, f32 scale);
+void uiSpriteSetKeyframe(SceneSprite *sprite, s32 keyframe, s32 restart);
+void uiSpriteSelectAnim(SceneSprite *sprite, s32 animation);
 
-int FUN_0014e188(int, int, int, int, int);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int, unsigned char *, int);
-int uiSpriteSelectAnim(int, int);
-int uiSpriteSetKeyframe(int, int);
-int mapProbePositionDownward(float *);
-int FUN_00352eec(void);
-int paramsClearPacket(int);
-
-/* stack frame of param_2: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_2_stack;
-
-extern unsigned char DAT_005315d0; /* 0x5315d0 */
-extern unsigned char DAT_005315d8; /* 0x5315d8 */
-extern unsigned char DAT_005315f0; /* 0x5315f0 */
-extern unsigned char DAT_00531608; /* 0x531608 */
-extern unsigned char DAT_00531620; /* 0x531620 */
-extern unsigned int g_gameState; /* 0x5f15fc */
-extern unsigned int DAT_005f1600; /* 0x5f1600 */
-extern unsigned int DAT_005f1604; /* 0x5f1604 */
-extern float DAT_005f16bc; /* 0x5f16bc */
-extern float DAT_005f16c0; /* 0x5f16c0 */
-extern float DAT_005f16c4; /* 0x5f16c4 */
-extern float DAT_005f16c8; /* 0x5f16c8 */
-extern float DAT_005f16cc; /* 0x5f16cc */
-extern unsigned int DAT_005f16d0; /* 0x5f16d0 */
-extern unsigned int DAT_005f16d4; /* 0x5f16d4 */
-extern unsigned int DAT_005f1d0c; /* 0x5f1d0c */
-extern unsigned short DAT_005f1d70; /* 0x5f1d70 */
-extern unsigned short DAT_005f1d72; /* 0x5f1d72 */
-extern unsigned int DAT_005f1dc4; /* 0x5f1dc4 */
-extern unsigned short DAT_005f1e18; /* 0x5f1e18 */
-extern unsigned short DAT_005f1e1a; /* 0x5f1e1a */
-
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: paramsInit. */
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: mapProbePositionDownward. */
-/* Supplied declaration required: FUN_00352eec. */
-/* Supplied declaration required: paramsClearPacket. */
-
-
-void FUN_0029a794(int param_1,int param_2)
-
+/* Clear the scene's work areas; when `savePoint` is set, record the current map point into the flags block first. */
+void FUN_0029a794(SceneWork *work, s32 savePoint)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameFlagsGetBlock();
-  *(unsigned int *)(param_1 + 0x48) = 0;
-  *(unsigned int *)(param_1 + 0x4c) = 0;
-  *(unsigned char *)(param_1 + 0x50) = 0;
-  *(unsigned int *)(param_1 + 0x54) = 0;
-  *(unsigned int *)(param_1 + 0x58) = 0;
-  *(unsigned int *)(param_1 + 0x5c) = 0;
-  *(unsigned char *)(param_1 + 0x60) = 0;
-  *(unsigned char *)(param_1 + 0x61) = 0;
-  *(unsigned int *)(param_1 + 100) = 0;
-  *(unsigned char *)(param_1 + 0x68) = 0;
-  *(unsigned int *)(param_1 + 0x6c) = 0;
-  *(unsigned char *)(param_1 + 0x70) = 0;
-  *(unsigned int *)(param_1 + 0x74) = 0;
-  *(unsigned int *)(param_1 + 0x78) = 0;
-  *(unsigned char *)(param_1 + 0x8c) = 0;
-  *(unsigned char *)(param_1 + 0x8d) = 0;
-  *(unsigned char *)(param_1 + 0x8e) = 0;
-  *(unsigned int *)(param_1 + 0x90) = 0;
-  *(unsigned int *)(param_1 + 0x94) = 0;
-  *(unsigned int *)(param_1 + 0x98) = 0;
-  *(unsigned int *)(param_1 + 0x9c) = 0;
-  *(unsigned char *)(param_1 + 0xa0) = 0;
-  *(unsigned char *)(param_1 + 0xac) = 0;
-  *(unsigned int *)(param_1 + 0xa4) = 0;
-  *(unsigned int *)(param_1 + 0xa8) = 0;
-  *(unsigned char *)(param_1 + 0xa1) = 0;
-  *(unsigned int *)(param_1 + 0xb0) = 0;
-  *(unsigned int *)(param_1 + 0xb4) = 0;
-  *(unsigned int *)(param_1 + 0xb8) = 0;
-  *(unsigned int *)(param_1 + 0xbc) = 0;
-  *(unsigned int *)(param_1 + 0xd4) = 0;
-  *(unsigned int *)(param_1 + 0xe8) = 0;
-  *(unsigned int *)(param_1 + 0xc0) = 0;
-  *(unsigned int *)(param_1 + 0xd8) = 0;
-  *(unsigned int *)(param_1 + 0xec) = 0;
-  *(unsigned int *)(param_1 + 0xc4) = 0;
-  *(unsigned int *)(param_1 + 0xdc) = 0;
-  *(unsigned int *)(param_1 + 0xf0) = 0;
-  *(unsigned int *)(param_1 + 200) = 0;
-  *(unsigned int *)(param_1 + 0xe0) = 0;
-  *(unsigned int *)(param_1 + 0xf4) = 0;
-  *(unsigned int *)(param_1 + 0xcc) = 0;
-  *(unsigned int *)(param_1 + 0xe4) = 0;
-  *(unsigned int *)(param_1 + 0xf8) = 0;
-  *(unsigned int *)(param_1 + 0xfc) = 0;
-  *(unsigned int *)(param_1 + 0xd0) = 0;
-  *(unsigned int *)(param_1 + 0x4a0) = 0;
-  *(unsigned int *)(param_1 + 0x4a4) = 0;
-  *(unsigned int *)(param_1 + 0x4a8) = 0;
-  *(unsigned int *)(param_1 + 0x4ac) = 0;
-  *(unsigned int *)(param_1 + 0x4b0) = 0;
-  *(unsigned int *)(param_1 + 0x4b4) = 0;
-  *(unsigned int *)(param_1 + 0x4b8) = 0;
-  *(unsigned int *)(param_1 + 0x4bc) = 0;
-  *(unsigned int *)(param_1 + 0x4c0) = 0;
-  *(unsigned int *)(param_1 + 0x4c4) = 0;
-  mapProbePositionDownward(&DAT_005f16c0);
-  if (param_2 != 0) {
-    *(short *)(temp_v0 + 0x2c) = (short)(int)DAT_005f16bc;
-    *(short *)(temp_v0 + 0x2e) = (short)g_gameState;
-    *(short *)(temp_v0 + 0x30) = (short)DAT_005f1600;
-    *(unsigned int *)(temp_v0 + 0xe10) = DAT_005f1604;
-    *(short *)(temp_v0 + 0x32) = (short)(int)DAT_005f16c0;
-    *(short *)(temp_v0 + 0x34) = (short)(int)DAT_005f16c4;
-    *(short *)(temp_v0 + 0x36) = (short)(int)DAT_005f16c8;
-    *(short *)(temp_v0 + 0x38) = (short)(int)DAT_005f16cc;
-    *(short *)(temp_v0 + 0x28) = (short)DAT_005f16d0;
-    *(short *)(temp_v0 + 0x2a) = (short)DAT_005f16d4;
-  }
-  FUN_00352eec();
-  DAT_005f1d0c = 0;
-  DAT_005f1d70 = 0;
-  DAT_005f1d72 = 0;
-  DAT_005f1dc4 = 0;
-  DAT_005f1e18 = 0;
-  DAT_005f1e1a = 0;
-  paramsClearPacket(param_1 + 0x128);
-  paramsInit(param_1 + 0x128,&DAT_005315d8,0x18,&DAT_00531608,0x18,&DAT_005315f0,0x18,
-               &DAT_005315d0,8,&DAT_00531620,0x54);
-  *(unsigned int *)(param_1 + 0x490) = 0;
-  FUN_0014e188(param_1 + 0x148,0x1d,0,param_1 + 0x128,1);
-  uiSpriteSetKeyframe(param_1 + 0x148,0);
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 0x8c;
-    FUN_0014e188(temp_v1 + 0x1d4,0x13,0x11d4,param_1 + 0x128,0xb);
-    uiSpriteSelectAnim(temp_v1 + 0x1d4,0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 5);
-  return;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    work->unk048 = 0;
+    work->unk04c = 0;
+    work->unk050 = 0;
+    work->unk054 = 0;
+    work->unk058 = 0;
+    work->unk05c = 0;
+    work->unk060 = 0;
+    work->unk061 = 0;
+    work->unk064 = 0;
+    work->unk068 = 0;
+    work->unk06c = 0;
+    work->unk070 = 0;
+    work->unk074 = 0;
+    work->unk078 = 0;
+    work->unk08c = 0;
+    work->unk08d = 0;
+    work->unk08e = 0;
+    work->unk090 = 0;
+    work->unk094 = 0;
+    work->unk098 = 0;
+    work->unk09c = 0;
+    work->unk0a0 = 0;
+    work->unk0ac = 0;
+    work->unk0a4 = 0;
+    work->unk0a8 = 0;
+    work->unk0a1 = 0;
+    work->unk0b0[0] = 0;
+    work->unk0b0[1] = 0;
+    work->unk0b0[2] = 0;
+    work->unk0b0[3] = 0;
+    work->unk0b0[9] = 0;
+    work->unk0b0[14] = 0;
+    work->unk0b0[4] = 0;
+    work->unk0b0[10] = 0;
+    work->unk0b0[15] = 0;
+    work->unk0b0[5] = 0;
+    work->unk0b0[11] = 0;
+    work->unk0b0[16] = 0;
+    work->unk0b0[6] = 0;
+    work->unk0b0[12] = 0;
+    work->unk0b0[17] = 0;
+    work->unk0b0[7] = 0;
+    work->unk0b0[13] = 0;
+    work->unk0b0[18] = 0;
+    work->unk0b0[19] = 0;
+    work->unk0b0[8] = 0;
+    for (s32 i = 0; i < 10; i++) {
+        work->unk4a0[i] = 0;
+    }
+    mapProbePositionDownward(&g_gameState.point.position);
+    if (savePoint != 0) {
+        flags->savePoint.scale = (s16)(s32)g_gameState.point.scale;
+        flags->savePoint.mapId = g_gameState.mode;
+        flags->savePoint.areaId = g_gameState.submode;
+        flags->savePointObject.objectId = g_gameState.currentObjectId;
+        flags->savePoint.x = (s16)(s32)g_gameState.point.position.x;
+        flags->savePoint.y = (s16)(s32)g_gameState.point.position.y;
+        flags->savePoint.z = (s16)(s32)g_gameState.point.position.z;
+        flags->savePoint.heading = (s16)(s32)g_gameState.point.heading;
+        flags->savePoint.tableType = g_gameState.table2F.type;
+        flags->savePoint.tableId = g_gameState.table2F.id;
+    }
+    FUN_00352eec();
+    SceneRecordA *first = &DAT_005f1cbc.first;
+    SceneRecordB *second = &DAT_005f1cbc.second;
+    first->unk50 = 0;
+    first->unkb4 = 0;
+    first->unkb6 = 0;
+    second->unk50 = 0;
+    second->unka4 = 0;
+    second->unka6 = 0;
+    paramsClearPacket(&work->packet);
+    paramsInit(&work->packet, sKeysFirst, sizeof(sKeysFirst), sKeysSecond, sizeof(sKeysSecond),
+               sKeysThird, sizeof(sKeysThird), sKeysFourth, sizeof(sKeysFourth),
+               sKeysFifth, sizeof(sKeysFifth));
+    work->unk490 = 0;
+    FUN_0014e188(&work->sprite, 0x1d, 0, &work->packet, 1, 1.0f);
+    uiSpriteSetKeyframe(&work->sprite, 0, 0);
+    for (s32 i = 0; i < 5; i++) {
+        FUN_0014e188(&work->sprites[i], 0x13, 0x11d4, &work->packet, 0xb, 1.0f);
+        uiSpriteSelectAnim(&work->sprites[i], 0);
+    }
 }
 
 } /* extern "C" */

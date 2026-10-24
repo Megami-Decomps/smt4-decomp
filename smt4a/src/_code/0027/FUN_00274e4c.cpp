@@ -1,153 +1,144 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00274e4c` (_code @ 0x274e4c, 0x268 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: nearest map interaction target; retail keeps the arguments in s21/s20/s22 and the work global in r7 (built s20/s22/s21, r8) and reloads the hold counter before testing it */
+#include "common.h"
+
+#define MAP_TARGET_COUNT 0x40
+
+struct MapTargetPosition {
+    f32 x, y, z;
+};
+
+/* One interaction target of the map (0x3C bytes). */
+struct MapTarget {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u8 active;
+    /* 0x0D */ u8 unk0D[3];
+    /* 0x10 */ s16 kind;           /* 2: wide trigger, 4: ignored */
+    /* 0x12 */ s16 hintId;
+    /* 0x14 */ s16 textId;
+    /* 0x16 */ u8 unk16[6];
+    /* 0x1C */ MapTargetPosition position;
+    /* 0x28 */ f32 heading;
+    /* 0x2C */ u8 unk2C[0x10];
+};
+
+struct MapTargetText {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 icon;
+    /* 0x0C */ char text[1];
+};
+
+struct MapTargetWork {
+    /* 0x0000 */ MapTarget targets[MAP_TARGET_COUNT];
+    /* 0x0F00 */ u8 unk0F00[0xC];
+    /* 0x0F0C */ u8 hasTarget;
+    /* 0x0F0D */ u8 unk0F0D[3];
+    /* 0x0F10 */ s32 target;
+    /* 0x0F14 */ s32 hintId;
+    /* 0x0F18 */ u8 unk0F18[4];
+    /* 0x0F1C */ u32 icon;
+    /* 0x0F20 */ char text[0x20];
+    /* 0x0F40 */ u8 disabled;
+    /* 0x0F41 */ u8 unk0F41[0xB];
+    /* 0x0F4C */ s32 holdFrames;
+    /* 0x0F50 */ s32 lastTarget;
+};
+
+struct MapGameStateView {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s8 blocked;
+    /* 0x19 */ u8 unk19[3];
+    /* 0x1C */ MapTargetPosition position;
+};
 
 extern "C" {
+extern MapTargetWork *DAT_00581280;
+extern MapGameStateView g_gameState;
+extern u8 DAT_005f1724;
 
-int CONCAT44(double, double);
-int FUN_00234044(...);
-int distSpatial(void);
-int libc_strcpy(int, int);
-int dataTable2aGetEntryWithAoc(void);
-int FUN_00384830(void);
+f32 distSpatial(MapTargetPosition from, MapTargetPosition to);
+f32 FUN_00384830(f32 x, f32 y, f32 z, f32 heading, MapTargetPosition to);
+void FUN_00234044(s32 show, s32 target);
+MapTargetText *dataTable2aGetEntryWithAoc(s32 id);
+char *libc_strcpy(char *destination, const char *source);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
+#define MAP_TARGET_NEAR_LIMIT 180.0f
+#define MAP_TARGET_ANGLE_LIMIT 80.0f
+#define MAP_TARGET_WIDE_NEAR_LIMIT 290.0f
+#define MAP_TARGET_WIDE_ANGLE_LIMIT 60.0f
+#define MAP_TARGET_HOLD_FRAMES 0x14
+#define MAP_TARGET_NEAR_ICON_DISTANCE 110.0f
 
-extern int DAT_00581280; /* 0x581280 */
-extern unsigned char g_gameState; /* 0x5f15fc */
-extern unsigned char DAT_005f1724; /* 0x5f1724 */
-
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_00234044. */
-/* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: dataTable2aGetEntryWithAoc. */
-/* Supplied declaration required: FUN_00384830. */
-
-
-void FUN_00274e4c(void)
-
+/* Picks the nearest interaction target the player at (x, y, z) faces and keeps its hint on
+ * screen for a few frames after the player leaves it. */
+void FUN_00274e4c(f32 x, f32 y, f32 z, f32 heading)
 {
-/* irregular: irregular input(s): in_s0; 7 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  int temp_v2;
-  char *pcVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned int in_s0;
-  float temp_v6;
-  float temp_v7;
-  unsigned long long temp_v8;
-  float temp_v9;
-  float temp_v10;
-  long long temp_v11;
-  unsigned long long temp_v12;
-  unsigned long long temp_v13;
-  
-  temp_v4 = -1;
-  temp_v10 = 0.0f;
-  temp_v8 = 0x4334000000000000;
-  temp_v9 = 80.0f;
-  if (*(char *)(DAT_00581280 + 0xf40) != '\0') {
-    return;
-  }
-  *(unsigned char *)(DAT_00581280 + 0xf0c) = 0;
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) != '\0') {
-    return;
-  }
-  temp_v11 = (unsigned long long)in_s0 << 0x20;
-  temp_v12 = 0x4391000000000000;
-  temp_v13 = 0x42700000;
-  temp_v3 = 0;
-  do {
-    temp_v7 = (float)((unsigned long long)temp_v8 >> 0x20);
-    temp_v2 = DAT_00581280 + temp_v3 * 0x3c;
-    temp_v5 = *(char *)(temp_v2 + 0xc) != '\0';
-    temp_v1 = 0;
-    if (temp_v5) {
-      temp_v1 = *(short *)(temp_v2 + 0x10);
-    }
-    if (temp_v5 && temp_v1 != 4) {
-      if (temp_v1 == 2) {
-        temp_v7 = (float)((unsigned long long)temp_v12 >> 0x20);
-        temp_v9 = (float)temp_v13;
-      }
-      temp_v6 = (float)((unsigned long long)temp_v11 >> 0x20);
-      distSpatial();
-      temp_v8 = CONCAT44(temp_v7,temp_v6);
-      if (temp_v6 < temp_v7) {
-        temp_v7 = (float)((unsigned long long)temp_v11 >> 0x20);
-        FUN_00384830();
-        if ((temp_v7 < temp_v9) && ((temp_v4 == -1 || ((float)temp_v8 < temp_v10)))) {
-          temp_v4 = temp_v3;
-          temp_v10 = (float)temp_v8;
-        }
-      }
-    }
-    temp_v2 = DAT_00581280;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x40);
-  if ((temp_v4 != -1) || (0 < *(int *)(DAT_00581280 + 0xf4c))) {
-    *(unsigned char *)(DAT_00581280 + 0xf0c) = 1;
-    if (temp_v4 == -1) {
-      temp_v4 = *(int *)(temp_v2 + 0xf50);
-    }
-    else {
-      *(unsigned int *)(temp_v2 + 0xf4c) = 0x14;
-      *(int *)(temp_v2 + 0xf50) = temp_v4;
-    }
-    *(int *)(temp_v2 + 0xf10) = temp_v4;
-    temp_v3 = temp_v2 + temp_v4 * 0x3c;
-    *(int *)(temp_v2 + 0xf14) = (int)*(short *)(temp_v3 + 0x12);
-    temp_v2 = (int)*(short *)(temp_v3 + 0x14);
-    dataTable2aGetEntryWithAoc();
-    temp_v3 = DAT_00581280;
-    pcVar4 = (char *)(temp_v2 + 0xc);
-    if (pcVar4 != (char *)0x0) {
-      temp_v0 = *pcVar4;
-      if (temp_v0 == '0') {
-        pcVar4 = (char *)(unsigned int)*(unsigned char *)(temp_v2 + 0xd);
-      }
-      if (!(temp_v0 == '0' && pcVar4 == (char *)0x0)) {
-        temp_v3 = *(int *)(DAT_00581280 + temp_v4 * 0x3c + 0x1c);
-        FUN_00384830();
-        DAT_005f1724 = temp_v3 < 0x42dc0000;
-        FUN_00234044(1,temp_v4);
-        libc_strcpy(DAT_00581280 + 0xf20,temp_v2 + 0xc);
-        *(unsigned int *)(DAT_00581280 + 0xf1c) = *(unsigned int *)(temp_v2 + 8);
-      }
-      else {
-        *(unsigned char *)(DAT_00581280 + 0xf20) = 0;
-        *(unsigned char *)(temp_v3 + 0xf21) = 0;
-      }
-    }
-    else {
-      *(unsigned char *)(DAT_00581280 + 0xf20) = 0;
-      *(unsigned char *)(temp_v3 + 0xf21) = 0;
-    }
-    temp_v4 = *(int *)(DAT_00581280 + 0xf4c);
-    if (0 < temp_v4) {
-      *(int *)(DAT_00581280 + 0xf4c) = temp_v4 - 1;
-      if ((*(char *)(DAT_00581280 + 0xf0c) == '\0') && (*(int *)(DAT_00581280 + 0xf4c) < 1)) {
-        FUN_00234044(0);
+    s32 best = -1;
+    f32 bestDistance = 0.0f;
+    f32 nearLimit = MAP_TARGET_NEAR_LIMIT;
+    f32 angleLimit = MAP_TARGET_ANGLE_LIMIT;
+    MapTargetPosition player = {x, y, z};
+
+    if (DAT_00581280->disabled != 0)
         return;
-      }
-      return;
+    DAT_00581280->hasTarget = 0;
+    if (g_gameState.blocked != 0)
+        return;
+
+    for (s32 i = 0; i < MAP_TARGET_COUNT; i++) {
+        MapTarget *target = &DAT_00581280->targets[i];
+        if (target->active != 0 && target->kind != 4) {
+            if (target->kind == 2) {
+                nearLimit = MAP_TARGET_WIDE_NEAR_LIMIT;
+                angleLimit = MAP_TARGET_WIDE_ANGLE_LIMIT;
+            }
+            f32 distance = distSpatial(player, target->position);
+            if (distance < nearLimit) {
+                f32 angle = FUN_00384830(x, y, z, heading, DAT_00581280->targets[i].position);
+                if (angle < angleLimit && (best == -1 || distance < bestDistance)) {
+                    best = i;
+                    bestDistance = distance;
+                }
+            }
+        }
     }
-  }
-  temp_v4 = DAT_00581280;
-  *(unsigned int *)(DAT_00581280 + 0xf4c) = 0;
-  *(unsigned int *)(temp_v4 + 0xf50) = 0xffffffff;
-  if ((*(char *)(DAT_00581280 + 0xf0c) == '\0') && (*(int *)(DAT_00581280 + 0xf4c) < 1)) {
-    FUN_00234044(0);
-    return;
-  }
-  return;
+
+    MapTargetWork *work = DAT_00581280;
+    if (best != -1 || work->holdFrames > 0) {
+        work->hasTarget = 1;
+        if (best == -1) {
+            best = work->lastTarget;
+        } else {
+            work->holdFrames = MAP_TARGET_HOLD_FRAMES;
+            work->lastTarget = best;
+        }
+        work->target = best;
+        work->hintId = work->targets[best].hintId;
+        MapTargetText *entry = dataTable2aGetEntryWithAoc(work->targets[best].textId);
+        work = DAT_00581280;
+        char *text = entry != NULL ? entry->text : NULL;
+        if (text != NULL && !(text[0] == '0' && entry->text[1] == 0)) {
+            f32 near = FUN_00384830(work->targets[best].position.x, work->targets[best].position.y,
+                                    work->targets[best].position.z, work->targets[best].heading,
+                                    g_gameState.position);
+            DAT_005f1724 = near < MAP_TARGET_NEAR_ICON_DISTANCE;
+            FUN_00234044(1, best);
+            libc_strcpy(DAT_00581280->text, text);
+            DAT_00581280->icon = entry->icon;
+        } else {
+            work->text[0] = 0;
+            work->text[1] = 0;
+        }
+        if (DAT_00581280->holdFrames > 0) {
+            DAT_00581280->holdFrames--;
+            if (DAT_00581280->hasTarget == 0 && DAT_00581280->holdFrames < 1)
+                FUN_00234044(0, 0);
+            return;
+        }
+    }
+    DAT_00581280->holdFrames = 0;
+    DAT_00581280->lastTarget = -1;
+    if (DAT_00581280->hasTarget == 0 && DAT_00581280->holdFrames < 1)
+        FUN_00234044(0, 0);
 }
 
 } /* extern "C" */

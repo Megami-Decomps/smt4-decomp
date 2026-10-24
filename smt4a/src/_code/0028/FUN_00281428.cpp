@@ -1,91 +1,125 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00281428` (_code @ 0x281428, 0x290 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register assignment and the packing of the vertex colour differ (retail loads the half-size with one vldmia into s17/s18 and keeps the shift in s19/s16); same loads, conversions and the two FUN_0019e3d0 quads. */
+#include "camp/RenderCtx.h"
+
+namespace {
+/* A loaded texture object: only its pixel size is read. */
+struct QuadTexture {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+};
+
+/* A texture slot; the object it points at is at +8. */
+struct QuadTextureSlot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ QuadTexture *texture;
+};
+
+/* The job's work block as the quad drawer reads it. */
+struct QuadWork {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ QuadTextureSlot *slot;
+    /* 0x10 */ u32 table;                /* texture table the nodes below are looked up in */
+    /* 0x14 */ u32 node;
+    /* 0x18 */ u8 unk18[4];
+    /* 0x1c */ f32 halfWidth;
+    /* 0x20 */ f32 halfHeight;
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ f32 fade;
+    /* 0x2c */ f32 alpha;
+    /* 0x30 */ u8 unk30;
+    /* 0x31 */ u8 solid;                 /* alpha is used as it is; otherwise it is halved */
+    /* 0x32 */ u8 unk32[2];
+    /* 0x34 */ f32 x;
+    /* 0x38 */ f32 y;
+    /* 0x3c */ f32 depth;
+    /* 0x40 */ u8 unk40[0x18];
+    /* 0x58 */ f32 offsetX;
+    /* 0x5c */ u8 unk5c[0x1c];
+    /* 0x78 */ s32 enabled;
+    /* 0x7c */ u8 unk7c[4];
+    /* 0x80 */ QuadTextureSlot *overlaySlot;
+    /* 0x84 */ u32 overlayNode;
+    /* 0x88 */ f32 overlayFade;
+    /* 0x8c */ u8 unk8c;
+    /* 0x8d */ u8 overlayUsesFade;
+    /* 0x8e */ u8 unk8e[2];
+    /* 0x90 */ f32 shiftX;
+    /* 0x94 */ f32 shiftY;
+};
+}
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+QuadWork *jobGetWork(void);
+s32 FUN_00162ea4(void);
+s32 engineCleanupIsDone(void);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+void FUN_0016c4b8(RenderCtxA *context, void *texture);
+void FUN_0019e3d0(u32 color0, u32 color1, u32 color2, u32 color3,
+    f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+    f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
+    f32 u0, f32 v0, f32 u1, f32 v1, f32 u2, f32 v2, f32 u3, f32 v3);
 
-int FUN_0016c4b8(unsigned int, unsigned int);
-int FUN_0019e3d0(int);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int engineCleanupIsDone(void);
-extern int FUN_00162ea4(void);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_0016c4b8. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019e3d0. */
-
-
-void FUN_00281428(void)
-
+/* Draws the job's texture (and its overlay) as a quad centred on its position, shifted by (offsetX, offsetY);
+   the vertex colour carries the alpha and the fade. */
+void FUN_00281428(f32 offsetX, f32 offsetY)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  int temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  
-  temp_v0 = jobGetWork();
-  if (((*(int *)(temp_v0 + 0x78) != 0) &&
-      ((temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(temp_v0 + 0x28) == 0.0f) << 0x1e),
-       !romwright_subpiece_4_1_0(temp_v2 >> 0x1e,0) || (*(int *)(temp_v0 + 0x80) != 0)))) &&
-     ((temp_v1 = FUN_00162ea4(), temp_v1 == 0 || (temp_v1 = engineCleanupIsDone(), temp_v1 == 0)))) {
-    if (*(char *)(temp_v0 + 0x31) != '\0') {
-      temp_v4 = *(float *)(temp_v0 + 0x2c);
+    QuadWork *work = jobGetWork();
+    if (work->enabled == 0) {
+        return;
     }
-    else {
-      temp_v4 = *(float *)(temp_v0 + 0x2c) * 0.5f;
+    if (work->fade == 0.0f && work->overlaySlot == NULL) {
+        return;
     }
-    temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
-    temp_v6 = 255.0f;
-    if (temp_v1 != 0) {
-      temp_v1 = *(int *)(*(int *)(temp_v0 + 0xc) + 8);
-      VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(temp_v2 >> 0x16) & 3);
-      VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x18),(unsigned char)(temp_v2 >> 0x16) & 3);
-      temp_v1 = VectorFloatToUnsigned(temp_v4 * 255.0f,3);
-      temp_v3 = VectorFloatToUnsigned(*(float *)(temp_v0 + 0x28) * 255.0f,3);
-      temp_v6 = 255.0f;
-      FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(temp_v0 + 0xc) + 8));
-      FUN_0019e3d0(temp_v3 + temp_v1 * 0x1010100);
+    if (FUN_00162ea4() != 0 && engineCleanupIsDone() != 0) {
+        return;
     }
-    temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x84));
-    if (temp_v1 != 0) {
-      temp_v5 = *(float *)(temp_v0 + 0x88);
-      if (*(char *)(temp_v0 + 0x8d) == '\0') {
-        temp_v5 = *(float *)(temp_v0 + 0x28);
-        temp_v1 = asdTMTexTableNodeIsLoaded(*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14));
-        if (temp_v1 != 0) {
-          return;
+    f32 centerX = (work->x + work->offsetX) + (work->shiftX + offsetX);
+    f32 centerY = (work->y + work->shiftY) + offsetY;
+    f32 depth = work->depth;
+    f32 halfWidth = work->halfWidth;
+    f32 halfHeight = work->halfHeight;
+    f32 alpha;
+    if (work->solid != 0) {
+        alpha = work->alpha;
+    } else {
+        alpha = work->alpha * 0.5f;
+    }
+    if (asdTMTexTableNodeIsLoaded(work->table, work->node) != 0) {
+        QuadTexture *texture = work->slot->texture;
+        halfWidth *= (f32)texture->width * 0.001953125f;
+        halfHeight *= (f32)texture->height * 0.001953125f;
+        u32 high = (u32)(alpha * 255.0f);
+        u32 low = (u32)(work->fade * 255.0f);
+        u32 color = (high << 24) | (high << 16) | (high << 8) | low;
+        FUN_0016c4b8(g_renderCtx, work->slot->texture);
+        FUN_0019e3d0(color, color, color, color,
+            centerX - halfWidth, centerY + halfHeight, depth,
+            centerX - halfWidth, centerY - halfHeight, depth,
+            centerX + halfWidth, centerY + halfHeight, depth,
+            centerX + halfWidth, centerY - halfHeight, depth,
+            0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f);
+    }
+    if (asdTMTexTableNodeIsLoaded(work->table, work->overlayNode) != 0) {
+        f32 overlayFade = work->overlayFade;
+        if (work->overlayUsesFade == 0) {
+            overlayFade = work->fade;
+            if (asdTMTexTableNodeIsLoaded(work->table, work->node) != 0) {
+                return;
+            }
         }
-      }
-      temp_v1 = VectorFloatToUnsigned(temp_v4 * temp_v6,3);
-      temp_v3 = VectorFloatToUnsigned(temp_v5 * temp_v6,3);
-      FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(temp_v0 + 0x80) + 8));
-      FUN_0019e3d0(temp_v3 + temp_v1 * 0x1010100);
+        u32 high = (u32)(alpha * 255.0f);
+        u32 low = (u32)(overlayFade * 255.0f);
+        u32 color = (high << 24) | (high << 16) | (high << 8) | low;
+        FUN_0016c4b8(g_renderCtx, work->overlaySlot->texture);
+        FUN_0019e3d0(color, color, color, color,
+            centerX - halfWidth, centerY + halfHeight, depth,
+            centerX - halfWidth, centerY - halfHeight, depth,
+            centerX + halfWidth, centerY + halfHeight, depth,
+            centerX + halfWidth, centerY - halfHeight, depth,
+            0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f);
     }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,154 +1,107 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019d96c` (_code @ 0x19d96c, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: case 1 stores hidden = 0 and armcc folds the trailing hidden test into a direct return there; retail still branches to the shared test (1 instruction fewer in this build). */
+#include "common.h"
 
 extern "C" {
 
-int uiSpriteReplaceTextureEntry(int, int, unsigned int);
-int FUN_001ad0fc(int);
-int FUN_001ad1ac(int, unsigned int);
-int VectorSignedToFloat(int, int);
+/* One word of the addon sprite table: the texture entry the sprite shows. */
+typedef struct AddonSpriteRecord {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 textureEntry;
+} AddonSpriteRecord;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
+/* A bustup sprite and its transition state. */
+typedef struct BustupSprite {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ void *request;      /* the addon table request, NULL when none */
+    /* 0x08 */ s32 slot;
+    /* 0x0C */ s32 unk0c;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ s32 textureIndex;   /* -1 when no texture is held */
+    /* 0x18 */ u8 unk18[0xC];
+    /* 0x24 */ s32 operation;      /* the transition being played */
+    /* 0x28 */ f32 progress;
+    /* 0x2C */ f32 progressEnd;
+    /* 0x30 */ u8 hidden;
+    /* 0x31 */ u8 unk31[3];
+    /* 0x34 */ u8 position[0x24];
+    /* 0x58 */ f32 offset[3];
+    /* 0x64 */ u8 unk64[0x10];
+    /* 0x74 */ f32 duration;       /* frames the transition takes */
+    /* 0x78 */ u8 unk78[0x10];
+    /* 0x88 */ f32 fade;
+    /* 0x8C */ u8 unk8c;
+    /* 0x8D */ u8 fading;
+} BustupSprite;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: uiSpriteReplaceTextureEntry. */
-extern int dataTable19FindAddonWord(int, unsigned int);
-/* Supplied declaration required: FUN_001ad0fc. */
-/* Supplied declaration required: FUN_001ad1ac. */
+void aocSlotRelease(BustupSprite *sprite);
+void FUN_001ad1ac(void *position, s32 slot);
+AddonSpriteRecord *dataTable19FindAddonWord(void *request, u32 index);
+void uiSpriteReplaceTextureEntry(BustupSprite *sprite, u32 entry, u32 flag);
 
-
-void FUN_0019d96c(int param_1,unsigned int param_2,int param_3)
-
+/* Starts transition `operation` on the sprite; `duration` overrides the default length (0 = default). */
+void FUN_0019d96c(BustupSprite *sprite, u32 operation, s32 duration)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0, in_s1; 6 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned int in_fpscr;
-  int in_s0;
-  unsigned int temp_v2;
-  unsigned int in_s1;
-  
-  *(unsigned int *)(param_1 + 0x24) = param_2;
-  switch(param_2) {
-  case 1:
-    if (param_3 == 0) {
-      temp_v2 = 0x40800000;
+    sprite->operation = operation;
+    switch (operation) {
+    case 1:
+        sprite->duration = duration == 0 ? 4.0f : (f32)duration;
+        sprite->progress = 1.0f;
+        sprite->hidden = 0;
+        break;
+    case 2:
+        sprite->duration = duration == 0 ? 12.0f : (f32)duration;
+        sprite->progress = 0.0f;
+        sprite->hidden = 1;
+        aocSlotRelease(sprite);
+        break;
+    case 3:
+        sprite->fading = 1;
+        sprite->duration = duration == 0 ? 6.0f : (f32)duration;
+        sprite->progress = 1.0f;
+        sprite->fade = 1.0f;
+        break;
+    case 4:
+        sprite->duration = duration == 0 ? 12.0f : (f32)duration;
+        sprite->progress = 0.0f;
+        sprite->fade = 1.0f;
+        break;
+    case 5:
+        sprite->duration = duration == 0 ? 10.0f : (f32)duration;
+        break;
+    case 6:
+        sprite->duration = duration == 0 ? 10.0f : (f32)duration;
+        FUN_001ad1ac(sprite->position, sprite->slot);
+        sprite->hidden = 1;
+        sprite->offset[1] = 0.0f;
+        sprite->offset[0] = 0.0f;
+        sprite->offset[2] = 0.0f;
+        sprite->progress = 0.0f;
+        aocSlotRelease(sprite);
+        break;
+    case 7:
+        sprite->duration = duration == 0 ? 4.0f : (f32)duration;
+        sprite->progress = 0.0f;
+        sprite->hidden = 1;
+        aocSlotRelease(sprite);
+        break;
+    case 8:
+        sprite->duration = duration == 0 ? 120.0f : (f32)duration;
+        sprite->hidden = 1;
+        sprite->progress = 0.0f;
+        sprite->progressEnd = 0.0f;
+        aocSlotRelease(sprite);
+        break;
+    case 9:
+        sprite->duration = duration == 0 ? 120.0f : (f32)duration;
+        sprite->progress = 1.0f;
+        sprite->hidden = 1;
+        sprite->progressEnd = 0.0f;
+        aocSlotRelease(sprite);
+        break;
     }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
+    if (sprite->hidden != 0 && sprite->unk0c == 0 && sprite->textureIndex == -1 && sprite->request != NULL) {
+        uiSpriteReplaceTextureEntry(sprite, dataTable19FindAddonWord(sprite->request, 1)->textureEntry, 0xFFFFFFFF);
     }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0x3f800000;
-    *(unsigned char *)(param_1 + 0x30) = 0;
-    break;
-  case 2:
-    if (param_3 == 0) {
-      temp_v2 = 0x41400000;
-    }
-    else {
-LAB_0019dad0:
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    FUN_001ad0fc(param_1);
-    break;
-  case 3:
-    temp_v1 = param_3 != 0;
-    if (!temp_v1) {
-      in_s1 = 0x40c00000;
-      param_3 = in_s0;
-    }
-    *(unsigned char *)(param_1 + 0x8d) = 1;
-    if (temp_v1) {
-      in_s1 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = in_s1;
-    *(unsigned int *)(param_1 + 0x28) = 0x3f800000;
-    *(unsigned int *)(param_1 + 0x88) = 0x3f800000;
-    break;
-  case 4:
-    if (param_3 == 0) {
-      temp_v2 = 0x41400000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned int *)(param_1 + 0x88) = 0x3f800000;
-    break;
-  case 5:
-    if (param_3 == 0) {
-      temp_v2 = 0x41200000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    break;
-  case 6:
-    if (param_3 == 0) {
-      temp_v2 = 0x41200000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    FUN_001ad1ac(param_1 + 0x34,*(unsigned int *)(param_1 + 8));
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    *(unsigned int *)(param_1 + 0x5c) = 0;
-    *(unsigned int *)(param_1 + 0x58) = 0;
-    *(unsigned int *)(param_1 + 0x60) = 0;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    FUN_001ad0fc(param_1);
-    break;
-  case 7:
-    if (param_3 != 0) goto LAB_0019dad0;
-    temp_v2 = 0x40800000;
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    FUN_001ad0fc(param_1);
-    break;
-  case 8:
-    if (param_3 == 0) {
-      temp_v2 = 0x42f00000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    *(unsigned int *)(param_1 + 0x28) = 0;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    FUN_001ad0fc(param_1);
-    break;
-  case 9:
-    if (param_3 == 0) {
-      temp_v2 = 0x42f00000;
-    }
-    else {
-      temp_v2 = VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    *(unsigned int *)(param_1 + 0x74) = temp_v2;
-    *(unsigned int *)(param_1 + 0x28) = 0x3f800000;
-    *(unsigned char *)(param_1 + 0x30) = 1;
-    *(unsigned int *)(param_1 + 0x2c) = 0;
-    FUN_001ad0fc(param_1);
-  }
-  if ((((*(char *)(param_1 + 0x30) != '\0') && (*(int *)(param_1 + 0xc) == 0)) &&
-      (*(int *)(param_1 + 0x14) == -1)) && (*(int *)(param_1 + 4) != 0)) {
-    temp_v0 = dataTable19FindAddonWord(*(int *)(param_1 + 4),1);
-    uiSpriteReplaceTextureEntry(param_1,*(unsigned short *)(temp_v0 + 2),0xffffffff);
-    return;
-  }
-  return;
 }
 
-} /* extern "C" */
+}

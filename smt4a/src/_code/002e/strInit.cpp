@@ -11,14 +11,14 @@ extern u8 DAT_0055af54;
 
 extern Object *_ZN9Obj5593b8C1Ev(void);
 extern u32 FUN_00121234(void);
-extern void FUN_002ecad4(Object *obj, u32 value, s32 arg);
+extern void _ZN9Obj55af4c4initEjh(Object *obj, u32 value, s32 arg);
 
 Object *strInit(void)
 {
     Object *obj = _ZN9Obj5593b8C1Ev();
 
     obj->vtbl = &DAT_0055af54;
-    FUN_002ecad4(obj, FUN_00121234(), 0);
+    _ZN9Obj55af4c4initEjh(obj, FUN_00121234(), 0);
     return obj;
 }
 

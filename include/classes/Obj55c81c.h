@@ -28,7 +28,9 @@ public:
     /* 0x44 */ f32 unk44[3];
     /* 0x50 */ f32 scale[3];
     /* 0x5C */ s32 frames;
-    /* 0x60 */ u8 unk60[0x14];
+    /* 0x60 */ u8 unk60[0xc];
+    /* 0x6C */ u32 unk6c;
+    /* 0x70 */ u8 unk70[4];
     /* 0x74 */ Obj55c81cChild *child;
     /* 0x78 */ u32 unk78;
     /* 0x7C */ u32 unk7c;
@@ -39,4 +41,7 @@ public:
     /* 0x91 */ u8 unk91[3];
     /* 0x94 */ u8 unk94;
 };
+
+typedef char Obj55c81cSizeCheck[sizeof(Obj55c81c) == 0x98 ? 1 : -1];
+
 #endif

@@ -1,109 +1,73 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ca878` (_code @ 0x2ca878, 0x268 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: counter badge draw; call sequence follows retail, float/int scheduling and the saved-register set are not compared */
+#include "common.h"
+
+/* A placed sprite frame: offset and a pointer to its size words. */
+struct UiSpriteFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ s16 *size;
+};
 
 extern "C" {
+extern void *g_renderCtx;
 
-int textFormatBuffer(...);
-int FUN_00162790(...);
-int efctSetSpeed(void);
-int FUN_00180310(...);
-int FUN_0018152c(int, int, int, int, int);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
-int FUN_0018408c(...);
-int drawSetColorFromRGBA8(...);
-int renderCtxCalculateStereoParallax(unsigned int);
-int jobGetScalarValue(void);
-int VectorSignedToFloat(...);
+f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
+f32 jobGetScalarValue(void);
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
+UiSpriteFrame *FUN_001834a4(u32 bank, u32 sprite);
+u32 FUN_00180114(u32 id);
+void textFormatBuffer(char *buffer, const char *format, ...);
+void FUN_0018152c(u32 id, s32 x, s32 y, u32 flags, u32 arg);
+void drawSetColorFromRGBA8(u32 color);
+void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
+void FUN_00183bb0(void);
+s32 FUN_0018408c(const char *text, s32 mode);
+void FUN_00162790(u32 layer, u32 flags, const char *text, f32 x, f32 y);
 
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int spB8; /* 0xb8: local_b8 */
-    unsigned int spBC; /* 0xbc: local_bc */
-    unsigned int spC0; /* 0xc0: local_c0 */
-} param_3_stack;
+#define BADGE_STEREO_SCALE 0.26f
+#define BADGE_BANK 0x14
+#define BADGE_FLAGS 0xBF
 
-extern unsigned char LAB_002caaec; /* 0x2caaec */
-extern unsigned char LAB_002cab0c; /* 0x2cab0c */
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00180114(unsigned int);
-/* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_0018152c. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: jobGetScalarValue. */
-
-
-void FUN_002ca878(unsigned int param_1,int param_2,int param_3)
-
+/* Draws a count badge at (x, y): the four frame sprites, the label and the digits centred in it. */
+void FUN_002ca878(f32 speed, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  float temp_v6;
-  unsigned char temp_v7 [64];
-  unsigned char temp_v8 [80];
-  unsigned long long temp_v9;
-  
-  temp_v6 = 0.26f;
-  temp_v9 = 0x3e851eb8;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  jobGetScalarValue();
-  efctSetSpeed();
-  temp_v3 = 0;
-  do {
-    FUN_001835b4(2,0x14,temp_v3 + 0xc18,param_2 + (int)temp_v6,param_3,0xbf);
-    temp_v5 = (float)temp_v9;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 4);
-  temp_v2 = FUN_00180114(799);
-  textFormatBuffer(temp_v7,&LAB_002caaec,temp_v2);
-  temp_v6 = temp_v5;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v3 = FUN_001834a4(0x14,0xc1c);
-  temp_v4 = (int)*(short *)(temp_v3 + 8) + param_2 + (int)temp_v5;
-  temp_v3 = *(short *)(temp_v3 + 10) + param_3;
-  FUN_001835b4(2,0x14,0xc13,temp_v4,temp_v3,0xbf);
-  FUN_001835b4(2,0x14,0xbba,temp_v4,temp_v3,0xbf);
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  temp_v3 = FUN_001834a4(0x14,0xc1e);
-  temp_v4 = param_2 + (int)temp_v6;
-  FUN_0018152c(799,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + param_3,0xc4,0);
-  temp_v3 = FUN_001834a4(0x14,0xc1d);
-  FUN_001835b4(2,0x14,0xbc2,*(short *)(temp_v3 + 8) + temp_v4,*(short *)(temp_v3 + 10) + param_3,0xbf);
-  textFormatBuffer(temp_v8,&LAB_002cab0c,99);
-  temp_v3 = FUN_001834a4(0x14,0xc22);
-  temp_v0 = *(short *)(temp_v3 + 8);
-  temp_v1 = *(short *)(temp_v3 + 10);
-  drawSetColorFromRGBA8(0xffffffff);
-  FUN_00180310(0,temp_v4 + temp_v0,temp_v1 + param_3,1,2,0xce,temp_v8);
-  FUN_00183bb0();
-  temp_v3 = FUN_001834a4(0x14,0xc1f);
-  puVar4 = temp_v7;
-  FUN_0018408c(puVar4,2);
-  temp_v4 = (int)*(short *)(temp_v3 + 8) + ((int)**(short **)(temp_v3 + 0xc) - (int)puVar4) / 2 + param_2
-          + (int)temp_v6;
-  VectorSignedToFloat(*(short *)(temp_v3 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,0xff,temp_v7,temp_v4);
-  efctSetSpeed();
-  return;
+    char label[64];
+    char digits[64];
+
+    s32 stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, BADGE_STEREO_SCALE);
+    f32 savedSpeed = jobGetScalarValue();
+    efctSetSpeed(speed);
+    s32 baseX = x + stereo;
+    for (s32 i = 0; i < 4; i++)
+        FUN_001835b4(2, BADGE_BANK, 0xC18 + i, baseX, y, BADGE_FLAGS);
+
+    textFormatBuffer(label, "%s", FUN_00180114(0x31F));
+    stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, BADGE_STEREO_SCALE);
+    UiSpriteFrame *frame = FUN_001834a4(BADGE_BANK, 0xC1C);
+    s32 frameX = frame->x + x + stereo;
+    s32 frameY = frame->y + y;
+    FUN_001835b4(2, BADGE_BANK, 0xC13, frameX, frameY, BADGE_FLAGS);
+    FUN_001835b4(2, BADGE_BANK, 0xBBA, frameX, frameY, BADGE_FLAGS);
+
+    stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, BADGE_STEREO_SCALE);
+    frame = FUN_001834a4(BADGE_BANK, 0xC1E);
+    s32 iconX = x + stereo;
+    FUN_0018152c(0x31F, frame->x + iconX, frame->y + y, 0xC4, 0);
+    frame = FUN_001834a4(BADGE_BANK, 0xC1D);
+    FUN_001835b4(2, BADGE_BANK, 0xBC2, frame->x + iconX, frame->y + y, BADGE_FLAGS);
+
+    textFormatBuffer(digits, "%d", 99);
+    frame = FUN_001834a4(BADGE_BANK, 0xC22);
+    drawSetColorFromRGBA8(0xFFFFFFFF);
+    FUN_00180310(0, iconX + frame->x, frame->y + y, 1, 2, 0xCE, digits);
+    FUN_00183bb0();
+
+    frame = FUN_001834a4(BADGE_BANK, 0xC1F);
+    s32 labelX = frame->x + (frame->size[0] - FUN_0018408c(label, 2)) / 2 + x + stereo;
+    FUN_00162790(2, 0xFF, label, (f32)labelX, (f32)(frame->y + y));
+    efctSetSpeed(savedSpeed);
 }
 
 } /* extern "C" */

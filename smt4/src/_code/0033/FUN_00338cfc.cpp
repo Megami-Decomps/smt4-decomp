@@ -1,175 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338cfc` (_code @ 0x338cfc, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (171 vs 165 rows); retail keeps more values in callee-saved registers across the power loops */
+#include "common.h"
+
+// Battle main state: only the fields the escape roll uses.
+struct BattleMain {
+    u8 unk0000[0xc8];
+    u32 enemyIds[6];        // 0xc8: id word, low halfword is the demon id
+    u32 rules;              // 0xe0: bit 16 = escape always fails, bit 17 = escape disabled
+    u8 unk00e4[0x14c - 0xe4];
+    s8 escapeRule;          // 0x14c: 1 = needs a race 0x27 ally, 2 = always fails, 3 = always succeeds
+    u8 unk14d[0x44a0 - 0x14d];
+    u32 flags;              // 0x44a0: bit 1/2 = escape failed, bit 3 = no eligible ally
+    u8 unk44a4[4];
+    u32 flags2;             // 0x44a8
+    u32 flags3;             // 0x44ac
+};
+
+struct PartyMember {
+    u8 unk00[0x18];
+    s16 power0;             // 0x18
+    s16 power1;             // 0x1a
+    u8 unk1c[0x44 - 0x1c];
+    u16 status;             // 0x44
+};
+
+struct DevilRecordRace {
+    u8 unk00[2];
+    u8 race;                // 0x02
+};
+
+struct EnemyRecord {
+    u8 unk00[0x12];
+    u16 power0;             // 0x12
+    u16 power1;             // 0x14
+};
+
+struct PlayerData {
+    u8 unk00[0x26];
+    s16 power0;             // 0x26
+    s16 power1;             // 0x28
+    u8 unk2a[0x72 - 0x2a];
+    u16 flags;              // 0x72
+};
+
+struct EscapeTable {
+    u8 unk00[0x1c];
+    f32 rate;               // 0x1c
+};
+
+struct SlotTable {
+    u8 unk0000[0x9108];
+    s8 partyActive[3];      // 0x9108
+};
 
 extern "C" {
 
-int dataTable00FindById(void);
-int devilGetRecord(void);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(int, int);
+EnemyRecord* dataTable00FindById(u32 id);
+DevilRecordRace* devilGetRecord(u32 id);
+s32 randRange(s32 range);
+PartyMember* saveResolvePartySlot(s32 index);
+EscapeTable* FUN_0023ea94(void);
+s32 FUN_002973ec(void);
+SlotTable* gameGetSlotTable(void);
+PlayerData* gameGetPlayerData(void);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_0023ea94(void);
-extern int randRange(unsigned int);
-extern int saveResolvePartySlot(int);
-extern int FUN_002973ec(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable00FindById. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: devilGetRecord. */
-
-
-void FUN_00338cfc(int param_1,int param_2)
-
+// Rolls the escape attempt: sets bits 1-2 of the battle flags when the escape fails.
+void FUN_00338cfc(BattleMain* battle, s32 sureEscape)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr; 5 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  short temp_v2;
-  unsigned char temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int *puVar9;
-  unsigned int in_fpscr;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  
-  puVar9 = (unsigned int *)(param_1 + 0x44a0);
-  temp_v4 = *puVar9;
-  temp_v5 = temp_v4 & 0xfffffff9;
-  *puVar9 = temp_v5;
-  if ((*(unsigned int *)(param_1 + 0x44ac) & 0x20) != 0) {
-    return;
-  }
-  if ((*(unsigned int *)(param_1 + 0x44a8) & 0x4000) != 0) {
-    return;
-  }
-  if ((*(unsigned int *)(param_1 + 0x44a8) & 0x8000) != 0) {
-    *puVar9 = temp_v5 | 6;
-    return;
-  }
-  if ((temp_v4 & 0x200) != 0) {
-    return;
-  }
-  temp_v7 = 0;
-  if ((*(unsigned int *)(param_1 + 0xe0) & 0x10000) != 0) {
-    *puVar9 = temp_v5 | 6;
-    return;
-  }
-  if ((*(unsigned int *)(param_1 + 0xe0) & 0x20000) != 0) {
-    return;
-  }
-  if (param_2 != 0) {
-    temp_v7 = randRange(99);
-    if (temp_v7 < 0x46) {
-      return;
+    u32 flags = battle->flags;
+    battle->flags = flags & ~6u;
+    if ((battle->flags3 & 0x20) != 0) return;
+    if ((battle->flags2 & 0x4000) != 0) return;
+    if ((battle->flags2 & 0x8000) != 0) {
+        battle->flags |= 6;
+        return;
     }
-  }
-  else {
-    temp_v0 = *(char *)(param_1 + 0x14c);
-    if (temp_v0 == '\x01') {
-      do {
-        temp_v4 = *(unsigned int *)(param_1 + temp_v7 * 4 + 200);
-        if (temp_v4 != 0) {
-          temp_v4 = temp_v4 & 0xffff;
-          devilGetRecord();
-          if ((temp_v4 != 0) && (*(char *)(temp_v4 + 2) == '\'')) goto LAB_00338da0;
+    if ((flags & 0x200) != 0) return;
+    if ((battle->rules & 0x10000) != 0) {
+        battle->flags |= 6;
+        return;
+    }
+    if ((battle->rules & 0x20000) != 0) return;
+
+    if (sureEscape != 0) {
+        if (randRange(99) < 0x46) return;
+    } else {
+        if (battle->escapeRule == 1) {
+            s32 i = 0;
+            for (; i < 6; i++) {
+                u32 id = battle->enemyIds[i];
+                if (id != 0 && devilGetRecord(id & 0xffff)->race == 0x27) break;
+            }
+            if (i >= 6) {
+                battle->flags |= 8;
+                return;
+            }
+        } else if (battle->escapeRule == 2) {
+            battle->flags |= 6;
+            return;
+        } else if (battle->escapeRule == 3) {
+            return;
         }
-        temp_v7 = temp_v7 + 1;
-      } while (temp_v7 < 6);
-      temp_v4 = *puVar9 | 8;
-      *puVar9 = temp_v4;
-      return;
-    }
-    if (temp_v0 == '\x02') {
-      *puVar9 = temp_v5 | 6;
-      return;
-    }
-    if (temp_v0 == '\x03') {
-      return;
-    }
-LAB_00338da0:
-    temp_v9 = 0.0f;
-    temp_v10 = temp_v9;
-    temp_v7 = gameGetPlayerData();
-    if ((*(unsigned short *)(temp_v7 + 0x72) & 2) == 0) {
-      temp_v7 = gameGetPlayerData();
-      temp_v2 = *(short *)(temp_v7 + 0x26);
-      temp_v7 = gameGetPlayerData();
-      temp_v9 = (float)VectorSignedToFloat((int)*(short *)(temp_v7 + 0x28) + (int)temp_v2,
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-    }
-    temp_v7 = 0;
-    do {
-      temp_v6 = gameGetSlotTable();
-      if (-1 < *(char *)(temp_v6 + temp_v7 + 0x9108)) {
-        temp_v6 = saveResolvePartySlot(temp_v7);
-        temp_v1 = *(unsigned short *)(temp_v6 + 0x44);
-        if (((temp_v1 & 2) == 0 && (temp_v1 & 0x400) == 0) && (temp_v1 & 4) == 0) {
-          temp_v6 = (int)*(short *)(temp_v6 + 0x1a) + (int)*(short *)(temp_v6 + 0x18);
-          temp_v8 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v9) << 0x1f) |
-                  ((unsigned int)(temp_v8 == temp_v9) << 0x1e);
-          in_fpscr = temp_v4 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v9 != temp_v9)) << 0x1c);
-          temp_v3 = (unsigned char)(temp_v4 >> 0x18);
-          if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-            temp_v9 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
+
+        f32 allyPower = 0.0f;
+        f32 enemyPower = 0.0f;
+        if ((gameGetPlayerData()->flags & 2) == 0) {
+            allyPower = (f32)(gameGetPlayerData()->power1 + gameGetPlayerData()->power0);
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < 3);
-    temp_v7 = 0;
-    do {
-      temp_v4 = *(unsigned int *)(param_1 + temp_v7 * 4 + 200);
-      if (temp_v4 != 0) {
-        temp_v4 = temp_v4 & 0xffff;
-        dataTable00FindById();
-        if (temp_v4 != 0) {
-          temp_v6 = (unsigned int)*(unsigned short *)(temp_v4 + 0x14) + (unsigned int)*(unsigned short *)(temp_v4 + 0x12);
-          temp_v8 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v8 < temp_v10) << 0x1f) |
-                  ((unsigned int)(temp_v8 == temp_v10) << 0x1e);
-          in_fpscr = temp_v4 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v10 != temp_v10)) << 0x1c);
-          temp_v3 = (unsigned char)(temp_v4 >> 0x18);
-          if (!(unsigned char)((temp_v3 >> 6) & 1) && temp_v3 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-            temp_v10 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
+        for (s32 i = 0; i < 3; i++) {
+            if (gameGetSlotTable()->partyActive[i] >= 0) {
+                PartyMember* member = saveResolvePartySlot(i);
+                if ((member->status & 2) == 0 && (member->status & 0x400) == 0 && (member->status & 4) == 0) {
+                    s32 power = member->power1 + member->power0;
+                    if ((f32)power > allyPower) allyPower = (f32)power;
+                }
+            }
         }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < 6);
-    temp_v7 = FUN_0023ea94();
-    temp_v10 = (float)VectorSignedToFloat((int)((temp_v9 - temp_v10) * 0.2f) + 0x2d,
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (int)(*(float *)(temp_v7 + 0x1c) * temp_v10);
-    temp_v7 = FUN_002973ec();
-    if (temp_v7 != 0) {
-      temp_v7 = FUN_002973ec();
-      if (temp_v7 == 1) {
-        temp_v6 = 0x50;
-      }
+        for (s32 i = 0; i < 6; i++) {
+            u32 id = battle->enemyIds[i];
+            if (id != 0) {
+                EnemyRecord* record = dataTable00FindById(id & 0xffff);
+                if (record != NULL) {
+                    u32 power = record->power1 + record->power0;
+                    if ((f32)power > enemyPower) enemyPower = (f32)power;
+                }
+            }
+        }
+        s32 chance = (s32)(FUN_0023ea94()->rate * (f32)((s32)((allyPower - enemyPower) * 0.2f) + 0x2d));
+        if (FUN_002973ec() != 0) {
+            if (FUN_002973ec() == 1) chance = 0x50;
+        } else if (chance < 0x1e) {
+            chance = 0x1e;
+        } else if (chance >= 0x47) {
+            chance = 0x46;
+        }
+        if (randRange(100) <= chance) return;
     }
-    else if (temp_v6 < 0x1e) {
-      temp_v6 = 0x1e;
-    }
-    else if (temp_v6 >= 0x47) {
-      temp_v6 = 0x46;
-    }
-    temp_v7 = randRange(100);
-    if (temp_v7 <= temp_v6) {
-      return;
-    }
-  }
-  temp_v4 = *puVar9 | 6;
-  *puVar9 = temp_v4;
-  return;
+    battle->flags |= 6;
 }
 
 } /* extern "C" */

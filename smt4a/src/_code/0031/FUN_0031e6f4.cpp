@@ -1,189 +1,151 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031e6f4` (_code @ 0x31e6f4, 0x3b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: adds a battle's rewards to the result tally (money, item drops by id, experience for the party and for each demon slot with the reduced share for non-participants); written from the decompilation, the float/int share arithmetic and slot lookups are approximated and not compared with retail */
+#include "common.h"
+
+#define REWARD_ITEM_SLOTS 6
+#define REWARD_DEMON_SLOTS 0x18
+#define REWARD_PARTY_SLOTS 0xC
+#define REWARD_PLAYER_BIT_NO_EXP_A 1
+#define REWARD_PLAYER_BIT_NO_EXP_B 10
+#define REWARD_RESERVE_SHARE 0.3f
+#define REWARD_BENCH_SHARE 0.8f
+#define REWARD_SKILL_SCALE 0.01f
+
+struct BattleRewards {
+    /* 0x00 */ s32 experience;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 money;
+    /* 0x0C */ s32 itemIds[REWARD_ITEM_SLOTS];
+    /* 0x24 */ s32 itemCounts[REWARD_ITEM_SLOTS];
+};
+
+struct BattleTally {
+    /* 0x0000 */ u8 unk0000[0x43F0];
+    /* 0x43F0 */ s32 itemIds[REWARD_ITEM_SLOTS];
+    /* 0x4408 */ s32 itemCounts[REWARD_ITEM_SLOTS];
+    /* 0x4420 */ u8 unk4420[8];
+    /* 0x4428 */ s32 money;
+    /* 0x442C */ u8 unk442C[0x3444];
+    /* 0x7870 */ struct { s32 experience; u8 unk[0x24]; } partyExperience[1];
+};
+
+struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x1C88];
+    /* 0x1C88 */ s8 slotIds[REWARD_DEMON_SLOTS];
+    /* 0x1CA0 */ s8 leaders[3];
+};
+
+struct DemonRecord {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u16 skills[8];
+    /* 0x44 */ u8 unk44[0x20];
+    /* 0x64 */ u16 growthType;
+    /* 0x66 */ u8 experienceSlot;
+};
+
+struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x2F];
+    /* 0x2F */ u8 bonus;
+};
 
 extern "C" {
+extern u8 g_engineCleanupOwner[];
 
-int gameGetPlayerData(void);
-int dataTable41FindById(void);
-int FUN_003e503c(void);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
+SlotTable *gameGetSlotTable(void);
+void gameGetPlayerData(void);
+DemonRecord *gameGetSlotRecord(void);
+s32 playerHasFlagBit(u32 bit);
+s32 FUN_0022fd80(s32 experience, u32 flag);
+SkillRecord *dataTable41FindById(u32 id);
+s32 bitsAt60Test(DemonRecord *record, u32 bit);
+s32 dataTable9Type3GetClamped(u16 type, u32 flag);
+DemonRecord *FUN_003e503c(u32 slot);
+s32 actorIsActive(void);
+s32 partySlotMatchesSelected(u32 slot);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: gameGetPlayerData. */
-extern int gameGetSlotRecord(void);
-extern int gameGetSlotTable(void);
-extern int FUN_0022fd80(int, unsigned int);
-/* Supplied declaration required: dataTable41FindById. */
-extern int playerHasFlagBit(unsigned int);
-extern int actorIsActive(void);
-extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
-extern int bitsAt60Test(int, unsigned int);
-extern int dataTable9Type3GetClamped(unsigned short, unsigned int);
-
-
-/* WARNING: Removing unreachable block (ram,0x0031e734) */
-/* WARNING: Removing unreachable block (ram,0x0031e740) */
-/* WARNING: Removing unreachable block (ram,0x0031e744) */
-
-void FUN_0031e6f4(int *param_1)
-
+/* Experience share of `base` for the slot's growth type, at least 1 when there is any base. */
+static __inline u32 rewardShare(u32 base, u16 growthType)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  unsigned int in_fpscr;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  unsigned long long temp_v15;
-  unsigned long long temp_v16;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4));
-  temp_v2 = gameGetSlotTable();
-  gameGetPlayerData();
-  temp_v10 = param_1[2];
-  temp_v11 = 0;
-  *(int *)(temp_v1 + 0x4428) = *(int *)(temp_v1 + 0x4428) + temp_v10;
-  do {
-    temp_v7 = param_1[temp_v11 + 3];
-    if (temp_v7 != 0) {
-      temp_v10 = param_1[temp_v11 + 9];
+    u32 share = (base * (u32)dataTable9Type3GetClamped(growthType, 0)) / 100;
+    if (share == 0 && base != 0)
+        share = 1;
+    return share;
+}
+
+void FUN_0031e6f4(BattleRewards *rewards)
+{
+    BattleTally *tally = *reinterpret_cast<BattleTally **>(g_engineCleanupOwner + 4);
+    SlotTable *slots = gameGetSlotTable();
+    gameGetPlayerData();
+    tally->money += rewards->money;
+
+    for (s32 i = 0; i < REWARD_ITEM_SLOTS; i++) {
+        s32 id = rewards->itemIds[i];
+        s32 count = rewards->itemCounts[i];
+        if (id == 0 || count == 0)
+            continue;
+        for (s32 j = 0; j < REWARD_ITEM_SLOTS; j++) {
+            if (tally->itemIds[j] == id) {
+                tally->itemCounts[j] += count;
+                break;
+            }
+            if (tally->itemIds[j] == 0) {
+                tally->itemIds[j] = id;
+                tally->itemCounts[j] = count;
+                break;
+            }
+        }
     }
-    if (temp_v7 != 0 && temp_v10 != 0) {
-      temp_v3 = 0;
-      do {
-        temp_v8 = temp_v1 + temp_v3 * 4;
-        temp_v9 = *(int *)(temp_v8 + 0x43f0);
-        if (temp_v9 == temp_v7) {
-          piVar5 = (int *)(temp_v1 + temp_v3 * 4 + 0x4408);
-          *piVar5 = *piVar5 + temp_v10;
-          break;
+
+    s32 experience = rewards->experience;
+    if (playerHasFlagBit(REWARD_PLAYER_BIT_NO_EXP_A) == 0 && playerHasFlagBit(REWARD_PLAYER_BIT_NO_EXP_B) == 0)
+        tally->partyExperience[0].experience += FUN_0022fd80(experience, 0);
+
+    for (s32 slot = 0; slot < REWARD_DEMON_SLOTS; slot++) {
+        if (slots->slotIds[slot] < 0)
+            continue;
+        DemonRecord *record = gameGetSlotRecord();
+        if (bitsAt60Test(record, 1) != 0 || bitsAt60Test(record, 10) != 0)
+            continue;
+
+        bool leader = slots->leaders[0] == slots->slotIds[slot] || slots->leaders[1] == slots->slotIds[slot]
+                      || slots->leaders[2] == slots->slotIds[slot];
+        DemonRecord *current = gameGetSlotRecord();
+        f32 skillScale = 1.0f;
+        for (s32 s = 0; s < 8; s++) {
+            u32 skill = current->skills[s];
+            if (skill != 0) {
+                SkillRecord *skillRecord = dataTable41FindById(skill);
+                if (skillRecord != NULL && skillRecord->bonus != 0)
+                    skillScale = (f32)skillRecord->bonus * REWARD_SKILL_SCALE * skillScale;
+            }
         }
-        if (temp_v9 == 0) {
-          *(int *)(temp_v1 + temp_v3 * 4 + 0x43f0) = temp_v7;
-          *(int *)(temp_v8 + 0x4408) = temp_v10;
-          break;
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 6);
+        u32 base = (u32)(experience * (s32)(skillScale * 100.0f)) / 100;
+        u32 share = rewardShare(base, current->growthType);
+        if (!leader)
+            share = (u32)((f32)share * REWARD_RESERVE_SHARE);
+        if ((s32)share < 1 && experience != 0)
+            share = 1;
+        *reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(tally) + record->experienceSlot * 0x28 + 0x7898) += share;
     }
-    temp_v11 = temp_v11 + 1;
-    if (temp_v11 >= 6) {
-      temp_v11 = *param_1;
-      temp_v10 = playerHasFlagBit(1);
-      if ((temp_v10 == 0) && (temp_v10 = playerHasFlagBit(10), temp_v10 == 0)) {
-        temp_v10 = FUN_0022fd80(temp_v11,0);
-        *(int *)(temp_v1 + 0x7870) = temp_v10 + *(int *)(temp_v1 + 0x7870);
-      }
-      temp_v14 = 0.01f;
-      temp_v15 = 0x42c800003f800000;
-      temp_v16 = 0x3e99999a;
-      temp_v10 = 0;
-      do {
-        if (-1 < *(char *)(temp_v2 + temp_v10 + 0x1c88)) {
-          temp_v7 = gameGetSlotRecord();
-          temp_v3 = bitsAt60Test(temp_v7,1);
-          if ((temp_v3 == 0) && (temp_v3 = bitsAt60Test(temp_v7,10), temp_v3 == 0)) {
-            temp_v6 = 0;
-            temp_v0 = *(char *)(temp_v2 + temp_v10 + 0x1c88);
-            if ((*(char *)(temp_v2 + 0x1ca0) == temp_v0) ||
-               ((*(char *)(temp_v2 + 0x1ca1) == temp_v0 || (*(char *)(temp_v2 + 0x1ca2) == temp_v0)))) {
-              temp_v6 = 1;
-            }
-            temp_v3 = gameGetSlotRecord();
-            temp_v13 = (float)temp_v15;
-            temp_v8 = 0;
-            do {
-              temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x34 + temp_v8 * 2);
-              if (temp_v4 != 0) {
-                dataTable41FindById();
-                temp_v5 = 0;
-                if (temp_v4 != 0) {
-                  temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x2f);
-                }
-                if (temp_v4 != 0 && temp_v5 != 0) {
-                  temp_v12 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  temp_v13 = temp_v12 * temp_v14 * temp_v13;
-                }
-              }
-              temp_v8 = temp_v8 + 1;
-            } while (temp_v8 < 8);
-            temp_v4 = (unsigned int)(temp_v11 * (int)(temp_v13 * (float)((unsigned long long)temp_v15 >> 0x20))) / 100;
-            temp_v3 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v3 + 100),0);
-            temp_v5 = (temp_v4 * temp_v3) / 100;
-            if ((temp_v5 == 0) && (temp_v4 != 0)) {
-              temp_v5 = 1;
-            }
-            temp_v13 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-            if (!temp_v6) {
-              temp_v5 = VectorFloatToUnsigned(temp_v13 * (float)temp_v16,3);
-            }
-            if (((int)temp_v5 < 1) && (temp_v11 != 0)) {
-              temp_v5 = 1;
-            }
-            piVar5 = (int *)(temp_v1 + (unsigned int)*(unsigned char *)(temp_v7 + 0x66) * 0x28 + 0x7898);
-            *piVar5 = temp_v5 + *piVar5;
-          }
-        }
-        temp_v10 = temp_v10 + 1;
-      } while (temp_v10 < 0x18);
-      temp_v15 = 0x3f4ccccd;
-      temp_v4 = 0;
-      do {
-        temp_v5 = temp_v4 & 0xffff;
-        FUN_003e503c();
-        temp_v10 = actorIsActive();
-        if (temp_v10 != 0) {
-          temp_v10 = partySlotMatchesSelected(temp_v5);
-          temp_v2 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v5 + 100),0);
-          temp_v5 = (unsigned int)(temp_v11 * temp_v2) / 100;
-          if ((temp_v5 == 0) && (temp_v11 != 0)) {
-            temp_v5 = 1;
-          }
-          temp_v14 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-          if (temp_v10 == 0) {
-            temp_v5 = VectorFloatToUnsigned(temp_v14 * (float)temp_v15,3);
-          }
-          if (((int)temp_v5 < 1) && (temp_v11 != 0)) {
-            temp_v5 = 1;
-          }
-          temp_v10 = temp_v4 + 0x19;
-          if (temp_v10 >= 0x25) {
-            temp_v10 = 0x24;
-          }
-          piVar5 = (int *)(temp_v1 + temp_v10 * 0x28 + 0x7870);
-          *piVar5 = temp_v5 + *piVar5;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while ((int)temp_v4 < 0xc);
-      return;
+
+    for (u32 slot = 0; (s32)slot < REWARD_PARTY_SLOTS; slot++) {
+        u32 index = slot & 0xFFFF;
+        DemonRecord *partyRecord = FUN_003e503c(index);
+        if (actorIsActive() == 0)
+            continue;
+        s32 selected = partySlotMatchesSelected(index);
+        u32 share = (u32)(experience * dataTable9Type3GetClamped(partyRecord->growthType, 0)) / 100;
+        if (share == 0 && experience != 0)
+            share = 1;
+        if (selected == 0)
+            share = (u32)((f32)share * REWARD_BENCH_SHARE);
+        if ((s32)share < 1 && experience != 0)
+            share = 1;
+        u32 target = slot + 0x19;
+        if (target >= 0x25)
+            target = 0x24;
+        *reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(tally) + target * 0x28 + 0x7870) += share;
     }
-  } while( 1 );
 }
 
 } /* extern "C" */

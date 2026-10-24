@@ -1,168 +1,134 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00269694` (_code @ 0x269694, 0x3c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: blends a keyframed colour ramp over time and applies the alpha fade envelope (fade-in until one fraction of the span, fade-out after another); written from the decompilation, the float temporaries are stored to the retail scratch globals as the original does but the instruction order and the mode ladder's register use are not compared with retail */
+#include "common.h"
+
+#define RAMP_MODE_TWO_KEY 0
+#define RAMP_MODE_THREE_KEY 1
+#define RAMP_MODE_FOUR_KEY 2
+#define RAMP_BYTE_TO_FLOAT 0.003921569f
+#define RAMP_FLOAT_TO_BYTE 255.0f
+
+struct ColorRamp {
+    /* 0x00 */ s8 mode;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 start;
+    /* 0x08 */ u32 end;
+    /* 0x0C */ u32 middleA;
+    /* 0x10 */ f32 firstKey;      /* fraction of the span where the first key sits */
+    /* 0x14 */ u32 middleB;
+    /* 0x18 */ f32 secondKey;
+};
+
+struct AlphaEnvelope {
+    /* 0x00 */ u32 alpha;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ f32 fadeInEnd;     /* fraction of the span where the fade-in ends */
+    /* 0x0C */ f32 fadeOutStart;  /* fraction of the span where the fade-out starts */
+};
 
 extern "C" {
+extern f32 DAT_004ea91c;
+extern f32 DAT_004ea920;
+extern f32 DAT_004ea924;
+extern f32 DAT_004ea928;
+extern f32 DAT_004ea92c;
+extern f32 DAT_004ea930;
+extern f32 DAT_004ea934;
+extern f32 DAT_004ea938;   /* also holds the blend weight while computing */
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(...);
-int VectorUnsignedToFloat(...);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-
-
-unsigned int FUN_00269694(char *param_1,int *param_2,int param_3,int param_4)
-
+/* Blend weight of `value` between two keys `from`..`to` spans (1.0 when the span is empty). */
+static __inline f32 rampWeight(s32 value, s32 from, s32 to)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int in_fpscr;
-  int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  
-  if (param_4 == 0) {
-    return (*(unsigned int *)(param_1 + 4) & 0xffffff) | (*param_2 << 0x18);
-  }
-  temp_v0 = *param_1;
-  temp_v5 = 1.0f;
-  temp_v9 = (float)VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 != '\x02') {
-        temp_v3 = *(unsigned int *)(param_1 + 4);
-        temp_v2 = *(unsigned int *)(param_1 + 8);
+    f32 span = (f32)(to - from);
+    f32 weight = 1.0f;
+    if (span != 0.0f)
+        weight = (f32)(value - from) / span;
+    return weight;
+}
+
+u32 FUN_00269694(ColorRamp *ramp, AlphaEnvelope *envelope, s32 time, s32 total)
+{
+    if (total == 0)
+        return (ramp->start & 0xFFFFFF) | (envelope->alpha << 24);
+
+    f32 span = (f32)total;
+    u32 from;     /* weighted by 1 - blend */
+    u32 to;       /* weighted by blend */
+    switch (ramp->mode) {
+    case RAMP_MODE_TWO_KEY:
+        from = ramp->start;
+        to = ramp->end;
+        DAT_004ea938 = (f32)time / span;
+        break;
+    case RAMP_MODE_THREE_KEY: {
+        s32 key = (s32)(ramp->firstKey * span);
+        if (key > time) {
+            from = ramp->start;
+            to = ramp->middleA;
+            DAT_004ea938 = (f32)time / (f32)key;
+        } else {
+            to = ramp->end;
+            from = ramp->middleA;
+            DAT_004ea938 = rampWeight(time, key, total);
+        }
+        break;
+    }
+    case RAMP_MODE_FOUR_KEY: {
+        s32 firstKey = (s32)(ramp->firstKey * span);
+        if (firstKey > time) {
+            from = ramp->start;
+            to = ramp->middleA;
+            DAT_004ea938 = (f32)time / (f32)firstKey;
+        } else {
+            s32 secondKey = (s32)(ramp->secondKey * span);
+            if (time < secondKey) {
+                from = ramp->middleA;
+                to = ramp->middleB;
+                DAT_004ea938 = rampWeight(time, firstKey, secondKey);
+            } else {
+                from = ramp->middleB;
+                to = ramp->end;
+                DAT_004ea938 = rampWeight(time, secondKey, total);
+            }
+        }
+        break;
+    }
+    default:
+        from = ramp->start;
+        to = ramp->end;
         DAT_004ea938 = 0.0f;
-      }
-      else {
-        temp_v4 = (int)(*(float *)(param_1 + 0x10) * temp_v9);
-        if (temp_v4 > param_3) {
-          temp_v3 = *(unsigned int *)(param_1 + 4);
-          temp_v2 = *(unsigned int *)(param_1 + 0xc);
-          temp_v10 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v6 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          DAT_004ea938 = temp_v10 / temp_v6;
-        }
-        else {
-          temp_v8 = (int)(*(float *)(param_1 + 0x18) * temp_v9);
-          if (param_3 < temp_v8) {
-            temp_v3 = *(unsigned int *)(param_1 + 0xc);
-            temp_v2 = *(unsigned int *)(param_1 + 0x14);
-            temp_v6 = (float)VectorSignedToFloat(temp_v8 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
-            temp_v1 = (unsigned char)(in_fpscr >> 0x18);
-            temp_v10 = (float)VectorSignedToFloat(param_3 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
-          else {
-            temp_v3 = *(unsigned int *)(param_1 + 0x14);
-            temp_v2 = *(unsigned int *)(param_1 + 8);
-            temp_v6 = (float)VectorSignedToFloat(param_4 - temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-            in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
-            temp_v1 = (unsigned char)(in_fpscr >> 0x18);
-            temp_v10 = (float)VectorSignedToFloat(param_3 - temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-          }
-          DAT_004ea938 = temp_v5;
-          if (!(unsigned char)(temp_v1 >> 6)) {
-            DAT_004ea938 = temp_v10 / temp_v6;
-          }
-        }
-      }
+        break;
     }
-    else {
-      temp_v4 = (int)(*(float *)(param_1 + 0x10) * temp_v9);
-      if (temp_v4 > param_3) {
-        temp_v3 = *(unsigned int *)(param_1 + 4);
-        temp_v2 = *(unsigned int *)(param_1 + 0xc);
-        temp_v10 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v6 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-        DAT_004ea938 = temp_v10 / temp_v6;
-      }
-      else {
-        temp_v2 = *(unsigned int *)(param_1 + 8);
-        temp_v3 = *(unsigned int *)(param_1 + 0xc);
-        temp_v6 = (float)VectorSignedToFloat(param_4 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-        in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v6 == 0.0f) << 0x1e);
-        temp_v1 = (unsigned char)(in_fpscr >> 0x18);
-        temp_v10 = (float)VectorSignedToFloat(param_3 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-        DAT_004ea938 = temp_v5;
-        if (!(unsigned char)(temp_v1 >> 6)) {
-          DAT_004ea938 = temp_v10 / temp_v6;
-        }
-      }
-    }
-  }
-  else {
-    temp_v3 = *(unsigned int *)(param_1 + 4);
-    temp_v2 = *(unsigned int *)(param_1 + 8);
-    temp_v6 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_004ea938 = temp_v6 / temp_v9;
-  }
-  temp_v17 = (float)VectorUnsignedToFloat((temp_v2 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v15 = (float)VectorUnsignedToFloat(temp_v2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v13 = (float)VectorUnsignedToFloat((temp_v2 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v11 = (float)VectorUnsignedToFloat(temp_v2 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v10 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v12 = (float)VectorUnsignedToFloat((temp_v3 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v14 = (float)VectorUnsignedToFloat((temp_v3 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v16 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = 1.0f - DAT_004ea938;
-  DAT_004ea92c = temp_v11 * 0.003921569f * DAT_004ea938;
-  DAT_004ea930 = temp_v13 * 0.003921569f * DAT_004ea938;
-  DAT_004ea934 = temp_v17 * 0.003921569f * DAT_004ea938;
-  DAT_004ea938 = temp_v15 * 0.003921569f * DAT_004ea938;
-  DAT_004ea91c = temp_v10 * 0.003921569f * temp_v6 + DAT_004ea92c;
-  DAT_004ea920 = temp_v12 * 0.003921569f * temp_v6 + DAT_004ea930;
-  DAT_004ea924 = temp_v14 * 0.003921569f * temp_v6 + DAT_004ea934;
-  DAT_004ea928 = temp_v16 * 0.003921569f * temp_v6 + DAT_004ea938;
-  temp_v2 = VectorFloatToUnsigned(DAT_004ea920 * 255.0f,3);
-  VectorFloatToUnsigned(DAT_004ea91c * 255.0f,3);
-  temp_v7 = VectorFloatToUnsigned(DAT_004ea924 * 255.0f,3);
-  temp_v3 = VectorFloatToUnsigned(DAT_004ea928 * 255.0f,3);
-  if (param_3 < (int)((float)param_2[2] * temp_v9)) {
-    temp_v5 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = (float)VectorSignedToFloat((int)((float)param_2[2] * temp_v9),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = temp_v5 / temp_v9;
-  }
-  else if ((int)((float)param_2[3] * temp_v9) < param_3) {
-    temp_v5 = (float)VectorSignedToFloat(param_4 - param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = (float)VectorSignedToFloat(param_4 - (int)((float)param_2[3] * temp_v9),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = temp_v5 / temp_v9;
-  }
-  temp_v9 = (float)VectorUnsignedToFloat(*param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v4 = VectorFloatToUnsigned(temp_v9 * temp_v5,3);
-  return (temp_v3 & 0xff) | ((temp_v2 & 0xff) << 0x10) | ((temp_v7 & 0xff) << 8) | (temp_v4 << 0x18);
+
+    f32 toA = (f32)(to >> 24);
+    f32 toB = (f32)((to & 0xFFFFFF) >> 16);
+    f32 toG = (f32)((to & 0xFFFF) >> 8);
+    f32 toR = (f32)(to & 0xFF);
+    f32 fromA = (f32)(from >> 24);
+    f32 fromB = (f32)((from & 0xFFFFFF) >> 16);
+    f32 fromG = (f32)((from & 0xFFFF) >> 8);
+    f32 fromR = (f32)(from & 0xFF);
+    f32 inverse = 1.0f - DAT_004ea938;
+    DAT_004ea92c = toA * RAMP_BYTE_TO_FLOAT * DAT_004ea938;
+    DAT_004ea930 = toB * RAMP_BYTE_TO_FLOAT * DAT_004ea938;
+    DAT_004ea934 = toG * RAMP_BYTE_TO_FLOAT * DAT_004ea938;
+    DAT_004ea938 = toR * RAMP_BYTE_TO_FLOAT * DAT_004ea938;
+    DAT_004ea91c = fromA * RAMP_BYTE_TO_FLOAT * inverse + DAT_004ea92c;
+    DAT_004ea920 = fromB * RAMP_BYTE_TO_FLOAT * inverse + DAT_004ea930;
+    DAT_004ea924 = fromG * RAMP_BYTE_TO_FLOAT * inverse + DAT_004ea934;
+    DAT_004ea928 = fromR * RAMP_BYTE_TO_FLOAT * inverse + DAT_004ea938;
+    u32 blue = (u32)(DAT_004ea920 * RAMP_FLOAT_TO_BYTE);
+    u32 green = (u32)(DAT_004ea924 * RAMP_FLOAT_TO_BYTE);
+    u32 red = (u32)(DAT_004ea928 * RAMP_FLOAT_TO_BYTE);
+
+    f32 fade = 1.0f;
+    s32 fadeInEnd = (s32)(envelope->fadeInEnd * span);
+    s32 fadeOutStart = (s32)(envelope->fadeOutStart * span);
+    if (time < fadeInEnd)
+        fade = (f32)time / (f32)fadeInEnd;
+    else if (fadeOutStart < time)
+        fade = (f32)(total - time) / (f32)(total - fadeOutStart);
+    u32 alpha = (u32)((f32)envelope->alpha * fade);
+    return (red & 0xFF) | ((blue & 0xFF) << 16) | ((green & 0xFF) << 8) | (alpha << 24);
 }
 
 } /* extern "C" */

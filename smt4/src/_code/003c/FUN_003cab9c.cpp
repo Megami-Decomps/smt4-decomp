@@ -1,155 +1,158 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cab9c` (_code @ 0x3cab9c, 0x2c4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the result 1 in r6 and returns through one shared exit, reads the action kind with ldrsh and dispatches phases 0/1/2/5 through a different branch tree; this build returns from each path and uses ldrh. */
+#include "common.h"
+
+/* The record of a combatant's chosen action: its id is at 0x62. */
+struct TurnRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ s16 id;
+};
+
+/* The actor performing the action: its pending flags (0xFA) and the kind of action (0x14C). */
+struct TurnActor {
+    /* 0x000 */ u8 unk000[0xFA];
+    /* 0x0FA */ u16 flags;
+    /* 0x0FC */ u8 unk0FC[0x50];
+    /* 0x14C */ u16 kind;
+    /* 0x14E */ s16 skill;
+};
+
+struct TurnState {
+    /* 0x0000 */ u8 unk0000[0x84];
+    /* 0x0084 */ s32 actorIndex;
+    /* 0x0088 */ u8 unk0088[0x4418];
+    /* 0x44A0 */ u32 stateFlags;
+};
+
+struct TurnOwner {
+    /* 0x00 */ TurnState *state;
+};
+
+/* The work area of one performed action. */
+struct TurnWork {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u16 unk004;
+    /* 0x006 */ u16 duration;
+    /* 0x008 */ s32 phase;
+    /* 0x00C */ u8 unk00C[0x18];
+    /* 0x024 */ TurnRecord *record;
+    /* 0x028 */ TurnActor *actor;
+    /* 0x02C */ u8 unk02C[0x540];
+    /* 0x56C */ u32 elapsed;
+    /* 0x570 */ u8 unk570[0x24];
+    /* 0x594 */ u32 argument;
+};
+
+/* One script slot of the battle (0xF1C bytes each); the byte at 9 is its command. */
+struct TurnScriptSlot {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 command;
+    /* 0x0A */ u8 unk0A[0xF12];
+};
+
+struct DataTable40Record {
+    /* 0x00 */ u8 unk00[0x45];
+    /* 0x45 */ u8 flag;
+};
 
 extern "C" {
+extern TurnScriptSlot *g_btlScriptUnit;
+extern void *DAT_00435d18;
 
-int btlTargetSetFlag10(int, int, int);
-int slotResetIdle(int, int, int);
-int dataTable40FindById(void);
-int FUN_003da010(int);
-int FUN_003dc504(void);
-int FUN_003dcaac(int, unsigned int);
+s32 objSlotStateIsActiveRange(TurnOwner *owner, s32 slot);
+void slotResetIdle(TurnOwner *owner, s32 slot, u32 value);
+s32 FUN_003dc504(void);
+void FUN_003da010(void *resources);
+s32 FUN_003db7b4(void *resources);
+void FUN_003dcaac(void *resources, u32 value);
+DataTable40Record *dataTable40FindById(s32 id);
+void btlTargetSetFlag10(TurnOwner *owner, s32 targetId, s32 primary);
 
-extern int g_btlScriptUnit; /* 0x43427c */
-extern int DAT_00435d18; /* 0x435d18 */
-
-/* Supplied declaration required: btlTargetSetFlag10. */
-/* Supplied declaration required: slotResetIdle. */
-/* Supplied declaration required: dataTable40FindById. */
-extern int objSlotStateIsActiveRange(int, unsigned int);
-/* Supplied declaration required: FUN_003da010. */
-extern unsigned long long FUN_003db7b4(int);
-/* Supplied declaration required: FUN_003dc504. */
-/* Supplied declaration required: FUN_003dcaac. */
-
-
-unsigned int FUN_003cab9c(int *param_1,unsigned int *param_2)
-
+/* Drives the action's animation phases; returns 1 when the action is over and its script command is set. */
+u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
 {
-/* irregular: 1 goto(s); 7 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned char temp_v2;
-  unsigned int *temp_v3;
-  unsigned int *puVar5;
-  unsigned char temp_v4;
-  unsigned long long temp_v5;
-  
-  temp_v0 = param_2[2];
-  if (temp_v0 == 0) {
-    temp_v1 = objSlotStateIsActiveRange(*param_1,0);
-    if (temp_v1 != 0) {
-      slotResetIdle(*param_1,0,0x1e);
-    }
-    param_2[2] = 1;
-LAB_003cac08:
-    temp_v1 = DAT_00435d18;
-    FUN_003dc504();
-    if (temp_v1 == 0) {
-      return 0;
-    }
-    FUN_003da010(DAT_00435d18);
-    param_2[2] = 2;
-    return 0;
-  }
-  if (temp_v0 == 1) goto LAB_003cac08;
-  if (temp_v0 != 2) {
-    puVar5 = param_2;
-    if (temp_v0 != 5) {
-      return 0;
-    }
-  }
-  else {
-    temp_v5 = FUN_003db7b4(DAT_00435d18);
-    if ((int)temp_v5 == 0) {
-      return 0;
-    }
-    param_2[2] = 5;
-    puVar5 = (unsigned int *)((unsigned long long)temp_v5 >> 0x20);
-    if ((*(unsigned int *)(*param_1 + 0x44a0) & 4) == 0) {
-      FUN_003dcaac(DAT_00435d18,param_2[0x165]);
-      puVar5 = temp_v3;
-    }
-  }
-  puVar3 = (unsigned int *)param_2[0x15b];
-  temp_v4 = puVar3 == (unsigned int *)0x0;
-  if (!temp_v4) {
-    puVar5 = (unsigned int *)(unsigned int)*(unsigned short *)((int)param_2 + 6);
-  }
-  if ((temp_v4 || puVar5 <= puVar3) && (!temp_v4 && puVar3 != puVar5)) {
-    return 0;
-  }
-  switch(*(unsigned short *)(param_2[10] + 0x14c)) {
-  default:
-    if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x10) != 0) {
-      btlTargetSetFlag10(*param_1,(int)*(short *)(param_2[9] + 0x62),0);
-    }
-    return 1;
-  case 1:
-  case 2:
-  case 3:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xc:
-    if (*(short *)(param_2[10] + 0x14c) == 2) {
-      temp_v1 = (int)*(short *)(param_2[10] + 0x14e);
-      dataTable40FindById();
-      if ((temp_v1 != 0) && (*(char *)(temp_v1 + 0x45) != '\0')) {
-        if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
-          temp_v0 = *param_2 | 0x80;
+    switch (work->phase) {
+    case 0:
+        if (objSlotStateIsActiveRange(owner, 0) != 0) {
+            slotResetIdle(owner, 0, 0x1e);
         }
-        else {
-          if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) == 0) {
-            temp_v2 = 0xe;
-            temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-            break;
-          }
-          temp_v0 = *param_2 | 0x1000;
+        work->phase = 1;
+        /* fall through */
+    case 1:
+        FUN_003dc504();
+        if (DAT_00435d18 == 0) {
+            return 0;
         }
-        *param_2 = temp_v0;
-      }
+        FUN_003da010(DAT_00435d18);
+        work->phase = 2;
+        return 0;
+    case 2:
+        if (FUN_003db7b4(DAT_00435d18) == 0) {
+            return 0;
+        }
+        work->phase = 5;
+        if ((owner->state->stateFlags & 4) == 0) {
+            FUN_003dcaac(DAT_00435d18, work->argument);
+        }
+        break;
+    case 5:
+        break;
+    default:
+        return 0;
     }
-    temp_v2 = 0xe;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 4:
-    temp_v2 = 0x14;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 5:
-  case 6:
-  case 0xf:
-  case 0x10:
-  case 0x11:
-    temp_v2 = 0x13;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 7:
-    temp_v2 = 0xf;
-    temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    break;
-  case 0xd:
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 8;
-    if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x10) != 0) {
-      btlTargetSetFlag10(*param_1,(int)*(short *)(param_2[9] + 0x62),0);
+    if (work->elapsed != 0 && work->elapsed > work->duration) {
+        return 0;
+    }
+    u8 command;
+    switch (work->actor->kind) {
+    case 1:
+    case 2:
+    case 3:
+    case 8:
+    case 9:
+    case 10:
+    case 0xb:
+    case 0xc:
+        if (work->actor->kind == 2) {
+            DataTable40Record *skill = dataTable40FindById(work->actor->skill);
+            if (skill != 0 && skill->flag != 0) {
+                if ((owner->state->stateFlags & 0x40) != 0) {
+                    work->flags |= 0x80;
+                } else if ((owner->state->stateFlags & 0x100) != 0) {
+                    work->flags |= 0x1000;
+                }
+            }
+        }
+        command = 0xe;
+        break;
+    case 4:
+        command = 0x14;
+        break;
+    case 5:
+    case 6:
+    case 0xf:
+    case 0x10:
+    case 0x11:
+        command = 0x13;
+        break;
+    case 7:
+        command = 0xf;
+        break;
+    case 0xd:
+        command = 8;
+        break;
+    case 0xe:
+        command = 0x16;
+        break;
+    default:
+        if ((work->actor->flags & 0x10) != 0) {
+            btlTargetSetFlag10(owner, work->record->id, 0);
+        }
+        return 1;
+    }
+    g_btlScriptUnit[owner->state->actorIndex].command = command;
+    if ((work->actor->flags & 0x10) != 0) {
+        btlTargetSetFlag10(owner, work->record->id, 0);
     }
     return 1;
-  case 0xe:
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x16;
-    if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x10) != 0) {
-      btlTargetSetFlag10(*param_1,(int)*(short *)(param_2[9] + 0x62),0);
-    }
-    return 1;
-  }
-  *(unsigned char *)(temp_v1 + 9) = temp_v2;
-  if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x10) != 0) {
-    btlTargetSetFlag10(*param_1,(int)*(short *)(param_2[9] + 0x62),0);
-  }
-  return 1;
 }
-
-} /* extern "C" */
+}

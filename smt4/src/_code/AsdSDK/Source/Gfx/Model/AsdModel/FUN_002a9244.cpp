@@ -9,7 +9,7 @@ int FUN_0015156c(...);
 int FUN_002a55ec(...);
 int modelSelectPrimaryMotion(...);
 int FUN_002a5960(...);
-int FUN_002a5dc4(...);
+int _ZN9Obj42111cC1Ej(...);
 int asdMemoryAlloc(...);
 
 typedef struct fn_002a9244_arg0 fn_002a9244_arg0;
@@ -111,7 +111,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002a55ec. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002a5960. */
-/* Supplied declaration required: FUN_002a5dc4. */
+/* Supplied declaration required: _ZN9Obj42111cC1Ej. */
 extern int *asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 
@@ -265,7 +265,7 @@ void FUN_002a9244(fn_002a9244_arg0 *param_1)
         piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar5 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar5 != (int *)0x0) {
-          FUN_002a5dc4(piVar5,piVar3);
+          _ZN9Obj42111cC1Ej(piVar5,piVar3);
           FUN_002a5960(piVar5,&temp_v6,temp_v7,temp_v8,(int)temp_v9);
           if ((piVar5 != (int *)0x0) &&
              ((**(romwright_code **)(*piVar5 + 0xc))(piVar5,temp_v4), *(int *)&pfVar8->field_0x148 != 0)) {
@@ -334,7 +334,7 @@ void FUN_002a9244(fn_002a9244_arg0 *param_1)
         piVar3 = (int *)asdMemoryGetDefaultAllocator();
         piVar5 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar5 != (int *)0x0) {
-          FUN_002a5dc4(piVar5,piVar3);
+          _ZN9Obj42111cC1Ej(piVar5,piVar3);
           FUN_002a5960(piVar5,&temp_v6,temp_v7,temp_v8,(int)temp_v9);
           if ((piVar5 != (int *)0x0) &&
              ((**(romwright_code **)(*piVar5 + 0xc))(piVar5,temp_v4), pfVar8->field_0x150 != 0)) {

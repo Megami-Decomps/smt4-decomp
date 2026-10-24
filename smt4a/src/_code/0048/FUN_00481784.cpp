@@ -1,164 +1,170 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00481784` (_code @ 0x481784, 0x3b8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: updates a field NPC marker (appears after leaving the trigger range, rises into view, shows its message, then follows the NPC with a height offset based on the lmap view); written from the decompilation, the goto structure is rebuilt as blocks, distSpatial's arguments are not recovered and float/bit comparisons are written as float compares */
+#include "common.h"
+
+#define NPC_FLAG_PENDING 0x01
+#define NPC_FLAG_RISING 0x02
+#define NPC_FLAG_NEAR 0x04
+#define NPC_FLAG_HIDDEN 0x08
+#define NPC_BYTE_FLAG_ACTIVE 0x10
+#define NPC_VISIBLE_BITS 3
+#define NPC_TRIGGER_DISTANCE 300.0f
+#define NPC_RISE_STEP 100.0f
+#define NPC_KIND_FLOATING_A 0
+#define NPC_KIND_FLOATING_B 3
+#define NPC_KIND_GROUND_A 1
+#define NPC_KIND_GROUND_B 2
+
+struct NpcControllerInner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags;
+};
+
+struct NpcController {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ NpcControllerInner *inner;
+};
+
+struct FieldNpc {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 byteFlags;
+    /* 0x0D */ u8 unk0D[0x1F];
+    /* 0x2C */ f32 x;
+    /* 0x30 */ f32 y;
+    /* 0x34 */ f32 z;
+    /* 0x38 */ u8 unk38[0x24];
+    /* 0x5C */ u32 queueCount;
+    /* 0x60 */ u8 unk60[4];
+    /* 0x64 */ u32 messageId;
+    /* 0x68 */ u8 unk68[4];
+    /* 0x6C */ s32 counter;
+    /* 0x70 */ s32 mode;
+    /* 0x74 */ u8 unk74[4];
+    /* 0x78 */ NpcController *controller;
+    /* 0x7C */ u32 flags;
+    /* 0x80 */ u8 unk80[4];
+    /* 0x84 */ u16 limit;
+    /* 0x86 */ u8 unk86[5];
+    /* 0x8B */ u8 kind;
+    /* 0x8C */ u8 unk8C[0xC];
+    /* 0x98 */ f32 offsetX;
+    /* 0x9C */ f32 offsetY;
+    /* 0xA0 */ f32 offsetZ;
+};
+
+struct LmapViewHeight {
+    /* 0x000 */ u8 unk000[0x308];
+    /* 0x308 */ f32 height;
+};
+
+struct NpcGameBlock {
+    /* 0x0000 */ u8 unk0000[0x14E8];
+    /* 0x14E8 */ s32 forceAppear;
+};
 
 extern "C" {
+extern LmapViewHeight *g_lmapView;
+extern s8 DAT_005f161d;
+extern s8 DAT_005f161f;
+extern s32 DAT_005f189c;
 
-int messageShowForKindVariant(unsigned int, int);
-int distSpatial(void);
-int controllerSetDestination(unsigned int, float *);
-int controllerSetPosition(unsigned int);
-int controllerSetRotationEulerDegrees(unsigned int);
+NpcGameBlock *gameFlagsGetBlock(void);
+f32 distSpatial(void);
+void messageShowForKindVariant(u32 message, s32 variant);
+void controllerSetDestination(u32 controller, f32 *destination);
+void controllerSetPosition(u32 controller);
+void controllerSetRotationEulerDegrees(u32 controller);
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern int g_lmapView; /* 0x5806a4 */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f161f; /* 0x5f161f */
-extern int DAT_005f189c; /* 0x5f189c */
-
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: messageShowForKindVariant. */
-/* Supplied declaration required: distSpatial. */
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-
-
-void FUN_00481784(int param_1)
-
+static __inline bool npcKindIsFloating(u8 kind)
 {
-/* irregular: 4 unstructured edge(s); 2 goto(s); 5 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  
-  temp_v1 = gameFlagsGetBlock();
-  if (DAT_005f161d != '\0') {
-    return;
-  }
-  if ((*(int *)(param_1 + 0x70) != 1) && (0 < DAT_005f189c)) {
-    return;
-  }
-  temp_v7 = 100.0f;
-  temp_v6 = 0.0f;
-  if ((*(unsigned int *)(param_1 + 0x7c) & 4) == 0) {
-    if ((*(unsigned int *)(param_1 + 0x7c) & 1) != 0) goto LAB_004818dc;
-    *(unsigned char *)(param_1 + 0xc) = *(unsigned char *)(param_1 + 0xc) | 0x10;
-    if ((*(unsigned int *)(param_1 + 0x7c) & 4) == 0) goto LAB_004818d0;
-  }
-  temp_v4 = *(int *)(param_1 + 0x2c);
-  distSpatial();
-  if (temp_v4 < 0x43960000) {
-    return;
-  }
-  temp_v4 = *(int *)(param_1 + 0x6c) + 1;
-  *(int *)(param_1 + 0x6c) = temp_v4;
-  if (((int)(unsigned int)*(unsigned short *)(param_1 + 0x84) < temp_v4) || (*(int *)(temp_v1 + 0x14e8) == 1)) {
-    temp_v0 = *(char *)(param_1 + 0x8b);
-    if (!(temp_v0 == '\0' || temp_v0 == '\x03')) {
-      if (!(temp_v0 == '\x01' || temp_v0 == '\x02')) {
-        temp_v2 = *(unsigned int *)(param_1 + 0x7c);
-      }
-      else {
-        temp_v1 = *(int *)(*(int *)(param_1 + 0x78) + 4);
-        *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
-        temp_v2 = *(unsigned int *)(param_1 + 0x7c) & 0xfffffff7;
-        *(unsigned int *)(param_1 + 0x7c) = temp_v2;
-      }
-      *(unsigned int *)(param_1 + 0x7c) = (temp_v2 & 0xfffffffb) | 1;
+    return kind == NPC_KIND_FLOATING_A || kind == NPC_KIND_FLOATING_B;
+}
+
+/* Raises the pending marker; returns false while the player is still inside the trigger range. */
+static __inline bool npcRunPending(FieldNpc *npc)
+{
+    if (distSpatial() < NPC_TRIGGER_DISTANCE)
+        return false;
+    npc->offsetY += NPC_RISE_STEP;
+    if (npc->offsetY > 0.0f) {
+        if (npcKindIsFloating(npc->kind))
+            messageShowForKindVariant(npc->messageId, 0);
+        npc->offsetY = 0.0f;
+        npc->flags &= ~NPC_FLAG_PENDING;
     }
-    else {
-      temp_v1 = *(int *)(*(int *)(param_1 + 0x78) + 4);
-      *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
-      temp_v2 = *(unsigned int *)(param_1 + 0x7c) | 8;
-      *(unsigned int *)(param_1 + 0x7c) = temp_v2;
-      *(unsigned int *)(param_1 + 0x7c) = (temp_v2 & 0xfffffffb) | 1;
-    }
-  }
-LAB_004818d0:
-  if ((*(unsigned int *)(param_1 + 0x7c) & 1) != 0) {
-LAB_004818dc:
-    temp_v1 = *(int *)(param_1 + 0x2c);
-    distSpatial();
-    if (temp_v1 < 0x43960000) {
-      return;
-    }
-    temp_v5 = *(float *)(param_1 + 0x9c) + temp_v7;
-    *(float *)(param_1 + 0x9c) = temp_v5;
-    if (temp_v6 < temp_v5) {
-      if (*(char *)(param_1 + 0x8b) == '\0' || *(char *)(param_1 + 0x8b) == '\x03') {
-        messageShowForKindVariant(*(unsigned int *)(param_1 + 100),0);
-      }
-      *(float *)(param_1 + 0x9c) = temp_v6;
-      *(unsigned int *)(param_1 + 0x7c) = *(unsigned int *)(param_1 + 0x7c) & 0xfffffffe;
-    }
-  }
-  if (*(unsigned int *)(param_1 + 0x5c) < 5) {
-    *(float *)(param_1 + 0x9c) = *(float *)(param_1 + 0x9c) - temp_v7;
-    *(unsigned int *)(param_1 + 0x7c) = *(unsigned int *)(param_1 + 0x7c) | 2;
-  }
-  if (*(int *)(param_1 + 0x78) != 0) {
-    temp_v8 = *(float *)(param_1 + 0x2c) + *(float *)(param_1 + 0x98);
-    temp_v9 = *(float *)(param_1 + 0x30) + *(float *)(param_1 + 0x9c);
-    temp_v10 = *(float *)(param_1 + 0x34) + *(float *)(param_1 + 0xa0);
-    if ((int)*(float *)(g_lmapView + 0x308) >= 0x3f666667) {
-      temp_v5 = (*(float *)(g_lmapView + 0x308) - 0.9f) * 10.0f;
-      if ((temp_v6 <= temp_v5) && (temp_v6 = temp_v5, (int)temp_v5 >= 0x3f800001)) {
-        temp_v6 = 1.0f;
-      }
-      temp_v9 = temp_v9 + temp_v6 * temp_v7;
-      temp_v3 = *(unsigned int *)(*(int *)(param_1 + 0x78) + 4);
-      controllerSetDestination(temp_v3,&temp_v8);
-    }
-    else {
-      temp_v3 = *(unsigned int *)(*(int *)(param_1 + 0x78) + 4);
-      controllerSetDestination(temp_v3,&temp_v8);
-    }
-    controllerSetRotationEulerDegrees(temp_v3);
-    controllerSetPosition(*(unsigned int *)(*(int *)(param_1 + 0x78) + 4));
-    temp_v1 = *(int *)(*(int *)(param_1 + 0x78) + 4);
-    if (DAT_005f161d != '\0') {
-      temp_v2 = *(unsigned int *)(temp_v1 + 4) | 3;
-    }
-    else {
-      if (DAT_005f161f != '\0') {
-        temp_v2 = *(unsigned int *)(temp_v1 + 4) | 3;
-        *(unsigned int *)(temp_v1 + 4) = temp_v2;
+    return true;
+}
+
+void FUN_00481784(FieldNpc *npc)
+{
+    NpcGameBlock *block = gameFlagsGetBlock();
+    if (DAT_005f161d != 0)
         return;
-      }
-      if ((*(unsigned int *)(param_1 + 0x7c) & 8) == 0) {
+    if (npc->mode != 1 && DAT_005f189c > 0)
         return;
-      }
-      temp_v2 = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
+
+    if ((npc->flags & NPC_FLAG_NEAR) != 0) {
+        if (distSpatial() < NPC_TRIGGER_DISTANCE)
+            return;
+        npc->counter++;
+        if ((s32)npc->limit < npc->counter || block->forceAppear == 1) {
+            if (npcKindIsFloating(npc->kind)) {
+                npc->controller->inner->flags &= ~NPC_VISIBLE_BITS;
+                npc->flags |= NPC_FLAG_HIDDEN;
+            } else if (npc->kind == NPC_KIND_GROUND_A || npc->kind == NPC_KIND_GROUND_B) {
+                npc->controller->inner->flags |= NPC_VISIBLE_BITS;
+                npc->flags &= ~NPC_FLAG_HIDDEN;
+            }
+            npc->flags = (npc->flags & ~NPC_FLAG_NEAR) | NPC_FLAG_PENDING;
+        }
+        if ((npc->flags & NPC_FLAG_PENDING) != 0 && !npcRunPending(npc))
+            return;
+    } else if ((npc->flags & NPC_FLAG_PENDING) != 0) {
+        if (!npcRunPending(npc))
+            return;
+    } else {
+        npc->byteFlags |= NPC_BYTE_FLAG_ACTIVE;
     }
-    *(unsigned int *)(temp_v1 + 4) = temp_v2;
-    if (DAT_005f161f != '\0') {
-      temp_v2 = *(unsigned int *)(temp_v1 + 4) | 3;
+
+    if (npc->queueCount < 5) {
+        npc->offsetY -= NPC_RISE_STEP;
+        npc->flags |= NPC_FLAG_RISING;
     }
-    else {
-      if ((*(unsigned int *)(param_1 + 0x7c) & 8) == 0) {
+    if (npc->controller == NULL)
         return;
-      }
-      temp_v2 = *(unsigned int *)(temp_v1 + 4) & 0xfffffffc;
+
+    f32 destination[3];
+    destination[0] = npc->x + npc->offsetX;
+    destination[1] = npc->y + npc->offsetY;
+    destination[2] = npc->z + npc->offsetZ;
+    u32 controller = (u32)npc->controller->inner;
+    f32 height = g_lmapView->height;
+    if (height >= 0.9f) {
+        f32 lift = (height - 0.9f) * 10.0f;
+        if (lift < 0.0f)
+            lift = 0.0f;
+        else if (lift > 1.0f)
+            lift = 1.0f;
+        destination[1] += lift * NPC_RISE_STEP;
     }
-    *(unsigned int *)(temp_v1 + 4) = temp_v2;
-    return;
-  }
-  return;
+    controllerSetDestination(controller, destination);
+    controllerSetRotationEulerDegrees(controller);
+    controllerSetPosition((u32)npc->controller->inner);
+
+    NpcControllerInner *inner = npc->controller->inner;
+    if (DAT_005f161d != 0) {
+        inner->flags |= NPC_VISIBLE_BITS;
+    } else if (DAT_005f161f != 0) {
+        inner->flags |= NPC_VISIBLE_BITS;
+        return;
+    } else if ((npc->flags & NPC_FLAG_HIDDEN) != 0) {
+        inner->flags &= ~NPC_VISIBLE_BITS;
+    } else {
+        return;
+    }
+    if (DAT_005f161f != 0)
+        inner->flags |= NPC_VISIBLE_BITS;
+    else if ((npc->flags & NPC_FLAG_HIDDEN) != 0)
+        inner->flags &= ~NPC_VISIBLE_BITS;
 }
 
 } /* extern "C" */

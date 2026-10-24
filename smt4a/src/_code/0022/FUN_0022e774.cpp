@@ -1,118 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022e774` (_code @ 0x22e774, 0x208 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares the final `if (model) statusCameraDestroy()` tail between the script and non-script paths (b to the common test), stores y/z of the lifted position with one vstmia, and keeps the game pointer in r5 with the state base in r7; armcc here duplicates the tail and copies z through an integer register. */
+#include "shard/Shard0033.h"
+#include "status/StatusCamera.h"
+
+class StatusScreenModel {
+public:
+    virtual ~StatusScreenModel();
+};
+
+struct HandleRegistryEntry {
+    /* 0x00 */ u8 unk00[0xC4];
+    /* 0xC4 */ u8 unkC4;
+};
+struct HandleRegistry {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ HandleRegistryEntry *entry;
+};
 
 extern "C" {
+extern ObjBRef g_gameGlobals;
+extern HandleRegistry *g_handleRegistry;
 
-int uiSpriteSelectAnim(int, int);
-int uiSpriteSetKeyframe(...);
-int uiSpriteSetImageKeyframe(int, int, int);
-int resourceOwnerReleaseAndReset(void);
-int gameStateChange(...);
-int statusCameraDestroy(void);
-int FUN_003857b4(int);
-int linkHolderRunAll(unsigned int, int *);
-int resourceOwnerReleaseAll(void);
+s32 lmapSceneGetScript(void);
+void linkHolderRunAll(StatusScreenModel *model, const Vec3 *position);
+void FUN_003857b4(s32 value);
+void resourceOwnerReleaseAll(StatusScreenModel *model);
+void resourceOwnerReleaseAndReset(HandleRegistry *registry);
+s32 lmapMainIsRunning(void);
+void statusCameraDestroy(void);
+void uiSpriteSelectAnim(UiSpriteState *sprite, s32 anim);
+void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 key, s32 arg);
+void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 arg);
+void gameStateChange(s32 state);
 
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} void_stack;
-
-extern int g_handleRegistry; /* 0x56fcc0 */
-extern signed char DAT_00588fd2; /* 0x588fd2 */
-extern int DAT_00588fd4; /* 0x588fd4 */
-
-extern int lmapMainIsRunning(void);
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: resourceOwnerReleaseAndReset. */
-/* Supplied declaration required: gameStateChange. */
-/* Supplied declaration required: statusCameraDestroy. */
-extern int lmapSceneGetScript(void);
-/* Supplied declaration required: FUN_003857b4. */
-/* Supplied declaration required: linkHolderRunAll. */
-/* Supplied declaration required: resourceOwnerReleaseAll. */
-
-
+/* Closes the status panel: hides the status model, restarts the panel's sprite animations and
+ * returns to state 3. */
 void FUN_0022e774(void)
-
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  float temp_v5;
-  unsigned int uStack_20;
-  
-  temp_v0 = DAT_00588fd4;
-  if (*(int *)(DAT_00588fd4 + 0x1368) == 4) {
-    return;
-  }
-  if (*(char *)(DAT_00588fd4 + 0x2018) == '\x03' || *(char *)(DAT_00588fd4 + 0x2018) == '\n') {
-    temp_v1 = lmapSceneGetScript();
-    if (temp_v1 != 0) {
-      if (*(int *)(temp_v0 + 0x2034) != 0) {
-        temp_v4 = *(unsigned int *)(temp_v0 + 0x2038);
-        temp_v5 = *(float *)(temp_v0 + 0x203c) + 1000.0f;
-        uStack_20 = *(unsigned int *)(temp_v0 + 0x2040);
-        linkHolderRunAll(*(unsigned int *)(temp_v0 + 0x2034),&temp_v4);
-        FUN_003857b4(1);
-        if (*(int *)(temp_v0 + 0x2034) != 0) {
-          statusCameraDestroy();
+    ObjB *game = g_gameGlobals.instance;
+    if (game->activeState == 4)
+        return;
+    if (game->unk2018 == 3 || game->unk2018 == 10) {
+        if (lmapSceneGetScript()) {
+            if (game->unk2034) {
+                Vec3 position = { game->statusModelPosition[0], game->statusModelPosition[1] + 1000.0f,
+                                  game->statusModelPosition[2] };
+                linkHolderRunAll((StatusScreenModel *)game->unk2034, &position);
+                FUN_003857b4(1);
+                if (game->unk2034)
+                    statusCameraDestroy();
+            }
+        } else if (game->unk2034) {
+            resourceOwnerReleaseAll((StatusScreenModel *)game->unk2034);
+            if (lmapMainIsRunning()) {
+                g_handleRegistry->entry->unkC4 = game->unk20E6;
+            } else {
+                g_handleRegistry->entry->unkC4 = game->unk20E6;
+                resourceOwnerReleaseAndReset(g_handleRegistry);
+            }
+            if (g_gameGlobals.ownsStatusModel) {
+                if (game->unk2034)
+                    delete (StatusScreenModel *)game->unk2034;
+            }
+            if (game->unk2034)
+                statusCameraDestroy();
         }
-      }
     }
-    else if (*(int *)(temp_v0 + 0x2034) != 0) {
-      resourceOwnerReleaseAll();
-      temp_v1 = lmapMainIsRunning();
-      if (temp_v1 != 0) {
-        *(unsigned char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
-      }
-      else {
-        *(unsigned char *)(*(int *)(g_handleRegistry + 0x14) + 0xc4) = *(unsigned char *)(temp_v0 + 0x20e6);
-        resourceOwnerReleaseAndReset();
-      }
-      if (DAT_00588fd2 != '\0') {
-        if (*(int **)(temp_v0 + 0x2034) != (int *)0x0) {
-          (**(romwright_code **)(**(int **)(temp_v0 + 0x2034) + 4))();
-          if (*(int *)(temp_v0 + 0x2034) != 0) {
-            statusCameraDestroy();
-          }
-        }
-      }
-      else if (*(int *)(temp_v0 + 0x2034) != 0) {
-        statusCameraDestroy();
-      }
+    uiSpriteSetKeyframe(&game->statusSprites.status[0], 5, 0);
+    uiSpriteSelectAnim(&game->statusSprites.status[1], 3);
+    uiSpriteSelectAnim(&game->statusSprites.status[2], 3);
+    uiSpriteSelectAnim(&game->statusSprites.status[3], 3);
+    uiSpriteSetKeyframe(&game->statusSprites.status[4], 5, 0);
+    uiSpriteSelectAnim(&game->statusSprites.status[5], 3);
+    uiSpriteSelectAnim(&game->statusSprites.status[6], 3);
+    for (s32 i = 0; i < 10; i++) {
+        uiSpriteSetKeyframe(&game->spriteLists.primary[i], 0x11, 0);
+        uiSpriteSetImageKeyframe(&game->spriteLists.primary[i], 0xE, 0);
+        uiSpriteSetKeyframe(&game->spriteLists.secondary[i], 5, 0);
     }
-  }
-  uiSpriteSetKeyframe(temp_v0 + 0x418,5,0);
-  uiSpriteSelectAnim(temp_v0 + 0x4a4,3);
-  uiSpriteSelectAnim(temp_v0 + 0x530,3);
-  uiSpriteSelectAnim(temp_v0 + 0x5bc,3);
-  uiSpriteSetKeyframe(temp_v0 + 0x648,5,0);
-  uiSpriteSelectAnim(temp_v0 + 0x6d4,3);
-  uiSpriteSelectAnim(temp_v0 + 0x760,3);
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v1 * 0x8c;
-    temp_v3 = temp_v2 + 0x7ec;
-    uiSpriteSetKeyframe(temp_v3,0x11,0);
-    uiSpriteSetImageKeyframe(temp_v3,0xe,0);
-    uiSpriteSetKeyframe(temp_v2 + 0xd64,5,0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 10);
-  if (*(char *)(temp_v0 + 0x2017) == '\x05') {
-    uiSpriteSetKeyframe(temp_v0 + 0x12dc,5,0);
-  }
-  gameStateChange(3);
-  return;
+    if (game->unk2017 == 5)
+        uiSpriteSetKeyframe((UiSpriteState *)game->block12DC, 5, 0);
+    gameStateChange(3);
 }
 
 } /* extern "C" */

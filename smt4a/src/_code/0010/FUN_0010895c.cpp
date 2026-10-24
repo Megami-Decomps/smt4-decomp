@@ -59,7 +59,7 @@ extern unsigned int onlineGetActiveLock(void);
 /* Supplied declaration required: FUN_002eb7e0. */
 extern int FUN_002eb83c(void);
 /* Supplied declaration required: FUN_002ef34c. */
-extern int *FUN_002eff58(int, unsigned int);
+extern int *_ZN9Obj5588ecC1Ej(int, unsigned int);
 extern int FUN_002eff84(void);
 /* Supplied declaration required: vectorInitEmpty4. */
 /* Supplied declaration required: FUN_002f1448. */
@@ -111,7 +111,7 @@ void FUN_0010895c(int *param_1,int param_2,fn_0010895c_arg2 *param_3,unsigned in
     if ((int)((unsigned int)param_3->field_0x1c << 0x1d) < 0) {
       temp_v1 = FUN_002eb7d0(0x20,0);
       if (temp_v1 != 0) {
-        piVar6 = (int *)FUN_002eff58(temp_v1,temp_v17);
+        piVar6 = (int *)_ZN9Obj5588ecC1Ej(temp_v1,temp_v17);
         piVar3 = temp_v9;
         if (piVar6 == (int *)0x0) break;
         temp_v1 = FUN_002eff84();

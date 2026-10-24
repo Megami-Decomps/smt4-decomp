@@ -1,157 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b64c0` (_code @ 0x2b64c0, 0x2c4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills r0-r2 and d0-d1 in the prologue (a variadic-style frame), keeps the resource name in a 32-byte buffer at sp, reads the kind back from the stack and runs an empty 21-iteration count-down loop before textFormatBuffer (not reproducible with honest code); this build uses a 0x54-byte buffer and no such loop. */
+#include "Model/ModelList.h"
+#include "shard/W9_W9Match7_EnemyModelSources.h"
+
+/* One extra-model slot of the enemy owner (Apocalypse layout). */
+struct ExtraModelSlot {
+    ModelList *model;
+    u8 registered;
+    u8 active;
+    u8 padding[2];
+};
+
+/* A reserved encounter: who asked for it, the candidate chosen and the model slot it uses. */
+struct EnemyReservation {
+    s32 owner;
+    s32 candidate;
+    s32 selected;
+    s32 modelSlot;
+};
+
+/* The first group reserves sixteen candidates at once. */
+struct EnemyGroupReservation {
+    s32 owner;
+    s32 candidates[16];
+    s32 selected[16];
+    s32 modelSlots[16];
+};
+
+struct EnemyOwner {
+    /* 0x0000 */ u8 unk0000[0xC];
+    /* 0x000C */ u8 unk000C[0x3D80];
+    /* 0x3D8C */ ExtraModelSlot slots[21];
+    /* 0x3E34 */ EnemyGroupReservation groupOne[16];
+    /* 0x4A74 */ u8 unk4A74[4];
+    /* 0x4A78 */ EnemyReservation groupThree[16];
+    /* 0x4B78 */ u8 unk4B78[4];
+    /* 0x4B7C */ EnemyReservation groupTwo[16];
+    /* 0x4C7C */ u8 unk4C7C[4];
+    /* 0x4C80 */ EnemyReservation groupFour[16];
+};
 
 extern "C" {
-
-int textFormatBuffer(...);
-int FUN_00178b04(...);
-int FUN_003fe86c(...);
-int FUN_0040aa6c(...);
-int FUN_0040aad4(...);
-int handleRegistryRegisterObject(...);
-int FUN_004bc2dc(...);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_3_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_mapEnemy; /* 0x5806d4 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040aa6c. */
-/* Supplied declaration required: FUN_0040aad4. */
-extern int modelListInit(void);
-/* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_004bc2dc. */
-extern int dataSelectPrioritizedCandidate(int index);
-
-
-unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
-
-{
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int *piVar6;
-  int *piVar7;
-  unsigned char temp_v5 [56];
-  int iStack_30;
-  int temp_v6;
-  int iStack_28;
-  
-  temp_v0 = 0;
-  do {
-    iStack_30 = param_1;
-    temp_v6 = param_2;
-    if (param_3 != 1) {
-      if (param_3 == 2) {
-        piVar6 = (int *)(g_mapEnemy + temp_v0 * 0x10 + 0x4b7c);
-      }
-      else if (param_3 == 3) {
-        piVar6 = (int *)(g_mapEnemy + temp_v0 * 0x10 + 0x4a78);
-      }
-      else {
-        if (param_3 != 4) {
-          temp_v0 = temp_v0 + 1;
-          if (temp_v0 >= 0x10) {
-            return 0xffffffff;
-          }
-          continue;
-        }
-        piVar6 = (int *)(g_mapEnemy + temp_v0 * 0x10 + 0x4c80);
-      }
-      if (*piVar6 == -1) {
-        *piVar6 = param_1;
-        iStack_28 = param_3;
-        temp_v0 = FUN_004bc2dc(param_2,0);
-        piVar6[1] = temp_v0;
-        temp_v0 = dataSelectPrioritizedCandidate(temp_v0);
-        piVar6[2] = temp_v0;
-        temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 0x5806e0);
-        piVar6[3] = temp_v4;
-        temp_v0 = g_mapEnemy + temp_v4 * 8;
-        piVar6 = (int *)(temp_v0 + 0x3d8c);
-        if (*piVar6 != 0) {
-          return 1;
-        }
-        temp_v2 = 0x15;
-        do {
-          temp_v2 = temp_v2 - 1;
-        } while (temp_v2 != 0);
-        textFormatBuffer(temp_v5,"map/all/sym%03d.bam",(int)*(short *)(temp_v4 * 0x10 + 0x582204));
-        temp_v3 = 0x20;
-        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp",0x375);
-        temp_v2 = 0;
-        if (temp_v3 != 0) {
-          temp_v2 = modelListInit();
-        }
-        *piVar6 = temp_v2;
-        FUN_0040aa6c();
-        FUN_0040aad4(*piVar6,0);
-        temp_v2 = *(int *)(*piVar6 + 4);
-        FUN_003fe86c(temp_v2,0,2);
-        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-        *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-        *(unsigned char *)(temp_v0 + 0x3d90) = 1;
-        *(unsigned char *)(temp_v0 + 0x3d91) = 0;
-        return 1;
-      }
-    }
-    else {
-      piVar6 = (int *)(g_mapEnemy + temp_v0 * 0xc4 + 0x3e34);
-      if (*piVar6 == -1) {
-        temp_v0 = 0;
-        *piVar6 = param_1;
-        iStack_28 = 1;
-        do {
-          temp_v2 = FUN_004bc2dc(temp_v6,0);
-          piVar6[temp_v0 + 1] = temp_v2;
-          temp_v2 = dataSelectPrioritizedCandidate(temp_v2);
-          piVar6[temp_v0 + 0x11] = temp_v2;
-          temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x5806e0);
-          piVar6[temp_v0 + 0x21] = temp_v4;
-          temp_v2 = g_mapEnemy + temp_v4 * 8;
-          piVar7 = (int *)(temp_v2 + 0x3d8c);
-          if (*piVar7 == 0) {
-            temp_v3 = 0x15;
-            do {
-              temp_v3 = temp_v3 - 1;
-            } while (temp_v3 != 0);
-            textFormatBuffer(temp_v5,"map/all/sym%03d.bam",(int)*(short *)(temp_v4 * 0x10 + 0x582204));
-            temp_v1 = 0x20;
-            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp",0x375);
-            temp_v3 = 0;
-            if (temp_v1 != 0) {
-              temp_v3 = modelListInit();
-            }
-            *piVar7 = temp_v3;
-            FUN_0040aa6c();
-            FUN_0040aad4(*piVar7,0);
-            temp_v3 = *(int *)(*piVar7 + 4);
-            FUN_003fe86c(temp_v3,0,2);
-            handleRegistryRegisterObject(g_handleRegistry,temp_v3);
-            *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
-            *(unsigned char *)(temp_v2 + 0x3d90) = 1;
-            *(unsigned char *)(temp_v2 + 0x3d91) = 0;
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 0x10);
-        return 1;
-      }
-    }
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x10) {
-      return 0xffffffff;
-    }
-  } while( 1 );
+extern EnemyOwner *g_mapEnemy;
+extern EnemyExtraModelSource DAT_00582204[];
+extern u8 DAT_005806e0[]; /* the model slot of each selected candidate */
+extern void *g_handleRegistry;
+void textFormatBuffer(char *, const char *, ...);
+void *FUN_00178b04(u32, const char *, u32);
+ModelList *modelListInit(ModelList *);
+void FUN_0040aa6c(ModelList *, const char *);
+void FUN_0040aad4(ModelList *, u32);
+void FUN_003fe86c(MoriModelBody *, u32, u8, f32, f32);
+void handleRegistryRegisterObject(void *, MoriModelBody *);
+s32 FUN_004bc2dc(s32 kind, s32 flag);
+s32 dataSelectPrioritizedCandidate(s32 index);
 }
 
-} /* extern "C" */
+struct ModelFlags {
+    u32 vtable;
+    u32 flags;
+};
+
+/* Loads the model of `slotIndex` (once), registers it and leaves it inactive. */
+static __inline void ensureEnemyModel(EnemyOwner *owner, s32 slotIndex)
+{
+    ExtraModelSlot *slot = &owner->slots[slotIndex];
+    if (slot->model != NULL) {
+        return;
+    }
+    char resourceName[0x54];
+    textFormatBuffer(resourceName, "map/all/sym%03d.bam", DAT_00582204[slotIndex].modelId);
+    ModelList *model = static_cast<ModelList *>(
+        FUN_00178b04(32, "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp", 0x375));
+    if (model != NULL) {
+        model = modelListInit(model);
+    }
+    slot->model = model;
+    FUN_0040aa6c(slot->model, resourceName);
+    FUN_0040aad4(slot->model, 0);
+    MoriModelBody *body = slot->model->content.body;
+    FUN_003fe86c(body, 0, 2, 0.0f, 0.0f);
+    handleRegistryRegisterObject(g_handleRegistry, body);
+    reinterpret_cast<ModelFlags *>(body)->flags |= 3;
+    slot->registered = 1;
+    slot->active = 0;
+}
+
+/* Reserves an enemy encounter slot of `group` for `owner`, loading its models; returns 1, or -1 when full. */
+extern "C" s32 FUN_002b64c0(s32 owner, s32 kind, s32 group)
+{
+    EnemyOwner *enemies = g_mapEnemy;
+    for (s32 i = 0; i < 16; i++) {
+        EnemyReservation *reservation;
+        if (group == 1) {
+            EnemyGroupReservation *entry = &enemies->groupOne[i];
+            if (entry->owner == -1) {
+                entry->owner = owner;
+                for (s32 j = 0; j < 16; j++) {
+                    entry->candidates[j] = FUN_004bc2dc(kind, 0);
+                    entry->selected[j] = dataSelectPrioritizedCandidate(entry->candidates[j]);
+                    u32 modelSlot = DAT_005806e0[entry->selected[j]];
+                    entry->modelSlots[j] = modelSlot;
+                    ensureEnemyModel(g_mapEnemy, modelSlot);
+                }
+                return 1;
+            }
+            continue;
+        } else if (group == 2) {
+            reservation = &enemies->groupTwo[i];
+        } else if (group == 3) {
+            reservation = &enemies->groupThree[i];
+        } else if (group == 4) {
+            reservation = &enemies->groupFour[i];
+        } else {
+            continue;
+        }
+        if (reservation->owner == -1) {
+            reservation->owner = owner;
+            reservation->candidate = FUN_004bc2dc(kind, 0);
+            reservation->selected = dataSelectPrioritizedCandidate(reservation->candidate);
+            u32 modelSlot = DAT_005806e0[reservation->selected];
+            reservation->modelSlot = modelSlot;
+            ensureEnemyModel(g_mapEnemy, modelSlot);
+            return 1;
+        }
+    }
+    return -1;
+}

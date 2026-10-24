@@ -1,4 +1,3 @@
-/* NON_MATCHING: Inlined render-state push hoists the destination address into ip instead of reusing r3. */
 #include "camp/RenderCtx.h"
 #include "event/2dEvent/EventEffect.h"
 

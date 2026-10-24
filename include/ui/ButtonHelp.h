@@ -2,6 +2,7 @@
 #ifndef UI_BUTTONHELP_H
 #define UI_BUTTONHELP_H
 #include "common.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 typedef struct ButtonHelpValueEntry {
     /* 0x00 */ u16 value;
     /* 0x02 */ u16 unk02;
@@ -30,9 +31,20 @@ typedef struct ButtonHelpWork {
             u8 unk0000[0xC];
             /* 0x000C */ s32 phase;
         } transition;
+        struct {
+            /* 0x0000 */ u32 process;
+            /* 0x0004 */ u32 unk04;
+            /* 0x0008 */ u32 drawTask;
+        } jobs;
     };
     /* 0x0010 */ s32 state;
-    /* 0x0014 */ u8 unk0014[0x368];
+    union {
+        /* 0x0014 */ u8 unk0014[0x368];
+        struct {
+            /* 0x0014 */ UiResourceParameters parameters;
+            /* 0x0034 */ ButtonHelpDisplayUnit selection[6];
+        } ui;
+    };
     /* 0x037C */ ButtonHelpDisplayUnit units[2];
     /* 0x0494 */ u8 unk0494[2];
     /* 0x0496 */ ButtonHelpValueEntry entries[6];
@@ -63,7 +75,11 @@ typedef struct ButtonHelpWork {
 } ButtonHelpWork;
 
 typedef struct ButtonHelpUnit {
-    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 x;
+    /* 0x10 */ s32 y;
+    /* 0x14 */ s32 z;
+    /* 0x18 */ u8 unk18[0x72];
     /* 0x8A */ s8 flags;
     /* 0x8B */ u8 unk8B;
 } ButtonHelpUnit;
@@ -79,17 +95,28 @@ typedef struct ButtonHelpWorkA {
     union {
         /* 0x000 */ u8 unk000[0xC];
         /* 0x000 */ u32 job;
+        struct {
+            u32 job;
+            u32 unk04;
+            /* 0x008 */ u32 drawTask;
+        } jobs;
     };
     /* 0x00C */ s32 unk0C;
     /* 0x010 */ s32 state;
-    /* 0x014 */ u8 unk014[0x20];
+    union {
+        /* 0x014 */ u8 unk014[0x20];
+        /* 0x014 */ UiResourceParameters packet;
+    };
     /* 0x034 */ ButtonHelpUnit units[6];
     union {
         /* 0x37C */ u8 unk37C[0x230];
         /* 0x37C */ ButtonHelpUnit selected[4];
     };
     /* 0x5AC */ ButtonHelpKind kinds[6];
-    /* 0x5C4 */ u8 unk5C4[0xC];
+    union {
+        /* 0x5C4 */ u8 unk5C4[0xC];
+        /* 0x5C4 */ u16 icons[6];      /* icon id of each slot's kind */
+    };
     /* 0x5D0 */ s32 count;
     union {
         /* 0x5D4 */ u8 unk5D4[0xC];
@@ -97,6 +124,10 @@ typedef struct ButtonHelpWorkA {
             /* 0x5D4 */ u8 active[6];
             /* 0x5DA */ u8 unk5DA[6];
         } clear;
+        struct {
+            /* 0x5D4 */ u32 low;
+            /* 0x5D8 */ u16 high;
+        } cleared;
     };
     /* 0x5E0 */ u8 unk5E0;
     /* 0x5E1 */ s8 panelState;
@@ -120,7 +151,7 @@ typedef struct ButtonHelpWorkA {
 } ButtonHelpWorkA;
 
 typedef struct ButtonHelpGlobals {
-    /* 0x00 */ u8 unk00;
+    /* 0x00 */ s8 references;
     /* 0x01 */ s8 loadCount;
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ ButtonHelpWork *work;

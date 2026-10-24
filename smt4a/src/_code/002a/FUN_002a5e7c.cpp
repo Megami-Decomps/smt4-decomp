@@ -1,134 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a5e7c` (_code @ 0x2a5e7c, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store order of the record update and the loop's scheduling differ from retail (150 rows against 147); the compendium percentage uses __aeabi_idivmod as retail does. */
+#include "shard/W4_W4Match6b_GameDataBlock.h"
+
+/* A party demon record (300 bytes each) as the compendium registration reads it. */
+struct PartyDemon {
+    /* 0x000 */ u16 level;
+    /* 0x002 */ u16 form;
+    /* 0x004 */ u16 stats[5];
+    /* 0x00E */ u8 unk00E[0x12];
+    /* 0x020 */ u16 growth[5];
+    /* 0x02A */ u8 unk02A[6];
+    /* 0x030 */ u32 skillBits;
+    /* 0x034 */ u32 affinities[4];
+    /* 0x044 */ u32 resistances[2];
+    /* 0x04C */ u8 learned[0x12];
+    /* 0x05E */ u8 unk05E[4];
+    /* 0x062 */ u16 id;
+    /* 0x064 */ u16 variant;
+    /* 0x066 */ u8 unk066[0x46];
+    /* 0x0AC */ u16 bonus[5];
+    /* 0x0B6 */ u8 unk0B6[0x75];
+    /* 0x12B */ u8 temperament;
+};
+
+/* A compendium entry (0x50 bytes): what is stored of a demon once it has been registered. */
+struct CompendiumRecord {
+    /* 0x00 */ u16 variant;
+    /* 0x02 */ u16 stats[5];
+    /* 0x0C */ u16 growth[5];
+    /* 0x16 */ u8 flags;           /* bits 2-5: temperament, bit 0: registered */
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u16 level;
+    /* 0x1A */ u16 form;
+    /* 0x1C */ u32 affinities[4];
+    /* 0x2C */ u32 resistances[2];
+    /* 0x34 */ u8 unk34[4];
+    /* 0x38 */ u32 skillBits;
+    /* 0x3C */ u8 learned[0x12];
+    /* 0x4E */ u16 unk4E;
+};
+
+typedef char CompendiumRecordSizeCheck[sizeof(CompendiumRecord) == 0x50 ? 1 : -1];
+
+#define COMPENDIUM_FLAG_REGISTERED 1
+#define COMPENDIUM_MAX_ID 0x500
+#define COMPENDIUM_LISTED 1
+#define COMPENDIUM_SEEN 2
+
+/* The demon model table's entry. */
+struct DemonModelInfo {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[8];
+    /* 0x0A */ u16 flags;
+};
+
+/* The party block inside the save data: the order list and the 300-byte demon records. */
+struct PartyBlock {
+    /* 0x0000 */ u8 unk0000[0x8C];
+    /* 0x008C */ u8 unk008C[0x68];
+    /* 0x00F4 */ PartyDemon demons[1];
+};
 
 extern "C" {
 
-int FUN_00184310(void);
-int countersRaiseA(int, unsigned int);
-int rt_memcpy_w(...);
+DemonModelInfo *FUN_00184310(u32 id);
+void countersRaiseA(s32 counter, s32 amount);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-/* stack frame of param_1: 17 slot(s), 39 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned short sp4E; /* 0x4e: local_4e */
-    unsigned short sp50; /* 0x50: local_50 */
-    unsigned char sp52; /* 0x52: local_52 */
-    unsigned short sp54; /* 0x54: local_54 */
-    unsigned short sp56; /* 0x56: local_56 */
-    unsigned short sp58; /* 0x58: local_58 */
-    unsigned short sp5A; /* 0x5a: local_5a */
-    unsigned short sp5C; /* 0x5c: local_5c */
-    unsigned short sp5E; /* 0x5e: local_5e */
-    unsigned short sp60; /* 0x60: local_60 */
-    unsigned short sp62; /* 0x62: local_62 */
-    unsigned short sp64; /* 0x64: local_64 */
-    unsigned short sp66; /* 0x66: local_66 */
-    unsigned short sp68; /* 0x68: local_68 */
-} param_1_stack;
-
-extern int DAT_0057f69c; /* 0x57f69c */
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: countersRaiseA. */
-extern unsigned int __aeabi_idivmod(int, int);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_002a5e7c(unsigned int param_1)
-
+/* Registers the demon with the given id in the compendium from the party member that currently
+ * is that demon, then reports the percentage of listed demons that were seen. */
+void FUN_002a5e7c(u32 id)
 {
-/* irregular: 1 goto(s); 3 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned short *puVar5;
-  int temp_v3;
-  int temp_v4;
-  unsigned short temp_v5;
-  short temp_v6;
-  short temp_v7;
-  short temp_v8;
-  short temp_v9;
-  short temp_v10;
-  unsigned short temp_v11;
-  unsigned short temp_v12;
-  unsigned short temp_v13;
-  unsigned short temp_v14;
-  unsigned short temp_v15;
-  unsigned char temp_v16;
-  unsigned short temp_v17;
-  unsigned short temp_v18;
-  unsigned int temp_v19;
-  unsigned int uStack_48;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int temp_v20;
-  unsigned int uStack_38;
-  unsigned int temp_v21;
-  unsigned char temp_v22 [20];
-  
-  temp_v1 = 0;
-  if (*(char *)(DAT_0057f69c + 0x1d2f) != '\0') {
-    do {
-      temp_v2 = (int)*(char *)(DAT_0057f69c + 0x8c + temp_v1 + 0x1c88);
-      if ((-1 < temp_v2) &&
-         (temp_v2 = DAT_0057f69c + 0x8c + temp_v2 * 300, puVar5 = (unsigned short *)(temp_v2 + 0x68),
-         *(unsigned short *)(temp_v2 + 0xca) == param_1)) goto LAB_002a5f00;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(unsigned char *)(DAT_0057f69c + 0x1d2f));
-  }
-  puVar5 = (unsigned short *)0x0;
-LAB_002a5f00:
-  if (param_1 < 0x501) {
-    temp_v2 = DAT_0057f69c + param_1 * 0x50;
-    rt_memcpy_w(&temp_v5,temp_v2 + 0x5f0c,0x50);
-    temp_v5 = puVar5[0x32];
-    temp_v21 = *(unsigned int *)(puVar5 + 0x18);
-    temp_v17 = *puVar5;
-    temp_v18 = puVar5[1];
-    temp_v6 = puVar5[2] + puVar5[0x56];
-    temp_v11 = puVar5[0x10];
-    temp_v7 = puVar5[3] + puVar5[0x57];
-    temp_v12 = puVar5[0x11];
-    temp_v8 = puVar5[4] + puVar5[0x58];
-    temp_v13 = puVar5[0x12];
-    temp_v9 = puVar5[5] + puVar5[0x59];
-    temp_v14 = puVar5[0x13];
-    temp_v10 = puVar5[6] + puVar5[0x5a];
-    temp_v15 = puVar5[0x14];
-    temp_v19 = *(unsigned int *)(puVar5 + 0x1a);
-    uStack_48 = *(unsigned int *)(puVar5 + 0x1c);
-    uStack_44 = *(unsigned int *)(puVar5 + 0x1e);
-    uStack_40 = *(unsigned int *)(puVar5 + 0x20);
-    temp_v20 = *(unsigned int *)(puVar5 + 0x22);
-    uStack_38 = *(unsigned int *)(puVar5 + 0x24);
-    rt_memcpy_w(temp_v22,puVar5 + 0x26,0x12);
-    temp_v16 = (temp_v16 & 0xc3) | ((*(unsigned char *)((int)puVar5 + 299) & 0xf) << 2);
-    rt_memcpy_w(temp_v2 + 0x5f0c,&temp_v5,0x50);
-    temp_v4 = 0;
-    *(unsigned char *)(temp_v2 + 0x5f22) = *(unsigned char *)(temp_v2 + 0x5f22) | 1;
-    temp_v3 = 0;
-    temp_v2 = 0;
-    do {
-      puVar1 = (unsigned short *)((temp_v2 + 1U) & 0xffff);
-      FUN_00184310();
-      if ((puVar1 != (unsigned short *)0x0) && ((puVar1[5] & 1) != 0)) {
-        temp_v3 = temp_v3 + 1;
-        if ((*puVar1 < 0x501) &&
-           ((*(unsigned short *)(DAT_0057f69c + (unsigned int)*puVar1 * 0x50 + 0x5f42) & 2) != 0)) {
-          temp_v4 = temp_v4 + 1;
+    PartyBlock *party = (PartyBlock *)g_gameDataBlocks.saveBlock;
+    s8 *order = (s8 *)party + 0x1D14;
+    u8 *partyCount = (u8 *)party + 0x1D2F;
+    PartyDemon *demon = NULL;
+    u16 i;
+
+    for (i = 0; i < *partyCount; i++) {
+        s32 slot = order[i];
+
+        if (slot >= 0 && party->demons[slot].id == id) {
+            demon = &party->demons[slot];
+            break;
         }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x4ff);
-    temp_v0 = __aeabi_idivmod(temp_v4 * 100,temp_v3);
-    countersRaiseA(5,temp_v0);
-  }
-  return;
+    }
+    if (id <= COMPENDIUM_MAX_ID) {
+        CompendiumRecord *entry = (CompendiumRecord *)&g_gameDataBlocks.saveBlock->inventory.items[id];
+        CompendiumRecord record;
+        s32 listed;
+        s32 seen;
+        s32 index;
+
+        rt_memcpy_w(&record, entry, sizeof(CompendiumRecord));
+        record.variant = demon->variant;
+        record.skillBits = demon->skillBits;
+        record.level = demon->level;
+        record.form = demon->form;
+        record.stats[0] = demon->stats[0] + demon->bonus[0];
+        record.growth[0] = demon->growth[0];
+        record.stats[1] = demon->stats[1] + demon->bonus[1];
+        record.growth[1] = demon->growth[1];
+        record.stats[2] = demon->stats[2] + demon->bonus[2];
+        record.growth[2] = demon->growth[2];
+        record.stats[3] = demon->stats[3] + demon->bonus[3];
+        record.growth[3] = demon->growth[3];
+        record.stats[4] = demon->stats[4] + demon->bonus[4];
+        record.growth[4] = demon->growth[4];
+        record.affinities[0] = demon->affinities[0];
+        record.affinities[1] = demon->affinities[1];
+        record.affinities[2] = demon->affinities[2];
+        record.affinities[3] = demon->affinities[3];
+        record.resistances[0] = demon->resistances[0];
+        record.resistances[1] = demon->resistances[1];
+        rt_memcpy_w(record.learned, demon->learned, sizeof(record.learned));
+        record.flags = (record.flags & ~0x3C) | ((demon->temperament << 2) & 0x3C);
+        rt_memcpy_w(entry, &record, sizeof(CompendiumRecord));
+        entry->flags |= COMPENDIUM_FLAG_REGISTERED;
+        listed = 0;
+        seen = 0;
+        for (index = 0; index < 0x4FF; index++) {
+            DemonModelInfo *info = FUN_00184310((u16)(index + 1));
+
+            if (info != NULL && (info->flags & COMPENDIUM_LISTED) != 0) {
+                listed++;
+                if (info->id <= COMPENDIUM_MAX_ID &&
+                    (g_gameDataBlocks.saveBlock->inventory.items[info->id].bits & COMPENDIUM_SEEN) != 0) {
+                    seen++;
+                }
+            }
+        }
+        countersRaiseA(5, seen * 100 / listed);
+    }
 }
 
 } /* extern "C" */

@@ -1,166 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00349214` (_code @ 0x349214, 0x2cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register allocation and the jump-table layout of the state switch differ from retail; the draw selection is the same. */
+#include "common.h"
 
 extern "C" {
 
-int renderCtxCalculateStereoParallax(unsigned int);
-int FUN_002bf288(...);
-int FUN_0032b4f8(int, int, int);
-int VectorSignedToFloat(...);
+/* One row of the list (0x10 bytes). */
+typedef struct ListRow {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ f32 x;
+    /* 0x08 */ f32 y;
+    /* 0x0C */ u8 hasKind;
+    /* 0x0D */ u8 kind;
+    /* 0x0E */ s8 flagA;
+    /* 0x0F */ s8 tag;
+    /* 0x10 */ s8 subTag;
+    /* 0x11 */ s8 flagB;
+    /* 0x12 */ s8 flagC;
+    /* 0x13 */ s8 shown;
+} ListRow;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+/* The list work block (only the rows and the selection count). */
+typedef struct ListWork {
+    /* 0x00 */ ListRow rows[5];
+    /* 0x50 */ u8 unk50[4];
+    /* 0x54 */ s32 count;
+} ListWork;
 
-extern unsigned int g_titleScene; /* 0x44ea00 */
+extern void *g_titleScene;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_0032b4f8. */
+f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
+void FUN_0032b4f8(s32 id, s32 tag, s32 subTag);
+void FUN_002bf288(s32 a, s32 b, s32 id, s32 x, s32 y, s32 layer);
 
-
-void FUN_00349214(int param_1)
-
+/* Draws the five rows of the list: each shown row sets its tag, picks its icon id from its kind
+ * and flags, and draws the icon plus the extra marks some states carry. */
+void FUN_00349214(ListWork *work)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  unsigned long long temp_v6;
-  
-  temp_v5 = 0.7f;
-  renderCtxCalculateStereoParallax(g_titleScene);
-  temp_v6 = (unsigned long long)(unsigned int)(int)temp_v5;
-  temp_v4 = 0;
-  do {
-    temp_v3 = param_1 + temp_v4 * 0x10;
-    temp_v0 = *(char *)(temp_v3 + 0x13);
-    if (temp_v0 != '\0') {
-      temp_v1 = (int)*(char *)(temp_v3 + 0xf);
-      if (temp_v1 == 0) {
-        temp_v0 = *(char *)(temp_v3 + 0x10);
-      }
-      if (temp_v1 != 0 || temp_v0 != '\0') {
-        VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_0032b4f8(0x41,temp_v1,(int)*(char *)(temp_v3 + 0x10));
-      }
-      if (*(char *)(temp_v3 + 0xc) == '\0') {
-        temp_v1 = 3;
-      }
-      else {
-        switch(*(unsigned char *)(temp_v3 + 0xd)) {
-        case 0:
-        case 5:
-          if (*(char *)(temp_v3 + 0xe) == '\0') {
-            temp_v1 = 0;
-            break;
-          }
-          temp_v1 = 1;
-          break;
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.7f);
+
+    for (s32 i = 0; i < 5; i++) {
+        ListRow *row = &work->rows[i];
+
+        if (row->shown == 0) {
+            continue;
+        }
+        s32 tag = row->tag;
+        s8 subTag = tag == 0 ? row->subTag : (s8)tag;
+        s32 state;
+
+        if (tag != 0 || subTag != 0) {
+            FUN_0032b4f8(0x41, tag, row->subTag);
+        }
+        if (row->hasKind == 0) {
+            state = 3;
+        } else {
+            switch (row->kind) {
+            case 0:
+            case 5:
+                state = row->flagA == 0 ? 0 : 1;
+                break;
+            case 1:
+                state = row->flagC == 0 ? 4 : 8;
+                break;
+            case 2:
+                state = row->flagB == 0 ? 2 : 7;
+                break;
+            case 3:
+                state = 5;
+                break;
+            case 4:
+                state = row->flagC == 0 ? 6 : 9;
+                break;
+            default:
+                state = 0;
+                break;
+            }
+        }
+        s32 id = 0x33;
+
+        switch (state) {
         case 1:
-          if (*(char *)(temp_v3 + 0x12) == '\0') {
-            temp_v1 = 4;
-          }
-          else {
-            temp_v1 = 8;
-          }
-          break;
+            id = 0x34;
+            break;
         case 2:
-          if (*(char *)(temp_v3 + 0x11) == '\0') {
-            temp_v1 = 2;
-          }
-          else {
-            temp_v1 = 7;
-          }
-          break;
+            id = work->count > 0 ? 0x72 : 0x71;
+            break;
         case 3:
-          temp_v1 = 5;
-          break;
+            id = work->count > 0 ? 0x74 : 0x73;
+            break;
         case 4:
-          if (*(char *)(temp_v3 + 0x12) == '\0') {
-            temp_v1 = 6;
-          }
-          else {
-            temp_v1 = 9;
-          }
-          break;
-        default:
-          temp_v1 = 0;
+        case 5:
+        case 6:
+            id = work->count > 0 ? 0x76 : 0x75;
+            break;
+        case 7:
+            id = work->count > 0 ? 0x7B : 0x7A;
+            break;
+        case 8:
+            id = work->count > 0 ? 0x7D : 0x7C;
+            break;
         }
-      }
-      temp_v2 = 0x33;
-                    /* WARNING: Switch table taken from the stored dispatch table */
-                    /* WARNING: Could not find normalized switch variable to match jumptable */
-      switch(temp_v1) {
-      case 1:
-        temp_v2 = 0x34;
-        break;
-      case 2:
-        temp_v2 = 0x71;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x72;
+        FUN_002bf288(2, 0x14, id, (s32)(row->x + (f32)parallax), (s32)row->y, 0x42);
+        if (state == 4 || state == 8) {
+            FUN_002bf288(2, 0x14, 0x77, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
         }
-        break;
-      case 3:
-        temp_v2 = 0x73;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x74;
+        if (state != 5) {
+            if (state == 6 || state == 9) {
+                FUN_002bf288(2, 0x14, 0x79, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
+            }
+        } else {
+            FUN_002bf288(2, 0x14, 0x78, (s32)(row->x + (f32)parallax), (s32)row->y, 0x43);
         }
-        break;
-      case 4:
-      case 5:
-      case 6:
-        temp_v2 = 0x75;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x76;
-        }
-        break;
-      case 7:
-        temp_v2 = 0x7a;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x7b;
-        }
-        break;
-      case 8:
-        temp_v2 = 0x7c;
-        if (0 < *(int *)(param_1 + 0x54)) {
-          temp_v2 = 0x7d;
-        }
-      }
-      temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002bf288(2,0x14,temp_v2,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),0x42
-                  );
-      if (temp_v1 == 4 || temp_v1 == 8) {
-        temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002bf288(2,0x14,0x77,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),
-                     0x43);
-      }
-      if (temp_v1 != 5) {
-        if (temp_v1 == 6 || temp_v1 == 9) {
-          temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002bf288(2,0x14,0x79,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),
-                       0x43);
-        }
-      }
-      else {
-        temp_v5 = (float)VectorSignedToFloat((int)temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002bf288(2,0x14,0x78,(int)(*(float *)(temp_v3 + 4) + temp_v5),(int)*(float *)(temp_v3 + 8),
-                     0x43);
-      }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 5) {
-      return;
-    }
-  } while( 1 );
 }
 
-} /* extern "C" */
+}

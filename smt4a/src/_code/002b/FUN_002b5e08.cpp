@@ -1,215 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b5e08` (_code @ 0x2b5e08, 0x30c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "addon/aocMain.h"
+/* NON_MATCHING: readable rebuild from asm of the add-on treasure roll (a table-22 record's item count and per-slot chances, then random picks from the matching table-83 records); armcc here keeps the candidate buffer and the table lookups in different stack slots, and the second record lookup is dereferenced unchecked, as in retail. */
+#include "common.h"
+
+/* The count/chance record of one treasure (table 22 or its table-33 fallback, 28 bytes). */
+struct TreasureRecord {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 minCount;
+    /* 0x05 */ u8 maxCount;
+    /* 0x06 */ u8 minLevel;
+    /* 0x07 */ u8 maxLevel;
+    struct Slot {
+        u16 item;
+        u8 kind;       /* 0: a fixed roll */
+        u8 chance;     /* percent */
+    } slots[3];
+    /* 0x14 */ u8 tags[4];
+    /* 0x18 */ u16 unk18;
+    /* 0x1A */ u8 unk1A[2];
+};
+
+/* A candidate item record (table 83). */
+struct ItemRecord {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[2];
+    /* 0x24 */ u8 level;
+    /* 0x25 */ u8 tag;
+};
+
+struct MapDepart {
+    /* 0x00 */ u8 unk00[0xB0];
+    /* 0xB0 */ u32 lastRecord;
+};
 
 extern "C" {
+extern MapDepart *g_mapDepart;
+extern void *g_aocSystem;
 
-int jyoucyuGetTableEntry(int);
-u8* aocFindTable22Record(AocSystemA*, s32 id);
-int aocRecordLookup83(void);
-int flagValueAdd(...);
+TreasureRecord *aocFindTable22Record(void *system, s32 index);
+ItemRecord *aocRecordLookup83(u32 id);
+void *dataTableGet(s32 table, s32 section);
+TreasureRecord *dataTableGetEntries(void *section);
+u32 dataTableGetCount(void *section);
+void flagValueAdd(s32 id, s32 count);
+s32 gamePackedFlagTest(s32 id);
+s32 randRange(u32 limit);
+s32 __aeabi_idivmod(s32 a, s32 b);
+void jyoucyuGetTableEntry(s32 index);
 
-/* stack frame of param_4: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_4_stack;
-
-extern int g_aocSystem; /* 0x570280 */
-extern unsigned char *g_mapDepart; /* 0x5806c4 */
-
-extern int randRange(unsigned int);
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: aocFindTable22Record. */
-/* Supplied declaration required: aocRecordLookup83. */
-/* Supplied declaration required: flagValueAdd. */
-extern int gamePackedFlagTest(int);
-extern unsigned int __aeabi_idivmod(int, unsigned int);
-
-
-unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned int *param_4)
-
+/* The treasure record of an index: the table-22 record or else the table-33 entry. */
+static TreasureRecord *findTreasureRecord(s32 index)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned char temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  int temp_v10;
-  int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  short asStack_1e0 [200];
-  unsigned int temp_v14;
-  unsigned char *temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  unsigned int temp_v19;
-  unsigned int temp_v20;
-  int iStack_30;
-  int iStack_2c;
-  unsigned int *puStack_28;
-  
-  temp_v15 = g_mapDepart;
-  temp_v20 = param_1;
-  iStack_30 = param_2;
-  iStack_2c = param_3;
-  puStack_28 = param_4;
-  temp_v11 = reinterpret_cast<s32>(aocFindTable22Record(reinterpret_cast<AocSystemA*>(g_aocSystem), param_1));
-  temp_v8 = temp_v20;
-  temp_v16 = temp_v20 * 7;
-  if (temp_v11 == 0) {
-    temp_v4 = dataTableGet(0x21,0);
-    temp_v11 = dataTableGetEntries();
-    temp_v13 = dataTableGetCount(temp_v4);
-    if (temp_v13 <= temp_v8) {
-      jyoucyuGetTableEntry(0);
-      return 0;
+    TreasureRecord *record = aocFindTable22Record(g_aocSystem, index);
+    if (record != NULL)
+        return record;
+    void *section = dataTableGet(33, 0);
+    TreasureRecord *entries = dataTableGetEntries(section);
+    if ((u32)index < dataTableGetCount(section))
+        return entries + index;
+    return NULL;
+}
+
+/* Rolls the treasure of `index`: how many items (written to `count`), which of its fixed slots hit
+ * by chance and then random items of the record's level range and tags for the rest; each is added
+ * to the flag storage, with its id in `ids` and whether it was new in `isNew`. Returns the roll's
+ * percent, or 0 when nothing could be rolled. */
+s32 FUN_002b5e08(u32 unused, u32 *ids, u8 *isNew, s32 *count, s32 index)
+{
+    MapDepart *depart = g_mapDepart;
+    TreasureRecord *record = findTreasureRecord(index);
+    s32 percent;
+    s32 wanted;
+    s32 found = 0;
+    if (record == NULL) {
+        jyoucyuGetTableEntry(0);
+        return 0;
     }
-    temp_v11 = temp_v11 + temp_v16 * 4;
-  }
-  if (temp_v11 != 0) {
-    temp_v6 = (unsigned int)*(unsigned char *)(temp_v11 + 4);
-    temp_v12 = (unsigned int)*(unsigned char *)(temp_v11 + 5);
-    temp_v5 = 0;
-    temp_v13 = temp_v12;
-    temp_v8 = temp_v6;
-    if (temp_v12 < temp_v6) {
-      temp_v13 = temp_v6;
-      temp_v8 = temp_v12;
+    s32 low = record->minCount;
+    s32 high = record->maxCount;
+    if (high < low) {
+        s32 swap = low;
+        low = high;
+        high = swap;
     }
-    if (temp_v12 == temp_v6) {
-      temp_v14 = 0x32;
+    if (low == high) {
+        percent = 50;
+        wanted = high;
+    } else {
+        s32 span = high - low;
+        s32 roll = randRange((u16)span);
+        percent = __aeabi_idivmod(roll * 100, span);
+        wanted = low + roll;
     }
-    else {
-      temp_v2 = randRange((temp_v13 - temp_v8) & 0xffff);
-      temp_v14 = __aeabi_idivmod(temp_v2 * 100,temp_v13 - temp_v8);
-      temp_v13 = temp_v8 + temp_v2;
+    if (wanted <= 0) {
+        jyoucyuGetTableEntry(0);
+        return 0;
     }
-    if (0 < (int)temp_v13) {
-      temp_v2 = 0;
-      *(unsigned int *)(temp_v15 + 0xb0) = (unsigned int)*(unsigned short *)(temp_v11 + 0x18);
-      puVar4 = temp_v15;
-      if (param_4 != (unsigned int *)0x0) {
-        *param_4 = temp_v13;
-      }
-      do {
-        temp_v10 = temp_v11 + temp_v2 * 4;
-        temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 8);
-        if (temp_v8 != 0) {
-          puVar4 = (unsigned char *)(unsigned int)*(unsigned char *)(temp_v10 + 0xb);
+    depart->lastRecord = record->unk18;
+    if (count != NULL)
+        *count = wanted;
+    for (s32 slot = 0; slot < 3; slot++) {
+        TreasureRecord::Slot *entry = &record->slots[slot];
+        if (entry->item != 0 && entry->chance != 0 && entry->kind == 0) {
+            if ((u16)(randRange(99) + 1) <= entry->chance) {
+                flagValueAdd(entry->item, 1);
+                if (ids != NULL)
+                    ids[found] = entry->item;
+                found++;
+                if (found >= wanted)
+                    return percent;
+            }
         }
-        if ((temp_v8 != 0 && puVar4 != (unsigned char *)0x0) &&
-           (puVar4 = (unsigned char *)(unsigned int)*(unsigned char *)(temp_v10 + 10), puVar4 == (unsigned char *)0x0)) {
-          temp_v3 = randRange(99);
-          puVar4 = (unsigned char *)((temp_v3 + 1U) & 0xffff);
-          if (puVar4 <= (unsigned char *)(unsigned int)*(unsigned char *)(temp_v10 + 0xb)) {
-            puVar4 = (unsigned char *)flagValueAdd(temp_v8,1);
-            if (param_2 != 0) {
-              *(unsigned int *)(param_2 + temp_v5 * 4) = temp_v8;
-            }
-            temp_v5 = temp_v5 + 1;
-            if ((int)temp_v13 <= temp_v5) {
-              return temp_v14;
-            }
-          }
-        }
-        temp_v8 = temp_v20;
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 3);
-      temp_v15 = (unsigned char *)asStack_1e0;
-      temp_v11 = reinterpret_cast<s32>(aocFindTable22Record(reinterpret_cast<AocSystemA*>(g_aocSystem), static_cast<s32>(temp_v20)));
-      if (temp_v11 == 0) {
-        temp_v4 = dataTableGet(0x21,0);
-        temp_v11 = dataTableGetEntries();
-        temp_v6 = dataTableGetCount(temp_v4);
-        if (temp_v8 >= temp_v6) {
-          temp_v11 = 0;
-        }
-        else {
-          temp_v11 = temp_v11 + temp_v16 * 4;
-        }
-      }
-      temp_v16 = (unsigned int)*(unsigned char *)(temp_v11 + 0x14);
-      temp_v0 = *(unsigned char *)(temp_v11 + 6);
-      temp_v9 = *(unsigned char *)(temp_v11 + 7);
-      temp_v17 = (unsigned int)*(unsigned char *)(temp_v11 + 0x15);
-      temp_v18 = (unsigned int)*(unsigned char *)(temp_v11 + 0x16);
-      temp_v19 = (unsigned int)*(unsigned char *)(temp_v11 + 0x17);
-      temp_v7 = temp_v0;
-      if (temp_v9 < temp_v0) {
-        temp_v7 = temp_v9;
-        temp_v9 = temp_v0;
-      }
-      temp_v8 = 0x3b7;
-      temp_v11 = 0;
-      do {
-        temp_v6 = temp_v8;
-        aocRecordLookup83();
-        if (((temp_v6 != 0) && (temp_v7 <= *(unsigned char *)(temp_v6 + 0x24))) &&
-           (*(unsigned char *)(temp_v6 + 0x24) <= temp_v9)) {
-          temp_v12 = (unsigned int)*(unsigned char *)(temp_v6 + 0x25);
-          if (temp_v12 != temp_v16) {
-            temp_v1 = temp_v16;
-            if (temp_v12 != temp_v17) {
-              temp_v1 = temp_v18;
-            }
-            if ((!(temp_v12 != temp_v17 && temp_v12 != temp_v1)) || (temp_v12 == temp_v19)) {
-              temp_v2 = temp_v11 * 2;
-              temp_v11 = temp_v11 + 1;
-              *(unsigned short *)(temp_v15 + temp_v2) = *(unsigned short *)(temp_v6 + 0x20);
-            }
-          }
-          else {
-            temp_v2 = temp_v11 * 2;
-            temp_v11 = temp_v11 + 1;
-            *(unsigned short *)(temp_v15 + temp_v2) = *(unsigned short *)(temp_v6 + 0x20);
-          }
-        }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < 0x47f);
-      if ((short)temp_v11 != 0) {
-        if (temp_v5 < (int)temp_v13) {
-          do {
-            temp_v2 = randRange(((int)(short)temp_v11 - 1U) & 0xffff);
-            temp_v10 = (int)asStack_1e0[temp_v2];
-            temp_v2 = gamePackedFlagTest(temp_v10);
-            if (temp_v2 == 0) {
-              *(unsigned char *)(param_3 + temp_v5) = 1;
-            }
-            else {
-              *(unsigned char *)(param_3 + temp_v5) = 0;
-            }
-            flagValueAdd(temp_v10,1);
-            if (param_2 != 0) {
-              *(int *)(param_2 + temp_v5 * 4) = temp_v10;
-            }
-            temp_v5 = temp_v5 + 1;
-          } while (temp_v5 < (int)temp_v13);
-        }
-        return temp_v14;
-      }
     }
-  }
-  jyoucyuGetTableEntry(0);
-  return 0;
+    TreasureRecord *second = findTreasureRecord(index);
+    u32 tags[4] = { second->tags[0], second->tags[1], second->tags[2], second->tags[3] };
+    u32 minLevel = second->minLevel;
+    u32 maxLevel = second->maxLevel;
+    if (minLevel > maxLevel) {
+        u32 swap = minLevel;
+        minLevel = maxLevel;
+        maxLevel = swap;
+    }
+    u16 candidates[200];
+    s32 candidateCount = 0;
+    for (u32 id = 0x3B7; id <= 0x47E; id++) {
+        ItemRecord *item = aocRecordLookup83(id);
+        if (item != NULL && minLevel <= item->level && item->level <= maxLevel &&
+            (item->tag == tags[0] || item->tag == tags[1] || item->tag == tags[2] || item->tag == tags[3]))
+            candidates[candidateCount++] = item->id;
+    }
+    if ((s16)candidateCount == 0) {
+        jyoucyuGetTableEntry(0);
+        return 0;
+    }
+    while (found < wanted) {
+        s32 pick = (s16)candidates[randRange((u16)((s16)candidateCount - 1))];
+        isNew[found] = gamePackedFlagTest(pick) == 0;
+        flagValueAdd(pick, 1);
+        if (ids != NULL)
+            ids[found] = pick;
+        found++;
+    }
+    return percent;
 }
 
 } /* extern "C" */

@@ -1,103 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049ec78` (_code @ 0x49ec78, 0x2b4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the marker ids 0x27/0x2f/0x28/0x30 into registers/stack (44-byte frame) and tests the u16 icon groups with a signed ble where this build emits beq; register allocation and the stm/strd argument packing differ. */
+#include "common.h"
+#include "camp/RenderCtx.h"
+
+/* One texture id: group * 1000 + index. */
+struct IconRef {
+    /* 0x0 */ u16 group;
+    /* 0x2 */ u16 index;
+    /* 0x4 */ u16 unk4[3];
+};
+
+struct IconAnchor {
+    /* 0x0 */ s16 kind;
+};
+
+struct IconTexture {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ IconAnchor *anchor;
+};
+
+struct IconPanelData {
+    /* 0x00 */ u16 state;
+    /* 0x02 */ u8 unk02[0x34];
+    /* 0x36 */ IconRef icons[2];
+};
+
+struct IconPanel {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ IconPanelData *data;
+};
+
+struct IconCursor {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 first;
+    /* 0x14 */ s32 second;
+};
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
 
-int efctSetSpeed(void);
-int FUN_001834a4(...);
-int FUN_001835b4(...);
-int renderCtxCalculateStereoParallax(unsigned int);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+IconTexture *FUN_001834a4(u32 file, s32 index);
+void FUN_001835b4(s32 layer, u32 file, u32 id, s32 x, s32 y, s32 z);
+void efctSetSpeed(f32 speed);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
 
-/* stack frame of param_5: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_5_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-void FUN_0049ec78(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Draws the two icons selected by the cursor and the marker below them, shifted by the stereo parallax. */
+void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed, s32 z)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  float temp_v6;
-  float temp_v7;
-  
-  temp_v5 = *(int *)(param_2 + 0x10);
-  if (((*(short *)(*(int *)(param_1 + 0x84) + 0x36) == 0) ||
-      (temp_v3 = asdTMTexTableNodeIsLoaded(0x33), temp_v3 != 0)) &&
-     ((*(short *)(*(int *)(param_1 + 0x84) + 0x40) == 0 || (temp_v3 = asdTMTexTableNodeIsLoaded(0x33), temp_v3 != 0))
-     )) {
-    temp_v7 = 0.25f;
-    temp_v6 = temp_v7;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x84) + temp_v5 * 10 + 0x36);
-    temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x84) + temp_v5 * 10 + 0x38);
-    if (temp_v4 != 0) {
-      temp_v5 = FUN_001834a4(0x33);
-      if (**(short **)(temp_v5 + 0xc) != 0xb6) {
-        if (**(short **)(temp_v5 + 0xc) == 0x93) {
-          temp_v5 = FUN_001834a4(0x33,0x2f);
+    s32 index = cursor->first;
+    if ((panel->data->icons[0].group > 0 && !asdTMTexTableNodeIsLoaded(0x33, panel->data->icons[0].group)) ||
+        (panel->data->icons[1].group > 0 && !asdTMTexTableNodeIsLoaded(0x33, panel->data->icons[1].group))) {
+        return;
+    }
+    s32 shiftedX = x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+    s32 group = panel->data->icons[index].group;
+    s32 id = panel->data->icons[index].index;
+    if (group > 0) {
+        IconTexture *texture = FUN_001834a4(0x33, id + group * 1000);
+        if (texture->anchor->kind == 0xb6) {
+            texture = FUN_001834a4(0x33, 0x27);
+        } else if (texture->anchor->kind == 0x93) {
+            texture = FUN_001834a4(0x33, 0x2f);
         }
-      }
-      else {
-        temp_v5 = FUN_001834a4(0x33,0x27);
-      }
-      temp_v1 = *(short *)(temp_v5 + 8);
-      temp_v2 = *(short *)(temp_v5 + 10);
-      efctSetSpeed();
-      FUN_001835b4(2,0x33,(unsigned int)temp_v0 + temp_v4 * 1000,(int)temp_v1 + param_3 + (int)temp_v7,
-                   temp_v2 + param_4,param_5 + 5);
-      efctSetSpeed();
+        efctSetSpeed(speed);
+        FUN_001835b4(2, 0x33, id + group * 1000, texture->x + shiftedX, texture->y + y, z + 5);
+        efctSetSpeed(1.0f);
     }
-    temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x84) + *(int *)(param_2 + 0x14) * 10 + 0x36);
-    temp_v0 = *(unsigned short *)(*(int *)(param_1 + 0x84) + *(int *)(param_2 + 0x14) * 10 + 0x38);
-    if (temp_v4 != 0) {
-      temp_v5 = FUN_001834a4(0x33);
-      if (**(short **)(temp_v5 + 0xc) != 0xb6) {
-        if (**(short **)(temp_v5 + 0xc) == 0x93) {
-          temp_v5 = FUN_001834a4(0x33,0x30);
+    index = cursor->second;
+    group = panel->data->icons[index].group;
+    id = panel->data->icons[index].index;
+    if (group > 0) {
+        IconTexture *texture = FUN_001834a4(0x33, id + group * 1000);
+        if (texture->anchor->kind == 0xb6) {
+            texture = FUN_001834a4(0x33, 0x28);
+        } else if (texture->anchor->kind == 0x93) {
+            texture = FUN_001834a4(0x33, 0x30);
         }
-      }
-      else {
-        temp_v5 = FUN_001834a4(0x33,0x28);
-      }
-      temp_v1 = *(short *)(temp_v5 + 8);
-      temp_v2 = *(short *)(temp_v5 + 10);
-      efctSetSpeed();
-      FUN_001835b4(2,0x33,(unsigned int)temp_v0 + temp_v4 * 1000,param_3 + (int)temp_v7 + (int)temp_v1,
-                   temp_v2 + param_4,param_5 + 5);
-      efctSetSpeed();
+        efctSetSpeed(speed);
+        FUN_001835b4(2, 0x33, id + group * 1000, shiftedX + texture->x, texture->y + y, z + 5);
+        efctSetSpeed(1.0f);
     }
-    efctSetSpeed();
-    temp_v1 = **(short **)(param_1 + 0x84);
-    if ((temp_v1 != 3 && temp_v1 != 9) && (temp_v1 != 0xb)) {
-      renderCtxCalculateStereoParallax(g_renderCtx);
-      efctSetSpeed();
-      FUN_001835b4(2,0x33,0x29,param_3 + (int)temp_v6,param_4,param_5 + 10);
-      efctSetSpeed();
-      return;
+    efctSetSpeed(1.0f);
+    u16 state = panel->data->state;
+    if (state != 3 && state != 9 && state != 11) {
+        s32 markerX = x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+        efctSetSpeed(speed);
+        FUN_001835b4(2, 0x33, 0x29, markerX, y, z + 10);
+        efctSetSpeed(1.0f);
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

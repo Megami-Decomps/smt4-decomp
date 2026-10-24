@@ -1,194 +1,109 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039b370` (_code @ 0x39b370, 0x2c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares one 16-byte stack block between the stylus sample and the hit-test rectangle and reads the touch/previous-touch pairs with scalar loads; this build merges them into vldmia pairs and keeps the game-state pointer in r7 (about 200 diff lines). */
+#include "map/mapDepart.h"
+#include "map/NavigationInterpolation.h"
+
+/* The navigation object seen as the touch-drag scroller that FUN_0039b370 drives. */
+struct NavigationDrag {
+    /* 0x000 */ u8 unk000[0x10];
+    /* 0x010 */ u32 flags; /* 0x20000: the stylus is dragging the cursor */
+    /* 0x014 */ u8 unk014[0x18];
+    /* 0x02C */ NavigationPoint touchStart;
+    /* 0x034 */ NavigationPoint cursorStart;
+    /* 0x03C */ NavigationPoint velocity; /* kept after the stylus is lifted */
+    /* 0x044 */ NavigationPoint touch;
+    /* 0x04C */ NavigationPoint previousTouch;
+    /* 0x054 */ s8 stillFrames; /* frames the stylus has not moved, capped at 99 */
+    /* 0x055 */ u8 unk055[0x10D];
+    /* 0x162 */ u8 cursorData[1];
+};
+typedef char NavigationDragOffsets[
+    offsetof(NavigationDrag, touchStart) == 0x2C && offsetof(NavigationDrag, stillFrames) == 0x54 &&
+    offsetof(NavigationDrag, cursorData) == offsetof(NavigationInterpolation, cursorData) ? 1 : -1];
+
+/* The stylus position as the touch readers report it; the hit-test query fills the same block. */
+struct TouchSample {
+    s32 y;
+    s32 x;
+    s32 extentX;
+    s32 extentY;
+};
 
 extern "C" {
+extern GameState g_gameState;
+extern f32 DAT_0044cdc8; /* velocity damping per frame */
 
-int effectForwardModeOne(int, int, int, unsigned int);
-int FUN_00231434(int, int, int *, int *);
-int FUN_0039b648(void);
-int FUN_003c2e0c(unsigned int **, unsigned int **);
-int NaviMain_GetCursorPos(...);
-int NaviMain_SetCursorPos(...);
-int VectorSignedToFloat(...);
+s32 FUN_0039b648(NavigationDrag *drag);
+s32 FUN_002bffd8(s32 *x, s32 *y);
+s32 FUN_003c2e14(s32 *x, s32 *y);
+s32 FUN_003c2e0c(s32 *x, s32 *y);
+s32 FUN_00231434(s32 a, s32 b, s32 *x, s32 *y, s32 *width, s32 *height);
+u32 effectForwardModeOne(s32 x, s32 y, s32 width, s32 height);
+NavigationPoint *NaviMain_GetCursorPos(u8 *cursorData);
+void NaviMain_SetCursorPos(u8 *cursorData, NavigationPoint *position);
 
-#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
-#define ROMWRIGHT_FLOAT_BITS_DEFINED
-static unsigned int romwright_f2u(float value)
+/* Per-frame touch drag of the navigation cursor: follows the stylus while it is down and coasts afterwards. */
+u32 FUN_0039b370(NavigationDrag *drag)
 {
-    union { float f; unsigned int u; } bits;
-    bits.f = value;
-    return bits.u;
-}
-static float romwright_u2f(unsigned int value)
-{
-    union { float f; unsigned int u; } bits;
-    bits.u = value;
-    return bits.f;
-}
-#endif
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern float DAT_0044cdc8; /* 0x44cdc8 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: effectForwardModeOne. */
-/* Supplied declaration required: FUN_00231434. */
-extern int FUN_002bffd8(unsigned int *, int *);
-/* Supplied declaration required: FUN_0039b648. */
-/* Supplied declaration required: FUN_003c2e0c. */
-extern unsigned int FUN_003c2e14(unsigned int *, int *);
-/* Supplied declaration required: NaviMain_GetCursorPos. */
-/* Supplied declaration required: NaviMain_SetCursorPos. */
-
-
-unsigned int FUN_0039b370(int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  float *pfVar4;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned int in_fpscr;
-  float temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int *temp_v9;
-  unsigned int *temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int uStack_28;
-  unsigned int temp_v13 [5];
-  
-  temp_v2 = param_1;
-  FUN_0039b648();
-  if (temp_v2 != 0) {
-    return 0;
-  }
-  temp_v8 = 0;
-  temp_v2 = param_1 + 0x162;
-  if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) != 0) {
-    temp_v0 = FUN_002bffd8((unsigned int *)&temp_v12,&temp_v11);
-    if ((temp_v0 == 0) || ((*(unsigned char *)((unsigned char *)&g_gameState + 0x18)) != 0)) {
-      temp_v1 = FUN_003c2e14((unsigned int *)&temp_v12,&temp_v11);
-      temp_v3 = temp_v1 == 0;
-      if (temp_v3) {
-        temp_v1 = (unsigned int)(*(unsigned char *)((unsigned char *)&g_gameState + 0x18));
-      }
-      if (!temp_v3 || temp_v1 != 0) {
-        *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffdffff;
-        if (*(char *)(param_1 + 0x54) >= '\x03') {
-          *(unsigned int *)(param_1 + 0x3c) = temp_v8;
-          *(unsigned int *)(param_1 + 0x40) = temp_v8;
-        }
-        else {
-          *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x44) - *(float *)(param_1 + 0x4c);
-          *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x48) - *(float *)(param_1 + 0x50);
-        }
-      }
-    }
-    else {
-      temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v9 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x34) + (temp_v4 - *(float *)(param_1 + 0x2c)))));
-      temp_v4 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v10 = (unsigned int *)romwright_f2u((float)((*(float *)(param_1 + 0x38) + (temp_v4 - *(float *)(param_1 + 0x30)))));
-      NaviMain_SetCursorPos(temp_v2,&temp_v9);
-      temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 0x44) == temp_v4) << 0x1e);
-      if (romwright_subpiece_4_1_0(temp_v1 >> 0x1e,0)) {
-        temp_v4 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(temp_v1 >> 0x16) & 3);
-        temp_v1 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(param_1 + 0x48) == temp_v4) << 0x1e);
-        if (romwright_subpiece_4_1_0(temp_v1 >> 0x1e,0)) {
-          if (*(char *)(param_1 + 0x54) < 'c') {
-            *(char *)(param_1 + 0x54) = *(char *)(param_1 + 0x54) + '\x01';
-          }
-        }
-        else {
-          temp_v5 = VectorSignedToFloat(temp_v12,(unsigned char)(temp_v1 >> 0x16) & 3);
-          *(float *)(param_1 + 0x4c) = *(float *)(param_1 + 0x44);
-          *(unsigned int *)(param_1 + 0x50) = *(unsigned int *)(param_1 + 0x48);
-          *(unsigned int *)(param_1 + 0x44) = temp_v5;
-          temp_v5 = VectorSignedToFloat(temp_v11,(unsigned char)(temp_v1 >> 0x16) & 3);
-          *(unsigned int *)(param_1 + 0x48) = temp_v5;
-        }
-      }
-      else {
-        temp_v5 = VectorSignedToFloat(temp_v12,(unsigned char)(temp_v1 >> 0x16) & 3);
-        *(float *)(param_1 + 0x4c) = *(float *)(param_1 + 0x44);
-        *(unsigned int *)(param_1 + 0x50) = *(unsigned int *)(param_1 + 0x48);
-        *(unsigned int *)(param_1 + 0x44) = temp_v5;
-        temp_v5 = VectorSignedToFloat(temp_v11,(unsigned char)(temp_v1 >> 0x16) & 3);
-        *(unsigned int *)(param_1 + 0x48) = temp_v5;
-      }
-    }
-  }
-  else {
-    temp_v10 = temp_v13;
-    temp_v9 = (unsigned int *)&uStack_28;
-    FUN_00231434(0x1c,0xfa4,&temp_v11,&temp_v12);
-    effectForwardModeOne(temp_v11,temp_v12,uStack_28,temp_v13[0]);
-    if ((temp_v11 != 0) && ((*(unsigned char *)((unsigned char *)&g_gameState + 0x18)) == 0)) {
-      FUN_003c2e0c(&temp_v9,&temp_v10);
-      temp_v5 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(param_1 + 0x2c) = temp_v5;
-      temp_v5 = VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(param_1 + 0x30) = temp_v5;
-      puVar3 = (unsigned int *)NaviMain_GetCursorPos(temp_v2);
-      temp_v5 = puVar3[1];
-      *(unsigned int *)(param_1 + 0x34) = *puVar3;
-      *(unsigned int *)(param_1 + 0x38) = temp_v5;
-      temp_v6 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v5 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(param_1 + 0x44) = temp_v6;
-      temp_v7 = VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v6 = VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-      *(unsigned int *)(param_1 + 0x48) = temp_v7;
-      *(unsigned int *)(param_1 + 0x4c) = temp_v5;
-      *(unsigned int *)(param_1 + 0x50) = temp_v6;
-      *(unsigned char *)(param_1 + 0x54) = 0;
-      *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x20000;
-    }
-  }
-  temp_v4 = DAT_0044cdc8;
-  if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {
-    if ((int)romwright_fabs_4(*(float *)(param_1 + 0x3c)) < 0x3f000001) {
-      if ((int)romwright_fabs_4(*(float *)(param_1 + 0x40)) < 0x3f000001) {
-        *(unsigned int *)(param_1 + 0x3c) = temp_v8;
-        *(unsigned int *)(param_1 + 0x40) = temp_v8;
+    if (FUN_0039b648(drag) != 0) {
         return 0;
-      }
     }
-    *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) * DAT_0044cdc8;
-    *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x40) * temp_v4;
-    pfVar4 = (float *)NaviMain_GetCursorPos(temp_v2);
-    temp_v9 = (unsigned int *)romwright_f2u((float)((*pfVar4 + *(float *)(param_1 + 0x3c))));
-    temp_v10 = (unsigned int *)romwright_f2u((float)((pfVar4[1] + *(float *)(param_1 + 0x40))));
-    NaviMain_SetCursorPos(temp_v2,&temp_v9);
-  }
-  return 0;
+    u8 *cursor = drag->cursorData;
+    TouchSample sample;
+    if (drag->flags & 0x20000) {
+        if (FUN_002bffd8(&sample.x, &sample.y) && g_gameState.unk18 == 0) {
+            NavigationPoint position;
+            position.x = drag->cursorStart.x + ((f32)sample.x - drag->touchStart.x);
+            position.y = drag->cursorStart.y + ((f32)sample.y - drag->touchStart.y);
+            NaviMain_SetCursorPos(cursor, &position);
+            if ((f32)sample.x == drag->touch.x && (f32)sample.y == drag->touch.y) {
+                if (drag->stillFrames < 99) {
+                    drag->stillFrames = drag->stillFrames + 1;
+                }
+            } else {
+                drag->previousTouch = drag->touch;
+                drag->touch.x = (f32)sample.x;
+                drag->touch.y = (f32)sample.y;
+            }
+        } else if (FUN_003c2e14(&sample.x, &sample.y) != 0 || g_gameState.unk18 != 0) {
+            drag->flags &= ~0x20000;
+            if (drag->stillFrames > 2) {
+                drag->velocity.x = 0.0f;
+                drag->velocity.y = 0.0f;
+            } else {
+                drag->velocity.x = drag->touch.x - drag->previousTouch.x;
+                drag->velocity.y = drag->touch.y - drag->previousTouch.y;
+            }
+        }
+    } else {
+        FUN_00231434(0x1C, 0xFA4, &sample.y, &sample.x, &sample.extentX, &sample.extentY);
+        if (effectForwardModeOne(sample.y, sample.x, sample.extentX, sample.extentY) && g_gameState.unk18 == 0) {
+            s32 x, y;
+            FUN_003c2e0c(&x, &y);
+            drag->touchStart.x = (f32)sample.x;
+            drag->touchStart.y = (f32)sample.y;
+            drag->cursorStart = *NaviMain_GetCursorPos(cursor);
+            drag->touch.x = (f32)sample.x;
+            drag->touch.y = (f32)sample.y;
+            drag->previousTouch.x = (f32)sample.x;
+            drag->previousTouch.y = (f32)sample.y;
+            drag->stillFrames = 0;
+            drag->flags |= 0x20000;
+        }
+    }
+    if ((drag->flags & 0x20000) == 0) {
+        f32 vx = drag->velocity.x;
+        if (!(vx < -0.5f || vx > 0.5f) && !(drag->velocity.y < -0.5f || drag->velocity.y > 0.5f)) {
+            drag->velocity.x = 0.0f;
+            drag->velocity.y = 0.0f;
+            return 0;
+        }
+        drag->velocity.x = vx * DAT_0044cdc8;
+        drag->velocity.y = drag->velocity.y * DAT_0044cdc8;
+        NavigationPoint position = *NaviMain_GetCursorPos(cursor);
+        position.x += drag->velocity.x;
+        position.y += drag->velocity.y;
+        NaviMain_SetCursorPos(cursor, &position);
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

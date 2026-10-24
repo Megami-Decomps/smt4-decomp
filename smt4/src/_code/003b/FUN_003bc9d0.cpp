@@ -1,163 +1,132 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc9d0` (_code @ 0x3bc9d0, 0x230 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the degree conversion's two float constants come out in swapped VFP registers (s2/s1) and the first-call stores schedule differently; folding the two multiplies into one is what armcc does for a single expression. */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(...);
-int gfxObjectDestroy(...);
-int FUN_00298d50(...);
-int FUN_0029bb14(...);
-int asdMdlManagerCreateLoaded(...);
-void FUN_0029c2cc(...);
-int slotSetRequest(...);
-int FUN_002a0428(...);
-int modelSlotAttachChild(...);
-int FUN_002a09b4(...);
-int asdWorkAreaReset(...);
-int asdModelSlotRelease(...);
-int asdMdlManagerDestroy(...);
-int FUN_002a8638(...);
-int FUN_002c1e30(...);
+extern char DAT_00407dc4[]; /* "title/title.bcenv" */
+extern char DAT_00407db0[]; /* "title/title_1.bccam" */
+extern char DAT_00407d9c[]; /* "title/title_1.bam" */
 
-typedef struct fn_003bc9d0_arg0 fn_003bc9d0_arg0;
-struct fn_003bc9d0_arg0 {
-    undefined1 field_0x0; /* +0x0 */
-    byte field_0x1; /* +0x1 */
-    undefined1 field_0x2; /* +0x2 */
-    undefined1 field_0x3; /* +0x3 */
-    void *field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x10];
-    void *field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x4];
-    int field_0x20; /* +0x20 */
-    byte field_0x24; /* +0x24 */
-    unsigned char pad_0x25[0x3];
-    int field_0x28; /* +0x28 */
-};
+/* The camera object the title intro plays: its +8 word is the scene node the camera reads. */
+typedef struct TitleIntroCamera {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *node;
+} TitleIntroCamera;
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
+/* The model node's motion speed: the base (0x74) and the applied value (0x78). */
+typedef struct TitleIntroNode {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ f32 baseSpeed;
+    /* 0x78 */ f32 speed;
+} TitleIntroNode;
 
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: gfxObjectDestroy. */
-extern int effTimelineIsDone(void *);
-extern void *FUN_00263c1c(char *);
-extern int screenFadeIsBusy(void);
-/* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: modelSlotAttachChild. */
-/* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: asdWorkAreaReset. */
-/* Supplied declaration required: asdModelSlotRelease. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002a8638. */
-extern int FUN_002adee0(void);
-extern int padIsButtonPressed(unsigned int);
-/* Supplied declaration required: FUN_002c1e30. */
-extern unsigned int FUN_002c501c(void);
+/* Work block of the title intro (the animated logo before the title menu). */
+typedef struct TitleIntro {
+    /* 0x00 */ u8 started;
+    /* 0x01 */ u8 fadingOut;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 finished;
+    /* 0x04 */ AsdMdlObject *model;
+    /* 0x08 */ u8 unk08[0x10];
+    /* 0x18 */ TitleIntroCamera *camera;
+    /* 0x1C */ u8 unk1c[4];
+    /* 0x20 */ s32 step;
+    /* 0x24 */ u8 skipRequested;
+    /* 0x25 */ u8 unk25[3];
+    /* 0x28 */ s32 fadeFrames;
+} TitleIntro;
 
+void asdWorkAreaReset(void);
+typedef struct CameraView {
+    f32 fov;
+    f32 v[3];
+} CameraView;
 
-void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
+void FUN_002a09b4(const char *path, s32 flags);
+TitleIntroCamera *FUN_00263c1c(const char *path);
+void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
+void *FUN_002c501c(void);
+void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
+void FUN_002c1e30(void *camera, s32 flag, CameraView view);
+void FUN_00298d50(void *camera);
+AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
+s32 FUN_002adee0(AsdMdlObject *model);
+void FUN_002a0428(AsdMdlObject *model, u32 enabled);
+void FUN_0029bb14(void *node, f32 speed);
+s32 effTimelineIsDone(void *effect);
+void slotSetRequest(s32 slot, s32 value, s32 arg);
+s32 screenFadeIsBusy(void);
+void asdMdlManagerMarkDestroy(AsdMdlObject *model);
+void asdMdlManagerDestroy(AsdMdlObject *model);
+void FUN_0029c2cc(void *camera, s32 arg);
+void gfxObjectDestroy(void *object);
+void asdModelSlotRelease(s32 slot);
+s32 padIsButtonPressed(u32 button);
 
+/* Flags a model as being destroyed and stops the effect from following its position. */
+static inline void modelFlagDestroyed(AsdMdlObject *model)
 {
-/* irregular: 15 native warning(s); review required */
-  int temp_v0;
-  void *pvVar2;
-  unsigned int temp_v1;
-  char *pcVar4;
-  unsigned int *puVar5;
-  float temp_v2;
-  unsigned char temp_v3 [4];
-  unsigned char temp_v4 [4];
-  unsigned char temp_v5 [4];
-  
-  if (param_1->field_0x20 != 0) {
-    temp_v0 = param_1->field_0x20;
-  }
-  else {
-    asdWorkAreaReset();
-    FUN_002a09b4("title/title.bcenv",0);
-    pvVar2 = (void *)FUN_00263c1c("title/title_1.bccam");
-    param_1->field_0x18 = pvVar2;
-    modelSlotAttachChild(pvVar2,0);
-    temp_v1 = FUN_002c501c();
-    FUN_002a8638(*(unsigned int *)((int)param_1->field_0x18 + 8),&temp_v2,temp_v5,temp_v3,
-                 temp_v4);
-    temp_v2 = temp_v2 * 180.0f * 0.31830987f;
-    FUN_002c1e30(temp_v1,1);
-    FUN_00298d50(temp_v1);
-    pcVar4 = "title/title_1.bam";
-    asdMdlManagerCreateLoaded("title/title_1.bam",0x38);
-    param_1->field_0x4 = pcVar4;
-    temp_v0 = FUN_002adee0();
-    if (temp_v0 != 0) {
-      FUN_002a0428(param_1->field_0x4,1);
-      puVar5 = (unsigned int *)param_1->field_0x4;
-      if ((*puVar5 & 4) != 0) {
-        *puVar5 = *puVar5 & 0xfffffffb;
-        *(unsigned int *)(puVar5[2] + 0x74) = 0x3f800000;
-        FUN_0029bb14();
-      }
-    }
-    param_1->field_0x0 = 1;
-    param_1->field_0x2 = 1;
-    temp_v0 = param_1->field_0x20 + 1;
-    param_1->field_0x20 = temp_v0;
-  }
-  if (temp_v0 != 1) {
-    temp_v0 = padIsButtonPressed(0);
-    if ((temp_v0 != 0) && (temp_v0 = screenFadeIsBusy(), temp_v0 == 0)) {
-      param_1->field_0x24 = 1;
-    }
-    return;
-  }
-  temp_v0 = effTimelineIsDone(param_1->field_0x18);
-  if ((temp_v0 == 0) || (param_1->field_0x1 != 0)) {
-    if (param_1->field_0x24 != 0) {
-      if (param_1->field_0x1 == 0) {
-        slotSetRequest(0,10,0xff);
-        slotSetRequest(1,10,0xff);
-      }
-      param_1->field_0x1 = 1;
-      param_1->field_0x24 = 0;
-    }
-  }
-  else {
-    slotSetRequest(0,10,0xff);
-    slotSetRequest(1,10,0xff);
-    param_1->field_0x1 = 1;
-    param_1->field_0x24 = 0;
-  }
-  temp_v0 = screenFadeIsBusy();
-  if (((temp_v0 == 0) && (param_1->field_0x1 != 0)) &&
-     (temp_v0 = param_1->field_0x28 + 1, param_1->field_0x28 = temp_v0, temp_v0 >= 2)) {
-    param_1->field_0x1 = 0;
-    puVar5 = (unsigned int *)param_1->field_0x4;
-    *puVar5 = *puVar5 | 2;
-    *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
-    asdMdlManagerMarkDestroy(param_1->field_0x4);
-    asdMdlManagerDestroy(param_1->field_0x4);
-    param_1->field_0x4 = (void *)0x0;
-    FUN_0029c2cc(param_1->field_0x18,0);
-    gfxObjectDestroy(param_1->field_0x18);
-    param_1->field_0x18 = (void *)0x0;
-    asdModelSlotRelease(0);
-    param_1->field_0x3 = 1;
-  }
-  temp_v0 = padIsButtonPressed(0);
-  if ((temp_v0 != 0) && (temp_v0 = screenFadeIsBusy(), temp_v0 == 0)) {
-    param_1->field_0x24 = 1;
-  }
-  return;
+    model->flags |= 2;
+    model->node->resource->positionFollowed = 0;
 }
 
-} /* extern "C" */
+/* Updates the title intro: loads the logo scene and camera on the first call, then plays it until
+ * it ends or the player presses a button, fades out and releases everything. */
+void FUN_003bc9d0(TitleIntro *intro)
+{
+    if (intro->step == 0) {
+        asdWorkAreaReset();
+        FUN_002a09b4(DAT_00407dc4, 0);
+        intro->camera = FUN_00263c1c(DAT_00407db0);
+        modelSlotAttachChild(intro->camera, 0);
+        void *camera = FUN_002c501c();
+        CameraView view;
+        FUN_002a8638(intro->camera->node, &view.fov, &view.v[2], &view.v[0], &view.v[1]);
+        f32 degrees = view.fov * 180.0f;
+        view.fov = degrees * 0.31830987f;
+        FUN_002c1e30(camera, 1, view);
+        FUN_00298d50(camera);
+        intro->model = asdMdlManagerCreateLoaded(DAT_00407d9c, 0x38);
+        if (FUN_002adee0(intro->model) != 0) {
+            FUN_002a0428(intro->model, 1);
+            AsdMdlObject *model = intro->model;
+            if ((model->flags & 4) != 0) {
+                model->flags &= ~4;
+                ((TitleIntroNode *)model->node)->baseSpeed = 1.0f;
+                FUN_0029bb14(model->node, ((TitleIntroNode *)model->node)->speed);
+            }
+        }
+        intro->started = 1;
+        intro->unk02 = 1;
+        intro->step++;
+    }
+    if (intro->step == 1) {
+        if ((effTimelineIsDone(intro->camera) != 0 && intro->fadingOut == 0) || intro->skipRequested != 0) {
+            if (intro->fadingOut == 0) {
+                slotSetRequest(0, 10, 0xFF);
+                slotSetRequest(1, 10, 0xFF);
+            }
+            intro->fadingOut = 1;
+            intro->skipRequested = 0;
+        }
+        if (screenFadeIsBusy() == 0 && intro->fadingOut != 0 && ++intro->fadeFrames >= 2) {
+            intro->fadingOut = 0;
+            modelFlagDestroyed(intro->model);
+            asdMdlManagerMarkDestroy(intro->model);
+            asdMdlManagerDestroy(intro->model);
+            intro->model = NULL;
+            FUN_0029c2cc(intro->camera, 0);
+            gfxObjectDestroy(intro->camera);
+            intro->camera = NULL;
+            asdModelSlotRelease(0);
+            intro->finished = 1;
+        }
+    }
+    if (padIsButtonPressed(0) != 0) {
+        if (screenFadeIsBusy() == 0) {
+            intro->skipRequested = 1;
+        }
+    }
+}
+
+}

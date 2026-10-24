@@ -1,153 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d5830` (_code @ 0x3d5830, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 174 vs 136 rows: retail addresses the fields through grouped sub-structures (vectors, timers) that this flat word view does not model. */
+#include "common.h"
+
+// One 32-bit slot of the event camera object, read as an integer or a float.
+union CameraWord {
+    u32 u;
+    f32 f;
+};
+
+// Event camera state, indexed by word; the named slots are the ones this reset
+// gives a meaning to (everything else is cleared).
+struct EventCamera {
+    CameraWord w[0x211];
+};
+
+enum {
+    CAM_RESET_FLAGS = 0x18d,    // bit 7 set while a reset is pending
+    CAM_POSITION = 0x15a,       // 3 floats: base position
+    CAM_DIRECTION = 0x160,      // 3 floats: direction, scaled by CAM_DISTANCE
+    CAM_DISTANCE = 0x166,
+    CAM_ZOOM = 0x158,
+    CAM_BLEND = 0x159,
+    CAM_PENDING_ACTION = 0x1b7,
+    CAM_ACTION_ID_A = 0x1d7,
+    CAM_ACTION_ID_B = 0x1d8,
+    CAM_SHAKE = 0xb,
+    CAM_ACTIVE = 10
+};
 
 extern "C" {
 
-int shakeEffectAlloc(void);
-int eventCommandSetPendingCleanup(void);
-int FUN_00298d50(unsigned int *);
-int asdCameraRegister(unsigned int *);
-int FUN_002c1e30(unsigned int *, int);
-int FUN_002c1edc(unsigned int *, unsigned int *, float *, int *);
-int FUN_002c2044(unsigned int *, int);
-int FUN_003d84d8(unsigned int *, int);
+void FUN_003d84d8(EventCamera* camera, s32 mode, s32 arg);
+void FUN_002c2044(void* node, s32 flag);
+void FUN_002c1edc(void* node, void* position, f32* target, s32* result);
+void FUN_002c1e30(void* node, s32 flag);
+void FUN_00298d50(void* node);
+void asdCameraRegister(void* node);
+s32 shakeEffectAlloc(void);
+void eventCommandSetPendingCleanup(void);
 
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-/* Supplied declaration required: shakeEffectAlloc. */
-/* Supplied declaration required: eventCommandSetPendingCleanup. */
-/* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: asdCameraRegister. */
-/* Supplied declaration required: FUN_002c1e30. */
-/* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002c2044. */
-/* Supplied declaration required: FUN_003d84d8. */
-
-
-void FUN_003d5830(unsigned int *param_1)
-
+// Resets the event camera to its idle state and registers it with the camera manager.
+void FUN_003d5830(EventCamera* camera)
 {
-/* irregular: 8 native warning(s); review required */
-  float temp_v0;
-  unsigned int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  FUN_003d84d8(param_1,0);
-  temp_v1 = 0;
-  param_1[0x1e5] = 0;
-  param_1[0x1eb] = 0;
-  param_1[500] = 0;
-  param_1[0x1f1] = 0;
-  param_1[0x1fc] = 0;
-  param_1[0x1fb] = 0;
-  param_1[0x1fa] = 0;
-  param_1[0x208] = 0;
-  param_1[0x207] = 0;
-  param_1[0x206] = 0;
-  param_1[0x1e9] = 0;
-  param_1[0x1ef] = 0;
-  param_1[0x1f8] = 0;
-  param_1[0x204] = 0;
-  param_1[0x210] = 0;
-  temp_v5 = 0;
-  temp_v6 = 0x3f800000;
-  temp_v7 = 0;
-  temp_v0 = (float)param_1[0x166];
-  temp_v2 = (float)param_1[0x15a] + (float)param_1[0x160] * temp_v0;
-  temp_v3 = (float)param_1[0x15b] + (float)param_1[0x161] * temp_v0;
-  temp_v4 = (float)param_1[0x15c] + (float)param_1[0x162] * temp_v0;
-  param_1[0x169] = 0;
-  param_1[0x158] = 0x40a00000;
-  param_1[0x159] = 0x3f4ccccd;
-  FUN_002c2044(param_1 + 0x16,1);
-  FUN_002c1edc(param_1 + 0x16,param_1 + 0x15a,&temp_v2,&temp_v5);
-  FUN_002c1e30(param_1 + 0x16,1);
-  FUN_00298d50(param_1 + 0x16);
-  asdCameraRegister(param_1 + 0x16);
-  param_1[0x192] = temp_v1;
-  param_1[0x191] = temp_v1;
-  param_1[400] = temp_v1;
-  param_1[0x1a4] = temp_v1;
-  param_1[0x1a3] = temp_v1;
-  param_1[0x1a2] = temp_v1;
-  param_1[0x18d] = param_1[0x18d] | 0x80;
-  param_1[0x19c] = temp_v1;
-  param_1[0x1a6] = temp_v1;
-  param_1[0x1aa] = temp_v1;
-  param_1[0x1ae] = temp_v1;
-  param_1[0x169] = temp_v1;
-  param_1[2] = temp_v1;
-  param_1[1] = temp_v1;
-  *param_1 = temp_v1;
-  param_1[0x198] = temp_v1;
-  param_1[0x197] = temp_v1;
-  param_1[0x196] = temp_v1;
-  param_1[0x1b5] = temp_v1;
-  param_1[0x1b4] = temp_v1;
-  param_1[0x1b3] = temp_v1;
-  param_1[0x1bb] = temp_v1;
-  param_1[0x1ba] = temp_v1;
-  param_1[0x1b9] = temp_v1;
-  param_1[5] = temp_v1;
-  param_1[4] = temp_v1;
-  param_1[3] = temp_v1;
-  param_1[8] = temp_v1;
-  param_1[7] = temp_v1;
-  param_1[6] = temp_v1;
-  param_1[9] = 0;
-  param_1[0x1d0] = temp_v1;
-  param_1[0x1cf] = temp_v1;
-  param_1[0x1ce] = temp_v1;
-  param_1[0x1db] = temp_v1;
-  param_1[0x1da] = temp_v1;
-  param_1[0x1d9] = temp_v1;
-  param_1[0x1de] = temp_v1;
-  param_1[0x1dd] = temp_v1;
-  param_1[0x1dc] = temp_v1;
-  param_1[0x1e1] = temp_v1;
-  param_1[0x1e0] = temp_v1;
-  param_1[0x1df] = temp_v1;
-  param_1[0x1e4] = temp_v1;
-  param_1[0x1e3] = temp_v1;
-  param_1[0x1e2] = temp_v1;
-  param_1[0x1a8] = 0;
-  param_1[0x1ac] = 0;
-  param_1[0x1b0] = 0;
-  param_1[0x1b7] = 0;
-  temp_v1 = 0xffffffff;
-  param_1[0x1bd] = 0;
-  param_1[0x1d7] = 0xffffffff;
-  param_1[0x1ca] = 0;
-  param_1[0x1d8] = 0xffffffff;
-  shakeEffectAlloc();
-  param_1[0xb] = temp_v1;
-  eventCommandSetPendingCleanup();
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x14] = 0;
-  param_1[10] = 1;
-  param_1[0x15] = 0;
-  return;
+    CameraWord* w = camera->w;
+    FUN_003d84d8(camera, 0, 0);
+    w[0x1e5].f = 0.0f;
+    w[0x1eb].f = 0.0f;
+    w[0x1f4].f = 0.0f;
+    w[0x1f1].f = 0.0f;
+    w[0x1fc].f = 0.0f;
+    w[0x1fb].f = 0.0f;
+    w[0x1fa].f = 0.0f;
+    w[0x208].f = 0.0f;
+    w[0x207].f = 0.0f;
+    w[0x206].f = 0.0f;
+    w[0x1e9].u = 0;
+    w[0x1ef].u = 0;
+    w[0x1f8].u = 0;
+    w[0x204].u = 0;
+    w[0x210].u = 0;
+
+    s32 result = 0;
+    f32 distance = w[CAM_DISTANCE].f;
+    f32 target[3];
+    target[0] = w[CAM_POSITION].f + w[CAM_DIRECTION].f * distance;
+    target[1] = w[CAM_POSITION + 1].f + w[CAM_DIRECTION + 1].f * distance;
+    target[2] = w[CAM_POSITION + 2].f + w[CAM_DIRECTION + 2].f * distance;
+    w[0x169].f = 0.0f;
+    w[CAM_ZOOM].f = 5.0f;
+    w[CAM_BLEND].f = 0.8f;
+    FUN_002c2044(&w[0x16], 1);
+    FUN_002c1edc(&w[0x16], &w[CAM_POSITION], target, &result);
+    FUN_002c1e30(&w[0x16], 1);
+    FUN_00298d50(&w[0x16]);
+    asdCameraRegister(&w[0x16]);
+
+    w[0x192].f = 0.0f;
+    w[0x191].f = 0.0f;
+    w[0x190].f = 0.0f;
+    w[0x1a4].f = 0.0f;
+    w[0x1a3].f = 0.0f;
+    w[0x1a2].f = 0.0f;
+    w[CAM_RESET_FLAGS].u |= 0x80;
+    w[0x19c].f = 0.0f;
+    w[0x1a6].f = 0.0f;
+    w[0x1aa].f = 0.0f;
+    w[0x1ae].f = 0.0f;
+    w[0x169].f = 0.0f;
+    w[2].f = 0.0f;
+    w[1].f = 0.0f;
+    w[0].f = 0.0f;
+    w[0x198].f = 0.0f;
+    w[0x197].f = 0.0f;
+    w[0x196].f = 0.0f;
+    w[0x1b5].f = 0.0f;
+    w[0x1b4].f = 0.0f;
+    w[0x1b3].f = 0.0f;
+    w[0x1bb].f = 0.0f;
+    w[0x1ba].f = 0.0f;
+    w[0x1b9].f = 0.0f;
+    w[5].f = 0.0f;
+    w[4].f = 0.0f;
+    w[3].f = 0.0f;
+    w[8].f = 0.0f;
+    w[7].f = 0.0f;
+    w[6].f = 0.0f;
+    w[9].u = 0;
+    w[0x1d0].f = 0.0f;
+    w[0x1cf].f = 0.0f;
+    w[0x1ce].f = 0.0f;
+    w[0x1db].f = 0.0f;
+    w[0x1da].f = 0.0f;
+    w[0x1d9].f = 0.0f;
+    w[0x1de].f = 0.0f;
+    w[0x1dd].f = 0.0f;
+    w[0x1dc].f = 0.0f;
+    w[0x1e1].f = 0.0f;
+    w[0x1e0].f = 0.0f;
+    w[0x1df].f = 0.0f;
+    w[0x1e4].f = 0.0f;
+    w[0x1e3].f = 0.0f;
+    w[0x1e2].f = 0.0f;
+    w[0x1a8].u = 0;
+    w[0x1ac].u = 0;
+    w[0x1b0].u = 0;
+    w[CAM_PENDING_ACTION].u = 0;
+    w[0x1bd].u = 0;
+    w[CAM_ACTION_ID_A].u = 0xffffffff;
+    w[0x1ca].u = 0;
+    w[CAM_ACTION_ID_B].u = 0xffffffff;
+    w[CAM_SHAKE].u = shakeEffectAlloc();
+    eventCommandSetPendingCleanup();
+    w[0xc].u = 0;
+    w[0xd].u = 0;
+    w[0xe].u = 0;
+    w[0xf].u = 0;
+    w[0x10].u = 0;
+    w[0x11].u = 0;
+    w[0x12].u = 0;
+    w[0x13].u = 0;
+    w[0x14].u = 0;
+    w[CAM_ACTIVE].u = 1;
+    w[0x15].u = 0;
 }
 
 } /* extern "C" */

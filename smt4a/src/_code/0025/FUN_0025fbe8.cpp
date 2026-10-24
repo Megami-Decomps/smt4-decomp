@@ -1,128 +1,107 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025fbe8` (_code @ 0x25fbe8, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float scheduling and register allocation differ - retail keeps the four vertices in s16-s27 loaded with vldmia and passes them straight to the edge builders, while armcc here interleaves the loads with the plane/centre computation; the stores and calls are the same. */
+#include "shard/S1Mover.h"
+
+namespace {
+/* A vertex or normal of the collision mesh (16 bytes, the fourth word is padding). */
+struct MeshVec4 {
+    Vec3f v;
+    f32 w;
+};
+
+/* A face of the collision mesh as stored in the file: four vertex indices and the normal index. */
+struct MeshFace {
+    s32 vertex[4];
+    s32 normal;
+    s32 unk14;
+};
+
+struct CollisionMesh {
+    /* 0x00 */ MeshVec4 *vertices;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ MeshVec4 *normals;
+    /* 0x0c */ u8 unk0c[0xc];
+    /* 0x18 */ MeshFace *faces;
+    /* 0x1c */ u32 faceCount;
+};
+
+/* A built collision face (0xA8 bytes). */
+struct CollisionFace {
+    /* 0x00 */ u32 owner;
+    /* 0x04 */ s8 kind;
+    /* 0x05 */ u8 vertexCount;
+    /* 0x06 */ u16 unk06;
+    /* 0x08 */ u8 enabled;
+    /* 0x09 */ u8 unk09;
+    /* 0x0a */ u16 unk0a;
+    /* 0x0c */ Vec3f normal;
+    /* 0x18 */ f32 distance;          /* dot(normal, vertex[0]) */
+    /* 0x1c */ f32 edgeA[3];
+    /* 0x28 */ f32 edgeB[3];
+    /* 0x34 */ f32 edgeC[3];
+    /* 0x40 */ f32 edgeD[3];
+    /* 0x4c */ f32 limitA;
+    /* 0x50 */ f32 limitB;
+    /* 0x54 */ f32 limitC;
+    /* 0x58 */ f32 limitD;
+    /* 0x5c */ Vec3f vertex[4];
+    /* 0x8c */ Vec3f center;
+    /* 0x98 */ f32 bounds[2];
+    /* 0xa0 */ f32 bounds2[2];
+};
+
+struct MapCollision {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 faceCount;         /* faces built so far */
+    /* 0x0c */ u8 unk0c[0x10];
+    /* 0x1c */ CollisionFace *faces;
+    /* 0x20 */ u8 unk20[0x10];
+    /* 0x30 */ CollisionMesh *mesh;
+};
+}
 
 extern "C" {
+extern MapCollision g_mapCollision;
+void FUN_001f4d08(s32 flag, Vec3f *out, f32 hint);
+void FUN_00237438(s32 kind, s32 corner, f32 *edge, f32 *limit, Vec3f origin, Vec3f from, Vec3f to);
+void FUN_00226e90(s32 kind, s32 count, f32 *bounds, f32 *bounds2, Vec3f a, Vec3f b, Vec3f c, Vec3f d);
 
-int FUN_001f4d08(int, unsigned char [72]);
-int FUN_00226e90(int, int, unsigned int *, unsigned int *);
-int FUN_00237438(int, int, unsigned int *, unsigned int *);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp68; /* 0x68: local_68 */
-} param_1_stack;
-
-extern int DAT_0058020c; /* 0x58020c */
-extern int DAT_00580220; /* 0x580220 */
-extern int *DAT_00580234; /* 0x580234 */
-
-/* Supplied declaration required: FUN_001f4d08. */
-/* Supplied declaration required: FUN_00226e90. */
-/* Supplied declaration required: FUN_00237438. */
-
-
-void FUN_0025fbe8(unsigned int param_1)
-
+/* Appends the collision mesh's faces to the face table, building each one's plane, centre and edge data. */
+void FUN_0025fbe8(u32 owner)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned long long temp_v0;
-  unsigned long long temp_v1;
-  unsigned long long temp_v2;
-  unsigned long long temp_v3;
-  int *piVar5;
-  unsigned long long *puVar6;
-  float *pfVar7;
-  float *pfVar8;
-  int temp_v4;
-  unsigned int *puVar10;
-  unsigned int temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  unsigned long long temp_v19;
-  unsigned char temp_v20 [72];
-  
-  temp_v5 = 0;
-  if (DAT_00580234[7] != 0) {
-    temp_v19 = 0x3e800000;
-    do {
-      piVar5 = (int *)(DAT_00580234[6] + temp_v5 * 0x18);
-      puVar10 = (unsigned int *)(DAT_00580220 + DAT_0058020c * 0xa8);
-      temp_v4 = *DAT_00580234;
-      puVar6 = (unsigned long long *)(temp_v4 + *piVar5 * 0x10);
-      temp_v0 = *puVar6;
-      temp_v11 = *(float *)(puVar6 + 1);
-      pfVar7 = (float *)(temp_v4 + piVar5[1] * 0x10);
-      temp_v15 = *pfVar7;
-      temp_v1 = *(unsigned long long *)(pfVar7 + 1);
-      puVar6 = (unsigned long long *)(temp_v4 + piVar5[2] * 0x10);
-      temp_v2 = *puVar6;
-      temp_v14 = *(float *)(puVar6 + 1);
-      pfVar8 = (float *)(temp_v4 + piVar5[3] * 0x10);
-      pfVar7 = (float *)(DAT_00580234[2] + piVar5[4] * 0x10);
-      temp_v12 = *pfVar8;
-      temp_v3 = *(unsigned long long *)(pfVar8 + 1);
-      temp_v6 = *pfVar7;
-      temp_v7 = pfVar7[1];
-      temp_v8 = pfVar7[2];
-      *(float *)&puVar10[3] = temp_v6;
-      *(float *)&puVar10[4] = temp_v7;
-      *(float *)&puVar10[5] = temp_v8;
-      temp_v9 = (float)temp_v0;
-      temp_v10 = (float)((unsigned long long)temp_v0 >> 0x20);
-      temp_v16 = (float)temp_v1;
-      puVar10[6] = temp_v6 * temp_v9 + temp_v7 * temp_v10 + temp_v8 * temp_v11;
-      temp_v17 = (float)((unsigned long long)temp_v1 >> 0x20);
-      temp_v8 = (float)temp_v2;
-      temp_v13 = (float)((unsigned long long)temp_v2 >> 0x20);
-      temp_v6 = (float)temp_v3;
-      temp_v7 = (float)((unsigned long long)temp_v3 >> 0x20);
-      temp_v18 = (float)temp_v19;
-      puVar10[0x23] = (temp_v9 + temp_v15 + temp_v8 + temp_v12) * temp_v18;
-      puVar10[0x24] = (temp_v10 + temp_v16 + temp_v13 + temp_v6) * temp_v18;
-      puVar10[0x25] = (temp_v11 + temp_v17 + temp_v14 + temp_v7) * temp_v18;
-      *(float *)&puVar10[0x17] = temp_v9;
-      *(float *)&puVar10[0x18] = temp_v10;
-      *(float *)&puVar10[0x19] = temp_v11;
-      *(float *)&puVar10[0x20] = temp_v12;
-      *(float *)&puVar10[0x21] = temp_v6;
-      *(float *)&puVar10[0x22] = temp_v7;
-      *(float *)&puVar10[0x1d] = temp_v8;
-      *(float *)&puVar10[0x1e] = temp_v13;
-      *(float *)&puVar10[0x1f] = temp_v14;
-      *(float *)&puVar10[0x1a] = temp_v15;
-      *(float *)&puVar10[0x1b] = temp_v16;
-      *(float *)&puVar10[0x1c] = temp_v17;
-      *(unsigned char *)((int)puVar10 + 5) = 4;
-      *(unsigned char *)(puVar10 + 1) = 1;
-      *puVar10 = param_1;
-      *(unsigned short *)((int)puVar10 + 6) = 0;
-      *(unsigned char *)(puVar10 + 2) = 1;
-      *(unsigned char *)((int)puVar10 + 9) = 0;
-      *(unsigned short *)((int)puVar10 + 10) = 0;
-      FUN_001f4d08(1,temp_v20);
-      FUN_00237438((int)*(char *)(puVar10 + 1),0,puVar10 + 7,puVar10 + 0x13);
-      FUN_00237438((int)*(char *)(puVar10 + 1),1,puVar10 + 10,puVar10 + 0x14);
-      FUN_00237438((int)*(char *)(puVar10 + 1),2,puVar10 + 0xd,puVar10 + 0x15);
-      FUN_00237438((int)*(char *)(puVar10 + 1),2,puVar10 + 0x10,puVar10 + 0x16);
-      FUN_00226e90((int)*(char *)(puVar10 + 1),(int)*(char *)((int)puVar10 + 5),puVar10 + 0x26,
-                   puVar10 + 0x28);
-      temp_v5 = temp_v5 + 1;
-      DAT_0058020c = DAT_0058020c + 1;
-    } while (temp_v5 < (unsigned int)DAT_00580234[7]);
-  }
-  return;
+    for (u32 i = 0; i < g_mapCollision.mesh->faceCount; i++) {
+        const MeshFace *source = &g_mapCollision.mesh->faces[i];
+        CollisionFace *face = &g_mapCollision.faces[g_mapCollision.faceCount];
+        const MeshVec4 *vertices = g_mapCollision.mesh->vertices;
+        Vec3f v0 = vertices[source->vertex[0]].v;
+        Vec3f v1 = vertices[source->vertex[1]].v;
+        Vec3f v2 = vertices[source->vertex[2]].v;
+        Vec3f v3 = vertices[source->vertex[3]].v;
+        const MeshVec4 *normal = &g_mapCollision.mesh->normals[source->normal];
+        face->normal = normal->v;
+        face->distance = normal->v.x * v0.x + normal->v.y * v0.y + normal->v.z * v0.z;
+        face->center.x = (v0.x + v1.x + v2.x + v3.x) * 0.25f;
+        face->center.y = (v0.y + v1.y + v2.y + v3.y) * 0.25f;
+        face->center.z = (v0.z + v1.z + v2.z + v3.z) * 0.25f;
+        face->vertex[0] = v0;
+        face->vertex[3] = v3;
+        face->vertex[2] = v2;
+        face->vertex[1] = v1;
+        face->vertexCount = 4;
+        face->kind = 1;
+        face->owner = owner;
+        face->unk06 = 0;
+        face->enabled = 1;
+        face->unk09 = 0;
+        face->unk0a = 0;
+        Vec3f reference;
+        FUN_001f4d08(1, &reference, v0.x);
+        FUN_00237438(face->kind, 0, face->edgeA, &face->limitA, reference, v0, v1);
+        FUN_00237438(face->kind, 1, face->edgeB, &face->limitB, reference, v1, v2);
+        FUN_00237438(face->kind, 2, face->edgeC, &face->limitC, reference, v2, v3);
+        FUN_00237438(face->kind, 2, face->edgeD, &face->limitD, reference, v3, v0);
+        FUN_00226e90(face->kind, face->vertexCount, face->bounds, face->bounds2, v0, v1, v2, v3);
+        g_mapCollision.faceCount++;
+    }
 }
 
 } /* extern "C" */

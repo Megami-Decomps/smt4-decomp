@@ -54,7 +54,8 @@ typedef struct Mover {
     /* 0x1610 */ Vec3f positionB;
     /* 0x161C */ Vec3f finalPosition;
     /* 0x1628 */ Vec3f finalPositionB;
-    /* 0x1634 */ u8 unk1634[0x18];
+    /* 0x1634 */ Vec3f homePosition;
+    /* 0x1640 */ Vec3f homePositionB;
     /* 0x164C */ Vec3f nodeVelocity;
     /* 0x1658 */ Vec3f nodePosition;
     /* 0x1664 */ Vec3f nodeFinalPosition;

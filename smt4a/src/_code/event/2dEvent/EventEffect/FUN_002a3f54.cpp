@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the renderStackPush expansions schedule differently (next-entry address computed into ip before the previous-entry load). */
 #include "event/2dEvent/EventFilter.h"
 #include "camp/RenderCtx.h"
 

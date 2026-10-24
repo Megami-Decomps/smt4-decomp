@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack address setup moves before the state lookup, and text-argument/return scheduling differs; O2 may retain retail's instruction ordering. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 12 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 
 struct PlaceWindowPosition {
@@ -43,7 +43,7 @@ u8 placeWinDraw(void)
     if (window->state && window->visible) {
         FUN_00157558(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         s32 x = vec2GetXInt(&window->position);
         s32 translatedX = x + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
         s32 y = vec2GetYInt(&window->position);

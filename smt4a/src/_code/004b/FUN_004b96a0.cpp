@@ -1,139 +1,137 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b96a0` (_code @ 0x4b96a0, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc keeps the constant 2 (process mode, entry kind 2) in a saved register where retail re-materializes it with mov, which shifts the 3/-1 constants' registers; the block layout and the switch table otherwise match. */
+#include "common.h"
+
+/* The map/scene state block as this scene start touches it. */
+struct GameStateScene {
+    /* 0x000 */ s32 scene;
+    /* 0x004 */ u8 unk004[0x10];
+    /* 0x014 */ u32 phase;
+    /* 0x018 */ u8 unk018[0x20];
+    /* 0x038 */ u8 busy;
+    /* 0x039 */ u8 unk039[0x53B];
+    /* 0x574 */ u8 resumed;
+};
+
+struct AocMainView {
+    /* 0x00 */ u8 unk00[0xC1];
+    /* 0xC1 */ u8 unk0C1;
+};
+
+/* The scene controller's work (observed prefix). */
+struct SceneStartWork {
+    /* 0x0000 */ u8 unk0000[0x34];
+    /* 0x0034 */ u32 bgmId;
+    /* 0x0038 */ u8 unk0038[4];
+    /* 0x003C */ s16 mode;
+    /* 0x003E */ u8 unk003E[0x12];
+    /* 0x0050 */ f32 centerX;
+    /* 0x0054 */ f32 centerY;
+    /* 0x0058 */ u8 unk0058[0xA30];
+    /* 0x0A88 */ u8 flagA88;
+    /* 0x0A89 */ u8 unk0A89[0x69F];
+    /* 0x1128 */ void *script;
+    /* 0x112C */ void *scriptData;
+    /* 0x1130 */ u32 *process;
+    /* 0x1134 */ u8 unk1134[0x38];
+    /* 0x116C */ u32 entryKind;
+};
 
 extern "C" {
 
-int gameDataTableGetFlag(void);
-int FUN_00215978(int);
-int FUN_00239b10(int);
-int bgmReleaseStopped(void);
-int FUN_00275bc8(int, unsigned int);
-int mapPlaceSet(unsigned int, unsigned int);
-int soundChannelRequestIfEnabled(int, int, int);
-int FUN_003d54f8(int, int);
-int FUN_004b6bc4(int, int, unsigned int);
+extern GameStateScene g_gameState;
+extern AocMainView *g_aocMain;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+u32 *FUN_00275bc8(void *script, void *data);
+s32 FUN_004186e0(void);
+s32 FUN_001bd118(void);
+void FUN_004b6bc4(SceneStartWork *work, s32 mode, s32 arg);
+s32 FUN_0013def0(u32 index);
+void FUN_003d54f8(u32 index, s32 value);
+void bgmReleaseStopped(void);
+u32 gameDataTableGetFlag(void);
+void FUN_00239b10(s32 value);
+void FUN_00215978(s32 value);
+s32 FUN_0031d230(void);
+void mapPlaceSet(s32 first, s32 second);
+s32 gameFlagIsSet(u32 flag);
+void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
 
-extern int g_aocMain; /* 0x570260 */
-extern int g_gameState; /* 0x5f15fc */
-extern unsigned int DAT_005f1610; /* 0x5f1610 */
-extern unsigned char DAT_005f1634; /* 0x5f1634 */
-extern signed char DAT_005f1b70; /* 0x5f1b70 */
-
-extern int FUN_0013def0(unsigned int);
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: gameDataTableGetFlag. */
-extern int FUN_001bd118(void);
-/* Supplied declaration required: FUN_00215978. */
-/* Supplied declaration required: FUN_00239b10. */
-/* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_00275bc8. */
-extern int FUN_0031d230(void);
-/* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_003d54f8. */
-extern int FUN_004186e0(void);
-/* Supplied declaration required: FUN_004b6bc4. */
-
-
-void FUN_004b96a0(int param_1)
-
+/* Starts the scene: creates its script process, resets the entry state from the game-data flags and
+ * picks the scene's background music. */
+void FUN_004b96a0(SceneStartWork *work)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = *(int *)(param_1 + 0x1128);
-  FUN_00275bc8(temp_v1,*(unsigned int *)(param_1 + 0x112c));
-  *(int *)(param_1 + 0x1130) = temp_v1;
-  *(unsigned int *)(temp_v1 + 0x108) = 2;
-  temp_v3 = (int)*(short *)(param_1 + 0x3c);
-  temp_v0 = 0;
-  temp_v1 = FUN_004186e0();
-  if ((temp_v1 != 0) && (temp_v1 = FUN_001bd118(), temp_v1 == 6)) {
-    temp_v0 = 1;
-  }
-  FUN_004b6bc4(param_1,temp_v3,0xffffffff);
-  *(unsigned int *)(param_1 + 0x50) = 0x43c80000;
-  *(unsigned int *)(param_1 + 0x54) = 0x43700000;
-  temp_v1 = FUN_0013def0(0);
-  if (temp_v1 == 3) {
-    FUN_003d54f8(0,10);
-  }
-  temp_v1 = FUN_0013def0(1);
-  if (temp_v1 == 3) {
-    FUN_003d54f8(1,10);
-  }
-  *(unsigned int *)(param_1 + 0x116c) = 0;
-  bgmReleaseStopped();
-  if (DAT_005f1b70 != '\0') {
-    if (temp_v0) {
-      temp_v2 = gameDataTableGetFlag();
-      switch(temp_v2) {
-      case 0:
-      case 3:
-        *(unsigned int *)(param_1 + 0x116c) = 1;
-        *(unsigned char *)(param_1 + 0xa88) = 1;
-        break;
-      case 4:
-        *(unsigned int *)(param_1 + 0x116c) = 2;
-      }
+    s32 mode;
+    u8 special;
+    u32 bgm;
+
+    work->process = FUN_00275bc8(work->script, work->scriptData);
+    *(work->process + 0x108 / 4) = 2;
+    mode = work->mode;
+    special = 0;
+    if (FUN_004186e0() != 0 && FUN_001bd118() == 6) {
+        special = 1;
     }
-    else if ((*(char *)(g_aocMain + 0xc1) == '\0') && (temp_v1 = gameDataTableGetFlag(), temp_v1 != 6)) {
-      temp_v1 = gameDataTableGetFlag();
-      if (temp_v1 != 1) {
-        temp_v1 = gameDataTableGetFlag();
-        if (temp_v1 == 5) {
-          FUN_00239b10(1);
-          FUN_00215978(0);
-          *(unsigned int *)(param_1 + 0x116c) = 4;
-        }
-      }
-      else {
-        FUN_00239b10(1);
-        FUN_00215978(0);
-        temp_v1 = FUN_0031d230();
-        if (temp_v1 != 0) {
-          *(unsigned int *)(param_1 + 0x116c) = 3;
-        }
-        else {
-          *(unsigned int *)(param_1 + 0x116c) = 4;
-        }
-      }
+    FUN_004b6bc4(work, mode, -1);
+    work->centerX = 400.0f;
+    work->centerY = 240.0f;
+    if (FUN_0013def0(0) == 3) {
+        FUN_003d54f8(0, 10);
     }
-    else {
-      FUN_00239b10(2);
-      FUN_00215978(0);
+    if (FUN_0013def0(1) == 3) {
+        FUN_003d54f8(1, 10);
     }
-  }
-  g_gameState = temp_v3 + 200;
-  DAT_005f1634 = 0;
-  DAT_005f1610 = 3;
-  DAT_005f1b70 = 0;
-  mapPlaceSet(0xffffffff,0xffffffff);
-  if (temp_v3 == 3 || temp_v3 == 4) {
-    temp_v1 = 0x100004a;
-  }
-  else {
-    temp_v1 = 0x100003d;
-  }
-  temp_v3 = gameFlagIsSet(0x12e);
-  if ((temp_v3 != 0) && (temp_v3 = gameFlagIsSet(0x135), temp_v3 == 0)) {
-    temp_v1 = 0x100003f;
-  }
-  if (*(int *)(param_1 + 0x34) == temp_v1) {
-    return;
-  }
-  *(int *)(param_1 + 0x34) = temp_v1;
-  soundChannelRequestIfEnabled(temp_v1,0,0x3c);
-  return;
+    work->entryKind = 0;
+    bgmReleaseStopped();
+    if (g_gameState.resumed != 0) {
+        if (special) {
+            switch (gameDataTableGetFlag()) {
+            case 0:
+            case 3:
+                work->entryKind = 1;
+                work->flagA88 = 1;
+                break;
+            case 4:
+                work->entryKind = 2;
+                break;
+            case 1:
+            case 2:
+                break;
+            }
+        } else if (g_aocMain->unk0C1 != 0 || gameDataTableGetFlag() == 6) {
+            FUN_00239b10(2);
+            FUN_00215978(0);
+        } else if (gameDataTableGetFlag() == 1) {
+            FUN_00239b10(1);
+            FUN_00215978(0);
+            if (FUN_0031d230() != 0) {
+                work->entryKind = 3;
+            } else {
+                work->entryKind = 4;
+            }
+        } else if (gameDataTableGetFlag() == 5) {
+            FUN_00239b10(1);
+            FUN_00215978(0);
+            work->entryKind = 4;
+        }
+    }
+    g_gameState.busy = 0;
+    g_gameState.scene = mode + 200;
+    g_gameState.phase = 3;
+    g_gameState.resumed = 0;
+    mapPlaceSet(-1, -1);
+    if (mode == 3 || mode == 4) {
+        bgm = 0x0100004A;
+    } else {
+        bgm = 0x0100003D;
+    }
+    if (gameFlagIsSet(0x12E) != 0 && gameFlagIsSet(0x135) == 0) {
+        bgm = 0x0100003F;
+    }
+    if (work->bgmId == bgm) {
+        return;
+    }
+    work->bgmId = bgm;
+    soundChannelRequestIfEnabled(bgm, 0, 60);
 }
 
 } /* extern "C" */

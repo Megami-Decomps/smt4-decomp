@@ -1,137 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042230c` (_code @ 0x42230c, 0x208 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the reader start-up. Retail passes a stale r6 as the second argument of asdOperatorNew (no source value exists for it), and keeps the three-callback table and the thread arguments in the order the stack shows; the register allocation of those stores and the event-creation guards differs. */
+#include "mobiclip_ctrl/S4FsReader.h"
+#include "AsdSDK/AsdDebug.h"
+#include "nn/svc.h"
+
+/* The reader thread's stack block: the memory and the allocator object that describes it. */
+struct S4ThreadStack {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 base;
+    /* 0x0C */ u32 size;
+    /* 0x10 */ u8 unk10;
+};
+struct S4ThreadStackBlock {
+    /* 0x00 */ void *memory;
+    /* 0x04 */ S4ThreadStack *stack;
+};
+
+/* The thread's start description: callbacks the thread library invokes. */
+struct S4ThreadHooks {
+    s32 version;
+    const void *onStart;
+    const void *onExit;
+    const void *onFree;
+};
 
 extern "C" {
+extern const char DAT_00532ab8[]; /* "c:\\SMT4F\\SMT4F\\mobiclip_ctrl\\helper_S4FsReader.cpp": __FILE__ */
+extern S4ThreadStackBlock DAT_005880f8;
 
-int asdOperatorNew(...);
-int memAlloc(...);
-int resultReportIfFailed(...);
-int FUN_0017fd20(...);
-int nn_os_CriticalSection_Initialize(...);
-int FUN_002e3140(...);
-int FUN_002fb0d4(...);
-int software_interrupt(...);
+void *memAlloc(int, int, int, s32 size, int align, int);
+void *asdOperatorNew(u32 bytes, s32 arg);
+void resultReportIfFailed(S4ThreadStack *stack, void *memory, u32 size);
+void nn_os_CriticalSection_Initialize(void *lock);
+s32 FUN_0017fd20(u32 *handle, u32 resetType); /* creates an event */
+void FUN_002e3140(s32 result);                /* throws a fatal error */
+s32 FUN_002fb0d4(u32 *thread, const S4ThreadHooks *hooks, void (*entry)(void *), void *argument, u32 stackTop, u32 alignment, s32 priority, s32 affinity);
+void FUN_00422534(void *reader);
+void FUN_00514a74(void);
+void FUN_00514b20(void);
+void FUN_00514b88(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_3_stack;
-
-extern int FUN_00422534(...); /* 0x422534 */
-extern unsigned char LAB_00514a74; /* 0x514a74 */
-extern unsigned char LAB_00514b20; /* 0x514b20 */
-extern unsigned char LAB_00514b88; /* 0x514b88 */
-extern unsigned int DAT_005880f8; /* 0x5880f8 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: FUN_0017fd20. */
-/* Supplied declaration required: nn_os_CriticalSection_Initialize. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002fb0d4. */
-
-
-unsigned int FUN_0042230c(unsigned int *param_1,int *param_2,unsigned int *param_3)
-
+static void createEventOnce(u32 *slot)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int uStack_3c;
-  unsigned int *temp_v3 [3];
-  int temp_v4;
-  unsigned char *puStack_24;
-  unsigned char *temp_v5;
-  unsigned char *temp_v6;
-  
-  param_1[0xe] = (unsigned int)param_2;
-  temp_v0 = (**(romwright_code **)(*param_2 + 0x24))(param_2);
-  param_1[4] = temp_v0;
-  param_1[5] = 0;
-  param_1[0xf] = (unsigned int)param_3;
-  temp_v0 = (**(romwright_code **)*param_3)(param_3,0x40000,4);
-  param_1[8] = temp_v0;
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  nn_os_CriticalSection_Initialize(param_1 + 0x10);
-  temp_v1 = 0;
-  puVar3 = (unsigned int *)0xe0a0183b;
-  puVar2 = puVar3;
-  if (param_1[0x13] == 0) {
-    puVar2 = (unsigned int *)&temp_v1;
-    FUN_0017fd20();
-    if (-1 < (int)puVar2) {
-      param_1[0x13] = temp_v1;
-      puVar2 = (unsigned int *)0x0;
+    s32 result = (s32)0xE0A0183B; /* already created */
+    u32 handle = 0;
+    if (*slot == 0) {
+        result = FUN_0017fd20(&handle, 0);
+        if (result >= 0) {
+            *slot = handle;
+            result = 0;
+        }
     }
-  }
-  if ((int)puVar2 < 0) {
-    FUN_002e3140();
-  }
-  temp_v1 = 0;
-  if (param_1[0x14] == 0) {
-    puVar3 = (unsigned int *)&temp_v1;
-    FUN_0017fd20(puVar3,0);
-    if (-1 < (int)puVar3) {
-      puVar3 = (unsigned int *)0x0;
-      param_1[0x14] = temp_v1;
+    if (result < 0)
+        FUN_002e3140(result);
+}
+
+/* Starts the movie reader: sizes it from the source, allocates the ring buffer, creates the data and
+ * stop events and the worker thread, and wakes the thread once. */
+u32 FUN_0042230c(S4FsReader *reader, S4StreamSource *source, S4Allocator *allocator)
+{
+    reader->source = source;
+    reader->limit = source->getSize();
+    reader->allocator = allocator;
+    reader->ring = (u8 *)allocator->allocate(S4_FS_READER_RING_SIZE, 4);
+    reader->consumed = 0;
+    reader->produced = 0;
+    reader->requested = 0;
+    nn_os_CriticalSection_Initialize(reader->lock);
+    createEventOnce(&reader->dataEvent);
+    createEventOnce(&reader->stopEvent);
+    reader->wakeup[0] = (u32)&reader->dataEvent;
+    reader->wakeup[1] = (u32)&reader->stopEvent;
+
+    asdDebugTrace(DAT_00532ab8, 295);
+    DAT_005880f8.memory = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
+    S4ThreadStack *stack = (S4ThreadStack *)asdOperatorNew(sizeof(S4ThreadStack), 0);
+    if (stack != NULL) {
+        stack->unk00 = 0;
+        stack->unk04 = 0;
+        stack->base = 0;
+        stack->size = 0;
+        stack->unk10 = 0;
     }
-  }
-  if ((int)puVar3 < 0) {
-    FUN_002e3140();
-  }
-  param_1[0x15] = (unsigned int)(param_1 + 0x13);
-  param_1[0x16] = (unsigned int)(param_1 + 0x14);
-  temp_v1 = 1;
-  temp_v0 = 0x100;
-  memAlloc(0x100,0x100,0,0x1000,0x1000);
-  puVar2 = (unsigned int *)0x18;
-  DAT_005880f8 = temp_v0;
-  asdOperatorNew();
-  if (puVar2 != (unsigned int *)0x0) {
-    *puVar2 = 0;
-    puVar2[1] = 0;
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    *(unsigned char *)(puVar2 + 4) = 0;
-  }
-  (*(unsigned int * *)((unsigned char *)&DAT_005880f8 + 0x4)) = puVar2;
-  resultReportIfFailed();
-  temp_v4 = 4;
-  puStack_24 = &LAB_00514a74;
-  puVar2 = param_1 + 0xc;
-  temp_v5 = &LAB_00514b88;
-  temp_v6 = &LAB_00514b20;
-  temp_v1 = 4;
-  temp_v2 = 0xfffffffe;
-  uStack_3c = 0;
-  temp_v3[0] = param_1;
-  FUN_002fb0d4(puVar2,&temp_v4,FUN_00422534,temp_v3,(*(unsigned int * *)((unsigned char *)&DAT_005880f8 + 0x4))[3] + (*(unsigned int * *)((unsigned char *)&DAT_005880f8 + 0x4))[2]);
-  if ((int)puVar2 < 0) {
-    FUN_002e3140();
-  }
-  software_interrupt(0x18);
-  if ((int)param_1[0x13] < 0) {
-    FUN_002e3140();
-  }
-  return 1;
+    DAT_005880f8.stack = stack;
+    resultReportIfFailed(stack, DAT_005880f8.memory, 0x1000);
+
+    S4ThreadHooks hooks = { 4, (const void *)FUN_00514a74, (const void *)FUN_00514b88, (const void *)FUN_00514b20 };
+    void *argument = reader;
+    s32 result = FUN_002fb0d4(&reader->threadHandle, &hooks, FUN_00422534, &argument,
+                              DAT_005880f8.stack->base + DAT_005880f8.stack->size, 4, -2, 0);
+    if (result < 0)
+        FUN_002e3140(result);
+    result = nn::svc::SignalEvent(reader->dataEvent);
+    if (result < 0)
+        FUN_002e3140(result);
+    return 1;
 }
 
 } /* extern "C" */

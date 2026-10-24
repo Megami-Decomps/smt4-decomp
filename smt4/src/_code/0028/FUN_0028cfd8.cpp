@@ -1,119 +1,104 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028cfd8` (_code @ 0x28cfd8, 0x214 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the skill usefulness check; retail evaluates the need/have masks with conditional ORs on the same registers, which armcc here allocates differently. */
+#include "common.h"
+
+/* A skill record as the check reads it. */
+struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 amount;          /* nonzero: a different check applies */
+    /* 0x64 */ u16 healHp;
+    /* 0x66 */ u16 healMp;
+    /* 0x68 */ u8 curesHp;
+    /* 0x69 */ u8 curesMp;
+    /* 0x6A */ u8 ailmentKind;      /* low seven bits: the ailment group */
+    /* 0x6B */ u8 usableOutside;
+    /* 0x6C */ u8 unk6C;
+    /* 0x6D */ u8 category;         /* 2 or 3: a healing skill */
+};
+
+/* A party member (0x288 bytes). */
+struct PartyMember {
+    /* 0x000 */ u32 flags;          /* 1: present, 0x40: unavailable */
+    /* 0x004 */ u8 unk004[0x1B0];
+    /* 0x1B4 */ s16 hp;
+    /* 0x1B6 */ s16 maxHp;
+    /* 0x1B8 */ s16 mp;
+    /* 0x1BA */ s16 maxMp;
+    /* 0x1BC */ u8 unk1BC[0xA];
+    /* 0x1C6 */ u16 ailments;
+    /* 0x1C8 */ u8 unk1C8[0xC0];
+};
+
+struct BattleParty {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ PartyMember *members;
+    /* 0x1FC4 */ u8 unk1FC4[0x24E4];
+    /* 0x44A8 */ u32 stateFlags;
+};
+
+struct SlotTable {
+    /* 0x0000 */ u8 unk0000[0x910B];
+    /* 0x910B */ s8 count;
+};
 
 extern "C" {
+SkillRecord *dataTable08Sub1GetRecord(u32 id);
+BattleParty *btlGetMainState(void);
+SlotTable *gameGetSlotTable(void);
+u32 FUN_0028d320(u32 amount);
+void FUN_0023dc38(u16 *mask, u32 group);
+s32 FUN_0033fe6c(s32 slot, s32 arg, const SkillRecord *skill);
 
-int FUN_0023dc38(unsigned int *, int);
-int dataTable08Sub1GetRecord(void);
-int FUN_0033fe6c(int, int, int);
-int SCARRY4(unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-/* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
-/* Supplied declaration required: FUN_0023dc38. */
-extern unsigned int FUN_0028d320(void);
-extern int btlGetMainState(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: FUN_0033fe6c. */
-
-
-unsigned int FUN_0028cfd8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Whether a healing skill is worth using: 1 invalid id, 2 not a usable healing skill, 0 when a
+ * party member (or a stocked slot) would benefit, 3 when nobody would. */
+u32 FUN_0028cfd8(u32 skillId)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  unsigned int temp_v7;
-  
-  if ((param_1 != 0) && (temp_v7 = param_4, dataTable08Sub1GetRecord(), param_1 != 0)) {
-    if ((*(char *)(param_1 + 0x6d) != '\x02' && *(char *)(param_1 + 0x6d) != '\x03') ||
-       (*(char *)(param_1 + 0x6b) != '\x01')) {
-      return 2;
-    }
-    if (*(short *)(param_1 + 0x62) != 0) {
-      temp_v0 = FUN_0028d320();
-      return temp_v0;
-    }
-    temp_v1 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v1 + 0x44a8) & 0x2000000) == 0) {
-      temp_v6 = 0;
-      do {
-        puVar7 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v6 * 0x288);
-        if (((*puVar7 & 1) != 0) && ((*puVar7 & 0x40) == 0)) {
-          temp_v4 = 0;
-          temp_v3 = *(char *)(param_1 + 0x68) != '\0' || *(short *)(param_1 + 100) != 0;
-          if (*(short *)(param_1 + 0x66) != 0) {
-            temp_v3 = temp_v3 | 2;
-          }
-          if (*(char *)(param_1 + 0x69) != '\0') {
-            temp_v3 = temp_v3 | 2;
-          }
-          if ((*(unsigned char *)(param_1 + 0x6a) & 0x7f) != 0) {
-            temp_v3 = temp_v3 | 4;
-          }
-          if ((((temp_v3 & 1) != 0) && ((*(unsigned short *)((int)puVar7 + 0x1c6) & 2) == 0)) &&
-             ((short)puVar7[0x6d] != *(short *)((int)puVar7 + 0x1b6))) {
-            temp_v4 = 1;
-          }
-          if (((temp_v3 & 2) != 0) && ((short)puVar7[0x6e] != *(short *)((int)puVar7 + 0x1ba))) {
-            temp_v4 = temp_v4 | 2;
-          }
-          temp_v5 = temp_v4;
-          if (((temp_v3 & 1) != 0 && (temp_v3 & 2) != 0) &&
-             ((((temp_v4 & 1) == 0 || (((temp_v4 & 2) == 0 && (temp_v5 = temp_v4 | 2, (temp_v4 & 1) == 0))))
-              && ((temp_v5 & 2) != 0)))) {
-            temp_v5 = temp_v5 | 1;
-          }
-          if ((temp_v3 & 4) != 0) {
-            temp_v7 = temp_v7 & 0xffff0000;
-            FUN_0023dc38(&temp_v7,*(unsigned char *)(param_1 + 0x6a) & 0x7f);
-            if (((unsigned short)temp_v7 & *(unsigned short *)((int)puVar7 + 0x1c6)) != 0) {
-              temp_v5 = temp_v5 | 4;
-            }
-          }
-          if (temp_v3 == temp_v5) {
+    if (skillId == 0)
+        return 1;
+    SkillRecord *skill = dataTable08Sub1GetRecord(skillId);
+    if (skill == NULL)
+        return 1;
+    if ((skill->category != 2 && skill->category != 3) || skill->usableOutside != 1)
+        return 2;
+    if (skill->amount != 0)
+        return FUN_0028d320(skill->amount);
+    BattleParty *battle = btlGetMainState();
+    if (battle->stateFlags & 0x2000000)
+        return 0;
+    for (s32 i = 0; i < 4; i++) {
+        PartyMember *member = &battle->members[i];
+        if (!(member->flags & 1) || (member->flags & 0x40))
+            continue;
+        u32 need = 0;
+        u32 have = 0;
+        if (skill->healHp != 0 || skill->curesHp != 0)
+            need |= 1;
+        if (skill->healMp != 0 || skill->curesMp != 0)
+            need |= 2;
+        if (skill->ailmentKind & 0x7F)
+            need |= 4;
+        if ((need & 1) && !(member->ailments & 2) && member->hp != member->maxHp)
+            have = 1;
+        if ((need & 2) && member->mp != member->maxMp)
+            have |= 2;
+        if ((need & 1) && (need & 2) && (have & 3))
+            have |= 3;
+        if (need & 4) {
+            u16 mask = 0;
+            FUN_0023dc38(&mask, skill->ailmentKind & 0x7F);
+            if (mask & member->ailments)
+                have |= 4;
+        }
+        if (need == have)
             return 0;
-          }
-        }
-        temp_v6 = temp_v6 + 1;
-        if (temp_v6 >= 4) {
-          if ((*(unsigned char *)(param_1 + 0x6a) & 0x7f) == 1) {
-            temp_v1 = gameGetSlotTable();
-            temp_v6 = -1;
-            if (*(unsigned char *)(temp_v1 + 0x910b) != 0xffffffff &&
-                !SCARRY4((unsigned int)*(unsigned char *)(temp_v1 + 0x910b),1)) {
-              do {
-                temp_v2 = temp_v6;
-                FUN_0033fe6c(temp_v6,0,param_1);
-                if (temp_v2 == 0) {
-                  return 0;
-                }
-                temp_v6 = temp_v6 + 1;
-              } while (temp_v6 < (int)(unsigned int)*(unsigned char *)(temp_v1 + 0x910b));
-            }
-          }
-          return 3;
-        }
-      } while( 1 );
     }
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    if ((skill->ailmentKind & 0x7F) == 1) {
+        SlotTable *slots = gameGetSlotTable();
+        for (s32 slot = -1; slot < slots->count; slot++) {
+            if (FUN_0033fe6c(slot, 0, skill) == 0)
+                return 0;
+        }
+    }
+    return 3;
 }
 
 } /* extern "C" */

@@ -179,7 +179,7 @@ Allocator *asdMemoryGetDefaultAllocator();
 size_t libc_strlen(const char *);
 DictionaryEntry *nw_ut_ResDicPatricia_Get(DictionaryView *, const char *,
                                         size_t);
-Animation *FUN_002a5dc4(void *, Allocator *);
+Animation *_ZN9Obj42111cC1Ej(void *, Allocator *);
 void FUN_002a5960(Animation *, SecondaryParameters *, u32,
                   u32, int);
 void FUN_002a0428(Model *, int);
@@ -461,7 +461,7 @@ extern "C" void modelSetupCreatePartAnimations(ModelSetup *setup)
             void *storage = allocator->vtable->allocate(allocator, 116, 4);
             Animation *animation = 0;
             if (storage) {
-                animation = FUN_002a5dc4(storage, allocator);
+                animation = _ZN9Obj42111cC1Ej(storage, allocator);
                 FUN_002a5960(animation, &parameters, parameters.channels,
                              parameters.count, parameters.initialize);
             }

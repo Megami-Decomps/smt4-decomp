@@ -1,125 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c982c` (_code @ 0x2c982c, 0x25c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail does not hoist the cursor/timer addresses out of the marker loop (they are recomputed where used) and conditionally materialises the constant 1 at loop entry; built hoists both and spills them */
+#include "common.h"
+
+/* A unit status record as filled by unitInitializeFromTemplate. */
+struct StatusUnitRecord {
+    /* 0x00 */ u8 unk00[0x2A];
+    /* 0x2A */ u16 unk2A;
+    /* 0x2C */ u16 unk2C;
+    /* 0x2E */ u8 unk2E[0x32];
+    /* 0x60 */ u16 mask;
+    /* 0x62 */ u8 unk62[0xCA];
+};
+
+struct MarkerEntry {
+    /* 0x00 */ u16 unitId;
+    /* 0x02 */ u16 unk02;
+    /* 0x04 */ u16 unk04;
+    /* 0x06 */ u16 kindMask; /* bit n set: marker kind n applies */
+    /* 0x08 */ u8 unk08[0x11];
+    /* 0x19 */ char name[0x23];
+    /* 0x3C */ u8 active;
+    /* 0x3D */ u8 unk3D[3];
+};
+
+struct MarkerWork {
+    /* 0x0000 */ u8 unk0000[0x4850];
+    /* 0x4850 */ s32 markerCount;
+    /* 0x4854 */ u8 unk4854[4];
+    /* 0x4858 */ MarkerEntry markers[10];
+    /* 0x4AD8 */ u8 unk4AD8[4];
+    /* 0x4ADC */ s32 timer;
+    /* 0x4AE0 */ s32 cursor;
+};
+
+struct MarkerPlayer {
+    /* 0x000 */ s16 unitId;
+    /* 0x002 */ u8 unk002[0x1A];
+    /* 0x01C */ u16 shownMask;
+    /* 0x01E */ u8 unk01E[0x5FC];
+    /* 0x61A */ u8 statusSource[1];
+};
 
 extern "C" {
-
-int markerKindGetColor(int);
-int FUN_0024101c(int, short *);
-int statusPanelSetOpen(int);
-int statusDisplayBindUnitRecord(unsigned char [42], int, int, int);
-int unitInitializeFromTemplate(...);
-int FUN_0037e09c(int);
-int FUN_003b076c(void);
-int __aeabi_idivmod(int, int);
-
-/* stack frame of param_1: 4 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned short spF8; /* 0xf8: local_f8 */
-    unsigned short sp12C; /* 0x12c: local_12c */
-    unsigned short sp12E; /* 0x12e: local_12e */
-} param_1_stack;
-
-/* Supplied declaration required: markerKindGetColor. */
-/* Supplied declaration required: FUN_0024101c. */
-/* Supplied declaration required: statusPanelSetOpen. */
-extern short *FUN_002c7e24(void);
-/* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: unitInitializeFromTemplate. */
-/* Supplied declaration required: FUN_0037e09c. */
-/* Supplied declaration required: FUN_003b076c. */
-/* Supplied declaration required: __aeabi_idivmod. */
-
-
-void FUN_002c982c(int param_1)
-
-{
-/* irregular: 1 goto(s); 9 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  int *piVar6;
-  int temp_v4;
-  unsigned char temp_v5 [42];
-  unsigned short temp_v6;
-  unsigned short temp_v7;
-  unsigned short temp_v8;
-  int *temp_v9;
-  
-  temp_v4 = 0;
-  temp_v9 = (int *)(param_1 + 0x4850);
-  if (0 < *temp_v9) {
-    do {
-      temp_v0 = param_1 + temp_v4 * 0x40;
-      if (*(char *)(temp_v0 + 0x4894) != '\0') {
-        puVar4 = (unsigned short *)(temp_v0 + 0x4858);
-        psVar2 = (short *)FUN_002c7e24();
-        if (*(short *)(temp_v0 + 0x485e) != 0) {
-          if ((int)*psVar2 == (unsigned int)*puVar4) {
-            temp_v3 = 0;
-            temp_v2 = 1;
-            piVar6 = (int *)(param_1 + 0x4ae0);
-            do {
-              if (((unsigned int)*(unsigned short *)(temp_v0 + 0x485e) & (1 << (temp_v2 & 0xff))) != 0) {
-                if (*piVar6 == temp_v3) {
-                  markerKindGetColor((int)(short)temp_v2);
-                  FUN_003b076c();
-                  FUN_0037e09c(1);
-                  if (*(short *)(temp_v0 + 0x485e) != psVar2[0xe]) {
-                    unitInitializeFromTemplate(*puVar4,temp_v5);
-                    temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
-                    temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
-                    temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
-                    statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
-                    FUN_0037e09c(1);
-                    statusPanelSetOpen(1);
-                  }
-                }
-                temp_v3 = temp_v3 + 1;
-              }
-              temp_v2 = temp_v2 + 1;
-            } while ((int)temp_v2 < 0xe);
-            if (*(int *)(param_1 + 0x4adc) >= 0x18) {
-              __aeabi_idivmod(*piVar6 + 1,temp_v3);
-              *piVar6 = temp_v1;
-              *(int *)(param_1 + 0x4adc) = 0;
-            }
-            if (*(short *)(temp_v0 + 0x485e) == 0) goto LAB_002c998c;
-          }
-        }
-        else {
-LAB_002c998c:
-          markerKindGetColor(0);
-          FUN_003b076c();
-          if (*(short *)(temp_v0 + 0x485e) != psVar2[0xe]) {
-            unitInitializeFromTemplate(*puVar4,temp_v5);
-            temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
-            temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
-            temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
-            statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
-            FUN_0037e09c(1);
-            statusPanelSetOpen(1);
-          }
-        }
-        temp_v3 = temp_v0 + 0x4871;
-        FUN_0024101c(temp_v3,psVar2 + 0x30d);
-        if ((temp_v3 != 0) && ((int)*psVar2 == (unsigned int)*puVar4)) {
-          unitInitializeFromTemplate((unsigned int)*puVar4,temp_v5);
-          temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
-          temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
-          temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
-          statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
-          statusPanelSetOpen(1);
-        }
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < *temp_v9);
-  }
-  return;
+MarkerPlayer *FUN_002c7e24(void);
+u32 markerKindGetColor(s32 kind);
+void FUN_003b076c(void);
+void FUN_0037e09c(s32 flag);
+s32 FUN_0024101c(const char *name, const u8 *source);
+void unitInitializeFromTemplate(u32 unitId, StatusUnitRecord *record);
+void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 a, s32 b, const char *name);
+void statusPanelSetOpen(s32 open);
 }
 
-} /* extern "C" */
+#define MARKER_KIND_COUNT 14
+
+static __inline void markerBindUnit(StatusUnitRecord &record, const MarkerEntry *marker)
+{
+    unitInitializeFromTemplate(marker->unitId, &record);
+    record.unk2A = marker->unk02;
+    record.unk2C = marker->unk04;
+    record.mask = marker->kindMask;
+    statusDisplayBindUnitRecord(&record, 1, 0, marker->name);
+}
+
+/* Updates the marker overlays: cycles through the kinds a marker carries while the player's unit
+ * is on it, and refreshes the unit status panel. */
+extern "C" void FUN_002c982c(MarkerWork *work)
+{
+    StatusUnitRecord record;
+    for (s32 i = 0; i < work->markerCount; i++) {
+        if (!work->markers[i].active)
+            continue;
+        MarkerEntry *marker = &work->markers[i];
+        MarkerPlayer *player = FUN_002c7e24();
+        if (marker->kindMask != 0) {
+            if (player->unitId == marker->unitId) {
+                s32 shown = 0;
+                for (s32 kind = 1; kind < MARKER_KIND_COUNT; kind++) {
+                    if (marker->kindMask & (1 << kind)) {
+                        if (work->cursor == shown) {
+                            markerKindGetColor((s16)kind);
+                            FUN_003b076c();
+                            FUN_0037e09c(1);
+                            if (marker->kindMask != player->shownMask) {
+                                markerBindUnit(record, marker);
+                                FUN_0037e09c(1);
+                                statusPanelSetOpen(1);
+                            }
+                        }
+                        shown++;
+                    }
+                }
+                if (work->timer >= 0x18) {
+                    work->cursor = (work->cursor + 1) % shown;
+                    work->timer = 0;
+                }
+                if (marker->kindMask == 0)
+                    goto none;
+            }
+        } else {
+none:
+            markerKindGetColor(0);
+            FUN_003b076c();
+            if (marker->kindMask != player->shownMask) {
+                markerBindUnit(record, marker);
+                FUN_0037e09c(1);
+                statusPanelSetOpen(1);
+            }
+        }
+        if (FUN_0024101c(marker->name, player->statusSource) != 0 && player->unitId == marker->unitId) {
+            markerBindUnit(record, marker);
+            statusPanelSetOpen(1);
+        }
+    }
+}

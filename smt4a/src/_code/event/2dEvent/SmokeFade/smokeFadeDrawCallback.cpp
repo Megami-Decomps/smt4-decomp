@@ -1,4 +1,3 @@
-/* NON_MATCHING: both renderStackPush expansions schedule next-entry addressing and scratch registers differently; an optimization flag may explain this. */
 #include "camp/RenderCtx.h"
 
 struct SmokeFadeDrawState {

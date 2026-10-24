@@ -1,152 +1,144 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002277d4` (_code @ 0x2277d4, 0x2e0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register assignment (retail keeps the skill record in r9 and the usable flag on the stack next to the out buffer); the checks are the same (182 vs 184 rows). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00228220(unsigned int, int, int, int, int, int, unsigned int, unsigned char [8]);
-int FUN_0022899c(unsigned int, int, int, int, int, unsigned int);
+/* A skill record (only the fields read here). */
+typedef struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22;
+    /* 0x23 */ u8 scope;               /* 0..10: who the skill can be used on */
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ u32 bits;               /* bits 5..8: the effect kind */
+    /* 0x2C */ u8 unk2c[3];
+    /* 0x2F */ u8 category;
+} SkillRecord;
 
-/* stack frame of param_7: 4 slot(s), 13 byte(s) */
-typedef struct {
-    unsigned char sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_7_stack;
+/* A candidate target (only the fields read here). */
+typedef struct SkillTarget {
+    /* 0x000 */ u32 flags;              /* 0x400: can be targeted */
+    /* 0x004 */ u8 unk004[4];
+    /* 0x008 */ s16 slot;
+    /* 0x00A */ u8 unk00a[0x64];
+    /* 0x06E */ s16 markIndex;
+    /* 0x070 */ u8 unk070[0x56];
+    /* 0x0C6 */ u16 categoryMask;
+    /* 0x0C8 */ u8 unk0c8[6];
+    /* 0x0CE */ u16 recordId;
+} SkillTarget;
 
-/* Supplied declaration required: FUN_00228220. */
-/* Supplied declaration required: FUN_0022899c. */
-extern int FUN_0029e9cc(unsigned short);
-extern unsigned short categoryMaskFromId(unsigned char);
+typedef struct SkillCaster {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ s16 slot;
+} SkillCaster;
 
+typedef struct SkillOutcome {
+    /* 0x00 */ u8 unk00[0x14C];
+    /* 0x14C */ u16 state;
+    /* 0x14E */ u16 skillId;
+} SkillOutcome;
 
-unsigned int
-FUN_002277d4(unsigned int param_1,int param_2,int param_3,int param_4,unsigned int param_5,int param_6,
-            int param_7)
+/* The skill check context (only the fields used here). */
+typedef struct SkillContext {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ SkillCaster *caster;
+    /* 0x28 */ SkillOutcome *outcome;
+    /* 0x2C */ u8 unk2c[0xC];
+    /* 0x38 */ u8 marks[1];
+} SkillContext;
 
+s32 FUN_0029e9cc(u16 recordId);
+u16 categoryMaskFromId(u8 category);
+s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 out[8]);
+s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
+
+/* Checks whether skill `skill` can be used on the candidate `targets` (`count` of them) in the
+ * given use mode, marks the usable targets and records the skill in the outcome. Returns 1 when
+ * it can be used. */
+u32 FUN_002277d4(u32 unused, SkillContext *context, SkillRecord *skill, SkillTarget **targets, u32 count, s32 anyTarget,
+                 s32 mode)
 {
-/* irregular: 2 goto(s); 2 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned short temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned int unaff_r11;
-  unsigned char temp_v7 [8];
-  
-  switch(*(unsigned char *)(param_3 + 0x23)) {
-  case 0:
-  case 1:
-    if (param_7 != 2) goto LAB_00227840;
-    break;
-  case 2:
-    if (param_7 != 1) goto LAB_00227840;
-    break;
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-    break;
-  default:
-LAB_00227840:
-    temp_v6 = 0;
-    switch((*(unsigned int *)(param_3 + 0x28) & 0x1ff) >> 5) {
+    switch (skill->scope) {
+    case 0:
+    case 1:
+        if (mode == 2) {
+            return 0;
+        }
+        break;
+    case 2:
+        if (mode == 1) {
+            return 0;
+        }
+        break;
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+        return 0;
+    }
+    s32 reviveKind = 0;
+
+    switch ((skill->bits << 23) >> 28) {
     case 1:
     case 6:
-      temp_v6 = 1;
-    default:
-      temp_v5 = 0;
-      if (param_5 != 0) {
-        unaff_r11 = 1;
-      }
-      temp_v1 = 0;
-      temp_v7[0] = 0;
-      if (param_5 != 0) {
-        do {
-          puVar4 = *(unsigned int **)(param_4 + temp_v5 * 4);
-          if (((*puVar4 & 0x400) != 0) &&
-             (temp_v3 = FUN_0029e9cc(*(unsigned short *)((int)puVar4 + 0xce)), temp_v3 != 0)) {
-            *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c) = 2;
-            *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14e) = *(unsigned short *)(param_3 + 0x20);
-            temp_v4 = (unsigned int)*(unsigned short *)(param_3 + 0x20);
-            FUN_00228220(temp_v4,0,2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),
-                         (int)*(short *)(*(int *)(param_4 + temp_v5 * 4) + 8),0,unaff_r11,temp_v7);
-            temp_v0 = (temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 3;
-            if ((unsigned char)(temp_v0 & temp_v6)) {
-              return 0;
-            }
-            if (!(unsigned char)(temp_v0 & ~temp_v6)) {
-              temp_v4 = (unsigned int)*(unsigned short *)(param_3 + 0x20);
-              FUN_0022899c(temp_v4,0,0,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),
-                           (int)*(short *)(*(int *)(param_4 + temp_v5 * 4) + 8),unaff_r11);
-              if ((((param_6 == 0) || (temp_v4 == 2)) &&
-                  (temp_v2 = categoryMaskFromId(*(unsigned char *)(param_3 + 0x2f)),
-                  (temp_v2 & *(unsigned short *)(*(int *)(param_4 + temp_v5 * 4) + 0x1c6)) == 0)) &&
-                 (temp_v1 = 1, !temp_v6)) {
-                *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c) = 2;
-                *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14e) = *(unsigned short *)(param_3 + 0x20);
-                *(char *)((int)*(short *)(*(int *)(param_4 + temp_v5 * 4) + 0x6e) + param_2 + 0x38) =
-                     (char)unaff_r11;
-                return 1;
-              }
-            }
-          }
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < param_5);
-      }
-      if ((unsigned char)(temp_v1 & temp_v6)) {
-        *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c) = 2;
-        *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14e) = *(unsigned short *)(param_3 + 0x20);
-        if (param_5 == 0) {
-          temp_v5 = 0;
-        }
-        else {
-          temp_v5 = param_5 & 1;
-          temp_v3 = 0;
-          if (temp_v5 != 0) {
-            do {
-              puVar4 = *(unsigned int **)(param_4 + temp_v3 * 4);
-              temp_v3 = temp_v3 + 1;
-              if ((*puVar4 & 0x400) != 0) {
-                *(unsigned char *)((int)*(short *)((int)puVar4 + 0x6e) + param_2 + 0x38) = 1;
-              }
-            } while (temp_v3 < (int)temp_v5);
-          }
-        }
-        if (temp_v5 < param_5) {
-          do {
-            puVar4 = *(unsigned int **)(param_4 + temp_v5 * 4);
-            if ((*puVar4 & 0x400) != 0) {
-              *(unsigned char *)((int)*(short *)((int)puVar4 + 0x6e) + param_2 + 0x38) = 1;
-            }
-            temp_v3 = temp_v5 * 4;
-            temp_v5 = temp_v5 + 2;
-            puVar4 = *(unsigned int **)(param_4 + temp_v3 + 4);
-            if ((*puVar4 & 0x400) != 0) {
-              *(unsigned char *)((int)*(short *)((int)puVar4 + 0x6e) + param_2 + 0x38) = 1;
-            }
-          } while (temp_v5 < param_5);
-        }
-        return 1;
-      }
-      return 0;
+        reviveKind = 1;
+        break;
     case 2:
     case 3:
     case 4:
     case 7:
     case 8:
-      break;
+        return 0;
     }
-  }
-  return 0;
+    s32 usable = 0;
+    u8 out[8];
+
+    out[0] = 0;
+    for (u32 i = 0; i < count; i++) {
+        s32 blocked = 0;
+
+        if ((targets[i]->flags & 0x400) != 0 && FUN_0029e9cc(targets[i]->recordId) != 0) {
+            context->outcome->state = 2;
+            context->outcome->skillId = skill->id;
+            s32 result = FUN_00228220(skill->id, 0, 2, context->caster->slot, targets[i]->slot, 0, 1, out);
+
+            if (result == 1 || result == 2 || result == 3) {
+                blocked = 1;
+            }
+            if ((blocked & reviveKind) != 0) {
+                return 0;
+            }
+            if ((blocked & ~reviveKind) == 0) {
+                s32 check = FUN_0022899c(skill->id, 0, 0, context->caster->slot, targets[i]->slot, 1);
+
+                if ((anyTarget == 0 || check == 2) && (categoryMaskFromId(skill->category) & targets[i]->categoryMask) == 0) {
+                    usable = 1;
+                    if (reviveKind == 0) {
+                        context->outcome->state = 2;
+                        context->outcome->skillId = skill->id;
+                        context->marks[targets[i]->markIndex] = 1;
+                        return 1;
+                    }
+                }
+            }
+        }
+    }
+    if ((usable & reviveKind) == 0) {
+        return 0;
+    }
+    context->outcome->state = 2;
+    context->outcome->skillId = skill->id;
+    for (u32 i = 0; i < count; i++) {
+        if ((targets[i]->flags & 0x400) != 0) {
+            context->marks[targets[i]->markIndex] = 1;
+        }
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

@@ -1,100 +1,69 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bcff8` (_code @ 0x3bcff8, 0x2f0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP scheduling differs: retail unpacks both palette colors into s-registers before blending and keeps the 1/255 constant in s16; the build interleaves the byte unpack with the blend (shorter, fewer rows). */
+#include "common.h"
 
-extern "C" {
+struct EffectVec4 {
+    f32 x, y, z, w;
+};
 
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+/* Scratch values shared by the effect drawing code (see FUN_00281bb0). */
+extern struct EffectScratch {
+    u8 unk00[0x100];
+    EffectVec4 modulate;    // 0x100: current color scale
+    EffectVec4 tint;        // 0x110
+    EffectVec4 saved;       // 0x120
+} DAT_006471dc;
 
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-extern float DAT_006472ec; /* 0x6472ec */
-extern float DAT_006472f0; /* 0x6472f0 */
-extern float DAT_006472f4; /* 0x6472f4 */
-extern float DAT_006472f8; /* 0x6472f8 */
-extern float DAT_006472fc; /* 0x6472fc */
-extern float DAT_00647300; /* 0x647300 */
-extern float DAT_00647304; /* 0x647304 */
-extern float DAT_00647308; /* 0x647308 */
+/* An effect with a cycling color palette (accessed fields). */
+struct ColorCycleEffect {
+    u8 unk00[0x38];
+    s32 length;             // 0x38: frames for a whole cycle
+    u32 colors[6];          // 0x3C: packed colors
+};
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern unsigned long long __aeabi_idivmod(unsigned int, int);
+struct ColorCycleState {
+    u8 unk00[0x18];
+    s8 startIndex;          // 0x18
+};
 
+extern "C" s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 
-void FUN_003bcff8(int param_1,int param_2,unsigned int param_3)
-
+static __inline f32 colorChannel(u32 color, s32 shift)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int in_fpscr;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  unsigned long long temp_v14;
-  
-  temp_v13 = 0.003921569f;
-  temp_v0 = *(int *)(param_1 + 0x38) / 6;
-  if (0 < temp_v0) {
-    DAT_006472fc = DAT_006472dc;
-    DAT_00647300 = DAT_006472e0;
-    DAT_00647304 = DAT_006472e4;
-    DAT_00647308 = DAT_006472e8;
-    temp_v14 = __aeabi_idivmod(param_3,temp_v0);
-    temp_v6 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3
-                                      );
-    temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = ((int)temp_v14 + (int)*(char *)(param_2 + 0x18)) % 6;
-    temp_v0 = temp_v2 + 1;
-    temp_v6 = temp_v6 / temp_v3;
-    temp_v1 = *(unsigned int *)(param_1 + temp_v0 * 4 + (temp_v0 / 6) * -0x18 + 0x3c);
-    temp_v11 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v3 = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v7 = (float)VectorUnsignedToFloat((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v9 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v1 = *(unsigned int *)(param_1 + temp_v2 * 4 + 0x3c);
-    temp_v12 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorUnsignedToFloat((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v10 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = 1.0f - temp_v6;
-    DAT_006472f8 = DAT_00647308;
-    DAT_006472ec = DAT_006472fc;
-    DAT_006472f0 = DAT_00647300;
-    DAT_006472f4 = DAT_00647304;
-    DAT_006472dc = (temp_v4 * temp_v13 * temp_v5 + temp_v3 * temp_v13 * temp_v6) * DAT_006472fc;
-    DAT_006472e0 = (temp_v8 * temp_v13 * temp_v5 + temp_v7 * temp_v13 * temp_v6) * DAT_00647300;
-    DAT_006472e4 = (temp_v10 * temp_v13 * temp_v5 + temp_v9 * temp_v13 * temp_v6) * DAT_00647304;
-    DAT_006472e8 = (temp_v12 * temp_v13 * temp_v5 + temp_v11 * temp_v13 * temp_v6) * DAT_00647308;
-    return;
-  }
-  temp_v1 = *(unsigned int *)(param_1 + *(char *)(param_2 + 0x18) * 4 + 0x3c);
-  temp_v4 = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v13 = (float)VectorUnsignedToFloat((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v3 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v6 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_006472ec = temp_v4 * 0.003921569f;
-  DAT_006472f0 = temp_v13 * 0.003921569f;
-  DAT_006472f4 = temp_v3 * 0.003921569f;
-  DAT_006472f8 = temp_v6 * 0.003921569f;
-  DAT_006472dc = DAT_006472dc * temp_v4 * 0.003921569f;
-  DAT_006472e0 = DAT_006472e0 * temp_v13 * 0.003921569f;
-  DAT_006472e4 = DAT_006472e4 * temp_v3 * 0.003921569f;
-  DAT_006472e8 = DAT_006472e8 * temp_v6 * 0.003921569f;
-  return;
+    return static_cast<f32>((color >> shift) & 0xFF);
 }
 
-} /* extern "C" */
+/* Blend the effect's palette colors by the frame and scale the shared color values by the result. */
+extern "C" void FUN_003bcff8(ColorCycleEffect *effect, ColorCycleState *state, u32 frame)
+{
+    const f32 unit = 0.003921569f;
+    s32 perColor = effect->length / 6;
+    if (perColor > 0) {
+        DAT_006471dc.saved = DAT_006471dc.modulate;
+        s32 cycle = frame / perColor;
+        s32 within = frame % perColor;
+        f32 blend = static_cast<f32>(within) / static_cast<f32>(perColor);
+        s32 index = (cycle + state->startIndex) % 6;
+        u32 next = effect->colors[(index + 1) % 6];
+        u32 current = effect->colors[index];
+        f32 inverse = 1.0f - blend;
+        DAT_006471dc.tint = DAT_006471dc.saved;
+        DAT_006471dc.modulate.x = (colorChannel(current, 24) * unit * inverse + colorChannel(next, 24) * unit * blend) *
+                                  DAT_006471dc.saved.x;
+        DAT_006471dc.modulate.y = (colorChannel(current, 16) * unit * inverse + colorChannel(next, 16) * unit * blend) *
+                                  DAT_006471dc.saved.y;
+        DAT_006471dc.modulate.z = (colorChannel(current, 8) * unit * inverse + colorChannel(next, 8) * unit * blend) *
+                                  DAT_006471dc.saved.z;
+        DAT_006471dc.modulate.w = (colorChannel(current, 0) * unit * inverse + colorChannel(next, 0) * unit * blend) *
+                                  DAT_006471dc.saved.w;
+        return;
+    }
+    u32 color = effect->colors[state->startIndex];
+    DAT_006471dc.tint.x = colorChannel(color, 24) * unit;
+    DAT_006471dc.tint.y = colorChannel(color, 16) * unit;
+    DAT_006471dc.tint.z = colorChannel(color, 8) * unit;
+    DAT_006471dc.tint.w = colorChannel(color, 0) * unit;
+    DAT_006471dc.modulate.x = DAT_006471dc.modulate.x * colorChannel(color, 24) * unit;
+    DAT_006471dc.modulate.y = DAT_006471dc.modulate.y * colorChannel(color, 16) * unit;
+    DAT_006471dc.modulate.z = DAT_006471dc.modulate.z * colorChannel(color, 8) * unit;
+    DAT_006471dc.modulate.w = DAT_006471dc.modulate.w * colorChannel(color, 0) * unit;
+}

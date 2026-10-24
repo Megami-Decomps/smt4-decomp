@@ -1,161 +1,114 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00150784` (_code @ 0x150784, 0x268 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: sound system shutdown (Apocalypse layout view); loops/stop-and-detach helper written structurally, register allocation not compared with retail */
+#include "common.h"
+
+/* A playing sound handle: stopped and detached from its slot. */
+struct SoundHandleSlot {
+    /* 0x00 */ s32 handle;
+};
+
+/* The pieces of the Apocalypse sound system block this shutdown touches (g_asdSoundSystem). */
+struct AsdSoundSystemApocView {
+    /* 0x000 */ u8 header[0x194];
+    /* 0x194 */ u8 streamPlayer[0x118];
+    /* 0x2AC */ u8 animPlayer[0x224];
+    /* 0x4D0 */ void *workBuffer;
+    /* 0x4D4 */ void *infoBlock;
+    /* 0x4D8 */ void *dataManagerBuffer;
+    /* 0x4DC */ void *playerBuffer;
+    /* 0x4E0 */ u8 unk4E0[4];
+    /* 0x4E4 */ u8 archiveLoaded;
+    /* 0x4E5 */ u8 unk4E5[0x277];
+    /* 0x75C */ SoundHandleSlot *voiceHandles;   /* list of live voice handles */
+    /* 0x760 */ s32 voiceHandleCount;
+    /* 0x764 */ u8 unk764[0xF0];
+    /* 0x854 */ u8 streamSource[0xC];
+    /* 0x860 */ u8 streamQueue[0x7A0];
+    /* 0x1000 */ u8 handleState[8];
+    /* 0x1008 */ u8 unk1008[0x108];
+    /* 0x1110 */ SoundHandleSlot streamHandles[16];
+    /* 0x1150 */ u8 unk1150[0x124];
+    /* 0x1274 */ u8 streamWork[0x64];
+    /* 0x12D8 */ void *streamBuffer;
+    /* 0x12DC */ s8 hasStream;
+    /* 0x12DD */ u8 unk12DD[0x3B];
+    /* 0x1318 */ u8 *currentSlotA;    /* 16 handles at +0x20 */
+    /* 0x131C */ u8 *auxSlots[2];     /* handle at +0x20 */
+    /* 0x1324 */ u8 *currentSlotB;    /* 4 handles at +0x20 */
+};
 
 extern "C" {
+extern AsdSoundSystemApocView g_asdSoundSystem;
 
-int FUN_00154890(unsigned int);
-int FUN_00169614(unsigned int);
-int FUN_00173a94(unsigned char *);
-int FUN_00173c1c(unsigned char *);
-int FUN_00173c7c(unsigned char *);
-int asdSoundObjectStop(...);
-int uiTextStateReset(unsigned char *);
-int asdMemFree(...);
-int FUN_001b6668(unsigned char *, unsigned char *);
-int nw_snd_SoundHandle_DetachSound(...);
+s32 nw_snd_SoundArchive_IsAvailable(void *archive);
+void FUN_00154890(u32 arg);
+void FUN_00169614(u32 arg);
+void FUN_00173a94(void *streamSource);
+void FUN_00173c1c(void *animPlayer);
+void FUN_00173c7c(void *streamPlayer);
+void asdSoundObjectStop(s32 handle, s32 arg);
+void uiTextStateReset(void *system);
+void asdMemFree(void *block);
+void FUN_001b6668(void *queue, void *work);
+void nw_snd_SoundHandle_DetachSound(s32 *handle);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char g_asdSoundSystem; /* 0x63e1e8 */
-extern unsigned char DAT_0063e37c; /* 0x63e37c */
-extern unsigned char DAT_0063e494; /* 0x63e494 */
-extern int DAT_0063e6b8; /* 0x63e6b8 */
-extern int DAT_0063e6bc; /* 0x63e6bc */
-extern int DAT_0063e6c0; /* 0x63e6c0 */
-extern int DAT_0063e6c4; /* 0x63e6c4 */
-extern unsigned char DAT_0063e6cc; /* 0x63e6cc */
-extern int *g_soundHandleList; /* 0x63e944 */
-extern int DAT_0063e948; /* 0x63e948 */
-extern unsigned char DAT_0063ea3c; /* 0x63ea3c */
-extern unsigned char DAT_0063ea48; /* 0x63ea48 */
-extern unsigned char g_asdSoundHandleState; /* 0x63f1e8 */
-extern unsigned char DAT_0063f45c; /* 0x63f45c */
-extern unsigned int DAT_0063f4c0; /* 0x63f4c0 */
-extern signed char DAT_0063f4c4; /* 0x63f4c4 */
-extern int DAT_0063f500; /* 0x63f500 */
-extern unsigned int DAT_0063f504; /* 0x63f504 */
-extern int DAT_0063f50c; /* 0x63f50c */
-
-/* Supplied declaration required: FUN_00154890. */
-extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
-/* Supplied declaration required: FUN_00169614. */
-/* Supplied declaration required: FUN_00173a94. */
-/* Supplied declaration required: FUN_00173c1c. */
-/* Supplied declaration required: FUN_00173c7c. */
-/* Supplied declaration required: asdSoundObjectStop. */
-/* Supplied declaration required: uiTextStateReset. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_001b6668. */
-/* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
-
-
-void FUN_00150784(void)
-
+static __inline void asdSoundHandleRelease(s32 *handle)
 {
-/* irregular: 10 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar6;
-  
-  temp_v0 = nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem);
-  temp_v3 = DAT_0063f500;
-  if (temp_v0 != 0) {
-    if (DAT_0063f500 != 0) {
-      temp_v1 = 0;
-      do {
-        temp_v2 = temp_v3 + temp_v1 * 4;
-        temp_v0 = *(int *)(temp_v2 + 0x20);
-        if (temp_v0 != 0) {
-          asdSoundObjectStop(temp_v0,0);
-          nw_snd_SoundHandle_DetachSound(temp_v2 + 0x20);
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x10);
+    if (*handle != 0) {
+        asdSoundObjectStop(*handle, 0);
+        nw_snd_SoundHandle_DetachSound(handle);
     }
-    temp_v1 = 0;
-    do {
-      if (temp_v1 < 2) {
-        puVar2 = &g_asdSoundHandleState + temp_v1 * 4;
-        temp_v3 = (&DAT_0063f504)[temp_v1];
-        if (temp_v3 != 0) {
-          puVar2 = *(unsigned char **)(temp_v3 + 0x20);
-        }
-        if (temp_v3 != 0 && puVar2 != (unsigned char *)0x0) {
-          asdSoundObjectStop(puVar2,0);
-          nw_snd_SoundHandle_DetachSound(temp_v3 + 0x20);
-        }
-      }
-      piVar6 = g_soundHandleList;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 2);
-    temp_v3 = 0;
-    if (temp_v3 < DAT_0063e948) {
-      do {
-        if (piVar6 == (int *)0x0) break;
-        if (*piVar6 != 0) {
-          asdSoundObjectStop(*piVar6,0);
-          nw_snd_SoundHandle_DetachSound(piVar6);
-        }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < DAT_0063e948);
+}
+
+/* Stops every sound and releases the sound system's buffers. */
+void FUN_00150784(void)
+{
+    if (nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) == 0)
+        return;
+
+    u8 *slotA = g_asdSoundSystem.currentSlotA;
+    if (slotA != NULL) {
+        for (u8 i = 0; i < 0x10; i++)
+            asdSoundHandleRelease((s32 *)(slotA + 0x20 + i * 4));
     }
-    temp_v3 = DAT_0063f50c;
-    if (DAT_0063f50c != 0) {
-      temp_v1 = 0;
-      do {
-        temp_v2 = temp_v3 + temp_v1 * 4;
-        temp_v0 = *(int *)(temp_v2 + 0x20);
-        if (temp_v0 != 0) {
-          asdSoundObjectStop(temp_v0,0);
-          nw_snd_SoundHandle_DetachSound(temp_v2 + 0x20);
+    for (u8 i = 0; i < 2; i++) {
+        u8 *aux = g_asdSoundSystem.auxSlots[i];
+        s32 handle = aux != NULL ? *(s32 *)(aux + 0x20) : 0;
+        if (aux != NULL && handle != 0) {
+            asdSoundObjectStop(handle, 0);
+            nw_snd_SoundHandle_DetachSound((s32 *)(aux + 0x20));
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 4);
     }
-    DAT_0063f500 = 0;
-    FUN_00169614(0xffffffff);
-    FUN_00154890(0xffffffff);
-    if (DAT_0063f4c4 == '\x01') {
-      temp_v1 = 0;
-      do {
-        piVar6 = (int *)(temp_v1 * 4 + 0x63f2f8);
-        temp_v3 = *piVar6;
-        if (temp_v3 != 0) {
-          asdSoundObjectStop(temp_v3,0);
-          nw_snd_SoundHandle_DetachSound(piVar6);
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x10);
-      FUN_001b6668(&DAT_0063ea48,&DAT_0063f45c);
-      FUN_00173a94(&DAT_0063ea3c);
-      asdMemFree(DAT_0063f4c0);
+    SoundHandleSlot *voices = g_asdSoundSystem.voiceHandles;
+    for (s32 i = 0; i < g_asdSoundSystem.voiceHandleCount && voices != NULL; i++)
+        asdSoundHandleRelease(&voices->handle);
+    u8 *slotB = g_asdSoundSystem.currentSlotB;
+    if (slotB != NULL) {
+        for (u8 i = 0; i < 4; i++)
+            asdSoundHandleRelease((s32 *)(slotB + 0x20 + i * 4));
     }
-    DAT_0063e6cc = 0;
-    FUN_00173c1c(&DAT_0063e494);
-    FUN_00173c7c(&DAT_0063e37c);
+
+    g_asdSoundSystem.currentSlotA = NULL;
+    FUN_00169614(0xFFFFFFFF);
+    FUN_00154890(0xFFFFFFFF);
+    if (g_asdSoundSystem.hasStream == 1) {
+        for (u8 i = 0; i < 0x10; i++)
+            asdSoundHandleRelease(&g_asdSoundSystem.streamHandles[i].handle);
+        FUN_001b6668(g_asdSoundSystem.streamQueue, g_asdSoundSystem.streamWork);
+        FUN_00173a94(g_asdSoundSystem.streamSource);
+        asdMemFree(g_asdSoundSystem.streamBuffer);
+    }
+    g_asdSoundSystem.archiveLoaded = 0;
+    FUN_00173c1c(g_asdSoundSystem.animPlayer);
+    FUN_00173c7c(g_asdSoundSystem.streamPlayer);
     uiTextStateReset(&g_asdSoundSystem);
-    if (DAT_0063e6b8 != 0) {
-      asdMemFree();
-    }
-    if (DAT_0063e6bc != 0) {
-      asdMemFree();
-    }
-    if (DAT_0063e6c0 != 0) {
-      asdMemFree();
-    }
-    if (DAT_0063e6c4 != 0) {
-      asdMemFree();
-      return;
-    }
-  }
-  return;
+    if (g_asdSoundSystem.workBuffer != NULL)
+        asdMemFree(g_asdSoundSystem.workBuffer);
+    if (g_asdSoundSystem.infoBlock != NULL)
+        asdMemFree(g_asdSoundSystem.infoBlock);
+    if (g_asdSoundSystem.dataManagerBuffer != NULL)
+        asdMemFree(g_asdSoundSystem.dataManagerBuffer);
+    if (g_asdSoundSystem.playerBuffer != NULL)
+        asdMemFree(g_asdSoundSystem.playerBuffer);
 }
 
 } /* extern "C" */

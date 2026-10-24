@@ -1,135 +1,111 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048bdec` (_code @ 0x48bdec, 0x2a4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (172 vs 154 rows); retail keeps a float constant in s16 (vpush d8) used by a float helper this version does not model, and addresses the screen fields via different base registers */
+#include "common.h"
+
+// Map selection screen: only the members this update touches.
+struct MapScreen {
+    u8 unk00[0x10];
+    u32 flags;                  // 0x10: bit 3 update active, bit 17 wide cursor, bit 12 pending
+    u8 unk14[0x5e - 0x14];
+    s8 phase;                   // 0x5e: 0 = browse, 1 = enter map, 2 = settle
+    u8 unk5f;
+    s32 mapIndex;               // 0x60
+    u8 selectedMarker;          // 0x64
+    u8 unk65[0x504 - 0x65];
+    u8 pointerSprite[0x58e - 0x504];    // 0x504
+    u8 cursorLocked;            // 0x58e
+    u8 unk58f;
+    u8 menuSprite[0xc40 - 0x590];       // 0x590
+    u8 listSprites[6][0x8c];    // 0xc40
+};
 
 extern "C" {
 
-int FUN_00163aa4(int);
-int FUN_00167458(int, int);
-int uiSpriteSetImageKeyframe(int, int, int);
-int dialogClose(int);
-int FUN_002d22c0(int);
-int FUN_0048821c(int, unsigned int);
-int FUN_0048a378(int);
-int FUN_0048d248(int, unsigned int);
-int naviMainSetCurrentMap(int, unsigned int);
-int FUN_00492ac8(int, int);
-int pointConvertToFloat(...);
+extern u8 DAT_005f1a5c;
+extern s8 DAT_005f1a5e;
 
-extern unsigned char DAT_005f1a5c; /* 0x5f1a5c */
-extern signed char DAT_005f1a5e; /* 0x5f1a5e */
+s32 FUN_00163aa4(void* sprite);
+void FUN_00167458(void* sprite, s32 arg);
+void uiSpriteSetImageKeyframe(void* sprite, s32 image, s32 keyframe);
+void dialogClose(s32 arg);
+void FUN_002d22c0(s32 arg);
+void FUN_0048821c(MapScreen* screen, s32 mapIndex);
+void FUN_0048a378(MapScreen* screen);
+void FUN_0048d248(MapScreen* screen, u32 value);
+void naviMainSetCurrentMap(void* cursor, s32 mapIndex);
+void FUN_00492ac8(void* cursor, s32 arg);
+u32 FUN_00492c84(void* cursor);
+u32 vec2GetXInt(void* sprite);
+u32 vec2GetYInt(void* sprite);
+void pointConvertToFloat(void* pointer, u32 x, u32 y);
 
-/* Supplied declaration required: FUN_00163aa4. */
-extern unsigned int vec2GetXInt(int);
-extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_002d22c0. */
-/* Supplied declaration required: FUN_0048821c. */
-/* Supplied declaration required: FUN_0048a378. */
-/* Supplied declaration required: FUN_0048d248. */
-/* Supplied declaration required: naviMainSetCurrentMap. */
-/* Supplied declaration required: FUN_00492ac8. */
-extern unsigned int FUN_00492c84(int);
-/* Supplied declaration required: pointConvertToFloat. */
+#define SCREEN_BYTE(screen, offset) (*reinterpret_cast<u8*>(reinterpret_cast<u8*>(screen) + (offset)))
+#define SCREEN_PTR(screen, offset) (reinterpret_cast<void*>(reinterpret_cast<u8*>(screen) + (offset)))
 
-
-void FUN_0048bdec(int param_1)
-
+// Per-frame update of the map selection screen.
+void FUN_0048bdec(MapScreen* screen)
 {
-/* irregular: 11 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned char *puVar5;
-  unsigned char *puVar6;
-  int temp_v4;
-  
-  if ((*(unsigned int *)(param_1 + 0x10) & 8) != 0) {
-    temp_v0 = *(char *)(param_1 + 0x5e);
-    temp_v4 = param_1 + 0xf88;
-    puVar5 = (unsigned char *)(param_1 + 0x7b90);
-    puVar6 = (unsigned char *)(param_1 + 0x7b91);
-    if (temp_v0 != '\0') {
-      if (temp_v0 == '\x01') {
-        temp_v1 = param_1 + 0x4cc;
-        naviMainSetCurrentMap(temp_v1,*(unsigned int *)(param_1 + 0x60));
-        FUN_00492ac8(temp_v1,0);
-        FUN_0048821c(param_1,*(unsigned int *)(param_1 + 0x60));
-        uiSpriteSetImageKeyframe(temp_v4,2,0);
-        if (DAT_005f1a5e != '\0') {
-          DAT_005f1a5e = 0;
-          *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
-          *puVar5 = 1;
-          *puVar6 = 1;
+    if ((screen->flags & 8) == 0) return;
+
+    s8 phase = screen->phase;
+    void* titleSprite = SCREEN_PTR(screen, 0xf88);
+    u8* dirtyA = &SCREEN_BYTE(screen, 0x7b90);
+    u8* dirtyB = &SCREEN_BYTE(screen, 0x7b91);
+    if (phase == 0) {
+        if (SCREEN_BYTE(screen, 0x20644) != 0) {
+            for (s32 i = 0; i < 6; i++) FUN_00163aa4(screen->listSprites[i]);
+            FUN_00163aa4(SCREEN_PTR(screen, 0x112c));
+            FUN_00163aa4(SCREEN_PTR(screen, 0x10a0));
         }
-        else {
-          DAT_005f1a5e = 1;
-          temp_v2 = FUN_00492c84(temp_v1);
-          FUN_0048d248(param_1,temp_v2);
+        FUN_00163aa4(titleSprite);
+        if (FUN_00163aa4(screen->menuSprite) != 0) screen->phase = 1;
+        u32 y = vec2GetYInt(screen->menuSprite);
+        u32 x = vec2GetXInt(screen->menuSprite);
+        pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
+        *dirtyA = 1;
+        *dirtyB = 1;
+    } else if (phase == 1) {
+        void* cursor = SCREEN_PTR(screen, 0x4cc);
+        naviMainSetCurrentMap(cursor, screen->mapIndex);
+        FUN_00492ac8(cursor, 0);
+        FUN_0048821c(screen, screen->mapIndex);
+        uiSpriteSetImageKeyframe(titleSprite, 2, 0);
+        if (DAT_005f1a5e != 0) {
+            DAT_005f1a5e = 0;
+            screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
+            *dirtyA = 1;
+            *dirtyB = 1;
+        } else {
+            DAT_005f1a5e = 1;
+            FUN_0048d248(screen, FUN_00492c84(cursor));
         }
-        FUN_0048a378(param_1);
-        if (*(char *)(param_1 + 0x20644) != '\0') {
-          *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
-          *puVar5 = 1;
-          *puVar6 = 1;
-          FUN_002d22c0(0);
-          dialogClose(1);
-          *(unsigned char *)(param_1 + 0x20644) = 0;
-          FUN_0048a378(param_1);
-          DAT_005f1a5c = 0;
+        FUN_0048a378(screen);
+        if (SCREEN_BYTE(screen, 0x20644) != 0) {
+            screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
+            *dirtyA = 1;
+            *dirtyB = 1;
+            FUN_002d22c0(0);
+            dialogClose(1);
+            SCREEN_BYTE(screen, 0x20644) = 0;
+            FUN_0048a378(screen);
+            DAT_005f1a5c = 0;
         }
-        *(unsigned char *)(param_1 + 0x5e) = 2;
-        return;
-      }
-      if (temp_v0 == '\x02') {
-        FUN_00163aa4(temp_v4);
-        FUN_00163aa4(param_1 + 0x1014);
-        temp_v4 = param_1 + 0x504;
-        FUN_00167458(temp_v4,0);
-        if (*(char *)(param_1 + 0x58e) != '\0') {
-          if (*(int *)(param_1 + 0x60) >= 101) {
-            *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffdffff;
-          }
-          pointConvertToFloat(param_1 + 0x4d0,0);
-          *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xffffeff7;
+        screen->phase = 2;
+    } else if (phase == 2) {
+        FUN_00163aa4(titleSprite);
+        FUN_00163aa4(SCREEN_PTR(screen, 0x1014));
+        FUN_00167458(screen->pointerSprite, 0);
+        if (screen->cursorLocked != 0) {
+            if (screen->mapIndex > 100) screen->flags &= 0xfffdffff;
+            pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), 0, 0);
+            screen->flags &= 0xffffeff7;
+        } else {
+            u32 y = vec2GetYInt(screen->pointerSprite);
+            u32 x = vec2GetXInt(screen->pointerSprite);
+            pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
         }
-        else {
-          temp_v2 = vec2GetYInt(temp_v4);
-          temp_v3 = vec2GetXInt(temp_v4);
-          pointConvertToFloat(param_1 + 0x4d0,temp_v3,temp_v2);
-        }
-        *puVar5 = 1;
-        *puVar6 = 1;
-        return;
-      }
+        *dirtyA = 1;
+        *dirtyB = 1;
     }
-    else {
-      if (*(char *)(param_1 + 0x20644) != '\0') {
-        temp_v1 = 0;
-        do {
-          FUN_00163aa4(param_1 + temp_v1 * 0x8c + 0xc40);
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 6);
-        FUN_00163aa4(param_1 + 0x112c);
-        FUN_00163aa4(param_1 + 0x10a0);
-      }
-      FUN_00163aa4(temp_v4);
-      temp_v1 = param_1 + 0x590;
-      temp_v4 = FUN_00163aa4(temp_v1);
-      if (temp_v4 != 0) {
-        *(unsigned char *)(param_1 + 0x5e) = 1;
-      }
-      temp_v2 = vec2GetYInt(temp_v1);
-      temp_v3 = vec2GetXInt(temp_v1);
-      pointConvertToFloat(param_1 + 0x4d0,temp_v3,temp_v2);
-      *puVar5 = 1;
-      *puVar6 = 1;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

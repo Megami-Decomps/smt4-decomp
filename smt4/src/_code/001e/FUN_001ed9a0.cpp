@@ -1,169 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ed9a0` (_code @ 0x1ed9a0, 0x338 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (209 rows against 209): same flow, constants, render-target push/pop and float maths; retail reads `visible` through a pointer to a 0x300 sub-block of the save/load UI (add r0,r4,#768; ldrb [r0,#84]) and the entry-lock byte as (ui+index)+844, keeps the zero constant in r7 instead of r6, and loads the three globals in a different order, which a flat struct does not reproduce */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int screenDrawShadedRect(...);
-int FUN_002996d8(int);
-int FUN_0029dfc0(int);
-int FUN_002ae038(int *);
-int renderCtxCalculateStereoParallax(int);
-int FUN_002be5a4(int, unsigned int, int);
-int FUN_002bed3c(void);
-int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(int, int);
-int efctSetSpeed(void);
-int dataTableGet(int, int);
-int VectorSignedToFloat(int, int);
+/* Render-target stack of the title scene (observed fields only). */
+struct RenderTargetStack {
+    s32 depth;                 /* 0x00 */
+    s32 pad04;
+    s32 entry[4];              /* 0x08 */
+    u8 dirty;                  /* 0x18 */
+    u8 pad19[3];
+    void (*apply)(void);       /* 0x1C: re-applies the current top entry */
+};
 
-typedef int romwright_code(...);
-/* stack frame of void: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
+struct TitleScene {
+    u8 pad0000[0x124C];
+    RenderTargetStack targets; /* 0x124C */
+};
 
-extern int g_saveLoadUI; /* 0x44de2c */
-extern int DAT_0044de30; /* 0x44de30 */
-extern int g_titleScene; /* 0x44ea00 */
+/* Save/load screen globals (observed fields only). */
+struct SaveLoadUI {
+    u8 pad00[0x49];
+    u8 hasCursor;              /* 0x49 */
+    u8 pad4A[0x55 - 0x4A];
+    u8 shaded;                 /* 0x55: screen shading requested */
+    u8 pad56[0x70 - 0x56];
+    u8 titleShown;             /* 0x70 */
+    u8 titleBusy;              /* 0x71 */
+    u8 cursorBusy;             /* 0x72 */
+    u8 pad73[0x34C - 0x73];
+    u8 entryLocked[1];         /* 0x34C: indexed by the current entry */
+    u8 pad34D[0x354 - 0x34D];
+    u8 visible;                /* 0x354 */
+    u8 pad355[0x374 - 0x355];
+    f32 speed;                 /* 0x374 */
+    u8 closing;                /* 0x378 */
+};
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: screenDrawShadedRect. */
-/* Supplied declaration required: FUN_002996d8. */
-/* Supplied declaration required: FUN_0029dfc0. */
-/* Supplied declaration required: FUN_002ae038. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
-extern int libc_strlen(int);
-extern int FUN_002c5d80(unsigned int, unsigned int);
+struct SaveLoadGlobals {
+    u32 pad00;
+    SaveLoadUI *ui;            /* 0x04 */
+    s32 entryIndex;            /* 0x08 */
+};
 
+struct TitleCaption {
+    u8 pad00[8];
+    s16 x;                     /* 0x08 */
+    s16 y;                     /* 0x0A */
+    s16 *size;                 /* 0x0C: glyph width/height pair */
+};
 
-unsigned char FUN_001ed9a0(void)
+struct CaptionRecord {
+    u8 pad00[0x54];
+};
 
+extern SaveLoadGlobals g_saveLoadUI;   /* 0x44de2c */
+extern TitleScene *g_titleScene;       /* 0x44ea00 */
+
+s32 FUN_0029dfc0(s32 arg);
+s32 FUN_002996d8(s32 arg);
+void FUN_002bed3c(void);
+u32 FUN_002c5d80(s32 a, s32 b);
+void efctSetSpeed(f32 speed);
+TitleCaption *FUN_002bf4f8(s32 a, s32 b);
+f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
+s32 FUN_002bf380(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
+s32 dataTableGet(s32 table, s32 index);
+u8 *dataTableGetEntries(void);
+s32 libc_strlen(const u8 *text);
+s32 FUN_002be5a4(s32 a, s32 b, const u8 *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
+s32 FUN_002ae038(f32 *color);
+s32 screenDrawShadedRect(s32 x, s32 y, s32 w, s32 h, s32 depth);
+
+/* Pushes `value` onto the render-target stack, re-applying it when it changed. */
+static void renderTargetPush(TitleScene *scene, u32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int *piVar10;
-  unsigned char temp_v9;
-  unsigned int in_fpscr;
-  float temp_v10;
-  float temp_v11;
-  unsigned long long temp_v12;
-  int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  
-  temp_v6 = g_saveLoadUI;
-  if ((*(char *)(g_saveLoadUI + 0x378) == '\0') && (*(char *)(g_saveLoadUI + 0x354) != '\0')) {
-    temp_v12 = 0x3f800000;
-    if (*(char *)(g_saveLoadUI + DAT_0044de30 + 0x34c) == '\0') {
-      FUN_0029dfc0(0);
-      FUN_002996d8(0);
-      temp_v5 = g_saveLoadUI;
-      if ((*(char *)(temp_v6 + 0x70) != '\0') && (*(char *)(temp_v6 + 0x71) == '\0')) {
-        FUN_002bed3c();
-        temp_v4 = g_titleScene;
-        temp_v3 = FUN_002c5d80(1,0);
-        piVar10 = (int *)(temp_v4 + 0x124c);
-        temp_v7 = *piVar10;
-        temp_v8 = piVar10[temp_v7 + 2];
-        *piVar10 = temp_v7 + 1;
-        piVar10[temp_v7 + 3] = temp_v3;
-        if (*(char *)(temp_v4 + 0x1264) != '\0' || temp_v8 != temp_v3) {
-          (**(romwright_code **)(temp_v4 + 0x1268))();
-          *(unsigned char *)(temp_v4 + 0x1264) = 0;
-        }
-        efctSetSpeed();
-        FUN_002bf4f8(0x36,0x56);
-        temp_v4 = FUN_002bf4f8(0x36,0x59);
-        temp_v10 = 0.305f;
-        renderCtxCalculateStereoParallax(g_titleScene);
-        FUN_002bf380(2,0x36,7,(int)temp_v10,0,0xf1);
-        temp_v0 = *(char *)(temp_v5 + 0x49);
-        temp_v1 = **(short **)(temp_v4 + 0xc);
-        temp_v2 = (*(short **)(temp_v4 + 0xc))[1];
-        dataTableGet(0x3d,0);
-        temp_v5 = dataTableGetEntries();
-        temp_v5 = temp_v5 + temp_v0 * 0x54;
-        temp_v3 = libc_strlen(temp_v5);
-        temp_v11 = (float)VectorSignedToFloat(temp_v3 * temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)temp_v1 - (int)(temp_v11 * 0.5f),(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(4,0xffffffff,temp_v5);
-        temp_v5 = g_titleScene;
-        piVar10 = (int *)(g_titleScene + 0x124c);
-        temp_v4 = *piVar10;
-        temp_v3 = piVar10[temp_v4 + 2];
-        *piVar10 = temp_v4 - 1;
-        if (*(char *)(temp_v5 + 0x1264) != '\0' || temp_v3 != piVar10[temp_v4 + 1]) {
-          (**(romwright_code **)(temp_v5 + 0x1268))();
-          *(unsigned char *)(temp_v5 + 0x1264) = 0;
-        }
-        efctSetSpeed();
-      }
+    RenderTargetStack *stack = &scene->targets;
+    s32 previous = stack->entry[stack->depth];
+
+    stack->depth = stack->depth + 1;
+    stack->entry[stack->depth] = value;
+    if (stack->dirty != 0 || previous != (s32)value) {
+        stack->apply();
+        stack->dirty = 0;
     }
-    temp_v5 = g_titleScene;
-    if (*(char *)(temp_v6 + 0x55) != '\0') {
-      temp_v9 = *(char *)(temp_v6 + 0x49) != '\0';
-      temp_v0 = '\0';
-      if (temp_v9) {
-        temp_v0 = *(char *)(temp_v6 + 0x72);
-      }
-      if (!temp_v9 || temp_v0 == '\0') {
-        temp_v6 = FUN_002c5d80(1,0);
-        piVar10 = (int *)(temp_v5 + 0x124c);
-        temp_v4 = *piVar10;
-        temp_v3 = piVar10[temp_v4 + 2];
-        *piVar10 = temp_v4 + 1;
-        piVar10[temp_v4 + 3] = temp_v6;
-        if (*(char *)(temp_v5 + 0x1264) != '\0' || temp_v3 != temp_v6) {
-          (**(romwright_code **)(temp_v5 + 0x1268))();
-          *(unsigned char *)(temp_v5 + 0x1264) = 0;
-        }
-        efctSetSpeed();
-        temp_v13 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
-        temp_v16 = (unsigned int)temp_v12;
-        temp_v14 = temp_v13;
-        temp_v15 = temp_v13;
-        FUN_002ae038(&temp_v13);
-        screenDrawShadedRect(0,0,400,0xf0,0xf5);
-        temp_v6 = g_titleScene;
-        piVar10 = (int *)(g_titleScene + 0x124c);
-        temp_v5 = *piVar10;
-        temp_v4 = piVar10[temp_v5 + 2];
-        *piVar10 = temp_v5 - 1;
-        if (*(char *)(temp_v6 + 0x1264) != '\0' || temp_v4 != piVar10[temp_v5 + 1]) {
-          (**(romwright_code **)(temp_v6 + 0x1268))();
-          *(unsigned char *)(temp_v6 + 0x1264) = 0;
-        }
-        efctSetSpeed();
-        FUN_002bed3c();
-      }
+}
+
+/* Pops the render-target stack, re-applying the entry underneath when it differs. */
+static void renderTargetPop(TitleScene *scene)
+{
+    RenderTargetStack *stack = &scene->targets;
+    s32 top = stack->entry[stack->depth];
+
+    stack->depth = stack->depth - 1;
+    if (stack->dirty != 0 || top != stack->entry[stack->depth]) {
+        stack->apply();
+        stack->dirty = 0;
     }
-  }
-  return 0;
+}
+
+/* Draws the save/load screen's title caption and the shading overlay; always returns 0. */
+u8 FUN_001ed9a0(void)
+{
+    SaveLoadUI *ui = g_saveLoadUI.ui;
+
+    if (ui->closing == 0 && ui->visible != 0) {
+        if (ui->entryLocked[g_saveLoadUI.entryIndex] == 0) {
+            FUN_0029dfc0(0);
+            FUN_002996d8(0);
+            if (ui->titleShown != 0 && ui->titleBusy == 0) {
+                SaveLoadUI *cursorUi = g_saveLoadUI.ui;
+                FUN_002bed3c();
+                renderTargetPush(g_titleScene, FUN_002c5d80(1, 0));
+                efctSetSpeed(1.0f);
+                FUN_002bf4f8(0x36, 0x56);
+                TitleCaption *caption = FUN_002bf4f8(0x36, 0x59);
+                s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.305f);
+                FUN_002bf380(2, 0x36, 7, parallax, 0, 0xF1);
+                s32 entry = cursorUi->hasCursor;
+                s32 width = caption->size[0];
+                s32 height = caption->size[1];
+                dataTableGet(0x3D, 0);
+                const u8 *text = dataTableGetEntries() + entry * 0x54;
+                s32 length = libc_strlen(text);
+                s32 half = (s32)((f32)(length * height) * 0.5f);
+                f32 x = (f32)caption->x + (f32)(width - half) * 0.5f + (f32)parallax;
+                FUN_002be5a4(4, -1, text, x, (f32)caption->y, 0.0f, 0.0f, 1.0f);
+                renderTargetPop(g_titleScene);
+                efctSetSpeed(1.0f);
+            }
+        }
+        if (ui->shaded != 0 && (ui->hasCursor == 0 || ui->cursorBusy == 0)) {
+            renderTargetPush(g_titleScene, FUN_002c5d80(1, 0));
+            efctSetSpeed(ui->speed);
+            f32 color[4];
+            color[0] = 0.0f;
+            color[1] = 0.0f;
+            color[2] = 0.0f;
+            color[3] = 1.0f;
+            FUN_002ae038(color);
+            screenDrawShadedRect(0, 0, 400, 240, 245);
+            renderTargetPop(g_titleScene);
+            efctSetSpeed(1.0f);
+            FUN_002bed3c();
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

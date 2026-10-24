@@ -80,7 +80,7 @@ extern unsigned int gameFlags2Get(unsigned char *);
 /* Supplied declaration required: mapIfRequestById. */
 extern int FUN_00356380(int);
 extern unsigned int FUN_00356528(int);
-extern unsigned int FUN_003683c8(int);
+extern unsigned int uiScreenIdToLayoutSet(int);
 /* Supplied declaration required: sceneLoadParameterPreset. */
 extern unsigned int FUN_00368868(unsigned int);
 extern int gameOwnedBitTest(int);
@@ -477,7 +477,7 @@ LAB_00364eac:
                       }
                       temp_v3 = FUN_00368868((unsigned int)(int)(short)temp_v8);
                       temp_v29 = FUN_00356528((int)(short)temp_v8);
-                      temp_v27 = FUN_003683c8((int)*(char *)((int)puVar4 + 10));
+                      temp_v27 = uiScreenIdToLayoutSet((int)*(char *)((int)puVar4 + 10));
                       VectorSignedToFloat((int)(short)puVar4[7],(unsigned char)(in_fpscr >> 0x16) & 3);
                       VectorSignedToFloat((int)*(short *)((int)puVar4 + 0x16),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);

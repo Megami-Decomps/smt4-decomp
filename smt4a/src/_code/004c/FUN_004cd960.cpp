@@ -1,146 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cd960` (_code @ 0x4cd960, 0x270 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation differs (retail keeps id/kind/variant in r7/r6/r4 across both lookups and reuses sl as zero; the build spills the id); logic equivalent. */
+#include "common.h"
+
+/* A table entry of 0x94 bytes (accessed fields). */
+struct TableEntry {
+    u8 id;          // 0x00
+    u8 kind;        // 0x01
+    u16 variant;    // 0x02
+    u8 unk04[0x90];
+};
+
+/* The per-entry roll state: the current result, the rolled-tier mask and a countdown. */
+struct RollState {
+    u16 current;
+    u8 rolledMask;
+    u8 countdown;   // low 5 bits countdown, high 3 bits kept
+};
+
+/* One chance row of the roll table: result, chance, countdown (3 halfwords). */
+struct RollRow {
+    u16 unk00;
+    u16 result;     // +0x04 from the table base
+    u16 chance;
+};
 
 extern "C" {
+TableEntry *dataTable18Sub0GetEntries(void);
+s32 dataTable18Sub0GetCount(void);
+RollState *FUN_00145f04(u8 kind, u32 id, u16 variant);
+s32 FUN_00148bb8(u32 id, u8 kind);
+u16 *FUN_00148c30(u8 kind, u32 id, u16 variant);
+s32 FUN_0015fb68(void);
+s32 randRange(u32 maximum);
 
-int FUN_00148bb8(unsigned int, int);
-int dataTable18Sub0GetCount(void);
-int dataTable18Sub0GetEntries(void);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned short *FUN_00145f04(char, unsigned int, short);
-/* Supplied declaration required: FUN_00148bb8. */
-extern unsigned short *FUN_00148c30(char, unsigned int, short);
-extern unsigned int randRange(unsigned int);
-extern int FUN_0015fb68(void);
-/* Supplied declaration required: dataTable18Sub0GetCount. */
-/* Supplied declaration required: dataTable18Sub0GetEntries. */
-
-
-void FUN_004cd960(int param_1)
-
+/* Roll every table entry's pending result: count down active results and draw new ones from the chance rows. */
+void FUN_004cd960(void)
 {
-/* irregular: 3 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned short *puVar6;
-  unsigned short *puVar7;
-  unsigned int temp_v5;
-  unsigned short *puVar9;
-  unsigned short *puVar10;
-  int temp_v6;
-  unsigned int temp_v7;
-  short temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned short temp_v12;
-  
-  dataTable18Sub0GetEntries();
-  temp_v3 = param_1;
-  dataTable18Sub0GetCount();
-  temp_v9 = 0;
-  if (temp_v9 < temp_v3) {
-    do {
-      temp_v4 = param_1 + temp_v9 * 0x94;
-      temp_v11 = (unsigned int)*(unsigned char *)(param_1 + temp_v9 * 0x94);
-      temp_v0 = *(char *)(temp_v4 + 1);
-      temp_v8 = *(short *)(temp_v4 + 2);
-      if (temp_v0 != '\0') {
-        if (temp_v8 == 6) {
-          temp_v8 = 0;
+    TableEntry *entries = dataTable18Sub0GetEntries();
+    s32 count = dataTable18Sub0GetCount();
+    for (s32 n = 0; n < count; n++) {
+        u32 id = entries[n].id;
+        u8 kind = entries[n].kind;
+        u16 variant = entries[n].variant;
+        if (kind != 0) {
+            if (variant == 6)
+                variant = 0;
+            else if (variant == 7)
+                variant = 1;
+        } else if (variant == 7) {
+            variant = 6;
         }
-        else if (temp_v8 == 7) {
-          temp_v8 = 1;
+        RollState *cleared = FUN_00145f04(kind, id, variant);
+        cleared->current = 0;
+        cleared->rolledMask = 0;
+        cleared->countdown &= ~0x3F;
+        s32 level = FUN_0015fb68();
+        RollState *state = FUN_00145f04(kind, id, variant);
+        u32 owned = FUN_00148bb8(id, kind);
+        if (owned == 0) {
+            state->current = 0;
+            state->countdown &= ~0x1F;
         }
-      }
-      else if (temp_v8 == 7) {
-        temp_v8 = 6;
-      }
-      puVar6 = (unsigned short *)FUN_00145f04(temp_v0,temp_v11,temp_v8);
-      *puVar6 = 0;
-      *(unsigned char *)(puVar6 + 1) = 0;
-      *(unsigned char *)((int)puVar6 + 3) = *(unsigned char *)((int)puVar6 + 3) & 0xc0;
-      temp_v4 = FUN_0015fb68();
-      puVar7 = (unsigned short *)FUN_00145f04(temp_v0,temp_v11,temp_v8);
-      temp_v5 = temp_v11;
-      FUN_00148bb8(temp_v11,temp_v0);
-      if (temp_v5 == 0) {
-        *puVar7 = 0;
-        *(unsigned char *)((int)puVar7 + 3) = *(unsigned char *)((int)puVar7 + 3) & 0xe0;
-      }
-      if (temp_v4 == 0) {
-        *(unsigned char *)(puVar7 + 1) = 0;
-      }
-      temp_v2 = *(unsigned char *)((int)puVar7 + 3);
-      if ((temp_v2 & 0x1f) >= 2) {
-        temp_v2 = (temp_v2 & 0xe0) | ((temp_v2 - 1) & 0x1f);
-        *(unsigned char *)((int)puVar7 + 3) = temp_v2;
-      }
-      else {
-        *(unsigned char *)((int)puVar7 + 3) = temp_v2 & 0xe0;
-        puVar9 = (unsigned short *)FUN_00148c30(temp_v0,temp_v11,temp_v8);
-        temp_v12 = *puVar7;
-        temp_v11 = (unsigned int)puVar9[temp_v4 * 3 + 3];
-        if ((-temp_v5 & temp_v11) == 0) {
-          temp_v12 = 0;
+        if (level == 0)
+            state->rolledMask = 0;
+        if ((state->countdown & 0x1F) >= 2) {
+            state->countdown = (state->countdown & 0xE0) | ((state->countdown - 1) & 0x1F);
+            continue;
         }
-        else if (temp_v11 < 1000) {
-          temp_v11 = randRange(99);
-          if ((temp_v11 < puVar9[temp_v4 * 3 + 3]) && (temp_v1 = puVar9[temp_v4 * 3 + 2], temp_v1 != 0)) {
-            temp_v12 = temp_v1;
-          }
-        }
-        else {
-          temp_v11 = (temp_v11 * 0x4189 + 0x4189) >> 0x18;
-          temp_v5 = 1 << ((temp_v11 - 1) & 0xff);
-          if ((temp_v5 & (unsigned char)puVar7[1]) == 0) {
-            temp_v6 = temp_v4 + 1;
-            temp_v10 = 0;
-            if (0 < temp_v6) {
-              puVar10 = puVar9;
-              do {
-                puVar10 = puVar10 + 3;
-                temp_v7 = (unsigned int)*puVar10;
-                if ((temp_v11 * 1000 < temp_v7) && (temp_v7 < (temp_v11 + 1) * 1000)) {
-                  temp_v10 = temp_v10 + temp_v11 * -1000 + temp_v7;
+        state->countdown &= ~0x1F;
+        u16 *table = FUN_00148c30(kind, id, variant);
+        u16 result = state->current;
+        u16 *row = table + level * 3;
+        u32 chance = row[3];
+        if ((-owned & chance) == 0) {
+            result = 0;
+        } else if (chance < 1000) {
+            if (static_cast<u32>(randRange(99)) < row[3] && row[2] != 0)
+                result = row[2];
+        } else {
+            u32 tier = (chance * 0x4189 + 0x4189) >> 24;
+            u32 bit = 1u << ((tier - 1) & 0xFF);
+            if ((bit & state->rolledMask) == 0) {
+                u32 total = 0;
+                u16 *scan = table;
+                for (s32 i = 0; i < level + 1; i++) {
+                    scan += 3;
+                    u32 value = *scan;
+                    if (tier * 1000 < value && value < (tier + 1) * 1000)
+                        total += value - tier * 1000;
                 }
-                temp_v6 = temp_v6 - 1;
-              } while (temp_v6 != 0);
+                if (static_cast<u32>(randRange(99)) < total) {
+                    result = row[2];
+                    state->rolledMask |= bit;
+                }
             }
-            temp_v11 = randRange(99);
-            if (temp_v11 < temp_v10) {
-              temp_v12 = puVar9[temp_v4 * 3 + 2];
-              *(unsigned char *)(puVar7 + 1) = (unsigned char)temp_v5 | (unsigned char)puVar7[1];
+        }
+        if (state->current != 0) {
+            if (result == 0) {
+                state->current = result;
+                state->countdown = (row[4] & 0x1F) | (state->countdown & 0xE0);
             }
-          }
+        } else if (result != 0) {
+            state->current = result;
+            state->countdown = (row[4] & 0x1F) | (state->countdown & 0xE0);
         }
-        if (*puVar7 != 0) {
-          if (temp_v12 == 0) {
-            *puVar7 = temp_v12;
-            temp_v2 = ((unsigned char)puVar9[temp_v4 * 3 + 4] & 0x1f) | (*(unsigned char *)((int)puVar7 + 3) & 0xe0);
-            *(unsigned char *)((int)puVar7 + 3) = temp_v2;
-          }
-        }
-        else if (temp_v12 != 0) {
-          *puVar7 = temp_v12;
-          temp_v2 = ((unsigned char)puVar9[temp_v4 * 3 + 4] & 0x1f) | (*(unsigned char *)((int)puVar7 + 3) & 0xe0);
-          *(unsigned char *)((int)puVar7 + 3) = temp_v2;
-        }
-      }
-      temp_v9 = temp_v9 + 1;
-    } while (temp_v9 < temp_v3);
-  }
-  return;
+    }
 }
-
-} /* extern "C" */
+}

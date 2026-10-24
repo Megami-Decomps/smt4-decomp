@@ -1,206 +1,189 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aeb64` (_code @ 0x3aeb64, 0x3d0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and the order of the duplicate scans differ (retail keeps the order counts and the output cursor in different registers and re-tests the side per record); same loops, lists and calls. */
+#include "common.h"
+
+namespace {
+/* A unit entry of the battle state (0x114 bytes): its first word is the unit's id. */
+struct UnitEntry {
+    /* 0x000 */ s32 id;
+    /* 0x004 */ u8 unk004[0x38];
+    /* 0x03c */ u8 team;                 /* 2: the player's team */
+    /* 0x03d */ u8 unk03d[0x25];
+    /* 0x062 */ s16 listedId;
+    /* 0x064 */ u8 unk064[0x8c];
+    /* 0x0f0 */ s32 slot;                /* negative: not placed in a slot yet */
+    /* 0x0f4 */ u8 unk0f4[0x20];
+};
+
+/* A battle record found by listed id. */
+struct BattleRecord {
+    /* 0x000 */ u32 flags;               /* 1: shown, 2: blank, 8: party member, 0x10: enemy */
+    /* 0x004 */ u8 unk004[0x6a];
+    /* 0x06e */ s16 key;
+    /* 0x070 */ u8 unk070[0x5e];
+    /* 0x0ce */ u16 partyId;
+    /* 0x0d0 */ u8 unk0d0[0xf6];
+    /* 0x1c6 */ u16 level;
+};
+
+/* The battle state: only the unit table pointer. */
+struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x1e98];
+    /* 0x1e98 */ UnitEntry *units;
+};
+
+/* A party slot record: its id at +0x46. */
+struct PartySlot {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 id;
+};
+
+/* One output row (0x18 bytes). */
+struct RosterRow {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 isEnemy;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 side;
+    /* 0x0c */ u32 index;
+    /* 0x10 */ u16 level;
+    /* 0x12 */ u8 stat7;
+    /* 0x13 */ u8 stat10;
+    /* 0x14 */ u8 stat11;
+    /* 0x15 */ u8 stat20;
+    /* 0x16 */ u8 unk16[2];
+};
+
+/* A (key, unit id) pair of the per-side order lists. */
+struct OrderPair {
+    s32 key;
+    s32 unit;
+};
+}
 
 extern "C" {
+BattleState *btlGetMainState(void);
+BattleRecord *btlMainFindEntryByListedId(BattleState *state, s32 id);
+s32 FUN_0027e6f4(BattleState *state, s32 arg);
+s32 recordCompareFloatKey(const void *a, const void *b);
+void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
+PartySlot *saveResolvePartySlot(s32 index);
+u32 battleGetEntryHalfword(s32 id, s32 field);
 
-int battleGetEntryHalfword(int, int);
-int FUN_0027e6f4(int, int);
-int btlMainFindEntryByListedId(unsigned int *, int);
-int btlGetMainState(void);
-int FUN_002b7bca(...);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-} param_2_stack;
-
-extern unsigned char LAB_0021778c; /* 0x21778c */
-
-extern int saveResolvePartySlot(int);
-/* Supplied declaration required: battleGetEntryHalfword. */
-/* Supplied declaration required: FUN_0027e6f4. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002b7bca. */
-
-
-int FUN_003aeb64(unsigned int param_1,int param_2)
-
+/* The side (0 or 1) an unplaced unit is listed under. */
+static s32 sideOf(UnitEntry *unit)
 {
-/* irregular: 2 goto(s); 5 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  int *piVar7;
-  int temp_v5;
-  int *piVar9;
-  unsigned int *puVar10;
-  int temp_v6;
-  int temp_v7;
-  int aiStack_8c0 [218];
-  unsigned int temp_v8 [218];
-  int aiStack_1f0 [109];
-  int temp_v9;
-  int temp_v10 [4];
-  int temp_v11;
-  
-  temp_v5 = 0;
-  temp_v10[0] = 0;
-  temp_v10[1] = 0;
-  temp_v10[3] = param_1;
-  temp_v11 = param_2;
-  do {
-    aiStack_8c0[temp_v5 * 2] = -1;
-    temp_v8[temp_v5 * 2] = 0xffffffff;
-    temp_v2 = btlGetMainState();
-    piVar9 = (int *)(*(int *)(temp_v2 + 0x1e98) + temp_v5 * 0x114);
-    if (piVar9 != (int *)0x0) {
-      puVar4 = (unsigned int *)btlGetMainState();
-      btlMainFindEntryByListedId(puVar4,(int)*(short *)((int)piVar9 + 0x62));
-      if (((puVar4 != (unsigned int *)0x0) && ((*puVar4 & 0x10) != 0)) && (piVar9[0x3c] < 0)) {
-        temp_v6 = 0;
-        temp_v2 = btlGetMainState();
-        FUN_0027e6f4(temp_v2,1);
-        if ((temp_v2 < 0) && ((char)piVar9[0xf] != '\x02')) {
-          temp_v6 = 1;
-        }
-        temp_v0 = 0;
-        temp_v2 = temp_v10[temp_v6];
-        if (0 < temp_v2) {
-          piVar7 = aiStack_8c0 + temp_v6 * 0xda;
-          temp_v3 = temp_v2;
-          do {
-            temp_v7 = *piVar7;
-            piVar7 = piVar7 + 2;
-            if (temp_v7 == *(short *)((int)puVar4 + 0x6e)) {
-              temp_v0 = 1;
-            }
-            temp_v3 = temp_v3 - 1;
-          } while (temp_v3 != 0);
-          if (!temp_v0) {
-            aiStack_8c0[temp_v6 * 0xda + temp_v2 * 2] = (int)*(short *)((int)puVar4 + 0x6e);
-            (aiStack_8c0 + temp_v6 * 0xda + temp_v2 * 2)[1] = *piVar9;
-            temp_v10[temp_v6] = temp_v2 + 1;
-          }
-        }
-        else {
-          aiStack_8c0[temp_v6 * 0xda + temp_v2 * 2] = (int)*(short *)((int)puVar4 + 0x6e);
-          (aiStack_8c0 + temp_v6 * 0xda + temp_v2 * 2)[1] = *piVar9;
-          temp_v10[temp_v6] = temp_v2 + 1;
-        }
-      }
+    s32 side = 0;
+    if (FUN_0027e6f4(btlGetMainState(), 1) < 0 && unit->team != 2) {
+        side = 1;
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x6d);
-  if (temp_v10[0] >= 2) {
-    FUN_002b7bca(aiStack_8c0,temp_v10[0],8,&LAB_0021778c);
-  }
-  if (temp_v10[1] >= 2) {
-    FUN_002b7bca(temp_v8,temp_v10[1],8,&LAB_0021778c);
-  }
-  temp_v2 = 0;
-  temp_v5 = 0;
-  temp_v9 = 0;
-  do {
-    temp_v6 = btlGetMainState();
-    temp_v6 = *(int *)(temp_v6 + 0x1e98) + temp_v5 * 0x114;
-    if (temp_v6 != 0) {
-      puVar4 = (unsigned int *)btlGetMainState();
-      btlMainFindEntryByListedId(puVar4,(int)*(short *)(temp_v6 + 0x62));
-      if ((puVar4 != (unsigned int *)0x0) && (temp_v4 = *puVar4, (temp_v4 & 1) != 0)) {
-        puVar10 = (unsigned int *)(temp_v11 + temp_v2 * 0x18);
-        if ((temp_v4 & 2) != 0) {
-          *puVar10 = 0xffffffff;
-          *(unsigned char *)(puVar10 + 1) = 0;
-          puVar10[2] = 0;
-          puVar10[3] = 0;
-        }
-        else if ((temp_v4 & 8) != 0) {
-          temp_v4 = 1;
-          *puVar10 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-          *(unsigned char *)(puVar10 + 1) = 0;
-          puVar10[2] = 0;
-          do {
-            temp_v3 = saveResolvePartySlot(temp_v4 - 1);
-            if ((temp_v3 != 0) && ((unsigned int)*(unsigned short *)(temp_v3 + 0x46) == *puVar10)) {
-              puVar10[3] = temp_v4;
-              break;
-            }
-            temp_v4 = temp_v4 + 1;
-          } while ((int)temp_v4 < 4);
-        }
-        else {
-          if ((temp_v4 & 0x10) == 0) goto LAB_003aef18;
-          temp_v0 = 0;
-          if (0 < temp_v9) {
-            piVar9 = aiStack_1f0;
-            temp_v3 = temp_v9;
-            do {
-              if (*piVar9 == (int)*(short *)((int)puVar4 + 0x6e)) {
-                temp_v0 = 1;
-              }
-              temp_v3 = temp_v3 - 1;
-              piVar9 = piVar9 + 1;
-            } while (temp_v3 != 0);
-            if (temp_v0) goto LAB_003aef18;
-          }
-          aiStack_1f0[temp_v9] = (int)*(short *)((int)puVar4 + 0x6e);
-          *puVar10 = (unsigned int)*(unsigned short *)((int)puVar4 + 0xce);
-          *(unsigned char *)(puVar10 + 1) = 1;
-          temp_v9 = temp_v9 + 1;
-          if (*(int *)(temp_v6 + 0xf0) >= 0) {
-            puVar10[2] = 1;
-            puVar10[3] = 0;
-          }
-          else {
-            temp_v3 = btlGetMainState();
-            FUN_0027e6f4(temp_v3,1);
-            if ((temp_v3 < 0) && (*(char *)(temp_v6 + 0x3c) != '\x02')) {
-              puVar10[2] = 1;
-            }
-            else {
-              puVar10[2] = 0;
-            }
-            puVar10[3] = 0;
-            temp_v4 = 0;
-            if ((int)temp_v4 < temp_v10[puVar10[2]]) {
-              do {
-                if (aiStack_8c0[puVar10[2] * 0xda + temp_v4 * 2] == -1) break;
-                if (aiStack_8c0[puVar10[2] * 0xda + temp_v4 * 2] ==
-                    (int)*(short *)((int)puVar4 + 0x6e)) {
-                  puVar10[3] = temp_v4;
-                  break;
+    return side;
+}
+
+/* Builds the battle roster rows: first the two per-side order lists of the enemies that wait to act (sorted),
+   then one row per shown unit - blank rows, party members (with their party slot) and enemies (with their
+   place in the order list). Returns the number of rows. */
+s32 FUN_003aeb64(u32 unused, RosterRow *rows)
+{
+    OrderPair order[2][109];
+    s32 orderCount[2] = { 0, 0 };
+    for (s32 i = 0; i < 109; i++) {
+        order[0][i].key = -1;
+        order[1][i].key = -1;
+        UnitEntry *unit = &btlGetMainState()->units[i];
+        if (unit != NULL) {
+            BattleRecord *record = btlMainFindEntryByListedId(btlGetMainState(), unit->listedId);
+            if (record != NULL && (record->flags & 0x10) != 0 && unit->slot < 0) {
+                s32 side = sideOf(unit);
+                s32 known = 0;
+                for (s32 j = 0; j < orderCount[side]; j++) {
+                    if (order[side][j].key == record->key) {
+                        known = 1;
+                    }
                 }
-                temp_v4 = temp_v4 + 1;
-              } while ((int)temp_v4 < temp_v10[puVar10[2]]);
+                if (orderCount[side] <= 0 || !known) {
+                    order[side][orderCount[side]].key = record->key;
+                    order[side][orderCount[side]].unit = unit->id;
+                    orderCount[side]++;
+                }
             }
-          }
         }
-        *(unsigned short *)(puVar10 + 4) = *(unsigned short *)((int)puVar4 + 0x1c6);
-        temp_v1 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),7);
-        *(unsigned char *)((int)puVar10 + 0x12) = temp_v1;
-        temp_v1 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),10);
-        *(unsigned char *)((int)puVar10 + 0x13) = temp_v1;
-        temp_v1 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),0xb);
-        *(unsigned char *)(puVar10 + 5) = temp_v1;
-        temp_v6 = battleGetEntryHalfword((int)*(short *)(temp_v6 + 0x62),0x14);
-        temp_v2 = temp_v2 + 1;
-        *(unsigned char *)((int)puVar10 + 0x15) = temp_v6 != 0;
-      }
     }
-LAB_003aef18:
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x6d) {
-      return temp_v2;
+    if (orderCount[0] > 1) {
+        FUN_002b7bca(order[0], orderCount[0], 8, recordCompareFloatKey);
     }
-  } while( 1 );
+    if (orderCount[1] > 1) {
+        FUN_002b7bca(order[1], orderCount[1], 8, recordCompareFloatKey);
+    }
+    s32 rowCount = 0;
+    s32 seenCount = 0;
+    s32 seen[109];
+    for (s32 i = 0; i < 109; i++) {
+        UnitEntry *unit = &btlGetMainState()->units[i];
+        if (unit == NULL) {
+            continue;
+        }
+        BattleRecord *record = btlMainFindEntryByListedId(btlGetMainState(), unit->listedId);
+        if (record == NULL || (record->flags & 1) == 0) {
+            continue;
+        }
+        RosterRow *row = &rows[rowCount];
+        if ((record->flags & 2) != 0) {
+            row->id = 0xffffffff;
+            row->isEnemy = 0;
+            row->side = 0;
+            row->index = 0;
+        } else if ((record->flags & 8) != 0) {
+            row->id = record->partyId;
+            row->isEnemy = 0;
+            row->side = 0;
+            for (s32 k = 1; k < 4; k++) {
+                PartySlot *slot = saveResolvePartySlot(k - 1);
+                if (slot != NULL && slot->id == row->id) {
+                    row->index = k;
+                    break;
+                }
+            }
+        } else {
+            if ((record->flags & 0x10) == 0) {
+                continue;
+            }
+            s32 already = 0;
+            for (s32 j = 0; j < seenCount; j++) {
+                if (seen[j] == record->key) {
+                    already = 1;
+                }
+            }
+            if (seenCount > 0 && already) {
+                continue;
+            }
+            seen[seenCount] = record->key;
+            row->id = record->partyId;
+            row->isEnemy = 1;
+            seenCount++;
+            if (unit->slot >= 0) {
+                row->side = 1;
+                row->index = 0;
+            } else {
+                row->side = sideOf(unit);
+                row->index = 0;
+                for (s32 j = 0; j < orderCount[row->side]; j++) {
+                    if (order[row->side][j].key == -1) {
+                        break;
+                    }
+                    if (order[row->side][j].key == record->key) {
+                        row->index = j;
+                        break;
+                    }
+                }
+            }
+        }
+        row->level = record->level;
+        row->stat7 = battleGetEntryHalfword(unit->listedId, 7);
+        row->stat10 = battleGetEntryHalfword(unit->listedId, 10);
+        row->stat11 = battleGetEntryHalfword(unit->listedId, 0xb);
+        row->stat20 = battleGetEntryHalfword(unit->listedId, 0x14) != 0;
+        rowCount++;
+    }
+    return rowCount;
 }
 
 } /* extern "C" */

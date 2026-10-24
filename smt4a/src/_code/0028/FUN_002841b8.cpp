@@ -1,211 +1,154 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002841b8` (_code @ 0x2841b8, 0x2d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves r0-r2 in the prologue and copies the 20-byte key table with ldm from an offset into one shared data block (here a separate extern copied word by word); the menu logic is the same (202 vs 199 rows). */
+#include "common.h"
+#include "shard/X14_MessageMain.h"
 
 extern "C" {
 
-int msgBoxFlagsSetBit7(unsigned int);
-int FUN_0021bdac(unsigned int, int, int, int, int, int);
-int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, unsigned char *);
-int useCounterStart(void);
-int FUN_002686b8(void);
-int scrCommMessageSetMode(int);
-int FUN_0031f208(int);
-int sortMenuAcquire(unsigned int, int);
-int obj04Finish(void);
-int useCounterRelease(void);
-int rt_memcpy_w(unsigned int [19], unsigned char *, int);
+/* The slice of the game state the Terminal menu uses: the open flag and the selected key. */
+typedef struct GameStateTerminalView {
+    /* 0x000 */ u8 unk000[0x500];
+    /* 0x500 */ u8 menuOpen;
+    /* 0x501 */ u8 unk501[3];
+    /* 0x504 */ u32 menuKey;
+} GameStateTerminalView;
 
-/* stack frame of param_3: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-} param_3_stack;
+/* The message work area fields written here, by their offsets. */
+typedef struct TerminalMessageWork {
+    /* 0x0000 */ u8 unk0000[4];
+    /* 0x0004 */ u32 handle;
+    /* 0x0008 */ u8 unk0008[4];
+    /* 0x000C */ u32 flags;             /* 0x20: menu shown */
+    /* 0x0010 */ u8 unk0010[0x19B4];
+    /* 0x19C4 */ u8 busy;
+    /* 0x19C5 */ u8 mode;
+} TerminalMessageWork;
 
-extern unsigned char LAB_002844a0; /* 0x2844a0 */
-extern unsigned char LAB_002844dc; /* 0x2844dc */
-extern unsigned char DAT_00530a24; /* 0x530a24 */
-extern int DAT_0057f58c; /* 0x57f58c */
-extern unsigned char DAT_005a6665; /* 0x5a6665 */
-extern unsigned char g_lmapMain; /* 0x5f1afc */
-extern unsigned char g_gameState; /* 0x5f15fc */
+typedef struct TerminalKeys {
+    u8 v[20];
+} TerminalKeys;
 
-/* Supplied declaration required: msgBoxFlagsSetBit7. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0021bdac. */
-/* Supplied declaration required: FUN_0023723c. */
-extern int useCounterIsFinished(void);
-/* Supplied declaration required: useCounterStart. */
-/* Supplied declaration required: FUN_002686b8. */
-/* Supplied declaration required: scrCommMessageSetMode. */
-extern unsigned int FUN_002c7c54(void);
-/* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: sortMenuAcquire. */
-/* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: useCounterRelease. */
-/* Supplied declaration required: rt_memcpy_w. */
+extern GameStateTerminalView g_gameState;
+extern const u32 DAT_00530a24[19];
+extern const TerminalKeys DAT_00530a70;
 
+void rt_memcpy_w(void *destination, const void *source, u32 size);
 
-unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
+void scrCommMessageSetMode(s32 mode);
+s32 gameFlagIsSet(u32 flag);
+void FUN_0021bdac(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
+void FUN_0023723c(u32 handle, s32 a, s32 b, s32 c, s32 d, const char *format, const char *text);
+void msgBoxFlagsSetBit7(u32 handle);
+void sortMenuAcquire(s32 a, s32 b);
+void FUN_0031f208(u8 key);
+void useCounterStart(void);
+u32 FUN_002c7c54(void);
+s32 useCounterIsFinished(void);
+void FUN_002686b8(void);
+void useCounterRelease(void);
+void obj04Finish(void);
 
+/* Runs the Terminal destination menu: lists the destinations whose flags are set, and returns the
+ * chosen destination (1-19), 0 while the menu is still open, -1 when it is cancelled or 99 when
+ * no destination is unlocked. `index` selects the entry shown highlighted. */
+s32 FUN_002841b8(s32 start, s32 index, u32 context)
 {
-/* irregular: 11 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6 [19];
-  unsigned char temp_v7 [16];
-  unsigned char *temp_v8;
-  int temp_v9;
-  int iStack_2c;
-  unsigned int uStack_28;
-  
-  temp_v9 = param_1;
-  iStack_2c = param_2;
-  uStack_28 = param_3;
-  rt_memcpy_w(temp_v6,&DAT_00530a24,0x4c);
-  temp_v8 = &DAT_005a6665;
-  temp_v7[0] = 'U';
-  temp_v7[1] = '\\';
-  temp_v7[2] = '[';
-  temp_v7[3] = 'g';
-  temp_v7[4] = 'V';
-  temp_v7[5] = '^';
-  temp_v7[6] = ']';
-  temp_v7[7] = '_';
-  temp_v7[8] = 'W';
-  temp_v7[9] = 'a';
-  temp_v7[10] = 'c';
-  temp_v7[0xb] = 'h';
-  temp_v7[0xc] = '`';
-  temp_v7[0xd] = 'b';
-  temp_v7[0xe] = 'X';
-  temp_v7[0xf] = 'd';
-  scrCommMessageSetMode(0);
-  temp_v5 = 0;
-  temp_v4 = 0;
-  do {
-    temp_v1 = gameFlagIsSet(temp_v6[temp_v4]);
-    temp_v0 = DAT_0057f58c;
-    if (temp_v1 != 0) {
-      temp_v5 = temp_v5 + 1;
-    }
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 0x13);
-  if (temp_v5 == 0) {
-    temp_v2 = 99;
-  }
-  else {
-    if (temp_v9 == 0) {
-      g_lmapMain = 1;
-      (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = (unsigned int)temp_v7[param_2];
-      if (DAT_0057f58c != 0) {
-        *(unsigned char *)(DAT_0057f58c + 0x19c5) = 0x15;
-      }
-      FUN_0021bdac(param_3,0,0,6,0,0);
-      FUN_0023723c(*(unsigned int *)(temp_v0 + 4),4,0xffffffff,0,3,&LAB_002844dc,&LAB_002844a0);
-      msgBoxFlagsSetBit7(*(unsigned int *)(temp_v0 + 4));
-      *(unsigned char *)(temp_v0 + 0x19c4) = 0;
-      *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 0x20;
-      sortMenuAcquire(0xffffffff,3);
-      temp_v4 = 0;
-      do {
-        temp_v5 = gameFlagIsSet(temp_v6[temp_v4]);
-        if (temp_v5 != 0) {
-          FUN_0031f208(temp_v7[temp_v4]);
+    u32 unlockFlags[19];
+
+    rt_memcpy_w(unlockFlags, DAT_00530a24, sizeof(unlockFlags));
+    TerminalKeys keys = DAT_00530a70;
+    scrCommMessageSetMode(0);
+    s32 unlocked = 0;
+
+    for (s32 i = 0; i < 19; i++) {
+        if (gameFlagIsSet(unlockFlags[i]) != 0) {
+            unlocked++;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x13);
-      useCounterStart();
     }
-    temp_v3 = FUN_002c7c54();
-    temp_v4 = useCounterIsFinished();
-    if (temp_v4 != 0) {
-      g_lmapMain = 0;
-      (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;
-      FUN_002686b8();
-      useCounterRelease();
-      obj04Finish();
-      temp_v2 = 0xffffffff;
+    if (unlocked == 0) {
+        return 99;
     }
-    else {
-      if ((temp_v3 == 0x69) || (temp_v7[param_2] == temp_v3)) {
+    if (start == 0) {
+        g_gameState.menuOpen = 1;
+        g_gameState.menuKey = keys.v[index];
+        TerminalMessageWork *work = (TerminalMessageWork *)g_messageMain.work;
+
+        if (work != NULL) {
+            work->mode = 0x15;
+        }
+        FUN_0021bdac(context, 0, 0, 6, 0, 0);
+        FUN_0023723c(work->handle, 4, -1, 0, 3, "%s",
+                     "\201\162\201\100\202\166\202\210\202\205\202\222\202\205\201\100\202\227\202\217\202\225\202\214\202\204\201\100"
+                     "\202\231\202\217\202\225\201\100\202\214\202\211\202\213\202\205\201\100\202\224\202\217\201\100\202\207\202\217"
+                     "\201\110");
+        msgBoxFlagsSetBit7(work->handle);
+        work->busy = 0;
+        work->flags |= 0x20;
+        sortMenuAcquire(-1, 3);
+        for (s32 i = 0; i < 19; i++) {
+            if (gameFlagIsSet(unlockFlags[i]) != 0) {
+                FUN_0031f208(keys.v[i]);
+            }
+        }
+        useCounterStart();
+    }
+    u32 key = FUN_002c7c54();
+
+    if (useCounterIsFinished() != 0) {
+        g_gameState.menuOpen = 0;
+        g_gameState.menuKey = 0;
+        FUN_002686b8();
+        useCounterRelease();
+        obj04Finish();
+        return -1;
+    }
+    if (key == 0x69 || keys.v[index] == key) {
         return 0;
-      }
-      g_lmapMain = 0;
-      (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;
-      FUN_002686b8();
-      useCounterRelease();
-      obj04Finish();
-      if (temp_v3 == 0x55) {
-        temp_v2 = 1;
-      }
-      else if (temp_v3 == 0x56) {
-        temp_v2 = 5;
-      }
-      else if (temp_v3 == 0x57) {
-        temp_v2 = 9;
-      }
-      else if (temp_v3 == 0x58) {
-        temp_v2 = 0xf;
-      }
-      else if (temp_v3 == 0x5a) {
-        temp_v2 = 0x13;
-      }
-      else if (temp_v3 == 0x5b) {
-        temp_v2 = 3;
-      }
-      else if (temp_v3 == 0x5c) {
-        temp_v2 = 2;
-      }
-      else if (temp_v3 == 0x5d) {
-        temp_v2 = 7;
-      }
-      else if (temp_v3 == 0x5e) {
-        temp_v2 = 6;
-      }
-      else if (temp_v3 == 0x5f) {
-        temp_v2 = 8;
-      }
-      else if (temp_v3 == 0x60) {
-        temp_v2 = 0xd;
-      }
-      else if (temp_v3 == 0x61) {
-        temp_v2 = 10;
-      }
-      else if (temp_v3 == 0x62) {
-        temp_v2 = 0xe;
-      }
-      else if (temp_v3 == 99) {
-        temp_v2 = 0xb;
-      }
-      else if (temp_v3 == 100) {
-        temp_v2 = 0x10;
-      }
-      else if (temp_v3 == 0x65) {
-        temp_v2 = 0x11;
-      }
-      else if (temp_v3 == 0x66) {
-        temp_v2 = 0x12;
-      }
-      else if (temp_v3 == 0x67) {
-        temp_v2 = 4;
-      }
-      else {
-        if (temp_v3 != 0x68) {
-          return 0;
-        }
-        temp_v2 = 0xc;
-      }
     }
-  }
-  return temp_v2;
+    g_gameState.menuOpen = 0;
+    g_gameState.menuKey = 0;
+    FUN_002686b8();
+    useCounterRelease();
+    obj04Finish();
+    if (key == 0x55) {
+        return 1;
+    } else if (key == 0x56) {
+        return 5;
+    } else if (key == 0x57) {
+        return 9;
+    } else if (key == 0x58) {
+        return 15;
+    } else if (key == 0x5A) {
+        return 19;
+    } else if (key == 0x5B) {
+        return 3;
+    } else if (key == 0x5C) {
+        return 2;
+    } else if (key == 0x5D) {
+        return 7;
+    } else if (key == 0x5E) {
+        return 6;
+    } else if (key == 0x5F) {
+        return 8;
+    } else if (key == 0x60) {
+        return 13;
+    } else if (key == 0x61) {
+        return 10;
+    } else if (key == 0x62) {
+        return 14;
+    } else if (key == 0x63) {
+        return 11;
+    } else if (key == 0x64) {
+        return 16;
+    } else if (key == 0x65) {
+        return 17;
+    } else if (key == 0x66) {
+        return 18;
+    } else if (key == 0x67) {
+        return 4;
+    } else if (key == 0x68) {
+        return 12;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

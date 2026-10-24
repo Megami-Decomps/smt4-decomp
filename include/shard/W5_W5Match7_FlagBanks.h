@@ -21,7 +21,9 @@ struct FlagWorkBanks {
             /* 0x003b */ u8 unk3b;
         } table4cHead;
         struct {
-            /* 0x0000 */ u8 unk0000BeforePoint[0x2c];
+            /* 0x0000 */ u8 unk0000BeforeTable[0x28];
+            /* 0x0028 */ s16 tableType;
+            /* 0x002a */ s16 tableId;
             /* 0x002c */ s16 scale;
             /* 0x002e */ s16 mapId;
             /* 0x0030 */ s16 areaId;
@@ -114,7 +116,9 @@ struct FlagWorkBanks {
             s8 firstY; // 0x0e01
             s8 secondX; // 0x0e02
             s8 secondY; // 0x0e03
-            u8 unk0e04[4];
+            u8 unk0e04[2];
+            u8 startX; // 0x0e06
+            u8 startY; // 0x0e07
             u8 specialCount; // 0x0e08
             u8 ready; // 0x0e09
             u8 displayX; // 0x0e0a

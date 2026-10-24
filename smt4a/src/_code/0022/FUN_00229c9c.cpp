@@ -1,227 +1,178 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229c9c` (_code @ 0x229c9c, 0x31c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: steps the lazily started event script task (start, wait for the script, branch to the next entry, finish); written from the decompilation, the state switch and its fall-through are not compared with retail */
+#include "common.h"
+
+#define LAZY_STATE_START 0
+#define LAZY_STATE_RUN_ENTRY 1
+#define LAZY_STATE_WAIT 2
+#define LAZY_STATE_BRANCH 3
+#define LAZY_STATE_AFTER_BRANCH 6
+#define LAZY_STATE_FINISH 7
+#define LAZY_STATE_NEXT_ENTRY 9
+#define LAZY_STATE_WAIT_ENTRY 10
+#define LAZY_KIND_CHAINED 5
+#define LAZY_NO_ENTRY -1
+
+struct LazyScriptTask {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 chained;
+    /* 0x08 */ s32 mode;
+    /* 0x0C */ s32 state;
+    /* 0x10 */ s32 frame;
+    /* 0x14 */ u8 unk14[0xC];
+    /* 0x20 */ s32 entry;
+    /* 0x24 */ u8 unk24[0x2C];
+    /* 0x50 */ s32 handled;
+    /* 0x54 */ u8 scriptRunning;
+    /* 0x55 */ u8 unk55[3];
+    /* 0x58 */ s32 pendingEntry;
+    /* 0x5C */ u8 pendingRunning;
+    /* 0x5D */ u8 closing;
+};
 
 extern "C" {
+extern s8 DAT_0057f6c9;
+extern s8 DAT_0057f6ca;
+extern LazyScriptTask *DAT_0057f6d0;
+extern s32 DAT_0057f6d8;
+extern s32 g_lazyScriptState;
+extern s32 DAT_005e210c;
+extern s32 DAT_005e2110;
 
-int gameDataFlagsClearBits(int);
-int FUN_001386b4(void);
-int gameDataBlocksReleaseHold(int);
-int gameDataBlocksMaskClearBits(int);
-int asdMemFree(void);
-int scrScriptProcessDestroy(void);
-int scrRunOpcodesStub(int);
-int FUN_00275bc8(void);
-int scrScriptProcessStartEntry(...);
-int FUN_0031ed60(char *, int);
-int obj04Finish(void);
-int FUN_0035d7bc(char *);
+void FUN_00275bc8(void);
+s32 scrRunOpcodesStub(s32 process);
+void scrScriptProcessStartEntry(s32 process, s32 entry);
+void scrScriptProcessDestroy(void);
+void obj04Finish(void);
+void FUN_0031ed60(LazyScriptTask *task, s32 value);
+s32 FUN_0035d83c(LazyScriptTask *task);
+void FUN_0035d7bc(LazyScriptTask *task);
+void FUN_001386b4(void);
+void gameDataBlocksReleaseHold(s32 mask);
+void gameDataFlagsClearBits(s32 mask);
+void gameDataBlocksMaskClearBits(s32 mask);
+void asdMemFree(void);
 
-extern signed char DAT_0057f6c9; /* 0x57f6c9 */
-extern signed char DAT_0057f6ca; /* 0x57f6ca */
-extern char *DAT_0057f6d0; /* 0x57f6d0 */
-extern int DAT_0057f6d8; /* 0x57f6d8 */
-extern int g_lazyScriptState; /* 0x5e2108 */
-extern int DAT_005e210c; /* 0x5e210c */
-extern int DAT_005e2110; /* 0x5e2110 */
-
-/* Supplied declaration required: gameDataFlagsClearBits. */
-/* Supplied declaration required: FUN_001386b4. */
-/* Supplied declaration required: gameDataBlocksReleaseHold. */
-/* Supplied declaration required: gameDataBlocksMaskClearBits. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_0031ed60. */
-/* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: FUN_0035d7bc. */
-extern int FUN_0035d83c(char *);
-
-
-unsigned int FUN_00229c9c(unsigned int param_1,int param_2)
-
+/* Returns 1 when the task has finished (or none exists), otherwise 0. */
+u32 FUN_00229c9c(u32 unused, s32 enabled)
 {
-/* irregular: 12 native warning(s); review required */
-  char temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  pcVar2 = DAT_0057f6d0;
-  if (DAT_0057f6d0 == (char *)0x0) {
-    return 1;
-  }
-  if (g_lazyScriptState != 0) {
-    param_2 = DAT_005e210c;
-  }
-  if (g_lazyScriptState == 0 || param_2 == 0) {
-    return 0;
-  }
-  if (DAT_005e2110 == 0) {
-    temp_v1 = g_lazyScriptState;
-    FUN_00275bc8();
-    DAT_005e2110 = temp_v1;
-    *(unsigned int *)(temp_v1 + 0x108) = 2;
-  }
-  if (pcVar2[0x5c] != '\0') {
-    temp_v1 = scrRunOpcodesStub(DAT_005e2110);
-    if (temp_v1 != 2) {
-      return 0;
-    }
-    pcVar2[0x5c] = '\0';
-    pcVar2[0x58] = -1;
-    pcVar2[0x59] = -1;
-    pcVar2[0x5a] = -1;
-    pcVar2[0x5b] = -1;
-    return 0;
-  }
-  if (*(int *)(pcVar2 + 0x58) != -1) {
-    *(int *)(pcVar2 + 0x20) = *(int *)(pcVar2 + 0x58);
-    scrScriptProcessStartEntry(DAT_005e2110);
-    pcVar2[0x5c] = '\x01';
-    pcVar2[0x54] = '\0';
-    obj04Finish();
-    return 0;
-  }
-  switch(*(unsigned int *)(pcVar2 + 0xc)) {
-  case 0:
-    temp_v1 = *(int *)(pcVar2 + 4);
-    pcVar2[0x50] = '\0';
-    pcVar2[0x51] = '\0';
-    pcVar2[0x52] = '\0';
-    pcVar2[0x53] = '\0';
-    if ((temp_v1 != 0) && ((*pcVar2 != '\x05' || (*(int *)(pcVar2 + 8) == 1)))) {
-      pcVar2[0xc] = '\x01';
-      pcVar2[0xd] = '\0';
-      pcVar2[0xe] = '\0';
-      pcVar2[0xf] = '\0';
-      *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
-      return 0;
-    }
-    temp_v2 = 3;
-    break;
-  case 1:
-    FUN_0031ed60(pcVar2,4);
-    temp_v2 = 2;
-    pcVar2[0x54] = '\0';
-    break;
-  case 2:
-    temp_v1 = FUN_0035d83c(pcVar2);
-    if (temp_v1 != 0) {
-      FUN_0035d7bc(pcVar2);
-      if (DAT_0057f6c9 != '\0') {
-        pcVar2[0x5d] = '\x01';
-        pcVar2[0xc] = '\x03';
-        pcVar2[0xd] = '\0';
-        pcVar2[0xe] = '\0';
-        pcVar2[0xf] = '\0';
-      }
-      else if (DAT_0057f6ca != '\0') {
-        if (*(int *)(pcVar2 + 0x50) == 0) {
-          pcVar2[0x50] = '\x01';
-          pcVar2[0x51] = '\0';
-          pcVar2[0x52] = '\0';
-          pcVar2[0x53] = '\0';
-          pcVar2[0xc] = '\x01';
-          pcVar2[0xd] = '\0';
-          pcVar2[0xe] = '\0';
-          pcVar2[0xf] = '\0';
-        }
-        else {
-          temp_v0 = *pcVar2;
-          pcVar2[0xc] = '\t';
-          pcVar2[0xd] = '\0';
-          pcVar2[0xe] = '\0';
-          pcVar2[0xf] = '\0';
-          pcVar2[0x5d] = '\0';
-          if (temp_v0 == '\x05') {
-            pcVar2[0xc] = '\x03';
-            pcVar2[0xd] = '\0';
-            pcVar2[0xe] = '\0';
-            pcVar2[0xf] = '\0';
-          }
-        }
-      }
-      else {
-        temp_v0 = *pcVar2;
-        pcVar2[0xc] = '\t';
-        pcVar2[0xd] = '\0';
-        pcVar2[0xe] = '\0';
-        pcVar2[0xf] = '\0';
-        pcVar2[0x5d] = '\0';
-        if (temp_v0 == '\x05') {
-          pcVar2[0xc] = '\x03';
-          pcVar2[0xd] = '\0';
-          pcVar2[0xe] = '\0';
-          pcVar2[0xf] = '\0';
-        }
-      }
-      pcVar2[0x54] = '\0';
-    }
-    else if (pcVar2[0x54] != '\0') {
-      scrRunOpcodesStub(DAT_005e2110);
-    }
-    *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
-    return 0;
-  case 3:
-    FUN_0031ed60(pcVar2,*pcVar2);
-    temp_v2 = 6;
-    break;
-  default:
-    *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
-    return 0;
-  case 6:
-    temp_v1 = FUN_0035d83c(pcVar2);
-    if (temp_v1 == 0) {
-      *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
-      return 0;
-    }
-    FUN_0035d7bc(pcVar2);
-    if (DAT_0057f6c9 == '\0') {
-      if (DAT_0057f6d8 != -1) {
-        gameDataBlocksReleaseHold(1);
-        gameDataFlagsClearBits(1);
-        gameDataBlocksMaskClearBits(1);
-        pcVar2[0xc] = '\n';
-        pcVar2[0xd] = '\0';
-        pcVar2[0xe] = '\0';
-        pcVar2[0xf] = '\0';
-        scrScriptProcessStartEntry(DAT_005e2110,DAT_0057f6d8);
-        *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
+    LazyScriptTask *task = DAT_0057f6d0;
+    if (task == NULL)
+        return 1;
+    if (g_lazyScriptState != 0)
+        enabled = DAT_005e210c;
+    if (g_lazyScriptState == 0 || enabled == 0)
         return 0;
-      }
-      temp_v2 = 9;
-      break;
+
+    if (DAT_005e2110 == 0) {
+        s32 process = g_lazyScriptState;
+        FUN_00275bc8();
+        DAT_005e2110 = process;
+        *(s32 *)(process + 0x108) = 2;
     }
-  case 9:
-    temp_v2 = 7;
-    break;
-  case 7:
-    if ((*(int *)(DAT_0057f6d0 + 4) == 1) && ((*pcVar2 != '\x05' || (*(int *)(pcVar2 + 8) == 4)))) {
-      FUN_001386b4();
+
+    if (task->pendingRunning != 0) {
+        if (scrRunOpcodesStub(DAT_005e2110) != 2)
+            return 0;
+        task->pendingRunning = 0;
+        task->pendingEntry = LAZY_NO_ENTRY;
+        return 0;
     }
-    if (DAT_005e2110 != 0) {
-      scrScriptProcessDestroy();
-      DAT_005e2110 = 0;
+    if (task->pendingEntry != LAZY_NO_ENTRY) {
+        task->entry = task->pendingEntry;
+        scrScriptProcessStartEntry(DAT_005e2110, task->entry);
+        task->pendingRunning = 1;
+        task->scriptRunning = 0;
+        obj04Finish();
+        return 0;
     }
-    if (DAT_0057f6d0 != (char *)0x0) {
-      asdMemFree();
+
+    s32 next;
+    switch (task->state) {
+    case LAZY_STATE_START:
+        task->handled = 0;
+        if (task->chained != 0 && (task->kind != LAZY_KIND_CHAINED || task->mode == 1)) {
+            task->state = LAZY_STATE_RUN_ENTRY;
+            task->frame++;
+            return 0;
+        }
+        next = LAZY_STATE_BRANCH;
+        break;
+    case LAZY_STATE_RUN_ENTRY:
+        FUN_0031ed60(task, 4);
+        next = LAZY_STATE_WAIT;
+        task->scriptRunning = 0;
+        break;
+    case LAZY_STATE_WAIT:
+        if (FUN_0035d83c(task) != 0) {
+            FUN_0035d7bc(task);
+            if (DAT_0057f6c9 != 0) {
+                task->closing = 1;
+                task->state = LAZY_STATE_BRANCH;
+            } else if (DAT_0057f6ca != 0 && task->handled == 0) {
+                task->handled = 1;
+                task->state = LAZY_STATE_RUN_ENTRY;
+            } else {
+                task->state = LAZY_STATE_NEXT_ENTRY;
+                task->closing = 0;
+                if (task->kind == LAZY_KIND_CHAINED)
+                    task->state = LAZY_STATE_BRANCH;
+            }
+            task->scriptRunning = 0;
+        } else if (task->scriptRunning != 0) {
+            scrRunOpcodesStub(DAT_005e2110);
+        }
+        task->frame++;
+        return 0;
+    case LAZY_STATE_BRANCH:
+        FUN_0031ed60(task, task->kind);
+        next = LAZY_STATE_AFTER_BRANCH;
+        break;
+    case LAZY_STATE_AFTER_BRANCH:
+        if (FUN_0035d83c(task) == 0) {
+            task->frame++;
+            return 0;
+        }
+        FUN_0035d7bc(task);
+        if (DAT_0057f6c9 == 0 && DAT_0057f6d8 != LAZY_NO_ENTRY) {
+            gameDataBlocksReleaseHold(1);
+            gameDataFlagsClearBits(1);
+            gameDataBlocksMaskClearBits(1);
+            task->state = LAZY_STATE_WAIT_ENTRY;
+            scrScriptProcessStartEntry(DAT_005e2110, DAT_0057f6d8);
+            task->frame++;
+            return 0;
+        }
+        next = DAT_0057f6c9 == 0 ? LAZY_STATE_NEXT_ENTRY : LAZY_STATE_FINISH;
+        break;
+    case LAZY_STATE_NEXT_ENTRY:
+        next = LAZY_STATE_FINISH;
+        break;
+    case LAZY_STATE_FINISH:
+        if (DAT_0057f6d0->chained == 1 && (task->kind != LAZY_KIND_CHAINED || task->mode == 4))
+            FUN_001386b4();
+        if (DAT_005e2110 != 0) {
+            scrScriptProcessDestroy();
+            DAT_005e2110 = 0;
+        }
+        if (DAT_0057f6d0 != NULL)
+            asdMemFree();
+        DAT_0057f6d0 = NULL;
+        return 1;
+    case LAZY_STATE_WAIT_ENTRY:
+        if (scrRunOpcodesStub(DAT_005e2110) != 2) {
+            task->frame++;
+            return 0;
+        }
+        next = LAZY_STATE_NEXT_ENTRY;
+        break;
+    default:
+        task->frame++;
+        return 0;
     }
-    DAT_0057f6d0 = (char *)0x0;
-    return 1;
-  case 10:
-    temp_v1 = scrRunOpcodesStub(DAT_005e2110);
-    if (temp_v1 != 2) {
-      *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
-      return 0;
-    }
-    temp_v2 = 9;
-  }
-  *(unsigned int *)(pcVar2 + 0xc) = temp_v2;
-  *(int *)(pcVar2 + 0x10) = *(int *)(pcVar2 + 0x10) + 1;
-  return 0;
+    task->state = next;
+    task->frame++;
+    return 0;
 }
 
 } /* extern "C" */

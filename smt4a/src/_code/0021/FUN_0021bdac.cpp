@@ -1,214 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021bdac` (_code @ 0x21bdac, 0x35c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles; the last parameter is a float passed on the stack; retail spills the register arguments (push {r0-r3}) and orders the null-safe state checks differently */
+#include "common.h"
+
+// Script message box: only the members this open/poll step touches.
+struct MessageBox {
+    u8 unk00[4];
+    u32 object;             // 0x04: ui object the box draws through
+    u8 state;               // 0x08: 0 idle, 3 opening, 4 busy, 5 done
+    u8 kind;                // 0x09
+    u8 unk0a[6];
+    u32 color;              // 0x10
+    u8 unk14[4];
+    u32 result;             // 0x18
+    u8 unk1c[4];
+    u32 sprite;             // 0x20
+    u8 unk24[9];
+    u8 withRuby;            // 0x2d
+    u8 reopen;              // 0x2e
+    u8 unk2f[6];
+    u8 hasText;             // 0x35
+    u8 lockInput;           // 0x36
+    u8 unk37[0x35];
+    u8 portrait;            // 0x6c
+    u8 mirrored;            // 0x6d
+    u8 unk6e[0x1958];
+    u16 helpValue;          // 0x19c6
+    u8 slotFlags[6];        // 0x19c8
+    u16 slotValues[6];      // 0x19ce
+    u8 helpPressed;         // 0x19da
+};
 
 extern "C" {
 
-int objFlagsSetBits(unsigned int, int);
-int msgBoxFlagsClear(unsigned int, int);
-int FUN_00165088(int, int);
-int sysPlaySe(int);
-int FUN_00169548(void);
-int FUN_00203da4(...);
-int messageSlotSet(int);
-int FUN_0028b350(int, int);
-int scrCommMessageSetMode(unsigned int);
-int scrSetResult(unsigned int);
+extern MessageBox* DAT_0057f58c;
+extern MessageBox* DAT_0057f590;
+extern MessageBox* DAT_0057f594;
+extern MessageBox* DAT_005e2010[];
+extern s16 DAT_005e205a[];
 
-/* stack frame of param_6: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_6_stack;
+s32 objFlagsSetBits(u32 object, s32 bits);
+s32 msgBoxFlagsClear(u32 object, s32 bits);
+void FUN_00165088(MessageBox* box, s32 kind);
+void sysPlaySe(s32 id);
+void FUN_00169548(void);
+void FUN_00203da4(MessageBox* box, u32 a, s32 b, s32 kind, s32 c, s32 d, f32 e);
+void messageSlotSet(s32 slot);
+void FUN_0028b350(MessageBox* box, s32 kind);
+void scrCommMessageSetMode(u32 mode);
+void scrSetResult(u32 value);
+s32 engineCleanupIsDone(void);
+s32 FUN_00162ea4(void);
+u32 FUN_001688c4(u32 object);
+u16 ifTouchGetButtonHelpValue(void);
+u16 screenGetSlotValue(u32 slot);
+u8 screenGetSlotFlag(u32 slot);
+s32 buttonHelpGetEntryValue(u32 slot);
 
-extern int DAT_0057f58c; /* 0x57f58c */
-extern int DAT_0057f590; /* 0x57f590 */
-extern int DAT_0057f594; /* 0x57f594 */
-
-/* Supplied declaration required: objFlagsSetBits. */
-extern int engineCleanupIsDone(void);
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: msgBoxFlagsClear. */
-/* Supplied declaration required: FUN_00165088. */
-extern unsigned short ifTouchGetButtonHelpValue(void);
-/* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_001688c4(unsigned int);
-/* Supplied declaration required: FUN_00169548. */
-/* Supplied declaration required: FUN_00203da4. */
-/* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: FUN_0028b350. */
-/* Supplied declaration required: scrCommMessageSetMode. */
-/* Supplied declaration required: scrSetResult. */
-extern unsigned short screenGetSlotValue(unsigned int);
-extern unsigned char screenGetSlotFlag(unsigned int);
-extern int buttonHelpGetEntryValue(unsigned int);
-
-
-unsigned int
-FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_5,unsigned int param_6)
-
+// Opens (param_3 == 0) or polls (param_3 != 0) the script message box for `kind`; returns 1 when finished.
+u32 FUN_0021bdac(u32 owner, s32 index, s32 poll, s32 kind, s32 lockInput, f32 extra)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  char temp_v6;
-  
-  temp_v2 = DAT_0057f58c;
-  temp_v0 = 0;
-  temp_v6 = param_4 == 0xb;
-  temp_v5 = DAT_0057f590;
-  if (!(unsigned char)temp_v6) {
-    if (param_4 != 0xe) {
-      if (param_4 == 0xf) {
-        param_4 = 0xb;
-      }
-      else if (param_4 != 0x10) {
-        temp_v5 = DAT_0057f594;
-        if (param_4 != 0xc) {
-          if (param_4 != 0xd) {
-            temp_v5 = DAT_0057f590;
-            if (param_4 != 0xb && param_4 != 0x14) {
-              temp_v5 = DAT_0057f58c;
+    MessageBox* normal = DAT_0057f58c;
+    MessageBox* box = DAT_0057f590;
+    u8 withRuby = 0;
+    u8 portrait = (kind == 0xb);
+    if (kind != 0xb) {
+        if (kind != 0xe) {
+            if (kind == 0xf) {
+                kind = 0xb;
+            } else if (kind != 0x10) {
+                box = DAT_0057f594;
+                if (kind != 0xc) {
+                    if (kind != 0xd) {
+                        box = DAT_0057f590;
+                        if (kind != 0xb && kind != 0x14) box = DAT_0057f58c;
+                    } else {
+                        box = DAT_005e2010[index];
+                        index = DAT_005e205a[index];
+                    }
+                }
+            } else {
+                kind = 0xb;
+                withRuby = 1;
+                portrait = 0;
             }
-          }
-          else {
-            temp_v5 = *(int *)(param_2 * 4 + 0x5e2010);
-            param_2 = (int)*(short *)(param_2 * 2 + 0x5e205a);
-          }
+        } else {
+            withRuby = 1;
+            kind = 0xb;
+            portrait = 1;
         }
-      }
-      else {
-        param_4 = 0xb;
-        temp_v0 = 1;
-        temp_v6 = 0;
-      }
     }
-    else {
-      temp_v0 = 1;
-      param_4 = 0xb;
-      temp_v6 = 1;
-    }
-  }
-  *(unsigned char *)(temp_v5 + 0x2d) = temp_v0;
-  *(char *)(temp_v5 + 0x6c) = temp_v6;
-  if (param_3 != 0) {
-    if ((temp_v5 != 0) && (temp_v6 = *(char *)(temp_v5 + 8), temp_v6 == '\x04')) {
-      return 1;
-    }
-    if (temp_v5 != 0) {
-      temp_v6 = *(char *)(temp_v5 + 8);
-    }
-    if (temp_v5 == 0 || temp_v6 == '\0') {
-      if (*(char *)(temp_v5 + 0x2e) != '\0') {
-        *(unsigned char *)(temp_v5 + 0x2e) = 0;
-        FUN_00203da4(temp_v5,param_1,param_2,param_4,0x1a,1,0);
-        if (*(char *)(temp_v5 + 0x35) != '\0') {
-          return 0;
+    box->withRuby = withRuby;
+    box->portrait = portrait;
+
+    if (poll != 0) {
+        s8 state = (box != NULL) ? box->state : 0;
+        if (box != NULL && state == 4) return 1;
+        if (box == NULL || state == 0) {
+            if (box->reopen != 0) {
+                box->reopen = 0;
+                FUN_00203da4(box, owner, index, kind, 0x1a, 1, 0);
+                if (box->hasText == 0) FUN_0028b350(box, box->kind);
+                return 0;
+            }
+            if (kind != 0xb && kind != 0x14) return 1;
+            s8 normalState = 0;
+            if (normal != NULL) normalState = normal->state;
+            if (normal == NULL || normalState == 0) {
+                scrSetResult(box->result);
+                scrCommMessageSetMode(0xffffffff);
+                messageSlotSet(0);
+                return 1;
+            }
+            return 0;
         }
-        FUN_0028b350(temp_v5,*(unsigned char *)(temp_v5 + 9));
-        return 0;
-      }
-      if ((param_4 != 0xb) && (param_4 != 0x14)) {
-        return 1;
-      }
-      temp_v6 = '\0';
-      if (temp_v2 != 0) {
-        temp_v6 = *(char *)(temp_v2 + 8);
-      }
-      if (temp_v2 == 0 || temp_v6 == '\0') {
-        scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
-        scrCommMessageSetMode(0xffffffff);
-        messageSlotSet(0);
-        return 1;
-      }
-      return 0;
+        if (state == 5) {
+            scrSetResult(box->result);
+            return 1;
+        }
+        if (FUN_00162ea4() == 0) return 0;
+        s8 current = 0;
+        if (engineCleanupIsDone() != 0) current = box->state;
+        if (engineCleanupIsDone() == 0 || current == 3 || current == 0) return 0;
+    } else {
+        if (portrait != 0) {
+            box->mirrored = 1;
+            normal->mirrored = 1;
+        }
+        box->lockInput = lockInput;
+        box->color = (kind == 6) ? 0x5dacfeff : 0xffffffff;
+        u32 state = 0;
+        if (box != NULL) state = box->state;
+        if (box == NULL || state == 0) {
+            if (FUN_00162ea4() != 0 && engineCleanupIsDone() != 0) return 1;
+            FUN_00203da4(box, owner, index, kind, 0x1a, 1, extra);
+            if (kind == 0xb || kind == 0x14) box->sprite = FUN_001688c4(box->object);
+            if (box->hasText == 0) FUN_0028b350(box, box->kind);
+            if (lockInput != 0) {
+                objFlagsSetBits(box->object, 0x20);
+                msgBoxFlagsClear(box->object, 0x40);
+            }
+            box->helpValue = 0;
+            for (u32 i = 0; i < 6; i++) {
+                box->slotFlags[i] = screenGetSlotFlag(i & 0xff);
+                box->slotValues[i] = screenGetSlotValue(i & 0xff);
+            }
+            if ((box->kind == 7 || box->kind == 8 || box->kind == 9) && buttonHelpGetEntryValue(0) == 5) {
+                box->helpPressed = 1;
+                box->helpValue = ifTouchGetButtonHelpValue();
+                sysPlaySe(0xde);
+            }
+            if (kind != 0x14) return 0;
+            FUN_00169548();
+            return 0;
+        }
+        box->reopen = 1;
     }
-    if (temp_v6 == '\x05') {
-      scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
-      return 1;
-    }
-    temp_v2 = FUN_00162ea4();
-    if (temp_v2 == 0) {
-      return 0;
-    }
-    temp_v2 = engineCleanupIsDone();
-    temp_v6 = '\0';
-    if (temp_v2 != 0) {
-      temp_v6 = *(char *)(temp_v5 + 8);
-    }
-    if ((temp_v2 == 0 || temp_v6 == '\x03') || temp_v6 == '\0') {
-      return 0;
-    }
-  }
-  else {
-    if ((unsigned char)temp_v6 != 0) {
-      *(unsigned char *)(temp_v5 + 0x6d) = 1;
-      *(unsigned char *)(temp_v2 + 0x6d) = 1;
-    }
-    if (param_4 == 6) {
-      temp_v3 = 0x5dacfeff;
-    }
-    else {
-      temp_v3 = 0xffffffff;
-    }
-    *(char *)(temp_v5 + 0x36) = (char)param_5;
-    *(unsigned int *)(temp_v5 + 0x10) = temp_v3;
-    if (temp_v5 != 0) {
-      temp_v3 = (unsigned int)*(unsigned char *)(temp_v5 + 8);
-    }
-    if (temp_v5 == 0 || temp_v3 == 0) {
-      temp_v2 = FUN_00162ea4();
-      if ((temp_v2 != 0) && (temp_v2 = engineCleanupIsDone(), temp_v2 != 0)) {
-        return 1;
-      }
-      FUN_00203da4(temp_v5,param_1,param_2,param_4,0x1a,1,param_6);
-      if (param_4 == 0xb || param_4 == 0x14) {
-        temp_v4 = FUN_001688c4(*(unsigned int *)(temp_v5 + 4));
-        *(unsigned int *)(temp_v5 + 0x20) = temp_v4;
-      }
-      if (*(char *)(temp_v5 + 0x35) == '\0') {
-        FUN_0028b350(temp_v5,*(unsigned char *)(temp_v5 + 9));
-      }
-      if (param_5 != 0) {
-        objFlagsSetBits(*(unsigned int *)(temp_v5 + 4),0x20);
-        msgBoxFlagsClear(*(unsigned int *)(temp_v5 + 4),0x40);
-      }
-      temp_v3 = 0;
-      *(unsigned short *)(temp_v5 + 0x19c6) = 0;
-      do {
-        temp_v0 = screenGetSlotFlag(temp_v3 & 0xff);
-        *(unsigned char *)(temp_v5 + temp_v3 + 0x19c8) = temp_v0;
-        temp_v1 = screenGetSlotValue(temp_v3 & 0xff);
-        temp_v2 = temp_v3 * 2;
-        temp_v3 = temp_v3 + 1;
-        *(unsigned short *)(temp_v5 + temp_v2 + 0x19ce) = temp_v1;
-      } while ((int)temp_v3 < 6);
-      temp_v6 = *(char *)(temp_v5 + 9);
-      if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
-         (temp_v2 = buttonHelpGetEntryValue(0), temp_v2 == 5)) {
-        *(unsigned char *)(temp_v5 + 0x19da) = 1;
-        temp_v1 = ifTouchGetButtonHelpValue();
-        *(unsigned short *)(temp_v5 + 0x19c6) = temp_v1;
-        sysPlaySe(0xde);
-      }
-      if (param_4 != 0x14) {
-        return 0;
-      }
-      FUN_00169548();
-      return 0;
-    }
-    *(unsigned char *)(temp_v5 + 0x2e) = 1;
-  }
-  FUN_00165088(temp_v5,*(unsigned char *)(temp_v5 + 9));
-  *(unsigned char *)(temp_v5 + 8) = 3;
-  *(unsigned char *)(temp_v5 + 0x35) = 0;
-  return 0;
+    FUN_00165088(box, box->kind);
+    box->state = 3;
+    box->hasText = 0;
+    return 0;
 }
 
 } /* extern "C" */

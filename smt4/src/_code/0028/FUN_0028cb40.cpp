@@ -1,168 +1,134 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028cb40` (_code @ 0x28cb40, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable switch rewrite (171 vs 168 rows); register numbering and case-body ordering differ from retail */
+#include "common.h"
+
+struct MenuList;
+
+// Battle command menu: only the members read here.
+struct CommandMenu {
+    u8 unk0000[0x305c];
+    s32 hasPlayerList;      // 0x305c
+    u8 unk3060[8];
+    s32 cursorDefault;      // 0x3068
+    u8 unk306c[0x3218 - 0x306c];
+    u8 itemList[0x32e0 - 0x3218];   // 0x3218
+    u8 targetList[0x3344 - 0x32e0]; // 0x32e0
+    u8 skillList[0x3480 - 0x3344];  // 0x3344
+    s16 targetIds[1];       // 0x3480
+};
+
+struct PlayerData {
+    u8 unk00[2];
+    s16 enabled;            // 0x02
+    u16 value;              // 0x04
+};
+
+struct BattleMainState {
+    u8 unk0000[0x44a0];
+    u32 flags;              // 0x44a0
+    u32 flags2;             // 0x44a4
+    u32 flags3;             // 0x44a8
+};
 
 extern "C" {
 
-int FUN_0029efa8(int);
-int FUN_0029efc0(...);
+BattleMainState* btlGetMainState(void);
+u32 FUN_00297ca4(CommandMenu* menu, u32 arg);
+s32 FUN_0029efc0(void* list);
+s32 FUN_0029efa8(void* list);
+s32 flagBitIsSet(s32 bit);
+s32 gameFlagIsSet(u32 flag);
+PlayerData* gameGetPlayerData(void);
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern int flagBitIsSet(int);
-extern int btlGetMainState(void);
-extern unsigned int FUN_00297ca4(int, unsigned int);
-/* Supplied declaration required: FUN_0029efa8. */
-/* Supplied declaration required: FUN_0029efc0. */
-extern unsigned int gameGetPlayerData(void);
-extern int gameFlagIsSet(unsigned int);
-
-
-void FUN_0028cb40(int param_1,unsigned short *param_2,short *param_3)
-
+// Maps the active command menu page to the screen layout `*layout` and the cursor index `*cursor`.
+void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  unsigned int temp_v10 [6];
-  
-  temp_v8 = 0;
-  temp_v3 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v3 + 0x44a0) & 0x200) != 0) {
-    *param_2 = 7;
-    *param_3 = 7;
-    return;
-  }
-  temp_v4 = FUN_00297ca4(param_1,1);
-  switch(temp_v4) {
-  case 0:
-  case 6:
-    temp_v2 = 0;
-    *param_2 = 1;
-    break;
-  case 1:
-    temp_v3 = FUN_0029efc0();
-    temp_v8 = FUN_0029efa8(param_1 + 0x3218);
-    temp_v8 = temp_v8 + temp_v3;
-    if (*(int *)(param_1 + 0x305c) != 0) {
-      if (temp_v8 != 0) {
-        temp_v0 = 2;
-        *param_2 = temp_v0;
-        temp_v2 = (short)*(unsigned int *)(param_1 + 0x3068);
-        break;
-      }
-      temp_v0 = 1;
+    s32 index = 0;
+    if ((btlGetMainState()->flags & 0x200) != 0) {
+        *layout = 7;
+        *cursor = 7;
+        return;
     }
-    else {
-      if (temp_v8 == 0) {
-        temp_v0 = 1;
-        *param_2 = temp_v0;
-        temp_v2 = (short)*(unsigned int *)(param_1 + 0x3068);
+    s16 result;
+    switch (FUN_00297ca4(menu, 1)) {
+    case 0:
+    case 6:
+        result = 0;
+        *layout = 1;
         break;
-      }
-      if ((temp_v8 == 1) && (temp_v3 = gameFlagIsSet(0x410), temp_v3 != 0)) {
-        temp_v5 = gameGetPlayerData();
-        temp_v9 = *(short *)(temp_v5 + 2) != 0;
-        if (temp_v9) {
-          temp_v5 = (unsigned int)*(unsigned short *)(temp_v5 + 4);
+    case 1: {
+        s32 base = FUN_0029efc0(menu->itemList);
+        index = FUN_0029efa8(menu->itemList) + base;
+        u16 page;
+        if (menu->hasPlayerList != 0) {
+            page = (index != 0) ? 2 : 1;
+        } else if (index == 0) {
+            page = 1;
+        } else {
+            page = 2;
+            if (index == 1 && gameFlagIsSet(0x410)) {
+                PlayerData* player = gameGetPlayerData();
+                if (player->enabled != 0 && player->value != 0) page = 1;
+            }
         }
-        if (temp_v9 && temp_v5 != 0) {
-          temp_v0 = 1;
-          *param_2 = temp_v0;
-          temp_v2 = (short)*(unsigned int *)(param_1 + 0x3068);
-          break;
-        }
-      }
-      temp_v0 = 2;
+        *layout = page;
+        result = menu->cursorDefault;
+        break;
     }
-    *param_2 = temp_v0;
-    temp_v2 = (short)*(unsigned int *)(param_1 + 0x3068);
-    break;
-  case 2:
-    *param_2 = 3;
-    temp_v2 = (short)*(unsigned int *)(param_1 + 0x3068);
-    break;
-  case 3:
-    *param_2 = 7;
-    temp_v3 = btlGetMainState();
-    if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x1000) == 0) {
-      temp_v10[5] = 5;
-      temp_v10[0] = 0;
-      temp_v10[1] = 1;
-      temp_v10[2] = 2;
-      temp_v10[3] = 3;
-      temp_v10[4] = 4;
-      temp_v3 = 0;
-      do {
-        temp_v6 = flagBitIsSet(temp_v3 + 0x2e);
-        if (temp_v6 != 0) {
-          temp_v6 = FUN_0029efc0(param_1 + 0x3344);
-          temp_v7 = FUN_0029efa8(param_1 + 0x3344);
-          if (temp_v7 + temp_v6 == temp_v8) {
-            temp_v2 = (short)temp_v10[temp_v3];
-            *param_3 = temp_v2;
+    case 2:
+        *layout = 3;
+        result = menu->cursorDefault;
+        break;
+    case 3:
+        *layout = 7;
+        if ((btlGetMainState()->flags3 & 0x1000) == 0) {
+            s32 slotIds[6] = { 0, 1, 2, 3, 4, 5 };
+            for (s32 i = 0; i < 6; i++) {
+                if (flagBitIsSet(i + 0x2e)) {
+                    s32 selected = FUN_0029efc0(menu->skillList) + FUN_0029efa8(menu->skillList);
+                    if (selected == index) {
+                        *cursor = slotIds[i];
+                        return;
+                    }
+                    index++;
+                }
+            }
             return;
-          }
-          temp_v8 = temp_v8 + 1;
         }
-        temp_v3 = temp_v3 + 1;
-        if (temp_v3 >= 6) {
-          return;
-        }
-      } while( 1 );
+        result = FUN_0029efc0(menu) + FUN_0029efa8(menu->skillList);
+        break;
+    case 4:
+        result = 0;
+        *layout = 0xd;
+        break;
+    case 5:
+        result = 0;
+        *layout = 6;
+        break;
+    case 7:
+        *layout = 8;
+        result = menu->targetIds[FUN_0029efc0(menu->targetList) + FUN_0029efa8(menu->targetList)];
+        break;
+    case 9:
+        result = 0;
+        *layout = 4;
+        break;
+    case 10:
+        result = 0;
+        *layout = 9;
+        break;
+    case 11:
+        *layout = 0xe;
+        *cursor = 0;
+        return;
+    case 0xffffffff:
+    case 8:
+        result = 0;
+        *layout = 5;
+        break;
+    default:
+        return;
     }
-    temp_v1 = FUN_0029efc0();
-    temp_v2 = FUN_0029efa8(param_1 + 0x3344);
-    temp_v2 = temp_v2 + temp_v1;
-    break;
-  case 4:
-    temp_v2 = 0;
-    *param_2 = 0xd;
-    break;
-  case 5:
-    temp_v2 = 0;
-    *param_2 = 6;
-    break;
-  case 7:
-    *param_2 = 8;
-    temp_v3 = FUN_0029efc0();
-    temp_v8 = FUN_0029efa8(param_1 + 0x32e0);
-    temp_v2 = *(short *)(param_1 + (temp_v8 + temp_v3) * 2 + 0x3480);
-    break;
-  case 9:
-    temp_v2 = 0;
-    *param_2 = 4;
-    break;
-  case 10:
-    temp_v2 = 0;
-    *param_2 = 9;
-    break;
-  case 0xb:
-    *param_2 = 0xe;
-    *param_3 = 0;
-    return;
-  case 0xffffffff:
-  case 8:
-    temp_v2 = 0;
-    *param_2 = 5;
-    break;
-  default:
-    return;
-  }
-  *param_3 = temp_v2;
-  return;
+    *cursor = result;
 }
 
 } /* extern "C" */

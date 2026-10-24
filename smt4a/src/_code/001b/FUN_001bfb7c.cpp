@@ -18,7 +18,7 @@ extern unsigned char DAT_0055b764; /* 0x55b764 */
 extern unsigned char DAT_0055c4f0; /* 0x55c4f0 */
 extern unsigned char DAT_0055c524; /* 0x55c524 */
 
-extern int *FUN_001b7420(int, int *, unsigned int *, unsigned int);
+extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, unsigned int *, unsigned int);
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
@@ -125,7 +125,7 @@ LAB_001bfd84:
     (*pcVar8)(param_4,piVar3);
     return (int *)0x0;
   }
-  piVar11 = (int *)FUN_001b7420(temp_v1,param_4,puVar14,param_3);
+  piVar11 = (int *)_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(temp_v1,param_4,puVar14,param_3);
   *piVar11 = (int)&DAT_0055b764;
   *(unsigned char *)(piVar11 + 0x52) = 1;
   piVar11[0x53] = 0;

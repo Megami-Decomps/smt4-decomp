@@ -1,129 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ba6b0` (_code @ 0x1ba6b0, 0x258 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: SDK texture-unit command writer; the LOD-bias fixed-point clamp and the flag packing schedule differently from retail (float clamp compares integer bits there) */
+#include "common.h"
+#include "shard/S2GrTexture.h"
+
+/* GPUREG_TEXUNIT0_* command headers (consecutive-register write of one word each). */
+#define TEXUNIT0_BORDER_COLOR 0x000F0081
+#define TEXUNIT0_DIM 0x000F0082
+#define TEXUNIT0_PARAM 0x000F0083
+#define TEXUNIT0_LOD 0x000F0084
+#define TEXUNIT0_ADDR1 0x000F0085
+#define TEXUNIT0_ADDR2 0x000F0086
+#define TEXUNIT0_ADDR3 0x000F0087
+#define TEXUNIT0_ADDR4 0x000F0088
+#define TEXUNIT0_ADDR5 0x000F0089
+#define TEXUNIT0_ADDR6 0x000F008A
+#define TEXUNIT0_TYPE 0x000F008E
+
+#define TEXTURE_FACE_CUBE_BIT 1
+#define TEXTURE_ADDR_SHIFT 3
+#define TEXTURE_ADDR_MASK 0xE03FFFFF
+
+struct TextureDescriptor {
+    /* 0x00 */ u32 address;
+    /* 0x04 */ u32 dimensions; /* width/height halves, swapped for the register */
+    /* 0x08 */ u8 format;
+    /* 0x09 */ u8 wrapS;
+    /* 0x0A */ u8 wrapT;
+    /* 0x0B */ u8 magFilter;
+    /* 0x0C */ u8 minFilter;
+    /* 0x0D */ u8 unk0D[3];
+    /* 0x10 */ f32 lodBias;
+    /* 0x14 */ u8 lodMax;
+    /* 0x15 */ u8 lodMin;
+    /* 0x16 */ __packed u32 borderColor; /* RGB in the low 24 bits, alpha in byte 0x19 */
+    /* 0x1A */ u8 unk1A[2];
+    /* 0x1C */ u8 target;
+    /* 0x1D */ u8 unk1D[3];
+    /* 0x20 */ u32 faceAddress[6];
+    /* 0x38 */ u32 commandBuffer;
+};
 
 extern "C" {
+u32 *FUN_001ba5bc(const GrTexture *texture, u32 *command, u32 addPadding);
 
-int SBORROW4(int, int);
-int VectorFloatToUnsigned(double, int);
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Writes the texture unit's border colour, dimensions, sampler parameters, LOD and address
+ * registers into the command buffer; returns the end of the written commands. */
+u32 *FUN_001ba6b0(TextureDescriptor *tex, u32 *cmd, s32 reserve)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern unsigned int *FUN_001ba5bc(unsigned int, unsigned int *, unsigned int);
+    if (reserve != 0)
+        cmd = FUN_001ba5bc((const GrTexture *)tex->commandBuffer, cmd, 1);
 
+    *cmd++ = (tex->borderColor & 0xFFFFFF) | ((u32)((u8 *)tex)[0x19] << 24);
+    *cmd++ = TEXUNIT0_BORDER_COLOR;
+    *cmd++ = (tex->dimensions >> 16) | (tex->dimensions << 16);
+    *cmd++ = TEXUNIT0_DIM;
 
-unsigned int * FUN_001ba6b0(unsigned int *param_1,unsigned int *param_2,int param_3)
+    u32 target = tex->target;
+    u32 min = tex->minFilter;
+    u32 mipmapped = (min == 3 || min == 4 || min == 5) ? 1 : 0;
+    u32 clamped = (tex->format == 12) ? 2 : 0;
+    *cmd++ = (tex->magFilter << 1) | (mipmapped << 2) | (clamped << 4) | (tex->wrapS << 8) |
+             (tex->wrapT << 12) | ((u32)(target == 2 || target == 4) << 20) |
+             ((u32)(min == 2 || min == 5) << 24) | (target << 28);
+    *cmd++ = TEXUNIT0_PARAM;
 
-{
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char temp_v4;
-  float temp_v5;
-  float temp_v6;
-  
-  if (param_3 != 0) {
-    param_2 = (unsigned int *)FUN_001ba5bc(param_1[0xe],param_2,1);
-  }
-  *param_2 = (*(unsigned int *)((int)param_1 + 0x16) & 0xffffff) |
-             ((unsigned int)*(unsigned char *)((int)param_1 + 0x19) << 0x18);
-  param_2[1] = 0xf0081;
-  param_2[2] = (param_1[1] >> 0x10) | (param_1[1] << 0x10);
-  param_2[3] = 0xf0082;
-  temp_v1 = (unsigned int)(unsigned char)param_1[7];
-  temp_v0 = (char)param_1[3];
-  if ((temp_v0 == '\x03' || temp_v0 == '\x04') || (temp_v0 == '\x05')) {
-    temp_v3 = 1;
-  }
-  else {
-    temp_v3 = 0;
-  }
-  if ((char)param_1[2] == '\f') {
-    temp_v2 = 2;
-  }
-  else {
-    temp_v2 = 0;
-  }
-  param_2[4] = ((unsigned int)*(unsigned char *)((int)param_1 + 0xb) << 1) | (temp_v3 << 2) | (temp_v2 << 4) |
-               ((unsigned int)*(unsigned char *)((int)param_1 + 9) << 8) |
-               ((unsigned int)*(unsigned char *)((int)param_1 + 10) << 0xc) |
-               ((unsigned int)(temp_v1 == 2 || temp_v1 == 4) << 0x14) |
-               ((unsigned int)(temp_v0 == '\x02' || temp_v0 == '\x05') << 0x18) | (temp_v1 << 0x1c);
-  param_2[5] = 0xf0083;
-  temp_v1 = 0;
-  if ((char)param_1[3] != '\x03' && (char)param_1[3] != '\0') {
-    temp_v5 = (float)param_1[4];
-    temp_v6 = 0.0f;
-    if ((temp_v5 != 0.0f) && ((unsigned int)romwright_fabs_4(temp_v5) >> 0x17 != 0xff)) {
-      temp_v5 = (temp_v5 + 16.0f) * 256.0f;
-      if (0.0f <= temp_v5) {
-        temp_v4 = SBORROW4((int)temp_v5,0x46000000);
-        temp_v3 = (int)temp_v5 - 0x46000000;
-        if ((int)temp_v5 >= 0x46000000) {
-          temp_v6 = 8191.0f;
+    u32 lod = 0;
+    if (tex->minFilter != 3 && tex->minFilter != 0) {
+        /* LOD bias as a 13-bit signed fixed-point value, stored offset-binary then flipped. */
+        f32 bias = tex->lodBias;
+        if (bias != 0.0f && ((*(u32 *)&bias << 1) >> 24) != 0xFF) {
+            f32 scaled = (bias + 16.0f) * 256.0f;
+            if (scaled < 0.0f) {
+                lod = (u32)(0.0f + 4096.0f);
+            } else {
+                if (scaled >= 8192.0f)
+                    scaled = 8191.0f;
+                lod = (scaled >= 4096.0f) ? (u32)(scaled - 4096.0f) : (u32)(scaled + 4096.0f);
+            }
         }
-        else {
-          temp_v4 = SBORROW4((int)temp_v5,0x45800000);
-          temp_v3 = (int)temp_v5 - 0x45800000;
-          temp_v6 = temp_v5;
-        }
-        if (temp_v3 < 0 == temp_v4) {
-          temp_v1 = VectorFloatToUnsigned(temp_v6 - 4096.0f,3);
-        }
-        else {
-          temp_v1 = VectorFloatToUnsigned(temp_v6 + 4096.0f,3);
-        }
-      }
-      else {
-        temp_v1 = VectorFloatToUnsigned(temp_v6 + 4096.0f,3);
-      }
+        lod |= ((u32)tex->lodMin << 16) | ((u32)tex->lodMax << 24);
     }
-    temp_v1 = temp_v1 | ((unsigned int)*(unsigned char *)((int)param_1 + 0x15) << 0x10) |
-            ((unsigned int)(unsigned char)param_1[5] << 0x18);
-  }
-  param_2[6] = temp_v1;
-  param_2[7] = 0xf0084;
-  puVar2 = param_2 + 8;
-  temp_v0 = (char)param_1[7];
-  if (!((temp_v0 == '\0' || temp_v0 == '\x03') || temp_v0 == '\x02')) {
-    if (temp_v0 != '\x01' && temp_v0 != '\x04') {
-      *puVar2 = (unsigned int)(unsigned char)param_1[2];
-      puVar2[1] = 0xf008e;
-      return puVar2 + 2;
+    *cmd++ = lod;
+    *cmd++ = TEXUNIT0_LOD;
+
+    if (target == 0 || target == 3 || target == 2) {
+        *cmd++ = tex->address >> TEXTURE_ADDR_SHIFT;
+        *cmd++ = TEXUNIT0_ADDR1;
+    } else if (target == 1 || target == 4) {
+        static const u32 header[6] = {TEXUNIT0_ADDR1, TEXUNIT0_ADDR2, TEXUNIT0_ADDR3,
+                                       TEXUNIT0_ADDR4, TEXUNIT0_ADDR5, TEXUNIT0_ADDR6};
+        *cmd++ = tex->faceAddress[0] >> TEXTURE_ADDR_SHIFT;
+        *cmd++ = header[0];
+        for (s32 i = 1; i < 6; i++) {
+            *cmd++ = (tex->faceAddress[i] >> TEXTURE_ADDR_SHIFT) & TEXTURE_ADDR_MASK;
+            *cmd++ = header[i];
+        }
     }
-    *puVar2 = param_1[8] >> 3;
-    param_2[9] = 0xf0085;
-    param_2[10] = (param_1[9] >> 3) & 0xe03fffff;
-    param_2[0xb] = 0xf0086;
-    param_2[0xc] = (param_1[10] >> 3) & 0xe03fffff;
-    param_2[0xd] = 0xf0087;
-    param_2[0xe] = (param_1[0xb] >> 3) & 0xe03fffff;
-    param_2[0xf] = 0xf0088;
-    param_2[0x10] = (param_1[0xc] >> 3) & 0xe03fffff;
-    param_2[0x11] = 0xf0089;
-    puVar2 = param_2 + 0x13;
-    param_2[0x12] = (param_1[0xd] >> 3) & 0xe03fffff;
-    *puVar2 = 0xf008a;
-  }
-  else {
-    *puVar2 = *param_1 >> 3;
-    param_2[9] = 0xf0085;
-    puVar2 = param_2 + 9;
-  }
-  puVar2 = puVar2 + 1;
-  *puVar2 = (unsigned int)(unsigned char)param_1[2];
-  puVar2[1] = 0xf008e;
-  return puVar2 + 2;
+    *cmd++ = tex->format;
+    *cmd++ = TEXUNIT0_TYPE;
+    return cmd;
 }
 
 } /* extern "C" */

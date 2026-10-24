@@ -1,129 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00387604` (_code @ 0x387604, 0x288 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the camera constants (30.0, 1.0) in callee-saved VFP registers across both camera set-ups and stores the setup fields in a different order; this build reloads/stores them in source order. */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "event/bustupEvent/BustupCutAnim.h"
+
+namespace {
+struct BustupVec3 {
+    f32 x, y, z;
+};
+
+/* The look-at camera the bust-up scenes render with. */
+struct BustupCameraSetup {
+    BustupVec3 position;
+    BustupVec3 target;
+    BustupVec3 up;
+    f32 fov;
+    f32 nearPlane;
+    f32 farPlane;
+    f32 aspect;
+    f32 roll;
+};
+
+/* Block layout as this function sees it (the camera object starts at +4). */
+struct BustupCutBlock {
+    /* 0x000 */ u32 job;
+    /* 0x004 */ u8 camera[0x50c];
+    /* 0x510 */ BustupCameraSetup setup;
+    /* 0x548 */ u8 unk548[0x5ec - 0x548];
+    /* 0x5ec */ u32 model;                  /* the model currently shown */
+    /* 0x5f0 */ s32 unk5f0;
+    /* 0x5f4 */ u8 unk5f4;
+    /* 0x5f5 */ u8 unk5f5;
+    /* 0x5f6 */ u8 unk5f6;
+    /* 0x5f7 */ u8 unk5f7[0x65c - 0x5f7];
+    /* 0x65c */ u32 lists[BUSTUP_CUT_ENTRIES];
+    /* 0x6cc */ u32 models[BUSTUP_CUT_ENTRIES];
+    /* 0x73c */ f32 shakeX;
+    /* 0x740 */ f32 shakeY;
+};
+
+struct BustupModelNode {
+    u8 unk00[8];
+    BustupModelNode *child;
+    u8 unk0c[4];
+    s32 partCount;
+};
+struct BustupModel {
+    u8 unk00[4];
+    BustupModelNode *node;
+};
+
+/* The global: the block pointer followed by the table of scene ids. */
+struct BustupCutGlobal {
+    BustupCutBlock *block;
+    u32 ids[BUSTUP_CUT_ENTRIES];
+};
+}
 
 extern "C" {
+extern BustupCutGlobal g_bustupCutAnim;
+extern const char DAT_0052f6c0[];
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+void sysMemClear(void *data, u32 size);
+void asdCameraInitializeDefaults(void *camera, s32 flag);
+void uiSetFloatPair(void *camera);
+void FUN_0014f0dc(void *camera, BustupVec3 *position, BustupVec3 *target, BustupVec3 *up);
+void FUN_001523b8(void *camera, s32 flag, f32 fov, f32 nearPlane, f32 farPlane, f32 aspect);
+void FUN_0036b824(void *camera);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, void *work);
+u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
+s32 FUN_002f4540(u32 job);
+s32 FUN_00334848(u32 job);
+void bustupCutAnimDestroy(u32 job);
+void textFormatBuffer(char *buffer, const char *format, u32 id);
+u32 FUN_00387350(const char *path);
+u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
+void FUN_00449814(BustupModelNode *node, s32 part);
+void cameraExportParameters(BustupCameraSetup *setup, u32 model);
 
-int textFormatBuffer(...);
-int asdCameraInitializeDefaults(...);
-int uiSetFloatPair(...);
-int asdProcessCreateSimple(...);
-int FUN_0014f0dc(...);
-int taskCreateDraw(...);
-int FUN_001523b8(...);
-int asdMemoryAllocTracked(...);
-int cameraExportParameters(...);
-int sysMemClear(...);
-int FUN_0036b824(...);
-int FUN_00449814(...);
-
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} void_stack;
-
-extern unsigned char LAB_002f4540; /* 0x2f4540 */
-extern int FUN_00334848(...); /* 0x334848 */
-extern int bustupCutAnimDestroy(...); /* 0x37e53c */
-extern unsigned char LAB_003878bc; /* 0x3878bc */
-extern unsigned char LAB_003878d0; /* 0x3878d0 */
-extern unsigned char LAB_003878e4; /* 0x3878e4 */
-extern unsigned char LAB_00387900; /* 0x387900 */
-extern unsigned int *g_bustupCutAnim; /* 0x57f4c4 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdCameraInitializeDefaults. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: cameraExportParameters. */
-extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0036b824. */
-extern unsigned int FUN_00387350(unsigned char *);
-/* Supplied declaration required: FUN_00449814. */
-
-
-unsigned int FUN_00387604(void)
-
+/* Creates the bust-up cut animation block on first use (camera, jobs and the per-scene models/lists)
+   and returns its job handle. */
+u32 FUN_00387604(void)
 {
-/* irregular: 14 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar7;
-  int temp_v4;
-  unsigned char temp_v5 [76];
-  
-  if (g_bustupCutAnim == (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x748,1);
-    g_bustupCutAnim = puVar1;
-    sysMemClear();
-    asdCameraInitializeDefaults(puVar1 + 1,1);
-    puVar1[0x144] = 0;
-    puVar1[0x145] = 0;
-    puVar1[0x146] = 0;
-    puVar1[0x147] = 0;
-    puVar1[0x148] = 0;
-    puVar1[0x149] = 0xc0a00000;
-    puVar1[0x151] = 0;
-    puVar1[0x14f] = 0x461c4000;
-    puVar1[0x14d] = 0x41f00000;
-    puVar1[0x14e] = 0x3f800000;
-    puVar7 = puVar1 + 1;
-    puVar1[0x14a] = 0;
-    puVar1[0x14b] = 0x3f800000;
-    puVar1[0x14c] = 0;
-    puVar1[0x150] = 0x3fd55555;
-    uiSetFloatPair(puVar7);
-    FUN_0014f0dc(puVar7,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);
-    FUN_001523b8(puVar7,1);
-    FUN_0036b824(puVar7);
-    *(unsigned char *)(puVar1 + 0x17d) = 0;
-    *(unsigned char *)((int)puVar1 + 0x5f6) = 1;
-    puVar2 = &LAB_003878bc;
-    asdProcessCreateSimple(&LAB_003878bc,4,0,0,&LAB_002f4540,bustupCutAnimDestroy,puVar1);
-    *puVar1 = (unsigned int)puVar2;
-    taskCreateDraw(&LAB_003878d0,0x71,0,0,FUN_00334848,0,puVar1,puVar2);
-    puVar1[0x17c] = 0;
-    temp_v2 = 0;
-    do {
-      textFormatBuffer(temp_v5,&LAB_003878e4,*(unsigned int *)(temp_v2 * 4 + 0x57f4c8));
-      temp_v0 = FUN_00387350(temp_v5);
-      puVar1[temp_v2 + 0x1b3] = temp_v0;
-      textFormatBuffer(temp_v5,&LAB_00387900,*(unsigned int *)(temp_v2 * 4 + 0x57f4c8));
-      temp_v0 = asdMdlManagerCreateSecondList(temp_v5,7);
-      temp_v3 = temp_v2 + 1;
-      puVar1[temp_v2 + 0x197] = temp_v0;
-      temp_v2 = temp_v3;
-    } while (temp_v3 < 0x1c);
-    puVar1[0x17b] = puVar1[0x1b3];
-    *(unsigned char *)((int)puVar1 + 0x5f5) = 0;
-    temp_v4 = *(int *)(puVar1[0x1b3] + 4);
-    if (temp_v4 != 0) {
-      temp_v1 = *(int *)(*(int *)(*(int *)(temp_v4 + 8) + 8) + 0x10);
-      while (temp_v1 = temp_v1 - 1, -1 < temp_v1) {
-        FUN_00449814(temp_v4,temp_v1);
-      }
+    if (g_bustupCutAnim.block == NULL) {
+        asdDebugTrace(DAT_0052f6c0, 0x201);
+        g_bustupCutAnim.block = static_cast<BustupCutBlock *>(asdMemoryAllocTracked(
+            ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(BustupCutBlock), 1));
+        BustupCutBlock *block = g_bustupCutAnim.block;
+        sysMemClear(block, sizeof(BustupCutBlock));
+        asdCameraInitializeDefaults(block->camera, 1);
+        block->setup.position.x = 0.0f;
+        block->setup.position.y = 0.0f;
+        block->setup.position.z = 0.0f;
+        block->setup.target.x = 0.0f;
+        block->setup.target.y = 0.0f;
+        block->setup.target.z = -5.0f;
+        block->setup.up.x = 0.0f;
+        block->setup.up.y = 1.0f;
+        block->setup.up.z = 0.0f;
+        block->setup.fov = 30.0f;
+        block->setup.nearPlane = 1.0f;
+        block->setup.farPlane = 10000.0f;
+        block->setup.aspect = 5.0f / 3.0f;
+        block->setup.roll = 0.0f;
+        uiSetFloatPair(block->camera);
+        FUN_0014f0dc(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
+        FUN_001523b8(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
+        FUN_0036b824(block->camera);
+        block->unk5f4 = 0;
+        block->unk5f6 = 1;
+        block->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BustupCutAnim"), 4, 0, 0,
+                                            FUN_002f4540, bustupCutAnimDestroy, block);
+        taskCreateDraw(reinterpret_cast<const s8 *>("BustupCutAnimDraw"), 0x71, 0, 0, FUN_00334848, NULL, block, block->job);
+        block->unk5f0 = 0;
+        char path[76];
+        for (u32 i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
+            textFormatBuffer(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
+            block->models[i] = FUN_00387350(path);
+            textFormatBuffer(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
+            block->lists[i] = asdMdlManagerCreateSecondList(path, 7);
+        }
+        block->model = block->models[0];
+        block->unk5f5 = 0;
+        BustupModel *model = reinterpret_cast<BustupModel *>(block->models[0]);
+        BustupModelNode *node = model->node;
+        if (node != NULL) {
+            for (s32 part = node->child->child->partCount - 1; part >= 0; part--) {
+                FUN_00449814(node, part);
+            }
+        }
+        cameraExportParameters(&block->setup, block->model);
+        uiSetFloatPair(block->camera);
+        FUN_0014f0dc(block->camera, &block->setup.position, &block->setup.target, &block->setup.up);
+        FUN_001523b8(block->camera, 1, block->setup.fov, block->setup.nearPlane, block->setup.farPlane, block->setup.aspect);
+        FUN_0036b824(block->camera);
     }
-    cameraExportParameters(puVar1 + 0x144,puVar1[0x17b]);
-    puVar7 = puVar1 + 1;
-    uiSetFloatPair(puVar7);
-    FUN_0014f0dc(puVar7,puVar1 + 0x144,puVar1 + 0x147,puVar1 + 0x14a);
-    FUN_001523b8(puVar7,1);
-    FUN_0036b824(puVar7);
-  }
-  return *g_bustupCutAnim;
+    return g_bustupCutAnim.block->job;
 }
 
 } /* extern "C" */

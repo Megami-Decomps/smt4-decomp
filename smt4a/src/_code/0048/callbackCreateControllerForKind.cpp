@@ -12,12 +12,12 @@ void callbackCreateControllerForKind(CallbackControllerOwner* owner, s32 kind)
     }
     case 1: {
         CallbackController* storage = (CallbackController*)asdOperatorNew(0x1C);
-        owner->controller = storage != NULL ? FUN_004823ec(storage) : NULL;
+        owner->controller = storage != NULL ? _ZN9Obj55c804C1Ev(storage) : NULL;
         break;
     }
     case 2: {
         CallbackController* storage = (CallbackController*)asdOperatorNew(0x10);
-        owner->controller = storage != NULL ? FUN_00481b80(storage) : NULL;
+        owner->controller = storage != NULL ? _ZN9Obj55c7d4C1Ev(storage) : NULL;
         break;
     }
     }

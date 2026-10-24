@@ -1,193 +1,150 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00483d34` (_code @ 0x483d34, 0x354 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~208 rows); the 15-column glyph table DAT_00532b5c is referenced as an external array, retail inlines the type/advance sequence at two places and pushes r3 differently */
+#include "common.h"
+
+// Two-character slot of the name being typed (high byte first).
+struct NameSlot {
+    u8 high;
+    s8 low;
+};
+
+// Name-entry screen: only the members used by the per-frame input handler.
+struct NameEntryScreen {
+    u8 unk000[0x10];
+    s32 column;                 // 0x010
+    s32 row;                    // 0x014
+    u8 unk018[8];
+    s8 page;                    // 0x020
+    u8 unk021;
+    s8 cursor;                  // 0x022
+    u8 unk023[5];
+    u8 kanaShift;               // 0x028
+    u8 unk029[0xb0 - 0x29];
+    NameSlot name[8];           // 0x0b0 (0xb0..0xc0)
+    u8 unk0c0[0x198 - 0xc0];
+    u8 gridCursor[0x64];        // 0x198: flagged entry of the grid cursor (value A = row, B = column)
+    u8 pageCursor[4];           // 0x1fc: flagged entry of the page tabs
+    u8 unk200[0x260 - 0x200];
+    u8 tabsActive;              // 0x260
+    u8 unk261[0x26c - 0x261];
+    u32 process;                // 0x26c: script process
+    u8 unk270[0x294 - 0x270];
+    u8 tabBar[0x40];            // 0x294
+    u8 unk2d4[0x560 - 0x2d4];
+    u16 mode;                   // 0x560
+    u8 finished;                // 0x562
+    u8 unk563[5];
+    s32 touchResult;            // 0x568
+};
 
 extern "C" {
 
-int FUN_00163aa4(int);
-int eventQueueAddUniqueIfValid(int);
-int scrRunOpcodesStub(unsigned int);
-int FUN_00228b04(int, int);
-int flaggedEntryGetValueB(int);
-int flaggedEntryGetValueA(int);
-int flaggedEntrySetValueB(int, int);
-int FUN_00484be0(int);
-int nameFormSetCharacter(...);
-int stateSetterEnterState(int, int);
-int sendEvent100020F(void);
-int sendEvent100020E(void);
+extern const s16 DAT_00532b5c[];
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+void scrRunOpcodesStub(u32 process);
+void FUN_00163aa4(void* tabBar, f32 amount);
+s32 largeGridHandleTouchSelection(NameEntryScreen* screen);
+s32 inputIsQuestConfirmPressed(void);
+s32 inputIsQuestMenuPressed(void);
+s32 FUN_004d0584(void);
+s32 FUN_0048408c(NameEntryScreen* screen, s32 page, s32 column, s32 row);
+s32 flaggedEntryGetValueA(void* entry);
+s32 flaggedEntryGetValueB(void* entry);
+void flaggedEntrySetValueB(void* entry, s32 value);
+s32 FUN_00228b04(void* entry, s32 direction);
+void nameFormSetCharacter(NameEntryScreen* screen, s32 position, s32 character);
+void FUN_00484be0(NameEntryScreen* screen);
+void sendEvent100020E(void);
+void sendEvent100020F(void);
+void stateSetterEnterState(NameEntryScreen* screen, s32 state);
+s32 eventQueueAddUniqueIfValid(u32 event);
 
-/* Supplied declaration required: FUN_00163aa4. */
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: flaggedEntryGetValueB. */
-/* Supplied declaration required: flaggedEntryGetValueA. */
-/* Supplied declaration required: flaggedEntrySetValueB. */
-extern int FUN_0048408c(int, int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00484be0. */
-/* Supplied declaration required: nameFormSetCharacter. */
-/* Supplied declaration required: stateSetterEnterState. */
-extern int largeGridHandleTouchSelection(int);
-/* Supplied declaration required: sendEvent100020F. */
-/* Supplied declaration required: sendEvent100020E. */
-extern int inputIsQuestConfirmPressed(void);
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
-
-
-void FUN_00483d34(int param_1)
-
+// Types the chosen character (or the blank cell) at the cursor and advances it.
+static inline void typeCharacter(NameEntryScreen* screen, s32 character)
 {
-/* irregular: irregular input(s): in_r12; 12 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  char temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  int in_r12;
-  
-  scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
-  FUN_00163aa4(param_1 + 0x294);
-  temp_v5 = largeGridHandleTouchSelection(param_1);
-  *(int *)(param_1 + 0x568) = temp_v5;
-  if ((temp_v5 == 1 || temp_v5 == 2) || (temp_v6 = inputIsQuestConfirmPressed(), temp_v6 != 0)) {
-    return;
-  }
-  if ((temp_v5 == 6) || (temp_v6 = FUN_004d0584(), temp_v6 != 0)) {
-    temp_v4 = *(char *)(param_1 + 0x20);
-    if (*(char *)(param_1 + 0x28) != '\0') {
-      temp_v4 = temp_v4 + '\x04';
-    }
-    temp_v6 = FUN_0048408c(param_1,(int)temp_v4,*(unsigned int *)(param_1 + 0x10),
-                         *(unsigned int *)(param_1 + 0x14));
-    if ((*(char *)(param_1 + 0x260) == '\0') || (temp_v7 = flaggedEntryGetValueB(param_1 + 0x1fc), temp_v7 != 0))
-    {
-      temp_v3 = 0;
-    }
-    else {
-      nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22),0xffff8140);
-      FUN_00484be0(param_1);
-      if (*(char *)(param_1 + 0x22) < '\a') {
-        *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
-      }
-      sendEvent100020E();
-      temp_v3 = 1;
-    }
-    if (!temp_v3 && temp_v6 == 0) {
-      if (*(short *)(
-                    "艠艡艢艣艤芁节芃芄芅艏艐艑艒艓艥艦艧艨艩芆芇芈芉芊艔艕艖艗艘艪艫艬艭艮芋芌芍芎芏腉膗膔膓腏良艰艱色艳芐芑芒芓芔膕膖腩腪腻艴艵艶艷艸芕芖芗芘芙腼膁膃膄腈艹腀腀腀腀芚腀腀腀腀腞腃腄腆腇腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉臷膝腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎艐艑艒艓艔艕艖艗艘艏艐艑艒艓艔艕艖艗艘艏臷膝艐艑艒艓艔艕艖艗艘艏腀腀腀腀蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉腀腀腀腀蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀ŀ"
-                    + *(int *)(param_1 + 0x10) * 2 + *(int *)(param_1 + 0x14) * 0x1e) != -0x7ec0) {
-        nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22));
-        FUN_00484be0(param_1);
-        if (*(char *)(param_1 + 0x22) < '\a') {
-          *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
+    nameFormSetCharacter(screen, screen->cursor, character);
+    FUN_00484be0(screen);
+    if (screen->cursor < 7) screen->cursor++;
+    sendEvent100020E();
+}
+
+// Per-frame input of the name-entry grid: confirm types the highlighted character, the menu
+// button deletes the character before the cursor (compacting the name), and the d-pad moves
+// between the grid and the page tabs.
+void FUN_00483d34(NameEntryScreen* screen)
+{
+    scrRunOpcodesStub(screen->process);
+    FUN_00163aa4(screen->tabBar, 1.0f);
+    s32 touch = largeGridHandleTouchSelection(screen);
+    screen->touchResult = touch;
+    if (touch == 1 || touch == 2) return;
+    if (inputIsQuestConfirmPressed() != 0) return;
+
+    if (touch == 6 || FUN_004d0584() != 0) {
+        s32 page = screen->page;
+        if (screen->kanaShift != 0) page = (s8)(page + 4);
+        s32 character = FUN_0048408c(screen, page, screen->column, screen->row);
+        if (screen->tabsActive != 0 && flaggedEntryGetValueB(screen->pageCursor) == 0) {
+            typeCharacter(screen, -0x7ec0);
+        } else if (character == 0) {
+            s16 symbol = DAT_00532b5c[screen->row * 15 + screen->column];
+            if (symbol == -0x7ec0) {
+                screen->finished = 1;
+                sendEvent100020F();
+            } else {
+                typeCharacter(screen, symbol);
+            }
         }
-        sendEvent100020E();
-      }
-      else {
-        *(unsigned char *)(param_1 + 0x562) = 1;
-        sendEvent100020F();
-      }
-    }
-    if (temp_v5 != 6) {
-      return;
-    }
-    *(unsigned short *)(param_1 + 0x560) = 3;
-    return;
-  }
-  temp_v5 = inputIsQuestMenuPressed();
-  if (temp_v5 != 0) {
-    temp_v5 = 0;
-    while ((-1 < (char)temp_v5 &&
-           (temp_v6 = param_1 + (char)temp_v5 * 2, temp_v2 = *(unsigned char *)(temp_v6 + 0xb1),
-           in_r12 = (int)(char)temp_v2,
-           (unsigned short)((unsigned short)*(unsigned char *)(temp_v6 + 0xb0) * 0x100 + (unsigned short)temp_v2) == 0))) {
-      temp_v5 = temp_v5 + 1;
-      if (temp_v5 >= 8) {
-        stateSetterEnterState(param_1,5);
+        if (touch == 6) screen->mode = 3;
         return;
-      }
     }
-    nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22),0);
-    temp_v5 = 0;
-    if ('\0' < *(char *)(param_1 + 0x22)) {
-      *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) - '\x01';
-    }
-    do {
-      temp_v6 = 0;
-      temp_v7 = 7;
-      do {
-        temp_v8 = param_1 + temp_v6 * 2;
-        temp_v4 = *(char *)(temp_v8 + 0xb0);
-        if (temp_v4 == '\0') {
-          in_r12 = (int)*(char *)(temp_v8 + 0xb1);
+
+    if (inputIsQuestMenuPressed() != 0) {
+        s32 slot;
+        for (slot = 0; slot < 8; slot++) {
+            if (((screen->name[slot].high << 8) + screen->name[slot].low) != 0) break;
         }
-        if (temp_v4 == '\0' && in_r12 == 0) {
-          temp_v0 = *(unsigned char *)(temp_v8 + 0xb2);
-          temp_v1 = *(unsigned char *)(temp_v8 + 0xb3);
-          *(char *)(temp_v8 + 0xb2) = temp_v4;
-          *(char *)(temp_v8 + 0xb3) = (char)in_r12;
-          *(unsigned char *)(temp_v8 + 0xb0) = temp_v0;
-          *(unsigned char *)(temp_v8 + 0xb1) = temp_v1;
+        if (slot == 8) {
+            stateSetterEnterState(screen, 5);
+            return;
         }
-        temp_v7 = temp_v7 - 1;
-        temp_v6 = temp_v6 + 1;
-      } while (temp_v7 != 0);
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < 7);
-    sendEvent100020F();
-    return;
-  }
-  if (*(char *)(param_1 + 0x260) == '\0') {
-    FUN_00228b04(param_1 + 0x198,1);
-    temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
-    *(unsigned int *)(param_1 + 0x10) = temp_v9;
-    temp_v5 = flaggedEntryGetValueA(param_1 + 0x198);
-    *(int *)(param_1 + 0x14) = temp_v5;
-    if (temp_v5 != 6) {
-      return;
+        nameFormSetCharacter(screen, screen->cursor, 0);
+        if (screen->cursor > 0) screen->cursor--;
+        for (s32 pass = 0; pass < 7; pass++) {
+            for (s32 k = 0; k < 7; k++) {
+                if (screen->name[k].high == 0 && screen->name[k].low == 0) {
+                    NameSlot next = screen->name[k + 1];
+                    screen->name[k + 1] = screen->name[k];
+                    screen->name[k] = next;
+                }
+            }
+        }
+        sendEvent100020F();
+        return;
     }
-    *(unsigned char *)(param_1 + 0x260) = 1;
-    flaggedEntrySetValueB(param_1 + 0x1fc,*(int *)(param_1 + 0x10) / 5);
-    return;
-  }
-  temp_v5 = param_1 + 0x1fc;
-  FUN_00228b04(temp_v5,0);
-  FUN_00228b04(param_1 + 0x198,0);
-  temp_v6 = flaggedEntryGetValueA(param_1 + 0x198);
-  if (temp_v6 != 6) {
-    *(unsigned char *)(param_1 + 0x260) = 0;
-    temp_v5 = flaggedEntryGetValueB(param_1 + 0x1fc);
-    temp_v5 = temp_v5 * 5;
-    if (temp_v5 >= 0xf) {
-      temp_v5 = 0xe;
+
+    if (screen->tabsActive != 0) {
+        s32 tab = FUN_00228b04(screen->pageCursor, 0);
+        FUN_00228b04(screen->gridCursor, 0);
+        if (flaggedEntryGetValueA(screen->gridCursor) != 6) {
+            screen->tabsActive = 0;
+            s32 value = flaggedEntryGetValueB(screen->pageCursor) * 5;
+            if (value >= 15) value = 14;
+            flaggedEntrySetValueB(screen->gridCursor, value);
+            eventQueueAddUniqueIfValid(0x0100020d);
+        } else if (tab != 0) {
+            eventQueueAddUniqueIfValid(0x0100020d);
+        }
+        screen->column = flaggedEntryGetValueB(screen->gridCursor);
+        screen->row = flaggedEntryGetValueA(screen->gridCursor);
+        return;
     }
-    flaggedEntrySetValueB(param_1 + 0x198,temp_v5);
-  }
-  else if (temp_v5 == 0) {
-    temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
-    *(unsigned int *)(param_1 + 0x10) = temp_v9;
-    temp_v9 = flaggedEntryGetValueA(param_1 + 0x198);
-    *(unsigned int *)(param_1 + 0x14) = temp_v9;
-    return;
-  }
-  eventQueueAddUniqueIfValid(0x100020d);
-  temp_v9 = flaggedEntryGetValueB(param_1 + 0x198);
-  *(unsigned int *)(param_1 + 0x10) = temp_v9;
-  temp_v9 = flaggedEntryGetValueA(param_1 + 0x198);
-  *(unsigned int *)(param_1 + 0x14) = temp_v9;
-  return;
+    FUN_00228b04(screen->gridCursor, 1);
+    screen->column = flaggedEntryGetValueB(screen->gridCursor);
+    screen->row = flaggedEntryGetValueA(screen->gridCursor);
+    if (screen->row == 6) {
+        screen->tabsActive = 1;
+        flaggedEntrySetValueB(screen->pageCursor, screen->column / 5);
+    }
 }
 
 } /* extern "C" */

@@ -1,129 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00233e10` (_code @ 0x233e10, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the entry as (state + index * 0x194) plus constant field offsets and does not keep a separate pointer to the record; the build folds the 0x1dc record base into the pointer and orders the state tests differently. */
+#include "map/mapIf.h"
+#include "map/mapDepart.h"
+#include "map/lmapMain.h"
 
 extern "C" {
+extern MapIfGlobalsA g_mapIf;
+extern LmapExtraA *g_lmapView;
+extern GameStateA g_gameState;
 
-int FUN_003d4ed8(int);
-int FUN_0050245c(int);
+void FUN_003d4ed8(u32 sound);
+void FUN_0050245c(f32 x, f32 y, f32 z);
 
-extern int *g_lmapView; /* 0x5806a4 */
-extern int g_mapIf; /* 0x58103c */
-extern int g_gameState; /* 0x5f15fc */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-
-/* Supplied declaration required: FUN_003d4ed8. */
-/* Supplied declaration required: FUN_0050245c. */
-
-
-unsigned int FUN_00233e10(unsigned char param_1,int param_2)
-
+// Applies a state change to interface entry `index` (-1: none): `blocked` is stored in the interface head and cleared
+// again when the entry does not lead to the map being viewed. With it clear, every active entry in a closing state
+// (8, 10, 12, 14, 16) is sent to state 6; with it set, the entry in state 6 moves on to its follow-up state.
+u32 FUN_00233e10(u8 blocked, s32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  
-  temp_v0 = g_mapIf;
-  temp_v5 = param_2 * 0x65;
-  *(unsigned char *)(g_mapIf + 0x1c) = param_1;
-  temp_v4 = g_mapIf + param_2 * 0x194;
-  if (param_2 != -1) {
-    temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x1dc);
-  }
-  if ((param_2 != -1 && temp_v5 != 0) && (g_lmapView[0x2c] != *(int *)(temp_v4 + 0x1fc))) {
-    *(unsigned char *)(temp_v0 + 0x1c) = 0;
-  }
-  if (*(char *)(temp_v0 + 0x1c) == '\0') {
-    temp_v4 = 0;
-    temp_v6 = 0x80;
-    do {
-      temp_v3 = temp_v0 + temp_v4 * 0x194;
-      temp_v7 = *(char *)(temp_v3 + 0x1dc) != '\0';
-      temp_v2 = 0;
-      if (temp_v7) {
-        temp_v2 = *(int *)(temp_v3 + 0x1f0);
-      }
-      if (((((temp_v7 && temp_v2 != 0x1d) && (temp_v2 != 0x31 && temp_v2 != 0x1e)) &&
-           (temp_v2 != 0x1f && temp_v2 != 0x30)) &&
-          ((temp_v2 != 0x22 && temp_v2 != 0x23 && (temp_v2 != 0x25 && temp_v2 != 0x28)))) &&
-         ((temp_v2 = *(int *)(temp_v3 + 0x1e0), temp_v2 == 8 || temp_v2 == 10 ||
-          ((temp_v2 == 0xc || temp_v2 == 0xe) || temp_v2 == 0x10)))) {
-        *(unsigned int *)(temp_v3 + 0x1e0) = 6;
-      }
-      temp_v6 = temp_v6 - 1;
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v6 != 0);
-    return 1;
-  }
-  if (param_2 == -1) {
-    return 0;
-  }
-  if (*(char *)(temp_v4 + 0x1dc) == '\0') {
-    return 1;
-  }
-  if (*(int *)(temp_v4 + 0x1e0) != 6) {
-    return 1;
-  }
-  if (*(int *)(temp_v4 + 0x1f0) >= 0x2d) {
-    *(unsigned int *)(temp_v4 + 0x1e0) = 7;
-    if (DAT_005f1614 != '\0') {
-      *(unsigned short *)(temp_v4 + 0x208) = 0;
-      return 1;
+    MapIfStateA *state = g_mapIf.state;
+    state->head.unk1C = blocked;
+    MapIfRecord *record = &g_mapIf.state->records[index];
+    if (index != -1 && record->active != 0 && g_lmapView->unkB0 != record->navigation.destination) {
+        state->head.unk1C = 0;
     }
-    FUN_0050245c(temp_v4 + 0x238);
-    FUN_003d4ed8(0x10002ab);
-  }
-  else {
-    temp_v0 = *(int *)(temp_v4 + 0x1fc);
-    if (temp_v0 == -1) {
-      temp_v1 = 9;
-      *(unsigned int *)(temp_v4 + 0x1e0) = temp_v1;
-    }
-    else {
-      if (temp_v0 == -2) {
-        temp_v1 = 0xb;
-        *(unsigned int *)(temp_v4 + 0x1e0) = temp_v1;
-        FUN_003d4ed8(0x10002ab);
-        *(unsigned short *)(temp_v4 + 0x208) = 0;
+    if (state->head.unk1C == 0) {
+        for (s32 i = 0; i < 128; i++) {
+            MapIfRecord *entry = &state->records[i];
+            if (entry->active != 0) {
+                s32 kind = entry->display.category;
+                if (kind != 0x1d && kind != 0x31 && kind != 0x1e && kind != 0x1f && kind != 0x30 && kind != 0x22 &&
+                    kind != 0x23 && kind != 0x25 && kind != 0x28 &&
+                    (entry->state == 8 || entry->state == 10 || entry->state == 12 || entry->state == 14 ||
+                     entry->state == 16)) {
+                    entry->state = 6;
+                }
+            }
+        }
         return 1;
-      }
-      if (temp_v0 == -3) {
-        *(unsigned int *)(temp_v4 + 0x1e0) = 0xd;
-      }
-      else {
-        if (*(int *)(temp_v4 + 0x368) != 0) {
-          *(unsigned int *)(temp_v4 + 0x1e0) = 7;
-          if ((DAT_005f1614 != '\0') && (*g_lmapView == 0)) {
-            *(unsigned short *)(temp_v4 + 0x208) = 0;
-            return 1;
-          }
-          if (g_gameState < 100) {
-            FUN_003d4ed8(0x10002ab);
-            *(unsigned short *)(temp_v4 + 0x208) = 0;
-            return 1;
-          }
-          FUN_0050245c(temp_v4 + 0x238);
-          FUN_003d4ed8(0x10002ab);
-          *(unsigned short *)(temp_v4 + 0x208) = 0;
-          return 1;
-        }
-        *(unsigned int *)(temp_v4 + 0x1e0) = 0xf;
-        if (DAT_005f1614 != '\0') {
-          *(unsigned short *)(temp_v4 + 0x208) = 0;
-          return 1;
-        }
-      }
     }
-    FUN_003d4ed8(0x10002ab);
-  }
-  *(unsigned short *)(temp_v4 + 0x208) = 0;
-  return 1;
+    if (index == -1) {
+        return 0;
+    }
+    if (record->active == 0) {
+        return 1;
+    }
+    if (record->state != 6) {
+        return 1;
+    }
+    if (record->display.category >= 45) {
+        record->state = 7;
+        if (g_gameState.inputBlocked == 0) {
+            FUN_0050245c(record->reset.start[0], record->reset.start[1], record->reset.start[2]);
+            FUN_003d4ed8(0x10002ab);
+        }
+    } else {
+        s32 destination = record->navigation.destination;
+        if (destination == -1) {
+            record->state = 9;
+            FUN_003d4ed8(0x10002ab);
+        } else if (destination == -2) {
+            record->state = 11;
+            FUN_003d4ed8(0x10002ab);
+        } else if (destination == -3) {
+            record->state = 13;
+            FUN_003d4ed8(0x10002ab);
+        } else if (record->reset.values[2] != 0) {
+            record->state = 7;
+            if (g_gameState.inputBlocked != 0 && g_lmapView->camera.mode == 0) {
+                // the entry is left in state 7 without a sound or a jump marker
+            } else if (g_gameState.mode < 100) {
+                FUN_003d4ed8(0x10002ab);
+            } else {
+                FUN_0050245c(record->reset.start[0], record->reset.start[1], record->reset.start[2]);
+                FUN_003d4ed8(0x10002ab);
+            }
+        } else {
+            record->state = 15;
+            if (g_gameState.inputBlocked == 0) {
+                FUN_003d4ed8(0x10002ab);
+            }
+        }
+    }
+    record->proximity.timer = 0;
+    return 1;
 }
-
-} /* extern "C" */
+}

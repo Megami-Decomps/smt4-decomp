@@ -1,155 +1,126 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033a690` (_code @ 0x33a690, 0x298 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the shared float coordinates into registers s16-s26 before the mode tests and reuses them across the layouts (so the (25, 1) layout shares the (25, 2) code); this build reloads each constant per block. The stores themselves are identical. */
+#include "map/mapDepart.h"
+
+namespace {
+/* One row of the screen's anchor table: three coordinates and the row's other state. */
+struct AnchorRow {
+    /* 0x00 */ f32 x[3];
+    /* 0x0c */ u8 unk0c[0x34];
+};
+
+/* The screen work area (the part this layout code sets). */
+struct AnchorWork {
+    /* 0x000 */ u8 unk000[0xd4];
+    /* 0x0d4 */ AnchorRow anchors[5];
+    /* 0x214 */ u8 unk214[0x305 - 0x214];
+    /* 0x305 */ u8 dirty;
+};
+
+/* The global that holds the work area pointer at +4. */
+struct AnchorGlobals {
+    u32 unk00;
+    AnchorWork *work;
+};
+}
 
 extern "C" {
+extern AnchorGlobals DAT_005806a0;
+extern GameStateA g_gameState;
+void FUN_00352a14(void);
+s32 gameFlagIsSet(u32 flag);
 
-int FUN_00352a14(void);
-
-extern int g_lmapView; /* 0x5806a4 */
-extern int g_gameState; /* 0x5f15fc */
-extern int DAT_005f1600; /* 0x5f1600 */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00352a14. */
-
-
-void FUN_0033a690(int param_1,int param_2)
-
+/* Lays out the screen's anchor rows for the current map mode (g_gameState.mode/submode); (10, 8) as arguments
+   selects the fixed first layout. */
+void FUN_0033a690(s32 mode, s32 subMode)
 {
-/* irregular: 1 goto(s); 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  
-  *(unsigned char *)(g_lmapView + 0x305) = 0;
-  FUN_00352a14();
-  temp_v0 = g_lmapView;
-  temp_v3 = 0x42c80000;
-  temp_v2 = 0;
-  if (param_1 == 10 && param_2 == 8) {
-    *(unsigned int *)(g_lmapView + 0xd8) = 0x42c80000;
-    *(unsigned int *)(temp_v0 + 0x118) = 0x43480000;
-    *(unsigned int *)(temp_v0 + 0x158) = 0;
-    *(unsigned int *)(temp_v0 + 0x198) = 0x43be0000;
-    *(unsigned int *)(temp_v0 + 0x1d8) = 0x42280000;
-  }
-  temp_v10 = 0x433e0000;
-  temp_v4 = 0x43f00000;
-  temp_v6 = 0x423c0000;
-  temp_v11 = 0x43340000;
-  temp_v12 = 0x43020000;
-  temp_v7 = 0x437a0000;
-  temp_v8 = 0x435c0000;
-  temp_v9 = 0x42200000;
-  temp_v5 = 0x432a0000;
-  if (g_gameState == 1) {
-    if (DAT_005f1600 != 1) {
-      return;
+    AnchorWork *work = DAT_005806a0.work;
+    work->dirty = 0;
+    FUN_00352a14();
+    if (mode == 10 && subMode == 8) {
+        work = DAT_005806a0.work;
+        work->anchors[0].x[1] = 100.0f;
+        work->anchors[1].x[1] = 200.0f;
+        work->anchors[2].x[1] = 0.0f;
+        work->anchors[3].x[1] = 380.0f;
+        work->anchors[4].x[1] = 42.0f;
     }
-    temp_v0 = gameFlagIsSet(0x72);
-    if ((temp_v0 != 0) && (temp_v1 = gameFlagIsSet(0xb1), temp_v0 = g_lmapView, temp_v1 == 0)) {
-      *(unsigned int *)(g_lmapView + 0x114) = 0x42dc0000;
-      *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x194) = temp_v4;
-      *(unsigned int *)(temp_v0 + 0x1d4) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0x118) = temp_v8;
-      *(unsigned int *)(temp_v0 + 0x158) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x198) = temp_v4;
-      *(unsigned int *)(temp_v0 + 0x1d8) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0xdc) = temp_v5;
-      *(unsigned int *)(temp_v0 + 0x11c) = temp_v12;
-      *(unsigned int *)(temp_v0 + 0x15c) = temp_v9;
-      *(unsigned int *)(temp_v0 + 0x19c) = temp_v7;
-      *(unsigned int *)(temp_v0 + 0x1dc) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0xd4) = temp_v10;
-      *(unsigned int *)(temp_v0 + 0xd8) = temp_v11;
+    if (g_gameState.mode == 1) {
+        if (g_gameState.submode != 1) {
+            return;
+        }
+        if (gameFlagIsSet(114) && !gameFlagIsSet(177)) {
+            work = DAT_005806a0.work;
+            work->anchors[1].x[0] = 110.0f;
+            work->anchors[2].x[0] = 0.0f;
+            work->anchors[3].x[0] = 480.0f;
+            work->anchors[4].x[0] = 47.0f;
+            work->anchors[1].x[1] = 220.0f;
+            work->anchors[2].x[1] = 0.0f;
+            work->anchors[3].x[1] = 480.0f;
+            work->anchors[4].x[1] = 47.0f;
+            work->anchors[0].x[2] = 170.0f;
+            work->anchors[1].x[2] = 130.0f;
+            work->anchors[2].x[2] = 40.0f;
+            work->anchors[3].x[2] = 250.0f;
+            work->anchors[4].x[2] = 47.0f;
+            work->anchors[0].x[0] = 190.0f;
+            work->anchors[0].x[1] = 180.0f;
+        }
     }
-  }
-  if (g_gameState == 4) {
-    if (DAT_005f1600 != 2) {
-      return;
+    if (g_gameState.mode == 4) {
+        if (g_gameState.submode != 2) {
+            return;
+        }
+        if (gameFlagIsSet(244) && !gameFlagIsSet(246)) {
+            work = DAT_005806a0.work;
+            work->anchors[1].x[0] = 100.0f;
+            work->anchors[2].x[0] = 0.0f;
+            work->anchors[3].x[0] = 480.0f;
+            work->anchors[4].x[0] = 47.0f;
+            work->anchors[1].x[1] = 220.0f;
+            work->anchors[2].x[1] = 0.0f;
+            work->anchors[3].x[1] = 480.0f;
+            work->anchors[4].x[1] = 47.0f;
+            work->anchors[0].x[2] = 170.0f;
+            work->anchors[1].x[2] = 130.0f;
+            work->anchors[2].x[2] = 40.0f;
+            work->anchors[3].x[2] = 250.0f;
+            work->anchors[4].x[2] = 47.0f;
+            work->anchors[0].x[0] = 190.0f;
+            work->anchors[0].x[1] = 180.0f;
+        }
     }
-    temp_v0 = gameFlagIsSet(0xf4);
-    if ((temp_v0 != 0) && (temp_v1 = gameFlagIsSet(0xf6), temp_v0 = g_lmapView, temp_v1 == 0)) {
-      *(unsigned int *)(g_lmapView + 0x114) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x194) = temp_v4;
-      *(unsigned int *)(temp_v0 + 0x1d4) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0x118) = temp_v8;
-      *(unsigned int *)(temp_v0 + 0x158) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x198) = temp_v4;
-      *(unsigned int *)(temp_v0 + 0x1d8) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0xdc) = temp_v5;
-      *(unsigned int *)(temp_v0 + 0x11c) = temp_v12;
-      *(unsigned int *)(temp_v0 + 0x15c) = temp_v9;
-      *(unsigned int *)(temp_v0 + 0x19c) = temp_v7;
-      *(unsigned int *)(temp_v0 + 0x1dc) = temp_v6;
-      *(unsigned int *)(temp_v0 + 0xd4) = temp_v10;
-      *(unsigned int *)(temp_v0 + 0xd8) = temp_v11;
+    if (g_gameState.mode == 25) {
+        if (g_gameState.submode == 1 || g_gameState.submode == 2) {
+            work = DAT_005806a0.work;
+            work->anchors[0].x[0] = 170.0f;
+            work->anchors[1].x[0] = 210.0f;
+            work->anchors[2].x[0] = 0.0f;
+            work->anchors[3].x[0] = 280.0f;
+            work->anchors[4].x[0] = 75.0f;
+            work->anchors[0].x[1] = 100.0f;
+            work->anchors[1].x[1] = 220.0f;
+            work->anchors[2].x[1] = 0.0f;
+            work->anchors[3].x[1] = 280.0f;
+            work->anchors[4].x[1] = 75.0f;
+            work->anchors[0].x[2] = 150.0f;
+            work->anchors[1].x[2] = 160.0f;
+            work->anchors[2].x[2] = 40.0f;
+            work->anchors[3].x[2] = 100.0f;
+            work->anchors[4].x[2] = 75.0f;
+        } else {
+            return;
+        }
     }
-  }
-  temp_v0 = g_lmapView;
-  if (g_gameState == 0x19) {
-    if (DAT_005f1600 == 1) {
-      *(unsigned int *)(g_lmapView + 0xd4) = temp_v5;
-      *(unsigned int *)(temp_v0 + 0x114) = 0x43520000;
-      *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x194) = 0x438c0000;
-      *(unsigned int *)(temp_v0 + 0x1d4) = 0x42960000;
-      *(unsigned int *)(temp_v0 + 0xd8) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x118) = temp_v8;
-      *(unsigned int *)(temp_v0 + 0x158) = temp_v2;
-      *(unsigned int *)(temp_v0 + 0x198) = 0x438c0000;
-      *(unsigned int *)(temp_v0 + 0x1d8) = 0x42960000;
-      *(unsigned int *)(temp_v0 + 0xdc) = 0x43160000;
-      *(unsigned int *)(temp_v0 + 0x11c) = 0x43200000;
-      *(unsigned int *)(temp_v0 + 0x15c) = temp_v9;
-      *(unsigned int *)(temp_v0 + 0x19c) = temp_v3;
-      *(unsigned int *)(temp_v0 + 0x1dc) = 0x42960000;
-      if (g_gameState != 0x19) goto LAB_0033a890;
+    s32 current = g_gameState.mode;
+    if (current == 28 || current == 29 || current == 30 || current == 31 || current == 32) {
+        work = DAT_005806a0.work;
+        work->anchors[0].x[0] = 170.0f;
+        work->anchors[1].x[0] = 250.0f;
+        work->anchors[2].x[0] = 0.0f;
+        work->anchors[3].x[0] = 490.0f;
+        work->anchors[4].x[0] = 43.0f;
     }
-    temp_v0 = g_lmapView;
-    if (DAT_005f1600 != 2) {
-      return;
-    }
-    *(unsigned int *)(g_lmapView + 0xd4) = temp_v5;
-    *(unsigned int *)(temp_v0 + 0x114) = 0x43520000;
-    *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x194) = 0x438c0000;
-    *(unsigned int *)(temp_v0 + 0x1d4) = 0x42960000;
-    *(unsigned int *)(temp_v0 + 0xd8) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x118) = temp_v8;
-    *(unsigned int *)(temp_v0 + 0x158) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x198) = 0x438c0000;
-    *(unsigned int *)(temp_v0 + 0x1d8) = 0x42960000;
-    *(unsigned int *)(temp_v0 + 0xdc) = 0x43160000;
-    *(unsigned int *)(temp_v0 + 0x11c) = 0x43200000;
-    *(unsigned int *)(temp_v0 + 0x15c) = temp_v9;
-    *(unsigned int *)(temp_v0 + 0x19c) = temp_v3;
-    *(unsigned int *)(temp_v0 + 0x1dc) = 0x42960000;
-  }
-LAB_0033a890:
-  temp_v0 = g_lmapView;
-  if ((g_gameState == 0x1c || g_gameState == 0x1d) ||
-     ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)) {
-    *(unsigned int *)(g_lmapView + 0xd4) = temp_v5;
-    *(unsigned int *)(temp_v0 + 0x114) = temp_v7;
-    *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
-    *(unsigned int *)(temp_v0 + 0x194) = 0x43f50000;
-    *(unsigned int *)(temp_v0 + 0x1d4) = 0x422c0000;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,134 +1,96 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f1b3c` (_code @ 0x3f1b3c, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail places the tier-0 and tier-99 blocks after the loop's exit tails, and duplicates the two delete tails; armcc lays the branches out in source order and merges the tails (138 vs 140 rows). */
+#include "common.h"
+#include "battle/btlMain.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-int qsort(int, int, int, unsigned char *);
-int asdOperatorNewD(void);
-int sysMemClear(void);
-int asdOperatorDeleteC(int);
+/* One record of the table (0x10 bytes): a randomly chosen effect, gated by tier and a game flag. */
+typedef struct EffectChoice {
+    /* 0x00 */ s16 kind;      /* the kind the caller asks for (0 = unused) */
+    /* 0x02 */ s16 tier;      /* 0 = always, 99 = last resort, else a rising tier */
+    /* 0x04 */ u32 effect;
+    /* 0x08 */ u32 soundWord;
+    /* 0x0C */ u32 flagId;    /* game flag that unlocks the record */
+} EffectChoice;
 
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_5_stack;
+/* The slice of g_btlMain this function reads. */
+typedef struct EffectChoiceMasks {
+    /* 0x000 */ u8 unk000[0x130];
+    /* 0x130 */ u64 choiceMask;
+} EffectChoiceMasks;
 
-extern unsigned char LAB_00221c14; /* 0x221c14 */
-extern unsigned int DAT_00573a50; /* 0x573a50 */
-extern unsigned int DAT_00573a54; /* 0x573a54 */
+extern EffectChoiceMasks g_btlMain;
 
-/* Supplied declaration required: qsort. */
-extern int lcgRandomRange(unsigned int);
-extern unsigned int dataTableGet(unsigned int);
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: asdOperatorNewD. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: asdOperatorDeleteC. */
-extern unsigned int repackWord(unsigned int);
+void *asdOperatorNewD(u32 size);
+void asdOperatorDeleteC(void *block);
+void *sysMemClear(void *destination, u32 size);
+void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
+s32 FUN_00221c14(const void *a, const void *b);
+s32 gameFlagIsSet(u32 flag);
+s32 lcgRandomRange(u32 limit);
+u32 repackWord(u32 word);
 
-
-void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsigned int *param_5)
-
+/* Picks a random effect of the given kind from table 10's section: the records of the kind are
+ * sorted, then walked keeping those whose tier rises (and whose flag is set) until a last-resort
+ * record; battle blocking flags can veto the gated ones. Outputs the effect and its sound word. */
+void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 *sound)
 {
-/* irregular: 4 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  short *psVar8;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  short temp_v11;
-  
-  *param_4 = 0;
-  *param_5 = 0;
-  if ((param_2 < 1) || (param_2 >= 9)) {
-    return;
-  }
-  temp_v1 = dataTableGet(10);
-  temp_v2 = dataTableGetEntries();
-  temp_v3 = dataTableGetCount(temp_v1);
-  temp_v4 = temp_v3 << 2;
-  asdOperatorNewD();
-  sysMemClear();
-  temp_v10 = 0;
-  temp_v5 = 0;
-  if (temp_v3 != 0) {
-    do {
-      psVar8 = (short *)(temp_v2 + temp_v5 * 0x10);
-      temp_v7 = (int)*psVar8;
-      if ((temp_v7 != 0) && (temp_v7 == param_3)) {
-        *(short **)(temp_v4 + temp_v10 * 4) = psVar8;
-        temp_v10 = temp_v10 + 1;
-      }
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < temp_v3);
-    if (temp_v10 != 0) {
-      qsort(temp_v4,temp_v10,4,&LAB_00221c14);
-      temp_v2 = temp_v10 << 2;
-      asdOperatorNewD();
-      sysMemClear();
-      temp_v7 = 0;
-      if (0 < temp_v10) {
-        param_1 = param_1 + 0x4000;
-      }
-      temp_v11 = 1;
-      temp_v8 = 0;
-      if (0 < temp_v10) {
-        do {
-          temp_v9 = *(int *)(temp_v4 + temp_v8 * 4);
-          temp_v0 = *(short *)(temp_v9 + 2);
-          if (temp_v0 != 0) {
-            if (temp_v0 != 99) {
-              if (((((DAT_00573a54 & *(unsigned int *)(param_1 + 0x5a4)) == 0 &&
-                     (*(unsigned int *)(param_1 + 0x5a0) & DAT_00573a50) == 0) && (temp_v11 != 99)) &&
-                  (temp_v11 <= temp_v0)) &&
-                 ((temp_v0 == 1 || (temp_v6 = gameFlagIsSet(*(unsigned int *)(temp_v9 + 0xc)), temp_v6 != 0)))
-                 ) {
-                *(int *)(temp_v2 + temp_v7 * 4) = temp_v9;
-                temp_v11 = *(short *)(temp_v9 + 2);
-                temp_v7 = temp_v7 + 1;
-              }
-            }
-            else if (((*(unsigned int *)(param_1 + 0x5a4) & DAT_00573a54) == 0 &&
-                      (*(unsigned int *)(param_1 + 0x5a0) & DAT_00573a50) == 0) &&
-                    (temp_v6 = gameFlagIsSet(*(unsigned int *)(temp_v9 + 0xc)), temp_v6 != 0)) {
-              *(int *)(temp_v2 + temp_v7 * 4) = temp_v9;
-              temp_v11 = 99;
-              temp_v7 = temp_v7 + 1;
-            }
-          }
-          else if (temp_v11 != 99) {
-            *(int *)(temp_v2 + temp_v7 * 4) = temp_v9;
-            temp_v11 = 0;
-            temp_v7 = temp_v7 + 1;
-          }
-          temp_v8 = temp_v8 + 1;
-        } while (temp_v8 < temp_v10);
-        if (temp_v7 != 0) {
-          temp_v10 = lcgRandomRange((temp_v7 - 1U) & 0xffff);
-          temp_v10 = *(int *)(temp_v2 + temp_v10 * 4);
-          *param_4 = *(unsigned int *)(temp_v10 + 4);
-          temp_v1 = repackWord(*(unsigned int *)(temp_v10 + 8));
-          *param_5 = temp_v1;
-        }
-      }
-      asdOperatorDeleteC(temp_v2);
-      asdOperatorDeleteC(temp_v4);
-      return;
+    *effect = 0;
+    *sound = 0;
+    if (section <= 0 || section >= 9) {
+        return;
     }
-  }
-  asdOperatorDeleteC(temp_v4);
-  return;
+    void *table = dataTableGet(10, section);
+    EffectChoice *records = (EffectChoice *)dataTableGetEntries(table);
+    u32 recordCount = dataTableGetCount(table);
+    EffectChoice **matching = (EffectChoice **)asdOperatorNewD(recordCount * sizeof(EffectChoice *));
+    sysMemClear(matching, recordCount * sizeof(EffectChoice *));
+
+    s32 matchCount = 0;
+    for (u32 i = 0; i < recordCount; i++) {
+        EffectChoice *record = &records[i];
+        if (record->kind != 0 && record->kind == kind) {
+            matching[matchCount++] = record;
+        }
+    }
+    if (matchCount != 0) {
+        qsort(matching, matchCount, sizeof(EffectChoice *), FUN_00221c14);
+        EffectChoice **candidates = (EffectChoice **)asdOperatorNewD(matchCount * sizeof(EffectChoice *));
+        sysMemClear(candidates, matchCount * sizeof(EffectChoice *));
+
+        s32 candidateCount = 0;
+        s32 lastTier = 1;
+        for (s32 i = 0; i < matchCount; i++) {
+            EffectChoice *record = matching[i];
+            s16 tier = record->tier;
+
+            if (tier != 0) {
+                if (tier != 99) {
+                    if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && lastTier != 99 && lastTier <= tier
+                        && (tier == 1 || gameFlagIsSet(record->flagId))) {
+                        candidates[candidateCount++] = record;
+                        lastTier = record->tier;
+                    }
+                } else if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && gameFlagIsSet(record->flagId)) {
+                    candidates[candidateCount++] = record;
+                    lastTier = 99;
+                }
+            } else if (lastTier != 99) {
+                candidates[candidateCount++] = record;
+                lastTier = 0;
+            }
+        }
+        if (candidateCount != 0) {
+            EffectChoice *chosen = candidates[lcgRandomRange((u16)(candidateCount - 1))];
+            *effect = chosen->effect;
+            *sound = repackWord(chosen->soundWord);
+        }
+        asdOperatorDeleteC(candidates);
+        asdOperatorDeleteC(matching);
+        return;
+    }
+    asdOperatorDeleteC(matching);
 }
 
-} /* extern "C" */
+}

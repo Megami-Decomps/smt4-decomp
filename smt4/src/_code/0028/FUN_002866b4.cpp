@@ -1,206 +1,201 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002866b4` (_code @ 0x2866b4, 0x328 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (207 rows against 205): flow, constants and calls follow retail; retail's prologue is a variadic-style `push {r0-r3,...}` with the 5th/6th stack arguments read at sp+72/+76 and the 6th forwarded to FUN_0028e6d0 through a VFP register copy (vldr/vstr), which a plain u32 parameter does not reproduce, and register allocation differs */
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int messageSlotSet(int);
-int scrCommMessageSetMode(unsigned int);
-int scrSetResult(unsigned int);
-int FUN_0028dcf4(int, int);
-int FUN_0028e6d0(...);
+#define MSG_KIND_PLAIN 11
+#define MSG_KIND_PLAIN_HELP 19
+
+/* Message window object (observed fields only). */
+struct MsgWindow {
+    u8 pad00[4];
+    u32 object;             /* 0x04 */
+    u8 state;               /* 0x08: 0 idle, 3 opening, 4/5 finished */
+    u8 layout;              /* 0x09 */
+    u8 pad0A[6];
+    u32 color;              /* 0x10 */
+    u8 pad14[4];
+    u32 result;             /* 0x18 */
+    u8 pad1C[4];
+    u32 menuLayer;          /* 0x20 */
+    u8 pad24[9];
+    u8 modeBit;             /* 0x2D */
+    u8 restartPending;      /* 0x2E */
+    u8 pad2F[6];
+    u8 hasText;             /* 0x35 */
+    u8 priority;            /* 0x36 */
+    u8 pad37[0x27];
+    u8 isPlain;             /* 0x5E */
+    u8 closeLocked;         /* 0x5F */
+    u8 pad60[0xA12 - 0x60];
+    u8 savedHelpStatus;     /* 0xA12 */
+    u8 savedSlot[6];        /* 0xA13 */
+    u16 savedValue[6];      /* 0xA1A */
+    u8 padA26[1];
+};
+
+struct MessageMainView {
+    u8 pad00[4];
+    MsgWindow *window[3];   /* 0x04, 0x08, 0x0C */
+};
+
+extern MessageMainView g_messageMain; /* 0x43e188 */
+
+void messageSlotSet(s32 slot);
+void scrCommMessageSetMode(s32 mode);
+void scrSetResult(u32 value);
+void FUN_0028dcf4(MsgWindow *window, u32 layout);
+void FUN_0028e6d0(MsgWindow *window, u32 a, u32 b, u32 kind, u32 c, u32 d, u32 options);
 int FUN_002b8244(void);
-int buttonHelpSetPreset(int);
-int titleOverlaySetModeAnimation(int, int);
-int msgBoxFlagsClear(unsigned int, int);
-int objFlagsSetBits(unsigned int, int);
+u32 FUN_002b753c(u32 object);
+s32 FUN_002b8660(void);
+s32 FUN_002c1d5c(void);
+void buttonHelpSetPreset(s32 preset);
+u32 buttonHelpGetStatus(void);
+u32 buttonHelpGetEntryValue(u32 entry);
+u8 buttonHelpGetSlotByte(u32 slot);
+u16 FUN_002d6624(u32 slot);
+void titleOverlaySetModeAnimation(MsgWindow *window, u8 layout);
+void msgBoxFlagsClear(u32 object, s32 bits);
+void objFlagsSetBits(u32 object, s32 bits);
 
-/* stack frame of param_6: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_6_stack;
-
-extern int DAT_0043e18c; /* 0x43e18c */
-extern int DAT_0043e190; /* 0x43e190 */
-extern int DAT_0043e194; /* 0x43e194 */
-
-/* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: scrCommMessageSetMode. */
-/* Supplied declaration required: scrSetResult. */
-extern int buttonHelpGetEntryValue(unsigned int);
-/* Supplied declaration required: FUN_0028dcf4. */
-/* Supplied declaration required: FUN_0028e6d0. */
-extern unsigned int FUN_002b753c(unsigned int);
-/* Supplied declaration required: FUN_002b8244. */
-extern int FUN_002b8660(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned char buttonHelpGetStatus(void);
-/* Supplied declaration required: titleOverlaySetModeAnimation. */
-/* Supplied declaration required: msgBoxFlagsClear. */
-extern int FUN_002c1d5c(void);
-/* Supplied declaration required: objFlagsSetBits. */
-extern unsigned short FUN_002d6624(unsigned int);
-extern unsigned char buttonHelpGetSlotByte(unsigned int);
-
-
-unsigned int
-FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,int param_5,
-            unsigned int param_6)
-
+/* Opens (when `wait` is 0) or advances/finishes (when nonzero) the message window of the given kind;
+ * returns 1 when the message is complete and 0 while it is still showing. */
+u32 FUN_002866b4(u32 a, u32 b, s32 wait, s32 kind, s32 priority, u32 options)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  char temp_v6;
-  
-  temp_v2 = DAT_0043e18c;
-  temp_v0 = 0;
-  temp_v6 = param_4 == 0xb;
-  temp_v5 = DAT_0043e190;
-  if (!(unsigned char)temp_v6) {
-    if (param_4 != 0xd) {
-      if (param_4 == 0xe) {
-        param_4 = 0xb;
-      }
-      else if (param_4 != 0xf) {
-        temp_v5 = DAT_0043e194;
-        if ((param_4 != 0xc) && (temp_v5 = DAT_0043e190, param_4 != 0xb && param_4 != 0x13)) {
-          temp_v5 = DAT_0043e18c;
+    MsgWindow *first = g_messageMain.window[0];
+    MsgWindow *win;
+    u8 modeBit = 0;
+    u8 isPlain = (kind == MSG_KIND_PLAIN);
+
+    win = g_messageMain.window[1];
+    if (!isPlain) {
+        if (kind != 13) {
+            if (kind == 14) {
+                kind = MSG_KIND_PLAIN;
+            } else if (kind != 15) {
+                win = g_messageMain.window[2];
+                if (kind != 12) {
+                    win = g_messageMain.window[1];
+                    if (kind != MSG_KIND_PLAIN && kind != MSG_KIND_PLAIN_HELP) {
+                        win = first;
+                    }
+                }
+            } else {
+                kind = MSG_KIND_PLAIN;
+                modeBit = 1;
+                isPlain = 0;
+            }
+        } else {
+            modeBit = 1;
+            kind = MSG_KIND_PLAIN;
+            isPlain = 1;
         }
-      }
-      else {
-        param_4 = 0xb;
-        temp_v0 = 1;
-        temp_v6 = 0;
-      }
     }
-    else {
-      temp_v0 = 1;
-      param_4 = 0xb;
-      temp_v6 = 1;
-    }
-  }
-  *(unsigned char *)(temp_v5 + 0x2d) = temp_v0;
-  *(char *)(temp_v5 + 0x5e) = temp_v6;
-  if (param_3 != 0) {
-    if ((temp_v5 != 0) && (temp_v6 = *(char *)(temp_v5 + 8), temp_v6 == '\x04')) {
-      return 1;
-    }
-    if (temp_v5 != 0) {
-      temp_v6 = *(char *)(temp_v5 + 8);
-    }
-    if (temp_v5 == 0 || temp_v6 == '\0') {
-      if (*(char *)(temp_v5 + 0x2e) != '\0') {
-        *(unsigned char *)(temp_v5 + 0x2e) = 0;
-        FUN_0028e6d0(temp_v5,param_1,param_2,param_4,0x1a,1,0);
-        if (*(char *)(temp_v5 + 0x35) != '\0') {
-          return 0;
+    win->modeBit = modeBit;
+    win->isPlain = isPlain;
+
+    if (wait != 0) {
+        u8 state = 0;
+        if (win != 0 && win->state == 4) {
+            return 1;
         }
-        FUN_0028dcf4(temp_v5,*(unsigned char *)(temp_v5 + 9));
-        return 0;
-      }
-      if ((param_4 != 0xb) && (param_4 != 0x13)) {
-        return 1;
-      }
-      temp_v6 = '\0';
-      if (temp_v2 != 0) {
-        temp_v6 = *(char *)(temp_v2 + 8);
-      }
-      if (temp_v2 == 0 || temp_v6 == '\0') {
-        scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
-        scrCommMessageSetMode(0xffffffff);
-        messageSlotSet(0);
-        return 1;
-      }
-      return 0;
+        if (win != 0) {
+            state = win->state;
+        }
+        if (win == 0 || state == 0) {
+            if (win->restartPending != 0) {
+                win->restartPending = 0;
+                FUN_0028e6d0(win, a, b, kind, 26, 1, 0);
+                if (win->hasText == 0) {
+                    FUN_0028dcf4(win, win->layout);
+                }
+                return 0;
+            }
+            if (kind != MSG_KIND_PLAIN && kind != MSG_KIND_PLAIN_HELP) {
+                return 1;
+            }
+            state = 0;
+            if (first != 0) {
+                state = first->state;
+            }
+            if (first == 0 || state == 0) {
+                scrSetResult(win->result);
+                scrCommMessageSetMode(-1);
+                messageSlotSet(0);
+                return 1;
+            }
+            return 0;
+        }
+        if (state == 5) {
+            scrSetResult(win->result);
+            return 1;
+        }
+        if (FUN_002c1d5c() == 0) {
+            return 0;
+        }
+        {
+            s32 busy = FUN_002b8660();
+            u8 now = 0;
+            if (busy != 0) {
+                now = win->state;
+            }
+            if (busy == 0 || now == 3 || now == 0) {
+                return 0;
+            }
+        }
+    } else {
+        if (isPlain != 0) {
+            win->closeLocked = 1;
+            first->closeLocked = 1;
+        }
+        win->priority = (u8)priority;
+        win->color = (kind == 6) ? 0x035AB9FF : 0x320202FF;
+        u32 state = 0;
+        if (win != 0) {
+            state = win->state;
+        }
+        if (win == 0 || state == 0) {
+            if (FUN_002c1d5c() != 0 && FUN_002b8660() != 0) {
+                return 1;
+            }
+            FUN_0028e6d0(win, a, b, kind, 26, 1, options);
+            if (kind == MSG_KIND_PLAIN || kind == MSG_KIND_PLAIN_HELP) {
+                win->menuLayer = FUN_002b753c(win->object);
+            }
+            if (win->hasText == 0) {
+                FUN_0028dcf4(win, win->layout);
+            }
+            if (priority != 0) {
+                objFlagsSetBits(win->object, 0x20);
+                msgBoxFlagsClear(win->object, 0x40);
+            }
+            win->savedHelpStatus = 0;
+            for (u32 i = 0; i < 6; i++) {
+                win->savedSlot[i] = buttonHelpGetSlotByte(i & 0xFF);
+                win->savedValue[i] = FUN_002d6624(i & 0xFF);
+            }
+            u8 layout = win->layout;
+            if ((layout == 7 || layout == 8 || layout == 9) && buttonHelpGetEntryValue(0) == 5) {
+                win->padA26[0] = 1;
+                win->savedHelpStatus = (u8)buttonHelpGetStatus();
+                buttonHelpSetPreset(0xDC);
+            }
+            if (kind == MSG_KIND_PLAIN_HELP) {
+                FUN_002b8244();
+            }
+            return 0;
+        }
+        win->restartPending = 1;
     }
-    if (temp_v6 == '\x05') {
-      scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
-      return 1;
-    }
-    temp_v2 = FUN_002c1d5c();
-    if (temp_v2 == 0) {
-      return 0;
-    }
-    temp_v2 = FUN_002b8660();
-    temp_v6 = '\0';
-    if (temp_v2 != 0) {
-      temp_v6 = *(char *)(temp_v5 + 8);
-    }
-    if ((temp_v2 == 0 || temp_v6 == '\x03') || temp_v6 == '\0') {
-      return 0;
-    }
-  }
-  else {
-    if ((unsigned char)temp_v6 != 0) {
-      *(unsigned char *)(temp_v5 + 0x5f) = 1;
-      *(unsigned char *)(temp_v2 + 0x5f) = 1;
-    }
-    if (param_4 == 6) {
-      temp_v3 = 0x35ab9ff;
-    }
-    else {
-      temp_v3 = 0x320202ff;
-    }
-    *(char *)(temp_v5 + 0x36) = (char)param_5;
-    *(unsigned int *)(temp_v5 + 0x10) = temp_v3;
-    if (temp_v5 != 0) {
-      temp_v3 = (unsigned int)*(unsigned char *)(temp_v5 + 8);
-    }
-    if (temp_v5 == 0 || temp_v3 == 0) {
-      temp_v2 = FUN_002c1d5c();
-      if ((temp_v2 != 0) && (temp_v2 = FUN_002b8660(), temp_v2 != 0)) {
-        return 1;
-      }
-      FUN_0028e6d0(temp_v5,param_1,param_2,param_4,0x1a,1,param_6);
-      if (param_4 == 0xb || param_4 == 0x13) {
-        temp_v4 = FUN_002b753c(*(unsigned int *)(temp_v5 + 4));
-        *(unsigned int *)(temp_v5 + 0x20) = temp_v4;
-      }
-      if (*(char *)(temp_v5 + 0x35) == '\0') {
-        FUN_0028dcf4(temp_v5,*(unsigned char *)(temp_v5 + 9));
-      }
-      if (param_5 != 0) {
-        objFlagsSetBits(*(unsigned int *)(temp_v5 + 4),0x20);
-        msgBoxFlagsClear(*(unsigned int *)(temp_v5 + 4),0x40);
-      }
-      temp_v3 = 0;
-      *(unsigned char *)(temp_v5 + 0xa12) = 0;
-      do {
-        temp_v0 = buttonHelpGetSlotByte(temp_v3 & 0xff);
-        *(unsigned char *)(temp_v5 + temp_v3 + 0xa13) = temp_v0;
-        temp_v1 = FUN_002d6624(temp_v3 & 0xff);
-        temp_v2 = temp_v3 * 2;
-        temp_v3 = temp_v3 + 1;
-        *(unsigned short *)(temp_v5 + temp_v2 + 0xa1a) = temp_v1;
-      } while ((int)temp_v3 < 6);
-      temp_v6 = *(char *)(temp_v5 + 9);
-      if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
-         (temp_v2 = buttonHelpGetEntryValue(0), temp_v2 == 5)) {
-        *(unsigned char *)(temp_v5 + 0xa26) = 1;
-        temp_v0 = buttonHelpGetStatus();
-        *(unsigned char *)(temp_v5 + 0xa12) = temp_v0;
-        buttonHelpSetPreset(0xdc);
-      }
-      if (param_4 != 0x13) {
-        return 0;
-      }
-      FUN_002b8244();
-      return 0;
-    }
-    *(unsigned char *)(temp_v5 + 0x2e) = 1;
-  }
-  titleOverlaySetModeAnimation(temp_v5,*(unsigned char *)(temp_v5 + 9));
-  *(unsigned char *)(temp_v5 + 8) = 3;
-  *(unsigned char *)(temp_v5 + 0x35) = 0;
-  return 0;
+    titleOverlaySetModeAnimation(win, win->layout);
+    win->state = 3;
+    win->hasText = 0;
+    return 0;
 }
 
 } /* extern "C" */

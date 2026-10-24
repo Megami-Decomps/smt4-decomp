@@ -5,7 +5,7 @@ extern "C" {
 void asdMemFree(void *data);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *name, void **output, s32 flags);
-extern const char *DAT_0057a7d8[];
+extern const char *g_btlTalkToneNames[];
 extern const char DAT_0052a9d8[]; // "battle/talk/TalkTone%s.mbm"
 
 bool FUN_004c96f8(BtlTalkA *work, s32 tone)
@@ -37,7 +37,7 @@ bool FUN_004c96f8(BtlTalkA *work, s32 tone)
             loader->data = NULL;
         }
         loader->tone = tone;
-        textFormatBuffer(path, DAT_0052a9d8, DAT_0057a7d8[tone]);
+        textFormatBuffer(path, DAT_0052a9d8, g_btlTalkToneNames[tone]);
         asdLoadFileAsyncSimple(path, &loader->data, 1);
         loader->pending = 1;
         loader->state = 3;

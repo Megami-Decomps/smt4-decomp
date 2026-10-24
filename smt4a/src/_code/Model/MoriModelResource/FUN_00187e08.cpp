@@ -1,185 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187e08` (_code @ 0x187e08, 0x384 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the camera animation resource setup (draft: the pointers returned by the allocator restored from the condition they feed); retail repeats each heap-kind selection inline with shared fallthrough jumps (the draft's gotos) and keeps the memory kinds in different registers than armcc here. */
+#include "common.h"
+
+#define MEMORY_DEFAULT 0x10000
+#define MEMORY_MAIN 0x20000
+#define MEMORY_EXTRA 0x30000
+
+/* The loaded camera animation state (only the fields set here). */
+struct CameraAnimState {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u8 stateBlock[0x38];
+    /* 0x44 */ void *keyBlockCopy;
+    /* 0x48 */ void *curveBlockCopy;
+    /* 0x4C */ void *alignedBlockCopy;
+    /* 0x50 */ void *thirdBlockCopy;
+    /* 0x54 */ void *fourthBlockCopy;
+    /* 0x58 */ void *lastBlockCopy;
+    /* 0x5C */ void *tables[6];   /* the six table pointers; slots 2-4 are replaced by the allocated blocks */
+    /* 0x74 */ void *alignedA;
+    /* 0x78 */ void *alignedB;
+    /* 0x7C */ void *alignedAMirror;
+    /* 0x80 */ void *alignedBMirror;
+};
 
 extern "C" {
+void *asdMemoryAlloc(u32 kind, u32 alignment, u32 region, u32 size, u32 option);
+void *asdMemoryAllocAligned(u32 kind, u32 alignment, u32 region, u32 size, u32 align, u32 option);
+void FUN_0017cf74(void *from, void *to);
+void _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(void *state, void *resource);
 
-int asdMemoryAlloc(...);
-int FUN_0017cf74(...);
-int asdMemoryAllocAligned(...);
-int _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(...);
-
-/* stack frame of param_5: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_5_stack;
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_0017cf74. */
-/* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup. */
-
-
-void FUN_00187e08(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Whether a memory kind names one of the two selectable heaps. */
+static __inline bool selectableKind(s32 kind)
 {
-/* irregular: 6 goto(s); 4 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v1 = 0;
-  temp_v5 = 6;
-  piVar1 = (int *)(param_2 + 0x20);
-  piVar4 = (int *)(param_2 + 8);
-  do {
-    temp_v2 = *piVar1;
-    piVar1 = piVar1 + 1;
-    temp_v3 = 0;
-    if (temp_v2 != 0) {
-      temp_v3 = *piVar4 + param_2;
-    }
-    piVar4 = piVar4 + 1;
-    *(int *)(param_1 + 0x5c + temp_v1 * 4) = temp_v3;
-    temp_v5 = temp_v5 - 1;
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v5 != 0);
-  *(unsigned int *)(param_1 + 0x74) = 0;
-  *(unsigned int *)(param_1 + 0x78) = 0;
-  temp_v4 = 0;
-  if (*(int *)(param_2 + 0x2c) != 0) {
-    temp_v4 = *(unsigned int *)(param_1 + 0x68);
-    if (param_4 != 0x10000) {
-      if (param_4 != 0x20000) {
-        if (param_4 != 0x30000) goto LAB_00187ea0;
-        temp_v0 = *(unsigned int *)(param_2 + 0x2c);
-        temp_v1 = 0x30000;
-      }
-      else {
-        temp_v0 = *(unsigned int *)(param_2 + 0x2c);
-        temp_v1 = 0x20000;
-      }
-      asdMemoryAlloc(temp_v1,0x100,0,temp_v0,1);
-      if (temp_v1 != 0) {
-        *(int *)(param_1 + 0x68) = temp_v1;
-        *(int *)(param_1 + 0x44) = temp_v1;
-        goto LAB_00187ea4;
-      }
-    }
-LAB_00187ea0:
-    param_4 = 0x10000;
-  }
-LAB_00187ea4:
-  if (*(int *)(param_2 + 0x30) != 0 && param_5 != 0x10000) {
-    if (param_5 != 0x20000) {
-      if (param_5 == 0x30000) {
-        temp_v0 = *(unsigned int *)(param_2 + 0x30);
-        temp_v1 = 0x30000;
-        asdMemoryAlloc(temp_v1,0x100,0,temp_v0,1);
-        if (temp_v1 != 0) {
-          *(int *)(param_1 + 0x6c) = temp_v1;
-          *(int *)(param_1 + 0x48) = temp_v1;
+    return kind == MEMORY_MAIN || kind == MEMORY_EXTRA;
+}
+
+/* Loads a camera animation resource into `state`: points its six tables into the resource, then
+ * allocates the animation blocks from the requested heaps (falling back to the resource itself when
+ * the heap is not selectable or full) and flushes the blocks it copied. */
+void FUN_00187e08(u8 *state, u8 *resource, s32 kindC, s32 kindA, s32 kindB)
+{
+    CameraAnimState *anim = (CameraAnimState *)state;
+    s32 *tableOffset = (s32 *)(resource + 8);
+    s32 *tablePresent = (s32 *)(resource + 0x20);
+    for (s32 i = 0; i < 6; i++)
+        anim->tables[i] = tablePresent[i] != 0 ? resource + tableOffset[i] : NULL;
+    anim->alignedA = NULL;
+    anim->alignedB = NULL;
+    void *previousA = NULL;
+    if (*(s32 *)(resource + 0x2C) != 0) {
+        previousA = anim->tables[3];
+        void *block = selectableKind(kindA) ? asdMemoryAlloc(kindA, 0x100, 0, *(u32 *)(resource + 0x2C), 1) : NULL;
+        if (block != NULL) {
+            anim->tables[3] = block;
+            anim->keyBlockCopy = block;
+        } else {
+            kindA = MEMORY_DEFAULT;
         }
-      }
     }
-    else {
-      temp_v0 = *(unsigned int *)(param_2 + 0x30);
-      temp_v1 = 0x20000;
-      asdMemoryAlloc(temp_v1,0x100,0,temp_v0,1);
-      if (temp_v1 != 0) {
-        *(int *)(param_1 + 0x6c) = temp_v1;
-        *(int *)(param_1 + 0x48) = temp_v1;
-      }
+    if (*(s32 *)(resource + 0x30) != 0 && kindB != MEMORY_DEFAULT && selectableKind(kindB)) {
+        void *block = asdMemoryAlloc(kindB, 0x100, 0, *(u32 *)(resource + 0x30), 1);
+        if (block != NULL) {
+            anim->tables[4] = block;
+            anim->curveBlockCopy = block;
+        }
     }
-  }
-  temp_v0 = 0x10000;
-  asdMemoryAllocAligned(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x38),4,1);
-  *(unsigned int *)(param_1 + 0x74) = temp_v0;
-  *(unsigned int *)(param_1 + 0x4c) = temp_v0;
-  *(unsigned int *)(param_1 + 0x7c) = *(unsigned int *)(param_1 + 100);
-  if (*(int *)(param_2 + 0x28) != 0) {
-    if (param_3 != 0x10000) {
-      if (param_3 != 0x20000) {
-        if (param_3 != 0x30000) goto LAB_00187f20;
-        temp_v0 = *(unsigned int *)(param_2 + 0x28);
-        temp_v1 = 0x30000;
-      }
-      else {
-        temp_v0 = *(unsigned int *)(param_2 + 0x28);
-        temp_v1 = 0x20000;
-      }
-      asdMemoryAlloc(temp_v1,0x100,0,temp_v0,1);
-      if (temp_v1 != 0) {
-        *(int *)(param_1 + 100) = temp_v1;
-        *(int *)(param_1 + 0x50) = temp_v1;
-        goto LAB_00187f24;
-      }
+    void *aligned = asdMemoryAllocAligned(MEMORY_DEFAULT, 0x100, 0, *(u32 *)(resource + 0x38), 4, 1);
+    anim->alignedA = aligned;
+    anim->alignedBlockCopy = aligned;
+    anim->alignedAMirror = anim->tables[2];
+    if (*(s32 *)(resource + 0x28) != 0) {
+        void *block = selectableKind(kindC) ? asdMemoryAlloc(kindC, 0x100, 0, *(u32 *)(resource + 0x28), 1) : NULL;
+        if (block != NULL) {
+            anim->tables[2] = block;
+            anim->thirdBlockCopy = block;
+        } else {
+            kindC = MEMORY_DEFAULT;
+        }
     }
-LAB_00187f20:
-    param_3 = 0x10000;
-  }
-LAB_00187f24:
-  temp_v0 = 0x10000;
-  asdMemoryAllocAligned(0x10000,0x100,0,*(unsigned int *)(param_2 + 0x3c),0x10,1);
-  *(unsigned int *)(param_1 + 0x78) = temp_v0;
-  *(unsigned int *)(param_1 + 0x80) = temp_v0;
-  *(unsigned int *)(param_1 + 0x58) = temp_v0;
-  temp_v1 = param_3;
-  if (*(int *)(param_2 + 0x3c) != 0) {
-    if (param_3 != 0x10000) {
-      if (param_3 != 0x20000) {
-        if (param_3 != 0x30000) goto LAB_00187f84;
-        temp_v0 = *(unsigned int *)(param_2 + 0x3c);
-        temp_v5 = 0x30000;
-      }
-      else {
-        temp_v0 = *(unsigned int *)(param_2 + 0x3c);
-        temp_v5 = 0x20000;
-      }
-      asdMemoryAlloc(temp_v5,0x100,0,temp_v0,1);
-      if (temp_v5 != 0) {
-        *(int *)(param_1 + 0x78) = temp_v5;
-        *(int *)(param_1 + 0x54) = temp_v5;
-        goto LAB_00187f88;
-      }
+    void *alignedB = asdMemoryAllocAligned(MEMORY_DEFAULT, 0x100, 0, *(u32 *)(resource + 0x3C), 0x10, 1);
+    anim->alignedB = alignedB;
+    anim->alignedBMirror = alignedB;
+    anim->lastBlockCopy = alignedB;
+    s32 kindD = kindC;
+    if (*(s32 *)(resource + 0x3C) != 0) {
+        void *block = selectableKind(kindC) ? asdMemoryAlloc(kindC, 0x100, 0, *(u32 *)(resource + 0x3C), 1) : NULL;
+        if (block != NULL) {
+            anim->alignedB = block;
+            anim->fourthBlockCopy = block;
+        } else {
+            kindD = MEMORY_DEFAULT;
+        }
     }
-LAB_00187f84:
-    temp_v1 = 0x10000;
-  }
-LAB_00187f88:
-  temp_v5 = param_1 + 0x5c;
-  _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(param_1 + 0xc,param_2);
-  if (param_4 != 0x10000) {
-    temp_v5 = *(int *)(param_2 + 0x2c);
-  }
-  if (param_4 != 0x10000 && temp_v5 != 0) {
-    FUN_0017cf74(temp_v4,*(unsigned int *)(param_1 + 0x68));
-  }
-  temp_v5 = *(int *)(param_2 + 0x30);
-  if (temp_v5 != 0 && param_5 != 0x10000) {
-    FUN_0017cf74(0,*(unsigned int *)(param_1 + 0x6c));
-  }
-  if (param_3 != 0x10000) {
-    temp_v5 = *(int *)(param_2 + 0x28);
-  }
-  if (param_3 != 0x10000 && temp_v5 != 0) {
-    FUN_0017cf74(*(unsigned int *)(param_1 + 0x7c),*(unsigned int *)(param_1 + 100));
-  }
-  if (temp_v1 != 0x10000) {
-    temp_v5 = *(int *)(param_2 + 0x3c);
-  }
-  if (temp_v1 == 0x10000 || temp_v5 == 0) {
-    return;
-  }
-  FUN_0017cf74(*(unsigned int *)(param_1 + 0x80),*(unsigned int *)(param_1 + 0x78));
-  return;
+    _ZN18AsdAnimCameraState10InitializeEPK21AsdAnimCameraResourceP18AsdAnimCameraSetup(state + 0xC, resource);
+    if (kindA != MEMORY_DEFAULT && *(s32 *)(resource + 0x2C) != 0)
+        FUN_0017cf74(previousA, anim->tables[3]);
+    if (*(s32 *)(resource + 0x30) != 0 && kindB != MEMORY_DEFAULT)
+        FUN_0017cf74(NULL, anim->tables[4]);
+    if (kindC != MEMORY_DEFAULT && *(s32 *)(resource + 0x28) != 0)
+        FUN_0017cf74(anim->alignedAMirror, anim->tables[2]);
+    if (kindD != MEMORY_DEFAULT && *(s32 *)(resource + 0x3C) != 0)
+        FUN_0017cf74(anim->alignedBMirror, anim->alignedB);
 }
 
 } /* extern "C" */

@@ -25,7 +25,7 @@ typedef struct AsdAmbientLightResource {
     /* 0x08 */ AsdAmbientLightData *data;
 } AsdAmbientLightResource;
 
-/* The build description FUN_0011d9c4 takes. */
+/* The build description _ZN9Obj4210946createEPvP18AsdAllocatorObject takes. */
 typedef struct AsdAmbientLightDesc {
     /* 0x00 */ u8 unk00;
     /* 0x01 */ u8 unk01;
@@ -43,7 +43,7 @@ typedef struct AsdAmbientLight {
 
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdMemoryGetDefaultAllocator(void);
-AsdAmbientLightResource *FUN_0011d9c4(const AsdAmbientLightDesc *desc, void *allocator);
+AsdAmbientLightResource *_ZN9Obj4210946createEPvP18AsdAllocatorObject(const AsdAmbientLightDesc *desc, void *allocator);
 u32 nw_ut_FloatColor_ToPicaU32(const AsdFloatColor *color);
 
 /* Creates an ambient light with a dim grey (0.2) colour. */
@@ -64,7 +64,7 @@ AsdAmbientLight *FUN_002cb80c(void)
     desc.unk04 = 0;
     desc.unk08 = 0;
     desc.unk0C = 1;
-    light->resource = FUN_0011d9c4(&desc, allocator);
+    light->resource = _ZN9Obj4210946createEPvP18AsdAllocatorObject(&desc, allocator);
     light->data = light->resource->data;
     light->data->color.r = 0.2f;
     light->data->color.g = 0.2f;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack addressing and the 16-byte image-choice copy lower differently, with a different saved-register allocation. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 23 diff lines remain, scheduling/register allocation only. */
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/AsdDebugHooks.h"
@@ -25,7 +25,7 @@ void messageDrawSelectedImagePair(const MessageImageSelector *owner, const f32 *
     FUN_002c39a4(g_titleScene);
     FUN_002bed3c();
     RenderCtx *context = g_titleScene;
-    renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
+    renderCtxPushA(context, FUN_002c5d80(1, 0));
     efctSetSpeed(*alpha);
     MessageImageChoices images = g_messageSelectedImagePairs;
     s32 depth = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.35f);

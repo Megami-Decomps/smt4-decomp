@@ -1,178 +1,135 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00434e88` (_code @ 0x434e88, 0x320 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: classifies an id-chain pattern (exact, prefix, suffix, contains) and matches it against a wide string; written from the decompilation, branch layout not compared with retail */
+#include "common.h"
+
+#define PAT_LITERAL 0        /* a plain id */
+#define PAT_WILD_OPEN 7      /* start of "anything" (flag 0), followed by PAT_WILD_BODY */
+#define PAT_WILD_BODY 0xC
+#define PAT_ANCHOR 0x11      /* flag 0: begin anchor, flag 1: end anchor */
+#define PAT_END 0x12
+
+#define PAT_RESULT_UNSUPPORTED 0
+#define PAT_RESULT_MATCH 1
+#define PAT_RESULT_NO_MATCH 2
+
+/* A node of the pattern chain. */
+struct IdPatternNode {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ IdPatternNode *next;
+    /* 0x08 */ u8 kind;
+    /* 0x09 */ u8 unk09;
+    /* 0x0A */ u8 flag;
+};
+
+struct IdPattern {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ IdPatternNode *first;
+};
+
+struct IdChainCursor {
+    IdPatternNode *node;
+};
+
+struct IdSequence {
+    /* 0x00 */ u16 *ids;
+    /* 0x04 */ u32 length;
+};
 
 extern "C" {
+u32 wstrlenU16(u16 *text);
+bool idChainMatchSequence(IdSequence *sequence, IdChainCursor *cursor, u32 start, u32 count);
 
-int idChainMatchSequence(...);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned int wstrlenU16(unsigned int);
-/* Supplied declaration required: idChainMatchSequence. */
-
-
-unsigned int FUN_00434e88(unsigned int *param_1,int param_2,unsigned int param_3,int param_4)
-
+/* Counts the literal nodes from `node` on and returns the node that ends the run. */
+static __inline IdPatternNode *patternSkipLiterals(IdPatternNode *node, u32 *count)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  int temp_v7;
-  
-  *param_1 = param_3;
-  temp_v7 = param_4;
-  temp_v1 = wstrlenU16(param_3);
-  param_1[1] = temp_v1;
-  temp_v7 = *(int *)(param_2 + 4);
-  temp_v0 = *(char *)(temp_v7 + 8);
-  if (temp_v0 == '\0') {
-    temp_v4 = 1;
-    for (temp_v2 = *(int *)(temp_v7 + 4); temp_v0 = *(char *)(temp_v2 + 8), temp_v0 == '\0';
-        temp_v2 = *(int *)(temp_v2 + 4)) {
-      temp_v4 = temp_v4 + 1;
+    while (node->kind == PAT_LITERAL) {
+        (*count)++;
+        node = node->next;
     }
-    if (temp_v0 != '\a') {
-      if (temp_v0 != '\x11') {
-        if (temp_v0 != '\x12') {
-          return 0;
+    return node;
+}
+
+/* Returns 1 when `text` matches the pattern, 2 when it does not and 0 for a pattern shape that
+ * is not supported. */
+u32 FUN_00434e88(IdSequence *sequence, IdPattern *pattern, u16 *text, s32 unused)
+{
+    sequence->ids = text;
+    u32 length = wstrlenU16(text);
+    sequence->length = length;
+    IdChainCursor cursor;
+    cursor.node = pattern->first;
+    IdPatternNode *first = cursor.node;
+    u32 count;
+    bool matched;
+
+    if (first->kind == PAT_LITERAL) {
+        /* literals, then one of: end, end anchor, trailing wildcard */
+        count = 1;
+        IdPatternNode *tail = patternSkipLiterals(first->next, &count);
+        if (tail->kind == PAT_WILD_OPEN) {
+            if (tail->flag != 0 || tail->next->kind != PAT_WILD_BODY || tail->next->next->kind != PAT_END)
+                return PAT_RESULT_UNSUPPORTED;
+            if (length < count)
+                return PAT_RESULT_NO_MATCH;
+        } else if (tail->kind == PAT_ANCHOR) {
+            if (tail->flag != 1 || tail->next->kind != PAT_END)
+                return PAT_RESULT_UNSUPPORTED;
+            if (length != count)
+                return PAT_RESULT_NO_MATCH;
+        } else if (tail->kind == PAT_END) {
+            if (length != count)
+                return PAT_RESULT_NO_MATCH;
+        } else {
+            return PAT_RESULT_UNSUPPORTED;
         }
-        if (temp_v1 != temp_v4) {
-          return 2;
+        matched = idChainMatchSequence(sequence, &cursor, 0, count);
+    } else if (first->kind == PAT_WILD_OPEN) {
+        /* leading wildcard: literals, then end (suffix) or another wildcard (contains) */
+        if (first->flag != 0 || first->next->kind != PAT_WILD_BODY)
+            return PAT_RESULT_UNSUPPORTED;
+        count = 0;
+        IdPatternNode *literals = first->next->next;
+        IdPatternNode *tail = patternSkipLiterals(literals, &count);
+        if (tail->kind == PAT_WILD_OPEN) {
+            if (count == 0 || tail->flag != 0 || tail->next->kind != PAT_WILD_BODY || tail->next->next->kind != PAT_END)
+                return PAT_RESULT_UNSUPPORTED;
+            if (length < count)
+                return PAT_RESULT_NO_MATCH;
+            for (u32 start = 0; start + count <= sequence->length; start++) {
+                cursor.node = literals;
+                if (idChainMatchSequence(sequence, &cursor, start, count))
+                    return PAT_RESULT_MATCH;
+            }
+            return PAT_RESULT_NO_MATCH;
         }
-        temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
-      }
-      else {
-        if (*(char *)(temp_v2 + 10) != '\x01') {
-          return 0;
+        if (tail->kind != PAT_END || count == 0)
+            return PAT_RESULT_UNSUPPORTED;
+        if (length < count)
+            return PAT_RESULT_NO_MATCH;
+        cursor.node = literals;
+        matched = idChainMatchSequence(sequence, &cursor, length - count, count);
+    } else if (first->kind == PAT_ANCHOR && first->flag == 0) {
+        /* begin anchor: literals, then end or end anchor */
+        count = 0;
+        cursor.node = first->next;
+        IdPatternNode *tail = patternSkipLiterals(cursor.node, &count);
+        if (tail->kind == PAT_ANCHOR) {
+            if (count == 0 || tail->flag != 1 || tail->next->kind != PAT_END)
+                return PAT_RESULT_UNSUPPORTED;
+            if (length != count)
+                return PAT_RESULT_NO_MATCH;
+        } else if (tail->kind == PAT_END) {
+            if (count == 0)
+                return PAT_RESULT_UNSUPPORTED;
+            if (length != count)
+                return PAT_RESULT_NO_MATCH;
+        } else {
+            return PAT_RESULT_UNSUPPORTED;
         }
-        if (*(char *)(*(int *)(temp_v2 + 4) + 8) != '\x12') {
-          return 0;
-        }
-        if (temp_v1 != temp_v4) {
-          return 2;
-        }
-        temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
-      }
+        matched = idChainMatchSequence(sequence, &cursor, 0, count);
+    } else {
+        return PAT_RESULT_UNSUPPORTED;
     }
-    else {
-      if (*(char *)(temp_v2 + 10) != '\0') {
-        return 0;
-      }
-      if (*(char *)(*(int *)(temp_v2 + 4) + 8) != '\f') {
-        return 0;
-      }
-      if (*(char *)(*(int *)(*(int *)(temp_v2 + 4) + 4) + 8) != '\x12') {
-        return 0;
-      }
-      if (temp_v1 < temp_v4) {
-        return 2;
-      }
-      temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
-    }
-  }
-  else if (temp_v0 != '\a') {
-    temp_v6 = temp_v0 == '\x11';
-    if (temp_v6) {
-      temp_v0 = *(char *)(temp_v7 + 10);
-    }
-    if (!temp_v6 || temp_v0 != '\0') {
-      return 0;
-    }
-    temp_v4 = 0;
-    temp_v7 = *(int *)(temp_v7 + 4);
-    for (temp_v2 = temp_v7; temp_v0 = *(char *)(temp_v2 + 8), temp_v0 == '\0'; temp_v2 = *(int *)(temp_v2 + 4))
-    {
-      temp_v4 = temp_v4 + 1;
-    }
-    if (temp_v0 != '\x11') {
-      if (temp_v0 != '\x12') {
-        return 0;
-      }
-      if (temp_v4 == 0) {
-        return 0;
-      }
-      if (temp_v1 != temp_v4) {
-        return 2;
-      }
-      temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
-    }
-    else {
-      if (temp_v4 == 0) {
-        return 0;
-      }
-      if (*(char *)(temp_v2 + 10) != '\x01') {
-        return 0;
-      }
-      if (*(char *)(*(int *)(temp_v2 + 4) + 8) != '\x12') {
-        return 0;
-      }
-      if (temp_v1 != temp_v4) {
-        return 2;
-      }
-      temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
-    }
-  }
-  else {
-    if ((*(char *)(temp_v7 + 10) != '\0') || (*(char *)(*(int *)(temp_v7 + 4) + 8) != '\f')) {
-      return 0;
-    }
-    temp_v4 = 0;
-    temp_v5 = *(int *)(*(int *)(temp_v7 + 4) + 4);
-    for (temp_v2 = temp_v5; temp_v0 = *(char *)(temp_v2 + 8), temp_v0 == '\0'; temp_v2 = *(int *)(temp_v2 + 4)) {
-      temp_v4 = temp_v4 + 1;
-    }
-    if (temp_v0 == '\a') {
-      if (temp_v4 == 0) {
-        return 0;
-      }
-      if (*(char *)(temp_v2 + 10) != '\0') {
-        return 0;
-      }
-      if (*(char *)(*(int *)(temp_v2 + 4) + 8) != '\f') {
-        return 0;
-      }
-      if (*(char *)(*(int *)(*(int *)(temp_v2 + 4) + 4) + 8) == '\x12') {
-        temp_v2 = 0;
-        if (temp_v1 < temp_v4) {
-          return 2;
-        }
-        do {
-          temp_v7 = temp_v5;
-          temp_v3 = idChainMatchSequence(param_1,&temp_v7,temp_v2,temp_v4);
-          if (temp_v3 != 0) {
-            return 1;
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 + temp_v4 <= (unsigned int)param_1[1]);
-        return 2;
-      }
-      return 0;
-    }
-    if (temp_v0 != '\x12') {
-      return 0;
-    }
-    if (temp_v4 == 0) {
-      return 0;
-    }
-    if (temp_v1 < temp_v4) {
-      return 2;
-    }
-    temp_v7 = temp_v5;
-    temp_v2 = idChainMatchSequence(param_1,&temp_v7,temp_v1 - temp_v4);
-  }
-  if (temp_v2 == 0) {
-    return 2;
-  }
-  return 1;
+    return matched ? PAT_RESULT_MATCH : PAT_RESULT_NO_MATCH;
 }
 
 } /* extern "C" */

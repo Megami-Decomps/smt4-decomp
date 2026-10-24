@@ -1,147 +1,134 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028c2ec` (_code @ 0x28c2ec, 0x328 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near-structure (172 rows against 203): same skip test, special-row cases, member/row loops and index maths from the asm; retail has extra armcc nops around calls (inlined stubs) and re-tests `target < 0` before the second special case, with the row pointer reloaded (ldr/rsb/str order) after each FUN_004bcbb4, which ours schedules differently */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
 
 extern "C" {
 
-int FUN_002a4878(...);
-int FUN_002c7bb0(...);
-int FUN_003344b4(int, unsigned int);
-int FUN_004bcbb4(...);
+/* Row shown in the party panel (observed fields only). */
+struct PanelEntry {
+    u8 pad00[0x34];
+    u32 slot;            /* 0x34: party slot id, or -1/-2 for the special rows */
+    u8 pad38[8];
+    u32 result;          /* 0x40 */
+    s32 value;           /* 0x44 */
+};
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+/* Party panel (observed fields only). */
+struct PartyPanel {
+    u8 pad00[0x2C];
+    s32 page;            /* 0x2C */
+    u8 pad30[6];
+    u16 skillId;         /* 0x36 */
+    s16 target;          /* 0x38 */
+    u8 pad3A[8];
+    u8 compactLayout;    /* 0x42 */
+    u8 pad43[0xA10 - 0x43];
+    PanelEntry *cursor;  /* 0xA10 */
+    PanelEntry *member[3];   /* 0xA14 */
+    PanelEntry *row[24];     /* 0xA20 */
+    s32 rowTarget[24][2];    /* 0xA80: target id at +0 of each 8-byte pair */
+};
 
-extern int g_btlScriptUnit; /* 0x57113c */
-extern int g_partyPanel; /* 0x57f268 */
+struct SlotTableView {
+    u8 pad0000[0x1C9F];
+    s8 byIndex[1];           /* 0x1C9F: slot ids, 1-based */
+};
 
-extern int btlGetMainState(void);
-extern unsigned int gameGetSlotRecord(unsigned int);
-extern int gameGetSlotTable(void);
-extern int btlMainGetUnk14(void);
-/* Supplied declaration required: FUN_002a4878. */
-extern int FUN_002a4894(unsigned int);
-/* Supplied declaration required: FUN_002c7bb0. */
-/* Supplied declaration required: FUN_003344b4. */
-extern int FUN_003df57c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_004bcbb4. */
-extern int btlUnitGet(void);
+struct UnitState {
+    u8 pad00[0x28];
+    u8 *action;              /* 0x28 */
+};
 
+extern PartyPanel *g_partyPanel;   /* 0x57f268 */
+extern u32 g_btlScriptUnit;        /* 0x57113c */
 
-void FUN_0028c2ec(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+s32 gameGetSlotTable(void);
+s32 btlGetMainState(void);
+UnitState *btlUnitGet(u32 unit);
+u32 gameGetSlotRecord(u32 slot);
+s32 FUN_004bcbb4(u32 record, u32 skillId);
+s32 FUN_003df57c(u32 skillId, s32 flag);
+u32 btlMainGetUnk14(void);
+s32 FUN_002a4878(u32 id);
+s32 FUN_002a4894(u32 id);
+s32 FUN_002c7bb0(s32 target, s32 slot, u32 skillId, u32 *out);
+s32 FUN_003344b4(u32 value, s32 amount);
 
+/* Refreshes the skill-cost preview of the party panel rows for the current skill/target and the
+ * entry of list position `id` (`direct` selects the unpaged layout). */
+void FUN_0028c2ec(u32 id, s32 direct)
 {
-/* irregular: 3 goto(s); 4 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  
-  temp_v6 = g_partyPanel;
-  temp_v8 = param_4;
-  temp_v2 = gameGetSlotTable();
-  temp_v8 = 0;
-  if (((*(short *)(temp_v6 + 0x36) == 0x7d) && (temp_v3 = btlGetMainState(), temp_v3 != 0)) &&
-     (g_btlScriptUnit != 0)) {
-    temp_v3 = btlUnitGet();
-    if ((*(int *)(temp_v3 + 0x28) != 0) && (*(short *)(*(int *)(temp_v3 + 0x28) + 0x1be) == 8))
-    goto LAB_0028c444;
-  }
-  if (*(short *)(temp_v6 + 0x38) < 0) {
-    if (*(int *)(*(int *)(temp_v6 + 0xa10) + 0x34) == -1) {
-      temp_v3 = FUN_003df57c(*(unsigned short *)(temp_v6 + 0x36),1);
-      *(int *)(*(int *)(temp_v6 + 0xa10) + 0x44) = -temp_v3;
-      goto LAB_0028c444;
+    PartyPanel *panel = g_partyPanel;
+    SlotTableView *slots = (SlotTableView *)gameGetSlotTable();
+    u32 out = 0;
+    s32 index;
+
+    s32 skipPreview = 0;
+    if (panel->skillId == 125 && btlGetMainState() != 0 && g_btlScriptUnit != 0) {
+        UnitState *unit = btlUnitGet(g_btlScriptUnit);
+        if (unit->action != 0 && *(u16 *)(unit->action + 0x1BE) == 8) {
+            skipPreview = 1;
+        }
     }
-    if ((*(short *)(temp_v6 + 0x38) < 0) && (*(int *)(*(int *)(temp_v6 + 0xa10) + 0x34) == -2)) {
-      temp_v3 = btlMainGetUnk14();
-      if (temp_v3 != 0) {
-        temp_v3 = FUN_004bcbb4(temp_v3,*(unsigned short *)(temp_v6 + 0x36));
-        *(int *)(*(int *)(temp_v6 + 0xa10) + 0x44) = -temp_v3;
-      }
-      goto LAB_0028c444;
+    if (!skipPreview) {
+        if (panel->target < 0 && panel->cursor->slot == (u32)-1) {
+            panel->cursor->value = -FUN_003df57c(panel->skillId, 1);
+        } else if (panel->target < 0 && panel->cursor->slot == (u32)-2) {
+            u32 unit = btlMainGetUnk14();
+            if (unit != 0) {
+                panel->cursor->value = -FUN_004bcbb4(unit, panel->skillId);
+            }
+        } else {
+            for (s32 i = 0; i < 3; i++) {
+                if (slots->byIndex[i + 1] == panel->target) {
+                    u32 record = gameGetSlotRecord(panel->member[i]->slot);
+                    panel->member[i]->value = -FUN_004bcbb4(record, panel->skillId);
+                }
+            }
+            for (s32 i = 0; i < 24; i++) {
+                if (panel->rowTarget[i][0] == panel->target) {
+                    u32 record = gameGetSlotRecord(panel->row[i]->slot);
+                    panel->row[i]->value = -FUN_004bcbb4(record, panel->skillId);
+                }
+            }
+        }
     }
-  }
-  temp_v3 = 0;
-  do {
-    if ((int)*(char *)(temp_v2 + temp_v3 + 0x1ca0) == (int)*(short *)(temp_v6 + 0x38)) {
-      temp_v7 = temp_v6 + temp_v3 * 4;
-      temp_v4 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v7 + 0xa14) + 0x34));
-      temp_v5 = FUN_004bcbb4(temp_v4,*(unsigned short *)(temp_v6 + 0x36));
-      *(int *)(*(int *)(temp_v7 + 0xa14) + 0x44) = -temp_v5;
+
+    if (direct != 0) {
+        if (panel->compactLayout != 0) {
+            index = FUN_002a4878(id) + FUN_002a4894(id) * 4;
+        } else {
+            index = FUN_002a4894(id) * 4 + panel->page * 12 + FUN_002a4878(id);
+        }
+    } else {
+        s32 count = FUN_002a4894(id);
+        if (count < 1) {
+            s32 position = FUN_002a4878(id);
+            s32 slot;
+            if (position != 0) {
+                slot = slots->byIndex[position];
+            } else {
+                slot = -1;
+            }
+            FUN_002c7bb0(panel->target, slot, panel->skillId, &out);
+            panel->member[position]->result = out;
+            FUN_003344b4(out, panel->member[position]->value);
+            return;
+        }
+        if (panel->compactLayout != 0) {
+            index = FUN_002a4878(id) + count * 4;
+        } else {
+            index = FUN_002a4878(id) + count * 4 + panel->page * 12;
+        }
+        index = index - 4;
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v3 = 0;
-  do {
-    if (*(int *)(temp_v6 + temp_v3 * 8 + 0xa80) == (int)*(short *)(temp_v6 + 0x38)) {
-      temp_v7 = temp_v6 + temp_v3 * 4;
-      temp_v4 = gameGetSlotRecord(*(unsigned int *)(*(int *)(temp_v7 + 0xa20) + 0x34));
-      temp_v5 = FUN_004bcbb4(temp_v4,*(unsigned short *)(temp_v6 + 0x36));
-      *(int *)(*(int *)(temp_v7 + 0xa20) + 0x44) = -temp_v5;
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x18);
-LAB_0028c444:
-  if (param_2 != 0) {
-    if (*(char *)(temp_v6 + 0x42) != '\0') {
-      temp_v2 = FUN_002a4878();
-      temp_v3 = FUN_002a4894(param_1);
-      temp_v2 = temp_v2 + temp_v3 * 4;
-    }
-    else {
-      temp_v3 = FUN_002a4894(param_1);
-      temp_v5 = *(int *)(temp_v6 + 0x2c);
-      temp_v2 = FUN_002a4878(param_1);
-      temp_v2 = temp_v3 * 4 + temp_v5 * 0xc + temp_v2;
-    }
-  }
-  else {
-    temp_v3 = FUN_002a4894(param_1);
-    if (temp_v3 < 1) {
-      temp_v3 = FUN_002a4878(param_1);
-      if (temp_v3 != 0) {
-        temp_v0 = *(unsigned short *)(temp_v6 + 0x36);
-        temp_v2 = (int)*(char *)(temp_v2 + temp_v3 + 0x1c9f);
-        temp_v1 = *(short *)(temp_v6 + 0x38);
-      }
-      else {
-        temp_v0 = *(unsigned short *)(temp_v6 + 0x36);
-        temp_v1 = *(short *)(temp_v6 + 0x38);
-        temp_v2 = -1;
-      }
-      FUN_002c7bb0((int)temp_v1,temp_v2,temp_v0,&temp_v8);
-      temp_v6 = temp_v6 + temp_v3 * 4;
-      *(unsigned int *)(*(int *)(temp_v6 + 0xa10) + 0x40) = temp_v8;
-      FUN_003344b4(temp_v8,*(unsigned int *)(*(int *)(temp_v6 + 0xa10) + 0x44));
-      return;
-    }
-    if (*(char *)(temp_v6 + 0x42) != '\0') {
-      temp_v2 = FUN_002a4878();
-      temp_v3 = FUN_002a4894(param_1);
-      temp_v2 = temp_v2 + temp_v3 * 4;
-    }
-    else {
-      temp_v3 = FUN_002a4894(param_1);
-      temp_v5 = *(int *)(temp_v6 + 0x2c);
-      temp_v2 = FUN_002a4878(param_1);
-      temp_v2 = temp_v2 + temp_v3 * 4 + temp_v5 * 0xc;
-    }
-    temp_v2 = temp_v2 - 4;
-  }
-  FUN_002c7bb0((int)*(short *)(temp_v6 + 0x38),*(unsigned int *)(temp_v6 + temp_v2 * 8 + 0xa80),
-               *(unsigned short *)(temp_v6 + 0x36),&temp_v8);
-  temp_v6 = temp_v6 + temp_v2 * 4;
-  *(unsigned int *)(*(int *)(temp_v6 + 0xa20) + 0x40) = temp_v8;
-  FUN_003344b4(temp_v8,*(unsigned int *)(*(int *)(temp_v6 + 0xa20) + 0x44));
-  return;
+    FUN_002c7bb0(panel->target, panel->rowTarget[index][0], panel->skillId, &out);
+    panel->row[index]->result = out;
+    FUN_003344b4(out, panel->row[index]->value);
 }
 
 } /* extern "C" */

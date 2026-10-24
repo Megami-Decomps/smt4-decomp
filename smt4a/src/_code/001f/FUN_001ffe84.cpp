@@ -26,7 +26,7 @@ int FUN_0020d700(void);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
-int FUN_0028b088(...);
+int campShowSelectedEntryHelp(...);
 int statusPanelSetOpen(...);
 int campTouchRegionsRemoveGroup(...);
 int FUN_002c7e24(void);
@@ -70,7 +70,7 @@ extern int FUN_0022e714(void);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_002684d0(int, int);
-/* Supplied declaration required: FUN_0028b088. */
+/* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
@@ -157,7 +157,7 @@ void FUN_001ffe84(void)
     campTouchRegionsRemoveGroup(temp_v8 + 0x1ec,1);
     FUN_0022e774();
     FUN_0035dbd4(0);
-    FUN_0028b088(0);
+    campShowSelectedEntryHelp(0);
     FUN_0021b274(3,0xffffffff,0);
     *(unsigned int *)(temp_v8 + 0x24) = 6;
     campChangeState(5);
@@ -258,7 +258,7 @@ void FUN_001ffe84(void)
   if (temp_v4 != 0) {
     temp_v7 = FUN_002a4878(temp_v8 + 0x40);
     FUN_003da8f4((int)*(char *)(temp_v8 + 0xa4),temp_v7);
-    FUN_0028b088();
+    campShowSelectedEntryHelp();
     return;
   }
   temp_v4 = temp_v8 + 0x1ec;
@@ -266,7 +266,7 @@ void FUN_001ffe84(void)
   if (temp_v4 != 0) {
     temp_v7 = FUN_002a4878(temp_v8 + 0x40);
     FUN_003da8f4((int)*(char *)(temp_v8 + 0xa4),temp_v7);
-    FUN_0028b088();
+    campShowSelectedEntryHelp();
     return;
   }
   temp_v4 = 0;
@@ -411,7 +411,7 @@ void FUN_001ffe84(void)
     FUN_003344b4(0);
     FUN_0022e774();
     FUN_0035dbd4(0);
-    FUN_0028b088(0);
+    campShowSelectedEntryHelp(0);
     FUN_0021b274(3,0xffffffff,0);
     *(unsigned int *)(temp_v8 + 0x24) = 6;
     campChangeState(5);

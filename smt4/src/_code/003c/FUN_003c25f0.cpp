@@ -1,155 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c25f0` (_code @ 0x3c25f0, 0x2ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (174 vs ~176 rows); register allocation (retail keeps the zero in sl) and branch layout of the suppress/roll tail differ */
+#include "common.h"
+
+// Entry of data table 0x24 (0x94 bytes): which category variant to roll.
+struct VariantRequest {
+    u8 kind;            // 0x00
+    u8 group;           // 0x01
+    u16 variant;        // 0x02
+    u8 unk04[0x90];
+};
+
+// Per-variant runtime state: the active id, the rolled-group bits and a countdown.
+struct VariantState {
+    u16 id;             // 0x00
+    u8 rolledGroups;    // 0x02
+    u8 timerAndFlags;   // 0x03: bits 0-4 countdown, bits 5-7 flags
+};
+
+// Variant definition row: id, chance and duration.
+struct VariantRow {
+    u16 id;             // +0
+    u16 chance;         // +2: < 1000 plain percent, otherwise group*1000 + percent
+    u16 duration;       // +4
+};
 
 extern "C" {
 
-int dataTable24Sub0Get(void);
-int dataTable24Sub0GetEntries(void);
+VariantRequest* dataTable24Sub0GetEntries(void);
+s32 dataTable24Sub0Get(void);
+VariantState* FUN_002c0a2c(u8 group, u8 kind, s16 variant);
+s32 FUN_002c0a84(VariantState* state);
+u16* dataTableFindCategoryVariant(u8 group, u8 kind, s16 variant);
+s32 gameFlagIsSet(u32 flag);
+u32 randNextInRange(u32 range);
 
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern unsigned short *dataTableFindCategoryVariant(char, char, short);
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int randNextInRange(unsigned int);
-extern unsigned short *FUN_002c0a2c(char, char, short);
-extern int FUN_002c0a84(void);
-/* Supplied declaration required: dataTable24Sub0Get. */
-/* Supplied declaration required: dataTable24Sub0GetEntries. */
-
-
-void FUN_003c25f0(int param_1)
-
+// Re-rolls every category variant: counts the timers down and picks a new id when one expires.
+void FUN_003c25f0(void)
 {
-/* irregular: 2 goto(s); 2 native warning(s); review required */
-  unsigned int temp_v0;
-  char temp_v1;
-  char temp_v2;
-  unsigned short temp_v3;
-  unsigned char temp_v4;
-  int temp_v5;
-  int temp_v6;
-  unsigned short *puVar8;
-  unsigned short *puVar9;
-  unsigned short *puVar10;
-  unsigned short *puVar11;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  short temp_v10;
-  int temp_v11;
-  unsigned int temp_v12;
-  unsigned short temp_v13;
-  
-  dataTable24Sub0GetEntries();
-  temp_v5 = param_1;
-  dataTable24Sub0Get();
-  temp_v11 = 0;
-  if (temp_v11 < temp_v5) {
-    do {
-      temp_v6 = param_1 + temp_v11 * 0x94;
-      temp_v1 = *(char *)(param_1 + temp_v11 * 0x94);
-      temp_v2 = *(char *)(temp_v6 + 1);
-      temp_v10 = *(short *)(temp_v6 + 2);
-      if (temp_v2 != '\0') {
-        if (temp_v10 == 6) {
-          temp_v10 = 0;
+    VariantRequest* requests = dataTable24Sub0GetEntries();
+    s32 count = dataTable24Sub0Get();
+    for (s32 i = 0; i < count; i++) {
+        u8 kind = requests[i].kind;
+        u8 group = requests[i].group;
+        s16 variant = requests[i].variant;
+        if (group != 0) {
+            if (variant == 6) variant = 0;
+            else if (variant == 7) variant = 1;
+        } else if (variant == 7) {
+            variant = 6;
         }
-        else if (temp_v10 == 7) {
-          temp_v10 = 1;
+
+        VariantState* state = FUN_002c0a2c(group, kind, variant);
+        state->id = 0;
+        state->rolledGroups = 0;
+        state->timerAndFlags &= 0xc0;
+        s32 index = FUN_002c0a84(state);
+        state = FUN_002c0a2c(group, kind, variant);
+        if (index == 0) state->rolledGroups = 0;
+
+        u8 timer = state->timerAndFlags;
+        if ((timer & 0x1f) >= 2) {
+            state->timerAndFlags = (timer & 0xe0) | ((timer - 1) & 0x1f);
+            continue;
         }
-      }
-      else if (temp_v10 == 7) {
-        temp_v10 = 6;
-      }
-      puVar8 = (unsigned short *)FUN_002c0a2c(temp_v2,temp_v1,temp_v10);
-      *puVar8 = 0;
-      *(unsigned char *)(puVar8 + 1) = 0;
-      *(unsigned char *)((int)puVar8 + 3) = *(unsigned char *)((int)puVar8 + 3) & 0xc0;
-      temp_v6 = FUN_002c0a84();
-      puVar9 = (unsigned short *)FUN_002c0a2c(temp_v2,temp_v1,temp_v10);
-      if (temp_v6 == 0) {
-        *(unsigned char *)(puVar9 + 1) = 0;
-      }
-      temp_v4 = *(unsigned char *)((int)puVar9 + 3);
-      if ((temp_v4 & 0x1f) >= 2) {
-        *(unsigned char *)((int)puVar9 + 3) = (temp_v4 & 0xe0) | ((temp_v4 - 1) & 0x1f);
-      }
-      else {
-        *(unsigned char *)((int)puVar9 + 3) = temp_v4 & 0xe0;
-        puVar10 = (unsigned short *)dataTableFindCategoryVariant(temp_v2,temp_v1,temp_v10);
-        temp_v13 = *puVar9;
-        temp_v8 = (unsigned int)puVar10[temp_v6 * 3 + 3];
-        if (temp_v8 == 0) {
-          temp_v13 = 0;
-        }
-        else if (temp_v8 < 1000) {
-          temp_v8 = randNextInRange(99);
-          if ((temp_v8 < puVar10[temp_v6 * 3 + 3]) && (temp_v3 = puVar10[temp_v6 * 3 + 2], temp_v3 != 0)) {
-            temp_v13 = temp_v3;
-          }
-        }
-        else {
-          temp_v8 = (temp_v8 * 0x4189 + 0x4189) >> 0x18;
-          temp_v0 = 1 << ((temp_v8 - 1) & 0xff);
-          if (((unsigned char)puVar9[1] & temp_v0) == 0) {
-            temp_v7 = temp_v6 + 1;
-            temp_v12 = 0;
-            if (0 < temp_v7) {
-              puVar11 = puVar10;
-              do {
-                puVar11 = puVar11 + 3;
-                temp_v9 = (unsigned int)*puVar11;
-                if ((temp_v8 * 1000 < temp_v9) && (temp_v9 < (temp_v8 + 1) * 1000)) {
-                  temp_v12 = temp_v12 + temp_v8 * -1000 + temp_v9;
+        state->timerAndFlags = timer & 0xe0;
+
+        VariantRow* rows = reinterpret_cast<VariantRow*>(dataTableFindCategoryVariant(group, kind, variant) + 2);
+        u16 rolled = state->id;
+        u32 chance = rows[index].chance;
+        if (chance == 0) {
+            rolled = 0;
+        } else if (chance < 1000) {
+            if (randNextInRange(99) < rows[index].chance && rows[index].id != 0) rolled = rows[index].id;
+        } else {
+            u32 band = (chance * 0x4189 + 0x4189) >> 0x18;
+            u32 mask = 1 << ((band - 1) & 0xff);
+            if ((state->rolledGroups & mask) == 0) {
+                u32 total = 0;
+                for (s32 j = 0; j <= index; j++) {
+                    u32 value = rows[j].chance;
+                    if (band * 1000 < value && value < (band + 1) * 1000) total += value - band * 1000;
                 }
-                temp_v7 = temp_v7 - 1;
-              } while (temp_v7 != 0);
+                if (randNextInRange(99) < total) {
+                    rolled = rows[index].id;
+                    state->rolledGroups |= mask;
+                }
             }
-            temp_v8 = randNextInRange(99);
-            if (temp_v8 < temp_v12) {
-              temp_v13 = puVar10[temp_v6 * 3 + 2];
-              *(unsigned char *)(puVar9 + 1) = (unsigned char)temp_v0 | (unsigned char)puVar9[1];
+        }
+
+        bool suppressed = gameFlagIsSet(0x668) != 0 && gameFlagIsSet(0x1d7) == 0 &&
+                          ((group == 0 && kind == 8) || (group == 1 && kind == 9));
+        if (suppressed) {
+            state->id = 0;
+            state->rolledGroups = 0;
+            state->timerAndFlags &= 0xc0;
+        } else if (state->id != 0) {
+            if (rolled == 0) {
+                state->id = rolled;
+                state->timerAndFlags = (rows[index].duration & 0x1f) | (state->timerAndFlags & 0xe0);
             }
-          }
+        } else if (rolled != 0) {
+            state->id = rolled;
+            state->timerAndFlags = (rows[index].duration & 0x1f) | (state->timerAndFlags & 0xe0);
         }
-        temp_v7 = gameFlagIsSet(0x668);
-        if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x1d7), temp_v7 == 0)) {
-          if (temp_v2 != '\0') {
-            if ((temp_v2 != '\x01') || (temp_v1 != '\t')) goto LAB_003c2834;
-          }
-          else if (temp_v1 != '\b') goto LAB_003c2834;
-          *puVar9 = 0;
-          *(unsigned char *)(puVar9 + 1) = 0;
-          temp_v4 = *(unsigned char *)((int)puVar9 + 3) & 0xc0;
-          *(unsigned char *)((int)puVar9 + 3) = temp_v4;
-        }
-        else {
-LAB_003c2834:
-          if (*puVar9 != 0) {
-            if (temp_v13 == 0) {
-              *puVar9 = temp_v13;
-              temp_v4 = ((unsigned char)puVar10[temp_v6 * 3 + 4] & 0x1f) | (*(unsigned char *)((int)puVar9 + 3) & 0xe0);
-              *(unsigned char *)((int)puVar9 + 3) = temp_v4;
-            }
-          }
-          else if (temp_v13 != 0) {
-            *puVar9 = temp_v13;
-            temp_v4 = ((unsigned char)puVar10[temp_v6 * 3 + 4] & 0x1f) | (*(unsigned char *)((int)puVar9 + 3) & 0xe0);
-            *(unsigned char *)((int)puVar9 + 3) = temp_v4;
-          }
-        }
-      }
-      temp_v11 = temp_v11 + 1;
-    } while (temp_v11 < temp_v5);
-  }
-  return;
+    }
 }
 
 } /* extern "C" */

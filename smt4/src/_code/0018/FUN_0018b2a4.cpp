@@ -1,4 +1,3 @@
-/* NON_MATCHING: two stack-index address calculations are scheduled in the opposite order. */
 #include "camp/RenderCtx.h"
 
 extern "C" {

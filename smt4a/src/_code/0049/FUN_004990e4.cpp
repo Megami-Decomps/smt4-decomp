@@ -1,133 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004990e4` (_code @ 0x4990e4, 0x23c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the two-element id table is loaded from the pool with ldm/stm in retail and the stereo-parallax float/int round trips schedule differently; the draw sequence is the same. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_00157558(int);
-int FUN_00164b5c(int, int, int, int, int);
-int renderCtxResetColorScale(...);
-int skinObjectUpdateMatrices(...);
-int FUN_001834a4(...);
-int FUN_00183bb0(void);
-int renderCtxCalculateStereoParallax(int);
-int FUN_003fabfc(unsigned int, int, float [3], unsigned int, int);
-int FUN_00499b58(unsigned int *);
-int asdAnimGetTrackLastFrame(unsigned int, int);
-int VectorSignedToFloat(...);
-int __aeabi_idivmod(unsigned int, int);
+/* A layout record: its position at 8 and 10. */
+typedef struct HintLayout {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} HintLayout;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+/* A three-float vector the animation is placed with. */
+typedef struct HintVec3 {
+    f32 x, y, z;
+} HintVec3;
 
-extern int g_renderCtx; /* 0x59dbb4 */
+/* The hint window's work block (only the fields touched here). */
+typedef struct HintWindow {
+    /* 0x00000 */ u32 flags;           /* 0x2000: the arrow animation is shown */
+    /* 0x00004 */ s32 step;
+    /* 0x00008 */ u8 unk00008[0xC];
+    /* 0x00014 */ s32 mode;            /* 1: skip drawing */
+    /* 0x00018 */ u8 unk00018[8];
+    /* 0x00020 */ u8 secondArrow;
+    /* 0x00021 */ u8 firstArrow;
+    /* 0x00022 */ u8 unk00022[0x16032];
+    /* 0x16054 */ u32 animation;
+    /* 0x16058 */ u32 frame;
+} HintWindow;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00164b5c. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern int placeWinGetValue(void);
-extern int FUN_00284f50(void);
-extern int FUN_00284f70(void);
-/* Supplied declaration required: FUN_003fabfc. */
-/* Supplied declaration required: FUN_00499b58. */
-/* Supplied declaration required: asdAnimGetTrackLastFrame. */
-/* Supplied declaration required: __aeabi_idivmod. */
+extern RenderCtxA *g_renderCtx;
 
+void FUN_00157558(RenderCtxA *ctx);
+void FUN_00183bb0(void);
+s32 FUN_001692ac(u32 kind, u32 arg);
+void FUN_00499b58(HintWindow *window);
+s32 placeWinGetValue(void);
+s32 FUN_00284f50(void);
+s32 FUN_00284f70(void);
+HintLayout *FUN_001834a4(u32 kind, u32 index);
+void FUN_00164b5c(s32 a, s32 b, s32 c, s32 x, s32 y, s32 z);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
+f32 asdAnimGetTrackLastFrame(u32 animation, s32 track);
+void FUN_003fabfc(u32 animation, s32 a, const HintVec3 *position, s32 b, s32 c, f32 frame, f32 scale);
+void skinObjectUpdateMatrices(RenderCtxA *ctx);
+void renderCtxResetColorScale(RenderCtxA *ctx);
 
-void FUN_004990e4(unsigned int *param_1)
-
+/* Draws the hint window's arrows and, when shown, the stepping arrow animation. */
+void FUN_004990e4(HintWindow *window)
 {
-/* irregular: irregular input(s): in_fpscr; 13 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int *piVar6;
-  unsigned char temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8 [3];
-  
-  FUN_00157558(g_renderCtx);
-  FUN_00183bb0();
-  temp_v1 = g_renderCtx;
-  temp_v0 = FUN_001692ac(1,0);
-  piVar6 = (int *)(temp_v1 + 0x1258);
-  temp_v3 = *piVar6;
-  temp_v4 = piVar6[temp_v3 + 2];
-  *piVar6 = temp_v3 + 1;
-  piVar6[temp_v3 + 3] = temp_v0;
-  if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v4 != temp_v0) {
-    (**(romwright_code **)(temp_v1 + 0x1274))();
-    *(unsigned char *)(temp_v1 + 0x1270) = 0;
-  }
-  if (param_1[5] != 1) {
-    FUN_00499b58(param_1);
-    temp_v1 = placeWinGetValue();
-    if (temp_v1 != 0) {
-      temp_v1 = FUN_00284f50();
-      temp_v0 = FUN_00284f70();
-      temp_v8[1] = 3.43318e-43f;
-      temp_v8[2] = 3.44719e-43f;
-      temp_v6 = *(char *)((int)param_1 + 0x21) != '\0';
-      if (temp_v6) {
-        temp_v3 = FUN_001834a4(0x20,0xf5);
-        temp_v8[0] = 1.82169e-44f;
-        FUN_00164b5c(2,0x20,6,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0);
-      }
-      if ((char)param_1[8] != '\0') {
-        temp_v3 = FUN_001834a4(0x20,temp_v8[temp_v6 + 1]);
-        temp_v8[0] = 1.82169e-44f;
-        FUN_00164b5c(2,0x20,7,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v0);
-      }
+    FUN_00157558(g_renderCtx);
+    FUN_00183bb0();
+    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    if (window->mode != 1) {
+        FUN_00499b58(window);
+        if (placeWinGetValue() != 0) {
+            s32 x = FUN_00284f50();
+            s32 y = FUN_00284f70();
+            s32 arrowIds[2] = {0xF5, 0xF6};
+            s32 used = 0;
+
+            if (window->firstArrow != 0) {
+                HintLayout *layout = FUN_001834a4(0x20, arrowIds[0]);
+
+                FUN_00164b5c(2, 0x20, 6, layout->x + x, layout->y + y, 13);
+                used = 1;
+            }
+            if (window->secondArrow != 0) {
+                HintLayout *layout = FUN_001834a4(0x20, arrowIds[used]);
+
+                FUN_00164b5c(2, 0x20, 7, layout->x + x, layout->y + y, 13);
+            }
+        }
+        if ((window->flags & 0x2000) != 0 && window->step > 0 && window->step < 20) {
+            HintVec3 position;
+
+            position.x = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.33f);
+            position.y = 46.0f;
+            position.z = 0.0f;
+            window->frame += 2;
+            window->frame = window->frame % (s32)asdAnimGetTrackLastFrame(window->animation, 0);
+            FUN_003fabfc(window->animation, 0, &position, -1, 0, (f32)(s32)window->frame, 1.0f);
+        }
     }
-    temp_v6 = (*param_1 & 0x2000) != 0;
-    temp_v2 = 0;
-    if (temp_v6) {
-      temp_v2 = param_1[1];
-    }
-    if ((temp_v6 && 0 < (int)temp_v2) && ((int)temp_v2 < 0x14)) {
-      temp_v7 = 0.33f;
-      renderCtxCalculateStereoParallax(g_renderCtx);
-      temp_v7 = (float)VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v8[1] = 46.0f;
-      temp_v8[2] = 0.0f;
-      param_1[0x5816] = param_1[0x5816] + 2;
-      temp_v8[0] = temp_v7;
-      asdAnimGetTrackLastFrame(param_1[0x5815],0);
-      __aeabi_idivmod(param_1[0x5816],(int)temp_v7);
-      param_1[0x5816] = temp_v5;
-      VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_003fabfc(param_1[0x5815],0,temp_v8,0xffffffff,0);
-    }
-  }
-  temp_v1 = g_renderCtx;
-  piVar6 = (int *)(g_renderCtx + 0x1258);
-  temp_v0 = *piVar6;
-  temp_v3 = piVar6[temp_v0 + 2];
-  *piVar6 = temp_v0 - 1;
-  if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v3 != piVar6[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v1 + 0x1274))();
-    *(unsigned char *)(temp_v1 + 0x1270) = 0;
-  }
-  skinObjectUpdateMatrices(g_renderCtx);
-  renderCtxResetColorScale(g_renderCtx);
-  return;
+    renderStackPop(&g_renderCtx->stackA);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
 }
 
-} /* extern "C" */
+}

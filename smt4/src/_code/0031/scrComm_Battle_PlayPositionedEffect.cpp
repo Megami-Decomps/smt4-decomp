@@ -1,165 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Battle_PlayPositionedEffect` (_code @ 0x312864, 0x2ac bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (169 vs 170 rows); stack frame (84 vs 92 bytes) and register allocation differ */
+#include "common.h"
+
+// Effect request handed to the battle effect queue (32 bytes). It first carries the
+// effect set's name, then is reused for one request per matching effect slot.
+struct EffectRequest {
+    s32 mode;           // 0x00
+    s32 side;           // 0x04
+    u32 type;           // 0x08
+    const char* name;   // 0x0c
+    s32 target;         // 0x10
+    s32 targetCopy;     // 0x14
+    u32 user;           // 0x18
+    u32 unk1c;
+};
+
+struct BattleUnitSlot {
+    u32 flags;              // 0x00: bit 0 present, bit 6 dead
+    u8 unk04[4];
+    s32 entryIndex;         // 0x08 (low halfword)
+    u8 unk0c[0x288 - 0x0c];
+};
+
+struct BattleEffectSlot {
+    u8 unk00[0x58];
+    char name[0x10];        // 0x58: effect name
+    s16 power;              // 0x68
+    u16 type;               // 0x6a
+};
+
+struct BattleMain {
+    u8 unk0000[0x1e98];
+    u8* entries;            // 0x1e98 (0x114 bytes each; listed id at 0x62)
+    u8 unk1e9c[0x1fc0 - 0x1e9c];
+    u8* units;              // 0x1fc0 (BattleUnitSlot, 0x288 each)
+};
+
+struct BattleEffectState {
+    u8 unk0000[0x1cfc];
+    u8* effectSlots;        // 0x1cfc
+};
 
 extern "C" {
 
-int ARM_common_memcpy4_9(int *, char *);
-int FUN_00245420(int, unsigned int, int, unsigned int);
-int FUN_002454c4(int, int *, int, int);
-int FUN_0024550c(void);
-int FUN_00282820(int, unsigned int, int, int);
-int btlMainFindEntryByListedId(unsigned int *, int);
-int btlGetMainState(void);
-int scrGetArg(int);
-int libc_strcmp(int, unsigned char *);
+extern const char DAT_00400440[];
+extern u32 g_btlScriptUnit;
+extern BattleEffectState* DAT_00435d18;
+extern u32 g_btlEvent;
 
-/* stack frame of void: 13 slot(s), 52 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} void_stack;
+void ARM_common_memcpy4_9(void* dst, const char* src);
+void FUN_00245420(s32 slot, u32 unit, void* entry, u32 effect);
+void FUN_002454c4(BattleEffectState* state, EffectRequest* request, s32 a, s32 b);
+s32 FUN_0024550c(void);
+void FUN_00282820(s32 value, u32 user, s32 target, s32 targetCopy);
+u32* btlMainFindEntryByListedId(BattleMain* main, s32 id);
+BattleMain* btlGetMainState(void);
+s32 scrGetArg(s32 index);
+s32 libc_strcmp(const char* a, const char* b);
+s32 libc_strlen(const char* s);
+s32 FUN_0027e3b8(u32 event);
+u32 btlUnitGet(u32 unit);
+s32 FUN_0028299c(BattleEffectState* state);
 
-extern unsigned char DAT_00400440; /* 0x400440 */
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int g_btlEvent; /* 0x435d48 */
-
-/* Supplied declaration required: ARM_common_memcpy4_9. */
-/* Supplied declaration required: FUN_00245420. */
-/* Supplied declaration required: FUN_002454c4. */
-/* Supplied declaration required: FUN_0024550c. */
-extern int FUN_0027e3b8(unsigned int);
-extern unsigned int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_00282820. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int FUN_0028299c(int);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: libc_strcmp. */
-extern int libc_strlen(int);
-
-
+// Script command: plays the effect set `arg0` on every living side, positioned by the sign of `arg1`.
 void scrComm_Battle_PlayPositionedEffect(void)
-
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  char *pcVar5;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int *temp_v18;
-  int temp_v19;
-  int *temp_v20;
-  
-  temp_v17 = scrGetArg(0);
-  temp_v0 = scrGetArg(1);
-  temp_v1 = FUN_0027e3b8(g_btlEvent);
-  if (((temp_v1 == 0) || (temp_v1 = DAT_00435d18, FUN_0024550c(), temp_v1 != 0)) && (temp_v0 != 0)) {
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v10 = 0;
-    temp_v11 = 0;
-    temp_v12 = 0;
-    temp_v13 = 0;
-    temp_v14 = 0;
-    temp_v15 = 0;
-    if (temp_v0 < 0) {
-      pcVar5 = "commonDw";
-    }
-    else {
-      pcVar5 = "commonUp";
-    }
-    ARM_common_memcpy4_9(&temp_v8,pcVar5);
-    FUN_002454c4(DAT_00435d18,&temp_v8,1,0);
-    temp_v1 = btlGetMainState();
-    temp_v16 = btlUnitGet(g_btlScriptUnit);
-    temp_v7 = 0;
-    temp_v5 = *(int *)(DAT_00435d18 + 0x1cfc);
-    temp_v20 = (int *)(temp_v1 + 0x1e98);
-    temp_v19 = 0;
-    do {
-      temp_v1 = btlGetMainState();
-      puVar3 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + temp_v19 * 0x288);
-      temp_v3 = *puVar3;
-      if ((((temp_v3 & 1) != 0) && ((temp_v3 & 0x40) == 0)) &&
-         (temp_v1 = (int)(short)puVar3[2], -1 < temp_v1)) {
-        temp_v1 = *temp_v20 + temp_v1 * 0x114;
-        temp_v9 = temp_v19 << 3;
-        temp_v10 = 0xffffffff;
-        temp_v8 = temp_v0;
-        FUN_00245420(temp_v7 << 3,temp_v16,temp_v1,temp_v17);
-        temp_v14 = temp_v16;
-        temp_v12 = (int)*(short *)(temp_v1 + 0x62);
-        temp_v13 = temp_v12;
-        temp_v18 = (unsigned int *)btlGetMainState();
-        temp_v1 = 0;
-        do {
-          temp_v4 = temp_v5 + temp_v1 * 0x16;
-          temp_v6 = temp_v4 + 0x58;
-          temp_v2 = libc_strlen(temp_v6);
-          if ((temp_v2 != 0) && (libc_strcmp(temp_v6,&DAT_00400440), temp_v6 != 0)) {
-            temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x6a);
-            temp_v2 = FUN_0028299c(DAT_00435d18);
-            temp_v6 = 2;
-            if (temp_v0 < 0) {
-              temp_v6 = 3;
+    u32 effectId = scrGetArg(0);
+    s32 direction = scrGetArg(1);
+    s32 inEvent = FUN_0027e3b8(g_btlEvent);
+    if (!((inEvent == 0 || FUN_0024550c() != 0) && direction != 0)) return;
+
+    EffectRequest request = { 0, 0, 0, NULL, 0, 0, 0, 0 };
+    const char* setName = direction < 0 ? "commonDw" : "commonUp";
+    ARM_common_memcpy4_9(&request, setName);
+    FUN_002454c4(DAT_00435d18, &request, 1, 0);
+
+    BattleMain* main = btlGetMainState();
+    u32 user = btlUnitGet(g_btlScriptUnit);
+    s32 placed = 0;
+    u8* effectSlots = DAT_00435d18->effectSlots;
+    BattleMain* mainForEntries = main;
+    for (s32 unitIndex = 0; unitIndex < 4; unitIndex++) {
+        BattleUnitSlot* unit = reinterpret_cast<BattleUnitSlot*>(btlGetMainState()->units + unitIndex * 0x288);
+        if ((unit->flags & 1) == 0 || (unit->flags & 0x40) != 0) continue;
+        s16 entryIndex = (s16)unit->entryIndex;
+        if (entryIndex < 0) continue;
+        u8* entry = mainForEntries->entries + entryIndex * 0x114;
+        request.side = unitIndex << 3;
+        request.type = 0xffffffff;
+        request.mode = direction;
+        FUN_00245420(placed << 3, user, entry, effectId);
+        request.user = user;
+        request.target = *reinterpret_cast<s16*>(entry + 0x62);
+        request.targetCopy = request.target;
+        BattleMain* current = btlGetMainState();
+        for (s32 slot = 0; slot < 4; slot++) {
+            BattleEffectSlot* effect = reinterpret_cast<BattleEffectSlot*>(effectSlots + slot * 0x16);
+            if (libc_strlen(effect->name) == 0 || libc_strcmp(effect->name, DAT_00400440) == 0) continue;
+            u32 type = effect->type;
+            s32 base = FUN_0028299c(DAT_00435d18);
+            s32 sideCode = direction < 0 ? 3 : 2;
+            switch (type) {
+            case 0: case 1: case 2: case 3: case 4: case 5: case 0xc: {
+                u32* found = NULL;
+                if (type == 0xc && request.target >= 0) found = btlMainFindEntryByListedId(current, request.target);
+                if (type != 0xc || request.target < 0 || found == NULL || (*found & 2) != 0) {
+                    request.name = effect->name;
+                    request.mode = 6;
+                    request.side = sideCode;
+                    request.type = type;
+                    FUN_00282820(effect->power + base * placed, user, request.targetCopy, request.target);
+                }
+                break;
             }
-            switch(temp_v3) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 0xc:
-              if ((((temp_v3 != 0xc) || (temp_v12 < 0)) ||
-                  (puVar3 = temp_v18, btlMainFindEntryByListedId(temp_v18,temp_v12), puVar3 == (unsigned int *)0x0)) ||
-                 ((*puVar3 & 2) != 0)) {
-                temp_v11 = temp_v4 + 0x58;
-                temp_v8 = 6;
-                temp_v9 = temp_v6;
-                temp_v10 = temp_v3;
-                FUN_00282820((int)*(short *)(temp_v4 + 0x68) + temp_v2 * temp_v7,temp_v14,temp_v13,
-                             temp_v12);
-              }
             }
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 4);
-        temp_v7 = temp_v7 + 1;
-      }
-      temp_v19 = temp_v19 + 1;
-    } while (temp_v19 < 4);
-  }
-  return;
+        }
+        placed++;
+    }
 }
 
 } /* extern "C" */

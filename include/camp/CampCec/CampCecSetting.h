@@ -15,9 +15,11 @@ typedef struct CampCecSetting {
     /* 0x2C */ s32 unk2C;
     /* 0x30 */ s32 unk30;
     /* 0x34 */ s32 unk34;
-    /* 0x38 */ s32 unk38;
-    /* 0x3C */ u8 unk3C;
-    /* 0x3D */ u8 unk3D[3];
+    /* 0x38 */ s32 stage;        /* which menu / answer flow is running */
+    /* 0x3C */ u8 flags;         /* bit 0: the script is running, bit 1: the next entry is queued */
+    /* 0x3D */ u8 started;       /* the script was created from the two loaded files */
+    /* 0x3E */ u8 waiting;       /* waiting for the confirmation to close */
+    /* 0x3F */ u8 polling;       /* a script entry is running and is polled every frame */
     /* 0x40 */ u8 done;          /* the screen has finished */
     /* 0x41 */ u8 unk41[3];
 } CampCecSetting;

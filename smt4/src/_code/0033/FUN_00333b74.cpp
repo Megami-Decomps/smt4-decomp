@@ -1,164 +1,158 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333b74` (_code @ 0x333b74, 0x23c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the loot-weight sum is accumulated by retail in two interleaved running totals with software-pipelined loads, and the quest-record slot address is built with different shifts; the reward logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int dataTable9EntryOrZero(...);
-int dataTable1bOr1cGetRecord(void);
-int randNextInRange(int);
-int dataTableGetCount(unsigned int);
+/* One reward slot of a quest record (12 bytes). */
+typedef struct RewardSlot {
+    /* 0x00 */ u16 kind;       /* 1: fixed item, 3: set value, 4: loot table */
+    /* 0x02 */ u16 arg;        /* item id, or the loot table id */
+    /* 0x04 */ u16 amount;     /* item count, or the value for kind 3 */
+    /* 0x06 */ u16 percent;    /* nonzero: the gold is this percent of the level's base */
+    /* 0x08 */ u32 gold;
+} RewardSlot;
 
-typedef struct fn_00333b74_arg1 fn_00333b74_arg1;
-struct fn_00333b74_arg1 {
-    byte field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0x153];
-    ushort field_0x154; /* +0x154 */
-    ushort field_0x156; /* +0x156 */
-    ushort field_0x158; /* +0x158 */
-    ushort field_0x15a; /* +0x15a */
-    void *field_0x15c; /* +0x15c */
-};
+/* The quest record: three reward slots at 0x154. */
+typedef struct QuestRewardRecord {
+    /* 0x000 */ u8 unk000[0x154];
+    /* 0x154 */ RewardSlot slots[3];
+} QuestRewardRecord;
 
-extern int g_aocSystem; /* 0x433158 */
+typedef struct QuestRuntimeStatus {
+    u8 flags;                  /* bit 3: use the second reward slot set */
+} QuestRuntimeStatus;
 
-extern unsigned char *questGetRuntimeStatus(fn_00333b74_arg1 *);
-/* Supplied declaration required: dataTable9EntryOrZero. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-/* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: dataTableGetCount. */
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* A loot table (0x50 bytes): eight (id, weight) pairs and a last extra weight. */
+typedef struct LootTable {
+    /* 0x00 */ u8 unk00[0x30];
+    struct {
+        /* 0x30 */ u16 id;
+        /* 0x32 */ u16 weight;
+    } pairs[8];
+    /* 0x50 */ u8 unk50[0x4];
+} LootTable;
 
+/* The reward list being filled (only the fields written here). */
+typedef struct RewardList {
+    /* 0x00 */ u32 items[6];
+    /* 0x18 */ u32 counts[6];
+    /* 0x30 */ u32 value;
+    /* 0x34 */ u32 gold;
+    /* 0x38 */ u16 quest;
+} RewardList;
 
-void FUN_00333b74(unsigned int *param_1,fn_00333b74_arg1 *param_2)
+/* The aoc system's loot table cache: entries of 0x54 bytes (a key, then the table). */
+typedef struct LootCacheEntry {
+    u32 key;
+    u8 table[0x50];
+} LootCacheEntry;
 
+typedef struct AocSystem {
+    u8 unk000[0x38C];
+    u32 lootCount;
+    LootCacheEntry *loot;
+} AocSystem;
+
+typedef struct PlayerLevelView {
+    u8 unk00[0x76];
+    u8 level;
+} PlayerLevelView;
+
+extern AocSystem *g_aocSystem;
+
+QuestRewardRecord *dataTable1bOr1cGetRecord(void *quest);
+QuestRuntimeStatus *questGetRuntimeStatus(void *quest);
+PlayerLevelView *gameGetPlayerData(void);
+u32 dataTable9EntryOrZero(u32 level);
+void *dataTableGet(u32 table, u32 section);
+void *dataTableGetEntries(void *section);
+u32 dataTableGetCount(void *section);
+s32 randNextInRange(s32 limit);
+
+/* Fills the reward list for a quest: a fixed item, a set value, or 3-7 rolls on a loot table, and
+ * its gold (a fixed amount, or a percent of the player's level base). */
+void FUN_00333b74(RewardList *list, void *quest)
 {
-/* irregular: 1 goto(s); 4 native warning(s); review required */
-  unsigned short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  fn_00333b74_arg1 *pfVar4;
-  unsigned char *pbVar5;
-  unsigned int *puVar6;
-  unsigned int temp_v3;
-  short *psVar8;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  void *pvVar12;
-  int temp_v7;
-  unsigned int temp_v8;
-  short temp_v9;
-  short temp_v10;
-  unsigned short *puVar17;
-  
-  pfVar4 = param_2;
-  dataTable1bOr1cGetRecord();
-  if (pfVar4 != (fn_00333b74_arg1 *)0x0) {
-    pbVar5 = (unsigned char *)questGetRuntimeStatus(param_2);
-    puVar17 = (unsigned short *)((int)pfVar4 + ((int)((unsigned int)*pbVar5 << 0x1c) >> 0x1f) * -0xc + 0x154);
-    if (((*pbVar5 & 8) != 0) && (*puVar17 == 0)) {
-      puVar17 = &pfVar4->field_0x154;
+    QuestRewardRecord *record = dataTable1bOr1cGetRecord(quest);
+
+    if (record == NULL) {
+        return;
     }
-    temp_v0 = *puVar17;
-    if (temp_v0 != 1) {
-      if (temp_v0 == 3) {
-        param_1[0xc] = (unsigned int)puVar17[2];
-      }
-      else if (temp_v0 == 4) {
-        temp_v0 = puVar17[1];
-        puVar6 = *(unsigned int **)(g_aocSystem + 0x390);
-        if (puVar6 != (unsigned int *)0x0) {
-          temp_v8 = 0;
-          if (temp_v8 < *(unsigned int *)(g_aocSystem + 0x38c)) {
-            do {
-              if (*puVar6 == (unsigned int)temp_v0) {
-                puVar6 = puVar6 + 1;
-                goto LAB_00333c78;
-              }
-              temp_v8 = temp_v8 + 1;
-              puVar6 = puVar6 + 0x15;
-            } while (temp_v8 < *(unsigned int *)(g_aocSystem + 0x38c));
-          }
-        }
-        temp_v3 = dataTableGet(0x1c,1);
-        temp_v7 = dataTableGetEntries();
-        dataTableGetCount(temp_v3);
-        puVar6 = (unsigned int *)(temp_v7 + (unsigned int)temp_v0 * 0x50);
-LAB_00333c78:
-        temp_v1 = *(short *)((int)puVar6 + 0x36);
-        temp_v9 = 0;
-        if (*(short *)((int)puVar6 + 0x32) != 0) {
-          temp_v9 = *(short *)((int)puVar6 + 0x32);
-        }
-        temp_v10 = 0;
-        temp_v7 = 3;
-        psVar8 = (short *)((int)puVar6 + 0x32);
-        do {
-          temp_v2 = psVar8[4];
-          if (temp_v1 != 0) {
-            temp_v9 = temp_v9 + temp_v1;
-          }
-          temp_v1 = psVar8[6];
-          if (temp_v2 != 0) {
-            temp_v10 = temp_v10 + temp_v2;
-          }
-          temp_v7 = temp_v7 - 1;
-          psVar8 = psVar8 + 4;
-        } while (temp_v7 != 0);
-        temp_v9 = temp_v9 + temp_v10;
-        if (*(short *)((int)puVar6 + 0x4e) != 0) {
-          temp_v9 = temp_v9 + *(short *)((int)puVar6 + 0x4e);
-        }
-        temp_v4 = randNextInRange(5);
-        temp_v4 = temp_v4 + 3;
-        temp_v7 = 0;
-        if (temp_v4 != 0) {
-          do {
-            temp_v5 = randNextInRange(temp_v9 - 1);
-            temp_v6 = 0;
-            do {
-              temp_v8 = (unsigned int)*(unsigned short *)((int)puVar6 + temp_v6 * 4 + 0x32);
-              if ((temp_v8 != 0) && (temp_v5 = temp_v5 - temp_v8, temp_v5 < 0)) {
-                if ((temp_v7 < 6) && ((unsigned short)puVar6[temp_v6 + 0xc] != 0)) {
-                  param_1[temp_v7] = (unsigned int)(unsigned short)puVar6[temp_v6 + 0xc];
-                  param_1[temp_v7 + 6] = 1;
-                  temp_v7 = temp_v7 + 1;
+    RewardSlot *slot = &record->slots[(questGetRuntimeStatus(quest)->flags >> 3) & 1];
+
+    if ((questGetRuntimeStatus(quest)->flags & 8) != 0 && slot->kind == 0) {
+        slot = &record->slots[0];
+    }
+    if (slot->kind == 1) {
+        list->items[0] = slot->arg;
+        list->counts[0] = slot->amount;
+    } else if (slot->kind == 3) {
+        list->value = slot->amount;
+    } else if (slot->kind == 4) {
+        u16 tableId = slot->arg;
+        LootTable *table = NULL;
+
+        if (g_aocSystem->loot != NULL) {
+            LootCacheEntry *entry = g_aocSystem->loot;
+
+            for (u32 i = 0; i < g_aocSystem->lootCount; i++, entry++) {
+                if (entry->key == tableId) {
+                    table = (LootTable *)entry->table;
+                    break;
                 }
-                break;
-              }
-              temp_v6 = temp_v6 + 1;
-            } while (temp_v6 < 8);
-            temp_v4 = temp_v4 - 1;
-          } while (temp_v4 != 0);
+            }
         }
-      }
+        if (table == NULL) {
+            void *section = dataTableGet(0x1C, 1);
+            LootTable *tables = (LootTable *)dataTableGetEntries(section);
+
+            dataTableGetCount(section);
+            table = &tables[tableId];
+        }
+        s32 total = 0;
+        for (s32 i = 0; i < 8; i++) {
+            if (table->pairs[i].weight != 0) {
+                total += table->pairs[i].weight;
+            }
+        }
+        s32 rolls = randNextInRange(5) + 3;
+        s32 added = 0;
+
+        for (; rolls != 0; rolls--) {
+            s32 pick = randNextInRange(total - 1);
+
+            for (s32 i = 0; i < 8; i++) {
+                if (table->pairs[i].weight == 0) {
+                    continue;
+                }
+                pick -= table->pairs[i].weight;
+                if (pick < 0) {
+                    if (added < 6 && table->pairs[i].id != 0) {
+                        list->items[added] = table->pairs[i].id;
+                        list->counts[added] = 1;
+                        added++;
+                    }
+                    break;
+                }
+            }
+        }
     }
-    else {
-      *param_1 = (unsigned int)puVar17[1];
-      param_1[6] = (unsigned int)puVar17[2];
+    u32 gold;
+    if (slot->percent == 0) {
+        gold = slot->gold;
+    } else {
+        u32 base;
+
+        if (gameGetPlayerData()->level >= 99) {
+            base = dataTable9EntryOrZero(98);
+        } else {
+            base = dataTable9EntryOrZero(gameGetPlayerData()->level);
+        }
+        list->gold = base;
+        gold = base * slot->percent / 100;
     }
-    if (puVar17[3] == 0) {
-      pvVar12 = *(void **)(puVar17 + 4);
-    }
-    else {
-      temp_v7 = gameGetPlayerData();
-      if (*(unsigned char *)(temp_v7 + 0x76) >= 99) {
-        temp_v8 = dataTable9EntryOrZero(0x62);
-        param_1[0xd] = temp_v8;
-      }
-      else {
-        temp_v8 = dataTable9EntryOrZero();
-        param_1[0xd] = temp_v8;
-      }
-      pvVar12 = (void *)((temp_v8 * puVar17[3]) / 100);
-    }
-    param_1[0xd] = (unsigned int)pvVar12;
-    *(short *)(param_1 + 0xe) = (short)(int)param_2;
-  }
-  return;
+    list->gold = gold;
+    list->quest = (u16)(u32)quest;
 }
 
-} /* extern "C" */
+}

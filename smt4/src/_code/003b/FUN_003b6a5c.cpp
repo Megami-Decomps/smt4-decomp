@@ -1,91 +1,80 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b6a5c` (_code @ 0x3b6a5c, 0x32c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near: 203 rows against 204; retail keeps the text colour in a callee-saved register and the work pointer in r7 (ours r8) and loads the frame/digit y offsets before the x offsets; the draw sequence and leading-zero logic agree. */
+#include "common.h"
+
+/* An image placement record (offsets 8 and 10 hold the position). */
+struct ImagePlacement {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+/* The work area the counter reads (observed field). */
+struct CounterWork {
+    /* 0x0000 */ u8 unk0000[0xD550];
+    /* 0xD550 */ u32 value;       /* fixed point, 12 fractional bits */
+};
+
+#define COUNTER_MAX 9999
+#define COUNTER_GROUP 0x28
+#define COUNTER_TEXT_COLOR 0x7A4C00FF
 
 extern "C" {
 
-int FUN_0025086c(...);
-int FUN_002be5a4(...);
-int FUN_002bed3c(void);
-int FUN_002bf288(int, int, int, int, int, int);
-int VectorSignedToFloat(...);
+ImagePlacement *FUN_002bf4f8(s32 group, s32 image);
+void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
+void FUN_0025086c(u32 digit, char *text);
+void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
+void FUN_002bed3c(void);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp78; /* 0x78: local_78 */
-} param_3_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0025086c. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-
-
-void FUN_003b6a5c(int param_1,int param_2,int param_3)
-
+/* Draws the counter frame at (x, y) and the work's value (clamped to 9999) as four digit images,
+ * leaving out leading zeros. */
+void FUN_003b6a5c(CounterWork *work, s32 x, s32 y)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int in_fpscr;
-  unsigned char temp_v6 [76];
-  
-  temp_v3 = FUN_002bf4f8(0x28,0xca);
-  FUN_002bf288(2,0x28,0xc2,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x65);
-  FUN_002bf288(2,0x28,0xc3,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a);
-  FUN_002bf288(2,0x28,0xc4,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6f);
-  FUN_002bf288(2,0x28,0xc5,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x74);
-  FUN_002bf288(2,0x28,0xc6,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x79);
-  temp_v5 = *(unsigned int *)(param_1 + 0xd550) >> 0xc;
-  if (temp_v5 >= 10000) {
-    temp_v5 = 9999;
-  }
-  temp_v4 = FUN_002bf4f8(0x28,0xcb);
-  temp_v0 = temp_v5 / 1000;
-  if (temp_v0 != 0) {
-    FUN_0025086c(temp_v0,temp_v6);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,0x7a4c00ff,temp_v6,(int)*(short *)(temp_v4 + 8));
-  }
-  temp_v1 = (temp_v5 % 1000) / 100;
-  temp_v5 = (temp_v5 % 1000) % 100;
-  if (temp_v0 != 0 || temp_v1 != 0) {
-    temp_v4 = FUN_002bf4f8(0x28,0xc9);
-    FUN_0025086c(temp_v1,temp_v6);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,0x7a4c00ff,temp_v6,(int)*(short *)(temp_v4 + 8));
-  }
-  temp_v2 = temp_v5 / 10;
-  if ((temp_v0 != 0 || temp_v1 != 0) || temp_v2 != 0) {
-    temp_v4 = FUN_002bf4f8(0x28,200);
-    FUN_0025086c(temp_v2,temp_v6);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,0x7a4c00ff,temp_v6,(int)*(short *)(temp_v4 + 8));
-  }
-  temp_v4 = FUN_002bf4f8(0x28,199);
-  FUN_0025086c(temp_v5 % 10,temp_v6);
-  VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
-                      (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(3,0x7a4c00ff,temp_v6,(int)*(short *)(temp_v4 + 8));
-  FUN_002bed3c();
-  return;
+    ImagePlacement *frame = FUN_002bf4f8(COUNTER_GROUP, 0xCA);
+    ImagePlacement *digit;
+    char text[0x44];
+    u32 value;
+    u32 thousands;
+    u32 hundreds;
+    u32 tens;
+
+    FUN_002bf288(2, COUNTER_GROUP, 0xC2, frame->x + x, frame->y + y, 0x65);
+    FUN_002bf288(2, COUNTER_GROUP, 0xC3, frame->x + x, frame->y + y, 0x6A);
+    FUN_002bf288(2, COUNTER_GROUP, 0xC4, frame->x + x, frame->y + y, 0x6F);
+    FUN_002bf288(2, COUNTER_GROUP, 0xC5, frame->x + x, frame->y + y, 0x74);
+    FUN_002bf288(2, COUNTER_GROUP, 0xC6, frame->x + x, frame->y + y, 0x79);
+    value = work->value >> 12;
+    if (value > COUNTER_MAX) {
+        value = COUNTER_MAX;
+    }
+    digit = FUN_002bf4f8(COUNTER_GROUP, 0xCB);
+    thousands = value / 1000;
+    value %= 1000;
+    if (thousands != 0) {
+        FUN_0025086c(thousands, text);
+        FUN_002be5a4(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
+                     0.0f, 0.0f, 1.0f);
+    }
+    hundreds = value / 100;
+    value %= 100;
+    if (thousands != 0 || hundreds != 0) {
+        digit = FUN_002bf4f8(COUNTER_GROUP, 0xC9);
+        FUN_0025086c(hundreds, text);
+        FUN_002be5a4(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
+                     0.0f, 0.0f, 1.0f);
+    }
+    tens = value / 10;
+    if (thousands != 0 || hundreds != 0 || tens != 0) {
+        digit = FUN_002bf4f8(COUNTER_GROUP, 0xC8);
+        FUN_0025086c(tens, text);
+        FUN_002be5a4(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
+                     0.0f, 0.0f, 1.0f);
+    }
+    digit = FUN_002bf4f8(COUNTER_GROUP, 0xC7);
+    FUN_0025086c(value % 10, text);
+    FUN_002be5a4(3, COUNTER_TEXT_COLOR, text, (f32)(frame->x + digit->x + x), (f32)(frame->y + digit->y + y),
+                 0.0f, 0.0f, 1.0f);
+    FUN_002bed3c();
 }
 
 } /* extern "C" */

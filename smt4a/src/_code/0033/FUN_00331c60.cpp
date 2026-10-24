@@ -1,142 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331c60` (_code @ 0x331c60, 0x284 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation differs: retail spills the member record and keeps the item loop base/limit (r5/r6) in registers and loads the divide-by-100 reciprocal later; logic matches. */
+#include "common.h"
+
+/* Battle reward input: base experience and the enemy level it came from. */
+struct RewardSource {
+    s32 experience;
+    s32 level;
+};
+
+/* A party member's slot record (accessed fields). */
+struct SlotRecord {
+    u8 unk00[0x34];
+    u16 itemIds[8];     // 0x34
+    u8 unk44[0x20];
+    u16 growthType;     // 0x64
+    u8 unk66;           // 0x66: reward slot the member's share goes to
+};
+
+struct ItemRecord {
+    u8 unk00[0x2F];
+    u8 experienceRate;  // 0x2F
+};
+
+/* The reward totals: entries of 0x28 bytes starting at 0x7870 (0 = pool, 1.. = members, 0x24 = overflow). */
+struct RewardTotals {
+    u8 unk0000[0x7870];
+    struct {
+        s32 total;
+        u8 unk04[0x24];
+    } entries[0x25];
+};
+
+struct RewardOwner {
+    u32 unk00;
+    RewardTotals *totals;   // 0x04
+};
 
 extern "C" {
+extern RewardOwner g_engineCleanupOwner;
+s8 *gameGetSlotTable(void);
+void gameGetPlayerData(void);
+s32 playerHasFlagBit(u32 bit);
+s32 FUN_0022fd80(s32 experience, s32 level);
+SlotRecord *gameGetSlotRecord(s32 slot);
+s32 bitsAt60Test(SlotRecord *record, u32 bit);
+ItemRecord *dataTable41FindById(u32 id);
+s32 dataTable9Type3GetClamped(u32 growthType, s32 level);
+void *FUN_003e503c(u32 index);
+s32 actorIsActive(void *actor);
+s32 partySlotMatchesSelected(void *actor);
 
-int gameGetPlayerData(void);
-int gameGetSlotRecord(...);
-int dataTable41FindById(void);
-int FUN_003e503c(void);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: gameGetSlotRecord. */
-extern int gameGetSlotTable(void);
-extern int FUN_0022fd80(int, int);
-/* Supplied declaration required: dataTable41FindById. */
-extern int playerHasFlagBit(unsigned int);
-extern int actorIsActive(void);
-extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
-extern int bitsAt60Test(int, unsigned int);
-extern int dataTable9Type3GetClamped(unsigned short, int);
-
-
-void FUN_00331c60(int *param_1)
-
+/* Distribute the battle's experience to the pool and to every party member that is in the fight. */
+void FUN_00331c60(RewardSource *source)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int *piVar8;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int in_fpscr;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  unsigned long long temp_v13;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_engineCleanupOwner + 0x4));
-  temp_v1 = gameGetSlotTable();
-  gameGetPlayerData();
-  temp_v8 = *param_1;
-  temp_v9 = param_1[1];
-  temp_v2 = playerHasFlagBit(1);
-  if ((temp_v2 == 0) && (temp_v2 = playerHasFlagBit(10), temp_v2 == 0)) {
-    temp_v2 = FUN_0022fd80(temp_v8,temp_v9);
-    *(int *)(temp_v0 + 0x7870) = temp_v2 + *(int *)(temp_v0 + 0x7870);
-  }
-  temp_v12 = 1.0f;
-  temp_v13 = 0x42c800003c23d70a;
-  temp_v2 = 0;
-  do {
-    if (-1 < *(char *)(temp_v1 + temp_v2 + 0x1c88)) {
-      temp_v3 = gameGetSlotRecord();
-      temp_v4 = bitsAt60Test(temp_v3,1);
-      if (((temp_v4 == 0) && (temp_v4 = bitsAt60Test(temp_v3,10), temp_v4 == 0)) &&
-         (temp_v4 = bitsAt60Test(temp_v3,2), temp_v4 == 0)) {
-        temp_v4 = gameGetSlotRecord((int)*(char *)(temp_v1 + temp_v2 + 0x1c88));
-        temp_v7 = 0;
-        temp_v11 = temp_v12;
-        do {
-          temp_v5 = (unsigned int)*(unsigned short *)(temp_v4 + 0x34 + temp_v7 * 2);
-          if (temp_v5 != 0) {
-            dataTable41FindById();
-            temp_v6 = 0;
-            if (temp_v5 != 0) {
-              temp_v6 = (unsigned int)*(unsigned char *)(temp_v5 + 0x2f);
+    RewardTotals *totals = g_engineCleanupOwner.totals;
+    s8 *slotTable = gameGetSlotTable();
+    gameGetPlayerData();
+    s32 experience = source->experience;
+    s32 level = source->level;
+    if (playerHasFlagBit(1) == 0 && playerHasFlagBit(10) == 0)
+        totals->entries[0].total += FUN_0022fd80(experience, level);
+    for (s32 slot = 0; slot < 24; slot++) {
+        if (slotTable[0x1C88 + slot] < 0)
+            continue;
+        SlotRecord *record = gameGetSlotRecord(slotTable[0x1C88 + slot]);
+        if (bitsAt60Test(record, 1) != 0 || bitsAt60Test(record, 10) != 0 || bitsAt60Test(record, 2) != 0)
+            continue;
+        SlotRecord *member = gameGetSlotRecord(slotTable[0x1C88 + slot]);
+        f32 multiplier = 1.0f;
+        for (s32 i = 0; i < 8; i++) {
+            if (member->itemIds[i] != 0) {
+                ItemRecord *item = dataTable41FindById(member->itemIds[i]);
+                if (item != 0 && item->experienceRate != 0)
+                    multiplier = item->experienceRate * 0.01f * multiplier;
             }
-            if (temp_v5 != 0 && temp_v6 != 0) {
-              temp_v10 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v11 = temp_v10 * (float)temp_v13 * temp_v11;
-            }
-          }
-          temp_v7 = temp_v7 + 1;
-        } while (temp_v7 < 8);
-        temp_v5 = (unsigned int)(temp_v8 * (int)(temp_v11 * (float)((unsigned long long)temp_v13 >> 0x20))) / 100;
-        temp_v4 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v4 + 100),temp_v9);
-        temp_v6 = (temp_v5 * temp_v4) / 100;
-        if ((temp_v6 == 0) && (temp_v5 != 0)) {
-          temp_v6 = 1;
         }
-        if ((temp_v6 == 0) && (temp_v8 != 0)) {
-          temp_v6 = 1;
-        }
-        piVar8 = (int *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v3 + 0x66) * 0x28 + 0x7898);
-        *piVar8 = temp_v6 + *piVar8;
-      }
+        u32 baseShare = static_cast<u32>(experience * static_cast<s32>(multiplier * 100.0f)) / 100;
+        u32 share = baseShare * dataTable9Type3GetClamped(member->growthType, level) / 100;
+        if (share == 0 && baseShare != 0)
+            share = 1;
+        if (share == 0 && experience != 0)
+            share = 1;
+        totals->entries[1 + record->unk66].total += share;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x18);
-  temp_v13 = 0x3f4ccccd;
-  temp_v5 = 0;
-  do {
-    temp_v6 = temp_v5 & 0xffff;
-    FUN_003e503c();
-    temp_v1 = actorIsActive();
-    if (temp_v1 != 0) {
-      temp_v1 = partySlotMatchesSelected(temp_v6);
-      temp_v2 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v6 + 100),temp_v9);
-      temp_v6 = (unsigned int)(temp_v8 * temp_v2) / 100;
-      if ((temp_v6 == 0) && (temp_v8 != 0)) {
-        temp_v6 = 1;
-      }
-      temp_v12 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      if (temp_v1 == 0) {
-        temp_v6 = VectorFloatToUnsigned(temp_v12 * (float)temp_v13,3);
-      }
-      if (((int)temp_v6 < 1) && (temp_v8 != 0)) {
-        temp_v6 = 1;
-      }
-      temp_v1 = temp_v5 + 0x19;
-      if (temp_v1 >= 0x25) {
-        temp_v1 = 0x24;
-      }
-      piVar8 = (int *)(temp_v0 + temp_v1 * 0x28 + 0x7870);
-      *piVar8 = temp_v6 + *piVar8;
+    for (u32 i = 0; i < 12; i++) {
+        void *actor = FUN_003e503c(static_cast<u16>(i));
+        if (actorIsActive(actor) == 0)
+            continue;
+        s32 matches = partySlotMatchesSelected(actor);
+        u32 share = static_cast<u32>(experience * dataTable9Type3GetClamped(*reinterpret_cast<u16 *>(static_cast<u8 *>(actor) + 100), level)) / 100;
+        if (share == 0 && experience != 0)
+            share = 1;
+        if (matches == 0)
+            share = static_cast<u32>(static_cast<f32>(share) * 0.8f);
+        if (static_cast<s32>(share) < 1 && experience != 0)
+            share = 1;
+        s32 index = i + 25;
+        if (index > 36)
+            index = 36;
+        totals->entries[index].total += share;
     }
-    temp_v5 = temp_v5 + 1;
-  } while ((int)temp_v5 < 0xc);
-  return;
 }
-
-} /* extern "C" */
+}

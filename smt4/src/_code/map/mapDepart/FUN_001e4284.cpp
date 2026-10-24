@@ -1,155 +1,145 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e4284` (_code @ 0x1e4284, 0x290 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout, float constant scheduling and register naming differ - retail places the immediate branch after the tail and scales the colour bytes in a different register order; stores and calls are the same. */
+#include "map/MapEnvironment.h"
+
+namespace {
+/* One record of the map's record table (0x124 bytes each; only the first word is set here). */
+struct MapEnvRecord {
+    /* 0x000 */ s32 unk000;
+    /* 0x004 */ u8 unk004[0x120];
+};
+
+/* g_mapTable as the environment code sees it: the preset table, the fade between presets and the sky texture. */
+struct MapEnvironmentState {
+    /* 0x00 */ MapEnvironmentEntry *entries;
+    /* 0x04 */ MapEnvRecord *records;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0c */ s32 unk0c;
+    /* 0x10 */ f32 unk10;
+    /* 0x14 */ s32 unk14;
+    /* 0x18 */ s32 current;            /* the preset being shown */
+    /* 0x1c */ s32 previous;           /* the preset faded out */
+    /* 0x20 */ f32 fade;
+    /* 0x24 */ f32 fadeSpeed;
+    /* 0x28 */ s32 unk28;
+    /* 0x2c */ s32 selectedIndex;
+    /* 0x30 */ s32 textureLoaded;
+    /* 0x34 */ s32 texture;
+    /* 0x38 */ s32 unk38;
+    /* 0x3c */ s32 unk3c;
+};
+
+/* g_gameState's environment block (0x610..0x64c). */
+struct MapEnvironmentGameView {
+    /* 0x000 */ u8 unk000[0x228];
+    /* 0x228 */ u8 darkZone;
+    /* 0x229 */ u8 unk229[0x167];
+    /* 0x390 */ s32 presetIndex;
+    /* 0x394 */ u8 unk394[4];
+    /* 0x398 */ s32 unk398;
+    /* 0x39c */ s32 unk39c;
+    /* 0x3a0 */ s32 unk3a0;
+    /* 0x3a4 */ s32 unk3a4;
+    /* 0x3a8 */ s32 unk3a8;
+    /* 0x3ac */ s32 unk3ac;
+    /* 0x3b0 */ s32 unk3b0;
+    /* 0x3b4 */ u32 unk3b4;
+    /* 0x3b8 */ u32 unk3b8;
+    /* 0x3bc */ u32 unk3bc;
+    /* 0x3c0 */ u32 unk3c0;
+    /* 0x3c4 */ u32 unk3c4;
+    /* 0x3c8 */ u32 unk3c8;
+};
+
+struct MapHeading {
+    u32 unk00;
+    f32 degrees;
+};
+}
 
 extern "C" {
+extern MapEnvironmentState g_mapTable;
+extern MapEnvironmentGameView g_gameState;
+extern MapHeading DAT_0049f8f8;
+void asdTMTexTableReleaseNode(u32 table, u32 node);
+void FUN_002c58c8(u32 table, u32 node);
+s32 FUN_002c1c0c(u32 table, u32 node);
+void FUN_001a9604(u32 a, f32 b, f32 c, f32 d, f32 e, f32 f, f32 g);
+void FUN_001e39ec(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,
+                  u32 arg18, u32 arg19, u32 arg20, u32 arg21, u32 arg22,
+                  u32 arg23, s32 arg24, s32 arg26, f32 arg1A, f32 arg1C);
+void FUN_0025b754(void);
 
-int FUN_001a9604(int, unsigned int, unsigned int, int);
-int FUN_001e39ec(...);
-int FUN_0025b754(void);
-int asdTMTexTableReleaseNode(int, int);
-int FUN_002c58c8(int, int);
-int VectorSignedToFloat(...);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-extern int g_mapTable; /* 0x448c58 */
-extern int DAT_00448c5c; /* 0x448c5c */
-extern int DAT_00448c64; /* 0x448c64 */
-extern unsigned int DAT_00448c68; /* 0x448c68 */
-extern unsigned int DAT_00448c6c; /* 0x448c6c */
-extern int DAT_00448c70; /* 0x448c70 */
-extern int DAT_00448c74; /* 0x448c74 */
-extern unsigned int DAT_00448c78; /* 0x448c78 */
-extern unsigned int DAT_00448c7c; /* 0x448c7c */
-extern int DAT_00448c80; /* 0x448c80 */
-extern int DAT_00448c84; /* 0x448c84 */
-extern int DAT_00448c88; /* 0x448c88 */
-extern int DAT_00448c8c; /* 0x448c8c */
-extern unsigned int DAT_00448c90; /* 0x448c90 */
-extern int DAT_00448c94; /* 0x448c94 */
-extern float DAT_0049f8fc; /* 0x49f8fc */
-extern signed char DAT_0049fb44; /* 0x49fb44 */
-extern int DAT_0049fcac; /* 0x49fcac */
-extern int DAT_0049fcb4; /* 0x49fcb4 */
-extern int DAT_0049fcb8; /* 0x49fcb8 */
-extern int DAT_0049fcbc; /* 0x49fcbc */
-extern int DAT_0049fcc0; /* 0x49fcc0 */
-extern unsigned int DAT_0049fcc4; /* 0x49fcc4 */
-extern int DAT_0049fcc8; /* 0x49fcc8 */
-extern int DAT_0049fccc; /* 0x49fccc */
-extern unsigned int DAT_0049fcd0; /* 0x49fcd0 */
-extern unsigned int DAT_0049fcd4; /* 0x49fcd4 */
-extern unsigned int DAT_0049fcd8; /* 0x49fcd8 */
-extern unsigned int DAT_0049fcdc; /* 0x49fcdc */
-extern unsigned int DAT_0049fce0; /* 0x49fce0 */
-extern unsigned int DAT_0049fce4; /* 0x49fce4 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a9604. */
-/* Supplied declaration required: FUN_001e39ec. */
-/* Supplied declaration required: FUN_0025b754. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-extern int FUN_002c1c0c(unsigned int, int);
-/* Supplied declaration required: FUN_002c58c8. */
-
-
-void FUN_001e4284(int param_1,int param_2)
-
+/* Switches the map environment (sky texture, light and fog parameters, heading) to preset `preset`,
+   fading from the previous one over `transition` frames (1 means the default 15; 0 is immediate). */
+void FUN_001e4284(u32 preset, s32 transition)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  unsigned int in_fpscr;
-  unsigned int temp_v2;
-  
-  if (param_2 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 0xf;
-    if (param_2 >= 2) {
-      temp_v0 = param_2;
+    s32 frames;
+    if (transition == 0) {
+        frames = 0;
+    } else {
+        frames = 15;
+        if (transition > 1) {
+            frames = transition;
+        }
     }
-  }
-  temp_v2 = 0;
-  DAT_00448c84 = param_1;
-  if (DAT_0049fb44 != '\0') {
-    DAT_00448c84 = 0;
-  }
-  DAT_0049fcac = DAT_00448c84;
-  psVar2 = (short *)(g_mapTable + DAT_00448c84 * 0x30);
-  DAT_0049fcb4 = (int)*psVar2;
-  DAT_0049fcb8 = (int)psVar2[1];
-  DAT_0049fcbc = (int)psVar2[2];
-  DAT_0049fcc0 = (int)psVar2[3];
-  temp_v1 = (int)*psVar2;
-  if (temp_v0 != 0) {
-    DAT_00448c78 = 0;
-    DAT_00448c74 = DAT_00448c70;
-    DAT_00448c7c = VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  else {
-    DAT_00448c7c = 0x3f800000;
-    DAT_00448c78 = 0x3f800000;
-    DAT_00448c74 = temp_v1;
-  }
-  DAT_00448c70 = temp_v1;
-  *(int *)(DAT_00448c5c + temp_v1 * 0x124) = (int)psVar2[3];
-  if (DAT_00448c88 != 0) {
-    asdTMTexTableReleaseNode(0x38,DAT_00448c8c);
-    DAT_00448c88 = 0;
-  }
-  DAT_00448c8c = temp_v1;
-  if (temp_v1 >= 0x32) {
-    DAT_00448c8c = 0;
-  }
-  FUN_002c58c8(0x38,DAT_00448c8c);
-  DAT_00448c88 = FUN_002c1c0c(0x38,DAT_00448c8c);
-  DAT_00448c64 = (int)psVar2[1];
-  DAT_00448c6c = 0;
-  DAT_00448c94 = (int)psVar2[3];
-  DAT_00448c80 = (int)psVar2[2];
-  VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)psVar2 + 9),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)*(unsigned char *)(psVar2 + 5),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)psVar2[6],(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)psVar2 + 0xb),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)psVar2[7],(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_00448c68 = temp_v2;
-  FUN_001a9604((char)psVar2[4],(unsigned int)*(unsigned char *)(psVar2 + 5),(unsigned int)*(unsigned char *)((int)psVar2 + 0xb),
-               (int)psVar2[6]);
-  VectorSignedToFloat((int)psVar2[0xd],(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_001e39ec(0,(char)psVar2[10],*(unsigned char *)((int)psVar2 + 0x15),(char)psVar2[0xb],
-               *(unsigned char *)((int)psVar2 + 0x17),(char)psVar2[0xc],
-               *(unsigned char *)((int)psVar2 + 0x19),(char)psVar2[0x10],
-               *(unsigned char *)((int)psVar2 + 0x21),(char)psVar2[0x11],
-               *(unsigned char *)((int)psVar2 + 0x23),(int)psVar2[0x12],(int)psVar2[0x13]);
-  DAT_0049fcc4 = (unsigned int)*(unsigned char *)(psVar2 + 0x14);
-  DAT_0049fcc8 = (int)(char)psVar2[0x15];
-  DAT_0049fccc = (DAT_0049fcc8 * 3) / 5;
-  DAT_0049fcd0 = (unsigned int)*(unsigned char *)((int)psVar2 + 0x2b);
-  DAT_0049fcd4 = (unsigned int)*(unsigned char *)(psVar2 + 0x16);
-  DAT_0049fcd8 = (unsigned int)*(unsigned char *)((int)psVar2 + 0x29);
-  DAT_0049fcdc = (unsigned int)*(unsigned char *)((int)psVar2 + 0x2d);
-  DAT_0049fce0 = (unsigned int)*(unsigned char *)(psVar2 + 0x17);
-  DAT_0049fce4 = (unsigned int)*(unsigned char *)((int)psVar2 + 0x2f);
-  DAT_0049f8fc = (float)VectorSignedToFloat((int)psVar2[0xd],(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_0049f8fc = DAT_0049f8fc + 180.0f;
-  if ((int)DAT_0049f8fc >= 0x43b40001) {
-    DAT_0049f8fc = DAT_0049f8fc - 360.0f;
-  }
-  DAT_00448c90 = 0;
-  FUN_0025b754();
-  return;
+    g_mapTable.selectedIndex = preset;
+    if (g_gameState.darkZone != 0) {
+        g_mapTable.selectedIndex = 0;
+    }
+    g_gameState.presetIndex = g_mapTable.selectedIndex;
+    const MapEnvironmentEntry *entry = &g_mapTable.entries[g_mapTable.selectedIndex];
+    g_gameState.unk398 = entry->id;
+    g_gameState.unk39c = entry->unk02;
+    g_gameState.unk3a0 = entry->unk04;
+    g_gameState.unk3a4 = entry->unk06;
+    s32 id = entry->id;
+    if (frames != 0) {
+        g_mapTable.fade = 0.0f;
+        g_mapTable.previous = g_mapTable.current;
+        g_mapTable.fadeSpeed = (f32)frames;
+    } else {
+        g_mapTable.fade = 1.0f;
+        g_mapTable.previous = id;
+    }
+    g_mapTable.current = id;
+    g_mapTable.records[id].unk000 = entry->unk06;
+    if (g_mapTable.textureLoaded != 0) {
+        asdTMTexTableReleaseNode(56, g_mapTable.texture);
+        g_mapTable.textureLoaded = 0;
+    }
+    g_mapTable.texture = id;
+    if (id > 49) {
+        g_mapTable.texture = 0;
+    }
+    FUN_002c58c8(56, g_mapTable.texture);
+    g_mapTable.textureLoaded = FUN_002c1c0c(56, g_mapTable.texture);
+    g_mapTable.unk0c = entry->unk02;
+    g_mapTable.unk10 = 0.0f;
+    g_mapTable.unk14 = 0;
+    g_mapTable.unk3c = entry->unk06;
+    g_mapTable.unk28 = entry->unk04;
+    FUN_001a9604(entry->unk08, (f32)entry->unk09 * (1.0f / 255.0f), (f32)entry->unk0A * (1.0f / 255.0f),
+                 (f32)entry->unk0B * (1.0f / 255.0f), (f32)entry->unk0C * 100.0f,
+                 (f32)entry->unk0E * 100.0f, entry->unk10);
+    FUN_001e39ec(0, entry->unk14, entry->unk15, entry->unk16, entry->unk17,
+                 entry->unk18, entry->unk19, entry->unk20, entry->unk21,
+                 entry->unk22, entry->unk23, entry->unk24, entry->unk26,
+                 (f32)entry->unk1A, entry->unk1C);
+    g_gameState.unk3a8 = entry->unk28[0];
+    g_gameState.unk3ac = (s8)entry->unk28[2];
+    g_gameState.unk3b0 = (g_gameState.unk3ac * 3) / 5;
+    g_gameState.unk3b4 = entry->unk28[3];
+    g_gameState.unk3b8 = entry->unk28[4];
+    g_gameState.unk3bc = entry->unk28[1];
+    g_gameState.unk3c0 = entry->unk28[5];
+    g_gameState.unk3c4 = entry->unk28[6];
+    g_gameState.unk3c8 = entry->unk28[7];
+    DAT_0049f8f8.degrees = (f32)entry->unk1A + 180.0f;
+    if (DAT_0049f8f8.degrees > 360.0f) {
+        DAT_0049f8f8.degrees -= 360.0f;
+    }
+    g_mapTable.unk38 = 0;
+    FUN_0025b754();
 }
 
 } /* extern "C" */

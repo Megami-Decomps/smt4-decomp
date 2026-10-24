@@ -1,157 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d01f8` (_code @ 0x1d01f8, 0x2a0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and compare layout only - retail keeps the cost in s0 and the running score in s16, branches to the take path with a shared tail, and loads the kind bytes in the opposite register order; the logic and calls are identical. */
+#include "common.h"
 
-extern "C" {
-
-int idMapLookup(void);
-int passiveSkillLookupRecord(void);
-int dataTable06Sub1GetRecord(void);
-int dataTable40FindById(void);
-int VectorUnsignedToFloat(int, int);
-
-typedef struct fn_001d01f8_arg0 fn_001d01f8_arg0;
-struct fn_001d01f8_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x8];
-    int field_0x1c; /* +0x1c */
-    int field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x8];
-    byte field_0x2c; /* +0x2c */
+namespace {
+/* A record of the skill table (dataTable06Sub1). */
+struct SkillCostRecord {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 kind;
+    /* 0x03 */ u8 flags;         /* bits 0-4: cost */
 };
 
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-extern int FUN_0026a604(void);
-/* Supplied declaration required: idMapLookup. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-/* Supplied declaration required: dataTable06Sub1GetRecord. */
-/* Supplied declaration required: dataTable40FindById. */
+/* The skill inheritance picker's work: the candidate skills, the passive skills that may follow them and
+   the skills already chosen. */
+struct SkillPicker {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 *candidates;
+    /* 0x08 */ s32 candidateCount;
+    /* 0x0c */ u16 *passives;
+    /* 0x10 */ s32 passiveCount;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1c */ u16 *chosen;
+    /* 0x20 */ s32 chosenCount;
+    /* 0x24 */ u8 unk24[8];
+    /* 0x2c */ u8 element;
+};
+}
 
+extern "C" {
+SkillCostRecord *dataTable06Sub1GetRecord(u32 id);
+s32 idMapLookup(u32 id);
+void *dataTable40FindById(u32 id);
+void *passiveSkillLookupRecord(u32 id);
+s32 FUN_0026a604(void *passive, void *match);
 
-unsigned int FUN_001d01f8(fn_001d01f8_arg0 *param_1)
-
+/* Picks the best remaining candidate skill (cheapest bonus first, preferring the unit's element and the passives
+   that go with it, penalising what is already chosen), moves it - and the first passive matching it - into
+   the chosen list and clears them from the pools. Returns 1 when something was picked. */
+u32 FUN_001d01f8(SkillPicker *picker)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int in_fpscr;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  
-  temp_v6 = 0;
-  temp_v7 = -1;
-  temp_v9 = 0.0f;
-  if (0 < param_1->field_0x8) {
-    temp_v11 = 0.01f;
-    temp_v10 = 1.0f;
-    do {
-      if (*(short *)(param_1->field_0x4 + temp_v6 * 2) != 0) {
-        dataTable06Sub1GetRecord();
-        temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x4 + temp_v6 * 2);
-        temp_v3 = temp_v4;
-        dataTable06Sub1GetRecord();
-        temp_v8 = (float)VectorUnsignedToFloat
-                                 (*(unsigned char *)(temp_v3 + 3) & 0x1f,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = temp_v8 + temp_v8 * temp_v11;
-        temp_v1 = temp_v4;
-        idMapLookup();
-        if (param_1->field_0x2c == temp_v1) {
-          temp_v8 = temp_v8 + temp_v10;
+    s32 best = -1;
+    f32 bestScore = 0.0f;
+    for (s32 i = 0; i < picker->candidateCount; i++) {
+        if (picker->candidates[i] == 0) {
+            continue;
         }
-        dataTable40FindById();
-        if ((temp_v4 != 0) && (temp_v5 = 0, 0 < param_1->field_0x10)) {
-          do {
-            if (*(short *)(param_1->field_0xc + temp_v5 * 2) != 0) {
-              passiveSkillLookupRecord();
-              temp_v2 = FUN_0026a604();
-              if (temp_v2 != 0) {
-                temp_v8 = temp_v8 + temp_v10;
-                break;
-              }
+        dataTable06Sub1GetRecord(picker->candidates[i]);
+        u32 id = picker->candidates[i];
+        SkillCostRecord *record = dataTable06Sub1GetRecord(id);
+        f32 cost = (f32)(u32)(record->flags & 0x1f);
+        f32 score = cost;
+        score += cost * 0.01f;
+        s32 element = idMapLookup(id);
+        if (picker->element == element) {
+            score += 1.0f;
+        }
+        void *match = dataTable40FindById(id);
+        if (match != NULL) {
+            for (s32 j = 0; j < picker->passiveCount; j++) {
+                if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), match) != 0) {
+                    score += 1.0f;
+                    break;
+                }
             }
-            temp_v5 = temp_v5 + 1;
-          } while (temp_v5 < param_1->field_0x10);
         }
-        temp_v5 = 0;
-        if (temp_v5 < param_1->field_0x20) {
-          do {
-            temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x1c + temp_v5 * 2);
-            idMapLookup();
-            if (temp_v4 == temp_v1) {
-              temp_v8 = temp_v8 - temp_v10;
+        for (s32 j = 0; j < picker->chosenCount; j++) {
+            if (idMapLookup(picker->chosen[j]) == element) {
+                score -= 1.0f;
             }
-            temp_v4 = (unsigned int)*(unsigned short *)(param_1->field_0x1c + temp_v5 * 2);
-            dataTable06Sub1GetRecord();
-            temp_v5 = temp_v5 + 1;
-            if (*(char *)(temp_v3 + 2) == *(char *)(temp_v4 + 2)) {
-              temp_v8 = temp_v8 - temp_v10;
+            if (dataTable06Sub1GetRecord(picker->chosen[j])->kind == record->kind) {
+                score -= 1.0f;
             }
-          } while (temp_v5 < param_1->field_0x20);
         }
-        if (-1 >= temp_v7) {
-          temp_v7 = temp_v6;
-          temp_v9 = temp_v8;
+        bool keep = best >= 0 && (bestScore > score || (bestScore == score && picker->candidates[i] > picker->candidates[best]));
+        if (!keep) {
+            bestScore = score;
+            best = i;
         }
-        else {
-          temp_v3 = in_fpscr & 0xfffffff;
-          temp_v1 = temp_v3 | ((unsigned int)(temp_v9 < temp_v8) << 0x1f) | ((unsigned int)(temp_v9 == temp_v8) << 0x1e);
-          in_fpscr = temp_v1 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v8 != temp_v8)) << 0x1c);
-          temp_v0 = (unsigned char)(temp_v1 >> 0x18);
-          if ((!(!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1))) &&
-             ((in_fpscr = temp_v3 | ((unsigned int)(temp_v9 == temp_v8) << 0x1e), !romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0) ||
-              (*(unsigned short *)(param_1->field_0x4 + temp_v7 * 2) >=
-               *(unsigned short *)(param_1->field_0x4 + temp_v6 * 2))))) {
-            temp_v7 = temp_v6;
-            temp_v9 = temp_v8;
-          }
-        }
-      }
-      temp_v6 = temp_v6 + 1;
-    } while (temp_v6 < param_1->field_0x8);
-    if (-1 < temp_v7) {
-      *(unsigned short *)(param_1->field_0x1c + param_1->field_0x20 * 2) =
-           *(unsigned short *)(param_1->field_0x4 + temp_v7 * 2);
-      param_1->field_0x20 = param_1->field_0x20 + 1;
-      temp_v3 = (unsigned int)*(unsigned short *)(param_1->field_0x4 + temp_v7 * 2);
-      dataTable40FindById();
-      if ((temp_v3 != 0) && (temp_v6 = 0, 0 < param_1->field_0x10)) {
-        do {
-          if (*(short *)(param_1->field_0xc + temp_v6 * 2) != 0) {
-            passiveSkillLookupRecord();
-            temp_v5 = FUN_0026a604();
-            if (temp_v5 != 0) {
-              *(unsigned short *)(param_1->field_0x1c + param_1->field_0x20 * 2) =
-                   *(unsigned short *)(param_1->field_0xc + temp_v6 * 2);
-              param_1->field_0x20 = param_1->field_0x20 + 1;
-              *(unsigned short *)(param_1->field_0xc + temp_v6 * 2) = 0;
-              break;
-            }
-          }
-          temp_v6 = temp_v6 + 1;
-        } while (temp_v6 < param_1->field_0x10);
-      }
-      *(unsigned short *)(param_1->field_0x4 + temp_v7 * 2) = 0;
-      return 1;
     }
-  }
-  return 0;
+    if (best >= 0) {
+        picker->chosen[picker->chosenCount] = picker->candidates[best];
+        picker->chosenCount++;
+        void *match = dataTable40FindById(picker->candidates[best]);
+        if (match != NULL) {
+            for (s32 j = 0; j < picker->passiveCount; j++) {
+                if (picker->passives[j] != 0 && FUN_0026a604(passiveSkillLookupRecord(picker->passives[j]), match) != 0) {
+                    picker->chosen[picker->chosenCount] = picker->passives[j];
+                    picker->chosenCount++;
+                    picker->passives[j] = 0;
+                    break;
+                }
+            }
+        }
+        picker->candidates[best] = 0;
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

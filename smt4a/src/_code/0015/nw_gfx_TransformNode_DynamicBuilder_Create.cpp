@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int *FUN_001b7420(int, int *, unsigned int, unsigned int);
+extern int *_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(int, int *, unsigned int, unsigned int);
 
 
 int * nw_gfx_TransformNode_DynamicBuilder_Create(unsigned int param_1,int *param_2)
@@ -19,7 +19,7 @@ int * nw_gfx_TransformNode_DynamicBuilder_Create(unsigned int param_1,int *param
     piVar2 = (int *)0x0;
   }
   else {
-    piVar2 = (int *)FUN_001b7420(temp_v0,param_2,0,param_1);
+    piVar2 = (int *)_ZN9Obj55b680C1EP18AsdAllocatorObjectP12Obj55b680ResPv(temp_v0,param_2,0,param_1);
   }
   (**(romwright_code **)(*piVar2 + 0x24))(piVar2,param_2);
   return piVar2;

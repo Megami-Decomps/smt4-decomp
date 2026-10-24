@@ -38,8 +38,8 @@ void campCecSettingOpen(void)
     taskCreateDraw(LAB_002f5db8, 0xdf, 0, 0, LAB_002000ac, 0, 0, setting->task);
     asdLoadFileAsyncSimple(LAB_002f5dd4, &setting->heapA, 0);
     asdLoadFileAsyncSimple(LAB_002f5dec, &setting->heapB, 0);
-    setting->unk38 = 0;
-    setting->unk3C = 2;
+    setting->stage = 0;
+    setting->flags = 2;
     setting->items[2] = 2;
     setting->items[3] = 3;
     setting->items[4] = 4;

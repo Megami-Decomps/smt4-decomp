@@ -20,7 +20,7 @@ struct BindingLookup {
 
 extern "C" {
 extern const u32 _ZTV9Obj55a178[];
-BoundObject* FUN_003054a4(BoundObject* object, s32 mode);
+BoundObject* _ZN9Obj558d20C1Ej(BoundObject* object, s32 mode);
 void* FUN_002eb56c();
 BindingLookup* FUN_002ecedc(s32 kind, void* context);
 void FUN_002f3b58(void* bindings, s32 id, void* payload);
@@ -28,7 +28,7 @@ void FUN_002f3b58(void* bindings, s32 id, void* payload);
 // Construct a bound object and register its payload when an ID is supplied.
 BoundObject* FUN_00311780(BoundObject* object, s32 bindingId)
 {
-    object = FUN_003054a4(object, 1);
+    object = _ZN9Obj558d20C1Ej(object, 1);
     object->vtable = _ZTV9Obj55a178 + 2;
     if (bindingId != 0) {
         object->bindingId = bindingId;

@@ -1,170 +1,137 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e16cc` (_code @ 0x3e16cc, 0x344 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (212 vs 209 rows); register allocation differs (retail keeps the state in r9) */
+#include "common.h"
+
+// Battle unit entry (0x1d0 bytes each): only the fields read here.
+struct BattleUnitEntry {
+    u8 unk00[0x50];
+    u32 flags;              // 0x50: bit 0 present, bit 1 active, bit 4 player side
+    u8 unk54[4];
+    u32 flags2;             // 0x58: bit 3 pending refresh
+    u8 unk5c[4];
+    u16 status;             // 0x60: bit 11 = inactive pair
+    u8 unk62[8];
+    s16 listedId;           // 0x6a
+};
+
+struct BattleState {
+    u8 unk0000[0x1ed4];
+    u8* units;              // 0x1ed4
+    u8 unk1ed8[0x45a0 - 0x1ed8];
+    u64 pendingMask;        // 0x45a0
+};
+
+struct StateObject {
+    u32 phase;              // 0x00
+    u32 unk04;
+    u32 unk08;
+    u32 flags;              // 0x0c: bit 1 = refresh running
+    u32 unk10;              // 0x10
+};
+
+struct SideRecord {
+    u8 unk00[2];
+    u16 id;                 // 0x02
+};
 
 extern "C" {
 
-int qsort(int [50], int, int, unsigned char *);
-int FUN_001568f8(int, int);
-int FUN_003e0cd4(...);
-int FUN_003ed6e8(int);
-int FUN_003f26d4(...);
-int FUN_004aa2e0(...);
-int FUN_004cae0c(int, int, int, int, int);
-int FUN_004f1c5c(...);
-int nameEntriesRegisterVerNames(void);
-int FUN_004fb43c(int, unsigned int *, int, int, int, int, int);
-int FUN_004fd204(int, unsigned int *, int, int, int, int);
-int FUN_004fe764(int, unsigned int *, int, unsigned int, int);
+extern s32 g_btlCamera;
+extern u8* g_btlAux;
+extern u32 g_btlUiBlock;
+extern s16 DAT_0057a634;
+extern s16 DAT_0057a638;
+extern s16 DAT_0057a63c;
+extern s16 DAT_0057a640;
+extern s16 DAT_0057a644;
+extern s16 DAT_0057a648;
+extern s16 DAT_0057a64c;
+extern u64 DAT_00573858;
+extern u64 DAT_00573878;
+extern u64 DAT_00573890;
 
-/* stack frame of param_2: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int spFC; /* 0xfc: local_fc */
-    unsigned int sp100; /* 0x100: local_100 */
-    unsigned int sp104; /* 0x104: local_104 */
-    unsigned int sp108; /* 0x108: local_108 */
-} param_2_stack;
+void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
+s32 FUN_00221a94(const void* a, const void* b);
+SideRecord* FUN_001568f8(BattleState* state, s32 id);
+s32 pairedEntryTableContains(BattleState* state, u16 id);
+void nameEntriesRegisterVerNames(void);
+s32 FUN_004f8264(u8* aux);
+void FUN_004cae0c(BattleState* state, BattleUnitEntry* unit, s32 a, s32 b, s32 c);
+void FUN_004fd204(s32 offset, StateObject* object, BattleUnitEntry* unit, s32 a, s32 b, s32 c);
+void FUN_004fe764(s32 offset, StateObject* object, BattleUnitEntry* unit, u32 kind, s32 arg);
+void FUN_004fb43c(s32 offset, StateObject* object, s32 id, s32 a, s32 b, s32 c, s32 d);
+void FUN_004f1c5c(s32 camera, s32 arg);
+void FUN_003ed6e8(BattleState* state);
+void FUN_003f26d4(BattleState* state);
+void FUN_004aa2e0(u32 ui, s32 arg);
+void FUN_003e0cd4(StateObject* object, BattleState* state);
 
-extern unsigned char LAB_00221a94; /* 0x221a94 */
-extern int g_btlCamera; /* 0x571508 */
-extern int g_btlAux; /* 0x573808 */
-extern unsigned int DAT_00573858; /* 0x573858 */
-extern unsigned int DAT_0057385c; /* 0x57385c */
-extern unsigned int DAT_00573878; /* 0x573878 */
-extern unsigned int DAT_0057387c; /* 0x57387c */
-extern unsigned int DAT_00573890; /* 0x573890 */
-extern unsigned int DAT_00573894; /* 0x573894 */
-extern unsigned int DAT_0057a634; /* 0x57a634 */
-extern unsigned int DAT_0057a638; /* 0x57a638 */
-extern unsigned int DAT_0057a63c; /* 0x57a63c */
-extern unsigned int DAT_0057a640; /* 0x57a640 */
-extern unsigned int DAT_0057a644; /* 0x57a644 */
-extern unsigned int DAT_0057a648; /* 0x57a648 */
-extern unsigned int DAT_0057a64c; /* 0x57a64c */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_003e0cd4. */
-/* Supplied declaration required: FUN_003ed6e8. */
-extern int pairedEntryTableContains(int, unsigned short);
-/* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: FUN_004aa2e0. */
-/* Supplied declaration required: FUN_004cae0c. */
-/* Supplied declaration required: FUN_004f1c5c. */
-extern int FUN_004f8264(int);
-/* Supplied declaration required: nameEntriesRegisterVerNames. */
-/* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004fd204. */
-/* Supplied declaration required: FUN_004fe764. */
-
-
-void FUN_003e16cc(unsigned int *param_1,int param_2)
-
+// Shows the "refresh" announcement for every unit whose pair state changed, then continues the state machine.
+void FUN_003e16cc(StateObject* object, BattleState* state)
 {
-/* irregular: 12 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int *puVar9;
-  int temp_v8;
-  short temp_v9;
-  int temp_v10;
-  int aiStack_f8 [50];
-  int temp_v11;
-  int temp_v12;
-  
-  if ((param_1[3] == 0) && ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0)) {
-    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
-    nameEntriesRegisterVerNames();
-    param_1[3] = param_1[3] | 2;
-  }
-  if (((param_1[3] & 2) != 0) && (temp_v3 = FUN_004f8264(g_btlAux), temp_v3 != 0)) {
-    temp_v8 = 0;
-    temp_v3 = 4;
-    do {
-      temp_v4 = *(int *)(param_2 + 0x1ed4) + temp_v3 * 0x1d0;
-      if (((*(unsigned int *)(temp_v4 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v4 + 0x50) & 2) != 0) &&
-         ((*(unsigned int *)(temp_v4 + 0x58) & 8) != 0)) {
-        aiStack_f8[temp_v8] = temp_v4;
-        temp_v8 = temp_v8 + 1;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 0x36);
-    qsort(aiStack_f8,temp_v8,4,&LAB_00221a94);
-    temp_v9 = 0;
-    temp_v3 = 0;
-    temp_v12 = 0;
-    if (temp_v3 < temp_v8) {
-      do {
-        temp_v4 = aiStack_f8[temp_v3];
-        if ((((*(unsigned int *)(temp_v4 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v4 + 0x50) & 2) != 0) &&
-            ((*(unsigned int *)(temp_v4 + 0x58) & 8) != 0)) &&
-           (*(unsigned int *)(temp_v4 + 0x58) = *(unsigned int *)(temp_v4 + 0x58) & 0xfffffff7,
-           (*(unsigned short *)(temp_v4 + 0x60) & 0x800) == 0)) {
-          temp_v5 = param_2;
-          FUN_001568f8(param_2,(int)*(short *)(temp_v4 + 0x6a));
-          temp_v5 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v5 + 2));
-          if (temp_v5 == 0) {
-            *(unsigned short *)(temp_v4 + 0x60) = *(unsigned short *)(temp_v4 + 0x60) | 0x800;
-            if ((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) {
-              temp_v0 = (short)DAT_0057a640;
-              temp_v1 = (short)DAT_0057a644;
-              temp_v2 = (short)DAT_0057a648;
+    if (object->flags == 0 && (*reinterpret_cast<u32*>(g_btlAux + 0x339c) & 0x400) != 0) {
+        *reinterpret_cast<u32*>(g_btlCamera + 0x64c) |= 0x4000;
+        nameEntriesRegisterVerNames();
+        object->flags |= 2;
+    }
+    if ((object->flags & 2) == 0 || FUN_004f8264(g_btlAux) == 0) return;
+
+    BattleUnitEntry* pending[50];
+    s32 count = 0;
+    for (s32 i = 4; i < 0x36; i++) {
+        BattleUnitEntry* unit = reinterpret_cast<BattleUnitEntry*>(state->units + i * 0x1d0);
+        if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->flags2 & 8) != 0) pending[count++] = unit;
+    }
+    qsort(pending, count, 4, FUN_00221a94);
+
+    s16 shown = 0;
+    bool announced = false;
+    for (s32 i = 0; i < count; i++) {
+        BattleUnitEntry* unit = pending[i];
+        if ((unit->flags & 1) != 0 && (unit->flags & 2) != 0 && (unit->flags2 & 8) != 0) {
+            unit->flags2 &= 0xfffffff7;
+            if ((unit->status & 0x800) == 0) {
+                SideRecord* record = FUN_001568f8(state, unit->listedId);
+                if (pairedEntryTableContains(state, record->id) == 0) {
+                    unit->status |= 0x800;
+                    s16 stride, base, extra;
+                    if ((unit->flags & 0x10) != 0) {
+                        stride = DAT_0057a640;
+                        base = DAT_0057a644;
+                        extra = DAT_0057a648;
+                    } else {
+                        stride = DAT_0057a634;
+                        base = DAT_0057a638;
+                        extra = DAT_0057a63c;
+                    }
+                    s32 offset = shown * stride + DAT_0057a64c;
+                    FUN_004cae0c(state, unit, 0, 0, extra);
+                    FUN_004fd204(offset + base, object, unit, 0xff, extra, 0);
+                    u32 kind = ((unit->flags & 0x10) != 0) ? 7 : 6;
+                    FUN_004fe764(offset, object, unit, kind, 0xd);
+                    if (!announced) {
+                        FUN_004fb43c(shown * stride, object, 0x1000276, 0, 0, 0, 0);
+                        announced = true;
+                    }
+                    shown++;
+                }
             }
-            else {
-              temp_v1 = (short)DAT_0057a638;
-              temp_v0 = (short)DAT_0057a634;
-              temp_v2 = (short)DAT_0057a63c;
-            }
-            temp_v11 = (int)temp_v1;
-            temp_v10 = (int)(short)DAT_0057a64c;
-            temp_v5 = (int)temp_v2;
-            FUN_004cae0c(param_2,temp_v4,0,0,temp_v5);
-            FUN_004fd204((int)temp_v9 * (int)temp_v0 + temp_v10 + temp_v11,param_1,temp_v4,0xff,temp_v5,0);
-            temp_v7 = 6;
-            if ((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) {
-              temp_v7 = 7;
-            }
-            FUN_004fe764((int)temp_v9 * (int)temp_v0 + temp_v10,param_1,temp_v4,temp_v7,0xd);
-            if (temp_v12 == 0) {
-              FUN_004fb43c((int)temp_v9 * (int)temp_v0,param_1,0x1000276,0,0,0,0);
-              temp_v12 = 1;
-            }
-            temp_v9 = temp_v9 + 1;
-          }
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < temp_v8);
     }
-    if (*(int *)(g_btlCamera + 0x34) != 0) {
-      FUN_004f1c5c();
+    if (*reinterpret_cast<s32*>(g_btlCamera + 0x34) != 0) {
+        FUN_004f1c5c(g_btlCamera, 0);
+    } else {
+        FUN_004f1c5c(g_btlCamera, 0x78);
     }
-    else {
-      FUN_004f1c5c(g_btlCamera,0x78);
+    if ((DAT_00573858 & state->pendingMask) == 0) {
+        FUN_003ed6e8(state);
+        FUN_003f26d4(state);
+        state->pendingMask = DAT_00573878 | state->pendingMask | DAT_00573890;
+        FUN_004aa2e0(g_btlUiBlock, 0);
     }
-    puVar9 = (unsigned int *)(param_2 + 0x45a0);
-    if ((DAT_00573858 & *puVar9) == 0 && (*(unsigned int *)(param_2 + 0x45a4) & DAT_0057385c) == 0) {
-      FUN_003ed6e8(param_2);
-      FUN_003f26d4(param_2);
-      temp_v6 = DAT_0057387c | *(unsigned int *)(param_2 + 0x45a4) | DAT_00573894;
-      *puVar9 = DAT_00573878 | *puVar9 | DAT_00573890;
-      *(unsigned int *)(param_2 + 0x45a4) = temp_v6;
-      FUN_004aa2e0(g_btlUiBlock,0);
-    }
-    param_1[4] = 0;
-    *param_1 = 0x19;
-    param_1[3] = 0;
-    FUN_003e0cd4(param_1,param_2);
-  }
-  return;
+    object->unk10 = 0;
+    object->phase = 0x19;
+    object->flags = 0;
+    FUN_003e0cd4(object, state);
 }
 
 } /* extern "C" */

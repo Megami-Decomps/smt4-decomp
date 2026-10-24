@@ -1,131 +1,118 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb24c` (_code @ 0x3cb24c, 0x238 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP register allocation and the scheduling of the per-vertex color stores differ from retail. */
+#include "common.h"
+#include "gfx/RenderSubmission.h"
 
 extern "C" {
 
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-int rt_memcpy(unsigned char *, unsigned char *, unsigned int);
-int rt_memcpy_w(unsigned int *, unsigned int *, unsigned int);
+/* One RGBA texel of a vertex strip, written from a packed word through its byte channels. */
+typedef RenderSubmissionColor StripColor;
 
-typedef struct fn_003cb24c_arg1 fn_003cb24c_arg1;
-struct fn_003cb24c_arg1 {
-    unsigned char pad_0x0[0x38];
-    uint field_0x38; /* +0x38 */
-    unsigned char pad_0x3c[0x3c];
-    float field_0x78; /* +0x78 */
-    float field_0x7c; /* +0x7c */
-    unsigned char pad_0x80[0xc];
-    int field_0x8c; /* +0x8c */
-    float field_0x90; /* +0x90 */
-};
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_003cb24c(int param_1,fn_003cb24c_arg1 *param_2)
-
+static __inline void stripColorSet(StripColor *color, u32 word)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  int *piVar1;
-  unsigned int temp_v0;
-  unsigned char *puVar3;
-  unsigned char *puVar4;
-  unsigned int *puVar5;
-  unsigned int *puVar6;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int in_fpscr;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v1 = param_2->field_0x38;
-  if (temp_v1 != 0) {
-    piVar1 = *(int **)(param_1 + 4);
-    puVar3 = *(unsigned char **)(*piVar1 + 0x38);
-    temp_v0 = piVar1[0x16];
-    piVar1[0x16] = temp_v0 | 0x20;
-    puVar5 = *(unsigned int **)(**(int **)(param_1 + 4) + 0x3c);
-    (*(int **)(param_1 + 4))[0x16] = temp_v0 | 0x24;
-    temp_v3 = param_2->field_0x8c;
-    temp_v2 = temp_v3 + 1;
-    temp_v0 = 0;
-    temp_v7 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = (int)(param_2->field_0x78 * temp_v7);
-    temp_v4 = (int)(param_2->field_0x7c * temp_v8);
-    temp_v7 = param_2->field_0x90 * 0.33333334f;
-    puVar4 = puVar3;
-    puVar6 = puVar5;
-    if (temp_v2 != 0) {
-      do {
-        if ((int)temp_v0 < temp_v5) {
-          temp_v9 = (float)VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v8 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v8 = temp_v9 / temp_v8;
-        }
-        else {
-          temp_v8 = 1.0f;
-          if (temp_v4 < (int)temp_v0) {
-            temp_v9 = (float)VectorSignedToFloat(temp_v3 - temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v8 = (float)VectorUnsignedToFloat(temp_v3 - temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v8 = temp_v8 / temp_v9;
-          }
-        }
-        *puVar4 = 0xff;
-        puVar4[1] = 0xff;
-        puVar4[2] = 0xff;
-        temp_v0 = temp_v0 + 1;
-        puVar4[3] = 0;
-        temp_v6 = VectorFloatToUnsigned(temp_v8 * 255.0f,3);
-        puVar4[4] = 0xff;
-        puVar4[5] = 0xff;
-        puVar4[6] = 0xff;
-        puVar4[7] = (char)temp_v6;
-        *(unsigned int *)(puVar4 + 8) = *(unsigned int *)(puVar4 + 4);
-        puVar4[0xc] = 0xff;
-        puVar4[0xd] = 0xff;
-        puVar4[0xe] = 0xff;
-        puVar4[0xf] = 0;
-        *puVar6 = 0;
-        *(float *)&puVar6[2] = temp_v7;
-        *(float *)&puVar6[4] = temp_v7 * 2.0f;
-        *(float *)&puVar6[6] = temp_v7 * 3.0f;
-        puVar4 = puVar4 + 0x10;
-        puVar6 = puVar6 + 8;
-      } while (temp_v0 < temp_v2);
-    }
-    temp_v0 = 1;
-    if (temp_v0 < temp_v1) {
-      do {
-        rt_memcpy(puVar4,puVar3,temp_v2 * 0x10);
-        puVar4 = puVar4 + temp_v2 * 0x10;
-        rt_memcpy_w(puVar6,puVar5,temp_v2 * 0x20);
-        temp_v0 = temp_v0 + 1;
-        puVar6 = puVar6 + temp_v2 * 8;
-      } while (temp_v0 < temp_v1);
-    }
-  }
-  return;
+    color->channels.red = __rev(word) >> 24;
+    color->channels.green = __rev(word) >> 16;
+    color->channels.blue = __rev(word) >> 8;
+    color->channels.alpha = __rev(word);
 }
 
-} /* extern "C" */
+/* One vertex's four colors (0x10 bytes). */
+typedef struct StripVertexColors {
+    StripColor corner[4];
+} StripVertexColors;
+
+/* One vertex's four texture offsets (0x20 bytes): only the first component of each is set. */
+typedef struct StripVertexOffsets {
+    f32 offset[4][2];
+} StripVertexOffsets;
+
+/* The mesh buffers the strip is written into. */
+typedef struct StripMesh {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ StripVertexColors *colors;
+    /* 0x3C */ StripVertexOffsets *offsets;
+} StripMesh;
+
+typedef struct StripOwner {
+    /* 0x00 */ StripMesh *mesh;
+    /* 0x04 */ u8 unk04[0x50];
+    /* 0x54 */ u32 unk54;
+    /* 0x58 */ u32 flags;       /* 0x20 and 0x04: the mesh data was written */
+} StripOwner;
+
+typedef struct StripHost {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ StripOwner *owner;
+} StripHost;
+
+/* The strip's parameters (only the fields read here). */
+typedef struct StripParams {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 rings;          /* how many copies of the first ring the strip repeats */
+    /* 0x3C */ u8 unk3c[0x3C];
+    /* 0x78 */ f32 fadeInEnd;      /* fraction of the ring over which the alpha fades in */
+    /* 0x7C */ f32 fadeOutStart;   /* fraction after which it fades out */
+    /* 0x80 */ u8 unk80[0xC];
+    /* 0x8C */ s32 segments;
+    /* 0x90 */ f32 width;
+} StripParams;
+
+void *rt_memcpy(void *destination, const void *source, u32 size);
+void *rt_memcpy_w(void *destination, const void *source, u32 size);
+
+/* Builds the vertex strip of a ribbon effect: the first ring gets white colors fading in and out
+ * along its length plus its offsets, and the remaining rings are copies of it. */
+void FUN_003cb24c(StripHost *host, StripParams *params)
+{
+    u32 rings = params->rings;
+
+    if (rings == 0) {
+        return;
+    }
+    StripOwner *owner = host->owner;
+    StripVertexColors *firstColors = owner->mesh->colors;
+
+    owner->flags |= 0x20;
+    StripVertexOffsets *firstOffsets = host->owner->mesh->offsets;
+    host->owner->flags |= 0x20 | 0x04;
+
+    s32 segments = params->segments;
+    u32 vertices = segments + 1;
+    s32 fadeInEnd = (s32)(params->fadeInEnd * (f32)segments);
+    s32 fadeOutStart = (s32)(params->fadeOutStart * (f32)segments);
+    f32 step = params->width * 0.33333334f;
+    StripVertexColors *colors = firstColors;
+    StripVertexOffsets *offsets = firstOffsets;
+
+    for (u32 i = 0; i < vertices; i++) {
+        f32 fade;
+
+        if ((s32)i < fadeInEnd) {
+            fade = (f32)i / (f32)fadeInEnd;
+        } else {
+            fade = 1.0f;
+            if (fadeOutStart < (s32)i) {
+                fade = (f32)(u32)(segments - i) / (f32)(segments - fadeOutStart);
+            }
+        }
+        u8 alpha = (u8)(u32)(fade * 255.0f);
+
+        stripColorSet(&colors->corner[0], 0x00FFFFFF);
+        stripColorSet(&colors->corner[1], 0x00FFFFFF | (alpha << 24));
+        colors->corner[2] = colors->corner[1];
+        stripColorSet(&colors->corner[3], 0x00FFFFFF);
+        offsets->offset[0][0] = 0.0f;
+        offsets->offset[1][0] = step;
+        offsets->offset[2][0] = step * 2.0f;
+        offsets->offset[3][0] = step * 3.0f;
+        colors++;
+        offsets++;
+    }
+    for (u32 ring = 1; ring < rings; ring++) {
+        rt_memcpy(colors, firstColors, vertices * sizeof(StripVertexColors));
+        colors += vertices;
+        rt_memcpy_w(offsets, firstOffsets, vertices * sizeof(StripVertexOffsets));
+        offsets += vertices;
+    }
+}
+
+}

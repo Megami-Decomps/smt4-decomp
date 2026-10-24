@@ -1,107 +1,123 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f5750` (_code @ 0x4f5750, 0x254 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near: same shape, 156 rows against 152; register assignment differs (retail keeps the effect id in sl and the free-slot pointer in r9 and ends both loops at one shared `mov r0,#0`). */
+#include "common.h"
+
+#define EFFECT_LIST_SIZE 50
+#define EFFECT_LIST_ENTRY_READY 4
+
+struct Vector2 {
+    f32 x;
+    f32 y;
+};
+
+struct Vector3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+/* The battle effect manager (observed fields): the active handles, the slot table and per-battle flags. */
+struct BtlEffectManager {
+    /* 0x0000 */ s32 handle[EFFECT_LIST_SIZE];
+    /* 0x00C8 */ s32 slot[EFFECT_LIST_SIZE];
+    /* 0x0190 */ u8 unk0190[0x320C];
+    /* 0x339C */ u32 flags;
+    /* 0x33A0 */ u8 unk33A0[0x68D0];
+    /* 0x9C70 */ f32 scaleFactor;
+};
 
 extern "C" {
 
-int FUN_00260030(int);
-int FUN_0031ba34(int, int, int, int);
-int FUN_00320b44(unsigned int [9], int, unsigned int);
-int FUN_0047ed10(unsigned int, int, int);
-int FUN_004fad68(int, int, unsigned int, int);
-
-/* stack frame of param_9: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_9_stack;
-
-/* Supplied declaration required: FUN_00260030. */
-extern int entryIsValid(int);
-/* Supplied declaration required: FUN_0031ba34. */
-/* Supplied declaration required: FUN_00320b44. */
-/* Supplied declaration required: FUN_0047ed10. */
-/* Supplied declaration required: FUN_004fad68. */
-
-
-void FUN_004f5750(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,
-                 int param_6,unsigned int param_7,int param_8,int param_9)
-
+/* Records `handle` in the first free entry of the active list (or finds it already there); 0 when full. */
+static __inline s32 effectManagerRecordHandle(BtlEffectManager *manager, s32 handle)
 {
-/* irregular: 2 goto(s); 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2 [9];
-  int iStack_34;
-  int iStack_30;
-  unsigned int temp_v3;
-  int iStack_28;
-  
-  if (param_2 != 0xff) {
-    temp_v2[0] = 0;
-    iStack_34 = param_1;
-    iStack_30 = param_2;
-    temp_v3 = param_3;
-    iStack_28 = param_4;
-    if ((param_6 != 6) && (-1 < param_4)) {
-      FUN_00320b44(temp_v2,param_4,param_5);
-    }
-    FUN_004fad68(param_1,param_6,temp_v3,param_4);
-    temp_v0 = 0;
-    do {
-      temp_v1 = param_1 + temp_v0 * 4;
-      if (*(int *)(temp_v1 + 200) == 0) {
-        temp_v0 = param_1 + temp_v0 * 4 + 200;
-        goto LAB_004f5804;
-      }
-      if (*(int *)(temp_v1 + 0xcc) == 0) {
-        temp_v0 = param_1 + temp_v0 * 4 + 0xcc;
-        goto LAB_004f5804;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while (temp_v0 < 0x32);
-    temp_v0 = 0;
-LAB_004f5804:
-    if (param_8 != 0) {
-      FUN_0047ed10(param_7,0,param_6);
-    }
-    if (((param_6 == 2 || param_6 == 5) || (param_6 == 7 || param_6 == 8)) ||
-       ((param_6 == 9 || param_6 == 0xc) || param_6 == 0xf)) {
-      FUN_0031ba34(param_2,temp_v0,1,3);
-      temp_v0 = 0;
-      do {
-        temp_v1 = *(int *)(param_1 + temp_v0 * 4);
-        if (temp_v1 == param_2) {
-          return;
+    s32 i;
+
+    for (i = 0; i < EFFECT_LIST_SIZE; i++) {
+        if (manager->handle[i] == handle) {
+            return handle;
         }
-        if (temp_v1 == 0) {
-          *(int *)(param_1 + temp_v0 * 4) = param_2;
-          return;
+        if (manager->handle[i] == 0) {
+            manager->handle[i] = handle;
+            return handle;
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x32);
     }
-    else {
-      if (((*(unsigned int *)(param_1 + 0x339c) & 4) == 0) && (temp_v1 = entryIsValid(param_2), temp_v1 != 0)) {
-        FUN_00260030(param_2);
-        *(unsigned int *)(param_1 + 0x339c) = *(unsigned int *)(param_1 + 0x339c) | 4;
-      }
-      FUN_0031ba34(param_2,temp_v0,0,param_9 != 0);
-      temp_v0 = 0;
-      do {
-        temp_v1 = *(int *)(param_1 + temp_v0 * 4);
-        if (temp_v1 == param_2) {
-          return;
-        }
-        if (temp_v1 == 0) {
-          *(int *)(param_1 + temp_v0 * 4) = param_2;
-          return;
-        }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x32);
+    return 0;
+}
+
+s32 FUN_00320b44(f32 *scale, s32 index, u32 value);
+Vector3 FUN_004fad68(BtlEffectManager *manager, s32 mode, u32 param, s32 index);
+void FUN_0047ed10(u32 value, s32 a, s32 mode, f32 x, f32 y, f32 z);
+s32 FUN_0031ba34(s32 effect, s32 *slot, s32 a, s32 b, f32 x, f32 y, f32 z, f32 scale);
+s32 entryIsValid(s32 entry);
+void FUN_00260030(s32 entry);
+
+/* Starts effect `effect` for the manager: finds a free slot, plays the effect (scaled by its mode) at
+ * `position` plus the mode's offset, and records its handle. Returns the handle, or 0 when it could not
+ * be started or the handle list is full. */
+s32 FUN_004f5750(BtlEffectManager *manager, s32 effect, u32 param, s32 index, Vector2 start, u32 infoValue,
+                 s32 mode, u32 targetValue, s32 hasTarget, s32 centered)
+{
+    f32 info;
+    Vector3 position;
+    s32 hasInfo = 0;
+    Vector3 offset;
+    s32 *freeSlot;
+    s32 handle;
+    s32 i;
+
+    if (effect == 0xFF) {
+        return 0;
     }
-  }
-  return;
+    info = 0.0f;
+    if (mode != 6 && index >= 0) {
+        hasInfo = FUN_00320b44(&info, index, infoValue);
+    }
+    offset = FUN_004fad68(manager, mode, param, index);
+    position.x = offset.x + start.x;
+    position.y = offset.y + start.y;
+    position.z = offset.z;
+    freeSlot = NULL;
+    for (i = 0; i < EFFECT_LIST_SIZE; i += 2) {
+        if (manager->slot[i] == 0) {
+            freeSlot = &manager->slot[i];
+            break;
+        }
+        if (manager->slot[i + 1] == 0) {
+            freeSlot = &manager->slot[i + 1];
+            break;
+        }
+    }
+    if (hasTarget != 0) {
+        FUN_0047ed10(targetValue, 0, mode, position.x, position.y, position.z);
+    }
+    if (mode == 2 || mode == 5 || mode == 7 || mode == 8 || mode == 9 || mode == 12 || mode == 15) {
+        handle = FUN_0031ba34(effect, freeSlot, 1, 3, position.x, position.y, position.z, 1.0f);
+        return effectManagerRecordHandle(manager, handle);
+    } else {
+        f32 scale = 5.6f;
+        s32 flag = 0;
+
+        if (mode == 11) {
+            scale = 1.0f;
+        } else if (hasInfo != 0) {
+            scale = info;
+        } else if (centered == 0) {
+            scale = manager->scaleFactor * scale;
+        }
+        if ((manager->flags & EFFECT_LIST_ENTRY_READY) == 0 && entryIsValid(effect) != 0) {
+            FUN_00260030(effect);
+            manager->flags |= EFFECT_LIST_ENTRY_READY;
+        }
+        if (centered != 0) {
+            position.x = 0.0f;
+            position.y = 0.0f;
+            position.z = 0.0f;
+            scale = 1.0f;
+            flag = 1;
+        }
+        handle = FUN_0031ba34(effect, freeSlot, 0, flag, position.x, position.y, position.z, scale);
+    }
+    return effectManagerRecordHandle(manager, handle);
 }
 
 } /* extern "C" */

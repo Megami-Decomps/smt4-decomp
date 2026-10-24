@@ -1,105 +1,84 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041aca8` (_code @ 0x41aca8, 0x214 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the particle spawn; retail keeps the four constants in s16/s17/s20/s21, hoists the effect position components into the first product and evaluates the two rotated axes with interleaved vmla chains, which armcc here orders differently. */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "gfx/CameraMatrixCache.h"
+
+struct ParticleVec3 {
+    ParticleVec3() {}
+    void set(f32 sx, f32 sy, f32 sz)
+    {
+        x = sx;
+        y = sy;
+        z = sz;
+    }
+    f32 x, y, z;
+};
+
+/* A spawned particle (0xB4 bytes; only the fields the spawn sets are named). */
+struct Particle {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ ParticleVec3 unk0C;
+    /* 0x18 */ u8 unk18[0x18];
+    /* 0x30 */ ParticleVec3 unk30;       /* the model's position */
+    /* 0x3C */ ParticleVec3 unk3C[3];
+    /* 0x60 */ u8 unk60[0x54];
+};
+
+/* How a particle emitter spawns its particles. */
+struct ParticleEmitterSpec {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;            /* copied into the particle */
+    /* 0x08 */ f32 spread;           /* random offset along the emitter's first axis */
+    /* 0x0C */ f32 speedBase;
+    /* 0x10 */ f32 speedVariance;
+    /* 0x14 */ f32 angleVariance;
+    /* 0x18 */ f32 angleBase;
+    /* 0x1C */ f32 positionBase[3];
+    /* 0x28 */ f32 positionVariance[3];
+    /* 0x34 */ u32 color[3];
+};
 
 extern "C" {
-
-int asdOperatorNew(void);
-int FUN_001aff14(float *, int);
-int FUN_0025cb1c(void);
-
-/* stack frame of param_1: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
-
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_001aff14. */
-/* Supplied declaration required: FUN_0025cb1c. */
-extern int FUN_0041bd84(void);
-
-
-int FUN_0041aca8(int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  float temp_v1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  
-  temp_v0 = 0xb4;
-  asdOperatorNew();
-  if (temp_v0 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = FUN_0041bd84();
-  }
-  temp_v3 = 1.0f;
-  temp_v2 = 0.0f;
-  *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(param_1 + 4);
-  FUN_0025cb1c();
-  FUN_001aff14(&temp_v8,1);
-  temp_v4 = temp_v8 * temp_v3 + temp_v9 * temp_v2 + temp_v10 * temp_v2;
-  temp_v5 = temp_v11 * temp_v3 + temp_v12 * temp_v2 + temp_v13 * temp_v2;
-  temp_v1 = temp_v13;
-  FUN_0025cb1c();
-  temp_v6 = 0.5f;
-  temp_v7 = 2.0f;
-  temp_v1 = (temp_v1 - 0.5f) * 2.0f * *(float *)(param_1 + 8);
-  *(float *)(temp_v0 + 0xc) = temp_v4 * temp_v1 * *(float *)(temp_v0 + 0x30) * 0.5f;
-  *(float *)(temp_v0 + 0x10) =
-       temp_v5 * temp_v1 * *(float *)(temp_v0 + 0x34) * 0.5f + *(float *)(temp_v0 + 0x34) * 0.5f;
-  *(float *)(temp_v0 + 0x14) = temp_v2;
-  FUN_0025cb1c();
-  FUN_0025cb1c();
-  FUN_001aff14(&temp_v8,1);
-  temp_v1 = temp_v8 * temp_v2 + temp_v9 * temp_v3 + temp_v10 * temp_v2;
-  temp_v4 = temp_v11 * temp_v2 + temp_v12 * temp_v3 + temp_v13 * temp_v2;
-  temp_v3 = temp_v14 * temp_v2 + temp_v15 * temp_v3 + temp_v16 * temp_v2;
-  FUN_0025cb1c();
-  temp_v2 = *(float *)(param_1 + 0xc) + *(float *)(param_1 + 0x10) * (temp_v16 - temp_v6) * temp_v7;
-  temp_v1 = temp_v1 * temp_v2;
-  *(float *)(temp_v0 + 0x3c) = temp_v1;
-  *(float *)(temp_v0 + 0x40) = temp_v4 * temp_v2;
-  *(float *)(temp_v0 + 0x44) = temp_v3 * temp_v2;
-  FUN_0025cb1c();
-  temp_v1 = (temp_v1 - temp_v6) * temp_v7;
-  temp_v2 = *(float *)(param_1 + 0x1c) + *(float *)(param_1 + 0x28) * temp_v1;
-  FUN_0025cb1c();
-  temp_v1 = (temp_v1 - temp_v6) * temp_v7;
-  temp_v3 = *(float *)(param_1 + 0x20) + *(float *)(param_1 + 0x2c) * temp_v1;
-  FUN_0025cb1c();
-  *(float *)(temp_v0 + 0x5c) =
-       *(float *)(param_1 + 0x24) + *(float *)(param_1 + 0x30) * (temp_v1 - temp_v6) * temp_v7;
-  *(float *)(temp_v0 + 0x54) = temp_v2;
-  *(float *)(temp_v0 + 0x58) = temp_v3;
-  *(unsigned int *)(temp_v0 + 0x48) = *(unsigned int *)(param_1 + 0x34);
-  *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(param_1 + 0x38);
-  *(unsigned int *)(temp_v0 + 0x50) = *(unsigned int *)(param_1 + 0x3c);
-  return temp_v0;
+f32 FUN_0025cb1c(void);
+void FUN_001aff14(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 z);
+void *asdOperatorNew(u32 bytes);
+Particle *FUN_0041bd84(Particle *particle, AsdMdlObject *model);
 }
 
-} /* extern "C" */
+/* Creates a particle for the model from the emitter spec: a random start offset, a random
+ * direction scaled by a random speed, and a randomised target position. */
+extern "C" Particle *FUN_0041aca8(const ParticleEmitterSpec *spec, AsdMdlObject *model)
+{
+    const f32 degreesToPhase = 0.71111f; /* 256 / 360 */
+    Particle *particle = (Particle *)asdOperatorNew(sizeof(Particle));
+    if (particle != NULL)
+        particle = FUN_0041bd84(particle, model);
+    particle->unk08 = spec->unk04;
+
+    Matrix34Data rotation;
+    FUN_001aff14(&rotation, 1, 0.0f, 0.0f, FUN_0025cb1c() * 256.0f);
+    f32 dirX = rotation.values[0] * 1.0f + rotation.values[1] * 0.0f + rotation.values[2] * 0.0f;
+    f32 dirY = rotation.values[4] * 1.0f + rotation.values[5] * 0.0f + rotation.values[6] * 0.0f;
+    f32 spread = (FUN_0025cb1c() - 0.5f) * 2.0f * spec->spread;
+    particle->unk0C.x = dirX * spread * particle->unk30.x * 0.5f;
+    particle->unk0C.y = dirY * spread * particle->unk30.y * 0.5f + particle->unk30.y * 0.5f;
+    particle->unk0C.z = 0.0f;
+
+    f32 pitch = FUN_0025cb1c() * -spec->angleBase;
+    f32 yaw = (FUN_0025cb1c() - 0.5f) * 2.0f * spec->angleVariance;
+    FUN_001aff14(&rotation, 1, pitch * degreesToPhase, 0.0f, yaw * degreesToPhase);
+    f32 axisX = rotation.values[0] * 0.0f + rotation.values[1] * 1.0f + rotation.values[2] * 0.0f;
+    f32 axisY = rotation.values[4] * 0.0f + rotation.values[5] * 1.0f + rotation.values[6] * 0.0f;
+    f32 axisZ = rotation.values[8] * 0.0f + rotation.values[9] * 1.0f + rotation.values[10] * 0.0f;
+    f32 speed = spec->speedBase + spec->speedVariance * ((FUN_0025cb1c() - 0.5f) * 2.0f);
+    particle->unk3C[0].set(axisX * speed, axisY * speed, axisZ * speed);
+
+    f32 targetX = spec->positionBase[0] + spec->positionVariance[0] * ((FUN_0025cb1c() - 0.5f) * 2.0f);
+    f32 targetY = spec->positionBase[1] + spec->positionVariance[1] * ((FUN_0025cb1c() - 0.5f) * 2.0f);
+    f32 targetZ = spec->positionBase[2] + spec->positionVariance[2] * ((FUN_0025cb1c() - 0.5f) * 2.0f);
+    particle->unk3C[2].set(targetX, targetY, targetZ);
+    ((u32 *)&particle->unk3C[1])[0] = spec->color[0];
+    ((u32 *)&particle->unk3C[1])[1] = spec->color[1];
+    ((u32 *)&particle->unk3C[1])[2] = spec->color[2];
+    return particle;
+}

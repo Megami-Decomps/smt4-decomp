@@ -1,122 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026edbc` (_code @ 0x26edbc, 0x2f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads each type id from its own global (DAT_0056fd74, DAT_0056fdb0, ... one pool word each) and packs two ids into one register; the build addresses one record table from a single base. */
+#include "common.h"
+
+/* A record of the command-type table (0x3C bytes, first halfword is its item type id). */
+struct CommandTypeRecord {
+    s16 typeId;
+    u8 unk02[0x3A];
+};
+
+/* The menu object: item pointers from 0x5A8, their count at 0x600. */
+struct CommandMenu {
+    u8 unk000[0x5A8];
+    s16 *items[22];     // 0x5A8: each points at the item's type id
+    s32 itemCount;      // 0x600
+};
 
 extern "C" {
+extern CommandTypeRecord DAT_0056fd74[21];
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-extern unsigned short DAT_0056fd74; /* 0x56fd74 */
-extern unsigned short DAT_0056fdb0; /* 0x56fdb0 */
-extern unsigned short DAT_0056fdec; /* 0x56fdec */
-extern unsigned short DAT_0056fe28; /* 0x56fe28 */
-extern unsigned short DAT_0056fe64; /* 0x56fe64 */
-extern unsigned short DAT_0056fea0; /* 0x56fea0 */
-extern unsigned short DAT_0056fedc; /* 0x56fedc */
-extern unsigned short DAT_0056ff18; /* 0x56ff18 */
-extern unsigned short DAT_0056ff54; /* 0x56ff54 */
-extern unsigned short DAT_0056ff90; /* 0x56ff90 */
-extern unsigned short DAT_0056ffcc; /* 0x56ffcc */
-extern short DAT_00570008; /* 0x570008 */
-extern short DAT_00570044; /* 0x570044 */
-extern short DAT_00570080; /* 0x570080 */
-extern short DAT_005700bc; /* 0x5700bc */
-extern unsigned short DAT_005700f8; /* 0x5700f8 */
-extern unsigned short DAT_00570134; /* 0x570134 */
-extern unsigned short DAT_00570170; /* 0x570170 */
-extern unsigned short DAT_005701ac; /* 0x5701ac */
-extern unsigned short DAT_005701e8; /* 0x5701e8 */
-extern unsigned short DAT_00570224; /* 0x570224 */
-
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-
-
-int FUN_0026edbc(int param_1,unsigned int param_2)
-
+/* Find the index of the first menu item whose type matches the command code (the inverse of the item-to-code mapping). */
+s32 FUN_0026edbc(CommandMenu *menu, u32 code)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  short temp_v2;
-  
-  temp_v1 = 0;
-  temp_v2 = 0;
-  switch(param_2) {
-  case 0x35:
-  case 0x44:
-  case 0x49:
-    temp_v1 = romwright_piece_2_2(DAT_0056ff54,DAT_0056fe28);
-    temp_v2 = DAT_00570044;
-    break;
-  case 0x36:
-  case 0x45:
-  case 0x4a:
-    temp_v1 = romwright_piece_2_2(DAT_0056ff90,DAT_0056fea0);
-    temp_v2 = DAT_00570080;
-    break;
-  case 0x37:
-  case 0x48:
-    temp_v1 = (unsigned int)DAT_0056fdec;
-    temp_v2 = DAT_00570008;
-    break;
-  case 0x38:
-  case 0x47:
-  case 0x4b:
-    temp_v1 = romwright_piece_2_2(DAT_0056ffcc,DAT_0056fe64);
-    temp_v2 = DAT_005700bc;
-    break;
-  case 0x39:
-    temp_v1 = (unsigned int)DAT_0056fedc;
-    break;
-  case 0x3a:
-    temp_v1 = (unsigned int)DAT_0056fdb0;
-    break;
-  case 0x3b:
-    temp_v1 = (unsigned int)DAT_005700f8;
-    break;
-  case 0x3c:
-    temp_v1 = (unsigned int)DAT_00570134;
-    break;
-  case 0x41:
-    temp_v1 = (unsigned int)DAT_0056fd74;
-    break;
-  case 0x42:
-    temp_v1 = (unsigned int)DAT_00570170;
-    break;
-  case 0x43:
-    temp_v1 = (unsigned int)DAT_005701ac;
-    break;
-  case 0x46:
-    temp_v1 = (unsigned int)DAT_0056ff18;
-    break;
-  case 0x4c:
-    temp_v1 = (unsigned int)DAT_005701e8;
-    break;
-  case 0x4d:
-    temp_v1 = (unsigned int)DAT_00570224;
-  }
-  temp_v0 = 0;
-  if (temp_v0 < *(int *)(param_1 + 0x600)) {
-    do {
-      if ((0 < (short)temp_v1) && (**(short **)(param_1 + temp_v0 * 4 + 0x5a8) == (short)temp_v1)) {
-        return temp_v0;
-      }
-      if ((0 < (int)temp_v1 >> 0x10) &&
-         ((int)**(short **)(param_1 + temp_v0 * 4 + 0x5a8) == (int)temp_v1 >> 0x10)) {
-        return temp_v0;
-      }
-      if ((0 < temp_v2) && (**(short **)(param_1 + temp_v0 * 4 + 0x5a8) == temp_v2)) {
-        return temp_v0;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x600));
-  }
-  return 0;
+    const CommandTypeRecord *types = DAT_0056fd74;
+    s16 first = 0;
+    s16 second = 0;
+    s16 third = 0;
+    switch (code) {
+    case 0x35:
+    case 0x44:
+    case 0x49:
+        first = types[3].typeId;
+        second = types[8].typeId;
+        third = types[12].typeId;
+        break;
+    case 0x36:
+    case 0x45:
+    case 0x4A:
+        first = types[5].typeId;
+        second = types[9].typeId;
+        third = types[13].typeId;
+        break;
+    case 0x37:
+    case 0x48:
+        first = types[2].typeId;
+        third = types[11].typeId;
+        break;
+    case 0x38:
+    case 0x47:
+    case 0x4B:
+        first = types[4].typeId;
+        second = types[10].typeId;
+        third = types[14].typeId;
+        break;
+    case 0x39:
+        first = types[6].typeId;
+        break;
+    case 0x3A:
+        first = types[1].typeId;
+        break;
+    case 0x3B:
+        first = types[15].typeId;
+        break;
+    case 0x3C:
+        first = types[16].typeId;
+        break;
+    case 0x41:
+        first = types[0].typeId;
+        break;
+    case 0x42:
+        first = types[17].typeId;
+        break;
+    case 0x43:
+        first = types[18].typeId;
+        break;
+    case 0x46:
+        first = types[7].typeId;
+        break;
+    case 0x4C:
+        first = types[19].typeId;
+        break;
+    case 0x4D:
+        first = types[20].typeId;
+    }
+    for (s32 i = 0; i < menu->itemCount; i++) {
+        if (first > 0 && *menu->items[i] == first)
+            return i;
+        if (second > 0 && *menu->items[i] == second)
+            return i;
+        if (third > 0 && *menu->items[i] == third)
+            return i;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

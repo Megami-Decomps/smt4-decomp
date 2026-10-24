@@ -138,15 +138,20 @@ typedef char RenderCtxAColorScaleOffsetCheck[offsetof(RenderCtxA, color.colorSca
 typedef char RenderCtxAColorDirtyOffsetCheck[offsetof(RenderCtxA, color.colorScaleDirty) == 0x11E8 ? 1 : -1];
 typedef char RenderCtxAColorTargetOffsetCheck[offsetof(RenderCtxA, colorTarget.colorScaleTarget) == 0x530 ? 1 : -1];
 
+/* Whether a new top state has to be applied: the stack was marked dirty or the state changed. */
+static __inline bool renderStackNeedsApply(RenderStateStack *st, int prev, int state)
+{
+    return st->dirty != 0 || prev != state;
+}
+
 /* Pushes `state`; the state is re-applied if it differs from the previous top. */
 static __inline void renderStackPush(RenderStateStack *st, int state)
 {
-    s32 index = st->count;
-    int prev = st->entries[index];
+    int prev = st->entries[st->count];
 
-    st->count = index + 1;
+    st->count++;
     st->entries[st->count] = state;
-    if (st->dirty != 0 || prev != state) {
+    if (renderStackNeedsApply(st, prev, state)) {
         st->apply(state);
         st->dirty = 0;
     }

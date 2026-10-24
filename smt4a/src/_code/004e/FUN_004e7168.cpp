@@ -1,137 +1,162 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e7168` (_code @ 0x4e7168, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: instruction scheduling and register allocation differ - retail forms the unit record's priority address as record+0x200 (+122) and keeps the u64 masks in ldm pairs on different registers; the logic is otherwise identical. */
+#include "common.h"
+
+namespace {
+/* One actor's record from the unit table. */
+struct BtlUnitRecord {
+    /* 0x000 */ u8 unk000[0x258];
+    /* 0x258 */ u32 commandA;
+    /* 0x25c */ u32 commandB;
+    /* 0x260 */ u8 unk260[0x1a];
+    /* 0x27a */ u16 priority;
+};
+
+/* A slot of the battle's per-unit table (0x408 bytes each; only the leading flags are read). */
+struct BtlTableSlot {
+    /* 0x000 */ u64 flags;
+    /* 0x008 */ u8 unk008[0x400];
+};
+
+struct BtlTable {
+    /* 0x0000 */ u8 unk0000[0x1020];
+    /* 0x1020 */ BtlTableSlot slots[50];
+};
+
+struct BtlBattleData {
+    /* 0x0000 */ u8 unk0000[0xa4];
+    /* 0x00a4 */ s32 unitIndex;
+    /* 0x00a8 */ s32 uiState;
+    /* 0x00ac */ u8 unk00ac[0x1f50];
+    /* 0x1ffc */ BtlTable *table;
+    /* 0x2000 */ u8 unk2000[0x356];
+    /* 0x2356 */ s16 actor;
+    /* 0x2358 */ s32 phase;
+    /* 0x235c */ s32 phaseArg;
+    /* 0x2360 */ s32 trigger;
+    /* 0x2364 */ u8 unk2364[4];
+    /* 0x2368 */ s32 highestPriority;
+    /* 0x236c */ u8 unk236c[0x2234];
+    /* 0x45a0 */ u64 flags;
+};
+
+struct BtlUnitHandle {
+    /* 0x00 */ BtlBattleData *data;
+};
+
+struct BtlCommandChoice {
+    /* 0x000 */ u8 unk000[0x1be];
+    /* 0x1be */ u16 mode;
+};
+
+struct BtlCommandEntry {
+    /* 0x0 */ u32 commandA;
+    /* 0x4 */ u32 commandB;
+    /* 0x8 */ u8 unk08[8];
+};
+
+struct BtlAiAction {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x20];
+    /* 0x024 */ u32 uiIndex;
+    /* 0x028 */ BtlCommandChoice *choice;
+    /* 0x02c */ u8 unk02c[0x9b8];
+    /* 0x9e4 */ BtlCommandEntry commands[109];
+};
+
+/* The u64 flag masks kept in the battle action block. */
+struct BtlActionMasks {
+    /* 0x000 */ u8 unk000[0x10];
+    /* 0x010 */ u64 mask10;
+    /* 0x018 */ u8 unk018[0x28];
+    /* 0x040 */ u64 mask40;
+    /* 0x048 */ u8 unk048[0xa0];
+    /* 0x0e8 */ u64 mask0e8;
+    /* 0x0f0 */ u8 unk0f0[8];
+    /* 0x0f8 */ u64 mask0f8;
+    /* 0x100 */ u8 unk100[0x38];
+    /* 0x138 */ u64 mask138;
+};
+}
 
 extern "C" {
+extern BtlActionMasks g_btlAction;
+BtlUnitRecord *FUN_003f0e20(BtlBattleData *data, s32 index);
+void btlUnitClearRecordFields(BtlUnitHandle *handle, s32 unitIndex);
+void FUN_004fcde0(s32 arg, BtlAiAction *action, BtlUnitRecord *record);
+void FUN_004fd508(s32 arg, BtlAiAction *action, u32 kind, u32 uiIndex, s32 flag);
 
-int FUN_003f0e20(...);
-int btlUnitClearRecordFields(int *, unsigned int);
-int FUN_004fcde0(int, unsigned int *, int);
-int FUN_004fd508(int, unsigned int *, unsigned int, unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_4_stack;
-
-extern unsigned int DAT_00571148; /* 0x571148 */
-extern unsigned int DAT_0057114c; /* 0x57114c */
-extern unsigned int DAT_00571178; /* 0x571178 */
-extern unsigned int DAT_0057117c; /* 0x57117c */
-extern unsigned int DAT_00571220; /* 0x571220 */
-extern unsigned int DAT_00571224; /* 0x571224 */
-extern unsigned int DAT_00571230; /* 0x571230 */
-extern unsigned int DAT_00571234; /* 0x571234 */
-extern unsigned int DAT_00571270; /* 0x571270 */
-extern unsigned int DAT_00571274; /* 0x571274 */
-
-/* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: btlUnitClearRecordFields. */
-/* Supplied declaration required: FUN_004fcde0. */
-/* Supplied declaration required: FUN_004fd508. */
-
-
-void FUN_004e7168(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+/* Per-actor battle step: raises the priority high-water mark, applies the current phase's flag changes
+   and commands, and refreshes the action's per-unit command table. */
+void FUN_004e7168(BtlUnitHandle *handle, BtlAiAction *action)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  unsigned int temp_v4;
-  
-  temp_v1 = *param_1;
-  FUN_003f0e20(temp_v1,(int)*(short *)(temp_v1 + 0x2356),param_3,param_4,param_4);
-  if ((temp_v1 != 0) &&
-     (temp_v2 = *param_1,
-     (*(unsigned int *)(temp_v2 + 0x45a4) & DAT_00571234) == 0 &&
-     (*(unsigned int *)(temp_v2 + 0x45a0) & DAT_00571230) == 0)) {
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x27a);
-    if ((int)(unsigned int)*(unsigned short *)(temp_v1 + 0x27a) < (int)*(unsigned int *)(temp_v2 + 0x2368)) {
-      temp_v3 = *(unsigned int *)(temp_v2 + 0x2368);
+    BtlUnitRecord *unit = FUN_003f0e20(handle->data, handle->data->actor);
+    if (unit != NULL && (handle->data->flags & g_btlAction.mask0f8) == 0) {
+        if (unit->priority > handle->data->highestPriority) {
+            handle->data->highestPriority = unit->priority;
+        }
     }
-    *(unsigned int *)(temp_v2 + 0x2368) = temp_v3;
-  }
-  temp_v1 = *param_1;
-  temp_v2 = *(int *)(temp_v1 + 0x2358);
-  if (temp_v2 != 1) {
-    if (temp_v2 != 2) {
-      if (temp_v2 == 3) {
-        *(unsigned short *)(param_2[10] + 0x1be) = 4;
-        return;
-      }
-    }
-    else {
-      temp_v3 = DAT_00571270 | *(unsigned int *)(temp_v1 + 0x45a0);
-      *(unsigned int *)(temp_v1 + 0x45a4) = DAT_00571274 | *(unsigned int *)(temp_v1 + 0x45a4);
-      *(unsigned int *)(temp_v1 + 0x45a0) = temp_v3;
-    }
-  }
-  temp_v1 = *param_1;
-  temp_v0 = 0;
-  temp_v4 = 0;
-  if (*(int *)(temp_v1 + 0x2358) == 1) {
-    switch(*(unsigned int *)(temp_v1 + 0x235c)) {
-    case 1:
-      temp_v0 = 1;
-      temp_v4 = 0xc;
-      break;
+    switch (handle->data->phase) {
     case 2:
-      temp_v0 = 1;
-      temp_v4 = 5;
-      break;
+        handle->data->flags |= g_btlAction.mask138;
+        break;
     case 3:
-      temp_v0 = 1;
-      temp_v4 = 3;
-      break;
-    case 4:
-      temp_v0 = 1;
-      temp_v4 = 0xe;
-      break;
-    case 7:
-      temp_v3 = DAT_00571224 | *(unsigned int *)(temp_v1 + 0x45a4);
-      *(unsigned int *)(temp_v1 + 0x45a0) = DAT_00571220 | *(unsigned int *)(temp_v1 + 0x45a0);
-      *(unsigned int *)(temp_v1 + 0x45a4) = temp_v3;
-      *param_2 = *param_2 | 4;
+        action->choice->mode = 4;
+        return;
     }
-    temp_v1 = *param_1;
-    if ((*(int *)(temp_v1 + 0x2360) == 2) &&
-       (FUN_003f0e20(temp_v1,(int)*(short *)(temp_v1 + 0x2356)), temp_v1 != 0)) {
-      FUN_004fcde0(0,param_2,temp_v1);
+    bool command = false;
+    u32 kind = 0;
+    if (handle->data->phase == 1) {
+        switch (handle->data->phaseArg) {
+        case 1:
+            command = true;
+            kind = 12;
+            break;
+        case 2:
+            command = true;
+            kind = 5;
+            break;
+        case 3:
+            command = true;
+            kind = 3;
+            break;
+        case 4:
+            command = true;
+            kind = 14;
+            break;
+        case 7:
+            handle->data->flags |= g_btlAction.mask0e8;
+            action->flags |= 4;
+            break;
+        }
+        if (handle->data->trigger == 2) {
+            BtlUnitRecord *record = FUN_003f0e20(handle->data, handle->data->actor);
+            if (record != NULL) {
+                FUN_004fcde0(0, action, record);
+            }
+        }
+        if (command) {
+            FUN_004fd508(0, action, kind, action->uiIndex, 1);
+        }
     }
-    if (temp_v0) {
-      FUN_004fd508(0,param_2,temp_v4,param_2[9],1);
+    s32 active = 0;
+    for (s32 i = 0; i < 50; i++) {
+        u64 flags = handle->data->table->slots[i].flags;
+        if ((flags & g_btlAction.mask10) != 0 && (flags & g_btlAction.mask40) == 0) {
+            active++;
+        }
     }
-  }
-  temp_v1 = 0;
-  temp_v2 = 0x32;
-  puVar5 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + 0x1020);
-  do {
-    if (((*puVar5 & DAT_00571148) != 0 || (puVar5[1] & DAT_0057114c) != 0) &&
-       ((*puVar5 & DAT_00571178) == 0 && (puVar5[1] & DAT_0057117c) == 0)) {
-      temp_v1 = temp_v1 + 1;
+    if (active == 0) {
+        handle->data->uiState = 10;
     }
-    temp_v2 = temp_v2 - 1;
-    puVar5 = puVar5 + 0x102;
-  } while (temp_v2 != 0);
-  if (temp_v1 == 0) {
-    *(unsigned int *)(*param_1 + 0xa8) = 10;
-  }
-  btlUnitClearRecordFields(param_1,*(unsigned int *)(*param_1 + 0xa4));
-  temp_v1 = 0;
-  do {
-    param_2[temp_v1 * 4 + 0x279] = 0;
-    temp_v2 = *param_1;
-    FUN_003f0e20(temp_v2,temp_v1);
-    if (temp_v2 != 0) {
-      param_2[temp_v1 * 4 + 0x279] = *(unsigned int *)(temp_v2 + 600);
-      param_2[temp_v1 * 4 + 0x27a] = *(unsigned int *)(temp_v2 + 0x25c);
+    btlUnitClearRecordFields(handle, handle->data->unitIndex);
+    for (s32 i = 0; i < 109; i++) {
+        action->commands[i].commandA = 0;
+        BtlUnitRecord *record = FUN_003f0e20(handle->data, i);
+        if (record != NULL) {
+            action->commands[i].commandA = record->commandA;
+            action->commands[i].commandB = record->commandB;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x6d);
-  return;
 }
 
 } /* extern "C" */

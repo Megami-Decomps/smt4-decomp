@@ -3,7 +3,7 @@
 
 extern "C" {
 extern TaggedRecordPools DAT_00446fec;
-extern TaggedPoolRecord DAT_00493c5c[];
+extern TaggedPoolRecord g_collisionPlaneTable[];
 
 // Disable every matching tag in the four dynamic record pools and the static pool.
 void FUN_002878fc(s32 tag)
@@ -16,7 +16,7 @@ void FUN_002878fc(s32 tag)
             if (record->tag == tag)
                 record->enabled = 0;
     }
-    TaggedPoolRecord *record = DAT_00493c5c;
+    TaggedPoolRecord *record = g_collisionPlaneTable;
     for (s32 remaining = DAT_00446fec.counts[4]; remaining > 0; --remaining, ++record)
         if (record->tag == tag)
             record->enabled = 0;

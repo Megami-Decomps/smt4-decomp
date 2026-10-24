@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack address/entry scheduling and rectangle argument loads differ; candidate -O2. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 6 diff lines remain, scheduling/register allocation only. */
 #include "kernel/jyoucyu.h"
 #include "camp/RenderCtx.h"
 
@@ -26,7 +26,7 @@ u32 jyoucyuDrawLoadingOverlay()
     }
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     efctSetSpeed(1.0f);
     FUN_00183bb0();
     FUN_0016c4b8(g_renderCtx, 0);

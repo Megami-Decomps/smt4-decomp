@@ -1,4 +1,3 @@
-/* NON_MATCHING: the three inline stack pushes allocate old/new indices and value-address registers differently; all pops and control flow match. */
 #include "camp/RenderCtx.h"
 
 struct RenderStateScopeWork { u8 prefix[0xC]; u32 state; };

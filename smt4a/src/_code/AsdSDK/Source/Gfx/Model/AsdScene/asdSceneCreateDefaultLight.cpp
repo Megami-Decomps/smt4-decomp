@@ -58,7 +58,7 @@ static __inline void setLightDirection(SceneLightData *data, f32 x, f32 y, f32 z
 extern "C" {
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *asdMemoryGetDefaultAllocator(void);
-SceneLightObject *FUN_00171d7c(SceneLightDescription *, void *allocator);
+SceneLightObject *_ZN9Obj55b5a86createEPvP18AsdAllocatorObject(SceneLightDescription *, void *allocator);
 u32 FUN_001931d8(const SceneLightColor *);
 
 // Create a neutral directional scene light with packed hardware colors.
@@ -76,7 +76,7 @@ SceneLight *asdSceneCreateDefaultLight(void)
     description.flags = 0;
     description.mode = 0;
     description.count = 1;
-    light->object = FUN_00171d7c(&description, allocator);
+    light->object = _ZN9Obj55b5a86createEPvP18AsdAllocatorObject(&description, allocator);
     light->data = light->object->data;
     light->data->kind = 0;
     setLightDirection(light->data, -0.40824827551841736f, -0.8164965510368347f,

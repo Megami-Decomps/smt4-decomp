@@ -1,197 +1,165 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a5e30` (_code @ 0x3a5e30, 0x360 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of a selection scene's constructor; the member arrays (nine 0x74-byte entries, nine 0x1002-byte pages) are default-constructed by loops here where retail calls the vector constructor helper with compiler-generated constructors, and the scene's layout is a view over the offsets the constructor writes. */
+#include "classes/SelectionState.h"
+#include "classes/Obj55ca08.h"
+#include "classes/Obj4223ac.h"
+
+inline void *operator new(unsigned int, void *place) { return place; }
+
+/* One selection entry (0x74 bytes). */
+struct SceneEntry {
+    SelectionFlags flags;
+    u8 unk10[0x74 - sizeof(SelectionFlags)];
+};
+
+/* One page of selections (0x1002 bytes). */
+struct ScenePage {
+    u8 data[0x1002];
+};
+
+/* A selection scene (only the fields the constructor sets). */
+struct SelectionScene {
+    /* 0x0000 */ u32 unk0000;
+    /* 0x0004 */ s32 stepA;
+    /* 0x0008 */ s32 stepB;
+    /* 0x000C */ u8 unk000C[4];
+    /* 0x0010 */ s32 mode;
+    /* 0x0014 */ s8 kind;
+    /* 0x0015 */ u8 unk0015[3];
+    /* 0x0018 */ s32 subKind;
+    /* 0x001C */ u8 hasProgress;
+    /* 0x001D */ u8 shown;
+    /* 0x001E */ u8 unk001E[0x142];
+    /* 0x0160 */ u32 unk0160[3];
+    /* 0x016C */ u8 unk016C[0x204];
+    /* 0x0370 */ u32 unk0370[3];
+    /* 0x037C */ s32 buttonSprite;
+    /* 0x0380 */ SelectionRectangle firstRectangle;
+    /* 0x0394 */ SelectionRectangle secondRectangle;
+    /* 0x03A8 */ u8 timers[0x28];
+    /* 0x03D0 */ u8 unk03D0[0x458];
+    /* 0x0828 */ Obj55ca08 touch;
+    /* 0x0864 */ u8 unk0864[0x1C];
+    /* 0x0880 */ SceneEntry entries[9];
+    /* 0x0C94 */ ScenePage pages[9];
+    /* 0x9CA6 */ u8 unk9CA6[2];
+    /* 0x9CA8 */ SelectionFlags flags;
+};
 
 extern "C" {
+void FUN_003a4518(SelectionScene *scene);
+void FUN_003a169c(SelectionScene *scene);
+void FUN_003a45fc(void);
+void FUN_002637c8(void);
+void FUN_00282bfc(s32 channel, s32 value);
+void FUN_002a03d8(s32 a, s32 b);
+void FUN_002c58c8(s32 a, s32 b);
+s16 *FUN_002c0a2c(u8 kind, u32 sub);
+void uiInitializeEightTimerSet(void *timers);
+void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
+void buttonHelpAcquireResources(void);
+void buttonHelpCreate(void);
+void asdTMTexTableLoadSprites(s32 table);
+void questCenterSetFlag(s32 index, s32 value);
+void qcSetPersistentStateFlag(s32 index, s32 value);
+s32 bgmGetStateById(u32 id);
+void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
+void FUN_00343c0c(u32 id, s32 value);
+void gameCounterAddSaturating(s32 counter, s32 amount);
+void *asdOperatorNew(u32 bytes);
 
-int _ZN18SelectionRectangleC1Ev(...);
-int rectangleInitializeSelection(int, int, int, int);
-int uiInitializeEightTimerSet(int);
-int FUN_002637c8(void);
-int FUN_00282bfc(int, int);
-int buttonHelpCreate(void);
-int buttonHelpAcquireResources(void);
-int gameCounterAddSaturating(...);
-int soundChannelRequestIfEnabled(...);
-int FUN_002a03d8(...);
-int asdOperatorNew(void);
-int asdTMTexTableLoadSprites(int);
-int FUN_002c58c8(int, int);
-int __aeabi_vec_ctor_nocookie_nodtor(...);
-int questCenterSetFlag(int, int);
-int qcSetPersistentStateFlag(...);
-int FUN_00343c0c(...);
-int FUN_003a169c(unsigned int *);
-int FUN_003a4518(unsigned int *);
-int FUN_003a45fc(void);
-
-extern unsigned char LAB_003a0104; /* 0x3a0104 */
-extern unsigned char DAT_004223b0; /* 0x4223b0 */
-extern unsigned char DAT_00422590; /* 0x422590 */
-
-/* Supplied declaration required: _ZN18SelectionRectangleC1Ev. */
-/* Supplied declaration required: rectangleInitializeSelection. */
-extern unsigned int *_ZN9Obj422594C1Ev(void);
-/* Supplied declaration required: uiInitializeEightTimerSet. */
-/* Supplied declaration required: FUN_002637c8. */
-/* Supplied declaration required: FUN_00282bfc. */
-extern int _ZN14SelectionFlagsC1Ev(int);
-extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: buttonHelpAcquireResources. */
-/* Supplied declaration required: gameCounterAddSaturating. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a03d8. */
-extern short *FUN_002c0a2c(unsigned char, unsigned int);
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: questCenterSetFlag. */
-/* Supplied declaration required: qcSetPersistentStateFlag. */
-/* Supplied declaration required: FUN_00343c0c. */
-/* Supplied declaration required: FUN_003a169c. */
-/* Supplied declaration required: FUN_003a4518. */
-/* Supplied declaration required: FUN_003a45fc. */
-
-
-unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param_3,int param_4)
-
+/* Builds a selection scene: constructs its rectangles, entries and pages, clears its state, creates
+ * its window and, when opened with `mode` 1, its button help; otherwise starts the background
+ * music for the quest kind and registers every flagged selection. */
+SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subKind)
 {
-/* irregular: 21 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  short *psVar5;
-  unsigned int temp_v3;
-  unsigned int *puVar7;
-  
-  *param_1 = 0;
-  temp_v1 = _ZN18SelectionRectangleC1Ev(param_1 + 0xe0);
-  temp_v1 = _ZN18SelectionRectangleC1Ev(temp_v1 + 0x14);
-  *(unsigned char **)(temp_v1 + 0x494) = &DAT_00422590;
-  temp_v1 = temp_v1 + 0x4ec;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,_ZN14SelectionFlagsC1Ev,0x74,9);
-  temp_v1 = temp_v1 + 0x414;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_003a0104,0x1002,9);
-  temp_v1 = _ZN14SelectionFlagsC1Ev(temp_v1 + 0x9014);
-  puVar7 = (unsigned int *)(temp_v1 - 0x9ca8);
-  FUN_003a4518(puVar7);
-  *(unsigned int *)(temp_v1 - 0x9c98) = param_2;
-  *puVar7 = 0;
-  *(char *)(temp_v1 - 0x9c94) = (char)param_3;
-  *(int *)(temp_v1 - 0x9c90) = param_4;
-  *(unsigned int *)(temp_v1 - 0x9448) = 0xffffffff;
-  *(unsigned int *)(temp_v1 - 0x9444) = 0;
-  *(unsigned int *)(temp_v1 + 0xc07c) = 0;
-  *(unsigned int *)(temp_v1 + 0xc080) = 0;
-  *(unsigned int *)(temp_v1 + 0xc098) = 0;
-  *(unsigned int *)(temp_v1 + 0xc09c) = 0;
-  *(unsigned int *)(temp_v1 + 0xc0a0) = 0;
-  *(unsigned int *)(temp_v1 - 0x9b48) = 0;
-  *(unsigned int *)(temp_v1 - 0x9b44) = 0;
-  *(unsigned int *)(temp_v1 - 0x9b40) = 0;
-  *(unsigned int *)(temp_v1 - 0x9938) = 0;
-  *(unsigned int *)(temp_v1 - 0x9934) = 0;
-  *(unsigned int *)(temp_v1 - 0x9930) = 0;
-  *(unsigned char *)(temp_v1 - 0x9c8c) = 0;
-  *(unsigned char *)(temp_v1 - 0x9c8b) = 0;
-  uiInitializeEightTimerSet(temp_v1 - 0x9900);
-  rectangleInitializeSelection(temp_v1 - 0x9928,0x140,0,0x2b);
-  rectangleInitializeSelection(temp_v1 - 0x9914,0x140,0,0x2b);
-  temp_v2 = 0x68;
-  asdOperatorNew();
-  puVar4 = (unsigned int *)0x0;
-  if (temp_v2 != 0) {
-    puVar4 = (unsigned int *)_ZN9Obj422594C1Ev();
-    *puVar4 = (unsigned int)&DAT_004223b0;
-  }
-  *(unsigned int **)(temp_v1 - 0x944c) = puVar4;
-  FUN_002637c8();
-  psVar5 = (short *)FUN_002c0a2c(*(unsigned char *)(temp_v1 - 0x9c94),*(unsigned int *)(temp_v1 - 0x9c90));
-  if (*psVar5 != 0) {
-    *(unsigned char *)(temp_v1 - 0x9c8c) = 1;
-  }
-  if (*(int *)(temp_v1 - 0x9c98) == 1) {
-    *(unsigned int *)(temp_v1 - 0x9ca4) = 0xd;
-    *(unsigned int *)(temp_v1 - 0x9ca0) = 0;
-    buttonHelpAcquireResources();
-    buttonHelpCreate();
-    asdTMTexTableLoadSprites(0x2b);
-    FUN_002c58c8(0x2b,0);
-    *(unsigned int *)(temp_v1 - 0x992c) = 0x83;
-    puVar4 = puVar7;
+    scene->unk0000 = 0;
+    new (&scene->firstRectangle) SelectionRectangle();
+    new (&scene->secondRectangle) SelectionRectangle();
+    new (&scene->touch) Obj55ca08();
+    for (s32 i = 0; i < 9; i++)
+        new (&scene->entries[i].flags) SelectionFlags();
+    new (&scene->flags) SelectionFlags();
+    FUN_003a4518(scene);
+    scene->mode = mode;
+    scene->unk0000 = 0;
+    scene->kind = (s8)kind;
+    scene->subKind = subKind;
+    *(s32 *)scene->touch.unk38 = -1;
+    ((u32 *)scene)[0x864 / 4] = 0;
+    ((u32 *)scene)[0x15D24 / 4] = 0;
+    ((u32 *)scene)[0x15D28 / 4] = 0;
+    ((u32 *)scene)[0x15D40 / 4] = 0;
+    ((u32 *)scene)[0x15D44 / 4] = 0;
+    ((u32 *)scene)[0x15D48 / 4] = 0;
+    scene->unk0160[0] = 0;
+    scene->unk0160[1] = 0;
+    scene->unk0160[2] = 0;
+    scene->unk0370[0] = 0;
+    scene->unk0370[1] = 0;
+    scene->unk0370[2] = 0;
+    scene->hasProgress = 0;
+    scene->shown = 0;
+    uiInitializeEightTimerSet(scene->timers);
+    rectangleInitializeSelection(&scene->firstRectangle, 0x140, 0, 0x2B);
+    rectangleInitializeSelection(&scene->secondRectangle, 0x140, 0, 0x2B);
+    Obj4223ac *window = new Obj4223ac;
+    scene->touch.unk34 = (u32)window;
+    FUN_002637c8();
+    if (*FUN_002c0a2c((u8)scene->kind, scene->subKind) != 0)
+        scene->hasProgress = 1;
+    if (scene->mode == 1) {
+        scene->stepA = 13;
+        scene->stepB = 0;
+        buttonHelpAcquireResources();
+        buttonHelpCreate();
+        asdTMTexTableLoadSprites(0x2B);
+        FUN_002c58c8(0x2B, 0);
+        scene->buttonSprite = 0x83;
+        FUN_003a45fc();
+        scene->shown = 1;
+        FUN_002a03d8(0, 1);
+        FUN_002a03d8(1, 0);
+        return scene;
+    }
+    scene->buttonSprite = 0x1F;
+    scene->stepA = 0;
+    scene->stepB = 0;
+    FUN_003a169c(scene);
+    FUN_00282bfc(0, 0xFF);
+    FUN_00282bfc(1, 0xFF);
+    u32 music = 0x1000060;
+    if (kind == 0) {
+        qcSetPersistentStateFlag(subKind, 1);
+        if (subKind == 6 || subKind == 7) {
+            if (bgmGetStateById(0x1000060) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        } else if (subKind != 8) {
+            music = 0x100005B;
+            if (bgmGetStateById(music) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        }
+    } else if (kind == 1) {
+        questCenterSetFlag(subKind, 1);
+        if (subKind == 5) {
+            if (bgmGetStateById(0x1000060) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        } else if (subKind != 9) {
+            music = 0x100005C;
+            if (bgmGetStateById(music) != 1)
+                soundChannelRequestIfEnabled(music, 0, 0x3C);
+        }
+    }
     FUN_003a45fc();
-    *(char *)(temp_v1 - 0x9c8b) = (char)(int)puVar4;
-    FUN_002a03d8(0,1);
-    FUN_002a03d8(1);
-    return puVar7;
-  }
-  *(unsigned int *)(temp_v1 - 0x992c) = 0x1f;
-  *(unsigned int *)(temp_v1 - 0x9ca4) = 0;
-  *(unsigned int *)(temp_v1 - 0x9ca0) = 0;
-  FUN_003a169c(puVar7);
-  FUN_00282bfc(0,0xff);
-  FUN_00282bfc(1,0xff);
-  temp_v3 = 0x1000060;
-  if (param_3 != 0) {
-    if (param_3 == 1) {
-      questCenterSetFlag(param_4,1);
-      if (param_4 != 5) {
-        if (param_4 != 9) {
-          temp_v3 = 0x100005c;
-          temp_v2 = bgmGetStateById(0x100005c);
-          if (temp_v2 != 1) {
-            soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-          }
+    scene->shown = 1;
+    for (s32 page = 0; page < 9; page++) {
+        u8 *base = (u8 *)scene->pages + page * 0x1002;
+        for (s32 i = 0; i < *(u16 *)(base + 0x1000); i++) {
+            if (*(u16 *)(base + i * 4 + 2) & 1)
+                FUN_00343c0c(*(u16 *)(base + i * 4), 1);
         }
-      }
-      else {
-        temp_v2 = bgmGetStateById(0x1000060);
-        if (temp_v2 != 1) {
-          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-        }
-      }
     }
-  }
-  else {
-    qcSetPersistentStateFlag(param_4,1);
-    if (!(param_4 == 6 || param_4 == 7)) {
-      if (param_4 != 8) {
-        temp_v3 = 0x100005b;
-        temp_v2 = bgmGetStateById(0x100005b);
-        if (temp_v2 != 1) {
-          soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-        }
-      }
-    }
-    else {
-      temp_v2 = bgmGetStateById(0x1000060);
-      if (temp_v2 != 1) {
-        soundChannelRequestIfEnabled(temp_v3,0,0x3c);
-      }
-    }
-  }
-  puVar4 = puVar7;
-  FUN_003a45fc();
-  temp_v2 = 0;
-  *(char *)(temp_v1 - 0x9c8b) = (char)(int)puVar4;
-  do {
-    temp_v1 = 0;
-    if (*(short *)((int)puVar7 + temp_v2 * 0x1002 + 0x1c94) != 0) {
-      do {
-        temp_v0 = temp_v1 * 4 + temp_v2 * 0x1002;
-        if ((*(unsigned short *)((int)puVar7 + temp_v0 + 0xc96) & 1) != 0) {
-          FUN_00343c0c(*(unsigned short *)((int)puVar7 + temp_v0 + 0xc94),1);
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)(unsigned int)*(unsigned short *)((int)puVar7 + temp_v2 * 0x1002 + 0x1c94));
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 9);
-  gameCounterAddSaturating(0x1c,1);
-  return puVar7;
+    gameCounterAddSaturating(0x1C, 1);
+    return scene;
 }
 
 } /* extern "C" */

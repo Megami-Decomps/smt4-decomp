@@ -1537,7 +1537,7 @@
 0x002b5134 nw_gfx_res_SetupReferenceLut name
 0x002b51b8 _ZN14AllocatedArrayI13WeightedEntryED1Ev between
 0x002b5228 nw_gfx_RenderContext_MaterialHash_ResetMaterialHash name
-0x002b52b4 FUN_002b52b4 between
+0x002b52b4 _ZN9Obj421230C1EP18AsdAllocatorObjectP12Obj421230ResPv between
 0x002b563c FUN_002b563c between
 0x002b5838 nn_applet_CTR_detail_CallUtility name
 0x002b5904 FUN_002b5904 between
@@ -2649,7 +2649,7 @@
 0x003801dc nw_snd_internal_driver_MmlParser_ParseAllocTrack name
 0x00380210 nw_snd_internal_CurveLfo_Reset name
 0x00380228 nw_snd_internal_FrameHeap_Alloc name
-0x00380298 nw_snd_internal_FrameHeap_FrameHeap_sub_object_380298 name
+0x00380298 _ZN13Obj421f54ListC1Ev between
 0x003802b0 nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0 name
 0x003802f0 FUN_003802f0 between
 0x00380320 FUN_00380320 between

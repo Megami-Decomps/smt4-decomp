@@ -1,156 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f33b0` (_code @ 0x3f33b0, 0x2a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 169 vs 160 rows; register numbering differs (retail reuses the dead argument registers) and retail lays the skill-collection branch out of line. */
+#include "common.h"
+
+// Party member record (0x12c bytes): only the parts merged here.
+struct MemberRecord {
+    u8 unk00[0x32];
+    u16 skillPad;       // 0x32
+    u16 skills[8];      // 0x34
+    u8 unk44[0x22];
+    u8 id;              // 0x66
+    u8 unk67;
+    u8 learned[0x40];   // 0x68
+    u8 unka8[0x12c - 0xa8];
+};
+
+struct SlotTable {
+    u8 unk0000[0x1ca0];
+    s8 party[3];        // 0x1ca0
+};
 
 extern "C" {
 
-int qsort(...);
-int FUN_002a6894(...);
-int FUN_004bcd90(...);
-int dispatchIfFound(...);
-int bitsAt60Set(...);
-int FUN_004bd6b0(...);
-int FUN_004d0d70(...);
-int rt_memcpy_w(...);
+void rt_memcpy_w(void* dst, const void* src, u32 size);
+SlotTable* gameGetSlotTable(void);
+MemberRecord* gameGetSlotRecord(u8 id);
+void FUN_004d0d70(u8 id);
+void dispatchIfFound(u8 id, u32 arg, s32 mode);
+s32 bitsAt60Test(void* record, u32 bit);
+void bitsAt60Set(void* record, u32 bit);
+void FUN_002a6894(void* record);
+s32 recordContainsPairedId(void* record);
+void qsort(void* base, u32 count, u32 size, s32 (*compare)(const void*, const void*));
+s32 FUN_002c2bf4(const void* a, const void* b);
+u32 getUnlockedSlotCount(void* record);
+void FUN_004bcd90(void* record);
+void FUN_004bd6b0(void* record, u32 skill, s32 slot);
 
-/* stack frame of param_3: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char spEA; /* 0xea: local_ea */
-} param_3_stack;
-
-extern int FUN_002c2bf4(...); /* 0x2c2bf4 */
-
-/* Supplied declaration required: qsort. */
-extern int gameGetSlotRecord(unsigned char);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002a6894. */
-extern int recordContainsPairedId(int);
-/* Supplied declaration required: FUN_004bcd90. */
-extern unsigned int getUnlockedSlotCount(int);
-/* Supplied declaration required: dispatchIfFound. */
-extern int bitsAt60Test(unsigned char *, unsigned int);
-/* Supplied declaration required: bitsAt60Set. */
-/* Supplied declaration required: FUN_004bd6b0. */
-/* Supplied declaration required: FUN_004d0d70. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
-
+// Merges the member image `source` into its slot record, collecting the skills
+// that could not be merged into `outSkills`; returns 1 when some do not fit.
+u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
 {
-/* irregular: 9 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  short *psVar6;
-  int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7 [52];
-  short asStack_11c [25];
-  unsigned char temp_v8;
-  unsigned char temp_v9 [200];
-  
-  rt_memcpy_w(temp_v7,param_1,300);
-  temp_v1 = gameGetSlotTable();
-  temp_v2 = (unsigned int)temp_v8;
-  temp_v6 = -1;
-  if ((int)*(char *)(temp_v1 + 0x1ca0) == temp_v2) {
-    temp_v6 = 0;
-  }
-  else if ((int)*(char *)(temp_v1 + 0x1ca1) == temp_v2) {
-    temp_v6 = 1;
-  }
-  else if ((int)*(char *)(temp_v1 + 0x1ca2) == temp_v2) {
-    temp_v6 = 2;
-  }
-  FUN_004d0d70(*(unsigned char *)(param_1 + 0x66));
-  dispatchIfFound(temp_v8,param_2,0);
-  temp_v3 = gameGetSlotRecord(temp_v8);
-  if (-1 < temp_v6) {
-    *(unsigned char *)(temp_v1 + temp_v6 + 0x1ca0) = *(unsigned char *)(temp_v3 + 0x66);
-  }
-  temp_v1 = 0;
-  do {
-    temp_v5 = temp_v3 + temp_v1;
-    temp_v6 = temp_v1 + 2;
-    *(unsigned char *)(temp_v5 + 0x68) = *(unsigned char *)(temp_v5 + 0x68) | temp_v9[temp_v1];
-    *(unsigned char *)(temp_v5 + 0x69) = temp_v9[temp_v1 + 1] | *(unsigned char *)(temp_v5 + 0x69);
-    temp_v1 = temp_v6;
-  } while (temp_v6 < 0x40);
-  temp_v1 = bitsAt60Test(temp_v7,2);
-  if (temp_v1 != 0) {
-    bitsAt60Set(temp_v3,2);
-  }
-  FUN_002a6894(temp_v3);
-  temp_v5 = 0;
-  temp_v1 = 0;
-  temp_v6 = 0;
-  do {
-    if (asStack_11c[temp_v6] != 0) {
-      temp_v4 = recordContainsPairedId(temp_v3);
-      if (temp_v4 != 0) {
-        if (asStack_11c[temp_v6] != 0) {
-          temp_v5 = temp_v5 + 1;
+    MemberRecord copy;
+    rt_memcpy_w(&copy, source, 300);
+    SlotTable* table = gameGetSlotTable();
+    u32 id = copy.id;
+    s32 partyIndex = -1;
+    if (table->party[0] == id) partyIndex = 0;
+    else if (table->party[1] == id) partyIndex = 1;
+    else if (table->party[2] == id) partyIndex = 2;
+    FUN_004d0d70(source->id);
+    dispatchIfFound(copy.id, arg, 0);
+    MemberRecord* record = gameGetSlotRecord(copy.id);
+    if (partyIndex >= 0) table->party[partyIndex] = record->id;
+    for (s32 i = 0; i < 0x40; i++) {
+        record->learned[i] |= copy.learned[i];
+    }
+    if (bitsAt60Test(&copy, 2)) bitsAt60Set(record, 2);
+    FUN_002a6894(record);
+
+    s32 duplicates = 0;
+    s32 added = 0;
+    for (s32 i = 0; i < 8; i++) {
+        if (copy.skills[i] != 0) {
+            if (!recordContainsPairedId(record)) {
+                outSkills[added++] = copy.skills[i];
+            } else if (copy.skills[i] != 0) {
+                duplicates++;
+            }
         }
-      }
-      else {
-        temp_v4 = temp_v1 * 2;
-        temp_v1 = temp_v1 + 1;
-        *(short *)(param_3 + temp_v4) = asStack_11c[temp_v6];
-      }
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 8);
-  qsort(param_3,8,2,FUN_002c2bf4);
-  temp_v2 = getUnlockedSlotCount(temp_v3);
-  if (0 < 8 - temp_v1) {
-    *(unsigned short *)(param_3 + temp_v1 * 2) = 0;
-  }
-  if (0 < (int)(temp_v2 - 1)) {
-    psVar6 = (short *)(temp_v3 + 0x32);
-    if (((temp_v2 & 1) == 0) && (psVar6 = (short *)(temp_v3 + 0x34), *psVar6 == 0)) {
-      temp_v1 = temp_v1 - 1;
+    qsort(outSkills, 8, 2, FUN_002c2bf4);
+    u32 unlocked = getUnlockedSlotCount(record);
+    if (8 - added > 0) outSkills[added] = 0;
+
+    MemberRecord* member = record;
+    s32 unplaced = added;
+    for (u32 i = 0; i < unlocked; i++) {
+        if (member->skills[i] == 0) unplaced--;
     }
-    temp_v0 = psVar6[1];
-    temp_v4 = 0;
-    for (temp_v6 = (int)(temp_v2 - 1) >> 1; temp_v6 != 0; temp_v6 = temp_v6 - 1) {
-      if (temp_v0 == 0) {
-        temp_v1 = temp_v1 - 1;
-      }
-      temp_v0 = psVar6[3];
-      if (psVar6[2] == 0) {
-        temp_v4 = temp_v4 - 1;
-      }
-      psVar6 = psVar6 + 2;
+    if (unplaced > 0) {
+        FUN_004bcd90(record);
+        return 1;
     }
-    temp_v1 = temp_v1 + temp_v4;
-  }
-  if ((-1 < (int)(temp_v2 - 1)) && (*(short *)(temp_v3 + (temp_v2 - 1) * 2 + 0x34) == 0)) {
-    temp_v1 = temp_v1 - 1;
-  }
-  if (0 < temp_v1) {
-    FUN_004bcd90(temp_v3);
-    return 1;
-  }
-  temp_v1 = 0;
-  do {
-    temp_v6 = temp_v5;
-    if (*(short *)(param_3 + temp_v1 * 2) != 0) {
-      for (; temp_v6 < 8; temp_v6 = temp_v6 + 1) {
-        if (*(short *)(temp_v3 + temp_v6 * 2 + 0x34) == 0) {
-          FUN_004bd6b0(temp_v3);
-          break;
+    for (s32 i = 0; i < 8; i++) {
+        u16 skill = outSkills[i];
+        if (skill != 0) {
+            for (s32 j = duplicates; j < 8; j++) {
+                if (member->skills[j] == 0) {
+                    FUN_004bd6b0(record, skill, j);
+                    break;
+                }
+            }
         }
-      }
     }
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 8) {
-      FUN_004bcd90(temp_v3);
-      return 0;
-    }
-  } while( 1 );
+    FUN_004bcd90(record);
+    return 0;
 }
 
 } /* extern "C" */

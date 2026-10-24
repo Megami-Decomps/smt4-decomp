@@ -1,142 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018b49c` (_code @ 0x18b49c, 0x2a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (177 vs 166 rows); retail frame is 84 bytes with the label text buffer placed differently and the draw-state helper not inlined the same way */
+#include "common.h"
+
+// Title/menu scene: the draw-state ring the config screen writes into.
+struct TitleScene {
+    u8 unk0000[0x12ac];
+    s32 ringIndex;          // 0x12ac
+    s32 ring[6];            // 0x12b0
+    u8 dirty;               // 0x12c4
+    u8 unk12c5[3];
+    void (*flush)(void);    // 0x12c8
+};
+
+struct LayoutEntry {
+    u8 unk00[8];
+    s16 x;                  // 0x08
+    s16 y;                  // 0x0a
+};
+
+struct ConfigMenu {
+    u8 unk00[0x80];
+    u32 cursorValues[8];    // 0x80
+    u8 unk_a0[8];
+    u8 mode;                // 0xa8
+};
 
 extern "C" {
 
-int FUN_00196fe8(...);
-int FUN_0029efa8(int);
-int FUN_0029efc0(...);
-int FUN_002be5a4(...);
-int textFormatBuffer(unsigned char [64], unsigned char *, int);
-int FUN_002bf288(int, int, int, int, int, int);
-int FUN_002bf380(int, int, int, int, int, int);
-int VectorSignedToFloat(int, int);
+extern ConfigMenu* g_config;
+extern TitleScene* g_titleScene;
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_2_stack;
+s32 FUN_0029efc0(ConfigMenu* menu);
+s32 FUN_0029efa8(ConfigMenu* menu);
+void FUN_002bf380(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
+void FUN_002bf288(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
+LayoutEntry* FUN_002bf4f8(u32 group, u32 index);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
+s32 gameFlagIsSet(u32 flag);
+u32 dataTableGet(u32 table, u32 arg);
+u8* dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+void textFormatBuffer(u8* out, const char* format, ...);
+void FUN_002be5a4(s32 a, u32 color, u8* text, s32 b, f32 x, f32 y);
+void FUN_00196fe8(s32 kind, s32 x, s32 y, u32 value, u8* label);
 
-extern unsigned char LAB_0018b754; /* 0x18b754 */
-extern int g_config; /* 0x43dc58 */
-extern int g_titleScene; /* 0x44ea00 */
+extern const char LAB_0018b754[];
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00196fe8. */
-/* Supplied declaration required: FUN_0029efa8. */
-/* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-extern int gameFlagIsSet(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_0018b49c(int param_1,int param_2)
-
+// Records a draw state in the title scene's ring and flushes it when it changed.
+static void setDrawState(s32 value)
 {
-/* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  int *piVar11;
-  unsigned int temp_v10;
-  int temp_v11;
-  unsigned int in_fpscr;
-  unsigned char temp_v12 [64];
-  int temp_v13;
-  unsigned int temp_v14;
-  
-  temp_v2 = g_config;
-  FUN_0029efc0(g_config);
-  FUN_0029efa8(temp_v2);
-  FUN_002bf380(2,0x2f,0,param_1,param_2,0xb);
-  temp_v14 = 0xe09800ff;
-  temp_v3 = FUN_002bf4f8(0x2f,0x20);
-  temp_v5 = g_titleScene;
-  temp_v13 = *(short *)(temp_v3 + 8) + param_1;
-  temp_v11 = *(short *)(temp_v3 + 10) + param_2;
-  temp_v4 = packNibblesAndByte(6,1,0);
-  piVar11 = (int *)(temp_v5 + 0x12ac);
-  temp_v8 = piVar11[*piVar11 + 2];
-  piVar11[*piVar11 + 2] = temp_v4;
-  if (*(char *)(temp_v5 + 0x12c4) != '\0' || temp_v8 != temp_v4) {
-    (**(romwright_code **)(temp_v5 + 0x12c8))();
-    *(unsigned char *)(temp_v5 + 0x12c4) = 0;
-  }
-  FUN_002bf288(2,0x2f,0xc,temp_v13,temp_v11,0xb);
-  temp_v5 = g_titleScene;
-  temp_v4 = packNibblesAndByte(6,7,0);
-  piVar11 = (int *)(temp_v5 + 0x12ac);
-  temp_v8 = piVar11[*piVar11 + 2];
-  piVar11[*piVar11 + 2] = temp_v4;
-  if (*(char *)(temp_v5 + 0x12c4) != '\0' || temp_v8 != temp_v4) {
-    (**(romwright_code **)(temp_v5 + 0x12c8))();
-    *(unsigned char *)(temp_v5 + 0x12c4) = 0;
-  }
-  FUN_002bf380(2,0x2f,1,temp_v13,temp_v11,0x10);
-  temp_v10 = 0xffffffff;
-  temp_v5 = gameFlagIsSet(0x555);
-  if ((temp_v5 != 0) && (temp_v5 = gameFlagIsSet(0x557), temp_v5 != 0)) {
-    temp_v10 = 2;
-  }
-  else {
-    temp_v5 = gameFlagIsSet(0x557);
-    if (temp_v5 != 0) {
-      temp_v10 = 1;
+    TitleScene* scene = g_titleScene;
+    s32* slot = &scene->ringIndex;
+    s32 previous = slot[*slot + 2];
+    slot[*slot + 2] = value;
+    if (scene->dirty != 0 || previous != value) {
+        scene->flush();
+        scene->dirty = 0;
     }
-    else {
-      temp_v5 = gameFlagIsSet(0x555);
-      if (temp_v5 != 0) {
-        temp_v10 = 0;
-      }
+}
+
+// Draws one config option row at (x, y): the frame, its label and cursor value.
+void FUN_0018b49c(s32 x, s32 y)
+{
+    ConfigMenu* menu = g_config;
+    FUN_0029efc0(menu);
+    FUN_0029efa8(menu);
+    FUN_002bf380(2, 0x2f, 0, x, y, 0xb);
+    u32 color = 0xe09800ff;
+    LayoutEntry* frame = FUN_002bf4f8(0x2f, 0x20);
+    s32 rowX = frame->x + x;
+    s32 rowY = frame->y + y;
+    setDrawState(packNibblesAndByte(6, 1, 0));
+    FUN_002bf288(2, 0x2f, 0xc, rowX, rowY, 0xb);
+    setDrawState(packNibblesAndByte(6, 7, 0));
+    FUN_002bf380(2, 0x2f, 1, rowX, rowY, 0x10);
+
+    u32 variant = 0xffffffff;
+    if (gameFlagIsSet(0x555) && gameFlagIsSet(0x557)) {
+        variant = 2;
+    } else if (gameFlagIsSet(0x557)) {
+        variant = 1;
+    } else if (gameFlagIsSet(0x555)) {
+        variant = 0;
     }
-  }
-  temp_v6 = dataTableGet(0x36,0);
-  temp_v5 = dataTableGetEntries();
-  temp_v7 = dataTableGetCount(temp_v6);
-  if ((temp_v10 < temp_v7) && (temp_v5 = temp_v5 + temp_v10 * 0x80, temp_v5 != 0)) {
-    temp_v4 = FUN_002bf4f8(0x2f,0x1a);
-    textFormatBuffer(temp_v12,&LAB_0018b754,temp_v5);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
-                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,temp_v14,temp_v12,(int)*(short *)(temp_v4 + 8));
-    if (*(char *)(temp_v2 + 0xa8) != '\x01') {
-      temp_v4 = FUN_0029efc0(temp_v2);
-      temp_v9 = *(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x80);
-      temp_v0 = *(short *)(temp_v3 + 10);
-      temp_v1 = *(short *)(temp_v3 + 8);
-      temp_v6 = 2;
+    u32 table = dataTableGet(0x36, 0);
+    u8* entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+    if (variant < count && (entries + variant * 0x80) != NULL) {
+        u8* entry = entries + variant * 0x80;
+        LayoutEntry* label = FUN_002bf4f8(0x2f, 0x1a);
+        u8 text[64];
+        textFormatBuffer(text, LAB_0018b754, entry);
+        FUN_002be5a4(2, color, text, label->x, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y));
+        s32 kind = (menu->mode != 1) ? 2 : 3;
+        u32 value = menu->cursorValues[FUN_0029efc0(menu)];
+        FUN_00196fe8(kind, frame->x + x, frame->y + y, value, entry);
     }
-    else {
-      temp_v4 = FUN_0029efc0(temp_v2);
-      temp_v9 = *(unsigned int *)(temp_v2 + temp_v4 * 4 + 0x80);
-      temp_v0 = *(short *)(temp_v3 + 10);
-      temp_v1 = *(short *)(temp_v3 + 8);
-      temp_v6 = 3;
-    }
-    FUN_00196fe8(temp_v6,temp_v1 + param_1,temp_v0 + param_2,temp_v9,temp_v5);
-  }
-  return;
 }
 
 } /* extern "C" */

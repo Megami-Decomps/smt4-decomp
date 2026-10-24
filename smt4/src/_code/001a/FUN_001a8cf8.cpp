@@ -1,129 +1,154 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a8cf8` (_code @ 0x1a8cf8, 0x25c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills the zero return value to the stack and hoists 0/5/100.0f into r9/sl/s19 with the loop index in r5 (built: r4/r8); the switch jump table and call sequence are identical */
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "map/mapDepart.h"
+
+#define MAP_RANGE_ENTRY_COUNT 16
+
+enum MapRangePhase {
+    MAP_RANGE_WAIT = 1,    /* waiting for the encounter source to come close and face the entry */
+    MAP_RANGE_TRIGGERED = 2,
+    MAP_RANGE_FINISHING = 4,
+    MAP_RANGE_DONE = 5,
+};
+
+struct MapRangeObjectInner {
+    /* 0x000 */ u8 unk000[0x1F6];
+    /* 0x1F6 */ u8 visible;
+};
+
+struct MapRangeObjectData {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ MapRangeObjectInner *inner;
+};
+
+struct MapRangeObject {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ MapRangeObjectData *data;
+};
+
+struct MapRangeEntry {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 phase;
+    /* 0x08 */ s32 timer;
+    /* 0x0C */ MapVector position;
+    /* 0x18 */ f32 heading;
+    /* 0x1C */ u32 triggered;
+    /* 0x20 */ u8 reacting;
+    /* 0x21 */ u8 unk21[3];
+    /* 0x24 */ s32 effectId;
+    /* 0x28 */ u8 hasModel;
+    /* 0x29 */ u8 unk29[3];
+    /* 0x2C */ s32 model;
+    /* 0x30 */ u8 modelVisible;
+    /* 0x31 */ u8 unk31[3];
+    /* 0x34 */ s32 objectIndex;
+    /* 0x38 */ s32 soundId;
+};
+
+struct MapRangeObjectSlot {
+    MapRangeObject *object;
+    u32 unk04;
+};
+
+struct MapRangeWork {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ MapRangeObjectSlot objects[1];
+    /* 0x20 */ u8 unk20[4];
+    /* 0x24 */ MapRangeEntry entries[MAP_RANGE_ENTRY_COUNT];
+};
 
 extern "C" {
+extern MapRangeWork *g_mapRangeWork;
+extern GameState g_gameState;
 
-int asdMdlManagerMarkDestroy(void);
-int FUN_002878fc(int);
-int FUN_002879dc(int, int, int);
-int FUN_00287a78(void);
-int mathDistanceBetweenPoints(void);
-int mathGetShortestAngleDelta(void);
-int mathPositionHeadingDegrees(void);
-int FUN_00291e40(int);
-int asdMdlManagerDestroy(void);
-int FUN_002df824(int, int);
+f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
+f32 mathGetShortestAngleDelta(f32 first, f32 second);
+f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
+f32 FUN_00287a78(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
+u32 FUN_00291e40(u32 soundId, SoundActorQueuePosition position);
+void FUN_002df824(s32 id, s32 flag);
+void FUN_002879dc(s32 a, s32 b, s32 c);
+void FUN_002878fc(s32 id);
+void asdMdlManagerMarkDestroy(s32 model);
+void asdMdlManagerDestroy(s32 model);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern int g_mapRangeWork; /* 0x447a60 */
-extern signed char DAT_0049fa98; /* 0x49fa98 */
-extern int DAT_0049fa9c; /* 0x49fa9c */
-extern short DAT_0049faae; /* 0x49faae */
-
-/* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_002878fc. */
-/* Supplied declaration required: FUN_002879dc. */
-/* Supplied declaration required: FUN_00287a78. */
-/* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: mathGetShortestAngleDelta. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002df824. */
-
-
-unsigned int FUN_001a8cf8(void)
-
+/* Advances every active map-range entry: it triggers when the encounter source is close and
+ * faces it, plays its sound and effect, then retires its model. */
+u32 FUN_001a8cf8(void)
 {
-/* irregular: 10 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v5 = 0;
-  do {
-    temp_v4 = g_mapRangeWork + temp_v5 * 0x3c;
-    if (*(char *)(temp_v4 + 0x24) != '\0') {
-      switch(*(unsigned int *)(temp_v4 + 0x28)) {
-      case 1:
-        temp_v1 = 0;
-        temp_v0 = 0;
-        if (DAT_0049fa98 != '\0') {
-          temp_v0 = DAT_0049faae;
+    for (s32 i = 0; i < MAP_RANGE_ENTRY_COUNT; i++) {
+        MapRangeEntry *entry = &g_mapRangeWork->entries[i];
+        if (!entry->active)
+            continue;
+        switch (entry->phase) {
+        case 0:
+        case 3:
+            break;
+        case MAP_RANGE_WAIT: {
+            s32 facing = 0;
+            if (g_gameState.encounterSourceActive && g_gameState.encounterSourceKind != 0) {
+                f32 heading = mathPositionHeadingDegrees(entry->position, g_gameState.encounterSourcePosition);
+                f32 delta = mathGetShortestAngleDelta(entry->heading, heading);
+                if (delta > -90.0f && delta < 90.0f)
+                    facing = 1;
+                if (mathDistanceBetweenPoints(g_gameState.encounterSourcePosition, entry->position) < 300.0f
+                    && FUN_00287a78(g_gameState.encounterSourcePosition.x,
+                                    g_gameState.encounterSourcePosition.y,
+                                    g_gameState.encounterSourcePosition.z,
+                                    g_gameState.encounterSourceHeading, entry->position.x,
+                                    entry->position.y, entry->position.z) < 70.0f
+                    && facing) {
+                    entry->triggered = 1;
+                    SoundActorQueuePosition position = {entry->position.x, entry->position.y + 100.0f,
+                                                        entry->position.z};
+                    FUN_00291e40(0x10001FB, position);
+                    FUN_002df824((s16)entry->effectId, 1);
+                    entry->reacting = 1;
+                    entry->phase = MAP_RANGE_TRIGGERED;
+                    entry->timer = 0;
+                }
+            }
+            break;
         }
-        if (DAT_0049fa98 != '\0' && temp_v0 != 0) {
-          mathPositionHeadingDegrees();
-          temp_v6 = *(unsigned int *)(temp_v4 + 0x3c);
-          mathGetShortestAngleDelta();
-          if ((temp_v6 < 0xc2b40000) && ((int)temp_v6 < 0x42b40000)) {
-            temp_v1 = 1;
-          }
-          temp_v2 = DAT_0049fa9c;
-          mathDistanceBetweenPoints();
-          if (((temp_v2 < 0x43960000) && (temp_v2 = DAT_0049fa9c, FUN_00287a78(), temp_v2 < 0x428c0000))
-             && (temp_v1)) {
-            *(unsigned int *)(temp_v4 + 0x40) = 1;
-            FUN_00291e40(0x10001fb);
-            FUN_002df824((int)(short)*(unsigned int *)(temp_v4 + 0x48),1);
-            *(unsigned char *)(temp_v4 + 0x44) = 1;
-            *(unsigned int *)(temp_v4 + 0x28) = 2;
-            *(unsigned int *)(temp_v4 + 0x2c) = 0;
-          }
+        case MAP_RANGE_TRIGGERED:
+            entry->timer++;
+            if (entry->timer == 2)
+                FUN_002879dc(0xF, 0x1E, 1);
+            if (entry->timer == 0x28)
+                FUN_002878fc((s16)entry->soundId);
+            if (entry->timer >= 0x3C) {
+                u32 next;
+                if (entry->hasModel) {
+                    if (entry->model == 0)
+                        break;
+                    asdMdlManagerMarkDestroy(entry->model);
+                    entry->modelVisible = 0;
+                    next = MAP_RANGE_FINISHING;
+                } else {
+                    MapRangeObject *object = g_mapRangeWork->objects[entry->objectIndex].object;
+                    object->flags |= 2;
+                    object->data->inner->visible = 0;
+                    next = 3;
+                }
+                entry->phase = next;
+            }
+            break;
+        case MAP_RANGE_FINISHING:
+            entry->phase = MAP_RANGE_DONE;
+            break;
+        case MAP_RANGE_DONE:
+            if (entry->model != 0) {
+                asdMdlManagerDestroy(entry->model);
+                entry->model = 0;
+            }
+            entry->active = 0;
+            entry->phase = 0;
+            break;
         }
-        break;
-      case 2:
-        temp_v2 = *(int *)(temp_v4 + 0x2c) + 1;
-        *(int *)(temp_v4 + 0x2c) = temp_v2;
-        if (temp_v2 == 2) {
-          FUN_002879dc(0xf,0x1e,1);
-        }
-        if (*(int *)(temp_v4 + 0x2c) == 0x28) {
-          FUN_002878fc((int)(short)*(unsigned int *)(temp_v4 + 0x5c));
-        }
-        if (*(int *)(temp_v4 + 0x2c) >= 0x3c) {
-          if (*(char *)(temp_v4 + 0x4c) != '\0') {
-            if (*(int *)(temp_v4 + 0x50) == 0) break;
-            asdMdlManagerMarkDestroy();
-            temp_v3 = 4;
-            *(unsigned char *)(temp_v4 + 0x54) = 0;
-          }
-          else {
-            puVar5 = *(unsigned int **)(g_mapRangeWork + *(int *)(temp_v4 + 0x58) * 8 + 0x18);
-            *puVar5 = *puVar5 | 2;
-            *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
-            temp_v3 = 3;
-          }
-          *(unsigned int *)(temp_v4 + 0x28) = temp_v3;
-        }
-        break;
-      case 4:
-        *(unsigned int *)(temp_v4 + 0x28) = 5;
-        break;
-      case 5:
-        if (*(int *)(temp_v4 + 0x50) != 0) {
-          asdMdlManagerDestroy();
-          *(unsigned int *)(temp_v4 + 0x50) = 0;
-        }
-        *(char *)(temp_v4 + 0x24) = '\0';
-        *(unsigned int *)(temp_v4 + 0x28) = 0;
-      }
     }
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x10) {
-      return 0;
-    }
-  } while( 1 );
+    return 0;
 }
 
 } /* extern "C" */

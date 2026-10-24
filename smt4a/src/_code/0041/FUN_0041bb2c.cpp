@@ -1,121 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041bb2c` (_code @ 0x41bb2c, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads each velocity/position component from memory between the adds and uses a 76-byte frame; ours forwards the stored velocity in registers (84-byte frame). */
+#include "nw/math/MTX34.h"
+#include <stddef.h>
+
+using nw::math::MTX34;
+
+struct Vector3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+/* The controller an effect drives (flags at +4). */
+struct EffectController {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags;
+};
+
+struct EffectOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ EffectController *controller;
+};
+
+/* A scripted move/rotate of an effect: position and angle advance each frame by a velocity that
+ * itself accelerates, and the result is turned into the controller's transform. */
+struct EffectMotion {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ EffectOwner *owner;
+    /* 0x08 */ s32 framesLeft;
+    /* 0x0C */ Vector3 pivot;
+    /* 0x18 */ Vector3 position;
+    /* 0x24 */ Vector3 angle;         /* degrees */
+    /* 0x30 */ u8 unk30[0xC];
+    /* 0x3C */ Vector3 velocity;
+    /* 0x48 */ Vector3 acceleration;
+    /* 0x54 */ Vector3 angularVelocity;
+    /* 0x60 */ MTX34 transform;
+    /* 0x90 */ Vector3 finalPosition;
+    /* 0x9C */ Vector3 finalAngle;
+    /* 0xA8 */ u32 finalTriple[3];
+};
+
+typedef char EffectMotionLayoutCheck[offsetof(EffectMotion, transform) == 0x60 &&
+    offsetof(EffectMotion, finalTriple) == 0xA8 ? 1 : -1];
 
 extern "C" {
 
-int FUN_0017fc94(...);
-int FUN_001ab810(unsigned int, unsigned char [48]);
-int FUN_001aff14(unsigned char [48], int);
-int controllerSetDestination(...);
-int controllerSetRotationEulerDegrees(int);
-int tripleOwnerSetValue(int, int);
-int nn_math_ARMv6_MTX34CopyAsm(int, unsigned int *);
-int nn_math_ARMv6_MTX34MultAsm(int, unsigned char [48]);
-int nn_math_ARMv6_VEC3TransformAsm_2AD44C(int *, int);
+void controllerSetDestination(EffectController *controller, const Vector3 *destination);
+void controllerSetRotationEulerDegrees(EffectController *controller, f32 x, f32 y, f32 z);
+void tripleOwnerSetValue(EffectController *controller, const u32 *triple);
+void nn_math_ARMv6_MTX34CopyAsm(MTX34 *destination, const MTX34 *source);
+void nn_math_ARMv6_MTX34MultAsm(MTX34 *destination, const MTX34 *first, const MTX34 *second);
+void nn_math_ARMv6_VEC3TransformAsm_2AD44C(Vector3 *out, const MTX34 *matrix, const Vector3 *in);
+void FUN_0017fc94(MTX34 *destination, const Vector3 *translation, const MTX34 *source);
+void FUN_001aff14(MTX34 *matrix, s32 clearTranslation, f32 x, f32 y, f32 z);
+void FUN_001ab810(EffectController *controller, const MTX34 *matrix);
 
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
-extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
-extern unsigned int DAT_0064c058; /* 0x64c058 */
-extern unsigned int DAT_0064c05c; /* 0x64c05c */
-extern unsigned int DAT_0064c060; /* 0x64c060 */
-extern unsigned int DAT_0064c064; /* 0x64c064 */
-extern unsigned int DAT_0064c068; /* 0x64c068 */
-extern unsigned int DAT_0064c06c; /* 0x64c06c */
-extern unsigned int DAT_0064c070; /* 0x64c070 */
-extern unsigned int DAT_0064c074; /* 0x64c074 */
-extern unsigned int DAT_0064c078; /* 0x64c078 */
-extern unsigned int DAT_0064c07c; /* 0x64c07c */
-extern unsigned int DAT_0064c080; /* 0x64c080 */
-
-/* Supplied declaration required: FUN_0017fc94. */
-/* Supplied declaration required: FUN_001ab810. */
-/* Supplied declaration required: FUN_001aff14. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: controllerSetRotationEulerDegrees. */
-/* Supplied declaration required: tripleOwnerSetValue. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
-/* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
-
-void FUN_0041bb2c(int param_1)
-
+/* One frame of the effect motion; on the last frame it snaps the controller to the final values. */
+void FUN_0041bb2c(EffectMotion *motion)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [48];
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v0 = *(int *)(param_1 + 8) - 1;
-  *(int *)(param_1 + 8) = temp_v0;
-  if (temp_v0 == 0) {
-    temp_v0 = *(int *)(*(int *)(param_1 + 4) + 4);
-    controllerSetDestination(temp_v0,param_1 + 0x90);
-    controllerSetRotationEulerDegrees(temp_v0);
-    tripleOwnerSetValue(temp_v0,param_1 + 0xa8);
-    *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
-    return;
-  }
-  temp_v2 = 0;
-  *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) + *(float *)(param_1 + 0x48);
-  *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x40) + *(float *)(param_1 + 0x4c);
-  *(float *)(param_1 + 0x44) = *(float *)(param_1 + 0x44) + *(float *)(param_1 + 0x50);
-  *(float *)(param_1 + 0x18) = *(float *)(param_1 + 0x18) + *(float *)(param_1 + 0x3c);
-  *(float *)(param_1 + 0x1c) = *(float *)(param_1 + 0x1c) + *(float *)(param_1 + 0x40);
-  *(float *)(param_1 + 0x20) = *(float *)(param_1 + 0x20) + *(float *)(param_1 + 0x44);
-  *(float *)(param_1 + 0x24) = *(float *)(param_1 + 0x24) + *(float *)(param_1 + 0x54);
-  *(float *)(param_1 + 0x28) = *(float *)(param_1 + 0x28) + *(float *)(param_1 + 0x58);
-  *(float *)(param_1 + 0x2c) = *(float *)(param_1 + 0x2c) + *(float *)(param_1 + 0x5c);
-  temp_v7 = -*(float *)(param_1 + 0xc);
-  temp_v8 = -*(float *)(param_1 + 0x10);
-  temp_v9 = -*(float *)(param_1 + 0x14);
-  if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v0 != 0)) {
-    _ZZN2nw4math5MTX348IdentityEvE8identity = 0x3f800000;
-    DAT_0064c068 = 0x3f800000;
-    DAT_0064c07c = 0x3f800000;
-    DAT_0064c058 = temp_v2;
-    DAT_0064c05c = temp_v2;
-    DAT_0064c060 = temp_v2;
-    DAT_0064c064 = temp_v2;
-    DAT_0064c06c = temp_v2;
-    DAT_0064c070 = temp_v2;
-    DAT_0064c074 = temp_v2;
-    DAT_0064c078 = temp_v2;
-    DAT_0064c080 = temp_v2;
-  }
-  nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x60,&_ZZN2nw4math5MTX348IdentityEvE8identity);
-  FUN_0017fc94(param_1 + 0x60,&temp_v7);
-  FUN_001aff14(temp_v3,1);
-  nn_math_ARMv6_MTX34MultAsm(param_1 + 0x60,temp_v3);
-  FUN_0017fc94(param_1 + 0x60,param_1 + 0xc);
-  FUN_0017fc94(param_1 + 0x60,param_1 + 0x18);
-  temp_v1 = *(unsigned int *)(*(int *)(param_1 + 4) + 4);
-  FUN_001ab810(temp_v1,temp_v3);
-  temp_v4 = temp_v2;
-  temp_v5 = temp_v2;
-  temp_v6 = temp_v2;
-  nn_math_ARMv6_VEC3TransformAsm_2AD44C(&temp_v4,param_1 + 0x60);
-  controllerSetDestination(temp_v1,&temp_v4);
-  return;
+    EffectController *controller;
+    MTX34 rotation;
+    Vector3 origin;
+    Vector3 negPivot;
+
+    motion->framesLeft--;
+    if (motion->framesLeft == 0) {
+        controller = motion->owner->controller;
+        controllerSetDestination(controller, &motion->finalPosition);
+        controllerSetRotationEulerDegrees(controller, motion->finalAngle.x, motion->finalAngle.y, motion->finalAngle.z);
+        tripleOwnerSetValue(controller, motion->finalTriple);
+        controller->flags |= 3;
+        return;
+    }
+    motion->velocity.x += motion->acceleration.x;
+    motion->velocity.y += motion->acceleration.y;
+    motion->velocity.z += motion->acceleration.z;
+    motion->position.x += motion->velocity.x;
+    motion->position.y += motion->velocity.y;
+    motion->position.z += motion->velocity.z;
+    motion->angle.x += motion->angularVelocity.x;
+    motion->angle.y += motion->angularVelocity.y;
+    motion->angle.z += motion->angularVelocity.z;
+    negPivot.x = -motion->pivot.x;
+    negPivot.y = -motion->pivot.y;
+    negPivot.z = -motion->pivot.z;
+    nn_math_ARMv6_MTX34CopyAsm(&motion->transform, &MTX34::Identity());
+    FUN_0017fc94(&motion->transform, &negPivot, &motion->transform);
+    FUN_001aff14(&rotation, 1, motion->angle.x * 0.7111111f, motion->angle.y * 0.7111111f, motion->angle.z * 0.7111111f);
+    nn_math_ARMv6_MTX34MultAsm(&motion->transform, &rotation, &motion->transform);
+    FUN_0017fc94(&motion->transform, &motion->pivot, &motion->transform);
+    FUN_0017fc94(&motion->transform, &motion->position, &motion->transform);
+    controller = motion->owner->controller;
+    FUN_001ab810(controller, &rotation);
+    origin.x = 0.0f;
+    origin.y = 0.0f;
+    origin.z = 0.0f;
+    nn_math_ARMv6_VEC3TransformAsm_2AD44C(&origin, &motion->transform, &origin);
+    controllerSetDestination(controller, &origin);
 }
 
 } /* extern "C" */

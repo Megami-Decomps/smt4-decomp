@@ -1,195 +1,324 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002496b8` (_code @ 0x2496b8, 0x288 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the retail unit builds the 2-float pairs (scene+40/64 from scene+28, +72, +348, +416) with stm/vstmia and addresses the globals through DAT_005f16fc-256; the same stores in the same order, but the pairs/globals are separate stores/offsets here. */
+#include "common.h"
+#include "classes/Obj557c58.h"
+#include <new>
+
+namespace {
+/* The map scene block (Apocalypse), as the scene constructor lays it out: only the offsets FUN_002496b8 writes are typed. */
+struct LmapSceneInit {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ u32 unk008;
+    /* 0x00c */ u8 pad00c[0x4];
+    /* 0x010 */ u8 unk010;
+    /* 0x011 */ u8 pad011[0x3];
+    /* 0x014 */ f32 unk014;
+    /* 0x018 */ u8 pad018[0x4];
+    /* 0x01c */ f32 unk01c;
+    /* 0x020 */ f32 unk020;
+    /* 0x024 */ f32 unk024;
+    /* 0x028 */ f32 unk028;
+    /* 0x02c */ f32 unk02c;
+    /* 0x030 */ f32 unk030;
+    /* 0x034 */ u8 pad034[0xc];
+    /* 0x040 */ f32 unk040;
+    /* 0x044 */ f32 unk044;
+    /* 0x048 */ f32 unk048;
+    /* 0x04c */ f32 unk04c;
+    /* 0x050 */ f32 unk050;
+    /* 0x054 */ u32 unk054;
+    /* 0x058 */ f32 unk058;
+    /* 0x05c */ u8 unk05c;
+    /* 0x05d */ u8 pad05d[0x3];
+    /* 0x060 */ u32 unk060;
+    /* 0x064 */ u8 pad064[0x4];
+    /* 0x068 */ f32 unk068;
+    /* 0x06c */ u8 unk06c;
+    /* 0x06d */ u8 pad06d[0x3];
+    /* 0x070 */ u32 unk070;
+    /* 0x074 */ f32 unk074;
+    /* 0x078 */ f32 unk078;
+    /* 0x07c */ f32 unk07c;
+    /* 0x080 */ f32 unk080;
+    /* 0x084 */ u32 unk084;
+    /* 0x088 */ u8 unk088;
+    /* 0x089 */ u8 pad089[0x7];
+    /* 0x090 */ u32 unk090;
+    /* 0x094 */ f32 unk094;
+    /* 0x098 */ u8 pad098[0x9c];
+    /* 0x134 */ u8 unk134;
+    /* 0x135 */ u8 pad135[0x27];
+    /* 0x15c */ f32 unk15c;
+    /* 0x160 */ f32 unk160;
+    /* 0x164 */ u8 pad164[0x8];
+    /* 0x16c */ u32 unk16c;
+    /* 0x170 */ u32 unk170;
+    /* 0x174 */ u32 unk174;
+    /* 0x178 */ u32 unk178;
+    /* 0x17c */ u32 unk17c;
+    /* 0x180 */ u32 unk180;
+    /* 0x184 */ u32 unk184;
+    /* 0x188 */ u32 unk188;
+    /* 0x18c */ u32 unk18c;
+    /* 0x190 */ u32 unk190;
+    /* 0x194 */ u8 unk194;
+    /* 0x195 */ u8 unk195;
+    /* 0x196 */ u8 unk196;
+    /* 0x197 */ u8 unk197;
+    /* 0x198 */ u8 unk198;
+    /* 0x199 */ u8 pad199[0x1];
+    /* 0x19a */ u16 unk19a;
+    /* 0x19c */ u16 unk19c;
+    /* 0x19e */ u8 pad19e[0x2];
+    /* 0x1a0 */ u32 unk1a0;
+    /* 0x1a4 */ u32 unk1a4;
+    /* 0x1a8 */ Obj557c58 *object;
+    /* 0x1ac */ u8 unk1ac;
+    /* 0x1ad */ u8 pad1ad[0x3];
+    /* 0x1b0 */ u32 unk1b0;
+    /* 0x1b4 */ u32 unk1b4;
+    /* 0x1b8 */ u32 unk1b8;
+    /* 0x1bc */ u32 unk1bc;
+    /* 0x1c0 */ u32 unk1c0;
+    /* 0x1c4 */ u32 unk1c4;
+    /* 0x1c8 */ u16 unk1c8;
+    /* 0x1ca */ u16 unk1ca;
+    /* 0x1cc */ u16 unk1cc;
+    /* 0x1ce */ u8 pad1ce[0x2];
+    /* 0x1d0 */ u32 unk1d0;
+    /* 0x1d4 */ u32 unk1d4;
+    /* 0x1d8 */ f32 unk1d8;
+    /* 0x1dc */ f32 unk1dc;
+    /* 0x1e0 */ f32 unk1e0;
+    /* 0x1e4 */ f32 unk1e4;
+    /* 0x1e8 */ f32 unk1e8;
+    /* 0x1ec */ f32 unk1ec;
+    /* 0x1f0 */ f32 unk1f0;
+    /* 0x1f4 */ f32 unk1f4;
+    /* 0x1f8 */ f32 unk1f8;
+    /* 0x1fc */ f32 unk1fc;
+    /* 0x200 */ f32 unk200;
+    /* 0x204 */ f32 unk204;
+    /* 0x208 */ f32 unk208;
+    /* 0x20c */ f32 unk20c;
+    /* 0x210 */ f32 unk210;
+    /* 0x214 */ u8 unk214;
+    /* 0x215 */ u8 pad215[0x7];
+    /* 0x21c */ f32 unk21c;
+    /* 0x220 */ u8 pad220[0x4];
+    /* 0x224 */ u8 unk224;
+    /* 0x225 */ u8 pad225[0x3];
+    /* 0x228 */ u32 unk228;
+    /* 0x22c */ u8 unk22c;
+    /* 0x22d */ u8 pad22d[0x3];
+    /* 0x230 */ u32 unk230;
+    /* 0x234 */ u8 pad234[0x4];
+    /* 0x238 */ u32 unk238;
+    /* 0x23c */ u8 unk23c;
+    /* 0x23d */ u8 unk23d;
+    /* 0x23e */ u8 pad23e[0x2];
+    /* 0x240 */ f32 unk240;
+    /* 0x244 */ f32 unk244;
+    /* 0x248 */ u32 unk248;
+    /* 0x24c */ u32 unk24c;
+    /* 0x250 */ u32 unk250;
+    /* 0x254 */ f32 unk254;
+    /* 0x258 */ f32 unk258;
+    /* 0x25c */ f32 unk25c;
+    /* 0x260 */ f32 unk260;
+    /* 0x264 */ u32 unk264;
+    /* 0x268 */ u32 unk268;
+    /* 0x26c */ u32 unk26c;
+    /* 0x270 */ u32 unk270;
+    /* 0x274 */ u32 unk274;
+    /* 0x278 */ u32 unk278;
+    /* 0x27c */ u32 unk27c;
+    /* 0x280 */ u32 unk280;
+    /* 0x284 */ u32 unk284;
+    /* 0x288 */ u32 unk288;
+    /* 0x28c */ u32 unk28c;
+    /* 0x290 */ u8 unk290;
+    /* 0x291 */ u8 unk291;
+};
+
+/* Scene-wide globals at DAT_005f16fc. */
+struct LmapGlobalsInit {
+    /* 0x000 */ u8 pad000[0xb0];
+    /* 0x0b0 */ u8 unk0b0;
+    /* 0x0b1 */ u8 pad0b1[0x3];
+    /* 0x0b4 */ f32 unk0b4;
+    /* 0x0b8 */ f32 unk0b8;
+    /* 0x0bc */ f32 unk0bc;
+    /* 0x0c0 */ f32 unk0c0;
+    /* 0x0c4 */ u8 pad0c4[0x4];
+    /* 0x0c8 */ u16 unk0c8;
+    /* 0x0ca */ u8 pad0ca[0x2];
+    /* 0x0cc */ u8 unk0cc;
+    /* 0x0cd */ u8 unk0cd;
+    /* 0x0ce */ u8 unk0ce;
+    /* 0x0cf */ u8 pad0cf[0x5];
+    /* 0x0d4 */ u8 unk0d4;
+    /* 0x0d5 */ u8 pad0d5[0x3];
+    /* 0x0d8 */ u32 unk0d8;
+    /* 0x0dc */ f32 unk0dc;
+    /* 0x0e0 */ f32 unk0e0;
+    /* 0x0e4 */ f32 unk0e4;
+    /* 0x0e8 */ f32 unk0e8;
+    /* 0x0ec */ u8 pad0ec[0x1ec];
+    /* 0x2d8 */ u8 unk2d8;
+    /* 0x2d9 */ u8 pad2d9[0x3];
+    /* 0x2dc */ f32 unk2dc;
+    /* 0x2e0 */ f32 unk2e0;
+    /* 0x2e4 */ f32 unk2e4;
+    /* 0x2e8 */ f32 unk2e8;
+    /* 0x2ec */ u16 unk2ec;
+};
+}
 
 extern "C" {
+extern LmapSceneInit *g_lmapScene;
+extern LmapGlobalsInit DAT_005f16fc;
 
-int asdOperatorNew(void);
-
-extern unsigned char DAT_00557c60; /* 0x557c60 */
-extern unsigned int *g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f17ac; /* 0x5f17ac */
-extern unsigned int DAT_005f17b0; /* 0x5f17b0 */
-extern unsigned int DAT_005f17b4; /* 0x5f17b4 */
-extern unsigned int DAT_005f17b8; /* 0x5f17b8 */
-extern unsigned int DAT_005f17bc; /* 0x5f17bc */
-extern unsigned short DAT_005f17c4; /* 0x5f17c4 */
-extern unsigned char DAT_005f17c8; /* 0x5f17c8 */
-extern unsigned char DAT_005f17c9; /* 0x5f17c9 */
-extern unsigned char DAT_005f17ca; /* 0x5f17ca */
-extern unsigned char DAT_005f17d0; /* 0x5f17d0 */
-extern unsigned int DAT_005f17d4; /* 0x5f17d4 */
-extern unsigned int DAT_005f17d8; /* 0x5f17d8 */
-extern unsigned int DAT_005f17dc; /* 0x5f17dc */
-extern unsigned int DAT_005f17e0; /* 0x5f17e0 */
-extern unsigned int DAT_005f17e4; /* 0x5f17e4 */
-extern unsigned char DAT_005f19d4; /* 0x5f19d4 */
-extern unsigned int DAT_005f19d8; /* 0x5f19d8 */
-extern unsigned int DAT_005f19dc; /* 0x5f19dc */
-extern unsigned int DAT_005f19e0; /* 0x5f19e0 */
-extern unsigned int DAT_005f19e4; /* 0x5f19e4 */
-extern unsigned short DAT_005f19e8; /* 0x5f19e8 */
-
-/* Supplied declaration required: asdOperatorNew. */
-extern unsigned int *_ZN9Obj557ae8C1Ev(void);
-
-
+/* Resets the map scene block to its start-of-map state: camera/transform defaults (distance 10, yaw -90,
+   scale 100/1000), the script object and the scene-wide globals. */
 void FUN_002496b8(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  puVar2 = g_lmapScene;
-  temp_v2 = 0;
-  puVar3 = g_lmapScene + 10;
-  *g_lmapScene = 0;
-  puVar2[1] = 0;
-  puVar2[2] = 0;
-  *(unsigned char *)(puVar2 + 4) = 0;
-  puVar2[5] = 0;
-  puVar2[7] = 0x41200000;
-  puVar2[8] = 0;
-  puVar2[9] = 0x41200000;
-  temp_v1 = puVar2[7];
-  puVar2[0xc] = 0x41200000;
-  *puVar3 = temp_v1;
-  puVar2[0xb] = 0;
-  puVar2[0x12] = 0x41200000;
-  puVar2[0x13] = 0xc2b40000;
-  puVar2[0x14] = 0xc2b40000;
-  puVar2[0x1a] = 0;
-  puVar2[0x10] = temp_v1;
-  puVar2[0x11] = 0;
-  *(unsigned char *)(puVar2 + 0x1b) = 0;
-  puVar2[0x15] = 0;
-  puVar2[0x16] = 0x40a00000;
-  *(unsigned char *)(puVar2 + 0x17) = 0;
-  puVar2[0x18] = 0;
-  puVar2[0x1c] = 0;
-  puVar2[0x1d] = 0;
-  puVar2[0x1e] = 0;
-  puVar2[0x1f] = 0;
-  puVar2[0x20] = 0;
-  puVar2[0x21] = 0;
-  *(unsigned char *)(puVar2 + 0x22) = 0;
-  puVar2[0x24] = 0;
-  puVar2[0x25] = 0;
-  puVar2[0x57] = 0x42c80000;
-  puVar2[0x58] = 0x447a0000;
-  *(unsigned char *)(puVar2 + 0x4d) = 1;
-  temp_v0 = 0x130;
-  asdOperatorNew();
-  puVar2 = (unsigned int *)0x0;
-  if (temp_v0 != 0) {
-    puVar2 = (unsigned int *)_ZN9Obj557ae8C1Ev();
-    *puVar2 = (unsigned int)&DAT_00557c60;
-  }
-  puVar3 = g_lmapScene;
-  g_lmapScene[0x6a] = (unsigned int)puVar2;
-  *(unsigned char *)(puVar3 + 0x6b) = 0;
-  puVar3[0x6c] = 0;
-  puVar3[0x6d] = 0;
-  puVar3[0x6e] = 0;
-  puVar3[0x6f] = 0;
-  puVar3[0x70] = 0;
-  puVar3[0x71] = 0;
-  *(unsigned short *)(puVar3 + 0x72) = 0;
-  *(unsigned short *)((int)puVar3 + 0x1ca) = 0;
-  *(unsigned short *)(puVar3 + 0x73) = 0;
-  puVar3[0x5c] = 0;
-  *(unsigned short *)((int)puVar3 + 0x19a) = 0;
-  *(unsigned short *)(puVar3 + 0x67) = 0;
-  puVar3[0x5d] = 0;
-  puVar3[0x5e] = 0;
-  puVar3[0x5f] = 0;
-  puVar3[0x61] = 0;
-  puVar3[0x62] = 0;
-  puVar3[0x60] = 0;
-  puVar3[99] = 0;
-  puVar3[100] = 0;
-  *(unsigned char *)(puVar3 + 0x65) = 0;
-  *(unsigned char *)((int)puVar3 + 0x195) = 0;
-  *(unsigned char *)((int)puVar3 + 0x196) = 0;
-  *(unsigned char *)((int)puVar3 + 0x197) = 0;
-  *(unsigned char *)(puVar3 + 0x66) = 0;
-  puVar3[0x5b] = 0;
-  puVar3[0x68] = 0xffffffff;
-  puVar3[0x69] = 0;
-  puVar3[0x75] = 0;
-  puVar3[0x79] = temp_v2;
-  puVar3[0x7a] = temp_v2;
-  puVar3[0x7b] = temp_v2;
-  puVar3[0x7f] = temp_v2;
-  puVar3[0x80] = temp_v2;
-  puVar3[0x81] = temp_v2;
-  puVar3[0x7c] = temp_v2;
-  puVar3[0x7d] = temp_v2;
-  puVar3[0x7e] = temp_v2;
-  puVar3[0x76] = temp_v2;
-  puVar3[0x77] = temp_v2;
-  puVar3[0x78] = temp_v2;
-  puVar3[0x82] = temp_v2;
-  puVar3[0x83] = temp_v2;
-  puVar3[0x84] = temp_v2;
-  puVar3[0x74] = 0;
-  *(unsigned char *)(puVar3 + 0x85) = 0;
-  *(unsigned char *)(puVar3 + 0x89) = 0;
-  puVar3[0x8a] = 0;
-  *(unsigned char *)(puVar3 + 0x8b) = 0;
-  puVar3[0x8c] = 0;
-  puVar3[0x8e] = 0;
-  *(unsigned char *)(puVar3 + 0x8f) = 0;
-  *(unsigned char *)((int)puVar3 + 0x23d) = 0;
-  puVar3[0x90] = temp_v2;
-  puVar3[0x91] = temp_v2;
-  puVar3[0x9a] = 0;
-  puVar3[0x9b] = 0;
-  puVar3[0x9c] = 0;
-  puVar3[0x87] = temp_v2;
-  puVar3[0x9d] = 0;
-  puVar3[0x9e] = 0;
-  puVar3[0x9f] = 0;
-  puVar3[0x92] = 0;
-  puVar3[0x93] = 0;
-  puVar3[0x94] = 0;
-  puVar3[0x98] = temp_v2;
-  puVar3[0x99] = 0;
-  DAT_005f17ac = 0;
-  DAT_005f17c4 = 0;
-  DAT_005f17c8 = 0;
-  DAT_005f17c9 = 0;
-  DAT_005f17ca = 0;
-  DAT_005f17d0 = 0;
-  DAT_005f17d4 = 0;
-  DAT_005f19d4 = 0;
-  DAT_005f19e8 = 0;
-  DAT_005f17b0 = temp_v2;
-  DAT_005f17b4 = temp_v2;
-  DAT_005f17b8 = temp_v2;
-  DAT_005f17bc = temp_v2;
-  DAT_005f17d8 = temp_v2;
-  DAT_005f17dc = temp_v2;
-  DAT_005f17e0 = temp_v2;
-  DAT_005f17e4 = temp_v2;
-  DAT_005f19d8 = temp_v2;
-  DAT_005f19dc = temp_v2;
-  DAT_005f19e0 = temp_v2;
-  DAT_005f19e4 = temp_v2;
-  puVar3[0xa0] = 0;
-  puVar3[0xa1] = 0;
-  puVar3[0xa2] = 0;
-  puVar3[0xa3] = 0;
-  puVar3[0x95] = temp_v2;
-  puVar3[0x96] = temp_v2;
-  puVar3[0x97] = temp_v2;
-  *(unsigned char *)(puVar3 + 0xa4) = 0;
-  *(unsigned char *)((int)puVar3 + 0x291) = 0;
-  return;
+    LmapSceneInit *scene = g_lmapScene;
+    scene->unk000 = 0;
+    scene->unk004 = 0;
+    scene->unk008 = 0;
+    scene->unk010 = 0;
+    scene->unk014 = 0.0f;
+    scene->unk01c = 10.0f;
+    scene->unk020 = 0.0f;
+    scene->unk024 = 10.0f;
+    scene->unk030 = 10.0f;
+    scene->unk028 = scene->unk01c;
+    scene->unk02c = 0.0f;
+    scene->unk048 = 10.0f;
+    scene->unk04c = -90.0f;
+    scene->unk050 = -90.0f;
+    scene->unk068 = 0.0f;
+    scene->unk040 = scene->unk01c;
+    scene->unk044 = 0.0f;
+    scene->unk06c = 0;
+    scene->unk054 = 0;
+    scene->unk058 = 5.0f;
+    scene->unk05c = 0;
+    scene->unk060 = 0;
+    scene->unk070 = 0;
+    scene->unk074 = 0.0f;
+    scene->unk078 = 0.0f;
+    scene->unk07c = 0.0f;
+    scene->unk080 = 0.0f;
+    scene->unk084 = 0;
+    scene->unk088 = 0;
+    scene->unk090 = 0;
+    scene->unk094 = 0.0f;
+    scene->unk15c = 100.0f;
+    scene->unk160 = 1000.0f;
+    scene->unk134 = 1;
+    Obj557c58 *object = new (NULL) Obj557c58;
+    scene = g_lmapScene;
+    scene->object = object;
+    scene->unk1ac = 0;
+    scene->unk1b0 = 0;
+    scene->unk1b4 = 0;
+    scene->unk1b8 = 0;
+    scene->unk1bc = 0;
+    scene->unk1c0 = 0;
+    scene->unk1c4 = 0;
+    scene->unk1c8 = 0;
+    scene->unk1ca = 0;
+    scene->unk1cc = 0;
+    scene->unk170 = 0;
+    scene->unk19a = 0;
+    scene->unk19c = 0;
+    scene->unk174 = 0;
+    scene->unk178 = 0;
+    scene->unk17c = 0;
+    scene->unk184 = 0;
+    scene->unk188 = 0;
+    scene->unk180 = 0;
+    scene->unk18c = 0;
+    scene->unk190 = 0;
+    scene->unk194 = 0;
+    scene->unk195 = 0;
+    scene->unk196 = 0;
+    scene->unk197 = 0;
+    scene->unk198 = 0;
+    scene->unk16c = 0;
+    scene->unk1a0 = -1;
+    scene->unk1a4 = 0;
+    scene->unk1d4 = 0;
+    scene->unk1e4 = 0.0f;
+    scene->unk1e8 = 0.0f;
+    scene->unk1ec = 0.0f;
+    scene->unk1fc = 0.0f;
+    scene->unk200 = 0.0f;
+    scene->unk204 = 0.0f;
+    scene->unk1f0 = 0.0f;
+    scene->unk1f4 = 0.0f;
+    scene->unk1f8 = 0.0f;
+    scene->unk1d8 = 0.0f;
+    scene->unk1dc = 0.0f;
+    scene->unk1e0 = 0.0f;
+    scene->unk208 = 0.0f;
+    scene->unk20c = 0.0f;
+    scene->unk210 = 0.0f;
+    scene->unk1d0 = 0;
+    scene->unk214 = 0;
+    scene->unk224 = 0;
+    scene->unk228 = 0;
+    scene->unk22c = 0;
+    scene->unk230 = 0;
+    scene->unk238 = 0;
+    scene->unk23c = 0;
+    scene->unk23d = 0;
+    scene->unk240 = 0.0f;
+    scene->unk244 = 0.0f;
+    scene->unk268 = 0;
+    scene->unk26c = 0;
+    scene->unk270 = 0;
+    scene->unk21c = 0.0f;
+    scene->unk274 = 0;
+    scene->unk278 = 0;
+    scene->unk27c = 0;
+    scene->unk248 = 0;
+    scene->unk24c = 0;
+    scene->unk250 = 0;
+    scene->unk260 = 0.0f;
+    scene->unk264 = 0;
+    DAT_005f16fc.unk0b0 = 0;
+    DAT_005f16fc.unk0b4 = 0.0f;
+    DAT_005f16fc.unk0b8 = 0.0f;
+    DAT_005f16fc.unk0bc = 0.0f;
+    DAT_005f16fc.unk0c0 = 0.0f;
+    DAT_005f16fc.unk0c8 = 0;
+    DAT_005f16fc.unk0cc = 0;
+    DAT_005f16fc.unk0cd = 0;
+    DAT_005f16fc.unk0ce = 0;
+    DAT_005f16fc.unk0d4 = 0;
+    DAT_005f16fc.unk0d8 = 0;
+    DAT_005f16fc.unk0dc = 0.0f;
+    DAT_005f16fc.unk0e0 = 0.0f;
+    DAT_005f16fc.unk0e4 = 0.0f;
+    DAT_005f16fc.unk0e8 = 0.0f;
+    DAT_005f16fc.unk2d8 = 0;
+    DAT_005f16fc.unk2dc = 0.0f;
+    DAT_005f16fc.unk2e0 = 0.0f;
+    DAT_005f16fc.unk2e4 = 0.0f;
+    DAT_005f16fc.unk2e8 = 0.0f;
+    DAT_005f16fc.unk2ec = 0;
+    scene->unk280 = 0;
+    scene->unk284 = 0;
+    scene->unk288 = 0;
+    scene->unk28c = 0;
+    scene->unk254 = 0.0f;
+    scene->unk258 = 0.0f;
+    scene->unk25c = 0.0f;
+    scene->unk290 = 0;
+    scene->unk291 = 0;
 }
 
 } /* extern "C" */

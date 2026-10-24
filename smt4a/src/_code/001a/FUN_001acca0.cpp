@@ -1,161 +1,149 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001acca0` (_code @ 0x1acca0, 0x254 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: not matched; the mesh loop and the inlined type-chain walks are laid out differently (154 rows against 152). The null `node` dereference after the flag test mirrors retail. */
+#include "common.h"
+
+/* Runtime type information as the engine's dynamic casts see it: a chain of base types. */
+struct TypeInfo {
+    const TypeInfo *base;
+};
+
+/* An engine object: slot 2 of its vtable returns its TypeInfo. */
+class TypedObject {
+public:
+    virtual ~TypedObject();
+    virtual void reserved();
+    virtual const TypeInfo *getTypeInfo();
+};
+
+/* A self-relative offset: zero for none, otherwise the target lies `value` bytes past the field. */
+static inline void *resolveOffset(s32 *field)
+{
+    return *field != 0 ? (u8 *)field + *field : NULL;
+}
+
+/* The resource-dictionary node a shadow lookup finds (observed fields). */
+struct ShadowNode {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0xC];
+    /* 0x10 */ s32 shadowMode;
+};
+
+/* The material data of a mesh (observed fields). */
+struct MeshData {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ s32 dictionary;       /* self-relative */
+    /* 0x018 */ u8 unk018[0x25C];
+    /* 0x274 */ s32 textures[3];      /* self-relative */
+    /* 0x280 */ u8 unk280[0xF0];
+    /* 0x370 */ u32 kind;
+};
+
+struct MeshObject {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ MeshData *data;
+};
+
+/* The model, with its mesh vector and the flag block cast of the scene object. */
+struct ShadowModel {
+    /* 0x000 */ u8 unk000[0x164];
+    /* 0x164 */ MeshObject **meshesBegin;
+    /* 0x168 */ MeshObject **meshesEnd;
+    /* 0x16C */ u8 unk16C[0xB0];
+    /* 0x21C */ u32 shadowCaster;
+};
+
+/* g_gfxSettings fields used here. */
+struct GfxSettingsView {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 enabled;
+    /* 0x02 */ u8 unk02[0x5E];
+    /* 0x60 */ f32 shadowDepth;
+};
 
 extern "C" {
 
-int FUN_001b5314(int, int);
+extern GfxSettingsView g_gfxSettings;
+extern s32 DAT_005b3c74;
+extern TypeInfo DAT_005c0f18;
+extern TypeInfo DAT_005c0f34;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
+u32 wstrlen(const char *text);
+ShadowNode *nw_ut_ResDicPatricia_Get(void *dictionary, const char *name, u32 length);
+void FUN_001b5314(MeshObject *mesh, s32 mode, f32 depth);
 
-extern unsigned char LAB_001acefc; /* 0x1acefc */
-extern signed char DAT_005b3bf5; /* 0x5b3bf5 */
-extern int DAT_005b3c74; /* 0x5b3c74 */
-
-#ifndef ROMWRIGHT_PIECE_3_1_DEFINED
-#define ROMWRIGHT_PIECE_3_1_DEFINED
-#define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
-#endif
-/* Supplied declaration required: FUN_001b5314. */
-extern unsigned int wstrlen(unsigned char *);
-extern int nw_ut_ResDicPatricia_Get(int *, unsigned char *, unsigned int);
-
-
-unsigned int FUN_001acca0(int *param_1)
-
+/* Dynamic cast: the object if `target` is among its type's bases, else NULL. */
+static inline void *castTo(TypedObject *object, const TypeInfo *target)
 {
-/* irregular: 2 goto(s); 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  int *piVar5;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int *temp_v9;
-  unsigned int temp_v10;
-  int *temp_v11;
-  
-  temp_v10 = 0;
-  if ((DAT_005b3bf5 != '\0') && (temp_v10 = 0, DAT_005b3c74 != 0)) {
-    temp_v10 = 0;
-    temp_v11 = param_1;
-    if (param_1 != (int *)0x0) {
-      piVar1 = (int *)(**(romwright_code **)(*param_1 + 8))(param_1);
-      do {
-        if (piVar1 == (int *)0x5c0f18) goto LAB_001acd0c;
-        piVar1 = (int *)*piVar1;
-      } while (piVar1 != (int *)0x0);
+    const TypeInfo *type;
+
+    if (object == NULL) {
+        return NULL;
     }
-    param_1 = (int *)0x0;
-LAB_001acd0c:
-    temp_v4 = 0;
-    if (0 < (param_1[0x5a] - param_1[0x59]) >> 2) {
-      do {
-        temp_v6 = 0;
-        temp_v2 = 0;
-        temp_v5 = *(int *)(param_1[0x59] + temp_v4 * 4);
-        temp_v0 = *(int *)(temp_v5 + 8);
-        do {
-          piVar1 = (int *)(temp_v2 * 4 + 0x274 + temp_v0);
-          temp_v3 = *piVar1;
-          if (temp_v3 != 0) {
-            temp_v3 = (int)piVar1 + temp_v3;
-          }
-          else {
-            temp_v3 = 0;
-          }
-          if (temp_v3 != 0) {
-            if (*(int *)(temp_v3 + 8) != 0) {
-              temp_v3 = temp_v3 + 8 + *(int *)(temp_v3 + 8);
-            }
-            else {
-              temp_v3 = 0;
-            }
-            if (temp_v3 != 0) {
-              temp_v6 = temp_v6 + 1;
-            }
-          }
-          temp_v2 = temp_v2 + 1;
-        } while (temp_v2 < 3);
-        if ((temp_v6 >= 2) && ((*(unsigned int *)(temp_v0 + 0x170) & 0xff) == 3)) {
-          temp_v8 = *(int *)(temp_v0 + 0x14);
-          if (temp_v8 != 0) {
-            temp_v8 = temp_v0 + 0x14 + temp_v8;
-          }
-          else {
-            temp_v8 = 0;
-          }
-          temp_v9 = &temp_v8;
-          if (temp_v8 != 0) {
-            temp_v1 = wstrlen(&LAB_001acefc);
-            temp_v0 = nw_ut_ResDicPatricia_Get(temp_v9,&LAB_001acefc,temp_v1);
-            if (temp_v0 != 0) {
-              temp_v2 = *(int *)(temp_v0 + 0xc);
-              if (temp_v2 == 0) {
-                puVar4 = (unsigned int *)0x0;
-              }
-              else {
-                puVar4 = (unsigned int *)(temp_v0 + 0xc + temp_v2);
-              }
-            }
-            else {
-              puVar4 = (unsigned int *)0x0;
-            }
-          }
-          else {
-            puVar4 = (unsigned int *)0x0;
-          }
-          if (puVar4 != (unsigned int *)0x0) {
-            if ((*puVar4 & 0x20000000) == 0) {
-              puVar4 = (unsigned int *)0x0;
-            }
-            if ((int)puVar4[4] >= 1) {
-              if (puVar4[4] == 2) {
-                if (DAT_005b3bf5 != '\0') {
-                  FUN_001b5314(temp_v5,0);
-                }
-                temp_v10 = 1;
-              }
-              piVar1 = temp_v11;
-              if (temp_v11 != (int *)0x0) {
-                piVar5 = (int *)(**(romwright_code **)(*temp_v11 + 8))(temp_v11);
-                do {
-                  if (piVar5 == (int *)0x5c0f34) goto LAB_001ace94;
-                  piVar5 = (int *)*piVar5;
-                } while (piVar5 != (int *)0x0);
-              }
-              piVar1 = (int *)0x0;
-LAB_001ace94:
-              temp_v7 = romwright_piece_3_1((((unsigned int)(temp_v7) >> 8) & 0xffffffU),1);
-              piVar1[0x87] = temp_v7;
-            }
-            else {
-              if (DAT_005b3bf5 != '\0') {
-                FUN_001b5314(temp_v5,0);
-              }
-              temp_v10 = 1;
-            }
-          }
+    for (type = object->getTypeInfo(); type != NULL; type = type->base) {
+        if (type == target) {
+            return object;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < (param_1[0x5a] - param_1[0x59]) >> 2);
     }
-  }
-  return temp_v10;
+    return NULL;
+}
+
+/* Looks through the model's meshes for ones whose material carries a "shadow" entry and applies it; returns
+ * whether any mesh needed the shadow pass. */
+u32 FUN_001acca0(TypedObject *object)
+{
+    u32 applied = 0;
+    ShadowModel *model;
+    s32 i;
+
+    if (g_gfxSettings.enabled == 0 || DAT_005b3c74 == 0) {
+        return 0;
+    }
+    model = (ShadowModel *)castTo(object, &DAT_005c0f18);
+    for (i = 0; i < model->meshesEnd - model->meshesBegin; i++) {
+        MeshObject *mesh = model->meshesBegin[i];
+        MeshData *data = mesh->data;
+        s32 textureCount = 0;
+        s32 slot;
+
+        for (slot = 0; slot < 3; slot++) {
+            void *texture = resolveOffset(&data->textures[slot]);
+
+            if (texture != NULL && resolveOffset((s32 *)((u8 *)texture + 8)) != NULL) {
+                textureCount++;
+            }
+        }
+        if (textureCount >= 2 && (data->kind & 0xFF) == 3) {
+            void *dictionary = resolveOffset(&data->dictionary);
+            ShadowNode *node = NULL;
+
+            if (dictionary != NULL) {
+                ShadowNode *found = nw_ut_ResDicPatricia_Get(&dictionary, "shadow", wstrlen("shadow"));
+
+                if (found != NULL) {
+                    node = (ShadowNode *)resolveOffset((s32 *)((u8 *)found + 0xC));
+                }
+            }
+            if (node != NULL) {
+                if ((node->flags & 0x20000000) == 0) {
+                    node = NULL;
+                }
+                if (node->shadowMode >= 1) {
+                    if (node->shadowMode == 2) {
+                        if (g_gfxSettings.enabled != 0) {
+                            FUN_001b5314(mesh, 0, g_gfxSettings.shadowDepth);
+                        }
+                        applied = 1;
+                    }
+                    ((ShadowModel *)castTo(object, &DAT_005c0f34))->shadowCaster = 1;
+                } else {
+                    if (g_gfxSettings.enabled != 0) {
+                        FUN_001b5314(mesh, 0, g_gfxSettings.shadowDepth);
+                    }
+                    applied = 1;
+                }
+            }
+        }
+    }
+    return applied;
 }
 
 } /* extern "C" */

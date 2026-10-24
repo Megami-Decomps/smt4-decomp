@@ -1,158 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a72a4` (_code @ 0x3a72a4, 0x288 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps screen+0x500 in a register for the mode/page loads (r5) and reads the row id with ldrh+sxth+uxth; armcc here uses r4-relative loads and a single ldrsh. */
+#include "common.h"
+
+/* One animated cursor channel of the screen's widget. */
+struct BibleDevilChannel { u8 unk00[0x8c]; };
+
+struct BibleDevilWidget {
+    u8 unk00[0x20];
+    BibleDevilChannel channels[7];  /* 0x20 */
+    u8 unk3f4[0x480 - 0x3f4];
+};
+
+struct BibleDevilRow { u32 unk00; u16 id; u8 unk06[0x1a]; };
+
+/* The devil bible screen's object (the view this function needs). */
+struct BibleDevilScreen {
+    u8 unk00[0x14];
+    s32 state;                      /* 0x14 */
+    s32 stateArg;                   /* 0x18 */
+    u8 unk1c[4];
+    u8 cursor[0x28];                /* 0x20 */
+    u8 unk48[0x94 - 0x48];
+    s8 level;                       /* 0x94 */
+    u8 unk95[0xc8 - 0x95];
+    u8 rectangle[0x14];             /* 0xc8 */
+    BibleDevilWidget widget;        /* 0xdc */
+    u8 unk55c[0x5a4 - 0x55c];
+    s8 mode;                        /* 0x5a4 */
+    u8 page;                        /* 0x5a5 */
+    u8 unk5a6;
+    u8 pageChanged;                 /* 0x5a7 */
+    BibleDevilRow rows[1280];  /* 0x5a8 */
+    u8 unka5a8[0xa5b4 - 0xa5a8];
+    s16 selected;                   /* 0xa5b4 */
+};
+struct BibleDevilTasks { void *work; s32 selected; };
 
 extern "C" {
 
-int FUN_0022de74(int);
-int pointConvertToFloat(int, unsigned int, unsigned int);
-int FUN_002328b4(void);
-int FUN_00233240(int, int);
-int uiAnimationAdvanceChannel(int, int);
-int FUN_00233404(void);
-int FUN_0029ce60(unsigned int, int, int);
-int messageTargetSetValue(unsigned int, int);
-int FUN_0029e648(int, int);
-int FUN_002b8454(int, int, int, int);
-int buttonHelpSetPreset(void);
-int buttonHelpGetStatus(void);
-int FUN_003c2b74(int);
-int FUN_003c2c6c(int);
+extern BibleDevilTasks DAT_0043d9c8;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
+s32 useCounterIsFinished(void);
+void uiAnimationAdvanceChannel(BibleDevilWidget *, s32);
+u32 vec2GetYInt(BibleDevilChannel *);
+u32 vec2GetXInt(BibleDevilChannel *);
+void pointConvertToFloat(void *, u32, u32);
+s32 gameGetNavigationState(void);
+s32 FUN_00293aac(void);
+s32 gameGetFlagByte12e8(void);
+void FUN_00233240(BibleDevilWidget *, s32);
+s32 flaggedValueHolderGetTotal(void *);
+s32 FUN_0029ce60(u32, s32, s32, s32, s32);
+void FUN_0029e648(s32, s32);
+void messageTargetSetValue(s32, s32);
+s32 FUN_0029e924(void *);
+s32 FUN_00240d5c(void *);
+s32 FUN_00293b8c(void);
+s32 inputIsQuestConfirmPressed(void);
+void FUN_002328b4(void);
+void FUN_0022de74(BibleDevilScreen *);
+void buttonHelpGetStatus(void);
+void buttonHelpSetPreset(void);
+void FUN_003c2b74(void *);
+void FUN_003c2c6c(void *);
+void FUN_002b8454(s32, s32, s32, s32);
+void FUN_00233404(void);
 
-extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
-
-/* Supplied declaration required: FUN_0022de74. */
-/* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_002328b4. */
-/* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: uiAnimationAdvanceChannel. */
-/* Supplied declaration required: FUN_00233404. */
-extern int flaggedValueHolderGetTotal(int);
-extern int FUN_00240d5c(int);
-extern int inputIsQuestConfirmPressed(void);
-extern int gameGetNavigationState(void);
-extern int FUN_00293aac(void);
-extern int FUN_00293b8c(void);
-/* Supplied declaration required: FUN_0029ce60. */
-extern int gameGetFlagByte12e8(void);
-extern int useCounterIsFinished(void);
-/* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029e648. */
-extern int FUN_0029e924(int);
-/* Supplied declaration required: FUN_002b8454. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: buttonHelpGetStatus. */
-extern unsigned int vec2GetYInt(int);
-extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_003c2b74. */
-/* Supplied declaration required: FUN_003c2c6c. */
-
-
-void FUN_003a72a4(int param_1)
-
+/* Per-frame update of the devil bible: moves the cursor between pages/entries and starts the buy flow when the navigation state allows it. */
+void FUN_003a72a4(BibleDevilScreen *screen)
 {
-/* irregular: 14 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  
-  temp_v1 = useCounterIsFinished();
-  if (temp_v1 == 0) {
-    return;
-  }
-  uiAnimationAdvanceChannel(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
-  temp_v1 = param_1 + *(short *)(param_1 + 0xa5b4) * 0x8c + 0xfc;
-  temp_v2 = vec2GetYInt(temp_v1);
-  temp_v3 = vec2GetXInt(temp_v1);
-  pointConvertToFloat(param_1 + 200,temp_v3,temp_v2);
-  temp_v1 = gameGetNavigationState();
-  if ((temp_v1 != 0) && (temp_v1 = FUN_00293aac(), temp_v1 == 0)) {
-    *(unsigned int *)(param_1 + 0x14) = 10;
-    *(unsigned int *)(param_1 + 0x18) = 0;
-    temp_v1 = gameGetFlagByte12e8();
-    if (temp_v1 == 1) {
-      *(unsigned short *)(param_1 + 0xa5b4) = 0;
-    }
-    else {
-      *(unsigned short *)(param_1 + 0xa5b4) = 4;
-    }
-    FUN_00233240(param_1 + 0xdc,(int)*(short *)(param_1 + 0xa5b4));
-    if (*(char *)(param_1 + 0x5a4) != '\0') {
-      return;
-    }
-    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
-    temp_v6 = (unsigned int)*(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x5ac);
-    FUN_0029ce60(temp_v6,*(unsigned char *)(param_1 + 0x5a5),0);
-    FUN_0029e648(1,0);
-    messageTargetSetValue(-temp_v6,0);
-    return;
-  }
-  temp_v1 = gameGetNavigationState();
-  if (temp_v1 != 0) {
-    return;
-  }
-  if (*(int *)(param_1 + 0x28) < 1) {
-    return;
-  }
-  temp_v1 = FUN_0029e924(param_1 + 0x20);
-  temp_v4 = FUN_00240d5c(param_1 + 0x20);
-  temp_v5 = FUN_00293b8c();
-  if (temp_v5 != 1) {
-    temp_v5 = FUN_00293b8c();
-    if (temp_v5 != -1) {
-      if (*(char *)(param_1 + 0x5a4) != '\x01') {
-        temp_v5 = FUN_0029e924(param_1 + 0x20);
-        if ((temp_v5 == temp_v1) && (temp_v1 = FUN_00240d5c(param_1 + 0x20), temp_v1 == temp_v4)) {
-          return;
-        }
-        FUN_00233404();
+    if (!useCounterIsFinished()) {
         return;
-      }
-      temp_v5 = inputIsQuestConfirmPressed();
-      if (temp_v5 != 0) {
-        temp_v0 = *(char *)(param_1 + 0x5a5) + '\x01';
-        *(char *)(param_1 + 0x5a5) = temp_v0;
-        if ('\x01' < temp_v0) {
-          *(unsigned char *)(param_1 + 0x5a5) = 0;
+    }
+    uiAnimationAdvanceChannel(&screen->widget, screen->selected);
+    BibleDevilChannel *channel = &screen->widget.channels[screen->selected];
+    pointConvertToFloat(screen->rectangle, vec2GetXInt(channel), vec2GetYInt(channel));
+
+    if (gameGetNavigationState() != 0 && FUN_00293aac() == 0) {
+        screen->state = 10;
+        screen->stateArg = 0;
+        if (gameGetFlagByte12e8() == 1) {
+            screen->selected = 0;
+        } else {
+            screen->selected = 4;
+        }
+        FUN_00233240(&screen->widget, screen->selected);
+        if (screen->mode == 0) {
+            BibleDevilRow *rows = screen->rows;
+            s16 id = rows[flaggedValueHolderGetTotal(screen->cursor)].id;
+            s32 delta = FUN_0029ce60(id, screen->page, 0, screen->level >= 100, 0);
+            FUN_0029e648(1, 0);
+            messageTargetSetValue(-delta, 0);
+        }
+        return;
+    }
+
+    if (gameGetNavigationState() != 0) {
+        return;
+    }
+    if (*(s32 *)&screen->cursor[8] <= 0) {
+        return;
+    }
+
+    s32 selection = FUN_0029e924(screen->cursor);
+    s32 scroll = FUN_00240d5c(screen->cursor);
+    if (FUN_00293b8c() == 1) {
+        FUN_003c2b74(screen->cursor);
+    } else if (FUN_00293b8c() == -1) {
+        FUN_003c2c6c(screen->cursor);
+    } else if (screen->mode == 1 && inputIsQuestConfirmPressed()) {
+        s8 next = screen->page + 1;
+        screen->page = next;
+        if (next > 1) {
+            screen->page = 0;
         }
         FUN_002328b4();
-        *(unsigned char *)(param_1 + 0x5a7) = 1;
-        (*(unsigned int *)((unsigned char *)&DAT_0043d9c8 + 0x4)) = 0xffffffff;
-        FUN_0022de74(param_1);
+        screen->pageChanged = 1;
+        DAT_0043d9c8.selected = -1;
+        FUN_0022de74(screen);
         buttonHelpGetStatus();
         buttonHelpSetPreset();
-      }
     }
-    else {
-      FUN_003c2c6c(param_1 + 0x20);
+    if (screen->mode == 1) {
+        if (screen->page == 1) {
+            FUN_002b8454(2, 4, 0x40, 1);
+        } else {
+            FUN_002b8454(2, 4, 0x41, 1);
+        }
     }
-  }
-  else {
-    FUN_003c2b74(param_1 + 0x20);
-  }
-  if (*(char *)(param_1 + 0x5a4) == '\x01') {
-    if (*(char *)(param_1 + 0x5a5) != '\x01') {
-      FUN_002b8454(2,4,0x41,1);
+    if (FUN_0029e924(screen->cursor) == selection && FUN_00240d5c(screen->cursor) == scroll) {
+        return;
     }
-    else {
-      FUN_002b8454(2,4,0x40,1);
-    }
-  }
-  temp_v5 = FUN_0029e924(param_1 + 0x20);
-  if ((temp_v5 == temp_v1) && (temp_v1 = FUN_00240d5c(param_1 + 0x20), temp_v1 == temp_v4)) {
-    return;
-  }
-  FUN_00233404();
-  return;
+    FUN_00233404();
 }
 
 } /* extern "C" */

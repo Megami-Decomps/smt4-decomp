@@ -1,191 +1,147 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036fe68` (_code @ 0x36fe68, 0x30c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild of the map-depart load sequence; armcc here keeps the frame counter and the scene pointer in different registers across the staged calls (retail reloads DAT_005806b4.frame between the stages). */
+#include "shard/W5_W5Match7_SceneState.h"
+
+/* The depart sequence's own state. */
+struct DepartSequence {
+    s8 started;
+    s8 finished;       /* the sequence has finished loading */
+    s8 overlayShown;   /* the debug overlay was shown by the sequence */
+    s8 unk03;
+    s32 frame;         /* frames since the sequence started */
+};
+
+/* Map flags shared with the rest of the map code. */
+struct DepartFlags {
+    u32 scene;
+    u8 unk04[0xC];
+    s32 mode;
+    u8 unk14[0xB];
+    u8 loading;
+    s8 ready;
+};
 
 extern "C" {
+extern u8 *g_mapDepartWork;
+extern DepartSequence DAT_005806b4;
+extern DepartFlags DAT_005f1600;
+extern u8 DAT_005f185c;
 
-int FUN_002235f4(void);
-int FUN_00234b30(void);
-int FUN_0023534c(void);
-int FUN_0023a52c(void);
-int FUN_00249a08(void);
-int mikadoSetCameraFlag80(void);
-int FUN_002737a8(void);
-int FUN_00296530(void);
-int FUN_00297c3c(void);
-int FUN_002b9520(void);
-void frameTransitionSetMode(int);
-int FUN_002c2358(void);
-int FUN_002c23cc(int);
-int FUN_002c2610(void);
-int FUN_002c3398(int);
-int debugOverlaySetShown(int);
-int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
-int objectE0ResetFlags1040(void);
-int mapRecordResumePoint(void);
-int sub68OwnerCall3(void);
-int mapEnvironmentSelectPreset(unsigned int);
-int FUN_00379be8(void);
-int FUN_0037a078(void);
-int linkHolderClearFlag(unsigned int);
+void mikadoSetCameraFlag80(void);
+s32 mikadoIsCameraNotState7(void);
+void debugOverlaySetShown(s32 shown);
+void FUN_0023a52c(void);
+void FUN_00296530(void);
+void FUN_00234b30(void);
+void FUN_002737a8(void);
+void FUN_0023534c(void);
+void FUN_00297c3c(void);
+void FUN_002b9520(void);
+void sub68OwnerCall3(void);
+void FUN_00249a08(void);
+void mapRecordResumePoint(void);
+void FUN_002c2358(void);
+void FUN_002235f4(void);
+void FUN_00379be8(void);
+void frameTransitionSetMode(s32 arg);
+void objectE0ResetFlags1040(void);
+void FUN_0037a078(void);
+void mapEnvironmentSelectPreset(u32 scene);
+void FUN_002c2610(void);
+void FUN_002c23cc(s32 arg);
+void FUN_002c3398(s32 arg);
+void FUN_0031416c(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+void linkHolderClearFlag(u32 arg);
+s32 campIsState85(void);
+s32 naviMainIsActive(void);
 
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} void_stack;
-
-extern int g_mapDepartWork; /* 0x58069c */
-extern signed char DAT_005806b4; /* 0x5806b4 */
-extern signed char DAT_005806b5; /* 0x5806b5 */
-extern signed char DAT_005806b6; /* 0x5806b6 */
-extern int DAT_005806b8; /* 0x5806b8 */
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned int DAT_005f1600; /* 0x5f1600 */
-extern int DAT_005f1610; /* 0x5f1610 */
-extern unsigned char DAT_005f161f; /* 0x5f161f */
-extern signed char DAT_005f1620; /* 0x5f1620 */
-extern unsigned char DAT_005f185c; /* 0x5f185c */
-
-extern int campIsState85(void);
-/* Supplied declaration required: FUN_002235f4. */
-/* Supplied declaration required: FUN_00234b30. */
-/* Supplied declaration required: FUN_0023534c. */
-/* Supplied declaration required: FUN_0023a52c. */
-/* Supplied declaration required: FUN_00249a08. */
-/* Supplied declaration required: mikadoSetCameraFlag80. */
-/* Supplied declaration required: FUN_002737a8. */
-/* Supplied declaration required: FUN_00296530. */
-/* Supplied declaration required: FUN_00297c3c. */
-/* Supplied declaration required: FUN_002b9520. */
-/* Supplied declaration required: FUN_002c2358. */
-/* Supplied declaration required: FUN_002c23cc. */
-/* Supplied declaration required: FUN_002c2610. */
-/* Supplied declaration required: FUN_002c3398. */
-extern int mikadoIsCameraNotState7(void);
-/* Supplied declaration required: debugOverlaySetShown. */
-/* Supplied declaration required: FUN_0031416c. */
-/* Supplied declaration required: objectE0ResetFlags1040. */
-/* Supplied declaration required: mapRecordResumePoint. */
-/* Supplied declaration required: sub68OwnerCall3. */
-/* Supplied declaration required: mapEnvironmentSelectPreset. */
-/* Supplied declaration required: FUN_00379be8. */
-/* Supplied declaration required: FUN_0037a078. */
-extern int naviMainIsActive(void);
-/* Supplied declaration required: linkHolderClearFlag. */
-
-
-unsigned int FUN_0036fe68(void)
-
+/* Per-frame driver of the map depart sequence. Returns 1 on the frame the sequence ends. */
+u32 FUN_0036fe68(void)
 {
-/* irregular: 24 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  if ((DAT_005f1620 != '\0') && (DAT_005806b6 == '\0')) {
-    DAT_005806b6 = '\x01';
-    debugOverlaySetShown(1);
-  }
-  temp_v0 = g_lmapScene;
-  if (DAT_005f1610 == 3) {
-    if (DAT_005806b4 == '\0') {
-      mikadoSetCameraFlag80();
-      DAT_005806b4 = '\x01';
+    if (DAT_005f1600.ready != 0 && DAT_005806b4.overlayShown == 0) {
+        DAT_005806b4.overlayShown = 1;
+        debugOverlaySetShown(1);
     }
-    temp_v0 = mikadoIsCameraNotState7();
-    if (temp_v0 == 0) {
-      return 0;
+    if (DAT_005f1600.mode == 3) {
+        if (DAT_005806b4.started == 0) {
+            mikadoSetCameraFlag80();
+            DAT_005806b4.started = 1;
+        }
+        if (mikadoIsCameraNotState7() == 0)
+            return 0;
+        DAT_005806b4.started = 0;
+        if (DAT_005806b4.overlayShown != 0) {
+            debugOverlaySetShown(0);
+            DAT_005806b4.overlayShown = 0;
+        }
+        return 1;
     }
-    DAT_005806b4 = 0;
-    if (DAT_005806b6 != '\0') {
-      debugOverlaySetShown(0);
-      DAT_005806b6 = '\0';
+    if (DAT_005806b4.started == 0) {
+        DAT_005806b4.frame = 0;
+        DAT_005806b4.started = 1;
+        DAT_005806b4.finished = 0;
     }
-    return 1;
-  }
-  if (DAT_005806b4 == '\0') {
-    DAT_005806b8 = 0;
-    DAT_005806b4 = '\x01';
-    DAT_005806b5 = '\0';
-  }
-  if (DAT_005806b5 != '\0') {
-    DAT_005f1620 = '\0';
-    frameTransitionSetMode(0);
-    DAT_005806b5 = '\0';
-    DAT_005806b4 = 0;
-    if (DAT_005806b6 != '\0') {
-      debugOverlaySetShown(0);
-      DAT_005806b6 = '\0';
+    if (DAT_005806b4.finished != 0) {
+        DAT_005f1600.ready = 0;
+        frameTransitionSetMode(0);
+        DAT_005806b4.finished = 0;
+        DAT_005806b4.started = 0;
+        if (DAT_005806b4.overlayShown != 0) {
+            debugOverlaySetShown(0);
+            DAT_005806b4.overlayShown = 0;
+        }
+        return 1;
     }
-    return 1;
-  }
-  if (DAT_005806b8 != 0) {
-    if (DAT_005806b8 == 10) {
-      DAT_005f185c = 1;
-      FUN_002c2610();
-      objectE0ResetFlags1040();
-      frameTransitionSetMode(1);
-      FUN_00379be8();
+    if (DAT_005806b4.frame != 0) {
+        if (DAT_005806b4.frame == 10) {
+            DAT_005f185c = 1;
+            FUN_002c2610();
+            objectE0ResetFlags1040();
+            frameTransitionSetMode(1);
+            FUN_00379be8();
+        }
+        if (DAT_005806b4.frame == 0xB) {
+            DAT_005f1600.loading = 1;
+            g_mapDepartWork[10] = 0;
+            FUN_002235f4();
+            FUN_002c2610();
+        }
+        if (DAT_005806b4.frame <= 0x13)
+            DAT_005806b4.frame++;
+    } else {
+        g_lmapScene->targetPosition = g_lmapScene->position;
+        DAT_005806b4.frame++;
     }
-    if (DAT_005806b8 == 0xb) {
-      DAT_005f161f = 1;
-      *(unsigned char *)(g_mapDepartWork + 10) = 0;
-      FUN_002235f4();
-      FUN_002c2610();
+    if (DAT_005806b4.frame < 100) {
+        if (DAT_005806b4.frame >= 0xD && naviMainIsActive() != 0) {
+            FUN_002c2358();
+            mapRecordResumePoint();
+            FUN_00249a08();
+            FUN_002c3398(0);
+            FUN_0031416c(200, 200, 200, 0x82, 0x82, 0x82, 0x1E, 0x1E, 0x1E, 0x96, 0x96, 0x96);
+            DAT_005806b4.frame = 100;
+            DAT_005f1600.ready = 1;
+            FUN_0037a078();
+        }
+    } else if (campIsState85() == 0) {
+        DAT_005f185c = 0;
+        FUN_002c23cc(1);
+        DAT_005f1600.loading = 0;
+        sub68OwnerCall3();
+        FUN_002b9520();
+        mapEnvironmentSelectPreset(DAT_005f1600.scene);
+        FUN_00297c3c();
+        FUN_0023534c();
+        FUN_002737a8();
+        FUN_00234b30();
+        g_mapDepartWork[10] = 1;
+        FUN_002235f4();
+        linkHolderClearFlag(((u32 *)g_lmapScene)[0x1A8 / 4]);
+        FUN_00296530();
+        FUN_0023a52c();
+        DAT_005806b4.finished = 1;
+        return 0;
     }
-    if (0x13 >= DAT_005806b8) {
-      DAT_005806b8 = DAT_005806b8 + 1;
-    }
-  }
-  else {
-    puVar3 = (unsigned int *)(g_lmapScene + 0x20);
-    temp_v1 = *(unsigned int *)(g_lmapScene + 0x24);
-    *(unsigned int *)(g_lmapScene + 0x28) = *(unsigned int *)(g_lmapScene + 0x1c);
-    *(unsigned int *)(temp_v0 + 0x2c) = *puVar3;
-    *(unsigned int *)(temp_v0 + 0x30) = temp_v1;
-    DAT_005806b8 = DAT_005806b8 + 1;
-  }
-  if (DAT_005806b8 < 100) {
-    if ((DAT_005806b8 >= 0xd) && (temp_v0 = naviMainIsActive(), temp_v0 != 0)) {
-      FUN_002c2358();
-      mapRecordResumePoint();
-      FUN_00249a08();
-      FUN_002c3398(0);
-      FUN_0031416c(200,200,200,0x82,0x82,0x82,0x1e,0x1e,0x1e,0x96,0x96,0x96);
-      DAT_005806b8 = 100;
-      DAT_005f1620 = '\x01';
-      FUN_0037a078();
-    }
-  }
-  else {
-    temp_v0 = campIsState85();
-    if (temp_v0 == 0) {
-      DAT_005f185c = 0;
-      FUN_002c23cc(1);
-      DAT_005f161f = 0;
-      sub68OwnerCall3();
-      FUN_002b9520();
-      mapEnvironmentSelectPreset(DAT_005f1600);
-      FUN_00297c3c();
-      FUN_0023534c();
-      FUN_002737a8();
-      FUN_00234b30();
-      *(unsigned char *)(g_mapDepartWork + 10) = 1;
-      FUN_002235f4();
-      linkHolderClearFlag(*(unsigned int *)(g_lmapScene + 0x1a8));
-      FUN_00296530();
-      FUN_0023a52c();
-      DAT_005806b5 = 1;
-      return 0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

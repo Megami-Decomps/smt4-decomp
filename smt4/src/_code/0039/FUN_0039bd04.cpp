@@ -1,124 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039bd04` (_code @ 0x39bd04, 0x314 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: title scene loading ring draw (nine dots rotating around a centre, "Activating..." caption); written from the decompilation, float/int conversions and the local text copy not compared with retail */
+#include "camp/RenderCtx.h"
+
+struct TitleLoadingScene {
+    /* 0x000 */ u8 unk000[0x9ED];
+    /* 0x9ED */ u8 requested;
+    /* 0x9EE */ u8 confirmed;
+    /* 0x9EF */ u8 unk9EF;
+    /* 0x9F0 */ s32 step;
+    /* 0x9F4 */ s32 phase;
+    /* 0x9F8 */ u8 cursor[0x8C];     /* sprite state of the ring's origin */
+    /* 0xA82 */ u8 unkA82[1];
+};
+
+struct LoadingDot {
+    f32 x;
+    f32 y;
+};
+
+struct LoadingSpriteFrame {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+#define LOADING_DOT_COUNT 9
 
 extern "C" {
+extern RenderCtx *g_titleScene;
+extern s32 DAT_0044cdc8;   /* frames per ring step */
+extern u32 DAT_0044cdd0;   /* caption colour */
 
-int FUN_002be5a4(...);
-int FUN_002bed3c(void);
-int vec2GetXInt(...);
-int FUN_002bedb0(...);
-int FUN_002bee04(unsigned int, int, unsigned int);
-int FUN_002bf288(...);
-int FUN_002bf380(int, int, int, unsigned int, int, int);
-int FUN_002bf4f8(...);
-int efctSetSpeed(void);
-int FUN_002bf818(...);
-int VectorSignedToFloat(...);
-int __aeabi_idivmod(int, unsigned int);
-int rt_memcpy_w(...);
+u32 FUN_002c5d80(u32 slot, u32 flags);
+void FUN_002bee04(RenderCtx *context, s32 stack, u32 value);
+void efctSetSpeed(f32 speed);
+void FUN_002bed3c(void);
+s32 vec2GetXInt(void *state);
+void FUN_002bf380(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
+LoadingSpriteFrame *FUN_002bf4f8(u32 bank, u32 sprite);
+void FUN_002bf288(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
+void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y);
+s32 FUN_002bedb0(RenderCtx *context, s32 stack);
+void FUN_002bf818(void *state);
 
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-} param_1_stack;
-
-extern unsigned char LAB_0039c030; /* 0x39c030 */
-extern unsigned int DAT_0044cdcc; /* 0x44cdcc */
-extern unsigned int DAT_0044cdd0; /* 0x44cdd0 */
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-/* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002bf818. */
-extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: __aeabi_idivmod. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_0039bd04(int param_1)
-
+/* Draws the title loading ring: the backdrop, nine dots with the current and the opposite pair
+ * highlighted, and the caption; confirms the load when the origin sprite has finished. */
+void FUN_0039bd04(TitleLoadingScene *scene)
 {
-/* irregular: irregular input(s): in_fpscr; 14 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar6;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float afStack_98 [18];
-  unsigned char temp_v8 [32];
-  int temp_v9;
-  
-  temp_v0 = FUN_002c5d80(1,0);
-  FUN_002bee04(g_titleScene,3,temp_v0);
-  efctSetSpeed();
-  FUN_002bed3c();
-  temp_v9 = param_1 + 0x9f8;
-  temp_v0 = vec2GetXInt();
-  FUN_002bf380(2,0x1c,0x1d,temp_v0,0,0xd3);
-  __aeabi_idivmod(*(int *)(param_1 + 0x9f0) + 1,DAT_0044cdcc);
-  puVar6 = (unsigned int *)(param_1 + 0x9f4);
-  *(int *)(param_1 + 0x9f0) = temp_v3;
-  if (temp_v3 < 1) {
-    *puVar6 = *(int *)(param_1 + 0x9f4) + 1;
-  }
-  temp_v5 = 0;
-  temp_v4 = *(unsigned int *)(param_1 + 0x9f4) & 7;
-  temp_v6 = (temp_v4 + 1) & 7;
-  *puVar6 = temp_v4;
-  do {
-    temp_v1 = FUN_002bf4f8(0x1c,temp_v5 + 0x1124);
-    temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-    afStack_98[temp_v5 * 2] = temp_v7;
-    temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-    afStack_98[temp_v5 * 2 + 1] = temp_v7;
-    temp_v2 = vec2GetXInt(temp_v9);
-    FUN_002bf288(1,0x1c,0x1121,temp_v2 + *(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),6);
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 9);
-  temp_v0 = vec2GetXInt(temp_v9);
-  temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(1,0x1c,0x1123,(int)(temp_v7 + afStack_98[*(int *)(param_1 + 0x9f4) * 2]),
-               (int)afStack_98[*(int *)(param_1 + 0x9f4) * 2 + 1],6);
-  temp_v0 = vec2GetXInt(temp_v9);
-  temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(1,0x1c,0x1122,(int)(temp_v7 + afStack_98[temp_v6 * 2]),(int)afStack_98[temp_v6 * 2 + 1],6);
-  temp_v4 = (*puVar6 + 4) & 7;
-  temp_v6 = (temp_v4 + 1) & 7;
-  temp_v0 = vec2GetXInt(temp_v9);
-  temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(1,0x1c,0x1123,(int)(temp_v7 + afStack_98[temp_v4 * 2]),(int)afStack_98[temp_v4 * 2 + 1],6);
-  temp_v0 = vec2GetXInt(temp_v9);
-  temp_v7 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002bf288(1,0x1c,0x1122,(int)(temp_v7 + afStack_98[temp_v6 * 2]),(int)afStack_98[temp_v6 * 2 + 1],6);
-  temp_v5 = FUN_002bf4f8(0x1c,0x1120);
-  rt_memcpy_w(temp_v8,&LAB_0039c030,0x1b);
-  temp_v1 = vec2GetXInt(temp_v9);
-  VectorSignedToFloat((temp_v1 - 0xe) + (int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(4,DAT_0044cdd0,temp_v8);
-  FUN_002bedb0(g_titleScene,3);
-  efctSetSpeed();
-  FUN_002bf818(temp_v9);
-  if ((*(char *)(param_1 + 0x9ed) != '\0') && (*(char *)(temp_v9 + 0x8a) != '\0')) {
-    *(unsigned char *)(param_1 + 0x9ee) = 1;
-  }
-  return;
+    u32 slot = FUN_002c5d80(1, 0);
+    FUN_002bee04(g_titleScene, 3, slot);
+    efctSetSpeed(1.0f);
+    FUN_002bed3c();
+    void *origin = scene->cursor;
+    s32 originX = vec2GetXInt(origin);
+    FUN_002bf380(2, 0x1C, 0x1D, originX, 0, 0xD3);
+
+    scene->step = (scene->step + 1) % (u32)DAT_0044cdc8;
+    if (scene->step < 1)
+        scene->phase = scene->phase + 1;
+    s32 phase = scene->phase & 7;
+    s32 next = (phase + 1) & 7;
+    scene->phase = phase;
+
+    LoadingDot dots[LOADING_DOT_COUNT];
+    for (s32 i = 0; i < LOADING_DOT_COUNT; i++) {
+        LoadingSpriteFrame *frame = FUN_002bf4f8(0x1C, i + 0x1124);
+        dots[i].x = (f32)frame->x;
+        dots[i].y = (f32)frame->y;
+        FUN_002bf288(1, 0x1C, 0x1121, vec2GetXInt(origin) + frame->x, frame->y, 6);
+    }
+    FUN_002bf288(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt(origin) + dots[scene->phase].x), (s32)dots[scene->phase].y, 6);
+    FUN_002bf288(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt(origin) + dots[next].x), (s32)dots[next].y, 6);
+    s32 opposite = (scene->phase + 4) & 7;
+    s32 oppositeNext = (opposite + 1) & 7;
+    FUN_002bf288(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt(origin) + dots[opposite].x), (s32)dots[opposite].y, 6);
+    FUN_002bf288(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt(origin) + dots[oppositeNext].x), (s32)dots[oppositeNext].y, 6);
+
+    LoadingSpriteFrame *caption = FUN_002bf4f8(0x1C, 0x1120);
+    char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
+    FUN_002be5a4(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y);
+    FUN_002bedb0(g_titleScene, 3);
+    efctSetSpeed(1.0f);
+    FUN_002bf818(origin);
+    if (scene->requested != 0 && scene->cursor[0x8A] != 0)
+        scene->confirmed = 1;
 }
 
 } /* extern "C" */

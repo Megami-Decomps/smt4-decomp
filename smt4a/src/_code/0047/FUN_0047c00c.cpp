@@ -1,150 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047c00c` (_code @ 0x47c00c, 0x360 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of a state scene's draw (a tiled panel, its sprite table and the current state's handler); armcc here orders the render-state pushes and the float stereo offsets differently, and keeps the x offset and loop counters in other registers. */
+#include "gfx/TitleSceneStack.h"
+
+/* The render context: two render-state stacks. */
+struct RenderCtx {
+    /* 0x0000 */ u8 unk0000[0x1258];
+    /* 0x1258 */ StateStack firstStack;
+    /* 0x1278 */ u8 unk1278[0x40];
+    /* 0x12B8 */ StateStack secondStack;
+};
+
+struct LayoutPoint {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+/* One sprite of the panel table (12 bytes). */
+struct PanelSprite {
+    s32 point;
+    s32 sprite;
+    f32 alpha;
+};
+
+class StateScene;
+typedef void (StateScene::*StateHandler)();
+
+/* A scene whose current state selects the handler called after drawing. */
+class StateScene {
+public:
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 state;
+    /* 0x08 */ u8 unk08[0xB0];
+    /* 0xB8 */ StateHandler handlers[8];
+};
 
 extern "C" {
+extern RenderCtx *g_renderCtx;
+extern PanelSprite DAT_00526314[24];
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int renderCtxResetColorScale(...);
-int skinObjectUpdateMatrices(...);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
-int renderCtxCalculateStereoParallax(int);
+void FUN_00183bb0(void);
+void efctSetSpeed(f32 speed);
+void FUN_00157558(RenderCtx *ctx);
+u32 FUN_001692ac(s32 a, s32 b);
+s32 packNibblesAndByte(u32 a, u32 b, u32 c);
+f32 renderCtxCalculateStereoParallax(RenderCtx *ctx, f32 depth);
+s32 textureGetIndexedResource(s32 index);
+void FUN_001835b4(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+LayoutPoint *FUN_001834a4(s32 group, s32 part);
+void skinObjectUpdateMatrices(RenderCtx *ctx);
+void renderCtxResetColorScale(RenderCtx *ctx);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern int textureGetIndexedResource(unsigned int);
-
-
-void FUN_0047c00c(int param_1)
-
+/* Draws the panel (tiled background, its sprite table and the edge sprites) inside two render
+ * states, then calls the handler of the scene's current state. */
+void FUN_0047c00c(StateScene *scene)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  int *piVar5;
-  float temp_v4;
-  
-  if (0 < *(int *)(param_1 + 4)) {
+    if (scene->state <= 0)
+        return;
     FUN_00183bb0();
-    efctSetSpeed();
+    efctSetSpeed(1.0f);
     FUN_00157558(g_renderCtx);
-    temp_v1 = g_renderCtx;
-    temp_v0 = FUN_001692ac(1,0);
-    piVar5 = (int *)(temp_v1 + 0x1258);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v3 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
+    RenderCtx *first = g_renderCtx;
+    u32 firstState = FUN_001692ac(1, 0);
+    stateStackPush(&first->firstStack, firstState);
+    RenderCtx *second = g_renderCtx;
+    s32 secondState = packNibblesAndByte(6, 7, 0);
+    stateStackPush(&second->secondStack, secondState);
+    renderCtxCalculateStereoParallax(g_renderCtx, 0.38f);
+    s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.36f);
+    if (textureGetIndexedResource(0x2F) != 0) {
+        FUN_001835b4(2, 0x2F, 0x7A, x, 0, 11);
+        FUN_001835b4(2, 0x2F, 0x7B, x, 0, 11);
     }
-    temp_v1 = g_renderCtx;
-    temp_v0 = packNibblesAndByte(6,7,0);
-    piVar5 = (int *)(temp_v1 + 0x12b8);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v0;
-    if (*(char *)(temp_v1 + 0x12d0) != '\0' || temp_v3 != temp_v0) {
-      (**(romwright_code **)(temp_v1 + 0x12d4))(temp_v0);
-      *(unsigned char *)(temp_v1 + 0x12d0) = 0;
+    for (s32 i = 0; i < 24; i++) {
+        if (DAT_00526314[i].sprite >= 0) {
+            efctSetSpeed(DAT_00526314[i].alpha);
+            LayoutPoint *point = FUN_001834a4(20, DAT_00526314[i].point);
+            FUN_001835b4(2, 20, DAT_00526314[i].sprite, point->x + x, point->y, 11);
+        }
     }
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v4 = 0.36f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v0 = (int)temp_v4;
-    temp_v1 = textureGetIndexedResource(0x2f);
-    if (temp_v1 != 0) {
-      FUN_001835b4(2,0x2f,0x7a,temp_v0,0,0xb);
-      FUN_001835b4(2,0x2f,0x7b,temp_v0,0,0xb);
+    efctSetSpeed(1.0f);
+    for (s32 row = 0; row < 9; row++) {
+        for (s32 column = 0; column < 13; column++)
+            FUN_001835b4(2, 20, 0x7F2, x + column * 32, row * 32, 11);
     }
-    temp_v1 = 0;
-    do {
-      if (-1 < *(int *)(temp_v1 * 0xc + 0x526318)) {
-        efctSetSpeed();
-        temp_v2 = FUN_001834a4(0x14,*(unsigned int *)(temp_v1 * 0xc + 0x526314));
-        FUN_001835b4(2,0x14,*(unsigned int *)(temp_v1 * 0xc + 0x526318),*(short *)(temp_v2 + 8) + temp_v0,
-                     (int)*(short *)(temp_v2 + 10),0xb);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-    efctSetSpeed();
-    temp_v1 = 0;
-    do {
-      temp_v2 = 0;
-      do {
-        FUN_001835b4(2,0x14,0x7f2,temp_v0 + temp_v2 * 0x20,temp_v1 << 5,0xb);
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 0xd);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 9);
-    temp_v1 = 0;
-    do {
-      FUN_001835b4(2,0x14,temp_v1 + 0x7f4,temp_v0,0,0x10);
-      temp_v2 = g_renderCtx;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0xb);
-    piVar5 = (int *)(g_renderCtx + 0x12b8);
-    temp_v1 = *piVar5;
-    temp_v0 = piVar5[temp_v1 + 2];
-    *piVar5 = temp_v1 - 1;
-    if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v0 != piVar5[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v2 + 0x12d4))(piVar5[temp_v1 + 1]);
-      *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-    }
-    temp_v1 = g_renderCtx;
-    piVar5 = (int *)(g_renderCtx + 0x1258);
-    temp_v0 = *piVar5;
-    temp_v2 = piVar5[temp_v0 + 2];
-    *piVar5 = temp_v0 - 1;
-    if (*(char *)(temp_v1 + 0x1270) != '\0' || temp_v2 != piVar5[temp_v0 + 1]) {
-      (**(romwright_code **)(temp_v1 + 0x1274))();
-      *(unsigned char *)(temp_v1 + 0x1270) = 0;
-    }
+    for (s32 i = 0; i < 11; i++)
+        FUN_001835b4(2, 20, 0x7F4 + i, x, 0, 16);
+    stateStackPop(&g_renderCtx->secondStack);
+    stateStackPop(&g_renderCtx->firstStack);
     FUN_00183bb0();
-    efctSetSpeed();
+    efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
-    temp_v1 = param_1 + *(int *)(param_1 + 4) * 8;
-    UNRECOVERED_JUMPTABLE = *(romwright_code **)(temp_v1 + 0xb8);
-    if ((UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) ||
-       (((*(unsigned int *)(temp_v1 + 0xbc) & 1) != 0 && (*(unsigned int *)(temp_v1 + 0xbc) != 0)))) {
-      if ((*(unsigned int *)(temp_v1 + 0xbc) & 1) != 0) {
-        UNRECOVERED_JUMPTABLE =
-             *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE +
-                       *(int *)(param_1 + ((int)*(unsigned int *)(temp_v1 + 0xbc) >> 1)));
-      }
-                    /* WARNING: Could not recover jumptable at 0x0047c344. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-      (*UNRECOVERED_JUMPTABLE)();
-      return;
-    }
-  }
-  return;
+    if (scene->handlers[scene->state])
+        (scene->*scene->handlers[scene->state])();
 }
 
 } /* extern "C" */

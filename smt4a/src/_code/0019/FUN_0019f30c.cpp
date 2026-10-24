@@ -1,115 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f30c` (_code @ 0x19f30c, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float register allocation and load/store scheduling differ (retail hoists the matrix loads of every branch above the stores and unpredicated 1/root); the algorithm is the same. */
+#include "gfx/QuaternionWorkspace.h"
 
 extern "C" {
 
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+/* A joint's 3x4 row-major transform (0x30 bytes). */
+typedef struct JointMatrix {
+    f32 m[3][4];
+} JointMatrix;
+
+typedef struct JointList {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ JointMatrix *joints;
+} JointList;
+
+typedef struct JointNameTable {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u8 member70[1];
+} JointNameTable;
+
+typedef struct JointOwner {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ JointList *list;
+    /* 0x10C */ u8 unk10C[0x104];
+    /* 0x210 */ JointNameTable *names;
+} JointOwner;
+
+s32 FUN_001a7a20(u8 *table, u32 name, u32 length);
+u32 wstrlen(u32 name);
+extern f32 __sqrtf(f32);
+
+/* Looks a joint up by name and converts its rotation matrix to a quaternion. Returns whether the
+ * joint was found. */
+u32 FUN_0019f30c(JointOwner *owner, u32 name, RotationQuaternion *rotation)
 {
-    return (float)sqrt((double)value);
-}
-#endif
-extern int FUN_001a7a20(int, unsigned int, unsigned int);
-extern unsigned int wstrlen(unsigned int);
+    u8 *base = owner->names->member70;
+    u32 length = wstrlen(name);
+    s32 index = FUN_001a7a20(base + 4, name, length);
 
+    if (index == 0xFFFF) {
+        return 0;
+    }
+    const JointMatrix *joint = &owner->list->joints[index];
+    f32 m00 = joint->m[0][0];
+    f32 m11 = joint->m[1][1];
+    f32 m22 = joint->m[2][2];
+    f32 trace = m00 + m11 + m22;
 
-unsigned int FUN_0019f30c(int param_1,unsigned int param_2,float *param_3)
+    if (trace > 0.0f) {
+        f32 root = __sqrtf(trace + 1.0f);
+        f32 scale = 0.5f / root;
 
-{
-  int temp_v0;
-  unsigned int temp_v1;
-  float *pfVar3;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v0 = *(int *)(param_1 + 0x210);
-  temp_v1 = wstrlen(param_2);
-  temp_v0 = FUN_001a7a20(temp_v0 + 0x74,param_2,temp_v1);
-  if (temp_v0 == 0xffff) {
-    return 0;
-  }
-  pfVar3 = (float *)(*(int *)(*(int *)(param_1 + 0x108) + 0x14) + temp_v0 * 0x30);
-  temp_v3 = *pfVar3;
-  temp_v4 = pfVar3[5];
-  temp_v2 = pfVar3[10];
-  temp_v7 = temp_v3 + temp_v4 + temp_v2;
-  if (temp_v7 > 0.0f) {
-    temp_v8 = pfVar3[2];
-    temp_v5 = pfVar3[8];
-    temp_v4 = pfVar3[4];
-    temp_v6 = pfVar3[1];
-    temp_v3 = romwright_sqrt_4(temp_v7 + 1.0f);
-    temp_v2 = 0.5f / temp_v3;
-    *param_3 = (pfVar3[9] - pfVar3[6]) * temp_v2;
-    param_3[1] = (temp_v8 - temp_v5) * temp_v2;
-    param_3[2] = (temp_v4 - temp_v6) * temp_v2;
-    param_3[3] = temp_v3 * 0.5f;
-  }
-  else {
-    if (temp_v4 > temp_v3) {
-      if (temp_v2 <= temp_v4) {
-        temp_v2 = romwright_sqrt_4((temp_v4 - (temp_v2 + temp_v3)) + 1.0f);
-        temp_v3 = temp_v2 * 0.5f;
-        if (temp_v2 != 0.0f) {
-          temp_v2 = 0.5f / temp_v2;
+        rotation->x = (joint->m[2][1] - joint->m[1][2]) * scale;
+        rotation->y = (joint->m[0][2] - joint->m[2][0]) * scale;
+        rotation->z = (joint->m[1][0] - joint->m[0][1]) * scale;
+        rotation->w = root * 0.5f;
+    } else {
+        if (m11 > m00) {
+            if (!(m22 > m11)) {
+                f32 scale = __sqrtf((m11 - (m22 + m00)) + 1.0f);
+                f32 half = scale * 0.5f;
+                if (scale != 0.0f) {
+                    scale = 0.5f / scale;
+                }
+
+                rotation->y = half;
+                rotation->w = (joint->m[0][2] - joint->m[2][0]) * scale;
+                rotation->z = (joint->m[1][2] + joint->m[2][1]) * scale;
+                rotation->x = (joint->m[1][0] + joint->m[0][1]) * scale;
+                return 1;
+            }
+        } else if (!(m22 > m00)) {
+            f32 scale = __sqrtf((m00 - (m11 + m22)) + 1.0f);
+            f32 half = scale * 0.5f;
+            if (scale != 0.0f) {
+                scale = 0.5f / scale;
+            }
+
+            rotation->x = half;
+            rotation->w = (joint->m[2][1] - joint->m[1][2]) * scale;
+            rotation->y = (joint->m[0][1] + joint->m[1][0]) * scale;
+            rotation->z = (joint->m[0][2] + joint->m[2][0]) * scale;
+            return 1;
         }
-        temp_v8 = pfVar3[2];
-        temp_v9 = pfVar3[8];
-        temp_v6 = pfVar3[6];
-        temp_v7 = pfVar3[9];
-        temp_v4 = pfVar3[4];
-        temp_v5 = pfVar3[1];
-        param_3[1] = temp_v3;
-        param_3[3] = (temp_v8 - temp_v9) * temp_v2;
-        param_3[2] = (temp_v6 + temp_v7) * temp_v2;
-        *param_3 = (temp_v4 + temp_v5) * temp_v2;
-        return 1;
-      }
+        f32 scale = __sqrtf((m22 - (m00 + m11)) + 1.0f);
+        f32 half = scale * 0.5f;
+        if (scale != 0.0f) {
+            scale = 0.5f / scale;
+        }
+
+        rotation->z = half;
+        rotation->w = (joint->m[1][0] - joint->m[0][1]) * scale;
+        rotation->x = (joint->m[2][0] + joint->m[0][2]) * scale;
+        rotation->y = (joint->m[2][1] + joint->m[1][2]) * scale;
     }
-    else if (temp_v2 <= temp_v3) {
-      temp_v2 = romwright_sqrt_4((temp_v3 - (temp_v4 + temp_v2)) + 1.0f);
-      temp_v3 = temp_v2 * 0.5f;
-      if (temp_v2 != 0.0f) {
-        temp_v2 = 0.5f / temp_v2;
-      }
-      temp_v4 = pfVar3[9];
-      temp_v7 = pfVar3[6];
-      temp_v5 = pfVar3[1];
-      temp_v6 = pfVar3[4];
-      temp_v8 = pfVar3[2];
-      temp_v9 = pfVar3[8];
-      *param_3 = temp_v3;
-      param_3[3] = (temp_v4 - temp_v7) * temp_v2;
-      param_3[1] = (temp_v5 + temp_v6) * temp_v2;
-      param_3[2] = (temp_v8 + temp_v9) * temp_v2;
-      return 1;
-    }
-    temp_v2 = romwright_sqrt_4((temp_v2 - (temp_v3 + temp_v4)) + 1.0f);
-    temp_v3 = temp_v2 * 0.5f;
-    if (temp_v2 != 0.0f) {
-      temp_v2 = 0.5f / temp_v2;
-    }
-    temp_v5 = pfVar3[4];
-    temp_v9 = pfVar3[1];
-    temp_v6 = pfVar3[8];
-    temp_v8 = pfVar3[2];
-    temp_v4 = pfVar3[9];
-    temp_v7 = pfVar3[6];
-    param_3[2] = temp_v3;
-    param_3[3] = (temp_v5 - temp_v9) * temp_v2;
-    *param_3 = (temp_v6 + temp_v8) * temp_v2;
-    param_3[1] = (temp_v4 + temp_v7) * temp_v2;
-  }
-  return 1;
+    return 1;
 }
 
-} /* extern "C" */
+}

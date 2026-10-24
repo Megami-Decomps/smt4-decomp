@@ -1,155 +1,136 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00169b30` (_code @ 0x169b30, 0x250 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near: same logic, 153 rows against 151; retail interleaves the four total sums with the slot lookup (ldm of three counters), keeps the old follow-up on the stack and the table copy at sp+24, so scheduling/frame size differ. */
+#include "common.h"
+
+#define CARD_PLAYER_COUNT 24
+#define CARD_SLOT_COUNT 4
+#define CARD_COUNTER_COUNT 6
+
+/* One slot's usage counters: [0..2] count how many players hold each kind of pick, [3..5] each kind of
+ * follow-up. */
+struct CardSlot {
+    s32 counter[CARD_COUNTER_COUNT];
+};
+
+/* What a player's card shows (the 0x14-byte record the UI reads). */
+struct CardRecord {
+    s32 value;
+    s32 first;
+    s32 second;
+    f32 progress;
+    s32 reserved;
+};
+
+/* The card-assignment table (observed fields), at +0x1078 of the owning object. */
+struct CardTable {
+    /* 0x000 */ s32 pick[CARD_PLAYER_COUNT];
+    /* 0x060 */ s32 pickValue[CARD_PLAYER_COUNT];
+    /* 0x0C0 */ s32 followUp[CARD_PLAYER_COUNT];
+    /* 0x120 */ CardSlot slot[CARD_SLOT_COUNT];
+    /* 0x180 */ CardRecord record[CARD_PLAYER_COUNT];
+    /* 0x360 */ s32 firstArgA;
+    /* 0x364 */ s32 firstArgB;
+    /* 0x368 */ s32 secondArgA;
+    /* 0x36C */ s32 secondArgB;
+    /* 0x370 */ s32 totalLimit1;
+    /* 0x374 */ s32 totalLimit2;
+    /* 0x378 */ s32 slotLimit1;
+    /* 0x37C */ s32 slotLimit2;
+    /* 0x380 */ s32 value0;
+    /* 0x384 */ s32 value1;
+    /* 0x388 */ s32 randomLow;
+    /* 0x38C */ s32 randomHigh;
+    /* 0x390 */ s32 unk390;
+    /* 0x394 */ s32 value1Held;
+    /* 0x398 */ s32 value2Held;
+};
+
+struct CardOwner {
+    /* 0x0000 */ u8 unk0000[0x1078];
+    /* 0x1078 */ CardTable table;
+};
 
 extern "C" {
 
-int FUN_00184964(...);
-int pairSetFirstResetSecond(int);
-int SBORROW4(int, int);
-int rt_memcpy_w(int [27], unsigned char *, int);
+extern const s32 DAT_00530e50[CARD_PLAYER_COUNT];
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-} param_2_stack;
+void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+s32 FUN_00184964(s32 first, s32 second);
+void pairSetFirstResetSecond(void *pair);
 
-extern unsigned char DAT_00530e50; /* 0x530e50 */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00184964. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00169b30(int param_1,int param_2)
-
+/* Sum of one counter over every slot. */
+static __inline s32 cardCounterTotal(const CardTable *table, s32 counter)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  unsigned char temp_v14;
-  int aiStack_90 [27];
-  
-  temp_v8 = param_1 + 0x1078;
-  rt_memcpy_w(aiStack_90,&DAT_00530e50,0x60);
-  temp_v10 = temp_v8 + param_2 * 4;
-  temp_v0 = *(int *)(temp_v10 + 0xc0);
-  temp_v13 = *(int *)(temp_v8 + param_2 * 4);
-  temp_v4 = *(int *)(param_1 + 0x11a0) + *(int *)(param_1 + 0x11b8) + *(int *)(param_1 + 0x11d0) +
-          *(int *)(param_1 + 0x11e8);
-  temp_v12 = *(int *)(param_1 + 0x11f4) +
-           *(int *)(param_1 + 0x11ac) + *(int *)(param_1 + 0x11c4) + *(int *)(param_1 + 0x11dc);
-  temp_v9 = temp_v8 + aiStack_90[param_2] * 0x18;
-  temp_v5 = *(int *)(param_1 + 0x13f0);
-  temp_v7 = *(int *)(temp_v9 + 0x124);
-  temp_v14 = SBORROW4(temp_v7,temp_v5);
-  temp_v2 = temp_v7 - temp_v5;
-  temp_v6 = temp_v5;
-  if (temp_v7 < temp_v5) {
-    temp_v6 = *(int *)(param_1 + 0x13e8);
-  }
-  temp_v1 = *(int *)(param_1 + 0x119c) + *(int *)(param_1 + 0x11b4) + *(int *)(param_1 + 0x11cc) +
-          *(int *)(param_1 + 0x11e4);
-  temp_v11 = *(int *)(param_1 + 0x11ec) +
-           *(int *)(param_1 + 0x11a4) + *(int *)(param_1 + 0x11bc) + *(int *)(param_1 + 0x11d4);
-  if (temp_v7 < temp_v5) {
-    temp_v14 = SBORROW4(temp_v1,temp_v6);
-    temp_v2 = temp_v1 - temp_v6;
-  }
-  if (temp_v2 < 0 != temp_v14) {
-    *(unsigned int *)(temp_v8 + param_2 * 4) = 1;
-    *(int *)(temp_v9 + 0x124) = *(int *)(temp_v9 + 0x124) + 1;
-    temp_v2 = FUN_00184964(0,3);
-    temp_v2 = temp_v2 + 0x7ed;
-  }
-  else {
-    temp_v6 = *(int *)(temp_v9 + 0x128);
-    temp_v5 = *(int *)(param_1 + 0x13f4);
-    temp_v14 = SBORROW4(temp_v6,temp_v5);
-    temp_v2 = temp_v6 - temp_v5;
-    if (temp_v6 < temp_v5) {
-      temp_v14 = SBORROW4(temp_v4,*(int *)(param_1 + 0x13ec));
-      temp_v2 = temp_v4 - *(int *)(param_1 + 0x13ec);
+    s32 total = 0;
+    s32 i;
+
+    for (i = 0; i < CARD_SLOT_COUNT; i++) {
+        total += table->slot[i].counter[counter];
     }
-    if (temp_v2 < 0 != temp_v14) {
-      *(unsigned int *)(temp_v8 + param_2 * 4) = 2;
-      temp_v2 = 0x7f1;
-      *(int *)(temp_v9 + 0x128) = *(int *)(temp_v9 + 0x128) + 1;
+    return total;
+}
+
+/* Reassigns player `player`'s pick and follow-up: it moves to the first pick whose slot and overall
+ * counters are under their limits, then to the first under-limit follow-up, updating the counters and
+ * the card record. */
+void FUN_00169b30(CardOwner *owner, s32 player)
+{
+    CardTable *table = &owner->table;
+    s32 slotOrder[CARD_PLAYER_COUNT];
+    CardSlot *slot;
+    CardRecord *record;
+    s32 oldPick;
+    s32 oldFollowUp;
+    s32 pickValue;
+    s32 followUp;
+    s32 total1;
+    s32 total2;
+    s32 total3;
+    s32 total5;
+
+    rt_memcpy_w(slotOrder, DAT_00530e50, sizeof(slotOrder));
+    oldFollowUp = table->followUp[player];
+    oldPick = table->pick[player];
+    total2 = cardCounterTotal(table, 2);
+    total5 = cardCounterTotal(table, 5);
+    total1 = cardCounterTotal(table, 1);
+    total3 = cardCounterTotal(table, 3);
+    slot = &table->slot[slotOrder[player]];
+    if (slot->counter[1] < table->slotLimit1 && total1 < table->totalLimit1) {
+        table->pick[player] = 1;
+        slot->counter[1]++;
+        pickValue = FUN_00184964(0, 3) + 0x7ED;
+    } else if (slot->counter[2] < table->slotLimit2 && total2 < table->totalLimit2) {
+        table->pick[player] = 2;
+        pickValue = 0x7F1;
+        slot->counter[2]++;
+    } else {
+        table->pick[player] = 0;
+        pickValue = 2000;
+        slot->counter[0]++;
     }
-    else {
-      *(unsigned int *)(temp_v8 + param_2 * 4) = 0;
-      temp_v2 = 2000;
-      *(int *)(temp_v9 + 0x120) = *(int *)(temp_v9 + 0x120) + 1;
+    slot->counter[oldPick]--;
+    table->pickValue[player] = pickValue;
+    pairSetFirstResetSecond((u8 *)owner + player * 0x8C + 0x54);
+    record = &table->record[player];
+    if (slot->counter[3] < 1 && total3 < 2) {
+        followUp = 0;
+        record->value = table->value0;
+        table->followUp[player] = 0;
+    } else if (slot->counter[5] < 1 && total5 < 2) {
+        record->value = table->pick[player] == 2 ? table->value1Held : table->value1;
+        followUp = 2;
+        table->followUp[player] = followUp;
+    } else {
+        record->value = table->pick[player] == 2 ? table->value2Held : FUN_00184964(table->randomLow, table->randomHigh);
+        followUp = 1;
+        table->followUp[player] = followUp;
     }
-  }
-  temp_v6 = temp_v9 + temp_v13 * 4;
-  *(int *)(temp_v6 + 0x120) = *(int *)(temp_v6 + 0x120) - 1;
-  *(int *)(temp_v10 + 0x60) = temp_v2;
-  pairSetFirstResetSecond(param_1 + param_2 * 0x8c + 0x54);
-  temp_v6 = *(int *)(temp_v9 + 300);
-  temp_v2 = temp_v6;
-  if (temp_v6 < 1) {
-    temp_v2 = temp_v11 - 2;
-  }
-  temp_v4 = param_1 + 0x1078 + param_2 * 0x14;
-  if (temp_v2 < 0 != (temp_v6 < 1 && SBORROW4(temp_v11,2))) {
-    temp_v2 = 0;
-    *(unsigned int *)(temp_v4 + 0x180) = *(unsigned int *)(param_1 + 0x13f8);
-    *(unsigned int *)(temp_v10 + 0xc0) = 0;
-  }
-  else {
-    temp_v6 = *(int *)(temp_v9 + 0x134);
-    temp_v5 = *(int *)(temp_v8 + param_2 * 4);
-    temp_v2 = temp_v6;
-    if (temp_v6 < 1) {
-      temp_v2 = temp_v12 - 2;
-    }
-    if (temp_v2 < 0 != (temp_v6 < 1 && SBORROW4(temp_v12,2))) {
-      if (temp_v5 == 2) {
-        temp_v3 = *(unsigned int *)(param_1 + 0x140c);
-      }
-      else {
-        temp_v3 = *(unsigned int *)(param_1 + 0x13fc);
-      }
-      *(unsigned int *)(temp_v4 + 0x180) = temp_v3;
-      temp_v2 = 2;
-    }
-    else {
-      if (temp_v5 == 2) {
-        temp_v3 = *(unsigned int *)(param_1 + 0x1410);
-      }
-      else {
-        temp_v3 = FUN_00184964(*(unsigned int *)(param_1 + 0x1400),*(unsigned int *)(param_1 + 0x1404));
-      }
-      *(unsigned int *)(temp_v4 + 0x180) = temp_v3;
-      temp_v2 = 1;
-    }
-    *(int *)(temp_v10 + 0xc0) = temp_v2;
-  }
-  temp_v2 = temp_v9 + temp_v2 * 4;
-  temp_v9 = temp_v9 + temp_v0 * 4;
-  *(int *)(temp_v2 + 300) = *(int *)(temp_v2 + 300) + 1;
-  *(int *)(temp_v9 + 300) = *(int *)(temp_v9 + 300) - 1;
-  temp_v3 = FUN_00184964(*(unsigned int *)(param_1 + 0x13dc),*(unsigned int *)(param_1 + 0x13d8));
-  *(unsigned int *)(temp_v4 + 0x184) = temp_v3;
-  temp_v3 = FUN_00184964(*(unsigned int *)(param_1 + 0x13e4),*(unsigned int *)(param_1 + 0x13e0));
-  *(unsigned int *)(temp_v4 + 0x188) = temp_v3;
-  *(unsigned int *)(temp_v4 + 0x18c) = 0;
-  *(unsigned int *)(temp_v4 + 400) = 0;
-  return;
+    slot->counter[followUp + 3]++;
+    slot->counter[oldFollowUp + 3]--;
+    record->first = FUN_00184964(table->firstArgB, table->firstArgA);
+    record->second = FUN_00184964(table->secondArgB, table->secondArgA);
+    record->progress = 0.0f;
+    record->reserved = 0;
 }
 
 } /* extern "C" */

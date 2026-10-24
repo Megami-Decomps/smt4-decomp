@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_002a0428(...);
 int FUN_002a5960(...);
-int FUN_002a5dc4(...);
+int _ZN9Obj42111cC1Ej(...);
 
 int actionSequenceDispatchTriggers(...);
 int actionSequenceUpdateLoopTransition(...);
@@ -82,7 +82,7 @@ extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_00257e74. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a5960. */
-/* Supplied declaration required: FUN_002a5dc4. */
+/* Supplied declaration required: _ZN9Obj42111cC1Ej. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdOperatorNew. */
 extern int *asdMemoryGetDefaultAllocator(void);
@@ -676,7 +676,7 @@ code_r0x0034ca74:
             unaff_r4 = (int *)0x0;
           }
           else {
-            FUN_002a5dc4(unaff_r4,piVar4);
+            _ZN9Obj42111cC1Ej(unaff_r4,piVar4);
             FUN_002a5960(unaff_r4,&temp_v21,piStack_a4,piStack_a0,(int)(char)iStack_9c);
           }
           (**(romwright_code **)(*unaff_r4 + 0xc))(unaff_r4,temp_v8);

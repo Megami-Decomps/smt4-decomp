@@ -1,169 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00327b98` (_code @ 0x327b98, 0x324 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: builds the lightning strips of a polygon thunder effect (one strip per bolt, vertex colours fading in and out along the bolt); written from the decompilation and the retail disassembly, float conversions and the vertex store layout not compared with retail */
+#include "AsdSDK/AsdDebug.h"
+
+/* Packed vertex colour data of one strip vertex: three RGBA colours and two copies. */
+struct ThunderVertex {
+    /* 0x00 */ u8 color0[4];
+    /* 0x04 */ u8 color1[4];
+    /* 0x08 */ u8 color2[4];
+    /* 0x0C */ u32 copy1;
+    /* 0x10 */ u32 copy0;
+};
+
+struct ThunderVertexBuffer {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ ThunderVertex *vertices;
+};
+
+struct ThunderStrip {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 vertexValues;     /* five values per vertex */
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ ThunderVertexBuffer *buffer;
+};
+
+/* One entry of the result block: the strip and its index marker. */
+struct ThunderEntry {
+    /* 0x00 */ ThunderStrip *strip;
+    /* 0x04 */ s32 marker;
+    /* 0x08 */ u32 unk08;
+};
+
+struct ThunderBlock {
+    /* 0x00 */ ThunderEntry *entries;
+    /* 0x04 */ ThunderEntry storage[1];
+};
+
+/* The effect parameters. */
+struct ThunderParams {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 strips;
+    /* 0x3C */ u32 segments;
+    /* 0x40 */ u8 unk40[0x28];
+    /* 0x68 */ f32 fadeIn;           /* fraction of the bolt that fades in */
+    /* 0x6C */ f32 fadeOut;          /* fraction at which it starts to fade out */
+    /* 0x70 */ u32 color0;           /* 0xAARRGGBB */
+    /* 0x74 */ u32 color1;
+    /* 0x78 */ u32 color2;
+};
 
 extern "C" {
+extern u8 DAT_0047372c[];
 
-int CONCAT44(unsigned int, double);
-int FUN_0024505c(int, unsigned char *, int, int);
-int memAlloc(int, int, int, unsigned int, int, int);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 zero);
+ThunderStrip *FUN_0024505c(u32 segments, const u8 *signature, u32 valuesPerVertex, u32 vertexSize);
 
-/* stack frame of param_1: 15 slot(s), 60 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp90; /* 0x90: local_90 */
-} param_1_stack;
-
-extern unsigned char DAT_0047372c; /* 0x47372c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0024505c. */
-/* Supplied declaration required: memAlloc. */
-
-
-unsigned int * FUN_00327b98(int param_1)
-
+/* Writes the colour (rgb of `rgb`, alpha scaled by `envelope`) into a vertex colour. */
+static __inline void thunderColor(u8 *out, u32 rgb, u32 argb, f32 envelope)
 {
-/* irregular: irregular input(s): in_d8, in_fpscr; 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned short temp_v2;
-  unsigned int *puVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int in_fpscr;
-  unsigned int temp_v10;
-  int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  unsigned long long in_d8;
-  long long temp_v18;
-  unsigned int temp_v19;
-  unsigned int temp_v20;
-  unsigned int *temp_v21;
-  
-  temp_v19 = (unsigned int)((unsigned long long)in_d8 >> 0x20);
-  temp_v0 = *(unsigned int *)(param_1 + 0x38);
-  puVar2 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,temp_v0 * 0xc + 4,0x10,1);
-  *puVar2 = (unsigned int)(puVar2 + 1);
-  temp_v1 = *(unsigned int *)(param_1 + 0x3c);
-  if (temp_v1 < 4) {
-    temp_v1 = 3;
-  }
-  *(unsigned int *)(param_1 + 0x3c) = temp_v1;
-  if ((temp_v1 & 1) == 0) {
-    *(unsigned int *)(param_1 + 0x3c) = temp_v1 + 1;
-  }
-  temp_v4 = *(unsigned int *)(param_1 + 0x70);
-  temp_v3 = *(unsigned int *)(param_1 + 0x74);
-  temp_v1 = *(unsigned int *)(param_1 + 0x78);
-  temp_v20 = 0;
-  temp_v6 = *(int *)(param_1 + 0x3c) + 1;
-  temp_v7 = temp_v4 & 0xffffff;
-  if (temp_v0 != 0) {
-    temp_v19 = 0x3f800000;
-  }
-  temp_v18 = (unsigned long long)temp_v19 << 0x20;
-  temp_v21 = (unsigned int *)*puVar2;
-  temp_v14 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v16 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v19 = temp_v3 & 0xffffff;
-  temp_v8 = temp_v1 & 0xffffff;
-  temp_v11 = (int)(*(float *)(param_1 + 0x68) * temp_v14);
-  temp_v6 = (int)(*(float *)(param_1 + 0x6c) * temp_v16);
-  if (temp_v0 != 0) {
-    do {
-      temp_v2 = *(unsigned int *)(param_1 + 0x3c);
-      FUN_0024505c(temp_v2,&DAT_0047372c,5,0x48);
-      temp_v5 = 0;
-      *temp_v21 = temp_v2;
-      temp_v9 = (int)*(short *)(temp_v2 + 2) / 5;
-      if (temp_v9 != 0) {
-        puVar5 = *(unsigned int **)(*(int *)(temp_v2 + 8) + 0x38);
-        do {
-          if ((((temp_v5 & 1) - 1) & temp_v5) == 0) {
-            temp_v10 = (unsigned int)((unsigned long long)temp_v18 >> 0x20);
-            if ((int)temp_v5 < temp_v11) {
-              temp_v14 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v16 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v18 = CONCAT44(temp_v10,temp_v14 / temp_v16);
+    out[0] = (u8)rgb;
+    out[1] = (u8)(rgb >> 8);
+    out[2] = (u8)(rgb >> 16);
+    out[3] = (u8)(u32)((f32)(argb >> 24) * envelope);
+}
+
+ThunderBlock *FUN_00327b98(ThunderParams *params)
+{
+    u32 stripCount = params->strips;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonThunder.cpp", 1181);
+    ThunderBlock *block = static_cast<ThunderBlock *>(memAlloc(0x10000, 0x100, 0, stripCount * sizeof(ThunderEntry) + 4, 0x10, 1));
+    block->entries = block->storage;
+
+    if (params->segments < 4)
+        params->segments = 3;
+    if ((params->segments & 1) == 0)
+        params->segments++;
+
+    u32 color0 = params->color0;
+    u32 color1 = params->color1;
+    u32 color2 = params->color2;
+    s32 spanCells = params->segments + 1;
+    u32 rgb0 = color0 & 0xFFFFFF;
+    u32 rgb1 = color1 & 0xFFFFFF;
+    u32 rgb2 = color2 & 0xFFFFFF;
+    s32 fadeInEnd = (s32)(params->fadeIn * (f32)spanCells);
+    s32 fadeOutStart = (s32)(params->fadeOut * (f32)spanCells);
+    f32 envelope = stripCount != 0 ? 1.0f : 0.0f;
+
+    ThunderEntry *entry = block->entries;
+    for (u32 strip = 0; strip < stripCount; strip++) {
+        ThunderStrip *bolt = FUN_0024505c(params->segments, DAT_0047372c, 5, 0x48);
+        entry->strip = bolt;
+        u32 vertexCount = bolt->vertexValues / 5;
+        ThunderVertex *vertex = bolt->buffer->vertices;
+        for (u32 i = 0; i < vertexCount; i++) {
+            if (i == 0 || (i & 1) != 0) {
+                if ((s32)i < fadeInEnd)
+                    envelope = (f32)i / (f32)fadeInEnd;
+                else if ((s32)i <= fadeOutStart)
+                    envelope = 1.0f;
+                else
+                    envelope = (f32)(vertexCount - i - 1) / (f32)(vertexCount - fadeOutStart);
             }
-            else if ((int)temp_v5 <= temp_v6) {
-              temp_v18 = romwright_piece_4_4(temp_v10,temp_v10);
-            }
-            else {
-              temp_v16 = (float)VectorUnsignedToFloat(temp_v9 - temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v14 = (float)VectorUnsignedToFloat
-                                        ((temp_v9 - temp_v5) - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
-              temp_v18 = CONCAT44(temp_v10,temp_v14 / temp_v16);
-            }
-          }
-          temp_v15 = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v14 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v17 = (float)temp_v18;
-          temp_v16 = (float)VectorUnsignedToFloat(temp_v4 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-          temp_v5 = temp_v5 + 1;
-          temp_v10 = VectorFloatToUnsigned(temp_v15 * temp_v17,3);
-          temp_v12 = VectorFloatToUnsigned(temp_v14 * temp_v17,3);
-          temp_v13 = VectorFloatToUnsigned(temp_v16 * temp_v17,3);
-          *(char *)puVar5 = (char)temp_v8;
-          *(char *)((int)puVar5 + 1) = (char)(temp_v8 >> 8);
-          *(char *)((int)puVar5 + 2) = (char)(temp_v8 >> 0x10);
-          *(char *)((int)puVar5 + 3) = (char)temp_v10;
-          *(char *)(puVar5 + 1) = (char)temp_v19;
-          *(char *)((int)puVar5 + 5) = (char)(temp_v19 >> 8);
-          *(char *)((int)puVar5 + 6) = (char)(temp_v19 >> 0x10);
-          *(char *)((int)puVar5 + 7) = (char)temp_v12;
-          *(char *)(puVar5 + 2) = (char)temp_v7;
-          *(char *)((int)puVar5 + 9) = (char)(temp_v7 >> 8);
-          *(char *)((int)puVar5 + 10) = (char)(temp_v7 >> 0x10);
-          *(char *)((int)puVar5 + 0xb) = (char)temp_v13;
-          puVar5[3] = puVar5[1];
-          puVar5[4] = *puVar5;
-          puVar5 = puVar5 + 5;
-        } while (temp_v5 < temp_v9);
-      }
-      temp_v9 = temp_v20 + 1;
-      temp_v21[1] = temp_v20 * -4 - 1;
-      temp_v21 = temp_v21 + 3;
-      temp_v20 = temp_v9;
-    } while (temp_v9 < temp_v0);
-  }
-  return puVar2;
+            thunderColor(vertex->color0, rgb0, color0, envelope);
+            thunderColor(vertex->color1, rgb1, color1, envelope);
+            thunderColor(vertex->color2, rgb2, color2, envelope);
+            vertex->copy1 = *reinterpret_cast<u32 *>(vertex->color1);
+            vertex->copy0 = *reinterpret_cast<u32 *>(vertex->color0);
+            vertex++;
+        }
+        entry->marker = (s32)(strip * -4) - 1;
+        entry++;
+    }
+    return block;
 }
 
 } /* extern "C" */

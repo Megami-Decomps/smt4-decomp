@@ -1,186 +1,161 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018f69c` (_code @ 0x18f69c, 0x324 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: resolves a model's material and texture references against a resource set and rebuilds the texture commands of the materials that gained textures; written from the decompilation and the retail disassembly, stack frame layout and sampler copies not compared with retail */
+#include "shard/W6_W6Match7_MaterialTextures.h"
+#include "shard/S2GrTexture.h"
 #include "classes/Texture.h"
 #include <new>
 
-extern "C" {
+#define MATERIAL_ENTRY_COUNT 6
+#define NAME_NOT_FOUND 0xFFFF
+#define RESULT_MISSING_MATERIAL 0x80000010
+#define RESULT_MISSING_ENTRY_TABLE 0x80000020
+#define RESULT_MISSING_TEXTURE 0x80000008
 
-int gfxModelRebuildTextureCommands(int, int *, unsigned char [60], int, int, int, unsigned int, unsigned int);
-int FUN_001a7a20(...);
-int wstrlen(...);
-int libc_strcmp(int, int);
+/* One table of 0x10-byte entries; the name of an entry is at 0x0C. */
+struct MaterialEntry {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ const char *name;
+};
 
-/* stack frame of param_4: 13 slot(s), 52 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp114; /* 0x114: local_114 */
-    unsigned int sp120; /* 0x120: local_120 */
-    unsigned int sp124; /* 0x124: local_124 */
-    unsigned int sp128; /* 0x128: local_128 */
-} param_4_stack;
+struct MaterialEntryTable {
+    /* 0x00 */ MaterialEntry *entries;
+    /* 0x04 */ s32 count;
+};
 
-/* Supplied declaration required: _ZN2nn2gr3CTR7TextureC1Ev. */
-/* Supplied declaration required: gfxModelRebuildTextureCommands. */
-/* Supplied declaration required: FUN_001a7a20. */
-/* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: libc_strcmp. */
+/* A material definition: the resource it names and the entries it still has to bind. */
+struct MaterialDefinition {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ void *resource;
+    /* 0x00C */ u8 unk00C[0x80];
+    /* 0x08C */ MaterialEntry *entries[MATERIAL_ENTRY_COUNT];
+    /* 0x0A4 */ u8 unk0A4[0x30];
+    /* 0x0D4 */ const u16 *tableNames[MATERIAL_ENTRY_COUNT];
+    /* 0x0EC */ const char *entryNames[MATERIAL_ENTRY_COUNT];
+    /* 0x104 */ const u16 *name;
+};
 
+/* The resource set the model's names are resolved in: arrays plus their name tables. */
+struct ModelResourceSet {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ void **materials;
+    /* 0x1C */ u8 materialNames[8];
+    /* 0x24 */ NamedModelTexture **textures;
+    /* 0x28 */ u8 textureNames[8];
+    /* 0x30 */ MaterialEntryTable **entryTables;
+    /* 0x34 */ u8 entryNames[8];
+};
 
-unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
+struct ModelBindOwner {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ ModelResourceSet *set;
+};
 
+namespace {
+struct MaterialTextureState {
+    GrTexture texture;
+    GrTextureUnit procedural;
+};
+
+inline void applyTextureSampler(GrTextureUnit *unit, const NamedModelTexture *bound,
+                                const MaterialTextureSampler *sampler, s32 slot)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned char *puVar5;
-  int temp_v4;
-  unsigned char *puVar7;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int *piVar11;
-  int *piVar12;
-  int temp_v8;
-  int temp_v9;
-  int *temp_v10 [3];
-  unsigned char temp_v11 [60];
-  unsigned char temp_v12 [36];
-  unsigned char temp_v13 [72];
-  int *temp_v14;
-  unsigned int temp_v15;
-  unsigned char *temp_v16 [4];
-  unsigned char *temp_v17;
-  int temp_v18;
-  int iStack_30;
-  unsigned int temp_v19;
-  unsigned int uStack_28;
-  
-  temp_v15 = 0;
-  piVar12 = *(int **)(param_1 + 0x34);
-  temp_v14 = piVar12 + (unsigned int)*(unsigned short *)(param_1 + 0x38) * 0xb;
-  if (piVar12 != temp_v14) {
-    temp_v16[3] = temp_v12;
-    temp_v17 = temp_v13;
-    temp_v18 = param_1;
-    iStack_30 = param_2;
-    temp_v19 = param_3;
-    uStack_28 = param_4;
-    do {
-      temp_v9 = *piVar12;
-      if (temp_v9 != 0) {
-        if (*(int *)(temp_v9 + 8) == 0) {
-          temp_v0 = *(int *)(param_2 + 0x30);
-          temp_v6 = *(unsigned int *)(temp_v9 + 0x104);
-          temp_v1 = wstrlen(temp_v6);
-          temp_v0 = FUN_001a7a20(temp_v0 + 0x1c,temp_v6,temp_v1);
-          if (temp_v0 == 0xffff) {
-            temp_v15 = temp_v15 | 0x80000010;
-          }
-          else {
-            *(unsigned int *)(temp_v9 + 8) =
-                 *(unsigned int *)(*(int *)(*(int *)(param_2 + 0x30) + 0x18) + temp_v0 * 4);
-          }
-        }
-        temp_v0 = 0;
-        do {
-          temp_v8 = temp_v9 + temp_v0 * 4;
-          if (((*(int *)(temp_v8 + 0x8c) == 0) && (temp_v2 = *(int *)(temp_v8 + 0xd4), temp_v2 != 0)) &&
-             (*(int *)(temp_v8 + 0xec) != 0)) {
-            temp_v4 = *(int *)(param_2 + 0x30);
-            temp_v1 = wstrlen();
-            temp_v2 = FUN_001a7a20(temp_v4 + 0x34,temp_v2,temp_v1);
-            if (temp_v2 == 0xffff) {
-              temp_v15 = temp_v15 | 0x80000020;
+    if (bound == NULL)
+        return;
+    unit->format = bound->format;
+    unit->wrapT = sampler->wrapT;
+    unit->wrapS = sampler->wrapS;
+    unit->minFilter = sampler->filter;
+    unit->type = sampler->filterType;
+    unit->lodBias = sampler->lodBias;
+    unit->lodMin = sampler->lodMin;
+    unit->lodMax = bound->mipCount - 1;
+    unit->unk16[0] = sampler->borderColor[0];
+    unit->unk16[1] = sampler->borderColor[1];
+    unit->unk16[2] = sampler->borderColor[2];
+    unit->unk16[3] = sampler->borderColor[3];
+    if (slot < 3)
+        unit->targetView.targetMode = sampler->targetMode;
+}
+}
+
+extern "C" {
+u32 wstrlen(const u16 *text);
+s32 FUN_001a7a20(void *names, const void *name, u32 length);
+s32 libc_strcmp(const char *first, const char *second);
+void gfxModelRebuildTextureCommands(ModelTextureBindings *model, MaterialTextureCommands *commands,
+                                    MaterialTextureState *state, const MaterialTextureSampler *first,
+                                    const MaterialTextureSampler *second, const MaterialTextureSampler *third,
+                                    u8 *replacementCommands, const u8 *originalCommands);
+
+/* Binds every material's resource, entries and textures from `owner`'s resource set; returns the
+ * error bits of the names that could not be resolved. */
+u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replacementCommands,
+                 const u8 *originalCommands)
+{
+    u32 result = 0;
+    MaterialTextureBinding *end = model->bindings + model->bindingCount;
+    for (MaterialTextureBinding *binding = model->bindings; binding != end; ++binding) {
+        MaterialDefinition *material = static_cast<MaterialDefinition *>(binding->material);
+        if (material != NULL) {
+            if (material->resource == NULL) {
+                s32 index = FUN_001a7a20(owner->set->materialNames, material->name, wstrlen(material->name));
+                if (index == NAME_NOT_FOUND)
+                    result |= RESULT_MISSING_MATERIAL;
+                else
+                    material->resource = owner->set->materials[index];
             }
-            else {
-              temp_v4 = *(int *)(temp_v8 + 0xec);
-              piVar11 = *(int **)(*(int *)(*(int *)(param_2 + 0x30) + 0x30) + temp_v2 * 4);
-              if (temp_v4 != 0) {
-                temp_v2 = *piVar11;
-                temp_v7 = temp_v2 + piVar11[1] * 0x10;
-                for (; temp_v2 != temp_v7; temp_v2 = temp_v2 + 0x10) {
-                  temp_v3 = *(int *)(temp_v2 + 0xc);
-                  libc_strcmp(temp_v3,temp_v4);
-                  if (temp_v3 == 0) break;
+            for (s32 slot = 0; slot < MATERIAL_ENTRY_COUNT; ++slot) {
+                if (material->entries[slot] == NULL && material->tableNames[slot] != NULL
+                    && material->entryNames[slot] != NULL) {
+                    s32 tableIndex = FUN_001a7a20(owner->set->entryNames, material->tableNames[slot],
+                                                  wstrlen(material->tableNames[slot]));
+                    if (tableIndex == NAME_NOT_FOUND) {
+                        result |= RESULT_MISSING_ENTRY_TABLE;
+                    } else {
+                        MaterialEntryTable *table = owner->set->entryTables[tableIndex];
+                        MaterialEntry *entry = table->entries;
+                        MaterialEntry *tableEnd = table->entries + table->count;
+                        for (; entry != tableEnd; ++entry) {
+                            if (libc_strcmp(entry->name, material->entryNames[slot]) == 0)
+                                break;
+                        }
+                        if (entry == table->entries + table->count)
+                            entry = NULL;
+                        material->entries[slot] = entry;
+                    }
                 }
-                if (temp_v2 == *piVar11 + piVar11[1] * 0x10) {
-                  temp_v2 = 0;
-                }
-              }
-              else {
-                temp_v2 = 0;
-              }
-              *(int *)(temp_v8 + 0x8c) = temp_v2;
             }
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 6);
-      }
-      (int)(new ((void *)(temp_v11)) nn::gr::CTR::Texture());
-      temp_v16[0] = temp_v11;
-      temp_v16[1] = temp_v16[3];
-      temp_v9 = 0;
-      temp_v16[2] = temp_v17;
-      temp_v5 = 0;
-      temp_v10[0] = piVar12 + 1;
-      temp_v10[1] = piVar12 + 2;
-      temp_v10[2] = piVar12 + 3;
-      do {
-        piVar11 = temp_v10[temp_v5];
-        if ((*piVar11 == 0) && (temp_v0 = piVar12[temp_v5 + 7], temp_v0 != 0)) {
-          temp_v8 = *(int *)(param_2 + 0x30);
-          temp_v1 = wstrlen();
-          temp_v0 = FUN_001a7a20(temp_v8 + 0x28,temp_v0,temp_v1);
-          if (temp_v0 == 0xffff) {
-            temp_v15 = temp_v15 | 0x80000008;
-          }
-          else {
-            temp_v9 = temp_v9 + 1;
-            *piVar11 = *(int *)(*(int *)(*(int *)(param_2 + 0x30) + 0x24) + temp_v0 * 4);
-          }
         }
-        temp_v0 = *piVar11;
-        puVar7 = (unsigned char *)(piVar12[6] + temp_v5 * 0x10);
-        puVar5 = temp_v16[temp_v5];
-        if (temp_v0 != 0) {
-          puVar5[8] = *(unsigned char *)(temp_v0 + 0x18);
-          puVar5[10] = puVar7[1];
-          puVar5[9] = puVar7[2];
-          puVar5[0xb] = puVar7[3];
-          puVar5[0xc] = puVar7[4];
-          *(unsigned int *)(puVar5 + 0x10) = *(unsigned int *)(puVar7 + 8);
-          puVar5[0x14] = puVar7[5];
-          puVar5[0x15] = *(char *)(temp_v0 + 0x19) - '\x01';
-          puVar5[0x16] = puVar7[0xc];
-          puVar5[0x17] = puVar7[0xd];
-          puVar5[0x18] = puVar7[0xe];
-          puVar5[0x19] = puVar7[0xf];
-          if (temp_v5 < 3) {
-            puVar5[0x1c] = *puVar7;
-          }
+
+        MaterialTextureState state;
+        (MaterialTextureState *)(new ((void *)(&state)) nn::gr::CTR::Texture());
+        GrTextureUnit *units[3] = {
+            reinterpret_cast<GrTextureUnit *>(state.texture.unk00),
+            reinterpret_cast<GrTextureUnit *>(state.texture.unit3c),
+            &state.texture.unit
+        };
+        NamedModelTexture **references[3] = { &binding->texture0, &binding->texture1, &binding->texture2 };
+        s32 added = 0;
+        for (s32 slot = 0; slot < 3; ++slot) {
+            NamedModelTexture *&bound = *references[slot];
+            if (bound == NULL && binding->textureNames[slot] != NULL) {
+                s32 index = FUN_001a7a20(owner->set->textureNames, binding->textureNames[slot],
+                                         wstrlen(reinterpret_cast<const u16 *>(binding->textureNames[slot])));
+                if (index == NAME_NOT_FOUND) {
+                    result |= RESULT_MISSING_TEXTURE;
+                } else {
+                    ++added;
+                    bound = owner->set->textures[index];
+                }
+            }
+            applyTextureSampler(units[slot], bound, &binding->samplers[slot], slot);
         }
-        temp_v5 = temp_v5 + 1;
-      } while ((int)temp_v5 < 3);
-      if (temp_v9 != 0) {
-        temp_v9 = piVar12[6];
-        gfxModelRebuildTextureCommands(temp_v18,piVar12 + 4,temp_v11,temp_v9,temp_v9 + 0x10,temp_v9 + 0x20,temp_v19,
-                     uStack_28);
-      }
-      piVar12 = piVar12 + 0xb;
-    } while (piVar12 != temp_v14);
-  }
-  return temp_v15;
+        if (added != 0) {
+            gfxModelRebuildTextureCommands(model, &binding->commands, &state, &binding->samplers[0],
+                                           &binding->samplers[1], &binding->samplers[2],
+                                           replacementCommands, originalCommands);
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

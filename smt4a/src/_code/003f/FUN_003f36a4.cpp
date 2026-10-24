@@ -1,170 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f36a4` (_code @ 0x3f36a4, 0x264 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: skill inheritance pick; retail's candidate scan loops and the u8 rank arithmetic schedule differently */
+#include "common.h"
 
-extern "C" {
-
-int randRange(...);
-int FUN_00184310(void);
-int findSkillMetadataById(void);
-int FUN_003f39ac(void);
-
-typedef struct fn_003f36a4_arg2 fn_003f36a4_arg2;
-struct fn_003f36a4_arg2 {
-    unsigned char pad_0x0[0x52];
-    ushort field_0x52; /* +0x52 */
-    unsigned char pad_0x54[0x2];
-    ushort field_0x56; /* +0x56 */
-    unsigned char pad_0x58[0x2];
-    ushort field_0x5a; /* +0x5a */
-    unsigned char pad_0x5c[0x2];
-    ushort field_0x5e; /* +0x5e */
-    unsigned char pad_0x60[0x2];
-    ushort field_0x62; /* +0x62 */
-    unsigned char pad_0x64[0x2];
-    ushort field_0x66; /* +0x66 */
-    unsigned char pad_0x68[0x2];
-    ushort field_0x6a; /* +0x6a */
-    unsigned char pad_0x6c[0x2];
-    ushort field_0x6e; /* +0x6e */
+/* A skill record; the byte at +3 packs the learnable flag (0x80) and the skill rank (low 5 bits). */
+struct SkillMeta {
+    /* 0x00 */ s16 id;
+    /* 0x02 */ u8 unk02;
+    /* 0x03 */ u8 rankFlags;
 };
 
-/* stack frame of param_3: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_3_stack;
+/* Chance table of one rank: cumulative-free percentages of landing on rank-2 .. rank+2. */
+struct SkillRankChances {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 percent[5];
+};
 
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-/* Supplied declaration required: randRange. */
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: findSkillMetadataById. */
-extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003f39ac. */
+/* The unit's skill slots (every second halfword). */
+struct UnitSkillSlots {
+    /* 0x00 */ u8 unk00[0x52];
+    /* 0x52 */ u16 slot0;
+    /* 0x54 */ u16 pad54;
+    /* 0x56 */ u16 slot1;
+    /* 0x58 */ u16 pad58;
+    /* 0x5A */ u16 slot2;
+    /* 0x5C */ u16 pad5C;
+    /* 0x5E */ u16 slot3;
+    /* 0x60 */ u16 pad60;
+    /* 0x62 */ u16 slot4;
+    /* 0x64 */ u16 pad64;
+    /* 0x66 */ u16 slot5;
+    /* 0x68 */ u16 pad68;
+    /* 0x6A */ u16 slot6;
+    /* 0x6C */ u16 pad6C;
+    /* 0x6E */ u16 slot7;
+};
 
+extern "C" {
+u32 randRange(u32 maximum);
+UnitSkillSlots *FUN_00184310(void *unit);
+SkillMeta *findSkillMetadataById(u32 id);
+SkillRankChances *FUN_003f39ac(u32 rank);
+s32 gameDataFlagTestBit(u32 flag);
 
-short FUN_003f36a4(unsigned int *param_1,int param_2,fn_003f36a4_arg2 *param_3)
+#define SKILL_ID_COUNT 0x1F5
+#define SKILL_KNOWN_COUNT 16
 
+/* Picks a random learnable skill of a rank derived from the skill at `index` of the source
+ * list: the rank shifts by -2..+2 according to a percentage table (+1 with flag 5 set). Skills
+ * the unit already knows are skipped. Returns the skill id or 0. */
+s16 FUN_003f36a4(const u16 *sourceSkills, s32 index, void *unit)
 {
-/* irregular: 2 goto(s); 4 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  short *psVar6;
-  int temp_v5;
-  unsigned char temp_v6;
-  short *psVar9;
-  unsigned char temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  
-  if (param_2 < 0) {
-    return 0;
-  }
-  temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + param_2 * 2);
-  findSkillMetadataById();
-  temp_v0 = *(unsigned char *)(temp_v1 + 3);
-  temp_v2 = temp_v0 & 0x1f;
-  temp_v1 = temp_v2;
-  FUN_003f39ac();
-  temp_v7 = 0;
-  temp_v6 = 0;
-  temp_v3 = randRange(99);
-  do {
-    temp_v6 = *(unsigned char *)(temp_v1 + 1 + temp_v7) + temp_v6;
-    if (temp_v3 < temp_v6) break;
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 5);
-  if (temp_v7 != 0) {
-    if (temp_v7 != 1) {
-      if (temp_v7 == 3) {
-        temp_v2 = (temp_v2 + 1) & 0xff;
-      }
-      else if (temp_v7 == 4) {
-        temp_v2 = (temp_v2 + 2) & 0xff;
-      }
-    }
-    else if ((temp_v0 & 0x1f) != 0) {
-      temp_v2 = (temp_v2 - 1) & 0xff;
-    }
-  }
-  else if (temp_v2 >= 2) {
-    temp_v2 = (temp_v2 - 2) & 0xff;
-  }
-  temp_v4 = gameDataFlagTestBit(5);
-  if (temp_v4 != 0) {
-    temp_v2 = (temp_v2 + 1) & 0xff;
-  }
-  temp_v12 = 0;
-  temp_v13 = 0;
-  temp_v14 = 0;
-  temp_v15 = 0;
-  temp_v8 = *param_1;
-  temp_v9 = param_1[1];
-  temp_v10 = param_1[2];
-  temp_v11 = param_1[3];
-  FUN_00184310();
-  temp_v4 = 0;
-  psVar9 = (short *)0x1;
-  temp_v12 = romwright_piece_2_2(param_3->field_0x56,param_3->field_0x52);
-  temp_v13 = romwright_piece_2_2(param_3->field_0x5e,param_3->field_0x5a);
-  temp_v14 = romwright_piece_2_2(param_3->field_0x66,param_3->field_0x62);
-  temp_v15 = romwright_piece_2_2(param_3->field_0x6e,param_3->field_0x6a);
-  do {
-    psVar6 = psVar9;
-    findSkillMetadataById();
-    if (((psVar6 != (short *)0x0) && ((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0)) &&
-       ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)) {
-      temp_v5 = 0;
-      do {
-        if (*(short *)((int)&temp_v8 + temp_v5 * 2) == *psVar6) goto LAB_003f384c;
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x10);
-      temp_v4 = temp_v4 + 1;
-    }
-LAB_003f384c:
-    psVar9 = (short *)(((int)psVar9 + 1U) & 0xffff);
-  } while (psVar9 < (short *)0x1f5);
-  if (temp_v4 != 0) {
-    temp_v4 = randRange((temp_v4 - 1U) & 0xffff);
-    psVar9 = (short *)0x1;
+    if (index < 0)
+        return 0;
+
+    u32 rank = findSkillMetadataById(sourceSkills[index])->rankFlags & 0x1F;
+    SkillRankChances *chances = FUN_003f39ac(rank);
+    u8 step = 0;
+    u8 cumulative = 0;
+    u32 roll = randRange(99);
     do {
-      psVar6 = psVar9;
-      findSkillMetadataById();
-      if (((psVar6 != (short *)0x0) && ((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0)) &&
-         ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)) {
-        temp_v5 = 0;
-        do {
-          if (*(short *)((int)&temp_v8 + temp_v5 * 2) == *psVar6) goto LAB_003f38d0;
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 0x10);
-        temp_v4 = temp_v4 - 1;
-        if (temp_v4 == 0) {
-          return *psVar6;
+        cumulative = chances->percent[step] + cumulative;
+        if (roll < cumulative)
+            break;
+        step++;
+    } while (step < 5);
+
+    if (step == 0) {
+        if (rank >= 2)
+            rank = (rank - 2) & 0xFF;
+    } else if (step == 1) {
+        if (rank != 0)
+            rank = (rank - 1) & 0xFF;
+    } else if (step == 3) {
+        rank = (rank + 1) & 0xFF;
+    } else if (step == 4) {
+        rank = (rank + 2) & 0xFF;
+    }
+    if (gameDataFlagTestBit(5) != 0)
+        rank = (rank + 1) & 0xFF;
+
+    u16 known[SKILL_KNOWN_COUNT];
+    for (s32 i = 0; i < 8; i++)
+        known[i] = sourceSkills[i];
+    UnitSkillSlots *slots = FUN_00184310(unit);
+    known[8] = slots->slot0;
+    known[9] = slots->slot1;
+    known[10] = slots->slot2;
+    known[11] = slots->slot3;
+    known[12] = slots->slot4;
+    known[13] = slots->slot5;
+    known[14] = slots->slot6;
+    known[15] = slots->slot7;
+
+    s32 candidates = 0;
+    for (u16 id = 1; id < SKILL_ID_COUNT; id++) {
+        SkillMeta *meta = findSkillMetadataById(id);
+        if (meta != NULL && (meta->rankFlags & 0x80) && (meta->rankFlags & 0x1F) == rank) {
+            s32 i;
+            for (i = 0; i < SKILL_KNOWN_COUNT; i++) {
+                if (known[i] == meta->id)
+                    break;
+            }
+            if (i == SKILL_KNOWN_COUNT)
+                candidates++;
         }
-      }
-LAB_003f38d0:
-      psVar9 = (short *)(((int)psVar9 + 1U) & 0xffff);
-    } while (psVar9 < (short *)0x1f5);
-  }
-  return 0;
+    }
+    if (candidates != 0) {
+        s32 pick = randRange((candidates - 1) & 0xFFFF);
+        for (u16 id = 1; id < SKILL_ID_COUNT; id++) {
+            SkillMeta *meta = findSkillMetadataById(id);
+            if (meta != NULL && (meta->rankFlags & 0x80) && (meta->rankFlags & 0x1F) == rank) {
+                s32 i;
+                for (i = 0; i < SKILL_KNOWN_COUNT; i++) {
+                    if (known[i] == meta->id)
+                        break;
+                }
+                if (i == SKILL_KNOWN_COUNT) {
+                    pick--;
+                    if (pick == 0)
+                        return meta->id;
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

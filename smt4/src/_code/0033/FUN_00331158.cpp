@@ -1,177 +1,170 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331158` (_code @ 0x331158, 0x334 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (211 rows against 209, 32 diff lines): same states, calls, constants and event ids; retail loads 0x100016D into r8 (CANCEL derived as r8+1 in r9) where ours loads 0x100016E and derives the other by subtraction, and shares one `eventQueueAddUniqueIfValid; return` tail placed right after the select path, which our separate returns do not merge */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef unsigned short u16;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
 
 extern "C" {
 
-int guestWinRequestClose(void);
-int FUN_0028fc60(void);
-int campReleaseScreenTouchRegions(...);
-int dataTable15GetUnlockedEntryId(int, unsigned int);
-int FUN_00299900(...);
-int FUN_00299bc4(...);
-int FUN_0029cc44(...);
-int FUN_0029e328(int);
-int sortMenuCreate(int, int);
-int FUN_0029ee6c(int, int);
-int FUN_0029efd8(int, int);
-int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [4], int, int);
-int eventQueueAddUniqueIfValid(void);
-int timerStart(...);
-int FUN_002c1658(...);
+#define CAMP_LIST_A 11
+#define CAMP_LIST_B 12
+#define CAMP_LIST_C 13
 
-/* stack frame of param_1: 5 slot(s), 17 byte(s) */
-typedef struct {
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
+#define CAMP_EVENT_SELECT 0x100016D
+#define CAMP_EVENT_CANCEL 0x100016E
 
-extern int g_camp; /* 0x43da90 */
+struct CampList {
+    u8 data[0x64];
+};
 
-/* Supplied declaration required: guestWinRequestClose. */
-/* Supplied declaration required: FUN_0028fc60. */
-/* Supplied declaration required: campReleaseScreenTouchRegions. */
-/* Supplied declaration required: dataTable15GetUnlockedEntryId. */
-/* Supplied declaration required: FUN_00299900. */
-/* Supplied declaration required: FUN_00299bc4. */
-/* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029e328. */
-/* Supplied declaration required: sortMenuCreate. */
-extern unsigned int objectPartRunUnlessLocked(int);
-/* Supplied declaration required: FUN_0029ee6c. */
-extern int FUN_0029efa8(int);
-extern int FUN_0029efc0(int);
-/* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-extern unsigned char buttonHelpGetStatus(void);
-/* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: timerStart. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c1658. */
+/* Camp work (observed fields only). */
+struct CampWork {
+    u8 pad00[0x14];
+    u32 substep;               /* 0x14 */
+    u32 state;                 /* 0x18 */
+    s32 phase;                 /* 0x1C */
+    u32 returnState;           /* 0x20: state to come back to */
+    u32 previousState;         /* 0x24 */
+    u8 pad28[4];
+    u32 selectedId;            /* 0x2C */
+    u8 pad30[1];
+    u8 helpStatus;             /* 0x31 */
+    u8 pad32[2];
+    u8 headPart[0x98 - 0x34];  /* 0x34: object part */
+    s8 category;               /* 0x98 */
+    u8 pad99[0xB0 - 0x99];
+    CampList listA;            /* 0x0B0 */
+    CampList listB;            /* 0x114 */
+    CampList listC;            /* 0x178 */
+    u8 pad1DC[0x6D4 - 0x1DC];
+    u8 timer[4];               /* 0x6D4 */
+    u8 pad6D8[0xE02 - 0x6D8];
+    s16 scrollTop;             /* 0xE02 */
+    s16 scrollLines;           /* 0xE04 */
+    s16 scrollSpacing;         /* 0xE06 */
+    u8 padE08[4];
+    u8 scrollState[0x147C - 0xE0C];  /* 0xE0C */
+    u16 idTable[1];            /* 0x147C: ids indexed by list position */
+};
 
+extern CampWork *g_campWork;   /* 0x43da90 */
 
-void FUN_00331158(int param_1)
+s32 guestWinRequestClose(void);
+s32 FUN_0028fc60(u32 id);
+void campReleaseScreenTouchRegions(CampList *list, s32 flag);
+s32 dataTable15GetUnlockedEntryId(s32 category, u32 part);
+void FUN_00299900(s32 arg);
+void FUN_00299bc4(CampList *list, s32 flag);
+void FUN_0029cc44(s32 arg);
+void FUN_0029e328(s32 id);
+void sortMenuCreate(s32 id, s32 arg);
+void FUN_0029ee6c(s32 a, u32 color);
+s32 FUN_0029efa8(CampList *list);
+s32 FUN_0029efc0(CampList *list);
+s32 FUN_0029efd8(CampList *list, s32 flag);
+s32 uiScrollHandleActionsOrTouch(CampList *list, u32 text, u8 *state, s32 top, s32 lines, s32 spacing, s8 *touched, s32 a, s32 b);
+void eventQueueAddUniqueIfValid(u32 event);
+void timerStart(u8 *timer, s32 kind, s32 arg);
+s32 FUN_002c1658(s32 button, s32 mode);
+u32 objectPartRunUnlessLocked(u8 *part);
+u8 buttonHelpGetStatus(void);
+u32 FUN_002bf4f8(u32 a, u32 b);
 
+/* Switches the camp to `state`, remembering the previous one. */
+static void campChangeState(u32 state)
 {
-/* irregular: 15 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int *puVar7;
-  int temp_v6;
-  char temp_v7 [4];
-  
-  temp_v0 = g_camp;
-  temp_v6 = 0;
-  if (param_1 == 0xb) {
-    temp_v6 = g_camp + 0xb0;
-  }
-  else if (param_1 == 0xc) {
-    temp_v6 = g_camp + 0x114;
-  }
-  else if (param_1 == 0xd) {
-    temp_v6 = g_camp + 0x178;
-  }
-  if (*(int *)(g_camp + 0x1c) != 0) {
-    if (*(int *)(g_camp + 0x1c) == 1) {
-      temp_v7[0] = '\0';
-      temp_v2 = FUN_002bf4f8(0x1d,0x56d);
-      temp_v3 = temp_v6;
-      uiScrollHandleActionsOrTouch(temp_v6,temp_v2,temp_v0 + 0xe0c,(int)*(short *)(temp_v0 + 0xe02),
-                   (int)*(short *)(temp_v0 + 0xe04),(int)*(short *)(temp_v0 + 0xe06),temp_v7,0,1);
-      if ((temp_v3 != 0) || (temp_v3 = temp_v6, FUN_0029efd8(temp_v6,1), temp_v3 != 0)) {
-        temp_v2 = objectPartRunUnlessLocked(temp_v0 + 0x34);
-        dataTable15GetUnlockedEntryId((int)*(char *)(temp_v0 + 0x98),temp_v2);
-        FUN_00299900();
-        return;
-      }
-      temp_v3 = 0;
-      FUN_002c1658(0,1);
-      if ((temp_v3 == 0 && temp_v7[0] == '\0') || (param_1 != 0xb)) {
-        temp_v3 = 1;
-        FUN_002c1658();
-        if (temp_v3 != 0) {
-          FUN_00299900(0);
-          timerStart(temp_v0 + 0x6d4,3,0);
-          *(unsigned int *)(temp_v0 + 0x20) = 6;
-          temp_v0 = g_camp;
-          puVar7 = (unsigned int *)(g_camp + 0x18);
-          *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
-          *puVar7 = 5;
-          *(unsigned int *)(temp_v0 + 0x1c) = 0;
-          *(unsigned int *)(temp_v0 + 0x14) = 0;
-          campReleaseScreenTouchRegions(temp_v6,1);
-        }
-        else {
-          temp_v6 = 9;
-          FUN_002c1658(9,1);
-          if (temp_v6 == 0) {
-            return;
-          }
-          if (param_1 == 0xc) {
-            return;
-          }
-          if (param_1 != 0xb) {
-            if (param_1 == 0xd) {
-              sortMenuCreate(4,0);
-              FUN_0029e328(0x21);
-              FUN_0029e328(0x10);
-              FUN_0029e328(3);
-            }
-          }
-          else {
-            sortMenuCreate(3,0);
-            FUN_0029e328(0xc);
-            FUN_0029e328(0x10);
-            FUN_0029e328(3);
-          }
-          FUN_0029ee6c(0,0x323232ff);
-          temp_v1 = buttonHelpGetStatus();
-          *(unsigned char *)(temp_v0 + 0x31) = temp_v1;
-          temp_v0 = g_camp;
-          puVar7 = (unsigned int *)(g_camp + 0x18);
-          *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
-          *puVar7 = 0x28;
-          *(unsigned int *)(temp_v0 + 0x1c) = 0;
-          *(unsigned int *)(temp_v0 + 0x14) = 0;
-        }
-      }
-      else {
-        temp_v3 = FUN_0029efc0(temp_v6);
-        temp_v4 = FUN_0029efa8(temp_v6);
-        temp_v3 = temp_v0 + (temp_v4 + temp_v3) * 2;
-        temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 0x147c);
-        FUN_0028fc60();
-        if (temp_v5 != 0) {
-          *(unsigned int *)(temp_v0 + 0x2c) = (unsigned int)*(unsigned short *)(temp_v3 + 0x147c);
-          timerStart(temp_v0 + 0x6d4,3,0);
-          *(unsigned int *)(temp_v0 + 0x20) = 0xb;
-          temp_v0 = g_camp;
-          puVar7 = (unsigned int *)(g_camp + 0x18);
-          *(unsigned int *)(g_camp + 0x24) = *(unsigned int *)(g_camp + 0x18);
-          *puVar7 = 5;
-          *(unsigned int *)(temp_v0 + 0x1c) = 0;
-          *(unsigned int *)(temp_v0 + 0x14) = 0;
-          campReleaseScreenTouchRegions(temp_v6,1);
-          guestWinRequestClose();
-          FUN_0029cc44(1);
-        }
-      }
-      eventQueueAddUniqueIfValid();
-      return;
+    CampWork *camp = g_campWork;
+
+    camp->previousState = camp->state;
+    camp->state = state;
+    camp->phase = 0;
+    camp->substep = 0;
+}
+
+/* Input handling for one of the three camp list screens (`kind` 11, 12 or 13). */
+void FUN_00331158(s32 kind)
+{
+    CampWork *camp = g_campWork;
+    CampList *list = 0;
+
+    if (kind == CAMP_LIST_A) {
+        list = &camp->listA;
+    } else if (kind == CAMP_LIST_B) {
+        list = &camp->listB;
+    } else if (kind == CAMP_LIST_C) {
+        list = &camp->listC;
     }
-  }
-  else {
-    FUN_00299bc4(temp_v6,1);
-    *(int *)(temp_v0 + 0x1c) = *(int *)(temp_v0 + 0x1c) + 1;
-  }
-  return;
+
+    if (camp->phase == 0) {
+        FUN_00299bc4(list, 1);
+        camp->phase = camp->phase + 1;
+        return;
+    }
+    if (camp->phase != 1) {
+        return;
+    }
+
+    s8 touched = 0;
+    u32 text = FUN_002bf4f8(0x1D, 0x56D);
+    s32 confirmed = uiScrollHandleActionsOrTouch(list, text, camp->scrollState, camp->scrollTop, camp->scrollLines,
+                                                 camp->scrollSpacing, &touched, 0, 1);
+    if (confirmed != 0 || FUN_0029efd8(list, 1) != 0) {
+        u32 part = objectPartRunUnlessLocked(camp->headPart);
+        FUN_00299900(dataTable15GetUnlockedEntryId(camp->category, part));
+        return;
+    }
+
+    if ((FUN_002c1658(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
+        s32 index = FUN_0029efc0(list) + FUN_0029efa8(list);
+        u32 id = camp->idTable[index];
+        if (FUN_0028fc60(id) == 0) {
+            eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
+            return;
+        }
+        camp->selectedId = camp->idTable[index];
+        timerStart(camp->timer, 3, 0);
+        camp->returnState = 11;
+        campChangeState(5);
+        campReleaseScreenTouchRegions(list, 1);
+        guestWinRequestClose();
+        FUN_0029cc44(1);
+        eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
+        return;
+    }
+
+    if (FUN_002c1658(1, 1) != 0) {
+        FUN_00299900(0);
+        timerStart(camp->timer, 3, 0);
+        camp->returnState = 6;
+        campChangeState(5);
+        campReleaseScreenTouchRegions(list, 1);
+        eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
+        return;
+    }
+
+    if (FUN_002c1658(9, 1) == 0) {
+        return;
+    }
+    if (kind == CAMP_LIST_B) {
+        return;
+    }
+    if (kind == CAMP_LIST_A) {
+        sortMenuCreate(3, 0);
+        FUN_0029e328(12);
+        FUN_0029e328(16);
+        FUN_0029e328(3);
+    } else if (kind == CAMP_LIST_C) {
+        sortMenuCreate(4, 0);
+        FUN_0029e328(33);
+        FUN_0029e328(16);
+        FUN_0029e328(3);
+    }
+    FUN_0029ee6c(0, 0x323232FF);
+    camp->helpStatus = buttonHelpGetStatus();
+    campChangeState(40);
+    eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
 }
 
 } /* extern "C" */

@@ -1,193 +1,161 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cdf2c` (_code @ 0x2cdf2c, 0x39c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the item merge loops and the passive-bonus loop are unrolled/scheduled differently from retail (207 vs 232 rows); the spoils application is the same. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00203640(int);
-int FUN_00269dc8(void);
-int bgmReleaseStopped(void);
-int FUN_0027581c(void);
-int passiveSkillLookupRecord(void);
-void bgmRequestSelectedChannelFade(unsigned int frames);
-int FUN_00296774(int, int);
-int gameCounterAddSaturating(int, int);
-int soundChannelStopAll(int);
-int soundChannelRequestIfEnabled(int, int);
-int gameGetPlayerData(void);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+/* The battle spoils (only the fields read here). */
+typedef struct BattleSpoils {
+    /* 0x00 */ s32 itemId[6];
+    /* 0x18 */ s32 itemCount[6];
+    /* 0x30 */ s32 gold;
+    /* 0x34 */ s32 experience;
+    /* 0x38 */ u16 battleId;
+} BattleSpoils;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
+/* The result screen block (only the fields written here, by their offsets). */
+typedef struct ResultBlock {
+    /* 0x0000 */ u8 unk0000[0x35B4];
+    /* 0x35B4 */ s32 totalExperience;
+    /* 0x35B8 */ s32 shareBySlot[24];
+    /* 0x3618 */ s32 gainedItemId[6];
+    /* 0x3630 */ s32 gainedItemCount[6];
+    /* 0x3648 */ u8 unk3648[8];
+    /* 0x3650 */ s32 totalGold;
+} ResultBlock;
 
-extern int g_result; /* 0x44dc20 */
+/* The party slot table (only the fields read here). */
+typedef struct PartySlots {
+    u8 unk0000[0x90F0];
+    s8 unitIndex[24];
+    s8 leaders[3];                   /* 0x9108: the active front-line members */
+} PartySlots;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00203640. */
-/* Supplied declaration required: FUN_00269dc8. */
-/* Supplied declaration required: bgmReleaseStopped. */
-/* Supplied declaration required: FUN_0027581c. */
-/* Supplied declaration required: passiveSkillLookupRecord. */
-extern int playerPadTestBit(unsigned int);
-/* Supplied declaration required: FUN_00296774. */
-extern int FUN_00298f88(unsigned short);
-/* Supplied declaration required: gameCounterAddSaturating. */
-/* Supplied declaration required: soundChannelStopAll. */
-extern int flagWordTestBit(int, unsigned int);
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: gameGetPlayerData. */
-extern int lmapMainIsRunning(void);
-extern int FUN_0033361c(void);
-extern int mapMainIsBusy(void);
+typedef struct SpoilsUnit {
+    u8 unk00[0x34];
+    u16 skills[8];
+    u8 unk44[6];
+    u8 level;                        /* 0x4A: selects the share slot */
+} SpoilsUnit;
 
+typedef struct PassiveRecord {
+    u8 unk00[0x2F];
+    u8 percent;                      /* the experience bonus percent */
+} PassiveRecord;
 
-/* WARNING: Removing unreachable block (ram,0x002cdff4) */
-/* WARNING: Removing unreachable block (ram,0x002ce000) */
-/* WARNING: Removing unreachable block (ram,0x002ce004) */
+extern ResultBlock *g_result;
 
-void FUN_002cdf2c(int param_1)
+PartySlots *gameGetSlotTable(void);
+void *gameGetPlayerData(void);
+void FUN_00296774(ResultBlock *result, s32 arg);
+void FUN_00269dc8(void);
+void FUN_00203640(u16 battleId);
+s32 mapMainIsBusy(void);
+s32 lmapMainIsRunning(void);
+void bgmReleaseStopped(void);
+void soundChannelStopAll(s32 channel);
+void FUN_0027581c(void);
+s32 FUN_0033361c(void);
+void bgmRequestSelectedChannelFade(u32 frames);
+void soundChannelRequestIfEnabled(u32 id, s32 arg);
+s32 FUN_00298f88(u16 battleId);
+void gameCounterAddSaturating(s32 counter, s32 amount);
+s32 playerPadTestBit(u32 bit);
+SpoilsUnit *gameGetUnitRecord(void);
+s32 flagWordTestBit(SpoilsUnit *unit, u32 bit);
+PassiveRecord *passiveSkillLookupRecord(u32 skill);
 
+/* Applies a finished battle's spoils to the result screen: stops the battle music, adds gold and
+ * the items (merging stacks), counts the battle, adds the experience and shares it out to the
+ * party, scaled by each member's passive experience bonuses (members outside the front line
+ * get 30%). */
+void FUN_002cdf2c(BattleSpoils *spoils)
 {
-/* irregular: irregular input(s): in_fpscr; 16 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int temp_v13;
-  int temp_v14;
-  unsigned int in_fpscr;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  unsigned long long temp_v18;
-  unsigned long long temp_v19;
-  
-  temp_v2 = g_result;
-  temp_v3 = gameGetSlotTable();
-  gameGetPlayerData();
-  FUN_00296774(temp_v2,0);
-  FUN_00269dc8();
-  FUN_00203640(*(unsigned short *)(param_1 + 0x38));
-  temp_v4 = mapMainIsBusy();
-  if ((temp_v4 != 0) || (temp_v4 = lmapMainIsRunning(), temp_v4 != 0)) {
-    bgmReleaseStopped();
-    soundChannelStopAll(0xf);
-    FUN_0027581c();
-  }
-  else {
-    temp_v4 = FUN_0033361c();
-    if (temp_v4 == 0) {
-      bgmRequestSelectedChannelFade(0x1e);
+    ResultBlock *result = g_result;
+    PartySlots *slots = gameGetSlotTable();
+
+    gameGetPlayerData();
+    FUN_00296774(result, 0);
+    FUN_00269dc8();
+    FUN_00203640(spoils->battleId);
+    if (mapMainIsBusy() != 0 || lmapMainIsRunning() != 0) {
+        bgmReleaseStopped();
+        soundChannelStopAll(15);
+        FUN_0027581c();
+    } else if (FUN_0033361c() == 0) {
+        bgmRequestSelectedChannelFade(30);
     }
-  }
-  soundChannelRequestIfEnabled(0x100003c,0);
-  temp_v4 = *(int *)(param_1 + 0x30);
-  temp_v11 = 0;
-  temp_v14 = 0;
-  *(int *)(temp_v2 + 0x3650) = *(int *)(temp_v2 + 0x3650) + temp_v4;
-  do {
-    temp_v8 = *(int *)(param_1 + temp_v14 * 4);
-    if (temp_v8 != 0) {
-      temp_v13 = param_1 + temp_v14 * 4;
-      temp_v12 = *(int *)(temp_v13 + 0x18);
-      if (temp_v12 != 0) {
-        temp_v5 = 0;
-        do {
-          temp_v9 = temp_v2 + temp_v5 * 4;
-          temp_v10 = *(int *)(temp_v9 + 0x3618);
-          if (temp_v10 == temp_v8) {
-            piVar7 = (int *)(temp_v2 + temp_v5 * 4 + 0x3630);
-            *piVar7 = *piVar7 + temp_v12;
-            break;
-          }
-          if (temp_v10 == 0) {
-            *(int *)(temp_v2 + temp_v5 * 4 + 0x3618) = temp_v8;
-            *(int *)(temp_v9 + 0x3630) = temp_v12;
-            break;
-          }
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 6);
-        temp_v11 = temp_v11 + *(int *)(temp_v13 + 0x18);
-      }
-    }
-    temp_v14 = temp_v14 + 1;
-    if (temp_v14 >= 6) {
-      temp_v14 = FUN_00298f88(*(unsigned short *)(param_1 + 0x38));
-      if (temp_v14 == 0) {
-        gameCounterAddSaturating(0x22,1);
-        gameCounterAddSaturating(0x23,temp_v4);
-        gameCounterAddSaturating(0x24,temp_v11);
-      }
-      temp_v11 = *(int *)(param_1 + 0x34);
-      temp_v4 = playerPadTestBit(1);
-      if ((temp_v4 == 0) && (temp_v4 = playerPadTestBit(10), temp_v4 == 0)) {
-        *(int *)(temp_v2 + 0x35b4) = *(int *)(temp_v2 + 0x35b4) + temp_v11;
-      }
-      temp_v19 = 0x3e99999a;
-      temp_v17 = 1.0f;
-      temp_v18 = 0x42c800003c23d70a;
-      temp_v4 = 0;
-      do {
-        if (-1 < *(char *)(temp_v3 + temp_v4 + 0x90f0)) {
-          temp_v14 = gameGetUnitRecord();
-          temp_v8 = flagWordTestBit(temp_v14,1);
-          if (((temp_v8 == 0) && (temp_v8 = flagWordTestBit(temp_v14,10), temp_v8 == 0)) &&
-             (temp_v8 = flagWordTestBit(temp_v14,2), temp_v8 == 0)) {
-            temp_v1 = 0;
-            temp_v0 = *(char *)(temp_v3 + temp_v4 + 0x90f0);
-            if (((*(char *)(temp_v3 + 0x9108) == temp_v0) || (*(char *)(temp_v3 + 0x9109) == temp_v0)) ||
-               (*(char *)(temp_v3 + 0x910a) == temp_v0)) {
-              temp_v1 = 1;
-            }
-            temp_v15 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
-            temp_v8 = temp_v11;
-            if (((!temp_v1) && (temp_v8 = (int)(temp_v15 * (float)temp_v19), temp_v11 != 0)) && (temp_v8 < 1))
-            {
-              temp_v8 = 1;
-            }
-            temp_v12 = 0;
-            temp_v15 = temp_v17;
-            do {
-              temp_v6 = (unsigned int)*(unsigned short *)(temp_v14 + 0x34 + temp_v12 * 2);
-              if (temp_v6 != 0) {
-                passiveSkillLookupRecord();
-                temp_v7 = 0;
-                if (temp_v6 != 0) {
-                  temp_v7 = (unsigned int)*(unsigned char *)(temp_v6 + 0x2f);
-                }
-                if (temp_v6 != 0 && temp_v7 != 0) {
-                  temp_v16 = (float)VectorUnsignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-                  temp_v15 = temp_v16 * (float)temp_v18 * temp_v15;
-                }
-              }
-              temp_v12 = temp_v12 + 1;
-            } while (temp_v12 < 8);
-            piVar7 = (int *)(temp_v2 + (unsigned int)*(unsigned char *)(temp_v14 + 0x4a) * 4 + 0x35b8);
-            *piVar7 = (temp_v8 * (int)(temp_v15 * (float)((unsigned long long)temp_v18 >> 0x20))) / 100 + *piVar7;
-          }
+    soundChannelRequestIfEnabled(0x100003C, 0);
+    s32 gold = spoils->gold;
+    s32 itemTotal = 0;
+
+    result->totalGold += gold;
+    for (s32 i = 0; i < 6; i++) {
+        s32 id = spoils->itemId[i];
+
+        if (id == 0 || spoils->itemCount[i] == 0) {
+            continue;
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x18);
-      return;
+        for (s32 j = 0; j < 6; j++) {
+            if (result->gainedItemId[j] == id) {
+                result->gainedItemCount[j] += spoils->itemCount[i];
+                break;
+            }
+            if (result->gainedItemId[j] == 0) {
+                result->gainedItemId[j] = id;
+                result->gainedItemCount[j] = spoils->itemCount[i];
+                break;
+            }
+        }
+        itemTotal += spoils->itemCount[i];
     }
-  } while( 1 );
+    if (FUN_00298f88(spoils->battleId) == 0) {
+        gameCounterAddSaturating(0x22, 1);
+        gameCounterAddSaturating(0x23, gold);
+        gameCounterAddSaturating(0x24, itemTotal);
+    }
+    s32 experience = spoils->experience;
+
+    if (playerPadTestBit(1) == 0 && playerPadTestBit(10) == 0) {
+        result->totalExperience += experience;
+    }
+    for (s32 i = 0; i < 24; i++) {
+        if (slots->unitIndex[i] < 0) {
+            continue;
+        }
+        SpoilsUnit *unit = gameGetUnitRecord();
+
+        if (flagWordTestBit(unit, 1) != 0 || flagWordTestBit(unit, 10) != 0 || flagWordTestBit(unit, 2) != 0) {
+            continue;
+        }
+        s32 inFront = 0;
+        s8 index = slots->unitIndex[i];
+
+        if (slots->leaders[0] == index || slots->leaders[1] == index || slots->leaders[2] == index) {
+            inFront = 1;
+        }
+        s32 share = experience;
+
+        if (!inFront) {
+            share = (s32)((f32)experience * 0.3f);
+            if (experience != 0 && share < 1) {
+                share = 1;
+            }
+        }
+        f32 multiplier = 1.0f;
+
+        for (s32 k = 0; k < 8; k++) {
+            u32 skill = unit->skills[k];
+
+            if (skill != 0) {
+                PassiveRecord *record = passiveSkillLookupRecord(skill);
+
+                if (record != NULL && record->percent != 0) {
+                    multiplier = (f32)record->percent * 0.01f * multiplier;
+                }
+            }
+        }
+        result->shareBySlot[unit->level] += (share * (s32)(multiplier * 100.0f)) / 100;
+    }
 }
 
-} /* extern "C" */
+}

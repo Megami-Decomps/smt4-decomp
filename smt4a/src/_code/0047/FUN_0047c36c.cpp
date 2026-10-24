@@ -1,113 +1,101 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047c36c` (_code @ 0x47c36c, 0x228 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the quest scene update; constructor/strd result copy now match retail, but the build hoists the jobStop mode argument and the zero move ahead of the flag clear, allocates the tick counters in r0/r1 the other way round and loads the step PTMF adjustment before the pointer test. */
+#include "addon/aocMain.h"
+#include "classes/Obj526238.h"
+#include "classes/WindowOperation.h"
+
+struct JobOwner;
+struct JobFlagsWork;
+struct PanelSprite;
+struct SceneWindowWork;
+struct QuestScene;
+
+typedef void (QuestScene::*QuestSceneStep)();
+
+// One of the 25 animated panels of the scene (0x8c bytes).
+struct QuestPanel {
+    u8 data[0x8c];
+};
+
+// The quest scene's work block; its step handlers are member-function pointers indexed by the state.
+struct QuestScene {
+    /* 0x0000 */ u32 flags;
+    /* 0x0004 */ s32 state;
+    /* 0x0008 */ s32 substate;
+    /* 0x000C */ u8 unk000c[4];
+    /* 0x0010 */ QuestSceneStep steps[63];
+    /* 0x0208 */ Obj526238Child *child;
+    /* 0x020C */ u8 unk020c[4];
+    /* 0x0210 */ WindowOperationResult operation;
+    /* 0x0220 */ u8 unk0224[0x158];
+    /* 0x037C */ QuestPanel panels[25];
+    /* 0x1128 */ s32 slowTick;      // 0..19
+    /* 0x112C */ s32 fastTick;      // 0..29
+    /* 0x1130 */ u8 unk1130[0x80];
+    /* 0x11B0 */ u8 owner[0x5f0];
+    /* 0x17A0 */ u32 childJob;
+    /* 0x17A4 */ u8 unk17a4[8];
+    /* 0x17AC */ s32 touchMarker;
+};
 
 extern "C" {
+extern AocMain *g_aocMain;
+extern AocSystem *g_aocSystem;
 
-int jobStop(unsigned int, int);
-int FUN_00163aa4(unsigned int *);
-int ifTouchRegionRemove(void);
-int FUN_0016ccb4(int);
-int aocReleasePackageOwner(unsigned int);
-int _ZN18WindowStatusResultC1Ej(unsigned int [5], int);
-int aocClearDisplayFlag(unsigned int);
-int jobOwnerFreeSlotAndStop(unsigned int *);
-int FUN_00477d10(unsigned int *, unsigned int, int);
-int jobFlagsWorkStop(unsigned int *);
+s32 sysLightEventTryWait(AocObjB *event);
+void FUN_00163aa4(PanelSprite *panel, f32 step);
+void FUN_00477d10(SceneWindowWork *window, s32 value, s32 mode);
+void jobOwnerFreeSlotAndStop(JobOwner *owner);
+void jobFlagsWorkStop(JobFlagsWork *work);
+u32 jobIsValid(u32 job);
+u32 jobStop(u32 job, s32 mode);
+void ifTouchRegionRemove();
+void FUN_0016ccb4(u32 *queryResult);
+void aocClearDisplayFlag(AocSystem *system);
+void aocReleasePackageOwner(AocSystem *system);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-} param_1_stack;
-
-extern int g_aocMain; /* 0x570260 */
-extern unsigned int g_aocSystem; /* 0x570280 */
-
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_00163aa4. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: aocReleasePackageOwner. */
-extern int sysLightEventTryWait(int);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-/* Supplied declaration required: aocClearDisplayFlag. */
-/* Supplied declaration required: jobOwnerFreeSlotAndStop. */
-/* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: jobFlagsWorkStop. */
-
-
-void FUN_0047c36c(unsigned int *param_1)
-
+// Runs the scene one frame. While the content is released (states 4..14 with the add-on event signalled) the scene
+// shuts down instead: it stops its job, clears the result and returns to state 17.
+void FUN_0047c36c(QuestScene *scene)
 {
-/* irregular: 12 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  unsigned int temp_v2 [5];
-  
-  puVar2 = temp_v2;
-  if ((param_1[1] - 4 >= 11) || (temp_v0 = sysLightEventTryWait(g_aocMain + 0x98), temp_v0 == 0)) {
-    temp_v0 = 0;
-    do {
-      FUN_00163aa4(param_1 + temp_v0 * 0x23 + 0xdf);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x19);
-    param_1[0x44a] = (int)(param_1[0x44a] + 1) % 0x14;
-    temp_v1 = param_1[1099] + 1;
-    temp_v0 = (int)(((long long)(int)temp_v1 * -0x77777777 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
-    param_1[1099] = temp_v1 + ((temp_v0 >> 4) - (temp_v0 >> 0x1f)) * -0x1e;
-    temp_v1 = param_1[1];
-    UNRECOVERED_JUMPTABLE = (romwright_code *)param_1[temp_v1 * 2 + 4];
-    if ((UNRECOVERED_JUMPTABLE == (romwright_code *)0x0) &&
-       (((param_1[temp_v1 * 2 + 5] & 1) == 0 || (param_1[temp_v1 * 2 + 5] == 0)))) {
-      return;
+    if ((u32)(scene->state - 4) < 11 && sysLightEventTryWait(&g_aocMain->objB) != 0) {
+        g_aocMain->flags &= ~0x10000;
+        FUN_00477d10((SceneWindowWork *)scene, -1, 0);
+        jobOwnerFreeSlotAndStop((JobOwner *)scene->owner);
+        jobFlagsWorkStop((JobFlagsWork *)scene);
+        if (jobIsValid(scene->childJob)) {
+            if (scene->touchMarker != -1) {
+                scene->touchMarker = -1;
+                ifTouchRegionRemove();
+            }
+            scene->flags &= ~0x3000;
+            jobStop(scene->childJob, 0);
+        }
+        WindowOperationResult *operation = &scene->operation;
+        operation->succeeded = true;
+        operation->first = 0;
+        operation->result = WindowStatusResult(operation->first);
+        FUN_0016ccb4(&g_aocMain->operation.queryResult);
+        g_aocMain->flags &= ~0x10000;
+        if (scene->state == 10) {
+            aocClearDisplayFlag(g_aocSystem);
+            aocReleasePackageOwner(g_aocSystem);
+        }
+        scene->state = 17;
+        scene->substate = 0;
+        if (scene->child != NULL) {
+            delete scene->child;
+            scene->child = NULL;
+        }
+        return;
     }
-    if ((param_1[temp_v1 * 2 + 5] & 1) != 0) {
-      UNRECOVERED_JUMPTABLE =
-           *(romwright_code **)((unsigned char *)UNRECOVERED_JUMPTABLE +
-                     *(int *)((int)param_1 + ((int)param_1[temp_v1 * 2 + 5] >> 1)));
+    for (s32 index = 0; index < 25; index++) {
+        FUN_00163aa4((PanelSprite *)&scene->panels[index], 1.0f);
     }
-                    /* WARNING: Could not recover jumptable at 0x0047c590. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE)();
-    return;
-  }
-  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-  FUN_00477d10(param_1,0xffffffff,0);
-  jobOwnerFreeSlotAndStop(param_1 + 0x46c);
-  jobFlagsWorkStop(param_1);
-  temp_v0 = jobIsValid(param_1[0x5e8]);
-  if (temp_v0 != 0) {
-    if (param_1[0x5eb] != 0xffffffff) {
-      param_1[0x5eb] = 0xffffffff;
-      ifTouchRegionRemove();
+    scene->slowTick = (scene->slowTick + 1) % 20;
+    scene->fastTick = (scene->fastTick + 1) % 30;
+    QuestSceneStep step = scene->steps[scene->state];
+    if (step != NULL) {
+        (scene->*step)();
     }
-    *param_1 = *param_1 & 0xffffcfff;
-    jobStop(param_1[0x5e8],0);
-  }
-  *(unsigned char *)(param_1 + 0x84) = 1;
-  param_1[0x87] = 0;
-  _ZN18WindowStatusResultC1Ej(temp_v2,0);
-  temp_v1 = puVar2[1];
-  param_1[0x85] = *puVar2;
-  param_1[0x86] = temp_v1;
-  FUN_0016ccb4(g_aocMain + 0x80);
-  *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-  if (param_1[1] == 10) {
-    aocClearDisplayFlag(g_aocSystem);
-    aocReleasePackageOwner(g_aocSystem);
-  }
-  param_1[1] = 0x11;
-  param_1[2] = 0;
-  if ((int *)param_1[0x82] == (int *)0x0) {
-    return;
-  }
-  (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-  param_1[0x82] = 0;
-  return;
 }
-
-} /* extern "C" */
+}

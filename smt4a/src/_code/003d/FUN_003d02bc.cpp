@@ -1,164 +1,102 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d02bc` (_code @ 0x3d02bc, 0x2d4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the icon table lookup is inlined twice with different register allocation and the render-state push/pop sequence is scheduled differently (178 vs 183 rows); the drawing logic is the same. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int libc_bsearch(unsigned int *, unsigned int, unsigned int, int, unsigned char *);
-int efctSetSpeed(...);
-int FUN_001834a4(int, int);
-int FUN_00185dd4(...);
-int renderCtxCalculateStereoParallax(int);
-int FUN_0028520c(void);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
+/* One row of the icon table (4 bytes): an item id and the texture it maps to. */
+typedef struct IconTableEntry {
+    s16 id;
+    s16 texture;
+} IconTableEntry;
 
-typedef int romwright_code(...);
-/* stack frame of void: 4 slot(s), 14 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned short sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+/* A texture layout record (only the fields read here). */
+typedef struct TextureLayout {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 width;               /* bit 15 is a flag */
+    /* 0x06 */ u16 height;
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} TextureLayout;
 
-extern unsigned char LAB_002321f8; /* 0x2321f8 */
-extern int g_sWin; /* 0x57f57c */
-extern int g_renderCtx; /* 0x59dbb4 */
+/* The item window (only the fields used here). */
+typedef struct ItemWindow {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 active;
+    /* 0x0C */ u8 unk0c[8];
+    /* 0x14 */ s32 item;
+    /* 0x18 */ s32 pending;             /* a second item shown while it is fading in */
+    /* 0x1C */ s32 elapsed;
+    /* 0x20 */ s32 total;
+    /* 0x24 */ s32 offsetX;
+    /* 0x28 */ u8 unk28[0x40];
+    /* 0x68 */ f32 speed;
+    /* 0x6C */ u8 unk6c[4];
+    /* 0x70 */ f32 scaleX;
+    /* 0x74 */ f32 scaleY;
+} ItemWindow;
 
-#ifndef ROMWRIGHT_PIECE_2_2_DEFINED
-#define ROMWRIGHT_PIECE_2_2_DEFINED
-#define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_00185dd4. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0028520c. */
+extern ItemWindow *g_sWin;
+extern u8 *g_renderCtx;
 
+u32 dataTableGet(u32 id, u32 index);
+IconTableEntry *dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 FUN_002321f8(const void *a, const void *b);
+TextureLayout *FUN_001834a4(u32 group, u32 id);
+s32 FUN_001692ac(s32 a, s32 b);
+f32 renderCtxCalculateStereoParallax(u8 *context, f32 depth);
+void efctSetSpeed(f32 speed);
+s32 FUN_0028520c(s16 item);
+u32 FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, s32 flag);
 
-unsigned int FUN_003d02bc(void)
-
+/* Finds the icon texture of `item` in the item icon table (id * 1000 is its texture id), or -1. */
+static __inline s32 findIconTexture(s32 item)
 {
-/* irregular: irregular input(s): in_fpscr; 9 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int temp_v9;
-  int *piVar12;
-  int temp_v10;
-  unsigned int in_fpscr;
-  float temp_v11;
-  unsigned int temp_v12;
-  float temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16 [3];
-  
-  temp_v8 = g_sWin;
-  if (*(int *)(g_sWin + 8) != 0) {
-    temp_v9 = *(unsigned int *)(g_sWin + 0x14);
-    temp_v0 = dataTableGet(0x47,0);
-    temp_v1 = dataTableGetEntries();
-    temp_v0 = dataTableGetCount(temp_v0);
-    puVar3 = &temp_v15;
-    temp_v15 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v15 + 2)),(short)temp_v9);
-    libc_bsearch(puVar3,temp_v1,temp_v0,4,&LAB_002321f8);
-    temp_v2 = 0;
-    if (puVar3 != (unsigned int *)0x0) {
-      temp_v2 = (int)*(short *)((int)puVar3 + 2);
-    }
-    temp_v10 = -1;
-    if (puVar3 == (unsigned int *)0x0) {
-      temp_v2 = -1;
-    }
-    temp_v3 = FUN_001834a4(0x34,temp_v2 * 1000);
-    temp_v5 = g_renderCtx;
-    temp_v4 = FUN_001692ac(1,0);
-    piVar12 = (int *)(temp_v5 + 0x1258);
-    temp_v6 = *piVar12;
-    temp_v7 = piVar12[temp_v6 + 2];
-    *piVar12 = temp_v6 + 1;
-    piVar12[temp_v6 + 3] = temp_v4;
-    if (*(char *)(temp_v5 + 0x1270) != '\0' || temp_v7 != temp_v4) {
-      (**(romwright_code **)(temp_v5 + 0x1274))();
-      *(unsigned char *)(temp_v5 + 0x1270) = 0;
-    }
-    temp_v11 = (float)VectorUnsignedToFloat
-                              (*(unsigned short *)(temp_v3 + 4) & 0xffff7fff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v13 = (float)VectorUnsignedToFloat
-                              (*(unsigned short *)(temp_v3 + 6) & 0xffff7fff,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v14 = VectorFloatToUnsigned(temp_v11 * *(float *)(temp_v8 + 0x70),3);
-    temp_v12 = VectorFloatToUnsigned(temp_v13 * *(float *)(temp_v8 + 0x74),3);
-    temp_v5 = FUN_001834a4(0x27,0xd);
-    temp_v11 = 0.25f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v3 = (int)*(short *)(temp_v5 + 10) - (temp_v12 >> 1);
-    temp_v16[2] = (int)temp_v11 + ((int)*(short *)(temp_v5 + 8) - (temp_v14 >> 1)) +
-                  *(int *)(temp_v8 + 0x24);
-    efctSetSpeed();
-    temp_v5 = (int)(short)*(unsigned int *)(temp_v8 + 0x14);
-    FUN_0028520c();
-    if (temp_v5 != 0) {
-      temp_v16[1] = 0x15;
-      temp_v15 = temp_v14;
-      temp_v16[0] = temp_v12;
-      FUN_00185dd4(2,0x34,temp_v2 * 1000,temp_v16[2],temp_v3);
-    }
-    if (*(int *)(temp_v8 + 0x18) != 0) {
-      temp_v2 = (int)(short)*(int *)(temp_v8 + 0x18);
-      FUN_0028520c();
-      if (temp_v2 != 0) {
-        temp_v1 = *(unsigned int *)(temp_v8 + 0x18);
-        temp_v0 = dataTableGet(0x47,0);
-        temp_v15 = dataTableGetEntries();
-        temp_v0 = dataTableGetCount(temp_v0);
-        puVar3 = temp_v16;
-        temp_v16[0] = romwright_piece_2_2((((unsigned int)(temp_v16[0]) >> 16) & 0xffffU),(short)temp_v1);
-        libc_bsearch(puVar3,temp_v15,temp_v0,4,&LAB_002321f8);
-        if (puVar3 != (unsigned int *)0x0) {
-          temp_v10 = (int)*(short *)((int)puVar3 + 2);
-        }
-        FUN_001834a4(0x34,temp_v10 * 1000);
-        temp_v2 = *(int *)(temp_v8 + 0x20);
-        temp_v8 = temp_v2 - *(int *)(temp_v8 + 0x1c);
-        VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-        VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-        efctSetSpeed(temp_v2,temp_v8);
-        temp_v16[1] = 0x15;
-        temp_v15 = temp_v14;
-        temp_v16[0] = temp_v12;
-        FUN_00185dd4(2,0x34,temp_v10 * 1000,temp_v16[2],temp_v3);
-      }
-    }
-    efctSetSpeed();
-    temp_v8 = g_renderCtx;
-    piVar12 = (int *)(g_renderCtx + 0x1258);
-    temp_v2 = *piVar12;
-    temp_v10 = piVar12[temp_v2 + 2];
-    *piVar12 = temp_v2 - 1;
-    if (*(char *)(temp_v8 + 0x1270) != '\0' || temp_v10 != piVar12[temp_v2 + 1]) {
-      (**(romwright_code **)(temp_v8 + 0x1274))();
-      *(unsigned char *)(temp_v8 + 0x1270) = 0;
-    }
-  }
-  return 0;
+    u32 table = dataTableGet(0x47, 0);
+    IconTableEntry *entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+    IconTableEntry key;
+
+    key.id = (s16)item;
+    IconTableEntry *found = (IconTableEntry *)libc_bsearch(&key, entries, count, 4, FUN_002321f8);
+
+    return found != NULL ? found->texture : -1;
 }
 
-} /* extern "C" */
+/* Draws the item window's icon (and, while one is pending, the fading second icon) centred on
+ * its slot, scaled by the window's scale, inside a pushed render state. Always returns 0. */
+u32 FUN_003d02bc(void)
+{
+    ItemWindow *window = g_sWin;
+
+    if (window->active == 0) {
+        return 0;
+    }
+    s32 texture = findIconTexture(window->item) * 1000;
+    TextureLayout *icon = FUN_001834a4(0x34, texture);
+
+    renderStackPush((RenderStateStack *)(g_renderCtx + 0x1258), FUN_001692ac(1, 0));
+    u32 width = (u32)((f32)(icon->width & 0x7FFF) * window->scaleX);
+    u32 height = (u32)((f32)(icon->height & 0x7FFF) * window->scaleY);
+    TextureLayout *frame = FUN_001834a4(0x27, 13);
+    s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + (frame->x - (s32)(width >> 1)) + window->offsetX;
+    s32 y = frame->y - (s32)(height >> 1);
+
+    efctSetSpeed(window->speed);
+    if (FUN_0028520c((s16)window->item) != 0) {
+        FUN_00185dd4(2, 0x34, texture, x, y, width, height, 21);
+    }
+    if (window->pending != 0 && FUN_0028520c((s16)window->pending) != 0) {
+        texture = findIconTexture(window->pending) * 1000;
+        FUN_001834a4(0x34, texture);
+        efctSetSpeed((f32)(window->total - window->elapsed) / (f32)window->total);
+        FUN_00185dd4(2, 0x34, texture, x, y, width, height, 21);
+    }
+    efctSetSpeed(1.0f);
+    renderStackPop((RenderStateStack *)(g_renderCtx + 0x1258));
+    return 0;
+}
+
+}

@@ -54,7 +54,10 @@ struct BtlActionRecord {
         } editorRestore;
     };
     /* 0xf8 */ u32 stateFlags;
-    /* 0xfc */ u8 unkfc[0x18];
+    union {
+        /* 0xfc */ u8 unkfc[0x18];
+        /* 0xfc */ u32 groupKey;
+    };
 };
 
 typedef char BtlActionRecordLayoutCheck[sizeof(BtlActionRecord) == 0x114 &&

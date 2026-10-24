@@ -1,123 +1,105 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028a2e8` (_code @ 0x28a2e8, 0x244 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail spills the reset flag with `push {r0, ...}` and evaluates the first data-table lookup, then the kind test, before the second lookup in a different block order; ours keeps the flag in sl and merges the count tests (147 rows against 145). */
+#include "common.h"
+
+/* Record of data table 0x24 (0x94 bytes). */
+struct UniteTableRecord {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 kind;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u16 flagId;
+    /* 0x06 */ u8 unk06[0x8E];
+};
+
+struct UniteDraftState {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 unk10[0x20];
+    /* 0x30 */ u8 filled[16];
+};
+
+/* The unite menu as this setup step touches it. */
+struct UniteMenu {
+    /* 0x0000 */ u8 unk0000[0x438];
+    /* 0x0438 */ s16 touchIds[8];
+    /* 0x0448 */ u8 unk0448[0x2A];
+    /* 0x0472 */ s16 backTouchId;
+    /* 0x0474 */ s16 nextTouchId;
+    /* 0x0476 */ s16 prevTouchId;
+    /* 0x0478 */ u8 unk0478[0x84];
+    /* 0x04FC */ u8 list[0x8D80];
+    /* 0x927C */ s32 entryIndices[16];
+};
 
 extern "C" {
 
-int ifTouchRegionRemove(void);
-int FUN_001643b4(int, int);
-int __aeabi_memset4(int, int, unsigned int);
-int FUN_00203b40(int, int, int, int, int, int);
-int FUN_002a4964(int, int);
+extern UniteMenu *g_unite;
 
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
+u8 *FUN_0026140c(void);
+s32 resourceRunOperationIfUnblocked(void *list);
+s32 FUN_002a4894(void *list);
+void __aeabi_memset4(void *memory, u32 size, s32 value);
+u32 dataTableGet(u32 table, u32 index);
+UniteTableRecord *dataTableGetEntries(u32 table);
+u32 dataTableGetCount(u32 table);
+s32 gamePackedFlagTest(u32 flagId);
+void FUN_00203b40(void *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
+void FUN_002a4964(void *list, s32 value);
+void ifTouchRegionRemove(void);
+s32 objectApplyIfUnblocked(void *list);
+s16 FUN_001643b4(s32 category, s32 index);
 
-extern int g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_001643b4. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00203b40. */
-extern int FUN_0026140c(void);
-extern int resourceRunOperationIfUnblocked(void);
-extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a4964. */
-extern int objectApplyIfUnblocked(int);
-extern int gamePackedFlagTest(void);
-
-
-void FUN_0028a2e8(int param_1)
-
+/* Rebuilds the unite menu's entry list from data table 0x24 (listing every record up to the first
+ * one the player has not unlocked) and, when asked, re-registers the touch regions. */
+void FUN_0028a2e8(s32 resetTouch)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  int temp_v10;
-  int temp_v11;
-  
-  temp_v0 = g_unite;
-  temp_v2 = FUN_0026140c();
-  temp_v3 = temp_v0 + 0x4fc;
-  temp_v4 = resourceRunOperationIfUnblocked();
-  temp_v5 = FUN_002a4894(temp_v3);
-  temp_v10 = 0;
-  temp_v11 = 0;
-  __aeabi_memset4(temp_v0 + 0x927c,0x40,0xffffffff);
-  temp_v9 = 0;
-  do {
-    temp_v6 = dataTableGet(0x24,0);
-    temp_v7 = dataTableGetEntries();
-    temp_v8 = dataTableGetCount(temp_v6);
-    if ((temp_v9 >= temp_v8) || (*(char *)(temp_v7 + temp_v9 * 0x94 + 1) != '\x02')) {
-      temp_v6 = dataTableGet(0x24,0);
-      temp_v7 = dataTableGetEntries();
-      temp_v8 = dataTableGetCount(temp_v6);
-      if ((temp_v8 <= temp_v9) ||
-         ((*(short *)(temp_v7 + temp_v9 * 0x94 + 4) == 0 || (temp_v7 = gamePackedFlagTest(), temp_v7 != 0)))) {
-        temp_v7 = temp_v10 * 4;
-        temp_v10 = temp_v10 + 1;
-        *(unsigned int *)(temp_v0 + temp_v7 + 0x927c) = temp_v9;
-      }
+    UniteMenu *menu = g_unite;
+    UniteDraftState *draft = (UniteDraftState *)FUN_0026140c();
+    void *list = menu->list;
+    s32 a = resourceRunOperationIfUnblocked(list);
+    s32 b = FUN_002a4894(list);
+    s32 count = 0;
+    s32 unlocked = 0;
+    s32 i;
+
+    __aeabi_memset4(menu->entryIndices, 0x40, -1);
+    for (i = 0; i < 16; i++) {
+        u32 table = dataTableGet(0x24, 0);
+        UniteTableRecord *entries = dataTableGetEntries(table);
+
+        if ((u32)i < dataTableGetCount(table) && entries[i].kind == 2) {
+            menu->entryIndices[count++] = i;
+            if (draft->filled[unlocked] == 0) {
+                break;
+            }
+            unlocked++;
+            continue;
+        }
+        table = dataTableGet(0x24, 0);
+        entries = dataTableGetEntries(table);
+        if ((u32)i >= dataTableGetCount(table) || entries[i].flagId == 0 ||
+            gamePackedFlagTest(entries[i].flagId) != 0) {
+            menu->entryIndices[count++] = i;
+        }
     }
-    else {
-      *(unsigned int *)(temp_v0 + temp_v10 * 4 + 0x927c) = temp_v9;
-      temp_v10 = temp_v10 + 1;
-      if (*(char *)(temp_v2 + temp_v11 + 0x30) == '\0') break;
-      temp_v11 = temp_v11 + 1;
+    FUN_00203b40(list, count, 8, 1, 0, 1);
+    FUN_002a4964(list, a + b);
+    if (resetTouch != 0) {
+        for (i = 0; i < 8; i++) {
+            menu->touchIds[i] = -1;
+            ifTouchRegionRemove();
+        }
+        menu->prevTouchId = -1;
+        menu->backTouchId = -1;
+        menu->nextTouchId = -1;
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        ifTouchRegionRemove();
+        for (i = 0; i < objectApplyIfUnblocked(list) && i < 8; i++) {
+            menu->touchIds[i] = FUN_001643b4(0x1A, 0xA9 + i);
+        }
+        menu->prevTouchId = FUN_001643b4(0x1A, 0x1F0);
+        menu->backTouchId = FUN_001643b4(0x1A, 0x1EE);
+        menu->nextTouchId = FUN_001643b4(0x1A, 0x1EF);
     }
-    temp_v9 = temp_v9 + 1;
-  } while ((int)temp_v9 < 0x10);
-  FUN_00203b40(temp_v3,temp_v10,8,1,0,1);
-  FUN_002a4964(temp_v3,temp_v5 + temp_v4);
-  if (param_1 != 0) {
-    temp_v2 = 0;
-    do {
-      *(unsigned short *)(temp_v0 + temp_v2 * 2 + 0x438) = 0xffff;
-      ifTouchRegionRemove();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 8);
-    *(unsigned short *)(temp_v0 + 0x476) = 0xffff;
-    *(unsigned short *)(temp_v0 + 0x472) = 0xffff;
-    *(unsigned short *)(temp_v0 + 0x474) = 0xffff;
-    ifTouchRegionRemove();
-    ifTouchRegionRemove();
-    ifTouchRegionRemove();
-    temp_v2 = 0;
-    do {
-      temp_v4 = objectApplyIfUnblocked(temp_v3);
-      if (temp_v4 <= temp_v2) break;
-      temp_v1 = FUN_001643b4(0x1a,temp_v2 + 0xa9);
-      temp_v4 = temp_v2 * 2;
-      temp_v2 = temp_v2 + 1;
-      *(unsigned short *)(temp_v0 + temp_v4 + 0x438) = temp_v1;
-    } while (temp_v2 < 8);
-    temp_v1 = FUN_001643b4(0x1a,0x1f0);
-    *(unsigned short *)(temp_v0 + 0x476) = temp_v1;
-    temp_v1 = FUN_001643b4(0x1a,0x1ee);
-    *(unsigned short *)(temp_v0 + 0x472) = temp_v1;
-    temp_v1 = FUN_001643b4(0x1a,0x1ef);
-    *(unsigned short *)(temp_v0 + 0x474) = temp_v1;
-  }
-  return;
 }
 
 } /* extern "C" */

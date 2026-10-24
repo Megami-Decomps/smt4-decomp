@@ -1,207 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00254a68` (_code @ 0x254a68, 0x334 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (206 rows against 207): same logic and constants (sector tests, 57.295776 conversion, wrap sector for the first direction); retail dispatches the mode with `cmp #1; beq; cmp #2; bne; b` and shares one epilogue, loads the sector centre/half-width pair once into r0/r1 for both range tests of a direction, ours picks other registers and a slightly different branch layout */
+typedef unsigned char u8;
+typedef signed char s8;
+typedef short s16;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int FUN_0027f958(float *, float [3], int);
-int FUN_00281e34(void);
-int padIsButtonRepeat(...);
-int padIsButtonPressed(...);
-int FUN_002c15fc(...);
-int VectorSignedToFloat(int, int);
+#define BUTTON_STICK_DOWN  0x0C
+#define BUTTON_STICK_RIGHT 0x0D
+#define BUTTON_STICK_UP    0x0E
+#define BUTTON_STICK_LEFT  0x0F
 
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
+#define BUTTON_MODE_PRESSED 0
+#define BUTTON_MODE_REPEAT  1
+#define BUTTON_MODE_HELD    2
 
-extern short DAT_00465278; /* 0x465278 */
-#ifndef ROMWRIGHT_STORAGE_s____Z____0046527a_10_2_DEFINED
-#define ROMWRIGHT_STORAGE_s____Z____0046527a_10_2_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s____Z____0046527a_10_2 {
-    char whole[10];
-    unsigned char u1[10];
-    signed char s1[10];
-    unsigned short u2[5];
-    short s2[5];
+/* Angle sector (degrees) of one stick direction. */
+struct StickSector {
+    s16 center;
+    s16 halfWidth;
 };
-typedef char romwright_storage_s____Z____0046527a_10_2_size_check[(sizeof(union romwright_storage_s____Z____0046527a_10_2) == 10) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_u1_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_s1_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->s1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_u2_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->u2[0]) == 2) ? 1 : -1];
-typedef char romwright_storage_s____Z____0046527a_10_2_s2_width_check[(sizeof(((union romwright_storage_s____Z____0046527a_10_2 *)0)->s2[0]) == 2) ? 1 : -1];
-#endif
-extern union romwright_storage_s____Z____0046527a_10_2 s____Z____0046527a; /* 0x46527a */
-extern short DAT_00465284; /* 0x465284 */
-extern short DAT_00465286; /* 0x465286 */
-extern signed char DAT_00465288; /* 0x465288 */
 
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0027f958. */
-/* Supplied declaration required: FUN_00281e34. */
-/* Supplied declaration required: padIsButtonRepeat. */
-/* Supplied declaration required: padIsButtonPressed. */
-/* Supplied declaration required: FUN_002c15fc. */
+/* Stick-as-d-pad configuration (observed fields only). */
+struct StickDirectionTable {
+    StickSector up;       /* 0x00 */
+    StickSector left;     /* 0x04 */
+    StickSector down;     /* 0x08 */
+    StickSector right;    /* 0x0C */
+    s8 enabled;           /* 0x10 */
+};
 
+extern StickDirectionTable DAT_00465278;   /* 0x465278 */
 
-unsigned int FUN_00254a68(int param_1,int param_2,int param_3)
+s32 padIsButtonPressed(s32 button);
+s32 padIsButtonRepeat(s32 button);
+s32 FUN_002c15fc(s32 button);
+s32 FUN_0027f958(f32 *x, f32 *y, s32 flag);
+f32 FUN_00281e34(f32 x, f32 y);
 
+static s32 isStickDirection(s32 button)
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  unsigned int in_fpscr;
-  unsigned int temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13 [3];
-  
-  temp_v5 = 0;
-  temp_v4 = 0;
-  temp_v3 = 0;
-  if (param_3 != 0) {
-    if (param_3 != 1) {
-      if (param_3 == 2) {
-        temp_v4 = FUN_002c15fc();
-        temp_v3 = FUN_002c15fc(param_2);
-        temp_v5 = temp_v4 | temp_v3;
-      }
-    }
-    else {
-      temp_v4 = padIsButtonRepeat();
-      temp_v3 = padIsButtonRepeat(param_2);
-      temp_v6 = FUN_002c15fc(param_1);
-      if ((temp_v6 != 0) && (temp_v6 = FUN_002c15fc(param_2), temp_v6 != 0)) {
-        temp_v3 = 0;
-      }
-      temp_v5 = temp_v4 | temp_v3;
-    }
-  }
-  else {
-    temp_v4 = padIsButtonPressed();
-    temp_v3 = padIsButtonPressed(param_2);
-    temp_v5 = temp_v4 | temp_v3;
-  }
-  if ((!(param_1 == 0xc || param_1 == 0xd)) && (!(param_1 == 0xe || param_1 == 0xf))) {
-    if ((param_2 != 0xc && param_2 != 0xd) && (param_2 != 0xe && param_2 != 0xf)) {
-      return temp_v5;
-    }
-    temp_v6 = 2;
-  }
-  else {
-    temp_v6 = 1;
-  }
-  if ((DAT_00465288 != '\0') &&
-     ((((temp_v2 = FUN_002c15fc(0xe), temp_v2 != 0 || (temp_v2 = FUN_002c15fc(0xf), temp_v2 != 0)) ||
-       (temp_v2 = FUN_002c15fc(0xc), temp_v2 != 0)) || (temp_v2 = FUN_002c15fc(0xd), temp_v2 != 0)))) {
-    FUN_0027f958(&temp_v12,temp_v13,0);
-    temp_v10 = temp_v12;
-    FUN_00281e34();
-    temp_v11 = 360.0f;
-    temp_v10 = temp_v10 * 57.295776f;
-    if (temp_v10 < 0.0f) {
-      temp_v10 = temp_v10 + 360.0f;
-    }
-    temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 == 0.0f) << 0x1e);
-    temp_v7 = 0;
-    if (romwright_subpiece_4_1_0(temp_v8 >> 0x1e,0)) {
-      temp_v8 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13[0] == 0.0f) << 0x1e);
-      temp_v7 = romwright_subpiece_4_1_0(temp_v8 >> 0x1e,0);
-    }
-    if (!temp_v7) {
-      temp_v2 = FUN_002c15fc(0xe);
-      if (temp_v2 != 0) {
-        temp_v2 = (int)DAT_00465278;
-        temp_v9 = (float)VectorSignedToFloat(temp_v2 - (short)s____Z____0046527a.u2[0],
-                                            (unsigned char)(temp_v8 >> 0x16) & 3);
-        temp_v0 = (temp_v8 & 0xfffffff) | ((unsigned int)(temp_v9 + temp_v11 == temp_v10) << 0x1e) |
-                ((unsigned int)(temp_v10 <= temp_v9 + temp_v11) << 0x1d);
-        temp_v1 = (unsigned char)(temp_v0 >> 0x18);
-        if ((!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) && ((int)temp_v10 < 0x43b40000)) {
-          return temp_v5;
+    return button == BUTTON_STICK_DOWN || button == BUTTON_STICK_RIGHT || button == BUTTON_STICK_UP ||
+           button == BUTTON_STICK_LEFT;
+}
+
+/* The stick angle lies inside the sector [center - halfWidth, center + halfWidth). */
+static s32 angleInSector(f32 angle, const StickSector *sector)
+{
+    return (f32)(sector->center - sector->halfWidth) <= angle && angle < (f32)(sector->center + sector->halfWidth);
+}
+
+/* Combined state of two buttons (pressed / repeating / held, depending on `mode`). When one of them is
+ * a stick direction and the physical stick is not inside that direction's sector, that button's
+ * contribution is dropped. */
+u32 FUN_00254a68(s32 buttonA, s32 buttonB, s32 mode)
+{
+    u32 result = 0;
+    u32 stateA = 0;
+    u32 stateB = 0;
+
+    if (mode == BUTTON_MODE_PRESSED) {
+        stateA = padIsButtonPressed(buttonA);
+        stateB = padIsButtonPressed(buttonB);
+        result = stateA | stateB;
+    } else if (mode == BUTTON_MODE_REPEAT) {
+        stateA = padIsButtonRepeat(buttonA);
+        stateB = padIsButtonRepeat(buttonB);
+        if (FUN_002c15fc(buttonA) != 0 && FUN_002c15fc(buttonB) != 0) {
+            stateB = 0;
         }
-        temp_v11 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(temp_v0 >> 0x16) & 3);
-        temp_v8 = (temp_v8 & 0xfffffff) | ((unsigned int)(temp_v11 == temp_v10) << 0x1e) |
-                ((unsigned int)(temp_v10 <= temp_v11) << 0x1d);
-        temp_v1 = (unsigned char)(temp_v8 >> 0x18);
-        if ((!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) &&
-           (temp_v11 = (float)VectorSignedToFloat(temp_v2 + (short)s____Z____0046527a.u2[0],
-                                                (unsigned char)(temp_v8 >> 0x16) & 3), temp_v10 < temp_v11)) {
-          return temp_v5;
+        result = stateA | stateB;
+    } else if (mode == BUTTON_MODE_HELD) {
+        stateA = FUN_002c15fc(buttonA);
+        stateB = FUN_002c15fc(buttonB);
+        result = stateA | stateB;
+    }
+
+    s32 stickSide;
+    if (isStickDirection(buttonA)) {
+        stickSide = 1;
+    } else if (isStickDirection(buttonB)) {
+        stickSide = 2;
+    } else {
+        return result;
+    }
+
+    if (DAT_00465278.enabled != 0 &&
+        (FUN_002c15fc(BUTTON_STICK_UP) != 0 || FUN_002c15fc(BUTTON_STICK_LEFT) != 0 ||
+         FUN_002c15fc(BUTTON_STICK_DOWN) != 0 || FUN_002c15fc(BUTTON_STICK_RIGHT) != 0)) {
+        f32 x;
+        f32 y;
+        FUN_0027f958(&x, &y, 0);
+        f32 angle = FUN_00281e34(x, y) * 57.295776f;
+        if (angle < 0.0f) {
+            angle += 360.0f;
         }
-      }
-      else {
-        temp_v2 = FUN_002c15fc(0xf);
-        if (temp_v2 != 0) {
-          temp_v11 = (float)VectorSignedToFloat((int)(short)s____Z____0046527a.u2[1] -
-                                              (int)(short)s____Z____0046527a.u2[2],
-                                              (unsigned char)(temp_v8 >> 0x16) & 3);
-          temp_v8 = (temp_v8 & 0xfffffff) | ((unsigned int)(temp_v11 == temp_v10) << 0x1e) |
-                  ((unsigned int)(temp_v10 <= temp_v11) << 0x1d);
-          temp_v1 = (unsigned char)(temp_v8 >> 0x18);
-          if ((!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) &&
-             (temp_v11 = (float)VectorSignedToFloat((int)(short)s____Z____0046527a.u2[1] +
-                                                  (int)(short)s____Z____0046527a.u2[2],
-                                                  (unsigned char)(temp_v8 >> 0x16) & 3), temp_v10 < temp_v11)) {
-            return temp_v5;
-          }
+        if (x == 0.0f && y == 0.0f) {
+            return result;
         }
-        else {
-          temp_v2 = FUN_002c15fc(0xc);
-          if (temp_v2 != 0) {
-            temp_v11 = (float)VectorSignedToFloat((int)(short)s____Z____0046527a.u2[3] -
-                                                (int)(short)s____Z____0046527a.u2[4],
-                                                (unsigned char)(temp_v8 >> 0x16) & 3);
-            temp_v8 = (temp_v8 & 0xfffffff) | ((unsigned int)(temp_v11 == temp_v10) << 0x1e) |
-                    ((unsigned int)(temp_v10 <= temp_v11) << 0x1d);
-            temp_v1 = (unsigned char)(temp_v8 >> 0x18);
-            if ((!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) &&
-               (temp_v11 = (float)VectorSignedToFloat((int)(short)s____Z____0046527a.u2[3] +
-                                                    (int)(short)s____Z____0046527a.u2[4],
-                                                    (unsigned char)(temp_v8 >> 0x16) & 3), temp_v10 < temp_v11)) {
-              return temp_v5;
+        if (FUN_002c15fc(BUTTON_STICK_UP) != 0) {
+            if ((f32)(DAT_00465278.up.center - DAT_00465278.up.halfWidth) + 360.0f <= angle && angle < 360.0f) {
+                return result;
             }
-          }
-          else {
-            temp_v2 = FUN_002c15fc(0xd);
-            if (temp_v2 != 0) {
-              temp_v11 = (float)VectorSignedToFloat((int)DAT_00465284 - (int)DAT_00465286,
-                                                  (unsigned char)(temp_v8 >> 0x16) & 3);
-              temp_v8 = (temp_v8 & 0xfffffff) | ((unsigned int)(temp_v11 == temp_v10) << 0x1e) |
-                      ((unsigned int)(temp_v10 <= temp_v11) << 0x1d);
-              temp_v1 = (unsigned char)(temp_v8 >> 0x18);
-              if ((!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) &&
-                 (temp_v11 = (float)VectorSignedToFloat((int)DAT_00465284 + (int)DAT_00465286,
-                                                      (unsigned char)(temp_v8 >> 0x16) & 3), temp_v10 < temp_v11))
-              {
-                return temp_v5;
-              }
+            if (angleInSector(angle, &DAT_00465278.up)) {
+                return result;
             }
-          }
+        } else if (FUN_002c15fc(BUTTON_STICK_LEFT) != 0) {
+            if (angleInSector(angle, &DAT_00465278.left)) {
+                return result;
+            }
+        } else if (FUN_002c15fc(BUTTON_STICK_DOWN) != 0) {
+            if (angleInSector(angle, &DAT_00465278.down)) {
+                return result;
+            }
+        } else if (FUN_002c15fc(BUTTON_STICK_RIGHT) != 0) {
+            if (angleInSector(angle, &DAT_00465278.right)) {
+                return result;
+            }
         }
-      }
-      temp_v5 = temp_v3;
-      if (temp_v6 != 1) {
-        temp_v5 = temp_v4;
-      }
+        result = (stickSide == 1) ? stateB : stateA;
     }
-  }
-  return temp_v5;
+    return result;
 }
 
 } /* extern "C" */

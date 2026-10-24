@@ -428,6 +428,12 @@ struct GameStateA {
             /* 0x034 */ u8 unk034BeforeRandomPopup[0x490];
             /* 0x4C4 */ s32 countdown;
         } randomPopup;
+        struct {
+            /* 0x034 */ u8 unk034BeforeCamera[0xC0];
+            /* 0x0F4 */ MapVector eye;
+            /* 0x100 */ MapVector target;
+            /* 0x10C */ f32 fov;
+        } scriptCamera;
     };
     /* 0x4cc */ u8 mapRequested;
     /* 0x4cd */ u8 unk4cd[3];

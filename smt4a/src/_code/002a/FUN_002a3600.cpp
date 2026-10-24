@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-state push scheduling, corner initialization order and alternate-render branch placement differ. */
+/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 62 diff lines remain, scheduling/register allocation only. */
 #include "camp/CommonBg.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
@@ -23,7 +23,7 @@ s32 FUN_002a3600()
     if (owner != NULL && owner->enabled != 0) {
         FUN_00157558(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         if (owner->mode != 1) {
             QuadVector corners[4];
             for (s32 index = 0; index < 4; ++index) {

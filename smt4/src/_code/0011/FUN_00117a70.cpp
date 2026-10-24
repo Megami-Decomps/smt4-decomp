@@ -1,153 +1,119 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00117a70` (_code @ 0x117a70, 0x318 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
+#include "camp/RenderCtx.h"
+
+struct FrameSurface {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+    /* 0x1C */ u8 unk1C[0x20];
+    /* 0x3C */ s32 filterX;
+    /* 0x40 */ s32 filterY;
+};
+
+struct FrameTexQuad {
+    /* 0x00 */ f32 x[4];
+    /* 0x10 */ f32 y[4];
+};
+
+struct FrameTex {
+    /* 0x0000 */ u8 unk0000[0xE90];
+    /* 0x0E90 */ s32 downscale;        /* capture was taken at 1/2^n size */
+    /* 0x0E94 */ u8 fullWidth;
+    /* 0x0E95 */ u8 unk0E95[3];
+    /* 0x0E98 */ FrameTexQuad quad;
+    /* 0x0EB8 */ u8 unk0EB8[8];
+    /* 0x0EC0 */ u32 color;
+    /* 0x0EC4 */ f32 depth;
+    /* 0x0EC8 */ s32 blendMode;        /* 0 normal, 1 additive, 2 subtractive */
+    /* 0x0ECC */ u8 filtered;
+    /* 0x0ECD */ u8 unk0ECD[0x10F];
+    /* 0x0FDC */ FrameSurface *surface;
+};
+
+#define FRAME_TEX_WIDTH_HALF 240.0f
+#define FRAME_TEX_WIDTH_FULL 480.0f
+#define FRAME_TEX_HEIGHT 400.0f
 
 extern "C" {
+extern FrameTex *g_frameTex;
+extern RenderCtx *g_titleScene;
 
-int FUN_002b99b8(void);
-int FUN_002ba1e0(int, int, int, int, int, int, int, double);
-int FUN_002c1b64(int, int);
-int VectorSignedToFloat(...);
+s32 FUN_002bff10(s32 selector);
+s32 FUN_002c5d80(u32 a, u32 b);
+s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
+f32 FUN_002b99b8(f32 base, f32 exponent);
+void FUN_002c1b64(RenderCtx *context, FrameSurface *surface);
+void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3,
+                  f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+                  f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
+                  f32 u0, f32 v0, f32 u1, f32 v1, f32 u2, f32 v2, f32 u3, f32 v3);
 
-typedef int romwright_code(...);
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern int g_frameTex; /* 0x43e278 */
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b99b8. */
-/* Supplied declaration required: FUN_002ba1e0. */
-extern int FUN_002bff10(unsigned int);
-/* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-
-
-void FUN_00117a70(void)
-
+void FUN_00117a70(s32 wide)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  int *piVar8;
-  unsigned char temp_v7;
-  unsigned int in_fpscr;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v3 = g_frameTex;
-  temp_v9 = 400.0f;
-  temp_v0 = FUN_002bff10(0);
-  temp_v1 = *(int *)(temp_v3 + 0xe90);
-  if (((temp_v0 == 0) && (temp_v1 >= 2)) && (temp_v1 = temp_v1 - 1, temp_v1 < 1)) {
-    temp_v1 = 1;
-    VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = 2.0f;
-    FUN_002b99b8();
-    temp_v9 = temp_v9 / temp_v8;
-  }
-  else if (temp_v1 != 0) {
-    VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v8 = 2.0f;
-    FUN_002b99b8();
-    temp_v9 = temp_v9 / temp_v8;
-  }
-  temp_v0 = *(int *)(temp_v3 + 0xfdc);
-  temp_v7 = *(char *)(temp_v3 + 0xecc) != '\0';
-  if (temp_v7) {
-    *(unsigned int *)(temp_v0 + 0x3c) = 1;
-    *(unsigned int *)(temp_v0 + 0x40) = 1;
-  }
-  VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v8 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (!temp_v7) {
-    *(unsigned int *)(temp_v0 + 0x3c) = 0;
-    *(unsigned int *)(temp_v0 + 0x40) = 0;
-  }
-  temp_v1 = g_titleScene;
-  temp_v9 = temp_v9 / temp_v8;
-  temp_v2 = FUN_002c5d80(1,0);
-  piVar8 = (int *)(temp_v1 + 0x124c);
-  temp_v4 = *piVar8;
-  temp_v5 = piVar8[temp_v4 + 2];
-  *piVar8 = temp_v4 + 1;
-  piVar8[temp_v4 + 3] = temp_v2;
-  if (*(char *)(temp_v1 + 0x1264) != '\0' || temp_v5 != temp_v2) {
-    (**(romwright_code **)(temp_v1 + 0x1268))();
-    *(unsigned char *)(temp_v1 + 0x1264) = 0;
-  }
-  temp_v1 = g_titleScene;
-  temp_v2 = *(int *)(temp_v3 + 0xec8);
-  if (temp_v2 != 0) {
-    if (temp_v2 != 1) {
-      if (temp_v2 == 2) {
-        temp_v2 = packNibblesAndByte(6,1,2);
-        piVar8 = (int *)(temp_v1 + 0x12ac);
-        temp_v4 = piVar8[*piVar8 + 2];
-        piVar8[*piVar8 + 2] = temp_v2;
-        if (!(*(char *)(temp_v1 + 0x12c4) == '\0' && temp_v4 == temp_v2)) {
-          (**(romwright_code **)(temp_v1 + 0x12c8))();
-          *(unsigned char *)(temp_v1 + 0x12c4) = 0;
-        }
-      }
+    FrameTex *tex = g_frameTex;
+    f32 extentU = FRAME_TEX_WIDTH_HALF;
+    f32 extentV = FRAME_TEX_HEIGHT;
+    if (tex->fullWidth == 0 && wide != 0)
+        extentU = FRAME_TEX_WIDTH_FULL;
+
+    s32 selector = FUN_002bff10(0);
+    s32 level = tex->downscale;
+    if (selector == 0 && level > 1) {
+        level = level - 1;
+        if (level < 1)
+            level = 1;
     }
-    else {
-      temp_v2 = packNibblesAndByte(6,1,0);
-      piVar8 = (int *)(temp_v1 + 0x12ac);
-      temp_v4 = piVar8[*piVar8 + 2];
-      piVar8[*piVar8 + 2] = temp_v2;
-      if (!(*(char *)(temp_v1 + 0x12c4) == '\0' && temp_v4 == temp_v2)) {
-        (**(romwright_code **)(temp_v1 + 0x12c8))();
-        *(unsigned char *)(temp_v1 + 0x12c4) = 0;
-      }
+    if (level != 0) {
+        f32 scale = FUN_002b99b8(2.0f, (f32)level);
+        extentV = extentV / scale;
+        extentU = extentU / scale;
     }
-  }
-  else {
-    temp_v2 = packNibblesAndByte(6,7,0);
-    piVar8 = (int *)(temp_v1 + 0x12ac);
-    temp_v4 = piVar8[*piVar8 + 2];
-    piVar8[*piVar8 + 2] = temp_v2;
-    if (!(*(char *)(temp_v1 + 0x12c4) == '\0' && temp_v4 == temp_v2)) {
-      (**(romwright_code **)(temp_v1 + 0x12c8))();
-      *(unsigned char *)(temp_v1 + 0x12c4) = 0;
+
+    FrameSurface *surface = tex->surface;
+    if (tex->filtered != 0) {
+        surface->filterX = 1;
+        surface->filterY = 1;
     }
-  }
-  FUN_002c1b64(g_titleScene,temp_v0);
-  temp_v6 = *(unsigned int *)(temp_v3 + 0xec0);
-  FUN_002ba1e0(temp_v6,temp_v6,temp_v6,temp_v6,0,0,0,temp_v9);
-  temp_v0 = g_titleScene;
-  if (*(int *)(temp_v3 + 0xec8) != 0) {
-    temp_v3 = packNibblesAndByte(6,7,0);
-    piVar8 = (int *)(temp_v0 + 0x12ac);
-    temp_v1 = piVar8[*piVar8 + 2];
-    piVar8[*piVar8 + 2] = temp_v3;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v1 != temp_v3) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
+    f32 width = (f32)surface->width;
+    f32 height = (f32)surface->height;
+    if (tex->filtered == 0) {
+        surface->filterX = 0;
+        surface->filterY = 0;
     }
-  }
-  temp_v3 = g_titleScene;
-  piVar8 = (int *)(g_titleScene + 0x124c);
-  temp_v0 = *piVar8;
-  temp_v1 = piVar8[temp_v0 + 2];
-  *piVar8 = temp_v0 - 1;
-  if (*(char *)(temp_v3 + 0x1264) != '\0' || temp_v1 != piVar8[temp_v0 + 1]) {
-    (**(romwright_code **)(temp_v3 + 0x1268))();
-    *(unsigned char *)(temp_v3 + 0x1264) = 0;
-  }
-  return;
+    f32 maxU = extentU / width;
+    f32 maxV = extentV / height;
+
+    RenderCtx *context = g_titleScene;
+    s32 state = FUN_002c5d80(1, 0);
+    renderStackPush(&context->stackA, state);
+    context = g_titleScene;
+    switch (tex->blendMode) {
+    case 0:
+        state = packNibblesAndByte(6, 7, 0);
+        renderStackSet(&context->stackB, state);
+        break;
+    case 1:
+        state = packNibblesAndByte(6, 1, 0);
+        renderStackSet(&context->stackB, state);
+        break;
+    case 2:
+        state = packNibblesAndByte(6, 1, 2);
+        renderStackSet(&context->stackB, state);
+        break;
+    }
+    FUN_002c1b64(g_titleScene, surface);
+    u32 color = tex->color;
+    f32 z = tex->depth;
+    FUN_002ba1e0(color, color, color, color,
+                 tex->quad.x[0], tex->quad.y[0], z, tex->quad.x[1], tex->quad.y[1], z,
+                 tex->quad.x[2], tex->quad.y[2], z, tex->quad.x[3], tex->quad.y[3], z,
+                 maxU, 0.0f, maxU, maxV, 0.0f, 0.0f, 0.0f, maxV);
+    context = g_titleScene;
+    if (tex->blendMode != 0) {
+        state = packNibblesAndByte(6, 7, 0);
+        renderStackSet(&context->stackB, state);
+    }
+    renderStackPop(&g_titleScene->stackA);
 }
 
 } /* extern "C" */

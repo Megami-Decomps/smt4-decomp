@@ -1,141 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00427360` (_code @ 0x427360, 0x248 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps one result register and one shared cleanup tail (the file wrapper's destructor runs once) and a 64-bit running read offset; ours duplicates the tail per return and indexes the offset (157 rows against 154). The module/description range test is also folded differently (cmp #17408, unsigned). */
+#include "shard/W6_W6Match7_ArchiveIcon.h"
+#include "nn/Result.h"
+
+/* The archive's content header: 7 default pairs, then a count of extra pairs stored after the header. */
+struct ArchiveContentHeader {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s16 pair[7][2];      /* (value, key) */
+    /* 0x30 */ u32 extraCount;
+};
+
+/* The loader state the chosen pair is written to (observed fields); the archive source leads it. */
+struct ArchiveContentTarget {
+    /* 0x00 */ ArchiveIconSource source;
+    /* 0x08 */ u8 unk08[0x40];
+    /* 0x48 */ u16 value;
+    /* 0x4A */ u16 key;
+};
 
 extern "C" {
-
-int multibyteToUtf16(unsigned char [96], unsigned char [52], int);
-int vcallSlot12IfValid(void);
-int archiveTryOpenFile(int *, unsigned int, unsigned int, int *, int);
-int FUN_00430f98(void);
-int stringFormatBounded(unsigned char [52], int, unsigned char *);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int spC0; /* 0xc0: local_c0 */
-    unsigned int spCC; /* 0xcc: local_cc */
-    unsigned int spD0; /* 0xd0: local_d0 */
-    unsigned int spD4; /* 0xd4: local_d4 */
-    unsigned int spD8; /* 0xd8: local_d8 */
-    unsigned int sp10C; /* 0x10c: local_10c */
-    unsigned int sp110; /* 0x110: local_110 */
-} param_1_stack;
-
-extern unsigned char LAB_004275a8; /* 0x4275a8 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: multibyteToUtf16. */
-/* Supplied declaration required: vcallSlot12IfValid. */
-extern int wstrlenU16(void);
-/* Supplied declaration required: archiveTryOpenFile. */
-/* Supplied declaration required: FUN_00430f98. */
-extern int *FUN_0043126c(void);
-/* Supplied declaration required: stringFormatBounded. */
-extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(int *, unsigned int, long long, unsigned int, unsigned int);
-
-
-int * FUN_00427360(unsigned int *param_1)
-
-{
-/* irregular: 4 goto(s); 5 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  int *piVar4;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  unsigned char temp_v7 [20];
-  short asStack_f4 [14];
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned char *temp_v10;
-  int temp_v11;
-  int temp_v12;
-  int iStack_bc;
-  unsigned char temp_v13 [96];
-  unsigned char temp_v14 [52];
-  
-  stringFormatBounded(temp_v14,0x30,&LAB_004275a8);
-  multibyteToUtf16(temp_v13,temp_v14,0x30);
-  temp_v12 = 0;
-  temp_v2 = *param_1;
-  temp_v3 = param_1[1];
-  temp_v10 = temp_v13;
-  piVar4 = &temp_v12;
-  temp_v9 = 4;
-  temp_v0 = wstrlenU16();
-  temp_v11 = (temp_v0 + 1) * 2;
-  archiveTryOpenFile(piVar4,temp_v2,temp_v3,&temp_v9,1);
-  if (((((unsigned int)piVar4 & 0x3fc00) != 0x4400) || (99 >= ((unsigned int)piVar4 & 0x3ff))) ||
-     (((unsigned int)piVar4 & 0x3ff) >= 0xb4)) {
-    if ((-1 < (int)piVar4) &&
-       (piVar2 = (int *)nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile
-                                  (&iStack_bc,temp_v12,romwright_piece_4_4(0x34,temp_v7),0,0),
-       piVar4 = piVar2, -1 < (int)piVar2)) {
-      temp_v1 = 0x34;
-      temp_v5 = 0;
-      FUN_00430f98();
-      piVar3 = (int *)FUN_0043126c();
-      temp_v4 = 0;
-      if (temp_v4 < temp_v8) {
-        do {
-          piVar4 = (int *)nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile
-                                    (&iStack_bc,temp_v12,romwright_piece_4_4(4,&temp_v9),temp_v1,temp_v5);
-          if ((int)piVar4 < 0) {
-            if (temp_v12 != 0) {
-              vcallSlot12IfValid();
-            }
-            return piVar4;
-          }
-          piVar4 = (int *)(int)(*(short *)((unsigned char *)&temp_v9 + 2));
-          temp_v6 = 0xfffffffb < temp_v1;
-          temp_v1 = temp_v1 + 4;
-          temp_v5 = temp_v5 + temp_v6;
-          temp_v6 = piVar4 == piVar2;
-          if (temp_v6) {
-            piVar4 = (int *)(int)(short)temp_v9;
-          }
-          if (temp_v6 && piVar4 == piVar3) {
-            *(short *)((int)param_1 + 0x4a) = (*(short *)((unsigned char *)&temp_v9 + 2));
-            *(short *)(param_1 + 0x12) = (short)temp_v9;
-            goto joined_r0x00427528;
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < temp_v8);
-      }
-      temp_v0 = 0;
-LAB_00427548:
-      if ((int *)(int)asStack_f4[temp_v0 * 2] != piVar3) goto LAB_00427580;
-      *(short *)((int)param_1 + 0x4a) = asStack_f4[temp_v0 * 2 + 1];
-      *(short *)(param_1 + 0x12) = asStack_f4[temp_v0 * 2];
-joined_r0x00427528:
-      piVar4 = (int *)0x0;
-      if (temp_v12 == 0) {
-        return (int *)0x0;
-      }
-      vcallSlot12IfValid();
-      return piVar4;
-    }
-  }
-  else {
-joined_r0x00427598:
-    piVar4 = (int *)0xd901388b;
-  }
-  if (temp_v12 != 0) {
-    vcallSlot12IfValid();
-  }
-  return piVar4;
-LAB_00427580:
-  temp_v0 = temp_v0 + 1;
-  if (temp_v0 >= 7) goto joined_r0x00427598;
-  goto LAB_00427548;
+s32 stringFormatBounded(char *output, u32 size, const char *format, ...);
+u32 multibyteToUtf16(u16 *output, const char *input, u32 count);
+s32 wstrlenU16(const u16 *text);
+s32 archiveTryOpenFile(void **file, u32 archiveFirst, u32 archiveSecond, const ArchiveIconPath *path, u32 mode);
+s32 nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(u32 *readSize, void *file, s64 offset, void *output, u32 size);
+void vcallSlot12IfValid(void *object);
+s32 FUN_00430f98(void);
+s32 FUN_0043126c(void);
 }
 
-} /* extern "C" */
+inline ArchiveIconFile::ArchiveIconFile() : object(NULL)
+{
+}
+
+inline ArchiveIconFile::~ArchiveIconFile()
+{
+    if (object != NULL) {
+        vcallSlot12IfValid(object);
+    }
+}
+
+inline ArchiveIconPath::ArchiveIconPath(const u16 *text)
+    : type(4), data(text), byteSize((wstrlenU16(text) + 1) * sizeof(u16))
+{
+}
+
+inline s32 ArchiveIconFile::tryOpen(ArchiveIconSource source, const ArchiveIconPath &path)
+{
+    return archiveTryOpenFile(&object, source.first, source.second, &path, 1);
+}
+
+/* Opens the archive's content header and picks the pair for the current language/region: first the pairs
+ * stored after the header (matching both key and value), then the 7 defaults (matching the value only).
+ * Returns an nn::Result; the chosen pair is written to the target. */
+extern "C" s32 FUN_00427360(ArchiveContentTarget *target)
+{
+    char path[48];
+    u16 widePath[48];
+    ArchiveContentHeader header;
+    u32 readSize;
+    s32 status;
+    s32 key;
+    s32 value;
+    u32 i;
+
+    stringFormatBounded(path, sizeof(path), "/MetaDataContentHeader.bin");
+    multibyteToUtf16(widePath, path, 48);
+    ArchiveIconFile file;
+    status = file.tryOpen(target->source, ArchiveIconPath(widePath));
+    if (nnResultModule(status) == 17 && nnResultDescription(status) >= 100 && nnResultDescription(status) <= 179) {
+        return static_cast<s32>(0xd901388b);
+    }
+    if (nnResultIsFailure(status)) {
+        return status;
+    }
+    status = nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(&readSize, file.object, 0, &header, sizeof(header));
+    if (nnResultIsFailure(status)) {
+        return status;
+    }
+    key = FUN_00430f98();
+    value = FUN_0043126c();
+    for (i = 0; i < header.extraCount; i++) {
+        s16 pair[2];
+
+        status = nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(&readSize, file.object, sizeof(header) + i * 4, pair, 4);
+        if (nnResultIsFailure(status)) {
+            return status;
+        }
+        if (pair[1] == key && pair[0] == value) {
+            target->key = pair[1];
+            target->value = pair[0];
+            return 0;
+        }
+    }
+    for (i = 0; i < 7; i++) {
+        if (header.pair[i][0] == value) {
+            target->key = header.pair[i][1];
+            target->value = header.pair[i][0];
+            return 0;
+        }
+    }
+    return static_cast<s32>(0xd901388b);
+}

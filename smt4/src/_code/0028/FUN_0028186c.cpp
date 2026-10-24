@@ -1,168 +1,143 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028186c` (_code @ 0x28186c, 0x334 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (206 rows against 207): retail copies the origin/offset vectors with mixed ldr/ldm and keeps the saved orientation in s16-s19, the node flags in r8 and the callback table in r7, with a 9-register push; ours uses plain ldm/stm vector copies and different VFP/saved-register assignments. Control flow, constants and the render-state push/pop agree. */
+#include "camp/RenderCtx.h"
+
+struct EffectVec4 {
+    f32 x, y, z, w;
+};
+
+/* Scratch positions shared by the effect update (accessed at 0x100 and 0x110). */
+extern struct EffectScratch {
+    u8 unk00[0x100];
+    EffectVec4 position;    // 0x100
+    EffectVec4 offset;      // 0x110
+} DAT_004ea81c;
+
+/* The effect definition a node runs: handler type and argument. */
+struct EffectDef {
+    u8 unk00[4];
+    u16 type;           // 0x04
+    u8 unk06[2];
+    void *argument;     // 0x08
+};
+
+/* Per-type handler table entry (0x44 bytes). */
+struct EffectHandler {
+    u8 unk00[0xC];
+    void (*update)(void *argument);                     // 0x0C
+    u8 unk10[0x10];
+    void (*attach)(void *argument, const EffectVec4 *position);  // 0x20
+    void (*orient)(void *argument, const f32 *matrix);  // 0x24
+    u8 unk28[0x1C];
+};
+extern "C" EffectHandler g_handlerTable[];
+
+/* An effect node (accessed fields). */
+struct EffectNode {
+    EffectVec4 offset;          // 0x00
+    u8 unk10[0x30];
+    EffectVec4 origin;          // 0x40
+    EffectVec4 orientation;     // 0x50
+    f32 scale;                  // 0x60
+    u8 unk64[4];
+    u32 flags;                  // 0x68
+    u8 unk6C[8];
+    f32 childScale;             // 0x74
+    u8 unk78[8];
+    s32 startFrame;             // 0x80
+    s32 frame;                  // 0x84 (children: flags2 at the same offset)
+    u8 unk88[4];
+    EffectNode *firstChild;     // 0x8C
+    EffectDef *def;             // 0x90
+    u8 unk94[0x18];
+    EffectNode *next;           // 0xAC
+};
+
+#define EFFECT_NODE_PLACED 0x80000000
 
 extern "C" {
 
-int FUN_0025c8f0(...);
-int FUN_002a3958(float *, unsigned char [36]);
+extern RenderCtx *g_titleScene;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_1_stack;
+s32 FUN_0025c8f0(EffectNode *node, const EffectVec4 *position, f32 *matrix);
+void FUN_002a3958(EffectNode *node, const f32 *matrix);
 
-extern int g_titleScene; /* 0x44ea00 */
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Places the effect node and updates every child that has started, with the title scene's render state
+ * duplicated for the duration; the node's "placed" flag is cleared afterwards. */
+void FUN_0028186c(EffectNode *node)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: FUN_0025c8f0. */
-/* Supplied declaration required: FUN_002a3958. */
+    EffectVec4 position;
+    EffectVec4 childOffset;
+    f32 matrix[9];
+    f32 scale;
+    s32 lastFrame;
+    EffectNode *child;
+    u32 flags;
 
-
-void FUN_0028186c(float *param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  float temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  romwright_code *pcVar6;
-  float temp_v5;
-  int *piVar8;
-  float temp_v6;
-  float temp_v7;
-  unsigned long long temp_v8;
-  float temp_v9;
-  unsigned long long temp_v10;
-  float temp_v11;
-  float fStack_64;
-  float fStack_60;
-  float temp_v12;
-  float temp_v13;
-  float fStack_54;
-  float fStack_50;
-  float fStack_4c;
-  unsigned char temp_v14 [36];
-  
-  if (0 < (int)param_1[0x21]) {
-    temp_v6 = param_1[0x1a];
-    DAT_004ea92c = *param_1;
-    DAT_004ea930 = param_1[1];
-    DAT_004ea934 = param_1[2];
-    DAT_004ea938 = param_1[3];
-    temp_v11 = param_1[0x10] + DAT_004ea92c;
-    fStack_64 = param_1[0x11] + DAT_004ea930;
-    fStack_60 = param_1[0x12] + DAT_004ea934;
-    temp_v12 = param_1[0x13] + DAT_004ea938;
-    DAT_004ea91c = temp_v11;
-    DAT_004ea920 = fStack_64;
-    DAT_004ea924 = fStack_60;
-    DAT_004ea928 = temp_v12;
-    if ((((unsigned int)temp_v6 & 0x60) != 0) && (((unsigned int)temp_v6 & 0x80000000) == 0)) {
-      temp_v8 = *(unsigned long long *)(param_1 + 0x14);
-      temp_v10 = *(unsigned long long *)(param_1 + 0x16);
-      FUN_0025c8f0(param_1,&temp_v11,temp_v14);
-      FUN_002a3958(param_1,temp_v14);
-      param_1[0x14] = (float)temp_v8;
-      param_1[0x15] = (float)((unsigned long long)temp_v8 >> 0x20);
-      param_1[0x16] = (float)temp_v10;
-      param_1[0x17] = (float)((unsigned long long)temp_v10 >> 0x20);
+    if (node->frame <= 0) {
+        return;
     }
-    temp_v0 = g_titleScene;
-    temp_v1 = param_1[0x21];
-    temp_v5 = param_1[0x23];
-    temp_v7 = param_1[0x18] * param_1[0x1d];
-    temp_v3 = *(int *)(g_titleScene + 0x12ac);
-    piVar8 = (int *)(g_titleScene + 0x12ac);
-    temp_v2 = *(int *)(g_titleScene + temp_v3 * 4 + 0x12b4);
-    temp_v4 = piVar8[temp_v3 + 2];
-    *piVar8 = temp_v3 + 1;
-    piVar8[temp_v3 + 3] = temp_v2;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v4 != temp_v2) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
+    DAT_004ea81c.position = node->origin;
+    DAT_004ea81c.offset = node->offset;
+    DAT_004ea81c.position.x += DAT_004ea81c.offset.x;
+    DAT_004ea81c.position.y += DAT_004ea81c.offset.y;
+    DAT_004ea81c.position.z += DAT_004ea81c.offset.z;
+    DAT_004ea81c.position.w += DAT_004ea81c.offset.w;
+    position = DAT_004ea81c.position;
+    flags = node->flags;
+    if ((flags & 0x60) != 0 && (flags & EFFECT_NODE_PLACED) == 0) {
+        EffectVec4 orientation = node->orientation;
+
+        FUN_0025c8f0(node, &position, matrix);
+        FUN_002a3958(node, matrix);
+        node->orientation = orientation;
     }
-    if (temp_v5 != 0.0f) {
-      temp_v9 = 5.0f;
-      do {
-        if ((*(int *)((int)temp_v5 + 0x80) <= (int)temp_v1 - 1) &&
-           ((*(unsigned int *)((int)temp_v5 + 0x84) & 2) == 0)) {
-          if (((unsigned int)temp_v6 & 0x80000000) == 0) {
-            if ((*(unsigned int *)((int)temp_v5 + 0x68) & 0x18) != 0) {
-              DAT_004ea920 = fStack_64;
-              if ((*(unsigned int *)((int)temp_v5 + 0x68) & 4) != 0) {
-                DAT_004ea920 = temp_v9;
-              }
-              DAT_004ea92c = temp_v13;
-              DAT_004ea930 = fStack_54;
-              DAT_004ea934 = fStack_50;
-              DAT_004ea938 = fStack_4c;
-              if ((*(unsigned int *)((int)temp_v5 + 0x68) & 0x80) != 0) {
-                DAT_004ea92c = temp_v13 * temp_v7;
-                DAT_004ea930 = fStack_54 * temp_v7;
-                DAT_004ea934 = fStack_50 * temp_v7;
-                DAT_004ea938 = fStack_4c * temp_v7;
-              }
-              temp_v13 = temp_v11 + DAT_004ea92c;
-              fStack_54 = DAT_004ea920 + DAT_004ea930;
-              fStack_50 = fStack_60 + DAT_004ea934;
-              fStack_4c = temp_v12 + DAT_004ea938;
-              pcVar6 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)((int)temp_v5 + 0x90) + 4) * 0x44 +
-                                 0x464130);
-              DAT_004ea91c = temp_v13;
-              DAT_004ea920 = fStack_54;
-              DAT_004ea924 = fStack_50;
-              DAT_004ea928 = fStack_4c;
-              if (pcVar6 != (romwright_code *)0x0) {
-                (*pcVar6)(*(unsigned int *)(*(int *)((int)temp_v5 + 0x90) + 8),&temp_v13);
-              }
-            }
-            if ((*(unsigned int *)((int)temp_v5 + 0x68) & 0x60) != 0) {
-              FUN_0025c8f0(temp_v5,&temp_v11,temp_v14);
-              pcVar6 = *(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)((int)temp_v5 + 0x90) + 4) * 0x44 +
-                                 0x464134);
-              if (pcVar6 != (romwright_code *)0x0) {
-                (*pcVar6)(*(unsigned int *)(*(int *)((int)temp_v5 + 0x90) + 8),temp_v14);
-              }
-            }
-          }
-          (**(romwright_code **)((unsigned int)*(unsigned short *)(*(int *)((int)temp_v5 + 0x90) + 4) * 0x44 + 0x46411c))
-                    (*(unsigned int *)(*(int *)((int)temp_v5 + 0x90) + 8));
+    lastFrame = node->frame - 1;
+    scale = node->scale * node->childScale;
+    child = node->firstChild;
+    renderStackPush(&g_titleScene->stackB, g_titleScene->stackB.entries[g_titleScene->stackB.count]);
+    for (; child != NULL; child = child->next) {
+        if (child->startFrame > lastFrame || (child->frame & 2) != 0) {
+            continue;
         }
-        temp_v5 = *(float *)((int)temp_v5 + 0xac);
-      } while (temp_v5 != 0.0f);
+        if ((flags & EFFECT_NODE_PLACED) == 0) {
+            if ((child->flags & 0x18) != 0) {
+                EffectHandler *handler;
+
+                DAT_004ea81c.position = position;
+                if ((child->flags & 4) != 0) {
+                    DAT_004ea81c.position.y = 5.0f;
+                }
+                DAT_004ea81c.offset = childOffset;
+                if ((child->flags & 0x80) != 0) {
+                    DAT_004ea81c.offset.x *= scale;
+                    DAT_004ea81c.offset.y *= scale;
+                    DAT_004ea81c.offset.z *= scale;
+                    DAT_004ea81c.offset.w *= scale;
+                }
+                DAT_004ea81c.position.x += DAT_004ea81c.offset.x;
+                DAT_004ea81c.position.y += DAT_004ea81c.offset.y;
+                DAT_004ea81c.position.z += DAT_004ea81c.offset.z;
+                DAT_004ea81c.position.w += DAT_004ea81c.offset.w;
+                childOffset = DAT_004ea81c.position;
+                handler = &g_handlerTable[child->def->type];
+                if (handler->attach != NULL) {
+                    handler->attach(child->def->argument, &childOffset);
+                }
+            }
+            if ((child->flags & 0x60) != 0) {
+                EffectHandler *handler;
+
+                FUN_0025c8f0(child, &position, matrix);
+                handler = &g_handlerTable[child->def->type];
+                if (handler->orient != NULL) {
+                    handler->orient(child->def->argument, matrix);
+                }
+            }
+        }
+        g_handlerTable[child->def->type].update(child->def->argument);
     }
-    param_1[0x1a] = romwright_fabs_4(param_1[0x1a]);
-    temp_v0 = g_titleScene;
-    piVar8 = (int *)(g_titleScene + 0x12ac);
-    temp_v2 = *piVar8;
-    temp_v3 = piVar8[temp_v2 + 2];
-    *piVar8 = temp_v2 - 1;
-    if (*(char *)(temp_v0 + 0x12c4) != '\0' || temp_v3 != piVar8[temp_v2 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x12c8))();
-      *(unsigned char *)(temp_v0 + 0x12c4) = 0;
-    }
-  }
-  return;
+    node->flags &= ~EFFECT_NODE_PLACED;
+    renderStackPop(&g_titleScene->stackB);
 }
 
 } /* extern "C" */

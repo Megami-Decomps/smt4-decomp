@@ -1,215 +1,150 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004275f0` (_code @ 0x4275f0, 0x2d8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail walks the entry list with a re-checked list pointer each pass and orders the packed-record bit tests differently; the catalogue query logic is the same (161 vs 184 rows). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001029f4(unsigned int, int, int);
-int sysFatalBreak(void);
-int recordTableAppend(unsigned char *);
-int pricingSelectionBuildPredicate(int);
-int wordPairClear(void);
-int FUN_00428334(int, unsigned char **, unsigned int);
-int FUN_00428428(int, int, int);
-int FUN_00439750(int, unsigned int, int *, int);
+/* One key/value pair of a catalogue entry. */
+typedef struct CatalogPair {
+    const char *key;
+    const char *value;
+} CatalogPair;
 
-/* stack frame of param_4: 12 slot(s), 48 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_4_stack;
+/* One catalogue entry (0x30 bytes): a packed id/kind pair and its key/value pairs. */
+typedef struct CatalogEntry {
+    /* 0x00 */ u32 packedLow;
+    /* 0x04 */ u32 packedHigh;
+    /* 0x08 */ u8 unk08[0x10];
+    /* 0x18 */ CatalogPair *pairs;
+    /* 0x1C */ u32 pairCount;
+    /* 0x20 */ u8 unk20[0x10];
+} CatalogEntry;
 
-extern unsigned char LAB_004278c8; /* 0x4278c8 */
-extern unsigned char LAB_004278d0; /* 0x4278d0 */
-extern unsigned char LAB_004278d8; /* 0x4278d8 */
-extern unsigned char LAB_004278e4; /* 0x4278e4 */
-extern unsigned char LAB_004278f4; /* 0x4278f4 */
-extern unsigned char LAB_00427904; /* 0x427904 */
-extern unsigned int DAT_005c0a8c; /* 0x5c0a8c */
-extern unsigned int DAT_005c0a90; /* 0x5c0a90 */
-extern unsigned char DAT_00642980; /* 0x642980 */
-extern unsigned char DAT_00642b80; /* 0x642b80 */
+typedef struct CatalogList {
+    /* 0x00 */ CatalogEntry *entries;
+    /* 0x04 */ u32 count;
+} CatalogList;
 
-/* Supplied declaration required: FUN_001029f4. */
-/* Supplied declaration required: sysFatalBreak. */
-extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: recordTableAppend. */
-/* Supplied declaration required: pricingSelectionBuildPredicate. */
-/* Supplied declaration required: wordPairClear. */
-/* Supplied declaration required: FUN_00428334. */
-extern unsigned char *dataGetBlockBase(int);
-extern unsigned int FUN_004283e0(int);
-/* Supplied declaration required: FUN_00428428. */
-/* Supplied declaration required: FUN_00439750. */
+/* The catalogue response object (only the fields used here). */
+typedef struct Catalog {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ CatalogList *list;
+    /* 0x08 */ u32 extraBuffer;
+    /* 0x0C */ u32 extraSize;
+} Catalog;
 
+/* The request: output buffers for the query (a null buffer pointer means "use the request itself"). */
+typedef struct CatalogRequest {
+    /* 0x00 */ void *first;
+    /* 0x04 */ u32 firstSize;
+    /* 0x08 */ void *third;
+    /* 0x0C */ u32 thirdCount;
+    /* 0x10 */ u32 key0;
+    /* 0x14 */ u32 key1;
+    /* 0x18 */ void *sixth;
+    /* 0x1C */ u32 unk1c[3];
+    /* 0x28 */ u8 priceMode;
+    /* 0x29 */ u8 unk29[3];
+    /* 0x2C */ void *seventh;
+    /* 0x30 */ u32 seventhSize;
+} CatalogRequest;
 
-void FUN_004275f0(int param_1,int param_2,unsigned int param_3,int *param_4)
+extern u8 DAT_00642980[];
+extern u8 DAT_00642b80[];
+extern u32 DAT_005c0a8c;
+extern u32 DAT_005c0a90;
 
+s32 FUN_00428428(Catalog *catalog, u32 a, u32 b);
+void *dataGetBlockBase(Catalog *catalog);
+u32 FUN_004283e0(Catalog *catalog);
+void wordPairClear(void);
+void recordTableAppend(const char *key);
+void pricingSelectionBuildPredicate(s32 mode);
+u32 FUN_00439750(u32 id, u32 option, void *first, u32 firstSize, void *second, u32 secondSize, void *third,
+                 u32 thirdCount, void *fourth, u32 fourthCount, void *fifth, u32 fifthCount, void *sixth,
+                 u32 sixthCount, void *seventh, u32 seventhSize, u32 *outputCount, void *extraBuffer, u32 extraSize);
+s32 libc_strncmp(const char *a, const char *b, u32 count);
+u32 FUN_001029f4(const char *text, s32 end, s32 base);
+void sysFatalBreak(void);
+s32 FUN_00428334(Catalog *catalog, u32 *record, u32 version);
+
+/* Queries the catalogue service for the title `id` and fills `catalog`: appends the six
+ * attribute names to ask for, runs the query, then registers every returned entry with its
+ * TitleVersion. Returns a negative error code on failure. */
+s32 FUN_004275f0(Catalog *catalog, u32 id, u32 option, CatalogRequest *request)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  int *piVar4;
-  unsigned int temp_v2;
-  unsigned int *puVar5;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  unsigned char *temp_v10;
-  unsigned int temp_v11;
-  int *temp_v12;
-  int temp_v13;
-  unsigned char *puStack_58;
-  unsigned int temp_v14;
-  unsigned char *puStack_50;
-  unsigned int temp_v15;
-  int *temp_v16;
-  unsigned int uStack_44;
-  int temp_v17;
-  int temp_v18;
-  int temp_v19;
-  unsigned int temp_v20;
-  unsigned int uStack_30;
-  int temp_v21;
-  
-  temp_v0 = param_1;
-  FUN_00428428(param_1,param_4[4],param_4[5]);
-  if (-1 < temp_v0) {
-    temp_v21 = param_2;
-    temp_v10 = (unsigned char *)dataGetBlockBase(param_1);
-    temp_v11 = FUN_004283e0(param_1);
-    temp_v6 = *(unsigned int *)(param_1 + 8);
-    temp_v8 = *(unsigned int *)(param_1 + 0xc);
+    s32 result = FUN_00428428(catalog, request->key0, request->key1);
+
+    if (result < 0) {
+        return result;
+    }
+    void *block = dataGetBlockBase(catalog);
+    u32 blockSize = FUN_004283e0(catalog);
+
     wordPairClear();
-    recordTableAppend(&LAB_004278c8);
-    recordTableAppend(&LAB_004278d0);
-    recordTableAppend(&LAB_004278d8);
-    recordTableAppend(&LAB_004278e4);
-    recordTableAppend(&LAB_004278f4);
-    recordTableAppend(&LAB_00427904);
-    pricingSelectionBuildPredicate((char)param_4[10]);
-    piVar4 = (int *)param_4[6];
-    piVar2 = (int *)*param_4;
-    if ((int *)*param_4 == (int *)0x0) {
-      piVar2 = param_4;
+    recordTableAppend("Prices");
+    recordTableAppend("Ratings");
+    recordTableAppend("NewSince");
+    recordTableAppend("TitleVersion");
+    recordTableAppend("sys.ItemCode");
+    recordTableAppend("sys.AllowContentOverlap");
+    pricingSelectionBuildPredicate(request->priceMode);
+    void *first = request->first != NULL ? request->first : request;
+    void *third = request->third != NULL ? request->third : request;
+    void *sixth = request->sixth != NULL ? request->sixth : request;
+
+    result = FUN_00439750(id, option, first, request->firstSize, DAT_00642980, DAT_005c0a8c, third,
+                          request->thirdCount, DAT_00642b80, DAT_005c0a90, block, blockSize, sixth,
+                          request->sixth != NULL, request->seventh, request->seventhSize, (u32 *)&catalog->list,
+                          (void *)catalog->extraBuffer, catalog->extraSize);
+    if (result >= 0) {
+        result = 0;
     }
-    temp_v17 = param_4[0xb];
-    temp_v18 = param_4[0xc];
-    temp_v12 = (int *)param_4[2];
-    if ((int *)param_4[2] == (int *)0x0) {
-      temp_v12 = param_4;
+    if (result < 0) {
+        return result;
     }
-    temp_v16 = param_4;
-    if (piVar4 != (int *)0x0) {
-      temp_v16 = piVar4;
-    }
-    uStack_44 = (unsigned int)(piVar4 != (int *)0x0);
-    temp_v15 = temp_v11;
-    temp_v13 = param_4[3];
-    temp_v14 = DAT_005c0a90;
-    puStack_58 = &DAT_00642b80;
-    puStack_50 = temp_v10;
-    temp_v11 = DAT_005c0a8c;
-    temp_v10 = &DAT_00642980;
-    temp_v0 = temp_v21;
-    temp_v19 = param_1 + 4;
-    temp_v20 = temp_v6;
-    uStack_30 = temp_v8;
-    FUN_00439750(temp_v21,param_3,piVar2,param_4[1]);
-    if (-1 < temp_v0) {
-      temp_v0 = 0;
-    }
-    if (-1 < temp_v0) {
-      temp_v5 = 0;
-      if ((*(int *)(param_1 + 4) != 0) && (*(int *)(*(int *)(param_1 + 4) + 4) != 0)) {
-        do {
-          piVar2 = *(int **)(param_1 + 4);
-          if ((piVar2 != (int *)0x0) && ((unsigned int)piVar2[1] >= temp_v5)) {
-            puVar5 = (unsigned int *)(*piVar2 + temp_v5 * 0x30);
-          }
-          else {
-            puVar5 = (unsigned int *)0x0;
-          }
-          temp_v7 = puVar5[7];
-          temp_v3 = 0;
-          temp_v1 = 0;
-          if (temp_v3 < temp_v7) {
-            do {
-              temp_v0 = libc_strncmp(*(unsigned int *)(puVar5[6] + temp_v3 * 8),&LAB_004278e4,0x40);
-              if (temp_v0 == 0) {
-                temp_v1 = *(unsigned int *)(puVar5[6] + temp_v3 * 8 + 4);
+    for (u32 i = 0; catalog->list != NULL && i < catalog->list->count; i++) {
+        CatalogEntry *entry = catalog->list != NULL && i <= catalog->list->count ? &catalog->list->entries[i] : NULL;
+        const char *versionText = NULL;
+
+        for (u32 j = 0; j < entry->pairCount; j++) {
+            if (libc_strncmp(entry->pairs[j].key, "TitleVersion", 0x40) == 0) {
+                versionText = entry->pairs[j].value;
                 break;
-              }
-              temp_v3 = temp_v3 + 1;
-            } while (temp_v3 < temp_v7);
-          }
-          FUN_001029f4(temp_v1,0,10);
-          temp_v4 = *puVar5;
-          temp_v7 = puVar5[1];
-          temp_v3 = (temp_v4 >> 8) | (temp_v7 << 0x18);
-          temp_v9 = temp_v7 >> 0xe == 0x10;
-          if (temp_v9) {
-            temp_v3 = temp_v7 & 0xffff;
-          }
-          if (temp_v9 && temp_v3 == 0x8c) {
-            temp_v3 = 0;
-          }
-          else {
-            temp_v9 = temp_v7 >> 0xe == 0x10;
-            if (temp_v9) {
-              temp_v3 = temp_v7 & 0xffff;
             }
-            if (temp_v9 && temp_v3 == 0xd) {
-              temp_v3 = 1;
+        }
+        u32 version = (u16)FUN_001029f4(versionText, 0, 10);
+        u32 high = entry->packedHigh;
+        u32 low = entry->packedLow;
+        u32 itemId = ((low >> 8) | (high << 24)) & 0xFFFFF;
+        u32 kind;
+
+        if ((high >> 14) == 0x10 && (high & 0xFFFF) == 0x8C) {
+            kind = 0;
+        } else if ((high >> 14) == 0x10 && (high & 0xFFFF) == 0xD) {
+            kind = 1;
+        } else {
+            kind = 0xFF;
+        }
+        u32 type = ((low >> 28) | (high << 4)) & 0xF;
+        u32 typeFlag = 0;
+
+        if (type != 0) {
+            if (type == 2) {
+                typeFlag = 1;
+            } else {
+                sysFatalBreak();
             }
-            else {
-              temp_v3 = 0xff;
-            }
-          }
-          temp_v7 = temp_v4 >> 0x1c;
-          temp_v0 = 0;
-          if (temp_v7 != 0) {
-            if (temp_v7 == 2) {
-              temp_v0 = 1;
-            }
-            else {
-              sysFatalBreak();
-              temp_v0 = 0;
-              temp_v7 = temp_v2;
-            }
-          }
-          temp_v11 = (temp_v7 & 0xff000000) | temp_v3 | ((temp_v4 & 0xff) << 8) | (temp_v0 << 0x10);
-          temp_v0 = param_1;
-          temp_v10 = (unsigned char *)((temp_v4 >> 8) & 0xfffff);
-          FUN_00428334(param_1,&temp_v10,temp_v1 & 0xffff);
-          if (temp_v0 < 0) {
-            return;
-          }
-          temp_v5 = temp_v5 + 1;
-          temp_v1 = 0;
-          if (*(int *)(param_1 + 4) != 0) {
-            temp_v1 = *(unsigned int *)(*(int *)(param_1 + 4) + 4);
-          }
-        } while (temp_v5 < temp_v1);
-      }
+        }
+        u32 record[2];
+
+        record[0] = itemId;
+        record[1] = (typeFlag << 16) | ((low & 0xFF) << 8) | kind;
+        result = FUN_00428334(catalog, record, version);
+        if (result < 0) {
+            return result;
+        }
     }
-  }
-  return;
+    return 0;
 }
 
-} /* extern "C" */
+}

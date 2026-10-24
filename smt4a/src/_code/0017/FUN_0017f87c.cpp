@@ -1,267 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017f87c` (_code @ 0x17f87c, 0x3bc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: applies one frame of keyframed property tracks to the effect nodes (scalar, 2-float, 4-float and table-reference properties; each component is either kept, a literal or read through FUN_001a83bc); written from the decompilation, the by-id slot lookups are shared helpers and the uninitialised partial vectors rely on the keep flags exactly as retail does */
+#include "common.h"
+
+#define TRACK_NO_TARGET 0xFFFF
+#define TRACK_TYPE_SCALAR 0
+#define TRACK_TYPE_VEC2 2
+#define TRACK_TYPE_VEC4 5
+#define TRACK_TYPE_TABLE 6
+#define TRACK_KEEP_BIT 0x100
+#define TRACK_LITERAL_BIT 1
+#define TRACK_VEC4_KEEP_MASK 0xF00
+#define TRACK_NODE_STRIDE 0x158
+#define TRACK_TABLE_FLAG_VALUE 0xC
+#define NODE_FLAG_TABLE_A 1
+#define NODE_FLAG_TABLE_B 2
+#define NODE_FLAG_TABLE_C 4
+
+/* One keyframe of a property track (observed fields). */
+struct TrackKey {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 property;
+    /* 0x06 */ s16 type;
+    /* 0x08 */ u32 flags;
+    /* 0x0C */ union {
+        f32 value;      /* literal component */
+        u32 reference;  /* reference evaluated by FUN_001a83bc */
+    } slots[4];
+};
+
+struct TrackSet {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ TrackKey **keys;
+    /* 0x10 */ u32 count;
+};
+
+/* An entry of the table referenced by table-type tracks (observed fields). */
+struct TrackTableEntry {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u32 c;
+    /* 0x0C */ u32 d;
+    /* 0x10 */ u32 e;
+    /* 0x14 */ u32 f;
+    /* 0x18 */ s8 marker;
+};
 
 extern "C" {
+f32 FUN_001a83bc(u32 reference);
+void FUN_0018fb38(void *node, f32 *values, u32 mask, u32 property);
 
-int FUN_0018fb38(int, float [9], unsigned int, int);
-int FUN_001a83bc(unsigned int);
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_0018fb38. */
-/* Supplied declaration required: FUN_001a83bc. */
-
-
-void FUN_0017f87c(int param_1,int *param_2,int *param_3,int *param_4)
-
+/* Component `index` of a key: its literal, or the evaluated reference. */
+static __inline f32 trackComponent(const TrackKey *key, s32 index)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  float *pfVar5;
-  unsigned int *puVar6;
-  char temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  float in_s0;
-  float temp_v10;
-  float in_s1;
-  unsigned long long temp_v11;
-  float temp_v12 [9];
-  int temp_v13;
-  int *temp_v14;
-  int *piStack_2c;
-  int *temp_v15;
-  
-  temp_v7 = 0;
-  temp_v11 = (unsigned long long)(unsigned int)in_s0;
-  temp_v13 = param_1;
-  temp_v14 = param_2;
-  piStack_2c = param_3;
-  temp_v15 = param_4;
-  if (*(int *)(param_1 + 0x10) != 0) {
-    do {
-      temp_v2 = (unsigned int)*(unsigned short *)(*param_3 + temp_v7 * 2);
-      if (temp_v2 != 0xffff) {
-        temp_v8 = *temp_v14 + temp_v2 * 0x158;
-        temp_v6 = *(int *)(*(int *)(temp_v13 + 0xc) + temp_v7 * 4);
-        temp_v0 = *(short *)(temp_v6 + 6);
-        temp_v10 = (float)temp_v11;
-        if (temp_v0 != 0) {
-          if (temp_v0 == 2) {
-            switch(*(unsigned short *)(temp_v6 + 4)) {
-            case 0x13:
-              pfVar5 = (float *)(temp_v8 + 0xf0);
-              break;
-            default:
-              pfVar5 = (float *)0x0;
-              break;
-            case 0x15:
-              pfVar5 = (float *)(temp_v8 + 0xfc);
-              break;
-            case 0x16:
-              pfVar5 = (float *)(temp_v8 + 0x108);
-              break;
-            case 0x18:
-              pfVar5 = (float *)(temp_v8 + 0x114);
-              break;
-            case 0x19:
-              pfVar5 = (float *)(temp_v8 + 0x120);
-              break;
-            case 0x1b:
-              pfVar5 = (float *)(temp_v8 + 300);
+    if ((key->flags & TRACK_LITERAL_BIT << index) != 0)
+        return key->slots[index].value;
+    return FUN_001a83bc(key->slots[index].reference);
+}
+
+/* The 2-float slot a vec2 property id addresses, or NULL. */
+static __inline f32 *trackVec2Slot(u8 *node, u32 property)
+{
+    switch (property) {
+    case 0x13: return reinterpret_cast<f32 *>(node + 0xF0);
+    case 0x15: return reinterpret_cast<f32 *>(node + 0xFC);
+    case 0x16: return reinterpret_cast<f32 *>(node + 0x108);
+    case 0x18: return reinterpret_cast<f32 *>(node + 0x114);
+    case 0x19: return reinterpret_cast<f32 *>(node + 0x120);
+    case 0x1B: return reinterpret_cast<f32 *>(node + 0x12C);
+    default: return NULL;
+    }
+}
+
+/* Copies a table entry's pair into the node's pair and mirrors its marker in the node's flag bit. */
+static __inline void trackApplyTable(u8 *node, u32 *pair, u32 first, u32 second, const TrackTableEntry *entry, u8 flagBit)
+{
+    bool marked = entry->marker == TRACK_TABLE_FLAG_VALUE;
+    pair[1] = second;
+    pair[0] = first;
+    if (marked)
+        node[2] |= flagBit;
+    else
+        node[2] &= ~flagBit;
+}
+
+void FUN_0017f87c(TrackSet *set, u8 **nodes, u16 **targets, TrackTableEntry ***tables)
+{
+    for (u32 i = 0; i < set->count; i++) {
+        u32 target = (*targets)[i];
+        if (target == TRACK_NO_TARGET)
+            continue;
+        u8 *node = *nodes + target * TRACK_NODE_STRIDE;
+        TrackKey *key = set->keys[i];
+
+        if (key->type == TRACK_TYPE_SCALAR) {
+            f32 value;
+            if ((key->flags & TRACK_KEEP_BIT) == 0)
+                value = trackComponent(key, 0);
+            if (key->property == 0x14)
+                *reinterpret_cast<f32 *>(node + 0xF8) = value;
+            else if (key->property == 0x17)
+                *reinterpret_cast<f32 *>(node + 0x110) = value;
+            else if (key->property == 0x1A)
+                *reinterpret_cast<f32 *>(node + 0x128) = value;
+        } else if (key->type == TRACK_TYPE_VEC2) {
+            f32 *slot = trackVec2Slot(node, key->property);
+            f32 values[9];
+            values[0] = slot[0];
+            values[1] = slot[1];
+            for (s32 k = 0; k < 2; k++) {
+                if ((key->flags & (TRACK_KEEP_BIT << k)) == 0)
+                    values[k] = trackComponent(key, k);
             }
-            temp_v12[0] = *pfVar5;
-            temp_v12[1] = pfVar5[1];
-            temp_v2 = 0;
-            do {
-              if ((*(unsigned int *)(temp_v6 + 8) & (0x100 << (temp_v2 & 0xff))) == 0) {
-                temp_v3 = temp_v6 + temp_v2 * 4;
-                if ((*(unsigned int *)(temp_v6 + 8) & (1 << (temp_v2 & 0xff))) != 0) {
-                  in_s0 = *(float *)(temp_v3 + 0xc);
-                }
-                else {
-                  in_s0 = (float)temp_v11;
-                  FUN_001a83bc(*(unsigned int *)(temp_v3 + 0xc));
-                }
-                temp_v12[temp_v2] = in_s0;
-              }
-              temp_v2 = temp_v2 + 1;
-            } while ((int)temp_v2 < 2);
-            switch(*(unsigned short *)(temp_v6 + 4)) {
-            case 0x13:
-              pfVar5 = (float *)(temp_v8 + 0xf0);
-              *pfVar5 = temp_v12[0];
-              pfVar5[1] = temp_v12[1];
-              break;
-            default:
-              break;
-            case 0x15:
-              pfVar5 = (float *)(temp_v8 + 0xfc);
-              *pfVar5 = temp_v12[0];
-              pfVar5[1] = temp_v12[1];
-              break;
-            case 0x16:
-              pfVar5 = (float *)(temp_v8 + 0x108);
-              *pfVar5 = temp_v12[0];
-              pfVar5[1] = temp_v12[1];
-              break;
-            case 0x18:
-              pfVar5 = (float *)(temp_v8 + 0x114);
-              *pfVar5 = temp_v12[0];
-              pfVar5[1] = temp_v12[1];
-              break;
-            case 0x19:
-              pfVar5 = (float *)(temp_v8 + 0x120);
-              *pfVar5 = temp_v12[0];
-              pfVar5[1] = temp_v12[1];
-              break;
-            case 0x1b:
-              pfVar5 = (float *)(temp_v8 + 300);
-              *pfVar5 = temp_v12[0];
-              pfVar5[1] = temp_v12[1];
+            slot = trackVec2Slot(node, key->property);
+            if (slot != NULL) {
+                slot[0] = values[0];
+                slot[1] = values[1];
             }
-          }
-          else if (temp_v0 == 5) {
-            temp_v2 = 0;
-            do {
-              if ((*(unsigned int *)(temp_v6 + 8) & (0x100 << (temp_v2 & 0xff))) == 0) {
-                temp_v3 = temp_v6 + temp_v2 * 4;
-                if ((*(unsigned int *)(temp_v6 + 8) & (1 << (temp_v2 & 0xff))) != 0) {
-                  in_s0 = *(float *)(temp_v3 + 0xc);
-                }
-                else {
-                  in_s0 = (float)temp_v11;
-                  FUN_001a83bc(*(unsigned int *)(temp_v3 + 0xc));
-                }
-                temp_v12[temp_v2] = in_s0;
-              }
-              temp_v2 = temp_v2 + 1;
-            } while ((int)temp_v2 < 4);
-            FUN_0018fb38(temp_v8,temp_v12,~(*(unsigned int *)(temp_v6 + 8) & 0xf00) << 8,
-                         *(unsigned short *)(temp_v6 + 4));
-          }
-          else if (temp_v0 == 6) {
-            if ((*(unsigned int *)(temp_v6 + 8) & 0x100) == 0) {
-              if ((*(unsigned int *)(temp_v6 + 8) & 1) != 0) {
-                in_s0 = *(float *)(temp_v6 + 0xc);
-              }
-              else {
-                FUN_001a83bc(*(unsigned int *)(temp_v6 + 0xc));
-                in_s0 = temp_v10;
-              }
+        } else if (key->type == TRACK_TYPE_VEC4) {
+            f32 values[9];
+            for (s32 k = 0; k < 4; k++) {
+                if ((key->flags & (TRACK_KEEP_BIT << k)) == 0)
+                    values[k] = trackComponent(key, k);
             }
-            in_s0 = (float)(int)in_s0;
-            temp_v0 = *(short *)(temp_v6 + 4);
-            puVar6 = *(unsigned int **)(*temp_v15 + (int)in_s0 * 4);
-            if (temp_v0 != 0xd) {
-              if (temp_v0 != 0xf) {
-                if (temp_v0 == 0x11) {
-                  temp_v4 = *(char *)(puVar6 + 6);
-                  temp_v5 = puVar6[4];
-                  temp_v9 = temp_v4 != '\f';
-                  if (temp_v9) {
-                    temp_v4 = '\0';
-                  }
-                  *(unsigned int *)(temp_v8 + 0x154) = puVar6[5];
-                  *(unsigned int *)(temp_v8 + 0x150) = temp_v5;
-                  if (!temp_v9) {
-                    temp_v4 = '\x01';
-                  }
-                  if (temp_v4 != '\0') {
-                    temp_v1 = *(unsigned char *)(temp_v8 + 2) | 4;
-                  }
-                  else {
-                    temp_v1 = *(unsigned char *)(temp_v8 + 2) & 0xfb;
-                  }
-                  *(unsigned char *)(temp_v8 + 2) = temp_v1;
-                }
-              }
-              else {
-                temp_v4 = *(char *)(puVar6 + 6);
-                temp_v5 = puVar6[2];
-                temp_v9 = temp_v4 != '\f';
-                if (temp_v9) {
-                  temp_v4 = '\0';
-                }
-                *(unsigned int *)(temp_v8 + 0x14c) = puVar6[3];
-                *(unsigned int *)(temp_v8 + 0x148) = temp_v5;
-                if (!temp_v9) {
-                  temp_v4 = '\x01';
-                }
-                if (temp_v4 != '\0') {
-                  temp_v1 = *(unsigned char *)(temp_v8 + 2) | 2;
-                }
-                else {
-                  temp_v1 = *(unsigned char *)(temp_v8 + 2) & 0xfd;
-                }
-                *(unsigned char *)(temp_v8 + 2) = temp_v1;
-              }
-            }
-            else {
-              temp_v4 = *(char *)(puVar6 + 6);
-              temp_v5 = *puVar6;
-              temp_v9 = temp_v4 != '\f';
-              if (temp_v9) {
-                temp_v4 = '\0';
-              }
-              *(unsigned int *)(temp_v8 + 0x144) = puVar6[1];
-              *(unsigned int *)(temp_v8 + 0x140) = temp_v5;
-              if (!temp_v9) {
-                temp_v4 = '\x01';
-              }
-              if (temp_v4 != '\0') {
-                temp_v1 = *(unsigned char *)(temp_v8 + 2) | 1;
-              }
-              else {
-                temp_v1 = *(unsigned char *)(temp_v8 + 2) & 0xfe;
-              }
-              *(unsigned char *)(temp_v8 + 2) = temp_v1;
-            }
-          }
+            FUN_0018fb38(node, values, ~(key->flags & TRACK_VEC4_KEEP_MASK) << 8, key->property);
+        } else if (key->type == TRACK_TYPE_TABLE) {
+            f32 index;
+            if ((key->flags & TRACK_KEEP_BIT) == 0)
+                index = trackComponent(key, 0);
+            TrackTableEntry *entry = (*tables)[(s32)index];
+            if (key->property == 0xD)
+                trackApplyTable(node, reinterpret_cast<u32 *>(node + 0x140), entry->a, entry->b, entry, NODE_FLAG_TABLE_A);
+            else if (key->property == 0xF)
+                trackApplyTable(node, reinterpret_cast<u32 *>(node + 0x148), entry->c, entry->d, entry, NODE_FLAG_TABLE_B);
+            else if (key->property == 0x11)
+                trackApplyTable(node, reinterpret_cast<u32 *>(node + 0x150), entry->e, entry->f, entry, NODE_FLAG_TABLE_C);
         }
-        else {
-          in_s0 = temp_v10;
-          if ((*(unsigned int *)(temp_v6 + 8) & 0x100) == 0) {
-            if ((*(unsigned int *)(temp_v6 + 8) & 1) != 0) {
-              in_s1 = *(float *)(temp_v6 + 0xc);
-            }
-            else {
-              FUN_001a83bc(*(unsigned int *)(temp_v6 + 0xc));
-              in_s0 = temp_v10;
-              in_s1 = temp_v10;
-            }
-          }
-          temp_v0 = *(short *)(temp_v6 + 4);
-          if (temp_v0 == 0x14) {
-            *(float *)(temp_v8 + 0xf8) = in_s1;
-          }
-          else if (temp_v0 == 0x17) {
-            temp_v8 = temp_v8 + 0x70;
-            *(float *)(temp_v8 + 0xa0) = in_s1;
-          }
-          else if (temp_v0 == 0x1a) {
-            temp_v8 = temp_v8 + 0x88;
-            *(float *)(temp_v8 + 0xa0) = in_s1;
-          }
-        }
-      }
-      temp_v7 = temp_v7 + 1;
-    } while (temp_v7 < *(unsigned int *)(temp_v13 + 0x10));
-  }
-  return;
+    }
 }
 
 } /* extern "C" */

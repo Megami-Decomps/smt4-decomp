@@ -1,146 +1,152 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027cda0` (_code @ 0x27cda0, 0x30c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the map unit loader's per-frame step; retail runs the clone branch of the load state straight into the finish state by a jump (the draft's goto) and keeps the spawner pointer and the zero constant in registers across the states, which armcc here compiles from separate helpers. */
+#include "common.h"
+
+/* One loaded map unit slot (0x28 bytes). */
+struct UnitSlot {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 visible;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ f32 position[4];
+    /* 0x14 */ u16 unk14;
+    /* 0x16 */ u16 kind;          /* 14: the shared player model */
+    /* 0x18 */ u32 model;
+    /* 0x1C */ s32 id;
+    /* 0x20 */ u16 flagsA;
+    /* 0x22 */ u16 flagsB;
+    /* 0x24 */ u8 ownsModel;      /* the model is a clone */
+    /* 0x25 */ u8 unk25[3];
+};
+
+/* The unit spawner (g_mapGimic, as this step sees it). */
+struct UnitSpawner {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ s16 area;
+    /* 0x08 */ s16 subArea;
+    /* 0x0A */ s16 step;           /* 0 find, 1 load, 2 finish, 99 done */
+    /* 0x0C */ s16 index;          /* the table row being spawned */
+    /* 0x0E */ s16 slot;           /* the slot chosen for it */
+    /* 0x10 */ s32 loaded;
+    /* 0x14 */ u8 cloneAvailable;
+    /* 0x15 */ u8 unk15[3];
+    /* 0x18 */ s32 cloneSlot;
+    /* 0x1C */ UnitSlot slots[24];
+};
+
+/* One row of the unit table. */
+struct UnitRow {
+    /* 0x00 */ s8 area;
+    /* 0x01 */ s8 subArea;
+    /* 0x02 */ s16 kind;
+    /* 0x04 */ s16 position[4];
+    /* 0x0C */ s16 requiredFlag;   /* must be set (0: none) */
+    /* 0x0E */ s16 forbiddenFlag;  /* must not be set (0: none) */
+};
 
 extern "C" {
+extern UnitSpawner *g_mapGimic;
 
-int FUN_0024ad14(void);
-int FUN_002a0428(unsigned int, int);
-int textFormatBuffer(unsigned char [128], unsigned char *);
-int VectorSignedToFloat(int, int);
+s32 FUN_0030f6f8(void);
+UnitRow *FUN_0024ad14(s32 index);
+s32 gameFlagIsSet(s32 flag);
+void textFormatBuffer(char *buffer, const char *format, ...);
+u32 asdMdlManagerCreateSecondList(const char *name, u32 flags);
+u32 asdMdlManagerClone(u32 model, u32 flags);
+s32 FUN_002adee0(u32 model);
+void FUN_002a0428(u32 model, s32 flag);
 
-extern unsigned char LAB_0027d0b0; /* 0x27d0b0 */
-extern int g_mapGimic; /* 0x447a48 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0024ad14. */
-extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
-extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002a0428. */
-extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagIsSet(int);
-extern int FUN_0030f6f8(void);
-
-
-unsigned int FUN_0027cda0(void)
-
+/* Runs the step after the model exists: marks the slot live with the row's position and advances. */
+static void finishSlot(UnitSpawner *spawner)
 {
-/* irregular: 2 unstructured edge(s); 2 goto(s); irregular input(s): in_fpscr; 4 native warning(s); review required */
-  short temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  char *pcVar6;
-  unsigned int in_fpscr;
-  unsigned int temp_v4;
-  unsigned char temp_v5 [128];
-  
-  temp_v0 = *(short *)(g_mapGimic + 10);
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        if (temp_v0 == 99) {
-          return 1;
+    UnitRow *row = FUN_0024ad14(spawner->index);
+    UnitSlot *slot = &spawner->slots[spawner->slot];
+    if (slot->ownsModel == 0 && FUN_002adee0(slot->model) == 0)
+        return;
+    if (slot->kind == 14) {
+        spawner->cloneAvailable = 1;
+        spawner->cloneSlot = spawner->slot;
+    }
+    FUN_002a0428(slot->model, 1);
+    slot->active = 1;
+    slot->visible = 1;
+    slot->position[0] = (f32)row->position[0];
+    slot->position[1] = (f32)row->position[1];
+    slot->position[2] = (f32)row->position[2];
+    slot->position[3] = (f32)row->position[3];
+    slot->unk14 = 0;
+    slot->id = spawner->index + 0x2000;
+    slot->flagsA = row->requiredFlag;
+    slot->flagsB = row->forbiddenFlag;
+    spawner->loaded++;
+    spawner->index++;
+    spawner->step = 0;
+}
+
+/* Steps the unit spawner: finds the next table row of the current area whose flags allow it, loads
+ * its model into a free slot and finishes the slot. Returns 1 when the spawner is done. */
+u32 FUN_0027cda0(void)
+{
+    UnitSpawner *spawner = g_mapGimic;
+    switch (spawner->step) {
+    case 0: {
+        s32 i = spawner->index;
+        for (; i < FUN_0030f6f8(); i++) {
+            UnitRow *row = FUN_0024ad14(i);
+            if (row->area < 0 || row->area != g_mapGimic->area || row->subArea != g_mapGimic->subArea)
+                continue;
+            s32 required = row->requiredFlag;
+            s32 forbidden = row->forbiddenFlag;
+            if ((required == 0 || gameFlagIsSet(required) != 0) && (forbidden == 0 || gameFlagIsSet(forbidden) == 0)) {
+                UnitSpawner *current = g_mapGimic;
+                current->index = (s16)i;
+                s32 slot = 0;
+                while (current->slots[slot].active != 0) {
+                    slot++;
+                    if (slot >= 24) {
+                        slot = -1;
+                        break;
+                    }
+                }
+                current->slot = (s16)slot;
+                if ((s16)slot != -1) {
+                    current->step++;
+                    return 0;
+                }
+                current->step = 99;
+                return 1;
+            }
+        }
+        g_mapGimic->step = 99;
+        return 1;
+    }
+    case 1: {
+        UnitRow *row = FUN_0024ad14(spawner->index);
+        UnitSlot *slot = &spawner->slots[spawner->slot];
+        slot->kind = row->kind;
+        char path[128];
+        textFormatBuffer(path, "map/unit/u%03d.bam", row->kind);
+        if (slot->kind != 14) {
+            slot->model = asdMdlManagerCreateSecondList(path, 7);
+            slot->ownsModel = 0;
+            g_mapGimic->step++;
+        } else if (g_mapGimic->cloneAvailable != 0) {
+            slot->model = asdMdlManagerClone(g_mapGimic->slots[g_mapGimic->cloneSlot].model, 1);
+            slot->ownsModel = 1;
+            g_mapGimic->step++;
+            finishSlot(spawner);
+        } else {
+            slot->model = asdMdlManagerCreateSecondList(path, 56);
+            slot->ownsModel = 0;
+            g_mapGimic->step++;
         }
         return 0;
-      }
-LAB_0027cf90:
-      temp_v1 = (int)*(short *)(g_mapGimic + 0xc);
-      FUN_0024ad14();
-      temp_v2 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x28;
-      if ((*(char *)(temp_v2 + 0x40) != '\0') ||
-         (temp_v3 = FUN_002adee0(*(unsigned int *)(temp_v2 + 0x34)), temp_v3 != 0)) {
-        temp_v3 = g_mapGimic;
-        if (*(short *)(temp_v2 + 0x32) == 0xe) {
-          *(unsigned char *)(g_mapGimic + 0x14) = 1;
-          *(int *)(temp_v3 + 0x18) = (int)*(short *)(temp_v3 + 0xe);
-        }
-        FUN_002a0428(*(unsigned int *)(temp_v2 + 0x34),1);
-        *(unsigned char *)(temp_v2 + 0x1c) = 1;
-        *(unsigned char *)(temp_v2 + 0x1d) = 1;
-        temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x20) = temp_v4;
-        temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x24) = temp_v4;
-        temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x28) = temp_v4;
-        temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned int *)(temp_v2 + 0x2c) = temp_v4;
-        *(unsigned short *)(temp_v2 + 0x30) = 0;
-        temp_v3 = g_mapGimic;
-        *(int *)(temp_v2 + 0x38) = *(short *)(g_mapGimic + 0xc) + 0x2000;
-        *(unsigned short *)(temp_v2 + 0x3c) = *(unsigned short *)(temp_v1 + 0xc);
-        *(unsigned short *)(temp_v2 + 0x3e) = *(unsigned short *)(temp_v1 + 0xe);
-        *(int *)(temp_v3 + 0x10) = *(int *)(temp_v3 + 0x10) + 1;
-        *(short *)(temp_v3 + 0xc) = *(short *)(temp_v3 + 0xc) + 1;
-        *(unsigned short *)(temp_v3 + 10) = 0;
-      }
     }
-    else {
-      temp_v1 = (int)*(short *)(g_mapGimic + 0xc);
-      FUN_0024ad14();
-      temp_v2 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x28;
-      *(unsigned short *)(temp_v2 + 0x32) = *(unsigned short *)(temp_v1 + 2);
-      textFormatBuffer(temp_v5,&LAB_0027d0b0);
-      if (*(short *)(temp_v2 + 0x32) != 0xe) {
-        temp_v4 = asdMdlManagerCreateSecondList(temp_v5,7);
-        *(unsigned int *)(temp_v2 + 0x34) = temp_v4;
-      }
-      else {
-        if (*(char *)(g_mapGimic + 0x14) != '\0') {
-          temp_v4 = asdMdlManagerClone(*(unsigned int *)
-                                (g_mapGimic + *(int *)(g_mapGimic + 0x18) * 0x28 + 0x34),1);
-          *(unsigned int *)(temp_v2 + 0x34) = temp_v4;
-          *(unsigned char *)(temp_v2 + 0x40) = 1;
-          *(short *)(g_mapGimic + 10) = *(short *)(g_mapGimic + 10) + 1;
-          goto LAB_0027cf90;
-        }
-        temp_v4 = asdMdlManagerCreateSecondList(temp_v5,0x38);
-        *(unsigned int *)(temp_v2 + 0x34) = temp_v4;
-      }
-      *(unsigned char *)(temp_v2 + 0x40) = 0;
-      *(short *)(g_mapGimic + 10) = *(short *)(g_mapGimic + 10) + 1;
+    case 2:
+        finishSlot(spawner);
+        return 0;
+    case 99:
+        return 1;
     }
     return 0;
-  }
-  pcVar6 = (char *)(int)*(short *)(g_mapGimic + 0xc);
-  temp_v1 = FUN_0030f6f8();
-  if ((int)pcVar6 < temp_v1) {
-    do {
-      pcVar2 = pcVar6;
-      FUN_0024ad14();
-      if (((-1 < *pcVar2) && ((int)*pcVar2 == (int)*(short *)(g_mapGimic + 6))) &&
-         ((int)pcVar2[1] == (int)*(short *)(g_mapGimic + 8))) {
-        temp_v0 = *(short *)(pcVar2 + 0xe);
-        if (((*(short *)(pcVar2 + 0xc) == 0) ||
-            (temp_v1 = gameFlagIsSet((int)*(short *)(pcVar2 + 0xc)), temp_v1 != 0)) &&
-           ((temp_v0 == 0 || (temp_v1 = gameFlagIsSet((int)temp_v0), temp_v1 == 0)))) {
-          temp_v1 = g_mapGimic;
-          temp_v2 = 0;
-          *(short *)(g_mapGimic + 0xc) = (short)(int)pcVar6;
-LAB_0027ce9c:
-          if (*(char *)(temp_v1 + temp_v2 * 0x28 + 0x1c) != '\0') {
-            temp_v2 = temp_v2 + 1;
-            if (temp_v2 < 0x18) goto LAB_0027ce9c;
-            temp_v2 = -1;
-          }
-          *(short *)(temp_v1 + 0xe) = (short)temp_v2;
-          if ((short)temp_v2 != -1) {
-            *(short *)(temp_v1 + 10) = *(short *)(temp_v1 + 10) + 1;
-            return 0;
-          }
-          *(unsigned short *)(temp_v1 + 10) = 99;
-          return 1;
-        }
-      }
-      pcVar6 = pcVar6 + 1;
-      temp_v1 = FUN_0030f6f8();
-    } while ((int)pcVar6 < temp_v1);
-  }
-  *(unsigned short *)(g_mapGimic + 10) = 99;
-  return 1;
 }
 
 } /* extern "C" */

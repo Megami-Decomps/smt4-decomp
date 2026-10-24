@@ -3,6 +3,7 @@
 #define ASDSDK_SOURCE_GFX_MODEL_ASDMDLMANAGER_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The shared part of a model object. */
 typedef struct AsdMdlNode {
@@ -39,8 +40,11 @@ typedef struct AsdMdlResource {
 
 /* One record of a model object's record array (0x1C bytes). */
 typedef struct AsdMdlRecord {
-    /* 0x00 */ void *data;      /* freed with the object */
-    /* 0x04 */ u8 unk04[0x18];
+    /* 0x00 */ void *data;      /* freed with the object: `count` 0x84-byte entries */
+    /* 0x04 */ s32 count;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ f32 radius;      /* furthest horizontal extent of the record's parts */
+    /* 0x18 */ f32 height;      /* highest vertical extent */
 } AsdMdlRecord;
 
 /* A model object (0x1C bytes). */
@@ -53,5 +57,7 @@ typedef struct AsdMdlObject {
     /* 0x14 */ u32 unk14;
     /* 0x18 */ AsdMdlRecord *records; /* node->count records */
 } AsdMdlObject;
+
+typedef char AsdMdlRecordLayoutCheck[sizeof(AsdMdlRecord) == 0x1C && offsetof(AsdMdlRecord, height) == 0x18 ? 1 : -1];
 
 #endif

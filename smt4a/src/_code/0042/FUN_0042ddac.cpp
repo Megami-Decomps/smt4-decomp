@@ -9,7 +9,7 @@ int wordPairCopy(...);
 int FUN_0030fc80(int **);
 int FUN_0042f79c(void);
 int FUN_00430e58(int *);
-int asdCecMessageIdInit(unsigned char [8]);
+int _ZN12CecMessageIdC1Ev(unsigned char [8]);
 int FUN_00501928(...);
 int copy0x70Bytes(int, unsigned char [96]);
 int FUN_00501fa4(unsigned char [8], int *);
@@ -44,7 +44,7 @@ extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x6426c0 */
 /* Supplied declaration required: FUN_0042f79c. */
 /* Supplied declaration required: FUN_00430e58. */
 extern unsigned int releaseOrCopyHandle2(unsigned int *, unsigned int *);
-/* Supplied declaration required: asdCecMessageIdInit. */
+/* Supplied declaration required: _ZN12CecMessageIdC1Ev. */
 extern int *handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00501928. */
 /* Supplied declaration required: copy0x70Bytes. */
@@ -111,7 +111,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   temp_v25 = param_4;
   nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
   temp_v8 = 0;
-  asdCecMessageIdInit(temp_v12);
+  _ZN12CecMessageIdC1Ev(temp_v12);
   temp_v16 = 0;
   temp_v15 = 0;
   if ((*(char *)((int)param_1 + 9) == '\0') && (piVar3 = param_1, FUN_0042f79c(), (int)piVar3 < 0))

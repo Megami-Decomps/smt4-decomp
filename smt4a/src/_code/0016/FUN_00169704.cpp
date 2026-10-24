@@ -1,158 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00169704` (_code @ 0x169704, 0x30c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the bust-up cut animation's finish step; retail resumes the loop by jumping back after the i == 0 job (loop restart at the job pointer) and keeps the offsets 0x640..0x654 in s-registers across the calls, and the position vector is left uninitialised when no model is available (as retail does). */
+#include "common.h"
+
+struct Vec3 {
+    f32 x, y, z;
+};
+
+/* The bust-up cut animation (only the fields read here). */
+struct BustupCutAnim {
+    /* 0x000 */ u8 unk000[0x594];
+    /* 0x594 */ u8 unk594[4];
+    /* 0x598 */ u8 cameraBlock[0x44];
+    /* 0x5DC */ f32 fadeFrames;
+    /* 0x5E0 */ u8 unk5E0[4];
+    /* 0x5E4 */ u32 owner;
+    /* 0x5E8 */ u32 *model;
+    /* 0x5EC */ u32 cameraSource;
+    /* 0x5F0 */ s32 state;
+    /* 0x5F4 */ u8 unk5F4[4];
+    /* 0x5F8 */ s32 pageA;
+    /* 0x5FC */ s32 pageB;
+    /* 0x600 */ s32 slotB;
+    /* 0x604 */ s32 slotA;
+    /* 0x608 */ u8 unk608[0x2C];
+    /* 0x634 */ u32 jobs[4];
+    /* 0x644 */ f32 headOffsetY;
+    /* 0x648 */ f32 headOffsetZ;
+    /* 0x64C */ f32 firstOffsetY;
+    /* 0x650 */ u8 unk650[4];
+    /* 0x654 */ f32 sideOffsetZ;
+    /* 0x658 */ f32 sideOffsetY;
+};
 
 extern "C" {
+extern BustupCutAnim *g_bustupCutAnim;
+extern u32 g_bustupCutAnimSlotTable[];
 
-int FUN_00185830(...);
-int FUN_00186ce4(...);
-int cameraExportParameters(int, unsigned int);
-int FUN_001ad7cc(int, unsigned int, int *);
+void cameraExportParameters(void *block, u32 source);
+s32 jobIsValid(u32 job);
+s32 FUN_001ab8c0(u32 *model);
+s32 FUN_001ad7cc(u32 model, u32 bone, Vec3 *out);
+void FUN_00186ce4(u32 job, Vec3 *from, Vec3 *to, u32 owner, s32 frames, s32 mode);
+void FUN_00185830(u32 job, u32 owner, s32 frames, f32 x, f32 y);
 
-/* stack frame of void: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} void_stack;
-
-extern int g_bustupCutAnim; /* 0x57f4c4 */
-
-extern int jobIsValid(void);
-/* Supplied declaration required: FUN_00185830. */
-/* Supplied declaration required: FUN_00186ce4. */
-/* Supplied declaration required: cameraExportParameters. */
-extern int FUN_001ab8c0(void);
-/* Supplied declaration required: FUN_001ad7cc. */
-
-
-unsigned int FUN_00169704(void)
-
+/* Finishes the cut animation: moves each of its four jobs to its target pose (or releases it when
+ * the model is gone). Returns 1 while the animation is still running or has nothing to finish. */
+u32 FUN_00169704(void)
 {
-/* irregular: 2 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  float temp_v7;
-  int temp_v8;
-  int iStack_54;
-  float temp_v9;
-  int temp_v10;
-  int iStack_34;
-  float temp_v11;
-  
-  temp_v0 = g_bustupCutAnim;
-  if (g_bustupCutAnim == 0) {
-    return 1;
-  }
-  temp_v1 = *(int *)(g_bustupCutAnim + 0x5f0);
-  if (temp_v1 != 5) {
-    if (temp_v1 == 2 || temp_v1 == 3) {
-      return 1;
+    BustupCutAnim *anim = g_bustupCutAnim;
+    if (anim == NULL)
+        return 1;
+    if (anim->state != 5) {
+        if (anim->state == 2 || anim->state == 3)
+            return 1;
+        return 0;
     }
-  }
-  else {
-    cameraExportParameters(g_bustupCutAnim + 0x598,*(unsigned int *)(g_bustupCutAnim + 0x5ec));
-    temp_v1 = 0;
-LAB_0016975c:
-    do {
-      temp_v6 = temp_v0 + temp_v1 * 4;
-      if (*(int *)(temp_v6 + 0x634) != 0) {
-        temp_v2 = jobIsValid();
-        temp_v4 = g_bustupCutAnim;
-        if (temp_v2 != 0) {
-          if (g_bustupCutAnim != 0) {
-            if ((*(int *)(g_bustupCutAnim + 0x5e8) != 0) && (temp_v2 = FUN_001ab8c0(), temp_v2 != 0)) {
-              temp_v2 = *(int *)(*(int *)(temp_v4 + 0x5e8) + 8);
-              FUN_001ad7cc(temp_v2,*(unsigned int *)(temp_v1 * 4 + 0x57f538),&temp_v8);
-              if (temp_v1 == 0) {
-                temp_v9 = temp_v9 + *(float *)(temp_v4 + 0x644);
-              }
-              if (temp_v2 == 0) goto LAB_00169990;
-            }
-            temp_v10 = temp_v8;
-            iStack_34 = iStack_54;
-            if (temp_v1 != 0) {
-              temp_v4 = *(int *)(temp_v0 + 0x5fc);
-              if ((*(int *)(temp_v0 + 0x5f8) == temp_v4) || (*(int *)(temp_v0 + 0x5f8) != 1)) {
-                temp_v11 = temp_v9 + *(float *)(temp_v0 + 0x654);
-                temp_v9 = temp_v9 + *(float *)(temp_v0 + 0x658);
-              }
-              else {
-                temp_v11 = temp_v9 + *(float *)(temp_v0 + 0x658);
-                temp_v9 = temp_v9 + *(float *)(temp_v0 + 0x658);
-              }
-            }
-            else {
-              temp_v11 = temp_v9 + *(float *)(temp_v0 + 0x648);
-              temp_v4 = iStack_54;
-              temp_v9 = temp_v9 + *(float *)(temp_v0 + 0x64c);
-            }
-            temp_v2 = *(int *)(temp_v0 + 0x604);
-            if (temp_v2 != 200) {
-              temp_v4 = *(int *)(temp_v0 + 0x600);
-            }
-            if (temp_v2 == 200 || temp_v4 == 200) {
-              if (temp_v1 == 0) {
-                if (temp_v2 != 200) {
-                  if (*(int *)(temp_v0 + 0x600) == 200) {
-                    FUN_00186ce4(*(unsigned int *)(temp_v0 + 0x634),&temp_v8,&temp_v10,
-                                 *(unsigned int *)(temp_v0 + 0x5e4),(int)*(float *)(temp_v0 + 0x5dc),7);
-                  }
-                }
-                else {
-                  FUN_00186ce4(*(unsigned int *)(temp_v0 + 0x634),&temp_v8,&temp_v10,
-                               *(unsigned int *)(temp_v0 + 0x5e4),(int)*(float *)(temp_v0 + 0x5dc),1);
-                }
-                temp_v1 = 1;
-                goto LAB_0016975c;
-              }
-              if (*(int *)(temp_v0 + 0x600) != 200) {
-                FUN_00186ce4(*(unsigned int *)(temp_v6 + 0x634),&temp_v8,&temp_v10,
-                             *(unsigned int *)(temp_v0 + 0x5e4),(int)*(float *)(temp_v0 + 0x5dc),0);
-              }
-              else {
-                FUN_00186ce4(*(unsigned int *)(temp_v6 + 0x634),&temp_v8,&temp_v10,
-                             *(unsigned int *)(temp_v0 + 0x5e4),(int)*(float *)(temp_v0 + 0x5dc),7);
-              }
-            }
-            else {
-              FUN_00186ce4(*(unsigned int *)(temp_v6 + 0x634),&temp_v8,&temp_v10,
-                           *(unsigned int *)(temp_v0 + 0x5e4),(int)*(float *)(temp_v0 + 0x5dc),0);
-            }
-          }
-          else {
-LAB_00169990:
-            if (temp_v1 != 0) {
-              temp_v7 = *(float *)(temp_v0 + 0x5dc);
-              temp_v5 = *(unsigned int *)(temp_v0 + 0x5e4);
-              temp_v3 = *(unsigned int *)(temp_v6 + 0x634);
-            }
-            else {
-              temp_v7 = *(float *)(temp_v0 + 0x5dc);
-              temp_v3 = *(unsigned int *)(temp_v0 + 0x634);
-              temp_v5 = *(unsigned int *)(temp_v0 + 0x5e4);
-            }
-            FUN_00185830(temp_v3,temp_v5,(int)temp_v7);
-            *(unsigned int *)(temp_v6 + 0x634) = 0;
-          }
+    cameraExportParameters(anim->cameraBlock, anim->cameraSource);
+    for (s32 i = 0; i < 4; i++) {
+        if (anim->jobs[i] == 0)
+            continue;
+        if (jobIsValid(anim->jobs[i]) == 0) {
+            anim->jobs[i] = 0;
+            continue;
         }
-        else {
-          *(unsigned int *)(temp_v6 + 0x634) = 0;
+        BustupCutAnim *current = g_bustupCutAnim;
+        Vec3 position;
+        bool placed = false;
+        if (current != NULL) {
+            s32 found = 1;
+            if (current->model != NULL && FUN_001ab8c0(current->model) != 0) {
+                found = FUN_001ad7cc(current->model[2], g_bustupCutAnimSlotTable[i], &position);
+                if (i == 0)
+                    position.y += current->headOffsetY;
+            }
+            placed = found != 0;
         }
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-    *(unsigned int *)(temp_v0 + 0x5f0) = 6;
-  }
-  return 0;
+        if (!placed) {
+            if (i != 0)
+                FUN_00185830(anim->jobs[i], anim->owner, (s32)anim->fadeFrames, anim->sideOffsetZ, anim->sideOffsetY);
+            else
+                FUN_00185830(anim->jobs[0], anim->owner, (s32)anim->fadeFrames, 0.0f, 0.0f);
+            anim->jobs[i] = 0;
+            continue;
+        }
+        Vec3 target = position;
+        if (i == 0) {
+            position.y += anim->firstOffsetY;
+            target.z = position.z + anim->headOffsetZ;
+        } else if (anim->pageA == anim->pageB || anim->pageA != 1) {
+            position.y += anim->sideOffsetY;
+            target.z = position.z + anim->sideOffsetZ;
+        } else {
+            position.y += anim->sideOffsetY;
+            target.z = position.z + anim->sideOffsetY;
+        }
+        s32 frames = (s32)anim->fadeFrames;
+        if (anim->slotA == 200 || anim->slotB == 200) {
+            if (i == 0) {
+                if (anim->slotA == 200)
+                    FUN_00186ce4(anim->jobs[0], &position, &target, anim->owner, frames, 1);
+                else if (anim->slotB == 200)
+                    FUN_00186ce4(anim->jobs[0], &position, &target, anim->owner, frames, 7);
+            } else if (anim->slotB == 200) {
+                FUN_00186ce4(anim->jobs[i], &position, &target, anim->owner, frames, 7);
+            } else {
+                FUN_00186ce4(anim->jobs[i], &position, &target, anim->owner, frames, 0);
+            }
+        } else {
+            FUN_00186ce4(anim->jobs[i], &position, &target, anim->owner, frames, 0);
+        }
+    }
+    anim->state = 6;
+    return 0;
 }
 
 } /* extern "C" */

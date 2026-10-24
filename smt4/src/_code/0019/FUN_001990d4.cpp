@@ -1,137 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001990d4` (_code @ 0x1990d4, 0x348 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite compiles (212 vs 155 rows); retail unrolls the grouping loop by two and keeps the key comparisons paired, which this natural loop does not reproduce */
+#include "common.h"
+
+// One sorted entry of the list (0x2c bytes).
+struct RankRow {
+    u8 unk00[0x10];
+    f32 key;            // 0x10: sort key, descending
+    u8 unk14[0x0c];
+    s32 firstIcon;      // 0x20
+    s32 secondIcon;     // 0x24
+    u8 unk28[4];
+};
+
+// Two-column ranking screen: only the members this layout pass uses.
+struct RankScreen {
+    u8 unk0000[0x5758];
+    s32 count;              // 0x5758
+    u8 unk575c[4];
+    RankRow rows[1];        // 0x5760
+};
 
 extern "C" {
 
-int FUN_002b7bca(int, unsigned int, int, unsigned char *);
+void FUN_002b7bca(void* base, u32 count, s32 size, s32 (*compare)(const void*, const void*));
+s32 FUN_001d1d34(const void* a, const void* b);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char LAB_001d1d34; /* 0x1d1d34 */
-
-/* Supplied declaration required: FUN_002b7bca. */
-
-
-void FUN_001990d4(int param_1)
-
+// Sorts the rows, splits them into two groups where the key rises and assigns each row
+// the icon ids that centre it in its group.
+void FUN_001990d4(RankScreen* screen)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  unsigned int temp_v7 [3];
-  
-  puVar4 = (unsigned int *)(param_1 + 0x5758);
-  FUN_002b7bca(param_1 + 0x5760,*puVar4,0x2c,&LAB_001d1d34);
-  temp_v7[0] = 0;
-  temp_v7[1] = 0;
-  temp_v3 = *puVar4;
-  temp_v0 = 0;
-  if (0 < (int)temp_v3) {
-    temp_v6 = (temp_v3 & 1) != 0;
-    temp_v1 = param_1 + 0x5744;
-    temp_v2 = param_1 + 0x5718;
-    if (temp_v6) {
-      temp_v1 = param_1 + 0x5770;
-      temp_v2 = param_1 + 0x5744;
-      temp_v7[0] = 1;
+    FUN_002b7bca(screen->rows, screen->count, 0x2c, FUN_001d1d34);
+    s32 groupCount[2] = { 0, 0 };
+    s32 count = screen->count;
+    s32 group = 0;
+    for (s32 i = 0; i < count; i++) {
+        if (i > 0 && screen->rows[i - 1].key < screen->rows[i].key && group < 1) group++;
+        groupCount[group]++;
     }
-    temp_v7[0] = (unsigned int)temp_v6;
-    temp_v4 = (unsigned int)temp_v6;
-    for (temp_v5 = (int)temp_v3 >> 1; temp_v5 != 0; temp_v5 = temp_v5 - 1) {
-      if (((0 < (int)temp_v4) && (*(float *)(temp_v2 + 0x2c) < *(float *)(temp_v1 + 0x2c))) && (temp_v0 < 1)
-         ) {
-        temp_v0 = temp_v0 + 1;
-      }
-      temp_v7[temp_v0] = temp_v7[temp_v0] + 1;
-      if (((0 < (int)(temp_v4 + 1)) && (*(float *)(temp_v2 + 0x58) < *(float *)(temp_v1 + 0x58))) &&
-         (temp_v0 < 1)) {
-        temp_v0 = temp_v0 + 1;
-      }
-      temp_v1 = temp_v1 + 0x58;
-      temp_v2 = temp_v2 + 0x58;
-      temp_v4 = temp_v4 + 2;
-      temp_v7[temp_v0] = temp_v7[temp_v0] + 1;
+
+    u8* flags = reinterpret_cast<u8*>(screen);
+    if (flags[0x575e] == 0) {
+        if (groupCount[0] < 1) {
+            if (groupCount[1] >= 1) {
+                flags[0x575f] = 1;
+                flags[0x575e] = 1;
+            }
+        } else {
+            flags[0x575f] = (groupCount[1] >= 1) ? 0 : 1;
+            flags[0x575e] = 1;
+        }
     }
-  }
-  if (*(char *)(param_1 + 0x575e) == '\0') {
-    if ((int)temp_v7[0] < 1) {
-      if ((int)temp_v7[1] >= 1) {
-        *(unsigned char *)(param_1 + 0x575f) = 1;
-        *(unsigned char *)(param_1 + 0x575e) = 1;
-      }
+
+    for (s32 i = 0; i < count; i++) {
+        RankRow* row = &screen->rows[i];
+        if (flags[0x575f] != 0) {
+            u32 size = (groupCount[0] <= i) ? groupCount[1] : groupCount[0];
+            if ((size & 1) != 0) {
+                s32 base = i + (5 - (s32)size) / 2;
+                row->firstIcon = base + 0x1a1;
+                row->secondIcon = base + 0x1aa;
+            } else {
+                s32 base = i + (4 - (s32)size) / 2;
+                row->firstIcon = base + 0x1a6;
+                row->secondIcon = base + 0x1af;
+            }
+        } else if (i < groupCount[0]) {
+            if ((groupCount[0] & 1) != 0) {
+                s32 base = i + (5 - groupCount[0]) / 2;
+                row->firstIcon = base + 0x14a;
+                row->secondIcon = base + 0x154;
+            } else {
+                s32 base = i + (4 - groupCount[0]) / 2;
+                row->firstIcon = base + 0x165;
+                row->secondIcon = base + 0x16d;
+            }
+        } else if ((groupCount[1] & 1) != 0) {
+            s32 base = (i - groupCount[0]) + (5 - groupCount[1]) / 2;
+            row->firstIcon = base + 0x13b;
+            row->secondIcon = base + 0x145;
+        } else {
+            s32 base = (i - groupCount[0]) + (4 - groupCount[1]) / 2;
+            row->firstIcon = base + 0x159;
+            row->secondIcon = base + 0x161;
+        }
     }
-    else {
-      if ((int)temp_v7[1] >= 1) {
-        *(unsigned char *)(param_1 + 0x575f) = 0;
-      }
-      else {
-        *(unsigned char *)(param_1 + 0x575f) = 1;
-      }
-      *(unsigned char *)(param_1 + 0x575e) = 1;
-    }
-  }
-  temp_v0 = 0;
-  if (0 < (int)temp_v3) {
-    do {
-      if (*(char *)(param_1 + 0x575f) != '\0') {
-        temp_v3 = temp_v7[0];
-        if ((int)temp_v7[0] <= temp_v0) {
-          temp_v3 = temp_v7[1];
-        }
-        if ((temp_v3 & 1) != 0) {
-          temp_v1 = temp_v0 + (int)(5 - temp_v3) / 2;
-          temp_v2 = param_1 + temp_v0 * 0x2c;
-          *(int *)(temp_v2 + 0x5780) = temp_v1 + 0x1a1;
-          *(int *)(temp_v2 + 0x5784) = temp_v1 + 0x1aa;
-        }
-        else {
-          temp_v1 = temp_v0 + (int)(4 - temp_v3) / 2;
-          temp_v2 = param_1 + temp_v0 * 0x2c;
-          *(int *)(temp_v2 + 0x5780) = temp_v1 + 0x1a6;
-          *(int *)(temp_v2 + 0x5784) = temp_v1 + 0x1af;
-        }
-      }
-      else if (temp_v0 < (int)temp_v7[0]) {
-        if ((temp_v7[0] & 1) != 0) {
-          temp_v1 = temp_v0 + (int)(5 - temp_v7[0]) / 2;
-          temp_v2 = param_1 + temp_v0 * 0x2c;
-          *(int *)(temp_v2 + 0x5780) = temp_v1 + 0x14a;
-          *(int *)(temp_v2 + 0x5784) = temp_v1 + 0x154;
-        }
-        else {
-          temp_v1 = temp_v0 + (int)(4 - temp_v7[0]) / 2;
-          temp_v2 = param_1 + temp_v0 * 0x2c;
-          *(int *)(temp_v2 + 0x5780) = temp_v1 + 0x165;
-          *(int *)(temp_v2 + 0x5784) = temp_v1 + 0x16d;
-        }
-      }
-      else if ((temp_v7[1] & 1) != 0) {
-        temp_v1 = (temp_v0 - temp_v7[0]) + (int)(5 - temp_v7[1]) / 2;
-        temp_v2 = param_1 + temp_v0 * 0x2c;
-        *(int *)(temp_v2 + 0x5780) = temp_v1 + 0x13b;
-        *(int *)(temp_v2 + 0x5784) = temp_v1 + 0x145;
-      }
-      else {
-        temp_v1 = (temp_v0 - temp_v7[0]) + (int)(4 - temp_v7[1]) / 2;
-        temp_v2 = param_1 + temp_v0 * 0x2c;
-        *(int *)(temp_v2 + 0x5780) = temp_v1 + 0x159;
-        *(int *)(temp_v2 + 0x5784) = temp_v1 + 0x161;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (int)*puVar4);
-  }
-  return;
 }
 
 } /* extern "C" */

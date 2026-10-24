@@ -1,143 +1,144 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ac480` (_code @ 0x3ac484, 0x260 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the constant 0 to the function entry (r7) next to 1/2/3/4; built hoists it only in front of the second switch (one instruction shorter at the first switch) */
+#include "common.h"
+
+/* An image key and the handle (low half) of the image loaded for it. */
+struct ImageRef {
+    /* 0x00 */ s32 key;
+    union {
+        /* 0x04 */ s32 raw;
+        /* 0x04 */ s16 id;
+    };
+};
+
+/* The countdown's image panel: shows an image, fades it out and swaps in the next one. */
+struct ImagePanel {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ ImageRef shown;    /* the image on screen (id negative: none) */
+    /* 0x00C */ ImageRef request;   /* the requested image */
+    /* 0x014 */ ImageRef loading;   /* the image being loaded */
+    /* 0x01C */ u8 stateCopy;
+    /* 0x01D */ u8 inAnimation;     /* animation step reported by the in sprite */
+    /* 0x01E */ u8 swapState;
+    /* 0x01F */ u8 outAnimation;
+    /* 0x020 */ u8 unk020[0x20];
+    /* 0x040 */ u8 introSprite[0x8C];
+    /* 0x0CC */ u8 fadeSprite[0x8C];
+    /* 0x158 */ u8 outroSprite[0x8C];
+    /* 0x1E4 */ u8 swapSprite[0x8C];
+    /* 0x270 */ s16 rampA;
+    /* 0x272 */ s16 rampB;
+    /* 0x274 */ u8 unk274[0x1FC];
+    /* 0x470 */ u8 state;
+};
+
+struct CountdownGlobals {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ImagePanel *panel;
+};
 
 extern "C" {
+extern CountdownGlobals g_countdown;
+s32 FUN_00293f10(s32 image, s32 arg);
+s32 FUN_002942c4(s32 image, s32 arg);
+s32 FUN_002958f8(s32 image, s32 arg);
+s32 asdTMTexTableNodeIsLoaded(u32 type, s32 index);
+void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, ...);
+s32 FUN_002bf818(void *sprite);
 
-int FUN_00293f10(int, int);
-int FUN_002942c4(int, int);
-int FUN_002958f8(int, int);
-int uiSpriteSetImageKeyframe(...);
-
-/* Supplied declaration required: FUN_00293f10. */
-/* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: FUN_002958f8. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_002bf818(int);
-
-
-unsigned int FUN_003ac480(int param_1)
-
+/* Steps the countdown panel's state machine (intro, idle, outro) and its image swap sub-machine. */
+u32 FUN_003ac480(void)
 {
-/* irregular: 1 goto(s); 4 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = *(int *)(param_1 + 4);
-  *(unsigned char *)(temp_v4 + 0x1c) = *(unsigned char *)(temp_v4 + 0x470);
-  switch(*(unsigned char *)(temp_v4 + 0x470)) {
-  case 0:
-    *(unsigned char *)(temp_v4 + 0x470) = 2;
-    break;
-  case 1:
-    if (*(char *)(temp_v4 + 0x1d) == '\x04') {
-      *(unsigned char *)(temp_v4 + 0x470) = 4;
+    ImagePanel *panel = g_countdown.panel;
+    panel->stateCopy = panel->state;
+    switch (panel->state) {
+    case 0:
+        panel->state = 2;
+        break;
+    case 2: {
+        s32 i = 0;
+        do {
+            if (asdTMTexTableNodeIsLoaded(0x22, i) == 0)
+                goto swap;
+            i++;
+        } while (i < 2);
+        s32 image = panel->shown.id;
+        if (image >= 0 && FUN_00293f10(image, 1) != 0)
+            panel->state = 1;
+        break;
     }
-    break;
-  case 2:
-    temp_v3 = 0;
-    do {
-      temp_v2 = asdTMTexTableNodeIsLoaded(0x22,temp_v3);
-      if (temp_v2 == 0) goto LAB_003ac5a4;
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 2);
-    temp_v3 = (int)*(short *)(temp_v4 + 8);
-    if ((-1 < temp_v3) && (FUN_00293f10(temp_v3,1), temp_v3 != 0)) {
-      *(unsigned char *)(temp_v4 + 0x470) = 1;
+    case 1:
+        if (panel->inAnimation == 4)
+            panel->state = 4;
+        break;
+    case 4:
+        if (panel->rampA < 8)
+            panel->rampA++;
+        if (panel->rampB < 8)
+            panel->rampB++;
+        if (FUN_002bf818(panel->introSprite) != 0) {
+            panel->state = 3;
+            panel->swapState = 3;
+            panel->rampA = 8;
+            panel->rampB = 8;
+        }
+        break;
+    case 3:
+        if (panel->inAnimation == 5)
+            panel->state = 5;
+        break;
+    case 5:
+        if (FUN_002bf818(panel->outroSprite) != 0)
+            panel->state = 6;
+        break;
     }
-    break;
-  case 3:
-    if (*(char *)(temp_v4 + 0x1d) == '\x05') {
-      temp_v1 = 5;
-      *(unsigned char *)(temp_v4 + 0x470) = temp_v1;
+swap:
+    switch (panel->swapState) {
+    case 0:
+        break;
+    case 3:
+        if (panel->outAnimation != 4)
+            return 0;
+        panel->swapState = 4;
+        uiSpriteSetImageKeyframe(panel->fadeSprite, 0, 0);
+        uiSpriteSetImageKeyframe(panel->swapSprite, 1, 0);
+        panel->loading = panel->request;
+        if (panel->loading.id >= 0)
+            FUN_002942c4(panel->loading.id, 1);
+        panel->outAnimation = 0;
+        break;
+    case 4:
+        if (FUN_002bf818(panel->swapSprite) != 0) {
+            if (panel->shown.key != panel->loading.key && panel->shown.id >= 0)
+                FUN_002958f8(panel->shown.id, 1);
+            panel->shown.key = 0;
+            panel->swapState = 1;
+        }
+        break;
+    case 1: {
+        s32 image = panel->loading.id;
+        if (image < 0)
+            return 0;
+        if (FUN_00293f10(image, 1) == 0)
+            return 0;
+        if (panel->loading.key == panel->request.key) {
+            panel->shown = panel->loading;
+            panel->swapState = 2;
+            return 0;
+        }
+        if (panel->loading.id >= 0)
+            FUN_002958f8(panel->loading.id, 1);
+        panel->loading = panel->request;
+        if (panel->loading.id >= 0)
+            FUN_002942c4(panel->loading.id, 1);
+        panel->outAnimation = 0;
+        break;
     }
-    break;
-  case 4:
-    if (*(short *)(temp_v4 + 0x270) < 8) {
-      *(short *)(temp_v4 + 0x270) = *(short *)(temp_v4 + 0x270) + 1;
+    case 2:
+        if (FUN_002bf818(panel->fadeSprite) != 0)
+            panel->swapState = 3;
+        break;
     }
-    if (*(short *)(temp_v4 + 0x272) < 8) {
-      *(short *)(temp_v4 + 0x272) = *(short *)(temp_v4 + 0x272) + 1;
-    }
-    temp_v3 = FUN_002bf818(temp_v4 + 0x40);
-    if (temp_v3 != 0) {
-      *(unsigned char *)(temp_v4 + 0x470) = 3;
-      *(unsigned char *)(temp_v4 + 0x1e) = 3;
-      *(unsigned short *)(temp_v4 + 0x270) = 8;
-      *(unsigned short *)(temp_v4 + 0x272) = 8;
-    }
-    break;
-  case 5:
-    temp_v3 = FUN_002bf818(temp_v4 + 0x158);
-    if (temp_v3 != 0) {
-      temp_v1 = 6;
-      *(unsigned char *)(temp_v4 + 0x470) = temp_v1;
-    }
-  }
-LAB_003ac5a4:
-  switch(*(unsigned char *)(temp_v4 + 0x1e)) {
-  case 1:
-    temp_v3 = (int)*(short *)(temp_v4 + 0x18);
-    if (temp_v3 < 0) {
-      return 0;
-    }
-    FUN_00293f10(temp_v3,1);
-    if (temp_v3 == 0) {
-      return 0;
-    }
-    if (*(int *)(temp_v4 + 0x14) == *(int *)(temp_v4 + 0xc)) {
-      *(int *)(temp_v4 + 4) = *(int *)(temp_v4 + 0x14);
-      *(unsigned int *)(temp_v4 + 8) = *(unsigned int *)(temp_v4 + 0x18);
-      *(unsigned char *)(temp_v4 + 0x1e) = 2;
-      return 0;
-    }
-    if (-1 < *(short *)(temp_v4 + 0x18)) {
-      FUN_002958f8((int)*(short *)(temp_v4 + 0x18),1);
-    }
-    *(unsigned int *)(temp_v4 + 0x14) = *(unsigned int *)(temp_v4 + 0xc);
-    *(unsigned int *)(temp_v4 + 0x18) = *(unsigned int *)(temp_v4 + 0x10);
-    temp_v0 = *(short *)(temp_v4 + 0x18);
-    if (-1 < temp_v0) {
-      FUN_002942c4((int)temp_v0,1);
-    }
-    *(unsigned char *)(temp_v4 + 0x1f) = 0;
-    break;
-  case 2:
-    temp_v3 = FUN_002bf818(temp_v4 + 0xcc);
-    if (temp_v3 != 0) {
-      *(unsigned char *)(temp_v4 + 0x1e) = 3;
-    }
-    break;
-  case 3:
-    if (*(char *)(temp_v4 + 0x1f) != '\x04') {
-      return 0;
-    }
-    *(unsigned char *)(temp_v4 + 0x1e) = 4;
-    uiSpriteSetImageKeyframe(temp_v4 + 0xcc,0);
-    uiSpriteSetImageKeyframe(temp_v4 + 0x1e4,1,0);
-    *(unsigned int *)(temp_v4 + 0x14) = *(unsigned int *)(temp_v4 + 0xc);
-    *(unsigned int *)(temp_v4 + 0x18) = *(unsigned int *)(temp_v4 + 0x10);
-    temp_v0 = *(short *)(temp_v4 + 0x18);
-    if (-1 < temp_v0) {
-      FUN_002942c4((int)temp_v0,1);
-    }
-    *(unsigned char *)(temp_v4 + 0x1f) = 0;
-    break;
-  case 4:
-    temp_v3 = FUN_002bf818(temp_v4 + 0x1e4);
-    if (temp_v3 != 0) {
-      if ((*(int *)(temp_v4 + 4) != *(int *)(temp_v4 + 0x14)) && (-1 < *(short *)(temp_v4 + 8))) {
-        FUN_002958f8((int)*(short *)(temp_v4 + 8),1);
-      }
-      *(unsigned int *)(temp_v4 + 4) = 0;
-      *(unsigned char *)(temp_v4 + 0x1e) = 1;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

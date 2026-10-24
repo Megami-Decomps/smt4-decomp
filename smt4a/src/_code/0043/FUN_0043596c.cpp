@@ -1,172 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043596c` (_code @ 0x43596c, 0x264 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: regular-expression alternation parser (pattern -> branch list); handler tables are pointer-to-member arrays indexed by token type and the allocation/link sequences are inlined list helpers, written here as plain structured code */
+#include "common.h"
+
+struct PatternTokenNode {
+    /* 0x00 */ PatternTokenNode *next;
+    /* 0x04 */ PatternTokenNode *previous;
+    /* 0x08 */ u8 type;           /* 1: alternation separator */
+};
+
+/* A list node that owns a sub-list (alternatives of one group). */
+struct PatternGroupNode {
+    /* 0x00 */ PatternGroupNode *next;
+    /* 0x04 */ PatternGroupNode *previous;
+    /* 0x08 */ PatternGroupNode *branchHead;   /* sub-list sentinel: points at itself when empty */
+    /* 0x0C */ PatternGroupNode *branchTail;
+    /* 0x10 */ void *arena;                    /* allocator of the branch nodes */
+    /* 0x14 */ s32 generation;
+};
+
+struct PatternParser {
+    /* 0x00 */ PatternTokenNode *current;
+    /* 0x04 */ PatternGroupNode groups;        /* group list sentinel */
+    /* 0x0C */ void *arena;
+    /* 0x10 */ s32 unk10;
+    /* 0x14 */ s32 generation;
+};
+
+typedef s32 (PatternParser::*PatternParseHandler)(s32 *status, PatternGroupNode **cursor);
+typedef s32 (PatternParser::*PatternApplyHandler)(PatternGroupNode **result, PatternGroupNode **cursor);
+
+#define PATTERN_TOKEN_ALTERNATION 1
+#define PATTERN_ERROR_OUT_OF_MEMORY 2
 
 extern "C" {
+extern const PatternParseHandler g_patternParseHandlers[];  /* indexed by token type */
+extern const PatternApplyHandler g_patternApplyHandlers[];
 
-int FUN_004351b8(int *, int **, int [2]);
-int FUN_004387f0(int *, int);
-int variantSetPlain(int *, int *[2]);
-int FUN_00515598(void);
+s32 FUN_004351b8(PatternParser *parser, PatternGroupNode **first, PatternGroupNode **cursor);
+void FUN_004387f0(void *block, u32 units);
+void variantSetPlain(void *variant, PatternGroupNode **value);
+void FUN_00515598(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 9 slot(s), 36 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp64; /* 0x64: local_64 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_004351b8. */
-/* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: variantSetPlain. */
-/* Supplied declaration required: FUN_00515598. */
-
-
-int * FUN_0043596c(int *param_1,int *param_2,int *param_3,romwright_code *param_4)
-
+/* Appends a freshly allocated, empty group node to a list; NULL when the arena is exhausted. */
+static PatternGroupNode *patternGroupAppend(void *arena, PatternGroupNode *sentinel)
 {
-/* irregular: irregular input(s): in_r12; 4 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  unsigned int temp_v1;
-  int *piVar5;
-  romwright_code *in_r12;
-  unsigned char temp_v2;
-  int *temp_v3 [3];
-  int *temp_v4 [2];
-  int *temp_v5 [2];
-  int *temp_v6;
-  int temp_v7 [2];
-  int *temp_v8;
-  int temp_v9;
-  int temp_v10;
-  int *piStack_30;
-  int *temp_v11;
-  int *piStack_28;
-  
-  temp_v6 = (int *)0x0;
-  temp_v7[0] = *param_3;
-  piVar3 = param_1;
-  piStack_30 = param_1;
-  temp_v11 = param_2;
-  piStack_28 = param_3;
-  FUN_004351b8(param_1,&temp_v6,temp_v7);
-  if (piVar3 == (int *)0x0) {
-    if (*(char *)(*param_1 + 8) != '\x01') {
-      *temp_v11 = (int)temp_v6;
-    }
-    else {
-      piVar3 = (int *)param_1[3];
-      piVar2 = param_1 + 1;
-      FUN_004387f0(piVar3,2);
-      if (piVar3 == (int *)0x0) {
-        return (int *)0x2;
-      }
-      piVar5 = piVar3 + 2;
-      if (piVar5 != (int *)0x0) {
-        piVar3[4] = 0;
-        *piVar5 = (int)piVar5;
-        piVar3[5] = 0;
-        piVar3[3] = (int)piVar5;
-      }
-      *piVar3 = *piVar2;
-      piVar3[1] = (int)piVar2;
-      *piVar2 = (int)piVar3;
-      *(int **)(*piVar3 + 4) = piVar3;
-      piVar3[4] = param_1[5];
-      piVar5 = temp_v6 + 2;
-      piVar2 = (int *)temp_v6[4];
-      FUN_004387f0(piVar2,2);
-      if (piVar2 == (int *)0x0) {
-        return (int *)0x2;
-      }
-      if (piVar2 != (int *)0xfffffff8) {
+    PatternGroupNode *node = (PatternGroupNode *)arena;
+    FUN_004387f0(node, 2);
+    if (node == NULL)
+        return NULL;
+    if ((s32)node != -8)
         FUN_00515598();
-      }
-      *piVar2 = *piVar5;
-      piVar2[1] = (int)piVar5;
-      *piVar5 = (int)piVar2;
-      *(int **)(*piVar2 + 4) = piVar2;
-      temp_v4[0] = piVar3;
-      variantSetPlain(piVar2 + 2,temp_v4);
-      while (*(char *)(*param_1 + 8) == '\x01') {
-        *param_1 = *(int *)(*param_1 + 4);
-        temp_v5[0] = (int *)*param_3;
-        temp_v9 = 0;
-        temp_v8 = (int *)0x0;
-        while( 1 ) {
-          temp_v0 = (unsigned int)*(unsigned char *)(*param_1 + 8) * 8;
-          piVar2 = (int *)(temp_v0 + 0x5c14c4);
-          temp_v1 = *(unsigned int *)(temp_v0 + 0x5c14c8);
-          temp_v2 = (temp_v1 & 1) == 0;
-          if (temp_v2) {
-            param_4 = (romwright_code *)*piVar2;
-          }
-          piVar5 = (int *)((int)param_1 + ((int)temp_v1 >> 1));
-          if (!temp_v2) {
-            param_4 = *(romwright_code **)(*piVar5 + *piVar2);
-          }
-          temp_v3[0] = temp_v5[0];
-          piVar2 = (int *)(*param_4)(piVar5,&temp_v9,temp_v3);
-          if (piVar2 == (int *)0x1) break;
-          if (piVar2 != (int *)0x0) {
-            return piVar2;
-          }
-          temp_v0 = (unsigned int)*(unsigned char *)(*param_1 + 8) * 8;
-          piVar2 = (int *)(temp_v0 + 0x5c155c);
-          temp_v1 = *(unsigned int *)(temp_v0 + 0x5c1560);
-          temp_v2 = (temp_v1 & 1) == 0;
-          if (temp_v2) {
-            in_r12 = (romwright_code *)*piVar2;
-          }
-          piVar5 = (int *)((int)param_1 + ((int)temp_v1 >> 1));
-          if (!temp_v2) {
-            in_r12 = *(romwright_code **)(*piVar5 + *piVar2);
-          }
-          param_4 = (romwright_code *)&temp_v10;
-          temp_v3[0] = temp_v5[0];
-          temp_v10 = temp_v9;
-          piVar2 = (int *)(*in_r12)(piVar5,&temp_v8,temp_v3);
-          if ((int *)0x1 < piVar2) {
-            return piVar2;
-          }
-          temp_v5[0] = temp_v8;
-        }
-        piVar5 = temp_v5[0] + 2;
-        temp_v6 = temp_v5[0];
-        piVar2 = (int *)temp_v5[0][4];
-        FUN_004387f0(piVar2,2);
-        if (piVar2 == (int *)0x0) {
-          piVar2 = (int *)0x0;
-        }
-        else {
-          if (piVar2 != (int *)0xfffffff8) {
-            FUN_00515598();
-          }
-          *piVar2 = *piVar5;
-          piVar2[1] = (int)piVar5;
-          *piVar5 = (int)piVar2;
-          *(int **)(*piVar2 + 4) = piVar2;
-        }
-        if (piVar2 == (int *)0x0) {
-          return (int *)0x2;
-        }
-        temp_v5[0] = piVar3;
-        variantSetPlain(piVar2 + 2,temp_v5);
-      }
-      *temp_v11 = (int)piVar3;
+    node->next = sentinel->next;
+    node->previous = sentinel;
+    sentinel->next = node;
+    node->next->previous = node;
+    return node;
+}
+
+/* Parses `branch ('|' branch)*`: the first branch is parsed by FUN_004351b8, every further branch
+ * is appended to a group node which then replaces the first branch in *out. Returns 0 or an error. */
+s32 FUN_0043596c(PatternParser *parser, PatternGroupNode **out, PatternGroupNode **cursor)
+{
+    PatternGroupNode *first = NULL;
+    PatternGroupNode *start = *cursor;
+    s32 status = FUN_004351b8(parser, &first, &start);
+    if (status != 0)
+        return status;
+
+    if (parser->current->type != PATTERN_TOKEN_ALTERNATION) {
+        *out = first;
+        return 0;
     }
-    piVar3 = (int *)0x0;
-  }
-  return piVar3;
+
+    PatternGroupNode *group = (PatternGroupNode *)parser->arena;
+    FUN_004387f0(group, 2);
+    if (group == NULL)
+        return PATTERN_ERROR_OUT_OF_MEMORY;
+    PatternGroupNode *branches = group + 0;
+    branches->branchTail = NULL;
+    branches->branchHead = branches;
+    group->next = parser->groups.next;
+    group->previous = &parser->groups;
+    parser->groups.next = group;
+    group->next->previous = group;
+    group->generation = parser->generation;
+
+    PatternGroupNode *branch = patternGroupAppend(first->arena, first);
+    if (branch == NULL)
+        return PATTERN_ERROR_OUT_OF_MEMORY;
+    PatternGroupNode *value = group;
+    variantSetPlain(branch + 1, &value);
+
+    while (parser->current->type == PATTERN_TOKEN_ALTERNATION) {
+        parser->current = parser->current->next;
+        PatternGroupNode *position = *cursor;
+        s32 pending = 0;
+        PatternGroupNode *next = NULL;
+        for (;;) {
+            s32 result = (parser->*g_patternParseHandlers[parser->current->type])(&pending, &position);
+            if (result == 1)
+                break;
+            if (result != 0)
+                return result;
+            result = (parser->*g_patternApplyHandlers[parser->current->type])(&next, &position);
+            if (result > 1)
+                return result;
+            position = next;
+        }
+        first = position;
+        PatternGroupNode *appended = patternGroupAppend(position->arena, position);
+        if (appended == NULL)
+            return PATTERN_ERROR_OUT_OF_MEMORY;
+        value = group;
+        variantSetPlain(appended + 1, &value);
+    }
+    *out = group;
+    return 0;
 }
 
 } /* extern "C" */

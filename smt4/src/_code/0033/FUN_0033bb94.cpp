@@ -1,159 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033bb94` (_code @ 0x33bb94, 0x2a4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite (171 vs 172 rows) matches except callee-saved register numbering: retail reuses the dead argument register r1 (sl) as the copy pointer */
+#include "common.h"
+
+struct SlotTable {
+    u8 unk0000[0x9108];
+    s8 party[3];        // 0x9108
+};
+
+// Unit record (0x604 bytes): only the parts merged here.
+struct UnitRecord {
+    u8 unk00[0x34];
+    u16 skills[8];      // 0x34
+    u8 unk44[6];
+    u8 id;              // 0x4a
+    u8 unk4b;
+    u8 learned[0x40];   // 0x4c
+    u8 counters[0x500]; // 0x8c: saturating byte counters
+    u8 unk58c[0x604 - 0x58c];
+};
 
 extern "C" {
 
-int FUN_0029bbc8(...);
-int FUN_0029bde4(...);
-int FUN_0029c1c8(...);
-int unitRecalculateEffectiveStats(...);
-int FUN_002b7bca(...);
-int rt_memcpy_w(...);
+void rt_memcpy_w(void* dst, const void* src, u32 size);
+SlotTable* gameGetSlotTable(void);
+UnitRecord* gameGetUnitRecord(u32 id);
+void FUN_0029bbc8(u8 id);
+void FUN_0029c1c8(u32 id, u32 arg, s32 mode);
+void FUN_0029bde4(UnitRecord* record);
+s32 recordContainsPairedId(UnitRecord* record);
+void FUN_002b7bca(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));
+s32 dataTable06Sub1CompareBySortKeys(const void* a, const void* b);
+u32 flagCountUnlockedSlots(UnitRecord* record);
+void unitRecalculateEffectiveStats(UnitRecord* record);
 
-/* stack frame of param_3: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp5E6; /* 0x5e6: local_5e6 */
-} param_3_stack;
-
-extern int dataTable06Sub1CompareBySortKeys(...); /* 0x20154c */
-
-extern int recordContainsPairedId(int);
-/* Supplied declaration required: FUN_0029bbc8. */
-/* Supplied declaration required: FUN_0029bde4. */
-/* Supplied declaration required: FUN_0029c1c8. */
-/* Supplied declaration required: unitRecalculateEffectiveStats. */
-extern unsigned int flagCountUnlockedSlots(int);
-extern int gameGetUnitRecord(unsigned int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
-
+// Merges the unit image `source` into its unit record, collecting the skills
+// that cannot be merged into `outSkills`; returns 1 when some do not fit.
+u32 FUN_0033bb94(UnitRecord* source, u32 arg, u16* outSkills)
 {
-/* irregular: 7 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  short *psVar5;
-  int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned char temp_v7 [52];
-  short asStack_5fc [11];
-  unsigned char temp_v8;
-  unsigned char temp_v9 [1476];
-  
-  rt_memcpy_w(temp_v7,param_1,0x604);
-  temp_v1 = gameGetSlotTable();
-  temp_v5 = (unsigned int)temp_v8;
-  temp_v6 = -1;
-  if ((int)*(char *)(temp_v1 + 0x9108) == temp_v5) {
-    temp_v6 = 0;
-  }
-  else if ((int)*(char *)(temp_v1 + 0x9109) == temp_v5) {
-    temp_v6 = 1;
-  }
-  else if ((int)*(char *)(temp_v1 + 0x910a) == temp_v5) {
-    temp_v6 = 2;
-  }
-  FUN_0029bbc8(*(unsigned char *)(param_1 + 0x4a));
-  FUN_0029c1c8(temp_v5,param_2,0);
-  temp_v2 = gameGetUnitRecord(temp_v5);
-  if (-1 < temp_v6) {
-    *(unsigned char *)(temp_v1 + temp_v6 + 0x9108) = *(unsigned char *)(temp_v2 + 0x4a);
-  }
-  temp_v1 = 0;
-  do {
-    temp_v6 = temp_v2 + temp_v1;
-    temp_v4 = temp_v1 + 2;
-    *(unsigned char *)(temp_v6 + 0x4c) = *(unsigned char *)(temp_v6 + 0x4c) | temp_v9[temp_v1];
-    *(unsigned char *)(temp_v6 + 0x4d) = temp_v9[temp_v1 + 1] | *(unsigned char *)(temp_v6 + 0x4d);
-    temp_v1 = temp_v4;
-  } while (temp_v4 < 0x40);
-  temp_v1 = 0;
-  do {
-    temp_v4 = temp_v2 + temp_v1;
-    temp_v6 = temp_v1 + 0x40;
-    temp_v1 = temp_v1 + 1;
-    temp_v5 = (unsigned int)temp_v9[temp_v6] + (unsigned int)*(unsigned char *)(temp_v4 + 0x8c);
-    if (temp_v5 >= 0x100) {
-      temp_v5 = 0xff;
+    UnitRecord copy;
+    rt_memcpy_w(&copy, source, 0x604);
+    SlotTable* table = gameGetSlotTable();
+    u32 id = copy.id;
+    s32 partyIndex = -1;
+    if (table->party[0] == id) partyIndex = 0;
+    else if (table->party[1] == id) partyIndex = 1;
+    else if (table->party[2] == id) partyIndex = 2;
+    FUN_0029bbc8(source->id);
+    FUN_0029c1c8(id, arg, 0);
+    UnitRecord* record = gameGetUnitRecord(id);
+    if (partyIndex >= 0) table->party[partyIndex] = record->id;
+    for (s32 i = 0; i < 0x40; i++) {
+        record->learned[i] |= copy.learned[i];
     }
-    *(char *)(temp_v4 + 0x8c) = (char)temp_v5;
-  } while (temp_v1 < 0x500);
-  FUN_0029bde4(temp_v2);
-  temp_v4 = 0;
-  temp_v1 = 0;
-  temp_v6 = 0;
-  do {
-    if (asStack_5fc[temp_v6] != 0) {
-      temp_v3 = recordContainsPairedId(temp_v2);
-      if (temp_v3 != 0) {
-        if (asStack_5fc[temp_v6] != 0) {
-          temp_v4 = temp_v4 + 1;
+    for (s32 i = 0; i < 0x500; i++) {
+        s32 sum = copy.counters[i] + record->counters[i];
+        if (sum > 0xff) sum = 0xff;
+        record->counters[i] = sum;
+    }
+    FUN_0029bde4(record);
+
+    s32 duplicates = 0;
+    s32 added = 0;
+    for (s32 i = 0; i < 8; i++) {
+        if (copy.skills[i] != 0) {
+            if (recordContainsPairedId(record)) {
+                if (copy.skills[i] != 0) duplicates++;
+            } else {
+                outSkills[added++] = copy.skills[i];
+            }
         }
-      }
-      else {
-        temp_v3 = temp_v1 * 2;
-        temp_v1 = temp_v1 + 1;
-        *(short *)(param_3 + temp_v3) = asStack_5fc[temp_v6];
-      }
     }
-    temp_v6 = temp_v6 + 1;
-  } while (temp_v6 < 8);
-  FUN_002b7bca(param_3,8,2,dataTable06Sub1CompareBySortKeys);
-  temp_v5 = flagCountUnlockedSlots(temp_v2);
-  if (0 < 8 - temp_v1) {
-    *(unsigned short *)(param_3 + temp_v1 * 2) = 0;
-  }
-  if (0 < (int)(temp_v5 - 1)) {
-    psVar5 = (short *)(temp_v2 + 0x32);
-    if (((temp_v5 & 1) == 0) && (psVar5 = (short *)(temp_v2 + 0x34), *psVar5 == 0)) {
-      temp_v1 = temp_v1 - 1;
+    FUN_002b7bca(outSkills, 8, 2, dataTable06Sub1CompareBySortKeys);
+    u32 unlocked = flagCountUnlockedSlots(record);
+    if (8 - added > 0) outSkills[added] = 0;
+
+    s32 unplaced = added;
+    for (u32 i = 0; i < unlocked; i++) {
+        if (record->skills[i] == 0) unplaced--;
     }
-    temp_v0 = psVar5[1];
-    temp_v3 = 0;
-    for (temp_v6 = (int)(temp_v5 - 1) >> 1; temp_v6 != 0; temp_v6 = temp_v6 - 1) {
-      if (temp_v0 == 0) {
-        temp_v1 = temp_v1 - 1;
-      }
-      temp_v0 = psVar5[3];
-      if (psVar5[2] == 0) {
-        temp_v3 = temp_v3 - 1;
-      }
-      psVar5 = psVar5 + 2;
+    if (unplaced > 0) {
+        unitRecalculateEffectiveStats(record);
+        return 1;
     }
-    temp_v1 = temp_v1 + temp_v3;
-  }
-  if ((-1 < (int)(temp_v5 - 1)) && (*(short *)(temp_v2 + (temp_v5 - 1) * 2 + 0x34) == 0)) {
-    temp_v1 = temp_v1 - 1;
-  }
-  if (0 < temp_v1) {
-    unitRecalculateEffectiveStats(temp_v2);
-    return 1;
-  }
-  temp_v1 = 0;
-  do {
-    temp_v0 = *(short *)(param_3 + temp_v1 * 2);
-    temp_v6 = temp_v4;
-    if (temp_v0 != 0) {
-      for (; temp_v6 < 8; temp_v6 = temp_v6 + 1) {
-        if (*(short *)(temp_v2 + temp_v6 * 2 + 0x34) == 0) {
-          *(short *)(temp_v2 + temp_v6 * 2 + 0x34) = temp_v0;
-          break;
+    for (s32 i = 0; i < 8; i++) {
+        u16 skill = outSkills[i];
+        if (skill != 0) {
+            for (s32 j = duplicates; j < 8; j++) {
+                if (record->skills[j] == 0) {
+                    record->skills[j] = skill;
+                    break;
+                }
+            }
         }
-      }
     }
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 8) {
-      unitRecalculateEffectiveStats(temp_v2);
-      return 0;
-    }
-  } while( 1 );
+    unitRecalculateEffectiveStats(record);
+    return 0;
 }
 
 } /* extern "C" */

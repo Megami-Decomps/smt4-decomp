@@ -1,265 +1,104 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030d4c0` (_code @ 0x30d4c0, 0x362 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zlib's send_tree (run-length codes of a Huffman tree) rebuilt from the draft; the send_code/send_bits macros expand per call site and armcc here lays out the repeated bit-buffer updates and the loop-carried locals differently from retail. */
+#include "common.h"
+#include <stddef.h>
+
+/* One Huffman tree node: a code and a length. */
+struct ct_data {
+    u16 code;
+    u16 len;
+};
+
+#define Buf_size 16
+#define REP_3_6 16
+#define REPZ_3_10 17
+#define REPZ_11_138 18
+
+typedef struct deflate_state {
+    /* 0x0000 */ u8 unk0000[8];
+    /* 0x0008 */ u8 *pending_buf;
+    /* 0x000C */ u8 unk000C[8];
+    /* 0x0014 */ u32 pending;
+    /* 0x0018 */ u8 unk0018[0xA64];
+    /* 0x0A7C */ ct_data bl_tree[39];
+    /* 0x0B18 */ u8 unk0B18[0xBA0];
+    /* 0x16B8 */ u16 bi_buf;
+    /* 0x16BA */ u8 unk16BA[2];
+    /* 0x16BC */ s32 bi_valid;
+} deflate_state;
+
+typedef char DeflateStateBlTreeCheck[offsetof(deflate_state, bl_tree) == 0xA7C ? 1 : -1];
+
+#define put_byte(s, c) ((s)->pending_buf[(s)->pending++] = (u8)(c))
+#define put_short(s, w) { put_byte(s, (u8)((w) & 0xff)); put_byte(s, (u8)((u16)(w) >> 8)); }
+
+#define send_bits(s, value, length) \
+    { int len = (length); \
+      if ((s)->bi_valid > (int)Buf_size - len) { \
+          int val = (value); \
+          (s)->bi_buf |= (u16)val << (s)->bi_valid; \
+          put_short((s), (s)->bi_buf); \
+          (s)->bi_buf = (u16)val >> (Buf_size - (s)->bi_valid); \
+          (s)->bi_valid += len - Buf_size; \
+      } else { \
+          (s)->bi_buf |= (u16)(value) << (s)->bi_valid; \
+          (s)->bi_valid += len; \
+      } \
+    }
+
+#define send_code(s, c, tree) send_bits(s, (tree)[c].code, (tree)[c].len)
 
 extern "C" {
 
-/* stack frame of param_3: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_3_stack;
-
-
-void FUN_0030d4c0(int param_1,int param_2,int param_3)
-
+/* Sends a literal/distance tree in compressed form with the bit-length tree's codes. */
+void FUN_0030d4c0(deflate_state *s, ct_data *tree, int max_code)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  
-  temp_v4 = 7;
-  temp_v7 = 4;
-  temp_v0 = 0xffffffff;
-  if (*(unsigned short *)(param_2 + 2) == 0) {
-    temp_v4 = 0x8a;
-    temp_v7 = 3;
-  }
-  temp_v9 = 0;
-  temp_v2 = 0;
-  temp_v8 = (unsigned int)*(unsigned short *)(param_2 + 2);
-  do {
-    if (param_3 < temp_v9) {
-      return;
+    int n;
+    int prevlen = -1;
+    int curlen;
+    int nextlen = tree[0].len;
+    int count = 0;
+    int max_count = 7;
+    int min_count = 4;
+    if (nextlen == 0) {
+        max_count = 138;
+        min_count = 3;
     }
-    temp_v1 = temp_v2 + 1;
-    temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 * 4 + param_2 + 6);
-    if ((temp_v4 <= temp_v1) || (temp_v8 != temp_v5)) {
-      if (temp_v1 < temp_v7) {
-        temp_v4 = temp_v8 * 4 + param_1;
-        do {
-          temp_v0 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa7e);
-          temp_v6 = *(unsigned int *)(param_1 + 0x16bc);
-          if ((int)(0x10 - temp_v0) < (int)temp_v6) {
-            temp_v3 = *(unsigned short *)(temp_v4 + 0xa7c);
-            temp_v6 = ((unsigned int)temp_v3 << (temp_v6 & 0xff)) | (unsigned int)*(unsigned short *)(param_1 + 0x16b8);
-            *(short *)(param_1 + 0x16b8) = (short)temp_v6;
-            temp_v7 = *(int *)(param_1 + 0x14);
-            *(int *)(param_1 + 0x14) = temp_v7 + 1;
-            *(char *)(*(int *)(param_1 + 8) + temp_v7) = (char)temp_v6;
-            temp_v7 = *(int *)(param_1 + 0x14);
-            *(int *)(param_1 + 0x14) = temp_v7 + 1;
-            *(char *)(*(int *)(param_1 + 8) + temp_v7) =
-                 (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-            *(unsigned short *)(param_1 + 0x16b8) = temp_v3 >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff);
-            *(unsigned int *)(param_1 + 0x16bc) = *(int *)(param_1 + 0x16bc) + (temp_v0 - 0x10);
-          }
-          else {
-            *(unsigned short *)(param_1 + 0x16b8) =
-                 (*(short *)(temp_v4 + 0xa7c) << (temp_v6 & 0xff)) | *(unsigned short *)(param_1 + 0x16b8);
-            *(unsigned int *)(param_1 + 0x16bc) = temp_v6 + temp_v0;
-          }
-          temp_v1 = temp_v1 - 1;
-        } while (temp_v1 != 0);
-      }
-      else if (temp_v8 != 0) {
-        if (temp_v8 != temp_v0) {
-          temp_v4 = temp_v8 * 4 + param_1;
-          temp_v6 = *(unsigned int *)(param_1 + 0x16bc);
-          temp_v0 = (unsigned int)*(unsigned short *)(temp_v4 + 0xa7e);
-          temp_v1 = temp_v2;
-          if ((int)(0x10 - temp_v0) < (int)temp_v6) {
-            temp_v3 = *(unsigned short *)(temp_v4 + 0xa7c);
-            temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x16b8) | ((unsigned int)temp_v3 << (temp_v6 & 0xff));
-            *(short *)(param_1 + 0x16b8) = (short)temp_v6;
-            temp_v4 = *(int *)(param_1 + 0x14);
-            *(int *)(param_1 + 0x14) = temp_v4 + 1;
-            *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v6;
-            temp_v4 = *(int *)(param_1 + 0x14);
-            *(int *)(param_1 + 0x14) = temp_v4 + 1;
-            *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-                 (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-            *(unsigned short *)(param_1 + 0x16b8) = temp_v3 >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff);
-            *(unsigned int *)(param_1 + 0x16bc) = *(int *)(param_1 + 0x16bc) + (temp_v0 - 0x10);
-          }
-          else {
-            *(unsigned short *)(param_1 + 0x16b8) =
-                 (*(short *)(temp_v4 + 0xa7c) << (temp_v6 & 0xff)) | *(unsigned short *)(param_1 + 0x16b8);
-            *(unsigned int *)(param_1 + 0x16bc) = temp_v6 + temp_v0;
-          }
+    for (n = 0; n <= max_code; n++) {
+        curlen = nextlen;
+        nextlen = tree[n + 1].len;
+        if (++count < max_count && curlen == nextlen) {
+            continue;
+        } else if (count < min_count) {
+            do {
+                send_code(s, curlen, s->bl_tree);
+            } while (--count != 0);
+        } else if (curlen != 0) {
+            if (curlen != prevlen) {
+                send_code(s, curlen, s->bl_tree);
+                count--;
+            }
+            send_code(s, REP_3_6, s->bl_tree);
+            send_bits(s, count - 3, 2);
+        } else if (count <= 10) {
+            send_code(s, REPZ_3_10, s->bl_tree);
+            send_bits(s, count - 3, 3);
+        } else {
+            send_code(s, REPZ_11_138, s->bl_tree);
+            send_bits(s, count - 11, 7);
         }
-        temp_v6 = *(unsigned int *)(param_1 + 0x16bc);
-        temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0xabe);
-        if ((int)(0x10 - temp_v0) < (int)temp_v6) {
-          temp_v3 = *(unsigned short *)(param_1 + 0xabc);
-          temp_v6 = ((unsigned int)temp_v3 << (temp_v6 & 0xff)) | (unsigned int)*(unsigned short *)(param_1 + 0x16b8);
-          *(short *)(param_1 + 0x16b8) = (short)temp_v6;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v6;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-               (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-          *(unsigned short *)(param_1 + 0x16b8) = temp_v3 >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff);
-          temp_v0 = *(int *)(param_1 + 0x16bc) + (temp_v0 - 0x10);
-          *(unsigned int *)(param_1 + 0x16bc) = temp_v0;
+        count = 0;
+        prevlen = curlen;
+        if (nextlen == 0) {
+            max_count = 138;
+            min_count = 3;
+        } else if (curlen == nextlen) {
+            max_count = 6;
+            min_count = 3;
+        } else {
+            max_count = 7;
+            min_count = 4;
         }
-        else {
-          temp_v0 = temp_v6 + temp_v0;
-          *(unsigned short *)(param_1 + 0x16b8) =
-               (*(short *)(param_1 + 0xabc) << (temp_v6 & 0xff)) | *(unsigned short *)(param_1 + 0x16b8);
-          *(unsigned int *)(param_1 + 0x16bc) = temp_v0;
-        }
-        if ((int)temp_v0 >= 0xf) {
-          temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x16b8) | ((temp_v1 - 3U) << (temp_v0 & 0xff));
-          *(short *)(param_1 + 0x16b8) = (short)temp_v0;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v0;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-               (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-          temp_v4 = *(int *)(param_1 + 0x16bc) - 0xe;
-          *(short *)(param_1 + 0x16b8) =
-               (short)(((temp_v1 - 3U) & 0xffff) >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff));
-          *(int *)(param_1 + 0x16bc) = temp_v4;
-        }
-        else {
-          temp_v3 = *(unsigned short *)(param_1 + 0x16b8) | (unsigned short)((temp_v1 - 3) << (temp_v0 & 0xff));
-          temp_v4 = temp_v0 + 2;
-          *(unsigned short *)(param_1 + 0x16b8) = temp_v3;
-          *(int *)(param_1 + 0x16bc) = temp_v4;
-        }
-      }
-      else if (temp_v1 < 0xb) {
-        temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0xac2);
-        temp_v6 = *(unsigned int *)(param_1 + 0x16bc);
-        if ((int)(0x10 - temp_v0) < (int)temp_v6) {
-          temp_v3 = *(unsigned short *)(param_1 + 0xac0);
-          temp_v6 = ((unsigned int)temp_v3 << (temp_v6 & 0xff)) | (unsigned int)*(unsigned short *)(param_1 + 0x16b8);
-          *(short *)(param_1 + 0x16b8) = (short)temp_v6;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v6;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-               (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-          *(unsigned short *)(param_1 + 0x16b8) = temp_v3 >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff);
-          temp_v0 = *(int *)(param_1 + 0x16bc) + (temp_v0 - 0x10);
-          *(unsigned int *)(param_1 + 0x16bc) = temp_v0;
-        }
-        else {
-          temp_v0 = temp_v6 + temp_v0;
-          *(unsigned short *)(param_1 + 0x16b8) =
-               (*(unsigned short *)(param_1 + 0xac0) << (temp_v6 & 0xff)) | *(unsigned short *)(param_1 + 0x16b8);
-          *(unsigned int *)(param_1 + 0x16bc) = temp_v0;
-        }
-        if ((int)temp_v0 >= 0xe) {
-          temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x16b8) | ((temp_v2 - 2U) << (temp_v0 & 0xff));
-          *(short *)(param_1 + 0x16b8) = (short)temp_v0;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v0;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-               (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-          temp_v4 = *(int *)(param_1 + 0x16bc) - 0xd;
-          *(short *)(param_1 + 0x16b8) =
-               (short)(((temp_v2 - 2U) & 0xffff) >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff));
-          *(int *)(param_1 + 0x16bc) = temp_v4;
-        }
-        else {
-          temp_v3 = *(unsigned short *)(param_1 + 0x16b8) | (unsigned short)((temp_v2 - 2) << (temp_v0 & 0xff));
-          temp_v4 = temp_v0 + 3;
-          *(unsigned short *)(param_1 + 0x16b8) = temp_v3;
-          *(int *)(param_1 + 0x16bc) = temp_v4;
-        }
-      }
-      else {
-        temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0xac6);
-        temp_v6 = *(unsigned int *)(param_1 + 0x16bc);
-        if ((int)(0x10 - temp_v0) < (int)temp_v6) {
-          temp_v3 = *(unsigned short *)(param_1 + 0xac4);
-          temp_v6 = ((unsigned int)temp_v3 << (temp_v6 & 0xff)) | (unsigned int)*(unsigned short *)(param_1 + 0x16b8);
-          *(short *)(param_1 + 0x16b8) = (short)temp_v6;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v6;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-               (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-          *(unsigned short *)(param_1 + 0x16b8) = temp_v3 >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff);
-          temp_v0 = *(int *)(param_1 + 0x16bc) + (temp_v0 - 0x10);
-          *(unsigned int *)(param_1 + 0x16bc) = temp_v0;
-        }
-        else {
-          temp_v0 = temp_v6 + temp_v0;
-          *(unsigned short *)(param_1 + 0x16b8) =
-               (*(short *)(param_1 + 0xac4) << (temp_v6 & 0xff)) | *(unsigned short *)(param_1 + 0x16b8);
-          *(unsigned int *)(param_1 + 0x16bc) = temp_v0;
-        }
-        if ((int)temp_v0 >= 10) {
-          temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x16b8) | ((temp_v2 - 10U) << (temp_v0 & 0xff));
-          *(short *)(param_1 + 0x16b8) = (short)temp_v0;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) = (char)temp_v0;
-          temp_v4 = *(int *)(param_1 + 0x14);
-          *(int *)(param_1 + 0x14) = temp_v4 + 1;
-          *(char *)(*(int *)(param_1 + 8) + temp_v4) =
-               (char)((unsigned short)*(unsigned short *)(param_1 + 0x16b8) >> 8);
-          temp_v4 = *(int *)(param_1 + 0x16bc) - 9;
-          *(short *)(param_1 + 0x16b8) =
-               (short)(((temp_v2 - 10U) & 0xffff) >> ((0x10U - *(int *)(param_1 + 0x16bc)) & 0xff));
-          *(int *)(param_1 + 0x16bc) = temp_v4;
-        }
-        else {
-          temp_v3 = *(unsigned short *)(param_1 + 0x16b8) | (unsigned short)((temp_v2 - 10) << (temp_v0 & 0xff));
-          temp_v4 = temp_v0 + 7;
-          *(unsigned short *)(param_1 + 0x16b8) = temp_v3;
-          *(int *)(param_1 + 0x16bc) = temp_v4;
-        }
-      }
-      temp_v1 = 0;
-      temp_v0 = temp_v8;
-      if (temp_v5 != 0) {
-        if (temp_v8 != temp_v5) {
-          temp_v4 = 7;
-          temp_v7 = 4;
-          temp_v9 = temp_v9 + 1;
-          temp_v2 = temp_v1;
-          temp_v8 = temp_v5;
-          continue;
-        }
-        temp_v4 = 6;
-      }
-      else {
-        temp_v4 = 0x8a;
-      }
-      temp_v7 = 3;
     }
-    temp_v9 = temp_v9 + 1;
-    temp_v2 = temp_v1;
-    temp_v8 = temp_v5;
-  } while( 1 );
 }
 
 } /* extern "C" */

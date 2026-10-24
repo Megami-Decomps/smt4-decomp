@@ -1,158 +1,159 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a1d08` (_code @ 0x1a1d08, 0x268 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: event-script state machine; draft shape, fall-through between cases 0/3/6 and the shared tail is written as in the compiler's switch, register allocation not compared */
+#include "common.h"
+
+/* The event being played: its resources, state and script process. */
+struct EventRequest {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ s32 file;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 state;
+    /* 0x10 */ s32 frames;
+    /* 0x14 */ u8 unk14[0x30];
+    /* 0x44 */ s32 fadeId;
+    /* 0x48 */ u8 unk48[8];
+    /* 0x50 */ void *messageFile;
+    /* 0x54 */ void *modelFile;
+    /* 0x58 */ void *scriptProcess;
+};
+
+/* The script process object (its state word at +0x108). */
+struct ScriptProcessState {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ u32 state;
+};
+
+/* The event player's global block at 0x43e310. */
+struct EventPlayerState {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ s8 skipScript;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ EventRequest *request;
+    /* 0x08 */ s32 unk08;
+    /* 0x0C */ s32 scriptEntry;     /* -1: none */
+};
+
+enum EventState {
+    EVENT_START = 0,
+    EVENT_INTRO_DONE = 3,
+    EVENT_FADE = 6,
+    EVENT_END = 7,
+    EVENT_NO_SCRIPT = 9,
+    EVENT_SCRIPT = 10
+};
 
 extern "C" {
+extern EventPlayerState g_saveLoadThread;
 
-int FUN_00103c9c(void);
-int FUN_00223898(unsigned char *, int);
-int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_00297060(void);
-int scrScriptProcessDestroy(void);
-int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
-int asdMemFree(void);
-int FUN_002c526c(void);
-int gameDataFlagsClear(int);
-int gameDataFlagsClearAndRefresh(int);
-int gameDataRemoveHomeButtonHold(int);
-int FUN_002e2f14(unsigned char *);
-int FUN_00309a60(unsigned int, int, int, int, int, int);
+void FUN_00103c9c(void);
+s32 FUN_00223898(EventRequest *request, s32 kind);
+s32 scrScriptProcessStartEntry(void *process, s32 entry);
+ScriptProcessState *FUN_00297060(void);
+void scrScriptProcessDestroy(void *process);
+void FUN_002c40f8(u32 *result, s32 *request, s32 a, s32 b, s32 c, s32 d);
+void asdMemFree(void *block);
+void FUN_002c526c(void);
+void gameDataFlagsClear(s32 flag);
+void gameDataFlagsClearAndRefresh(s32 flag);
+void gameDataRemoveHomeButtonHold(s32 flag);
+void FUN_002e2f14(EventRequest *request);
+void FUN_00309a60(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
+s32 scrRunOpcodesStub(void *process);
+u32 FUN_001c0954(u32 id, u32 arg);
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern signed char DAT_0043e311; /* 0x43e311 */
-extern unsigned char *DAT_0043e314; /* 0x43e314 */
-extern int DAT_0043e318; /* 0x43e318 */
-extern int DAT_0043e31c; /* 0x43e31c */
-
-/* Supplied declaration required: FUN_00103c9c. */
-extern int scrRunOpcodesStub(unsigned int);
-extern unsigned int FUN_001c0954(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00223898. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: gameDataFlagsClear. */
-/* Supplied declaration required: gameDataFlagsClearAndRefresh. */
-/* Supplied declaration required: gameDataRemoveHomeButtonHold. */
-/* Supplied declaration required: FUN_002e2f14. */
-/* Supplied declaration required: FUN_00309a60. */
-
-
-unsigned int FUN_001a1d08(unsigned int param_1,int param_2)
-
+/* Steps the event once per frame; returns 1 when it is finished and released. */
+u32 FUN_001a1d08(void)
 {
-/* irregular: 13 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  unsigned int temp_v1;
-  int iStack_18;
-  unsigned char temp_v2 [4];
-  
-  puVar1 = DAT_0043e314;
-  if (DAT_0043e314 == (unsigned char *)0x0) {
-    return 1;
-  }
-  temp_v0 = *(int *)(DAT_0043e314 + 0x50);
-  if (temp_v0 != 0) {
-    param_2 = *(int *)(DAT_0043e314 + 0x54);
-  }
-  if (temp_v0 == 0 || param_2 == 0) {
-    return 0;
-  }
-  if (*(int *)(DAT_0043e314 + 0x58) == 0) {
-    FUN_00297060();
-    *(int *)(puVar1 + 0x58) = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x108) = 2;
-  }
-  switch(*(unsigned int *)(puVar1 + 0xc)) {
-  case 0:
-    if (*(int *)(DAT_0043e314 + 4) == 1) {
-      temp_v1 = FUN_001c0954(0xff2ae,0);
-      iStack_18 = DAT_0043e318;
-      FUN_00309a60(temp_v1,6,0xff2ae,0,6,0);
-    }
-  case 3:
-    FUN_00223898(puVar1,*puVar1);
-    temp_v1 = 6;
-    break;
-  default:
-    *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
-    return 0;
-  case 6:
-    if (*(int *)(puVar1 + 0x44) != 0) {
-      puVar3 = temp_v2;
-      iStack_18 = *(int *)(puVar1 + 0x44);
-      FUN_002c40f8(puVar3,&iStack_18,1,0,0,0);
-      if ((int)puVar3 < 0) {
-        FUN_002c526c();
-      }
-      if (((unsigned int)puVar3 & 0x3ff) == 0x3fe) {
-        *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
+    EventRequest *request = g_saveLoadThread.request;
+    if (request == NULL)
+        return 1;
+    if (request->messageFile == NULL || request->modelFile == NULL)
         return 0;
-      }
+
+    if (request->scriptProcess == NULL) {
+        ScriptProcessState *process = FUN_00297060();
+        request->scriptProcess = process;
+        process->state = 2;
     }
-    FUN_002e2f14(puVar1);
-    if (DAT_0043e311 == '\0') {
-      if (DAT_0043e31c != -1) {
-        gameDataRemoveHomeButtonHold(1);
-        gameDataFlagsClearAndRefresh(1);
-        gameDataFlagsClear(1);
-        *(unsigned int *)(puVar1 + 0xc) = 10;
-        scrScriptProcessStartEntry(*(unsigned int *)(puVar1 + 0x58),DAT_0043e31c);
-        *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
+
+    u32 next;
+    switch (request->state) {
+    case EVENT_START:
+        if (request->file == 1) {
+            u32 sound = FUN_001c0954(0xFF2AE, 0);
+            FUN_00309a60(sound, 6, 0xFF2AE, 0, 6, 0);
+        }
+        /* fall through */
+    case EVENT_INTRO_DONE:
+        FUN_00223898(request, request->kind);
+        next = EVENT_FADE;
+        break;
+    default:
+        request->frames++;
         return 0;
-      }
-      temp_v1 = 9;
-      break;
+    case EVENT_FADE:
+        if (request->fadeId != 0) {
+            u32 result;
+            s32 id = request->fadeId;
+            FUN_002c40f8(&result, &id, 1, 0, 0, 0);
+            if ((s32)result < 0)
+                FUN_002c526c();
+            if ((result & 0x3FF) == 0x3FE) {
+                request->frames++;
+                return 0;
+            }
+        }
+        FUN_002e2f14(request);
+        if (g_saveLoadThread.skipScript == 0) {
+            if (g_saveLoadThread.scriptEntry != -1) {
+                gameDataRemoveHomeButtonHold(1);
+                gameDataFlagsClearAndRefresh(1);
+                gameDataFlagsClear(1);
+                request->state = EVENT_SCRIPT;
+                scrScriptProcessStartEntry(request->scriptProcess, g_saveLoadThread.scriptEntry);
+                request->frames++;
+                return 0;
+            }
+            next = EVENT_NO_SCRIPT;
+        } else {
+            next = EVENT_END;
+        }
+        break;
+    case EVENT_END:
+        if (g_saveLoadThread.request->file == 1)
+            FUN_00103c9c();
+        request = g_saveLoadThread.request;
+        if (request->scriptProcess != NULL) {
+            scrScriptProcessDestroy(request->scriptProcess);
+            request->scriptProcess = NULL;
+        }
+        if (request->messageFile != NULL) {
+            asdMemFree(request->messageFile);
+            request->messageFile = NULL;
+        }
+        if (request->modelFile != NULL) {
+            asdMemFree(request->modelFile);
+            request->modelFile = NULL;
+        }
+        if (g_saveLoadThread.request != NULL)
+            asdMemFree(g_saveLoadThread.request);
+        g_saveLoadThread.request = NULL;
+        return 1;
+    case EVENT_NO_SCRIPT:
+        request->state = EVENT_END;
+        request->frames++;
+        return 0;
+    case EVENT_SCRIPT:
+        if (scrRunOpcodesStub(request->scriptProcess) != 2) {
+            request->frames++;
+            return 0;
+        }
+        next = EVENT_NO_SCRIPT;
+        break;
     }
-    temp_v1 = 7;
-    break;
-  case 7:
-    if (*(int *)(DAT_0043e314 + 4) == 1) {
-      FUN_00103c9c();
-    }
-    puVar1 = DAT_0043e314;
-    if (*(int *)(DAT_0043e314 + 0x58) != 0) {
-      scrScriptProcessDestroy();
-      *(unsigned int *)(puVar1 + 0x58) = 0;
-    }
-    if (*(int *)(puVar1 + 0x50) != 0) {
-      asdMemFree();
-      *(unsigned int *)(puVar1 + 0x50) = 0;
-    }
-    if (*(int *)(puVar1 + 0x54) != 0) {
-      asdMemFree();
-      *(unsigned int *)(puVar1 + 0x54) = 0;
-    }
-    if (DAT_0043e314 != (unsigned char *)0x0) {
-      asdMemFree();
-    }
-    DAT_0043e314 = (unsigned char *)0x0;
-    return 1;
-  case 9:
-    *(unsigned int *)(puVar1 + 0xc) = 7;
-    *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
+    request->state = next;
+    request->frames++;
     return 0;
-  case 10:
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(puVar1 + 0x58));
-    if (temp_v0 != 2) {
-      *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
-      return 0;
-    }
-    temp_v1 = 9;
-  }
-  *(unsigned int *)(puVar1 + 0xc) = temp_v1;
-  *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
-  return 0;
 }
 
 } /* extern "C" */

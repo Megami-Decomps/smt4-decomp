@@ -1,198 +1,164 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001edcf0` (_code @ 0x1edcf0, 0x3a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: steps the save/load confirmation script task (start script by mode, run it, request the save, finish); written from the decompilation, switch layout and state write-back not compared with retail */
+#include "classes/WindowStatus.h"
+
+#define SAVELOAD_STATE_START 0
+#define SAVELOAD_STATE_PROMPT 4
+#define SAVELOAD_STATE_WAIT_ANSWER 5
+#define SAVELOAD_STATE_RUN 6
+#define SAVELOAD_STATE_DONE_A 7
+#define SAVELOAD_STATE_DONE_B 8
+#define SAVELOAD_STATE_CANCEL 9
+#define SAVELOAD_STATE_RESTART 0xC
+
+struct SaveLoadTask {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ s32 state;
+    /* 0x10 */ u8 unk10[0x34];
+    /* 0x44 */ s32 request;
+    /* 0x48 */ u8 unk48[8];
+    /* 0x50 */ s32 enabledSource;
+    /* 0x54 */ s32 enabled;
+    /* 0x58 */ s32 script;
+};
 
 extern "C" {
+extern u8 g_saveLoadThread;
+extern s8 DAT_0043e311;   /* confirmed */
+extern u8 DAT_0043e312;   /* a message window was opened */
+extern s8 DAT_0043e313;   /* prompt already shown */
+extern SaveLoadTask *DAT_0043e314;
 
-int scrRunOpcodesStub(...);
-int FUN_00223898(int, int);
-int gameDataFlagsSet(int);
-int gameDataFlagsSetBits(int);
-int gameDataBlocksAddFlags(int);
-int FUN_00289880(void);
-int FUN_002898e4(void);
-int messageMainFinishWindow(void);
-int scrScriptProcessStartEntry(...);
-int FUN_00297060(void);
-int buttonHelpSetPreset(int);
-int FUN_002c40f8(unsigned char *, int *, int, int, int, int);
-int FUN_002c526c(void);
-int gameDataFlagsClear(...);
-int gameDataFlagsClearAndRefresh(...);
-int gameDataRemoveHomeButtonHold(...);
-int FUN_002e2f14(int);
+s32 scrRunOpcodesStub(s32 script);
+void scrScriptProcessStartEntry(s32 script, s32 entry);
+void FUN_00297060(void);
+s32 FUN_002103dc(u32 id, u32 flag);
+void FUN_00223898(SaveLoadTask *task, s32 flag);
+void gameDataFlagsSet(s32 mask);
+void gameDataFlagsSetBits(s32 mask);
+void gameDataBlocksAddFlags(s32 mask);
+void gameDataFlagsClear(s32 mask);
+void gameDataFlagsClearAndRefresh(s32 mask);
+void gameDataRemoveHomeButtonHold(s32 mask);
+void FUN_00289880(void);
+void FUN_002898e4(void);
+void messageMainFinishWindow(void);
+s32 messageMainIsWindowActive(void);
+void buttonHelpSetPreset(s32 preset);
+WindowStatusResult FUN_002c40f8(s32 *request, s32 a, s32 b, s32 c, s32 d);
+void FUN_002c526c(void);
+void FUN_002e2f14(SaveLoadTask *task);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char g_saveLoadThread; /* 0x43e310 */
-extern signed char DAT_0043e311; /* 0x43e311 */
-extern unsigned char DAT_0043e312; /* 0x43e312 */
-extern signed char DAT_0043e313; /* 0x43e313 */
-extern int DAT_0043e314; /* 0x43e314 */
-
-/* Supplied declaration required: scrRunOpcodesStub. */
-extern int FUN_002103dc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00223898. */
-/* Supplied declaration required: gameDataFlagsSet. */
-/* Supplied declaration required: gameDataFlagsSetBits. */
-/* Supplied declaration required: gameDataBlocksAddFlags. */
-/* Supplied declaration required: FUN_00289880. */
-/* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: messageMainFinishWindow. */
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
-extern int messageMainIsWindowActive(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: gameDataFlagsClear. */
-/* Supplied declaration required: gameDataFlagsClearAndRefresh. */
-/* Supplied declaration required: gameDataRemoveHomeButtonHold. */
-/* Supplied declaration required: FUN_002e2f14. */
-
-
-unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
-
+/* Releases the home-button hold and clears the transient game data flags. */
+static __inline void saveLoadClearFlags(void)
 {
-/* irregular: 17 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  int iStack_18;
-  unsigned char temp_v3 [8];
-  
-  temp_v2 = DAT_0043e314;
-  temp_v0 = *(int *)(DAT_0043e314 + 0x50);
-  if (temp_v0 != 0) {
-    param_2 = *(int *)(DAT_0043e314 + 0x54);
-  }
-  if (temp_v0 == 0 || param_2 == 0) {
-    return 0;
-  }
-  if (*(int *)(DAT_0043e314 + 0x58) == 0) {
-    FUN_00297060();
-    *(int *)(temp_v2 + 0x58) = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x108) = 2;
-  }
-  switch(*(unsigned int *)(temp_v2 + 0xc)) {
-  case 0:
-    temp_v0 = FUN_002103dc(6,0);
-    if (temp_v0 != 0) {
-      if (temp_v0 != 3) {
-        if (temp_v0 != 4) {
-          temp_v1 = 8;
-          g_saveLoadThread = 1;
-        }
-        else {
-          g_saveLoadThread = 1;
-          scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),3);
-          temp_v1 = 4;
-        }
-      }
-      else {
-        g_saveLoadThread = 1;
-        scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),0);
-        temp_v1 = 4;
-      }
-    }
-    else {
-      g_saveLoadThread = 0;
-      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),4);
-      temp_v1 = 9;
-    }
-    break;
-  default:
-    return 0;
-  case 4:
     gameDataRemoveHomeButtonHold(1);
     gameDataFlagsClearAndRefresh(1);
     gameDataFlagsClear(1);
-    buttonHelpSetPreset(0xe6);
-    if (DAT_0043e313 == '\0') {
-      FUN_002898e4();
-      FUN_00289880();
-      DAT_0043e313 = '\x01';
-    }
-    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
-    if (temp_v0 != 2) {
-      return 0;
-    }
-    gameDataBlocksAddFlags(1);
-    gameDataFlagsSetBits(1);
-    gameDataFlagsSet(1);
-    scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),1);
-    temp_v1 = 5;
-    break;
-  case 5:
-    buttonHelpSetPreset(0xe7);
-    scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
-    FUN_00223898(temp_v2,1);
-    temp_v1 = 6;
-    break;
-  case 6:
-    scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
-    temp_v0 = messageMainIsWindowActive();
-    if (temp_v0 != 0) {
-      DAT_0043e312 = 1;
-    }
-    if (*(int *)(temp_v2 + 0x44) != 0) {
-      puVar2 = temp_v3;
-      iStack_18 = *(int *)(temp_v2 + 0x44);
-      FUN_002c40f8(puVar2,&iStack_18,1,0,0,0);
-      if ((int)puVar2 < 0) {
-        FUN_002c526c();
-      }
-      if (((unsigned int)puVar2 & 0x3ff) == 0x3fe) {
+}
+
+/* Returns 1 when the task has finished. */
+u32 FUN_001edcf0(u32 unused, s32 enabled)
+{
+    SaveLoadTask *task = DAT_0043e314;
+    s32 source = task->enabledSource;
+    if (source != 0)
+        enabled = task->enabled;
+    if (source == 0 || enabled == 0)
         return 0;
-      }
+    if (task->script == 0) {
+        FUN_00297060();
+        task->script = source;
+        *(u32 *)(source + 0x108) = 2;
     }
-    FUN_002e2f14(temp_v2);
-    buttonHelpSetPreset(0xe6);
-    if (DAT_0043e311 != '\0') {
-      gameDataRemoveHomeButtonHold(1);
-      gameDataFlagsClearAndRefresh(1);
-      gameDataFlagsClear(1);
-      messageMainFinishWindow();
-      DAT_0043e312 = 0;
-      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),2);
-      temp_v1 = 7;
+
+    s32 next;
+    switch (task->state) {
+    case SAVELOAD_STATE_START: {
+        s32 mode = FUN_002103dc(6, 0);
+        if (mode == 0) {
+            g_saveLoadThread = 0;
+            scrScriptProcessStartEntry(task->script, 4);
+            next = SAVELOAD_STATE_CANCEL;
+        } else if (mode == 3) {
+            g_saveLoadThread = 1;
+            scrScriptProcessStartEntry(task->script, 0);
+            next = SAVELOAD_STATE_PROMPT;
+        } else if (mode == 4) {
+            g_saveLoadThread = 1;
+            scrScriptProcessStartEntry(task->script, 3);
+            next = SAVELOAD_STATE_PROMPT;
+        } else {
+            g_saveLoadThread = 1;
+            next = SAVELOAD_STATE_DONE_B;
+        }
+        break;
     }
-    else {
-      gameDataRemoveHomeButtonHold(1);
-      gameDataFlagsClearAndRefresh(1);
-      gameDataFlagsClear(1);
-      messageMainFinishWindow();
-      DAT_0043e312 = 0;
-      scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),5);
-      temp_v1 = 9;
+    case SAVELOAD_STATE_PROMPT:
+        saveLoadClearFlags();
+        buttonHelpSetPreset(0xE6);
+        if (DAT_0043e313 == 0) {
+            FUN_002898e4();
+            FUN_00289880();
+            DAT_0043e313 = 1;
+        }
+        if (scrRunOpcodesStub(task->script) != 2)
+            return 0;
+        gameDataBlocksAddFlags(1);
+        gameDataFlagsSetBits(1);
+        gameDataFlagsSet(1);
+        scrScriptProcessStartEntry(task->script, 1);
+        next = SAVELOAD_STATE_WAIT_ANSWER;
+        break;
+    case SAVELOAD_STATE_WAIT_ANSWER:
+        buttonHelpSetPreset(0xE7);
+        scrRunOpcodesStub(task->script);
+        FUN_00223898(task, 1);
+        next = SAVELOAD_STATE_RUN;
+        break;
+    case SAVELOAD_STATE_RUN:
+        scrRunOpcodesStub(task->script);
+        if (messageMainIsWindowActive() != 0)
+            DAT_0043e312 = 1;
+        if (task->request != 0) {
+            s32 request = task->request;
+            WindowStatusResult result = FUN_002c40f8(&request, 1, 0, 0, 0);
+            if ((s32)result.code < 0)
+                FUN_002c526c();
+            if ((result.code & 0x3FF) == 0x3FE)
+                return 0;
+        }
+        FUN_002e2f14(task);
+        buttonHelpSetPreset(0xE6);
+        saveLoadClearFlags();
+        messageMainFinishWindow();
+        DAT_0043e312 = 0;
+        if (DAT_0043e311 != 0) {
+            scrScriptProcessStartEntry(task->script, 2);
+            next = SAVELOAD_STATE_DONE_A;
+        } else {
+            scrScriptProcessStartEntry(task->script, 5);
+            next = SAVELOAD_STATE_CANCEL;
+        }
+        break;
+    case SAVELOAD_STATE_DONE_A:
+        if (scrRunOpcodesStub(task->script) != 2)
+            return 0;
+        return 1;
+    case SAVELOAD_STATE_DONE_B:
+        return 1;
+    case SAVELOAD_STATE_CANCEL:
+        saveLoadClearFlags();
+        if (scrRunOpcodesStub(task->script) != 2)
+            return 0;
+        return 1;
+    case SAVELOAD_STATE_RESTART:
+        task->state = SAVELOAD_STATE_RUN;
+        return 0;
+    default:
+        return 0;
     }
-    break;
-  case 7:
-    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
-    if (temp_v2 != 2) {
-      return 0;
-    }
-  case 8:
-    return 1;
-  case 9:
-    gameDataRemoveHomeButtonHold(1);
-    gameDataFlagsClearAndRefresh(1);
-    gameDataFlagsClear(1);
-    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
-    if (temp_v2 != 2) {
-      return 0;
-    }
-    return 1;
-  case 0xc:
-    *(unsigned int *)(temp_v2 + 0xc) = 6;
+    task->state = next;
     return 0;
-  }
-  *(unsigned int *)(temp_v2 + 0xc) = temp_v1;
-  return 0;
 }
 
 } /* extern "C" */

@@ -1,159 +1,147 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208160` (_code @ 0x208160, 0x31c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: steps the map depart loader (sky model first, then the map model; each from a preloaded resource or from file); written from the decompilation, branch layout and the duplicated model setup not compared with retail */
+#include "common.h"
+
+#define DEPART_STATE_SKY_START 0
+#define DEPART_STATE_SKY_WAIT 1
+#define DEPART_STATE_MAP_START 10
+#define DEPART_STATE_MAP_WAIT 11
+#define DEPART_STATE_DONE 99
+
+#define DEPART_MAP_SPECIAL_A 0x29
+#define DEPART_MAP_SPECIAL_B 0x2A
+#define DEPART_MAP_SPECIAL_C 0x2B
+#define DEPART_MAP_SPECIAL_MODEL 0x24
+#define DEPART_MAP_LOWERED_SKY 0x13
+#define DEPART_MAP_MODEL_FLAGS 0x38
+#define DEPART_SKY_MODEL_FLAGS 0x1C0
+
+struct DepartMotion;
+
+struct DepartModel {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ DepartMotion *motion;
+};
+
+struct DepartVec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+struct MapDepartWork {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s16 mapId;
+    /* 0x06 */ s16 subId;
+    /* 0x08 */ s16 state;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ DepartModel *mapModel;
+    /* 0x10 */ DepartModel *skyModel;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ s32 skyId;
+    /* 0x1C */ s16 loadMapId;
+    /* 0x1E */ s16 loadSubId;
+    /* 0x20 */ void *mapResource;
+    /* 0x24 */ u32 mapResourceSize;
+    /* 0x28 */ void *skyResource;
+    /* 0x2C */ u32 skyResourceSize;
+};
+
+struct DepartGameState {
+    /* 0x000 */ u8 unk000[0x360];
+    /* 0x360 */ s32 skyDisabled;
+};
 
 extern "C" {
+extern MapDepartWork *g_mapDepartWork;
+extern DepartGameState g_gameState;
 
-int modelSelectSecondaryMotion(unsigned int, int);
-int nodeSetTranslation(unsigned int, int, int *);
-int FUN_002a0428(unsigned int, int);
-int modelSelectPrimaryMotion(unsigned int, int);
-int textFormatBuffer(...);
+s32 mapTableGetValue(s32 mapId);
+DepartModel *asdMdlManagerCreateFromSource(void *source, u32 size, u32 flags);
+DepartModel *asdMdlManagerCreateSecondList(const char *path, u32 flags);
+s32 FUN_002adee0(DepartModel *model);
+void FUN_002a0428(DepartModel *model, s32 flag);
+void modelSelectPrimaryMotion(DepartMotion *motion, s32 index);
+void modelSelectSecondaryMotion(DepartMotion *motion, s32 index);
+void nodeSetTranslation(DepartMotion *motion, s32 node, DepartVec3 *translation);
+void textFormatBuffer(char *out, const char *format, ...);
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int spB0; /* 0xb0: local_b0 */
-} void_stack;
-
-extern unsigned char LAB_0020848c; /* 0x20848c */
-extern unsigned char LAB_002084a4; /* 0x2084a4 */
-extern int g_mapDepartWork; /* 0x4474d8 */
-extern unsigned char g_gameState; /* 0x49f91c */
-
-extern int mapTableGetValue(int);
-extern unsigned int asdMdlManagerCreateFromSource(int, unsigned int, unsigned int);
-/* Supplied declaration required: modelSelectSecondaryMotion. */
-/* Supplied declaration required: nodeSetTranslation. */
-extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: modelSelectPrimaryMotion. */
-extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: textFormatBuffer. */
-
-
-unsigned int FUN_00208160(void)
-
+/* Starts the loaded model with its first motions. */
+static __inline void departModelStart(DepartModel *model)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned short *puVar1;
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned long long temp_v4;
-  unsigned char temp_v5 [128];
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v3 = g_mapDepartWork;
-  temp_v0 = *(short *)(g_mapDepartWork + 8);
-  if (temp_v0 == 10) {
-    if (*(int *)(g_mapDepartWork + 0x20) != 0) {
-      temp_v1 = asdMdlManagerCreateFromSource(*(int *)(g_mapDepartWork + 0x20),*(unsigned int *)(g_mapDepartWork + 0x24),0x38);
-      *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v1;
-      FUN_002a0428(temp_v1,1);
-      modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
-      modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
-      *(unsigned short *)(g_mapDepartWork + 8) = 99;
-      return 0;
+    FUN_002a0428(model, 1);
+    modelSelectPrimaryMotion(model->motion, 0);
+    modelSelectSecondaryMotion(model->motion, 0);
+}
+
+/* Starts the sky model; one map keeps it far below the camera. */
+static __inline void departSkyStart(MapDepartWork *work)
+{
+    departModelStart(work->skyModel);
+    if (work->mapId == DEPART_MAP_LOWERED_SKY) {
+        DepartVec3 lowered = { 0.0f, -20000.0f, 0.0f };
+        nodeSetTranslation(work->skyModel->motion, 0, &lowered);
     }
-    temp_v0 = *(short *)(g_mapDepartWork + 4);
-    if ((temp_v0 != 0x29) && (!(temp_v0 == 0x2a || temp_v0 == 0x2b))) {
-      puVar1 = (unsigned short *)(g_mapDepartWork + 6);
-      *(short *)(g_mapDepartWork + 0x1c) = temp_v0;
-      *(unsigned short *)(temp_v3 + 0x1e) = *puVar1;
-    }
-    else {
-      *(unsigned short *)(g_mapDepartWork + 0x1c) = 0x24;
-      *(unsigned short *)(temp_v3 + 0x1e) = 1;
-    }
-    textFormatBuffer(temp_v5,&LAB_002084a4,(int)*(short *)(temp_v3 + 0x1c),
-                 (int)*(short *)(temp_v3 + 0x1c),(int)*(short *)(temp_v3 + 0x1e));
-    temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x38);
-    temp_v3 = g_mapDepartWork;
-    *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v1;
-    *(short *)(temp_v3 + 8) = *(short *)(temp_v3 + 8) + 1;
-    return 0;
-  }
-  if (temp_v0 >= 10) {
-    if (temp_v0 == 0xb) {
-      temp_v3 = FUN_002adee0(*(unsigned int *)(g_mapDepartWork + 0xc));
-      if (temp_v3 == 0) {
+    work->state = DEPART_STATE_MAP_START;
+}
+
+u32 FUN_00208160(void)
+{
+    MapDepartWork *work = g_mapDepartWork;
+    char path[128];
+    switch (work->state) {
+    case DEPART_STATE_SKY_START:
+        if (g_gameState.skyDisabled == 1) {
+            work->mapModel = NULL;
+            work->state = DEPART_STATE_DONE;
+            return 0;
+        }
+        if (work->skyResource != NULL) {
+            work->skyModel = asdMdlManagerCreateFromSource(work->skyResource, work->skyResourceSize, DEPART_SKY_MODEL_FLAGS);
+            departSkyStart(g_mapDepartWork);
+            return 0;
+        }
+        work->skyId = mapTableGetValue(work->subId);
+        if (work->skyId < 1) {
+            work->state = DEPART_STATE_MAP_START;
+            return 0;
+        }
+        textFormatBuffer(path, "map/sky/sky_%02d.bam", work->skyId);
+        work->skyModel = asdMdlManagerCreateSecondList(path, DEPART_SKY_MODEL_FLAGS);
+        work->state++;
+        /* fall through to the load check */
+    case DEPART_STATE_SKY_WAIT:
+        if (FUN_002adee0(work->skyModel) == 0)
+            return 0;
+        departSkyStart(work);
         return 0;
-      }
-      FUN_002a0428(*(unsigned int *)(g_mapDepartWork + 0xc),1);
-      modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
-      modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
-      *(unsigned short *)(g_mapDepartWork + 8) = 99;
-      return 0;
+    case DEPART_STATE_MAP_START:
+        if (work->mapResource != NULL) {
+            work->mapModel = asdMdlManagerCreateFromSource(work->mapResource, work->mapResourceSize, DEPART_MAP_MODEL_FLAGS);
+            departModelStart(g_mapDepartWork->mapModel);
+            g_mapDepartWork->state = DEPART_STATE_DONE;
+            return 0;
+        }
+        if (work->mapId == DEPART_MAP_SPECIAL_A || work->mapId == DEPART_MAP_SPECIAL_B || work->mapId == DEPART_MAP_SPECIAL_C) {
+            work->loadMapId = DEPART_MAP_SPECIAL_MODEL;
+            work->loadSubId = 1;
+        } else {
+            work->loadMapId = work->mapId;
+            work->loadSubId = work->subId;
+        }
+        textFormatBuffer(path, "map/m%03d/m%03d_%02d.bam", work->loadMapId, work->loadMapId, work->loadSubId);
+        work->mapModel = asdMdlManagerCreateSecondList(path, DEPART_MAP_MODEL_FLAGS);
+        work->state++;
+        return 0;
+    case DEPART_STATE_MAP_WAIT:
+        if (FUN_002adee0(work->mapModel) == 0)
+            return 0;
+        departModelStart(work->mapModel);
+        work->state = DEPART_STATE_DONE;
+        return 0;
+    case DEPART_STATE_DONE:
+        return 1;
     }
-    if (temp_v0 != 99) {
-      return 0;
-    }
-    return 1;
-  }
-  temp_v4 = 0xc69c400000000000;
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      return 0;
-    }
-  }
-  else {
-    if ((*(int *)((unsigned char *)&g_gameState + 0x360)) == 1) {
-      *(unsigned int *)(g_mapDepartWork + 0xc) = 0;
-      *(unsigned short *)(temp_v3 + 8) = 99;
-      return 0;
-    }
-    if (*(int *)(g_mapDepartWork + 0x28) != 0) {
-      temp_v1 = asdMdlManagerCreateFromSource(*(int *)(g_mapDepartWork + 0x28),*(unsigned int *)(g_mapDepartWork + 0x2c),0x1c0)
-      ;
-      *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v1;
-      FUN_002a0428(temp_v1,1);
-      modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
-      modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
-      temp_v0 = *(short *)(g_mapDepartWork + 4);
-      if (temp_v0 == 0x13) {
-        temp_v6 = (unsigned int)temp_v4;
-        temp_v7 = (unsigned int)((unsigned long long)temp_v4 >> 0x20);
-        temp_v8 = temp_v6;
-        nodeSetTranslation(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0,&temp_v6);
-      }
-      *(unsigned short *)(g_mapDepartWork + 8) = 10;
-      return 0;
-    }
-    temp_v2 = mapTableGetValue((int)*(short *)(g_mapDepartWork + 6));
-    temp_v3 = g_mapDepartWork;
-    *(int *)(g_mapDepartWork + 0x18) = temp_v2;
-    if (temp_v2 < 1) {
-      *(unsigned short *)(temp_v3 + 8) = 10;
-      return 0;
-    }
-    textFormatBuffer(temp_v5,&LAB_0020848c,temp_v2);
-    temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x1c0);
-    temp_v3 = g_mapDepartWork;
-    *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v1;
-    *(short *)(temp_v3 + 8) = *(short *)(temp_v3 + 8) + 1;
-  }
-  temp_v3 = FUN_002adee0(*(unsigned int *)(g_mapDepartWork + 0x10));
-  if (temp_v3 == 0) {
     return 0;
-  }
-  FUN_002a0428(*(unsigned int *)(g_mapDepartWork + 0x10),1);
-  modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
-  modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
-  temp_v0 = *(short *)(g_mapDepartWork + 4);
-  if (temp_v0 == 0x13) {
-    temp_v6 = (unsigned int)temp_v4;
-    temp_v7 = (unsigned int)((unsigned long long)temp_v4 >> 0x20);
-    temp_v8 = temp_v6;
-    nodeSetTranslation(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0,&temp_v6);
-  }
-  *(unsigned short *)(g_mapDepartWork + 8) = 10;
-  return 0;
 }
 
 } /* extern "C" */

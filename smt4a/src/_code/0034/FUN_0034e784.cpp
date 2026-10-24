@@ -1,110 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034e784` (_code @ 0x34e784, 0x2e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the scale factor in s16 across the vec2 getters and addresses the panel flag through panel+0x3800; register allocation and loop-free block order differ. */
+#include "camp/RenderCtx.h"
 
-extern "C" {
+#define PANEL_AT(panel, type, offset) (*reinterpret_cast<type *>(reinterpret_cast<u8 *>(panel) + (offset)))
 
-int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, int);
-int FUN_0035ae58(int, int, int, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-extern int vec2GetXInt(void);
-extern int vec2GetYInt(int);
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0035ae58. */
-
-
-void FUN_0034e784(int param_1,int param_2)
-
+/* The render context's extra cached state stack (beyond RenderCtxA's known size). */
+static __inline RenderStateStack *renderCtxStackE(RenderCtxA *context)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  
-  if (*(char *)(param_1 + 0x38b9) == '\0') {
-    param_2 = param_2 * 8;
-    if (param_2 >= 0x29) {
-      param_2 = 0x28;
-    }
-    if (*(int *)(param_1 + 0x3890) < 4) {
-      temp_v1 = vec2GetXInt();
-      temp_v2 = vec2GetYInt(param_1 + 0x12b8);
-      temp_v1 = temp_v1 + *(int *)(param_1 + 0x41a0);
-      temp_v2 = temp_v2 + *(int *)(param_1 + 0x41a4);
-      efctSetSpeed();
-      temp_v3 = FUN_001834a4(0xd,*(int *)(param_1 + 0x3890) + 0x52);
-      temp_v0 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,1,0);
-      piVar7 = (int *)(temp_v0 + 0x12b8);
-      temp_v5 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v4;
-      if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-        (**(romwright_code **)(temp_v0 + 0x12d4))();
-        *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-      }
-      FUN_001835b4(2,0xd,0x4f,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x2e);
-      FUN_001835b4(2,0xd,0x4e,*(short *)(temp_v3 + 8) + temp_v1,
-                   (*(short *)(temp_v3 + 10) + temp_v2) - param_2,0x2e);
-      temp_v0 = g_renderCtx;
-      piVar7 = (int *)(g_renderCtx + 0x1318);
-      temp_v4 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = 3;
-      if (*(char *)(temp_v0 + 0x1330) != '\0' || temp_v4 != 3) {
-        (**(romwright_code **)(temp_v0 + 0x1334))();
-        *(unsigned char *)(temp_v0 + 0x1330) = 0;
-      }
-      FUN_0035ae58(*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,
-                   (int)**(short **)(temp_v3 + 0xc),(*(short **)(temp_v3 + 0xc))[1] - param_2,1);
-      temp_v0 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,1,0);
-      piVar7 = (int *)(temp_v0 + 0x12b8);
-      temp_v5 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v4;
-      if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v5 != temp_v4) {
-        (**(romwright_code **)(temp_v0 + 0x12d4))();
-        *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-      }
-      FUN_001835b4(2,0xd,0x50,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x2e);
-      FUN_001835b4(2,0xd,0x51,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x2e);
-      temp_v0 = g_renderCtx;
-      piVar7 = (int *)(g_renderCtx + 0x1318);
-      temp_v1 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = 0;
-      if (*(char *)(temp_v0 + 0x1330) != '\0' || temp_v1 != 0) {
-        (**(romwright_code **)(temp_v0 + 0x1334))();
-        *(unsigned char *)(temp_v0 + 0x1330) = 0;
-      }
-      temp_v0 = g_renderCtx;
-      temp_v1 = packNibblesAndByte(6,7,0);
-      piVar7 = (int *)(temp_v0 + 0x12b8);
-      temp_v2 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v1;
-      if (*(char *)(temp_v0 + 0x12d0) != '\0' || temp_v2 != temp_v1) {
-        (**(romwright_code **)(temp_v0 + 0x12d4))();
-        *(unsigned char *)(temp_v0 + 0x12d0) = 0;
-      }
-      efctSetSpeed();
-      return;
-    }
-  }
-  return;
+    return reinterpret_cast<RenderStateStack *>(reinterpret_cast<u8 *>(context) + 0x1318);
 }
 
-} /* extern "C" */
+extern "C" {
+extern RenderCtxA *g_renderCtx;
+void efctSetSpeed(f32 speed);
+void FUN_001835b4(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
+void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
+s32 vec2GetXInt(void *vector);
+s32 vec2GetYInt(void *vector);
+u32 packNibblesAndByte(u32 high, u32 low, u32 byte);
+struct GaugeSprite {
+    u8 unk00[8];
+    s16 x;
+    s16 y;
+    s16 *size;
+};
+GaugeSprite *FUN_001834a4(u32 table, s32 frame);
+}
+
+/* Draw the two-part gauge frame at the slot position, with the lower part shortened by `shrink` rows. */
+extern "C" void FUN_0034e784(u8 *panel, s32 rows)
+{
+    if (PANEL_AT(panel, u8, 0x38B9) != 0)
+        return;
+    s32 shrink = rows * 8;
+    if (shrink > 40)
+        shrink = 40;
+    if (PANEL_AT(panel, s32, 0x3890) >= 4)
+        return;
+    void *position = panel + 0x12B8;
+    s32 x = vec2GetXInt(position);
+    s32 y = vec2GetYInt(position);
+    f32 scale = PANEL_AT(panel, f32, 0x12B8 + 0x20);
+    x += PANEL_AT(panel, s32, 0x41A0);
+    y += PANEL_AT(panel, s32, 0x41A4);
+    efctSetSpeed(PANEL_AT(panel, f32, 0x598 + 0x20) * scale);
+    GaugeSprite *sprite = FUN_001834a4(13, PANEL_AT(panel, s32, 0x3890) + 0x52);
+    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+    FUN_001835b4(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
+    FUN_001835b4(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);
+    renderStackSet(renderCtxStackE(g_renderCtx), 3);
+    FUN_0035ae58(sprite->x + x, sprite->y + y, sprite->size[0], sprite->size[1] - shrink, 1);
+    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+    FUN_001835b4(2, 13, 0x50, sprite->x + x, sprite->y + y, 0x2E);
+    FUN_001835b4(2, 13, 0x51, sprite->x + x, sprite->y + y, 0x2E);
+    renderStackSet(renderCtxStackE(g_renderCtx), 0);
+    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
+    efctSetSpeed(1.0f);
+}

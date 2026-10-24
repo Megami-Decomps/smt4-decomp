@@ -23,7 +23,7 @@ extern int _Znwj(unsigned int);
 extern int *FUN_002e7614(int, unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ec8a8. */
-extern int *FUN_002eff58(int, int);
+extern int *_ZN9Obj5588ecC1Ej(int, int);
 extern int FUN_002eff84(void);
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_00122bd4(int param_1,fn_00122bd4_arg1 *param_2)
   if ((int)((unsigned int)param_2->field_0x1c << 0x1d) < 0) {
     temp_v0 = FUN_002eb7d0(0x20,0);
     if ((temp_v0 != 0) &&
-       (piVar2 = (int *)FUN_002eff58(temp_v0,param_2->field_0x10 + param_2->field_0x18),
+       (piVar2 = (int *)_ZN9Obj5588ecC1Ej(temp_v0,param_2->field_0x10 + param_2->field_0x18),
        piVar2 != (int *)0x0)) {
       temp_v0 = FUN_002eff84();
       if (temp_v0 != 0) {

@@ -1,115 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00332fd8` (_code @ 0x332fd8, 0x270 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail addresses the grid fields through block+0xE00 held in a register and keeps constants in different s-registers; the build uses an extra saved register and frame word. Argument decode (position/size vectors, 20 integer arguments) taken from the retail asm. */
+#include "common.h"
+
+struct MapPoint {
+    f32 x, y, z;
+};
+
+/* The flags block (accessed fields). */
+struct MapFlagsBlock {
+    u8 unk0000[0xE00];
+    s8 targetX;             // 0xE00
+    s8 targetY;             // 0xE01
+    u8 unkE02[7];
+    u8 effectActive;        // 0xE09
+    s8 gridX;               // 0xE0A
+    s8 gridY;               // 0xE0B
+    u8 unkE0C[0x860];
+    s8 forcedHeading;       // 0x166C
+    u8 unk166D[0x7];
+    f32 unk1674;
+};
 
 extern "C" {
+MapFlagsBlock *gameFlagsGetBlock(void);
+s32 FUN_003857c8(s32 value);
+s32 FUN_002393cc(s32 scene);
+f32 mathPositionHeadingDegrees(MapPoint from, MapPoint to);
+f32 calcHeadingRoundedToCardinalDirection(f32 heading);
+f32 FUN_001bc124(f32 radians);
+f32 FUN_001bbf0c(f32 radians);
+void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e, s32 f0, s32 f1, s32 f2, s32 f3,
+                            s32 f4, s32 f5, s32 f6, s32 f7, s32 g, s32 h, s32 kind, s32 i, s32 j, s32 k,
+                            MapPoint position, MapPoint size, f32 heading);
 
-int FUN_001bbf0c(void);
-int FUN_001bc124(int, int);
-int calcHeadingRoundedToCardinalDirection(void);
-int mathPositionHeadingDegrees(int, int);
-int sceneRegisterBoxEffect(...);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of void: 12 slot(s), 48 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp70; /* 0x70: local_70 */
-} void_stack;
-
-extern unsigned char LAB_00333264; /* 0x333264 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-extern int FUN_002393cc(unsigned int);
-/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
-/* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: sceneRegisterBoxEffect. */
-extern unsigned int FUN_003857c8(int);
-
-
+/* Place the fountain box effect in front of the map target, facing along the rounded cardinal heading. */
 void FUN_00332fd8(void)
-
 {
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  char temp_v0;
-  char temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  
-  temp_v2 = gameFlagsGetBlock();
-  if (*(char *)(temp_v2 + 0xe09) != '\0') {
-    temp_v0 = *(char *)(temp_v2 + 0xe0a);
-    temp_v1 = *(char *)(temp_v2 + 0xe0b);
-    temp_v3 = FUN_003857c8((int)*(float *)(temp_v2 + 0x15c4));
-    VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe00),(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe01),(unsigned char)(in_fpscr >> 0x16) & 3);
-    mathPositionHeadingDegrees((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
-    calcHeadingRoundedToCardinalDirection();
-    temp_v4 = (short)*(char *)(temp_v2 + 0xe0a) * 700 + 0x15e;
-    temp_v2 = (short)*(char *)(temp_v2 + 0xe0b) * 700 + 0x15e;
-    VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001bc124(temp_v2,temp_v4);
-    FUN_001bbf0c();
-    temp_v6 = 0x12;
-    temp_v2 = FUN_002393cc(temp_v3);
-    if (temp_v2 != 0) {
-      switch(temp_v3) {
-      case 2:
-        temp_v6 = 0x13;
-        break;
-      case 3:
-        temp_v6 = 0x14;
-        break;
-      case 4:
-        temp_v6 = 0x15;
-        break;
-      case 5:
-        temp_v6 = 0x16;
-        break;
-      case 6:
-        temp_v6 = 0x17;
-        break;
-      case 7:
-        temp_v6 = 0x18;
-        break;
-      case 8:
-        temp_v6 = 0x19;
-      }
-      temp_v7 = 0x24;
-      temp_v5 = 0x52;
-      temp_v3 = 0;
+    MapFlagsBlock *block = gameFlagsGetBlock();
+    if (block->effectActive == 0)
+        return;
+    s32 gridX = block->gridX;
+    s32 gridY = block->gridY;
+    s32 scene = FUN_003857c8(static_cast<s32>(*reinterpret_cast<f32 *>(reinterpret_cast<u8 *>(block) + 0x15C4)));
+    MapPoint from = {static_cast<f32>(gridX), 0.0f, static_cast<f32>(gridY)};
+    MapPoint to = {static_cast<f32>(block->targetX), 0.0f, static_cast<f32>(block->targetY)};
+    f32 heading = calcHeadingRoundedToCardinalDirection(mathPositionHeadingDegrees(from, to));
+    s8 forced = block->forcedHeading;
+    if (forced != 0) {
+        if (forced == 64 || forced == 66)
+            heading = 90.0f;
+        else if (forced == 65 || forced == 67)
+            heading = 0.0f;
     }
-    else {
-      temp_v6 = 1;
-      temp_v7 = 0xc;
-      temp_v3 = 0x205;
-      temp_v5 = 0x56;
+    f32 x = static_cast<f32>(block->gridX * 700 + 350);
+    f32 z = static_cast<f32>(block->gridY * 700 + 350);
+    f32 radians = heading * 0.017453292f;
+    x -= FUN_001bc124(radians) * 250.0f;
+    z -= FUN_001bbf0c(radians) * 250.0f;
+    MapPoint position = {x, 0.0f, z};
+    MapPoint size = {200.0f, 200.0f, 120.0f};
+    s32 kind = 18;
+    if (FUN_002393cc(scene) != 0) {
+        switch (scene) {
+        case 2: kind = 19; break;
+        case 3: kind = 20; break;
+        case 4: kind = 21; break;
+        case 5: kind = 22; break;
+        case 6: kind = 23; break;
+        case 7: kind = 24; break;
+        case 8: kind = 25; break;
+        }
+        sceneRegisterBoxEffect(0, 0, "HCT_FOUNTAIN", 82, 36, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, kind, 1, -1, 0,
+                               position, size, heading);
+    } else {
+        sceneRegisterBoxEffect(0x205, 0, "HCT_FOUNTAIN", 86, 12, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, 1, 1, -1, 0,
+                               position, size, heading);
     }
-    sceneRegisterBoxEffect(temp_v3,0,&LAB_00333264,temp_v5,temp_v7,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v6,1,0xffffffff
-                 ,0);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

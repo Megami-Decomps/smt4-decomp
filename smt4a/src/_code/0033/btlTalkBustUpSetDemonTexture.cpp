@@ -7,7 +7,7 @@ s32 aocLoadTextureNode(u32 system, s32 group, u32 node, s32 flags);
 const void *dataTable00FindById(u32 id);
 s32 FUN_001a6568(u32 system, s32 group, u32 node, s32 flags);
 s32 asdTMTexLoadMainHeap(s32 group, u32 node);
-void FUN_0021ba5c(void *portrait);
+void uiSpriteScreenSetupForMode(void *portrait);
 void FUN_003d44ac(void *portrait);
 s32 aocRunByName(u32 system, u32 group, u32 node, u32 mode);
 extern u32 g_aocSystem;
@@ -51,7 +51,7 @@ void btlTalkBustUpSetDemonTexture(u32 demonId, s32 deferred)
                 FUN_0014afd0(0x10, portrait->textureNode);
             }
             FUN_003d44ac(portrait);
-            FUN_0021ba5c(portrait);
+            uiSpriteScreenSetupForMode(portrait);
             portrait->state = 2;
             portrait->stateCounter = 0;
         }

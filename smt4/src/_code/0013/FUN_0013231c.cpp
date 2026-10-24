@@ -1,209 +1,152 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013231c` (_code @ 0x13231c, 0x28c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stack layout of the dump line buffer and the load order of the job's record list (retail uses one ldrd for the list and state words) differ; the call sequence is the same. The pass-state array is labelled g_asdLightCount in the symbol table. */
+#include "gfx/DrawCallbackRecord.h"
+
+/* The two words the draw dispatch functor carries (context, state). */
+struct DrawDispatchArgs {
+    u32 context;
+    u32 state;
+};
+
+/* A scene draw job: its renderer, and the record list drawn at 0x14 with a state word at 0x18. */
+struct SceneDrawRecords {
+    u8 unk00[0xC];
+    DrawCallbackRecord *begin;
+    DrawCallbackRecord *end;
+};
+struct SceneDrawJob {
+    u8 unk00[4];
+    u32 renderer;
+    u8 unk08[0xC];
+    SceneDrawRecords *records;
+    u32 state;
+};
+
+/* The command-list state of one scene pass (0x18 bytes, one per pass). */
+struct GfxPassState {
+    u8 unk00[4];
+    u8 enabled;
+    u8 sceneBuilt;
+    u8 unk06[2];
+    u32 commandList;
+    u8 unk0c[4];
+    u32 *recorder;
+    u8 recorded;                     /* the pass has been recorded already */
+    u8 unk15[3];
+};
+
+/* A scene node pair the traversal starts from (nodes at 4 and 8). */
+struct SceneRootPair {
+    u8 unk00[4];
+    u32 first;
+    u32 second;
+};
+
+/* The transform builder: a virtual object whose slot 4 visits a scene node. */
+class TransformBuilder {
+public:
+    virtual void slot0();
+    virtual void slot1();
+    virtual void slot2();
+    virtual void slot3();
+    virtual void visit(u32 node);
+};
 
 extern "C" {
 
-int FUN_00138c94(void);
-int FUN_0013c6c0(...);
-int nnosConvertVirtToPhys(...);
-int FUN_002aa6ac(...);
-int asdGxCommandListStartRecord(unsigned int *);
-int FUN_002ab92c(...);
-int _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(...);
-int FUN_002abb5c(unsigned int);
-int FUN_002abbe8(unsigned int, unsigned int);
-int FUN_002c4e98(...);
-int asdGxCommandListBegin(unsigned int);
-int asdGxCommandListEnd(unsigned int, int);
-int nw_gfx_RenderContext_ResetState_2B7478(...);
-int nw_gfx_SceneNode_AttachChild(unsigned int, unsigned int);
-int nw_gfx_SceneTraverser_Begin(unsigned int, unsigned int);
+extern GfxPassState g_asdLightCount[2];
+extern TransformBuilder *g_asdModelTransformBuilder[2];
+extern u32 sceneGroup1Root[2];
+extern u32 sceneGroup2Root[2];
+extern SceneRootPair *DAT_00464b7c[2];
+extern u32 *g_commandBufferCursor;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp140; /* 0x140: local_140 */
-} param_4_stack;
+DrawDispatchArgs _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(DrawCallbackRecord *first,
+                                                                                    DrawCallbackRecord *last,
+                                                                                    DrawDispatchArgs functor);
+void FUN_002abbe8(void *builder, u32 root);
+void nw_gfx_SceneTraverser_Begin(u32 node, u32 other);
+void FUN_002abb5c(u32 node);
+void asdGxCommandListBegin(u32 list);
+void asdGxCommandListEnd(u32 list, s32 arg);
+void nw_gfx_SceneNode_AttachChild(TransformBuilder *builder, u32 root);
+void asdGxCommandListStartRecord(u32 *recorder);
+s32 FUN_0013c6c0(char *buffer, s32 size, s32 limit, const char *format, u32 value);
+void FUN_00138c94(u32 *recorder);
+void FUN_002ab92c(u32 renderer, u32 state, s32 arg);
+void FUN_002c4e98(u32 list);
+void nw_gfx_RenderContext_ResetState_2B7478(u32 renderer);
+void FUN_002ab8c4(u32 *recorder);
 
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern unsigned int sceneGroup1Root; /* 0x464b8c */
-extern unsigned int sceneGroup2Root; /* 0x464b94 */
-extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
-extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
-extern int DAT_004c632c; /* 0x4c632c */
-extern unsigned char DAT_004dad84; /* 0x4dad84 */
-extern unsigned char DAT_004dad85; /* 0x4dad85 */
-extern unsigned int DAT_004dad88; /* 0x4dad88 */
-extern unsigned int *DAT_004dad90; /* 0x4dad90 */
-extern unsigned char DAT_004dad94; /* 0x4dad94 */
-
-/* Supplied declaration required: FUN_00138c94. */
-/* Supplied declaration required: FUN_0013c6c0. */
-/* Supplied declaration required: nnosConvertVirtToPhys. */
-/* Supplied declaration required: FUN_002aa6ac. */
-/* Supplied declaration required: asdGxCommandListStartRecord. */
-/* Supplied declaration required: FUN_002ab92c. */
-/* Supplied declaration required: _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_. */
-/* Supplied declaration required: FUN_002abb5c. */
-/* Supplied declaration required: FUN_002abbe8. */
-/* Supplied declaration required: FUN_002c4e98. */
-/* Supplied declaration required: asdGxCommandListBegin. */
-/* Supplied declaration required: asdGxCommandListEnd. */
-/* Supplied declaration required: nw_gfx_RenderContext_ResetState_2B7478. */
-/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
-/* Supplied declaration required: nw_gfx_SceneTraverser_Begin. */
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-void FUN_0013231c(int param_1,unsigned int param_2,int param_3,int param_4)
-
+/* The two-pass variant of the scene draw: `which` (1 or not) picks the pass; the pass builds its scene graph
+ * on first use, then draws the job's callback records into the command buffer (optionally dumping the
+ * recorded words as hex), and flushes its recorder. */
+void FUN_0013231c(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
 {
-/* irregular: 16 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
-  unsigned int *puVar5;
-  unsigned int temp_v2;
-  unsigned char *puVar7;
-  int temp_v3;
-  int *piVar9;
-  unsigned char *puVar10;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6 [260];
-  int iStack_34;
-  unsigned int temp_v7;
-  int iStack_2c;
-  int temp_v8;
-  
-  temp_v2 = (unsigned int)(param_3 != 1);
-  temp_v4 = *(unsigned int *)(param_1 + 4);
-  temp_v0 = temp_v2 * 0x18;
-  iStack_34 = param_1;
-  temp_v7 = param_2;
-  iStack_2c = param_3;
-  temp_v8 = param_4;
-  if (((&DAT_004dad84)[temp_v0] != '\0') && ((&DAT_004dad85)[temp_v0] == '\0')) {
-    FUN_002abbe8((&g_asdModelTransformBuilder)[temp_v2] + 0x10,(&sceneGroup1Root)[temp_v2]);
-    piVar9 = (int *)(&g_asdModelTransformBuilder)[temp_v2];
-    temp_v3 = (&DAT_00464b7c)[temp_v2];
-    nw_gfx_SceneTraverser_Begin(*(unsigned int *)(temp_v3 + 8),*(unsigned int *)(temp_v3 + 4));
-    (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
-    FUN_002abb5c(*(unsigned int *)(temp_v3 + 8));
-    asdGxCommandListBegin((&DAT_004dad88)[temp_v2 * 6]);
-    _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
-                 *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
-                 *(unsigned int *)(param_1 + 0x18));
-    asdGxCommandListEnd((&DAT_004dad88)[temp_v2 * 6],0);
-    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v2],(&sceneGroup1Root)[temp_v2]);
-    FUN_002abbe8((&g_asdModelTransformBuilder)[temp_v2] + 0x10,(&sceneGroup2Root)[temp_v2]);
-    piVar9 = (int *)(&g_asdModelTransformBuilder)[temp_v2];
-    temp_v3 = (&DAT_00464b7c)[temp_v2];
-    nw_gfx_SceneTraverser_Begin(*(unsigned int *)(temp_v3 + 8),*(unsigned int *)(temp_v3 + 4));
-    (**(romwright_code **)(*piVar9 + 0x10))(piVar9,*(unsigned int *)(temp_v3 + 8));
-    FUN_002abb5c(*(unsigned int *)(temp_v3 + 8));
-    (&DAT_004dad85)[temp_v0] = 1;
-  }
-  if ((&DAT_004dad94)[temp_v0] == '\0') {
-    if (temp_v2 != 0) {
-      FUN_002ab92c(temp_v4,temp_v7,0);
+    u32 pass = which != 1;
+    u32 renderer = job->renderer;
+    GfxPassState *state = &g_asdLightCount[pass];
+
+    if (state->enabled != 0 && state->sceneBuilt == 0) {
+        FUN_002abbe8((u8 *)g_asdModelTransformBuilder[pass] + 16, sceneGroup1Root[pass]);
+        TransformBuilder *builder = g_asdModelTransformBuilder[pass];
+        SceneRootPair *roots = DAT_00464b7c[pass];
+        nw_gfx_SceneTraverser_Begin(roots->second, roots->first);
+        builder->visit(roots->second);
+        FUN_002abb5c(roots->second);
+        asdGxCommandListBegin(state->commandList);
+        DrawDispatchArgs first = {renderer, job->state};
+        _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, first);
+        asdGxCommandListEnd(state->commandList, 0);
+        nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder[pass], sceneGroup1Root[pass]);
+        FUN_002abbe8((u8 *)g_asdModelTransformBuilder[pass] + 16, sceneGroup2Root[pass]);
+        builder = g_asdModelTransformBuilder[pass];
+        roots = DAT_00464b7c[pass];
+        nw_gfx_SceneTraverser_Begin(roots->second, roots->first);
+        builder->visit(roots->second);
+        FUN_002abb5c(roots->second);
+        state->sceneBuilt = 1;
     }
-    else {
-      asdGxCommandListStartRecord(DAT_004dad90);
-    }
-    puVar5 = g_commandBufferCursor;
-    if (temp_v8 != 0) {
-      _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
-                   *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
-                   *(unsigned int *)(param_1 + 0x18));
-      puVar3 = (unsigned int *)0x0;
-      if (puVar5 != (unsigned int *)0x0) {
-        puVar3 = g_commandBufferCursor;
-      }
-      if ((puVar5 != (unsigned int *)0x0 && puVar3 != (unsigned int *)0x0) && puVar3 != puVar5) {
-        puVar7 = (unsigned char *)0x0;
-        puVar10 = (unsigned char *)0x0;
-        if (puVar5 < puVar3) {
-          do {
-            puVar4 = temp_v6 + (int)puVar7;
-            FUN_0013c6c0(puVar4,0x100 - (int)puVar7,0xff - (int)puVar7,"0x%08x, ",*puVar5);
-            puVar10 = puVar10 + 1;
-            puVar7 = puVar7 + (int)puVar4;
-            if (puVar10 == (unsigned char *)0x4) {
-              puVar10 = (unsigned char *)0x0;
-              puVar7 = puVar10;
-            }
-            puVar5 = puVar5 + 1;
-          } while (puVar5 < puVar3);
+    if (state->recorded == 0) {
+        if (pass != 0) {
+            FUN_002ab92c(renderer, stateA, 0);
+        } else {
+            asdGxCommandListStartRecord(state->recorder);
         }
-      }
+        DrawDispatchArgs functor = {renderer, job->state};
+        if (dumpCommands != 0) {
+            u32 *cursor = g_commandBufferCursor;
+            char line[260];
+
+            _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, functor);
+            u32 *end = cursor != NULL ? g_commandBufferCursor : NULL;
+            if (cursor != NULL && end != NULL && end != cursor) {
+                s32 length = 0;
+                s32 words = 0;
+
+                for (; cursor < end; cursor++) {
+                    length += FUN_0013c6c0(line + length, 0x100 - length, 0xFF - length, "0x%08x, ", *cursor);
+                    if (++words == 4) {
+                        words = 0;
+                        length = 0;
+                    }
+                }
+            }
+        } else {
+            _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, functor);
+        }
+        if (pass == 0) {
+            FUN_00138c94(state->recorder);
+        }
     }
-    else {
-      _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(temp_v6,*(unsigned int *)(*(int *)(param_1 + 0x14) + 0xc),
-                   *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
-                   *(unsigned int *)(param_1 + 0x18));
+    if (state->enabled != 0 && state->sceneBuilt != 0) {
+        FUN_002ab92c(renderer, stateA, 0);
+        FUN_002c4e98(state->commandList);
+        nw_gfx_RenderContext_ResetState_2B7478(renderer);
     }
-    if (temp_v2 == 0) {
-      FUN_00138c94();
+    if (pass == 0) {
+        FUN_002ab92c(renderer, stateA, 0);
+        FUN_002ab8c4(state->recorder);
     }
-  }
-  temp_v1 = '\0';
-  if ((&DAT_004dad84)[temp_v0] != '\0') {
-    temp_v1 = (&DAT_004dad85)[temp_v0];
-  }
-  if ((&DAT_004dad84)[temp_v0] != '\0' && temp_v1 != '\0') {
-    FUN_002ab92c(temp_v4,temp_v7,0);
-    FUN_002c4e98((&DAT_004dad88)[temp_v2 * 6]);
-    nw_gfx_RenderContext_ResetState_2B7478(temp_v4);
-  }
-  if (temp_v2 != 0) {
-    return;
-  }
-  FUN_002ab92c(temp_v4,temp_v7,0);
-  temp_v0 = DAT_004c632c;
-  temp_v8 = DAT_004dad90[1];
-  if (temp_v8 < 1) {
-    return;
-  }
-  temp_v4 = *DAT_004dad90;
-  temp_v2 = (int)g_commandBufferCursor - *(int *)(DAT_004c632c + 4);
-  temp_v5 = (temp_v2 & 8) != 0;
-  puVar5 = g_commandBufferCursor;
-  if (temp_v5) {
-    puVar5 = (unsigned int *)(temp_v2 + 0x18);
-  }
-  *(unsigned int *)(DAT_004c632c + 0xc) = temp_v2;
-  if (temp_v5) {
-    *(unsigned int **)(temp_v0 + 0xc) = puVar5;
-  }
-  else {
-    *(unsigned int *)(temp_v0 + 0xc) = temp_v2 + 0x20;
-    if ((unsigned int)puVar5 < g_commandBufferEnd) {
-      g_commandBufferCursor = puVar5 + 2;
-      puVar5[1] = 0x8025e;
-      *puVar5 = 0;
-    }
-  }
-  temp_v8 = temp_v8 >> 3;
-  nnosConvertVirtToPhys(temp_v4);
-  nnosConvertVirtToPhys(*(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0xc));
-  if (*(int *)(temp_v0 + 0x30) == 0) {
-    *(int *)(temp_v0 + 0x30) = *(int *)(temp_v0 + 0xc) - *(int *)(temp_v0 + 0x14);
-  }
-  temp_v3 = *(int *)(temp_v0 + 0x34);
-  if (temp_v3 != 0) {
-    *(unsigned int *)(temp_v3 + 8) = (unsigned int)((int)g_commandBufferCursor - temp_v3) >> 3;
-  }
-  *(unsigned int **)(temp_v0 + 0x34) = g_commandBufferCursor;
-  FUN_002aa6ac(0x238,5,&temp_v8);
-  return;
 }
 
 } /* extern "C" */

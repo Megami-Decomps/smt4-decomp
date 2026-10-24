@@ -1,114 +1,82 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba2b8` (_code @ 0x2ba2b8, 0x260 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail builds the type 2/3/4 register words as bit-field struct writes (bic/orr chains, hoisted masks r8/r9/fp) and loads the argument words with ldm; built packs the words with shifts and masks */
+#include "shard/W6_W6Match5_DisplayMode.h"
+
+/* The recorded render-state command carried by a graphics queue entry. */
+struct RenderCommand {
+    /* 0x00 */ u8 type;
+    /* 0x01 */ u8 unk01;
+    /* 0x02 */ u8 last;   /* 1: ends the replay */
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u32 a;
+    /* 0x08 */ u32 b;
+    /* 0x0C */ u32 c;
+    /* 0x10 */ u32 d;
+    /* 0x14 */ u32 e;
+    /* 0x18 */ u32 f;
+};
+typedef char RenderCommandSizeCheck[sizeof(RenderCommand) == sizeof(GraphicsQueueEntry) ? 1 : -1];
 
 extern "C" {
 
-int FUN_00142fb8(unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_00142fcc(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-int FUN_00142fec(int, unsigned int, unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int);
-int FUN_0014300c(...);
-int FUN_00147948(unsigned int, unsigned int, unsigned int, unsigned int);
+void FUN_00142fb8(u32 a, u32 b, u32 c, u32 d);
+void FUN_00142fcc(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g);
+void FUN_00142fec(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
+void FUN_0014300c(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
+void FUN_00147948(u32 a, u32 b, u32 c, u32 d);
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
-
-extern int DAT_004c62a4; /* 0x4c62a4 */
-extern signed char DAT_004c62a8; /* 0x4c62a8 */
-extern int DAT_004c6330; /* 0x4c6330 */
-
-/* Supplied declaration required: FUN_00142fb8. */
-/* Supplied declaration required: FUN_00142fcc. */
-/* Supplied declaration required: FUN_00142fec. */
-/* Supplied declaration required: FUN_0014300c. */
-/* Supplied declaration required: FUN_00147948. */
-
-
+/* Replays the recorded render-state commands of the current graphics queue up to the limit. */
 void FUN_002ba2b8(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned char *puVar8;
-  unsigned short temp_v7;
-  unsigned char temp_v8;
-  
-  temp_v0 = DAT_004c6330;
-  if ((DAT_004c62a8 != '\x01') &&
-     (temp_v1 = *(int *)(DAT_004c6330 + 0x24), temp_v1 < *(int *)(DAT_004c6330 + 0x20))) {
+    if (g_asdGfxContext.submission.ready == 1)
+        return;
+    GraphicsQueue *queue = g_asdGfxContext.submission.queue;
+    if ((s32)queue->activeCount >= (s32)queue->pendingCount)
+        return;
     do {
-      if (DAT_004c62a4 + *(int *)(temp_v0 + 0x28) <= temp_v1) {
-        return;
-      }
-      puVar8 = (unsigned char *)(*(int *)(temp_v0 + 0x18) + temp_v1 * 0x1c);
-      switch(*puVar8) {
-      case 0:
-        FUN_00142fb8(*(unsigned int *)(puVar8 + 8),*(unsigned int *)(puVar8 + 4),
-                     *(unsigned int *)(puVar8 + 0xc),~*(unsigned int *)(puVar8 + 0x10) & 1);
-        break;
-      case 1:
-        FUN_00147948(*(unsigned int *)(puVar8 + 4),*(unsigned int *)(puVar8 + 8),
-                     ~(*(unsigned int *)(puVar8 + 0xc) >> 2) & 1,*(unsigned int *)(puVar8 + 0xc) & 1);
-        break;
-      case 2:
-        FUN_00142fec(*(int *)(puVar8 + 4),
-                     *(int *)(puVar8 + 4) + (*(unsigned int *)(puVar8 + 0xc) & 0x7fffff),
-                     *(unsigned int *)(puVar8 + 8),((*(unsigned int *)(puVar8 + 0xc) >> 0xf) & 0x300) | 1,
-                     *(int *)(puVar8 + 0x10),
-                     (*(unsigned int *)(puVar8 + 0x18) & 0x7fffff) + *(int *)(puVar8 + 0x10),
-                     *(unsigned int *)(puVar8 + 0x14),((*(unsigned int *)(puVar8 + 0x18) >> 0xf) & 0x300) | 1)
-        ;
-        break;
-      case 3:
-        temp_v2 = *(unsigned int *)(puVar8 + 0x14);
-        temp_v4 = *(unsigned int *)(puVar8 + 0xc);
-        temp_v5 = *(unsigned int *)(puVar8 + 0x10);
-        temp_v6 = temp_v2 << 0x19;
-        temp_v7 = temp_v5;
-        temp_v8 = (temp_v4 & 0xffff) <= temp_v7;
-        temp_v3 = (temp_v2 & 0x7f) >> 6;
-        if (temp_v8) {
-          temp_v6 = temp_v5 >> 0x10;
+        if ((s32)queue->activeCount >= (s32)(g_asdGfxContext.submission.replayLimit + queue->currentEntry))
+            return;
+        RenderCommand *cmd = reinterpret_cast<RenderCommand *>(&queue->entries[queue->activeCount]);
+        switch (cmd->type) {
+        case 0:
+            FUN_00142fb8(cmd->b, cmd->a, cmd->c, ~cmd->d & 1);
+            break;
+        case 1:
+            FUN_00147948(cmd->a, cmd->b, ~(cmd->c >> 2) & 1, cmd->c & 1);
+            break;
+        case 2:
+            FUN_00142fec(cmd->a, cmd->a + (cmd->c & 0x7FFFFF), cmd->b, ((cmd->c >> 15) & 0x300) | 1,
+                         cmd->d, (cmd->f & 0x7FFFFF) + cmd->d, cmd->e, ((cmd->f >> 15) & 0x300) | 1);
+            break;
+        case 3: {
+            u32 e = cmd->e;
+            u16 low = cmd->d;
+            u32 flags = (e & 0x7F) >> 6;
+            u32 ref = e << 25;
+            bool inRange = (cmd->c & 0xFFFF) <= low;
+            if (inRange)
+                ref = cmd->d >> 16;
+            if (!inRange || ref < cmd->c >> 16)
+                flags |= 4;
+            FUN_00142fcc(cmd->a, cmd->c & 0xFFFF, cmd->c >> 16, cmd->b, low, cmd->d >> 16,
+                         ((e >> 6) & 0x20) | ((e & 0x200) << 7) | ((e & 0x180) << 17) | flags
+                             | ((e & 7) << 8) | ((e & 0x38) << 9) | ((e >> 9) & 2));
+            break;
         }
-        if (!temp_v8 || temp_v6 < temp_v4 >> 0x10) {
-          temp_v3 = temp_v3 | 4;
+        case 4: {
+            u32 flags = 0;
+            if ((cmd->d & 0xFFFF) != 0 || (cmd->e & 0xFFFF) != 0)
+                flags = 4;
+            FUN_0014300c(cmd->a, cmd->b, cmd->c, cmd->d >> 16, cmd->d & 0xFFFF, cmd->e >> 16,
+                         cmd->e & 0xFFFF, flags | 8);
+            break;
         }
-        FUN_00142fcc(*(unsigned int *)(puVar8 + 4),temp_v4 & 0xffff,temp_v4 >> 0x10,
-                     *(unsigned int *)(puVar8 + 8),temp_v7,temp_v5 >> 0x10,
-                     ((temp_v2 >> 6) & 0x20) |
-                     ((temp_v2 & 0x200) << 7) |
-                     ((temp_v2 & 0x180) << 0x11) | temp_v3 | ((temp_v2 & 7) << 8) | ((temp_v2 & 0x38) << 9)
-                     | ((temp_v2 >> 9) & 2));
-        break;
-      case 4:
-        temp_v6 = *(unsigned int *)(puVar8 + 0x10);
-        if (((temp_v6 & 0xffff) != 0) || (temp_v3 = 0, (*(unsigned int *)(puVar8 + 0x14) & 0xffff) != 0)) {
-          temp_v3 = 4;
         }
-        FUN_0014300c(*(unsigned int *)(puVar8 + 4),*(unsigned int *)(puVar8 + 8),
-                     *(unsigned int *)(puVar8 + 0xc),temp_v6 >> 0x10,temp_v6 & 0xffff,
-                     *(unsigned int *)(puVar8 + 0x14) >> 0x10,*(unsigned int *)(puVar8 + 0x14) & 0xffff,temp_v3 | 8);
-      }
-      temp_v1 = *(int *)(temp_v0 + 0x24) + 1;
-      *(int *)(temp_v0 + 0x24) = temp_v1;
-      if (puVar8[2] == '\x01') {
-        DAT_004c62a8 = 1;
-        return;
-      }
-    } while (temp_v1 < *(int *)(temp_v0 + 0x20));
-  }
-  return;
+        queue->activeCount++;
+        if (cmd->last == 1) {
+            g_asdGfxContext.submission.ready = 1;
+            return;
+        }
+    } while ((s32)queue->activeCount < (s32)queue->pendingCount);
 }
 
 } /* extern "C" */

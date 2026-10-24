@@ -1,123 +1,140 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cc9e0` (_code @ 0x2cc9e0, 0x310 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rebuild from asm of the battle command menu's result selection; retail shares its skip/candidate tails by jumps (the draft's six gotos) and computes the work-block offsets from three base registers, which armcc here emits from the structured conditions. */
+#include "common.h"
+
+/* One command-menu entry (only the fields read here). */
+struct CommandEntry {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 valid;
+    /* 0x02 */ u8 unk02[0x59];
+    /* 0x5B */ u8 limitedByBattle;
+    /* 0x5C */ u16 flagA;
+    /* 0x5E */ u16 flagB;
+    /* 0x60 */ u32 attributes;     /* bit 0: needs the target to be free */
+};
+
+/* A party member record (only the fields read here). */
+struct MemberRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 equipment;
+};
+
+struct EquipmentInfo {
+    /* 0x00 */ u8 unk00[0xB3];
+    /* 0xB3 */ u8 flags;           /* bit 2: allows the command */
+};
+
+/* The battle command work (only the fields read here). */
+struct CommandWork {
+    /* 0x0000 */ u8 unk0000[0x387C];
+    /* 0x387C */ s32 mode;
+    /* 0x3880 */ u8 unk3880[0x10];
+    /* 0x3890 */ s32 selected;
+    /* 0x3894 */ u8 unk3894[0x28];
+    /* 0x38BC */ u8 lists[0x7D0];  /* one 100-byte list per selection */
+    /* 0x408C */ u8 unk408C[0x161];
+    /* 0x41ED */ u8 blocked;
+    /* 0x41EE */ u8 unk41EE[0x22];
+    /* 0x4210 */ s16 targets[8];
+};
+
+struct BattleState {
+    /* 0x0000 */ u8 unk0000[0x45A0];
+    /* 0x45A0 */ u32 maskA;
+    /* 0x45A4 */ u32 maskB;
+};
+
+struct BattleMasks {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 maskA;
+    /* 0x2C */ u32 maskB;
+};
 
 extern "C" {
+extern BattleMasks DAT_00573b88;
 
-int FUN_00184310(void);
-int gameGetSlotTable(...);
-int FUN_002cc228(char *, int);
+u8 *gameGetSlotTable(void);
+MemberRecord *gameGetSlotRecord(s32 id);
+CommandEntry *FUN_002cc228(u32 index, s32 first);
+s32 gameFlagIsSet(u32 flag);
+s32 gameDataFlagTestBit(u32 flag);
+BattleState *btlGetMainState(void);
+s32 idListHasFlaggedRecord(MemberRecord *member);
+s32 FUN_00291e14(void);
+EquipmentInfo *FUN_00184310(u32 equipment);
+s32 FUN_002b24fc(void);
+s32 FUN_002a4878(void *list);
 
-extern unsigned int DAT_00573bb0; /* 0x573bb0 */
-extern unsigned int DAT_00573bb4; /* 0x573bb4 */
-
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00184310. */
-extern int gameFlagIsSet(void);
-extern int gameGetSlotRecord(int);
-/* Supplied declaration required: gameGetSlotTable. */
-extern int FUN_00291e14(void);
-extern int FUN_002a4878(int);
-extern int FUN_002b24fc(void);
-/* Supplied declaration required: FUN_002cc228. */
-extern int gameDataFlagTestBit(void);
-extern int idListHasFlaggedRecord(int);
-
-
-unsigned int FUN_002cc9e0(int param_1,int param_2)
-
+/* Whether a target command is usable by the member: allowed by the member's equipment when no
+ * flagged record applies. */
+static bool targetCommandAllowed(CommandEntry *entry, MemberRecord *member)
 {
-/* irregular: 6 goto(s); 3 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  char *pcVar3;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int *piVar7;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v1 = param_1;
-  if ((param_2 != 0) && (temp_v1 = *(int *)(param_1 + 0x387c), temp_v1 == 6)) {
-    return 0xb;
-  }
-  temp_v1 = gameGetSlotTable(temp_v1);
-  temp_v6 = 0;
-  temp_v4 = 0;
-  piVar7 = (int *)(param_1 + 0x3890);
-  do {
-    pcVar3 = (char *)(temp_v4 & 0xff);
-    FUN_002cc228(pcVar3,*piVar7 == 0);
-    temp_v5 = 0;
-    if ((*piVar7 != 0) && (-1 < *(char *)(*piVar7 + temp_v1 + 0x1c9f))) {
-      temp_v5 = gameGetSlotTable();
-      temp_v5 = gameGetSlotRecord((int)*(char *)(*piVar7 + temp_v5 + 0x1c9f));
-    }
-    if (((((pcVar3 != (char *)0x0) && (pcVar3[1] == '\x01')) &&
-         ((*(short *)(pcVar3 + 0x5c) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
-        ((*(short *)(pcVar3 + 0x5e) == 0 || (temp_v2 = gameDataFlagTestBit(), temp_v2 != 0)))) &&
-       ((pcVar3[0x5b] == '\0' ||
-        (temp_v2 = btlGetMainState(),
-        (DAT_00573bb0 & *(unsigned int *)(temp_v2 + 0x45a0)) == 0 &&
-        (*(unsigned int *)(temp_v2 + 0x45a4) & DAT_00573bb4) == 0)))) {
-      temp_v0 = *pcVar3;
-      if (temp_v0 != '\x05') {
-        if (temp_v0 != '\x02') {
-          if (temp_v0 == '\x03') {
-            if ((*(short *)(param_1 + *piVar7 * 2 + 0x4210) == -1) || (temp_v5 == 0))
-            goto LAB_002ccb74;
-            temp_v2 = idListHasFlaggedRecord(temp_v5);
-            if (temp_v2 == 0) {
-              if ((((*pcVar3 == '\x03') && ((*(unsigned int *)(pcVar3 + 0x60) & 1) == 0)) &&
-                  (temp_v2 = FUN_00291e14(), temp_v2 != 0)) && (temp_v2 = FUN_00291e14(), temp_v2 != 0)) {
-                temp_v3 = (unsigned int)*(unsigned short *)(temp_v5 + 0x62);
-                FUN_00184310();
-                if ((temp_v3 != 0) && ((*(unsigned char *)(temp_v3 + 0xb3) & 4) != 0)) goto LAB_002ccb64;
-              }
-              goto LAB_002ccc30;
-            }
-          }
-LAB_002ccb64:
-          if (*pcVar3 != '\x06' && *pcVar3 != '\b') goto LAB_002ccb74;
-LAB_002ccc14:
-          if (((*(unsigned int *)(pcVar3 + 0x60) & 1) == 0) || (temp_v5 = FUN_00291e14(), temp_v5 == 0)) {
-            temp_v5 = FUN_002a4878(param_1 + *piVar7 * 100 + 0x38bc);
-            if (temp_v5 == temp_v6) goto LAB_002ccc44;
-            temp_v6 = temp_v6 + 1;
-          }
+    if ((entry->attributes & 1) || FUN_00291e14() == 0 || FUN_00291e14() == 0)
+        return false;
+    EquipmentInfo *info = FUN_00184310(member->equipment);
+    return info != NULL && (info->flags & 4) != 0;
+}
+
+/* Picks which command the menu returns for the current selection: walks the ten command slots,
+ * keeps the usable entries and returns the code of the one under the cursor. */
+u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
+{
+    if (inBattle != 0 && work->mode == 6)
+        return 11;
+    u8 *table = gameGetSlotTable();
+    CommandEntry *entry = NULL;
+    s32 count = 0;
+    for (s32 t = 0; t < 10; t++) {
+        entry = FUN_002cc228(t & 0xFF, work->selected == 0);
+        MemberRecord *member = NULL;
+        if (work->selected != 0 && (s8)table[0x1C9F + work->selected] >= 0)
+            member = gameGetSlotRecord((s8)gameGetSlotTable()[0x1C9F + work->selected]);
+        if (entry == NULL || entry->valid != 1)
+            continue;
+        if (entry->flagA != 0 && gameFlagIsSet(entry->flagA) == 0)
+            continue;
+        if (entry->flagB != 0 && gameDataFlagTestBit(entry->flagB) == 0)
+            continue;
+        if (entry->limitedByBattle) {
+            BattleState *battle = btlGetMainState();
+            if ((DAT_00573b88.maskA & battle->maskA) | (battle->maskB & DAT_00573b88.maskB))
+                continue;
         }
-      }
-      else if (*(char *)(param_1 + 0x41ed) == '\0') {
-LAB_002ccb74:
-        if ((*pcVar3 != '\t') || (temp_v5 = FUN_002b24fc(), temp_v5 != 0)) goto LAB_002ccc14;
-      }
+        if (entry->kind == 2)
+            continue;
+        if (entry->kind == 5 && work->blocked != 0)
+            continue;
+        if (entry->kind == 3 && work->targets[work->selected] != -1 && member != NULL &&
+            idListHasFlaggedRecord(member) == 0 && !targetCommandAllowed(entry, member))
+            continue;
+        if (entry->kind == 9 && FUN_002b24fc() == 0)
+            continue;
+        if ((entry->attributes & 1) && FUN_00291e14() != 0)
+            continue;
+        if (FUN_002a4878(work->lists + work->selected * 100) == count)
+            break;
+        count++;
     }
-LAB_002ccc30:
-    temp_v4 = temp_v4 + 1;
-  } while ((int)temp_v4 < 10);
-  if (pcVar3 != (char *)0x0) {
-LAB_002ccc44:
-    switch(*pcVar3) {
-    case '\x01':
-      return 1;
-    case '\x02':
-      return 2;
-    case '\x03':
-      return 7;
-    case '\x04':
-      return 3;
-    case '\x05':
-      return 10;
-    case '\x06':
-      return 9;
-    case '\a':
-      return 4;
-    case '\t':
-      return 0xc;
+    if (entry == NULL)
+        return 5;
+    switch (entry->kind) {
+    case 1:
+        return 1;
+    case 2:
+        return 2;
+    case 3:
+        return 7;
+    case 4:
+        return 3;
+    case 5:
+        return 10;
+    case 6:
+        return 9;
+    case 7:
+        return 4;
+    case 9:
+        return 12;
     }
-  }
-  return 5;
+    return 5;
 }
 
 } /* extern "C" */

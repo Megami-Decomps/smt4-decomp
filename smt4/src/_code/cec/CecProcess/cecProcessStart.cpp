@@ -12,7 +12,7 @@ extern CecProcessView* g_cecProcess;
 void* asdMemAlloc(s32 heap, s32 alignment, s32 mode, u32 size, s32 fromFront);
 void memClear(void* memory, u32 size);
 void* asdOperatorNew(u32 size);
-CecProcessChild* FUN_003bbe6c(CecProcessChild* child);
+CecProcessChild* _ZN9Obj420a1cC1Ev(CecProcessChild* child);
 
 // Allocate the cleared CEC process block and construct its child object.
 void cecProcessStart()
@@ -23,7 +23,7 @@ void cecProcessStart()
     g_cecProcess = process;
     CecProcessChild* child = (CecProcessChild*)asdOperatorNew(sizeof(CecProcessChild));
     if (child != NULL) {
-        child = FUN_003bbe6c(child);
+        child = _ZN9Obj420a1cC1Ev(child);
     }
     process->process = child;
 }

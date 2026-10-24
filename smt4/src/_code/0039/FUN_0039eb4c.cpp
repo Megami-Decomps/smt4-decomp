@@ -1,133 +1,112 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039eb4c` (_code @ 0x39eb4c, 0x264 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: navi map marker placement; float scheduling and the hoisted constants (s19/s22 pairs, vpush d8-d11) differ from retail */
+#include "common.h"
+
+struct NaviVec2 {
+    f32 x;
+    f32 y;
+};
+
+/* One marker on the navi map (0x4C bytes). */
+struct NaviMarker {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 flagRow;       /* save flag row/column that must be set for the marker to show */
+    /* 0x05 */ u8 flagColumn;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u16 icon;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ NaviVec2 offset;
+    /* 0x14 */ NaviVec2 size;
+    /* 0x1C */ u8 unk1C[0x14];
+    /* 0x30 */ s16 showFlag;     /* game flag that must be set (0: none) */
+    /* 0x32 */ s16 hideFlag;     /* game flag that hides the marker when set (0: none) */
+    /* 0x34 */ s16 visible;
+    /* 0x36 */ u16 drawIcon;
+    /* 0x38 */ s32 x;
+    /* 0x3C */ s32 y;
+    /* 0x40 */ u32 width;
+    /* 0x44 */ u32 height;
+    /* 0x48 */ u32 color;
+};
+
+struct NaviMapWork {
+    /* 0x0000 */ u8 unk0000[0x162];
+    /* 0x0162 */ u16 player;      /* handle of the scene object the map follows */
+    /* 0x0164 */ u8 originPair[0xC];
+    /* 0x0170 */ u8 unk0170[0xD18];
+    /* 0x0E88 */ NaviMarker markers[1];
+};
+
+struct GameStateVisibility {
+    u8 unk000[0x3E0];
+    u32 forceVisible;
+};
 
 extern "C" {
+extern GameStateVisibility g_gameState;
 
-int pairCopy(int, float *);
-int gameGetMapBlock(void);
-int VectorFloatToUnsigned(double, int);
-int VectorSignedToFloat(int, int);
+void gameGetMapBlock(void);
+s32 NaviMain_GetPosX(void);
+f32 *lmapSceneGetObj(void *handle);
+NaviVec2 *NaviMain_GetCursorPos(void *handle);
+void pairCopy(void *source, NaviVec2 *destination);
+s32 saveTestFlagRow(u8 row, u8 column);
+s32 gameFlagIsSet(s32 flag);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp50; /* 0x50: local_50 */
-} param_1_stack;
-
-extern unsigned char g_gameState; /* 0x49f91c */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Supplied declaration required: pairCopy. */
-extern float *lmapSceneGetObj(int);
-extern int saveTestFlagRow(unsigned char, unsigned char);
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: gameGetMapBlock. */
-extern unsigned long long *NaviMain_GetCursorPos(int);
-extern int NaviMain_GetPosX(void);
-
-
-void FUN_0039eb4c(int param_1)
-
+/* Converts the player's world position to map coordinates for the current area, then places
+ * every navi marker whose flags allow it and drops the ones that fall outside the 320x240 screen. */
+void FUN_0039eb4c(NaviMapWork *work)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  float *pfVar3;
-  unsigned long long *puVar4;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int in_fpscr;
-  unsigned int temp_v5;
-  float temp_v6;
-  unsigned int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  unsigned long long temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float fStack_4c;
-  
-  gameGetMapBlock();
-  temp_v1 = NaviMain_GetPosX();
-  pfVar3 = (float *)lmapSceneGetObj(param_1 + 0x162);
-  temp_v8 = *pfVar3;
-  temp_v9 = pfVar3[2];
-  puVar4 = (unsigned long long *)NaviMain_GetCursorPos(param_1 + 0x162);
-  temp_v11 = 0.0f;
-  temp_v10 = *puVar4;
-  temp_v12 = temp_v11;
-  temp_v6 = temp_v11;
-  pairCopy(param_1 + 0x164,&temp_v13);
-  temp_v4 = *(int *)(param_1 + 0x5a88);
-  if (temp_v1 != 0x65) {
-    if (temp_v1 != 0x66) {
-      if (temp_v1 == 0x67) {
-        temp_v6 = (temp_v8 - -17000.0f) * 0.010566667f;
-        temp_v11 = (temp_v9 - -19000.0f) * 0.010810811f;
-      }
+    gameGetMapBlock();
+    u16 *handle = &work->player;
+    s32 area = NaviMain_GetPosX();
+    f32 *player = lmapSceneGetObj(handle);
+    f32 worldX = player[0];
+    f32 worldZ = player[2];
+    NaviVec2 cursor = *NaviMain_GetCursorPos(handle);
+    f32 mapX = 0.0f;
+    f32 mapY = 0.0f;
+    NaviVec2 origin;
+    pairCopy(work->originPair, &origin);
+    s32 markerCount = *(s32 *)((u8 *)work + 0x5A88);
+
+    if (area == 0x65) {
+        mapX = 0.010745763f * (worldX - -25500.0f);
+        mapY = (worldZ - -18500.0f) * 0.010526316f;
+    } else if (area == 0x66) {
+        mapX = 0.010225806f * (worldX - -17000.0f);
+        mapY = (worldZ - -18000.0f) * 0.010810811f;
+    } else if (area == 0x67) {
+        mapX = 0.010566667f * (worldX - -17000.0f);
+        mapY = (worldZ - -19000.0f) * 0.010810811f;
     }
-    else {
-      temp_v6 = (temp_v8 - -17000.0f) * 0.010225806f;
-      temp_v11 = (temp_v9 - -18000.0f) * 0.010810811f;
-    }
-  }
-  else {
-    temp_v6 = (temp_v8 - -25500.0f) * 0.010745763f;
-    temp_v11 = (temp_v9 - -18500.0f) * 0.010526316f;
-  }
-  temp_v1 = 0;
-  temp_v10 = romwright_piece_4_4((int)((float)((unsigned long long)temp_v10 >> 0x20) - (temp_v11 - 120.0f)),
-                    (int)((float)temp_v10 - (temp_v6 - 160.0f)));
-  if (0 < temp_v4) {
-    do {
-      temp_v2 = param_1 + temp_v1 * 0x4c;
-      if (((*(int *)((unsigned char *)&g_gameState + 0x3e0)) == 0) &&
-         (((temp_v3 = saveTestFlagRow(*(unsigned char *)(temp_v2 + 0xe8c),*(unsigned char *)(temp_v2 + 0xe8d)),
-           temp_v3 == 0 || ((*(short *)(temp_v2 + 0xeb8) != 0 && (temp_v3 = gameFlagIsSet(), temp_v3 == 0))))
-          || ((*(short *)(temp_v2 + 0xeba) != 0 && (temp_v3 = gameFlagIsSet(), temp_v3 != 0)))))) {
-        *(unsigned short *)(temp_v2 + 0xebc) = 0;
-      }
-      else {
-        *(unsigned short *)(temp_v2 + 0xebc) = 1;
-      }
-      if (*(short *)(temp_v2 + 0xebc) != 0) {
-        temp_v6 = (float)VectorSignedToFloat((int)temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v10 >> 0x20),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        *(unsigned short *)(temp_v2 + 0xebe) = *(unsigned short *)(temp_v2 + 0xe90);
-        temp_v7 = VectorFloatToUnsigned(*(float *)(temp_v2 + 0xe9c),3);
-        temp_v5 = VectorFloatToUnsigned(*(float *)(temp_v2 + 0xea0),3);
-        *(unsigned int *)(temp_v2 + 0xed0) = 0xffffffff;
-        temp_v6 = temp_v13 + *(float *)(temp_v2 + 0xe94) + temp_v6;
-        temp_v8 = fStack_4c + *(float *)(temp_v2 + 0xe98) + temp_v8;
-        *(unsigned int *)(temp_v2 + 0xec8) = temp_v7;
-        *(unsigned int *)(temp_v2 + 0xecc) = temp_v5;
-        temp_v0 = in_fpscr & 0xfffffff;
-        in_fpscr = temp_v0 | ((unsigned int)(temp_v12 <= temp_v6 + *(float *)(temp_v2 + 0xe9c)) << 0x1d);
-        *(int *)(temp_v2 + 0xec0) = (int)temp_v6;
-        *(int *)(temp_v2 + 0xec4) = (int)temp_v8;
-        if ((((!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) || ((int)temp_v6 >= 0x43a00001)) ||
-            (in_fpscr = temp_v0 | ((unsigned int)(temp_v12 <= temp_v8 + *(float *)(temp_v2 + 0xea0)) << 0x1d),
-            !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) || ((int)temp_v8 >= 0x43700001)) {
-          *(unsigned short *)(temp_v2 + 0xebc) = 0;
+    s32 scrollX = (s32)(cursor.x - (mapX - 160.0f));
+    s32 scrollY = (s32)(cursor.y - (mapY - 120.0f));
+
+    for (s32 i = 0; i < markerCount; i++) {
+        NaviMarker *marker = &work->markers[i];
+        if (g_gameState.forceVisible == 0
+            && (saveTestFlagRow(marker->flagRow, marker->flagColumn) == 0
+                || (marker->showFlag != 0 && gameFlagIsSet(marker->showFlag) == 0)
+                || (marker->hideFlag != 0 && gameFlagIsSet(marker->hideFlag) != 0))) {
+            marker->visible = 0;
+        } else {
+            marker->visible = 1;
         }
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v4);
-  }
-  *(unsigned char *)(param_1 + 0x5a8d) = 0;
-  return;
+        if (marker->visible != 0) {
+            marker->drawIcon = marker->icon;
+            f32 screenX = origin.x + (marker->offset.x + (f32)scrollX);
+            f32 screenY = origin.y + (marker->offset.y + (f32)scrollY);
+            marker->width = (u32)marker->size.x;
+            marker->height = (u32)marker->size.y;
+            marker->color = 0xFFFFFFFF;
+            marker->x = (s32)screenX;
+            marker->y = (s32)screenY;
+            if (!(0.0f <= screenX + marker->size.x) || screenX > 320.0f
+                || !(0.0f <= screenY + marker->size.y) || screenY > 240.0f)
+                marker->visible = 0;
+        }
+    }
+    *((u8 *)work + 0x5A8D) = 0;
 }
 
 } /* extern "C" */

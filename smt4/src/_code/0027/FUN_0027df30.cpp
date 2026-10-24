@@ -1,156 +1,151 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027df30` (_code @ 0x27df30, 0x3d8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register pressure - retail keeps the frame, actor and skill in registers and re-evaluates the frame offsets per use, while this version spills r0-r3 and the derived frames; the stack-argument layout (two skipped words, the speed passed as raw bits) and the calls are the same. */
+#include "common.h"
+
+namespace {
+/* A skill record: its id at +0x62 (ids below 0x6d are the "reflect" skills). */
+struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ s16 id;
+};
+
+/* An entry of the reflect action queue the queue function returns (fields written after queuing). */
+struct ReflectAction {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[0xf];
+    /* 0x14 */ SkillRecord *skill;
+    /* 0x18 */ void *target;
+    /* 0x1c */ u8 unk1c[0xc];
+    /* 0x28 */ s32 side;
+    /* 0x2c */ u8 unk2c[0x20];
+    /* 0x4c */ s32 amount;
+};
+
+/* The battle unit entry found for a skill: its status flags are at +0xfa. */
+struct BattleEntry {
+    /* 0x00 */ u8 unk00[0xfa];
+    /* 0xfa */ u16 statusFlags;
+};
+}
 
 extern "C" {
+extern ReflectAction *g_btlActionReflect;
+void *btlGetMainState(void);
+void FUN_002550d8(s32 id, s32 a, s32 b, s32 c);
+void *btlMainFindEntryByListedId(void *state, s32 id);
+ReflectAction *btlQueueReflectAction(ReflectAction *queue, s32 frame, s32 delay, u32 actor);
+void FUN_002268d0(s32 frame, s32 delay, u32 actor, SkillRecord *skill, s32 first, s32 second, s32 mode, s32 arg, f32 speed);
+u32 FUN_00293230(void *state);
+void FUN_002505c0(s32 a, s32 b, u32 sound, s32 c, s32 d, s32 e, s32 f);
+BattleEntry *FUN_0027da30(void *state, s32 id);
 
-int FUN_002268d0(...);
-int btlQueueReflectAction(...);
-int FUN_002505c0(...);
-int FUN_002550d8(int, int, int, int);
-int FUN_0027da30(...);
-int btlMainFindEntryByListedId(int, int);
-int btlGetMainState(void);
-
-/* stack frame of param_13: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_13_stack;
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_002268d0. */
-/* Supplied declaration required: btlQueueReflectAction. */
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_002550d8. */
-/* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern unsigned int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-
-
-unsigned int
-FUN_0027df30(int param_1,unsigned int param_2,int param_3,unsigned int param_4,int param_5,int param_6,
-            unsigned int param_7,unsigned int param_8,int param_9,int param_10,int param_11,
-            unsigned int param_12,unsigned int param_13)
-
+/* Queues the reflect actions of a skill use: the optional pre-effect, the one or two damage amounts (with their
+   effect and, when a status flag changes, the effect sound), and the follow-up status actions. Always returns 1. */
+u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unused5, u32 unused6, s32 firstAmount, s32 secondAmount,
+                 u32 unused7, u32 statusMask, s32 preDelay, s32 effectDelay, s32 preSide, u32 effectSpeedBits,
+                 u32 clearMask)
 {
-/* irregular: 2 unstructured edge(s); 1 goto(s); 7 native warning(s); review required */
-  unsigned char temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = *(short *)(param_3 + 0x62) < 0x6d;
-  if (temp_v0) {
-    FUN_002550d8((int)*(short *)(param_3 + 0x62),1,1,0);
-  }
-  temp_v1 = (short)param_9 + (short)param_1;
-  if (-1 < param_9) {
-    temp_v2 = btlGetMainState();
-    btlMainFindEntryByListedId(temp_v2,(int)*(short *)(param_3 + 0x62));
-    if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_11)) {
-      temp_v4 = g_btlActionReflect;
-      btlQueueReflectAction(g_btlActionReflect,(int)temp_v1,0,param_2);
-      *(unsigned char *)(temp_v4 + 4) = 6;
-      *(int *)(temp_v4 + 0x18) = temp_v2;
-      *(int *)(temp_v4 + 0x28) = param_11;
+    union {
+        u32 bits;
+        f32 value;
+    } speed;
+    speed.bits = effectSpeedBits;
+    f32 effectSpeed = speed.value;
+    s32 isReflect = skill->id < 0x6d;
+    if (isReflect) {
+        FUN_002550d8(skill->id, 1, 1, 0);
     }
-  }
-  temp_v2 = (int)(short)((short)param_1 + (short)param_10);
-  param_1 = param_1 + param_10;
-  if (param_5 >= 1) {
-    if (param_6 >= 1) {
-      if ((temp_v0) && (-1 < param_10)) {
-        FUN_002268d0(param_1,0,param_2,param_3,param_5,param_6,5,param_12,1);
-      }
-      temp_v4 = g_btlActionReflect;
-      btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
-      *(unsigned char *)(temp_v4 + 4) = 0x1c;
-      *(int *)(temp_v4 + 0x14) = param_3;
-      *(unsigned int *)(temp_v4 + 0x28) = 0;
-      *(int *)(temp_v4 + 0x4c) = param_5;
-      temp_v4 = g_btlActionReflect;
-      btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
-      *(unsigned char *)(temp_v4 + 4) = 0x1c;
-      *(int *)(temp_v4 + 0x14) = param_3;
-      *(unsigned int *)(temp_v4 + 0x28) = 1;
-      *(int *)(temp_v4 + 0x4c) = param_6;
-      btlGetMainState();
-      temp_v3 = FUN_00293230();
+    s16 preFrame = (s16)preDelay + (s16)frame;
+    if (preDelay >= 0) {
+        void *entry = btlMainFindEntryByListedId(btlGetMainState(), skill->id);
+        if (isReflect && entry != NULL && preSide >= 0) {
+            ReflectAction *action = g_btlActionReflect;
+            btlQueueReflectAction(g_btlActionReflect, preFrame, 0, actor);
+            action->kind = 6;
+            action->target = entry;
+            action->side = preSide;
+        }
     }
-    else {
-LAB_0027e16c:
-      if ((temp_v0) && (-1 < param_10)) {
-        FUN_002268d0(param_1,0,param_2,param_3,param_5,0,2,param_12,1);
-      }
-      temp_v4 = g_btlActionReflect;
-      btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
-      *(unsigned char *)(temp_v4 + 4) = 0x1c;
-      *(int *)(temp_v4 + 0x14) = param_3;
-      *(unsigned int *)(temp_v4 + 0x28) = 0;
-      *(int *)(temp_v4 + 0x4c) = param_5;
-      btlGetMainState();
-      temp_v3 = FUN_00293230();
-      temp_v3 = temp_v3 & ~param_13;
+    s16 effectFrame = (s16)frame + (s16)effectDelay;
+    frame = frame + effectDelay;
+    u32 changed;
+    if (firstAmount >= 1) {
+        if (secondAmount >= 1) {
+            if (isReflect && effectDelay >= 0) {
+                FUN_002268d0(frame, 0, actor, skill, firstAmount, secondAmount, 5, 1, effectSpeed);
+            }
+            ReflectAction *action = g_btlActionReflect;
+            btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+            action->kind = 0x1c;
+            action->skill = skill;
+            action->side = 0;
+            action->amount = firstAmount;
+            action = g_btlActionReflect;
+            btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+            action->kind = 0x1c;
+            action->skill = skill;
+            action->side = 1;
+            action->amount = secondAmount;
+            changed = FUN_00293230(btlGetMainState());
+        } else {
+            if (isReflect && effectDelay >= 0) {
+                FUN_002268d0(frame, 0, actor, skill, firstAmount, 0, 2, 1, effectSpeed);
+            }
+            ReflectAction *action = g_btlActionReflect;
+            btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+            action->kind = 0x1c;
+            action->skill = skill;
+            action->side = 0;
+            action->amount = firstAmount;
+            changed = FUN_00293230(btlGetMainState()) & ~clearMask;
+        }
+        if (changed != 0) {
+            FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
+        }
+    } else if (secondAmount >= 1) {
+        if (isReflect && effectDelay >= 0) {
+            FUN_002268d0(frame, 0, actor, skill, secondAmount, 0, 3, 1, effectSpeed);
+        }
+        ReflectAction *action = g_btlActionReflect;
+        btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+        action->kind = 0x1c;
+        action->skill = skill;
+        action->side = 1;
+        action->amount = secondAmount;
+        changed = FUN_00293230(btlGetMainState());
+        if (changed != 0) {
+            FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
+        }
     }
-    if (temp_v3 != 0) {
-      FUN_002505c0(0,0,0x10001c1,0,1,0,0);
+    if (statusMask != 0) {
+        u32 flags = 0;
+        isReflect = skill->id < 0x6d;
+        if (isReflect) {
+            BattleEntry *entry = FUN_0027da30(btlGetMainState(), skill->id);
+            if (entry != NULL) {
+                flags = entry->statusFlags;
+            }
+        }
+        ReflectAction *action = g_btlActionReflect;
+        btlQueueReflectAction(g_btlActionReflect, (s16)((s16)frame + 1), 0, actor);
+        action->kind = 0x1d;
+        action->skill = skill;
+        action->side = 0;
+        action->amount = statusMask;
+        if (isReflect && (flags & ~statusMask & 0x586) == 0) {
+            s16 lastFrame = (s16)((s16)frame + 2);
+            action = g_btlActionReflect;
+            btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
+            action->kind = 0x14;
+            action->skill = skill;
+            action = g_btlActionReflect;
+            btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
+            action->kind = 10;
+            action->skill = skill;
+            action->side = statusMask;
+        }
     }
-  }
-  else if (param_6 >= 1) {
-    if ((temp_v0) && (-1 < param_10)) {
-      FUN_002268d0(param_1,0,param_2,param_3,param_6,0,3,param_12,1);
-    }
-    temp_v4 = g_btlActionReflect;
-    btlQueueReflectAction(g_btlActionReflect,temp_v2,0,param_2);
-    *(unsigned char *)(temp_v4 + 4) = 0x1c;
-    *(int *)(temp_v4 + 0x14) = param_3;
-    *(unsigned int *)(temp_v4 + 0x28) = 1;
-    *(int *)(temp_v4 + 0x4c) = param_6;
-    btlGetMainState();
-    temp_v3 = FUN_00293230();
-    if (temp_v3 != 0) {
-      FUN_002505c0(0,0,0x10001c1,0,1,0,0);
-    }
-  }
-  else if (param_5 >= 1) goto LAB_0027e16c;
-  if (param_8 != 0) {
-    temp_v3 = 0;
-    temp_v0 = *(short *)(param_3 + 0x62) < 0x6d;
-    if (temp_v0) {
-      temp_v2 = btlGetMainState();
-      FUN_0027da30(temp_v2,(int)*(short *)(param_3 + 0x62));
-      if (temp_v2 != 0) {
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0xfa);
-      }
-    }
-    temp_v2 = g_btlActionReflect;
-    btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_1 + 1),0,param_2);
-    *(unsigned char *)(temp_v2 + 4) = 0x1d;
-    *(int *)(temp_v2 + 0x14) = param_3;
-    *(unsigned int *)(temp_v2 + 0x28) = 0;
-    *(unsigned int *)(temp_v2 + 0x4c) = param_8;
-    if ((temp_v0) && ((temp_v3 & ~param_8 & 0x586) == 0)) {
-      temp_v4 = (int)(short)((short)param_1 + 2);
-      temp_v2 = g_btlActionReflect;
-      btlQueueReflectAction(g_btlActionReflect,temp_v4,0,param_2);
-      *(unsigned char *)(temp_v2 + 4) = 0x14;
-      *(int *)(temp_v2 + 0x14) = param_3;
-      temp_v2 = g_btlActionReflect;
-      btlQueueReflectAction(g_btlActionReflect,temp_v4,0,param_2);
-      *(unsigned char *)(temp_v2 + 4) = 10;
-      *(int *)(temp_v2 + 0x14) = param_3;
-      *(unsigned int *)(temp_v2 + 0x28) = param_8;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,178 +1,135 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023b4cc` (_code @ 0x23b4cc, 0x390 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the render-state push/pop, the text buffer frame and the float constant registers differ from retail (233 vs 235 rows); the quest screen drawing is the same. */
+#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
-int FUN_00157558(int);
-int FUN_00162790(...);
-int FUN_001634b4(...);
-int efctSetSpeed(void);
-int renderCtxResetColorScale(...);
-int skinObjectUpdateMatrices(...);
-int FUN_001835b4(int, int, int, int, int, int);
-int renderCtxCalculateStereoParallax(...);
-int uiFadeDraw(int);
-int FUN_00218640(void);
-int FUN_002f6048(int);
-int partyDrawCategorySelectionIcon(...);
-int VectorSignedToFloat(...);
+/* A layout record (only the fields read here). */
+typedef struct QuestLayout {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} QuestLayout;
 
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} void_stack;
+/* The quest UI work block (only the fields used here, by their offsets). */
+typedef struct QuestUi {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u32 state;
+    /* 0x008 */ u8 unk008[0x400];
+    /* 0x408 */ u8 panel[0x20];
+    /* 0x428 */ f32 panelSpeed;
+    /* 0x42C */ u8 unk42c[0x510];
+    /* 0x93C */ u8 hideFade;
+    /* 0x93D */ u8 unk93d[0x38D];
+    /* 0xCCA */ u16 category;
+} QuestUi;
 
-extern unsigned char LAB_0023b870; /* 0x23b870 */
-extern int g_uiQuest; /* 0x57f28c */
-extern int g_renderCtx; /* 0x59dbb4 */
+extern RenderCtxA *g_renderCtx;
+extern QuestUi *g_uiQuest;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_00156850(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001634b4. */
-extern int vec2GetXInt(void);
-extern int vec2GetYInt(int);
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: uiFadeDraw. */
-/* Supplied declaration required: FUN_00218640. */
-/* Supplied declaration required: FUN_002f6048. */
-/* Supplied declaration required: partyDrawCategorySelectionIcon. */
+void FUN_00157558(RenderCtxA *context);
+s32 FUN_001692ac(s32 a, s32 b);
+void FUN_00218640(void);
+void FUN_002f6048(QuestUi *ui);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+s32 vec2GetXInt(void *vector);
+s32 vec2GetYInt(void *vector);
+void efctSetSpeed(f32 speed);
+void uiFadeDraw(u32 id);
+void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
+QuestLayout *FUN_001834a4(u32 group, u32 id);
+void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
+u32 FUN_00156850(u16 category, s32 arg);
+void textFormatBuffer(void *buffer, const char *format, u32 value);
+void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+void FUN_001634b4(void *panel, f32 offset);
+u32 packNibblesAndByte(u32 a, u32 b, u32 c);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-
-unsigned int FUN_0023b4cc(void)
-
+/* Draws the quest screen for its current state: the base screen for most states, the party
+ * screen for 0x11-0x13, and for 0x14-0x16 the category picker with its panel and label.
+ * Always returns 0. */
+u32 FUN_0023b4cc(void)
 {
-/* irregular: irregular input(s): in_fpscr; 14 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int *piVar8;
-  unsigned int in_fpscr;
-  float temp_v7;
-  unsigned char temp_v8 [64];
-  int temp_v9;
-  
-  temp_v2 = g_uiQuest;
-  FUN_00157558(g_renderCtx);
-  temp_v4 = g_renderCtx;
-  temp_v1 = FUN_001692ac(1,0);
-  piVar8 = (int *)(temp_v4 + 0x1258);
-  temp_v5 = *piVar8;
-  temp_v6 = piVar8[temp_v5 + 2];
-  *piVar8 = temp_v5 + 1;
-  piVar8[temp_v5 + 3] = temp_v1;
-  if (*(char *)(temp_v4 + 0x1270) != '\0' || temp_v6 != temp_v1) {
-    (**(romwright_code **)(temp_v4 + 0x1274))();
-    *(unsigned char *)(temp_v4 + 0x1270) = 0;
-  }
-  switch(*(unsigned int *)(temp_v2 + 4)) {
-  case 1:
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-  case 0xc:
-  case 0xd:
-  case 0xe:
-  case 0xf:
-  case 0x10:
-  case 0x17:
-  case 0x18:
-  case 0x19:
-  case 0x1a:
-  case 0x1b:
-  case 0x1c:
-  case 0x1d:
-  case 0x1e:
-    FUN_00218640();
-    break;
-  case 0x11:
-  case 0x12:
-  case 0x13:
-    FUN_002f6048(temp_v2);
-    break;
-  case 0x14:
-  case 0x15:
-  case 0x16:
-    if (*(char *)(temp_v2 + 0x93c) == '\0') {
-      FUN_00218640();
+    QuestUi *ui = g_uiQuest;
+
+    FUN_00157558(g_renderCtx);
+    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    switch (ui->state) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 0x17:
+    case 0x18:
+    case 0x19:
+    case 0x1A:
+    case 0x1B:
+    case 0x1C:
+    case 0x1D:
+    case 0x1E:
+        FUN_00218640();
+        break;
+    case 0x11:
+    case 0x12:
+    case 0x13:
+        FUN_002f6048(ui);
+        break;
+    case 0x14:
+    case 0x15:
+    case 0x16: {
+        if (ui->hideFade == 0) {
+            FUN_00218640();
+        }
+        ui = g_uiQuest;
+        s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.3f);
+        s32 x = vec2GetXInt(ui->panel);
+        s32 y = vec2GetYInt(ui->panel);
+        f32 speed = ui->panelSpeed;
+
+        efctSetSpeed(speed);
+        u16 category = ui->category;
+
+        if (ui->hideFade == 0) {
+            uiFadeDraw(0x92);
+        }
+        efctSetSpeed(speed);
+        x += parallax;
+        FUN_001835b4(2, 0x1E, 0x57, x, y, 0x97);
+        FUN_001835b4(2, 0x1E, 0x58, x, y, 0x97);
+        FUN_001835b4(2, 0x1E, 0x59, x, y, 0x97);
+        FUN_001835b4(2, 0x1E, 0x51, x, y, 0xA1);
+        QuestLayout *icon = FUN_001834a4(0x1E, 0x54);
+
+        partyDrawCategorySelectionIcon(category, icon->x + x, icon->y + y, 0xA6);
+        QuestLayout *label = FUN_001834a4(0x1E, 0x55);
+        char text[64];
+
+        textFormatBuffer(text, "%s", FUN_00156850(category, 0));
+        FUN_00162790(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
+        FUN_001634b4(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
+        efctSetSpeed(1.0f);
+        break;
     }
-    temp_v2 = g_uiQuest;
-    temp_v7 = 0.3f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v9 = temp_v2 + 0x408;
-    temp_v4 = vec2GetXInt();
-    temp_v1 = vec2GetYInt(temp_v2 + 0x408);
-    efctSetSpeed();
-    temp_v0 = *(unsigned short *)(temp_v2 + 0xcca);
-    if (*(char *)(temp_v2 + 0x93c) == '\0') {
-      uiFadeDraw(0x92);
     }
-    efctSetSpeed();
-    temp_v4 = temp_v4 + (int)temp_v7;
-    FUN_001835b4(2,0x1e,0x57,temp_v4,temp_v1,0x97);
-    FUN_001835b4(2,0x1e,0x58,temp_v4,temp_v1,0x97);
-    FUN_001835b4(2,0x1e,0x59,temp_v4,temp_v1,0x97);
-    FUN_001835b4(2,0x1e,0x51,temp_v4,temp_v1,0xa1);
-    temp_v2 = FUN_001834a4(0x1e,0x54);
-    partyDrawCategorySelectionIcon(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
-    temp_v2 = FUN_001834a4(0x1e,0x55);
-    temp_v3 = FUN_00156850(temp_v0,0);
-    textFormatBuffer(temp_v8,&LAB_0023b870,temp_v3);
-    VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,0xffffffff,temp_v8);
-    temp_v7 = 0.28f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    VectorSignedToFloat((int)temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_001634b4(temp_v9);
-    efctSetSpeed();
-  }
-  temp_v2 = g_renderCtx;
-  piVar8 = (int *)(g_renderCtx + 0x1258);
-  temp_v4 = *piVar8;
-  temp_v1 = piVar8[temp_v4 + 2];
-  *piVar8 = temp_v4 - 1;
-  if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v1 != piVar8[temp_v4 + 1]) {
-    (**(romwright_code **)(temp_v2 + 0x1274))();
-    *(unsigned char *)(temp_v2 + 0x1270) = 0;
-  }
-  temp_v2 = g_renderCtx;
-  temp_v4 = packNibblesAndByte(6,7,0);
-  piVar8 = (int *)(temp_v2 + 0x12b8);
-  temp_v1 = piVar8[*piVar8 + 2];
-  piVar8[*piVar8 + 2] = temp_v4;
-  if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v1 != temp_v4) {
-    (**(romwright_code **)(temp_v2 + 0x12d4))();
-    *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-  }
-  skinObjectUpdateMatrices(g_renderCtx);
-  renderCtxResetColorScale(g_renderCtx);
-  return 0;
+    renderStackPop(&g_renderCtx->stackA);
+    renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
+    return 0;
 }
 
-} /* extern "C" */
+}

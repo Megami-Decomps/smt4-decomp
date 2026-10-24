@@ -1,4 +1,3 @@
-/* NON_MATCHING: inlined push helpers schedule next-entry addresses and scratch registers differently; -O2 candidate. */
 #include "camp/RenderCtx.h"
 
 struct RenderPhase {

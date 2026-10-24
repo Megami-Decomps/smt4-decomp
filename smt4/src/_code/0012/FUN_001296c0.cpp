@@ -1,170 +1,137 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001296c0` (_code @ 0x1296c0, 0x328 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: near (205 rows against 204): same eye-separation maths (far/(far-depth) scaling, 3D slider from the shared config page at 0x1FF81000, per-eye frustum shift and look-at vectors) and nn::math calls; retail saves fp and reads the last two stack parameters with one ldrd, builds its two eye blocks in a 180-byte frame in a different order and recomputes the shift per use with different VFP registers, ours uses a 164-byte frame and ldm */
+typedef unsigned char u8;
+typedef unsigned int u32;
+typedef int s32;
+typedef float f32;
 
 extern "C" {
 
-int asdFatalError(void);
-int nn_math_ARMv6_MTX34LookAtC_FAST(unsigned int, float *, float *, float *);
-int nn_math_ARMv6_MTX44FrustumC_FAST(unsigned int);
-int nn_math_ARMv6_MTX44PivotC_FAST(unsigned int, unsigned int);
+struct Vec3 {
+    f32 x;
+    f32 y;
+    f32 z;
+};
 
-/* stack frame of param_6: 28 slot(s), 112 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp50; /* 0x50: local_50 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-    unsigned int sp8C; /* 0x8c: local_8c */
-    unsigned int sp98; /* 0x98: local_98 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spB8; /* 0xb8: local_b8 */
-    unsigned int spBC; /* 0xbc: local_bc */
-    unsigned int spC0; /* 0xc0: local_c0 */
-    unsigned int spC4; /* 0xc4: local_c4 */
-    unsigned int spC8; /* 0xc8: local_c8 */
-} param_6_stack;
+/* Stereo camera description (observed fields only). */
+struct StereoCamera {
+    f32 left;            /* 0x00 */
+    f32 right;           /* 0x04 */
+    f32 bottom;          /* 0x08 */
+    f32 top;             /* 0x0C */
+    f32 nearPlane;       /* 0x10 */
+    f32 farPlane;        /* 0x14 */
+    Vec3 eye;            /* 0x18 */
+    Vec3 forward;        /* 0x24 */
+    Vec3 up;             /* 0x30 */
+    Vec3 targetOffset;   /* 0x3C */
+    f32 scale;           /* 0x48 */
+    f32 widthRatio;      /* 0x4C: output */
+    f32 depth;           /* 0x50 */
+    f32 nearCopy;        /* 0x54 */
+    f32 farCopy;         /* 0x58 */
+    f32 parallax;        /* 0x5C: output, world-space eye separation */
+};
 
-extern float DAT_004d4644; /* 0x4d4644 */
-extern float fRam1ff81080; /* 0x1ff81080 */
-extern signed char cRam1ff81084; /* 0x1ff81084 */
+/* Per-eye projection and view description. */
+struct EyeView {
+    f32 frustum[6];      /* left, right, bottom, top, near, far */
+    Vec3 position;
+    Vec3 forward;
+    Vec3 up;
+    Vec3 target;
+};
 
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Shared system configuration page (observed fields only). */
+struct SharedConfigPage {
+    u8 pad00[0x80];
+    f32 slider3d;        /* 0x80: 3D depth slider, 0..1 */
+    u8 slider3dOff;      /* 0x84 */
+};
+
+#define SHARED_CONFIG_PAGE ((SharedConfigPage *)0x1FF81000)
+
+extern f32 DAT_004d4644;   /* screen units per near-plane unit */
+
+void asdFatalError(void);
+void nn_math_ARMv6_MTX44FrustumC_FAST(u32 matrix, f32 left, f32 right, f32 bottom, f32 top, f32 nearPlane, f32 farPlane);
+void nn_math_ARMv6_MTX44PivotC_FAST(u32 matrix, u32 pivot);
+void nn_math_ARMv6_MTX34LookAtC_FAST(u32 matrix, const Vec3 *position, const Vec3 *up, const Vec3 *target);
+
+static f32 absf(f32 value)
 {
-    return value < (float)0 ? -value : value;
+    return value < 0.0f ? -value : value;
 }
-#endif
-/* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: nn_math_ARMv6_MTX34LookAtC_FAST. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44FrustumC_FAST. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44PivotC_FAST. */
 
-
-void FUN_001296c0(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+/* Computes the eye separation for the 3D `factor` (0..1) at screen `depth` and builds the left/right
+ * projection and view matrices of the stereo camera. */
+void FUN_001296c0(StereoCamera *camera, u32 projectionA, u32 viewA, u32 projectionB, u32 viewB, u32 pivot, f32 depth, f32 factor)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 5 native warning(s); review required */
-  float in_s0;
-  float temp_v0;
-  float temp_v1;
-  float in_s1;
-  float temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float fStack_a0;
-  float fStack_9c;
-  float temp_v8;
-  float fStack_94;
-  float fStack_90;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float temp_v21;
-  float fStack_58;
-  float fStack_54;
-  float temp_v22;
-  float fStack_4c;
-  float fStack_48;
-  float temp_v23;
-  float temp_v24;
-  float temp_v25;
-  
-  temp_v3 = 0.0f;
-  if ((in_s1 < 0.0f) || ((int)in_s1 >= 0x3f800001)) {
-    asdFatalError();
-  }
-  param_1[0x14] = in_s0;
-  temp_v2 = param_1[4] * DAT_004d4644;
-  temp_v0 = param_1[5];
-  temp_v1 = temp_v0;
-  if (temp_v0 <= in_s0) {
-    param_1[0x17] = temp_v3;
-    temp_v1 = temp_v3;
-  }
-  if (in_s0 < temp_v0) {
-    temp_v1 = (temp_v1 / (temp_v1 - in_s0)) *
-            ((romwright_fabs_4(param_1[3] - param_1[2]) * in_s0) / temp_v2) * param_1[0x12];
-    param_1[0x17] = temp_v1;
-  }
-  param_1[0x17] = temp_v1 * in_s1;
-  if (cRam1ff81084 == '\0') {
-    temp_v3 = fRam1ff81080;
-  }
-  temp_v3 = temp_v3 * 0.5f * temp_v1 * in_s1;
-  param_1[0x17] = temp_v3;
-  temp_v12 = (temp_v3 * param_1[4]) / in_s0 + *param_1;
-  temp_v13 = (temp_v3 * param_1[4]) / in_s0 + param_1[1];
-  temp_v14 = param_1[2];
-  temp_v15 = param_1[3];
-  temp_v16 = param_1[4];
-  temp_v17 = param_1[5];
-  temp_v3 = param_1[0x17];
-  temp_v18 = param_1[6] - param_1[9] * temp_v3;
-  temp_v19 = param_1[7] - param_1[10] * temp_v3;
-  temp_v20 = param_1[8] - param_1[0xb] * temp_v3;
-  temp_v23 = temp_v18 + param_1[0xf];
-  temp_v24 = temp_v19 + param_1[0x10];
-  temp_v25 = temp_v20 + param_1[0x11];
-  temp_v21 = param_1[9];
-  fStack_58 = param_1[10];
-  fStack_54 = param_1[0xb];
-  temp_v22 = param_1[0xc];
-  fStack_4c = param_1[0xd];
-  fStack_48 = param_1[0xe];
-  temp_v3 = param_1[0x17];
-  temp_v4 = param_1[6] + param_1[9] * temp_v3;
-  temp_v5 = param_1[7] + param_1[10] * temp_v3;
-  temp_v6 = param_1[8] + param_1[0xb] * temp_v3;
-  temp_v9 = temp_v4 + param_1[0xf];
-  temp_v10 = temp_v5 + param_1[0x10];
-  temp_v11 = temp_v6 + param_1[0x11];
-  temp_v7 = param_1[9];
-  fStack_a0 = param_1[10];
-  fStack_9c = param_1[0xb];
-  temp_v8 = param_1[0xc];
-  fStack_94 = param_1[0xd];
-  fStack_90 = param_1[0xe];
-  param_1[0x15] = param_1[4];
-  param_1[0x16] = param_1[5];
-  param_1[0x13] = romwright_fabs_4(param_1[1] - *param_1) * (param_1[0x14] / param_1[4]);
-  nn_math_ARMv6_MTX44FrustumC_FAST(param_2);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_2,param_6);
-  nn_math_ARMv6_MTX44FrustumC_FAST(param_4);
-  nn_math_ARMv6_MTX44PivotC_FAST(param_4,param_6);
-  nn_math_ARMv6_MTX34LookAtC_FAST(param_3,&temp_v18,&temp_v22,&temp_v23);
-  nn_math_ARMv6_MTX34LookAtC_FAST(param_5,&temp_v4,&temp_v8,&temp_v9);
-  return;
+    EyeView eyeA;
+    EyeView eyeB;
+
+    if (factor < 0.0f || factor > 1.0f) {
+        asdFatalError();
+    }
+    camera->depth = depth;
+
+    f32 separation;
+    if (camera->farPlane <= depth) {
+        separation = 0.0f;
+        camera->parallax = 0.0f;
+    } else {
+        f32 world = absf(camera->top - camera->bottom) * depth / (camera->nearPlane * DAT_004d4644) * camera->scale;
+        separation = camera->farPlane / (camera->farPlane - depth) * world;
+        camera->parallax = separation;
+    }
+    camera->parallax = separation * factor;
+    f32 slider = 0.0f;
+    if (SHARED_CONFIG_PAGE->slider3dOff == 0) {
+        slider = SHARED_CONFIG_PAGE->slider3d;
+    }
+    camera->parallax = slider * 0.5f * (separation * factor);
+
+    f32 shift = camera->parallax * camera->nearPlane / depth;
+    eyeA.frustum[0] = shift + camera->left;
+    eyeA.frustum[1] = camera->parallax * camera->nearPlane / depth + camera->right;
+    eyeA.frustum[2] = camera->bottom;
+    eyeA.frustum[3] = camera->top;
+    eyeA.frustum[4] = camera->nearPlane;
+    eyeA.frustum[5] = camera->farPlane;
+    eyeB.frustum[0] = camera->left - camera->parallax * camera->nearPlane / camera->depth;
+    eyeB.frustum[1] = camera->right - camera->parallax * camera->nearPlane / camera->depth;
+    eyeB.frustum[2] = camera->bottom;
+    eyeB.frustum[3] = camera->top;
+    eyeB.frustum[4] = camera->nearPlane;
+    eyeB.frustum[5] = camera->farPlane;
+
+    eyeA.position.x = camera->eye.x - camera->forward.x * camera->parallax;
+    eyeA.position.y = camera->eye.y - camera->forward.y * camera->parallax;
+    eyeA.position.z = camera->eye.z - camera->forward.z * camera->parallax;
+    eyeA.target.x = eyeA.position.x + camera->targetOffset.x;
+    eyeA.target.y = eyeA.position.y + camera->targetOffset.y;
+    eyeA.target.z = eyeA.position.z + camera->targetOffset.z;
+    eyeA.forward = camera->forward;
+    eyeA.up = camera->up;
+
+    eyeB.position.x = camera->eye.x + camera->forward.x * camera->parallax;
+    eyeB.position.y = camera->eye.y + camera->forward.y * camera->parallax;
+    eyeB.position.z = camera->eye.z + camera->forward.z * camera->parallax;
+    eyeB.target.x = eyeB.position.x + camera->targetOffset.x;
+    eyeB.target.y = eyeB.position.y + camera->targetOffset.y;
+    eyeB.target.z = eyeB.position.z + camera->targetOffset.z;
+    eyeB.forward = camera->forward;
+    eyeB.up = camera->up;
+
+    camera->nearCopy = camera->nearPlane;
+    camera->farCopy = camera->farPlane;
+    camera->widthRatio = absf(camera->right - camera->left) * (camera->depth / camera->nearPlane);
+
+    nn_math_ARMv6_MTX44FrustumC_FAST(projectionA, eyeA.frustum[0], eyeA.frustum[1], eyeA.frustum[2], eyeA.frustum[3], eyeA.frustum[4], eyeA.frustum[5]);
+    nn_math_ARMv6_MTX44PivotC_FAST(projectionA, pivot);
+    nn_math_ARMv6_MTX44FrustumC_FAST(projectionB, eyeB.frustum[0], eyeB.frustum[1], eyeB.frustum[2], eyeB.frustum[3], eyeB.frustum[4], eyeB.frustum[5]);
+    nn_math_ARMv6_MTX44PivotC_FAST(projectionB, pivot);
+    nn_math_ARMv6_MTX34LookAtC_FAST(viewA, &eyeA.position, &eyeA.up, &eyeA.target);
+    nn_math_ARMv6_MTX34LookAtC_FAST(viewB, &eyeB.position, &eyeB.up, &eyeB.target);
 }
 
 } /* extern "C" */

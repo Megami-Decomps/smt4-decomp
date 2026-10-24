@@ -1,150 +1,147 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033e348` (_code @ 0x33e348, 0x23c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tail-calls ptrListRemoveClearOwner conditionally from inside the release step and picks the transition object through a compare chain with shared stores; the step logic is the same. */
+#include "common.h"
 
 extern "C" {
 
-int gameFlagsGetBlock(void);
-int ptrListRemoveClearOwner(unsigned int);
-int dataTable2EType1Count(void);
-int dataTable2EType0Count(void);
-int handleRegistryRegisterObject(unsigned int, int);
+/* An object the transition registers: its flags word is at 4. */
+typedef struct TransitionPart {
+    u32 unk00;
+    u32 flags;
+} TransitionPart;
 
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern short *g_lmapScene; /* 0x581288 */
-extern int DAT_005f1848; /* 0x5f1848 */
-extern short *DAT_005f184c; /* 0x5f184c */
-extern int DAT_005f1b14; /* 0x5f1b14 */
-extern int DAT_005f1b18; /* 0x5f1b18 */
-extern int DAT_005f1b1c; /* 0x5f1b1c */
-extern int DAT_005f1b20; /* 0x5f1b20 */
-extern int DAT_005f1c68; /* 0x5f1c68 */
-extern short *DAT_005f1c6c; /* 0x5f1c6c */
+typedef struct TransitionObject {
+    u32 unk00;
+    TransitionPart *part;
+} TransitionObject;
 
-/* Supplied declaration required: gameFlagsGetBlock. */
-extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-extern short *dataTable2EType1GetEntry(int);
-extern short *dataTable2EType0GetEntry(int);
-/* Supplied declaration required: dataTable2EType1Count. */
-/* Supplied declaration required: dataTable2EType0Count. */
-/* Supplied declaration required: handleRegistryRegisterObject. */
+/* The map scene's transition fields (only those used here). */
+typedef struct TransitionScene {
+    /* 0x000 */ u8 unk000[0x164];
+    /* 0x164 */ s16 first;
+    /* 0x166 */ s16 second;
+    /* 0x168 */ s16 firstEnd;
+    /* 0x16A */ s16 secondEnd;
+    /* 0x16C */ s32 step;
+    /* 0x170 */ TransitionObject *current;
+    /* 0x174 */ u8 unk174[0x10];
+    /* 0x184 */ TransitionObject *previous;
+} TransitionScene;
 
+/* The slice of the game state the transition reads and writes. */
+typedef struct TransitionState {
+    /* 0x000 */ u8 unk000[0x24C];
+    /* 0x24C */ s32 modeA;
+    /* 0x250 */ s32 modeB;
+    /* 0x254 */ u8 unk254[0x2C4];
+    /* 0x518 */ TransitionObject *objects[4];
+    /* 0x528 */ u8 unk528[0x144];
+    /* 0x66C */ s32 overrideA;
+    /* 0x670 */ s32 overrideB;
+} TransitionState;
 
-unsigned int FUN_0033e348(void)
+/* A table entry: the id it matches and the mode it selects. */
+typedef struct TransitionEntry {
+    s16 id;
+    s16 mode;
+} TransitionEntry;
 
+typedef struct TransitionPlayer {
+    u16 idA;
+    u8 unk02[6];
+    u16 idB;
+} TransitionPlayer;
+
+extern TransitionScene *g_lmapScene;
+extern TransitionState g_gameState;
+extern u32 g_handleRegistry;
+
+TransitionPlayer *gameGetPlayerData(void);
+void *gameFlagsGetBlock(void);
+s32 dataTable2EType1Count(void);
+s32 dataTable2EType0Count(void);
+TransitionEntry *dataTable2EType1GetEntry(s32 index);
+TransitionEntry *dataTable2EType0GetEntry(s32 index);
+void ptrListRemoveClearOwner(u32 registry);
+void handleRegistryRegisterObject(u32 registry, TransitionPart *part);
+
+/* Steps the map transition: picks the target modes (step 0), releases the old objects (1), and
+ * (steps 2-3) registers the object for the chosen mode. Returns 1 once the transition is finished. */
+u32 FUN_0033e348(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned short *puVar1;
-  short *psVar2;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  puVar1 = (unsigned short *)gameGetPlayerData();
-  gameFlagsGetBlock();
-  psVar2 = g_lmapScene;
-  temp_v2 = *(int *)(g_lmapScene + 0xb6);
-  if (temp_v2 != 0) {
-    if (temp_v2 != 1) {
-      if (temp_v2 != 2) {
-        if (temp_v2 != 3) {
-          return 0;
+    TransitionPlayer *player = gameGetPlayerData();
+
+    gameFlagsGetBlock();
+    TransitionScene *scene = g_lmapScene;
+
+    switch (scene->step) {
+    case 0: {
+        for (s32 i = 0; i < dataTable2EType1Count(); i++) {
+            TransitionEntry *entry = dataTable2EType1GetEntry(i);
+
+            if (entry->id == player->idB) {
+                g_gameState.modeB = g_gameState.overrideB == -1 ? entry->mode : g_gameState.overrideB;
+                break;
+            }
         }
-        temp_v2 = DAT_005f1b14;
-        if ((((DAT_005f1848 == 0) || (temp_v2 = DAT_005f1b18, DAT_005f1848 == 1)) ||
-            (temp_v2 = DAT_005f1b1c, DAT_005f1848 == 2)) || (temp_v2 = DAT_005f1b20, DAT_005f1848 == 3))
-        {
-          *(int *)(g_lmapScene + 0xb8) = temp_v2;
+        for (s32 i = 0; i < dataTable2EType0Count(); i++) {
+            TransitionEntry *entry = dataTable2EType0GetEntry(i);
+
+            if (entry->id == player->idA) {
+                s32 mode = g_gameState.overrideA == -1 ? entry->mode : g_gameState.overrideA;
+
+                if (g_gameState.modeA == mode) {
+                    return 1;
+                }
+                g_gameState.modeA = mode;
+                g_lmapScene->step++;
+                return 0;
+            }
         }
-        temp_v2 = *(int *)(*(int *)(psVar2 + 0xb8) + 4);
-        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-        *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-        psVar2 = g_lmapScene;
-        psVar2[0xb2] = 0;
-        psVar2[0xb3] = 0;
-        psVar2[0xb4] = -1;
-        psVar2[0xb5] = -1;
-        psVar2[0xb6] = 0;
-        temp_v2 = DAT_005f1b14;
-        psVar2[0xb7] = 0;
-        *(int *)(psVar2 + 0xc2) = DAT_005f1b14;
-        temp_v2 = *(int *)(temp_v2 + 4);
-        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
-        *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
-        psVar2 = g_lmapScene;
-        psVar2[0xb2] = 0;
-        psVar2[0xb3] = 0;
-        psVar2[0xb4] = -1;
-        psVar2[0xb5] = -1;
-        psVar2[0xb6] = 0;
-        psVar2[0xb7] = 0;
         return 1;
-      }
-      temp_v2 = 3;
     }
-    else {
-      temp_v2 = 1;
-      if ((*(int *)(g_lmapScene + 0xb8) != 0) &&
-         (temp_v2 = 0, *(int *)(*(int *)(g_lmapScene + 0xb8) + 4) != 0)) {
-        ptrListRemoveClearOwner(g_handleRegistry);
-        temp_v2 = temp_v3;
-      }
-      temp_v1 = *(int *)(g_lmapScene + 0xc2);
-      if (temp_v1 != 0) {
-        temp_v2 = *(int *)(temp_v1 + 4);
-      }
-      if (temp_v1 != 0 && temp_v2 != 0) {
-        ptrListRemoveClearOwner(g_handleRegistry);
-      }
-      temp_v2 = *(int *)(g_lmapScene + 0xb6) + 1;
-    }
-    *(int *)(g_lmapScene + 0xb6) = temp_v2;
-    return 0;
-  }
-  temp_v2 = 0;
-  dataTable2EType1Count();
-  if (0 < (int)psVar2) {
-    do {
-      psVar2 = (short *)dataTable2EType1GetEntry(temp_v2);
-      if ((int)*psVar2 == (unsigned int)puVar1[4]) {
-        if (DAT_005f1c6c == (short *)0xffffffff) {
-          psVar2 = (short *)(int)psVar2[1];
-          DAT_005f184c = psVar2;
+    case 1:
+        if (scene->current != NULL && scene->current->part != NULL) {
+            ptrListRemoveClearOwner(g_handleRegistry);
         }
-        else {
-          DAT_005f184c = DAT_005f1c6c;
+        if (g_lmapScene->previous != NULL && g_lmapScene->previous->part != NULL) {
+            ptrListRemoveClearOwner(g_handleRegistry);
         }
-        break;
-      }
-      temp_v2 = temp_v2 + 1;
-      dataTable2EType1Count();
-    } while (temp_v2 < (int)psVar2);
-  }
-  temp_v2 = 0;
-  dataTable2EType0Count();
-  if (0 < (int)psVar2) {
-    do {
-      psVar2 = (short *)dataTable2EType0GetEntry(temp_v2);
-      temp_v0 = (unsigned int)*psVar2;
-      if (temp_v0 == *puVar1) {
-        temp_v2 = DAT_005f1c68;
-        if (DAT_005f1c68 == -1) {
-          temp_v2 = (int)psVar2[1];
-        }
-        if (DAT_005f1848 == temp_v2) {
-          return 1;
-        }
-        DAT_005f1848 = temp_v2;
-        *(int *)(g_lmapScene + 0xb6) = *(int *)(g_lmapScene + 0xb6) + 1;
+        g_lmapScene->step++;
         return 0;
-      }
-      temp_v2 = temp_v2 + 1;
-      dataTable2EType0Count();
-    } while (temp_v2 < (int)temp_v0);
-  }
-  return 1;
+    case 2:
+        g_lmapScene->step = 3;
+        return 0;
+    case 3: {
+        s32 mode = g_gameState.modeA;
+
+        if (mode >= 0 && mode <= 3) {
+            scene->current = g_gameState.objects[mode];
+        }
+        TransitionPart *part = scene->current->part;
+
+        handleRegistryRegisterObject(g_handleRegistry, part);
+        part->flags |= 3;
+        scene = g_lmapScene;
+        scene->first = 0;
+        scene->second = 0;
+        scene->firstEnd = -1;
+        scene->secondEnd = -1;
+        scene->step = 0;
+        scene->previous = g_gameState.objects[0];
+        part = scene->previous->part;
+        handleRegistryRegisterObject(g_handleRegistry, part);
+        part->flags |= 3;
+        scene = g_lmapScene;
+        scene->first = 0;
+        scene->second = 0;
+        scene->firstEnd = -1;
+        scene->secondEnd = -1;
+        scene->step = 0;
+        return 1;
+    }
+    default:
+        return 0;
+    }
 }
 
-} /* extern "C" */
+}
