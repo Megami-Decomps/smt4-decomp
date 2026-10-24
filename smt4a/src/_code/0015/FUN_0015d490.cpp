@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017ef34(int **);
+int _ZN14AllocatedArrayI10ArrayEntryED1Ev(int **);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 24 slot(s), 96 byte(s) */
@@ -37,7 +37,7 @@ typedef struct {
 
 extern unsigned char DAT_0055babc; /* 0x55babc */
 
-/* Supplied declaration required: FUN_0017ef34. */
+/* Supplied declaration required: _ZN14AllocatedArrayI10ArrayEntryED1Ev. */
 
 
 unsigned int * FUN_0015d490(char *param_1,int *param_2)
@@ -109,7 +109,7 @@ unsigned int * FUN_0015d490(char *param_1,int *param_2)
       temp_v23 = temp_v0;
       temp_v24 = temp_v4 & 0x3fffffff;
     }
-    FUN_0017ef34(&temp_v5);
+    _ZN14AllocatedArrayI10ArrayEntryED1Ev(&temp_v5);
     temp_v4 = *(unsigned int *)(param_1 + 4);
     if (temp_v4 == 0) {
       temp_v6 = 0;
@@ -149,7 +149,7 @@ unsigned int * FUN_0015d490(char *param_1,int *param_2)
     temp_v22 = 0;
     temp_v15 = 0;
     temp_v14 = 0;
-    FUN_0017ef34(&temp_v13);
+    _ZN14AllocatedArrayI10ArrayEntryED1Ev(&temp_v13);
     temp_v14 = 0;
     temp_v15 = 0;
     temp_v16 = 0x40000000;
@@ -166,7 +166,7 @@ unsigned int * FUN_0015d490(char *param_1,int *param_2)
     }
     ppiVar7 = &temp_v13;
   }
-  FUN_0017ef34(ppiVar7);
+  _ZN14AllocatedArrayI10ArrayEntryED1Ev(ppiVar7);
   temp_v3 = temp_v23;
   temp_v2 = temp_v22;
   temp_v1 = temp_v11;
@@ -196,11 +196,11 @@ unsigned int * FUN_0015d490(char *param_1,int *param_2)
     temp_v28 = temp_v12 & 0xc0000000;
     temp_v12 = temp_v12 & 0xc0000000;
     temp_v24 = temp_v24 & 0xc0000000;
-    FUN_0017ef34(&temp_v25);
-    FUN_0017ef34(&temp_v17);
+    _ZN14AllocatedArrayI10ArrayEntryED1Ev(&temp_v25);
+    _ZN14AllocatedArrayI10ArrayEntryED1Ev(&temp_v17);
   }
-  FUN_0017ef34(&temp_v9);
-  FUN_0017ef34(&temp_v21);
+  _ZN14AllocatedArrayI10ArrayEntryED1Ev(&temp_v9);
+  _ZN14AllocatedArrayI10ArrayEntryED1Ev(&temp_v21);
   return puVar6;
 }
 

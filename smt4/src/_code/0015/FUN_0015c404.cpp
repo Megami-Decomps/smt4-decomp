@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_00421d2c; /* 0x421d2c */
 
-extern unsigned int *FUN_002a7b78(int);
+extern unsigned int *_ZN9Obj421d10C1Ev(int);
 extern unsigned int FUN_002bb020(void);
 /* Supplied declaration required: memClear. */
 extern int nw_snd_internal_PoolImpl_AllocImpl(int);
@@ -40,7 +40,7 @@ void FUN_0015c404(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
   }
   else {
     memClear(temp_v0,0x50);
-    puVar2 = (unsigned int *)FUN_002a7b78(temp_v0);
+    puVar2 = (unsigned int *)_ZN9Obj421d10C1Ev(temp_v0);
     *puVar2 = (unsigned int)&DAT_00421d2c;
     puVar2[0x12] = 0;
     puVar2[0x13] = 0;

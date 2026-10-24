@@ -7,9 +7,9 @@ extern BtlStateB *btlGetMainState(void);
 extern void scrSetResult(s32 value);
 
 /* Script command: result is (battle counter + 1) modulo argument 0. */
-u32 scrCommBattleCounterMod(s32 argIndex)
+u32 scrCommBattleCounterMod(void)
 {
-    s32 modulus = scrGetArg(argIndex);
+    s32 modulus = scrGetArg(0);
     BtlStateB *state = btlGetMainState();
 
     scrSetResult((state->unk45B8 + 1) % modulus);

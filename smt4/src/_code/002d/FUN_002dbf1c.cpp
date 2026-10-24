@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x406e10; not written yet. */
 #include "common.h"
+
+extern "C" {
+extern u32 g_btlScriptUnit;
+s32 scrGetArg(u32 index);
+void btlUnitSetParam(u32 unit, s32 param, u32 value);
+
+/* Script command: sets parameter 7 of the script's battle unit to its first argument. */
+s32 FUN_002dbf1c(void)
+{
+    btlUnitSetParam(g_btlScriptUnit, 7, scrGetArg(0));
+    return 1;
+}
+}

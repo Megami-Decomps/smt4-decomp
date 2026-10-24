@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4648b0; not written yet. */
 #include "common.h"
+
+struct Slot4 {
+    /* 0x00 */ u8 unk00[0x4];
+    /* 0x04 */ s32 value;
+};
+
+extern "C" {
+
+/* Virtual setter: stores the s32 at offset 0x4. */
+void FUN_002f8924(Slot4 *self, s32 value)
+{
+    self->value = value;
+}
+
+} /* extern "C" */

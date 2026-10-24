@@ -16,7 +16,7 @@ extern unsigned char DAT_00594b24; /* 0x594b24 */
 /* Supplied declaration required: FUN_001294fc. */
 /* Supplied declaration required: _ZN9Obj559020C1Ev. */
 /* Supplied declaration required: FUN_0030e878. */
-extern unsigned int *FUN_0030e8dc(void);
+extern unsigned int *_ZN9Obj55a474C1Ev(void);
 /* Supplied declaration required: FUN_004326fc. */
 
 
@@ -28,7 +28,7 @@ int FUN_00129568(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = (unsigned int *)FUN_0030e8dc();
+  puVar1 = (unsigned int *)_ZN9Obj55a474C1Ev();
   *puVar1 = (unsigned int)&DAT_005598d8;
   temp_v0 = _ZN9Obj559020C1Ev(puVar1 + 4);
   temp_v0 = _ZN9Obj559020C1Ev(temp_v0 + 0xd8);

@@ -1,2 +1,26 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5b3548; not written yet. */
 #include "common.h"
+
+struct Vec3 {
+    f32 x, y, z;
+};
+
+struct Object00390648 {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ f32 x;
+    /* 0x24 */ f32 y;
+    /* 0x28 */ f32 z;
+    /* 0x2c */ f32 w;
+};
+
+extern "C" {
+
+/* Sets the vector at 0x20 to the given position with a fourth component of one. */
+void FUN_00390648(Object00390648 *object, const Vec3 *position)
+{
+    object->x = position->x;
+    object->y = position->y;
+    object->z = position->z;
+    object->w = 1.0f;
+}
+
+} /* extern "C" */

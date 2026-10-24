@@ -20,7 +20,7 @@ extern GameState g_gameState;
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void FUN_00289880(void);
-void FUN_00275f00(void);
+void buttonHelpSelectMapPreset(void);
 s32 buttonHelpIsNotActive(void);
 
 /* Steps the phase: rebuilds the background if requested, waits for the button help to close,
@@ -37,7 +37,7 @@ void FUN_0039ca70(Unk39ca70Phase *phase)
                 FUN_00289880();
             }
         }
-        FUN_00275f00();
+        buttonHelpSelectMapPreset();
         phase->step = 1;
         break;
     case 1:

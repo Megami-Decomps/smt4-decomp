@@ -11,7 +11,7 @@ int sysPlaySe(...);
 int FUN_0019de98(...);
 int FUN_00228b04(int, int);
 int scrScriptProcessStartEntry(unsigned int);
-int FUN_002a4914(int, int);
+int scrollOwnerSelectIndex(int, int);
 int FUN_002a4964(int, int);
 int statusPanelSetOpen(...);
 int FUN_0032d0c8(...);
@@ -46,7 +46,7 @@ extern int FUN_0023b3b8(void);
 extern int recordGetModeForId(int);
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a4914. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int gameGetMode(void);
@@ -91,7 +91,7 @@ void FUN_004bea0c(int param_1)
       }
       if (!temp_v5 && temp_v0 < 0 == temp_v6) {
         FUN_002a4964(param_1 + 0x260,(int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1e)) >> 2);
-        FUN_002a4914(param_1 + 0x260,temp_v3 % 4);
+        scrollOwnerSelectIndex(param_1 + 0x260,temp_v3 % 4);
         temp_v4 = recordGetModeForId((int)*(short *)(param_1 + temp_v3 * 2 + 0x2f8));
       }
       break;

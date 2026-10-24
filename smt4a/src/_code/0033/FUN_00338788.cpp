@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5b3480; not written yet. */
 #include "common.h"
+
+struct Obj00338788 {
+    u8 unk00[0x24];
+    s32 value;
+};
+
+/* Stores its argument in a field of the object. */
+extern "C" void FUN_00338788(Obj00338788 *obj, s32 value)
+{
+    obj->value = value;
+}

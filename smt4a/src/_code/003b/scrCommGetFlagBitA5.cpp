@@ -12,9 +12,9 @@ extern RecA5 *dataTable00FindById(u16 id);
 extern void scrSetResult(u32 value);
 
 /* Script command: result is bit 1 of the record's byte at +0xA5 (mask 3, shifted right by 1). */
-u32 scrCommGetFlagBitA5(s32 argIndex)
+u32 scrCommGetFlagBitA5(void)
 {
-    u16 id = scrGetArg(argIndex);
+    u16 id = scrGetArg(0);
     RecA5 *rec = dataTable00FindById(id);
 
     scrSetResult((rec->unkA5 & 3) >> 1);

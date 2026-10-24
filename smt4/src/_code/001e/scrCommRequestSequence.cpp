@@ -8,7 +8,7 @@ int scrGetArg(...);
 
 u32 scrCommRequestSequence(void)
 {
-    u32 a = scrGetArg();
+    u32 a = scrGetArg(1);
     u32 b = scrGetArg(0);
 
     sequenceRequestDefer(b, a);

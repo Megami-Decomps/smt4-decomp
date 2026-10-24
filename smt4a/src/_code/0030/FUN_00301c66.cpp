@@ -2,10 +2,10 @@
 #include "common.h"
 extern "C" {
 struct CopyObject { u8 kind; u8 unk01[7]; u8 child; };
-void copyObjectCtorDerived(void *object, const void *source);
+void _ZN16Obj55a87cPayloadC1ERKS_(void *object, const void *source);
 /* Copies the outer tag and constructs the embedded object. */
 void FUN_00301c66(CopyObject *output, const CopyObject *source, const void *childSource) {
     output->kind = source->kind;
-    copyObjectCtorDerived(&output->child, childSource);
+    _ZN16Obj55a87cPayloadC1ERKS_(&output->child, childSource);
 }
 }

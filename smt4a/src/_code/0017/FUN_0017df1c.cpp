@@ -1,40 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017df1c` (_code @ 0x17df1c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the two command-word stores separate and uses another register split; we get an stm */
+#include "common.h"
+
+/* The parts of the command pool and of the graphics context (g_asdGfxContext) this function touches. */
+struct CommandPool {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 start;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ s32 used;
+    /* 0x10 */ u8 unk10[0x10];
+    /* 0x20 */ u32 entryCount;
+};
+
+struct GfxContextView {
+    /* 0x000 */ u8 unk000[0x13];
+    /* 0x013 */ u8 bufferTerminated;
+    /* 0x014 */ u8 unk014[0x88];
+    /* 0x09C */ CommandPool *pool;
+    /* 0x0A0 */ u8 unk0A0[0xC8];
+    /* 0x168 */ s32 commandBytes;
+    /* 0x16C */ u32 commandEntries;
+};
+
+struct NoOpCommand {
+    u32 header;
+    u32 id;
+};
 
 extern "C" {
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+extern GfxContextView g_asdGfxContext;
+extern NoOpCommand *g_commandBufferCursor;
+extern NoOpCommand *g_commandBufferEnd;
 
-extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-extern unsigned char DAT_0061a483; /* 0x61a483 */
-extern int DAT_0061a50c; /* 0x61a50c */
-extern int DAT_0061a5d8; /* 0x61a5d8 */
-extern unsigned int DAT_0061a5dc; /* 0x61a5dc */
-
-
+/* Pads the command buffer to a 16-byte boundary with a no-op command, then records the buffer's size and entry count in the context. */
 void FUN_0017df1c(void)
-
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  puVar1 = g_commandBufferCursor;
-  temp_v0 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
-  *(unsigned int *)(DAT_0061a50c + 0xc) = temp_v0;
-  if (((temp_v0 & 8) != 0) && ((unsigned int)puVar1 < g_commandBufferEnd)) {
-    g_commandBufferCursor = puVar1 + 2;
-    puVar1[1] = 0x8025e;
-    *puVar1 = 0;
-  }
-  DAT_0061a483 = 1;
-  DAT_0061a5d8 = (int)g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
-  DAT_0061a5dc = *(unsigned int *)(DAT_0061a50c + 0x20);
-  return;
+    GfxContextView *context = &g_asdGfxContext;
+    NoOpCommand *cursor = g_commandBufferCursor;
+
+    context->pool->used = (s32)cursor - context->pool->start;
+    if (((context->pool->used & 8) != 0) && cursor < g_commandBufferEnd) {
+        cursor->id = 0x8025E;
+        cursor->header = 0;
+        g_commandBufferCursor = cursor + 1;
+    }
+    context->bufferTerminated = 1;
+    context->commandBytes = (s32)g_commandBufferCursor - context->pool->start;
+    context->commandEntries = context->pool->entryCount;
 }
 
 } /* extern "C" */

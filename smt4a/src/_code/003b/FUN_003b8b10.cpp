@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x535760; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+extern void *g_btlAux;
+
+void state339CFinish(void *aux);
+
+/* Script command: finishes state 0x339C on the battle aux block. */
+u32 FUN_003b8b10(void)
+{
+    state339CFinish(g_btlAux);
+    return 1;
+}
+
+} /* extern "C" */

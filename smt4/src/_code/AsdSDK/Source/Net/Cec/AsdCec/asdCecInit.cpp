@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the AsdCec allocation. */
+/* NON_MATCHING: the stripped debug trace now matches; retail passes an unset register (r4, never saved) as a second argument to both asdOperatorNew calls and allocates r5/r6 differently. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
@@ -27,6 +28,7 @@ s32 asdCecInit(void)
         g_asdCec.cec = NULL;
     }
 
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 163);
     cec = (AsdCec *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdCec), 1);
     g_asdCec.cec = cec;
     g_asdCec.unk00 = 0;

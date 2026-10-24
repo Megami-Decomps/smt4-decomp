@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x422308; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void asdMemFreeNonNull(void *block);
+
+/* Deleting destructor of an object with nothing to destroy: frees the block. */
+void FUN_00395e68(void *self)
+{
+    asdMemFreeNonNull(self);
+}
+
+} /* extern "C" */

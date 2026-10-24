@@ -7,13 +7,13 @@ int FUN_00291730(u32 *block);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int soundRequestEnd(void);
-int FUN_002b827c(void);
+int FUN_002b827c(int mode);
 int asdMemFree(void *ptr);
 int jobStop(u32 job, int mode);
 
 void naviReleaseMain(void)
 {
-    FUN_002b827c();
+    FUN_002b827c(3);
     soundRequestEnd();
     uiFadeRelease();
     buttonHelpRelease();

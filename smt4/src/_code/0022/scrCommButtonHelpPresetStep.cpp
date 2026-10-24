@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 extern s32 scrGetCommandFrame(void);
 extern s32 uiQuestStateIsIdle(void);
 extern s32 FUN_00215cd4(u32 id);
@@ -15,7 +15,7 @@ extern s32 buttonHelpSetPreset(s32 preset);
 /* Script command: runs the pending step for the id argument, then shows the button help preset 0x90 when the follow-up check holds. */
 u32 scrCommButtonHelpPresetStep(void)
 {
-    u16 id = scrGetArg();
+    u16 id = scrGetArg(0);
     s32 result;
 
     if (scrGetCommandFrame() == 0) {

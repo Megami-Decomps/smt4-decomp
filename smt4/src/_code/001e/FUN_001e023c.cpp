@@ -1,102 +1,74 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e023c` (_code @ 0x1e023c, 0x208 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail evaluates the three color channels as separate multiplies (no CSE), keeps the pushes' address computation after the call, and returns through the early-out with r0 cleared; built merges the channel multiplies */
+#include "camp/RenderCtx.h"
+
+static __inline void pushState(RenderStateStack *stack, s32 state)
+{
+    s32 previous = stack->entries[stack->count];
+    ++stack->count;
+    stack->entries[stack->count] = state;
+    if (stack->dirty != 0 || previous != state) {
+        stack->apply(state);
+        stack->dirty = 0;
+    }
+}
 
 extern "C" {
 
-int FUN_001a79a8(int);
-int FUN_002c18e4(int);
-int FUN_002c198c(int);
-int FUN_0033e160(unsigned int, int, int, int, int, int);
-int VectorFloatToUnsigned(double, int);
+typedef struct FadeVec2 {
+    f32 x, y;
+} FadeVec2;
 
-typedef int romwright_code(...);
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
+typedef struct FadeJob {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 pending;
+    /* 0x08 */ f32 intensity;
+    /* 0x0C */ f32 alpha;
+    /* 0x10 */ u8 unk10[5];
+    /* 0x15 */ u8 initialized;
+    /* 0x16 */ u8 active;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 params[12];
+    /* 0x24 */ FadeVec2 origin;
+    /* 0x2C */ u8 unk2C[8];
+    /* 0x34 */ u32 handle;
+    /* 0x38 */ u8 unk38[8];
+    /* 0x40 */ f32 level;
+} FadeJob;
 
-extern int g_titleScene; /* 0x44ea00 */
+extern RenderCtx *g_titleScene;
+FadeJob *jobGetWork(void);
+void FUN_001a79a8(FadeJob *job);
+s32 FUN_002c5d80(u32 slot, u32 flags);
+s32 FUN_002865c0(u32 state, f32 value);
+void FUN_0033e160(u32 handle, s32 zero, s32 level, u8 *params, u32 color, u32 flag, FadeVec2 origin);
+void FUN_002c198c(RenderCtx *context);
+void FUN_002c18e4(RenderCtx *context);
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_001a79a8. */
-extern int FUN_002865c0(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-extern int FUN_002c5d80(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0033e160. */
-
-
-unsigned int FUN_001e023c(void)
-
+/* Draws the fade job with temporary title-scene render states, when it has no pending request and is active. */
+u32 FUN_001e023c(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  float temp_v4;
-  int temp_v5;
-  
-  temp_v0 = jobGetWork();
-  if ((*(int *)(temp_v0 + 4) == 0) && (*(char *)(temp_v0 + 0x16) != '\0')) {
-    if (*(char *)(temp_v0 + 0x15) == '\0') {
-      FUN_001a79a8(temp_v0);
-      *(unsigned char *)(temp_v0 + 0x15) = 1;
+    FadeJob *job = jobGetWork();
+    if (job->pending == 0 && job->active != 0) {
+        if (job->initialized == 0) {
+            FUN_001a79a8(job);
+            job->initialized = 1;
+        }
+        RenderCtx *context = g_titleScene;
+        s32 state = FUN_002c5d80(5, 1);
+        pushState(&context->stackA, state);
+        context = g_titleScene;
+        state = FUN_002865c0(6, 0.0f);
+        pushState(&context->additional.stackC, state);
+        u32 color = ((((u32)(job->intensity * 255.0f) << 8) + (u32)(job->intensity * 255.0f)) << 8) +
+                    (u32)(job->intensity * 255.0f);
+        color = (color << 8) + (u32)(job->alpha * 255.0f);
+        FUN_0033e160(job->handle, 0, (s32)job->level, job->params, color, 0, job->origin);
+        renderStackPop(&g_titleScene->additional.stackC);
+        renderStackPop(&g_titleScene->stackA);
+        FUN_002c198c(g_titleScene);
+        FUN_002c18e4(g_titleScene);
     }
-    temp_v5 = g_titleScene;
-    temp_v1 = FUN_002c5d80(5,1);
-    piVar5 = (int *)(temp_v5 + 0x124c);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v5 + 0x1264) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v5 + 0x1268))();
-      *(unsigned char *)(temp_v5 + 0x1264) = 0;
-    }
-    temp_v5 = g_titleScene;
-    temp_v1 = FUN_002865c0(6);
-    piVar5 = (int *)(temp_v5 + 0x126c);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v5 + 0x1284) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v5 + 0x1288))();
-      *(unsigned char *)(temp_v5 + 0x1284) = 0;
-    }
-    temp_v4 = *(float *)(temp_v0 + 8);
-    temp_v5 = VectorFloatToUnsigned(temp_v4 * 255.0f,3);
-    temp_v1 = VectorFloatToUnsigned(temp_v4 * 255.0f,3);
-    temp_v2 = VectorFloatToUnsigned(temp_v4 * 255.0f,3);
-    temp_v3 = VectorFloatToUnsigned(*(float *)(temp_v0 + 0xc) * 255.0f,3);
-    FUN_0033e160(*(unsigned int *)(temp_v0 + 0x34),0,(int)*(float *)(temp_v0 + 0x40),temp_v0 + 0x18,
-                 temp_v3 + (temp_v2 + (temp_v1 + temp_v5 * 0x100) * 0x100) * 0x100,0);
-    temp_v0 = g_titleScene;
-    piVar5 = (int *)(g_titleScene + 0x126c);
-    temp_v5 = *piVar5;
-    temp_v1 = piVar5[temp_v5 + 2];
-    *piVar5 = temp_v5 - 1;
-    if (*(char *)(temp_v0 + 0x1284) != '\0' || temp_v1 != piVar5[temp_v5 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1288))();
-      *(unsigned char *)(temp_v0 + 0x1284) = 0;
-    }
-    temp_v0 = g_titleScene;
-    piVar5 = (int *)(g_titleScene + 0x124c);
-    temp_v5 = *piVar5;
-    temp_v1 = piVar5[temp_v5 + 2];
-    *piVar5 = temp_v5 - 1;
-    if (*(char *)(temp_v0 + 0x1264) != '\0' || temp_v1 != piVar5[temp_v5 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1268))();
-      *(unsigned char *)(temp_v0 + 0x1264) = 0;
-    }
-    FUN_002c198c(g_titleScene);
-    FUN_002c18e4(g_titleScene);
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

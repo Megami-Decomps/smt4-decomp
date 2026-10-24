@@ -55,7 +55,7 @@ extern int btlDevilCompareRankAscending(...); /* 0x2e49dc */
 extern int dataTable08Sub0CompareBySortKeys(...); /* 0x2e4a0c */
 extern int dataTableKeyRankCompare(...); /* 0x2e4a60 */
 extern int FUN_002e4aac(...); /* 0x2e4aac */
-extern int FUN_002f261c(...); /* 0x2f261c */
+extern int recordRankCompareWithTieBreak(...); /* 0x2f261c */
 extern int FUN_002f2680(...); /* 0x2f2680 */
 extern int FUN_002f2740(...); /* 0x2f2740 */
 extern int dataTable08CompareSecondaryKeyDescending(...); /* 0x2f27ec */
@@ -147,7 +147,7 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x11) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_002f261c);
+        FUN_002b7bca(temp_v1,temp_v2,8,recordRankCompareWithTieBreak);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);

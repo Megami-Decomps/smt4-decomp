@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int copyObjectCtorDerived(int, unsigned char *);
+int _ZN16Obj55a87cPayloadC1ERKS_(int, unsigned char *);
 
 extern int FUN_00301df0(void);
-/* Supplied declaration required: copyObjectCtorDerived. */
+/* Supplied declaration required: _ZN16Obj55a87cPayloadC1ERKS_. */
 
 
 int FUN_0030a00c(unsigned int param_1,unsigned char *param_2)
@@ -19,7 +19,7 @@ int FUN_0030a00c(unsigned int param_1,unsigned char *param_2)
   temp_v0 = FUN_00301df0();
   if ((unsigned char *)(temp_v0 + 0x10) != (unsigned char *)0x0) {
     *(unsigned char *)(temp_v0 + 0x10) = *param_2;
-    copyObjectCtorDerived(temp_v0 + 0x18,param_2 + 8);
+    _ZN16Obj55a87cPayloadC1ERKS_(temp_v0 + 0x18,param_2 + 8);
   }
   return temp_v0;
 }

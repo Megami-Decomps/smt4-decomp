@@ -33,7 +33,7 @@ extern unsigned int FUN_00123100(int, unsigned int, unsigned int);
 extern int onlineContextGetInstance(void);
 /* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-extern int FUN_002e7168(int, unsigned int);
+extern int _ZN9Obj5590d0C1Ej(int, unsigned int);
 extern int _Znwj(unsigned int);
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
 /* Supplied declaration required: onlineTimeGetNow. */
@@ -64,7 +64,7 @@ int FUN_00120d60(void)
   *(unsigned int *)(temp_v0 + 0x24) = 0;
   *(unsigned int *)(temp_v0 + 0x28) = 0;
   *(unsigned char *)(temp_v0 + 0x2c) = 0;
-  temp_v0 = FUN_002e7168(temp_v0 + 0x30,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x30,0x20000000);
   DAT_00594966 = 0;
   onlineTimeGetNow(temp_v4);
   FUN_00120cd8();

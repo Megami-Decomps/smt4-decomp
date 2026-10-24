@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030ddde(int);
+int zlibBiFlush(int);
 
-/* Supplied declaration required: FUN_0030ddde. */
+/* Supplied declaration required: zlibBiFlush. */
 
 
 void FUN_00126ba0(int param_1)
@@ -55,7 +55,7 @@ void FUN_00126ba0(int param_1)
   else {
     *(unsigned int *)(param_1 + 0x16bc) = temp_v2 + 7;
   }
-  FUN_0030ddde(param_1);
+  zlibBiFlush(param_1);
   temp_v1 = *(unsigned int *)(param_1 + 0x16bc);
   if ((int)((*(int *)(param_1 + 0x16b4) - temp_v1) + 0xb) < 9) {
     if ((int)temp_v1 >= 0xe) {
@@ -92,7 +92,7 @@ void FUN_00126ba0(int param_1)
     else {
       *(unsigned int *)(param_1 + 0x16bc) = temp_v2 + 7;
     }
-    FUN_0030ddde(param_1);
+    zlibBiFlush(param_1);
   }
   *(unsigned int *)(param_1 + 0x16b4) = 7;
   return;

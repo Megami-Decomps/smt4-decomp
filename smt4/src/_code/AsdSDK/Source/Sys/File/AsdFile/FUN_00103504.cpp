@@ -1,4 +1,4 @@
-/* NON_MATCHING: svc 0x23 matches through svcCloseHandle; svc 0xc (SetThreadPriority) is an __svc intrinsic in nn/svc.h, which armcc schedules differently from retail's call to a removed wrapper (handle loaded before the priority call, no handle copy in r2), and retail materializes the timeout test as a bool (movne/moveq/teq) and keeps g_asdFile in r6. */
+/* NON_MATCHING: syscall wrappers inline as in retail (svcSetThreadPriority/svcWaitSynchronization1/svcCloseHandle); remaining: retail loads the handle straight into r0 after the priority call, evaluates the timeout test as a bool (movne/moveq/teq) and keeps g_asdFile in r6; armcc loads the handle through r2 and folds the bool */
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/Result.h"
@@ -40,7 +40,7 @@ void FUN_00103504(void)
         code.value = result;
         if (code.fields.description == 0x3fe) {
             s32 priority = nn_os_detail_ConvertLibraryToSvcPriority(0x10);
-            result = nn::svc::SetThreadPriority(g_asdFileThread.handle, priority);
+            result = svcSetThreadPriority(g_asdFileThread.handle, priority);
             failed = nnResultIsFailure(result);
             if (failed) {
                 FUN_002c526c(result, failed);

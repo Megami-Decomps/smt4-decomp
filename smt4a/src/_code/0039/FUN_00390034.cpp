@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5c1064; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+s32 asdMemFree(void *block);
+
+/* Releases the allocation. */
+void FUN_00390034(void *block)
+{
+    asdMemFree(block);
+}
+
+} /* extern "C" */

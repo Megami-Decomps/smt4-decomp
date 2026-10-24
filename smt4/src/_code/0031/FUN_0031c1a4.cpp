@@ -1,2 +1,19 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x406620; not written yet. */
 #include "common.h"
+
+struct GameStateView {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ s32 value;
+};
+
+extern "C" {
+extern GameStateView g_gameState;
+void scrSetResult(s32 result);
+void FUN_0021e450(void);
+}
+
+extern "C" s32 FUN_0031c1a4(void)
+{
+    scrSetResult(g_gameState.value);
+    FUN_0021e450();
+    return 1;
+}

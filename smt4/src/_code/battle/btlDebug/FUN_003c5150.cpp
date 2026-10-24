@@ -1,82 +1,60 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5150` (_code @ 0x3c5150, 0x210 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only instruction order differs: retail loads work->listBox (r0) before selectedId/category (r2) for the two arm-local ItemMode3/ItemMode2 calls */
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
 
 extern "C" {
 
-int asdListBoxSetItemMode3(...);
-int asdListBoxSetItemMode2(...);
-int asdListBoxSetByteValue(unsigned int, int);
-int asdListBoxAddItems(void);
-int asdListBoxCreateDefault(unsigned int, int, int);
-int jobSetText(unsigned int, unsigned char *);
-int dataTableGetEntries(void);
-int dataTable22GetCount(void);
-int dataTable03Sub0GetCount(void);
+struct BattleDebugFlagsView {
+    u8 unk00[0x5c];
+    u32 job;
+    u8 unk60[0x4448];
+    u64 flags;
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+extern AsdListBoxEntry DAT_004343a8[];
+extern u32 DAT_00435dc0;
+extern u32 DAT_00435dd8;
+u32 asdListBoxCreateDefault(u32 parent, u32 priority, u32 flags, u32 option);
+void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, u32 count);
+void asdListBoxSetByteValue(u32 listBox, u8 value);
+void jobSetText(u32 job, const char *text);
+void asdListBoxSetItemMode3(u32 listBox, u32 index, u32 value, u32 minimum, u32 maximum, u8 option);
+void asdListBoxSetItemMode2(u32 listBox, u32 index, u32 value);
+s32 dataTable03Sub0GetCount(void);
+s32 dataTable22GetCount(void);
+u32 dataTableGet(u32 table, u32 index);
+void dataTableGetEntries(void);
+u32 dataTableGetCount(u32 table);
 
-extern unsigned char LAB_003c5364; /* 0x3c5364 */
-extern unsigned int DAT_00435dc0; /* 0x435dc0 */
-extern unsigned int DAT_00435dd8; /* 0x435dd8 */
-
-/* Supplied declaration required: asdListBoxSetItemMode3. */
-/* Supplied declaration required: asdListBoxSetItemMode2. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxCreateDefault. */
-/* Supplied declaration required: jobSetText. */
-extern unsigned int dataTableGetCount(unsigned int);
-/* Supplied declaration required: dataTableGetEntries. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: dataTable22GetCount. */
-/* Supplied declaration required: dataTable03Sub0GetCount. */
-
-
-void FUN_003c5150(int param_1,int param_2)
-
+// Build the battle debug menu from the current category, ids and debug flags.
+void FUN_003c5150(BattleDebugWork *work, const BattleDebugFlagsView *owner)
 {
-/* irregular: 9 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  
-  temp_v0 = *(unsigned int *)(param_2 + 0x5c);
-  asdListBoxCreateDefault(temp_v0,0x73,0);
-  *(unsigned int *)(param_1 + 0x10) = temp_v0;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_003c5364);
-  temp_v1 = (unsigned int)(unsigned char)g_btlDebugState.category;
-  if (temp_v1 != 0) {
-    dataTable03Sub0GetCount();
-    asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,g_btlDebugState.selectedId,0,temp_v1 - 1,0);
-    asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)g_btlDebugState.category);
-  }
-  else {
-    dataTable22GetCount();
-    asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,g_btlDebugState.selectedId,0,temp_v1 - 1,0);
-    asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)g_btlDebugState.category);
-  }
-  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),2,DAT_00435dc0,0,0x4b1,0);
-  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),3,DAT_00435dd8,0,1000,0);
-  puVar3 = (unsigned int *)(param_2 + 0x44a8);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),4,(*puVar3 & 0x4000) >> 0xe);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),5,(*puVar3 & 0x8000) >> 0xf);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),6,(*puVar3 & 0x10000) >> 0x10);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0xb,(*puVar3 & 0x20000000) >> 0x1d);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0xc);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0xd,(*puVar3 & 0x100000) >> 0x14);
-  asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),0xe,*puVar3 >> 0x1f);
-  temp_v0 = dataTableGet(0x1c,2);
-  dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),10,0,0,temp_v0,0);
-  return;
+    u32 listBox = asdListBoxCreateDefault(owner->job, 0x73, 0, 0);
+    work->listBox = listBox;
+    asdListBoxAddItems(listBox, DAT_004343a8, 15);
+    asdListBoxSetByteValue(work->listBox, 1);
+    jobSetText(work->listBox, "btl Debug Menu");
+    if (g_btlDebugState.category == 0) {
+        s32 count = dataTable22GetCount();
+        asdListBoxSetItemMode3(work->listBox, 0, g_btlDebugState.selectedId, 0, count - 1, 0);
+        asdListBoxSetItemMode2(work->listBox, 1, g_btlDebugState.category);
+    } else {
+        s32 count = dataTable03Sub0GetCount();
+        asdListBoxSetItemMode3(work->listBox, 0, g_btlDebugState.selectedId, 0, count - 1, 0);
+        asdListBoxSetItemMode2(work->listBox, 1, g_btlDebugState.category);
+    }
+    asdListBoxSetItemMode3(work->listBox, 2, DAT_00435dc0, 0, 0x4b1, 0);
+    asdListBoxSetItemMode3(work->listBox, 3, DAT_00435dd8, 0, 1000, 0);
+    asdListBoxSetItemMode2(work->listBox, 4, ((u32)owner->flags & 0x4000) >> 14);
+    asdListBoxSetItemMode2(work->listBox, 5, ((u32)owner->flags & 0x8000) >> 15);
+    asdListBoxSetItemMode2(work->listBox, 6, ((u32)owner->flags & 0x10000) >> 16);
+    asdListBoxSetItemMode2(work->listBox, 11, ((u32)owner->flags & 0x20000000) >> 29);
+    asdListBoxSetItemMode2(work->listBox, 12, (owner->flags & 0x2000000000ULL) != 0);
+    asdListBoxSetItemMode2(work->listBox, 13, ((u32)owner->flags & 0x100000) >> 20);
+    asdListBoxSetItemMode2(work->listBox, 14, (u32)owner->flags >> 31);
+    u32 table = dataTableGet(0x1c, 2);
+    dataTableGetEntries();
+    asdListBoxSetItemMode3(work->listBox, 10, 0, 0, dataTableGetCount(table), 0);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int partyCaptureEligibleSkills(int);
 int FUN_0028e9ec(int);
-int FUN_0029e8b8(...);
+int scrollOwnerSelectIndex(...);
 int FUN_0029eb5c(...);
 int FUN_0029f848(...);
 int FUN_002b7bca(...);
@@ -29,7 +29,7 @@ extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0028e9ec. */
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_0029e8b8. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029f848. */
 extern int gameGetUnitRecord(int);
@@ -190,10 +190,10 @@ void FUN_00199424(int param_1)
     if (temp_v3 >= 0x3d) {
       FUN_0029f848(param_1 + 0x32e0,temp_v1,6,1,0,1);
       FUN_002b7bca(param_1 + 0x3480,temp_v1,2,FUN_0021960c);
-      FUN_0029e8b8(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088,0);
+      scrollOwnerSelectIndex(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088,0);
       temp_v1 = FUN_0023dcb8();
       if (temp_v1 != 0) {
-        FUN_0029e8b8(param_1 + 0x3088,1);
+        scrollOwnerSelectIndex(param_1 + 0x3088,1);
       }
       *(int *)(param_1 + 0x340c) = temp_v5;
       return;

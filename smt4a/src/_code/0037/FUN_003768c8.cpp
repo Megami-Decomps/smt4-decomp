@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5b3628; not written yet. */
 #include "common.h"
+
+struct Inner {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ void *data;
+};
+
+struct Object {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ Inner *inner;
+};
+
+extern "C" void *FUN_003768c8(Object *object)
+{
+    return object->inner->data;
+}

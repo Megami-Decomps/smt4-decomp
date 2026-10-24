@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail calls out-of-line vector<SerialRecord> members (clear FUN_0030d1bc, reserve FUN_0013395c, construct FUN_0030d19e, _C_insert_aux FUN_0013389c); armcc inlines them here. Needs those instantiations as units with matching names. */
+/* NON_MATCHING: retail calls out-of-line vector<SerialRecord> members (clear FUN_0030d1bc, reserve FUN_0013395c, construct _ZN12AsdAllocatorI9Obj55a508E9constructEPS0_RKS0_, _C_insert_aux FUN_0013389c); armcc inlines them here. Needs those instantiations as units with matching names. */
 #include "common.h"
 #include <vector>
 #include "stl/AsdAllocator.h"

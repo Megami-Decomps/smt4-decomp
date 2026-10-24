@@ -1,17 +1,19 @@
-/* NON_MATCHING: retail call target FUN_00243808 has no registered symbol or unit; the subsequent linker-NOP tail calls _ZN18WindowStatusResultC1Ej. */
-#include "common.h"
+#include "classes/WindowStatus.h"
+#include "nn/Result.h"
 
 extern "C" {
 
 s32 FUN_00428308(u32 kind, u32 entry);
-s32 _ZN18WindowStatusResultC1Ej(u32 value, u32 mode, u32 kind, u32 entry);
-s32 FUN_001b576c(u32 value, u32 kind, u32 entry)
+
+/* Wraps FUN_00428308's SDK result: a failure code is kept, anything else becomes success (0). */
+WindowStatusResult FUN_001b576c(u32 kind, u32 entry)
 {
-    s32 result = FUN_00428308(kind, entry);
-    if (result < 0) {
-        return _ZN18WindowStatusResultC1Ej(value, 0, kind, entry);
+    s32 code = FUN_00428308(kind, entry);
+
+    if (nnResultIsFailure(code)) {
+        return WindowStatusResult(code);
     }
-    return result;
+    return WindowStatusResult(0);
 }
 
 } /* extern "C" */

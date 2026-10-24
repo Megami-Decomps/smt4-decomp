@@ -12,7 +12,7 @@ extern unsigned char DAT_0055b368; /* 0x55b368 */
 extern unsigned int FUN_001056ae(int, unsigned int);
 extern int FUN_0010575c(unsigned int *, unsigned int, unsigned int *, unsigned int, unsigned int);
 extern unsigned int *FUN_0010b564(void);
-extern int FUN_002e7168(int, unsigned int);
+extern int _ZN9Obj5590d0C1Ej(int, unsigned int);
 extern int _Znwj(unsigned int);
 extern unsigned int FUN_002eb56c(void);
 extern int FUN_002f1858(int, unsigned char *, unsigned int, unsigned char *);
@@ -32,9 +32,9 @@ int FUN_00123100(unsigned int *param_1,unsigned int param_2,unsigned int *param_
   *param_1 = (unsigned int)&DAT_0055b368;
   *(unsigned char *)(param_1 + 2) = 0;
   temp_v0 = FUN_0010575c(param_1 + 4,1,param_3,param_4,param_4);
-  temp_v0 = FUN_002e7168(temp_v0 + 0x48,param_2);
-  temp_v0 = FUN_002e7168(temp_v0 + 0x30,0x10);
-  temp_v0 = FUN_002e7168(temp_v0 + 0x30,0x400);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x48,param_2);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x30,0x10);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x30,0x400);
   temp_v0 = FUN_0030f3c8(temp_v0 + 0x30);
   temp_v0 = FUN_0030f3c8(temp_v0 + 0x14);
   *(unsigned int *)(temp_v0 + 0x14) = 0;

@@ -7,7 +7,7 @@ s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
 s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
 s32 flaggedEntryGetValueA(FlaggedEntry *entry);
 s32 flaggedEntryGetValueB(FlaggedEntry *entry);
-s32 FUN_002a48e0(FlaggedEntry *entry, s32 value);
+s32 scrollOwnerSetValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
@@ -43,7 +43,7 @@ void FUN_004d01f8(ResourceValueCyclePrefixA *state)
     }
 
     if (state->mode == 0) {
-        FUN_002a48e0(entry, primary);
+        scrollOwnerSetValue(entry, primary);
         flaggedEntrySetValueA(entry, secondary);
     }
     if (state->mode == 1) {

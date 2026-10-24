@@ -6,14 +6,14 @@ struct PlayerPartyIds {
     /* 0x00 */ u16 ids[7];
 };
 
-u32 scrGetArg(void);
+u32 scrGetArg(u32 index);
 PlayerPartyIds *gameGetPlayerData(void);
 void scrSetResult(u32 value);
 
 /* Script command: 1 when the argument is one of the player's seven stored ids, else 0. */
 u32 scrCommIsPlayerPartyId(void)
 {
-    u32 id = scrGetArg();
+    u32 id = scrGetArg(0);
     PlayerPartyIds *player = gameGetPlayerData();
     u32 result = 0;
 

@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_002e7168(int, unsigned int);
+extern int _ZN9Obj5590d0C1Ej(int, unsigned int);
 extern int FUN_002eb530(int);
 extern int constructObj00559344(unsigned char *, unsigned int);
 extern int FUN_002f4258(void);
@@ -47,7 +47,7 @@ int FUN_002f13c2(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v1 = FUN_002eb530(param_1 + 0x24);
   temp_v1 = FUN_002eb530(temp_v1 + 8);
   temp_v1 = FUN_002eb530(temp_v1 + 8);
-  temp_v1 = FUN_002e7168(temp_v1 + 0x10,0x20000000);
+  temp_v1 = _ZN9Obj5590d0C1Ej(temp_v1 + 0x10,0x20000000);
   *(short *)(temp_v1 - 0x24) = (short)param_2;
   temp_v4 = temp_v1 - 0x20;
   temp_v2 = constructObj00559344(temp_v3,1);

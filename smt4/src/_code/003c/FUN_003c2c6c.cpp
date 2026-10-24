@@ -7,7 +7,7 @@ s32 FUN_0029efc0(FlaggedEntry *entry);
 s32 FUN_0029e93c(FlaggedEntry *entry);
 s32 flaggedEntryGetValueA(FlaggedEntry *entry);
 s32 flaggedEntryGetValueB(FlaggedEntry *entry);
-s32 FUN_00298d64(FlaggedEntry *entry, s32 value);
+s32 scrollOwnerSetValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
@@ -43,7 +43,7 @@ void FUN_003c2c6c(EntryCountdownPrefixIV *state)
     }
 
     if (state->mode == 0) {
-        FUN_00298d64(entry, primary);
+        scrollOwnerSetValue(entry, primary);
         flaggedEntrySetValueA(entry, secondary);
     }
     if (state->mode == 1) {

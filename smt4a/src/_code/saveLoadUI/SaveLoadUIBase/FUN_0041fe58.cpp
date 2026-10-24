@@ -17,7 +17,7 @@ int wordPairCopy(unsigned int, unsigned int);
 int asdTMTexLoadMainHeap(...);
 int FUN_00203b40(...);
 int asdLoadFileAsyncSimple(...);
-int FUN_002a48e0(...);
+int scrollOwnerSetValue(...);
 int sysMemClear(...);
 int flaggedEntrySetValueA(...);
 int FUN_003f86f0(void);
@@ -63,7 +63,7 @@ extern int DAT_00588e28; /* 0x588e28 */
 extern unsigned int configGetSettings(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002a48e0. */
+/* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern unsigned char saveLoadProcessGetState(void);
@@ -168,7 +168,7 @@ void FUN_0041fe58(int param_1,int param_2,unsigned char param_3)
   *(int *)(param_1 + 0x308) = temp_v4;
   FUN_00203b40(param_1 + 0x3d8,5,2,1,1,1);
   flaggedEntrySetValueA(param_1 + 0x3d8,temp_v4);
-  FUN_002a48e0(param_1 + 0x3d8,temp_v3);
+  scrollOwnerSetValue(param_1 + 0x3d8,temp_v3);
   FUN_0019de98(0,0xf4f4f4ff);
   temp_v0 = *(unsigned char *)(param_1 + 7);
   *(unsigned int *)(param_1 + 8) = 0;

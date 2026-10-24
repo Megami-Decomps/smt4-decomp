@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00126950(int, int *);
 int FUN_00126aec(int, int, int);
-int FUN_0030e2f4(int, int, int);
+int zlibPqDownHeap(int, int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00126950. */
 /* Supplied declaration required: FUN_00126aec. */
-/* Supplied declaration required: FUN_0030e2f4. */
+/* Supplied declaration required: zlibPqDownHeap. */
 
 
 void FUN_0030e3a0(int param_1,int *param_2)
@@ -74,14 +74,14 @@ void FUN_0030e3a0(int param_1,int *param_2)
   }
   param_2[1] = temp_v7;
   for (temp_v2 = *(int *)(param_1 + 0x1450) / 2; 0 < temp_v2; temp_v2 = temp_v2 - 1) {
-    FUN_0030e2f4(param_1,temp_v5,temp_v2);
+    zlibPqDownHeap(param_1,temp_v5,temp_v2);
   }
   do {
     temp_v2 = *(int *)(param_1 + 0x1450);
     temp_v6 = *(int *)(param_1 + 0xb60);
     *(int *)(param_1 + 0x1450) = temp_v2 - 1;
     *(unsigned int *)(param_1 + 0xb60) = *(unsigned int *)(temp_v2 * 4 + param_1 + 0xb5c);
-    FUN_0030e2f4(param_1,temp_v5,1);
+    zlibPqDownHeap(param_1,temp_v5,1);
     temp_v3 = *(int *)(param_1 + 0x1454);
     temp_v2 = *(int *)(param_1 + 0xb60);
     *(int *)(param_1 + 0x1454) = temp_v3 - 1;
@@ -100,7 +100,7 @@ void FUN_0030e3a0(int param_1,int *param_2)
     *(short *)(temp_v5 + temp_v6 * 4 + 2) = (short)temp_v4;
     *(int *)(param_1 + 0xb60) = temp_v4;
     temp_v4 = temp_v4 + 1;
-    FUN_0030e2f4(param_1,temp_v5,1);
+    zlibPqDownHeap(param_1,temp_v5,1);
   } while (*(int *)(param_1 + 0x1450) >= 2);
   temp_v2 = *(int *)(param_1 + 0x1454);
   *(int *)(param_1 + 0x1454) = temp_v2 - 1;

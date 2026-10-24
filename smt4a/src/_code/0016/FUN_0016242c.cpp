@@ -1,29 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016242c` (_code @ 0x16242c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float scheduling: retail compares time against duration as (time, duration) with bge and avoids vmla, we swap the compare and fuse the multiply-add */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a1ea8(unsigned int);
-int VectorFloatToUnsigned(double, int);
+f32 FUN_001a1ea8(u16 angle);
 
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_001a1ea8. */
-
-
-void FUN_0016242c(void)
-
+/* Eases from `from` to `to` over `duration`: 0 duration returns `to`, a time at or below 0 returns `from`,
+ * and in between a sine curve (angle in 1/65536 turns) weights the two. */
+f32 FUN_0016242c(f32 from, f32 to, f32 duration, f32 time)
 {
-/* irregular: irregular input(s): in_s2, in_s3; 4 native warning(s); review required */
-  unsigned int temp_v0;
-  float in_s2;
-  float in_s3;
-  
-  if (((in_s2 != 0.0f) && (0.0f < in_s3)) && (in_s3 < in_s2)) {
-    temp_v0 = VectorFloatToUnsigned((in_s3 * 16384.0f) / in_s2 + 49152.0f,3);
-    FUN_001a1ea8(temp_v0 & 0xffff);
-  }
-  return;
+    f32 result = to;
+
+    if (duration != 0.0f) {
+        if (time <= 0.0f) {
+            result = from;
+        } else if (time < duration) {
+            u16 angle = (u16)(time * 16384.0f / duration + 49152.0f);
+
+            result = from + (to - from) * (FUN_001a1ea8(angle) + 1.0f);
+        }
+    }
+    return result;
 }
 
 } /* extern "C" */

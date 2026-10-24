@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads both range starts with one ldrd, inlines the unlock (and its failure test) separately in each branch and has compiler nop hints at the branch targets; the build shares one unlock tail and compares the ranges differently. */
+/* NON_MATCHING: same calls, the two range tests (ldrd) and the unlock duplicated per branch; only register numbering (memory r4/state r5 in retail) and two compiler nop hints around the failure test differ */
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
@@ -12,32 +12,32 @@ void *FUN_0017fe8c(void *memory);
 void asdMemoryFreeRegion(void *memory);
 void FUN_002e3140(s32 result, bool failed);
 
-/* Holds the allocator lock for the enclosing scope. */
-class AllocatorLockGuard {
-public:
-    AllocatorLockGuard() { FUN_0018003c(); }
-    ~AllocatorLockGuard()
-    {
-        s32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
-        bool failed = nnResultIsFailure(result);
-        if (failed) {
-            FUN_002e3140(result, failed);
-        }
+/* Releases the allocator lock (a kernel mutex), reporting a failed release. */
+static __inline void allocatorUnlock(AllocatorState &state)
+{
+    s32 result = nn::svc::ReleaseMutex(*state.mutex);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
-};
+}
 
 // Releases a block under the allocator lock; blocks outside the two large regions are first
 // translated to their owning block.
 void asdMemFree(void *memory)
 {
-    AllocatorLockGuard lock;
+    FUN_0018003c();
     AllocatorState &state = g_allocationAddressRanges;
     u32 address = (u32)memory;
-    if ((address >= state.firstRangeStart && address <= state.firstRangeStart + state.firstRangeSize) ||
-        (address >= state.secondRangeStart && address <= state.secondRangeStart + state.secondRangeSize)) {
+    u32 firstStart = state.firstRangeStart;
+    u32 secondStart = state.secondRangeStart;
+    if ((firstStart <= address && address <= firstStart + state.firstRangeSize) ||
+        (secondStart <= address && address <= secondStart + state.secondRangeSize)) {
         asdMemoryFreeRegion(memory);
+        allocatorUnlock(state);
     } else {
         asdMemoryFreeRegion(FUN_0017fe8c(memory));
+        allocatorUnlock(state);
     }
 }
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the zero marker mask is initialized after the visibility guard instead of before it. */
 #include "shard/Shard0034.h"
 #include "shard/W6_W6Match6_PartyPanel.h"
 
@@ -21,11 +20,11 @@ u32 FUN_003f3f08(const PartyPanelWidget *widget)
         s32 sourceSelector;
     };
     const MarkerWidgetView *entry = (const MarkerWidgetView *)widget;
+    u32 markerMask = 0;
     u32 color = 0xFFFFFFFF;
     if (entry->markerHidden) {
         return color;
     }
-    u32 markerMask = 0;
     s32 selector = entry->sourceSelector;
     if (selector == -1) {
         markerMask = gameGetPlayerData()->unk5E;

@@ -7,7 +7,7 @@ extern "C" {
 int gauntletAppSortMenuEntries(void);
 int dataTable0BGetValueById(...);
 int scrScriptProcessStartEntry(...);
-int FUN_00298d64(...);
+int scrollOwnerSetValue(...);
 int flaggedEntrySetValueA(...);
 int useCounterRelease(void);
 int useCounterStart(void);
@@ -56,7 +56,7 @@ extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
-/* Supplied declaration required: FUN_00298d64. */
+/* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: useCounterRelease. */
@@ -417,7 +417,7 @@ unsigned int FUN_003291dc(int *param_1)
         }
         FUN_0029f848(temp_v7 + 0x10,*(unsigned int *)(temp_v7 + 0x2a8),10,1,1,1);
         gauntletAppSortMenuEntries();
-        FUN_00298d64(temp_v7 + 0x10,temp_v10);
+        scrollOwnerSetValue(temp_v7 + 0x10,temp_v10);
         flaggedEntrySetValueA(temp_v7 + 0x10,temp_v9);
         FUN_00242000(temp_v7);
         FUN_00248738(temp_v7,3);

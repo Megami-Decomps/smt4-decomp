@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x406de0; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+extern void *g_btlScriptUnit;
+
+void btlUnitSetParam(void *unit, u32 param, s32 value);
+
+/* Script command: sets the script unit's parameter 3 to zero. */
+s32 FUN_002e3fb8(void)
+{
+    btlUnitSetParam(g_btlScriptUnit, 3, 0);
+    return 1;
+}
+
+} /* extern "C" */

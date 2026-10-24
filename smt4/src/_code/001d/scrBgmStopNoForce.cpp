@@ -8,7 +8,7 @@ int scrGetArg(...);
 /* Script command: argument 1 is clamped to be non-negative. */
 u32 scrBgmStopNoForce(void)
 {
-    u32 value = scrGetArg();
+    u32 value = scrGetArg(0);
     int a = scrGetArg(1);
 
     if (a < 0) {

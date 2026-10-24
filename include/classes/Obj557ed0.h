@@ -4,6 +4,7 @@
 #include "common.h"
 
 extern "C" void *asdOperatorNew(u32 bytes);
+extern "C" int asdOperatorDelete(void *block);
 
 /* The object whose vtable is at 0x557ed0 (named after it until its real name is known): the
  * fountain screen's state, 0x5A0 bytes. Its constructor installs the vtable, constructs the
@@ -14,6 +15,7 @@ public:
     virtual ~Obj557ed0();
 
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void operator delete(void *block) { asdOperatorDelete(block); }
 
     /* 0x00: vtable pointer */
     /* 0x04 */ u32 task;                 /* the screen's process handle */

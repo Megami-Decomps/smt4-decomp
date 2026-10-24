@@ -1,2 +1,15 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x464460; not written yet. */
 #include "common.h"
+
+struct Vec4 {
+    f32 x, y, z, w;
+};
+
+extern "C" {
+
+/* Virtual setter: copies a four-float vector over the object's first 16 bytes. */
+void FUN_002f991c(Vec4 *self, const Vec4 *value)
+{
+    *self = *value;
+}
+
+} /* extern "C" */

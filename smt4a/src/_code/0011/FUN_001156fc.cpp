@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002e7168(int, unsigned int);
+extern int _ZN9Obj5590d0C1Ej(int, unsigned int);
 
 
 void FUN_001156fc(int param_1)
@@ -14,7 +14,7 @@ void FUN_001156fc(int param_1)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_002e7168(param_1 + 4,0x80000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(param_1 + 4,0x80000);
   temp_v1 = 0;
   do {
     temp_v2 = temp_v1 * 4;

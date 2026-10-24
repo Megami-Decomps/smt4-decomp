@@ -4,7 +4,7 @@ extern "C" {
 
 int asdMdlManagerMarkDestroy(u32 handle);
 extern int scrGetCommandFrame(void);
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(u32 index);
 extern int jobIsValid(u32 job);
 
 typedef struct JobWork {
@@ -19,7 +19,7 @@ extern JobWork *jobGetWork(u32 job);
 
 u32 scrComm_Job_StopAndWait(void)
 {
-    u32 job = scrGetArg();
+    u32 job = scrGetArg(0);
     JobWork *work;
 
     if (scrGetCommandFrame() != 0) {

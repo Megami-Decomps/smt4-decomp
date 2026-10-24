@@ -7,7 +7,7 @@ int flagSlotSetEnabled(int a, int b);
 
 u32 scrCommSetFlagSlotEnabled(void)
 {
-    u16 a = scrGetArg();
+    u16 a = scrGetArg(0);
     int b = scrGetArg(1);
 
     flagSlotSetEnabled(a, b == 1);

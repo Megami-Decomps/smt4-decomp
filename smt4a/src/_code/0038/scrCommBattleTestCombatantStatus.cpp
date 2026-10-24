@@ -8,9 +8,9 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 void scrSetResult(s32 result);
 
 // Test the requested status bit on the selected combatant, if one exists.
-u32 scrCommBattleTestCombatantStatus(u32 argument)
+u32 scrCommBattleTestCombatantStatus(void)
 {
-    u32 bit = scrGetArg(argument);
+    u32 bit = scrGetArg(0);
     BtlMainStateA *battle = btlGetMainState();
     BtlCombatantEntryA *entry = FUN_003eaf20(battle);
     if (entry != NULL && (entry->statusFlags & (1u << bit)) != 0) {

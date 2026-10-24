@@ -1,4 +1,3 @@
-/* NON_MATCHING: code is identical; retail's function-local static and its guard are the globals DAT_0064776c / DAT_005c1d20 and __cxa_guard_acquire / a __weak guard release, which a compiled static local cannot name. */
 #include "common.h"
 
 typedef struct ListNode {

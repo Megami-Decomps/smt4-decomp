@@ -42,7 +42,7 @@ typedef char romwright_storage_s______0059496b_9_1_s1_width_check[(sizeof(((unio
 #endif
 extern union romwright_storage_s______0059496b_9_1 s______0059496b; /* 0x59496b */
 extern unsigned int DAT_00594a54; /* 0x594a54 */
-extern unsigned int DAT_00594a58; /* 0x594a58 */
+extern unsigned int g_onlineRegistry; /* 0x594a58 */
 
 extern int FUN_00109e60(int *, unsigned char *, unsigned short *, unsigned int);
 /* Supplied declaration required: FUN_0011ccfc. */
@@ -89,7 +89,7 @@ FUN_0010e05c(int param_1,unsigned int param_2,unsigned short *param_3,unsigned i
     if (s______0059496b.whole[0] == '\x01') {
       temp_v1 = *(int *)(param_1 + 0x150) + 0xa8;
     }
-    temp_v2 = DAT_00594a58;
+    temp_v2 = g_onlineRegistry;
     temp_v3 = DAT_00594a54;
     piVar2 = (int *)_Znwj(0x270);
     if (piVar2 != (int *)0x0) {

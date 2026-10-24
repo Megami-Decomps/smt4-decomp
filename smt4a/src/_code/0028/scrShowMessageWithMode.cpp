@@ -7,10 +7,12 @@ typedef struct MessageState {
     /* 0x19C5 */ u8 mode;
 } MessageState;
 
-typedef struct MessageCommand {
+typedef struct MessageMain {
     /* 0x0 */ u8 unk0[4];
     /* 0x4 */ MessageState *state;
-} MessageCommand;
+} MessageMain;
+
+extern MessageMain g_messageMain;
 
 u32 FUN_002ba85c(void);
 u32 scrGetArg(u32 index);
@@ -27,10 +29,10 @@ static void showMessage(s32 mode)
 }
 
 /* Script command: puts the message state in mode 0x15 and starts FUN_0021bdac with the first argument. */
-void scrShowMessageWithMode(MessageCommand *command)
+void scrShowMessageWithMode(void)
 {
-    if (command->state != NULL) {
-        command->state->mode = 0x15;
+    if (g_messageMain.state != NULL) {
+        g_messageMain.state->mode = 0x15;
     }
     showMessage(9);
 }

@@ -3,7 +3,7 @@
 extern "C" {
 
 void scrSetResult(s32 result);
-s32 scrGetArg(void);
+s32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
@@ -11,7 +11,7 @@ extern u32 g_btlScriptUnit;
 /* Script command: true when the script's argument does not exceed a field of the unit's data. */
 s32 scrComm_Battle_UnitDataAtLeast(void)
 {
-    s32 value = scrGetArg();
+    s32 value = scrGetArg(0);
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
 
     scrSetResult(value <= (s32)unit->data->unk116);

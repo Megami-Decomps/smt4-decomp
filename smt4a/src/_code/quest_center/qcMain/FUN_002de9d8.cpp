@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_001919a4(void);
+int scriptPanelRelease(void);
 int asdMemFree(void *ptr);               /* heap free */
 int jobFind(u32 task);                /* nonzero while the task exists */
 int asdOperatorDelete(void *entry);
@@ -25,7 +25,7 @@ s32 FUN_002de9d8(void)
         if (work != NULL) {
             work->done = 1;
             if (work->entry != 0) {
-                FUN_001919a4();
+                scriptPanelRelease();
                 asdOperatorDelete(work->entry);
                 work->entry = 0;
             }

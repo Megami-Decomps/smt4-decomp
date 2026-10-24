@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x421688; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Empty virtual-slot handler. */
+void FUN_0036d760(void)
+{
+}
+
+} /* extern "C" */

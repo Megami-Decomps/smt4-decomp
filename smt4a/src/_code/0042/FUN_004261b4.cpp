@@ -1,2 +1,6 @@
-/* NON_MATCHING: found outside every function: its address is in _ZTV9Obj557f74; not written yet. */
 #include "common.h"
+
+extern "C" s32 FUN_004261b4(void)
+{
+    return 2;
+}

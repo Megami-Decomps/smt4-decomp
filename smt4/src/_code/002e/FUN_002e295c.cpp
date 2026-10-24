@@ -1,2 +1,20 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4060b0; not written yet. */
 #include "common.h"
+
+struct QuestEntry {
+    /* 0x00 */ u8 unk00[0xfbc];
+    /* 0xfbc */ s32 value;
+};
+
+extern "C" {
+
+QuestEntry *QuestCenter_GetActiveEntry(void);
+void scrSetResult(s32 result);
+
+/* Script command: reports the active quest entry's word at 0xfbc. */
+u32 FUN_002e295c(void)
+{
+    scrSetResult(QuestCenter_GetActiveEntry()->value);
+    return 1;
+}
+
+} /* extern "C" */

@@ -2,7 +2,7 @@
 #include "skill/SkillSlotScreen.h"
 
 extern "C" {
-s32 FUN_002a48e0(void *cursor, s32 value);
+s32 scrollOwnerSetValue(void *cursor, s32 value);
 s32 FUN_002a4964(void *cursor, s32 value);
 s32 objectApplyIfUnblocked(void *cursor);
 s32 uiSearchPrimary(void);
@@ -26,10 +26,10 @@ void FUN_00359a08(SkillSlotScreen *screen)
         }
     }
     if (emptySlot < objectApplyIfUnblocked(screen->slotCursor)) {
-        FUN_002a48e0(screen->slotCursor, 0);
+        scrollOwnerSetValue(screen->slotCursor, 0);
         FUN_002a4964(screen->slotCursor, emptySlot);
     } else {
-        FUN_002a48e0(screen->slotCursor, 0);
+        scrollOwnerSetValue(screen->slotCursor, 0);
         FUN_002a4964(screen->slotCursor, 0);
     }
 
@@ -52,7 +52,7 @@ void FUN_00359a08(SkillSlotScreen *screen)
         scroll++;
         offset--;
     }
-    FUN_002a48e0(cursor, scroll);
+    scrollOwnerSetValue(cursor, scroll);
     flaggedEntrySetValueA(cursor, offset);
     FUN_00359b6c(skill);
 }

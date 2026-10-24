@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00311458(int *, int, unsigned int);
+int _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_(int *, int, unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,10 +17,10 @@ typedef struct {
 extern unsigned char DAT_0055a808; /* 0x55a808 */
 
 extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
-/* Supplied declaration required: FUN_00311458. */
+/* Supplied declaration required: _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_. */
 extern int allocElements184(int *, int, unsigned int);
 extern unsigned int bufGrowCapacity3(unsigned int, int *);
-extern unsigned int FUN_00311490(unsigned char *);
+extern unsigned int _ZN9Obj559edcC1Ev(unsigned char *);
 
 
 unsigned int * FUN_0011c03c(unsigned int *param_1)
@@ -41,7 +41,7 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   piVar4 = (int *)(param_1 + 3);
   *param_1 = (unsigned int)&DAT_0055a808;
   *(unsigned char *)(param_1 + 1) = 0;
-  temp_v0 = FUN_00311490(temp_v7);
+  temp_v0 = _ZN9Obj559edcC1Ev(temp_v7);
   *piVar4 = 0;
   param_1[4] = 0;
   param_1[5] = 0;
@@ -53,7 +53,7 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   *piVar4 = temp_v1;
   temp_v6 = temp_v0;
   for (temp_v2 = temp_v4; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-    FUN_00311458(piVar4,temp_v1,temp_v6);
+    _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_(piVar4,temp_v1,temp_v6);
     temp_v1 = temp_v1 + 0xb8;
   }
   param_1[5] = *piVar4 + temp_v3 * 0xb8;

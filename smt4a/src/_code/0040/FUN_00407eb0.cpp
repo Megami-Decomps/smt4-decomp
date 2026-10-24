@@ -1,118 +1,103 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00407eb0` (_code @ 0x407eb0, 0x208 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail splits the 12-byte point copies as ldrd/stm {x,y} + str z and places the index==0 (home) arm after the epilogue; built copies whole Vec3s with ldm/stm and keeps the arm inline */
+#include "common.h"
 
 extern "C" {
 
-int controllerSetDestination(unsigned int, int);
-int FUN_00407598(int);
+typedef struct Vec3 {
+    f32 x, y, z;
+} Vec3;
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+typedef struct CameraPoint {
+    Vec3 position;
+    Vec3 look;
+} CameraPoint;
 
-/* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_00407598. */
+typedef struct CameraNode {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ Vec3 position;
+    /* 0x28 */ u8 unk28[8];
+    /* 0x30 */ Vec3 *look;
+} CameraNode;
 
+typedef struct CameraNodeTable {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ CameraNode **nodes;
+} CameraNodeTable;
 
-void FUN_00407eb0(int param_1,int param_2,int param_3)
+typedef struct CameraSource {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ CameraNodeTable *table;
+} CameraSource;
 
+typedef struct CameraTarget {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 handle;
+} CameraTarget;
+
+typedef struct CameraController {
+    /* 0x000 */ u8 unk000[0x10];
+    /* 0x010 */ s32 progress;
+    /* 0x014 */ u8 moving;
+    /* 0x015 */ u8 hasSecond;
+    /* 0x016 */ u8 unk016[6];
+    /* 0x01C */ CameraTarget *target;
+    /* 0x020 */ u8 unk020[0x574];
+    /* 0x594 */ CameraSource *source;
+    /* 0x598 */ u8 unk598[4];
+    /* 0x59C */ CameraPoint step;
+    /* 0x5B4 */ CameraPoint current;
+    /* 0x5CC */ CameraPoint destination;
+    /* 0x5E4 */ CameraPoint home;
+    /* 0x5FC */ Vec3 secondStep;
+    /* 0x608 */ Vec3 secondCurrent;
+    /* 0x614 */ Vec3 secondDestination;
+    /* 0x620 */ Vec3 secondTable[1];
+} CameraController;
+
+void FUN_00407598(CameraController *controller);
+void controllerSetDestination(u32 handle, Vec3 *destination);
+
+/* Moves the camera toward the node's point: at once when `immediate`, otherwise in ten steps; the optional second point follows. */
+void FUN_00407eb0(CameraController *ctrl, s32 index, s32 immediate)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  
-  temp_v4 = param_1 + param_2 * 0xc;
-  if (param_3 != 0) {
-    temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(param_1 + 0x594) + 0x34) + 0x48) + param_2 * 4);
-    temp_v1 = *(unsigned int *)(temp_v0 + 0x24);
-    temp_v2 = *(unsigned int *)(temp_v0 + 0x1c);
-    temp_v3 = *(unsigned int *)(temp_v0 + 0x20);
-    puVar2 = *(unsigned int **)(temp_v0 + 0x30);
-    *(unsigned int *)(param_1 + 0x5d4) = temp_v1;
-    *(unsigned int *)(param_1 + 0x5cc) = temp_v2;
-    *(unsigned int *)(param_1 + 0x5d0) = temp_v3;
-    temp_v5 = *puVar2;
-    temp_v6 = puVar2[1];
-    temp_v7 = puVar2[2];
-    *(unsigned int *)(param_1 + 0x5d8) = temp_v5;
-    *(unsigned int *)(param_1 + 0x5dc) = temp_v6;
-    *(unsigned int *)(param_1 + 0x5e0) = temp_v7;
-    *(unsigned int *)(param_1 + 0x5bc) = temp_v1;
-    *(unsigned int *)(param_1 + 0x5b4) = temp_v2;
-    *(unsigned int *)(param_1 + 0x5b8) = temp_v3;
-    *(unsigned int *)(param_1 + 0x5c0) = temp_v5;
-    *(unsigned int *)(param_1 + 0x5c4) = temp_v6;
-    *(unsigned int *)(param_1 + 0x5c8) = temp_v7;
-    FUN_00407598(param_1);
-    if (*(char *)(param_1 + 0x15) != '\0') {
-      temp_v1 = *(unsigned int *)(temp_v4 + 0x620);
-      temp_v2 = *(unsigned int *)(temp_v4 + 0x624);
-      temp_v3 = *(unsigned int *)(temp_v4 + 0x628);
-      *(unsigned int *)(param_1 + 0x614) = temp_v1;
-      *(unsigned int *)(param_1 + 0x618) = temp_v2;
-      *(unsigned int *)(param_1 + 0x61c) = temp_v3;
-      *(unsigned int *)(param_1 + 0x608) = temp_v1;
-      *(unsigned int *)(param_1 + 0x60c) = temp_v2;
-      *(unsigned int *)(param_1 + 0x610) = temp_v3;
-      controllerSetDestination(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4),param_1 + 0x608);
-      return;
+    if (immediate != 0) {
+        CameraNode *node = ctrl->source->table->nodes[index];
+        Vec3 position = node->position;
+        Vec3 look = *node->look;
+        ctrl->destination.position = position;
+        ctrl->destination.look = look;
+        ctrl->current.position = position;
+        ctrl->current.look = look;
+        FUN_00407598(ctrl);
+        if (ctrl->hasSecond != 0) {
+            ctrl->secondDestination = ctrl->secondTable[index];
+            ctrl->secondCurrent = ctrl->secondDestination;
+            controllerSetDestination(ctrl->target->handle, &ctrl->secondCurrent);
+        }
+    } else {
+        ctrl->progress = 0;
+        ctrl->moving = 1;
+        if (index != 0) {
+            CameraNode *node = ctrl->source->table->nodes[index];
+            ctrl->destination.position = node->position;
+            ctrl->destination.look = *node->look;
+        } else {
+            ctrl->destination.position = ctrl->home.position;
+            ctrl->destination.look = ctrl->home.look;
+        }
+        ctrl->step.position.x = (ctrl->destination.position.x - ctrl->current.position.x) * 0.1f;
+        ctrl->step.position.y = (ctrl->destination.position.y - ctrl->current.position.y) * 0.1f;
+        ctrl->step.position.z = (ctrl->destination.position.z - ctrl->current.position.z) * 0.1f;
+        ctrl->step.look.x = (ctrl->destination.look.x - ctrl->current.look.x) * 0.1f;
+        ctrl->step.look.y = (ctrl->destination.look.y - ctrl->current.look.y) * 0.1f;
+        ctrl->step.look.z = (ctrl->destination.look.z - ctrl->current.look.z) * 0.1f;
+        if (ctrl->hasSecond != 0) {
+            ctrl->secondDestination = ctrl->secondTable[index];
+            ctrl->secondStep.x = (ctrl->secondDestination.x - ctrl->secondCurrent.x) * 0.1f;
+            ctrl->secondStep.y = (ctrl->secondDestination.y - ctrl->secondCurrent.y) * 0.1f;
+            ctrl->secondStep.z = (ctrl->secondDestination.z - ctrl->secondCurrent.z) * 0.1f;
+        }
     }
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x10) = 0;
-    *(unsigned char *)(param_1 + 0x14) = 1;
-    if (param_2 != 0) {
-      temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(param_1 + 0x594) + 0x34) + 0x48) + param_2 * 4);
-      puVar2 = *(unsigned int **)(temp_v0 + 0x30);
-      temp_v1 = *(unsigned int *)(temp_v0 + 0x20);
-      temp_v2 = *(unsigned int *)(temp_v0 + 0x24);
-      *(unsigned int *)(param_1 + 0x5cc) = *(unsigned int *)(temp_v0 + 0x1c);
-      *(unsigned int *)(param_1 + 0x5d0) = temp_v1;
-      *(unsigned int *)(param_1 + 0x5d4) = temp_v2;
-      temp_v1 = *puVar2;
-      temp_v2 = puVar2[1];
-      *(unsigned int *)(param_1 + 0x5e0) = puVar2[2];
-      *(unsigned int *)(param_1 + 0x5d8) = temp_v1;
-      *(unsigned int *)(param_1 + 0x5dc) = temp_v2;
-    }
-    else {
-      *(unsigned int *)(param_1 + 0x5cc) = *(unsigned int *)(param_1 + 0x5e4);
-      *(unsigned int *)(param_1 + 0x5d0) = *(unsigned int *)(param_1 + 0x5e8);
-      *(unsigned int *)(param_1 + 0x5d4) = *(unsigned int *)(param_1 + 0x5ec);
-      *(unsigned int *)(param_1 + 0x5d8) = *(unsigned int *)(param_1 + 0x5f0);
-      *(unsigned int *)(param_1 + 0x5dc) = *(unsigned int *)(param_1 + 0x5f4);
-      *(unsigned int *)(param_1 + 0x5e0) = *(unsigned int *)(param_1 + 0x5f8);
-    }
-    *(float *)(param_1 + 0x59c) = (*(float *)(param_1 + 0x5cc) - *(float *)(param_1 + 0x5b4)) * 0.1f;
-    *(float *)(param_1 + 0x5a0) = (*(float *)(param_1 + 0x5d0) - *(float *)(param_1 + 0x5b8)) * 0.1f;
-    *(float *)(param_1 + 0x5a4) = (*(float *)(param_1 + 0x5d4) - *(float *)(param_1 + 0x5bc)) * 0.1f;
-    *(float *)(param_1 + 0x5a8) = (*(float *)(param_1 + 0x5d8) - *(float *)(param_1 + 0x5c0)) * 0.1f;
-    *(float *)(param_1 + 0x5ac) = (*(float *)(param_1 + 0x5dc) - *(float *)(param_1 + 0x5c4)) * 0.1f;
-    *(float *)(param_1 + 0x5b0) = (*(float *)(param_1 + 0x5e0) - *(float *)(param_1 + 0x5c8)) * 0.1f;
-    if (*(char *)(param_1 + 0x15) != '\0') {
-      temp_v1 = *(unsigned int *)(temp_v4 + 0x624);
-      temp_v2 = *(unsigned int *)(temp_v4 + 0x628);
-      *(unsigned int *)(param_1 + 0x614) = *(unsigned int *)(temp_v4 + 0x620);
-      *(unsigned int *)(param_1 + 0x618) = temp_v1;
-      *(unsigned int *)(param_1 + 0x61c) = temp_v2;
-      *(float *)(param_1 + 0x5fc) =
-           (*(float *)(param_1 + 0x614) - *(float *)(param_1 + 0x608)) * 0.1f;
-      *(float *)(param_1 + 0x600) =
-           (*(float *)(param_1 + 0x618) - *(float *)(param_1 + 0x60c)) * 0.1f;
-      *(float *)(param_1 + 0x604) =
-           (*(float *)(param_1 + 0x61c) - *(float *)(param_1 + 0x610)) * 0.1f;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

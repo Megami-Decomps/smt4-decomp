@@ -17,7 +17,7 @@ int FUN_0020b908(...);
 int FUN_00228b04(int, int);
 int uniteStartOrQueueRequest(int);
 int resourceRunOperationIfUnblocked(...);
-int FUN_002a48e0(int, int);
+int scrollOwnerSetValue(int, int);
 int FUN_002a4964(int, int);
 int FUN_002a7b74(void);
 int flaggedEntrySetValueA(int, int);
@@ -55,7 +55,7 @@ extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a48e0. */
+/* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a7b74. */
 extern unsigned int *objectApplyIfUnblocked(int);
@@ -143,7 +143,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
               FUN_002a4964(temp_v14,0);
             }
             else {
-              FUN_002a48e0(temp_v14,temp_v5 - 2);
+              scrollOwnerSetValue(temp_v14,temp_v5 - 2);
               flaggedEntrySetValueA(temp_v14,1);
             }
             if ((temp_v4 >= *piVar11) || (*(char *)(param_1 + 0x8eac) != '\0')) {
@@ -158,7 +158,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
         if ((temp_v10 >= 7) && (temp_v4 < (int)temp_v12 - 2)) {
           temp_v5 = resourceRunOperationIfUnblocked(temp_v14);
           flaggedEntrySetValueA(temp_v14,temp_v10 - 1);
-          FUN_002a48e0(temp_v14,temp_v5 + 1);
+          scrollOwnerSetValue(temp_v14,temp_v5 + 1);
         }
       }
     }

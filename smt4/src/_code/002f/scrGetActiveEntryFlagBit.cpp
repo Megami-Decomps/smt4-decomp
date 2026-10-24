@@ -13,16 +13,18 @@ Record *btlMainFindActiveEntry(void);
 u32 scrGetArg(int index);
 
 /* Script command: passes to scrSetResult whether flag bit (script argument 0) is set in the current record's flags. */
-u32 scrGetActiveEntryFlagBit(int firstArg)
+u32 scrGetActiveEntryFlagBit(void)
 {
-    u32 bit = scrGetArg(firstArg);
-    Record *record;
+    u32 bit = scrGetArg(0);
 
     btlGetMainState();
-    record = btlMainFindActiveEntry();
-    if (record != NULL && (record->flags & (1 << (bit & 0xff))) != 0) {
-        scrSetResult(1);
-        return 1;
+    Record *record = btlMainFindActiveEntry();
+    if (record != NULL) {
+        u32 flags = record->flags;
+        if ((flags & (1 << bit)) != 0) {
+            scrSetResult(1);
+            return 1;
+        }
     }
     scrSetResult(0);
     return 1;

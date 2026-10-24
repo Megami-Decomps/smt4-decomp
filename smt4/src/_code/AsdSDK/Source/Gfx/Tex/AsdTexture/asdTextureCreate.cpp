@@ -1,7 +1,10 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 43 vs built 34 rows, 30 diff lines. */
+/* NON_MATCHING: the debug traces now match; the field stores after memClear are scheduled differently (retail stores unk08/target/unk38.. first and increments refCount last as a separate load/add/store; built merges them into one stm). */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+
+extern const char DAT_00409594[];
 
 void *asdMemoryAlloc(int, int, int, s32 size, int flag);
 void memClear(void *block, s32 size);
@@ -12,8 +15,10 @@ AsdTexture *asdTextureCreate(s32 shared)
     AsdTexture *tex;
 
     if (shared != 0) {
+        asdDebugTrace(DAT_00409594, 43);
         tex = (AsdTexture *)asdMemoryAlloc(0x10000, 0x100, 0, 0x48, 0);
     } else {
+        asdDebugTrace(DAT_00409594, 47);
         tex = (AsdTexture *)asdMemoryAlloc(0x10000, 0x100, 0, 0x48, 1);
     }
     memClear(tex, 0x48);

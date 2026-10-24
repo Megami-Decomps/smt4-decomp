@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x406600; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+s32 scrSetResult(s32 value);
+
+/* Script command: returns zero to the script. */
+s32 FUN_00317dd4(void)
+{
+    scrSetResult(0);
+    return 1;
+}
+
+} /* extern "C" */

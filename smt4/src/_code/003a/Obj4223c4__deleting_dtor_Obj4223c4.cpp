@@ -3,7 +3,7 @@
 
 extern "C" {
 extern const u32 _ZTV9Obj42247c[];
-void asdMemFreeNonNull(void *allocation);
+int asdMemFreeNonNull(void *block);
 
 // Tear down the selection interface and release the compendium menu.
 void _ZN9Obj4223c4D0Ev(Obj4223c4 *self)

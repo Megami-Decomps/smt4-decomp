@@ -52,7 +52,7 @@ extern unsigned int FUN_00110318(unsigned int *);
 /* Supplied declaration required: FUN_00129b6c. */
 /* Supplied declaration required: FUN_00129d40. */
 /* Supplied declaration required: FUN_00129e20. */
-extern unsigned int FUN_002e7168(unsigned char *, unsigned int);
+extern unsigned int _ZN9Obj5590d0C1Ej(unsigned char *, unsigned int);
 /* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_0030e67c. */
 /* Supplied declaration required: FUN_0030e690. */
@@ -62,7 +62,7 @@ extern unsigned int FUN_002e7168(unsigned char *, unsigned int);
 extern unsigned int FUN_0030e734(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0030e878. */
 /* Supplied declaration required: FUN_0030e8b4. */
-extern unsigned int *FUN_0030e8dc(unsigned char *);
+extern unsigned int *_ZN9Obj55a474C1Ev(unsigned char *);
 
 
 void FUN_001253a4(void)
@@ -76,13 +76,13 @@ void FUN_001253a4(void)
   
   temp_v0 = FUN_0010b66c(&DAT_0059937c);
   emptyStub_002f4370(temp_v0,&LAB_0010b679,0x100000);
-  temp_v0 = FUN_002e7168(&DAT_006306ac,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(&DAT_006306ac,0x20000000);
   emptyStub_002f4370(temp_v0,&LAB_002eb625,0x100000);
   temp_v0 = FUN_00110318(&DAT_00630424);
   emptyStub_002f4370(temp_v0,&LAB_00110331,0x100000);
   temp_v0 = FUN_0030e734(&DAT_00630530,&LAB_00125568,0);
   emptyStub_002f4370(temp_v0,&LAB_0010b195,0x100000);
-  puVar2 = (unsigned int *)FUN_0030e8dc(&DAT_006305a8);
+  puVar2 = (unsigned int *)_ZN9Obj55a474C1Ev(&DAT_006305a8);
   *puVar2 = (unsigned int)&DAT_00559968;
   temp_v1 = FUN_0030e6cc(puVar2 + 3);
   temp_v1 = FUN_0030e6cc(temp_v1 + 0x14);
@@ -94,7 +94,7 @@ void FUN_001253a4(void)
     FUN_001298b8(temp_v2);
   }
   emptyStub_002f4370(temp_v2,&LAB_0012992d,0x100000);
-  puVar2 = (unsigned int *)FUN_0030e8dc(&DAT_006305dc);
+  puVar2 = (unsigned int *)_ZN9Obj55a474C1Ev(&DAT_006305dc);
   *puVar2 = (unsigned int)&DAT_0055998c;
   temp_v1 = FUN_0030e6b8(puVar2 + 3);
   temp_v1 = FUN_0030e6b8(temp_v1 + 0x14);
@@ -106,7 +106,7 @@ void FUN_001253a4(void)
     FUN_00129998(temp_v2);
   }
   emptyStub_002f4370(temp_v2,&LAB_00129a0d,0x100000);
-  puVar2 = (unsigned int *)FUN_0030e8dc(&DAT_00630610);
+  puVar2 = (unsigned int *)_ZN9Obj55a474C1Ev(&DAT_00630610);
   *puVar2 = (unsigned int)&DAT_00559a1c;
   temp_v1 = FUN_0030e6a4(puVar2 + 3);
   temp_v1 = FUN_0030e6a4(temp_v1 + 0x14);
@@ -118,7 +118,7 @@ void FUN_001253a4(void)
     FUN_00129d40(temp_v2);
   }
   emptyStub_002f4370(temp_v2,&LAB_00129db5,0x100000);
-  puVar2 = (unsigned int *)FUN_0030e8dc(&DAT_00630644);
+  puVar2 = (unsigned int *)_ZN9Obj55a474C1Ev(&DAT_00630644);
   *puVar2 = (unsigned int)&DAT_005599d4;
   temp_v1 = FUN_0030e690(puVar2 + 3);
   temp_v1 = FUN_0030e690(temp_v1 + 0x14);
@@ -130,7 +130,7 @@ void FUN_001253a4(void)
     FUN_00129b6c(temp_v2);
   }
   emptyStub_002f4370(temp_v2,&LAB_00129be1,0x100000);
-  puVar2 = (unsigned int *)FUN_0030e8dc(&DAT_00630678);
+  puVar2 = (unsigned int *)_ZN9Obj55a474C1Ev(&DAT_00630678);
   *puVar2 = (unsigned int)&DAT_00559a40;
   temp_v1 = FUN_0030e67c(puVar2 + 3);
   temp_v1 = FUN_0030e67c(temp_v1 + 0x14);

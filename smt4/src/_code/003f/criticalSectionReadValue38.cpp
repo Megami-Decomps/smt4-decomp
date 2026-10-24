@@ -11,9 +11,12 @@ typedef struct Obj {
     /* 0x38 */ u32 value;
 } Obj;
 
-/* Reads obj->value under the critical section. */
+/* Reads obj->value under the critical section; does nothing for a null object. */
 u32 criticalSectionReadValue38(Obj *obj, u32 *out)
 {
+    if (obj == NULL) {
+        return 0;
+    }
     nn_os_CriticalSection_Enter(&g_mwmoCriticalSection);
     *out = obj->value;
     nn_os_CriticalSection_Leave(&g_mwmoCriticalSection);

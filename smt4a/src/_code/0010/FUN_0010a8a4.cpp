@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp44; /* 0x44: local_44 */
 } param_1_stack;
 
-extern unsigned char DAT_00594a58; /* 0x594a58 */
+extern unsigned char g_onlineRegistry; /* 0x594a58 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001322b6. */
@@ -67,7 +67,7 @@ void FUN_0010a8a4(int param_1)
   while( 1 ) {
     temp_v7 = *(unsigned int *)(param_1 + 0x18);
     temp_v1 = wordRefsDiffer_002f35fc(&temp_v5,(unsigned int *)&temp_v7);
-    temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x14));
+    temp_v0 = (*(unsigned int *)((unsigned char *)&g_onlineRegistry + 0x14));
     if (temp_v1 == 0) break;
     temp_v3 = _ZmiRK15OnlineTimestampS1_(temp_v8,temp_v5 + 0x50);
     temp_v1 = (int)((unsigned long long)temp_v3 >> 0x20);
@@ -84,7 +84,7 @@ void FUN_0010a8a4(int param_1)
   while( 1 ) {
     temp_v10 = *(unsigned int *)(param_1 + 0x34);
     temp_v1 = wordRefsDiffer_002f3594(&temp_v6,(unsigned int *)&temp_v10);
-    temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x14));
+    temp_v0 = (*(unsigned int *)((unsigned char *)&g_onlineRegistry + 0x14));
     if (temp_v1 == 0) break;
     temp_v3 = _ZmiRK15OnlineTimestampS1_(temp_v8,temp_v6 + 0x30);
     temp_v1 = (int)((unsigned long long)temp_v3 >> 0x20);

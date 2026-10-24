@@ -1,105 +1,56 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c55c` (_code @ 0x31c55c, 0x224 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the first two renderStackPush expansions schedule their next-entry address differently (ip instead of r3). */
+#include "camp/RenderCtx.h"
+
+struct BlinkFadeDrawState {
+    u8 unk00[0xC];
+    s32 position;
+    u8 unk10[4];
+    f32 alpha;
+    u8 visible;
+};
+struct BlinkFadeImage {
+    u32 group;
+    s32 index;
+    u8 ownsIndex;
+    u8 ownsGroup;
+    u8 unk0a[2];
+};
 
 extern "C" {
+extern BlinkFadeDrawState *g_eventEffect;
+extern BlinkFadeImage DAT_0057f3d0[2];
+extern RenderCtxA *g_renderCtx;
+void FUN_00183bb0();
+void FUN_00157558(RenderCtxA *);
+s32 FUN_001692ac(u32, u32);
+s32 packNibblesAndByte(u32, u32, u32);
+void efctSetSpeed(f32);
+void FUN_001835b4(u32, u32, s32, s32, s32, s32);
+void renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int FUN_00183bb0(void);
-int renderCtxCalculateStereoParallax(int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int g_eventEffect; /* 0x57f3b4 */
-extern unsigned int DAT_0057f3d0; /* 0x57f3d0 */
-extern int DAT_0057f3d4; /* 0x57f3d4 */
-extern unsigned int DAT_0057f3dc; /* 0x57f3dc */
-extern int DAT_0057f3e0; /* 0x57f3e0 */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-
-
-unsigned char FUN_0031c55c(void)
-
+/* Draw callback of the blink fade: one centred image, then the left/right pair offset by the position. */
+u8 FUN_0031c55c()
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  
-  temp_v0 = g_eventEffect;
-  if (*(char *)(g_eventEffect + 0x18) != '\0') {
+    BlinkFadeDrawState *work = g_eventEffect;
+    if (work->visible == 0) {
+        return 0;
+    }
     FUN_00183bb0();
     FUN_00157558(g_renderCtx);
-    temp_v4 = g_renderCtx;
-    temp_v1 = FUN_001692ac(1,0);
-    piVar5 = (int *)(temp_v4 + 0x1258);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v4 + 0x1270) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v4 + 0x1274))();
-      *(unsigned char *)(temp_v4 + 0x1270) = 0;
-    }
-    temp_v4 = g_renderCtx;
-    temp_v1 = packNibblesAndByte(6,1,0);
-    piVar5 = (int *)(temp_v4 + 0x12b8);
-    temp_v2 = *piVar5;
-    temp_v3 = piVar5[temp_v2 + 2];
-    *piVar5 = temp_v2 + 1;
-    piVar5[temp_v2 + 3] = temp_v1;
-    if (*(char *)(temp_v4 + 0x12d0) != '\0' || temp_v3 != temp_v1) {
-      (**(romwright_code **)(temp_v4 + 0x12d4))();
-      *(unsigned char *)(temp_v4 + 0x12d0) = 0;
-    }
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v4 = DAT_0057f3d4 * 1000;
-    efctSetSpeed();
-    FUN_001835b4(2,DAT_0057f3d0,temp_v4,0,0,0xfa);
-    temp_v4 = g_renderCtx;
-    piVar5 = (int *)(g_renderCtx + 0x12b8);
-    temp_v1 = *piVar5;
-    temp_v2 = piVar5[temp_v1 + 2];
-    *piVar5 = temp_v1 - 1;
-    if (*(char *)(temp_v4 + 0x12d0) != '\0' || temp_v2 != piVar5[temp_v1 + 1]) {
-      (**(romwright_code **)(temp_v4 + 0x12d4))();
-      *(unsigned char *)(temp_v4 + 0x12d0) = 0;
-    }
-    temp_v4 = DAT_0057f3e0 * 1000;
-    efctSetSpeed();
-    FUN_001835b4(2,DAT_0057f3dc,temp_v4,0,-*(int *)(temp_v0 + 0xc),0xfb);
-    FUN_001835b4(2,DAT_0057f3dc,temp_v4 + 1,0,*(unsigned int *)(temp_v0 + 0xc),0xfb);
+    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+    renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+    s32 firstEntry = DAT_0057f3d0[0].index * 1000;
+    efctSetSpeed(work->alpha);
+    FUN_001835b4(2, DAT_0057f3d0[0].group, firstEntry, 0, 0, 0xfa);
+    renderStackPop(&g_renderCtx->stackB);
+    s32 secondEntry = DAT_0057f3d0[1].index * 1000;
+    efctSetSpeed(1.0f);
+    FUN_001835b4(2, DAT_0057f3d0[1].group, secondEntry, 0, -work->position, 0xfb);
+    FUN_001835b4(2, DAT_0057f3d0[1].group, secondEntry + 1, 0, work->position, 0xfb);
     FUN_00183bb0();
-    efctSetSpeed();
-    temp_v0 = g_renderCtx;
-    piVar5 = (int *)(g_renderCtx + 0x1258);
-    temp_v4 = *piVar5;
-    temp_v1 = piVar5[temp_v4 + 2];
-    *piVar5 = temp_v4 - 1;
-    if (*(char *)(temp_v0 + 0x1270) != '\0' || temp_v1 != piVar5[temp_v4 + 1]) {
-      (**(romwright_code **)(temp_v0 + 0x1274))();
-      *(unsigned char *)(temp_v0 + 0x1270) = 0;
-    }
-  }
-  return 0;
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_renderCtx->stackA);
+    return 0;
 }
-
-} /* extern "C" */
+}

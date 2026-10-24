@@ -79,7 +79,7 @@ int statusPanelSetOpen(...);
 int FUN_0029d8f4(...);
 int FUN_0029defc(...);
 int FUN_0029dfc0(...);
-int FUN_0029e8b8(...);
+int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...);
 int FUN_0029efd8(...);
 int gameGetUnitRecord(...);
@@ -209,7 +209,7 @@ extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: useCounterRelease. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e890. */
-/* Supplied declaration required: FUN_0029e8b8. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -505,7 +505,7 @@ joined_r0x001c43a0:
         } while (temp_v22 && temp_v8 < 4);
         temp_v6 = objectPartRunUnlessLocked(temp_v4);
         if (temp_v6 != temp_v24) {
-          FUN_0029e8b8(temp_v4,temp_v24);
+          scrollOwnerSelectIndex(temp_v4,temp_v24);
           FUN_0029dfc0(0);
         }
       }
@@ -532,7 +532,7 @@ LAB_001c4748:
         if (temp_v15 != temp_v10) {
           eventQueueAddUniqueIfValid(0x100016c);
         }
-        FUN_0029e8b8(temp_v4,temp_v10);
+        scrollOwnerSelectIndex(temp_v4,temp_v10);
         FUN_0029dfc0(0);
       }
       else {
@@ -696,19 +696,19 @@ LAB_001c4748:
           FUN_00292be4(*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x6d8),0);
           if (*(char *)(temp_v1 + 0x42) != '\0') {
             *(unsigned int *)(temp_v1 + 0x2c) = 0;
-            FUN_0029e8b8(temp_v24,temp_v16 % 4);
+            scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
             FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
           }
           else {
             if (temp_v16 >= 0xc) {
               *(unsigned int *)(temp_v1 + 0x2c) = 1;
               temp_v16 = temp_v16 - 0xc;
-              FUN_0029e8b8(temp_v24,temp_v16 % 4);
+              scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
               FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
             }
             else {
               *(unsigned int *)(temp_v1 + 0x2c) = 0;
-              FUN_0029e8b8(temp_v24,temp_v16 % 4);
+              scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
               FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
             }
             temp_v6 = 0;
@@ -733,7 +733,7 @@ LAB_001c4748:
         temp_v6 = objectPartRunUnlessLocked(temp_v24);
         temp_v4 = FUN_0029efa8(temp_v24);
         temp_v16 = temp_v10 - 4;
-        FUN_0029e8b8(temp_v24,temp_v16 % 4);
+        scrollOwnerSelectIndex(temp_v24,temp_v16 % 4);
         FUN_0029eb5c(temp_v24,(int)(temp_v16 + ((unsigned int)(temp_v16 >> 0x1f) >> 0x1e)) >> 2);
         FUN_0029dfc0(0);
         if (temp_v6 + temp_v4 * 4 != temp_v15) {
@@ -1038,7 +1038,7 @@ LAB_001c545c:
             }
           } while (temp_v22 && temp_v16 < 4);
           temp_v4 = objectPartRunUnlessLocked(temp_v8);
-          if ((temp_v4 != temp_v24) && (FUN_0029e8b8(temp_v8,temp_v24), *(char *)(temp_v1 + 0x66c) != '\v')) {
+          if ((temp_v4 != temp_v24) && (scrollOwnerSelectIndex(temp_v8,temp_v24), *(char *)(temp_v1 + 0x66c) != '\v')) {
             FUN_0029dfc0(0);
             if (*(char *)(temp_v1 + 0x66c) == '\t') {
               temp_v4 = gameGetSlotTable();
@@ -1079,20 +1079,20 @@ LAB_001c545c:
             if (*(char *)(temp_v1 + 0x42) != '\0') {
               temp_v4 = temp_v6 + 4;
               *(unsigned int *)(temp_v1 + 0x2c) = 0;
-              FUN_0029e8b8(temp_v8,temp_v4 % 4);
+              scrollOwnerSelectIndex(temp_v8,temp_v4 % 4);
               FUN_0029eb5c(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
             }
             else {
               if (temp_v6 >= 0xc) {
                 *(unsigned int *)(temp_v1 + 0x2c) = 1;
                 temp_v4 = temp_v6 - 8;
-                FUN_0029e8b8(temp_v8,temp_v4 % 4);
+                scrollOwnerSelectIndex(temp_v8,temp_v4 % 4);
                 FUN_0029eb5c(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
               }
               else {
                 temp_v4 = temp_v6 + 4;
                 *(unsigned int *)(temp_v1 + 0x2c) = 0;
-                FUN_0029e8b8(temp_v8,temp_v4 % 4);
+                scrollOwnerSelectIndex(temp_v8,temp_v4 % 4);
                 FUN_0029eb5c(temp_v8,(int)(temp_v4 + ((unsigned int)(temp_v4 >> 0x1f) >> 0x1e)) >> 2);
               }
               temp_v4 = 0;
@@ -1161,7 +1161,7 @@ LAB_001c659c:
           if (temp_v22) {
             temp_v6 = objectPartRunUnlessLocked(temp_v8);
             temp_v4 = FUN_0029efa8(temp_v8);
-            FUN_0029e8b8(temp_v8,(int)temp_v10 % 4);
+            scrollOwnerSelectIndex(temp_v8,(int)temp_v10 % 4);
             FUN_0029eb5c(temp_v8,(int)(temp_v10 + ((unsigned int)((int)temp_v10 >> 0x1f) >> 0x1e)) >> 2);
             if (temp_v6 + temp_v4 * 4 != temp_v10) {
               eventQueueAddUniqueIfValid();
@@ -1491,7 +1491,7 @@ LAB_001c6598:
                             }
                             else {
                               *(int *)(temp_v1 + 0x674) = temp_v4;
-                              FUN_0029e8b8(temp_v1 + 0x8dc,1);
+                              scrollOwnerSelectIndex(temp_v1 + 0x8dc,1);
                               FUN_0029dfc0(0);
                               partyPanelSetState(4,1);
                               if (temp_v24 != 0) goto LAB_001c6598;
@@ -2398,8 +2398,8 @@ LAB_001c7c50:
           temp_v4 = FUN_0029efa8(temp_v1 + 0x940);
           temp_v6 = temp_v6 + temp_v4 * 4;
           FUN_0028a924(0xf,0);
-          FUN_0029e8b8(temp_v1 + 0x8dc,temp_v7);
-          FUN_0029e8b8(temp_v1 + 0x940,temp_v6 % 4);
+          scrollOwnerSelectIndex(temp_v1 + 0x8dc,temp_v7);
+          scrollOwnerSelectIndex(temp_v1 + 0x940,temp_v6 % 4);
           FUN_0029eb5c(temp_v1 + 0x940,(int)(temp_v6 + ((unsigned int)(temp_v6 >> 0x1f) >> 0x1e)) >> 2);
           eventQueueAddUniqueIfValid(0x100017f);
         }

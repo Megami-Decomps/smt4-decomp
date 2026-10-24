@@ -14,7 +14,7 @@ int FUN_002937e0(void);
 int useCounterStart(void);
 int FUN_0029e328(int);
 int sortMenuCreate(int);
-int FUN_0029e8b8(...);
+int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(...);
 int FUN_0029efa8(...);
@@ -37,7 +37,7 @@ extern int FUN_0029e02c(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e8b8. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029efa8. */
@@ -106,7 +106,7 @@ unsigned int FUN_0026d6a4(int param_1)
       if (*(char *)(temp_v5 + 0x42) != '\0') {
         temp_v2 = objectPartRunUnlessLocked();
         temp_v3 = temp_v5 + 0xa6c;
-        FUN_0029e8b8(temp_v3,temp_v2);
+        scrollOwnerSelectIndex(temp_v3,temp_v2);
         temp_v1 = FUN_0029efa8(temp_v5 + 0xa08);
         if (temp_v1 < 1) {
           FUN_0029eb5c(temp_v3,0);
@@ -138,7 +138,7 @@ unsigned int FUN_0026d6a4(int param_1)
         FUN_002937e0();
         temp_v2 = objectPartRunUnlessLocked(temp_v3);
         temp_v1 = temp_v5 + 0xa08;
-        FUN_0029e8b8(temp_v1,temp_v2);
+        scrollOwnerSelectIndex(temp_v1,temp_v2);
         temp_v4 = FUN_0029efa8(temp_v3);
         if (temp_v4 >= 4) {
           if (*(int *)(temp_v5 + 0x30) >= 2) {
@@ -160,7 +160,7 @@ unsigned int FUN_0026d6a4(int param_1)
   else if (*(char *)(temp_v5 + 0x42) != '\0') {
     temp_v2 = objectPartRunUnlessLocked(temp_v5 + 0x940);
     temp_v3 = temp_v5 + 0x9a4;
-    FUN_0029e8b8(temp_v3,temp_v2);
+    scrollOwnerSelectIndex(temp_v3,temp_v2);
     temp_v1 = FUN_0029efa8(temp_v5 + 0x940);
     temp_v1 = *(int *)(temp_v5 + 0x2c) * 3 + temp_v1;
     FUN_0029eb5c(temp_v3,temp_v1);
@@ -185,7 +185,7 @@ unsigned int FUN_0026d6a4(int param_1)
     }
     FUN_002937e0();
     temp_v2 = objectPartRunUnlessLocked(temp_v3);
-    FUN_0029e8b8(temp_v5 + 0x940,temp_v2);
+    scrollOwnerSelectIndex(temp_v5 + 0x940,temp_v2);
     temp_v1 = FUN_0029efa8(temp_v3);
     if (temp_v1 >= 3) {
       if (*(int *)(temp_v5 + 0x30) >= 2) {

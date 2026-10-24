@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00126ba0(int *);
 int rt_memclr(int, int);
-int FUN_0030dce8(...);
+int bufferAppendU16BigEndian(...);
 int FUN_0030dd02(...);
-int FUN_0030dd7e(int *, int, int);
+int zlibTrStoredBlock(int *, int, int);
 int ringBufferRead(int *);
 int __aeabi_uidivmod(unsigned int, int);
 
@@ -23,9 +23,9 @@ extern int FUN_00126358(int *, int);
 /* Supplied declaration required: FUN_00126ba0. */
 /* Supplied declaration required: rt_memclr. */
 extern int FUN_0030db5c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0030dce8. */
+/* Supplied declaration required: bufferAppendU16BigEndian. */
 /* Supplied declaration required: FUN_0030dd02. */
-/* Supplied declaration required: FUN_0030dd7e. */
+/* Supplied declaration required: zlibTrStoredBlock. */
 /* Supplied declaration required: ringBufferRead. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -91,10 +91,10 @@ LAB_00126f96:
     }
     __aeabi_uidivmod(temp_v12,0x1f);
     piVar13[1] = 0x71;
-    FUN_0030dce8(piVar13,(0x1f - temp_v7) + temp_v12);
+    bufferAppendU16BigEndian(piVar13,(0x1f - temp_v7) + temp_v12);
     if (piVar13[0x1b] != 0) {
-      FUN_0030dce8(piVar13,(unsigned int)param_1[0xc] >> 0x10);
-      FUN_0030dce8(piVar13,param_1[0xc] & 0xffff);
+      bufferAppendU16BigEndian(piVar13,(unsigned int)param_1[0xc] >> 0x10);
+      bufferAppendU16BigEndian(piVar13,param_1[0xc] & 0xffff);
     }
     temp_v1 = FUN_0030db5c(0,0);
     param_1[0xc] = temp_v1;
@@ -422,7 +422,7 @@ LAB_00127200:
   if (temp_v5 != 0) {
     if (temp_v5 == 1) {
       if (param_2 != 1) {
-        if ((param_2 != 5) && (FUN_0030dd7e(piVar13,0,0), param_2 == 3)) {
+        if ((param_2 != 5) && (zlibTrStoredBlock(piVar13,0,0), param_2 == 3)) {
           *(unsigned short *)(piVar13[0x11] + (piVar13[0x13] * 2 - 2)) = 0;
           rt_memclr(piVar13[0x11],piVar13[0x13] * 2 - 2);
           if (piVar13[0x1d] == 0) {
@@ -444,8 +444,8 @@ LAB_001272b2:
     if (param_2 == 4) {
       if (0 < piVar13[6]) {
         if (piVar13[6] != 2) {
-          FUN_0030dce8(piVar13,(unsigned int)param_1[0xc] >> 0x10);
-          FUN_0030dce8(piVar13,param_1[0xc] & 0xffff);
+          bufferAppendU16BigEndian(piVar13,(unsigned int)param_1[0xc] >> 0x10);
+          bufferAppendU16BigEndian(piVar13,param_1[0xc] & 0xffff);
         }
         else {
           temp_v5 = piVar13[5];

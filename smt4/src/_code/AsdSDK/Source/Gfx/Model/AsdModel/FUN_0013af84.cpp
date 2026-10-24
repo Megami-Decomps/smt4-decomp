@@ -1,8 +1,17 @@
-/* NON_MATCHING: thread-local IPC wrapper requires MRC and SVC intrinsics, which the assignment forbids. */
-#include "common.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
 
-extern "C" {
+extern "C" u32 DAT_00471ba4;
 
-
-
-} /* extern "C" */
+/* Sends one word to the service. */
+extern "C" s32 FUN_0013af84(u32 value)
+{
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x90040;
+    command->words[0] = value;
+    s32 result = nn::svc::SendSyncRequest(DAT_00471ba4);
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
+}

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030e2b0(void);
+int zlibBiWindup(void);
 
-/* Supplied declaration required: FUN_0030e2b0. */
+/* Supplied declaration required: zlibBiWindup. */
 
 
 void FUN_00125a34(int param_1,unsigned char *param_2,unsigned int param_3,int param_4)
@@ -17,7 +17,7 @@ void FUN_00125a34(int param_1,unsigned char *param_2,unsigned int param_3,int pa
   int temp_v1;
   unsigned char temp_v2;
   
-  FUN_0030e2b0();
+  zlibBiWindup();
   *(unsigned int *)(param_1 + 0x16b4) = 8;
   if (param_4 != 0) {
     temp_v1 = *(int *)(param_1 + 0x14);

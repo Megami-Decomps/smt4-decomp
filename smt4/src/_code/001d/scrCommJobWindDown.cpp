@@ -11,7 +11,7 @@ typedef struct JobState {
     /* 0x30 */ u8 stopRequested;
 } JobState;
 
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(u32 index);
 extern s32 jobIsValid(u32 job);
 extern JobState *jobGetWork(u32 job);
 extern void jobStop(u32 job, s32 arg);
@@ -19,7 +19,7 @@ extern void jobStop(u32 job, s32 arg);
 /* Script command: stops the job in argument 0 when it is in phase 1, otherwise asks it to wind down at -0.25 speed; returns 1. */
 s32 scrCommJobWindDown(void)
 {
-    u32 job = scrGetArg();
+    u32 job = scrGetArg(0);
 
     if (jobIsValid(job) != 0) {
         JobState *state = jobGetWork(job);

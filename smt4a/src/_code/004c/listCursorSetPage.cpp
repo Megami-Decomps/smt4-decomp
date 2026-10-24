@@ -14,7 +14,7 @@ s32 resourceRunOperationIfUnblocked(void *list);
 s32 resourceRunEmbeddedOperationIfUnblocked(void *list);
 s32 flaggedEntryGetValueA(void *list);
 s32 flaggedEntryGetValueB(void *list);
-void FUN_002a48e0(void *list, s32 top);
+void scrollOwnerSetValue(void *list, s32 top);
 void recordTrackDirtyValue(void *list, s32 top);
 void flaggedEntrySetValueA(void *list, s32 position);
 void flaggedEntrySetValueB(void *list, s32 position);
@@ -38,7 +38,7 @@ static s32 listCursorGetPosition(ListCursor *cursor)
 static void listCursorSet(ListCursor *cursor, s32 top, s32 position)
 {
     if (cursor->kind == 0) {
-        FUN_002a48e0(cursor->list, top);
+        scrollOwnerSetValue(cursor->list, top);
         flaggedEntrySetValueA(cursor->list, position);
     }
     if (cursor->kind == 1) {

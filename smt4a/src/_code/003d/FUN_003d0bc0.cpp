@@ -48,7 +48,7 @@ extern int FUN_0036024c(...); /* 0x36024c */
 extern int contentIdCompareSecondaryThenPrimary(...); /* 0x36027c */
 extern int idCompareByKeyThenRank(...); /* 0x3602d0 */
 extern int FUN_0036031c(...); /* 0x36031c */
-extern int FUN_00375874(...); /* 0x375874 */
+extern int recordRankCompareWithTieBreak(...); /* 0x375874 */
 extern int FUN_003758d8(...); /* 0x3758d8 */
 extern int FUN_00375998(...); /* 0x375998 */
 extern int entrySortComparePrimaryKeyDesc(...); /* 0x375aa8 */
@@ -137,7 +137,7 @@ void FUN_003d0bc0(int param_1)
         if ((*pbVar5 & 0x7f) == 0x11) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = objectApplyIfUnblocked(temp_v3);
-            qsort(temp_v1,temp_v2,8,FUN_00375874);
+            qsort(temp_v1,temp_v2,8,recordRankCompareWithTieBreak);
           }
           else {
             temp_v2 = objectApplyIfUnblocked(temp_v3);

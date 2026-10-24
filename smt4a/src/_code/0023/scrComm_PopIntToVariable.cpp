@@ -14,7 +14,7 @@ typedef struct ScriptContext {
     /* 0xBC */ ScriptOp *ops;
 } ScriptContext;
 
-extern u32 DAT_0061889c[];
+extern u32 g_scrIntVars[];
 
 extern u32 FUN_003d2004(void);
 
@@ -23,7 +23,7 @@ u32 scrComm_PopIntToVariable(ScriptContext *context)
 {
     u32 value = FUN_003d2004();
 
-    DAT_0061889c[context->ops[context->pc].variable] = value;
+    g_scrIntVars[context->ops[context->pc].variable] = value;
     context->pc++;
     return 1;
 }

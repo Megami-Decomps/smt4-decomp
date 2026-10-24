@@ -1,140 +1,92 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ef738` (_code @ 0x3ef738, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-int dataTable04FindById(void);
+/* The skill record returned by dataTable04FindById; only the three words the script command tests are named. */
+typedef struct SkillRecord {
+    /* 0x00 */ u8 unk00[0x5A];
+    /* 0x5A */ u16 words[3];
+} SkillRecord;
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
+typedef struct UnitCharacter {
+    /* 0x000 */ u8 unk000[0x12C];
+    /* 0x12C */ u16 id;
+} UnitCharacter;
 
-/* Supplied declaration required: FUN_00184310. */
-extern int FUN_0019acdc(unsigned short, unsigned int);
-/* Supplied declaration required: dataTable04FindById. */
-extern int FUN_004aba3c(unsigned int);
-extern int btlUnitGet(unsigned int);
+typedef struct UnitOwner {
+    /* 0x000 */ u8 unk000[0x400];
+    /* 0x400 */ UnitCharacter *character;
+} UnitOwner;
 
+typedef struct UnitStats {
+    /* 0x000 */ u8 unk000[0x1BE];
+    /* 0x1BE */ u16 mode;
+    /* 0x1C0 */ s16 selected;
+} UnitStats;
 
-void FUN_003ef738(void)
+typedef struct BtlUnit {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ UnitOwner *owner;
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ UnitStats *stats;
+} BtlUnit;
 
+extern u32 g_btlScriptUnit;
+extern u32 g_btlUiBlock;
+
+s32 FUN_00184310(u32 id);
+s32 dataTable04FindById(u32 id);
+s32 FUN_0019acdc(u16 id, u32 flag);
+s32 FUN_004aba3c(u32 block);
+BtlUnit *btlUnitGet(u32 unit);
+
+/* Whether the script unit's character is of the given kind. */
+static __inline bool scriptUnitIsKind(s32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  
-  temp_v0 = btlUnitGet(g_btlScriptUnit);
-  temp_v3 = temp_v0 == 0;
-  temp_v1 = 0;
-  if (!temp_v3) {
-    temp_v1 = *(int *)(temp_v0 + 0x20);
-  }
-  temp_v4 = temp_v1 == 0;
-  if (!temp_v3 && !temp_v4) {
-    temp_v1 = *(int *)(temp_v1 + 0x400);
-  }
-  if (((temp_v3 || temp_v4) || temp_v1 == 0) ||
-     (temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v1 + 300),0), temp_v1 != 1)) {
-    temp_v0 = btlUnitGet(g_btlScriptUnit);
-    temp_v3 = temp_v0 != 0;
-    temp_v1 = 0;
-    if (temp_v3) {
-      temp_v1 = *(int *)(temp_v0 + 0x20);
+    BtlUnit *unit = btlUnitGet(g_btlScriptUnit);
+
+    return unit != NULL && unit->owner != NULL && unit->owner->character != NULL &&
+        FUN_0019acdc(unit->owner->character->id, 0) == kind;
+}
+
+/* Script command: for the selected skill, returns its word for the script unit's kind when that skill exists. */
+s32 FUN_003ef738(void)
+{
+    s32 skillId;
+    SkillRecord *record;
+
+    if (!scriptUnitIsKind(1) && !scriptUnitIsKind(4) && !scriptUnitIsKind(3)) {
+        return 0;
     }
-    temp_v4 = temp_v1 != 0;
-    if (temp_v3 && temp_v4) {
-      temp_v1 = *(int *)(temp_v1 + 0x400);
-    }
-    if (((!temp_v3 || !temp_v4) || temp_v1 == 0) ||
-       (temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v1 + 300),0), temp_v1 != 4)) {
-      temp_v0 = btlUnitGet(g_btlScriptUnit);
-      temp_v3 = temp_v0 != 0;
-      temp_v1 = 0;
-      if (temp_v3) {
-        temp_v1 = *(int *)(temp_v0 + 0x20);
-      }
-      temp_v4 = temp_v1 != 0;
-      if (temp_v3 && temp_v4) {
-        temp_v1 = *(int *)(temp_v1 + 0x400);
-      }
-      if ((!temp_v3 || !temp_v4) || temp_v1 == 0) {
-        return;
-      }
-      temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v1 + 300),0);
-      if (temp_v1 != 3) {
-        return;
-      }
-    }
-  }
-  temp_v1 = FUN_004aba3c(g_btlUiBlock);
-  if (temp_v1 != -1) {
-    temp_v1 = FUN_004aba3c(g_btlUiBlock);
-  }
-  else {
-    temp_v1 = btlUnitGet(g_btlScriptUnit);
-    if (*(short *)(*(int *)(temp_v1 + 0x28) + 0x1be) != 2) {
-      return;
-    }
-    temp_v1 = (int)*(short *)(*(int *)(temp_v1 + 0x28) + 0x1c0);
-  }
-  dataTable04FindById();
-  if (temp_v1 != 0) {
-    temp_v2 = btlUnitGet(g_btlScriptUnit);
-    temp_v3 = temp_v2 != 0;
-    temp_v0 = 0;
-    if (temp_v3) {
-      temp_v0 = *(int *)(temp_v2 + 0x20);
-    }
-    temp_v4 = temp_v0 != 0;
-    if (temp_v3 && temp_v4) {
-      temp_v0 = *(int *)(temp_v0 + 0x400);
-    }
-    if ((!((temp_v3 && temp_v4) && temp_v0 != 0)) ||
-       (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),0), temp_v0 != 1)) {
-      temp_v2 = btlUnitGet(g_btlScriptUnit);
-      temp_v3 = temp_v2 != 0;
-      temp_v0 = 0;
-      if (temp_v3) {
-        temp_v0 = *(int *)(temp_v2 + 0x20);
-      }
-      temp_v4 = temp_v0 != 0;
-      if (temp_v3 && temp_v4) {
-        temp_v0 = *(int *)(temp_v0 + 0x400);
-      }
-      if ((!((temp_v3 && temp_v4) && temp_v0 != 0)) ||
-         (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),0), temp_v0 != 4)) {
-        temp_v2 = btlUnitGet(g_btlScriptUnit);
-        temp_v3 = temp_v2 != 0;
-        temp_v0 = 0;
-        if (temp_v3) {
-          temp_v0 = *(int *)(temp_v2 + 0x20);
+    if (FUN_004aba3c(g_btlUiBlock) == -1) {
+        UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+
+        if (stats->mode != 2) {
+            return 0;
         }
-        temp_v4 = temp_v0 != 0;
-        if (temp_v3 && temp_v4) {
-          temp_v0 = *(int *)(temp_v0 + 0x400);
-        }
-        if ((((temp_v3 && temp_v4) && temp_v0 != 0) &&
-            (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),0), temp_v0 == 3)) &&
-           (*(short *)(temp_v1 + 0x5e) != 0)) {
-          FUN_00184310();
-          return;
-        }
-      }
-      else if (*(short *)(temp_v1 + 0x5c) != 0) {
-        FUN_00184310();
-        return;
-      }
+        skillId = stats->selected;
+    } else {
+        skillId = FUN_004aba3c(g_btlUiBlock);
     }
-    else if (*(short *)(temp_v1 + 0x5a) != 0) {
-      FUN_00184310();
-      return;
+    record = (SkillRecord *)dataTable04FindById(skillId);
+    if (record == NULL) {
+        return 0;
     }
-  }
-  return;
+    if (scriptUnitIsKind(1)) {
+        if (record->words[0] != 0) {
+            return FUN_00184310(record->words[0]) != 0 ? (s16)record->words[0] : 0;
+        }
+    } else if (scriptUnitIsKind(4)) {
+        if (record->words[1] != 0) {
+            return FUN_00184310(record->words[1]) != 0 ? (s16)record->words[1] : 0;
+        }
+    } else if (scriptUnitIsKind(3)) {
+        if (record->words[2] != 0) {
+            return FUN_00184310(record->words[2]) != 0 ? (s16)record->words[2] : 0;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

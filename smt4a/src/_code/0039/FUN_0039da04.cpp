@@ -1,2 +1,20 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x534f78; not written yet. */
 #include "common.h"
+
+struct BattleStateWord {
+    /* 0x00 */ u8 unk00[0x4ccc];
+    /* 0x4ccc */ s32 value;
+};
+
+extern "C" {
+
+BattleStateWord *btlGetMainState(void);
+void scrSetResult(s32 result);
+
+/* Script command: reports the battle state's word at 0x4ccc. */
+u32 FUN_0039da04(void)
+{
+    scrSetResult(btlGetMainState()->value);
+    return 1;
+}
+
+} /* extern "C" */

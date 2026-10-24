@@ -1,2 +1,7 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x406ee0; not written yet. */
 #include "common.h"
+
+/* Answers yes. */
+extern "C" s32 FUN_002ffdf8(void)
+{
+    return 1;
+}

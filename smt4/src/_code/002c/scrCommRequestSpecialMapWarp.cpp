@@ -19,9 +19,9 @@ s32 scrGetArg(s32 index);
 void FUN_00275e4c(void);
 
 // Handle the special script warp to map101, section5 and its fixed entry pose.
-u32 scrCommRequestSpecialMapWarp(s32 argument)
+u32 scrCommRequestSpecialMapWarp(void)
 {
-    if (scrGetArg(argument) == 0x164f) {
+    if (scrGetArg(0) == 0x164f) {
         FUN_00275e4c();
         PendingWarpState *warp = (PendingWarpState *)&g_gameState;
         warp->map = 101;

@@ -1,2 +1,15 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5b32d4; not written yet. */
 #include "common.h"
+
+struct Object {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ void *child;
+};
+
+extern "C" void FUN_00290c10(void *child);
+
+extern "C" void FUN_00290e58(Object *object)
+{
+    if (object->child != NULL) {
+        FUN_00290c10(object->child);
+    }
+}

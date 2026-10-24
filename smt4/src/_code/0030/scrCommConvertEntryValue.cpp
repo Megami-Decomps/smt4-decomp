@@ -17,9 +17,9 @@ void scrSetResult(s32 value);
 
 /* Script command: looks up the value for script argument 0 (a battle entry below 0x6d, a unit record from there on), converts it
  * with FUN_0033b960, calls gameSavedFlagSet when the result is positive and reports it. Returns 1. */
-u32 scrCommConvertEntryValue(s32 firstArg)
+u32 scrCommConvertEntryValue(void)
 {
-    s32 id = scrGetArg(firstArg);
+    s32 id = scrGetArg(0);
     s32 value;
     s32 result;
 

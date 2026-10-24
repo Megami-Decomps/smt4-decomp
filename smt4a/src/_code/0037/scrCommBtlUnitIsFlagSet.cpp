@@ -14,14 +14,14 @@ typedef struct Unit {
 
 extern u32 g_btlScriptUnit;
 
-s32 scrGetArg(void);
+s32 scrGetArg(u32 index);
 Unit *btlUnitGet(u32 unit);
 int scrSetResult(bool value);
 
 /* Script command: result is whether the unit's flag byte for the argument is set. */
 u32 scrCommBtlUnitIsFlagSet(void)
 {
-    s32 index = scrGetArg();
+    s32 index = scrGetArg(0);
 
     UnitFlags *table = btlUnitGet(g_btlScriptUnit)->flags;
 

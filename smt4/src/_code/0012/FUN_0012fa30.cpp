@@ -24,7 +24,7 @@ typedef struct {
 
 extern int FUN_001407a0(unsigned int, unsigned int *);
 extern int FUN_0014085c(unsigned int, unsigned int *);
-extern int FUN_00141140(unsigned int, unsigned int *);
+extern int _ZN9Obj421f18C1Ej(unsigned int, unsigned int *);
 extern int FUN_0014204c(unsigned int, int *);
 /* Supplied declaration required: FUN_002b4e80. */
 /* Supplied declaration required: nw_snd_SoundArchivePlayer_SetupSoundPlayer. */
@@ -105,7 +105,7 @@ unsigned int FUN_0012fa30(int param_1,unsigned int param_2,unsigned int param_3,
               temp_v0 = 0;
             }
             else {
-              temp_v0 = FUN_00141140(temp_v5,(unsigned int *)(param_1 + 0x48));
+              temp_v0 = _ZN9Obj421f18C1Ej(temp_v5,(unsigned int *)(param_1 + 0x48));
             }
             nw_ut_internal_LinkListImpl_insert(param_1 + 0x5c,param_1 + 0x60,temp_v0 + 0xd4);
             temp_v3 = temp_v3 + 1;

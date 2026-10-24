@@ -1,46 +1,29 @@
-/* NON_MATCHING: retail directly reads CP15 TLS and invokes SVC 0x32; required __mrc/__svc constructs are disallowed. */
-#include "romwright_types.h"
+/* NON_MATCHING: same IPC call; armcc saves/restores the 8-byte receive descriptor through VFP (vldmia/vstmia) where retail uses ldrd/strd in r6/r7. */
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
+extern u32 DAT_005b4438; /* service session handle */
 
-extern unsigned int DAT_005b4438; /* 0x5b4438 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_00426634(unsigned int param_1)
-
+/* Sends IPC command 0x00010000 with one buffer address (receive descriptor 0x00800002, restored afterwards);
+ * returns the result code, or the first reply word on success. */
+s32 FUN_00426634(u32 buffer)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v3 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v3 + 0x80) = 0x10000;
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  puVar4 = (unsigned int *)(temp_v1 + 0x180);
-  temp_v4 = *puVar4;
-  temp_v5 = *(unsigned int *)(temp_v1 + 0x184);
-  *(unsigned int *)(temp_v1 + 0x184) = param_1;
-  *puVar4 = 0x800002;
-  temp_v0 = DAT_005b4438;
-  software_interrupt(0x32);
-  temp_v2 = DAT_005b4438 & 0x80000000;
-  *puVar4 = temp_v4;
-  *(unsigned int *)(temp_v1 + 0x184) = temp_v5;
-  if (temp_v2 == 0) {
-    temp_v0 = *(unsigned int *)(temp_v3 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+
+    command->header = 0x10000;
+    s64 *receive = reinterpret_cast<s64 *>(nn::os::GetIpcCommandBuffer() + 1);
+    s64 saved = *receive;
+    u32 *words = reinterpret_cast<u32 *>(receive);
+    words[1] = buffer;
+    words[0] = 0x00800002;
+    s32 result = nn::svc::SendSyncRequest(DAT_005b4438);
+    *receive = saved;
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }
 
 } /* extern "C" */

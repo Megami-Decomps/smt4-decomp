@@ -7,6 +7,13 @@ struct QuestFlagsRecord {
     /* 0x07 */ u8 flags;
 };
 }
+static __inline void uiQuestChangeState(UiQuest *quest, s32 state)
+{
+    quest->previousState = quest->state;
+    quest->state = state;
+    quest->timer = 0;
+}
+
 extern "C" {
 void uiQuestLoadResources(void);
 void FUN_0028fe0c(u32 questId, s32 enabled);
@@ -24,9 +31,7 @@ void FUN_00215cd4(u32 questId)
     uiQuestLoadResources();
     FUN_0028fe0c(questId, 1);
     timerStart(work->mainSprite, 0, 0);
-    g_uiQuest->previousState = g_uiQuest->state;
-    g_uiQuest->state = 1;
-    g_uiQuest->timer = 0;
+    uiQuestChangeState(g_uiQuest, 1);
     work->nextState = 0x1D;
     QuestFlagsRecord *record = dataTable1bOr1cGetRecord(questId);
     if (record->flags & 0x40) {

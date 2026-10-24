@@ -1,12 +1,14 @@
-/* NON_MATCHING: retail invokes svc 0x15 directly; inline assembly and SVC intrinsics are prohibited. */
-/* romwright 0.5.0 decompilation of FUN_0014a930 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: retail is the SDK hand-written svc wrapper (push {r0}; svc; ldr r2,[sp]; str r1,[r2]); armcc keeps the out pointer in r4 and pushes r4/lr instead */
+#include "nn/svc.h"
 
-void FUN_0014a930(unsigned int *param_1,unsigned int param_2)
+extern "C" {
 
+/* Creates a semaphore through svc 0x15 and stores its handle in *out (the arguments pass through). */
+s32 FUN_0014a930(u32 *out, u32 initialCount, u32 maxCount)
 {
-  software_interrupt(0x15);
-  *param_1 = param_2;
-  return;
+    nn::svc::ResultAndValue r = nn::svc::CreateSemaphoreRaw((u32)out, initialCount, maxCount);
+    *out = r.value;
+    return r.result;
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

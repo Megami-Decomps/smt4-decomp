@@ -23,7 +23,7 @@ int FUN_00297408(void);
 int FUN_00298ad8(void);
 int campRefreshEquipmentCategory(...);
 int FUN_0029e874(...);
-int FUN_0029e8b8(...);
+int scrollOwnerSelectIndex(...);
 int FUN_0029eb5c(...);
 int FUN_0029f848(...);
 int gameGetSlotTable(...);
@@ -87,7 +87,7 @@ extern unsigned int statusGetAvailableChoiceCount(void);
 /* Supplied declaration required: FUN_00298d28. */
 /* Supplied declaration required: campRefreshEquipmentCategory. */
 /* Supplied declaration required: FUN_0029e874. */
-/* Supplied declaration required: FUN_0029e8b8. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 extern unsigned int objectPartRunUnlessLocked(void);
 /* Supplied declaration required: FUN_0029eb5c. */
 extern unsigned int FUN_0029efa8(int);
@@ -266,7 +266,7 @@ void FUN_0028a420(void)
             if (temp_v3 != 0) {
               if (*(short *)(g_partyPanel + (temp_v0 % 4 + (temp_v3 * 4 - 4)) * 8 + 0x73c) != 0) {
 LAB_0028b308:
-                FUN_0029e8b8(temp_v5,temp_v0 % 4);
+                scrollOwnerSelectIndex(temp_v5,temp_v0 % 4);
                 FUN_0029eb5c(temp_v5,((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 if (temp_v0 < 0x18) goto LAB_0028b6d0;
                 break;
@@ -278,7 +278,7 @@ LAB_0028b308:
           temp_v0 = 0;
           do {
             if (*(char *)(g_partyPanel + temp_v0 + 0x678) != '\0') {
-              FUN_0029e8b8(temp_v5);
+              scrollOwnerSelectIndex(temp_v5);
               temp_v0 = 0;
               FUN_0029eb5c(temp_v5,temp_v0);
               break;
@@ -289,7 +289,7 @@ LAB_0028b308:
         else {
           do {
             if (*(char *)(g_partyPanel + temp_v0 + 0x678) != '\0') {
-              FUN_0029e8b8(temp_v5,temp_v0);
+              scrollOwnerSelectIndex(temp_v5,temp_v0);
               FUN_0029eb5c(temp_v5,0);
               if (temp_v0 < 4) goto LAB_0028b6d0;
               break;
@@ -301,14 +301,14 @@ LAB_0028b308:
             temp_v3 = ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2) + 1;
             if (temp_v3 != 0) {
               if (*(short *)(g_partyPanel + (temp_v0 % 4 + (temp_v3 * 4 - 4)) * 8 + 0x73c) != 0) {
-                FUN_0029e8b8(temp_v5,temp_v0 % 4);
+                scrollOwnerSelectIndex(temp_v5,temp_v0 % 4);
                 temp_v0 = ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2) + 1;
                 FUN_0029eb5c(temp_v5,temp_v0);
                 break;
               }
             }
             else if (*(char *)(temp_v0 % 4 + g_partyPanel + 0x678) != '\0') {
-              FUN_0029e8b8(temp_v5,temp_v0 % 4);
+              scrollOwnerSelectIndex(temp_v5,temp_v0 % 4);
               temp_v0 = ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2) + 1;
               FUN_0029eb5c(temp_v5,temp_v0);
               break;
@@ -336,13 +336,13 @@ LAB_0028b50c:
                 temp_v3 = temp_v0 + *(int *)(temp_v6 + 0x2c) * 0xc;
                 if (temp_v3 < 0xc) {
                   *(unsigned int *)(temp_v6 + 0x2c) = 0;
-                  FUN_0029e8b8(temp_v5,temp_v0 % 4);
+                  scrollOwnerSelectIndex(temp_v5,temp_v0 % 4);
                   FUN_0029eb5c(temp_v5,((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 }
                 else {
                   temp_v3 = temp_v3 - 0xc;
                   *(unsigned int *)(temp_v6 + 0x2c) = 1;
-                  FUN_0029e8b8(temp_v5,temp_v3 % 4);
+                  scrollOwnerSelectIndex(temp_v5,temp_v3 % 4);
                   FUN_0029eb5c(temp_v5,((int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 }
                 if (temp_v0 < 0x18) goto LAB_0028b6d0;
@@ -355,7 +355,7 @@ LAB_0028b50c:
           temp_v0 = 0;
           do {
             if (*(char *)(g_partyPanel + temp_v0 + 0x678) != '\0') {
-              FUN_0029e8b8(temp_v5);
+              scrollOwnerSelectIndex(temp_v5);
               temp_v0 = 0;
               FUN_0029eb5c(temp_v5,temp_v0);
               break;
@@ -366,7 +366,7 @@ LAB_0028b50c:
         else {
           do {
             if (*(char *)(g_partyPanel + temp_v0 + 0x678) != '\0') {
-              FUN_0029e8b8(temp_v5,temp_v0);
+              scrollOwnerSelectIndex(temp_v5,temp_v0);
               FUN_0029eb5c(temp_v5,0);
               if (temp_v0 < 4) goto LAB_0028b6d0;
               break;
@@ -400,7 +400,7 @@ LAB_0028b668:
                     temp_v8 = temp_v8 + 1;
                   } while (temp_v8 < 0x18);
                 }
-                FUN_0029e8b8(temp_v5,temp_v3 % 4);
+                scrollOwnerSelectIndex(temp_v5,temp_v3 % 4);
                 FUN_0029eb5c(temp_v5,((int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1e)) >> 2) + 1);
                 break;
               }
@@ -424,7 +424,7 @@ LAB_0028b668:
                 } while (temp_v8 < 0x18);
               }
               temp_v3 = temp_v3 - 0xc;
-              FUN_0029e8b8(temp_v5,temp_v3 % 4);
+              scrollOwnerSelectIndex(temp_v5,temp_v3 % 4);
               temp_v0 = ((int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1e)) >> 2) + 1;
               FUN_0029eb5c(temp_v5,temp_v0);
               break;

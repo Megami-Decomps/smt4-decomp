@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x44df4c; not written yet. */
-#include "common.h"
+/* NON_MATCHING: same code, but armcc loads the process fields in a different order and allocates other registers. */
+#include "script/ScriptVm.h"
+
+extern "C" {
+
+/* Script opcode: pushes the float constant the instruction's operand indexes. */
+u32 FUN_001dc750(ScriptVmProcess *process)
+{
+    scriptVmPush(process, SCRIPT_VM_TAG_FLOAT, process->constants[process->code[process->pc].decoded.operand]);
+    process->pc++;
+    return 1;
+}
+
+} /* extern "C" */

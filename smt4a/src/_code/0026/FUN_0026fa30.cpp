@@ -9,7 +9,7 @@ BtlPartyBlockA *gameGetSlotTable();
 s32 FUN_002a4878(GridNavigation *);
 s32 FUN_002a4894(GridNavigation *);
 void FUN_00203b40(GridNavigation *, s32, s32, s32, s32, s32);
-void FUN_002a4914(GridNavigation *, s32);
+void scrollOwnerSelectIndex(GridNavigation *, s32);
 void FUN_002a4964(GridNavigation *, s32);
 void FUN_00261840(GridNavigation *);
 
@@ -51,9 +51,9 @@ void FUN_0026fa30()
         FUN_00203b40(&grids->primary, 12, 3, 4, 1, 1);
         FUN_00203b40(&grids->secondary, 16, 4, 4, 1, 1);
     }
-    FUN_002a4914(&grids->primary, primaryColumn);
+    scrollOwnerSelectIndex(&grids->primary, primaryColumn);
     FUN_002a4964(&grids->primary, primaryRow);
-    FUN_002a4914(&grids->secondary, secondaryColumn);
+    scrollOwnerSelectIndex(&grids->secondary, secondaryColumn);
     FUN_002a4964(&grids->secondary, secondaryRow);
     FUN_00261840(&grids->primary);
     FUN_00261840(&grids->secondary);

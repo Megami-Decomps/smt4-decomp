@@ -7,9 +7,9 @@ s32 scrGetArg(u32 index);
 u32 FUN_0030ac54(u32 id, u32 flags);
 void bustupCutAnimSetJobParam(u32 handle);
 void scrSetResult(u32 value);
-u32 scrBustupStartAnimation(u32 argument)
+u32 scrBustupStartAnimation(void)
 {
-    s32 id = scrGetArg(argument);
+    s32 id = scrGetArg(0);
     if (id >= 232) {
         id = 0;
     }

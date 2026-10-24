@@ -13,7 +13,7 @@ s32 objectApplyIfUnblocked(FlaggedEntry *);
 u32 FUN_00228b04(FlaggedEntry *, u32);
 u32 FUN_001517b4(u32, u32);
 u32 flaggedEntryGetValueA(FlaggedEntry *);
-void FUN_002a48e0(FlaggedEntry *, s32);
+void scrollOwnerSetValue(FlaggedEntry *, s32);
 void eventQueueAddUniqueIfValid(u32);
 
 void updateNineRowListInput(NineRowListInput *list)
@@ -39,7 +39,7 @@ void updateNineRowListInput(NineRowListInput *list)
         if (resourceRunOperationIfUnblocked(&list->grid) == 0)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
-        FUN_002a48e0(&list->grid, --list->top);
+        scrollOwnerSetValue(&list->grid, --list->top);
     }
     if (FUN_001517b4(10, 0) && objectApplyIfUnblocked(&list->grid) >= 9) {
         s32 top = resourceRunOperationIfUnblocked(&list->grid);
@@ -47,7 +47,7 @@ void updateNineRowListInput(NineRowListInput *list)
         if (top != count - 9 &&
             (flaggedEntryGetValueA(&list->grid) != 0 || objectApplyIfUnblocked(&list->grid) >= 9)) {
             eventQueueAddUniqueIfValid(0x100020d);
-            FUN_002a48e0(&list->grid, ++list->top);
+            scrollOwnerSetValue(&list->grid, ++list->top);
         }
     }
 }

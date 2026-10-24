@@ -6,6 +6,8 @@
 #include "nw/math/MTX34.h"
 #include "Model/ModelUnitBuffers.h"
 
+extern "C" void asdOperatorDelete(void *block);
+
 /* A 0x30-byte element of the camera's two-element table; its constructor clears four values. */
 extern "C" void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *source);
 
@@ -41,7 +43,8 @@ public:
     Obj557b18();
     /* Starts empty like the default constructor, tags the unit with `id` (0x1B0) and attaches the content. */
     Obj557b18(UnitModelContent *content, u32 partIndex, u32 id);
-    virtual ~Obj557b18() = 0;
+    virtual ~Obj557b18();
+    static void operator delete(void *block) { asdOperatorDelete(block); }
 
     /* Attaches model content: sets up one of its parts, allocates the channels sized from its meshes,
      * builds the extra object when the content has extra data and resets the matrix. */

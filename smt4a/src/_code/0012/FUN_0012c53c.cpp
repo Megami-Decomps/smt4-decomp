@@ -16,7 +16,7 @@ int vectorAt24(int, unsigned int);
 int FUN_0030c720(...);
 int holderSetPairAndFlush(...);
 int _ZN9Obj55a328C1Ev(unsigned char [8]);
-int FUN_0030d1ac(unsigned char [8]);
+int _ZN9Obj55a508C1Ev(unsigned char [8]);
 int _ZN9Obj55aae4D1Ev(unsigned char [8]);
 
 typedef int romwright_code(...);
@@ -61,8 +61,8 @@ extern int vectorSize24B(void);
 extern unsigned int vectorCount4_0030c774(void);
 /* Supplied declaration required: holderSetPairAndFlush. */
 /* Supplied declaration required: _ZN9Obj55a328C1Ev. */
-/* Supplied declaration required: FUN_0030d1ac. */
-extern int FUN_0030d420(unsigned int *, unsigned char *);
+/* Supplied declaration required: _ZN9Obj55a508C1Ev. */
+extern int _ZN9Obj55a508C1ERKS_(unsigned int *, unsigned char *);
 /* Supplied declaration required: _ZN9Obj55aae4D1Ev. */
 
 
@@ -108,7 +108,7 @@ void FUN_0012c53c(int param_1)
       temp_v22 = param_1 + 0x110;
       temp_v0 = vectorSize24B();
       if (temp_v0 != *(int *)(param_1 + 0x3f4)) {
-        FUN_0030d1ac(temp_v15);
+        _ZN9Obj55a508C1Ev(temp_v15);
         temp_v6 = 0;
         for (temp_v0 = *(int *)(param_1 + 0x3fc); *(int *)(param_1 + 0x400) != temp_v0;
             temp_v0 = temp_v0 + 0x20) {
@@ -147,7 +147,7 @@ void FUN_0012c53c(int param_1)
               puVar5[1] = *puVar6;
               puVar5[2] = temp_v6;
               *puVar5 = (unsigned int)&DAT_0055aee0;
-              temp_v0 = FUN_0030d420(puVar5 + 4,temp_v15);
+              temp_v0 = _ZN9Obj55a508C1ERKS_(puVar5 + 4,temp_v15);
               temp_v0 = temp_v0 - 0x10;
             }
             *(int *)(param_1 + 0x40c) = temp_v0;

@@ -12,13 +12,13 @@ typedef struct Elem {
     u32 w5;
 } Elem;                         /* 24 bytes */
 
-int FUN_0030d200(u32 allocator, Elem *dst, Elem *src);
+int _ZN12AsdAllocatorI9Obj55a168E9constructEPS0_RKS0_(u32 allocator, Elem *dst, Elem *src);
 
 /* std::uninitialized_copy for 24-byte elements: constructs a copy of each of [first, last) at `dest` through the allocator; returns the end of the copy. */
 Elem *FUN_00307b44(Elem *first, Elem *last, Elem *dest, u32 allocator)
 {
     for (; first != last; ++first, ++dest) {
-        FUN_0030d200(allocator, dest, first);
+        _ZN12AsdAllocatorI9Obj55a168E9constructEPS0_RKS0_(allocator, dest, first);
     }
     return dest;
 }

@@ -7,9 +7,9 @@ extern BtlStateB *btlGetMainState(void);
 extern void scrSetResult(s32 value);
 
 /* Script command: result is true when argument 0 is at most the battle counter + 1. */
-u32 scrCommBattleCounterAtLeast(s32 argIndex)
+u32 scrCommBattleCounterAtLeast(void)
 {
-    s32 value = scrGetArg(argIndex);
+    s32 value = scrGetArg(0);
     BtlStateB *state = btlGetMainState();
 
     scrSetResult(value <= (s32)(state->unk45B8 + 1));

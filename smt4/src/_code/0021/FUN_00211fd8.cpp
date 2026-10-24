@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x404f3c; not written yet. */
 #include "common.h"
+
+struct Object {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 low;
+    /* 0x1C */ u32 high;
+};
+
+extern "C" u64 FUN_00211fd8(Object *object)
+{
+    return ((u64)object->high << 32) | object->low;
+}

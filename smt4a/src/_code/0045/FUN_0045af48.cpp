@@ -1,111 +1,141 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045af48` (_code @ 0x45af48, 0x210 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument/temporary register allocation (commands/extra/address in r8/r7/r6 in retail), the kind 2/3/4 mode chain is compiled as a cmpne chain here but as separate moveq arms in retail, and the command writer's cursor is reloaded from the stack for the first block */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b14dc(unsigned int **, unsigned int *);
+typedef struct TexSource {
+    /* 0x00 */ u32 address;
+    /* 0x04 */ u32 height;
+    /* 0x08 */ u32 width;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u8 format;
+    /* 0x21 */ u8 simple;
+    /* 0x22 */ u8 kind;
+    /* 0x23 */ u8 flag;
+} TexSource;
 
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_5_stack;
+typedef struct TexSetup {
+    /* 0x00 */ u32 address;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u32 height;
+    /* 0x0C */ u32 width;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u8 unk20[4];
+    /* 0x24 */ u32 extra;
+    /* 0x28 */ u8 flag;
+    /* 0x29 */ u8 unk29[3];
+    /* 0x2C */ u32 height2;
+    /* 0x30 */ u32 width2;
+    /* 0x34 */ u32 value;
+    /* 0x38 */ u8 format;
+    /* 0x39 */ u8 unk39[7];
+    /* 0x40 */ u32 height3;
+    /* 0x44 */ u32 width3;
+    /* 0x48 */ u32 list0[2];
+    /* 0x50 */ u32 list1[2];
+    /* 0x58 */ u32 list2[2];
+    /* 0x60 */ u8 mode;
+    /* 0x61 */ u8 enabled;
+    /* 0x62 */ u8 unk62[2];
+    /* 0x64 */ u32 sourceAddress;
+} TexSetup;
 
-/* Supplied declaration required: FUN_001b14dc. */
-extern unsigned int asdGxGetPhysicalAddress(unsigned int);
+u32 asdGxGetPhysicalAddress(u32 address);
+typedef struct CommandWriter {
+    u32 *start;
+    u32 *cursor;
+} CommandWriter;
 
+void FUN_001b14dc(CommandWriter *writer, u32 *out);
 
-void FUN_0045af48(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int *param_5)
-
+/* Fills the texture setup from its source and writes up to three command blocks into the command buffer. */
+void FUN_0045af48(TexSetup *setup, u32 *commands, u32 address, u32 extra, TexSource *source)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned char temp_v2;
-  unsigned int *temp_v3;
-  unsigned int *temp_v4;
-  
-  temp_v1 = asdGxGetPhysicalAddress(param_3);
-  *param_1 = param_3;
-  *(unsigned char *)(param_1 + 1) = *(unsigned char *)((int)param_5 + 0x22);
-  *(unsigned char *)((int)param_1 + 5) = 0;
-  param_1[2] = param_5[1];
-  param_1[3] = param_5[2];
-  param_1[4] = param_5[3];
-  param_1[5] = param_5[4];
-  param_1[6] = param_5[5];
-  param_1[7] = param_5[6];
-  param_1[9] = param_4;
-  *(unsigned char *)(param_1 + 10) = *(unsigned char *)((int)param_5 + 0x23);
-  param_1[0xb] = param_5[1];
-  param_1[0xc] = param_5[2];
-  param_1[0xd] = param_5[7];
-  *(unsigned char *)(param_1 + 0xe) = *(unsigned char *)(param_5 + 8);
-  param_1[0x10] = param_5[1];
-  param_1[0x11] = param_5[2];
-  if ((*(char *)((int)param_5 + 0x21) == '\0') &&
-     (temp_v0 = *(char *)((int)param_5 + 0x22), temp_v0 != '\0')) {
-    if (temp_v0 == '\x02') {
-      temp_v2 = 2;
+    u32 physical = asdGxGetPhysicalAddress(address);
+    setup->address = address;
+    setup->kind = source->kind;
+    setup->unk05 = 0;
+    setup->height = source->height;
+    setup->width = source->width;
+    setup->unk10 = source->unk0C;
+    setup->unk14 = source->unk10;
+    setup->unk18 = source->unk14;
+    setup->unk1C = source->unk18;
+    setup->extra = extra;
+    setup->flag = source->flag;
+    setup->height2 = source->height;
+    setup->width2 = source->width;
+    setup->value = source->unk1C;
+    setup->format = source->format;
+    setup->height3 = source->height;
+    setup->width3 = source->width;
+    u8 mode;
+    if (source->simple == 0 && source->kind != 0) {
+        if (source->kind == 2) {
+            mode = 2;
+        } else if (source->kind == 3) {
+            mode = 3;
+        } else if (source->kind == 4) {
+            mode = 4;
+        } else {
+            mode = 0;
+        }
+    } else {
+        mode = 0;
     }
-    else if (temp_v0 == '\x03') {
-      temp_v2 = 3;
+    setup->mode = mode;
+    setup->enabled = 1;
+    setup->sourceAddress = source->address;
+    u32 shifted = physical >> 3;
+    CommandWriter writer;
+    writer.cursor = commands;
+    writer.start = commands;
+    u32 *cursor = writer.cursor;
+    *cursor++ = source->width | (source->height << 16);
+    *cursor++ = 0xF0082;
+    *cursor++ = 0;
+    *cursor++ = 0x40084;
+    *cursor++ = shifted;
+    *cursor++ = 0xF0085;
+    *cursor++ = setup->mode;
+    *cursor++ = 0xF008E;
+    writer.cursor = cursor;
+    FUN_001b14dc(&writer, setup->list0);
+    if (source->simple == 0) {
+        cursor = writer.cursor;
+        *cursor++ = source->width | (source->height << 16);
+        *cursor++ = 0xF0092;
+        *cursor++ = 0;
+        *cursor++ = 0x40094;
+        *cursor++ = shifted;
+        *cursor++ = 0xF0095;
+        *cursor++ = setup->mode;
+        *cursor++ = 0xF0096;
+        writer.cursor = cursor;
+        FUN_001b14dc(&writer, setup->list1);
+        if (source->simple == 0) {
+            cursor = writer.cursor;
+            *cursor++ = source->width | (source->height << 16);
+            *cursor++ = 0xF009A;
+            *cursor++ = 0;
+            *cursor++ = 0x4009C;
+            *cursor++ = shifted;
+            *cursor++ = 0xF009D;
+            *cursor++ = setup->mode;
+            *cursor++ = 0xF009E;
+            writer.cursor = cursor;
+            FUN_001b14dc(&writer, setup->list2);
+        }
     }
-    else if (temp_v0 == '\x04') {
-      temp_v2 = 4;
-    }
-    else {
-      temp_v2 = 0;
-    }
-  }
-  else {
-    temp_v2 = 0;
-  }
-  *(unsigned char *)(param_1 + 0x18) = temp_v2;
-  *(unsigned char *)((int)param_1 + 0x61) = 1;
-  param_1[0x19] = *param_5;
-  temp_v1 = temp_v1 >> 3;
-  *param_2 = param_5[2] | (param_5[1] << 0x10);
-  param_2[1] = 0xf0082;
-  param_2[2] = 0;
-  param_2[3] = 0x40084;
-  param_2[4] = temp_v1;
-  param_2[5] = 0xf0085;
-  param_2[6] = (unsigned int)*(unsigned char *)(param_1 + 0x18);
-  temp_v4 = param_2 + 8;
-  param_2[7] = 0xf008e;
-  temp_v3 = param_2;
-  FUN_001b14dc(&temp_v3,param_1 + 0x12);
-  if (*(char *)((int)param_5 + 0x21) == '\0') {
-    *temp_v4 = param_5[2] | (param_5[1] << 0x10);
-    temp_v4[1] = 0xf0092;
-    temp_v4[2] = 0;
-    temp_v4[3] = 0x40094;
-    temp_v4[4] = temp_v1;
-    temp_v4[5] = 0xf0095;
-    puVar3 = temp_v4 + 7;
-    temp_v4[6] = (unsigned int)*(unsigned char *)(param_1 + 0x18);
-    temp_v4 = temp_v4 + 8;
-    *puVar3 = 0xf0096;
-    FUN_001b14dc(&temp_v3,param_1 + 0x14);
-    if (*(char *)((int)param_5 + 0x21) == '\0') {
-      *temp_v4 = param_5[2] | (param_5[1] << 0x10);
-      temp_v4[1] = 0xf009a;
-      temp_v4[2] = 0;
-      temp_v4[3] = 0x4009c;
-      temp_v4[4] = temp_v1;
-      temp_v4[5] = 0xf009d;
-      puVar3 = temp_v4 + 7;
-      temp_v4[6] = (unsigned int)*(unsigned char *)(param_1 + 0x18);
-      temp_v4 = temp_v4 + 8;
-      *puVar3 = 0xf009e;
-      FUN_001b14dc(&temp_v3,param_1 + 0x16);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

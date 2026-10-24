@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x44df48; not written yet. */
-#include "common.h"
+/* NON_MATCHING: same code, but retail loads the cursor and stack depth together (ldm) and allocates other registers. */
+#include "script/ScriptVm.h"
+
+extern "C" {
+
+/* Script opcode: pushes the integer variable the instruction's operand indexes. */
+u32 FUN_001dc7b0(ScriptVmProcess *process)
+{
+    scriptVmPush(process, SCRIPT_VM_TAG_INT, process->intVariables[process->code[process->pc].decoded.operand]);
+    process->pc++;
+    return 1;
+}
+
+}

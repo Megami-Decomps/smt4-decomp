@@ -168,6 +168,31 @@ def inlined_bodies():
     return _INLINED
 
 
+_VENEERS = None
+
+
+def veneer_stubs():
+    """{Thumb function: the armlink stub before it} for the stubs retail has: an 8-byte ARM function
+    `add ip, pc, #1; bx ip` (checked in its retail target object) placed right before a Thumb one.
+    armlink sends every ARM `b` and conditional `bl` to a Thumb function through it (they cannot
+    change the instruction set), so retail's relocation names the stub."""
+    global _VENEERS
+    if _VENEERS is None:
+        import struct
+        by_address = {int(unit["address"], 16): unit for unit in PROJECT["units"]}
+        _VENEERS = {}
+        for unit in PROJECT["units"]:
+            target = ROOT / unit["target"] if "target" in unit else None
+            thumb = by_address.get(int(unit["address"], 16) + 8)
+            if unit.get("thumb") or unit["size"] != 8 or target is None or not target.exists() or not (thumb and thumb.get("thumb")):
+                continue
+            data = target.read_bytes()
+            body = next((s for s in read_elf(data)[0] if s["name"] == ".text"), None)
+            if body and body["size"] >= 8 and struct.unpack_from("<II", data, body["offset"]) == (0xE28FC001, 0xE12FFF1C):
+                _VENEERS[thumb["function"]] = unit["function"]
+    return _VENEERS
+
+
 def link_weak_calls(obj, unit=None):
     """Do what armlink did to the retail code, which per-function objects never went through:
     - a call to a weak function nothing defines (the release build left the debug hooks out)
@@ -178,6 +203,11 @@ def link_weak_calls(obj, unit=None):
       (armlink's --inline, see `inlined_bodies`).
     armcc itself never emits these NOPs, so every one in the retail code is such a call. The
     relocation goes too. Returns how many.
+
+    An ARM `b` (R_ARM_JUMP24) or conditional `bl` to a Thumb function cannot change the instruction
+    set, so armlink sent it through the 8-byte stub it placed before that function (see
+    `veneer_stubs`): the relocation is retargeted at the stub's symbol, as in the retail objects.
+    An unconditional `bl` stays: the linker turns it into a `blx`.
 
     `__cxa_guard_release` and `__aeabi_atexit` count as weak: the retail program defines neither
     (only `__cxa_guard_acquire`), and every call a function-local static's initialisation makes to
@@ -190,7 +220,7 @@ def link_weak_calls(obj, unit=None):
     headers = [list(struct.unpack_from("<10I", data, shoff + i * entsize)) for i in range(count)]
     name = lambda h: bytes(data[headers[strndx][4] + h[0]:data.index(b"\0", headers[strndx][4] + h[0])])
     text = next((i for i, h in enumerate(headers) if name(h) == b".text"), None)
-    patched = 0
+    patched, stubs, stub_symtab = 0, {}, None
     for index, rel in enumerate(headers):
         if rel[1] != 9 or not headers[rel[7]][2] & 4:  # SHT_REL of a code section (.text, an inline function's i.)
             continue
@@ -219,6 +249,15 @@ def link_weak_calls(obj, unit=None):
                 else:
                     struct.pack_into("<HH", data, code + offset, 0x46C0, 0x46C0)
                 patched += 1
+            elif (unit is not None and not unit.get("thumb") and rel[7] == text and shndx == 0 and symbol in veneer_stubs()
+                  and (kind == 29 or (kind == 28 and struct.unpack_from("<I", data, code + offset)[0] >> 28 != 0xE))):
+                # a B or conditional BL to a Thumb function: retail's relocation names its armlink stub
+                stub_symtab = rel[6]
+                number = stubs.setdefault(veneer_stubs()[symbol], len(stubs))
+                struct.pack_into("<II", data, at, offset, (symtab[5] // 16 + number) << 8 | kind)
+                kept.append(bytes(data[at:at + 8]))
+                patched += 1
+                continue
             else:
                 kept.append(bytes(data[at:at + 8]))
                 continue
@@ -227,6 +266,17 @@ def link_weak_calls(obj, unit=None):
         if len(kept) * 8 != rel[5]:
             data[rel[4]:rel[4] + len(kept) * 8] = b"".join(kept)
             struct.pack_into("<I", data, shoff + index * entsize + 0x14, len(kept) * 8)
+    if stubs:  # the stubs' names, as undefined symbols appended to the symbol table and its strings
+        while len(data) % 4:
+            data.append(0)
+        symtab, strtab = headers[stub_symtab], headers[headers[stub_symtab][6]]
+        symbols, strings = bytes(data[symtab[4]:symtab[4] + symtab[5]]), bytes(data[strtab[4]:strtab[4] + strtab[5]])
+        for stub in stubs:
+            symbols += struct.pack("<IIIBBH", len(strings), 0, 0, 0x10, 0, 0)  # GLOBAL, NOTYPE, UND
+            strings += stub.encode() + b"\0"
+        for header, blob in ((stub_symtab, symbols), (headers[stub_symtab][6], strings)):
+            struct.pack_into("<II", data, shoff + header * entsize + 0x10, len(data), len(blob))
+            data += blob
     if patched:
         Path(obj).write_bytes(bytes(data))
     return patched

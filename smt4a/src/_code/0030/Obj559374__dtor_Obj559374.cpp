@@ -14,7 +14,7 @@ struct Obj559374Registry {
 };
 
 extern "C" {
-extern Obj559374Registry DAT_00594a58;
+extern Obj559374Registry g_onlineRegistry;
 void FUN_002fb25c(void* registrations, u32 key);
 void* FUN_002fb1d4(void* object);
 void FUN_002fb244(void* object);
@@ -27,7 +27,7 @@ void asdOperatorDeleteArray(void* object);
 Obj559374::~Obj559374()
 {
     if (registered != 0) {
-        FUN_002fb25c(DAT_00594a58.registrations, registration);
+        FUN_002fb25c(g_onlineRegistry.registrations, registration);
     }
     Obj559374Implementation* resource = implementation;
     if (resource != NULL) {

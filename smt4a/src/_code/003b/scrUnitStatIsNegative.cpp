@@ -12,14 +12,14 @@ typedef struct Unit {
 
 extern u32 g_btlScriptUnit;
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 extern void scrSetResult(s32 value);
 extern Unit *btlUnitGet(u32 unit);
 
 /* Script command: result is 1 when the script unit's stat selected by the argument (0-3) is negative. */
 s32 scrUnitStatIsNegative(void)
 {
-    s32 kind = scrGetArg();
+    s32 kind = scrGetArg(0);
     s32 index = 0;
 
     if (kind == 0) {

@@ -1,56 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a20e4` (_code @ 0x3a20e4, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation (retail keeps the resource in r5 and the track in r4, reuses the old buffer register as the free argument) */
+#include "common.h"
+
+struct ResourceDesc {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u16 count;
+    /* 0x0E */ u8 unk0E[0xE];
+    /* 0x1C */ u16 paramCount;
+};
+
+struct TrackObject {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 unk04[0x2C];
+    /* 0x30 */ void *buffer;
+};
 
 extern "C" {
 
-int FUN_002b2d74(unsigned int, unsigned int, int);
-int objectBufferFree(void);
-int polygonTrackRebuildResources(void);
-int FUN_003a1ef4(void);
-int effHolderSetParams(unsigned int *, int);
+void *resourceResolveHeaderPointer(ResourceDesc *resource);
+void *resourceResolveDataPointer(ResourceDesc *resource);
+TrackObject *FUN_003a1ef4(void *header);
+void polygonTrackRebuildResources(TrackObject *track, u32 count, void *header);
+void objectBufferFree(void *buffer);
+void *FUN_002b2d74(u32 count, u32 first, void *header);
+void effHolderSetParams(TrackObject *track, u32 count, void *data);
 
-typedef struct fn_003a20e4_arg0 fn_003a20e4_arg0;
-struct fn_003a20e4_arg0 {
-    uint field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0x8];
-    ushort field_0xc; /* +0xc */
-    unsigned char pad_0xe[0xe];
-    ushort field_0x1c; /* +0x1c */
-};
-
-extern int resourceResolveDataPointer(fn_003a20e4_arg0 *);
-/* Supplied declaration required: FUN_002b2d74. */
-/* Supplied declaration required: objectBufferFree. */
-extern int resourceResolveHeaderPointer(void);
-/* Supplied declaration required: polygonTrackRebuildResources. */
-/* Supplied declaration required: FUN_003a1ef4. */
-/* Supplied declaration required: effHolderSetParams. */
-
-
-unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
-
+/* Builds the track object of a resource: rebuilds its resources, replaces its buffer and applies the resource's parameters. */
+TrackObject *FUN_003a20e4(ResourceDesc *resource)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = resourceResolveHeaderPointer();
-  puVar2 = (unsigned int *)(temp_v0 + 0x1c);
-  FUN_003a1ef4();
-  polygonTrackRebuildResources();
-  temp_v1 = (unsigned int)param_1->field_0xc;
-  if (puVar2[0xc] != 0) {
-    objectBufferFree();
-  }
-  FUN_002b2d74(temp_v1,*puVar2,temp_v0 + 0x1c);
-  puVar2[0xc] = temp_v1;
-  temp_v0 = resourceResolveDataPointer(param_1);
-  if (temp_v0 != 0) {
-    effHolderSetParams(puVar2,param_1->field_0x1c);
-  }
-  return puVar2;
+    u8 *header = (u8 *)resourceResolveHeaderPointer(resource);
+    TrackObject *track = FUN_003a1ef4(header + 0x1C);
+    void *data;
+
+    polygonTrackRebuildResources(track, resource->count, header);
+    u16 count = resource->count;
+
+    void *oldBuffer = track->buffer;
+
+    if (oldBuffer != NULL) {
+        objectBufferFree(oldBuffer);
+    }
+    track->buffer = FUN_002b2d74(count, track->unk00, header + 0x1C);
+    data = resourceResolveDataPointer(resource);
+    if (data != NULL) {
+        effHolderSetParams(track, resource->paramCount, data);
+    }
+    return track;
 }
 
 } /* extern "C" */

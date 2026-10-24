@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307770` (_code @ 0x307770, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct Elem8 {
+    u32 words[2];
+};
 
 extern "C" {
 
-int FUN_0030d010(unsigned int, int, int);
+void FUN_0030d010(void *allocator, Elem8 *dest, const Elem8 *source);
 
-/* Supplied declaration required: FUN_0030d010. */
-
-
-int FUN_00307770(int param_1,int param_2,int param_3,unsigned int param_4)
-
+/* Copy-constructs [first, last) into dest through the allocator and returns the end of the copy. */
+Elem8 *FUN_00307770(const Elem8 *first, const Elem8 *last, Elem8 *dest, void *allocator)
 {
-/* irregular: 1 native warning(s); review required */
-  for (; param_1 != param_2; param_1 = param_1 + 8) {
-    FUN_0030d010(param_4,param_3,param_1);
-    param_3 = param_3 + 8;
-  }
-  return param_3;
+    for (; first != last; ++first, ++dest) {
+        FUN_0030d010(allocator, dest, first);
+    }
+    return dest;
 }
 
 } /* extern "C" */

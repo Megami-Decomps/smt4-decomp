@@ -193,7 +193,7 @@ extern int btlSlotsGetMaxValue(int);
 extern int cameraTestDefaultPose(int);
 /* Supplied declaration required: FUN_003d86a0. */
 /* Supplied declaration required: workAdoptGlobalHandle. */
-extern int FUN_003d9af8(int, int);
+extern int handlePoolRequestIsDone(int, int);
 /* Supplied declaration required: btlEffectDisableModels. */
 /* Supplied declaration required: FUN_003d9f74. */
 /* Supplied declaration required: keyedValueFindPair. */
@@ -906,7 +906,7 @@ joined_r0x0034611c:
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {
         if ((temp_v5 == 2) &&
-           ((temp_v5 = FUN_003d9af8(DAT_00435d18,temp_v9), temp_v5 == 0 ||
+           ((temp_v5 = handlePoolRequestIsDone(DAT_00435d18,temp_v9), temp_v5 == 0 ||
             ((*(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) & 1) == 0)))) {
           temp_v5 = btlGetMainState();
           *(char *)(temp_v5 + 0x2f04) = *(char *)(temp_v5 + 0x2f04) - '\x01';

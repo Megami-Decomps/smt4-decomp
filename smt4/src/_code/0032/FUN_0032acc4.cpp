@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x464150; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Always fails. */
+s32 FUN_0032acc4(void)
+{
+    return 0;
+}
+
+} /* extern "C" */

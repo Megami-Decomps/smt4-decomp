@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+extern "C" int asdMemFreeNonNull(void *block);
+
 struct Obj4208d4Vec2 {
     f32 x, y;
     Obj4208d4Vec2() {}
@@ -20,6 +22,7 @@ class Obj4208d4 {
 public:
     Obj4208d4();
     virtual ~Obj4208d4();
+    static void operator delete(void *block) { asdMemFreeNonNull(block); }
     virtual void vfunc08();
     virtual void vfunc0c();
     virtual void vfunc10();

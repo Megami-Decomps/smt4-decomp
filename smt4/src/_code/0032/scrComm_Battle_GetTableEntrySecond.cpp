@@ -5,12 +5,12 @@ extern "C" {
 int btlMainGetDataTable(u32 btl, int a);
 int scrSetResult(int result);
 extern u32 btlGetMainState(void);
-extern int scrGetArg(void);
+extern int scrGetArg(int index);
 extern u8 *dataTableGetEntries(void);
 
 u32 scrComm_Battle_GetTableEntrySecond(void)
 {
-    int row = scrGetArg();
+    int row = scrGetArg(0);
     u32 btl = btlGetMainState();
     u8 *entries;
 

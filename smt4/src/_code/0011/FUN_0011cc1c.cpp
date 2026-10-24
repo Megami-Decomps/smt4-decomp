@@ -34,7 +34,9 @@ s32 FUN_0011cc1c(void)
     if (nnResultIsFailure(result)) {
         return result;
     }
-    DAT_0044e7c0.hardwareMode = reinterpret_cast<const SystemSoundInfo *>(0x1FF81000)->mode;
+    s32 mode = reinterpret_cast<const SystemSoundInfo *>(0x1FF81000)->mode;
+
+    DAT_0044e7c0.hardwareMode = mode;
     FUN_00146e40(&g_nnSndMasterManager);
     nn_snd_CTR_VoiceManager_Initialize(&g_nnSndVoiceManager);
     FUN_00128e20(&g_nnSndMasterManager);

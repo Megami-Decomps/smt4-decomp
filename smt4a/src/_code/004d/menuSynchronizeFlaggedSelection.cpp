@@ -28,7 +28,7 @@ s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
 u32 flaggedEntryGetValueA(FlaggedEntry *entry);
 u32 flaggedEntryGetValueB(FlaggedEntry *entry);
-void FUN_002a48e0(FlaggedEntry *entry, u32 value);
+void scrollOwnerSetValue(FlaggedEntry *entry, u32 value);
 void recordTrackDirtyValue(FlaggedEntry *entry, u32 value);
 void flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 void flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
@@ -63,7 +63,7 @@ void menuSynchronizeFlaggedSelection(MenuSelectionScan *scan, FlaggedMenuList *l
             }
             offset = list->mode == 1 ? resourceRunEmbeddedOperationIfUnblocked(&list->entry) : resourceRunOperationIfUnblocked(&list->entry);
             if (list->mode == 0) {
-                FUN_002a48e0(&list->entry, offset);
+                scrollOwnerSetValue(&list->entry, offset);
                 flaggedEntrySetValueA(&list->entry, selected);
             }
             if (list->mode == 1) {

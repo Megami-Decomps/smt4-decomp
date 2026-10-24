@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5b3470; not written yet. */
 #include "common.h"
+
+struct Obj003768bcVec4 {
+    f32 x, y, z, w;
+};
+
+/* Copies a 4-float vector. */
+extern "C" void FUN_003768bc(Obj003768bcVec4 *dst, const Obj003768bcVec4 *src)
+{
+    *dst = *src;
+}

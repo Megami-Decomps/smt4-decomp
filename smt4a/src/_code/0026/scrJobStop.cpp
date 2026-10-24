@@ -13,7 +13,7 @@ u32 scrJobStop(void)
     u32 job;
     s32 valid;
 
-    job = scrGetArg();
+    job = scrGetArg(0);
     valid = jobIsValid(job);
     if (valid != 0) {
         eventTexRemoveHandle(job);

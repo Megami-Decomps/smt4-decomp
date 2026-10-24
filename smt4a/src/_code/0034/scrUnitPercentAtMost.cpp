@@ -15,14 +15,14 @@ typedef struct Unit {
 
 extern u32 g_btlScriptUnit;
 
-s32 scrGetArg(void);
+s32 scrGetArg(u32 index);
 Unit *btlUnitGet(u32 unit);
 int scrSetResult(bool value);
 
 /* Script command: result is whether the unit's current/max percentage is at most the script argument. */
 u32 scrUnitPercentAtMost(void)
 {
-    s32 threshold = scrGetArg();
+    s32 threshold = scrGetArg(0);
     UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
 
     s32 current = stats->current;

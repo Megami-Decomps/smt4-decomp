@@ -9,7 +9,7 @@ typedef struct BtlUnitState {
 
 extern void *btlGetMainState(void);
 extern BtlUnitState *FUN_003eaf20(void *mainState);
-extern int scrGetArg(void);
+extern int scrGetArg(u32 index);
 extern int scrSetResult(int value);
 
 /* Script command: pushes whether the counter selected by argument 0 (0-3) is positive. */
@@ -19,7 +19,7 @@ u32 scrComm_BtlCounterIsPositive(void)
     int index;
     BtlUnitState *state;
 
-    arg = scrGetArg();
+    arg = scrGetArg(0);
     index = 0;
     if (arg == 0) {
         index = 7;

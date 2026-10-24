@@ -11,9 +11,9 @@ extern void FUN_003252dc(void);
 extern void FUN_003252f4(void);
 
 /* Script command: calls one of six routines selected by argument 0. */
-u32 scrCommDispatch6(s32 argIndex)
+u32 scrCommDispatch6(void)
 {
-    s32 selector = scrGetArg(argIndex);
+    s32 selector = scrGetArg(0);
 
     if (selector == 0) {
         FUN_00294928();

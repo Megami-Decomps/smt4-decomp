@@ -265,7 +265,7 @@ extern int FUN_004f283c(int);
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004f56cc. */
-extern int FUN_004f5c84(int, int);
+extern int handlePoolRequestIsDone(int, int);
 /* Supplied declaration required: asdModelActivateOwnedSlots. */
 /* Supplied declaration required: FUN_004f5fb8. */
 /* Supplied declaration required: resourceEnsureCachedObject. */
@@ -1171,7 +1171,7 @@ LAB_0040f684:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_004f5c84(g_btlAux,temp_v6);
+    temp_v3 = handlePoolRequestIsDone(g_btlAux,temp_v6);
     if (temp_v3 != 0) {
       temp_v5 = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50);
       goto joined_r0x0040f750;

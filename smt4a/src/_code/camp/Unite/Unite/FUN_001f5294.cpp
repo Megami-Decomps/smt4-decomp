@@ -30,7 +30,7 @@ int FUN_004db07c(...);
 int wordAt1B0Clear(...);
 
 int partyFindSlotById(...);
-int FUN_002a48e0(...);
+int scrollOwnerSetValue(...);
 int FUN_002a5e7c(...);
 int FUN_002a6894(...);
 int panelSetMode3(...);
@@ -80,7 +80,7 @@ int useCounterStart(void);
 int FUN_0023b45c(...);
 int ifTouchRegionAdd(...);
 int resourceRunEmbeddedOperationIfUnblocked(...);
-int FUN_002a4914(...);
+int scrollOwnerSelectIndex(...);
 int FUN_002c8538(...);
 int FUN_002c8550(...);
 int rt_memclr(...);
@@ -271,8 +271,8 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4878(int *);
 /* Supplied declaration required: FUN_002a4894. */
-/* Supplied declaration required: FUN_002a48e0. */
-/* Supplied declaration required: FUN_002a4914. */
+/* Supplied declaration required: scrollOwnerSetValue. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a4b28. */
 extern int messageGetChoiceResult(void);
@@ -1844,7 +1844,7 @@ LAB_001f77ec:
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
         temp_v4 = resourceRunOperationIfUnblocked(piVar17);
         temp_v5 = FUN_002a4894(piVar17);
-        FUN_002a4914(piVar3 + 0x188f,temp_v4 + temp_v5);
+        scrollOwnerSelectIndex(piVar3 + 0x188f,temp_v4 + temp_v5);
         piVar3[0xff] = piVar3[0xff] + 1;
         return 0;
       }
@@ -2655,14 +2655,14 @@ LAB_001f8d58:
     temp_v5 = resourceRunOperationIfUnblocked(piVar19);
     if (*(short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x8b72) != 0) {
       if (temp_v4 + 1 >= 8) {
-        FUN_002a48e0(piVar19,temp_v5 + 1);
+        scrollOwnerSetValue(piVar19,temp_v5 + 1);
       }
       else {
         flaggedEntrySetValueA(piVar19);
       }
     }
     else {
-      FUN_002a48e0(piVar19,0);
+      scrollOwnerSetValue(piVar19,0);
       FUN_002a4964(piVar19,0);
     }
     FUN_002a4894(piVar19);
@@ -2676,11 +2676,11 @@ LAB_001f8d58:
     piVar17 = piVar3 + 0x236c;
     temp_v4 = objectApplyIfUnblocked();
     if (temp_v5 < temp_v4) {
-      FUN_002a48e0(piVar17,0);
+      scrollOwnerSetValue(piVar17,0);
       FUN_002a4964(piVar17,temp_v5);
     }
     else {
-      FUN_002a48e0(piVar17,0);
+      scrollOwnerSetValue(piVar17,0);
       FUN_002a4964(piVar17,0);
     }
     temp_v4 = resourceRunOperationIfUnblocked(piVar19);
@@ -3362,7 +3362,7 @@ LAB_001fab44:
          (piVar19 = piVar17, FUN_00228b04(piVar17,1), piVar19 != (int *)0x0)) {
         temp_v5 = resourceRunOperationIfUnblocked(piVar17);
         temp_v6 = FUN_002a4894(piVar17);
-        FUN_002a4914(piVar3 + 0x23c5,temp_v5 + temp_v6);
+        scrollOwnerSelectIndex(piVar3 + 0x23c5,temp_v5 + temp_v6);
         if (temp_v36 == 0) {
           piVar3[0xff] = piVar3[0xff] + 1;
           return 0;

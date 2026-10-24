@@ -298,7 +298,7 @@ LAB_003323f0:
         } while ((int)uVar18 < 0x35);
         if (iStack_634 < 2) {
           FUN_00298ad8();
-          FUN_0029e8b8(iVar12 + 0x34,0);
+          scrollOwnerSelectIndex(iVar12 + 0x34,0);
           *(unsigned char *)(iVar12 + 0x25bc) = 1;
         }
       }
@@ -443,7 +443,7 @@ LAB_003323f0:
             if ((int)uVar18 < 2) {
               *(unsigned char *)(iVar12 + 0x98) = *(unsigned char *)(iVar7 + 2);
               FUN_00298ad8();
-              FUN_0029e8b8(iVar12 + 0x34,0);
+              scrollOwnerSelectIndex(iVar12 + 0x34,0);
               *(unsigned char *)(iVar12 + 0x25bc) = 1;
             }
           }

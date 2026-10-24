@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int FUN_001919a4(QuestEntry *entry);
+int scriptPanelRelease(QuestEntry *entry);
 int asdMemFree(void *ptr);
 int asdOperatorDelete(void *ptr);
 int jobFind(u32 task);
@@ -21,7 +21,7 @@ u32 QuestCenterMode_IsBusy(void)
         if (work != NULL) {
             work->done = 1;
             if (work->entry != NULL) {
-                FUN_001919a4(work->entry);
+                scriptPanelRelease(work->entry);
                 asdOperatorDelete(work->entry);
                 work->entry = NULL;
             }

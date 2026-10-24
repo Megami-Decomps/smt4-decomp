@@ -28,7 +28,7 @@ void eventQueueAddUniqueIfValid(u32 event);
 void uiSpriteSetKeyframe(void *sprite, s16 key, s32 mode);
 void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 mode);
 s32 resourceRunOperationIfUnblocked(void *cursor);
-s32 FUN_002a48e0(void *cursor, s32 value);
+s32 scrollOwnerSetValue(void *cursor, s32 value);
 s32 objectApplyIfUnblocked(void *cursor);
 s32 flaggedEntryGetValueA(void *cursor);
 void dialogEnterState(UnlockLogMenu *menu, u32 state, u32 arg);
@@ -45,14 +45,14 @@ void FUN_003f56ac(UnlockLogMenu *menu)
         if (up != 0) {
             eventQueueAddUniqueIfValid(0x100020d);
             menu->selected--;
-            FUN_002a48e0(menu->cursor, menu->selected);
+            scrollOwnerSetValue(menu->cursor, menu->selected);
         }
         if (FUN_001517b4(10, 0) != 0 && objectApplyIfUnblocked(menu->cursor) >= 7) {
             if (resourceRunOperationIfUnblocked(menu->cursor) != objectApplyIfUnblocked(menu->cursor) - 7 &&
                 (flaggedEntryGetValueA(menu->cursor) != 0 || objectApplyIfUnblocked(menu->cursor) >= 7)) {
                 eventQueueAddUniqueIfValid(0x100020d);
                 menu->selected++;
-                FUN_002a48e0(menu->cursor, menu->selected);
+                scrollOwnerSetValue(menu->cursor, menu->selected);
             }
         }
     }

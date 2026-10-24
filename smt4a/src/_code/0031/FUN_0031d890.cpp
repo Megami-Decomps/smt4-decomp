@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00203b40(...);
 int FUN_002a4878(...);
-int FUN_002a4914(...);
+int scrollOwnerSelectIndex(...);
 int FUN_002a4964(...);
 int partyPanelSortByMode(void);
 
@@ -24,7 +24,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a4878. */
 extern unsigned int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a4914. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: partyPanelSortByMode. */
 
@@ -105,9 +105,9 @@ void FUN_0031d890(void)
       FUN_00203b40(temp_v6 + 0xd50,0x10,4,4,1,1);
     }
   }
-  FUN_002a4914(temp_v9,temp_v2);
+  scrollOwnerSelectIndex(temp_v9,temp_v2);
   FUN_002a4964(temp_v9,temp_v3);
-  FUN_002a4914(temp_v6 + 0xd50,temp_v4);
+  scrollOwnerSelectIndex(temp_v6 + 0xd50,temp_v4);
   FUN_002a4964(temp_v6 + 0xd50,temp_v5);
   temp_v9 = temp_v6 + 0xcec;
   temp_v2 = FUN_002a4878();
@@ -117,9 +117,9 @@ void FUN_0031d890(void)
   temp_v5 = FUN_002a4894(temp_v6);
   FUN_00203b40(temp_v9,*pbVar12,temp_v10,4,1,1);
   FUN_00203b40(temp_v6,*pbVar12 + 4,temp_v10 + 1,4,1,1);
-  FUN_002a4914(temp_v9,temp_v2);
+  scrollOwnerSelectIndex(temp_v9,temp_v2);
   FUN_002a4964(temp_v9,temp_v3);
-  FUN_002a4914(temp_v6,temp_v4);
+  scrollOwnerSelectIndex(temp_v6,temp_v4);
   FUN_002a4964(temp_v6,temp_v5);
   return;
 }

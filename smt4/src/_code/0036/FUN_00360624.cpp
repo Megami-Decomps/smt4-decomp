@@ -1,45 +1,29 @@
-/* NON_MATCHING: retail directly reads CP15 TLS and invokes SVC 0x32; required __mrc/__svc constructs are disallowed. */
-#include "romwright_types.h"
+/* NON_MATCHING: same IPC call; retail spills r0-r3 and reloads the two halfword arguments from the stack (the original signature differs), armcc keeps them in registers. */
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
+extern u32 DAT_00471bac; /* service session handle */
 
-/* stack frame of param_5: 1 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned short spC; /* 0xc: local_c */
-} param_5_stack;
-
-extern unsigned char LAB_00110102; /* 0x110102 */
-extern unsigned int DAT_00471bac; /* 0x471bac */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_00360624(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned short param_4,
-                 unsigned short param_5)
-
+/* Sends IPC command 0x00110102 with two words, two halfwords and a handle-like value; returns the
+ * result code, or the first reply word on success. */
+s32 FUN_00360624(u32 handle, u32 first, u32 second, u16 third, u32 unused, u32 unused2, u16 fourth)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(temp_v1 + 0x80) = &LAB_00110102;
-  *(unsigned int *)(temp_v1 + 0x84) = param_2;
-  *(unsigned int *)(temp_v1 + 0x88) = param_3;
-  *(unsigned short *)(temp_v1 + 0x8c) = param_4;
-  *(unsigned short *)(temp_v1 + 0x90) = param_5;
-  *(unsigned int *)(temp_v1 + 0x98) = param_1;
-  *(unsigned int *)(temp_v1 + 0x94) = 0;
-  software_interrupt(0x32);
-  temp_v0 = DAT_00471bac;
-  if ((DAT_00471bac & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+
+    command->header = 0x00110102;
+    command->words[0] = first;
+    command->words[1] = second;
+    *reinterpret_cast<u16 *>(&command->words[2]) = third;
+    *reinterpret_cast<u16 *>(&command->words[3]) = fourth;
+    command->words[4] = 0;
+    command->words[5] = handle;
+    s32 result = nn::svc::SendSyncRequest(DAT_00471bac);
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }
 
 } /* extern "C" */

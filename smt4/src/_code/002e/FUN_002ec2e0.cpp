@@ -1,85 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ec2e0` (_code @ 0x2ec2e0, 0x228 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the spilled arguments differs (retail keeps the fourth argument in r9, we keep the second) and the scissor push schedules its address differently. */
+#include "camp/RenderCtx.h"
 
+struct SpriteInfo;
+// Coordinate-only view of a layout entry.
+struct LayoutEntryView { u8 prefix[8]; s16 x, y; s16* size; };
+// The scissor stack lies beyond the published IV render-context prefix.
+struct TitleSceneScissorViewIV {
+    RenderCtx context;
+    u8 unk12CC[0x40];
+    RenderStateStack scissor;
+};
 extern "C" {
+extern RenderCtx* g_titleScene;
+void FUN_002598f0(u32 text, s32 x, s32 y, u32 parameter, f32 scale);
+void asdTextDrawDirectoryEntry(u32 text, u32 a, s32 b, u32 c, u32 d, u32 e, s32 f);
+void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
+void FUN_002bd82c(u32 text, u32 color);
+void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
+SpriteInfo* FUN_002bf4f8(u32 table, u32 id);
 
-int FUN_002598f0(...);
-int asdTextDrawDirectoryEntry(...);
-int FUN_0029a17c(int, int, int, int, int);
-int FUN_002bd82c(...);
-int FUN_002bf288(...);
-int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_7: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_7_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_002598f0. */
-/* Supplied declaration required: asdTextDrawDirectoryEntry. */
-/* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_002bd82c. */
-/* Supplied declaration required: FUN_002bf288. */
-/* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
-
-
-void FUN_002ec2e0(unsigned int param_1,unsigned int param_2,int param_3,int param_4,int param_5,
-                 unsigned int param_6,int param_7)
-
+void FUN_002ec2e0(u32 text, u32 param2, s32 param3, s32 param4, s32 row, u32 sprite, s32 offset)
 {
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int *piVar5;
-  
-  FUN_002bf4f8(0x39,0xe0);
-  temp_v0 = FUN_002bf4f8(0x39,param_5 + 0xe6);
-  FUN_002bf380(2,0x39,0x13,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x1f);
-  FUN_002bf288(2,0x39,0xdf,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x21);
-  FUN_002bf288(2,0x39,param_6,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0x22);
-  temp_v1 = FUN_002bf4f8(0x39,0xe0);
-  temp_v2 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x130c);
-  temp_v3 = piVar5[*piVar5 + 2];
-  piVar5[*piVar5 + 2] = 3;
-  if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v3 != 3) {
-    (**(romwright_code **)(temp_v2 + 0x1328))();
-    *(unsigned char *)(temp_v2 + 0x1324) = 0;
-  }
-  FUN_0029a17c((int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v1 + 8),
-               (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v1 + 10),
-               (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1],1);
-  FUN_002bf288(2,0x39,0xe2,*(short *)(temp_v0 + 8) + param_7,(int)*(short *)(temp_v0 + 10),0x65);
-  temp_v2 = g_titleScene;
-  piVar5 = (int *)(g_titleScene + 0x130c);
-  temp_v1 = piVar5[*piVar5 + 2];
-  piVar5[*piVar5 + 2] = 0;
-  if (*(char *)(temp_v2 + 0x1324) != '\0' || temp_v1 != 0) {
-    (**(romwright_code **)(temp_v2 + 0x1328))();
-    *(unsigned char *)(temp_v2 + 0x1324) = 0;
-  }
-  temp_v2 = FUN_002bf4f8(0x39,0xe4);
-  FUN_002bf288(2,0x39,0xe3,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0xd);
-  asdTextDrawDirectoryEntry(param_1,3,0xffffffff,0,3,param_2,param_3 + param_5 + param_4);
-  FUN_002bd82c(param_1,0xffffffff);
-  FUN_002598f0(param_1,(int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8),
-               (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10),0x15);
-  FUN_002bd82c(param_1,0x320202ff);
-  return;
+    FUN_002bf4f8(0x39, 0xE0);
+    LayoutEntryView* origin = reinterpret_cast<LayoutEntryView*>(FUN_002bf4f8(0x39, row + 0xE6));
+    FUN_002bf380(2, 0x39, 0x13, origin->x, origin->y, 0x1F);
+    FUN_002bf288(2, 0x39, 0xDF, origin->x, origin->y, 0x21);
+    FUN_002bf288(2, 0x39, sprite, origin->x, origin->y, 0x22);
+    LayoutEntryView* clip = reinterpret_cast<LayoutEntryView*>(FUN_002bf4f8(0x39, 0xE0));
+    TitleSceneScissorViewIV* context = reinterpret_cast<TitleSceneScissorViewIV*>(g_titleScene);
+    renderStackSet(&context->scissor, 3);
+    FUN_0029a17c(origin->x + clip->x, origin->y + clip->y, clip->size[0], clip->size[1], 1);
+    FUN_002bf288(2, 0x39, 0xE2, origin->x + offset, origin->y, 0x65);
+    context = reinterpret_cast<TitleSceneScissorViewIV*>(g_titleScene);
+    renderStackSet(&context->scissor, 0);
+    LayoutEntryView* label = reinterpret_cast<LayoutEntryView*>(FUN_002bf4f8(0x39, 0xE4));
+    FUN_002bf288(2, 0x39, 0xE3, origin->x, origin->y, 0xD);
+    asdTextDrawDirectoryEntry(text, 3, -1, 0, 3, param2, param3 + row + param4);
+    FUN_002bd82c(text, 0xFFFFFFFF);
+    FUN_002598f0(text, origin->x + label->x, label->y + origin->y, 0x15, 1.0f);
+    FUN_002bd82c(text, 0x320202FF);
 }
-
-} /* extern "C" */
+}

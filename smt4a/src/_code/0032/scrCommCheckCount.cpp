@@ -7,9 +7,9 @@ extern s32 scrGetCommandFrame(void);
 extern s32 FUN_00203d74(void);
 
 /* Script command: 1 (done) unless argument 0 lies beyond the current count and FUN_00203d74 reports not ready. */
-u32 scrCommCheckCount(s32 argIndex)
+u32 scrCommCheckCount(void)
 {
-    s32 count = scrGetArg(argIndex);
+    s32 count = scrGetArg(0);
 
     if (0 < count) {
         s32 current = scrGetCommandFrame();

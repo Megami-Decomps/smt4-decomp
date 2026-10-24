@@ -16,9 +16,9 @@ u32 scrGetArgString(u32 index);
 u32 scrGetArg(int index);
 
 /* Script command: stores script argument 0 in the global value and passes argument 1 (via scrGetArgString) to libc_strcpy for the global text. */
-u32 gameStateSetFromScript(int firstArg)
+u32 gameStateSetFromScript(void)
 {
-    u32 value = scrGetArg(firstArg);
+    u32 value = scrGetArg(0);
     u32 arg = scrGetArgString(1);
 
     g_gameState.value = value;

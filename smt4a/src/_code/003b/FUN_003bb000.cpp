@@ -1,2 +1,25 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x59f360; not written yet. */
 #include "common.h"
+
+struct Obj0031ea5cParent {
+    u8 unk00[0x60];
+    u8 block[1];
+    u8 unk61[0x57];
+    s32 value;
+};
+
+struct Obj003bb000 {
+    u8 unk00[0xc];
+    Obj0031ea5cParent *parent;
+};
+
+extern "C" {
+extern u8 DAT_0059ee68[];
+
+void FUN_0031ab38(u8 *block, s32 value, const u8 *entry, const u8 *table);
+
+/* Hands the parent's block and value, a descriptor entry and its table to FUN_0031ab38. */
+void FUN_003bb000(Obj003bb000 *obj)
+{
+    FUN_0031ab38(obj->parent->block, obj->parent->value, DAT_0059ee68 + 0x70, DAT_0059ee68);
+}
+}

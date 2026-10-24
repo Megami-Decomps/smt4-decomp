@@ -7,7 +7,7 @@ extern StatusDownState *g_statusDown;
 void memClear(void *memory, u32 bytes);
 void FUN_0029f848(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
 void FUN_0029eb5c(GridNavigation *navigation, s32 row);
-void FUN_0029e8b8(GridNavigation *navigation, s32 column);
+void scrollOwnerSelectIndex(GridNavigation *navigation, s32 column);
 void statusInventorySort();
 
 // Rebuild the status inventory from owned demon quantities and keep its grid cursor in range.
@@ -35,10 +35,10 @@ void FUN_001ee8b4(const u8 *quantities)
         status->inventory.row = (count - 1) / 4;
         status->inventory.column = status->inventory.count - status->inventory.row * 4 - 1;
         FUN_0029eb5c(navigation, status->inventory.row);
-        FUN_0029e8b8(navigation, status->inventory.column);
+        scrollOwnerSelectIndex(navigation, status->inventory.column);
     } else {
         FUN_0029eb5c(navigation, status->inventory.row);
-        FUN_0029e8b8(navigation, status->inventory.column);
+        scrollOwnerSelectIndex(navigation, status->inventory.column);
     }
     statusInventorySort();
     status->unk410 = 1;

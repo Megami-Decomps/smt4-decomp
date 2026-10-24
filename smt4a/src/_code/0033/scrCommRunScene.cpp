@@ -13,9 +13,9 @@ extern void sysPlaySe(u32 id);
 extern void messageSlotSet(s32 value);
 
 /* Script command: starts a scene on the first call; returns whether it is running, with end-of-scene cleanup. */
-u8 scrCommRunScene(s32 argIndex)
+u8 scrCommRunScene(void)
 {
-    u16 scene = scrGetArg(argIndex);
+    u16 scene = scrGetArg(0);
     s32 running;
 
     if (scrGetCommandFrame() == 0) {

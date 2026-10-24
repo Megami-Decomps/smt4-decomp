@@ -1,48 +1,42 @@
-/* NON_MATCHING: retail emits a CP15 data-synchronization MCR barrier directly; the required intrinsic/assembly is forbidden by this assignment. */
-#include "romwright_types.h"
+/* NON_MATCHING: same calls and barrier (nn::os::DataSynchronizationBarrier); retail loads the DSP status byte with ldrsb and stores it before reloading the manager address, armcc copies it with ldrb after */
+#include "nn/svc.h"
+
+/* The sound engine's flags (at DAT_0044e7c0): the event that signals the DSP thread is at +8. */
+struct DspSoundFlags {
+    s8 enabled;
+    s8 pending;
+    s8 busy;
+    u8 unk03;
+    s8 status;
+    u8 unk05[3];
+    u8 event[1];
+};
+
+/* The DSP shared-memory window's register block: the byte at 0xc0 mirrors the DSP status. */
+struct DspRegisters {
+    u8 unk00[0xc0];
+    s8 status;
+};
 
 extern "C" {
+extern DspSoundFlags DAT_0044e7c0;
+extern u8 g_dspsndState;
+extern u8 g_nnSndMasterManager;
+void FUN_00129214(u8 *state, s32 flag);
+void FUN_00146e40(u8 *manager);
+void nn_os_LightEvent_Signal(u8 *event);
 
-int FUN_00129214(unsigned char *, int);
-int FUN_00146e40(unsigned char *);
-int nn_os_LightEvent_Signal(unsigned char *);
-int coproc_moveto_Data_Synchronization(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char DAT_0044e7c0; /* 0x44e7c0 */
-extern unsigned char DAT_0044e7c1; /* 0x44e7c1 */
-extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
-extern unsigned char DAT_0044e7c4; /* 0x44e7c4 */
-extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
-extern unsigned char g_nnSndMasterManager; /* 0x4e6f14 */
-extern unsigned char g_dspsndState; /* 0x4e6f64 */
-extern unsigned char uRam1ff810c0; /* 0x1ff810c0 */
-
-/* Unsupported intrinsic, declaration required: coproc_moveto_Data_Synchronization (CALLOTHER). */
-/* Supplied declaration required: FUN_00129214. */
-/* Supplied declaration required: FUN_00146e40. */
-/* Supplied declaration required: nn_os_LightEvent_Signal. */
-
-
+/* When the DSP sound engine is enabled and has a pending request: runs it, latches the DSP status, clears the pending and busy flags and signals the DSP event. */
 void FUN_00129478(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  if ((DAT_0044e7c0 & DAT_0044e7c1) != 0) {
-    FUN_00129214(&g_dspsndState,1);
-    DAT_0044e7c4 = uRam1ff810c0;
-    FUN_00146e40(&g_nnSndMasterManager);
-    DAT_0044e7c1 = 0;
-    DAT_0044e7c2 = 0;
-    coproc_moveto_Data_Synchronization(0);
-    nn_os_LightEvent_Signal(&DAT_0044e7c8);
-    return;
-  }
-  return;
+    if ((DAT_0044e7c0.enabled & DAT_0044e7c0.pending) != 0) {
+        FUN_00129214(&g_dspsndState, 1);
+        DAT_0044e7c0.status = ((DspRegisters *)0x1ff81000)->status;
+        FUN_00146e40(&g_nnSndMasterManager);
+        DAT_0044e7c0.pending = 0;
+        DAT_0044e7c0.busy = 0;
+        nn::os::DataSynchronizationBarrier();
+        nn_os_LightEvent_Signal(DAT_0044e7c0.event);
+    }
 }
-
-} /* extern "C" */
+}

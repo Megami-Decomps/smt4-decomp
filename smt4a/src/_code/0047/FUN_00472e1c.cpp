@@ -1,18 +1,22 @@
-/* NON_MATCHING: stack-push addressing, speed field base and compiler NOP placement differ. */
+/* NON_MATCHING: speed read is now the inlined vec2GetSpeed; remaining: ands vs tst on the flag test, renderStackPush address scheduling (add ip before ldr) and the order of mov r0,#0/add sp at the return */
 #include "gfx/DrawParameterOwner.h"
 #include "camp/RenderCtx.h"
 
-// Speed lies beyond DrawParameterOwner's established 0x440-byte prefix.
+// The speed state lies beyond DrawParameterOwner's established 0x440-byte prefix.
+struct EffectSpeedState {
+    u8 unk00[0x20];
+    f32 speed;
+};
 struct EffectDrawWorkView {
     DrawParameterOwner owner;
-    /* 0x440 */ u8 unk440[0x20];
-    /* 0x460 */ f32 speed;
+    /* 0x440 */ EffectSpeedState speedState;
 };
 extern "C" {
 extern RenderCtxA* g_renderCtx;
 EffectDrawWorkView* jobGetWork(void);
 s32 FUN_001692ac(u32 enabled, u32 option);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const EffectSpeedState* state);
 void FUN_001835b4(s32 layer, s32 category, s32 effect, s32 option, s32 flags, s32 mode);
 void FUN_00183bb0(void);
 void skinObjectUpdateMatrices(RenderCtxA* context);
@@ -26,7 +30,7 @@ u32 FUN_00472e1c(void)
         RenderCtxA* context = g_renderCtx;
         s32 mode = FUN_001692ac(1, 0);
         renderStackPush(&context->stackA, mode);
-        efctSetSpeed(work->speed);
+        efctSetSpeed(vec2GetSpeed(&work->speedState));
         FUN_001835b4(2, 8, 0x14F, 0, 0, 6);
         efctSetSpeed(1.0f);
         renderStackPop(&g_renderCtx->stackA);

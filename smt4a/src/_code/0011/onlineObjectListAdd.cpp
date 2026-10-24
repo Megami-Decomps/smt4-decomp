@@ -1,0 +1,52 @@
+/* NON_MATCHING: romwright 0.5.0 decompilation of `onlineObjectListAdd` (_code @ 0x113d48, 0x50 bytes) from smt4a.cxi.
+ * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "romwright_types.h"
+
+extern "C" {
+
+int _ZN9Obj55b28cC1EPv(unsigned char [12], int);
+int _ZN9Obj55b28cD1Ev(unsigned char [12]);
+
+/* stack frame of param_2: 1 slot(s), 4 byte(s) */
+typedef struct {
+    unsigned int sp10; /* 0x10: local_10 */
+} param_2_stack;
+
+extern unsigned char g_flagBlock; /* 0x594958 */
+
+/* Supplied declaration required: _ZN9Obj55b28cC1EPv. */
+/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
+extern int wordRefsDiffer_002fe9f2(int, int);
+
+
+void onlineObjectListAdd(int param_1,int param_2)
+
+{
+/* irregular: 2 native warning(s); review required */
+  int temp_v0;
+  int *piVar2;
+  unsigned char temp_v1 [12];
+  int iStack_14;
+  int temp_v2;
+  
+  if ((*(signed char *)((unsigned char *)&g_flagBlock + 0x5)) != '\0') {
+    iStack_14 = param_1;
+    temp_v2 = param_2;
+    _ZN9Obj55b28cC1EPv(temp_v1,param_1 + 0x18);
+    temp_v0 = wordRefsDiffer_002fe9f2(param_1 + 8,param_1 + 0x10);
+    piVar2 = (int *)(param_1 + 0xc);
+    if (temp_v0 != 0) {
+      *(int *)(*piVar2 + 4) = temp_v2;
+      *(int *)(temp_v2 + 8) = *piVar2;
+    }
+    else {
+      *(int *)(param_1 + 8) = temp_v2;
+    }
+    *piVar2 = temp_v2;
+    *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + 1;
+    _ZN9Obj55b28cD1Ev(temp_v1);
+  }
+  return;
+}
+
+} /* extern "C" */

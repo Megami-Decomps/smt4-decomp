@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x535cf8; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void FUN_003ca208(void);
+
+/* Runs FUN_003ca208 and reports success. */
+s32 FUN_003caa1c(void)
+{
+    FUN_003ca208();
+    return 1;
+}
+
+} /* extern "C" */

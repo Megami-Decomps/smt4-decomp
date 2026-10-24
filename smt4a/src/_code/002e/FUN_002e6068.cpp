@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x535bb0; not written yet. */
 #include "common.h"
+
+extern "C" void FUN_002756a4(void);
+
+/* Script command: runs FUN_002756a4 and reports success. */
+extern "C" s32 FUN_002e6068(void)
+{
+    FUN_002756a4();
+    return 1;
+}

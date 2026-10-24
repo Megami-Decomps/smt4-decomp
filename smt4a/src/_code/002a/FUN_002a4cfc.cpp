@@ -44,7 +44,7 @@ int FUN_0021b274(...);
 int bgmRestart(int);
 int uniteStartOrQueueRequest(...);
 int campRebuildEnabledFlagList(...);
-int FUN_0026f148(...);
+int campSelectorRebuildList(...);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_002a5cf4(void);
 int FUN_002a7b74(void);
@@ -88,7 +88,7 @@ extern unsigned int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: uniteStartOrQueueRequest. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: campReleaseSlotTouchRegions. */
-/* Supplied declaration required: FUN_0026f148. */
+/* Supplied declaration required: campSelectorRebuildList. */
 /* Supplied declaration required: bibleOpenMode0. */
 /* Supplied declaration required: campCecScriptStart. */
 /* Supplied declaration required: FUN_00284ee4. */
@@ -293,13 +293,13 @@ void FUN_002a4cfc(void)
       FUN_002c8538(1);
       FUN_00215bd0();
       *(unsigned int *)(temp_v3 + 0x24) = 0x1d;
-      FUN_0026f148(0x13);
-      FUN_0026f148(0x14);
-      FUN_0026f148(0x15);
-      FUN_0026f148(0x16);
-      FUN_0026f148(0x17);
-      FUN_0026f148(0x18);
-      FUN_0026f148(0x19);
+      campSelectorRebuildList(0x13);
+      campSelectorRebuildList(0x14);
+      campSelectorRebuildList(0x15);
+      campSelectorRebuildList(0x16);
+      campSelectorRebuildList(0x17);
+      campSelectorRebuildList(0x18);
+      campSelectorRebuildList(0x19);
       campChangeState(4);
       return;
     }
@@ -699,13 +699,13 @@ void FUN_002a4cfc(void)
         campSetSpriteAnimationPreset(2,3,0xffffffff,0);
         FUN_0021b274(1,0xffffffff,0);
         *(unsigned int *)(temp_v3 + 0x24) = 0x1d;
-        FUN_0026f148(0x48);
-        FUN_0026f148(0x49);
-        FUN_0026f148(0x4a);
-        FUN_0026f148(0x4b);
-        FUN_0026f148(0x4c);
-        FUN_0026f148(0x4d);
-        FUN_0026f148(0x4e);
+        campSelectorRebuildList(0x48);
+        campSelectorRebuildList(0x49);
+        campSelectorRebuildList(0x4a);
+        campSelectorRebuildList(0x4b);
+        campSelectorRebuildList(0x4c);
+        campSelectorRebuildList(0x4d);
+        campSelectorRebuildList(0x4e);
         FUN_0036cf98(1);
         campChangeState(4);
         return;

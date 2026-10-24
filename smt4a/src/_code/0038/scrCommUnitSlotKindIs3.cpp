@@ -19,9 +19,9 @@ s32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 
 /* Script command: reports whether slot `scrGetArg` of the script unit has kind 3. Returns 1. */
-u32 scrCommUnitSlotKindIs3(s32 firstArg)
+u32 scrCommUnitSlotKindIs3(void)
 {
-    s32 slot = scrGetArg(firstArg);
+    s32 slot = scrGetArg(0);
     UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
 
     scrSetResult(stats->slots[slot] >> 10 == 3);

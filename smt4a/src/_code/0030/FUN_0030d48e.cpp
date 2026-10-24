@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030d48e` (_code @ 0x30d48e, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct SockAddrRef {
+    /* 0x00 */ void *ref;
+    /* 0x04 */ u8 addr[0x20];
+};
 
 extern "C" {
 
-int sharedRefAddRef(unsigned int);
-int onlineSockAddrCopy(int, unsigned int *);
+u8 *onlineSockAddrConstruct(u8 *addr);
+void sharedRefAddRef(void *ref);
+void onlineSockAddrCopy(u8 *dest, const u8 *source);
 
-/* Supplied declaration required: sharedRefAddRef. */
-/* Supplied declaration required: onlineSockAddrCopy. */
-extern int onlineSockAddrConstruct(int);
-
-
-unsigned int * FUN_0030d48e(int param_1,unsigned int *param_2)
-
+/* Copy-constructs a shared reference plus socket address pair and returns it. */
+SockAddrRef *FUN_0030d48e(SockAddrRef *self, const SockAddrRef *source)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = onlineSockAddrConstruct(param_1 + 4);
-  temp_v1 = *param_2;
-  *(unsigned int *)(temp_v0 - 4) = temp_v1;
-  sharedRefAddRef(temp_v1);
-  onlineSockAddrCopy(temp_v0,param_2 + 1);
-  return (unsigned int *)(temp_v0 - 4);
+    void *ref = source->ref;
+    SockAddrRef *result = (SockAddrRef *)(onlineSockAddrConstruct(self->addr) - 4);
+
+    result->ref = ref;
+    sharedRefAddRef(ref);
+    onlineSockAddrCopy(result->addr, source->addr);
+    return result;
 }
 
 } /* extern "C" */

@@ -19,9 +19,9 @@ void *btlGetMainState(void);
 BattleSlot002cfd90 *btlMainFindEntryByListedId(void *state, u32 index);
 Unit002cfd90 *gameGetUnitRecord(u32 index);
 
-u32 scrCommGetUnitValue(u32 index)
+u32 scrCommGetUnitValue(void)
 {
-    s32 arg = scrGetArg(index);
+    s32 arg = scrGetArg(0);
     Unit002cfd90 *unit;
 
     if (arg < 109) {

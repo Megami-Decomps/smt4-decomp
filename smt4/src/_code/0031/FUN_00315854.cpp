@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4644a4; not written yet. */
 #include "common.h"
+
+struct Vec4 {
+    f32 x, y, z, w;
+};
+
+extern "C" void FUN_00315854(Vec4 *dest, const Vec4 *source)
+{
+    *dest = *source;
+}

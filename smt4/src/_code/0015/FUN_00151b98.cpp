@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a2e08(unsigned int);
 int FUN_002a2f08(unsigned int, unsigned char [4]);
-int FUN_002a301c(unsigned char [4]);
+int _ZN9Obj422224C1Ev(unsigned char [4]);
 int FUN_002ba81c(...);
 int libc_strlen(...);
 
@@ -30,7 +30,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002a2e08. */
 /* Supplied declaration required: FUN_002a2f08. */
-/* Supplied declaration required: FUN_002a301c. */
+/* Supplied declaration required: _ZN9Obj422224C1Ev. */
 /* Supplied declaration required: FUN_002ba81c. */
 /* Supplied declaration required: libc_strlen. */
 
@@ -63,7 +63,7 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
   if (param_3 != 0) {
     libc_strlen(param_2);
     libc_strlen(param_3);
-    FUN_002a301c(temp_v9);
+    _ZN9Obj422224C1Ev(temp_v9);
     FUN_002ba81c(temp_v16,param_2,0x40);
     FUN_002ba81c(temp_v17,param_3,0x40);
     temp_v14 = (unsigned int)param_5;
@@ -81,7 +81,7 @@ void FUN_00151b98(unsigned int param_1,unsigned int param_2,int param_3,unsigned
     return;
   }
   libc_strlen(param_2);
-  FUN_002a301c(temp_v0);
+  _ZN9Obj422224C1Ev(temp_v0);
   FUN_002ba81c(temp_v7,param_2,0x40);
   temp_v5 = (unsigned int)param_5;
   temp_v3 = (unsigned int)((unsigned long long)param_5 >> 0x20);

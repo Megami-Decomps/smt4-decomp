@@ -3,7 +3,7 @@
 extern "C" {
 
 int recordTrackDirtyValue(void *panel, u32 a);
-int FUN_00298d64(void *panel, u32 a);
+int scrollOwnerSetValue(void *panel, u32 a);
 int flaggedEntrySetValueB(void *panel, u32 a);
 int flaggedEntrySetValueA(void *panel, u32 a);
 
@@ -17,7 +17,7 @@ typedef struct Panel {
 void panelSetScrollPosition(Panel *panel, u32 first, u32 count)
 {
     if (panel->kind == 0) {
-        FUN_00298d64(panel->body, first);
+        scrollOwnerSetValue(panel->body, first);
         flaggedEntrySetValueA(panel->body, count);
     }
     if (panel->kind == 1) {

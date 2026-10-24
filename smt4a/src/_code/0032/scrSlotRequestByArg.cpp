@@ -10,11 +10,11 @@ s32 FUN_00162ea4(void);
 void FUN_0022677c(s32 a, s32 value);
 void slotSetRequest(s32 slot, s32 count, s32 value);
 
-/* Script command: on its first frame requests slot 0 with the argument's count (at most 4 when capped), argument 0 or 1 choosing the fill;
+/* Script command: on its first frame requests slot 0 with argument 1's count (at most 4 when capped), argument 0 choosing the fill;
  * later frames wait, then apply the same choice. Returns 1 to keep waiting. */
-u32 scrSlotRequestByArg(s32 index)
+u32 scrSlotRequestByArg(void)
 {
-    s32 count = scrGetArg(index);
+    s32 count = scrGetArg(1);
 
     if (FUN_00203d74() != 0 && count > 4) {
         count = 4;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: function-local static defined in the unit; fdiff/relink cannot map its section-relative relocation yet (the code itself is instruction-identical). */
 /* Returns the sound thread singleton, constructing it on first use. */
 #include "common.h"
 

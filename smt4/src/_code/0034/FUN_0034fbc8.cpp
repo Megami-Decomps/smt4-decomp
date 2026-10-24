@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail repeatedly reloads the shared state and includes two post-sleep NOP hints. */
+/* NON_MATCHING: armcc hoists the 500000 ns sleep constant into r5 out of the loop; retail reloads it from the pool each iteration (everything else matches). */
 #include "shard/ThreadControl.h"
 
 extern "C" {
@@ -11,16 +11,21 @@ void nn_os_CriticalSection_Leave(void *criticalSection);
 u32 FUN_0034fbc8(ThreadControl *control)
 {
     if (control->state == 1 || control->state == 8) {
+        s32 requested = 5;
+
         nn_os_CriticalSection_Enter(control->criticalSection);
-        control->state = 5;
+        control->state = requested;
         nn_os_CriticalSection_Leave(control->criticalSection);
         nn_os_LightEvent_Signal(control->wakeEvent);
-        while (control->state != 3) {
-            if (control->state == 7 || control->state == 1)
+        for (;;) {
+            if (control->state == 3) {
+                return 1;
+            }
+            if (control->state == 7 || control->state == 1) {
                 return 0;
+            }
             threadSleepDuration(500000);
         }
-        return 1;
     }
     return 0;
 }

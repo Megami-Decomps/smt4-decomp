@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler omits retail ldrh r0, [r0]. */
 #include "common.h"
 
 struct TextureTable;

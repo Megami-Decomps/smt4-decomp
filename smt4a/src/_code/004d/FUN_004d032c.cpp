@@ -3,7 +3,7 @@
 
 extern "C" {
 void recordTrackDirtyValue(FlaggedEntry *record, u32 value);
-void FUN_002a48e0(FlaggedEntry *record, u32 value);
+void scrollOwnerSetValue(FlaggedEntry *record, u32 value);
 void flaggedEntrySetValueB(FlaggedEntry *record, u32 value);
 void flaggedEntrySetValueA(FlaggedEntry *record, u32 value);
 u32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *record);
@@ -19,7 +19,7 @@ void FUN_004d032c(TrackedRecordOwner *owner, u32 value)
         tracked = resourceRunOperationIfUnblocked(&owner->record);
     }
     if (owner->mode == 0) {
-        FUN_002a48e0(&owner->record, tracked);
+        scrollOwnerSetValue(&owner->record, tracked);
         flaggedEntrySetValueA(&owner->record, value);
     }
     if (owner->mode == 1) {

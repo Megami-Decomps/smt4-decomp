@@ -5,10 +5,10 @@ extern MessageGlobalsA g_messageMain;
 
 extern void FUN_00165088(MessageWorkA *obj, u32 value);
 
-/* Finishes the pending change of the owner's child; returns 1 when the child is idle (state 0). */
-u32 obj04ApplyPending(MessageGlobalsA *owner)
+/* Finishes the pending change of the message state's child; returns 1 when the child is idle (state 0). */
+u32 obj04ApplyPending(void)
 {
-    MessageWorkA *child = owner->state;
+    MessageWorkA *child = g_messageMain.state;
 
     if (child->closeRequested != 0) {
         FUN_00165088(child, child->mode);

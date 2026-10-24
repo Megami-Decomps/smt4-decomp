@@ -4,9 +4,9 @@ extern "C" {
 
 s32 scrGetArg(u32 index);
 
-s32 scrCommClearBattleMaskBit(u32 index)
+s32 scrCommClearBattleMaskBit(void)
 {
-    s32 bit = scrGetArg(index);
+    s32 bit = scrGetArg(0);
     BattleMaskState *state = btlGetMainState();
     s32 mask = ~(1 << bit);
     state->scriptFlags &= (s64)mask;

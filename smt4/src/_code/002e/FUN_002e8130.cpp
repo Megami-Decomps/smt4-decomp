@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4643e8; not written yet. */
 #include "common.h"
+
+struct WordSlot30 {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u32 value;
+};
+
+extern "C" {
+
+/* Virtual setter: stores the word at offset 0x30. */
+void FUN_002e8130(WordSlot30 *self, u32 value)
+{
+    self->value = value;
+}
+
+} /* extern "C" */

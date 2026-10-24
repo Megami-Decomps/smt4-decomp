@@ -1,2 +1,25 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x52b6f4; not written yet. */
 #include "common.h"
+
+struct WordPair {
+    s32 first;
+    s32 second;
+};
+
+struct StartedTimer {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 active;
+    /* 0x11 */ u8 unk11[3];
+    /* 0x14 */ WordPair range;
+};
+
+extern "C" {
+
+/* Virtual start: marks the object active and sets its pair to 15 and 0. */
+void FUN_004a321c(StartedTimer *self)
+{
+    self->active = 1;
+    self->range.first = 15;
+    self->range.second = 0;
+}
+
+} /* extern "C" */

@@ -1,153 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00412248` (_code @ 0x412248, 0x230 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: case 3 stores nextState before dataEntries via a pre-indexed str; retail stores dataEntries then tail-merges mov r0,#4/str (+4 bytes shift after) */
+#include "battle/btlCamera.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int dataTableFileGetTable(unsigned int, int);
-int dialogClose(int);
-int FUN_00410628(unsigned int *);
-int FUN_00410d44(unsigned int *);
-int FUN_004112c4(unsigned int *);
-int FUN_004119fc(unsigned int *);
-int FUN_004f8f08(int);
-int FUN_004f950c(int, int);
-int resourceTestPendingRecordsReady(int, int);
+/* Battle intro state task; `state` selects the handler, `step` is its sub-step. */
+typedef struct BtlIntroTask {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 nextState;
+    /* 0x0C */ u32 timer;
+    /* 0x10 */ u32 step;
+    /* 0x14 */ u8 unk14[0x170];
+    /* 0x184 */ u32 dataFile;
+    /* 0x188 */ u32 dataEntries;
+} BtlIntroTask;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+extern u32 g_btlUiBlock; /* 0x57a9c8 */
+extern u32 g_btlAux; /* 0x573808 */
+extern BtlCameraA *g_btlCamera; /* 0x571508 */
+extern u32 g_btlActionReflect; /* 0x5712f0 */
 
-extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern int g_btlCamera; /* 0x571508 */
-extern int g_btlAux; /* 0x573808 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: btlGetMainState. */
-extern unsigned int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableFileGetTable. */
-/* Supplied declaration required: dialogClose. */
+extern int btlGetMainState(void);
 extern int dialogIsActive(void);
+extern void dialogClose(int);
+extern int dataTableFileGetTable(u32, int);
+extern u32 dataTableGetEntries(void);
+extern int chainCountIdUnflagged(u32, int);
 extern int FUN_003ecd94(void);
-extern int chainCountIdUnflagged(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00410628. */
-/* Supplied declaration required: FUN_00410d44. */
-/* Supplied declaration required: FUN_004112c4. */
-/* Supplied declaration required: FUN_004119fc. */
-extern int FUN_004aa768(unsigned int, int);
-extern int btlUiIsIdleB(unsigned int);
-extern int FUN_004ab784(unsigned int);
-extern int FUN_004abb08(unsigned int);
-/* Supplied declaration required: FUN_004f8f08. */
-/* Supplied declaration required: FUN_004f950c. */
-/* Supplied declaration required: resourceTestPendingRecordsReady. */
-extern int FUN_004fa0d8(int);
+extern void FUN_00410628(BtlIntroTask *);
+extern void FUN_004112c4(BtlIntroTask *);
+extern void FUN_004119fc(BtlIntroTask *);
+extern void FUN_00410d44(BtlIntroTask *);
+extern int FUN_004aa768(u32, int);
+extern int btlUiIsIdleB(u32);
+extern int FUN_004ab784(u32);
+extern int FUN_004abb08(u32);
+extern void FUN_004f8f08(u32);
+extern void FUN_004f950c(u32, int);
+extern int resourceTestPendingRecordsReady(u32, int);
+extern int FUN_004fa0d8(u32);
 
-
-void FUN_00412248(unsigned int *param_1)
-
+static __inline void btlIntroSetNextState(BtlIntroTask *task, u32 state)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  switch(*param_1) {
-  case 1:
-    temp_v1 = param_1[4];
-    if (temp_v1 != 0) {
-      if (temp_v1 != 1) {
-        if (temp_v1 == 2) {
-          temp_v1 = FUN_004abb08(g_btlUiBlock);
-          if (temp_v1 == 0) {
-            return;
-          }
-          temp_v0 = 2;
-          param_1[2] = temp_v0;
-          return;
+    task->nextState = state;
+}
+
+/* Per-frame handler for the battle intro state machine. */
+void FUN_00412248(BtlIntroTask *task)
+{
+    int i;
+
+    switch (task->state) {
+    case 1:
+        switch (task->step) {
+        case 0:
+            if (resourceTestPendingRecordsReady(g_btlAux, 1) == 0) {
+                break;
+            }
+            FUN_004f950c(g_btlAux, 1);
+            task->step = task->step + 1;
+            break;
+        case 1:
+            if (FUN_004fa0d8(g_btlAux) == 0) {
+                break;
+            }
+            task->step = task->step + 1;
+            break;
+        case 2:
+            if (FUN_004abb08(g_btlUiBlock) == 0) {
+                break;
+            }
+            btlIntroSetNextState(task, 2);
+            break;
         }
-      }
-      else {
-        temp_v1 = FUN_004fa0d8(g_btlAux);
-        if (temp_v1 != 0) {
-          param_1[4] = param_1[4] + 1;
-          return;
+        break;
+    case 2:
+        FUN_004112c4(task);
+        break;
+    case 3:
+        if (task->step != 0 || task->dataFile == 0) {
+            break;
         }
-      }
-    }
-    else {
-      temp_v1 = g_btlAux;
-      resourceTestPendingRecordsReady(g_btlAux,1);
-      if (temp_v1 != 0) {
-        FUN_004f950c(g_btlAux,1);
-        param_1[4] = param_1[4] + 1;
-        return;
-      }
-    }
-    break;
-  case 2:
-    FUN_004112c4(param_1);
-    return;
-  case 3:
-    if ((param_1[4] == 0) && (param_1[0x61] != 0)) {
-      dataTableFileGetTable(param_1[0x61],0);
-      temp_v0 = dataTableGetEntries();
-      param_1[0x62] = temp_v0;
-      temp_v0 = 4;
-      param_1[2] = temp_v0;
-      return;
-    }
-    break;
-  case 4:
-    FUN_004119fc(param_1);
-    return;
-  case 5:
-    FUN_00410d44(param_1);
-    return;
-  case 6:
-    FUN_00410628(param_1);
-    return;
-  case 7:
-    *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
-    FUN_004f8f08(g_btlAux);
-    temp_v0 = 0;
-    param_1[2] = temp_v0;
-    return;
-  case 8:
-    temp_v1 = btlUiIsIdleB(g_btlUiBlock);
-    if ((temp_v1 != 0) && ((temp_v1 = dialogIsActive(), temp_v1 == 0 || ((unsigned int)param_1[3] >= 0x37)))) {
-      dialogClose(1);
-      temp_v0 = 9;
-      param_1[2] = temp_v0;
-      return;
-    }
-    break;
-  case 9:
-    temp_v1 = chainCountIdUnflagged(g_btlActionReflect,0);
-    if (temp_v1 < 1) {
-      btlGetMainState();
-      temp_v1 = FUN_003ecd94();
-      if (temp_v1 != 0) {
-        temp_v1 = 0;
-        do {
-          temp_v2 = FUN_004aa768(g_btlUiBlock,temp_v1);
-          if (temp_v2 == 0) {
-            return;
-          }
-          temp_v1 = temp_v1 + 1;
-        } while (temp_v1 < 4);
-        temp_v1 = FUN_004ab784(g_btlUiBlock);
-        if (temp_v1 == 0) {
-          return;
+        dataTableFileGetTable(task->dataFile, 0);
+        task->dataEntries = dataTableGetEntries();
+        btlIntroSetNextState(task, 4);
+        break;
+    case 4:
+        FUN_004119fc(task);
+        break;
+    case 5:
+        FUN_00410d44(task);
+        break;
+    case 6:
+        FUN_00410628(task);
+        break;
+    case 7:
+        g_btlCamera->flags &= ~0x4000;
+        FUN_004f8f08(g_btlAux);
+        btlIntroSetNextState(task, 0);
+        break;
+    case 8:
+        if (btlUiIsIdleB(g_btlUiBlock) != 0 && (dialogIsActive() == 0 || task->timer >= 55)) {
+            dialogClose(1);
+            btlIntroSetNextState(task, 9);
         }
-      }
-      param_1[2] = 0;
-      return;
+        break;
+    case 9:
+        if (chainCountIdUnflagged(g_btlActionReflect, 0) > 0) {
+            break;
+        }
+        btlGetMainState();
+        if (FUN_003ecd94() != 0) {
+            for (i = 0; i < 4; i++) {
+                if (FUN_004aa768(g_btlUiBlock, i) == 0) {
+                    break;
+                }
+            }
+            if (FUN_004ab784(g_btlUiBlock) == 0) {
+                break;
+            }
+        }
+        btlIntroSetNextState(task, 0);
+        break;
     }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x421740; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Empty virtual method. */
+void FUN_0036e0f4(void)
+{
+}
+
+} /* extern "C" */

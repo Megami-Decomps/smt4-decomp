@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail closes the native handle with SVC 0x23, which is prohibited by the no-intrinsics rule. */
+/* NON_MATCHING: retail tests the result sign with lsrs r0,r0,#31 (and swaps r4/r5); armcc here emits cmp r0,#0. */
 #include "common.h"
 #include "nn/svc.h"
 extern "C" {

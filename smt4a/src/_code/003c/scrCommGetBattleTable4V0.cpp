@@ -14,9 +14,9 @@ extern Row4 *dataTableGetEntries(void *table);
 extern void scrSetResult(u32 value);
 
 /* Script command: result is halfword v0 of row `argument 0` of the battle's table 4. */
-u32 scrCommGetBattleTable4V0(s32 argIndex)
+u32 scrCommGetBattleTable4V0(void)
 {
-    s32 row = scrGetArg(argIndex);
+    s32 row = scrGetArg(0);
     void *state = btlGetMainState();
     Row4 *rows = dataTableGetEntries(btlGetTable(state, 4));
 

@@ -12,7 +12,7 @@ extern GameState g_gameState;
 /* Script command: passes the script's first argument to FUN_0027d5ac, then runs mapDepartSetTarget and asdSequenceRequest. */
 s32 scrCommRequestMapDeparture(void)
 {
-    u32 value = scrGetArg();
+    u32 value = scrGetArg(0);
 
     scrGetArg(1);
     FUN_0027d5ac(value);

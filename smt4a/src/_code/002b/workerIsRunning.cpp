@@ -10,13 +10,15 @@ typedef struct Job {
 
 s32 jobFind(u32 id);
 
-/* Returns 1 when the job record `*ref` exists and its job is found or it has not started. */
-u32 workerIsRunning(Job **ref)
+extern Job *g_clearSave;
+
+/* Returns 1 when the clear-save job exists and its job is found or it has not started. */
+u32 workerIsRunning(void)
 {
     s32 found;
     Job *job;
 
-    job = *ref;
+    job = g_clearSave;
     if ((job != NULL) && ((found = jobFind(job->id), found != 0 || (job->started == 0)))) {
         return 1;
     }

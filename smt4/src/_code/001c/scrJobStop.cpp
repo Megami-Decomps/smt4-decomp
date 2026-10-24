@@ -8,7 +8,7 @@ extern int jobIsValid(u32 job);
 
 u32 scrJobStop(void)
 {
-    u32 job = scrGetArg();
+    u32 job = scrGetArg(0);
     int valid = jobIsValid(job);
 
     if (valid != 0) {

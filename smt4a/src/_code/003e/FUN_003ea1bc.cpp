@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: called by FUN_003b8808; not written yet. */
-#include "common.h"
+#include "battle/btlMain.h"
+
+extern "C" {
+
+extern BtlMainGlobalsA g_btlMain;
+
+/* The battle global's word at 0x24 (the state argument goes unused). */
+u32 FUN_003ea1bc(BtlMainStateA *state)
+{
+    return g_btlMain.unk24;
+}
+
+} /* extern "C" */

@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x557d74; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+int asdMemFree(void *block);
+
+/* Virtual slot that releases its second argument. */
+void FUN_0041ac28(void *self, void *block)
+{
+    asdMemFree(block);
+}
+
+} /* extern "C" */

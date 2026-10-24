@@ -8,7 +8,7 @@ int qsort(...);
 int FUN_00203b40(...);
 int FUN_0020d3d4(int);
 int FUN_0023f788(int);
-int FUN_002a4914(...);
+int scrollOwnerSelectIndex(...);
 int FUN_002a4964(...);
 int sysMemClear(...);
 int FUN_004c67d0(void);
@@ -35,7 +35,7 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_0020d3d4. */
 /* Supplied declaration required: FUN_0023f788. */
 extern int btlMainGetUnk14(void);
-/* Supplied declaration required: FUN_002a4914. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0047fbb4(unsigned int);
@@ -248,7 +248,7 @@ void FUN_0021a9e8(int param_1)
       FUN_00203b40(param_1 + 0x3db4,*(int *)(param_1 + 0x3e18) != 0,1,1,0,1);
       FUN_00203b40(param_1 + 0x3b14,temp_v1,6,1,0,1);
       qsort(param_1 + 0x3ca8,temp_v1,2,dataTableCompareIdsByOrder);
-      FUN_002a4914(param_1 + *piVar8 * 100 + 0x38bc,0);
+      scrollOwnerSelectIndex(param_1 + *piVar8 * 100 + 0x38bc,0);
       *(int *)(param_1 + 0x3c40) = temp_v6;
       return;
     }

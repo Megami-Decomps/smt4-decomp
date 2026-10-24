@@ -1,2 +1,9 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5c1004; not written yet. */
 #include "common.h"
+
+extern "C" int asdMemFree(void *block);
+
+/* Frees a block. */
+extern "C" void FUN_00381730(void *block)
+{
+    asdMemFree(block);
+}

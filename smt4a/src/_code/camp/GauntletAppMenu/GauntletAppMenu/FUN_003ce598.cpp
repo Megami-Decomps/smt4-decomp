@@ -9,7 +9,7 @@ int eventQueueAddUnique(...);
 int campResetScreen(void);
 int useCounterStart(void);
 int msgWindowReset(void);
-int FUN_002a48e0(...);
+int scrollOwnerSetValue(...);
 int FUN_003180c4(...);
 int flaggedEntrySetValueA(...);
 int FUN_0031f208(...);
@@ -72,7 +72,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a48e0. */
+/* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: FUN_002a4964. */
 extern int messageGetChoiceResult(void);
 extern int objectApplyIfUnblocked(int);
@@ -436,7 +436,7 @@ unsigned int FUN_003ce598(void)
         temp_v8 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
         temp_v5 = flaggedEntryGetValueA(temp_v6 + 0x10);
         FUN_003d1aa0(temp_v6);
-        FUN_002a48e0(temp_v6 + 0x10,temp_v8);
+        scrollOwnerSetValue(temp_v6 + 0x10,temp_v8);
         flaggedEntrySetValueA(temp_v6 + 0x10,temp_v5);
         FUN_0021b1a8(temp_v6);
         FUN_003dc0c0(temp_v6,3);

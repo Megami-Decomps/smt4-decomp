@@ -1,2 +1,35 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4724bc; not written yet. */
 #include "common.h"
+
+struct ChildBlock {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+};
+
+struct Owned {
+    /* 0x00 */ u8 unk00[0xc0];
+    /* 0xC0 */ u8 block[0xf];
+    /* 0xCF */ u8 enabled;
+};
+
+struct Holder {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ Owned *owned;
+    /* 0x28 */ ChildBlock *child;
+};
+
+extern "C" {
+
+void FUN_001f67ec(void *block, u32 value);
+
+/* Virtual slot: when the owned object is enabled, passes its block and the child's value on. */
+void FUN_002c7314(Holder *self)
+{
+    Owned *owned = self->owned;
+    u8 *block = owned->block;
+
+    if (owned->enabled) {
+        FUN_001f67ec(block, self->child->value);
+    }
+}
+
+} /* extern "C" */

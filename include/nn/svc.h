@@ -9,21 +9,38 @@
 /* The wrappers retail keeps as functions (svc N; bx lr) are written with the intrinsics below;
  * armlink replaces each call to them with the svc instruction, so callers use them as functions. */
 extern "C" s32 svcCloseHandle(u32 handle);
+extern "C" s32 svcSetThreadPriority(u32 thread, s32 priority);
 extern "C" s64 svcGetSystemTick(void);
 
 namespace nn {
 namespace svc {
 
+/* Calls that return a value besides the result code hand it back in r1. */
+struct ResultAndValue {
+    s32 result;
+    u32 value;
+};
+
+/* Never returns to the caller's thread. */
+__svc(0x09) void ExitThread(void);
 __svc(0x0c) s32 SetThreadPriority(u32 thread, s32 priority);
 __svc(0x14) s32 ReleaseMutex(u32 mutex);
 __svc(0x18) s32 SignalEvent(u32 event);
 __svc(0x19) s32 ClearEvent(u32 event);
 __svc(0x1f) s32 MapMemoryBlock(u32 handle, u32 address, u32 myPermission, u32 otherPermission);
 __svc(0x23) s32 CloseHandle(u32 handle);
+/* Returns the semaphore's previous count in r1. */
+/* Returns the new semaphore handle in r1. */
+__svc(0x15) __value_in_regs ResultAndValue CreateSemaphoreRaw(u32 unused, u32 initialCount, u32 maxCount);
+/* Returns the session handle in r1. */
+__svc(0x2d) __value_in_regs ResultAndValue ConnectToPortRaw(u32 unused, const char *name);
+__svc(0x16) __value_in_regs ResultAndValue ReleaseSemaphoreRaw(u32 unused, u32 semaphore, u32 releaseCount);
 /* The 64-bit timeout travels in r2:r3 (r1 is skipped by the calling convention). */
 __svc(0x24) s32 WaitSynchronization1(u32 handle, u32 skipped, u32 timeoutLow, u32 timeoutHigh);
 __svc(0x28) s64 GetSystemTick(void);
 __svc(0x32) s32 SendSyncRequest(u32 session);
+__svc(0x35) __value_in_regs ResultAndValue GetThreadIdRaw(u32 unused, u32 thread);
+__svc(0x38) __value_in_regs ResultAndValue GetResourceLimitRaw(u32 unused, u32 process);
 
 } // namespace svc
 

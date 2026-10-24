@@ -18,9 +18,9 @@ u32 scrGetArgString(u32 index);
 u16 scrGetArg(int index);
 
 /* Script command: activates the global entry with value = script argument 0 and passes argument 1 (via scrGetArgString) to libc_strcpy for its text. */
-u32 gameStateSetActiveFromScript(int firstArg)
+u32 gameStateSetActiveFromScript(void)
 {
-    u16 value = scrGetArg(firstArg);
+    u16 value = scrGetArg(0);
     u32 arg = scrGetArgString(1);
 
     g_gameState.active = 1;

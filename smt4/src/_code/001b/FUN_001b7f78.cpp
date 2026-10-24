@@ -147,7 +147,7 @@ int FUN_00275dc4(void);
 int FUN_00275dec(void);
 int battlePrepareEncounter(void);
 int FUN_00275e4c(void);
-int FUN_00275f00(void);
+int buttonHelpSelectMapPreset(void);
 int FUN_00275f8c(void);
 int mapFlagSlotsRetireByKey(...);
 int gameCopyPersistentSave(void);
@@ -549,7 +549,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_00275dec. */
 /* Supplied declaration required: battlePrepareEncounter. */
 /* Supplied declaration required: FUN_00275e4c. */
-/* Supplied declaration required: FUN_00275f00. */
+/* Supplied declaration required: buttonHelpSelectMapPreset. */
 /* Supplied declaration required: FUN_00275f8c. */
 extern int FUN_00276060(unsigned int);
 /* Supplied declaration required: mapFlagSlotsRetireByKey. */
@@ -2803,7 +2803,7 @@ LAB_001bb1d4:
          ((temp_v10 = lmapSceneGetUnk0(), temp_v10 == 1 && (*(char *)(DAT_004474f4 + 0xb0) == '\0')))) {
         if ((*(int *)(DAT_004474f4 + 0xac) != 0) && (temp_v10 = inputIsQuestMenuPressed(), temp_v10 != 0)) {
           *(unsigned int *)(DAT_004474f4 + 0xac) = 0;
-          FUN_00275f00();
+          buttonHelpSelectMapPreset();
           if (*(int *)(g_lmapScene + 0x188) == 0) {
             *(unsigned int *)(g_lmapScene + 0x188) = 2;
           }
@@ -2826,7 +2826,7 @@ LAB_001bb1d4:
             else if (temp_v12 != -1) {
               if (temp_v12 != 2) {
                 if (temp_v12 == 0) {
-                  FUN_00275f00();
+                  buttonHelpSelectMapPreset();
                 }
               }
               else {
@@ -2836,7 +2836,7 @@ LAB_001bb1d4:
             }
             else {
               *(unsigned int *)(temp_v10 + 0xac) = 0;
-              FUN_00275f00();
+              buttonHelpSelectMapPreset();
             }
           }
           else {
@@ -2851,7 +2851,7 @@ LAB_001bb1d4:
               temp_v12 = *(int *)(temp_v10 + 0xac);
               if (temp_v12 == 2) {
                 *(unsigned int *)(temp_v10 + 0xac) = 0;
-                FUN_00275f00();
+                buttonHelpSelectMapPreset();
               }
               else {
                 temp_v19 = temp_v12 == 0;
@@ -2864,7 +2864,7 @@ LAB_001bb1d4:
                   buttonHelpSetPreset(temp_v16);
                 }
                 else if (temp_v12 == 0) {
-                  FUN_00275f00();
+                  buttonHelpSelectMapPreset();
                 }
               }
             }
@@ -3173,7 +3173,7 @@ LAB_001bb1d4:
       }
       else {
         gameJumpRequestClear();
-        FUN_00275f00();
+        buttonHelpSelectMapPreset();
         lmapSetSceneId(1);
         DAT_0049f934 = 0;
         DAT_0049f93c = 0;
@@ -3235,7 +3235,7 @@ LAB_001bbd00:
       return 0;
     }
     scrLoaderFreeBuffers(g_aocMain + 0xa8);
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     mapMainEnterScene();
     *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
     lmapSetSceneId(1);
@@ -3265,7 +3265,7 @@ LAB_001bbd00:
       return 0;
     }
     scrLoaderRelease(g_aocMain + 0xa8);
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     temp_v9 = gameJumpRequestIsPending();
     if (temp_v9 != 0) {
       temp_v9 = 0x1d;
@@ -3302,7 +3302,7 @@ LAB_001bc008:
       return 0;
     }
     FUN_002895a8(g_aocMain + 0xa8);
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     temp_v9 = gameJumpRequestIsPending();
     if (temp_v9 == 0) goto LAB_001bc008;
     temp_v9 = 0x1d;
@@ -3485,7 +3485,7 @@ LAB_001bc008:
     }
     temp_v10 = messageMainGetChoiceResult();
     if (temp_v10 != 0) {
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       FUN_00273358(0xffffffff);
       lmapSetSceneId(1);
       DAT_0049fb45 = 1;
@@ -3549,7 +3549,7 @@ LAB_001bc008:
     DAT_0049fb6a = 0;
     temp_v10 = messageMainGetChoiceResult();
     if (temp_v10 != 0) {
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       FUN_00273358(0xffffffff);
       lmapSetSceneId(1);
       DAT_0049fb45 = 1;
@@ -4123,7 +4123,7 @@ joined_r0x001bce40:
       DAT_0049f934 = 0;
       DAT_0049f93c = 0;
       navigationApplyOptionalValue(0);
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       puVar14[9] = 0x15;
       puVar14[10] = 0;
       return 0;
@@ -4311,7 +4311,7 @@ LAB_001bd824:
               if (temp_v9 != 1) {
                 return 0;
               }
-              FUN_00275f00();
+              buttonHelpSelectMapPreset();
               *(unsigned char *)((int)puVar14 + 0x47) = 1;
               DAT_0049fb45 = 1;
               DAT_0049fb46 = 1;
@@ -4359,7 +4359,7 @@ LAB_001bd824:
             DAT_0049f92c = (int)pcVar13[1];
             navigationSetArguments(DAT_0049f928);
             navigationApplyArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
-            FUN_00275f00();
+            buttonHelpSelectMapPreset();
             puVar14[9] = 0x15;
             puVar14[10] = 0;
             return 0;
@@ -4676,7 +4676,7 @@ LAB_001bd824:
       }
       FUN_0027db24(0);
       mapMainEnterScene();
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       *(unsigned char *)(DAT_004474f4 + 0xa4) = 1;
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
@@ -4720,7 +4720,7 @@ LAB_001bd824:
       puVar14[0x27] = 0;
       asdMemFree(puVar14[0x28]);
       puVar14[0x28] = 0;
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       lmapSetSceneId(1);
       *(unsigned char *)((int)puVar14 + 0x47) = 1;
       DAT_0049fb45 = 1;
@@ -5132,7 +5132,7 @@ LAB_001bec78:
           FUN_00277b5c(g_gameState,DAT_0049f920);
         }
         if (puVar14[9] == 0x15) {
-          FUN_00275f00();
+          buttonHelpSelectMapPreset();
         }
       }
     }
@@ -5155,7 +5155,7 @@ LAB_001bec78:
         puVar14[10] = 0;
       }
       else {
-        FUN_00275f00();
+        buttonHelpSelectMapPreset();
         DAT_0049f934 = 0;
         DAT_0049f93c = 0;
         DAT_0049fb45 = 1;
@@ -5451,7 +5451,7 @@ LAB_001bf6c8:
             puVar14[10] = 0;
           }
           else {
-            FUN_00275f00();
+            buttonHelpSelectMapPreset();
             DAT_0049f934 = 0;
             DAT_0049f93c = 0;
             DAT_0049fb45 = 1;

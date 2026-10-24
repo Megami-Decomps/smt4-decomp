@@ -1,2 +1,6 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x42092c; not written yet. */
 #include "common.h"
+
+/* An optional hook: nothing to do. */
+extern "C" void FUN_0034b164(void)
+{
+}

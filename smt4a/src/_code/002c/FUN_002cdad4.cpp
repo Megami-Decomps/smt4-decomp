@@ -1,80 +1,106 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cdad4` (_code @ 0x2cdad4, 0x238 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014e188(...);
-int uiSpriteInitializeState(...);
-int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int uiSpriteSelectAnim(...);
-int uiSpriteSetKeyframe(...);
-int pairSetHalves(...);
-int FUN_00387240(...);
-int paramsClearPacket(void);
+typedef struct PanelSpriteParameters {
+    u8 data[0x20];
+} PanelSpriteParameters;
 
-/* stack frame of param_1: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
+/* A 0x8C-byte UI sprite; only the fields this initializer writes are named. */
+typedef struct PanelSprite {
+    /* 0x00 */ u8 unk00[0x3A];
+    /* 0x3A */ u8 unk3A[0x52];
+} PanelSprite;
 
-extern unsigned char DAT_0052aa1c; /* 0x52aa1c */
-extern unsigned char DAT_0052aa4c; /* 0x52aa4c */
-extern unsigned char DAT_0052aa94; /* 0x52aa94 */
-extern unsigned char DAT_0052aac4; /* 0x52aac4 */
+typedef struct PanelSprites {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ PanelSprite frame;
+    /* 0x0AC */ PanelSprite icon;
+    /* 0x138 */ PanelSprite marker;
+    /* 0x1C4 */ PanelSprite cursor;
+    /* 0x250 */ u8 unk250[0x8C];
+    /* 0x2DC */ PanelSprite label;
+    /* 0x368 */ PanelSprite hint;
+    /* 0x3F4 */ u32 unk3F4;
+    /* 0x3F8 */ u32 unk3F8;
+} PanelSprites;
 
-/* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: uiSpriteInitializeState. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: pairSetHalves. */
-/* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: paramsClearPacket. */
+/* Animation key tables passed to paramsInit; the original file defined them statically. */
+static const s32 sPanelKeysA[] = {
+    400, 0, 4, 65136, 400, 16,
+    -4194240, 0, 5, 200, 0, 4,
+};
+static const f32 sPanelKeysB[] = {
+    0.0f, 1.0f, 8, 0.0f, 1.0f, 4,
+    1.0f, 1.0f, 10, 1.0f, 0.0f, 8,
+    0.0f, 1.0f, 3, 1.0f, 1.0f, 10,
+};
+static const f32 sPanelKeysC[] = {
+    0.0f, 1.0f, 8, 0.0f, 1.0f, 4,
+    0.0f, 3.0f, 8, 3.0f, 0.0f, 8,
+};
+static const s32 sPanelKeysD[] = {
+    -3, 0, -3, 0, 0, 0,
+    0, -1, 0, -1, -1, 0,
+    -1, 0, 0, 0, -3, 1,
+    0, 1, 0, -1, 0, -1,
+    -1, 0, -1, 0, 1, 0,
+    -3, 0, 0, 2, 0, -3,
+    0, -3, -3, 0, 3, 0,
+    -1, 0, -1, -1, 0, -1,
+    0, -3, 0, -3, 2, 0,
+    -3, 0, -3, 0, -3, 3,
+    0, -3, 0, -1, 0, -1,
+    -1, 0, -1, 0, -3, 0,
+    -3, 4, 0, -3, 0, -1,
+    0, -1, -1, 0, -1, 0,
+};
 
+void paramsClearPacket(PanelSpriteParameters *params);
+void paramsInit(PanelSpriteParameters *params, const void *first, u32 firstBytes, const void *second, u32 secondBytes,
+                const void *third, u32 thirdBytes, const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void FUN_0014e188(PanelSprite *sprite, u32 group, u32 image, PanelSprites *owner, u16 id, f32 scale);
+void uiSpriteInitializeState(PanelSprite *sprite, u32 group, s32 image, u32 kind, PanelSprites *owner, u16 id, f32 scale);
+void FUN_00387240(PanelSprite *sprite, u32 group, u32 image);
+void uiSpriteSelectAnim(PanelSprite *sprite, s32 animation);
+void uiSpriteSetKeyframe(PanelSprite *sprite, s32 keyframe, s32 restart);
+void spriteSetLayer(PanelSprite *sprite, u16 layer);
+void spriteSetVisible(PanelSprite *sprite, u8 visible);
+void pairSetHalves(PanelSprite *sprite, s32 width, s32 height);
 
-void FUN_002cdad4(int param_1)
-
+/* Builds the panel's six sprites and their resource parameters. */
+void FUN_002cdad4(PanelSprites *panel)
 {
-/* irregular: 8 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x3f8) = 0;
-  *(unsigned int *)(param_1 + 0x3f4) = 0;
-  paramsClearPacket();
-  paramsInit(param_1,&DAT_0052aa1c,0x30,&DAT_0052aa4c,0x48,&DAT_0052aa94,0x30,0,0,&DAT_0052aac4,
-               0x150);
-  FUN_0014e188(param_1 + 0x20,0xc,0x29,param_1,0x33);
-  *(unsigned short *)(param_1 + 0x5a) = 2;
-  FUN_00387240(param_1 + 0x20,0xc,0x29);
-  *(unsigned char *)(param_1 + 0x5c) = 1;
-  uiSpriteSelectAnim(param_1 + 0x20,0);
-  uiSpriteInitializeState(param_1 + 0x1c4,0xc,0xffffffff,7,param_1,0x38);
-  *(unsigned short *)(param_1 + 0x1fe) = 2;
-  FUN_00387240(param_1 + 0x1c4,0xc,0x29);
-  *(unsigned char *)(param_1 + 0x200) = 1;
-  uiSpriteSelectAnim(param_1 + 0x1c4,0);
-  uiSpriteInitializeState(param_1 + 0x138,0xc,0xffffffff,2,param_1,0x3d);
-  *(unsigned short *)(param_1 + 0x172) = 1;
-  *(unsigned char *)(param_1 + 0x174) = 1;
-  pairSetHalves(param_1 + 0x138,200,0x78);
-  uiSpriteSelectAnim(param_1 + 0x138,2);
-  uiSpriteInitializeState(param_1 + 0xac,0xc,0xffffffff,0,param_1,0x47);
-  *(unsigned short *)(param_1 + 0xe6) = 2;
-  FUN_00387240(param_1 + 0xac,0xc,0x2b);
-  *(unsigned char *)(param_1 + 0xe8) = 1;
-  uiSpriteSelectAnim(param_1 + 0xac,1);
-  FUN_0014e188(param_1 + 0x2dc,0xc,9,param_1,0xb);
-  uiSpriteSetKeyframe(param_1 + 0x2dc,2,0);
-  FUN_0014e188(param_1 + 0x368,0xc,5000,param_1,0x51);
-  FUN_00387240(param_1 + 0x368,0xc,0x29);
-  uiSpriteSelectAnim(param_1 + 0x368,4);
-  return;
+    panel->unk3F8 = 0;
+    panel->unk3F4 = 0;
+    paramsClearPacket((PanelSpriteParameters *)panel);
+    paramsInit((PanelSpriteParameters *)panel, sPanelKeysA, sizeof(sPanelKeysA), sPanelKeysB, sizeof(sPanelKeysB), sPanelKeysC,
+               sizeof(sPanelKeysC), NULL, 0, sPanelKeysD, sizeof(sPanelKeysD));
+    FUN_0014e188(&panel->frame, 0xc, 0x29, panel, 0x33, 1.0f);
+    spriteSetLayer(&panel->frame, 2);
+    FUN_00387240(&panel->frame, 0xc, 0x29);
+    spriteSetVisible(&panel->frame, 1);
+    uiSpriteSelectAnim(&panel->frame, 0);
+    uiSpriteInitializeState(&panel->cursor, 0xc, -1, 7, panel, 0x38, 1.0f);
+    spriteSetLayer(&panel->cursor, 2);
+    FUN_00387240(&panel->cursor, 0xc, 0x29);
+    spriteSetVisible(&panel->cursor, 1);
+    uiSpriteSelectAnim(&panel->cursor, 0);
+    uiSpriteInitializeState(&panel->marker, 0xc, -1, 2, panel, 0x3d, 1.0f);
+    spriteSetLayer(&panel->marker, 1);
+    spriteSetVisible(&panel->marker, 1);
+    pairSetHalves(&panel->marker, 200, 0x78);
+    uiSpriteSelectAnim(&panel->marker, 2);
+    uiSpriteInitializeState(&panel->icon, 0xc, -1, 0, panel, 0x47, 1.0f);
+    spriteSetLayer(&panel->icon, 2);
+    FUN_00387240(&panel->icon, 0xc, 0x2b);
+    spriteSetVisible(&panel->icon, 1);
+    uiSpriteSelectAnim(&panel->icon, 1);
+    FUN_0014e188(&panel->label, 0xc, 9, panel, 0xb, 1.0f);
+    uiSpriteSetKeyframe(&panel->label, 2, 0);
+    FUN_0014e188(&panel->hint, 0xc, 5000, panel, 0x51, 1.0f);
+    FUN_00387240(&panel->hint, 0xc, 0x29);
+    uiSpriteSelectAnim(&panel->hint, 4);
 }
 
 } /* extern "C" */

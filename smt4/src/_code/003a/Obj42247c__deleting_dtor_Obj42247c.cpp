@@ -2,7 +2,7 @@
 #include "common.h"
 #include "classes/Obj42247c.h"
 
-extern "C" void asdMemFreeNonNull(void *allocation);
+extern "C" int asdMemFreeNonNull(void *block);
 extern "C" u8 _ZTV9Obj42247c[];
 
 // Destroy the embedded touch selection before releasing the owner.

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 33 vs built 29 rows, 27 diff lines. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -20,7 +19,8 @@ PolyGeomBlock *effPolyFlashGeomCreate1(PolyParams *params)
     asdDebugTrace(DAT_00410408, 493);
     block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
-    block->data = block->payload;
+    u8 *payload = block->payload;
+    block->data = payload;
     block->self = block;
     block->geom = FUN_00247334(segments & 0xffff, 12, 13, &DAT_0047377a, 72);
     return block;

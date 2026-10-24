@@ -1,2 +1,6 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0044e794; not written yet. */
 #include "common.h"
+
+/* An optional hook: nothing to do. */
+extern "C" void FUN_0044b354(void)
+{
+}

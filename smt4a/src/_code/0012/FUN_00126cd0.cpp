@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0030dd24(void);
+int zlibDeflateInitBlock(void);
 
 extern char s__T_T__005c1c10[11]; /* 0x5c1c10 */
 extern char s__T_T_005c1c24[9]; /* 0x5c1c24 */
 extern unsigned char DAT_005c1c38; /* 0x5c1c38 */
 
-/* Supplied declaration required: FUN_0030dd24. */
+/* Supplied declaration required: zlibDeflateInitBlock. */
 
 
 void FUN_00126cd0(int param_1)
@@ -26,7 +26,7 @@ void FUN_00126cd0(int param_1)
   *(unsigned short *)(param_1 + 0x16b8) = 0;
   *(unsigned int *)(param_1 + 0x16bc) = 0;
   *(unsigned int *)(param_1 + 0x16b4) = 8;
-  FUN_0030dd24();
+  zlibDeflateInitBlock();
   return;
 }
 

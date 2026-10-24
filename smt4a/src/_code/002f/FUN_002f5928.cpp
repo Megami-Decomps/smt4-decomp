@@ -11,11 +11,11 @@ struct ObjFUN_002f5928 {
 };
 
 extern const u8 DAT_00559bf8[];
-ObjFUN_002f5928 *FUN_002e7168(ObjFUN_002f5928 *obj);
+ObjFUN_002f5928 *_ZN9Obj5590d0C1Ej(ObjFUN_002f5928 *obj);
 
 ObjFUN_002f5928 *FUN_002f5928(ObjFUN_002f5928 *obj)
 {
-    obj = FUN_002e7168(obj);
+    obj = _ZN9Obj5590d0C1Ej(obj);
     obj->unk2c = 2;
     obj->vtable = DAT_00559bf8;
     return obj;

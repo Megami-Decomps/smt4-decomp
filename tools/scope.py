@@ -67,11 +67,20 @@ def classify(game):
                 calls[a].add(b)
                 callers[b].add(a)
 
+    def veneer(a):
+        """armlink's code, not anyone's source: a long-branch veneer (`ldr pc, [pc, #-4]` and the
+        address) or an ARM-to-Thumb entry (`add ip, pc, #1; bx ip`)."""
+        import struct
+        first, second = struct.unpack_from("<II", code, a - base)
+        return not functions[a][2] and (first == 0xE51FF004 or (first & 0xFFFFFF00 == 0xE28FC000 and second == 0xE12FFF1C))
+
     label, reason = {}, {}
     for a in starts:
         name, where = functions[a][0], folder.get(a, "")
         if THIRD_PARTY.match(name):
             label[a], reason[a] = "third", "name"
+        elif functions[a][1] <= 8 and veneer(a):
+            label[a], reason[a] = "third", "linker"
         elif FIRST_PARTY.match(name) or (where and not ADDRESS_FOLDER.fullmatch(where)):
             label[a] = "first"
     changed = True
@@ -106,7 +115,7 @@ def main():
         lines = [f"{a:#010x} {name} {why}" for a, (name, why) in sorted(third.items())]
         out = ROOT / game / "config" / "third_party.txt"
         out.write_text("# Third-party functions, not counted in progress: written by tools/scope.py.\n"
-                       "# <address> <name at the time> <evidence: name | callers | between>\n"
+                       "# <address> <name at the time> <evidence: name | linker | callers | between>\n"
                        + "\n".join(lines) + "\n", encoding="utf-8", newline="\n")
         print(f"{game}: {len(third)} third-party functions -> {out.relative_to(ROOT)}")
 

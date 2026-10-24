@@ -20,8 +20,8 @@ struct ScriptContextView {
 
 extern "C" {
 extern ScriptContextView g_scrContext;
-extern s32 DAT_0061889c[];
-extern f32 DAT_00618e9c[];
+extern s32 g_scrIntVars[];
+extern f32 g_scrFloatVars[];
 
 // Read a stack value relative to the top and convert its typed representation to float.
 f32 scriptReadStackValueAsFloat(s32 depth)
@@ -36,9 +36,9 @@ f32 scriptReadStackValueAsFloat(s32 depth)
     case 1:
         return stack->values[index].real;
     case 2:
-        return static_cast<f32>(DAT_0061889c[stack->values[index].integer]);
+        return static_cast<f32>(g_scrIntVars[stack->values[index].integer]);
     case 3:
-        return DAT_00618e9c[stack->values[index].integer];
+        return g_scrFloatVars[stack->values[index].integer];
     default:
         return 0.0f;
     }

@@ -3668,3 +3668,194 @@
 0020f5e8 btlUnitDestroyDrawJobs inferred [high] end callback of btlUnit Calc job: stops job, removes/destroys the two draw objects and shuts down the owner
 0023b5e0 titleSceneMultiplyByCameraView inferred [med] multiplies a matrix by the title scene camera's view (identity fallback) into a destination
 002ee42c effEditorCreateJobs inferred [high] creates the effEditor Calc process and its four draw processes (strings effEditor*)
+002ee428 effEditorCreateJobsThunk inferred [high] stub in front of effEditorCreateJobs: its tail call to it is the branch-to-next NOP
+002ee42c effEditorCreateJobs inferred [high] creates the effect editor jobs
+003f5754 moCreateValueRecordThunk inferred [high] thunk in front of moCreateValueRecord: its tail call is the branch-to-next NOP
+003f575c moCreateValueRecord inferred [high] moCreateValueRecord
+003f64cc criticalSectionReadValue38Thunk inferred [high] thunk in front of criticalSectionReadValue38: its tail call is the branch-to-next NOP
+003f64d4 criticalSectionReadValue38 inferred [high] criticalSectionReadValue38
+00348888 _ZN9Obj420880D0Ev inferred deleting destructor (vtable slot 1 of _ZTV9Obj420880): frees the object
+003b3340 _ZN9Obj422564D1Ev inferred empty destructor (vtable slot 0 of _ZTV9Obj422564)
+0034079c _ZN9Obj42070812refreshRectsEv inferred vtable +0x0c of _ZTV9Obj420708 (Obj420794Child::refreshRects)
+00340720 _ZN9Obj42070814refreshOffsetsEv inferred vtable +0x08 of _ZTV9Obj420708 (Obj420794Child::refreshOffsets)
+003406e0 _ZN9Obj4207089setTargetEjjj inferred vtable +0x14 of _ZTV9Obj420708 (Obj420794Child::setTarget)
+003aa84c _ZN9Obj4223f8D0Ev inferred deleting destructor (vtable slot 1 of _ZTV9Obj4223f8)
+003aa77c _ZN9Obj4223f85unk0cEv inferred vtable +0x0c of _ZTV9Obj4223f8 (header slot unk0c)
+00379220 _ZN9Obj421a785vfunc0cEv inferred vtable +0x0c of _ZTV9Obj421a78
+002a301c _ZN9Obj422224C1Ev inferred constructor: stores vtable _ZTV9Obj422224+8 (0x42222c) then zeroes 0xb0 bytes of fields
+00343294 _ZN9Obj420780D0Ev inferred deleting destructor: vtable 0x420780 slot +4 (address point 0x420788); body is a tail call to asdMemFreeNonNull(this)
+0034ad8c _ZN9Obj4208d48vfunc18Ev inferred vtable 0x4208d4 slot +0x18 (address point 0x4208dc); tail call to asdMemFreeNonNull(this)
+00348880 _ZN9Obj4208808callbackEv inferred vtable 0x420880 slot +0x10 (Obj420794Child::callback); returns 0
+003aa50c _ZN9Obj4223f85unk14Ev inferred virtual unk14 hook of Obj4223f8 (slot 0x1c of _ZTV9Obj4223f8): empty
+003ac20c _ZN9Obj4224485unk0cEv inferred virtual unk0c of Obj422448 (slot 0x14 of _ZTV9Obj422448): dispatches the selected state handler (pointer-to-member table at 0xA5B8), same shape as Obj4223c4 dispatchSelectedHandler
+003ac444 _ZN9Obj422448D0Ev inferred deleting destructor (slot 0xc of _ZTV9Obj422448): stores _ZTV9Obj42247c+8, destroys touchSelection (_ZN9Obj55ca08D1Ev at 0x55c), frees with asdMemFreeNonNull
+0034a288 _ZN9Obj4208d4D0Ev inferred deleting destructor (slot 0xc of _ZTV9Obj4208d4): trivial destructor, only frees this with asdMemFreeNonNull
+003407cc _ZN9Obj420708D0Ev inferred deleting destructor, slot 1 of vtable 0x420708 (frees the block)
+003407b4 _ZN9Obj4207088callbackEv inferred Obj420794Child::callback slot (+0x10) of vtable 0x420708: position >= limit
+003494e8 _ZN9Obj4208b4D0Ev inferred deleting destructor, slot 1 of vtable 0x4208b4 (frees the block)
+00348868 _ZN9Obj42088012refreshRectsEv inferred Obj420794Child::refreshRects slot (+0xC) of vtable 0x420880: resets the scalar to 1
+003abd88 _ZNK9Obj42244813isScreenReadyEv inferred Obj42247c::isScreenReady slot (+0x24) of vtable 0x422448: both values set
+003abda8 _ZN9Obj4224485unk14Ev inferred Obj42247c::unk14 slot (+0x14) of vtable 0x422448
+003b3304 _ZN9Obj4225646decodeEPKhj inferred Obj422564::decode slot (+0xC) of vtable 0x422564: loads the 20-byte payload
+003b3344 _ZN9Obj4225648copyFlagsEPK20SelectionValueRecord inferred Obj422564::copyFlags slot (+0x18) of vtable 0x422564: copies the record
+003aab30 _ZN9Obj42242cD0Ev inferred D0 of the class whose vtable is at 0x42242c (derives Obj422594 through ObjBase3c2ef0, like Obj4223ac); runs the base destructor and frees
+0042242c _ZTV9Obj42242c inferred size:0x1c vtable stored by the class FUN_003aab30 is the deleting destructor of (slot0 stripped, slot1 = D0)
+0036de90 _ZN9Obj421698D1Ev inferred D1 of the class whose vtable is at 0x421698 (slot0 at 0x4216a0): stores the vtable and destroys the two AllocatedArray members at +24 and +8
+00421698 _ZTV9Obj421698 inferred size:0x1c vtable of the weighted-entry list owner (slot0 = D1 FUN_0036de90, weightedEntryListAdd at +0x14)
+002b51b8 _ZN14AllocatedArrayI13WeightedEntryED1Ev inferred AllocatedArray<WeightedEntry>::~AllocatedArray (twin of smt4a FUN_0017ef34); called for both array members of Obj421698
+0040b808 _ZTV9Obj40b808 evidence size:0xc vtable (address point 0x40b810; stored by FUN_003575cc)
+004207f0 _ZTV9Obj4207f0 evidence size:0x18 vtable (address point 0x4207f8; stored by asdMemoryInit)
+00420868 _ZTV9Obj420868 evidence size:0x10 vtable (address point 0x420870; stored by asdMemoryInit)
+004208a0 _ZTV9Obj4208a0 evidence size:0xc vtable (address point 0x4208a8; stored by FUN_001049ac)
+00420908 _ZTV9Obj420908 evidence size:0xc vtable (address point 0x420910; stored by FUN_001049ac)
+0042091c _ZTV9Obj42091c evidence size:0x14 vtable (address point 0x420924; stored by FUN_003f66f0)
+00420930 _ZTV9Obj420930 evidence size:0x18 vtable (address point 0x420938; stored by asdMemoryInit)
+004209bc _ZTV9Obj4209bc evidence size:0xc vtable (address point 0x4209c4; stored by FUN_003ec860)
+00420a1c _ZTV9Obj420a1c evidence size:0x10 vtable (address point 0x420a24; stored by FUN_003bbe6c, FUN_003bbf08)
+00420a50 _ZTV9Obj420a50 evidence size:0x18 vtable (address point 0x420a58; stored by FUN_003eff64)
+00420a68 _ZTV9Obj420a68 evidence size:0x18 vtable (address point 0x420a70; stored by FUN_003eff64)
+00420a80 _ZTV9Obj420a80 evidence size:0x24 vtable (address point 0x420a88; stored by FUN_00351b70)
+00420aa4 _ZTV9Obj420aa4 evidence size:0x24 vtable (address point 0x420aac; stored by FUN_00351b94)
+00420ac8 _ZTV9Obj420ac8 evidence size:0x34 vtable (address point 0x420ad0; stored by FUN_0034f8e8, mobiclipDecoderWrapperDestroy)
+00420afc _ZTV9Obj420afc evidence size:0x24 vtable (address point 0x420b04; stored by FUN_00351be4)
+00420c98 _ZTV9Obj420c98 evidence size:0x3c vtable (address point 0x420ca0; stored by FUN_003556c8)
+00420cf8 _ZTV9Obj420cf8 evidence size:0x50 vtable (address point 0x420d00; stored by FUN_003565e0)
+00420d48 _ZTV9Obj420d48 evidence size:0x3c vtable (address point 0x420d50; stored by FUN_0035633c)
+00420d88 _ZTV9Obj420d88 evidence size:0x1c vtable (address point 0x420d90; stored by FUN_003560bc)
+00420da8 _ZTV9Obj420da8 evidence size:0x40 vtable (address point 0x420db0; stored by FUN_001272fc, FUN_00355ecc, FUN_003564e8, FUN_00356664)
+00420dec _ZTV9Obj420dec evidence size:0x60 vtable (address point 0x420df4; stored by FUN_001393e4)
+00420e4c _ZTV9Obj420e4c evidence size:0x40 vtable (address point 0x420e54; stored by FUN_00358c24, FUN_00358cfc)
+00420ed4 _ZTV9Obj420ed4 evidence size:0x14 vtable (address point 0x420edc; stored by FUN_003eff64)
+00420eec _ZTV9Obj420eec evidence size:0x38 vtable (address point 0x420ef4; stored by FUN_003f20b4)
+00420f28 _ZTV9Obj420f28 evidence size:0xc vtable (address point 0x420f30; stored by FUN_0011cf04, FUN_003ec0bc)
+00420f4c _ZTV9Obj420f4c evidence size:0xc vtable (address point 0x420f54; stored by FUN_001392fc, unitHeapModuleInitialize)
+00420fd0 _ZTV9Obj420fd0 evidence size:0xc vtable (address point 0x420fd8; stored by FUN_003ee9bc)
+00420fec _ZTV9Obj420fec evidence size:0xc vtable (address point 0x420ff4; stored by FUN_0036203c)
+00420ffc _ZTV9Obj420ffc evidence size:0x2c vtable (address point 0x421004; stored by FUN_00362164, _ZN9Obj421654D1Ev)
+00421028 _ZTV9Obj421028 evidence size:0x30 vtable (address point 0x421030; stored by FUN_00148650, FUN_003621fc)
+00421058 _ZTV9Obj421058 evidence size:0x34 vtable (address point 0x421060; stored by FUN_0012abd0, FUN_0012adb8, FUN_00362888)
+00421094 _ZTV9Obj421094 evidence size:0x34 vtable (address point 0x42109c; stored by FUN_0011d9c4, FUN_0012b288, FUN_00362d64)
+004210e0 _ZTV9Obj4210e0 evidence size:0xc vtable (address point 0x4210e8; stored by FUN_0011dadc, FUN_003630b4)
+004210f0 _ZTV9Obj4210f0 evidence size:0x2c vtable (address point 0x4210f8; stored by FUN_0036359c)
+0042111c _ZTV9Obj42111c evidence size:0x38 vtable (address point 0x421124; stored by FUN_002a5dc4, FUN_00363a58)
+00421158 _ZTV9Obj421158 evidence size:0x34 vtable (address point 0x421160; stored by FUN_0012b48c, FUN_0012b64c, FUN_00363e48)
+00421194 _ZTV9Obj421194 evidence size:0x34 vtable (address point 0x42119c; stored by FUN_0012b8a0, FUN_00364610)
+004211c8 _ZTV9Obj4211c8 evidence size:0x14 vtable (address point 0x4211d0; stored by FUN_00364cf4)
+004211dc _ZTV9Obj4211dc evidence size:0xc vtable (address point 0x4211e4; stored by FUN_00365220)
+004211ec _ZTV9Obj4211ec evidence size:0xc vtable (address point 0x4211f4; stored by FUN_0012bf24)
+004211fc _ZTV9Obj4211fc evidence size:0x34 vtable (address point 0x421204; stored by FUN_003657dc)
+00421230 _ZTV9Obj421230 evidence size:0x84 vtable (address point 0x421238; stored by FUN_002b52b4, FUN_00362888, FUN_00362d64, FUN_00363e48)
+004212b4 _ZTV9Obj4212b4 evidence size:0x34 vtable (address point 0x4212bc; stored by FUN_0036752c)
+004212e8 _ZTV9Obj4212e8 evidence size:0x34 vtable (address point 0x4212f0; stored by FUN_00120000, FUN_0012c424, FUN_00367a58)
+00421324 _ZTV9Obj421324 evidence size:0x1c vtable (address point 0x42132c; stored by FUN_0012c628)
+00421340 _ZTV9Obj421340 evidence size:0x40 vtable (address point 0x421348; stored by FUN_0012ca58, FUN_00367dfc)
+00421384 _ZTV9Obj421384 evidence size:0x2c vtable (address point 0x42138c; stored by FUN_0015156c, FUN_00368100, _ZN9Obj421654D1Ev)
+004213b0 _ZTV9Obj4213b0 evidence size:0x20 vtable (address point 0x4213b8; stored by FUN_003f76a4)
+004213d4 _ZTV9Obj4213d4 evidence size:0x50 vtable (address point 0x4213dc; stored by FUN_003683d4)
+00421424 _ZTV9Obj421424 evidence size:0x38 vtable (address point 0x42142c; stored by FUN_0013e238, FUN_00368500)
+00421460 _ZTV9Obj421460 evidence size:0x54 vtable (address point 0x421468; stored by FUN_002a5dc4, FUN_00368a28)
+004214fc _ZTV9Obj4214fc evidence size:0x24 vtable (address point 0x421504; stored by FUN_0013ebe8, FUN_0036aa70)
+00421520 _ZTV9Obj421520 evidence size:0x24 vtable (address point 0x421528; stored by FUN_0036aab0)
+00421544 _ZTV9Obj421544 evidence size:0x24 vtable (address point 0x42154c; stored by FUN_0012d1fc, FUN_0013ec34, FUN_0036acc4)
+00421568 _ZTV9Obj421568 evidence size:0x30 vtable (address point 0x421570; stored by FUN_0036b0a0)
+004215a4 _ZTV9Obj4215a4 evidence size:0x24 vtable (address point 0x4215ac; stored by FUN_0012d318, FUN_0013ec9c, FUN_0036b360)
+004215c8 _ZTV9Obj4215c8 evidence size:0x2c vtable (address point 0x4215d0; stored by FUN_0036bcf8)
+00421774 _ZTV9Obj421774 evidence size:0x34 vtable (address point 0x42177c; stored by FUN_001204b8, FUN_0012db88, FUN_0036e488)
+004217a8 _ZTV9Obj4217a8 evidence size:0x3c vtable (address point 0x4217b0; stored by FUN_00370394)
+004217e4 _ZTV9Obj4217e4 evidence size:0x34 vtable (address point 0x4217ec; stored by FUN_0012b8a0, FUN_0012e780, FUN_002b3acc, FUN_00371b58)
+00421818 _ZTV9Obj421818 evidence size:0x34 vtable (address point 0x421820; stored by FUN_00140048, FUN_003728b8)
+0042184c _ZTV9Obj42184c evidence size:0xc vtable (address point 0x421854; stored by FUN_00372c6c)
+00421860 _ZTV9Obj421860 evidence size:0x14 vtable (address point 0x421868; stored by FUN_00373e30)
+004218b0 _ZTV9Obj4218b0 evidence size:0xc vtable (address point 0x4218b8; stored by FUN_002375a0, FUN_0037597c)
+004218c0 _ZTV9Obj4218c0 evidence size:0x30 vtable (address point 0x4218c8; stored by FUN_00148650, FUN_002b52b4, FUN_00362888, FUN_00362d64)
+004218f0 _ZTV9Obj4218f0 evidence size:0x20 vtable (address point 0x4218f8; stored by FUN_00376880)
+00421910 _ZTV9Obj421910 evidence size:0x20 vtable (address point 0x421918; stored by FUN_00376d14, FUN_00376d74)
+00421948 _ZTV9Obj421948 evidence size:0x54 vtable (address point 0x421950; stored by FUN_00376dd0)
+004219bc _ZTV9Obj4219bc evidence size:0x20 vtable (address point 0x4219c4; stored by FUN_003771e0)
+004219dc _ZTV9Obj4219dc evidence size:0x20 vtable (address point 0x4219e4; stored by FUN_003773d4)
+00421a40 _ZTV9Obj421a40 evidence size:0x14 vtable (address point 0x421a48; stored by FUN_00378a54, FUN_00378b40)
+00421ad4 _ZTV9Obj421ad4 evidence size:0x14 vtable (address point 0x421adc; stored by FUN_0014c0c4)
+00421ae8 _ZTV9Obj421ae8 evidence size:0x3c vtable (address point 0x421af0; stored by FUN_001407a0, FUN_0037a1bc)
+00421b24 _ZTV9Obj421b24 evidence size:0x60 vtable (address point 0x421b2c; stored by FUN_0037a540, FUN_0037a6c8)
+00421b84 _ZTV9Obj421b84 evidence size:0x14 vtable (address point 0x421b8c; stored by FUN_0014085c)
+00421b98 _ZTV9Obj421b98 evidence size:0x3c vtable (address point 0x421ba0; stored by FUN_0014085c, FUN_0037b114)
+00421bd4 _ZTV9Obj421bd4 evidence size:0x14 vtable (address point 0x421bdc; stored by FUN_003f3f34)
+00421be8 _ZTV9Obj421be8 evidence size:0x14 vtable (address point 0x421bf0; stored by FUN_003f3f34)
+00421bfc _ZTV9Obj421bfc evidence size:0x14 vtable (address point 0x421c04; stored by FUN_003f3f34)
+00421c10 _ZTV9Obj421c10 evidence size:0x60 vtable (address point 0x421c18; stored by FUN_003e6b1c)
+00421c70 _ZTV9Obj421c70 evidence size:0x20 vtable (address point 0x421c78; stored by FUN_0037b4b0, FUN_0037b544)
+00421cac _ZTV9Obj421cac evidence size:0x14 vtable (address point 0x421cb4; stored by FUN_003f3f34)
+00421cc0 _ZTV9Obj421cc0 evidence size:0x14 vtable (address point 0x421cc8; stored by FUN_003f3f34)
+00421cd4 _ZTV9Obj421cd4 evidence size:0x1c vtable (address point 0x421cdc; stored by FUN_0014c450, FUN_0037ba64)
+00421d10 _ZTV9Obj421d10 evidence size:0x14 vtable (address point 0x421d18; stored by FUN_00235c60)
+00421d24 _ZTV9Obj421d24 evidence size:0x14 vtable (address point 0x421d2c; stored by FUN_00150fc8, FUN_0015c404)
+00421d38 _ZTV9Obj421d38 evidence size:0x14 vtable (address point 0x421d40; stored by FUN_0014c888)
+00421d4c _ZTV9Obj421d4c evidence size:0x4c vtable (address point 0x421d54; stored by FUN_0037df5c, FUN_0037dfe4)
+00421dd4 _ZTV9Obj421dd4 evidence size:0x24 vtable (address point 0x421ddc; stored by FUN_001512e0, FUN_0037f188, FUN_0037f9a8)
+00421df8 _ZTV9Obj421df8 evidence size:0x14 vtable (address point 0x421e00; stored by FUN_0037e730)
+00421e0c _ZTV9Obj421e0c evidence size:0x24 vtable (address point 0x421e14; stored by FUN_0014c964, FUN_0037f188)
+00421e58 _ZTV9Obj421e58 evidence size:0x2c vtable (address point 0x421e60; stored by FUN_0014c9b4, FUN_0037f9a8)
+00421ed8 _ZTV9Obj421ed8 evidence size:0x14 vtable (address point 0x421ee0; stored by FUN_00380138)
+00421f04 _ZTV9Obj421f04 evidence size:0x14 vtable (address point 0x421f0c; stored by FUN_00141140)
+00421f18 _ZTV9Obj421f18 evidence size:0x3c vtable (address point 0x421f20; stored by FUN_00141140, FUN_00380864)
+00421f54 _ZTV9Obj421f54 evidence size:0x14 vtable (address point 0x421f5c; stored by FUN_0038093c, FUN_003809a0)
+00422108 _ZTV9Obj422108 evidence size:0x74 vtable (address point 0x422110; stored by FUN_00121e38, FUN_0038125c)
+004222cc _ZTV9Obj4222cc evidence size:0x18 vtable (address point 0x4222d4; stored by FUN_003955e4)
+004222e4 _ZTV9Obj4222e4 evidence size:0x18 vtable (address point 0x4222ec; stored by callbackOwnerInitialize)
+004222fc _ZTV9Obj4222fc evidence size:0x18 vtable (address point 0x422304; stored by FUN_00395e44)
+0042235c _ZTV9Obj42235c evidence size:0xc vtable (address point 0x422364; stored by FUN_003b3030)
+00422368 _ZTV9Obj422368 evidence size:0xc vtable (address point 0x422370; stored by FUN_003b3160)
+00422374 _ZTV9Obj422374 evidence size:0xc vtable (address point 0x42237c; stored by FUN_003b3030)
+0042238c _ZTV9Obj42238c evidence size:0x1c vtable (address point 0x422394; stored by FUN_003a8fe0)
+00421a98 _ZTV9Obj421a98 inferred size:0xc vtable inside the oversized _ZTV9Obj421a78 (size 0x2c): retail reloc is _ZTV9Obj421a78+0x28 = address point 0x421aa0 stored by FUN_0014bfec; _ZTV9Obj421a78 should end at 0x421a98 (size 0x20)
+00421d60 _ZTV9Obj421d60 inferred size:0x14 vtable inside the oversized _ZTV9Obj421d4c (size 0x4c): address point 0x421d68 (reloc _ZTV9Obj421d4c+0x1c) stored by FUN_0014c450; _ZTV9Obj421d4c should be size 0x14
+00421d74 _ZTV9Obj421d74 inferred size:0x24 vtable inside the oversized _ZTV9Obj421d4c: address point 0x421d7c (reloc _ZTV9Obj421d4c+0x30) stored by FUN_0014c900
+0014bfec _ZN9Obj421a98C1Ev inferred arm ctor: stores _ZTV9Obj421a98+8 and the float/counter defaults of the 0xF4-byte base
+0014c900 _ZN9Obj421d74C1Ev inferred arm ctor of the 0xA0-byte parameter holder: base ctor FUN_001512e0, three vptrs (_ZTV9Obj421d74+8, +0x38 at +0x44, +0x4c at +0x50), nw::snd CurveLfoParam init at +0x78
+002a7b78 _ZN9Obj421d10C1Ev inferred arm ctor: stores _ZTV9Obj421d10+8, initialises and signals the light event at +0xC
+0014c450 _ZN9Obj421cd4C1Ev inferred arm ctor of the 0x278-byte object: _ZTV9Obj421d60+8 first, Obj421c90 base at +0xC, then _ZTV9Obj421cd4+8 and secondary vptr at +0xC
+00141140 _ZN9Obj421f18C1Ej inferred arm ctor: base Obj421a98, params Obj421d74 at +0xF4, owner word at +0x194, embedded Obj421f04 signal object at +0x198, trailing state cleared (retail recovers the owner with sub #244 / #472 after each member ctor)
+0020eba8 scrComm_Game_IsFlagSet inferred [high] returns gameFlagIsSet(arg0)
+001ab980 scrComm_Sound_StopSlotById inferred [med] soundSlotStopById(arg0)
+002d8df8 scrComm_FrameTex_StartFade inferred [med] frameTexStartFade(arg0)
+002f8104 scrComm_Battle_SwitchBgmToBattleTrack inferred [med] bgmSwitchCurrent(battle, 0x0100003A)
+0032843c scrComm_Pad_IsButton0Pressed inferred [med] padIsButtonPressed(0) != 0
+002f504c scrComm_Game_RestoreWorkSave inferred [med] gameRestoreWorkSave(arg0)
+0030a994 scrComm_Quest_ResetEntriesMatchingValue inferred [med] scrSetResult(questResetEligibleEntriesMatchingValue(arg0))
+0030b658 scrComm_Save_IsRecordValueBounded inferred [med] scrSetResult(saveIsRecordValueBounded(arg0))
+0030b5ac scrComm_Party_HasStoredDemon inferred [med] scrSetResult(partyHasStoredDemon(arg0) != 0)
+002d8c00 scrComm_Sequence_RequestDeferred inferred [med] sequenceRequestDeferEx(arg0, string arg1)
+002e4024 scrComm_Battle_SetUnitParam13 inferred [med] btlUnitSetParam(scriptUnit, 0x13, arg0)
+002f10fc scrComm_Battle_SetUnitParam08 inferred [med] btlUnitSetParam(scriptUnit, 8, arg0)
+00224e10 scrComm_Battle_ClearUnitParam01 inferred [med] btlUnitSetParam(scriptUnit, 1, 0)
+002e3f70 scrComm_Battle_ClearUnitParam0B inferred [med] btlUnitSetParam(scriptUnit, 0xB, 0)
+002f774c scrComm_Devil_GetRecordByte2 inferred [med] devilGetRecord(arg0)->byte2
+001c35ac scrComm_Sound_RequestChannel60 inferred [med] soundChannelRequestIfEnabled(arg0, 0, 60)
+002ed43c messageIsWindowIdle inferred [med] g_messageMain window byte 0x7C == 0
+001a09b8 scrOpNop inferred [med] script opcode that only advances pc
+001a094c scrOpJump inferred [high] script opcode: pc = labels[operand].target
+00275f00 buttonHelpSelectMapPreset inferred [med] picks the map button-help preset from the scene id and progression flags
+003d9af8 handlePoolRequestIsDone inferred [med] polls the request registered under an id; unknown ids count as done
+002cfc50 scrComm_Battle_SetModeFromArg inferred [med] battle mode 11 when arg0 nonzero else 12
+0029e8b8 scrollOwnerSelectIndex inferred [med] selects an entry when unlocked, marks changed
+00298d64 scrollOwnerSetValue inferred [med] stores a selection value when unlocked, marks changed
+002f261c recordRankCompareWithTieBreak inferred [med] comparator: rank difference then FUN_002497f8
+003a8874 sortCompareU16Ascending inferred [high] qsort comparator: *a - *b on halfwords
+003acb78 sortCompareByGroupThenKey inferred [high] comparator: u16 at +0xe, then u16 at +0
+003aca7c sortCompareByGroupLevelKeyDescending inferred [high] comparator on b-a: u16 +0xe, byte +0xc, u16 +0
+0021a67c effPolyFlashLateUpdateKind inferred [high] runs kind lateUpdate callback while frame > 0
+001fc578 scrCommSetGameFlagOn inferred [high] script command: gameFlagSetValue(arg0, 1, 1)
+002cd998 scrCommDeferSequenceRequest inferred [high] script command: sequenceRequestDefer(arg0, arg1)
+001d2554 soundPlayAtNormalSpeed inferred [med] calls the sound player with speed 1.0
+003aa900 u16CompareDescending inferred [high] comparator: *second - *first on u16 pointers
+003aa8dc entryCompareByKeyThenId inferred [med] comparator: key descending, then id ascending
+003133b8 effParamsScaleCopy inferred [med] target params = source params * scale for nine floats
+00207d38 effPolyRingLateUpdateKind inferred [high] ring polygon: runs the kind late-update callback once frame > 0
+002cfc8c scrFlagBitIsSet inferred [high] script command: result = flagBitIsSet(arg0)
+002f76c0 scrBtlTalkBustUpDestroy inferred [high] script command: btlTalkBustUpDestroy
+002f7c08 scrGetPlayerValue inferred [med] script command: one of five player s16 values by arg0
+003aac88 entryCompareByKeyThenIdDescending inferred [med] qsort comparator
+0029205c bgmStopAllForced inferred [high] stops all BGM with fade frames: bgmStop(-1, frames, 1)
+003ac794 sortKeyCompareKindId inferred [med] comparator: kind then id
+001e293c mapDepartStopJob inferred [med] jobStop(g_mapDepart->job, 0)
+001e0654 bibleStopTask inferred [med] jobStop(g_bible.work->task, 0)

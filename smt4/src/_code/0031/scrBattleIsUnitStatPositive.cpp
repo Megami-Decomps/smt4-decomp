@@ -18,9 +18,9 @@ int scrSetResult(int value);
 int scrGetArg(int index);
 
 /* Script command: passes to scrSetResult whether the stat selected by script argument 0 (0 -> 7, 1 -> 10, 2 -> 11) is positive. */
-u32 scrBattleIsUnitStatPositive(int firstArg)
+u32 scrBattleIsUnitStatPositive(void)
 {
-    int which = scrGetArg(firstArg);
+    int which = scrGetArg(0);
     int slot = 0;
     Stats *stats;
 

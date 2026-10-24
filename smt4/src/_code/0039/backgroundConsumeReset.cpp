@@ -10,7 +10,7 @@ extern BackgroundResetState g_gameState;
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void FUN_00289880(void);
-void FUN_00275f00(void);
+void buttonHelpSelectMapPreset(void);
 
 // Consume a pending background reset, choosing the reset path by game flag 0x16.
 void backgroundConsumeReset(void)
@@ -26,6 +26,6 @@ void backgroundConsumeReset(void)
             break;
         }
     }
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
 }
 }

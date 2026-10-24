@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x55c7e0; not written yet. */
 #include "common.h"
+
+extern "C" {
+int asdOperatorDelete(void *block);
+
+/* Frees the object. */
+void FUN_00481ba4(void *object)
+{
+    asdOperatorDelete(object);
+}
+}

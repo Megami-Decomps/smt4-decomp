@@ -7,9 +7,9 @@ BtlMainState* btlGetMainState(void);
 BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, s32 id);
 
 // Reports whether the listed battle entry has flag 0x10000.
-u32 scrCommBattleEntryHasFlag(s32 argumentIndex)
+u32 scrCommBattleEntryHasFlag(void)
 {
-    s32 id = scrGetArg(argumentIndex);
+    s32 id = scrGetArg(0);
     BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     if (entry != NULL) {
         s32 result = entry->flags & 0x10000;

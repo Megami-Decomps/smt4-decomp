@@ -1,11 +1,8 @@
-/* NON_MATCHING: retail is svc #9 (ExitThread), then bx lr; implementing this SDK syscall requires the prohibited __svc/__asm mechanism. */
-/* romwright 0.5.0 decompilation of FUN_00144f88 for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: the SDK wrapper is hand-written (svc 9; bx lr); the __svc intrinsic call compiles with push {r4, lr}/pop {r4, pc} around the svc */
+#include "nn/svc.h"
 
-void FUN_00144f88(void)
-
+/* Ends the calling thread. */
+extern "C" void FUN_00144f88(void)
 {
-  software_interrupt(9);
-  return;
+    nn::svc::ExitThread();
 }
-*/
-#include "common.h"

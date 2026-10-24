@@ -9,7 +9,7 @@ int ptrListRemoveClearOwner(...);
 int campChangeState(...);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
-int FUN_0026f148(...);
+int campSelectorRebuildList(...);
 int FUN_002a4878(...);
 int campTouchRegionsRemoveGroup(...);
 int FUN_002cb278(...);
@@ -89,7 +89,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_0022e714(void);
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3d0(void);
-/* Supplied declaration required: FUN_0026f148. */
+/* Supplied declaration required: campSelectorRebuildList. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_0028b088. */
 extern int resourceRunOperationIfUnblocked(int);
@@ -678,7 +678,7 @@ LAB_001fea60:
   return;
 LAB_001fe16c:
   if (param_1 == 0x48) {
-    FUN_0026f148(0x48);
+    campSelectorRebuildList(0x48);
     gameSetStatusCameraHeightMode(0);
     temp_v2 = 0;
     goto LAB_001fe40c;
@@ -686,73 +686,73 @@ LAB_001fe16c:
   if (0x48 >= param_1) {
     switch(param_1) {
     case 0x13:
-      FUN_0026f148(0x13);
+      campSelectorRebuildList(0x13);
       temp_v3 = 0;
       gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x14:
-      FUN_0026f148(0x14);
+      campSelectorRebuildList(0x14);
       temp_v3 = 0;
       gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x15:
-      FUN_0026f148(0x15);
+      campSelectorRebuildList(0x15);
       gameSetStatusCameraHeightMode(0);
       break;
     case 0x16:
-      FUN_0026f148(0x16);
+      campSelectorRebuildList(0x16);
       temp_v3 = 1;
       gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x17:
-      FUN_0026f148(0x17);
+      campSelectorRebuildList(0x17);
       gameSetStatusCameraHeightMode(0);
       break;
     case 0x18:
-      FUN_0026f148(0x18);
+      campSelectorRebuildList(0x18);
       temp_v3 = 2;
       gameSetStatusCameraHeightMode(temp_v3);
       break;
     case 0x19:
-      FUN_0026f148(0x19);
+      campSelectorRebuildList(0x19);
       gameSetStatusCameraHeightMode(0);
     }
   }
   else {
     switch(param_1) {
     case 0x49:
-      FUN_0026f148(0x49);
+      campSelectorRebuildList(0x49);
       gameSetStatusCameraHeightMode(0);
       temp_v2 = 0;
       break;
     case 0x4a:
-      FUN_0026f148(0x4a);
+      campSelectorRebuildList(0x4a);
       gameSetStatusCameraHeightMode(0);
       temp_v2 = 0;
       break;
     case 0x4b:
-      FUN_0026f148(0x4b);
+      campSelectorRebuildList(0x4b);
       gameSetStatusCameraHeightMode(1);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4c:
-      FUN_0026f148(0x4c);
+      campSelectorRebuildList(0x4c);
       gameSetStatusCameraHeightMode(0);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4d:
-      FUN_0026f148(0x4d);
+      campSelectorRebuildList(0x4d);
       gameSetStatusCameraHeightMode(2);
       temp_v4 = resourceRunOperationIfUnblocked(temp_v13);
       temp_v8 = FUN_002a4894(temp_v13);
       temp_v2 = *(unsigned short *)(temp_v9 + (temp_v8 + temp_v4) * 2);
       break;
     case 0x4e:
-      FUN_0026f148(0x4e);
+      campSelectorRebuildList(0x4e);
       gameSetStatusCameraHeightMode(0);
       campCecPreviewEquipmentChoice(0);
     default:

@@ -1,10 +1,15 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the node allocation. */
+/* NON_MATCHING: debug trace and list/count struct now match; remaining difference is register allocation (retail keeps 0 in r2 and uses r5/r6/r7 for id, flag and the loop temp). */
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
+struct SoundHandleList {
+    /* 0x00 */ AsdSndHandleNode *head; /* the registered sounds */
+    /* 0x04 */ s32 count;
+};
+
 extern "C" {
-extern AsdSndHandleNode *g_soundHandleList; /* head of the registered sounds */
-extern s32 DAT_0063e948;               /* how many */
+extern SoundHandleList g_soundHandleList;
 
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
@@ -15,8 +20,8 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     AsdSndHandleNode *last;
     s32 i = 0;
 
-    node = g_soundHandleList;
-    if (0 < DAT_0063e948) {
+    node = g_soundHandleList.head;
+    if (0 < g_soundHandleList.count) {
         do {
             if (node == NULL) {
                 break;
@@ -26,15 +31,16 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
             }
             node = node->next;
             i++;
-        } while (i < DAT_0063e948);
+        } while (i < g_soundHandleList.count);
     }
 
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 4263);
     node = (AsdSndHandleNode *)asdMemoryAllocTracked(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdSndHandleNode), 1);
     node->id = id;
     node->unk0d = 0;
     node->unk0f = flag;
-    if (g_soundHandleList != NULL) {
-        for (last = g_soundHandleList; last->next != NULL; last = last->next) {
+    if (g_soundHandleList.head != NULL) {
+        for (last = g_soundHandleList.head; last->next != NULL; last = last->next) {
         }
         node->prev = last;
         node->next = NULL;
@@ -42,9 +48,9 @@ u32 asdSoundHandleListAdd(s32 id, u8 flag)
     } else {
         node->prev = NULL;
         node->next = NULL;
-        g_soundHandleList = node;
+        g_soundHandleList.head = node;
     }
-    DAT_0063e948++;
+    g_soundHandleList.count++;
     return 1;
 }
 

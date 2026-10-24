@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+extern "C" void asdOperatorDelete(void *block);
+
 /* A reference-counted model resource (a unit or NPC model file) kept in a 16-entry cache; the
  * object whose vtable is at 0x557b08 (named after it until its real name is known). Slot 0 is the
  * destructor; the vtable slot 0 entry is stripped from the retail image. */
@@ -14,6 +16,7 @@ public:
     {
     }
     virtual ~Obj557b08();
+    static void operator delete(void *block) { asdOperatorDelete(block); }
 
     /* 0x04 */ s32 id;     /* the unit id, negative for an NPC */
     /* 0x08 */ s32 kind;   /* 2 = NPC, 6 = unit */

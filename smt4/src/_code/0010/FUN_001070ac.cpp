@@ -19,7 +19,7 @@ typedef struct {
 } void_stack;
 
 extern int FUN_00111004(...); /* 0x111004 */
-extern int FUN_002a301c(...); /* 0x2a301c */
+extern int _ZN9Obj422224C1Ev(...); /* 0x2a301c */
 extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: aocThreadAllocateStorage. */
@@ -53,7 +53,7 @@ void FUN_001070ac(void)
     }
     else {
       temp_v0 = temp_v0 + 0xc;
-      __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_002a301c,0xb8,0x60);
+      __aeabi_vec_ctor_nocookie_nodtor(temp_v0,_ZN9Obj422224C1Ev,0xb8,0x60);
       *(unsigned char *)(temp_v0 + 0x4500) = 0;
       temp_v1 = FUN_00121fa0(temp_v0 + 0x4504);
       temp_v0 = temp_v1 - 0x4510;

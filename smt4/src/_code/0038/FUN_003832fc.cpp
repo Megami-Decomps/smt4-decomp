@@ -1,113 +1,121 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003832fc` (_code @ 0x3832fc, 0x238 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: duplicate-id scan: retail jumps from the inner loop straight to the outer loop's increment and does not unroll it; armcc unrolls this form */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b7bca(int, unsigned int, int, unsigned char *);
-int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int, unsigned int);
-int FUN_0031e2bc(unsigned int, unsigned char [64], int);
-int dataTable27Sub0GetCount(void);
+/* A picked hunter-company record: its index in data table 27 and the id used as the sort key. */
+typedef struct HunterPick {
+    /* 0x0 */ s32 recordIndex;
+    /* 0x4 */ s32 id;
+} HunterPick;
 
-extern unsigned char LAB_00381b7c; /* 0x381b7c */
-extern unsigned char LAB_00383538; /* 0x383538 */
-extern unsigned char LAB_00383550; /* 0x383550 */
+typedef struct HunterRecord {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u16 rank;
+    /* 0x62 */ u16 id;
+    /* 0x64 */ u16 pose;
+    /* 0x66 */ u16 requiredFlag;
+    /* 0x68 */ u16 forbiddenFlag;
+    /* 0x6A */ u8 unk6A[0x1E];
+} HunterRecord;
 
-extern int dataTable27Sub0GetRecord(int, unsigned int);
-extern int FUN_0023ea64(int);
-extern unsigned int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: textFormatBuffer. */
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_0031e2bc. */
-extern int FUN_00385afc(int);
-/* Supplied declaration required: dataTable27Sub0GetCount. */
-extern int FUN_00385b1c(int);
+typedef struct HunterSlot {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 text;
+} HunterSlot;
 
+typedef struct HunterCompany {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u32 state;
+    /* 0x008 */ u32 stateArg;
+    /* 0x00C */ u8 unk00C[4];
+    /* 0x010 */ s8 rank;
+    /* 0x011 */ u8 unk011[7];
+    /* 0x018 */ u8 randomizePoses;
+    /* 0x019 */ u8 unk019[7];
+    /* 0x020 */ u8 table[0xCF0];
+    /* 0xD10 */ HunterSlot *nameSlots[6];
+    /* 0xD28 */ HunterSlot *addSlots[6];
+    /* 0xD40 */ u8 unkD40[0x1C];
+    /* 0xD5C */ HunterPick picks[6];
+    /* 0xD8C */ s32 pickCount;
+} HunterCompany;
 
-void FUN_003832fc(int param_1)
+extern s32 sortCompareEntryKey(const HunterPick *left, const HunterPick *right);
+extern s32 FUN_0023ea64(u8 *table);
+extern s32 FUN_00385afc(u8 *table);
+extern s32 FUN_00385b1c(u8 *table);
+extern HunterRecord *dataTable27Sub0GetRecord(u8 *table, s32 index);
+extern s32 dataTable27Sub0GetCount(u8 *table);
+extern s32 gameFlagIsSet(s32 flag);
+extern void FUN_002b7bca(void *base, s32 count, s32 size, s32 (*compare)(const HunterPick *, const HunterPick *));
+extern s32 randBetween(s32 low, s32 high);
+extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
+extern void FUN_0031e2bc(u32 text, u8 *name, s32 flag);
 
+/* Picks up to six hunter-company records matching the current rank, sorts them by id and names their slots. */
+void FUN_003832fc(HunterCompany *company)
 {
-/* irregular: 2 goto(s); 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int *puVar8;
-  unsigned char temp_v7 [64];
-  
-  temp_v0 = FUN_0023ea64(param_1 + 0x20);
-  if (((temp_v0 != 0) && (temp_v0 = FUN_00385afc(param_1 + 0x20), temp_v0 != 0)) &&
-     (temp_v0 = FUN_00385b1c(param_1 + 0x20), temp_v0 != 0)) {
-    temp_v0 = dataTable27Sub0GetRecord(param_1 + 0x20,0);
-    temp_v5 = 0;
-    temp_v1 = param_1 + 0x20;
-    dataTable27Sub0GetCount();
-    puVar8 = (unsigned int *)(param_1 + 0xd8c);
-    if (0 < temp_v1) {
-      do {
-        temp_v1 = temp_v0 + temp_v5 * 0x88;
-        if ((((unsigned int)*(unsigned short *)(temp_v1 + 0x60) == (int)*(char *)(param_1 + 0x10)) &&
-            ((*(short *)(temp_v1 + 0x66) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) &&
-           ((*(short *)(temp_v1 + 0x68) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))) {
-          temp_v4 = *(int *)(param_1 + 0xd8c);
-          temp_v2 = 0;
-          if (temp_v2 < temp_v4) {
-            do {
-              if (*(unsigned int *)(param_1 + temp_v2 * 8 + 0xd60) == (unsigned int)*(unsigned short *)(temp_v1 + 0x62))
-              goto LAB_00383410;
-              temp_v2 = temp_v2 + 1;
-            } while (temp_v2 < temp_v4);
-          }
-          *(int *)(param_1 + temp_v4 * 8 + 0xd5c) = temp_v5;
-          *(unsigned int *)(param_1 + *puVar8 * 8 + 0xd60) = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
-          temp_v3 = *puVar8;
-          *puVar8 = temp_v3 + 1;
-          if (temp_v3 + 1 >= 6) break;
-        }
-LAB_00383410:
-        temp_v5 = temp_v5 + 1;
-        temp_v1 = param_1 + 0x20;
-        dataTable27Sub0GetCount();
-      } while (temp_v5 < temp_v1);
+    u8 name[64];
+    HunterRecord *records;
+    HunterRecord *record;
+    s32 i;
+    s32 j;
+    s32 pose;
+
+    if (FUN_0023ea64(company->table) == 0 || FUN_00385afc(company->table) == 0 ||
+        FUN_00385b1c(company->table) == 0) {
+        return;
     }
-    FUN_002b7bca(param_1 + 0xd5c,*(unsigned int *)(param_1 + 0xd8c),8,&LAB_00381b7c);
-    if (*(char *)(param_1 + 0x18) == '\x01') {
-      temp_v3 = 0;
-      do {
-        temp_v0 = 0;
-        if (temp_v0 < *(int *)(param_1 + 0xd8c)) {
-          do {
-            if (*(int *)(param_1 + temp_v0 * 8 + 0xd60) == temp_v3 + 1) {
-              temp_v0 = dataTable27Sub0GetRecord(param_1 + 0x20,*(unsigned int *)(param_1 + temp_v0 * 8 + 0xd5c));
-              if ((*(short *)(temp_v0 + 100) == 1) || (*(short *)(temp_v0 + 100) != 2)) {
-                temp_v6 = 2;
-              }
-              else {
-                temp_v6 = 1;
-              }
-              goto LAB_003834c0;
+    records = dataTable27Sub0GetRecord(company->table, 0);
+    for (i = 0; i < dataTable27Sub0GetCount(company->table); i++) {
+        record = &records[i];
+        if (record->rank != company->rank) {
+            continue;
+        }
+        if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0) {
+            continue;
+        }
+        if (record->forbiddenFlag != 0 && gameFlagIsSet(record->forbiddenFlag) != 0) {
+            continue;
+        }
+        for (j = 0; j < company->pickCount; j++) {
+            if ((u32)company->picks[j].id == record->id) {
+                break;
             }
-            temp_v0 = temp_v0 + 1;
-          } while (temp_v0 < *(int *)(param_1 + 0xd8c));
         }
-        temp_v6 = randBetween(1,2);
-LAB_003834c0:
-        textFormatBuffer(temp_v7,&LAB_00383538,temp_v3 + 1,temp_v6);
-        temp_v0 = param_1 + temp_v3 * 4;
-        FUN_0031e2bc(*(unsigned int *)(*(int *)(temp_v0 + 0xd10) + 8),temp_v7,0);
-        textFormatBuffer(temp_v7,&LAB_00383550,temp_v3 + 1,temp_v6);
-        FUN_0031e2bc(*(unsigned int *)(*(int *)(temp_v0 + 0xd28) + 8),temp_v7,0);
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < 6);
+        if (j < company->pickCount) {
+            continue;
+        }
+        company->picks[company->pickCount].recordIndex = i;
+        company->picks[company->pickCount].id = record->id;
+        company->pickCount++;
+        if ((u32)company->pickCount >= 6) {
+            break;
+        }
     }
-    *(unsigned int *)(param_1 + 4) = 2;
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  return;
+    FUN_002b7bca(company->picks, company->pickCount, sizeof(HunterPick), sortCompareEntryKey);
+    if (company->randomizePoses == 1) {
+        for (i = 0; i < 6; i++) {
+            for (j = 0; j < company->pickCount; j++) {
+                if (company->picks[j].id == i + 1) {
+                    break;
+                }
+            }
+            if (j < company->pickCount) {
+                record = dataTable27Sub0GetRecord(company->table, company->picks[j].recordIndex);
+                pose = (record->pose == 1 || record->pose != 2) ? 2 : 1;
+            } else {
+                pose = randBetween(1, 2);
+            }
+            textFormatBuffer(name, "hunter_company_npc%d_%d", i + 1, pose);
+            FUN_0031e2bc(company->nameSlots[i]->text, name, 0);
+            textFormatBuffer(name, "hunter_company_npc%d_%d_add1", i + 1, pose);
+            FUN_0031e2bc(company->addSlots[i]->text, name, 0);
+        }
+    }
+    company->state = 2;
+    company->stateArg = 0;
 }
 
 } /* extern "C" */

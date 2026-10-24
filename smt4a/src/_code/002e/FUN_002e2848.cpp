@@ -19,7 +19,7 @@ s32 objectApplyIfUnblocked(ScrollList *list);
 s32 widgetSubCallIfVisible(ScrollList *list);
 s32 FUN_002a4878(ScrollList *list);
 s32 FUN_002a4894(ScrollList *list);
-void FUN_002a4914(ScrollList *list, s32 value);
+void scrollOwnerSelectIndex(ScrollList *list, s32 value);
 void FUN_002a4964(ScrollList *list, s32 value);
 s16 FUN_002618c8(void);
 s16 FUN_002618e0(void);
@@ -44,7 +44,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
             return 1;
         }
         if (horizontal != 0) {
-            FUN_002a4914(list, position - 1);
+            scrollOwnerSelectIndex(list, position - 1);
         } else {
             FUN_002a4964(list, position - 1);
         }
@@ -55,7 +55,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
             if (widgetSubCallIfVisible(list) <= position) {
                 return 1;
             }
-            FUN_002a4914(list, position);
+            scrollOwnerSelectIndex(list, position);
         } else {
             if (objectApplyIfUnblocked(list) <= position) {
                 return 1;
@@ -74,7 +74,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
             if (x < 0 || barSize.x <= x) {
                 return 1;
             }
-            FUN_002a4914(list, static_cast<s16>(x * total / barSize.x));
+            scrollOwnerSelectIndex(list, static_cast<s16>(x * total / barSize.x));
             return 1;
         }
         if (y < 0 || barSize.y <= y) {

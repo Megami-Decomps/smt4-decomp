@@ -16,7 +16,7 @@ int wordListAt(unsigned int *, unsigned int);
 int FUN_0030c884(unsigned char [8], int);
 int recordListAt(int, unsigned int);
 int FUN_0030cac0(unsigned char [8]);
-int FUN_0030d0ac(unsigned char [8]);
+int _ZN9Obj55a88cC1Ev(unsigned char [8]);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 12 slot(s), 44 byte(s) */
@@ -56,8 +56,8 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 extern int elemVectorCount(void);
 extern unsigned int vectorCount4_0030c8ce(void);
 /* Supplied declaration required: FUN_0030cac0. */
-/* Supplied declaration required: FUN_0030d0ac. */
-extern int FUN_0030d3c8(unsigned int *, unsigned char *);
+/* Supplied declaration required: _ZN9Obj55a88cC1Ev. */
+extern int _ZN9Obj55a88cC1ERKS_(unsigned int *, unsigned char *);
 
 
 void FUN_0012bce8(int param_1)
@@ -100,7 +100,7 @@ void FUN_0012bce8(int param_1)
       temp_v19 = param_1 + 0x110;
       temp_v0 = elemVectorCount();
       if (temp_v0 != *(int *)(param_1 + 0x3f4)) {
-        FUN_0030d0ac(temp_v11);
+        _ZN9Obj55a88cC1Ev(temp_v11);
         temp_v7 = 0;
         piVar9 = (int *)(param_1 + 0x400);
         for (temp_v0 = *(int *)(param_1 + 0x3fc); *piVar9 != temp_v0; temp_v0 = temp_v0 + 0x18) {
@@ -156,7 +156,7 @@ void FUN_0012bce8(int param_1)
             puVar4[1] = *puVar5;
             puVar4[2] = temp_v7;
             *puVar4 = (unsigned int)&DAT_0055aec4;
-            temp_v0 = FUN_0030d3c8(puVar4 + 3,temp_v11);
+            temp_v0 = _ZN9Obj55a88cC1ERKS_(puVar4 + 3,temp_v11);
             temp_v0 = temp_v0 - 0xc;
           }
           piVar9[3] = temp_v0;

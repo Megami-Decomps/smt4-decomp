@@ -6,7 +6,7 @@ extern "C" {
 
 int asdSequenceRequest(...);
 void* asdOperatorNew(unsigned int size);
-int FUN_001919a4(void);
+int scriptPanelRelease(void);
 int FUN_0021c118(int, int);
 int campButtonHelpLoad(void);
 int asdOperatorDelete(unsigned int);
@@ -46,7 +46,7 @@ extern int DAT_005f1b74; /* 0x5f1b74 */
 
 /* Supplied declaration required: asdSequenceRequest. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001919a4. */
+/* Supplied declaration required: scriptPanelRelease. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0021c118. */
 /* Supplied declaration required: campButtonHelpLoad. */
@@ -143,7 +143,7 @@ unsigned int FUN_00236110(void)
     *(unsigned char *)(DAT_00588c30 + 0x19) = 4;
     *(unsigned char *)(temp_v0 + 0x18) = 1;
     if (*(int *)(temp_v0 + 0x1c) != 0) {
-      FUN_001919a4();
+      scriptPanelRelease();
       asdOperatorDelete(*(unsigned int *)(temp_v0 + 0x1c));
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }
@@ -183,7 +183,7 @@ unsigned int FUN_00236110(void)
     *(unsigned char *)(temp_v0 + 0x19) = 4;
     *(unsigned char *)(temp_v0 + 0x18) = 1;
     if (*(int *)(temp_v0 + 0x1c) != 0) {
-      FUN_001919a4();
+      scriptPanelRelease();
       asdOperatorDelete(*(unsigned int *)(temp_v0 + 0x1c));
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
     }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001291fc(unsigned int *);
 int FUN_00130a5c(int *, int *, int *, int *);
 int asdOperatorDeleteArray(...);
-int FUN_0030cdc0(int);
+int _ZN9Obj559608D1Ev(int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned char DAT_00559054; /* 0x559054 */
 /* Supplied declaration required: FUN_00130a5c. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002f5966(unsigned int *);
-/* Supplied declaration required: FUN_0030cdc0. */
+/* Supplied declaration required: _ZN9Obj559608D1Ev. */
 
 
 void FUN_00129288(unsigned int *param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -56,7 +56,7 @@ void FUN_00129288(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
     }
   }
   temp_v0 = FUN_002f5966(param_1 + 4);
-  FUN_0030cdc0(temp_v0 - 0x10);
+  _ZN9Obj559608D1Ev(temp_v0 - 0x10);
   return;
 }
 

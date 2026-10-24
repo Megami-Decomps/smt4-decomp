@@ -19,7 +19,7 @@ struct Unk233730Scroller {
 extern "C" {
 
 void FUN_0029f848(void *list, s32 total, s32 columns, s32 rows, s32 a, s32 b);
-void FUN_00298d64(void *list, s32 value);
+void scrollOwnerSetValue(void *list, s32 value);
 void flaggedEntrySetValueA(void *list, s32 value);
 void recordTrackDirtyValue(void *list, s32 value);
 void flaggedEntrySetValueB(void *list, s32 value);
@@ -38,7 +38,7 @@ void FUN_00233730(Unk233730Scroller *scroller, s32 visible, s32 total, s32 direc
     scroller->total = total;
     scroller->direction = direction;
     if (scroller->direction == UNK233730_HORIZONTAL) {
-        FUN_00298d64(scroller->list, 0);
+        scrollOwnerSetValue(scroller->list, 0);
         flaggedEntrySetValueA(scroller->list, 0);
     }
     if (scroller->direction == UNK233730_VERTICAL) {

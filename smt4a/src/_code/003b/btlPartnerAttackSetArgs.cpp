@@ -9,7 +9,7 @@ s32 scrGetArg(...);
 /* Script command: stores its two arguments in the partner attack state. */
 u32 btlPartnerAttackSetArgs(void)
 {
-    s32 arg0 = scrGetArg();
+    s32 arg0 = scrGetArg(0);
     s32 arg1 = scrGetArg(1);
 
     g_btlPartnerAttack->argument = arg0;

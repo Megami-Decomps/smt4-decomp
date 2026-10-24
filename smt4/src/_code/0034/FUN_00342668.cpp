@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x42077c; not written yet. */
 #include "common.h"
+
+extern "C" {
+int asdMemFreeNonNull(void *block);
+
+/* Frees the object. */
+void FUN_00342668(void *object)
+{
+    asdMemFreeNonNull(object);
+}
+}

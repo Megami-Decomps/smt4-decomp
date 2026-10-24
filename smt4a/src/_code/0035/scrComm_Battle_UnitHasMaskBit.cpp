@@ -3,7 +3,7 @@
 extern "C" {
 
 void scrSetResult(s32 result);
-u32 scrGetArg(void);
+u32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
@@ -11,7 +11,7 @@ extern u32 g_btlScriptUnit;
 /* Script command: tests one bit of the unit's mask; the script's argument is the bit number. */
 s32 scrComm_Battle_UnitHasMaskBit(void)
 {
-    u32 bit = scrGetArg();
+    u32 bit = scrGetArg(0);
     BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
     BtlUnitDataA *data = unit->data;
 

@@ -1,71 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00305314` (_code @ 0x305314, 0x72 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail builds the record in the loop without hoisting its vptr/flag constants (no r7, no spill of the vector pointer); the compiler hoists them and spills. */
+#include "sys/StreamReader.h"
+#include "stl/Obj559bb0Values.h"
 
 extern "C" {
+int streamReadU32(StreamReader *reader, u32 *value);
+void FUN_0011bfa6(StreamReader *reader, Obj559bb0 *record);
 
-int FUN_0011bfa6(int, unsigned char **);
-int FUN_001335cc(int, int, unsigned char **);
-int FUN_001336a8(int, unsigned int);
-int FUN_0030d27c(int, int);
-int FUN_0030d2a8(...);
-
-/* stack frame of param_2: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned char sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned char DAT_00559bb8; /* 0x559bb8 */
-
-/* Supplied declaration required: FUN_0011bfa6. */
-/* Supplied declaration required: FUN_001335cc. */
-/* Supplied declaration required: FUN_001336a8. */
-extern int streamReadU32(int, unsigned int *);
-/* Supplied declaration required: FUN_0030d27c. */
-/* Supplied declaration required: FUN_0030d2a8. */
-
-
-void FUN_00305314(int param_1,int param_2)
-
+/* Reads a count and that many records into the vector; any read error empties it again. */
+void FUN_00305314(StreamReader *reader, Obj559bb0Values *values)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2 [2];
-  unsigned char *temp_v3;
-  unsigned char temp_v4;
-  
-  FUN_0030d2a8(param_2);
-  temp_v0 = streamReadU32(param_1,temp_v2);
-  if (temp_v0 != 0) {
-    FUN_001336a8(param_2,temp_v2[0]);
-    temp_v1 = 0;
-    while( 1 ) {
-      if (temp_v2[0] <= temp_v1) {
-        return;
-      }
-      if (*(char *)(param_1 + 4) != '\0') {
-        return;
-      }
-      temp_v4 = 0;
-      temp_v3 = &DAT_00559bb8;
-      FUN_0011bfa6(param_1,&temp_v3);
-      if (*(char *)(param_1 + 4) != '\0') break;
-      temp_v0 = *(int *)(param_2 + 4);
-      if (temp_v0 != *(int *)(param_2 + 8)) {
-        *(int *)(param_2 + 4) = temp_v0 + 0x18;
-        FUN_0030d27c(param_2,temp_v0);
-      }
-      else {
-        FUN_001335cc(param_2,temp_v0,&temp_v3);
-      }
-      temp_v1 = temp_v1 + 1;
+    values->clear();
+    u32 count;
+    if (streamReadU32(reader, &count)) {
+        values->reserve(count);
+        for (u32 i = 0; i < count && !reader->error; ++i) {
+            Obj559bb0 record;
+            FUN_0011bfa6(reader, &record);
+            if (reader->error) {
+                values->clear();
+                return;
+            }
+            values->push_back(record);
+        }
     }
-    FUN_0030d2a8();
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0012575c(int *, int *, int *);
 int FUN_00128a54(int *, int, int, int, int *, int *, int, int, int);
-int FUN_0030dd24(int *);
-int FUN_0030dd7e(int *, int, int, int);
-int FUN_0030e2b0(int *);
+int zlibDeflateInitBlock(int *);
+int zlibTrStoredBlock(int *, int, int, int);
+int zlibBiWindup(int *);
 int FUN_0030e3a0(int *, int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -20,9 +20,9 @@ typedef struct {
 extern int FUN_001256f4(int *);
 /* Supplied declaration required: FUN_0012575c. */
 /* Supplied declaration required: FUN_00128a54. */
-/* Supplied declaration required: FUN_0030dd24. */
-/* Supplied declaration required: FUN_0030dd7e. */
-/* Supplied declaration required: FUN_0030e2b0. */
+/* Supplied declaration required: zlibDeflateInitBlock. */
+/* Supplied declaration required: zlibTrStoredBlock. */
+/* Supplied declaration required: zlibBiWindup. */
 /* Supplied declaration required: FUN_0030e3a0. */
 
 
@@ -82,7 +82,7 @@ LAB_0030def2:
     temp_v1 = temp_v0;
   }
   if ((temp_v0 >= param_3 + 4U) && (param_2 != 0)) {
-    FUN_0030dd7e(param_1,param_2,param_3,param_4);
+    zlibTrStoredBlock(param_1,param_2,param_3,param_4);
   }
   else {
     if ((piVar5[2] == 4) || (temp_v1 == temp_v0)) {
@@ -135,9 +135,9 @@ LAB_0030def2:
     }
     FUN_0012575c(param_1,piVar2,piVar5);
   }
-  FUN_0030dd24(param_1);
+  zlibDeflateInitBlock(param_1);
   if (param_4 != 0) {
-    FUN_0030e2b0(param_1);
+    zlibBiWindup(param_1);
   }
   return;
 }

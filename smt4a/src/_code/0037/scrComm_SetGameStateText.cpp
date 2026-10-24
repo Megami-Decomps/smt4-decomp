@@ -11,14 +11,14 @@ typedef struct GameState {
 
 extern GameState g_gameState; /* 0x5f15fc */
 
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(u32 index);
 extern const char *scrGetArgString(u32 index);
 extern char *libc_strcpy(char *dst, const char *src);
 
 /* Script command: stores argument 0 and copies string argument 1 into the game state. */
 u32 scrComm_SetGameStateText(void)
 {
-    u32 value = scrGetArg();
+    u32 value = scrGetArg(0);
     const char *text = scrGetArgString(1);
 
     g_gameState.scriptValue = value;

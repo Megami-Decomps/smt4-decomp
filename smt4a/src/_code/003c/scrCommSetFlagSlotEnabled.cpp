@@ -5,10 +5,10 @@ extern "C" {
 extern s32 scrGetArg(s32 index);
 extern void gameFlagSlotSetEnabled(s32 id, s32 flag);
 
-/* Script command: gameFlagSlotSetEnabled(argN, arg1 == 1). */
-u32 scrCommSetFlagSlotEnabled(s32 argIndex)
+/* Script command: gameFlagSlotSetEnabled(arg0, arg1 == 1). */
+u32 scrCommSetFlagSlotEnabled(void)
 {
-    u16 id = scrGetArg(argIndex);
+    u16 id = scrGetArg(0);
     s32 mode = scrGetArg(1);
 
     gameFlagSlotSetEnabled(id, mode == 1);

@@ -1,2 +1,14 @@
-/* NON_MATCHING: split off FUN_0010e8e8 at +0x3c (FUN_0010e8e8: two functions (second entry at +0x3c)); not written yet. */
 #include "common.h"
+
+extern "C" {
+struct LightEvent;
+extern LightEvent g_appletSleepQueryEvent;
+void nn_os_LightEvent_ClearSignal(LightEvent *event);
+s32 FUN_002bc7e4(void);
+}
+
+extern "C" s32 FUN_0010e924(void)
+{
+    nn_os_LightEvent_ClearSignal(&g_appletSleepQueryEvent);
+    return FUN_002bc7e4() != 0 ? 2 : 1;
+}

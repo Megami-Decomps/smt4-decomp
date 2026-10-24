@@ -11,9 +11,9 @@ Player *btlGetMainState(void);
 int scrGetArg(int index);
 
 /* Script command: adds script argument 0 to the current player's counter. */
-u32 scrAddPlayerCounter(int firstArg)
+u32 scrAddPlayerCounter(void)
 {
-    int amount = scrGetArg(firstArg);
+    int amount = scrGetArg(0);
     Player *player = btlGetMainState();
     int *counter = &player->counter;
 

@@ -1,10 +1,22 @@
-/* NON_MATCHING: linker-erased member constructor call at +0x08 has no recovered target. */
-/* romwright 0.5.0 decompilation of FUN_003e329c for reference (not compiled; its own view of the boundaries):
-
-unsigned int FUN_003e329c(unsigned int param_1)
-
-{
-  return param_1;
-}
-*/
 #include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
+
+struct Member {
+    u32 unk00;
+};
+
+struct Owner {
+    /* 0x000 */ u8 unk000[0x4a0];
+    /* 0x4a0 */ Member member;
+};
+
+extern "C" {
+
+/* Constructor: runs the (removed) constructor hook of the embedded member at 0x4a0 and returns the owner. */
+Owner *FUN_003e329c(Owner *owner)
+{
+    Member *member = static_cast<Member *>(asdDebugHookPass(&owner->member));
+    return reinterpret_cast<Owner *>(reinterpret_cast<u8 *>(member) - 0x4a0);
+}
+
+} /* extern "C" */

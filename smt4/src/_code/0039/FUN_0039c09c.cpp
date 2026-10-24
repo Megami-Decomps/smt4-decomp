@@ -11,7 +11,7 @@ void mapNaviDisplayLoadMap(MapNaviDisplay*, int);
 int FUN_002316e8(int, int);
 int FUN_00233240(int, int);
 int commonBgReset(void);
-int FUN_00275f00(void);
+int buttonHelpSelectMapPreset(void);
 int FUN_00289880(void);
 int FUN_002bf818(int);
 int naviMainSetCurrentMap(int, int);
@@ -28,7 +28,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_002316e8. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: commonBgReset. */
-/* Supplied declaration required: FUN_00275f00. */
+/* Supplied declaration required: buttonHelpSelectMapPreset. */
 /* Supplied declaration required: FUN_00289880. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
@@ -104,7 +104,7 @@ void FUN_0039c09c(int param_1)
         FUN_00289880();
       }
     }
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     FUN_00233240(param_1 + 0x178,0);
     *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;
     temp_v0 = param_1 + 0x162;

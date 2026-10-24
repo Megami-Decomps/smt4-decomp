@@ -1,32 +1,33 @@
 # Third-party functions, not counted in progress: written by tools/scope.py.
-# <address> <name at the time> <evidence: name | callers | between>
+# <address> <name at the time> <evidence: name | linker | callers | between>
+0x00100330 FUN_00100330 linker
 0x00100338 libc_printfStrDispatch name
 0x0010034e FUN_0010034e between
 0x0010035e FUN_0010035e between
 0x00100366 libc_printfStr name
-0x001003b8 FUN_001003b8 between
+0x001003b8 FUN_001003b8 linker
 0x001003c0 FUN_001003c0 between
 0x0010042c FUN_0010042c between
 0x001005b4 FUN_001005b4 between
 0x001005dc rt_vec_delete name
 0x001005f0 libc_printfWstr name
-0x001006ac FUN_001006ac between
+0x001006ac FUN_001006ac linker
 0x001006b4 FUN_001006b4 between
-0x00100724 FUN_00100724 between
+0x00100724 FUN_00100724 linker
 0x0010072c FUN_0010072c between
 0x00100770 FUN_00100770 between
 0x00100788 FUN_00100788 between
-0x0010079c FUN_0010079c between
+0x0010079c FUN_0010079c linker
 0x001007a4 FUN_001007a4 between
 0x001007fc FUN_001007fc between
 0x00100818 FUN_00100818 between
 0x00100822 FUN_00100822 between
-0x0010083c FUN_0010083c between
-0x00100888 FUN_00100888 between
+0x0010083c FUN_0010083c linker
+0x00100888 FUN_00100888 linker
 0x00100890 FUN_00100890 between
 0x001008c8 FUN_001008c8 between
 0x0010095c isAsciiDigit between
-0x0010096c FUN_0010096c between
+0x0010096c FUN_0010096c linker
 0x00100974 libc_printfWstrDispatch name
 0x0010098a FUN_0010098a between
 0x0010099a FUN_0010099a between
@@ -726,7 +727,7 @@
 0x0014bf24 nw_snd_SoundPlayer_SetPlayableSoundCount name
 0x0014bf70 nw_snd_SoundPlayer_SoundPlayer_sub_object name
 0x0014bfe0 FUN_0014bfe0 callers
-0x0014bfec FUN_0014bfec between
+0x0014bfec _ZN9Obj421a98C1Ev between
 0x0014c098 nw_snd_internal_PlayerHeap_Create name
 0x0014c0c4 FUN_0014c0c4 callers
 0x0014c0f4 nw_snd_internal_TaskManager_ExecuteTask name
@@ -734,12 +735,12 @@
 0x0014c240 FUN_0014c240 between
 0x0014c250 FUN_0014c250 between
 0x0014c3b8 FUN_0014c3b8 between
-0x0014c450 FUN_0014c450 between
+0x0014c450 _ZN9Obj421cd4C1Ev between
 0x0014c4c8 nw_snd_internal_driver_SoundThread_SoundThreadFunc name
 0x0014c544 FUN_0014c544 between
 0x0014c6a8 FUN_0014c6a8 callers
 0x0014c888 FUN_0014c888 between
-0x0014c900 FUN_0014c900 between
+0x0014c900 _ZN9Obj421d74C1Ev between
 0x0014c964 FUN_0014c964 between
 0x0014c9b4 FUN_0014c9b4 between
 0x0014ca50 FUN_0014ca50 between
@@ -1350,6 +1351,13 @@
 0x00254384 nn_fnd_DateTime_GetMonth name
 0x002543dc nn_fnd_DateTime_GetDay name
 0x002580c4 mobiclipAllocatorFree name
+0x0027f3dc FUN_0027f3dc linker
+0x0027f3e4 FUN_0027f3e4 linker
+0x0027f3ec FUN_0027f3ec linker
+0x0027f3f4 FUN_0027f3f4 linker
+0x0027f3fc FUN_0027f3fc linker
+0x0027f404 FUN_0027f404 linker
+0x0027f40c FUN_0027f40c linker
 0x00286180 nn_math_ARMv6_MTX33CopyAsm name
 0x00286198 FUN_00286198 between
 0x00286390 nn_math_ARMv6_MTX34InvTransposeAsm name
@@ -1394,7 +1402,7 @@
 0x002a42e8 FUN_002a42e8 callers
 0x002a4360 ARM_fpclassifyf between
 0x002a438c FUN_002a438c between
-0x002a439c FUN_002a439c between
+0x002a439c FUN_002a439c linker
 0x002a43ae __set_errno name
 0x002a472c nw_snd_internal_CurveLfoParam_Initialize name
 0x002a4758 nw_snd_internal_TaskManager_GetNextTask name
@@ -1412,7 +1420,7 @@
 0x002a6a14 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo name
 0x002a6a50 nw_snd_internal_Util_BitFlag_GetValue name
 0x002a7a94 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset name
-0x002a7b78 FUN_002a7b78 between
+0x002a7b78 _ZN9Obj421d10C1Ev between
 0x002a7bc0 _ZN2nw4math5MTX448IdentityEv name
 0x002a7c50 nw_gfx_res_ResLookupTable_Dereference name
 0x002a7c80 FUN_002a7c80 between
@@ -1464,7 +1472,7 @@
 0x002ac658 nw_snd_internal_SoundArchiveLoader_LoadImpl name
 0x002ac788 nn_fs_detail_FileBase_TrySeek name
 0x002ac838 libc_mbstowcs name
-0x002ac8a8 FUN_002ac8a8 between
+0x002ac8a8 FUN_002ac8a8 linker
 0x002ac8b0 multibyteToUtf16 between
 0x002ac900 nw_ut_internal_LinkListImpl_erase_2AC900 name
 0x002ac94c FUN_002ac94c between
@@ -1508,7 +1516,7 @@
 0x002b4810 FUN_002b4810 between
 0x002b4828 FUN_002b4828 between
 0x002b486c FUN_002b486c between
-0x002b4b80 FUN_002b4b80 between
+0x002b4b80 FUN_002b4b80 linker
 0x002b4b88 FUN_002b4b88 between
 0x002b4b94 FUN_002b4b94 between
 0x002b4bf8 nw_snd_internal_driver_Voice_Free name
@@ -1527,7 +1535,7 @@
 0x002b4f64 FUN_002b4f64 between
 0x002b50e4 FUN_002b50e4 callers
 0x002b5134 nw_gfx_res_SetupReferenceLut name
-0x002b51b8 FUN_002b51b8 between
+0x002b51b8 _ZN14AllocatedArrayI13WeightedEntryED1Ev between
 0x002b5228 nw_gfx_RenderContext_MaterialHash_ResetMaterialHash name
 0x002b52b4 FUN_002b52b4 between
 0x002b563c FUN_002b563c between
@@ -1691,6 +1699,7 @@
 0x002c560c FUN_002c560c between
 0x002c5620 FUN_002c5620 between
 0x002c5630 mobiclipCloseSlot name
+0x002c5d54 FUN_002c5d54 linker
 0x002c5d5c __aeabi_vec_ctor_nocookie_nodtor name
 0x002c5dc0 nn_cfg_CTR_Initialize name
 0x002c5de8 FUN_002c5de8 between
@@ -1702,6 +1711,7 @@
 0x002c639c FUN_002c639c between
 0x002c6614 FUN_002c6614 between
 0x002c6644 __aeabi_errno_addr name
+0x002c66c4 FUN_002c66c4 linker
 0x002c66cc rt_vec_dtor name
 0x002c6a20 __aeabi_uidivmod name
 0x002fea94 mobiclipProcessDestroy name
@@ -1740,8 +1750,8 @@
 0x0034f7ec FUN_0034f7ec between
 0x0034f800 FUN_0034f800 between
 0x0034f8e8 FUN_0034f8e8 between
-0x0034f994 FUN_0034f994 between
-0x0034f9d0 FUN_0034f9d0 between
+0x0034f98c FUN_0034f98c between
+0x0034f9c8 FUN_0034f9c8 between
 0x0034fa04 movieSyncDrainSourcePositions callers
 0x0034fb94 FUN_0034fb94 between
 0x0034fc50 FUN_0034fc50 callers
@@ -2303,7 +2313,7 @@
 0x003684f0 FUN_003684f0 between
 0x003684f8 FUN_003684f8 between
 0x00368500 FUN_00368500 between
-0x00368610 FUN_00368610 between
+0x003685fc FUN_003685fc between
 0x0036865c FUN_0036865c callers
 0x00368a28 FUN_00368a28 between
 0x00368ab0 FUN_00368ab0 callers
@@ -2984,7 +2994,8 @@
 0x003f629c FUN_003f629c between
 0x003f63bc mobiclipAllocatorReset name
 0x003f63e4 FUN_003f63e4 between
-0x003f64dc criticalSectionReadValue38 between
+0x003f64cc criticalSectionReadValue38Thunk between
+0x003f64d4 criticalSectionReadValue38 between
 0x003f650c FUN_003f650c between
 0x003f6520 FUN_003f6520 callers
 0x003f6558 FUN_003f6558 between

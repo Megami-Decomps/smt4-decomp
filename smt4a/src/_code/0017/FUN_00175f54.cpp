@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned char DAT_0055c534; /* 0x55c534 */
 
-extern unsigned int *FUN_0019181c(void);
+extern unsigned int *_ZN9Obj55c5a0C1Ev(void);
 
 
 void FUN_00175f54(void)
@@ -14,7 +14,7 @@ void FUN_00175f54(void)
 {
   unsigned int *puVar1;
   
-  puVar1 = (unsigned int *)FUN_0019181c();
+  puVar1 = (unsigned int *)_ZN9Obj55c5a0C1Ev();
   puVar1[1] = 0;
   *puVar1 = (unsigned int)&DAT_0055c534;
   puVar1[2] = 0;

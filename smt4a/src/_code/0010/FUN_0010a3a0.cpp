@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZNSt6vectorIj12AsdAllocatorIjEE13_C_insert_auxEPjjRKj(int *, unsigned int, int, int *);
 int sysMemClear(int, int);
-int FUN_002e7168(...);
+int _ZN9Obj5590d0C1Ej(...);
 int FUN_002f3340(...);
 int _ZNKSt6vectorIj12AsdAllocatorIjEE4sizeEv(int *);
 
@@ -30,7 +30,7 @@ extern int FUN_0012d57c(unsigned int *);
 extern unsigned int FUN_00132c28(unsigned int *, unsigned int);
 /* Supplied declaration required: _ZNSt6vectorIj12AsdAllocatorIjEE13_C_insert_auxEPjjRKj. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_002e7168. */
+/* Supplied declaration required: _ZN9Obj5590d0C1Ej. */
 extern int _Znwj(unsigned int);
 extern int onlineSockAddrConstruct(int);
 extern int _ZN9Obj55aff4C1Ev(int);
@@ -64,8 +64,8 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v5 = param_2;
   temp_v6 = (int *)param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002e7168(param_1 + 1,0x20000000);
-  temp_v0 = FUN_002e7168(temp_v0 + 0x30,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(param_1 + 1,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x30,0x20000000);
   *(unsigned int *)(temp_v0 + 0x30) = 0x554;
   *(unsigned char *)(temp_v0 + 0x34) = 0;
   puVar2 = (unsigned int *)FUN_002f3340(temp_v0 + 0x38);

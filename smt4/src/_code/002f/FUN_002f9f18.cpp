@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x464a14; not written yet. */
 #include "common.h"
+
+struct WordSlotBC {
+    /* 0x00 */ u8 unk00[0xbc];
+    /* 0xBC */ u32 value;
+};
+
+extern "C" {
+
+/* Virtual getter: returns the word at offset 0xBC. */
+u32 FUN_002f9f18(const WordSlotBC *self)
+{
+    return self->value;
+}
+
+} /* extern "C" */

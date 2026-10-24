@@ -3,8 +3,8 @@
 
 extern "C" {
 
-extern s32 DAT_0061889c[0x180]; /* script integer variables (g_scrIntVars) */
-extern f32 DAT_00618e9c[0x180]; /* script float variables (g_scrFloatVars) */
+extern s32 g_scrIntVars[0x180]; /* script integer variables (g_scrIntVars) */
+extern f32 g_scrFloatVars[0x180]; /* script float variables (g_scrFloatVars) */
 
 /* Pops the top value of the script stack and returns it as a float, converting int values and
  * resolving variable references. */
@@ -19,9 +19,9 @@ f32 scrPopFloat(ScriptStack *stack)
     case SCR_VALUE_FLOAT:
         return stack->values[slot].f;
     case SCR_VALUE_INT_VAR:
-        return (f32)DAT_0061889c[stack->values[slot].i];
+        return (f32)g_scrIntVars[stack->values[slot].i];
     case SCR_VALUE_FLOAT_VAR:
-        return DAT_00618e9c[stack->values[slot].i];
+        return g_scrFloatVars[stack->values[slot].i];
     default:
         return 0.0f;
     }

@@ -1,10 +1,10 @@
-/* NON_MATCHING: linker erased two calls around the embedded-object adjustment; weak call targets are not recoverable from the retail unit. */
-/* romwright 0.5.0 decompilation of FUN_002fffbe for reference (not compiled; its own view of the boundaries):
-
-unsigned int FUN_002fffbe(unsigned int param_1)
-
-{
-  return param_1;
-}
-*/
 #include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
+
+/* Destroys the object's embedded member at +0x20 (whose result gives the owner back) and then the owner itself; both destructors are weak hooks the release build did not link. */
+extern "C" u8 *FUN_002fffbe(u8 *self)
+{
+    u8 *member = (u8 *)asdDebugHookPass(self + 0x20);
+    u8 *owner = member - 0x20;
+    return (u8 *)asdDebugHookPass(owner);
+}

@@ -29,4 +29,5 @@ u32 effEditorCreateJobs(void)
     g_shutdownJobs.finish = NULL;
     return g_shutdownJobs.mainJob;
 }
-}
+
+} /* extern "C" */

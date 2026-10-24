@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(u32 index);
 extern s32 scrGetCommandFrame(void);
 extern void partyEntrySetBit0AndFlag80(u32 id);
 extern s32 FUN_00162ea4(void);
@@ -16,7 +16,7 @@ extern void sysPlaySe(s32 id);
  * plays the join sound. Returns 1 when finished, 0 to run again. */
 s32 scrPartyEntryJoin(void)
 {
-    u16 id = scrGetArg();
+    u16 id = scrGetArg(0);
 
     if (scrGetCommandFrame() == 0) {
         partyEntrySetBit0AndFlag80(id);

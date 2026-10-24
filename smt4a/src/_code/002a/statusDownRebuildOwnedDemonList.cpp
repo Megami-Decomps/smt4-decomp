@@ -7,7 +7,7 @@ extern StatusDownStateA *g_statusDown;
 void sysMemClear(void *memory, u32 size);
 void FUN_00203b40(void *controller, s32 count, s32 rows, s32 columns, s32 arg4, s32 arg5);
 void FUN_002a4964(void *controller, s32 row);
-void FUN_002a4914(void *controller, s32 column);
+void scrollOwnerSelectIndex(void *controller, s32 column);
 void FUN_003d4104(void);
 
 void statusDownRebuildOwnedDemonList(const u8 *quantities)
@@ -36,10 +36,10 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
         state->inventory.row = row;
         state->inventory.column = count - row * 4 - 1;
         FUN_002a4964(controller, row);
-        FUN_002a4914(controller, state->inventory.column);
+        scrollOwnerSelectIndex(controller, state->inventory.column);
     } else {
         FUN_002a4964(controller, state->inventory.row);
-        FUN_002a4914(controller, state->inventory.column);
+        scrollOwnerSelectIndex(controller, state->inventory.column);
     }
     FUN_003d4104();
     state->inventoryDirty = 1;

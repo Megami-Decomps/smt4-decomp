@@ -64,6 +64,19 @@ Every match must be one a programmer could have written for a reason.
     names atexit's `__dso_handle` argument `entry` (the image base). Write the `static` normally;
   - **a branch to the very next instruction** (armlink's `--branchnop`): a tail call into the
     function placed right after. Write the call as the last statement.
+  - **an ARM `b` or conditional `bl` to a Thumb function** (`beq` tail call, `blne`): it cannot change
+    the instruction set, so armlink sent it through the 8-byte stub (`add ip, pc, #1; bx ip`) placed
+    right before that function, and retail's relocation names the stub (`scope.py` labels it
+    `linker`). Write the call to the Thumb function; `build.py` retargets the relocation at the stub
+    when retail has one. An unconditional `bl` stays: the linker turns it into a `blx`.
+- **A unit may define its own data**: a function-local `static T instance;` and its guard, a
+  file-scope `static` table the function addresses from a base register, or the global a static
+  initialiser constructs. `relink.py` places the object's `.constdata`/`.data`/`.bss` at the address
+  retail's pool words name (`.constdata`/`.data` only when the image bytes there equal the
+  object's; `.bss` only inside the image's zero-filled range). `fdiff` cannot prove that address:
+  a pool word into the object's own data against retail's `DAT_x`/`_ZZ…` counts as equal and
+  `IDENTICAL` carries `(data relocations by section: relink checks the address)`. Give the
+  variables their real names when known.
 - **Linker-inlined calls.** armlink (`--inline`) replaced every ARM `bl` to a function whose body is
   one instruction and `bx lr` with that instruction: a getter's `ldr r0, [r0, #N]`, a setter's
   `vstr s0, [r0, #N]`, a `mov r0, #0` stub, an SDK svc wrapper's `svc N`. A lone instruction like

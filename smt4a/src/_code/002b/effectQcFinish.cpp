@@ -15,7 +15,7 @@ typedef struct EffectOwner {
     Effect *effect; /* 0x04 */
 } EffectOwner;
 
-extern void FUN_001919a4(void *handle);
+extern void scriptPanelRelease(void *handle);
 extern void asdOperatorDelete(void *handle);
 extern void jyoucyuGetTableEntry(int index);
 
@@ -28,7 +28,7 @@ void effectQcFinish(void)
 
     effect->finished = 1;
     if (effect->handle != NULL) {
-        FUN_001919a4(effect->handle);
+        scriptPanelRelease(effect->handle);
         asdOperatorDelete(effect->handle);
         effect->handle = NULL;
     }

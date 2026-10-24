@@ -1,4 +1,3 @@
-/* NON_MATCHING: Common selector tail target FUN_0038892c is now resolved; subobject address uses ADD r4 rather than retail ADD r0 then MOV r4, shifting the final linker-NOP position. */
 #include "common.h"
 
 struct ShopSelectionResult {
@@ -11,12 +10,13 @@ s32 scrGetCommandFrame();
 void FUN_003c1060();
 s32 selector16038Pick(ShopSelectionResult *shop);
 void FUN_0038892c(void *selection, s32 result);
+void *shopResultGetSelection(ShopSelectionResult *shop);
 }
 
 /* Pick the shop result and forward it to the common script-selection handler. */
 extern "C" void FUN_003888f8()
 {
-    void *selection = shopGetResult()->selection;
+    void *selection = shopResultGetSelection(shopGetResult());
     if (scrGetCommandFrame() == 0) {
         FUN_003c1060();
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: The level-cap guard moves before the prologue and returns directly; retail also keeps a separate level-index copy in r5. */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -10,7 +9,8 @@ extern "C" u32 FUN_00295c60(u16 devilId, s32 level)
         cost = 0;
     } else {
         const u32 *costs = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
-        cost = costs[level - 1];
+        s32 index = level;
+        cost = costs[index - 1];
         const DevilSortRecord *devil = devilGetRecord(devilId);
         s32 difference = level - devil->level + 1;
         u32 percent;

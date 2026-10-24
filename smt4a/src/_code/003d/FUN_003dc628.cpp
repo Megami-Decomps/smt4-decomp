@@ -31,7 +31,7 @@ int FUN_0023b45c(...);
 int campReleaseSlotTouchRegions(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_0028b088(...);
-int FUN_002a4914(...);
+int scrollOwnerSelectIndex(...);
 int FUN_002a4cfc(void);
 int FUN_002a5cf4(void);
 int FUN_002c7e24(void);
@@ -109,7 +109,7 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_0028b088. */
 /* Supplied declaration required: FUN_002a4878. */
-/* Supplied declaration required: FUN_002a4914. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4cfc. */
 /* Supplied declaration required: FUN_002a5cf4. */
 /* Supplied declaration required: statusPanelSetOpen. */
@@ -450,7 +450,7 @@ LAB_003dcd84:
         } while ((int)temp_v12 < 0x4f);
         if ((int)temp_v16 < 2) {
           FUN_0020d700();
-          FUN_002a4914(temp_v9 + 0x40,0);
+          scrollOwnerSelectIndex(temp_v9 + 0x40,0);
           *(unsigned char *)(temp_v9 + 0x32a8) = 1;
         }
       }
@@ -567,7 +567,7 @@ LAB_003dcd84:
             if ((int)temp_v12 < 2) {
               *(unsigned char *)(temp_v9 + 0xa4) = *(unsigned char *)(temp_v5 + 2);
               FUN_0020d700();
-              FUN_002a4914(temp_v9 + 0x40,0);
+              scrollOwnerSelectIndex(temp_v9 + 0x40,0);
               *(unsigned char *)(temp_v9 + 0x32a8) = 1;
             }
           }

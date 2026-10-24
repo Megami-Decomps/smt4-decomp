@@ -1,57 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cd36` (_code @ 0x30cd36, 0x66 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the chunk/byte-count temporaries and a duplicated grow-call argument setup */
+#include "common.h"
+
+struct PoolNode {
+    /* 0x00 */ u8 used;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ PoolNode *next; /* free-list link */
+    /* 0x10 */ u8 unk10[8];
+};
+
+struct PoolChunk {
+    /* 0x00 */ PoolChunk *previous;
+    /* 0x04 */ u32 capacity;
+    /* 0x08 */ PoolNode *nodes;
+};
+
+struct NodePool {
+    /* 0x00 */ PoolChunk *chunks;
+    /* 0x04 */ PoolNode *freeList;
+    /* 0x08 */ PoolNode *cursor;
+    /* 0x0C */ PoolNode *end;
+};
 
 extern "C" {
 
-int rt_malloc(int);
+void *rt_malloc(u32 bytes);
+u32 vectorGrowCapacity_0012d2aa(u32 capacity, NodePool *pool);
 
-extern int vectorGrowCapacity_0012d2aa(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_0030cd36(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Takes a node from the pool (free list first, then the current chunk, growing by a new chunk when full) and clears it. */
+PoolNode *FUN_0030cd36(NodePool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  
-  puVar1 = (unsigned char *)param_1[1];
-  if (puVar1 != (unsigned char *)0x0) {
-    param_1[1] = *(int *)(puVar1 + 0xc);
-  }
-  else {
-    puVar1 = (unsigned char *)param_1[2];
-    if (puVar1 == (unsigned char *)param_1[3]) {
-      if (*param_1 != 0) {
-        temp_v0 = *(unsigned int *)(*param_1 + 4);
-      }
-      else {
-        temp_v0 = 0;
-      }
-      temp_v1 = vectorGrowCapacity_0012d2aa(temp_v0,param_1,param_3,param_4,param_4);
-      piVar4 = (int *)rt_malloc(0xc);
-      temp_v2 = rt_malloc(temp_v1 * 0x18);
-      piVar4[2] = temp_v2;
-      temp_v2 = *param_1;
-      piVar4[1] = temp_v1;
-      *piVar4 = temp_v2;
-      *param_1 = (int)piVar4;
-      puVar1 = (unsigned char *)piVar4[2];
-      param_1[3] = (int)(puVar1 + temp_v1 * 0x18);
-      param_1[2] = (int)puVar1;
+    PoolNode *node = pool->freeList;
+
+    if (node != NULL) {
+        pool->freeList = node->next;
+    } else {
+        if (pool->cursor == pool->end) {
+            u32 count = vectorGrowCapacity_0012d2aa(pool->chunks == NULL ? 0 : pool->chunks->capacity, pool);
+            PoolChunk *chunk = (PoolChunk *)rt_malloc(sizeof(PoolChunk));
+            u32 bytes = count * 24;
+
+            chunk->nodes = (PoolNode *)rt_malloc(bytes);
+            chunk->previous = pool->chunks;
+            chunk->capacity = count;
+            pool->chunks = chunk;
+            node = chunk->nodes;
+            pool->end = (PoolNode *)((u8 *)node + bytes);
+            pool->cursor = node;
+        }
+        node = pool->cursor;
+        pool->cursor = (PoolNode *)((u8 *)node + 24);
     }
-    param_1[2] = (int)(puVar1 + 0x18);
-  }
-  *(unsigned int *)(puVar1 + 4) = 0;
-  *(unsigned int *)(puVar1 + 8) = 0;
-  *(unsigned int *)(puVar1 + 0xc) = 0;
-  *puVar1 = 0;
-  return;
+    node->unk04 = 0;
+    node->unk08 = 0;
+    node->next = NULL;
+    node->used = 0;
+    return node;
 }
 
 } /* extern "C" */

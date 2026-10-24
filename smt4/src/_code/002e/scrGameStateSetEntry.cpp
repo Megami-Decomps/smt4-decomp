@@ -19,7 +19,7 @@ int libc_strcpy(u8 *sub, u32 value);
 /* Stores the current scrGetArg value in the global block and updates its sub-object from entry 1; always reports success. */
 u32 scrGameStateSetEntry(void)
 {
-    u32 value = scrGetArg();
+    u32 value = scrGetArg(0);
     u32 entry = scrGetArgString(1);
 
     g_gameState.value = value;

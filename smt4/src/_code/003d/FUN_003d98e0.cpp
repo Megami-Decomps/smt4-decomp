@@ -1,96 +1,91 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d98e0` (_code @ 0x3d98e0, 0x20c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP callee-saved numbering only: retail keeps the incoming x/y pair in d8 (s16/s17) and z in s18, built uses s17/s18 and s16 */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001c2b48(int);
-int FUN_00224ab0(unsigned int [6], int, unsigned int);
-int FUN_00244e1c(...);
-int FUN_003947cc(unsigned int, int, int);
-int FUN_003dd680(int, int, unsigned int, int);
+typedef struct Vec3 {
+    f32 x, y, z;
+} Vec3;
 
-/* stack frame of param_7: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-} param_7_stack;
+typedef struct Vec2 {
+    f32 x, y;
+} Vec2;
 
-/* Supplied declaration required: FUN_001c2b48. */
-extern int FUN_00221b70(int);
-/* Supplied declaration required: FUN_00224ab0. */
-/* Supplied declaration required: FUN_00244e1c. */
-/* Supplied declaration required: FUN_003947cc. */
-/* Supplied declaration required: FUN_003dd680. */
+typedef struct EffectOwner {
+    /* 0x0000 */ u32 handles[50];
+    /* 0x00C8 */ u32 slots[50];
+    /* 0x0190 */ u8 unk190[0x2E98];
+    /* 0x3028 */ u32 flags;
+} EffectOwner;
 
+s32 FUN_001c2b48(u32 effect);
+s32 FUN_00221b70(u32 effect);
+s32 FUN_00224ab0(f32 *value, s32 index, u32 arg);
+u32 FUN_00244e1c(u32 effect, u32 *slot, s32 flag, s32 mode, Vec3 position, f32 scale);
+void FUN_003947cc(u32 handle, s32 zero, s32 kind, Vec3 position);
+Vec3 FUN_003dd680(EffectOwner *owner, s32 kind, u32 arg, s32 index);
 
-void FUN_003d98e0(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,
-                 int param_6,unsigned int param_7)
-
+/* Returns the first unused slot of the owner's slot list, or NULL when all are taken. */
+static __inline u32 *findFreeSlot(EffectOwner *owner)
 {
-/* irregular: 2 goto(s); 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2 [6];
-  
-  if (param_2 != 0xff) {
-    temp_v2[0] = 0;
-    if ((param_6 != 6) && (-1 < param_4)) {
-      FUN_00224ab0(temp_v2,param_4,param_5);
+    for (s32 i = 0; i < 50; i += 2) {
+        if (owner->slots[i] == 0) {
+            return &owner->slots[i];
+        }
+        if (owner->slots[i + 1] == 0) {
+            return &owner->slots[i + 1];
+        }
     }
-    FUN_003dd680(param_1,param_6,param_3,param_4);
-    temp_v0 = 0;
-    do {
-      temp_v1 = param_1 + temp_v0 * 4;
-      if (*(int *)(temp_v1 + 200) == 0) {
-        temp_v0 = param_1 + temp_v0 * 4 + 200;
-        goto LAB_003d998c;
-      }
-      if (*(int *)(temp_v1 + 0xcc) == 0) {
-        temp_v0 = param_1 + temp_v0 * 4 + 0xcc;
-        goto LAB_003d998c;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while (temp_v0 < 0x32);
-    temp_v0 = 0;
-LAB_003d998c:
-    FUN_003947cc(param_7,0,param_6);
-    if (((!(param_6 == 2 || param_6 == 5)) && (!(param_6 == 7 || param_6 == 8))) &&
-       (!(param_6 == 9 || param_6 == 0xc))) {
-      if (((*(unsigned int *)(param_1 + 0x3028) & 4) == 0) && (temp_v1 = FUN_00221b70(param_2), temp_v1 != 0)) {
-        FUN_001c2b48(param_2);
-        *(unsigned int *)(param_1 + 0x3028) = *(unsigned int *)(param_1 + 0x3028) | 4;
-      }
-      FUN_00244e1c(param_2,temp_v0,0);
-      temp_v0 = 0;
-      do {
-        temp_v1 = *(int *)(param_1 + temp_v0 * 4);
-        if (temp_v1 == param_2) {
-          return;
+    return NULL;
+}
+
+/* Records the handle in the owner's handle list (unless already present); returns it, or 0 when the list is full. */
+static __inline u32 registerHandle(EffectOwner *owner, u32 handle)
+{
+    for (s32 i = 0; i < 50; i++) {
+        if (owner->handles[i] == handle) {
+            return handle;
         }
-        if (temp_v1 == 0) {
-          *(int *)(param_1 + temp_v0 * 4) = param_2;
-          return;
+        if (owner->handles[i] == 0) {
+            owner->handles[i] = handle;
+            return handle;
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x32);
     }
-    else {
-      FUN_00244e1c(param_2,temp_v0,1,3);
-      temp_v0 = 0;
-      do {
-        temp_v1 = *(int *)(param_1 + temp_v0 * 4);
-        if (temp_v1 == param_2) {
-          return;
-        }
-        if (temp_v1 == 0) {
-          *(int *)(param_1 + temp_v0 * 4) = param_2;
-          return;
-        }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x32);
+    return 0;
+}
+
+/* Starts the effect `effect` of the given kind at the (offset) origin in a free slot, and registers its handle in the owner's list; returns the handle. */
+u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexArg, s32 kind, u32 target, Vec2 origin)
+{
+    if (effect == 0xff) {
+        return 0;
     }
-  }
-  return;
+    f32 value = 0.0f;
+    s32 found = 0;
+    if (kind != 6 && index >= 0) {
+        found = FUN_00224ab0(&value, index, indexArg);
+    }
+    Vec3 offset = FUN_003dd680(owner, kind, arg, index);
+    Vec3 position;
+    position.x = offset.x + origin.x;
+    position.y = offset.y + origin.y;
+    position.z = offset.z;
+    u32 *slot = findFreeSlot(owner);
+    FUN_003947cc(target, 0, kind, position);
+    if (kind == 2 || kind == 5 || kind == 7 || kind == 8 || kind == 9 || kind == 12) {
+        return registerHandle(owner, FUN_00244e1c(effect, slot, 1, 3, position, 1.0f));
+    }
+    f32 scale = 5.6f;
+    if (kind == 11) {
+        scale = 1.0f;
+    } else if (found != 0) {
+        scale = value;
+    }
+    if ((owner->flags & 4) == 0 && FUN_00221b70(effect) != 0) {
+        FUN_001c2b48(effect);
+        owner->flags |= 4;
+    }
+    return registerHandle(owner, FUN_00244e1c(effect, slot, 0, 0, position, scale));
 }
 
 } /* extern "C" */

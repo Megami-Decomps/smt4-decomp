@@ -1,2 +1,8 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x406320; not written yet. */
 #include "common.h"
+
+extern "C" void FUN_002d8910(s32 mode);
+
+extern "C" void FUN_002d8908(void)
+{
+    FUN_002d8910(0);
+}

@@ -15,13 +15,13 @@ typedef struct UnitRef {
 
 extern u32 g_btlScriptUnit;
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 extern UnitRef *btlUnitGet(u32 id);
 extern void scrSetResult(s32 value);
 
 u32 scrComm_Battle_IsScriptUnitStatNegative(void)
 {
-    s32 which = scrGetArg();
+    s32 which = scrGetArg(0);
     s32 slot = 0;
     UnitRef *ref;
     if (which == 0) {

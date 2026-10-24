@@ -9,7 +9,7 @@ typedef struct {
 } GameData;
 
 GameData *btlGetMainState(void);
-u32 scrGetArg(void);
+u32 scrGetArg(u32 index);
 
 static __inline void maskClear(u32 *word, u32 bit)
 {
@@ -19,7 +19,7 @@ static __inline void maskClear(u32 *word, u32 bit)
 /* Clears the mask bit selected by scrGetArg; always reports success. */
 u32 scrClearBattleMaskBit(void)
 {
-    u32 bit = scrGetArg();
+    u32 bit = scrGetArg(0);
     GameData *data = btlGetMainState();
 
     maskClear(&data->mask, bit);

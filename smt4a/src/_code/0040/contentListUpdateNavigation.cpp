@@ -15,7 +15,7 @@ s32 FUN_00228b04(ContentGrid *, u32);
 s32 FUN_001517b4(u32, u32);
 s32 flaggedEntryGetValueA(ContentGrid *);
 void eventQueueAddUniqueIfValid(u32);
-void FUN_002a48e0(ContentGrid *);
+void scrollOwnerSetValue(ContentGrid *);
 
 void contentListUpdateNavigation(ContentNavigation *screen)
 {
@@ -41,7 +41,7 @@ void contentListUpdateNavigation(ContentNavigation *screen)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
         --screen->topRow;
-        FUN_002a48e0(&screen->grid);
+        scrollOwnerSetValue(&screen->grid);
     }
     if (FUN_001517b4(10, 0) && objectApplyIfUnblocked(&screen->grid) >= 8) {
         s32 row = resourceRunOperationIfUnblocked(&screen->grid);
@@ -50,7 +50,7 @@ void contentListUpdateNavigation(ContentNavigation *screen)
             (flaggedEntryGetValueA(&screen->grid) || objectApplyIfUnblocked(&screen->grid) >= 8)) {
             eventQueueAddUniqueIfValid(0x100020d);
             ++screen->topRow;
-            FUN_002a48e0(&screen->grid);
+            scrollOwnerSetValue(&screen->grid);
         }
     }
 }

@@ -4,11 +4,11 @@ extern "C" {
 
 int scrSetResult(u32 result);
 extern u8 *btlGetMainState(void);
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(u32 index);
 
 u32 scrComm_Battle_GetWorkSlot(void)
 {
-    u32 index = scrGetArg();
+    u32 index = scrGetArg(0);
     u8 *btl;
 
     if (index < 0x10) {

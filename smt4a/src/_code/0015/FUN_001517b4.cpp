@@ -6,7 +6,7 @@ s32 padButtonRepeat(s32 key);
 s32 padButtonIsPressed(s32 key);
 s32 FUN_00163fd4(s32 key);
 s32 FUN_00164cf4(s32 direction);
-s32 FUN_00164e18(s32 direction);
+s32 buttonHelpIsKindInitialSelection(s32 direction);
 s32 FUN_00166fa0(s32 direction);
 
 // The state of one pad button in `mode`: 0 auto-repeat, 1 pressed, 2 released.
@@ -74,7 +74,7 @@ s32 FUN_001517b4(s32 key, s32 mode)
         case 2:
             return FUN_00164cf4(stickDirection);
         case 1:
-            return FUN_00164e18(stickDirection);
+            return buttonHelpIsKindInitialSelection(stickDirection);
         case 0:
             return FUN_00166fa0(stickDirection);
         }

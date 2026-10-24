@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x446e1c; not written yet. */
-#include "common.h"
+#include "shard/W6_W6Match2_ShutdownJobs.h"
+
+extern "C" {
+void jobStop(u32 job, s32 mode);
+extern ShutdownJobs g_shutdownJobs;
+
+/* Stops the shutdown group's main job. */
+void FUN_00211c2c(void)
+{
+    jobStop(g_shutdownJobs.mainJob, 0);
+}
+}

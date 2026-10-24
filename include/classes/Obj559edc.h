@@ -31,6 +31,7 @@ struct Obj559edcVector {
 /* Owner of two polymorphic entry arrays and two byte-vector resources. */
 class Obj559edc {
 public:
+    Obj559edc();
     virtual ~Obj559edc();
     /* 0x04 */ u8 unk04[0x14];
     /* 0x18 */ Obj55aff4 address;

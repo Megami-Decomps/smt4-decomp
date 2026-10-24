@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x464454; not written yet. */
 #include "common.h"
+
+struct Obj2c7ad0 {
+    u8 unk00[0x38];
+    u32 kind;
+    u8 unk3c[4];
+    void *params;
+};
+
+extern "C" void *effPolyRingCreate(u32 kind, void *params);
+
+/* Creates a ring effect from the kind and parameter block held by the object. */
+extern "C" void FUN_002c7ad0(Obj2c7ad0 *obj)
+{
+    effPolyRingCreate((u16)obj->kind, obj->params);
+}

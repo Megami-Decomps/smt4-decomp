@@ -13,7 +13,7 @@ typedef struct BtlActiveEntry {
     /* 0xCC */ BtlEntryStats stats;
 } BtlActiveEntry;
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 extern void btlGetMainState(void);
 extern BtlActiveEntry *btlMainFindActiveEntry(void);
 extern void scrSetResult(s32 value);
@@ -21,7 +21,7 @@ extern void scrSetResult(s32 value);
 /* Script command: 1 when the active entry's HP percentage is at most the argument, else 0. */
 u32 scrBtlActiveHpPercentAtMost(void)
 {
-    s32 threshold = scrGetArg();
+    s32 threshold = scrGetArg(0);
     BtlActiveEntry *entry;
 
     btlGetMainState();

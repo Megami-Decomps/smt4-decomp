@@ -1,2 +1,15 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x580020; not written yet. */
-#include "common.h"
+#include "shard/W6_W6Match2_ShutdownJobs.h"
+
+extern "C" {
+s32 jobFind(u32 job);
+extern ShutdownJobs g_shutdownJobs;
+
+/* True when the shutdown group's main job exists and is found. */
+s32 FUN_0031aac8(void)
+{
+    if (g_shutdownJobs.mainJob == 0) {
+        return 0;
+    }
+    return jobFind(g_shutdownJobs.mainJob) != 0;
+}
+}

@@ -4,7 +4,7 @@
 struct FileQueue;
 extern "C" {
 u32 libc_strlen(const char *text);
-void FUN_002a301c(FileQueueRequest *request);
+void _ZN9Obj422224C1Ev(FileQueueRequest *request);
 char *FUN_002ba81c(char *destination, const char *source, u32 capacity);
 FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request);
 void FUN_002a2e08(FileQueue *queue);
@@ -19,7 +19,7 @@ u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath, u32
         libc_strlen(path);
         libc_strlen(secondPath);
         FileQueueRequest request;
-        FUN_002a301c(&request);
+        _ZN9Obj422224C1Ev(&request);
         FUN_002ba81c(reinterpret_cast<char *>(request.path), path, 0x40);
         FUN_002ba81c(reinterpret_cast<char *>(request.path + 0x40), secondPath, 0x40);
         request.flags |= 2;
@@ -33,7 +33,7 @@ u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath, u32
     } else {
         libc_strlen(path);
         FileQueueRequest request;
-        FUN_002a301c(&request);
+        _ZN9Obj422224C1Ev(&request);
         FUN_002ba81c(reinterpret_cast<char *>(request.path), path, 0x40);
         request.context = 0;
         request.mode = mode;

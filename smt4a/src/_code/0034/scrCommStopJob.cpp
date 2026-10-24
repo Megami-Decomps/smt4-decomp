@@ -7,9 +7,9 @@ extern s32 jobIsValid(u32 job);
 extern void jobStop(u32 job, u16 arg);
 
 /* Script command: stops the job given as argument 0 if it is valid. */
-u32 scrCommStopJob(s32 argIndex)
+u32 scrCommStopJob(void)
 {
-    u32 job = scrGetArg(argIndex);
+    u32 job = scrGetArg(0);
 
     if (jobIsValid(job) != 0) {
         jobStop(job, 0);

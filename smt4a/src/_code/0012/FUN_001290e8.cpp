@@ -38,7 +38,7 @@ extern int FUN_002f5928(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002fb208. */
 extern int FUN_0030cdfa(void);
 /* Supplied declaration required: FUN_0030ce60. */
-extern unsigned int *FUN_0030ce94(fn_001290e8_arg0 *);
+extern unsigned int *_ZN9Obj559608C1Ev(fn_001290e8_arg0 *);
 /* Supplied declaration required: FUN_0030ceb8. */
 /* Supplied declaration required: FUN_0030cf36. */
 
@@ -58,7 +58,7 @@ unsigned long long FUN_001290e8(fn_001290e8_arg0 *param_1,int param_2,unsigned i
   temp_v3 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  puVar1 = (unsigned int *)FUN_0030ce94(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj559608C1Ev(param_1);
   *puVar1 = (unsigned int)&DAT_00559038;
   puVar1 = puVar1 + 3;
   FUN_0030ce60(puVar1,param_2);

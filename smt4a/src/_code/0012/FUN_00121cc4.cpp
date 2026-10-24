@@ -11,7 +11,7 @@ int FUN_00121b54(int);
 int FUN_00121b6c(int);
 int FUN_00121c24(unsigned int);
 int netSetPayload(int *, int);
-int FUN_002e7168(...);
+int _ZN9Obj5590d0C1Ej(...);
 int FUN_002ecef0(void);
 int FUN_002ed0c0(int, int);
 
@@ -26,7 +26,7 @@ extern unsigned char DAT_0055909c; /* 0x55909c */
 extern unsigned char DAT_0055b0ec; /* 0x55b0ec */
 extern unsigned char DAT_0059496f; /* 0x59496f */
 extern unsigned char g_flagBlock; /* 0x594958 */
-extern unsigned char DAT_00594a58; /* 0x594a58 */
+extern unsigned char g_onlineRegistry; /* 0x594a58 */
 
 extern int *FUN_00106fa8(void);
 /* Supplied declaration required: FUN_0010cd18. */
@@ -40,7 +40,7 @@ extern int FUN_0011456c(int);
 /* Supplied declaration required: FUN_00121c24. */
 /* Supplied declaration required: netSetPayload. */
 extern int _ZN9Obj5584c8C1Ev(int);
-/* Supplied declaration required: FUN_002e7168. */
+/* Supplied declaration required: _ZN9Obj5590d0C1Ej. */
 extern int _Znwj(unsigned int);
 extern int vectorInitEmpty(int);
 extern unsigned int *_ZN9Obj5593b8C1Ev(void);
@@ -69,10 +69,10 @@ int FUN_00121cc4(void)
   
   puVar1 = (unsigned int *)_ZN9Obj5593b8C1Ev();
   *puVar1 = (unsigned int)&DAT_0055b0ec;
-  temp_v0 = FUN_002e7168(puVar1 + 4,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(puVar1 + 4,0x20000000);
   temp_v0 = FUN_002ed074(temp_v0 + 0x30,1);
   *(unsigned char **)(temp_v0 + 0x14) = &DAT_0055909c;
-  temp_v0 = FUN_002e7168(temp_v0 + 0x18,1);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x18,1);
   temp_v0 = FUN_002f8728(temp_v0 + 0x30);
   temp_v0 = FUN_0011456c(temp_v0 + 0x1c);
   temp_v0 = temp_v0 + 0x30;
@@ -80,17 +80,17 @@ int FUN_00121cc4(void)
   temp_v0 = FUN_002ecd54(temp_v0 + 0x14);
   temp_v0 = _ZN9Obj5584c8C1Ev(temp_v0 + 0x23c);
   temp_v0 = vectorInitEmpty(temp_v0 + 0x28);
-  temp_v0 = FUN_002e7168(temp_v0 + 0xc,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0xc,0x20000000);
   *(unsigned int *)(temp_v0 + 0x30) = 0;
   *(unsigned int *)(temp_v0 + 0x34) = 0;
   *(unsigned int *)(temp_v0 + 0x38) = 0;
-  temp_v0 = FUN_002e7168(temp_v0 + 0x3c,0x20000000);
+  temp_v0 = _ZN9Obj5590d0C1Ej(temp_v0 + 0x3c,0x20000000);
   temp_v3 = temp_v0 - 0x394;
   FUN_002ed0c0(temp_v0 - 0x354,temp_v3);
   FUN_002ecef0();
   *(unsigned int *)(temp_v0 - 0x388) = 0;
-  if ((*(int * *)((unsigned char *)&DAT_00594a58 + 0x50)) != (int *)0x0) {
-    temp_v1 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00594a58 + 0x50)) + 8))();
+  if ((*(int * *)((unsigned char *)&g_onlineRegistry + 0x50)) != (int *)0x0) {
+    temp_v1 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_onlineRegistry + 0x50)) + 8))();
     *(unsigned int *)(temp_v0 - 0x388) = temp_v1;
   }
   else {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00122024(int, int);
 int FUN_0012211c(int, int);
 int FUN_0030382c(int, int);
-int FUN_003038a0(int, int);
+int _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EEC1ERKS3_(int, int);
 
 extern unsigned char DAT_00559ee4; /* 0x559ee4 */
 
@@ -16,7 +16,7 @@ extern unsigned char DAT_00559ee4; /* 0x559ee4 */
 extern int _ZN9Obj55aff4C1ERKS_(unsigned int *, int);
 extern int FUN_00303146(int, int);
 /* Supplied declaration required: FUN_0030382c. */
-/* Supplied declaration required: FUN_003038a0. */
+/* Supplied declaration required: _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EEC1ERKS3_. */
 
 
 int FUN_00117a90(unsigned int *param_1,int param_2)
@@ -53,7 +53,7 @@ int FUN_00117a90(unsigned int *param_1,int param_2)
   temp_v0 = temp_v0 + 8;
   FUN_0012211c(temp_v0,param_2 + 0xa0);
   temp_v0 = temp_v0 + 0xc;
-  FUN_003038a0(temp_v0,param_2 + 0xac);
+  _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EEC1ERKS3_(temp_v0,param_2 + 0xac);
   return temp_v0 - 0xac;
 }
 

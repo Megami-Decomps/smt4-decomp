@@ -1,121 +1,115 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a9df4` (_code @ 0x3a9df4, 0x234 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and the cursor-row base address (retail adds 0x55c then ldrsb #17; here a literal-pool offset) differ; structure and call order match. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0022d800(int, int, int, int);
-int FUN_0022d9c8(int, int, int, int, int, unsigned int);
-int FUN_0022daac(int, unsigned int, int, int, int);
-int FUN_0022db94(int, unsigned int, int, int, int);
-int FUN_0022dcac(int, int, unsigned int, int, int, int);
-int drawTextAtRelativePosition(...);
-int dataTable00FindById(void);
-int textFormatBuffer(...);
-int FUN_002bf4f0(...);
+/* The record of data table 0 used for the row: a name-kind byte and two counters. */
+typedef struct RowRecord {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 kind;
+    /* 0x03 */ u8 unk03;
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+} RowRecord;
 
-/* stack frame of param_4: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_4_stack;
+/* A layout slot: the position of an element relative to the panel. */
+typedef struct LayoutSlot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+} LayoutSlot;
 
-extern unsigned char LAB_003aa030; /* 0x3aa030 */
+typedef struct CursorState {
+    /* 0x00 */ u8 unk00[0x11];
+    /* 0x11 */ s8 row;
+    /* 0x12 */ u8 unk12[0x26];
+} CursorState;
 
-/* Supplied declaration required: FUN_0022d800. */
-/* Supplied declaration required: FUN_0022d9c8. */
-/* Supplied declaration required: FUN_0022daac. */
-/* Supplied declaration required: FUN_0022db94. */
-/* Supplied declaration required: FUN_0022dcac. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf4f0. */
+/* Local view of the panel: the layout object is embedded at 0xC8. */
+typedef struct RowPanel {
+    /* 0x000 */ u8 unk000[0xC8];
+    /* 0x0C8 */ u8 layout[0x494];
+    /* 0x55C */ CursorState cursor;
+    /* 0x594 */ s32 alpha;
+} RowPanel;
 
+extern LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
+extern void FUN_0022d800(RowPanel *panel, s32 index, s32 alpha, s32 row);
+extern void FUN_0022d9c8(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
+extern void FUN_0022daac(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
+extern void FUN_0022db94(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
+extern void FUN_0022dcac(RowPanel *panel, s32 a, u32 id, s32 index, s32 selected, s32 alpha);
+extern void drawTextAtRelativePosition(u8 *layout, s32 a, s32 x, s32 y, s32 b, s32 c, u32 color, s32 alpha, u8 *text);
+extern RowRecord *dataTable00FindById(u16 id);
+extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
 
-void FUN_003a9df4(int param_1,int param_2,int param_3,unsigned int param_4)
-
+/* Draws one row of the panel: its icon layers and the two counters of the record. */
+void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
 {
-/* irregular: 9 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  short temp_v2;
-  short temp_v3;
-  int temp_v4;
-  unsigned short temp_v5;
-  int temp_v6;
-  unsigned char temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned char temp_v10 [44];
-  
-  temp_v6 = *(int *)(param_1 + 0x594);
-  if (param_3 != 0) {
-    temp_v6 = temp_v6 + 1;
-    temp_v4 = FUN_002bf4f0(param_1 + 200,param_2 + 0x42f);
-  }
-  else {
-    temp_v4 = FUN_002bf4f0(param_1 + 200,param_2 + 0x40e);
-  }
-  temp_v0 = *(short *)(temp_v4 + 8);
-  temp_v1 = *(short *)(temp_v4 + 10);
-  if (param_3 != 0) {
-    FUN_0022d800(param_1,param_2,temp_v6,(int)*(char *)(param_1 + 0x56d));
-  }
-  FUN_0022dcac(param_1,1,param_4,param_2,param_3,temp_v6);
-  FUN_0022db94(param_1,param_4,param_2,param_3,temp_v6);
-  FUN_0022daac(param_1,param_4,param_2,param_3,temp_v6);
-  temp_v5 = param_4;
-  temp_v7 = 0;
-  dataTable00FindById();
-  if (temp_v5 != 0) {
-    temp_v7 = *(unsigned char *)(temp_v5 + 2);
-  }
-  FUN_0022d9c8(param_1,temp_v7,param_2,param_3,temp_v6,0xffffffff);
-  temp_v5 = param_4;
-  temp_v8 = 0;
-  dataTable00FindById();
-  if (temp_v5 != 0) {
-    temp_v8 = *(unsigned int *)(temp_v5 + 4);
-  }
-  if (param_3 != 0) {
-    temp_v4 = FUN_002bf4f0(param_1 + 200,0x49d);
-    temp_v9 = 0xfbeb39ff;
-  }
-  else {
-    temp_v4 = FUN_002bf4f0(param_1 + 200,0x48f);
-    temp_v9 = 0xffffffff;
-  }
-  temp_v2 = *(short *)(temp_v4 + 8);
-  temp_v3 = *(short *)(temp_v4 + 10);
-  textFormatBuffer(temp_v10,&LAB_003aa030,temp_v8);
-  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v2 + (int)temp_v0,(int)temp_v3 + (int)temp_v1,0,7,temp_v9,temp_v6,
-               temp_v10);
-  param_4 = param_4 & 0xffff;
-  temp_v8 = 0;
-  dataTable00FindById();
-  if (param_4 != 0) {
-    temp_v8 = *(unsigned int *)(param_4 + 8);
-  }
-  if (param_3 != 0) {
-    temp_v4 = FUN_002bf4f0(param_1 + 200,0x4a1);
-    temp_v9 = 0x6bbb2cff;
-  }
-  else {
-    temp_v4 = FUN_002bf4f0(param_1 + 200,0x493);
-    temp_v9 = 0xffffffff;
-  }
-  temp_v2 = *(short *)(temp_v4 + 8);
-  temp_v3 = *(short *)(temp_v4 + 10);
-  textFormatBuffer(temp_v10,&LAB_003aa030,temp_v8);
-  drawTextAtRelativePosition(param_1 + 200,0,(int)temp_v0 + (int)temp_v2,(int)temp_v3 + (int)temp_v1,0,7,temp_v9,temp_v6,
-               temp_v10);
-  return;
+    LayoutSlot *slot;
+    RowRecord *record;
+    u8 text[44];
+    s32 alpha = panel->alpha;
+    s16 baseX;
+    s16 baseY;
+    s32 kind;
+    s32 x;
+    s32 y;
+    u32 count;
+    u32 color;
+
+    if (selected != 0) {
+        alpha = alpha + 1;
+        slot = FUN_002bf4f0(panel->layout, index + 0x42F);
+    } else {
+        slot = FUN_002bf4f0(panel->layout, index + 0x40E);
+    }
+    baseX = slot->x;
+    baseY = slot->y;
+    if (selected != 0) {
+        FUN_0022d800(panel, index, alpha, panel->cursor.row);
+    }
+    FUN_0022dcac(panel, 1, id, index, selected, alpha);
+    FUN_0022db94(panel, id, index, selected, alpha);
+    FUN_0022daac(panel, id, index, selected, alpha);
+    record = dataTable00FindById(id);
+    kind = 0;
+    if (record != NULL) {
+        kind = record->kind;
+    }
+    FUN_0022d9c8(panel, kind, index, selected, alpha, -1);
+    record = dataTable00FindById(id);
+    count = 0;
+    if (record != NULL) {
+        count = record->first;
+    }
+    if (selected != 0) {
+        slot = FUN_002bf4f0(panel->layout, 0x49D);
+        color = 0xFBEB39FF;
+    } else {
+        slot = FUN_002bf4f0(panel->layout, 0x48F);
+        color = 0xFFFFFFFF;
+    }
+    x = slot->x + baseX;
+    y = slot->y + baseY;
+    textFormatBuffer(text, "%d", count);
+    drawTextAtRelativePosition(panel->layout, 0, x, y, 0, 7, color, alpha, text);
+    record = dataTable00FindById(id);
+    count = 0;
+    if (record != NULL) {
+        count = record->second;
+    }
+    if (selected != 0) {
+        slot = FUN_002bf4f0(panel->layout, 0x4A1);
+        color = 0x6BBB2CFF;
+    } else {
+        slot = FUN_002bf4f0(panel->layout, 0x493);
+        color = 0xFFFFFFFF;
+    }
+    x = baseX + slot->x;
+    y = slot->y + baseY;
+    textFormatBuffer(text, "%d", count);
+    drawTextAtRelativePosition(panel->layout, 0, x, y, 0, 7, color, alpha, text);
 }
 
 } /* extern "C" */

@@ -27,7 +27,7 @@ extern unsigned char DAT_00559070; /* 0x559070 */
 extern unsigned int *FUN_002f18f8(int);
 extern int FUN_002f5928(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002fb208. */
-extern unsigned int *FUN_0030ce94(fn_002f74ec_arg0 *);
+extern unsigned int *_ZN9Obj559608C1Ev(fn_002f74ec_arg0 *);
 
 
 unsigned int *
@@ -42,7 +42,7 @@ FUN_002f74ec(fn_002f74ec_arg0 *param_1,unsigned int *param_2,unsigned int param_
   unsigned int *temp_v1;
   
   temp_v1 = param_4;
-  puVar1 = (unsigned int *)FUN_0030ce94(param_1);
+  puVar1 = (unsigned int *)_ZN9Obj559608C1Ev(param_1);
   *puVar1 = (unsigned int)&DAT_00559070;
   puVar1[3] = *param_2;
   temp_v0 = FUN_002f5928(puVar1 + 4,1);

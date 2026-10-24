@@ -1,110 +1,86 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00166fa0` (_code @ 0x166fa0, 0x23c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "ui/ButtonHelp.h"
 
 extern "C" {
 
-extern unsigned char g_buttonHelp; /* 0x57f0c4 */
+/* The button-help work's per-slot kinds, touch region ids and active flags. */
+typedef struct ButtonHelpTouchSlots {
+    /* 0x000 */ u8 unk000[0x5AC];
+    /* 0x5AC */ ButtonHelpCompatibilityKind kinds[6];
+    /* 0x5C4 */ s16 regions[8];
+    /* 0x5D4 */ u8 active[7];
+} ButtonHelpTouchSlots;
 
-extern int ifTouchIsRepeatingSelection(int);
+extern ButtonHelpGlobalsA g_buttonHelp;
 
+extern s32 ifTouchIsRepeatingSelection(s32 region);
 
-unsigned int FUN_00166fa0(unsigned int param_1)
-
+/* Returns 1 if an active button-help slot of the given kind (or a combined kind containing it) has its touch region repeating its selection. */
+u32 FUN_00166fa0(u32 kind)
 {
-/* irregular: 4 goto(s) */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_buttonHelp + 0x4));
-  if ((*(int *)((unsigned char *)&g_buttonHelp + 0x4)) != 0) {
-    temp_v3 = 0;
-    do {
-      temp_v4 = temp_v0 + temp_v3 * 4;
-      if (((*(unsigned char *)(temp_v4 + 0x5ac) == param_1) && (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0')) &&
-         (temp_v1 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4)), temp_v1 != 0)) {
-        return 1;
-      }
-      if (*(char *)(temp_v4 + 0x5ac) == '\b') {
-        if ((param_1 == 4) && (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0')) {
-          temp_v1 = temp_v0 + temp_v3 * 2;
-          temp_v2 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v1 + 0x5c4));
-          if (temp_v2 != 0) {
+    ButtonHelpTouchSlots *work = (ButtonHelpTouchSlots *)g_buttonHelp.work;
+    s32 i;
+
+    if (work == NULL) {
+        return 0;
+    }
+    for (i = 0; i < 6; i++) {
+        if (work->kinds[i].kind == kind && work->active[i] != 0 && ifTouchIsRepeatingSelection(work->regions[i]) != 0) {
             return 1;
-          }
-          temp_v2 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v1 + 0x5c6));
-          if (temp_v2 != 0) {
-            return 1;
-          }
-          temp_v1 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v1 + 0x5c6));
-          if (temp_v1 != 0) {
-            return 1;
-          }
-          goto LAB_00167060;
         }
-      }
-      else {
-LAB_00167060:
-        if (*(char *)(temp_v4 + 0x5ac) == '\t') {
-          if ((param_1 != 3) || (*(char *)(temp_v0 + temp_v3 + 0x5d4) == '\0')) goto LAB_001671c8;
-          temp_v1 = temp_v0 + temp_v3 * 2;
-          temp_v2 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v1 + 0x5c4));
-          if (temp_v2 != 0) {
-            return 1;
-          }
-          temp_v2 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v1 + 0x5c6));
-          if (temp_v2 != 0) {
-            return 1;
-          }
-          temp_v1 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v1 + 0x5c6));
-          if (temp_v1 != 0) {
-            return 1;
-          }
-        }
-        if (*(char *)(temp_v4 + 0x5ac) == '\x14') {
-          if (param_1 != 1) {
-            if ((param_1 == 2) && (*(char *)(temp_v0 + temp_v3 + 0x5d5) != '\0')) {
-              temp_v1 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c6));
-joined_r0x00167110:
-              if (temp_v1 != 0) {
-                return 1;
-              }
-              goto LAB_00167144;
+        if (work->kinds[i].kind == 8) {
+            if (kind != 4 || work->active[i] == 0) {
+                continue;
             }
-          }
-          else if (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0') {
-            temp_v1 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4));
-            goto joined_r0x00167110;
-          }
+            if (ifTouchIsRepeatingSelection(work->regions[i]) != 0) {
+                return 1;
+            }
+            if (ifTouchIsRepeatingSelection(work->regions[i + 1]) != 0) {
+                return 1;
+            }
+            if (ifTouchIsRepeatingSelection(work->regions[i + 1]) != 0) {
+                return 1;
+            }
         }
-        else {
-LAB_00167144:
-          if (*(char *)(temp_v4 + 0x5ac) == '\x15') {
-            if (param_1 != 5) {
-              if ((param_1 == 6) && (*(char *)(temp_v0 + temp_v3 + 0x5d5) != '\0')) {
-                temp_v4 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c6));
-                if (temp_v4 != 0) {
-                  return 1;
+        if (work->kinds[i].kind == 9) {
+            if (kind != 3 || work->active[i] == 0) {
+                continue;
+            }
+            if (ifTouchIsRepeatingSelection(work->regions[i]) != 0) {
+                return 1;
+            }
+            if (ifTouchIsRepeatingSelection(work->regions[i + 1]) != 0) {
+                return 1;
+            }
+            if (ifTouchIsRepeatingSelection(work->regions[i + 1]) != 0) {
+                return 1;
+            }
+        }
+        if (work->kinds[i].kind == 0x14) {
+            if (kind == 1) {
+                if (work->active[i] != 0 && ifTouchIsRepeatingSelection(work->regions[i]) != 0) {
+                    return 1;
                 }
-              }
+            } else if (kind == 2) {
+                if (work->active[i + 1] != 0 && ifTouchIsRepeatingSelection(work->regions[i + 1]) != 0) {
+                    return 1;
+                }
+            } else {
+                continue;
             }
-            else if (*(char *)(temp_v0 + temp_v3 + 0x5d4) != '\0') {
-              temp_v4 = ifTouchIsRepeatingSelection((int)*(short *)(temp_v0 + temp_v3 * 2 + 0x5c4));
-              if (temp_v4 != 0) {
-                return 1;
-              }
-            }
-          }
         }
-      }
-LAB_001671c8:
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < 6);
-  }
-  return 0;
+        if (work->kinds[i].kind == 0x15) {
+            if (kind == 5) {
+                if (work->active[i] != 0 && ifTouchIsRepeatingSelection(work->regions[i]) != 0) {
+                    return 1;
+                }
+            } else if (kind == 6) {
+                if (work->active[i + 1] != 0 && ifTouchIsRepeatingSelection(work->regions[i + 1]) != 0) {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

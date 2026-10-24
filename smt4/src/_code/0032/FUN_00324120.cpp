@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x407030; not written yet. */
 #include "common.h"
+
+extern "C" {
+extern void *g_btlUiBlock;
+void btlUiPlaySceneFadeOutWhenReady(void *block);
+}
+
+extern "C" s32 FUN_00324120(void)
+{
+    btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
+    return 1;
+}

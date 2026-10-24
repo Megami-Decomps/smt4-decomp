@@ -57,7 +57,7 @@ int btlGetMainState(void);
 int FUN_00297b94(...);
 int FUN_00297ca4(...);
 int playSceneSetState(...);
-int FUN_0029e8b8(...);
+int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(char *, int);
 int FUN_0029efd8(...);
@@ -144,7 +144,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e8b8. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
 /* Supplied declaration required: FUN_0029eb5c. */
@@ -451,7 +451,7 @@ joined_r0x0019aa34:
         }
         temp_v5 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
         if (temp_v5 < 1) break;
-        FUN_0029e8b8(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088,0);
+        scrollOwnerSelectIndex(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088,0);
         temp_v9 = FUN_00297ca4(param_1,1);
         FUN_00297b94(param_1,temp_v9,*(unsigned int *)(param_1 + 0x305c));
         battleSelectButtonHelpPreset(1);

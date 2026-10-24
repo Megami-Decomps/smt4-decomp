@@ -23,6 +23,9 @@ TableEntry *dataTableGetEntries(void);
 
 void tableFireMatchingEntries(u32 matchId)
 {
+    if ((s32)matchId < 0) {
+        return;
+    }
     u32 group = dataTableGet(0x35, 1);
     TableEntry *entry = dataTableGetEntries();
     u32 count = dataTableGetCount(group);

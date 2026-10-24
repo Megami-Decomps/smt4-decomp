@@ -8,14 +8,14 @@ typedef struct FlagBlock {
     /* 0x166A */ s16 valueB;
 } FlagBlock;
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 extern FlagBlock *gameFlagsGetBlock(void);
 extern void scrSetResult(s32 value);
 
 /* Script command: pushes game value A (argument 0) or B (argument 1); returns 1. */
 s32 scrCommGameValueGet(void)
 {
-    s32 which = scrGetArg();
+    s32 which = scrGetArg(0);
     FlagBlock *block = gameFlagsGetBlock();
 
     if (which == 0) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the message buffer allocation. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
@@ -38,6 +39,7 @@ u8 asdCecReadInboxMessage(u32 index, void *out)
             box = g_asdCec.cec->box;
             nn_cec_CTR_MessageBox_GetMessageId(box, &id, ASD_CEC_INBOX, index);
             bufferSize = asdCecMessageBoxGetMessageSize(g_asdCec.cec->box, ASD_CEC_INBOX, index);
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 1166);
             buffer = asdMemoryAlloc(0x100, 0x100, 0, bufferSize, 1);
             result = nn_cec_CTR_MessageBox_ReadMessage_3579D4(g_asdCec.cec->box, &message, buffer, bufferSize, 0, &id);
             ok = result >= 0;

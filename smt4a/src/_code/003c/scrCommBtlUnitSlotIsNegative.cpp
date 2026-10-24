@@ -7,7 +7,7 @@ typedef struct UnitSlots {
     /* 0x74 */ s32 slots[16];
 } UnitSlots;
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 extern void *btlGetMainState(void);
 extern UnitSlots *FUN_003eaf20(void);
 extern void scrSetResult(s32 value);
@@ -15,7 +15,7 @@ extern void scrSetResult(s32 value);
 /* Script command: pushes whether the selected slot (0..3 mapped to 7, 8, 10, 11) of the current unit is negative. */
 s32 scrCommBtlUnitSlotIsNegative(void)
 {
-    s32 which = scrGetArg();
+    s32 which = scrGetArg(0);
     s32 slot = 0;
     UnitSlots *unit;
 

@@ -7,9 +7,9 @@ extern BtlStateB *btlGetMainState(void);
 extern void scrSetResult(u32 value);
 
 /* Script command: result is battle word `argument 0` (below 16). */
-u32 scrCommGetBattleWord(s32 argIndex)
+u32 scrCommGetBattleWord(void)
 {
-    u32 index = scrGetArg(argIndex);
+    u32 index = scrGetArg(0);
 
     if (index < 0x10) {
         scrSetResult(btlGetMainState()->words[index]);

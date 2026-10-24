@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x557b84; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Virtual slot that always answers 0. */
+u32 FUN_004ffcd8(void)
+{
+    return 0;
+}
+
+} /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: current C compilation omits the three retail ARM hint NOPs around the reset call; the original control-flow/inlining shape remains unrecovered. */
 #include "common.h"
 
 extern "C" {
@@ -10,12 +9,10 @@ void FUN_002bff50(void);
 // Resets texture selection for ID zero, otherwise selects it and updates mode on success.
 u32 FUN_00108074(s32 id)
 {
-    if (id != 0) {
-        if (bustupCutAnimSelectSlotsById() == 0 && eventTexSelectJobsById(id) == 0) {
-            FUN_002bff38(2);
-        }
-    } else {
+    if (id == 0) {
         FUN_002bff50();
+    } else if (bustupCutAnimSelectSlotsById() == 0 && eventTexSelectJobsById(id) == 0) {
+        FUN_002bff38(2);
     }
     return 1;
 }

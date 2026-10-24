@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in _ZTV9Obj55bad0; not written yet. */
 #include "common.h"
+
+struct Object {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 value;
+};
+
+extern "C" u32 FUN_0044faa8(Object *object)
+{
+    return object->value;
+}

@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x52b5d4; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Comparator: orders records by their leading u16 id. */
+s32 FUN_004a45d8(const u16 *a, const u16 *b)
+{
+    return *a - *b;
+}
+
+} /* extern "C" */

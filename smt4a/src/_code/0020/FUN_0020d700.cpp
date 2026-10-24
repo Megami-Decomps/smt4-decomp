@@ -15,7 +15,7 @@ CampMenuEntry *dataTable15GetEntry(u32 index);
 u32 FUN_002e26ac(void);
 s32 gameDataFlagTestBit(u32 bit);
 void FUN_00203b40(void *list, s32 a, s32 b, s32 c, s32 d, s32 e);
-void FUN_002a4914(void *list, s32 index);
+void scrollOwnerSelectIndex(void *list, s32 index);
 
 extern CampMenuState *g_camp;
 
@@ -47,7 +47,7 @@ void FUN_0020d700(void)
         }
     }
     FUN_00203b40(camp->list, visible, 1, visible, 1, 1);
-    FUN_002a4914(camp->list, camp->selection[camp->group]);
+    scrollOwnerSelectIndex(camp->list, camp->selection[camp->group]);
 }
 
 }

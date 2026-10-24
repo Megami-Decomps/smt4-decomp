@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses different argument packing, inlined accessor frames or signed bit-index arithmetic. */
 #include "common.h"
 
 struct FlagState {
@@ -11,6 +10,9 @@ FlagState *FUN_0023d2ec();
 s32 FUN_00342044(u32 index)
 {
     FlagState *state = FUN_0023d2ec();
-    return (state->flags[index >> 3] & (1u << (index & 7))) != 0;
+    u8 *flags = state->flags;
+    u8 byte = flags[index >> 3];
+    u8 mask = 1 << (index & 7);
+    return (byte & mask) != 0;
 }
 }

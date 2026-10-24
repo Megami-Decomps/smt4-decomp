@@ -1,2 +1,9 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x535758; not written yet. */
 #include "common.h"
+
+extern "C" void dialogClose(s32 value);
+
+extern "C" s32 FUN_002e6120(void)
+{
+    dialogClose(1);
+    return 1;
+}

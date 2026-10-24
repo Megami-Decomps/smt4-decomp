@@ -6,7 +6,9 @@ Builds the function's unit with the game's build.py, disassembles the retail tar
 the compiled object with relocations, and prints the instructions that differ. Branch and pool
 offsets inside the function are compared as written; relocations by target name. Prints
 IDENTICAL when the code and relocations agree: that function is then expected to reach 100% in
-objdiff and to be proven by `tools/relink.py --matched`.
+objdiff and to be proven by `tools/relink.py --matched`. A pool word that points into the
+object's own `.constdata`/`.data`/`.bss` where retail's names a symbol (`DAT_x`) counts as equal:
+the note after IDENTICAL says so, and relink.py is what checks the address.
 """
 
 import argparse
@@ -87,6 +89,36 @@ def data_as_bytes(retail, built, retail_bytes, built_bytes):
             rows[:] = sorted(keep, key=at)
 
 
+RELOCATION = re.compile(r"  \[R_ARM_ABS32 (\S+)\]")
+OWN_DATA = re.compile(r"^\.(?:constdata|data|bss)(?:\$\$.*)?$")
+
+
+def data_relocations(retail, built):
+    """Pool-word relocations where the compiled object points into its own `.constdata`/`.data`/
+    `.bss` (a section symbol, the offset in the word) and retail's, in the same row and position,
+    names a symbol (`DAT_x`, `_ZZ...E8instance`): both become `data`, and the rows' own word
+    (the offset) is ignored. The address is not provable here; relink.py places the section where
+    retail's word points and checks the image. Returns how many relocations were made equal."""
+    retail_at = {row.split(":", 1)[0].strip(): i for i, row in enumerate(retail)}
+    count = 0
+    for i, row in enumerate(built):
+        j = retail_at.get(row.split(":", 1)[0].strip())
+        if j is None:
+            continue
+        mine, theirs = RELOCATION.findall(row), RELOCATION.findall(retail[j])
+        if len(mine) != len(theirs):
+            continue
+        equal = [bool(OWN_DATA.match(a)) and not OWN_DATA.match(b) for a, b in zip(mine, theirs)]
+        if not any(equal):
+            continue
+        for rows, index, names in ((built, i, mine), (retail, j, theirs)):
+            todo = iter(equal)
+            rows[index] = RELOCATION.sub(lambda m: "  [R_ARM_ABS32 data]" if next(todo) else m[0], rows[index])
+            if len(names) == 1:
+                rows[index] = re.sub(r"(\.word\s+)0x[0-9a-f]+", r"\g<1>data", rows[index])
+        count += sum(equal)
+    return count
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
@@ -117,19 +149,21 @@ def main():
     retail = listing(tool, ROOT / args.game / unit["target"])
     built = listing(tool, ROOT / args.game / unit["object"])
     data_as_bytes(retail, built, text_bytes(tool, ROOT / args.game / unit["target"]), text_bytes(tool, ROOT / args.game / unit["object"]))
+    by_section = data_relocations(retail, built)
+    note = " (data relocations by section: relink checks the address)" if by_section else ""
     strip = lambda rows: [re.sub(r"^\s*[0-9a-f]+: ", "", r) for r in rows]
     # armcc pads a Thumb function's section to 4 bytes: a trailing pad is not a difference.
     while len(built) > len(retail) and strip(built)[-1] in ("movs r0, r0", "nop", ".short 0x0000"):
         built.pop()
     if strip(retail) == strip(built):
-        print(f"IDENTICAL: {args.game} {args.function} ({unit['source']})")
+        print(f"IDENTICAL: {args.game} {args.function} ({unit['source']}){note}")
         return
     # A string literal armcc placed after the pool: retail's function ends before it, the same bytes
     # follow in the image. relink.py checks them against the image; here only data rows may trail.
     extra = strip(built)[len(retail):]
     if extra and strip(built)[:len(retail)] == strip(retail) and all(r.startswith((".word", ".short", ".byte", ".ascii")) for r in extra):
         print(f"IDENTICAL: {args.game} {args.function} ({unit['source']}), plus {len(extra)} rows of trailing literal data "
-              "that relink.py checks against the image")
+              f"that relink.py checks against the image{note}")
         return
     print(f"DIFFERS: {args.game} {args.function} ({unit['source']}), retail {len(retail)} vs built {len(built)} rows")
     for line in difflib.unified_diff(strip(retail), strip(built), "retail", "built", n=2, lineterm=""):

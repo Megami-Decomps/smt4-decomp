@@ -6,6 +6,7 @@
 #include "classes/Obj55ca08.h"
 
 extern "C" void *asdOperatorNew(u32 bytes);
+extern "C" int asdMemFreeNonNull(void *block);
 
 /* IV selection-view base, whose touch interface precedes three state words. */
 class Obj42247c : public BibleView {
@@ -13,6 +14,7 @@ public:
     Obj42247c();
     virtual ~Obj42247c();
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void operator delete(void *block) { asdMemFreeNonNull(block); }
     virtual void start() = 0;
     virtual void unk0c() = 0;
     virtual void stop() = 0;

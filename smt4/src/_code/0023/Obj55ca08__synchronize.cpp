@@ -15,7 +15,7 @@ s32 FUN_0029e93c(const u8 *state);
 s32 flaggedEntryGetValueA(void);
 s32 flaggedEntryGetValueB(const u8 *state);
 void eventQueueAddUnique(u32 event);
-void FUN_00298d64(u8 *state, u32 value);
+void scrollOwnerSetValue(u8 *state, u32 value);
 void flaggedEntrySetValueA(u8 *state, s32 value);
 void recordTrackDirtyValue(u8 *state, u32 value);
 void flaggedEntrySetValueB(u8 *state, s32 value);
@@ -51,7 +51,7 @@ void Obj55ca08::synchronize(const u8 *selection)
             }
             offset = entry->type == 1 ? FUN_0029e93c(entry->state) : FUN_0029efc0();
             if (entry->type == 0) {
-                FUN_00298d64(entry->state, offset);
+                scrollOwnerSetValue(entry->state, offset);
                 flaggedEntrySetValueA(entry->state, index);
             }
             if (entry->type == 1) {

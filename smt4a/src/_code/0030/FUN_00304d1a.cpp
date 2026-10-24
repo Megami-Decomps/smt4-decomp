@@ -1,81 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00304d1a` (_code @ 0x304d1a, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail zeroes the inner vector through r0 right before the read and keeps no spare registers (push {r0-r6}); the compiler hoists the zero into a callee-saved register and uses a 20-byte frame. */
+#include "sys/StreamReader.h"
+#include "stl/Obj55a87cValueLists.h"
 
 extern "C" {
+int streamReadU32(StreamReader *reader, u32 *value);
+void FUN_00303698(StreamReader *reader, Obj55a87cValues *values);
 
-int FUN_001344c4(int, int, int *);
-int FUN_001345a0(int, unsigned int);
-int FUN_00303698(unsigned int, int *);
-int FUN_0030d02e(int, int);
-int vectorTeardown_0030d03c(int *);
-int FUN_0030d052(...);
-
-/* stack frame of param_4: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: FUN_001344c4. */
-/* Supplied declaration required: FUN_001345a0. */
-extern int streamReadU32(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_00303698. */
-/* Supplied declaration required: FUN_0030d02e. */
-/* Supplied declaration required: vectorTeardown_0030d03c. */
-/* Supplied declaration required: FUN_0030d052. */
-
-
-unsigned long long FUN_00304d1a(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Reads a count and that many record lists into the vector; any read error empties it again. */
+void FUN_00304d1a(StreamReader *reader, Obj55a87cValueLists *lists)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  
-  temp_v2 = param_1;
-  temp_v3 = param_2;
-  temp_v4 = param_3;
-  temp_v5 = param_4;
-  FUN_0030d052(param_2);
-  temp_v0 = streamReadU32(param_1,&temp_v2);
-  if (temp_v0 != 0) {
-    FUN_001345a0(param_2,temp_v2);
-    for (temp_v1 = 0; temp_v1 < temp_v2; temp_v1 = temp_v1 + 1) {
-      if (*(char *)(param_1 + 4) != '\0') {
-        return romwright_piece_4_4(temp_v3,temp_v2);
-      }
-      temp_v3 = 0;
-      temp_v4 = 0;
-      temp_v5 = 0;
-      FUN_00303698(param_1,&temp_v3);
-      if (*(char *)(param_1 + 4) != '\0') {
-        FUN_0030d052();
-        vectorTeardown_0030d03c(&temp_v3);
-        break;
-      }
-      temp_v0 = *(int *)(param_2 + 4);
-      if (temp_v0 != *(int *)(param_2 + 8)) {
-        *(int *)(param_2 + 4) = temp_v0 + 0xc;
-        FUN_0030d02e(param_2,temp_v0);
-      }
-      else {
-        FUN_001344c4(param_2,temp_v0,&temp_v3);
-      }
-      vectorTeardown_0030d03c(&temp_v3);
+    lists->clear();
+    u32 count;
+    if (streamReadU32(reader, &count)) {
+        lists->reserve(count);
+        for (u32 i = 0; i < count && !reader->error; ++i) {
+            Obj55a87cValues values;
+            FUN_00303698(reader, &values);
+            if (reader->error) {
+                lists->clear();
+                return;
+            }
+            lists->push_back(values);
+        }
     }
-  }
-  return romwright_piece_4_4(temp_v3,temp_v2);
 }
 
 } /* extern "C" */

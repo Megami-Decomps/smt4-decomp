@@ -11,9 +11,9 @@ extern s32 engineCleanupIsDone(void);
 extern void uniteReleaseExit(void);
 
 /* Script command: starts the scene on the first call, then reports whether it is still running. */
-u8 scrCommRunScene2(s32 argIndex)
+u8 scrCommRunScene2(void)
 {
-    u32 scene = scrGetArg(argIndex);
+    u32 scene = scrGetArg(0);
     s32 running;
 
     gameGetPlayerData();

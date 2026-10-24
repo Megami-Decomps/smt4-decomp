@@ -4,7 +4,7 @@ extern "C" QcGlobalsA g_qcMain;
 
 extern "C" {
 u32 jobFind(u32 task);
-void FUN_001919a4(QuestEntry *entry);
+void scriptPanelRelease(QuestEntry *entry);
 void asdOperatorDelete(void *memory);
 void asdMemFree(void *memory);
 u32 FUN_0019196c(QuestEntry *entry, u32 parameter);
@@ -26,7 +26,7 @@ u32 FUN_00168d38(u32 parameter)
         QuestEntry *entry = work->entry;
         work->done = 1;
         if (entry != NULL) {
-            FUN_001919a4(entry);
+            scriptPanelRelease(entry);
             asdOperatorDelete(work->entry);
             work->entry = NULL;
         }

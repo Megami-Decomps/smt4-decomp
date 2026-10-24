@@ -5707,3 +5707,480 @@
 0038010c scrBattleRemoveMembersByRecordValue inferred [med] script command: removes battle members whose data-table record word at +0x3c equals the argument
 0038d28c scrBattleRemoveMembersAtOrBelowValue inferred [med] script command: removes battle members whose value (FUN_001ba3d4) is not above the argument
 0039d784 scrBattleFindHighestValueMember inferred [med] script command: returns the id of the battle member with the highest value (FUN_001ba3d4), 0 if none
+00349240 tableFireMatchingEntriesThunk inferred [high] thunk in front of tableFireMatchingEntries: its tail call is the branch-to-next NOP
+00349244 tableFireMatchingEntries inferred [high] tableFireMatchingEntries
+0036ef5c effEditorCreateJobsThunk inferred [high] thunk in front of effEditorCreateJobs: its tail call is the branch-to-next NOP
+0036ef60 effEditorCreateJobs inferred [high] effEditorCreateJobs
+00418c34 _ZN9Obj557d48D0Ev inferred deleting destructor (vtable slot 1 of _ZTV9Obj557d48)
+00420dac _ZN9Obj557e3cD0Ev inferred deleting destructor (vtable slot 1 of _ZTV9Obj557e3c)
+0044b3c4 _ZN9Obj4214ecD1Ev inferred empty destructor (vtable slot 0 of _ZTV9Obj4214ec)
+004ad4a8 _ZN9Obj55c9c0D1Ev inferred destructor (vtable slot 0 of _ZTV9Obj55c9c0): tail-calls Obj422540 D1
+004016e8 _ZN9Obj557b285slot6Ev inferred vtable slot 6 of _ZTV9Obj557b28 (twin of smt4 Obj420708 refreshOffsets)
+00401764 _ZN9Obj557b285slot7Ev inferred vtable slot 7 of _ZTV9Obj557b28 (twin of smt4 Obj420708 refreshRects)
+004016a8 _ZN9Obj557b285slot9Ev inferred vtable slot 9 of _ZTV9Obj557b28 (twin of smt4 Obj420708 setTarget)
+00421db8 _ZNK9Obj4209d813getCellUnitIdEi inferred vtable +0x10 of _ZTV9Obj4209d8 (header vfunc10): returns cells[index].unitId
+00421de0 _ZNK9Obj4209d87vfunc18Ei inferred vtable +0x18 of _ZTV9Obj4209d8 (header vfunc18): returns a float of cells[index]
+0045f038 _ZN9Obj55be805vfunc0cEv inferred vtable +0x0c of _ZTV9Obj55be80 (twin of smt4 Obj421a78 +0x0c)
+00494388 _ZN9Obj55c880D0Ev inferred deleting destructor (vtable slot 1 of the vtable at 0x55c880): D1 of Obj422594, then asdOperatorDelete
+00426190 _ZN9Obj557f50D1Ev inferred destructor (vtable slot 0 of the vtable at 0x557f50): sets vptr, releases the decoder, returns this
+0030e8c8 _ZN9Obj55a564C1Ev inferred thumb constructor: base Obj5590e4(1) then vptr = vtable at 0x55a564 (+8)
+00557f50 _ZTV9Obj557f50 inferred size:0x24 vtable: slot0 FUN_00426190 (D1), pool word in FUN_00426190 is vtable+8
+0055c880 _ZTV9Obj55c880 inferred size:0x1c vtable: slot1 FUN_00494388 (D0); next vtable starts at 0x55c89c
+0055a564 _ZTV9Obj55a564 inferred size:0x14 vtable: slot0 FUN_0011b4bc; initVtable0055a580 follows at +0x1c
+00401794 _ZN9Obj557b287vfunc14Ev inferred vtable 0x557b28 slot +0x14 (address point 0x557b30); tail call to asdOperatorDelete(this)
+00421e0c _ZNK9Obj4209d816implementationIdEv inferred twin of the smt4 method of the same name: vtable 0x557e7c slot +8; returns 109
+00421c30 _ZNK9Obj4209d811isCellReadyEi inferred twin of the smt4 method of the same name: vtable 0x557e7c slot +0xc; tests the selection flags of the indexed grid cell
+004ad380 _ZN9Obj55c9c05parseEPKhj inferred vtable 0x55c9c0 slot +0xc; parses a big-endian packet header and fields from a byte buffer, returns the bytes consumed or -1
+0030e668 _ZN9Obj55a314C1Ev inferred constructor of Obj55a314: base Obj5590e4(1) then the vtable store; called through the vec-ctor callback at 0x1296f0
+001861dc u16KeyRecordCompare inferred [high] bsearch comparator: difference of the two records' leading u16 keys
+0061889c g_scrIntVars inferred size:0x600 script integer variable table (twin of smt4 g_scrIntVars, indexed by INT_VAR stack values)
+00618e9c g_scrFloatVars inferred size:0x600 script float variable table (twin of smt4 g_scrFloatVars)
+00409678 _ZN9Obj557bd8D0Ev inferred deleting destructor (slot 0xc of _ZTV9Obj557bd8): trivial destructor, frees this with asdOperatorDelete
+004cef00 _ZN9Obj557ed0D0Ev inferred deleting destructor (slot 0xc of _ZTV9Obj557ed0): stores the vtable, destroys the member at 0x4d8, frees with asdOperatorDelete
+0030e654 _ZN9Obj55ada4C1Ev inferred thumb constructor: Obj5590e4(1) base constructor then stores _ZTV9Obj55ada4+8
+004ad4ac _ZN9Obj55c9c010copyValuesEPKS_ inferred vtable 0x55c9c0 slot 0x20: copies a packed selection record (this <- source)
+0041af70 _ZN9Obj4208d4D0Ev inferred deleting destructor, slot 1 of vtable 0x557d80 (frees the block)
+00421e14 _ZN9Obj4209d8D0Ev inferred deleting destructor, slot 1 of vtable 0x557e7c (frees the block)
+00421b08 _ZNK9Obj4209d87vfunc1cEi inferred slot at +0x1C of vtable 0x557e7c: float of the table entry at the index
+0040177c _ZN9Obj557b285slot8Ev inferred slot at +0x20 of vtable 0x557b28: position >= limit
+00557fa8 _ZTV9Obj557fa8 inferred size:0x24 vtable (two zero words then slots; address point 0x557fb0); FUN_004261e0 is its destructor
+004261e0 _ZN9Obj557fa8D1Ev inferred destructor: sets the vtable, releases the handle object at +4
+0051327c _ZN9Obj557fa87vfunc18Ev inferred slot at +0x18 of vtable 0x557fa8: returns the pointer at +4
+0040bcf4 _ZN9Obj557c58D0Ev inferred D0 of Obj557c58 (vtable 0x557c58, slot1 at 0x557c64): runs Obj557ae8 D1 and frees
+004930d4 _ZN9Obj55c864D0Ev inferred D0 of the class whose vtable is at 0x55c864 (slot1 at 0x55c870): runs Obj422594 D1 and frees
+0055c864 _ZTV9Obj55c864 inferred size:0x1c vtable of the class FUN_004930d4 is the deleting destructor of
+0044fa84 _ZN9Obj55bab4D1Ev inferred D1 of the class whose vtable is at 0x55bab4 (slot0 at 0x55babc): stores the vtable and destroys the two AllocatedArray members at +24 and +8 (twin of smt4 FUN_0036de90)
+0055bab4 _ZTV9Obj55bab4 inferred size:0x1c vtable of the twin of smt4 Obj421698
+0017ef34 _ZN14AllocatedArrayI10ArrayEntryED1Ev inferred AllocatedArray<ArrayEntry>::~AllocatedArray; called for both array members of Obj55bab4
+003fed14 _ZN9Obj557b18D0Ev inferred D0 of Obj557b18: vtable store, moriModelBodyReleaseOwnedStorage, asdOperatorDelete
+0030e6e0 _ZN9Obj55adecC1Ev inferred constructor of Obj55adec: Obj5590e4(1) then the Obj55adec vtable (+8)
+003fd454 _ZN9Obj557b08D0Ev inferred deleting destructor of Obj557b08 (vtable 0x557b08 slot +4): restores the vtable, releases the resource table's textures and buffers, then asdOperatorDelete(this)
+00421c90 _ZNK9Obj4209d87getTintEj inferred vtable 0x557e7c slot 0x28 (header getTint): modulates the cell colour at 0x6c by its modulation colour at 0x74 unless that is the neutral colour
+002e7168 _ZN9Obj5590d0C1Ej inferred constructor of Obj5590d0 (vtable 0x5590d0): stores the vtable, takes the size, returns this
+00532840 g_mikadoPathPrefix inferred size:0x8 "mikado/" directory prefix string passed to textFormatBuffer("%s%s") in FUN_004b8598
+00536c74 _ZTV9Obj536c74 evidence size:0xc vtable (address point 0x536c7c; stored by FUN_0050f808)
+00536d04 _ZTV9Obj536d04 evidence size:0xc vtable (address point 0x536d0c; stored by FUN_0050e0b0)
+0053f5f4 _ZTV9Obj53f5f4 evidence size:0x18 vtable (address point 0x53f5fc; stored by FUN_0042d164)
+00557bb4 _ZTV9Obj557bb4 evidence size:0x24 vtable (address point 0x557bbc; stored by vtblHolderInit557bbc)
+00557c78 _ZTV9Obj557c78 evidence size:0x18 vtable (address point 0x557c80; stored by asdMemoryInit)
+00557c90 _ZTV9Obj557c90 evidence size:0x10 vtable (address point 0x557c98; stored by FUN_003fa6a4, FUN_00414a24)
+00557d10 _ZTV9Obj557d10 evidence size:0x38 vtable (address point 0x557d18; stored by asdMemoryInit)
+00557d68 _ZTV9Obj557d68 evidence size:0x10 vtable (address point 0x557d70; stored by asdMemoryInit)
+00557db4 _ZTV9Obj557db4 evidence size:0x18 vtable (address point 0x557dbc; stored by asdMemoryInit)
+00557e60 _ZTV9Obj557e60 evidence size:0xc vtable (address point 0x557e68; stored by FUN_0050e798)
+00557ec0 _ZTV9Obj557ec0 evidence size:0x10 vtable (address point 0x557ec8; stored by FUN_004bb440, ownerBufDestroy)
+00557f14 _ZTV9Obj557f14 evidence size:0x18 vtable (address point 0x557f1c; stored by FUN_00510084)
+00557f2c _ZTV9Obj557f2c evidence size:0x24 vtable (address point 0x557f34; stored by vtblHolderInit557f34)
+00558174 _ZTV9Obj558174 evidence size:0x40 vtable (address point 0x55817c; stored by FUN_0042aac4)
+005581d8 _ZTV9Obj5581d8 evidence size:0xb0 vtable (address point 0x5581e0; stored by FUN_0042bb70)
+0055828c _ZTV9Obj55828c evidence size:0x40 vtable (address point 0x558294; stored by FUN_0016d090, FUN_0042a16c, FUN_0042b3b8, FUN_0042ba78)
+005582d0 _ZTV9Obj5582d0 evidence size:0x60 vtable (address point 0x5582d8; stored by FUN_001a0164)
+00558330 _ZTV9Obj558330 evidence size:0x40 vtable (address point 0x558338; stored by FUN_0042fac4, FUN_0042fb9c)
+005583b8 _ZTV9Obj5583b8 evidence size:0x14 vtable (address point 0x5583c0; stored by FUN_00510084)
+005583d0 _ZTV9Obj5583d0 evidence size:0x38 vtable (address point 0x5583d8; stored by FUN_005116f8)
+0055840c _ZTV9Obj55840c evidence size:0xc vtable (address point 0x558414; stored by FUN_00159fa0, FUN_0050e3b8, FUN_00512190)
+00558430 _ZTV9Obj558430 evidence size:0xc vtable (address point 0x558438; stored by FUN_001a007c, unitHeapModuleInitialize)
+00558454 _ZTV9Obj558454 evidence size:0x24 vtable (address point 0x55845c; stored by FUN_001af814)
+00558488 _ZTV9Obj558488 evidence size:0x10 vtable (address point 0x558490; stored by sharedRefHolderDestroy, FUN_002ed258, FUN_002eff90, FUN_002f2afc)
+00558508 _ZTV9Obj558508 evidence size:0x1c vtable (address point 0x558510; stored by initVtable00558510)
+00558524 _ZTV9Obj558524 evidence size:0xc vtable (address point 0x55852c; stored by FUN_002ea974, onlineUrlDestroy, FUN_002ee568, FUN_002fd5d4)
+00558534 _ZTV9Obj558534 evidence size:0x2c vtable (address point 0x55853c; stored by FUN_002f84f0, FUN_002f8520)
+0055859c _ZTV9Obj55859c evidence size:0x1c vtable (address point 0x5585a4; stored by FUN_002ea00c, FUN_002eca44)
+005585b8 _ZTV9Obj5585b8 evidence size:0x10 vtable (address point 0x5585c0; stored by FUN_00103fd4, destroyObj005585c0)
+005585c8 _ZTV9Obj5585c8 evidence size:0x10 vtable (address point 0x5585d0; stored by onlineSockAddrConstruct, FUN_002eb858, onlineSockAddrConstruct2, FUN_002f32ac)
+005585d8 _ZTV9Obj5585d8 evidence size:0x40 vtable (address point 0x5585e0; stored by FUN_00104694, FUN_001046dc)
+00558628 _ZTV9Obj558628 evidence size:0x28 vtable (address point 0x558630; stored by initVtable00558630)
+00558650 _ZTV9Obj558650 evidence size:0x70 vtable (address point 0x558658; stored by _ZN9Obj558650C1EhP17Obj558cbcListener, FUN_00105100)
+00558704 _ZTV9Obj558704 evidence size:0x30 vtable (address point 0x55870c; stored by FUN_0010531c)
+0055873c _ZTV9Obj55873c evidence size:0x1c vtable (address point 0x558744; stored by FUN_001054b4, FUN_001054f8)
+00558770 _ZTV9Obj558770 evidence size:0xc vtable (address point 0x558778; stored by FUN_0010557c)
+00558780 _ZTV9Obj558780 evidence size:0xc vtable (address point 0x558788; stored by FUN_001057dc)
+00558790 _ZTV9Obj558790 evidence size:0x2c vtable (address point 0x558798; stored by FUN_002f7a28)
+005587bc _ZTV9Obj5587bc evidence size:0x30 vtable (address point 0x5587c4; stored by FUN_001059f4, FUN_00105a54)
+005587f4 _ZTV9Obj5587f4 evidence size:0x3c vtable (address point 0x5587fc; stored by FUN_00105c54, destroyObj005587fc)
+00558830 _ZTV9Obj558830 evidence size:0x10 vtable (address point 0x558838; stored by constructObj00558838)
+0055885c _ZTV9Obj55885c evidence size:0x14 vtable (address point 0x558864; stored by FUN_0010b47c)
+00558870 _ZTV9Obj558870 evidence size:0x14 vtable (address point 0x558878; stored by FUN_0010b910)
+00558884 _ZTV9Obj558884 evidence size:0x14 vtable (address point 0x55888c; stored by FUN_0010e4dc)
+00558898 _ZTV9Obj558898 evidence size:0x14 vtable (address point 0x5588a0; stored by FUN_00116770)
+005588ac _ZTV9Obj5588ac evidence size:0x14 vtable (address point 0x5588b4; stored by FUN_00311700)
+005588c0 _ZTV9Obj5588c0 evidence size:0x10 vtable (address point 0x5588c8; stored by FUN_00105ce0)
+005588ec _ZTV9Obj5588ec evidence size:0x10 vtable (address point 0x5588f4; stored by FUN_002eff58)
+0055890c _ZTV9Obj55890c evidence size:0x10 vtable (address point 0x558914; stored by FUN_00106150, FUN_0010620c)
+0055891c _ZTV9Obj55891c evidence size:0x2c vtable (address point 0x558924; stored by FUN_001068d4)
+00558948 _ZTV9Obj558948 evidence size:0x10 vtable (address point 0x558950; stored by FUN_00116b1c)
+00558958 _ZTV9Obj558958 evidence size:0x8c vtable (address point 0x558960; stored by FUN_00106db4, FUN_00106e00)
+00558a00 _ZTV9Obj558a00 evidence size:0x34 vtable (address point 0x558a08; stored by FUN_00106e30)
+00558a50 _ZTV9Obj558a50 evidence size:0x10 vtable (address point 0x558a58; stored by FUN_002ea2e8, FUN_002ea3a8)
+00558a60 _ZTV9Obj558a60 evidence size:0x48 vtable (address point 0x558a68; stored by FUN_00106fa8)
+00558abc _ZTV9Obj558abc evidence size:0x1c vtable (address point 0x558ac4; stored by destroyObj00558ac4, FUN_002f2fe8)
+00558aec _ZTV9Obj558aec evidence size:0x30 vtable (address point 0x558af4; stored by FUN_00114250)
+00558b34 _ZTV9Obj558b34 evidence size:0x9c vtable (address point 0x558b3c; stored by FUN_00109240, FUN_001095ec)
+00558c74 _ZTV9Obj558c74 evidence size:0x1c vtable (address point 0x558c7c; stored by FUN_0010a9a0, FUN_0010aa58)
+00558cdc _ZTV9Obj558cdc evidence size:0xc vtable (address point 0x558ce4; stored by FUN_0010b194, FUN_0030e734)
+00558cec _ZTV9Obj558cec evidence size:0x1c vtable (address point 0x558cf4; stored by FUN_0010b588)
+00558d08 _ZTV9Obj558d08 evidence size:0x18 vtable (address point 0x558d10; stored by FUN_0010b66c, FUN_0010b678)
+00558d20 _ZTV9Obj558d20 evidence size:0x64 vtable (address point 0x558d28; stored by destroyObj00558d28, FUN_003054a4)
+00558d84 _ZTV9Obj558d84 evidence size:0x44 vtable (address point 0x558d8c; stored by _ZN9Obj5594d4C1EP9Obj558cbchhh)
+00558dcc _ZTV9Obj558dcc evidence size:0xc vtable (address point 0x558dd4; stored by FUN_0011a76c)
+00558ddc _ZTV9Obj558ddc evidence size:0x60 vtable (address point 0x558de4; stored by FUN_00111240)
+00558e3c _ZTV9Obj558e3c evidence size:0x3c vtable (address point 0x558e44; stored by FUN_0010bb20, FUN_002f8174)
+00558ea8 _ZTV9Obj558ea8 evidence size:0x10 vtable (address point 0x558eb0; stored by FUN_002f59f8)
+00558eb8 _ZTV9Obj558eb8 evidence size:0x2c vtable (address point 0x558ec0; stored by FUN_0010c0d0)
+00558ee4 _ZTV9Obj558ee4 evidence size:0x2c vtable (address point 0x558eec; stored by FUN_0010c7d8)
+00558f10 _ZTV9Obj558f10 evidence size:0x98 vtable (address point 0x558f18; stored by FUN_0010ca78, destroyObj00558f18)
+00558fac _ZTV9Obj558fac evidence size:0x64 vtable (address point 0x558fb4; stored by initVtable00558fb4)
+00559030 _ZTV9Obj559030 evidence size:0x1c vtable (address point 0x559038; stored by FUN_001290e8, FUN_0012914c)
+0055904c _ZTV9Obj55904c evidence size:0x1c vtable (address point 0x559054; stored by FUN_0012922c, FUN_00129288)
+00559068 _ZTV9Obj559068 evidence size:0x1c vtable (address point 0x559070; stored by FUN_002f74ec, FUN_002f7708)
+00559094 _ZTV9Obj559094 evidence size:0xc vtable (address point 0x55909c; stored by FUN_00129380)
+005590a4 _ZTV9Obj5590a4 evidence size:0xc vtable (address point 0x5590ac; stored by FUN_002fafc4)
+005590b4 _ZTV9Obj5590b4 evidence size:0x30 vtable (address point 0x5590bc; stored by FUN_0010d134, FUN_0010d1e8)
+005590f8 _ZTV9Obj5590f8 evidence size:0x14 vtable (address point 0x559100; stored by FUN_002f3340)
+0055910c _ZTV9Obj55910c evidence size:0x10 vtable (address point 0x559114; stored by FUN_0010d3a4, FUN_0010d470)
+0055911c _ZTV9Obj55911c evidence size:0xc vtable (address point 0x559124; stored by FUN_0010d51c, FUN_0010d564)
+0055912c _ZTV9Obj55912c evidence size:0xc vtable (address point 0x559134; stored by FUN_002ed074)
+0055913c _ZTV9Obj55913c evidence size:0xc vtable (address point 0x559144; stored by FUN_003032ec)
+0055914c _ZTV9Obj55914c evidence size:0x30 vtable (address point 0x559154; stored by FUN_0010e4dc)
+00559184 _ZTV9Obj559184 evidence size:0x48 vtable (address point 0x55918c; stored by FUN_0010eb10, FUN_002ee878)
+005591d0 _ZTV9Obj5591d0 evidence size:0x10 vtable (address point 0x5591d8; stored by FUN_002ea3c0, FUN_002fd6bc)
+005591e0 _ZTV9Obj5591e0 evidence size:0x3c vtable (address point 0x5591e8; stored by FUN_002eca10, FUN_002ecac4)
+0055921c _ZTV9Obj55921c evidence size:0xc vtable (address point 0x559224; stored by FUN_0010eea4, FUN_0010eec4)
+0055922c _ZTV9Obj55922c evidence size:0x44 vtable (address point 0x559234; stored by FUN_002f4fd8, FUN_002fd1e8)
+00559274 _ZTV9Obj559274 evidence size:0x1c vtable (address point 0x55927c; stored by FUN_002f2fe8)
+00559294 _ZTV9Obj559294 evidence size:0x18 vtable (address point 0x55929c; stored by FUN_0010f164, destroyObj0055929c)
+005592bc _ZTV9Obj5592bc evidence size:0xc vtable (address point 0x5592c4; stored by FUN_002ea2a8)
+005592cc _ZTV9Obj5592cc evidence size:0xc vtable (address point 0x5592d4; stored by FUN_00109240, FUN_0010f1d0)
+005592dc _ZTV9Obj5592dc evidence size:0x3c vtable (address point 0x5592e4; stored by destroyObj005592e4, FUN_00303aac)
+00559318 _ZTV9Obj559318 evidence size:0x10 vtable (address point 0x559320; stored by FUN_00110298)
+0055934c _ZTV9Obj55934c evidence size:0x24 vtable (address point 0x559354; stored by FUN_00110318)
+00559388 _ZTV9Obj559388 evidence size:0xc vtable (address point 0x559390; stored by FUN_00110594, FUN_001105e4)
+00559398 _ZTV9Obj559398 evidence size:0x10 vtable (address point 0x5593a0; stored by FUN_001106f4)
+005593a8 _ZTV9Obj5593a8 evidence size:0xc vtable (address point 0x5593b0; stored by initVtable005593b0)
+005593c8 _ZTV9Obj5593c8 evidence size:0x48 vtable (address point 0x5593d0; stored by FUN_0011081c)
+00559410 _ZTV9Obj559410 evidence size:0x3c vtable (address point 0x559418; stored by FUN_00110a7c, FUN_00110aa4)
+0055944c _ZTV9Obj55944c evidence size:0x60 vtable (address point 0x559454; stored by FUN_00111240, FUN_001112f0)
+005594ac _ZTV9Obj5594ac evidence size:0x28 vtable (address point 0x5594b4; stored by FUN_002ea6e8)
+005594d4 _ZTV9Obj5594d4 evidence size:0x28 vtable (address point 0x5594dc; stored by _ZN9Obj5594d4C1EP9Obj558cbchhh, FUN_00111790)
+005594fc _ZTV9Obj5594fc evidence size:0xc vtable (address point 0x559504; stored by FUN_002f7b34, FUN_0030c5d8, initVtable00559504)
+0055950c _ZTV9Obj55950c evidence size:0xc vtable (address point 0x559514; stored by FUN_00311458, FUN_00311490)
+00559554 _ZTV9Obj559554 evidence size:0x40 vtable (address point 0x55955c; stored by FUN_00112188, FUN_0011234c)
+00559594 _ZTV9Obj559594 evidence size:0x2c vtable (address point 0x55959c; stored by FUN_00113764)
+005595c0 _ZTV9Obj5595c0 evidence size:0x10 vtable (address point 0x5595c8; stored by FUN_00113bc0, FUN_00113c60)
+005595e8 _ZTV9Obj5595e8 evidence size:0xc vtable (address point 0x5595f0; stored by FUN_002fbaec, FUN_002fbb44)
+005595f8 _ZTV9Obj5595f8 evidence size:0x10 vtable (address point 0x559600; stored by FUN_00113e9c)
+00559608 _ZTV9Obj559608 evidence size:0x1c vtable (address point 0x559610; stored by FUN_0030cdc0, FUN_0030ce94)
+00559624 _ZTV9Obj559624 evidence size:0xc vtable (address point 0x55962c; stored by FUN_00114048)
+00559634 _ZTV9Obj559634 evidence size:0x44 vtable (address point 0x55963c; stored by FUN_001142fc, FUN_0011439c)
+0055967c _ZTV9Obj55967c evidence size:0x20 vtable (address point 0x559684; stored by FUN_001144a4, destroyObj00559684)
+0055969c _ZTV9Obj55969c evidence size:0xc vtable (address point 0x5596a4; stored by FUN_0011456c, FUN_001145a0)
+005596cc _ZTV9Obj5596cc evidence size:0xc vtable (address point 0x5596d4; stored by FUN_001145e4)
+00559704 _ZTV9Obj559704 evidence size:0x1c vtable (address point 0x55970c; stored by FUN_002fafd8, FUN_002fb028)
+00559740 _ZTV9Obj559740 evidence size:0xc vtable (address point 0x559748; stored by FUN_002f4ffc)
+00559750 _ZTV9Obj559750 evidence size:0x2c vtable (address point 0x559758; stored by FUN_00114e54, FUN_00114efc)
+0055977c _ZTV9Obj55977c evidence size:0x58 vtable (address point 0x559784; stored by FUN_00115314)
+005597d4 _ZTV9Obj5597d4 evidence size:0x18 vtable (address point 0x5597dc; stored by FUN_00115484, FUN_002fa0f4)
+005597ec _ZTV9Obj5597ec evidence size:0xc vtable (address point 0x5597f4; stored by FUN_00115504)
+00559828 _ZTV9Obj559828 evidence size:0x14 vtable (address point 0x559830; stored by FUN_0010a3a0)
+0055983c _ZTV9Obj55983c evidence size:0xc vtable (address point 0x559844; stored by FUN_00115750, FUN_00115770)
+00559878 _ZTV9Obj559878 evidence size:0x10 vtable (address point 0x559880; stored by FUN_0011595c)
+00559888 _ZTV9Obj559888 evidence size:0x24 vtable (address point 0x559890; stored by FUN_0010eb10, FUN_00115ad0)
+005598ac _ZTV9Obj5598ac evidence size:0x24 vtable (address point 0x5598b4; stored by destroyObj005598b4)
+005598d0 _ZTV9Obj5598d0 evidence size:0x24 vtable (address point 0x5598d8; stored by FUN_00129568, destroyObj005598d8)
+005598f4 _ZTV9Obj5598f4 evidence size:0x24 vtable (address point 0x5598fc; stored by FUN_00129690)
+00559918 _ZTV9Obj559918 evidence size:0x24 vtable (address point 0x559920; stored by FUN_00129778)
+0055993c _ZTV9Obj55993c evidence size:0x24 vtable (address point 0x559944; stored by FUN_00129858)
+00559960 _ZTV9Obj559960 evidence size:0x24 vtable (address point 0x559968; stored by FUN_001253a4, FUN_0012992c)
+00559984 _ZTV9Obj559984 evidence size:0x24 vtable (address point 0x55998c; stored by FUN_001253a4, FUN_00129a0c)
+005599a8 _ZTV9Obj5599a8 evidence size:0x24 vtable (address point 0x5599b0; stored by FUN_00129b00)
+005599cc _ZTV9Obj5599cc evidence size:0x24 vtable (address point 0x5599d4; stored by FUN_001253a4, FUN_00129be0)
+005599f0 _ZTV9Obj5599f0 evidence size:0x24 vtable (address point 0x5599f8; stored by FUN_00129cd4)
+00559a14 _ZTV9Obj559a14 evidence size:0x24 vtable (address point 0x559a1c; stored by FUN_001253a4, FUN_00129db4)
+00559a38 _ZTV9Obj559a38 evidence size:0x24 vtable (address point 0x559a40; stored by FUN_001253a4, FUN_00129e94)
+00559a5c _ZTV9Obj559a5c evidence size:0x24 vtable (address point 0x559a64; stored by FUN_00129f34)
+00559a80 _ZTV9Obj559a80 evidence size:0x24 vtable (address point 0x559a88; stored by FUN_00129fc8)
+00559aa4 _ZTV9Obj559aa4 evidence size:0x24 vtable (address point 0x559aac; stored by FUN_0012a05c)
+00559ac8 _ZTV9Obj559ac8 evidence size:0x24 vtable (address point 0x559ad0; stored by FUN_0012a0e4)
+00559aec _ZTV9Obj559aec evidence size:0x24 vtable (address point 0x559af4; stored by FUN_0012a16c)
+00559b10 _ZTV9Obj559b10 evidence size:0x24 vtable (address point 0x559b18; stored by FUN_0012a1fc)
+00559b34 _ZTV9Obj559b34 evidence size:0x24 vtable (address point 0x559b3c; stored by FUN_0012a290)
+00559b58 _ZTV9Obj559b58 evidence size:0x54 vtable (address point 0x559b60; stored by FUN_002fb58c, FUN_002fba98)
+00559bb0 _ZTV9Obj559bb0 evidence size:0xc vtable (address point 0x559bb8; stored by FUN_0030d27c)
+00559bc0 _ZTV9Obj559bc0 evidence size:0xc vtable (address point 0x559bc8; stored by FUN_00115c7c)
+00559bd0 _ZTV9Obj559bd0 evidence size:0x1c vtable (address point 0x559bd8; stored by FUN_00115cb4)
+00559bf0 _ZTV9Obj559bf0 evidence size:0x14 vtable (address point 0x559bf8; stored by FUN_002f5928)
+00559c04 _ZTV9Obj559c04 evidence size:0x4c vtable (address point 0x559c0c; stored by FUN_0012a9e4)
+00559c70 _ZTV9Obj559c70 evidence size:0x4c vtable (address point 0x559c78; stored by FUN_0012b20c)
+00559cdc _ZTV9Obj559cdc evidence size:0x3c vtable (address point 0x559ce4; stored by FUN_00116498, FUN_00116550)
+00559d18 _ZTV9Obj559d18 evidence size:0x14 vtable (address point 0x559d20; stored by FUN_0010a3a0)
+00559d2c _ZTV9Obj559d2c evidence size:0x1c vtable (address point 0x559d34; stored by FUN_002eb7e0)
+00559d50 _ZTV9Obj559d50 evidence size:0x20 vtable (address point 0x559d58; stored by FUN_00116770, FUN_0011681c)
+00559d78 _ZTV9Obj559d78 evidence size:0x24 vtable (address point 0x559d80; stored by FUN_00116854)
+00559d9c _ZTV9Obj559d9c evidence size:0xc vtable (address point 0x559da4; stored by FUN_00116934, FUN_00116988)
+00559dac _ZTV9Obj559dac evidence size:0xc vtable (address point 0x559db4; stored by FUN_001169dc)
+00559dbc _ZTV9Obj559dbc evidence size:0xc vtable (address point 0x559dc4; stored by FUN_00116a1c)
+00559dcc _ZTV9Obj559dcc evidence size:0x50 vtable (address point 0x559dd4; stored by FUN_00116f6c, FUN_00116ff4)
+00559e3c _ZTV9Obj559e3c evidence size:0x2c vtable (address point 0x559e44; stored by FUN_002ec6ec, destroyObj00559e44)
+00559e68 _ZTV9Obj559e68 evidence size:0x2c vtable (address point 0x559e70; stored by FUN_001174ec, destroyObj00559e70)
+00559e94 _ZTV9Obj559e94 evidence size:0x10 vtable (address point 0x559e9c; stored by FUN_001175a4)
+00559ea4 _ZTV9Obj559ea4 evidence size:0x18 vtable (address point 0x559eac; stored by FUN_003112b4)
+00559ebc _ZTV9Obj559ebc evidence size:0xc vtable (address point 0x559ec4; stored by FUN_00117804, FUN_00117828)
+0055a168 _ZTV9Obj55a168 evidence size:0xc vtable (address point 0x55a170; stored by FUN_0030d200)
+0055a1dc _ZTV9Obj55a1dc evidence size:0x3c vtable (address point 0x55a1e4; stored by FUN_0011997c, FUN_00119aa0)
+0055a27c _ZTV9Obj55a27c evidence size:0x84 vtable (address point 0x55a284; stored by FUN_002eb4a4, constructObj0055a284)
+0055a348 _ZTV9Obj55a348 evidence size:0x3c vtable (address point 0x55a350; stored by FUN_0011a268, destroyObj0055a350)
+0055a384 _ZTV9Obj55a384 evidence size:0x30 vtable (address point 0x55a38c; stored by FUN_0011a8b8, FUN_0011a9d0)
+0055a3bc _ZTV9Obj55a3bc evidence size:0x3c vtable (address point 0x55a3c4; stored by FUN_0011afd8, destroyObj0055a3c4)
+0055a3f8 _ZTV9Obj55a3f8 evidence size:0x78 vtable (address point 0x55a400; stored by FUN_002ed0dc, FUN_00307140)
+0055a474 _ZTV9Obj55a474 evidence size:0x24 vtable (address point 0x55a47c; stored by FUN_0030e8dc)
+0055a498 _ZTV9Obj55a498 evidence size:0x10 vtable (address point 0x55a4a0; stored by initVtable0055a4a0)
+0055a4d8 _ZTV9Obj55a4d8 evidence size:0xc vtable (address point 0x55a4e0; stored by FUN_001145e4, destroyObj0055a4e0)
+0055a4e8 _ZTV9Obj55a4e8 evidence size:0x10 vtable (address point 0x55a4f0; stored by FUN_00310f58)
+0055a508 _ZTV9Obj55a508 evidence size:0xc vtable (address point 0x55a510; stored by FUN_0030d1ac, FUN_0030d420)
+0055a518 _ZTV9Obj55a518 evidence size:0x30 vtable (address point 0x55a520; stored by FUN_0011b430, destroyObj0055a520)
+0055a578 _ZTV9Obj55a578 evidence size:0x10 vtable (address point 0x55a580; stored by initVtable0055a580)
+0055a598 _ZTV9Obj55a598 evidence size:0xc vtable (address point 0x55a5a0; stored by FUN_00115504, FUN_0011b4e4)
+0055a5c8 _ZTV9Obj55a5c8 evidence size:0x108 vtable (address point 0x55a5d0; stored by FUN_0011b724, FUN_0011b77c)
+0055a7a8 _ZTV9Obj55a7a8 evidence size:0x20 vtable (address point 0x55a7b0; stored by FUN_0011bc64, FUN_0011be64)
+0055a7f0 _ZTV9Obj55a7f0 evidence size:0xc vtable (address point 0x55a7f8; stored by FUN_00115c7c, destroyObj0055a7f8)
+0055a810 _ZTV9Obj55a810 evidence size:0xc vtable (address point 0x55a818; stored by FUN_0011c0e8)
+0055a830 _ZTV9Obj55a830 evidence size:0x4c vtable (address point 0x55a838; stored by FUN_0011c5d8, FUN_0011c614)
+0055a87c _ZTV9Obj55a87c evidence size:0xc vtable (address point 0x55a884; stored by FUN_0030d108, FUN_0030d134)
+0055a88c _ZTV9Obj55a88c evidence size:0xc vtable (address point 0x55a894; stored by FUN_0030d0ac, FUN_0030d3c8)
+0055a89c _ZTV9Obj55a89c evidence size:0x3c vtable (address point 0x55a8a4; stored by FUN_0011c750, destroyObj0055a8a4)
+0055a8d8 _ZTV9Obj55a8d8 evidence size:0xc vtable (address point 0x55a8e0; stored by FUN_001169dc, FUN_0011c914)
+0055a8e8 _ZTV9Obj55a8e8 evidence size:0xc vtable (address point 0x55a8f0; stored by FUN_00116a1c, FUN_0011c93c)
+0055a92c _ZTV9Obj55a92c evidence size:0x20 vtable (address point 0x55a934; stored by FUN_0011ccfc, FUN_0011cd9c)
+0055a94c _ZTV9Obj55a94c evidence size:0x64 vtable (address point 0x55a954; stored by FUN_00300b18)
+0055aa5c _ZTV9Obj55aa5c evidence size:0x3c vtable (address point 0x55aa64; stored by FUN_0011dda0, FUN_0011de1c)
+0055aa98 _ZTV9Obj55aa98 evidence size:0x3c vtable (address point 0x55aaa0; stored by FUN_0011e0d4, FUN_0011e178)
+0055ab04 _ZTV9Obj55ab04 evidence size:0x20 vtable (address point 0x55ab0c; stored by FUN_0011e660, FUN_002f7e4c)
+0055ab24 _ZTV9Obj55ab24 evidence size:0x6c vtable (address point 0x55ab2c; stored by FUN_00106150, FUN_0011e840)
+0055ab90 _ZTV9Obj55ab90 evidence size:0x44 vtable (address point 0x55ab98; stored by FUN_0011e894, FUN_00311298)
+0055abd4 _ZTV9Obj55abd4 evidence size:0x64 vtable (address point 0x55abdc; stored by FUN_00303208)
+0055ac58 _ZTV9Obj55ac58 evidence size:0xc vtable (address point 0x55ac60; stored by destroyObj0055ac60)
+0055acb8 _ZTV9Obj55acb8 evidence size:0x68 vtable (address point 0x55acc0; stored by FUN_0011ff0c, FUN_0011ff7c)
+0055ad54 _ZTV9Obj55ad54 evidence size:0xc vtable (address point 0x55ad5c; stored by FUN_00120424)
+0055ad64 _ZTV9Obj55ad64 evidence size:0xc vtable (address point 0x55ad6c; stored by FUN_0011d590, destroyObj0055ad6c)
+0055ad74 _ZTV9Obj55ad74 evidence size:0xc vtable (address point 0x55ad7c; stored by destroyObj0055ad7c, FUN_0030ca9c)
+0055ad94 _ZTV9Obj55ad94 evidence size:0xc vtable (address point 0x55ad9c; stored by FUN_0011f57c, destroyObj0055ad9c)
+0055adb8 _ZTV9Obj55adb8 evidence size:0xc vtable (address point 0x55adc0; stored by FUN_0011fe6c, destroyObj0055adc0)
+0055ae14 _ZTV9Obj55ae14 evidence size:0xc vtable (address point 0x55ae1c; stored by FUN_00120424, FUN_0012086c)
+0055ae24 _ZTV9Obj55ae24 evidence size:0x30 vtable (address point 0x55ae2c; stored by FUN_002eb77c, FUN_002eb7c0)
+0055ae5c _ZTV9Obj55ae5c evidence size:0x10 vtable (address point 0x55ae64; stored by FUN_002ec75c, destroyObj0055ae64, FUN_002ec934, FUN_002ecbdc)
+0055ae6c _ZTV9Obj55ae6c evidence size:0xc vtable (address point 0x55ae74; stored by FUN_0030fc14, FUN_0030fc48)
+0055aed8 _ZTV9Obj55aed8 evidence size:0x1c vtable (address point 0x55aee0; stored by FUN_00120b78, FUN_0012c53c)
+0055aef4 _ZTV9Obj55aef4 evidence size:0x10 vtable (address point 0x55aefc; stored by FUN_00120d60, FUN_00120e80)
+0055af04 _ZTV9Obj55af04 evidence size:0x28 vtable (address point 0x55af0c; stored by FUN_002fb018)
+0055af2c _ZTV9Obj55af2c evidence size:0x10 vtable (address point 0x55af34; stored by FUN_00120f44)
+0055af3c _ZTV9Obj55af3c evidence size:0xc vtable (address point 0x55af44; stored by FUN_001210b0, FUN_001210e0)
+0055af4c _ZTV9Obj55af4c evidence size:0x10 vtable (address point 0x55af54; stored by FUN_0010d6d4, FUN_002e7614, strInit, strDestroy)
+0055afb4 _ZTV9Obj55afb4 evidence size:0xc vtable (address point 0x55afbc; stored by FUN_00121328, destroyObj0055afbc)
+0055b004 _ZTV9Obj55b004 evidence size:0x10 vtable (address point 0x55b00c; stored by FUN_001214c4, FUN_001214f8, FUN_00121540)
+0055b014 _ZTV9Obj55b014 evidence size:0xc vtable (address point 0x55b01c; stored by FUN_0012ce9c)
+0055b024 _ZTV9Obj55b024 evidence size:0xc vtable (address point 0x55b02c; stored by FUN_0012cec4, FUN_002f4424)
+0055b034 _ZTV9Obj55b034 evidence size:0xc vtable (address point 0x55b03c; stored by FUN_0012ceec)
+0055b044 _ZTV9Obj55b044 evidence size:0xc vtable (address point 0x55b04c; stored by FUN_0012cf14)
+0055b054 _ZTV9Obj55b054 evidence size:0xc vtable (address point 0x55b05c; stored by FUN_0030f34c, FUN_0030f3c8)
+0055b064 _ZTV9Obj55b064 evidence size:0xc vtable (address point 0x55b06c; stored by FUN_00310578)
+0055b084 _ZTV9Obj55b084 evidence size:0xc vtable (address point 0x55b08c; stored by FUN_0012cf84)
+0055b094 _ZTV9Obj55b094 evidence size:0x40 vtable (address point 0x55b09c; stored by FUN_0012193c, FUN_0012199c)
+0055b0d4 _ZTV9Obj55b0d4 evidence size:0x10 vtable (address point 0x55b0dc; stored by FUN_002f4e90, FUN_002f4f00, FUN_00303cd8)
+0055b0e4 _ZTV9Obj55b0e4 evidence size:0x10 vtable (address point 0x55b0ec; stored by FUN_00121cc4, FUN_00121e38)
+0055b0f4 _ZTV9Obj55b0f4 evidence size:0x10 vtable (address point 0x55b0fc; stored by FUN_00121fa4, FUN_00302374)
+0055b114 _ZTV9Obj55b114 evidence size:0x18 vtable (address point 0x55b11c; stored by FUN_0010ed0c)
+0055b1c8 _ZTV9Obj55b1c8 evidence size:0xc vtable (address point 0x55b1d0; stored by FUN_00122230)
+0055b1e4 _ZTV9Obj55b1e4 evidence size:0x40 vtable (address point 0x55b1ec; stored by FUN_0012229c, FUN_002ea614)
+0055b224 _ZTV9Obj55b224 evidence size:0x10 vtable (address point 0x55b22c; stored by FUN_002f2a44)
+0055b234 _ZTV9Obj55b234 evidence size:0x4c vtable (address point 0x55b23c; stored by FUN_002f4f3c)
+0055b2ac _ZTV9Obj55b2ac evidence size:0x28 vtable (address point 0x55b2b4; stored by FUN_001224b0)
+0055b2d8 _ZTV9Obj55b2d8 evidence size:0x10 vtable (address point 0x55b2e0; stored by FUN_002ee524, sharedRefHolderDestroy2, FUN_002fde5c)
+0055b2e8 _ZTV9Obj55b2e8 evidence size:0xc vtable (address point 0x55b2f0; stored by FUN_0012272c, destroyObj0055b2f0)
+0055b2f8 _ZTV9Obj55b2f8 evidence size:0x1c vtable (address point 0x55b300; stored by FUN_00122a68, FUN_00122b34)
+0055b360 _ZTV9Obj55b360 evidence size:0x10 vtable (address point 0x55b368; stored by FUN_00123100, FUN_0012323c)
+0055b3a8 _ZTV9Obj55b3a8 evidence size:0xc vtable (address point 0x55b3b0; stored by FUN_0043a20c, FUN_005117f8)
+0055b3b8 _ZTV9Obj55b3b8 evidence size:0xc vtable (address point 0x55b3c0; stored by FUN_0043b044)
+0055b3c8 _ZTV9Obj55b3c8 evidence size:0xc vtable (address point 0x55b3d0; stored by FUN_0043b55c)
+0055b3d8 _ZTV9Obj55b3d8 evidence size:0x28 vtable (address point 0x55b3e0; stored by FUN_002ea668)
+0055b404 _ZTV9Obj55b404 evidence size:0xc vtable (address point 0x55b40c; stored by FUN_0043eca8)
+0055b410 _ZTV9Obj55b410 evidence size:0xc vtable (address point 0x55b418; stored by FUN_0043e30c, FUN_0043f384)
+0055b420 _ZTV9Obj55b420 evidence size:0xc vtable (address point 0x55b428; stored by FUN_00511fb8)
+0055b43c _ZTV9Obj55b43c evidence size:0xc vtable (address point 0x55b444; stored by FUN_00443250)
+0055b44c _ZTV9Obj55b44c evidence size:0x2c vtable (address point 0x55b454; stored by FUN_00443378, _ZN9Obj421654D1Ev)
+0055b478 _ZTV9Obj55b478 evidence size:0x30 vtable (address point 0x55b480; stored by FUN_001cdbb4, FUN_00443410)
+0055b4a8 _ZTV9Obj55b4a8 evidence size:0x34 vtable (address point 0x55b4b0; stored by FUN_00171acc, FUN_001be190, FUN_00443b48)
+0055b4e4 _ZTV9Obj55b4e4 evidence size:0x48 vtable (address point 0x55b4ec; stored by FUN_0015add8, FUN_001be4a0, FUN_00444024)
+0055b530 _ZTV9Obj55b530 evidence size:0xc vtable (address point 0x55b538; stored by FUN_0015aef0, FUN_00444374)
+0055b540 _ZTV9Obj55b540 evidence size:0x2c vtable (address point 0x55b548; stored by FUN_00444c64)
+0055b56c _ZTV9Obj55b56c evidence size:0x38 vtable (address point 0x55b574; stored by FUN_001b12a4, FUN_00445124)
+0055b5a8 _ZTV9Obj55b5a8 evidence size:0x34 vtable (address point 0x55b5b0; stored by FUN_00171d7c, FUN_001be7a4, FUN_00445514)
+0055b5e4 _ZTV9Obj55b5e4 evidence size:0x34 vtable (address point 0x55b5ec; stored by FUN_001be9f8, FUN_00445df8)
+0055b618 _ZTV9Obj55b618 evidence size:0x14 vtable (address point 0x55b620; stored by ifaceHolderDestroy)
+0055b62c _ZTV9Obj55b62c evidence size:0xc vtable (address point 0x55b634; stored by FUN_00446550)
+0055b63c _ZTV9Obj55b63c evidence size:0xc vtable (address point 0x55b644; stored by FUN_00171e44)
+0055b64c _ZTV9Obj55b64c evidence size:0x34 vtable (address point 0x55b654; stored by FUN_001b6d08, FUN_00446b0c)
+0055b680 _ZTV9Obj55b680 evidence size:0x84 vtable (address point 0x55b688; stored by FUN_001b7420, FUN_00443b48, FUN_00444024, FUN_00445514)
+0055b704 _ZTV9Obj55b704 evidence size:0x34 vtable (address point 0x55b70c; stored by FUN_0015d35c, FUN_001bf68c, FUN_00448958)
+0055b740 _ZTV9Obj55b740 evidence size:0xc vtable (address point 0x55b748; stored by FUN_00448ca4)
+0055b75c _ZTV9Obj55b75c evidence size:0x40 vtable (address point 0x55b764; stored by FUN_001bfb7c, FUN_00448e4c)
+0055b7a0 _ZTV9Obj55b7a0 evidence size:0x2c vtable (address point 0x55b7a8; stored by FUN_001b25c0, FUN_00449150, _ZN9Obj421654D1Ev)
+0055b7cc _ZTV9Obj55b7cc evidence size:0x20 vtable (address point 0x55b7d4; stored by FUN_005160a0)
+0055b7f0 _ZTV9Obj55b7f0 evidence size:0x50 vtable (address point 0x55b7f8; stored by FUN_0044959c)
+0055b840 _ZTV9Obj55b840 evidence size:0x38 vtable (address point 0x55b848; stored by FUN_001b77a8, FUN_00449718)
+0055b87c _ZTV9Obj55b87c evidence size:0x54 vtable (address point 0x55b884; stored by FUN_001b12a4, FUN_00449ce0)
+0055b918 _ZTV9Obj55b918 evidence size:0x24 vtable (address point 0x55b920; stored by FUN_001ca61c, FUN_0044c418)
+0055b93c _ZTV9Obj55b93c evidence size:0x24 vtable (address point 0x55b944; stored by FUN_0044c458)
+0055b960 _ZTV9Obj55b960 evidence size:0x24 vtable (address point 0x55b968; stored by FUN_001723f0, FUN_001ca668, FUN_0044c66c)
+0055b984 _ZTV9Obj55b984 evidence size:0x30 vtable (address point 0x55b98c; stored by FUN_001b8108, FUN_0044ca44)
+0055b9c0 _ZTV9Obj55b9c0 evidence size:0x24 vtable (address point 0x55b9c8; stored by FUN_0017250c, FUN_001ca6d0, FUN_0044cd0c)
+0055b9e4 _ZTV9Obj55b9e4 evidence size:0x2c vtable (address point 0x55b9ec; stored by FUN_0044d850)
+0055bb90 _ZTV9Obj55bb90 evidence size:0x34 vtable (address point 0x55bb98; stored by FUN_0015d814, FUN_001c0324, FUN_0045007c)
+0055bbc4 _ZTV9Obj55bbc4 evidence size:0x3c vtable (address point 0x55bbcc; stored by FUN_004531e0)
+0055bc00 _ZTV9Obj55bc00 evidence size:0x34 vtable (address point 0x55bc08; stored by FUN_001b6d08, FUN_001be9f8, FUN_001c0a0c, FUN_00454ac8)
+0055bc34 _ZTV9Obj55bc34 evidence size:0x34 vtable (address point 0x55bc3c; stored by FUN_001a46c0, FUN_004558b0)
+0055bc68 _ZTV9Obj55bc68 evidence size:0xc vtable (address point 0x55bc70; stored by FUN_00455c64)
+0055bccc _ZTV9Obj55bccc evidence size:0xc vtable (address point 0x55bcd4; stored by FUN_00459870, FUN_0045991c)
+0055bcdc _ZTV9Obj55bcdc evidence size:0x30 vtable (address point 0x55bce4; stored by FUN_001b7420, FUN_001cdbb4, FUN_00443b48, FUN_00444024)
+0055bd0c _ZTV9Obj55bd0c evidence size:0x20 vtable (address point 0x55bd14; stored by FUN_0045b738)
+0055bd2c _ZTV9Obj55bd2c evidence size:0x20 vtable (address point 0x55bd34; stored by FUN_0045bbdc, FUN_0045bc3c)
+0055bd64 _ZTV9Obj55bd64 evidence size:0x54 vtable (address point 0x55bd6c; stored by FUN_0045bd20)
+0055bdd8 _ZTV9Obj55bdd8 evidence size:0x20 vtable (address point 0x55bde0; stored by installVtbl55BDE0)
+0055bdf8 _ZTV9Obj55bdf8 evidence size:0x20 vtable (address point 0x55be00; stored by FUN_0045c310)
+0055be48 _ZTV9Obj55be48 evidence size:0x14 vtable (address point 0x55be50; stored by FUN_0045e798, FUN_0045e8fc)
+0055bedc _ZTV9Obj55bedc evidence size:0x14 vtable (address point 0x55bee4; stored by constructObj0055bee4)
+0055bef0 _ZTV9Obj55bef0 evidence size:0x3c vtable (address point 0x55bef8; stored by FUN_0019070c, FUN_00460024)
+0055bf2c _ZTV9Obj55bf2c evidence size:0x60 vtable (address point 0x55bf34; stored by FUN_00460378, FUN_00460500)
+0055bfbc _ZTV9Obj55bfbc evidence size:0x3c vtable (address point 0x55bfc4; stored by constructObj0055bfc4, FUN_00460a30)
+0055bff8 _ZTV9Obj55bff8 evidence size:0x14 vtable (address point 0x55c000; stored by FUN_00512398)
+0055c00c _ZTV9Obj55c00c evidence size:0x14 vtable (address point 0x55c014; stored by FUN_00512398)
+0055c020 _ZTV9Obj55c020 evidence size:0x60 vtable (address point 0x55c028; stored by FUN_00460d1c)
+0055c080 _ZTV9Obj55c080 evidence size:0x60 vtable (address point 0x55c088; stored by FUN_00460dd8)
+0055c0e0 _ZTV9Obj55c0e0 evidence size:0x14 vtable (address point 0x55c0e8; stored by FUN_00512398)
+0055c0f4 _ZTV9Obj55c0f4 evidence size:0x20 vtable (address point 0x55c0fc; stored by FUN_00460e9c, FUN_00460f30)
+0055c130 _ZTV9Obj55c130 evidence size:0x14 vtable (address point 0x55c138; stored by FUN_00512398)
+0055c144 _ZTV9Obj55c144 evidence size:0x14 vtable (address point 0x55c14c; stored by FUN_00512398)
+0055c158 _ZTV9Obj55c158 evidence size:0x1c vtable (address point 0x55c160; stored by FUN_00461470, FUN_004614b4)
+0055c194 _ZTV9Obj55c194 evidence size:0x14 vtable (address point 0x55c19c; stored by constructObj0055c19c)
+0055c1a8 _ZTV9Obj55c1a8 evidence size:0x3c vtable (address point 0x55c1b0; stored by FUN_004625c0, voiceOwnerDestroy)
+0055c1e4 _ZTV9Obj55c1e4 evidence size:0x24 vtable (address point 0x55c1ec; stored by FUN_004631f0)
+0055c268 _ZTV9Obj55c268 evidence size:0x14 vtable (address point 0x55c270; stored by constructTrackBase)
+0055c27c _ZTV9Obj55c27c evidence size:0x14 vtable (address point 0x55c284; stored by FUN_001b23a0, FUN_001cc084)
+0055c290 _ZTV9Obj55c290 evidence size:0x14 vtable (address point 0x55c298; stored by FUN_001a6384)
+0055c2a4 _ZTV9Obj55c2a4 evidence size:0x24 vtable (address point 0x55c2ac; stored by FUN_001a6400, FUN_00465564)
+0055c2f0 _ZTV9Obj55c2f0 evidence size:0x14 vtable (address point 0x55c2f8; stored by FUN_0019029c)
+0055c304 _ZTV9Obj55c304 evidence size:0x2c vtable (address point 0x55c30c; stored by FUN_00466330)
+0055c384 _ZTV9Obj55c384 evidence size:0x14 vtable (address point 0x55c38c; stored by FUN_00466b00)
+0055c3b0 _ZTV9Obj55c3b0 evidence size:0x3c vtable (address point 0x55c3b8; stored by constructObj0055c3b8, FUN_00466f6c)
+0055c3ec _ZTV9Obj55c3ec evidence size:0x14 vtable (address point 0x55c3f4; stored by FUN_00467040, FUN_004670a4)
+0055c52c _ZTV9Obj55c52c evidence size:0x74 vtable (address point 0x55c534; stored by FUN_00175f54)
+0055c5a0 _ZTV9Obj55c5a0 evidence size:0x70 vtable (address point 0x55c5a8; stored by FUN_0019181c)
+0055c610 _ZTV9Obj55c610 evidence size:0x74 vtable (address point 0x55c618; stored by initVtable0055c618, FUN_00467bb4)
+0055c7b0 _ZTV9Obj55c7b0 evidence size:0x24 vtable (address point 0x55c7b8; stored by _ZN19ControllerFirstKindC1Ev)
+0055c7d4 _ZTV9Obj55c7d4 evidence size:0x18 vtable (address point 0x55c7dc; stored by FUN_00481b80)
+0055c7ec _ZTV9Obj55c7ec evidence size:0x18 vtable (address point 0x55c7f4; stored by callbackOwnerInitialize)
+0055c804 _ZTV9Obj55c804 evidence size:0x18 vtable (address point 0x55c80c; stored by FUN_004823ec)
+0055c840 _ZTV9Obj55c840 evidence size:0x24 vtable (address point 0x55c848; stored by _ZN20ControllerSecondKindC1Ev)
+0055c904 _ZTV9Obj55c904 evidence size:0x1c vtable (address point 0x55c90c; stored by _ZN9Obj55c89c5startEv, _ZN9Obj55c8d05startEv)
+0055ca5c _ZTV9Obj55ca5c evidence size:0x28 vtable (address point 0x55ca64; stored by FUN_004d99a8)
+0055ca84 _ZTV9Obj55ca84 evidence size:0x40 vtable (address point 0x55ca8c; stored by FUN_004d95e8, FUN_004d9ab0)
+0055cac4 _ZTV9Obj55cac4 evidence size:0x18 vtable (address point 0x55cacc; stored by FUN_004134f8, FUN_004139ec, FUN_00413e50, uiOpenSelectedValueDialog)
+0055cadc _ZTV9Obj55cadc evidence size:0x44 vtable (address point 0x55cae4; stored by FUN_004d95e8, FUN_004d9800)
+0055cb20 _ZTV9Obj55cb20 evidence size:0x14 vtable (address point 0x55cb28; stored by FUN_003fa010)
+0055cb40 _ZTV9Obj55cb40 evidence size:0x14 vtable (address point 0x55cb48; stored by FUN_0010095c)
+0055cb54 _ZTV9Obj55cb54 evidence size:0x14 vtable (address point 0x55cb5c; stored by FUN_001248c0)
+0055cb88 _ZTV9Obj55cb88 evidence size:0x14 vtable (address point 0x55cb90; stored by FUN_0010077c, FUN_00124a0c)
+0055cb9c _ZTV9Obj55cb9c evidence size:0x14 vtable (address point 0x55cba4; stored by FUN_0030e8ec, FUN_0030e924)
+0055cbd0 _ZTV9Obj55cbd0 evidence size:0x1c vtable (address point 0x55cbd8; stored by FUN_0010095c)
+005c14b4 _ZTV9Obj5c14b4 evidence size:0x8 vtable (address point 0x5c14bc; stored by FUN_0016f06c)
+0055ad30 _ZTV9Obj55ad30 inferred size:0x10 vtable of abstract base (two null slots; address point 0x55ad38 stored first by copy ctor FUN_0030d3c8)
+0055ac48 _ZTV9Obj55ac48 inferred size:0x10 vtable of abstract base (address point 0x55ac50: retail reloc is _ZTV9Obj55ac38+0x18, so _ZTV9Obj55ac38 (size:0x20) must shrink to 0x10; all-zero slots at 0x55ac48)
+0055ad20 _ZTV9Obj55ad20 inferred size:0x10 vtable of abstract base (address point 0x55ad28 stored first by FUN_0030d108)
+0030d0ac _ZN9Obj55a88cC1Ev inferred thumb default ctor: clears the byte at +4 and stores _ZTV9Obj55a88c+8
+0030d3c8 _ZN9Obj55a88cC1ERKS_ inferred thumb copy ctor: stores _ZTV9Obj55ad30+8, copies the 0x18-byte record, stores _ZTV9Obj55a88c+8
+0030d09c _ZN12AsdAllocatorI9Obj55a88cE9constructEPS0_RKS0_ inferred allocator construct: null-checked copy ctor call (callee FUN_0030d3c8)
+0030d1ac _ZN9Obj55a508C1Ev inferred thumb default ctor: clears the byte at +4 and stores _ZTV9Obj55a508+8
+0030d420 _ZN9Obj55a508C1ERKS_ inferred thumb copy ctor: stores _ZTV9Obj55ac48+8, copies the 0x20-byte record, stores _ZTV9Obj55a508+8
+0030d19e _ZN12AsdAllocatorI9Obj55a508E9constructEPS0_RKS0_ inferred allocator construct: null-checked copy ctor call (callee FUN_0030d420)
+0030e8dc _ZN9Obj55a474C1Ev inferred thumb ctor: clears +4 and stores _ZTV9Obj55a474+8 (derived filter classes call it first)
+0030ce94 _ZN9Obj559608C1Ev inferred thumb ctor: clears +4/+8, stores _ZTV9Obj559608+8, appends this to the online object list (FUN_00113d48)
+0030cdc0 _ZN9Obj559608D1Ev inferred thumb dtor (slot 0 of _ZTV9Obj559608): stores the vtable and unlinks this from the online object list (FUN_00113de4)
+00113d48 onlineObjectListAdd inferred appends a node (next at +4, previous at +8) to a doubly linked list (head +8, tail +0xc, count +0x14) when the flag at g_flagBlock+5 is set
+00113de4 onlineObjectListUnlink inferred partner of FUN_00113d48: unlinks the node; called by the Obj559608 destructor
+00594a58 g_onlineRegistry inferred size:0x68 online system state; the pointer at +0x64 is the online object list
+0030d108 _ZN9Obj55a87cC1ERKS_ inferred thumb copy ctor: stores _ZTV9Obj55ad20+8, copies two bytes, copy-constructs the 0x20-byte member at +8, stores _ZTV9Obj55a87c+8
+003038a0 _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EEC1ERKS3_ inferred std::vector<Obj55a87c> copy ctor (0x28-byte elements): begin/end/cap = 0, capacity = max(__rw_new_capacity(0), size), allocate, uninitialized_copy (FUN_0030fd40)
+0030d02e _ZN12AsdAllocatorISt6vectorI9Obj55a87cS_IS1_EEE9constructEPS3_RKS3_ inferred allocator construct for the Obj55a87c vector: null-checked copy ctor call (FUN_003038a0)
+0019181c _ZN9Obj55c5a0C1Ev inferred constructor of the abstract base with vtable 0x55c5a0: stores the vtable, then the removed debug hook(0, 0x4000144)
+0030d108 _ZN12AsdAllocatorI9Obj55a87cE9constructEPS0_RKS0_ inferred CORRECTION of batch 1 (was _ZN9Obj55a87cC1ERKS_): allocator construct for Obj55a87c, null-checked, copy ctor inlined (base vptr _ZTV9Obj55ad20+8, bytes +4/+5, member copy at +8, _ZTV9Obj55a87c+8)
+0030d134 _ZN9Obj55a87cC1Ev inferred thumb default ctor: stores _ZTV9Obj55ad20+8, clears +4, constructs the payload at +8 (FUN_001145c8), stores _ZTV9Obj55a87c+8
+0030d154 _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EE5clearEv inferred std::vector<Obj55a87c>::clear, 0x28-byte elements
+00133c2c _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EE7reserveEj inferred std::vector<Obj55a87c>::reserve
+00133b48 _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_ inferred std::vector<Obj55a87c>::_C_insert_aux (push_back slow path)
+0030d03c _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EED1Ev inferred std::vector<Obj55a87c> destructor (called on the inner vector by FUN_00304d1a)
+0030d052 _ZNSt6vectorIS_I9Obj55a87c12AsdAllocatorIS0_EES1_IS3_EE5clearEv inferred std::vector<std::vector<Obj55a87c>>::clear (12-byte elements)
+001345a0 _ZNSt6vectorIS_I9Obj55a87c12AsdAllocatorIS0_EES1_IS3_EE7reserveEj inferred std::vector<std::vector<Obj55a87c>>::reserve
+001344c4 _ZNSt6vectorIS_I9Obj55a87c12AsdAllocatorIS0_EES1_IS3_EE13_C_insert_auxEPS3_RKS3_ inferred std::vector<std::vector<Obj55a87c>>::_C_insert_aux
+0030d0bc _ZNSt6vectorI9Obj55a88c12AsdAllocatorIS0_EE5clearEv inferred std::vector<Obj55a88c>::clear, 0x18-byte elements
+00133e90 _ZNSt6vectorI9Obj55a88c12AsdAllocatorIS0_EE7reserveEj inferred std::vector<Obj55a88c>::reserve
+00133db6 _ZNSt6vectorI9Obj55a88c12AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_ inferred std::vector<Obj55a88c>::_C_insert_aux
+0030d27c _ZN12AsdAllocatorI9Obj559bb0E9constructEPS0_RKS0_ inferred allocator construct for Obj559bb0 (0x18-byte record, vtable 0x559bb0; called with the vector as allocator by FUN_00305314)
+0030d2a8 _ZNSt6vectorI9Obj559bb012AsdAllocatorIS0_EE5clearEv inferred std::vector<Obj559bb0>::clear
+001336a8 _ZNSt6vectorI9Obj559bb012AsdAllocatorIS0_EE7reserveEj inferred std::vector<Obj559bb0>::reserve
+001335cc _ZNSt6vectorI9Obj559bb012AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_ inferred std::vector<Obj559bb0>::_C_insert_aux
+0030d200 _ZN12AsdAllocatorI9Obj55a168E9constructEPS0_RKS0_ inferred allocator construct for Obj55a168 (0x18-byte record, vtable 0x55a168)
+0030d228 _ZNSt6vectorI9Obj55a16812AsdAllocatorIS0_EE5clearEv inferred std::vector<Obj55a168>::clear
+00133810 _ZNSt6vectorI9Obj55a16812AsdAllocatorIS0_EE7reserveEj inferred std::vector<Obj55a168>::reserve
+00133734 _ZNSt6vectorI9Obj55a16812AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_ inferred std::vector<Obj55a168>::_C_insert_aux
+00311458 _ZN12AsdAllocatorI9Obj559edcE9constructEPS0_RKS0_ inferred allocator construct for Obj559edc (0xB8-byte elements)
+00311490 _ZN9Obj559edcC1Ev inferred thumb default ctor of Obj559edc (extern call from FUN_00305298)
+0030d2fc _ZNSt6vectorI9Obj559edc12AsdAllocatorIS0_EE5clearEv inferred std::vector<Obj559edc>::clear
+00133478 _ZNSt6vectorI9Obj559edc12AsdAllocatorIS0_EE7reserveEj inferred std::vector<Obj559edc>::reserve
+00133394 _ZNSt6vectorI9Obj559edc12AsdAllocatorIS0_EE13_C_insert_auxEPS0_RKS0_ inferred std::vector<Obj559edc>::_C_insert_aux
+0030fd7e _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55a87c12AsdAllocatorIS2_EEEEjjPKT_ inferred __rw_new_capacity for vector<Obj55a87c>: max(capacity+0x20, capacity*1.625); called by its copy ctor with 0
+0030fd70 _ZNKSt6vectorI9Obj55a87c12AsdAllocatorIS0_EE4sizeEv inferred vector<Obj55a87c>::size(): (end-begin)/0x28
+0030fd62 _ZN12AsdAllocatorI9Obj55a87cE8allocateEjPKv inferred AsdAllocator<Obj55a87c>::allocate(count, hint): rt_malloc(count*0x28)
+0030fd40 _ZSt18uninitialized_copyIPK9Obj55a87cPS0_12AsdAllocatorIS0_EET0_T_S7_S6_RT1_ inferred uninitialized_copy of Obj55a87c: allocator construct per element (stride 0x28)
+0030d3f4 _ZN16Obj55a87cPayloadC1ERKS_ inferred copy ctor of the 0x20-byte payload embedded at +8 of Obj55a87c (called from the inlined record copy in AsdAllocator<Obj55a87c>::construct)
+001145c8 _ZN16Obj55a87cPayloadC1Ev inferred default ctor of the same payload (called by Obj55a87c default ctor FUN_0030d134)
+00512dc8 moCreateValueRecordThunk inferred [high] thunk in front of moCreateValueRecord: its tail call is the branch-to-next NOP
+00512dd0 moCreateValueRecord inferred [high] moCreateValueRecord
+00513b40 criticalSectionReadValue38Thunk inferred [high] thunk in front of criticalSectionReadValue38: its tail call is the branch-to-next NOP
+00513b48 criticalSectionReadValue38 inferred [high] criticalSectionReadValue38
+001919a4 scriptPanelRelease inferred [med] releases helper, registered objects and script groups, resets message mode
+0026f148 campSelectorRebuildList inferred [med] rebuilds a camp selector page list from set flags and selects the stored entry
+00164e18 buttonHelpIsKindInitialSelection inferred [med] true if an active button-help slot of this kind (or combined kind) has its touch region at initial selection
+002dea60 scrComm_Game_IsFlagSet inferred [high] returns gameFlagIsSet(arg0)
+003c55d0 scrComm_Pad_IsButton0Pressed inferred [med] padButtonIsPressed(0) != 0
+0037e200 scrComm_Quest_SetPackedFlag inferred [med] questSetPackedFlag(arg0, 1)
+0039c22c scrComm_Options_ApplyOverride inferred [med] optionsApplyOverride(arg0)
+00348b40 scrComm_Sequence_RequestDeferred inferred [med] sequenceRequestDeferEx(arg0, string arg1)
+00320ed0 scrComm_Battle_ClearUnitParam01 inferred [med] btlUnitSetParam(scriptUnit, 1, 0, 1)
+0035f1cc scrComm_Battle_ClearUnitParam0B inferred [med] btlUnitSetParam(scriptUnit, 0xB, 0, 1)
+0038e37c scrComm_BattleCamera_StartSwitch inferred [med] obj4FStartSwitch(g_btlCamera, arg0)
+003b03d4 scrComm_Map_IsGimicHandleActiveReady inferred [med] mapGimicIsActiveHandleReady(arg0) != 0
+00227a5c scrOpNop inferred [med] script opcode that only advances pc
+002279f0 scrOpJump inferred [high] script opcode: pc = labels[operand].target
+004f5c84 handlePoolRequestIsDone inferred [med] polls the request registered under an id; unknown ids count as done
+002a4914 scrollOwnerSelectIndex inferred [med] selects an entry when unlocked, marks changed
+002a48e0 scrollOwnerSetValue inferred [med] stores a selection value when unlocked, marks changed
+00375874 recordRankCompareWithTieBreak inferred [med] comparator: rank difference then FUN_003811ec
+004a69ac sortCompareU16Descending inferred [high] qsort comparator: *b - *a on halfwords
+004a7314 sortCompareByGroupThenKey inferred [high] comparator: u16 at +0xe, then u16 at +0
+004a72e0 sortCompareByGroupLevelKeyDescending inferred [high] comparator on b-a: u16 +0x14, u16 +0xc, u16 +0
+002cf51c effPolyWindLateUpdateKind inferred [high] runs wind kind lateUpdate callback while frame > 0
+00323cd0 effPolyRingCreateFromDesc inferred [high] tail call: effPolyRingCreate(kind, params) from object fields
+002721d8 soundPlayAtNormalSpeed inferred [med] calls the sound player with speed 1.0
+004a6988 entryCompareByKeyThenId inferred [med] comparator: key descending, then id ascending
+003aa1d4 effParamsScaleCopy inferred [med] target params = source params * scale for nine floats
+003332a4 gameDataIncrementCounterCapped inferred [med] increments the halfword at 0x66 of the game data block, capped at 9998
+0034900c dialogTickAutoClose inferred [med] counts frames in the game state; at 60 closes the dialog and returns 1
+002cf394 effPolyRingLateUpdateKind inferred [high] ring polygon: runs the kind late-update callback once frame > 0
+004a6e0c entryCompareByKeyThenIdDescending inferred [med] qsort comparator
+00434aec lexerReadHexDigits inferred [med] reads count hex digits into a token, returns 6 on error
+0050d4f0 slistPushFrontIfNotNull inferred [med] pushes node on owner list unless null
+0030dd24 zlibDeflateInitBlock inferred [high] zlib init_block
+0030ddde zlibBiFlush inferred [high] zlib bi_flush
+0030dd7e zlibTrStoredBlock inferred [high] zlib _tr_stored_block
+0030e2b0 zlibBiWindup inferred [high] zlib bi_windup
+0030e2f4 zlibPqDownHeap inferred [high] zlib pqdownheap
+0030dce8 bufferAppendU16BigEndian inferred [med] appends a 16-bit value high byte first to a byte buffer

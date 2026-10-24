@@ -1,4 +1,3 @@
-/* NON_MATCHING: The active-byte zero test uses a direct unsigned byte load instead of retail's owner-pointer copy and signed getter load. */
 #include "common.h"
 
 struct SubmenuRecord {
@@ -31,6 +30,7 @@ void menuSynchronizeFlaggedSelection(SubmenuSelectionOwner *owner, SubmenuRecord
 void sub10OwnerStart(SubmenuRecord *record);
 void FUN_004cf8dc(void *owner, s32 value);
 s32 selectOwnerGetSelected(SubmenuSelectionOwner *owner);
+s32 selectOwnerGetActive(const SubmenuSelectionOwner *owner);
 s32 FUN_004d0058(SubmenuRecord *record, s32 selected);
 
 /* Starts the current submenu record and applies an active flagged selection. */
@@ -43,7 +43,7 @@ u32 FUN_004954e8(SubmenuWork *work)
     FUN_004cf8dc(work->unk3CC, 2);
     FUN_004cf8dc(work->unk3CC, 12);
     u32 result = 0;
-    if (work->selection.active != 0) {
+    if (selectOwnerGetActive(&work->selection) != 0) {
         if (FUN_004d0058(record, selectOwnerGetSelected(&work->selection)) != 0) {
             result = 1;
         }

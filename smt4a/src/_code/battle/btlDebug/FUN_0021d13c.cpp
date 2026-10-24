@@ -61,7 +61,7 @@ int FUN_00270104(...);
 int btlMainGetUnk14(void);
 int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
-int FUN_002a4914(...);
+int scrollOwnerSelectIndex(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
 int useCounterRelease(void);
@@ -182,7 +182,7 @@ extern int FUN_00291e14(void);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: FUN_002a4894. */
-/* Supplied declaration required: FUN_002a4914. */
+/* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: infoWinSetText. */
 extern int FUN_002a6a24(unsigned short);
@@ -643,7 +643,7 @@ joined_r0x0021db60:
         }
         temp_v4 = FUN_002a4878(param_1 + *piVar16 * 100 + 0x38bc);
         if (temp_v4 < 1) break;
-        FUN_002a4914(param_1 + *piVar16 * 100 + 0x38bc,0);
+        scrollOwnerSelectIndex(param_1 + *piVar16 * 100 + 0x38bc,0);
         temp_v8 = FUN_002cc9e0(param_1,1);
         screenSetContextHint(param_1,temp_v8,*piVar16);
         FUN_003756c8(1);

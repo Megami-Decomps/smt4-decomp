@@ -42,7 +42,7 @@ typedef struct {
 extern unsigned char DAT_00558c7c; /* 0x558c7c */
 
 extern int FUN_0012da5c(unsigned int *);
-extern int FUN_002e7168(unsigned int *, unsigned int);
+extern int _ZN9Obj5590d0C1Ej(unsigned int *, unsigned int);
 extern int FUN_002eac34(unsigned int);
 extern unsigned int *FUN_002eb994(fn_0010a9a0_arg0 *, unsigned int, unsigned int, unsigned int, fn_0010a9a0_arg0 *, unsigned int, unsigned int, unsigned int);
 extern int FUN_002eb9b0(int, int);
@@ -86,7 +86,7 @@ int FUN_0010a9a0(fn_0010a9a0_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(puVar1[0xd] + 0xc) = puVar1[0xd];
   puVar1[0x10] = 0;
   puVar1[0x11] = 0;
-  temp_v0 = FUN_002e7168(puVar1 + 0x13,1);
+  temp_v0 = _ZN9Obj5590d0C1Ej(puVar1 + 0x13,1);
   temp_v1 = FUN_002eac34(1);
   temp_v0 = FUN_002eb9b0(temp_v0 + 0x34,*(int *)(temp_v1 + 0x74) * 3);
   *(unsigned int *)(temp_v0 + 0x30) = 0;

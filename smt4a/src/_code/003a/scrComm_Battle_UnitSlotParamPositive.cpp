@@ -3,7 +3,7 @@
 extern "C" {
 
 void scrSetResult(s32 result);
-s32 scrGetArg(void);
+s32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
@@ -11,7 +11,7 @@ extern u32 g_btlScriptUnit;
 /* Script command: true when the unit's parameter for the given slot is at least 1. */
 s32 scrComm_Battle_UnitSlotParamPositive(void)
 {
-    s32 slot = scrGetArg();
+    s32 slot = scrGetArg(0);
     s32 index = 0;
 
     if (slot == 0) {

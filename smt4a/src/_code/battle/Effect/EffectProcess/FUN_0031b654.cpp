@@ -1,114 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031b654` (_code @ 0x31b654, 0x210 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the camera field addresses (eye/target/keepScene base pointers) and allocates r8 for the draw callback; the allocation result is stored to the global before sysMemClear's argument setup here */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
-int asdCameraInitializeDefaults(...);
-int uiSetFloatPair(...);
-int asdProcessCreateSimple(...);
-int FUN_0014f0dc(...);
-int taskCreateDraw(...);
-int FUN_001523b8(...);
-int asdMemoryAllocTracked(...);
-int textureCacheReset(...);
-int sysMemClear(...);
-int FUN_0031b96c(...);
-int FUN_003afc2c(...);
-int taskInitLists(...);
+typedef struct EffectProcessInit {
+    /* 0x000 */ u8 unk000[0x508];
+    /* 0x508 */ u8 unk508[4];
+    /* 0x50C */ f32 eye[3];
+    /* 0x518 */ f32 target[3];
+    /* 0x524 */ f32 fieldOfView;
+    /* 0x528 */ u32 process;
+    /* 0x52C */ u32 drawZero;
+    /* 0x530 */ u32 drawTwo;
+    /* 0x534 */ u32 drawThree;
+    /* 0x538 */ u8 keepScene;
+    /* 0x539 */ u8 unk539[3];
+} EffectProcessInit;
 
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
+extern EffectProcessInit *g_effectProcessActive;
 
-extern int FUN_001f4c80(...); /* 0x1f4c80 */
-extern int FUN_0023799c(...); /* 0x23799c */
-extern int renderScopedTaskPhaseZero(...); /* 0x237ba4 */
-extern int effectProcessDestroy(...); /* 0x282c4c */
-extern int renderScopedTaskPhaseThree(...); /* 0x282cf8 */
-extern unsigned char LAB_0031b8d0; /* 0x31b8d0 */
-extern unsigned char LAB_0031b8e0; /* 0x31b8e0 */
-extern unsigned char LAB_0031b8f8; /* 0x31b8f8 */
-extern unsigned char LAB_0031b908; /* 0x31b908 */
-extern int g_effectProcessActive; /* 0x5702f4 */
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
+void sysMemClear(void *block, u32 size);
+void taskInitLists(void);
+void textureCacheReset(u32 mode);
+void FUN_003afc2c(void);
+void FUN_0031b96c(void);
+void asdCameraInitializeDefaults(EffectProcessInit *camera, s32 enabled);
+void uiSetFloatPair(EffectProcessInit *camera, f32 distance, f32 scale);
+void FUN_0014f0dc(EffectProcessInit *camera, const f32 *eye, const f32 *target, const f32 *up);
+void FUN_001523b8(EffectProcessInit *camera, u32 pivot, f32 fov, f32 aspect, f32 nearClip, f32 farClip);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
+s32 FUN_001f4c80(u32 job);
+void effectProcessDestroy(u32 job);
+s32 FUN_0023799c(u32 job);
+s32 renderScopedTaskPhaseZero(u32 job);
+s32 renderScopedTaskPhaseThree(u32 job);
 
-/* Supplied declaration required: asdCameraInitializeDefaults. */
-/* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_001523b8. */
-/* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: textureCacheReset. */
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0031b96c. */
-/* Supplied declaration required: FUN_003afc2c. */
-/* Supplied declaration required: taskInitLists. */
-
-
-unsigned int FUN_0031b654(unsigned char param_1)
-
+/* Creates the battle effect process: the work area with its camera, the process job and its draw tasks; returns the process job. */
+u32 FUN_0031b654(u8 keepScene)
 {
-/* irregular: 17 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = 0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x53c,1);
-  g_effectProcessActive = temp_v0;
-  sysMemClear();
-  *(unsigned char *)(temp_v0 + 0x538) = param_1;
-  taskInitLists();
-  textureCacheReset(0);
-  if (*(char *)(temp_v0 + 0x538) == '\0') {
-    FUN_003afc2c();
-  }
-  FUN_0031b96c();
-  temp_v1 = 0;
-  temp_v2 = 0x3f800000;
-  temp_v3 = 0;
-  *(unsigned int *)(temp_v0 + 0x50c) = 0;
-  *(unsigned int *)(temp_v0 + 0x510) = 0;
-  *(unsigned int *)(temp_v0 + 0x514) = 0x40a00000;
-  *(unsigned int *)(temp_v0 + 0x518) = 0;
-  *(unsigned int *)(temp_v0 + 0x51c) = 0;
-  *(unsigned int *)(temp_v0 + 0x520) = 0;
-  *(unsigned int *)(temp_v0 + 0x524) = 0x42700000;
-  asdCameraInitializeDefaults(temp_v0,1);
-  uiSetFloatPair(temp_v0);
-  FUN_0014f0dc(temp_v0,(unsigned int *)(temp_v0 + 0x50c),(unsigned int *)(temp_v0 + 0x518),&temp_v1);
-  FUN_001523b8(temp_v0,1);
-  puVar2 = &LAB_0031b8d0;
-  asdProcessCreateSimple(&LAB_0031b8d0,4,0,0,FUN_001f4c80,effectProcessDestroy,temp_v0);
-  *(unsigned char **)(temp_v0 + 0x528) = puVar2;
-  if (*(char *)(temp_v0 + 0x538) != '\0') {
-    puVar3 = &LAB_0031b8e0;
-    taskCreateDraw(&LAB_0031b8e0,0x89,0,0,FUN_0023799c,0,temp_v0,puVar2);
-    *(unsigned char **)(temp_v0 + 0x534) = puVar3;
-  }
-  else {
-    puVar3 = &LAB_0031b8f8;
-    taskCreateDraw(&LAB_0031b8f8,0x72,0,0,renderScopedTaskPhaseZero,0,temp_v0,puVar2);
-    *(unsigned char **)(temp_v0 + 0x52c) = puVar3;
-    puVar2 = &LAB_0031b908;
-    taskCreateDraw(&LAB_0031b908,0x89,0,0,FUN_0023799c,0,temp_v0,*(unsigned int *)(temp_v0 + 0x528));
-    *(unsigned char **)(temp_v0 + 0x530) = puVar2;
-    puVar2 = &LAB_0031b8e0;
-    taskCreateDraw(&LAB_0031b8e0,0xec,0,0,renderScopedTaskPhaseThree,0,temp_v0,*(unsigned int *)(temp_v0 + 0x528));
-    *(unsigned char **)(temp_v0 + 0x534) = puVar2;
-  }
-  return *(unsigned int *)(temp_v0 + 0x528);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\dds4\\program\\battle\\Effect\\EffectProcess.cpp", 150);
+    EffectProcessInit *process = (EffectProcessInit *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x53C, 1);
+    g_effectProcessActive = process;
+    sysMemClear(process, 0x53C);
+    process->keepScene = keepScene;
+    taskInitLists();
+    textureCacheReset(0);
+    if (process->keepScene == 0) {
+        FUN_003afc2c();
+    }
+    FUN_0031b96c();
+    f32 up[3];
+    up[0] = 0.0f;
+    up[1] = 1.0f;
+    up[2] = 0.0f;
+    process->eye[0] = 0.0f;
+    process->eye[1] = 0.0f;
+    process->eye[2] = 5.0f;
+    process->target[0] = 0.0f;
+    process->target[1] = 0.0f;
+    process->target[2] = 0.0f;
+    process->fieldOfView = 60.0f;
+    asdCameraInitializeDefaults(process, 1);
+    uiSetFloatPair(process, 5.0f, 1.0f);
+    FUN_0014f0dc(process, process->eye, process->target, up);
+    FUN_001523b8(process, 1, process->fieldOfView, 1.6666666f, 0.1f, 100000.0f);
+    process->process = asdProcessCreateSimple((const s8 *)"EffectProc", 4, 0, 0, FUN_001f4c80, effectProcessDestroy, (u32)process);
+    if (process->keepScene != 0) {
+        process->drawThree = taskCreateDraw("EffectDrawDown2D", 0x89, 0, 0, FUN_0023799c, NULL, process, process->process);
+    } else {
+        process->drawZero = taskCreateDraw("EffectDrawUp3D", 0x72, 0, 0, renderScopedTaskPhaseZero, NULL, process, process->process);
+        process->drawTwo = taskCreateDraw("EffectDrawUp2D", 0x89, 0, 0, FUN_0023799c, NULL, process, process->process);
+        process->drawThree = taskCreateDraw("EffectDrawDown2D", 0xEC, 0, 0, renderScopedTaskPhaseThree, NULL, process, process->process);
+    }
+    return process->process;
 }
 
 } /* extern "C" */

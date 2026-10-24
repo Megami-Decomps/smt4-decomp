@@ -7,7 +7,7 @@ extern "C" {
 int qsort(...);
 int FUN_001ad9b4(...);
 int FUN_00203b40(...);
-int FUN_002a48e0(...);
+int scrollOwnerSetValue(...);
 int FUN_002a4964(...);
 int gameDataGetIndexedPair(...);
 int sysMemClear(...);
@@ -31,7 +31,7 @@ extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002a48e0. */
+/* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: gameDataGetIndexedPair. */
 extern int objectApplyIfUnblocked(int);
@@ -206,7 +206,7 @@ LAB_001ff9d0:
     *puVar7 = 0;
   }
   temp_v8 = gameDataGetIndexedPair(0);
-  FUN_002a48e0(temp_v1,*(unsigned int *)(temp_v8 + 4));
+  scrollOwnerSetValue(temp_v1,*(unsigned int *)(temp_v8 + 4));
   puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
   flaggedEntrySetValueA(temp_v1,*puVar7);
   temp_v8 = gameDataGetIndexedPair(1);
@@ -219,7 +219,7 @@ LAB_001ff9d0:
     temp_v8 = objectApplyIfUnblocked(temp_v3);
     if (temp_v9 + temp_v5 <= temp_v8) {
       temp_v5 = gameDataGetIndexedPair(1);
-      FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));
+      scrollOwnerSetValue(temp_v3,*(unsigned int *)(temp_v5 + 4));
       puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
       flaggedEntrySetValueA(temp_v3,*puVar7);
       return;
@@ -230,7 +230,7 @@ LAB_001ff9d0:
   puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
   *puVar7 = 0;
   temp_v5 = gameDataGetIndexedPair(1);
-  FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));
+  scrollOwnerSetValue(temp_v3,*(unsigned int *)(temp_v5 + 4));
   puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
   flaggedEntrySetValueA(temp_v3,*puVar7);
   return;

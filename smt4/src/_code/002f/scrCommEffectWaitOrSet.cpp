@@ -12,9 +12,9 @@ s32 FUN_003da5b4(EffectCommandState* state);
 void FUN_003d9eb4(EffectCommandState* state, s32 first, u32 second);
 
 // Wait for the flagged effect operation, or submit the script's two values.
-u32 scrCommEffectWaitOrSet(u32 argumentIndex)
+u32 scrCommEffectWaitOrSet(void)
 {
-    u32 first = scrGetArg(argumentIndex);
+    u32 first = scrGetArg(0);
     u32 second = scrGetArg(1);
     if ((DAT_00435d18->flags & 0x4000) != 0) {
         if (FUN_003da5b4(DAT_00435d18) != 0) {

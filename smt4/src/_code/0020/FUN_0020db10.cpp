@@ -1,134 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020db10` (_code @ 0x20db10, 0x21c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the player-id compares load their halfwords in the opposite order (ldrh before ldrsh, cmp operands swapped). */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
+/* A model source and the parameter the model manager builds it with. */
+typedef struct ModelSource {
+    u32 source;
+    u32 param;
+} ModelSource;
+
+/* The part of the global game state this function reads and writes. */
+typedef struct GameStateModels {
+    /* 0x000 */ u8 unk000[0x218];
+    /* 0x218 */ s32 sceneKind;
+    /* 0x21C */ s32 eventKind;
+    /* 0x220 */ u8 unk220[0x78];
+    /* 0x298 */ ModelSource models[6];
+    /* 0x2C8 */ u8 unk2C8[0x124];
+    /* 0x3EC */ s32 sceneKindOverride;
+    /* 0x3F0 */ s32 eventKindOverride;
+} GameStateModels;
+
+/* The part of the map scene block that holds the models. */
+typedef struct SceneModels {
+    /* 0x000 */ u8 unk000[0x164];
+    /* 0x164 */ AsdMdlObject *sceneModel;
+    /* 0x168 */ s32 unk168;
+    /* 0x16C */ s32 unk16C;
+    /* 0x170 */ u8 unk170[8];
+    /* 0x178 */ AsdMdlObject *modelB;
+    /* 0x17C */ AsdMdlObject *modelC;
+} SceneModels;
+
 int dataTable2eSub1GetCount(void);
 int dataTable2eSub0GetCount(void);
-int FUN_002a0428(unsigned int, int);
+int FUN_002a0428(AsdMdlObject *model, int flag);
+u16 *gameGetPlayerData(void);
+s16 *dataTable2eSub1GetRecord(int index);
+s16 *dataTable2eSub0GetRecord(int index);
+AsdMdlObject *asdMdlManagerCreateFromSource(u32 source, u32 param, u32 size);
 
-extern int g_lmapScene; /* 0x447e88 */
-extern int DAT_0049fb34; /* 0x49fb34 */
-extern int DAT_0049fb38; /* 0x49fb38 */
-extern unsigned int DAT_0049fbb4; /* 0x49fbb4 */
-extern unsigned int DAT_0049fbb8; /* 0x49fbb8 */
-extern unsigned int DAT_0049fbbc; /* 0x49fbbc */
-extern unsigned int DAT_0049fbc0; /* 0x49fbc0 */
-extern unsigned int DAT_0049fbc4; /* 0x49fbc4 */
-extern unsigned int DAT_0049fbc8; /* 0x49fbc8 */
-extern unsigned int DAT_0049fbcc; /* 0x49fbcc */
-extern unsigned int DAT_0049fbd0; /* 0x49fbd0 */
-extern unsigned int DAT_0049fbd4; /* 0x49fbd4 */
-extern unsigned int DAT_0049fbd8; /* 0x49fbd8 */
-extern unsigned int DAT_0049fbdc; /* 0x49fbdc */
-extern unsigned int DAT_0049fbe0; /* 0x49fbe0 */
-extern int DAT_0049fd08; /* 0x49fd08 */
-extern int DAT_0049fd0c; /* 0x49fd0c */
+extern GameStateModels g_gameState;
+extern SceneModels *g_lmapScene;
 
-/* Supplied declaration required: dataTable2eSub1GetCount. */
-/* Supplied declaration required: dataTable2eSub0GetCount. */
-extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002a0428. */
-extern unsigned short *gameGetPlayerData(void);
-extern short *dataTable2eSub1GetRecord(int);
-extern short *dataTable2eSub0GetRecord(int);
-
+/* Hides a model's position-follow flag and marks it ready. */
+static void prepareModel(AsdMdlObject *model)
+{
+    model->flags |= 2;
+    model->node->resource->positionFollowed = 0;
+}
 
 void FUN_0020db10(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  short *psVar3;
-  unsigned int temp_v0;
-  unsigned int *puVar5;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = (unsigned short *)gameGetPlayerData();
-  temp_v1 = 0;
-  puVar2 = puVar1;
-  dataTable2eSub0GetCount();
-  if (0 < (int)puVar2) {
-    do {
-      psVar3 = (short *)dataTable2eSub0GetRecord(temp_v1);
-      if ((int)*psVar3 == (unsigned int)*puVar1) {
-        DAT_0049fb34 = DAT_0049fd08;
-        if (DAT_0049fd08 == -1) {
-          DAT_0049fb34 = (int)psVar3[1];
+    u16 *player = gameGetPlayerData();
+    s16 *record;
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < dataTable2eSub0GetCount(); i++) {
+        record = dataTable2eSub0GetRecord(i);
+        if (player[0] == record[0]) {
+            s32 value = g_gameState.sceneKindOverride;
+            if (value == -1) {
+                value = record[1];
+            }
+            g_gameState.sceneKind = value;
+            break;
         }
+    }
+
+    s32 kind = g_gameState.sceneKindOverride;
+    if (kind == -1) {
+        kind = g_gameState.sceneKind;
+    }
+    switch (kind) {
+    case 0:
+        g_lmapScene->sceneModel = asdMdlManagerCreateFromSource(g_gameState.models[0].source, g_gameState.models[0].param, 0x1c0);
         break;
-      }
-      temp_v1 = temp_v1 + 1;
-      dataTable2eSub0GetCount();
-    } while (temp_v1 < (int)psVar3);
-  }
-  temp_v1 = DAT_0049fd08;
-  if (DAT_0049fd08 == -1) {
-    temp_v1 = DAT_0049fb34;
-  }
-  if (temp_v1 != 0) {
-    if (temp_v1 != 1) {
-      if (temp_v1 != 2) {
-        if (temp_v1 == 3) {
-          temp_v0 = asdMdlManagerCreateFromSource(DAT_0049fbcc,DAT_0049fbd0,0x1c0);
-          *(unsigned int *)(g_lmapScene + 0x164) = temp_v0;
+    case 1:
+        g_lmapScene->sceneModel = asdMdlManagerCreateFromSource(g_gameState.models[1].source, g_gameState.models[1].param, 0x1c0);
+        break;
+    case 2:
+        g_lmapScene->sceneModel = asdMdlManagerCreateFromSource(g_gameState.models[2].source, g_gameState.models[2].param, 0x1c0);
+        break;
+    case 3:
+        g_lmapScene->sceneModel = asdMdlManagerCreateFromSource(g_gameState.models[3].source, g_gameState.models[3].param, 0x1c0);
+        break;
+    }
+    FUN_002a0428(g_lmapScene->sceneModel, 1);
+    prepareModel(g_lmapScene->sceneModel);
+    g_lmapScene->unk168 = 0;
+    g_lmapScene->unk16C = -1;
+
+    g_lmapScene->modelB = asdMdlManagerCreateFromSource(g_gameState.models[4].source, g_gameState.models[4].param, 0x1c0);
+    FUN_002a0428(g_lmapScene->modelB, 1);
+    prepareModel(g_lmapScene->modelB);
+
+    g_lmapScene->modelC = asdMdlManagerCreateFromSource(g_gameState.models[5].source, g_gameState.models[5].param, 0x1c0);
+    FUN_002a0428(g_lmapScene->modelC, 1);
+    prepareModel(g_lmapScene->modelC);
+
+    for (j = 0; j < dataTable2eSub1GetCount(); j++) {
+        record = dataTable2eSub1GetRecord(j);
+        if (player[4] == record[0]) {
+            if (g_gameState.eventKindOverride == -1) {
+                g_gameState.eventKind = record[1];
+            } else {
+                g_gameState.eventKind = g_gameState.eventKindOverride;
+            }
+            break;
         }
-      }
-      else {
-        temp_v0 = asdMdlManagerCreateFromSource(DAT_0049fbc4,DAT_0049fbc8,0x1c0);
-        *(unsigned int *)(g_lmapScene + 0x164) = temp_v0;
-      }
     }
-    else {
-      temp_v0 = asdMdlManagerCreateFromSource(DAT_0049fbbc,DAT_0049fbc0,0x1c0);
-      *(unsigned int *)(g_lmapScene + 0x164) = temp_v0;
-    }
-  }
-  else {
-    temp_v0 = asdMdlManagerCreateFromSource(DAT_0049fbb4,DAT_0049fbb8,0x1c0);
-    *(unsigned int *)(g_lmapScene + 0x164) = temp_v0;
-  }
-  FUN_002a0428(*(unsigned int *)(g_lmapScene + 0x164),1);
-  temp_v2 = 0;
-  puVar5 = *(unsigned int **)(g_lmapScene + 0x164);
-  *puVar5 = *puVar5 | 2;
-  *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
-  temp_v1 = g_lmapScene;
-  *(unsigned int *)(g_lmapScene + 0x168) = 0;
-  *(unsigned int *)(temp_v1 + 0x16c) = 0xffffffff;
-  temp_v0 = asdMdlManagerCreateFromSource(DAT_0049fbd4,DAT_0049fbd8,0x1c0);
-  *(unsigned int *)(g_lmapScene + 0x178) = temp_v0;
-  FUN_002a0428(temp_v0,1);
-  puVar5 = *(unsigned int **)(g_lmapScene + 0x178);
-  *puVar5 = *puVar5 | 2;
-  *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
-  temp_v0 = asdMdlManagerCreateFromSource(DAT_0049fbdc,DAT_0049fbe0,0x1c0);
-  *(unsigned int *)(g_lmapScene + 0x17c) = temp_v0;
-  FUN_002a0428(temp_v0,1);
-  puVar5 = *(unsigned int **)(g_lmapScene + 0x17c);
-  *puVar5 = *puVar5 | 2;
-  temp_v1 = *(int *)(puVar5[2] + 0x2c);
-  *(unsigned char *)(temp_v1 + 0x1f6) = 0;
-  dataTable2eSub1GetCount();
-  if (0 < temp_v1) {
-    while (psVar3 = (short *)dataTable2eSub1GetRecord(temp_v2), (int)*psVar3 != (unsigned int)puVar1[4]) {
-      temp_v2 = temp_v2 + 1;
-      dataTable2eSub1GetCount();
-      if ((int)psVar3 <= temp_v2) {
-        return;
-      }
-    }
-    if (DAT_0049fd0c == -1) {
-      DAT_0049fb38 = (int)psVar3[1];
-    }
-    else {
-      DAT_0049fb38 = DAT_0049fd0c;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -23,7 +23,7 @@ u32 scrComm_Job_StopAndWait(void)
     s32 result;
     Task *task;
 
-    job = scrGetArg();
+    job = scrGetArg(0);
     result = scrGetCommandFrame();
     if (result != 0) {
         result = jobIsValid(job);

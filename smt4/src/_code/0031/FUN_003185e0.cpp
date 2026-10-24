@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x407128; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+s32 scrGetArg(u32 index);
+s32 battleGetEntryHalfword(s32 entry, u32 field);
+s32 scrSetResult(s32 value);
+
+/* Script command: returns field three of the battle entry in argument zero. */
+s32 FUN_003185e0(void)
+{
+    scrSetResult(battleGetEntryHalfword(scrGetArg(0), 3));
+    return 1;
+}
+
+} /* extern "C" */

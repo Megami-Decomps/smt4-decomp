@@ -5,7 +5,7 @@ extern "C" {
 int scrSetResult(int result);
 int btlGetMainState(void);
 extern u8 *btlMainFindActiveEntry(void);
-extern int scrGetArg(void);
+extern int scrGetArg(int index);
 
 /* Script command: tests the status counter selected by argument 0 (0 -> slot 7, 1 -> slot 10, 2 -> slot 11) of the current unit. */
 u32 scrComm_Battle_IsCurrentUnitStatNegative(void)
@@ -14,7 +14,7 @@ u32 scrComm_Battle_IsCurrentUnitStatNegative(void)
     int slot;
     u8 *unit;
 
-    which = scrGetArg();
+    which = scrGetArg(0);
     slot = 0;
     if (which == 0) {
         slot = 7;

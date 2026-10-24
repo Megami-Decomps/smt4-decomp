@@ -1,4 +1,4 @@
-/* NON_MATCHING: the inlined poll leaves its result in r0 and returns once through `eor r0, r0, #1`; this version returns the inverted constants from two exits */
+/* NON_MATCHING: control flow now matches (single exit through eor r0, r0, #1); only the register allocation differs: retail keeps zero in r6 and &g_bible in r5, built swaps them. */
 /* The same shutdown poll as biblePollShutdown with the result inverted: returns 0 while the bible
  * screen is still running, 1 once it is gone. */
 #include "common.h"
@@ -39,7 +39,7 @@ static __inline u32 bibleIsRunning(void)
 
 u32 bibleIsClosed(void)
 {
-    return !bibleIsRunning();
+    return bibleIsRunning() ^ 1;
 }
 
 } /* extern "C" */

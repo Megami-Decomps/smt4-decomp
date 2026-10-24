@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail preserves the owner in R4 and sign-extends two subobject readiness reads; direct source uses unsigned zero tests and merges them. Original getter-inlining shape is unresolved. */
 #include "shard/S3SceneWidget.h"
 
 struct FrameReadinessState {
@@ -14,17 +13,16 @@ struct FrameReadinessState {
 
 extern "C" {
 extern FrameReadinessState* g_frameTex;
+s32 recordGetSignedFlags(const SceneSprite *sprite);
 
 u32 FUN_003309e0(void)
 {
     const FrameReadinessState* frame = g_frameTex;
     if (frame->enabled != 0 && frame->active != 0) {
-        if (frame->first.ready == 0) {
-            return 0;
+        if (recordGetSignedFlags(&frame->first) != 0 && recordGetSignedFlags(&frame->second) != 0) {
+            return 1;
         }
-        if (frame->second.ready == 0) {
-            return 0;
-        }
+        return 0;
     }
     return 1;
 }

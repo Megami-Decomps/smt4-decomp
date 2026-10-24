@@ -13,9 +13,9 @@ extern s32 FUN_00162ea4(void);
 extern void handleSetReset(HandleSet *set);
 
 /* Script command: frees the job block when it is empty (returns 1), else releases its handle set once ready. */
-u32 scrCommReleaseJobBlock(s32 argIndex)
+u32 scrCommReleaseJobBlock(void)
 {
-    JobBlock *block = (JobBlock *)scrGetArg(argIndex);
+    JobBlock *block = (JobBlock *)scrGetArg(0);
     u32 result;
 
     if (block == NULL) {

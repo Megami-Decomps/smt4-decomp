@@ -1,121 +1,146 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00401798` (_code @ 0x401798, 0x220 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: logic agrees; register numbering/operand load order of the owner->frame and owner->metrics chains differs, and the table-search loop is rotated differently. */
+#include "common.h"
 
 extern "C" {
 
-int VectorSignedToFloat(...);
-int VectorUnsignedToFloat(unsigned int, int);
+/* The scene metrics the offsets are centred against. */
+typedef struct CenterMetrics {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ s16 originX;
+    /* 0x22 */ s16 originY;
+    /* 0x24 */ u16 innerWidth;
+    /* 0x26 */ u16 innerHeight;
+} CenterMetrics;
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern unsigned short *dataTableGetEntries(void);
+typedef struct CenterOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 key;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ CenterMetrics *metrics;
+} CenterOwner;
 
+typedef struct CenterFrame {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+} CenterFrame;
 
-void FUN_00401798(int param_1,int param_2)
+typedef struct CenterFrameOwner {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ CenterFrame *frame;
+} CenterFrameOwner;
 
+/* The object being laid out: float offsets and the integer positions they were derived from. */
+typedef struct CenteredLayout {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ CenterOwner *owner;
+    /* 0x08 */ CenterFrameOwner *frameOwner;
+    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x1C */ f32 offsetX;
+    /* 0x20 */ f32 offsetY;
+    /* 0x24 */ s16 positionX;
+    /* 0x26 */ s16 positionY;
+} CenteredLayout;
+
+/* The entry of the layout record: wanted positions at 0x94 / 0x96. */
+typedef struct LayoutSource {
+    /* 0x00 */ u8 unk00[0x94];
+    /* 0x94 */ s16 positionX;
+    /* 0x96 */ s16 positionY;
+} LayoutSource;
+
+/* A table row: id and the two wanted positions. */
+typedef struct PositionRow {
+    u16 id;
+    s16 positionX;
+    s16 positionY;
+    u16 unk06;
+} PositionRow;
+
+s32 dataTableGetCount(u32 table);
+PositionRow *dataTableGetEntries(void);
+u32 dataTableGet(u32 table, u32 index);
+
+/* Offset that centres a span of `outer` around `position`, measured from the origin. */
+static __inline f32 centreOffset(s32 outer, u16 inner, s32 position, s16 origin)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned short *puVar5;
-  int temp_v4;
-  int temp_v5;
-  unsigned int in_fpscr;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  
-  *(unsigned int *)(param_1 + 0x1c) = 0;
-  *(unsigned int *)(param_1 + 0x20) = 0;
-  temp_v8 = 0.5f;
-  *(unsigned short *)(param_1 + 0x24) = 0;
-  *(unsigned short *)(param_1 + 0x26) = 0;
-  if (param_2 != 0) {
-    temp_v0 = *(short *)(param_2 + 0x94);
-    if (temp_v0 != 0) {
-      *(short *)(param_1 + 0x24) = temp_v0;
-      temp_v5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-      temp_v8 = (float)VectorSignedToFloat(*(unsigned int *)
-                                           (*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x14),
-                                          (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v6 = (float)VectorUnsignedToFloat
-                               ((unsigned int)*(unsigned short *)(temp_v5 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v6 = (float)VectorSignedToFloat((int)((temp_v8 - temp_v6) * 0.5f) +
-                                         ((int)temp_v0 - (int)*(short *)(temp_v5 + 0x20)),
-                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(param_1 + 0x1c) = temp_v6 - temp_v8 * 0.5f;
+    f32 span = (f32)outer;
+    s32 shifted = (s32)((span - (f32)inner) * 0.5f) + (position - origin);
+
+    return (f32)shifted - span * 0.5f;
+}
+
+void FUN_00401798(CenteredLayout *layout, LayoutSource *source)
+{
+    f32 offsetY;
+
+    layout->offsetX = 0.0f;
+    layout->offsetY = 0.0f;
+    layout->positionX = 0;
+    layout->positionY = 0;
+    if (source != NULL) {
+        s16 x = source->positionX;
+        s16 y;
+
+        if (x != 0) {
+            CenterOwner *owner = layout->owner;
+            CenterFrameOwner *frames = layout->frameOwner;
+
+            layout->positionX = x;
+            layout->offsetX = centreOffset(frames->frame->width, owner->metrics->innerWidth, x, owner->metrics->originX);
+        }
+        y = source->positionY;
+        if (y == 0) {
+            return;
+        }
+        layout->positionY = y;
+        {
+            CenterOwner *owner = layout->owner;
+            CenterFrameOwner *frames = layout->frameOwner;
+
+            offsetY = -centreOffset(frames->frame->height, owner->metrics->innerHeight, y, owner->metrics->originY);
+        }
+    } else {
+        u16 key = layout->owner->key;
+        u32 table = dataTableGet(0x3B, 0);
+        PositionRow *row = dataTableGetEntries();
+        s32 count = dataTableGetCount(table);
+        s32 i = 0;
+
+        if (count < 1) {
+            return;
+        }
+        while (row->id != key) {
+            i++;
+            row++;
+            if (count <= i) {
+                return;
+            }
+        }
+        if (row == NULL) {
+            return;
+        }
+        if (row->positionX != 0) {
+            CenterOwner *owner = layout->owner;
+            CenterFrameOwner *frames = layout->frameOwner;
+
+            layout->positionX = row->positionX;
+            layout->offsetX = centreOffset(frames->frame->width, owner->metrics->innerWidth, row->positionX, owner->metrics->originX);
+        }
+        if (row->positionY == 0) {
+            return;
+        }
+        layout->positionY = row->positionY;
+        {
+            CenterOwner *owner = layout->owner;
+            CenterFrameOwner *frames = layout->frameOwner;
+            f32 span = (f32)frames->frame->height;
+            s32 shifted = (s32)((span - (f32)owner->metrics->innerHeight) * 0.5f) + (row->positionY - owner->metrics->originY);
+
+            offsetY = span * 0.5f - (f32)shifted;
+        }
     }
-    temp_v0 = *(short *)(param_2 + 0x96);
-    if (temp_v0 == 0) {
-      return;
-    }
-    *(short *)(param_1 + 0x26) = temp_v0;
-    temp_v5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-    temp_v8 = (float)VectorSignedToFloat(*(unsigned int *)
-                                         (*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x18),
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                             ((unsigned int)*(unsigned short *)(temp_v5 + 0x26),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorSignedToFloat((int)((temp_v8 - temp_v6) * 0.5f) +
-                                       ((int)temp_v0 - (int)*(short *)(temp_v5 + 0x22)),
-                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = -(temp_v6 - temp_v8 * 0.5f);
-  }
-  else {
-    temp_v2 = *(unsigned int *)(*(int *)(param_1 + 4) + 4);
-    temp_v3 = dataTableGet(0x3b,0);
-    puVar5 = (unsigned short *)dataTableGetEntries();
-    temp_v5 = dataTableGetCount(temp_v3);
-    temp_v4 = 0;
-    if (temp_v5 < 1) {
-      return;
-    }
-    while ((unsigned int)*puVar5 != (temp_v2 & 0xffff)) {
-      temp_v4 = temp_v4 + 1;
-      puVar5 = puVar5 + 4;
-      if (temp_v5 <= temp_v4) {
-        return;
-      }
-    }
-    if (puVar5 == (unsigned short *)0x0) {
-      return;
-    }
-    temp_v1 = puVar5[1];
-    if ((short)temp_v1 != 0) {
-      *(unsigned short *)(param_1 + 0x24) = temp_v1;
-      temp_v5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-      temp_v6 = (float)VectorSignedToFloat(*(unsigned int *)
-                                          (*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x14),
-                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v7 = (float)VectorUnsignedToFloat
-                               ((unsigned int)*(unsigned short *)(temp_v5 + 0x24),(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v7 = (float)VectorSignedToFloat((int)((temp_v6 - temp_v7) * temp_v8) +
-                                         ((int)(short)temp_v1 - (int)*(short *)(temp_v5 + 0x20)),
-                                         (unsigned char)(in_fpscr >> 0x16) & 3);
-      *(float *)(param_1 + 0x1c) = temp_v7 - temp_v6 * temp_v8;
-    }
-    temp_v1 = puVar5[2];
-    if ((short)temp_v1 == 0) {
-      return;
-    }
-    *(unsigned short *)(param_1 + 0x26) = temp_v1;
-    temp_v5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-    temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 0xc) + 0x18)
-                                       ,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorUnsignedToFloat
-                             ((unsigned int)*(unsigned short *)(temp_v5 + 0x26),(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = (float)VectorSignedToFloat((int)((temp_v7 - temp_v6) * temp_v8) +
-                                       ((int)(short)temp_v1 - (int)*(short *)(temp_v5 + 0x22)),
-                                       (unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v6 = temp_v7 * temp_v8 - temp_v6;
-  }
-  *(float *)(param_1 + 0x20) = temp_v6;
-  return;
+    layout->offsetY = offsetY;
 }
 
 } /* extern "C" */

@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_00115054; /* 0x115054 */
-extern unsigned char DAT_00594a58; /* 0x594a58 */
+extern unsigned char g_onlineRegistry; /* 0x594a58 */
 
 /* Supplied declaration required: FUN_00300d58. */
 extern unsigned int FUN_00300d90(int, unsigned char *, int);
@@ -44,7 +44,7 @@ unsigned int FUN_00115010(int param_1,unsigned int param_2,unsigned int param_3,
   else if (param_4 != (int *)0x0) {
     *param_4 = temp_v0;
   }
-  (*(*(romwright_code * *)((unsigned char *)&DAT_00594a58 + 0x78)))(temp_v1,param_2,param_3,param_4,temp_v2,param_1,temp_v3,temp_v4,piVar6);
+  (*(*(romwright_code * *)((unsigned char *)&g_onlineRegistry + 0x78)))(temp_v1,param_2,param_3,param_4,temp_v2,param_1,temp_v3,temp_v4,piVar6);
   return temp_v1;
 }
 

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int vectorTeardown_0030d03c(int);
+int _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EED1Ev(int);
 
-/* Supplied declaration required: vectorTeardown_0030d03c. */
+/* Supplied declaration required: _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EED1Ev. */
 
 
 void destroyRangeElem12(unsigned int param_1,int param_2,int param_3)
@@ -14,7 +14,7 @@ void destroyRangeElem12(unsigned int param_1,int param_2,int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   for (; param_2 != param_3; param_2 = param_2 + 0xc) {
-    vectorTeardown_0030d03c(param_2);
+    _ZNSt6vectorI9Obj55a87c12AsdAllocatorIS0_EED1Ev(param_2);
   }
   return;
 }

@@ -20,7 +20,7 @@ u8 *gameGetSlotTable();
 void timerStart(void *, s32, s32);
 void FUN_0029378c(PartyPanelWidget *, u32);
 void FUN_002937e0();
-void FUN_0029e8b8(ScrollSelectionOwner *, s32);
+void scrollOwnerSelectIndex(ScrollSelectionOwner *, s32);
 void FUN_0029eb5c(ScrollSelection *, s32);
 }
 
@@ -54,7 +54,7 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
             return 0;
     }
     if (panel->unk42) {
-        FUN_0029e8b8(&fields->alternate, slot % 4);
+        scrollOwnerSelectIndex(&fields->alternate, slot % 4);
         FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->alternate), slot / 4);
         return 0;
     }
@@ -66,7 +66,7 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
             changed = 1;
             partyPanelAnimatePage(g_partyPanel, 5);
         }
-        FUN_0029e8b8(&fields->regular, slot % 4);
+        scrollOwnerSelectIndex(&fields->regular, slot % 4);
         FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->regular), slot / 4);
         return changed;
     }
@@ -77,7 +77,7 @@ extern "C" u32 partyPanelFocusSelectedPartyMember(s32 force)
         partyPanelAnimatePage(g_partyPanel, 4);
     }
     slot -= 12;
-    FUN_0029e8b8(&fields->regular, slot % 4);
+    scrollOwnerSelectIndex(&fields->regular, slot % 4);
     FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&fields->regular), slot / 4);
     return changed;
 }

@@ -1,2 +1,9 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4214a4; not written yet. */
 #include "common.h"
+
+extern "C" void FUN_0036a090(void);
+
+/* Forwards to FUN_0036a090. */
+extern "C" void FUN_0036a08c(void)
+{
+    FUN_0036a090();
+}

@@ -12,7 +12,7 @@ extern "C" {
 void entry();
 void FUN_0042ce40(void *object);
 void FUN_00431fe0(void *object);
-extern u32 DAT_005c14b4;
+extern u32 _ZTV9Obj5c14b4;
 __weak s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 void emptyStub_002f4370(void *object, void (*destroy)(void *), void *module);
 }
@@ -28,6 +28,6 @@ extern "C" void FUN_0050f8cc(DeviceModuleState *state)
     state->state = 0;
     state->ready = 0;
     __aeabi_atexit(state, FUN_0042ce40, reinterpret_cast<void *>(entry));
-    DAT_005c14b4 = 0;
-    emptyStub_002f4370(&DAT_005c14b4, FUN_00431fe0, reinterpret_cast<void *>(entry));
+    _ZTV9Obj5c14b4 = 0;
+    emptyStub_002f4370(&_ZTV9Obj5c14b4, FUN_00431fe0, reinterpret_cast<void *>(entry));
 }

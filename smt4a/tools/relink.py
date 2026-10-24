@@ -9,9 +9,10 @@ from its retail target object (`orig/target/**.o`: its bytes with calls, tail
 calls and literal-pool addresses as relocations), which proves those objects
 relocate back to retail; otherwise they are retail bytes. What no object
 covers (padding, strings between functions, functions the decompiler refused,
-.rodata, .data) is retail bytes, except a matched function's own constants (`.constdata`):
-they sit at the address its retail pool words name, once the bytes there equal the
-object's. Symbols the objects reference and nothing
+.rodata, .data) is retail bytes, except a matched function's own data (`.constdata`, and the
+`.data`/`.bss` of a function-local static): it sits at the address its retail pool words
+name, once the bytes there equal the object's (`.bss`: once that range is in the image's
+zero-filled range past `.code`). Symbols the objects reference and nothing
 defines (`DAT_<addr>`, functions linked as bytes) are defined at their
 addresses. The linked image is compared with the decompressed `.code` of the
 dump (`image.orig` in config/project.json; tools/n3ds.py reads it).
@@ -104,11 +105,12 @@ def text_section(path):
 
 
 def data_references(path):
-    """({section: (payload, alignment, constant)} for the allocated sections of an ELF32 ARM
+    """({section: (payload, alignment, kind)} for the allocated sections of an ELF32 ARM
     object besides `.text`, {symbol name: (section, value)} for what its `.text` relocations
-    point into them). `constant` is False for a writable, executable or zero-filled section
-    and for one that carries relocations of its own; such a section cannot be placed by
-    comparing its bytes with the image."""
+    point into them). `kind` is "rodata" for a read-only section, "data" for a writable one
+    with bytes, "bss" for a zero-filled one (its payload is that many zero bytes), and None
+    for an executable section or one that carries relocations of its own: such a section
+    cannot be placed by comparing its bytes with the image."""
     data = Path(path).read_bytes()
     shoff, = struct.unpack_from("<I", data, 0x20)
     shentsize, shnum, shstrndx = struct.unpack_from("<HHH", data, 0x2E)
@@ -121,8 +123,14 @@ def data_references(path):
     sections = {}
     for i in held:
         h = headers[i]
-        constant = h[1] == 1 and not h[2] & 0x5 and not any(r[1] == 9 and r[7] == i for r in headers)  # PROGBITS, not W/X
-        sections[section_name(h)] = (data[h[4]:h[4] + h[5]] if h[1] != 8 else b"", h[8], constant)
+        own_relocations = any(r[1] == 9 and r[7] == i for r in headers)
+        kind = None
+        if not h[2] & 0x4 and not own_relocations:
+            if h[1] == 1:  # PROGBITS
+                kind = "data" if h[2] & 0x1 else "rodata"
+            elif h[1] == 8 and h[2] & 0x1:  # NOBITS, writable
+                kind = "bss"
+        sections[section_name(h)] = (data[h[4]:h[4] + h[5]] if h[1] != 8 else bytes(h[5]), h[8], kind)
     references = {}
     for header in headers:
         if header[1] != 9 or header[7] != text_index:
@@ -190,16 +198,18 @@ def trailing_literal(built, address, retail_size, size, code, base, next_start):
     return bytes(text[retail_size:size]) == bytes(code[start + retail_size:start + size])
 
 
-def place_data(built, retail, resolve, code, base, window):
-    """Where the image holds the constants the compiled object `built` defines (`.constdata`),
-    or None when that cannot be shown. Each pool word of `built` that relocates to its own
-    section is a word of `retail` that relocates to a symbol the image has an address for
-    (`DAT_x`): that fixes the section's address, and the section is placed there only when
-    its bytes equal the image's and it lies in `window` (the .rodata range) at its alignment.
+def place_data(built, retail, resolve, code, base, windows):
+    """Where the image holds the data the compiled object `built` defines (`.constdata`,
+    `.data`, `.bss`), or None when that cannot be shown. Each pool word of `built` that
+    relocates to its own section is a word of `retail` that relocates to a symbol the image
+    has an address for (`DAT_x`, `_ZZ...E8instance`): that fixes the section's address, and the
+    section is placed there only when it lies at its alignment in `windows[kind]` (the
+    .rodata, .data or .bss range of the image) and, but for zero-filled `.bss`, its bytes
+    equal the image's.
     Returns ({section: (address, size)}, {symbol name: address}); the symbols resolve the
     object's references to the section for `code_difference`."""
     sections, references = data_references(built)
-    if not sections or not all(constant for _payload, _alignment, constant in sections.values()):
+    if not sections or not all(kind for _payload, _alignment, kind in sections.values()):
         return None
     (built_text, built_relocations), (retail_text, retail_relocations) = text_section(built), text_section(retail)
     if len(built_text) != len(retail_text):
@@ -222,11 +232,12 @@ def place_data(built, retail, resolve, code, base, window):
     if set(start) != set(sections):
         return None
     placed = {}
-    for section, (payload, alignment, _constant) in sections.items():
+    for section, (payload, alignment, kind) in sections.items():
         begin = start[section]
+        window = windows[kind]
         if begin % max(alignment, 1) or not window[0] <= begin <= begin + len(payload) <= window[1]:
             return None
-        if code[begin - base:begin - base + len(payload)] != payload:
+        if kind != "bss" and code[begin - base:begin - base + len(payload)] != payload:
             return None
         placed[section] = (begin, len(payload))
     spans = sorted(placed.values())
@@ -368,7 +379,10 @@ def main():
     swapped, oversized, with_data, retargeted, rewritten = 0, [], [], [], []
     missing, no_retail, entered_across, overlapped, object_for = [], [], [], [], {}
     data_placed = []  # (address, size, object, section): an object's own constants at their retail address
-    rodata_window = (segments["rodata"][0], segments["data"][0])
+    # Where each kind of the object's data may sit: .rodata and .data hold bytes of the image; .bss is the
+    # zero-filled range past it, which no bytes of `.code` cover.
+    windows = {"rodata": (segments["rodata"][0], segments["data"][0]), "data": segments["data"],
+               "bss": (max(segments["bss"][0], base + len(code)), segments["bss"][1])}
     address_name = re.compile(r"_([0-9a-f]{8})$")
 
     objects = {name: address for address, name in split.read_objects(ROOT / module["symbols"]).items()}
@@ -410,9 +424,9 @@ def main():
             built = elf_sections(ROOT / unit["object"])
             size = built[".text"][0]
             data = [name for name, (length, flags) in built.items() if flags & 0x2 and length and name != ".text"]
-            # Its own constants (`.constdata`) go where the image holds them, when the retail
+            # Its own data (`.constdata`, `.data`, `.bss`) goes where the image holds it, when the retail
             # object's pool words name that address and the bytes there are the object's.
-            own = place_data(ROOT / unit["object"], ROOT / target, resolve, code, base, rodata_window) if data else None
+            own = place_data(ROOT / unit["object"], ROOT / target, resolve, code, base, windows) if data else None
             if own and any(a < start + length and start < a + n for start, length in own[0].values() for a, n, _o, _s in data_placed):
                 own = None  # another function's constants already sit there
             here = resolve if own is None else (lambda name, symbols=own[1]: symbols[name] if name in symbols else resolve(name))
@@ -422,7 +436,7 @@ def main():
             difference = (None if (data and own is None) or (size != retail_size and not tail)
                           else code_difference(ROOT / unit["object"], ROOT / target, here, retail_size if tail else None))
             if data and own is None:
-                # Its own variables, or constants nothing ties to a retail address: the code
+                # Data nothing ties to a retail address (or that conflicts there): the code
                 # goes in as retail bytes.
                 with_data.append((unit["function"], ",".join(data)))
                 if not args.full:
@@ -501,7 +515,7 @@ def main():
         hi = segments["data"][0] if segment == "rodata" else base + len(code)
         # The retail bytes of the segment, but for the constants that sit in compiled objects.
         pieces, cursor = [], lo
-        for address, size, target, section in constants if segment == "rodata" else ():
+        for address, size, target, section in (piece for piece in constants if lo <= piece[0] < hi):
             if address > cursor:
                 pieces.append((cursor, code[cursor - base:address - base], None))
             pieces.append((address, None, f"\"{target}\"({section})"))
@@ -518,6 +532,11 @@ def main():
                 ref = f"\"{inputs[-1]}\"(.{segment})"
             lines.append(f"    . = {at - lo:#x}; {ref}")
         data_sections.append(f"  .{segment} {lo:#x} : SUBALIGN(1) {{\n" + "\n".join(lines) + "\n  }")
+    end = base + len(code)  # zero-filled data (.bss) lies past the image: nothing of it is in `.code`
+    bss = [piece for piece in constants if piece[0] >= end]
+    if bss:
+        lines = [f"    . = {address - end:#x}; \"{target}\"({section})" for address, _size, target, section in bss]
+        data_sections.append(f"  .bss {end:#x} (NOLOAD) : SUBALIGN(1) {{\n" + "\n".join(lines) + "\n  }")
 
     # Everything the objects reference and no object defines, as absolute
     # symbols: functions linked as bytes (typed, with the Thumb bit, so ld
@@ -575,7 +594,7 @@ def main():
           f"{len(dat)} address-named symbols, {len(constants)} constant sections of compiled objects at their retail addresses")
     retained = (
         (oversized, "compiled section size differs", lambda item: f"{item[0]} {item[1]:#x} vs {item[2]:#x}"),
-        (with_data, "they define variables, or constants no retail pool word ties to an address holding the same bytes", lambda item: f"{item[0]} ({item[1]})"),
+        (with_data, "their variables or constants are tied by no retail pool word to a free address holding the same bytes", lambda item: f"{item[0]} ({item[1]})"),
         (retargeted, "they call or address something else than retail", str),
         (rewritten, "their instructions differ in operands objdiff does not compare", str),
         (no_retail, "their unit has no retail target object", str),

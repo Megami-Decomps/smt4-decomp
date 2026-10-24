@@ -1,2 +1,19 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x472768; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void geometryDestroy(void *geometry);
+void asdMemFree(void *block);
+
+struct Holder {
+    void *geometry;
+};
+
+/* Destroys the object's geometry and frees the object. */
+void FUN_00315610(Holder *object)
+{
+    geometryDestroy(object->geometry);
+    asdMemFree(object);
+}
+
+} /* extern "C" */

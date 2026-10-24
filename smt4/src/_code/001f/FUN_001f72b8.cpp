@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4642f4; not written yet. */
 #include "common.h"
+
+extern "C" s32 effGetFrameCounter(void);
+
+struct Object {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ s32 frames;
+};
+
+extern "C" void FUN_001f72b8(Object *object)
+{
+    object->frames += effGetFrameCounter();
+}

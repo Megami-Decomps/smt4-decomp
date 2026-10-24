@@ -10,6 +10,8 @@ void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int f
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(AsdListBox *listBox);
 void asdListBoxViewRefresh(void *view);
+s32 asdListBoxGetCursor(void *view);
+void asdListBoxFreeItem(void *item);
 char *strncpy(char *dst, const char *src, u32 n);
 
 /* Appends a plain item labelled `label` to the list box; returns the item's id. */
@@ -25,10 +27,10 @@ u32 asdListBoxAddItem(AsdListBox *listBox, const char *label)
     item->type = 0;
     item->id = model->nextItemId;
     model->nextItemId++;
-    asdListAdd(model, item, (void *)0x00359330 /* item callback */);
+    asdListAdd(model, item, (void *)asdListBoxFreeItem);
     asdListBoxMarkDirty(listBox);
     asdListBoxViewRefresh(model->view);
-    model->selectedCursor = model->viewCursor;
+    model->selectedCursor = asdListBoxGetCursor(model->view);
     return item->id;
 }
 

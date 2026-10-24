@@ -12,9 +12,10 @@ extern u32 g_btlAux; /* 0x573808 */
 /* Script command: passes its string argument (copied into a zeroed 0x44-byte buffer) to the battle aux handler. */
 u32 FUN_00335934(void)
 {
+    const char *source = scrGetArgString(0);
     char name[0x44] = {0};
 
-    libc_strcpy(name, scrGetArgString(0));
+    libc_strcpy(name, source);
     FUN_004f7b84(g_btlAux, name);
     return 1;
 }

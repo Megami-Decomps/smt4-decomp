@@ -1,58 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00406a1c` (_code @ 0x406a1c, 0xb8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: same loops and calls; retail hoists the zero constant into r9 at entry and caches begin/end with ldrd; registers and schedule differ */
+#include "common.h"
+
+struct Owned406a1c {
+    virtual ~Owned406a1c();
+};
+
+struct PointerVector406a1c {
+    void **begin;
+    void **end;
+    void **capacityEnd;
+};
+
+struct Obj406a1c {
+    u8 unk00[4];
+    u32 flags;
+    Owned406a1c *owned;
+    void *buffer;
+    u8 unk10[0xec];
+    u8 *array;
+    u8 unk100[0x14];
+    PointerVector406a1c lists[8];
+};
 
 extern "C" {
+int asdOperatorDelete(void *block);
+void asdOperatorDeleteB(void *block);
+int asdMemFree(void *block);
 
-int asdMemFree(void);
-int asdOperatorDelete(void);
-int asdOperatorDeleteB(int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: asdOperatorDeleteB. */
-
-
-void FUN_00406a1c(int param_1)
-
+/* Releases the object: frees the pointers held by each of its eight lists, the counted array, the owned object and the buffer. */
+void FUN_00406a1c(Obj406a1c *obj)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int *piVar5;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  do {
-    temp_v0 = param_1 + temp_v3 * 0xc;
-    piVar5 = *(int **)(temp_v0 + 0x118);
-    for (piVar4 = *(int **)(temp_v0 + 0x114); piVar4 != piVar5; piVar4 = piVar4 + 1) {
-      if (*piVar4 != 0) {
-        asdOperatorDelete();
-      }
+    for (s32 i = 0; i < 8; i++) {
+        PointerVector406a1c *list = &obj->lists[i];
+        void **last = list->end;
+        for (void **entry = list->begin; entry != last; entry++) {
+            if (*entry != NULL) {
+                asdOperatorDelete(*entry);
+            }
+        }
+        void **first = list->begin;
+        void **end = list->end;
+        if (first != end) {
+            list->end = end - (end - first);
+        }
     }
-    temp_v1 = *(int *)(temp_v0 + 0x114);
-    temp_v2 = *(int *)(temp_v0 + 0x118);
-    if (temp_v1 != temp_v2) {
-      *(unsigned int *)(temp_v0 + 0x118) = temp_v2 - ((temp_v2 - temp_v1) & 0xfffffffcU);
+    if (obj->array != NULL) {
+        asdOperatorDeleteB(obj->array - 8);
     }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 8);
-  if (*(int *)(param_1 + 0xfc) != 0) {
-    asdOperatorDeleteB(*(int *)(param_1 + 0xfc) - 8);
-  }
-  if (((*(unsigned int *)(param_1 + 4) & 1) == 0) && (*(int **)(param_1 + 8) != (int *)0x0)) {
-    (**(romwright_code **)(**(int **)(param_1 + 8) + 4))();
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  if (*(int *)(param_1 + 0xc) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xc) = 0;
-  }
-  return;
+    if (!(obj->flags & 1) && obj->owned != NULL) {
+        delete obj->owned;
+        obj->owned = NULL;
+    }
+    if (obj->buffer != NULL) {
+        asdMemFree(obj->buffer);
+        obj->buffer = NULL;
+    }
 }
-
-} /* extern "C" */
+}

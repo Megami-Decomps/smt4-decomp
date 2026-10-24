@@ -12,9 +12,9 @@ extern Rec16 *dataTable00FindById(u16 id);
 extern void scrSetResult(u32 value);
 
 /* Script command: result is the record's halfword at +0x16, masked with 0x3F and shifted right by 5. */
-u32 scrCommGetFlagBit5(s32 argIndex)
+u32 scrCommGetFlagBit5(void)
 {
-    Rec16 *rec = dataTable00FindById(scrGetArg(argIndex));
+    Rec16 *rec = dataTable00FindById(scrGetArg(0));
 
     scrSetResult((rec->unk16 & 0x3F) >> 5);
     return 1;

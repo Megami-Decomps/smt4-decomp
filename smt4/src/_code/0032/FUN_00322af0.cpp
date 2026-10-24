@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4066d8; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void FUN_002fb234(void);
+
+/* Script command: runs FUN_002fb234. */
+u32 FUN_00322af0(void)
+{
+    FUN_002fb234();
+    return 1;
+}
+
+} /* extern "C" */

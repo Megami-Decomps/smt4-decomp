@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail predicates the -1 (mvneq) and has no alignment nop before the final scrSetResult call; built emits an unconditional mvn and a nop. */
+/* NON_MATCHING: ternary now gives retail's predicated mvneq; remaining difference is one compiler nop hint before the final scrSetResult call (and the pool offset it shifts) */
 #include "common.h"
 
 extern "C" {
@@ -66,11 +66,7 @@ u32 FUN_0031f400(void)
         }
         i++;
     } while (i < ENTITY_COUNT);
-    if (count == 0) {
-        id = -1;
-    } else {
-        id = candidates[randNextInRange((count - 1) & 0xffff)]->id;
-    }
+    id = count == 0 ? -1 : candidates[randNextInRange((count - 1) & 0xffff)]->id;
     scrSetResult(id);
     return 1;
 }

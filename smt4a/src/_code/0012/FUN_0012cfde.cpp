@@ -5,8 +5,8 @@
 extern "C" {
 
 int sysMemClear(unsigned char [40], int);
-int FUN_0030d108(int *, int, unsigned char *);
-int FUN_0030d134(unsigned char [40]);
+int _ZN12AsdAllocatorI9Obj55a87cE9constructEPS0_RKS0_(int *, int, unsigned char *);
+int _ZN9Obj55a87cC1Ev(unsigned char [40]);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,10 +17,10 @@ typedef struct {
 
 extern int *_ZSt3maxIjERKT_S2_S2_(int *, unsigned int *);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0030d108. */
-/* Supplied declaration required: FUN_0030d134. */
-extern int vectorAllocx28(int *, int, unsigned int);
-extern unsigned int vectorGrowCapacity_0030fd7e(unsigned int, int *);
+/* Supplied declaration required: _ZN12AsdAllocatorI9Obj55a87cE9constructEPS0_RKS0_. */
+/* Supplied declaration required: _ZN9Obj55a87cC1Ev. */
+extern int _ZN12AsdAllocatorI9Obj55a87cE8allocateEjPKv(int *, int, unsigned int);
+extern unsigned int _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55a87c12AsdAllocatorIS2_EEEEjjPKT_(unsigned int, int *);
 
 
 int * FUN_0012cfde(int *param_1,int param_2)
@@ -37,19 +37,19 @@ int * FUN_0012cfde(int *param_1,int param_2)
   unsigned char *temp_v6;
   
   sysMemClear(temp_v3,0x28);
-  FUN_0030d134(temp_v3);
+  _ZN9Obj55a87cC1Ev(temp_v3);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;
   temp_v4 = param_2;
-  temp_v5 = vectorGrowCapacity_0030fd7e(0,param_1);
+  temp_v5 = _ZN4__rw17__rw_new_capacityISt6vectorI9Obj55a87c12AsdAllocatorIS2_EEEEjjPKT_(0,param_1);
   piVar1 = (int *)_ZSt3maxIjERKT_S2_S2_(&temp_v4,(unsigned int *)&temp_v5);
   temp_v2 = *piVar1;
-  temp_v0 = vectorAllocx28(param_1,temp_v2,0);
+  temp_v0 = _ZN12AsdAllocatorI9Obj55a87cE8allocateEjPKv(param_1,temp_v2,0);
   *param_1 = temp_v0;
   temp_v6 = temp_v3;
   for (temp_v1 = temp_v4; temp_v1 != 0; temp_v1 = temp_v1 - 1) {
-    FUN_0030d108(param_1,temp_v0,temp_v6);
+    _ZN12AsdAllocatorI9Obj55a87cE9constructEPS0_RKS0_(param_1,temp_v0,temp_v6);
     temp_v0 = temp_v0 + 0x28;
   }
   param_1[2] = *param_1 + temp_v2 * 0x28;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler merges all three pointer guards; retail branches before loading the form pointer. */
+/* NON_MATCHING: armcc predicates the form-pointer load and null test behind the first two guards; retail branches before loading the form pointer. */
 #include "common.h"
 
 struct ScriptUnitForm {
@@ -25,8 +25,11 @@ s32 FUN_0019acdc(u16 formId, u32 flags);
 s32 FUN_003f25e8()
 {
     ScriptBattleUnit* unit = btlUnitGet(g_btlScriptUnit);
-    if (unit != NULL && unit->data != NULL && unit->data->form != NULL) {
-        return FUN_0019acdc(unit->data->form->id, 0) == 3;
+    if (unit != NULL && unit->data != NULL) {
+        ScriptUnitForm* form = unit->data->form;
+        if (form != NULL) {
+            return FUN_0019acdc(form->id, 0) == 3;
+        }
     }
     return 0;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) around the AsdFileHashPack allocation. */
+/* NON_MATCHING: same calls and stores; retail sets the three trailing call arguments in ascending order (r1, r2, r3) where armcc sets them descending */
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 
 extern "C" {

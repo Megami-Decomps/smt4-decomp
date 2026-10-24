@@ -1,2 +1,9 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4024e8; not written yet. */
 #include "common.h"
+
+extern "C" void FUN_003ab3dc(void *view);
+
+/* Draws through the list renderer. */
+extern "C" void FUN_003abd84(void *view)
+{
+    FUN_003ab3dc(view);
+}

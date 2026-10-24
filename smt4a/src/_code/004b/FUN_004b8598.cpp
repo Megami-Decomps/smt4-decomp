@@ -1,129 +1,120 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b8598` (_code @ 0x4b8598, 0x234 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: prologue order only - retail schedules `sub sp` after `ldr r1,[r0,#144]; mov r7,r0`, armcc emits it right after the push */
+#include "common.h"
 
 extern "C" {
 
-int textFormatBuffer(...);
-int placeWinStartText(...);
-int moveCameraCtrlCreateEntry(...);
-int linkSlotSetFlag1C(...);
-int linkSlotSetFlag20(...);
-int listSelectItem(...);
-int FUN_00407ab0(...);
-int FUN_00407eb0(...);
-int FUN_004080bc(...);
-int FUN_004b96a0(...);
-int dataTable33Entries(...);
-int dataTable33TypeCount(...);
+/* One mikado list entry: image names under g_mikadoPathPrefix, flags gating the alternate image and the entry's table type. */
+typedef struct MikadoEntry {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 name[0x3E];
+    /* 0x40 */ char image[0x20];
+    /* 0x60 */ s32 tableType;
+    /* 0x64 */ u16 altFlagA;
+    /* 0x66 */ u16 altFlagB;
+    /* 0x68 */ char altImage[0x20];
+} MikadoEntry;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct MikadoMenuEntry {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ s16 kind;
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ s8 listIndex;
+} MikadoMenuEntry;
 
-extern unsigned char LAB_004b87d0; /* 0x4b87d0 */
-extern unsigned char LAB_004b87d8; /* 0x4b87d8 */
+/* Local view of the mikado scene panel (see CampScriptPanelResources for the shared layout). */
+typedef struct MikadoPanel {
+    /* 0x0000 */ u8 unk0000[0x28];
+    /* 0x0028 */ u32 state;
+    /* 0x002C */ u32 stateArg;
+    /* 0x0030 */ u8 unk0030[0xC];
+    /* 0x003C */ s16 sceneId;
+    /* 0x003E */ u8 unk003E[0x52];
+    /* 0x0090 */ u32 textureNode;
+    /* 0x0094 */ u8 unk0094[8];
+    /* 0x009C */ u8 menu[0x107C];
+    /* 0x1118 */ MikadoEntry *entry;
+    /* 0x111C */ u8 unk111C[0xC];
+    /* 0x1128 */ void *scriptFile;
+    /* 0x112C */ void *messageFile;
+    /* 0x1130 */ u8 unk1130[0x3C];
+    /* 0x116C */ s32 keepWindow;
+    /* 0x1170 */ u8 unk1170[0xA4];
+    /* 0x1214 */ u8 cacheLoaded;
+    /* 0x1215 */ u8 unk1215[3];
+    /* 0x1218 */ u32 cacheHandle;
+} MikadoPanel;
 
-/* Supplied declaration required: textFormatBuffer. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-extern int gameFlagIsSet(void);
-/* Supplied declaration required: placeWinStartText. */
-/* Supplied declaration required: moveCameraCtrlCreateEntry. */
-/* Supplied declaration required: linkSlotSetFlag1C. */
-/* Supplied declaration required: linkSlotSetFlag20. */
-/* Supplied declaration required: listSelectItem. */
-/* Supplied declaration required: FUN_00407ab0. */
-/* Supplied declaration required: FUN_00407eb0. */
-/* Supplied declaration required: FUN_004080bc. */
-/* Supplied declaration required: FUN_004b96a0. */
-extern int menu4CGetCurrentEntry(int);
-/* Supplied declaration required: dataTable33Entries. */
-/* Supplied declaration required: dataTable33TypeCount. */
+extern const char g_mikadoPathPrefix[];
+extern int textFormatBuffer(u8 *destination, const char *format, ...);
+extern int asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+extern int gameFlagIsSet(s32 flag);
+extern int placeWinStartText(u8 *name);
+extern void moveCameraCtrlCreateEntry(u32 handle, u8 *path, s32 index);
+extern void linkSlotSetFlag1C(u32 handle, s32 enable);
+extern void linkSlotSetFlag20(u32 handle, s32 enable);
+extern void listSelectItem(u32 handle, s32 index);
+extern void FUN_00407ab0(u32 handle, u8 *path, u8 *altPath);
+extern void FUN_00407eb0(u32 handle, s32 kind, s32 flag);
+extern void FUN_004080bc(u32 handle, s32 a, s32 b);
+extern void FUN_004b96a0(MikadoPanel *panel);
+extern MikadoMenuEntry *menu4CGetCurrentEntry(u8 *menu);
+extern u8 *dataTable33Entries(u8 *scratch, s32 type);
+extern s32 dataTable33TypeCount(u8 *scratch, s32 type);
 
-
-void FUN_004b8598(int param_1)
-
+/* Once the panel's textures and scripts are loaded, enters state 3 and loads the current entry's images into the cache. */
+void FUN_004b8598(MikadoPanel *panel)
 {
-/* irregular: 12 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned char *puVar6;
-  unsigned char temp_v4;
-  unsigned char temp_v5 [128];
-  unsigned char temp_v6 [128];
-  unsigned char temp_v7 [8];
-  
-  temp_v0 = asdTMTexTableNodeIsLoaded(0x18,*(unsigned int *)(param_1 + 0x90));
-  if (temp_v0 != 0) {
-    temp_v4 = *(int *)(param_1 + 0x1128) != 0;
-    temp_v0 = 0;
-    if (temp_v4) {
-      temp_v0 = *(int *)(param_1 + 0x112c);
-    }
-    if (temp_v4 && temp_v0 != 0) {
-      FUN_004b96a0(param_1);
-      *(unsigned int *)(param_1 + 0x28) = 3;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      if (*(char *)(*(int *)(param_1 + 0x1118) + 0x40) != '0') {
-        *(unsigned char *)(param_1 + 0x1214) = 1;
-        textFormatBuffer(temp_v5,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
-        if (((*(short *)(*(int *)(param_1 + 0x1118) + 100) != 0) &&
-            (temp_v0 = gameFlagIsSet(), temp_v0 != 0)) ||
-           ((*(short *)(*(int *)(param_1 + 0x1118) + 0x66) != 0 &&
-            (temp_v0 = gameFlagIsSet(), temp_v0 != 0)))) {
-          textFormatBuffer(temp_v6,&LAB_004b87d0,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
-          FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v5,temp_v6);
-        }
-        else {
-          FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v5,0);
-        }
-        temp_v0 = menu4CGetCurrentEntry(param_1 + 0x9c);
-        FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),0,0xffffffff);
-        FUN_00407eb0(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v0 + 0x28),1);
-        if (-1 < *(int *)(*(int *)(param_1 + 0x1118) + 0x60)) {
-          puVar6 = temp_v7;
-          dataTable33Entries();
-          if (puVar6 != (unsigned char *)0x0) {
-            temp_v3 = 0;
-            puVar2 = temp_v7;
-            dataTable33TypeCount(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
-            if (0 < (int)puVar2) {
-              do {
-                textFormatBuffer(temp_v5,&LAB_004b87d8,"mikado/",puVar6);
-                moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),temp_v5,temp_v3);
-                puVar6 = puVar6 + 0x20;
-                temp_v3 = temp_v3 + 1;
-                puVar2 = temp_v7;
-                dataTable33TypeCount(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
-              } while (temp_v3 < (int)puVar2);
-            }
-            listSelectItem(*(unsigned int *)(param_1 + 0x1218),(int)*(char *)(temp_v0 + 0x2b));
-          }
-        }
-        if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||
-           (!(*(short *)(temp_v0 + 0x28) == 0 || *(short *)(temp_v0 + 0x28) == 6))) {
-          linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),0);
-          temp_v1 = *(unsigned int *)(param_1 + 0x1218);
-          temp_v2 = 1;
-        }
-        else {
-          linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),1);
-          temp_v1 = *(unsigned int *)(param_1 + 0x1218);
-          temp_v2 = 0;
-        }
-        linkSlotSetFlag1C(temp_v1,temp_v2);
-      }
-      if (*(int *)(param_1 + 0x116c) != 1) {
-        placeWinStartText(*(int *)(param_1 + 0x1118) + 2);
+    MikadoMenuEntry *current;
+    u8 *typeEntries;
+    s32 i;
+
+    if (asdTMTexTableNodeIsLoaded(0x18, panel->textureNode) == 0) {
         return;
-      }
     }
-  }
-  return;
+    if (panel->scriptFile != NULL && panel->messageFile != NULL) {
+        FUN_004b96a0(panel);
+        panel->state = 3;
+        panel->stateArg = 0;
+        if (panel->entry->image[0] != '0') {
+            u8 path[0x80];
+            u8 altPath[0x80];
+            u8 scratch[8];
+
+            panel->cacheLoaded = 1;
+            textFormatBuffer(path, "%s%s", g_mikadoPathPrefix, panel->entry->image);
+            if ((panel->entry->altFlagA != 0 && gameFlagIsSet(panel->entry->altFlagA) != 0) ||
+                (panel->entry->altFlagB != 0 && gameFlagIsSet(panel->entry->altFlagB) != 0)) {
+                textFormatBuffer(altPath, "%s%s", g_mikadoPathPrefix, panel->entry->altImage);
+                FUN_00407ab0(panel->cacheHandle, path, altPath);
+            } else {
+                FUN_00407ab0(panel->cacheHandle, path, NULL);
+            }
+            current = menu4CGetCurrentEntry(panel->menu);
+            FUN_004080bc(panel->cacheHandle, 0, -1);
+            FUN_00407eb0(panel->cacheHandle, current->kind, 1);
+            if (panel->entry->tableType >= 0) {
+                typeEntries = dataTable33Entries(scratch, panel->entry->tableType);
+                if (typeEntries != NULL) {
+                    for (i = 0; i < dataTable33TypeCount(scratch, panel->entry->tableType); i++) {
+                        textFormatBuffer(path, "%s%s.bam", g_mikadoPathPrefix, typeEntries);
+                        moveCameraCtrlCreateEntry(panel->cacheHandle, path, i);
+                        typeEntries += 0x20;
+                    }
+                    listSelectItem(panel->cacheHandle, current->listIndex);
+                }
+            }
+            if ((panel->sceneId == 4 || panel->sceneId == 3) && (current->kind == 0 || current->kind == 6)) {
+                linkSlotSetFlag20(panel->cacheHandle, 1);
+                linkSlotSetFlag1C(panel->cacheHandle, 0);
+            } else {
+                linkSlotSetFlag20(panel->cacheHandle, 0);
+                linkSlotSetFlag1C(panel->cacheHandle, 1);
+            }
+        }
+        if (panel->keepWindow != 1) {
+            placeWinStartText(panel->entry->name);
+        }
+    }
 }
 
 } /* extern "C" */

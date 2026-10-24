@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the constant 1 in r2 across the flag set and the tail call (one instruction more), so the final branch is not the branch-to-next armlink turns into a nop. */
 #include "common.h"
 
 extern "C" {
@@ -13,7 +12,7 @@ typedef struct Table2EEntry {
 s32 dataTable2ECount(void);
 Table2EEntry *dataTable2EGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(s32 flag, s32 value);
+void gameFlagSetValue(s32 flag, s32 value, s32 notify);
 void gameFlagsGetBlock(void);
 void gameDataSetEntryEnabled(s32 id, u32 arg1, bool enabled);
 
@@ -32,7 +31,7 @@ void FUN_004bc95c(s32 id, u32 arg1)
             }
             if (entry->id == id) {
                 if (entry->gameFlag != 0 && gameFlagIsSet(entry->gameFlag) == 0) {
-                    gameFlagSetValue(entry->gameFlag, 1);
+                    gameFlagSetValue(entry->gameFlag, 1, 1);
                 }
                 break;
             }

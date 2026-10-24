@@ -1,4 +1,4 @@
-/* NON_MATCHING: Result-sign predicates, branch joins and the shrink-path linker NOP differ. */
+/* NON_MATCHING: same control flow; retail tests the sign with ands/bmi into a temporary and lays the second path out after the common return, armcc tests with tst and branches differently */
 #include "shard/GlobalBlocks.h"
 #include "nn/Result.h"
 extern "C" {
@@ -15,13 +15,13 @@ u32 FUN_00146910(u32 size)
     if (size > currentSize) {
         status = FUN_0016236c(&address, 0x08000000 + currentSize, 0,
             size - currentSize, 3, 3);
-        if (!nnResultIsSuccess(status)) {
+        if ((status & 0x80000000) != 0) {
             return status;
         }
     } else {
         status = FUN_0016236c(&address, 0x08000000 + size, 0,
             currentSize - size, 1, 0);
-        if (!nnResultIsSuccess(status)) {
+        if ((status & 0x80000000) != 0) {
             return status;
         }
     }

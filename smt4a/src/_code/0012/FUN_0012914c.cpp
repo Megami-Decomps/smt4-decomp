@@ -8,7 +8,7 @@ int FUN_001290ba(unsigned int *);
 int FUN_00130664(int *, int *, int *, int *);
 int asdOperatorDeleteArray(...);
 int FUN_00303350(int);
-int FUN_0030cdc0(int);
+int _ZN9Obj559608D1Ev(int);
 int FUN_0030cde0(int *, unsigned int, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned char DAT_00559038; /* 0x559038 */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int FUN_002f5966(unsigned int *);
 /* Supplied declaration required: FUN_00303350. */
-/* Supplied declaration required: FUN_0030cdc0. */
+/* Supplied declaration required: _ZN9Obj559608D1Ev. */
 /* Supplied declaration required: FUN_0030cde0. */
 
 
@@ -60,7 +60,7 @@ void FUN_0012914c(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   temp_v0 = FUN_002f5966(param_1 + 9);
   temp_v0 = temp_v0 - 0x18;
   FUN_00303350(temp_v0);
-  FUN_0030cdc0(temp_v0 - 0xc);
+  _ZN9Obj559608D1Ev(temp_v0 - 0xc);
   return;
 }
 

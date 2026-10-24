@@ -16,7 +16,7 @@ PartyStockView *gameGetSlotTable(void);
 s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 FUN_0029efa8(const GridNavigation *grid);
 void FUN_0029f848(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
-void FUN_0029e8b8(GridNavigation *grid, s32 index);
+void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
 void FUN_0029eb5c(GridNavigation *grid, s32 index);
 void partyPanelSortEntries(void);
 
@@ -54,9 +54,9 @@ void FUN_0026b9bc(void)
         FUN_0029f848(&panel->capacityGrids.base, party->capacity - 12, 3, 4, 1, 1);
         FUN_0029f848(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
     }
-    FUN_0029e8b8(&panel->capacityGrids.base, firstRow);
+    scrollOwnerSelectIndex(&panel->capacityGrids.base, firstRow);
     FUN_0029eb5c(&panel->capacityGrids.base, firstColumn);
-    FUN_0029e8b8(&panel->capacityGrids.expanded, secondRow);
+    scrollOwnerSelectIndex(&panel->capacityGrids.expanded, secondRow);
     FUN_0029eb5c(&panel->capacityGrids.expanded, secondColumn);
 
     GridNavigation *base2 = &panel->capacityGrids.secondary;
@@ -67,9 +67,9 @@ void FUN_0026b9bc(void)
     secondColumn = FUN_0029efa8(expanded2);
     FUN_0029f848(base2, party->capacity, rows, 4, 1, 1);
     FUN_0029f848(expanded2, party->capacity + 4, rows + 1, 4, 1, 1);
-    FUN_0029e8b8(base2, firstRow);
+    scrollOwnerSelectIndex(base2, firstRow);
     FUN_0029eb5c(base2, firstColumn);
-    FUN_0029e8b8(expanded2, secondRow);
+    scrollOwnerSelectIndex(expanded2, secondRow);
     FUN_0029eb5c(expanded2, secondColumn);
 }
 

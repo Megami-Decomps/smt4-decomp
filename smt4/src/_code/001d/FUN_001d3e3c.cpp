@@ -94,7 +94,7 @@ int FUN_002759bc(void);
 int FUN_00275bc8(void);
 int FUN_00275be8(...);
 int FUN_00275dc4(void);
-int FUN_00275f00(void);
+int buttonHelpSelectMapPreset(void);
 int mapEntryTriggerForScene(...);
 int frameTexResetFlags(void);
 int FUN_00280ac0(...);
@@ -416,7 +416,7 @@ extern unsigned int campGetState(void);
 /* Supplied declaration required: FUN_00275be8. */
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_00275dec. */
-/* Supplied declaration required: FUN_00275f00. */
+/* Supplied declaration required: buttonHelpSelectMapPreset. */
 extern int FUN_00276060(unsigned int);
 extern int dataTable2fSub0GetRecord(int);
 /* Supplied declaration required: gameCopyPersistentSave. */
@@ -1625,7 +1625,7 @@ joined_r0x001d535c:
         }
         else {
           gameJumpRequestClear();
-          FUN_00275f00();
+          buttonHelpSelectMapPreset();
           DAT_0049f934 = '\0';
           DAT_0049f93c = 0;
           puVar7[3] = 0xb;
@@ -1687,7 +1687,7 @@ LAB_001d61bc:
     FUN_00281784();
     mapInitializeStoryMarkerEffects(puVar17[0x10]);
     FUN_002646d4(1);
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     DAT_0049f934 = '\0';
     puVar7[3] = 0xb;
     puVar7[4] = 0;
@@ -1710,7 +1710,7 @@ LAB_001d61bc:
       return 0;
     }
     scrLoaderRelease(g_aocMain + 0xa8);
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     temp_v6 = gameJumpRequestIsPending();
 joined_r0x001d6448:
     if (temp_v6 == 0) {
@@ -1737,7 +1737,7 @@ joined_r0x001d6448:
         return 0;
       }
       FUN_002895a8(g_aocMain + 0xa8);
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       temp_v6 = gameJumpRequestIsPending();
       goto joined_r0x001d6448;
     }
@@ -1881,7 +1881,7 @@ LAB_001d6bd0:
     }
     if (DAT_0049f970 != 0) goto LAB_001d6bd0;
     if (DAT_0049fd14 == -1) {
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       FUN_002644a8();
       DAT_0049f934 = 0;
       puVar7[3] = 0xb;
@@ -1983,7 +1983,7 @@ LAB_001d6bd0:
         break;
       }
     }
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     temp_v6 = 0xb;
     DAT_0049f934 = '\0';
     puVar7[3] = temp_v6;
@@ -2008,7 +2008,7 @@ LAB_001d6bd0:
         *(unsigned int *)(temp_v6 + 0x4c) = DAT_0049f9ac;
         *(unsigned int *)(temp_v6 + 0x50) = temp_v7;
       }
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       DAT_0049f934 = '\0';
       puVar7[3] = 0xb;
       puVar7[4] = 0;
@@ -2187,7 +2187,7 @@ LAB_001d6bd0:
     FUN_00281784();
     mapInitializeStoryMarkerEffects(puVar17[0x10]);
     FUN_002646d4(1);
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     FUN_00266a2c();
     temp_v6 = 0xb;
     DAT_0049f934 = '\0';
@@ -2222,7 +2222,7 @@ LAB_001d6bd0:
       puVar7[0x27d] = 0;
       asdMemFree(puVar7[0x27e]);
       puVar7[0x27e] = 0;
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       DAT_0049f934 = '\0';
       puVar7[3] = 0xb;
       puVar7[4] = 0;
@@ -2289,7 +2289,7 @@ LAB_001d6bd0:
       return 0;
     }
     if (DAT_0049fd14 == -1) {
-      FUN_00275f00();
+      buttonHelpSelectMapPreset();
       temp_v7 = 0xb;
       DAT_0049fb47 = 0;
       DAT_0049fb45 = 1;
@@ -2429,7 +2429,7 @@ LAB_001d6bd0:
       puVar7[4] = 0;
       return 0;
     }
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     DAT_0049f934 = '\0';
     DAT_0049fb46 = 1;
     puVar7[3] = 0xb;
@@ -2473,7 +2473,7 @@ LAB_001d6bd0:
     if (temp_v6 == 0) {
       return 0;
     }
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     temp_v6 = puVar7[3];
     temp_v6 = temp_v6 + 1;
     puVar7[3] = temp_v6;
@@ -3024,7 +3024,7 @@ LAB_001d6bd0:
     puVar7[0x24] = 0;
     FUN_00266a2c();
     *(unsigned char *)((int)puVar7 + 0xb) = 0;
-    FUN_00275f00();
+    buttonHelpSelectMapPreset();
     DAT_0049f940 = 0;
     DAT_0049f941 = 0;
     mapIfClose();

@@ -1,33 +1,45 @@
-/* NON_MATCHING: retail inlines wait/close syscalls; this source calls their existing native wrappers. */
-#include "shard/W6_W6Match3_ThreadHandleState.h"
+/* NON_MATCHING: syscall wrappers now inline as in retail; remaining: retail reloads the handle before each wait, keeps the 0 constant in r6, and evaluates the timeout test through separate boolean temporaries (movne/moveq, teq) that armcc folds */
+#include "classes/AllocatorState.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
 
 extern "C" {
-u32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(u32 result);
-void nn_os_Thread_FinalizeImpl(ThreadHandleState *thread);
-u32 svcCloseHandle(u32 handle);
 
-bool FUN_0047d754(ThreadHandleState *thread)
+extern AllocatorState g_allocationAddressRanges;
+
+void FUN_0018003c(void);
+void *FUN_0017fe8c(void *memory);
+void asdMemoryFreeRegion(void *memory);
+void FUN_002e3140(s32 result, bool failed);
+
+/* Releases the allocator lock (a kernel mutex), reporting a failed release. */
+static __inline void allocatorUnlock(AllocatorState &state)
 {
-    if (thread->handle) {
-        u32 result = svcWaitSynchronization1(thread->handle, 0);
-        if (result >> 31) {
-            FUN_002e3140(result);
-        }
-        if ((result & 0x3ff) == 0x3fe) {
-            return false;
-        }
+    s32 result = nn::svc::ReleaseMutex(*state.mutex);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
-    u32 result = svcWaitSynchronization1(thread->handle, -1);
-    if (result >> 31) {
-        FUN_002e3140(result);
-    }
-    thread->unk04 = 1;
-    nn_os_Thread_FinalizeImpl(thread);
-    if (thread->handle) {
-        svcCloseHandle(thread->handle);
-        thread->handle = 0;
-    }
-    return true;
 }
+
+// Releases a block under the allocator lock; blocks outside the two large regions are first
+// translated to their owning block.
+void asdMemFree(void *memory)
+{
+    AllocatorState &state = g_allocationAddressRanges;
+    u32 address = (u32)memory;
+
+    FUN_0018003c();
+    u32 firstStart = state.firstRangeStart;
+    u32 secondStart = state.secondRangeStart;
+    if ((firstStart <= address && address <= firstStart + state.firstRangeSize) ||
+        (secondStart <= address && address <= secondStart + state.secondRangeSize)) {
+        asdMemoryFreeRegion(memory);
+        allocatorUnlock(state);
+    } else {
+        asdMemoryFreeRegion(FUN_0017fe8c(memory));
+        allocatorUnlock(state);
+    }
+}
+
 }

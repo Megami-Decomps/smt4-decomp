@@ -13,7 +13,7 @@ int FUN_002ecf40(void);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_0055b0ec; /* 0x55b0ec */
-extern unsigned char DAT_00594a58; /* 0x594a58 */
+extern unsigned char g_onlineRegistry; /* 0x594a58 */
 
 /* Supplied declaration required: FUN_00113baa. */
 extern int FUN_001145a0(int);
@@ -50,7 +50,7 @@ void FUN_00121e38(unsigned int *param_1)
   param_1[0x28] = 0;
   FUN_002ecf40();
   if (param_1[3] != 0) {
-    (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00594a58 + 0x50)) + 0xc))();
+    (**(romwright_code **)(*(*(int * *)((unsigned char *)&g_onlineRegistry + 0x50)) + 0xc))();
     param_1[3] = 0;
   }
   if ((int *)param_1[0xc6] != (int *)0x0) {

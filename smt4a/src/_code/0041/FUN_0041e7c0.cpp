@@ -7,7 +7,7 @@ s32 FUN_00228b04(MenuList *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(MenuList *list);
 s32 flaggedEntryGetValueA(MenuList *list);
 s32 objectApplyIfUnblocked(MenuList *list);
-void FUN_002a48e0(MenuList *list, s32 position);
+void scrollOwnerSetValue(MenuList *list, s32 position);
 void flaggedEntrySetValueA(MenuList *list, s32 value);
 void FUN_002f0384(s32 value);
 
@@ -25,11 +25,11 @@ void FUN_0041e7c0(SdCardMenu *menu)
         s32 total = position + value + offset;
         menu->total = total;
         if (value <= 0 && offset + 1 <= total && menu->previousTotal < total) {
-            FUN_002a48e0(&menu->list, position - 1);
+            scrollOwnerSetValue(&menu->list, position - 1);
             flaggedEntrySetValueA(&menu->list, 1);
         } else if (value >= 1) {
             if (offset + (span - 1) > total && menu->previousTotal > total) {
-                FUN_002a48e0(&menu->list, position + 1);
+                scrollOwnerSetValue(&menu->list, position + 1);
                 flaggedEntrySetValueA(&menu->list, 0);
             }
         }

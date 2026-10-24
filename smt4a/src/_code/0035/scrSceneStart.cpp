@@ -12,13 +12,13 @@ typedef struct SceneState {
 
 extern SceneState g_gameState;
 
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(u32 index);
 extern u32 scrGetArgString(u32 arg);
 extern void libc_strcpy(void *transition, u32 value);
 
 u32 scrSceneStart(void)
 {
-    u32 value = scrGetArg();
+    u32 value = scrGetArg(0);
     u32 transition = scrGetArgString(1);
 
     g_gameState.value = value;

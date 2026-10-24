@@ -1,104 +1,87 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010854c` (_code @ 0x10854c, 0x204 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads work+0xE8D and work+0xFE0 through hoisted bases (add r0,r5,#0xE00 / add r4,r5,#0xF00); source has no known form that makes armcc do that */
+#include "common.h"
 
 extern "C" {
 
-int surfaceCopy(unsigned int, unsigned int);
-int FUN_002bfadc(int, int);
-int FUN_002c39a4(unsigned int);
+typedef struct Surface {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 width;
+    /* 0x18 */ s32 height;
+} Surface;
 
-extern unsigned int g_titleScene; /* 0x44ea00 */
+typedef struct ScreenWork {
+    /* 0x000 */ u8 unk000[0xE8C];
+    /* 0xE8C */ u8 enabled;
+    /* 0xE8D */ u8 ready;
+    /* 0xE8E */ u8 unkE8E[2];
+    /* 0xE90 */ s32 levels;
+    /* 0xE94 */ u8 result;
+    /* 0xE95 */ u8 busy;
+    /* 0xE96 */ u8 done;
+    /* 0xE97 */ u8 unkE97[0x141];
+    /* 0xFD8 */ u8 locked;
+    /* 0xFD9 */ u8 unkFD9[3];
+    /* 0xFDC */ Surface *base;
+    /* 0xFE0 */ u8 chained;
+    /* 0xFE1 */ u8 unkFE1[3];
+    /* 0xFE4 */ Surface *second;
+    /* 0xFE8 */ Surface *third;
+} ScreenWork;
 
-/* Supplied declaration required: surfaceCopy. */
-/* Supplied declaration required: FUN_002bfadc. */
-extern int FUN_002bff10(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c39a4. */
+ScreenWork *jobGetWork(void);
+s32 FUN_002bff10(u32 arg);
+s32 FUN_002bfadc(u32 arg, Surface *surface);
+void FUN_002c39a4(u32 scene);
+void surfaceCopy(Surface *src, Surface *dst);
 
+extern u32 g_titleScene;
 
-unsigned int FUN_0010854c(void)
-
+/* Builds the successive half-size copies of the work's base surface (a chain through two further surfaces when `chained`). */
+u32 FUN_0010854c(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int unaff_r7;
-  int *piVar5;
-  int unaff_r8;
-  int *piVar6;
-  int *piVar7;
-  
-  temp_v1 = jobGetWork();
-  *(unsigned char *)(temp_v1 + 0xe96) = 0;
-  temp_v2 = FUN_002bff10(0);
-  if ((((temp_v2 != 0) || (*(char *)(temp_v1 + 0xe8c) == '\0')) || (*(char *)(temp_v1 + 0xe8d) == '\0'))
-     || ((piVar7 = (int *)(temp_v1 + 0xfdc), *(int *)(temp_v1 + 0xfdc) == 0 ||
-         (*(char *)(temp_v1 + 0xfd8) != '\0')))) {
-    return 0;
-  }
-  FUN_002c39a4(g_titleScene);
-  *(unsigned int *)(*(int *)(temp_v1 + 0xfdc) + 0x14) = 0x200;
-  *(unsigned int *)(*piVar7 + 0x18) = 0x200;
-  temp_v0 = 0;
-  FUN_002bfadc(0,*piVar7);
-  *(unsigned char *)(temp_v1 + 0xe94) = temp_v0;
-  temp_v2 = FUN_002bff10(0);
-  temp_v3 = *(int *)(temp_v1 + 0xe90);
-  if ((temp_v2 == 0) && ((temp_v3 >= 2 && (temp_v3 = temp_v3 - 1, temp_v3 < 1)))) {
-    temp_v3 = 1;
-  }
-  if (*(char *)(temp_v1 + 0xfe0) != '\0') {
-    if (0 < temp_v3) {
-      unaff_r7 = temp_v1 + 0xc00;
-      unaff_r8 = temp_v1 + 0xc00;
+    ScreenWork *work = jobGetWork();
+    work->done = 0;
+    if (FUN_002bff10(0) != 0 || work->enabled == 0 || work->ready == 0 || work->base == NULL || work->locked != 0) {
+        return 0;
     }
-    temp_v2 = 0;
-    if (0 < temp_v3) {
-      piVar5 = (int *)(unaff_r7 + 1000);
-      piVar6 = (int *)(unaff_r8 + 0x3e4);
-      do {
-        surfaceCopy(*(unsigned int *)(temp_v1 + 0xfdc),*(unsigned int *)(temp_v1 + 0xfe4));
-        *(int *)(*piVar6 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
-        *(int *)(*piVar6 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
-        while( 1 ) {
-          temp_v2 = temp_v2 + 1;
-          if (temp_v3 <= temp_v2) {
-            *(unsigned char *)(temp_v1 + 0xe96) = 1;
-            *(unsigned char *)(temp_v1 + 0xe95) = 0;
-            return 0;
-          }
-          if (temp_v2 == 0) break;
-          if (temp_v2 != 1) {
-            surfaceCopy(*(unsigned int *)(temp_v1 + 0xfe8),*(unsigned int *)(temp_v1 + 0xfe8));
-            *(int *)(*piVar5 + 0x14) = *(int *)(*piVar5 + 0x14) >> 1;
-            *(int *)(*piVar5 + 0x18) = *(int *)(*piVar5 + 0x18) >> 1;
-          }
-          else {
-            surfaceCopy(*(unsigned int *)(temp_v1 + 0xfe4),*(unsigned int *)(temp_v1 + 0xfe8));
-            *(int *)(*piVar5 + 0x14) = *(int *)(*piVar6 + 0x14) >> 1;
-            *(int *)(*piVar5 + 0x18) = *(int *)(*piVar6 + 0x18) >> 1;
-          }
+    FUN_002c39a4(g_titleScene);
+    work->base->width = 0x200;
+    work->base->height = 0x200;
+    work->result = FUN_002bfadc(0, work->base);
+    s32 skipped = FUN_002bff10(0);
+    s32 levels = work->levels;
+    if (skipped == 0 && levels > 1) {
+        levels--;
+        if (levels < 1) {
+            levels = 1;
         }
-      } while( 1 );
     }
-  }
-  else {
-    temp_v2 = 0;
-    if (temp_v2 < temp_v3) {
-      do {
-        surfaceCopy(*(unsigned int *)(temp_v1 + 0xfdc),*(unsigned int *)(temp_v1 + 0xfdc));
-        temp_v2 = temp_v2 + 1;
-        *(int *)(*piVar7 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
-        *(int *)(*piVar7 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
-      } while (temp_v2 < temp_v3);
+    if (work->chained != 0) {
+        for (s32 i = 0; i < levels; i++) {
+            if (i == 0) {
+                surfaceCopy(work->base, work->second);
+                work->second->width = work->base->width >> 1;
+                work->second->height = work->base->height >> 1;
+            } else if (i == 1) {
+                surfaceCopy(work->second, work->third);
+                work->third->width = work->second->width >> 1;
+                work->third->height = work->second->height >> 1;
+            } else {
+                surfaceCopy(work->third, work->third);
+                work->third->width >>= 1;
+                work->third->height >>= 1;
+            }
+        }
+    } else {
+        for (s32 i = 0; i < levels; i++) {
+            surfaceCopy(work->base, work->base);
+            work->base->width >>= 1;
+            work->base->height >>= 1;
+        }
     }
-  }
-  *(unsigned char *)(temp_v1 + 0xe96) = 1;
-  *(unsigned char *)(temp_v1 + 0xe95) = 0;
-  return 0;
+    work->done = 1;
+    work->busy = 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,2 +1,17 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5c12f4; not written yet. */
 #include "common.h"
+
+struct Obj003ac494 {
+    u32 first;
+};
+
+extern "C" {
+int geometryDestroy(u32 value);
+int asdMemFree(void *block);
+
+/* Destroys the object's geometry and frees the object. */
+void FUN_003ac494(Obj003ac494 *obj)
+{
+    geometryDestroy(obj->first);
+    asdMemFree(obj);
+}
+}

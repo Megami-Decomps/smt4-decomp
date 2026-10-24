@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00298d64(...);
+int scrollOwnerSetValue(...);
 int FUN_00298d98(...);
 int flaggedEntrySetValueA(...);
 int FUN_0029eb5c(...);
@@ -26,7 +26,7 @@ typedef struct {
 extern int dataTable1bOr1cCompareRecordKeys(...); /* 0x1e16ec */
 extern int g_uiQuest; /* 0x43dd50 */
 
-/* Supplied declaration required: FUN_00298d64. */
+/* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: FUN_00298d98. */
 extern int FUN_00298dc8(unsigned short);
 extern int idIsAtLeast350(unsigned int);
@@ -222,7 +222,7 @@ LAB_00189f2c:
     *puVar8 = 0;
   }
   temp_v8 = FUN_00298d98(0);
-  FUN_00298d64(temp_v3,*(unsigned int *)(temp_v8 + 4));
+  scrollOwnerSetValue(temp_v3,*(unsigned int *)(temp_v8 + 4));
   puVar8 = (unsigned int *)FUN_00298d98(0);
   flaggedEntrySetValueA(temp_v3,*puVar8);
   temp_v8 = FUN_00298d98(1);
@@ -235,7 +235,7 @@ LAB_00189f2c:
     temp_v9 = FUN_0029ee54(temp_v2 + 0x660);
     if (temp_v3 + temp_v8 <= temp_v9) {
       temp_v8 = FUN_00298d98(1);
-      FUN_00298d64(temp_v2 + 0x660,*(unsigned int *)(temp_v8 + 4));
+      scrollOwnerSetValue(temp_v2 + 0x660,*(unsigned int *)(temp_v8 + 4));
       puVar8 = (unsigned int *)FUN_00298d98(1);
       flaggedEntrySetValueA(temp_v2 + 0x660,*puVar8);
       return;
@@ -246,7 +246,7 @@ LAB_00189f2c:
   puVar8 = (unsigned int *)FUN_00298d98(1);
   *puVar8 = 0;
   temp_v8 = FUN_00298d98(1);
-  FUN_00298d64(temp_v2 + 0x660,*(unsigned int *)(temp_v8 + 4));
+  scrollOwnerSetValue(temp_v2 + 0x660,*(unsigned int *)(temp_v8 + 4));
   puVar8 = (unsigned int *)FUN_00298d98(1);
   flaggedEntrySetValueA(temp_v2 + 0x660,*puVar8);
   return;

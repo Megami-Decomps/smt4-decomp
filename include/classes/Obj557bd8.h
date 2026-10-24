@@ -5,6 +5,7 @@
 #include <stddef.h>
 
 extern "C" void *asdOperatorNew(u32 bytes, void *owner);
+extern "C" int asdOperatorDelete(void *block);
 
 /* The battle target selection's information panel (vtable at 0x557bd8), 0xF4 bytes. */
 class Obj557bd8 {
@@ -13,6 +14,7 @@ public:
     virtual ~Obj557bd8();
 
     static void *operator new(u32 bytes, void *owner) throw() { return asdOperatorNew(bytes, owner); }
+    static void operator delete(void *block) { asdOperatorDelete(block); }
 
     /* 0x00: vtable pointer */
     /* 0x04 */ char labelText[0x20];

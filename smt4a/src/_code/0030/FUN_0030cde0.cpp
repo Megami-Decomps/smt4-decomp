@@ -1,24 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cde0` (_code @ 0x30cde0, 0x1a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one register choice: retail passes the payload address from r4 (the saved node), we use r1 */
+#include "common.h"
+
+struct ListNode {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ ListNode *next;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u8 payload[4];
+};
+
+struct NodeList {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ ListNode *head;
+};
 
 extern "C" {
 
-int FUN_00303350(int);
+void FUN_00303350(u8 *payload);
 
-/* Supplied declaration required: FUN_00303350. */
-
-
-void FUN_0030cde0(int param_1,int param_2,int param_3)
-
+/* Pushes a node on the front of the list, initialising its payload when requested. */
+void FUN_0030cde0(NodeList *list, ListNode *node, s32 initPayload)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_2 + 0xc) = *(unsigned int *)(param_1 + 4);
-  if (param_3 != 0) {
-    FUN_00303350(param_2 + 0x14);
-  }
-  *(int *)(param_1 + 4) = param_2;
-  return;
+    node->next = list->head;
+    if (initPayload != 0) {
+        FUN_00303350(node->payload);
+    }
+    list->head = node;
 }
 
 } /* extern "C" */
