@@ -8,3 +8,5 @@
 __pycache__/
 /build/
 /gen-*.log
+.romwright/*.sqlite-shm
+.romwright/*.sqlite-wal
