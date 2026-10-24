@@ -1186,14 +1186,14 @@
 002d1860 effPolyFlashDestroy
 00302744 effPolyFlashUpdateLate
 0030ef08 effPolyFlashGeomCreate0
-0031518c effPolyFlashGeomClone0
+00315188 effPolyFlashGeomClone0
 003153d8 effPolyFlashGeomCreate1
-0031a610 effPolyFlashGeomClone1
+0031a60c effPolyFlashGeomClone1
 0031d118 effPolyFlashGeomCreate2
 0031d1bc effPolyFlashGeomTexCreate0
 0031f854 effPolyFlashGeomCreate3
 003201ec effPolyFlashGeomClone2
-00321194 effPolyFlashGeomClone3
+00321190 effPolyFlashGeomClone3
 003213dc effPolyFlashGeomTexCreate1
 00324228 effPolyFlashGeomTexCreate2
 003243b0 effPolyFlashGeomTexCreate3
@@ -2210,7 +2210,7 @@
 002bcd44 resultReportIfFailed
 00360554 resultFatalIfFailed
 002472f0 textureSlotReplace
-002dbc48 scrCommBtlUnitHpPercentWithin
+002dbc44 scrCommBtlUnitHpPercentWithin
 0021f300 shopMainDrawDown
 001e39b4 lmapSceneCreateEffect
 00269c7c slotPlacementSetSlot
@@ -2227,7 +2227,7 @@
 0023a0b4 queryResultFailureOnly
 002232f8 scrCommButtonHelpPresetStep
 002f6044 scrCommSetResultFromClass
-002ff35c scrCommBtlUnitValueKindIs3
+002ff358 scrCommBtlUnitValueKindIs3
 002f25f0 btlTalkBustUpGetId
 0030034c scrCommBtlSetFlag16AfterEntryLookup
 002cdaa4 gameDataBlocksGetFlagBit2
@@ -2284,8 +2284,8 @@
 0028971c msgWindowReset
 0024acdc aocSystemGetTotalCount
 0027eb30 jobOwnerFreeSlotAndStop
-0031cb20 scrCommBtlScriptLockSet
-002ff3a8 scrCommBtlUnitSlotStateIs4
+0031cb1c scrCommBtlScriptLockSet
+002ff3a4 scrCommBtlUnitSlotStateIs4
 002c5728 gameDataFlagsClearAndRefresh
 00342134 bitTableSetFlag
 00310ac0 textureSlotsReleaseAll
@@ -2729,8 +2729,8 @@
 0028c814 textureCreateFromImage
 00287be4 mathPositionHeadingDegrees
 002a3504 mathMatrixTranslateLocal
-002f128c scrBattleSetFlag
-002f7928 scrBattleClearFlag
+002f1288 scrBattleSetFlag
+002f7924 scrBattleClearFlag
 002bf538 efctSetSpeed
 002bb150 threadSleepDuration
 003bc8d8 gameDataSetEntryEnabled
@@ -2972,7 +2972,7 @@
 0025a084 frameTexPollTransitionComplete
 002bc02c workCommandRefreshActiveSlots
 002dcaa8 dataTable06ComparePriority
-002fe9e8 scrCommSetMapScopedState
+002fe9e4 scrCommSetMapScopedState
 003290d8 effEditorUpdatePreservingState
 0039fbc8 devilDrawIconRelative
 00105e98 asdGxSetChannelFlags
@@ -3208,7 +3208,7 @@
 002cf58c statusDownSetSelectedEntryDescription
 002c8b80 lmapFindNearestMatchingTargetPoint
 0014f16c lzDecompressBytes
-00313590 effBlurFilterCreateRandomSamples
+00313588 effBlurFilterCreateRandomSamples
 00336368 btlAssignGroupedActionOrder
 0038959c aocFindTable03RecordByKey
 0030a530 eventEffectBlinkFadeInit

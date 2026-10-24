@@ -778,14 +778,14 @@
 00338748 effPolyFlashDestroy
 003905dc effPolyFlashUpdateLate
 003a1b7c effPolyFlashGeomCreate0
-003abfa0 effPolyFlashGeomClone0
+003abf9c effPolyFlashGeomClone0
 003ac1ec effPolyFlashGeomCreate1
-003b3eb0 effPolyFlashGeomClone1
+003b3eac effPolyFlashGeomClone1
 003b9194 effPolyFlashGeomCreate2
 003b9270 effPolyFlashGeomTexCreate0
 003bd2f8 effPolyFlashGeomCreate3
 003bdcec effPolyFlashGeomClone2
-003bec94 effPolyFlashGeomClone3
+003bec90 effPolyFlashGeomClone3
 003beedc effPolyFlashGeomTexCreate1
 003c49e8 effPolyFlashGeomTexCreate2
 003c4b70 effPolyFlashGeomTexCreate3
@@ -3232,7 +3232,7 @@
 004a8454 gaugePercent
 0019f1a4 gameFlagEntryGetBit
 002a3bd4 scrCommJobStartWithFloat
-0039d35c scrCommBattleGaugeAtLeast
+0039d358 scrCommBattleGaugeAtLeast
 003a7888 scrCommEnableKinds
 002f2910 ptrVectorFree
 00321298 workTablesClear
@@ -3666,10 +3666,10 @@
 003b071c statusDownIsStateEleven
 003c3048 mapEntryGetOrigin
 003f89c0 controllerResetInterpolation
-0039bc5c scrCommGetFlaggedStateValue
+0039bc58 scrCommGetFlaggedStateValue
 003b2178 uiMenuRequestStateNine
 003baa3c messageSetActiveMode
-003c68b8 scrCommSetBattleCameraEnabled
+003c68b4 scrCommSetBattleCameraEnabled
 003d21b0 mathInterpolateClamped
 003f9c0c controllerApplyAtUnitScale
 003f9c3c controllerRefreshAtUnitScale
@@ -3728,7 +3728,7 @@
 0037a6bc gameDataAddMoneySaturating
 0037d25c scrCommDispatchSignedValue
 0037f03c scrCommTestBattleMaskClear
-0037f788 scrCommTestUnitPackedValue
+0037f784 scrCommTestUnitPackedValue
 003805e8 scrCommForwardTriple
 0038d174 scrCommTestBattleMaskSet
 003a1b38 engineApplyGlobalParameters
@@ -3883,7 +3883,7 @@
 003fb994 btlEnemyDrawCalcVerticalOffset
 001bce30 asdFileEnqueueRead
 00341098 asdPrimCreateQuadSlot
-00372944 scrCommSetPendingUnitCommand
+00372940 scrCommSetPendingUnitCommand
 003cbb0c commonBgReleaseOwnedJob
 003f3654 btlGetDemonEvolutionStatus
 002320b0 gauntletAppCompareBySortKeys
@@ -3916,7 +3916,7 @@
 00221d14 renderCtxSetPackedColor
 002a3ea8 scrCommFadeMessageUnderlayOut
 0030c96e onlineJobFinishValueRequest
-0038df2c scrCommGrantRandomSkill
+0038df28 scrCommGrantRandomSkill
 003b8150 scrCommPartyRecordHasSkill
 0042125c animationVisualIsComplete
 00421fec asdGxEmitAlphaDepthWritePreset
@@ -3927,7 +3927,7 @@
 004da920 contentBuildWordList
 00131844 onlineU16TreeFind
 002e5414 scrCommCreateBattleTextureJob
-00330e50 scrCommCountFlagsExceptIndex
+00330e4c scrCommCountFlagsExceptIndex
 0038da14 scrCommGetBattleMemberParameter
 00401390 btlStageUpdateNodePositions
 0046e2d0 aocResetOperationState
@@ -3988,7 +3988,7 @@
 003eccd0 btlFindMarkedReserveRecord
 004f612c btlCameraFinishTransition
 00164288 workCommandRefreshActiveSlots
-0038af08 scrCommSetMapScopedState
+0038af04 scrCommSetMapScopedState
 003ce494 effEditorUpdatePreservingState
 004932ec devilDrawIconRelative
 0016547c taskRunInitializationState
@@ -4215,7 +4215,7 @@
 00150618 asdModelRenderLightPass
 00373208 scrAnyEligibleHpPercentThreshold
 004d130c btlDebugNormalizeMarkerFlags
-003aa3ac blurFilterAllocateScatterSamples
+003aa3a4 blurFilterAllocateScatterSamples
 002a6a84 textGetNameToken
 00424454 moviePumpCurrentStreamPackets
 003222fc gfxDrawOffsetTwoColorRect
