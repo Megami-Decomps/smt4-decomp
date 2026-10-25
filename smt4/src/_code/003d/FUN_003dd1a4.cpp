@@ -45,7 +45,7 @@ extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002a0428. */
-extern int FUN_002adee0(unsigned int);
+extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: memClear. */
@@ -121,7 +121,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
       do {
         temp_v3 = param_1 + temp_v2 * 0x28;
         if ((*(unsigned int *)(temp_v3 + 0x1b4) & 2) != 0) {
-          temp_v4 = FUN_002adee0(*(unsigned int *)(temp_v3 + 400));
+          temp_v4 = modelHasLoadedAttachment(*(unsigned int *)(temp_v3 + 400));
           if (temp_v4 == 0) goto LAB_003dd4ac;
           *(unsigned int *)(temp_v3 + 0x1b4) = *(unsigned int *)(temp_v3 + 0x1b4) | 4;
         }

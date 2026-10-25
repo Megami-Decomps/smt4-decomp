@@ -6,8 +6,6 @@
 extern "C" {
 extern const char DAT_00526044[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
-void *FUN_00178b04(u32 size, const char *file, u32 line);
-u32 FUN_00291038(u32 resource);
 
 // Build the model's private list of flagged effect entries, cloning their resource handles.
 void FUN_0041a270(ModelEffects *effects)
@@ -37,7 +35,7 @@ void FUN_0041a270(ModelEffects *effects)
                 entry->flags = 0;
                 entry->id = -1;
                 entry->unk08 = 0;
-                entry->unk0C = 0;
+                entry->unk0C = NULL;
             }
             entry->id = source->id;
             entry->flags = source->flags;

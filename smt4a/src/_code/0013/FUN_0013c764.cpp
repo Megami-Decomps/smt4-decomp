@@ -1,31 +1,46 @@
-/* NON_MATCHING: addressing only: retail forms a base at JobWork+0xF00 for the 0xFF5/0xFFD flags and folds the 0x148C flag as (work+0x1400)+0x8C; built uses flat offsets */
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
+struct JobDisplayFlags {
+    /* 0x00 */ u8 unk00[0xF4];
+    /* 0xF4 */ u8 enabled;
+    /* 0xF5 */ u8 ready;
+    /* 0xF6 */ u8 unkF6[7];
+    /* 0xFD */ u8 shown;
+};
+struct JobRequestState {
+    /* 0x00 */ u8 unk00[0x8C];
+    /* 0x8C */ u8 busy;
+    /* 0x8D */ u8 unk8D[3];
+    /* 0x90 */ s32 request;
+};
 typedef struct JobWork {
-    /* 0x000 */ u8 unk000[0xFF4];
-    /* 0xFF4 */ u8 enabled;
-    /* 0xFF5 */ u8 ready;
-    /* 0xFF6 */ u8 unkFF6[7];
-    /* 0xFFD */ u8 shown;
-    /* 0xFFE */ u8 unkFFE[0x48E];
-    /* 0x148C */ u8 busy;
-    /* 0x148D */ u8 unk148D[3];
-    /* 0x1490 */ s32 request;
+    /* 0x0000 */ u8 unk0000[0xF00];
+    /* 0x0F00 */ JobDisplayFlags display;
+    /* 0x0FFE */ u8 unk0FFE[0x402];
+    /* 0x1400 */ JobRequestState requestState;
 } JobWork;
-
+typedef char JobWorkLayoutCheck[offsetof(JobWork, display.enabled) == 0xFF4 &&
+    offsetof(JobWork, display.shown) == 0xFFD && offsetof(JobWork, requestState.busy) == 0x148C &&
+    offsetof(JobWork, requestState.request) == 0x1490 && sizeof(JobWork) == 0x1494 ? 1 : -1];
 extern u32 g_renderCtx;
 
-extern JobWork *jobGetWork(void);
+extern JobWork *jobGetWork(u32 job);
 extern void FUN_00157558(u32 ctx);
 extern void FUN_00150d38(s32 arg);
 
-s32 FUN_0013c764(void)
+s32 FUN_0013c764(u32 job)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
 
-    if (work->enabled != 0 && work->ready != 0 && work->shown != 0 && work->request != 0 && work->busy == 0) {
+    JobDisplayFlags *display = &work->display;
+    if (work->display.enabled != 0 && display->ready != 0 && display->shown != 0 &&
+        work->requestState.request != 0) {
+        JobRequestState *state = &work->requestState;
+        if (state->busy != 0)
+            return 0;
         FUN_00157558(g_renderCtx);
         FUN_00150d38(1);
         return 0;

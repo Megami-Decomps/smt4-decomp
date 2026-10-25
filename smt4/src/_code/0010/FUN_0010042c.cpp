@@ -18,7 +18,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: isAsciiDigit. */
-extern int FUN_0010123c(unsigned int *, unsigned int);
+extern int libc_printfFormatDispatch(unsigned int *, unsigned int);
 
 
 unsigned long long FUN_0010042c(unsigned int *param_1,unsigned int *param_2)
@@ -150,7 +150,7 @@ LAB_00100436:
         temp_v0 = temp_v0 + 0x20;
       }
       *param_1 = temp_v3;
-      temp_v4 = FUN_0010123c(param_1,temp_v0);
+      temp_v4 = libc_printfFormatDispatch(param_1,temp_v0);
       if (temp_v4 != 0) {
         if (temp_v4 != 1) {
           temp_v6 = (unsigned int *)((((int)temp_v6 + 7U) & 0xfffffff8) + 8);

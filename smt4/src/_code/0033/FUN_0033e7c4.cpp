@@ -1,5 +1,5 @@
 /* NON_MATCHING: register choice only: retail holds the "loaded" 1 in r2, this build in r1. */
-#include "common.h"
+#include "addon/aocMain.h"
 
 #define WORLD_DATA_MAGIC 0x57444b4e /* "NKDW" */
 
@@ -35,10 +35,10 @@ struct WorldData {
 
 extern "C" {
 extern const char DAT_003ff7e4[];
-extern void *g_aocSystem;
+extern AocSystem *g_aocSystem;
 s32 textFormatBuffer(char *output, const char *format, ...);
 s32 FUN_0023e3a4(void *aoc, s32 id, s32 kind);
-void *FUN_00389528(void *aoc, s32 id, const char *path);
+void *aocLoadWorldDataFile(AocSystem *aoc, s32 id, const char *path);
 void *asdLoadFileSyncDefault(const char *path);
 
 /* Loads world data file `id` (from downloadable content when it provides one) and locates its
@@ -51,7 +51,7 @@ void FUN_0033e7c4(WorldData *world, s32 id)
     world->index = id - 1;
     void *file;
     if (FUN_0023e3a4(g_aocSystem, id, 1) != 0) {
-        file = FUN_00389528(g_aocSystem, id, path);
+        file = aocLoadWorldDataFile(g_aocSystem, id, path);
     } else {
         file = asdLoadFileSyncDefault(path);
     }

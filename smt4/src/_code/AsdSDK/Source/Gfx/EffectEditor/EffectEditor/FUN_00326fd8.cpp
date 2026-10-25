@@ -26,7 +26,7 @@ struct EditorView {
 };
 
 extern "C" {
-extern EditorVector DAT_004d9270;
+extern EditorVector g_effectEditorVector;
 extern EditorMathWork DAT_004ea81c;
 extern EditorView DAT_0044fe80;
 extern f32 DAT_0044fea0[];
@@ -48,10 +48,10 @@ u32 FUN_00326fd8(void)
 
     f32 step = 10.0f;
     if (padIsButtonRepeat(5) || padIsButtonRepeat(padAlternateButtonIndex(5))) {
-        DAT_004d9270.y = DAT_004d9270.y - step;
+        g_effectEditorVector.y = g_effectEditorVector.y - step;
         changed = 3;
     } else if (padIsButtonRepeat(6) || padIsButtonRepeat(padAlternateButtonIndex(6))) {
-        DAT_004d9270.y = DAT_004d9270.y + step;
+        g_effectEditorVector.y = g_effectEditorVector.y + step;
         changed = 3;
     }
 
@@ -64,8 +64,8 @@ u32 FUN_00326fd8(void)
         step = 0.0f;
     }
 
-    f32 x = DAT_004d9270.x;
-    f32 z = DAT_004d9270.z;
+    f32 x = g_effectEditorVector.x;
+    f32 z = g_effectEditorVector.z;
     if (!(x == 0.0f && z == 0.0f)) {
         EditorMathWork *work = &DAT_004ea81c;
         work->axis.x = x;
@@ -117,8 +117,8 @@ u32 FUN_00326fd8(void)
         DAT_0044fe80.direction[2] = work->axis.z;
         DAT_0044fe80.direction[3] = work->axis.w;
     }
-    DAT_004d9270.x = x + DAT_0044fea0[0] * step;
-    DAT_004d9270.z = z + DAT_0044fea0[2] * step;
+    g_effectEditorVector.x = x + DAT_0044fea0[0] * step;
+    g_effectEditorVector.z = z + DAT_0044fea0[2] * step;
 
     if (padIsButtonPressed(1) || padIsButtonPressed(padAlternateButtonIndex(1))) {
         return changed & ~1u;

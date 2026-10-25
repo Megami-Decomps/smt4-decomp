@@ -14,8 +14,8 @@ int FUN_003604a0(int);
 int FUN_003604bc(void);
 int FUN_003604d8(int);
 int FUN_003604f4(void);
-int FUN_0036051c(void);
-int FUN_00360538(unsigned int);
+int serviceQuerySignedByteChecked(void);
+void FUN_00360538(unsigned char value);
 int resultFatalIfFailed(int);
 int FUN_003605b0(unsigned int);
 int FUN_003605cc(int);
@@ -42,7 +42,7 @@ extern int g_y2rTransferEvent; /* 0x44e9e8 */
 /* Supplied declaration required: FUN_003604bc. */
 /* Supplied declaration required: FUN_003604d8. */
 /* Supplied declaration required: FUN_003604f4. */
-/* Supplied declaration required: FUN_0036051c. */
+/* Supplied declaration required: serviceQuerySignedByteChecked. */
 /* Supplied declaration required: FUN_00360538. */
 /* Supplied declaration required: resultFatalIfFailed. */
 /* Supplied declaration required: FUN_003605b0. */
@@ -72,7 +72,7 @@ void movieY2rConfigureAndStart(int param_1,int param_2,int param_3,unsigned int 
   puVar7 = (unsigned int *)&param_9;
   FUN_003604bc();
   do {
-    FUN_0036051c();
+    serviceQuerySignedByteChecked();
   } while (puVar7 != (unsigned int *)0x0);
   software_interrupt(0x19);
   if (g_y2rTransferEvent < 0) {

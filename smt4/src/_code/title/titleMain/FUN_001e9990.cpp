@@ -10,7 +10,7 @@ int sndObjectForwardField8(...);
 
 int FUN_0019213c(void);
 int modelEvaluateFirstScalarChannel(...);
-int FUN_0026e324(...);
+int aocActivateFileGroupFlags(...);
 int FUN_0026f824(...);
 int FUN_0026fe0c(void);
 int FUN_0026ff54(void);
@@ -101,7 +101,7 @@ extern int effIsFinished(unsigned int);
 extern int frameTexPollTransitionComplete(void);
 /* Supplied declaration required: commonBgReset. */
 extern unsigned int FUN_00263c1c(unsigned char *);
-/* Supplied declaration required: FUN_0026e324. */
+/* Supplied declaration required: aocActivateFileGroupFlags. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_0026f824. */
 /* Supplied declaration required: FUN_0026faa4. */
@@ -133,7 +133,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_002a5eb4. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: FUN_002a8638. */
-extern int FUN_002adee0(unsigned int);
+extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: FUN_002b827c. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
@@ -160,7 +160,7 @@ extern int titleConfigIsClosed(void);
 /* Supplied declaration required: FUN_003bc9d0. */
 
 
-unsigned int FUN_001e9990(void)
+int FUN_001e9990(unsigned int handle)
 
 {
 /* irregular: 13 goto(s); irregular input(s): in_fpscr, in_s0; 48 native warning(s); review required */
@@ -277,9 +277,9 @@ unsigned int FUN_001e9990(void)
     temp_v4 = puVar13[0x27] + 1;
     break;
   case 3:
-    temp_v4 = FUN_002adee0(g_titleMain[0x23]);
+    temp_v4 = modelHasLoadedAttachment(g_titleMain[0x23]);
     if (temp_v4 == 0) {
-      temp_v4 = FUN_002adee0(puVar13[0x24]);
+      temp_v4 = modelHasLoadedAttachment(puVar13[0x24]);
       temp_v7 = temp_v4 == 0;
       if (temp_v7) {
         temp_v4 = puVar13[0x22];
@@ -593,7 +593,7 @@ LAB_001ea4cc:
         }
         else {
           FUN_0026f824(0);
-          FUN_0026e324(g_aocSystem);
+          aocActivateFileGroupFlags(g_aocSystem);
           FUN_00287c34(0);
           DAT_0049fc74 = 0;
           DAT_0049fc88 = 1;

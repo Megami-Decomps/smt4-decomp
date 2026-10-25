@@ -8,7 +8,7 @@ int FUN_00204ed0(...);
 int FUN_00288e68(...);
 int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int FUN_002b75ec(...);
 int devilGetRecord(void);
 int textFormatBuffer(...);
@@ -76,7 +76,7 @@ extern int FUN_0029e9cc(unsigned short);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bdf94. */
@@ -430,7 +430,7 @@ LAB_001ccb9c:
       temp_v12 = FUN_002bf4f8(0x1a,0x544);
       textFormatBuffer(&temp_v17,&LAB_001cd814);
       ppuVar8 = &temp_v17;
-      FUN_002b6dd8(ppuVar8,2);
+      fontMeasureLineAdvance(ppuVar8,2);
       VectorSignedToFloat(temp_v1 + (int)*(short *)(temp_v12 + 8) +
                                   ((int)**(short **)(temp_v12 + 0xc) - (int)ppuVar8) / 2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);

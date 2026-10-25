@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00126b48(...);
 int FUN_00126cd0(...);
-int FUN_0030dd02(...);
+int crc32Dispatch(...);
 
 typedef struct fn_001274fc_arg0 fn_001274fc_arg0;
 typedef struct fn_001274fc_arg0_p1c fn_001274fc_arg0_p1c;
@@ -42,7 +42,7 @@ struct fn_001274fc_arg0_p1c {
 /* Supplied declaration required: FUN_00126b48. */
 /* Supplied declaration required: FUN_00126cd0. */
 extern unsigned int FUN_0030db5c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0030dd02. */
+/* Supplied declaration required: crc32Dispatch. */
 
 
 unsigned int FUN_001274fc(fn_001274fc_arg0 *param_1)
@@ -79,7 +79,7 @@ unsigned int FUN_001274fc(fn_001274fc_arg0 *param_1)
     }
     else {
       temp_v1 = 0;
-      FUN_0030dd02(0,0);
+      crc32Dispatch(0,0);
     }
     *(unsigned int *)(param_1 + 1) = temp_v1;
     *(unsigned int *)&pfVar3[1].field_0xc = 0;

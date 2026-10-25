@@ -18,13 +18,13 @@ struct FrameCurve {
 };
 
 extern "C" {
-f32 hardfp_floorf(f32 value);
+f32 __hardfp_floorf(f32 value);
 
 /* Returns the last key of the curve at or before `time` (the first key before the start), starting
  * the search at an estimated key. */
 CurveKey *FUN_003f87cc(FrameCurve *curve, f32 time)
 {
-    u32 frame = (u32)hardfp_floorf(time / curve->frameLength + 0.5f);
+    u32 frame = (u32)__hardfp_floorf(time / curve->frameLength + 0.5f);
     CurveKey *key = &curve->keys[0];
 
     if (frame < key->frame) {

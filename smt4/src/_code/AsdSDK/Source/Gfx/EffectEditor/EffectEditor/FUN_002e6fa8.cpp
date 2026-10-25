@@ -4,7 +4,7 @@
 extern "C" {
 extern const u8 DAT_00400001;
 extern const u8 DAT_00400002;
-extern char DAT_004d8bd0[0x50];
+extern char g_effectEditorResourceName[0x50];
 void asdMemoryFreeLocked(void* memory);
 void FUN_002f2aa8(EffMenuNode* node);
 void namedObjectFormatFullName(EffMenuNode* node, char* dest);
@@ -51,7 +51,7 @@ u32 FUN_002e6fa8(void)
     if (input.state == 2) {
         result = 0x400000;
     } else if (input.state == 1 && g_effectEditor.selection.list != NULL) {
-        libc_strcpy(DAT_004d8bd0, input.name);
+        libc_strcpy(g_effectEditorResourceName, input.name);
         textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
         FUN_002e6fa8_hook(g_effectEditor.selection.list, path);
         result = (u32)&DAT_00400002;

@@ -4,7 +4,7 @@ extern "C" {
 
 extern Flags0C0C *gameFlagsGetBlock(void);
 
-void gameFlagsSet(s32 index, u8 value)
+void gameFlagsSet(s32 index, s32 value)
 {
     Flags0C0C *obj = gameFlagsGetBlock();
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains the filter's shared base through skill and affinity tests; one extra halfword-address calculation remains. */
+/* NON_MATCHING: signed byte flags now retain retail's shared base; a zero-return branch and an LSLS scratch register still differ. */
 #include "gamedata/FusionCandidateFilter.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/PackedSkillSlot.h"
@@ -6,15 +6,15 @@
 namespace {
 struct FusionSkillFilterView {
     u8 prefix[0x120];
-    u8 matchSkill;
+    s8 matchSkill;
     u8 padding121;
     u16 skill;
     u8 padding124[0xE];
-    u8 matchAffinity;
+    s8 matchAffinity;
     u8 padding133;
     PackedSkillSlot affinity;
     u8 padding136[0xD];
-    u8 matchCategory;
+    s8 matchCategory;
     u16 category;
     u16 skills[24];
     u8 padding176[2];

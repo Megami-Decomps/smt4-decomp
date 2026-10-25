@@ -1,29 +1,13 @@
-#include "common.h"
-
-class CallbackOwner;
-typedef void (CallbackOwner::*MemberCallback)();
-
-struct CallbackSource;
-struct CallbackSourceVtable {
-    u8 unk00[0x48];
-    s32 (*getKind)(CallbackSource* source); // 0x48
-};
-struct CallbackSource {
-    CallbackSourceVtable* vtable;
-};
-struct CallbackBinding {
-    u32 state; // 0x00
-    MemberCallback callback; // 0x04
-};
+#include "font/FontStringReader.h"
 
 extern "C" {
-extern MemberCallback DAT_004090e4[3];
+extern FontNextCharacter DAT_004090e4[3];
 
 // Initializes a member-callback binding from the source's virtual kind.
-void callbackBindingInitFromKind(CallbackBinding* binding, CallbackSource* source)
+void callbackBindingInitFromKind(FontStringReader* binding, FontEncodingSource* source, s32 format)
 {
-    MemberCallback callback = NULL;
-    switch (source->vtable->getKind(source)) {
+    FontNextCharacter callback = NULL;
+    switch (source->getKind()) {
     case 1:
         callback = DAT_004090e4[0];
         break;

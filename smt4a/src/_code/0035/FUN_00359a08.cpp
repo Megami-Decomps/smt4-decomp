@@ -1,13 +1,13 @@
-/* NON_MATCHING: register allocation only: retail keeps two separate zeros (r2 for the slot clear, r6 for the search starts), builds the candidate cursor pointer in r0 before uiSearchPrimary, so the closing tail call to FUN_00359b6c (the nop at +0x160) is not at the retail offset. */
+/* NON_MATCHING: zero-value lifetimes and candidate-cursor address scheduling differ; the search receives its cursor argument. */
 #include "skill/SkillSlotScreen.h"
 
 extern "C" {
 s32 scrollOwnerSetValue(void *cursor, s32 value);
 s32 FUN_002a4964(void *cursor, s32 value);
 s32 objectApplyIfUnblocked(void *cursor);
-s32 uiSearchPrimary(void);
+s32 uiSearchPrimary(const void *cursor);
 s32 flaggedEntrySetValueA(void *cursor, s32 value);
-void FUN_00359b6c(s32 id);
+void skillHelpUpdateAttributeAndTarget(s32 id);
 
 // Take the last freed slot back: clear it, park both cursors on the first empty slot and on the
 // skill's candidate entry (scrolled into view), then refresh the skill help for that skill.
@@ -41,7 +41,7 @@ void FUN_00359a08(SkillSlotScreen *screen)
         }
     }
     u8 *cursor = screen->candidateCursor;
-    s32 limit = uiSearchPrimary() - 2;
+    s32 limit = uiSearchPrimary(cursor) - 2;
     s32 last = objectApplyIfUnblocked(cursor) - 2;
     s32 scroll = 0;
     if (index > limit) {
@@ -54,7 +54,7 @@ void FUN_00359a08(SkillSlotScreen *screen)
     }
     scrollOwnerSetValue(cursor, scroll);
     flaggedEntrySetValueA(cursor, offset);
-    FUN_00359b6c(skill);
+    skillHelpUpdateAttributeAndTarget(skill);
 }
 
 } /* extern "C" */

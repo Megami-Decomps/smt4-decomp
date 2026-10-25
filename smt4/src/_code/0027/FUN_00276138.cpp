@@ -1,72 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276138` (_code @ 0x27613c, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains a second game-state base with add #0 after the global load; remaining body matches. */
+#include "map/mapDepart.h"
+#include "map/mapMain.h"
+#include "shard/SaveWork.h"
+
+// View of the saved map origin in SaveWork's opaque prefix.
+struct SavedMapOrigin {
+    u8 unk00[0x2e];
+    s16 mapId; // 0x2e
+    s16 areaId; // 0x30
+    s16 x, y, z; // 0x32
+    s16 heading; // 0x38
+};
+struct MapSnapshotSave : SaveWork {
+    u8 unkBDC[0x200];
+    u32 objectId; // 0xddc
+};
+typedef char MapSnapshotSaveOffsetCheck[offsetof(MapSnapshotSave, objectId) == 0xddc ? 1 : -1];
+
 
 extern "C" {
+extern MapMain *g_mapMain;
+extern GameState g_gameState;
+SaveWork *gameGetMapBlock();
+void FUN_00270f70(MapVector *position);
 
-int FUN_00270f70(unsigned int *);
-int VectorSignedToFloat(int, int);
-
-extern unsigned int DAT_0049f9ac; /* 0x49f9ac */
-extern unsigned int DAT_0049f9b0; /* 0x49f9b0 */
-extern unsigned int DAT_0049f9b4; /* 0x49f9b4 */
-extern unsigned int DAT_0049f9b8; /* 0x49f9b8 */
-extern signed char DAT_0049fba0; /* 0x49fba0 */
-extern unsigned char DAT_0049fc14; /* 0x49fc14 */
-extern int DAT_0049fc18; /* 0x49fc18 */
-extern int DAT_0049fc1c; /* 0x49fc1c */
-extern unsigned int DAT_0049fc20; /* 0x49fc20 */
-extern unsigned int DAT_0049fc24; /* 0x49fc24 */
-extern unsigned int DAT_0049fc28; /* 0x49fc28 */
-extern unsigned int DAT_0049fc2c; /* 0x49fc2c */
-extern unsigned int DAT_0049fc30; /* 0x49fc30 */
-extern unsigned int DAT_0049fc34; /* 0x49fc34 */
-extern unsigned int DAT_0049fc38; /* 0x49fc38 */
-extern unsigned int DAT_0049fc3c; /* 0x49fc3c */
-extern unsigned int DAT_0049fc40; /* 0x49fc40 */
-extern unsigned int DAT_0049fc44; /* 0x49fc44 */
-extern unsigned int DAT_0049fc48; /* 0x49fc48 */
-extern unsigned int DAT_0049fc4c; /* 0x49fc4c */
-extern unsigned int DAT_0049fc50; /* 0x49fc50 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00270f70. */
-extern int gameGetMapBlock(void);
-
-
-void FUN_00276138(int *param_1)
-
+// Save the return map and pose, unless a one-shot suppression flag was set.
+void FUN_00276138()
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int in_fpscr;
-  
-  temp_v1 = *param_1;
-  temp_v0 = gameGetMapBlock();
-  if (DAT_0049fba0 != '\0') {
-    DAT_0049fba0 = '\0';
-  }
-  else {
-    FUN_00270f70(&DAT_0049f9b0);
-    DAT_0049fc14 = 1;
-    DAT_0049fc18 = (int)*(short *)(temp_v0 + 0x2e);
-    DAT_0049fc1c = (int)*(short *)(temp_v0 + 0x30);
-    DAT_0049fc20 = *(unsigned int *)(temp_v0 + 0xddc);
-    DAT_0049fc24 = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x32),(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_0049fc28 = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_0049fc2c = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x36),(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_0049fc30 = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x38),(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_0049fc34 = VectorSignedToFloat((int)*(short *)(temp_v0 + 0x38),(unsigned char)(in_fpscr >> 0x16) & 3);
-    DAT_0049fc38 = *(unsigned int *)(temp_v1 + 0x2c);
-    DAT_0049fc3c = *(unsigned int *)(temp_v1 + 0x30);
-    DAT_0049fc40 = DAT_0049f9b0;
-    DAT_0049fc44 = DAT_0049f9b4;
-    DAT_0049fc48 = DAT_0049f9b8;
-    DAT_0049fc4c = DAT_0049f9ac;
-    DAT_0049fc50 = DAT_0049f9ac;
-  }
-  return;
+    MapMain *map = g_mapMain;
+    MapSnapshotSave *save = static_cast<MapSnapshotSave *>(gameGetMapBlock());
+    GameState *state = &g_gameState;
+    if (g_gameState.unk284 != 0) {
+        state->unk284 = 0;
+    } else {
+        const SavedMapOrigin *origin = reinterpret_cast<const SavedMapOrigin *>(save);
+        FUN_00270f70(&state->position);
+        state->unk2F8 = 1;
+        state->savedMapId = origin->mapId;
+        state->savedAreaId = origin->areaId;
+        state->savedObjectId = save->objectId;
+        state->savedPosition.x = origin->x;
+        state->savedPosition.y = origin->y;
+        state->savedPosition.z = origin->z;
+        state->unk314 = origin->heading;
+        state->unk318 = origin->heading;
+        state->targetMapId = map->mapId;
+        state->targetAreaId = map->areaId;
+        state->targetPosition = state->position;
+        state->unk330 = state->unk90;
+        state->unk334 = state->unk90;
+    }
 }
-
-} /* extern "C" */
+}

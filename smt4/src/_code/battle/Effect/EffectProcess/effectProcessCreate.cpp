@@ -1,6 +1,7 @@
 /* NON_MATCHING: preserved registers, keepScene address reuse and camera scheduling differ; -O2 candidate. */
 #include "battle/Effect/EffectProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern EffectProcess *g_effectProcessActive;
@@ -14,13 +15,13 @@ void FUN_002c2044(EffectProcess *, u32);
 void FUN_002c159c(EffectProcess *, f32, f32);
 void FUN_002c1edc(EffectProcess *, const f32 *, const f32 *, const f32 *);
 void FUN_002c1e30(EffectProcess *, u32, f32, f32, f32, f32);
-void FUN_0017fbe4();
-void effectProcessDestroy();
-void renderScopedTaskPhaseOne();
-void FUN_001aa4a8();
-void effectProcessDrawPhase3();
-u32 asdProcessCreateSimple(const char *, u32, u32, u32, void (*)(), void (*)(), EffectProcess *);
-u32 taskCreateDraw(const char *, u32, u32, u32, void (*)(), void (*)(), EffectProcess *, u32);
+s32 FUN_0017fbe4(u32 job);
+void effectProcessDestroy(u32 job);
+s32 renderScopedTaskPhaseOne(u32 job);
+s32 FUN_001aa4a8(u32 job);
+s32 effectProcessDrawPhase3(u32 job);
+u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, EffectProcess *);
+u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, EffectProcess *, u32);
 
 // Create the battle effect scene, its camera and the appropriate 2D/3D drawing tasks.
 u32 effectProcessCreate(u8 keepScene)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push uses ip instead of r3; color argument moves and literal-pool order differ. */
+/* NON_MATCHING: color argument copies use equivalent registers, and the two global literal-pool words are reversed. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include <stddef.h>
@@ -21,12 +21,10 @@ void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 enabled);
 
 // Draw the battle's full-screen color overlay, preserving the current render state.
-u32 FUN_001e4ac0(void)
+s32 FUN_001e4ac0(u32 job)
 {
-    RenderCtx *context = g_titleScene;
     u32 color = g_btlMainState->color;
-    s32 state = FUN_002c5d80(5, 1);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(g_titleScene, FUN_002c5d80(5, 1));
     FUN_002c39a4(g_titleScene);
     FUN_002c1b64(g_titleScene, 0);
     FUN_002c0944(0.0f, 0.0f, 400.0f, 240.0f, 0.0f, color, color, color, color);

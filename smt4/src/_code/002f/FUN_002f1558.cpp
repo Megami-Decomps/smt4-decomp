@@ -8,7 +8,7 @@ int devilGetCategoryTableId(...);
 int mapGetSelectedRecordCategoryTable(void);
 int playerGetMappedCategory(void);
 int FUN_002b6db0(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int devilGetRecord(void);
 
 int btlGetMainState(void);
@@ -70,7 +70,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6940. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -344,7 +344,7 @@ void FUN_002f1558(int param_1)
         textFormatBuffer(temp_v18,&LAB_002f1fe8);
         temp_v3 = FUN_002bf4f8(0x15,0x11c);
         puVar11 = temp_v18;
-        FUN_002b6dd8(puVar11,3);
+        fontMeasureLineAdvance(puVar11,3);
         temp_v1 = *(short *)(temp_v3 + 8);
         temp_v0 = **(short **)(temp_v3 + 0xc);
         temp_v3 = FUN_002bf4f8(0x15,0x12e,(int)temp_v0);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002f71b0(void);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
-int FUN_0031126c(int, int, unsigned int);
+int onlineJobDispatchInstanceResult(int, int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned ch
 /* Supplied declaration required: FUN_002f71b0. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-/* Supplied declaration required: FUN_0031126c. */
+/* Supplied declaration required: onlineJobDispatchInstanceResult. */
 
 
 unsigned long long FUN_0011c6ec(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -58,7 +58,7 @@ unsigned long long FUN_0011c6ec(int param_1,unsigned int param_2,unsigned int pa
   }
   temp_v2 = 0x10001;
   temp_v1 = _ZN12OnlineResultC1ERKj(&iStack_20,(unsigned int *)&temp_v2);
-  FUN_0031126c(param_1,2,temp_v1);
+  onlineJobDispatchInstanceResult(param_1,2,temp_v1);
   return romwright_piece_4_4(uStack_1c,iStack_20);
 }
 

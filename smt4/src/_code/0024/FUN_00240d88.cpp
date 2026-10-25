@@ -6,7 +6,7 @@ extern "C" {
 
 void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int FUN_0029a17c(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int devilGetRecord(void);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
@@ -37,7 +37,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int demonGetRaceLabel(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
@@ -163,7 +163,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     temp_v6 = FUN_002bd068(*psVar7);
     textFormatBuffer(temp_v12,&LAB_00241174,temp_v6);
     puVar9 = temp_v12;
-    FUN_002b6dd8(puVar9,1);
+    fontMeasureLineAdvance(puVar9,1);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v3 + 8) +
@@ -174,7 +174,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     temp_v11 = demonGetRaceLabel(*psVar7,0);
     textFormatBuffer(temp_v12,&LAB_00241174,temp_v11);
     puVar9 = temp_v12;
-    FUN_002b6dd8(puVar9,2);
+    fontMeasureLineAdvance(puVar9,2);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(((int)**(short **)(temp_v5 + 0xc) - (int)puVar9) + temp_v1 +

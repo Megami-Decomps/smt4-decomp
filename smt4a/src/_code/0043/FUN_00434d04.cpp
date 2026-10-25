@@ -1,34 +1,22 @@
 /* NON_MATCHING: storage argument and byte-clear loop registers differ from retail. */
-#include "common.h"
-
-// Local view of the allocator's buffer bookkeeping.
-struct AllocatorBufferView {
-    u8 unk00[8];
-    u8 *readPosition; // 0x08
-    u8 unk0c[8];
-    u8 *writePosition; // 0x14
-    u8 *storage; // 0x18
-    u8 *mappedStorage; // 0x1c
-    u32 size; // 0x20
-};
-
+#include "gfx/MaskWork.h"
 extern "C" {
-u8 *FUN_004387f0(u8 *, u32);
+void *FUN_004387f0(void *allocator, u32 units);
 
-// Map a backing buffer and optionally clear its bytes before resetting cursors.
-s32 FUN_00434d04(AllocatorBufferView *buffer, u8 *storage, u32 size, s32 clear)
+// Allocate the mask's baseline buffer, optionally clear it, and bind both list allocators.
+s32 FUN_00434d04(MaskWorkBody *body, void *storage, u32 bytes, s32 clear)
 {
-    buffer->storage = storage;
-    buffer->size = size;
-    buffer->mappedStorage = FUN_004387f0(storage, (size + 15) >> 4);
-    if (buffer->mappedStorage == NULL)
+    body->storage = storage;
+    body->byteCount = bytes;
+    body->baseline = static_cast<u8 *>(FUN_004387f0(storage, (bytes + 15) >> 4));
+    if (body->baseline == NULL)
         return 0;
     if (clear != 0) {
-        for (u32 index = 0; index < size; ++index)
-            buffer->mappedStorage[index] = 0;
+        for (u32 index = 0; index < bytes; ++index)
+            body->baseline[index] = 0;
     }
-    buffer->readPosition = buffer->storage;
-    buffer->writePosition = buffer->storage;
+    body->output.allocator = body->storage;
+    body->pending.allocator = body->storage;
     return 1;
 }
 }

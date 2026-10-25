@@ -117,7 +117,7 @@ u32 FUN_001c0404(LoadTask **task)
         work->state = 100;
         break;
     case 100:
-        work->state = 0x65;
+        ++work->state;
         break;
     case 0x65:
         DAT_00446db4 = 1;

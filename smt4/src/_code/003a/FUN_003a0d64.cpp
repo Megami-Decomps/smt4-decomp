@@ -1,5 +1,10 @@
 /* NON_MATCHING: readable rebuild of the place window start-up; retail keeps the constant 2 in r1 for the two window stores, scales the record index with a shifted add chain and shares the exit, which armcc here allocates differently. */
 #include "common.h"
+#include "script/scrScriptProcess.h"
+#include "font/PlaceWin.h"
+
+struct ScriptFile;
+struct ScriptProcessWork;
 
 /* A place-window scene (only the fields the start-up touches). */
 struct PlaceScene {
@@ -11,10 +16,10 @@ struct PlaceScene {
     /* 0x00015 */ u8 unk00015[3];
     /* 0x00018 */ s32 placeKey;
     /* 0x0001C */ u8 unk0001C[0x144];
-    /* 0x00160 */ void *windowPool;
-    /* 0x00164 */ s32 windowSize;
-    /* 0x00168 */ u8 *windowA;
-    /* 0x0016C */ u8 *windowB;
+    /* 0x00160 */ ScriptFile *scriptFile;
+    /* 0x00164 */ u32 scriptOwner;
+    /* 0x00168 */ ScriptRunState *scriptA;
+    /* 0x0016C */ ScriptRunState *scriptB;
     /* 0x00170 */ u8 unk00170[0x15BD0];
     /* 0x15D40 */ u32 jobA;
     /* 0x15D44 */ u32 jobB;
@@ -22,7 +27,7 @@ struct PlaceScene {
 
 /* A record of data table 0x17/1 (0x68 bytes). */
 struct PlaceRecord {
-    /* 0x00 */ u8 unk00[0x20];
+    /* 0x00 */ u8 text[0x20];
     /* 0x20 */ s32 key;
     /* 0x24 */ u16 kind;
     /* 0x26 */ u8 unk26[0x42];
@@ -32,13 +37,12 @@ extern "C" {
 s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
-u8 *FUN_00297060(void *pool, s32 size);
+ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
 void FUN_002a03d8(s32 a, s32 b);
 void FUN_0029e648(s32 a, s32 b);
 void messageTargetSetValue(s32 value, s32 arg);
 PlaceRecord *dataTable17Sub1GetRecord(u32 *ignored, u32 index);
 s32 dataTable17Sub1GetCount(u32 *ignored);
-void placeWinStartText(void);
 s32 FUN_0028e9d0(u32 flag);
 void FUN_003a4210(PlaceScene *scene);
 void buttonHelpSetPreset(s32 preset);
@@ -62,7 +66,7 @@ static bool placeFlagsAnySet()
  * text and switches to state 1 when any of the place flags is set (state 3 when none is). */
 void FUN_003a0d64(PlaceScene *scene)
 {
-    if (scene->windowPool == NULL || scene->windowSize == 0)
+    if (scene->scriptFile == NULL || scene->scriptOwner == 0)
         return;
     if (!asdTMTexTableNodeIsLoaded(0x2B, 0))
         return;
@@ -71,10 +75,10 @@ void FUN_003a0d64(PlaceScene *scene)
     if (jobIsValid(scene->jobB) && !eventTexJobSlotsDone(scene->jobB))
         return;
 
-    scene->windowA = FUN_00297060(scene->windowPool, scene->windowSize);
-    *(u32 *)(scene->windowA + 0x108) = 2;
-    scene->windowB = FUN_00297060(scene->windowPool, scene->windowSize);
-    *(u32 *)(scene->windowB + 0x108) = 2;
+    scene->scriptA = reinterpret_cast<ScriptRunState *>(FUN_00297060(scene->scriptFile, scene->scriptOwner));
+    scene->scriptA->mode = 2;
+    scene->scriptB = reinterpret_cast<ScriptRunState *>(FUN_00297060(scene->scriptFile, scene->scriptOwner));
+    scene->scriptB->mode = 2;
     FUN_002a03d8(0, 10);
     FUN_002a03d8(1, 10);
     FUN_0029e648(1, 0);
@@ -92,8 +96,8 @@ void FUN_003a0d64(PlaceScene *scene)
         }
     }
     u32 ignoredSecond;
-    dataTable17Sub1GetRecord(&ignoredSecond, found);
-    placeWinStartText();
+    PlaceRecord *record = dataTable17Sub1GetRecord(&ignoredSecond, found);
+    placeWinStartText(record->text);
 
     if (placeFlagsAnySet()) {
         scene->state = 1;

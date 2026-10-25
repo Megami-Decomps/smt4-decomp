@@ -1,9 +1,9 @@
 /* NON_MATCHING: Placement member construction adds null checks and retains the root instead of chaining constructor returns. */
+#include "classes/AocMenu.h"
 #include "ui/SceneWindowWork.h"
 #include <new>
 extern "C" {
 TimedState* timeInitializeActiveState(TimedState*);
-void FUN_003930e4(SceneWindowWork*);
 extern const u8 DAT_0042219c[];
 
 SceneWindowWork* FUN_00393340(SceneWindowWork* work)
@@ -24,7 +24,7 @@ SceneWindowWork* FUN_00393340(SceneWindowWork* work)
     work->unk1798 = 0;
     work->unk17A0 = 0;
     work->unk1C30 = 0;
-    FUN_003930e4(work);
+    reinterpret_cast<AocMenu *>(work)->initializeStepCallbacks();
     return work;
 }
 }

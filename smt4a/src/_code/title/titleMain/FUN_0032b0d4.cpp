@@ -9,7 +9,7 @@ int FUN_0014e314(...);
 int FUN_00157558(int);
 int FUN_00162790(...);
 int efctSetSpeed(...);
-int FUN_00168594(int, int);
+float FUN_00168594(const char *, unsigned int, float);
 int FUN_0016c4b8(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
@@ -140,7 +140,7 @@ unsigned int FUN_0032b0d4(void)
         temp_v5 = dataTableGetEntries();
         temp_v5 = temp_v5 + temp_v3 * 100;
         temp_v10 = temp_v9;
-        FUN_00168594(temp_v5,4);
+        temp_v9 = FUN_00168594(reinterpret_cast<const char *>(temp_v5), 4, 0.0f);
         temp_v6 = (int)temp_v0 - (int)temp_v9;
         temp_v9 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v9 = temp_v9 * (float)temp_v12;

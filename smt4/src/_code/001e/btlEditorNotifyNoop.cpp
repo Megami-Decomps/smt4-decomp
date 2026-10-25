@@ -3,7 +3,7 @@
 extern "C" {
 
 /* This callback intentionally performs no work. */
-void btlEditorNotifyNoop(void)
+void btlEditorNotifyNoop(u32 job)
 {
 }
 

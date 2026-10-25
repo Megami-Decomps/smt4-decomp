@@ -26,7 +26,7 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00162790(u32 layer, u32 flags, const char *text, f32 x, f32 y);
 void efctSetSpeed(f32 speed);
 DetailSpriteFrame *FUN_001834a4(u32 bank, u32 sprite);
-s32 FUN_0018408c(const char *text, s32 mode);
+s32 fontMeasureLineAdvance(const char *text, s32 mode);
 f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
 void FUN_0019e52c(u32 soundId);
 void FUN_003f533c(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 value, u32 a, u32 b, u32 c, u32 color, u32 flags);
@@ -67,7 +67,7 @@ void FUN_003f7674(DetailPanel *panel, s32 x, s32 y)
     s32 stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, DETAIL_STEREO_SCALE);
     efctSetSpeed(0.15625f);
     DetailSpriteFrame *frame = FUN_001834a4(0x31, 0x46);
-    FUN_0018408c(name, 3);
+    fontMeasureLineAdvance(name, 3);
     s32 nameX = frame->x + x + stereo;
     FUN_00162790(3, 0xFF, name, (f32)nameX, (f32)(frame->y + y));
 

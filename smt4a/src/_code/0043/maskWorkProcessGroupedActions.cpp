@@ -1,31 +1,9 @@
 /* NON_MATCHING: list cursor allocation differs and retail placement construction has a null-address guard. */
-#include "shard/Shard0051.h"
+#include "gfx/MaskWork.h"
 
 struct MaskAction {
     u8 unk00[0x14];
     u32 byteIndex;
-};
-struct MaskWorkNode {
-    MaskWorkNode *previous;
-    MaskWorkNode *next;
-    Variant payload;
-};
-struct MaskWorkList {
-    MaskWorkNode *previous;
-    MaskWorkNode *next;
-    void *allocator;
-};
-struct MaskWorkState {
-    u8 unk00[8];
-    MaskWorkList output; // 0x08
-    MaskWorkList pending; // 0x14
-    u8 unk20[4];
-    const u8 *baseline; // 0x24
-};
-struct MaskProcessor {
-    void *allocator;
-    u8 unk04[0xc];
-    u32 byteCount; // 0x10
 };
 extern "C" {
 void *FUN_004387f0(void *, u32);

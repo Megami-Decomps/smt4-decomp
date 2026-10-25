@@ -1,60 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bad74` (_code @ 0x2bad74, 0xbc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler places the empty-batch allocation before the common publish block; retail puts it on an out-of-line branch. */
+#include "classes/Obj421aa4.h"
+#include "nn/svc.h"
 
 extern "C" {
+Obj421aa4Node *FUN_002b4f64(Obj421aa4Manager *manager, u32 kind);
+void nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue(Obj421aa4Manager *queue, Obj421aa4Node *head);
+u32 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(Obj421aa4Manager *queue, Obj421aa4Node *head);
 
-int FUN_002b4f64(unsigned int *, int);
-int coproc_moveto_Data_Memory_Barrier(int);
-int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue(void);
-
-/* Unsupported intrinsic, declaration required: coproc_moveto_Data_Memory_Barrier (CALLOTHER). */
-/* Supplied declaration required: FUN_002b4f64. */
-/* Supplied declaration required: nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue. */
-extern int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(unsigned int *, unsigned int);
-
-
-unsigned int FUN_002bad74(unsigned int *param_1,int param_2)
-
+// Publish a batch of sound commands; a blocking flush also publishes an empty batch.
+u32 FUN_002bad74(Obj421aa4Manager *manager, s32 blocking)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_1[0x5b] == 0) {
-    if (param_2 == 0) {
-      return 0;
+    if (manager->pending.head == NULL) {
+        if (blocking == 0)
+            return 0;
+        Obj421aa4Node *node = FUN_002b4f64(manager, 4);
+        node->stamp = manager->unk184;
+        node->type = 0;
+        if (manager->pending.tail == NULL)
+            manager->pending.head = node;
+        else
+            manager->pending.tail->next = node;
+        manager->pending.tail = node;
+        node->next = NULL;
     }
-    puVar1 = param_1;
-    FUN_002b4f64(param_1,4);
-    puVar1[3] = param_1[0x61];
-    *(unsigned char *)(puVar1 + 1) = 0;
-    if ((unsigned int *)param_1[0x5c] == (unsigned int *)0x0) {
-      param_1[0x5b] = (unsigned int)puVar1;
+    Obj421aa4Node *head = manager->pending.head;
+    u32 sequence = manager->pending.nextSequence;
+    nn::os::DataMemoryBarrier();
+    if (blocking != 0) {
+        nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue(manager, head);
+    } else {
+        if (nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(manager, head) == 0)
+            return 0;
     }
-    else {
-      *(unsigned int **)param_1[0x5c] = puVar1;
-    }
-    param_1[0x5c] = (unsigned int)puVar1;
-    *puVar1 = 0;
-  }
-  temp_v1 = param_1[0x5d];
-  coproc_moveto_Data_Memory_Barrier(0);
-  if (param_2 != 0) {
-    nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue();
-  }
-  else {
-    temp_v0 = nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(param_1,param_1[0x5b]);
-    if (temp_v0 == 0) {
-      return 0;
-    }
-  }
-  *(unsigned int *)(param_1[0x5b] + 8) = temp_v1;
-  param_1[0x5d] = param_1[0x5d] + 1;
-  param_1[0x5b] = 0;
-  param_1[0x5c] = 0;
-  return temp_v1;
+    manager->pending.head->completion.sequence = sequence;
+    manager->pending.nextSequence++;
+    manager->pending.head = NULL;
+    manager->pending.tail = NULL;
+    return sequence;
 }
-
 } /* extern "C" */

@@ -1,23 +1,23 @@
-/* NON_MATCHING: instruction selection/order differs: retail beq 3c; compiler beq 38. */
 #include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
 extern u8 DAT_005b40c8;
-extern void globalBlockGetFirst(void);
-extern s32 FUN_001a0380(void);
+extern u32 globalBlockGetFirst(void);
+extern u32 FUN_001a0380(const char *path);
 extern void FUN_0013ebd8(void);
 
-/* Completes pending initialization and clears its flag on success. */
+/* Unmounts the current registration and clears its mounted flag on success. */
 bool FUN_001387c0(void)
 {
     if (DAT_005b40c8 == 0) {
         return true;
     }
-    globalBlockGetFirst();
-    s32 status = FUN_001a0380();
+    const char *path = reinterpret_cast<const char *>(globalBlockGetFirst());
+    u32 status = FUN_001a0380(path);
     FUN_0013ebd8();
-    if (status >= 0) {
+    if (nnResultIsSuccess(status)) {
         DAT_005b40c8 = 0;
         return true;
     }

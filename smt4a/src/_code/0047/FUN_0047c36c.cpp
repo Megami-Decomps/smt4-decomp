@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite of the quest scene update; constructor/strd result copy now match retail, but the build hoists the jobStop mode argument and the zero move ahead of the flag clear, allocates the tick counters in r0/r1 the other way round and loads the step PTMF adjustment before the pointer test. */
 #include "addon/aocMain.h"
-#include "classes/Obj526238.h"
+#include "classes/AocMenu.h"
 #include "classes/WindowOperation.h"
 
 struct JobOwner;
@@ -23,7 +23,7 @@ struct QuestScene {
     /* 0x0008 */ s32 substate;
     /* 0x000C */ u8 unk000c[4];
     /* 0x0010 */ QuestSceneStep steps[63];
-    /* 0x0208 */ Obj526238Child *child;
+    /* 0x0208 */ AocMenuWindow *child;
     /* 0x020C */ u8 unk020c[4];
     /* 0x0210 */ WindowOperationResult operation;
     /* 0x0220 */ u8 unk0224[0x158];

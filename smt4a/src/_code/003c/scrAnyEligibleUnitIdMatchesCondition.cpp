@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the required-mask u64 as two ldr (ip, r3) where armcc emits ldm, orders the last AND operands differently and pools the literals in another order; the active-entry byte now folds (s8 flag). */
+/* NON_MATCHING: direct flag reads reproduce retail's separate required-mask loads and pool; entry-address and final-AND scratch registers still differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -21,9 +21,8 @@ u32 scrAnyEligibleUnitIdMatchesCondition()
     FUN_00301a08(kind, reinterpret_cast<u32*>(&first), reinterpret_cast<u32*>(&count));
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
-        const u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable)
-            && (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded)
+        if (!(entry->flags & g_btlCandidateMasks.unavailable)
+            && (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded)
             && entry->id == id && FUN_003020fc(entry, condition)) {
             scrSetResult(1);
             return 1;

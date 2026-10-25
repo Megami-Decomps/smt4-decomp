@@ -13,6 +13,11 @@ public:
     virtual void vfunc14();
     virtual void vfunc18();
     virtual void vfunc1c();
+
+    /* 0x64 */ void *rectangle;
 };
+
+typedef char Obj42242cLayoutCheck[
+    sizeof(Obj42242c) == 0x68 && offsetof(Obj42242c, rectangle) == 0x64 ? 1 : -1];
 
 #endif

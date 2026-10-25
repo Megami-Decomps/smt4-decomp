@@ -7,7 +7,7 @@ void eventDispatch(u32 event);
 // Updates the effect editor event state and dispatches when the selected mode permits it.
 void effectEditorProcessEvent(u32 event)
 {
-    if (g_effectEditor.dispatch.blocked == 0) {
+    if (g_effectEditor.dispatch.node == NULL) {
         effectEditorApplyHandlerState(event);
         switch (g_effectEditor.dispatch.mode) {
         case 0:

@@ -20,7 +20,7 @@ extern int *DAT_00581270; /* 0x581270 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: wordPairCopy. */
-extern int FUN_001ab8c0(int);
+extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: FUN_001ac2d4. */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
@@ -58,7 +58,7 @@ unsigned int FUN_00378a90(void)
         if (temp_v1 == 0xb) {
           temp_v2 = DAT_00581270[1];
           piVar7 = DAT_00581270 + temp_v2 * 0xb + 0x445;
-          temp_v1 = FUN_001ab8c0(DAT_00581270[temp_v2 * 0xb + 0x44d]);
+          temp_v1 = modelHasLoadedAttachment(DAT_00581270[temp_v2 * 0xb + 0x44d]);
           if (temp_v1 == 0) {
             return 0;
           }
@@ -243,7 +243,7 @@ LAB_00379048:
   else {
     temp_v2 = DAT_00581270[1];
     piVar7 = DAT_00581270 + temp_v2 * 0xb + 0x4a8;
-    temp_v1 = FUN_001ab8c0(DAT_00581270[temp_v2 * 0xb + 0x4b0]);
+    temp_v1 = modelHasLoadedAttachment(DAT_00581270[temp_v2 * 0xb + 0x4b0]);
     if (temp_v1 != 0) {
       *(unsigned char *)piVar7 = 1;
       *(unsigned char *)((int)piVar3 + temp_v2 * 0x2c + 0x12a1) = 1;

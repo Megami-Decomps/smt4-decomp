@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001286a0(int *, unsigned char *);
 int FUN_0030d824(...);
 int FUN_0030db5c(...);
-int FUN_0030dd02(...);
+int crc32Dispatch(...);
 int __aeabi_uidivmod(unsigned int, int);
 int rt_memcpy(...);
 
@@ -42,7 +42,7 @@ extern unsigned char DAT_00544830; /* 0x544830 */
 extern int FUN_00128bdc(int *, unsigned char *);
 /* Supplied declaration required: FUN_0030d824. */
 /* Supplied declaration required: FUN_0030db5c. */
-/* Supplied declaration required: FUN_0030dd02. */
+/* Supplied declaration required: crc32Dispatch. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -180,13 +180,13 @@ LAB_0012761c:
         goto LAB_001279cc;
       }
       temp_v0 = 0;
-      FUN_0030dd02(0,0);
+      crc32Dispatch(0,0);
       *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
       temp_v19 = 0x1f;
       temp_v20 = 0x8b;
       temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
       param_3 = (unsigned char *)0x2;
-      FUN_0030dd02(temp_v0,&temp_v19);
+      crc32Dispatch(temp_v0,&temp_v19);
       temp_v14 = 0;
       temp_v6 = 1;
       temp_v12 = 0;
@@ -219,7 +219,7 @@ LAB_001276e0:
           temp_v19 = (unsigned char)temp_v14;
           temp_v20 = (unsigned char)(temp_v14 >> 8);
           temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
-          FUN_0030dd02(temp_v0,&temp_v19,2);
+          crc32Dispatch(temp_v0,&temp_v19,2);
           *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
         }
         temp_v14 = 0;
@@ -247,7 +247,7 @@ LAB_00127750:
               temp_v21 = (unsigned char)(temp_v14 >> 0x10);
               temp_v22 = (unsigned char)(temp_v14 >> 0x18);
               temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
-              FUN_0030dd02(temp_v0,&temp_v19,4);
+              crc32Dispatch(temp_v0,&temp_v19,4);
               *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
             }
             temp_v14 = 0;
@@ -275,7 +275,7 @@ LAB_0012779c:
               temp_v20 = (unsigned char)(temp_v14 >> 8);
               temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
               temp_v19 = (char)temp_v14;
-              FUN_0030dd02(temp_v0,&temp_v19,2);
+              crc32Dispatch(temp_v0,&temp_v19,2);
               *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
             }
             temp_v14 = 0;
@@ -308,7 +308,7 @@ LAB_0012782c:
               }
               if (*(int *)(pbVar15 + 0x10) << 0x16 < 0) {
                 temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
-                FUN_0030dd02(temp_v0,temp_v24,temp_v23);
+                crc32Dispatch(temp_v0,temp_v24,temp_v23);
                 *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
               }
               pbVar17 = pbVar17 + -(int)temp_v23;
@@ -351,7 +351,7 @@ LAB_001278a8:
               } while ((temp_v27 != (unsigned char *)0x0) && (temp_v23 < pbVar17));
               if ((int)temp_v28 << 0x16 < 0) {
                 temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
-                FUN_0030dd02(temp_v0,temp_v24,temp_v23);
+                crc32Dispatch(temp_v0,temp_v24,temp_v23);
                 *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
               }
               pbVar17 = pbVar17 + -(int)temp_v23;
@@ -388,7 +388,7 @@ LAB_0012792a:
                   } while ((temp_v27 != (unsigned char *)0x0) && (temp_v23 < pbVar17));
                   if ((int)temp_v28 << 0x16 < 0) {
                     temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
-                    FUN_0030dd02(temp_v0,temp_v24,temp_v23);
+                    crc32Dispatch(temp_v0,temp_v24,temp_v23);
                     *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
                   }
                   pbVar17 = pbVar17 + -(int)temp_v23;
@@ -406,7 +406,7 @@ LAB_001279d8:
                       *(unsigned int *)(*(int *)(pbVar15 + 0x20) + 0x30) = 1;
                     }
                     temp_v3 = 0;
-                    FUN_0030dd02(0,0);
+                    crc32Dispatch(0,0);
                     *(int *)(pbVar15 + 0x18) = temp_v3;
                     temp_v34[0xc] = temp_v3;
                     goto LAB_00128118;
@@ -769,7 +769,7 @@ LAB_00128072:
       if (temp_v3 != 0) {
         if (*(int *)(pbVar15 + 0x10) != 0) {
           temp_v13 = *(int *)(pbVar15 + 0x18);
-          FUN_0030dd02(temp_v13,(int)temp_v29 - temp_v3);
+          crc32Dispatch(temp_v13,(int)temp_v29 - temp_v3);
         }
         else {
           temp_v13 = FUN_0030db5c(*(unsigned int *)(pbVar15 + 0x18),(int)temp_v29 - temp_v3);
@@ -831,7 +831,7 @@ LAB_0012840c:
       if ((*(int *)(pbVar15 + 8) != 0) && (temp_v3 != 0)) {
         if (*(int *)(pbVar15 + 0x10) != 0) {
           temp_v4 = *(int *)(pbVar15 + 0x18);
-          FUN_0030dd02(temp_v4,temp_v34[3] - temp_v3,temp_v3);
+          crc32Dispatch(temp_v4,temp_v34[3] - temp_v3,temp_v3);
         }
         else {
           temp_v4 = FUN_0030db5c(*(unsigned int *)(pbVar15 + 0x18),temp_v34[3] - temp_v3,temp_v3);
@@ -1194,7 +1194,7 @@ LAB_001277f0:
     temp_v19 = (unsigned char)temp_v14;
     temp_v20 = (unsigned char)(temp_v14 >> 8);
     temp_v0 = *(unsigned int *)(pbVar15 + 0x18);
-    FUN_0030dd02(temp_v0,&temp_v19,2);
+    crc32Dispatch(temp_v0,&temp_v19,2);
     *(unsigned int *)(pbVar15 + 0x18) = temp_v0;
   }
   temp_v14 = 0;

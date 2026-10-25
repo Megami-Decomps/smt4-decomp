@@ -17,23 +17,8 @@ void FUN_00412c54(VertexStreamSource *source, void *vertex)
 {
     sysMemClear(vertex, 0x790);
     ShaderBindSymbol position;
-    position.vertex.kind = 0;
-    position.vertex.count = 1;
-    position.vertex.attribute = 255;
-    position.vertex.registerIndex = 255;
-    position.vertex.flags = 0;
     ShaderBindSymbol texCoord;
-    texCoord.vertex.kind = 0;
-    texCoord.vertex.count = 1;
-    texCoord.vertex.attribute = 255;
-    texCoord.vertex.registerIndex = 255;
-    texCoord.vertex.flags = 0;
     ShaderBindSymbol color;
-    color.vertex.kind = 0;
-    color.vertex.count = 1;
-    color.vertex.attribute = 255;
-    color.vertex.registerIndex = 255;
-    color.vertex.flags = 0;
     if (source->flags & 1) {
         void *data = asdPrimAlloc(vertexStreamBytes(source, 1, 12));
         rt_memcpy(data, source->position, vertexStreamBytes(source, 1, 12));

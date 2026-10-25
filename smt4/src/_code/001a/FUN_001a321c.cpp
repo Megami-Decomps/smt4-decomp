@@ -28,7 +28,7 @@ int requestForward(...);
 int FUN_001ee4e4(...);
 int FUN_00288ef0(...);
 int FUN_00293ac0(void);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -127,7 +127,7 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002b64b8. */
 /* Supplied declaration required: FUN_002b659c. */
 /* Supplied declaration required: FUN_002b6c34. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int aocIndexValueOrDefault(unsigned int);
@@ -269,7 +269,7 @@ unsigned char FUN_001a321c(void)
       }
       temp_v7 = FUN_002bf4f8(0x1a,0xba);
       puVar9 = temp_v35;
-      FUN_002b6dd8(puVar9,2);
+      fontMeasureLineAdvance(puVar9,2);
       VectorSignedToFloat((unsigned char *)
                           ((int)temp_v28 +
                           (int)*(short *)(temp_v7 + 8) +

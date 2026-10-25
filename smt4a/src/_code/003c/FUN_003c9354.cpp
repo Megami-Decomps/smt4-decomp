@@ -24,7 +24,7 @@ int flaggedEntrySetValueA(int, int);
 int arrayContainsU16(...);
 int unitRecordBuild(...);
 int FUN_003450d4(int, unsigned int, int, int);
-int FUN_00359b6c(...);
+int skillHelpUpdateAttributeAndTarget(...);
 int screenStartOrClear(unsigned int, int);
 int FUN_003b0558(void);
 
@@ -65,7 +65,7 @@ extern unsigned int *objectApplyIfUnblocked(int);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
-/* Supplied declaration required: FUN_00359b6c. */
+/* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_0037e1b0. */
 /* Supplied declaration required: FUN_003b0558. */
@@ -150,7 +150,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
               screenStartOrClear(*(unsigned int *)(param_1 + 0x424),0x1a);
             }
             else {
-              FUN_00359b6c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
+              skillHelpUpdateAttributeAndTarget(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
             }
             return temp_v15;
           }
@@ -166,7 +166,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       screenStartOrClear(*(unsigned int *)(param_1 + 0x424),0x1a);
     }
     else {
-      FUN_00359b6c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
+      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
     }
     return temp_v15;
   }
@@ -240,7 +240,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       temp_v4 = resourceRunOperationIfUnblocked();
       temp_v5 = FUN_002a4894(param_1 + 0x8db0);
       if (*(short *)(param_1 + (temp_v5 + temp_v4) * 2 + 0x8b60) != 0) {
-        FUN_00359b6c();
+        skillHelpUpdateAttributeAndTarget();
         return temp_v15;
       }
       FUN_0019de98(0,0xf4f4f4ff);

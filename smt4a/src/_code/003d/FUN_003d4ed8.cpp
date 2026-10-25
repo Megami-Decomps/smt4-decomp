@@ -4,12 +4,12 @@
 extern "C" {
 void *jyoucyuGetTableEntry(u32 table);
 s32 FUN_00162ea4();
-s32 asd3dSoundActorIsPlaying(s32 channel);
-void FUN_0032cc8c(s32 channel, const BattleVector3 *position);
-void FUN_0036bca0(u32 sound, s32 channel);
-void FUN_0032cb58(u32 sound, s32 channel);
-void *FUN_0036bc6c(s32 channel);
-s32 asdSoundGetPlayerPriority(void *player);
+u32 asd3dSoundActorIsPlaying(u32 channel);
+void FUN_0032cc8c(u32 channel, const BattleVector3 *position);
+u8 FUN_0036bca0(s32 sound, u32 channel);
+u8 FUN_0032cb58(s32 sound, u32 channel);
+u32 FUN_0036bc6c(u32 channel);
+s32 asdSoundGetPlayerPriority(u32 soundId);
 
 // Start a sound on free actor channels, or choose the highest-priority replacement channel.
 s32 FUN_003d4ed8(u32 sound, BattleVector3 position)

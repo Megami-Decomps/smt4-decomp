@@ -2,12 +2,12 @@
 
 extern "C" {
 
-int FUN_00360364(u32 *block);
+int serviceCloseInitializedHandle(u32 *block);
 extern u32 DAT_00471bac;
 
 void FUN_00351b44(void)
 {
-    FUN_00360364(&DAT_00471bac);
+    serviceCloseInitializedHandle(&DAT_00471bac);
 }
 
 } /* extern "C" */

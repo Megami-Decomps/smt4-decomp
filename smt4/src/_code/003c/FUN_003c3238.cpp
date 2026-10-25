@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the scratch VFP register for unsigned line-height conversion differs (s2 instead of retail s1). */
+/* NON_MATCHING: the scratch VFP register for unsigned line-height conversion is s1 instead of retail s2. */
 #include "common.h"
 
 struct StatusHelpRecord {

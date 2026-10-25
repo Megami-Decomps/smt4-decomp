@@ -14,7 +14,7 @@ int ll_sdiv(...);
 extern int FUN_0014fa90(void);
 /* Supplied declaration required: FUN_002baf30. */
 /* Supplied declaration required: ll_sdiv. */
-extern float ll_sto_f(void);
+extern float __aeabi_l2f(void);
 extern unsigned char nw_snd_internal_driver_VoiceManager_GetVoiceCount(void);
 
 
@@ -58,7 +58,7 @@ void FUN_0014c6a8(unsigned int *param_1,unsigned int *param_2)
               ((int)temp_v4 >> 0x1f) * temp_v7 + (int)((unsigned long long)temp_v7 * (unsigned long long)temp_v4 >> 0x20) +
               ((int)temp_v6 >> 0x1f) * (int)temp_v12 + (int)((unsigned long long)temp_v0 >> 0x20) +
               (unsigned int)romwright_carry_4(temp_v9,temp_v8) + temp_v6 * temp_v4 + (unsigned int)romwright_carry_4(temp_v10,temp_v5),1000,0);
-      temp_v3 = (float)ll_sto_f();
+      temp_v3 = (float)__aeabi_l2f();
       pfVar8 = (float *)(param_1 + 4);
       temp_v3 = temp_v3 * 0.02045408f;
       if ((temp_v3 < 0.0f) || ((int)temp_v3 >= 0x42c80001)) {

@@ -13,7 +13,7 @@ int FUN_0029e6f0(void);
 int FUN_0029efc0(...);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int devilGetRecord(void);
 int demonGetRaceLabel(...);
 int FUN_002bd068(...);
@@ -69,7 +69,7 @@ extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
@@ -218,7 +218,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = FUN_002bd068(*psVar13);
         textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
         puVar16 = temp_v19;
-        FUN_002b6dd8(puVar16,1);
+        fontMeasureLineAdvance(puVar16,1);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -229,7 +229,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = demonGetRaceLabel(*psVar13,0);
         textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
         puVar16 = temp_v19;
-        FUN_002b6dd8(puVar16,2);
+        fontMeasureLineAdvance(puVar16,2);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -267,7 +267,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = FUN_002bd068(*psVar13);
         textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
         puVar16 = temp_v19;
-        FUN_002b6dd8(puVar16,1);
+        fontMeasureLineAdvance(puVar16,1);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -278,7 +278,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = demonGetRaceLabel(*psVar13,0);
         textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
         puVar16 = temp_v19;
-        FUN_002b6dd8(puVar16,2);
+        fontMeasureLineAdvance(puVar16,2);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -401,7 +401,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       temp_v15 = demonGetRaceLabel(*psVar13,0);
       textFormatBuffer(temp_v19,&LAB_001efd54,temp_v15);
       puVar16 = temp_v19;
-      FUN_002b6dd8(puVar16,2);
+      fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v9 + ((int)**(short **)(temp_v10 + 0xc) - (int)puVar16) / 2 +
@@ -474,7 +474,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       temp_v15 = demonGetRaceLabel(*psVar13,0);
       textFormatBuffer(temp_v19,&LAB_001f0518,temp_v15);
       puVar16 = temp_v19;
-      FUN_002b6dd8(puVar16,2);
+      fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v9 + ((int)**(short **)(temp_v10 + 0xc) - (int)puVar16) / 2 +

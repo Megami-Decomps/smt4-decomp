@@ -1,4 +1,4 @@
-/* NON_MATCHING: heap-owner size/alignment argument setup is reversed relative to retail; all other instructions agree. */
+/* NON_MATCHING: heap-owner size/option setup order differs; retail pools the six independent owners through g_mobiclipSlots aliases. */
 #include "mobiclip_ctrl/MobiclipCtrl.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -13,7 +13,7 @@ extern HeapOwner DAT_00617e00;
 extern u8 DAT_00617e58[];
 extern u8 g_mobiclipCtrl;
 void *asdMemoryAlloc(u32 flags, u32 alignment, s32 heap, u32 size, bool clear);
-void heapOwnerCreate(HeapOwner *owner, void *memory, u32 size, s32 alignment);
+void heapOwnerCreate(HeapOwner *owner, void *memory, u32 size, u32 option);
 void *mobiclipHeapAllocA(u32 size);
 void *mobiclipHeapAllocB(u32 size);
 void *mobiclipHeapAllocC(u32 size);

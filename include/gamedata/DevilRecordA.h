@@ -6,7 +6,10 @@
 
 struct DevilTableRecordA {
     /* 0x00 */ DevilRecordA header;
-    /* 0x40 */ u8 unk40[0x5C];
+    union {
+        /* 0x40 */ u8 unk40[0x5C];
+        /* 0x40 */ u16 initializationSkills[8];
+    };
     /* 0x9C */ u16 unk9C;
     union {
         /* 0x9E */ u8 unk9E[0x16];
@@ -34,6 +37,9 @@ typedef char DevilTableRecordAChanceOffsetCheck[
     offsetof(DevilTableRecordA, extraAction.chance) == 0xB2 ? 1 : -1];
 typedef char DevilTableRecordACategoryModifiersOffsetCheck[
     offsetof(DevilTableRecordA, categoryModifiers.values) == 0xA0 &&
+    sizeof(DevilTableRecordA) == 0xB4 ? 1 : -1];
+typedef char DevilTableRecordAInitializationSkillsOffsetCheck[
+    offsetof(DevilTableRecordA, initializationSkills) == 0x40 &&
     sizeof(DevilTableRecordA) == 0xB4 ? 1 : -1];
 
 #endif

@@ -19,7 +19,7 @@ extern int FUN_002ce22c(...); /* 0x2ce22c */
 extern int dataTable08ComparePackedKeys(...); /* 0x2ce2a0 */
 extern int FUN_002ce304(...); /* 0x2ce304 */
 extern int FUN_002ce378(...); /* 0x2ce378 */
-extern int FUN_002ce3ec(...); /* 0x2ce3ec */
+extern int equipmentCompareUpgradeKind2Descending(...); /* 0x2ce3ec */
 extern int FUN_002ce460(...); /* 0x2ce460 */
 extern int FUN_002ce4d4(...); /* 0x2ce4d4 */
 extern int FUN_002ce520(...); /* 0x2ce520 */
@@ -435,7 +435,7 @@ LAB_003d141c:
     }
     else {
       temp_v2 = objectApplyIfUnblocked(temp_v4);
-      qsort(temp_v5,temp_v2,2,FUN_002ce3ec);
+      qsort(temp_v5,temp_v2,2,equipmentCompareUpgradeKind2Descending);
     }
   }
   if ((*pbVar5 & 0x7f) == 0x27) {

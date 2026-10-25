@@ -1,4 +1,3 @@
-/* NON_MATCHING: the frame table is emitted as local .constdata rather than DAT_00526458; AOC flag clear reuses r7 and retail's pre-create NOP is absent. */
 #include "shard/W4_Match3_AocMainA.h"
 
 struct AocSpriteParameters {
@@ -39,6 +38,7 @@ u32 spriteHandleCreate(s32 flags);
 void FUN_001527d8(u32 handle, u32 mask);
 void positionStateSet(u32 handle, s32 slot, u32 color, f32 duration);
 void FUN_004cf7cc(void *control);
+void aocMenuSetReadyFlag(AocMainA *owner, u8 ready);
 
 // Initialize the AOC menu's common sprite resources, entry frames and background.
 void aocMenuInitializeSprites(AocMenuSprites *menu)
@@ -60,7 +60,7 @@ void aocMenuInitializeSprites(AocMenuSprites *menu)
     }
     FUN_0015f258(menu->panel);
     menu->ready = 0;
-    g_aocMain->unkB81 = 0;
+    aocMenuSetReadyFlag(g_aocMain, 0);
     menu->background = spriteHandleCreate(0);
     FUN_001527d8(menu->background, 0xffffffff);
     positionStateSet(menu->background, 0, 0x646464ff, 0.0f);

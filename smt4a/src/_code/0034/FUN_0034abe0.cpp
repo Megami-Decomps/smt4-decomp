@@ -17,7 +17,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
@@ -88,7 +88,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
@@ -108,7 +108,7 @@ extern int uiSearchPrimary(unsigned int *);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: devilDispatchTextureResource. */
 /* Supplied declaration required: contentEntryFindById. */
-extern int FUN_004db07c(unsigned int, unsigned int, unsigned char *);
+extern int fusionClassifyRecipeAvailability(unsigned int, unsigned int, unsigned char *);
 
 
 void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
@@ -228,7 +228,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
               temp_v8 = temp_v8 + 1;
             } while (temp_v8 < (int)(unsigned int)*(unsigned short *)(puVar19 + 0x1e));
           }
-          temp_v8 = FUN_004db07c(*puVar2,temp_v12,temp_v16);
+          temp_v8 = fusionClassifyRecipeAvailability(*puVar2,temp_v12,temp_v16);
           if (temp_v8 == 0) {
             temp_v17 = 1;
           }
@@ -303,7 +303,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         temp_v2 = FUN_001834a4(0x1a,0xdc);
         puVar9 = temp_v13;
-        FUN_0018408c(puVar9,1);
+        fontMeasureLineAdvance(puVar9,1);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)&param_1->field_0x0 +
@@ -315,7 +315,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         temp_v10 = FUN_0014bf3c(*puVar7,0);
         textFormatBuffer(temp_v13,&LAB_0034b684,temp_v10);
         puVar9 = temp_v13;
-        FUN_0018408c(puVar9,2);
+        fontMeasureLineAdvance(puVar9,2);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)param_1 +
@@ -420,7 +420,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
               temp_v8 = temp_v8 + 1;
             } while (temp_v8 < (int)(unsigned int)*(unsigned short *)(puVar2 + 0x23de));
           }
-          temp_v2 = FUN_004db07c(*puVar2,temp_v12,temp_v16);
+          temp_v2 = fusionClassifyRecipeAvailability(*puVar2,temp_v12,temp_v16);
           if (temp_v2 == 0) {
             temp_v17 = 1;
           }
@@ -443,7 +443,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         temp_v5 = FUN_0014bf3c(*psVar6,0);
         textFormatBuffer(temp_v13,&LAB_0034b684,temp_v5);
         puVar9 = temp_v13;
-        FUN_0018408c(puVar9,2);
+        fontMeasureLineAdvance(puVar9,2);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)&param_1->field_0x0 +
@@ -536,7 +536,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < (int)(unsigned int)*(unsigned short *)(puVar2 + 0x23de));
     }
-    temp_v2 = FUN_004db07c(*puVar2,temp_v12,temp_v16);
+    temp_v2 = fusionClassifyRecipeAvailability(*puVar2,temp_v12,temp_v16);
     if (temp_v2 == 0) {
       temp_v17 = 1;
     }
@@ -615,7 +615,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   temp_v5 = FUN_0014bf3c(*psVar6,0);
   textFormatBuffer(temp_v13,&LAB_0034c1c0,temp_v5);
   puVar9 = temp_v13;
-  FUN_0018408c(puVar9,3);
+  fontMeasureLineAdvance(puVar9,3);
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)&param_1->field_0x0 +

@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push scheduling, stereo-mode branch padding and overlay literal ordering differ. */
+/* NON_MATCHING: the stereo-mode branch hint and overlay literal-pool ordering differ; render-context wrapper scheduling agrees. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 
@@ -16,8 +16,7 @@ void FUN_00280840(u32 style, u32 firstColor, u32 secondColor,
 void FUN_00345b94(void)
 {
     RenderCtxA *context = g_renderCtx;
-    s32 renderState = FUN_001692ac(1, 1);
-    renderStackPush(&context->stackA, renderState);
+    renderCtxPushA(context, FUN_001692ac(1, 1));
     FUN_0016c4b8(g_renderCtx, 0);
     u32 mono = 1;
     if (getFloatPairValue() && g_renderCtx->stereoMode == 0 && displayIsStereoActive()) {

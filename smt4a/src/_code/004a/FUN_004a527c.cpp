@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reads the motion's active flag through R0 with a signed-byte load in its own branch; armcc folds it into a conditional unsigned-byte load from R5. */
 #include "common.h"
 
 extern "C" {
@@ -27,6 +26,7 @@ s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 s32 utilityReturnSuccess(void *value);
+s8 recordGetSignedFlags(const void *record);
 
 /* Advances the screen's motion and follows its position; once the active motion finishes, moves to state 7. */
 void FUN_004a527c(MotionScreenWork *work)
@@ -38,7 +38,7 @@ void FUN_004a527c(MotionScreenWork *work)
     work->mode = 9;
     FUN_00163aa4(motion, 1.0f);
     pointConvertToFloat(work->position, vec2GetXInt(motion), vec2GetYInt(motion));
-    if (FUN_0026c3a0() && motion->active != 0 && FUN_002e19f8() && !utilityReturnSuccess(work->unk0096)) {
+    if (FUN_0026c3a0() && recordGetSignedFlags(motion) != 0 && FUN_002e19f8() && !utilityReturnSuccess(work->unk0096)) {
         work->state = 7;
         work->substate = 0;
     }

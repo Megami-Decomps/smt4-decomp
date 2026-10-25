@@ -18,13 +18,13 @@ typedef struct Curve {
     /* 0x14 */ CurveKey keys[1];
 } Curve;
 
-f32 hardfp_floorf(f32 value);
+f32 __hardfp_floorf(f32 value);
 
 /* Returns the last key at or before `time`, starting the search from the key the time is expected at. */
 CurveKey *FUN_003f887c(Curve *curve, f32 time)
 {
     f32 position = time / curve->duration * 32.0f;
-    u32 frame = (s32)hardfp_floorf(position + 0.5f);
+    u32 frame = (s32)__hardfp_floorf(position + 0.5f);
     CurveKey *key = &curve->keys[0];
     if (frame < key->frame) {
         return key;

@@ -1,16 +1,15 @@
-/* NON_MATCHING: one redundant stack store remains for the seeded comparison result; all other instruction rows agree. */
 #include "shard/Shard0031.h"
 
 extern "C" {
 PartyStatusSlots *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
-s32 FUN_002c7bb0(s32, s32, u32, u32 *);
+s32 FUN_002c7bb0(u32 user, s32 target, u32 id, s32 *result);
 }
 
 /* Test the selected party set, including the protagonist for the applicable modes. */
-extern "C" u32 FUN_0049fbb8(u32 mode, s32 predicate, u32 argument, u32 initialResult)
+extern "C" s32 FUN_0049fbb8(u32 mode, s32 predicate, u16 argument)
 {
-    u32 result = initialResult;
+    s32 result;
     if ((mode == 0 || mode == 2 || mode == 3) &&
         FUN_002c7bb0(predicate, -1, argument, &result) == 0) {
         return 1;

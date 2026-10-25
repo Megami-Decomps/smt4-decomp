@@ -28,7 +28,7 @@ void asdTMTexTableLoadSprites(s32 table);
 void FUN_0014afd0(s32 kind, s32 index);
 MessageWindowWork *FUN_00145280(void);
 void FUN_001527d8(u32 handle, s32 value);
-void FUN_001402d0(void);
+void infoWindowInitialize(void);
 void FUN_0013f578(void);
 void FUN_001409e4(void);
 s32 FUN_0013f7c4(u32 handle);
@@ -58,9 +58,9 @@ void FUN_00137144(void)
     g_messageMain.second->layer = 6;
     g_messageMain.third->layer = 12;
     FUN_001527d8(g_messageMain.third->handle, 0xFF);
-    for (u32 i = 0; i < 12; i++)
+    for (s32 i = 0; i < 12; i++)
         DAT_005e2010[i]->layer = 13;
-    FUN_001402d0();
+    infoWindowInitialize();
     FUN_0013f578();
     FUN_001409e4();
     taskCreateDraw((const s8 *)"MESS_D", 239, 0, 0, FUN_0013f7c4, NULL, (u32)g_messageMain.main, (void *)g_messageMain.main->head);

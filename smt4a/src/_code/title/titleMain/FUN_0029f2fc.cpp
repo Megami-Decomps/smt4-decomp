@@ -19,7 +19,7 @@ int FUN_00363c58(...);
 int FUN_003b5064(void);
 int FUN_003b61ec(void);
 int FUN_003c91e8(void);
-int FUN_0046bd44(...);
+int aocActivateFileGroupFlags(...);
 int gameFlagsSetFlagsFromTaggedGroupEntries(...);
 
 int textFormatBuffer(...);
@@ -149,7 +149,7 @@ extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0046bd44. */
+/* Supplied declaration required: aocActivateFileGroupFlags. */
 extern int aocHasType36(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
 
@@ -886,7 +886,7 @@ LAB_0029fb00:
         }
         else {
           FUN_00283d74(0);
-          FUN_0046bd44(g_aocSystem);
+          aocActivateFileGroupFlags(g_aocSystem);
           FUN_00363c58(0);
           gameFlagsSetFlagsFromTaggedGroupEntries(g_aocSystem);
           stateModeDispatch(puVar4[0x25]);

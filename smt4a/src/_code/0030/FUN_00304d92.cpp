@@ -1,4 +1,4 @@
-/* NON_MATCHING: this is std::vector<12-byte element>::clear/reserve/push_back around a stream read (FUN_0030d36a/00134338/0030d358/0013425c are its STL instantiations); written with the callees as plain functions, built has a 24-byte frame and a rotated loop where retail has a 16-byte frame, re-reads the count each iteration and tests the stream flag in the loop condition */
+/* NON_MATCHING: this is std::vector<12-byte element>::clear/reserve/push_back around a stream read (onlineResultsClear/00134338/0030d358/0013425c are its STL instantiations); written with the callees as plain functions, built has a 24-byte frame and a rotated loop where retail has a 16-byte frame, re-reads the count each iteration and tests the stream flag in the loop condition */
 #include "common.h"
 
 extern "C" {
@@ -18,7 +18,7 @@ struct ElementVector {
     /* 0x08 */ Element *capacity;
 };
 
-void FUN_0030d36a(ElementVector *vector);
+void onlineResultsClear(ElementVector *vector);
 s32 streamReadU32(Stream *stream, u32 *value);
 void FUN_00134338(ElementVector *vector, u32 count);
 void FUN_002e9ff4(Element *element);
@@ -33,7 +33,7 @@ void FUN_00304d92(Stream *stream, ElementVector *vector)
     u32 count;
     u32 i;
 
-    FUN_0030d36a(vector);
+    onlineResultsClear(vector);
     if (streamReadU32(stream, &count) == 0) {
         return;
     }
@@ -45,7 +45,7 @@ void FUN_00304d92(Stream *stream, ElementVector *vector)
         FUN_002e9ff4(&element);
         FUN_00310ff2(stream, &element);
         if (stream->failed) {
-            FUN_0030d36a(vector);
+            onlineResultsClear(vector);
             return;
         }
         if (vector->end != vector->capacity) {

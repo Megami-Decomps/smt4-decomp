@@ -27,6 +27,11 @@ public:
     virtual void vfunc14();
     virtual void vfunc18();
     virtual void vfunc1c();
+
+    /* 0x64 */ u8 ready;
 };
+
+typedef char Obj4221a4LayoutCheck[
+    sizeof(Obj4221a4) == 0x68 && offsetof(Obj4221a4, ready) == 0x64 ? 1 : -1];
 
 #endif

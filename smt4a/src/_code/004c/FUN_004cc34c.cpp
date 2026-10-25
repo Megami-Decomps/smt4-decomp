@@ -1,10 +1,7 @@
 /* NON_MATCHING: all workflow calls and state transitions are recovered; the state-2 reset block is tail-merged at the front instead of the end, with a few register differences. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "script/scrScriptProcess.h"
 
-struct WorkflowScriptProcess {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 state;
-};
 
 struct CallbackWorkflow {
     /* 0x00 */ u32 task;
@@ -13,10 +10,10 @@ struct CallbackWorkflow {
     /* 0x08 */ u32 step;
     /* 0x0C */ u32 timer;
     /* 0x10 */ void *heapA;
-    /* 0x14 */ WorkflowScriptProcess *script;
+    /* 0x14 */ ScriptRunState *script;
     /* 0x18 */ void *heapB;
     /* 0x1C */ void *resource;
-    /* 0x20 */ WorkflowScriptProcess *process;
+    /* 0x20 */ ScriptRunState *process;
     /* 0x24 */ void *allocation;
     /* 0x28 */ u32 unk28;
     /* 0x2C */ u32 region;
@@ -25,7 +22,7 @@ struct CallbackWorkflow {
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-WorkflowScriptProcess *FUN_00275bc8(void *heapA, void *heapB);
+ScriptRunState *FUN_00275bc8(void *heapA, void *heapB);
 void FUN_004cbb38(CallbackWorkflow *work);
 void FUN_004cbd70(CallbackWorkflow *work);
 u16 *FUN_002613f0(u32 region);
@@ -37,15 +34,15 @@ s32 FUN_002effbc();
 s32 btlTalkBustUpGetValue();
 void btlTalkBustUpSetDemonTexture(u16 entry, u32 option);
 void btlTalkBustUpSetUnk2F4(u32 value);
-void scrScriptProcessStartEntry(WorkflowScriptProcess *process, u32 entry);
+void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
 s32 btlTalkBustupMatchesEntry(u16 entry);
 s32 bgmGetStateById(u32 id);
-s32 scrRunOpcodesStub(WorkflowScriptProcess *process);
+s32 scrRunOpcodesStub(ScriptRunState *process);
 void FUN_002c85b0(u32 value);
 void FUN_002c39dc(u32 first, u32 second, u32 third);
 void FUN_00284ee4(u32 value);
 void FUN_00215bbc();
-void scrScriptProcessDestroy(WorkflowScriptProcess *process);
+void scrScriptProcessDestroy(ScriptRunState *process);
 void asdMemFree(void *allocation);
 void btlTalkBustUpDestroy();
 void soundChannelStopAll(u32 channel);
@@ -56,6 +53,7 @@ void lmapMainCallIfActive();
 s32 mikadoPollShutdown();
 void mikadoRequestSoundChannel();
 void bgmFadeOut(u32 duration);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 }
 
 // Drive the callback's resource, dialogue, and return-to-map workflow.
@@ -72,7 +70,7 @@ extern "C" s32 FUN_004cc34c(CallbackWorkflow *work)
             break;
         if (work->script == NULL) {
             work->script = FUN_00275bc8(work->heapA, work->heapB);
-            work->script->state = 0;
+            scriptProcessSetMode(work->script, 0);
         }
         work->step = 0;
         work->state = 2;

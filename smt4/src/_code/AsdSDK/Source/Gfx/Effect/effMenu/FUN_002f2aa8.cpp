@@ -1,5 +1,5 @@
 /* NON_MATCHING: character-grid text entry step of the effect menu (13 x 3 grid plus delete/confirm cells: moves the cursor with wrap, appends/removes the selected character, finishes on confirm/cancel, then draws the entry field and returns the grid's right edge or the result); written from the decompilation, the goto ladder is rebuilt as direction/action handling and the retail grid walk at the end is folded to its two results (last cell character stored, right-edge x returned) */
-#include "common.h"
+#include "gfx/EffectKeyboard.h"
 
 #define KEYBOARD_COLUMNS 13
 #define KEYBOARD_ROWS 3
@@ -18,19 +18,6 @@
 #define KEYBOARD_LIST_HEIGHT 0x44
 #define KEYBOARD_LIST_OFFSET_Y 0x18
 
-/* Input state of the text entry (observed fields). */
-struct KeyboardState {
-    /* 0x00 */ s32 x;
-    /* 0x04 */ s32 y;
-    /* 0x08 */ s32 mode;
-    /* 0x0C */ s32 cursor;
-    /* 0x10 */ s32 length;
-    /* 0x14 */ s32 maxLength;
-    /* 0x18 */ s32 result;
-    /* 0x1C */ s32 formatArg;
-    /* 0x20 */ u8 unk20;
-    /* 0x21 */ u8 text[1];
-};
 
 /* The effect menu state's tail: the last cursor character and the grid's character table. */
 struct EffKeyboardView {

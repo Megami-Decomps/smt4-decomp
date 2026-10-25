@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026e324(...);
+int aocActivateFileGroupFlags(...);
 
 unsigned int appTryPurchase(unsigned int, int, int);
 int saveGetMapFlag(...);
@@ -62,7 +62,7 @@ typedef struct {
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int gameDataGetWorkBlock(void);
-/* Supplied declaration required: FUN_0026e324. */
+/* Supplied declaration required: aocActivateFileGroupFlags. */
 /* Supplied declaration required: appTryPurchase. */
 /* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: objectFlagSetBit. */
@@ -440,7 +440,7 @@ void FUN_001c36d8(int param_1)
                 gameFlagSetValue(0x466,1);
                 gameFlagSetValue(0x410,1);
               }
-              FUN_0026e324(g_aocSystem);
+              aocActivateFileGroupFlags(g_aocSystem);
               return;
             }
           } while (temp_v5 == 0x46f);

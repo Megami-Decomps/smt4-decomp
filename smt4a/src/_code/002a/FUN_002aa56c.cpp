@@ -13,7 +13,7 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
 int FUN_0020caec(...);
@@ -52,7 +52,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_0020caec. */
@@ -199,7 +199,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
         temp_v6 = FUN_0014bf3c(*puVar6,0);
         textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
         puVar9 = temp_v9;
-        FUN_0018408c(puVar9,2);
+        fontMeasureLineAdvance(puVar9,2);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_1 + ((int)**(short **)(temp_v4 + 0xc) - (int)puVar9) / 2 +
@@ -231,7 +231,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
         textFormatBuffer(temp_v9,&LAB_002aaf84);
         temp_v4 = FUN_001834a4(0x1a,0x72);
         puVar9 = temp_v9;
-        FUN_0018408c(puVar9,2);
+        fontMeasureLineAdvance(puVar9,2);
         temp_v5 = (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -335,7 +335,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   temp_v6 = FUN_0014bf3c(*puVar6,0);
   textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
   puVar9 = temp_v9;
-  FUN_0018408c(puVar9,3);
+  fontMeasureLineAdvance(puVar9,3);
   VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(((int)**(short **)(temp_v1 + 0xc) - (int)puVar9) / 2 + param_1 +

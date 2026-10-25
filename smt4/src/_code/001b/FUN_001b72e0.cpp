@@ -73,7 +73,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033cc84. */
 
 
-unsigned int FUN_001b72e0(void)
+int FUN_001b72e0(unsigned int job)
 
 {
 /* irregular: irregular input(s): in_fpscr; 18 native warning(s); review required */

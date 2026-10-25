@@ -1,21 +1,16 @@
-/* NON_MATCHING: retail uses ldr r0, [r0, #4] where the compiled block uses ldr r1, [r0, #4]. */
-#include "common.h"
+/* NON_MATCHING: corrected global resident work lookup; phase/work pointer use swapped registers. */
+#include "kernel/jyoucyu.h"
 
-struct ProgressState {
-    u8 unk00[8];  // 0x00
-    u32 phase;    // 0x08
-};
-
-struct ProgressContext {
-    u8 unk00[4];           // 0x00
-    ProgressState* state;  // 0x04
+struct ProgressState : JyoucyuWork {
+    /* 0x08 */ u32 phase;
 };
 
 extern "C" void FUN_0022258c(s32 value);
+extern "C" JyoucyuGlobals g_jyoucyu;
 
-extern "C" s32 FUN_0025c7e4(ProgressContext* context)
+extern "C" s32 FUN_0025c7e4(void)
 {
-    ProgressState* state = context->state;
+    ProgressState* state = static_cast<ProgressState *>(g_jyoucyu.work);
     u32 phase = state->phase;
 
     if (phase == 0 || phase == 1) {

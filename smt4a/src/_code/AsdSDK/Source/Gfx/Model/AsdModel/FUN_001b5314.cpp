@@ -66,7 +66,7 @@ extern u32 DAT_005b3c74;
 extern GfxSettings g_gfxSettings;
 
 u32 FUN_001931d8(f32 *color);
-void FUN_001c0544(u8 **block);
+void runtimeDispatchObjectRelease(u8 **block);
 void nw_gfx_res_ResTextureMapper_SetTexture(u8 **handle, u32 texture);
 OwnerCommand nw_gfx_res_ResTextureSampler_GetOwnerCommand(u32 **sampler);
 
@@ -93,7 +93,7 @@ void FUN_001b5314(ModelLink *model, s32 useTexture, f32 intensity)
         if (*(u32 *)resource == 0x20000004) {
             resource = relPtr(resource + 0x1C);
         }
-        FUN_001c0544(&resource);
+        runtimeDispatchObjectRelease(&resource);
         nw_gfx_res_ResTextureMapper_SetTexture(&textureBlock, DAT_005b3c74);
         u32 *sampler = (u32 *)relPtr(textureBlock + 12);
 

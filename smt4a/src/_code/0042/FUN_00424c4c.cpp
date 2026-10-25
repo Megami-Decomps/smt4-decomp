@@ -2,8 +2,8 @@
 #include "record/RecordTable.h"
 
 extern "C" {
-s32 readInnerWord6(u32 file, u32 *value);
-s32 FUN_0051415c(u32 file, u32 index, u32 *record);
+u8 readInnerWord6(u32 file, u32 *value);
+void FUN_0051415c(u32 file, u32 index, u32 *record);
 
 /* Reads every record from the file into the table's per-kind arrays, flagging overflows and missing kinds. */
 void FUN_00424c4c(RecordTable *table)

@@ -11,7 +11,7 @@ typedef struct Options0037d358 {
 } Options0037d358;
 
 void scrSetResult(s32 value);
-s32 randRange(u16 limit);
+u32 randRange(s32 limit);
 Options0037d358 *gameGetOptions(void);
 s32 gameOptionsClassifyMode(void);
 
@@ -34,7 +34,7 @@ u32 scrCommOptionRandomPick(void)
         if (options->choiceC != 0) {
             count++;
         }
-        pick = randRange(count);
+        pick = randRange((u16)count);
         if (options->choiceA != 0) {
             if (pick == 0) {
                 result = options->choiceA;

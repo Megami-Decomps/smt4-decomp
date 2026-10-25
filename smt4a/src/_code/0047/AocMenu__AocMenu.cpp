@@ -1,10 +1,10 @@
 /* NON_MATCHING: explicit member lifetime construction adds placement-new null guards and retains the outer owner pointer. */
+#include "classes/AocMenu.h"
 #include "shard/SelectionPanelOwner.h"
 #include <new>
 
 extern "C" {
 extern const u8 DAT_0055c6a4[];
-void FUN_0047c65c(SelectionPanelOwner *owner);
 TimedState *timeInitializeActiveState(TimedState *state);
 
 // Initialize the owner's timers, selection controls and embedded window panel.
@@ -26,7 +26,7 @@ SelectionPanelOwner *_ZN7AocMenuC1Ev(SelectionPanelOwner *owner)
     owner->unk1798 = 0;
     owner->unk17a0 = 0;
     owner->unk1eec = 0;
-    FUN_0047c65c(owner);
+    reinterpret_cast<AocMenu *>(owner)->initializeStepCallbacks();
     return owner;
 }
 }

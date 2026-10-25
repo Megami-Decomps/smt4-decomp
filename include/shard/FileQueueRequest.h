@@ -24,7 +24,8 @@ struct FileQueueRequest {
     };
     /* 0x28 */ u32 mode;
     /* 0x2c */ u32 bytes;
-    /* 0x30 */ u8 path[132];
+    /* 0x30 */ u8 path[128];
+    /* 0xB0 */ FileQueueRequest *next;
     /* 0xb4 */ void *context;
 };
 
@@ -33,5 +34,8 @@ typedef char FileQueueRequestOutputOffsets[
     __INTADDR__(&((FileQueueRequest *)0)->operation.state) == 8 &&
     __INTADDR__(&((FileQueueRequest *)0)->operation.result) == 0x14 &&
     __INTADDR__(&((FileQueueRequest *)0)->output.transferredBytes) == 0x24 ? 1 : -1];
+typedef char FileQueueRequestLinkOffset[
+    __INTADDR__(&((FileQueueRequest *)0)->next) == 0xb0 &&
+    __INTADDR__(&((FileQueueRequest *)0)->context) == 0xb4 ? 1 : -1];
 
 #endif

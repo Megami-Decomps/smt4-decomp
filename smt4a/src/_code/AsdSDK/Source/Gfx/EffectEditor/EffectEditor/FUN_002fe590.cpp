@@ -7,9 +7,9 @@ extern "C" {
 extern PhaseVector DAT_006352d0;     /* camera position offset */
 extern PhaseVector DAT_006352dc;     /* camera rotation (degrees) */
 extern PhaseVector DAT_006352c4;     /* orbit centre */
-extern PhaseVector DAT_006352ac;     /* orbit anchor */
+extern PhaseVector g_effectEditorCameraDefaults;     /* orbit anchor */
 extern PhaseVector DAT_006352b8;     /* up vector */
-extern u8 DAT_00634da0[];            /* the editor camera */
+extern u8 g_effectEditorCamera[];            /* the editor camera */
 extern const PhaseTrigEntry DAT_00536d14[];
 
 s32 padButtonIsPressed(u32 button);
@@ -48,9 +48,9 @@ void FUN_002fe590(void)
     if (FUN_00163fd4(18) != 0) {
         DAT_006352d0.y += 5.0f;
     }
-    offset.x = DAT_006352ac.x - DAT_006352c4.x;
-    offset.y = DAT_006352ac.y - DAT_006352c4.y;
-    offset.z = DAT_006352ac.z - DAT_006352c4.z;
+    offset.x = g_effectEditorCameraDefaults.x - DAT_006352c4.x;
+    offset.y = g_effectEditorCameraDefaults.y - DAT_006352c4.y;
+    offset.z = g_effectEditorCameraDefaults.z - DAT_006352c4.z;
     PhaseSinCos a = samplePhase(DAT_00536d14, DAT_006352dc.x * 0.71111107f);
     PhaseSinCos b = samplePhase(DAT_00536d14, DAT_006352dc.y * 0.71111107f);
     PhaseSinCos c = samplePhase(DAT_00536d14, DAT_006352dc.z * 0.71111107f);
@@ -74,7 +74,7 @@ void FUN_002fe590(void)
     eye.x = center.x + offset.x;
     eye.y = center.y + offset.y;
     eye.z = center.z + offset.z;
-    FUN_0014f0dc(DAT_00634da0, &eye, &center, &DAT_006352b8);
+    FUN_0014f0dc(g_effectEditorCamera, &eye, &center, &DAT_006352b8);
 }
 
 }

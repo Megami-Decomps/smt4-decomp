@@ -1,9 +1,8 @@
-#include "common.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
 
 int FUN_002305e8(int a);
-int placeWinStartText(void *text);
 int dialogOpen(int a, int b);
 int infoWinSetMessage(u32 a, int b);
 int scrScriptProcessDestroy(u32 process);

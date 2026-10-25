@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail keeps the random pick in r3 across btlUnitGet (same-file callee register knowledge) and holds context/count in r4/r5 the other way round. */
+/* NON_MATCHING: needs matched multifile callees btlUnitGet and FUN_004e9ae8; context/count saved registers also differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 struct BtlActionContext {
     /* 0x00 */ BtlMainStateA *battle;
@@ -9,9 +10,8 @@ struct BtlActionContext {
 extern "C" {
 extern u64 DAT_00571190;
 
-s16 FUN_004e9ae8(BtlActionContext *context, s32 *candidates, s32 count, u32 mode);
-s32 lcgRandomRange(u16 limit);
-u8 *btlUnitGet(BtlActionContext *context);
+s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *candidates, s32 count, s32 force);
+u32 lcgRandomRange(s32 limit);
 
 /* Marks one random combatant among those matching the mask as chosen in the acting unit's selection flags. */
 void FUN_004e5b5c(BtlActionContext *context)
@@ -25,8 +25,8 @@ void FUN_004e5b5c(BtlActionContext *context)
             candidates[count++] = battle->entries[i].indexView.selectionIndex;
         }
     }
-    s32 pick = lcgRandomRange(FUN_004e9ae8(context, candidates, count, 0) - 1);
-    btlUnitGet(context)[candidates[pick] + 0x38] = 1;
+    s32 pick = lcgRandomRange((u16)(FUN_004e9ae8(&context->battle, candidates, count, 0) - 1));
+    btlUnitGet(&context->battle)->selection.targeted[candidates[pick]] = 1;
 }
 
 } /* extern "C" */

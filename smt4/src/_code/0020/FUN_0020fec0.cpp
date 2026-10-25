@@ -1,8 +1,17 @@
-/* NON_MATCHING: retail contains a removed weak call on the active title subobject at +0x14; no target symbol is available. */
-#include "common.h"
+#include "title/titleMain.h"
+#include "AsdSDK/AsdDebugHooks.h"
+
 extern "C" {
-struct TitleCloseWork { u8 unk00[4]; u8 requested; };
-extern TitleCloseWork *g_titleMain;
-/* Request closure of the title work. */
-s32 FUN_0020fec0(void) { g_titleMain->requested=1; return 0; }
+extern TitleMain *g_titleMain;
+
+s32 FUN_0020fec0(u32 handle)
+{
+    TitleMain *title = g_titleMain;
+    title->freeOnEnd = 1;
+    void *target = title;
+    if (title->trace.usesSubobject != 0)
+        target = title->trace.subobject;
+    asdDebugHookPtr(target);
+    return 0;
+}
 }

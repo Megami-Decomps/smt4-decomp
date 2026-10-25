@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached draw-state push uses IP rather than R3 and schedules the dirty-clear zero later. */
+/* NON_MATCHING: the render-stack dirty-clear zero is materialized later than in retail. */
 #include "battle/btlUI.h"
 #include "camp/RenderCtx.h"
 
@@ -14,7 +14,7 @@ s32 asdTMTexTableNodeIsLoaded(u32, s32);
 s32 FUN_002c5d80(u32, u32);
 
 // Draw the lower battle UI only after both texture sets have finished loading.
-u32 FUN_001e4bf0(void)
+s32 FUN_001e4bf0(u32 job)
 {
     BtlUi *ui = g_btlUi.ui;
     if (ui) {
@@ -29,9 +29,7 @@ u32 FUN_001e4bf0(void)
         }
         if (loaded >= 9) {
             FUN_002c39a4(g_titleScene);
-            RenderCtx *context = g_titleScene;
-            s32 state = FUN_002c5d80(1, 0);
-            renderStackPush(&context->stackA, state);
+            renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
             if (FUN_0028a318())
                 FUN_001e071c(&ui->objC);
             renderStackPop(&g_titleScene->stackA);

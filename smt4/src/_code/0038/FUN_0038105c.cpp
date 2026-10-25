@@ -5,10 +5,10 @@
 extern "C" {
 
 int VectorSignedToFloat(int, int);
-int hardfp_floorf(void);
+int __hardfp_floorf(void);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: hardfp_floorf. */
+/* Supplied declaration required: __hardfp_floorf. */
 
 
 void FUN_0038105c(void)
@@ -22,7 +22,7 @@ void FUN_0038105c(void)
   float in_s2;
   
   temp_v0 = (in_s0 - in_s1) / (in_s2 - in_s1);
-  hardfp_floorf();
+  __hardfp_floorf();
   VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   return;
 }

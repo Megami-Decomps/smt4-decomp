@@ -8,7 +8,7 @@ s32 unitMatchesAlignment(u32 itemId);
 const OutfitPreviewItem *dataTable08Sub2GetRecord(u32 itemId);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 FUN_002e2114(OutfitPreview *preview);
-void FUN_002e2184(OutfitPreview *preview, const OutfitPreviewEquipment *equipment);
+void outfitPreviewConfigureEquipment(OutfitPreview *preview, const OutfitPreviewEquipment *equipment);
 void FUN_002e207c(OutfitPreview *preview);
 void FUN_003e5c68(void *modelGroup, const f32 *rotation);
 void linkHolderApplyFlag(OutfitPreview *preview, u32 enabled);
@@ -35,7 +35,7 @@ void campCecPreviewEquipmentChoice(u32 itemId)
         }
     }
     if (FUN_002e2114(reinterpret_cast<OutfitPreview *>(edit->unk04))) {
-        FUN_002e2184(reinterpret_cast<OutfitPreview *>(edit->unk04), &equipment);
+        outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(edit->unk04), &equipment);
         FUN_002e207c(reinterpret_cast<OutfitPreview *>(edit->unk04));
         OutfitPreview *preview = reinterpret_cast<OutfitPreview *>(edit->unk04);
         if (preview != NULL && preview->modelGroup != NULL) {

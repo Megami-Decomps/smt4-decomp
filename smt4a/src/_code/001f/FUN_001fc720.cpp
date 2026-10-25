@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int dataTable00FindById(void);
 int fadeObjectResetIfActive(...);
 int FUN_00288b20(...);
@@ -73,7 +73,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned char *slotRecordFindById(void);
@@ -660,7 +660,7 @@ LAB_001fd57c:
       textFormatBuffer(temp_v20,&LAB_001fddb4);
     }
     puVar15 = temp_v20;
-    FUN_0018408c(puVar15,2);
+    fontMeasureLineAdvance(puVar15,2);
     VectorSignedToFloat((int)*(short *)(temp_v12 + 8) +
                         ((int)**(short **)(temp_v12 + 0xc) - (int)puVar15) / 2 + param_1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

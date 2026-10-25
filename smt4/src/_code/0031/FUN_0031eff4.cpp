@@ -2,7 +2,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
-void FUN_002499fc(u32 group, s32 *first, s32 *count);
+void FUN_002499fc(u32 group, u32 *first, u32 *count);
 void scrSetResult(s32);
 BtlMainState *btlGetMainState(void);
 s32 scrGetArg(s32);
@@ -12,10 +12,10 @@ u32 btlScriptResolveGroupArg(s32);
 // Report whether the selected group or active entry has either pending effect.
 u32 FUN_0031eff4(void)
 {
-    s32 first, count;
+    u32 first, count;
     u32 group = btlScriptResolveGroupArg(scrGetArg(0));
     FUN_002499fc(group, &first, &count);
-    for (s32 index = first; index < count + first; ++index) {
+    for (s32 index = first; index < static_cast<s32>(count + first); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&

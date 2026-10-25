@@ -1,29 +1,16 @@
 /* NON_MATCHING: readable rewrite of the shake job update; the build fuses the old-offset loads into one vldmia, hoists the 0.01f constant and keeps the sign selects in different registers than retail, so the three-way branch layout also differs. */
-#include "common.h"
+#include "event/bustupEvent/BustupShake.h"
 
-// The work of a screen-shake job: its timing, amplitude, current offset and the two cells it writes the offset to.
-struct ShakeJobWork {
-    /* 0x00 */ f32 elapsed;
-    /* 0x04 */ f32 duration;
-    /* 0x08 */ f32 fadeStart;   // the amplitude fades out from here to the duration
-    /* 0x0c */ f32 amplitudeX;
-    /* 0x10 */ f32 amplitudeY;
-    /* 0x14 */ f32 offsetX;
-    /* 0x18 */ f32 offsetY;
-    /* 0x1c */ f32 *outputX;
-    /* 0x20 */ f32 *outputY;
-    /* 0x24 */ u8 endless;      // never ends: no timing, no fade
-};
 
 extern "C" {
-ShakeJobWork *jobGetWork(void);
+ShakeJobWork *jobGetWork(u32 job);
 s32 FUN_00184964(s32 minimum, s32 maximum);
 
 // Picks a new random shake offset (opposing the old direction while it is moving), publishes it and advances the timer;
 // returns -1 once the duration is over and the offset has been cleared.
-s32 FUN_002ac078(void)
+s32 FUN_002ac078(u32 job)
 {
-    ShakeJobWork *work = jobGetWork();
+    ShakeJobWork *work = jobGetWork(job);
     f32 one = 1.0f;
     f32 amplitudeX = work->amplitudeX;
     f32 amplitudeY = work->amplitudeY;

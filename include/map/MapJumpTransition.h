@@ -5,6 +5,13 @@
 #include <stddef.h>
 
 struct MapJumpRequest {
+    MapJumpRequest() : kind(0), map(0), entrance(0), object(0)
+    {
+        transform[0] = 0.0f;
+        transform[1] = 0.0f;
+        transform[2] = 0.0f;
+    }
+
     u8 kind;
     u8 map;
     u8 entrance;
@@ -34,6 +41,9 @@ struct MapJumpTransition {
     MapJumpDestination destination;
 };
 typedef char MapJumpTransitionLayoutCheck[offsetof(MapJumpTransition, destination) == 0x42 &&
-    sizeof(MapJumpDestination) == 6 && sizeof(MapJumpRequest) == 0x18 ? 1 : -1];
+    sizeof(MapJumpDestination) == 6 && sizeof(MapJumpRequest) == 0x18 &&
+    offsetof(MapJumpRequest, kind) == 0 && offsetof(MapJumpRequest, map) == 1 &&
+    offsetof(MapJumpRequest, entrance) == 2 && offsetof(MapJumpRequest, object) == 3 &&
+    offsetof(MapJumpRequest, transform) == 4 ? 1 : -1];
 
 #endif

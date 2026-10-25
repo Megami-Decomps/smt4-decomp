@@ -36,7 +36,7 @@ int itemTableClear(...);
 int FUN_0045adc0(...);
 int FUN_0049fc88(...);
 int FUN_002b7f18(...);
-int FUN_002d871c(...);
+int mapInterfaceUnregisterHandle(...);
 
 int FUN_0015f858(...);
 int FUN_001681c4(...);
@@ -434,7 +434,7 @@ extern int FUN_004d0584(void);
 extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: FUN_002b7f18. */
-/* Supplied declaration required: FUN_002d871c. */
+/* Supplied declaration required: mapInterfaceUnregisterHandle. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -5312,7 +5312,7 @@ LAB_002dad8c:
         piVar18 = g_lmapScene;
         g_lmapScene[0x15] = 0;
         piVar18[0x16] = 0x40a00000;
-        FUN_002d871c();
+        mapInterfaceUnregisterHandle();
         piVar18 = g_lmapScene;
         g_lmapScene[1] = g_lmapScene[1] + 1;
         piVar18[2] = 0;

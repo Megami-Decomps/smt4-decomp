@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d2140` (_code @ 0x3d2140, 0x76c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct BattleActionHistoryState;
 
 extern "C" {
 
@@ -31,7 +32,7 @@ void battleSelectButtonHelpPreset(int);
 int gameGetSlotTable(void);
 int buttonHelpSetPreset(...);
 int memClear(int, int);
-int FUN_0033a780(...);
+void FUN_0033a780(BattleActionHistoryState *state);
 int btlUiRouteSelectedAction(int *);
 int FUN_003ca32c(...);
 int battleResolveEscapeAttempt(...);
@@ -213,7 +214,7 @@ LAB_003d243c:
     FUN_00244fb0(piVar11,0,1,10,0xff);
     return piVar11;
   case 0xd:
-    FUN_0033a780(piVar11);
+    FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(piVar11));
     btlResetTransitionProgress((BtlMainState *)g_btlMain);
     *(unsigned int *)(temp_v2 + 0x10) = 0;
     FUN_00256898(0,0);

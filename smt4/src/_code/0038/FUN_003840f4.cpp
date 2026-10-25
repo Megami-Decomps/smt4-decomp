@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "classes/FloatState.h"
 #include <new>
+struct Mover;
 
 struct QuestModelState {
     /* 0x000 */ u8 unk000[0x1F6];
@@ -66,7 +67,7 @@ void FUN_002a09b4(const char *path, s32 flag);
 void modelSetAnimationChannels(QuestModel *model, s32 channels);
 void animOwnerSetScale(QuestModel *model, f32 scale);
 void FUN_002e1230(QuestModel *model, s32 flag);
-void FUN_00235250(void);
+void FUN_00235250(Mover *mover);
 void FUN_00234f5c(QuestTalkWork *talk, const char *name, s32 flag);
 void asdLoadFileAsyncSimple(const char *path, u32 *handle, s32 flags);
 void FUN_00287704(u32 area);
@@ -142,7 +143,7 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         new (&talk->state) FloatState();
     }
     scene->talk = talk;
-    FUN_00235250();
+    FUN_00235250(reinterpret_cast<Mover *>(talk));
     FUN_00234f5c(scene->talk, areaNames[scene->area], 0);
     nodeOwnerSetEnabled(reinterpret_cast<NodeEnableOwner *>(scene->talk), 0);
 

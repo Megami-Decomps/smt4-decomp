@@ -3,14 +3,14 @@
 extern "C" {
 
 int btlTalkBustUpDestroy(void);
-int FUN_00296774(int, int);
+int resultSetMenuState(int, int);
 int FUN_0029e788(void);
 int FUN_0029e874(int);
 int scrScriptProcessDestroy(unsigned int);
 int asdMemFree(unsigned int);
 
 /* Supplied declaration required: btlTalkBustUpDestroy. */
-/* Supplied declaration required: FUN_00296774. */
+/* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -30,12 +30,12 @@ unsigned int FUN_0029541c(int param_1)
   temp_v0 = *(int *)(param_1 + 0xcf78) + 1;
   *(int *)(param_1 + 0xcf78) = temp_v0;
   if (*(int *)(param_1 + 0xcf74) == temp_v0) {
-    FUN_00296774(param_1,0x14);
+    resultSetMenuState(param_1,0x14);
     return 0;
   }
   FUN_0029e874(1);
   FUN_0029e788();
-  FUN_00296774(param_1,9);
+  resultSetMenuState(param_1,9);
   return 1;
 }
 

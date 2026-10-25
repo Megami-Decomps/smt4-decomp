@@ -7,7 +7,7 @@ extern "C" {
 int gameGetUnitRecord(...);
 int gameGetPlayerData(void);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002b6dd8(int [2], int);
+int fontMeasureLineAdvance(int [2], int);
 int FUN_002bdf94(int, int, int, int);
 int drawSetColorFromRGBA8(unsigned int);
 int FUN_002be5a4(int, unsigned int, int [2]);
@@ -49,7 +49,7 @@ extern unsigned char LAB_0025217c; /* 0x25217c */
 /* Supplied declaration required: gameGetUnitRecord. */
 extern unsigned int categoryGetColor(int);
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -105,7 +105,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
               }
             }
             temp_v3 = FUN_002bf4f8(0x19,0x11);
-            FUN_002b6dd8(temp_v10,1);
+            fontMeasureLineAdvance(temp_v10,1);
             temp_v1 = *(short *)(temp_v3 + 8);
             temp_v2 = **(short **)(temp_v3 + 0xc);
             temp_v5 = 0xffffffff;

@@ -33,7 +33,7 @@ extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern int FUN_002adee0(void);
+extern int modelHasLoadedAttachment(void);
 /* Supplied declaration required: FUN_002b2ae8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: objectValueGetChecked. */
@@ -63,7 +63,7 @@ void FUN_00297684(int param_1)
   
   if ((*(int *)(param_1 + 4) != 0) && (*(int *)(param_1 + 4) == 1)) {
     if (*(int *)(param_1 + 8) != 0) {
-      temp_v0 = FUN_002adee0();
+      temp_v0 = modelHasLoadedAttachment();
       if (temp_v0 != 0) {
         if (*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0xc) < 0) {
           FUN_002a0428(*(int *)(param_1 + 8),*(unsigned int *)(param_1 + 0xc));
@@ -118,7 +118,7 @@ void FUN_00297684(int param_1)
     puVar9 = (unsigned int *)(temp_v3 + 0x10);
     switch(*puVar9) {
     case 1:
-      if ((*(int *)(temp_v3 + 0x18) != 0) && (temp_v4 = FUN_002adee0(), temp_v4 != 0)) {
+      if ((*(int *)(temp_v3 + 0x18) != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 != 0)) {
         FUN_002b2ae8(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v9);
         objectValueGetChecked(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v10);
         if (*(int *)(*(int *)(*(int *)(temp_v3 + 0x18) + 8) + 0xc) < 0) {

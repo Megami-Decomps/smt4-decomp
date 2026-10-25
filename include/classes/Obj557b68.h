@@ -112,6 +112,13 @@ public:
     u32 unk104;                       // 0x104
     Obj557b68EntryVector entries;     // 0x108
     Obj557b68WordVector records[8];   // 0x114
+    u8 unk174[8];                    // 0x174
+    f32 fogStart;                    // 0x17C
+    f32 fogEnd;                      // 0x180
+    f32 fogOffset;                   // 0x184
+    f32 fogScale;                    // 0x188
+    f32 fogPower;                    // 0x18C
+    u8 fogColor[4];                  // 0x190
 };
 
 typedef char Obj557b68LayoutCheck[offsetof(Obj557b68, layer) == 0x10 && offsetof(Obj557b68Layer, matrixA) == 0x10 &&
@@ -119,6 +126,7 @@ typedef char Obj557b68LayoutCheck[offsetof(Obj557b68, layer) == 0x10 && offsetof
     offsetof(Obj557b68Layer, unk0e4) == 0xD4 && sizeof(Obj557b68Layer) == 0xDC &&
     offsetof(Obj557b68, tail) == 0xEC && offsetof(Obj557b68, unk104) == 0x104 &&
     offsetof(Obj557b68, entries) == 0x108 && offsetof(Obj557b68, records) == 0x114 &&
-    sizeof(Obj557b68) == 0x174 ? 1 : -1];
+    offsetof(Obj557b68, fogStart) == 0x17C && offsetof(Obj557b68, fogColor) == 0x190 &&
+    sizeof(Obj557b68) == 0x194 ? 1 : -1];
 
 #endif

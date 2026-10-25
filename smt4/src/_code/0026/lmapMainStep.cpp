@@ -16,7 +16,7 @@ typedef struct LmapMain00265110 {
 
 void FUN_0026493c(LmapMain00265110 *main);
 void FUN_00265180(void);
-void FUN_00265bf8(LmapMain00265110 *main);
+void mapUpdateFollowerModels(LmapMain00265110 *main);
 void FUN_00265f50(LmapMain00265110 *main);
 void FUN_002fb7dc(void);
 
@@ -36,7 +36,7 @@ void lmapMainStep(void)
         }
     }
     FUN_00265f50(main);
-    FUN_00265bf8(main);
+    mapUpdateFollowerModels(main);
     if (g_lmapMainState->progress != 100) {
         FUN_00265180();
     }

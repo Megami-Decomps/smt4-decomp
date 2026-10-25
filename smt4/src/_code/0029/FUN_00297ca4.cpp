@@ -3,7 +3,7 @@
 
 extern "C" {
 BattleCommandEntry *FUN_00292960(u8 index, int primary);
-s32 FUN_00293988(void);
+u32 FUN_00293988(void *scene);
 s32 FUN_0023dcb8(void);
 s32 idOwnerHasActiveObject(void *unit);
 s8 *gameGetSlotTable(void);
@@ -28,8 +28,7 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
             continue;
         if (command->kind != 5) {
             if (command->kind == 2) {
-                btlGetMainState();
-                if (FUN_00293988() == 0)
+                if (FUN_00293988(btlGetMainState()) == 0)
                     continue;
                 if ((btlGetMainState()->flags & 0x40000) != 0)
                     continue;

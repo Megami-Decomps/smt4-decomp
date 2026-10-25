@@ -1,57 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00482f20` (_code @ 0x482f20, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: kind-load predication and release-vtable load scheduling differ. */
+#include "map/ControllerPool.h"
 
-extern "C" {
-
-typedef int romwright_code(...);
-
-void FUN_00482f20(int param_1)
-
+static __inline void controllerPoolReleaseSlot(ControllerPool *pool, s32 index)
 {
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int unaff_r7;
-  unsigned char temp_v2;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 4;
-    piVar1 = *(int **)(temp_v1 + 0x18);
-    if (piVar1 != (int *)0x0) {
-      temp_v2 = (*(unsigned char *)(piVar1 + 3) & 1) == 0;
-      if (temp_v2) {
-        unaff_r7 = piVar1[2];
-      }
-      if (!temp_v2) {
-        (**(romwright_code **)(*piVar1 + 0xc))();
-        piVar1 = *(int **)(temp_v1 + 0x18);
-        if (((*(unsigned char *)(piVar1 + 3) & 1) != 0) || (piVar1 == (int *)0x0)) {
-          temp_v0 = temp_v0 + 1;
-          if (temp_v0 >= 0x20) {
-            return;
-          }
-          continue;
-        }
-        unaff_r7 = piVar1[2];
-        (**(romwright_code **)(*piVar1 + 4))();
-        *(unsigned int *)(temp_v1 + 0x18) = 0;
-      }
-      else {
-        (**(romwright_code **)(*piVar1 + 4))();
-        *(unsigned int *)(temp_v1 + 0x18) = 0;
-      }
-      if (unaff_r7 == 0) {
-        *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) - 1;
-      }
-      *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) - 1;
+    Controller *controller = pool->slots[index];
+    if (controller != NULL) {
+        s32 kind = controller->lifecycle.kind;
+        controller->vtable->lifetime.release(controller);
+        pool->slots[index] = NULL;
+        if (kind == 0)
+            --pool->firstKindCount;
+        --pool->count;
     }
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x20) {
-      return;
-    }
-  } while( 1 );
 }
 
-} /* extern "C" */
+// Update active controllers and release every controller that has finished.
+extern "C" void FUN_00482f20(ControllerPool *pool)
+{
+    for (s32 i = 0; i < 32; ++i) {
+        Controller *controller = pool->slots[i];
+        if (controller != NULL) {
+            if ((controller->lifecycle.flags & 1) == 0) {
+                controllerPoolReleaseSlot(pool, i);
+            } else {
+                static_cast<const ControllerLifecycleVtable *>(controller->vtable)->update(controller);
+                if ((pool->slots[i]->lifecycle.flags & 1) == 0)
+                    controllerPoolReleaseSlot(pool, i);
+            }
+        }
+    }
+}

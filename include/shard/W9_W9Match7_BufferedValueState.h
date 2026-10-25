@@ -7,7 +7,7 @@ struct BufferedValueEntry {
     /* 0x00 */ u8 unk00[0x2C];
     /* 0x2C */ u32 primary;
     /* 0x30 */ u8 unk30[8];
-    /* 0x38 */ u8 ready;
+    /* 0x38 */ s8 ready;
     /* 0x39 */ u8 unk39[7];
 };
 struct BufferedValueState {

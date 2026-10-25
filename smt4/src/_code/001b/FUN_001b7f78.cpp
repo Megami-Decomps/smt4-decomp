@@ -241,7 +241,7 @@ int FUN_00289880(void);
 int FUN_00297060(...);
 int textFormatBuffer(...);
 int NaviMain_SetCurrentMap(...);
-int NaviMain_Start(...);
+void NaviMain_Start(int unused, int requestId);
 int mapRangeWorkReset(void);
 int mapDepartRequest(...);
 int FUN_001e3284(void);
@@ -712,7 +712,6 @@ extern int FUN_00328b1c(int);
 /* Supplied declaration required: MapEpl_Init. */
 /* Supplied declaration required: MapIf_Register. */
 /* Supplied declaration required: NaviMain_SetCurrentMap. */
-/* Supplied declaration required: NaviMain_Start. */
 /* Supplied declaration required: mapIfResetTimer. */
 /* Supplied declaration required: mapEnemyStopJob. */
 /* Supplied declaration required: mapRangeWorkReset. */

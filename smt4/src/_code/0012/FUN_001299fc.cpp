@@ -13,7 +13,7 @@ extern NngxCommandPrefixIV DAT_00431c40;
 void nn_os_CriticalSection_Enter(u32 *criticalSection);
 void nn_os_CriticalSection_Leave(u32 *criticalSection);
 void FUN_002c1398(void);
-void FUN_0013b218(void);
+void FUN_0013b218(NngxCommandPrefixIV *commandState);
 u32 libc_strlen(const char *text);
 void asdModelForwardChecked(u32 *destination, const char *source,
                             u32 length, s32 flags);
@@ -60,7 +60,7 @@ void FUN_001299fc(void)
     DAT_00431c40.word6c = 0;
     DAT_00431c40.byte70 = 1;
     g_nngxState.commandState = &DAT_00431c40;
-    FUN_0013b218();
+    FUN_0013b218(&DAT_00431c40);
     nn_os_CriticalSection_Leave(&g_nngxCriticalSection);
 }
 }

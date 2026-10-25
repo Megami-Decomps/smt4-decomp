@@ -17,7 +17,7 @@ struct MessageOwner {
     /* 0x940 */ u16 helpPreset;
 };
 
-void FUN_00232698(void);
+void touchLayoutRebuildRegions(void);
 void buttonHelpSetPreset(u32 preset);
 void messageMainFinishWindow(void);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 index);
@@ -31,7 +31,7 @@ void messageOwnerSetState(MessageOwner *owner, s32 state)
     previous = owner->state;
     owner->state = state;
     if (state == 2) {
-        FUN_00232698();
+        touchLayoutRebuildRegions();
         if (previous != 4 && previous != 5) {
             buttonHelpSetPreset(owner->helpPreset & 0xff);
         }

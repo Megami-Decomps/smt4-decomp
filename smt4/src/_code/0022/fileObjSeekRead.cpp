@@ -19,7 +19,7 @@ typedef struct FileObj {
     /* 0x8 */ u32 handle;
 } FileObj;
 
-extern void FUN_002c3510(s32 result);
+extern void FUN_002c3510(u32 result);
 extern void asdFatalError(void);
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
@@ -42,10 +42,10 @@ s32 fileObjSeekRead(FileObj *file, u32 offset, u32 buffer, u32 size)
         }
         return result;
     }
-    s32 ok = 0;
+    result = 0;
 
-    FUN_002c3510(ok);
-    return ok;
+    FUN_002c3510(result);
+    return result;
 }
 
 }

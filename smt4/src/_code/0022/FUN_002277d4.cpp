@@ -1,5 +1,6 @@
-/* NON_MATCHING: register assignment (retail keeps the skill record in r9 and the usable flag on the stack next to the out buffer); the checks are the same (182 vs 184 rows). */
+/* NON_MATCHING: final target-marking loops and the early-success state stores use permuted scratch registers; target mask offset and one-byte output now match retail. */
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
@@ -22,11 +23,14 @@ typedef struct SkillTarget {
     /* 0x008 */ s16 slot;
     /* 0x00A */ u8 unk00a[0x64];
     /* 0x06E */ s16 markIndex;
-    /* 0x070 */ u8 unk070[0x56];
-    /* 0x0C6 */ u16 categoryMask;
-    /* 0x0C8 */ u8 unk0c8[6];
+    /* 0x070 */ u8 unk070[0x5E];
     /* 0x0CE */ u16 recordId;
+    /* 0x0D0 */ u8 unk0D0[0xF6];
+    /* 0x1C6 */ u16 categoryMask;
 } SkillTarget;
+typedef char SkillTargetOffsetsCheck[
+    offsetof(SkillTarget, recordId) == 0xCE &&
+    offsetof(SkillTarget, categoryMask) == 0x1C6 ? 1 : -1];
 
 typedef struct SkillCaster {
     /* 0x00 */ u8 unk00[0x62];
@@ -50,7 +54,7 @@ typedef struct SkillContext {
 
 s32 FUN_0029e9cc(u16 recordId);
 u16 categoryMaskFromId(u8 category);
-s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 out[8]);
+s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
 
 /* Checks whether skill `skill` can be used on the candidate `targets` (`count` of them) in the
@@ -96,16 +100,14 @@ u32 FUN_002277d4(u32 unused, SkillContext *context, SkillRecord *skill, SkillTar
         return 0;
     }
     s32 usable = 0;
-    u8 out[8];
-
-    out[0] = 0;
+    u8 out = 0;
     for (u32 i = 0; i < count; i++) {
         s32 blocked = 0;
 
         if ((targets[i]->flags & 0x400) != 0 && FUN_0029e9cc(targets[i]->recordId) != 0) {
             context->outcome->state = 2;
             context->outcome->skillId = skill->id;
-            s32 result = FUN_00228220(skill->id, 0, 2, context->caster->slot, targets[i]->slot, 0, 1, out);
+            s32 result = FUN_00228220(skill->id, 0, 2, context->caster->slot, targets[i]->slot, 0, 1, &out);
 
             if (result == 1 || result == 2 || result == 3) {
                 blocked = 1;
@@ -133,7 +135,7 @@ u32 FUN_002277d4(u32 unused, SkillContext *context, SkillRecord *skill, SkillTar
     }
     context->outcome->state = 2;
     context->outcome->skillId = skill->id;
-    for (u32 i = 0; i < count; i++) {
+    for (s32 i = 0; i < count; i++) {
         if ((targets[i]->flags & 0x400) != 0) {
             context->marks[targets[i]->markIndex] = 1;
         }

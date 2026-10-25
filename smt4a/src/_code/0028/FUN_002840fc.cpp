@@ -1,19 +1,12 @@
-#include "common.h"
+#include "shard/W5_W5Match6_CallbackController.h"
 
 extern "C" {
+u32 eventRowUpdateState(void *object, u32 handle);
 
-struct CallbackOwner {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ void *object;
-};
-extern CallbackOwner g_callbackController;
-void FUN_0049f084(void *object, void *argument);
-s32 FUN_002840fc(void *argument)
+s32 FUN_002840fc(u32 handle)
 {
-    if (g_callbackController.object != NULL) {
-        FUN_0049f084(g_callbackController.object, argument);
-    }
+    if (g_callbackController.work != NULL)
+        eventRowUpdateState(g_callbackController.work, handle);
     return 0;
 }
-
-} /* extern "C" */
+}

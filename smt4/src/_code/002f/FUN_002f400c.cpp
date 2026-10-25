@@ -26,7 +26,7 @@ extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002ad8b4. */
-extern int FUN_002adee0(int);
+extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: textFormatBuffer. */
 extern char *dataTable2cSub1GetRecord(int);
 /* Supplied declaration required: dataTable2cSub1GetCount. */
@@ -58,7 +58,7 @@ unsigned int FUN_002f400c(void)
         if (temp_v1 == 0xb) {
           temp_v2 = DAT_00447e10[1];
           piVar7 = DAT_00447e10 + temp_v2 * 0xb + 0x445;
-          temp_v1 = FUN_002adee0(DAT_00447e10[temp_v2 * 0xb + 0x44d]);
+          temp_v1 = modelHasLoadedAttachment(DAT_00447e10[temp_v2 * 0xb + 0x44d]);
           if (temp_v1 == 0) {
             return 0;
           }
@@ -243,7 +243,7 @@ LAB_002f45c4:
   else {
     temp_v2 = DAT_00447e10[1];
     piVar7 = DAT_00447e10 + temp_v2 * 0xb + 0x4a8;
-    temp_v1 = FUN_002adee0(DAT_00447e10[temp_v2 * 0xb + 0x4b0]);
+    temp_v1 = modelHasLoadedAttachment(DAT_00447e10[temp_v2 * 0xb + 0x4b0]);
     if (temp_v1 != 0) {
       *(unsigned char *)piVar7 = 1;
       *(unsigned char *)((int)piVar3 + temp_v2 * 0x2c + 0x12a1) = 1;

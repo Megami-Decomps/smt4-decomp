@@ -7,7 +7,7 @@ extern "C" {
 int fadeObjectResetIfActive(...);
 int FUN_0029a284(...);
 int dataTable00FindById(void);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 
 int FUN_0029a17c(...);
 int FUN_0029a924(...);
@@ -77,7 +77,7 @@ extern int FUN_0029efa8(void);
 extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b6c34. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -593,7 +593,7 @@ LAB_00187ce0:
       textFormatBuffer(temp_v16,&LAB_0018851c);
     }
     puVar12 = temp_v16;
-    FUN_002b6dd8(temp_v16,2);
+    fontMeasureLineAdvance(temp_v16,2);
     VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v8 + 8) +
                         ((int)**(short **)(temp_v8 + 0xc) - (int)puVar12) / 2 + param_1,

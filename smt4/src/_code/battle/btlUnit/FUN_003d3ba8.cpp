@@ -165,7 +165,7 @@ extern int slotTableValueReducedByRecord(unsigned int);
 extern int FUN_003d98a0(int, int);
 extern int btlGetMaximumNamedValue(int);
 /* Supplied declaration required: btlLookupEffectValue. */
-extern unsigned int FUN_003dcf34(int);
+extern unsigned int btlFindEffectNameValue(int);
 /* Supplied declaration required: btlReflectCreateKind1c. */
 /* Supplied declaration required: FUN_003dda20. */
 /* Supplied declaration required: FUN_003ddae8. */
@@ -819,7 +819,7 @@ LAB_003d444c:
     temp_v12 = 0;
     FUN_003de60c(0,param_2,5);
   }
-  if ((temp_v13 != 0) && (temp_v12 = FUN_003dcf34(DAT_00435d18), -1 < (int)temp_v12)) {
+  if ((temp_v13 != 0) && (temp_v12 = btlFindEffectNameValue(DAT_00435d18), -1 < (int)temp_v12)) {
     temp_v12 = FUN_003de9b0(temp_v12,param_2,5);
   }
   temp_v11 = 0;

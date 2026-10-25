@@ -2,7 +2,9 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "font/PlaceWin.h"
 
+struct Mover;
 extern "C" {
 
 int FUN_0022afb0(...);
@@ -14,8 +16,7 @@ int FUN_0022b6c4(int);
 int FUN_00234cd8(...);
 void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_00234f5c(...);
-int FUN_00235250(void);
-int placeWinStartText(...);
+void FUN_00235250(Mover *mover);
 int frameTexApplyMode(...);
 int FUN_00275dec(void);
 int dialogOpen(...);
@@ -321,7 +322,7 @@ void FUN_003ba998(int param_1)
         temp_v6 = temp_v6 - 0x4cc;
       }
       *(int *)(param_1 + 0xe5c) = temp_v6;
-      FUN_00235250();
+      FUN_00235250(reinterpret_cast<Mover *>(temp_v6));
       textFormatBuffer(temp_v9,&LAB_003bb08c,*(int *)(param_1 + 0xd5c) + 0x40);
       if (((*(short *)(*(int *)(param_1 + 0xd5c) + 100) != 0) &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) ||
@@ -377,7 +378,7 @@ void FUN_003ba998(int param_1)
       dialogOpen(0);
       infoWinSetMessage(*(unsigned int *)(param_1 + 0xd80),
                    *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
-      placeWinStartText(*(int *)(param_1 + 0xd5c) + 2);
+      placeWinStartText(reinterpret_cast<const u8 *>(*(int *)(param_1 + 0xd5c) + 2));
       FUN_002305e8(1);
       FUN_0022af9c(1);
       return;

@@ -1,42 +1,33 @@
-/* NON_MATCHING: same instruction sequence and calls; only register allocation of the zero/constants differs (retail keeps the zero in r3 and loads the two callbacks into r1/r2; the build uses r1 for the zero and r3/r2 for the callbacks). */
+/* NON_MATCHING: process callback/zero registers differ, and armcc rematerializes the zero before process creation. */
 #include "AsdSDK/AsdDebug.h"
+#include "event/bustupEvent/BustupShake.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-/* The bust-up shake job's work (0x24 bytes). */
-struct BustupShakeWork {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ f32 center;
-    /* 0x08 */ f32 low;
-    /* 0x0C */ f32 amplitudeX;
-    /* 0x10 */ f32 amplitudeY;
-    /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
-    /* 0x1C */ u32 first;
-    /* 0x20 */ u32 second;
-};
 
 extern "C" {
 
 s32 FUN_002c1d5c(void);
-void *asdMemAlloc(u32 size, u32 alignment, u32 heap, u32 tag, u32 flags);
-void randomOffsetJobUpdate(void *work);
-void jobWorkFreeWork(void *work);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u16 arg2, u16 arg3,
-                           void (*update)(void *), void (*destroy)(void *), void *work);
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+s32 randomOffsetJobUpdate(u32 job);
+void jobWorkFreeWork(u32 job);
+u32 asdProcessCreateSimple(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 
 // Starts the shaking job for the bust-up display unless the effect is disabled; returns the job.
-u32 FUN_002ebe68(f32 amplitude, f32 center, u32 first, u32 second)
+u32 FUN_002ebe68(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration)
 {
     if (FUN_002c1d5c() == 0) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\event\\bustupEvent\\BustupEffect.cpp", 137);
-        BustupShakeWork *work = (BustupShakeWork *)asdMemAlloc(0x100, 0x100, 0, 0x24, 1);
-        *work = BustupShakeWork();
-        work->low = center - 10.0f;
-        work->first = first;
-        work->second = second;
-        work->center = center;
+        ShakeJobWorkIV *work = (ShakeJobWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(ShakeJobWorkIV), 1);
+        *work = ShakeJobWorkIV();
+        work->fadeStart = duration - 10.0f;
+        work->outputX = outputX;
+        work->outputY = outputY;
+        work->duration = duration;
         work->amplitudeX = amplitude;
         work->amplitudeY = amplitude;
-        return asdProcessCreateSimple("EVE_BustupShake", 2, 0, 0, randomOffsetJobUpdate, jobWorkFreeWork, work);
+        return asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_BustupShake"), 2, 0, 0, randomOffsetJobUpdate,
+            jobWorkFreeWork, reinterpret_cast<u32>(work));
     }
     return 0;
 }

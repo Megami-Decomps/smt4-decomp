@@ -4,8 +4,8 @@
 extern "C" {
 extern EffectSelectionContext DAT_0059e9a8;
 extern EffectSelectionCatalogEntry *DAT_0059e624[13];
-extern u8 DAT_00634bc0[0x90];
-extern u8 DAT_00634d20[0x80];
+extern u8 g_effectEditorSettings[0x90];
+extern u8 g_effectEditorSavedSnapshot[0x80];
 EffectSelectionItem *linkedFindItemByIndex(void *owner, s32 index);
 EffectSelectionItem *FUN_00376628(void *owner, EffectSelectionBlock *block);
 EffectSelectionItem *nodeListFindByKey(void *owner, u32 key);
@@ -52,8 +52,8 @@ extern "C" u32 FUN_003c597c()
     if (sourceView->flags & 2)
         previous = nodeListFindByKey(g_effectEditor.selection.list, sourceView->related);
     FUN_003c2df0(g_effectEditor.selection.list, copy, previous);
-    __aeabi_memcpy4(DAT_00634bc0, copy, 0x90);
-    __aeabi_memcpy4(DAT_00634d20, copy, 0x80);
+    __aeabi_memcpy4(g_effectEditorSettings, copy, 0x90);
+    __aeabi_memcpy4(g_effectEditorSavedSnapshot, copy, 0x80);
     g_effectEditor.selection.block = copy->block;
     EffectSelectionParts *parts = FUN_002b30e4(copy);
     libc_strcpy(reinterpret_cast<ItemView *>(copy)->name, reinterpret_cast<const char *>(parts->unk00));

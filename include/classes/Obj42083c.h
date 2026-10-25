@@ -3,7 +3,7 @@
 
 #include "classes/Obj420794.h"
 
-extern "C" int asdOperatorDelete(void *block);
+extern "C" void asdOperatorDelete(void *block);
 
 /* A screen filter (vtable at 0x42083c, named after it until its real name is known) with one more
  * block, freed with the engine's delete. */

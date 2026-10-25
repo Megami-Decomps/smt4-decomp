@@ -16,7 +16,7 @@ int infoWinSetText(...);
 int btlTalkBustUpSetDemonTexture(...);
 int FUN_003450d4(...);
 int obj04Finish(void);
-int FUN_00359b6c(...);
+int skillHelpUpdateAttributeAndTarget(...);
 int btlTalkBustUpSetUnk2F4(...);
 int screenStartOrClear(...);
 int whisperEffectStart(...);
@@ -121,7 +121,7 @@ extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: FUN_00359b6c. */
+/* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 extern int btlTalkBustupMatchesEntry(unsigned short);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: whisperEffectFinish. */
@@ -703,7 +703,7 @@ LAB_0026e1e4:
     FUN_00203b40(temp_v30,temp_v8,temp_v8,1,1,1);
     FUN_00203b40(temp_v26,temp_v28 + 1,9,1,1,1);
     temp_v9 = FUN_002a4894(temp_v26);
-    FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
+    skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
     temp_v14 = 0;
     temp_v9 = objectApplyIfUnblocked(temp_v30);
     if (0 < temp_v9) {
@@ -925,7 +925,7 @@ LAB_0026e66c:
         return;
       }
       temp_v6 = FUN_002a4894(temp_v26);
-      FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
+      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
       return;
     }
     temp_v9 = 0;
@@ -1023,7 +1023,7 @@ LAB_0026d5fc:
         do {
           if (*(short *)(param_1 + temp_v20 * 2 + 0x76a4) == 0) {
             flaggedEntrySetValueA(param_1 + 0x75dc,temp_v20);
-            FUN_00359b6c(0);
+            skillHelpUpdateAttributeAndTarget(0);
             goto LAB_0026d4c4;
           }
           if ((!temp_v22) && (temp_v11 = recordContainsPairedId(temp_v5), temp_v11 == 0)) {
@@ -1060,7 +1060,7 @@ LAB_0026d4c4:
       }
       else {
         temp_v5 = FUN_002a4894(temp_v30);
-        FUN_00359b6c(*(unsigned short *)(param_1 + temp_v5 * 2 + 0x76a4));
+        skillHelpUpdateAttributeAndTarget(*(unsigned short *)(param_1 + temp_v5 * 2 + 0x76a4));
         temp_v8 = 4;
       }
       *(unsigned int *)(param_1 + 0x436c) = temp_v8;
@@ -1094,7 +1094,7 @@ LAB_0026d4c4:
       }
       FUN_002a4894(temp_v30);
       temp_v6 = FUN_002a4894(temp_v30);
-      FUN_00359b6c(*(unsigned short *)(param_1 + temp_v6 * 2 + 0x76a4));
+      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(param_1 + temp_v6 * 2 + 0x76a4));
     }
     else {
       temp_v6 = 0;
@@ -1180,7 +1180,7 @@ LAB_0026d4c4:
     temp_v6 = *(int *)(param_1 + 0x436c);
     if (temp_v6 == 3) {
       temp_v6 = FUN_002a4894(temp_v26);
-      FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
+      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
       return;
     }
     break;
@@ -1272,14 +1272,14 @@ LAB_0026db30:
         uiSpriteSelectAnim(temp_v6 + 0x8e0,0);
         *(unsigned int *)(param_1 + 0x436c) = 3;
         temp_v6 = FUN_002a4894(temp_v26);
-        FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
+        skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
         return;
       }
     }
     temp_v6 = *(int *)(param_1 + 0x436c);
     if (temp_v6 == 3) {
       temp_v6 = FUN_002a4894(temp_v26);
-      FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
+      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0x34));
       return;
     }
   }

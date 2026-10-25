@@ -13,7 +13,7 @@ int FUN_002c198c(...);
 
 int gameDataGetPlayerName(void);
 int libc_bsearch(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002bf288(...);
@@ -55,7 +55,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -144,7 +144,7 @@ unsigned int FUN_001a26dc(void)
       textFormatBuffer(temp_v11,&LAB_001a2ab0);
     }
     puVar6 = temp_v11;
-    FUN_002b6dd8(puVar6,2);
+    fontMeasureLineAdvance(puVar6,2);
     temp_v8 = (int)*(short *)(temp_v7 + 8) + ((int)**(short **)(temp_v7 + 0xc) - (int)puVar6) / 2;
     VectorSignedToFloat(*(short *)(temp_v7 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -221,7 +221,7 @@ unsigned int FUN_001a26dc(void)
       }
       temp_v8 = FUN_002bf4f8(0x1e,6);
       puVar6 = temp_v11;
-      FUN_002b6dd8(puVar6,2);
+      fontMeasureLineAdvance(puVar6,2);
       temp_v9 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) +
                ((int)**(short **)(temp_v8 + 0xc) - (int)puVar6) / 2;
       VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10),
@@ -309,7 +309,7 @@ unsigned int FUN_001a26dc(void)
     }
     temp_v4 = FUN_002bf4f8(0x1e,0x17);
     puVar6 = temp_v11;
-    FUN_002b6dd8(puVar6,3);
+    fontMeasureLineAdvance(puVar6,3);
     temp_v7 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) +
              ((int)**(short **)(temp_v4 + 0xc) - (int)puVar6) / 2;
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10),

@@ -32,7 +32,7 @@ extern int FUN_0023dcb8(void);
 extern int idOwnerHasActiveObject(int);
 /* Supplied declaration required: FUN_00292960. */
 extern int flagBitIsSet(void);
-extern int FUN_00293988(void);
+extern unsigned int FUN_00293988(void *scene);
 /* Supplied declaration required: btlGetMainState. */
 extern int objectPartRunUnlessLocked(int);
 extern unsigned int FUN_0029e958(int);
@@ -116,8 +116,7 @@ void FUN_0025ee64(int param_1)
               (temp_v10 = btlGetMainState(), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) == 0)))) {
             if (*pcVar11 != '\x05') {
               if (*pcVar11 == '\x02') {
-                btlGetMainState();
-                temp_v10 = FUN_00293988();
+                temp_v10 = FUN_00293988(reinterpret_cast<void *>(btlGetMainState()));
                 if ((temp_v10 == 0) ||
                    (temp_v10 = btlGetMainState(), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) != 0))
                 goto LAB_0025f1b8;

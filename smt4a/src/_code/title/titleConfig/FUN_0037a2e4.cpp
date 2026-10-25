@@ -1,6 +1,7 @@
 /* NON_MATCHING: the save-block byte reads (0x27E90..0x27E94) and the settings global take different registers/address forms (retail loads each offset from a literal, ours shares one base), and the frame needs r7 */
 #include "title/titleConfig.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
@@ -37,7 +38,7 @@ void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void sysPlaySe(s32 sound);
 void FUN_0019de98(s32 channel, u32 color);
 s32 campIsState85(void);
-u8 *gameDataBlocksGetSaveData(void);
+GameDataBlock *gameDataBlocksGetSaveData(void);
 u32 categoryGetThresholdIndex(u8 value);
 u32 findByteThresholdTier(u8 value);
 u32 thresholdIndexFind(u8 value);
@@ -69,12 +70,12 @@ void FUN_0037a2e4(void)
     sysPlaySe(0x9b);
     FUN_0019de98(0, 0xf4f4f4ff);
     if (campIsState85() != 0) {
-        u8 *save = gameDataBlocksGetSaveData();
-        if (save[0x27E94] != 0) {
-            config->settingIndex[0] = categoryGetThresholdIndex(save[0x27E90]);
-            config->settingIndex[1] = findByteThresholdTier(save[0x27E91]);
-            config->settingIndex[2] = thresholdIndexFind(save[0x27E92]);
-            *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(&save[0x27E90]);
+        GameDataBlock *save = gameDataBlocksGetSaveData();
+        if (save->unk27E94[0] != 0) {
+            config->settingIndex[0] = categoryGetThresholdIndex(reinterpret_cast<u8 *>(&save->unk27E90)[0]);
+            config->settingIndex[1] = findByteThresholdTier(reinterpret_cast<u8 *>(&save->unk27E90)[1]);
+            config->settingIndex[2] = thresholdIndexFind(reinterpret_cast<u8 *>(&save->unk27E90)[2]);
+            *reinterpret_cast<u64 *>(config->saved) = *reinterpret_cast<u64 *>(&save->unk27E90);
             config->saved[4] = DAT_00588fc0.changed;
             return;
         }

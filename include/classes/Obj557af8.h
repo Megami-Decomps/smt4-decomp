@@ -47,7 +47,7 @@ public:
 class Obj557af8 : public AsdAnimCameraState {
 public:
     Obj557af8(const AsdAnimCameraResource *resource);
-    virtual ~Obj557af8() = 0;
+    virtual ~Obj557af8();
 
     /* 0x00: vtable pointer */
     /* 0x04: AsdAnimCameraState */

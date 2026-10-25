@@ -1,8 +1,9 @@
-/* NON_MATCHING: R7/R8 zero/global allocation differs; motion comparison keeps the model pointer live rather than retail's R0 result, hint NOP and reload. */
+/* NON_MATCHING: the motion getter now matches; the saved registers holding zero and the range-work global are exchanged. */
 #include "shard/W4_Match1b_Node.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
+struct Inner0020ffe0;
 namespace {
 struct RangeModel {
     /* 0x00 */ NodeOwner transform;
@@ -61,6 +62,7 @@ void nodeSetTranslation(NodeOwner*, u32, const NodeVec3*);
 void FUN_0028c618(NodeOwner*, u32, f32, f32, f32);
 void modelSelectPrimaryMotion(RangeModel*, s32, f32);
 void modelSelectSecondaryMotion(RangeModel*, s32, f32);
+u32 modelGetCurrentMotion(Inner0020ffe0 *model);
 
 /* Apply visibility and queued transforms to the sixteen active range entries. */
 void mapRangeUpdateModelVisibilityAndTransforms()
@@ -90,7 +92,7 @@ void mapRangeUpdateModelVisibilityAndTransforms()
             if (entry->transformPending) {
                 nodeSetTranslation(&binding->model->transform, 0, &entry->position);
                 FUN_0028c618(&binding->model->transform, 0, 0.0f, entry->heading, 0.0f);
-                if (binding->model->motion != entry->motion) {
+                if ((s32)modelGetCurrentMotion(reinterpret_cast<Inner0020ffe0 *>(binding->model)) != entry->motion) {
                     modelSelectPrimaryMotion(binding->model, entry->motion, 0.0f);
                     modelSelectSecondaryMotion(binding->model, entry->motion, 0.0f);
                 }

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_002adee0(u32 handle);
+extern int modelHasLoadedAttachment(u32 handle);
 
 /* 1 when every pending entry (flag 2) of the 0x32 slots at +400 has finished; marks them with flag 4. */
 u32 FUN_003db1f4(int base, int mode)
@@ -15,7 +15,7 @@ u32 FUN_003db1f4(int base, int mode)
         do {
             entry = (u32 *)(base + i * 0x28 + 400);
             if ((entry[9] & 2) != 0) {
-                if (FUN_002adee0(*entry) == 0) {
+                if (modelHasLoadedAttachment(*entry) == 0) {
                     return 0;
                 }
                 entry[9] = entry[9] | 4;

@@ -59,7 +59,7 @@ extern unsigned int _ZN9Obj5590d0C1Ej(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0030e6a4. */
 /* Supplied declaration required: FUN_0030e6b8. */
 /* Supplied declaration required: FUN_0030e6cc. */
-extern unsigned int FUN_0030e734(unsigned char *, unsigned char *, unsigned int);
+extern unsigned int _ZN9Obj558cdcC1EPvS0_(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0030e878. */
 /* Supplied declaration required: FUN_0030e8b4. */
 extern unsigned int *_ZN9Obj55a474C1Ev(unsigned char *);
@@ -80,7 +80,7 @@ void FUN_001253a4(void)
   emptyStub_002f4370(temp_v0,&LAB_002eb625,0x100000);
   temp_v0 = FUN_00110318(&DAT_00630424);
   emptyStub_002f4370(temp_v0,&LAB_00110331,0x100000);
-  temp_v0 = FUN_0030e734(&DAT_00630530,&LAB_00125568,0);
+  temp_v0 = _ZN9Obj558cdcC1EPvS0_(&DAT_00630530,&LAB_00125568,0);
   emptyStub_002f4370(temp_v0,&LAB_0010b195,0x100000);
   puVar2 = (unsigned int *)_ZN9Obj55a474C1Ev(&DAT_006305a8);
   *puVar2 = (unsigned int)&DAT_00559968;

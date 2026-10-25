@@ -46,7 +46,7 @@ extern unsigned char LAB_0013941c; /* 0x13941c */
 extern int frameTexReleaseWork(...); /* 0x13c1a0 */
 extern int FUN_0013c660(...); /* 0x13c660 */
 extern int FUN_0013c6d4(...); /* 0x13c6d4 */
-extern int FUN_0013c764(...); /* 0x13c764 */
+extern int FUN_0013c764(unsigned int job); /* 0x13c764 */
 extern int FUN_0013c7dc(...); /* 0x13c7dc */
 extern int renderSurfaceDownsampleJob(...); /* 0x13cb90 */
 extern int FUN_0013cd7c(...); /* 0x13cd7c */

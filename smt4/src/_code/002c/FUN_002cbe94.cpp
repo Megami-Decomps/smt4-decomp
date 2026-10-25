@@ -1,58 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cbe94` (_code @ 0x2cbe94, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: open-result lifetime, resize argument order and constant result materialization differ. */
+#include "shard/RomFileOpenState.h"
 
-extern "C" {
+extern "C" s32 FUN_00254884(const char *path, char *resolvedPath, s32 flags);
+extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
+extern "C" void FUN_002c3510(u32 result);
+extern "C" void asdFatalError();
+extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
-int FUN_00254884(int, unsigned char [500], int);
-int FUN_002bb5a4(int *, unsigned char [500], int);
-int FUN_002c3510(...);
-int asdFatalError(void);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00254884. */
-/* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: asdFatalError. */
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
-
-
-int * FUN_002cbe94(int *param_1,int param_2,unsigned int param_3)
-
+static __inline u32 fileRecordResult(u32 result)
 {
-/* irregular: 4 native warning(s); review required */
-  int *piVar1;
-  unsigned char temp_v0 [500];
-  
-  FUN_00254884(param_2,temp_v0,0);
-  if (param_2 == 0) {
-    FUN_002c3510();
-    return (int *)0xe0e046bc;
-  }
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[3] = 0;
-  piVar1 = param_1 + 2;
-  param_1[4] = 0;
-  FUN_002bb5a4(piVar1,temp_v0,6);
-  if ((int)piVar1 < 0) {
-    FUN_002c3510(piVar1);
-    return piVar1;
-  }
-  piVar1 = (int *)(**(romwright_code **)(*param_1 + 0x3c))(param_1,*(romwright_code **)(*param_1 + 0x3c),param_3,0);
-  FUN_002c3510();
-  if ((int)piVar1 < 0) {
-    if ((param_1[2] & 0xfffffffeU) != 0) {
-      if ((param_1[2] & 1U) != 0) {
-        asdFatalError();
-      }
-      nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
-      param_1[2] = 0;
-    }
-    return piVar1;
-  }
-  FUN_002c3510();
-  return (int *)0x0;
+    FUN_002c3510(result);
+    return result;
 }
 
-} /* extern "C" */
+// Create a file at the requested length, closing it if setting the length fails.
+extern "C" s32 FUN_002cbe94(RomFileOpenState *state, const char *path, u32 size)
+{
+    char resolvedPath[500];
+    if (!FUN_00254884(path, resolvedPath, 0))
+        return fileRecordResult(0xe0e046bc);
+    romOpenFileInitialize(&state->file);
+    s32 result = FUN_002bb5a4(&state->file, resolvedPath, 6);
+    if ((s32)(result & 0x80000000) < 0)
+        return fileRecordResult(result);
+    const PositionedResizeVtable *vtable = static_cast<PositionedResizeVtable *>(state->interface.vtable);
+    result = vtable->resize(reinterpret_cast<PositionedStream *>(state), (u64)size);
+    FUN_002c3510(result);
+    if ((s32)(result & 0x80000000) < 0) {
+        if ((state->file.unk00 & ~1u) != 0) {
+            if (state->file.unk00 & 1)
+                asdFatalError();
+            nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(state->file.unk00 & ~1u);
+            state->file.unk00 = 0;
+        }
+        return result;
+    }
+    return fileRecordResult(0);
+}

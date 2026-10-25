@@ -1,9 +1,9 @@
-/* NON_MATCHING: the 11 jump-table words differ in fdiff (retail: absolute addresses, build: __switch$$-relative relocs to the same labels), and retail keeps the argument copy in r0 for the compares (build compares r4 and moves it just before the call). */
+/* NON_MATCHING: restored script argument0; switch compares the saved type rather than retail's forwarded R0 copy. */
 #include "common.h"
 
 extern "C" {
 
-s32 scrGetArg(...);  /* index in r0; the first argument is read without one */
+s32 scrGetArg(s32 index);
 void FUN_00282a08(s32 type, s32 kind);
 void FUN_002a33f0(void);
 
@@ -11,7 +11,7 @@ void FUN_002a33f0(void);
  * other call goes to FUN_00282a08, the rest to FUN_002a33f0 (the function that follows). */
 void FUN_002a3348(void)
 {
-    s32 type = scrGetArg();
+    s32 type = scrGetArg(0);
     s32 kind = scrGetArg(1);
 
     if (kind != 13) {

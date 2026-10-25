@@ -5,13 +5,13 @@
 extern "C" {
 
 int handlerTableCallWithValue(...);
-int requestDispatch(...);
+void requestDispatch(void *request);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
 int FUN_00256a50(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
-int FUN_002571e8(...);
+int renderCtxSelectBlendPreset(...);
 int FUN_00257374(...);
 int refCountIncrement(void);
 int FUN_0028186c(...);
@@ -111,7 +111,7 @@ extern int effectQuerySelectedBehavior(void *);
 /* Supplied declaration required: FUN_00256a50. */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
-/* Supplied declaration required: FUN_002571e8. */
+/* Supplied declaration required: renderCtxSelectBlendPreset. */
 /* Supplied declaration required: FUN_00257374. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_0028186c. */
@@ -384,7 +384,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
         *(unsigned int *)(temp_v8 + 100) =
              (((temp_v0 >> 0x10) & 0xff) << 0x10) | (temp_v0 & 0xff) | (((temp_v0 >> 8) & 0xff) << 8) |
              (temp_v0 & 0xff000000);
-        FUN_002571e8(*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
+        renderCtxSelectBlendPreset(*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
         FUN_00256a50(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v1 + 0x54) & 0xffff);
       }
       break;
@@ -608,7 +608,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
              (temp_v0 & 0xff) | (((temp_v0 >> 8) & 0xff) << 8) | (((temp_v0 >> 0x10) & 0xff) << 0x10) |
              (temp_v0 & 0xff000000);
         *(int *)(temp_v34 + 0x60) = temp_v8;
-        FUN_002571e8(*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
+        renderCtxSelectBlendPreset(*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
         FUN_00256a50(*(unsigned int *)(param_1 + 1),*(unsigned int *)(temp_v7 + 0x54) & 0xffff);
         return;
       }
@@ -644,7 +644,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
             handlerTableCallWithValue(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
-            requestDispatch(*puVar2);
+            requestDispatch(reinterpret_cast<void *>(*puVar2));
           }
           temp_v1 = temp_v1 + 1;
           pfVar8 = pfVar8 + 10;
@@ -694,7 +694,7 @@ void FUN_00267d84(fn_00267d84_arg0 *param_1)
       }
       break;
     case 7:
-      FUN_002571e8(*(unsigned int *)(*(int *)((int)pvVar11 + 0x20) + 0x54) & 0xffff);
+      renderCtxSelectBlendPreset(*(unsigned int *)(*(int *)((int)pvVar11 + 0x20) + 0x54) & 0xffff);
       FUN_002c7d18(param_1);
       return;
     }

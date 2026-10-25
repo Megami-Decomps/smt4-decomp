@@ -12,7 +12,7 @@ int efctSetSpeed(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int FUN_0035ae58(...);
 int devilDispatchTextureResource(...);
@@ -50,7 +50,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: devilDispatchTextureResource. */
@@ -150,7 +150,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     temp_v4 = FUN_00180114(*psVar5);
     textFormatBuffer(temp_v12,&LAB_00219e04,temp_v4);
     puVar7 = temp_v12;
-    FUN_0018408c(puVar7,1);
+    fontMeasureLineAdvance(puVar7,1);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) +
@@ -161,7 +161,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     temp_v11 = FUN_0014bf3c(*psVar5,0);
     textFormatBuffer(temp_v12,&LAB_00219e04,temp_v11);
     puVar7 = temp_v12;
-    FUN_0018408c(puVar7,2);
+    fontMeasureLineAdvance(puVar7,2);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v8,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(((int)**(short **)(temp_v3 + 0xc) - (int)puVar7) + temp_v1 +

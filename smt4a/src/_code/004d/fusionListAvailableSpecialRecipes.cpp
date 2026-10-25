@@ -1,4 +1,4 @@
-/* NON_MATCHING: save-entry buffer/count stack slots and save-requirement mask lowering differ; -O2 candidate. */
+/* NON_MATCHING: save-entry/count stack slots and the ingredient-presence zero scratch register differ. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
 struct FusionRecipeEntry {
@@ -44,7 +44,7 @@ u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
             continue;
         if (result->saveRequirement & 1) {
             FusionSavedDemon saved;
-            if (result->saveRequirement & 0xfffe) {
+            if (result->saveRequirement & ~1u) {
                 if (!gameDataCopySaveEntry(result->saveRequirement >> 1, &saved) || !(saved.flags & 0xfc))
                     continue;
             } else if (!gameDataCopySaveEntry(result->id, &saved) || !(saved.flags & 0xfc)) {

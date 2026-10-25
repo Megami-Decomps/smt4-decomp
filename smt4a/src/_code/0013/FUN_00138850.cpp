@@ -10,17 +10,17 @@ typedef struct Scene {
 
 extern Scene *g_renderCtx;
 
-int FUN_0014192c(int arg0, int arg1);
+int renderTargetClear(int arg0, int arg1);
 int FUN_00144ab4(void);
 int FUN_001575cc(Scene *scene);
 int FUN_0017dd80(void);
 
-/* Script command: prepares the scene (FUN_00144ab4, FUN_0017dd80, FUN_0014192c), switches it to state 2 and starts it. */
+/* Script command: prepares the scene (FUN_00144ab4, FUN_0017dd80, renderTargetClear), switches it to state 2 and starts it. */
 u32 FUN_00138850(void)
 {
     FUN_00144ab4();
     FUN_0017dd80();
-    FUN_0014192c(2, 0);
+    renderTargetClear(2, 0);
     g_renderCtx->state = 2;
     FUN_001575cc(g_renderCtx);
     return 0;

@@ -51,7 +51,7 @@ s32 gameFlagIsSet(s32 flag);
 void textFormatBuffer(char *buffer, const char *format, ...);
 u32 asdMdlManagerCreateSecondList(const char *name, u32 flags);
 u32 asdMdlManagerClone(u32 model, u32 flags);
-s32 FUN_002adee0(u32 model);
+s32 modelHasLoadedAttachment(u32 model);
 void FUN_002a0428(u32 model, s32 flag);
 
 /* Runs the step after the model exists: marks the slot live with the row's position and advances. */
@@ -59,7 +59,7 @@ static void finishSlot(UnitSpawner *spawner)
 {
     UnitRow *row = FUN_0024ad14(spawner->index);
     UnitSlot *slot = &spawner->slots[spawner->slot];
-    if (slot->ownsModel == 0 && FUN_002adee0(slot->model) == 0)
+    if (slot->ownsModel == 0 && modelHasLoadedAttachment(slot->model) == 0)
         return;
     if (slot->kind == 14) {
         spawner->cloneAvailable = 1;

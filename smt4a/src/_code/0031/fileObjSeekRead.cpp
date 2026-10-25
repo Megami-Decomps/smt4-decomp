@@ -19,7 +19,7 @@ typedef struct FileObj {
     /* 0x8 */ u32 handle;
 } FileObj;
 
-extern void FUN_0013ebd8(s32 result);
+extern void FUN_0013ebd8(u32 result);
 extern void sysFatalBreak(void);
 extern void vcallSlot12IfValid(u32 handle);
 
@@ -42,10 +42,10 @@ s32 fileObjSeekRead(FileObj *file, u32 offset, u32 buffer, u32 size)
         }
         return result;
     }
-    s32 ok = 0;
+    result = 0;
 
-    FUN_0013ebd8(ok);
-    return ok;
+    FUN_0013ebd8(result);
+    return result;
 }
 
 }

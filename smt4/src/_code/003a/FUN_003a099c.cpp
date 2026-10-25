@@ -13,7 +13,7 @@ s32 FUN_0029e0f8(void);
 u32 tableGroupFindEntryIndex(u32 resource, const char *name);
 void scrScriptProcessStartEntry(u32 process, u32 entry);
 void scrRunOpcodesStub(u32 process);
-s32 FUN_002adee0(void);
+s32 modelHasLoadedAttachment(void);
 void FUN_002a0428(void *manager, s32 value);
 void nodeSetTranslation3f(void *node, s32 relative, f32 x, f32 y, f32 z);
 
@@ -91,7 +91,7 @@ void FUN_003a099c(Scene3a *scene)
         break;
     }
     }
-    if (scene->modelManager != NULL && FUN_002adee0() != 0 &&
+    if (scene->modelManager != NULL && modelHasLoadedAttachment() != 0 &&
         ((PreviewManagerView *)scene->modelManager)->node->state < 0) {
         FUN_002a0428(scene->modelManager, 1);
         nodeSetTranslation3f(((PreviewManagerView *)scene->modelManager)->node, 0, 0.0f, -32000.0f, 0.0f);

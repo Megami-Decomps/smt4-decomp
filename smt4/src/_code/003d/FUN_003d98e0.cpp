@@ -65,11 +65,9 @@ u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexAr
     if (kind != 6 && index >= 0) {
         found = FUN_00224ab0(&value, index, indexArg);
     }
-    Vec3 offset = FUN_003dd680(owner, kind, arg, index);
-    Vec3 position;
-    position.x = offset.x + origin.x;
-    position.y = offset.y + origin.y;
-    position.z = offset.z;
+    Vec3 position = FUN_003dd680(owner, kind, arg, index);
+    position.x += origin.x;
+    position.y += origin.y;
     u32 *slot = findFreeSlot(owner);
     FUN_003947cc(target, 0, kind, position);
     if (kind == 2 || kind == 5 || kind == 7 || kind == 8 || kind == 9 || kind == 12) {

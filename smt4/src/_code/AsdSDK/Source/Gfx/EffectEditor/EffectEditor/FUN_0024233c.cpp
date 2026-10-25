@@ -62,7 +62,7 @@ extern unsigned int DAT_0044f8d0; /* 0x44f8d0 */
 extern unsigned int DAT_0044f8d4; /* 0x44f8d4 */
 extern int DAT_0044f8dc; /* 0x44f8dc */
 extern unsigned int DAT_0044f8e0; /* 0x44f8e0 */
-extern unsigned char DAT_004d8ca0; /* 0x4d8ca0 */
+extern unsigned char g_effectEditorSavedSnapshot; /* 0x4d8ca0 */
 extern unsigned int uRam004d8ce0; /* 0x4d8ce0 */
 extern unsigned int uRam004d8ce4; /* 0x4d8ce4 */
 extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
@@ -182,7 +182,7 @@ LAB_002424b8:
     if (temp_v4 == 0) goto LAB_002426c4;
     temp_v6 = VectorFloatToUnsigned(*(unsigned int *)(temp_v0 + DAT_0044f8d4 * 0x18 + 0x14),3);
     piVar3 = (int *)(param_2 + temp_v6 * 0x1c);
-    FUN_002a3d58(&DAT_004d8ca0);
+    FUN_002a3d58(&g_effectEditorSavedSnapshot);
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
@@ -219,7 +219,7 @@ LAB_002424b8:
     *(unsigned char *)(temp_v6 + 0x88) = 8;
     *(unsigned char *)(temp_v6 + 0x89) = 0;
     *(unsigned char *)(temp_v6 + 0x8a) = 0;
-    __aeabi_memcpy4(&DAT_004d8ca0,temp_v6,0x80);
+    __aeabi_memcpy4(&g_effectEditorSavedSnapshot,temp_v6,0x80);
     DAT_0044ea9c = *(unsigned int *)(temp_v6 + 0x90);
     if (*(int *)(*piVar3 + 0xc) != 0) {
       effPartsSetData();
@@ -265,7 +265,7 @@ LAB_002424b8:
           registrationEntryInsert(DAT_0044ea90,3);
           DAT_0044ea90 = 0;
         }
-        FUN_002a3d58(&DAT_004d8ca0);
+        FUN_002a3d58(&g_effectEditorSavedSnapshot);
         uRam004d8ce0 = *(unsigned int *)(param_2 + 0xc);
         uRam004d8ce4 = *(unsigned int *)(param_2 + 0x10);
         uRam004d8ce8 = *(unsigned int *)(param_2 + 0x14);

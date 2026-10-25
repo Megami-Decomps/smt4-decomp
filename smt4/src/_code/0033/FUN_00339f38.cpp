@@ -8,7 +8,7 @@ struct StatusModelScene {
     /* 0x4394 */ Obj4207d0 *playerModel;
 };
 
-void mdlPartsRelease(void);
+void mdlPartsRelease(void *model);
 void playerModelListCreate(Obj4206e8 *model, s32 kind);
 
 /* Releases the scene's player model (if any) and builds a fresh one. */
@@ -17,7 +17,7 @@ void FUN_00339f38(StatusModelScene *scene)
     void *owner;
 
     if (scene->playerModel != NULL) {
-        mdlPartsRelease();
+        mdlPartsRelease(scene->playerModel);
         delete scene->playerModel;
         scene->playerModel = NULL;
     }

@@ -1,7 +1,7 @@
 /* NON_MATCHING: initial half-frame constant load and VFP division/addition registers differ; key search matches retail. */
 #include "shard/W5_W5Match5_TwinRecords.h"
 
-extern "C" f32 hardfp_floorf(f32 value);
+extern "C" f32 __hardfp_floorf(f32 value);
 
 using namespace SampleValueDecoding;
 
@@ -22,7 +22,7 @@ extern "C" EncodedValue *FUN_003f8940(ValueDecoder *decoder, f32 time)
         CompactKey keys[1];           /* 0x14 */
     };
     CompactCurveView *curve = reinterpret_cast<CompactCurveView *>(decoder);
-    u32 frame = (u32)hardfp_floorf(time / curve->frameDuration + 0.5f);
+    u32 frame = (u32)__hardfp_floorf(time / curve->frameDuration + 0.5f);
     CompactKey *key = curve->keys;
     if (key->frame <= frame) {
         key = &curve->keys[curve->keyCount - 1];

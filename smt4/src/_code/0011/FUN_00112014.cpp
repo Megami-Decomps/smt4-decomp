@@ -2,14 +2,10 @@
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match7_TextureBinding.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
 
 #define TEXTURE_CACHE_BUCKETS 512
 #define TEXTURE_FACE_COUNT 6
-
-/* One face of a texture resource (0x44 bytes). */
-struct TextureFace {
-    u8 data[0x44];
-};
 
 /* A cached texture resource (observed fields): faces from 0x34, a heap handle, and six sub-resources
  * for the multi-part kind. */
@@ -17,7 +13,7 @@ struct TextureResource {
     /* 0x000 */ u8 unk000[0x2C];
     /* 0x02C */ u32 storage;
     /* 0x030 */ u8 unk030[4];
-    /* 0x034 */ TextureFace face[TEXTURE_FACE_COUNT];
+    /* 0x034 */ DefaultTextureStorage face[TEXTURE_FACE_COUNT];
     /* 0x1CC */ u8 unk1CC[0x638];
     /* 0x804 */ void *part[6];
 };
@@ -41,7 +37,7 @@ struct TextureCache {
 
 typedef char TextureCacheLayoutCheck[
     sizeof(TextureCacheNode) == 0x10 && offsetof(TextureCache, bucket) == 0x10 &&
-    offsetof(TextureResource, part) == 0x804 && sizeof(TextureFace) == 0x44 ? 1 : -1];
+    offsetof(TextureResource, part) == 0x804 && sizeof(DefaultTextureStorage) == 0x44 ? 1 : -1];
 
 extern "C" {
 
@@ -49,8 +45,8 @@ extern void (*g_gfxReleaseCallback)(u32 heap, u32 alignment, u32 flags, void *bl
 extern TextureBindingState *g_textureBindingState;
 extern TextureCache *g_textureBindingCache;
 
-void gfxTextureStorageUnbind(TextureFace *face);
-void gfxTextureStorageRelease(u32 storage, TextureFace *face);
+void gfxTextureStorageUnbind(DefaultTextureStorage *face);
+void gfxTextureStorageRelease(u32 storage, DefaultTextureStorage *face);
 void memClear(void *memory, u32 size);
 
 /* Releases every block through the graphics release callback, if one is installed. */

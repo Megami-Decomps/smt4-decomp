@@ -2,12 +2,19 @@
 #define CLASSES_OBJ421AA4_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* A node of the sound manager's request list. */
 struct Obj421aa4Node {
-    /* 0x00 */ u8 unk00[4];
+    union {
+        /* 0x00 */ u8 unk00[4];
+        /* 0x00 */ Obj421aa4Node *next;
+    };
     /* 0x04 */ u8 type;
-    /* 0x05 */ u8 unk05[7];
+    /* 0x05 */ u8 unk05[3];
+    struct {
+        /* 0x08 */ u32 sequence;
+    } completion;
     /* 0x0C */ u32 stamp;
     /* 0x10 */ u32 id;
     /* 0x14 */ void *arg;
@@ -15,10 +22,25 @@ struct Obj421aa4Node {
 
 /* The sound manager: a request list and a running stamp at +0x184. */
 struct Obj421aa4Manager {
-    /* 0x000 */ u8 unk000[0x184];
+    union {
+        /* 0x000 */ u8 unk000[0x184];
+        struct {
+            u8 unk000[0x16c];
+            /* 0x16C */ Obj421aa4Node *head;
+            /* 0x170 */ Obj421aa4Node *tail;
+            /* 0x174 */ u32 nextSequence;
+            u8 unk178[0xc];
+        } pending;
+    };
     /* 0x184 */ u32 unk184;
     /* 0x188 */ u32 stamp;
 };
+typedef char Obj421aa4CommandLayoutCheck[sizeof(Obj421aa4Node) == 0x18 &&
+    offsetof(Obj421aa4Node, type) == 4 && offsetof(Obj421aa4Node, completion.sequence) == 8 &&
+    offsetof(Obj421aa4Node, stamp) == 0xc && sizeof(Obj421aa4Manager) == 0x18c &&
+    offsetof(Obj421aa4Manager, pending.head) == 0x16c &&
+    offsetof(Obj421aa4Manager, pending.tail) == 0x170 &&
+    offsetof(Obj421aa4Manager, pending.nextSequence) == 0x174 ? 1 : -1];
 
 /* A sound object (vtable at 0x421aa4, named after it until its real name is known): slot 0 sets it
  * up and announces it to the sound manager, slot 1 shuts it down. */

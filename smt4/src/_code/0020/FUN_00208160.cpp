@@ -58,7 +58,7 @@ extern DepartGameState g_gameState;
 s32 mapTableGetValue(s32 mapId);
 DepartModel *asdMdlManagerCreateFromSource(void *source, u32 size, u32 flags);
 DepartModel *asdMdlManagerCreateSecondList(const char *path, u32 flags);
-s32 FUN_002adee0(DepartModel *model);
+s32 modelHasLoadedAttachment(DepartModel *model);
 void FUN_002a0428(DepartModel *model, s32 flag);
 void modelSelectPrimaryMotion(DepartMotion *motion, s32 index);
 void modelSelectSecondaryMotion(DepartMotion *motion, s32 index);
@@ -110,7 +110,7 @@ u32 FUN_00208160(void)
         work->state++;
         /* fall through to the load check */
     case DEPART_STATE_SKY_WAIT:
-        if (FUN_002adee0(work->skyModel) == 0)
+        if (modelHasLoadedAttachment(work->skyModel) == 0)
             return 0;
         departSkyStart(work);
         return 0;
@@ -133,7 +133,7 @@ u32 FUN_00208160(void)
         work->state++;
         return 0;
     case DEPART_STATE_MAP_WAIT:
-        if (FUN_002adee0(work->mapModel) == 0)
+        if (modelHasLoadedAttachment(work->mapModel) == 0)
             return 0;
         departModelStart(work->mapModel);
         work->state = DEPART_STATE_DONE;

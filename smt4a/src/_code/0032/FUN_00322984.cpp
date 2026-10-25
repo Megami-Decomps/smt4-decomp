@@ -8,7 +8,7 @@ int FUN_00182540(...);
 int FUN_001b4c1c(...);
 int FUN_001bc460(void);
 int refCountIncrement(void);
-int requestDispatch(...);
+void requestDispatch(void *request);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
 int handlerTableCallWithValue(...);
@@ -644,7 +644,7 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
             handlerTableCallWithValue(*puVar2,(temp_v13 & 0xff) |
                                  (temp_v7 << 0x18) | ((temp_v17 & 0xff) << 0x10) |
                                  ((temp_v0 & 0xff) << 8));
-            requestDispatch(*puVar2);
+            requestDispatch(reinterpret_cast<void *>(*puVar2));
           }
           temp_v1 = temp_v1 + 1;
           pfVar8 = pfVar8 + 10;

@@ -36,8 +36,24 @@ Every match must be one a programmer could have written for a reason.
   walk an array or struct, and small `static __inline` accessors in headers.
 - A near miss stays as it is with a `/* NON_MATCHING: ... */` comment saying what still differs.
   Don't keep a fake match to raise the count.
+  Before treating a small diff as allocation, check the actual constants, member offsets and full
+  callee argument list: a signed load into an otherwise-unused argument register can expose a
+  dropped argument. For a local buffer displaced by four bytes, recover its real size and alignment
+  from its producers/consumers and existing record types; don't compensate with dummy padding or
+  an invented outgoing argument.
+  A no-argument wrapper can accidentally consume the incoming `r0` unchanged: check the real
+  callee and restore explicit pointer/handle forwarding. For registered process/draw callbacks,
+  compare the body with its registrar and recover the callback parameter and result types too.
+  At large byte-field offsets, check signedness before reshaping the layout: an `s8` flag can
+  reproduce a folded `add`/`ldrb` even when a zero test makes the load itself unsigned.
+  Keep packing local to genuinely unaligned members, with size/offset assertions; packing an
+  entire record can incorrectly downgrade its otherwise-aligned word accesses.
+  A float-shaped stack argument does not alone prove a variadic callee: a one-word integer/float
+  payload union can have the same calling convention.
 - Shared record layouts must have one definition in a common header. Include that header from
   each user; unrelated layouts with coincidentally identical names need distinct type names.
+  Check which class owns a tail field before extending a base: sibling classes can have
+  different fields at the same offset. Assert both the base extent and each derived layout.
   Recheck every previously matching consumer of either affected header with `fdiff`.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
@@ -55,10 +71,11 @@ Every match must be one a programmer could have written for a reason.
   `fdiff` then compile it in one `--multifile --no_autoinline` run with the callees' unit sources
   and keep only the unit's function. Same evidence rule as `cflags`, and the callees' own sources
   must clobber what retail's do (matched callees are best).
-- **The image mixes armcc 4.1 builds.** Most code matches the pinned b713, but some only matches
-  b1454 (e.g. b713 writes a `vdiv`/`vsqrt`/`vabs` result over its operand, b1454 takes a fresh
-  register). A unit can name the other build in a `compiler` field (`"armcc-4.1-b1454"`, a tool of
-  `config/toolchain.json`; `build.py fetch` downloads it). Same evidence rule as `cflags`.
+- **The compiler is armcc 4.1 b713 throughout.** Every other build decomp.me ships (4.0, 4.1 b561
+  to b1454, 5.04) loses proven functions and gains none that b713 lacks. Later 4.1 builds happen to
+  match some near misses (they never write a `vdiv`/`vabs`/`vcvt` result over an operand), but
+  those sit next to functions only b713 matches: the source is still not the original. Fix the
+  source; don't change the compiler.
 - **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
   armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
   so write the call:
@@ -88,6 +105,11 @@ Every match must be one a programmer could have written for a reason.
   a pool word into the object's own data against retail's `DAT_x`/`_ZZ…` counts as equal and
   `IDENTICAL` carries `(data relocations by section: relink checks the address)`. Give the
   variables their real names when known.
+- **Compiler-generated global initialisers are not ordinary wrappers.** armcc emits
+  `__sti___<n>_<file>` functions in `i.` sections, with references to their own data sections.
+  The current unit carver does not extract those initialisers. Keep native global object
+  definitions, or report `BLOCKED: static initialiser: needs build.py support for __sti__ units`;
+  do not replace construction/destructor registration with explicit runtime-helper calls.
 - **Linker-inlined calls.** armlink (`--inline`) replaced every ARM `bl` to a function whose body is
   one instruction and `bx lr` with that instruction: a getter's `ldr r0, [r0, #N]`, a setter's
   `vstr s0, [r0, #N]`, a `mov r0, #0` stub, an SDK svc wrapper's `svc N`. A lone instruction like
@@ -168,6 +190,11 @@ Constructors and destructors are written as such (`Obj55afc4::~Obj55afc4()`, ref
   writeback before interpreting the final pointer adjustment;
 - preserve class-value copy semantics as well as layout: a small iterator with a nontrivial
   copy constructor uses hidden result storage, unlike an ordinary one-word aggregate;
+- recover a callback table's actual owner and use native member functions/member pointers,
+  not a second owner layout or integer pairs standing in for member pointers. Preserve each
+  callback's real arguments and return type, even when its body ignores an argument. Native
+  placement construction also preserves the compiler's nullable-member construction guard;
+  a hand-written `pointer != -8` check is not a substitute for that constructor.
 - verify destructor entry points against their vtable slots. If a unit starts after the
   instruction loading its vptr, fix the function boundary rather than inventing a vtable argument;
 - defining a destructor also emits its deleting variant (`D0`) and the vtable. `build.py` (and

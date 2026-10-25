@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001c0544(int *);
+int runtimeDispatchObjectRelease(int *);
 int FUN_004516ec(int *);
 int FUN_00452d74(int *);
 int FUN_004679b0(int *);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001c0544. */
+/* Supplied declaration required: runtimeDispatchObjectRelease. */
 /* Supplied declaration required: FUN_004516ec. */
 /* Supplied declaration required: FUN_00452d74. */
 /* Supplied declaration required: FUN_004679b0. */
@@ -206,7 +206,7 @@ void nw_gfx_res_ResGraphicsFile_Cleanup(int *param_1)
       temp_v1 = 0;
     }
     if (temp_v1 != 0) {
-      FUN_001c0544(&temp_v1);
+      runtimeDispatchObjectRelease(&temp_v1);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x40);

@@ -1,10 +1,10 @@
 #include "addon/aocMain.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
 
 int buttonHelpSelectByProgress(void *scene);
 int FUN_002305e8(int a);
-int placeWinStartText(void *text);
 void scrLoaderReset(AocObjC *loader);
 void scrLoaderFreeBuffers(AocObjC *loader);
 u32 FUN_002736e8(AocObjC *loader);

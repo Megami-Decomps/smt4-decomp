@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002e410c(int, unsigned int, unsigned int);
+int __rw_string_rep_allocate(int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002e410c. */
+/* Supplied declaration required: __rw_string_rep_allocate. */
 extern unsigned int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned int *);
 
 
@@ -35,7 +35,7 @@ int FUN_00101518(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   uStack_18 = param_3;
   uStack_14 = param_4;
   puVar1 = (unsigned int *)_ZSt3maxIjERKT_S2_S2_(temp_v0,(unsigned int *)&uStack_18);
-  FUN_002e410c(param_1,*puVar1,param_4);
+  __rw_string_rep_allocate(param_1,*puVar1,param_4);
   return param_1 + 0xc;
 }
 

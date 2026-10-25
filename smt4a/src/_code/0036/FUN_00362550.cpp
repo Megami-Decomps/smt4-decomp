@@ -23,6 +23,7 @@ extern "C" {
 s32 FUN_00362550(Object00362550 *object)
 {
     Part00362550 *part = &object->owner->part;
+    /* i is returned unset when the flags are clear, as in the original. */
     s32 i;
     if ((part->flags & 0xff000000) != 0) {
         i = 0;

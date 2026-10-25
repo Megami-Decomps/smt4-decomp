@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail enters the loop with a branch to the bottom test; the built loop pre-tests the range with cmp/beq. */
 #include "common.h"
 
 extern "C" {

@@ -23,14 +23,14 @@ int vec2GetXInt(...);
 int vec2GetYInt(...);
 int FUN_00165b08(void);
 int efctSetSpeed(void);
-int FUN_00168594(int, int);
+float FUN_00168594(const char *, unsigned int, float);
 int FUN_0016c4b8(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_0017ffa8(int, int, int, int);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(...);
 int VectorSignedToFloat(...);
 
@@ -82,7 +82,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern int asdTMTexTableGetNode(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
@@ -149,8 +149,7 @@ char FUN_0014f3f4(void)
       if (temp_v8 != 0) {
         temp_v22 = FUN_001834a4(0x13,0x11f1);
         temp_v23 = FUN_001834a4(0x13,0x11f2);
-        temp_v14 = (float)((unsigned long long)temp_v17 >> 0x20);
-        FUN_00168594(temp_v8,3);
+        temp_v14 = FUN_00168594(reinterpret_cast<const char *>(temp_v8), 3, 0.0f);
         temp_v21 = 0xb;
         temp_v20 = temp_v6;
         FUN_00164b5c(2,0x13);
@@ -210,7 +209,7 @@ char FUN_0014f3f4(void)
                    ,*(unsigned int *)
                      ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 4));
       piVar10 = &temp_v22;
-      FUN_0018408c(piVar10,2);
+      fontMeasureLineAdvance(piVar10,2);
       temp_v10 = *(short *)(temp_v11 + 8) + temp_v12 +
                temp_v15 + ((int)**(short **)(temp_v11 + 0xc) - (int)piVar10) / 2;
       VectorSignedToFloat(*(short *)(temp_v11 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -225,7 +224,7 @@ char FUN_0014f3f4(void)
                    *(unsigned int *)
                     ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 4));
       piVar10 = &temp_v22;
-      FUN_0018408c(piVar10,3);
+      fontMeasureLineAdvance(piVar10,3);
       temp_v6 = *(short *)(temp_v11 + 8) + temp_v12 +
               temp_v15 + ((int)**(short **)(temp_v11 + 0xc) - (int)piVar10) / 2;
       VectorSignedToFloat(*(short *)(temp_v11 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);

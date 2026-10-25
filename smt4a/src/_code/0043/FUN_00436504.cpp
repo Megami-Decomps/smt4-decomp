@@ -1,8 +1,9 @@
 /* NON_MATCHING: the retail unit inlines std::list node linking and its scratch-list cleanup separately at each exit (three copies of the free loop and a different register assignment); this version shares one helper, so the instruction count and scheduling differ. The list/node layouts are inferred from the stores. */
 #include "common.h"
+#include "gfx/MaskWork.h"
+#include <new>
 
 namespace {
-struct Variant;
 
 /* A node of the doubly linked value list: links, then the value. */
 struct ValueNode {
@@ -70,7 +71,6 @@ void FUN_004386a4(ScratchList *scratch, s32 *buffer, s32 length);
 s32 FUN_00438434(ScratchList *scratch, s32 *zero, s32 *first, s32 *second);
 void FUN_0043865c(ValueList **result, ScratchList *scratch, s32 *key);
 ValueNode *FUN_004387f0(void *allocator, u32 count);
-void FUN_00515598(void);
 void FUN_005155bc(void *value);
 void FUN_00515618(ValueNode **result, ValueNode *sentinel);
 void variantSetPlain(void *variant, s32 *source);
@@ -98,9 +98,7 @@ u32 FUN_00436504(TokenReader *reader, ValueList **result, ValueList **target, Va
                 releaseScratch(&scratch);
                 return 2;
             }
-            if (node != reinterpret_cast<ValueNode *>(-8)) {
-                FUN_00515598();
-            }
+            new (&reinterpret_cast<MaskWorkNode *>(node)->payload) Variant;
             node->prev = sentinel->prev;
             node->next = sentinel;
             sentinel->prev = node;

@@ -21,3 +21,4 @@ uiSubStateGetReady = 0xe1d001d2; // 0x22fc2c (FUN_0022fbc0: mov r0, r6 passes th
 shopListItemGetId = 0xe1d000b4; // 0x3a82a8 (FUN_003a8240: add r0, r5, r0, lsl #5 passes the item; the u16 result is widened by sxth, which a direct field read would fold into ldrsh)
 scriptProcessSetMode = 0xe5801108; // 0x27376c (FUN_002736e8): mov r1, #2 sets the argument, r0 is the stored process, and r0 is reloaded from the holder right after the call
 asdGxGetBlackForced = 0xe5d001d0; // 0x105c54 (asdGxResumeAndApplyPreset: the presets address is loaded again into r0 as the argument although r4 holds it)
+frameAnimationGetBusy = 0xe1d008d5; // 0x25a0ac (frameTexPollTransitionComplete: the animation sub-object address is formed in r0, add #0xe8 unfolded, and rebuilt right after)

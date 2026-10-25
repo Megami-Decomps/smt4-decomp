@@ -1,28 +1,20 @@
-/* NON_MATCHING: one register: retail keeps the picked index in r3 across the btlUnitGet call (as if the callee were known to preserve r3); armcc here uses r5. */
+/* NON_MATCHING: needs multifile with btlUnitGet and FUN_004e9ae8 once their register clobber sets match retail. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 namespace {
-struct BattleActionMasks {
-    /* 0x00 */ u8 unk00[0x58];
-    /* 0x58 */ u64 targetable;
-};
 
 struct BattleAiContext {
     /* 0x00 */ BtlMainStateA *state;
 };
 
-struct BattleAiUnit {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ u8 targeted[1]; /* by selection index */
-};
 }
 
 extern "C" {
 
-extern BattleActionMasks g_btlAction;
-s32 FUN_004e9ae8(BattleAiContext *context, s32 *candidates, s32 count, u32 mode);
-BattleAiUnit *btlUnitGet(BattleAiContext *context);
+extern BattleActionState g_btlAction;
+s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *candidates, s32 count, s32 force);
 
 /* Mark as targeted one of the targetable entries with the lowest HP seen so far in entry order. */
 void FUN_004e6fb0(BattleAiContext *context)
@@ -38,8 +30,8 @@ void FUN_004e6fb0(BattleAiContext *context)
             lowestHp = entry->hp;
         }
     }
-    s32 pick = FUN_004e9ae8(context, candidates, count, 1);
-    btlUnitGet(context)->targeted[candidates[pick - 1]] = 1;
+    s32 pick = FUN_004e9ae8(&context->state, candidates, count, 1);
+    btlUnitGet(&context->state)->selection.targeted[candidates[pick - 1]] = 1;
 }
 
 } /* extern "C" */

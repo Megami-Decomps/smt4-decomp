@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rewrite of the pattern-group copy (clones a group node and its member list into the graph, recursing for members not in it yet); retail constructs the group's sub-list sentinel and the link payload with placement-new null checks (adds/beq, strne) that this plain-struct version does not have, and orders the saves and stack temporaries differently. */
 #include "sys/FlagBlockPool.h"
+#include "gfx/MaskWork.h"
+#include <new>
 
 struct PatternGroup;
 
@@ -47,8 +49,6 @@ struct PatternSource {
 
 extern "C" {
 FlagPoolBlock *FUN_004387f0(FlagBlockPool *pool, s32 count);
-void FUN_00515598(void *value);
-s32 FUN_005153f0(void *value, void *source, u32 *token, FlagBlockPool *pool);
 
 s32 FUN_00438434(PatternGraph *graph, PatternGroup **out, PatternSource **source, PatternSource **end);
 
@@ -59,9 +59,7 @@ static inline PatternGroup *patternGroupInsertAfter(FlagBlockPool *pool, Pattern
     if (node == NULL) {
         return NULL;
     }
-    if (reinterpret_cast<s32>(node) != -8) {
-        FUN_00515598(node + 0);
-    }
+    new (&reinterpret_cast<MaskWorkNode *>(node)->payload) Variant;
     node->next = sentinel->next;
     node->previous = sentinel;
     sentinel->next = node;
@@ -125,7 +123,8 @@ s32 FUN_00438434(PatternGraph *graph, PatternGroup **out, PatternSource **source
                 }
                 token = reinterpret_cast<u32>(created);
             }
-            if (FUN_005153f0(&child->memberFirst, &member->source, &token, graph->memberPool) == 0) {
+            if (FUN_005153f0(reinterpret_cast<Variant *>(&child->memberFirst),
+                reinterpret_cast<const Variant *>(&member->source), &token, graph->memberPool) == 0) {
                 return 0;
             }
         }

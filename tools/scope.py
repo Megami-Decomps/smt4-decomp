@@ -8,6 +8,7 @@ not counted. There are no symbols to say which is which, so this writes
 
 - **name**: a function named as third-party code (`nn_`, `nw_`, `libc_`, `rt_`, `__`, `svc`,
   `online`/`nex`, `mwmo`/`mobiclip`, ...), most of them identified by matching Nintendo's SDK code;
+- **library**: inside a library block listed with its evidence in `config/libraries.txt`;
 - **callers**: every direct caller is third-party and it calls no first-party function (library
   code is reached from library code; Atlus code calls into libraries, never the reverse except
   through callbacks, which are not direct calls);
@@ -27,7 +28,8 @@ ROOT = Path(__file__).resolve().parent.parent
 GAMES = ("smt4", "smt4a")
 THIRD_PARTY = re.compile(r"^(?:nn_|nw_|nngx|nnos|nnsnd|libc_|rt_|__|svc[A-Z]|online|nex|NEX|mwmo|mobiclip|Mobiclip"
                          r"|vldtr_|streamReader|streamWriter|sharedRef|wstr|_Z\w*(?:2nn|2nw)"
-                         r"|_ZN?K?St|_ZN?K?4__rw|_Zn[wa]j|_Zd[la]Pv)")
+                         r"|_ZN?K?St|_ZN?K?4__rw|_Zn[wa]j|_Zd[la]Pv"
+                         r"|(?:strn?cpy|strn?cmp|strn?cat|strlen|strchr|strrchr|strstr|memcpy|memset|memmove|memcmp)$)")
 FIRST_PARTY = re.compile(r"^(?:asd|Asd|_ZN\d+Asd)")
 ADDRESS_FOLDER = re.compile(r"[0-9a-f]{4}")
 
@@ -74,11 +76,23 @@ def classify(game):
         first, second = struct.unpack_from("<II", code, a - base)
         return not functions[a][2] and (first == 0xE51FF004 or (first & 0xFFFFFF00 == 0xE28FC000 and second == 0xE12FFF1C))
 
+    # A library linked as one block, from evidence recorded in config/libraries.txt: each line
+    # `<arm|thumb|any> <start> <end> <library> <evidence>`, the functions of that instruction set in
+    # [start, end) (a block the linker interleaved with game code of the other set).
+    libraries = []
+    listing = root / "config" / "libraries.txt"
+    for line in listing.read_text(encoding="utf-8").splitlines() if listing.exists() else ():
+        if line.strip() and not line.startswith("#"):
+            kind, start, end, *_ = line.split()
+            libraries.append((kind, int(start, 16), int(end, 16)))
+
     label, reason = {}, {}
     for a in starts:
         name, where = functions[a][0], folder.get(a, "")
         if THIRD_PARTY.match(name):
             label[a], reason[a] = "third", "name"
+        elif any(start <= a < end and kind in ("any", "thumb" if functions[a][2] else "arm") for kind, start, end in libraries):
+            label[a], reason[a] = "third", "library"
         elif functions[a][1] <= 8 and veneer(a):
             label[a], reason[a] = "third", "linker"
         elif FIRST_PARTY.match(name) or (where and not ADDRESS_FOLDER.fullmatch(where)):
@@ -115,7 +129,7 @@ def main():
         lines = [f"{a:#010x} {name} {why}" for a, (name, why) in sorted(third.items())]
         out = ROOT / game / "config" / "third_party.txt"
         out.write_text("# Third-party functions, not counted in progress: written by tools/scope.py.\n"
-                       "# <address> <name at the time> <evidence: name | linker | callers | between>\n"
+                       "# <address> <name at the time> <evidence: name | library | linker | callers | between>\n"
                        + "\n".join(lines) + "\n", encoding="utf-8", newline="\n")
         print(f"{game}: {len(third)} third-party functions -> {out.relative_to(ROOT)}")
 

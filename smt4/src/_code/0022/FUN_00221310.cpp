@@ -1,4 +1,4 @@
-/* NON_MATCHING: steps the intro sequence job (touch icon appears, waits for the touch, then plays out); same 204 rows as retail, differs only in the loads of the icon record before ifTouchRegionAdd and one register in the frameB modulo */
+/* NON_MATCHING: restored s32(u32 handle) task callback and forwarded jobGetWork handle; icon rectangle argument scheduling and frameB modulo scratch register differ (204 rows each). */
 #include "common.h"
 
 #define INTRO_STATE_APPEAR 0
@@ -35,9 +35,9 @@ struct IntroIconRecord {
 };
 
 extern "C" {
-IntroWork *jobGetWork(void);
+u32 jobGetWork(u32 handle);
 void eventQueueAddUnique(u32 event);
-IntroIconRecord *FUN_002bf4f8(u32 table, u32 index);
+IntroIconRecord *FUN_002bf4f8(u32 table, s32 index);
 s32 ifTouchGetSelectionModeForRegion(s32 id);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 height, s32 width);
 void ifTouchRegionRemove(void);
@@ -53,9 +53,9 @@ static __inline void introEnter(IntroWork *work, s32 state)
     work->timer = 0;
 }
 
-u32 FUN_00221310(void)
+s32 FUN_00221310(u32 handle)
 {
-    IntroWork *work = jobGetWork();
+    IntroWork *work = reinterpret_cast<IntroWork *>(jobGetWork(handle));
     work->tick = (work->tick + 1) % 60;
     switch (work->state) {
     case INTRO_STATE_APPEAR:

@@ -36,7 +36,7 @@ int efctSetSpeed(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183788(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int gameGetSlotRecord(...);
 int FUN_0025e704(...);
@@ -124,7 +124,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -574,7 +574,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       textFormatBuffer(temp_v40,&LAB_002af618,temp_v8);
       temp_v13 = FUN_001834a4(0xd,0x1c);
       puVar12 = temp_v32;
-      FUN_0018408c(puVar12,1);
+      fontMeasureLineAdvance(puVar12,1);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 8) +
                           ((int)**(short **)(temp_v13 + 0xc) - (int)puVar12) / 2 + temp_v6,
                           (unsigned char)(in_fpscr >> 0x16) & 3);

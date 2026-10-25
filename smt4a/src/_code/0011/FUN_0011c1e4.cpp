@@ -12,7 +12,7 @@ int FUN_002f4f00(unsigned char [64]);
 int FUN_00303cd8(unsigned char [64]);
 int listHolderOwnerBack(int *);
 int FUN_003113ee(unsigned int, int, int);
-int FUN_0031144c(void);
+int streamReaderReadWordValue(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_6: 6 slot(s), 24 byte(s) */
@@ -35,7 +35,7 @@ extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_00303cd8. */
 /* Supplied declaration required: listHolderOwnerBack. */
 /* Supplied declaration required: FUN_003113ee. */
-/* Supplied declaration required: FUN_0031144c. */
+/* Supplied declaration required: streamReaderReadWordValue. */
 
 
 void FUN_0011c1e4(int *param_1,int param_2,unsigned int param_3,unsigned int param_4,char *param_5,
@@ -64,7 +64,7 @@ void FUN_0011c1e4(int *param_1,int param_2,unsigned int param_3,unsigned int par
   if (((temp_v0 != 0) || (temp_v0 = (**(romwright_code **)(*temp_v7 + 0x2c))(temp_v7,param_2), temp_v0 != 0)) ||
      (param_2 != 1)) {
     temp_v1 = temp_v8;
-    FUN_0031144c();
+    streamReaderReadWordValue();
     temp_v5 = temp_v1;
     FUN_00303cd8(temp_v4);
     *param_5 = '\0';

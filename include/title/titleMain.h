@@ -4,18 +4,32 @@
 
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include <stddef.h>
 
 /* The title screen's block, kept by a module global. */
 typedef struct TitleMain {
     /* 0x00 */ u32 job;          /* job that runs the title screen */
     /* 0x04 */ u8 freeOnEnd;     /* 0 = keep the block after the job ends */
-    /* 0x05 */ u8 unk05[0x80];
+    union {
+        /* 0x05 */ u8 unk05[0x80];
+        struct {
+            /* 0x05 */ u8 unk05[0xB];
+            /* 0x10 */ u8 usesSubobject;
+            /* 0x11 */ u8 unk11[3];
+            /* 0x14 */ u8 subobject[4];
+        } trace;
+    };
     /* 0x85 */ u8 unk85;
     /* 0x86 */ u8 unk86[2];
     /* 0x88 */ u32 unk88;
     /* 0x8C */ AsdMdlObject *modelA;   /* destroyed with the title screen */
     /* 0x90 */ AsdMdlObject *modelB;   /* destroyed with the title screen */
 } TitleMain;
+typedef char TitleMainTraceLayoutCheck[
+    offsetof(TitleMain, trace.usesSubobject) == 0x10 &&
+    offsetof(TitleMain, trace.subobject) == 0x14 &&
+    offsetof(TitleMain, modelA) == 0x8C &&
+    sizeof(TitleMain) == 0x94 ? 1 : -1];
 
 /* Apocalypse keeps another word in front of the title screen's pointer. */
 typedef struct TitleMainGlobals {

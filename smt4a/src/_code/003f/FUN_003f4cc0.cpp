@@ -12,7 +12,7 @@ int FUN_00180310(int, int, int, int);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(int *, int);
+int fontMeasureLineAdvance(int *, int);
 int drawSetColorFromRGBA8(...);
 int VectorSignedToFloat(...);
 
@@ -38,7 +38,7 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern unsigned int markerKindGetColor(int);
 extern int gameGetSlotRecord(void);
@@ -140,7 +140,7 @@ LAB_003f510c:
             textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
           }
           temp_v5 = FUN_001834a4(0x11);
-          FUN_0018408c(&temp_v10,1);
+          fontMeasureLineAdvance(&temp_v10,1);
           temp_v0 = *(short *)(temp_v5 + 8);
           temp_v3 = 0xffffffff;
           temp_v1 = **(short **)(temp_v5 + 0xc);

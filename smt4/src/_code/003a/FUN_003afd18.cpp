@@ -1,79 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003afd18` (_code @ 0x3afd18, 0x100 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: iterator construction and payload-address folding schedule differently; the accepted-packet result, three-word iterator ABI and Boolean return are restored. */
+#include "shard/CircularTransferQueue.h"
 
-extern "C" {
+struct BufferedPacketBytes : CircularByteStorage {
+    u32 ringSize; // 0x0c
+    u32 readPosition; // 0x10
+    u32 unk14;
+    u32 byteCount; // 0x18
+};
+struct BufferedPacketIterator {
+    BufferedPacketBytes *owner;
+    u8 *pointer;
+    u32 position;
+};
+struct BufferedPacketPending {
+    TransferDescriptor *items;
+    u32 unk04;
+    u32 capacity;
+    u32 readIndex;
+    u32 tailIndex;
+    u32 count;
+};
+struct BufferedPacketInput {
+    u32 unk00;
+    BufferedPacketBytes bytes; // 0x04
+    TransferDescriptorRing accepted; // 0x20
+    BufferedPacketPending pending; // 0x34
+};
+typedef char BufferedPacketInputLayoutCheck[sizeof(BufferedPacketBytes) == 0x1c &&
+    sizeof(BufferedPacketIterator) == 0xc && offsetof(BufferedPacketInput, accepted) == 0x20 &&
+    offsetof(BufferedPacketInput, pending.items) == 0x34 &&
+    offsetof(BufferedPacketInput, pending.readIndex) == 0x40 &&
+    offsetof(BufferedPacketInput, pending.count) == 0x48 ? 1 : -1];
 
-int FUN_003fb848(unsigned char [12], int, int, int, int, int, unsigned int, int);
-int FUN_003fbc38(int, int);
-
-/* stack frame of param_3: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-/* Supplied declaration required: FUN_003fb848. */
-/* Supplied declaration required: FUN_003fbc38. */
-
-
-void FUN_003afd18(int param_1,unsigned int param_2,int param_3)
-
+static __inline BufferedPacketIterator bufferedPacketBegin(BufferedPacketBytes *buffer)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5 [12];
-  
-  if (*(int *)(param_1 + 0x48) != 0) {
-    temp_v0 = param_1 + 0x20;
-    FUN_003fbc38(temp_v0,*(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x40) * 0x10);
-    if (temp_v0 != 0) {
-      temp_v4 = *(int *)(param_1 + 0x1c) != 0;
-      temp_v0 = param_1 + 4;
-      if (temp_v4) {
-        param_3 = *(int *)(param_1 + 8);
-      }
-      temp_v1 = *(int *)(*(int *)((*(int *)(param_1 + 0x2c) * 0x10 + *(int *)(param_1 + 0x24)) - 0xc)
-                      + 0xc);
-      if (!temp_v4) {
-        param_3 = 0;
-      }
-      else {
-        param_3 = param_3 + *(int *)(param_1 + 0x14);
-      }
-      temp_v3 = param_3 + temp_v1;
-      if ((unsigned int)(*(int *)(param_1 + 8) + *(int *)(param_1 + 0x10)) <= temp_v3) {
-        temp_v3 = temp_v3 - *(int *)(param_1 + 0x10);
-      }
-      if (*(int *)(param_1 + 0x1c) != 0) {
-        temp_v2 = *(int *)(param_1 + 8) + *(int *)(param_1 + 0x14);
-      }
-      else {
-        temp_v2 = 0;
-      }
-      FUN_003fb848(temp_v5,temp_v0,temp_v0,temp_v2,*(int *)(param_1 + 0x14),temp_v0,temp_v3,
-                   *(int *)(param_1 + 0x14) + temp_v1);
-      temp_v0 = *(int *)(param_1 + 0x48) - 1;
-      *(int *)(param_1 + 0x48) = temp_v0;
-      if (temp_v0 == 0) {
-        *(unsigned int *)(param_1 + 0x44) = 0;
-        *(unsigned int *)(param_1 + 0x40) = 0;
-      }
-      else {
-        temp_v0 = *(int *)(param_1 + 0x40) + 1;
-        *(int *)(param_1 + 0x40) = temp_v0;
-        if (temp_v0 == *(int *)(param_1 + 0x3c)) {
-          *(unsigned int *)(param_1 + 0x40) = 0;
-        }
-      }
-    }
-  }
-  return;
+    BufferedPacketIterator iterator;
+    iterator.owner = buffer;
+    iterator.pointer = buffer->byteCount != 0 ? buffer->bytes + buffer->readPosition : NULL;
+    iterator.position = buffer->readPosition;
+    return iterator;
 }
 
-} /* extern "C" */
+static __inline BufferedPacketIterator bufferedPacketAdvance(BufferedPacketIterator iterator, u32 amount)
+{
+    u32 address = reinterpret_cast<u32>(iterator.pointer) + amount;
+    if (reinterpret_cast<u32>(iterator.owner->bytes) + iterator.owner->ringSize <= address)
+        address -= iterator.owner->ringSize;
+    iterator.pointer = reinterpret_cast<u8 *>(address);
+    iterator.position += amount;
+    return iterator;
+}
+
+extern "C" {
+u32 FUN_003fbc38(TransferDescriptorRing *descriptors, const TransferDescriptor *packet);
+BufferedPacketIterator FUN_003fb848(BufferedPacketBytes *buffer,
+    BufferedPacketIterator first, BufferedPacketIterator last);
+
+// Forward one pending packet and discard the corresponding byte range only after acceptance.
+u32 FUN_003afd18(BufferedPacketInput *input)
+{
+    if (input->pending.count == 0)
+        return 0;
+    if (FUN_003fbc38(&input->accepted, &input->pending.items[input->pending.readIndex]) == 0)
+        return 0;
+    u32 bytes = input->accepted.items[input->accepted.pending - 1].payload->size;
+    BufferedPacketIterator end = bufferedPacketAdvance(bufferedPacketBegin(&input->bytes), bytes);
+    FUN_003fb848(&input->bytes, bufferedPacketBegin(&input->bytes), end);
+    if (--input->pending.count == 0) {
+        input->pending.tailIndex = 0;
+        input->pending.readIndex = 0;
+    } else {
+        input->pending.readIndex++;
+        if (input->pending.readIndex == input->pending.capacity)
+            input->pending.readIndex = 0;
+    }
+    return 1;
+}
+}

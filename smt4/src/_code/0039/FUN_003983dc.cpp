@@ -1,40 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003983dc` (_code @ 0x3983dc, 0xc4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: encoded-character byte assembly and signed/unsigned literal sharing differ. */
+#include "shard/W6_W6Match3_NameFormState.h"
+#include "shard/W6_W6Match7_FontResource.h"
 
-extern "C" {
+extern "C" FontGlyphResourceOwner *recordTableGet(u32 index);
 
-typedef int romwright_code(...);
-extern int recordTableGet(unsigned int);
-
-
-void FUN_003983dc(int param_1)
-
+static __inline void nameFormSetCharacter(NameFormState *form, s8 index, s16 character)
 {
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = (int)*(char *)(param_1 + 0x22);
-  if (0 < temp_v1) {
-    while (temp_v1 = temp_v1 - 1, -1 < temp_v1) {
-      temp_v0 = (char)temp_v1;
-      if ((((-1 < temp_v0) &&
-           (temp_v2 = param_1 + temp_v0 * 2,
-           (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) == 0)
-           ) || (temp_v0 < 0)) ||
-         (temp_v2 = param_1 + temp_v0 * 2,
-         (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) ==
-         -0x7ec0)) {
-        temp_v2 = recordTableGet(3);
-        (**(romwright_code **)(**(int **)(temp_v2 + 8) + 0x44))(*(int **)(temp_v2 + 8),0x8140);
-        temp_v2 = param_1 + temp_v0 * 2;
-        *(unsigned char *)(temp_v2 + 0xb0) = 0x81;
-        *(unsigned char *)(temp_v2 + 0xb1) = 0x40;
-      }
-    }
-  }
-  return;
+    FontGlyphLookup *font = recordTableGet(3)->font;
+    font->vtable->hasGlyph(font, (u16)character);
+    form->text.characters[index].high = (s8)((u16)character >> 8);
+    form->text.characters[index].low = (s8)character;
 }
 
-} /* extern "C" */
+// Replace empty or fallback character slots with the full-width space glyph.
+extern "C" void FUN_003983dc(NameFormState *form)
+{
+    s32 length = form->text.length;
+    if (length > 0) {
+        for (s32 i = length - 1; i >= 0; --i) {
+            if (nameFormGetCharacter(form, (s8)i) == 0 ||
+                nameFormGetCharacter(form, (s8)i) == (s16)0x8140) {
+                nameFormSetCharacter(form, (s8)i, (s16)0x8140);
+            }
+        }
+    }
+}

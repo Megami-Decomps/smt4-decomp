@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0014d6f0(void);
-int hardfp_floorf(void);
+int __hardfp_floorf(void);
 
 /* Supplied declaration required: FUN_0014d6f0. */
-/* Supplied declaration required: hardfp_floorf. */
+/* Supplied declaration required: __hardfp_floorf. */
 
 
 void nw_anim_PlayPolicy_Loop(void)
@@ -21,7 +21,7 @@ void nw_anim_PlayPolicy_Loop(void)
   
   if (in_s1 - in_s0 != 0.0f) {
     if (in_s2 - in_s0 < 0.0f) {
-      hardfp_floorf();
+      __hardfp_floorf();
     }
     FUN_0014d6f0();
   }

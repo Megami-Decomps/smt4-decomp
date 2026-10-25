@@ -3,14 +3,14 @@
 
 extern "C" {
 
-extern int jyoucyuGetTableEntry(u32 id);
-extern int bgmStop(u32 channel, u32 fadeFrames, int force);
+extern void *jyoucyuGetTableEntry(s32 index);
+extern void bgmStop(s32 handle, s32 fade, s32 mode);
 
 /* Stops all BGM with a 15-frame fade, unless the jyoucyu table entry 1 is set. */
 void FUN_0032c69c(void)
 {
-    if (jyoucyuGetTableEntry(1) == 0) {
-        bgmStop(0xffffffff, 15, 0);
+    if (jyoucyuGetTableEntry(1) == NULL) {
+        bgmStop(-1, 15, 0);
     }
 }
 

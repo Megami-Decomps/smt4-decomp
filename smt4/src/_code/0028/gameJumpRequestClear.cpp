@@ -1,28 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `gameJumpRequestClear` (_code @ 0x289508, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: aggregate copy groups the two unspecified transform values into vstmia. */
+#include "map/MapJumpTransition.h"
 
-extern "C" {
+struct SaveJumpRequestBody {
+    /* 0x00000 */ u8 unk00000[0x24b84];
+    /* 0x24B84 */ MapJumpRequest jumpRequest;
+};
+extern "C" SaveJumpRequestBody *gameDataBlocksGetSaveData();
 
-extern int gameDataBlocksGetSaveData(void);
-
-
-void gameJumpRequestClear(void)
-
+// Clear the destination and translation; the remaining transform values are unspecified.
+extern "C" void gameJumpRequestClear()
 {
-/* irregular: irregular input(s): in_s16, in_s17 */
-  int temp_v0;
-  unsigned int in_s16;
-  unsigned int in_s17;
-  
-  temp_v0 = gameDataBlocksGetSaveData();
-  *(unsigned int *)(temp_v0 + 0x24b94) = in_s17;
-  *(unsigned int *)(temp_v0 + 0x24b84) = 0;
-  *(unsigned int *)(temp_v0 + 0x24b98) = in_s16;
-  *(unsigned int *)(temp_v0 + 0x24b88) = 0;
-  *(unsigned int *)(temp_v0 + 0x24b8c) = 0;
-  *(unsigned int *)(temp_v0 + 0x24b90) = 0;
-  return;
+    MapJumpRequest *destination = &gameDataBlocksGetSaveData()->jumpRequest;
+    MapJumpRequest request;
+    *destination = request;
 }
-
-} /* extern "C" */

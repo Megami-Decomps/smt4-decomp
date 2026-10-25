@@ -12,7 +12,7 @@ int FUN_0023acdc(...);
 int statusCommitSelectedSkills(...);
 int FUN_0026cbb8(...);
 int FUN_002a5e7c(...);
-int statusReplaceSkills(...);
+void statusReplaceSkills(const u16 *skills, u8 count);
 int FUN_0037dfb0(...);
 int FUN_0037e078(void);
 int buttonHelpSetMode(...);
@@ -2707,7 +2707,7 @@ LAB_00207d0c:
           temp_v41 = temp_v30;
           temp_v44 = temp_v16;
           temp_v16 = statusDownGetCursorPosition();
-          statusReplaceSkills(temp_v13 + 0x34,8);
+          statusReplaceSkills(reinterpret_cast<const u16 *>(temp_v13 + 0x34),8);
           statusDownSelectListIndex(temp_v16 - 1);
         }
         temp_v11 = *(unsigned int *)(temp_v13 + 0x38);

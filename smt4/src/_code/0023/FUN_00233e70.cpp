@@ -17,8 +17,8 @@ extern AocMain *g_aocMain;
 void FUN_002ba8f4(AocObjA *operation);
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 void FUN_0038b420(AocMain *main, u32 low, u32 high);
-bool FUN_002a1200(WindowStatusResult *result);
-bool FUN_002a116c(WindowStatusResult *result);
+u32 FUN_002a1200(const u32 *result);
+u32 FUN_002a116c(const u32 *result);
 s32 queryResultFailureOnly(u32 *result);
 void FUN_00234124(ScreenTransitionState *transition, const void *result);
 
@@ -38,10 +38,10 @@ void FUN_00233e70(ScreenTransitionState *transition, u32 unused, u32 nextState)
     if (legacyResourceIdRemap(&work->result.handle) == 0xC9413891)
         return;
     FUN_0038b420(g_aocMain, work->result.handle.code, work->result.handle.description);
-    if (FUN_002a1200(&work->result.handle)) {
+    if (FUN_002a1200(&work->result.handle.code)) {
         transition->flags = 4;
         transition->phase = 0;
-    } else if (FUN_002a116c(&work->result.handle) ||
+    } else if (FUN_002a116c(&work->result.handle.code) ||
                nnResultIsFailure(queryResultFailureOnly(&main->operation.queryResult))) {
         transition->flags = 3;
         transition->phase = 0;

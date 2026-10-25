@@ -1,4 +1,4 @@
-/* NON_MATCHING: identical except register numbering (retail keeps the config in r5 and the child in r4, this build the reverse) and the callee symbol, which names the initialize member with a malformed mangling (see rename request). */
+/* NON_MATCHING: configuration and child pointers use exchanged callee-saved registers. */
 #include "classes/Obj420990.h"
 #include "classes/Obj420708.h"
 #include "classes/Obj420880.h"

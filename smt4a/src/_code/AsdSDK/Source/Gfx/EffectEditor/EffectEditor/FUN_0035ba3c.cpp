@@ -41,7 +41,7 @@ u32 FUN_0035ba3c(Point2* coordinates, u32 value, EffectEditorMenuState* state)
     effMenuListAppend(reinterpret_cast<EffMenuNode*>(node), 3);
     if (padButtonIsPressed(1) || padButtonIsPressed(FUN_00202178(1))) {
         result = 0x400000;
-    } else if (state->dispatch.blocked & 8) {
+    } else if (state->inputStatus.flags & 8) {
         result = 0x400003;
     }
     return result;

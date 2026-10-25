@@ -19,7 +19,7 @@ int flaggedEntrySetValueB(...);
 void statusSkillsCommitOnDialogResult(void*);
 int screenShowMessage(...);
 int obj04Finish(void);
-int FUN_00359b6c(...);
+int skillHelpUpdateAttributeAndTarget(...);
 int screenStartOrClear(...);
 int FUN_003d4104(void);
 
@@ -142,7 +142,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: obj04Finish. */
 extern int asdSoundIsBankHandleLoaded(unsigned int);
-/* Supplied declaration required: FUN_00359b6c. */
+/* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0037b564(void);
 /* Supplied declaration required: screenStartOrClear. */
@@ -1395,7 +1395,7 @@ LAB_00269f7c:
         screenStartOrClear(*(unsigned int *)(temp_v6 + 0x256c),7);
       }
       else if (temp_v4 != 0) {
-        FUN_00359b6c(temp_v4);
+        skillHelpUpdateAttributeAndTarget(temp_v4);
       }
       else {
         FUN_0019de98(0,0xf4f4f4ff);
@@ -1424,7 +1424,7 @@ LAB_00269f7c:
         screenStartOrClear(*(unsigned int *)(temp_v6 + 0x256c),7);
       }
       else if (temp_v4 != 0) {
-        FUN_00359b6c(temp_v4);
+        skillHelpUpdateAttributeAndTarget(temp_v4);
       }
       else {
         FUN_0019de98(0,0xf4f4f4ff);
@@ -1529,7 +1529,7 @@ LAB_0026adc4:
       FUN_0019de98(temp_v17,0xf4f4f4ff);
     }
     else {
-      FUN_00359b6c(temp_v11);
+      skillHelpUpdateAttributeAndTarget(temp_v11);
     }
   }
   if (*(int *)(temp_v2 + 0x518) == 0x13) {
@@ -1608,7 +1608,7 @@ LAB_0026adc4:
     temp_v11 = (unsigned int)temp_v1;
     FUN_00480da8();
     if (temp_v11 != 0) {
-      FUN_00359b6c();
+      skillHelpUpdateAttributeAndTarget();
       *(int *)(temp_v2 + 0x524) = *(int *)(temp_v2 + 0x524) + 1;
       return 0;
     }
@@ -1621,7 +1621,7 @@ LAB_0026adc4:
       temp_v11 = (unsigned int)temp_v1;
       FUN_00480da8();
       if (temp_v11 != 0) {
-        FUN_00359b6c();
+        skillHelpUpdateAttributeAndTarget();
         *(int *)(temp_v2 + 0x524) = *(int *)(temp_v2 + 0x524) + 1;
         return 0;
       }

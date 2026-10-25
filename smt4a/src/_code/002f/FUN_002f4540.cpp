@@ -30,7 +30,7 @@ unsigned int FUN_002f4540(void)
     case 0:
       bVar1 = 1;
       uVar4 = 0;
-      while (iVar5 = FUN_001ab8c0(*(unsigned int *)(iVar2 + uVar4 * 4 + 0x65c)), iVar5 != 0) {
+      while (iVar5 = modelHasLoadedAttachment(*(unsigned int *)(iVar2 + uVar4 * 4 + 0x65c)), iVar5 != 0) {
         uVar4 = uVar4 + 1;
         if (0x1b < uVar4) {
           uVar4 = 0;

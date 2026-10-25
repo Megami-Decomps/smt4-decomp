@@ -1,8 +1,8 @@
-/* NON_MATCHING: The caller extends the narrow identifier and forms inventory-member addresses differently. */
+/* NON_MATCHING: corrected identifier width/saved flag signedness; inventory base offset folds into the member displacement. */
 #include "gamedata/Table00.h"
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 extern "C" {
-Table00Record* dataTable00FindById(u16);
+Table00Record* dataTable00FindById(u32 id);
 
 // Tests the collection flag for this identifier and its related identifiers.
 u32 FUN_0026264c(u32 id)
@@ -10,7 +10,7 @@ u32 FUN_0026264c(u32 id)
     if (id > 0x500) {
         return 0;
     }
-    Table00Record* record = dataTable00FindById((u16)id);
+    Table00Record* record = dataTable00FindById(id);
     if ((record->flags & 1) == 0) {
         return 0;
     }

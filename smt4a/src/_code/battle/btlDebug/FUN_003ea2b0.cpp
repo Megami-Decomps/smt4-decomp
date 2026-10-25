@@ -105,12 +105,12 @@ void aocHandleButtons(u32 resource, s32 mode);
 s32 FUN_003fce08(u32 resource, s32 flag);
 void btlEnsureEnemyDrawResources(u32 resource, s32 flag);
 SummonResource *FUN_00409fe8(s32 id, s32 flag);
-void FUN_004cae0c(BtlSummonState *state, SummonEffect *effect, s32 flag);
+void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void FUN_004fd204(s32 a, u32 unit, SummonEffect *effect, s32 b, s32 c, s32 d);
 u32 btlUnitGet(u32 unit);
 void FUN_004fe764(s32 a, u32 unit, SummonEffect *effect, u32 b, s32 c);
 void FUN_004cb90c(s32 flag);
-void nameEntriesRegisterVerNames(void);
+void nameEntriesRegisterVerNames(void *work);
 
 /* Returns 1 once the summon has been spawned. */
 u32 FUN_003ea2b0(BtlSummonState *state, u32 request)
@@ -152,7 +152,7 @@ u32 FUN_003ea2b0(BtlSummonState *state, u32 request)
         }
         g_btlCamera->flags |= 0x4000;
         if ((g_btlAux->flags & 0x400) != 0)
-            nameEntriesRegisterVerNames();
+            nameEntriesRegisterVerNames(g_btlAux);
         state->state = SUMMON_STATE_SPAWN;
         return 0;
     }
@@ -212,7 +212,7 @@ u32 FUN_003ea2b0(BtlSummonState *state, u32 request)
     s16 offsetA = (s16)DAT_0057a638;
     s16 offsetB = (s16)DAT_0057a64c;
     s16 offsetC = (s16)DAT_0057a63c;
-    FUN_004cae0c(state, effect, 0);
+    FUN_004cae0c(state, effect, 0, 0);
     FUN_004fd204(offsetB + offsetA, btlUnitGet(g_btlScriptUnit), effect, 0xFF, offsetC, 0);
     u32 reflectKind = (effect->flags & 0x10) != 0 ? 7 : 6;
     FUN_004fe764(offsetB, btlUnitGet(g_btlScriptUnit), effect, reflectKind, 0xD);

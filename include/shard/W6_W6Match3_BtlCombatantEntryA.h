@@ -81,7 +81,7 @@ struct BtlCombatantEntryA {
         /* 0x276 */ u8 unk276[0x182];
         struct {
             /* 0x276 */ u8 unk276BeforeStats[0x40];
-            /* 0x2B6 */ u16 values[1];
+            /* 0x2B6 */ u16 values[21];
         } encodedStats;
         struct {
             /* 0x276 */ u8 unk276BeforeLevels[0x94];
@@ -133,6 +133,11 @@ struct BtlCombatantEntryA {
 };
 
 typedef char BtlCombatantEntryASizeCheck[sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
+typedef char BtlCombatantEncodedStatsExtentCheck[
+    offsetof(BtlCombatantEntryA, encodedStats.values) == 0x2B6 &&
+    sizeof(((BtlCombatantEntryA *)0)->encodedStats.values) == 0x2A &&
+    offsetof(BtlCombatantEntryA, indexedFlags.values) == 0x2E0 &&
+    sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
 typedef char BtlCombatantIndexedFlagsOffsetCheck[
     offsetof(BtlCombatantEntryA, indexedFlags.values) == 0x2E0 ? 1 : -1];
 typedef char BtlCombatantQueryValueOffsetCheck[

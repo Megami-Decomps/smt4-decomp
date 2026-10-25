@@ -8,7 +8,7 @@ extern MapIfState *g_mapIf;
 extern GameState g_gameState;
 NodeEnableNode *asdMdlManagerCreateFromSource(u32 source, u32 size, u32 flags);
 void FUN_002a0428(NodeEnableNode *model, s32 enabled);
-void FUN_002531bc(MapIfModelMarker *marker);
+void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);
 
 // Load and reset the two model-backed map interface markers.
 void FUN_0020d6b0()
@@ -37,7 +37,7 @@ void FUN_0020d6b0()
     first->position[2] = 0.0f;
     first->heading = 0.0f;
     first->elapsed = 0;
-    FUN_002531bc(first);
+    mapMarkerSynchronizeModelState(first);
     MapIfModelMarker *second = &interfaceState->modelMarkers[1];
     second->model = asdMdlManagerCreateFromSource(sources->secondSource, sources->secondSize, 7);
     FUN_002a0428(second->model, 1);
@@ -54,6 +54,6 @@ void FUN_0020d6b0()
     second->position[2] = 0.0f;
     second->heading = 0.0f;
     second->elapsed = 0;
-    FUN_002531bc(second);
+    mapMarkerSynchronizeModelState(second);
 }
 }

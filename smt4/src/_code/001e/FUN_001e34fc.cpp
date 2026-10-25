@@ -31,7 +31,7 @@ extern int *g_deferredMapModels; /* 0x447e58 */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
-extern int FUN_002adee0(int);
+extern int modelHasLoadedAttachment(int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002e004c. */
 /* Supplied declaration required: FUN_002f479c. */
@@ -73,7 +73,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
         }
         piVar10 = g_deferredMapModels + temp_v4 * 0xe + 3;
         if ((!temp_v5 && temp_v3 < 0 == (param_1 < 0x65 && SBORROW4(param_1,100))) ||
-           (temp_v3 = FUN_002adee0(g_deferredMapModels[temp_v4 * 0xe + 0xf]), temp_v3 != 0)) {
+           (temp_v3 = modelHasLoadedAttachment(g_deferredMapModels[temp_v4 * 0xe + 0xf]), temp_v3 != 0)) {
           FUN_002a0428(piVar9[temp_v4 * 0xe + 0xf],1);
           temp_v3 = g_deferredMapModels[1];
           FUN_00266f30();

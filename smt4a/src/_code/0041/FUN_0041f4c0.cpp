@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: argument setup order before FUN_0041f020 and the previous-state temp (r2 vs r0) in the state change */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -33,8 +34,6 @@ void FUN_0041e58c(ModeScreen *screen);
 void FUN_0041f020(ModeScreen *screen, s32 arg);
 s32 FUN_00163fd4(s32 id);
 void FUN_002f0384(s32 arg);
-void *dataTableGet(u32 tableId, u32 flags);
-ModeScreenEntry *dataTableGetEntries(void);
 void FUN_0019de98(void *target, u32 color);
 
 /* Switches to `state`/`subState`, remembering the state left and restarting the timer. */
@@ -67,8 +66,8 @@ void FUN_0041f4c0(ModeScreen *screen)
         screen->unk68 = 0;
     }
     index = screen->entryIndex;
-    dataTableGet(0x3d, 0);
-    FUN_0019de98(dataTableGetEntries()[index].colorTarget, 0xf4f4f4ff);
+    ModeScreenEntry *entries = static_cast<ModeScreenEntry *>(dataTableGetEntries(dataTableGet(0x3d, 0)));
+    FUN_0019de98(entries[index].colorTarget, 0xf4f4f4ff);
     modeScreenSetState(screen, 13, 4);
 }
 

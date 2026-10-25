@@ -5,7 +5,7 @@
 extern "C" {
 
 int eventTexCallIfIdle(...);
-int FUN_0011a0d4(...);
+int bustupRequestOwnedTextureFrame(...);
 int FUN_002bff38(...);
 int __aeabi_memcpy4(...);
 
@@ -38,7 +38,7 @@ extern unsigned char LAB_0010d0ec; /* 0x10d0ec */
 extern int eventTexSelectJobsById(short);
 extern int bustupCutAnimSelectSlotsById(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
-/* Supplied declaration required: FUN_0011a0d4. */
+/* Supplied declaration required: bustupRequestOwnedTextureFrame. */
 extern unsigned int dataTableGetNamePayload(void);
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
 extern unsigned int aocIndexValueOrDefault(unsigned short);
@@ -240,7 +240,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       temp_v3 = *(unsigned short *)(param_2 + (temp_v9 + 1) * 2);
       wstrBufferPutChar(param_3,param_5,temp_v3,param_6);
       temp_v7 = temp_v10;
-      FUN_0011a0d4(temp_v10,temp_v4,temp_v2,temp_v3,0xffffffff);
+      bustupRequestOwnedTextureFrame(temp_v10,temp_v4,temp_v2,temp_v3,0xffffffff);
       if (temp_v7 != 0) {
         return 1;
       }

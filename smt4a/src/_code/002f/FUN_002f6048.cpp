@@ -11,7 +11,7 @@ int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_0018408c(unsigned char *, int);
+int fontMeasureLineAdvance(unsigned char *, int);
 int renderCtxCalculateStereoParallax(int);
 int jobGetScalarValue(void);
 int FUN_002f6f44(...);
@@ -43,7 +43,7 @@ extern unsigned int FUN_00156850(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002f6f44. */
@@ -108,7 +108,7 @@ void FUN_002f6048(int param_1)
   temp_v4 = FUN_00156850(temp_v13,0);
   textFormatBuffer(temp_v12,&LAB_002f64c4,temp_v4);
   puVar6 = temp_v12;
-  FUN_0018408c(puVar6,3);
+  fontMeasureLineAdvance(puVar6,3);
   temp_v2 = FUN_001834a4(0x1e,0x55);
   temp_v3 = ((int)**(short **)(temp_v2 + 0xc) - (int)(puVar6 + temp_v8 + (int)temp_v0)) / 2;
   renderCtxCalculateStereoParallax(g_renderCtx);

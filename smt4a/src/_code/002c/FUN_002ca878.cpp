@@ -23,7 +23,7 @@ void FUN_0018152c(u32 id, s32 x, s32 y, u32 flags, u32 arg);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *text);
 void FUN_00183bb0(void);
-s32 FUN_0018408c(const char *text, s32 mode);
+s32 fontMeasureLineAdvance(const char *text, s32 mode);
 void FUN_00162790(u32 layer, u32 flags, const char *text, f32 x, f32 y);
 
 #define BADGE_STEREO_SCALE 0.26f
@@ -65,7 +65,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
     FUN_00183bb0();
 
     frame = FUN_001834a4(BADGE_BANK, 0xC1F);
-    s32 labelX = frame->x + (frame->size[0] - FUN_0018408c(label, 2)) / 2 + x + stereo;
+    s32 labelX = frame->x + (frame->size[0] - fontMeasureLineAdvance(label, 2)) / 2 + x + stereo;
     FUN_00162790(2, 0xFF, label, (f32)labelX, (f32)(frame->y + y));
     efctSetSpeed(savedSpeed);
 }

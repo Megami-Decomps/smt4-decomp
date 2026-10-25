@@ -1,11 +1,8 @@
 /* NON_MATCHING: -O2 candidate; map-state, registry, object and zero register roles differ although all82 normalized instructions otherwise agree. */
 #include "map/mapIf.h"
 #include "shard/W5_W5Match7_SceneState.h"
+#include "gfx/ObjectRegistry.h"
 
-struct MapIfSceneObject {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 flags;
-};
 struct MapIfController {
     /* 0x00 */ u8 active;
     /* 0x01 */ u8 visible;
@@ -24,8 +21,8 @@ struct MapIfResourceState {
 
 extern "C" {
 extern MapIfGlobalsA g_mapIf;
-extern void* g_handleRegistry;
-void handleRegistryRegisterObject(void* registry, MapIfSceneObject* object);
+extern ObjectRegistry* g_handleRegistry;
+void handleRegistryRegisterObject(ObjectRegistry* registry, RegisteredObject* object);
 void mapIfControllerApply(MapIfController* controller);
 }
 
@@ -38,7 +35,7 @@ inline MapIfResource* controllerResource(u32 index)
 inline void initializeController(MapIfController* controller, MapIfResource* resource)
 {
     controller->resource = resource;
-    MapIfSceneObject* object = reinterpret_cast<MapIfSceneObject*>(resource->handle);
+    RegisteredObject* object = reinterpret_cast<RegisteredObject*>(resource->handle);
     handleRegistryRegisterObject(g_handleRegistry, object);
     object->flags |= 3;
     controller->active = 1;

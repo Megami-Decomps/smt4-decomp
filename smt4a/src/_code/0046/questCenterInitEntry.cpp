@@ -1,11 +1,11 @@
-/* NON_MATCHING: work/quest GPRs R4/R5 are reversed and the same constant address is spelled DAT533458+0x18 versus retail DAT533470 (113/113); optimization plus data-alias integration candidate. */
+/* NON_MATCHING: work and quest-ID saved registers are exchanged; parameter data relocations now agree. */
 #include "shard/W6_W6Match7_QuestInteraction.h"
 #include "shard/W6_W6Match7_DrawParameters.h"
 
 namespace {
 struct QuestParameterData {
     u8 first[0x18];
-    u8 second[1]; // Minimum prefix; only its address, 0x18 after first, is established.
+    u8 second[0xa8];
 };
 struct QuestInitializationWork {
     union {

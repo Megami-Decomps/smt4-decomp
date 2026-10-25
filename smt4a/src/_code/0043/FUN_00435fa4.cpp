@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00435fa4` (_code @ 0x435fa4, 0x27c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/MaskWork.h"
+#include <new>
 
 extern "C" {
 
@@ -10,7 +12,6 @@ int FUN_004386a4(unsigned int ********, int *, int);
 int FUN_004387bc(int, unsigned int *******, int);
 int FUN_004387f0(int *, int);
 int variantSetPlain(...);
-int FUN_00515598(void);
 int FUN_00515618(...);
 
 /* stack frame of param_4: 12 slot(s), 48 byte(s) */
@@ -35,7 +36,6 @@ typedef struct {
 /* Supplied declaration required: FUN_004387bc. */
 /* Supplied declaration required: FUN_004387f0. */
 /* Supplied declaration required: variantSetPlain. */
-/* Supplied declaration required: FUN_00515598. */
 /* Supplied declaration required: FUN_00515618. */
 
 
@@ -110,9 +110,7 @@ unsigned int FUN_00435fa4(int *param_1,int *param_2,int *param_3,int *param_4)
           }
           return 2;
         }
-        if (piVar2 != (int *)0xfffffff8) {
-          FUN_00515598();
-        }
+        new (&reinterpret_cast<MaskWorkNode *>(piVar2)->payload) Variant;
         *piVar2 = *piVar4;
         piVar2[1] = (int)piVar4;
         *piVar4 = (int)piVar2;

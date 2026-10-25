@@ -8,7 +8,7 @@ s32 stageAssetsLoaded(void);
 int NaviMain_UpdateDiscovery(void *discovery);
 
 /* Navi task: while stageAssetsLoaded reports ready and the navi object isn't busy, updates its discovery state; always returns 0. */
-u32 NAVI_DOWN(void)
+s32 NAVI_DOWN(u32 handle)
 {
     if (stageAssetsLoaded() == 0) {
         return 0;

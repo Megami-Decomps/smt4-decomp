@@ -3,8 +3,8 @@
 
 extern "C" {
 extern EffectSelectionContext DAT_0059e9a8;
-extern u8 DAT_00634bc0[];
-extern u8 DAT_00634d20[];
+extern u8 g_effectEditorSettings[];
+extern u8 g_effectEditorSavedSnapshot[];
 extern EffectSelectionCatalogEntry *DAT_0059e624[13];
 EffectSelectionItem *linkedFindItemByIndex(void *list, s32 index);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -40,8 +40,8 @@ extern "C" u32 effectEditorActivateSelection()
     EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.selection.list,
         g_effectEditor.selection.index + DAT_0059e9a8.index);
     g_effectEditor.selection.item = item;
-    __aeabi_memcpy4(DAT_00634bc0, item, 0x90);
-    __aeabi_memcpy4(DAT_00634d20, item, 0x80);
+    __aeabi_memcpy4(g_effectEditorSettings, item, 0x90);
+    __aeabi_memcpy4(g_effectEditorSavedSnapshot, item, 0x80);
     g_effectEditor.selection.block = item->block;
     EffectSelectionParts *parts = FUN_002b30e4(item);
     if (parts->type != 0x1b) {

@@ -25,7 +25,7 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 void FUN_002c1b64(RenderCtx *context, u32 camera);
 void camSetMatrixB(RenderCtx *context, const Matrix44 *matrix);
-void FUN_002571e8(u32 mode);
+void renderCtxSelectBlendPreset(u32 mode);
 s32 FUN_002c5d80(u32 kind, u32 value);
 void FUN_00347198(TiledIndexMesh *mesh);
 void FUN_00346f2c(TiledIndexMesh *mesh);
@@ -43,7 +43,7 @@ void FUN_0024f5ec(TiledMeshDrawWork *work, u32 mode)
     matrix.values[11] = 0.0f;
     matrix.values[15] = 1.0f;
     camSetMatrixB(g_titleScene, &matrix);
-    FUN_002571e8(mode);
+    renderCtxSelectBlendPreset(mode);
     RenderCtx *context = g_titleScene;
     if ((work->flags & 0x100) != 0) {
         renderCtxPushA(context, FUN_002c5d80(5, 0));

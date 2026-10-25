@@ -1,12 +1,14 @@
 /* NON_MATCHING: whole body matches (MikadoCamera::initialize, string globals, FloatState ctor); armcc keeps the zero/-1 constants in r6/r0 where retail hoists them to r7/r8, and retail's asdOperatorNew call carries an extra stale r6 argument (as in the other `new` sites) that has no source expression. */
 #include "mikado/mikadoMain.h"
+struct ContentTransition;
+struct Mover;
 
 extern "C" {
 extern const char g_mikadoTalkBfPath[];    /* g_mikadoTalkBfPath */
 extern const char g_mikadoTalkMbmPath[];   /* g_mikadoTalkMbmPath */
 extern const char g_mikadoCheckBfPath[];   /* g_mikadoCheckBfPath */
 extern const char g_mikadoCheckMbmPath[];  /* g_mikadoCheckMbmPath */
-void FUN_003bb0ac(void);
+void FUN_003bb0ac(ContentTransition *transition);
 void FUN_003bb1f0(SelectionFlags *panel);
 void asdTMTexTableLoadTmx(u32 kind, u32 arg);
 void FUN_002898e4(void);
@@ -18,7 +20,7 @@ void FUN_003bbaf4(u32 *object);
 void spriteTable2aLoad(SelectionFlags *panel);
 void asdLoadFileAsyncSimple(const char *path, u32 *dest, s32 arg);
 void FUN_00282bfc(s32 slot, u32 value);
-void FUN_00235250(void);
+void FUN_00235250(Mover *mover);
 void FUN_002637c8(void);
 }
 
@@ -26,7 +28,7 @@ void MikadoCamera::initialize()
 {
     ready = 0;
     flags = 0;
-    FUN_003bb0ac();
+    FUN_003bb0ac(reinterpret_cast<ContentTransition *>(this));
     FUN_003bb1f0(&selectionFlags);
     unk34 = -1;
     asdTMTexTableLoadTmx(0x21, 0);
@@ -62,6 +64,6 @@ void MikadoCamera::initialize()
     FUN_00282bfc(0, 0xFF);
     FUN_00282bfc(1, 0xFF);
     talkWork = new MikadoTalkWork;
-    FUN_00235250();
+    FUN_00235250(reinterpret_cast<Mover *>(talkWork));
     FUN_002637c8();
 }

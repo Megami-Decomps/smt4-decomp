@@ -1,11 +1,12 @@
-/* NON_MATCHING: same instructions as retail except register allocation (retail keeps the countdown pointer in r5, the divisor base in r6, the reduction in r4), an `adds` where retail has `add`, and the 64-bit multiply temporaries (r3/ip swapped). */
+/* NON_MATCHING: countdown/zero saved registers and the high/low multiply intermediates differ. */
 #include "nn/svc.h"
 
 struct CountdownState {
     bool active;    // 0x00
     bool debug;     // 0x01
     u8 unk02[0x16]; // 0x02
-    s64 remaining;  // 0x18
+    u32 remaining;  // 0x18
+    u32 unk1C;      // 0x1C
 };
 
 extern "C" {
@@ -23,7 +24,7 @@ void FUN_002ad958(s32 shortDelay)
 {
     u32 reduction = 0;
     CountdownState *state = &g_titleContentFileSystem;
-    u32 delay = shortDelay == 0 ? 380 : 100;
+    u32 delay = shortDelay ? 100 : 380;
     if (state->active) {
         if (state->debug) {
             s32 tick = (s32)svcGetSystemTick();

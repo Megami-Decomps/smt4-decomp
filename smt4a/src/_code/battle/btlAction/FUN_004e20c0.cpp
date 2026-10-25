@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "battle/BattleCommandValue.h"
 
 extern "C" {
 
-int FUN_003e77cc(...);
 int FUN_003f0254(...);
 int FUN_003f06b4(...);
 int FUN_004c14c8(void);
@@ -1759,7 +1759,7 @@ LAB_004e4cac:
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
            (temp_v12 = param_8, FUN_004c14c8(), temp_v12 != 0)) {
           temp_v5 = *(int *)(*param_1 + 0x1ed4);
-          FUN_003e77cc(*param_1,4,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
+          FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),4,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
                        (int)*(short *)(temp_v5 + temp_v30),temp_v12);
         }
       }
@@ -1781,7 +1781,7 @@ LAB_004e4cac:
             if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
                (temp_v5 = temp_v12, FUN_004c5ec0(), temp_v5 != 0)) {
               temp_v8 = *(int *)(*param_1 + 0x1ed4);
-              FUN_003e77cc(*param_1,4,(int)*(short *)(temp_v8 + temp_v12 * 0x1d0 + 0x68),
+              FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),4,(int)*(short *)(temp_v8 + temp_v12 * 0x1d0 + 0x68),
                            (int)*(short *)(temp_v8 + param_7 * 0x1d0 + 0x68),temp_v5);
             }
           }
@@ -1797,7 +1797,7 @@ LAB_004e4cac:
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
            (temp_v12 = FUN_004c65e8(param_8), temp_v12 != 0)) {
           temp_v5 = *(int *)(*param_1 + 0x1ed4);
-          FUN_003e77cc(*param_1,5,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
+          FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),5,(int)*(short *)(temp_v5 + param_8 * 0x1d0 + 0x68),
                        (int)*(short *)(temp_v5 + temp_v30),temp_v12);
         }
       }
@@ -1818,7 +1818,7 @@ LAB_004e4cac:
     FUN_004c5848();
     if ((temp_v12 != 0) && (temp_v12 = btlFindEntryValue(param_8,0x2c), temp_v12 < 1)) {
       temp_v12 = *(int *)(*param_1 + 0x1ed4);
-      FUN_003e77cc(*param_1,7,(int)*(short *)(temp_v12 + param_8 * 0x1d0 + 0x68),
+      FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),7,(int)*(short *)(temp_v12 + param_8 * 0x1d0 + 0x68),
                    (int)*(short *)(temp_v12 + temp_v30),0x6a);
       FUN_004c571c(param_8,0x2c,1,0);
     }

@@ -50,7 +50,7 @@ void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
 void FUN_002c1e30(void *camera, s32 flag, CameraView view);
 void FUN_00298d50(void *camera);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
-s32 FUN_002adee0(AsdMdlObject *model);
+s32 modelHasLoadedAttachment(AsdMdlObject *model);
 void FUN_002a0428(AsdMdlObject *model, u32 enabled);
 void FUN_0029bb14(void *node, f32 speed);
 s32 effTimelineIsDone(void *effect);
@@ -87,7 +87,7 @@ void FUN_003bc9d0(TitleIntro *intro)
         FUN_002c1e30(camera, 1, view);
         FUN_00298d50(camera);
         intro->model = asdMdlManagerCreateLoaded(DAT_00407d9c, 0x38);
-        if (FUN_002adee0(intro->model) != 0) {
+        if (modelHasLoadedAttachment(intro->model) != 0) {
             FUN_002a0428(intro->model, 1);
             AsdMdlObject *model = intro->model;
             if ((model->flags & 4) != 0) {

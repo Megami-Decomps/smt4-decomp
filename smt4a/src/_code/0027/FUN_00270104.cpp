@@ -50,7 +50,7 @@ HelpRecordView *btlMainGetUnk14(void);
 HelpRecordView *gameGetSlotRecord(void);
 u32 slotRecordFindById(u16 id);
 void FUN_0032d0c8(u32 panel, s32 a, u32 id, u32 member);
-void FUN_00359b6c(u32 id);
+void skillHelpUpdateAttributeAndTarget(u32 id);
 void FUN_003aeb18(u32 panel, s32 arg);
 void FUN_00399e20(u32 panel, s32 arg);
 s32 gameFlagIsSet(u32 flag);
@@ -113,7 +113,7 @@ void FUN_00270104(SkillMenuWork *work)
                 return;
             }
             if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
-                FUN_00359b6c(index);
+                skillHelpUpdateAttributeAndTarget(index);
                 return;
             }
             index = *(u16 *)((u8 *)work + work->page * 0x10 + index * 2 + 0x3C42);
@@ -151,7 +151,7 @@ void FUN_00270104(SkillMenuWork *work)
             return;
         }
     }
-    FUN_00359b6c(index);
+    skillHelpUpdateAttributeAndTarget(index);
 }
 
 }

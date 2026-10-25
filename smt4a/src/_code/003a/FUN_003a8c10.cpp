@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 kind, s32 *first, s32 *count);
+void FUN_00301a08(s32 kind, u32 *first, u32 *count);
 BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 void scrSetResult(s32 value);
@@ -16,9 +16,9 @@ u32 FUN_003a8c10()
 {
     u32 id = scrGetArg(0);
     s32 stat = scrGetArg(1);
-    s32 first, count;
+    u32 first, count;
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(2)), &first, &count);
-    for (s32 index = first; index < first + count; ++index) {
+    for (s32 index = first; index < (s32)(first + count); ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&

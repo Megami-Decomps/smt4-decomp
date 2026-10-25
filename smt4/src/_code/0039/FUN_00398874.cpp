@@ -22,7 +22,7 @@ typedef struct CursorMenu {
 
 s32 FUN_002bf818(void *timer);
 void FUN_00232848(void);
-void FUN_00232698(CursorMenu *menu);
+void touchLayoutRebuildRegions(CursorMenu *menu);
 void buttonHelpSetPreset(s32 preset);
 void messageOwnerSetState(CursorMenu *menu, s32 state);
 void timerStart(void *timer, s32 a, s32 b);
@@ -39,13 +39,13 @@ void FUN_00398874(CursorMenu *menu)
             menu->cursorX = menu->savedCursorX;
             menu->cursorY = menu->savedCursorY;
             FUN_00232848();
-            FUN_00232698(menu);
+            touchLayoutRebuildRegions(menu);
             buttonHelpSetPreset(150);
         } else {
             menu->cursorX = 0;
             menu->zoomed = 1;
             menu->cursorY = 0;
-            FUN_00232698(menu);
+            touchLayoutRebuildRegions(menu);
             buttonHelpSetPreset(151);
         }
         messageOwnerSetState(menu, 11);

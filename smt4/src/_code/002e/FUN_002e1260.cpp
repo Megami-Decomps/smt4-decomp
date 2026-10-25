@@ -1,4 +1,4 @@
-/* NON_MATCHING: Animation policy selection is complete; first-column lookup folds to MUL rather than retail inlined zero-column MLA and uses different load scheduling. */
+/* NON_MATCHING: original two-dimensional accessor and zero-column MLA are restored; table/row pointer load registers differ. */
 #include "common.h"
 
 struct AnimationPolicyState {
@@ -28,6 +28,11 @@ struct AnimationPolicyOwner {
 };
 extern "C" void FUN_00155650();
 extern "C" void nw_anim_PlayPolicy_Loop();
+static inline AnimationPolicyState *animationPolicyTableGet(AnimationPolicyTable *table, s32 column, s32 row)
+{
+    return table->states[column + row * table->columns];
+}
+
 
 /* Enable the first animation in the active row and choose its play policy. */
 extern "C" void FUN_002e1260(AnimationPolicyOwner *owner, s32 loop)
@@ -35,7 +40,7 @@ extern "C" void FUN_002e1260(AnimationPolicyOwner *owner, s32 loop)
     if (owner->count > 0) {
         AnimationPolicyModel *model = owner->model;
         if (model->ready != 0) {
-            AnimationPolicyState *state = model->table->states[model->row * model->table->columns];
+            AnimationPolicyState *state = animationPolicyTableGet(model->table, 0, model->row);
             if (state != NULL) {
                 state->enabled = 1;
                 state->policy = loop == 0 ? FUN_00155650 : nw_anim_PlayPolicy_Loop;

@@ -5,7 +5,7 @@ extern "C" {
 
 void scrCommMessageSetMode(s32 arg0);
 u32 FUN_002ba85c(void);
-s32 scrGetArg(...);
+s32 scrGetArg(s32 index);
 u32 scrGetCommandFrame(void);
 void FUN_0021bdac(u32 arg0, s32 arg1, u32 frame, s32 arg3, s32 arg4, s32 arg5);
 

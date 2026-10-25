@@ -1,36 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ebb94` (_code @ 0x3ebba0, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: static initialization scheduling has not yet been matched. */
+#include "AsdSDK/Source/Sys/File/AsdFile.h"
+
+struct AsdFileInitializationGlobals : AsdFileGlobals {
+    u32 unk2c;
+    s64 timestamp; // 0x30
+};
+struct FileThreadState {
+    u32 handle;
+    u8 joined;
+    u8 padding[3];
+};
+struct FileEventState { u32 words[2]; };
 
 extern "C" {
+extern AsdFileInitializationGlobals g_asdFile;
+extern u64 DAT_00465038;
+extern FileThreadState g_asdFileThread;
+extern u32 g_asdFileMutex;
+extern FileEventState g_asdFileEvent;
+void nn_os_Thread_Thread_sub_object(void *object);
+void FUN_00357754(void *object);
+void FUN_003573a0(void *object);
+void entry();
+__weak s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
+void sceneNotifyNoop(void *object, void (*destroy)(void *), void *module);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned int g_asdFileMutex; /* 0x465014 */
-extern unsigned int g_asdFileThread; /* 0x465020 */
-extern unsigned char DAT_00465024; /* 0x465024 */
-extern unsigned int g_asdFileEvent; /* 0x465028 */
-extern unsigned int DAT_0046502c; /* 0x46502c */
-extern unsigned int DAT_00465038; /* 0x465038 */
-extern unsigned int DAT_0046503c; /* 0x46503c */
-
-
-void FUN_003ebb94(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Initialize the file loader's thread, mutex and wake event, registering cleanup.
+void FUN_003ebb94()
 {
-  *(unsigned int *)(param_3 + 0x30) = param_1;
-  *(unsigned int *)(param_3 + 0x34) = param_2;
-  DAT_00465038 = 0;
-  DAT_0046503c = 0;
-  g_asdFileThread = 0;
-  DAT_00465024 = 1;
-  g_asdFileMutex = 0;
-  g_asdFileEvent = 0;
-  DAT_0046502c = 0;
-  return;
+    g_asdFile.timestamp = -1;
+    DAT_00465038 = 0;
+    g_asdFileThread.handle = 0;
+    g_asdFileThread.joined = 1;
+    __aeabi_atexit(&g_asdFileThread, nn_os_Thread_Thread_sub_object, reinterpret_cast<void *>(entry));
+    g_asdFileMutex = 0;
+    __aeabi_atexit(&g_asdFileMutex, FUN_00357754, reinterpret_cast<void *>(entry));
+    g_asdFileEvent.words[0] = 0;
+    g_asdFileEvent.words[1] = 0;
+    sceneNotifyNoop(&g_asdFileEvent, FUN_003573a0, reinterpret_cast<void *>(entry));
 }
-
-} /* extern "C" */
+}

@@ -37,7 +37,7 @@ extern "C" {
 extern PartyPanelView *g_partyPanel;
 void FUN_0023f900(void);
 void screenShowMessage(u32 id);
-void FUN_00359b6c(u32 id);
+void skillHelpUpdateAttributeAndTarget(u32 id);
 
 /* Shows the help line for the party panel's current screen: the page-specific handlers, or a
  * line of table 0x39 picked by the panel kind and its flags. */
@@ -65,7 +65,7 @@ void FUN_0020d934(void)
     case 5:
     case 6:
     case 7:
-        FUN_00359b6c(g_partyPanel->id);
+        skillHelpUpdateAttributeAndTarget(g_partyPanel->id);
         return;
     case 8:
     case 9:

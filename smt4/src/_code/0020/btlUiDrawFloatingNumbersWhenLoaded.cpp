@@ -8,7 +8,7 @@ extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 extern BtlUiGlobals g_btlUi;
 
 /* Counts the set entries of tables 0x14 (5 entries) and 0x15 (4 entries); with 9 or more, calls btlDrawFloatingNumbers. Returns 0. */
-u32 btlUiDrawFloatingNumbersWhenLoaded(void)
+s32 btlUiDrawFloatingNumbersWhenLoaded(u32 job)
 {
     s32 i;
     s32 count;

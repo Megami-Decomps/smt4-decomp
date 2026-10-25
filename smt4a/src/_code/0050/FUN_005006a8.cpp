@@ -20,7 +20,6 @@ WindowStatusResult FUN_005006a8(HalfwordSource **source, u32 *readCount, u32 han
 {
     HalfwordSource *input = *source;
     s32 status;
-
     if (start >= input->length) {
         status = 0;
         *readCount = 0;

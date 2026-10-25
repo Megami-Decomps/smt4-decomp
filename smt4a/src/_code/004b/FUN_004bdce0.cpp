@@ -13,7 +13,7 @@ UiTextMetrics *FUN_001834a4(u32 texture, u32 frame);
 BattleRosterRecordA *FUN_003e4d68(u32 id);
 const char *FUN_00180114(u16 id);
 void textFormatBuffer(char *output, const char *format, ...);
-s32 FUN_0018408c(const char *text, s32 font);
+s32 fontMeasureLineAdvance(const char *text, s32 font);
 void FUN_00162790(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
 
 /* Centers each active roster member's label in its layout slot, dimming unselected members in mode two. */
@@ -32,7 +32,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
             char text[64];
             textFormatBuffer(text, DAT_0052d838, FUN_00180114(record->label.nameId));
             UiTextMetrics *placement = FUN_001834a4(0x11, visible + 0xAE);
-            s32 width = FUN_0018408c(text, 1);
+            s32 width = fontMeasureLineAdvance(text, 1);
             s32 labelX = origin->x + (placement->x + (placement->dimensions[0] - width) / 2 + x);
             s32 labelY = placement->y + origin->y + y;
             u32 color = 0xFFFFFFFF;

@@ -12,7 +12,7 @@ BattleEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 void FUN_00247478(void *, BtlMainState *, BattleEntry *);
 u32 FUN_00246134(u32, u32, s32, u32);
 void selectionCopySupportedValue(u32, u32 *);
-s32 FUN_0022aa38(BattleEntry *, u32);
+s32 btlEntryHasSkillCategory(BattleEntry *, u32);
 f32 battleGetPassiveAffinityMultiplier(u32, u32);
 
 f32 FUN_003bd1d8(u32 listedId, u32 request)
@@ -58,7 +58,7 @@ f32 FUN_003bd1d8(u32 listedId, u32 request)
     entry = btlMainFindEntryByListedId(mainState, listedId);
     u32 attributes;
     selectionCopySupportedValue(query.entryId, &attributes);
-    if (FUN_0022aa38(entry, attributes & 0xFFu) != 0 && percent < 100) {
+    if (btlEntryHasSkillCategory(entry, attributes & 0xFFu) != 0 && percent < 100) {
         percent = 100;
         reinterpret_cast<MinimumPercentViewIV *>(mainState)->minimumPercentApplied = 1;
     }

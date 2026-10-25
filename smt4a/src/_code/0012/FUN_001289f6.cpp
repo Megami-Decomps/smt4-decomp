@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0030dd02(int, int, unsigned int);
+int crc32Dispatch(int, int, unsigned int);
 int rt_memcpy(unsigned int, int, unsigned int);
 
 extern int FUN_0030db5c(int, int, unsigned int);
-/* Supplied declaration required: FUN_0030dd02. */
+/* Supplied declaration required: crc32Dispatch. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_001289f6(int *param_1,unsigned int param_2,unsigned int param_3
       return temp_v2;
     }
     temp_v1 = param_1[0xc];
-    FUN_0030dd02(temp_v1,*param_1,temp_v2);
+    crc32Dispatch(temp_v1,*param_1,temp_v2);
   }
   else {
     temp_v1 = FUN_0030db5c(param_1[0xc],*param_1,temp_v2);

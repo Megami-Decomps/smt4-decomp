@@ -32,7 +32,7 @@ s32 state2CIsNot1(State2C* controller);
 void FUN_00421514(State2C* controller, BattleTransitionAssetA* asset, f32 scale);
 void attachmentsSetOffset(State2C* controller, const f32* position);
 void FUN_00421858(State2C* controller);
-void FUN_004cae0c(BtlMainStateA* battle, BattleRosterRecordA* roster, u32 first, u32 second);
+void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void FUN_00421078(State2C* controller);
 void FUN_004fa15c(BattlePlacementTransitionViewA* work);
 void FUN_004fb43c(u32 first, u32 second, u32 sound, u32 fourth, u32 fifth, u32 sixth, u32 seventh);

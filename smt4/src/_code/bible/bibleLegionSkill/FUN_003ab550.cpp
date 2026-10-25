@@ -1,16 +1,16 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ab550` (_code @ 0x3ab550, 0x1b0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/Obj42242c.h"
 
 extern "C" {
 
-int FUN_0022e2fc(int *);
+void FUN_0022e2fc(void *table);
 int rectangleInitializeSelection(...);
 int FUN_00233240(...);
 int uiInitializeEightTimerSet(...);
 int FUN_00233670(...);
 int FUN_0029ee6c(...);
-int asdOperatorNew(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
@@ -34,17 +34,14 @@ extern unsigned char LAB_003ace14; /* 0x3ace14 */
 extern unsigned char LAB_003ace3c; /* 0x3ace3c */
 extern unsigned char LAB_003ad068; /* 0x3ad068 */
 extern unsigned char LAB_003ad368; /* 0x3ad368 */
-extern unsigned char DAT_00422434; /* 0x422434 */
 extern int *DAT_0043d9f8; /* 0x43d9f8 */
 
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-extern unsigned int *_ZN9Obj422594C1Ev(void);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -60,8 +57,6 @@ void FUN_003ab550(int *param_1)
   int *piVar1;
   unsigned char *puVar2;
   unsigned char *puVar3;
-  int temp_v0;
-  unsigned int *puVar5;
   
   param_1[5] = 0;
   param_1[6] = 0;
@@ -87,15 +82,9 @@ void FUN_003ab550(int *param_1)
   uiInitializeEightTimerSet(param_1 + 0x37);
   FUN_00233240(param_1 + 0x37,0);
   FUN_00233240(param_1 + 0x37,1);
-  temp_v0 = 0x68;
-  asdOperatorNew();
-  puVar5 = (unsigned int *)0x0;
-  if (temp_v0 != 0) {
-    puVar5 = (unsigned int *)_ZN9Obj422594C1Ev();
-    *puVar5 = (unsigned int)&DAT_00422434;
-  }
-  param_1[0x164] = (int)puVar5;
-  puVar5[0x19] = (unsigned int)(param_1 + 0x32);
+  Obj42242c *controller = new Obj42242c;
+  param_1[0x164] = (int)controller;
+  controller->rectangle = param_1 + 0x32;
   _ZN9Obj4224489buildListEv(param_1);
   FUN_00233670(param_1 + 0x157,0x1d,0x40e,10);
   *(unsigned char *)(param_1 + 0x15b) = 1;

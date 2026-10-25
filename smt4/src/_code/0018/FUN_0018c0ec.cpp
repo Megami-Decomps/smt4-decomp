@@ -92,7 +92,7 @@ int FUN_002960ec(...);
 int FUN_00296284(int, int);
 int FUN_002963ec(...);
 int FUN_00296474(...);
-int FUN_00296774(...);
+int resultSetMenuState(...);
 int FUN_00296934(void);
 int FUN_0029c43c(...);
 int messageTargetSetValue(unsigned int, int);
@@ -178,7 +178,7 @@ extern int dataTable9EntryOrZero(int);
 /* Supplied declaration required: FUN_00296284. */
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: FUN_00296474. */
-/* Supplied declaration required: FUN_00296774. */
+/* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: FUN_00296934. */
 extern int modelPairTryBind(int);
 /* Supplied declaration required: messageMainFinishWindow. */
@@ -346,7 +346,7 @@ unsigned int FUN_0018c0ec(void)
       mapMainCallIfActive2();
       lmapMainCallIfActive2();
       FUN_00296934();
-      FUN_00296774(temp_v2,1);
+      resultSetMenuState(temp_v2,1);
     }
     break;
   case 1:
@@ -386,7 +386,7 @@ unsigned int FUN_0018c0ec(void)
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 0x18);
     FUN_00296474(temp_v2);
-    FUN_00296774(temp_v2,2);
+    resultSetMenuState(temp_v2,2);
     FUN_0029e648(1,0);
     messageTargetSetValue(*(unsigned int *)(temp_v2 + 0x3650),1);
     temp_v8 = 0;
@@ -455,7 +455,7 @@ LAB_0018c354:
          (*(char *)(temp_v2 + 0x1c2) != '\0')) &&
         ((*(char *)(temp_v2 + 0x24e) != '\0' && (*(char *)(temp_v2 + 0x2da) != '\0')))) &&
        ((*(char *)(temp_v2 + 0x366) != '\0' && (*(char *)(temp_v2 + 0x3f2) != '\0')))) {
-      FUN_00296774(temp_v2,3);
+      resultSetMenuState(temp_v2,3);
     }
     break;
   case 3:
@@ -481,7 +481,7 @@ LAB_0018c354:
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
       FUN_0029c43c(*(unsigned int *)(temp_v2 + 0x3650),1);
-      FUN_00296774(temp_v2,4);
+      resultSetMenuState(temp_v2,4);
     }
     break;
   case 4:
@@ -497,7 +497,7 @@ LAB_0018c354:
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
     if (*(char *)(temp_v2 + 0x1112) != '\0') {
-      FUN_00296774(temp_v2,5);
+      resultSetMenuState(temp_v2,5);
       *(unsigned int *)(temp_v2 + 0xd558) = 0;
       *(unsigned char *)(temp_v2 + 0xd55c) = 0;
       *(unsigned char *)(temp_v2 + 0xd55d) = 0;
@@ -940,7 +940,7 @@ LAB_0018d058:
           if ((*(char *)(temp_v31 + 0x5c) == '\0') && (*piVar17 != 0)) {
             eventQueueAddUnique(0x100017e);
           }
-          FUN_00296774(temp_v2,6);
+          resultSetMenuState(temp_v2,6);
         }
         break;
       }
@@ -977,7 +977,7 @@ LAB_0018d058:
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 6);
-      FUN_00296774(temp_v2,7);
+      resultSetMenuState(temp_v2,7);
       timerStart(temp_v2 + 0x20,1,0);
       temp_v4 = 0;
       do {
@@ -1009,10 +1009,10 @@ LAB_0018d058:
       if (*(int *)(temp_v2 + 0xcf74) != *(int *)(temp_v2 + 0xcf78)) {
         FUN_0029e874(1);
         FUN_0029e788();
-        FUN_00296774(temp_v2,9);
+        resultSetMenuState(temp_v2,9);
       }
       else {
-        FUN_00296774(temp_v2,0x14);
+        resultSetMenuState(temp_v2,0x14);
       }
     }
     break;
@@ -1027,7 +1027,7 @@ LAB_0018d058:
         temp_v9 = gameGetUnitRecord((int)*(char *)(temp_v2 + *piVar17 * 0x620 + 0x3654));
         FUN_0029c4e4(temp_v9,0);
         statusPanelSetOpen(1);
-        FUN_00296774(temp_v2,0xb);
+        resultSetMenuState(temp_v2,0xb);
       }
       else {
         gameGlobalsSetSelected(5);
@@ -1036,7 +1036,7 @@ LAB_0018d058:
         gameGetPlayerData();
         FUN_0029a0cc();
         statusPanelSetOpen(1);
-        FUN_00296774(temp_v2,10);
+        resultSetMenuState(temp_v2,10);
         FUN_0029f848(temp_v2 + 0xcfd4,5,5,1,0,1);
       }
     }
@@ -1195,10 +1195,10 @@ LAB_0018da7c:
         temp_v8 = temp_v8 + 1;
       }
       if (temp_v8 >= 1) {
-        FUN_00296774(temp_v2,0xd);
+        resultSetMenuState(temp_v2,0xd);
       }
       else {
-        FUN_00296774(temp_v2,0xe);
+        resultSetMenuState(temp_v2,0xe);
       }
       break;
     case 4:
@@ -1231,7 +1231,7 @@ LAB_0018da7c:
             temp_v0 = *(char *)(temp_v8 + 0x3c72);
 joined_r0x0018edf0:
             if (temp_v0 != '\0') {
-              FUN_00296774(temp_v2,0x10);
+              resultSetMenuState(temp_v2,0x10);
             }
             else {
               FUN_0029bd4c();
@@ -1239,15 +1239,15 @@ joined_r0x0018edf0:
             }
           }
           else {
-            FUN_00296774(temp_v2,0xc);
+            resultSetMenuState(temp_v2,0xc);
           }
         }
         else {
-          FUN_00296774(temp_v2,0x11);
+          resultSetMenuState(temp_v2,0x11);
         }
       }
       else {
-        FUN_00296774(temp_v2,0xf);
+        resultSetMenuState(temp_v2,0xf);
       }
     }
     break;
@@ -1369,7 +1369,7 @@ joined_r0x0018edf0:
             *piVar20 = 2;
           }
           else {
-            FUN_00296774(temp_v2,0xe);
+            resultSetMenuState(temp_v2,0xe);
           }
         }
         else {
@@ -1387,16 +1387,16 @@ joined_r0x0018edf0:
       if (temp_v4 != 0) {
         FUN_0029ee6c(0,0x323232ff);
         if (*(char *)(temp_v8 + 0x3c71) != '\0') {
-          FUN_00296774(temp_v2,0xf);
+          resultSetMenuState(temp_v2,0xf);
         }
         else if (*(char *)(temp_v8 + 0x3c70) != '\0') {
-          FUN_00296774(temp_v2,0x11);
+          resultSetMenuState(temp_v2,0x11);
         }
         else if (*(int *)(temp_v8 + 0x3c6c) != 1) {
-          FUN_00296774(temp_v2,0xc);
+          resultSetMenuState(temp_v2,0xc);
         }
         else if (*(char *)(temp_v8 + 0x3c72) != '\0') {
-          FUN_00296774(temp_v2,0x10);
+          resultSetMenuState(temp_v2,0x10);
         }
         else {
           FUN_0029bd4c();
@@ -1417,7 +1417,7 @@ joined_r0x0018edf0:
         temp_v9 = gameGetUnitRecord((int)*(char *)(temp_v2 + *piVar17 * 0x620 + 0x3654));
         FUN_0029c4e4(temp_v9,0);
         statusPanelSetOpen(1);
-        FUN_00296774(temp_v2,0xb);
+        resultSetMenuState(temp_v2,0xb);
       }
     }
     break;
@@ -1530,19 +1530,19 @@ joined_r0x0018edf0:
         FUN_0029ee6c(0,0x323232ff);
         if (*(int *)(temp_v2 + 0x3530) != 0xc) {
           if (*(char *)(temp_v8 + 0x3c71) != '\0') {
-            FUN_00296774(temp_v2,0xf);
+            resultSetMenuState(temp_v2,0xf);
             break;
           }
           if (*(char *)(temp_v8 + 0x3c70) != '\0') {
-            FUN_00296774(temp_v2,0x11);
+            resultSetMenuState(temp_v2,0x11);
             break;
           }
           if (*(int *)(temp_v8 + 0x3c6c) != 1) {
-            FUN_00296774(temp_v2,0xc);
+            resultSetMenuState(temp_v2,0xc);
             break;
           }
           if (*(char *)(temp_v8 + 0x3c72) != '\0') {
-            FUN_00296774(temp_v2,0x10);
+            resultSetMenuState(temp_v2,0x10);
             break;
           }
           FUN_0029bd4c();
@@ -1566,7 +1566,7 @@ joined_r0x0018edf0:
         temp_v9 = gameGetUnitRecord((int)*(char *)(temp_v2 + *(int *)(temp_v2 + 0xcf78) * 0x620 + 0x3654));
         FUN_0029c4e4(temp_v9,0);
         statusPanelSetOpen(1);
-        FUN_00296774(temp_v2,0xb);
+        resultSetMenuState(temp_v2,0xb);
       }
       break;
     case 6:
@@ -1785,7 +1785,7 @@ joined_r0x0018edf0:
           unitRecalculateEffectiveStats(temp_v4);
           FUN_002954bc(temp_v4);
           if (*(char *)(temp_v18 + 0x3c70) != '\0') {
-            FUN_00296774(temp_v2,0x11);
+            resultSetMenuState(temp_v2,0x11);
             break;
           }
           if (*(int *)(temp_v18 + 0x3c6c) == 1) {
@@ -1793,7 +1793,7 @@ joined_r0x0018edf0:
             goto joined_r0x0018edf0;
           }
           FUN_00295214(0);
-          FUN_00296774(temp_v2,0xc);
+          resultSetMenuState(temp_v2,0xc);
         }
       }
     }
@@ -1913,7 +1913,7 @@ joined_r0x0018edf0:
         temp_v4 = *(int *)(temp_v2 + 0xcf78) + 1;
         *(int *)(temp_v2 + 0xcf78) = temp_v4;
         if (*(int *)(temp_v2 + 0xcf74) == temp_v4) {
-          FUN_00296774(temp_v2,0x14);
+          resultSetMenuState(temp_v2,0x14);
           break;
         }
         gameGlobalsSetSelected(6);
@@ -1922,7 +1922,7 @@ joined_r0x0018edf0:
         temp_v9 = gameGetUnitRecord((int)*(char *)(temp_v2 + *(int *)(temp_v2 + 0xcf78) * 0x620 + 0x3654));
         FUN_0029c4e4(temp_v9,0);
         statusPanelSetOpen(1);
-        FUN_00296774(temp_v2,0xb);
+        resultSetMenuState(temp_v2,0xb);
       }
     }
     break;

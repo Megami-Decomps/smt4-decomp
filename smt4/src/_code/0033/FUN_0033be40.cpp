@@ -15,14 +15,14 @@ struct DevilLevelStatus {
 
 extern "C" {
 DevilLevelStatus* devilGetRecord(u16 id);
-s32 partyHasStoredDemon();
+s32 partyHasStoredDemon(u16 id);
 
 // Classify an entry against its record's gated level requirement.
 u32 FUN_0033be40(const EntryLevelStatus* entry)
 {
     DevilLevelStatus* record = devilGetRecord(entry->devilId);
     u32 status = 1;
-    if (record->requirement != 0 && partyHasStoredDemon() == 0) {
+    if (record->requirement != 0 && partyHasStoredDemon(record->requirement) == 0) {
         status = record->threshold > entry->level ? 2 : 0;
     }
     return status;

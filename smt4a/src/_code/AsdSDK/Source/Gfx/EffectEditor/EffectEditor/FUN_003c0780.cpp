@@ -39,11 +39,11 @@ extern float DAT_005c1110; /* 0x5c1110 */
 extern float DAT_005c1114; /* 0x5c1114 */
 extern float DAT_005c1118; /* 0x5c1118 */
 extern float DAT_005c111c; /* 0x5c111c */
-extern float DAT_00634c90; /* 0x634c90 */
+extern float g_effectEditorInitialVector; /* 0x634c90 */
 extern float DAT_00634c94; /* 0x634c94 */
 extern float DAT_00634c98; /* 0x634c98 */
 extern float DAT_00634c9c; /* 0x634c9c */
-extern float DAT_006352f0; /* 0x6352f0 */
+extern float g_effectEditorVector; /* 0x6352f0 */
 extern float DAT_006352f4; /* 0x6352f4 */
 extern float DAT_006352f8; /* 0x6352f8 */
 extern float DAT_006352fc; /* 0x6352fc */
@@ -158,7 +158,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   temp_v15 = DAT_006472e4;
   temp_v14 = DAT_006472e0;
   temp_v1 = DAT_006472dc;
-  DAT_006352f0 = DAT_006472dc;
+  g_effectEditorVector = DAT_006472dc;
   DAT_006352f4 = DAT_006472e0;
   DAT_006352f8 = DAT_006472e4;
   DAT_006352fc = DAT_006472e8;
@@ -176,7 +176,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   if ((DAT_0059ea98 & 8) != 0) {
     temp_v4 = temp_v4 | 2;
   }
-  DAT_006472ec = DAT_00634c90;
+  DAT_006472ec = g_effectEditorInitialVector;
   DAT_006472f0 = DAT_00634c94;
   DAT_006472f4 = DAT_00634c98;
   DAT_006472f8 = DAT_00634c9c;
@@ -276,7 +276,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   DAT_00647320 = temp_v7;
   DAT_0064731c = temp_v5;
   temp_v12 = 0x3f800000;
-  DAT_006472ec = DAT_00634c90;
+  DAT_006472ec = g_effectEditorInitialVector;
   DAT_006472f0 = DAT_00634c94;
   DAT_006472f4 = DAT_00634c98;
   DAT_006472f8 = DAT_00634c9c;
@@ -325,7 +325,7 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   DAT_00647324 = temp_v10;
   DAT_00647320 = temp_v8;
   DAT_0064731c = temp_v6;
-  DAT_006472ec = DAT_00634c90;
+  DAT_006472ec = g_effectEditorInitialVector;
   DAT_006472f0 = DAT_00634c94;
   DAT_006472f4 = DAT_00634c98;
   DAT_006472f8 = DAT_00634c9c;

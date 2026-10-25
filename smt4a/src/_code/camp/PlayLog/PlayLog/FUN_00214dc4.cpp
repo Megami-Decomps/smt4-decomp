@@ -10,7 +10,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_002c0940(...);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
@@ -42,7 +42,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -143,7 +143,7 @@ void FUN_00214dc4(void)
           textFormatBuffer(temp_v10,&LAB_00215248,temp_v11,temp_v12);
         }
         puVar9 = temp_v10;
-        FUN_0018408c(puVar9,2);
+        fontMeasureLineAdvance(puVar9,2);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((((int)**(short **)(temp_v6 + 0xc) + (int)*(short *)(temp_v6 + 8)) -

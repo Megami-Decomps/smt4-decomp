@@ -26,4 +26,6 @@ typedef char PlaceWindowInitializationOffsetsCheck[
     __INTADDR__(&((PlaceWindow *)0)->parameters.packet) == 0x14 &&
     sizeof(PlaceWindow) == 0x140 ? 1 : -1];
 
+extern "C" void placeWinStartText(const u8 *text);
+
 #endif

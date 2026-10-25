@@ -39,8 +39,8 @@ void FUN_0033449c(u32 enabled);
 void statusDisplayBindUnitRecord(const UnitRecord *record, u32 option, u32 mode, u32 flags);
 void objBInitBlock19D0(const UnitRecord *record, u32 option, u32 flags);
 void statusPanelSetOpen(u32 open);
-void statusReplaceSkills(const u16 *skills, u32 count);
-void statusMarkNewSkills(const u16 *skills, u32 count);
+void statusReplaceSkills(const u16 *skills, u8 count);
+void statusMarkNewSkills(const u16 *skills, u8 count);
 
 // Build a leveled/stat-adjusted target record and compare its original skills with the compacted inheritance choice.
 void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *target)

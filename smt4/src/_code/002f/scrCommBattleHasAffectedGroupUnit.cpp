@@ -7,7 +7,7 @@ int scrSetResult(int result);
 extern u8 *btlGetMainState(void);
 int scrGetArg(int index);
 extern u8 *btlMainFindActiveEntry(void);
-extern u32 btlScriptResolveGroupArg(void);
+extern s32 btlScriptResolveGroupArg(s32 group);
 
 typedef struct BtlUnit {
     /* 0x000 */ u32 flags;
@@ -27,8 +27,7 @@ u32 scrCommBattleHasAffectedGroupUnit(void)
     u8 *btl;
     BtlUnit *extra;
 
-    scrGetArg(1);
-    group = btlScriptResolveGroupArg();
+    group = btlScriptResolveGroupArg(scrGetArg(1));
     FUN_002499fc(group, &first, &count);
     i = first;
     if (first < count + first) {

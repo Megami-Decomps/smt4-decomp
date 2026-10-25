@@ -18,7 +18,7 @@ extern TitleMain *g_titleMain;
 
 /* Destroy callback of the title job: lets go of its resources, marks the block to be freed and
  * frees it. */
-void titleMainDestroy(void)
+void titleMainDestroy(u32 handle)
 {
     TitleMain **slot = &g_titleMain;
     TitleMain *title = *slot;

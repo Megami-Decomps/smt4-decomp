@@ -4,7 +4,6 @@
 
 extern "C" {
 extern u32 _ZTV9Obj422278[];
-void *handleOwnerClose(void *owner);
 void asdOperatorDelete(void *block);
 }
 
@@ -12,6 +11,6 @@ void asdOperatorDelete(void *block);
 extern "C" void _ZN9Obj422278D0Ev(Obj422278 *self)
 {
     ((VObject *)self)->vtbl = _ZTV9Obj422278 + 2;
-    void *owner = handleOwnerClose(&self->value);
-    asdOperatorDelete((u8 *)owner - offsetof(Obj422278, value));
+    HandleOwner *owner = handleOwnerClose(&self->owner);
+    asdOperatorDelete((u8 *)owner - offsetof(Obj422278, owner));
 }

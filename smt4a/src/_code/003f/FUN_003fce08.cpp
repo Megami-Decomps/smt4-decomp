@@ -31,7 +31,7 @@ typedef struct Starter {
 } Starter;
 
 extern Resource *asdTMTexTableGetNode(void *owner, u32 key);
-extern s32 resourceIsReady(void);
+extern u8 resourceIsReady(Resource *resource);
 extern void FUN_003fc294(Starter *starter, u32 arg);
 extern s32 FUN_003fcbe0(Starter *starter);
 extern void aocReleaseObjectBufferAndFlag(Starter *starter);
@@ -40,7 +40,7 @@ s32 FUN_003fce08(Starter *starter, u32 arg)
 {
     Resource *resource = asdTMTexTableGetNode(starter->owner, starter->key);
 
-    if (resourceIsReady() == 0) {
+    if (resourceIsReady(resource) == 0) {
         return 0;
     }
     if (starter->started == 0) {

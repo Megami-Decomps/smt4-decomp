@@ -8,7 +8,7 @@ int contentEntryFlagTest(void);
 int dialogOpen(...);
 int infoWinSetMessage(...);
 int FUN_0029541c(...);
-int FUN_00296774(...);
+int resultSetMenuState(...);
 int messageMainFinishWindow(void);
 int FUN_0029aafc(void);
 int soundChannelStopAll(...);
@@ -79,7 +79,7 @@ extern int whisperEffectIsIdle(void);
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_00296774. */
+/* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: messageMainFinishWindow. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
@@ -651,10 +651,10 @@ LAB_001cfdfc:
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 7);
       if (*(int *)(temp_v4 + 0x3c6c) != 1) {
-        FUN_00296774(param_1,0xc);
+        resultSetMenuState(param_1,0xc);
       }
       else if (*(char *)(temp_v4 + 0x3c72) != '\0') {
-        FUN_00296774(param_1,0x10);
+        resultSetMenuState(param_1,0x10);
       }
       else {
         FUN_0029541c(param_1);

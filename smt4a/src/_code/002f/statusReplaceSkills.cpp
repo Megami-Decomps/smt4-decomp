@@ -1,4 +1,3 @@
-/* NON_MATCHING: unrolled prefix scan uses signed GT/LE predicates where retail uses NE/EQ. */
 #include "common.h"
 
 struct StatusSkillListState {
@@ -20,7 +19,7 @@ extern "C" void *rt_memcpy(void *destination, const void *source, u32 size);
 extern "C" void FUN_00203b40(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
 
 /* Replace the displayed skills and configure the selector for its nonempty prefix. */
-extern "C" void statusReplaceSkills(const u16 *skills, u32 count)
+extern "C" void statusReplaceSkills(const u16 *skills, u8 count)
 {
     if (count > 16)
         return;
@@ -31,7 +30,7 @@ extern "C" void statusReplaceSkills(const u16 *skills, u32 count)
         status->skillWords[index] = 0;
     rt_memcpy(status->skills, skills, count * sizeof(u16));
     s32 nonempty;
-    for (nonempty = 0; nonempty < (s32)count; ++nonempty) {
+    for (nonempty = 0; nonempty < count; ++nonempty) {
         if (status->skills[nonempty] == 0)
             break;
     }

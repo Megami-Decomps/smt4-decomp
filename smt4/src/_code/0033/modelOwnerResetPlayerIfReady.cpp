@@ -22,12 +22,12 @@ void animPlayerSetLoopPolicy(AnimPlayer *player, s32 policy);
 void nodeSetScale(AnimPlayer *player, s32 flag, f32 x, f32 y, f32 z);
 void FUN_002a0428(ModelObject *model, s32 mode);
 void animOwnerSetScale(ModelObject *model, f32 value);
-s32 FUN_002adee0(ModelObject *model);
+s32 modelHasLoadedAttachment(ModelObject *model);
 
 /* Resets the owner's model when it is ready and its player has a negative loop policy (unit scale, loop policy 1); returns whether it was ready. */
 u32 modelOwnerResetPlayerIfReady(ModelOwner *owner)
 {
-    if (FUN_002adee0(owner->model) == 0) {
+    if (modelHasLoadedAttachment(owner->model) == 0) {
         return 0;
     }
     if (owner->model->player->loopPolicy < 0) {

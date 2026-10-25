@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the skill info panel (single record); the Shift-JIS literals are written with hex escapes (decoded in the comments) and armcc here pools/orders them differently from retail's four-byte-aligned inline strings. */
+/* NON_MATCHING: only the initial button-help global address load follows stack allocation and the first argument save instead of preceding them. */
 #include "common.h"
 
 /* A skill record as the panel reads it. */
@@ -36,7 +36,7 @@ extern PanelButtonHelp g_buttonHelp;
 
 PanelPlayerData *gameGetPlayerData(void);
 PanelSkill *dataTable08Sub2GetRecord(u32 id);
-void FUN_002c0940(s32 *out, u32 value);
+void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003180c4(s32 slot, const char *text);
 void FUN_002ad414(s32 a, s32 b, s32 c, char *text);
@@ -57,13 +57,12 @@ void FUN_003aeb18(s32 textId, u32 flags)
     }
     block->visible = 1;
     block->shown = 1;
-    s32 minimum[2];
-    s32 maximum[2];
-    char text[132];
+    char text[128];
     u32 range = first->levelRange;
     if ((range & 0xF) == range >> 4) {
         FUN_00359974(0x25, range & 0xF, 0xFFFFFFFF, 0);
     } else {
+        char minimum[8], maximum[8];
         FUN_002c0940(minimum, range & 0xF);
         FUN_002c0940(maximum, first->levelRange >> 4);
         textFormatBuffer(text, "%s\x81\x60%s", minimum, maximum); /* "%s～%s" */

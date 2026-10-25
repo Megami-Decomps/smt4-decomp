@@ -1,6 +1,7 @@
 /* NON_MATCHING: state initialization store scheduling and global-address register reuse differ from retail. */
 #include "battle/btlPartnerAttack.h"
 #include "AsdSDK/AsdDebug.h"
+#include "battle/PartnerAttackEntries.h"
 
 struct PartnerAttackOwner {
     u32 parent;                   /* 0x00 */
@@ -20,8 +21,6 @@ void btlPartnerAttackApplyState(void *);
 void renderObjAttach(void *);
 void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
-void *asdOperatorNew(u32 size, BtlPartnerAttackA **owner);
-void *_ZN20PartnerAttackEntriesC1Ev(void *);
 
 // Allocate the partner attack state and attach its update and draw jobs.
 void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
@@ -55,10 +54,6 @@ void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
         state->scriptData = NULL;
     }
     state->unk2c = 0;
-    void *entries = asdOperatorNew(0x860, &g_btlPartnerAttack);
-    if (entries != NULL) {
-        entries = _ZN20PartnerAttackEntriesC1Ev(entries);
-    }
-    state->entries = entries;
+    state->entries = new (&g_btlPartnerAttack) PartnerAttackEntries;
 }
 }

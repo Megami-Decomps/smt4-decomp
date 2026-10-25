@@ -19,7 +19,7 @@ typedef struct UnitManager {
 
 extern UnitManager *btlGetMainState(void);
 extern Unit *btlMainFindActiveEntry(void);
-extern u32 btlScriptResolveGroupArg(void);
+extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
 extern void scrSetResult(s32 found);
 extern s32 scrGetArg(s32 index);
@@ -34,8 +34,7 @@ u32 FUN_002f08d4(void)
     s32 count;
     s32 i;
 
-    scrGetArg(0);
-    owner = btlScriptResolveGroupArg();
+    owner = btlScriptResolveGroupArg(scrGetArg(0));
     kind = scrGetArg(1);
     slot = 0;
     if (kind == 0) {

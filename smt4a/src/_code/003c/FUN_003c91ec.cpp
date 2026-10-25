@@ -26,7 +26,7 @@ void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void wordPairCopy(void *dest, void *src);
 void FUN_00358cbc(void);
 void titleConfigApply(void);
-void FUN_0046bd44(u32 system);
+void aocActivateFileGroupFlags(u32 system);
 int gameFlagIsSet(int id);
 void gameFlagSetValue(int id, int a, int b);
 void asdMemFree(void *ptr);
@@ -39,7 +39,7 @@ void FUN_003c91ec(void)
         __aeabi_memcpy4(gameDataBlocksGetSaveData(), g_saveLoadUIBase.snapshotC, 0x2a71c);
         FUN_00358cbc();
         titleConfigApply();
-        FUN_0046bd44(g_aocSystem);
+        aocActivateFileGroupFlags(g_aocSystem);
         if (g_saveLoadUIBase.requestA && gameFlagIsSet(0x470) == 0) {
             gameFlagSetValue(0x470, 1, 1);
         }

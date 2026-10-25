@@ -21,6 +21,7 @@ Vector32 *FUN_003002ae(Vector32 *vec)
     Elem32 *it;
 
     for (it = begin; it != vec->end; it++) {
+        it->~Elem32();
     }
     asdOperatorDeleteArray(begin);
     return vec;

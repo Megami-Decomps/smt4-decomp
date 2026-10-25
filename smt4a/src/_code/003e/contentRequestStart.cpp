@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads desc->aocIndex into r1 for the first test (r0 here) and stores state before unk10 (mov r0,#22 scheduling) */
+/* NON_MATCHING: the aocIndex test uses r0 instead of retail r1; the state store is scheduled before unk10 instead of after it. */
 #include "common.h"
 
 extern "C" {
@@ -16,7 +16,7 @@ typedef struct ContentDesc003e1390 {
     /* 0xf0 */ s32 aocIndex;
 } ContentDesc003e1390;
 
-void asdMemFree(void);
+void asdMemFree(void *memory);
 void asdLoadFileAsyncSimple(u8 name[132], u32 *handle, s32 flags);
 void libc_strcpy(u8 dst[132], u32 src);
 void sysMemClear(u8 dst[132], s32 size);
@@ -35,7 +35,7 @@ void contentRequestStart(ContentRequest003e1390 *request, ContentDesc003e1390 *d
     sysMemClear(name, 0x80);
     libc_strcpy(name, btlPosArrangeGetFileName(desc));
     if (request->handle != 0) {
-        asdMemFree();
+        asdMemFree(reinterpret_cast<void *>(request->handle));
         request->handle = 0;
     }
     if (0 < desc->aocIndex && FUN_0046ebf0(g_aocSystem) != 0) {

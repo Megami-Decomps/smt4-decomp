@@ -6,7 +6,7 @@ void registrationEntryInsert(u32, s32);
 void resourceQueueDeferredDestroy(void*, s32);
 void* effPartCreate(void);
 extern EffectEditorDefaultSlot DAT_0044f858;
-extern u8 DAT_004d8bd0;
+extern u8 g_effectEditorResourceName;
 
 // Recreates the editor's part and clears its current/default selections.
 u32 FUN_00327858(void)
@@ -29,7 +29,7 @@ u32 FUN_00327858(void)
     defaults->first.object.indices.extraOffset = 0;
     g_effectEditor.selection.index = 0;
     defaults->second.object.indices.extraOffset = 0;
-    DAT_004d8bd0 = 0;
+    g_effectEditorResourceName = 0;
     g_effectEditor.selection.object = &defaults->second.object;
     return 0;
 }

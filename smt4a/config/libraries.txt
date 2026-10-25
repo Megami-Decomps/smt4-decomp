@@ -1,0 +1,7 @@
+# Library blocks for tools/scope.py: <arm|thumb|any> <start> <end> <library> <evidence>
+# OnlineCore (Nintendo's online library, added for Apocalypse's online features): its Thumb code,
+# built -O3 -Ospace, sits between 0x2e2ecc and 0x3116d6 interleaved with ARM game code. Its source
+# paths (D:/home/jenkins/workspace/Manual-Pack/.../OnlineCore/src/Core/Scheduler.cpp, Buffer.cpp,
+# CollectionContext.cpp, InstantiationContext.cpp) are in the image, smt4 has no counterpart, and
+# most of the block is already third-party by name (online*, streamReader*, wstr*) or callers.
+thumb 0x2e2000 0x311800 OnlineCore source paths in the image; Thumb -Ospace block absent from smt4

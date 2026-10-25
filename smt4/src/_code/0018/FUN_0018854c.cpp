@@ -94,7 +94,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern int FUN_002adee0(int);
+extern int modelHasLoadedAttachment(int);
 extern short *gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned char buttonHelpGetStatus(void);
@@ -244,7 +244,7 @@ void FUN_0018854c(unsigned int param_1)
     return;
   case 1:
     piVar12 = (int *)(temp_v5 + 0x25c0);
-    temp_v9 = FUN_002adee0(*piVar12);
+    temp_v9 = modelHasLoadedAttachment(*piVar12);
     if ((temp_v9 != 0) && (*(int *)(*(int *)(*piVar12 + 8) + 0xc) < 0)) {
       FUN_002a0428(*piVar12,1);
       nodeSetTranslation3f(*(unsigned int *)(*piVar12 + 8),0);
@@ -253,7 +253,7 @@ void FUN_0018854c(unsigned int param_1)
     if (temp_v9 == 0) {
       return;
     }
-    temp_v9 = FUN_002adee0(*piVar12);
+    temp_v9 = modelHasLoadedAttachment(*piVar12);
     if (temp_v9 == 0) {
       return;
     }

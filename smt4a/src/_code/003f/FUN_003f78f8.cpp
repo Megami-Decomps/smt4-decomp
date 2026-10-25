@@ -23,7 +23,7 @@ void FUN_003f707c(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, s32 d, s3
 f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
 void efctSetSpeed(f32 speed);
 NoticeLayout *FUN_001834a4(u32 kind, u32 index);
-void FUN_0018408c(const char *text, s32 mode);
+void fontMeasureLineAdvance(const char *text, s32 mode);
 void FUN_00162790(s32 a, s32 color, const char *text, f32 x, f32 y, f32 sx, f32 sy, f32 speed);
 void FUN_003f757c(NoticeWork *work, s32 x, s32 y, s32 a, const char *text, s32 b, s32 c, s32 d, s32 e, f32 speed);
 void uiDrawStereoKindIcon(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, f32 speed);
@@ -54,7 +54,7 @@ void FUN_003f78f8(NoticeWork *work, s32 x, s32 y, f32 speed)
     efctSetSpeed(speed);
     NoticeLayout *layout = FUN_001834a4(0x31, 0xF1);
 
-    FUN_0018408c(tag, 3);
+    fontMeasureLineAdvance(tag, 3);
     FUN_00162790(3, 0xFF, tag, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
     FUN_003f757c(work, x, y, 0xD8, heading, 0xF6, 0xF5, 0, 1, speed);
     uiDrawStereoKindIcon(work, x, y, 0xD8, 0xB, 0x106, speed);

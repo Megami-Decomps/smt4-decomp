@@ -1,31 +1,40 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 217 rows, three small differences): retail copies the 3 handles through r2, loads the g_btlMain base before the 0x4d64 offset literal and loads the flags halfword before bumping the step in the final case */
+/* NON_MATCHING: restored script factory arguments and mode setter; only the final global-file load and large field-offset scratch registers differ. */
 #include "common.h"
+#include "script/scrScriptProcess.h"
+#include <stddef.h>
 
 // Battle resource loader: the step counter, its critical section and the resource slots.
 struct BattleLoader {
     u8 unk0000[0x2268];
-    u32 slot2268;           // 0x2268
-    u32 slot226c;           // 0x226c
-    u32 slot2270;           // 0x2270
-    u32 slot2274;           // 0x2274
-    u32 slot2278;           // 0x2278
-    u32 slot227c;           // 0x227c
-    u32 slot2280;           // 0x2280
-    u32 slot2284;           // 0x2284
-    u32 slot2288;           // 0x2288
-    u32 process;            // 0x228c
+    void *slot2268;          // 0x2268
+    void *slot226c;          // 0x226c
+    void *slot2270;          // 0x2270
+    void *slot2274;          // 0x2274
+    void *slot2278;          // 0x2278
+    void *slot227c;          // 0x227c
+    void *slot2280;          // 0x2280
+    void *slot2284;          // 0x2284
+    void *slot2288;          // 0x2288
+    ScriptRunState *process; // 0x228c
     u8 unk2290[0x4d08 - 0x2290];
     u16 flags;              // 0x4d08: bit 0 = finished
     u16 step;               // 0x4d0a
     u8 lock[0x58];          // 0x4d0c: critical section
-    u32 slot4d64;           // 0x4d64
+    void *slot4d64;          // 0x4d64
 };
 
-// Files loaded by the battle (handles at 0x28..0x4c of the global table).
+// File buffers loaded by the battle (0x28..0x4c of the global table).
 struct BtlLoadTable {
     u8 unk00[0x28];
-    u32 files[10];          // 0x28
+    void *files[10];        // 0x28
 };
+typedef char BattleLoaderOffsetsCheck[
+    offsetof(BattleLoader, slot2280) == 0x2280 &&
+    offsetof(BattleLoader, process) == 0x228C &&
+    offsetof(BattleLoader, flags) == 0x4D08 &&
+    offsetof(BattleLoader, slot4d64) == 0x4D64 &&
+    sizeof(BattleLoader) == 0x4D68 &&
+    offsetof(BtlLoadTable, files) == 0x28 && sizeof(BtlLoadTable) == 0x50 ? 1 : -1];
 
 extern "C" {
 
@@ -47,15 +56,14 @@ void nn_os_CriticalSection_Leave(void* section);
 void callJyoucyuGetTableEntry1B(void);
 void loadSlotEnsureLoaded(s32 slot);
 void FUN_00470e64(u32 aoc);
-u32 asdLoadFileSyncDefault(const char* path);
+void *asdLoadFileSyncDefault(const char* path);
 void btlStageLoadTable(void);
 void battleMapAccessoryLoad(void);
 s32 jyoucyuEnsureResidentEntry(void);
-u32 FUN_00275bc8(void);
+ScriptRunState *FUN_00275bc8(const void *script, u32 owner);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void FUN_003cdb28(void);
 void FUN_003ce360(void);
-
-#define BATTLE_WORD(base, offset) (*reinterpret_cast<u32*>(reinterpret_cast<u8*>(base) + (offset)))
 
 // Runs the battle resource loading steps under the loader's critical section: each case
 // waits for the previous resource to be ready, publishes the next one, and falls through to
@@ -93,8 +101,8 @@ void FUN_003f0794(BattleLoader* loader)
             loader->slot2280 = g_btlMain.files[0];
             loader->slot2284 = g_btlMain.files[1];
             loader->slot2288 = g_btlMain.files[2];
-            loader->process = FUN_00275bc8();
-            BATTLE_WORD(loader->process, 264) = 0;
+            loader->process = FUN_00275bc8(loader->slot2288, reinterpret_cast<u32>(loader->slot2280));
+            scriptProcessSetMode(loader->process, 0);
             loader->step++;
             /* fall through */
         case 2:

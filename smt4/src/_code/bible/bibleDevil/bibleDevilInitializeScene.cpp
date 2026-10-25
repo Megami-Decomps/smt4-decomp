@@ -1,16 +1,10 @@
-/* NON_MATCHING: retail constructor ABI preserves the new object in r0, while the exposed C initializer forces a saved pointer; frame and row-address scheduling also differ. */
+/* NON_MATCHING: callback stack arguments, saved screen/table registers and final row-address scheduling differ. */
 #include "shard/W4_Match6_BibleScreen.h"
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "classes/Obj42242c.h"
 
-struct BibleSelectionController {
-    union {
-        FlaggedEntry base;
-        struct { const void *vtable; u8 unk04[0x60]; } object;
-    } header;
-    u32 *rectangle;
-};
 struct BibleInitRow { u32 unk00; s16 id; u8 unk06[0x1a]; };
 struct BibleInitFields {
     struct Vtable { void *unk00[8]; void (*initialize)(BibleScreen *); } *vtable;
@@ -28,7 +22,7 @@ struct BibleInitFields {
     u8 scroll[0x10]; // 0x55c
     u8 scrollEnabled;
     u8 unk56d[0x23];
-    BibleSelectionController *controller; // 0x590
+    Obj42242c *controller;
     u8 unk594[0x11];
     u8 initialized;
     u8 unk5a6[2];
@@ -41,8 +35,7 @@ struct BibleDevilTaskWork { BibleScreen *screen; };
 struct BibleDevilTasks { BibleDevilTaskWork *work; s32 selected; };
 extern "C" {
 extern BibleDevilTasks DAT_0043d9c8;
-extern const u8 DAT_00422434;
-void FUN_0022e2fc();
+void FUN_0022e2fc(void *table);
 void menuSetModeAndResetTransitions(s32);
 void *asdMemAlloc(u32, u32, u32, u32, u32);
 u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *);
@@ -52,8 +45,6 @@ void uiCallbackFree(u32);
 s32 FUN_003ac738(u32);
 s32 btlDevilListFinishDrawCallback(u32);
 void rectangleInitializeSelection(u32 *, s32, s32, s32);
-void *asdOperatorNew(u32);
-void _ZN9Obj422594C1Ev(FlaggedEntry *);
 void FUN_0022d434(BibleScreen *);
 void partyIdsReset(u16 *);
 void devilListMarkOrInsertQualifiedEntry(u16 *, u16);
@@ -71,7 +62,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     fields->changed = 0;
     fields->selected = 0xffff;
     fields->marked = 0;
-    FUN_0022e2fc();
+    FUN_0022e2fc(fields->rows);
     fields->vtable->initialize(screen);
     menuSetModeAndResetTransitions(2);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleDevil.cpp", 200);
@@ -82,11 +73,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     fields->drawUpper = taskCreateDraw("BIBLE DEVIL UP", 111, 1, 0, FUN_003ac738, NULL, DAT_0043d9c8.work, fields->calculate);
     fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, btlDevilListFinishDrawCallback, NULL, DAT_0043d9c8.work, fields->calculate);
     rectangleInitializeSelection(fields->rectangle, 320, 0, 29);
-    BibleSelectionController *controller = (BibleSelectionController *)asdOperatorNew(sizeof(BibleSelectionController));
-    if (controller) {
-        _ZN9Obj422594C1Ev(&controller->header.base);
-        controller->header.object.vtable = &DAT_00422434;
-    }
+    Obj42242c *controller = new Obj42242c;
     fields->controller = controller;
     controller->rectangle = fields->rectangle;
     FUN_0022d434(screen);

@@ -4,15 +4,11 @@
 
 extern "C" {
 
-typedef struct EntryRange {
-    s32 first;
-    s32 count;
-} EntryRange;
-
+struct EntryRange { u32 first; u32 count; };
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
-extern u32 btlScriptResolveGroupArg(void);
-extern int FUN_002499fc(u32 handle, s32 *first, s32 *count);
+extern s32 btlScriptResolveGroupArg(s32 group);
+extern void FUN_002499fc(s32 group, u32 *first, u32 *count);
 extern s32 scrGetArg(s32 index);
 extern int scrSetResult(s32 value);
 
@@ -32,9 +28,9 @@ u32 FUN_00312148(void)
     } else if (arg == 2) {
         kind = 11;
     }
-    scrGetArg(1);
-    FUN_002499fc(btlScriptResolveGroupArg(), &range.first, &range.count);
-    for (i = range.first; i < range.first + range.count; i++) {
+    s32 group = scrGetArg(1);
+    FUN_002499fc(btlScriptResolveGroupArg(group), &range.first, &range.count);
+    for (i = range.first; i < (s32)(range.first + range.count); i++) {
         entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&

@@ -32,8 +32,9 @@ typedef struct Table {
 } Table;
 
 /* Clears the table: every entry's fields, the head and the free-list state. */
-void FUN_0022e2fc(Table *table)
+void FUN_0022e2fc(void *memory)
 {
+    Table *table = static_cast<Table *>(memory);
     s32 i;
 
     table->sentinel = 0xFF;

@@ -2,13 +2,16 @@
 
 extern "C" {
 
-extern void slots4FGetActiveValue(FlagData *data);
+struct Slots4F;
+extern u32 slots4FGetActiveValue(Slots4F *data);
 
-void linkHolderCallFirst(LinkHolder *holder)
+s32 linkHolderCallFirst(LinkHolder *holder)
 {
-    if (holder->first->data != NULL) {
-        slots4FGetActiveValue(holder->first->data);
+    FlagData *data = holder->first->data;
+    if (data != NULL) {
+        return static_cast<s32>(slots4FGetActiveValue(reinterpret_cast<Slots4F *>(data)));
     }
+    return 0;
 }
 
 } /* extern "C" */

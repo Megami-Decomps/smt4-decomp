@@ -13,11 +13,11 @@ typedef struct JobWork {
     /* 0x10 */ u32 unk10;
 } JobWork;
 
-extern JobWork *jobGetWork(void);
+extern u32 jobGetWork(u32 handle);
 
-void commonBgDestroyJobWork(void)
+void commonBgDestroyJobWork(u32 handle)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = reinterpret_cast<JobWork *>(jobGetWork(handle));
 
     asdMemFreeSlot(work->unk0C);
     asdMemFreeSlot(work->unk10);

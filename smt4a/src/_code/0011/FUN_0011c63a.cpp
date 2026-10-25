@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_002ea41e(...);
 int _ZNK18OnlineResultRecord7isValidEv(int *);
-int FUN_0031126c(int, int, int *);
+int onlineJobDispatchInstanceResult(int, int, int *);
 
 /* Supplied declaration required: FUN_002ea41e. */
 /* Supplied declaration required: _ZNK18OnlineResultRecord7isValidEv. */
-/* Supplied declaration required: FUN_0031126c. */
+/* Supplied declaration required: onlineJobDispatchInstanceResult. */
 
 
 void FUN_0011c63a(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -27,7 +27,7 @@ void FUN_0011c63a(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_002ea41e(&uStack_18);
   _ZNK18OnlineResultRecord7isValidEv(&uStack_18);
   FUN_002ea41e(&uStack_18,param_1 + 0x70);
-  FUN_0031126c(param_1,*(unsigned char *)(param_1 + 0x80),&uStack_18);
+  onlineJobDispatchInstanceResult(param_1,*(unsigned char *)(param_1 + 0x80),&uStack_18);
   return;
 }
 

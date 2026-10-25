@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two list-position counters and the resource compare in the first loop get swapped registers (retail counts the replacement in r2 and the item in r1, and loads other->resource before item->resource). */
+/* NON_MATCHING: the two list-position counters use exchanged registers; resource compare order matches. */
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 

@@ -2,6 +2,8 @@
 #define CLASSES_WINDOW_STATUS_H
 
 #include "common.h"
+#include "nn/os/HandleOwner.h"
+#include <stddef.h>
 
 /* An SDK result and the game's translated description ID. */
 struct WindowStatusResult {
@@ -20,6 +22,13 @@ struct WindowStatusOperationResult {
     /* 0x10 */ u32 reserved10;
 };
 
+/* The native one-word SDK result constructed before its translated counterpart. */
+struct WindowStatusCode {
+    explicit WindowStatusCode(u32 value) : code(value) {}
+    u32 code;
+};
+typedef char WindowStatusCodeSizeCheck[sizeof(WindowStatusCode) == 4 ? 1 : -1];
+
 /* Common result-bearing base, constructed inline by the concrete status objects. */
 class Obj42217c {
 public:
@@ -29,10 +38,14 @@ public:
     virtual WindowStatusOperationResult vfunc0c(const void *) = 0;
 
     /* 0x04 */ u32 reserved;
-    /* 0x08 */ u32 status;
+    /* 0x08 */ WindowStatusCode status;
     /* 0x0C */ WindowStatusResult result;
     /* 0x14 */ s32 state;
 };
+typedef char WindowStatusBaseOffsetsCheck[
+    offsetof(Obj42217c, reserved) == 4 && offsetof(Obj42217c, status) == 8 &&
+    offsetof(Obj42217c, result) == 0xC && offsetof(Obj42217c, state) == 0x14 &&
+    sizeof(Obj42217c) == 0x18 ? 1 : -1];
 
 class Obj4221bc : public Obj42217c {
 public:
@@ -90,9 +103,10 @@ public:
     virtual ~Obj422278();
     virtual void unk08();
     virtual WindowStatusOperationResult vfunc0c(const void *);
-    /* 0x18 */ u32 value;
-    /* 0x1C */ u8 active;
+    /* 0x18 */ HandleOwner owner;
 };
+typedef char WindowStatusHandleOwnerOffsetsCheck[
+    offsetof(Obj422278, owner) == 0x18 && sizeof(Obj422278) == 0x20 ? 1 : -1];
 
 class Obj422290 : public Obj42217c {
 public:

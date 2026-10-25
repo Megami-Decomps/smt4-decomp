@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: the required-mask intersection uses a different LDM pair and AND result registers. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -20,9 +20,8 @@ u32 scrCheckUnitStatStageThree()
     FUN_00301a08(kind, (u32 *)&first, (u32 *)&count);
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) &&
-            (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded) &&
             entry->id == id && (entry->encodedStats.values[stat] >> 10) == 3) {
             scrSetResult(1);
             return 1;

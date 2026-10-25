@@ -9,7 +9,7 @@ extern "C" {
 extern EffectCommandState* DAT_00435d18;
 u32 scrGetArg(u32 index);
 s32 FUN_003da5b4(EffectCommandState* state);
-void FUN_003d9eb4(EffectCommandState* state, s32 first, u32 second);
+void btlActionControllerStartSequence(EffectCommandState* state, s32 first, u32 second);
 
 // Wait for the flagged effect operation, or submit the script's two values.
 u32 scrCommEffectWaitOrSet(void)
@@ -21,7 +21,7 @@ u32 scrCommEffectWaitOrSet(void)
             return 1;
         }
     } else {
-        FUN_003d9eb4(DAT_00435d18, (s16)first, (u16)second);
+        btlActionControllerStartSequence(DAT_00435d18, (s16)first, (u16)second);
     }
     return 0;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: branch layout only at the end: retail shares one `str` after the first branch arm and jumps to it from the second (bgt 88); built emits the second arm's store after it */
+/* NON_MATCHING: branch/store layout matches; slot and x-output pointers use exchanged saved registers. */
 #include "common.h"
 
 extern "C" {
@@ -39,16 +39,20 @@ void FUN_003f3e64(Slot *slot, s32 *x, s32 *y)
     position = FUN_001834a4(0x11, index + 0x2d);
     *x = position->x;
     *y = position->y;
-    if (slot->shifted != 0) {
-        if ((u32)(slot->index - 4) > 11) {
+    if (slot->shifted == 0) {
+        if (slot->index > 15) {
+            shifted = *x + 400;
+        } else {
             return;
         }
-        shifted = *x - 400;
-        *x = shifted;
-    } else if (slot->index > 15) {
-        shifted = *x + 400;
-        *x = shifted;
+    } else {
+        if ((u32)(slot->index - 4) <= 11) {
+            shifted = *x - 400;
+        } else {
+            return;
+        }
     }
+    *x = shifted;
 }
 
 } /* extern "C" */

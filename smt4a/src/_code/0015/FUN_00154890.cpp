@@ -1,60 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00154890` (_code @ 0x154890, 0xa8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: current-slot address materialization and local allocation differ. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
-extern "C" {
+struct ApocalypseSoundSlotSelectionView {
+    /* 0x0000 */ u8 unk0000[0x764];
+    /* 0x0764 */ AsdSndSlotA slotsA[4];
+    /* 0x0854 */ u8 unk0854[0xAD0];
+    /* 0x1324 */ AsdSndSlotA *currentSlotA;
+};
+typedef char ApocalypseSoundSlotSelectionLayoutCheck[
+    offsetof(ApocalypseSoundSlotSelectionView, slotsA) == 0x764 &&
+    offsetof(ApocalypseSoundSlotSelectionView, currentSlotA) == 0x1324 ? 1 : -1];
+extern "C" ApocalypseSoundSlotSelectionView g_asdSoundSystem;
+extern "C" void asdSoundObjectStop(s32 handle, s32 fadeFrames);
+extern "C" void nw_snd_SoundHeap_LoadState(void *heap, u32 state);
 
-int asdSoundObjectStop(int, int);
-int nw_snd_SoundHeap_LoadState(int, unsigned int);
-
-extern unsigned char DAT_0063e984; /* 0x63e984 */
-extern unsigned char DAT_0063e986; /* 0x63e986 */
-extern unsigned char DAT_0063e987; /* 0x63e987 */
-extern unsigned int DAT_0063f50c; /* 0x63f50c */
-
-/* Supplied declaration required: asdSoundObjectStop. */
-/* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
-
-
-unsigned int FUN_00154890(unsigned int param_1)
-
+// Select an active four-handle slot, optionally restoring its saved heap state.
+extern "C" s32 FUN_00154890(u32 index)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int unaff_r5;
-  unsigned char temp_v5;
-  
-  temp_v5 = param_1 == 0xffffffff;
-  if (temp_v5) {
-    param_1 = 0;
-  }
-  temp_v3 = param_1;
-  temp_v1 = param_1;
-  if (((!temp_v5) && (temp_v3 = 0, temp_v1 = DAT_0063f50c, param_1 < 4)) &&
-     (temp_v0 = param_1 * 0x3c, (&DAT_0063e986)[temp_v0] != '\0')) {
-    if (unaff_r5 != 0) {
-      temp_v4 = 0;
-      do {
-        temp_v2 = *(int *)(temp_v0 + 0x63e94c + temp_v4 * 4 + 0x20);
-        if (temp_v2 != 0) {
-          asdSoundObjectStop(temp_v2,0);
+    ApocalypseSoundSlotSelectionView *sound = &g_asdSoundSystem;
+    AsdSndSlotA **currentSlot = &sound->currentSlotA;
+    AsdSndSlotA *slot; /* Read before it is ever set, as in the original. */
+    s32 selected = 0;
+    if (index == (u32)-1) {
+        *currentSlot = NULL;
+    } else if (index < 4 && sound->slotsA[index].active != 0) {
+        if (slot != NULL) {
+            slot = &sound->slotsA[index];
+            for (s32 i = 0; i < 4; ++i) {
+                if (slot->handles[i] != 0)
+                    asdSoundObjectStop(slot->handles[i], 0);
+            }
+            slot->volume = 0x40;
+            if (slot->hasHeap != 0)
+                nw_snd_SoundHeap_LoadState(slot, slot->savedState);
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 4);
-      (&DAT_0063e984)[temp_v0] = 0x40;
-      if ((&DAT_0063e987)[temp_v0] != '\0') {
-        nw_snd_SoundHeap_LoadState(temp_v0 + 0x63e94c,*(unsigned int *)(temp_v0 + 0x63e980));
-      }
+        *currentSlot = &sound->slotsA[index];
+        selected = 1;
     }
-    temp_v3 = 1;
-    temp_v1 = temp_v0 + 0x63e94c;
-  }
-  DAT_0063f50c = temp_v1;
-  return temp_v3;
+    return selected;
 }
-
-} /* extern "C" */

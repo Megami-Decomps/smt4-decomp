@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029541c(...);
-int FUN_00296774(...);
+int resultSetMenuState(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
 int spriteStartAnimationByIndex(...);
@@ -69,7 +69,7 @@ extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned ch
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 /* Supplied declaration required: textEncodeFontSlot. */
-/* Supplied declaration required: FUN_00296774. */
+/* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int messageMainGetChoiceResult(void);
@@ -393,7 +393,7 @@ LAB_002174ac:
           if (temp_v2 != 2) {
             return;
           }
-          FUN_00296774(param_1,0xe);
+          resultSetMenuState(param_1,0xe);
           return;
         }
         if (temp_v3 != 10) {
@@ -419,7 +419,7 @@ LAB_002174ac:
           FUN_0029541c(param_1);
           return;
         }
-        FUN_00296774(param_1,0x10);
+        resultSetMenuState(param_1,0x10);
         return;
       }
       temp_v2 = scrRunOpcodesStub(*puVar16);

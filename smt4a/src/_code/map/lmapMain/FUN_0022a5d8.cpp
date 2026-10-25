@@ -17,7 +17,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00261468(...);
 int gameDataGetPlayerName(void);
 int tmnlGetEntryText(...);
@@ -63,7 +63,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -160,7 +160,7 @@ unsigned int FUN_0022a5d8(void)
         textFormatBuffer(temp_v17,&LAB_0022a9e0);
       }
       puVar4 = temp_v17;
-      FUN_0018408c(puVar4,2);
+      fontMeasureLineAdvance(puVar4,2);
       temp_v7 = (int)*(short *)(temp_v6 + 8) + ((int)**(short **)(temp_v6 + 0xc) - (int)puVar4) / 2;
       VectorSignedToFloat(*(short *)(temp_v6 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -284,7 +284,7 @@ unsigned int FUN_0022a5d8(void)
         }
         temp_v3 = FUN_001834a4(0x15,6);
         puVar4 = temp_v17;
-        FUN_0018408c(puVar4,2);
+        fontMeasureLineAdvance(puVar4,2);
         temp_v9 = (int)**(short **)(temp_v3 + 0xc);
         temp_v11 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) +
                  (temp_v9 - (int)puVar4) / 2;
@@ -391,12 +391,12 @@ unsigned int FUN_0022a5d8(void)
       }
       temp_v2 = FUN_001834a4(0x15,0x17);
       puVar4 = temp_v17;
-      FUN_0018408c(puVar4,3);
+      fontMeasureLineAdvance(puVar4,3);
       temp_v7 = (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8) +
                ((int)**(short **)(temp_v2 + 0xc) - (int)puVar4) / 2;
       if (g_lmapMain != '\0') {
         puVar4 = temp_v17;
-        FUN_0018408c(puVar4,2);
+        fontMeasureLineAdvance(puVar4,2);
         temp_v7 = (int)*(short *)(temp_v2 + 8);
         temp_v3 = *(short *)(temp_v6 + 8) + temp_v7 + ((int)**(short **)(temp_v2 + 0xc) - (int)puVar4) / 2
         ;

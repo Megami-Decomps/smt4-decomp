@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses `vsub.f32 s0, s0, s4` where armcc emits `vsub.f32 s1, s0, s4`. */
+/* NON_MATCHING: comparison direction matches; circle deltas, sum and square-root use different VFP registers. */
 #include "common.h"
 
 extern "C" {
@@ -9,7 +9,9 @@ s32 mathCirclesOverlap(f32 x, f32 y, f32 z, f32 radius, f32 otherX, f32 otherY, 
 {
     f32 dx = x - otherX;
     f32 dz = z - otherZ;
-    return radius + otherRadius >= sqrtf(dx * dx + dz * dz);
+    f32 distance = sqrtf(dx * dx + dz * dz);
+    f32 combinedRadius = radius + otherRadius;
+    return combinedRadius >= distance;
 }
 
 } /* extern "C" */

@@ -1,5 +1,6 @@
 #include "shard/S1GfxModel.h"
 #include "shard/W5_W5Match2_PlainData.h"
+#include "gfx/CameraAnimationApply.h"
 
 struct SceneModeObject {
     /* 0x000 */ u8 unk000[0x1fc];
@@ -24,7 +25,6 @@ struct ModelModeRegistry {
 
 extern "C" {
 extern ModelModeRegistry *g_handleRegistry;
-void controllerApplyAtUnitScale(void *controller, Matrix44 *matrix, s32 flags);
 void FUN_003fe86c(SceneModeObject *, s32 mode, s32 enabled, f32 start, f32 end);
 void FUN_003fd8dc(SceneModeObject *, s32 slot, u32 color);
 void FUN_00406768(void *renderer, s32 slot, u32 color);

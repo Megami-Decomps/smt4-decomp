@@ -8,7 +8,7 @@ s32 stageAssetsLoaded(void);
 int NaviMain_DispatchState(void *state);
 
 /* Navi main task: while stageAssetsLoaded reports ready and the navi object isn't busy, dispatches its state; always returns 0. */
-u32 NAVI_PROC(void)
+s32 NAVI_PROC(u32 handle)
 {
     if (stageAssetsLoaded() == 0) {
         return 0;

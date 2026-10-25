@@ -1,4 +1,4 @@
-/* NON_MATCHING: port of the IV FUN_003707a8; see the diff for what still differs. */
+/* NON_MATCHING: upper-level bound compares record level against maximum in the opposite operand order. */
 #include "common.h"
 
 namespace {

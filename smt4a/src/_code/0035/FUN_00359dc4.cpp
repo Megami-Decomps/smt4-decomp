@@ -65,7 +65,7 @@ void linkHolderApplyFlag(LinkHolder *links, s32 flag);
 void FUN_002e1c94(void *work, s32 count, u32 frame, f32 start, f32 end);
 void FUN_002e207c(void);
 void FUN_002e2114(void);
-void FUN_002e2184(StatusScene *scene, u32 playerData);
+void outfitPreviewConfigureEquipment(struct OutfitPreview *preview, const struct OutfitPreviewEquipment *equipment);
 StatusScene *overlayGetStatusScene(void);
 u32 overlayGetBuffer1(void);
 s32 buttonHelpGetPanelMode(void);
@@ -96,7 +96,8 @@ u32 FUN_00359dc4(StatusScreen *screen)
         resourceEntryMarkReleased(overlayGetStatusScene()->resources, 1);
         resourceEntryMarkReleased(overlayGetStatusScene()->resources, 2);
         u32 playerData = gameGetPlayerData();
-        FUN_002e2184(overlayGetStatusScene(), playerData);
+        outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(overlayGetStatusScene()),
+                     reinterpret_cast<const OutfitPreviewEquipment *>(playerData));
         overlayGetStatusScene();
         FUN_002e207c();
         screen->resourcesReleased = 1;

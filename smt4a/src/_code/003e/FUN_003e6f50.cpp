@@ -21,7 +21,7 @@ struct BtlMainStateView {
 };
 BtlMainStateView *btlGetMainState(void);
 BtlGameOverA *FUN_003e6c14(BtlGameOverA *work);
-BtlGameOverA *FUN_003e6dc8(BtlGameOverA *work);
+BtlGameOverA *talkEventStartScript(BtlGameOverA *work);
 BtlGameOverA *FUN_003e71a8(BtlGameOverA *work);
 BtlGameOverA *stepStateBattleStart(BtlGameOverA *work);
 }
@@ -80,10 +80,10 @@ BtlGameOverA *FUN_003e6f50(BtlGameOverA *work)
             save->gameOvers++;
         }
         work->state = GAMEOVER_STATE_MENU;
-        return FUN_003e6dc8(work);
+        return talkEventStartScript(work);
     }
     case GAMEOVER_STATE_MENU:
-        return FUN_003e6dc8(work);
+        return talkEventStartScript(work);
     case GAMEOVER_STATE_CHAINED:
         work->state = GAMEOVER_STATE_START;
         return stepStateBattleStart(work);

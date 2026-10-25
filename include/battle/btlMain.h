@@ -278,6 +278,12 @@ typedef struct BtlMainStateA {
             /* 0x22CD */ u8 ready;
         } environmentModel;
         struct {
+            /* 0x2000 */ u8 unk2000BeforeEventModel[0x298];
+            /* 0x2298 */ u32 *owner;
+            /* 0x229C */ u8 unk229C[0x18];
+            /* 0x22B4 */ u8 loaded;
+        } eventModel;
+        struct {
             /* 0x2000 */ u8 prefix[0x340];
             /* 0x2340 */ u8 enabled[4];
             /* 0x2344 */ s16 actorOffsets[4];
@@ -317,6 +323,10 @@ typedef char BtlMainStateAAuxiliaryTaskOffsetCheck[
 typedef char BtlMainStateAEnvironmentModelOffsetCheck[
     offsetof(BtlMainStateA, environmentModel.owner) == 0x22BC &&
     offsetof(BtlMainStateA, environmentModel.loaded) == 0x22CC &&
+    sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
+typedef char BtlMainStateAEventModelOffsetCheck[
+    offsetof(BtlMainStateA, eventModel.owner) == 0x2298 &&
+    offsetof(BtlMainStateA, eventModel.loaded) == 0x22B4 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateAReflectedSlotOffsetCheck[
     offsetof(BtlMainStateA, environmentModel.ready) == 0x22CD &&

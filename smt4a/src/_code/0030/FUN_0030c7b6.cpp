@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'mov r5, r0'; compiler emits 'mov r4, r0' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 void sysMemClear(void *,u32);

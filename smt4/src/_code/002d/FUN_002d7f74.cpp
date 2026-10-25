@@ -7,8 +7,8 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 
 void effMenuCallHandler(s32 handler, s32 flag);
-void requestDispatch(void);
-void FUN_0028186c(void);
+void requestDispatch(void *request);
+void FUN_0028186c(EffectNode *node);
 void layoutApplyForState(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 void FUN_002c198c(RenderCtx *context);
@@ -29,13 +29,13 @@ void FUN_002d7f74(void)
     }
     effMenuCallHandler(1, 1);
     if (g_effectEditor.selection.resource != NULL) {
-        requestDispatch();
+        requestDispatch(g_effectEditor.selection.resource);
     }
-    if (g_effectEditor.dispatch.blocked != 0) {
-        FUN_0028186c();
+    if (g_effectEditor.dispatch.node != NULL) {
+        FUN_0028186c(g_effectEditor.dispatch.node);
     }
     if (g_effectEditor.dispatch.cachedEvent != 0) {
-        requestDispatch();
+        requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));
     }
     FUN_002c18e4(g_titleScene);
     FUN_002c198c(g_titleScene);

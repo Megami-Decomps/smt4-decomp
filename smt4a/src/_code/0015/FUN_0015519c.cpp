@@ -15,7 +15,7 @@ int FUN_00167860(...);
 int FUN_00168470(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(int);
 int camSetMatrixA(int, unsigned char [84]);
 int mtx44Copy(...);
@@ -61,7 +61,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
@@ -256,7 +256,7 @@ unsigned int FUN_0015519c(void)
       if (*(int *)(temp_v0 + 0x14) != 2) {
         if (*(int *)(temp_v0 + 0x14) != 6) {
           temp_v3 = temp_v0 + 0x26c;
-          FUN_0018408c(temp_v3,4);
+          fontMeasureLineAdvance(temp_v3,4);
           temp_v1 = (**(short **)(temp_v1 + 0xc) - temp_v3) / 2;
           VectorSignedToFloat(temp_v6 + 6,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

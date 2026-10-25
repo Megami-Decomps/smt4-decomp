@@ -9,6 +9,7 @@ inline void *operator new(unsigned int, void *place) { return place; }
 class Obj55c880 : public Obj422594 {
 public:
     virtual ~Obj55c880();
+    /* 0x64 */ u32 positionId;
 };
 
 /* One selection entry (0x74 bytes). */

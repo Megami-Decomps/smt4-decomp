@@ -7,7 +7,7 @@ typedef struct FlagBlock {
     /* 0x00000 */ u8 unk00000[0x1EC10];
     /* 0x1EC10 */ u8 flagsA[0x40];
     /* 0x1EC50 */ u8 unk1EC50[0x5F0C];
-    /* 0x24B5C */ u8 flagsB[8];
+    /* 0x24B5C */ u8 flagsB[0x48]; /* ids 0x40..0x47 retain their full index */
 } FlagBlock;
 
 typedef struct DataBlocks {

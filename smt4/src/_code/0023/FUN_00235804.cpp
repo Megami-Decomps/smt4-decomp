@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001559ec(void);
+int rt_fpResultDispatch(void);
 int halt_baddata(void);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_001559ec. */
+/* Supplied declaration required: rt_fpResultDispatch. */
 
 
 /* WARNING: Control flow encountered bad instruction data */
@@ -44,7 +44,7 @@ unsigned long long FUN_00235804(int param_1)
   else if ((unsigned int)(param_1 << 1) < 0x7f000000) {
     return 0;
   }
-  FUN_001559ec();
+  rt_fpResultDispatch();
                     /* WARNING: Bad instruction - Truncating control flow here */
   halt_baddata();
 }

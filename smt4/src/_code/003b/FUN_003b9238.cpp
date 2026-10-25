@@ -1,4 +1,4 @@
-#include "common.h"
+#include "font/PlaceWin.h"
 
 struct StepText {
     u8 unk00[2];     // 0x00
@@ -27,7 +27,6 @@ void buttonHelpSelectByProgress(TextStep *step);
 void FUN_0027db24(s32 arg);
 void dialogOpen(u8 mode, u8 arg);
 void infoWinSetMessage(u32 window, s32 id);
-void placeWinStartText(const void *text);
 void FUN_002305e8(s32 value);
 
 /* When the step's script finishes, opens the text of its entry and moves the step to state 5. */

@@ -20,12 +20,12 @@ extern JyoucyuGlobalView g_jyoucyu;
 
 void* asdMemoryAlloc(u32 category, u32 size, u32 flags, u32 alignment,
                      u32 option);
-void FUN_0025c7e4(void);
+s32 FUN_0025c7e4(void);
 void jyoucyuRequest(void);
 u32 jyoucyuDrawLoadingOverlay(void);
 
 void* asdProcessCreateSimple(const char* name, u32 priority, u32 option,
-                             u32 flags, void (*entry)(void),
+                             u32 flags, s32 (*entry)(void),
                              void (*request)(void), void* argument);
 void taskCreateDraw(const char* name, u32 priority, u32 option, u32 flags,
                     u32 (*draw)(void), u32 option2, u32 option3,

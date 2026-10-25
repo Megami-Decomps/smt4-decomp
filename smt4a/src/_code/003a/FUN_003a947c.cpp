@@ -1,4 +1,3 @@
-/* NON_MATCHING: only one extra compiler `nop {0}` before scrSetResult (the null-record path joins at the call in retail without it). */
 #include "common.h"
 
 extern "C" {

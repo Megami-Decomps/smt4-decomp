@@ -7,8 +7,6 @@ extern "C" {
 extern const char DAT_00526044[]; /* ...\Model\MoriModelEffect.cpp: __FILE__ */
 
 void *asdMemoryAllocTracked(s32 heap, s32 align, s32 a, s32 size, s32 b);
-ModelEffectEntry *FUN_00178b04(u32 size, const char *file, s32 line); /* operator new with caller info */
-u32 FUN_00291038(u32 value);
 
 /* Collect the table's entries whose id is the model and which are not flagged, copying each into a
  * new entry of this model's list. */
@@ -39,13 +37,13 @@ void FUN_0041a124(ModelEffects *effects, u32 modelId)
         ModelEffectEntry *source = table->entries[i];
 
         if (!(source->flags & 1) && source->id == modelId) {
-            ModelEffectEntry *memory = FUN_00178b04(sizeof(ModelEffectEntry), DAT_00526044, 240);
-
+            ModelEffectEntry *memory = static_cast<ModelEffectEntry *>(FUN_00178b04(
+                sizeof(ModelEffectEntry), DAT_00526044, 240));
             if (memory != NULL) {
                 memory->id = -1;
                 memory->flags = 0;
                 memory->unk08 = 0;
-                memory->unk0C = 0;
+                memory->unk0C = NULL;
             }
             ModelEffectEntry *copy = memory;
             copy->id = source->id;

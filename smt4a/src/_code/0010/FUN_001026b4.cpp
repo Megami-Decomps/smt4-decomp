@@ -6,7 +6,7 @@ extern "C" {
 
 void _ZN4__rw10__rw_throwEiz(int kind, ...);
 int FUN_002e40ec(...);
-int FUN_002e410c(unsigned int *, unsigned int, unsigned int);
+int __rw_string_rep_allocate(unsigned int *, unsigned int, unsigned int);
 int FUN_002e5780(unsigned int *);
 int FUN_002e5f10(...);
 
@@ -26,7 +26,7 @@ extern unsigned char DAT_0064c010; /* 0x64c010 */
 
 /* Supplied declaration required: _ZN4__rw10__rw_throwEiz. */
 /* Supplied declaration required: FUN_002e40ec. */
-/* Supplied declaration required: FUN_002e410c. */
+/* Supplied declaration required: __rw_string_rep_allocate. */
 extern unsigned int *_ZSt3maxIjERKT_S2_S2_(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e5780. */
 /* Supplied declaration required: FUN_002e5f10. */
@@ -98,7 +98,7 @@ int FUN_001026b4(unsigned int *param_1,unsigned int param_2,unsigned int param_3
       temp_v7 = temp_v5;
       puVar2 = (unsigned int *)_ZSt3maxIjERKT_S2_S2_(&temp_v6,&temp_v7);
       puVar3 = param_1;
-      FUN_002e410c(param_1,*puVar2,temp_v5);
+      __rw_string_rep_allocate(param_1,*puVar2,temp_v5);
       if (param_2 != 0) {
         FUN_002e40ec(puVar3 + 3,*param_1,param_2);
       }

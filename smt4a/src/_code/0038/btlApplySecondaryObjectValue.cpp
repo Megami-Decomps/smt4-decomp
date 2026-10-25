@@ -1,18 +1,18 @@
-/* NON_MATCHING: retail uses `add r0, r0, #8192` where armcc emits `mov r1, #8832`. */
 #include "common.h"
 
 extern "C" {
 
-struct BattleState { u8 unk0000[0x2280]; void *object; };
+struct BattleSecondaryState { u8 unk000[0x280]; void *object; };
+struct BattleState { u8 unk0000[0x2000]; BattleSecondaryState secondary; };
 BattleState *btlGetMainState(void);
-s32 FUN_0027099c(BattleState *state);
+u32 FUN_0027099c(void);
 void messageAuxDispatch(void *object, s32 value);
 
 void btlApplySecondaryObjectValue(void)
 {
     BattleState *state = btlGetMainState();
-    void *object = state->object;
-    messageAuxDispatch(object, FUN_0027099c(state));
+    void *object = state->secondary.object;
+    messageAuxDispatch(object, FUN_0027099c());
 }
 
 } /* extern "C" */

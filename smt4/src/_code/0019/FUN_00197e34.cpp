@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028f4b4(...);
+float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002907c4(...);
 int questIsCompleted(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
@@ -264,7 +264,7 @@ void FUN_00197e34(void)
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(2,0xffffffff,temp_v24);
-      FUN_0028f4b4(temp_v24,2);
+      temp_v16 = FUN_0028f4b4(reinterpret_cast<const char *>(temp_v24), 2, 0.0f);
       puStack_178 = &LAB_00198614;
       temp_v11 = (int)(temp_v16 + 3.0f) + (int)temp_v17;
       FUN_002bdf94(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0,7,

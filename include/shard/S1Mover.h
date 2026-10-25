@@ -3,6 +3,7 @@
 #define SHARD_S1MOVER_H
 
 #include "common.h"
+#include <stddef.h>
 
 typedef struct Vec3f {
     /* 0x0 */ f32 x;
@@ -21,6 +22,7 @@ typedef struct MovedPart {
     /* 0x7C */ u8 unk7C[0xC];
     /* 0x88 */ u32 flags;      /* 0x800: transform dirty */
 } MovedPart;
+
 
 enum {
     MOVED_PART_DIRTY = 0x800
@@ -60,6 +62,10 @@ typedef struct Mover {
     /* 0x1658 */ Vec3f nodePosition;
     /* 0x1664 */ Vec3f nodeFinalPosition;
 } Mover;
+typedef char MoverPositionLayoutCheck[sizeof(Vec3f) == 0xc && sizeof(MovedPart) == 0x8c &&
+    offsetof(Mover, parts) == 0x56c && offsetof(Mover, position) == 0x1604 &&
+    offsetof(Mover, positionB) == 0x1610 && offsetof(Mover, finalPosition) == 0x161c &&
+    offsetof(Mover, finalPositionB) == 0x1628 ? 1 : -1];
 
 /* A 3x4 matrix (nn::math::MTX34); the default constructor makes the identity. */
 struct Mtx34 {

@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00512870` (_code @ 0x512870, 0x54c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
 
 extern "C" {
 
 int gfxTextureStorageUnbind(int);
-int gfxTextureStorageRelease(unsigned int, int);
+void gfxTextureStorageRelease(u32, DefaultTextureStorage *);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -99,7 +100,7 @@ LAB_005128c0:
               }
               temp_v0 = *piVar7;
               gfxTextureStorageUnbind(temp_v0 + 0x34);
-              gfxTextureStorageRelease(*(unsigned int *)(temp_v0 + 0x2c),temp_v0 + 0x34);
+              gfxTextureStorageRelease(*(unsigned int *)(temp_v0 + 0x2c),reinterpret_cast<DefaultTextureStorage *>(temp_v0 + 0x34));
               goto joined_r0x00512b38;
             }
             if (temp_v2 != 1) {
@@ -212,7 +213,7 @@ LAB_00512d14:
               do {
                 temp_v3 = temp_v2 + temp_v0 * 0x44;
                 gfxTextureStorageUnbind(temp_v3 + 0x34);
-                gfxTextureStorageRelease(*(unsigned int *)(temp_v2 + 0x2c),temp_v3 + 0x34);
+                gfxTextureStorageRelease(*(unsigned int *)(temp_v2 + 0x2c),reinterpret_cast<DefaultTextureStorage *>(temp_v3 + 0x34));
                 temp_v0 = temp_v0 + 1;
               } while (temp_v0 < 6);
 joined_r0x00512b38:

@@ -7,6 +7,13 @@ extern "C" {
 
 GameBlock2830C *gameDataBlocksGetSaveData(void);
 
+static __inline bool unlockBitIsEarned(s32 index)
+{
+    s32 byteIndex = index / 8;
+    s32 bitIndex = index % 8;
+    return (progressUnlockByteGet(&gameDataBlocksGetSaveData()->unlocks.earned[byteIndex]) & (1u << bitIndex)) != 0;
+}
+
 /* Returns the table index of the nth earned progress unlock, or the table count if fewer are earned. */
 s32 FUN_00344bc8(s32 nth)
 {
@@ -20,15 +27,13 @@ s32 FUN_00344bc8(s32 nth)
         if (&entries[index] == NULL) {
             continue;
         }
-        s32 byte = index / 8;
-        s32 bit = index % 8;
-        u8 *earnedBits = gameDataBlocksGetSaveData()->unlocks.earned;
-        if (earnedBits[byte] & (1 << bit)) {
-            if (earned == nth) {
-                return index;
-            }
-            earned++;
+        if (!unlockBitIsEarned(index)) {
+            continue;
         }
+        if (earned == nth) {
+            return index;
+        }
+        earned++;
     }
     return index;
 }

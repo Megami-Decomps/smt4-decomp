@@ -44,7 +44,7 @@ s32 libc_strcmp(const char* a, const char* b);
 void gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
 void textFormatBuffer(char* out, const char* format, ...);
-s32 FUN_0018408c(const char* text, s32 font);
+s32 fontMeasureLineAdvance(const char* text, s32 font);
 SpriteRect* FUN_001834a4(s32 group, s32 index);
 void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 speed);
 void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
@@ -64,13 +64,13 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
         name = gameGetPlayerName();
     }
     textFormatBuffer(text, "%s", name);
-    s32 nameWidth = FUN_0018408c(text, 2);
+    s32 nameWidth = fontMeasureLineAdvance(text, 2);
     SpriteRect* frame = FUN_001834a4(50, 9);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     FUN_00162790(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
 
     textFormatBuffer(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
-    s32 suffixWidth = FUN_0018408c(text, 2);
+    s32 suffixWidth = fontMeasureLineAdvance(text, 2);
     SpriteRect* suffix = FUN_001834a4(50, 10);
     s32 suffixOffset = *suffix->extra;
     FUN_00162790(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);

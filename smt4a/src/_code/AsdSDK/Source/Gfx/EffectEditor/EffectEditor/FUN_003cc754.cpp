@@ -4,7 +4,7 @@
 
 extern "C" {
 extern EffectSelectionContext DAT_0059e9a8;
-extern EffectEditorSelectionTransfer DAT_00634bc0;
+extern EffectEditorSelectionTransfer g_effectEditorSettings;
 extern EffectEditorOptions DAT_0059e858;
 extern const u8 DAT_0059e738[];
 extern const u8 DAT_0059e780[];
@@ -15,10 +15,10 @@ u32 FUN_003cc754(u32 result)
 {
     void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
         g_effectEditor.selection.index + DAT_0059e9a8.index);
-    __aeabi_memcpy4(item, &DAT_00634bc0.working, sizeof(DAT_00634bc0.working));
-    __aeabi_memcpy4(DAT_00634bc0.saved, &DAT_00634bc0.working, sizeof(DAT_00634bc0.saved));
+    __aeabi_memcpy4(item, &g_effectEditorSettings.working, sizeof(g_effectEditorSettings.working));
+    __aeabi_memcpy4(g_effectEditorSettings.saved, &g_effectEditorSettings.working, sizeof(g_effectEditorSettings.saved));
     g_effectEditor.unk00[6] = 1;
-    if (DAT_00634bc0.working.flags & 2) {
+    if (g_effectEditorSettings.working.flags & 2) {
         DAT_0059e858.options = DAT_0059e738;
         DAT_0059e858.limit = 3;
         if (DAT_0059e858.index > 3) {

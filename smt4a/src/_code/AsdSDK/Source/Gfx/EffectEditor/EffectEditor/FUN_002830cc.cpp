@@ -27,10 +27,10 @@ struct EditorRenderResetView {
 };
 }
 extern "C" {
-extern EditorCameraDefaults DAT_006352ac;
-extern EditorCamera DAT_00634da0;
+extern EditorCameraDefaults g_effectEditorCameraDefaults;
+extern EditorCamera g_effectEditorCamera;
 extern EditorResetStateView g_effectEditor;
-extern EditorRenderResetView DAT_00634c50;
+extern EditorRenderResetView g_effectEditorResourceName;
 void randomStateSeed(u32 stream, u32 seed);
 void FUN_00387454(void);
 void asdCameraInitializeDefaults(EditorCamera *camera, s32 mode);
@@ -44,36 +44,36 @@ void FUN_002830cc(void)
 {
     randomStateSeed(0, 0x12345678);
     FUN_00387454();
-    DAT_006352ac.position[0] = 0.0f;
-    DAT_006352ac.position[1] = 100.0f;
-    DAT_006352ac.position[2] = 600.0f;
-    DAT_006352ac.up[0] = 0.0f;
-    DAT_006352ac.up[1] = 1.0f;
-    DAT_006352ac.up[2] = 0.0f;
-    DAT_006352ac.target[0] = 0.0f;
-    DAT_006352ac.target[1] = 0.0f;
-    DAT_006352ac.target[2] = 0.0f;
-    DAT_006352ac.rotation[0] = 0.0f;
-    DAT_006352ac.rotation[1] = 0.0f;
-    DAT_006352ac.rotation[2] = 0.0f;
-    DAT_006352ac.offset[0] = 0.0f;
-    DAT_006352ac.offset[1] = 0.0f;
-    DAT_006352ac.offset[2] = 0.0f;
-    asdCameraInitializeDefaults(&DAT_00634da0, 1);
-    FUN_0014f0dc(&DAT_00634da0, DAT_006352ac.position, DAT_006352ac.target, DAT_006352ac.up);
-    FUN_001523b8(&DAT_00634da0, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
-    FUN_0036b824(&DAT_00634da0);
+    g_effectEditorCameraDefaults.position[0] = 0.0f;
+    g_effectEditorCameraDefaults.position[1] = 100.0f;
+    g_effectEditorCameraDefaults.position[2] = 600.0f;
+    g_effectEditorCameraDefaults.up[0] = 0.0f;
+    g_effectEditorCameraDefaults.up[1] = 1.0f;
+    g_effectEditorCameraDefaults.up[2] = 0.0f;
+    g_effectEditorCameraDefaults.target[0] = 0.0f;
+    g_effectEditorCameraDefaults.target[1] = 0.0f;
+    g_effectEditorCameraDefaults.target[2] = 0.0f;
+    g_effectEditorCameraDefaults.rotation[0] = 0.0f;
+    g_effectEditorCameraDefaults.rotation[1] = 0.0f;
+    g_effectEditorCameraDefaults.rotation[2] = 0.0f;
+    g_effectEditorCameraDefaults.offset[0] = 0.0f;
+    g_effectEditorCameraDefaults.offset[1] = 0.0f;
+    g_effectEditorCameraDefaults.offset[2] = 0.0f;
+    asdCameraInitializeDefaults(&g_effectEditorCamera, 1);
+    FUN_0014f0dc(&g_effectEditorCamera, g_effectEditorCameraDefaults.position, g_effectEditorCameraDefaults.target, g_effectEditorCameraDefaults.up);
+    FUN_001523b8(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
+    FUN_0036b824(&g_effectEditorCamera);
     g_effectEditor.buffer = g_effectEditor.scratch;
     g_effectEditor.frame = 0;
-    DAT_00634c50.active = 0;
+    g_effectEditorResourceName.active = 0;
     g_effectEditor.flag8 = 0;
     g_effectEditor.flag7 = 0;
     g_effectEditor.mode = 0;
     g_effectEditor.inhibited = 0;
-    DAT_00634c50.rotation[0] = 0;
-    DAT_00634c50.rotation[1] = 0;
-    DAT_00634c50.rotation[2] = 0;
-    DAT_00634c50.scale = 1.0f;
+    g_effectEditorResourceName.rotation[0] = 0;
+    g_effectEditorResourceName.rotation[1] = 0;
+    g_effectEditorResourceName.rotation[2] = 0;
+    g_effectEditorResourceName.scale = 1.0f;
     FUN_003627ac(0.0f, 0.0f);
 }
 }

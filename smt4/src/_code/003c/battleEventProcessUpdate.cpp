@@ -32,7 +32,7 @@ extern const char DAT_00400938[];
 void memClear(void *destination, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
 s32 FUN_0022a2c4(void *system, u32 id);
-void FUN_00387a7c(void *system, u32 id, void **output, const char *name);
+void aocQueueType1e(void *system, u32 id, void **output, const char *name);
 void aocQueueType1f(void *system, u32 id, void **output, const char *name);
 void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 void *dataTableFileGetTable(void *file, u32 index);
@@ -97,7 +97,7 @@ extern "C" u32 battleEventProcessUpdate(BattleEventWork *work, BattleEventContex
         memClear(name, sizeof(name));
         textFormatBuffer(name, DAT_00400968, context->eventName, context->eventName);
         if (FUN_0022a2c4(g_aocSystem, context->aocId))
-            FUN_00387a7c(g_aocSystem, context->aocId, &work->tableData, name);
+            aocQueueType1e(g_aocSystem, context->aocId, &work->tableData, name);
         else
             asdLoadFileAsyncSimple(name, &work->tableData, 0);
         work->state = 2;

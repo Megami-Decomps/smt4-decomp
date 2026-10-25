@@ -5,8 +5,8 @@
 
 extern "C" {
 s32 scrGetArg(s32 index);
-u32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(u32 selection, s32 *first, s32 *count);
+s32 btlResolveEntryChoice(s32 choice);
+void FUN_00301a08(s32 selection, u32 *first, u32 *count);
 void scrSetResult(s32 value);
 BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
@@ -14,12 +14,12 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 // Check the selected range and optional special combatant for either positive status property.
 u32 FUN_003bbe24()
 {
-    struct Selection { s32 count; s32 first; } selection;
-    u32 choice = btlResolveEntryChoice(scrGetArg(0));
+    struct Selection { u32 count; u32 first; } selection;
+    s32 choice = btlResolveEntryChoice(scrGetArg(0));
     FUN_00301a08(choice, &selection.first, &selection.count);
     // These words cannot be added to the shared union at unaligned +0x0a without moving its fields.
     struct PropertyView { u8 prefix[0xac]; s32 first; u32 unkB0; s32 second; };
-    for (s32 index = selection.first; index < selection.first + selection.count; ++index) {
+    for (s32 index = selection.first; index < (s32)(selection.first + selection.count); ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&

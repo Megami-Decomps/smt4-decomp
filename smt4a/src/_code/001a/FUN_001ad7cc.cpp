@@ -1,64 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ad7cc` (_code @ 0x1ad7cc, 0xf0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: dictionary/type-check register lifetimes and translation snapshot stores differ. */
+#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "gfx/ModelBoneLookup.h"
 extern "C" {
+u32 wstrlen(const char *name);
+ResDicPatriciaNode *nw_ut_ResDicPatricia_Get(ResDicPatricia **dictionary, const char *name, u32 length);
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern unsigned int wstrlen(int);
-extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
-
-
-unsigned int FUN_001ad7cc(int param_1,int param_2,unsigned int *param_3)
-
+// Find a named skeleton bone and copy the translation from its current matrix.
+u32 FUN_001ad7cc(AsdMotionModel *model, const char *name, SkeletonVector3 *position)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  puVar1 = *(unsigned int **)(*(int *)(param_1 + 0x2c) + 8);
-  if ((puVar1 != (unsigned int *)0x0) && ((~*puVar1 & 0x40000092) != 0)) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  temp_v5 = 0;
-  temp_v3 = puVar1[0x38];
-  if (temp_v3 != 0) {
-    temp_v0 = (int)(puVar1 + 0x38) + temp_v3;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  temp_v4 = *(int *)(temp_v0 + 0x1c);
-  if (temp_v4 != 0) {
-    temp_v5 = temp_v4 + temp_v0 + 0x1c;
-  }
-  if (temp_v5 != 0 && param_2 != 0) {
-    temp_v1 = wstrlen(param_2);
-    temp_v0 = nw_ut_ResDicPatricia_Get(&temp_v5,param_2,temp_v1);
-    if ((temp_v0 != 0) && (temp_v0 = ((temp_v0 - temp_v5) - 0x1c) >> 4, -1 < temp_v0)) {
-      temp_v4 = (**(romwright_code **)(**(int **)(*(int *)(param_1 + 0x2c) + 0x220) + 0x1c))();
-      temp_v0 = *(int *)(temp_v4 + 4) + temp_v0 * 0x30;
-      temp_v1 = *(unsigned int *)(temp_v0 + 0x1c);
-      temp_v2 = *(unsigned int *)(temp_v0 + 0x2c);
-      *param_3 = *(unsigned int *)(temp_v0 + 0xc);
-      param_3[1] = temp_v1;
-      param_3[2] = temp_v2;
-      return 1;
+    ModelBoneResource *resource = ModelBoneResource::cast(model->owner->model.resource);
+    RelativePointer *skeletonReference = &resource->skeleton;
+    ModelBoneSkeleton *skeleton = static_cast<ModelBoneSkeleton *>(skeletonReference->get());
+    RelativePointer *dictionaryReference = &skeleton->dictionary;
+    ResDicPatricia *dictionary = static_cast<ResDicPatricia *>(dictionaryReference->get());
+    s32 bone = -1;
+    if (dictionary != NULL && name != NULL) {
+        ResDicPatriciaNode *node = nw_ut_ResDicPatricia_Get(&dictionary, name, wstrlen(name));
+        if (node != NULL)
+            bone = node - dictionary->nodes;
     }
-  }
-  *param_3 = 0;
-  param_3[1] = 0;
-  param_3[2] = 0;
-  return 0;
+    if (bone < 0) {
+        position->values[0] = 0.0f;
+        position->values[1] = 0.0f;
+        position->values[2] = 0.0f;
+        return 0;
+    }
+    ModelBoneMatrixProvider *provider = model->owner->secondary.skeleton.provider;
+    SkeletonMatrix34 *matrix = &provider->vtable->getMatrices(provider)->matrices[bone];
+    SkeletonVector3 translation = {{matrix->values[3], matrix->values[7], matrix->values[11]}};
+    *position = translation;
+    return 1;
 }
-
-} /* extern "C" */
+}

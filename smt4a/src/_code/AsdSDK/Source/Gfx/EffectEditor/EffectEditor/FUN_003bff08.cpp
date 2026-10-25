@@ -63,11 +63,11 @@ extern unsigned int DAT_005c142c; /* 0x5c142c */
 extern signed char DAT_00634c48; /* 0x634c48 */
 extern signed char DAT_00634c49; /* 0x634c49 */
 extern signed char DAT_00634c4a; /* 0x634c4a */
-extern unsigned int DAT_00634c90; /* 0x634c90 */
+extern unsigned int g_effectEditorInitialVector; /* 0x634c90 */
 extern unsigned int DAT_00634c94; /* 0x634c94 */
 extern unsigned int DAT_00634c98; /* 0x634c98 */
 extern unsigned int DAT_00634c9c; /* 0x634c9c */
-extern float DAT_006352f0; /* 0x6352f0 */
+extern float g_effectEditorVector; /* 0x6352f0 */
 extern float DAT_006352f4; /* 0x6352f4 */
 extern unsigned int DAT_006352f8; /* 0x6352f8 */
 extern float DAT_006352fc; /* 0x6352fc */
@@ -281,11 +281,11 @@ LAB_003c00f8:
   }
   temp_v12 = temp_v12 | 2;
 LAB_003c01a8:
-  DAT_006472dc = DAT_006352f0;
+  DAT_006472dc = g_effectEditorVector;
   DAT_006472e0 = DAT_006352f4;
   DAT_006472e4 = (float)DAT_006352f8;
   DAT_006472e8 = DAT_006352fc;
-  DAT_006472ec = (float)DAT_00634c90;
+  DAT_006472ec = (float)g_effectEditorInitialVector;
   DAT_006472f0 = (float)DAT_00634c94;
   DAT_006472f4 = (float)DAT_00634c98;
   DAT_006472f8 = (float)DAT_00634c9c;

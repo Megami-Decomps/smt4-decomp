@@ -2,7 +2,7 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-void *jobGetWork(void);
+void *jobGetWork(u32 job);
 s32 FUN_002865c0(u32 mode, f32 alpha);
 s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
@@ -10,9 +10,9 @@ void taskRunPhase(u32 phase);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
-u32 FUN_001aa4a8(void)
+s32 FUN_001aa4a8(u32 job)
 {
-    jobGetWork();
+    jobGetWork(job);
     RenderCtx *context = g_titleScene;
     renderCtxPushC(context, FUN_002865c0(6, 0.0f));
     context = g_titleScene;

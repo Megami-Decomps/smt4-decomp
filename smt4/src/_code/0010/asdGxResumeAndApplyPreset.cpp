@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc emits `nop {0}` between the force-black getter's cmp and bne; retail has none. */
 #include "shard/W6_W6Match3_GxPresetResumeState.h"
 
 extern "C" {

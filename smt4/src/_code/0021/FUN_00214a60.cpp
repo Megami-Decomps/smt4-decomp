@@ -7,7 +7,7 @@ extern "C" {
 int screenDrawShadedRect(...);
 int FUN_0025086c(...);
 int FUN_0025090c(...);
-int FUN_0028f4b4(...);
+float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002907c4(...);
 int FUN_0029ee6c(int, int);
 int FUN_002ae038(...);
@@ -242,7 +242,7 @@ unsigned int FUN_00214a60(void)
           }
           FUN_0025090c(temp_v14,*(unsigned short *)(temp_v17 + 0x2a6),2,temp_v27);
           temp_v2 = **(short **)(temp_v9 + 0xc);
-          FUN_0028f4b4(temp_v27,2);
+          FUN_0028f4b4(reinterpret_cast<const char *>(temp_v27), 2, 0.0f);
           temp_v5 = *(int *)(temp_v5 + temp_v4 * 4 + 0x68);
           VectorSignedToFloat((int)temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(temp_v5 + *(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

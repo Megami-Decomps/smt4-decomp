@@ -1,64 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00471d94` (_code @ 0x471d94, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: add-on file-list rebuilding has not yet been matched. */
+#include "addon/aocMain.h"
+#include "shard/W8X15_PackageList.h"
+#include "gamedata/TableEntryCache.h"
+
+struct AocPackageItemList : AocSystemA {
+    u8 unk394[0xb4];
+    s32 itemCount; // 0x448
+    u32 unk44c;
+    PackageFileRef *items; // 0x450
+};
+typedef char AocPackageItemListOffsets[
+    offsetof(AocPackageItemList, itemCount) == 0x448 &&
+    offsetof(AocPackageItemList, items) == 0x450 ? 1 : -1];
 
 extern "C" {
+extern AocMain *g_aocMain;
+void asdOperatorDeleteB(void *items);
+void *asdOperatorNewE(u32 size);
+s32 asdFsIsSdCardDetected();
+u32 objGetFlagBit16(AocMain *main);
+s32 aocCountPackageItemsOfType(AocSystemA *system, u32 kind);
+void entryStateClear(EntryState *entry);
+void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void (*construct)(void *), u32 size, u32 count);
+void FUN_00471468(AocSystemA *system, s32 kind, s32 capacity, PackageFileRef *output);
 
-int __aeabi_vec_ctor_nocookie_nodtor(void);
-int asdOperatorNewE(void);
-int asdFsIsSdCardDetected(void);
-int FUN_00471468(int, int, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int g_aocMain; /* 0x570260 */
-
-extern int objGetFlagBit16(void);
-extern int asdOperatorDeleteB(void);
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: asdFsIsSdCardDetected. */
-extern int aocCountPackageItemsOfType(int, unsigned int);
-/* Supplied declaration required: FUN_00471468. */
-
-
-void FUN_00471d94(int param_1)
-
+// Rebuild the type-0x34 package file list when the SD card and add-on system are available.
+void FUN_00471d94(AocPackageItemList *system)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (*(int *)(param_1 + 0x450) != 0) {
-    temp_v0 = asdOperatorDeleteB();
-    *(unsigned int *)(param_1 + 0x450) = 0;
-  }
-  *(unsigned int *)(param_1 + 0x448) = 0;
-  asdFsIsSdCardDetected();
-  if (temp_v0 != 0) {
-    temp_v0 = objGetFlagBit16();
-    if (temp_v0 != 0) {
-      temp_v0 = aocCountPackageItemsOfType(param_1,0x34);
-      *(int *)(param_1 + 0x448) = temp_v0;
-      if (0 < *(int *)(param_1 + 0x448)) {
-        temp_v0 = temp_v0 << 4;
-        asdOperatorNewE();
-        if (temp_v0 != 0) {
-          __aeabi_vec_ctor_nocookie_nodtor();
-        }
-        *(int *)(param_1 + 0x450) = temp_v0;
-        FUN_00471468(param_1,0x34,*(unsigned int *)(param_1 + 0x448),temp_v0);
-        return;
-      }
+    if (system->items != NULL) {
+        asdOperatorDeleteB(system->items);
+        system->items = NULL;
     }
-  }
-  else {
-    *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
-  }
-  return;
+    system->itemCount = 0;
+    if (asdFsIsSdCardDetected()) {
+        if (objGetFlagBit16(g_aocMain)) {
+            system->itemCount = aocCountPackageItemsOfType(system, 0x34);
+            s32 count = system->itemCount;
+            if (count > 0) {
+                void *items = asdOperatorNewE(count * sizeof(PackageFileRef));
+                if (items != NULL)
+                    items = __aeabi_vec_ctor_nocookie_nodtor(items, reinterpret_cast<void (*)(void *)>(entryStateClear), sizeof(PackageFileRef), count);
+                system->items = static_cast<PackageFileRef *>(items);
+                FUN_00471468(system, 0x34, system->itemCount, system->items);
+            }
+        }
+    } else {
+        g_aocMain->flags &= ~0x10000u;
+    }
 }
-
-} /* extern "C" */
+}

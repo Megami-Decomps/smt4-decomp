@@ -38,7 +38,7 @@ extern "C" {
 
 extern u8* g_renderCtx;
 
-s32 FUN_0018408c(const char* text, s32 font);
+s32 fontMeasureLineAdvance(const char* text, s32 font);
 void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 alpha);
 void skinObjectUpdateMatrices(u8* ctx);
 SpriteRect* FUN_001834a4(s32 group, s32 index);
@@ -55,7 +55,7 @@ void camSetMatrixA(u8* ctx, const Mtx44* matrix);
 // (two digits once it reaches ten), the count part scaled around its anchor while it pops in.
 void FUN_00165778(ItemBadge* badge, SpriteRect* frame)
 {
-    s32 captionWidth = FUN_0018408c(badge->caption, 4);
+    s32 captionWidth = fontMeasureLineAdvance(badge->caption, 4);
     s32 left = (*frame->extra - captionWidth) / 2;
     FUN_00162790(4, -1, badge->caption, (f32)left, 6.0f, 0.57f, 0.0f, badge->textAlpha);
     uiDrawItemCategoryIcon(badge->category, left - 13, 8, 121, 0);

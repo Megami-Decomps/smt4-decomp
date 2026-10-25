@@ -27,7 +27,7 @@ int FUN_00269bf0(void);
 int FUN_002888a8(...);
 int FUN_00288ddc(...);
 int FUN_0029a17c(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
@@ -110,7 +110,7 @@ extern int gameGetPlayerData(void);
 extern int supportUnitGetEntry(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int gameGetSupportUnitData(void);
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int FUN_002bd068(unsigned short);
@@ -568,7 +568,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
       textFormatBuffer(temp_v40,&LAB_00260730,temp_v7);
       temp_v8 = FUN_002bf4f8(0x15,0x1c);
       puVar10 = temp_v29;
-      FUN_002b6dd8(puVar10,1);
+      fontMeasureLineAdvance(puVar10,1);
       temp_v7 = ((int)**(short **)(temp_v8 + 0xc) - (int)puVar10) / 2;
       VectorSignedToFloat(temp_v6 + temp_v7 + (int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

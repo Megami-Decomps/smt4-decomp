@@ -30,7 +30,8 @@ void FUN_003c7ffc(StageRequest* request)
         width = request->width;
         height = request->height;
     } else {
-        width = height = 1;
+        width = 1;
+        height = 1;
     }
     request->stage = g_btlStage;
     FUN_003400f0(request, width, height, 0x1c0);

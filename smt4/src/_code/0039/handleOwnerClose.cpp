@@ -1,11 +1,7 @@
 #include "nn/svc.h"
+#include "nn/os/HandleOwner.h"
 
 extern "C" {
-
-typedef struct HandleOwner {
-    /* 0x00 */ u32 handle;
-    /* 0x04 */ u8 started;
-} HandleOwner;
 
 void FUN_00351ca0(void);
 

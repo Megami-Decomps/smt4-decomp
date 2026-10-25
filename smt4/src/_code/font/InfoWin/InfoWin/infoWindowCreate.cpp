@@ -2,16 +2,17 @@
 #include "shard/W6_W6Match7_DrawParameters.h"
 #include "ui/UiSpriteState.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 void memClear(void *memory, u32 bytes);
-u32 infoWindowUpdate(void *job);
-u32 FUN_0011aef0(void *job);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
-    u32 (*update)(void *), u32 destroy, void *work);
-u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
-    u32 (*draw)(void *), u32 destroy, void *work, u32 parent);
+s32 infoWindowUpdate(u32 job);
+s32 infoWinDraw(u32 job);
+u32 asdProcessCreateSimple(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, u32 parent);
 void drawParameterBlockClear(Params002c312c *parameters);
 void paramsInit(Params002c312c *parameters, const void *source, u32 value,
     u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
@@ -39,10 +40,10 @@ void infoWindowCreate()
     InfoWindowSmt4 *work = g_infoWin;
     memClear(work, sizeof(InfoWindowSmt4));
     InfoWindowSetupView *setup = reinterpret_cast<InfoWindowSetupView *>(work);
-    u32 process = asdProcessCreateSimple("InfoWin Calc", 1, 0, 0, infoWindowUpdate, 0, NULL);
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("InfoWin Calc"), 1, 0, 0, infoWindowUpdate, NULL, 0);
     setup->process = process;
-    taskCreateDraw("InfoWin DrawUpLeft", 0x81, 0, 0, FUN_0011aef0, 0, NULL, process);
-    taskCreateDraw("InfoWin DrawUpRight", 0xDF, 0, 0, FUN_0011aef0, 0, NULL, setup->process);
+    taskCreateDraw(reinterpret_cast<const s8 *>("InfoWin DrawUpLeft"), 0x81, 0, 0, infoWinDraw, NULL, 0, process);
+    taskCreateDraw(reinterpret_cast<const s8 *>("InfoWin DrawUpRight"), 0xDF, 0, 0, infoWinDraw, NULL, 0, setup->process);
     work = g_infoWin;
     setup = reinterpret_cast<InfoWindowSetupView *>(work);
     drawParameterBlockClear(&setup->parameters);

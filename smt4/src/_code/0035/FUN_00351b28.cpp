@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_0036051c(void);
+int serviceQuerySignedByteChecked(void);
 
-/* Supplied declaration required: FUN_0036051c. */
+/* Supplied declaration required: serviceQuerySignedByteChecked. */
 
 
 unsigned int FUN_00351b28(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0036051c();
+  serviceQuerySignedByteChecked();
   return param_1 ^ 1;
 }
 

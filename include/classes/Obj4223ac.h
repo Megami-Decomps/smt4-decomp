@@ -20,6 +20,11 @@ public:
     virtual void vfunc14();
     virtual void vfunc18();
     virtual void vfunc1c();
+
+    /* 0x64 */ u32 positionId;
 };
+
+typedef char Obj4223acLayoutCheck[
+    sizeof(Obj4223ac) == 0x68 && offsetof(Obj4223ac, positionId) == 0x64 ? 1 : -1];
 
 #endif

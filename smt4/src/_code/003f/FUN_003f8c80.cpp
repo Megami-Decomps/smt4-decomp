@@ -1,7 +1,7 @@
 /* NON_MATCHING: packed-scalar constants and VFP loads are scheduled differently. */
 #include "shard/AnimCurve.h"
 
-extern "C" f32 hardfp_floorf(f32 value);
+extern "C" f32 __hardfp_floorf(f32 value);
 
 extern "C" f32 FUN_003f8c80(const PackedScalarAnimCurve *curve, f32 frame)
 {
@@ -18,7 +18,7 @@ extern "C" f32 FUN_003f8c80(const PackedScalarAnimCurve *curve, f32 frame)
     typedef char SampledCurveLayoutCheck[offsetof(SampledCurveView, inverseDuration) == 4 &&
         offsetof(SampledCurveView, keys) == 0x14 ? 1 : -1];
     const SampledCurveView *source = (const SampledCurveView *)curve;
-    u32 roundedFrame = (u32)hardfp_floorf(frame / source->timeScale + 0.5f);
+    u32 roundedFrame = (u32)__hardfp_floorf(frame / source->timeScale + 0.5f);
     const PackedScalarAnimKey *key = source->keys;
     if (key->frame <= roundedFrame) {
         key = source->keys + source->keyCount - 1;

@@ -1,68 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036c580` (_code @ 0x36c580, 0xe4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "event/bustupEvent/BustupShake.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+s32 FUN_00162ea4();
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
+s32 FUN_002ac078(u32 job);
+void jobFreeWork(u32 job);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 
-int asdProcessCreateSimple(...);
-int asdMemoryAllocTracked(...);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int FUN_002ac078(...); /* 0x2ac078 */
-extern unsigned char LAB_00341ee4; /* 0x341ee4 */
-extern unsigned char LAB_0036c6b4; /* 0x36c6b4 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-extern int FUN_00162ea4(void);
-/* Supplied declaration required: asdMemoryAllocTracked. */
-
-
-void FUN_0036c580(unsigned int param_1,unsigned int param_2)
-
+// Start a uniform-amplitude shake, fading during its final ten frames when timed.
+u32 FUN_0036c580(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int in_s0;
-  float temp_v1;
-  float in_s1;
-  
-  temp_v0 = FUN_00162ea4();
-  if (temp_v0 == 0) {
-    puVar2 = (unsigned int *)0x100;
-    asdMemoryAllocTracked(0x100,0x100,0,0x28,1);
-    temp_v1 = 0.0f;
-    *puVar2 = 0;
-    puVar2[1] = 0;
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    puVar2[4] = 0;
-    puVar2[5] = 0;
-    puVar2[6] = 0;
-    puVar2[7] = param_1;
-    puVar2[8] = param_2;
-    puVar2[9] = 0;
-    if (in_s1 == 0.0f) {
-      *(unsigned char *)(puVar2 + 9) = 1;
-      puVar2[1] = 0;
+    if (FUN_00162ea4())
+        return 0;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\bustupEvent\\BustupEffect.cpp", 0x92);
+    ShakeJobWork *work = static_cast<ShakeJobWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(ShakeJobWork), 1));
+    *work = ShakeJobWork();
+    work->outputX = outputX;
+    work->outputY = outputY;
+    f32 fadeStart;
+    if (duration == 0.0f) {
+        work->endless = 1;
+        work->duration = 0.0f;
+        fadeStart = 0.0f;
+    } else {
+        work->duration = duration;
+        work->endless = 0;
+        fadeStart = duration - 10.0f;
     }
-    else {
-      *(float *)&puVar2[1] = in_s1;
-      *(unsigned char *)(puVar2 + 9) = 0;
-      temp_v1 = in_s1 - 10.0f;
-    }
-    *(float *)&puVar2[2] = temp_v1;
-    puVar2[3] = in_s0;
-    puVar2[4] = in_s0;
-    asdProcessCreateSimple(&LAB_0036c6b4,4,0,0,FUN_002ac078,&LAB_00341ee4,puVar2);
-  }
-  return;
+    work->fadeStart = fadeStart;
+    work->amplitudeX = amplitude;
+    work->amplitudeY = amplitude;
+    return asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_BustupShake"), 4, 0, 0,
+                                  FUN_002ac078, jobFreeWork, reinterpret_cast<u32>(work));
 }
-
-} /* extern "C" */
+}

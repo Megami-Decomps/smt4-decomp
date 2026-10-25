@@ -7,8 +7,8 @@ extern "C" {
 
 int FUN_0015dc2c(...);
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
-int FUN_002a116c(...);
-int FUN_002a1200(...);
+u32 FUN_002a116c(const u32 *result);
+u32 FUN_002a1200(const u32 *result);
 int asdLoadFileAsyncNoCallback(...);
 int _ZN9AocSystem17getPendingRequestEv(...);
 int legacyResourceIdRemap(...);
@@ -442,12 +442,8 @@ LAB_0015cfcc:
       else if (!temp_v6) {
         jyoucyuGetTableEntry();
       }
-      pcVar4 = temp_v16;
-      FUN_002a1200();
-      if (pcVar4 == (char *)0x0) {
-        pcVar4 = temp_v16;
-        FUN_002a116c();
-        if (pcVar4 == (char *)0x0) {
+      if (FUN_002a1200(reinterpret_cast<const u32 *>(temp_v16)) == 0) {
+        if (FUN_002a116c(reinterpret_cast<const u32 *>(temp_v16)) == 0) {
           jyoucyuGetTableEntry(0);
           temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
           *(unsigned char *)(param_2 + 8) = 1;

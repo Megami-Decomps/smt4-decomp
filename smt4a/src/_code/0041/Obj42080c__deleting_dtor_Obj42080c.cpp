@@ -4,9 +4,7 @@
 extern "C" {
 extern u8 _ZTV9Obj420794[];
 void textureOwnerReset(u32 handle);
-void asdOperatorDelete(FilterObj *object);
 
-/* C entry retained: generated D0 selects the shared base's SMT IV release/delete names. */
 void _ZN9Obj42080cD0Ev(FilterObj *object)
 {
     object->vtbl = _ZTV9Obj420794 + 8;

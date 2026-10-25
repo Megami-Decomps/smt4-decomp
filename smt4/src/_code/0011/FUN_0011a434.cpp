@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002b6b8c(...);
 int FUN_002b6c34(...);
 int FUN_002b6db0(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int cameraSetViewMatrix(int, unsigned char [84]);
 int renderCtxCalculateStereoParallax(int);
 int itemDrawCategoryBadge(...);
@@ -67,7 +67,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002b6b8c. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
@@ -274,7 +274,7 @@ unsigned int FUN_0011a434(void)
         temp_v2 = FUN_002bf4f8(0xe,0xdd);
       }
       temp_v1 = temp_v0 + 0x154;
-      FUN_002b6dd8(temp_v1,4);
+      fontMeasureLineAdvance(temp_v1,4);
       temp_v2 = (**(short **)(temp_v2 + 0xc) - temp_v1) / 2;
       VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(4,0xff,temp_v0 + 0x154);

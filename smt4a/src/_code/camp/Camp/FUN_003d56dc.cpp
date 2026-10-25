@@ -87,7 +87,7 @@ int FUN_0031d890(void);
 int FUN_0031db84(...);
 int FUN_0032d0c8(...);
 int FUN_003492dc(void);
-int FUN_0035ab90(void);
+int callbackSceneDestroyResources(void);
 int FUN_0035dbd4(...);
 int arousalSkillOpen(...);
 int obj25CRefreshFlags(...);
@@ -304,7 +304,7 @@ extern unsigned int FUN_0034a9ac(void);
 extern int FUN_0035a028(void);
 extern int campCecEditIsStateSixteen(void);
 /* Supplied declaration required: FUN_0035a094. */
-/* Supplied declaration required: FUN_0035ab90. */
+/* Supplied declaration required: callbackSceneDestroyResources. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
@@ -1240,7 +1240,7 @@ LAB_003d6870:
     temp_v4 = FUN_00284e94();
     if (temp_v4 != 0) {
       if (puVar12[7] == 0x4a) {
-        FUN_0035ab90();
+        callbackSceneDestroyResources();
         puVar19 = g_camp;
         *(unsigned char *)(g_camp + 0xcad) = 0;
         temp_v4 = FUN_002e27b8();

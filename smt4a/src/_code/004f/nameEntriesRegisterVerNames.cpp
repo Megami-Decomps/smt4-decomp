@@ -1,38 +1,24 @@
-#include "common.h"
+#include "battle/BtlEffectFiles.h"
 
 extern "C" {
 
-struct NameRecord {
-    /* 0x00 */ u8 data[0x84];
-};
+u32 keyedRecordRegisterName(const char *name);
+u32 FUN_003478dc(u32 index, char *data);
 
-struct NameEntry {
-    /* 0x00 */ u8 id;
-    /* 0x01 */ u8 unk01[3];
-    /* 0x04 */ const char *name;
-    /* 0x08 */ NameRecord record;
-};
-
-struct NameOwner {
-    /* 0x0000 */ u8 unk0000[0x281c];
-    /* 0x281c */ NameEntry entries[11];
-};
-
-u8 keyedRecordRegisterName(NameRecord *record);
-u8 FUN_003478dc(u8 id, const char *name);
-
-/* Registers every entry whose name starts with "VER", replacing its id with the one the name resolves to. */
-void nameEntriesRegisterVerNames(NameOwner *owner)
+/* Registers and parses loaded marker effect files whose buffers begin with the VER header. */
+void nameEntriesRegisterVerNames(void *work)
 {
+    BtlEffectFiles *owner = static_cast<BtlEffectFiles *>(work);
     s32 i;
 
     for (i = 0; i < 11; i++) {
-        NameEntry *entry = &owner->entries[i];
-        const char *name = entry->name;
+        BtlEffectSlot *entry = &owner->markerSlots[i];
+        char *data = static_cast<char *>(entry->file);
 
-        if (name[0] == 'V' && name[1] == 'E' && name[2] == 'R') {
-            entry->id = keyedRecordRegisterName(&entry->record);
-            entry->id = FUN_003478dc(entry->id, name);
+        if (data[0] == 'V' && data[1] == 'E' && data[2] == 'R') {
+            u32 index = keyedRecordRegisterName(entry->name);
+            entry->handle = index;
+            entry->handle = FUN_003478dc(index, data);
         }
     }
 }

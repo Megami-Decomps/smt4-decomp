@@ -1,3 +1,4 @@
+/* NON_MATCHING: STL sort iterator local offsets and equivalent register allocation differ from retail. */
 #include "common.h"
 #include <algorithm>
 #include <vector>

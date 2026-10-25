@@ -38,7 +38,7 @@ int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
 int FUN_00230a50(...);
@@ -129,7 +129,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern int FUN_0018416c(short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -267,7 +267,7 @@ unsigned char FUN_0022b2d4(void)
       }
       temp_v3 = FUN_001834a4(0x12,0xba);
       puVar22 = temp_v29;
-      FUN_0018408c(puVar22,2);
+      fontMeasureLineAdvance(puVar22,2);
       VectorSignedToFloat(temp_v27[5] +
                           (int)*(short *)(temp_v3 + 8) +
                           ((int)**(short **)(temp_v3 + 0xc) - (int)puVar22) / 2,

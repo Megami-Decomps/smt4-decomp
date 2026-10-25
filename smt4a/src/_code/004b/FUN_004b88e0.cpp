@@ -28,6 +28,7 @@ void FUN_001695a0();
 void textFormatBuffer(char *, const char *, ...);
 void *asdLoadFileSyncDefault(const char *);
 ScriptRunState *FUN_00275bc8(void *, void *);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptRunState *, u32);
 
@@ -56,7 +57,7 @@ void FUN_004b88e0(EventScriptLaunchWorkView *work)
     textFormatBuffer(path, "event/e%03d/e%03d.mbm", DAT_005f16fc.eventId, DAT_005f16fc.eventId);
     work->messages = asdLoadFileSyncDefault(path);
     work->script = FUN_00275bc8(work->bytecode, work->messages);
-    work->script->mode = 2;
+    scriptProcessSetMode(work->script, 2);
     u32 entry = tableGroupFindEntryIndex(work->bytecode, DAT_005f16fc.entryName);
     scrScriptProcessStartEntry(work->script, entry);
     ++work->transform.runtime.phase;

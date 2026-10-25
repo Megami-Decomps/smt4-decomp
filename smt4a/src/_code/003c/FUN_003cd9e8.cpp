@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation only: retail keeps the best key in r1, the entry key in r2, the entry pointer in r3 and the count in ip; the build rotates r1-r3/ip. */
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -8,14 +8,11 @@ typedef struct PairEntry {
     /* 0x02 */ s16 value;
 } PairEntry;
 
-extern u32 dataTableGet(u32 table, u32 index);
-extern u32 dataTableGetCount(u32 table);
-extern PairEntry *dataTableGetEntries(void);
 
 /* Looks `key` up in table 6/2; without an exact match returns the value of the entry with the largest key (or, for a negative key, the smallest). */
 int FUN_003cd9e8(int key)
 {
-    u32 table;
+    void *table;
     PairEntry *entries;
     u32 count;
     int bestKey;
@@ -23,7 +20,7 @@ int FUN_003cd9e8(int key)
     u32 i;
 
     table = dataTableGet(6, 2);
-    entries = dataTableGetEntries();
+    entries = static_cast<PairEntry *>(dataTableGetEntries(table));
     count = dataTableGetCount(table);
     bestKey = 0;
     bestValue = 0;

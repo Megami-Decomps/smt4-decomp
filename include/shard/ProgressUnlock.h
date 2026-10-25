@@ -13,4 +13,7 @@ struct ProgressUnlockCondition {
 
 typedef char ProgressUnlockConditionSizeCheck[sizeof(ProgressUnlockCondition) == 0x2c ? 1 : -1];
 
+/* Read one earned-bit storage byte through the save-data byte accessor. */
+extern "C" u32 progressUnlockByteGet(const u8 *byte);
+
 #endif

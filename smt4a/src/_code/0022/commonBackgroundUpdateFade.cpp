@@ -7,7 +7,7 @@ s32 gameFlagIsSet(u32 flag);
 void jobStop(u32 job, s32 reason);
 void asdMemFree(void *memory);
 
-u32 commonBackgroundUpdateFade()
+s32 commonBackgroundUpdateFade(u32 handle)
 {
     CommonBackgroundState *background = g_commonBg.background;
     if (background == NULL) {

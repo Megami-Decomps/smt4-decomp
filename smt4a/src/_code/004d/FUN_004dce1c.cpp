@@ -62,7 +62,7 @@ void FUN_00408184(s32 kind, s32 flag);
 s32 FUN_004c67d0(void);
 s32 FUN_004d7a70(s32 event, s32 kind, s32 arg, s32 flag);
 void FUN_004d7fe4(s32 event);
-void nameEntriesRegisterVerNames(void);
+void nameEntriesRegisterVerNames(void *work);
 void FUN_004fb670(s32 a, s32 b, s32 c);
 void FUN_004fbeac(s32 a, BtlAiAction *action, s32 b, s32 c, s32 d);
 void FUN_004fd508(s32 a, BtlAiAction *action, s32 kind, u32 uiIndex, s32 flag);
@@ -96,7 +96,7 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
     handle->data->attempts = attempts;
     handle->data->attempts = attempts < 255 ? attempts : 255;
     if ((reinterpret_cast<BtlAuxBlock *>(g_btlAux)->flags & 0x400) != 0) {
-        nameEntriesRegisterVerNames();
+        nameEntriesRegisterVerNames(reinterpret_cast<void *>(g_btlAux));
     }
     if (handle->data->phase == 3) {
         escaped = 1;

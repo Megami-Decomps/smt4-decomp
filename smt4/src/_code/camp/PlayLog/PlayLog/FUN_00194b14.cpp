@@ -53,7 +53,7 @@ PlayLogFrame *FUN_002bf4f8(u32 table, u32 index);
 s32 vec2GetXInt(void *row);
 void textFormatBuffer(char *out, const char *format, ...);
 void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y);
-s32 FUN_002b6dd8(const char *text, u32 font);
+s32 fontMeasureLineAdvance(const char *text, u32 font);
 
 void FUN_00194b14(void)
 {
@@ -100,7 +100,7 @@ void FUN_00194b14(void)
             FUN_002907c4(second, rest / 60);
             textFormatBuffer(text, "%s\x82g\x81@%s\x82l", first, second);
         }
-        s32 width = FUN_002b6dd8(text, 2);
+        s32 width = fontMeasureLineAdvance(text, 2);
         FUN_002be5a4(2, PLAYLOG_VALUE_COLOR, text,
                      (f32)(frame->x + x + (valueFrame->x + *valueFrame->size - width)),
                      (f32)(frame->y + valueFrame->y));

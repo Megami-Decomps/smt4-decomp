@@ -7,8 +7,8 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 btlResolveEntryChoice(void);
-void FUN_00301a08(u32 group, s32 *first, s32 *count);
+s32 btlResolveEntryChoice(s32 choice);
+void FUN_00301a08(s32 group, u32 *first, u32 *count);
 BtlMainStateA *btlGetMainState(void);
 s32 FUN_002b54a0(BtlCombatantEntryA *entry, s32 kind);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
@@ -17,10 +17,10 @@ BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 u32 btlScriptAnyCandidateMatches(void)
 {
     s32 kind = scrGetArg(0);
-    scrGetArg(1);
-    s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(), &first, &count);
-    for (s32 i = first; i < first + count; ++i) {
+    s32 choice = scrGetArg(1);
+    u32 first, count;
+    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
+    for (s32 i = first; i < (s32)(first + count); ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&

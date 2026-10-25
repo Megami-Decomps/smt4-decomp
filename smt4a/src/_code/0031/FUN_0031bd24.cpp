@@ -1,14 +1,16 @@
 /* NON_MATCHING: only the null-model readiness branch differs: compiler skips the redundant second null check that retail preserves. */
 #include "battle/BattleStageLoadWork.h"
 
+struct OrbitScreen;
+
 extern "C" {
-BattleStageLoadWork *jobGetWork(void);
-void FUN_001ffba8(void);
+BattleStageLoadWork *jobGetWork(u32 handle);
+void FUN_001ffba8(OrbitScreen *screen);
 s32 FUN_00162ea4(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void asdEnvResetModelBank(const char *file, s32 bank);
 AsdMdlObject *asdMdlManagerCreateSecondList(const char *file, u32 flags);
-s32 FUN_001ab8c0(AsdMdlObject *model);
+s32 modelHasLoadedAttachment(AsdMdlObject *model);
 void lightOwnerRegister(AsdMdlObject *model, s32 enabled);
 void nodeSetTranslation3f(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
 void animPlayerSetLoopPolicy(AsdMdlNode *node, s32 loop);
@@ -17,10 +19,10 @@ extern const char DAT_0052f5bc[];
 extern const char DAT_0052f598[];
 
 // Load the battle stage environment/model, then register and initialize the ready model.
-u32 FUN_0031bd24(void)
+s32 FUN_0031bd24(u32 handle)
 {
-    BattleStageLoadWork *work = jobGetWork();
-    FUN_001ffba8();
+    BattleStageLoadWork *work = jobGetWork(handle);
+    FUN_001ffba8(reinterpret_cast<OrbitScreen *>(work));
     switch (work->state) {
     case 0:
         if (!FUN_00162ea4()) {
@@ -36,7 +38,7 @@ u32 FUN_0031bd24(void)
         }
         break;
     case 1:
-        if (work->model != NULL && !FUN_001ab8c0(work->model))
+        if (work->model != NULL && !modelHasLoadedAttachment(work->model))
             break;
         if (work->model != NULL) {
             if (work->model->node->unk0c < 0) {
@@ -52,7 +54,7 @@ u32 FUN_0031bd24(void)
     case 2:
         break;
     case 3:
-        return (u32)-1;
+        return -1;
     }
     return 0;
 }

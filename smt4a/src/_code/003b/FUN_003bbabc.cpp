@@ -32,8 +32,7 @@ u32 FUN_003bbabc()
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[slot];
         u64 flags = entry->flags;
         if ((g_btlCandidateMasks.unavailable & flags) &&
-            (((u32)g_btlCandidateMasks.required & (u32)flags) |
-             ((u32)(g_btlCandidateMasks.required >> 32) & (u32)(flags >> 32))) &&
+            (g_btlCandidateMasks.required & flags) &&
             !(flags & g_btlCandidateMasks.excluded) &&
             entry->id == unitId &&
             reinterpret_cast<ModifierView *>(entry)->values[index] <= -1) {

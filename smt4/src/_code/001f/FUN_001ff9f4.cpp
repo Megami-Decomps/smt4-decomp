@@ -1,61 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ff9f4` (_code @ 0x1ff9f4, 0xf8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: failure-report argument scheduling and final success-result materialization differ. */
+#include "shard/W6_W6Match1_PositionedStream.h"
 
-extern "C" {
+extern "C" void FUN_002c3510(u32 result);
+extern "C" void FUN_00254824(u32 result);
+extern "C" void asdFatalError();
+extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
-int FUN_00254824(int);
-int FUN_002c3510(...);
-int asdFatalError(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00254824. */
-/* Supplied declaration required: FUN_002c3510. */
-/* Supplied declaration required: asdFatalError. */
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
-
-
-int FUN_001ff9f4(int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+static __inline u32 fileRecordResult(u32 result)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = param_4;
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1,*(romwright_code **)(*param_1 + 0x18),param_2,0);
-  FUN_002c3510();
-  if (temp_v0 < 0) {
-    FUN_00254824(temp_v0);
-    temp_v1 = param_1[2];
-  }
-  else {
-    temp_v0 = (**(romwright_code **)(*param_1 + 0x28))(param_1,&temp_v2,param_3,param_4);
-    if (temp_v2 == 0) {
-      temp_v0 = -0x26ffba7a;
-    }
-    FUN_002c3510(temp_v0);
-    if (-1 < temp_v0) {
-      FUN_002c3510();
-      return 0;
-    }
-    FUN_00254824(temp_v0);
-    temp_v1 = param_1[2];
-  }
-  if ((temp_v1 & 0xfffffffe) != 0) {
-    if ((temp_v1 & 1) != 0) {
-      asdFatalError();
-    }
-    nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(param_1[2] & 0xfffffffe);
-    param_1[2] = 0;
-  }
-  return temp_v0;
+    FUN_002c3510(result);
+    return result;
 }
 
-} /* extern "C" */
+
+static __inline void positionedFileClose(PositionedFileStream *stream)
+{
+    if ((stream->handle & ~1u) != 0) {
+        if (stream->handle & 1)
+            asdFatalError();
+        nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(stream->handle & ~1u);
+        stream->handle = 0;
+    }
+}
+
+// Read at an absolute offset, reporting failures and closing the failed file.
+extern "C" s32 FUN_001ff9f4(PositionedFileStream *stream, u32 offset, void *buffer, u32 size)
+{
+    s32 result = stream->vtable->seek(stream, (u64)offset);
+    FUN_002c3510(result);
+    if ((s32)(result & 0x80000000) < 0) {
+        FUN_00254824(result);
+        positionedFileClose(stream);
+        return result;
+    }
+    u32 completed;
+    result = stream->vtable->transfer(stream, &completed, buffer, size);
+    if (completed == 0)
+        result = (s32)0xd9004586;
+    FUN_002c3510(result);
+    if ((s32)(result & 0x80000000) < 0) {
+        FUN_00254824(result);
+        positionedFileClose(stream);
+        return result;
+    }
+    return fileRecordResult(0);
+}

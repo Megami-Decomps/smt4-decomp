@@ -1,59 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032c900` (_code @ 0x32c900, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: open-result lifetime, resize argument order and constant result materialization differ. */
+#include "shard/RomFileOpenState.h"
 
-extern "C" {
+extern "C" s32 FUN_002e0e04(const char *path, char *resolvedPath, s32 flags);
+extern "C" s32 FUN_001883b0(RomOpenFile *file, const char *path, u32 mode);
+extern "C" void FUN_0013ebd8(u32 result);
+extern "C" void sysFatalBreak();
+extern "C" void vcallSlot12IfValid(u32 handle);
 
-int FUN_0013ebd8(...);
-int FUN_001883b0(int *, unsigned char [500], int);
-int vcallSlot12IfValid(unsigned int);
-int sysFatalBreak(void);
-int FUN_002e0e04(int, unsigned char [500], int);
-
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: FUN_001883b0. */
-/* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_002e0e04. */
-
-
-int * FUN_0032c900(int *param_1,int param_2,unsigned int param_3)
-
+static __inline u32 fileRecordResult(u32 result)
 {
-/* irregular: 5 native warning(s); review required */
-  int *piVar1;
-  unsigned char temp_v0 [500];
-  
-  FUN_002e0e04(param_2,temp_v0,0);
-  if (param_2 == 0) {
-    FUN_0013ebd8();
-    return (int *)0xe0e046bc;
-  }
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[3] = 0;
-  piVar1 = param_1 + 2;
-  param_1[4] = 0;
-  FUN_001883b0(piVar1,temp_v0,6);
-  if ((int)piVar1 < 0) {
-    FUN_0013ebd8(piVar1);
-    return piVar1;
-  }
-  piVar1 = (int *)(**(romwright_code **)(*param_1 + 0x3c))(param_1,*(romwright_code **)(*param_1 + 0x3c),param_3,0);
-  FUN_0013ebd8();
-  if ((int)piVar1 < 0) {
-    if ((param_1[2] & 0xfffffffeU) != 0) {
-      if ((param_1[2] & 1U) != 0) {
-        sysFatalBreak();
-      }
-      vcallSlot12IfValid(param_1[2] & 0xfffffffe);
-      param_1[2] = 0;
-    }
-    return piVar1;
-  }
-  FUN_0013ebd8();
-  return (int *)0x0;
+    FUN_0013ebd8(result);
+    return result;
 }
 
-} /* extern "C" */
+// Create a file at the requested length, closing it if setting the length fails.
+extern "C" s32 FUN_0032c900(RomFileOpenState *state, const char *path, u32 size)
+{
+    char resolvedPath[500];
+    if (!FUN_002e0e04(path, resolvedPath, 0))
+        return fileRecordResult(0xe0e046bc);
+    romOpenFileInitialize(&state->file);
+    s32 result = FUN_001883b0(&state->file, resolvedPath, 6);
+    if ((s32)(result & 0x80000000) < 0)
+        return fileRecordResult(result);
+    const PositionedResizeVtable *vtable = static_cast<PositionedResizeVtable *>(state->interface.vtable);
+    result = vtable->resize(reinterpret_cast<PositionedStream *>(state), (u64)size);
+    FUN_0013ebd8(result);
+    if ((s32)(result & 0x80000000) < 0) {
+        if ((state->file.unk00 & ~1u) != 0) {
+            if (state->file.unk00 & 1)
+                sysFatalBreak();
+            vcallSlot12IfValid(state->file.unk00 & ~1u);
+            state->file.unk00 = 0;
+        }
+        return result;
+    }
+    return fileRecordResult(0);
+}

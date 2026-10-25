@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the order of the two mode stores in enterMode differs (retail stores the new mode before the remembered one). */
+/* NON_MATCHING: enterMode's two values use exchanged registers; the mode and remembered-mode stores now have the retail order. */
 #include "shard/SaveSlotHeaderWork.h"
 
 extern "C" {
@@ -14,8 +14,9 @@ void FUN_0022e774(void);
 /* Switches to another mode, remembering the one it leaves. */
 static void enterMode(SaveSlotHeaderWork *work, u8 mode)
 {
-    work->previousMode = work->mode;
+    u8 previousMode = work->mode;
     work->mode = mode;
+    work->previousMode = previousMode;
 }
 
 static void releaseRegisteredHandle(RegisteredHandle *&handle)

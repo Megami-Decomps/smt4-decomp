@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail defines the record, its saved header and the page tables in this unit and addresses DAT_00634bc0 and DAT_0059e738 relative to their neighbours (`sub r0, r1, #0x160`, `sub r1, r0, #0x120`); extern globals need their own literals. */
+/* NON_MATCHING: retail defines the record, its saved header and the page tables in this unit and addresses g_effectEditorSettings and DAT_0059e738 relative to their neighbours (`sub r0, r1, #0x160`, `sub r1, r0, #0x120`); extern globals need their own literals. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 /* The effect record being edited. */
@@ -24,8 +24,8 @@ struct EffectEditorPageCursor {
 
 extern "C" {
 extern EffectSelectionContext DAT_0059e9a8;
-extern EffectEditorRecord DAT_00634bc0;
-extern u8 DAT_00634d20[0x80];
+extern EffectEditorRecord g_effectEditorSettings;
+extern u8 g_effectEditorSavedSnapshot[0x80];
 extern EffectEditorPageCursor DAT_0059e858;
 extern EffectEditorPageItem DAT_0059e738[3];
 extern EffectEditorPageItem DAT_0059e780[9];
@@ -38,9 +38,9 @@ void *FUN_003c8a2c(void *arg)
 {
     void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
                                        DAT_0059e9a8.index + g_effectEditor.selection.index);
-    __aeabi_memcpy4(&DAT_00634bc0, item, sizeof(EffectEditorRecord));
-    __aeabi_memcpy4(&DAT_00634bc0, DAT_00634d20, sizeof(DAT_00634d20));
-    if (DAT_00634bc0.flags & 2) {
+    __aeabi_memcpy4(&g_effectEditorSettings, item, sizeof(EffectEditorRecord));
+    __aeabi_memcpy4(&g_effectEditorSettings, g_effectEditorSavedSnapshot, sizeof(g_effectEditorSavedSnapshot));
+    if (g_effectEditorSettings.flags & 2) {
         DAT_0059e858.items = DAT_0059e738;
         DAT_0059e858.itemCount = 3;
         if (DAT_0059e858.index > 3) {

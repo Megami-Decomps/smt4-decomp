@@ -1,4 +1,4 @@
-/* NON_MATCHING: range loads differ (retail ldr count,[sp,#4]; ldr first into r4 directly, ours ldrd then mov) and the exclusion-mask AND registers differ; active-entry byte now folds (s8 flag). */
+/* NON_MATCHING: excluded-mask AND/OR scratch registers differ; split first/count locals reproduce retail range loads. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -37,14 +37,16 @@ extern "C" u32 FUN_0038c6dc(void)
         stat = 11;
     }
     u32 value = scrGetArg(3);
-    struct EntryRange { s32 first; s32 count; } range;
-    FUN_00301a08(choice, &range.first, &range.count);
-    for (s32 index = range.first; index < range.first + range.count; ++index) {
+    s32 first;
+    s32 count;
+    FUN_00301a08(choice, &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 && entry->id == id && candidateEqualityStat(entry, stat) == value) {
+            (flags & g_btlCandidateMasks.excluded) == 0 &&
+            entry->id == id && candidateEqualityStat(entry, stat) == value) {
             scrSetResult(1);
             return 1;
         }

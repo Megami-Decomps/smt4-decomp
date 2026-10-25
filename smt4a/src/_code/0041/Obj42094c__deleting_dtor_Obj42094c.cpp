@@ -3,13 +3,10 @@
 
 extern "C" {
 
-void textureOwnerReset(void *object);
-void asdOperatorDelete(Filter4Poly *filter);
 
 extern const u8 _ZTV9Obj420794[];
 extern const u8 _ZTV9Obj42094c[];
 
-/* C ABI retained: this game's base resets a texture owner, unlike the shared handle-release base. */
 void _ZN9Obj42094cD0Ev(Filter4Poly *filter)
 {
     filter->vtable = _ZTV9Obj42094c + 8;
@@ -19,7 +16,7 @@ void _ZN9Obj42094cD0Ev(Filter4Poly *filter)
     }
     filter->vtable = _ZTV9Obj420794 + 8;
     if (filter->object != NULL) {
-        textureOwnerReset(filter->object);
+        obj420794ReleaseTexture(reinterpret_cast<u32>(filter->object));
         filter->object = NULL;
     }
     if (filter->dataA != NULL) {

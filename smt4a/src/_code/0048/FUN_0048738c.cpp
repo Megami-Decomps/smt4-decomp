@@ -17,7 +17,7 @@ extern int FUN_0048b8a4(...); /* 0x48b8a4 */
 extern int FUN_0048bad0(...); /* 0x48bad0 */
 extern int FUN_0048bd2c(...); /* 0x48bd2c */
 extern int FUN_0048c1c0(...); /* 0x48c1c0 */
-extern int FUN_0048cd48(...); /* 0x48cd48 */
+extern int selectionNotificationAdvanceEntryAnimations(...); /* 0x48cd48 */
 extern int FUN_0048ce38(...); /* 0x48ce38 */
 extern int FUN_0048d11c(...); /* 0x48d11c */
 extern int FUN_0048d1c8(...); /* 0x48d1c8 */
@@ -67,7 +67,7 @@ void FUN_0048738c(int param_1)
   *(unsigned int *)(param_1 + 0x144c) = 0;
   *(romwright_code **)(param_1 + 0x1450) = FUN_0048a4c0;
   *(unsigned int *)(param_1 + 0x1454) = 0;
-  *(romwright_code **)(param_1 + 0x1460) = FUN_0048cd48;
+  *(romwright_code **)(param_1 + 0x1460) = selectionNotificationAdvanceEntryAnimations;
   *(unsigned int *)(param_1 + 0x1464) = 0;
   *(romwright_code **)(param_1 + 0x1468) = FUN_00490898;
   *(unsigned int *)(param_1 + 0x146c) = 0;

@@ -1,16 +1,18 @@
-/* NON_MATCHING: two flag loads use the owner rather than its cached +0x100 base, and one zero-skill branch targets the other zero-return label; -O2 candidate. */
+/* NON_MATCHING: one zero-skill branch targets the other zero-return label; signed byte flags now reproduce retail's cached-base loads. */
 #include "common.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
 struct BattleSkillFilter {
     u8 unk000[0x158];
-    u8 requireSkill, unk159;
+    s8 requireSkill;
+    u8 unk159;
     u16 skill;
     u8 unk15c[0xe];
-    u8 requireElement, unk16b;
+    s8 requireElement;
+    u8 unk16b;
     u16 element;
     u8 unk16e[0xd];
-    u8 requireCategory;
+    s8 requireCategory;
     u16 category;
     u16 skills[24];
     u8 unk1ae[2];

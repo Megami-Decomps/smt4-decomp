@@ -67,17 +67,6 @@ def find_compiler(args):
     )
 
 
-def unit_compiler(unit):
-    """The armcc build a unit's "compiler" names, as fetched into build/tools (None: the default)."""
-    tool_id = unit.get("compiler")
-    if not tool_id:
-        return None
-    path = BUILD / "tools" / tool_id / MANIFEST[tool_id]["entry"]
-    if not path.exists():
-        raise SystemExit(f"{unit['function']} is compiled with {tool_id}: run `python3 build.py fetch`")
-    return str(path)
-
-
 def launcher():
     """armcc is a Windows executable: other hosts run it through wibo."""
     if FAMILY != "armcc" or os.name == "nt":
@@ -118,10 +107,6 @@ def command(compiler, unit, source, obj):
     # function. Needs evidence like "cflags": IDENTICAL with the list, not without.
     together = [ROOT / UNITS_BY_FUNCTION[name]["source"] for name in unit.get("multifile", ()) if name in UNITS_BY_FUNCTION]
     if FAMILY == "armcc":
-        # A unit may name, in "compiler", another armcc build from config/toolchain.json: the image
-        # mixes 4.1 builds (b713 allocates a VFP result in place where later builds take a fresh
-        # register). Needs evidence like "cflags": IDENTICAL with that build, not with the default.
-        compiler = unit_compiler(unit) or compiler
         system = Path(compiler).resolve().parent.parent / "include"
         includes = ["-J", str(system)] if system.is_dir() else []
         # armcc --multifile checks declarations across the files it compiles together (#1171, which
@@ -486,7 +471,7 @@ def build(args):
 
 
 def fetch():
-    tools = [COMPILER["tool"], "objdiff-cli"] + sorted({unit["compiler"] for unit in PROJECT["units"] if "compiler" in unit})
+    tools = [COMPILER["tool"], "objdiff-cli"]
     if FAMILY == "armcc" and os.name != "nt":
         tools.append("wibo")
     ids = [t for t in tools if t in MANIFEST]

@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00180118(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int dataTable00FindById(...);
 int FUN_002a1850(...);
 int VectorSignedToFloat(...);
@@ -50,7 +50,7 @@ extern int btlGetMainState(void);
 extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int gameDataGetTableValue(void);
 extern unsigned char FUN_0026264c(fn_00368e10_arg1 *);
@@ -119,7 +119,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   }
   temp_v2 = FUN_001834a4(0xc,0x47);
   temp_v4 = *piVar1 + 0x2c;
-  FUN_0018408c(temp_v4,1);
+  fontMeasureLineAdvance(temp_v4,1);
   temp_v1 = VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (**(short **)(temp_v2 + 0xc) - temp_v4) / 2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(*piVar1 + 0x88) = temp_v1;

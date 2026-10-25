@@ -45,7 +45,7 @@ extern int FUN_00330bb4(unsigned short);
 /* Supplied declaration required: dataTable5Type9Count. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004da858. */
-extern int FUN_004db07c(int, unsigned short, unsigned int *);
+extern int fusionClassifyRecipeAvailability(int, unsigned short, unsigned int *);
 /* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 
 
@@ -91,7 +91,7 @@ unsigned int FUN_003a7d74(void)
           if (((temp_v4 != 0) &&
               (temp_v7 = FUN_00330bb4(*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c)),
               temp_v7 == 0)) &&
-             (temp_v7 = FUN_004db07c(*piVar3,*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c),
+             (temp_v7 = fusionClassifyRecipeAvailability(*piVar3,*(unsigned short *)((int)piVar3 + temp_v9 * 2 + 0x8f7c),
                                     temp_v10), temp_v7 != 0)) {
             temp_v6 = temp_v3 + 1;
             *(char *)((int)piVar3 + temp_v3 + 0x901c) =

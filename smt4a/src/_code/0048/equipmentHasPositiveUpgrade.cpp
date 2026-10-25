@@ -9,7 +9,7 @@ extern "C" bool equipmentHasPositiveUpgrade(u32 item)
         return 0;
     }
     EquipmentUpgradeBonuses bonuses;
-    equipmentGetCappedUpgradeBonuses(item, &bonuses.common);
+    equipmentGetCappedUpgradeBonuses(item, bonuses.values);
     const EquipmentUpgradeRecord *record = FUN_0019c06c(item);
     if (record == NULL) {
         return 0;

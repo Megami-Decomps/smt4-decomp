@@ -25,7 +25,7 @@ extern "C" void FUN_002b8ee0(TimerSlot *timer, s32 value);
 extern "C" s32 vec2GetXInt(TimerSlot *timer);
 
 /* Advance opening, scrolling and timed closing of the information window. */
-extern "C" s32 infoWindowUpdate(void)
+extern "C" s32 infoWindowUpdate(u32 job)
 {
     InfoWindowUpdateState *window = g_infoWin;
     switch (window->state) {

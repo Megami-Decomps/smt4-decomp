@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void asdLoadFileSync(s32 a, s32 b, u32 c, s32 d, s32 e, s32 mode);
+void *asdLoadFileSync(s32 *result, void *context, const char *path, u32 *size, u32 flags, u32 alignment);
 
-/* Calls asdLoadFileSync with mode 4 and the single argument `c`. */
-void asdLoadFileSyncDefault(u32 c)
+/* Loads a file into an owned buffer using the default request alignment. */
+void *asdLoadFileSyncDefault(const char *path)
 {
-    asdLoadFileSync(0, 0, c, 0, 0, 4);
+    return asdLoadFileSync(NULL, NULL, path, NULL, 0, 4);
 }
 
 } /* extern "C" */

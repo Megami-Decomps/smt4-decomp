@@ -2,6 +2,7 @@
 #define CLASSES_OBJ422594_H
 
 #include "common.h"
+#include <stddef.h>
 
 #include "classes/Obj422594Delete.h"
 
@@ -62,7 +63,9 @@ public:
     /* 0x4C */ u8 mode;
     /* 0x4D */ u8 unk4d[3];
     /* 0x50 */ Obj422594Region region;
-    /* 0x64 */ u8 ready;
 };
+
+typedef char Obj422594LayoutCheck[
+    sizeof(Obj422594) == 0x64 && offsetof(Obj422594, region) == 0x50 ? 1 : -1];
 
 #endif

@@ -24,7 +24,7 @@ extern s32 scrGetArg(s32 index);
 extern void scrSetResult(s32 value);
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(void);
-extern u32 btlScriptResolveGroupArg(void);
+extern s32 btlScriptResolveGroupArg(s32 group);
 extern s32 btlCommandOwnerHasSlotId(BtlEntry *entry, s32 slot);
 extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
 
@@ -35,8 +35,7 @@ s32 FUN_00323268(void)
     s32 first;
     s32 count;
 
-    scrGetArg(1);
-    FUN_002499fc(btlScriptResolveGroupArg(), &first, &count);
+    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &first, &count);
     for (s32 i = first; i < first + count; i++) {
         BtlEntry *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0

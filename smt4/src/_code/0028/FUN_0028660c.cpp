@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail branches on the null check before testing the portrait flag; built predicates the flag test (ldrbne/cmpne) and the switch table order of the default case moves. */
+/* NON_MATCHING: retail branches after the null-owner test; built predicates the following portrait flag test, removing one branch. */
 #include "common.h"
 
 extern "C" {
@@ -27,7 +27,6 @@ u32 FUN_0028660c(void)
     if (bustUp != NULL) {
         if (bustUp->hasPortrait != 0 && bustUp->portraitHandle != 0) {
             Portrait *portrait = FUN_0031bbc4((u16)bustUp->portraitHandle);
-
             if (portrait != NULL) {
                 switch (portrait->kind) {
                 case 1:

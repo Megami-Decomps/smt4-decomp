@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler reuses the animation base, omits retail's second address construction and uses ldrb rather than its signed busy-byte load. */
 #include "ui/FrameTex.h"
 extern "C" FrameWork *g_frameTex;
 
@@ -20,6 +19,7 @@ struct FrameTextureActivity {
 
 extern "C" {
 s32 FUN_002bf818(FrameTextureAnimationWork *work);
+s8 frameAnimationGetBusy(const FrameTextureAnimation *animation);
 
 // Poll active frame animation, rejecting a busy or incomplete transition.
 u32 frameTexPollTransitionComplete(void)
@@ -27,8 +27,7 @@ u32 frameTexPollTransitionComplete(void)
     FrameWork *texture = g_frameTex;
     FrameTextureActivity *activity = (FrameTextureActivity *)texture;
     if (texture->unkF2B != 0 && activity->active != 0) {
-        FrameTextureAnimation *animation = &activity->animation;
-        if (animation->busy != 0 || FUN_002bf818(&animation->work) == 0) {
+        if (frameAnimationGetBusy(&activity->animation) != 0 || FUN_002bf818(&activity->animation.work) == 0) {
             return 0;
         }
     }

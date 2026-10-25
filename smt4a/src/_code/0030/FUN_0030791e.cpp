@@ -1,4 +1,3 @@
-/* NON_MATCHING: the loop is inverted (test duplicated before the body); retail enters it with an unconditional branch to the bottom test. */
 #include "common.h"
 
 extern "C" {

@@ -1,6 +1,6 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 2 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: the black alpha store is scheduled before its argument-address setup instead of after it. */
 #include "camp/RenderCtx.h"
-#include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/EffectColorMath.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
@@ -15,11 +15,7 @@ void uiDrawScreenDimmer(u32 unused, s32 topScreen)
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
     efctSetSpeed(0.5f);
-    EffectColor black;
-    black.red = 0.0f;
-    black.green = 0.0f;
-    black.blue = 0.0f;
-    black.alpha = 1.0f;
+    EffectColor black = effectColorUnpack(0x000000ff);
     FUN_001834e4(&black);
     if (topScreen) {
         screenDrawShadedRect(0, 0, 400, 240, 245);

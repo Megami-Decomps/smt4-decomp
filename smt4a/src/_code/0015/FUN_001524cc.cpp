@@ -10,12 +10,9 @@ void memCopyWords(const void *source, void *destination, u32 bytes);
 // Rebuild stereo view/projection matrices and their GPU-facing transposed caches.
 void FUN_001524cc(CameraMatrixCache *camera)
 {
-    // The stereo builder also reads one float beyond the documented shared cache prefix.
-    struct StereoCameraView { CameraMatrixCache cache; f32 stereoParameter; };
-    typedef char StereoCameraViewOffsetCheck[offsetof(StereoCameraView, stereoParameter) == 0x508 ? 1 : -1];
     if (!camera->enabled)
         return;
-    const StereoCameraView *stereo = reinterpret_cast<const StereoCameraView *>(camera);
+    const CameraMatrixStereoCache *stereo = reinterpret_cast<const CameraMatrixStereoCache *>(camera);
     FUN_0016fd04(camera->parameters, stereo->stereoParameter, camera->stereoScale,
                   &camera->projection, &camera->view, &camera->secondaryProjection, &camera->secondaryView, 1, 1);
     FUN_00162330(&camera->viewNormals, &camera->view);

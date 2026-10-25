@@ -1,23 +1,25 @@
-/* NON_MATCHING: register allocation in the tie-break: retail copies b to r6 before the first call and keeps the result in r4; built keeps b in r4 and puts the result in r5. */
+/* NON_MATCHING: canonical slot-pointer qsort/callee contracts restored; tie-break result/second-pointer lifetimes still differ. */
 #include "common.h"
+
+struct ItemSlot;
 
 extern "C" {
 
-extern s32 FUN_00230e04(u32 id);
-extern s32 FUN_00230f44(u32 id);
+extern u32 FUN_00230e04(ItemSlot *slot);
+extern u16 FUN_00230f44(const u16 *id);
 
-static __inline s32 compareByPrimary(u32 a, u32 b)
+static __inline s32 compareByPrimary(const void *a, const void *b)
 {
-    return FUN_00230e04(a) - FUN_00230e04(b);
+    return FUN_00230e04((ItemSlot *)a) - FUN_00230e04((ItemSlot *)b);
 }
 
-static __inline s32 compareBySecondary(u32 a, u32 b)
+static __inline s32 compareBySecondary(const void *a, const void *b)
 {
-    return FUN_00230f44(a) - FUN_00230f44(b);
+    return FUN_00230f44((const u16 *)a) - FUN_00230f44((const u16 *)b);
 }
 
-/* qsort comparison of two ids: by FUN_00230e04, then by FUN_00230f44. */
-s32 FUN_003a0674(u32 a, u32 b)
+/* qsort comparison of item slots: by price, then by the record's order key. */
+s32 FUN_003a0674(const void *a, const void *b)
 {
     s32 diff = compareByPrimary(a, b);
 

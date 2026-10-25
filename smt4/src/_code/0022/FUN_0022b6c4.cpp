@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail puts index+1 and index+2 in r1/r2, built in r0/r1 */
 /* Resets the per-turn state of the context and arms the notification flag for its current entry. */
 #include "common.h"
 
@@ -34,7 +33,7 @@ typedef struct Context {
 
 extern void FUN_00233240(void *obj, s32 arg);
 extern s32 flaggedValueHolderGetTotal(Context *ctx);
-extern void asdTMTexTableLoadEntryAsync(s32 id);
+extern void asdTMTexTableLoadEntryAsync(s32 table, u32 entry);
 extern void uiSpriteSetImageKeyframe(Slot *slot, s32 a, s32 b);
 
 void FUN_0022b6c4(Context *ctx)
@@ -58,7 +57,7 @@ void FUN_0022b6c4(Context *ctx)
     ctx->unkC64 = next;
     ctx->unkC60 = index + 2;
     if (ctx->flags[next] == 0) {
-        asdTMTexTableLoadEntryAsync(0x2a);
+        asdTMTexTableLoadEntryAsync(0x2a, next);
         ctx->flags[next] = 1;
     }
 }

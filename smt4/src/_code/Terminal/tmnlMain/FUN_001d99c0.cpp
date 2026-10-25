@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d99c0` (_code @ 0x1d99c0, 0x16f0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
 
@@ -17,7 +18,7 @@ int gfxObjectDestroy(...);
 int FUN_002636b0(void);
 int FUN_002636d0(...);
 int mapDepartSetTarget(...);
-int mdlPartsRelease(void);
+void mdlPartsRelease(void *model);
 int touchMenuClose(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
@@ -42,7 +43,6 @@ int useCounterSelectMode2(void);
 int scrRunOpcodesStub(...);
 int FUN_001d04a4(...);
 int FUN_0020ffe8(...);
-int placeWinStartText(...);
 int FUN_0027f94c(...);
 int FUN_00282bfc(...);
 int FUN_00287030(...);
@@ -137,7 +137,6 @@ extern int FUN_0025a030(unsigned int);
 /* Supplied declaration required: FUN_002636d0. */
 extern int effectAreAllCompletionChecksReady(unsigned int);
 extern int effTimelineIsDone(unsigned int);
-/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_00263988. */
 extern unsigned int FUN_00263c1c(unsigned char *);
@@ -149,7 +148,6 @@ extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287030. */
 extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: gameDataGetPlayerName. */
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: touchMenuClose. */
@@ -194,7 +192,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: placeWinRelease. */
-extern int FUN_002adee0(unsigned int);
+extern int modelHasLoadedAttachment(unsigned int);
 /* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
 /* Supplied declaration required: FUN_002b827c. */
@@ -489,7 +487,7 @@ unsigned int FUN_001d99c0(void)
             pcVar10 = (char *)gameDataGetPlayerName();
           }
           textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
-          placeWinStartText(temp_v7);
+          placeWinStartText(reinterpret_cast<const u8 *>(temp_v7));
           puVar2[5] = 0;
           scrScriptProcessStartEntry(puVar2[10],
                        *(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24 + 0x432d18));
@@ -738,7 +736,7 @@ LAB_001da638:
                   pcVar10 = (char *)gameDataGetPlayerName();
                 }
                 textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
-                placeWinStartText(temp_v7);
+                placeWinStartText(reinterpret_cast<const u8 *>(temp_v7));
                 scrScriptProcessStartEntry(puVar2[10],0x18);
                 puVar2[4] = 5;
                 buttonHelpSetPreset(0xbd);
@@ -768,7 +766,7 @@ LAB_001da638:
           }
           puVar2[4] = puVar2[4] + 1;
         }
-        temp_v6 = FUN_002adee0(puVar2[puVar2[0x158] + 0xd]);
+        temp_v6 = modelHasLoadedAttachment(puVar2[puVar2[0x158] + 0xd]);
         if (temp_v6 == 0) goto LAB_001dacc8;
         FUN_002a0428(puVar2[puVar2[0x158] + 0xd],1);
         puVar9 = (unsigned int *)puVar2[puVar2[0x158] + 0xd];
@@ -817,7 +815,7 @@ LAB_001da638:
             puVar7 = g_tmnl;
             asdWorkAreaReset();
             if (puVar7[0xc] != 0) {
-              mdlPartsRelease();
+              mdlPartsRelease(reinterpret_cast<void *>(puVar7[0xc]));
               if ((int *)puVar7[0xc] != (int *)0x0) {
                 (**(romwright_code **)(*(int *)puVar7[0xc] + 4))();
               }

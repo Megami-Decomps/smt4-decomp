@@ -16,7 +16,7 @@ int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
 int jobGetScalarValue(void);
@@ -50,7 +50,7 @@ extern unsigned int FUN_00180114(unsigned short);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int FUN_00184ed0(void);
 extern int saveSlotFindById(unsigned int);
@@ -163,7 +163,7 @@ void FUN_00165b08(void)
       textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = FUN_001834a4(0x14,temp_v10 + 0xc49);
       puVar8 = temp_v17;
-      FUN_0018408c(puVar8,2);
+      fontMeasureLineAdvance(puVar8,2);
       temp_v4 = temp_v4 + (int)*(short *)(temp_v3 + 8) +
                       ((int)**(short **)(temp_v3 + 0xc) - (int)puVar8) / 2;
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -225,7 +225,7 @@ LAB_00165eec:
       textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = FUN_001834a4(0x14,temp_v10 + 0xc49);
       puVar8 = temp_v17;
-      FUN_0018408c(puVar8,2);
+      fontMeasureLineAdvance(puVar8,2);
       temp_v4 = temp_v4 + (int)*(short *)(temp_v3 + 8) +
                       ((int)**(short **)(temp_v3 + 0xc) - (int)puVar8) / 2;
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

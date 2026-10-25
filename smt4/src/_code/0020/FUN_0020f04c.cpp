@@ -34,7 +34,7 @@ void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(u32 object);
 void asdMemFreeNonNull(u32 object);
 void asdMemFree(u32 object);
-void mdlPartsRelease(u32 model);
+void mdlPartsRelease(void *model);
 void FUN_00338fb0(BattleMainState* state);
 void FUN_00337a34(BattleMainState* state);
 void scrScriptProcessDestroy(u32 process);
@@ -91,7 +91,7 @@ void FUN_0020f04c(void)
     w[BTL_WORD_RESULT_ID] = 0xffffffff;
 
     if (w[BTL_WORD_PARTS_MODEL] != 0) {
-        mdlPartsRelease(w[BTL_WORD_PARTS_MODEL]);
+        mdlPartsRelease(reinterpret_cast<void *>(w[BTL_WORD_PARTS_MODEL]));
         BattleVirtual* model = reinterpret_cast<BattleVirtual*>(w[BTL_WORD_PARTS_MODEL]);
         if (model != NULL) model->vtable[1](model);
         w[BTL_WORD_PARTS_MODEL] = 0;

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_BattleCamera.h"
 #include "battle/btlMain.h"
+#include "battle/BattleCommandValue.h"
 struct BattleMaskState;
 struct TransitionView;
 
@@ -29,7 +30,6 @@ int btlReflectCreateKind19(...);
 int sysPlaySe(...);
 int scrScriptProcessStartEntry(...);
 int buttonHelpGetValue(...);
-int FUN_003e77cc(...);
 int FUN_003e7ef0(...);
 int FUN_003e7fa4(...);
 int FUN_0040c64c(...);
@@ -42,7 +42,7 @@ int FUN_004c6edc(...);
 int FUN_004c80f0(...);
 int FUN_004c8284(...);
 int FUN_004c9d04(...);
-int FUN_004cae0c(...);
+void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 int FUN_004cb348(...);
 int asdModelActivateOwnedSlots(...);
 int FUN_004f5fb8(...);
@@ -1099,7 +1099,9 @@ LAB_0040f258:
           psVar2[1] = temp_v4;
           break;
         }
-        FUN_004cae0c(*param_1);
+        FUN_004cae0c(reinterpret_cast<void *>(*param_1),
+                     reinterpret_cast<void *>(*(unsigned int *)(psVar2 + 10)),
+                     *(int *)(psVar2 + 0x14), *(unsigned int *)(psVar2 + 0x26));
         psVar2[0x12] = psVar2[0x12] + 1;
         temp_v4 = 1;
         psVar2[1] = temp_v4;
@@ -1184,7 +1186,7 @@ LAB_0040f684:
   case '2':
     temp_v4 = *(short *)(*(int *)(psVar2 + 10) + 0x68);
     temp_v8 = btlGetMainState();
-    FUN_003e77cc(temp_v8,6,(int)temp_v4,0,unaff_r8);
+    FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(temp_v8),6,(int)temp_v4,0,reinterpret_cast<u32>(unaff_r8));
     puVar6 = (unsigned int *)btlGetMainState();
     FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {

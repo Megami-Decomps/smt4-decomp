@@ -1,4 +1,4 @@
-/* NON_MATCHING: needs the rename of _ZN14MatrixSlotListC1EjP9SlotOwnerj to its constructor name (rename_S2.tsv); with it the body differs from retail only in register choice (new capacity in r6/alloc result in r4 instead of r4/r6) and the order of three stores. */
+/* NON_MATCHING: vector reserve capacity/allocation saved registers swap, and the trailing sentinel store moves past pointer initialization. */
 #include "common.h"
 #include <vector>
 #include "stl/MacroMax.h"

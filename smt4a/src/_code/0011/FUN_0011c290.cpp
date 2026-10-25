@@ -22,7 +22,7 @@ int FUN_002f4ecc(unsigned char [4], char [4], unsigned short [2]);
 int FUN_002f4f00(...);
 int FUN_00303cd8(unsigned char [64]);
 int FUN_003112ee(...);
-int FUN_003112f6(int *, unsigned int);
+int onlineStatisticsAccumulateSample(int *, unsigned int);
 int FUN_00311318(int *, int);
 
 typedef int romwright_code(...);
@@ -67,7 +67,7 @@ extern int streamWriterFinish(unsigned char *);
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_00303cd8. */
 /* Supplied declaration required: FUN_003112ee. */
-/* Supplied declaration required: FUN_003112f6. */
+/* Supplied declaration required: onlineStatisticsAccumulateSample. */
 /* Supplied declaration required: FUN_00311318. */
 
 
@@ -107,7 +107,7 @@ void FUN_0011c290(int *param_1,int param_2,int param_3,int param_4)
   temp_v4 = *(unsigned int *)(temp_v17 + 0x10);
   piVar1 = param_1 + 1;
   FUN_00311318(piVar1,temp_v8[0]);
-  FUN_003112f6(piVar1 + 1,temp_v4);
+  onlineStatisticsAccumulateSample(piVar1 + 1,temp_v4);
   if (temp_v13[0] != '\x01') {
     temp_v0 = onlineContextGetInstance();
     _ZN9Obj55b28cC1EPv(&temp_v5,temp_v0 + 0x58);
@@ -134,7 +134,7 @@ void FUN_0011c290(int *param_1,int param_2,int param_3,int param_4)
       temp_v4 = *(unsigned int *)(temp_v0 + 0x10);
       param_1 = param_1 + 1;
       FUN_00311318(param_1,temp_v8[0]);
-      FUN_003112f6(param_1 + 10,temp_v4);
+      onlineStatisticsAccumulateSample(param_1 + 10,temp_v4);
     }
     FUN_002f4f00(temp_v15);
     FUN_0011053e(temp_v12,param_2);

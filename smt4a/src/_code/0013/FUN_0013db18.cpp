@@ -26,15 +26,15 @@ typedef struct RenderWork {
 
 extern u32 g_renderCtx; /* 0x59dbb4 */
 
-extern RenderWork *jobGetWork(void);
+extern RenderWork *jobGetWork(u32 handle);
 extern int surfaceCopy(Surface *dst, Surface *src);
 extern int FUN_00154edc(int arg, Surface *surface);
 extern int FUN_00157558(u32 ctx);
 
 /* Renders the scene into the backdrop surface once, then halves the surface size to mark it copied. */
-u32 FUN_0013db18(void)
+u32 FUN_0013db18(u32 handle)
 {
-    RenderWork *work = jobGetWork();
+    RenderWork *work = jobGetWork(handle);
 
     if (work->backdrop.enabled != 0) {
         if (work->backdrop.copied != 0) {

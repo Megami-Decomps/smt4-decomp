@@ -26,7 +26,7 @@ int linkHolderSetFlag(...);
 int linkHolderClearFlag(...);
 int FUN_0040aa6c(void);
 int flagValueSub(...);
-int FUN_004db07c(...);
+int fusionClassifyRecipeAvailability(...);
 int wordAt1B0Clear(...);
 
 int partyFindSlotById(...);
@@ -93,7 +93,7 @@ int unitRecordBuild(...);
 int statusDisplayBindUnitRecord(...);
 int FUN_003347e8(...);
 int FUN_0034a9c4(...);
-int FUN_00359b6c(...);
+int skillHelpUpdateAttributeAndTarget(...);
 int FUN_0035ad50(...);
 int useCounterRelease(void);
 int panelSetTarget(...);
@@ -335,7 +335,7 @@ extern int uiQuestIsCreated(void);
 /* Supplied declaration required: FUN_0034c340. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_00359a08. */
-/* Supplied declaration required: FUN_00359b6c. */
+/* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
@@ -398,7 +398,7 @@ extern unsigned int FUN_004d0cd4(void);
 /* Supplied declaration required: FUN_004da77c. */
 extern int FUN_004dad8c(int);
 /* Supplied declaration required: entryDefIsAvailable. */
-/* Supplied declaration required: FUN_004db07c. */
+/* Supplied declaration required: fusionClassifyRecipeAvailability. */
 /* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 extern int FUN_004db65c(int, unsigned short, unsigned short, int *);
 /* Supplied declaration required: FUN_004dbdf8. */
@@ -1706,7 +1706,7 @@ LAB_001f732c:
     temp_v5 = FUN_002a4894(piVar3 + 0x158);
     if (temp_v7 == 4) {
       if (temp_v5 + temp_v4 != 0) {
-        FUN_00359b6c(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0xfb6));
+        skillHelpUpdateAttributeAndTarget(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0xfb6));
       }
       else {
         FUN_0019de98(0,0xf4f4f4ff);
@@ -2685,7 +2685,7 @@ LAB_001f8d58:
     }
     temp_v4 = resourceRunOperationIfUnblocked(piVar19);
     temp_v5 = FUN_002a4894(piVar19);
-    FUN_00359b6c(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x8b70));
+    skillHelpUpdateAttributeAndTarget(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0x8b70));
     temp_v15 = 0;
     temp_v4 = 0xf;
     break;
@@ -3303,7 +3303,7 @@ LAB_001f9868:
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < (int)(unsigned int)*(unsigned short *)(piVar3 + 0x23de));
     }
-    FUN_004db07c(*piVar3,temp_v30,&temp_v33);
+    fusionClassifyRecipeAvailability(*piVar3,temp_v30,&temp_v33);
     if (*(char *)(temp_v4 + 0x38) == '\0') {
       FUN_00231574();
     }
@@ -3516,7 +3516,7 @@ LAB_001fac1c:
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < (int)(unsigned int)*(unsigned short *)(piVar3 + 0x23de));
     }
-    temp_v42 = FUN_004db07c(*piVar3,temp_v25,asStack_170);
+    temp_v42 = fusionClassifyRecipeAvailability(*piVar3,temp_v25,asStack_170);
     temp_v7 = 1;
     temp_v4 = 0;
     do {
@@ -4083,7 +4083,7 @@ joined_r0x001fbbe8:
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < (int)(unsigned int)*(unsigned short *)(piVar3 + 0x23de));
         }
-        temp_v5 = FUN_004db07c(*piVar3,temp_v3,&temp_v31);
+        temp_v5 = fusionClassifyRecipeAvailability(*piVar3,temp_v3,&temp_v31);
         piVar19 = piVar3 + 0x1a0c;
         temp_v12 = (char)piVar3[0x1a0c] + (char)temp_v4;
         *(char *)piVar19 = temp_v12;

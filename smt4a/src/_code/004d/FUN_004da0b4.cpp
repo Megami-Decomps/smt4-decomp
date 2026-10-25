@@ -6,7 +6,7 @@ PartySlotA* gameGetOptions(void);
 SupportUnitRecordA* dataTableGetCategoryEntry(s32, u16);
 void affinityResolveUnitSlot(PackedSkillSlot*, PartySlotA*, s32);
 
-u16 FUN_004da0b4(s32 index)
+u32 FUN_004da0b4(u32 index)
 {
     PartySlotA* unit = gameGetOptions();
     PartySlotA* current = gameGetOptions();

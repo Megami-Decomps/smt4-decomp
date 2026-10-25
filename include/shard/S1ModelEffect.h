@@ -3,14 +3,25 @@
 #define SHARD_S1MODELEFFECT_H
 
 #include "common.h"
+#include <stddef.h>
+
+struct EffPartList;
+extern "C" {
+void *FUN_00178b04(u32 bytes, const char *file, u32 line);
+EffPartList *FUN_00291038(EffPartList *source);
+}
 
 /* One effect entry (16 bytes). */
 typedef struct ModelEffectEntry {
     /* 0x00 */ s32 id;
     /* 0x04 */ u32 flags;
     /* 0x08 */ u32 unk08;
-    /* 0x0C */ u32 unk0C;
+    /* 0x0C */ EffPartList *unk0C;
 } ModelEffectEntry;
+typedef char ModelEffectEntryLayoutCheck[
+    sizeof(ModelEffectEntry) == 0x10 && offsetof(ModelEffectEntry, id) == 0 &&
+    offsetof(ModelEffectEntry, flags) == 4 && offsetof(ModelEffectEntry, unk08) == 8 &&
+    offsetof(ModelEffectEntry, unk0C) == 0xC ? 1 : -1];
 
 /* An effect table: an array of pointers to entries. */
 typedef struct ModelEffectTable {

@@ -13,7 +13,7 @@ typedef struct GameSavedPairA {
 
 typedef struct GameSavedItemA {
     /* 0x00000 */ u8 unk00000[0x16];
-    /* 0x00016 */ u8 flags;
+    /* 0x00016 */ s8 flags;
     /* 0x00017 */ u8 unk00017[0x1F];
     /* 0x00036 */ u16 bits;
     /* 0x00038 */ u8 unk00038[0x16];
@@ -24,6 +24,10 @@ typedef struct GameSavedItemTableA {
     /* 0x00000 */ u8 unk00000[0x5F0C];
     /* 0x05F0C */ GameSavedItemA items[0x501];
 } GameSavedItemTableA;
+typedef char GameSavedItemAOffsetsCheck[
+    sizeof(GameSavedItemA) == 0x50 && offsetof(GameSavedItemA, flags) == 0x16 &&
+    offsetof(GameSavedItemA, counter) == 0x4E &&
+    offsetof(GameSavedItemTableA, items) == 0x5F0C ? 1 : -1];
 
 typedef struct GameSavedRecordA {
     /* 0x00000 */ u8 unk00000[0xC];

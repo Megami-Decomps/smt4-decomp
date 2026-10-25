@@ -1,6 +1,7 @@
-/* NON_MATCHING: register allocation only: retail passes navi in r4 to NaviMain_InitInstance (armcc uses r0), puts sp+4 in r8 instead of r5, and splits the zero arguments of the final requestBeginProcessing tail call between r6 and #0. */
+/* NON_MATCHING: canonical task contracts and the display-state initializer reproduce retail's bases/pool; argument-stack pointer register and final zero-argument scheduling still differ. */
 #include "shard/NaviMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern NaviMain *g_naviMain;
@@ -15,24 +16,21 @@ void FUN_002898e4(void);
 s32 gameFlagIsSet(u32 flag);
 void FUN_00289880(void);
 void buttonHelpCreate(void);
-void FUN_00240cec(u32 mode);
-void naviRequestClose(void *job);
-u32 NAVI_PROC(void);
-u32 NAVI_DOWN(void);
-u32 FUN_001fc4f8(void);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
-    u32 (*step)(void), void (*destroy)(void *), void *work);
-u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
-    u32 (*draw)(void), void (*destroy)(void *), void *work, u32 process);
-void NaviMain_ResetFlags(void *settings, s32 value);
-void requestBeginProcessing(void *request, s32 value, s32 type);
+void FUN_00240cec(s32 requestId);
+void naviRequestClose(u32 handle);
+s32 NAVI_PROC(u32 handle);
+s32 NAVI_DOWN(u32 handle);
+s32 naviMainDrawFade(u32 handle);
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
+void NaviMain_ResetFlags(void *settings, u8 value);
+void requestBeginProcessing(void *request, s8 mode, u32 value);
 
-/* Creates the navi screen: the state block, its process and its two draw tasks, then starts the first request. */
-void NaviMain_Start(s32 unused, u32 mode)
+/* Initialize display/navigation state; the creator owns the task and close-request prefix. */
+static __inline NaviMain *naviMainInitializeState(NaviMain *navi)
 {
-    asdDebugTrace(DAT_00404c78, 213);
-    NaviMain *navi = (NaviMain *)asdMemAlloc(0x100, 0x100, 0, 0x12344, 1);
-    g_naviMain = navi;
     navi->active = 0;
     navi->unk0009[0] = 0;
     navi->posX = 0;
@@ -44,6 +42,16 @@ void NaviMain_Start(s32 unused, u32 mode)
     navi->value = 1.0f;
     navi->unk38f = 0.0f;
     navi->unk3Cf = 0.0f;
+    return navi;
+}
+
+/* Creates the navi screen: the state block, its process and its two draw tasks, then starts the first request. */
+void NaviMain_Start(s32 unused, s32 requestId)
+{
+    asdDebugTrace(DAT_00404c78, 213);
+    NaviMain *navi = (NaviMain *)asdMemAlloc(0x100, 0x100, 0, 0x12344, 1);
+    g_naviMain = navi;
+    naviMainInitializeState(navi);
     navi->closeRequested = 0;
     NaviMain_InitInstance(navi->state);
     FUN_002898e4();
@@ -51,10 +59,10 @@ void NaviMain_Start(s32 unused, u32 mode)
         FUN_00289880();
     }
     buttonHelpCreate();
-    FUN_00240cec(mode);
-    navi->job = asdProcessCreateSimple(DAT_00404cc4, 2, 0, 0, NAVI_PROC, naviRequestClose, navi);
-    navi->drawTask = taskCreateDraw(DAT_00404cb8, 0xe5, 1, 0, NAVI_DOWN, NULL, navi, navi->job);
-    navi->tasks.fadeTask = taskCreateDraw(DAT_00404ca8, 0xe6, 0, 0, FUN_001fc4f8, NULL, NULL, navi->job);
+    FUN_00240cec(requestId);
+    navi->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00404cc4), 2, 0, 0, NAVI_PROC, naviRequestClose, reinterpret_cast<u32>(navi));
+    navi->drawTask = taskCreateDraw(reinterpret_cast<const s8 *>(DAT_00404cb8), 0xe5, 1, 0, NAVI_DOWN, NULL, reinterpret_cast<u32>(navi), reinterpret_cast<void *>(navi->job));
+    navi->tasks.fadeTask = taskCreateDraw(reinterpret_cast<const s8 *>(DAT_00404ca8), 0xe6, 0, 0, naviMainDrawFade, NULL, 0, reinterpret_cast<void *>(navi->job));
     NaviMain_ResetFlags(navi->settings, 1);
     if (g_naviMain != NULL) {
         requestBeginProcessing(g_naviMain->settings, 0, 0);

@@ -36,7 +36,7 @@ void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 
 void efctSetSpeed(f32 speed);
 void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void textFormatBuffer(void *buffer, const char *format);
-s32 FUN_0018408c(void *text, u32 kind);
+s32 fontMeasureLineAdvance(void *text, u32 kind);
 void FUN_00162790(u32 first, u32 second, const u16 *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 void skinObjectUpdateMatrices(u8 *context);
 void renderCtxResetColorScale(u8 *context);
@@ -73,7 +73,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
                          "\202\170\202\217\202\225\201\100\202\204\202\217\201\100\202\216\202\217\202\224\201\100\202\210"
                          "\202\201\202\226\202\205\201\100\202\201\202\216\202\231\201\100\202\220\202\201\202\222\202\224"
                          "\202\216\202\205\202\222\202\223\201\104");
-        s32 width = FUN_0018408c(text, 3);
+        s32 width = fontMeasureLineAdvance(text, 3);
 
         FUN_00162790(3, -1, (const u16 *)text, (f32)(x + notice->x + (notice->size[0] - width) / 2),
                      (f32)(notice->y + y), 0.0f, 0.0f, scale);

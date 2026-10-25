@@ -1,5 +1,6 @@
 #include "battle/btlUI.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct BattleUiTaskOwner {
     u32 process;
@@ -9,13 +10,13 @@ struct BattleUiTaskOwner {
 extern "C" {
 void FUN_002898e4(void);
 void *asdMemAlloc(u32, u32, u32, u32, u32);
-u32 taskCreateDraw(const char *, u32, u32, u32, void (*)(), void (*)(), void *, u32);
+u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, void *, u32);
 void FUN_003ad76c(BtlUi *, BattleUiTaskOwner *);
-void FUN_0019e138(void);
-void btlEditorNotifyNoop(void);
-void FUN_001b72e0(void);
-void FUN_001e4bf0(void);
-void btlUiDrawFloatingNumbersWhenLoaded(void);
+s32 FUN_0019e138(u32 job);
+void btlEditorNotifyNoop(u32 job);
+s32 FUN_001b72e0(u32 job);
+s32 FUN_001e4bf0(u32 job);
+s32 btlUiDrawFloatingNumbersWhenLoaded(u32 job);
 extern BtlUiGlobals g_btlUi;
 
 // Allocate battle UI storage and register its calculation and screen draw passes.

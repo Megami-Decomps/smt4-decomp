@@ -1,5 +1,5 @@
 /* Picks the next state: mode 13 when both checks pass (after buttonHelpSetPreset(0x3c)), otherwise mode 6 after rebuilding the display. */
-#include "common.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
 
@@ -19,9 +19,8 @@ extern s32 gameFlagIsSet(u32 id);
 extern void scrScriptProcessStartMappedEntry(StateObject *obj, const char *name);
 extern void FUN_002355ac(s32 arg);
 extern void messageMainRequestBanner(void);
-extern void placeWinStartText(void);
 extern void buttonHelpSetPreset(s32 arg);
-extern void dataTable28Sub0GetRecord(void *display, s32 slot);
+extern void *dataTable28Sub0GetRecord(void *display, s32 slot);
 
 void FUN_00384800(StateObject *obj)
 {
@@ -37,8 +36,7 @@ void FUN_00384800(StateObject *obj)
     }
     messageMainRequestBanner();
     scrScriptProcessStartMappedEntry(obj, "qc_start");
-    dataTable28Sub0GetRecord(obj->display, obj->slot);
-    placeWinStartText();
+    placeWinStartText(static_cast<const u8 *>(dataTable28Sub0GetRecord(obj->display, obj->slot)));
     obj->state = 6;
     obj->stateStep = 0;
 }

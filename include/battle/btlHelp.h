@@ -5,6 +5,50 @@
 #include "common.h"
 #include <stddef.h>
 
+/* The last request word is either an integer route/index or a floating value. */
+union BtlHelpValue {
+    s32 integer;
+    f32 real;
+
+    BtlHelpValue(s32 value) : integer(value) {}
+};
+
+/* SMT IV's help entry; Apocalypse uses the larger entry below. */
+struct BtlHelpEntryIV {
+    /* 0x000 */ u16 id;
+    /* 0x002 */ u16 unk002;
+    /* 0x004 */ s16 style;
+    /* 0x006 */ u16 flags;
+    /* 0x008 */ u32 argument;
+    /* 0x00C */ u32 resource;
+    /* 0x010 */ u8 body[0x288];
+    /* 0x298 */ u8 option;
+    /* 0x299 */ u8 unk299[3];
+    /* 0x29C */ BtlHelpValue value;
+    /* 0x2A0 */ u16 unk2A0;
+    /* 0x2A2 */ u16 active;
+    /* 0x2A4 */ BtlHelpEntryIV *next;
+    /* 0x2A8 */ BtlHelpEntryIV *previous;
+    /* 0x2AC */ u8 unk2AC[4];
+};
+
+struct BtlHelpListIV {
+    BtlHelpEntryIV *head;
+    BtlHelpEntryIV *tail;
+    s32 count;
+};
+
+typedef char BtlHelpValueSizeCheck[sizeof(BtlHelpValue) == 4 ? 1 : -1];
+typedef char BtlHelpEntryIVLayoutCheck[
+    offsetof(BtlHelpEntryIV, flags) == 6 &&
+    offsetof(BtlHelpEntryIV, body) == 0x10 &&
+    offsetof(BtlHelpEntryIV, value) == 0x29C &&
+    offsetof(BtlHelpEntryIV, next) == 0x2A4 &&
+    sizeof(BtlHelpEntryIV) == 0x2B0 && sizeof(BtlHelpListIV) == 0xC ? 1 : -1];
+
+extern "C" BtlHelpEntryIV *FUN_0022a4ac(u16 id, s16 style, u32 argument, u32 resource,
+    const void *body, u8 option, BtlHelpValue value);
+
 /* The help block, kept by a module global (Apocalypse). */
 typedef struct BtlHelpA {
     /* 0x00 */ u32 unk00;

@@ -1,5 +1,7 @@
-/* NON_MATCHING: Obj422448::buildList matches except four instruction-level choices: retail forms the list address in r0 and moves it to r8 (armcc adds in r8 directly), loads the source id through r1, and updates the panel flags with a pre-incremented halfword pointer (ldrh r1,[r0,#4]!). */
+/* NON_MATCHING: list/self/source pointer allocation and the panel-flag writeback addressing differ; the name ID argument and weak debug hook now match. */
 #include "classes/Obj422448.h"
+#include "AsdSDK/AsdDebugHooks.h"
+#include <stddef.h>
 
 /* One unlocked list entry as the list collects it (0x20 bytes). */
 struct Obj422448Entry {
@@ -18,9 +20,13 @@ struct Obj422448Source {
     /* 0x20 */ u16 id;
     /* 0x22 */ u8 unk22[2];
     /* 0x24 */ u16 unk24;
-    /* 0x26 */ u16 available;
+    /* 0x26 */ u16 nameId;
     /* 0x28 */ u32 unk28;
 };
+typedef char Obj422448SourceLayoutCheck[
+    offsetof(Obj422448Source, nameId) == 0x26 &&
+    offsetof(Obj422448Source, unk28) == 0x28 &&
+    sizeof(Obj422448Source) == 0x2C ? 1 : -1];
 
 /* The view's layout past the shared base, as this state handler sees it (Shin Megami Tensei IV). */
 struct Obj422448Layout {
@@ -54,14 +60,13 @@ struct Obj422448Mode {
 
 extern "C" {
 void FUN_0022e2fc(void *list);
-s32 unlockFlagTest(u32 id);
+u32 unlockFlagTest(u32 id);
 Obj422448Source *FUN_002498ec(u32 id);
-u32 aocIndexValueOrDefault(void);
+u32 aocIndexValueOrDefault(u32 index);
 void recordAppendFloatEntry(void *list, Obj422448Entry *entry);
 Obj422448Mode *FUN_002a0d0c(void);
 void FUN_0022e0fc(void *list, s32 line);
 void FUN_00233730(void *holder, s32 a, s32 count, s32 b, s32 c, s32 d);
-void FUN_0023a1b8(void *holder, s32 arg);
 u8 gaugePercent(void *list);
 u32 jyoucyuGetTableEntry(s32 index);
 }
@@ -72,7 +77,7 @@ void Obj422448::buildList()
 {
     Obj422448Layout *self = reinterpret_cast<Obj422448Layout *>(this);
 
-    void *list = (u8 *)this + 0x5A8;
+    void *list = &self->listCount;
 
     FUN_0022e2fc(list);
     u16 id = 0x79F;
@@ -81,10 +86,10 @@ void Obj422448::buildList()
         scanned++;
         if (unlockFlagTest(id) != 0) {
             Obj422448Source *source = FUN_002498ec(id);
-            if (source->available != 0) {
+            if (source->nameId != 0) {
                 Obj422448Entry entry;
                 entry.id = source->id;
-                entry.unk1C = aocIndexValueOrDefault();
+                entry.unk1C = aocIndexValueOrDefault(source->nameId);
                 entry.unk08 = source->unk28;
                 entry.unk0E = source->unk24;
                 recordAppendFloatEntry(list, &entry);
@@ -123,7 +128,7 @@ void Obj422448::buildList()
         FUN_0022e0fc(list, line);
     }
     FUN_00233730(self->holder, 10, (s16)self->listCount, 0, 1, 1);
-    FUN_0023a1b8(self->holder, 1);
+    asdDebugHookPtrInt(self->holder, 1);
     self->unk02D = 1;
     BibleListPanel *&panel = self->panel;
     panel->rebind(self->holder);

@@ -24,7 +24,7 @@ typedef struct EquipRecord {
 u32 aocEntryGetKind(u32 id);
 ItemRecord *dataTable08Sub1GetRecord(u32 id);
 EquipRecord *dataTable08Sub2GetRecord(u32 id);
-s32 FUN_002973ec(void);
+u8 FUN_002973ec(void);
 
 static s32 itemGetPrice(u32 id)
 {

@@ -1,5 +1,5 @@
 /* NON_MATCHING: register choice only: retail keeps the cleared value in r1 (built uses r0) */
-/* Releases the object's file handle (tag bit 0 marks a shared handle that needs a flush first) and clears it; returns the object. */
+/* Releases the file handle, rejecting its low ownership tag before closing and clearing it; returns the enclosing object. */
 #include "common.h"
 
 extern "C" {
@@ -10,9 +10,10 @@ typedef struct FileObject {
 } FileObject;
 
 extern void sysFatalBreak(void);
-extern void vcallSlot12IfValid(u32 handle);
+struct Object;
+extern void vcallSlot12IfValid(Object *handle);
 
-FileObject *FUN_001585ec(FileObject *obj)
+FileObject *FUN_001585ec(FileObject *obj, u32 mode)
 {
     u32 *slot = &obj->handle;
 
@@ -20,7 +21,7 @@ FileObject *FUN_001585ec(FileObject *obj)
         if ((*slot & 1) != 0) {
             sysFatalBreak();
         }
-        vcallSlot12IfValid(*slot & ~1);
+        vcallSlot12IfValid(reinterpret_cast<Object *>(*slot & ~1u));
         *slot = 0;
     }
     return (FileObject *)((u8 *)slot - 4);

@@ -12,11 +12,11 @@ struct RequestState {
 };
 
 /* Starts a new request if the state machine is not already processing one. */
-extern "C" void requestBeginProcessing(RequestState *request, s32 value, s32 type)
+extern "C" void requestBeginProcessing(RequestState *request, s8 mode, u32 value)
 {
     if (request->state != 2) {
-        request->type = type;
-        request->value = value;
+        request->type = value;
+        request->value = mode;
         request->complete = 0;
         request->state = 2;
         request->progress = 0;

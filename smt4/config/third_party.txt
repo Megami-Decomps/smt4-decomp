@@ -1,5 +1,5 @@
 # Third-party functions, not counted in progress: written by tools/scope.py.
-# <address> <name at the time> <evidence: name | linker | callers | between>
+# <address> <name at the time> <evidence: name | library | linker | callers | between>
 0x00100330 FUN_00100330 linker
 0x00100338 libc_printfStrDispatch name
 0x0010034e FUN_0010034e between
@@ -61,6 +61,9 @@
 0x001011c6 FUN_001011c6 callers
 0x001011e8 FUN_001011e8 callers
 0x00101208 FUN_00101208 callers
+0x00101232 FUN_00101232 between
+0x0010123c libc_printfFormatDispatch name
+0x001012fc svcExitProcess name
 0x00106de4 nn_pl_CTR_InitializeGameCoin name
 0x00106e10 FUN_00106e10 between
 0x00106e60 FUN_00106e60 between
@@ -241,7 +244,7 @@
 0x001270a8 FUN_001270a8 between
 0x001270f8 FUN_001270f8 between
 0x00127138 FUN_00127138 between
-0x00127188 FUN_00127188 between
+0x00127188 fsArchiveGetWorkspaceSize between
 0x001271a0 FUN_001271a0 between
 0x001272fc FUN_001272fc callers
 0x001273b0 nn_fs_ipc_FileSystem_InitializeWithSdkVersion name
@@ -795,7 +798,7 @@
 0x0014dcd8 FUN_0014dcd8 between
 0x0014de50 FUN_0014de50 between
 0x0014e648 FUN_0014e648 between
-0x0014e668 FUN_0014e668 between
+0x0014e668 FUN_0014e668 callers
 0x0014e66c FUN_0014e66c between
 0x0014e674 rt_memmove_w name
 0x0014e6f4 FUN_0014e6f4 callers
@@ -925,6 +928,9 @@
 0x001558fc nw_snd_internal_SoundArchiveFile_FileInfo_GetFileLocationType name
 0x00155920 nw_snd_internal_SoundArchiveFile_FileInfo_GetInternalFileInfo name
 0x00155948 nw_anim_res_ResAnim_IsFullBakedAnim name
+0x0015599c FUN_0015599c between
+0x001559dc runtimeCopyOptionalWord between
+0x001559ec rt_fpResultDispatch name
 0x00155ccc nn_os_AddressSpaceManager_Free name
 0x00155d3c FUN_00155d3c between
 0x00155dd8 nn_dsp_CTR_DSP_FlushDataCache name
@@ -1011,9 +1017,9 @@
 0x00158f24 nw_snd_internal_BankFile_FileHeader_GetInfoBlock name
 0x00158f90 FUN_00158f90 callers
 0x0015903c FUN_0015903c between
-0x001590a8 FUN_001590a8 between
-0x001590b8 FUN_001590b8 between
-0x001590c4 FUN_001590c4 between
+0x001590a8 fileWorkerCopyArgument between
+0x001590b8 fileWorkerInvokeEntry between
+0x001590c4 fileWorkerDestroyArgument between
 0x001590c8 FUN_001590c8 between
 0x0015911c FUN_0015911c between
 0x00159464 FUN_00159464 between
@@ -1351,6 +1357,7 @@
 0x00254384 nn_fnd_DateTime_GetMonth name
 0x002543dc nn_fnd_DateTime_GetDay name
 0x002580c4 mobiclipAllocatorFree name
+0x00262934 strncpy name
 0x0027f3dc FUN_0027f3dc linker
 0x0027f3e4 FUN_0027f3e4 linker
 0x0027f3ec FUN_0027f3ec linker
@@ -1358,6 +1365,7 @@
 0x0027f3fc FUN_0027f3fc linker
 0x0027f404 FUN_0027f404 linker
 0x0027f40c FUN_0027f40c linker
+0x00282c38 __aeabi_l2f name
 0x00286180 nn_math_ARMv6_MTX33CopyAsm name
 0x00286198 FUN_00286198 between
 0x00286390 nn_math_ARMv6_MTX34InvTransposeAsm name
@@ -1397,6 +1405,9 @@
 0x002a2ab0 FUN_002a2ab0 between
 0x002a2b14 nw_gfx_res_ResTextureSampler_GetOwnerCommand name
 0x002a2b3c nw_gfx_res_ResTextureMapper_SetTexture name
+0x002a30dc __hardfp_floorf name
+0x002a3178 FUN_002a3178 between
+0x002a3188 slistPushFront between
 0x002a3198 nn_os_TransferMemoryBlock_Finalize name
 0x002a3dfc nw_gfx_res_ResGraphicsFile_Cleanup name
 0x002a42e8 FUN_002a42e8 callers

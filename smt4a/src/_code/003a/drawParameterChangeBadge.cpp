@@ -1,4 +1,4 @@
-/* NON_MATCHING: amount/x occupy R6/R7 rather than retail R7/R6, with one icon-call argument move scheduled differently; candidate -O2. */
+/* NON_MATCHING: amount and X saved registers are exchanged, and one icon-call argument move is scheduled differently. */
 #include "shard/S1ListPanel.h"
 
 extern "C" {

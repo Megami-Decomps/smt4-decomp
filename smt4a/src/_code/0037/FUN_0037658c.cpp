@@ -1,66 +1,39 @@
 /* NON_MATCHING: Retail mov r5, r0 differs from recovered mov r5, r1. */
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effParts.h"
+#include "shard/W5_W5Match2_LinkedItems.h"
 
-// Private views of the pool owner and its 0xc0-byte records.
-namespace {
-
-struct RecordView;
-
-struct RecordOwnerView {
-    u8 unk00[0x80];       // +0x00
-    u32 unk80;           // +0x80
-    u8 unk84[4];         // +0x84
-    RecordView* unk88;   // +0x88
-};
-
-struct RecordView {
-    u8 unk00[0x84];      // +0x00
-    u32 unk84;           // +0x84
-    u8 unk88;            // +0x88
-    u8 unk89;            // +0x89
-    u8 unk8A;            // +0x8a
-    u8 unk8B[5];         // +0x8b
-    u32 unk90;           // +0x90
-    u8 unk94[4];         // +0x94
-    u32 unk98;           // +0x98
-    u8 unk9C[0x10];      // +0x9c
-    RecordView* unkAC;   // +0xac
-    RecordView* unkB0;   // +0xb0
-    u8 unkB4[0x0c];      // +0xb4
-};
-
-}
 
 extern "C" {
-RecordView* FUN_003007a0(RecordOwnerView* owner);
+EffPart *FUN_003007a0(void);
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void sysMemClear(void* destination, u32 size);
-void FUN_001b4ddc(RecordView* record);
+void FUN_001b4ddc(EffPart *record);
 
 // Allocate and initialize a copy, insert it before the source, and update the owner's count.
-RecordView* FUN_0037658c(RecordOwnerView* owner, RecordView* source)
+LinkedItem *FUN_0037658c(LinkedItems *owner, LinkedItem *source)
 {
-    RecordView* record = FUN_003007a0(owner);
-    __aeabi_memcpy4(record, source, 0xc0);
-    sysMemClear(record, 0x90);
-    record->unk84 = 1;
-    record->unk88 = 8;
-    record->unk89 = 0;
-    record->unk8A = 0;
-    FUN_001b4ddc(record);
-    record->unk98 |= 1;
-    record->unk90 = source->unk90;
+    EffPart *part = FUN_003007a0();
+    LinkedItem *record = reinterpret_cast<LinkedItem *>(part);
+    __aeabi_memcpy4(part, source, sizeof(EffPart));
+    sysMemClear(part, sizeof(record->data));
+    part->unk84 = 1;
+    part->unk88 = 8;
+    part->unk89 = 0;
+    part->unk8a = 0;
+    FUN_001b4ddc(part);
+    record->reference.flags |= 1;
+    record->value = source->value;
 
-    if (source->unkAC != 0) {
-        source->unkAC->unkB0 = record;
-        record->unkAC = source->unkAC;
+    if (source->next != NULL) {
+        source->next->previous = record;
+        record->next = source->next;
     } else {
-        record->unkAC = 0;
-        owner->unk88 = record;
+        record->next = NULL;
+        owner->tail = record;
     }
-    source->unkAC = record;
-    record->unkB0 = source;
-    owner->unk80 += 1;
+    source->next = record;
+    record->previous = source;
+    ++owner->count;
     return record;
 }
 }

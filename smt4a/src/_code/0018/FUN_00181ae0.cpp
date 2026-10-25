@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00181ae0` (_code @ 0x181ae0, 0x570 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "font/FontStringReader.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_0019af70(...);
 int FUN_0019f764(unsigned int, unsigned int, int);
 int FUN_0019f7dc(...);
 int FUN_001a64f4(unsigned char [4]);
-int callbackBindingInitFromKind(int *, int *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -119,7 +119,7 @@ void FUN_00181ae0(unsigned int param_1,unsigned int *param_2,int param_3,int par
   temp_v7 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;
-  callbackBindingInitFromKind(&temp_v20,piVar13,0x30);
+  callbackBindingInitFromKind(reinterpret_cast<FontStringReader *>(&temp_v20), reinterpret_cast<FontEncodingSource *>(piVar13), 0x30);
   FUN_0019f7dc(g_renderCtx);
   temp_v20 = param_3;
   temp_v14 = (unsigned long long)temp_v7 << 0x20;

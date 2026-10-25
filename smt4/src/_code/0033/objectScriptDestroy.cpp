@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int mdlPartsRelease(void);
+void mdlPartsRelease(void *model);
 
 struct Script;
 typedef struct ScriptVtbl {
@@ -22,7 +22,7 @@ typedef struct Obj {
 void objectScriptDestroy(Obj *obj)
 {
     if (obj->script != NULL) {
-        mdlPartsRelease();
+        mdlPartsRelease(obj->script);
         if (obj->script != NULL) {
             obj->script->vtbl->destroy(obj->script);
         }

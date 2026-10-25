@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail builds 0x817 as 23 + 0x800 (mov/add) where this loads a literal; state 6 is hoisted into r6 and the outer guard returns through its own pop */
 #include "battle/btlMain.h"
+struct BattleActionHistoryState;
 
 extern "C" {
 
@@ -17,7 +18,7 @@ extern BtlMain *g_btlMain;
 
 s32 FUN_002c2a04(s32 index);
 BtlMainState *btlGetMainState(void);
-void FUN_0033a780(void);
+void FUN_0033a780(BattleActionHistoryState *state);
 void btlTalkBustUpDestroy(void);
 void jobStopIfValidB(BtlMainState *state);
 void jobStopIfValidA(BtlMainState *state);
@@ -36,7 +37,7 @@ s32 FUN_0023f194(BtlEndTask *task)
         if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
             BtlMainState *state = btlGetMainState();
 
-            FUN_0033a780();
+            FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(state));
             btlTalkBustUpDestroy();
             jobStopIfValidB(state);
             jobStopIfValidA(state);

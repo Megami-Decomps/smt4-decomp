@@ -23,9 +23,7 @@ void FUN_002371b0(void);
 u32 FUN_00298544(void)
 {
     u32 color = g_btlMain->overlayColor;
-    RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(5, 1);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(g_renderCtx, FUN_001692ac(5, 1));
     FUN_00157558(g_renderCtx);
     FUN_0016c4b8(g_renderCtx, 0);
     FUN_0014e314(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);

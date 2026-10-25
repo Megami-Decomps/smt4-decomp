@@ -22,9 +22,8 @@ void FUN_00156ea8(ModelShadowMap *shadow)
         "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelShadowMap.cpp", 62);
     if (work != NULL) {
         work = FUN_0016d17c(work);
-        for (s32 index = 0; index < 6; ++index) {
+        for (s32 index = 0; index < 6; ++index)
             work->handles[index] = 0;
-        }
     }
     shadow->work = work;
 }

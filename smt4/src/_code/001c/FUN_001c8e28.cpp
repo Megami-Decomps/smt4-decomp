@@ -84,7 +84,7 @@ unsigned int FUN_001c8e28(void)
       if ((bVar13 || bVar12) || iVar8 == 0) {
         return 0;
       }
-      iVar8 = FUN_002adee0(puVar2[0xd8]);
+      iVar8 = modelHasLoadedAttachment(puVar2[0xd8]);
       if (iVar8 == 0) {
         return 0;
       }
@@ -659,7 +659,7 @@ code_r0x001c9900:
           iVar8 = FUN_002c09bc();
           *(unsigned char *)(iVar8 + 2) = *(unsigned char *)((int)puVar4 + 0x379);
           FUN_002c09bc();
-          FUN_001a1a64();
+          saveBuildSlotSummary();
           FUN_0026b4cc();
           gameCounterAddSaturating(0x20,1);
           iVar8 = FUN_002c09bc();

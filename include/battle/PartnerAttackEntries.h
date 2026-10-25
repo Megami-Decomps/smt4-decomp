@@ -6,6 +6,8 @@
 #include <stddef.h>
 #include "shard/W6_W6Match7_DrawParameters.h"
 
+extern "C" void *asdOperatorNew(u32 bytes, void *owner);
+
 #define PARTNER_ATTACK_ENTRY_COUNT 12
 
 /* One entry (0xb0 bytes). Its constructor does nothing; the table clears the fields. */
@@ -29,6 +31,7 @@ public:
 class PartnerAttackEntries {
 public:
     PartnerAttackEntries();
+    static void *operator new(u32 bytes, void *owner) throw() { return asdOperatorNew(bytes, owner); }
 
     /* 0x000 */ PartnerAttackEntry entries[PARTNER_ATTACK_ENTRY_COUNT];
     /* 0x840 */ Params002c312c parameters;

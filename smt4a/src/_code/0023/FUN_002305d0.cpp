@@ -1,5 +1,6 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 216 rows); callee-saved register numbering and scheduling of the field copies differ */
+/* NON_MATCHING: corrected master growth offset0xA0, preserved unboosted HP, widened IDs and restored switch; affinity array base/zero register lifetime still differ. */
 #include "common.h"
+#include "gamedata/DevilRecordA.h"
 
 // Demon record in the party/compendium format (0x12c bytes).
 struct DemonRecord {
@@ -26,7 +27,7 @@ struct DemonRecord {
     /* 0x30 */ u32 extra;
     /* 0x34 */ u16 skills[8];
     /* 0x44 */ s8 affinityBonus[8];
-    /* 0x4c */ u8 growth[18];
+    /* 0x4c */ s8 growth[18];
     /* 0x5e */ u8 unk5e[4];
     /* 0x62 */ u16 id;
     /* 0x64 */ u16 levelBase;
@@ -34,17 +35,6 @@ struct DemonRecord {
     /* 0x67 */ u8 unk67[0x12c - 0x67];
 };
 
-// Demon info record: only the fields copied into the record.
-struct DevilInfo {
-    u8 unk00[6];
-    u16 level;              // 0x06
-    u8 unk08[0x10];
-    u16 stat[8];            // 0x18..0x26 (0x18,0x1a,0x1c,0x1e,0x20,0x22,0x24,0x26)
-    u8 unk28[0x18];
-    u16 skills[8];          // 0x40
-    u8 unk50[0x10];
-    u8 growth[18];          // 0xa0
-};
 
 // Saved demon entry (0x80 bytes): same fields in save order.
 struct SaveEntry {
@@ -67,7 +57,7 @@ struct SaveEntry {
     u8 affinityBonus[8];    // 0x2c
     u8 unk34[4];
     u32 extra;              // 0x38
-    u8 growth[18];          // 0x3c
+    s8 growth[18];          // 0x3c
 };
 
 extern "C" {
@@ -76,7 +66,6 @@ void sysMemClear(void* data, u32 size);
 s8* gameGetSlotTable(void);
 void gameItemSetFlag(u32 id, s32 value);
 void FUN_002854d8(u32 id, s32 value);
-DevilInfo* FUN_00184310(u32 id);
 void gameDataCopySaveEntry(u32 id, SaveEntry* out);
 void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
@@ -88,7 +77,7 @@ void FUN_002a6894(DemonRecord* record);
 
 // Builds a demon record for `id` in slot `slot`: kind 0/3 copies the master data, kind 1 the
 // saved entry; kinds other than 3 also claim a free party slot and flag the demon as owned.
-void FUN_002305d0(DemonRecord* record, u8 slot, u16 id, s32 kind)
+void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
 {
     sysMemClear(record, 300);
     record->id = id;
@@ -101,29 +90,31 @@ void FUN_002305d0(DemonRecord* record, u8 slot, u16 id, s32 kind)
                 break;
             }
         }
-        gameItemSetFlag(id, 1);
-        FUN_002854d8(id, 1);
+        gameItemSetFlag((u16)id, 1);
+        FUN_002854d8((u16)id, 1);
     }
-    DevilInfo* info = FUN_00184310(id);
+    const DevilTableRecordA* info = reinterpret_cast<const DevilTableRecordA *>(FUN_00184310((u16)id));
     s16 hp = 0;
-    if (kind == 0 || kind == 3) {
-        record->levelBase = info->level;
-        record->stat0 = info->stat[0];
-        record->stat1 = info->stat[1];
-        record->stat2 = info->stat[3];
-        record->stat4 = info->stat[5];
-        record->stat5 = info->stat[6];
-        record->stat6 = info->stat[7];
-        record->stat3 = info->stat[4];
+    switch (kind) {
+    case 0:
+    case 3:
+        record->levelBase = info->header.level;
+        record->stat0 = info->header.initialization.stats[0];
+        record->stat1 = info->header.initialization.stats[1];
+        record->stat2 = info->header.initialization.stats[3];
+        record->stat4 = info->header.initialization.stats[5];
+        record->stat5 = info->header.initialization.stats[6];
+        record->stat6 = info->header.initialization.stats[7];
+        record->stat3 = info->header.initialization.stats[4];
         record->unk1c = 0;
         record->unk1e = 0;
-        record->curStat2 = info->stat[3];
-        record->curStat4 = info->stat[5];
-        record->curStat5 = info->stat[6];
-        record->curStat6 = info->stat[7];
-        record->curStat3 = info->stat[4];
-        for (s32 i = 0; i < 8; i++) record->skills[i] = info->skills[i];
-        __aeabi_memcpy4(record->growth, info->growth, 18);
+        record->curStat2 = info->header.initialization.stats[3];
+        record->curStat4 = info->header.initialization.stats[5];
+        record->curStat5 = info->header.initialization.stats[6];
+        record->curStat6 = info->header.initialization.stats[7];
+        record->curStat3 = info->header.initialization.stats[4];
+        for (s32 i = 0; i < 8; i++) record->skills[i] = info->initializationSkills[i];
+        __aeabi_memcpy4(record->growth, info->categoryModifiers.values, 18);
         if (record != NULL && record->id != 0 && FUN_00184310(record->id) != NULL) {
             for (s32 i = 0; i < 8; i++) {
                 if (record->skills[i] == 0) continue;
@@ -135,10 +126,11 @@ void FUN_002305d0(DemonRecord* record, u8 slot, u16 id, s32 kind)
                 else if (sum < -9) record->affinityBonus[i] = -9;
             }
         }
-        FUN_0031f190(id, 0);
-    } else if (kind == 1) {
+        FUN_0031f190((u16)id, 0);
+        break;
+    case 1: {
         SaveEntry save;
-        gameDataCopySaveEntry(id, &save);
+        gameDataCopySaveEntry((u16)id, &save);
         record->levelBase = save.level;
         record->stat0 = save.stat0;
         record->stat1 = save.stat1;
@@ -160,11 +152,12 @@ void FUN_002305d0(DemonRecord* record, u8 slot, u16 id, s32 kind)
         *reinterpret_cast<u64*>(record->affinityBonus) = *reinterpret_cast<u64*>(save.affinityBonus);
         __aeabi_memcpy4(record->growth, save.growth, 18);
     }
+        break;
+    }
     FUN_004bcd90(record);
     if (record != NULL) {
         hp = record->hpBase;
         if (FUN_0018416c(record->id) != 0) hp = (s16)((f32)hp * 1.25f);
-        else hp = 0;
     }
     record->hpMax = hp;
     record->mpMax = record->mpBase;

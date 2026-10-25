@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001493a8` (_code @ 0x1493a8, 0x33c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
 
 extern "C" {
 
 int gfxTextureStorageUnbind(int);
-int gfxTextureStorageRelease(unsigned int, int);
+void gfxTextureStorageRelease(u32, DefaultTextureStorage *);
 int sysMemClear(int, int);
 
 typedef int romwright_code(...);
@@ -55,7 +56,7 @@ void FUN_001493a8(void)
             do {
               temp_v3 = temp_v1 + temp_v0 * 0x44;
               gfxTextureStorageUnbind(temp_v3 + 0x34);
-              gfxTextureStorageRelease(*(unsigned int *)(temp_v1 + 0x2c),temp_v3 + 0x34);
+              gfxTextureStorageRelease(*(unsigned int *)(temp_v1 + 0x2c),reinterpret_cast<DefaultTextureStorage *>(temp_v3 + 0x34));
               temp_v0 = temp_v0 + 1;
             } while (temp_v0 < 6);
             if (g_gfxReleaseCallback != (romwright_code *)0x0) {
@@ -120,7 +121,7 @@ void FUN_001493a8(void)
         }
         else {
           gfxTextureStorageUnbind(temp_v1 + 0x34);
-          gfxTextureStorageRelease(*(unsigned int *)(temp_v1 + 0x2c),temp_v1 + 0x34);
+          gfxTextureStorageRelease(*(unsigned int *)(temp_v1 + 0x2c),reinterpret_cast<DefaultTextureStorage *>(temp_v1 + 0x34));
           if (g_gfxReleaseCallback != (romwright_code *)0x0) {
             (*g_gfxReleaseCallback)(0x10000,0x100,0,temp_v1);
           }
@@ -144,7 +145,7 @@ void FUN_001493a8(void)
       *(unsigned int *)(temp_v2 + 0xf4) = 0;
       temp_v2 = *g_textureBindingCache;
       gfxTextureStorageUnbind(temp_v2 + 0x34);
-      gfxTextureStorageRelease(*(unsigned int *)(temp_v2 + 0x2c),temp_v2 + 0x34);
+      gfxTextureStorageRelease(*(unsigned int *)(temp_v2 + 0x2c),reinterpret_cast<DefaultTextureStorage *>(temp_v2 + 0x34));
       if (g_gfxReleaseCallback != (romwright_code *)0x0) {
         (*g_gfxReleaseCallback)(0x10000,0x100,0,temp_v2);
       }
@@ -153,7 +154,7 @@ void FUN_001493a8(void)
       do {
         temp_v1 = temp_v4 + temp_v2 * 0x44;
         gfxTextureStorageUnbind(temp_v1 + 0x34);
-        gfxTextureStorageRelease(*(unsigned int *)(temp_v4 + 0x2c),temp_v1 + 0x34);
+        gfxTextureStorageRelease(*(unsigned int *)(temp_v4 + 0x2c),reinterpret_cast<DefaultTextureStorage *>(temp_v1 + 0x34));
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       if (g_gfxReleaseCallback != (romwright_code *)0x0) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: caching the label removes retail's repeated address calculation and changes byte-test registers. */
+/* NON_MATCHING: retail tests name bytes through the precomputed name address; this build folds the member offset into the loads. */
 #include "map/DeferredModels.h"
 #include "map/ModelSelectionLabel.h"
 #include "map/mapDepart.h"
@@ -44,9 +44,9 @@ void FUN_001d350c(f32 x, f32 y, f32 z, f32 heading)
         g_deferredMapModels->pending = 1;
         g_deferredMapModels->pendingCount = selected;
         g_deferredMapModels->selection.id = g_deferredMapModels->entries[selected].id;
-        const char *name = FUN_00266f30(g_deferredMapModels->entries[selected].modelId)->name;
-        if (name != NULL && (name[0] != '0' || name[1] != '\0')) {
-            libc_strcpy(g_deferredMapModels->selection.label, name);
+        ModelSelectionLabel *label = FUN_00266f30(g_deferredMapModels->entries[selected].modelId);
+        if (label->name != NULL && (label->name[0] != '0' || label->name[1] != '\0')) {
+            libc_strcpy(g_deferredMapModels->selection.label, label->name);
         } else {
             g_deferredMapModels->selection.label[0] = '\0';
             g_deferredMapModels->selection.label[1] = '\0';

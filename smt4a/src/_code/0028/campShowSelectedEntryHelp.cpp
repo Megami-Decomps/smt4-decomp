@@ -34,7 +34,7 @@ extern CampView *g_camp;
 s32 resourceRunOperationIfUnblocked(CampPage *page);
 s32 FUN_002a4894(CampPage *page);
 void screenShowMessage(s32 id);
-void FUN_00359b6c(s32 id);
+void skillHelpUpdateAttributeAndTarget(s32 id);
 
 /* Shows the help message of the selected entry on the camp menu page `page`. */
 void campShowSelectedEntryHelp(s32 page)
@@ -45,7 +45,7 @@ void campShowSelectedEntryHelp(s32 page)
     case 10:
         break;
     case 9:
-        FUN_00359b6c(camp->summons[resourceRunOperationIfUnblocked(&camp->pages[3]) + FUN_002a4894(&camp->pages[3])].id);
+        skillHelpUpdateAttributeAndTarget(camp->summons[resourceRunOperationIfUnblocked(&camp->pages[3]) + FUN_002a4894(&camp->pages[3])].id);
         break;
     case 0xb:
         screenShowMessage(camp->messages0[resourceRunOperationIfUnblocked(&camp->pages[0]) + FUN_002a4894(&camp->pages[0])]);

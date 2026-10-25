@@ -38,7 +38,7 @@ typedef struct PlacementRecord {
 } PlacementRecord;
 
 PlacementRecord *FUN_001b2ca4(u32 a, s32 kind, u32 key);
-void FUN_0047ca10(u32 handle, u32 target, s32 mode, u32 key, s32 id, s32 x, s32 y, s32 z);
+void spriteDrawFromTextureTable(u32 handle, u32 target, s32 mode, u32 key, s32 id, s32 x, s32 y, s32 z);
 
 /* Returns the list's group with the id, or NULL. */
 static PlacementGroup *placementFindGroup(PlacementList *list, s32 id)
@@ -73,7 +73,7 @@ u32 FUN_00471244(u32 a, u32 unused, u32 target, u32 key, s32 id, s32 x, s32 y, s
     }
     for (i = 0; i < group->count; i++) {
         PlacementEntry *entry = &group->entries[i];
-        FUN_0047ca10(owner->handle, target, 0xf, key, entry->major * 1000 + entry->minor, entry->x + x, entry->y + y,
+        spriteDrawFromTextureTable(owner->handle, target, 0xf, key, entry->major * 1000 + entry->minor, entry->x + x, entry->y + y,
                      entry->z + z);
     }
     return 1;

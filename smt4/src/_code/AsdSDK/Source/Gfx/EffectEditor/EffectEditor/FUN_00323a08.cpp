@@ -36,15 +36,15 @@ typedef struct {
 extern signed char DAT_0044ea89; /* 0x44ea89 */
 extern unsigned char DAT_0044f900; /* 0x44f900 */
 extern unsigned int DAT_0044f910; /* 0x44f910 */
-extern float DAT_004d8c10; /* 0x4d8c10 */
+extern float g_effectEditorInitialVector; /* 0x4d8c10 */
 extern float DAT_004d8c14; /* 0x4d8c14 */
 extern float DAT_004d8c18; /* 0x4d8c18 */
 extern float DAT_004d8c1c; /* 0x4d8c1c */
-extern float DAT_004d8c20; /* 0x4d8c20 */
+extern float g_effectEditorWorkingSnapshot; /* 0x4d8c20 */
 extern float DAT_004d8c24; /* 0x4d8c24 */
 extern float DAT_004d8c28; /* 0x4d8c28 */
 extern float DAT_004d8c2c; /* 0x4d8c2c */
-extern unsigned int DAT_004d9270; /* 0x4d9270 */
+extern unsigned int g_effectEditorVector; /* 0x4d9270 */
 extern unsigned int DAT_004d9274; /* 0x4d9274 */
 extern unsigned int DAT_004d9278; /* 0x4d9278 */
 extern unsigned int DAT_004d927c; /* 0x4d927c */
@@ -127,7 +127,7 @@ unsigned int FUN_00323a08(int param_1,int param_2)
       temp_v6 = 0;
     }
   }
-  DAT_004d9270 = *(unsigned int *)(param_1 + 0x40);
+  g_effectEditorVector = *(unsigned int *)(param_1 + 0x40);
   DAT_004d9274 = *(unsigned int *)(param_1 + 0x44);
   DAT_004d9278 = *(unsigned int *)(param_1 + 0x48);
   DAT_004d927c = *(unsigned int *)(param_1 + 0x4c);
@@ -138,7 +138,7 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   temp_v1 = DAT_004d927c;
   temp_v0 = DAT_004d9278;
   temp_v11 = DAT_004d9274;
-  *(unsigned int *)(param_1 + 0x40) = DAT_004d9270;
+  *(unsigned int *)(param_1 + 0x40) = g_effectEditorVector;
   *(unsigned int *)(param_1 + 0x44) = temp_v11;
   *(unsigned int *)(param_1 + 0x48) = temp_v0;
   *(unsigned int *)(param_1 + 0x4c) = temp_v1;
@@ -146,12 +146,12 @@ unsigned int FUN_00323a08(int param_1,int param_2)
     temp_v6 = temp_v6 | 2;
   }
   if (((temp_v6 & 2) != 0) && ((*(unsigned int *)(param_1 + 0x68) & 0x18) != 0)) {
-    DAT_004ea91c = DAT_004d8c10;
+    DAT_004ea91c = g_effectEditorInitialVector;
     DAT_004ea920 = DAT_004d8c14;
     DAT_004ea924 = DAT_004d8c18;
     DAT_004ea928 = DAT_004d8c1c;
     if (param_2 != 0) {
-      DAT_004ea92c = DAT_004d8c20;
+      DAT_004ea92c = g_effectEditorWorkingSnapshot;
       DAT_004ea930 = DAT_004d8c24;
       DAT_004ea934 = DAT_004d8c28;
       DAT_004ea938 = DAT_004d8c2c;
@@ -164,11 +164,11 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   }
   if (param_2 != 0) {
     FUN_002496cc(param_1);
-    DAT_004ea92c = DAT_004d8c20;
+    DAT_004ea92c = g_effectEditorWorkingSnapshot;
     DAT_004ea930 = DAT_004d8c24;
     DAT_004ea934 = DAT_004d8c28;
     DAT_004ea938 = DAT_004d8c2c;
-    DAT_004ea91c = DAT_004ea91c - DAT_004d8c20;
+    DAT_004ea91c = DAT_004ea91c - g_effectEditorWorkingSnapshot;
     DAT_004ea920 = DAT_004ea920 - DAT_004d8c24;
     DAT_004ea924 = DAT_004ea924 - DAT_004d8c28;
     DAT_004ea928 = DAT_004ea928 - DAT_004d8c2c;
@@ -185,13 +185,13 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   temp_v8 = 0.0f;
   temp_v12 = CONCAT44(DAT_004ea928,DAT_004ea924);
   temp_v7 = DAT_004ea91c * DAT_004ea91c;
-  DAT_004ea91c = DAT_004d8c10;
+  DAT_004ea91c = g_effectEditorInitialVector;
   DAT_004ea920 = DAT_004d8c14;
   DAT_004ea924 = DAT_004d8c18;
   DAT_004ea928 = DAT_004d8c1c;
   temp_v10 = CONCAT44(temp_v2,romwright_sqrt_4(temp_v7 + 0.0f + temp_v3 * temp_v3));
   if (param_2 != 0) {
-    DAT_004ea92c = DAT_004d8c20;
+    DAT_004ea92c = g_effectEditorWorkingSnapshot;
     DAT_004ea930 = DAT_004d8c24;
     DAT_004ea934 = DAT_004d8c28;
     DAT_004ea938 = DAT_004d8c2c;

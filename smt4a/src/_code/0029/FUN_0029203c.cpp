@@ -10,7 +10,7 @@ MapResumeFlagsView *gameFlagsGetBlock(void);
 extern s32 g_gameState;
 void gameFlagSetValue(u32, s32, s32);
 s32 gameFlagIsSet(u32);
-void FUN_0024400c(void);
+void btlViewResetDefaults(void);
 void FUN_002440f4(void);
 
 // Resume map effects after returning from one of the map-related game states.
@@ -26,7 +26,7 @@ void FUN_0029203c(void)
         flags->pending = 0;
     }
     if (gameFlagIsSet(0x4d0)) {
-        FUN_0024400c();
+        btlViewResetDefaults();
         FUN_002440f4();
     }
 }

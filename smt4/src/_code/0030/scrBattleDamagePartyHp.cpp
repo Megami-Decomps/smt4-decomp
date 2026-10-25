@@ -19,12 +19,13 @@ struct DamageBattleState {
     u8 unk1e9c[0x124];
     DamageTarget *targets; // 0x1fc0
 };
+struct SlotManager;
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
 void *btlUnitGet(u32 index);
 DamageBattleState *btlGetMainState();
-void FUN_00250720();
+void FUN_00250720(SlotManager *manager);
 void FUN_002505c0(s32, void *, u32, s32, s32, s32, s32);
 void FUN_002551ac(s32, void *, DamageUnit *, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
@@ -46,8 +47,7 @@ u32 scrBattleDamagePartyHp()
             }
             if (target->hp <= damage)
                 damage = target->hp - 1;
-            btlGetMainState();
-            FUN_00250720();
+            FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainState()));
             DamageUnit *unit = &btlGetMainState()->units[target->unitIndex];
             s32 slotMask = slot << 3;
             FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->hp, target->maxHp,

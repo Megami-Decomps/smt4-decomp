@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 
 int FUN_0028f694(...);
 int FUN_0028f870(...);
@@ -51,7 +51,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6c34. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern int aocIndexValueOrDefault(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -277,7 +277,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     temp_v5 = FUN_002bf4f8(0x1a,0x544);
     textFormatBuffer(temp_v10,&LAB_001af638);
     puVar7 = temp_v10;
-    FUN_002b6dd8(puVar7,2);
+    fontMeasureLineAdvance(puVar7,2);
     VectorSignedToFloat(param_1 + (int)*(short *)(temp_v5 + 8) +
                                   ((int)**(short **)(temp_v5 + 0xc) - (int)puVar7) / 2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

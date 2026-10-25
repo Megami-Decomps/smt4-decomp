@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (206 rows each): in the last help-text case retail tail-calls FUN_0019de98 straight from the add/movls result (ours routes it through r6), and in the demon branch retail keeps the record pointer in r3 (movs) while ours keeps it in r0 and loads the mode into r1. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 #define HELP_TEXT_TABLE 0x39
 #define HELP_TEXT_COLOR 0xF4F4F4FF
@@ -22,9 +23,6 @@ extern "C" {
 
 extern PartyHelpPanel *g_partyPanel;
 
-u32 dataTableGet(u32 table, u32 index);
-u8 *dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 void FUN_0019de98(u8 *text, u32 color);
 s32 FUN_002cad18(void);
 u32 partyPanelGetSelectedDemonId(void);
@@ -37,8 +35,8 @@ void FUN_0032d0c8(s32 a, s32 b, u16 id);
 /* The help-text entry at `offset`, or NULL when the help table has no more than `lastIndex` entries. */
 static __inline u8 *partyHelpTextEntry(u32 lastIndex, u32 offset)
 {
-    u32 table = dataTableGet(HELP_TEXT_TABLE, 0);
-    u8 *entries = dataTableGetEntries();
+    void *table = dataTableGet(HELP_TEXT_TABLE, 0);
+    u8 *entries = static_cast<u8 *>(dataTableGetEntries(table));
 
     if (dataTableGetCount(table) > lastIndex) {
         return entries + offset;

@@ -2,8 +2,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
 extern "C" {
 s32 scrGetArg(s32 index);
-u32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(u32 group, s32 *range, s32 *count);
+s32 btlScriptResolveGroupArg(s32 group);
+void FUN_002499fc(s32 group, u32 *range, u32 *count);
 BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 void scrSetResult(s32 result);
@@ -11,10 +11,10 @@ void scrSetResult(s32 result);
 // Test whether a selected combatant has either alternate pending effect.
 u32 FUN_00327a24(void)
 {
-    s32 first;
-    s32 count;
+    u32 first;
+    u32 count;
     FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(0)), &first, &count);
-    for (s32 index = first; index < first + count; ++index) {
+    for (s32 index = first; index < (s32)(first + count); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&

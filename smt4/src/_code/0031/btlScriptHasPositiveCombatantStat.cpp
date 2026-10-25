@@ -1,12 +1,11 @@
-/* NON_MATCHING: compiler folds entry address calculation into the flags load; retail uses separate ADD and LDR. */
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 btlScriptResolveGroupArg();
-void FUN_002499fc(u32 group, s32 *first, s32 *count);
+s32 btlScriptResolveGroupArg(s32 group);
+void FUN_002499fc(s32 group, u32 *first, u32 *count);
 BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
@@ -23,11 +22,11 @@ u32 btlScriptHasPositiveCombatantStat()
     } else if (kind == 2) {
         stat = 11;
     }
-    scrGetArg(2);
-    s32 first;
-    s32 count;
-    FUN_002499fc(btlScriptResolveGroupArg(), &first, &count);
-    for (s32 index = first; index < first + count; ++index) {
+    s32 group = (s32)scrGetArg(2);
+    u32 first;
+    u32 count;
+    FUN_002499fc(btlScriptResolveGroupArg(group), &first, &count);
+    for (s32 index = first; index < (s32)(first + count); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;
         if ((flags & BTL_ENTRY_FLAG_PRESENT) == 0 &&

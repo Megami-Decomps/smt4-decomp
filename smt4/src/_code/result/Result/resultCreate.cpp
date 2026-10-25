@@ -36,7 +36,7 @@ u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, u32 option
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 options,
                    u32 (*draw)(u32), u32 (*destroy)(u32), void *work, u32 parent);
 void FUN_003b7b58(ResultProcessWorkIV *work);
-void FUN_00296774(ResultProcessWorkIV *work, s32 state);
+void resultSetMenuState(ResultProcessWorkIV *work, s32 state);
 
 // Create the result calculation process, stereo upper-screen tasks, and lower-screen task once.
 void resultCreate(u8 kind)
@@ -53,7 +53,7 @@ void resultCreate(u8 kind)
         work->drawDown = taskCreateDraw(DAT_00405db8, 0xE6, 0, 0, FUN_001c8974, NULL, NULL, work->calculate);
         FUN_003b7b58(work);
         work->kind = kind;
-        FUN_00296774(work, 1);
+        resultSetMenuState(work, 1);
     }
 }
 }

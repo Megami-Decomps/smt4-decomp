@@ -1,63 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015a0e0` (_code @ 0x15a0e0, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: calibration copy and aggregate vector clears use different ARM/VFP stores. */
+#include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
+#include "nn/Result.h"
 
-extern "C" {
+struct StereoCalibrationConfig {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ f32 separation;
+    /* 0x14 */ u8 unk14[0xc];
+};
+extern "C" u8 DAT_00589504;
+extern "C" StereoCalibrationConfig DAT_0062d6d8;
+extern "C" void nn_cfg_CTR_Initialize();
+extern "C" s32 FUN_00189738(void *data, u32 size, u32 blockId);
+extern "C" void sysFatalBreak();
+extern "C" void FUN_001a0eb0();
 
-int sysFatalBreak(void);
-int FUN_001a0eb0(void);
-
-extern signed char DAT_00589504; /* 0x589504 */
-extern unsigned int DAT_0062d6d8; /* 0x62d6d8 */
-extern unsigned int DAT_0062d6e8; /* 0x62d6e8 */
-
-extern int FUN_00189738(unsigned int *, unsigned int, unsigned int);
-/* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_001a0eb0. */
-extern void nn_cfg_CTR_Initialize(void);
-
-
-void FUN_0015a0e0(unsigned int *param_1)
-
+static __inline AsdCameraVec3 cameraFilledVector(f32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if (DAT_00589504 == '\0') {
-    nn_cfg_CTR_Initialize();
-    temp_v0 = FUN_00189738(&DAT_0062d6d8,0x20,0x50005);
-    if (temp_v0 < 0) {
-      sysFatalBreak();
-    }
-    FUN_001a0eb0();
-    DAT_00589504 = '\x01';
-  }
-  param_1[0x12] = DAT_0062d6e8;
-  param_1[0x13] = 0;
-  param_1[0x14] = 0;
-  param_1[0x15] = 0;
-  param_1[0x16] = 0;
-  param_1[0x17] = 0;
-  param_1[0x18] = 0;
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  return;
+    AsdCameraVec3 vector;
+    vector.x = value;
+    vector.y = value;
+    vector.z = value;
+    return vector;
 }
 
-} /* extern "C" */
+// Load the device's stereo calibration once and reset per-camera stereo parameters.
+extern "C" void FUN_0015a0e0(AsdCameraStereo *stereo)
+{
+    if (DAT_00589504 == 0) {
+        nn_cfg_CTR_Initialize();
+        if (nnResultIsFailure(FUN_00189738(&DAT_0062d6d8, 0x20, 0x50005)))
+            sysFatalBreak();
+        FUN_001a0eb0();
+        DAT_00589504 = 1;
+    }
+    stereo->initial.calibration = DAT_0062d6d8.separation;
+    stereo->initial.offsets[0] = 0.0f;
+    stereo->initial.offsets[1] = 0.0f;
+    stereo->initial.offsets[2] = 0.0f;
+    stereo->initial.offsets[3] = 0.0f;
+    stereo->initial.offsets[4] = 0.0f;
+    stereo->initial.offsets[5] = 0.0f;
+    stereo->initial.parameters[0] = 0.0f;
+    stereo->initial.parameters[1] = 0.0f;
+    stereo->initial.parameters[2] = 0.0f;
+    stereo->initial.parameters[3] = 0.0f;
+    stereo->initial.parameters[4] = 0.0f;
+    stereo->initial.parameters[5] = 0.0f;
+    stereo->initial.vectors[0] = cameraFilledVector(0.0f);
+    stereo->initial.vectors[1] = cameraFilledVector(0.0f);
+    stereo->initial.vectors[2] = cameraFilledVector(0.0f);
+    stereo->initial.vectors[3] = cameraFilledVector(0.0f);
+}

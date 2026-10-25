@@ -17,6 +17,11 @@ public:
     virtual void vfunc18();
     virtual void vfunc1c();
     static void operator delete(void *block) { asdOperatorDelete(block); }
+
+    /* 0x64 */ void *rectangle;
 };
+
+typedef char Obj55c864LayoutCheck[
+    sizeof(Obj55c864) == 0x68 && offsetof(Obj55c864, rectangle) == 0x64 ? 1 : -1];
 
 #endif

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296774(...);
+int resultSetMenuState(...);
 int FUN_00299370(...);
 int FUN_0029a0cc(void);
 int FUN_0029c424(...);
@@ -48,7 +48,7 @@ typedef struct {
 extern int scrRunOpcodesStub(unsigned int);
 extern int statsAreAllCapped(int);
 extern int FUN_0029563c(void);
-/* Supplied declaration required: FUN_00296774. */
+/* Supplied declaration required: resultSetMenuState. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_00299370. */
@@ -497,7 +497,7 @@ LAB_002049f0:
     temp_v10 = FUN_002bf818(temp_v12);
     if (temp_v10 != 0) {
       FUN_0029ee6c(0,0x323232ff);
-      FUN_00296774(param_1,0x12);
+      resultSetMenuState(param_1,0x12);
       return;
     }
   }

@@ -5,6 +5,7 @@
 extern "C" {
 u32 FUN_0026f784(void *link);
 ScriptRunState *FUN_00297060(void *resource, u32 entry);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void linkHolderApplyFlag(void *link, u32 flag);
 void characterInfoPanelPopulate(void *panel, u32 selection, const void *record);
 u32 FUN_0028d594(void);
@@ -33,7 +34,7 @@ u32 FUN_002e1744(void *object)
         u8 unk114[0x10];
         u8 busy;
         u8 unk125[4];
-        u8 needsHelp;
+        s8 needsHelp;
     };
     PanelWork *work = (PanelWork *)object;
     u32 result = 0;
@@ -41,7 +42,7 @@ u32 FUN_002e1744(void *object)
         work->resource != NULL && work->entry != 0 && work->record != NULL) {
         if (work->ready == 1) {
             work->process = FUN_00297060(work->resource, work->entry);
-            work->process->mode = 2;
+            scriptProcessSetMode(work->process, 2);
             work->busy = 1;
             linkHolderApplyFlag(work->link, 1);
             characterInfoPanelPopulate(work->panel, work->selection, work->record);

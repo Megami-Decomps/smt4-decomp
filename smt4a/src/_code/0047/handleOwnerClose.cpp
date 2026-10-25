@@ -1,11 +1,7 @@
 #include "nn/svc.h"
+#include "nn/os/HandleOwner.h"
 
 extern "C" {
-
-typedef struct HandleOwner {
-    /* 0x00 */ u32 handle;
-    /* 0x04 */ u8 started;
-} HandleOwner;
 
 void resetFlag5891A4And65f8(void);
 

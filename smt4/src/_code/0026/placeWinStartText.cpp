@@ -1,32 +1,22 @@
-#include "common.h"
+#include "font/PlaceWin.h"
 
 extern "C" {
 
 int spriteStartAnimationByIndex(void *block, int arg);
 int memClear(void *ptr, int size);
-int rt_memcpy(void *dst, u8 *src, int size);
+int rt_memcpy(void *dst, const u8 *src, int size);
 
-typedef struct Obj {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 unk08;
-    /* 0x0C */ u8 unk0C[4];
-    /* 0x10 */ u8 unk10;
-    /* 0x11 */ u8 unk11[0x23];
-    /* 0x34 */ u8 block[0x8C];
-    /* 0xC0 */ u8 text[0x80];
-} Obj;
+extern PlaceWindow *g_placeWin;
 
-extern Obj *g_placeWin;
-
-/* Starts a text entry: stores the UTF-16 string `text` (up to 0x80 bytes, ending at the first zero halfword) in the object. */
-void placeWinStartText(u8 *text)
+/* Start a text entry, copying its encoded bytes into the fixed 0x80-byte text buffer. */
+void placeWinStartText(const u8 *text)
 {
-    Obj *obj = g_placeWin;
+    PlaceWindow *obj = g_placeWin;
     int length;
 
-    obj->unk08 = 1;
-    obj->unk10 = 1;
-    spriteStartAnimationByIndex(obj->block, 0);
+    obj->state = 1;
+    obj->visible = 1;
+    spriteStartAnimationByIndex(obj->animation, 0);
     memClear(obj->text, 0x80);
     length = 0;
     do {

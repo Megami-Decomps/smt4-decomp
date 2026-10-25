@@ -65,7 +65,7 @@ s32 dataTableGetRecordFortyFive(void);
 MapObjEntry *mapObjGetCombinedEntry(s32 index);
 void textFormatBuffer(char buffer[128], const char *format, s32 kind);
 u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
-s32 FUN_002adee0(u32 model);
+s32 modelHasLoadedAttachment(u32 model);
 void FUN_002a0428(u32 model, s32 flag);
 char *libc_strcpy(char *destination, const char *source);
 
@@ -112,7 +112,7 @@ u32 FUN_0021e4bc(void)
     case 12: {
         MapObjEntry *entry = mapObjGetCombinedEntry(g_mapObj->entryIndex);
         MapObjSlot *slot = &g_mapObj->slots[g_mapObj->slot];
-        if (FUN_002adee0(slot->model) != 0) {
+        if (modelHasLoadedAttachment(slot->model) != 0) {
             FUN_002a0428(slot->model, 1);
             slot->x = entry->x;
             slot->y = entry->y;

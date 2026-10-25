@@ -32,7 +32,14 @@ struct RenderTargetSystemView {
     /* 0x13C */ u8 unk13C[0x30];
     /* 0x16C */ RenderTargetBinding *selectedBinding;
     /* 0x170 */ RenderTargetFramebuffer *selectedFramebuffer;
-    /* 0x174 */ u8 unk174[0x80];
+    union {
+        /* 0x174 */ u8 unk174[0x80];
+        struct {
+            /* 0x174 */ f32 color[3][4];
+            /* 0x1A4 */ f32 depth[3];
+            /* 0x1B0 */ u32 mask[3];
+        } clear;
+    };
     /* 0x1F4 */ s32 bindingEnabled;
     union {
         /* 0x1F8 */ u8 unk1F8[8];
@@ -56,5 +63,9 @@ typedef char RenderTargetCopyOffsetsCheck[
     offsetof(RenderTargetFramebuffer, color.buffer) == 8 &&
     offsetof(RenderTargetSystemView, copy.format) == 0x1F8 &&
     sizeof(RenderTargetSystemView) == 0x204 ? 1 : -1];
+typedef char RenderTargetClearOffsetsCheck[
+    offsetof(RenderTargetSystemView, clear.color) == 0x174 &&
+    offsetof(RenderTargetSystemView, clear.depth) == 0x1A4 &&
+    offsetof(RenderTargetSystemView, clear.mask) == 0x1B0 ? 1 : -1];
 
 #endif

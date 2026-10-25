@@ -31,7 +31,13 @@ typedef char NwFontBinaryBlockOffsets[sizeof(NwFontBlockHeader) == 8 &&
 
 struct FontGlyphLookup;
 struct FontGlyphLookupVTable {
-    /* 0x00 */ u8 unk00[0x44];
+    union {
+        u8 unk00[0x44];
+        struct {
+            u8 unk00[0x40];
+            void (*getGlyph)(FontGlyphLookup *font, NwFontGlyph *glyph, s32 character); // 0x40
+        } glyph;
+    };
     /* 0x44 */ bool (*hasGlyph)(FontGlyphLookup *font, u16 code);
 };
 struct FontGlyphLookup {

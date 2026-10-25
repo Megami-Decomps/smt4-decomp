@@ -52,7 +52,7 @@ extern "C" {
 extern MapIf *g_mapIf;
 extern MapIfPlayerState g_gameState;
 
-void FUN_002531bc(void *marker);
+void mapMarkerSynchronizeModelState(void *marker);
 void FUN_00291e40(u32 effect, f32 x, f32 y, f32 z);
 
 /* Brings the map interface's destination and player markers in line with the player state: shows
@@ -107,7 +107,7 @@ void FUN_002c8858(void)
         marker->shown = 0;
         marker->dirty = 1;
     }
-    FUN_002531bc(marker);
+    mapMarkerSynchronizeModelState(marker);
 
     s32 area = g_gameState.area;
     bool hasPlayerMarker = area == 0x20 || area == 5 || area == 0x19 || area == 0x1A || area == 0x1F ||
@@ -119,14 +119,14 @@ void FUN_002c8858(void)
         ((f32 *)mapIf->playerPosition)[1] = g_gameState.playerPositionY + 10.0f;
         mapIf->playerPosition[2] = g_gameState.playerPositionZ;
         mapIf->playerFacing = g_gameState.playerFacing;
-        FUN_002531bc(&mapIf->unkCC94);
+        mapMarkerSynchronizeModelState(&mapIf->unkCC94);
         return;
     }
     if (mapIf->playerShown != 0) {
         mapIf->playerShown = 0;
         mapIf->playerDirty = 1;
     }
-    FUN_002531bc(&mapIf->unkCC94);
+    mapMarkerSynchronizeModelState(&mapIf->unkCC94);
 }
 
 } /* extern "C" */

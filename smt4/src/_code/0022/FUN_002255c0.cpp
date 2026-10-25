@@ -1,78 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002255c0` (_code @ 0x2255c0, 0xd4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: relative-pointer null handling and matrix/bounds evaluation order differ; retail keeps a shared zero register and a call/return rather than this tail call. */
+#include "AsdSDK/Source/Gfx/Model/AsdMotionModel.h"
+#include "gfx/ModelBoneLookup.h"
 
-extern "C" {
+struct ModelDepthBounds {
+    u32 flags;
+    SkeletonVector3 center;
+};
+struct ModelDepthMesh {
+    u8 unk00[0x1c];
+    RelativePointer bounds;
+    u8 unk20[0xc];
+    u32 boneCount;
+    RelativePointer bones;
+};
+struct ModelDepthBoneBinding {
+    u32 unk00;
+    RelativePointer index;
+};
+struct ModelDepthInstance {
+    AsdTrackOwner *owner;
+    ModelBoneResource *resource;
+};
+struct ModelDepthMeshInstance {
+    u8 unk00[0x18];
+    u32 index;
+};
+typedef char ModelDepthLayoutCheck[offsetof(ModelDepthMesh, bounds) == 0x1c &&
+    offsetof(ModelDepthMesh, boneCount) == 0x2c && offsetof(ModelDepthMesh, bones) == 0x30 &&
+    offsetof(ModelDepthBounds, center) == 4 && offsetof(ModelDepthBoneBinding, index) == 4 &&
+    offsetof(ModelDepthMeshInstance, index) == 0x18 ? 1 : -1];
 
-int nw_gfx_SceneHelper_CalculateDepth(int, int, unsigned int);
+extern "C" f32 nw_gfx_SceneHelper_CalculateDepth(const SkeletonVector3 *center,
+    const SkeletonMatrix34 *matrix, const void *camera);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: nw_gfx_SceneHelper_CalculateDepth. */
-
-
-void FUN_002255c0(int *param_1,int param_2,unsigned int param_3)
-
+// Use a singly-bound mesh's bone matrix; other meshes use the model transform.
+extern "C" f32 FUN_002255c0(ModelDepthInstance *instance,
+    ModelDepthMeshInstance *meshInstance, const void *camera)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  temp_v2 = *(int *)(param_1[1] + 200);
-  if (temp_v2 != 0) {
-    temp_v2 = param_1[1] + 200 + temp_v2;
-  }
-  else {
-    temp_v2 = 0;
-  }
-  piVar1 = (int *)(temp_v2 + *(int *)(param_2 + 0x18) * 4);
-  temp_v2 = *piVar1;
-  if (temp_v2 != 0) {
-    temp_v2 = temp_v2 + (int)piVar1;
-  }
-  else {
-    temp_v2 = 0;
-  }
-  if (*(int *)(temp_v2 + 0x2c) != 1) {
-    temp_v0 = *(int *)(temp_v2 + 0x1c);
-    if (temp_v0 != 0) {
-      temp_v3 = temp_v0 + temp_v2 + 0x1c;
+    RelativePointer *meshes = (RelativePointer *)instance->resource->meshes.table.get();
+    ModelDepthMesh *mesh = (ModelDepthMesh *)meshes[meshInstance->index].get();
+    const SkeletonMatrix34 *matrix;
+    if (mesh->boneCount != 1) {
+        matrix = &instance->owner->transform.defaultMatrix;
+        ModelDepthBounds *bounds = (ModelDepthBounds *)mesh->bounds.get();
+        return nw_gfx_SceneHelper_CalculateDepth(&bounds->center, matrix, camera);
+    } else {
+        RelativePointer *bones = (RelativePointer *)mesh->bones.get();
+        ModelDepthBoneBinding *binding = (ModelDepthBoneBinding *)bones->get();
+        u32 boneIndex = *(u32 *)binding->index.get();
+        ModelBoneMatrixProvider *provider = instance->owner->secondary.skeleton.provider;
+        ModelBoneMatrixSet *matrices = provider->vtable->getMatrices(provider);
+        matrix = &matrices->matrices[boneIndex];
     }
-    temp_v1 = *param_1 + 0x8c;
-  }
-  else {
-    if (*(int *)(temp_v2 + 0x30) != 0) {
-      piVar1 = (int *)(temp_v2 + 0x30 + *(int *)(temp_v2 + 0x30));
-    }
-    else {
-      piVar1 = (int *)0x0;
-    }
-    if (*piVar1 != 0) {
-      temp_v0 = (int)piVar1 + *piVar1;
-    }
-    else {
-      temp_v0 = 0;
-    }
-    temp_v1 = *(int *)(temp_v0 + 4);
-    if (temp_v1 != 0) {
-      piVar1 = (int *)(temp_v0 + 4 + temp_v1);
-    }
-    else {
-      piVar1 = (int *)0x0;
-    }
-    temp_v1 = *piVar1;
-    temp_v0 = (**(romwright_code **)(**(int **)(*param_1 + 0x220) + 0x1c))();
-    temp_v1 = *(int *)(temp_v0 + 4) + temp_v1 * 0x30;
-    temp_v0 = *(int *)(temp_v2 + 0x1c);
-    if (temp_v0 != 0) {
-      temp_v3 = temp_v0 + temp_v2 + 0x1c;
-    }
-  }
-  nw_gfx_SceneHelper_CalculateDepth(temp_v3 + 4,temp_v1,param_3);
-  return;
+    ModelDepthBounds *bounds = (ModelDepthBounds *)mesh->bounds.get();
+    return nw_gfx_SceneHelper_CalculateDepth(&bounds->center, matrix, camera);
 }
-
-} /* extern "C" */

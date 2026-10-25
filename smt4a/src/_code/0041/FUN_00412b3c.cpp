@@ -9,23 +9,8 @@ void FUN_0042c7c8(void *vertex, const ShaderBindSymbol *symbol, u32 physicalAddr
 void FUN_00412b3c(VertexStreamSource *source, void *vertex)
 {
     ShaderBindSymbol position;
-    position.vertex.kind = 0;
-    position.vertex.count = 1;
-    position.vertex.attribute = 255;
-    position.vertex.registerIndex = 255;
-    position.vertex.flags = 0;
     ShaderBindSymbol texCoord;
-    texCoord.vertex.kind = 0;
-    texCoord.vertex.count = 1;
-    texCoord.vertex.attribute = 255;
-    texCoord.vertex.registerIndex = 255;
-    texCoord.vertex.flags = 0;
     ShaderBindSymbol color;
-    color.vertex.kind = 0;
-    color.vertex.count = 1;
-    color.vertex.attribute = 255;
-    color.vertex.registerIndex = 255;
-    color.vertex.flags = 0;
     if (source->flags & 1) {
         position.vertex.attribute = 0;
         FUN_0042c7c8(vertex, &position, asdGxGetPhysicalAddress(source->position), 11);

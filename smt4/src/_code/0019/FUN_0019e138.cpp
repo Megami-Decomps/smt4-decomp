@@ -153,7 +153,7 @@ extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int jobGetWork(void);
+extern int jobGetWork(unsigned int job);
 /* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
@@ -177,7 +177,7 @@ extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: FUN_003aeb64. */
 
 
-unsigned int FUN_0019e138(void)
+int FUN_0019e138(unsigned int job)
 
 {
 /* irregular: 2 goto(s); irregular input(s): in_fpscr; 63 native warning(s); review required */
@@ -208,7 +208,7 @@ unsigned int FUN_0019e138(void)
   unsigned int temp_v20;
   int temp_v21;
   
-  temp_v4 = jobGetWork();
+  temp_v4 = jobGetWork(job);
   temp_v0 = g_btlUiBlock;
   if (g_btlUiBlock == 0) {
     return 0;

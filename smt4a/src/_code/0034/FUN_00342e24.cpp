@@ -293,7 +293,7 @@ code_r0x00343274:
     *(unsigned int *)(param_1 + 0xec) = 0xffffffff;
     *(unsigned int *)(param_1 + 0xf8) = 6;
     *(unsigned int *)(param_1 + 0xfc) = 2;
-    uVar6 = FUN_0035a9fc();
+    uVar6 = progressUnlockCountEarned();
     *(unsigned int *)(param_1 + 0x124) = uVar6;
     *(unsigned int *)(param_1 + 0x158) = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 8) + 0x23);
     uVar1 = FUN_00344bc8(*(int *)(param_1 + 0x128) + *(int *)(param_1 + 0x120));

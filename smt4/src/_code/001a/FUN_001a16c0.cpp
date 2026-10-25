@@ -45,7 +45,7 @@ void FUN_002c18e4(RenderCtx *context);
 /* Draws the result screen: while the curtain closes after the results step, slides the curtain
  * halves in and runs the effect speed; then draws the result sprites for phases below 9.
  * Always returns 0. */
-u32 FUN_001a16c0(void)
+u32 FUN_001a16c0(u32 job)
 {
     ResultScreen *result = g_result;
 

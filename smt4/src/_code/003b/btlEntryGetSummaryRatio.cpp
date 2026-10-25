@@ -1,24 +1,17 @@
-#include "common.h"
-
-struct BattleMain;
-struct BattleEntry;
-struct BattleEntrySummary {
-    u8 unk00[0x1e]; // 0x00
-    u8 percentage;   // 0x1e
-    u8 unk1f[3];    // 0x1f
-};
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BattleEntrySummary.h"
 
 extern "C" {
-BattleMain* btlGetMainState();
-BattleEntry* btlMainFindEntryByListedId(BattleMain* state, u32 listedId);
-void FUN_00247478(BattleEntrySummary* summary, BattleMain* state, const BattleEntry* entry);
+BtlMainState* btlGetMainState();
+BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, u32 listedId);
+void FUN_00247478(BattleEntrySummary* summary, BtlMainState* state, const BtlEntry* entry);
 
 // Return the selected entry's summary percentage as a unit-scale float.
 f32 btlEntryGetSummaryRatio(u32 listedId)
 {
-    BattleEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
+    BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     BattleEntrySummary summary;
     FUN_00247478(&summary, btlGetMainState(), entry);
-    return (f32)summary.percentage * 0.01f;
+    return (f32)summary.ratios.percentage * 0.01f;
 }
 }

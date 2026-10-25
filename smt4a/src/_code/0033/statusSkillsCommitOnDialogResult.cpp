@@ -58,7 +58,7 @@ s32 messageMainGetValue(void);
 PlayerData* gameGetPlayerData(void);
 s32 countUnlockedSlots(void);
 s32 getUnlockedSlotCount(const PlayerData*);
-void statusReplaceSkills(u16*, u32);
+void statusReplaceSkills(const u16*, u8);
 void FUN_003343f0(u32);
 
 void statusSkillsCommitOnDialogResult(void* object)

@@ -1,78 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00436c10` (_code @ 0x436c10, 0xf4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: sentinel/result register lifetimes and allocation-failure block merging differ. */
+#include "gfx/MaskWork.h"
+#include <new>
 extern "C" {
+s32 rt_memcmp(const void *left, const void *right, u32 bytes);
+void *rt_memcpy(void *destination, const void *source, u32 bytes);
+void *FUN_004387f0(void *allocator, u32 kind);
+s32 FUN_00434d04(MaskWorkBody *body, void *allocator, u32 bytes, s32 clear);
+u32 FUN_0043756c(MaskSourceProcessor *processor, MaskWorkState **state);
 
-int FUN_00434d9c(void);
-int FUN_004387f0(int *, int);
-int rt_memcpy(int, unsigned int, unsigned int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern int rt_memcmp(int, unsigned int, unsigned int);
-extern int FUN_00434d04(int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00434d9c. */
-extern int FUN_0043756c(unsigned int *, int **);
-/* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_00436c10(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,int *param_4)
-
+// Construct and append one state to the intrusive list.
+static inline MaskWorkState *maskStateListAppend(MaskStateList *list)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  int *temp_v1;
-  
-  piVar3 = (int *)param_2[2];
-  temp_v1 = param_4;
-  if (piVar3 != (int *)(param_2 + 1)) {
-    do {
-      temp_v0 = rt_memcmp(piVar3[9],param_3,param_2[4]);
-      if (temp_v0 != 0) {
-        piVar3 = (int *)piVar3[1];
-      }
-    } while (temp_v0 != 0 && piVar3 != (int *)(param_2 + 1));
-  }
-  piVar2 = (int *)(param_2 + 1);
-  if (piVar3 != piVar2) {
-    *param_1 = (unsigned int)piVar3;
-    return;
-  }
-  piVar3 = (int *)param_2[3];
-  FUN_004387f0(piVar3,3);
-  if (piVar3 == (int *)0x0) {
-    temp_v1 = (int *)0x0;
-  }
-  else {
-    if (piVar3 != (int *)0xfffffff8) {
-      FUN_00434d9c();
+    MaskWorkState *state = static_cast<MaskWorkState *>(FUN_004387f0(list->allocator, 3));
+    if (state != NULL) {
+        new (state->body()) MaskWorkBody;
+        MaskWorkState *sentinel = reinterpret_cast<MaskWorkState *>(list);
+        state->links.previous = list->previous;
+        state->links.next = sentinel;
+        list->previous = state;
+        state->links.previous->links.next = state;
     }
-    *piVar3 = *piVar2;
-    piVar3[1] = (int)piVar2;
-    *piVar2 = (int)piVar3;
-    *(int **)(*piVar3 + 4) = piVar3;
-    temp_v1 = piVar3;
-  }
-  piVar3 = temp_v1;
-  if ((temp_v1 != (int *)0x0) &&
-     (temp_v0 = FUN_00434d04(temp_v1 + 2,*param_2,param_2[4],0), temp_v0 != 0)) {
-    rt_memcpy(piVar3[9],param_3,param_2[4]);
-    temp_v1 = piVar3;
-    temp_v0 = FUN_0043756c(param_2,&temp_v1);
-    if (temp_v0 != 0) {
-      *param_1 = (unsigned int)piVar3;
-      return;
-    }
-  }
-  *param_1 = 0;
-  return;
+    return state;
 }
 
-} /* extern "C" */
+// Find the mask state for this baseline, or allocate, link and populate a new state.
+void FUN_00436c10(MaskWorkState **output, MaskSourceProcessor *processor, const u8 *key)
+{
+    MaskWorkState *sentinel = reinterpret_cast<MaskWorkState *>(&processor->states);
+    MaskWorkState *state = processor->states.next;
+    while (state != sentinel) {
+        if (rt_memcmp(state->baseline, key, processor->byteCount) == 0)
+            break;
+        state = state->links.next;
+    }
+    if (state != sentinel) {
+        *output = state;
+        return;
+    }
+    state = maskStateListAppend(&processor->states);
+    MaskWorkState *newState = state;
+    if (state != NULL && FUN_00434d04(state->body(), processor->allocator, processor->byteCount, 0)) {
+        rt_memcpy(state->baseline, key, processor->byteCount);
+        newState = state;
+        if (FUN_0043756c(processor, &newState)) {
+            *output = state;
+            return;
+        }
+    }
+    *output = NULL;
+}
+}

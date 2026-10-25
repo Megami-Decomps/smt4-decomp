@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial 64-bit exclusion mask load pairing and registers differ. */
+/* NON_MATCHING: initial exclusion-mask AND/OR operands use different scratch registers; the paired flags load matches. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "gamedata/Table04Record.h"
 
@@ -18,7 +18,8 @@ s32 FUN_004c5da4(u32 unit, s32 rollChance)
     };
     extern TriggerMaskView DAT_005713f0;
     BattleMaskState *battle = btlGetMainState();
-    if ((battle->mask & DAT_005713f0.blockedStates) != 0)
+    u64 flags = battle->mask;
+    if ((flags & DAT_005713f0.blockedStates) != 0)
         return 0;
     Source4C *source = FUN_003f0e20(battle, unit);
     switch (battle->activity.currentAction) {

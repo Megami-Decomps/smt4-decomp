@@ -100,12 +100,13 @@ it as armcc emits it, each word a case's offset from a local `__switch$$` symbol
 ## What counts
 
 Progress counts first-party code only: Atlus's engine (AsdSDK) and the game. Nintendo's SDK,
-NintendoWare, the online library (NEX), the Mobiclip video library and the ARM runtime are linked into
-the same `.code`; they still relink byte-identically with everything else, but they are not counted.
-`python -B tools/scope.py` lists them in `config/third_party.txt` from evidence: third-party names
-(mostly from matching Nintendo's SDK code), functions reached only from third-party code, and unnamed
-functions linked between third-party ones. Anything uncertain stays counted. Run it again after
-naming passes.
+NintendoWare, the online libraries (NEX, OnlineCore), the Mobiclip video library and the ARM runtime
+are linked into the same `.code`; they still relink byte-identically with everything else, but they
+are not counted. `python -B tools/scope.py` lists them in `config/third_party.txt` from evidence:
+third-party names (mostly from matching Nintendo's SDK code, plus the C library's standard names),
+library blocks recorded with their evidence in `config/libraries.txt` (Apocalypse's OnlineCore Thumb
+code), functions reached only from third-party code, and unnamed functions linked between
+third-party ones. Anything uncertain stays counted. Run it again after naming passes.
 
 ## Progress site
 

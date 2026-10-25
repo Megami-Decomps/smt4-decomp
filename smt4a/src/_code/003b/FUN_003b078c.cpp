@@ -1,4 +1,4 @@
-/* NON_MATCHING: data-table and qsort argument scheduling differs; large-record section registers swap. */
+/* NON_MATCHING: the section handle and entries pointer use r4/r5 in the opposite order in five repeated sorts. */
 #include "gamedata/DataTable.h"
 #include <stdlib.h>
 
@@ -19,8 +19,10 @@ template <typename Record>
 static __inline void sortTableSection(s32 table, s32 section,
                                      s32 (*compare)(const void *, const void *))
 {
-    DataTableView<Record> records(table, section);
-    qsort(records.entries, records.count, sizeof(Record), compare);
+    void *resource = dataTableGet(table, section);
+    void *entries = dataTableGetEntries(resource);
+    u32 count = dataTableGetCount(resource);
+    qsort(entries, count, sizeof(Record), compare);
 }
 
 // Sort lookup sections by their record keys before consumers perform binary searches.

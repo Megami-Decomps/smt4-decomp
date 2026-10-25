@@ -1,28 +1,8 @@
 /* NON_MATCHING: readable rebuild of the particle spawn; retail keeps the four constants in s16/s17/s20/s21, hoists the effect position components into the first product and evaluates the two rotated axes with interleaved vmla chains, which armcc here orders differently. */
-#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "classes/Obj557d90.h"
 #include "gfx/CameraMatrixCache.h"
+#include <new>
 
-struct ParticleVec3 {
-    ParticleVec3() {}
-    void set(f32 sx, f32 sy, f32 sz)
-    {
-        x = sx;
-        y = sy;
-        z = sz;
-    }
-    f32 x, y, z;
-};
-
-/* A spawned particle (0xB4 bytes; only the fields the spawn sets are named). */
-struct Particle {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 unk08;
-    /* 0x0C */ ParticleVec3 unk0C;
-    /* 0x18 */ u8 unk18[0x18];
-    /* 0x30 */ ParticleVec3 unk30;       /* the model's position */
-    /* 0x3C */ ParticleVec3 unk3C[3];
-    /* 0x60 */ u8 unk60[0x54];
-};
 
 /* How a particle emitter spawns its particles. */
 struct ParticleEmitterSpec {
@@ -42,17 +22,16 @@ extern "C" {
 f32 FUN_0025cb1c(void);
 void FUN_001aff14(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 z);
 void *asdOperatorNew(u32 bytes);
-Particle *FUN_0041bd84(Particle *particle, AsdMdlObject *model);
 }
 
 /* Creates a particle for the model from the emitter spec: a random start offset, a random
  * direction scaled by a random speed, and a randomised target position. */
-extern "C" Particle *FUN_0041aca8(const ParticleEmitterSpec *spec, AsdMdlObject *model)
+extern "C" Obj557d90 *FUN_0041aca8(const ParticleEmitterSpec *spec, AsdMdlObject *model)
 {
     const f32 degreesToPhase = 0.71111f; /* 256 / 360 */
-    Particle *particle = (Particle *)asdOperatorNew(sizeof(Particle));
+    Obj557d90 *particle = static_cast<Obj557d90 *>(asdOperatorNew(sizeof(Obj557d90)));
     if (particle != NULL)
-        particle = FUN_0041bd84(particle, model);
+        particle = new (particle) Obj557d90(model);
     particle->unk08 = spec->unk04;
 
     Matrix34Data rotation;

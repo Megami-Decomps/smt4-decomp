@@ -36,7 +36,7 @@ extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, un
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
-extern int FUN_002adee0(unsigned int);
+extern int modelHasLoadedAttachment(unsigned int);
 extern int gameFlagIsSet(void);
 extern int gameGetMapBlock(void);
 
@@ -73,7 +73,7 @@ unsigned int FUN_0027c3d0(void)
       }
       temp_v2 = (int)*(short *)(g_mapStateSlots + 10);
       if (((temp_v2 != 0) && (temp_v2 != 1 && temp_v2 != 3)) &&
-         (temp_v2 = FUN_002adee0(*(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x1c)), temp_v2 == 0)) {
+         (temp_v2 = modelHasLoadedAttachment(*(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x1c)), temp_v2 == 0)) {
         return 0;
       }
       goto LAB_0027c7c0;

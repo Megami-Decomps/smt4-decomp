@@ -1,16 +1,20 @@
-/* NON_MATCHING: register allocation only: retail keeps b in r4 and re-copies it to r6 before the second rank call */
-/* Compares two ids: by FUN_00246570 key (descending), then by FUN_00230f44 rank. */
+/* NON_MATCHING: corrected packed-item pointer/rank types; retail retains the second item through an extra saved-register copy before rank calls. */
+/* Compare packed items by descending price, then by their item rank. */
 #include "common.h"
+
+struct AocPricedItem;
 
 extern "C" {
 
-extern s32 aocItemGetPrice(u32 id);
-extern s32 FUN_0049c9a0(u32 id);
+s32 aocItemGetPrice(AocPricedItem *item);
+u16 FUN_0049c9a0(const u16 *item);
 
-s32 FUN_00494530(u32 a, u32 b)
+s32 FUN_00494530(const void *first, const void *second)
 {
-    s32 keyA = aocItemGetPrice(a);
-    s32 keyB = aocItemGetPrice(b);
+    const u16 *a = static_cast<const u16 *>(first);
+    const u16 *b = static_cast<const u16 *>(second);
+    s32 keyA = aocItemGetPrice(static_cast<AocPricedItem *>(const_cast<void *>(first)));
+    s32 keyB = aocItemGetPrice(static_cast<AocPricedItem *>(const_cast<void *>(second)));
     s32 diff = keyB - keyA;
 
     if (diff == 0) {

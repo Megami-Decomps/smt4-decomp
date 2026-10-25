@@ -24,7 +24,7 @@ int FUN_003e45bc(...);
 void FUN_003e48dc(unsigned int);
 int FUN_003fd5bc(...);
 int gameFlagSetValue(...);
-int FUN_0046bd44(...);
+int aocActivateFileGroupFlags(...);
 int flagValueSub(...);
 int FUN_0048111c(...);
 int FUN_004bcb54(...);
@@ -100,7 +100,7 @@ extern int gameDataFlagTestBit(unsigned int);
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003fd5bc. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0046bd44. */
+/* Supplied declaration required: aocActivateFileGroupFlags. */
 /* Supplied declaration required: flagValueSub. */
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0048111c. */
@@ -619,7 +619,7 @@ void FUN_00261a28(int param_1)
     gameFlagSetValue(0x466,1);
     gameFlagSetValue(0x410,1);
   }
-  FUN_0046bd44(g_aocSystem);
+  aocActivateFileGroupFlags(g_aocSystem);
   __aeabi_memcpy4(temp_v0 + 0x29478,temp_v1 + 0x29478,0x290);
   temp_v7 = 0;
   do {

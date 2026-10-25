@@ -1,4 +1,4 @@
-/* NON_MATCHING: memset lowers to __aeabi_memset instead of retail __aeabi_memset4 (same as FUN_00232698); the demon-id switch also keeps case 1-3 stores addressed from the world base in retail while built folds them into predicated stores off r7 */
+/* NON_MATCHING: memset lowers to __aeabi_memset instead of retail __aeabi_memset4 (same as touchLayoutRebuildRegions); the demon-id switch also keeps case 1-3 stores addressed from the world base in retail while built folds them into predicated stores off r7 */
 #include "common.h"
 #include <stddef.h>
 #include <string.h>

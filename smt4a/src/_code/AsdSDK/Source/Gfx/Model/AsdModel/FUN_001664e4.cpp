@@ -1,14 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001664e4` (_code @ 0x1664e4, 0xa98 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/CameraMatrixCache.h"
 
 extern "C" {
 
-int FUN_00152f54(void);
+u32 FUN_00152f54(void);
 int FUN_00176538(unsigned int);
 int FUN_001767a4(unsigned int, unsigned int);
 int FUN_00191bec(int, int);
-int FUN_00192484(unsigned int, unsigned int, unsigned int, int);
+void FUN_00192484(u32 context, u32 firstCamera, u32 secondCamera, u32 sourceCamera, f32 stereoParameter, f32 stereoScale);
 int _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_(void);
 int nw_gfx_Camera_UpdateCameraMatrix(...);
 int nw_gfx_SceneNode_IsCircularReference(void);
@@ -496,8 +497,10 @@ LAB_00166e14:
         nw_gfx_Camera_UpdateCameraMatrix(DAT_005b3c20);
       }
       if ((0 < g_asdLightCount) && (temp_v3 = FUN_001696f4(), temp_v3 == 1)) {
-        FUN_00152f54();
-        FUN_00192484(g_asdModelSlotArray3,DAT_005b3c18,DAT_005b3c1c,DAT_005b3c14);
+        const CameraMatrixStereoCache *camera =
+            reinterpret_cast<const CameraMatrixStereoCache *>(FUN_00152f54());
+        FUN_00192484(g_asdModelSlotArray3,DAT_005b3c18,DAT_005b3c1c,DAT_005b3c14,
+                     camera->stereoParameter,camera->stereoScale);
       }
       DAT_005b3c00 = 0;
       DAT_005b3c10 = DAT_005b3c10 + 1;

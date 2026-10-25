@@ -14,7 +14,7 @@ int FUN_0032d0c8(...);
 int unitRecordBuild(unsigned int, unsigned char [304]);
 int FUN_00333dc8(...);
 int FUN_003343f0(...);
-int FUN_00359b6c(int);
+int skillHelpUpdateAttributeAndTarget(int);
 int FUN_0035ad50(unsigned int, unsigned char [304]);
 
 extern int g_unite; /* 0x57f290 */
@@ -36,7 +36,7 @@ extern int buttonHelpGetPanelMode(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00359b6c. */
+/* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
 /* Supplied declaration required: FUN_0035ad50. */
 
 
@@ -104,7 +104,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
       sysPlaySe(0x57);
       temp_v4 = resourceRunOperationIfUnblocked();
       temp_v1 = FUN_002a4894(temp_v0 + 0x8e14);
-      FUN_00359b6c(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x8b70));
+      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x8b70));
       FUN_002c8550(0xf);
     }
     break;

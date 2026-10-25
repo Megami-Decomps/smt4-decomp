@@ -1,12 +1,12 @@
 /* NON_MATCHING: loader-state increment register and shared zero-return block differ. */
 #include "ui/SceneResourceWait.h"
 extern "C" {
-s32 jobIsValid(u32 job);
+u32 jobIsValid(u32 job);
 s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
 s32 eventTexJobSlotsDone(u32 job);
-void aocHandleButtons(u32 loader, s32 mode);
+void aocHandleButtons(u32 loader, u32 mode);
 s32 FUN_003fce08(u32 loader, u32 wait);
-s32 nkdwLoaderParse(u32 loader);
+u32 nkdwLoaderParse(u32 loader);
 
 // Wait for the optional loader, resource object, and both texture jobs.
 u32 FUN_004962e4(SceneResourceWaitState *state)

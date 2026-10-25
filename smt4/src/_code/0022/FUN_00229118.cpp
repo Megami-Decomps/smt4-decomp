@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetListedSummaryValues(...);
-int FUN_0022aa38(...);
+int btlEntryHasSkillCategory(...);
 int selectionCopySupportedValue(...);
 int FUN_0023cd08(...);
 int FUN_00246134(...);
@@ -38,7 +38,7 @@ typedef struct {
 extern unsigned int g_btlAction; /* 0x434278 */
 
 /* Supplied declaration required: btlGetListedSummaryValues. */
-/* Supplied declaration required: FUN_0022aa38. */
+/* Supplied declaration required: btlEntryHasSkillCategory. */
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00246134. */
@@ -147,7 +147,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
         btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v11,temp_v13 + 5);
         selectionCopySupportedValue(temp_v11,temp_v13 + 6);
         temp_v8 = *(unsigned int *)(param_4 + 0x20);
-        FUN_0022aa38(temp_v8,temp_v13[6] & 0xff);
+        btlEntryHasSkillCategory(temp_v8,temp_v13[6] & 0xff);
       }
     }
     else {
@@ -260,7 +260,7 @@ LAB_002292ac:
           btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v12,&temp_v16);
           selectionCopySupportedValue(temp_v12,temp_v17);
           temp_v3 = *(int *)(param_4 + 0x20);
-          FUN_0022aa38(temp_v3,temp_v17[0] & 0xff);
+          btlEntryHasSkillCategory(temp_v3,temp_v17[0] & 0xff);
         }
       }
       else {

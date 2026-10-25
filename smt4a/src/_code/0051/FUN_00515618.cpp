@@ -1,14 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00515618` (_code @ 0x515618, 0x48 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/MaskWork.h"
+#include <new>
 
 extern "C" {
 
 int FUN_004387f0(int *, int);
-int FUN_00515598(void);
 
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_00515598. */
 
 
 void FUN_00515618(unsigned int *param_1,int *param_2)
@@ -23,9 +23,7 @@ void FUN_00515618(unsigned int *param_1,int *param_2)
     *param_1 = 0;
   }
   else {
-    if (piVar1 != (int *)0xfffffff8) {
-      FUN_00515598();
-    }
+    new (&reinterpret_cast<MaskWorkNode *>(piVar1)->payload) Variant;
     *piVar1 = *param_2;
     piVar1[1] = (int)param_2;
     *param_2 = (int)piVar1;

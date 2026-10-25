@@ -1,4 +1,4 @@
-/* NON_MATCHING: inline push addresses, positioned-work/coordinate registers and member-relative speed load differ; render restoration and repeated speed resets are preserved. */
+/* NON_MATCHING: work/coordinate and zero saved registers differ, and the switch default branch uses a different layout. */
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 
@@ -22,14 +22,13 @@ void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
-u32 FUN_003f7f90(PositionedMenuDrawWork *work)
+s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)
 {
     if (work->state == 0 || work->state == 1)
         return 0;
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     s32 x = vec2GetXInt(&work->position);
     s32 y = vec2GetYInt(&work->position);
     f32 speed = vec2GetSpeed(&work->position);
@@ -48,8 +47,7 @@ u32 FUN_003f7f90(PositionedMenuDrawWork *work)
     context = g_renderCtx;
     renderStackPop(&context->stackA);
     context = g_renderCtx;
-    state = packNibblesAndByte(6, 7, 0);
-    renderStackSet(&context->stackB, state);
+    renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

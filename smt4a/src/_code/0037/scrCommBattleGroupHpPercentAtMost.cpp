@@ -17,9 +17,9 @@ u32 scrCommBattleGroupHpPercentAtMost()
     s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 totalHp = 0;
     s32 totalMaxHp = 0;
-    s32 first, count;
-    FUN_00301a08(kind, (u32 *)&first, (u32 *)&count);
-    for (s32 index = first; index < first + count; ++index) {
+    u32 first, count;
+    FUN_00301a08(kind, &first, &count);
+    for (s32 index = first; index < (s32)(first + count); ++index) {
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(g_btlCandidateMasks.unavailable & flags) &&

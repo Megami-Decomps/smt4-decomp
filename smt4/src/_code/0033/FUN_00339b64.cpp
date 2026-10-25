@@ -1,4 +1,4 @@
-/* NON_MATCHING: two register differences only: retail adds the lock address into r0 and copies it to r7, and uses r2 for the middle word of the three-word handle copy; 151 rows each. */
+/* NON_MATCHING: the middle word of the three-word script-handle copy uses r1 instead of retail r2; all instructions otherwise agree. */
 #include "common.h"
 
 /* The resident handles the main battle state offers; the loader copies them over one by one. */

@@ -16,10 +16,10 @@ struct StatusLearnedSkillState {
 };
 
 extern "C" StatusLearnedSkillState *g_statusDown;
-extern "C" void statusReplaceSkills(void *source, u32 count);
+extern "C" void statusReplaceSkills(const u16 *source, u8 count);
 
 /* Flag nonempty skills absent from the previous eight-slot history. */
-extern "C" void statusMarkNewSkills(void *source, u32 count)
+extern "C" void statusMarkNewSkills(const u16 *source, u8 count)
 {
     if (count > 16)
         return;

@@ -21,7 +21,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
 int gameGetSlotRecord(...);
@@ -82,7 +82,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
@@ -360,7 +360,7 @@ LAB_004b07c8:
       temp_v16 = temp_v27[temp_v4];
       temp_v13 = aiStack_110[temp_v4];
       puVar10 = temp_v31;
-      FUN_0018408c(puVar10,1);
+      fontMeasureLineAdvance(puVar10,1);
       VectorSignedToFloat(aiStack_120[temp_v4] + (int)*(short *)(temp_v15 + 10) + temp_v13,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v16 + ((int)**(short **)(temp_v15 + 0xc) - (int)puVar10) / 2 +

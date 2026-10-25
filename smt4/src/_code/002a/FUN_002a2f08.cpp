@@ -1,77 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a2f08` (_code @ 0x2a2f08, 0x114 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: queued file request index/link register lifetimes have not yet been matched. */
+#include "sys/FileWorkerQueue.h"
+#include "nn/Result.h"
 extern "C" {
+s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+s32 FUN_002c5254(u32 *previousCount, u32 semaphore, u32 releaseCount);
+void FUN_002c526c(u32 result);
+void *nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
-int FUN_002c40f8(unsigned char *, int *, int, int);
-int FUN_002c5254(int *, int, int);
-int FUN_002c526c(void);
-int nnnstdMemCpy(int *, unsigned int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c5254. */
-/* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: nnnstdMemCpy. */
-
-
-int * FUN_002a2f08(int *param_1,unsigned int param_2)
-
+// Append a copied request to the fixed ring and link it after the previous queued request.
+FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar4;
-  int *piVar5;
-  int temp_v2;
-  unsigned int uStack_2c;
-  int iStack_28;
-  unsigned char temp_v3 [8];
-  
-  iStack_28 = param_1[0x1148];
-  puVar4 = (unsigned int *)&temp_v2;
-  temp_v2 = 0xffffffff;
-  uStack_2c = 0xffffffff;
-  puVar1 = temp_v3;
-  FUN_002c40f8(puVar1,&iStack_28,1,0);
-  if ((int)puVar1 < 0) {
-    FUN_002c526c();
-  }
-  temp_v0 = param_1[1];
-  if (*param_1 == temp_v0) {
-    piVar5 = param_1 + temp_v0 * 0x2e + 3;
-    nnnstdMemCpy(piVar5,param_2,0xb8);
-    temp_v0 = param_1[1];
-    temp_v1 = temp_v0 + 1;
-    param_1[1] = temp_v1;
-    param_1[2] = temp_v0;
-    if (temp_v1 >= 0x60) {
-      param_1[1] = 0;
+    u32 *semaphore = &queue->semaphore;
+    u32 handle = *semaphore;
+    s32 index;
+    s32 result = FUN_002c40f8(&index, &handle, 1, 0, -1);
+    if (nnResultIsFailure(result))
+        FUN_002c526c(result);
+    FileQueueRequest *inserted;
+    if (queue->readIndex == queue->writeIndex) {
+        inserted = &queue->requests[queue->writeIndex];
+        nnnstdMemCpy(inserted, request, sizeof(*inserted));
+        queue->tailIndex = queue->writeIndex++;
+        if (queue->writeIndex >= 96)
+            queue->writeIndex = 0;
+    } else {
+        FileQueueRequest *previous = &queue->requests[queue->tailIndex];
+        inserted = &queue->requests[queue->writeIndex];
+        nnnstdMemCpy(inserted, request, sizeof(*inserted));
+        queue->tailIndex = queue->writeIndex;
+        queue->writeIndex = queue->writeIndex + 1;
+        if (queue->writeIndex >= 96)
+            queue->writeIndex = 0;
+        previous->next = inserted;
     }
-  }
-  else {
-    temp_v1 = param_1[2];
-    piVar5 = param_1 + temp_v0 * 0x2e + 3;
-    nnnstdMemCpy(piVar5,param_2,0xb8);
-    param_1[2] = param_1[1];
-    temp_v0 = param_1[1] + 1;
-    param_1[1] = temp_v0;
-    if (temp_v0 >= 0x60) {
-      param_1[1] = 0;
-    }
-    param_1[temp_v1 * 0x2e + 0x2f] = (int)piVar5;
-  }
-  FUN_002c5254(&temp_v2,param_1[0x1148],1);
-  if ((int)puVar4 < 0) {
-    FUN_002c526c();
-  }
-  return piVar5;
+    u32 previousCount;
+    result = FUN_002c5254(&previousCount, *semaphore, 1);
+    if (nnResultIsFailure(result))
+        FUN_002c526c(result);
+    return inserted;
 }
-
-} /* extern "C" */
+}

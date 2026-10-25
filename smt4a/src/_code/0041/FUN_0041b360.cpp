@@ -12,7 +12,7 @@ int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
 int FUN_003849cc(...);
 int FUN_0041af74(...);
@@ -45,7 +45,7 @@ extern unsigned char DAT_00533f4c; /* 0x533f4c */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
 extern short FUN_0019e52c(short);
@@ -134,7 +134,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
     }
     FUN_003849cc(temp_v1,*(unsigned short *)(param_2 + 0x5a),2,temp_v9,*(unsigned int *)(param_2 + 0x6c))
     ;
-    FUN_0018408c(temp_v9,2);
+    fontMeasureLineAdvance(temp_v9,2);
     VectorSignedToFloat(temp_v7 + *(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v6 + *(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xb9d7d7ff,temp_v9,(int)*(short *)(temp_v3 + 8));
@@ -168,7 +168,7 @@ void FUN_0041b360(int *param_1,int param_2,int param_3,unsigned int param_4,int 
   temp_v2 = FUN_0031a914(*(unsigned char *)(param_2 + 99));
   rt_memcpy(temp_v9,temp_v2,0x40);
   puVar3 = temp_v9;
-  FUN_0018408c(puVar3,2);
+  fontMeasureLineAdvance(puVar3,2);
   temp_v3 = FUN_001834a4(0x2b,0x25);
   temp_v4 = *(short *)(temp_v3 + 10) + temp_v7;
   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

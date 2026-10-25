@@ -1,9 +1,9 @@
-/* NON_MATCHING: state loads are coalesced, scoped readiness temporaries increase the frame to 28 bytes, and the final ring-capacity test uses different registers. */
+/* NON_MATCHING: scalar backend output restores the 12-byte frame; state loads still coalesce and ring-capacity/address registers differ. */
 #include "shard/S2MovieSync.h"
 #include "shard/W6_W6Match7_MovieSource.h"
 
 extern "C" {
-void FUN_00514018(u32 backend, u32 stream, s32 *status);
+u32 FUN_00514018(u32 backend, u32 stream, u32 *status);
 u32 FUN_005142c4(u32 backend);
 
 // Advance movie synchronization state when source data or backend completion permits it.
@@ -18,9 +18,9 @@ void movieSyncPollBackend(MovieSync *sync)
                 s32 remaining;
                 sync->io.sources[sync->entryIndex[stream]]->getPosition(&remaining);
                 remaining = sync->io.sources[sync->entryIndex[stream]]->getSize() - remaining;
-                s32 status[2];
-                FUN_00514018(*sync->backend, sync->streamHandles[sync->entryIndex[stream]], status);
-                if (status[0] == 0 && remaining > 0)
+                u32 status;
+                FUN_00514018(*sync->backend, sync->streamHandles[sync->entryIndex[stream]], &status);
+                if (status == 0 && remaining > 0)
                     ready = true;
             }
         }

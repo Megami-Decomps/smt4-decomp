@@ -1,4 +1,4 @@
-/* NON_MATCHING: global/index register allocation and auxiliary-loop zero initialization differ. */
+/* NON_MATCHING: global and loop-counter scratch registers are permuted; all instructions now agree. */
 #include "map/MapStateSlots.h"
 
 extern "C" MapStateSlots *g_mapStateSlots;
@@ -30,20 +30,21 @@ static __inline void resetSlot(MapStateSlot *slot, bool clearTimer)
 extern "C" void FUN_0027cc6c(void)
 {
     struct ExtendedSlotsView { MapStateSlots base; MapStateSlot auxiliary[3]; };
+    s32 index;
     g_mapStateSlots->state = 0;
     g_mapStateSlots->unk04 = 0;
     g_mapStateSlots->unk06 = 0;
     g_mapStateSlots->unk08 = 0;
     g_mapStateSlots->unk0A = 0;
     g_mapStateSlots->allocation.count = 0;
-    for (s32 index = 0; index < 32; ++index)
+    for (index = 0; index < 32; ++index)
         resetSlot(&g_mapStateSlots->slots[index], true);
     MapStateSlots *slots = g_mapStateSlots;
-    for (s32 index = 0; index < 8; ++index) {
+    for (index = 0; index < 8; ++index) {
         slots->references.models[index].unk00 = 0;
         slots->references.models[index].model = NULL;
     }
     // The auxiliary slots lie beyond the shared MapStateSlots extent.
-    for (s32 index = 0; index < 3; ++index)
+    for (index = 0; index < 3; ++index)
         resetSlot(&reinterpret_cast<ExtendedSlotsView *>(g_mapStateSlots)->auxiliary[index], false);
 }

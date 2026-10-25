@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_002adee0(BattleStageNode *node);
+s32 modelHasLoadedAttachment(BattleStageNode *node);
 void FUN_002a0428(BattleStageNode *node, s32 enable);
 void FUN_002e1230(BattleStageNode *node, s32 enable);
 void animOwnerSetScale(BattleStageNode *node, f32 scale);
@@ -16,7 +16,7 @@ u32 FUN_00340558(BattleStageModel *stage)
     s32 index;
 
     for (index = 0; index < 3; index++) {
-        if (stage->scene.nodes[index] != NULL && !FUN_002adee0(stage->scene.nodes[index])) {
+        if (stage->scene.nodes[index] != NULL && !modelHasLoadedAttachment(stage->scene.nodes[index])) {
             return 0;
         }
     }

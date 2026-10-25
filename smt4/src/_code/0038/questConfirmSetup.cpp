@@ -1,4 +1,4 @@
-#include "common.h"
+#include "font/PlaceWin.h"
 
 struct QuestConfirmWork {
     /* 0x00 */ u32 unk00;
@@ -16,7 +16,6 @@ void FUN_002355ac(s32 enabled);
 void messageMainRequestBanner(void);
 void scrScriptProcessStartMappedEntry(QuestConfirmWork* work, const char* name);
 void* dataTable28Sub0GetRecord(void* output, s32 kind);
-void placeWinStartText(void);
 
 // Configure the quest-confirmation resource and enter state 6.
 void questConfirmSetup(QuestConfirmWork* work)
@@ -25,8 +24,7 @@ void questConfirmSetup(QuestConfirmWork* work)
         FUN_002355ac(1);
     messageMainRequestBanner();
     scrScriptProcessStartMappedEntry(work, "qc_confirm");
-    dataTable28Sub0GetRecord(work->table, work->kind);
-    placeWinStartText();
+    placeWinStartText(static_cast<const u8 *>(dataTable28Sub0GetRecord(work->table, work->kind)));
     work->state = 6;
     work->substate = 0;
 }

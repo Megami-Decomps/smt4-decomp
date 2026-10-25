@@ -31,7 +31,7 @@ void FUN_0018152c(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
 void FUN_00180310(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);
 void FUN_00183bb0(void);
-s32 FUN_0018408c(const char *text, s32 mode);
+s32 fontMeasureLineAdvance(const char *text, s32 mode);
 void FUN_00162790(s32 category, u32 color, const char *text, f32 x, f32 y, f32 scaleX, f32 scaleY, f32 speed);
 
 /* Draws one status badge: its frame, icon, count and name text. */
@@ -87,7 +87,7 @@ void FUN_003721b0(u32 unused, f32 speed, StatusRecord *record, s32 slot, s32 x, 
     FUN_00180310(0, frameX, frameY, 1, digits, 0xce, countText);
     FUN_00183bb0();
     placement = FUN_001834a4(20, slot + 0xbe5);
-    frameX = placement->x + (*placement->width - FUN_0018408c(name, 2)) / 2 + x + parallax;
+    frameX = placement->x + (*placement->width - fontMeasureLineAdvance(name, 2)) / 2 + x + parallax;
     FUN_00162790(2, 0xff, name, (f32)frameX, (f32)(placement->y + y), 1.0f, 0.0f, speed);
     efctSetSpeed(savedSpeed);
 }

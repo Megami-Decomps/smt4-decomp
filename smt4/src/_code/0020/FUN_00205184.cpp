@@ -49,7 +49,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern int FUN_002adee0(void);
+extern int modelHasLoadedAttachment(void);
 /* Supplied declaration required: cameraExportParameters. */
 /* Supplied declaration required: FUN_002b2b64. */
 extern int jobGetWork(void);
@@ -89,7 +89,7 @@ unsigned int FUN_00205184(void)
     break;
   case 1:
     piVar4 = (int *)(temp_v0 + 0x554);
-    if ((*(int *)(temp_v0 + 0x554) == 0) || (temp_v1 = FUN_002adee0(), temp_v1 != 0)) {
+    if ((*(int *)(temp_v0 + 0x554) == 0) || (temp_v1 = modelHasLoadedAttachment(), temp_v1 != 0)) {
       temp_v1 = *(int *)(temp_v0 + 0x554);
       *(unsigned int *)(temp_v0 + 0x570) = 1;
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {

@@ -15,7 +15,7 @@ int efctSetSpeed(...);
 int messageKindForward(...);
 int FUN_00288844(...);
 int gameGetUnitRecord(...);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -72,7 +72,7 @@ extern int categoryGetColor(int);
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: pairSetHalves. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bd068(unsigned short);
@@ -353,7 +353,7 @@ LAB_003b35ac:
       temp_v5 = aiStack_e0[temp_v21];
       param_3 = aiStack_d0[temp_v21];
       puVar9 = temp_v23;
-      FUN_002b6dd8(puVar9,1);
+      fontMeasureLineAdvance(puVar9,1);
       VectorSignedToFloat(aiStack_f8[temp_v21] + (int)*(short *)(temp_v14 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v5 + ((int)**(short **)(temp_v14 + 0xc) - (int)puVar9) / 2 +

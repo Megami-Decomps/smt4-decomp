@@ -20,8 +20,9 @@ typedef struct Obj {
 } Obj;
 
 /* Releases the model and buffer of each of the three parts, then the object's own model. */
-void mdlPartsRelease(Obj *obj)
+void mdlPartsRelease(void *memory)
 {
+    Obj *obj = static_cast<Obj *>(memory);
     int i = 0;
     Part *part;
 

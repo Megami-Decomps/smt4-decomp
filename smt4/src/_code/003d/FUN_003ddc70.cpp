@@ -1,5 +1,4 @@
 /* NON_MATCHING: register numbering only: retail keeps the queue pointer in r5 and the kind byte in r6; the build swaps the two. Instruction sequence is identical. */
-/* NON_MATCHING: register allocation/scheduling in the list walk only: retail loads the next pointer (ip) before the kind compare and keeps the queue in r5; the build loads it after and uses ip for the queue. */
 #include "common.h"
 
 /* A queued reflect action: kind at +4, its target at +8 and the next action at +0xC. */

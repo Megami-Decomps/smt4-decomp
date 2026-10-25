@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0017dd80(void);
-int FUN_0014192c(int a, int b);
+int renderTargetClear(int a, int b);
 int FUN_00144ab4(int arg);
 int FUN_00157558(RenderCtxA *ctx);
 int FUN_001575cc(RenderCtxA *ctx);
@@ -25,7 +25,7 @@ u32 renderCtxBeginPass(void)
         ctx = g_renderCtx;
         ctx->unk052C = 1;
         FUN_0017dd80();
-        FUN_0014192c(1, 0);
+        renderTargetClear(1, 0);
         FUN_001575cc(g_renderCtx);
         FUN_00157558(g_renderCtx);
     }

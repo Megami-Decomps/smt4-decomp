@@ -7,11 +7,11 @@ s32 FUN_003600a4(const SortItem *left, const SortItem *right)
 {
     EntrySortData *leftData = dataTable08Sub2GetRecord(left->id);
     EntrySortData *rightData = dataTable08Sub2GetRecord(right->id);
-    EntrySortBonus leftBonus;
-    EntrySortBonus rightBonus;
-    equipmentGetCappedUpgradeBonuses(left->id, &leftBonus);
-    equipmentGetCappedUpgradeBonuses(right->id, &rightBonus);
-    s32 order = leftBonus.valuesFrom1[3] + leftData->bonusesFrom1[3] - (rightBonus.valuesFrom1[3] + rightData->bonusesFrom1[3]);
+    s16 leftBonus[8];
+    s16 rightBonus[8];
+    equipmentGetCappedUpgradeBonuses(left->id, leftBonus);
+    equipmentGetCappedUpgradeBonuses(right->id, rightBonus);
+    s32 order = leftBonus[6] + leftData->bonusesFrom1[3] - (rightBonus[6] + rightData->bonusesFrom1[3]);
     if (order == 0) {
         order = rightData->key - leftData->key;
     }

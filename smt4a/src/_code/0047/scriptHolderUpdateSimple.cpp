@@ -6,8 +6,8 @@
 extern "C" {
 ScriptRunState *FUN_00275bc8(void *script, void *images);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
-void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
-void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
+u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
+void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 s32 scrRunOpcodesStub(ScriptRunState *process);
 u32 FUN_004186e0(void);
 void FUN_00418070(u32 object, s32 value);

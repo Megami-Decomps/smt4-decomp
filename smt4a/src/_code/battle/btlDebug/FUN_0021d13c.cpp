@@ -25,7 +25,7 @@ int sysPlayVoice(...);
 int FUN_003ec6d8(...);
 int FUN_003eeb4c(...);
 int FUN_003f1114(...);
-int nameEntriesRegisterVerNames(void);
+void nameEntriesRegisterVerNames(void *work);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_idivmod(...);
@@ -2556,7 +2556,7 @@ LAB_0022129c:
                 }
               }
               else if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
-                nameEntriesRegisterVerNames();
+                nameEntriesRegisterVerNames(reinterpret_cast<void *>(g_btlAux));
               }
             }
             else if (temp_v4 != 0x29) {

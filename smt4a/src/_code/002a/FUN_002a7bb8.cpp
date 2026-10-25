@@ -15,7 +15,7 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
@@ -71,7 +71,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
@@ -230,7 +230,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v17 = FUN_00180114(*psVar13);
       textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v17);
       puVar16 = temp_v20;
-      FUN_0018408c(puVar16,1);
+      fontMeasureLineAdvance(puVar16,1);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -241,7 +241,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v17 = FUN_0014bf3c(*psVar13,0);
       textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v17);
       puVar16 = temp_v20;
-      FUN_0018408c(puVar16,2);
+      fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -289,7 +289,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v17 = FUN_00180114(*psVar13);
       textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v17);
       puVar16 = temp_v20;
-      FUN_0018408c(puVar16,1);
+      fontMeasureLineAdvance(puVar16,1);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -300,7 +300,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v17 = FUN_0014bf3c(*psVar13,0);
       textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v17);
       puVar16 = temp_v20;
-      FUN_0018408c(puVar16,2);
+      fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v8 + ((int)**(short **)(temp_v12 + 0xc) - (int)puVar16) / 2 +
@@ -461,7 +461,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   temp_v17 = FUN_0014bf3c(*psVar13,0);
   textFormatBuffer(temp_v20,&LAB_002a8fec,temp_v17);
   puVar16 = temp_v20;
-  FUN_0018408c(puVar16,2);
+  fontMeasureLineAdvance(puVar16,2);
   VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v14 + 10) + temp_v8,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v9 + ((int)**(short **)(temp_v14 + 0xc) - (int)puVar16) / 2 +
@@ -550,7 +550,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   temp_v17 = FUN_0014bf3c(*psVar13,0);
   textFormatBuffer(temp_v20,&LAB_002a8fec,temp_v17);
   puVar16 = temp_v20;
-  FUN_0018408c(puVar16,2);
+  fontMeasureLineAdvance(puVar16,2);
   VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v6 + 10) + temp_v8,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v9 + ((int)**(short **)(temp_v6 + 0xc) - (int)puVar16) / 2 +

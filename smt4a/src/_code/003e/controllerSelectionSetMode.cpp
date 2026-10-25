@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_PlainData.h"
+#include "gfx/CameraAnimationApply.h"
 
 struct SelectionVisual {
     /* 0x000 */ u8 unk000[0x1fc];
@@ -26,7 +27,6 @@ struct SelectionRegistry {
 
 extern "C" {
 extern SelectionRegistry *g_handleRegistry;
-void controllerApplyAtUnitScale(u32 controller, Matrix44 *matrix, s32 flags);
 void FUN_003fe86c(SelectionVisual *, s32 mode, s32 flags, f32 x, f32 y);
 void FUN_003fd8dc(SelectionVisual *, s32 slot, u32 color);
 void FUN_00406768(void *background, s32 slot, u32 color);
@@ -39,7 +39,7 @@ void controllerSelectionSetMode(ControllerSelection *selection, s32 mode)
             selection->reference->visual->opacity = 0.0f;
         selection->selected = mode;
         Matrix44 matrix;
-        controllerApplyAtUnitScale(selection->controllers[selection->selected], &matrix, 0);
+        controllerApplyAtUnitScale(reinterpret_cast<void *>(selection->controllers[selection->selected]), &matrix, 0);
         selection->changed = 0;
         SelectionVisual *visual = selection->reference->visual;
         visual->opacity = 1.0f;

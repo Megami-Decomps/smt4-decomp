@@ -23,7 +23,7 @@ void modelSelectPrimaryMotion(AsdMotionModel *model, s32 motionIndex, f32 blend)
     }
     if ((model->flags & 1) != 0) {
         AsdTrackOwner *owner = model->owner;
-        AsdTrackNode *node = owner->hasActive != 0 ? owner->list->items[owner->index * owner->list->stride] : NULL;
+        AsdTrackNode *node = owner->activeTarget != NULL ? owner->list->items[owner->index * owner->list->stride] : NULL;
 
         if (node != NULL) {
             const AsdTypeInfo *type = node->vtbl->getType(node);

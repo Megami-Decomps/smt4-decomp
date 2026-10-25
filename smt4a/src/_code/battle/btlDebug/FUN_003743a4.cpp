@@ -25,7 +25,7 @@ int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00185e84(...);
 int dataTable00FindById(void);
 int VectorSignedToFloat(...);
@@ -73,7 +73,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -382,7 +382,7 @@ void FUN_003743a4(int param_1)
             textFormatBuffer(temp_v19,&LAB_00375678);
             temp_v3 = FUN_001834a4(0xd,0x11c);
             puVar10 = temp_v19;
-            FUN_0018408c(puVar10,3);
+            fontMeasureLineAdvance(puVar10,3);
             temp_v1 = *(short *)(temp_v3 + 8);
             temp_v0 = **(short **)(temp_v3 + 0xc);
             temp_v3 = FUN_001834a4(0xd,0x12e,(int)temp_v1);

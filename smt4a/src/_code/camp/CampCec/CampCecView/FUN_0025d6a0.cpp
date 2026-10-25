@@ -20,7 +20,7 @@ int linkHolderApplyFlag(...);
 int FUN_002e1c94(...);
 int FUN_002e207c(...);
 int FUN_002e2114(void);
-int FUN_002e2184(...);
+void outfitPreviewConfigureEquipment(struct OutfitPreview *preview, const struct OutfitPreviewEquipment *equipment);
 int campCecSetObjectValue(int);
 int gameDataGetMarkEntry(...);
 int FUN_00359974(int, unsigned int);
@@ -55,7 +55,6 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e1c94. */
 /* Supplied declaration required: FUN_002e207c. */
 /* Supplied declaration required: FUN_002e2114. */
-/* Supplied declaration required: FUN_002e2184. */
 /* Supplied declaration required: campCecSetObjectValue. */
 extern int overlayGetStatusScene(void);
 extern int buttonHelpGetPanelMode(void);
@@ -167,7 +166,8 @@ unsigned int FUN_0025d6a0(void)
           resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),1);
           temp_v5 = overlayGetStatusScene();
           resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),2);
-          FUN_002e2184(*(unsigned int *)(temp_v1 + 8),temp_v17);
+          outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(*(unsigned int *)(temp_v1 + 8)),
+                       reinterpret_cast<const OutfitPreviewEquipment *>(temp_v17));
           FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
           linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);
           *(unsigned int *)(temp_v1 + 0x124) = *(unsigned int *)(temp_v1 + 0x114);
@@ -683,7 +683,8 @@ LAB_0025e324:
             resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),1);
             temp_v5 = overlayGetStatusScene();
             resourceEntryMarkReleased(*(unsigned int *)(temp_v5 + 0x1c),2);
-            FUN_002e2184(*(unsigned int *)(temp_v1 + 8),temp_v17);
+            outfitPreviewConfigureEquipment(reinterpret_cast<OutfitPreview *>(*(unsigned int *)(temp_v1 + 8)),
+                         reinterpret_cast<const OutfitPreviewEquipment *>(temp_v17));
             FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
             linkHolderApplyFlag(*(unsigned int *)(temp_v1 + 8),0);
             *(unsigned int *)(temp_v1 + 0x124) = *(unsigned int *)(temp_v1 + 0x114);

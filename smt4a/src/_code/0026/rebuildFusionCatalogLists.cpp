@@ -22,7 +22,7 @@ u32 entryDefIsAvailable(void *, u16);
 u32 FUN_002a4b28(u32);
 u16 FUN_0026264c(u32);
 u32 FUN_004da77c(void *, s32, u32);
-u32 arrayContainsU16(const u16 *, s32, u16);
+s32 arrayContainsU16(const u16 *, s32, u32);
 s32 FUN_002b2ca8(const void *, const void *);
 u32 FUN_00229210(s32);
 

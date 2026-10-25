@@ -40,13 +40,13 @@ executable; names, types and source organization are still being recovered.
 The hash is of the decompressed program, so any container of the same build works.
 
 Progress counts first-party code only: Atlus's engine (AsdSDK) and the game. Nintendo's SDK,
-NintendoWare, NEX, Mobiclip and the ARM runtime still relink with everything else, but are listed in
-`config/third_party.txt` and not counted ([what counts](docs/project.md#what-counts)).
+NintendoWare, NEX and OnlineCore, Mobiclip and the ARM runtime still relink with everything else, but
+are listed in `config/third_party.txt` and not counted ([what counts](docs/project.md#what-counts)).
 
 | Version | First-party functions | Proven by relink | Readable | Third-party (not counted) |
 |---|---|---|---|---|
-| `smt4` | 7,795 | 4,155 | 1,721 | 3,083 |
-| `smt4a` | 10,246 | 5,297 | 2,255 | 7,080 |
+| `smt4` | 7,786 | 4,205 | 1,743 | 3,094 |
+| `smt4a` | 9,578 | 5,028 | 2,141 | 7,749 |
 
 "Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
 [project notes](docs/project.md#proof) explain the measurements and the six functions per game that

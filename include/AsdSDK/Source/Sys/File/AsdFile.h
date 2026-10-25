@@ -33,8 +33,8 @@ typedef struct AsdFileRequest {
     /* 0x028 */ u32 alignment;           /* 0x80 by default */
     /* 0x02c */ char path[ASD_FILE_PATH_LEN];
     /* 0x12c */ void *stream;            /* the open file */
-    /* 0x130 */ void (*onDone)(struct AsdFileRequest *); /* called when DONE or FAILED */
-    /* 0x134 */ struct AsdFileRequest *onDoneArg;        /* what onDone gets (the request itself if NULL) */
+    /* 0x130 */ void (*onDone)(void *); /* called when DONE or FAILED */
+    /* 0x134 */ void *onDoneArg;        /* what onDone gets (the request itself if NULL) */
     /* 0x138 */ void (*onOpen)(void *stream);            /* called with the open file before it is read */
     /* 0x13c */ struct AsdFileRequest *next;
     /* 0x140 */ union {
@@ -43,6 +43,8 @@ typedef struct AsdFileRequest {
     };
 } AsdFileRequest;
 typedef char AsdFileRequestReadResultOffset[
+    offsetof(AsdFileRequest, onDone) == 0x130 &&
+    offsetof(AsdFileRequest, onDoneArg) == 0x134 &&
     offsetof(AsdFileRequest, readResult) == 0x140 &&
     sizeof(AsdFileRequest) == 0x144 ? 1 : -1];
 

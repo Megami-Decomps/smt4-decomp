@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
 /* The view's layout past the shared base, as its state handlers see it (Shin Megami Tensei IV). */
-struct Obj4223f8Layout {
+struct Obj4223f8HandlerView {
     /* 0x000 */ u8 unk000[0x14];
     /* 0x014 */ u32 state;
     /* 0x018 */ u32 substate;
@@ -54,7 +54,7 @@ void FUN_00233670(void *selection, s32 a, s32 b, s32 count);
 /* State handler: the highlighted entry changed; refreshes the cursor, the help line and the detail text. */
 void Obj4223f8::confirmSelection()
 {
-    Obj4223f8Layout *self = reinterpret_cast<Obj4223f8Layout *>(this);
+    Obj4223f8HandlerView *self = reinterpret_cast<Obj4223f8HandlerView *>(this);
     s32 advanced = uiAnimationAdvanceChannel(self->channels, selectedIndex);
     u8 *point = self->points + selectedIndex * 0x8C;
     s32 y = vec2GetYInt(point);

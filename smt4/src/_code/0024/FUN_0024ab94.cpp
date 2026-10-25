@@ -1,48 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024ab94` (_code @ 0x24ab94, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mode branches merge after the second arm rather than placing it after the error return. */
+#include "shard/RomFileOpenState.h"
 
-extern "C" {
+extern "C" s32 FUN_00254884(const char *path, char *resolvedPath, s32 flags);
+extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
+extern "C" void FUN_002c3510(u32 result);
 
-int FUN_00254884(int, unsigned char [500], int);
-int FUN_002bb5a4(int, unsigned char [500], int);
-int FUN_002c3510(void);
-
-/* Supplied declaration required: FUN_00254884. */
-/* Supplied declaration required: FUN_002bb5a4. */
-/* Supplied declaration required: FUN_002c3510. */
-
-
-int FUN_0024ab94(int param_1,int param_2,int param_3)
-
+static __inline s32 romFileOpen(RomOpenFile *file, const char *path, u32 mode)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [500];
-  
-  FUN_00254884(param_2,temp_v1,0);
-  if (param_2 != 0) {
-    if (param_3 != 1) {
-      *(unsigned int *)(param_1 + 0x14) = 0;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-      temp_v0 = param_1 + 8;
-      *(unsigned int *)(param_1 + 0x10) = 0;
-      FUN_002bb5a4(temp_v0,temp_v1,1);
-    }
-    else {
-      *(unsigned int *)(param_1 + 0x14) = 0;
-      *(unsigned int *)(param_1 + 0x18) = 0;
-      *(unsigned int *)(param_1 + 0xc) = 0;
-      temp_v0 = param_1 + 8;
-      *(unsigned int *)(param_1 + 0x10) = 0;
-      FUN_002bb5a4(temp_v0,temp_v1,2);
-    }
-    FUN_002c3510();
-    return temp_v0;
-  }
-  FUN_002c3510();
-  return -0x1f1fb944;
+    romOpenFileInitialize(file);
+    return FUN_002bb5a4(file, path, mode);
 }
 
-} /* extern "C" */
+// Resolve the path and initialize the ROM file in read or write mode.
+extern "C" s32 FUN_0024ab94(RomFileOpenState *state, const char *path, s32 mode)
+{
+    char resolvedPath[500];
+    s32 result;
+    if (FUN_00254884(path, resolvedPath, 0)) {
+        if (mode != 1) {
+            result = romFileOpen(&state->file, resolvedPath, 1);
+        } else {
+            result = romFileOpen(&state->file, resolvedPath, 2);
+        }
+        FUN_002c3510(result);
+        return result;
+    }
+    result = (s32)0xe0e046bc;
+    FUN_002c3510(result);
+    return result;
+}

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00126ba0(int *);
 int rt_memclr(int, int);
 int bufferAppendU16BigEndian(...);
-int FUN_0030dd02(...);
+int crc32Dispatch(...);
 int zlibTrStoredBlock(int *, int, int);
 int ringBufferRead(int *);
 int __aeabi_uidivmod(unsigned int, int);
@@ -24,7 +24,7 @@ extern int FUN_00126358(int *, int);
 /* Supplied declaration required: rt_memclr. */
 extern int FUN_0030db5c(unsigned int, unsigned int);
 /* Supplied declaration required: bufferAppendU16BigEndian. */
-/* Supplied declaration required: FUN_0030dd02. */
+/* Supplied declaration required: crc32Dispatch. */
 /* Supplied declaration required: zlibTrStoredBlock. */
 /* Supplied declaration required: ringBufferRead. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -101,7 +101,7 @@ LAB_00126f96:
     goto LAB_00126f96;
   }
   temp_v1 = 0;
-  FUN_0030dd02(0,0);
+  crc32Dispatch(0,0);
   param_1[0xc] = temp_v1;
   temp_v1 = piVar13[5];
   piVar13[5] = temp_v1 + 1;
@@ -186,7 +186,7 @@ LAB_00126f96:
     }
     if (*(int *)(piVar13[7] + 0x2c) != 0) {
       temp_v1 = param_1[0xc];
-      FUN_0030dd02(temp_v1,piVar13[2],piVar13[5]);
+      crc32Dispatch(temp_v1,piVar13[2],piVar13[5]);
       param_1[0xc] = temp_v1;
     }
     piVar13[1] = 0x45;
@@ -201,7 +201,7 @@ LAB_00126fa2:
         if (temp_v2 == piVar13[3]) {
           if ((*(int *)(piVar13[7] + 0x2c) != 0) && (temp_v12 < temp_v2)) {
             temp_v1 = param_1[0xc];
-            FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
+            crc32Dispatch(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
             param_1[0xc] = temp_v1;
           }
           ringBufferRead(param_1);
@@ -216,7 +216,7 @@ LAB_00126fa2:
       }
       if ((*(int *)(piVar13[7] + 0x2c) != 0) && (temp_v2 < (unsigned int)piVar13[5])) {
         temp_v1 = param_1[0xc];
-        FUN_0030dd02(temp_v1,piVar13[2] + temp_v2,piVar13[5] - temp_v2);
+        crc32Dispatch(temp_v1,piVar13[2] + temp_v2,piVar13[5] - temp_v2);
         param_1[0xc] = temp_v1;
       }
       if (piVar13[8] != *(int *)(piVar13[7] + 0x14)) {
@@ -238,7 +238,7 @@ LAB_00127042:
         if (temp_v2 == piVar13[3]) {
           if ((*(int *)(piVar13[7] + 0x2c) != 0) && (temp_v12 < temp_v2)) {
             temp_v1 = param_1[0xc];
-            FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
+            crc32Dispatch(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
             param_1[0xc] = temp_v1;
           }
           ringBufferRead(param_1);
@@ -259,7 +259,7 @@ LAB_00127042:
       } while (temp_v9 != '\0');
       if ((*(int *)(piVar13[7] + 0x2c) != 0) && (temp_v12 < (unsigned int)piVar13[5])) {
         temp_v1 = param_1[0xc];
-        FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,piVar13[5] - temp_v12);
+        crc32Dispatch(temp_v1,piVar13[2] + temp_v12,piVar13[5] - temp_v12);
         param_1[0xc] = temp_v1;
       }
       if (temp_v0) {
@@ -281,7 +281,7 @@ LAB_001270d0:
         if (temp_v2 == piVar13[3]) {
           if ((*(int *)(piVar13[7] + 0x2c) != 0) && (temp_v12 < temp_v2)) {
             temp_v1 = param_1[0xc];
-            FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
+            crc32Dispatch(temp_v1,piVar13[2] + temp_v12,temp_v2 - temp_v12);
             param_1[0xc] = temp_v1;
           }
           ringBufferRead(param_1);
@@ -302,7 +302,7 @@ LAB_001270d0:
       } while (temp_v9 != '\0');
       if ((*(int *)(piVar13[7] + 0x2c) != 0) && (temp_v12 < (unsigned int)piVar13[5])) {
         temp_v1 = param_1[0xc];
-        FUN_0030dd02(temp_v1,piVar13[2] + temp_v12,piVar13[5] - temp_v12);
+        crc32Dispatch(temp_v1,piVar13[2] + temp_v12,piVar13[5] - temp_v12);
         param_1[0xc] = temp_v1;
       }
       if (temp_v0) {
@@ -330,7 +330,7 @@ LAB_0012715a:
         piVar13[5] = temp_v1 + 1;
         *(char *)(piVar13[2] + temp_v1) = (char)((unsigned int)temp_v8 >> 8);
         temp_v1 = 0;
-        FUN_0030dd02(0,0);
+        crc32Dispatch(0,0);
         param_1[0xc] = temp_v1;
         piVar13[1] = 0x71;
       }

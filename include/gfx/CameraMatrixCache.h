@@ -25,4 +25,13 @@ struct CameraMatrixCache {
 };
 typedef char CameraMatrixCacheOffsets[(offsetof(CameraMatrixCache, projection) == 0x248 && offsetof(CameraMatrixCache, parameters) == 0x4A0) ? 1 : -1];
 typedef char CameraMatrixCacheStereoOffsets[(offsetof(CameraMatrixCache, stereoOffset) == 0x500 && offsetof(CameraMatrixCache, stereoScale) == 0x504) ? 1 : -1];
+
+/* The active camera also owns the stereo-builder distance beyond the matrix cache. */
+struct CameraMatrixStereoCache : CameraMatrixCache {
+    /* 0x508 */ f32 stereoParameter;
+};
+typedef char CameraMatrixStereoCacheLayoutCheck[
+    sizeof(CameraMatrixCache) == 0x508 &&
+    offsetof(CameraMatrixStereoCache, stereoParameter) == 0x508 &&
+    sizeof(CameraMatrixStereoCache) == 0x50C ? 1 : -1];
 #endif

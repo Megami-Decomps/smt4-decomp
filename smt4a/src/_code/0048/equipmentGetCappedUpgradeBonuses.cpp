@@ -34,12 +34,11 @@ extern "C" {
 const EquipmentIdRange *FUN_0019c06c(u32 id);
 EquipmentUpgradeStorage *FUN_00239200();
 
-void equipmentGetCappedUpgradeBonuses(u32 id, EntrySortBonus *bonus)
+void equipmentGetCappedUpgradeBonuses(u32 id, s16 *values)
 {
     const EquipmentIdRange *range = FUN_0019c06c(id);
     u8 kind = range != NULL ? range->kind : 0;
     EquipmentUpgradeStorage *storage = FUN_00239200();
-    s16 *values = (s16 *)bonus;
     values[0] = 0;
     values[1] = 0;
     values[2] = 0;

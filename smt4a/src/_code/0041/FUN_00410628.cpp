@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct BtlCameraA;
+
 extern "C" {
 
 int FUN_0013c174(unsigned char *, int);
@@ -22,7 +24,7 @@ int FUN_00416610(unsigned int);
 int FUN_0047f98c(unsigned int);
 int mathVectorClear(...);
 int FUN_004f1c5c(...);
-int FUN_004f1edc(...);
+void FUN_004f1edc(BtlCameraA *camera);
 int cameraBeginScalarTransition(...);
 int FUN_004f41b0(...);
 int FUN_004f5238(...);
@@ -100,7 +102,6 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0047f98c. */
 /* Supplied declaration required: mathVectorClear. */
 /* Supplied declaration required: FUN_004f1c5c. */
-/* Supplied declaration required: FUN_004f1edc. */
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
@@ -370,7 +371,7 @@ void FUN_00410628(int param_1)
     mathVectorClear(g_btlCamera);
     markerOwnerUpdatePositions(g_btlStageModel);
     FUN_004f1c5c(g_btlCamera,0);
-    FUN_004f1edc(g_btlCamera);
+    FUN_004f1edc(reinterpret_cast<BtlCameraA *>(g_btlCamera));
     temp_v3 = g_btlCamera;
     *(unsigned int *)(g_btlCamera + 0xc) = *(unsigned int *)(g_btlCamera + 0x14);
     *(unsigned int *)(temp_v3 + 0x10) = *(unsigned int *)(temp_v3 + 0x18);

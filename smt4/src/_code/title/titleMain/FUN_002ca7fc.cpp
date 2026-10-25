@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028f4b4(int, int);
+float FUN_0028f4b4(const char *, unsigned int, float);
 int FUN_002be5a4(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
@@ -39,7 +39,7 @@ extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
-unsigned int FUN_002ca7fc(void)
+int FUN_002ca7fc(unsigned int handle)
 
 {
 /* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
@@ -109,9 +109,8 @@ unsigned int FUN_002ca7fc(void)
     do {
       dataTableGet(0x3a,0);
       temp_v4 = dataTableGetEntries();
-      temp_v6 = (float)temp_v8;
       temp_v4 = temp_v4 + temp_v1 * 0x56;
-      FUN_0028f4b4(temp_v4,4);
+      temp_v6 = FUN_0028f4b4(reinterpret_cast<const char *>(temp_v4), 4, 0.0f);
       temp_v5 = (int)temp_v0 - (int)temp_v6;
       temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = temp_v6 * (float)temp_v9;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022e0fc(int, int);
 int recordAppendFloatEntry(int, unsigned char [8]);
 int FUN_0022e17c(unsigned char [8], int, int);
-int FUN_0022e2fc(void);
+void FUN_0022e2fc(void *table);
 int FUN_00233670(...);
 int FUN_00233730(...);
 int FUN_00233818(void);
@@ -74,7 +74,7 @@ void FUN_0022d434(int param_1)
   FUN_00233818();
   temp_v2 = param_1 + 0x5a8;
   if (*(char *)(param_1 + 0x5a4) != '\x01') {
-    FUN_0022e2fc();
+    FUN_0022e2fc(reinterpret_cast<void *>(temp_v2));
     temp_v10 = 0;
     temp_v9 = 0;
     do {
@@ -126,7 +126,7 @@ void FUN_0022d434(int param_1)
     jyoucyuGetTableEntry(0);
   }
   else {
-    FUN_0022e2fc();
+    FUN_0022e2fc(reinterpret_cast<void *>(temp_v2));
     temp_v9 = gameGetSlotTable();
     temp_v4 = 0;
     if (*(char *)(temp_v9 + 0x910b) != '\0') {

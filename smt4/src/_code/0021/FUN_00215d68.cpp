@@ -11,7 +11,7 @@ int FUN_0029a17c(...);
 int dataTable54FindById(...);
 int partyMemberFindById(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int devilGetRecord(...);
 int demonGetRaceLabel(...);
 int FUN_002bd068(...);
@@ -73,7 +73,7 @@ extern int FUN_0029efc0(unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: partyMemberFindById. */
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: demonGetRaceLabel. */
 /* Supplied declaration required: FUN_002bd068. */
@@ -315,7 +315,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
         temp_v11 = demonGetRaceLabel(*psVar10,0);
         textFormatBuffer(temp_v15,&LAB_002162d4,temp_v11);
         puVar11 = temp_v15;
-        FUN_002b6dd8(puVar11,2);
+        fontMeasureLineAdvance(puVar11,2);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)&param_1->field_0x0 +

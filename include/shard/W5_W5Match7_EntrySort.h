@@ -60,7 +60,7 @@ struct SortDefaults { s32 left, right; };
 
 extern "C" {
 EntrySortData *dataTable08Sub2GetRecord(u32 id);
-void equipmentGetCappedUpgradeBonuses(u32 id, EntrySortBonus *bonus);
+void equipmentGetCappedUpgradeBonuses(u32 id, s16 *bonuses);
 s32 FUN_00345098(s32 left, s32 right);
 extern SortDefaults DAT_0052b8ac[2];
 }

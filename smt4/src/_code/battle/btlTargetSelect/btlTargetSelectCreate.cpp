@@ -1,4 +1,4 @@
-/* NON_MATCHING: needs the _ZN9Obj420780C1Ev / TargetMarkerEntry constructor / vtable renames applied; register assignment of the hoisted constants may differ (twin of smt4a FUN_00363990). */
+/* NON_MATCHING: the hoisted zero and one constants use exchanged callee-saved registers. */
 #include "battle/btlMain.h"
 #include "battle/btlTargetSelect.h"
 #include "shard/W6_W6Match7_DrawParameters.h"

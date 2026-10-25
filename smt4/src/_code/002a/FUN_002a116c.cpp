@@ -1,12 +1,12 @@
-/* NON_MATCHING: Retail push {lr} differs from recovered push {r4, lr}. */
+/* NON_MATCHING: result-code pointer forwarding restored; classification return blocks and call-stack padding differ. */
 #include "common.h"
 
-extern "C" u32 legacyResourceIdRemap(void);
+extern "C" u32 legacyResourceIdRemap(const u32 *result);
 
-// Accept selected remapped resource IDs or IDs in the low-bit interval [0x60, 0x80).
-extern "C" u32 FUN_002a116c(void)
+// Recognize selected remapped result codes or module-0x4e descriptions in [0x60, 0x80).
+extern "C" u32 FUN_002a116c(const u32 *result)
 {
-    const s32 resourceId = (s32)legacyResourceIdRemap();
+    const s32 resourceId = (s32)legacyResourceIdRemap(result);
 
     if ((resourceId & 0x3fc00) != 0x13800) {
         return 0;

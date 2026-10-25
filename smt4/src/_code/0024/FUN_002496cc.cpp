@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_EffectRender.h"
 
 extern "C" {
-extern EffectPositionDefaults DAT_004d8b40;
+extern EffectPositionDefaults g_effectEditorSettings;
 extern EffectRenderGlobals DAT_004ea81c;
 void FUN_00249678(void);
 /* Release armlink removes this optional three-argument transform hook. */
@@ -13,7 +13,7 @@ void FUN_002496cc(const EffectPositionControl *control)
 {
     EffectRenderGlobals *globals = &DAT_004ea81c;
     if (control->flags & 0x18) {
-        globals->current = DAT_004d8b40.position;
+        globals->current = g_effectEditorSettings.position;
         globals->vector = effectRenderSource()->origin;
         FUN_00249678();
         EffectRenderVector transformed = globals->current;
@@ -30,7 +30,7 @@ void FUN_002496cc(const EffectPositionControl *control)
         globals->current.z *= scale;
         globals->current.w *= scale;
     }
-    globals->vector = DAT_004d8b40.position;
+    globals->vector = g_effectEditorSettings.position;
     FUN_00249678();
     globals->vector = effectRenderSource()->origin;
     FUN_00249678();

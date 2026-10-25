@@ -23,10 +23,10 @@ void FUN_00230d2c(void);
 void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, u32 f, s32 text);
 void statusDownRebuildOwnedDemonList(s16 *demons);
 void FUN_002f001c(s16 *pending);
-void statusReplaceSkills(u8 *skills, s32 count);
+void statusReplaceSkills(const u16 *skills, u8 count);
 void FUN_00333de0(void);
 void FUN_0035da20(u32 *slots, s32 value);
-void statusMarkNewSkills(u8 *skills, s32 count);
+void statusMarkNewSkills(const u16 *skills, u8 count);
 u8 countUnlockedSlots(void);
 u8 getUnlockedSlotCount(u32 arg);
 s32 slotRecordFindById(u16 id);
@@ -64,9 +64,9 @@ void FUN_002f0420(s32 second, u32 unused, s16 *unusedList)
             slots = 8;
         }
     }
-    statusReplaceSkills(state + 0x13E0, slots);
+    statusReplaceSkills(reinterpret_cast<const u16 *>(state + 0x13E0), slots);
     if (second != 0) {
-        statusMarkNewSkills(state + 0x1A20, slots);
+        statusMarkNewSkills(reinterpret_cast<const u16 *>(state + 0x1A20), slots);
     }
     u32 out[4] = {0, 0, 0, 0};
     u32 *outPtr;

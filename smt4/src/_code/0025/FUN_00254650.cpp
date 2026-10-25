@@ -2,13 +2,7 @@
 #include "camp/CampCec/OutfitPreview.h"
 /* Interaction fields extend beyond the shared model-preview prefix. */
 struct PreviewInteractionView {
-    union {
-        OutfitPreview preview;
-        struct {
-            u8 unk00[0x18];
-            f32 scale;
-        } zoom;
-    };
+    OutfitPreview preview;
     u32 unk20;
     u32 animation;
     s32 zoomSteps;
@@ -24,7 +18,7 @@ void FUN_0020ffe8(void *model, u32 animation, f32 start, f32 blend);
 }
 static inline void updatePreviewZoom(PreviewInteractionView *work)
 {
-    FUN_00293e08(work->preview.modelGroup, work->zoom.scale, work->zoom.scale, work->zoom.scale);
+    FUN_00293e08(work->preview.modelGroup, work->preview.scale, work->preview.scale, work->preview.scale);
     f32 eyeY = 6.3f;
     if (work->zoomSteps > 0)
         eyeY += static_cast<f32>(work->zoomSteps) * 0.08f;
@@ -34,15 +28,15 @@ extern "C" void FUN_00254650(PreviewInteractionView *work, u32 action)
 {
     switch (action) {
     case 0:
-        if (work->zoom.scale < 0.03f) {
-            work->zoom.scale += 0.0005f;
+        if (work->preview.scale < 0.03f) {
+            work->preview.scale += 0.0005f;
             ++work->zoomSteps;
         }
         updatePreviewZoom(work);
         break;
     case 1:
-        if (work->zoom.scale > 0.012f) {
-            work->zoom.scale -= 0.0005f;
+        if (work->preview.scale > 0.012f) {
+            work->preview.scale -= 0.0005f;
             --work->zoomSteps;
         }
         updatePreviewZoom(work);

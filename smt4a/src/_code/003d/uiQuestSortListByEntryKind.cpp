@@ -31,10 +31,10 @@ extern void arraySortQsort(void *list, u32 count, u32 size, SortCompare compare)
 extern int dataTable1bOr1cCompareRecordKeys(const void *, const void *);
 extern int dataTableCompareRecordValues(const void *, const void *);
 extern int FUN_002b2b34(const void *, const void *);
-extern int FUN_0034f46c(const void *, const void *);
+extern int itemCompareMappedGroupAndKeyDescending(const void *, const void *);
 extern int FUN_002fdc2c(const void *, const void *);
 extern int FUN_003759f0(const void *, const void *);
-extern int FUN_002417a8(const void *, const void *);
+extern int entryCompareFlagsCategoryOrder(const void *, const void *);
 extern int FUN_002fdb20(const void *, const void *);
 
 /* Sorts the menu's list with the comparison of the selected quest entry's kind (the primary or
@@ -61,7 +61,7 @@ void uiQuestSortListByEntryKind(s32 mode)
             if (primary) {
                 qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002b2b34);
             } else {
-                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_0034f46c);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, itemCompareMappedGroupAndKeyDescending);
             }
         }
         if ((*info & 0x7F) == 0x18) {
@@ -73,7 +73,7 @@ void uiQuestSortListByEntryKind(s32 mode)
         }
         if ((*info & 0x7F) == 0x19) {
             if (primary) {
-                arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002417a8);
+                arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, entryCompareFlagsCategoryOrder);
             } else {
                 arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002fdb20);
             }

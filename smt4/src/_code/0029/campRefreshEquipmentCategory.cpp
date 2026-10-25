@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail retains a null-address guard on the selected camp grid subobject; the remaining instructions match. */
 #include "common.h"
 
 struct CampEquipmentGrid { u8 data[0x64]; };
@@ -69,6 +68,8 @@ void campRefreshEquipmentCategory(u32 category)
     default:
         return;
     }
+    if (grid == NULL)
+        return;
     s32 count = 0;
     for (s32 id = first; id <= last; ++id) {
         if (flagValueIsPositive(id))

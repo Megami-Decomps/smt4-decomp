@@ -1,5 +1,6 @@
-/* NON_MATCHING: position copies merge into doubleword stores and global/conditional argument scheduling differs; -O2 candidate. */
+/* NON_MATCHING: restored spawn-index return/argument chain; position copies and global/conditional scheduling still differ. */
 #include "map/lmapMain.h"
+#include "shard/W6_W6Match2_AocTable23.h"
 
 struct AreaHandleOwner { u32 unk00; u32 flags; };
 struct AreaHandle { u32 unk00; AreaHandleOwner *owner; };
@@ -37,8 +38,8 @@ extern AreaMainState *g_lmapMainState;
 extern AreaScene *g_lmapScene;
 extern AreaGameFlags g_gameState;
 extern void *g_handleRegistry;
-void FUN_003b5714(s32, u32, u32);
-const AreaSpawn *dataTableGetRecord23();
+u32 FUN_003b5714(s32 category, s32 subtype, u32 variant);
+Table23Record *dataTableGetRecord23(u32 index);
 void mapPlaceSet(s32, s32, s32);
 void FUN_00227a70();
 void FUN_002a2e98(s32, u32, u32, u32);
@@ -64,8 +65,8 @@ void FUN_002737a8();
 void lmapInitializeArea(u32 area, u32 spawnId)
 {
     AreaMainState *state = g_lmapMainState;
-    FUN_003b5714(state->map, area, spawnId);
-    const AreaSpawn *spawn = dataTableGetRecord23();
+    const AreaSpawn *spawn = reinterpret_cast<const AreaSpawn *>(
+        dataTableGetRecord23(FUN_003b5714(state->map, area, spawnId)));
     mapPlaceSet(spawn->map, spawn->area, spawn->place);
     state->area = area;
     AreaScene *scene = g_lmapScene;

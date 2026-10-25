@@ -6262,3 +6262,93 @@
 0038b1cc scrComm_Sequence16Request inferred [med] twin
 004c0834 mathScaleByCategory inferred [med] value * category scale factor
 004c3d78 mathScaleByCategoryEnabled inferred [med] value * enabled/disabled category scale factor
+002ea528 libc_strncpy evidence ISO C strncpy
+001bc604 rt_fpResultDispatch inferred twin of smt4 FUN_001559ec
+002e410c __rw_string_rep_allocate inferred Rogue Wave basic_string representation allocator (__rw_throw, __rw_allocate(capacity+14))
+00634bc0 g_effectEditorSettings inferred size:0x740 Twin reset FUN_003ca9dc loads DAT_006352f0 vector address and subtracts 0x730 for mode bytes at +0x88..0x8A; recovered containing object base 0x634bc0.
+00557d90 _ZTV9Obj557d90 evidence size:0x10 independent vtable: image words 0,0,0,0x41be5c at 0x557d90; currently oversized Obj4208d4 table swallows it.
+0041bd84 _ZN9Obj557d90C1EP12AsdMdlObject inferred [high] Native particle constructor stores address point 0x557d98, alloc caller FUN_0041aca8 requests size0xb4 and passes model.
+0041be5c _ZN9Obj557d90D0Ev inferred [high] Particle vtable deleting destructor at 0x557d9c.
+00557da0 _ZTV9Obj557da0 evidence size:0x14 vtable: words 0,0,0x41c590,0x41c570,0x41c58c at 0x557da0
+0030e734 _ZN9Obj558cdcC1EPvS0_ inferred Native constructor for _ZTV9Obj558cdc; initializes 24-byte intrusive registered task with two pointer payloads
+00157fa0 _ZN9Obj557c28C1Ev inferred [high] Native 0xc0-byte model-command owner constructor stores vtable addresspoint _ZTV9Obj557c28+8, initializes queue state and registers first instance.
+00476fb4 _ZN7AocMenu18restartPreviousRunEv inferred Native AOC scene callback: restartPreviousRun
+00477744 _ZN7AocMenu14runQuestDialogEv inferred Native AOC scene callback: runQuestDialog
+0047b224 _ZN7AocMenu15runConfirmationEv inferred Native AOC scene callback: runConfirmation
+0047b78c _ZN7AocMenu19runConnectedProcessEv inferred Native AOC scene callback: runConnectedProcess
+00477894 _ZN7AocMenu18runWindowOperationEv inferred Native AOC scene callback: runWindowOperation
+00479358 _ZN7AocMenu14runMainProcessEv inferred Native AOC scene callback: runMainProcess
+0047b4b4 _ZN7AocMenu16runResultProcessEv inferred Native AOC scene callback: runResultProcess
+0047bd94 _ZN7AocMenu15runQueryProcessEv inferred Native AOC scene callback: runQueryProcess
+00478edc _ZN7AocMenu13runScriptMenuEv inferred Native AOC scene callback: runScriptMenu
+0047815c _ZN7AocMenu15readContentCodeEv inferred Native AOC scene callback: readContentCode
+004782ec _ZN7AocMenu9closeMenuEv inferred Native AOC scene callback: closeMenu
+00477030 _ZN7AocMenu17pollContentStatusEv inferred Native AOC scene callback: pollContentStatus
+00478dc4 _ZN7AocMenu18waitCloseAnimationEv inferred Native AOC scene callback: waitCloseAnimation
+004772b0 _ZN7AocMenu14runLicenseFlowEv inferred Native AOC scene callback: runLicenseFlow
+00477c74 _ZN7AocMenu15runPurchaseListEv inferred Native AOC scene callback: runPurchaseList
+00478778 _ZN7AocMenu20releaseStepResourcesEv inferred Native AOC scene callback: releaseStepResources
+00478608 _ZN7AocMenu14returnToScriptEv inferred Native AOC scene callback: returnToScript
+004785b4 _ZN7AocMenu16leaveWhenAocFreeEv inferred Native AOC scene callback: leaveWhenAocFree
+0047c81c _ZN7AocMenu23updateRequestTransitionEv inferred Native AOC scene callback: updateRequestTransition
+0047c65c _ZN7AocMenu23initializeStepCallbacksEv inferred Native AOC callback initializeStepCallbacks
+00477c70 _ZN7AocMenu20beginWindowOperationEv inferred Native AOC callback beginWindowOperation
+00477c6c _ZN7AocMenu18endWindowOperationEv inferred Native AOC callback endWindowOperation
+0047a480 _ZN7AocMenu13drawSelectionEv inferred Native AOC callback drawSelection
+0047a6f0 _ZN7AocMenu8drawMenuEv inferred Native AOC callback drawMenu
+0047bc8c _ZN7AocMenu20endRequestTransitionEv inferred Native AOC callback endRequestTransition
+006352f0 g_effectEditorVector inferred size:0x10 Twin four-float editor vector zeroed by FUN_003ca9dc; same-file BSS immediately follows settings owner.
+00157194 _ZN19ResourceVectorOwnerD1Ev inferred non-virtual ResourceVectorOwner destructor: releases the buffer and file, then its std::vector member
+00159944 _ZN2nn3hid3CTR9PadReaderC1EPv evidence size:0x40 nonvirtual HID PadReader: shared memory@0/index4, clamper@C, initialized flag30 and words38/3C; native ctor needed for FUN_0013eb10 static
+00159978 _ZN2nn3hid3CTR9PadReaderD1Ev evidence size:0x40 nonvirtual PadReader empty destructor, registered by FUN_0013eb10 native function-local static; retail bx lr
+0016ebbc _ZN2nn3hid3CTR18AnalogStickClamperC1Ev evidence size:0x24 embedded PadReader member@C; ctor returns member address so native outer ctor derives this with sub r0,#C
+00515598 _ZN7VariantC1Ev evidence size:0x14 nonvirtual tagged Variant ctor value0/type1/children sentinel8/allocator10; native placement construction required for mask list ADDS null guard
+00434d9c _ZN12MaskWorkBodyC1Ev inferred Initializes self-linked output/pending lists, three zero words and active byte at body+0x24; returns body this. Native body subobject constructor called conditionally from new mask-state node at node+8.
+00634c50 g_effectEditorResourceName inferred size:0x40 twin resource-name storage before separately referenced initial vector
+00634c90 g_effectEditorInitialVector inferred size:0x10 twin initial render vector, independently referenced DAT_00634c90 through9c
+00634ca0 g_effectEditorWorkingSnapshot inferred size:0x80 twin working record copied by editor update-preserving-state
+00634d20 g_effectEditorSavedSnapshot inferred size:0x80 twin saved record copied by editor activation and restore
+00634da0 g_effectEditorCamera inferred size:0x50c CameraMatrixStereoCache; next camera defaults base is exactly+50c
+006352ac g_effectEditorCameraDefaults inferred size:0x3c twin five contiguous Vec3f defaults, initialized by FUN_002830cc
+002ea528 strncpy evidence ISO C strncpy, called by its standard name from <string.h>
+0031144c streamReaderReadWordValue inferred [high] Reads one u32 through FUN_003026b0 into local output and returns it.
+003112f6 onlineStatisticsAccumulateSample inferred [high] Adds unsigned sample to total/count and updates minimum and maximum.
+0031126c onlineJobDispatchInstanceResult inferred [high] Finds instance by job id at 0x6c, delivers copied callback result, marks job done.
+0024400c btlViewResetDefaults inferred [high] Clears alternate battle-view state and restores 120/80 default limits.
+0018408c fontMeasureLineAdvance inferred [high] Twin of font line advance measurement.
+001ab8c0 modelHasLoadedAttachment inferred [high] Twin of attachment readiness predicate.
+0030dd02 crc32Dispatch inferred [high] zlib CRC32 wrapper selecting little-endian or big-endian implementations
+0030d36a onlineResultsClear inferred [high] erase all OnlineResultRecord vector entries retaining allocation
+001c0544 runtimeDispatchObjectRelease inferred [med] invoke one of five object callbacks selected by leading type code
+00330ad4 keyedRecordFindPart inferred [high] look up one of six keyed parts by record index and key
+0014192c renderTargetClear inferred [high] clear framebuffer with configured RGBA color depth and mask
+0038a434 bustupEffectStartLine inferred [high] create EffectLine process/draw job for script-supplied duration
+00515520 variantCopy inferred [high] preserve tagged token while forwarding deep-copy success result
+00470164 aocLoadWorldDataFile inferred [high] Twin of smt4 type-0x10 package file loader; resource loader caller consumes NKDW header.
+0047ca10 spriteDrawFromTextureTable inferred [high] Fetches a texture table node, resolves the encoded bank/frame sprite id, applies optional size override, and emits a draw packet.
+002b74cc eplUpdateActiveNodes inferred [high] Updates each of 16 active effect-slot target nodes unless global pause is set.
+003283c8 btlSelectCandidateEntries inferred [high] Selects up to limit entries4..53 lacking both candidate-class masks into the current action unit's selectedUnits array.
+004db07c fusionClassifyRecipeAvailability inferred [high] Resolves recipe ingredients against party and compendium records, then classifies missing/owned/available status.
+003cb5f0 lmapSetFollowCameraPose inferred [med] Computes follow-camera eye/target vectors from scene position, heading and selected camera preset, storing the first output pair.
+003cb49c lmapSetFollowCameraTargetPose inferred [med] Same follow-camera computation stored in the second output pair at offsets34/40.
+0035a9fc progressUnlockCountEarned inferred [high] Counts data-table 0x4a progress unlocks whose earned bit is set in save data.
+002ce3ec equipmentCompareUpgradeKind2Descending inferred [med] Comparator orders by descending base-plus-upgrade value for upgrade kind 2 (bonus array index 4), then ascending key.
+002a60c8 saveLoadDrawUpdate inferred [high] Shared SAVELOAD_UI UD/UDD draw-task callback invokes the runner child virtual update phase at vtable +0x14 and returns zero.
+003cd974 scrLmapSetSecondTransform inferred [high] Reads six script float arguments and forwards them to lmapSetSecondTransform.
+0034f46c itemCompareMappedGroupAndKeyDescending inferred [high] Compares mapped item group descending, then the record sort key descending.
+0034813c keyedRecordLoadVerFile inferred [high] Twin basename lookup and VER file loading/registration.
+00359b6c skillHelpUpdateAttributeAndTarget inferred [high] Updates selected skill help with its attribute and target labels before drawing the directory entry.
+0038e3f4 bufferedValueGetFirstReady inferred [high] Returns the primary value of the first ready enabled entry, or the invalid sentinel.
+00408784 compositeSpriteDrawRequest inferred [high] Draws the requested composite sprite at integer coordinates using the supplied effect speed.
+002417a8 entryCompareFlagsCategoryOrder inferred [high] Twin status-flags/category-six/table-order comparator.
+003e6dc8 talkEventStartScript inferred [high] Shuts down battle resources and starts the ready talk event script.
+002d871c mapInterfaceUnregisterHandle inferred [high] Removes the map interface handle owner from the handle registry.
+0035ab90 callbackSceneDestroyResources inferred [high] Destroys callback scene script resources, buffers, context job and owner.
+0048cd48 selectionNotificationAdvanceEntryAnimations inferred [high] Initializes headings, advances six entry/two auxiliary sprites, and enters state2 when the final animation and button help finish.
+0049f084 eventRowUpdateState inferred [high] Advances event-list row transitions, waits for texture readiness, and dispatches confirm/cancel events.
+004b96a0 mapSceneInitializeScriptAndEntry inferred [high] Creates the scene script, selects entry kind from restored game flags, clears placement, and requests BGM.
+001402d0 infoWindowInitialize inferred [high] Allocate popup state, initialize sprites and start its jobs
+0046e1c4 aocQueueType1e inferred [high] Resolve type-1e path and queue display request
+002e2184 outfitPreviewConfigureEquipment inferred [high] Configure canonical preview pose and scale, cache equipment pointer, load models and mark holder
+0046bd44 aocActivateFileGroupFlags inferred [high] Activate pending flags attached to loaded file groups
+003a2f54 gameApplyCurrentFlagTableEntry inferred [high] Apply current table-2f entry flag and signed value

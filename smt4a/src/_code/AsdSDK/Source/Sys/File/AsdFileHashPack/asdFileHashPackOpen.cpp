@@ -4,7 +4,7 @@
 extern "C" {
 extern AsdFileHashPack *g_asdFileHashPack; /* the open pack */
 
-AsdFileHashPack *FUN_00157194(AsdFileHashPack *pack); /* the destructor: returns `this` */
+AsdFileHashPack *_ZN19ResourceVectorOwnerD1Ev(AsdFileHashPack *pack); /* the destructor: returns `this` */
 void asdOperatorDelete(AsdFileHashPack *pack);
 void *FUN_00178b04(u32 size, const char *file, int line);
 s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *streamPath, u32 arg);
@@ -15,7 +15,7 @@ s32 asdFileHashPackOpen(const char *path, const char *streamPath, u32 arg)
     AsdFileHashPack *pack;
 
     if (g_asdFileHashPack != NULL) {
-        asdOperatorDelete(FUN_00157194(g_asdFileHashPack));
+        asdOperatorDelete(_ZN19ResourceVectorOwnerD1Ev(g_asdFileHashPack));
     }
     pack = (AsdFileHashPack *)FUN_00178b04(sizeof(AsdFileHashPack), "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFileHashPack.cpp", 754);
     if (pack != NULL) {

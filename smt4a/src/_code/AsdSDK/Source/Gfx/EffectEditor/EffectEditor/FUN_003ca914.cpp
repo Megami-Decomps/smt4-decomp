@@ -6,7 +6,7 @@ void asdEffectQueueRelease(u32, s32);
 void objectRegistryInsert(void*, s32);
 void* effPartCreate(void);
 extern EffectEditorDefaultSlot DAT_0059e9a8;
-extern u8 DAT_00634c50;
+extern u8 g_effectEditorResourceName;
 
 // Recreates the editor's part and clears its current/default selections.
 u32 FUN_003ca914(void)
@@ -29,7 +29,7 @@ u32 FUN_003ca914(void)
     defaults->first.object.indices.extraOffset = 0;
     g_effectEditor.selection.index = 0;
     defaults->second.object.indices.extraOffset = 0;
-    DAT_00634c50 = 0;
+    g_effectEditorResourceName = 0;
     g_effectEditor.selection.object = &defaults->second.object;
     return 0;
 }

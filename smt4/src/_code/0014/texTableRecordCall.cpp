@@ -1,5 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the table pointer in r2 and the reciprocal constant in r0, the build the reverse */
-#include "common.h"
+#include "shard/W6_W6Match5_RecordCallParameters.h"
 
 extern "C" {
 
@@ -12,15 +11,15 @@ typedef struct TexTable00144fa8 {
     /* 0x04 */ Record00144fa8 **records;
 } TexTable00144fa8;
 
-TexTable00144fa8 *asdTMTexTableCallFileA(void);
-void FUN_002a8ac4(Record00144fa8 *record, u32 arg);
+TexTable00144fa8 *asdTMTexTableCallFileA(u32 table, s32 index);
+u32 FUN_002a8ac4(Record00144fa8 *record, RecordCallParameters *parameters, TexTable00144fa8 *table);
 
 /* Passes record (index mod 1000) of the texture table's record list on. */
-void texTableRecordCall(u32 unused, s32 index, u32 arg)
+void texTableRecordCall(u32 tableId, s32 index, RecordCallParameters *parameters)
 {
-    TexTable00144fa8 *table = asdTMTexTableCallFileA();
+    TexTable00144fa8 *table = asdTMTexTableCallFileA(tableId, index);
 
-    FUN_002a8ac4(*table->records + index % 1000, arg);
+    FUN_002a8ac4(*table->records + index % 1000, parameters, table);
 }
 
 } /* extern "C" */

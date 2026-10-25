@@ -1,116 +1,45 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a9540` (_code @ 0x3a9540, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: success-result materialization uses r1 and a shared success branch differs; all model-load and XYZ=0.01f callback arguments are restored. */
+#include "battle/btlMain.h"
 
 extern "C" {
+BtlMainStateA *btlGetMainState(void);
+s32 scrGetCommandFrame(void);
+const char *scrGetArgString(u32 index);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+void *FUN_00178b04(u32 size, const char *file, s32 line);
+u32 *battleModelOwnerInitialize(u32 *owner);
+s32 FUN_004d87e4(u32 *owner);
+void FUN_004d854c(u32 *owner);
+void callOnHandleField4D(u32 *owner, f32 x, f32 y, f32 z);
+void modelOwnerLoadNamed(u32 *owner, const char *name);
 
-int textFormatBuffer(int *, unsigned char *, unsigned int);
-int FUN_00178b04(int, unsigned char *, int);
-int FUN_004d854c(unsigned int);
-int callOnHandleField4D(unsigned int);
-int modelOwnerLoadNamed(void);
-
-/* stack frame of void: 16 slot(s), 64 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern unsigned char LAB_003a9644; /* 0x3a9644 */
-extern unsigned char LAB_003a965c; /* 0x3a965c */
-
-/* Supplied declaration required: textFormatBuffer. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_00178b04. */
-extern unsigned int scrGetArgString(unsigned int);
-extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_004d854c. */
-extern int FUN_004d87e4(unsigned int);
-/* Supplied declaration required: callOnHandleField4D. */
-/* Supplied declaration required: modelOwnerLoadNamed. */
-extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
-
-
-unsigned int FUN_003a9540(void)
-
+// Load the scripted battle model, then finish once its asynchronous load completes.
+u32 FUN_003a9540(void)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = scrGetCommandFrame();
-  if (temp_v1 != 0) {
-    temp_v1 = FUN_004d87e4(*(unsigned int *)(temp_v0 + 0x2298));
-    if (temp_v1 == 0) {
-      return 0;
+    BtlMainStateA *state = btlGetMainState();
+    if (scrGetCommandFrame() != 0) {
+        u32 ready = FUN_004d87e4(state->eventModel.owner);
+        if (ready != 0) {
+            FUN_004d854c(state->eventModel.owner);
+            callOnHandleField4D(state->eventModel.owner, 0.01f, 0.01f, 0.01f);
+            state->eventModel.loaded = 1;
+            ready = 1;
+        }
+        return ready;
+    } else {
+        const char *name = scrGetArgString(0);
+        char path[64] = {};
+        textFormatBuffer(path, "battle/model/%s.bam", name);
+        if (state->eventModel.owner == NULL) {
+            u32 *owner = (u32 *)FUN_00178b04(0x24,
+                "c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Event\\btlEventCommand.cpp", 0x54b);
+            if (owner != NULL)
+                owner = battleModelOwnerInitialize(owner);
+            state->eventModel.owner = owner;
+            modelOwnerLoadNamed(owner, path);
+            return 0;
+        }
     }
-    FUN_004d854c(*(unsigned int *)(temp_v0 + 0x2298));
-    callOnHandleField4D(*(unsigned int *)(temp_v0 + 0x2298));
-    *(unsigned char *)(temp_v0 + 0x22b4) = 1;
-  }
-  else {
-    temp_v2 = scrGetArgString(0);
-    temp_v3 = 0;
-    temp_v4 = 0;
-    temp_v5 = 0;
-    temp_v6 = 0;
-    temp_v7 = 0;
-    temp_v8 = 0;
-    temp_v9 = 0;
-    temp_v10 = 0;
-    temp_v11 = 0;
-    temp_v12 = 0;
-    temp_v13 = 0;
-    temp_v14 = 0;
-    temp_v15 = 0;
-    temp_v16 = 0;
-    temp_v17 = 0;
-    temp_v18 = 0;
-    textFormatBuffer(&temp_v3,&LAB_003a9644,temp_v2);
-    if (*(int *)(temp_v0 + 0x2298) == 0) {
-      temp_v1 = FUN_00178b04(0x24,&LAB_003a965c,0x54b);
-      temp_v2 = 0;
-      if (temp_v1 != 0) {
-        temp_v2 = (unsigned int)battleModelOwnerInitialize((unsigned int *)temp_v1);
-      }
-      *(unsigned int *)(temp_v0 + 0x2298) = temp_v2;
-      modelOwnerLoadNamed();
-      return 0;
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

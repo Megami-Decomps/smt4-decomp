@@ -15,8 +15,9 @@ struct DeferredByteState {
 };
 
 // Capture a byte transition, applying it immediately when no transition is pending.
-extern "C" void FUN_004cae0c(u32, DeferredByteState *state, s32 pending, u32 target)
+extern "C" void FUN_004cae0c(void *, void *opaqueState, s32 pending, u32 target)
 {
+    DeferredByteState *state = static_cast<DeferredByteState *>(opaqueState);
     state->progress = 0;
     state->pending = pending;
     state->target = target & 0xff;

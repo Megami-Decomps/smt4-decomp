@@ -44,7 +44,10 @@ struct BtlCameraOrientationTransition {
 };
 
 struct BtlCameraA {
-    /* 0x000 */ f32 vector[3];
+    union {
+        /* 0x000 */ f32 vector[3];
+        /* 0x000 */ BtlCameraVector3 position;
+    };
     /* 0x00c */ f32 unk0C;
     /* 0x010 */ f32 unk10;
     /* 0x014 */ f32 unk14;
@@ -94,6 +97,11 @@ struct BtlCameraA {
 };
 
 typedef char BtlCameraSizeCheck[sizeof(BtlCameraA) == 0x8B4 ? 1 : -1];
+typedef char BtlCameraPositionCheck[
+    offsetof(BtlCameraA, position) == 0 &&
+    offsetof(BtlCameraA, vector) == 0 &&
+    sizeof(BtlCameraVector3) == 0xC &&
+    sizeof(BtlCameraA) == 0x8B4 ? 1 : -1];
 typedef char BtlCameraMovementDurationCheck[offsetof(BtlCameraA, movement.duration) == 0x34 ? 1 : -1];
 typedef char BtlCameraRegistryCheck[offsetof(BtlCameraA, registryEntry) == 0x6C ? 1 : -1];
 typedef char BtlCameraFlagsCheck[offsetof(BtlCameraA, flags) == 0x64C ? 1 : -1];

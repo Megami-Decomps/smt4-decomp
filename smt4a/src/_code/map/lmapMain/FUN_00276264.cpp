@@ -209,7 +209,7 @@ int FUN_002b9324(void);
 int gameFlagBitSetValue(int, int);
 int FUN_00376fa4(...);
 int dataTableGetRecord23(void);
-int FUN_003a2f54(void);
+int gameApplyCurrentFlagTableEntry(void);
 int sysClearCachedFlag(void);
 int FUN_003b5714(...);
 int gameFlagSetEligibleEntryFlagsAtThreshold(int);
@@ -548,7 +548,7 @@ extern char FUN_00386720(void);
 /* Supplied declaration required: FUN_00399290. */
 /* Supplied declaration required: lmapApplyMapAndArea. */
 /* Supplied declaration required: FUN_003a2278. */
-/* Supplied declaration required: FUN_003a2f54. */
+/* Supplied declaration required: gameApplyCurrentFlagTableEntry. */
 extern int dataTable2FType0GetEntry(int);
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
 /* Supplied declaration required: FUN_003adef4. */
@@ -834,7 +834,7 @@ unsigned int FUN_00276264(void)
       g_mapSelection = 0;
       mapIfSetOpaqueMode();
       puVar2[3] = 2;
-      FUN_003a2f54();
+      gameApplyCurrentFlagTableEntry();
       temp_v8 = gameGetPlayerData();
       gameFlagSetEligibleEntryFlagsAtThreshold((int)*(short *)(temp_v8 + 0x62));
       if (*(char *)(puVar2 + 0x276) != '\0') {
@@ -910,7 +910,7 @@ unsigned int FUN_00276264(void)
         *(unsigned char *)(puVar2 + 0x278) = 1;
       }
       puVar2[3] = 2;
-      FUN_003a2f54();
+      gameApplyCurrentFlagTableEntry();
       temp_v8 = gameGetPlayerData();
       gameFlagSetEligibleEntryFlagsAtThreshold((int)*(short *)(temp_v8 + 0x62));
       return 0;

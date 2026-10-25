@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_003cb49c(void);
+extern void lmapSetFollowCameraTargetPose(void);
 
-/* Script command: runs FUN_003cb49c. */
+/* Script command: runs lmapSetFollowCameraTargetPose. */
 u32 FUN_003cdd1c(void)
 {
-    FUN_003cb49c();
+    lmapSetFollowCameraTargetPose();
     return 1;
 }
 

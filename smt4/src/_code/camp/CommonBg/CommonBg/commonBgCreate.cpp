@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
-#include "sys/Task.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 
 // The final word lies past the published CommonBackgroundChild prefix.
@@ -20,11 +20,11 @@ u32 asdTextCreate(u32 kind);
 void asdTextDrawFormatted(u32 text, s32 kind, u32 color, s32 x, s32 y, const char* format);
 void asdTMTexTableLoadSprites(u32 id);
 void FUN_002c58c8(u32 id, s32 option);
-u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
-                   TaskFunc callback, TaskFunc destroy, void* data, u32 parent);
-void FUN_00221310(void* work);
-void commonBgDestroyJobWork(void* work);
-void FUN_002ed628(void* work);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                  AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
+s32 FUN_00221310(u32 handle);
+void commonBgDestroyJobWork(u32 handle);
+s32 FUN_002ed628(u32 handle);
 
 // Create the common background's text prompts and its update/draw tasks.
 void commonBgCreate(void)
@@ -54,9 +54,9 @@ void commonBgCreate(void)
         "\x81\x40\x82\x89\x82\x83\x82\x8F\x82\x8E\x81\x44");
     asdTMTexTableLoadSprites(0x2D);
     FUN_002c58c8(0x2D, 0);
-    u32 job = taskCreateDraw("COMBG EVE CALC", 2, 8, 0, FUN_00221310,
-        commonBgDestroyJobWork, work, g_commonBg.background->counters.unk00);
+    u32 job = taskCreateDraw(reinterpret_cast<const s8 *>("COMBG EVE CALC"), 2, 8, 0, FUN_00221310,
+        commonBgDestroyJobWork, reinterpret_cast<u32>(work), reinterpret_cast<void *>(g_commonBg.background->counters.unk00));
     work->job = job;
-    taskCreateDraw("COMBG DDRAW", 0xE7, 8, 0, FUN_002ed628, NULL, work, job);
+    taskCreateDraw(reinterpret_cast<const s8 *>("COMBG DDRAW"), 0xE7, 8, 0, FUN_002ed628, NULL, reinterpret_cast<u32>(work), reinterpret_cast<void *>(job));
 }
 }

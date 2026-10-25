@@ -1,4 +1,4 @@
-/* NON_MATCHING: only difference is the argument order of the three questSetPackedFlag(id, 1) calls (retail loads r0 before r1, the build r1 first); -O2 candidate. */
+/* NON_MATCHING: three constant questSetPackedFlag calls load r1 before r0; retail loads r0 before r1. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "Terminal/tmnlMain.h"

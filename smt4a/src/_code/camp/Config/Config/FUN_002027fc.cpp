@@ -15,7 +15,7 @@ int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int configDrawRowFrame(...);
 int resourceRunOperationIfUnblocked(int);
 int FUN_002a4894(int);
@@ -50,7 +50,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -194,7 +194,7 @@ void FUN_002027fc(void)
                      temp_v2 + *(int *)(temp_v0 + temp_v10 * 8 + 0x98) * 0xc + 0x1e);
         temp_v11 = FUN_001834a4(0x24,0x74);
         puVar11 = temp_v18;
-        FUN_0018408c(puVar11,2);
+        fontMeasureLineAdvance(puVar11,2);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 8) +

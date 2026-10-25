@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-extern const char DAT_004d8bd0[];
+extern const char g_effectEditorResourceName[];
 void asdMemoryFreeLocked(void* memory);
 void effEditorSetTextValue(EffMenuNode* node, const char* text);
 
@@ -17,6 +17,6 @@ void FUN_00313704()
     g_effectEditor.label = label;
     label->initialKind = 0xb6;
     label->unk04 = 100;
-    effEditorSetTextValue(g_effectEditor.label, DAT_004d8bd0);
+    effEditorSetTextValue(g_effectEditor.label, g_effectEditorResourceName);
 }
 }

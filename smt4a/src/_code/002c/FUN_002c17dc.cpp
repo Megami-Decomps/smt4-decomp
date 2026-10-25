@@ -38,7 +38,7 @@ extern int keyedRecordCountGet(void);
 /* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: FUN_002a39a4. */
 /* Supplied declaration required: FUN_002e5154. */
-extern int FUN_00330ad4(unsigned char, unsigned int);
+extern int keyedRecordFindPart(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_0035bc4c. */
 extern int keyedRecordGetEntryValue(unsigned char, int);
 extern int keyedRecordGetKey(void);
@@ -151,7 +151,7 @@ void FUN_002c17dc(unsigned int *param_1)
         } while (temp_v2 < temp_v1);
       }
     }
-    temp_v2 = FUN_00330ad4(*(unsigned char *)(param_1 + 0xc),param_1[1]);
+    temp_v2 = keyedRecordFindPart(*(unsigned char *)(param_1 + 0xc),param_1[1]);
     if ((temp_v2 != 0) && ((*(unsigned int *)(temp_v2 + 8) & 0xfc0) != 0)) {
       temp_v7 = eventCommandGetPendingCleanup();
       rangeInit(temp_v7,*(unsigned char *)(temp_v2 + 0x14),0);

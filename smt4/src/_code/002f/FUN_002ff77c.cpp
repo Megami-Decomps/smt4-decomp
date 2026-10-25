@@ -15,9 +15,9 @@ typedef struct DevilRecord {
 } DevilRecord;
 
 typedef struct EntrySpan {
-    s32 count;
+    u32 count;
     s32 unk4;
-    s32 first;
+    u32 first;
     s32 unkC[3];
 } EntrySpan;
 
@@ -25,11 +25,11 @@ typedef struct EntrySpan {
 
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
-extern u32 btlScriptResolveGroupArg(void);
-extern int FUN_002499fc(u32 handle, s32 *first, s32 *count);
+extern s32 btlScriptResolveGroupArg(s32 group);
+extern void FUN_002499fc(s32 kind, u32 *first, u32 *count);
 extern ItemRecord *dataTable40FindById(u16 id);
 extern DevilRecord *devilGetRecord(u16 id);
-extern int FUN_001d2ac8(void);
+extern u32 FUN_001d2ac8(const BtlEntry *entry);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(s32 value);
 
@@ -43,9 +43,8 @@ u32 FUN_002ff77c(void)
     BtlEntry *entry;
     ItemRecord *item;
 
-    scrGetArg(1);
-    FUN_002499fc(btlScriptResolveGroupArg(), &span.first, &span.count);
-    for (i = span.first; i < span.first + span.count; i++) {
+    FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &span.first, &span.count);
+    for (i = span.first; i < static_cast<s32>(span.first + span.count); i++) {
         entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&
@@ -83,7 +82,7 @@ u32 FUN_002ff77c(void)
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && FUN_001d2ac8() != 0) {
+        if (entry != NULL && entry->id == id && FUN_001d2ac8(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

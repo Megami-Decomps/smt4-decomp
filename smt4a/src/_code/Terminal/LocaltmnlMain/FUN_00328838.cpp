@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328838` (_code @ 0x328838, 0x1238 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/CameraAnimationApply.h"
 
 extern "C" {
 
@@ -70,7 +71,6 @@ int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_0019c0e0(unsigned int);
 int controllerSelectionSetMode(...);
-int controllerApplyAtUnitScale(void);
 int cameraAnimationSampleAndAdvance(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int controllerSetPosition(...);
@@ -330,7 +330,7 @@ unsigned int FUN_00328838(void)
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v4 + 0x30) = temp_v6;
-    controllerApplyAtUnitScale();
+    controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v6), &temp_v9, 0);
     FUN_0013c174(&LAB_00328c8c,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c5);
@@ -338,7 +338,7 @@ unsigned int FUN_00328838(void)
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v4 + 0x34) = temp_v6;
-    controllerApplyAtUnitScale();
+    controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v6), &temp_v9, 0);
     FUN_0013c174(&LAB_00328cac,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c9);
@@ -346,7 +346,7 @@ unsigned int FUN_00328838(void)
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v4 + 0x38) = temp_v6;
-    controllerApplyAtUnitScale();
+    controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v6), &temp_v9, 0);
     *(unsigned int *)(temp_v4 + 0x54c) = 0xffffffff;
     temp_v6 = g_handleRegistry;
     resourceOwnerLoadNamed(g_handleRegistry,&LAB_00328ccc);

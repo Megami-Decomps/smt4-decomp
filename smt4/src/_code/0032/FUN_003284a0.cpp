@@ -16,15 +16,15 @@ struct EditorColor {
 
 extern "C" {
 
-extern ColorSource DAT_004d8b40;
+extern ColorSource g_effectEditorSettings;
 extern EditorColor g_effectEditor;
 
 /* Copies the colour at 0x88 of the source block into the effect editor. */
 void FUN_003284a0(void)
 {
-    g_effectEditor.red = DAT_004d8b40.red;
-    g_effectEditor.green = DAT_004d8b40.green;
-    g_effectEditor.blue = DAT_004d8b40.blue;
+    g_effectEditor.red = g_effectEditorSettings.red;
+    g_effectEditor.green = g_effectEditorSettings.green;
+    g_effectEditor.blue = g_effectEditorSettings.blue;
 }
 
 } /* extern "C" */

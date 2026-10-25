@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the stack-argument constant 48 for paramsInit is in r0 instead of r2; also needs gauntletSpriteSetMode (strh r1,[r0,#58]) in config/inlined.txt and the update callback at 0x3291dc as a unit (retail pool holds it raw). */
+/* NON_MATCHING: paramsInit's stack-argument constant 48 uses r0 instead of r2; its third table relocates as DAT_004028f0 + 0x54 instead of DAT_00402944. */
 /* Creates the Gauntlet app menu: work area, processes, sprites and its resource files. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"

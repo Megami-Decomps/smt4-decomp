@@ -1,60 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4708` (_code @ 0x2a4708, 0xe0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial controller-global and update-callback literal loads are scheduled in the opposite order; all task handles and arguments are restored. */
+#include "ui/HowToScreen.h"
+#include "shard/W5_W5Match6_CallbackController.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+void *asdOperatorNew(u32 size);
+s32 FUN_002840fc(u32 handle);
+s32 FUN_002c2bac(u32 handle);
+s32 FUN_002c2b88(u32 handle);
+u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 process);
+void FUN_0049d3f0(HowToScreenWork *work);
+void FUN_0049d140(HowToScreenWork *work, s32 state, u8 nextState);
 
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int taskCreateDraw(...);
-int asdOperatorNew(void);
-int FUN_0049d140(...);
-int FUN_0049d3f0(...);
-
-/* stack frame of void: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned char LAB_002840fc; /* 0x2840fc */
-extern unsigned char LAB_002a47f4; /* 0x2a47f4 */
-extern unsigned char LAB_002a4804; /* 0x2a4804 */
-extern unsigned char LAB_002a4810; /* 0x2a4810 */
-extern unsigned char LAB_002a4820; /* 0x2a4820 */
-extern unsigned char LAB_002c2b88; /* 0x2c2b88 */
-extern unsigned char LAB_002c2bac; /* 0x2c2bac */
-extern unsigned int *DAT_0057f240; /* 0x57f240 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_0049d140. */
-/* Supplied declaration required: FUN_0049d3f0. */
-
-
+// Start the tutorial controller and its left, right and lower-screen draw passes.
 void FUN_002a4708(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x478;
-  asdOperatorNew();
-  puVar2 = &LAB_002a47f4;
-  DAT_0057f240 = puVar1;
-  asdProcessCreateSimple(&LAB_002a47f4,4,0,0,&LAB_002840fc,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002a4804,0x7e,0,0,&LAB_002c2bac,0,0,puVar2);
-  taskCreateDraw(&LAB_002a4810,0xda,0,0,&LAB_002c2bac,0,0,*puVar1);
-  taskCreateDraw(&LAB_002a4820,0xeb,0,0,&LAB_002c2b88,0,0,*puVar1);
-  FUN_0049d3f0(puVar1);
-  puVar1[0x11b] = 0;
-  FUN_0049d140(puVar1,2,0);
-  return;
+    HowToScreenInstance *work = static_cast<HowToScreenInstance *>(asdOperatorNew(sizeof(HowToScreenInstance)));
+    g_callbackController.work = work;
+    work->process = asdProcessCreateSimple("HOW_TO PROC", 4, 0, 0, FUN_002840fc, NULL, 0);
+    taskCreateDraw("HOW_TO UL", 0x7e, 0, 0, FUN_002c2bac, NULL, 0, work->process);
+    taskCreateDraw("HOW_TO UR", 0xda, 0, 0, FUN_002c2bac, NULL, 0, work->process);
+    taskCreateDraw("HOW_TO DD", 0xeb, 0, 0, FUN_002c2b88, NULL, 0, work->process);
+    FUN_0049d3f0(work);
+    work->savedButtonHelp = 0;
+    FUN_0049d140(work, 2, 0);
 }
-
-} /* extern "C" */
+}

@@ -1,26 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int memClear(...);
+extern u8 DAT_004d92f0[0x200];
+extern u8 g_registrationEntries[];
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+void memClear(void *memory, u32 size);
 
-extern unsigned char DAT_004d92f0; /* 0x4d92f0 */
-
-/* Supplied declaration required: memClear. */
-
-
+/* Clears the two 0x200-byte tables at start-up. */
 void FUN_00105948(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  memClear(&DAT_004d92f0,0x200);
-  memClear(0x4d94f0,0x200);
-  return;
+    memClear(DAT_004d92f0, 0x200);
+    memClear(g_registrationEntries, 0x200);
 }
 
 } /* extern "C" */

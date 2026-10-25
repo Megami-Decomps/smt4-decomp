@@ -34,7 +34,7 @@ extern u32 g_btlScriptUnit;
 BattleState *btlGetMainState(void);
 u32 scrGetArg(void);
 BattleUnit *btlUnitGet(u32 id);
-s32 FUN_003283c8(s32 arg);
+s32 btlSelectCandidateEntries(s32 arg);
 
 /* Script command: puts the script unit in mode 12 and sets the battle mask to the argument with bit 17 added. */
 u32 FUN_003b0b00(void)
@@ -49,7 +49,7 @@ u32 FUN_003b0b00(void)
 
     block->maskLow = mask;
     block->maskHigh = mask >> 31;
-    FUN_003283c8(1);
+    btlSelectCandidateEntries(1);
     return 1;
 }
 

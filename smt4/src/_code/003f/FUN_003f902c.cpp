@@ -1,7 +1,7 @@
 /* NON_MATCHING: key-pointer register allocation and interpolation floating-point expression scheduling differ; local key-rate view preserves padding alignment. */
 #include "shard/AnimCurve.h"
 
-extern "C" f32 hardfp_floorf(f32 value);
+extern "C" f32 __hardfp_floorf(f32 value);
 
 // Locate packed scalar keys using the estimated index, then linearly interpolate.
 extern "C" f32 FUN_003f902c(const PackedScalarAnimCurve *curve, f32 time)
@@ -18,7 +18,7 @@ extern "C" f32 FUN_003f902c(const PackedScalarAnimCurve *curve, f32 time)
         offsetof(CurveView, keys) == 0x14 && sizeof(CurveView) == sizeof(PackedScalarAnimCurve) ? 1 : -1];
     const CurveView *data = reinterpret_cast<const CurveView *>(curve);
     f32 timeScale = data->timeScale;
-    u32 frame = (u32)hardfp_floorf(time / timeScale + 0.5f);
+    u32 frame = (u32)__hardfp_floorf(time / timeScale + 0.5f);
     const PackedScalarAnimKey *key = data->keys;
     const PackedScalarAnimKey *last = data->keys + data->keyCount - 1;
     if (data->keys[0].frame <= frame) {

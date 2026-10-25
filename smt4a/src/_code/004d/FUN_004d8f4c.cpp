@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail saves {r4-r7, lr} (odd count, likely a different build) and keeps the tree in r4, the parent in r6; armcc adds r8 and swaps them. */
+/* NON_MATCHING: tree/parent saved registers and initial sentinel setup differ; build preserves one additional register. */
 #include "shard/W6_W6Match3_AATreeNode.h"
 
 /* An AA tree: its root, the nil sentinel every leaf links to, and the extreme nodes. */

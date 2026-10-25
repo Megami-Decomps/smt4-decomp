@@ -1,7 +1,6 @@
-/* NON_MATCHING: opens the bible analysis screen (tasks, the confirm window of the current mode, the list of known devils, the party ids); written from the decompilation, allocation order and branch layout not compared with retail */
+/* NON_MATCHING: saved screen/table registers, record-loop scheduling and virtual-call branch layout differ. */
 #include "classes/Obj42242c.h"
 #include "AsdSDK/AsdDebug.h"
-#include <new>
 
 class Obj42238c : public ObjBase3c2ef0 {
 public:
@@ -11,13 +10,10 @@ public:
     virtual void vfunc14();
     virtual void vfunc18();
     virtual void vfunc1c();
-};
-
-/* The window's link back to the rectangle it is bound to. */
-struct WindowRectangleLink {
-    /* 0x00 */ u8 unk00[0x64];
     /* 0x64 */ void *rectangle;
 };
+typedef char BibleAnalyzeControllerLayoutCheck[
+    sizeof(Obj42238c) == 0x68 && offsetof(Obj42238c, rectangle) == 0x64 ? 1 : -1];
 
 struct BibleAnalyzeEntry {
     /* 0x00 */ u8 unk00[4];
@@ -43,7 +39,7 @@ public:
     /* 0x010 */ u8 unk010[4];
     /* 0x014 */ s32 state;
     /* 0x018 */ s32 stateArg;
-    /* 0x01C */ u8 unk01C[8];
+    /* 0x01C */ u8 unk01C[4];
     /* 0x020 */ s32 rangeBase[2];
     /* 0x028 */ s32 devilCount;
     /* 0x02C */ u8 unk02C[0x68];
@@ -70,6 +66,14 @@ public:
     /* 0xA6BC */ u16 cursorIndex;
     /* 0xA6BE */ u8 unkA6BE;
 };
+typedef char BibleAnalyzeScreenLayoutCheck[
+    offsetof(BibleAnalyzeScreen, flag94) == 0x94 &&
+    offsetof(BibleAnalyzeScreen, customMode) == 0x5A4 &&
+    offsetof(BibleAnalyzeScreen, unk5A8) == 0x5A8 &&
+    offsetof(BibleAnalyzeScreen, rectangle) == 0xC8 &&
+    offsetof(BibleAnalyzeScreen, selectedSlot) == 0xA5B0 &&
+    offsetof(BibleAnalyzeScreen, shownCount) == 0xA6BA &&
+    sizeof(BibleAnalyzeScreen) == 0xA6C0 ? 1 : -1];
 
 #define BIBLE_CUSTOM_ANALYSIS 1
 #define BIBLE_PROGRESS_FLAG_COUNT 0x3C
@@ -78,7 +82,7 @@ public:
 extern "C" {
 extern u32 *DAT_0043d990;
 
-void FUN_0022e2fc(void);
+void FUN_0022e2fc(void *table);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00240cec(s32 arg);
 void *asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
@@ -86,7 +90,6 @@ u32 asdProcessCreateSimple(const char *name, s32 priority, u32 first, u32 second
                            void *update, void *end, void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, void *work, u32 parent);
-void *asdOperatorNew(u32 size);
 void FUN_00233670(void *list, s32 a, s32 b, s32 count);
 s32 gameTestProgressFlag(s32 flag);
 void FUN_003a8aa0(BibleAnalyzeScreen *screen);
@@ -107,7 +110,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
     screen->flag94 = 0;
     screen->selectedSlot = 0xFFFF;
     screen->unkA6BE = 0xFF;
-    FUN_0022e2fc();
+    FUN_0022e2fc(screen->unk5A8);
     screen->prepare();
     menuSetModeAndResetTransitions(6);
     if (screen->customMode == BIBLE_CUSTOM_ANALYSIS)
@@ -123,9 +126,8 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
 
     s32 limit;
     if (screen->customMode != 0) {
-        void *memory = asdOperatorNew(0x68);
-        Obj42238c *window = memory != NULL ? new (memory) Obj42238c() : NULL;
-        reinterpret_cast<WindowRectangleLink *>(window)->rectangle = screen->rectangle;
+        Obj42238c *window = new Obj42238c;
+        window->rectangle = screen->rectangle;
         limit = screen->devilCount > BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
         FUN_00233670(screen->listView, 0x1C, 0x1030, limit);
         screen->listReady = 1;
@@ -139,11 +141,10 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
             }
         }
     } else {
-        void *memory = asdOperatorNew(0x68);
-        Obj42242c *window = memory != NULL ? new (memory) Obj42242c() : NULL;
+        Obj42242c *window = new Obj42242c;
         window->initialize(NULL);
-        reinterpret_cast<u16 *>(window)[2] |= 0x1000;
-        reinterpret_cast<WindowRectangleLink *>(window)->rectangle = screen->rectangle;
+        window->state |= 0x1000;
+        window->rectangle = screen->rectangle;
         limit = screen->devilCount > BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
         FUN_00233670(screen->listView, 0x1D, 0x40E, limit);
         screen->listReady = 1;

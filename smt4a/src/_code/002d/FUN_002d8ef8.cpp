@@ -75,7 +75,7 @@ static __inline RegisteredObject *registerModel(SceneModel *model)
 {
     RegisteredObject *object = model->object;
     handleRegistryRegisterObject(g_handleRegistry, object);
-    *(u32 *)((u8 *)object + 4) |= 3;
+    object->flags |= 3;
     return object;
 }
 

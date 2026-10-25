@@ -12,7 +12,7 @@ void *lmapSceneGetScript();
 void nodeOwnerSetTranslations(StatusScreenModel *, const Vec3 *);
 void lmapSceneSetUnk134(s32);
 void statusCameraDestroy();
-void mdlPartsRelease(StatusScreenModel *);
+void mdlPartsRelease(void *model);
 s32 lmapMainIsRunning();
 void asdModelSlotRelease(s32);
 void timerStart(UiAnimatedSprite *, s32, s32);

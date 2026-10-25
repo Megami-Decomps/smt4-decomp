@@ -61,7 +61,7 @@ extern unsigned int DAT_0059ea20; /* 0x59ea20 */
 extern unsigned int DAT_0059ea24; /* 0x59ea24 */
 extern int DAT_0059ea2c; /* 0x59ea2c */
 extern unsigned int DAT_0059ea30; /* 0x59ea30 */
-extern unsigned char DAT_00634d20; /* 0x634d20 */
+extern unsigned char g_effectEditorSavedSnapshot; /* 0x634d20 */
 extern unsigned int uRam00634d60; /* 0x634d60 */
 extern unsigned int uRam00634d64; /* 0x634d64 */
 extern unsigned int uRam00634d68; /* 0x634d68 */
@@ -180,7 +180,7 @@ LAB_0039ab4c:
     if (temp_v4 == 0) goto LAB_0039ad94;
     temp_v6 = VectorFloatToUnsigned(*(unsigned int *)(temp_v0 + DAT_0059ea24 * 0x18 + 0x14),3);
     piVar3 = (int *)(param_2 + temp_v6 * 0x1c);
-    FUN_001b4ddc(&DAT_00634d20);
+    FUN_001b4ddc(&g_effectEditorSavedSnapshot);
     temp_v6 = *piVar3;
     if (piVar3[2] != 0) {
       temp_v1 = effBlockLoadClone();
@@ -217,7 +217,7 @@ LAB_0039ab4c:
     *(unsigned char *)(temp_v6 + 0x88) = 8;
     *(unsigned char *)(temp_v6 + 0x89) = 0;
     *(unsigned char *)(temp_v6 + 0x8a) = 0;
-    __aeabi_memcpy4(&DAT_00634d20,temp_v6,0x80);
+    __aeabi_memcpy4(&g_effectEditorSavedSnapshot,temp_v6,0x80);
     DAT_0059dbfc = *(unsigned int *)(temp_v6 + 0x90);
     if (*(int *)(*piVar3 + 0xc) != 0) {
       effPartSetData();
@@ -263,7 +263,7 @@ LAB_0039ab4c:
           asdEffectQueueRelease(DAT_0059dbf0,3);
           DAT_0059dbf0 = 0;
         }
-        FUN_001b4ddc(&DAT_00634d20);
+        FUN_001b4ddc(&g_effectEditorSavedSnapshot);
         uRam00634d60 = *(unsigned int *)(param_2 + 0xc);
         uRam00634d64 = *(unsigned int *)(param_2 + 0x10);
         uRam00634d68 = *(unsigned int *)(param_2 + 0x14);

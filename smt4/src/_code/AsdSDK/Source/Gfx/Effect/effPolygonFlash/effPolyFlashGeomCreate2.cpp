@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 32 vs built 29 rows, 28 diff lines. */
+/* NON_MATCHING: the geometry table-size stack argument uses r1 instead of retail's r2. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 

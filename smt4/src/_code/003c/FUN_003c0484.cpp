@@ -1,8 +1,8 @@
 /* NON_MATCHING: compiler combines independent battle flag tests and allocates different saved/argument registers. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
-u32 FUN_0022a4ac(s32 a, s32 b, u32 message, u32 handle, s32 c, u32 context, u32 timeout);
 u32 FUN_0022a5d8(u32 message, BtlEntry *entry, u32 context);
 s32 battleGetEntryHalfword(s32 entry, u32 kind);
 BtlMainState *btlGetMainState();
@@ -31,7 +31,7 @@ u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u32 context)
     }
     BtlMainState *state = btlGetMainState();
     if ((state->battleFlags & 0x40) == 0 && (state->battleFlags & 0x100) == 0) {
-        return FUN_0022a4ac(0, 0, 0x15, state->dialog.messageHandle, 0, context, 0xffffffff);
+        return (u32)FUN_0022a4ac(0, 0, 0x15, state->dialog.messageHandle, NULL, context, -1);
     }
     return 0;
 }

@@ -1,44 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00428730` (_code @ 0x428730, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: paired parameter store uses strd instead of stm; zero and output-pointer allocation differ. */
+#include "common.h"
+#include <stddef.h>
 
+struct DiagnosticRequest {
+    /* 0x00 */ u8 *buffer;
+    /* 0x04 */ u32 capacity;
+    /* 0x08 */ u32 count;
+    /* 0x0C */ u32 type;
+    /* 0x10 */ u32 code;
+    /* 0x14 */ char name[0x40];
+    /* 0x54 */ u8 detail[0x44];
+    /* 0x98 */ u8 active;
+};
+typedef char DiagnosticRequestLayoutCheck[offsetof(DiagnosticRequest, name) == 0x14 &&
+    offsetof(DiagnosticRequest, detail) == 0x54 && offsetof(DiagnosticRequest, active) == 0x98 ? 1 : -1];
 extern "C" {
-
-int rt_memcpy(unsigned char *, unsigned int, int);
-int strncpy(unsigned char *, unsigned int, int);
-
-extern unsigned char DAT_006426e4; /* 0x6426e4 */
-extern unsigned char *DAT_006428e4; /* 0x6428e4 */
-extern unsigned int DAT_006428e8; /* 0x6428e8 */
-extern unsigned int DAT_006428ec; /* 0x6428ec */
-extern unsigned int DAT_006428f0; /* 0x6428f0 */
-extern unsigned int DAT_006428f4; /* 0x6428f4 */
-extern unsigned char DAT_006428f8; /* 0x6428f8 */
-extern unsigned char DAT_00642937; /* 0x642937 */
-extern unsigned char DAT_00642938; /* 0x642938 */
-extern unsigned char DAT_0064297c; /* 0x64297c */
-
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int
-FUN_00428730(int *param_1,int *param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
-            unsigned int param_6)
-
-{
-/* irregular: 1 native warning(s); review required */
-  *param_1 = *param_1 + 1;
-  DAT_006428e8 = 0x40;
-  DAT_006428ec = 0;
-  DAT_006428e4 = &DAT_006426e4;
-  DAT_0064297c = 0;
-  DAT_006428f0 = param_3;
-  DAT_006428f4 = param_4;
-  strncpy(&DAT_006428f8,param_5,0x40);
-  DAT_00642937 = 0;
-  rt_memcpy(&DAT_00642938,param_6,0x44);
-  *param_2 = *param_1;
-  return 0;
+u8 DAT_006426e4[0x200];
+DiagnosticRequest DAT_006428e4;
 }
+extern "C" char *strncpy(char *destination, const char *source, u32 size);
+extern "C" void *rt_memcpy(void *destination, const void *source, u32 size);
 
-} /* extern "C" */
+// Publish a diagnostic request and return its new serial number to the caller.
+extern "C" s32 FUN_00428730(u32 *serial, u32 *resultSerial, u32 type, u32 code,
+    const char *name, const void *detail)
+{
+    ++*serial;
+    DiagnosticRequest *request = &DAT_006428e4;
+    request->capacity = 0x40;
+    request->count = 0;
+    request->buffer = DAT_006426e4;
+    request->active = 0;
+    request->type = type;
+    request->code = code;
+    strncpy(request->name, name, sizeof(request->name));
+    request->name[0x3f] = '\0';
+    rt_memcpy(request->detail, detail, sizeof(request->detail));
+    *resultSerial = *serial;
+    return 0;
+}

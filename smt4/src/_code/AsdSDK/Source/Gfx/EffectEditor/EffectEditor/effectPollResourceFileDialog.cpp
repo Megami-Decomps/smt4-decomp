@@ -9,8 +9,8 @@ char* libc_strcpy(char*, const char*);
 void __aeabi_memcpy4(void*, const void*, u32);
 extern const u8 DAT_00400001;
 extern const u8 DAT_00400002;
-extern char DAT_004d8bd0[0x50];
-extern u8 DAT_004d8c20[0x80];
+extern char g_effectEditorResourceName[0x50];
+extern u8 g_effectEditorWorkingSnapshot[0x80];
 extern EffectEditorDefaultSlot DAT_0044f858;
 
 u32 effectPollResourceFileDialog(void)
@@ -24,10 +24,10 @@ u32 effectPollResourceFileDialog(void)
         if (g_effectEditor.selection.list != NULL) {
             registrationEntryInsert((u32)g_effectEditor.selection.list, 3);
         }
-        libc_strcpy(DAT_004d8bd0, dialog.name);
+        libc_strcpy(g_effectEditorResourceName, dialog.name);
         void* data = FUN_001e1a70(dialog.path);
         g_effectEditor.selection.list = data;
-        __aeabi_memcpy4(DAT_004d8c20, data, 0x80);
+        __aeabi_memcpy4(g_effectEditorWorkingSnapshot, data, 0x80);
         state = (u32)&DAT_00400002;
         g_effectEditor.selection.index = 0;
         DAT_0044f858.object.indices.extraOffset = 0;

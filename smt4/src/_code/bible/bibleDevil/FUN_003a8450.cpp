@@ -49,7 +49,7 @@ void FUN_0029cc44(s32 flag);
 void ifTouchRegionClearAll(u32 region);
 void FUN_00233818(SelectedRow *row);
 void FUN_0029ede8(s32 a, u32 b, u32 c, s32 d);
-s32 FUN_003a7ec8(DevilView *view, u32 devil);
+s32 demonPurchaseValidate(DevilView *view, u32 devil);
 void FUN_002bd06c(u32 devil);
 void libc_strcpy(char *dest, u32 source);
 void textEncodeFontSlot(s32 slot, char *text);
@@ -99,7 +99,7 @@ void FUN_003a8450(DevilView *view)
         u16 shown = view->entries[flaggedValueHolderGetTotal(view->cursor)].devil;
         FUN_0029ce60(shown, view->listKind, 0);
         FUN_0029ede8(0x18, shown, 0xFFFFFFFF, 0);
-        if (FUN_003a7ec8(view, shown) != 0) {
+        if (demonPurchaseValidate(view, shown) != 0) {
             char text[0x84];
             FUN_002bd06c(shown);
             libc_strcpy(text, shown);

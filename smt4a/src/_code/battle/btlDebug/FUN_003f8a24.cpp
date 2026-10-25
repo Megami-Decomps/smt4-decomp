@@ -12,7 +12,7 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(void);
 int renderCtxCalculateStereoParallax(unsigned int);
 int markerKindGetColor(...);
@@ -50,7 +50,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: markerKindGetColor. */
@@ -266,7 +266,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     temp_v1 = FUN_001834a4(0xc,temp_v16 + 0x94);
     temp_v23 = (int)**(short **)(temp_v1 + 0xc);
     puVar3 = temp_v19;
-    FUN_0018408c(puVar3,2);
+    fontMeasureLineAdvance(puVar3,2);
     temp_v6 = 0;
     temp_v1 = FUN_001834a4(0xc,0x9b);
     if (temp_v22 != 0) {

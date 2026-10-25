@@ -10,27 +10,27 @@ struct JobAxisWork {
     /* 0x28 */ f32 axisY;
 };
 
-JobAxisWork *jobGetWork(void);
+JobAxisWork *jobGetWork(u32 handle);
 
 /* Sets the work area's axis from a signed extent: reciprocal slope, negated when `flip` is set. */
-void FUN_0031bca4(u32 unused, s32 extent, s32 flip)
+void FUN_0031bca4(u32 handle, s32 extent, s32 flip)
 {
-    JobAxisWork *work = jobGetWork();
+    JobAxisWork *work = jobGetWork(handle);
 
-    if (flip == 0) {
-        if (extent == 0) {
-            work->axisX = 1.0f;
-        } else {
-            work->axisX = 0.0f;
-            work->axisY = 1.0f / (f32)extent;
-            return;
-        }
-    } else {
+    if (flip != 0) {
         if (extent == 0) {
             work->axisX = 0.0f;
         } else {
             work->axisX = 1.0f;
             work->axisY = -1.0f / (f32)extent;
+            return;
+        }
+    } else {
+        if (extent == 0) {
+            work->axisX = 1.0f;
+        } else {
+            work->axisX = 0.0f;
+            work->axisY = 1.0f / (f32)extent;
             return;
         }
     }

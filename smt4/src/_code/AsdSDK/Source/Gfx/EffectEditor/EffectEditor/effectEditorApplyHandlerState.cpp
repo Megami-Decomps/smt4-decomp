@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match6_EffectRender.h"
 
 extern "C" {
-extern EffectRenderSettings DAT_004d8c10;
+extern EffectRenderSettings g_effectEditorInitialVector;
 extern EffectRenderGlobals DAT_004ea81c;
 void FUN_002496cc(EffectEditorSnapshot *);
 void requestHandlerDispatch(EffectHandlerRequest *, const EffectRenderVector *);
@@ -16,7 +16,7 @@ void handlerTableCallWithValue(EffectHandlerRequest *, u32);
 
 void effectEditorApplyHandlerState(EffectHandlerRequest *request)
 {
-    EffectRenderSettings *settings = &DAT_004d8c10;
+    EffectRenderSettings *settings = &g_effectEditorInitialVector;
     EffectRenderGlobals *globals = &DAT_004ea81c;
     EffectRenderControls *controls = &settings->controls;
     FUN_002496cc(&controls->snapshot);

@@ -33,7 +33,7 @@ extern const char DAT_00528588[];
 void sysMemClear(void *data, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
 s32 FUN_0046c4b4(void *system, u32 aocId);
-void FUN_0046e1c4(void *system, u32 aocId, void **file, const char *path);
+void aocQueueType1e(void *system, u32 aocId, void **file, const char *path);
 void aocQueueType1f(void *system, u32 aocId, void **file, const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);
 void *dataTableFileGetTable(void *file, s32 index);
@@ -82,7 +82,7 @@ extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BattleMaskState *battle)
         sysMemClear(path, sizeof(path));
         textFormatBuffer(path, DAT_005285b8, identity->name, identity->name);
         if (FUN_0046c4b4(g_aocSystem, identity->aocId)) {
-            FUN_0046e1c4(g_aocSystem, identity->aocId, &step->tableFile, path);
+            aocQueueType1e(g_aocSystem, identity->aocId, &step->tableFile, path);
         } else {
             asdLoadFileAsyncSimple(path, &step->tableFile, 0);
         }

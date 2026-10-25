@@ -5,7 +5,7 @@
 
 extern "C" {
 extern const char DAT_0052fa28[];
-s32 FUN_0018408c(const char *text, s32 font);
+s32 fontMeasureLineAdvance(const char *text, s32 font);
 NumberAlignmentMetric *FUN_001834a4(u32 group, u32 frame);
 s32 fontMeasureFormattedText(s32 font, const char *format, ...);
 void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
@@ -32,7 +32,7 @@ void FUN_0016631c(MenuState *menu, const NumberAlignmentMetric *layout)
     typedef char NumericCaptionOffsetsCheck[offsetof(NumericCaptionView, label) == 0x26C &&
         offsetof(NumericCaptionView, showSign) == 0x2B1 && offsetof(NumericCaptionView, value) == 0x2B4 ? 1 : -1];
     const NumericCaptionView *caption = reinterpret_cast<const NumericCaptionView *>(menu);
-    s32 labelWidth = FUN_0018408c(caption->label, 4);
+    s32 labelWidth = fontMeasureLineAdvance(caption->label, 4);
     s32 numberWidth = 0;
     s32 signWidth = 0;
     bool showPlus = false;

@@ -6,7 +6,7 @@ extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
 BtlUnitA* btlUnitGet(u32 id);
 BtlMainStateA* btlGetMainState(void);
-void FUN_003283c8(s32 enabled);
+void btlSelectCandidateEntries(s32 enabled);
 
 static __inline void setUnitCommand(BtlUnitDataA* data, u16 command)
 {
@@ -27,7 +27,7 @@ u32 scrCommSetPendingUnitCommand(s32 argIndex)
     BtlMainStateA* main = btlGetMainState();
     u32 command = argument | 0x10000;
     setPendingCommand(main, static_cast<s32>(command));
-    FUN_003283c8(1);
+    btlSelectCandidateEntries(1);
     return 1;
 }
 }

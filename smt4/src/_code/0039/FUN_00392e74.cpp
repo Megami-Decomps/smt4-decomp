@@ -1,35 +1,6 @@
 /* NON_MATCHING: readable rebuild of the add-on content menu update; retail evaluates the % 20 / % 30 counters with the smull magic multiplies in a different order and dispatches the state's member function with the pointer-to-member adjustment folded into a tail `bx`. */
-#include "common.h"
+#include "classes/AocMenu.h"
 
-class AocMenu;
-typedef void (AocMenu::*AocMenuStateFunc)();
-
-class AocMenuWindow {
-public:
-    virtual ~AocMenuWindow();
-};
-
-/* The add-on content menu object as the update reads it. */
-class AocMenu {
-public:
-    void run() {}
-    /* 0x0000 */ u32 flags;
-    /* 0x0004 */ s32 step;
-    /* 0x0008 */ s32 substep;
-    /* 0x000C */ u8 unk000C[4];
-    /* 0x0010 */ AocMenuStateFunc states[18];  /* one handler per step */
-    /* 0x00A0 */ u8 unk00A0[0x168];
-    /* 0x0208 */ AocMenuWindow *window;
-    /* 0x020C */ u8 unk020C[4];
-    /* 0x0210 */ u8 unk0210[0x0C];
-    /* 0x021C */ u8 unk021C[0x14];
-    /* 0x0230 */ u8 unk0230[0x14C];
-    /* 0x037C */ u8 effects[25][0x8C];
-    /* 0x1128 */ u8 unk1128[8];
-    /* 0x1130 */ u8 unk1130[0x80];
-    /* 0x11B0 */ u8 jobOwner[1];
-    /* 0x11B1 */ u8 unk11B1[3];
-};
 
 extern "C" {
 extern struct AocMainBlock *g_aocMain;
@@ -55,12 +26,6 @@ void aocClearDisplayFlag(u32 system);
 void aocReleasePackageOwner(u32 system);
 }
 
-/* The pieces of the menu the cancel path clears (offsets past the named members). */
-struct AocMenuTail {
-    /* 0x0000 */ u8 unk0000[0x0004];
-    /* 0x0004 */ u8 unk0004[0x0200];
-    /* 0x0204 */ u8 unk0204[0x4];
-};
 
 extern "C" void FUN_00392e74(AocMenu *menu)
 {
@@ -100,10 +65,10 @@ extern "C" void FUN_00392e74(AocMenu *menu)
         return;
     }
     for (s32 i = 0; i < 25; i++)
-        FUN_002bf818(menu->effects[i]);
+        FUN_002bf818(menu->animated.effects[i]);
     u32 *counterA = (u32 *)(raw + 0x1128);
     u32 *counterB = (u32 *)(raw + 0x112C);
     *counterA = (*counterA + 1) % 20;
     *counterB = (*counterB + 1) % 30;
-    (menu->*menu->states[menu->step])();
+    (menu->*menu->callbacks.update[menu->step])();
 }

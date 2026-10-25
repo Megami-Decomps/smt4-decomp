@@ -28,7 +28,7 @@ extern u32 FUN_0029ee54(QuestCursor *cursor);
 extern void FUN_002b7bca(void *list, u32 count, u32 size, SortCompare compare);
 extern void FUN_0027f3dc(void *list, u32 count, u32 size, SortCompare compare);
 
-extern int FUN_001b1824(const void *, const void *);
+extern int entryCompareFlagsCategoryOrder(const void *, const void *);
 extern int dataTable1bOr1cCompareRecordKeys(const void *, const void *);
 extern int devilMaskCompare(const void *, const void *);
 extern int FUN_001f62ec(const void *, const void *);
@@ -75,7 +75,7 @@ void uiQuestSortListByEntryKind(s32 mode)
         }
         if ((*info & 0x7F) == 0x19) {
             if (primary) {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_001b1824);
+                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, entryCompareFlagsCategoryOrder);
             } else {
                 FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_002193bc);
             }

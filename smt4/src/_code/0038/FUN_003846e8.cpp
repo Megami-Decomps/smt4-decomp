@@ -16,7 +16,7 @@ void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
 void FUN_00298d50(u32);
 void FUN_002adde8(AsdMdlNode *, const char *, f32 *);
 void textFormatBuffer(char *, const char *, ...);
-void FUN_002c159c(f32, f32);
+void FUN_002c159c(void *camera, f32 first, f32 second);
 u32 FUN_002c501c(void);
 
 // Place both sets of markers at the six named dummy points of the source model.
@@ -28,7 +28,7 @@ void FUN_003846e8(DummyAttachmentWork *work)
         return;
     if (work->mode == 1) {
         u32 camera = FUN_002c501c();
-        FUN_002c159c(0.25f, 0.3f);
+        FUN_002c159c(reinterpret_cast<void *>(camera), 0.25f, 0.3f);
         FUN_00298d50(camera);
     }
     work->initialized = 1;

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void asdLoadFileSync(int path, int a, int b, int mode);
+void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 priority);
 
-/* Forwards to the function that follows it in the binary. */
-void asdLoadFileSyncDefault(int path)
+/* Loads a file into an owned buffer using the default request priority. */
+void *asdLoadFileSyncDefault(const char *path)
 {
-    asdLoadFileSync(path, 0, 0, 4);
+    return asdLoadFileSync(path, NULL, 0, 4);
 }
 
 } /* extern "C" */

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001c0544(int [2]);
+int runtimeDispatchObjectRelease(int [2]);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_001c0544. */
+/* Supplied declaration required: runtimeDispatchObjectRelease. */
 
 
 void FUN_0045277c(int param_1)
@@ -28,7 +28,7 @@ void FUN_0045277c(int param_1)
     temp_v1[0] = temp_v0 + param_1 + 8;
   }
   if (temp_v1[0] != 0) {
-    FUN_001c0544(temp_v1);
+    runtimeDispatchObjectRelease(temp_v1);
   }
   return;
 }

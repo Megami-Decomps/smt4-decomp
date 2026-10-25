@@ -1,5 +1,5 @@
 /* NON_MATCHING: two scheduling differences only: retail loads work->node (arg 2) before `mov r4, r0` and compares the model-set index in r1 (ours r0); the instruction multiset is identical (154 rows each). */
-#include "common.h"
+#include "font/PlaceWin.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 
 /* The record the info panel shows (observed prefix). */
@@ -61,7 +61,6 @@ u32 fileLoadSync(const char *path, u32 *size, u32 flags);
 void objModelCreateFromSource(NodeEnableOwner *owner, u32 file, u32 size);
 void modelSetVisible(NodeEnableOwner *owner, s32 visible);
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
-s32 placeWinStartText(void *text);
 
 /* Builds the info panel once its textures and data are ready: formats the record's names, creates its
  * model from the model set's files, shows or hides it for the current mode and starts the text. */

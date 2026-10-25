@@ -3922,3 +3922,81 @@
 002feb80 scrComm_Sequence16Request inferred [med] script command forwarding two args as sequence 0x10 request
 00318b3c btlTalkPickRandomFreeEntry inferred [med] picks a random free talk entry and sets the script result
 0027dd9c modelSetResetSlots inferred [med] resets all 50 model slots destroying object and model
+00282c38 __aeabi_l2f evidence armlib signed 64-bit to float conversion (D1: sign extraction, normalisation, IEEE rounding)
+00262934 libc_strncpy evidence ISO C strncpy
+002a30dc __hardfp_floorf evidence armlib hard-float floorf
+001559ec rt_fpResultDispatch inferred armlib floating-point exceptional-result dispatcher (LR-addressed control table, NaN 0x7fc00000)
+0010123c libc_printfFormatDispatch inferred C library printf conversion dispatcher (n,p,f,e,g,a,i,d,u,o,x,c,s)
+001012fc svcExitProcess evidence nop; svc #3; bx lr
+004d8b40 g_effectEditorSettings inferred size:0x740 Settings reset FUN_00327920 loads DAT_004d9270 vector address and subtracts 0x730 for mode bytes at +0x88..0x8A; recovered containing object base 0x4d8b40.
+00390038 _ZN7AocMenu16openPurchaseListEv inferred Native AOC scene callback: openPurchaseList
+0038e2f8 _ZN7AocMenu18restartPreviousRunEv inferred Native AOC scene callback: restartPreviousRun
+0038ea88 _ZN7AocMenu14runQuestDialogEv inferred Native AOC scene callback: runQuestDialog
+00391e48 _ZN7AocMenu15runConfirmationEv inferred Native AOC scene callback: runConfirmation
+003923b0 _ZN7AocMenu19runConnectedProcessEv inferred Native AOC scene callback: runConnectedProcess
+0038ebd8 _ZN7AocMenu18runWindowOperationEv inferred Native AOC scene callback: runWindowOperation
+003901bc _ZN7AocMenu14runMainProcessEv inferred Native AOC scene callback: runMainProcess
+003920d8 _ZN7AocMenu16runResultProcessEv inferred Native AOC scene callback: runResultProcess
+003928b4 _ZN7AocMenu15runQueryProcessEv inferred Native AOC scene callback: runQueryProcess
+0038fd40 _ZN7AocMenu13runScriptMenuEv inferred Native AOC scene callback: runScriptMenu
+0038efb8 _ZN7AocMenu15readContentCodeEv inferred Native AOC scene callback: readContentCode
+0038f148 _ZN7AocMenu9closeMenuEv inferred Native AOC scene callback: closeMenu
+0038e374 _ZN7AocMenu17pollContentStatusEv inferred Native AOC scene callback: pollContentStatus
+0038fc28 _ZN7AocMenu18waitCloseAnimationEv inferred Native AOC scene callback: waitCloseAnimation
+0038e5f4 _ZN7AocMenu14runLicenseFlowEv inferred Native AOC scene callback: runLicenseFlow
+00233890 _ZN7AocMenu15runPurchaseListEv inferred Native AOC scene callback: runPurchaseList
+0038f5d4 _ZN7AocMenu20releaseStepResourcesEv inferred Native AOC scene callback: releaseStepResources
+0038f464 _ZN7AocMenu14returnToScriptEv inferred Native AOC scene callback: returnToScript
+0038f410 _ZN7AocMenu16leaveWhenAocFreeEv inferred Native AOC scene callback: leaveWhenAocFree
+003932a4 _ZN7AocMenu23updateRequestTransitionEv inferred Native AOC scene callback: updateRequestTransition
+003930e4 _ZN7AocMenu23initializeStepCallbacksEv inferred Native AOC callback initializeStepCallbacks
+0038efb4 _ZN7AocMenu20beginWindowOperationEv inferred Native AOC callback beginWindowOperation
+0038efb0 _ZN7AocMenu18endWindowOperationEv inferred Native AOC callback endWindowOperation
+003912a0 _ZN7AocMenu13drawSelectionEv inferred Native AOC callback drawSelection
+003914f8 _ZN7AocMenu8drawMenuEv inferred Native AOC callback drawMenu
+003928b0 _ZN7AocMenu20endRequestTransitionEv inferred Native AOC callback endRequestTransition
+0033b618 _ZN19ThreadedTextScannerD1Ev inferred [high] complete destructor of owner with Obj420fa4 scanner@8 and NnOsThread@0x3c; retail recovers owner by sub r5,r4,#60 after thread destruction instead of wrapper retaining owner; static initializer FUN_003eb520 registers it as finalizer
+004d9270 g_effectEditorVector inferred size:0x10 Four-float editor vector zeroed by FUN_00327920; same-file BSS immediately follows settings owner.
+003a8cc8 _ZN9Obj4223f813resetHandlersEv inferred [high] Obj4223f8 method clearing its three nine-slot member-callback arrays at0xA6C0/0xA708/0xA750 then installing state handlers; both native constructors call it with this, parallel Obj4223c4::resetHandlers.
+004d8bd0 g_effectEditorResourceName inferred size:0x40 resource-name character storage before separately referenced initial vector at +0x40
+004d8c10 g_effectEditorInitialVector inferred size:0x10 four initial render values, independently referenced as DAT_004d8c10 through 1c
+004d8c20 g_effectEditorWorkingSnapshot inferred size:0x80 working record copied by editor update-preserving-state
+004d8ca0 g_effectEditorSavedSnapshot inferred size:0x80 saved record copied by editor activation and restore
+004d8d20 g_effectEditorCamera inferred size:0x508 CameraMatrixCache; embedded FloatState constructor at+4a0 and next defaults base independently bound it
+004d9228 g_effectEditorCameraDefaults inferred size:0x3c five contiguous Vec3f defaults (eye,up,target,offset,rotation), initialized by FUN_001dce30
+00262934 strncpy evidence ISO C strncpy, called by its standard name from <string.h>
+002b6dd8 fontMeasureLineAdvance inferred [high] Native font decoder sums signed character advances until zero/newline.
+002adee0 modelHasLoadedAttachment inferred [high] Tests attachment root, its model and loaded model file pointer.
+001590a8 fileWorkerCopyArgument inferred [high] Copies one borrowed queue pointer into thread startup argument storage.
+001590c4 fileWorkerDestroyArgument inferred [high] Empty destructor because copied thread argument owns no resources.
+001590b8 fileWorkerInvokeEntry inferred [high] Invokes thread entry with the copied queue pointer.
+00389528 aocLoadWorldDataFile inferred [high] Loads add-on type 0x10 by id using a 128-byte package path, returning the queued file result; world-data loader caller consumes NKDW header.
+002571e8 renderCtxSelectBlendPreset inferred [high] Selects packed blend-state presets for draw modes 0..6 on the context blend stack.
+0022aa38 btlEntryHasSkillCategory inferred [high] Tests active and learned passive skills for a supplied zero-based category.
+003dcf34 btlFindEffectNameValue inferred [high] Looks up a named effect record in the current battle context and returns its stored value, or zero.
+0030aee4 scrCommHasReadyBattleUnitId inferred [high] Reports whether an active visible unit of script argument0 id has a ready leader/member action slot.
+0020ffe0 modelGetCurrentMotion inferred [high] Returns AsdMotionModel.currentMotion at +0x38; retail callers compare it to the desired motion before modelSelectPrimaryMotion.
+002531bc mapMarkerSynchronizeModelState inferred [high] Synchronizes marker model visibility, translation, heading and primary/secondary motion with the map marker state.
+003188e8 btlScriptChooseEligiblePartyDemon inferred [high] Script command picks an eligible reserve demon, falling back to an eligible active battle entry, excluding the requested ID.
+00127188 fsArchiveGetWorkspaceSize inferred [med] Computes the archive workspace requirement as fileCount*0x20 plus directoryCount*0x18; other archive-selection arguments are unused.
+0038abbc aocBoardCreateDrawJobs inferred [high] Creates Aoc board CALC, UP L, UP R and DOWN processes after preparing its texture resource.
+00265bf8 mapUpdateFollowerModels inferred [high] Updates follower body/shadow visibility, transform, scale and selected motion from map/game flags.
+00360364 serviceCloseInitializedHandle inferred [med] Stops initialized service work, closes the supplied kernel handle and clears its initialized flag.
+0036051c serviceQuerySignedByteChecked inferred [med] Queries a signed output byte and reports a fatal error for a negative SDK result.
+002d848c keyedRecordLoadVerFile inferred [high] Reuses a registered basename or loads, validates and registers its VER file.
+0039723c titlePanelDraw inferred [high] Draws the panel frame, compact or paired elements, and animated highlighted or normal body.
+003d9eb4 btlActionControllerStartSequence inferred [high] Resets the controller, resolves an action sequence and tracks, and allocates requested shake effects.
+001b1824 entryCompareFlagsCategoryOrder inferred [high] Orders entries by completion flags, category six last, then table order.
+0011a0d4 bustupRequestOwnedTextureFrame inferred [high] Finds the idle bustup job with the requested owner, marks it busy and requests its indexed texture frame.
+00399638 menuScreenAdvanceConfirmedSlots inferred [med] Updates five slots through the current step and switches mode when the final slot confirms.
+00382cd8 fieldSceneApplyPendingQuestUpdate inferred [high] Applies pending quest/event identifiers and transitions the field scene.
+003a7ec8 demonPurchaseValidate inferred [high] Validates price, ownership, availability and capacity, setting the purchase error code.
+0011aef0 infoWinDraw inferred [high] Draws the information window frame, scrolling text and decorations.
+003284cc scrCommResultGetCurrentEntryValue inferred [high] Script command publishes the current result-screen entry value through scrSetResult and returns1.
+001a1a64 saveBuildSlotSummary inferred [high] Builds the 0x80-byte save-slot summary including name, map, party levels and progress flags.
+00232698 touchLayoutRebuildRegions inferred [high] Clears previous handles then registers the mode-dependent control, entry and footer touch regions.
+00296774 resultSetMenuState inferred [high] Changes result menu state, clears transient fields/touch regions, selects button help and resolves state20 follow-up.
+00387a7c aocQueueType1e inferred [high] Resolve type-1e path and queue display request
+001eb11c titleMainInitialize inferred [med] Allocate title state and start update/draw jobs
+0026e324 aocActivateFileGroupFlags inferred [high] Activate pending flags attached to loaded file groups
+001fc4f8 naviMainDrawFade inferred [high] NAVI FADE DRAW callback forwards live navigation settings to fade draw helper; returns0

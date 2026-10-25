@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs ~208 rows); the list node helpers are local stand-ins for an unrecovered intrusive list/pool container, so retail's inlined cleanup loops and register use differ */
 #include "common.h"
+#include "gfx/MaskWork.h"
+#include <new>
 
 // Doubly-linked node with a variant payload at +8 (sentinel nodes carry the pool pointer).
 struct LinkNode {
@@ -47,7 +49,6 @@ LinkNode* FUN_00438434(LinkList* list, u32* a, u32* b, u32* c);
 void FUN_0043865c(LinkNode** out, LinkList* list, u32* key);
 void* FUN_004387f0(void* pool, s32 count);
 void FUN_004387bc(void* pool, LinkNode* node, s32 count);
-void FUN_00515598(void);
 void FUN_00515618(LinkNode** out, void* location);
 void variantSetPlain(void* variant, u32* value);
 
@@ -71,7 +72,7 @@ static bool appendNode(ListOwner* owner, u32 value)
 {
     LinkNode* node = static_cast<LinkNode*>(FUN_004387f0(owner->pool, 2));
     if (node == NULL) return false;
-    if (node != reinterpret_cast<LinkNode*>(0xfffffff8)) FUN_00515598();
+    new (&reinterpret_cast<MaskWorkNode *>(node)->payload) Variant;
     node->prev = owner->head.prev;
     node->next = &owner->head;
     owner->head.prev = node;

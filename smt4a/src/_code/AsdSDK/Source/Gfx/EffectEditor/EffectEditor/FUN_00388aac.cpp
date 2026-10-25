@@ -97,10 +97,10 @@ extern char s_LOAD_PARTS_0059eff0[11]; /* 0x59eff0 */
 extern char s_NEW__PARTS_0059effb[11]; /* 0x59effb */
 extern char s_SAVE_EPL__0059f006[10]; /* 0x59f006 */
 extern char s_LOAD_EPL__0059f010[10]; /* 0x59f010 */
-extern unsigned int DAT_00634c90; /* 0x634c90 */
-extern unsigned int DAT_00634ca0; /* 0x634ca0 */
+extern unsigned int g_effectEditorInitialVector; /* 0x634c90 */
+extern unsigned int g_effectEditorWorkingSnapshot; /* 0x634ca0 */
 extern unsigned int uRam00634d04; /* 0x634d04 */
-extern unsigned char DAT_00634d20; /* 0x634d20 */
+extern unsigned char g_effectEditorSavedSnapshot; /* 0x634d20 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00163fd4(unsigned int);
@@ -292,7 +292,7 @@ LAB_00388d64:
   puVar11 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v8 * 0x18;
   temp_v3 = temp_v4;
-  __aeabi_memcpy4(&DAT_00634ca0,DAT_0059dbf4);
+  __aeabi_memcpy4(&g_effectEditorWorkingSnapshot,DAT_0059dbf4);
   if (temp_v10 != 0) {
     unaff_r11 = 0x59e624;
   }
@@ -491,7 +491,7 @@ LAB_00388edc:
     temp_v7 = 0;
     DAT_0059e9b4 = 0;
   }
-  __aeabi_memcpy4(DAT_0059dbf4,&DAT_00634ca0,0x80);
+  __aeabi_memcpy4(DAT_0059dbf4,&g_effectEditorWorkingSnapshot,0x80);
   temp_v3 = padButtonIsPressed(0x19);
   if (temp_v3 != 0) {
     DAT_0059dbe9 = DAT_0059dbe9 != 1;
@@ -564,7 +564,7 @@ LAB_00388edc:
       FUN_001abbc4();
       DAT_0059dbf0 = temp_v3;
       FUN_001acb48();
-      FUN_001b4eb8(DAT_0059dbf0,&DAT_00634c90);
+      FUN_001b4eb8(DAT_0059dbf0,&g_effectEditorInitialVector);
       FUN_001ac8ec(DAT_0059dbf0);
       FUN_001b4c1c(DAT_0059dbf0,uRam00634d04);
     }
@@ -586,7 +586,7 @@ LAB_003894e4:
       temp_v4 = *(int *)(temp_v3 + 0x90);
       FUN_00243c24();
       DAT_0059dc00 = temp_v4;
-      __aeabi_memcpy4(&DAT_00634d20,temp_v3,0x80);
+      __aeabi_memcpy4(&g_effectEditorSavedSnapshot,temp_v3,0x80);
     }
     DAT_0059dbe6 = '\0';
   }

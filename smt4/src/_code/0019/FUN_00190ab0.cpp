@@ -24,7 +24,7 @@ typedef struct SkillMenuWork {
 
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
 s32 btlGetMainState(void);
-s32 FUN_00293988(void);
+u32 FUN_00293988(void *scene);
 s32 FUN_0029ee54(void);
 void playSceneSetState(SkillMenuWork *work, s32 state, s32 flag);
 void uiSpriteSetImageKeyframe(void *sprite, s32 frame, s32 flag);
@@ -90,8 +90,7 @@ u32 FUN_00190ab0(SkillMenuWork *work)
             }
         } else {
             if ((*(u32 *)(btlGetMainState() + 0x44A8) & 0x40) == 0) {
-                btlGetMainState();
-                if (FUN_00293988() == 0) {
+                if (FUN_00293988(reinterpret_cast<void *>(btlGetMainState())) == 0) {
                     return 0;
                 }
             }

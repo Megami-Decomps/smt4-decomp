@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ typedef struct BattleMain {
     /* 0x44A0 */ u32 flags;
 } BattleMain;
 
-s32 FUN_0022a4ac(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 extern BattleMain *btlGetMainState(void);
 
 /* Starts the battle message FUN_0022a4ac for `id` unless battle flags 0x40 or 0x100 are set; returns 0 when skipped. */
@@ -27,7 +27,7 @@ s32 btlMessageStartUnlessFlagged(s32 id, s32 arg)
     if (arg != 0) {
         mode = 13;
     }
-    return FUN_0022a4ac(2, (s16)id, 0, 0, arg, 0, mode);
+    return (s32)FUN_0022a4ac(2, (s16)id, 0, 0, (const void *)arg, 0, mode);
 }
 
 } /* extern "C" */

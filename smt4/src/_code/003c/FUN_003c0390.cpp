@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r1, [pc, #104] differs from recovered ldr r1, [pc, #100]. */
 #include "common.h"
+#include "battle/btlHelp.h"
 
 namespace {
 
@@ -15,8 +16,6 @@ struct BattleMainStateView {
 extern "C" {
 BattleMainStateView* btlGetMainState(void);
 u32 btlMainFindActiveEntry(void);
-s32 FUN_0022a4ac(s32 hasEntry, s32 mode, u32 request, u32 stateValue,
-                 u32 activeEntry, u32 argument, s32 entryIndex);
 
 // Forward an uninhibited request, resolving the active entry for nonnegative indices.
 s32 FUN_003c0390(u32 request, s32 entryIndex, u32 argument)
@@ -29,11 +28,11 @@ s32 FUN_003c0390(u32 request, s32 entryIndex, u32 argument)
     u32 stateValue = state->unk2240;
     if (entryIndex >= 0) {
         u32 activeEntry = btlMainFindActiveEntry();
-        return FUN_0022a4ac(1, 0, request, stateValue,
-                            activeEntry, argument, entryIndex);
+        return (s32)FUN_0022a4ac(1, 0, request, stateValue,
+                            (const void *)activeEntry, argument, entryIndex);
     } else {
-        return FUN_0022a4ac(0, 0, request, stateValue,
-                            0, argument, -1);
+        return (s32)FUN_0022a4ac(0, 0, request, stateValue,
+                            NULL, argument, -1);
     }
 }
 }

@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_0038e3f4(BtlUiObjCA *obj);
+void bufferedValueGetFirstReady(BtlUiObjCA *obj);
 
 extern BtlUiGlobalsA g_btlUi;
 
 void FUN_004aba54(void)
 {
-    FUN_0038e3f4(&g_btlUi.ui->objC);
+    bufferedValueGetFirstReady(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

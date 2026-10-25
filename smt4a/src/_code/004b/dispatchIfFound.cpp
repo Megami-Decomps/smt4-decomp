@@ -1,16 +1,18 @@
 #include "shard/Shard004B.h"
 
+struct DemonRecord;
+
 extern "C" {
 
-extern void *gameGetSlotRecord(void *obj);
-extern void FUN_002305d0(void *found, void *obj, u32 a, u32 b);
+extern DemonRecord *gameGetSlotRecord(s32 slot);
+extern void FUN_002305d0(DemonRecord *record, u32 slot, u32 id, s32 kind);
 
-void dispatchIfFound(void *obj, u32 a, u32 b)
+void dispatchIfFound(s32 slot, u32 id, s32 kind)
 {
-    void *found = gameGetSlotRecord(obj);
+    DemonRecord *found = gameGetSlotRecord(slot);
 
     if (found != NULL) {
-        FUN_002305d0(found, obj, a, b);
+        FUN_002305d0(found, slot, id, kind);
     }
 }
 

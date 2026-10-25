@@ -129,7 +129,7 @@ int FUN_002648e8(...);
 int FUN_0026493c(...);
 int FUN_00265180(void);
 int FUN_00265b78(...);
-int FUN_00265bf8(...);
+int mapUpdateFollowerModels(...);
 int FUN_00265f50(...);
 int entryListCollectMatches(...);
 int FUN_002666b0(void);
@@ -176,7 +176,7 @@ int textFormatBuffer(...);
 int FUN_002f3694(void);
 int MapIf_Register(unsigned int, int);
 int NaviMain_SetCurrentMap(unsigned int);
-int NaviMain_Start(int);
+void NaviMain_Start(int unused, int requestId);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 14 slot(s), 56 byte(s) */
@@ -368,7 +368,7 @@ extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: lmapMainStep. */
 /* Supplied declaration required: FUN_00265180. */
 /* Supplied declaration required: FUN_00265b78. */
-/* Supplied declaration required: FUN_00265bf8. */
+/* Supplied declaration required: mapUpdateFollowerModels. */
 /* Supplied declaration required: FUN_00265f50. */
 /* Supplied declaration required: entryListCollectMatches. */
 /* Supplied declaration required: mapInitializeStoryMarkerEffects. */
@@ -498,7 +498,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern int FUN_002adee0(void);
+extern int modelHasLoadedAttachment(void);
 /* Supplied declaration required: FUN_002aff0c. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b6b04(void);
@@ -545,7 +545,6 @@ extern char FUN_002fb7dc(void);
 /* Supplied declaration required: MapDepart_Init. */
 /* Supplied declaration required: MapIf_Register. */
 /* Supplied declaration required: NaviMain_SetCurrentMap. */
-/* Supplied declaration required: NaviMain_Start. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -772,7 +771,7 @@ unsigned int FUN_001d3e3c(void)
     FUN_0028527c(0);
     DAT_0049f928 = puVar7[0x10];
     DAT_0049f92c = puVar7[0x12];
-    NaviMain_Start(0);
+    NaviMain_Start(0, puVar7[0x10]);
     NaviMain_SetCurrentMap(puVar7[0x10]);
     navigationSetArguments(puVar7[0x10],puVar7[0x12],DAT_0049f924);
     if ((DAT_0049f950 != '\0') || (*(char *)(puVar7 + 0x266) != '\0')) {
@@ -814,7 +813,7 @@ unsigned int FUN_001d3e3c(void)
       if (g_lmapMainState != (unsigned int *)0x0) {
         temp_v6 = 0;
         do {
-          if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = FUN_002adee0(), temp_v4 == 0)) {
+          if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 == 0)) {
             return 0;
           }
           temp_v6 = temp_v6 + 1;
@@ -861,7 +860,7 @@ unsigned int FUN_001d3e3c(void)
     *(unsigned char *)(puVar7 + 0x25) = 1;
     FUN_0027052c();
     FUN_00265f50(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     DAT_0049f934 = '\0';
     DAT_0049fb45 = 1;
@@ -1038,7 +1037,7 @@ unsigned int FUN_001d3e3c(void)
         FUN_0027052c();
         *(char *)(puVar7 + 0x268) = temp_v0;
         FUN_00265f50(puVar7);
-        FUN_00265bf8(puVar7);
+        mapUpdateFollowerModels(puVar7);
         FUN_00275364();
         navigationSetArguments(puVar7[0x10],puVar7[0x12],DAT_0049f924);
         if (*(char *)(puVar7 + 0x268) != '\0') {
@@ -1459,7 +1458,7 @@ joined_r0x001d535c:
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x20);
       DAT_0049f93e = 1;
-      FUN_00265bf8(puVar17);
+      mapUpdateFollowerModels(puVar17);
       FUN_002648e8(puVar17 + 0x3b);
       FUN_00275364();
       FUN_00274798();
@@ -1503,7 +1502,7 @@ joined_r0x001d535c:
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 0x20);
     DAT_0049f93e = 0;
-    FUN_00265bf8(puVar17);
+    mapUpdateFollowerModels(puVar17);
     FUN_002648e8(puVar17 + 0x3b);
     FUN_00275364();
     FUN_00274798();
@@ -1771,12 +1770,12 @@ joined_r0x001d6448:
     puVar7[3] = puVar7[3] + 1;
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     break;
   case 0x1e:
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     temp_v6 = lmapMainUpdateScriptTransition();
     if (temp_v6 == 0) {
       return 0;
@@ -1823,12 +1822,12 @@ LAB_001d6bd0:
     puVar7[3] = puVar7[3] + 1;
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     break;
   case 0x20:
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
     if (temp_v6 != 2) {
       return 0;
@@ -1868,13 +1867,13 @@ LAB_001d6bd0:
     puVar7[3] = puVar7[3] + 1;
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     navigationResetTimer();
     break;
   case 0x22:
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26e]);
     if (temp_v6 != 2) {
       return 0;
@@ -1909,7 +1908,7 @@ LAB_001d6bd0:
     scrScriptProcessStartEntry(puVar7[0x26e],DAT_0049f974);
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     FUN_0027052c();
     FUN_00275364();
     FUN_00274798();
@@ -1921,7 +1920,7 @@ LAB_001d6bd0:
     break;
   case 0x24:
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     FUN_00265f50(puVar7);
     FUN_0027052c();
     FUN_00275364();
@@ -1951,7 +1950,7 @@ LAB_001d6bd0:
     scrScriptProcessStartEntry(puVar7[0x26b],puVar7[0x267]);
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     puVar7[3] = puVar7[3] + 1;
     puVar7[4] = 0;
     break;
@@ -1959,7 +1958,7 @@ LAB_001d6bd0:
     puVar7[4] = puVar7[4] + 1;
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     temp_v6 = scrRunOpcodesStub(puVar7[0x26b]);
     if (temp_v6 != 2) {
       return 0;
@@ -2336,7 +2335,7 @@ LAB_001d6bd0:
     FUN_0027052c();
     *(unsigned char *)(puVar7 + 0x268) = temp_v1;
     FUN_00265f50(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     DAT_0049fb46 = 0;
     puVar7[3] = puVar7[3] + 1;
@@ -2347,7 +2346,7 @@ LAB_001d6bd0:
     FUN_0027052c();
     *(char *)(puVar7 + 0x268) = (char)temp_v5;
     FUN_00265f50(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     temp_v6 = FUN_002eb134();
     if (temp_v6 == 0) {
@@ -2376,7 +2375,7 @@ LAB_001d6bd0:
     FUN_0027052c();
     *(char *)(puVar7 + 0x268) = (char)temp_v5;
     FUN_00265f50(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     FUN_00275364();
     puVar7[4] = puVar7[4] + 1;
     temp_v6 = scrRunOpcodesStub(puVar7[0x26b]);
@@ -2600,7 +2599,7 @@ LAB_001d6bd0:
     if (g_lmapMainState != (unsigned int *)0x0) {
       temp_v6 = 0;
       do {
-        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = FUN_002adee0(), temp_v4 == 0)) {
+        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 == 0)) {
           return 0;
         }
         temp_v6 = temp_v6 + 1;
@@ -2925,7 +2924,7 @@ LAB_001d6bd0:
     if (g_lmapMainState != (unsigned int *)0x0) {
       temp_v6 = 0;
       do {
-        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = FUN_002adee0(), temp_v4 == 0)) {
+        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 == 0)) {
           return 0;
         }
         temp_v6 = temp_v6 + 1;
@@ -3066,7 +3065,7 @@ LAB_001d884c:
       }
     }
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     temp_v6 = puVar7[4];
     puVar7[4] = temp_v6 + 1;
     if (temp_v6 + 1 < 0x15) {
@@ -3166,7 +3165,7 @@ LAB_001d884c:
     }
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     temp_v6 = puVar7[4];
     puVar7[4] = temp_v6 + 1;
     if (temp_v6 + 1 < 0x11) {
@@ -3183,7 +3182,7 @@ LAB_001d884c:
     }
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
-    FUN_00265bf8(puVar7);
+    mapUpdateFollowerModels(puVar7);
     puVar7[4] = puVar7[4] + 1;
     temp_v6 = FUN_002896bc();
 joined_r0x001d8c24:

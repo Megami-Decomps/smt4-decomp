@@ -15,6 +15,14 @@ struct ShaderBindingStatePrefix {
     NativeShaderPrefix shader; // 0x08
 };
 struct ShaderBindSymbol {
+    ShaderBindSymbol()
+    {
+        vertex.kind = 0;
+        vertex.count = 1;
+        vertex.attribute = 255;
+        vertex.registerIndex = 255;
+        vertex.flags = 0;
+    }
     union {
         u32 words[2];
         struct {

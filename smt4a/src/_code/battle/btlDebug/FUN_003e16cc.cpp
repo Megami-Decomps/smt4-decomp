@@ -53,9 +53,9 @@ void qsort(void* base, s32 count, s32 size, s32 (*compare)(const void*, const vo
 s32 FUN_00221a94(const void* a, const void* b);
 SideRecord* FUN_001568f8(BattleState* state, s32 id);
 s32 pairedEntryTableContains(BattleState* state, u16 id);
-void nameEntriesRegisterVerNames(void);
+void nameEntriesRegisterVerNames(void *work);
 s32 FUN_004f8264(u8* aux);
-void FUN_004cae0c(BattleState* state, BattleUnitEntry* unit, s32 a, s32 b, s32 c);
+void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void FUN_004fd204(s32 offset, StateObject* object, BattleUnitEntry* unit, s32 a, s32 b, s32 c);
 void FUN_004fe764(s32 offset, StateObject* object, BattleUnitEntry* unit, u32 kind, s32 arg);
 void FUN_004fb43c(s32 offset, StateObject* object, s32 id, s32 a, s32 b, s32 c, s32 d);
@@ -70,7 +70,7 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
 {
     if (object->flags == 0 && (*reinterpret_cast<u32*>(g_btlAux + 0x339c) & 0x400) != 0) {
         *reinterpret_cast<u32*>(g_btlCamera + 0x64c) |= 0x4000;
-        nameEntriesRegisterVerNames();
+        nameEntriesRegisterVerNames(g_btlAux);
         object->flags |= 2;
     }
     if ((object->flags & 2) == 0 || FUN_004f8264(g_btlAux) == 0) return;
@@ -104,7 +104,7 @@ void FUN_003e16cc(StateObject* object, BattleState* state)
                         extra = DAT_0057a63c;
                     }
                     s32 offset = shown * stride + DAT_0057a64c;
-                    FUN_004cae0c(state, unit, 0, 0, extra);
+                    FUN_004cae0c(state, unit, 0, 0);
                     FUN_004fd204(offset + base, object, unit, 0xff, extra, 0);
                     u32 kind = ((unit->flags & 0x10) != 0) ? 7 : 6;
                     FUN_004fe764(offset, object, unit, kind, 0xd);

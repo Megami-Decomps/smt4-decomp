@@ -1,5 +1,5 @@
-/* NON_MATCHING: the failure test on the result: retail computes `ands r1,r0,#0x80000000` (flags only, r1 unused) and branches with bpl; the build emits tst/beq */
-#include "common.h"
+/* NON_MATCHING: the success mask uses r0 after saving the result in r4; retail masks into r1 before preserving the result. */
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -29,7 +29,7 @@ s32 moduleStartOnce(void)
         section = DAT_004e629c;
         nn_os_CriticalSection_Enter(section);
         result = FUN_0035ae94(0);
-        if ((result & 0x80000000) != 0) {
+        if (!nnResultIsSuccess(result)) {
             nn_os_CriticalSection_Leave(section);
             return result;
         }

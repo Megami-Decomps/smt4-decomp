@@ -15,7 +15,7 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(...);
 int drawSetColorFromRGBA8(...);
 int slotRecordFindById(...);
@@ -85,7 +85,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
@@ -99,7 +99,7 @@ extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 extern unsigned int computeCountLimit(void);
 /* Supplied declaration required: contentEntryFindById. */
-extern int FUN_004db07c(unsigned int, unsigned short, unsigned char *);
+extern int fusionClassifyRecipeAvailability(unsigned int, unsigned short, unsigned char *);
 
 
 void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
@@ -159,7 +159,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < (int)(unsigned int)*(unsigned short *)(temp_v17 + 0x1e));
   }
-  temp_v7 = FUN_004db07c(*puVar2,temp_v10,temp_v18);
+  temp_v7 = fusionClassifyRecipeAvailability(*puVar2,temp_v10,temp_v18);
   efctSetSpeed();
   FUN_00164b5c(2,0x1a,6,param_1,param_2,0x65);
   FUN_001835b4(2,0x1a,0x14b,param_1,param_2,0x6a);
@@ -363,7 +363,7 @@ LAB_002f2034:
       temp_v11 = FUN_0014bf3c(*psVar10,0);
       textFormatBuffer(temp_v14,&LAB_002f24ec,temp_v11);
       puVar11 = temp_v14;
-      FUN_0018408c(puVar11,2);
+      fontMeasureLineAdvance(puVar11,2);
       VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)&param_1->field_0x0 +

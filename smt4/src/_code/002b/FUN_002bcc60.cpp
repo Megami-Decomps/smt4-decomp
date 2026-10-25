@@ -1,67 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bcc60` (_code @ 0x2bcc60, 0xd8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: startup-record stores and argument lifetimes differ; this build spills processor affinity through s16 and adds a VFP save. */
+#include "nn/os/ThreadLaunch.h"
+#include "nn/Result.h"
 
 extern "C" {
-
-int FUN_00124178(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_8: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_8_stack;
-
-extern int nn_os_Thread_ThreadStart(...); /* 0x144f44 */
-
-/* Supplied declaration required: FUN_00124178. */
-
-
-void FUN_002bcc60(unsigned int *param_1,int *param_2,unsigned int param_3,unsigned int param_4,int param_5
-                 ,unsigned int param_6,unsigned int param_7,unsigned char param_8)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int *piVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = (param_5 - *param_2) & 0xfffffff8;
-  (*(romwright_code *)param_2[1])(param_4,temp_v1);
-  piVar3 = (int *)(temp_v1 - 0x18);
-  *piVar3 = param_2[2];
-  temp_v0 = param_2[3];
-  *(unsigned int *)(temp_v1 - 0xc) = temp_v1;
-  *(unsigned int *)(temp_v1 - 0x14) = temp_v0;
-  *(unsigned int *)(temp_v1 - 0x10) = param_3;
-  *(unsigned char *)(temp_v1 - 4) = param_8;
-  *(int *)(temp_v1 - 8) = param_5;
-  if (param_6 < 0x21) {
-    temp_v0 = param_6 + 0x20;
-  }
-  temp_v2 = 0;
-  if (param_6 >= 0x21) {
-    if (param_6 + 0xaef62b00 < 0x28) {
-      temp_v0 = param_6 + 0xaef62b18;
-    }
-    else {
-      temp_v0 = param_6 + 0x93725b00;
-      if (temp_v0 >= 0x41) {
-        temp_v0 = 0xffffffff;
-      }
-    }
-  }
-  puVar2 = (unsigned int *)&temp_v2;
-  FUN_00124178(puVar2,nn_os_Thread_ThreadStart,piVar3,piVar3,temp_v0,param_7);
-  if (-1 < (int)puVar2) {
-    *param_1 = temp_v2;
-    *(unsigned char *)(param_1 + 1) = 0;
-    *(unsigned char *)((int)param_1 + 5) = 0;
-  }
-  return;
+void nn_os_Thread_ThreadStart(ThreadStartupRecord *startup);
+u32 FUN_00124178(u32 *handle, void (*entry)(ThreadStartupRecord *), ThreadStartupRecord *argument,
+    void *stackTop, u32 priority, s32 processor);
 }
 
-} /* extern "C" */
+static __inline u32 threadDecodePriority(u32 priority)
+{
+    if (priority <= 32)
+        return priority + 32;
+    u32 relative = priority - 0x5109d500u;
+    if (relative <= 39)
+        return relative + 24;
+    u32 absolute = priority - 0x6c8da500u;
+    return absolute <= 64 ? absolute : 0xffffffffu;
+}
+
+// Copy the packed argument below the supplied stack top, then launch the SDK's startup thunk.
+extern "C" u32 FUN_002bcc60(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
+    ThreadEntryPoint entry, const void *argument, void *stackTop, u32 priority, s32 processor, u8 owned)
+{
+    u32 argumentAddress = (reinterpret_cast<u32>(stackTop) - descriptor->argumentSize) & ~7u;
+    void *argumentStorage = reinterpret_cast<void *>(argumentAddress);
+    descriptor->operations.copy(argument, argumentStorage);
+    ThreadStartupRecord *startup = reinterpret_cast<ThreadStartupRecord *>(
+        (argumentAddress - sizeof(ThreadStartupRecord)) & ~7u);
+    startup->destroy = descriptor->operations.destroy;
+    startup->invoke = descriptor->operations.invoke;
+    startup->userEntry = entry;
+    startup->argument = argumentStorage;
+    startup->stackTop = stackTop;
+    startup->owned = owned;
+    u32 handle = 0;
+    u32 result = FUN_00124178(&handle, nn_os_Thread_ThreadStart, startup, startup,
+        threadDecodePriority(priority), processor);
+    if (nnResultIsFailure(result))
+        return result;
+    thread->handle = handle;
+    thread->unk04 = 0;
+    thread->unk05 = 0;
+    return 0;
+}

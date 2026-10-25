@@ -45,15 +45,14 @@ extern signed char cRam1ff81084; /* 0x1ff81084 */
 
 
 void FUN_001a1fb4(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,float *param_6,unsigned int param_7,int param_8,int param_9)
+                 unsigned int param_5,float *param_6,unsigned int param_7,int param_8,int param_9,
+                 float stereoParameter,float stereoScale)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1; 6 native warning(s); review required */
-  float in_s0;
+/* The remaining body retains six native warnings pending a full matrix-builder reconstruction. */
   float temp_v0;
   float temp_v1;
   float temp_v2;
-  float in_s1;
   float temp_v3;
   float temp_v4;
   float temp_v5;
@@ -91,7 +90,7 @@ void FUN_001a1fb4(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   uStack_30 = param_2;
   temp_v28 = param_3;
   uStack_28 = param_4;
-  if ((in_s1 < 0.0f) || ((int)in_s1 >= 0x3f800001)) {
+  if ((stereoScale < 0.0f) || ((int)stereoScale >= 0x3f800001)) {
     sysFatalBreak();
   }
   temp_v4 = param_6[10];
@@ -105,41 +104,41 @@ void FUN_001a1fb4(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   temp_v7 = (param_6[6] + 1.0f) * temp_v1;
   temp_v1 = (param_6[6] - 1.0f) * temp_v1;
   temp_v3 = temp_v3 / (temp_v4 - 1.0f);
-  temp_v4 = ((temp_v7 - temp_v1) * (in_s0 / temp_v9)) / DAT_0062d6e4;
+  temp_v4 = ((temp_v7 - temp_v1) * (stereoParameter / temp_v9)) / DAT_0062d6e4;
   if (param_8 != 0) {
     temp_v2 = DAT_0062d6dc * temp_v4;
     param_1[0x14] = temp_v2;
-    temp_v5 = temp_v2 - (in_s0 - temp_v9);
-    temp_v8 = temp_v2 + (temp_v3 - in_s0);
+    temp_v5 = temp_v2 - (stereoParameter - temp_v9);
+    temp_v8 = temp_v2 + (temp_v3 - stereoParameter);
     if (temp_v5 <= temp_v11) {
       temp_v5 = temp_v2 * 0.01f;
     }
     if (temp_v8 <= temp_v5) {
       temp_v8 = temp_v5 * 2.0f;
     }
-    temp_v10 = temp_v10 * (in_s0 / temp_v9) * (temp_v5 / temp_v2);
+    temp_v10 = temp_v10 * (stereoParameter / temp_v9) * (temp_v5 / temp_v2);
     param_1[0x17] = DAT_0062d6d8 * temp_v4;
   }
   else {
-    param_1[0x14] = in_s0;
+    param_1[0x14] = stereoParameter;
     temp_v8 = temp_v3;
     temp_v5 = temp_v9;
-    if (temp_v3 <= in_s0) {
+    if (temp_v3 <= stereoParameter) {
       param_1[0x17] = temp_v11;
     }
     else {
-      param_1[0x17] = (temp_v3 / (temp_v3 - in_s0)) * param_1[0x12] * temp_v4;
+      param_1[0x17] = (temp_v3 / (temp_v3 - stereoParameter)) * param_1[0x12] * temp_v4;
     }
   }
   temp_v4 = param_1[0x17];
-  param_1[0x17] = temp_v4 * in_s1;
+  param_1[0x17] = temp_v4 * stereoScale;
   if (param_9 != 0) {
     if (cRam1ff81084 == '\0') {
       temp_v11 = fRam1ff81080;
     }
     param_1[0x18] = temp_v11;
   }
-  param_1[0x17] = temp_v4 * in_s1 * param_1[0x18] * 0.5f;
+  param_1[0x17] = temp_v4 * stereoScale * param_1[0x18] * 0.5f;
   nn_math_ARMv6_MTX44FrustumC_FAST(param_2);
   nn_math_ARMv6_MTX44PivotC_FAST(param_2,1);
   nn_math_ARMv6_MTX44FrustumC_FAST(param_4);
@@ -154,7 +153,7 @@ void FUN_001a1fb4(float *param_1,unsigned int param_2,unsigned int param_3,unsig
   param_1[0xc] = temp_v18;
   param_1[0xd] = fStack_a4;
   param_1[0xe] = fStack_a0;
-  temp_v11 = param_1[0x14] - in_s0;
+  temp_v11 = param_1[0x14] - stereoParameter;
   param_1[0xf] = temp_v19;
   param_1[0x10] = temp_v20;
   param_1[0x11] = temp_v21;

@@ -1,5 +1,7 @@
-/* NON_MATCHING: BLOCKED: inlined std::list<Entry>::insert (node from FUN_004387f0, value construction FUN_00515598, link before the sentinel) plus a map lookup (FUN_00515618) and IdList walk; the list/map instantiations behind FUN_004352b0/004387f0/00515580/00515598/00515618 are unnamed. Twin: smt4 FUN_0035d370. */
+/* NON_MATCHING: map lookup and IdList traversal retain their pre-existing draft layouts; native Variant payload construction now forwards the node's actual payload address. Twin: smt4 FUN_0035d370. */
 #include "romwright_types.h"
+#include "gfx/MaskWork.h"
+#include <new>
 #include "shard/W6_W6Match3_IdList.h"
 
 extern "C" {
@@ -8,7 +10,6 @@ int FUN_004352b0(int *, int *);
 IdList* idListFind(unsigned int id);
 int FUN_004387f0(int *, int);
 int variantSetHalfB(int *, int *, int);
-int FUN_00515598(void);
 int FUN_00515618(int **, int);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
@@ -24,7 +25,6 @@ typedef struct {
 /* Supplied declaration required: idListFind. */
 /* Supplied declaration required: FUN_004387f0. */
 /* Supplied declaration required: variantSetHalfB. */
-/* Supplied declaration required: FUN_00515598. */
 /* Supplied declaration required: FUN_00515618. */
 
 
@@ -67,9 +67,7 @@ unsigned int FUN_00436798(int *param_1,int *param_2,int *param_3)
           FUN_004387f0(piVar3,2);
           piVar1 = (int *)0x0;
           if (piVar3 != (int *)0x0) {
-            if (piVar3 != (int *)0xfffffff8) {
-              FUN_00515598();
-            }
+            new (&reinterpret_cast<MaskWorkNode *>(piVar3)->payload) Variant;
             *piVar3 = *piVar4;
             piVar3[1] = (int)piVar4;
             *piVar4 = (int)piVar3;

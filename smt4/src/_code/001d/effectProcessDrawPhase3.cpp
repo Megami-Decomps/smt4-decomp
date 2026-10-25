@@ -11,7 +11,7 @@ void FUN_002c198c(RenderCtx *);
 void FUN_002c18e4(RenderCtx *);
 void FUN_002c39a4(RenderCtx *);
 
-u32 effectProcessDrawPhase3(u32 job)
+s32 effectProcessDrawPhase3(u32 job)
 {
     jobGetWork(job);
     RenderCtx *context = g_titleScene;

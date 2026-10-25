@@ -1,5 +1,7 @@
 /* NON_MATCHING: regular-expression alternation parser (pattern -> branch list); handler tables are pointer-to-member arrays indexed by token type and the allocation/link sequences are inlined list helpers, written here as plain structured code */
 #include "common.h"
+#include "gfx/MaskWork.h"
+#include <new>
 
 struct PatternTokenNode {
     /* 0x00 */ PatternTokenNode *next;
@@ -38,7 +40,6 @@ extern const PatternApplyHandler g_patternApplyHandlers[];
 s32 FUN_004351b8(PatternParser *parser, PatternGroupNode **first, PatternGroupNode **cursor);
 void FUN_004387f0(void *block, u32 units);
 void variantSetPlain(void *variant, PatternGroupNode **value);
-void FUN_00515598(void);
 
 /* Appends a freshly allocated, empty group node to a list; NULL when the arena is exhausted. */
 static PatternGroupNode *patternGroupAppend(void *arena, PatternGroupNode *sentinel)
@@ -47,8 +48,7 @@ static PatternGroupNode *patternGroupAppend(void *arena, PatternGroupNode *senti
     FUN_004387f0(node, 2);
     if (node == NULL)
         return NULL;
-    if ((s32)node != -8)
-        FUN_00515598();
+    new (&reinterpret_cast<MaskWorkNode *>(node)->payload) Variant;
     node->next = sentinel->next;
     node->previous = sentinel;
     sentinel->next = node;

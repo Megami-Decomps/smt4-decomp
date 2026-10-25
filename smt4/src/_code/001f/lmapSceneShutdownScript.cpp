@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void mdlPartsRelease(LmapScript *script);
+void mdlPartsRelease(void *model);
 void asdMdlManagerDestroy(u32 handle);
 
 extern LmapScene *g_lmapScene;

@@ -5,11 +5,11 @@
 extern "C" {
 
 int onlineInstanceTableFind(unsigned int, unsigned int);
-int FUN_0031144c(void);
+int streamReaderReadWordValue(void);
 
 /* Supplied declaration required: onlineInstanceTableFind. */
 extern int onlineInstantiationContextGetCurrent(void);
-/* Supplied declaration required: FUN_0031144c. */
+/* Supplied declaration required: streamReaderReadWordValue. */
 
 
 void FUN_002f4e70(unsigned int param_1)
@@ -18,7 +18,7 @@ void FUN_002f4e70(unsigned int param_1)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  FUN_0031144c();
+  streamReaderReadWordValue();
   temp_v0 = onlineInstantiationContextGetCurrent();
   onlineInstanceTableFind(*(unsigned int *)(temp_v0 + 0x10),param_1);
   return;

@@ -17,8 +17,9 @@ typedef struct Scene {
 } Scene;
 
 /* 1 unless the scene is neither flagged (0x40) nor in state 1-4 and has no active entries. */
-u32 FUN_00293988(Scene *scene)
+u32 FUN_00293988(void *work)
 {
+    Scene *scene = static_cast<Scene *>(work);
     Entry *entry;
     int active;
     int i;

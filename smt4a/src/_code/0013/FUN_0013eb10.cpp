@@ -1,56 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013eb10` (_code @ 0x13eb10, 0xac bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: native static guard/object use separate data relocations, and retail has an unidentified weak NOP before the mode store; zero-register lifetimes differ. */
+#include "nn/hid/PadReader.h"
+
+struct InputReaderGlobals {
+    nn::hid::CTR::PadReader *reader;
+    u32 unk04;
+    u32 frame;
+    u32 repeatDelay;
+    u32 repeatInterval;
+    u32 unk14;
+};
+struct InputReaderCounters {
+    u32 held;
+    u32 pressed;
+    u32 released;
+    u16 previous;
+    u16 current;
+};
+typedef char InputReaderCountersLayoutCheck[sizeof(InputReaderCounters) == 0x10 &&
+    offsetof(InputReaderGlobals, frame) == 8 && sizeof(InputReaderGlobals) == 0x18 ? 1 : -1];
 
 extern "C" {
+void *FUN_00159808(void);
+void nn_hid_CTR_AnalogStickClamper_SetClampParam(nn::hid::CTR::PadReader *reader, s32 minimum, s32 maximum);
+void sysMemClear(void *destination, u32 size);
+static InputReaderGlobals DAT_005b4000 = {NULL, 0, 0, 15, 4, 0};
+extern InputReaderCounters DAT_0063fff0;
+extern u8 DAT_00640000[0x7c];
+extern u8 DAT_0064007c[0x7c];
 
-int nn_hid_CTR_AnalogStickClamper_SetClampParam(unsigned char *, int, int);
-int sysMemClear(unsigned char *, int);
-int nn_hid_CTR_PadReader_PadReader_sub_object(unsigned char *, unsigned int);
-
-extern unsigned char *DAT_005b4000; /* 0x5b4000 */
-extern unsigned int DAT_005b4008; /* 0x5b4008 */
-extern unsigned int DAT_005b4018; /* 0x5b4018 */
-extern unsigned char DAT_0063ff90; /* 0x63ff90 */
-extern unsigned char DAT_0063ffa8; /* 0x63ffa8 */
-extern unsigned int DAT_0063fff0; /* 0x63fff0 */
-extern unsigned int DAT_0063fff4; /* 0x63fff4 */
-extern unsigned int DAT_0063fff8; /* 0x63fff8 */
-extern unsigned short DAT_0063fffc; /* 0x63fffc */
-extern unsigned short DAT_0063fffe; /* 0x63fffe */
-extern unsigned char DAT_00640000; /* 0x640000 */
-extern unsigned char DAT_0064007c; /* 0x64007c */
-
-extern unsigned int FUN_00159808(void);
-/* Supplied declaration required: nn_hid_CTR_AnalogStickClamper_SetClampParam. */
-/* Supplied declaration required: sysMemClear. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: nn_hid_CTR_PadReader_PadReader_sub_object. */
-
-
+// Construct the HID reader once, then reset the game's two input histories and counters.
 void FUN_0013eb10(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (((DAT_005b4018 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005b4018), temp_v0 != 0)) {
-    temp_v1 = FUN_00159808();
-    nn_hid_CTR_PadReader_PadReader_sub_object(&DAT_0063ff90,temp_v1);
-  }
-  DAT_005b4000 = &DAT_0063ff90;
-  DAT_0063ffa8 = 0;
-  nn_hid_CTR_AnalogStickClamper_SetClampParam(&DAT_0063ff90,0x28,0x91);
-  sysMemClear(&DAT_00640000,0x7c);
-  sysMemClear(&DAT_0064007c,0x7c);
-  DAT_0063fff0 = 0;
-  DAT_0063fff4 = 0;
-  DAT_0063fff8 = 0;
-  DAT_0063fffc = 0;
-  DAT_0063fffe = 0;
-  DAT_005b4008 = 0;
-  return;
+    static nn::hid::CTR::PadReader reader(FUN_00159808());
+    nn::hid::CTR::AnalogStickClamper *clamper = &reader.clamper;
+    DAT_005b4000.reader = &reader;
+    clamper->mode = 0;
+    nn_hid_CTR_AnalogStickClamper_SetClampParam(DAT_005b4000.reader, 0x28, 0x91);
+    sysMemClear(DAT_00640000, sizeof(DAT_00640000));
+    sysMemClear(DAT_0064007c, sizeof(DAT_0064007c));
+    DAT_0063fff0.held = 0;
+    DAT_0063fff0.pressed = 0;
+    DAT_0063fff0.released = 0;
+    DAT_0063fff0.previous = 0;
+    DAT_0063fff0.current = 0;
+    DAT_005b4000.frame = 0;
 }
-
-} /* extern "C" */
+}

@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
-extern char DAT_00634c50[0x50];
+extern char g_effectEditorResourceName[0x50];
 void engineFreeCallback(void* memory);
 void FUN_00375ec8(EffMenuNode* node);
 void namedObjectFormatFullName(EffMenuNode* node, char* dest);
@@ -49,7 +49,7 @@ u32 FUN_00362584(void)
     if (input.state == 2) {
         result = 0x400000;
     } else if (input.state == 1 && g_effectEditor.selection.list != NULL) {
-        libc_strcpy(DAT_00634c50, input.name);
+        libc_strcpy(g_effectEditorResourceName, input.name);
         textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
         FUN_00362584_hook(g_effectEditor.selection.list, path);
         result = 0x400002;

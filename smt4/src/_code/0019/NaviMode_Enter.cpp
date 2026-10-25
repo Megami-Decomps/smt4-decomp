@@ -6,7 +6,7 @@ extern NaviMain *g_naviMain;
 int NaviMain_EnterState1(u32 *block);
 int backgroundConsumeReset(u32 *block);
 int FUN_003c28a8(u8 *block, int value);
-int NaviMain_Start(int a, int b);
+void NaviMain_Start(s32 unused, s32 requestId);
 
 void NaviMode_Enter(void)
 {

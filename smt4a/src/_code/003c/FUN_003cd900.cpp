@@ -1,5 +1,4 @@
-/* NON_MATCHING: only the VFP registers holding the first and fifth argument differ (retail keeps the first in s20, the fifth in s19). */
-#include "common.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
@@ -9,13 +8,15 @@ void lmapSetFirstTransform(f32 a, f32 b, f32 c, f32 d, f32 e, f32 f);
 /* Script command: sets the first map transform from six float arguments. */
 u32 FUN_003cd900(void)
 {
-    f32 a = scriptReadStackValueAsFloat(0);
-    f32 b = scriptReadStackValueAsFloat(1);
-    f32 c = scriptReadStackValueAsFloat(2);
-    f32 d = scriptReadStackValueAsFloat(3);
-    f32 e = scriptReadStackValueAsFloat(4);
-    f32 f = scriptReadStackValueAsFloat(5);
-    lmapSetFirstTransform(a, b, c, d, e, f);
+    MapVector position;
+    position.x = scriptReadStackValueAsFloat(0);
+    position.y = scriptReadStackValueAsFloat(1);
+    position.z = scriptReadStackValueAsFloat(2);
+    MapVector rotation;
+    rotation.x = scriptReadStackValueAsFloat(3);
+    rotation.y = scriptReadStackValueAsFloat(4);
+    rotation.z = scriptReadStackValueAsFloat(5);
+    lmapSetFirstTransform(position.x, position.y, position.z, rotation.x, rotation.y, rotation.z);
     return 1;
 }
 

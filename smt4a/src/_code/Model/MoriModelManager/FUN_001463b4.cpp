@@ -1,104 +1,64 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001463b4` (_code @ 0x1463b4, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: shader setup/path stack grouping and null-allocation register lifetimes differ. */
+#include "classes/Obj557c48.h"
+#include "classes/Obj557c28.h"
+#include "classes/Obj557b28.h"
+#include <new>
 
-extern "C" {
+class Obj557d00;
 
-int textFormatBuffer(...);
-int FUN_00156ea8(...);
-int moriModelCommandInitBuffers(...);
-int FUN_00157fa0(...);
-int FUN_001642e4(...);
-int FUN_00178b04(...);
-int rt_aeabi_memclr(...);
-
-typedef struct fn_001463b4_arg0 fn_001463b4_arg0;
-struct fn_001463b4_arg0 {
-    unsigned char pad_0x0[0x8];
-    undefined4 field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    int field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x24];
-    undefined4 field_0x3c; /* +0x3c */
+struct ModelShaderResourceSetup {
+    u32 handle;
+    u8 isResource;
+    u8 padding05[3];
+    u32 first;
+    u32 second;
+    u32 third;
+    u8 mode;
+    u8 padding15[3];
 };
 
-/* stack frame of param_1: 6 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned char sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned char sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-} param_1_stack;
 
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00156ea8. */
-extern unsigned int _ZN9Obj557b28C1Ev(void);
-/* Supplied declaration required: moriModelCommandInitBuffers. */
-/* Supplied declaration required: FUN_00157fa0. */
-extern unsigned int FUN_001581dc(unsigned char **);
-extern unsigned int FUN_001582d0(void);
-/* Supplied declaration required: FUN_001642e4. */
-/* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: rt_aeabi_memclr. */
+extern "C" {
+extern const char DAT_00526088[];
+extern const char DAT_00526098[];
+void rt_aeabi_memclr(void *buffer, u32 bytes);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+u32 FUN_001642e4(const char *path, u32 *size, u32 mode, u32 flags);
+Obj557d00 *FUN_001581dc(void *setup);
+void *FUN_00178b04(u32 size, const char *file, u32 line);
+void moriModelCommandInitBuffers(MoriModelCommand *command, u32 bytes, s32 capacity);
+void FUN_00156ea8();
+u32 *FUN_001582d0(u32 *value);
 
-
-void FUN_001463b4(fn_001463b4_arg0 *param_1)
-
+// Load the default shader and allocate the command queues, tuning block and scratch cell.
+void FUN_001463b4(Obj557c48 *manager)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *temp_v3;
-  unsigned char temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned char temp_v8;
-  unsigned char temp_v9 [68];
-  
-  rt_aeabi_memclr(temp_v9,0x40);
-  textFormatBuffer(temp_v9,"ddefshader.bch");
-  puVar1 = temp_v9;
-  FUN_001642e4(puVar1,0,1,0x80);
-  temp_v8 = 0;
-  temp_v6 = 0x10000;
-  temp_v5 = 0x30000;
-  temp_v7 = 0x10000;
-  temp_v4 = 1;
-  temp_v3 = puVar1;
-  temp_v0 = FUN_001581dc(&temp_v3);
-  param_1->field_0x8 = temp_v0;
-  temp_v1 = 0xc0;
-  FUN_00178b04(0xc0,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelManager.cpp",0x5a);
-  if (temp_v1 == 0) {
-    temp_v1 = 0;
-  }
-  else {
-    FUN_00157fa0();
-  }
-  moriModelCommandInitBuffers(temp_v1,0x100000,0x200);
-  temp_v2 = 200;
-  param_1->field_0x10 = temp_v1;
-  FUN_00178b04(200,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelManager.cpp",0x60);
-  temp_v0 = 0;
-  if (temp_v2 != 0) {
-    temp_v0 = _ZN9Obj557b28C1Ev();
-  }
-  param_1->field_0x14 = temp_v0;
-  FUN_00156ea8();
-  temp_v1 = 4;
-  FUN_00178b04(4,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelManager.cpp",100);
-  temp_v0 = 0;
-  if (temp_v1 != 0) {
-    temp_v0 = FUN_001582d0();
-  }
-  param_1->field_0x3c = temp_v0;
-  return;
+    {
+        ModelShaderResourceSetup setup;
+        char path[64];
+        rt_aeabi_memclr(path, sizeof(path));
+        textFormatBuffer(path, DAT_00526088);
+        setup.handle = FUN_001642e4(path, NULL, 1, 0x80);
+        setup.mode = 0;
+        setup.second = 0x10000;
+        setup.first = 0x30000;
+        setup.third = 0x10000;
+        setup.isResource = 1;
+        manager->setShader(FUN_001581dc(&setup));
+    }
+    Obj557c28 *command = static_cast<Obj557c28 *>(FUN_00178b04(sizeof(Obj557c28), DAT_00526098, 0x5a));
+    if (command != NULL)
+        command = new (command) Obj557c28();
+    moriModelCommandInitBuffers(command->command(), 0x100000, 0x200);
+    manager->setCommands(command);
+    Obj557b28 *tuning = static_cast<Obj557b28 *>(FUN_00178b04(sizeof(Obj557b28), DAT_00526098, 0x60));
+    if (tuning != NULL)
+        tuning = new (tuning) Obj557b28();
+    manager->setShadowMap(tuning);
+    FUN_00156ea8();
+    u32 *scratch = static_cast<u32 *>(FUN_00178b04(sizeof(u32), DAT_00526098, 100));
+    if (scratch != NULL)
+        scratch = FUN_001582d0(scratch);
+    manager->setScratch(scratch);
 }
-
-} /* extern "C" */
+}

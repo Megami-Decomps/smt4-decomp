@@ -1,47 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019e3d0` (_code @ 0x19e3d0, 0x100 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved packed-color and float argument allocation differ; all four vertices and UVs restored. */
+#include "shard/Shard0036.h"
 
-extern "C" {
+extern "C" void FUN_00186948(u32 primitive);
+extern "C" void FUN_00184c50(RgbaWord color, f32 x, f32 y, f32 z, f32 u, f32 v);
+extern "C" void effectSubmitDefaultParameters();
 
-int FUN_00184c50(unsigned int);
-int FUN_00186948(int);
-int FUN_001b4120(int *, int);
-
-/* stack frame of param_4: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp64; /* 0x64: local_64 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00184c50. */
-/* Supplied declaration required: FUN_00186948. */
-/* Supplied declaration required: FUN_001b4120. */
-
-
-void FUN_0019e3d0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Submit four independently colored and textured vertices as a quad.
+extern "C" void FUN_0019e3d0(f32 x0, f32 y0, f32 z0, RgbaWord color0,
+    f32 x1, f32 y1, f32 z1, RgbaWord color1,
+    f32 x2, f32 y2, f32 z2, RgbaWord color2,
+    f32 x3, f32 y3, f32 z3, RgbaWord color3,
+    f32 u0, f32 v0, f32 u1, f32 v1, f32 u2, f32 v2, f32 u3, f32 v3)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int uStack_1c;
-  
-  temp_v0 = param_3;
-  uStack_1c = param_4;
-  FUN_00186948(1);
-  FUN_00184c50(param_1);
-  FUN_00184c50(param_2);
-  FUN_00184c50(param_3);
-  FUN_00184c50(param_4);
-  temp_v0 = 1;
-  uStack_1c = 0x10245;
-  FUN_001b4120(&temp_v0,0x18);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    FUN_00186948(1);
+    FUN_00184c50(color0, x0, y0, z0, u0, v0);
+    FUN_00184c50(color1, x1, y1, z1, u1, v1);
+    FUN_00184c50(color2, x2, y2, z2, u2, v2);
+    FUN_00184c50(color3, x3, y3, z3, u3, v3);
+    effectSubmitDefaultParameters();
 }
-
-} /* extern "C" */

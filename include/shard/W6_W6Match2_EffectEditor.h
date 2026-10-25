@@ -4,6 +4,8 @@
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "shard/W6_W6Match8_EffectSelection.h"
 
+struct EffectNode;
+
 struct EffectTextRequest {
     u32 type;   // 0x00
     u32 size;   // 0x04
@@ -36,10 +38,14 @@ struct EffectEditorMenuState {
             u8 unk02[7];
             u8 mode; // 0x09
             u8 unk0a[6];
-            u32 blocked; // 0x10
+            EffectNode *node; // 0x10: effect rendered by the editor
             u8 unk14[0x18];
             u32 cachedEvent; // 0x2c
         } dispatch;
+        struct {
+            u8 unk00[0x10];
+            u32 flags; // 0x10: per-menu input status, not the editor's node pointer
+        } inputStatus;
         struct {
             u8 unk00[0x3c];
             void *owner; // 0x3c: node list owner of the request
@@ -56,6 +62,24 @@ struct EffectEditorMenuState {
     u32 unk64;
     u32 unk68;
 };
+typedef char EffectEditorMenuStateLayoutCheck[
+    __INTADDR__(&((EffectEditorMenuState *)0)->dispatch.node) == 0x10 &&
+    __INTADDR__(&((EffectEditorMenuState *)0)->inputStatus.flags) == 0x10 &&
+    sizeof(EffectEditorMenuState) == 0x6c ? 1 : -1];
+
+/* The independently addressed editor record and its three mode bytes. */
+struct EffectEditorSettings {
+    /* 0x000 */ u8 unk000[0x88];
+    /* 0x088 */ u8 mode;
+    /* 0x089 */ u8 flagA;
+    /* 0x08A */ u8 flagB;
+    /* 0x08B */ u8 unk08B[5];
+};
+typedef char EffectEditorSettingsLayoutCheck[
+    __INTADDR__(&((EffectEditorSettings *)0)->mode) == 0x88 &&
+    __INTADDR__(&((EffectEditorSettings *)0)->flagA) == 0x89 &&
+    __INTADDR__(&((EffectEditorSettings *)0)->flagB) == 0x8a &&
+    sizeof(EffectEditorSettings) == 0x90 ? 1 : -1];
 
 extern "C" {
 extern EffectEditorMenuState g_effectEditor;

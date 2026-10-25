@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
-#include "shard/JobWork.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
+u32 jobGetWork(u32 job);
 s32 FUN_002865c0(u32, f32);
 s32 FUN_002c5d80(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
@@ -11,9 +11,9 @@ void FUN_002c198c(RenderCtx *);
 void FUN_002c18e4(RenderCtx *);
 void FUN_002c39a4(RenderCtx *);
 
-u32 renderScopedTaskPhaseOne()
+s32 renderScopedTaskPhaseOne(u32 job)
 {
-    jobGetWork();
+    jobGetWork(job);
     RenderCtx *context = g_titleScene;
     s32 state = FUN_002865c0(6, 0.0f);
     renderStackPush(&context->additional.stackC, state);

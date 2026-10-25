@@ -2,6 +2,7 @@
 #define CLASSES_OBJ420794_H
 
 #include "common.h"
+#include "classes/Obj420794Resources.h"
 
 extern "C" {
 void *asdOperatorNew(u32 bytes, ...);
@@ -31,7 +32,7 @@ public:
     virtual ~Obj420794()
     {
         if (texture != 0) {
-            bufferHandleRelease(texture);
+            obj420794ReleaseTexture(texture);
             texture = 0;
         }
         if (buffer != NULL) {
@@ -45,7 +46,7 @@ public:
     }
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     static void *operator new(u32 bytes, u32 owner) throw() { return asdOperatorNew(bytes, owner); }
-    static void operator delete(void *block) { asdMemFreeNonNull(block); }
+    static void operator delete(void *block) { obj420794FreeBlock(block); }
     void setBuffer(void *block) { buffer = block; }
     virtual void prepareGeometry() = 0; /* +0x08 */
     virtual void draw() = 0;            /* +0x0C */
@@ -61,5 +62,7 @@ protected:
     /* 0x10 */ f32 speed;
     /* 0x14 */ Obj420794Child *child;
 };
+
+typedef char Obj420794SizeCheck[sizeof(Obj420794) == 0x18 ? 1 : -1];
 
 #endif

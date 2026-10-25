@@ -1,78 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a2e08` (_code @ 0x2a2e08, 0xec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+/* NON_MATCHING: timeout-description predicate lowering, descriptor stores and retained worker/result registers differ. */
+#include "sys/FileWorkerQueue.h"
+#include "nn/Result.h"
 extern "C" {
+s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002c526c(u32 result);
+void FUN_002ba8f4(ThreadHandleState *thread);
+u32 FUN_002bcc60(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
+    ThreadEntryPoint entry, const void *argument, void *stackTop, u32 priority, s32 processor, u8 owned);
+void FUN_00158bb4(void *queue);
+void fileWorkerCopyArgument(const void *source, void *destination);
+void fileWorkerDestroyArgument(void *argument);
+void fileWorkerInvokeEntry(ThreadEntryPoint entry, void *argument);
 
-int FUN_002ba8f4(...);
-int FUN_002bcc60(...);
-int FUN_002c40f8(...);
-int FUN_002c526c(...);
-
-/* stack frame of param_1: 8 slot(s), 32 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern int FUN_00158bb4(...); /* 0x158bb4 */
-extern unsigned char LAB_001590a8; /* 0x1590a8 */
-extern unsigned char LAB_001590b8; /* 0x1590b8 */
-extern unsigned char LAB_001590c4; /* 0x1590c4 */
-
-/* Supplied declaration required: FUN_002ba8f4. */
-/* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c40f8. */
-/* Supplied declaration required: FUN_002c526c. */
-
-
-/* WARNING: Type propagation algorithm not settling */
-
-void FUN_002a2e08(int param_1)
-
+// Restart a completed worker; a zero-timeout poll leaves a worker that is still running alone.
+void FUN_002a2e08(FileQueue *queue)
 {
-/* irregular: 6 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int aiStack_30 [3];
-  unsigned char *temp_v0;
-  unsigned char *temp_v1;
-  unsigned char *temp_v2;
-  int temp_v3 [2];
-  
-  piVar2 = (int *)(param_1 + 0x4510);
-  if (*piVar2 != 0) {
-    piVar1 = aiStack_30 + 1;
-    aiStack_30[0] = *piVar2;
-    FUN_002c40f8(piVar1,aiStack_30,1,0,0,0);
-    if ((int)piVar1 < 0) {
-      FUN_002c526c();
+    FileQueueWorker *thread = &queue->thread;
+    if (thread->handle != 0) {
+        u32 handle = thread->handle;
+        s32 index;
+        s32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
+        if (nnResultIsFailure(result))
+            FUN_002c526c(result);
+        if (!nnResultDescriptionIsNot(result, 0x3fe))
+            return;
     }
-    if (((unsigned int)piVar1 & 0x3ff) == 0x3fe) {
-      return;
-    }
-  }
-  FUN_002ba8f4(piVar2);
-  aiStack_30[2] = 4;
-  temp_v0 = &LAB_001590a8;
-  temp_v1 = &LAB_001590c4;
-  temp_v2 = &LAB_001590b8;
-  aiStack_30[1] = 0;
-  aiStack_30[0] = -2;
-  temp_v3[0] = param_1;
-  FUN_002bcc60(piVar2,aiStack_30 + 2,FUN_00158bb4,temp_v3,
-               *(int *)(*(int *)(param_1 + 0x451c) + 0xc) + *(int *)(*(int *)(param_1 + 0x451c) + 8)
-               ,0x11);
-  if (((unsigned int)piVar2 & 0x7e00000) != 0x600000 && (int)piVar2 < 0) {
-    FUN_002c526c();
-  }
-  return;
+    FUN_002ba8f4(thread);
+    FileQueue *argument = queue;
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.operations.copy = fileWorkerCopyArgument;
+    descriptor.operations.destroy = fileWorkerDestroyArgument;
+    descriptor.operations.invoke = fileWorkerInvokeEntry;
+    u32 result = FUN_002bcc60(thread, &descriptor, FUN_00158bb4, &argument,
+        reinterpret_cast<void *>(thread->stack->address + thread->stack->size), 0x11, -2, 0);
+    if (nnResultIsFailureExceptSummary(result, 3))
+        FUN_002c526c(result);
 }
-
-} /* extern "C" */
+}

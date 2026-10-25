@@ -43,7 +43,7 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle, co
 s32 FUN_00228b04(FlaggedEntry *entry, s32 mode);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
 s32 FUN_002a4894(const FlaggedEntry *entry);
-void FUN_00359b6c(u32 id);
+void skillHelpUpdateAttributeAndTarget(u32 id);
 void FUN_0019de98(u32 mode, u32 color);
 u32 FUN_001517b4(u32 button, u32 mode);
 void unitRecordBuild(u32 id, UnitRecord *record);
@@ -58,7 +58,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         const s32 index = resourceRunOperationIfUnblocked(&input->primary) + FUN_002a4894(&input->primary);
         const u16 id = input->primaryIds[index];
         if (id != 0) {
-            FUN_00359b6c(id);
+            skillHelpUpdateAttributeAndTarget(id);
         } else {
             FUN_0019de98(0, 0xF4F4F4FF);
         }
@@ -80,7 +80,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         eventQueueAddUniqueIfValid(0x100020F);
         input->accepted = 1;
         const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + FUN_002a4894(&input->secondary);
-        FUN_00359b6c(input->secondaryIds[index]);
+        skillHelpUpdateAttributeAndTarget(input->secondaryIds[index]);
     }
     return 0;
 }

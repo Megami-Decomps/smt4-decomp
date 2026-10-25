@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses `mov r2, #0` where armcc emits `mov r2, #0`. */
+/* NON_MATCHING: fade and mode argument constants are materialized in the opposite order. */
 #include "common.h"
 
 extern "C" {

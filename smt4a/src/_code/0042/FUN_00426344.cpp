@@ -1,61 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00426344` (_code @ 0x426344, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initialization-helper return lifetime and ready/error block placement differ. */
+#include "common.h"
+#include "nn/Result.h"
 
-extern "C" {
+extern "C" u8 DAT_005891a4;
+extern "C" s32 FUN_0042656c(u32 id, bool *ready);
+extern "C" s32 FUN_004264d0(u32 destination, u32 source, u32 size);
+extern "C" s32 FUN_00426478(u32 id, u32 value);
+extern "C" s32 FUN_004266e4(u32 destination, u32 source, u8 first, u8 second);
+extern "C" s32 FUN_0015997c();
+extern "C" s32 FUN_00432040(u32 mode);
+extern "C" void FUN_00432104();
 
-int FUN_00426478(unsigned int, unsigned int);
-int FUN_004264d0(unsigned int, unsigned int);
-unsigned int FUN_004266e4(unsigned int, unsigned int, unsigned char, unsigned char);
-int FUN_00432104(void);
-
-/* stack frame of param_4: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern signed char DAT_005891a4; /* 0x5891a4 */
-
-extern int FUN_0015997c(void);
-/* Supplied declaration required: FUN_00426478. */
-/* Supplied declaration required: FUN_004264d0. */
-extern int FUN_0042656c(unsigned int, unsigned int *);
-extern int FUN_00432040(unsigned int);
-/* Supplied declaration required: FUN_00432104. */
-
-
-void FUN_00426344(unsigned int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+static __inline s32 sessionEnsureInitialized()
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = param_4;
-  temp_v0 = FUN_0042656c(param_1,&temp_v1);
-  if (-1 < temp_v0) {
-    if ((temp_v1 & 0xff) != 0) {
-      FUN_004264d0(param_1,param_1);
+    s32 result = 0;
+    if (DAT_005891a4 == 0) {
+        result = FUN_0015997c();
+        if (nnResultIsFailure(result))
+            return result;
+        result = FUN_00432040(1);
+        if (nnResultIsFailure(result))
+            FUN_00432104();
+        else
+            DAT_005891a4 = 1;
     }
-    else {
-      temp_v0 = 0;
-      if ((DAT_005891a4 == '\0') && (temp_v0 = FUN_0015997c(), -1 < temp_v0)) {
-        temp_v0 = FUN_00432040(1);
-        if (temp_v0 >= 0) {
-          DAT_005891a4 = '\x01';
-        }
-        else {
-          FUN_00432104();
-        }
-      }
-      if (temp_v0 < 0) {
-        return;
-      }
-      FUN_004266e4(param_1,param_1,0,0);
-    }
-    FUN_00426478(param_1,*param_2);
-  }
-  return;
+    return result;
 }
 
-} /* extern "C" */
+// Prepare a session and apply the caller's value after initialization succeeds.
+extern "C" s32 FUN_00426344(u32 id, const u32 *value)
+{
+    bool ready;
+    s32 result = FUN_0042656c(id, &ready);
+    if (nnResultIsFailure(result))
+        return result;
+    if (ready) {
+        FUN_004264d0(id, id, 0x40);
+    } else {
+        result = sessionEnsureInitialized();
+        if (nnResultIsFailure(result))
+            return result;
+        FUN_004266e4(id, id, 0, 0);
+    }
+    result = FUN_00426478(id, *value);
+    return result;
+}

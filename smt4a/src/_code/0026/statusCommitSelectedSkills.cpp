@@ -22,7 +22,7 @@ u32 countUnlockedSlots();
 StatusSkillSlotView *slotRecordFindById(u32);
 u32 getUnlockedSlotCount();
 void *rt_memcpy(void *, const void *, u32);
-void statusReplaceSkills(u16 *, u8);
+void statusReplaceSkills(const u16 *, u8);
 s32 FUN_004bcaa8(u16, u16, u16 *, StatusSkillComparison *, u8);
 void FUN_0035da20(StatusSkillComparison *, s32);
 

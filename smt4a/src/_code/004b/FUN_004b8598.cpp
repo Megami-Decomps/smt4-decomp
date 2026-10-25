@@ -56,7 +56,7 @@ extern void listSelectItem(u32 handle, s32 index);
 extern void FUN_00407ab0(u32 handle, u8 *path, u8 *altPath);
 extern void FUN_00407eb0(u32 handle, s32 kind, s32 flag);
 extern void FUN_004080bc(u32 handle, s32 a, s32 b);
-extern void FUN_004b96a0(MikadoPanel *panel);
+extern void mapSceneInitializeScriptAndEntry(MikadoPanel *panel);
 extern MikadoMenuEntry *menu4CGetCurrentEntry(u8 *menu);
 extern u8 *dataTable33Entries(u8 *scratch, s32 type);
 extern s32 dataTable33TypeCount(u8 *scratch, s32 type);
@@ -72,7 +72,7 @@ void FUN_004b8598(MikadoPanel *panel)
         return;
     }
     if (panel->scriptFile != NULL && panel->messageFile != NULL) {
-        FUN_004b96a0(panel);
+        mapSceneInitializeScriptAndEntry(panel);
         panel->state = 3;
         panel->stateArg = 0;
         if (panel->entry->image[0] != '0') {

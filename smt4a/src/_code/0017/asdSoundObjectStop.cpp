@@ -1,12 +1,4 @@
-/* NON_MATCHING: identical except register allocation: retail keeps `frames` in r5 (reused for the fade pointer) and the integer zero in r6; this build swaps r5/r6. */
-#include "common.h"
-
-struct InterpolationState {
-    f32 start;       // 0x00
-    f32 end;         // 0x04
-    s32 duration;    // 0x08
-    s32 elapsed;     // 0x0C
-};
+#include "sound/SoundParameterCommand.h"
 
 struct SoundObject;
 struct SoundObjectVtbl {
@@ -22,7 +14,7 @@ struct SoundObject {
     /* 0x04 */ u8 unk04[0x0C];
     /* 0x10 */ void *group;
     /* 0x14 */ u8 unk14[0x54];
-    /* 0x68 */ InterpolationState fade;
+    /* 0x68 */ SoundFadeState fade;
     /* 0x78 */ u8 unk78[0x20];
     /* 0x98 */ u8 playing;
     /* 0x99 */ u8 pending;
@@ -38,8 +30,16 @@ struct SoundObject {
 
 extern "C" {
 
-f32 FUN_0017fc38(const InterpolationState *state);
+f32 FUN_0017fc38(const SoundFadeState *state);
 void FUN_001a586c(void *group, SoundObject *object);
+
+static __inline void soundFadeRestart(SoundFadeState *fade, f32 target, s32 duration)
+{
+    fade->start = FUN_0017fc38(fade);
+    fade->end = target;
+    fade->duration = duration;
+    fade->elapsed = 0;
+}
 
 /* Fades the sound out over a time proportional to its current fade value, or stops it at once when it is not playing or
  * `frames` is not positive. */
@@ -47,12 +47,7 @@ void asdSoundObjectStop(SoundObject *object, s32 frames)
 {
     if (frames > 0 && object->state != 2 && (object->playing != 0 || object->pending != 0)) {
         s32 duration = (s32)(FUN_0017fc38(&object->fade) * (f32)frames);
-        InterpolationState *fade = &object->fade;
-        f32 silent = 0.0f;
-        fade->start = FUN_0017fc38(fade);
-        fade->end = silent;
-        fade->duration = duration;
-        fade->elapsed = 0;
+        soundFadeRestart(&object->fade, 0.0f, duration);
         object->unk9D = 0;
         if (object->group != NULL) {
             FUN_001a586c(object->group, object);

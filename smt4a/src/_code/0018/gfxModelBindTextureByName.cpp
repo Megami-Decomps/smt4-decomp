@@ -1,4 +1,4 @@
-/* NON_MATCHING: 236-vs244-byte frame, bound/scratch r5-lr roles and integer-vs-VFP LOD copying differ; complete110-row control flow agrees. */
+/* NON_MATCHING: 236-vs244-byte local frame and the bound-texture/scratch register roles differ; the complete control flow agrees. */
 #include "shard/W6_W6Match7_MaterialTextures.h"
 #include "shard/S2GrTexture.h"
 #include "classes/Texture.h"

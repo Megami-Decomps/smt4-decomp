@@ -46,7 +46,7 @@ extern ResultBlock *g_result;
 
 PartySlots *gameGetSlotTable(void);
 void *gameGetPlayerData(void);
-void FUN_00296774(ResultBlock *result, s32 arg);
+void resultSetMenuState(ResultBlock *result, s32 arg);
 void FUN_00269dc8(void);
 void FUN_00203640(u16 battleId);
 s32 mapMainIsBusy(void);
@@ -74,7 +74,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
     PartySlots *slots = gameGetSlotTable();
 
     gameGetPlayerData();
-    FUN_00296774(result, 0);
+    resultSetMenuState(result, 0);
     FUN_00269dc8();
     FUN_00203640(spoils->battleId);
     if (mapMainIsBusy() != 0 || lmapMainIsRunning() != 0) {

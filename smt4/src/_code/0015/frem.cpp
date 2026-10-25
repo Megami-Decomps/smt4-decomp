@@ -17,7 +17,7 @@ int coprocessor_function(int, int, int, unsigned int, unsigned int, unsigned int
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: LZCOUNT (LZCOUNT). */
-extern unsigned long long FUN_001559ec(void);
+extern unsigned long long rt_fpResultDispatch(void);
 
 
 unsigned int frem(unsigned int param_1,unsigned int param_2)
@@ -46,7 +46,7 @@ unsigned int frem(unsigned int param_1,unsigned int param_2)
   }
   temp_v7 = (unsigned char)(temp_v0 >> 7);
   if (temp_v8 || (~(param_1 << 1) & 0xff000000) == 0) {
-    temp_v9 = FUN_001559ec();
+    temp_v9 = rt_fpResultDispatch();
     if (!temp_v7) {
       coprocessor_function(0xf,0xf,7,in_cr15,in_cr15,in_cr13);
     }

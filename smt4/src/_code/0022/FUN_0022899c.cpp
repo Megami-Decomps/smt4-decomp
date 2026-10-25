@@ -5,7 +5,7 @@
 extern "C" {
 
 int btlGetPassiveAffinityOverride(...);
-int FUN_0022aa38(unsigned int *, unsigned int);
+int btlEntryHasSkillCategory(unsigned int *, unsigned int);
 int selectionCopySupportedValue(unsigned int, unsigned int *);
 int FUN_0022abe0(...);
 int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
@@ -56,7 +56,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: btlGetPassiveAffinityOverride. */
-/* Supplied declaration required: FUN_0022aa38. */
+/* Supplied declaration required: btlEntryHasSkillCategory. */
 /* Supplied declaration required: selectionCopySupportedValue. */
 /* Supplied declaration required: FUN_0022abe0. */
 extern int randRange(unsigned int);
@@ -207,7 +207,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
           }
           selectionCopySupportedValue(temp_v9,&temp_v16);
           puVar5 = temp_v26;
-          FUN_0022aa38(temp_v26,temp_v16 & 0xff);
+          btlEntryHasSkillCategory(temp_v26,temp_v16 & 0xff);
           if (puVar5 != (unsigned int *)0x0) {
             return 2;
           }

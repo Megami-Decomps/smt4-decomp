@@ -1,4 +1,3 @@
-/* NON_MATCHING: one high-word mask AND uses reversed commutative operands. */
 #include "battle/btlMain.h"
 #include "battle/btlEffect.h"
 #include "battle/BattleMessageMasks.h"
@@ -34,9 +33,8 @@ u32 FUN_003a969c()
         s32 written = 0;
         for (s32 index = 0; index < 4; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-            u64 flags = entry->flags;
-            if ((g_btlMessageFlagMasks.required & flags) &&
-                !(flags & g_btlMessageFlagMasks.excluded) && entry->unitIndex >= 0) {
+            if ((entry->flags & g_btlMessageFlagMasks.required) &&
+                !(entry->flags & g_btlMessageFlagMasks.excluded) && entry->unitIndex >= 0) {
                 BattleRosterRecordA *record = &battle->roster[entry->unitIndex];
                 FUN_004fb6f4(written << 3, 0, record, effect, message, index << 3, -1);
                 s32 parameter = record->combatant.parameterIndex;

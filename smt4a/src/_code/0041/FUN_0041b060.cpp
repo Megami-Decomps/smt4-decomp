@@ -10,7 +10,7 @@ extern "C" {
 void efctSetSpeed(f32 alpha);
 void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
 UiTextMetrics *FUN_001834a4(u32 texture, u32 frame);
-s32 FUN_0018408c(const char *text, s32 font);
+s32 fontMeasureLineAdvance(const char *text, s32 font);
 void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
 void FUN_0041af74(FramedBadgeOwner *owner, s32 value, const UiScaledDrawPosition *position, u32 color);
 
@@ -27,7 +27,7 @@ void FUN_0041b060(FramedBadgeOwner *owner, const UiScaledDrawPosition *position,
         FUN_001835b4(2, 0x2B, index + 0x92, position->x, position->y, 17);
     }
     UiTextMetrics *metrics = FUN_001834a4(0x2B, 0x8A);
-    s32 width = FUN_0018408c(text, 4);
+    s32 width = fontMeasureLineAdvance(text, 4);
     FUN_00162790(4, 0x646464FF, text,
                  (f32)((metrics->dimensions[0] - width) / 2 + (position->x + metrics->x)),
                  (f32)(metrics->y + position->y), 0.0f, 0.0f, position->speed);

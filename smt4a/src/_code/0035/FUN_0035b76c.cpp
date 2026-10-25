@@ -1,14 +1,13 @@
 /* NON_MATCHING: two spots differ: the stack context is loaded into another register for the first push and first pop (retail builds the stack address in place in r4), and the third push (the stack's own top state as its argument) addresses its count through a literal offset where retail adds 0x10C0 and uses an immediate; layout, calls and offsets agree */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
-
 extern "C" {
 
 extern RenderCtxA *g_renderCtx;
 
 void FUN_00300100(s32 handler, s32 flag);
-void requestDispatch(void);
-void FUN_00182540(void);
+void requestDispatch(void *request);
+void FUN_00182540(EffectNode *node);
 void uiSpriteRefreshMode(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
@@ -29,13 +28,13 @@ void FUN_0035b76c(void)
     }
     FUN_00300100(2, 1);
     if (g_effectEditor.selection.resource != NULL) {
-        requestDispatch();
+        requestDispatch(g_effectEditor.selection.resource);
     }
-    if (g_effectEditor.dispatch.blocked != 0) {
-        FUN_00182540();
+    if (g_effectEditor.dispatch.node != NULL) {
+        FUN_00182540(g_effectEditor.dispatch.node);
     }
     if (g_effectEditor.dispatch.cachedEvent != 0) {
-        requestDispatch();
+        requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));
     }
     renderCtxResetColorScale(g_renderCtx);
     skinObjectUpdateMatrices(g_renderCtx);

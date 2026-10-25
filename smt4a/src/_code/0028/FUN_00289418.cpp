@@ -36,7 +36,7 @@ s32 recordGetModeForId(s32 id);
 void FUN_00334c6c(s32 x, s32 y, s32 flag);
 void efctSetSpeed(f32 alpha);
 void textFormatBuffer(u8 *buffer, const char *format);
-s32 FUN_0018408c(u8 *text, s32 font);
+s32 fontMeasureLineAdvance(u8 *text, s32 font);
 void FUN_00162790(s32 a, u32 color, u8 *text, f32 x, f32 y);
 void statusDownDrawEndBanner(s32 x, s32 y, f32 alpha);
 s32 vec2GetYInt(void *vec);
@@ -61,7 +61,7 @@ void FUN_00289418(s32 x, s32 y, f32 alpha)
         efctSetSpeed(alpha);
         u8 text[44];
         textFormatBuffer(text, "撂躂蒂＀");
-        s32 textWidth = FUN_0018408c(text, 3);
+        s32 textWidth = fontMeasureLineAdvance(text, 3);
         StatusPoint *label = FUN_001834a4(0x12, 0x579);
         FUN_00162790(3, color, text, (f32)(x + banner->x + (*banner->size - textWidth) / 2),
                      (f32)(label->y + banner->y + y));

@@ -14,18 +14,18 @@ extern struct {
     /* 0x08A */ u8 unk08a;
     /* 0x08B */ u8 unk08b[0x6b5];
     /* 0x740 */ Vec4 rotation;
-} DAT_00634bc0;
+} g_effectEditorSettings;
 
 /* Virtual slot: resets the display state (mode 8, identity rotation). */
 void FUN_003c5bd8(void)
 {
-    DAT_00634bc0.mode = 8;
-    DAT_00634bc0.unk089 = 0;
-    DAT_00634bc0.unk08a = 0;
-    DAT_00634bc0.rotation.x = 0;
-    DAT_00634bc0.rotation.y = 0;
-    DAT_00634bc0.rotation.z = 0;
-    DAT_00634bc0.rotation.w = 1.0f;
+    g_effectEditorSettings.mode = 8;
+    g_effectEditorSettings.unk089 = 0;
+    g_effectEditorSettings.unk08a = 0;
+    g_effectEditorSettings.rotation.x = 0;
+    g_effectEditorSettings.rotation.y = 0;
+    g_effectEditorSettings.rotation.z = 0;
+    g_effectEditorSettings.rotation.w = 1.0f;
 }
 
 } /* extern "C" */

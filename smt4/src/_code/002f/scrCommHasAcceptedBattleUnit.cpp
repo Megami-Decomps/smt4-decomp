@@ -1,27 +1,22 @@
-#include "common.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
 
 int scrSetResult(int result);
-extern int btlSlotsHaveReadyUnit(void *unit);
-extern u8 *btlGetMainState(void);
-
-typedef struct BtlUnit {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[0x284];
-} BtlUnit;
+extern int btlSlotsHaveReadyUnit(BtlEntry *unit);
+extern BtlMainState *btlGetMainState(void);
 
 /* Script command: result 1 when any of the 0x6D units is active (0x10), present (1), not hidden (0x40) and accepted by btlSlotsHaveReadyUnit. */
 u32 scrCommHasAcceptedBattleUnit(void)
 {
     int i = 0;
-    u8 *btl;
-    BtlUnit *unit;
+    BtlMainState *btl;
+    BtlEntry *unit;
     u32 flags;
 
     while (1) {
         btl = btlGetMainState();
-        unit = *(BtlUnit **)(btl + 0x1fc0) + i;
+        unit = btl->entries + i;
         flags = unit->flags;
         if ((((flags & 0x10) != 0 && (flags & 1) != 0) && ((flags & 0x40) == 0)) &&
             (btlSlotsHaveReadyUnit(unit) != 0)) {

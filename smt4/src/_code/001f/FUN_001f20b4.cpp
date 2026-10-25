@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002580d4(...);
 int FUN_0029a17c(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
-int FUN_002b6dd8(...);
+int fontMeasureLineAdvance(...);
 int devilGetRecord(void);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -45,7 +45,7 @@ extern int uniteGetWork(void);
 extern int ifTouchGetSelectionModeForRegion(unsigned int);
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029ea68(unsigned short);
-/* Supplied declaration required: FUN_002b6dd8. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
@@ -181,7 +181,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
               temp_v3 = demonGetRaceLabel(*temp_v10,0);
               textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
               puVar7 = temp_v9;
-              FUN_002b6dd8(puVar7,2);
+              fontMeasureLineAdvance(puVar7,2);
               VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) +
                                   param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
               VectorSignedToFloat(param_1 + ((int)**(short **)(temp_v6 + 0xc) - (int)puVar7) / 2 +
@@ -207,7 +207,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
               textFormatBuffer(temp_v9,&LAB_001f29c4);
               temp_v6 = FUN_002bf4f8(0x24,0x72);
               puVar7 = temp_v9;
-              FUN_002b6dd8(puVar7,2);
+              fontMeasureLineAdvance(puVar7,2);
               temp_v4 = (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v6 + 8);
               VectorSignedToFloat((int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) +
                                   param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -305,7 +305,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           temp_v3 = demonGetRaceLabel(*puVar5,0);
           textFormatBuffer(temp_v9,&LAB_001f29bc,temp_v3);
           puVar7 = temp_v9;
-          FUN_002b6dd8(puVar7,3);
+          fontMeasureLineAdvance(puVar7,3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v6 + 8) +

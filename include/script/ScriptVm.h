@@ -11,7 +11,8 @@ enum ScriptVmTag {
     SCRIPT_VM_TAG_INT = 0,
     SCRIPT_VM_TAG_FLOAT = 1,
     SCRIPT_VM_TAG_INT_VAR = 2,    /* the value is an index into the integer variables */
-    SCRIPT_VM_TAG_FLOAT_VAR = 3   /* the value is an index into the float variables */
+    SCRIPT_VM_TAG_FLOAT_VAR = 3,  /* the value is an index into the float variables */
+    SCRIPT_VM_TAG_RETURN_ADDRESS = 4
 };
 
 /* The 16-bit halves of an instruction. */
@@ -39,7 +40,13 @@ struct ScriptVmProcess {
     /* 0x1C */ s32 depth;                      /* values on the stack */
     /* 0x20 */ u8 tags[0x1c];                  /* ScriptVmTag of each stack value */
     /* 0x3C */ u32 values[0x1c];               /* the stack */
-    /* 0xAC */ u8 unkAC[0xc];
+    /* 0xAC */ union {
+        u8 unkAC[0xc];
+        struct {
+            u8 unkAC[8];
+            ScriptVmLabel *functions;
+        } tables;
+    };
     /* 0xB8 */ ScriptVmLabel *labels;
     /* 0xBC */ ScriptVmInstruction *code;
     /* 0xC0 */ u8 unkC0[0x28];
@@ -57,8 +64,10 @@ static __inline void scriptVmPush(ScriptVmProcess *process, u8 tag, u32 value)
 
 typedef char ScriptVmProcessLayout[
     offsetof(ScriptVmProcess, pc) == 0x18 && offsetof(ScriptVmProcess, tags) == 0x20 &&
-    offsetof(ScriptVmProcess, values) == 0x3c && offsetof(ScriptVmProcess, labels) == 0xb8 &&
-    offsetof(ScriptVmProcess, code) == 0xbc && offsetof(ScriptVmProcess, intVariables) == 0xe8 && offsetof(ScriptVmProcess, constants) == 0xec &&
+    offsetof(ScriptVmProcess, values) == 0x3c && offsetof(ScriptVmProcess, tables.functions) == 0xb4 &&
+    offsetof(ScriptVmProcess, labels) == 0xb8 && offsetof(ScriptVmProcess, code) == 0xbc &&
+    offsetof(ScriptVmProcess, intVariables) == 0xe8 && offsetof(ScriptVmProcess, constants) == 0xec &&
+    sizeof(ScriptVmProcess) == 0xf0 &&
     sizeof(ScriptVmLabel) == 0x20 ? 1 : -1];
 
 #endif

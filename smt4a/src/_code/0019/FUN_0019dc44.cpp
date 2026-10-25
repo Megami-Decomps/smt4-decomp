@@ -1,13 +1,8 @@
-#include "common.h"
-
-namespace {
-struct Record { u8 data[0x2c]; };
-struct Pool { Record *records; u32 count; };
-}
+#include "font/FontStringReader.h"
 extern "C" {
-extern Pool DAT_005b3bc0;
+extern FontRecordPool DAT_005b3bc0;
 /* Gets an indexed record when the pool is allocated and the index is valid. */
-Record *FUN_0019dc44(u32 index)
+FontRegisteredRecord *FUN_0019dc44(u32 index)
 {
     if (DAT_005b3bc0.records != NULL && index < DAT_005b3bc0.count) {
         return &DAT_005b3bc0.records[index];

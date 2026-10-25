@@ -16,7 +16,7 @@ s32 idOwnerHasActiveObject(void *unit);
 s32 gameFlagIsSet(u16 flag);
 s32 flagBitIsSet(u16 flag);
 BtlMainState *btlGetMainState(void);
-s32 FUN_00293988(BtlMainState *battle);
+u32 FUN_00293988(void *battle);
 s32 FUN_0023dcb8(void);
 
 u8 FUN_00330f80(PlayScene *scene, s32 ordinal)

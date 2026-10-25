@@ -17,7 +17,7 @@ void slotSetRequest(u32, u32, u32);
 BtlMainStateA *btlGetMainState();
 void asdLoadFileAsyncSimple(const char *, void **, u32);
 void *gameDataBlocksGetSaveData();
-u32 FUN_003e6dc8(BtlGameOverA *);
+u32 talkEventStartScript(BtlGameOverA *);
 u32 FUN_003e71a8(BtlGameOverA *);
 
 /* Drive eye, effect and fade events, then select the normal or forced game-over path. */
@@ -65,6 +65,6 @@ u32 FUN_003e6c14(BtlGameOverA *work)
     if (save->gameOvers < 255)
         ++save->gameOvers;
     work->state = 4;
-    return FUN_003e6dc8(work);
+    return talkEventStartScript(work);
 }
 }

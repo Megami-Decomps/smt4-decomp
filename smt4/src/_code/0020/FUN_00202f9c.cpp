@@ -1,6 +1,8 @@
 /* NON_MATCHING: the global base pointer is held in r6 (retail: r4); otherwise identical. */
 #include "common.h"
 
+struct ScriptResource;
+
 extern "C" {
 
 typedef struct SceneState {
@@ -9,7 +11,7 @@ typedef struct SceneState {
     /* 0x005 */ u8 unk005[0x23B];
     /* 0x240 */ void *buffer240;
     /* 0x244 */ void *buffer244;
-    /* 0x248 */ void *buffer248;
+    /* 0x248 */ ScriptResource *buffer248;
     /* 0x24C */ u8 unk24C[0x104];
     /* 0x350 */ void *buffer350;
     /* 0x354 */ u8 unk354[0xC];
@@ -36,7 +38,7 @@ int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
 int FUN_0029ee6c(int arg0, int color);
 int fileSlotFree(int arg);
-int scrScriptProcessDestroy(void);
+void scrScriptProcessDestroy(ScriptResource *resource);
 int asdMdlManagerDestroy(u32 handle);
 int ifTouchRegionRemove(void);
 int asdMemFree(void *block);
@@ -65,7 +67,7 @@ void FUN_00202f9c(void)
     fileSlotFree(0x3d);
     msgWindowReset();
     if (state2->buffer248 != NULL) {
-        scrScriptProcessDestroy();
+        scrScriptProcessDestroy(state2->buffer248);
         state2->buffer248 = NULL;
     }
     if (state2->buffer240 != NULL) {

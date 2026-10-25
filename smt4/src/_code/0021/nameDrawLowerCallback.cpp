@@ -12,12 +12,12 @@ struct NameDrawGlobals {
 };
 
 extern "C" NameDrawGlobals g_name;
-extern "C" void FUN_0039723c(void *drawing);
+extern "C" void titlePanelDraw(void *drawing);
 
 /* Draw the lower name-entry view unless it is hidden. */
 extern "C" s32 nameDrawLowerCallback(void)
 {
     if (g_name.work->hidden == 1)
-        FUN_0039723c(g_name.work->drawing);
+        titlePanelDraw(g_name.work->drawing);
     return 0;
 }

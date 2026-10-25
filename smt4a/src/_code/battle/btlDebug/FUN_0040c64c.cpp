@@ -77,8 +77,8 @@ void FUN_003f24e0(BattleStateView *state, s32 unit);
 s32 FUN_004aa750(u32 block);
 s32 FUN_004c9b38(UnitRecordView *unit);
 void btlPopulateSelectedSlot(s32 mode, s32 slot, s32 unit, s32 secondUnit);
-void FUN_004cae0c(BattleStateView *state, UnitRecordView *unit, s32 flag);
-void nameEntriesRegisterVerNames(void);
+void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
+void nameEntriesRegisterVerNames(void *work);
 void FUN_004fd204(s32 x, u32 id, UnitRecordView *unit, s32 alpha, s32 y, s32 flag);
 void FUN_004fe764(s32 x, u32 id, UnitRecordView *unit, u32 style, s32 flag);
 
@@ -97,7 +97,7 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
                     return;
                 }
                 if ((g_btlAux->flags & 0x400) != 0) {
-                    nameEntriesRegisterVerNames();
+                    nameEntriesRegisterVerNames(g_btlAux);
                 }
                 step->phase = 1;
             }
@@ -124,7 +124,7 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
             s16 a = DAT_0057a634.left;
             s16 b = DAT_0057a634.offset;
             s16 c = DAT_0057a634.top;
-            FUN_004cae0c(state, unit, 0);
+            FUN_004cae0c(state, unit, 0, 0);
             FUN_004fd204(b + a, step->id, unit, 0xff, c, 0);
             u32 style = 6;
             if ((unit->status & 0x10) != 0) {

@@ -121,6 +121,23 @@ def data_relocations(retail, built):
     return count
 
 
+def integer_words(retail, built):
+    """Pool words that are numbers, not addresses: the target objects relocate every pool word that
+    falls inside the image to a `DAT_<address>` symbol (a status code like 0x400001 does). Where the
+    built row holds the plain number that symbol plus retail's word adds up to, retail's row is the
+    built one; relink.py compares the bytes. Returns how many."""
+    retail_at = {row.split(":", 1)[0].strip(): i for i, row in enumerate(retail)}
+    count = 0
+    for row in built:
+        j = retail_at.get(row.split(":", 1)[0].strip())
+        mine = re.search(r"\.word\s+0x([0-9a-f]+)$", row)
+        theirs = j is not None and re.search(r"\.word\s+0x([0-9a-f]+)  \[R_ARM_ABS32 DAT_([0-9a-f]{8})\]$", retail[j])
+        if mine and theirs and int(theirs[2], 16) + int(theirs[1], 16) == int(mine[1], 16):
+            retail[j] = row
+            count += 1
+    return count
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("game", choices=["smt4", "smt4a"])
@@ -151,6 +168,7 @@ def main():
     built = listing(tool, ROOT / args.game / unit["object"])
     data_as_bytes(retail, built, text_bytes(tool, ROOT / args.game / unit["target"]), text_bytes(tool, ROOT / args.game / unit["object"]))
     by_section = data_relocations(retail, built)
+    integer_words(retail, built)
     note = " (data relocations by section: relink checks the address)" if by_section else ""
     strip = lambda rows: [re.sub(r"^\s*[0-9a-f]+: ", "", r) for r in rows]
     # armcc pads a Thumb function's section to 4 bytes: a trailing pad is not a difference.

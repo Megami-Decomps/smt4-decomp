@@ -17,7 +17,7 @@ int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_0018408c(...);
+int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int FUN_001fc720(int, int);
 int statusDownDrawIndicatorPairs(...);
@@ -62,7 +62,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_0018408c. */
+/* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
@@ -457,7 +457,7 @@ LAB_0026b644:
       temp_v11 = FUN_001834a4(0x12,0x544);
       textFormatBuffer(&temp_v17,&DAT_00536b70);
       ppuVar10 = &temp_v17;
-      FUN_0018408c(ppuVar10,2);
+      fontMeasureLineAdvance(ppuVar10,2);
       VectorSignedToFloat(temp_v0 + (int)*(short *)(temp_v11 + 8) +
                                   ((int)**(short **)(temp_v11 + 0xc) - (int)ppuVar10) / 2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);

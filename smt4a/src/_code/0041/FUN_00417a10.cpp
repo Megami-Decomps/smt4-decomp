@@ -1,4 +1,4 @@
-/* NON_MATCHING: The pair clear uses r1 for zero rather than retail r2 after FUN_00467040; the helper/constructor return ABI is not yet recovered. */
+/* NON_MATCHING: base heap construction matches, but the trailing range clear uses r1 instead of retail's r2. */
 #include "common.h"
 
 struct CallbackPairState {
@@ -6,12 +6,13 @@ struct CallbackPairState {
     /* 0x20 */ u32 first;
     /* 0x24 */ u32 second;
 };
-extern "C" CallbackPairState *FUN_00467040(void *context, u32 index);
+extern "C" CallbackPairState *FUN_00467040(CallbackPairState *heap);
 
-/* Clear the pair returned for the callback's selected entry. */
-extern "C" void FUN_00417a10(void *context, u32 index)
+/* Initialize the frame heap base, then clear its trailing range. */
+extern "C" CallbackPairState *FUN_00417a10(CallbackPairState *heap)
 {
-    CallbackPairState *entry = FUN_00467040(context, index);
+    CallbackPairState *entry = FUN_00467040(heap);
     entry->first = 0;
     entry->second = 0;
+    return entry;
 }
