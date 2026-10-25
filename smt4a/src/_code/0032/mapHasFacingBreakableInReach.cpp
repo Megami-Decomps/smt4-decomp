@@ -26,7 +26,7 @@ extern "C" {
 extern MapBreakableWork* g_mapHakai;
 f32 mathAngleDeltaDegrees(f32 current, f32 target);
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
-f32 FUN_00384830(MapVector from, f32 heading, MapVector to);
+f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
 }
 
 namespace {
@@ -65,7 +65,7 @@ extern "C" u32 mapHasFacingBreakableInReach(void)
             distance = cachedDistance;
         }
         if (distance < 300.0f &&
-            FUN_00384830(g_lmapScene->position, g_lmapScene->heading, entry.position) < 70.0f) {
+            mathAbsHeadingErrorToPoint(g_lmapScene->position, g_lmapScene->heading, entry.position) < 70.0f) {
             if (frontFacing != 0) {
                 return 1;
             }

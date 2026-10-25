@@ -1,11 +1,10 @@
-/* NON_MATCHING: retail addresses the entry id as menu + index * 32 + 0x5ac (this: + 0x5a8, #4) and branches to the shared "return 0" instead of movne for a pending error. */
+/* NON_MATCHING: retail ends the pending-error check with `moveq r0, #1; bne` into the shared return-0 block; armcc here emits `movne r0, #0`. */
 #include "common.h"
 
 namespace {
 struct PurchaseEntry {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 id;
-    /* 0x06 */ u8 unk06[0x1a];
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0x1e];
 };
 
 struct PurchaseMenu {
@@ -15,8 +14,9 @@ struct PurchaseMenu {
     /* 0x0095 */ u8 unk0095[0x510];
     /* 0x05A5 */ u8 discounted;
     /* 0x05A6 */ u8 unk05a6[2];
-    /* 0x05A8 */ PurchaseEntry entries[1280];
-    /* 0xA5A8 */ u8 unka5a8[8];
+    /* 0x05A8 */ u8 unk05a8[4];
+    /* 0x05AC */ PurchaseEntry entries[1280];
+    /* 0xA5AC */ u8 unka5ac[4];
     /* 0xA5B0 */ u8 error;
 };
 }

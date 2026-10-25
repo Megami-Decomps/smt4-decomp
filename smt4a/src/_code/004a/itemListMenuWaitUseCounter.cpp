@@ -31,7 +31,7 @@ ItemRecord *FUN_00184310(u16 itemId);
 void sysPlaySe(s32 se);
 void FUN_003343f0(s32 value);
 s32 FUN_002c7c54(void);
-void FUN_004a6610(ItemListMenu *menu, s32 a, s32 b);
+void itemListSelectVariant(ItemListMenu *menu, s32 a, s32 b);
 
 /* Wait for the use counter; once it finishes, play the confirm sound and move to state 2. */
 void itemListMenuWaitUseCounter(ItemListMenu *menu)
@@ -52,7 +52,7 @@ void itemListMenuWaitUseCounter(ItemListMenu *menu)
         menu->state = 2;
         menu->timer = 0;
     } else if (FUN_002c7c54() != 0x69) {
-        FUN_004a6610(menu, 1, 1);
+        itemListSelectVariant(menu, 1, 1);
     }
 }
 

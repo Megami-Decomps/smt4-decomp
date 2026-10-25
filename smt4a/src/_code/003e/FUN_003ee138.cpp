@@ -8,7 +8,7 @@ int sysMemClear(...);
 int FUN_003e9cec(...);
 int FUN_004ca63c(...);
 int rt_memcpy(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ extern unsigned int gameGetSaveSlotData(int);
 /* Supplied declaration required: FUN_003e9cec. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_003ee138(int param_1)
@@ -65,7 +65,7 @@ void FUN_003ee138(int param_1)
   temp_v12 = param_1;
   if (DAT_00573938 != 0) {
     temp_v3 = gameGetSlotTable();
-    rt_memcpy_w(DAT_00573938,temp_v3,0x2d30);
+    __aeabi_memcpy4(DAT_00573938,temp_v3,0x2d30);
   }
   if (DAT_0057393c != 0) {
     temp_v3 = flagValueGetStorage();
@@ -75,20 +75,20 @@ void FUN_003ee138(int param_1)
   piVar12 = (int *)(temp_v12 + 0x1ed4);
   piVar9 = (int *)(temp_v12 + 0x1ffc);
   if (*piVar14 != 0) {
-    rt_memcpy_w(*piVar14,*piVar9,0x408);
-    rt_memcpy_w(*piVar14 + 0x408,*piVar12,0x1d0);
-    rt_memcpy_w(*piVar14 + 0x5d8,*piVar9 + 0x408,0x408);
-    rt_memcpy_w(*piVar14 + 0x9e0,*piVar12 + 0x1d0,0x1d0);
-    rt_memcpy_w(*piVar14 + 0xbb0,*piVar9 + 0x810,0x408);
-    rt_memcpy_w(*piVar14 + 0xfb8,*piVar12 + 0x3a0,0x1d0);
-    rt_memcpy_w(*piVar14 + 0x1188,*piVar9 + 0xc18,0x408);
-    rt_memcpy_w(*piVar14 + 0x1590,*piVar12 + 0x570,0x1d0);
-    rt_memcpy_w(*piVar14 + 0x2ec0,*piVar9 + 0xd9b0,0x408);
-    rt_memcpy_w(*piVar14 + 13000,*piVar12 + 0x61e0,0x1d0);
+    __aeabi_memcpy4(*piVar14,*piVar9,0x408);
+    __aeabi_memcpy4(*piVar14 + 0x408,*piVar12,0x1d0);
+    __aeabi_memcpy4(*piVar14 + 0x5d8,*piVar9 + 0x408,0x408);
+    __aeabi_memcpy4(*piVar14 + 0x9e0,*piVar12 + 0x1d0,0x1d0);
+    __aeabi_memcpy4(*piVar14 + 0xbb0,*piVar9 + 0x810,0x408);
+    __aeabi_memcpy4(*piVar14 + 0xfb8,*piVar12 + 0x3a0,0x1d0);
+    __aeabi_memcpy4(*piVar14 + 0x1188,*piVar9 + 0xc18,0x408);
+    __aeabi_memcpy4(*piVar14 + 0x1590,*piVar12 + 0x570,0x1d0);
+    __aeabi_memcpy4(*piVar14 + 0x2ec0,*piVar9 + 0xd9b0,0x408);
+    __aeabi_memcpy4(*piVar14 + 13000,*piVar12 + 0x61e0,0x1d0);
   }
   if (DAT_0057392c != 0) {
     temp_v3 = gameGetSlotTable();
-    rt_memcpy_w(temp_v3,DAT_0057392c,0x2d30);
+    __aeabi_memcpy4(temp_v3,DAT_0057392c,0x2d30);
   }
   if (DAT_00573930 != 0) {
     temp_v3 = flagValueGetStorage();
@@ -165,14 +165,14 @@ LAB_003ee510:
       if (temp_v5 != 0) goto LAB_003ee500;
       goto LAB_003ee710;
     }
-    rt_memcpy_w(*piVar9,temp_v4 + 0x1760,0x408);
-    rt_memcpy_w(*piVar12,*piVar14 + 0x1b68,0x1d0);
-    rt_memcpy_w(*piVar9 + 0x408,*piVar14 + 0x1d38,0x408);
-    rt_memcpy_w(*piVar12 + 0x1d0,*piVar14 + 0x2140,0x1d0);
-    rt_memcpy_w(*piVar9 + 0x810,*piVar14 + 0x2310,0x408);
-    rt_memcpy_w(*piVar12 + 0x3a0,*piVar14 + 0x2718,0x1d0);
-    rt_memcpy_w(*piVar9 + 0xc18,*piVar14 + 0x28e8,0x408);
-    rt_memcpy_w(*piVar12 + 0x570,*piVar14 + 0x2cf0,0x1d0);
+    __aeabi_memcpy4(*piVar9,temp_v4 + 0x1760,0x408);
+    __aeabi_memcpy4(*piVar12,*piVar14 + 0x1b68,0x1d0);
+    __aeabi_memcpy4(*piVar9 + 0x408,*piVar14 + 0x1d38,0x408);
+    __aeabi_memcpy4(*piVar12 + 0x1d0,*piVar14 + 0x2140,0x1d0);
+    __aeabi_memcpy4(*piVar9 + 0x810,*piVar14 + 0x2310,0x408);
+    __aeabi_memcpy4(*piVar12 + 0x3a0,*piVar14 + 0x2718,0x1d0);
+    __aeabi_memcpy4(*piVar9 + 0xc18,*piVar14 + 0x28e8,0x408);
+    __aeabi_memcpy4(*piVar12 + 0x570,*piVar14 + 0x2cf0,0x1d0);
 LAB_003ee650:
     *(unsigned char *)(temp_v12 + 0x4cd0) = 0;
   }

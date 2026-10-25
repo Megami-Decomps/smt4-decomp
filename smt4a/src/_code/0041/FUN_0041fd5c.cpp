@@ -12,10 +12,10 @@ extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
 void FUN_0041fd5c(SaveLoadTransitionPrefixA *state)
 {
     for (s32 i = 0; i < state->spriteCount; ++i) {
-        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(
-            reinterpret_cast<u8 *>(state) + 0x500 + i * sizeof(UiSpriteState));
-        uiSpriteSetKeyframe(sprite, 5, 0);
-        uiSpriteSetImageKeyframe(sprite, 0, 0);
+        uiSpriteSetKeyframe(reinterpret_cast<UiSpriteState *>(
+            reinterpret_cast<u8 *>(state) + 0x500 + i * sizeof(UiSpriteState)), 5, 0);
+        uiSpriteSetImageKeyframe(reinterpret_cast<UiSpriteState *>(
+            reinterpret_cast<u8 *>(state) + 0x500 + i * sizeof(UiSpriteState)), 0, 0);
     }
 
     state->transitionValue0 = 0;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: category/rank keys are assigned to different callee-saved registers. */
+/* NON_MATCHING: category/rank keys are assigned to different callee-saved registers (declaring the four locals in the order rightCategory, leftCategory, rightRank, leftRank at the top matches, but that is declaration-order steering). */
 #include "gamedata/ItemSortRecord.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W6_W6Match5_DevilSort.h"

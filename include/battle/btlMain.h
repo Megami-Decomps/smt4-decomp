@@ -306,7 +306,7 @@ typedef struct BtlMainStateA {
         } reinforcementChance;
     };
     /* 0x4CD0 */ u8 unk4cd0;
-    /* 0x4CD1 */ u8 unk4cd1;
+    /* 0x4CD1 */ s8 unk4cd1;
     /* 0x4CD2 */ u8 unk4cd2[0x1A];
     /* 0x4CEC */ s32 specialEffect; /* effect handle for the special combatant, 0 = none */
 } BtlMainStateA;

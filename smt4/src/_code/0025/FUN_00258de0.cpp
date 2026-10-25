@@ -1,272 +1,229 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00258de0` (_code @ 0x258de0, 0x408 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation differs (retail keeps the source and effect arguments in their stack home slots across the calls) */
+#include "common.h"
 
-extern "C" {
-
-int FUN_00262260(int, int, unsigned int);
-int padClearBits(...);
-int btlSourceGetMaxHp(void);
-int objectFlagsClear(...);
-int FUN_00269bf0(void);
-
-typedef struct fn_00258de0_arg1 fn_00258de0_arg1;
-struct fn_00258de0_arg1 {
-    unsigned char pad_0x0[0xe];
-    short field_0xe; /* +0xe */
-    unsigned char pad_0x10[0xc];
-    short field_0x1c; /* +0x1c */
-    unsigned char pad_0x1e[0xc];
-    ushort field_0x2a; /* +0x2a */
+/* The player's pad-side record (only the fields used here). */
+struct RestorePlayer {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ s16 maximum;
+    /* 0x1e */ u8 unk1e[0xc];
+    /* 0x2a */ s16 current;
+    /* 0x2c */ u8 unk2c[0x46];
+    /* 0x72 */ u16 ailments;
 };
 
-/* stack frame of param_5: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_5_stack;
+/* A party unit's record (only the fields used here). */
+struct RestoreUnit {
+    /* 0x00 */ u8 unk00[0xe];
+    /* 0x0e */ s16 maximum;
+    /* 0x10 */ u8 unk10[0x1a];
+    /* 0x2a */ s16 current;
+    /* 0x2c */ u8 unk2c[0x18];
+    /* 0x44 */ u16 ailments;
+};
 
-extern int FUN_001ad4c0(int);
-/* Supplied declaration required: FUN_00262260. */
-/* Supplied declaration required: padClearBits. */
-/* Supplied declaration required: btlSourceGetMaxHp. */
-/* Supplied declaration required: objectFlagsClear. */
-/* Supplied declaration required: FUN_00269bf0. */
-extern int btlGetMainState(void);
-extern int playerPadTestBit(unsigned int);
-extern int flagWordTestBit(int, unsigned int);
-extern int gameGetUnitRecord(void);
-extern int gameGetPlayerData(void);
-extern unsigned int FUN_0032b278(int, unsigned short);
+/* The effect being applied (only the type byte). */
+struct RestoreEffect {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+};
 
+extern "C" {
+RestorePlayer *gameGetPlayerData(void);
+RestoreUnit *gameGetUnitRecord(s32 unit);
+s32 btlGetMainState(void);
+s32 btlSourceGetMaxHp(RestorePlayer *player);
+s32 FUN_00269bf0(RestoreUnit *unit);
+s32 flagWordTestBit(RestoreUnit *unit, u32 bit);
+void objectFlagsClear(RestoreUnit *unit, u32 bits);
+s32 playerPadTestBit(u32 bit);
+void padClearBits(u32 bits);
+s32 FUN_001ad4c0(RestoreEffect *effect);
+s32 FUN_00262260(RestoreEffect *effect, s32 maximum, u32 source);
+u32 FUN_0032b278(RestoreEffect *effect, u16 ailments);
 
-unsigned int
-FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int param_4,int *param_5)
-
+/* Applies a restore effect to the player (target < 0) or to a party unit. With `preview` set
+   nothing is written: the amount that would be restored goes to `amountOut`. Returns 0 when the
+   effect did something, 1 when the target is not affected. */
+u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32 *amountOut)
 {
-/* irregular: 5 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  
-  temp_v4 = 0;
-  temp_v5 = 0;
-  if ((int)param_2 < 0) {
-    temp_v4 = gameGetPlayerData();
-  }
-  else {
-    temp_v5 = gameGetUnitRecord();
-    if (temp_v5 == 0) {
-      return 1;
-    }
-    temp_v6 = flagWordTestBit(temp_v5,10);
-    if (temp_v6 != 0) {
-      return 1;
-    }
-    temp_v6 = flagWordTestBit(temp_v5,2);
-    if (temp_v6 != 0) {
-      return 1;
-    }
-  }
-  temp_v6 = 0;
-  temp_v8 = 1;
-  temp_v7 = 0;
-  if (temp_v4 != 0) {
-    temp_v6 = btlGetMainState();
-    if (temp_v6 == 0) {
-      temp_v6 = (int)*(short *)(temp_v4 + 0x1c);
-    }
-    else {
-      temp_v6 = temp_v4;
-      btlSourceGetMaxHp();
-    }
-  }
-  if (temp_v5 != 0) {
-    temp_v7 = btlGetMainState();
-    if (temp_v7 == 0) {
-      temp_v7 = (int)*(short *)(temp_v5 + 0xe);
-    }
-    else {
-      temp_v7 = temp_v5;
-      FUN_00269bf0();
-    }
-  }
-  temp_v2 = FUN_001ad4c0(param_3);
-  temp_v1 = (short)temp_v6;
-  temp_v0 = (short)temp_v7;
-  if (temp_v2 != 0) {
-    if (temp_v4 != 0) {
-      if (*(char *)(param_3 + 0x23) == '\a') {
-        return 1;
-      }
-      temp_v5 = playerPadTestBit(1);
-      if (temp_v5 == 0) {
-        return 1;
-      }
-      if (param_4 == 0) {
-        padClearBits(2);
-        temp_v5 = playerPadTestBit(3);
-        if (temp_v5 != 0) {
-          temp_v1 = *(short *)(temp_v4 + 0x2a) + 1;
+    RestorePlayer *player = NULL;
+    RestoreUnit *unit = NULL;
+    if (target < 0) {
+        player = gameGetPlayerData();
+    } else {
+        unit = gameGetUnitRecord(target);
+        if (unit == NULL || flagWordTestBit(unit, 10) || flagWordTestBit(unit, 2)) {
+            return 1;
         }
-        else {
-          FUN_00262260(param_3,(int)temp_v1,param_1);
-          temp_v1 = (short)param_3 + *(short *)(temp_v4 + 0x2a);
-        }
-        *(short *)(temp_v4 + 0x2a) = temp_v1;
-        if (0 < temp_v1) {
-          return 0;
-        }
-        *(unsigned short *)(temp_v4 + 0x2a) = 1;
-        return 0;
-      }
-      if (param_5 == (int *)0x0) {
-        return 0;
-      }
-      temp_v4 = playerPadTestBit(3);
-      if (temp_v4 == 0) {
-        FUN_00262260(param_3,(int)temp_v1,param_1);
-        *param_5 = param_3;
-        return 0;
-      }
     }
-    else {
-      temp_v4 = flagWordTestBit(temp_v5,1);
-      if (temp_v4 == 0) {
-        return 1;
-      }
-      if (param_4 == 0) {
-        objectFlagsClear(temp_v5,2);
-        temp_v4 = flagWordTestBit(temp_v5,3);
-        if (temp_v4 != 0) {
-          temp_v1 = *(short *)(temp_v5 + 0x2a) + 1;
+    u32 result = 1;
+    s32 playerMaximum = 0;
+    s32 unitMaximum = 0;
+    if (player != NULL) {
+        if (btlGetMainState() == 0) {
+            playerMaximum = player->maximum;
+        } else {
+            playerMaximum = btlSourceGetMaxHp(player);
         }
-        else {
-          FUN_00262260(param_3,(int)temp_v0,param_1);
-          temp_v1 = (short)param_3 + *(short *)(temp_v5 + 0x2a);
+    }
+    if (unit != NULL) {
+        if (btlGetMainState() == 0) {
+            unitMaximum = unit->maximum;
+        } else {
+            unitMaximum = FUN_00269bf0(unit);
         }
-        *(short *)(temp_v5 + 0x2a) = temp_v1;
-        if (0 < temp_v1) {
-          return 0;
-        }
-        *(unsigned short *)(temp_v5 + 0x2a) = 1;
-        return 0;
-      }
-      if (param_5 == (int *)0x0) {
-        return 0;
-      }
-      temp_v4 = flagWordTestBit(temp_v5,3);
-      if (temp_v4 == 0) {
-        FUN_00262260(param_3,(int)temp_v0,param_1);
-        *param_5 = param_3;
-        return 0;
-      }
     }
-    *param_5 = 1;
-    return 0;
-  }
-  if (temp_v4 == 0) {
-    temp_v4 = flagWordTestBit(temp_v5,1);
-    if (temp_v4 != 0) {
-      return 1;
-    }
-    temp_v3 = FUN_0032b278(param_3,*(unsigned short *)(temp_v5 + 0x44));
-    if (temp_v3 != 0) {
-      if (param_4 == 0) {
-        objectFlagsClear(temp_v5,temp_v3 & 0xffff);
-      }
-      temp_v8 = 0;
-    }
-    FUN_00262260(param_3,(int)temp_v0,param_1);
-    if (param_3 != 0) {
-      temp_v4 = flagWordTestBit(temp_v5,3);
-      temp_v1 = *(short *)(temp_v5 + 0x2a);
-      if (temp_v4 != 0) {
-        param_3 = 1;
-      }
-      if (temp_v1 < temp_v7) {
-        if (param_4 != 0) {
-          if (param_5 == (int *)0x0) {
+
+    if (FUN_001ad4c0(effect) != 0) {
+        if (player != NULL) {
+            if (effect->kind == 7 || !playerPadTestBit(1)) {
+                return 1;
+            }
+            if (preview == 0) {
+                padClearBits(2);
+                s16 value;
+                if (playerPadTestBit(3)) {
+                    value = player->current + 1;
+                } else {
+                    value = FUN_00262260(effect, (s16)playerMaximum, source) + player->current;
+                }
+                player->current = value;
+                if (value <= 0) {
+                    player->current = 1;
+                }
+                return 0;
+            }
+            if (amountOut == NULL) {
+                return 0;
+            }
+            if (!playerPadTestBit(3)) {
+                *amountOut = FUN_00262260(effect, (s16)playerMaximum, source);
+                return 0;
+            }
+            *amountOut = 1;
             return 0;
-          }
-          temp_v7 = temp_v7 - temp_v1;
-          if (temp_v7 < param_3) {
-            param_3 = temp_v7;
-          }
-          *param_5 = param_3;
-          return 0;
         }
-        temp_v8 = 0;
-        *(short *)(temp_v5 + 0x2a) = temp_v1 + (short)param_3;
-        if (*(short *)(temp_v5 + 0x2a) <= temp_v7) {
-          temp_v7 = (int)*(short *)(temp_v5 + 0x2a);
+        if (!flagWordTestBit(unit, 1)) {
+            return 1;
         }
-        *(short *)(temp_v5 + 0x2a) = (short)temp_v7;
-        return temp_v8;
-      }
-    }
-    if (param_4 != 0) {
-      return temp_v8;
-    }
-    if (*(short *)(temp_v5 + 0x2a) <= temp_v7) {
-      temp_v7 = (int)*(short *)(temp_v5 + 0x2a);
-    }
-    *(short *)(temp_v5 + 0x2a) = (short)temp_v7;
-    return temp_v8;
-  }
-  temp_v5 = playerPadTestBit(1);
-  if (temp_v5 != 0) {
-    return 1;
-  }
-  temp_v3 = FUN_0032b278(param_3,*(unsigned short *)(temp_v4 + 0x72));
-  if (temp_v3 != 0) {
-    if (param_4 == 0) {
-      padClearBits(temp_v3 & 0xffff);
-    }
-    temp_v8 = 0;
-  }
-  FUN_00262260(param_3,(int)temp_v1,param_1);
-  if (param_3 != 0) {
-    temp_v5 = playerPadTestBit(3);
-    temp_v1 = *(short *)(temp_v4 + 0x2a);
-    if (temp_v5 != 0) {
-      param_3 = 1;
-    }
-    if (temp_v1 < temp_v6) {
-      if (param_4 != 0) {
-        if (param_5 == (int *)0x0) {
-          return 0;
+        if (preview == 0) {
+            objectFlagsClear(unit, 2);
+            s16 value;
+            if (flagWordTestBit(unit, 3)) {
+                value = unit->current + 1;
+            } else {
+                value = FUN_00262260(effect, (s16)unitMaximum, source) + unit->current;
+            }
+            unit->current = value;
+            if (value <= 0) {
+                unit->current = 1;
+            }
+            return 0;
         }
-        temp_v6 = temp_v6 - temp_v1;
-        if (temp_v6 < param_3) {
-          param_3 = temp_v6;
+        if (amountOut == NULL) {
+            return 0;
         }
-        *param_5 = param_3;
+        if (!flagWordTestBit(unit, 3)) {
+            *amountOut = FUN_00262260(effect, (s16)unitMaximum, source);
+            return 0;
+        }
+        *amountOut = 1;
         return 0;
-      }
-      temp_v8 = 0;
-      *(short *)(temp_v4 + 0x2a) = temp_v1 + (short)param_3;
-      if (*(short *)(temp_v4 + 0x2a) <= temp_v6) {
-        temp_v6 = (int)*(short *)(temp_v4 + 0x2a);
-      }
-      *(short *)(temp_v4 + 0x2a) = (short)temp_v6;
-      return temp_v8;
     }
-  }
-  if (param_4 != 0) {
-    return temp_v8;
-  }
-  if (*(short *)(temp_v4 + 0x2a) <= temp_v6) {
-    temp_v6 = (int)*(short *)(temp_v4 + 0x2a);
-  }
-  *(short *)(temp_v4 + 0x2a) = (short)temp_v6;
-  return temp_v8;
+
+    if (player == NULL) {
+        if (flagWordTestBit(unit, 1)) {
+            return 1;
+        }
+        u32 cured = FUN_0032b278(effect, unit->ailments);
+        if (cured != 0) {
+            if (preview == 0) {
+                objectFlagsClear(unit, (u16)cured);
+            }
+            result = 0;
+        }
+        s32 amount = FUN_00262260(effect, (s16)unitMaximum, source);
+        if (amount != 0) {
+            if (flagWordTestBit(unit, 3)) {
+                amount = 1;
+            }
+            s32 current = unit->current;
+            if (current < unitMaximum) {
+                if (preview != 0) {
+                    if (amountOut == NULL) {
+                        return 0;
+                    }
+                    s32 room = unitMaximum - current;
+                    if (amount > room) {
+                        amount = room;
+                    }
+                    *amountOut = amount;
+                    return 0;
+                }
+                result = 0;
+                unit->current = current + amount;
+                if (unit->current <= unitMaximum) {
+                    unitMaximum = unit->current;
+                }
+                unit->current = unitMaximum;
+                return result;
+            }
+        }
+        if (preview != 0) {
+            return result;
+        }
+        if (unit->current <= unitMaximum) {
+            unitMaximum = unit->current;
+        }
+        unit->current = unitMaximum;
+        return result;
+    }
+
+    if (playerPadTestBit(1)) {
+        return 1;
+    }
+    u32 cured = FUN_0032b278(effect, player->ailments);
+    if (cured != 0) {
+        if (preview == 0) {
+            padClearBits((u16)cured);
+        }
+        result = 0;
+    }
+    s32 amount = FUN_00262260(effect, (s16)playerMaximum, source);
+    if (amount != 0) {
+        if (playerPadTestBit(3)) {
+            amount = 1;
+        }
+        s32 current = player->current;
+        if (current < playerMaximum) {
+            if (preview != 0) {
+                if (amountOut == NULL) {
+                    return 0;
+                }
+                s32 room = playerMaximum - current;
+                if (amount > room) {
+                    amount = room;
+                }
+                *amountOut = amount;
+                return 0;
+            }
+            player->current = current + amount;
+            result = 0;
+            if (player->current <= playerMaximum) {
+                playerMaximum = player->current;
+            }
+            player->current = playerMaximum;
+            return result;
+        }
+    }
+    if (preview != 0) {
+        return result;
+    }
+    if (player->current <= playerMaximum) {
+        playerMaximum = player->current;
+    }
+    player->current = playerMaximum;
+    return result;
 }
 
 } /* extern "C" */

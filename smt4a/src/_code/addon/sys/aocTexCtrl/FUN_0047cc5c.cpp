@@ -34,7 +34,7 @@ struct PackedAocTextureRow {
 extern "C" {
 extern const char DAT_005271bc[];
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 
 void FUN_0047cc5c(AocTexCtrl *control, const AocTexturePackageHeader *const *source)
 {
@@ -63,7 +63,7 @@ void FUN_0047cc5c(AocTexCtrl *control, const AocTexturePackageHeader *const *sou
                 row->entries = NULL;
             }
             if (row->count > 0)
-                rt_memcpy_w(row->entries, input + 1, row->count * sizeof(AocTexturePackageEntry));
+                __aeabi_memcpy4(row->entries, input + 1, row->count * sizeof(AocTexturePackageEntry));
             if (!previous)
                 reinterpret_cast<AocTexturePackageView *>(control->state)->rows = row;
             else

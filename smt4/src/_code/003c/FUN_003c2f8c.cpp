@@ -1,4 +1,3 @@
-/* NON_MATCHING: final comparison operands are reversed, emitting GT/LE instead of retail LT/GE. */
 #include "common.h"
 
 struct DemonStockState {
@@ -21,6 +20,7 @@ bool FUN_003c2f8c(void)
             break;
         ++count;
     }
-    return count < capacityState->capacity;
+    s32 capacity = capacityState->capacity;
+    return count < capacity;
 }
 }

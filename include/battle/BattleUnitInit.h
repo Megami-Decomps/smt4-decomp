@@ -61,7 +61,9 @@ struct BattleUnitState {
     /* 0x004 */ s16 unk004;
     /* 0x006 */ s16 unk006;
     /* 0x008 */ s16 unk008;
-    /* 0x00A */ u8 unk00A[0xCA];
+    /* 0x00A */ u8 unk00A[2];
+    /* 0x00C */ s32 unk00C;
+    /* 0x010 */ u8 unk010[0xC4];
     /* 0x0D4 */ u8 clearedD4[4];
     /* 0x0D8 */ UnitVitals current;
     /* 0x0F4 */ UnitVitals initial;
@@ -95,7 +97,8 @@ struct DemonModelInfo {
     /* 0xB3 */ u8 flagsB3;
 };
 
-typedef char BattleUnitStateLayoutCheck[offsetof(BattleUnitState, current) == 0xD8 &&
+typedef char BattleUnitStateLayoutCheck[offsetof(BattleUnitState, current) == 0xD8 && offsetof(BattleUnitState, unk00C) == 0xC &&
+    offsetof(BattleUnitState, clearedD4) == 0xD4 &&
     offsetof(BattleUnitState, initial) == 0xF4 && offsetof(BattleUnitState, skills) == 0x128 &&
     offsetof(BattleUnitState, learnable) == 0x152 && offsetof(BattleUnitState, flagsB) == 0x191 &&
     offsetof(BattleUnitState, clear1BE) == 0x1BE && offsetof(BattleUnitState, unk228) == 0x228 ? 1 : -1];

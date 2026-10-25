@@ -28,10 +28,9 @@ s32 devilMaskCompare(u16 *a, u16 *b)
         Record001e1794 *recA = dataTable1bOr1cGetRecord(*a);
         Record001e1794 *recB = dataTable1bOr1cGetRecord(*b);
 
+        result = 0;
         if (recA != NULL && recB != NULL) {
             result = recA->order - recB->order;
-        } else {
-            result = 0;
         }
     }
     return result;

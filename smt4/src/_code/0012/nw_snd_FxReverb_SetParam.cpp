@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0012fcd0(int);
-int rt_memcpy_w(int, unsigned int *, int);
+int __aeabi_memcpy4(int, unsigned int *, int);
 
 /* Supplied declaration required: FUN_0012fcd0. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int nw_snd_FxReverb_SetParam(int param_1,unsigned int *param_2)
@@ -53,7 +53,7 @@ LAB_00121408:
         temp_v1 = 4;
       }
       *(unsigned char *)(param_1 + 0x10d) = temp_v1;
-      rt_memcpy_w(param_1 + 0xc,param_2,0x22);
+      __aeabi_memcpy4(param_1 + 0xc,param_2,0x22);
       puVar4 = *(unsigned int **)(param_1 + 0x20);
       if (puVar4 != (unsigned int *)0x0) {
         temp_v2 = *puVar4;

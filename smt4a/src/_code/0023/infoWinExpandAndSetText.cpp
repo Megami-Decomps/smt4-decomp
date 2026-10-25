@@ -6,7 +6,7 @@ f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
 void uiSpriteSetKeyframe(void *sprite, s32 track, s32 frame);
 void FUN_0023723c(void *text, s32 font, u32 color, s32 mode, s32 alignment, const char *buffer);
 void sysMemClear(void *buffer, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 vec2GetXInt(const void *vector);
 
 /* Expands popup text, updates its scrolling bounds, and resets its display timer. */
@@ -20,7 +20,7 @@ void infoWinExpandAndSetText(const char *text)
         FUN_001654f8(text, expanded, 0);
         for (s32 length = 0; length < 160; ++length) {
             if (expanded[length] == '\0') {
-                rt_memcpy_w(window->message.buffer, expanded, length + 1);
+                __aeabi_memcpy4(window->message.buffer, expanded, length + 1);
                 window->hasText = 1;
                 s32 width = (s32)FUN_00168594(expanded, 3, 0.0f);
                 if (width > 332) {

@@ -19,7 +19,7 @@ int asdOperatorNewE(...);
 int FUN_00476e0c(unsigned int);
 int aocTexCtrlInit(...);
 int FUN_0047cc5c(unsigned int, unsigned int);
-int FUN_0047d5dc(unsigned int, unsigned int);
+int texTableEntryAttachStex(unsigned int, unsigned int);
 
 typedef struct fn_0046c528_arg0 fn_0046c528_arg0;
 struct fn_0046c528_arg0 {
@@ -163,7 +163,7 @@ extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_00476e0c. */
 /* Supplied declaration required: aocTexCtrlInit. */
 /* Supplied declaration required: FUN_0047cc5c. */
-/* Supplied declaration required: FUN_0047d5dc. */
+/* Supplied declaration required: texTableEntryAttachStex. */
 /* Supplied declaration required: nnnstdMemCpy. */
 
 
@@ -388,7 +388,7 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
                           } while (unaff_r5 < temp_v4);
                         }
                         if (unaff_r5 != temp_v4) {
-                          FUN_0047d5dc(*(unsigned int *)
+                          texTableEntryAttachStex(*(unsigned int *)
                                         (*(int *)(temp_v30 + 0x4c) + unaff_r5 * 0x10 + 4),
                                        *(int *)(temp_v30 + 0x4c) + temp_v13 * 0x10);
                         }

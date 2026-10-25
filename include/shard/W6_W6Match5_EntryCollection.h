@@ -15,6 +15,6 @@ struct EntryCollection {
 };
 typedef s32 (*EntryComparator)(const void *, const void *);
 
-extern "C" void rt_memcpy_w(void *, const void *, u32);
+extern "C" void __aeabi_memcpy4(void *, const void *, u32);
 
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: first required-mask loads merge into LDM and active-entry byte addressing adds one instruction. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -20,11 +19,10 @@ u32 FUN_003bc330(void)
     for (s32 index = 0; index < 0x6D; ++index) {
         BtlCombatantEntryA *entry = &battle->entries[index];
         if (entry != NULL) {
-            u64 flags = entry->flags;
-            if ((g_btlCandidateMasks.required & flags) != 0 &&
-                (g_btlCandidateMasks.excluded & flags) == 0 &&
-                (g_btlCandidateMasks.unavailable & flags) == 0 &&
-                (flags & g_btlCandidateMasks.singleAction) == 0 &&
+            if ((g_btlCandidateMasks.required & entry->flags) != 0 &&
+                (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
+                (entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+                (entry->flags & g_btlCandidateMasks.singleAction) == 0 &&
                 battleUnitHasElementEntry(entry, first, second)) {
                 ++count;
             }

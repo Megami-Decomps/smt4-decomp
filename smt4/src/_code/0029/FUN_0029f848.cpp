@@ -46,7 +46,7 @@ void FUN_0029f848(GridNavigation *work, s32 count, s32 visibleRows, s32 columns,
         objectSetRgba(&work->columns, 12, 13, 32, 32);
     work->row = 0;
     work->column = 0;
-    work->rows.mode = 1;
+    FUN_002fc248(&work->rows, 1);
     FUN_002fc248(&work->columns, 1);
 }
 }

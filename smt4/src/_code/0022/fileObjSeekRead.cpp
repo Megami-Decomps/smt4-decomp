@@ -1,4 +1,4 @@
-/* NON_MATCHING: the success return value is built as `mov r4, #0`; retail has `mov r0, #0; mov r4, r0` (one more instruction). */
+/* NON_MATCHING: success value: retail builds it in r0 then copies it to r4 (`mov r0, #0; mov r4, r0`); built `mov r4, #0; mov r0, r4`. */
 #include "nn/Result.h"
 
 extern "C" {
@@ -19,7 +19,7 @@ typedef struct FileObj {
     /* 0x8 */ u32 handle;
 } FileObj;
 
-extern void FUN_002c3510(void);
+extern void FUN_002c3510(s32 result);
 extern void asdFatalError(void);
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
@@ -29,10 +29,9 @@ s32 fileObjSeekRead(FileObj *file, u32 offset, u32 buffer, u32 size)
     u32 readSize;
     s32 result;
 
-    file->vtbl->seek(file, offset);
-    FUN_002c3510();
+    FUN_002c3510(file->vtbl->seek(file, offset));
     result = file->vtbl->read(file, &readSize, buffer, size, 1);
-    FUN_002c3510();
+    FUN_002c3510(result);
     if (!nnResultIsSuccess(result)) {
         if ((file->handle & ~1) != 0) {
             if ((file->handle & 1) != 0) {
@@ -45,7 +44,7 @@ s32 fileObjSeekRead(FileObj *file, u32 offset, u32 buffer, u32 size)
     }
     s32 ok = 0;
 
-    FUN_002c3510();
+    FUN_002c3510(ok);
     return ok;
 }
 

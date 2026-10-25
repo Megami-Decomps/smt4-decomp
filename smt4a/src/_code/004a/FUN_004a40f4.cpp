@@ -1,4 +1,4 @@
-/* NON_MATCHING: variant-byte address formation and flag reloads differ. */
+/* NON_MATCHING: only the owner-offset literal load is scheduled before the selection store (retail reloads it after). */
 #include "ui/ItemListSelection.h"
 
 // Adding word fields would raise the alignment and size of the shared halfword-ended owner.
@@ -43,19 +43,19 @@ void FUN_004a40f4(ItemListSelectionOwner *owner)
     } else if (FUN_002c7c54() != 0x69) {
         g_animatedPageSelection.selection = -1;
         if ((s16)owner->selection.value != 0) {
-            ItemVariantStateView *state = FUN_0026140c();
+            u8 *variant = &FUN_0026140c()->variant;
             u8 animation;
-            switch (state->variant & 0x7f) {
+            switch (*variant & 0x7f) {
             case 1: animation = 6; break;
             case 2: animation = 4; break;
             case 3: animation = 0x16; break;
             case 7: animation = 0x18; break;
             default:
                 animation = 6;
-                state->variant = (state->variant & 0x80) | 1;
+                *variant = (*variant & ~0x7f) | 1;
                 break;
             }
-            if (state->variant & 0x80) {
+            if (*variant & 0x80) {
                 ++animation;
             }
             FUN_004a84e8(&owner->selection, animation);

@@ -14,7 +14,7 @@ void controllerSetDestination(void *controller, const BattleVector3 *position);
 void tripleOwnerSetValue(void *controller, const BattleVector3 *value);
 void FUN_004019c0(BattleSpritePlacement *placement, BattleVector3 *value, f32 frame);
 void FUN_00401b50(BattleSpritePlacement *placement, BattleVector3 *position, f32 frame);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 u32 FUN_004f7778(void *owner)
 {
@@ -81,7 +81,7 @@ u32 FUN_004f7778(void *owner)
                     controllerSetDestination(controller, &position);
                     PlacementControllerSnapshot snapshot;
                     FUN_003bfd84(&snapshot, runtime->resource->controller);
-                    rt_memcpy_w(&view->snapshots[index], &snapshot, sizeof(snapshot));
+                    __aeabi_memcpy4(&view->snapshots[index], &snapshot, sizeof(snapshot));
                     view->snapshots[index].geometryTag =
                         ((GeometrySnapshotTagView *)entry->placement.geometry->geometry)->tag;
                     FUN_003cbb60(runtime->resource->controller, &entry->placement, &snapshot);

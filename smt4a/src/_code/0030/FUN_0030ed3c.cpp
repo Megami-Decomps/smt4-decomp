@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int rt_memcpy_w(int, unsigned int, int);
+int __aeabi_memcpy4(int, unsigned int, int);
 
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0030ed3c(unsigned int param_1,int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_0030ed3c(unsigned int param_1,int param_2,unsigned int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_2 != 0) {
-    rt_memcpy_w(param_2,param_3,0x20);
+    __aeabi_memcpy4(param_2,param_3,0x20);
   }
   return;
 }

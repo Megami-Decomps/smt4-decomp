@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial zero/last-row registers and category comparison operands differ; the unmatched-ID visible path is placed before the mode switch rather than inside it. */
+/* NON_MATCHING: initial zero/last-row registers and the placement of the unmatched-ID visible store (retail shares it with the pending path's tail) differ; the category comparison now matches. */
 #include "common.h"
 
 struct EventVisibilityRecord {
@@ -34,7 +34,8 @@ void eventRefreshVisibility(EventVisibilityState *state)
     u8 lastRow = 0;
     for (s32 index = 0; index < state->count; ++index) {
         EventVisibilityRecord *entry = &state->records[index];
-        if (entry->category != state->category) {
+        s32 wanted = state->category;
+        if (entry->category != wanted) {
             entry->visible = 0;
         } else if (entry->id != -1) {
             if (saveTestFlagRow(entry->row, entry->column)) {

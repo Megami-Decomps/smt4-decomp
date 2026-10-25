@@ -13,7 +13,7 @@ void gameDataBlocksReleaseHold(u32 bits);
 void messageMainSetFlag(s32 enabled);
 void sysPlaySe(s32 sound);
 void *gameDataBlocksGetSaveData(void);
-void rt_memcpy_w(void *output, const void *input, u32 size);
+void __aeabi_memcpy4(void *output, const void *input, u32 size);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
 void saveLoadProcessCreate(s32 slot, s32 mode);
 
@@ -68,7 +68,7 @@ void FUN_0041dcc0(SaveLoadControllerA *controller)
             if (byteArr5Get3()) {
                 gameDataBlocksReleaseHold(1);
                 const SaveProfileView *save = static_cast<const SaveProfileView *>(gameDataBlocksGetSaveData());
-                rt_memcpy_w(work->operation.profiles[controller->selectedSlot], save->profile, sizeof(save->profile));
+                __aeabi_memcpy4(work->operation.profiles[controller->selectedSlot], save->profile, sizeof(save->profile));
                 controller->slotFlags[controller->selectedSlot] = 1;
                 scrScriptProcessStartEntry(work->operation.script, 5);
             } else {

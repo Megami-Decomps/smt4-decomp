@@ -5,6 +5,7 @@
 
 extern "C" {
 void efctSetSpeed(f32);
+f32 vec2GetSpeed(const void *object);
 const UiLayoutEntryPrefixIV *FUN_002bf4f8(u32, u32);
 void FUN_002bf380(u32, u32, u32, s32, s32, s32);
 void FUN_002bf288(u32, u32, u32, s32, s32, s32);
@@ -18,7 +19,7 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
         UiSpriteState rows[10];
     };
     typedef char SceneRowSpriteOffset[offsetof(SceneRowSpritesView, rows) == 0x654 ? 1 : -1];
-    f32 scale = reinterpret_cast<SceneRowSpritesView *>(work)->rows[row].unk20;
+    f32 scale = vec2GetSpeed(&reinterpret_cast<SceneRowSpritesView *>(work)->rows[row]);
     efctSetSpeed(scale);
     s32 x, y;
     if (state) {

@@ -1,10 +1,16 @@
-/* NON_MATCHING: compiler schedules the zero argument before the table-number argument. */
-#include "common.h"
+#include "shard/W4_W4Match5_DataTable.h"
+
 extern "C" {
-extern u32 g_aocSystem;
-void *dataTableGet(u32 table,u32 section);
-u32 dataTableGetCount(void *table);
-u32 FUN_0046c35c(u32 system,u32 kind,u32 argument);
+
+extern void *g_aocSystem;
+s32 FUN_0046c35c(void *system, s32 kind, s32 slot);
+
 /* Count base-table entries together with the add-on entries of kind thirty-nine. */
-u32 dataTableGetRecordFortyEight(void) { u32 count=dataTableGetCount(dataTableGet(48,0)); return FUN_0046c35c(g_aocSystem,39,0)+count; }
+s32 dataTableGetRecordFortyEight(void)
+{
+    s32 count = dataTableGetCount(dataTableGetSection(48, 0));
+
+    return FUN_0046c35c(g_aocSystem, 39, 0) + count;
 }
+
+} /* extern "C" */

@@ -13,13 +13,13 @@ struct ReadinessPair {
 };
 
 extern "C" {
-void rt_memcpy_w(void* destination, const void* source, u32 size);
+void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 
 u32 btlAuxAreResourcesReady(const ReadinessPair* pair)
 {
     for (s32 index = 0; index < 2; ++index) {
         ReadinessRecord record;
-        rt_memcpy_w(&record, &pair->records[index], sizeof(record));
+        __aeabi_memcpy4(&record, &pair->records[index], sizeof(record));
         if ((record.flags & 1) != 0 && record.state == 0) {
             return 0;
         }

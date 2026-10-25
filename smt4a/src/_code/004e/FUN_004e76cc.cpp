@@ -11,7 +11,7 @@ int FUN_004e5f2c(...);
 int battleApplyInteractionSelection(...);
 int FUN_004fb43c(...);
 int FUN_004fb798(...);
-int FUN_004fbd5c(...);
+int btlReflectCreateKind19(...);
 int FUN_004fbeac(...);
 int FUN_004fc094(...);
 
@@ -52,7 +52,7 @@ extern int btlScriptUnitHasFlags(int);
 extern int FUN_004e83ac(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fb798. */
-/* Supplied declaration required: FUN_004fbd5c. */
+/* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fc094. */
 
@@ -116,7 +116,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
     else {
       temp_v2 = 1;
     }
-    FUN_004fbd5c(0x1e,param_2,(int)*(short *)(param_2[8] + 0x6e));
+    btlReflectCreateKind19(0x1e,param_2,(int)*(short *)(param_2[8] + 0x6e));
     battleRecordUnitMaskHistoryEvents((int)*(short *)(param_2[9] + 0x6a));
   }
   FUN_004e5f2c(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),-param_3);

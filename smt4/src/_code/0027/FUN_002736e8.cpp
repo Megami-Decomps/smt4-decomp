@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail rematerializes the constant 2 after scrScriptProcessStartEntry and shares one state store between states 0 and 1; built keeps 2 in r5 */
+/* NON_MATCHING: retail shares one state store between states 0 and 1 (case 0 branches to case 1's store); armcc merges case 1 into case 2's store. The process mode store uses the inlined scriptProcessSetMode. */
 #include "common.h"
 
 extern "C" {
@@ -21,6 +21,7 @@ typedef struct QuestScriptRun {
 void asdLoadFileAsyncSimple(const char *path, void **data, s32 a);
 ScriptProcess *FUN_00297060(void *script, void *messages);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 scrRunOpcodesStub(ScriptProcess *process);
 u32 FUN_002903f0(void);
 void FUN_0029016c(u32 a, s32 b);
@@ -39,7 +40,7 @@ u32 FUN_002736e8(QuestScriptRun *run)
     case 1:
         if (run->script != NULL && run->messages != NULL) {
             run->process = FUN_00297060(run->script, run->messages);
-            run->process->mode = 2;
+            scriptProcessSetMode(run->process, 2);
             scrScriptProcessStartEntry(run->process, run->entry);
             run->state = 2;
         }

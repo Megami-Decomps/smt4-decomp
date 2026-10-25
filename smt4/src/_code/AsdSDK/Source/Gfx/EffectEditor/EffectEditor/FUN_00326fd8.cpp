@@ -1,226 +1,128 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00326fd8` (_code @ 0x326fd8, 0x41c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and constant scheduling only (retail keeps the zero vector components in a separate s-register copy and holds the work/camera pointers in r7/r8) */
+#include "common.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
+#include <math.h>
+
+/* A position or direction in the editor's orbit camera. */
+struct EditorVector {
+    f32 x;
+    f32 y;
+    f32 z;
+};
+
+/* The shared math scratch area: a 4-float working vector and the 3x4 rotation the rotate helper
+   leaves behind. */
+struct EditorMathWork {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ Vector4 axis;
+    /* 0x110 */ u8 unk110[0x30];
+    /* 0x140 */ f32 rotation[3][4];
+};
+
+/* The editor camera's published view direction (x, y, z, w). */
+struct EditorView {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ f32 direction[4];
+};
 
 extern "C" {
+extern EditorVector DAT_004d9270;
+extern EditorMathWork DAT_004ea81c;
+extern EditorView DAT_0044fe80;
+extern f32 DAT_0044fea0[];
+void asdDebugLog(s32 column, s32 row, s32 color, const char *text);
+s32 padIsButtonRepeat(u32 button);
+s32 padIsButtonPressed(u32 button);
+u8 padAlternateButtonIndex(s32 index);
+void FUN_003f6cd8(f32 angle);
 
-int CONCAT44(...);
-int asdDebugLog(int, int, int, unsigned char *);
-int FUN_0024dd80(int);
-int padIsButtonRepeat(...);
-int padIsButtonPressed(...);
-int FUN_003f6cd8(void);
-
-extern unsigned char LAB_003272bc; /* 0x3272bc */
-extern unsigned char LAB_003272d4; /* 0x3272d4 */
-extern unsigned char LAB_003272e8; /* 0x3272e8 */
-extern float DAT_0044fea0; /* 0x44fea0 */
-extern float DAT_0044fea4; /* 0x44fea4 */
-extern float DAT_0044fea8; /* 0x44fea8 */
-extern float DAT_0044feac; /* 0x44feac */
-extern float DAT_004d9270; /* 0x4d9270 */
-extern float DAT_004d9274; /* 0x4d9274 */
-extern float DAT_004d9278; /* 0x4d9278 */
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea95c; /* 0x4ea95c */
-extern float DAT_004ea960; /* 0x4ea960 */
-extern float DAT_004ea964; /* 0x4ea964 */
-extern float DAT_004ea968; /* 0x4ea968 */
-extern float DAT_004ea96c; /* 0x4ea96c */
-extern float DAT_004ea970; /* 0x4ea970 */
-extern float DAT_004ea974; /* 0x4ea974 */
-extern float DAT_004ea978; /* 0x4ea978 */
-extern float DAT_004ea97c; /* 0x4ea97c */
-extern float DAT_004ea980; /* 0x4ea980 */
-extern float DAT_004ea984; /* 0x4ea984 */
-extern float DAT_004ea988; /* 0x4ea988 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+/* Handles one frame of the editor's orbit camera keys: up/down raise or lower the camera,
+   left/right turn it around the origin, R1/L1 move it toward or away from it. The result is the
+   changed-state mask (bit 0 cleared when the confirm key is down, bit 21 set otherwise). */
+u32 FUN_00326fd8(void)
 {
-    return (float)sqrt((double)value);
+    u32 changed = 1;
+    asdDebugLog(8, 8, 0, "UP  & DOWN : HEIGHT");
+    asdDebugLog(8, 20, 0, "LEFT & RIGHT : DIR");
+    asdDebugLog(8, 32, 0, "R1  & L1   : RADIUS");
+
+    f32 step = 10.0f;
+    if (padIsButtonRepeat(5) || padIsButtonRepeat(padAlternateButtonIndex(5))) {
+        DAT_004d9270.y = DAT_004d9270.y - step;
+        changed = 3;
+    } else if (padIsButtonRepeat(6) || padIsButtonRepeat(padAlternateButtonIndex(6))) {
+        DAT_004d9270.y = DAT_004d9270.y + step;
+        changed = 3;
+    }
+
+    if (padIsButtonRepeat(7) || padIsButtonRepeat(padAlternateButtonIndex(7))) {
+        changed |= 2;
+        step = -10.0f;
+    } else if (padIsButtonRepeat(8) || padIsButtonRepeat(padAlternateButtonIndex(8))) {
+        changed |= 2;
+    } else {
+        step = 0.0f;
+    }
+
+    f32 x = DAT_004d9270.x;
+    f32 z = DAT_004d9270.z;
+    if (!(x == 0.0f && z == 0.0f)) {
+        EditorMathWork *work = &DAT_004ea81c;
+        work->axis.x = x;
+        work->axis.y = 0.0f;
+        work->axis.z = z;
+        work->axis.w = 0.0f;
+        f32 length = sqrtf(work->axis.x * work->axis.x + work->axis.y * work->axis.y +
+                           work->axis.z * work->axis.z);
+        f32 angle = 0.0f;
+        if (padIsButtonRepeat(3) || padIsButtonRepeat(padAlternateButtonIndex(3))) {
+            changed |= 2;
+            angle = (100.0f / length) * 0.08726646f;
+        } else if (padIsButtonRepeat(4) || padIsButtonRepeat(padAlternateButtonIndex(4))) {
+            changed |= 2;
+            angle = (100.0f / length) * -0.08726646f;
+        }
+        if (angle != 0.0f) {
+            FUN_003f6cd8(angle);
+            work->axis.x = x;
+            work->axis.y = 0.0f;
+            work->axis.z = z;
+            work->axis.w = 0.0f;
+            f32 ax = work->axis.x;
+            f32 ay = work->axis.y;
+            f32 az = work->axis.z;
+            f32 aw = work->axis.w;
+            work->axis.x = ax * work->rotation[0][0] + ay * work->rotation[1][0] + az * work->rotation[2][0];
+            work->axis.w = ax * work->rotation[0][3] + ay * work->rotation[1][3] + az * work->rotation[2][3];
+            work->axis.y = ax * work->rotation[0][1] + ay * work->rotation[1][1] + az * work->rotation[2][1];
+            work->axis.z = ax * work->rotation[0][2] + ay * work->rotation[1][2] + az * work->rotation[2][2];
+            x = work->axis.x;
+            z = work->axis.z;
+            (void)aw;
+        } else {
+            work->axis.x = x;
+            work->axis.y = 0.0f;
+            work->axis.z = z;
+            work->axis.w = 0.0f;
+        }
+        f32 magnitude = sqrtf(work->axis.x * work->axis.x + work->axis.y * work->axis.y +
+                              work->axis.z * work->axis.z);
+        if (magnitude > 0.0f) {
+            work->axis.x = work->axis.x / magnitude;
+            work->axis.y = work->axis.y / magnitude;
+            work->axis.z = work->axis.z / magnitude;
+        }
+        DAT_0044fe80.direction[0] = work->axis.x;
+        DAT_0044fe80.direction[1] = work->axis.y;
+        DAT_0044fe80.direction[2] = work->axis.z;
+        DAT_0044fe80.direction[3] = work->axis.w;
+    }
+    DAT_004d9270.x = x + DAT_0044fea0[0] * step;
+    DAT_004d9270.z = z + DAT_0044fea0[2] * step;
+
+    if (padIsButtonPressed(1) || padIsButtonPressed(padAlternateButtonIndex(1))) {
+        return changed & ~1u;
+    }
+    return changed | 0x200000;
 }
-#endif
-/* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: asdDebugLog. */
-/* Supplied declaration required: FUN_0024dd80. */
-/* Supplied declaration required: padIsButtonRepeat. */
-/* Supplied declaration required: padIsButtonPressed. */
-/* Supplied declaration required: FUN_003f6cd8. */
-
-
-unsigned int FUN_00326fd8(void)
-
-{
-/* irregular: 6 native warning(s); review required */
-  float temp_v0;
-  float temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  float temp_v4;
-  float temp_v5;
-  long long temp_v6;
-  float temp_v7;
-  float temp_v8;
-  unsigned long long temp_v9;
-  float temp_v10;
-  
-  temp_v3 = 1;
-  asdDebugLog(8,8,0,&LAB_003272bc);
-  asdDebugLog(8,0x14,0,&LAB_003272d4);
-  asdDebugLog(8,0x20,0,&LAB_003272e8);
-  temp_v2 = padIsButtonRepeat(5);
-  temp_v5 = 10.0f;
-  if (temp_v2 == 0) {
-    FUN_0024dd80(5);
-    temp_v2 = padIsButtonRepeat();
-    if (temp_v2 != 0) {
-      DAT_004d9274 = DAT_004d9274 - temp_v5;
-      temp_v3 = 3;
-    }
-    else {
-      temp_v2 = padIsButtonRepeat(6);
-      if (temp_v2 == 0) {
-        FUN_0024dd80(6);
-        temp_v2 = padIsButtonRepeat();
-        if (temp_v2 != 0) {
-          DAT_004d9274 = DAT_004d9274 + temp_v5;
-          temp_v3 = 3;
-        }
-      }
-      else {
-        DAT_004d9274 = DAT_004d9274 + temp_v5;
-        temp_v3 = 3;
-      }
-    }
-  }
-  else {
-    DAT_004d9274 = DAT_004d9274 - temp_v5;
-    temp_v3 = 3;
-  }
-  temp_v2 = padIsButtonRepeat(7);
-  temp_v6 = (unsigned long long)(unsigned int)temp_v5 << 0x20;
-  if (temp_v2 == 0) {
-    FUN_0024dd80(7);
-    temp_v2 = padIsButtonRepeat();
-    if (temp_v2 != 0) {
-      temp_v3 = temp_v3 | 2;
-      temp_v6 = romwright_piece_4_4(0xc1200000,(int)temp_v6);
-    }
-    else {
-      temp_v2 = padIsButtonRepeat(8);
-      if (temp_v2 == 0) {
-        FUN_0024dd80(8);
-        temp_v2 = padIsButtonRepeat();
-        if (temp_v2 == 0) {
-          temp_v6 = romwright_piece_4_4((int)temp_v6,(int)temp_v6);
-        }
-        else {
-          temp_v3 = temp_v3 | 2;
-        }
-      }
-      else {
-        temp_v3 = temp_v3 | 2;
-      }
-    }
-  }
-  else {
-    temp_v3 = temp_v3 | 2;
-    temp_v6 = romwright_piece_4_4(0xc1200000,(int)temp_v6);
-  }
-  temp_v5 = (float)temp_v6;
-  if (!(DAT_004d9270 == temp_v5 && DAT_004d9278 == temp_v5)) {
-    DAT_004ea91c = DAT_004d9270;
-    DAT_004ea924 = DAT_004d9278;
-    temp_v9 = CONCAT44(romwright_sqrt_4(DAT_004d9270 * DAT_004d9270 + temp_v5 * temp_v5 + DAT_004d9278 * DAT_004d9278
-                          ),temp_v5);
-    temp_v4 = DAT_004d9270;
-    temp_v7 = DAT_004d9278;
-    DAT_004ea920 = temp_v5;
-    DAT_004ea928 = temp_v5;
-    temp_v2 = padIsButtonRepeat(3);
-    temp_v10 = 100.0f;
-    if (temp_v2 == 0) {
-      FUN_0024dd80(3);
-      temp_v2 = padIsButtonRepeat();
-      if (temp_v2 != 0) {
-        temp_v3 = temp_v3 | 2;
-        temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
-                         (temp_v10 / (float)((unsigned long long)temp_v9 >> 0x20)) * 0.08726646f);
-      }
-      else {
-        temp_v2 = padIsButtonRepeat(4);
-        if (temp_v2 == 0) {
-          FUN_0024dd80(4);
-          temp_v2 = padIsButtonRepeat();
-          if (temp_v2 != 0) {
-            temp_v3 = temp_v3 | 2;
-            temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
-                             (temp_v10 / (float)((unsigned long long)temp_v9 >> 0x20)) * -0.08726646f);
-          }
-        }
-        else {
-          temp_v3 = temp_v3 | 2;
-          temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
-                           (temp_v10 / (float)((unsigned long long)temp_v9 >> 0x20)) * -0.08726646f);
-        }
-      }
-    }
-    else {
-      temp_v3 = temp_v3 | 2;
-      temp_v6 = CONCAT44((int)((unsigned long long)temp_v6 >> 0x20),
-                       (temp_v10 / (float)((unsigned long long)temp_v9 >> 0x20)) * 0.08726646f);
-    }
-    temp_v8 = (float)temp_v9;
-    temp_v10 = temp_v4;
-    temp_v0 = temp_v7;
-    temp_v1 = temp_v8;
-    if ((float)temp_v6 != temp_v5) {
-      FUN_003f6cd8();
-      temp_v10 = temp_v4 * DAT_004ea95c + temp_v8 * DAT_004ea96c + temp_v7 * DAT_004ea97c;
-      temp_v0 = temp_v4 * DAT_004ea964 + temp_v8 * DAT_004ea974 + temp_v7 * DAT_004ea984;
-      temp_v1 = temp_v4 * DAT_004ea960 + temp_v8 * DAT_004ea970 + temp_v7 * DAT_004ea980;
-      temp_v8 = temp_v4 * DAT_004ea968 + temp_v8 * DAT_004ea978 + temp_v7 * DAT_004ea988;
-    }
-    DAT_004ea928 = temp_v8;
-    DAT_004ea920 = temp_v1;
-    DAT_004d9278 = temp_v0;
-    DAT_004d9270 = temp_v10;
-    temp_v4 = romwright_sqrt_4(DAT_004d9270 * DAT_004d9270 + DAT_004ea920 * DAT_004ea920 +
-                 DAT_004d9278 * DAT_004d9278);
-    DAT_004ea91c = DAT_004d9270;
-    DAT_004ea924 = DAT_004d9278;
-    if (temp_v5 < temp_v4) {
-      DAT_004ea91c = DAT_004d9270 / temp_v4;
-      DAT_004ea920 = DAT_004ea920 / temp_v4;
-      DAT_004ea924 = DAT_004d9278 / temp_v4;
-    }
-    DAT_0044feac = DAT_004ea928;
-    DAT_0044fea0 = DAT_004ea91c;
-    DAT_0044fea4 = DAT_004ea920;
-    DAT_0044fea8 = DAT_004ea924;
-  }
-  temp_v5 = (float)((unsigned long long)temp_v6 >> 0x20);
-  DAT_004d9270 = DAT_004d9270 + DAT_0044fea0 * temp_v5;
-  DAT_004d9278 = DAT_004d9278 + DAT_0044fea8 * temp_v5;
-  temp_v2 = padIsButtonPressed(1);
-  if (temp_v2 == 0) {
-    FUN_0024dd80(1);
-    temp_v2 = padIsButtonPressed();
-    if (temp_v2 == 0) {
-      return temp_v3 | 0x200000;
-    }
-  }
-  return temp_v3 & 0xfffffffe;
 }
-
-} /* extern "C" */

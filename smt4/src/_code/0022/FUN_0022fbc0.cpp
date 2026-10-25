@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the final `ready` load differs: retail reads the flag with `mov r0,r6; ldrsb r0,[r0,#18]`, built folds it into `ldrb r0,[r4,#2106]` */
 /* Applies the current entry to the sub-state and its handler, refreshes the display and reports whether the sub-state is ready and accepted. */
 #include "common.h"
 #include "classes/Obj55ca08.h"
@@ -41,6 +40,7 @@ extern void uiAnimationAdvanceChannel(void *display, s32 id);
 extern void FUN_00233410(Entry *entry);
 extern s32 stateCounterBelowLimit(Entry *entry, u32 value);
 extern u32 FUN_002333f0(SubState *subState);
+extern s8 uiSubStateGetReady(const SubState *subState);
 
 u32 FUN_0022fbc0(Screen *screen)
 {
@@ -53,7 +53,7 @@ u32 FUN_0022fbc0(Screen *screen)
     uiAnimationAdvanceChannel(screen->display, 2);
     uiAnimationAdvanceChannel(screen->display, 3);
     accepted = 0;
-    if (screen->subState.ready != 0) {
+    if (uiSubStateGetReady(&screen->subState) != 0) {
         if (stateCounterBelowLimit(entry, FUN_002333f0(&screen->subState)) != 0) {
             accepted = 1;
         }

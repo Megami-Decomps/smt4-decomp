@@ -8,7 +8,7 @@ extern DeferredModelWork *g_deferredMapModels;
 extern GameState g_gameState;
 void FUN_00266fac(s32 mode, s32 id);
 f32 mathDistanceBetweenPoints(f32, f32, f32, f32, f32, f32);
-f32 FUN_00287a78(f32, f32, f32, f32, f32, f32, f32);
+f32 mathAbsHeadingErrorToPoint(f32, f32, f32, f32, f32, f32, f32);
 ModelSelectionLabel *FUN_00266f30(u32);
 char *libc_strcpy(char *, const char *);
 
@@ -30,7 +30,7 @@ void FUN_001d350c(f32 x, f32 y, f32 z, f32 heading)
                 g_deferredMapModels->entries[i].x,
                 g_deferredMapModels->entries[i].y);
             if (distance < 90.0f &&
-                FUN_00287a78(x, y, z, heading,
+                mathAbsHeadingErrorToPoint(x, y, z, heading,
                     g_deferredMapModels->entries[i].offset,
                     g_deferredMapModels->entries[i].x,
                     g_deferredMapModels->entries[i].y) < 70.0f &&

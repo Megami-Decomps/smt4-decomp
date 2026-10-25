@@ -111,7 +111,7 @@ int playerAdvanceLevelsAndRecover(...);
 int FUN_004ccbf0(...);
 int FUN_004ccc7c(...);
 int FUN_004cd238(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int FUN_001517b4(...);
 int saveSlotFindSelected(void);
@@ -202,7 +202,7 @@ extern char *dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
-extern float FUN_001b4874(int, unsigned int);
+extern float __aeabi_ul2f(int, unsigned int);
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: gameGetUnlockedCountLimit. */
 /* Supplied declaration required: FUN_00203b40. */
@@ -332,7 +332,7 @@ extern int FUN_004cc9dc(unsigned short, unsigned short, int);
 /* Supplied declaration required: FUN_004cd238. */
 /* Supplied declaration required: FUN_004cd4b8. */
 /* Supplied declaration required: __aeabi_idivmod. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00204098(void)
@@ -971,7 +971,7 @@ LAB_0020524c:
           *(unsigned char *)(temp_v6 + 0x457a) = 0;
           *(unsigned int *)(temp_v6 + 0x4574) = 0;
           *(unsigned char *)(temp_v6 + 0x442c) = 0x7f;
-          rt_memcpy_w(temp_v6 + 0x4430,temp_v7,100);
+          __aeabi_memcpy4(temp_v6 + 0x4430,temp_v7,100);
           temp_v16 = FUN_002e5c2c();
           *(int *)(temp_v6 + 0x7e38) = temp_v16;
           *(int *)(temp_v6 + 0x7e3c) = temp_v16 << 0xc;
@@ -1036,7 +1036,7 @@ LAB_00205528:
                                           ,temp_v8 + 0x30);
                 }
               }
-              rt_memcpy_w(temp_v27 + 0x4580,temp_v8,300);
+              __aeabi_memcpy4(temp_v27 + 0x4580,temp_v8,300);
               temp_v45 = (int *)FUN_0025e684(temp_v8);
               if (temp_v45 != (int *)0x0) {
                 FUN_0021b968(temp_v6,temp_v7,*(unsigned short *)(temp_v8 + 0x62),0);
@@ -1128,7 +1128,7 @@ LAB_00205528:
             if (temp_v8 != 0) {
               *(int *)(temp_v13 + 0x30) = *(int *)(temp_v16 + 0x7870) + *(int *)(temp_v13 + 0x30);
               temp_v8 = FUN_004ccc7c(*(unsigned short *)(temp_v13 + 100),temp_v13 + 0x30);
-              rt_memcpy_w(temp_v27 + 0x4430,temp_v13,0x134);
+              __aeabi_memcpy4(temp_v27 + 0x4430,temp_v13,0x134);
               if (temp_v8 != 0) {
                 *(unsigned char *)(temp_v16 + 0x7892) = 1;
                 *(char *)(temp_v27 + 0x442c) = (char)temp_v7;
@@ -2227,7 +2227,7 @@ joined_r0x002073c8:
     case 2:
       temp_v7 = FUN_002e5c2c();
       temp_v13 = temp_v7 - *(int *)(temp_v6 + 0x7e38);
-      temp_v12 = (float)FUN_001b4874(temp_v13 * 0x1000,temp_v13 >> 0x14);
+      temp_v12 = (float)__aeabi_ul2f(temp_v13 * 0x1000,temp_v13 >> 0x14);
       if (*(char *)(temp_v6 + 0x7f50) == '\0') {
         temp_v34 = 1.0f;
       }

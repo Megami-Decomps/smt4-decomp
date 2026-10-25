@@ -19,7 +19,7 @@ int jyoucyuGetTableEntry(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int rt_memcpy_w(unsigned char [72], int, int);
+int __aeabi_memcpy4(unsigned char [72], int, int);
 
 /* stack frame of param_5: 27 slot(s), 98 byte(s) */
 typedef struct {
@@ -76,7 +76,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0029d434) */
@@ -188,7 +188,7 @@ unsigned int FUN_0029ce60(unsigned int param_1,int param_2,int param_3,unsigned 
         }
         temp_v3 = 0;
 LAB_0029cf80:
-        rt_memcpy_w(temp_v20,temp_v3,0x604);
+        __aeabi_memcpy4(temp_v20,temp_v3,0x604);
         temp_v22 = 0;
         temp_v23 = 0;
         temp_v24 = 0;

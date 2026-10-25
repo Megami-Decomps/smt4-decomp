@@ -29,7 +29,7 @@ struct RecordView {
 
 extern "C" {
 RecordView* FUN_0025c870(RecordOwnerView* owner);
-void rt_memcpy_w(void* destination, const void* source, u32 size);
+void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void memClear(void* destination, u32 size);
 void FUN_002a3d58(RecordView* record);
 
@@ -37,7 +37,7 @@ void FUN_002a3d58(RecordView* record);
 RecordView* FUN_002f316c(RecordOwnerView* owner, RecordView* source)
 {
     RecordView* record = FUN_0025c870(owner);
-    rt_memcpy_w(record, source, 0xc0);
+    __aeabi_memcpy4(record, source, 0xc0);
     memClear(record, 0x90);
     record->unk84 = 1;
     record->unk88 = 8;

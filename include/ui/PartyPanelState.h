@@ -134,7 +134,8 @@ typedef struct PartyPanelState {
 } PartyPanelState;
 
 typedef struct PartyPanelAnimationStateA {
-    /* 0x000 */ u8 unk000[0xAC];
+    /* 0x000 */ u8 unk000[0x8C];
+    /* 0x08C */ u8 speedObject[0x20]; /* the vec2 object whose speed is effectSpeed (vec2GetSpeed reads +0x20) */
     /* 0x0AC */ f32 effectSpeed;
     /* 0x0B0 */ u8 unk0B0[0x784];
     /* 0x834 */ u8 mode;

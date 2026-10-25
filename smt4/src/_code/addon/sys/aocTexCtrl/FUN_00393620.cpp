@@ -33,7 +33,7 @@ typedef char AocTextureListLayouts[sizeof(AocTextureListHeader) == 0x40 &&
 extern "C" {
 extern const char DAT_003ff788[];
 void *asdMemAlloc(u32 alignment, u32 granularity, s32 heap, u32 bytes, s32 clear);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void FUN_00393620(AocTexCtrl *control, const AocTextureFile *file)
 {
@@ -62,7 +62,7 @@ void FUN_00393620(AocTexCtrl *control, const AocTextureFile *file)
         }
         node->values = values;
         if (node->count > 0)
-            rt_memcpy_w(node->values, input->values, node->count * sizeof(*values));
+            __aeabi_memcpy4(node->values, input->values, node->count * sizeof(*values));
         if (previous == NULL)
             reinterpret_cast<AocTextureListStateView *>(control->state)->head = node;
         else

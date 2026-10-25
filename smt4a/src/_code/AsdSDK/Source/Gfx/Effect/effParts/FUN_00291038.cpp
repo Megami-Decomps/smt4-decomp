@@ -49,7 +49,7 @@ extern const char g_effPartsSourcePath[];
 extern EffBlockHandler g_handlerTable[];
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 category, u32 track);
 void sysMemClear(void *block, s32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_001b4ddc(void *part);
 void FUN_001b4eb8(EffPartList *part, const EffOrientation *orientation);
 void FUN_001acb48(EffPartList *part, const EffOrientation *orientation);
@@ -113,7 +113,7 @@ EffPartList *FUN_00291038(EffPartList *source)
 
         EffBlock *block = effBlockClone(node->block);
         copy->block = block;
-        rt_memcpy_w(copy, node, 0x90);
+        __aeabi_memcpy4(copy, node, 0x90);
         copy->next = NULL;
         if (part->tail != NULL) {
             part->tail->next = copy;

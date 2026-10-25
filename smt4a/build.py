@@ -67,6 +67,17 @@ def find_compiler(args):
     )
 
 
+def unit_compiler(unit):
+    """The armcc build a unit's "compiler" names, as fetched into build/tools (None: the default)."""
+    tool_id = unit.get("compiler")
+    if not tool_id:
+        return None
+    path = BUILD / "tools" / tool_id / MANIFEST[tool_id]["entry"]
+    if not path.exists():
+        raise SystemExit(f"{unit['function']} is compiled with {tool_id}: run `python3 build.py fetch`")
+    return str(path)
+
+
 def launcher():
     """armcc is a Windows executable: other hosts run it through wibo."""
     if FAMILY != "armcc" or os.name == "nt":
@@ -107,6 +118,10 @@ def command(compiler, unit, source, obj):
     # function. Needs evidence like "cflags": IDENTICAL with the list, not without.
     together = [ROOT / UNITS_BY_FUNCTION[name]["source"] for name in unit.get("multifile", ()) if name in UNITS_BY_FUNCTION]
     if FAMILY == "armcc":
+        # A unit may name, in "compiler", another armcc build from config/toolchain.json: the image
+        # mixes 4.1 builds (b713 allocates a VFP result in place where later builds take a fresh
+        # register). Needs evidence like "cflags": IDENTICAL with that build, not with the default.
+        compiler = unit_compiler(unit) or compiler
         system = Path(compiler).resolve().parent.parent / "include"
         includes = ["-J", str(system)] if system.is_dir() else []
         # armcc --multifile checks declarations across the files it compiles together (#1171, which
@@ -233,6 +248,7 @@ def link_weak_calls(obj, unit=None):
     name = lambda h: bytes(data[headers[strndx][4] + h[0]:data.index(b"\0", headers[strndx][4] + h[0])])
     text = next((i for i, h in enumerate(headers) if name(h) == b".text"), None)
     patched, stubs, stub_symtab = 0, {}, None
+    dropped, still_called = set(), set()
     for index, rel in enumerate(headers):
         if rel[1] != 9 or not headers[rel[7]][2] & 4:  # SHT_REL of a code section (.text, an inline function's i.)
             continue
@@ -273,11 +289,18 @@ def link_weak_calls(obj, unit=None):
             else:
                 kept.append(bytes(data[at:at + 8]))
                 continue
-            if shndx == 0:  # an undefined callee whose call is gone: weak, so the linker need not find it
-                data[symtab[4] + (info >> 8) * 16 + 12] = 0x20 | sym_info & 0xF
+            if shndx == 0:  # an undefined callee whose call is gone: weak, unless another call keeps it
+                dropped.add((rel[6], info >> 8))
         if len(kept) * 8 != rel[5]:
             data[rel[4]:rel[4] + len(kept) * 8] = b"".join(kept)
             struct.pack_into("<I", data, shoff + index * entsize + 0x14, len(kept) * 8)
+        for entry in kept:
+            still_called.add((rel[6], struct.unpack_from("<II", entry)[1] >> 8))
+    # Only after every relocation is seen: marking one early would turn a later B to the same
+    # callee (a tail call armlink leaves alone) into a call to an absent weak function.
+    for symtab_index, symbol_index in dropped - still_called:
+        at = headers[symtab_index][4] + symbol_index * 16 + 12
+        data[at] = 0x20 | data[at] & 0xF
     if stubs:  # the stubs' names, as undefined symbols appended to the symbol table and its strings
         while len(data) % 4:
             data.append(0)
@@ -463,7 +486,7 @@ def build(args):
 
 
 def fetch():
-    tools = [COMPILER["tool"], "objdiff-cli"]
+    tools = [COMPILER["tool"], "objdiff-cli"] + sorted({unit["compiler"] for unit in PROJECT["units"] if "compiler" in unit})
     if FAMILY == "armcc" and os.name != "nt":
         tools.append("wibo")
     ids = [t for t in tools if t in MANIFEST]

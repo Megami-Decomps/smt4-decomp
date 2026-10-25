@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail forms the cursor address in r0 (call argument) and copies it to r4; built computes it in r4 */
 /* Returns 1 if the cursor sub-state's current position is the last one of its range. */
 #include "common.h"
 
@@ -20,9 +19,10 @@ extern s32 objectApplyIfUnblocked(Cursor *cursor);
 
 u32 FUN_0037df64(void)
 {
-    if (g_statusDown != NULL) {
-        Cursor *cursor = &g_statusDown->cursor;
-        s32 position = FUN_002a4894(cursor);
+    Holder *holder = g_statusDown;
+    if (holder != NULL) {
+        s32 position = FUN_002a4894(&holder->cursor);
+        Cursor *cursor = &holder->cursor;
         s32 count = objectApplyIfUnblocked(cursor);
 
         if (position == count - 1) {

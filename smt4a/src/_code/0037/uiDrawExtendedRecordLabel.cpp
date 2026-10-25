@@ -17,8 +17,8 @@ extern "C" {
 const char *FUN_001654f8(const char *input, char *output, u32 flags);
 void FUN_0023723c(u32 handle, s32 mode, s32 selection, u32 flags, u32 options, const char *text);
 const char *FUN_00180118(u16 message);
-void FUN_0050d740(char *output, const char *text);
-void rt_memcpy_w(void *output, const void *input, u32 bytes);
+void ARM_common_memcpy4_7(char *output, const char *text);
+void __aeabi_memcpy4(void *output, const void *input, u32 bytes);
 void textFormatBuffer(char *output, const char *format, ...);
 f32 FUN_00168594(const char *text, u32 mode, f32 spacing);
 extern const char DAT_0052c008[];
@@ -34,9 +34,9 @@ extern "C" s32 uiDrawExtendedRecordLabel(ExtendedRecordLabels *labels, const Ext
     if (record->message)
         FUN_001654f8(FUN_00180118(record->message), text, 0);
     else
-        FUN_0050d740(text, "\x81\x7c\x81\x7c\x81\x7c");
+        ARM_common_memcpy4_7(text, "\x81\x7c\x81\x7c\x81\x7c");
     FUN_0023723c(labels->handles[1], 2, -1, 0, 0, text);
-    rt_memcpy_w(text, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
+    __aeabi_memcpy4(text, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
     FUN_0023723c(labels->handles[2], 2, -1, 0, 0, text);
     textFormatBuffer(text, DAT_0052c008);
     FUN_0023723c(labels->description, 2, -1, 0, 0, text);

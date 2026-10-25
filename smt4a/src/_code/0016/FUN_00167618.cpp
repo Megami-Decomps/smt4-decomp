@@ -1,4 +1,3 @@
-/* NON_MATCHING: the fourth core argument is saved one instruction group before retail. */
 #include "common.h"
 
 extern "C" {
@@ -9,9 +8,10 @@ void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth,
                   f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
 void effectSubmitDefaultParameters();
 
-void FUN_00167618(u32 first, u32 second, u32 third, u32 fourth,
+/* The fourth colour is declared after the first four floats: ABI-equal (r3), and it is the order retail copies the arguments in. */
+void FUN_00167618(u32 first, u32 second, u32 third,
                   f32 firstValue, f32 secondValue, f32 thirdValue, f32 fourthValue,
-                  f32 lastValue)
+                  u32 fourth, f32 lastValue)
 {
     if (first == 0) {
         first = DAT_005b3ce8;

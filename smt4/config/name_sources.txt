@@ -3887,3 +3887,38 @@
 003c5384 talkCtrlDebugMenuBuild inferred [high] builds the TalkCtrl debug list (26 settings: toggles and number fields)
 001a8748 mapSystemLoadSharedFiles inferred [high] loads the field map system shared files then clears the departure data
 002d9384 statusDownCreate inferred [med] allocates/clears g_statusDown, starts TMD CALC/DDRAW tasks and builds its seven sprites
+002bcd68 __aeabi_memcpy4 evidence armlib: __aeabi_memcpy4 is __rt_memcpy_w; armcc emits it for word-aligned struct copies
+00448e18 g_textEntryTable inferred size:0x16704 [high] 999 text entries of 0x5C bytes (category,id,...,text@0x1C) searched by FUN_001b43f0
+0044cd58 g_textCategoryTexts inferred [med] pointer table indexed by id for category 0x18 (FUN_001b43f0)
+0024ee4c ARM_common_memcpy4_7 evidence size:0x1c armcc library helper __ARM_common_memcpy4_7 (emitted for memcpy(d,s,7); bytes ldr r2/str, ldrh r3/strh, ldrb ip/strb identical to retail); like ARM_common_memcpy4_9 - belongs in third_party.txt
+0024dd80 padAlternateButtonIndex inferred [med] returns DAT_00409ba8[index]; used as padIsButtonX(a)||padIsButtonX(FUN_0024dd80(a))
+0019ff5c inputApplyDeadZone inferred [med] clears *value when |value|<=threshold, returns filtered value
+00287a78 mathAbsHeadingErrorToPoint inferred [med] absolute heading error to an X/Z point
+003de5d0 btlReflectCreateKind2d inferred [med] queues a reflect action of kind 0x2d and stores its two argument words
+003ddcf4 btlReflectCreateKind10 inferred [med] queues a reflect action of kind 0x10 and stores its two argument words
+003ddb14 btlReflectCreateKind24 inferred [med] queues a reflect action of kind 0x24 and stores its two argument words
+003ddd30 btlReflectCreateKindf inferred [med] queues a reflect action of kind 0xf and stores its two argument words
+003ddea4 btlReflectCreateKind2a inferred [med] queues a reflect action of kind 0x2a and stores its two argument words
+00333aac recordCategoryNineIsActiveInMode24 inferred [med] true for category-9 records with id>=0x15e while game mode is 24
+00264548 lmapMainUpdateScriptTransition inferred [med] lmap main state callback: runs the script and tears it down on completion
+0014e834 optionalParameterTrySet inferred [high] stores the parameter only while the work state is 0, returns whether it stored
+0020578c partyPanelResetCursor inferred [med] puts the panel cursor on the first present member / filled grid cell
+002c8acc modelGroupsMarkActiveDestroy inferred [high] marks active models of both slot groups for destruction
+002f056c scrCommBtlAverageLevelAtLeast inferred [med] script result: argument <= average level of active present units
+00254a68 padGetCombinedButtonState inferred [med] combined pressed/repeat/held state of two buttons with stick-sector filtering
+0038b2fc aocApplicationRecreateDecoder inferred [high] frees and recreates the 128KiB buffer and decoder
+003112ec saveLoadDrawIndicator inferred [med] draws the save/load indicator while the worker thread is active
+003848b8 dummyAttachmentUpdate inferred [med] runs the state callback, updates source playback, binds dummy markers
+002dfa78 mapEnemyEndEligibleStates inferred [med] ends eligible enemy states and updates the active count
+0028d5ac touchMenuClose inferred [med] frees touch regions and finishes a pending fade
+003a0c5c sceneExitTransitionUpdate inferred [med] finishes the animated exit then waits for the scene script objects to disappear
+0010f4d4 gameTestFlagBit32 inferred [med] tests bit `index` (index < 32) of the quest-center flag block
+00393fa4 texTableEntryAttachStex inferred [med] decodes a loaded STEX resource and attaches texture storage to the table entry
+00126f04 sndVoiceStart inferred [high] twin of smt4a sndVoiceStart: starts voice index under the sound lock and stamps the start tick
+002e467c devilSlotCompareRaceThenLevel inferred [med] sorts empty demon slots last, then race descending, level, id descending
+00126eb0 soundVoiceClearState inferred [med] sets sound voice [index] to state 0 under the sound lock
+00227c30 valueRangeSameSide inferred [med] whether two values are on the same side of range [4,0x36)
+002f62d8 scrComm_Sequence14Request inferred [med] script command forwarding two args as sequence 14 request
+002feb80 scrComm_Sequence16Request inferred [med] script command forwarding two args as sequence 0x10 request
+00318b3c btlTalkPickRandomFreeEntry inferred [med] picks a random free talk entry and sets the script result
+0027dd9c modelSetResetSlots inferred [med] resets all 50 model slots destroying object and model

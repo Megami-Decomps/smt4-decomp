@@ -6,7 +6,7 @@
 extern "C" {
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void effMenuListAppend(void *, s32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 extern const char DAT_0040930c[];
 extern const EffMenuMatrix DAT_004728f0;
 
@@ -28,7 +28,7 @@ void FUN_0021a250(const EffMenuRectangle *rectangle, u32 color,
     effMenuListAppend(entry, 1);
     asdDebugTrace(DAT_0040930c, 698);
     EffMenuMatrixNode *second = static_cast<EffMenuMatrixNode *>(memAlloc(0x10000, 0x100, 0, 0x68, 16, 1));
-    rt_memcpy_w(second, entry, sizeof(*entry));
+    __aeabi_memcpy4(second, entry, sizeof(*entry));
     effMenuListAppend(second, 2);
 }
 }

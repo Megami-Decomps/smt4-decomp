@@ -34,7 +34,7 @@ ObjectParticleHeaderView *resourceResolveHeaderPointer(ObjectParticleResourceVie
 const u8 *resourceResolveDataPointer(ObjectParticleResourceView *);
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void rt_memclr(void *, u32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 void FUN_002e59f8(const void *, void *, u32);
 void FUN_003aa57c(EffObjectParticle *, u16, EffEmitterDesc *);
 void FUN_003b8ecc(EffObjectParticle *);
@@ -55,7 +55,7 @@ EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
     particle->creation.previous = -1;
     particle->creation.maxCount = maximum;
     particle->creation.scale = 1.0f;
-    rt_memcpy_w(particle->creation.initialization, header, 0x44);
+    __aeabi_memcpy4(particle->creation.initialization, header, 0x44);
     FUN_003aa57c(&particle->object, resource->description.kind, &header->emission);
     if (particle->object.source->count) {
         const u8 *data = resourceResolveDataPointer(resource);

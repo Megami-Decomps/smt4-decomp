@@ -11,7 +11,7 @@ extern const EffectNameTable DAT_00530b5c; /* "F003002", ... */
 u32 FUN_00152f44(void);
 u32 FUN_0014af98(void);
 s32 rt_memcmp(const void *a, const void *b, u32 size);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_001628c0(const char *name, u32 handle, s32 a, s32 b, f32 x, f32 y);
 
 static __inline bool effectNameIsListed(const char *name, const EffectNameTable *table)
@@ -39,7 +39,7 @@ u32 FUN_0013edc8(const char *name)
     u32 flags;
     s8 kind;
 
-    rt_memcpy_w(&table, &DAT_00530b5c, sizeof(table));
+    __aeabi_memcpy4(&table, &DAT_00530b5c, sizeof(table));
     flags = FUN_00152f44();
     kind = name[0];
 

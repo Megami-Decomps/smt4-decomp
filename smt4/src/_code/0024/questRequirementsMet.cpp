@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail extracts record flag bit 2 as `and #4; lsrs #2` (a shifted 0/1 value); armcc folds every plain test to `tst #4`, only that and the 4-byte-shifted branch targets differ. */
 #include "common.h"
 
 /* Quest table record: the flags, quests and stick input a quest requires. */
@@ -79,7 +78,11 @@ u32 questRequirementsMet(u16 questId)
         return 0;
     }
     quest = dataTable1bOr1cGetRecord(questId);
-    if (quest == NULL || (quest->flags & 4) == 0 || gameFlagIsSet(0x675) != 0 || gameFlagIsSet(0x676) != 0 ||
+    if (quest == NULL) {
+        return 1;
+    }
+    u32 gated = (quest->flags & 4) >> 2;
+    if (gated == 0 || gameFlagIsSet(0x675) != 0 || gameFlagIsSet(0x676) != 0 ||
         gameFlagIsSet(0x677) != 0 || gameFlagIsSet(0x678) != 0 || gameFlagIsSet(0x679) != 0 ||
         gameFlagIsSet(0x67a) != 0 || gameFlagIsSet(0x67b) != 0 || gameFlagIsSet(0x674) != 0) {
         return 1;

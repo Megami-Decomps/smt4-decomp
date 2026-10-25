@@ -1,4 +1,3 @@
-/* NON_MATCHING: Preset binding now reproduces the full body; only the three preserved-argument/zero moves at the prologue are scheduled in a different order. */
 #include "common.h"
 
 struct ModelBindingResource {
@@ -22,7 +21,7 @@ struct ModelBindingOwner {
     /* 0x1198 */ u8 script[1];
 };
 extern "C" {
-s32 FUN_001696f4(ModelBindingOwner *owner);
+s32 FUN_001696f4(ModelBindingOwner *owner, ModelBindingResource *resource);
 void FUN_00187a84(ModelBindingOwner *owner, const void *configuration,
                    const void *transform, void *binding);
 void FUN_00187d90(u32 handle, void *script);
@@ -36,7 +35,7 @@ extern "C" void FUN_00145e24(ModelBindingOwner *owner, ModelBindingResource *res
     }
     const void *configuration = NULL;
     const void *transform = NULL;
-    if (FUN_001696f4(owner) == 1) {
+    if (FUN_001696f4(owner, resource) == 1) {
         switch (owner->variant) {
         case 0:
             configuration = resource->firstConfiguration;

@@ -99,7 +99,7 @@ s32 FUN_0027e6f4(BtlState *state, s32 flag);
 BtlSoundRecord *FUN_00227ecc(u32 table, s32 flag);
 void FUN_0023e52c(BtlState **battle, BtlSetupEntry *entry, u32 first, u32 second);
 void FUN_003cc944(BtlState **battle, BtlSetupEntry *entry, s32 flag);
-void FUN_0027dd9c(u32 table);
+void modelSetResetSlots(u32 table);
 void bgmSwitchCurrent(BtlState *state, u32 musicId);
 
 /* Takes the music kind of the table-40 record `id` unless it is none or the default. */
@@ -174,7 +174,7 @@ void FUN_003d3944(BtlState **battle, BtlSetupEntry *entry, u32 unused3, u32 unus
         }
     }
     FUN_003cc944(battle, entry, 0);
-    FUN_0027dd9c(DAT_00435d18);
+    modelSetResetSlots(DAT_00435d18);
     g_btlMain->flags = (g_btlMain->flags & 0xFEFFFFFF) | 0x4000;
     switch ((u16)entry->unit->kind) {
     case 1:

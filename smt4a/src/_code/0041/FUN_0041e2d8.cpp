@@ -31,7 +31,7 @@ typedef struct SelectMenu {
 
 void FUN_002f0384(s32 arg);
 void *gameGetPlayerData(void);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void FUN_0038b5fc(s32 slot, u16 value);
 void FUN_0023b45c(s32 arg);
 void FUN_002c8538(s32 arg);
@@ -49,7 +49,7 @@ void FUN_0041e2d8(SelectMenu *menu)
         menu->applied = 1;
         FUN_002f0384(0);
         menu->unk068 = 0;
-        rt_memcpy_w(gameGetPlayerData(), menu->record, sizeof(SelectRecord));
+        __aeabi_memcpy4(gameGetPlayerData(), menu->record, sizeof(SelectRecord));
         FUN_0038b5fc(1, menu->record->value1);
         FUN_0038b5fc(2, menu->record->value2);
         FUN_0038b5fc(0, menu->record->value0);

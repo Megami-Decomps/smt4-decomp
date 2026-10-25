@@ -1,273 +1,209 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a9104` (_code @ 0x1a9104, 0x408 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and branch layout differ (the two quest kinds share counters in retail) */
+#include "common.h"
+
+/* One reward line of a quest: the item and how many (0 = not granted). */
+struct QuestRewardEntry {
+    /* 0x00 */ s32 amount;
+    /* 0x04 */ u16 item;
+    /* 0x06 */ u16 unk06;
+};
+
+/* The map block (only the item-result slots at 0x1060 are touched). */
+struct ResultMapBlock {
+    /* 0x0000 */ u8 unk0000[0x2a];
+    /* 0x002a */ s16 specialRecord;
+    /* 0x002c */ u8 unk002c[0x1034];
+    /* 0x1060 */ s16 firstWanted;     /* the item the first quest kind asked for */
+    /* 0x1062 */ u16 firstOffered;
+    /* 0x1064 */ u16 secondOffered;
+    /* 0x1066 */ u16 secondWanted;
+};
+
+struct SpecialRecord {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ s16 value;
+};
 
 extern "C" {
+extern s8 DAT_0049f9c8;
+extern s32 DAT_0049f9cc;
+ResultMapBlock *gameGetMapBlock(void);
+SpecialRecord *dataTable2fSub1GetRecord(s32 id);
+void FUN_00295a18(s32 value, s32 mode);
+s32 FUN_00298dc8(u16 quest);
+s32 FUN_00287894(u16 quest);
+s32 FUN_00287874(u16 quest);
+s32 questPassesAvailabilityConditions(u16 quest);
+s32 FUN_00298e40(u16 quest, s32 index, QuestRewardEntry *entry);
+void FUN_0028784c(u16 quest, s32 mode);
+s32 FUN_00287800(void);
+void mapIfShowItemResultMessage(s32 message, u32 item, u32 amount);
+void FUN_002e8598(s32 message, u32 item);
 
-int FUN_0028784c(int, int);
-int FUN_00295a18(int, int);
-int FUN_002e8598(...);
-int mapIfShowItemResultMessage(...);
-
-/* stack frame of void: 9 slot(s), 34 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned short sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-} void_stack;
-
-extern signed char DAT_0049f9c8; /* 0x49f9c8 */
-extern int DAT_0049f9cc; /* 0x49f9cc */
-
-extern int FUN_00287800(void);
-/* Supplied declaration required: FUN_0028784c. */
-extern int FUN_00287874(unsigned short);
-extern int FUN_00287894(unsigned short);
-extern int dataTable2fSub1GetRecord(int);
-extern int questPassesAvailabilityConditions(unsigned short);
-/* Supplied declaration required: FUN_00295a18. */
-extern int FUN_00298dc8(unsigned short);
-extern int FUN_00298e40(unsigned short, int, unsigned int *);
-extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_002e8598. */
-/* Supplied declaration required: mapIfShowItemResultMessage. */
-
-
-int FUN_001a9104(void)
-
+/* Walks the finished quests (ids 100-399) and shows the result message each one calls for,
+   from the items the player handed in and the rewards that were granted. Returns the kind of
+   follow-up the map has to run (0 none, 1/2 close the menu, 3 a pending reward, 4 a special
+   record). */
+s32 FUN_001a9104(void)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned short temp_v13;
-  int temp_v14;
-  unsigned int temp_v15;
-  int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  unsigned int temp_v19;
-  unsigned int temp_v20;
-  
-  temp_v16 = 0;
-  temp_v14 = gameGetMapBlock();
-  temp_v17 = 0;
-  if (DAT_0049f9c8 != '\0') {
-    temp_v3 = dataTable2fSub1GetRecord((int)*(short *)(temp_v14 + 0x2a));
-    DAT_0049f9cc = (int)*(short *)(temp_v3 + 0x12);
-    FUN_00295a18(DAT_0049f9cc,1);
-    DAT_0049f9c8 = 0;
-    return 4;
-  }
-  temp_v14 = temp_v14 + 0x1000;
-  temp_v2 = 100;
-  do {
-    temp_v3 = FUN_00298dc8(temp_v2);
-    if (temp_v3 != 0) {
-      temp_v3 = FUN_00287894(temp_v2);
-      if (temp_v3 != 1) {
-        if (temp_v3 == 0) {
-          temp_v11 = 0;
-          temp_v7 = 0;
-          temp_v9 = 0;
-          temp_v10 = 0;
-          temp_v19 = 0;
-          temp_v20 = 0;
-          temp_v15 = 0;
-          temp_v3 = FUN_00287874(temp_v2);
-          if (temp_v3 != 0) {
-            temp_v3 = questPassesAvailabilityConditions(temp_v2);
-            if (temp_v3 != 0) {
-              temp_v8 = 0;
-              temp_v3 = 0;
-              temp_v1 = *(unsigned short *)(temp_v14 + 0x62);
-              temp_v18 = (unsigned int)*(short *)(temp_v14 + 0x60);
-              do {
-                temp_v4 = FUN_00298e40(temp_v2,temp_v3,&temp_v12);
-                if (temp_v4 != 0) {
-                  temp_v7 = temp_v7 + 1;
-                  temp_v5 = (unsigned int)temp_v13;
-                  if ((int)temp_v12 >= 1) {
-                    if (temp_v5 == temp_v18) {
-                      temp_v11 = 1;
-                      temp_v19 = temp_v12;
-                      if (temp_v10 == 0) {
-                        temp_v20 = temp_v12;
-                        temp_v10 = temp_v5;
-                      }
-                    }
-                    else {
-                      temp_v20 = temp_v12;
-                      temp_v10 = temp_v5;
-                    }
-                  }
-                  else {
-                    temp_v9 = temp_v9 + 1;
-                    if (temp_v5 == (int)(short)temp_v1) {
-                      temp_v11 = 1;
-                    }
-                  }
-                  temp_v8 = temp_v8 + temp_v12;
-                }
-                temp_v3 = temp_v3 + 1;
-              } while (temp_v3 < 6);
-              if ((temp_v11 & ~temp_v15 & ~temp_v17) != 0) {
-                if (temp_v7 >= 2) {
-                  if (temp_v8 != 0) {
-                    if ((int)(short)temp_v1 != 0) {
-                      temp_v5 = temp_v7 - temp_v9;
-                      temp_v11 = temp_v20;
-                      if ((int)temp_v5 >= 2) {
-                        temp_v10 = (unsigned int)temp_v1;
-                        temp_v11 = temp_v5;
-                      }
-                      temp_v11 = temp_v11 & 0xffff;
-                      if ((int)temp_v5 < 2) {
-                        temp_v6 = 2;
-                      }
-                      else {
-                        temp_v6 = 1;
-                      }
-                    }
-                    else {
-                      temp_v11 = temp_v19 & 0xffff;
-                      temp_v10 = temp_v18 & 0xffff;
-                      temp_v6 = 3;
-                    }
-                    mapIfShowItemResultMessage(temp_v6,temp_v10,temp_v11);
-                  }
-                  else {
-                    temp_v6 = 0;
-                    mapIfShowItemResultMessage(temp_v6,temp_v1,0);
-                    temp_v16 = 2;
-                  }
-                }
-                else if (temp_v8 != 0) {
-                  temp_v11 = temp_v19 & 0xffff;
-                  temp_v10 = temp_v18 & 0xffff;
-                  temp_v6 = 5;
-                  mapIfShowItemResultMessage(temp_v6,temp_v10,temp_v11);
-                }
-                else {
-                  temp_v6 = 4;
-                  mapIfShowItemResultMessage(temp_v6,temp_v1,0);
-                  temp_v16 = 2;
-                }
-              }
-            }
-            FUN_0028784c(temp_v2,0);
-          }
-        }
-      }
-      else {
-        temp_v10 = 0;
-        temp_v18 = 0;
-        temp_v7 = 0;
-        temp_v9 = 0;
-        temp_v19 = 0;
-        temp_v20 = 0;
-        temp_v15 = 0;
-        temp_v3 = FUN_00287874(temp_v2);
-        if (temp_v3 != 0) {
-          temp_v8 = 0;
-          temp_v3 = 0;
-          temp_v1 = *(unsigned short *)(temp_v14 + 100);
-          temp_v0 = *(unsigned short *)(temp_v14 + 0x66);
-          do {
-            temp_v4 = FUN_00298e40(temp_v2,temp_v3,&temp_v12);
-            if (temp_v4 != 0) {
-              temp_v7 = temp_v7 + 1;
-              temp_v11 = (unsigned int)temp_v13;
-              if ((int)temp_v12 >= 1) {
-                if (temp_v11 == (int)(short)temp_v0) {
-                  temp_v10 = 1;
-                  temp_v18 = temp_v12;
-                }
-                else {
-                  temp_v20 = temp_v12;
-                  temp_v19 = temp_v11;
-                }
-              }
-              else {
-                temp_v9 = temp_v9 + 1;
-                if (temp_v11 == (int)(short)temp_v1) {
-                  temp_v10 = 1;
-                }
-              }
-              temp_v8 = temp_v8 + temp_v12;
-            }
-            temp_v3 = temp_v3 + 1;
-          } while (temp_v3 < 6);
-          if ((temp_v10 & ~temp_v15) != 0) {
-            if (temp_v7 >= 2) {
-              if (temp_v8 != 0) {
-                if ((int)(short)temp_v1 != 0) {
-                  if (temp_v7 - temp_v9 >= 2) {
-                    temp_v10 = (unsigned int)temp_v1;
-                    temp_v6 = 7;
-                  }
-                  else {
-                    temp_v10 = temp_v19 & 0xffff;
-                    temp_v6 = 8;
-                  }
-                }
-                else {
-                  temp_v10 = (unsigned int)temp_v0;
-                  temp_v6 = 9;
-                }
-                FUN_002e8598(temp_v6,temp_v10);
-              }
-              else {
-                temp_v6 = 6;
-                FUN_002e8598(temp_v6,temp_v1);
-                temp_v16 = 1;
-                temp_v17 = 1;
-              }
-            }
-            else if (temp_v8 != 0) {
-              temp_v10 = (unsigned int)temp_v0;
-              temp_v6 = 0xb;
-              FUN_002e8598(temp_v6,temp_v10);
-            }
-            else {
-              temp_v6 = 10;
-              FUN_002e8598(temp_v6,temp_v1);
-              temp_v16 = 1;
-              temp_v17 = 1;
-            }
-          }
-          FUN_0028784c(temp_v2,0);
-        }
-      }
+    s32 result = 0;
+    ResultMapBlock *block = gameGetMapBlock();
+    u32 firstKindDone = 0;
+    if (DAT_0049f9c8 != 0) {
+        DAT_0049f9cc = dataTable2fSub1GetRecord(block->specialRecord)->value;
+        FUN_00295a18(DAT_0049f9cc, 1);
+        DAT_0049f9c8 = 0;
+        return 4;
     }
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 400) {
-      if ((temp_v16 == 0) && (temp_v3 = FUN_00287800(), temp_v3 != 0)) {
-        temp_v16 = 3;
-      }
-      *(unsigned short *)(temp_v14 + 100) = 0;
-      *(unsigned short *)(temp_v14 + 0x66) = 0;
-      *(unsigned short *)(temp_v14 + 0x62) = 0;
-      *(unsigned short *)(temp_v14 + 0x60) = 0;
-      return temp_v16;
+    for (u16 quest = 100; quest < 400; quest++) {
+        if (FUN_00298dc8(quest) == 0) {
+            continue;
+        }
+        s32 kind = FUN_00287894(quest);
+        if (kind == 1) {
+            u32 matched = 0;
+            s32 lines = 0;
+            s32 emptyLines = 0;
+            u32 itemOther = 0;
+            if (FUN_00287874(quest) != 0) {
+                s32 total = 0;
+                u16 offered = block->secondOffered;
+                u16 wanted = block->secondWanted;
+                for (s32 i = 0; i < 6; i++) {
+                    QuestRewardEntry entry;
+                    if (FUN_00298e40(quest, i, &entry) != 0) {
+                        lines++;
+                        if (entry.amount >= 1) {
+                            if (entry.item == (s16)wanted) {
+                                matched = 1;
+                            } else {
+                                itemOther = entry.item;
+                            }
+                        } else {
+                            emptyLines++;
+                            if (entry.item == (s16)offered) {
+                                matched = 1;
+                            }
+                        }
+                        total += entry.amount;
+                    }
+                }
+                if (matched != 0) {
+                    u32 message;
+                    u32 item;
+                    if (lines >= 2) {
+                        if (total != 0) {
+                            if ((s16)offered != 0) {
+                                if (lines - emptyLines >= 2) {
+                                    item = offered;
+                                    message = 7;
+                                } else {
+                                    item = itemOther & 0xffff;
+                                    message = 8;
+                                }
+                            } else {
+                                item = wanted;
+                                message = 9;
+                            }
+                            FUN_002e8598(message, item);
+                        } else {
+                            FUN_002e8598(6, offered);
+                            result = 1;
+                            firstKindDone = 1;
+                        }
+                    } else if (total != 0) {
+                        FUN_002e8598(0xb, wanted);
+                    } else {
+                        FUN_002e8598(10, offered);
+                        result = 1;
+                        firstKindDone = 1;
+                    }
+                }
+                FUN_0028784c(quest, 0);
+            }
+        } else if (kind == 0) {
+            u32 matched = 0;
+            s32 lines = 0;
+            s32 emptyLines = 0;
+            u32 item = 0;
+            u32 amountGranted = 0;
+            u32 amountOther = 0;
+            if (FUN_00287874(quest) != 0) {
+                if (questPassesAvailabilityConditions(quest) != 0) {
+                    s32 total = 0;
+                    u16 offered = block->firstOffered;
+                    u32 wanted = (u32)block->firstWanted;
+                    for (s32 i = 0; i < 6; i++) {
+                        QuestRewardEntry entry;
+                        if (FUN_00298e40(quest, i, &entry) != 0) {
+                            lines++;
+                            if (entry.amount >= 1) {
+                                if (entry.item == wanted) {
+                                    matched = 1;
+                                    amountGranted = entry.amount;
+                                    if (item == 0) {
+                                        amountOther = entry.amount;
+                                        item = entry.item;
+                                    }
+                                } else {
+                                    amountOther = entry.amount;
+                                    item = entry.item;
+                                }
+                            } else {
+                                emptyLines++;
+                                if (entry.item == (s16)offered) {
+                                    matched = 1;
+                                }
+                            }
+                            total += entry.amount;
+                        }
+                    }
+                    if ((matched & ~firstKindDone) != 0) {
+                        u32 message;
+                        u32 amount;
+                        if (lines >= 2) {
+                            if (total != 0) {
+                                if ((s16)offered != 0) {
+                                    s32 remaining = lines - emptyLines;
+                                    amount = amountOther;
+                                    if (remaining >= 2) {
+                                        item = offered;
+                                        amount = remaining;
+                                    }
+                                    amount &= 0xffff;
+                                    message = remaining < 2 ? 2 : 1;
+                                } else {
+                                    amount = amountGranted & 0xffff;
+                                    item = wanted & 0xffff;
+                                    message = 3;
+                                }
+                                mapIfShowItemResultMessage(message, item, amount);
+                            } else {
+                                mapIfShowItemResultMessage(0, offered, 0);
+                                result = 2;
+                            }
+                        } else if (total != 0) {
+                            amount = amountGranted & 0xffff;
+                            item = wanted & 0xffff;
+                            mapIfShowItemResultMessage(5, item, amount);
+                        } else {
+                            mapIfShowItemResultMessage(4, offered, 0);
+                            result = 2;
+                        }
+                    }
+                }
+                FUN_0028784c(quest, 0);
+            }
+        }
     }
-  } while( 1 );
+    if (result == 0 && FUN_00287800() != 0) {
+        result = 3;
+    }
+    block->secondOffered = 0;
+    block->secondWanted = 0;
+    block->firstOffered = 0;
+    block->firstWanted = 0;
+    return result;
 }
 
 } /* extern "C" */

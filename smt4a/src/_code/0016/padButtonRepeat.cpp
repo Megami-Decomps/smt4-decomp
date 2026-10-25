@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler combines the two blocking-bit checks into TST3 instead of retail TST1/TSTEQ2; all remaining instructions/layout match. -O2 is unchanged. */
 #include "common.h"
 
 struct PadRepeatSettings {
@@ -19,7 +18,8 @@ u32 padButtonRepeat(u32 button)
         return 0;
     }
     u32 frames;
-    if ((DAT_005b4000.flags & 1) == 0 && (DAT_005b4000.flags & 2) == 0) {
+    bool blocked = (DAT_005b4000.flags & 1) != 0;
+    if (!blocked && (DAT_005b4000.flags & 2) == 0) {
         frames = DAT_00640000[button];
         if (frames == 1) {
             return 1;

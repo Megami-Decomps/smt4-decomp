@@ -18,7 +18,7 @@ int rt_aeabi_memclr(...);
 int textureRequestCacheGet(...);
 int characterInfoPanelPopulate(void);
 int campCecDrawPageCreate(void);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -75,7 +75,7 @@ extern unsigned int overlayGetStatusScene(void);
 /* Supplied declaration required: characterInfoPanelPopulate. */
 /* Supplied declaration required: campCecDrawPageCreate. */
 extern int bitsAt60Test(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0034280c(unsigned char param_1)
@@ -177,9 +177,9 @@ void FUN_0034280c(unsigned char param_1)
   temp_v3 = FUN_002bf520();
   puVar3[2] = temp_v3;
   temp_v3 = gameGetPlayerData();
-  rt_memcpy_w(puVar3 + 0x5b,temp_v3,0xe);
+  __aeabi_memcpy4(puVar3 + 0x5b,temp_v3,0xe);
   temp_v3 = gameGetPlayerData();
-  rt_memcpy_w(temp_v3,puVar3[2],0xe);
+  __aeabi_memcpy4(temp_v3,puVar3[2],0xe);
   puVar7 = (unsigned int *)puVar3[2];
   *(unsigned int *)((int)puVar3 + 0x17a) = *puVar7;
   *(unsigned int *)((int)puVar3 + 0x17e) = puVar7[1];

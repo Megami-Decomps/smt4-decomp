@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the three render-stack pushes differ in address scheduling and scratch registers; -O2 candidate. */
 #include "Terminal/LocaltmnlMain.h"
 #include "camp/RenderCtx.h"
 
@@ -23,13 +22,13 @@ u32 localTerminalDrawOverlays()
     if (terminal->state - 1U < 14) {
         RenderCtxA *render = g_renderCtx;
         s32 state = FUN_00387580(6, 0.0f);
-        renderStackPush(&render->additional.stackC, state);
+        renderStackPushCounted(&render->additional.stackC, state);
         render = g_renderCtx;
         state = FUN_001692ac(1, 0);
-        renderStackPush(&render->stackA, state);
+        renderStackPushCounted(&render->stackA, state);
         render = g_renderCtx;
         state = packNibblesAndByte(6, 1, 0);
-        renderStackPush(&render->stackB, state);
+        renderStackPushCounted(&render->stackB, state);
         for (s32 i = 0; i < 4; ++i) {
             if (terminal->slots[i].visible)
                 FUN_00182540(terminal->slots[i].handle);

@@ -27,7 +27,7 @@ int FUN_003dc19c(int);
 void battleActionFinishPlacement(ActionController*);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nw_ut_ResDicPatricia_Get(...);
-int rt_memcpy_w(float *, int, int);
+int __aeabi_memcpy4(float *, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 5 slot(s), 17 byte(s) */
@@ -97,7 +97,7 @@ extern unsigned int _ZN9Obj4209ccC1Ev(void);
 /* Supplied declaration required: battleActionFinishPlacement. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_003da0ec(int param_1)
@@ -200,7 +200,7 @@ void FUN_003da0ec(int param_1)
   case 2:
     temp_v6 = 0;
     do {
-      rt_memcpy_w(&temp_v19,param_1 + temp_v6 * 0x8c + 0x3070,0x8c);
+      __aeabi_memcpy4(&temp_v19,param_1 + temp_v6 * 0x8c + 0x3070,0x8c);
       if (((temp_v22 & 1) != 0) && (temp_v20 == 0.0f)) goto LAB_003da57c;
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 3);

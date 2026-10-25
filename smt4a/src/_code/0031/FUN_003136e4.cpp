@@ -8,7 +8,7 @@ using nw::math::MTX34;
 extern "C" {
 f32 FUN_001bbf0c(f32 radians);
 f32 FUN_001bc124(f32 radians);
-void FUN_0027376c(s32 slot);
+void eplSlotStartRequest(s32 slot);
 void FUN_00294774(s32 slot, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
 void eplSlotApplyParameters(s32 slot, const MTX34 *matrix);
@@ -69,7 +69,7 @@ void FUN_003136e4(f32 angle, f32 distance)
     x += FUN_001bc124(radians) * distance;
     z += FUN_001bbf0c(radians) * distance;
     y += 5.0f;
-    FUN_0027376c(0);
+    eplSlotStartRequest(0);
 
     f32 sinX, cosX, sinY, cosY, sinZ, cosZ;
     sinCosFromTable(0.0f, &sinX, &cosX);

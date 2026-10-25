@@ -1,4 +1,3 @@
-/* NON_MATCHING: candidate average query stack layout and mask-load scheduling differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -20,12 +19,11 @@ u32 FUN_00373684(void)
     s32 candidates = 0;
     s32 first, count;
     FUN_00301a08(choice, &first, &count);
-    for (s32 index = first; index < first + count; ++index) {
+    for (s32 index = first; index < count + first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0) {
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0) {
             candidates++;
             sum += entry->thresholdView.unk27A;
         }

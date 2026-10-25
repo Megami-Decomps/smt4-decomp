@@ -20,7 +20,7 @@ struct PartyPanelView {
 
 extern "C" {
 extern PartyPanelView* g_partyPanel;
-void rt_memcpy_w(void* destination, const void* source, u32 size);
+void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void FUN_0031d890(void);
 void FUN_0023f900(void);
 
@@ -36,8 +36,8 @@ void FUN_0035d0e4(s32 mode)
     panel->unk0A10->unk34 = mode == 0 ? -1 : -2;
 
     if (mode != 0) {
-        rt_memcpy_w(panel->unk0D50, panel->unk0C24, 100);
-        rt_memcpy_w(panel->unk0DB4, panel->unk0C24, 100);
+        __aeabi_memcpy4(panel->unk0D50, panel->unk0C24, 100);
+        __aeabi_memcpy4(panel->unk0DB4, panel->unk0C24, 100);
     } else {
         FUN_0031d890();
     }

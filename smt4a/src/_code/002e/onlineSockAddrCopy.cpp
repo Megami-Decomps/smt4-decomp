@@ -8,11 +8,11 @@ typedef struct {
     u8 payload[0x1c]; /* 0x04 */
 } PayloadBlock;
 
-void rt_memcpy_w(void *dst, const void *src, u32 size);
+void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 
 PayloadBlock *onlineSockAddrCopy(PayloadBlock *self, const PayloadBlock *other)
 {
-    rt_memcpy_w(self->payload, other->payload, sizeof(self->payload));
+    __aeabi_memcpy4(self->payload, other->payload, sizeof(self->payload));
     return self;
 }
 

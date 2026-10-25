@@ -22,7 +22,7 @@ void FUN_0031f208(u8 label);
 void useCounterStart(void);
 s32 FUN_002c7c54(void);
 s32 useCounterIsFinished(void);
-void FUN_002686b8(...);
+void touchMenuClose(...);
 void useCounterRelease(void);
 void obj04Finish(void);
 
@@ -63,13 +63,13 @@ u32 FUN_003884d4(void)
     s32 result = FUN_002c7c54();
     if (useCounterIsFinished()) {
         scrSetResult(0);
-        FUN_002686b8();
+        touchMenuClose();
         useCounterRelease();
         obj04Finish();
         return 1;
     }
     if (result == 0x69) return 0;
-    FUN_002686b8(0);
+    touchMenuClose(0);
     useCounterRelease();
     scrSetResult(result == 0x5a ? 5 : result - 0x54);
     obj04Finish();

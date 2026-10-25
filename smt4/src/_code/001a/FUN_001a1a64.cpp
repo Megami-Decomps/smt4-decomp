@@ -32,7 +32,7 @@ __packed struct SaveSummary {
 
 extern "C" {
 extern u8 g_gameDataBlocks[];
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 s32 FUN_00288f78(u8 value);
 s32 gameFlagIsSet(u32 flag);
 
@@ -41,7 +41,7 @@ void FUN_001a1a64(u16 *save)
 {
     SaveSummary *summary = *reinterpret_cast<SaveSummary **>(g_gameDataBlocks + 4);
     summary->slotId = save[0];
-    rt_memcpy_w(summary, save + 0x2A, 0x12);
+    __aeabi_memcpy4(summary, save + 0x2A, 0x12);
     summary->unk10 = 0;
     summary->words12[0] = *reinterpret_cast<u32 *>(save + 4);
     summary->words12[1] = *reinterpret_cast<u32 *>(save + 6);
@@ -50,7 +50,7 @@ void FUN_001a1a64(u16 *save)
     summary->unk20 = *reinterpret_cast<u32 *>(save + 0x1C);
     summary->unk24 = save[0x19];
     summary->unk26 = save[0x1A];
-    rt_memcpy_w(summary->name30, save + 0x12, 0xE);
+    __aeabi_memcpy4(summary->name30, save + 0x12, 0xE);
     summary->words3E[0] = *reinterpret_cast<u32 *>(save + 0xB);
     summary->words3E[1] = *reinterpret_cast<u32 *>(save + 0xD);
     summary->words3E[2] = *reinterpret_cast<u32 *>(save + 0xF);
@@ -111,6 +111,6 @@ void FUN_001a1a64(u16 *save)
         else
             summary->partyLevel[2] = save[third * 0x302 + 0x6D];
     }
-    rt_memcpy_w(*reinterpret_cast<u8 **>(g_gameDataBlocks + 4) + 0x24794, summary, 0x80);
+    __aeabi_memcpy4(*reinterpret_cast<u8 **>(g_gameDataBlocks + 4) + 0x24794, summary, 0x80);
 }
 }

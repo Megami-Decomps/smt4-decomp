@@ -8,7 +8,7 @@ void nngxLockEnter(void);
 void nngxLockLeave(void);
 void FUN_002bdb48(u32 committedOffset, u32 writeOffset);
 void FUN_002ba2b8(void);
-void *rt_memcpy_w(void *destination, const void *source, u32 byteCount);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 byteCount);
 
 // Append copied GPU words or enqueue an external command block for submission.
 void FUN_002adba8(const void *commands, u32 byteCount, s32 copyCommands)
@@ -16,7 +16,7 @@ void FUN_002adba8(const void *commands, u32 byteCount, s32 copyCommands)
     AsdCmdBuffer *list = g_asdGfxContext.cmdBuffer;
     list->writeOffset = g_commandBufferCursor - list->start;
     if (copyCommands != 0) {
-        rt_memcpy_w(g_commandBufferCursor, commands, byteCount);
+        __aeabi_memcpy4(g_commandBufferCursor, commands, byteCount);
         g_commandBufferCursor += byteCount & ~3u;
     } else {
         if (list->committedOffset != list->writeOffset) {

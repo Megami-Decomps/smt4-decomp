@@ -44,7 +44,7 @@ s32 dataTable2dSub5GetCount(void);
 VisibilityEntry *dataTable2DGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void *FUN_0040619c(void *source, u32 index);
 void ptrListRemoveClearOwner(u32 registry, void *object);
 void handleRegistryRegisterObject(u32 registry, void *object);
@@ -75,7 +75,7 @@ void FUN_003ca5a4(void)
             }
         }
     }
-    rt_memcpy_w(localTable, DAT_00531270, sizeof(localTable));
+    __aeabi_memcpy4(localTable, DAT_00531270, sizeof(localTable));
     rt_memcpy(DAT_005f0c54, visible, sizeof(visible));
 
     LmapStateAView *state = g_lmapMainState;

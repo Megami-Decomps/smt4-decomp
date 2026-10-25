@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the string block's address into r5 before the second sysMemClear and keeps the path buffer's address in r5 afterwards; built reloads both */
+/* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the FUN_00100d60 call differs (retail sets the path pointer first). */
 #include "common.h"
 
 extern "C" {
@@ -48,12 +48,14 @@ u32 FUN_004f84ec(EffectOwner *owner)
     }
     slot->flags = 0;
     sysMemClear(path, sizeof(path));
+    const EffectStrings *strings = &DAT_00528400;
     sysMemClear(formatted, sizeof(formatted));
-    textFormatBuffer(formatted, DAT_00528400.pathFormat, DAT_00528400.niyariName);
+    textFormatBuffer(formatted, strings->pathFormat, strings->niyariName);
     libc_strcpy(path, formatted);
-    libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
+    char *fullPath = path;
+    libc_strcpy(slot->name, FUN_00100d60(fullPath, '/') + 1);
     if (findRecordByKey(slot->name) == 0xff) {
-        asdLoadFileAsyncSimple(path, &slot->data, 1);
+        asdLoadFileAsyncSimple(fullPath, &slot->data, 1);
         slot->flags |= 1;
     }
     return 1;

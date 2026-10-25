@@ -9,8 +9,8 @@ struct VoiceStateUpdate {
 };
 
 extern "C" {
-void FUN_00126eb0(s32 handle);
-void FUN_00126f04(s32 handle);
+void soundVoiceClearState(s32 handle);
+void sndVoiceStart(s32 handle);
 
 // Applies the pending voice operation once; mode one skips the parameter refresh.
 void asdSndApplyPendingVoiceState(VoiceStateUpdate* state)
@@ -18,10 +18,10 @@ void asdSndApplyPendingVoiceState(VoiceStateUpdate* state)
     if (state->handle != -1 && state->applied == 0) {
         switch (state->mode) {
         case 1:
-            FUN_00126eb0(state->handle);
+            soundVoiceClearState(state->handle);
             break;
         default:
-            FUN_00126f04(state->handle);
+            sndVoiceStart(state->handle);
             break;
         }
         state->applied = 1;

@@ -1,11 +1,4 @@
-/* NON_MATCHING: packet kind constant is materialized/stored through r0 rather than retail r1. */
-#include "common.h"
-
-struct QuestRegistration {
-    u32 quest; // 0x00
-    u32 parameter; // 0x04
-    u32 kind; // 0x08
-};
+#include "quest_center/QuestRegistration.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
@@ -18,10 +11,7 @@ u32 scrComm_QuestCenter_RegisterKind2(void)
     u32 quest = scrGetArg(0);
     u32 parameter = scrGetArg(1);
     jyoucyuGetTableEntry(0);
-    QuestRegistration request;
-    request.kind = 2;
-    request.quest = quest;
-    request.parameter = parameter;
+    QuestRegistration request(quest, parameter, 2);
     QcMain_Register(&request, sizeof(request));
     return 1;
 }

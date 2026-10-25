@@ -23,7 +23,7 @@ struct WindowRequestBuffer {
 };
 
 extern "C" {
-void *rt_memcpy_w(void *dest, const void *src, u32 size);
+void *__aeabi_memcpy4(void *dest, const void *src, u32 size);
 void sysMemClear(void *block, u32 size);
 void FUN_0019a46c(void *dest, const char *src, u32 size);
 s32 FUN_00427e68(u32 token, u32 mode);
@@ -45,7 +45,7 @@ WindowStatusResult FUN_00429048(const u32 *token, const char *name)
         WindowRequestEntry *entry;
         status = tokenResolveAddress(FUN_0016ccfc(), &entry, *token);
         if (!nnResultIsFailure(status)) {
-            rt_memcpy_w(DAT_0061b030.payload, entry->payload, 0x44);
+            __aeabi_memcpy4(DAT_0061b030.payload, entry->payload, 0x44);
             DAT_0061b030.confirmed = entry->confirmed;
             if (name != NULL) {
                 FUN_0019a46c(DAT_0061b030.name, name, 0xF);

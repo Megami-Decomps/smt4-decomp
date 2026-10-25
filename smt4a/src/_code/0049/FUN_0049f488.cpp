@@ -10,6 +10,7 @@ s32 vec2GetYInt(const UiSpriteState *sprite);
 void FUN_0049d244(HowToScreenWork *screen, s32 x, s32 y, f32 progress);
 void FUN_0049e3f8(HowToScreenWork *screen);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -23,7 +24,7 @@ u32 FUN_0049f488(HowToScreenWork *screen)
     renderCtxPushA(context, FUN_001692ac(1, 0));
     s32 x = vec2GetXInt(&screen->sprites[0]);
     s32 y = vec2GetYInt(&screen->sprites[0]);
-    FUN_0049d244(screen, x, y, screen->sprites[0].unk20);
+    FUN_0049d244(screen, x, y, vec2GetSpeed(&screen->sprites[0]));
     switch (screen->mode.state) {
     case 5:
     case 6:

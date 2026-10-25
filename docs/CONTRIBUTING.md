@@ -55,6 +55,10 @@ Every match must be one a programmer could have written for a reason.
   `fdiff` then compile it in one `--multifile --no_autoinline` run with the callees' unit sources
   and keep only the unit's function. Same evidence rule as `cflags`, and the callees' own sources
   must clobber what retail's do (matched callees are best).
+- **The image mixes armcc 4.1 builds.** Most code matches the pinned b713, but some only matches
+  b1454 (e.g. b713 writes a `vdiv`/`vsqrt`/`vabs` result over its operand, b1454 takes a fresh
+  register). A unit can name the other build in a `compiler` field (`"armcc-4.1-b1454"`, a tool of
+  `config/toolchain.json`; `build.py fetch` downloads it). Same evidence rule as `cflags`.
 - **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
   armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
   so write the call:

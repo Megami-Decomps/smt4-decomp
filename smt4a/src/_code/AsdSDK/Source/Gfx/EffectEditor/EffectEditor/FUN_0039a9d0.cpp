@@ -25,7 +25,7 @@ int asdEffectQueueRelease(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -90,7 +90,7 @@ extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: objectRegistryInsert. */
 /* Supplied declaration required: asdEffectQueueRelease. */
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_0039a9d0(unsigned int param_1,int param_2,unsigned int param_3)
@@ -217,7 +217,7 @@ LAB_0039ab4c:
     *(unsigned char *)(temp_v6 + 0x88) = 8;
     *(unsigned char *)(temp_v6 + 0x89) = 0;
     *(unsigned char *)(temp_v6 + 0x8a) = 0;
-    rt_memcpy_w(&DAT_00634d20,temp_v6,0x80);
+    __aeabi_memcpy4(&DAT_00634d20,temp_v6,0x80);
     DAT_0059dbfc = *(unsigned int *)(temp_v6 + 0x90);
     if (*(int *)(*piVar3 + 0xc) != 0) {
       effPartSetData();

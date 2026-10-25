@@ -4,7 +4,7 @@ extern "C" {
 
 extern UnitTemplate *FUN_00184310(s32 id);
 extern void sysMemClear(void *ptr, u32 size);
-extern void rt_memcpy_w(void *dst, const void *src, u32 size);
+extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 extern void FUN_004bd6b0(UnitRecord *unit, u16 skill, s32 slot);
 extern void FUN_004bcd90(UnitRecord *unit);
 extern u16 recordGetScaledMaximum(UnitRecord *unit);
@@ -32,7 +32,7 @@ void unitRecordBuild(s32 id, UnitRecord *out)
     out->stats2[3] = entry->stat5;
     out->stats2[4] = entry->stat6;
     out->stats2[1] = entry->stat3;
-    rt_memcpy_w(out->name, entry->name, 0x12);
+    __aeabi_memcpy4(out->name, entry->name, 0x12);
     for (i = 0; i < 8; i++) {
         FUN_004bd6b0(out, entry->skills[i], i);
     }

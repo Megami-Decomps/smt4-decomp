@@ -11,7 +11,7 @@ int FUN_002a1f84(unsigned int, int);
 int FUN_002aa278(int, unsigned int, int, int);
 int nw_snd_internal_driver_StreamBufferPool_Free(int);
 int nw_snd_internal_driver_Voice_Free(void);
-int rt_memcpy_w(int *, unsigned int, int);
+int __aeabi_memcpy4(int *, unsigned int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -30,7 +30,7 @@ extern int FUN_002baf30(void);
 extern unsigned int __aeabi_uidivmod(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
 /* Supplied declaration required: nw_snd_internal_driver_Voice_Free. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00157b18(int *param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5)
@@ -55,7 +55,7 @@ unsigned int FUN_00157b18(int *param_1,int param_2,unsigned int param_3,int para
       (**(romwright_code **)(*param_1 + 0x14))(param_1);
       return 0;
     }
-    rt_memcpy_w(param_1 + 0x1f,param_3,0x48);
+    __aeabi_memcpy4(param_1 + 0x1f,param_3,0x48);
     temp_v7 = 0;
     if (temp_v7 < (unsigned int)param_1[0x35]) {
       do {

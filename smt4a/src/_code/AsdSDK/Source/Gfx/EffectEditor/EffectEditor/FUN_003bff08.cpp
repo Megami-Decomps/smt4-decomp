@@ -20,7 +20,7 @@ int FUN_002b3ed8(...);
 int FUN_002f8794(void);
 int effMenuListAppend(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(void);
+int __aeabi_memcpy4(void);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
 typedef struct {
@@ -110,7 +110,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002f8794. */
 /* Supplied declaration required: effMenuListAppend. */
 extern int displayIsStereoActive(void);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003bff08(void)
@@ -408,7 +408,7 @@ LAB_003c01a8:
     if (temp_v10 != 0) {
       temp_v11 = 0x10000;
       memAlloc(0x10000,0x100,0,0x68,0x10,1);
-      rt_memcpy_w();
+      __aeabi_memcpy4();
       effMenuListAppend(temp_v11,2);
     }
     temp_v9 = temp_v9 + 1;

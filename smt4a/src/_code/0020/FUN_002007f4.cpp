@@ -37,7 +37,7 @@ typedef char BufferedRowsOffsets[
 extern "C" {
 void FUN_00163aa4(UiSpriteState *, f32);
 void uiSpriteSelectAnim(UiSpriteState *, s32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 void FUN_00203b40(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 
 void FUN_002007f4(BufferedRowsWork *work)
@@ -67,9 +67,9 @@ void FUN_002007f4(BufferedRowsWork *work)
         return;
     }
     work->display.activeBuffer = !work->display.activeBuffer;
-    rt_memcpy_w(work->display.primaryData,
+    __aeabi_memcpy4(work->display.primaryData,
                 work->buffers[work->display.activeBuffer].primaryData, 200);
-    rt_memcpy_w(work->display.secondaryData,
+    __aeabi_memcpy4(work->display.secondaryData,
                 work->buffers[work->display.activeBuffer].secondaryData, 100);
     FUN_00203b40(&work->display, work->buffers[work->display.activeBuffer].source, 5, 1, 0, 1);
     s16 animation = work->selected ? 0 : 2;

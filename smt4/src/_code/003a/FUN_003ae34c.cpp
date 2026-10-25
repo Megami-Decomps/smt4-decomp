@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 extern BtlUiGlobals g_btlUi;
 
@@ -16,7 +16,7 @@ void FUN_003ae34c(u32 unused, BtlUiUnitRecord *record)
         BtlUnitEntry *unit = &((BtlState *)ui->owner)->units[i];
 
         if (unit != NULL && unit->link != NULL && unit->link->id == record->unitId) {
-            rt_memcpy_w(&ui->objC.unitRecords.records[i], record, sizeof(BtlUiUnitRecord));
+            __aeabi_memcpy4(&ui->objC.unitRecords.records[i], record, sizeof(BtlUiUnitRecord));
             return;
         }
     }

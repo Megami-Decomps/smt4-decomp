@@ -39,7 +39,7 @@ int FUN_0029e874(...);
 int FUN_0029ede8(...);
 int FUN_002bd06c(unsigned int);
 int libc_strcpy(unsigned char [32], unsigned int);
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_001ddc00(void);
@@ -87,7 +87,7 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
 extern int padIsButtonPressed(unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x001dc5b4) */
@@ -122,7 +122,7 @@ unsigned int FUN_001dbf34(int param_1)
     if (temp_v2 == 0) {
       FUN_002954f4(*(unsigned short *)(temp_v3 + 0x46),1);
     }
-    rt_memcpy_w(param_1 + 0x6e4,temp_v3,0x604);
+    __aeabi_memcpy4(param_1 + 0x6e4,temp_v3,0x604);
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 1:

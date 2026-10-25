@@ -1,4 +1,3 @@
-/* NON_MATCHING: The matched gimmick controller address uses different base registers. */
 #include "map/mapGimic.h"
 #include "map/mapDepart.h"
 extern "C" {
@@ -10,7 +9,8 @@ void controllerSetRotationEulerDegrees(void*, f32, f32, f32);
 void FUN_00377f54(s32 id, MapVector destination, f32 yaw)
 {
     for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
-        MapGimicSlot* slot = &g_mapGimic->slots[index];
+        MapGimic* gimic = g_mapGimic;
+        MapGimicSlot* slot = &gimic->slots[index];
         if (slot->active != 0 && slot->id == id) {
             void* controller = slot->obj->controller;
             controllerSetDestination(controller, &destination);

@@ -69,7 +69,7 @@ extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
-extern int FUN_00333aac(unsigned int);
+extern int recordCategoryNineIsActiveInMode24(unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -358,7 +358,7 @@ void FUN_001afc0c(void)
                       }
                     }
                     else {
-                      temp_v9 = FUN_00333aac(temp_v10);
+                      temp_v9 = recordCategoryNineIsActiveInMode24(temp_v10);
                       if (temp_v9 != 0) {
                         temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),4);
                       }

@@ -22,7 +22,7 @@ int bitsAt60Clear(int, int);
 int FUN_004d0d70(void);
 int FUN_004da6e0(...);
 int FUN_004db914(int, int, unsigned int, int *);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 23 slot(s), 86 byte(s) */
 typedef struct {
@@ -78,7 +78,7 @@ extern unsigned int FUN_004d0cd4(void);
 extern int FUN_004da520(int, unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_004da6e0. */
 /* Supplied declaration required: FUN_004db914. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned char FUN_001ff014(int param_1)
@@ -154,7 +154,7 @@ unsigned char FUN_001ff014(int param_1)
   }
   else {
     temp_v3 = slotRecordFindById(temp_v2);
-    rt_memcpy_w(temp_v32,temp_v3,300);
+    __aeabi_memcpy4(temp_v32,temp_v3,300);
   }
   temp_v5 = (piVar1[param_1 * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
   temp_v38 = temp_v32;
@@ -165,7 +165,7 @@ unsigned char FUN_001ff014(int param_1)
   }
   else {
     temp_v3 = slotRecordFindById(temp_v5);
-    rt_memcpy_w(temp_v30,temp_v3,300);
+    __aeabi_memcpy4(temp_v30,temp_v3,300);
   }
   temp_v5 = (piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2;
   temp_v1 = FUN_004da520(*piVar1,temp_v38,temp_v30);
@@ -364,7 +364,7 @@ unsigned char FUN_001ff014(int param_1)
     *(int *)(temp_v4 + 0xa0) = temp_v12;
     *(int *)(temp_v4 + 0xa4) = temp_v13;
     temp_v7 = getUnlockedSlotCount(temp_v4);
-    rt_memcpy_w(temp_v4 + 0x34,piVar1 + 0x19b4,temp_v7 << 1);
+    __aeabi_memcpy4(temp_v4 + 0x34,piVar1 + 0x19b4,temp_v7 << 1);
     FUN_004bcd90(temp_v4);
     piVar1[0x2426] = 1;
     piVar1[0x2427] = (unsigned int)*(unsigned short *)(temp_v4 + 100);

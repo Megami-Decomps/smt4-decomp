@@ -21,7 +21,7 @@ struct QueuePayloadVector {
 extern "C" {
 void onlineMutexLock(void *mutex);
 void onlineMutexUnlock(void *mutex);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0030ed3c(QueuePayloadVector *vector, QueuePayload *destination, const QueuePayload *source);
 void FUN_00133508(QueuePayloadVector *vector, QueuePayload *position, const QueuePayload *source);
 
@@ -33,7 +33,7 @@ void FUN_00300252(QueueCollection *source, QueuePayloadVector *destination)
     }
     for (u32 index = 0; index < source->count; ++index) {
         QueuePayload payload;
-        rt_memcpy_w(&payload, &source->records[index].payload, sizeof(payload));
+        __aeabi_memcpy4(&payload, &source->records[index].payload, sizeof(payload));
         if (destination->end != destination->capacity) {
             FUN_0030ed3c(destination, destination->end++, &payload);
         } else {

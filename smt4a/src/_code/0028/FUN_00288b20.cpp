@@ -18,7 +18,7 @@ int FUN_0035ad50(...);
 int statDrawClampedDelta(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_9: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -62,7 +62,7 @@ extern unsigned int FUN_003df57c(int, unsigned int);
 extern int recordContainsPairedId(unsigned char *, int);
 extern unsigned int FUN_004bcbb4(unsigned char *, int);
 /* Supplied declaration required: FUN_004bd6b0. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00288b20(int param_1,int param_2,int param_3,int param_4,unsigned int param_5,int param_6,
@@ -190,7 +190,7 @@ LAB_00288c34:
     if (temp_v3 != 5) {
       temp_v3 = slotRecordFindById();
       if (temp_v3 != 0) {
-        rt_memcpy_w(temp_v11,temp_v3,300);
+        __aeabi_memcpy4(temp_v11,temp_v3,300);
       }
       else {
         unitRecordBuild(*(unsigned short *)(temp_v0 + 0x598),temp_v11);

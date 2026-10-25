@@ -17,7 +17,7 @@ extern s8 DAT_005f18bf;
 extern EnemyApproachMode DAT_00580b94[];
 extern EnemyApproachKind DAT_00582204[];
 f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
-f32 FUN_00384830(f32 x, f32 y, f32 z, f32 heading, f32 otherX, f32 otherY, f32 otherZ);
+f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 otherX, f32 otherY, f32 otherZ);
 s32 FUN_0036d984(const MapVector *position, const MapVector *other, u32 flags);
 
 /* Start an unobstructed nearby enemy's approach when distance or heading permits. */
@@ -33,7 +33,7 @@ u32 FUN_003850b4(void)
                                           enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
             if (distance.bits <= 0x447a0000) {
                 player = &g_lmapScene->position;
-                angle.value = FUN_00384830(player->x, player->y, player->z, g_lmapScene->heading,
+                angle.value = mathAbsHeadingErrorToPoint(player->x, player->y, player->z, g_lmapScene->heading,
                                            enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
                 if ((distance.bits >= 0x43960000 || angle.bits >= 0x42f00000) &&
                     FUN_0036d984(&g_lmapScene->position, &enemy->previousPosition, 0) == -1) {

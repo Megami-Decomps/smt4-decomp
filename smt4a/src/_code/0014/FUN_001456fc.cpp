@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail reaches work->window.state as `add #0x1900; ldrb [#0xe8]`, the build as
- * `add #0x1800; add #0x1e8; ldrb [r0]` (one extra instruction); logic identical. */
 #include "shard/X14_MessageMain.h"
 
 extern "C" {

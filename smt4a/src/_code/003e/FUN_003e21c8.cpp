@@ -62,7 +62,7 @@ extern "C" {
 extern BtlEncountMasks g_btlEncount; /* 0x573828 */
 extern void *g_btlCamera;            /* 0x571508 */
 
-void rt_memcpy_w(void *dest, const void *src, u32 bytes);
+void __aeabi_memcpy4(void *dest, const void *src, u32 bytes);
 void FUN_003f0c78(EncounterContextA *context);
 void FUN_003f0b80(EncounterContextA *context);
 void words10CopyHighToLow(void *camera);
@@ -104,14 +104,14 @@ void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
         header->values[5] = 0.0f;
         header->flags = 0;
         if (version == 1100) {
-            rt_memcpy_w(header, data, 0x118);
+            __aeabi_memcpy4(header, data, 0x118);
             data += 0x118;
         }
         count = (u32)(size - 0x118) / 0x18;
         if (context->activeCount < count) {
             count = context->activeCount;
         }
-        rt_memcpy_w(context->recordTable, data, count * 0x18);
+        __aeabi_memcpy4(context->recordTable, data, count * 0x18);
     }
     FUN_003f0c78(context);
     FUN_003f0b80(context);

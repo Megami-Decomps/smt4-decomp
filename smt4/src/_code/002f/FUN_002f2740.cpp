@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail compares the two groups with `subs`, built uses `cmp`. */
 #include "common.h"
 
 extern "C" {
@@ -34,7 +33,8 @@ void FUN_002f2740(HandleHolder *first, HandleHolder *second)
     } else {
         secondGroup = gameGetUnitRecord()->group;
     }
-    if (secondGroup != firstGroup) {
+    s32 difference = secondGroup - firstGroup;
+    if (difference != 0) {
         return;
     }
     FUN_002497f8(first, second);

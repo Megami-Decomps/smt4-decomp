@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite compiles (171 vs 155 rows); retail reads the 64-bit masks through one base pointer into a global struct at 0x5737f8 and keeps them in a 60-byte frame */
+/* NON_MATCHING: readable rewrite compiles (156 vs 176 rows); the masks are now fields of the g_btlEncount block (one base, as retail), but retail keeps the 64-bit masks in a 60-byte frame (spilled) while the build reloads them from the block. */
 #include "common.h"
 
 // Per-combatant record of the battle sides list (0x408 bytes each).
@@ -32,11 +32,19 @@ extern "C" {
 extern u32 g_btlActionReflect;
 extern s32 g_btlCamera;
 extern u32 g_btlAux;
-extern u64 DAT_00573830;
-extern u64 DAT_00573838;
-extern u64 DAT_00573840;
-extern u64 DAT_00573850;
-extern u64 DAT_00573860;
+
+/* The encounter block at g_btlEncount (0x573828): the side masks sit at fixed offsets in it. */
+struct BtlEncount {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u64 activeSides;
+    /* 0x10 */ u64 targetSides;
+    /* 0x18 */ u64 blockedSides;
+    /* 0x20 */ u8 unk20[8];
+    /* 0x28 */ u64 markSides;
+    /* 0x30 */ u8 unk30[8];
+    /* 0x38 */ u64 panelSides;
+};
+extern BtlEncount g_btlEncount;
 extern u32 g_btlUiBlock;
 
 s32 chainCountIdUnflagged(u32 chain, u32* action);
@@ -53,13 +61,13 @@ u32 FUN_003e0cd4(u32* action, BattleState* state)
 {
     if ((state->hasChain == 0 || chainCountIdUnflagged(g_btlActionReflect, action) <= 0) &&
         recordAreAllCountsNonpositive(g_btlAux) != 0 &&
-        (((state->pendingMask & DAT_00573860) == 0) || btlUiIsPanelHolderReady(g_btlUiBlock) != 0)) {
+        (((state->pendingMask & g_btlEncount.panelSides) == 0) || btlUiIsPanelHolderReady(g_btlUiBlock) != 0)) {
         if ((state->modeFlags & 0x4000000) != 0) {
             for (s32 i = 4; i < 0x36; i++) {
                 BattleSideEntry* side = reinterpret_cast<BattleSideEntry*>(state->sides + i * 0x408);
                 u64 flags = side->flags;
-                if ((flags & DAT_00573830) != 0 && (flags & DAT_00573840) == 0 && (flags & DAT_00573838) != 0) {
-                    side->flags = flags | DAT_00573850;
+                if ((flags & g_btlEncount.activeSides) != 0 && (flags & g_btlEncount.blockedSides) == 0 && (flags & g_btlEncount.targetSides) != 0) {
+                    side->flags = flags | g_btlEncount.markSides;
                 }
             }
             for (s32 i = 4; i < 0x36; i++) {

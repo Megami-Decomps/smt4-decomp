@@ -1,4 +1,4 @@
-/* NON_MATCHING: player-affinity comparison splits, mask/unit saved registers swap, and the affinity tail branch reverses. */
+/* NON_MATCHING: the two shared status-set tails branch with reversed polarity (retail beq skip; b set) and the unit/11 argument moves are ordered differently; registers and layout otherwise match. */
 #include "shard/Shard0031.h"
 #include "shard/Shard004B.h"
 
@@ -22,16 +22,15 @@ void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
     if ((group == 0 || group == 2 || group == 3) &&
         !(gameGetPlayerData()->status & 2) && !(gameGetPlayerData()->status & 0x400) &&
         !(gameGetPlayerData()->status & mask) && static_cast<f32>(randRange(99)) < chance) {
-        if (statusBit != 5) {
-            PlayerStatusViewA* player = gameGetPlayerData();
-            player->status |= mask;
-        } else {
+        bool resisted = false;
+        if (statusBit == 5) {
             FUN_003dfad4(affinities, gameGetPlayerData());
             u16 state = affinities[11] >> 10;
-            if (!(state == 1 || state == 3 || state == 4)) {
-                PlayerStatusViewA* player = gameGetPlayerData();
-                player->status |= mask;
-            }
+            resisted = state == 1 || state == 3 || state == 4;
+        }
+        if (!resisted) {
+            PlayerStatusViewA* player = gameGetPlayerData();
+            player->status |= mask;
         }
     }
     s32 count;

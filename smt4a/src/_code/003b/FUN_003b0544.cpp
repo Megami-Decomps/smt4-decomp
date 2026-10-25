@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_0027376c(s32 mode);
+void eplSlotStartRequest(s32 mode);
 
-/* Script command: runs FUN_0027376c in mode 4. */
+/* Script command: runs eplSlotStartRequest in mode 4. */
 u32 FUN_003b0544(void)
 {
-    FUN_0027376c(4);
+    eplSlotStartRequest(4);
     return 1;
 }
 

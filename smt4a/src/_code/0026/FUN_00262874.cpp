@@ -67,7 +67,7 @@ int menuStateStartSelect(...);
 int obj48Arm(...);
 int FUN_00480140(...);
 int FUN_004ab734(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int partyPanelHandleCursorEdgeInput(...);
 int FUN_002a4964(...);
@@ -283,7 +283,7 @@ extern int FUN_0049fbb8(unsigned int, int, unsigned short);
 extern unsigned int FUN_004d0cd4(void);
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: FUN_004fd508. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -1533,7 +1533,7 @@ LAB_00264d34:
                         *(unsigned char *)(temp_v15 + 0x9c0) = 0;
                       }
                       temp_v10 = gameGetSlotRecord((int)*(char *)(temp_v4 + 0x1c9f));
-                      rt_memcpy_w(temp_v1 + 0x10e4,temp_v10,300);
+                      __aeabi_memcpy4(temp_v1 + 0x10e4,temp_v10,300);
                       objBInitBlock19D0(temp_v1 + 0x10e4,0);
 LAB_00264b88:
                       obj48Arm(*(unsigned int *)(temp_v9 + 0xa10),0xff);
@@ -1556,7 +1556,7 @@ LAB_00264b88:
                       mapBlockSetRequest();
                       obj48Arm(*(unsigned int *)(temp_v1 + 0xa10),0xff);
                       temp_v10 = gameGetPlayerData();
-                      rt_memcpy_w(temp_v1 + 0x1080,temp_v10,100);
+                      __aeabi_memcpy4(temp_v1 + 0x1080,temp_v10,100);
                       FUN_00372100(temp_v1 + 0x1080,0);
                       FUN_0020b718(0x15,1);
                     }
@@ -1711,7 +1711,7 @@ LAB_002654c8:
                             *(unsigned short *)(temp_v4 + 0xa84) = 0;
                           }
                           temp_v10 = gameGetSlotRecord(*(unsigned int *)(temp_v4 + 0xa80));
-                          rt_memcpy_w(temp_v1 + 0x10e4,temp_v10,300);
+                          __aeabi_memcpy4(temp_v1 + 0x10e4,temp_v10,300);
                           objBInitBlock19D0(temp_v1 + 0x10e4,0);
                           obj48Arm(*(unsigned int *)(temp_v15 + 0xa20),0xff);
                           FUN_0020b718(0x15,1);

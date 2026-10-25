@@ -83,7 +83,7 @@ void FUN_0029bb14(u32 object);
 s32 jobIsValid(u32 job);
 void jobSavePositionSnapshot(u32 job);
 void FUN_0024ecc0(u32 job, s32 index);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Refreshes every sub-node of a node head, last to first. */
 static __inline void cutRefreshNodes(CutNodeHead *head)
@@ -149,7 +149,7 @@ void FUN_002205a4(s32 id, s32 easeKind, s32 frames)
     anim->elapsed = 0.0f;
     anim->ease = ease;
     anim->savedOffsetA = anim->offsetA;
-    rt_memcpy_w(anim->cameraCopy, anim->camera, 0x44);
+    __aeabi_memcpy4(anim->cameraCopy, anim->camera, 0x44);
     anim->offsetE = 0.0f;
     anim->offsetD = 0.0f;
     anim->offsetC = 0.0f;

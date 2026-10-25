@@ -4,7 +4,7 @@ extern "C" {
 
 extern StateAtF4 *g_campCecEdit;
 extern void *gameGetPlayerData(void);
-extern void rt_memcpy_w(void *dst, const void *src, u32 size);
+extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 extern void asdMemFree(void *ptr);
 extern void asdMemFreeSlot(u32 handle);
 extern void scrScriptProcessDestroy(u32 process);
@@ -16,7 +16,7 @@ void stateAtF4Destroy(void)
 {
     StateAtF4 *state = g_campCecEdit;
 
-    rt_memcpy_w(gameGetPlayerData(), state->unk16C, 0xE);
+    __aeabi_memcpy4(gameGetPlayerData(), state->unk16C, 0xE);
     asdMemFree(state->buf50);
     asdMemFree(state->buf54);
     asdMemFree(state->unk58);

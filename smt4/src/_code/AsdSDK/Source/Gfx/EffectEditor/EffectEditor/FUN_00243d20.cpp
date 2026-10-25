@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(int, double);
 int asdDebugLog(...);
 int effEditorNodeChainApply(...);
-int FUN_0024dd80(...);
+int padAlternateButtonIndex(...);
 int FUN_0024dd90(...);
 int effMenuListAppend(void);
 int FUN_002826d4(...);
@@ -72,7 +72,7 @@ extern float DAT_004d92c0; /* 0x4d92c0 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002826d4. */
@@ -198,7 +198,7 @@ unsigned char * FUN_00243d20(unsigned int *param_1,float *param_2,int param_3)
         if (DAT_0044ead8 == (unsigned char *)0x2) {
           temp_v4 = padIsButtonRepeat(5);
           if (temp_v4 == 0) {
-            FUN_0024dd80(5);
+            padAlternateButtonIndex(5);
             temp_v4 = padIsButtonRepeat();
             if (temp_v4 != 0) {
               puVar9 = DAT_0044ead0;
@@ -210,7 +210,7 @@ unsigned char * FUN_00243d20(unsigned int *param_1,float *param_2,int param_3)
             else {
               temp_v4 = padIsButtonRepeat(6);
               if (temp_v4 == 0) {
-                FUN_0024dd80(6);
+                padAlternateButtonIndex(6);
                 temp_v4 = padIsButtonRepeat();
                 puVar9 = DAT_0044ead0;
                 if (temp_v4 == 0) goto LAB_00244490;
@@ -241,22 +241,22 @@ LAB_002444a4:
       else {
         temp_v4 = padIsButtonRepeat(3);
         if (temp_v4 == 0) {
-          FUN_0024dd80(3);
+          padAlternateButtonIndex(3);
           temp_v4 = padIsButtonRepeat();
           if (temp_v4 == 0) {
             temp_v4 = padIsButtonRepeat(4);
             if (temp_v4 == 0) {
-              FUN_0024dd80(4);
+              padAlternateButtonIndex(4);
               temp_v4 = padIsButtonRepeat();
               if (temp_v4 == 0) {
                 temp_v4 = padIsButtonRepeat(5);
                 if (temp_v4 == 0) {
-                  FUN_0024dd80(5);
+                  padAlternateButtonIndex(5);
                   temp_v4 = padIsButtonRepeat();
                   if (temp_v4 == 0) {
                     temp_v4 = padIsButtonRepeat(6);
                     if (temp_v4 == 0) {
-                      FUN_0024dd80(6);
+                      padAlternateButtonIndex(6);
                       temp_v4 = padIsButtonRepeat();
                       puVar9 = DAT_0044ead0;
                       if (temp_v4 == 0) goto LAB_00244490;
@@ -372,12 +372,12 @@ LAB_0024422c:
       if ((puVar2 != (unsigned char *)0x0) && (puVar2 != puVar13)) {
         temp_v4 = padIsButtonRepeat(3);
         if (temp_v4 == 0) {
-          FUN_0024dd80(3);
+          padAlternateButtonIndex(3);
           temp_v4 = padIsButtonRepeat();
           if (temp_v4 != 0) goto LAB_00243f30;
           temp_v4 = padIsButtonRepeat(4);
           if (temp_v4 == 0) {
-            FUN_0024dd80(4);
+            padAlternateButtonIndex(4);
             temp_v4 = padIsButtonRepeat();
             if (temp_v4 == 0) goto LAB_00244010;
           }
@@ -418,7 +418,7 @@ LAB_00243f30:
 LAB_00244010:
       temp_v4 = padIsButtonRepeat(5);
       if (temp_v4 == 0) {
-        FUN_0024dd80(5);
+        padAlternateButtonIndex(5);
         temp_v4 = padIsButtonRepeat();
         if (temp_v4 != 0) {
           puVar9 = DAT_0044ead0;
@@ -429,12 +429,12 @@ LAB_00244010:
         else {
           temp_v4 = padIsButtonRepeat(6);
           if (temp_v4 == 0) {
-            FUN_0024dd80(6);
+            padAlternateButtonIndex(6);
             temp_v4 = padIsButtonRepeat();
             if (temp_v4 == 0) {
               temp_v4 = padIsButtonPressed(0);
               if (temp_v4 == 0) {
-                FUN_0024dd80(0);
+                padAlternateButtonIndex(0);
                 temp_v4 = padIsButtonPressed();
                 puVar9 = DAT_0044ead0;
                 if (temp_v4 != 0) {
@@ -755,7 +755,7 @@ LAB_002444b0:
   asdDebugLog(0xa4,0x44,8,&LAB_00244d88,temp_v21);
   temp_v4 = padIsButtonPressed(1);
   if (temp_v4 == 0) {
-    FUN_0024dd80(1);
+    padAlternateButtonIndex(1);
     temp_v4 = padIsButtonPressed();
     if (temp_v4 == 0) {
       temp_v5 = uRam0044f980;

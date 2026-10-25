@@ -1,4 +1,3 @@
-/* NON_MATCHING: Saving the fourth resource is scheduled before the paired VFP argument saves instead of after them. */
 #include "common.h"
 
 extern "C" {
@@ -8,7 +7,8 @@ void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 
 void effectSubmitDefaultParameters(void);
 
 /* Substitutes the shared default for empty integer parameters and submits the scalar parameter block. */
-void FUN_00164034(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4)
+/* The fourth colour is declared after the first four floats: ABI-equal (r3), and it is the order retail copies the arguments in. */
+void FUN_00164034(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, u32 fourth, f32 value4)
 {
     if (first == 0) first = DAT_005b3ce8;
     if (second == 0) second = DAT_005b3ce8;

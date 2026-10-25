@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc loads the right record and key before the left; retail loads the left record first. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -6,7 +5,9 @@ extern "C" {
 /* Orders record pointers by their descending floating-point key. */
 s32 FUN_001a835c(const FloatSortRecord *const *left, const FloatSortRecord *const *right)
 {
-    return (s32)((*right)->key - (*left)->key);
+    const FloatSortRecord *a = *left;
+    const FloatSortRecord *b = *right;
+    return (s32)(b->key - a->key);
 }
 
 } /* extern "C" */

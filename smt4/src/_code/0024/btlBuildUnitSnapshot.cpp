@@ -52,7 +52,7 @@ struct BattleUnitSnapshot {
 
 extern "C" {
 void memClear(void *, u32 bytes);
-void rt_memcpy_w(void *, const void *, u32 bytes);
+void __aeabi_memcpy4(void *, const void *, u32 bytes);
 char *libc_strcpy(char *, const char *);
 s32 FUN_00295c60(u16 id, u8 variant);
 s32 FUN_00269bf0(const SnapshotUnitSource *);
@@ -76,8 +76,8 @@ void btlBuildUnitSnapshot(BattleUnitSnapshot *snapshot, const SnapshotUnitSource
     snapshot->level = unit->level;
     snapshot->slot = -1;
     snapshot->vitals = unit->prefix.vitals;
-    rt_memcpy_w(snapshot->stats, unit->prefix.stats, sizeof(snapshot->stats));
-    rt_memcpy_w(snapshot->skills, unit->record.items, flagCountUnlockedSlots(unit) * sizeof(u16));
+    __aeabi_memcpy4(snapshot->stats, unit->prefix.stats, sizeof(snapshot->stats));
+    __aeabi_memcpy4(snapshot->skills, unit->record.items, flagCountUnlockedSlots(unit) * sizeof(u16));
     libc_strcpy(snapshot->name, FUN_002bd06c(unit->id));
     for (s32 stat = 0; stat < 5; ++stat) {
         if (snapshot->vitals.attributes[stat] >= 1000) {
@@ -89,6 +89,6 @@ void btlBuildUnitSnapshot(BattleUnitSnapshot *snapshot, const SnapshotUnitSource
     }
     snapshot->values0 = unit->values0;
     snapshot->values1 = unit->values1;
-    rt_memcpy_w(snapshot->data, unit->data, sizeof(snapshot->data));
+    __aeabi_memcpy4(snapshot->data, unit->data, sizeof(snapshot->data));
 }
 }

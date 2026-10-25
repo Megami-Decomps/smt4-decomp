@@ -10,7 +10,7 @@ int FUN_00243224(...);
 int FUN_00249678(void);
 int FUN_002496cc(int);
 int effEditorNodeChainApply(unsigned char *);
-int FUN_0024dd80(int);
+int padAlternateButtonIndex(int);
 int FUN_0024dd90(unsigned char *);
 int effMenuListAppend(void);
 int padIsButtonPressed(...);
@@ -71,7 +71,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_002496cc. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -117,7 +117,7 @@ unsigned int FUN_00323a08(int param_1,int param_2)
   if ((DAT_0044f910 & 2) == 0) {
     temp_v5 = padIsButtonPressed(1);
     if (temp_v5 == 0) {
-      FUN_0024dd80(1);
+      padAlternateButtonIndex(1);
       temp_v5 = padIsButtonPressed();
       if (temp_v5 != 0) {
         temp_v6 = 0;

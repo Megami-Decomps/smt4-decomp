@@ -34,6 +34,7 @@ typedef struct SlotPicker {
 extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void FUN_00157558(RenderCtxA *context);
 void FUN_00183bb0(void);
@@ -50,7 +51,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
  * slot's cursor (blinking every 30 frames) and the slot's two-glyph label. */
 void FUN_00485718(SlotPicker *picker)
 {
-    f32 scale = picker->fade.speed;
+    f32 scale = vec2GetSpeed(&picker->fade);
 
     efctSetSpeed(scale);
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);

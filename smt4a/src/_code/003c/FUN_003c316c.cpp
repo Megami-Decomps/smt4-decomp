@@ -1,6 +1,5 @@
-/* NON_MATCHING: instruction order only: in the loop retail loads the key's high word (r1) before the low word (r0) */
 /* Finds the entry with the given id in the table's entry list; NULL if there is none. */
-#include "common.h"
+#include "shard/W4_W4Match5_DataTable.h"
 
 extern "C" {
 
@@ -10,17 +9,15 @@ typedef struct Entry {
     /* 0x0E */ u8 unk0E[2];
 } Entry; /* 0x10 */
 
-extern void *dataTableGet(u64 key);
-extern u32 dataTableGetCount(void *table);
 extern Entry *dataTableGetEntries(void *table);
 
 Entry *FUN_003c316c(s32 id)
 {
     s32 i = 0;
-    s32 count = dataTableGetCount(dataTableGet(0x600000029ULL));
+    s32 count = dataTableGetCount(dataTableGetSection(41, 6));
 
     for (; i < count; i++) {
-        void *table = dataTableGet(0x600000029ULL);
+        void *table = dataTableGet(41, 6);
         Entry *entries = dataTableGetEntries(table);
         u32 entryCount = dataTableGetCount(table);
 

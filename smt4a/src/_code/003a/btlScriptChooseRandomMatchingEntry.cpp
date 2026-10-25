@@ -1,4 +1,4 @@
-/* NON_MATCHING: combatant base/mask registers differ, and the special-entry byte load retains a separate low-offset address addition. */
+/* NON_MATCHING: registers of the entries base and index*0x408 are swapped in the entry address computation (retail base in r1, product in r0); everything else matches. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -25,9 +25,9 @@ u32 btlScriptChooseRandomMatchingEntry(void)
     for (s32 index = start; index < start + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (flags & g_btlCandidateMasks.required) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0 &&
+        if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
+            (g_btlCandidateMasks.required & flags) != 0 &&
+            (g_btlCandidateMasks.excluded & flags) == 0 &&
             FUN_002b54a0(entry, condition)) {
             candidates[candidateCount++] = entry->id;
         }

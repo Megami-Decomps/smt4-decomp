@@ -1,4 +1,3 @@
-/* NON_MATCHING: one instruction differs: the slot-key compare has its operands swapped (cmp r1, r0 instead of cmp r0, r1). */
 #include "common.h"
 
 extern "C" {
@@ -81,7 +80,8 @@ u32 FUN_00372570(s32 force)
         if (key >= 0) {
             s32 i;
             for (i = 0; i < 0x18; i++) {
-                if (key == panel->slots[i].key) {
+                s32 slotKey = panel->slots[i].key;
+                if (key == slotKey) {
                     s32 state;
                     if (panel->cursorOnly != 0) {
                         scrollOwnerSelectIndex(panel->cursorAlt, i % 4);

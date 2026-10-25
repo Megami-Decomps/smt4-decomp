@@ -1,4 +1,3 @@
-/* NON_MATCHING: range stack slots, excluded-mask loading and active-entry byte addressing differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -20,9 +19,8 @@ u32 FUN_003cc2f0()
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if (!(g_btlCandidateMasks.unavailable & flags) &&
-            (g_btlCandidateMasks.required & flags) && !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == id && btlFindEntryValue(entry->unitIndex, 0x13) > 0) {
             scrSetResult(1);
             return 1;

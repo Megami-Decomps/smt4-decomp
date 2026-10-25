@@ -5,12 +5,12 @@
 extern "C" {
 
 int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int rt_memcpy_w(int, unsigned int, int);
+int __aeabi_memcpy4(int, unsigned int, int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int nn_err_CTR_FatalErr_Throw(unsigned int *param_1,unsigned int param_2)
@@ -22,7 +22,7 @@ unsigned int nn_err_CTR_FatalErr_Throw(unsigned int *param_1,unsigned int param_
   
   temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
   *(unsigned int *)(temp_v1 + 0x80) = 0x10800;
-  rt_memcpy_w(temp_v1 + 0x84,param_2,0x80);
+  __aeabi_memcpy4(temp_v1 + 0x84,param_2,0x80);
   temp_v0 = *param_1;
   software_interrupt(0x32);
   if ((temp_v0 & 0x80000000) == 0) {

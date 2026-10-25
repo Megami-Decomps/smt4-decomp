@@ -21,13 +21,13 @@ struct BattlePresentationReadinessWork {
 typedef char BattlePresentationResourceOffsetsCheck[sizeof(BattlePresentationResource) == 0x8C &&
     offsetof(BattlePresentationResource, flags) == 0x88 &&
     offsetof(BattlePresentationReadinessWork, filter) == 0x33A8 ? 1 : -1];
-extern "C" void *rt_memcpy_w(void *output, const void *input, u32 bytes);
+extern "C" void *__aeabi_memcpy4(void *output, const void *input, u32 bytes);
 
 static __inline bool battlePresentationGroupIsReady(const BattlePresentationResource *resources)
 {
     for (s32 index = 0; index < 4; ++index) {
         BattlePresentationResource snapshot;
-        rt_memcpy_w(&snapshot, &resources[index], sizeof(snapshot));
+        __aeabi_memcpy4(&snapshot, &resources[index], sizeof(snapshot));
         if ((snapshot.flags & 1) != 0 && snapshot.resource == NULL) {
             return false;
         }

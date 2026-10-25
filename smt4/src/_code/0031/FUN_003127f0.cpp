@@ -1,4 +1,4 @@
-/* NON_MATCHING: callee-saved registers for the two script args are swapped (id r4, index r5 in retail) and armcc emits one extra compiler nop before scrSetResult. */
+/* NON_MATCHING: only one extra compiler `nop {0}` before scrSetResult (the null-record path joins at the call in retail without it). */
 #include "common.h"
 
 extern "C" {
@@ -26,14 +26,11 @@ u32 FUN_003127f0(void)
         result = -1;
     } else {
         u32 value = -1;
-        if (index == 0) {
-            value = record->values[0];
-        } else if (index == 1) {
-            value = record->values[1];
-        } else if (index == 2) {
-            value = record->values[2];
-        } else if (index == 3) {
-            value = record->values[3];
+        switch (index) {
+        case 0: value = record->values[0]; break;
+        case 1: value = record->values[1]; break;
+        case 2: value = record->values[2]; break;
+        case 3: value = record->values[3]; break;
         }
         result = value;
     }

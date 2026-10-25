@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only in the percentage multiply (retail: base in r0, percent in r1, constant in r2) */
 /* Returns the entry's explicit value (+0x50), or, when it has a percentage (+0x54), that percentage of the gameGetSlotTable base; 0 for a NULL entry. */
 #include "common.h"
 
@@ -23,9 +22,9 @@ s32 FUN_0028d1f4(u32 id)
             result = entry->value;
         }
         if (entry->percent != 0) {
-            s32 *base = gameGetSlotTable();
+            s32 total = *gameGetSlotTable();
 
-            result = (entry->percent * *base) / 100;
+            result = (entry->percent * total) / 100;
         }
     }
     return result;

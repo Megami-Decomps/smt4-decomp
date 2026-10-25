@@ -56,7 +56,7 @@ extern MapGameStateView g_gameState;
 extern u8 DAT_005f1724;
 
 f32 distSpatial(MapTargetPosition from, MapTargetPosition to);
-f32 FUN_00384830(f32 x, f32 y, f32 z, f32 heading, MapTargetPosition to);
+f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, MapTargetPosition to);
 void FUN_00234044(s32 show, s32 target);
 MapTargetText *dataTable2aGetEntryWithAoc(s32 id);
 char *libc_strcpy(char *destination, const char *source);
@@ -93,7 +93,7 @@ void FUN_00274e4c(f32 x, f32 y, f32 z, f32 heading)
             }
             f32 distance = distSpatial(player, target->position);
             if (distance < nearLimit) {
-                f32 angle = FUN_00384830(x, y, z, heading, DAT_00581280->targets[i].position);
+                f32 angle = mathAbsHeadingErrorToPoint(x, y, z, heading, DAT_00581280->targets[i].position);
                 if (angle < angleLimit && (best == -1 || distance < bestDistance)) {
                     best = i;
                     bestDistance = distance;
@@ -117,7 +117,7 @@ void FUN_00274e4c(f32 x, f32 y, f32 z, f32 heading)
         work = DAT_00581280;
         char *text = entry != NULL ? entry->text : NULL;
         if (text != NULL && !(text[0] == '0' && entry->text[1] == 0)) {
-            f32 near = FUN_00384830(work->targets[best].position.x, work->targets[best].position.y,
+            f32 near = mathAbsHeadingErrorToPoint(work->targets[best].position.x, work->targets[best].position.y,
                                     work->targets[best].position.z, work->targets[best].heading,
                                     g_gameState.position);
             DAT_005f1724 = near < MAP_TARGET_NEAR_ICON_DISTANCE;

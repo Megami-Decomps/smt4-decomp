@@ -1,246 +1,214 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `QuestCenterMainProcUpdate` (_code @ 0x1a9a74, 0x428 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout of the area-to-kind chain and constant/register order differ; the rest of the update follows retail */
+#include "common.h"
+#include "quest_center/qcMain.h"
+#include "classes/SelectionState.h"
+
+/* The quest center's globals as the update reads them (qcMain.h's QcGlobals is the 8-byte head). */
+struct QcMainState {
+    /* 0x00 */ u8 mode;
+    /* 0x01 */ u8 restoreMenus;           /* set when the menus have to be reset on exit */
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ QcWork *work;
+    /* 0x08 */ s32 area;                  /* the area the quest center was opened from */
+    /* 0x0c */ u32 argument;
+    /* 0x10 */ s32 resident;              /* nonzero: the screen's shared UI stays up */
+};
+
+/* A quest center start sequence: the table row selects it by kind, area and quest conditions. */
+struct QcStartSequence {
+    /* 0x00 */ char name[0x10];
+    /* 0x10 */ u16 sequenceArgument;
+    /* 0x12 */ u16 requiredFlag;          /* 0xffff: the first three quests must be completed */
+    /* 0x14 */ u16 skipFlag;              /* the sequence is skipped once this flag is set */
+    /* 0x16 */ u16 kind;
+    /* 0x18 */ s16 area;                  /* -1: any area */
+};
+
+/* The quest center's entry list screen: a state word and its selection flags at 0x658. */
+struct QuestEntry {
+    /* 0x000 */ u32 state;
+    /* 0x004 */ u8 unk004[0x654];
+    /* 0x658 */ SelectionFlags selection;
+    /* 0x667 */ u8 unk667[0x95d];
+
+    QuestEntry() : state(0) {}
+    static void *operator new(u32 size);
+};
+
+/* The game state's current-area field the finishing sequence reads. */
+struct QcGameState {
+    /* 0x000 */ u8 unk000[0x2fc];
+    /* 0x2fc */ s32 camera;
+};
 
 extern "C" {
+extern QcMainState g_qcMain;
+extern QcStartSequence DAT_0044dbb0[3];
+extern QcGameState g_gameState;
+void *asdOperatorNew(u32 size);
+s32 gameFlagIsSet(u32 flag);
+s32 gameStateIsFlagSetAndLarge(void);
+s32 FUN_00287304(void);
+void FUN_00287328(u32 bgm);
+void FUN_00287528(s32 mode);
+u32 FUN_00287704(u32 mode);
+void FUN_00289880(void);
+void FUN_002898e4(void);
+s32 bgmGetStateById(u32 id);
+s32 objectFlagBitIsSet(u32 object, u32 bit);
+s32 questIsCompleted(u32 quest);
+void FUN_002a03d8(s32 first, s32 second);
+void FUN_002a6fb8(void);
+void asdMemFreeNonNull(QuestEntry *entry);
+void libc_strcpy(char *destination, const char *source);
+void asdSequenceRequest(u32 kind, const void *argument, u32 size);
+void FUN_0032c69c(void);
+void FUN_00381b8c(void);
+void FUN_003840f4(QuestEntry *entry, s32 area, u32 argument, s32 resident);
+void dummyAttachmentUpdate(QuestEntry *entry);
+s32 entryRequestSequence(void);
+void buttonHelpAcquireResources(void);
+void buttonHelpCreate(void);
+void buttonHelpRelease(void);
+void buttonHelpTexturesUnref(void);
+void uiFadeRelease(void);
 
-int buttonHelpTexturesUnref(void);
-int FUN_00287328(unsigned int);
-int FUN_00287528(int);
-int FUN_00289880(void);
-int FUN_002898e4(void);
-int buttonHelpCreate(void);
-int buttonHelpAcquireResources(void);
-int buttonHelpRelease(void);
-int uiFadeRelease(void);
-int FUN_002a03d8(...);
-int FUN_002a6fb8(void);
-int asdMemFreeNonNull(unsigned int);
-int libc_strcpy(unsigned char [28]);
-int gameFlagIsSet(...);
-int asdOperatorNew(void);
-int asdSequenceRequest(...);
-int FUN_0032c69c(void);
-int FUN_00381b8c(void);
-int FUN_003840f4(unsigned int, int, unsigned int, int);
-int FUN_003848b8(unsigned int);
-int entryRequestSequence(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
-
-extern signed char DAT_0044db89; /* 0x44db89 */
-extern int DAT_0044db8c; /* 0x44db8c */
-extern int DAT_0044db90; /* 0x44db90 */
-extern unsigned int DAT_0044db94; /* 0x44db94 */
-extern int DAT_0044db98; /* 0x44db98 */
-extern int DAT_0049fc18; /* 0x49fc18 */
-
-/* Supplied declaration required: buttonHelpTexturesUnref. */
-extern int gameStateIsFlagSetAndLarge(void);
-extern int FUN_00287304(void);
-extern int _ZN14SelectionFlagsC1Ev(unsigned int *);
-/* Supplied declaration required: FUN_00287328. */
-extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: FUN_00287528. */
-extern int objectFlagBitIsSet(unsigned int, unsigned int);
-extern unsigned int FUN_00287704(unsigned int);
-/* Supplied declaration required: FUN_00289880. */
-/* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: buttonHelpCreate. */
-/* Supplied declaration required: buttonHelpAcquireResources. */
-/* Supplied declaration required: buttonHelpRelease. */
-/* Supplied declaration required: uiFadeRelease. */
-extern int questIsCompleted(unsigned int);
-/* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: FUN_002a6fb8. */
-/* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_0032c69c. */
-/* Supplied declaration required: FUN_00381b8c. */
-/* Supplied declaration required: FUN_003840f4. */
-/* Supplied declaration required: FUN_003848b8. */
-/* Supplied declaration required: entryRequestSequence. */
-
-
-unsigned int QuestCenterMainProcUpdate(void)
-
+void *QuestEntry::operator new(u32 size)
 {
-/* irregular: 2 goto(s); 21 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar6;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  short temp_v6;
-  unsigned int temp_v7 [2];
-  unsigned char temp_v8 [28];
-  
-  temp_v0 = DAT_0044db8c;
-  puVar6 = temp_v7;
-  switch(*(unsigned char *)(DAT_0044db8c + 0x19)) {
-  case 0:
-    if (DAT_0044db90 != 0xb) {
-      if (DAT_0044db90 < 0xc) {
-        if (DAT_0044db90 == 1) {
-          temp_v6 = 0;
-        }
-        else if (DAT_0044db90 == 9) {
-          temp_v6 = 2;
-        }
-        else if (DAT_0044db90 == 10) {
-          temp_v6 = 3;
-        }
-        else {
-          temp_v6 = 1;
-        }
-      }
-      else if (DAT_0044db90 == 0xc || DAT_0044db90 == 0xd) {
-        temp_v6 = 3;
-      }
-      else {
-        temp_v6 = 1;
-      }
-    }
-    else {
-      temp_v6 = 3;
-    }
-    if (DAT_0044db98 == 0) {
-      if ((temp_v6 == 1) && (temp_v2 = gameFlagIsSet(0x235), temp_v2 != 0)) {
-        temp_v2 = gameFlagIsSet(0x1c0);
-        if ((temp_v2 != 0) && (temp_v2 = gameFlagIsSet(0x424), temp_v2 != 0)) {
-          temp_v3 = FUN_00287704(1);
-          temp_v2 = objectFlagBitIsSet(temp_v3,4);
-          if (temp_v2 != 0) {
-            FUN_00287528(0);
-          }
-        }
-        else {
-          FUN_00287528(0);
-        }
-      }
-      temp_v5 = 0;
-      do {
-        temp_v2 = temp_v5 * 0x1a;
-        if ((*(short *)(temp_v2 + 0x44dbc6) == temp_v6) &&
-           ((*(short *)(temp_v2 + 0x44dbc8) == -1 || (*(short *)(temp_v2 + 0x44dbc8) == DAT_0044db90))))
-        {
-          if (*(short *)(temp_v2 + 0x44dbc2) != 0) {
-            if (*(short *)(temp_v2 + 0x44dbc2) == -1) {
-              temp_v1 = questIsCompleted(0x65);
-              if ((temp_v1 == 0) || (temp_v1 = questIsCompleted(0x66), temp_v1 == 0)) goto LAB_001a9c38;
-              temp_v1 = questIsCompleted(0x67);
+    return asdOperatorNew(size);
+}
+
+/* Per-frame update of the quest center screen: opens the entry list (playing a start sequence if
+   a row of the table asks for one), waits for it, then closes it again. Returns -1 once finished. */
+u32 QuestCenterMainProcUpdate(void)
+{
+    QcWork *work = g_qcMain.work;
+    switch (work->mode) {
+    case 0: {
+        s16 kind;
+        if (g_qcMain.area == 11) {
+            kind = 3;
+        } else if (g_qcMain.area > 11) {
+            if (g_qcMain.area == 12 || g_qcMain.area == 13) {
+                kind = 3;
+            } else {
+                kind = 1;
             }
-            else {
-              temp_v1 = gameFlagIsSet();
-            }
-            if (temp_v1 == 0) goto LAB_001a9c38;
-          }
-          if ((*(short *)(temp_v2 + 0x44dbc4) == 0) || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) {
-            if (temp_v2 != -0x44dbb0) {
-              temp_v7[0] = (unsigned int)*(unsigned short *)(temp_v2 + 0x44dbc0);
-              temp_v7[1] = 0xffffffff;
-              libc_strcpy(temp_v8);
-              asdSequenceRequest(4,temp_v7,0x20);
-              return 0;
-            }
-            break;
-          }
+        } else if (g_qcMain.area == 1) {
+            kind = 0;
+        } else if (g_qcMain.area == 9) {
+            kind = 2;
+        } else if (g_qcMain.area == 10) {
+            kind = 3;
+        } else {
+            kind = 1;
         }
-LAB_001a9c38:
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 3);
-      if (DAT_0044db90 != 1) {
-        temp_v3 = 0x100005a;
-        temp_v2 = bgmGetStateById(0x100005a);
-      }
-      else {
-        temp_v3 = 0x100005d;
-        temp_v2 = bgmGetStateById(0x100005d);
-      }
-      if (temp_v2 != 1) {
-        FUN_00287328(temp_v3);
-      }
-      FUN_002898e4();
-      buttonHelpAcquireResources();
-      buttonHelpCreate();
-      FUN_00289880();
+        if (g_qcMain.resident == 0) {
+            if (kind == 1 && gameFlagIsSet(0x235)) {
+                if (!gameFlagIsSet(0x1c0) || !gameFlagIsSet(0x424) || objectFlagBitIsSet(FUN_00287704(1), 4)) {
+                    FUN_00287528(0);
+                }
+            }
+            for (u32 i = 0; i < 3; i++) {
+                const QcStartSequence *row = &DAT_0044dbb0[i];
+                if (row->kind != kind || (row->area != -1 && row->area != g_qcMain.area)) {
+                    continue;
+                }
+                if (row->requiredFlag != 0) {
+                    if (row->requiredFlag == 0xffff) {
+                        if (!questIsCompleted(0x65) || !questIsCompleted(0x66) || !questIsCompleted(0x67)) {
+                            continue;
+                        }
+                    } else if (!gameFlagIsSet(row->requiredFlag)) {
+                        continue;
+                    }
+                }
+                if (row->skipFlag == 0 || !gameFlagIsSet(row->skipFlag)) {
+                    if (row != NULL) {
+                        struct {
+                            u32 argument;
+                            s32 unk04;
+                            char name[28];
+                        } request;
+                        request.argument = row->sequenceArgument;
+                        request.unk04 = -1;
+                        libc_strcpy(request.name, row->name);
+                        asdSequenceRequest(4, &request, 0x20);
+                        return 0;
+                    }
+                    break;
+                }
+            }
+            u32 bgm;
+            s32 bgmState;
+            if (g_qcMain.area != 1) {
+                bgm = 0x100005a;
+                bgmState = bgmGetStateById(bgm);
+            } else {
+                bgm = 0x100005d;
+                bgmState = bgmGetStateById(bgm);
+            }
+            if (bgmState != 1) {
+                FUN_00287328(bgm);
+            }
+            FUN_002898e4();
+            buttonHelpAcquireResources();
+            buttonHelpCreate();
+            FUN_00289880();
+        }
+        work->entry = new QuestEntry;
+        FUN_00381b8c();
+        FUN_003840f4(work->entry, g_qcMain.area, g_qcMain.argument, g_qcMain.resident);
+        work->mode = 1;
+        break;
     }
-    puVar3 = (unsigned int *)0xfc4;
-    asdOperatorNew();
-    temp_v2 = 0;
-    if (puVar3 != (unsigned int *)0x0) {
-      *puVar3 = 0;
-      temp_v2 = _ZN14SelectionFlagsC1Ev(puVar3 + 0x196);
-      temp_v2 = temp_v2 - 0x658;
+    case 1:
+        dummyAttachmentUpdate(work->entry);
+        if ((work->entry->state & 1) != 0) {
+            work->mode = 3;
+        }
+        break;
+    case 2:
+        work->mode = 4;
+        work->done = 1;
+        if (work->entry != NULL) {
+            FUN_002a6fb8();
+            asdMemFreeNonNull(work->entry);
+            work->entry = NULL;
+        }
+        break;
+    case 3:
+        if ((work->entry == NULL || entryRequestSequence() == 0) && FUN_00287304() != 0 &&
+            g_qcMain.resident == 0) {
+            if (gameStateIsFlagSetAndLarge()) {
+                s32 argument = g_gameState.camera - 200;
+                asdSequenceRequest(0xe, &argument, 4);
+            } else {
+                asdSequenceRequest(6, NULL, 0);
+            }
+        }
+        work->mode = 4;
+        work->done = 1;
+        if (work->entry != NULL) {
+            FUN_002a6fb8();
+            asdMemFreeNonNull(work->entry);
+            work->entry = NULL;
+        }
+        if (g_qcMain.resident == 0) {
+            uiFadeRelease();
+            buttonHelpRelease();
+            buttonHelpTexturesUnref();
+        }
+        break;
+    case 4:
+        if (g_qcMain.restoreMenus != 0) {
+            FUN_002a03d8(0, 1);
+            FUN_002a03d8(1, 1);
+            FUN_0032c69c();
+        }
+        return 0xffffffff;
     }
-    *(int *)(temp_v0 + 0x1c) = temp_v2;
-    FUN_00381b8c();
-    FUN_003840f4(*(unsigned int *)(temp_v0 + 0x1c),DAT_0044db90,DAT_0044db94,DAT_0044db98);
-    *(unsigned char *)(temp_v0 + 0x19) = 1;
-    break;
-  case 1:
-    FUN_003848b8(*(unsigned int *)(DAT_0044db8c + 0x1c));
-    if ((**(unsigned int **)(temp_v0 + 0x1c) & 1) != 0) {
-      *(unsigned char *)(temp_v0 + 0x19) = 3;
-    }
-    break;
-  case 2:
-    *(unsigned char *)(DAT_0044db8c + 0x19) = 4;
-    *(unsigned char *)(temp_v0 + 0x18) = 1;
-    if (*(int *)(temp_v0 + 0x1c) != 0) {
-      FUN_002a6fb8();
-      asdMemFreeNonNull(*(unsigned int *)(temp_v0 + 0x1c));
-      *(unsigned int *)(temp_v0 + 0x1c) = 0;
-    }
-    break;
-  case 3:
-    temp_v2 = *(int *)(DAT_0044db8c + 0x1c);
-    if ((((temp_v2 == 0) || (entryRequestSequence(), temp_v2 == 0)) && (temp_v2 = FUN_00287304(), temp_v2 != 0)) &&
-       (DAT_0044db98 == 0)) {
-      temp_v2 = gameStateIsFlagSetAndLarge();
-      if (temp_v2 != 0) {
-        temp_v4 = 4;
-        temp_v7[0] = DAT_0049fc18 - 200;
-        temp_v3 = 0xe;
-      }
-      else {
-        temp_v4 = 0;
-        puVar6 = (unsigned int *)0x0;
-        temp_v3 = 6;
-      }
-      asdSequenceRequest(temp_v3,puVar6,temp_v4);
-    }
-    *(unsigned char *)(temp_v0 + 0x19) = 4;
-    *(unsigned char *)(temp_v0 + 0x18) = 1;
-    if (*(int *)(temp_v0 + 0x1c) != 0) {
-      FUN_002a6fb8();
-      asdMemFreeNonNull(*(unsigned int *)(temp_v0 + 0x1c));
-      *(unsigned int *)(temp_v0 + 0x1c) = 0;
-    }
-    if (DAT_0044db98 == 0) {
-      uiFadeRelease();
-      buttonHelpRelease();
-      buttonHelpTexturesUnref();
-    }
-    break;
-  case 4:
-    if (DAT_0044db89 != '\0') {
-      FUN_002a03d8(0,1);
-      FUN_002a03d8(1);
-      FUN_0032c69c();
-    }
-    return 0xffffffff;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

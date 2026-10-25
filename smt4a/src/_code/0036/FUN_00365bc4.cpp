@@ -1,4 +1,4 @@
-/* NON_MATCHING: empty-table branch goes through the final null result rather than directly returning the zero count. */
+/* NON_MATCHING: only the empty-table early exit differs: retail branches straight to the epilogue (r0 already holds the zero count), this build branches to its own `mov r0, #0`. */
 #include "gamedata/DataTable.h"
 
 struct Table67Record {
@@ -12,11 +12,12 @@ extern "C" Table67Record *FUN_00365bc4(s32 id)
     void *table = dataTableGet(67, 1);
     Table67Record *entries = (Table67Record *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
-    if (count != 0) {
-        for (s32 i = 0; (u32)i < count; ++i) {
-            if (entries[i].id == id) {
-                return &entries[i];
-            }
+    if (count == 0) {
+        return NULL;
+    }
+    for (s32 i = 0; i < count; ++i) {
+        if (entries[i].id == id) {
+            return &entries[i];
         }
     }
     return NULL;

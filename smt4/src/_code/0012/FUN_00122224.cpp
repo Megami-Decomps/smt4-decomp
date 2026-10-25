@@ -6,7 +6,7 @@ extern "C" {
 
 int memClear(int, int, unsigned int, unsigned int, unsigned int);
 int rt_memcpy(int, int, int);
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern unsigned int DAT_004e528c; /* 0x4e528c */
 
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00122224(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -322,7 +322,7 @@ LAB_001227c4:
           if (temp_v2 == 0) {
             *(unsigned int *)(temp_v1 + 0x1450) = 0;
             *(unsigned char *)(temp_v1 + 0x1705) = 0xf;
-            rt_memcpy_w(temp_v1 + 0x100c,temp_v1 + 0x1300,0x2f4);
+            __aeabi_memcpy4(temp_v1 + 0x100c,temp_v1 + 0x1300,0x2f4);
             rt_memcpy(DAT_004652b4 + 0x15f4,DAT_004652b4 + 0x16b1,0xbd);
             temp_v0 = 0;
             DAT_004e5248 = 0;

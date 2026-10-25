@@ -15,7 +15,7 @@ struct SavedEffectRecord {
 extern "C" {
 extern SavedEffectRecord g_keyedRecords[];
 void *asdMemoryAlloc(u32 kind, u32 alignment, u32 flags, u32 size, s32 tracked);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 }
 
 /* Copy at most 64 effect entries into the keyed save record. */
@@ -30,7 +30,7 @@ extern "C" void FUN_0031bae0(u32 key, const SavedEffectEntry *entries, s32 count
         u32 size = count * sizeof(SavedEffectEntry);
         SavedEffectEntry *copy = static_cast<SavedEffectEntry *>(asdMemoryAlloc(256, 256, 0, size, 1));
         record->entries = copy;
-        rt_memcpy_w(copy, entries, size);
+        __aeabi_memcpy4(copy, entries, size);
     }
     record->count = count;
 }

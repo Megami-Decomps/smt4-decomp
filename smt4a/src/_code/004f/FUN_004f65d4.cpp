@@ -30,7 +30,7 @@ int FUN_004fa414(...);
 int FUN_004fa64c(int);
 int FUN_004fb43c(...);
 int ownerSlotSetText(...);
-int rt_memcpy_w(float *, int, int);
+int __aeabi_memcpy4(float *, int, int);
 
 /* stack frame of param_1: 5 slot(s), 17 byte(s) */
 typedef struct {
@@ -73,7 +73,7 @@ extern unsigned int _ZN9Obj4209ccC1Ev(void);
 /* Supplied declaration required: FUN_004fa64c. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: ownerSlotSetText. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_004f65d4(int param_1)
@@ -142,7 +142,7 @@ void FUN_004f65d4(int param_1)
   case 2:
     temp_v4 = 0;
     do {
-      rt_memcpy_w(&temp_v10,param_1 + temp_v4 * 0x8c + 0x33e4,0x8c);
+      __aeabi_memcpy4(&temp_v10,param_1 + temp_v4 * 0x8c + 0x33e4,0x8c);
       if (((temp_v13 & 1) != 0) && (temp_v11 == 0.0f)) goto LAB_004f6a68;
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 3);

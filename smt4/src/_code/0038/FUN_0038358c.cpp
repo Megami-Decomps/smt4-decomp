@@ -1,4 +1,3 @@
-/* NON_MATCHING: the frame != 7 branch skips the frame reload (bne 8c) where retail branches to it (bne 88). */
 #include "common.h"
 
 extern "C" {
@@ -29,7 +28,8 @@ void FUN_0038358c(QuestClearScene *scene)
 {
     switch (scene->step) {
     case 0:
-        if (++scene->frame == 7) {
+        scene->frame++;
+        if (scene->frame == 7) {
             eventQueueAddUnique(0x1000184);
             FUN_00275dec();
         }

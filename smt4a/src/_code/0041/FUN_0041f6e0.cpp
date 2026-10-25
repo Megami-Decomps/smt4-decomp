@@ -55,7 +55,7 @@ extern void *gameDataBlocksGetTable(void);
 extern void *configGetSettings(void);
 extern void *gameDataBlocksGetSaveData(void);
 extern PlayerData *gameGetPlayerData(void);
-extern void rt_memcpy_w(void *dest, const void *src, u32 size);
+extern void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 extern void sysMemClear(void *block, s32 size);
 extern void wordPairCopy(void *dest, void *src);
 extern s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
@@ -84,7 +84,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
                 return;
             }
             if (byteArr5Get3() != 0) {
-                rt_memcpy_w(&task->slots[index], gameDataBlocksGetTable(), 0x80);
+                __aeabi_memcpy4(&task->slots[index], gameDataBlocksGetTable(), 0x80);
                 task->slotValid[index] = 1;
             } else {
                 sysMemClear(&task->slots[index], 0x80);
@@ -113,7 +113,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
                 return;
             }
             if (byteArr5Get3() != 0) {
-                rt_memcpy_w(&task->slots[index], gameDataBlocksGetTable(), 0x80);
+                __aeabi_memcpy4(&task->slots[index], gameDataBlocksGetTable(), 0x80);
                 task->slotValid[index] = 1;
             } else {
                 sysMemClear(&task->slots[index], 0x80);
@@ -144,9 +144,9 @@ void FUN_0041f6e0(SaveLoadTask *task)
                     FUN_00275bc8();
                     task->handleC = handle;
                 }
-                rt_memcpy_w(gameDataBlocksGetTable(), task->snapshotTable, 0x80);
+                __aeabi_memcpy4(gameDataBlocksGetTable(), task->snapshotTable, 0x80);
                 wordPairCopy(configGetSettings(), task->snapshotConfig);
-                rt_memcpy_w(gameDataBlocksGetSaveData(), task->snapshotSave, 0x2A71C);
+                __aeabi_memcpy4(gameDataBlocksGetSaveData(), task->snapshotSave, 0x2A71C);
                 for (i = 0; i < SLOT_COUNT; i++) {
                     if (task->slotValid[i] == 0) {
                         PlayerData *player = gameGetPlayerData();
@@ -159,7 +159,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
                     }
                 }
                 FUN_0041eb94(task);
-                rt_memcpy_w(gameGetPlayerData(), task->snapshotPlayer, 0xE);
+                __aeabi_memcpy4(gameGetPlayerData(), task->snapshotPlayer, 0xE);
                 statusPanelSetOpen(1);
                 task->applied = 1;
                 if (task->slotValid[task->selectedSlot] == 0) {

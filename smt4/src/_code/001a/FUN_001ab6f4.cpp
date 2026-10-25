@@ -27,7 +27,7 @@ extern "C" {
 
 Task1ab6f4 *taskCreate(void (*update)(Task1ab6f4 *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 int memClear(void *block, int size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00291340(void *params, void *a, void *b, void *c, void *d);
 void FUN_00193130(Task1ab6f4 *task);
 
@@ -38,8 +38,8 @@ __softfp Task1ab6f4 *FUN_001ab6f4(u32 arg0, const void *data, const void *params
     Task1ab6f4 *task = taskCreate(FUN_00193130, 0, 0, 0, 0, sizeof(Task1ab6f4), 3, 0, 0);
     if (task != NULL) {
         memClear(task, sizeof(Task1ab6f4));
-        rt_memcpy_w(task->data, data, sizeof(task->data));
-        rt_memcpy_w(task->params, params, sizeof(task->params));
+        __aeabi_memcpy4(task->data, data, sizeof(task->data));
+        __aeabi_memcpy4(task->params, params, sizeof(task->params));
         task->unk21C = arg3;
         task->unk220 = arg7;
         task->unk224 = arg0;

@@ -21,7 +21,7 @@ int FUN_003c05e8(...);
 int FUN_003cefe0(int *, unsigned int *, unsigned int);
 int FUN_003cfe14(...);
 int FUN_003d03f8(...);
-int FUN_003ddcf4(...);
+int btlReflectCreateKind10(...);
 int FUN_003de758(int, unsigned int *, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -62,7 +62,7 @@ extern unsigned int questRecordValueIfState2(void);
 /* Supplied declaration required: FUN_003cefe0. */
 /* Supplied declaration required: FUN_003cfe14. */
 /* Supplied declaration required: FUN_003d03f8. */
-/* Supplied declaration required: FUN_003ddcf4. */
+/* Supplied declaration required: btlReflectCreateKind10. */
 /* Supplied declaration required: FUN_003de758. */
 
 
@@ -311,7 +311,7 @@ LAB_003cb60c:
       }
       temp_v11 = 0xffffffff;
     }
-    FUN_003ddcf4(5,param_2,temp_v2,temp_v11);
+    btlReflectCreateKind10(5,param_2,temp_v2,temp_v11);
   }
   else {
 LAB_003cbb20:

@@ -32,7 +32,7 @@ void unitRecordBuild(u16 id, UnitRecord *record);
 void FUN_004cd4b8(UnitRecord *record, s16 levelDelta);
 void FUN_004bcd90(UnitRecord *record);
 s32 FUN_004cc8d8(u16 id, u16 level);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 getUnlockedSlotCount(u32 mode);
 void FUN_004bd6b0(UnitRecord *record, u16 skill, s32 slot);
 void FUN_0033449c(u32 enabled);
@@ -54,7 +54,7 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     FUN_004bcd90(&original);
     original.unk30 = FUN_004cc8d8(original.id, original.unk64) - 1;
     UnitRecord preview;
-    rt_memcpy_w(&preview, &original, sizeof(preview));
+    __aeabi_memcpy4(&preview, &original, sizeof(preview));
     u16 inherited[8] = {0};
     InheritanceChoiceRecord choice = work->choices()[work->selected];
     s32 unlocked = getUnlockedSlotCount(0);

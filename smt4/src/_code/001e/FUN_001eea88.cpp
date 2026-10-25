@@ -1,212 +1,169 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001eea88` (_code @ 0x1eea88, 0x3ec bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the devilRecordGetTone call (armlink-inlined ldrb) differs: the build emits nop hints (2 before, 1 after) around it that retail does not have; everything else identical */
+#include "common.h"
+#include "gamedata/DevilRecord.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
+
+/* A 0x8C-byte UI sprite. */
+struct UniteSprite {
+    /* 0x00 */ u8 unk00[0x8c];
+};
+
+/* Texture binding the screen renders into (a 0x48-byte block). */
+struct UniteRenderTarget {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 texture;
+    /* 0x08 */ u8 unk08[0x40];
+};
+
+/* The fusion-result screen's work area. */
+struct UniteScreenWork {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ s32 state;
+    /* 0x008 */ s32 phase;
+    /* 0x00c */ u16 resultDevil;
+    /* 0x00e */ u16 materialDevils[8];
+    /* 0x01e */ u16 materialCount;
+    /* 0x020 */ u8 sacrifice;                 /* picks the "_ac" model variant */
+    /* 0x021 */ u8 unk021[7];
+    /* 0x028 */ u32 devilTextures[4];
+    /* 0x038 */ UniteRenderTarget renderTarget;
+    /* 0x080 */ u32 resultTexture;
+    /* 0x084 */ u32 model;
+    /* 0x088 */ u32 unk088;
+    /* 0x08c */ u32 camera;
+    /* 0x090 */ u8 unk090[0x20c];
+    /* 0x29c */ u32 scriptFile;
+    /* 0x2a0 */ u32 script;
+    /* 0x2a4 */ u32 messageFile;
+    /* 0x2a8 */ UiResourceParameters resources;
+    /* 0x2c8 */ UniteSprite sprites[10];
+    /* 0x840 */ UniteSprite panel;
+    /* 0x8cc */ UniteSprite cursor;
+};
+
+/* Animation tables for paramsInit; the original file defined them statically. */
+static const s32 sKeysFirst[9] = { 320, 0, 8, 1310720, 0, 8, 0, 0, 1 };
+static const f32 sKeysSecond[12] = { 0, 1.0f, 8, 1.0f, 1.0f, 1, 0, 0.3f, 15, 0.3f, 0, 5 };
+static const f32 sKeysThird[3] = { 0, 1.0f, 8 };
+static const s32 sKeysFourth[56] = {
+    1, 0, -3, 0, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
+    2, 0, -3, 1, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
+    -3, 0, -3, 2, 0, -3, 0, -3, 0, -3, 3, 0, -3, 0,
+    -3, 0, -3, -2, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
+};
+
+static inline const DevilRecord *getDevilRecord(u16 id)
+{
+    return (const DevilRecord *)devilGetRecord(id);
+}
 
 extern "C" {
+extern UniteScreenWork *g_screenStateWork;
 
-int FUN_00295eb0(...);
-int buttonHelpSetPreset(...);
+void FUN_0021a374(UniteRenderTarget *target, u32 texture);
+u8 devilRecordGetTone(const DevilRecord *record);
+void statusCameraDestroy(void);
+void statusCameraSelectPreset(s32 preset);
+u32 FUN_00294090(s32 model, s32 mode);
+void FUN_0033dcec(u32 texture, s32 a, s32 b);
+u32 asdVramBGetFreeBytes(void);
+void FUN_00343e5c(UniteRenderTarget *target, u32 extent, u32 options, u32 width, u32 height);
+void FUN_00258618(UniteRenderTarget *target);
+void FUN_00258408(const char *name);
+void FUN_00258170(UniteRenderTarget *target);
+u32 asdMdlManagerCreateLoaded(const char *path, s32 heap);
+u32 FUN_00263c1c(const char *path);
+void FUN_002942c4(s32 id, u32 kind);
+u32 asdLoadFileSyncDefault(const char *path);
+const char *FUN_002cdecc(s8 tone);
+s32 textFormatBuffer(char *buffer, const char *format, ...);
+u32 FUN_00297060(u32 script, u32 messages);
+void drawParameterBlockClear(UiResourceParameters *resources);
+void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
+    const void *chunk1, u16 count1, const void *chunk2, u16 count2,
+    const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+void FUN_002bd954(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
+void uiSpriteInitializeState(UniteSprite *sprite, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
+void timerStart(UniteSprite *sprite, s32 animation, s32 flags);
+void spriteStartAnimationByIndex(UniteSprite *sprite, s32 animation);
+void FUN_002a9fdc(UniteSprite *sprite, s32 a, s32 b);
+void spriteSetLayer(UniteSprite *sprite, u16 layer);
+void spriteSetVisible(UniteSprite *sprite, u8 visible);
+void FUN_00295eb0(UniteSprite *sprite, s32 kind, s32 count);
+void buttonHelpSetPreset(s32 preset);
 
-int FUN_00258170(...);
-int FUN_00258408(...);
-int FUN_00258618(int);
-int statusCameraDestroy(void);
-int FUN_002942c4(...);
-int statusCameraSelectPreset(int);
-int FUN_00297060(...);
-int asdMdlManagerCreateLoaded(unsigned char *, int);
-int FUN_002a9fdc(...);
-int devilGetRecord(void);
-int timerStart(...);
-int FUN_002bd954(...);
-int textFormatBuffer(...);
-int spriteStartAnimationByIndex(...);
-int uiSpriteInitializeState(...);
-int paramsInit(...);
-int FUN_0033dcec(unsigned int, int, int);
-int FUN_00343e5c(int, int, int, int, int);
-int drawParameterBlockClear(...);
-
-/* stack frame of void: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} void_stack;
-
-extern unsigned char LAB_001eee78; /* 0x1eee78 */
-extern unsigned char LAB_001eee94; /* 0x1eee94 */
-extern unsigned char LAB_001eeeb0; /* 0x1eeeb0 */
-extern unsigned char LAB_001eeec8; /* 0x1eeec8 */
-extern unsigned char LAB_001eeee4; /* 0x1eeee4 */
-extern unsigned char LAB_001eeef0; /* 0x1eeef0 */
-extern unsigned char LAB_001eef08; /* 0x1eef08 */
-extern unsigned char LAB_001eef24; /* 0x1eef24 */
-extern unsigned char LAB_001eef3c; /* 0x1eef3c */
-extern unsigned char LAB_001eef58; /* 0x1eef58 */
-extern unsigned char LAB_001eef6c; /* 0x1eef6c */
-extern unsigned char DAT_004033e0; /* 0x4033e0 */
-extern unsigned char DAT_00403404; /* 0x403404 */
-extern unsigned char DAT_00403434; /* 0x403434 */
-extern unsigned char DAT_00403440; /* 0x403440 */
-extern int g_screenStateWork; /* 0x43dd90 */
-
-/* Supplied declaration required: FUN_00258170. */
-/* Supplied declaration required: FUN_00258408. */
-/* Supplied declaration required: FUN_00258618. */
-extern unsigned int FUN_00263c1c(unsigned char *);
-/* Supplied declaration required: statusCameraDestroy. */
-extern unsigned int FUN_00294090(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: statusCameraSelectPreset. */
-/* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: asdMdlManagerCreateLoaded. */
-/* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: uiSpriteInitializeState. */
-/* Supplied declaration required: paramsInit. */
-extern unsigned int asdLoadFileSyncDefault(unsigned char *);
-extern int FUN_002cdecc(int);
-extern unsigned int asdVramBGetFreeBytes(void);
-/* Supplied declaration required: FUN_0033dcec. */
-/* Supplied declaration required: FUN_00343e5c. */
-/* Supplied declaration required: drawParameterBlockClear. */
-
-
+/* Starts the fusion-result screen: loads the result devils' textures, the stage model and camera
+   (by how many devils are fused), the message script and builds its sprites. */
 void FUN_001eea88(void)
-
 {
-/* irregular: 21 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6 [76];
-  
-  temp_v0 = g_screenStateWork;
-  statusCameraDestroy();
-  statusCameraSelectPreset(2);
-  temp_v4 = 0;
-  if (*(short *)(temp_v0 + 0x1e) != 0) {
-    do {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + temp_v4 * 2 + 0xe);
-      devilGetRecord();
-      temp_v2 = FUN_00294090(*(unsigned short *)(temp_v1 + 0x90),0);
-      *(unsigned int *)(temp_v0 + temp_v4 * 4 + 0x28) = temp_v2;
-      FUN_0033dcec(temp_v2,7,1);
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
-  }
-  *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(temp_v0 + 0x28);
-  temp_v1 = asdVramBGetFreeBytes();
-  if (temp_v1 < 0x20000) {
-    FUN_00343e5c(temp_v0 + 0x38,0x20000,0x20000,0x100,0x100);
-  }
-  else {
-    FUN_00343e5c(temp_v0 + 0x38,0x30000,0x30000,0x100,0x100);
-  }
-  FUN_00258618(temp_v0 + 0x38);
-  temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
-  devilGetRecord();
-  temp_v2 = FUN_00294090(*(unsigned short *)(temp_v1 + 0x90),0);
-  *(unsigned int *)(temp_v0 + 0x80) = temp_v2;
-  FUN_0033dcec(temp_v2,7,1);
-  if (*(short *)(temp_v0 + 0x1e) == 2) {
-    if (*(char *)(temp_v0 + 0x20) != '\0') {
-      puVar4 = &LAB_001eee78;
-      asdMdlManagerCreateLoaded(&LAB_001eee78,7);
-      *(unsigned char **)(temp_v0 + 0x84) = puVar4;
-      temp_v2 = FUN_00263c1c(&LAB_001eee94);
-      *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
+    UniteScreenWork *work = g_screenStateWork;
+    statusCameraDestroy();
+    statusCameraSelectPreset(2);
+    for (s32 i = 0; i < work->materialCount; i++) {
+        work->devilTextures[i] = FUN_00294090(getDevilRecord(work->materialDevils[i])->model, 0);
+        FUN_0033dcec(work->devilTextures[i], 7, 1);
     }
-    else {
-      puVar4 = &LAB_001eeeb0;
-      asdMdlManagerCreateLoaded(&LAB_001eeeb0,7);
-      *(unsigned char **)(temp_v0 + 0x84) = puVar4;
-      temp_v2 = FUN_00263c1c(&LAB_001eeec8);
-      *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
+    FUN_0021a374(&work->renderTarget, work->devilTextures[0]);
+    if (asdVramBGetFreeBytes() < 0x20000) {
+        FUN_00343e5c(&work->renderTarget, 0x20000, 0x20000, 0x100, 0x100);
+    } else {
+        FUN_00343e5c(&work->renderTarget, 0x30000, 0x30000, 0x100, 0x100);
     }
-    FUN_00258408(&LAB_001eeee4);
-    FUN_00258170(temp_v0 + 0x38);
-  }
-  if (*(short *)(temp_v0 + 0x1e) == 3) {
-    puVar4 = &LAB_001eeef0;
-    asdMdlManagerCreateLoaded(&LAB_001eeef0,7);
-    *(unsigned char **)(temp_v0 + 0x84) = puVar4;
-    temp_v2 = FUN_00263c1c(&LAB_001eef08);
-    *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
-    FUN_00258408(&LAB_001eeee4);
-    FUN_00258170(temp_v0 + 0x38);
-  }
-  if (*(short *)(temp_v0 + 0x1e) == 4) {
-    puVar4 = &LAB_001eef24;
-    asdMdlManagerCreateLoaded(&LAB_001eef24,7);
-    *(unsigned char **)(temp_v0 + 0x84) = puVar4;
-    temp_v2 = FUN_00263c1c(&LAB_001eef3c);
-    *(unsigned int *)(temp_v0 + 0x8c) = temp_v2;
-    FUN_00258408(&LAB_001eeee4);
-    FUN_00258170(temp_v0 + 0x38);
-  }
-  temp_v4 = 0;
-  if (*(short *)(temp_v0 + 0x1e) != 0) {
-    do {
-      FUN_002942c4((int)*(short *)(temp_v0 + temp_v4 * 2 + 0xe),1);
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
-  }
-  temp_v2 = asdLoadFileSyncDefault(&LAB_001eef58);
-  *(unsigned int *)(temp_v0 + 0x29c) = temp_v2;
-  temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
-  devilGetRecord();
-  temp_v4 = FUN_002cdecc((int)*(char *)(temp_v1 + 0x30));
-  textFormatBuffer(temp_v6,&LAB_001eef6c,temp_v4 + 1);
-  temp_v2 = asdLoadFileSyncDefault(temp_v6);
-  *(unsigned int *)(temp_v0 + 0x2a4) = temp_v2;
-  temp_v3 = *(unsigned int *)(temp_v0 + 0x29c);
-  FUN_00297060(temp_v3,temp_v2);
-  *(unsigned int *)(temp_v0 + 0x2a0) = temp_v3;
-  drawParameterBlockClear(temp_v0 + 0x2a8);
-  paramsInit(temp_v0 + 0x2a8,&DAT_004033e0,0x24,&DAT_00403404,0x30,&DAT_00403434,0xc,0,0,
-               &DAT_00403440,0xe0);
-  temp_v4 = 0;
-  do {
-    temp_v5 = temp_v0 + temp_v4 * 0x8c;
-    FUN_002bd954(temp_v5 + 0x2c8,0x24,0,temp_v0 + 0x2a8,1);
-    timerStart(temp_v5 + 0x2c8,0);
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 6);
-  temp_v4 = 6;
-  do {
-    temp_v5 = temp_v0 + temp_v4 * 0x8c;
-    FUN_002bd954(temp_v5 + 0x2c8,0x24,0,temp_v0 + 0x2a8,1);
-    spriteStartAnimationByIndex(temp_v5 + 0x2c8,0);
-    temp_v4 = temp_v4 + 1;
-  } while (temp_v4 < 10);
-  uiSpriteInitializeState(temp_v0 + 0x840,0x24,0xffffffff,0x18,temp_v0 + 0x2a8,0x65);
-  FUN_002a9fdc(temp_v0 + 0x840,0);
-  *(unsigned short *)(temp_v0 + 0x87a) = 2;
-  FUN_00295eb0(temp_v0 + 0x840,0x24,0x21c);
-  *(unsigned char *)(temp_v0 + 0x87c) = 1;
-  FUN_002bd954(temp_v0 + 0x8cc,0x24,0,temp_v0 + 0x2a8,1);
-  spriteStartAnimationByIndex(temp_v0 + 0x8cc,2);
-  buttonHelpSetPreset(0x61);
-  temp_v0 = g_screenStateWork;
-  *(unsigned int *)(g_screenStateWork + 4) = 1;
-  *(unsigned int *)(temp_v0 + 8) = 0;
-  return;
+    FUN_00258618(&work->renderTarget);
+    work->resultTexture = FUN_00294090(getDevilRecord(work->resultDevil)->model, 0);
+    FUN_0033dcec(work->resultTexture, 7, 1);
+    if (work->materialCount == 2) {
+        if (work->sacrifice) {
+            work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2_ac.bam", 7);
+            work->camera = FUN_00263c1c("camp/jakyou_union2_ac.bccam");
+        } else {
+            work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2.bam", 7);
+            work->camera = FUN_00263c1c("camp/jakyou_union2.bccam");
+        }
+        FUN_00258408("tx_devil1");
+        FUN_00258170(&work->renderTarget);
+    }
+    if (work->materialCount == 3) {
+        work->model = asdMdlManagerCreateLoaded("camp/jakyou_union3.bam", 7);
+        work->camera = FUN_00263c1c("camp/jakyou_union3.bccam");
+        FUN_00258408("tx_devil1");
+        FUN_00258170(&work->renderTarget);
+    }
+    if (work->materialCount == 4) {
+        work->model = asdMdlManagerCreateLoaded("camp/jakyou_union4.bam", 7);
+        work->camera = FUN_00263c1c("camp/jakyou_union4.bccam");
+        FUN_00258408("tx_devil1");
+        FUN_00258170(&work->renderTarget);
+    }
+    for (s32 i = 0; i < work->materialCount; i++) {
+        FUN_002942c4((s16)work->materialDevils[i], 1);
+    }
+    work->scriptFile = asdLoadFileSyncDefault("battle/DevilLvUp.bf");
+    char path[64];
+    const DevilRecord *record = getDevilRecord(work->resultDevil);
+    textFormatBuffer(path, "battle/DevilMsg/%s.mbm", FUN_002cdecc(devilRecordGetTone(record)) + 1);
+    work->messageFile = asdLoadFileSyncDefault(path);
+    work->script = FUN_00297060(work->scriptFile, work->messageFile);
+    drawParameterBlockClear(&work->resources);
+    paramsInit(&work->resources, sKeysFirst, 0x24, sKeysSecond, 0x30, sKeysThird, 0xc, NULL, 0, sKeysFourth, 0xe0);
+    for (s32 i = 0; i <= 5; i++) {
+        FUN_002bd954(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
+        timerStart(&work->sprites[i], 0, 0);
+    }
+    for (s32 i = 6; i <= 9; i++) {
+        FUN_002bd954(&work->sprites[i], 0x24, 0, &work->resources, 1, 1.0f);
+        spriteStartAnimationByIndex(&work->sprites[i], 0);
+    }
+    uiSpriteInitializeState(&work->panel, 0x24, -1, 0x18, &work->resources, 0x65, 1.0f);
+    FUN_002a9fdc(&work->panel, 0, 0);
+    spriteSetLayer(&work->panel, 2);
+    FUN_00295eb0(&work->panel, 0x24, 0x21c);
+    spriteSetVisible(&work->panel, 1);
+    FUN_002bd954(&work->cursor, 0x24, 0, &work->resources, 1, 1.0f);
+    spriteStartAnimationByIndex(&work->cursor, 2);
+    buttonHelpSetPreset(0x61);
+    g_screenStateWork->state = 1;
+    g_screenStateWork->phase = 0;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop affinity branches fold, start/count loads combine into LDRD, and the 4CD1 byte load splits its offset; O2 may restore retail lowering. */
+/* NON_MATCHING: the selection range's stack slots and loads differ (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

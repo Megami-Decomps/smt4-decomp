@@ -10,7 +10,7 @@ int FUN_00213fe4(unsigned int *);
 int nodeTreeReleaseItem(void);
 int FUN_003d2294(float *, unsigned int, unsigned int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
-int rt_memcpy_w(unsigned int *, unsigned int *, int);
+int __aeabi_memcpy4(unsigned int *, unsigned int *, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00213fe4. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: FUN_003d2294. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_002129b8(unsigned int *param_1)
@@ -202,7 +202,7 @@ void FUN_002129b8(unsigned int *param_1)
   }
   *(char *)(param_1 + 0xfa) = (char)temp_v3;
   if ((temp_v3 & 0xff) != 0) {
-    rt_memcpy_w(param_1 + 0xe2,param_1 + 0x9b,0x60);
+    __aeabi_memcpy4(param_1 + 0xe2,param_1 + 0x9b,0x60);
     temp_v3 = (unsigned int)(unsigned char)param_1[0xfa] | ((int)(float)param_1[0x79] << 0x18) |
             ((int)(float)param_1[0x7a] << 0x10) | ((int)(float)param_1[0x7b] << 8);
     param_1[0xe7] = temp_v3;

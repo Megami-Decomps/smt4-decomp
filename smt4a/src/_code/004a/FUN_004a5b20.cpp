@@ -69,7 +69,7 @@ u16 *FUN_00184310(u32 id);
 s32 FUN_0026264c(u32 id);
 void FUN_004a8584(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
-void FUN_004a6610(EntryListWork *work, s32 arg);
+void itemListSelectVariant(EntryListWork *work, s32 arg);
 void FUN_004cfeb0(void *header, s32 a, s32 b, s32 c, s32 d);
 
 /* Scans every (group, subgroup) entry, and for each of its keys every item and unlockable id that
@@ -131,7 +131,7 @@ void FUN_004a5b20(EntryListWork *work)
             }
         }
     }
-    FUN_004a6610(work, 1);
+    itemListSelectVariant(work, 1);
     FUN_004cfeb0(work->header, 10, work->first, 0, 1);
     asdDebugHookPtrInt(work->header, 1);
     work->ready = 1;

@@ -10,7 +10,7 @@ int FUN_0027ee24(void);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287a78(void);
+int mathAbsHeadingErrorToPoint(void);
 int gameFlagSetValue(int, int);
 int FUN_00295a18(int, int);
 int gameCounterAddSaturating(int, int);
@@ -66,7 +66,7 @@ extern unsigned int lmapSceneGetUnk0(void);
 extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
-/* Supplied declaration required: FUN_00287a78. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: gameCounterAddSaturating. */
@@ -136,7 +136,7 @@ unsigned int FUN_0027052c(void)
             temp_v3 = FUN_0027ef00();
             if (temp_v3 == 0) break;
             temp_v3 = *(int *)(temp_v6 + 100);
-            FUN_00287a78();
+            mathAbsHeadingErrorToPoint();
             if (temp_v3 >= 0x41f00000) break;
             temp_v3 = *(int *)(temp_v6 + 0x70);
             FUN_0027eee0();

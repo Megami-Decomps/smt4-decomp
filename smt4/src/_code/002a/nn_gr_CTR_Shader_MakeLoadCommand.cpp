@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int *
@@ -21,7 +21,7 @@ nn_gr_CTR_Shader_MakeLoadCommand
   for (; param_5 >= 0x81; param_5 = param_5 - 0x80) {
     *param_2 = *param_4;
     param_2[1] = param_3 | 0x7ff0000;
-    rt_memcpy_w(param_2 + 2,param_4 + 1,0x1fc);
+    __aeabi_memcpy4(param_2 + 2,param_4 + 1,0x1fc);
     param_2[0x81] = 0xead0fead;
     param_4 = param_4 + 0x80;
     param_2 = param_2 + 0x82;
@@ -29,7 +29,7 @@ nn_gr_CTR_Shader_MakeLoadCommand
   *param_2 = *param_4;
   puVar2 = param_2 + 2;
   param_2[1] = (param_5 * 0x100000 - 0x100000) | param_3 | 0xf0000;
-  rt_memcpy_w(puVar2,param_4 + 1,param_5 * 4 - 4);
+  __aeabi_memcpy4(puVar2,param_4 + 1,param_5 * 4 - 4);
   puVar2 = puVar2 + param_5;
   puVar1 = puVar2 + -1;
   if ((param_5 & 1) == 0) {

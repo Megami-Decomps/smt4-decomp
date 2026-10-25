@@ -15,15 +15,15 @@ typedef struct MainState {
 s32 scrGetArg(u32 index);
 u32 btlUnitGet(u32 unit);
 MainState *btlGetMainState(void);
-int FUN_004fe5dc(s32 a, u32 caster, Unit *target, s32 b);
+int btlReflectCreateKind37(s32 a, u32 caster, Unit *target, s32 b);
 
-/* Script command: runs FUN_004fe5dc from the script unit on the unit given by argument 0. */
+/* Script command: runs btlReflectCreateKind37 from the script unit on the unit given by argument 0. */
 u32 FUN_0039deb4(void)
 {
     s32 index = scrGetArg(0);
     u32 caster = btlUnitGet(g_btlScriptUnit);
 
-    FUN_004fe5dc(0, caster, &btlGetMainState()->units[index], 1);
+    btlReflectCreateKind37(0, caster, &btlGetMainState()->units[index], 1);
     return 1;
 }
 

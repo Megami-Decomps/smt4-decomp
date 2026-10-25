@@ -25,7 +25,7 @@ int messageMainSetFlag(...);
 unsigned int saveLoadStartSave(int, unsigned char);
 int gameFlagSetValue(int, int);
 int FUN_00408184(int, int);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -68,7 +68,7 @@ extern int byteArr5Get4(void);
 /* Supplied declaration required: saveLoadStartSave. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0041de6c(int param_1)
@@ -103,11 +103,11 @@ void FUN_0041de6c(int param_1)
     messageMainSetFlag(0);
     *(unsigned char *)(param_1 + 0xe) = 1;
     temp_v1 = gameDataBlocksGetTable();
-    rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x1c),0x80);
+    __aeabi_memcpy4(temp_v1,*(unsigned int *)(param_1 + 0x1c),0x80);
     temp_v1 = configGetSettings();
     wordPairCopy(temp_v1,*(unsigned int *)(param_1 + 0x20));
     temp_v1 = gameDataBlocksGetSaveData();
-    rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x24),0x2a71c);
+    __aeabi_memcpy4(temp_v1,*(unsigned int *)(param_1 + 0x24),0x2a71c);
     if ((DAT_00588e16 != '\0') && (temp_v0 = gameFlagIsSet(0x470), temp_v0 == 0)) {
       gameFlagSetValue(0x470,1);
     }
@@ -133,7 +133,7 @@ void FUN_0041de6c(int param_1)
     if (temp_v0 != 0) {
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),2);
       temp_v1 = gameDataBlocksGetTable();
-      rt_memcpy_w(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0x6c,temp_v1,0x80);
+      __aeabi_memcpy4(param_1 + *(int *)(param_1 + 0x2f8) * 0x80 + 0x6c,temp_v1,0x80);
       *(unsigned char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) = 1;
       puVar5 = *(unsigned int **)(param_1 + 0x54);
       temp_v0 = param_1 + *(int *)(param_1 + 0x2f8) * 0x80;
@@ -145,7 +145,7 @@ void FUN_0041de6c(int param_1)
       *(unsigned int *)((int)puVar5 + 0x12) = *(unsigned int *)(temp_v0 + 0xae);
       *(unsigned int *)((int)puVar5 + 0x16) = *(unsigned int *)(temp_v0 + 0xb2);
       *(unsigned short *)((int)puVar5 + 0x1a) = *(unsigned short *)(temp_v0 + 0xb6);
-      rt_memcpy_w(puVar5 + 7,temp_v0 + 0x9c,0xe);
+      __aeabi_memcpy4(puVar5 + 7,temp_v0 + 0x9c,0xe);
       *(unsigned short *)((int)puVar5 + 0x2a) = *(unsigned short *)(temp_v0 + 0x90);
       *(unsigned short *)(puVar5 + 0xb) = *(unsigned short *)(temp_v0 + 0x92);
       puVar5[0xc] = *(unsigned int *)(temp_v0 + 0x8c);

@@ -16,7 +16,7 @@ u32 keyedRecordRegisterName(const char *key);
 u32 FUN_00249e54(u32 handle, const void *file);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void asdMemFree(void);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 FUN_00246708(void);
 void FUN_0024679c(void);
 }

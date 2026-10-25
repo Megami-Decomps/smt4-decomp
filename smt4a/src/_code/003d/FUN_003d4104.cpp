@@ -15,7 +15,7 @@ extern StatusDownStateA *g_statusDown;
 u8 *FUN_0026140c(void);
 void arraySortQsort(void *entries, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int FUN_0035fe34(const void *, const void *);
-int FUN_002ce15c(const void *, const void *);
+int devilSlotCompareRaceThenLevel(const void *, const void *);
 int FUN_0035fdb0(const void *, const void *);
 int FUN_002ce0d8(const void *, const void *);
 int FUN_00321c18(const void *, const void *);
@@ -32,7 +32,7 @@ void FUN_003d4104(void)
         if (sortMode->descending != 0)
             qsort(status->inventory.entries, status->inventory.count, 4, FUN_0035fe34);
         else
-            qsort(status->inventory.entries, status->inventory.count, 4, FUN_002ce15c);
+            qsort(status->inventory.entries, status->inventory.count, 4, devilSlotCompareRaceThenLevel);
     }
     if (sortMode->key == 8) {
         if (sortMode->descending != 0)

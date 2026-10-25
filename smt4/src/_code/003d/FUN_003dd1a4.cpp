@@ -21,7 +21,7 @@ int FUN_003da0ec(...);
 int modelAttachmentsUpdateFromParents(...);
 int battleCreateSecondaryModels(...);
 int FUN_003dc924(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 3 slot(s), 9 byte(s) */
@@ -55,7 +55,7 @@ extern int gameObjectFlagIsSet(void);
 /* Supplied declaration required: modelAttachmentsUpdateFromParents. */
 /* Supplied declaration required: battleCreateSecondaryModels. */
 /* Supplied declaration required: FUN_003dc924. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -233,7 +233,7 @@ LAB_003dd4ac:
   if ((temp_v1 & 0x200) != 0) {
     temp_v2 = 0;
     do {
-      rt_memcpy_w(temp_v8,param_1 + temp_v2 * 0x8c + 0x25c0,0x8c);
+      __aeabi_memcpy4(temp_v8,param_1 + temp_v2 * 0x8c + 0x25c0,0x8c);
       if (((temp_v11 & 1) != 0) && (temp_v9 == 0)) {
         FUN_003da0ec(param_1);
         if (*(unsigned int *)(param_1 + 0x3030) < 0xffff) {

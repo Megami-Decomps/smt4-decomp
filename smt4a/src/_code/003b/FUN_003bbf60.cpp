@@ -1,4 +1,4 @@
-/* NON_MATCHING: mask LDM selection, signed-negative tests and loop bound compare direction differ. */
+/* NON_MATCHING: register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -30,13 +30,13 @@ u32 FUN_003bbf60(void)
         property = 11;
     u32 first, count;
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(2)), &first, &count);
-    for (s32 index = first; index < static_cast<s32>(first + count); ++index) {
+    for (s32 index = first; static_cast<s32>(first + count) > index; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) &&
             !(flags & g_btlCandidateMasks.excluded) && entry->id == id &&
-            reinterpret_cast<const PropertyView *>(entry)->values[property] < 0) {
+            reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
             scrSetResult(1);
             return 1;
         }
@@ -44,7 +44,7 @@ u32 FUN_003bbf60(void)
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
         if (entry && entry->id == id &&
-            reinterpret_cast<const PropertyView *>(entry)->values[property] < 0) {
+            reinterpret_cast<const PropertyView *>(entry)->values[property] <= -1) {
             scrSetResult(1);
             return 1;
         }

@@ -10,7 +10,7 @@ void sysMemClear(void *destination, u32 size);
 s32 FUN_001b315c(AocPackage *package);
 AocPackageFileDescription *FUN_001b31ac(AocPackage *package);
 u32 FUN_001b31e0(AocPackage *package);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void aocQueueFileLoad(AocDisplay *display, const char *path, void *destination, s32 kind, u32 flags, void *work);
 
@@ -32,7 +32,7 @@ void FUN_00471468(AocSystemA *system, s32 kind, s32 capacity, PackageFileRef *ou
                     if (written >= capacity || output == NULL)
                         return;
                     PackageFileRef *file = &output[written];
-                    rt_memcpy_w(file, &package->fileTable.files[index], 14);
+                    __aeabi_memcpy4(file, &package->fileTable.files[index], 14);
                     textFormatBuffer(path, DAT_005265ac, mount, description->name);
                     aocQueueFileLoad(g_aocDisplay, path, file, 1, 0x80, file);
                     ++written;

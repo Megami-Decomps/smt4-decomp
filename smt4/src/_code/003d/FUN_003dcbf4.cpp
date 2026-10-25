@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail grouped bit tests or aggregate-copy runtime selection differs. */
 #include "common.h"
 struct Snapshot {
     /* 0x00 */ u32 unk00;

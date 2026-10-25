@@ -18,7 +18,7 @@ void *FUN_0013c174(const char *name, u32 *size, s32 flags);
 u32 dataTableValueOrZero(s32 index);
 ScriptProcess *FUN_00275bc8(void *tableFile, u32 tableValue);
 void sysMemClear(void *buffer, u32 size);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 }
 
 void AocMenu::openPurchaseList()
@@ -49,5 +49,5 @@ void AocMenu::openPurchaseList()
     g_aocMain->flags &= ~0x70u;
     g_aocMain->mode = 2;
     sysMemClear(prompt, sizeof(prompt));
-    rt_memcpy_w(prompt, "Please select content to purchase.", 35);
+    __aeabi_memcpy4(prompt, "Please select content to purchase.", 35);
 }

@@ -18,7 +18,7 @@ extern "C" {
 s32 FUN_00427e68(s32 handle, s32 operation);
 u32 FUN_0016ccfc();
 s32 tokenResolveAddress(u32 context, const AsyncMapHandleObject **object, s32 handle);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void sysFatalBreak();
 s32 libc_toupper(s32 character);
 void FUN_0019a46c(void *destination, const void *source, u32 size);
@@ -39,7 +39,7 @@ WindowStatusResult FUN_004293b0(const s32 *handle, const AsyncMapParameters *par
     result = tokenResolveAddress(FUN_0016ccfc(), &object, *handle);
     if (result < 0)
         return WindowStatusResult(result);
-    rt_memcpy_w(DAT_0061b030.header, object->header, 0x44);
+    __aeabi_memcpy4(DAT_0061b030.header, object->header, 0x44);
     u32 format;
     switch (parameters->format) {
     case 0: format = 0x8C; break;

@@ -81,7 +81,7 @@ typedef struct LiveUnit {
 s32 gameDataCopySaveEntry(u16 id, void *destination);
 void FUN_00184310(u32 id);
 void sysMemClear(void *block, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_004bcd90(RebuiltRecord *record);
 u16 recordGetScaledMaximum(RebuiltRecord *record);
 s32 getUnlockedSlotCount(LiveUnit *unit);
@@ -119,7 +119,7 @@ s32 FUN_0032fbd0(LiveUnit *unit)
     record.w24 = entry.w10;
     record.w26 = entry.w12;
     record.w22 = entry.w0e;
-    rt_memcpy_w(record.name, entry.name, 18);
+    __aeabi_memcpy4(record.name, entry.name, 18);
     record.skills = entry.skills;
     record.experience = entry.experience;
     record.count = (entry.flags >> 2) & 0xF;

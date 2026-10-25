@@ -1621,7 +1621,7 @@
 0x002bcc14 nw_snd_SoundStartable_StartSound name
 0x002bcc54 nw_snd_SoundSystem_SetMasterVolume name
 0x002bcd60 rt_memcpy_w144 name
-0x002bcd68 rt_memcpy_w name
+0x002bcd68 __aeabi_memcpy4 name
 0x002bcddc FUN_002bcddc between
 0x002bcf10 FUN_002bcf10 between
 0x002bcf24 wstrBufferPutChar name

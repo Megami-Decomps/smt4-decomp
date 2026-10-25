@@ -1,4 +1,3 @@
-/* NON_MATCHING: panel speed loads directly from +0x22c rather than a timer-subobject base, and the first render-stack update swaps r1/r2. */
 #include "camp/RenderCtx.h"
 #include "ui/PartyPanelState.h"
 
@@ -13,6 +12,7 @@ extern PartyPanelStateA *g_partyPanel;
 extern RenderCtxA *g_renderCtx;
 PanelSpriteOrigin *FUN_001834a4(u32 table, s32 index);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void FUN_001835b4(s32 group, s32 table, s32 sprite, s32 x, s32 y, u32 flags);
 
@@ -22,7 +22,7 @@ void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted
     PartyPanelStateA *panel = g_partyPanel;
     PanelSpriteOrigin *origin = FUN_001834a4(0x11, index + 0x57);
     if (highlighted) {
-        efctSetSpeed(panel->animation.effectSpeed * speed);
+        efctSetSpeed(vec2GetSpeed(panel->animation.speedObject) * speed);
         RenderCtxA *context = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
         renderStackSet(&context->stackB, state);

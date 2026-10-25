@@ -15,7 +15,7 @@ int FUN_004a9c84(...);
 int btlFindEntryValue(...);
 int btlSlotSetStoreValue(unsigned int, int, int);
 int FUN_004c571c(...);
-int FUN_004fdc9c(...);
+int btlReflectCreateKind44(...);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -91,7 +91,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_004c571c. */
 extern int hasFlag80Or1000(unsigned int);
 extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004fdc9c. */
+/* Supplied declaration required: btlReflectCreateKind44. */
 
 
 void FUN_00385c44(unsigned int *param_1)
@@ -363,7 +363,7 @@ LAB_003861d0:
             temp_v20[1] = 0x125;
             temp_v8 = randRange(1);
             temp_v7 = temp_v20[temp_v8];
-            FUN_004fdc9c(0,0,0xbb,temp_v7);
+            btlReflectCreateKind44(0,0,0xbb,temp_v7);
             itemEffectPlay(temp_v7);
             param_1[0x2b] = 1;
             param_1[0x2d] = 0;

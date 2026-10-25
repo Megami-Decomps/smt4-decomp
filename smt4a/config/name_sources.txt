@@ -6223,3 +6223,42 @@
 004d4f54 debugOptionPageApplySelected inferred [med] copies the selected debug list entry into the options block
 00221754 battleUnitHasElementEntry inferred [med] true if the unit's equipment, demon skills or skill list hold an entry of the given element (12 also takes the special flag); restricted mode only counts kind-2 skills
 0028b088 campShowSelectedEntryHelp inferred [med] shows the help message of the selected entry of the camp menu page
+002e71b4 __aeabi_memcpy4 evidence armlib: __aeabi_memcpy4 is __rt_memcpy_w; armcc emits it for word-aligned struct copies
+00588f28 g_shopTabNeighbors inferred size:0x50 shop tab left/right neighbours (8 pairs + locked alternatives for tabs 0 and 3)
+001b4874 __aeabi_ul2f inferred armcc runtime unsigned-64-to-float: sets r2=1.0f then branches into the shared body next to ll_sto_f (0x1b487c); compiler emits `bl __aeabi_ul2f` for (float)u64, e.g. smt4a FUN_00240674
+0050d740 ARM_common_memcpy4_7 evidence size:0x1c same armcc library helper as smt4 FUN_0024ee4c
+00226c70 inputApplyDeadZone inferred [med] clears *value when |value|<=threshold, returns filtered value
+00384830 mathAbsHeadingErrorToPoint inferred [med] absolute heading error to an X/Z point
+004fef70 btlReflectCreateKind42 inferred [med] queues a reflect action of kind 0x42 and stores its two argument words
+004fe5dc btlReflectCreateKind37 inferred [med] queues a reflect action of kind 0x37 and stores its two argument words
+004fdc9c btlReflectCreateKind44 inferred [med] queues a reflect action of kind 0x44 and stores its two argument words
+004fbd98 btlReflectCreateKind2e inferred [med] queues a reflect action of kind 0x2e and stores its two argument words
+004fbd5c btlReflectCreateKind19 inferred [med] queues a reflect action of kind 0x19 and stores its two argument words
+004fcfc0 btlReflectCreateKind15 inferred [med] queues a reflect action of kind 0x15 and stores its two argument words
+004fda3c btlReflectCreateKind34 inferred [med] queues a reflect action of kind 0x34 and stores its two argument words
+003dee58 recordCategoryNineIsActiveInMode24 inferred [med] twin of smt4 FUN_00333aac
+001bceb8 optionalParameterTrySet inferred [high] twin
+00325af0 modelGroupsMarkActiveDestroy inferred [high] twin
+003177b0 padGetCombinedButtonState inferred [med] twin
+00473b6c aocApplicationRecreateDecoder inferred [high] twin
+00499338 placeWindowRunStateHandler inferred [med] calls the state-indexed member handler then FUN_0049ae34
+0027376c eplSlotStartRequest inferred [med] marks slot request pending and starts it
+00377edc mapGimicStartMotionById inferred [med] starts a motion on every active map gimmick with the id
+002174f4 fusionSortPairs inferred [high] sorts the fusion pair list by the selected key
+002dddb4 engineRecordsUnregisterHandles inferred [med] removes live slot/extra handles from the registry
+004a6610 itemListSelectVariant inferred [med] selects the item-list presentation variant
+0046fa94 texBindBindTableNode inferred [med] binds a texture table node to the model item
+002686b8 touchMenuClose inferred [med] twin
+003a37f0 partyRestoreActiveSlots inferred [med] saves valid active-slot ids, rebuilds the party and reactivates those slots
+00145f5c gameTestFlagBit32 inferred [med] tests bit `index` (index < 32) of the game-data stats block
+003032a8 pooledListErase inferred [high] unlinks a list node, destroys its value, returns the next iterator, node goes to the free list
+0047d5dc texTableEntryAttachStex inferred [med] decodes a loaded STEX resource and attaches texture storage to the table entry
+002ce15c devilSlotCompareRaceThenLevel inferred [med] twin of smt4 FUN_002e467c: empty slots last, then race, level descending, id
+0036fd64 equipmentTableFindIndexById inferred [high] finds the equipment record id in the table section selected by category (3,4,5,92,93)
+00406798 resourceNameGroupFindIndex inferred [high] returns the index of the name group containing the given name, -1 if none
+0016cba4 soundVoiceClearState inferred [med] twin
+004c6b5c valueRangeSameSide inferred [med] twin
+0037d700 scrComm_Sequence14Request inferred [med] twin
+0038b1cc scrComm_Sequence16Request inferred [med] twin
+004c0834 mathScaleByCategory inferred [med] value * category scale factor
+004c3d78 mathScaleByCategoryEnabled inferred [med] value * enabled/disabled category scale factor

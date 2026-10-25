@@ -17,7 +17,7 @@ int FUN_0035474c(int *, unsigned char [16]);
 int FUN_00354a20(int *, unsigned char [16], int);
 int FUN_00354b18(unsigned char [16], unsigned int, unsigned char [1024], int);
 int FUN_00354b3c(...);
-int FUN_0038b2fc(...);
+int aocApplicationRecreateDecoder(...);
 int FUN_0038d598(void);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -58,7 +58,7 @@ extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: FUN_00354a20. */
 /* Supplied declaration required: FUN_00354b18. */
 /* Supplied declaration required: FUN_00354b3c. */
-/* Supplied declaration required: FUN_0038b2fc. */
+/* Supplied declaration required: aocApplicationRecreateDecoder. */
 /* Supplied declaration required: FUN_0038d598. */
 extern unsigned int valueOwnerGet(unsigned int);
 extern unsigned int entryDataValueGet(unsigned int);
@@ -245,7 +245,7 @@ void FUN_0038dc48(int param_1)
     temp_v12[2] = temp_v0 + 0xe3;
     iStack_a4 = *(int *)(temp_v0 + 0x364);
   }
-  FUN_0038b2fc(temp_v0);
+  aocApplicationRecreateDecoder(temp_v0);
   FUN_003526c4(&temp_v8,*(unsigned int *)(temp_v0 + 0x5b0),*(unsigned int *)(temp_v0 + 0x684),0x40,temp_v12
               );
   *(unsigned int *)(param_1 + 0xc) = temp_v8;

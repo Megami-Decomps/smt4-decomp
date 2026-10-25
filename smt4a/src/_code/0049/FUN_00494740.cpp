@@ -33,12 +33,11 @@ void FUN_00494740(EquipmentMenuState *work)
         uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(work->unk00000 + 0x3CC), 0);
         work->transition.frame = 1;
     } else if (work->transition.frame == 1) {
-        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(work->unk00000 + 0x3EC);
-        FUN_00167458(sprite, 0);
-        s32 y = vec2GetYInt(sprite);
-        s32 x = vec2GetXInt(sprite);
+        FUN_00167458(reinterpret_cast<UiSpriteState *>(work->unk00000 + 0x3EC), 0);
+        s32 y = vec2GetYInt(reinterpret_cast<UiSpriteState *>(work->unk00000 + 0x3EC));
+        s32 x = vec2GetXInt(reinterpret_cast<UiSpriteState *>(work->unk00000 + 0x3EC));
         pointConvertToFloat(&work->detail.region, x, y);
-        if (sprite->animationFlags.completed) {
+        if (reinterpret_cast<UiSpriteState *>(work->unk00000 + 0x3EC)->animationFlags.completed) {
             EquipmentMenuScriptViewA *script = reinterpret_cast<EquipmentMenuScriptViewA *>(work);
             switch (work->page) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 6:

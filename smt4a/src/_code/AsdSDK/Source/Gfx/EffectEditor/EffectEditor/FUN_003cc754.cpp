@@ -9,14 +9,14 @@ extern EffectEditorOptions DAT_0059e858;
 extern const u8 DAT_0059e738[];
 extern const u8 DAT_0059e780[];
 void *linkedFindItemByIndex(void *list, s32 index);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 u32 FUN_003cc754(u32 result)
 {
     void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
         g_effectEditor.selection.index + DAT_0059e9a8.index);
-    rt_memcpy_w(item, &DAT_00634bc0.working, sizeof(DAT_00634bc0.working));
-    rt_memcpy_w(DAT_00634bc0.saved, &DAT_00634bc0.working, sizeof(DAT_00634bc0.saved));
+    __aeabi_memcpy4(item, &DAT_00634bc0.working, sizeof(DAT_00634bc0.working));
+    __aeabi_memcpy4(DAT_00634bc0.saved, &DAT_00634bc0.working, sizeof(DAT_00634bc0.saved));
     g_effectEditor.unk00[6] = 1;
     if (DAT_00634bc0.working.flags & 2) {
         DAT_0059e858.options = DAT_0059e738;

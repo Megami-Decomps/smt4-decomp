@@ -5,7 +5,7 @@
 extern "C" {
 extern BtlHelpListA *g_btlHelp;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 
 /* Allocate and append a help entry, preserving a snapshot of its combatant. */
 BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second,
@@ -50,7 +50,7 @@ BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second,
     work->unk006 = 0;
     work->second = second;
     if (combatant != NULL) {
-        rt_memcpy_w(work->combatant, combatant, 0x408);
+        __aeabi_memcpy4(work->combatant, combatant, 0x408);
     }
     work->mode = mode;
     work->argument = argument;

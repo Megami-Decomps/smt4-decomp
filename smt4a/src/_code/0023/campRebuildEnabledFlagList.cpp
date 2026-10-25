@@ -1,4 +1,4 @@
-/* NON_MATCHING: mode and menu pointer occupy r8/r9 instead of retail r9/r8, and the initial mode comparison is scheduled after the stack allocation. */
+/* NON_MATCHING: only the initial mode compare is scheduled after `mov r9, r0` and the first literal load (retail compares r0 first; 4 diff lines); the switch already gives retail's r8/r9 allocation. */
 #include "common.h"
 
 struct CampFlagMenu {
@@ -28,22 +28,26 @@ void campRebuildEnabledFlagList(s32 mode)
     s32 first, last;
     s16 *entries;
     CampFlagMenu *menu;
-    if (mode == 11) {
+    switch (mode) {
+    case 11:
         first = 1;
         last = 0x3c;
         entries = g_camp->first;
         menu = &g_camp->firstMenu;
-    } else if (mode == 13) {
+        break;
+    case 13:
         first = 0x3b7;
         last = 0x47e;
         entries = g_camp->second;
         menu = &g_camp->secondMenu;
-    } else if (mode == 14) {
+        break;
+    case 14:
         first = 0x33f;
         last = 0x3b6;
         entries = g_camp->third;
         menu = &g_camp->thirdMenu;
-    } else {
+        break;
+    default:
         return;
     }
     if (entries == NULL || menu == NULL)

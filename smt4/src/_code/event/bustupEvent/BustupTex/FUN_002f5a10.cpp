@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial sentinel-store ordering differs; table indexing folds id-minus-one into a negative load displacement. */
+/* NON_MATCHING: the three sentinel stores (previousId, previousNode, table) are scheduled in a different order and constants. */
 #include "event/bustupEvent/BustupTextureWork.h"
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdDebug.h"
@@ -33,7 +33,8 @@ void FUN_002f5a10(s32 bustupId)
     void *table = dataTableGet(26, 1);
     const s16 *entries = (const s16 *)dataTableGetEntries(table);
     dataTableGetCount(table);
-    work->node = entries[bustupId - 1];
+    s32 index = bustupId - 1;
+    work->node = entries[index];
     if (FUN_002c1d5c()) {
         work->deferred = 1;
     } else {

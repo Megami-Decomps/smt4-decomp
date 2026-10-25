@@ -1,5 +1,5 @@
-/* NON_MATCHING: block layout differs: retail places the shared script-work reset after the phase tests and merges the message-state cases into one chain; also keeps weak-hook nops in different places. */
 #include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 void FUN_00249b18(s32 a, s32 b);
@@ -22,6 +22,7 @@ s32 FUN_002d8910(s32 phase)
     if (phase == 0) {
         if (scrGetCommandFrame() == 0) {
             FUN_00249b18(0, 1);
+            asdDebugHookVoid();
             scrWorkSetValue(0, 0);
             scrWorkSetValue(1, 0);
             scrWorkSetValue(2, 0);
@@ -74,6 +75,7 @@ s32 FUN_002d8910(s32 phase)
     }
     if (phase == 1 && scrGetCommandFrame() == 0) {
         FUN_00249b18(0, 1);
+        asdDebugHookVoid();
         scrWorkSetValue(0, 0);
         scrWorkSetValue(1, 0);
         scrWorkSetValue(2, 0);

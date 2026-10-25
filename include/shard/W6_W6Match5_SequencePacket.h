@@ -7,6 +7,13 @@ struct ScriptSequencePacket {
     u32 first;
     u32 second;
     u32 flags;
+
+    ScriptSequencePacket(u32 firstArg, u32 secondArg, u32 flagBits)
+    {
+        first = firstArg;
+        second = secondArg;
+        flags = flagBits;
+    }
 };
 
 #endif

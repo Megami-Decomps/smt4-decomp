@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; range first output uses sp16 instead of sp8, entry-address scratch registers swap, and the later byte flag offset does not fold. */
+/* NON_MATCHING: the selection range's stack slots and loads differ; entries base/product registers are swapped in the entry address (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

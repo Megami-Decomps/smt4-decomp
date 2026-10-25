@@ -64,7 +64,7 @@ s32 FUN_002c2a04(s32 a);
 void FUN_00339e38(BattleMain* battle);
 void FUN_0033a01c(BattleMain* battle);
 void vec3CopyFromOffsetC(u32 object);
-void rt_memcpy_w(void* dst, const void* src, u32 size);
+void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 
 // Restores a saved battle snapshot, refreshes the side list and moves the load state on.
 void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
@@ -78,12 +78,12 @@ void FUN_0023fffc(BattleLoadState* state, BattleMain* battle)
         u8* payload = reinterpret_cast<u8*>(block) + block->payloadOffset;
         for (s32 i = 0; i < 7; i++) battle->header[i] = 0;
         if (d3 + (d0 * 1000 + d1 * 100 + d2 * 10 - 0xd050) == 0x44c) {
-            rt_memcpy_w(battle->header, payload, 0x118);
+            __aeabi_memcpy4(battle->header, payload, 0x118);
             payload += 0x118;
         }
         u32 count = (size - 0x118U) / 0x18;
         if (battle->maxEntries < count) count = battle->maxEntries;
-        rt_memcpy_w(battle->extraBuffer, payload, count * 0x18);
+        __aeabi_memcpy4(battle->extraBuffer, payload, count * 0x18);
     }
     FUN_0033a01c(battle);
     FUN_00339e38(battle);

@@ -45,7 +45,7 @@ struct AnimTemplate {
 
 extern "C" {
 void unitTransformReset(AnimUnitScale *scale);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void __aeabi_vec_ctor_nocookie_nodtor(void *array, void (*ctor)(void *), u32 size, u32 count);
 void animSlotsSetStartFrames(AnimSlot *slots, u32 count, u32 startFrame, const AnimEntry *entries, s32 entryCount);
 void FUN_0038aa84(AnimSlot *slots, s32 maxSlots, const void *record, const AnimEntry *entries, s32 entryCount);
@@ -83,7 +83,7 @@ u32 FUN_0038a7dc(AnimSlot *slots, s32 maxSlots, const AnimFile *file, const Anim
         if (maxSlots < count) {
             count = maxSlots;
         }
-        rt_memcpy_w(slots, source, count << 5);
+        __aeabi_memcpy4(slots, source, count << 5);
         if (version == 1200) {
             for (s32 i = 0; i < count; i++) {
                 slots[i].timing = 0.0f;
@@ -117,7 +117,7 @@ u32 FUN_0038a7dc(AnimSlot *slots, s32 maxSlots, const AnimFile *file, const Anim
         legacy.header[1] = record[1];
         legacy.header[2] = record[2];
         legacy.header[3] = record[3];
-        rt_memcpy_w(legacy.scales, record + 4, 200);
+        __aeabi_memcpy4(legacy.scales, record + 4, 200);
         legacy.values[0] = 0.0f;
         legacy.values[1] = 5.0f;
         legacy.values[2] = 3.0f;

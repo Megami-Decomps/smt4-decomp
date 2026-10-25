@@ -7,7 +7,7 @@
 extern "C" {
 u32 *setMinus1ReturnPtr(u32 *value);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 }
 
 /* Four consecutive words each set to -1. */
@@ -74,7 +74,7 @@ extern "C" {
 void FUN_004064a8(UiModelLookupObj *obj, u32 slot, UiFoundEntry *entry, const UiNodePosition *position)
 {
     UiModelNode *node = new ("c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelScene.cpp", 255) UiModelNode();
-    rt_memcpy_w(&node->entry, entry, sizeof(node->entry));
+    __aeabi_memcpy4(&node->entry, entry, sizeof(node->entry));
     node->hasEntry29 = entry->unk29[0] != 0;
     node->active = 1;
     node->position = *position;

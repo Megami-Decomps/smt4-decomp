@@ -16,7 +16,7 @@ int vec4Forward(...);
 int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00287a78(void);
+int mathAbsHeadingErrorToPoint(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int asdMdlManagerDestroy(void);
@@ -106,7 +106,7 @@ extern int spriteTemplateGetPreferredDevilId(void);
 /* Supplied declaration required: FUN_0028250c. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002879dc. */
-/* Supplied declaration required: FUN_00287a78. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -1585,7 +1585,7 @@ joined_r0x0020ae6c:
             *(float *)(temp_v3 + 0x108) = temp_v22;
           }
           temp_v19 = *(unsigned int *)(temp_v5 + 0x14);
-          FUN_00287a78();
+          mathAbsHeadingErrorToPoint();
           *(unsigned int *)(temp_v3 + 300) = temp_v19;
           temp_v22 = *(float *)(temp_v5 + 0x20) - *(float *)(temp_v3 + 0x108);
           *(float *)(temp_v3 + 0x110) = temp_v22;
@@ -1889,7 +1889,7 @@ LAB_0020ba2c:
               *(float *)(temp_v3 + 0x108) = temp_v22;
             }
             temp_v19 = *(unsigned int *)(temp_v5 + 0x14);
-            FUN_00287a78();
+            mathAbsHeadingErrorToPoint();
             *(unsigned int *)(temp_v3 + 300) = temp_v19;
             temp_v22 = *(float *)(temp_v5 + 0x20) - *(float *)(temp_v3 + 0x108);
             *(float *)(temp_v3 + 0x110) = temp_v22;

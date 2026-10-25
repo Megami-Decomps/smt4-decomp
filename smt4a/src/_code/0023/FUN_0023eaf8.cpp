@@ -71,7 +71,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_003d498c. */
 extern int FUN_003de75c(unsigned int);
 /* Supplied declaration required: FUN_003dea6c. */
-extern int FUN_003dee58(unsigned int);
+extern int recordCategoryNineIsActiveInMode24(unsigned int);
 /* Supplied declaration required: FUN_00417d08. */
 extern int partyEntryFlagsBit3(unsigned int);
 extern int FUN_004186a4(void);
@@ -386,7 +386,7 @@ LAB_0023f080:
                       }
                     }
                     else {
-                      temp_v8 = FUN_003dee58(temp_v10);
+                      temp_v8 = recordCategoryNineIsActiveInMode24(temp_v10);
                       if ((temp_v8 != 0) &&
                          (temp_v8 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x8fc),4), temp_v8 != 0)) {
                         sysPlaySe(0xb2);

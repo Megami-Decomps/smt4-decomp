@@ -35,7 +35,7 @@ int FUN_00294854(void);
 int mapGimicClearEntryChildren(void);
 int FUN_002ba30c(void);
 int FUN_002d22c0(...);
-int FUN_002dddb4(void);
+int engineRecordsUnregisterHandles(void);
 int FUN_002e5924(...);
 int mapProjectPointHeightToCollision(...);
 int messageStartIntroAnimation(void);
@@ -167,7 +167,7 @@ int lmapEnemyCtrlLoadModels(...);
 int fieldBuildAreaPlacementList(...);
 int stateSetterSetFromBase(...);
 int applyIfIdValid(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int asdCameraInitializeDefaults(...);
 int FUN_00178b04(...);
@@ -483,7 +483,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_002d22c0. */
 /* Supplied declaration required: mapIfStart. */
 /* Supplied declaration required: mapIfInitializeSceneControllers. */
-/* Supplied declaration required: FUN_002dddb4. */
+/* Supplied declaration required: engineRecordsUnregisterHandles. */
 /* Supplied declaration required: FUN_002ddea0. */
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: FUN_002df914. */
@@ -642,7 +642,7 @@ extern unsigned short gameFlagsGetWorkValue(void);
 /* Supplied declaration required: jobFlagObjStop. */
 /* Supplied declaration required: FUN_00482fd4. */
 /* Supplied declaration required: FUN_004bc758. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00276264(void)
@@ -1432,7 +1432,7 @@ LAB_00276f5c:
           puVar2[3] = 0x2f;
           puVar2[4] = 0;
           DAT_005f1658 = 0xffffffff;
-          rt_memcpy_w(&DAT_005f1660,0x277d14,0x12);
+          __aeabi_memcpy4(&DAT_005f1660,0x277d14,0x12);
           return 0;
         }
         if (*(char *)((int)puVar2 + 0x9365) != '\0') {
@@ -1440,7 +1440,7 @@ LAB_00276f5c:
           puVar2[3] = 0x2f;
           puVar2[4] = 0;
           DAT_005f1658 = 0xffffffff;
-          rt_memcpy_w(&DAT_005f1660,0x277d28,0x12);
+          __aeabi_memcpy4(&DAT_005f1660,0x277d28,0x12);
           return 0;
         }
         if (*(char *)((int)puVar2 + 0x9366) != '\0') {
@@ -1448,7 +1448,7 @@ LAB_00276f5c:
           puVar2[3] = 0x2f;
           puVar2[4] = 0;
           DAT_005f1658 = 0xffffffff;
-          rt_memcpy_w(&DAT_005f1660,0x277d3c,0x12);
+          __aeabi_memcpy4(&DAT_005f1660,0x277d3c,0x12);
           return 0;
         }
         if (*(char *)((int)puVar2 + 0x9367) != '\0') {
@@ -1456,7 +1456,7 @@ LAB_00276f5c:
           puVar2[3] = 0x2f;
           puVar2[4] = 0;
           DAT_005f1658 = 0xffffffff;
-          rt_memcpy_w(&DAT_005f1660,0x277d50,0x11);
+          __aeabi_memcpy4(&DAT_005f1660,0x277d50,0x11);
           return 0;
         }
         if (*(char *)(puVar2 + 0x24da) != '\0') {
@@ -1493,7 +1493,7 @@ LAB_00276f5c:
       DAT_005f1658 = 0xffffffff;
       temp_v9 = 0x12;
       temp_v22 = 0x277d00;
-      rt_memcpy_w(&DAT_005f1660,temp_v22,temp_v9);
+      __aeabi_memcpy4(&DAT_005f1660,temp_v22,temp_v9);
       return 0;
     }
     DAT_005f1776 = '\0';
@@ -1524,7 +1524,7 @@ LAB_00276f5c:
             FUN_003180c4(0,&uStack_b0);
             temp_v9 = 0x17;
             temp_v22 = 0x2780e8;
-            rt_memcpy_w(&DAT_005f1660,temp_v22,temp_v9);
+            __aeabi_memcpy4(&DAT_005f1660,temp_v22,temp_v9);
             return 0;
           }
           if (puVar19 == (unsigned int *)0x5) {
@@ -1691,7 +1691,7 @@ LAB_00276f5c:
                           if (DAT_005f1638 == 0x3f) {
                             DAT_005f1614 = '\x01';
                             if (DAT_005f16e4 != '\0') {
-                              rt_memcpy_w(&DAT_005f1660,0x278a70,0x11);
+                              __aeabi_memcpy4(&DAT_005f1660,0x278a70,0x11);
                               puVar2[3] = 0x2f;
                               puVar2[4] = 0;
                             }
@@ -2114,7 +2114,7 @@ LAB_00278b38:
                           return 0;
                         }
 LAB_00278774:
-                        rt_memcpy_w(&DAT_005f1660,0x278a70,0x11);
+                        __aeabi_memcpy4(&DAT_005f1660,0x278a70,0x11);
                         puVar2[3] = 0x2f;
                         puVar2[4] = 0;
                         mapPopupReset();
@@ -3693,7 +3693,7 @@ LAB_0027a030:
       ptrListRemoveClearOwner(g_handleRegistry);
     }
     resourceRemoveSlotOwners();
-    FUN_002dddb4();
+    engineRecordsUnregisterHandles();
     mapIfUnregisterOwnedResources();
     mapGimicClearEntryChildren();
     temp_v8 = puVar2[3] + 1;
@@ -4008,7 +4008,7 @@ LAB_0027a030:
       }
     }
     resourceRemoveSlotOwners();
-    FUN_002dddb4();
+    engineRecordsUnregisterHandles();
     mapIfUnregisterOwnedResources();
     mapGimicClearEntryChildren();
     puVar2[3] = puVar2[3] + 1;
@@ -4270,7 +4270,7 @@ LAB_0027ca0c:
     puVar2[3] = temp_v8;
     break;
   case 0x67:
-    FUN_002dddb4();
+    engineRecordsUnregisterHandles();
     mapIfUnregisterOwnedResources();
     mapGimicClearEntryChildren();
     FUN_00227a70();
@@ -4455,7 +4455,7 @@ joined_r0x0027ce58:
     }
     cameraRegistryRemove(&g_localCamera);
     resourceRemoveSlotOwners();
-    FUN_002dddb4();
+    engineRecordsUnregisterHandles();
     mapIfUnregisterOwnedResources();
     mapGimicClearEntryChildren();
     sub68OwnerDestroyAll();

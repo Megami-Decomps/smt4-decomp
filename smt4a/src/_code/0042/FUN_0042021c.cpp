@@ -74,7 +74,7 @@ void slotSetRequest(s32 slot, s32 kind, s32 value);
 DataBlockTable *gameDataBlocksGetTable(void);
 void *gameDataBlocksGetSaveData(void);
 void *configGetSettings(void);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void wordPairCopy(void *destination, const void *source);
 s32 gameFlagIsSet(s32 flag);
 void gameFlagSetValue(s32 flag, s32 value, s32 mark);
@@ -116,9 +116,9 @@ static __inline s8 saveLoadUiEntryReady(SaveLoadUi *ui)
 /* Copies the edited tables, settings and save data back into the game. */
 static __inline void saveLoadUiCommit(SaveLoadUi *ui)
 {
-    rt_memcpy_w(gameDataBlocksGetTable(), ui->tableBuffer, 128);
+    __aeabi_memcpy4(gameDataBlocksGetTable(), ui->tableBuffer, 128);
     wordPairCopy(configGetSettings(), ui->settingsBuffer);
-    rt_memcpy_w(gameDataBlocksGetSaveData(), ui->saveBuffer, 0x2A71C);
+    __aeabi_memcpy4(gameDataBlocksGetSaveData(), ui->saveBuffer, 0x2A71C);
 }
 
 /* Per-frame update of the save/load screen: one state per step of the flow. */

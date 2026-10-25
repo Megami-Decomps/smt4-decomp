@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses different loop scheduling, comparison branching or packed parameter grouping. */
 #include "common.h"
 
 struct OpeningState {
@@ -14,8 +13,8 @@ s32 jobIsValid(u32 job);
 void event3dOpeningRequestExit()
 {
     if (g_event3dOpening && jobIsValid(g_event3dOpening->job)) {
-        g_event3dOpening->state = 4;
         g_event3dOpening->step = 0;
+        g_event3dOpening->state = 4;
     }
 }
 }

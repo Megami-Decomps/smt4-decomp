@@ -13,7 +13,7 @@ int FUN_00367fac(void);
 int FUN_00368374(...);
 int lmapSceneMarkerStart(int);
 int FUN_00379344(int);
-int FUN_00384830(void);
+int mathAbsHeadingErrorToPoint(void);
 int FUN_003856f8(int);
 int FUN_00385798(int);
 int FUN_003d4ed8(unsigned int);
@@ -57,7 +57,7 @@ extern int FUN_00367f98(void);
 extern int FUN_0036d984(int, unsigned int *, unsigned int);
 /* Supplied declaration required: lmapSceneMarkerStart. */
 /* Supplied declaration required: FUN_00379344. */
-/* Supplied declaration required: FUN_00384830. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: FUN_003856f8. */
 /* Supplied declaration required: FUN_00385798. */
 extern int FUN_003d21dc(void);
@@ -118,7 +118,7 @@ unsigned int FUN_0033b100(int param_1)
         return 0;
       }
       temp_v13 = DAT_005f19d8;
-      FUN_00384830();
+      mathAbsHeadingErrorToPoint();
       temp_v5 = FUN_00367f98();
       if (temp_v5 != 3) {
         temp_v5 = FUN_00367f98();
@@ -226,7 +226,7 @@ unsigned int FUN_0033b100(int param_1)
   temp_v10 = temp_v0 | ((unsigned int)(temp_v12 != temp_v12) << 0x1c);
   temp_v2 = (unsigned char)(temp_v0 >> 0x18);
   if (((unsigned char)((temp_v2 >> 6) & 1) || temp_v2 >> 7 != ((unsigned char)(temp_v10 >> 0x1c) & 1)) ||
-     ((temp_v13 = DAT_005f17b0, FUN_00384830(), (int)temp_v13 >= 0x42a00000 &&
+     ((temp_v13 = DAT_005f17b0, mathAbsHeadingErrorToPoint(), (int)temp_v13 >= 0x42a00000 &&
       (((int)temp_v13 >= 0x43250000 || ((int)temp_v12 >= 0x43160000)))))) {
     temp_v5 = *(int *)(param_1 + 0x17c);
     temp_v9 = temp_v5 == 6 || temp_v5 == 0x10;
@@ -246,7 +246,7 @@ unsigned int FUN_0033b100(int param_1)
       return 0;
     }
     temp_v13 = DAT_005f17b0;
-    FUN_00384830();
+    mathAbsHeadingErrorToPoint();
     if ((int)temp_v13 >= 0x42a00000) {
       if ((int)temp_v13 >= 0x43250000) {
         DAT_005f19c4 = 2;

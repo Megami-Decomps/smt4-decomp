@@ -7,7 +7,7 @@ extern "C" {
 int eventTexCallIfIdle(...);
 int FUN_00154bbc(...);
 int messageMainSetMode(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int textFormatBuffer(unsigned char [128], unsigned char *);
 int wstrBufferPutChar(...);
@@ -59,7 +59,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int
@@ -300,7 +300,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
           libc_strcpy(temp_v9,temp_v5);
           break;
         default:
-          rt_memcpy_w(temp_v9,&LAB_00142870,0xb);
+          __aeabi_memcpy4(temp_v9,&LAB_00142870,0xb);
         }
         FUN_0014f2a8(param_3,param_5,temp_v9,param_6);
         break;

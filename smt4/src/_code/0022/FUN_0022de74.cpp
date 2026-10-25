@@ -53,7 +53,7 @@ DevilPreviewSlots *gameGetSlotTable(void);
 void bitsetSetBit(StatBlock *unit, u32 bit);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void memClear(void *block, s32 size);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* The last previewed id is kept at 0xA5B2 of the work block. */
 struct DevilPreviewWorkView {
@@ -112,7 +112,7 @@ void FUN_0022de74(DevilPreviewWork *work)
             const DevilRecord *devil = (const DevilRecord *)devilGetRecord(id);
             DevilPreviewUnit unit;
 
-            rt_memcpy_w(&unit, current, sizeof(StatBlock));
+            __aeabi_memcpy4(&unit, current, sizeof(StatBlock));
             for (s32 i = 0; i < 16; i++) {
                 unit.reset.clearedWords[i] = 0;
             }

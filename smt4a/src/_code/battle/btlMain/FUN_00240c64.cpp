@@ -60,7 +60,7 @@ u32 asdProcessCreateSimple(const char *, s32, u32, u32, TaskFunc, TaskFunc, void
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 u8 *gameGetSlotTable(void);
 u8 *flagValueGetStorage(void);
-void rt_memcpy_w(void *dest, const void *source, u32 size);
+void __aeabi_memcpy4(void *dest, const void *source, u32 size);
 void rt_memcpy(void *dest, const void *source, u32 size);
 void FUN_0024d9c4(BattleMainState *state);
 void FUN_0024bcd4(void *work);
@@ -79,7 +79,7 @@ void FUN_00240c64(void *start, s32 kind)
     g_btlMain.state = state;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x123);
     g_btlMain.slotTableCopy = (u8 *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x2D30, 1);
-    rt_memcpy_w(g_btlMain.slotTableCopy, gameGetSlotTable(), 0x2D30);
+    __aeabi_memcpy4(g_btlMain.slotTableCopy, gameGetSlotTable(), 0x2D30);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\dds\\program\\battle\\btlMain.cpp", 0x126);
     g_btlMain.flagStorageCopy = (u8 *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x10B8, 1);
     rt_memcpy(g_btlMain.flagStorageCopy, flagValueGetStorage(), 0x10B8);

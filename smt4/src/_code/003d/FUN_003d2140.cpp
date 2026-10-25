@@ -7,7 +7,7 @@ extern "C" {
 int eventCommandDispatchPendingCleanup(void);
 int FUN_002276f8(...);
 int battleResetCounterAndFlag(void);
-int FUN_0027dd9c(...);
+int modelSetResetSlots(...);
 int FUN_0027de24(...);
 int asdSoundSelectSlotB(...);
 int btlUiRecountParty(...);
@@ -73,7 +73,7 @@ extern unsigned int saveResolvePartySlot(int);
 /* Supplied declaration required: FUN_00256898. */
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
-/* Supplied declaration required: FUN_0027dd9c. */
+/* Supplied declaration required: modelSetResetSlots. */
 /* Supplied declaration required: FUN_0027de24. */
 extern int *FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: btlEventSelectTrigger. */
@@ -97,7 +97,7 @@ extern int questGetCurrentRecordHalf4(void);
 /* Supplied declaration required: FUN_003d3ba8. */
 /* Supplied declaration required: objDestroyChild. */
 extern int *FUN_003dbb40(int);
-extern int *FUN_003ddcf4(unsigned int, unsigned int *, int, unsigned int);
+extern int *btlReflectCreateKind10(unsigned int, unsigned int *, int, unsigned int);
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
 
 
@@ -264,7 +264,7 @@ LAB_003d243c:
     temp_v2 = questGetCurrentRecordHalf4();
     piVar2 = (int *)0x0;
     if (temp_v2 != 0) {
-      piVar2 = (int *)FUN_003ddcf4(0,puVar8,temp_v2,0xffffffff);
+      piVar2 = (int *)btlReflectCreateKind10(0,puVar8,temp_v2,0xffffffff);
       return piVar2;
     }
     break;
@@ -362,7 +362,7 @@ code_r0x0027e38c:
     *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) & 0xffff7fff;
     battleResetCounterAndFlag();
     FUN_0027de24(DAT_00435d18);
-    FUN_0027dd9c(DAT_00435d18);
+    modelSetResetSlots(DAT_00435d18);
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;
     eventCommandDispatchPendingCleanup();
     piVar2 = (int *)jyoucyuGetTableEntry(1);

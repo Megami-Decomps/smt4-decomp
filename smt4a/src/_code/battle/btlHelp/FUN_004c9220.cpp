@@ -7,7 +7,7 @@ extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
 BtlMainStateA *btlGetMainState(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second, const void *combatant, u8 mode,
                             u32 argument, u32 context);
 BtlHelpEntryA *FUN_004c8e30(u32 first, u32 second, u32 third);
@@ -70,8 +70,8 @@ BtlHelpEntryA *FUN_004c9220(u32 first, const void *snapshotA, const void *snapsh
     entry->phase = 0;
     entry->first = first;
     entry->context = context;
-    rt_memcpy_w(entry->snapshotA, snapshotA, sizeof(entry->snapshotA));
-    rt_memcpy_w(entry->snapshotB, snapshotB, sizeof(entry->snapshotB));
+    __aeabi_memcpy4(entry->snapshotA, snapshotA, sizeof(entry->snapshotA));
+    __aeabi_memcpy4(entry->snapshotB, snapshotB, sizeof(entry->snapshotB));
     entry->mode = mode;
     entry->counter = 0;
     entry->row = 13;

@@ -7,7 +7,7 @@ extern "C" {
 int nn_cec_CTR_MessageBox_ReadMessage_35791C(int, short *, unsigned int, unsigned int);
 int nn_cec_CTR_Message_InitializeMessage(void);
 int nn_cec_CTR_Message_SetExHeaderWithoutCalc(int, unsigned int, int, short *);
-int rt_memcpy_w(int, short *, int, int, unsigned int, unsigned int, unsigned int, unsigned int);
+int __aeabi_memcpy4(int, short *, int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: nn_cec_CTR_MessageBox_ReadMessage_35791C. */
 /* Supplied declaration required: nn_cec_CTR_Message_InitializeMessage. */
 /* Supplied declaration required: nn_cec_CTR_Message_SetExHeaderWithoutCalc. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 int nn_cec_CTR_MessageBox_ReadMessage_3579D4
@@ -52,7 +52,7 @@ int nn_cec_CTR_MessageBox_ReadMessage_3579D4
       temp_v2 = *(int *)(param_3 + 6);
       temp_v5 = *(int *)(param_3 + 4);
       if (temp_v2 + temp_v5 + 0x20U <= *(unsigned int *)(param_3 + 2)) {
-        rt_memcpy_w(param_2,param_3,0x70,0,unaff_r4,unaff_r5,unaff_r6,unaff_r7);
+        __aeabi_memcpy4(param_2,param_3,0x70,0,unaff_r4,unaff_r5,unaff_r6,unaff_r7);
         temp_v4 = temp_v5 - 0x70;
         if (temp_v4 != 0) {
           psVar5 = param_3 + 0x38;

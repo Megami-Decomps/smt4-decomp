@@ -10,7 +10,7 @@ int distSpatial(void);
 int mathAngleDeltaDegrees(void);
 int FUN_00312ea0(int);
 int mathPositionHeadingDegrees(void);
-int FUN_00384830(void);
+int mathAbsHeadingErrorToPoint(void);
 int FUN_003d4ed8(unsigned int);
 int controllerSetDestination(int, int);
 int controllerSetRotationEulerDegrees(int);
@@ -49,7 +49,7 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_00312ea0. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_00384830. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
@@ -285,7 +285,7 @@ void FUN_00234b30(void)
           if (((*(char *)(DAT_00581280 + 0xf40) != '\0') && (*(char *)(temp_v4 + 0xe) != '\0')) &&
              (*(short *)(temp_v4 + 0x10) == 2)) {
             temp_v10 = *(int *)(temp_v4 + 0x1c);
-            FUN_00384830();
+            mathAbsHeadingErrorToPoint();
             temp_v14 = *(float *)(temp_v4 + 0x28);
             if (temp_v10 >= 0x42dc0000) {
               calcHeadingRoundedToCardinalDirection();

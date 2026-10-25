@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail repeats the "measure the text and add the width" tail in every item-type case (ours is merged into one tail) and keeps the buffer address in r8 for the FUN_0050d740 call; the frame is 4 bytes larger here */
+/* NON_MATCHING: retail repeats the "measure the text and add the width" tail in every item-type case (ours is merged into one tail) and keeps the buffer address in r8 for the ARM_common_memcpy4_7 call; the frame is 4 bytes larger here */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 
 /* The list box work object as the size calculation sees it (observed fields). */
@@ -24,7 +24,7 @@ extern "C" {
 ListBoxMetrics *jobGetWork(void);
 s32 wstrlen(const char *text);
 void textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_0050d740(char *destination, const char *source);
+void ARM_common_memcpy4_7(char *destination, const char *source);
 
 /* Recomputes the size of the list box from its title and items: the widest item (with its value
  * text) gives the width, the number of visible rows the height. */
@@ -48,7 +48,7 @@ void asdListBoxMarkDirty(void)
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
             case ASD_LISTBOX_TOGGLE:
-                FUN_0050d740(text, "_FALSE");
+                ARM_common_memcpy4_7(text, "_FALSE");
                 itemWidth = box->measure(text) + itemWidth + box->charWidth;
                 break;
             case ASD_LISTBOX_INT:

@@ -56,7 +56,7 @@ int dataTable04FindById(void);
 int FUN_0020a320(...);
 int FUN_0020ad6c(...);
 int useCounterStart(void);
-int FUN_002686b8(void);
+int touchMenuClose(void);
 int FUN_00270104(...);
 int btlMainGetUnk14(void);
 int resourceRunOperationIfUnblocked(...);
@@ -172,7 +172,7 @@ extern int FUN_0022a030(unsigned int, int);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0023f328. */
-/* Supplied declaration required: FUN_002686b8. */
+/* Supplied declaration required: touchMenuClose. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_00270104. */
 extern int recordGetModeForId(int);
@@ -712,11 +712,11 @@ joined_r0x0021db60:
       if ((temp_v4 == 9) || (temp_v4 == 0x59)) {
         *(unsigned int *)(param_1 + 0x3884) = *(unsigned int *)(param_1 + 0x3880);
         FUN_0020ad6c(param_1,7,0);
-        FUN_002686b8();
+        touchMenuClose();
         useCounterRelease();
       }
       if (temp_v4 == 10) {
-        FUN_002686b8();
+        touchMenuClose();
         useCounterRelease();
         FUN_0020ad6c(param_1,5,0);
       }

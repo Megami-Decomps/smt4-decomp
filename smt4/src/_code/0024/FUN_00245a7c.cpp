@@ -12,7 +12,7 @@ struct SupportVoiceRecord {
 extern "C" {
 GameOptions *gameGetSupportUnitData();
 s32 gameGetOptionProgressStatus();
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 u32 randRange(u32 maximum);
 u8 FUN_002bfdc4();
 u32 FUN_002bfc24(u32 channel, u32 voice, s32 enabled, u8 kind, f32 left, f32 right);
@@ -28,21 +28,21 @@ u32 FUN_00245a7c(s32 category, u32 excludedVoice)
     s32 index = 0;
     if (gameGetOptionProgressStatus() != 2) {
         for (; index < count; ++index) {
-            rt_memcpy_w(&record, &entries[index], sizeof(record));
+            __aeabi_memcpy4(&record, &entries[index], sizeof(record));
             if (record.progress == progress)
                 break;
         }
     } else {
         progress = gameGetSupportUnitData()->unk46;
         for (; index < count; ++index) {
-            rt_memcpy_w(&record, &entries[index], sizeof(record));
+            __aeabi_memcpy4(&record, &entries[index], sizeof(record));
             if (record.alternateProgress == progress)
                 break;
         }
     }
     if (index >= count)
         return 0;
-    rt_memcpy_w(&record, &entries[index], sizeof(record));
+    __aeabi_memcpy4(&record, &entries[index], sizeof(record));
     u32 candidates[6] = {};
     s32 excludedPosition = -1;
     s8 lastCandidate = -1;

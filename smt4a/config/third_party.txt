@@ -3372,8 +3372,8 @@
 0x001b4208 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue name
 0x001b4690 FUN_001b4690 between
 0x001b4790 FUN_001b4790 between
-0x001b4874 FUN_001b4874 between
-0x001b487c ll_sto_f between
+0x001b4874 __aeabi_ul2f name
+0x001b487c ll_sto_f callers
 0x001b48d4 frem between
 0x001b49fc FUN_001b49fc between
 0x001b4a00 FUN_001b4a00 between
@@ -3998,7 +3998,7 @@
 0x002e7168 _ZN9Obj5590d0C1Ej between
 0x002e7194 onlineObjectCopyValue name
 0x002e71ac rt_memcpy_w144 name
-0x002e71b4 rt_memcpy_w name
+0x002e71b4 __aeabi_memcpy4 name
 0x002e7228 onlineJobSetStateReady name
 0x002e7232 sharedRefRelease name
 0x002e7258 FUN_002e7258 between

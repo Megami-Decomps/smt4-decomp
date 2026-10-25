@@ -43,7 +43,7 @@ int FUN_0037245c(int, int, int);
 int objBSetRecord2000(...);
 int FUN_003df7c4(...);
 int FUN_0048053c(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of void: 15 slot(s), 57 byte(s) */
 typedef struct {
@@ -112,7 +112,7 @@ extern int itemSelectionCanUse(int, int);
 /* Supplied declaration required: FUN_0048053c. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: flagValueIsPositive. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0020dc1c(void)
@@ -241,7 +241,7 @@ LAB_0020de28:
       temp_v14 = 0;
       temp_v15 = 0;
       temp_v16 = 0;
-      rt_memcpy_w(&temp_v7,temp_v2,100);
+      __aeabi_memcpy4(&temp_v7,temp_v2,100);
       if (temp_v6 != 0) {
         FUN_0048053c(temp_v6,&temp_v13);
       }
@@ -275,7 +275,7 @@ LAB_0020de28:
       temp_v19 = 0;
       temp_v20 = 0;
       temp_v21 = 0;
-      rt_memcpy_w(temp_v12,temp_v2,100);
+      __aeabi_memcpy4(temp_v12,temp_v2,100);
       if (temp_v3 != 0) {
         FUN_0048053c(temp_v3,&temp_v18);
       }
@@ -323,7 +323,7 @@ LAB_0020de28:
         temp_v8 = 0;
         temp_v9 = (unsigned char *)0x0;
         temp_v10 = 0;
-        rt_memcpy_w(temp_v12,temp_v2,100);
+        __aeabi_memcpy4(temp_v12,temp_v2,100);
         if (temp_v6 != 0) {
           FUN_0048053c(temp_v6,&temp_v7);
         }
@@ -354,7 +354,7 @@ LAB_0020de28:
       temp_v19 = 0;
       temp_v20 = 0;
       temp_v21 = 0;
-      rt_memcpy_w(temp_v12,temp_v2,100);
+      __aeabi_memcpy4(temp_v12,temp_v2,100);
       if (temp_v3 != 0) {
         FUN_0048053c(temp_v3,&temp_v18);
       }

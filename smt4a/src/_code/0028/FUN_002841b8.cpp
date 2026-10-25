@@ -31,7 +31,7 @@ extern GameStateTerminalView g_gameState;
 extern const u32 DAT_00530a24[19];
 extern const TerminalKeys DAT_00530a70;
 
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 void scrCommMessageSetMode(s32 mode);
 s32 gameFlagIsSet(u32 flag);
@@ -43,7 +43,7 @@ void FUN_0031f208(u8 key);
 void useCounterStart(void);
 u32 FUN_002c7c54(void);
 s32 useCounterIsFinished(void);
-void FUN_002686b8(void);
+void touchMenuClose(void);
 void useCounterRelease(void);
 void obj04Finish(void);
 
@@ -54,7 +54,7 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
 {
     u32 unlockFlags[19];
 
-    rt_memcpy_w(unlockFlags, DAT_00530a24, sizeof(unlockFlags));
+    __aeabi_memcpy4(unlockFlags, DAT_00530a24, sizeof(unlockFlags));
     TerminalKeys keys = DAT_00530a70;
     scrCommMessageSetMode(0);
     s32 unlocked = 0;
@@ -96,7 +96,7 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
     if (useCounterIsFinished() != 0) {
         g_gameState.menuOpen = 0;
         g_gameState.menuKey = 0;
-        FUN_002686b8();
+        touchMenuClose();
         useCounterRelease();
         obj04Finish();
         return -1;
@@ -106,7 +106,7 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
     }
     g_gameState.menuOpen = 0;
     g_gameState.menuKey = 0;
-    FUN_002686b8();
+    touchMenuClose();
     useCounterRelease();
     obj04Finish();
     if (key == 0x55) {

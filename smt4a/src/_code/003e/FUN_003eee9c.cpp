@@ -73,7 +73,7 @@ extern BtlSaveCopies g_btlSaveCopies;
 void *gameGetSlotTable(void);
 void *flagValueGetStorage(void);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 /* Restores the battle state from its snapshot: the save data copies go back and forth, the units and
  * extras are copied between the live arrays and the snapshot, and the per-unit counts are rebuilt. */
@@ -82,23 +82,23 @@ void FUN_003eee9c(BtlRestoreState *state)
     s32 i;
 
     if (g_btlSaveCopies.slotTableOut != NULL) {
-        rt_memcpy_w(g_btlSaveCopies.slotTableOut, gameGetSlotTable(), 0x2D30);
+        __aeabi_memcpy4(g_btlSaveCopies.slotTableOut, gameGetSlotTable(), 0x2D30);
     }
     if (g_btlSaveCopies.flagStorageOut != NULL) {
         rt_memcpy(g_btlSaveCopies.flagStorageOut, flagValueGetStorage(), 0x10B8);
     }
     if (state->snapshot != NULL) {
-        rt_memcpy_w(&state->snapshot->saved[0].unit, &state->units[0], sizeof(BtlUnitData));
-        rt_memcpy_w(&state->snapshot->saved[0].extra, &state->extras[0], sizeof(BtlUnitExtra));
-        rt_memcpy_w(&state->snapshot->saved[1].unit, &state->units[1], sizeof(BtlUnitData));
-        rt_memcpy_w(&state->snapshot->saved[1].extra, &state->extras[1], sizeof(BtlUnitExtra));
-        rt_memcpy_w(&state->snapshot->saved[2].unit, &state->units[2], sizeof(BtlUnitData));
-        rt_memcpy_w(&state->snapshot->saved[2].extra, &state->extras[2], sizeof(BtlUnitExtra));
-        rt_memcpy_w(&state->snapshot->saved[3].unit, &state->units[3], sizeof(BtlUnitData));
-        rt_memcpy_w(&state->snapshot->saved[3].extra, &state->extras[3], sizeof(BtlUnitExtra));
+        __aeabi_memcpy4(&state->snapshot->saved[0].unit, &state->units[0], sizeof(BtlUnitData));
+        __aeabi_memcpy4(&state->snapshot->saved[0].extra, &state->extras[0], sizeof(BtlUnitExtra));
+        __aeabi_memcpy4(&state->snapshot->saved[1].unit, &state->units[1], sizeof(BtlUnitData));
+        __aeabi_memcpy4(&state->snapshot->saved[1].extra, &state->extras[1], sizeof(BtlUnitExtra));
+        __aeabi_memcpy4(&state->snapshot->saved[2].unit, &state->units[2], sizeof(BtlUnitData));
+        __aeabi_memcpy4(&state->snapshot->saved[2].extra, &state->extras[2], sizeof(BtlUnitExtra));
+        __aeabi_memcpy4(&state->snapshot->saved[3].unit, &state->units[3], sizeof(BtlUnitData));
+        __aeabi_memcpy4(&state->snapshot->saved[3].extra, &state->extras[3], sizeof(BtlUnitExtra));
     }
     if (g_btlSaveCopies.slotTableIn != NULL) {
-        rt_memcpy_w(gameGetSlotTable(), g_btlSaveCopies.slotTableIn, 0x2D30);
+        __aeabi_memcpy4(gameGetSlotTable(), g_btlSaveCopies.slotTableIn, 0x2D30);
     }
     if (g_btlSaveCopies.flagStorageIn != NULL) {
         rt_memcpy(flagValueGetStorage(), g_btlSaveCopies.flagStorageIn, 0x10B8);
@@ -107,8 +107,8 @@ void FUN_003eee9c(BtlRestoreState *state)
         for (i = 0; i < BTL_SLOT_COUNT; i++) {
             BtlUnitFlags *unit;
 
-            rt_memcpy_w(&state->units[i], &state->snapshot->restore[i].unit, sizeof(BtlUnitData));
-            rt_memcpy_w(&state->extras[i], &state->snapshot->restore[i].extra, sizeof(BtlUnitExtra));
+            __aeabi_memcpy4(&state->units[i], &state->snapshot->restore[i].unit, sizeof(BtlUnitData));
+            __aeabi_memcpy4(&state->extras[i], &state->snapshot->restore[i].extra, sizeof(BtlUnitExtra));
             unit = (BtlUnitFlags *)&state->units[i];
             if ((state->flags & g_btlSaveCopies.resetKind) != 0) {
                 unit->cleared[0] = 0;

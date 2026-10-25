@@ -7,7 +7,7 @@ extern u8 DAT_004d8b40[];
 extern u8 DAT_004d8ca0[];
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
 EffectSelectionItem *linkedFindItemByIndex(void *list, s32 index);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 EffectSelectionParts *FUN_00246854(EffectSelectionItem *item);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *block);
@@ -40,8 +40,8 @@ extern "C" u32 effectEditorActivateSelection()
     EffectSelectionItem *item = linkedFindItemByIndex(g_effectEditor.selection.list,
         g_effectEditor.selection.index + DAT_0044f858.index);
     g_effectEditor.selection.item = item;
-    rt_memcpy_w(DAT_004d8b40, item, 0x90);
-    rt_memcpy_w(DAT_004d8ca0, item, 0x80);
+    __aeabi_memcpy4(DAT_004d8b40, item, 0x90);
+    __aeabi_memcpy4(DAT_004d8ca0, item, 0x80);
     g_effectEditor.selection.block = item->block;
     EffectSelectionParts *parts = FUN_00246854(item);
     if (parts->type != 0x1b) {

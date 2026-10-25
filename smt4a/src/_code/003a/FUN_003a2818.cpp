@@ -1,4 +1,3 @@
-/* NON_MATCHING: only register naming of the slot address computation differs (retail: ldr r0,[g_mapGimic]; add r1,idx*3; add r0,r0,r1,lsl #3). */
 #include "common.h"
 
 struct GimicObject {
@@ -29,7 +28,8 @@ void FUN_003fd7c0(u32 controller, u32 motion, s32 mode, f32 blend);
 void FUN_003a2818(s32 id, u32 motion)
 {
     for (s32 index = 0; index < 10; ++index) {
-        GimicSlot *slot = &g_mapGimic->slots[index];
+        GimicTable *table = g_mapGimic;
+        GimicSlot *slot = &table->slots[index];
         if (slot->active != 0 && slot->id == id) {
             FUN_003fd7c0(slot->obj->handle, motion, 2, 0.0f);
         }

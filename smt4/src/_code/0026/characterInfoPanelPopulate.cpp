@@ -33,13 +33,13 @@ typedef char CharacterInfoRecordSizeCheck[sizeof(CharacterInfoRecord) == 0x4c ? 
 
 extern "C" {
 char *libc_strcpy(char *destination, const char *source);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void asdTextDrawFormatted(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_002be650(u32 id, u32 flags);
 void FUN_002bcfc0(const char *source, char *destination);
 const char *FUN_002bd06c(u32 demon);
-void FUN_0024ee4c(char *destination, const char *source);
+void ARM_common_memcpy4_7(char *destination, const char *source);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
@@ -77,9 +77,9 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     libc_strcpy(buffer, record->name);
     asdTextDrawFormatted(panel->name, 4, -1u, 0, 0, buffer);
     if (record->flags & 2)
-        rt_memcpy_w(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
+        __aeabi_memcpy4(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
     else
-        rt_memcpy_w(buffer, "\x82\x72\x82\x81\x82\x8d\x82\x95\x82\x92\x82\x81\x82\x89", 15);
+        __aeabi_memcpy4(buffer, "\x82\x72\x82\x81\x82\x8d\x82\x95\x82\x92\x82\x81\x82\x89", 15);
     asdTextDrawFormatted(panel->title, 4, -1u, 0, 0, buffer);
     if (messages)
         asdTextDrawFormatted(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, record->message, 0));
@@ -101,7 +101,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     if (record->demon)
         FUN_002bcfc0(FUN_002bd06c(record->demon), buffer);
     else
-        FUN_0024ee4c(buffer, "\x81\x7c\x81\x7c\x81\x7c");
+        ARM_common_memcpy4_7(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
     if (record->demon)

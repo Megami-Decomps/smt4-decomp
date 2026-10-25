@@ -1,9 +1,9 @@
-/* NON_MATCHING: status-byte access splits its 0x2392 offset differently from retail (0x2000 + 0x392 versus 0x2300 + 0x92). */
 #include "common.h"
 
 extern "C" {
 
-struct StatusDown { u8 unk00[0x2392]; u8 enabled; };
+struct StatusDownPanel { u8 unk00[0x92]; u8 enabled; };
+struct StatusDown { u8 unk00[0x2300]; StatusDownPanel panel; };
 extern StatusDown *g_statusDown;
 
 extern int FUN_002881a0(void);
@@ -11,7 +11,8 @@ extern int FUN_0029ac94(void);
 
 u32 FUN_00288498(void)
 {
-    if (g_statusDown->enabled == 0) return 0;
+    StatusDownPanel *panel = &g_statusDown->panel;
+    if (panel->enabled == 0) return 0;
 
     int value = FUN_002881a0();
     u32 result;

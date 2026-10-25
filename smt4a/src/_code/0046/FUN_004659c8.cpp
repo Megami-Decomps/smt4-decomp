@@ -22,7 +22,7 @@ typedef struct {
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-extern float FUN_001b4874(int, int, int);
+extern float __aeabi_ul2f(int, int, int);
 /* Supplied declaration required: FUN_001cc644. */
 /* Supplied declaration required: FUN_001d0b34. */
 extern int FUN_00461d28(int, unsigned int);
@@ -125,7 +125,7 @@ void FUN_004659c8(int param_1)
       } while (temp_v3 <= temp_v8 && (unsigned int)temp_v9 <= temp_v3 - temp_v8);
     }
     temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20);
-    temp_v11 = (float)FUN_001b4874((unsigned int)temp_v15 - temp_v7,
+    temp_v11 = (float)__aeabi_ul2f((unsigned int)temp_v15 - temp_v7,
                                  (int)((unsigned long long)temp_v15 >> 0x20) - (temp_v8 + ((unsigned int)temp_v15 < temp_v7))
                                  ,temp_v4);
     *(float *)(param_1 + 0x68) = temp_v11 * temp_v13 * 3.7297867e-09f;

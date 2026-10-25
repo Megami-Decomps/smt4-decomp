@@ -13,7 +13,7 @@ int FUN_003fba4c(unsigned int, int, unsigned int, float *, int, int);
 int FUN_0050dda4(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
-int rt_memcpy_w(float [2], int, int);
+int __aeabi_memcpy4(float [2], int, int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -48,7 +48,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_003fba4c. */
 /* Supplied declaration required: FUN_0050dda4. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003d26cc(void)
@@ -123,10 +123,10 @@ unsigned int FUN_003d26cc(void)
   temp_v14 = 0.0f;
   temp_v15 = 0.0f;
   if (*(int *)(temp_v1 + 0x98) != 0) {
-    rt_memcpy_w(temp_v16,temp_v1 + 0xa0,0x44);
+    __aeabi_memcpy4(temp_v16,temp_v1 + 0xa0,0x44);
   }
   else {
-    rt_memcpy_w(temp_v16,temp_v1 + 0xe4,0x44);
+    __aeabi_memcpy4(temp_v16,temp_v1 + 0xe4,0x44);
   }
   temp_v11 = temp_v18 * 40.743664f;
   temp_v6 = temp_v11;

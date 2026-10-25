@@ -13,7 +13,7 @@ char *libc_strcpy(char *, const char *);
 char *FUN_00100d60(char *, s32);
 u32 findRecordByKey(const char *);
 void asdLoadFileAsyncSimple(const char *, char **, s32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const void *);
 void FUN_003afd30(void);
@@ -53,7 +53,7 @@ u32 FUN_004f5a78(BattleMovementEffects *work)
         BattleMovementEffects *effects = static_cast<BattleMovementEffects *>(g_btlEffect.data);
         for (s32 i = 0; i < 4; ++i) {
             BattleMovementEffectResource snapshot;
-            rt_memcpy_w(&snapshot, &effects->resources[i], sizeof(snapshot));
+            __aeabi_memcpy4(&snapshot, &effects->resources[i], sizeof(snapshot));
             if ((snapshot.flags & 1) && snapshot.file == NULL)
                 return 0;
         }

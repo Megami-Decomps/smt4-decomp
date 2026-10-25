@@ -1,4 +1,3 @@
-/* NON_MATCHING: partner-enabled byte load uses an extra ADD; remaining instructions match. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

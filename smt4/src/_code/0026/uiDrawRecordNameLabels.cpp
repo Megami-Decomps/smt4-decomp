@@ -16,8 +16,8 @@ extern "C" {
 void asdTextDrawFormatted(u32 handle, s32 mode, s32 selection, u32 flags, u32 options, const char *text);
 void *FUN_002bd06c(u16 message);
 void FUN_002bcfc0(void *message, char *output);
-void FUN_0024ee4c(char *output, const char *text);
-void rt_memcpy_w(void *output, const void *input, u32 bytes);
+void ARM_common_memcpy4_7(char *output, const char *text);
+void __aeabi_memcpy4(void *output, const void *input, u32 bytes);
 }
 
 // Populate the name, message and optional developer label for this record.
@@ -30,10 +30,10 @@ extern "C" s32 uiDrawRecordNameLabels(RecordLabels *labels, const LabelledRecord
     if (record->message)
         FUN_002bcfc0(FUN_002bd06c(record->message), text);
     else
-        FUN_0024ee4c(text, "\x81\x7c\x81\x7c\x81\x7c");
+        ARM_common_memcpy4_7(text, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(labels->handles[1], 2, -1, 0, 0, text);
     if (record->flags & 2) {
-        rt_memcpy_w(text, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
+        __aeabi_memcpy4(text, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
         asdTextDrawFormatted(labels->handles[2], 2, -1, 0, 0, text);
     }
     labels->active = 1;

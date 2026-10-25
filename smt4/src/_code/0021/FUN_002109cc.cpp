@@ -1,10 +1,10 @@
 /* NON_MATCHING: readable rebuild of the title button-help draw; retail's inlined state push/pop uses pointer arithmetic on the stack top (`piVar[top + 2]`) in a different register assignment and the float x/y order of FUN_002be5a4 is inferred, not verified. */
-#include "gfx/TitleSceneStack.h"
+#include "gfx/RenderStateStack.h"
 
 /* The title scene (its state stack lives at 0x124C). */
 struct TitleScene {
     /* 0x0000 */ u8 unk0000[0x124C];
-    /* 0x124C */ StateStack stack;
+    /* 0x124C */ RenderStateStack stack;
 };
 
 struct LayoutPoint {
@@ -67,7 +67,7 @@ u8 FUN_002109cc(void)
     ButtonHelp *help = g_buttonHelp.block;
     if (help->enabled) {
         FUN_002c39a4(g_titleScene);
-        stateStackPush(&g_titleScene->stack, FUN_002c5d80(1, 0));
+        renderStackPush(&g_titleScene->stack, FUN_002c5d80(1, 0));
         if (help->mode <= 3 && (help->mode < 2 || help->mode == 2 || help->mode == 3)) {
             FUN_00190e48();
             if (help->visible) {
@@ -98,7 +98,7 @@ u8 FUN_002109cc(void)
                 }
             }
         }
-        stateStackPop(&g_titleScene->stack);
+        renderStackPop(&g_titleScene->stack);
         FUN_002c198c(g_titleScene);
         FUN_002c18e4(g_titleScene);
     }

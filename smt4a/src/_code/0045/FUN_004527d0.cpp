@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_004529b0(int, int *);
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 typedef int romwright_code(...);
 extern int FUN_00450a30(int *);
 /* Supplied declaration required: FUN_004529b0. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 int FUN_004527d0(int param_1,int *param_2)
@@ -31,7 +31,7 @@ int FUN_004527d0(int param_1,int *param_2)
   
   temp_v0 = (**(romwright_code **)(*param_2 + 8))(param_2,0x4c,4);
   if (temp_v0 != 0) {
-    rt_memcpy_w(temp_v0,param_1,0x4c);
+    __aeabi_memcpy4(temp_v0,param_1,0x4c);
     puVar4 = (unsigned int *)0x0;
     if (*(int *)(param_1 + 8) != 0) {
       temp_v1 = *(int *)(param_1 + 8) + param_1 + 8;

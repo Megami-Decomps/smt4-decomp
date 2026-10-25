@@ -26,7 +26,7 @@ int VectorSignedToFloat(...);
 int nw_snd_SoundHandle_DetachSound(int *);
 int nw_snd_internal_BasicSound_SetAmbientInfo(...);
 int nw_ut_internal_LinkListImpl_insert(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_7: 32 slot(s), 116 byte(s) */
@@ -101,7 +101,7 @@ extern int FUN_00507c1c(unsigned int, int *, int **);
 extern int *nw_snd_internal_BasicSound_GetAmbientPriority(int *, int *);
 /* Supplied declaration required: nw_snd_internal_BasicSound_SetAmbientInfo. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_0045cba8(unsigned int param_1,int *param_2,int *param_3,int *param_4,int param_5,int param_6,
@@ -668,7 +668,7 @@ LAB_0045d254:
             ppiVar7[0xf] = (int *)0xffffffff;
             *(unsigned short *)((int)ppiVar7 + 0x39) = 0;
             if (temp_v62 != (unsigned int *)0x0) {
-              rt_memcpy_w(&temp_v52,temp_v62,0x44);
+              __aeabi_memcpy4(&temp_v52,temp_v62,0x44);
             }
             else {
               temp_v2 = FUN_00507bc4(*(unsigned int *)(param_1 + 4),temp_v64,&temp_v52);

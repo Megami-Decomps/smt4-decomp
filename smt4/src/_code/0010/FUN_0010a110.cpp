@@ -1,4 +1,3 @@
-/* NON_MATCHING: branch layout: retail branches explicitly (beq) after the first flag test and returns directly when the second flag is clear; built predicates the second load */
 #include "common.h"
 
 extern "C" {
@@ -30,7 +29,13 @@ u8 FUN_0010a110(void)
     TitleWork *work = jobGetWork();
     TitleFlags *flags = &work->flags;
 
-    if (flags->flagA != 0 && flags->flagB != 0 && FUN_002bff10(0) == 0 && work->ready != 0) {
+    if (flags->flagA == 0) {
+        return 0;
+    }
+    if (flags->flagB == 0) {
+        return 0;
+    }
+    if (FUN_002bff10(0) == 0 && work->ready != 0) {
         FUN_002c39a4(g_titleScene);
         FUN_001137fc(0);
     }

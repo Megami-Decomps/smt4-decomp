@@ -1,12 +1,12 @@
 /* NON_MATCHING: readable rebuild from asm of a state scene's draw (a tiled panel, its sprite table and the current state's handler); armcc here orders the render-state pushes and the float stereo offsets differently, and keeps the x offset and loop counters in other registers. */
-#include "gfx/TitleSceneStack.h"
+#include "gfx/RenderStateStack.h"
 
 /* The render context: two render-state stacks. */
 struct RenderCtx {
     /* 0x0000 */ u8 unk0000[0x1258];
-    /* 0x1258 */ StateStack firstStack;
+    /* 0x1258 */ RenderStateStack firstStack;
     /* 0x1278 */ u8 unk1278[0x40];
-    /* 0x12B8 */ StateStack secondStack;
+    /* 0x12B8 */ RenderStateStack secondStack;
 };
 
 struct LayoutPoint {
@@ -61,10 +61,10 @@ void FUN_0047c00c(StateScene *scene)
     FUN_00157558(g_renderCtx);
     RenderCtx *first = g_renderCtx;
     u32 firstState = FUN_001692ac(1, 0);
-    stateStackPush(&first->firstStack, firstState);
+    renderStackPushCounted(&first->firstStack, firstState);
     RenderCtx *second = g_renderCtx;
     s32 secondState = packNibblesAndByte(6, 7, 0);
-    stateStackPush(&second->secondStack, secondState);
+    renderStackPush(&second->secondStack, secondState);
     renderCtxCalculateStereoParallax(g_renderCtx, 0.38f);
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.36f);
     if (textureGetIndexedResource(0x2F) != 0) {
@@ -85,8 +85,8 @@ void FUN_0047c00c(StateScene *scene)
     }
     for (s32 i = 0; i < 11; i++)
         FUN_001835b4(2, 20, 0x7F4 + i, x, 0, 16);
-    stateStackPop(&g_renderCtx->secondStack);
-    stateStackPop(&g_renderCtx->firstStack);
+    renderStackPop(&g_renderCtx->secondStack);
+    renderStackPop(&g_renderCtx->firstStack);
     FUN_00183bb0();
     efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);

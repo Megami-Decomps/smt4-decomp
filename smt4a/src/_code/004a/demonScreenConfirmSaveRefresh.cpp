@@ -71,7 +71,7 @@ s32 scrRunOpcodesStub(u32);
 s32 messageGetChoiceResult();
 LiveDemon *slotEntryFindById(u16);
 s32 gameDataCopySaveEntry(u16, SavedDemon *);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 void gameDataStoreSavedRecord(u16, SavedDemon *);
 void FUN_004a1958(DemonScreen *);
 u32 buttonHelpGetValue();
@@ -108,7 +108,7 @@ void demonScreenConfirmSaveRefresh(DemonScreen *screen)
                 saved.skills[4] = demon->skills[4];
                 saved.data = demon->data;
                 saved.extra = demon->extra;
-                rt_memcpy_w(saved.inherited, demon->inherited, sizeof(saved.inherited));
+                __aeabi_memcpy4(saved.inherited, demon->inherited, sizeof(saved.inherited));
                 saved.flags = demon->flags & 0xf;
                 gameDataStoreSavedRecord(id, &saved);
             }

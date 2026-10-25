@@ -1,4 +1,3 @@
-/* NON_MATCHING: only register naming differs (retail i=r0, scratch r1; built i=r1, scratch r0). */
 #include "common.h"
 
 struct IfRecord {
@@ -25,9 +24,8 @@ void FUN_00378a1c(void)
     for (s32 i = 0; i < 128; i++) {
         IfRecord *record = &g_mapIf->records[i];
         if (record->active != 0) {
-            s32 type = record->type;
-            if (type == 0x1d || type == 0x31 || type == 0x1e || type == 0x1f || type == 0x30 || type == 0x22 ||
-                type == 0x23) {
+            if (record->type == 0x1d || record->type == 0x31 || record->type == 0x1e || record->type == 0x1f || record->type == 0x30 || record->type == 0x22 ||
+                record->type == 0x23) {
                 if (record->state == 8) {
                     record->state = 6;
                 }

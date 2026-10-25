@@ -43,7 +43,7 @@ extern u8 DAT_0061b000;
 
 void sysFatalBreak(void);
 void FUN_0019a46c(void *destination, const void *source, u32 bytes);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 FUN_00427e68(s32 handle, u32 mode);
 s32 FUN_00427e28(u8 *scratch, u8 *request, u32 arg);
 u32 FUN_0016ccfc(void);
@@ -95,7 +95,7 @@ WindowStatusResult FUN_00429580(s32 *handle, const RequestSettings *settings, co
         u8 *resolved;
         result = tokenResolveAddress(FUN_0016ccfc(), &resolved, *handle);
         if (!resultFailed(result)) {
-            rt_memcpy_w(&DAT_0061b030, resolved + 0x54, 0x44);
+            __aeabi_memcpy4(&DAT_0061b030, resolved + 0x54, 0x44);
             DAT_0061b030.unk2C8[0] = resolved[0x98];
             u8 scratch[8];
             result = FUN_00427e28(scratch, &DAT_0061b000, 0);

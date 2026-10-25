@@ -2,7 +2,7 @@
 #include "gfx/VersionedTextureRequest.h"
 
 extern "C" {
-void *rt_memcpy_w(void *output, const void *input, u32 size);
+void *__aeabi_memcpy4(void *output, const void *input, u32 size);
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_00249e54(u32 id, const char *format);
 s32 FUN_0024679c(void);
@@ -21,7 +21,7 @@ u32 FUN_00246f18(VersionedTextureOwner *owner)
     } else {
         VersionedTextureRequest *request = &owner->request;
         VersionedTextureRequest snapshot;
-        rt_memcpy_w(&snapshot, request, sizeof(snapshot));
+        __aeabi_memcpy4(&snapshot, request, sizeof(snapshot));
         if ((snapshot.flags & 1) && !snapshot.format) {
             return 0;
         }

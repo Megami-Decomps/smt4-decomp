@@ -1,239 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eb314` (_code @ 0x3eb314, 0x41c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the hit/magic points through VFP registers (vldr/vstmia) and keeps the unit vitals in other registers; this build uses core registers */
+#include "battle/BattleUnitInit.h"
+
+/* An enemy record as the battle reads it when it builds a unit (halfword indexed in the original
+   data; only the fields this initializer copies are named). */
+struct EnemyRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 level : 15;
+    /* 0x02 */ u16 boss : 1;
+    /* 0x04 */ u32 hp;
+    /* 0x08 */ u32 mp;
+    /* 0x0c */ u16 stats[5];
+    /* 0x16 */ u16 flags;              /* bit 9 / bit 10: unit flags */
+    /* 0x18 */ u8 unk18[0x0c];
+    /* 0x24 */ SkillSlot skills[21];
+    /* 0x4e */ u8 unk4e[2];
+    /* 0x50 */ UnitAffinities affinities;
+    /* 0x60 */ u8 unk60[0x13];
+    /* 0x73 */ u8 category;
+    /* 0x74 */ u8 unk74[0x18];
+    /* 0x8c */ s16 unk8c;
+    /* 0x8e */ u8 unk8e[0x14];
+    /* 0xa2 */ s8 flagA2;
+    /* 0xa3 */ s8 flagA3;
+    /* 0xa4 */ u8 unka4[0x46];
+};
+
+/* The battle state's progress counter. */
+struct EnemyBattle {
+    /* 0x00 */ u8 unk00[0xf0];
+    /* 0xf0 */ s32 phase;
+};
 
 extern "C" {
+void sysMemClear(void *memory, u32 size);
+void clearTwoWords(void *words);
+void rt_memclr(void *memory, u32 size);
+DemonModelInfo *FUN_00184310(u32 id);
+s32 gameProgressIsAdvanced(void);
+u32 gameDataGetTableValue(void);
+s32 FUN_001f4da0(s32 sourceId);
 
-int FUN_00184310(void);
-int FUN_001f4da0(void);
-int sysMemClear(unsigned char *, int);
-int rt_memclr(unsigned char *, int);
-int clearTwoWords(unsigned char *);
-int VectorSignedToFloat(...);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_001f4da0. */
-extern unsigned int gameDataGetTableValue(void);
-extern int gameProgressIsAdvanced(void);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: clearTwoWords. */
-
-
-void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
-
+/* Initializes a battle unit's state block from an enemy record, then scales its numbers up with
+   the game's progress grade once the story has advanced. */
+void FUN_003eb314(EnemyBattle *battle, BattleUnitState *unit, EnemyRecord *record)
 {
-/* irregular: irregular input(s): in_fpscr; 7 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  short temp_v4;
-  int temp_v5;
-  short temp_v6;
-  unsigned char temp_v7;
-  unsigned int in_fpscr;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  float temp_v10;
-  unsigned int temp_v11;
-  float temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  float temp_v15;
-  float temp_v16;
-  
-  *param_2 = 4;
-  *(unsigned short *)(param_2 + 8) = 0xffff;
-  *(unsigned short *)(param_2 + 2) = *param_3;
-  *(unsigned short *)(param_2 + 4) = 0xffff;
-  *(unsigned short *)(param_2 + 6) = 0xffff;
-  sysMemClear(param_2 + 0xc,200);
-  *(int *)(param_2 + 0xc) = (int)(short)param_3[0x46];
-  param_2[0xd4] = (unsigned char)((unsigned short)param_3[1] >> 0xf);
-  temp_v0 = *(char *)(param_3 + 0x51);
-  temp_v7 = temp_v0 == '\0';
-  if (temp_v7) {
-    temp_v0 = *(char *)((int)param_3 + 0xa3);
-  }
-  if (!(temp_v7 && temp_v0 == '\0')) {
-    param_2[0xd4] = 1;
-  }
-  else {
-    param_2[0xd4] = 0;
-  }
-  if ((param_3[0xb] & 0x200) != 0) {
-    param_2[0xd5] = 1;
-  }
-  else {
-    param_2[0xd5] = 0;
-  }
-  if ((param_3[0xb] & 0x400) != 0) {
-    param_2[0xd6] = 1;
-  }
-  else {
-    param_2[0xd6] = 0;
-  }
-  param_2[0xd7] = 1;
-  temp_v8 = *(unsigned int *)(param_3 + 2);
-  *(unsigned int *)(param_2 + 0xd8) = temp_v8;
-  temp_v9 = *(unsigned int *)(param_3 + 2);
-  *(unsigned int *)(param_2 + 0xdc) = temp_v9;
-  temp_v11 = *(unsigned int *)(param_3 + 4);
-  *(unsigned int *)(param_2 + 0xe0) = temp_v11;
-  temp_v14 = *(unsigned int *)(param_3 + 4);
-  *(unsigned int *)(param_2 + 0xe4) = temp_v14;
-  *(unsigned short *)(param_2 + 0xe8) = param_3[6];
-  *(unsigned short *)(param_2 + 0xea) = param_3[7];
-  *(unsigned short *)(param_2 + 0xec) = param_3[8];
-  *(unsigned short *)(param_2 + 0xee) = param_3[9];
-  *(unsigned short *)(param_2 + 0xf0) = param_3[10];
-  *(unsigned int *)(param_2 + 0xf4) = temp_v8;
-  *(unsigned int *)(param_2 + 0xf8) = temp_v9;
-  *(unsigned int *)(param_2 + 0xfc) = temp_v11;
-  *(unsigned int *)(param_2 + 0x100) = temp_v14;
-  *(unsigned int *)(param_2 + 0x104) = *(unsigned int *)(param_2 + 0xe8);
-  *(unsigned int *)(param_2 + 0x108) = *(unsigned int *)(param_2 + 0xec);
-  *(unsigned int *)(param_2 + 0x10c) = *(unsigned int *)(param_2 + 0xf0);
-  *(unsigned short *)(param_2 + 0x110) = 0;
-  *(unsigned short *)(param_2 + 0x112) = 0;
-  *(unsigned short *)(param_2 + 0x114) = 0;
-  *(unsigned short *)(param_2 + 0x116) = param_3[1] & 0x7fff;
-  *(unsigned int *)(param_2 + 0x228) = 0;
-  clearTwoWords(param_2 + 0x1be);
-  clearTwoWords(param_2 + 0x1c6);
-  clearTwoWords(param_2 + 0x1ce);
-  rt_memclr(param_2 + 0x1d6,0x50);
-  temp_v5 = 0x15;
-  temp_v3 = 0;
-  do {
-    *(unsigned short *)(param_2 + temp_v3 * 2 + 0x128) = param_3[temp_v3 + 0x12];
-    temp_v1 = param_3[temp_v3 + 0x12];
-    temp_v5 = temp_v5 - 1;
-    *(unsigned short *)(param_2 + temp_v3 * 2 + 0x152) = temp_v1;
-    param_2[temp_v3 + 0x1a6] = (unsigned char)(temp_v1 >> 10);
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v5 != 0);
-  param_2[0x1bb] = *(unsigned char *)((int)param_3 + 0x73);
-  temp_v2 = (unsigned int)*(unsigned short *)(param_2 + 2);
-  FUN_00184310();
-  temp_v0 = *(char *)(temp_v2 + 9);
-  if (temp_v0 == '\x01') {
-    param_2[0x1bc] = 1;
-  }
-  else if (temp_v0 == '\x04') {
-    param_2[0x1bc] = 0;
-  }
-  else if (temp_v0 == '\x05') {
-    param_2[0x1bc] = 2;
-  }
-  temp_v8 = *(unsigned int *)(param_3 + 0x2a);
-  temp_v9 = *(unsigned int *)(param_3 + 0x2c);
-  temp_v11 = *(unsigned int *)(param_3 + 0x2e);
-  *(unsigned int *)(param_2 + 0x118) = *(unsigned int *)(param_3 + 0x28);
-  *(unsigned int *)(param_2 + 0x11c) = temp_v8;
-  *(unsigned int *)(param_2 + 0x120) = temp_v9;
-  *(unsigned int *)(param_2 + 0x124) = temp_v11;
-  sysMemClear(param_2 + 0x17c,0x15);
-  *(unsigned int *)(param_2 + 0x191) = 0;
-  *(unsigned int *)(param_2 + 0x195) = 0;
-  *(unsigned int *)(param_2 + 0x199) = 0;
-  *(unsigned int *)(param_2 + 0x19d) = 0;
-  *(unsigned int *)(param_2 + 0x1a1) = 0;
-  param_2[0x1a5] = 0;
-  temp_v3 = gameProgressIsAdvanced();
-  if (temp_v3 != 0) {
-    temp_v8 = gameDataGetTableValue();
-    temp_v12 = 0.0f;
-    temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v10) << 0x1d);
-    if ((romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) && (temp_v12 = temp_v10, (int)temp_v10 >= 0x41100001)) {
-      temp_v12 = 9.0f;
+    unit->kind = 4;
+    unit->unk008 = -1;
+    unit->sourceId = record->id;
+    unit->unk004 = -1;
+    unit->unk006 = -1;
+    sysMemClear(&unit->unk00C, 200);
+    unit->unk00C = record->unk8c;
+    unit->clearedD4[0] = record->boss;
+    if (record->flagA2 != 0 || record->flagA3 != 0) {
+        unit->clearedD4[0] = 1;
+    } else {
+        unit->clearedD4[0] = 0;
     }
-    temp_v16 = temp_v12 * temp_v12;
-    temp_v6 = 999;
-    temp_v10 = (float)VectorUnsignedToFloat
-                              ((unsigned int)*(unsigned short *)(param_2 + 0x116),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v13 = (unsigned int)(temp_v10 * (temp_v12 * 0.55f + 1.0f) + temp_v16 * 5.0f);
-    temp_v1 = (unsigned short)temp_v13;
-    *(unsigned short *)(param_2 + 0x116) = temp_v1;
-    if ((temp_v13 & 0xffff) >= 0x3e7) {
-      temp_v1 = 999;
+    if ((record->flags & 0x200) != 0) {
+        unit->clearedD4[1] = 1;
+    } else {
+        unit->clearedD4[1] = 0;
     }
-    *(unsigned short *)(param_2 + 0x116) = temp_v1;
-    temp_v15 = (float)VectorSignedToFloat(*(unsigned int *)(param_2 + 0xf8),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v10 = temp_v12 * 0.3f + 1.0f + temp_v16 * 0.06666667f;
-    temp_v3 = (int)(temp_v10 * temp_v15);
-    *(int *)(param_2 + 0xf8) = temp_v3;
-    if (temp_v3 >= 0x98967f) {
-      temp_v3 = 9999999;
+    if ((record->flags & 0x400) != 0) {
+        unit->clearedD4[2] = 1;
+    } else {
+        unit->clearedD4[2] = 0;
     }
-    temp_v15 = (float)VectorSignedToFloat(*(unsigned int *)(param_2 + 0x100),(unsigned char)(temp_v2 >> 0x16) & 3);
-    *(int *)(param_2 + 0xf8) = temp_v3;
-    temp_v5 = (int)(temp_v10 * temp_v15);
-    *(int *)(param_2 + 0x100) = temp_v5;
-    if (temp_v5 >= 0x98967f) {
-      temp_v5 = 9999999;
+    unit->clearedD4[3] = 1;
+    unit->current.hp = record->hp;
+    unit->current.maxHp = record->hp;
+    unit->current.mp = record->mp;
+    unit->current.level = record->mp;
+    unit->current.stats[0] = record->stats[0];
+    unit->current.stats[1] = record->stats[1];
+    unit->current.stats[2] = record->stats[2];
+    unit->current.stats[3] = record->stats[3];
+    unit->current.stats[4] = record->stats[4];
+    unit->initial = unit->current;
+    unit->unk110 = 0;
+    unit->unk112 = 0;
+    unit->unk114 = 0;
+    unit->unk116 = record->level;
+    unit->unk228 = 0;
+    clearTwoWords(unit->clear1BE);
+    clearTwoWords(unit->clear1C6);
+    clearTwoWords(unit->clear1CE);
+    rt_memclr(unit->clear1D6, 0x50);
+    for (s32 i = 0; i < 21; i++) {
+        unit->skills[i] = record->skills[i];
+        unit->learnable[i] = record->skills[i];
+        unit->learnableCategory[i] = unit->learnable[i].category;
     }
-    *(int *)(param_2 + 0xf4) = temp_v3;
-    *(int *)(param_2 + 0x100) = temp_v5;
-    *(int *)(param_2 + 0xfc) = temp_v5;
-    temp_v12 = temp_v12 * 0.25f + 1.0f + temp_v16 * 0.033333335f;
-    temp_v10 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x104),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v4 = (short)(int)(temp_v12 * temp_v10);
-    *(short *)(param_2 + 0x104) = temp_v4;
-    if (temp_v4 >= 0x3e7) {
-      temp_v4 = temp_v6;
+    unit->unk1BB = record->category;
+    DemonModelInfo *model = FUN_00184310(unit->sourceId);
+    if (model->kind == 1) {
+        unit->unk1BC = 1;
+    } else if (model->kind == 4) {
+        unit->unk1BC = 0;
+    } else if (model->kind == 5) {
+        unit->unk1BC = 2;
     }
-    *(short *)(param_2 + 0x104) = temp_v4;
-    temp_v10 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x106),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v4 = (short)(int)(temp_v12 * temp_v10);
-    *(short *)(param_2 + 0x106) = temp_v4;
-    if (temp_v4 >= 0x3e7) {
-      temp_v4 = temp_v6;
-    }
-    *(short *)(param_2 + 0x106) = temp_v4;
-    temp_v10 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x108),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v4 = (short)(int)(temp_v12 * temp_v10);
-    *(short *)(param_2 + 0x108) = temp_v4;
-    if (temp_v4 >= 0x3e7) {
-      temp_v4 = temp_v6;
-    }
-    *(short *)(param_2 + 0x108) = temp_v4;
-    temp_v10 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x10a),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v4 = (short)(int)(temp_v12 * temp_v10);
-    *(short *)(param_2 + 0x10a) = temp_v4;
-    if (temp_v4 >= 0x3e7) {
-      temp_v4 = temp_v6;
-    }
-    *(short *)(param_2 + 0x10a) = temp_v4;
-    temp_v10 = (float)VectorSignedToFloat((int)*(short *)(param_2 + 0x10c),(unsigned char)(temp_v2 >> 0x16) & 3);
-    temp_v4 = (short)(int)(temp_v12 * temp_v10);
-    if (temp_v4 < 999) {
-      temp_v6 = temp_v4;
-    }
-    *(short *)(param_2 + 0x10c) = temp_v4;
-    *(short *)(param_2 + 0x10c) = temp_v6;
-    temp_v3 = gameProgressIsAdvanced();
-    if ((temp_v3 != 0) && (-1 < *(int *)(param_1 + 0xf0))) {
-      temp_v3 = (int)*(short *)(param_2 + 2);
-      FUN_001f4da0();
-      if (0 < temp_v3) {
-        if (*(int *)(param_2 + 0xf8) < temp_v3) {
-          temp_v3 = *(int *)(param_2 + 0xf8);
+    unit->affinities = record->affinities;
+    sysMemClear(unit->flagsA, 0x15);
+    unit->flagsB.first = 0;
+    unit->flagsB.second = 0;
+    unit->flagsB.third = 0;
+    unit->flagsB.fourth = 0;
+    unit->flagsB.fifth = 0;
+    unit->flagsB.last = 0;
+
+    if (gameProgressIsAdvanced() != 0) {
+        f32 grade = (f32)(s32)gameDataGetTableValue();
+        f32 clamped = 0.0f;
+        if (0.0f <= grade) {
+            clamped = grade;
+            if (grade > 9.0f) {
+                clamped = 9.0f;
+            }
         }
-        *(int *)(param_2 + 0xf4) = temp_v3;
-      }
+        f32 square = clamped * clamped;
+        u16 level = (u16)(u32)((f32)unit->unk116 * (clamped * 0.55f + 1.0f) + square * 5.0f);
+        if (level >= 999) {
+            level = 999;
+        }
+        unit->unk116 = level;
+        f32 vitalsScale = clamped * 0.3f + 1.0f + square * 0.06666667f;
+        s32 maxHp = (s32)(vitalsScale * (f32)unit->initial.maxHp);
+        unit->initial.maxHp = maxHp;
+        if (maxHp >= 9999999) {
+            maxHp = 9999999;
+        }
+        unit->initial.maxHp = maxHp;
+        s32 level2 = (s32)(vitalsScale * (f32)unit->initial.level);
+        unit->initial.level = level2;
+        if (level2 >= 9999999) {
+            level2 = 9999999;
+        }
+        unit->initial.hp = maxHp;
+        unit->initial.level = level2;
+        unit->initial.mp = level2;
+        f32 statScale = clamped * 0.25f + 1.0f + square * 0.033333335f;
+        for (s32 i = 0; i < 5; i++) {
+            s16 stat = (s16)(s32)(statScale * (f32)(s32)(s16)unit->initial.stats[i]);
+            if (stat >= 999) {
+                stat = 999;
+            }
+            unit->initial.stats[i] = stat;
+        }
+        if (gameProgressIsAdvanced() != 0 && battle->phase >= 0) {
+            s32 hp = FUN_001f4da0(unit->sourceId);
+            if (hp > 0) {
+                if (unit->initial.maxHp < hp) {
+                    hp = unit->initial.maxHp;
+                }
+                unit->initial.hp = hp;
+            }
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

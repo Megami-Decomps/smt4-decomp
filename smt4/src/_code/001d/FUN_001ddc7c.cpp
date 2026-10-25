@@ -1,24 +1,18 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 16 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "shard/W4_W4Match2_UiQuest.h"
 
-struct QuestDrawWorkIV {
-    u32 unk00;
-    u32 mode;
-    u8 unk008[0x5ea];
-    u8 hidden;
-};
 extern "C" {
 extern RenderCtx *g_titleScene;
 s32 FUN_002c5d80(u32 mode, u32 flags);
 void FUN_001a6d98();
 
-u32 FUN_001ddc7c(QuestDrawWorkIV **context)
+u32 FUN_001ddc7c()
 {
-    QuestDrawWorkIV *work = *context;
-    if (!work->hidden) {
+    UiQuest *quest = g_uiQuest;
+    if (!quest->panel.unkF2) {
         RenderCtx *render = g_titleScene;
         renderCtxPushA(render, FUN_002c5d80(1, 0));
-        switch (work->mode) {
+        switch (quest->state) {
         case 1:
         case 2:
         case 3:

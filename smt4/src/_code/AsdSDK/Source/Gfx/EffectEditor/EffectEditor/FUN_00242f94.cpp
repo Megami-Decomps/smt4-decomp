@@ -14,7 +14,7 @@ void effEditorNodeChainApply(EffectEditorOptions *options);
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 clear);
 void effMenuListAppend(EffMenuNode *node, s32 list);
 s32 padIsButtonPressed(u32 button);
-u8 FUN_0024dd80(s32 button);
+u8 padAlternateButtonIndex(s32 button);
 
 u32 FUN_00242f94(f32 *selection, u32 value, EffectEditorOptions *options)
 {
@@ -39,7 +39,7 @@ u32 FUN_00242f94(f32 *selection, u32 value, EffectEditorOptions *options)
     node->unk04 = 12;
     node->unk18 = value;
     effMenuListAppend(node, 3);
-    if (padIsButtonPressed(1) || padIsButtonPressed(FUN_0024dd80(1))) {
+    if (padIsButtonPressed(1) || padIsButtonPressed(padAlternateButtonIndex(1))) {
         result = 0x400000;
     } else if (options->unk10 & 8) {
         result = reinterpret_cast<u32>(&DAT_00400003);

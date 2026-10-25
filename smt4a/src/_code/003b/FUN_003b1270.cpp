@@ -1,4 +1,3 @@
-/* NON_MATCHING: indexed candidate flag query mask/register scheduling differs from retail. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -21,10 +20,9 @@ u32 FUN_003b1270(void)
         FUN_00301a08(choice, &first, &count);
         for (s32 index = first; index < count + first; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-            u64 flags = entry->flags;
-            if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
-                (flags & g_btlCandidateMasks.required) != 0 &&
-                (flags & g_btlCandidateMasks.excluded) == 0 &&
+            if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+                (entry->flags & g_btlCandidateMasks.required) != 0 &&
+                (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
                 entry->indexedFlags.values[flag] != 0) {
                 scrSetResult(1);
                 return 1;

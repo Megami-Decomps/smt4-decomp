@@ -1,4 +1,3 @@
-/* NON_MATCHING: unit addressing uses separate add/ldr instead of retail writeback ldr, adding one instruction. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
@@ -20,8 +19,7 @@ u32 FUN_003123a4(void)
     FUN_002499fc(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlUnitEntry *unit = &btlGetMainState()->units[index];
-        u32 flags = unit->flags;
-        if (!(flags & 0x10) && (flags & 1) && !(flags & 0x40) && unit->groupId == id &&
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id &&
             (unit->values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;

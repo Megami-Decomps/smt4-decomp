@@ -10,7 +10,7 @@ int FUN_00307bf4(...);
 int vectorCount32_00307c16(int *);
 int vectorCount32_00307c1e(...);
 int FUN_0030ed3c(...);
-int rt_memcpy_w(int, unsigned int, int);
+int __aeabi_memcpy4(int, unsigned int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int rt_malloc(void);
 /* Supplied declaration required: vectorCount32_00307c16. */
 /* Supplied declaration required: vectorCount32_00307c1e. */
 /* Supplied declaration required: FUN_0030ed3c. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00133508(int *param_1,int param_2,unsigned int param_3)
@@ -49,7 +49,7 @@ void FUN_00133508(int *param_1,int param_2,unsigned int param_3)
     param_1[1] = temp_v7 + 0x20;
     FUN_0030ed3c(param_1,temp_v7);
     recordArrayCopyBackward(param_2,temp_v7 - 0x20,temp_v7);
-    rt_memcpy_w(param_2,param_3,0x20);
+    __aeabi_memcpy4(param_2,param_3,0x20);
   }
   else {
     temp_v2 = vectorCount32_00307c16(param_1);

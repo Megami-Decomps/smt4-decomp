@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001c6b34(unsigned int *, int, int);
-int rt_memcpy_w(unsigned int *, int, int);
+int __aeabi_memcpy4(unsigned int *, int, int);
 
 /* Supplied declaration required: FUN_001c6b34. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int * FUN_001c3d20(int *param_1,unsigned int *param_2,int param_3)
@@ -24,14 +24,14 @@ unsigned int * FUN_001c3d20(int *param_1,unsigned int *param_2,int param_3)
   }
   temp_v0 = param_1[1];
   if (-1 < temp_v0) {
-    rt_memcpy_w(param_2,param_1[0x2d] + *(int *)(param_1[0x30] + temp_v0 * 4) * 4,
+    __aeabi_memcpy4(param_2,param_1[0x2d] + *(int *)(param_1[0x30] + temp_v0 * 4) * 4,
                 *(int *)(param_1[0x2e] + temp_v0 * 4) << 2);
     puVar3 = param_2 + *(int *)(param_1[0x2e] + param_1[1] * 4);
     *puVar3 = param_1[0x2a] | 0x7fff0000;
     param_2 = puVar3 + 2;
     puVar3[1] = 0xf0280;
   }
-  rt_memcpy_w(param_2,param_1[0x2d] + *(int *)(param_1[0x30] + *param_1 * 4) * 4,
+  __aeabi_memcpy4(param_2,param_1[0x2d] + *(int *)(param_1[0x30] + *param_1 * 4) * 4,
               *(int *)(param_1[0x2e] + *param_1 * 4) << 2);
   param_2 = param_2 + *(int *)(param_1[0x2e] + *param_1 * 4);
   *param_2 = param_1[0x29] | 0x7fff0000;
@@ -48,7 +48,7 @@ unsigned int * FUN_001c3d20(int *param_1,unsigned int *param_2,int param_3)
   }
   param_2[4] = temp_v1;
   param_2[5] = 0x20253;
-  rt_memcpy_w(param_2 + 6,param_1[0x2b] + *(int *)(param_1[0x32] + param_1[2] * 4) * 4,
+  __aeabi_memcpy4(param_2 + 6,param_1[0x2b] + *(int *)(param_1[0x32] + param_1[2] * 4) * 4,
               *(int *)(param_1[0x2c] + param_1[2] * 4) << 2);
   return param_2 + 6 + *(int *)(param_1[0x2c] + param_1[2] * 4);
 }

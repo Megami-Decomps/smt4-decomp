@@ -1,5 +1,5 @@
-/* NON_MATCHING: block layout and weak-hook nop placement differ from retail (see smt4 twin FUN_002d8910); logic equivalent. */
 #include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 void FUN_004a0bac(s32 a, s32 b);
@@ -22,6 +22,7 @@ s32 FUN_00348850(s32 phase)
     if (phase == 0) {
         if (scrGetCommandFrame() == 0) {
             FUN_004a0bac(0, 1);
+            asdDebugHookVoid();
             scrWorkSetValue(0, 0);
             scrWorkSetValue(1, 0);
             scrWorkSetValue(2, 0);
@@ -74,6 +75,7 @@ s32 FUN_00348850(s32 phase)
     }
     if (phase == 1 && scrGetCommandFrame() == 0) {
         FUN_004a0bac(0, 1);
+        asdDebugHookVoid();
         scrWorkSetValue(0, 0);
         scrWorkSetValue(1, 0);
         scrWorkSetValue(2, 0);

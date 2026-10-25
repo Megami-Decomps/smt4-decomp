@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reserves 24 stack bytes for two range outputs; entry writeback addressing and level-load registers differ. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
@@ -20,8 +19,7 @@ u32 FUN_002ff964(void)
     FUN_002499fc(group, &start, &count);
     for (s32 index = start; index < start + count; ++index) {
         BtlUnitEntry *entry = &btlGetMainState()->units[index];
-        u32 flags = entry->flags;
-        if ((flags & 0x10) == 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
+        if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 &&
             entry->groupId == id && entry->level >= minimumLevel) {
             scrSetResult(1);
             return 1;

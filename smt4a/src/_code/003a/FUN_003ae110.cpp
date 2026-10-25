@@ -1,4 +1,3 @@
-/* NON_MATCHING: the animation narrowing is scheduled after the initial global load rather than before it. */
 #include "map/mapGimic.h"
 
 extern "C" {
@@ -8,7 +7,8 @@ void FUN_003fd7c0(u32 handle, u32 animation, u32 mode, f32 time);
 void FUN_003ae110(s32 id, u32 animation, u32 value, s32 delay)
 {
     for (s32 index = 0; index < MAP_GIMIC_SLOTS; ++index) {
-        MapGimicSlot *slot = &g_mapGimic->slots[index];
+        MapGimic *gimic = g_mapGimic;
+        MapGimicSlot *slot = &gimic->slots[index];
         if (slot->active && slot->id == id) {
             FUN_003fd7c0(slot->obj->handle, animation, 2, 0.0f);
             slot->unk0C = value;

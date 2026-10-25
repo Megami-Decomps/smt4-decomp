@@ -116,7 +116,7 @@ int controllerGetSourceTiming(...);
 int FUN_003fd7c0(...);
 int FUN_004a0524(...);
 int FUN_004a08f0(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int CONCAT44(...);
 int gameFlagsGetBlock(...);
@@ -436,7 +436,7 @@ extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: FUN_002b7f18. */
 /* Supplied declaration required: FUN_002d871c. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00397c1c) */
@@ -1283,10 +1283,10 @@ LAB_002b82a8:
     fStack_2c = temp_v18;
     temp_v32 = gameFlagsGetBlock();
     soundVolumeSettingGet();
-    rt_memcpy_w(afStack_2e8,&DAT_00531c18,0xa0);
-    rt_memcpy_w(afStack_248,&DAT_00531cb8,0xa0);
-    rt_memcpy_w(afStack_1a8,&DAT_00531d58,0xa0);
-    rt_memcpy_w(afStack_108,&DAT_00531df8,0xa0);
+    __aeabi_memcpy4(afStack_2e8,&DAT_00531c18,0xa0);
+    __aeabi_memcpy4(afStack_248,&DAT_00531cb8,0xa0);
+    __aeabi_memcpy4(afStack_1a8,&DAT_00531d58,0xa0);
+    __aeabi_memcpy4(afStack_108,&DAT_00531df8,0xa0);
     temp_v18 = (float)g_lmapScene[10];
     temp_v33 = romwright_piece_4_4(g_lmapScene[0xb],g_lmapScene[0xc]);
     mapEaseSceneHeading();
@@ -5370,7 +5370,7 @@ code_r0x00313648:
   case 0x23:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    rt_memcpy_w(afStack_1a8,0x531fd8,0x188);
+    __aeabi_memcpy4(afStack_1a8,0x531fd8,0x188);
     temp_v32 = piVar18[1];
     if (temp_v32 == 0) {
       piVar18[0x15] = 0;
@@ -6050,7 +6050,7 @@ code_r0x00313648:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
     mapEaseSceneHeading();
-    rt_memcpy_w(afStack_1a8,0x531f38,0xa0);
+    __aeabi_memcpy4(afStack_1a8,0x531f38,0xa0);
     piVar18 = g_lmapScene;
     temp_v6 = g_lmapScene[1];
     if (temp_v6 == 0) {
@@ -8165,7 +8165,7 @@ LAB_00246d70:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
     mapEaseSceneHeading();
-    rt_memcpy_w(temp_v43,0x531e98,0xa0);
+    __aeabi_memcpy4(temp_v43,0x531e98,0xa0);
     piVar18 = g_lmapScene;
     if (g_lmapScene[1] != 0) {
       if (g_lmapScene[1] != 1) {

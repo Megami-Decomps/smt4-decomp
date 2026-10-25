@@ -1,4 +1,3 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 19 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "battle/Talk/btlTalkBustUp.h"
 
@@ -17,21 +16,22 @@ void renderCtxResetColorScale(RenderCtxA *context);
 u32 FUN_00321544()
 {
     BtlTalkBustUp *portrait = g_btlTalkBustUp;
-    if (portrait != NULL) {
-        FUN_00157558(g_renderCtx);
-        RenderCtxA *context = g_renderCtx;
-        renderCtxPushA(context, FUN_001692ac(1, 0));
-        if (portrait->unk2F4 != 0 && portrait->state == 2) {
-            s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
-            if (aocJobIsValid() != 0 || btlMainIsSecondJobValid() != 0) {
-                parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
-            }
-            FUN_003d939c(portrait, static_cast<f32>(parallax));
-        }
-        renderStackPop(&g_renderCtx->stackA);
-        skinObjectUpdateMatrices(g_renderCtx);
-        renderCtxResetColorScale(g_renderCtx);
+    if (portrait == NULL) {
+        return 0;
     }
+    FUN_00157558(g_renderCtx);
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushA(context, FUN_001692ac(1, 0));
+    if (portrait->unk2F4 != 0 && portrait->state == 2) {
+        s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
+        if (aocJobIsValid() != 0 || btlMainIsSecondJobValid() != 0) {
+            parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
+        }
+        FUN_003d939c(portrait, static_cast<f32>(parallax));
+    }
+    renderStackPop(&g_renderCtx->stackA);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
     return 0;
 }
 }

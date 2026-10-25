@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the entity's flags with a writeback load (ldr r1, [r0, r1, lsl #3]!), reusing r0 as the entity pointer; built computes the pointer into r2 first */
 #include "common.h"
 
 extern "C" {
@@ -27,9 +26,8 @@ u32 FUN_0030b080(void)
 
     for (i = 0; i < 109; i++) {
         Entity0030b080 *entity = &btlGetMainState()->entities[i];
-        u32 flags = entity->flags;
 
-        if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 && btlEntryHasActionSkillCategory(entity, arg) != 0) {
+        if ((entity->flags & 0x10) != 0 && (entity->flags & 1) != 0 && (entity->flags & 0x40) == 0 && btlEntryHasActionSkillCategory(entity, arg) != 0) {
             scrSetResult(1);
             return 1;
         }

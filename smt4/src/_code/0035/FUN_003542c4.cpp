@@ -8,7 +8,7 @@ int FUN_00239e14(int, int);
 int FUN_00239ed0(unsigned int, unsigned char *);
 int FUN_002ba81c(unsigned char *, unsigned int *, int);
 int _ZN18WindowStatusResultC1Ej(...);
-int rt_memcpy_w(unsigned char *, int, int);
+int __aeabi_memcpy4(unsigned char *, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern unsigned int FUN_002b5c44(void);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_003542c4(unsigned int param_1,int *param_2,unsigned int *param_3,unsigned int *param_4,int param_5)
@@ -54,7 +54,7 @@ void FUN_003542c4(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
     temp_v3 = FUN_002b5c44();
     temp_v2 = tokenResolveAddress(temp_v3,&temp_v5,*param_2);
     if (-1 < temp_v2) {
-      rt_memcpy_w(&DAT_004c7030,temp_v5 + 0x54,0x44);
+      __aeabi_memcpy4(&DAT_004c7030,temp_v5 + 0x54,0x44);
       temp_v0 = (char)param_3[1];
       if (temp_v0 == '\0') {
         DAT_004c707c = 0x8c;

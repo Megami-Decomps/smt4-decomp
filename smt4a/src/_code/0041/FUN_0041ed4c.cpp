@@ -12,7 +12,7 @@ void FUN_0033449c(s32 enabled);
 void FUN_0023b45c(s32 enabled);
 void FUN_002c8538(s32 enabled);
 UnitRecord *gameGetPlayerData();
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0038b5fc(s32 kind, u16 value);
 void FUN_0019de98(s32 slot, u32 color);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
@@ -38,7 +38,7 @@ void FUN_0041ed4c(SavedUnitSelection *editor)
         editor->changed = 0;
         if (!editor->changes[editor->selected])
             FUN_0023b45c(0);
-        rt_memcpy_w(gameGetPlayerData(), &editor->editor.stats, sizeof(UnitSevenStats));
+        __aeabi_memcpy4(gameGetPlayerData(), &editor->editor.stats, sizeof(UnitSevenStats));
         FUN_0038b5fc(1, editor->editor.stats.values[4]);
         FUN_0038b5fc(2, editor->editor.stats.values[5]);
         FUN_0038b5fc(0, editor->editor.stats.values[3]);

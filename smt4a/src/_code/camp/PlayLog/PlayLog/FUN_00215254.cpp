@@ -38,7 +38,7 @@ void FUN_0014e188(UiSpriteState *sprite, u32 table, s32 image, Params002c312c *p
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 channel, s32 frame);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
 void FUN_0022feb0(void *work);
-void rt_memcpy_w(void *output, const void *input, u32 size);
+void __aeabi_memcpy4(void *output, const void *input, u32 size);
 void FUN_00203b40(Obj4221a4 *window, u32 count, s32 rows, s32 first, s32 second, s32 third);
 const PlayLogPlayerViewA *gameDataBlocksGetTable(void);
 
@@ -60,15 +60,14 @@ void FUN_00215254(void)
                reinterpret_cast<u32>(DAT_0052dd98.second), sizeof(DAT_0052dd98.second), 0, 0, 0, 0,
                reinterpret_cast<u32>(DAT_0052dd98.third), sizeof(DAT_0052dd98.third));
     for (s32 index = 0; index < 5; ++index) {
-        UiSpriteState *sprite = &work->sprites[index];
-        FUN_0014e188(sprite, 0x25, 0, &work->parameters, 1, 1.0f);
-        uiSpriteSetKeyframe(sprite, 2, 0);
-        uiSpriteSetImageKeyframe(sprite, 0, 0);
+        FUN_0014e188((&work->sprites[index]), 0x25, 0, &work->parameters, 1, 1.0f);
+        uiSpriteSetKeyframe((&work->sprites[index]), 2, 0);
+        uiSpriteSetImageKeyframe((&work->sprites[index]), 0, 0);
     }
     FUN_0022feb0(work);
     work->page = 0;
-    rt_memcpy_w(work->values, work->pages[0].values, sizeof(work->values));
-    rt_memcpy_w(work->details, work->pages[work->page].details, sizeof(work->details));
+    __aeabi_memcpy4(work->values, work->pages[0].values, sizeof(work->values));
+    __aeabi_memcpy4(work->details, work->pages[work->page].details, sizeof(work->details));
     FUN_00203b40(&work->window, work->pages[work->page].count, 5, 1, 0, 1);
     work->hasPlayer = 0;
     if (gameDataBlocksGetTable()->id != 0)

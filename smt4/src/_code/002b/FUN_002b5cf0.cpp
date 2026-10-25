@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001394d4(unsigned int *, int, int, unsigned int, unsigned int);
 int nn_gr_CTR_Shader_MakeLoadCommand(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001394d4. */
 /* Supplied declaration required: nn_gr_CTR_Shader_MakeLoadCommand. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int * FUN_002b5cf0(int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
@@ -39,7 +39,7 @@ unsigned int * FUN_002b5cf0(int *param_1,unsigned int *param_2,unsigned int para
     puVar1[2] = 0;
     puVar1[3] = 0xf02a5;
     temp_v0 = nn_gr_CTR_Shader_MakeLoadCommand(param_1,puVar1 + 4,0x2a6,param_1 + 0x25,param_1[0xa5]);
-    rt_memcpy_w(temp_v0,param_1 + param_1[1] * 0x24a + 0xda,param_1[param_1[1] + 0x4a1a] << 2);
+    __aeabi_memcpy4(temp_v0,param_1 + param_1[1] * 0x24a + 0xda,param_1[param_1[1] + 0x4a1a] << 2);
     puVar3 = (unsigned int *)(temp_v0 + param_1[param_1[1] + 0x4a1a] * 4);
     *puVar3 = param_1[0xa8] | 0x7fff0000;
     param_2 = puVar3 + 2;
@@ -58,7 +58,7 @@ unsigned int * FUN_002b5cf0(int *param_1,unsigned int *param_2,unsigned int para
   puVar1[2] = 0;
   puVar1[3] = 0xf02d5;
   temp_v0 = nn_gr_CTR_Shader_MakeLoadCommand(param_1,puVar1 + 4,0x2d6,param_1 + 0x25,param_1[0xa5]);
-  rt_memcpy_w(temp_v0,param_1 + *param_1 * 0x24a + 0xda,param_1[*param_1 + 0x4a1a] << 2);
+  __aeabi_memcpy4(temp_v0,param_1 + *param_1 * 0x24a + 0xda,param_1[*param_1 + 0x4a1a] << 2);
   puVar3 = (unsigned int *)(temp_v0 + param_1[*param_1 + 0x4a1a] * 4);
   *puVar3 = param_1[0xa7] | 0x7fff0000;
   puVar3[1] = 0xf02b0;
@@ -74,7 +74,7 @@ unsigned int * FUN_002b5cf0(int *param_1,unsigned int *param_2,unsigned int para
   }
   puVar3[4] = temp_v1;
   puVar3[5] = 0x20253;
-  rt_memcpy_w(puVar3 + 6,param_1 + 0xa9,param_1[0xd9] << 2);
+  __aeabi_memcpy4(puVar3 + 6,param_1 + 0xa9,param_1[0xd9] << 2);
   return puVar3 + 6 + param_1[0xd9];
 }
 

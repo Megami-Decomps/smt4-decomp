@@ -18,7 +18,7 @@ typedef struct GameDataBlocks {
 
 extern GameDataBlocks g_gameDataBlocks;
 
-void rt_memcpy_w(void *dst, void *src, u32 size);
+void __aeabi_memcpy4(void *dst, void *src, u32 size);
 
 /* Copies entry `index` of the save block's table to `dest`; returns 0 for an out-of-range index. */
 u32 gameDataCopySaveEntry(u32 index, void *dest)
@@ -31,7 +31,7 @@ u32 gameDataCopySaveEntry(u32 index, void *dest)
     }
     block = g_gameDataBlocks.saveBlock;
     entry = &block->entries[index];
-    rt_memcpy_w(dest, entry, 0x50);
+    __aeabi_memcpy4(dest, entry, 0x50);
     return 1;
 }
 

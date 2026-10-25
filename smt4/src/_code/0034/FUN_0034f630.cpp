@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00126f04(int id);
+int sndVoiceStart(int id);
 
 typedef struct Handle {
     /* 0x00 */ u8 unk00[0xC];
@@ -15,7 +15,7 @@ typedef struct Handle {
 void FUN_0034f630(Handle *handle)
 {
     if ((handle->id != -1) && (handle->state == 0)) {
-        FUN_00126f04(handle->id);
+        sndVoiceStart(handle->id);
         handle->state = 1;
         handle->done = 0;
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: confirmed-byte access does not reuse retail's selection pointer. */
 /* Updates the screen cursor, then finishes a confirmed selection once help is idle. */
 #include "shard/Shard004A.h"
 
@@ -10,6 +9,7 @@ void pointConvertToFloat(f32 *position, s32 x, s32 y);
 s32 buttonHelpIsNotActive(void);
 void FUN_003343f0(s32 value);
 void FUN_0032cfe0(Screen4A *screen);
+s8 recordGetSignedFlags(const void *record);
 
 void FUN_004a2404(Screen4A *screen)
 {
@@ -19,7 +19,7 @@ void FUN_004a2404(Screen4A *screen)
     s32 y = vec2GetYInt(selection);
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);
-    if (screen->input.confirmed && buttonHelpIsNotActive()) {
+    if (recordGetSignedFlags(selection) != 0 && buttonHelpIsNotActive()) {
         FUN_003343f0(0);
         screen->state = 2;
         screen->unk18 = 0;

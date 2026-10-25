@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r0, [pc, #140] differs from recovered ldr r0, [pc, #136]. */
+/* NON_MATCHING: flag extraction now matches (and #16; lsrs #4); retail allocates the flag word in r2 and updates it in place (bic r2, r2, #112) where the build uses r1/r3 (register choice only). */
 #include "common.h"
 
 namespace {
@@ -35,7 +35,8 @@ u32 FUN_004d7e20(AocRequestView* request)
     const u32 flags = g_aocMain->unk754;
     g_aocMain->unk754 = flags & ~0x70u;
 
-    if ((flags & 0x10u) >> 4) {
+    u32 failed = (flags & 0x10u) >> 4;
+    if (failed) {
         request->status = 1;
         if (request->unk08) {
             asdMemFree(request->unk08);

@@ -31,7 +31,7 @@ int FUN_004bcb54(...);
 int FUN_004bcd90(...);
 int dispatchIfFound(...);
 int bitsAt60Set(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 35 slot(s), 140 byte(s) */
 typedef struct {
@@ -109,7 +109,7 @@ extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: dispatchIfFound. */
 extern unsigned long long bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Set. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00261a28(int param_1)
@@ -343,8 +343,8 @@ void FUN_00261a28(int param_1)
     gameFlagSetValue(0x43e,1);
     gameFlagSetValue(0x441,1);
   }
-  rt_memcpy_w(temp_v0 + 0x21e94,temp_v1 + 0x21e94,0x100);
-  rt_memcpy_w(temp_v0 + 0x21f94,temp_v1 + 0x21f94,0x100);
+  __aeabi_memcpy4(temp_v0 + 0x21e94,temp_v1 + 0x21e94,0x100);
+  __aeabi_memcpy4(temp_v0 + 0x21f94,temp_v1 + 0x21f94,0x100);
   temp_v5 = 0;
   *(unsigned int *)(temp_v0 + 0x2204c) = *(unsigned int *)(temp_v1 + 0x21d90);
   *(unsigned int *)(temp_v0 + 0x21e44) = *(unsigned int *)(temp_v1 + 0x21e44);
@@ -386,8 +386,8 @@ void FUN_00261a28(int param_1)
   *(unsigned int *)(temp_v0 + 0x27e34) = temp_v12;
   *(unsigned int *)(temp_v0 + 0x27e24) = temp_v10;
   *(unsigned int *)(temp_v0 + 0x27e28) = temp_v13;
-  rt_memcpy_w(temp_v0 + 0x27184,temp_v1 + 0x27184,0xc80);
-  rt_memcpy_w(temp_v0 + 0x28310,temp_v1 + 0x28310,0x50);
+  __aeabi_memcpy4(temp_v0 + 0x27184,temp_v1 + 0x27184,0xc80);
+  __aeabi_memcpy4(temp_v0 + 0x28310,temp_v1 + 0x28310,0x50);
   temp_v9 = *(unsigned int *)(temp_v1 + 0x28364);
   temp_v10 = *(unsigned int *)(temp_v1 + 0x28368);
   temp_v11 = *(unsigned int *)(temp_v1 + 0x2836c);
@@ -503,7 +503,7 @@ void FUN_00261a28(int param_1)
   if (temp_v34 != 0) {
     gameFlagSetValue(0x4f7,1);
   }
-  rt_memcpy_w(temp_v0 + 0x54,temp_v1 + 0x54,0x12);
+  __aeabi_memcpy4(temp_v0 + 0x54,temp_v1 + 0x54,0x12);
   temp_v6 = 0;
   temp_v27 = 0;
   temp_v21 = temp_v1 + 0x2d34;
@@ -538,7 +538,7 @@ void FUN_00261a28(int param_1)
         break;
       case 1:
         FUN_0048111c(temp_v22,temp_v21,(int)*(char *)(temp_v35 + 3));
-        rt_memcpy_w(temp_v24,temp_v23,0x10e8);
+        __aeabi_memcpy4(temp_v24,temp_v23,0x10e8);
         temp_v2 = flagValueIsPositive(0xac);
         if (temp_v2 != 0) {
           temp_v9 = FUN_001ba3d4(0xac);
@@ -551,7 +551,7 @@ void FUN_00261a28(int param_1)
         }
         break;
       case 2:
-        rt_memcpy_w(temp_v20,temp_v1 + 0x5ed4,0x19000);
+        __aeabi_memcpy4(temp_v20,temp_v1 + 0x5ed4,0x19000);
         break;
       case 4:
         *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v1 + 4);
@@ -573,7 +573,7 @@ void FUN_00261a28(int param_1)
           if (temp_v8 && temp_v5 != 0) {
             dispatchIfFound(0);
             temp_v3 = gameGetSlotRecord(0);
-            rt_memcpy_w(temp_v3,temp_v4,300);
+            __aeabi_memcpy4(temp_v3,temp_v4,300);
             *(unsigned char *)(temp_v3 + 0x66) = 0;
             *(unsigned char *)(temp_v3 + 0x67) = 0;
             *(unsigned char *)(temp_v3 + 0x12a) = 0;
@@ -591,7 +591,7 @@ void FUN_00261a28(int param_1)
         } while (temp_v2 < 0x18);
         break;
       case 7:
-        rt_memcpy_w(temp_v20,temp_v1 + 0x5ed4,0x19000);
+        __aeabi_memcpy4(temp_v20,temp_v1 + 0x5ed4,0x19000);
         temp_v3 = 0;
         temp_v2 = 0;
         do {
@@ -606,7 +606,7 @@ void FUN_00261a28(int param_1)
         temp_v5 = 0;
         do {
           temp_v2 = FUN_003e4d68(temp_v5 & 0xffff);
-          rt_memcpy_w(temp_v2,temp_v1 + temp_v5 * 0x134 + 0x1de0,0x134);
+          __aeabi_memcpy4(temp_v2,temp_v1 + temp_v5 * 0x134 + 0x1de0,0x134);
           FUN_003e48dc(*(unsigned short *)(temp_v2 + 300));
           temp_v5 = temp_v5 + 1;
         } while ((int)temp_v5 < 0xc);
@@ -620,7 +620,7 @@ void FUN_00261a28(int param_1)
     gameFlagSetValue(0x410,1);
   }
   FUN_0046bd44(g_aocSystem);
-  rt_memcpy_w(temp_v0 + 0x29478,temp_v1 + 0x29478,0x290);
+  __aeabi_memcpy4(temp_v0 + 0x29478,temp_v1 + 0x29478,0x290);
   temp_v7 = 0;
   do {
     temp_v6 = *(int *)(temp_v0 + 0x29478 + temp_v7 * 0x28 + 0x10);

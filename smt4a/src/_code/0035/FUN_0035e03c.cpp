@@ -1,225 +1,190 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035e03c` (_code @ 0x35e03c, 0x3f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout and stack frame differ (retail places the effect-12 halving block after the effect-11 scan and keeps the scan's unprotected flag in a stack slot) */
+#include "common.h"
+
+/* The player's record (only the fields used here). */
+struct EffectPlayer {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2c */ s16 value;
+    /* 0x2e */ u8 unk2e[2];
+    /* 0x30 */ u32 experience;
+    /* 0x34 */ u8 unk34[0x2e];
+    /* 0x62 */ u16 level;
+};
+
+/* A party unit's record (only the fields used here). */
+struct EffectUnit {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2c */ s16 value;
+    /* 0x2e */ u8 unk2e[2];
+    /* 0x30 */ u32 experience;
+    /* 0x34 */ u8 unk34[0x10];
+    /* 0x44 */ u32 pendingA;
+    /* 0x48 */ u32 pendingB;
+    /* 0x4c */ s8 boosts[18];
+    /* 0x5e */ u8 unk5e[4];
+    /* 0x62 */ u16 level;
+    /* 0x64 */ u16 race;
+};
+
+/* The item effect being applied (only the fields used here). */
+struct ItemEffect {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u16 id;
+    /* 0x32 */ u8 unk32[0x16];
+    /* 0x48 */ u16 experiencePercent;
+    /* 0x4a */ u16 points;
+    /* 0x4c */ u8 unk4c[8];
+    /* 0x54 */ u16 requirement;
+    /* 0x56 */ s8 boosts[18];
+    /* 0x68 */ u32 flags;
+};
+
+/* A skill record's flag word. */
+struct EffectSkill {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u32 flags;
+};
 
 extern "C" {
+extern s32 g_gameState;
+EffectPlayer *gameGetPlayerData(void);
+EffectUnit *gameGetSlotRecord(s32 slot);
+u32 randRange(u32 range);
+EffectSkill *dataTable41FindById(u16 id);
+void playerGetWords(u16 *words, s32 index);
+s32 playerHasFlagBit(u32 bit);
+void playerMaskSetBit(u32 bit);
+void halves34Copy(EffectUnit *unit, u16 *words);
+s32 bitsAt60Test(EffectUnit *unit, u32 bit);
+void bitsAt60Set(EffectUnit *unit, u32 bit);
+u32 FUN_004ccbf0(u16 level);
+u32 FUN_004cc8d8(u16 level, u16 race);
+s32 FUN_002e5c2c(void);
+void gameDataAddCappedPoints(u16 points);
+s32 FUN_003df4a4(void);
+void FUN_004bd17c(EffectUnit *unit);
 
-int gameDataAddCappedPoints(int);
-int dataTable41FindById(void);
-int playerGetWords(unsigned short [10], int);
-int playerMaskSetBit(int);
-int halves34Copy(int, unsigned short [10]);
-int FUN_004bd17c(int);
-int bitsAt60Set(int, int);
-int FUN_004cc8d8(int, int);
-int FUN_004ccbf0(int);
-int SBORROW4(int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4C; /* 0x4c: local_4c */
-} param_4_stack;
-
-extern int g_gameState; /* 0x5f15fc */
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern unsigned int randRange(unsigned int);
-extern int gameGetPlayerData(void);
-extern int gameGetSlotRecord(void);
-/* Supplied declaration required: gameDataAddCappedPoints. */
-extern int FUN_002e5c2c(void);
-/* Supplied declaration required: dataTable41FindById. */
-extern int FUN_003df4a4(void);
-/* Supplied declaration required: playerGetWords. */
-extern int playerHasFlagBit(unsigned int);
-/* Supplied declaration required: playerMaskSetBit. */
-/* Supplied declaration required: halves34Copy. */
-/* Supplied declaration required: FUN_004bd17c. */
-extern int bitsAt60Test(int, unsigned int);
-/* Supplied declaration required: bitsAt60Set. */
-/* Supplied declaration required: FUN_004cc8d8. */
-/* Supplied declaration required: FUN_004ccbf0. */
-
-
-unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
-
+/* Applies a consumable's secondary effects to the player (target < 0) or a party unit: the chance
+   effects of effects 11 and 12, the experience gain, the point reward and the stat boosts. With
+   `preview` set nothing is written. Returns 0 when the effect did something. */
+u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
 {
-/* irregular: 3 goto(s); 10 native warning(s); review required */
-  int temp_v0;
-  char temp_v1;
-  short temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  unsigned int temp_v10;
-  unsigned char temp_v11;
-  unsigned short temp_v12 [10];
-  
-  temp_v9 = 0;
-  temp_v8 = 0;
-  if (param_1 < 0) {
-    temp_v9 = gameGetPlayerData();
-  }
-  else {
-    temp_v8 = gameGetSlotRecord();
-    if (temp_v8 == 0) {
-      return 1;
-    }
-  }
-  temp_v10 = 1;
-  if (param_4 == 0) {
-    if (*(short *)(param_2 + 0x30) != 0xb) {
-      if ((!(*(short *)(param_2 + 0x30) != 0xc || param_3 != 0)) &&
-         (temp_v4 = randRange(99), 0x18 >= temp_v4)) {
-        if (temp_v9 != 0) {
-          temp_v2 = *(short *)(temp_v9 + 0x2c);
+    EffectPlayer *player = NULL;
+    EffectUnit *unit = NULL;
+    if (target < 0) {
+        player = gameGetPlayerData();
+    } else {
+        unit = gameGetSlotRecord(target);
+        if (unit == NULL) {
+            return 1;
         }
-        else {
-          temp_v2 = *(short *)(temp_v8 + 0x2c);
+    }
+    u32 result = 1;
+    if (preview == 0) {
+        if (effect->id == 11) {
+            if (check == 0 && randRange(99) < 25) {
+                u16 words[10];
+                s32 hasBit;
+                if (player != NULL) {
+                    playerGetWords(words, 0);
+                    hasBit = playerHasFlagBit(5);
+                } else {
+                    halves34Copy(unit, words);
+                    hasBit = bitsAt60Test(unit, 5);
+                }
+                if (hasBit == 0) {
+                    bool unprotected = true;
+                    for (s32 i = 0; i < 8; i++) {
+                        EffectSkill *skill = dataTable41FindById(words[i]);
+                        if (skill != NULL && (skill->flags & 0x400000) != 0) {
+                            unprotected = false;
+                            break;
+                        }
+                    }
+                    if (unprotected) {
+                        if (player != NULL) {
+                            playerMaskSetBit(5);
+                        } else {
+                            bitsAt60Set(unit, 5);
+                        }
+                        result = 0;
+                    }
+                }
+            }
+        } else if (effect->id == 12 && check == 0) {
+            if (randRange(99) < 25) {
+                if (player != NULL) {
+                    player->value = player->value / 2;
+                } else {
+                    unit->value = unit->value / 2;
+                }
+                result = 0;
+            }
         }
-        if (temp_v9 != 0) {
-          *(short *)(temp_v9 + 0x2c) = temp_v2 / 2;
+    }
+
+    if (effect->experiencePercent != 0 &&
+        ((player != NULL && FUN_004ccbf0(player->level) != player->experience) ||
+         (unit != NULL && FUN_004cc8d8(unit->level, unit->race) != unit->experience))) {
+        if (preview == 0) {
+            if (player != NULL) {
+                player->experience += (s32)(effect->experiencePercent * FUN_004ccbf0(player->level)) / 100;
+                if (FUN_004ccbf0(player->level) < player->experience) {
+                    player->experience = FUN_004ccbf0(player->level);
+                }
+            } else if (unit != NULL) {
+                unit->experience += (s32)(effect->experiencePercent * FUN_004cc8d8(unit->level, unit->race)) / 100;
+                if (FUN_004cc8d8(unit->level, unit->race) < unit->experience) {
+                    unit->experience = FUN_004cc8d8(unit->level, unit->race);
+                }
+            }
         }
-        else {
-          *(short *)(temp_v8 + 0x2c) = temp_v2 / 2;
+        result = 0;
+    }
+    if (effect->points != 0 && player != NULL && FUN_002e5c2c() != 9999) {
+        if (preview == 0) {
+            gameDataAddCappedPoints(effect->points);
         }
-        temp_v10 = 0;
-      }
+        result = 0;
     }
-    else if ((param_3 == 0) && (temp_v4 = randRange(99), 0x18 >= temp_v4)) {
-      if (temp_v9 != 0) {
-        playerGetWords(temp_v12,0);
-        temp_v3 = playerHasFlagBit(5);
-      }
-      else {
-        halves34Copy(temp_v8,temp_v12);
-        temp_v3 = bitsAt60Test(temp_v8,5);
-      }
-      if (temp_v3 == 0) {
-        temp_v3 = 0;
-        do {
-          temp_v4 = (unsigned int)temp_v12[temp_v3];
-          dataTable41FindById();
-          if ((temp_v4 != 0) && ((*(unsigned int *)(temp_v4 + 0x44) & 0x400000) != 0)) goto LAB_0035e194;
-          temp_v3 = temp_v3 + 1;
-        } while (temp_v3 < 8);
-        if (temp_v9 != 0) {
-          playerMaskSetBit(5);
+
+    if (effect->id == 0x79f) {
+        result = g_gameState == 24 ? 0 : 1;
+    }
+    if (effect->id == 0x7af) {
+        result = 0;
+    }
+    if (effect->id == 0x7b6) {
+        result = 0;
+        if (player == NULL || effect->requirement == 0 || FUN_003df4a4() != 0) {
+            result = 1;
         }
-        else {
-          bitsAt60Set(temp_v8,5);
+    }
+
+    if (unit != NULL) {
+        for (s32 i = 0; i < 18; i++) {
+            s32 cap = i >= 14 ? 5 : 9;
+            if (effect->boosts[i] != 0 && unit->boosts[i] > 0 && cap > unit->boosts[i]) {
+                result = 0;
+                if (preview != 0) {
+                    break;
+                }
+                s8 boosted = unit->boosts[i] + effect->boosts[i];
+                if (boosted <= cap) {
+                    cap = boosted;
+                }
+                unit->boosts[i] = boosted;
+                unit->boosts[i] = cap;
+                unit->pendingA = 0;
+                unit->pendingB = 0;
+                FUN_004bd17c(unit);
+            }
         }
-        temp_v10 = 0;
-      }
     }
-  }
-LAB_0035e194:
-  if ((*(short *)(param_2 + 0x48) != 0) &&
-     (((temp_v9 != 0 &&
-       (temp_v3 = FUN_004ccbf0(*(unsigned short *)(temp_v9 + 0x62)), temp_v3 != *(int *)(temp_v9 + 0x30))) ||
-      ((temp_v8 != 0 &&
-       (temp_v3 = FUN_004cc8d8(*(unsigned short *)(temp_v8 + 0x62),*(unsigned short *)(temp_v8 + 100)),
-       temp_v3 != *(int *)(temp_v8 + 0x30))))))) {
-    if (param_4 == 0) {
-      if (temp_v9 != 0) {
-        temp_v3 = FUN_004ccbf0(*(unsigned short *)(temp_v9 + 0x62));
-        *(int *)(temp_v9 + 0x30) =
-             (int)((unsigned int)*(unsigned short *)(param_2 + 0x48) * temp_v3) / 100 + *(int *)(temp_v9 + 0x30);
-        temp_v4 = FUN_004ccbf0(*(unsigned short *)(temp_v9 + 0x62));
-        if (temp_v4 < *(unsigned int *)(temp_v9 + 0x30)) {
-          temp_v10 = FUN_004ccbf0(*(unsigned short *)(temp_v9 + 0x62));
-          *(unsigned int *)(temp_v9 + 0x30) = temp_v10;
-        }
-      }
-      else if (temp_v8 != 0) {
-        temp_v3 = FUN_004cc8d8(*(unsigned short *)(temp_v8 + 0x62),*(unsigned short *)(temp_v8 + 100));
-        *(int *)(temp_v8 + 0x30) =
-             (int)((unsigned int)*(unsigned short *)(param_2 + 0x48) * temp_v3) / 100 + *(int *)(temp_v8 + 0x30);
-        temp_v4 = FUN_004cc8d8(*(unsigned short *)(temp_v8 + 0x62),*(unsigned short *)(temp_v8 + 100));
-        if (temp_v4 < *(unsigned int *)(temp_v8 + 0x30)) {
-          temp_v10 = FUN_004cc8d8(*(unsigned short *)(temp_v8 + 0x62),*(unsigned short *)(temp_v8 + 100));
-          *(unsigned int *)(temp_v8 + 0x30) = temp_v10;
-        }
-      }
+    if (player != NULL && (effect->flags & 1) != 0) {
+        result = 0;
     }
-    temp_v10 = 0;
-  }
-  if ((*(short *)(param_2 + 0x4a) != 0 && temp_v9 != 0) && (temp_v3 = FUN_002e5c2c(), temp_v3 != 9999)) {
-    if (param_4 == 0) {
-      gameDataAddCappedPoints(*(unsigned short *)(param_2 + 0x4a));
-    }
-    temp_v10 = 0;
-  }
-  temp_v2 = *(short *)(param_2 + 0x30);
-  if (temp_v2 == 0x79f) {
-    if (g_gameState == 0x18) {
-      temp_v10 = 0;
-    }
-    else {
-      temp_v10 = 1;
-    }
-  }
-  if (temp_v2 == 0x7af) {
-    temp_v10 = 0;
-  }
-  if (temp_v2 == 0x7b6) {
-    temp_v2 = 0x7b6;
-    if (temp_v9 != 0) {
-      temp_v2 = *(short *)(param_2 + 0x54);
-    }
-    temp_v10 = 0;
-    if ((temp_v9 == 0 || temp_v2 == 0) || (temp_v3 = FUN_003df4a4(), temp_v3 != 0)) {
-      temp_v10 = 1;
-    }
-  }
-  if (temp_v8 == 0) {
-LAB_0035e408:
-    if ((temp_v9 != 0) && ((*(unsigned int *)(param_2 + 0x68) & 1) != 0)) {
-      temp_v10 = 0;
-    }
-    if (param_3 == 0) {
-      temp_v10 = 0;
-    }
-    return temp_v10;
-  }
-  temp_v3 = 0;
-  do {
-    temp_v5 = 9;
-    while( 1 ) {
-      temp_v1 = *(char *)(param_2 + temp_v3 + 0x56);
-      if (temp_v1 != '\0') {
-        temp_v6 = temp_v8 + temp_v3;
-        temp_v7 = (int)*(char *)(temp_v6 + 0x4c);
-        temp_v11 = temp_v7 == 0;
-        temp_v0 = temp_v7;
-        if (0 < temp_v7) {
-          temp_v0 = temp_v5 - temp_v7;
-          temp_v11 = temp_v5 == temp_v7;
-        }
-        if (!temp_v11 && temp_v0 < 0 == (0 < temp_v7 && SBORROW4(temp_v5,temp_v7))) {
-          temp_v10 = 0;
-          if (param_4 != 0) goto LAB_0035e408;
-          temp_v1 = *(char *)(temp_v6 + 0x4c) + temp_v1;
-          if (temp_v1 <= temp_v5) {
-            temp_v5 = (int)temp_v1;
-          }
-          *(char *)(temp_v6 + 0x4c) = temp_v1;
-          *(char *)(temp_v6 + 0x4c) = (char)temp_v5;
-          *(unsigned int *)(temp_v8 + 0x44) = 0;
-          *(unsigned int *)(temp_v8 + 0x48) = 0;
-          FUN_004bd17c(temp_v8);
-        }
-      }
-      temp_v3 = temp_v3 + 1;
-      if (temp_v3 >= 0x12) goto LAB_0035e408;
-      if ((temp_v3 != 0xe && temp_v3 != 0xf) && (temp_v3 != 0x10 && temp_v3 != 0x11)) break;
-      temp_v5 = 5;
-    }
-  } while( 1 );
+    return check == 0 ? 0 : result;
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: O3 folds completion normalization to TST instead of AND/LSRS; ID/record saved registers and conditional move placement differ (107/106). */
+/* NON_MATCHING: questId/record saved registers are swapped (retail r5/r6) and retail predicates `mov r0, questId` before the id >= 0x15e branch. */
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 
@@ -46,7 +46,8 @@ bool questIsOfferable(u16 questId)
     if (record->excludedQuests[1] != 0 && questIsCompleted(record->excludedQuests[1]) != 0) {
         return false;
     }
-    if (questGetRuntimeStatus(questId)->completed() != 0 && (record->metadata.flags & 2) == 0) {
+    u32 completed = questGetRuntimeStatus(questId)->completed();
+    if (completed != 0 && (record->metadata.flags & 2) == 0) {
         return false;
     }
     if (questId >= 0x15e) {

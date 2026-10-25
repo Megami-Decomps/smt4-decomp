@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail addresses the globals of this block as separate arrays anchored on one base register (they were defined in the same translation unit); a single extern struct addresses them directly */
+/* NON_MATCHING: retail addresses the globals of this block as separate arrays anchored on one base register (they were defined in the same translation unit); a single extern struct addresses them directly. Tried defining head struct + the slot arrays in the unit: armcc then derives the arrays by add/sub from one literal as retail, but places the (largest) head object after the small arrays, so the chain runs the wrong way. */
 #include "shard/S1GfxModel.h"
 
 extern "C" {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the null checks on the two actor lookups differ: retail tests the returned pointer in place (cmp r0, #0 followed by a linker NOP) and reuses r0 as the zero result, built copies it to r1 first. */
 #include "common.h"
 
 extern "C" {
@@ -27,7 +26,6 @@ ActorB *dataTable08Sub2GetRecord(u32 actor);
 u32 FUN_0047fe44(u32 actor)
 {
     Command *command = FUN_0019c06c();
-    u32 result;
 
     if (command == NULL) {
         return 0;
@@ -40,11 +38,10 @@ u32 FUN_0047fe44(u32 actor)
         case 0xC: {
             ActorA *a = dataTable8FindRecord(actor);
 
-            result = 0;
-            if (a != NULL) {
-                result = (a->flags & 8) >> 3;
+            if (a == NULL) {
+                return 0;
             }
-            break;
+            return (a->flags & 8) >> 3;
         }
         case 2:
         case 3:
@@ -55,14 +52,12 @@ u32 FUN_0047fe44(u32 actor)
         case 8: {
             ActorB *b = dataTable08Sub2GetRecord(actor);
 
-            result = 0;
-            if (b != NULL) {
-                return (b->flags & 2) >> 1;
+            if (b == NULL) {
+                return 0;
             }
-            break;
+            return (b->flags & 2) >> 1;
         }
         }
-        return result;
     }
     return 1;
 }

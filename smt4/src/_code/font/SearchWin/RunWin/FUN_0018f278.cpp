@@ -1,10 +1,10 @@
 /* NON_MATCHING: readable rebuild from asm of the run window's loading-dots draw; armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
-#include "gfx/TitleSceneStack.h"
+#include "gfx/RenderStateStack.h"
 
 /* The title scene (its second state stack lives at 0x12AC). */
 struct TitleScene {
     /* 0x0000 */ u8 unk0000[0x12AC];
-    /* 0x12AC */ StateStack secondStack;
+    /* 0x12AC */ RenderStateStack secondStack;
 };
 
 /* The run window (only the fields read here). */
@@ -57,10 +57,10 @@ u8 FUN_0018f278(void)
         FUN_002bf380(2, 14, 19, x, y, 110);
         TitleScene *scene = g_titleScene;
         s32 state = packNibblesAndByte(6, 1, 0);
-        stateStackPush(&scene->secondStack, state);
+        renderStackPushCountedDirect(&scene->secondStack, state);
         FUN_002bf288(2, 14, 0x150, x, 0, 111);
         FUN_002bf288(2, 14, 0x151, x, 0, 111);
-        stateStackPop(&g_titleScene->secondStack);
+        renderStackPop(&g_titleScene->secondStack);
         LayoutPoint *labelPoint = FUN_002bf4f8(14, 0x153);
         FUN_002be5a4(4, 0xF49800FF, win->label, (f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);

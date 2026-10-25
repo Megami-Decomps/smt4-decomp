@@ -5,7 +5,7 @@
 extern "C" {
 
 int nw_gfx_ShaderBinaryInfo_SafeBuffer_Write(...);
-int rt_memcpy_w(unsigned int [2], unsigned char *, int);
+int __aeabi_memcpy4(unsigned int [2], unsigned char *, int);
 
 /* stack frame of param_4: 40 slot(s), 160 byte(s) */
 typedef struct {
@@ -54,7 +54,7 @@ typedef struct {
 extern unsigned char DAT_004149d8; /* 0x4149d8 */
 
 /* Supplied declaration required: nw_gfx_ShaderBinaryInfo_SafeBuffer_Write. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_003e245c(int param_1,unsigned int param_2,int param_3,int param_4)
@@ -258,7 +258,7 @@ void FUN_003e245c(int param_1,unsigned int param_2,int param_3,int param_4)
       temp_v41 = param_2;
       iStack_2c = param_3;
       iStack_28 = param_4;
-      rt_memcpy_w(temp_v14,&DAT_004149d8,0x60);
+      __aeabi_memcpy4(temp_v14,&DAT_004149d8,0x60);
       temp_v27 = temp_v0 | 0x7fff0000;
       temp_v14[0] = temp_v34;
       temp_v15 = temp_v33 - 1;

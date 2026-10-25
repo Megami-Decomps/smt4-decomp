@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int rt_memcpy_w(unsigned int, unsigned char [272], int);
+int __aeabi_memcpy4(unsigned int, unsigned char [272], int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned char FUN_00508d50(unsigned int *param_1,unsigned int param_2,int param_3)
@@ -21,7 +21,7 @@ unsigned char FUN_00508d50(unsigned int *param_1,unsigned int param_2,int param_
             ((int *)*param_1,(unsigned int)*(unsigned short *)(param_1 + 3) * param_3 + param_1[2],0);
   temp_v0 = (**(romwright_code **)(*(int *)*param_1 + 0x24))((int *)*param_1,temp_v1,0x100);
   if (temp_v0 == 0x100) {
-    rt_memcpy_w(param_2,temp_v1,0x100);
+    __aeabi_memcpy4(param_2,temp_v1,0x100);
   }
   return temp_v0 == 0x100;
 }

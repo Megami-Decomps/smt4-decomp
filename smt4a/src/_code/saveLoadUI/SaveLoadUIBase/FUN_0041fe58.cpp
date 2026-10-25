@@ -73,7 +73,7 @@ void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
 void *gameDataBlocksGetSaveData(void);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void wordPairCopy(void *destination, const void *source);
 void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
 s32 gameFlagIsSet(u32 flag);
@@ -105,10 +105,10 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->tableCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x80, 1);
     ui->settingsCopy = asdMemoryAlloc(0x10000, 0x100, 0, 8, 1);
     ui->saveCopy = asdMemoryAlloc(0x10000, 0x100, 0, 0x2A71C, 1);
-    rt_memcpy_w(ui->tableCopy, gameDataBlocksGetTable(), 0x80);
+    __aeabi_memcpy4(ui->tableCopy, gameDataBlocksGetTable(), 0x80);
     wordPairCopy(ui->settingsCopy, configGetSettings());
-    rt_memcpy_w(ui->saveCopy, gameDataBlocksGetSaveData(), 0x2A71C);
-    rt_memcpy_w(ui->header, (u8 *)gameDataBlocksGetSaveData() + 8, 0xE);
+    __aeabi_memcpy4(ui->saveCopy, gameDataBlocksGetSaveData(), 0x2A71C);
+    __aeabi_memcpy4(ui->header, (u8 *)gameDataBlocksGetSaveData() + 8, 0xE);
     asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.bf", &ui->uiScript, 0);
     asdLoadFileAsyncSimple("saveLoadUI/saveloadUI.mbm", &ui->uiMessages, 0);
     if (isLoad != 0) {

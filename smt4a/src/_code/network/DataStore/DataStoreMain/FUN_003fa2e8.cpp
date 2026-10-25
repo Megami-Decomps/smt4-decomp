@@ -18,7 +18,7 @@ s32 randRange(u32 maximum);
 s32 FUN_00413e28(void);
 void FUN_00413af4(ReplyString *result, DataStoreReply *reply, s32 index);
 void FUN_00414a24(void);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 
 /* Once the reply has arrived, pick up to ten random entries from it and store them in the entry table. */
 void FUN_003fa2e8(DataStoreWork *work)
@@ -57,7 +57,7 @@ void FUN_003fa2e8(DataStoreWork *work)
                 s32 length = 0;
                 for (char *p = text.begin; p != text.end; p++)
                     entryText[length++] = *p;
-                rt_memcpy_w(reinterpret_cast<u32 *>(work->entries) + i * 25, entryText, 100);
+                __aeabi_memcpy4(reinterpret_cast<u32 *>(work->entries) + i * 25, entryText, 100);
                 asdOperatorDeleteArray(text.begin);
             }
             if (remaining != 0)

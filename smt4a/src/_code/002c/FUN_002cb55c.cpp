@@ -11,7 +11,7 @@ int sysMemClear(unsigned short *, int);
 int FUN_003df7c4(unsigned short *);
 int FUN_003dfad4(unsigned char *, unsigned short *);
 int FUN_00480a00(void);
-int rt_memcpy_w(unsigned short *, unsigned short *, int);
+int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 
 /* stack frame of param_3: 8 slot(s), 16 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ extern unsigned int gameGetPlayerName(void);
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: FUN_00480a00. */
 extern int FUN_004ccbf0(unsigned short);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *param_3)
@@ -99,7 +99,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   *(unsigned int *)(param_1 + 0x25) = *(unsigned int *)(param_2 + 4);
   param_1[0x27] = param_2[6];
   temp_v4 = countUnlockedSlots();
-  rt_memcpy_w(param_1 + 0x28,param_2 + 0x1a,temp_v4 << 1);
+  __aeabi_memcpy4(param_1 + 0x28,param_2 + 0x1a,temp_v4 << 1);
   temp_v5 = gameGetPlayerName();
   libc_strcpy(param_1 + 0x2d2,temp_v5);
   if ((short)param_1[0x11] >= 1000) {

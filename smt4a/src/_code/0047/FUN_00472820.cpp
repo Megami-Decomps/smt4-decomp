@@ -15,7 +15,7 @@ int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(int [24], unsigned char *, int);
+int __aeabi_memcpy4(int [24], unsigned char *, int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -48,7 +48,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0023b4a4(unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00472820(void)
@@ -149,7 +149,7 @@ unsigned int FUN_00472820(void)
       }
       if ((char)puVar2[0x105] != '\x01') {
         if ((char)puVar2[0x105] == '\x02') {
-          rt_memcpy_w(aiStack_a0,&DAT_00527134,0x48);
+          __aeabi_memcpy4(aiStack_a0,&DAT_00527134,0x48);
           temp_v1 = 0;
           temp_v5 = puVar2[0x106] / 5;
           temp_v10 = temp_v5 - (temp_v5 & 0xfffffff8);

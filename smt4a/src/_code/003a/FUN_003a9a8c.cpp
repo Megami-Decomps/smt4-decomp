@@ -1,4 +1,4 @@
-/* NON_MATCHING: final table-selection branch, roll/weight registers, and loop comparison orientation differ. */
+/* NON_MATCHING: roll/weight registers (r2/r3) and the loop comparison orientation (cmp count,index; bgt) differ; the table-selection switch now matches. */
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 
@@ -14,12 +14,16 @@ u32 FUN_003a9a8c(void)
 {
     s32 kind = scrGetArg(0);
     void *table = NULL;
-    if (kind == 1) {
+    switch (kind) {
+    case 1:
         table = btlGetTable(btlGetMainState(), 10);
-    } else if (kind == 2) {
+        break;
+    case 2:
         table = btlGetTable(btlGetMainState(), 11);
-    } else if (kind == 3) {
+        break;
+    case 3:
         table = btlGetTable(btlGetMainState(), 12);
+        break;
     }
     const u16 *weights = (const u16 *)dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);

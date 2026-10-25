@@ -6,7 +6,7 @@
 extern "C" {
 u32 gameDataCopySaveEntry(u32 id, SavedUnitRecordA *destination);
 void sysMemClear(void *destination, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_004bcd90(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
 
@@ -33,7 +33,7 @@ void FUN_0035ad50(u32 id, UnitRecord *unit)
     unit->stats2[3] = saved.currentStats[3];
     unit->stats2[4] = saved.currentStats[4];
     unit->stats2[1] = saved.currentStats[1];
-    rt_memcpy_w(unit->name, saved.name, sizeof(unit->name));
+    __aeabi_memcpy4(unit->name, saved.name, sizeof(unit->name));
     memcpy(unit->skillList.skills, saved.skills.words, sizeof(unit->skillList.skills));
     memcpy(unit->skillList.unk44, saved.skills.words + 4, sizeof(unit->skillList.unk44));
     unit->unk30 = saved.bits;

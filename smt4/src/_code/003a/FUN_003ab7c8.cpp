@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the placement's flag byte with ldrsb (via mov r0, r5); built uses ldrb */
 #include "common.h"
 
 extern "C" {
@@ -22,6 +21,7 @@ void FUN_002bf818(Placement *placement);
 u32 vec2GetYInt(Placement *placement);
 u32 vec2GetXInt(Placement *placement);
 void pointConvertToFloat(u8 *target, u32 x, u32 y);
+s8 recordGetSignedFlags(const Placement *placement);
 s32 FUN_0026b564(void);
 s32 FUN_00241a44(void);
 s32 FUN_00295618(void);
@@ -37,7 +37,7 @@ void FUN_003ab7c8(Entity003ab7c8 *entity)
     y = vec2GetYInt(placement);
     x = vec2GetXInt(placement);
     pointConvertToFloat(entity->target, x, y);
-    if (placement->active != 0 && FUN_0026b564() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
+    if (recordGetSignedFlags(placement) != 0 && FUN_0026b564() != 0 && FUN_00241a44() != 0 && FUN_00295618() != 0) {
         entity->state = 11;
         entity->stateArg = 0;
     }

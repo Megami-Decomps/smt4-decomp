@@ -49,7 +49,7 @@ void FUN_002f0420(s32 value);
 StatusSlotTable *gameGetSlotTable(void);
 s32 FUN_00372014(void);
 void FUN_00184310(u32 id);
-void rt_memcpy_w(void *destination, const void *source, s32 size);
+void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 void FUN_004bcd90(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
 void objBInitBlock19D0(UnitRecord *unit, s32 value);
@@ -122,7 +122,7 @@ void FUN_004a3b48(StatusPanel *panel)
             }
             FUN_00184310(id);
             UnitRecord unit;
-            rt_memcpy_w(&unit, member, sizeof(UnitRecord));
+            __aeabi_memcpy4(&unit, member, sizeof(UnitRecord));
             for (s32 i = 0; i < 0x40; i++) {
                 unit.inheritance.flags[i] = 0;
             }

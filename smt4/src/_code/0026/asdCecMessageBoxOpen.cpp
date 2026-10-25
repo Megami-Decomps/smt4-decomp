@@ -9,7 +9,7 @@ void moduleStartOnce(void);
 s32 nn_cec_CTR_MessageBox_ReadMessageBoxInfo(AsdCecMessageBox* box, CecMessageBoxInfo* info, u32 id);
 void FUN_00238f4c(AsdCecMessageBox* box, s32 release);
 void FUN_0024ee68(s32 enabled);
-void rt_memcpy_w(void* destination, const void* source, u32 bytes);
+void __aeabi_memcpy4(void* destination, const void* source, u32 bytes);
 s32 FUN_0023959c(AsdCecMessageBox* box, CecMessageIndexHeader* header,
                   AsdCecMessageId* ids, u32 capacity, s32 kind);
 u32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(AsdCecMessageBox* box);
@@ -45,7 +45,7 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
 
     state->flags0a = 0;
     state->flags0b = 0;
-    rt_memcpy_w(&state->info, &info, sizeof(info));
+    __aeabi_memcpy4(&state->info, &info, sizeof(info));
     s32 result = FUN_0023959c(box, &state->inbox.header, state->inbox.ids,
                           state->inbox.capacity, ASD_CEC_INBOX);
     if ((s32)(result & 0x80000000) < 0) {

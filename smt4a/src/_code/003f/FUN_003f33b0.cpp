@@ -20,7 +20,7 @@ struct SlotTable {
 
 extern "C" {
 
-void rt_memcpy_w(void* dst, const void* src, u32 size);
+void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 MemberRecord* gameGetSlotRecord(u8 id);
 void FUN_004d0d70(u8 id);
@@ -40,7 +40,7 @@ void FUN_004bd6b0(void* record, u32 skill, s32 slot);
 u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
 {
     MemberRecord copy;
-    rt_memcpy_w(&copy, source, 300);
+    __aeabi_memcpy4(&copy, source, 300);
     SlotTable* table = gameGetSlotTable();
     u32 id = copy.id;
     s32 partyIndex = -1;

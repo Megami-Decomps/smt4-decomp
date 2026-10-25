@@ -123,7 +123,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00227c30(int, int);
+extern int valueRangeSameSide(int, int);
 /* Supplied declaration required: btlShowListedActionMessage. */
 /* Supplied declaration required: FUN_00227d18. */
 /* Supplied declaration required: FUN_00227d70. */
@@ -1253,7 +1253,7 @@ LAB_003cecbc:
         if (temp_v70 != 3) {
           return;
         }
-        temp_v5 = FUN_00227c30(temp_v41,temp_v40);
+        temp_v5 = valueRangeSameSide(temp_v41,temp_v40);
         temp_v4 = param_2[4];
         if (temp_v5 != 0) {
 joined_r0x003cee28:
@@ -1270,7 +1270,7 @@ joined_r0x003cee28:
         }
       }
       else {
-        temp_v5 = FUN_00227c30(temp_v41,temp_v40);
+        temp_v5 = valueRangeSameSide(temp_v41,temp_v40);
         temp_v4 = param_2[4];
         if (temp_v5 != 0) goto joined_r0x003cee28;
         temp_v16 = 8;
@@ -1280,7 +1280,7 @@ joined_r0x003cee28:
       }
     }
     else {
-      temp_v5 = FUN_00227c30(temp_v41,temp_v40);
+      temp_v5 = valueRangeSameSide(temp_v41,temp_v40);
       temp_v4 = param_2[4];
       if (temp_v5 != 0) goto joined_r0x003cee28;
       temp_v16 = 7;

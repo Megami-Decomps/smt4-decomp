@@ -15,7 +15,7 @@ int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(int [21], unsigned char *, int);
+int __aeabi_memcpy4(int [21], unsigned char *, int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -47,7 +47,7 @@ extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_0038a478(void)
@@ -145,7 +145,7 @@ unsigned int FUN_0038a478(void)
       }
       if ((char)puVar2[0x105] != '\x01') {
         if ((char)puVar2[0x105] == '\x02') {
-          rt_memcpy_w(aiStack_78,&DAT_003ff700,0x48);
+          __aeabi_memcpy4(aiStack_78,&DAT_003ff700,0x48);
           temp_v2 = 0;
           temp_v6 = puVar2[0x106] / 5;
           temp_v9 = temp_v6 - (temp_v6 & 0xfffffff8);

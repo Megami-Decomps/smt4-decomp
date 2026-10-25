@@ -16,7 +16,7 @@ void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 FUN_00155cb0(const char *path, u32 unk, void (*callback)(void *), AsdLoadJob *job);
 void asdFileFinalizeCompletion(void *job);
 void asdFileRequestSetHeapKind(u32 handle, u8 flags);
-void FUN_0014e834(u32 handle, u32 priority);
+void optionalParameterTrySet(u32 handle, u32 priority);
 
 /* Starts an asynchronous load: *result (if given) is cleared now and set when the load completes. */
 void asdLoadFileAsync(const char *path, u32 *result, u32 flags, u32 arg, u32 arg2, u32 priority)
@@ -47,7 +47,7 @@ void asdLoadFileAsync(const char *path, u32 *result, u32 flags, u32 arg, u32 arg
     }
     job->handle = FUN_00155cb0(fullPath, 0, asdFileFinalizeCompletion, job);
     asdFileRequestSetHeapKind(job->handle, ((flags & ASD_LOAD_FLAG_0) != 0) | (((flags & ASD_LOAD_FLAG_1) != 0) ? 0x10 : 0));
-    FUN_0014e834(job->handle, priority);
+    optionalParameterTrySet(job->handle, priority);
 }
 
 } /* extern "C" */

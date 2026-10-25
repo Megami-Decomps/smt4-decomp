@@ -17,10 +17,10 @@ typedef struct {
     ShaderBindSymbol uMaterialColor; /* 0x12a40 */
 } ModelShader;
 
-void *FUN_002b7148(void);
+u32 *FUN_002b7148(void);
 void nn_gr_CTR_Shader_SetupBinary(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
-void *FUN_002b5cf0(NativeShaderPrefix *shader, void *cursor);
-void FUN_002af390(void *begin, void *end);
+u32 *FUN_002b5cf0(NativeShaderPrefix *shader, u32 *cursor);
+void FUN_002af390(u32 *begin, u32 *end);
 void FUN_00126d14(ModelShader *owner);
 
 extern const char DAT_00410688[]; /* "uMatrix" */
@@ -30,8 +30,8 @@ extern const char DAT_00410678[]; /* "uMaterialColor" */
 s32 FUN_0011b498(ModelShader *owner, const void *binary, u32 unused, s32 size)
 {
 
-    void *begin;
-    void *end;
+    u32 *begin;
+    u32 *end;
 
     FUN_002b7148();
     nn_gr_CTR_Shader_SetupBinary(&owner->shader, binary, size, -1);

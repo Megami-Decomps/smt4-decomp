@@ -7,7 +7,7 @@ extern u8 DAT_005dee3e;
 void FUN_0019a270(u32 *destination, u32 parameter, u32 command);
 u32 *FUN_00501084(CachedCommandWords *commands, u32 *words);
 void FUN_00500fe4(CachedCommandWords *commands, u32 *destination, const void *trailer);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void FUN_00419c34(CachedCommandTable *table, u32 *destination, u32 index, u32 parameter)
 {
@@ -24,7 +24,7 @@ void FUN_00419c34(CachedCommandTable *table, u32 *destination, u32 index, u32 pa
             u32 *end = FUN_00501084(commands, commands->words);
             commands->count = end - commands->words;
         }
-        rt_memcpy_w(destination, commands->words, commands->count * sizeof(u32));
+        __aeabi_memcpy4(destination, commands->words, commands->count * sizeof(u32));
         FUN_00500fe4(commands, destination + commands->count, trailer);
     }
 }

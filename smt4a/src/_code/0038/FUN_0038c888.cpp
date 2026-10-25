@@ -1,4 +1,4 @@
-/* NON_MATCHING: same unsolved candidate-mask cluster as the neighbouring btl script queries (retail loads the 'required' mask with two LDRs and the 0x4CD1 byte through add+ldrb #209; the build uses LDRD and a second add; secondaryRecord skill pointer lands in a different register). */
+/* NON_MATCHING: register allocation of the mask AND/ORR chain differs (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

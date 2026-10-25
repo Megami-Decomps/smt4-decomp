@@ -1,4 +1,3 @@
-/* NON_MATCHING: effect-speed load lacks retail's member-relative address add and two inline-call NOPs; other instructions match. */
 #include "camp/RenderCtx.h"
 #include "ui/PartyPanel.h"
 #include "shard/S3UiLookup.h"
@@ -8,6 +7,7 @@ extern PartyPanel *g_partyPanel;
 extern RenderCtx *g_titleScene;
 const UiTextMetrics *FUN_002bf4f8(u32 bank, s32 entry);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_002bf288(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 
@@ -20,7 +20,7 @@ void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
     s32 blend = packNibblesAndByte(6, 1, 0);
     renderStackSet(&context->stackB, blend);
     if (selected != 0) {
-        efctSetSpeed(panel->members[3].effectSpeed);
+        efctSetSpeed(vec2GetSpeed(&panel->members[3]));
         FUN_002bf288(2, 0x19, 0x10, position->x + x, position->y + y, flags);
         efctSetSpeed(1.0f);
     } else {

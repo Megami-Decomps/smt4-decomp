@@ -1,4 +1,3 @@
-/* NON_MATCHING: final exclusion-mask registers and active-override byte addressing differ; selection and statistic checks match. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

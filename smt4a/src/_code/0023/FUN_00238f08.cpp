@@ -31,7 +31,7 @@ typedef struct LayoutTaskWork {
 void FUN_00213330(void *work);
 LayoutTaskWork *taskCreate(void (*update)(void *), u32 a, u32 b, u32 c, u32 d, u32 size, u32 list, u32 e, u32 f);
 void sysMemClear(void *memory, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0034a16c(void *layout, f32 *a, f32 *b, f32 *c, f32 *d);
 
 /* Starts the layout task with copies of its parameter and layout blocks. */
@@ -41,8 +41,8 @@ __softfp LayoutTaskWork *FUN_00238f08(u32 owner, const void *params, const void 
     LayoutTaskWork *work = taskCreate(FUN_00213330, 0, 0, 0, 0, sizeof(LayoutTaskWork), 3, 0, 0);
     if (work != NULL) {
         sysMemClear(work, sizeof(LayoutTaskWork));
-        rt_memcpy_w(work->params, params, sizeof(work->params));
-        rt_memcpy_w(work->layout, layout, sizeof(work->layout));
+        __aeabi_memcpy4(work->params, params, sizeof(work->params));
+        __aeabi_memcpy4(work->layout, layout, sizeof(work->layout));
         work->value = value;
         work->speed = speed;
         work->owner = owner;

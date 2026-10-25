@@ -3,7 +3,7 @@
 
 struct BattleCameraSnapshot;
 extern "C" {
-void rt_memcpy_w(void* destination, const void* source, u32 size);
+void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void FUN_003f0c78(BtlMainStateA* battle);
 void FUN_003f0b80(const BattleCameraSnapshot* snapshot);
 
@@ -24,14 +24,14 @@ void FUN_004f5144(const BattleRosterCacheConfig* config, BtlMainStateA* battle,
     saved.second.z = 0.0f;
     saved.value = 0;
     if (version == 1100) {
-        rt_memcpy_w(&saved, payload, sizeof(BattleRosterCacheSnapshotA));
+        __aeabi_memcpy4(&saved, payload, sizeof(BattleRosterCacheSnapshotA));
         payload += sizeof(BattleRosterCacheSnapshotA);
     }
     u32 count = (dataSize - sizeof(BattleRosterCacheSnapshotA)) / sizeof(BattleRosterCacheEntry);
     if (config->capacity < count) {
         count = config->capacity;
     }
-    rt_memcpy_w(battle->rosterCache.entries, payload, count * sizeof(BattleRosterCacheEntry));
+    __aeabi_memcpy4(battle->rosterCache.entries, payload, count * sizeof(BattleRosterCacheEntry));
     FUN_003f0c78(battle);
     FUN_003f0b80(reinterpret_cast<const BattleCameraSnapshot*>(battle));
 }

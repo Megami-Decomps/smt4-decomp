@@ -8,7 +8,7 @@ int FUN_0017dd84(void);
 int globalCriticalSectionEnterForward(void);
 int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
-int rt_memcpy_w(int, unsigned int, unsigned int);
+int __aeabi_memcpy4(int, unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int DAT_0061a510; /* 0x61a510 */
 /* Supplied declaration required: globalCriticalSectionEnterForward. */
 /* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_001b4128(unsigned int param_1,unsigned int param_2,int param_3)
@@ -42,7 +42,7 @@ void FUN_001b4128(unsigned int param_1,unsigned int param_2,int param_3)
   temp_v2 = g_commandBufferCursor - *(int *)(DAT_0061a50c + 4);
   *(int *)(DAT_0061a50c + 0xc) = temp_v2;
   if (param_3 != 0) {
-    rt_memcpy_w(temp_v0,param_1,param_2);
+    __aeabi_memcpy4(temp_v0,param_1,param_2);
     g_commandBufferCursor = g_commandBufferCursor + (param_2 & 0xfffffffc);
   }
   else {

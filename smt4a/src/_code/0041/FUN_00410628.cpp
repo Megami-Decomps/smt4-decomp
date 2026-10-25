@@ -28,9 +28,9 @@ int FUN_004f41b0(...);
 int FUN_004f5238(...);
 int FUN_004fb43c(...);
 void btlReflectCreateKind43(int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_004fef70(unsigned int, int, unsigned int, int **);
+int btlReflectCreateKind42(unsigned int, int, unsigned int, int **);
 int fillThreeWordsWithByte(...);
-int rt_memcpy_w(unsigned int ****, unsigned char *, int);
+int __aeabi_memcpy4(unsigned int ****, unsigned char *, int);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
 #define ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -106,9 +106,9 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: btlReflectCreateKind43. */
-/* Supplied declaration required: FUN_004fef70. */
+/* Supplied declaration required: btlReflectCreateKind42. */
 /* Supplied declaration required: fillThreeWordsWithByte. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -187,7 +187,7 @@ void FUN_00410628(int param_1)
         temp_v2 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),1);
         temp_v12 = (unsigned int ***)&temp_v14;
         FUN_003f1b3c(temp_v16,temp_v2,5,&temp_v13);
-        FUN_004fef70(temp_v6 * 5,0,temp_v6,temp_v13);
+        btlReflectCreateKind42(temp_v6 * 5,0,temp_v6,temp_v13);
         btlReflectCreateKind43(temp_v6 * 5,0xffffffff,0,temp_v6,1);
         temp_v3 = param_1 + temp_v6;
         *(unsigned int ****)(param_1 + temp_v6 * 4 + 0x18c) = temp_v14;
@@ -258,7 +258,7 @@ void FUN_00410628(int param_1)
          (*(char *)(param_1 + temp_v3 + 0x1bc) != '\x01')) {
         in_d9 = in_d9 & 0xffffffff;
         temp_v10 = (unsigned long long)*(unsigned int *)(param_1 + temp_v3 * 0x1c + 0x48) << 0x20;
-        rt_memcpy_w(&temp_v12,&DAT_005297d4,0x54);
+        __aeabi_memcpy4(&temp_v12,&DAT_005297d4,0x54);
         temp_v8 = 0;
         temp_v1 = 0;
         do {

@@ -30,7 +30,7 @@ extern EffectEditorPageCursor DAT_0059e858;
 extern EffectEditorPageItem DAT_0059e738[3];
 extern EffectEditorPageItem DAT_0059e780[9];
 void *linkedFindItemByIndex(void *list, s32 index);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Reloads the selected effect record over its saved header and picks the parameter page for its
  * kind (flag 2: the three-line page, else the nine-line page), keeping the cursor in range. */
@@ -38,8 +38,8 @@ void *FUN_003c8a2c(void *arg)
 {
     void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
                                        DAT_0059e9a8.index + g_effectEditor.selection.index);
-    rt_memcpy_w(&DAT_00634bc0, item, sizeof(EffectEditorRecord));
-    rt_memcpy_w(&DAT_00634bc0, DAT_00634d20, sizeof(DAT_00634d20));
+    __aeabi_memcpy4(&DAT_00634bc0, item, sizeof(EffectEditorRecord));
+    __aeabi_memcpy4(&DAT_00634bc0, DAT_00634d20, sizeof(DAT_00634d20));
     if (DAT_00634bc0.flags & 2) {
         DAT_0059e858.items = DAT_0059e738;
         DAT_0059e858.itemCount = 3;

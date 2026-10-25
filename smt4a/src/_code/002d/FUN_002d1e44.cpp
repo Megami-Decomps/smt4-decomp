@@ -3,13 +3,13 @@
 
 extern "C" {
 extern LmapExtraGlobalsA DAT_005806a0;
-void rt_memcpy_w(void* destination, const void* source, u32 size);
+void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 
 // Install the Apocalypse camera-vector packet, retaining its extra word.
 void FUN_002d1e44(const VectorPairTransitionA* parameters)
 {
     VectorPairTransitionA* packet = &DAT_005806a0.extra->cameraTransition.parameters;
-    rt_memcpy_w(packet, parameters, sizeof(VectorPairTransitionA));
+    __aeabi_memcpy4(packet, parameters, sizeof(VectorPairTransitionA));
     VectorPairTransition& transition = packet->value;
     transition.current.first = transition.start.first;
     transition.current.second = transition.start.second;

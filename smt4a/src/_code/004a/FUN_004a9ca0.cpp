@@ -18,7 +18,7 @@ struct BtlStateUnitsA {
 
 extern "C" {
 
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 extern BtlUiGlobalsA g_btlUi;
 
@@ -31,7 +31,7 @@ void FUN_004a9ca0(u32 unused, BtlUiUnitRecordA *record)
         BtlUnitEntryA *unit = &((BtlStateUnitsA *)ui->owner)->units[i];
 
         if (unit != NULL && unit->link != NULL && unit->link->id == record->unitId) {
-            rt_memcpy_w(&ui->unitRecords.records[i], record, sizeof(BtlUiUnitRecordA));
+            __aeabi_memcpy4(&ui->unitRecords.records[i], record, sizeof(BtlUiUnitRecordA));
             return;
         }
     }

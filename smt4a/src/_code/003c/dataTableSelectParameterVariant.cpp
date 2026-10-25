@@ -1,4 +1,3 @@
-/* NON_MATCHING: -O2 candidate; block39 initialization fills the pre-getter NOP instead of retail's prologue; no declaration-order steering used. */
 #include "gamedata/DataTable.h"
 
 struct BinFile;
@@ -19,6 +18,7 @@ void* dataTableFileGetTable(DataTableFile* file, u32 index);
 // Each category has three mode tables, with two parameter variants per table.
 extern "C" void* dataTableSelectParameterVariant(s32 variant, u32 category, s32 invert, s32 mode)
 {
+    u32 blockIndex = 39;
     u32 tableIndex = 0;
     switch (category) {
     case 0: break;
@@ -43,7 +43,6 @@ extern "C" void* dataTableSelectParameterVariant(s32 variant, u32 category, s32 
     }
 
     BinFile* file = reinterpret_cast<BinFile*>(dataTableValueOrZero(7));
-    u32 blockIndex = 39;
     if (static_cast<u32>(binFileGetValue(file)) <= 39) {
         blockIndex = 0;
     }

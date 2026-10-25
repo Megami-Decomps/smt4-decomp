@@ -7,7 +7,7 @@ extern "C" {
 int eventTexCallIfIdle(...);
 int FUN_0011a0d4(...);
 int FUN_002bff38(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int FUN_002bcf10(...);
 int wstrBufferPutChar(...);
@@ -57,7 +57,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bff38. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int
@@ -304,7 +304,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         libc_strcpy(temp_v11,temp_v6);
         break;
       default:
-        rt_memcpy_w(temp_v11,&LAB_0010d0ec,0xb);
+        __aeabi_memcpy4(temp_v11,&LAB_0010d0ec,0xb);
       }
       FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
     }

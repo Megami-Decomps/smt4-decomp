@@ -1,4 +1,3 @@
-/* NON_MATCHING: owner effect-speed load is folded/hoisted; retail retains accessor addressing and NOPs. */
 #include "common.h"
 #include "ui/PartyPanel.h"
 
@@ -9,6 +8,7 @@ s32 FUN_002240b4(u32);
 void FUN_002bf380(s32, s32, s32, s32, s32, s32);
 void FUN_002bf288(s32, s32, s32, s32, s32, s32);
 void efctSetSpeed(f32);
+f32 vec2GetSpeed(const void *object);
 void FUN_002be5a4(s32, u32, const u16 *, f32, f32, f32, f32, f32);
 
 // Draw a highlighted or ordinary entry label with its availability indicator.
@@ -23,12 +23,12 @@ void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 s
         FUN_002bf380(2, 36, 16, x, y, 101);
         FUN_002bf288(2, 36, 0x95, x, y, 106);
         if (FUN_002240b4(record)) {
-            efctSetSpeed(static_cast<LabelOwnerView *>(owner)->effect.effectSpeed);
+            efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect));
             FUN_002bf288(2, 36, 0x97, x, y, 109);
             efctSetSpeed(speed);
             FUN_002bf288(2, 36, 0x91, x, y, 111);
         } else {
-            efctSetSpeed(static_cast<LabelOwnerView *>(owner)->effect.effectSpeed);
+            efctSetSpeed(vec2GetSpeed(&static_cast<LabelOwnerView *>(owner)->effect));
             FUN_002bf288(2, 36, 0x96, x, y, 111);
             efctSetSpeed(speed);
         }

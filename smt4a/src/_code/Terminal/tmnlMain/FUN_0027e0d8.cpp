@@ -42,7 +42,7 @@ int slotSetRequest(...);
 int FUN_0021b6ec(...);
 int scrRunOpcodesStub(...);
 int useCounterStart(void);
-int FUN_002686b8(void);
+int touchMenuClose(void);
 int FUN_0026edbc(...);
 int msgWindowReset(void);
 int FUN_002bf4f4(...);
@@ -206,7 +206,7 @@ extern int messageMainIsWindowActive(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern unsigned int gameDataGetPlayerName(void);
-/* Supplied declaration required: FUN_002686b8. */
+/* Supplied declaration required: touchMenuClose. */
 /* Supplied declaration required: FUN_0026edbc. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -773,7 +773,7 @@ LAB_0027edcc:
   case 7:
     temp_v7 = screenFadeIsBusy();
     if (temp_v7 != 0) break;
-    FUN_002686b8();
+    touchMenuClose();
     useCounterRelease();
     FUN_002bf4f4(0);
     linkHolderSetFlag(puVar3[0xf]);

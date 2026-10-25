@@ -14,7 +14,7 @@ void FUN_002c23cc(u32 value);
 void FUN_00400d80(BtlStage *stage, s32 id, s32 variant, u32 flags);
 s32 FUN_00401440(BtlStage *stage);
 void resourceOwnerSetChildEulerAngles(BtlStage *stage, f32 x, f32 y, f32 z);
-u16 FUN_00406798(void *registry, const char *name);
+u16 resourceNameGroupFindIndex(void *registry, const char *name);
 void FUN_004d8bf8(BtlStage *stage, f32 x, f32 y, f32 z);
 void FUN_004d896c(BtlStage *stage, u32 first, u32 second);
 void FUN_002c2358(void);
@@ -51,7 +51,7 @@ u32 FUN_004d8d40(BtlStage *stage, s32 enabled)
         }
         btlStageUpdateNodePositions((BattleStageModelA *)stage, ((BattleStageModelA *)stage)->position);
         resourceOwnerSetChildEulerAngles(stage, 0.0f, g_btlCamera->basePose.yaw, 0.0f);
-        stage->apocalypse.selection = FUN_00406798(g_handleRegistry->entries, DAT_0052a9b8);
+        stage->apocalypse.selection = resourceNameGroupFindIndex(g_handleRegistry->entries, DAT_0052a9b8);
         FUN_004d8bf8(stage, 0.5f, 0.5f, 0.5f);
         FUN_004d896c(stage, stage->setupInput.first, stage->setupInput.second);
         stage->state = 4;

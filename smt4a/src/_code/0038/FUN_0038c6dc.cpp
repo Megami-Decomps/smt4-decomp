@@ -1,4 +1,4 @@
-/* NON_MATCHING: range LDRD, exclusion-mask grouping and auxiliary-unit byte addressing differ from retail. */
+/* NON_MATCHING: range loads differ (retail ldr count,[sp,#4]; ldr first into r4 directly, ours ldrd then mov) and the exclusion-mask AND registers differ; active-entry byte now folds (s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

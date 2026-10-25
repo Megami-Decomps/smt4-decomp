@@ -1,4 +1,3 @@
-/* NON_MATCHING: active-byte guard emits a separate address add instead of retail's ldrb immediate offset. */
 #include "common.h"
 
 extern "C" {
@@ -8,7 +7,7 @@ s32 FUN_002c7e54(void);
 
 typedef struct StatusGuard {
     /* 0x0000 */ u8 unk00[0x24AA];
-    /* 0x24AA */ u8 active;
+    /* 0x24AA */ s8 active;
 } StatusGuard;
 extern StatusGuard *g_statusDown;
 

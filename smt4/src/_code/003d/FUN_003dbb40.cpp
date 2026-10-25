@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materializes the path-string table address and the path buffer pointer in r5 around the formatting calls; armcc here loads them at each use. */
+/* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the FUN_002522e0 call differs (retail sets the path pointer first). */
 #include "common.h"
 
 namespace {
@@ -47,12 +47,14 @@ s32 FUN_003dbb40(LoadedFileOwner *owner)
     }
     file->flags = 0;
     memClear(path, sizeof(path));
+    FilePathStrings *strings = &DAT_004008a4;
     memClear(formatted, sizeof(formatted));
-    textFormatBuffer(formatted, DAT_004008a4.format, DAT_004008a4.base);
+    textFormatBuffer(formatted, strings->format, strings->base);
     libc_strcpy(path, formatted);
-    libc_strcpy(file->name, FUN_002522e0(path, '/') + 1);
+    char *fullPath = path;
+    libc_strcpy(file->name, FUN_002522e0(fullPath, '/') + 1);
     if (keyedRecordFindByName(file->name) == 0xff) {
-        asdLoadFileAsyncSimple(path, &file->data, 0);
+        asdLoadFileAsyncSimple(fullPath, &file->data, 0);
         file->flags |= 1;
     }
     return 1;

@@ -1,12 +1,12 @@
 /* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations and keeps the scene pointer in other registers than retail. */
-#include "gfx/TitleSceneStack.h"
+#include "gfx/RenderStateStack.h"
 
 /* The render context: two render-state stacks. */
 struct RenderCtx {
     /* 0x0000 */ u8 unk0000[0x1258];
-    /* 0x1258 */ StateStack firstStack;
+    /* 0x1258 */ RenderStateStack firstStack;
     /* 0x1278 */ u8 unk1278[0x40];
-    /* 0x12B8 */ StateStack secondStack;
+    /* 0x12B8 */ RenderStateStack secondStack;
 };
 
 /* The overlay's scene (only the fields the draw reads). */
@@ -57,18 +57,18 @@ u32 FUN_00229324(void)
     FUN_00157558(g_renderCtx);
     RenderCtx *ctx = g_renderCtx;
     u32 firstState = FUN_001692ac(1, 0);
-    stateStackPush(&ctx->firstStack, firstState);
+    renderStackPushCounted(&ctx->firstStack, firstState);
     ctx = g_renderCtx;
     if (scene->state == 13 && scene->step == 5 && scene->hidden == 0) {
         if (scene->timer < 16) {
             s32 offset = scene->timer * -30;
             if (offset < -240)
                 offset = -240;
-            stateStackReplaceTop(&ctx->secondStack, packNibblesAndByte(6, 1, 0));
+            renderStackSet(&ctx->secondStack, packNibblesAndByte(6, 1, 0));
             if (offset > -240)
                 FUN_001835b4(2, 0x1D, 0x113, 0, offset, 0xF1);
             FUN_001835b4(2, 0x1D, 0x114, 0, offset + 240, 0xF1);
-            stateStackReplaceTop(&g_renderCtx->secondStack, packNibblesAndByte(6, 7, 0));
+            renderStackSet(&g_renderCtx->secondStack, packNibblesAndByte(6, 7, 0));
         }
         if (scene->timer >= 9) {
             efctSetSpeed(g_engineCleanupOwner.alpha);
@@ -76,16 +76,16 @@ u32 FUN_00229324(void)
             efctSetSpeed(1.0f);
         }
     }
-    stateStackPop(&g_renderCtx->firstStack);
+    renderStackPop(&g_renderCtx->firstStack);
     ctx = g_renderCtx;
     if (scene->state < 10) {
         if (scene->state != 0) {
             u32 secondState = FUN_001692ac(1, 0);
-            stateStackPush(&ctx->firstStack, secondState);
+            renderStackPushCounted(&ctx->firstStack, secondState);
             FUN_004b0164(scene, vec2GetXInt(scene->position), vec2GetYInt(scene->position));
-            stateStackPop(&g_renderCtx->firstStack);
+            renderStackPop(&g_renderCtx->firstStack);
         }
-        stateStackReplaceTop(&g_renderCtx->secondStack, packNibblesAndByte(6, 7, 0));
+        renderStackSet(&g_renderCtx->secondStack, packNibblesAndByte(6, 7, 0));
         skinObjectUpdateMatrices(g_renderCtx);
         renderCtxResetColorScale(g_renderCtx);
     }

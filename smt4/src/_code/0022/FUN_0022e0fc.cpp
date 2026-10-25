@@ -14,7 +14,7 @@ void FUN_0022e0fc(EntryCollection *collection, s32 mode)
         return;
     collection->sortMode = mode;
     EntryComparator comparators[34];
-    rt_memcpy_w(comparators, DAT_00402284, sizeof(comparators));
+    __aeabi_memcpy4(comparators, DAT_00402284, sizeof(comparators));
     FUN_002b7bca(collection->entries, count, sizeof(CollectionEntry), comparators[mode]);
 }
 }

@@ -1,137 +1,90 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037c988` (_code @ 0x37c988, 0x404 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the 8-byte offset pair through VFP registers (vldmia/vstmia) and keeps it at different stack slots; this build uses ldrd/strd, and the register assignment follows */
+#include "camp/RenderCtx.h"
+
+/* A pair of screen coordinates. */
+struct ScreenOffset {
+    s32 x;
+    s32 y;
+};
+
+/* Position record of an icon in the icon table (only the screen position). */
+struct IconPosition {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0a */ s16 y;
+};
+
+/* The slot screen's work area (only the fields read here). */
+struct SlotScreen {
+    /* 0x0000 */ u8 unk0000[0x36c];
+    /* 0x036c */ u8 unk036c[0x20];
+    /* 0x038c */ f32 effectSpeed;
+    /* 0x0390 */ u8 unk0390[0x6c];
+    /* 0x03fc */ s32 phase;
+    /* 0x0400 */ u8 unk0400[0x8760];
+    /* 0x8b60 */ u16 currentIds[8];
+    /* 0x8b70 */ u16 targetIds[8];
+    /* 0x8b80 */ u8 unk8b80[0x94];
+    /* 0x8c14 */ u8 unk8c14[0x200];
+    /* 0x8e14 */ u32 cursor;
+    /* 0x8e18 */ u8 unk8e18[0x72];
+    /* 0x8e8a */ u8 locked;
+};
 
 extern "C" {
+extern RenderCtxA *g_renderCtx;
+s32 getUnlockedSlotCount(u32 argument);
+IconPosition *FUN_001834a4(u32 table, u32 index);
+void FUN_001835b4(s32 layer, u32 table, u32 index, s32 x, s32 y, s32 alpha);
+void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,
+                  s32 *x, s32 *y, u8 *extra);
+void FUN_003c33e8(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
+void FUN_003cce74(SlotScreen *screen, u32 argument, s32 x, s32 y, f32 scale);
+s32 resourceRunOperationIfUnblocked(u32 *cursor);
+s32 FUN_002a4894(u32 *cursor);
+void efctSetSpeed(f32 speed);
+s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
-int efctSetSpeed(void);
-int FUN_001835b4(...);
-int FUN_003b6354(...);
-int FUN_003c33e8(...);
-int FUN_003cce74(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_6: 9 slot(s), 33 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned char sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_6_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
-extern int resourceRunOperationIfUnblocked(int);
-extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_003b6354. */
-/* Supplied declaration required: FUN_003c33e8. */
-/* Supplied declaration required: FUN_003cce74. */
-extern int getUnlockedSlotCount(unsigned int);
-
-
-void FUN_0037c988(int param_1,unsigned int param_2,int param_3,int param_4,unsigned int param_5,
-                 unsigned long long param_6)
-
+/* Draws the eight slot icons of the slot screen: locked slots are blanked, unlocked ones get
+   their frame, cursor flash and effect, then the shared cursor effect is restarted. */
+void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32 flags, f32 scale,
+                  ScreenOffset offset)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9 [28];
-  int iStack_34;
-  unsigned int temp_v10;
-  int temp_v11;
-  int iStack_28;
-  
-  temp_v9[0] = 0;
-  iStack_34 = param_1;
-  temp_v10 = param_2;
-  temp_v11 = param_3;
-  iStack_28 = param_4;
-  temp_v0 = getUnlockedSlotCount(param_2);
-  temp_v5 = 0;
-  temp_v8 = param_1 + 0x8e14;
-  do {
-    temp_v6 = (int)param_6;
-    temp_v7 = (int)((unsigned long long)param_6 >> 0x20);
-    temp_v1 = FUN_001834a4(0x1a,temp_v5 + 0x17d);
-    if (temp_v5 >= temp_v0) {
-      FUN_001835b4(2,0x1a,0x229,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x16f,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x170,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x26f,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x270,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-    }
-    else {
-      FUN_003b6354(param_1,temp_v5,param_4,param_5,(int)*(short *)(temp_v1 + 8),
-                   (int)*(short *)(temp_v1 + 10),&temp_v6,&temp_v7,temp_v9);
-      FUN_001835b4(2,0x1a,0x16f,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x170,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x26f,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_001835b4(2,0x1a,0x270,*(short *)(temp_v1 + 8) + temp_v6,*(short *)(temp_v1 + 10) + temp_v7,
-                   0x65);
-      FUN_003c33e8(param_1,temp_v5,temp_v10,param_5,*(short *)(temp_v1 + 8) + temp_v6,
-                   *(short *)(temp_v1 + 10) + temp_v7);
-      if ((param_4 == 1) && (*(int *)(param_1 + 0x3fc) >= 5)) {
-        temp_v2 = resourceRunOperationIfUnblocked(temp_v8);
-        temp_v3 = FUN_002a4894(temp_v8);
-        if (*(short *)(param_1 + temp_v5 * 2 + 0x8b60) ==
-            *(short *)(param_1 + (temp_v3 + temp_v2) * 2 + 0x8b70)) {
-          efctSetSpeed();
-          temp_v2 = g_renderCtx;
-          temp_v3 = packNibblesAndByte(6,1,0);
-          piVar7 = (int *)(temp_v2 + 0x12b8);
-          temp_v4 = piVar7[*piVar7 + 2];
-          piVar7[*piVar7 + 2] = temp_v3;
-          if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v4 != temp_v3) {
-            (**(romwright_code **)(temp_v2 + 0x12d4))();
-            *(unsigned char *)(temp_v2 + 0x12d0) = 0;
-          }
-          FUN_001835b4(2,0x1a,0x173,*(short *)(temp_v1 + 8) + temp_v6,
-                       *(short *)(temp_v1 + 10) + temp_v7,0x65);
-          temp_v1 = g_renderCtx;
-          temp_v2 = packNibblesAndByte(6,7,0);
-          piVar7 = (int *)(temp_v1 + 0x12b8);
-          temp_v3 = piVar7[*piVar7 + 2];
-          piVar7[*piVar7 + 2] = temp_v2;
-          if (*(char *)(temp_v1 + 0x12d0) != '\0' || temp_v3 != temp_v2) {
-            (**(romwright_code **)(temp_v1 + 0x12d4))();
-            *(unsigned char *)(temp_v1 + 0x12d0) = 0;
-          }
+    u8 extra = 0;
+    s32 unlocked = getUnlockedSlotCount(argument);
+    for (s32 slot = 0; slot < 8; slot++) {
+        ScreenOffset position = offset;
+        IconPosition *icon = FUN_001834a4(0x1a, slot + 0x17d);
+        if (slot >= unlocked) {
+            FUN_001835b4(2, 0x1a, 0x229, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
+        } else {
+            FUN_003b6354(screen, slot, mode, flags, scale, icon->x, icon->y, &position.x, &position.y, &extra);
+            FUN_001835b4(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x170, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x26f, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_001835b4(2, 0x1a, 0x270, icon->x + position.x, icon->y + position.y, 0x65);
+            FUN_003c33e8(screen, slot, argument, flags, scale, icon->x + position.x, icon->y + position.y);
+            if (mode == 1 && screen->phase >= 5) {
+                s32 base = resourceRunOperationIfUnblocked(&screen->cursor);
+                if (screen->currentIds[slot] == screen->targetIds[base + FUN_002a4894(&screen->cursor)]) {
+                    efctSetSpeed(screen->effectSpeed * scale);
+                    RenderCtxA *context = g_renderCtx;
+                    renderStackSet(&context->stackB, packNibblesAndByte(6, 1, 0));
+                    FUN_001835b4(2, 0x1a, 0x173, icon->x + position.x, icon->y + position.y, 0x65);
+                    context = g_renderCtx;
+                    renderStackSet(&context->stackB, packNibblesAndByte(6, 7, 0));
+                }
+            }
+            efctSetSpeed(scale);
         }
-      }
-      efctSetSpeed();
     }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 8);
-  if ((*(char *)(param_1 + 0x8e8a) == '\0') && (temp_v11 != 0)) {
-    FUN_003cce74(param_1,temp_v10,temp_v6,temp_v7);
-  }
-  return;
+    if (screen->locked == 0 && drawExtra != 0) {
+        FUN_003cce74(screen, argument, offset.x, offset.y, scale);
+    }
 }
 
 } /* extern "C" */

@@ -58,7 +58,7 @@ void FUN_001aa6a4(QuadEffectTask *task);
 QuadEffectTask *taskCreate(void (*update)(QuadEffectTask *), void (*a)(QuadEffectTask *), void (*b)(QuadEffectTask *),
                            void (*c)(QuadEffectTask *), f32 priority, u32 size, u32 list, u32 e, u32 f);
 void memClear(void *block, s32 size);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00193c70(QuadEffectTask *task);
 
 /* Creates the quad effect task: its update routines depend on the config's kind. Sets up the
@@ -99,13 +99,13 @@ QuadEffectTask *FUN_002d8238(u32 owner, const void *base, const u8 *extra, u8 ha
         task->corners[3].position[2] = 0.0f;
         task->corners[3].color = 0xFFFF00FF;
         task->hasExtra = hasExtra;
-        rt_memcpy_w(task, base, 0x134);
+        __aeabi_memcpy4(task, base, 0x134);
         task->config = (const u32 *)config;
         task->offset[0] = 0.0f;
         task->offset[1] = 0.0f;
         task->offset[2] = 0.0f;
         if (task->hasExtra != 0) {
-            rt_memcpy_w(task->extra, extra, 0xB0);
+            __aeabi_memcpy4(task->extra, extra, 0xB0);
         } else {
             task->extra[0xA6] = extra[0xA6];
             task->extra[0xA7] = extra[0xA7];

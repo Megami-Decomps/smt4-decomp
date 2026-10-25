@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mov r3, #1` where armcc emits `mov r1, #1`. */
 #include "common.h"
 
 extern "C" {
@@ -13,9 +12,8 @@ extern LightState g_asdLightCount[];
 
 void asdLightActivate(u32 index)
 {
-    LightState *light = &g_asdLightCount[index];
-    light->active = 1;
-    light->dirty = 0;
+    g_asdLightCount[index].active = 1;
+    g_asdLightCount[index].dirty = 0;
 }
 
 } /* extern "C" */

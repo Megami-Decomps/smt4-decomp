@@ -6,7 +6,7 @@ extern "C" {
 extern AocDisplay *g_aocDisplay;
 extern const char DAT_005265ac[];
 void sysMemClear(void *memory, u32 bytes);
-void *rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void textFormatBuffer(char *destination, const char *format, ...);
 void *FUN_001b2ebc(AocDisplay *display, const char *path, s32 option,
                    void *size, s32 enabled, s32 alignment, s32 flags);
@@ -45,7 +45,7 @@ void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlo
                 if (outputIndex >= capacity || output == NULL)
                     return;
                 FileTableSlot *slot = &output[outputIndex];
-                rt_memcpy_w(slot, &group->slots[index], 0xE);
+                __aeabi_memcpy4(slot, &group->slots[index], 0xE);
                 textFormatBuffer(path, DAT_005265ac, directory, reinterpret_cast<const char *>(record->unk01));
                 slot->file = FUN_001b2ebc(g_aocDisplay, path, 0, &slot->unk04[4], 1, 0x80, 0);
                 slot->enabled = 1;

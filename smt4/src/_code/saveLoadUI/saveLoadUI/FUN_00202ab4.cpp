@@ -21,7 +21,7 @@ int asdTMTexTableLoadSprites(...);
 int asdMemoryAlloc(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
 int drawParameterBlockClear(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -73,7 +73,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: drawParameterBlockClear. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00202ab4(void)
@@ -110,13 +110,13 @@ void FUN_00202ab4(void)
   asdMemoryAlloc(0x100,0x100,0,0x24d28,1);
   puVar1[0xe1] = temp_v0;
   temp_v0 = gameDataBlocksGetTable();
-  rt_memcpy_w(puVar1[0xdf],temp_v0,0x80);
+  __aeabi_memcpy4(puVar1[0xdf],temp_v0,0x80);
   temp_v0 = configGetSettings();
   FUN_002ad8b4(puVar1[0xe0],temp_v0);
   temp_v0 = gameDataBlocksGetSaveData();
-  rt_memcpy_w(puVar1[0xe1],temp_v0,0x24d28);
+  __aeabi_memcpy4(puVar1[0xe1],temp_v0,0x24d28);
   temp_v1 = gameDataBlocksGetSaveData();
-  rt_memcpy_w(puVar1 + 0xd9,temp_v1 + 8,0xe);
+  __aeabi_memcpy4(puVar1 + 0xd9,temp_v1 + 8,0xe);
   puVar1[0x90] = 0;
   puVar1[0x91] = 0;
   puVar1[0x92] = 0;

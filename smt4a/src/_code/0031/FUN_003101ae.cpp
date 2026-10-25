@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003032a8(unsigned int **, unsigned int, int *);
+int pooledListErase(unsigned int **, unsigned int, int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_003032a8. */
+/* Supplied declaration required: pooledListErase. */
 extern int wordRefsDiffer_00307d28(unsigned int *, unsigned int);
 
 
@@ -32,7 +32,7 @@ void FUN_003101ae(unsigned int *param_1,unsigned int param_2,unsigned int *param
     temp_v0 = wordRefsDiffer_00307d28(param_3,param_4);
     temp_v1 = *param_3;
     if (temp_v0 == 0) break;
-    FUN_003032a8(&temp_v2,param_2,&temp_v1);
+    pooledListErase(&temp_v2,param_2,&temp_v1);
     *param_3 = (unsigned int)temp_v2;
   }
   *param_1 = temp_v1;

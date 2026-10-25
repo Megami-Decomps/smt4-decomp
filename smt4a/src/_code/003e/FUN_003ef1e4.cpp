@@ -1,255 +1,186 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ef1e4` (_code @ 0x3ef1e4, 0x41c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mask test and branch layout differ (retail loads each u64 mask pair with ldm/ldrd from the g_btlMain base and tests the halves separately) */
+#include "common.h"
+#include "shard/BattleFlagMasks.h"
+
+/* The battle state (only the fields this decision reads and writes). */
+struct EscapeBattle {
+    /* 0x0000 */ u8 unk0000[0xf4];
+    /* 0x00f4 */ u32 enemies[6];           /* enemy ids, 0 = empty slot */
+    /* 0x010c */ u32 conditions;           /* bit 16: always flees, bit 17: never flees */
+    /* 0x0110 */ u8 unk0110[0x42];
+    /* 0x0152 */ u16 fleeChance;           /* percent the enemies flee when behavior is 2 */
+    /* 0x0154 */ u8 unk0154[0x34];
+    /* 0x0188 */ s8 behavior;              /* 1: flee when a marked enemy is present, 2: percentage */
+    /* 0x0189 */ u8 unk0189[0x4417];
+    /* 0x45a0 */ u64 mask;
+    /* 0x45a8 */ u64 blockMask;
+};
+
+/* The player's record (only the levels). */
+struct EscapePlayer {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ s16 levelA;
+    /* 0x28 */ s16 levelB;
+    /* 0x2a */ u8 unk2a[0x34];
+    /* 0x5e */ u16 flags;
+};
+
+/* A party member's save record (only the levels and flags). */
+struct EscapeSaveSlot {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s16 levelA;
+    /* 0x1a */ s16 levelB;
+    /* 0x1c */ u8 unk1c[0x44];
+    /* 0x60 */ u16 flags;
+};
+
+/* An enemy's data record (only the levels). */
+struct EscapeEnemyRecord {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ u16 levelA;
+    /* 0x14 */ u16 levelB;
+};
+
+/* A demon model record (only the kind). */
+struct EscapeModel {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s8 kind;
+};
+
+struct EscapeSlotTable {
+    /* 0x0000 */ u8 unk0000[0x1ca0];
+    /* 0x1ca0 */ s8 party[3];
+};
 
 extern "C" {
+s32 lcgRandomRange(s32 range);
+EscapePlayer *gameGetPlayerData(void);
+EscapeModel *FUN_00184310(u32 id);
+EscapeEnemyRecord *dataTable00FindById(u16 id);
+EscapeSlotTable *gameGetSlotTable(void);
+s32 gameDataBlocksGetTableFlag(void);
+EscapeSaveSlot *gameGetSaveSlotData(s32 slot);
 
-int lcgRandomRange(int);
-int FUN_00184310(void);
-int dataTable00FindById(void);
-int SBORROW4(int, int);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-} param_2_stack;
-
-extern unsigned int DAT_005739e8; /* 0x5739e8 */
-extern unsigned int DAT_005739ec; /* 0x5739ec */
-extern unsigned int DAT_005739f0; /* 0x5739f0 */
-extern unsigned int DAT_005739f4; /* 0x5739f4 */
-extern unsigned int DAT_005739f8; /* 0x5739f8 */
-extern unsigned int DAT_005739fc; /* 0x5739fc */
-extern unsigned int DAT_00573a20; /* 0x573a20 */
-extern unsigned int DAT_00573a24; /* 0x573a24 */
-extern unsigned int DAT_00573aa8; /* 0x573aa8 */
-extern unsigned int DAT_00573aac; /* 0x573aac */
-extern unsigned int DAT_00573b28; /* 0x573b28 */
-extern unsigned int DAT_00573b2c; /* 0x573b2c */
-extern unsigned int DAT_00573b30; /* 0x573b30 */
-extern unsigned int DAT_00573b34; /* 0x573b34 */
-extern unsigned int DAT_00573b70; /* 0x573b70 */
-extern unsigned int DAT_00573b74; /* 0x573b74 */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: lcgRandomRange. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTable00FindById. */
-extern int gameGetSlotTable(void);
-extern int gameDataBlocksGetTableFlag(void);
-extern int gameGetSaveSlotData(int);
-
-
-void FUN_003ef1e4(int param_1,int param_2)
-
+/* Decides whether the enemies try to flee this turn and sets the flee masks if they do. */
+void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr; 7 native warning(s); review required */
-  char temp_v0;
-  short temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned int *puVar11;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  unsigned char temp_v13;
-  unsigned char temp_v14;
-  unsigned int in_fpscr;
-  float temp_v15;
-  int temp_v16;
-  float temp_v17;
-  float temp_v18;
-  
-  temp_v4 = DAT_005739f4;
-  temp_v3 = DAT_005739f0;
-  temp_v7 = DAT_005739ec;
-  temp_v5 = DAT_005739e8;
-  puVar11 = (unsigned int *)(param_1 + 0x45a0);
-  temp_v10 = *puVar11 & ~DAT_005739f0 & ~DAT_005739e8;
-  temp_v11 = *(unsigned int *)(param_1 + 0x45a4) & ~DAT_005739f4 & ~DAT_005739ec;
-  *puVar11 = temp_v10;
-  *(unsigned int *)(param_1 + 0x45a4) = temp_v11;
-  temp_v8 = *(unsigned int *)(param_1 + 0x45ac);
-  temp_v12 = *(unsigned int *)(param_1 + 0x45a8);
-  if ((temp_v8 & DAT_00573b74) != 0 || (DAT_00573b70 & temp_v12) != 0) {
-    return;
-  }
-  if ((temp_v8 & DAT_00573b2c) != 0 || (DAT_00573b28 & temp_v12) != 0) {
-    return;
-  }
-  if ((DAT_00573b30 & temp_v12) != 0 || (temp_v8 & DAT_00573b34) != 0) {
-    *(unsigned int *)(param_1 + 0x45a4) = temp_v7 | temp_v11 | temp_v4;
-    *puVar11 = temp_v10 | temp_v3 | temp_v5;
-    return;
-  }
-  if ((DAT_00573a24 & temp_v11) != 0 || (DAT_00573a20 & temp_v10) != 0) {
-    return;
-  }
-  temp_v9 = 0;
-  if ((*(unsigned int *)(param_1 + 0x10c) & 0x10000) != 0) {
-    *(unsigned int *)(param_1 + 0x45a4) = temp_v7 | temp_v11 | temp_v4;
-    *puVar11 = temp_v10 | temp_v3 | temp_v5;
-    return;
-  }
-  if ((*(unsigned int *)(param_1 + 0x10c) & 0x20000) != 0) {
-    return;
-  }
-  if (param_2 != 0) {
-    temp_v9 = lcgRandomRange(99);
-    if (temp_v9 < 0x5a) {
-      return;
-    }
-    temp_v5 = DAT_005739f0 | *puVar11 | DAT_005739e8;
-    temp_v7 = *(unsigned int *)(param_1 + 0x45a4) | DAT_005739f4 | DAT_005739ec;
-    *puVar11 = temp_v5;
-    *(unsigned int *)(param_1 + 0x45a4) = temp_v7;
-    return;
-  }
-  temp_v0 = *(char *)(param_1 + 0x188);
-  if (temp_v0 != '\x01') {
-    if (temp_v0 == '\x02') {
-      *(unsigned int *)(param_1 + 0x45a4) = temp_v7 | temp_v11 | temp_v4;
-      *puVar11 = temp_v10 | temp_v3 | temp_v5;
-      temp_v5 = lcgRandomRange(100);
-      if (*(unsigned short *)(param_1 + 0x152) <= temp_v5) {
+    u64 base = battle->mask & ~g_btlMain.fleeMask & ~g_btlMain.disableMask;
+    battle->mask = base;
+    if ((battle->blockMask & g_btlMain.stopMaskB) != 0) {
         return;
-      }
-      temp_v5 = DAT_00573aa8 | *puVar11;
-      temp_v7 = DAT_00573aac | *(unsigned int *)(param_1 + 0x45a4);
-      *puVar11 = temp_v5;
-      *(unsigned int *)(param_1 + 0x45a4) = temp_v7;
-      return;
     }
-    if (temp_v0 == '\x03') {
-      return;
-    }
-  }
-  else {
-    do {
-      temp_v5 = *(unsigned int *)(param_1 + temp_v9 * 4 + 0xf4);
-      if (temp_v5 != 0) {
-        temp_v5 = temp_v5 & 0xffff;
-        FUN_00184310();
-        if ((temp_v5 != 0) && (*(char *)(temp_v5 + 2) == '\'')) break;
-      }
-      temp_v9 = temp_v9 + 1;
-      if (temp_v9 >= 6) {
-        temp_v5 = DAT_005739f8 | *puVar11;
-        *(unsigned int *)(param_1 + 0x45a4) = DAT_005739fc | *(unsigned int *)(param_1 + 0x45a4);
-        *puVar11 = temp_v5;
+    if ((battle->blockMask & g_btlMain.stopMaskA) != 0) {
         return;
-      }
-    } while( 1 );
-  }
-  temp_v17 = 0.0f;
-  temp_v18 = temp_v17;
-  temp_v9 = gameGetPlayerData();
-  if ((*(unsigned short *)(temp_v9 + 0x5e) & 2) == 0) {
-    temp_v9 = gameGetPlayerData();
-    temp_v1 = *(short *)(temp_v9 + 0x26);
-    temp_v9 = gameGetPlayerData();
-    temp_v17 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 0x28) + (int)temp_v1,
-                                        (unsigned char)(in_fpscr >> 0x16) & 3);
-  }
-  temp_v9 = 0;
-  do {
-    temp_v6 = gameGetSlotTable();
-    if ((-1 < *(char *)(temp_v6 + temp_v9 + 0x1ca0)) &&
-       (temp_v6 = gameGetSaveSlotData(temp_v9),
-       (*(unsigned short *)(temp_v6 + 0x60) & 2) == 0 && (*(unsigned short *)(temp_v6 + 0x60) & 0x400) == 0)) {
-      temp_v6 = (int)*(short *)(temp_v6 + 0x1a) + (int)*(short *)(temp_v6 + 0x18);
-      temp_v15 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v15 < temp_v17) << 0x1f) |
-              ((unsigned int)(temp_v15 == temp_v17) << 0x1e);
-      in_fpscr = temp_v5 | ((unsigned int)((temp_v15 != temp_v15) || (temp_v17 != temp_v17)) << 0x1c);
-      temp_v2 = (unsigned char)(temp_v5 >> 0x18);
-      if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-        temp_v17 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-      }
     }
-    temp_v9 = temp_v9 + 1;
-  } while (temp_v9 < 3);
-  temp_v9 = 0;
-  do {
-    temp_v5 = *(unsigned int *)(param_1 + temp_v9 * 4 + 0xf4);
-    if (temp_v5 != 0) {
-      temp_v5 = temp_v5 & 0xffff;
-      dataTable00FindById();
-      if (temp_v5 != 0) {
-        temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + 0x14) + (unsigned int)*(unsigned short *)(temp_v5 + 0x12);
-        temp_v15 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v15 < temp_v18) << 0x1f) |
-                ((unsigned int)(temp_v15 == temp_v18) << 0x1e);
-        in_fpscr = temp_v5 | ((unsigned int)((temp_v15 != temp_v15) || (temp_v18 != temp_v18)) << 0x1c);
-        temp_v2 = (unsigned char)(temp_v5 >> 0x18);
-        if (!(unsigned char)((temp_v2 >> 6) & 1) && temp_v2 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-          temp_v18 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
+    if ((battle->blockMask & g_btlMain.forceFleeMask) != 0) {
+        battle->mask = base | g_btlMain.fleeMask | g_btlMain.disableMask;
+        return;
+    }
+    if ((base & g_btlMain.holdMask) != 0) {
+        return;
+    }
+    s32 roll = 0;
+    if ((battle->conditions & 0x10000) != 0) {
+        battle->mask = base | g_btlMain.fleeMask | g_btlMain.disableMask;
+        return;
+    }
+    if ((battle->conditions & 0x20000) != 0) {
+        return;
+    }
+    if (forced != 0) {
+        roll = lcgRandomRange(99);
+        if (roll < 90) {
+            return;
         }
-      }
+        battle->mask |= g_btlMain.fleeMask | g_btlMain.disableMask;
+        return;
     }
-    temp_v9 = temp_v9 + 1;
-  } while (temp_v9 < 6);
-  temp_v16 = (int)((temp_v17 - temp_v18) * 0.2f);
-  temp_v9 = temp_v16 + 0x32;
-  temp_v6 = gameDataBlocksGetTableFlag();
-  if (temp_v6 != 0) {
-    temp_v6 = gameDataBlocksGetTableFlag();
-    if ((temp_v6 != 1) && (temp_v6 = gameDataBlocksGetTableFlag(), temp_v6 != 3)) {
-      temp_v6 = gameDataBlocksGetTableFlag();
-      if (temp_v6 != 2) {
-        temp_v6 = gameDataBlocksGetTableFlag();
-        if (temp_v6 != 4) goto LAB_003ef5b0;
-        temp_v18 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v9 = (int)(temp_v18 * 0.1f);
-      }
-      else {
-        temp_v9 = temp_v9 / 2;
-      }
-      if (temp_v9 >= 0x47) {
-        temp_v9 = 0x46;
-      }
+    if (battle->behavior != 1) {
+        if (battle->behavior == 2) {
+            battle->mask = base | g_btlMain.fleeMask | g_btlMain.disableMask;
+            if (lcgRandomRange(100) >= battle->fleeChance) {
+                return;
+            }
+            battle->mask |= g_btlMain.partialFleeMask;
+            return;
+        }
+        if (battle->behavior == 3) {
+            return;
+        }
+    } else {
+        for (s32 i = 0;; i++) {
+            u32 id = battle->enemies[i];
+            if (id != 0) {
+                EscapeModel *model = FUN_00184310(id & 0xffff);
+                if (model != NULL && model->kind == 39) {
+                    break;
+                }
+            }
+            if (i + 1 >= 6) {
+                battle->mask |= g_btlMain.fleeBlockedMask;
+                return;
+            }
+        }
     }
-    else {
-      temp_v9 = 1000;
+
+    f32 partyPower = 0.0f;
+    f32 enemyPower = 0.0f;
+    if ((gameGetPlayerData()->flags & 2) == 0) {
+        partyPower = (f32)(s32)(gameGetPlayerData()->levelB + gameGetPlayerData()->levelA);
     }
-  }
-  else {
-    temp_v14 = SBORROW4(temp_v9,0x1e);
-    temp_v6 = temp_v16 + 0x14;
-    temp_v13 = temp_v9 == 0x1e;
-    if (temp_v9 < 0x1e) {
-      temp_v9 = 0x1e;
+    for (s32 i = 0; i < 3; i++) {
+        if (gameGetSlotTable()->party[i] >= 0) {
+            EscapeSaveSlot *slot = gameGetSaveSlotData(i);
+            if ((slot->flags & 2) == 0 && (slot->flags & 0x400) == 0) {
+                f32 power = (f32)(s32)(slot->levelB + slot->levelA);
+                if (power > partyPower) {
+                    partyPower = power;
+                }
+            }
+        }
     }
-    else {
-      temp_v14 = SBORROW4(temp_v9,0x46);
-      temp_v6 = temp_v16 - 0x14;
-      temp_v13 = temp_v9 == 0x46;
+    for (s32 i = 0; i < 6; i++) {
+        if (battle->enemies[i] != 0) {
+            EscapeEnemyRecord *record = dataTable00FindById(battle->enemies[i] & 0xffff);
+            if (record != NULL) {
+                f32 power = (f32)(u32)(record->levelB + record->levelA);
+                if (power > enemyPower) {
+                    enemyPower = power;
+                }
+            }
+        }
     }
-    if (!(temp_v13 || temp_v6 < 0 != temp_v14)) {
-      temp_v9 = 0x46;
+    s32 difference = (s32)((partyPower - enemyPower) * 0.2f);
+    s32 chance = difference + 50;
+    if (gameDataBlocksGetTableFlag() != 0) {
+        if (gameDataBlocksGetTableFlag() != 1 && gameDataBlocksGetTableFlag() != 3) {
+            if (gameDataBlocksGetTableFlag() != 2) {
+                if (gameDataBlocksGetTableFlag() == 4) {
+                    chance = (s32)((f32)chance * 0.1f);
+                    if (chance >= 71) {
+                        chance = 70;
+                    }
+                }
+            } else {
+                chance = chance / 2;
+                if (chance >= 71) {
+                    chance = 70;
+                }
+            }
+        } else {
+            chance = 1000;
+        }
+    } else {
+        if (chance < 30) {
+            chance = 30;
+        } else if (chance > 70) {
+            chance = 70;
+        }
     }
-  }
-LAB_003ef5b0:
-  temp_v6 = lcgRandomRange(100);
-  if (temp_v6 <= temp_v9) {
-    return;
-  }
-  temp_v5 = DAT_005739f0 | *puVar11 | DAT_005739e8;
-  *(unsigned int *)(param_1 + 0x45a4) = DAT_005739f4 | *(unsigned int *)(param_1 + 0x45a4) | DAT_005739ec;
-  *puVar11 = temp_v5;
-  return;
+    if (lcgRandomRange(100) <= chance) {
+        return;
+    }
+    battle->mask |= g_btlMain.fleeMask | g_btlMain.disableMask;
 }
 
 } /* extern "C" */

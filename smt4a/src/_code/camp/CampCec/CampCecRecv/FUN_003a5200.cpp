@@ -53,7 +53,7 @@ int cecProcessCall3(void);
 int dataStoreShutdown(void);
 int maskToCode(...);
 int campCecSetValue(int);
-int rt_memcpy_w(int, unsigned int, int);
+int __aeabi_memcpy4(int, unsigned int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -136,7 +136,7 @@ extern int dataStoreIsIdle(void);
 /* Supplied declaration required: dataTable4AType1Count. */
 extern int gameStockContainsEntry(unsigned short);
 /* Supplied declaration required: __aeabi_idivmod. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003a5200(int param_1,int param_2)
@@ -227,7 +227,7 @@ joined_r0x003a52e4:
     do {
       if (*(int *)(param_1 + 0x9c) <= temp_v8) break;
       temp_v9 = dataStoreGetEntry(temp_v8);
-      rt_memcpy_w(param_1 + temp_v8 * 100 + 0x3ec,temp_v9,100);
+      __aeabi_memcpy4(param_1 + temp_v8 * 100 + 0x3ec,temp_v9,100);
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 10);
     temp_v8 = dataStoreIsFinished();

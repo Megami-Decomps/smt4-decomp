@@ -1,10 +1,10 @@
 /* NON_MATCHING: readable rebuild from asm of the run window's loading-dots draw; armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
-#include "gfx/TitleSceneStack.h"
+#include "gfx/RenderStateStack.h"
 
 /* The render context (its second state stack lives at 0x12B8). */
 struct TitleScene {
     /* 0x0000 */ u8 unk0000[0x12B8];
-    /* 0x12B8 */ StateStack secondStack;
+    /* 0x12B8 */ RenderStateStack secondStack;
 };
 
 /* The run window (only the fields read here). */
@@ -50,19 +50,19 @@ u8 FUN_00208650(void)
     RunWin *win = g_runWin;
     if (win->active != 0 && win->visible != 0) {
         FUN_00157558(g_renderCtx);
-        FUN_001835b4(2, 14, 0x14F, 0, 0, 109);
+        FUN_001835b4(2, 8, 0x14F, 0, 0, 109);
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
-        FUN_00164b5c(2, 14, 19, x, y, 110);
+        FUN_00164b5c(2, 8, 19, x, y, 110);
         TitleScene *scene = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
-        stateStackPush(&scene->secondStack, state);
-        FUN_001835b4(2, 14, 0x150, x, 0, 111);
-        FUN_001835b4(2, 14, 0x151, x, 0, 111);
-        stateStackPop(&g_renderCtx->secondStack);
-        LayoutPoint *labelPoint = FUN_001834a4(14, 0x153);
-        FUN_00162790(4, 0xF49800FF, win->label, (f32)(labelPoint->x + x - 14), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
+        renderStackPushCountedDirect(&scene->secondStack, state);
+        FUN_001835b4(2, 8, 0x150, x, 0, 111);
+        FUN_001835b4(2, 8, 0x151, x, 0, 111);
+        renderStackPop(&g_renderCtx->secondStack);
+        LayoutPoint *labelPoint = FUN_001834a4(8, 0x153);
+        FUN_00162790(4, 0xF49800FF, win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
         s32 lit = step % 8;
@@ -72,13 +72,13 @@ u8 FUN_00208650(void)
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {
                 s32 index = row * 3 + column;
-                LayoutPoint *dot = FUN_001834a4(14, 0x157 + index);
+                LayoutPoint *dot = FUN_001834a4(8, 0x157 + index);
                 if (lit == index || lit2 == index)
-                    FUN_001835b4(2, 14, 0x155, dot->x + x, dot->y, 111);
+                    FUN_001835b4(2, 8, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)
-                    FUN_001835b4(2, 14, 0x156, dot->x + x, dot->y, 111);
+                    FUN_001835b4(2, 8, 0x156, dot->x + x, dot->y, 111);
                 else
-                    FUN_001835b4(2, 14, 0x154, dot->x + x, dot->y, 111);
+                    FUN_001835b4(2, 8, 0x154, dot->x + x, dot->y, 111);
             }
         }
         FUN_00183bb0();

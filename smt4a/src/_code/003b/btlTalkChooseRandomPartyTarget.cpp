@@ -1,4 +1,3 @@
-/* NON_MATCHING: positive-count branch folding, SXTAB versus separate index extension, and final mask operand allocation differ; alternate optimization remains untested. */
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -37,7 +36,8 @@ u32 btlTalkChooseRandomPartyTarget()
     s8 available = 0;
     s8 active = 0;
     s32 index = 0;
-    if (((TalkCandidateParty *)gameGetSlotTable())->count > 0) {
+    s32 count = ((TalkCandidateParty *)gameGetSlotTable())->count;
+    if (count > 0) {
         do {
             s8 slot = ((TalkCandidateParty *)gameGetSlotTable())->slots[index];
             if (slot >= 0) {
@@ -55,15 +55,15 @@ u32 btlTalkChooseRandomPartyTarget()
             ++index;
         } while (index < ((TalkCandidateParty *)gameGetSlotTable())->count);
         if (available > 0) {
-            result = candidates[(s8)randRange((u16)(available - 1))] + 0x6d;
+            s8 pick = (s8)randRange((u16)(available - 1));
+            result = candidates[pick] + 0x6d;
         } else if (active > 0) {
             s8 selected = (s8)randRange((u16)(active - 1));
             s8 seen = 0;
             for (s32 entryIndex = 0; entryIndex < 0x6d; ++entryIndex) {
                 BtlCombatantEntryA *entry = &btlGetMainState()->entries[entryIndex];
-                u64 flags = entry->flags;
-                if ((flags & g_btlMessageFlagMasks.eligible) && !(flags & g_btlMessageFlagMasks.excluded) &&
-                    entry->unitIndex >= 0 && (flags & g_btlMessageFlagMasks.required)) {
+                if ((entry->flags & g_btlMessageFlagMasks.eligible) && !(entry->flags & g_btlMessageFlagMasks.excluded) &&
+                    entry->unitIndex >= 0 && (entry->flags & g_btlMessageFlagMasks.required)) {
                     if (selected == seen) {
                         result = entry->unitIndex;
                         break;

@@ -18,7 +18,10 @@ struct CecMessageBoxInfo {
 };
 
 struct CecMessageIndexHeader {
-    u8 unk00[0x14];
+    u16 signature; // 0x00 (0x6262 when valid)
+    u8 unk02[2];
+    u32 size; // 0x04: bytes of the index data
+    u8 unk08[0xc];
     u32 count; // 0x14
     u8 unk18[8];
 };

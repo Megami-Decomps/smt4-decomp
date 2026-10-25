@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial scalar-store scheduling and one-based table-index addressing differ. */
+/* NON_MATCHING: the three sentinel stores (previousId, previousNode, table) are scheduled in a different order and constants. */
 #include "event/bustupEvent/BustupTextureWork.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
@@ -39,7 +39,8 @@ void FUN_0037b280(s32 portrait)
     work->texture.x = 150.0f;
     work->texture.y = 150.0f;
     DataTableView<s16> portraits(26, 1);
-    work->texture.node = portraits.entries[portrait - 1];
+    s32 index = portrait - 1;
+    work->texture.node = portraits.entries[index];
     if (FUN_00162ea4()) {
         work->texture.deferred = 1;
     } else {

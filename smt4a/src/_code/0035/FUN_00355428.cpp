@@ -17,7 +17,7 @@ int pairSetHalves(...);
 int FUN_003799d0(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 16 slot(s), 64 byte(s) */
@@ -62,7 +62,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_003799d0. */
 extern int panelInitBlockB00(void);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00355428(void)
@@ -135,7 +135,7 @@ void FUN_00355428(void)
                                          );
       temp_v15 = (unsigned long long)(unsigned int)(400.0f - temp_v11);
     }
-    rt_memcpy_w(temp_v20,"骁骁骁骁骁",0x50);
+    __aeabi_memcpy4(temp_v20,"骁骁骁骁骁",0x50);
     temp_v13 = (unsigned int)temp_v15;
     temp_v3 = 0;
     if ((*(unsigned int *)(temp_v1 + 0xc) < 2) || (*(char *)(temp_v1 + 0x4c8) == '\x01')) {

@@ -2,7 +2,7 @@
 #include "gfx/RelativeResourceClone.h"
 #include <string.h>
 
-extern "C" void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+extern "C" void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 extern "C" void *FUN_0036ebc0(AsdAllocatorObject *allocator, void *source);
 extern "C" void FUN_00370244(RelativeCloneResource *resource, AsdAllocatorObject *allocator);
 
@@ -14,7 +14,7 @@ extern "C" RelativeCloneResource *FUN_00370064(
     if (!copy) {
         return NULL;
     }
-    rt_memcpy_w(copy, source, sizeof(*copy));
+    __aeabi_memcpy4(copy, source, sizeof(*copy));
     void *child = source->child.get();
     if (child) {
         void *childCopy = FUN_0036ebc0(allocator, child);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mov r1, #4` where armcc emits `mov r1, #4`. */
 #include "common.h"
 
 extern "C" {
@@ -11,8 +10,8 @@ void eventOpeningResetValidJob(void)
 {
     if (g_event3dOpening != NULL && jobIsValid(g_event3dOpening->job)) {
         Opening *opening = g_event3dOpening;
-        opening->state = 4;
         opening->time = 0;
+        opening->state = 4;
     }
 }
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: default map destination is stored with words instead of three halfword stores. */
 #include "map/MapJumpTransition.h"
 #include "map/mapDepart.h"
 
@@ -29,7 +28,8 @@ extern "C" void FUN_003ba1d8(MapJumpTransition *work)
         work->flags |= 0x80010;
         break;
     case 3:
-        MapJumpDestination destination = {0, 0, 0};
+        MapJumpDestination destination;
+        mapJumpDestinationClear(&destination);
         destination.map = request->map;
         FUN_002bd808(&work->destination, &destination);
         work->flags |= 0x10;

@@ -21,7 +21,7 @@ int MapNaviTable_GetCategoryCount(void);
 int NaviMain_GetCurrentMap(int);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -74,7 +74,7 @@ extern int MapNaviTable_GetAreaRecord(unsigned char *, unsigned int);
 extern int MapNaviTable_GetCategoryRecord(unsigned char *, unsigned int);
 extern int MapNavi_SetDiscoveredCell(int, unsigned int);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_004920d4(int param_1)
@@ -130,10 +130,10 @@ void FUN_004920d4(int param_1)
   if ((((temp_v3 == 0) &&
        (!((*(unsigned int *)(temp_v33 + 0x10) & 0x20) != 0 || (*(unsigned int *)(temp_v33 + 0x10) & 8) != 0))) &&
       (*(char *)(temp_v33 + 0xc) != '\0')) && (DAT_005f1604 != -1)) {
-    rt_memcpy_w(temp_v21,&DAT_005324b8,0x48);
-    rt_memcpy_w(temp_v23,&DAT_00532500,0x48);
-    rt_memcpy_w(temp_v22,&DAT_00532548,0x48);
-    rt_memcpy_w(temp_v24,&DAT_00532590,0x48);
+    __aeabi_memcpy4(temp_v21,&DAT_005324b8,0x48);
+    __aeabi_memcpy4(temp_v23,&DAT_00532500,0x48);
+    __aeabi_memcpy4(temp_v22,&DAT_00532548,0x48);
+    __aeabi_memcpy4(temp_v24,&DAT_00532590,0x48);
     temp_v3 = temp_v33 + 0x4cc;
     pfVar5 = (float *)lmapSceneGetObj();
     temp_v15 = *pfVar5;
@@ -203,22 +203,22 @@ LAB_004922ec:
       if (temp_v1 != 1) {
         if (temp_v1 != 2) {
           if (temp_v1 != 3) {
-            rt_memcpy_w(temp_v20,temp_v21,0x48);
+            __aeabi_memcpy4(temp_v20,temp_v21,0x48);
           }
           else {
-            rt_memcpy_w(temp_v20,temp_v24,0x48);
+            __aeabi_memcpy4(temp_v20,temp_v24,0x48);
           }
         }
         else {
-          rt_memcpy_w(temp_v20,temp_v22,0x48);
+          __aeabi_memcpy4(temp_v20,temp_v22,0x48);
         }
       }
       else {
-        rt_memcpy_w(temp_v20,temp_v23,0x48);
+        __aeabi_memcpy4(temp_v20,temp_v23,0x48);
       }
     }
     else {
-      rt_memcpy_w(temp_v20,temp_v21,0x48);
+      __aeabi_memcpy4(temp_v20,temp_v21,0x48);
     }
     temp_v19 = 0x43fa0000;
     temp_v3 = temp_v33 + temp_v4 * 8;

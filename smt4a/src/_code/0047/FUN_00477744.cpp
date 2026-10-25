@@ -1,4 +1,3 @@
-/* NON_MATCHING: dialog cursor base-address folding, signed-load optimization and removed-call NOPs differ. */
 #include "ui/SceneWindowWork.h"
 
 extern "C" {
@@ -9,6 +8,7 @@ void flagObjAdvance(u32 *dialog);
 s32 FUN_004d0584(void);
 s32 inputIsQuestMenuPressed(void);
 void eventQueueAddUniqueIfValid(u32 event);
+s8 recordGetSignedFlags(const void *record);
 
 /* Open the quest dialog, handle confirmation/menu cancellation, and release its callback on exit. */
 void FUN_00477744(SceneWindowWork *window)
@@ -21,7 +21,7 @@ void FUN_00477744(SceneWindowWork *window)
         window->transition.phase = 1;
         break;
     case 1:
-        if (window->dialog.cursor.confirmed != 0) {
+        if (recordGetSignedFlags(&window->dialog.cursor) != 0) {
             if (FUN_004d0584() != 0) {
                 eventQueueAddUniqueIfValid(0x0100020E);
                 FUN_00477d10(window, -1, 0);
@@ -40,7 +40,7 @@ void FUN_00477744(SceneWindowWork *window)
         }
         break;
     case 2:
-        if (window->dialog.cursor.confirmed != 0) {
+        if (recordGetSignedFlags(&window->dialog.cursor) != 0) {
             jobOwnerFreeSlotAndStop(dialog);
             window->transition.state = 3;
             window->transition.phase = 0;

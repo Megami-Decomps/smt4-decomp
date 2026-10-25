@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'str r1, [r0, #40]'; compiler emits 'str r1, [r0, #48]' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 extern struct {
@@ -15,7 +14,10 @@ extern struct {
 void mapDepartPrepare() {
     if(g_gameState.mode==1) {
         g_mapDepartWork->state=1;
-        g_mapDepartWork->first=g_mapDepartWork->second=g_mapDepartWork->third=g_mapDepartWork->fourth=0;
+        g_mapDepartWork->first=0;
+        g_mapDepartWork->second=0;
+        g_mapDepartWork->third=0;
+        g_mapDepartWork->fourth=0;
     } else g_mapDepartWork->state=0;
 }
 }

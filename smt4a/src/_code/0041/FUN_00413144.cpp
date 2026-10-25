@@ -24,7 +24,7 @@ int _ZN9Obj55aad4D1Ev(...);
 int _ZN9Obj55ac68D1Ev(...);
 int FUN_00522a48(...);
 int _ZN15Obj55aff4VectoraSERKS_(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 26 slot(s), 101 byte(s) */
@@ -91,7 +91,7 @@ extern int _ZN15Obj55aff4VectorC1Ej(int, unsigned int);
 /* Supplied declaration required: _ZN9Obj55ac68D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
 /* Supplied declaration required: _ZN15Obj55aff4VectoraSERKS_. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00413144(int param_1)
@@ -200,7 +200,7 @@ void FUN_00413144(int param_1)
   temp_v0 = campCecHasObject();
   if (temp_v0 != 0) {
     temp_v1 = FUN_002bf520();
-    rt_memcpy_w(temp_v23,temp_v1,100);
+    __aeabi_memcpy4(temp_v23,temp_v1,100);
   }
   else {
     saveBuildSummary(temp_v23);

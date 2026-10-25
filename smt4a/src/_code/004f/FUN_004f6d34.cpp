@@ -7,7 +7,7 @@ u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 key, const char *data);
 s32 FUN_003afd30(void);
 s32 FUN_003c5d8c(void);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 u32 FUN_004f6d34(void *object)
 {
@@ -36,7 +36,7 @@ u32 FUN_004f6d34(void *object)
         }
     } else {
         TextureRequest snapshot;
-        rt_memcpy_w(&snapshot, &work->request, sizeof(snapshot));
+        __aeabi_memcpy4(&snapshot, &work->request, sizeof(snapshot));
         if ((snapshot.flags & 1) && snapshot.data == NULL) {
             return 0;
         }

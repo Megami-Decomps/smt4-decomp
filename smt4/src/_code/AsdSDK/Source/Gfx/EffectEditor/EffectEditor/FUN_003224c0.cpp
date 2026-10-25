@@ -9,7 +9,7 @@ int FUN_00243224(unsigned int *, float *, unsigned int, int);
 int FUN_00249678(void);
 int FUN_002496cc(int);
 int effEditorNodeChainApply(unsigned char *);
-int FUN_0024dd80(int);
+int padAlternateButtonIndex(int);
 int FUN_0024dd90(unsigned char *);
 int effMenuListAppend(void);
 int gfxQuaternionWorkspaceBuildMatrix(void);
@@ -81,7 +81,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_002496cc. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
@@ -131,7 +131,7 @@ unsigned int FUN_003224c0(int param_1,int param_2)
   if ((DAT_0044f948 & 2) == 0) {
     temp_v3 = padIsButtonPressed(1);
     if (temp_v3 == 0) {
-      FUN_0024dd80(1);
+      padAlternateButtonIndex(1);
       temp_v3 = padIsButtonPressed();
       if (temp_v3 != 0) {
         temp_v4 = 0;

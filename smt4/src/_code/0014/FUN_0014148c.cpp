@@ -1,4 +1,4 @@
-/* NON_MATCHING: the entry array base and the 0x60 id offset swap registers (r5/r4) in the unrolled search. */
+/* NON_MATCHING: the unrolled search's remainder step keeps its constant and temporary in swapped registers (r4/r3). */
 #include "common.h"
 
 extern "C" {
@@ -18,7 +18,8 @@ typedef struct IdEntryTable {
 /* Returns the entry with id `id`, or NULL. */
 IdEntry *FUN_0014148c(IdEntryTable *table, u32 id)
 {
-    for (s32 i = 0; i < table->count; i++) {
+    s32 count = table->count;
+    for (s32 i = 0; i < count; i++) {
         if (table->entries[i].id == id) {
             return &table->entries[i];
         }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: first 64-bit mask intersection uses r6/r3 rather than retail r3/ip; remaining scan matches. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -16,10 +15,9 @@ extern "C" u32 FUN_003c1824(void)
     };
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) &&
-            (g_btlCandidateMasks.required & flags) &&
-            !(g_btlCandidateMasks.excluded & flags) &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             reinterpret_cast<CandidateAvailabilityView *>(entry)->value > 0) {
             scrSetResult(1);
             return 1;

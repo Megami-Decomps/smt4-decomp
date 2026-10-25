@@ -1,199 +1,180 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `QcUtility_BuildTabList` (_code @ 0x3814d4, 0x3f4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and spill order differ (retail keeps the first-random-slot argument in r8 and the slot list in r7); the slot-clearing loop compiles to a counted pointer loop instead of retail's indexed 2x-unrolled one */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
+
+/* One tab's 20 quest slots: a quest index, QC_SLOT_FREE (-2, not filled yet) or QC_SLOT_BONUS (-1). */
+struct QcTab {
+    /* 0x00 */ s32 slots[20];
+};
+
+enum {
+    QC_SLOT_BONUS = -1,
+    QC_SLOT_FREE = -2,
+};
+
+/* The quest center's tab lists. */
+struct QcTabListState {
+    /* 0x00 */ u8 group;           /* quest table group */
+    /* 0x01 */ u8 unk01[0xb];
+    /* 0x0c */ u16 pinnedCategory; /* category whose first quest is placed in slot 0 */
+    /* 0x0e */ u8 unk0e[2];
+    /* 0x10 */ QcTab tabs[4];      /* 0x50 bytes each */
+};
+
+/* A quest table record (0x20 bytes). */
+struct QcQuestRecord {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 category;
+    /* 0x18 */ u16 requiredFlag;   /* the quest is skipped once this flag is set */
+    /* 0x1a */ u8 weight;
+    /* 0x1b */ u8 unk1b[5];
+};
+
+/* A quest that can still be picked: its index, category and remaining weight. */
+struct QcCandidate {
+    /* 0x00 */ u16 index;
+    /* 0x02 */ u16 category;
+    /* 0x04 */ s32 weight;
+};
 
 extern "C" {
+s32 QcUtility_GetQuestTableChunkCount(s32 group, s32 tableGroup);
+QcQuestRecord *dataTable26GroupGetRecord(s32 group, s32 tableGroup, s32 index);
+s32 gameFlagIsSet(s32 flagId);
+s32 randNextInRange(u16 range);
+s32 QcActive_GetField20(void);
+s32 QcActive_GetField22(void);
+s32 QcActive_GetField24(void);
+s32 QcActive_GetField26(void);
+s32 QcUtility_CountFlaggedSubQuests(void);
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
+void asdMemFree(void *memory);
 
-int asdMemFree(int);
-int asdMemoryAlloc(int, int, int, int, int);
-int QcUtility_GetQuestTableChunkCount(int, int);
-int SBORROW4(int, int);
-
-/* stack frame of param_7: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_7_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
-extern int gameFlagIsSet(void);
-extern int randNextInRange(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemoryAlloc. */
-extern int QcActive_GetField20(void);
-extern int QcActive_GetField22(void);
-extern int QcActive_GetField24(void);
-extern int QcActive_GetField26(void);
-extern int QcUtility_CountFlaggedSubQuests(void);
-/* Supplied declaration required: QcUtility_GetQuestTableChunkCount. */
-
-
-unsigned int
-QcUtility_BuildTabList
-          (unsigned char *param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
-          int param_7)
-
+/* Fills one tab of the list from the group's quest table: the pinned category first, a bonus
+   slot where `forcedSlot` says (or by chance within [firstRandomSlot, lastRandomSlot]), and the
+   rest by weighted random draw. Returns 1 when a bonus slot was placed. */
+u32 QcUtility_BuildTabList(QcTabListState *list, s32 tab, s32 group, s32 forcedSlot, s32 weightOffset,
+                           s32 firstRandomSlot, s32 lastRandomSlot)
 {
-/* irregular: 3 goto(s); 4 native warning(s); review required */
-  unsigned char temp_v0;
-  short temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned short *puVar7;
-  unsigned short *puVar8;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned int *puVar12;
-  int temp_v9;
-  int temp_v10;
-  unsigned int temp_v11;
-  unsigned char temp_v12;
-  unsigned int temp_v13;
-  
-  temp_v3 = 0;
-  puVar12 = (unsigned int *)(param_1 + param_2 * 0x50 + 0x10);
-  temp_v6 = 0;
-  temp_v13 = 0;
-  do {
-    puVar12[temp_v6] = 0xfffffffe;
-    temp_v3 = temp_v3 + 2;
-    puVar12[temp_v6 + 1] = 0xfffffffe;
-    temp_v6 = temp_v6 + 2;
-  } while (temp_v3 < 0x14);
-  temp_v3 = param_3;
-  QcUtility_GetQuestTableChunkCount(param_3,*param_1);
-  temp_v6 = 0x100;
-  asdMemoryAlloc(0x100,0x100,0,temp_v3 << 3,1);
-  temp_v11 = 0;
-  temp_v7 = 0;
-  temp_v4 = dataTable26GroupGetRecord(param_3,*param_1,0);
-  temp_v8 = 0;
-  if (temp_v8 < temp_v3) {
-    do {
-      temp_v9 = temp_v4 + temp_v8 * 0x20;
-      temp_v10 = temp_v9 + param_5;
-      if ((*(char *)(temp_v10 + 0x1a) != '\0') &&
-         ((*(short *)(temp_v9 + 0x18) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) {
-        puVar7 = (unsigned short *)(temp_v6 + temp_v7 * 8);
-        temp_v0 = *(unsigned char *)(temp_v10 + 0x1a);
-        *puVar7 = (short)temp_v8;
-        temp_v11 = temp_v11 + temp_v0;
-        puVar7[1] = *(unsigned short *)(temp_v9 + 0x16);
-        temp_v7 = (int)(short)((short)temp_v7 + 1);
-        *(unsigned int *)(puVar7 + 2) = (unsigned int)*(unsigned char *)(temp_v10 + 0x1a);
-      }
-      temp_v8 = temp_v8 + 1;
-    } while (temp_v8 < temp_v3);
-  }
-  if ((*(short *)(param_1 + 0xc) != 0) && (temp_v3 = 0, 0 < temp_v7)) {
-    do {
-      if (*(short *)(temp_v6 + temp_v3 * 8 + 2) == *(short *)(param_1 + 0xc)) {
-        puVar8 = (unsigned short *)(temp_v6 + temp_v3 * 8);
-        *puVar12 = (unsigned int)*puVar8;
-        temp_v3 = *(int *)(puVar8 + 2);
-        puVar8[2] = 0;
-        puVar8[3] = 0;
-        temp_v11 = temp_v11 - temp_v3;
-        break;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v7);
-  }
-  temp_v3 = 0;
-  temp_v4 = QcUtility_CountFlaggedSubQuests();
-  if (param_2 != 0) {
-    if (param_2 != 1) {
-      if (param_2 != 2) {
-        if (param_2 != 3) goto LAB_00381764;
-        temp_v8 = QcActive_GetField26();
-        temp_v3 = temp_v8 / 10 + temp_v4 / 10;
-      }
-      else {
-        temp_v8 = QcActive_GetField24();
-        temp_v3 = temp_v8 / 10 + temp_v4 / 10;
-      }
+    u32 result = 0;
+    s32 *slots = list->tabs[tab].slots;
+    for (s32 i = 0; i < 20; i++) {
+        slots[i] = QC_SLOT_FREE;
     }
-    else {
-      temp_v8 = QcActive_GetField22();
-      temp_v3 = temp_v8 / 10 + temp_v4 / 10;
-    }
-    if (temp_v8 < 10) {
-      temp_v3 = 0;
-    }
-    else if (temp_v3 >= 0x51) {
-      temp_v3 = 0x50;
-    }
-  }
-  else {
-    temp_v3 = QcActive_GetField20();
-    temp_v3 = temp_v3 / 0x14 + temp_v4 / 10;
-    if (temp_v3 >= 0x51) {
-      temp_v3 = 0x50;
-    }
-  }
-LAB_00381764:
-  temp_v2 = 0;
-  temp_v4 = 0;
-  do {
-    if (puVar12[temp_v4] == 0xfffffffe) {
-      if (param_4 >= 0) {
-        if (param_4 == temp_v4) {
-LAB_003817d8:
-          temp_v2 = 1;
-          puVar12[temp_v4] = 0xffffffff;
-          temp_v13 = 1;
-          temp_v4 = temp_v4 + 1;
-          if (temp_v4 >= 0x14) {
-            asdMemFree(temp_v6);
-            return temp_v13;
-          }
-          continue;
+
+    s32 questCount = QcUtility_GetQuestTableChunkCount(group, list->group);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\quest_center\\qcUtility.cpp", 172);
+    QcCandidate *candidates = (QcCandidate *)asdMemoryAlloc(0x100, 0x100, 0, questCount << 3, 1);
+
+    u32 totalWeight = 0;
+    s16 candidateCount = 0;
+    QcQuestRecord *records = dataTable26GroupGetRecord(group, list->group, 0);
+    for (s32 i = 0; i < questCount; i++) {
+        QcQuestRecord *record = &records[i];
+        QcQuestRecord *weighted = (QcQuestRecord *)((u8 *)record + weightOffset);
+        if (weighted->weight != 0 && (record->requiredFlag == 0 || !gameFlagIsSet(record->requiredFlag))) {
+            QcCandidate *candidate = &candidates[candidateCount];
+            candidate->index = i;
+            candidate->category = record->category;
+            totalWeight += weighted->weight;
+            candidate->weight = weighted->weight;
+            candidateCount++;
         }
-      }
-      else if ((((!temp_v2) && (param_6 <= temp_v4)) && (temp_v4 <= param_7)) &&
-              ((temp_v4 == param_7 || ((temp_v3 != 0 && (temp_v8 = randNextInRange(99), temp_v8 < temp_v3))))))
-      goto LAB_003817d8;
-      temp_v8 = randNextInRange(temp_v11 & 0xffff);
-      temp_v9 = 0;
-      if (temp_v9 < temp_v7) {
-        do {
-          temp_v10 = temp_v6 + temp_v9 * 8;
-          if ((*(int *)(temp_v10 + 4) != 0) && (temp_v8 = temp_v8 - *(int *)(temp_v10 + 4), temp_v8 < 1)) {
-            temp_v1 = *(short *)(temp_v10 + 2);
-            if ((temp_v1 == 3 || temp_v1 == 4) || temp_v1 == 5) {
-              temp_v12 = SBORROW4(param_6,temp_v4);
-              temp_v5 = param_6 - temp_v4;
-              if (param_6 < temp_v4) {
-                temp_v12 = SBORROW4(temp_v4,param_7);
-                temp_v5 = temp_v4 - param_7;
-              }
-              if (temp_v5 < 0 == temp_v12) goto LAB_0038189c;
+    }
+
+    if (list->pinnedCategory != 0) {
+        for (s32 i = 0; i < candidateCount; i++) {
+            if (candidates[i].category == list->pinnedCategory) {
+                slots[0] = candidates[i].index;
+                s32 weight = candidates[i].weight;
+                candidates[i].weight = 0;
+                totalWeight -= weight;
+                break;
             }
-            puVar12[temp_v4] = (unsigned int)*(unsigned short *)(temp_v6 + temp_v9 * 8);
-            temp_v8 = *(int *)(temp_v10 + 4);
-            *(unsigned int *)(temp_v10 + 4) = 0;
-            temp_v11 = temp_v11 - temp_v8;
+        }
+    }
+
+    /* Chance (percent) that a slot becomes a bonus slot, from the quests done. */
+    s32 flagged = QcUtility_CountFlaggedSubQuests();
+    s32 bonusChance = 0;
+    s32 progress;
+    switch (tab) {
+    case 0:
+        bonusChance = QcActive_GetField20() / 20 + flagged / 10;
+        if (bonusChance > 80) {
+            bonusChance = 80;
+        }
+        break;
+    case 1:
+        progress = QcActive_GetField22();
+        bonusChance = progress / 10 + flagged / 10;
+        if (progress < 10) {
+            bonusChance = 0;
+        } else if (bonusChance > 80) {
+            bonusChance = 80;
+        }
+        break;
+    case 2:
+        progress = QcActive_GetField24();
+        bonusChance = progress / 10 + flagged / 10;
+        if (progress < 10) {
+            bonusChance = 0;
+        } else if (bonusChance > 80) {
+            bonusChance = 80;
+        }
+        break;
+    case 3:
+        progress = QcActive_GetField26();
+        bonusChance = progress / 10 + flagged / 10;
+        if (progress < 10) {
+            bonusChance = 0;
+        } else if (bonusChance > 80) {
+            bonusChance = 80;
+        }
+        break;
+    }
+
+    u8 bonusPlaced = 0;
+    for (s32 slot = 0; slot < 20; slot++) {
+        if (slots[slot] != QC_SLOT_FREE) {
+            continue;
+        }
+        bool placeBonus = false;
+        if (forcedSlot >= 0) {
+            placeBonus = forcedSlot == slot;
+        } else if (!bonusPlaced && slot >= firstRandomSlot && slot <= lastRandomSlot &&
+                   (slot == lastRandomSlot || (bonusChance != 0 && randNextInRange(99) < bonusChance))) {
+            placeBonus = true;
+        }
+        if (placeBonus) {
+            bonusPlaced = 1;
+            slots[slot] = QC_SLOT_BONUS;
+            result = 1;
+            continue;
+        }
+        s32 roll = randNextInRange((u16)totalWeight);
+        for (s32 i = 0; i < candidateCount; i++) {
+            if (candidates[i].weight == 0) {
+                continue;
+            }
+            roll -= candidates[i].weight;
+            if (roll > 0) {
+                continue;
+            }
+            s16 category = candidates[i].category;
+            if ((category == 3 || category == 4 || category == 5) &&
+                !(firstRandomSlot < slot && slot < lastRandomSlot)) {
+                continue;
+            }
+            slots[slot] = candidates[i].index;
+            s32 weight = candidates[i].weight;
+            candidates[i].weight = 0;
+            totalWeight -= weight;
             break;
-          }
-LAB_0038189c:
-          temp_v9 = temp_v9 + 1;
-        } while (temp_v9 < temp_v7);
-      }
+        }
     }
-    temp_v4 = temp_v4 + 1;
-    if (temp_v4 >= 0x14) {
-      asdMemFree(temp_v6);
-      return temp_v13;
-    }
-  } while( 1 );
+    asdMemFree(candidates);
+    return result;
 }
 
 } /* extern "C" */

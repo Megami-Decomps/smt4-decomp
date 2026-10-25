@@ -23,7 +23,7 @@ extern u8 DAT_005dee3e;
 void FUN_0019a270(void *state, u32 parameter, u32 flags);
 u32 *FUN_00501084(ResourceWordSegment *segment, u32 *payload);
 void FUN_00500fe4(ResourceWordSegment *segment, u32 *destinationEnd, u8 *trailer);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 /* Initializes the tagged output, caches its leading word count, and copies that segment. */
 void FUN_00419d8c(TaggedResourceOwner *owner, TaggedBlock *output, u32 index, u32 parameter)
@@ -40,7 +40,7 @@ void FUN_00419d8c(TaggedResourceOwner *owner, TaggedBlock *output, u32 index, u3
         u32 *end = FUN_00501084(segment, segment->words);
         segment->count = static_cast<u32>(end - segment->words);
     }
-    rt_memcpy_w(output->payload, segment->words, segment->count * sizeof(u32));
+    __aeabi_memcpy4(output->payload, segment->words, segment->count * sizeof(u32));
     FUN_00500fe4(segment, output->payload + segment->count, resource + 0x7A0);
 }
 }

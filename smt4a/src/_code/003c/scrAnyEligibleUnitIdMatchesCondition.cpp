@@ -1,4 +1,4 @@
-/* NON_MATCHING: entry-base GPR roles/mask reassociation differ and the 4CD1 byte load has an extra address ADD (95/96); O2 addressing/allocation candidate. */
+/* NON_MATCHING: retail loads the required-mask u64 as two ldr (ip, r3) where armcc emits ldm, orders the last AND operands differently and pools the literals in another order; the active-entry byte now folds (s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

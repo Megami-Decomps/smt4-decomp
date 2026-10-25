@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail loads the flags into r2 and clears the state through r1; built swaps r1/r2. */
 #include "common.h"
 
 extern "C" {
@@ -27,10 +26,9 @@ void FUN_002123dc(void)
     MessageBox *box = g_messageMain.box;
 
     if (box != NULL && box->state == 2) {
-        u32 flags = box->flags;
 
         box->state = 0;
-        if ((flags & 0x20) == 0) {
+        if ((box->flags & 0x20) == 0) {
             msgBoxFlagsClearBit7(box->id);
         }
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only controller and initial-count saved registers are swapped (r6/r7); instructions otherwise match. */
 #include "camp/CampState.h"
 
 extern "C" {
@@ -20,9 +19,7 @@ void FUN_002cb278(const void *controller, s32 mode)
     typedef char LayoutCheck[offsetof(GlyphView, header) == 0x1b34 &&
         offsetof(GlyphView, entries) == 0x1b3e ? 1 : -1];
     GlyphView *state = reinterpret_cast<GlyphView *>(g_camp);
-    s32 count = objectApplyIfUnblocked(controller);
-    s32 visible = uiSearchPrimary(controller);
-    if (visible < count) {
+    if (objectApplyIfUnblocked(controller) > uiSearchPrimary(controller)) {
         if (mode == 0) {
             state->header[0] = FUN_001643b4(20, 0x572);
             state->header[1] = FUN_001643b4(20, 0x570);

@@ -1,201 +1,175 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023959c` (_code @ 0x23959c, 0x400 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and block layout differ (retail pushes r0-r3, keeps entries on the stack and does not merge the per-kind free/allocate blocks) */
+#include "shard/CecMessageBox.h"
+#include "shard/W6_W6Match6_CecMessageBox.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
+
+#define CEC_ERROR_BOX_CLOSED ((s32)0xc8810bea)
+#define CEC_ERROR_NO_DATA ((s32)0xc8810bef)
+#define CEC_ERROR_NO_MEMORY ((s32)0xc8610bf3)
+#define CEC_ERROR_BAD_INDEX ((s32)0xc8e1086a)
+
+/* One 0x70-byte message record of an index. */
+struct CecMessageRecord {
+    /* 0x00 */ u16 signature; /* 0x6060 */
+    /* 0x02 */ u8 unk02[0xe];
+    /* 0x10 */ u32 boxId;
+    /* 0x14 */ u8 unk14[0x5c];
+};
+
+/* The message box with the two index buffers' handles. */
+struct CecBoxView {
+    /* 0x000 */ MessageBox box;
+    /* 0x1e0 */ u8 unk1e0[0x1c8];
+    /* 0x3a8 */ u32 inboxBuffer;
+    /* 0x3ac */ u8 unk3ac[0x1ac];
+    /* 0x558 */ u32 outboxBuffer;
+};
+
+/* The module's flags: whether each index buffer is currently allocated. */
+struct CecModuleView {
+    CecModuleFlags prefix;
+    u8 unk02;
+    s8 inboxOwned;
+    s8 outboxOwned;
+};
 
 extern "C" {
+extern CecModuleFlags g_asdCecModuleFlags;
+extern CriticalSection g_asdCecMessageBoxCriticalSection, DAT_004e62b4;
+u32 FUN_002399bc(u32 size, u32 alignment);
+void FUN_002399ec(u32 buffer);
+void rt_memcpy(void *destination, const void *source, u32 bytes);
 
-int FUN_002399ec(int);
-int rt_memcpy(...);
-
-typedef int romwright_code(...);
-/* stack frame of param_5: 7 slot(s), 26 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp98; /* 0x98: local_98 */
-    unsigned short spA8; /* 0xa8: local_a8 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spC0; /* 0xc0: local_c0 */
-} param_5_stack;
-
-extern signed char DAT_004656d3; /* 0x4656d3 */
-extern signed char DAT_004656d4; /* 0x4656d4 */
-extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
-extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
-
-extern int FUN_002399bc(int, unsigned int);
-/* Supplied declaration required: FUN_002399ec. */
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_0023959c(int *param_1,int param_2,int param_3,unsigned int param_4,int param_5)
-
+/* Reads the inbox (kind 0) or outbox (kind 1) index of an open message box into `header`, keeping
+   the raw buffer allocated and listing each message record's address in `entries`. */
+s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **entries, u32 capacity, s32 kind)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int *temp_v7;
-  unsigned short temp_v8 [8];
-  int temp_v9;
-  int *piStack_34;
-  int iStack_30;
-  int temp_v10;
-  unsigned int uStack_28;
-  
-  piStack_34 = param_1;
-  iStack_30 = param_2;
-  temp_v10 = param_3;
-  uStack_28 = param_4;
-  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
-  temp_v1 = param_1[1];
-  if (temp_v1 == 0) {
-    temp_v2 = 0xc8810bea;
-  }
-  else {
-    temp_v6 = 0;
-    temp_v5 = 0;
-    if (param_5 != 0) {
-      (**(romwright_code **)(*param_1 + 8))(param_1,temp_v1,4,2,&temp_v5);
-    }
-    else {
-      (**(romwright_code **)(*param_1 + 8))(param_1,temp_v1,3,2,&temp_v5);
-    }
-    if (temp_v5 != 0) {
-      temp_v1 = -0x379ef40d;
-      temp_v7 = (unsigned int *)(param_1 + 0x156);
-      if (param_5 != 0) {
-        if ((param_5 == 1) && (DAT_004656d4 != '\0')) {
-          *(unsigned int *)(param_2 + 0x14) = 0;
-          nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-          if (DAT_004656d4 != '\0') {
-            FUN_002399ec(param_1[0x156]);
-            DAT_004656d4 = '\0';
-          }
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
+    CecBoxView *view = reinterpret_cast<CecBoxView *>(box);
+    CecModuleView *flags = reinterpret_cast<CecModuleView *>(&g_asdCecModuleFlags);
+    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxCriticalSection);
+    s32 result;
+    if (box->id == 0) {
+        result = CEC_ERROR_BOX_CLOSED;
+    } else {
+        u32 indexSize = 0;
+        u32 bufferSize = 0;
+        if (kind != 0) {
+            box->vtbl->read(box, box->id, 4, 2, &bufferSize);
+        } else {
+            box->vtbl->read(box, box->id, 3, 2, &bufferSize);
         }
-        temp_v0 = temp_v5;
-        nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-        if (DAT_004656d4 != '\0') {
-          FUN_002399ec(param_1[0x156]);
-          DAT_004656d4 = '\0';
-        }
-        temp_v0 = FUN_002399bc(temp_v0,4);
-        param_1[0x156] = temp_v0;
-        if (temp_v0 != 0) {
-          DAT_004656d4 = '\x01';
-          temp_v1 = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-        }
-        else {
-          DAT_004656d4 = '\0';
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-        }
-        if (temp_v1 < 0) {
-          *(unsigned int *)(param_2 + 0x14) = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-          return 0xc8610bf3;
-        }
-        temp_v1 = (**(romwright_code **)(*param_1 + 0x34))
-                          (param_1,param_1[0x156],temp_v5,&temp_v6,param_1[1],4,0x12);
-        temp_v4 = *temp_v7;
-      }
-      else {
-        if (DAT_004656d3 != '\0') {
-          *(unsigned int *)(param_2 + 0x14) = 0;
-          nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-          if (DAT_004656d3 != '\0') {
-            FUN_002399ec(param_1[0xea]);
-            DAT_004656d3 = '\0';
-          }
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-        }
-        temp_v0 = temp_v5;
-        nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-        if (DAT_004656d3 != '\0') {
-          FUN_002399ec(param_1[0xea]);
-          DAT_004656d3 = '\0';
-        }
-        temp_v0 = FUN_002399bc(temp_v0,4);
-        param_1[0xea] = temp_v0;
-        if (temp_v0 != 0) {
-          DAT_004656d3 = '\x01';
-          temp_v1 = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-        }
-        else {
-          DAT_004656d3 = '\0';
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-        }
-        if (temp_v1 < 0) {
-          *(unsigned int *)(param_2 + 0x14) = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-          return 0xc8610bf3;
-        }
-        temp_v1 = (**(romwright_code **)(*param_1 + 0x34))
-                          (param_1,param_1[0xea],temp_v5,&temp_v6,param_1[1],3,0x12);
-        temp_v4 = param_1[0xea];
-      }
-      if ((temp_v1 >= 0) && (temp_v6 != 0)) {
-        if (((temp_v6 < 0x20) ||
-            (rt_memcpy(param_2,temp_v4,0x20), *(unsigned int *)(param_2 + 4) != temp_v6)) ||
-           (temp_v1 = *(int *)(param_2 + 0x14), temp_v6 < temp_v1 * 0x70 + 0x20U)) {
-          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-          return 0xc8e1086a;
-        }
-        temp_v0 = temp_v4 + 0x20;
-        if (temp_v1 != 0) {
-          temp_v4 = 0x6060;
-        }
-        temp_v3 = 0;
-        if (temp_v1 != 0) {
-          do {
-            rt_memcpy(temp_v8,temp_v0,0x70);
-            if ((temp_v8[0] != temp_v4) || (temp_v9 != param_1[1])) {
-              nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-              return 0xc8e1086a;
+        if (bufferSize != 0) {
+            s32 status = CEC_ERROR_NO_MEMORY;
+            u32 buffer;
+            if (kind != 0) {
+                if (kind == 1 && flags->outboxOwned) {
+                    header->count = 0;
+                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    if (flags->outboxOwned) {
+                        FUN_002399ec(view->outboxBuffer);
+                        flags->outboxOwned = 0;
+                    }
+                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                }
+                nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                if (flags->outboxOwned) {
+                    FUN_002399ec(view->outboxBuffer);
+                    flags->outboxOwned = 0;
+                }
+                view->outboxBuffer = FUN_002399bc(bufferSize, 4);
+                if (view->outboxBuffer != 0) {
+                    flags->outboxOwned = 1;
+                    status = 0;
+                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                } else {
+                    flags->outboxOwned = 0;
+                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                }
+                if (status < 0) {
+                    header->count = 0;
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+                    return CEC_ERROR_NO_MEMORY;
+                }
+                status = box->vtbl->writeListKeyed(box, reinterpret_cast<void *>(view->outboxBuffer), bufferSize,
+                                                   &indexSize, box->id, 4, 18);
+                buffer = view->outboxBuffer;
+            } else {
+                if (flags->inboxOwned) {
+                    header->count = 0;
+                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    if (flags->inboxOwned) {
+                        FUN_002399ec(view->inboxBuffer);
+                        flags->inboxOwned = 0;
+                    }
+                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                }
+                nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                if (flags->inboxOwned) {
+                    FUN_002399ec(view->inboxBuffer);
+                    flags->inboxOwned = 0;
+                }
+                view->inboxBuffer = FUN_002399bc(bufferSize, 4);
+                if (view->inboxBuffer != 0) {
+                    flags->inboxOwned = 1;
+                    status = 0;
+                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                } else {
+                    flags->inboxOwned = 0;
+                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                }
+                if (status < 0) {
+                    header->count = 0;
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+                    return CEC_ERROR_NO_MEMORY;
+                }
+                status = box->vtbl->writeListKeyed(box, reinterpret_cast<void *>(view->inboxBuffer), bufferSize,
+                                                   &indexSize, box->id, 3, 18);
+                buffer = view->inboxBuffer;
             }
-            *(int *)(temp_v10 + temp_v3 * 4) = temp_v0;
-            temp_v3 = temp_v3 + 1;
-            temp_v0 = temp_v0 + 0x70;
-          } while (temp_v3 < *(unsigned int *)(param_2 + 0x14));
+            if (status >= 0 && indexSize != 0) {
+                if (indexSize < 32 || (rt_memcpy(header, reinterpret_cast<void *>(buffer), 32), header->size != indexSize) ||
+                    indexSize < header->count * 0x70 + 32U) {
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+                    return CEC_ERROR_BAD_INDEX;
+                }
+                u32 record = buffer + 32;
+                for (u32 i = 0; i < header->count; i++) {
+                    CecMessageRecord copy;
+                    rt_memcpy(&copy, reinterpret_cast<void *>(record), 0x70);
+                    if (copy.signature != 0x6060 || copy.boxId != box->id) {
+                        nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+                        return CEC_ERROR_BAD_INDEX;
+                    }
+                    entries[i] = reinterpret_cast<void *>(record);
+                    record += 0x70;
+                }
+                if (bufferSize != 0) {
+                    result = 0;
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+                    return result;
+                }
+            } else {
+                header->count = 0;
+                if (kind != 0) {
+                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    if (flags->outboxOwned) {
+                        FUN_002399ec(view->outboxBuffer);
+                        flags->outboxOwned = 0;
+                    }
+                } else {
+                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    if (flags->inboxOwned) {
+                        FUN_002399ec(view->inboxBuffer);
+                        flags->inboxOwned = 0;
+                    }
+                }
+                nn_os_CriticalSection_Leave(&DAT_004e62b4);
+            }
         }
-        if (temp_v5 != 0) {
-          temp_v2 = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-          return temp_v2;
-        }
-      }
-      else {
-        *(unsigned int *)(param_2 + 0x14) = 0;
-        if (param_5 != 0) {
-          nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-          if (DAT_004656d4 != '\0') {
-            FUN_002399ec(param_1[0x156]);
-            DAT_004656d4 = '\0';
-          }
-        }
-        else {
-          nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
-          if (DAT_004656d3 != '\0') {
-            FUN_002399ec(param_1[0xea]);
-            DAT_004656d3 = '\0';
-          }
-        }
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-      }
+        result = CEC_ERROR_NO_DATA;
     }
-    temp_v2 = 0xc8810bef;
-  }
-  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
-  return temp_v2;
+    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+    return result;
 }
 
 } /* extern "C" */

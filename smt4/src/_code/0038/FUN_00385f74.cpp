@@ -19,7 +19,7 @@ int FUN_002ac12c(...);
 int FUN_002b486c(void);
 int FUN_0038e2ac(unsigned int);
 int FUN_00393620(unsigned int, unsigned int);
-int FUN_00393fa4(unsigned int, unsigned int);
+int texTableEntryAttachStex(unsigned int, unsigned int);
 
 typedef struct fn_00385f74_arg0 fn_00385f74_arg0;
 struct fn_00385f74_arg0 {
@@ -164,7 +164,7 @@ extern int dataTableGetCount(void);
 extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_0038e2ac. */
 /* Supplied declaration required: FUN_00393620. */
-/* Supplied declaration required: FUN_00393fa4. */
+/* Supplied declaration required: texTableEntryAttachStex. */
 /* Supplied declaration required: nnnstdMemCpy. */
 
 
@@ -389,7 +389,7 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
                           } while (unaff_r5 < temp_v9);
                         }
                         if (unaff_r5 != temp_v9) {
-                          FUN_00393fa4(*(unsigned int *)
+                          texTableEntryAttachStex(*(unsigned int *)
                                         (*(int *)(temp_v23 + 0x4c) + unaff_r5 * 0x10 + 4),
                                        *(int *)(temp_v23 + 0x4c) + temp_v12 * 0x10);
                         }

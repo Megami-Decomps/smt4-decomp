@@ -1,169 +1,109 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036b21c` (_code @ 0x36b21c, 0x404 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps one more callee-saved register live (fp, stack frame 20 vs 16) and hoists the sprite pointers and float constants differently */
+#include "camp/RenderCtx.h"
+#include "title/titleMain.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
+
+/* A title-screen sprite: position, opacity and the texture frame it shows. */
+struct TitleSprite {
+    /* 0x00 */ s32 x;
+    /* 0x04 */ s32 y;
+    /* 0x08 */ f32 alpha;
+    /* 0x0c */ u8 unk0c[0x18];
+    /* 0x24 */ u32 texture;
+    /* 0x28 */ u32 frame;
+    /* 0x2c */ u8 unk2c[0xc];
+};
+
+/* The title block's drawn part (g_titleMain.title). */
+struct TitleScreenView {
+    /* 0x000 */ u8 unk000[0x9c];
+    /* 0x09c */ u8 menuA[0x38];
+    /* 0x0d4 */ u8 menuB[0x38];
+    /* 0x10c */ TitleSprite sprites[6];
+};
+
+/* The texture-table entry for a texture: the size of its first frame. */
+struct TitleTextureSize {
+    /* 0x00 */ s16 width;
+    /* 0x02 */ s16 height;
+};
+
+struct TitleTextureEntry {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ TitleTextureSize *size;
+};
+
+typedef char TitleScreenViewLayoutCheck[sizeof(TitleSprite) == 0x38 &&
+    offsetof(TitleScreenView, sprites) == 0x10c && sizeof(TitleScreenView) == 0x25c ? 1 : -1];
 
 extern "C" {
 
-int FUN_00157558(int);
-int efctSetSpeed(void);
-int renderCtxResetColorScale(...);
-int skinObjectUpdateMatrices(...);
-int FUN_001835b4(...);
-int renderCtxCalculateStereoParallax(...);
-int FUN_0034dc3c(int);
+void FUN_00157558(RenderCtxA *context);
+u32 FUN_001692ac(u32 value, bool enabled);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
+void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 order);
+TitleTextureEntry *FUN_001834a4(u32 texture, u32 frame);
+void efctSetSpeed(f32 alpha);
+void FUN_0034dc3c(void *menu);
+u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} void_stack;
+extern RenderCtxA *g_renderCtx;
+extern TitleMainGlobals g_titleMain;
 
-extern unsigned char g_titleMain; /* 0x58916c */
-extern int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_0034dc3c. */
-
-
-unsigned int FUN_0036b21c(void)
-
+/* Draws a sprite at its stereo-shifted position with its own opacity, if it is visible. */
+static __inline void titleDrawSprite(TitleSprite *sprite, u32 order)
 {
-/* irregular: 8 native warning(s); review required */
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int *piVar7;
-  float temp_v6;
-  int temp_v7;
-  float temp_v8;
-  float temp_v9;
-  
-  temp_v2 = (*(int *)((unsigned char *)&g_titleMain + 0x4));
-  FUN_00157558(g_renderCtx);
-  temp_v7 = g_renderCtx;
-  temp_v3 = FUN_001692ac(1,0);
-  piVar7 = (int *)(temp_v7 + 0x1258);
-  temp_v4 = *piVar7;
-  temp_v5 = piVar7[temp_v4 + 2];
-  *piVar7 = temp_v4 + 1;
-  piVar7[temp_v4 + 3] = temp_v3;
-  if (*(char *)(temp_v7 + 0x1270) != '\0' || temp_v5 != temp_v3) {
-    (**(romwright_code **)(temp_v7 + 0x1274))();
-    *(unsigned char *)(temp_v7 + 0x1270) = 0;
-  }
-  temp_v6 = 0.27f;
-  renderCtxCalculateStereoParallax(g_renderCtx);
-  FUN_001835b4(2,0x2a,5000,(int)temp_v6,0,0xb);
-  temp_v9 = 0.0f;
-  temp_v6 = 0.26f;
-  if (0.0f < *(float *)(temp_v2 + 0x1bc)) {
-    temp_v8 = temp_v6;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v7 = (int)temp_v6;
-    temp_v6 = temp_v8;
-    efctSetSpeed();
-    FUN_001835b4(2,*(unsigned int *)(temp_v2 + 0x1d8),*(unsigned int *)(temp_v2 + 0x1dc),
-                 *(int *)(temp_v2 + 0x1b4) + temp_v7,*(unsigned int *)(temp_v2 + 0x1b8),6);
-    efctSetSpeed();
-  }
-  if (temp_v9 < *(float *)(temp_v2 + 500)) {
-    temp_v8 = temp_v6;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v7 = (int)temp_v6;
-    temp_v6 = temp_v8;
-    efctSetSpeed();
-    FUN_001835b4(2,*(unsigned int *)(temp_v2 + 0x210),*(unsigned int *)(temp_v2 + 0x214),
-                 *(int *)(temp_v2 + 0x1ec) + temp_v7,*(unsigned int *)(temp_v2 + 0x1f0),6);
-    efctSetSpeed();
-  }
-  FUN_0034dc3c(temp_v2 + 0x9c);
-  FUN_0034dc3c(temp_v2 + 0xd4);
-  if (temp_v9 < *(float *)(temp_v2 + 0x14c)) {
-    temp_v8 = temp_v6;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v7 = (int)temp_v6;
-    temp_v6 = temp_v8;
-    efctSetSpeed();
-    FUN_001835b4(2,*(unsigned int *)(temp_v2 + 0x168),*(unsigned int *)(temp_v2 + 0x16c),
-                 *(int *)(temp_v2 + 0x144) + temp_v7,*(unsigned int *)(temp_v2 + 0x148),0xb);
-    efctSetSpeed();
-  }
-  if (temp_v9 < *(float *)(temp_v2 + 0x114)) {
-    temp_v8 = temp_v6;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v7 = (int)temp_v6;
-    temp_v6 = temp_v8;
-    efctSetSpeed();
-    FUN_001835b4(2,*(unsigned int *)(temp_v2 + 0x130),*(unsigned int *)(temp_v2 + 0x134),
-                 *(int *)(temp_v2 + 0x10c) + temp_v7,*(unsigned int *)(temp_v2 + 0x110),0x10);
-    efctSetSpeed();
-  }
-  if (temp_v9 < *(float *)(temp_v2 + 0x184)) {
-    temp_v8 = temp_v6;
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    temp_v7 = (int)temp_v6;
-    temp_v6 = temp_v8;
-    efctSetSpeed();
-    FUN_001835b4(2,*(unsigned int *)(temp_v2 + 0x1a0),*(unsigned int *)(temp_v2 + 0x1a4),
-                 *(int *)(temp_v2 + 0x17c) + temp_v7,*(unsigned int *)(temp_v2 + 0x180),0x10);
-    efctSetSpeed();
-  }
-  temp_v7 = FUN_001834a4(0x2a,3);
-  temp_v0 = **(short **)(temp_v7 + 0xc);
-  temp_v1 = (*(short **)(temp_v7 + 0xc))[1];
-  if (temp_v9 < *(float *)(temp_v2 + 0x22c)) {
-    renderCtxCalculateStereoParallax(g_renderCtx);
-    efctSetSpeed();
-    temp_v7 = g_renderCtx;
-    temp_v3 = packNibblesAndByte(6,1,0);
-    piVar7 = (int *)(temp_v7 + 0x12b8);
-    temp_v4 = piVar7[*piVar7 + 2];
-    piVar7[*piVar7 + 2] = temp_v3;
-    if (*(char *)(temp_v7 + 0x12d0) != '\0' || temp_v4 != temp_v3) {
-      (**(romwright_code **)(temp_v7 + 0x12d4))();
-      *(unsigned char *)(temp_v7 + 0x12d0) = 0;
+    s32 offset;
+
+    if (sprite->alpha <= 0.0f) {
+        return;
     }
-    texTableRecordCallExtended(2,*(unsigned int *)(temp_v2 + 0x248),*(unsigned int *)(temp_v2 + 0x24c),
-                 *(int *)(temp_v2 + 0x224) + (int)temp_v6,*(unsigned int *)(temp_v2 + 0x228),(int)temp_v0,
-                 (int)temp_v1,0x10);
-    temp_v2 = g_renderCtx;
-    temp_v7 = packNibblesAndByte(6,7,0);
-    piVar7 = (int *)(temp_v2 + 0x12b8);
-    temp_v3 = piVar7[*piVar7 + 2];
-    piVar7[*piVar7 + 2] = temp_v7;
-    if (*(char *)(temp_v2 + 0x12d0) != '\0' || temp_v3 != temp_v7) {
-      (**(romwright_code **)(temp_v2 + 0x12d4))();
-      *(unsigned char *)(temp_v2 + 0x12d0) = 0;
+    offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    efctSetSpeed(sprite->alpha);
+    FUN_001835b4(2, sprite->texture, sprite->frame, sprite->x + offset, sprite->y, order);
+    efctSetSpeed(1.0f);
+}
+
+/* Draws the title screen's sprites and menus. */
+u32 FUN_0036b21c(void)
+{
+    TitleScreenView *title = (TitleScreenView *)g_titleMain.title;
+    TitleTextureEntry *entry;
+    TitleSprite *sprite;
+    TitleSprite *last;
+    s32 width;
+    s32 height;
+
+    FUN_00157558(g_renderCtx);
+    renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
+    FUN_001835b4(2, 0x2a, 5000, (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f), 0, 0xb);
+    titleDrawSprite(&title->sprites[3], 6);
+    titleDrawSprite(&title->sprites[4], 6);
+    FUN_0034dc3c(title->menuA);
+    FUN_0034dc3c(title->menuB);
+    titleDrawSprite(&title->sprites[1], 0xb);
+    titleDrawSprite(&title->sprites[0], 0x10);
+    titleDrawSprite(&title->sprites[2], 0x10);
+    entry = FUN_001834a4(0x2a, 3);
+    last = &title->sprites[5];
+    width = entry->size->width;
+    height = entry->size->height;
+    if (!(last->alpha <= 0.0f)) {
+        s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+
+        efctSetSpeed(last->alpha);
+        renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
+        texTableRecordCallExtended(2, last->texture, last->frame, last->x + offset, last->y, width, height, 0x10);
+        renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
+        efctSetSpeed(1.0f);
     }
-    efctSetSpeed();
-  }
-  efctSetSpeed();
-  temp_v2 = g_renderCtx;
-  piVar7 = (int *)(g_renderCtx + 0x1258);
-  temp_v7 = *piVar7;
-  temp_v3 = piVar7[temp_v7 + 2];
-  *piVar7 = temp_v7 - 1;
-  if (*(char *)(temp_v2 + 0x1270) != '\0' || temp_v3 != piVar7[temp_v7 + 1]) {
-    (**(romwright_code **)(temp_v2 + 0x1274))();
-    *(unsigned char *)(temp_v2 + 0x1270) = 0;
-  }
-  skinObjectUpdateMatrices(g_renderCtx);
-  renderCtxResetColorScale(g_renderCtx);
-  return 0;
+    efctSetSpeed(1.0f);
+    renderStackPop(&g_renderCtx->stackA);
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
+    return 0;
 }
 
 } /* extern "C" */

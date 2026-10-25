@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the display-address and enabled-value temporary registers are swapped (retail r2/r3, compiled r3/r2). */
 #include "addon/aocMain.h"
 
 struct MappedOperationStatus {
@@ -41,7 +40,8 @@ void aocResetOperationState(AocOperationState* state)
     state->count = 0;
     state->lastFirst = 0;
     state->lastSecond = 0;
-    g_aocDisplay->operationActive = 1;
+    AocDisplay* display = g_aocDisplay;
+    display->operationActive = 1;
     OperationStatusState* status = &state->status;
     status->enabled = 1;
     status->mode = 0;

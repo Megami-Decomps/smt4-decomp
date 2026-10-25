@@ -1,4 +1,4 @@
-/* NON_MATCHING: the early exits share one return path and the constant 1 is kept in r5 across the calls; retail returns r0 as left by the failed test (two exits) and rebuilds the constant 1 before the last store */
+/* NON_MATCHING: only the first early exit differs: retail returns from the failed owner/script test directly (r0 already 0), the build branches to the shared `mov r0, #0` return. The process mode store uses the inlined scriptProcessSetMode. */
 #include "common.h"
 
 extern "C" {
@@ -17,6 +17,7 @@ typedef struct TalkEvent {
     /* 0x18 */ u32 script;
 } TalkEvent;
 
+extern void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 extern s32 g_btlCamera;
 
 extern s32 FUN_0013def0(s32 arg);
@@ -34,26 +35,27 @@ extern void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
  * down the battle state. Always returns 0. */
 s32 FUN_003e6dc8(TalkEvent *event)
 {
-    if (event->owner != 0 && event->script != 0) {
-        if (FUN_0013def0(0) == 3 && FUN_0013def0(1) == 3) {
-            u32 state = btlGetMainState();
+    if (event->owner == 0 || event->script == 0) {
+        return 0;
+    }
+    if (FUN_0013def0(0) == 3 && FUN_0013def0(1) == 3) {
+        u32 state = btlGetMainState();
 
-            FUN_003f14a0();
-            btlTalkBustUpDestroy();
-            holderStopJob2(state);
-            objectJobStop(state);
-            FUN_00290ba4(state);
-            if (g_btlCamera != 0) {
-                eventCommandClearPending();
-            }
-            event->state = 6;
-            event->running = 0;
-            event->process = FUN_00275bc8(event->owner, event->script);
-            event->process->unk108 = 1;
-            scrScriptProcessStartEntry(event->process, 0);
-            scrScriptProcessStartEntry(event->process, 4);
-            event->running = 1;
+        FUN_003f14a0();
+        btlTalkBustUpDestroy();
+        holderStopJob2(state);
+        objectJobStop(state);
+        FUN_00290ba4(state);
+        if (g_btlCamera != 0) {
+            eventCommandClearPending();
         }
+        event->state = 6;
+        event->running = 0;
+        event->process = FUN_00275bc8(event->owner, event->script);
+        scriptProcessSetMode(event->process, 1);
+        scrScriptProcessStartEntry(event->process, 0);
+        scrScriptProcessStartEntry(event->process, 4);
+        event->running = 1;
     }
     return 0;
 }

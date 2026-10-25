@@ -16,7 +16,7 @@ int FUN_002a39a4(...);
 int FUN_002e5154(...);
 int FUN_0035bc4c(...);
 int keyedGetEntryValue(...);
-int rt_memcpy_w(unsigned char [32], int, int);
+int __aeabi_memcpy4(unsigned char [32], int, int);
 
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -46,7 +46,7 @@ extern int keyedRecordGetValue(unsigned char);
 /* Supplied declaration required: keyedGetEntryValue. */
 extern unsigned long long *FUN_003c0d64(unsigned char, int);
 extern int FUN_003c5db4(unsigned char, int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_002c17dc(unsigned int *param_1)
@@ -81,7 +81,7 @@ void FUN_002c17dc(unsigned int *param_1)
           temp_v1 = FUN_003c5db4(*(unsigned char *)(param_1 + 0xc),temp_v2);
           if (temp_v1 == param_1[1]) {
             temp_v1 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
-            rt_memcpy_w(temp_v8,temp_v0 + temp_v1 * 0x348,0x348);
+            __aeabi_memcpy4(temp_v8,temp_v0 + temp_v1 * 0x348,0x348);
             temp_v1 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
             temp_v3 = temp_v0 + temp_v1 * 0x348 + 0x204;
             puVar3 = (unsigned long long *)FUN_003c0d64(*(unsigned char *)(param_1 + 0xc),temp_v2);

@@ -1,5 +1,10 @@
-/* NON_MATCHING: retail keeps the remaining count and category walker in different registers. */
+/* NON_MATCHING: the match store keeps the loaded id and the slot address in swapped scratch registers (ip/r3). */
 #include "common.h"
+
+struct CategoryPair {
+    u16 id;
+    u16 category;
+};
 
 extern "C" {
 s32 scrGetArg(u32 index);
@@ -15,17 +20,13 @@ u32 FUN_00312e78()
 {
     u32 category = scrGetArg(0);
     void *table = btlMainGetDataTable(btlGetMainState(), 8);
-    u16 *entry = dataTableGetEntries(table);
+    CategoryPair *pair = static_cast<CategoryPair *>(static_cast<void *>(dataTableGetEntries(table)));
     s32 remaining = dataTableGetCount(table) >> 1;
     u16 matches[12];
     s32 count = 0;
-    if (remaining > 0) {
-        for (u16 *entryCategory = entry + 1; remaining > 0; --remaining) {
-            if (*entryCategory == category) {
-                matches[count++] = *entry;
-            }
-            entryCategory += 2;
-            entry += 2;
+    for (s32 i = 0; i < remaining; i++, pair++) {
+        if (pair->category == category) {
+            matches[count++] = pair->id;
         }
     }
     s32 selected = randNextInRange((u16)(count - 1));

@@ -1,4 +1,3 @@
-/* NON_MATCHING: animation-progress access folds the retail getter address/NOPs; render-stack push scheduling and global/zero registers differ, 95 versus retail 98 instructions. */
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 
@@ -24,6 +23,7 @@ void FUN_00183bb0();
 s32 FUN_001692ac(u32 first, u32 second);
 void FUN_0016c4b8(RenderCtxA *context, u32 mode);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 void FUN_00164b5c(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 void FUN_001835b4(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 void FUN_004845ac(KeyboardPanelState *panel, u8 page, f32 progress);
@@ -38,7 +38,7 @@ void FUN_00483b78(KeyboardPanelState *panel)
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
     FUN_0016c4b8(g_renderCtx, 0);
-    f32 progress = panel->animation.unk20;
+    f32 progress = vec2GetSpeed(&panel->animation);
     efctSetSpeed(progress);
     FUN_00164b5c(2, 0x23, 0, panel->backgroundOffset, 0, 0xb);
     FUN_001835b4(2, 0x23, 0x3d, panel->sideOffset, 0, 0xb);

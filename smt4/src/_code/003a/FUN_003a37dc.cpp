@@ -1,4 +1,3 @@
-/* NON_MATCHING: state-range guard folds into an unsigned range test, and render-stack push uses different scratch registers. */
 #include "title/TitleJobWork.h"
 #include "camp/RenderCtx.h"
 
@@ -26,20 +25,21 @@ void FUN_003a37dc(TitleJobWork *work)
     typedef char TitleDrawOffsetsCheck[offsetof(TitleDrawView, firstJob) == 0x15D40 &&
         offsetof(TitleDrawView, secondJob) == 0x15D44 ? 1 : -1];
     TitleDrawView *draw = (TitleDrawView *)work;
-    if (draw->state > 0 && draw->state < 18) {
-        FUN_002c39a4(g_titleScene);
-        FUN_002bed3c();
-        RenderCtx *context = g_titleScene;
-        renderCtxPushA(context, FUN_002c5d80(1, 0));
-        if (jobIsValid(draw->firstJob)) {
-            FUN_00285584(draw->firstJob, 0, 0);
-        }
-        if (jobIsValid(draw->secondJob)) {
-            FUN_00285584(draw->secondJob, 0, 0);
-        }
-        renderStackPop(&g_titleScene->stackA);
-        FUN_002c198c(g_titleScene);
-        FUN_002c18e4(g_titleScene);
+    if (draw->state <= 0 || draw->state >= 18) {
+        return;
     }
+    FUN_002c39a4(g_titleScene);
+    FUN_002bed3c();
+    RenderCtx *context = g_titleScene;
+    renderCtxPushA(context, FUN_002c5d80(1, 0));
+    if (jobIsValid(draw->firstJob)) {
+        FUN_00285584(draw->firstJob, 0, 0);
+    }
+    if (jobIsValid(draw->secondJob)) {
+        FUN_00285584(draw->secondJob, 0, 0);
+    }
+    renderStackPop(&g_titleScene->stackA);
+    FUN_002c198c(g_titleScene);
+    FUN_002c18e4(g_titleScene);
 }
 }

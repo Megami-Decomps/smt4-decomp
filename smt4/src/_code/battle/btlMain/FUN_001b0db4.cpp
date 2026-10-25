@@ -60,7 +60,7 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 owner);
 void *gameGetSlotTable(void);
 void *FUN_00282be4(void);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 void FUN_001b6b98(BtlMainWork *work);
 s32 battleMainProcessUpdate(u32 job);
@@ -79,7 +79,7 @@ void FUN_001b0db4(const BtlStartRequest *request, s32 size)
     g_btlMainState.work = work;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlMain.cpp", 244);
     g_btlMainState.savedSlots = asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, 0x97e8, 1);
-    rt_memcpy_w(g_btlMainState.savedSlots, gameGetSlotTable(), 0x97e8);
+    __aeabi_memcpy4(g_btlMainState.savedSlots, gameGetSlotTable(), 0x97e8);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlMain.cpp", 247);
     g_btlMainState.savedData = asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, 0x104a, 1);
     rt_memcpy(g_btlMainState.savedData, FUN_00282be4(), 0x104a);

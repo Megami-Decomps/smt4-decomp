@@ -1,4 +1,3 @@
-/* NON_MATCHING: the special-entry flag load uses one additional address add; all other instructions match. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -19,7 +18,7 @@ u32 FUN_0038d024()
     if (affinity < 21) {
         s32 first, count;
         FUN_00301a08(group, &first, &count);
-        for (s32 index = first; index < first + count; ++index) {
+        for (s32 index = first; index < count + first; ++index) {
             BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
             if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
                 (g_btlCandidateMasks.required & entry->flags) &&

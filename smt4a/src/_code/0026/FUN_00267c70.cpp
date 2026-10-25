@@ -1,4 +1,3 @@
-/* NON_MATCHING: when scriptProcessCreateWhenReady fails retail branches straight to the pop (r0 is already 0); this build branches to the shared mov r0, #0. */
 #include "common.h"
 
 /* The engine object's cursor positions and mode, as this refresh reads them. */
@@ -30,30 +29,34 @@ void FUN_004b1a00(EngineCursorView *view, s32 x, s32 y);
 u32 FUN_00267c70(void)
 {
     EngineCursorView *view = g_engineCleanupOwner.instance;
-    if (view != NULL && scriptProcessCreateWhenReady(view)) {
-        if (view->mode <= 8 && view->mode != 0) {
-            FUN_004b2e50(view, 0, 0);
-        }
-        switch (view->mode) {
-        case 11: {
-            s32 x = vec2GetXInt(view->gridCursor);
-            s32 y = vec2GetYInt(view->gridCursor);
-            FUN_004b4f9c(view, x, y);
-            break;
-        }
-        case 19: {
-            s32 x = vec2GetXInt(view->pageCursor);
-            s32 y = vec2GetYInt(view->pageCursor);
-            FUN_004b40f4(view, x, y);
-            break;
-        }
-        case 18: {
-            s32 x = vec2GetXInt(view->listCursor);
-            s32 y = vec2GetYInt(view->listCursor);
-            FUN_004b1a00(view, x, y);
-            break;
-        }
-        }
+    if (view == NULL) {
+        return 0;
+    }
+    if (!scriptProcessCreateWhenReady(view)) {
+        return 0;
+    }
+    if (view->mode <= 8 && view->mode != 0) {
+        FUN_004b2e50(view, 0, 0);
+    }
+    switch (view->mode) {
+    case 11: {
+        s32 x = vec2GetXInt(view->gridCursor);
+        s32 y = vec2GetYInt(view->gridCursor);
+        FUN_004b4f9c(view, x, y);
+        break;
+    }
+    case 19: {
+        s32 x = vec2GetXInt(view->pageCursor);
+        s32 y = vec2GetYInt(view->pageCursor);
+        FUN_004b40f4(view, x, y);
+        break;
+    }
+    case 18: {
+        s32 x = vec2GetXInt(view->listCursor);
+        s32 y = vec2GetYInt(view->listCursor);
+        FUN_004b1a00(view, x, y);
+        break;
+    }
     }
     return 0;
 }

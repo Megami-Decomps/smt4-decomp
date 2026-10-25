@@ -11,7 +11,8 @@ struct NaviCategorySelectionWork {
     u8 unk004E4[0x76ac];
     u8 refreshFirst; // 0x7b90
     u8 refreshSecond; // 0x7b91
-    u8 unk07B92[0x1897e];
+    u8 discovered; // 0x7b92: set when a revealed cell was newly discovered
+    u8 unk07B93[0x1897d];
     s32 selectedIcon; // 0x20510
 };
 typedef char NaviCategorySelectionOffsets[
@@ -19,5 +20,6 @@ typedef char NaviCategorySelectionOffsets[
     offsetof(NaviCategorySelectionWork, scene) == 0x4cc &&
     offsetof(NaviCategorySelectionWork, refreshFirst) == 0x7b90 &&
     offsetof(NaviCategorySelectionWork, refreshSecond) == 0x7b91 &&
+    offsetof(NaviCategorySelectionWork, discovered) == 0x7b92 &&
     offsetof(NaviCategorySelectionWork, selectedIcon) == 0x20510 ? 1 : -1];
 #endif

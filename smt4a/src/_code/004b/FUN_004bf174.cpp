@@ -1,4 +1,3 @@
-/* NON_MATCHING: the marked-item comparison loads the selected item into r0 first and compares (r0, r1); retail loads the marked item first and compares (r1, r0). */
 #include "common.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
@@ -73,7 +72,9 @@ void FUN_004bf174(PickMenu *menu)
             sysPlaySe(0xF0);
             FUN_00183f58(5, 1, 1, 1);
         } else {
-            if (menu->items[menu->selected] == menu->items[menu->markedItem]) {
+            u32 selectedItem = menu->items[menu->selected];
+            u32 markedItem = menu->items[menu->markedItem];
+            if (selectedItem == markedItem) {
                 sysPlaySe(0x11B);
             } else {
                 sysPlaySe(0xF0);

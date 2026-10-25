@@ -13,7 +13,7 @@ int FUN_0041a7dc(int);
 int FUN_004c3d00(unsigned int *);
 int FUN_004c571c(int, int, unsigned int *, int);
 int clearTwoWords(int);
-int rt_memcpy_w(unsigned int *, int, int);
+int __aeabi_memcpy4(unsigned int *, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -51,7 +51,7 @@ extern unsigned int *FUN_003e83b4(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004c3d00. */
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: clearTwoWords. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int param_5)
@@ -78,7 +78,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
         if (puVar3 == (unsigned int *)0x0) {
           puVar3 = (unsigned int *)FUN_003e83b4(param_1,param_4,1);
         }
-        rt_memcpy_w(puVar3 + 0x59,param_2,0x230);
+        __aeabi_memcpy4(puVar3 + 0x59,param_2,0x230);
         temp_v1 = DAT_0057aa54 | DAT_0057aa34;
         *puVar3 = DAT_0057aa50 | DAT_0057aa30;
         puVar3[1] = temp_v1;
@@ -96,7 +96,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     else {
       puVar3 = param_1;
       FUN_003f1138();
-      rt_memcpy_w(puVar3 + 0x59,param_2,0x230);
+      __aeabi_memcpy4(puVar3 + 0x59,param_2,0x230);
       temp_v1 = DAT_0057aa4c | DAT_0057aa34;
       *puVar3 = DAT_0057aa48 | DAT_0057aa30;
       puVar3[1] = temp_v1;
@@ -113,7 +113,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   }
   else {
     puVar3 = (unsigned int *)FUN_003e83b4(param_1,param_4,0);
-    rt_memcpy_w(puVar3 + 0x59,param_2,0x230);
+    __aeabi_memcpy4(puVar3 + 0x59,param_2,0x230);
     if ((puVar3[0x59] & 1) != 0) {
       temp_v1 = DAT_0057aa3c | DAT_0057aa34;
       *puVar3 = DAT_0057aa38 | DAT_0057aa30;

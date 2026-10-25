@@ -5,7 +5,7 @@
 extern "C" {
 
 int sndAddDroppedFrames(unsigned char *);
-int rt_memcpy_w(int, unsigned int, int);
+int __aeabi_memcpy4(int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern int nn_snd_CTR_Dspsnd_IsInitialized(void);
 /* Supplied declaration required: sndAddDroppedFrames. */
 extern void nn_snd_CTR_OutputCapture_Write(unsigned int, short *, int);
 extern void nn_snd_CTR_VoiceManager_UpdateStatus(unsigned int, int, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_001cd7f4(int param_1)
@@ -54,7 +54,7 @@ void FUN_001cd7f4(int param_1)
                     0x1170));
         temp_v4 = temp_v4 + 1;
       } while ((int)temp_v4 < 0x18);
-      rt_memcpy_w(param_1 + 0x1324,
+      __aeabi_memcpy4(param_1 + 0x1324,
                   *(unsigned int *)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x1310),0x260)
       ;
       temp_v1 = *(int *)(param_1 + 0x14);

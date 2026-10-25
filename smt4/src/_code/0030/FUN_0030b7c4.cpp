@@ -6,7 +6,7 @@
 
 extern "C" {
 BtlMainState* btlGetMainState(void);
-void FUN_003de5d0(u32 kind, ScriptUnit* unit, BtlActionRecord* record, u32 flags);
+void btlReflectCreateKind2d(u32 kind, ScriptUnit* unit, BtlActionRecord* record, u32 flags);
 
 // Dispatches the script-selected action record for the current battle unit.
 u32 FUN_0030b7c4(void)
@@ -14,7 +14,7 @@ u32 FUN_0030b7c4(void)
     s32 index = scrGetArg(0);
     ScriptUnit* unit = btlUnitGet(g_btlScriptUnit);
     BtlMainState* state = btlGetMainState();
-    FUN_003de5d0(0, unit, &state->actions[index], 1);
+    btlReflectCreateKind2d(0, unit, &state->actions[index], 1);
     return 1;
 }
 }

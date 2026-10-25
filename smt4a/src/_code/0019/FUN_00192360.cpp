@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only in armcc's unrolled loop (retail: constant 0x20 in r5, entries in r4; here swapped). */
+/* NON_MATCHING: the unrolled search's remainder step keeps its constant and temporary in swapped registers (r4/r3). */
 #include "common.h"
 
 namespace {
@@ -20,7 +20,8 @@ extern "C" {
 /* Find the entry with the given id, or NULL. */
 IdEntry *FUN_00192360(IdEntryOwner *owner, u32 id)
 {
-    for (s32 i = 0; i < owner->count; ++i) {
+    s32 count = owner->count;
+    for (s32 i = 0; i < count; ++i) {
         if (owner->entries[i].id == id) {
             return &owner->entries[i];
         }

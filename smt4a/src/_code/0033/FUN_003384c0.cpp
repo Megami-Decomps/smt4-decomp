@@ -5,7 +5,7 @@
 extern "C" {
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, s32 kind);
 void rt_memclr(void *memory, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_003aa57c(EffEmitter *emitter, u16 kind, EffEmitterDesc *description);
 void FUN_003b8ecc(EffEmitter *emitter);
 void asdMdlManagerDestroy(EmitterCloneModel *model);
@@ -46,7 +46,7 @@ EffEmitter *FUN_003384c0(EffEmitter *source)
     clone->handle = -1;
     clone->maxCount = maxCount;
     clone->scale = 1.0f;
-    rt_memcpy_w(clone->parameters, original->parameters, sizeof(clone->parameters));
+    __aeabi_memcpy4(clone->parameters, original->parameters, sizeof(clone->parameters));
     EffEmitter *emitter = reinterpret_cast<EffEmitter *>(clone);
     FUN_003aa57c(emitter, original->resource->kind, description);
     if (clone->resource->data != NULL) {

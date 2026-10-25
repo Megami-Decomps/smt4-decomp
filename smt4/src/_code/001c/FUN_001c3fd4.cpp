@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0020578c(void);
+int partyPanelResetCursor(void);
 int FUN_00205a90(void);
 int FUN_0026b7c0(void);
 int FUN_0026b9bc(void);
@@ -58,7 +58,7 @@ int FUN_0029a0cc(...);
 int FUN_0029c4e4(...);
 int beginStatusPanelClose(void);
 int buttonHelpSetPreset(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int FUN_0026cba4(...);
 int partyPanelHandleCursorEdgeInput(...);
@@ -121,7 +121,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_001d1828. */
 extern int FUN_002015a4(void);
-/* Supplied declaration required: FUN_0020578c. */
+/* Supplied declaration required: partyPanelResetCursor. */
 /* Supplied declaration required: FUN_00205a90. */
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026b9bc. */
@@ -245,7 +245,7 @@ extern unsigned long long partyPanelFocusSelectedPartyMember(unsigned int);
 extern int btlItemUselessOnGroupMember(unsigned int, unsigned short);
 extern int FUN_003a65f4(unsigned int, int, unsigned short);
 /* Supplied declaration required: FUN_003ae34c. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -1337,7 +1337,7 @@ LAB_001c659c:
                                 *(unsigned char *)(temp_v24 + 0x678) = 0;
                               }
                               temp_v7 = gameGetUnitRecord((int)*(char *)(temp_v4 + 0x9107));
-                              rt_memcpy_w(temp_v1 + 0x11ec,temp_v7,0x604);
+                              __aeabi_memcpy4(temp_v1 + 0x11ec,temp_v7,0x604);
                               FUN_0029c4e4(temp_v1 + 0x11ec,0);
 LAB_001c5fe8:
                               FUN_00292bcc(*(unsigned int *)(temp_v16 + 0x6c8),0xff);
@@ -1362,7 +1362,7 @@ LAB_001c6598:
                               FUN_0026dafc(partyPanelPollSelectedStatusColor());
                               FUN_00292bcc(*(unsigned int *)(temp_v1 + 0x6c8),0xff);
                               temp_v7 = gameGetPlayerData();
-                              rt_memcpy_w(temp_v1 + 0x1160,temp_v7,0x8c);
+                              __aeabi_memcpy4(temp_v1 + 0x1160,temp_v7,0x8c);
                               FUN_0029a0cc(temp_v1 + 0x1160);
                               partyPanelSetState(0x13,1);
                               goto LAB_001c6598;
@@ -1535,7 +1535,7 @@ LAB_001c6598:
                               *(unsigned short *)(temp_v6 + 0x73c) = 0;
                             }
                             temp_v7 = gameGetUnitRecord(*(unsigned int *)(temp_v6 + 0x738));
-                            rt_memcpy_w(temp_v1 + 0x11ec,temp_v7,0x604);
+                            __aeabi_memcpy4(temp_v1 + 0x11ec,temp_v7,0x604);
                             FUN_0029c4e4(temp_v1 + 0x11ec,0);
 LAB_001c653c:
                             FUN_00292bcc(*(unsigned int *)(temp_v16 + 0x6d8),0xff);
@@ -2466,7 +2466,7 @@ LAB_001c7c50:
              (temp_v4 = FUN_003a65f4(0,(int)*(short *)(temp_v1 + 0x38),*(unsigned short *)(temp_v1 + 0x36)),
              temp_v4 != 0)) {
             FUN_0029dfc0(0);
-            FUN_0020578c();
+            partyPanelResetCursor();
             FUN_0026d144(temp_v6,0);
           }
           temp_v14 = 1;
@@ -2517,7 +2517,7 @@ LAB_001c7c50:
           }
           if ((temp_v4 != 0) && (temp_v4 = btlItemUselessOnGroupMember(0,*(unsigned short *)(temp_v1 + 0x36)), temp_v4 != 0)) {
             FUN_0029dfc0(0);
-            FUN_0020578c();
+            partyPanelResetCursor();
             FUN_0026d3e0(temp_v6,0);
           }
           FUN_0026c868();
@@ -2706,7 +2706,7 @@ LAB_001c7c50:
           *(unsigned int *)(temp_v4 + 0x7c) = temp_v21;
           *(unsigned int *)(temp_v4 + 0x80) = temp_v17;
           *(unsigned int *)(temp_v4 + 0x84) = temp_v18;
-          rt_memcpy_w(temp_v4 + 0x8c,temp_v1 + 0xbdc,0x500);
+          __aeabi_memcpy4(temp_v4 + 0x8c,temp_v1 + 0xbdc,0x500);
           unitRecalculateEffectiveStats(temp_v4);
           *(unsigned short *)(temp_v4 + 0x2a) = *(unsigned short *)(temp_v4 + 0xe);
           *(unsigned short *)(temp_v4 + 0x2c) = *(unsigned short *)(temp_v4 + 0x10);

@@ -17,7 +17,7 @@ typedef struct {
 
 extern int FUN_00145ec8(void);
 extern unsigned short *FUN_00145f04(char, unsigned int, short);
-extern int FUN_00145f5c(unsigned int);
+extern int gameTestFlagBit32(unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
 extern unsigned short *FUN_00148c30(char, unsigned int, short);
 extern unsigned int randRange(unsigned int);
@@ -133,7 +133,7 @@ LAB_0013bd60:
               temp_v6 = FUN_00145ec8();
             }
             else {
-              temp_v6 = FUN_00145f5c(temp_v4);
+              temp_v6 = gameTestFlagBit32(temp_v4);
             }
             if (temp_v6 != 0) {
               temp_v2 = *(unsigned char *)((int)puVar6 + 3) | 0x20;

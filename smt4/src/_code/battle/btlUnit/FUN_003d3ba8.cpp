@@ -23,7 +23,7 @@ int dataTable08Sub1GetRecord(void);
 int FUN_0033b33c(...);
 int btlLookupEffectValue(...);
 int FUN_003ddae8(...);
-int FUN_003ddd30(...);
+int btlReflectCreateKindf(...);
 int FUN_003de60c(...);
 int FUN_003de978(...);
 
@@ -49,7 +49,7 @@ int FUN_003ccaac(unsigned int *, unsigned int *, unsigned int, unsigned int, int
 int FUN_003cf4f8(unsigned int *, unsigned int *, short [266]);
 int FUN_003d13d4(...);
 int FUN_003dda20(...);
-int FUN_003ddea4(...);
+int btlReflectCreateKind2a(...);
 
 /* stack frame of param_2: 34 slot(s), 123 byte(s) */
 typedef struct {
@@ -116,7 +116,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00227334. */
 extern int FUN_00227630(int);
 /* Supplied declaration required: FUN_00227668. */
-extern int FUN_00227c30(int, int);
+extern int valueRangeSameSide(int, int);
 extern int FUN_0022810c(int, unsigned int);
 extern int FUN_002281a4(int);
 /* Supplied declaration required: FUN_00228220. */
@@ -169,8 +169,8 @@ extern unsigned int FUN_003dcf34(int);
 /* Supplied declaration required: btlReflectCreateKind1c. */
 /* Supplied declaration required: FUN_003dda20. */
 /* Supplied declaration required: FUN_003ddae8. */
-/* Supplied declaration required: FUN_003ddd30. */
-/* Supplied declaration required: FUN_003ddea4. */
+/* Supplied declaration required: btlReflectCreateKindf. */
+/* Supplied declaration required: btlReflectCreateKind2a. */
 /* Supplied declaration required: FUN_003de60c. */
 /* Supplied declaration required: FUN_003de874. */
 /* Supplied declaration required: FUN_003de978. */
@@ -308,7 +308,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       btlTargetSetFlag10(*param_1,temp_v4,0);
       FUN_002296f4(param_1,param_2,temp_v7,temp_v3 + temp_v5,10,0x14);
       FUN_00228930(param_1,temp_v7,1);
-      temp_v4 = FUN_00227c30(temp_v4,temp_v7);
+      temp_v4 = valueRangeSameSide(temp_v4,temp_v7);
       temp_v3 = param_2[4];
       if (temp_v4 != 0) {
         if ((int)temp_v3 < 0) {
@@ -449,7 +449,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       if ((temp_v12 != 0) && (temp_v0 = *(char *)(temp_v12 + 0x45), temp_v0 == '\x01' || temp_v0 == '\x02')) {
         temp_v10 = temp_v0;
       }
-      FUN_003ddea4(temp_v3 + temp_v4,param_2,temp_v15,temp_v10);
+      btlReflectCreateKind2a(temp_v3 + temp_v4,param_2,temp_v15,temp_v10);
     }
     if (temp_v13 != 0) {
       if (temp_v19 != 1 && temp_v19 != 2) {
@@ -616,7 +616,7 @@ LAB_003d444c:
             temp_v14 = FUN_00227630(DAT_00435d18);
             if (temp_v14 >= 1) {
               if (temp_v4 != 0) {
-                FUN_003ddd30(temp_v14,param_2,temp_v12);
+                btlReflectCreateKindf(temp_v14,param_2,temp_v12);
               }
             }
             else if (temp_v4 != 0) {
@@ -626,7 +626,7 @@ LAB_003d444c:
               else {
                 temp_v14 = temp_v20 + 0x1e;
               }
-              FUN_003ddd30(temp_v14,param_2,temp_v12);
+              btlReflectCreateKindf(temp_v14,param_2,temp_v12);
             }
           }
         }
@@ -638,7 +638,7 @@ LAB_003d444c:
         if (temp_v14 < 1) {
           temp_v14 = temp_v20 + 0x1e;
         }
-        FUN_003ddd30(temp_v14,param_2,temp_v12);
+        btlReflectCreateKindf(temp_v14,param_2,temp_v12);
       }
     }
     else if (!temp_v16) {
@@ -649,7 +649,7 @@ LAB_003d444c:
           if ((*(unsigned int *)(temp_v14 + 8) & 0x10) == 0) {
             temp_v18 = param_2[8];
           }
-          FUN_003ddd30(temp_v4,param_2,temp_v27,temp_v18);
+          btlReflectCreateKindf(temp_v4,param_2,temp_v27,temp_v18);
         }
       }
       else if (temp_v14 != 0) {
@@ -660,7 +660,7 @@ LAB_003d444c:
           temp_v18 = param_2[8];
           temp_v4 = temp_v20 + 0x1e;
         }
-        FUN_003ddd30(temp_v4,param_2,temp_v27,temp_v18);
+        btlReflectCreateKindf(temp_v4,param_2,temp_v27,temp_v18);
       }
       if (*(int *)(*param_1 + 0x48b8) != 0) {
         temp_v14 = FUN_002281a4(DAT_00435d18);
@@ -669,7 +669,7 @@ LAB_003d444c:
         if (temp_v14 < 1) {
           temp_v14 = temp_v20 + 0x1e;
         }
-        FUN_003ddd30(temp_v14,param_2,temp_v12);
+        btlReflectCreateKindf(temp_v14,param_2,temp_v12);
       }
     }
   }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: excluded-mask loads use LDM and the special-entry flag load adds an address instruction; 105 vs 106 instructions. */
+/* NON_MATCHING: required/excluded-mask u64 loads are ldr pairs in retail where armcc emits ldm, and the range loads pair as ldrd in retail; active-entry byte now folds (s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

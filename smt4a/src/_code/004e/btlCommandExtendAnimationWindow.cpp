@@ -1,4 +1,3 @@
-/* NON_MATCHING: frame clamp compares base/current in the opposite order; the remaining 21 instructions match. */
 #include "shard/W6_W6Match3_BattleTiming.h"
 
 struct AnimationWindow {
@@ -18,7 +17,7 @@ extern "C" void btlCommandExtendAnimationWindow(BtlActorRef*, BtlCommand* comman
 {
     CommandTimingView* timing = (CommandTimingView*)command;
     u32 current = timing->windows[animation].startFrame;
-    if ((s32)current > baseFrame) {
+    if (!((s32)current <= baseFrame)) {
         baseFrame = current;
     }
     if (startOffset >= 0) {

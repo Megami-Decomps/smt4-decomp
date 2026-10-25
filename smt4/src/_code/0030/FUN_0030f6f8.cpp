@@ -1,16 +1,16 @@
-/* NON_MATCHING: retail table lookup call argument lifetime differs. */
-#include "common.h"
+#include "shard/W4_W4Match5_DataTable.h"
 
 extern "C" {
-void dataTableGet(u32 table, u32 kind);
-u32 dataTableGetCount();
+
 extern void *g_aocSystem;
-u32 FUN_0025bed8(void *system, u32 version, u32 kind);
+s32 FUN_0025bed8(void *system, s32 kind, s32 slot);
+
 /* Adds installed and downloadable table counts. */
-u32 FUN_0030f6f8()
+s32 FUN_0030f6f8(void)
 {
-    dataTableGet(45, 2);
-    u32 count = dataTableGetCount();
+    s32 count = dataTableGetCount(dataTableGetSection(45, 2));
+
     return FUN_0025bed8(g_aocSystem, 37, 2) + count;
 }
-}
+
+} /* extern "C" */

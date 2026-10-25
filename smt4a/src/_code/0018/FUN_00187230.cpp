@@ -1,174 +1,154 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187230` (_code @ 0x187230, 0x408 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation and the cone-angle constant handling differ (retail keeps pi and 256/2pi in r9/s20 across the loop; 8 rows fewer here) */
+#include "common.h"
+
+/* One light as the shader setup reads it (0x70 bytes). */
+struct ShaderLight {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ f32 position[3];
+    /* 0x28 */ u8 type;            /* 5: directional, 7: spot-like (w = 1) */
+    /* 0x29 */ u8 unk29;
+    /* 0x2a */ u8 flags;           /* bit 1: enabled for the second pass */
+    /* 0x2b */ u8 unk2b[0x25];
+    /* 0x50 */ f32 direction[3];
+    /* 0x5c */ f32 color[3];
+    /* 0x68 */ f32 intensity;
+    /* 0x6c */ f32 coneAngle;      /* radians; 0 < angle < pi selects a spot cone */
+};
+
+/* The shader-state block: the lights and the vec4 tables they are packed into. */
+struct ShaderLightState {
+    /* 0x000 */ ShaderLight lights[8];
+    /* 0x380 */ f32 positionA[8][4];
+    /* 0x400 */ f32 positionB[8][4];
+    /* 0x480 */ f32 directionA[8][4];
+    /* 0x500 */ f32 directionB[8][4];
+    /* 0x580 */ f32 cone[8][4];
+    /* 0x600 */ f32 color[8][4];
+    /* 0x680 */ u8 unk680[0x80];
+    /* 0x700 */ u8 lightCount;
+    /* 0x701 */ u8 unk701[0x7];
+};
 
 extern "C" {
+void FUN_0019cb50(f32 *destination, const f32 *matrix, const f32 *source);
+f32 FUN_001b63b0(f32 angle);
 
-int FUN_0019cb50(int, float *, int);
-int FUN_001b63b0(void);
-int SBORROW4(int, int);
-
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0019cb50. */
-/* Supplied declaration required: FUN_001b63b0. */
-
-
-void FUN_00187230(int param_1,float *param_2,float *param_3)
-
+/* Rows of a 3x4 matrix applied to a point, and to a direction (no translation). */
+static __inline f32 transformX(const f32 *m, f32 x, f32 y, f32 z)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float *pfVar4;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  float temp_v6;
-  float temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  float temp_v12;
-  float temp_v13;
-  unsigned int temp_v14;
-  float temp_v15;
-  
-  temp_v2 = 0;
-  if (*(char *)(param_1 + 0x700) != '\0') {
-    temp_v15 = 40.743664f;
-    temp_v12 = 1.0f;
-    temp_v14 = 0x3f800054;
-    temp_v13 = 0.0f;
-    do {
-      temp_v0 = param_1 + temp_v2 * 0x70;
-      if (*(char *)(temp_v0 + 0x28) != '\x05') {
-        temp_v9 = *(float *)(temp_v0 + 0x20);
-        temp_v6 = *(float *)(temp_v0 + 0x1c);
-        temp_v7 = *(float *)(temp_v0 + 0x24);
-        temp_v1 = param_1 + temp_v2 * 0x10;
-        *(float *)(temp_v1 + 0x380) =
-             param_2[3] + *param_2 * temp_v6 + param_2[1] * temp_v9 + param_2[2] * temp_v7;
-        *(float *)(temp_v1 + 900) =
-             param_2[7] + param_2[4] * temp_v6 + param_2[5] * temp_v9 + param_2[6] * temp_v7;
-        *(float *)(temp_v1 + 0x388) =
-             param_2[0xb] + param_2[8] * temp_v6 + param_2[9] * temp_v9 + param_2[10] * temp_v7;
-        temp_v6 = *(float *)(temp_v0 + 0x1c);
-        temp_v7 = *(float *)(temp_v0 + 0x20);
-        temp_v9 = *(float *)(temp_v0 + 0x24);
-        *(float *)(temp_v1 + 0x400) =
-             param_3[3] + *param_3 * temp_v6 + param_3[1] * temp_v7 + param_3[2] * temp_v9;
-        *(float *)(temp_v1 + 0x404) =
-             param_3[7] + param_3[4] * temp_v6 + param_3[5] * temp_v7 + param_3[6] * temp_v9;
-        *(float *)(temp_v1 + 0x408) =
-             param_3[0xb] + param_3[8] * temp_v6 + param_3[9] * temp_v7 + param_3[10] * temp_v9;
-        *(float *)(temp_v1 + 0x38c) = temp_v12;
-        *(float *)(temp_v1 + 0x40c) = temp_v12;
-      }
-      else {
-        temp_v7 = *(float *)(temp_v0 + 0x50);
-        temp_v9 = *(float *)(temp_v0 + 0x54);
-        temp_v6 = *(float *)(temp_v0 + 0x58);
-        temp_v1 = param_1 + temp_v2 * 0x10;
-        *(float *)(temp_v1 + 0x380) = (-(*param_2 * temp_v7) - param_2[1] * temp_v9) - param_2[2] * temp_v6
-        ;
-        *(float *)(temp_v1 + 900) = (-(param_2[4] * temp_v7) - param_2[5] * temp_v9) - param_2[6] * temp_v6
-        ;
-        *(float *)(temp_v1 + 0x388) =
-             (-(param_2[8] * temp_v7) - param_2[9] * temp_v9) - param_2[10] * temp_v6;
-        temp_v9 = *(float *)(temp_v0 + 0x50);
-        temp_v6 = *(float *)(temp_v0 + 0x54);
-        temp_v7 = *(float *)(temp_v0 + 0x58);
-        *(float *)(temp_v1 + 0x400) = (-(*param_3 * temp_v9) - param_3[1] * temp_v6) - param_3[2] * temp_v7
-        ;
-        *(float *)(temp_v1 + 0x404) =
-             (-(param_3[4] * temp_v9) - param_3[5] * temp_v6) - param_3[6] * temp_v7;
-        *(float *)(temp_v1 + 0x408) =
-             (-(param_3[8] * temp_v9) - param_3[9] * temp_v6) - param_3[10] * temp_v7;
-        *(float *)(temp_v1 + 0x38c) = temp_v13;
-        *(float *)(temp_v1 + 0x40c) = temp_v13;
-      }
-      temp_v7 = *(float *)(temp_v0 + 0x50);
-      temp_v6 = *(float *)(temp_v0 + 0x54);
-      temp_v9 = *(float *)(temp_v0 + 0x58);
-      temp_v1 = param_1 + temp_v2 * 0x10;
-      *(float *)(temp_v1 + 0x480) = *param_2 * temp_v7 + param_2[1] * temp_v6 + param_2[2] * temp_v9;
-      *(float *)(temp_v1 + 0x484) = param_2[4] * temp_v7 + param_2[5] * temp_v6 + param_2[6] * temp_v9;
-      *(float *)(temp_v1 + 0x488) = param_2[8] * temp_v7 + param_2[9] * temp_v6 + param_2[10] * temp_v9;
-      temp_v6 = *(float *)(temp_v0 + 0x58);
-      temp_v7 = *(float *)(temp_v0 + 0x50);
-      temp_v9 = *(float *)(temp_v0 + 0x54);
-      *(float *)(temp_v1 + 0x500) = *param_3 * temp_v7 + param_3[1] * temp_v9 + param_3[2] * temp_v6;
-      *(float *)(temp_v1 + 0x504) = param_3[4] * temp_v7 + param_3[5] * temp_v9 + param_3[6] * temp_v6;
-      *(float *)(temp_v1 + 0x508) = param_3[8] * temp_v7 + param_3[9] * temp_v9 + param_3[10] * temp_v6;
-      temp_v6 = temp_v12;
-      if (*(char *)(temp_v0 + 0x28) != '\a') {
-        temp_v6 = temp_v13;
-      }
-      *(float *)(temp_v1 + 0x48c) = temp_v6;
-      temp_v6 = temp_v12;
-      if (*(char *)(temp_v0 + 0x28) != '\a') {
-        temp_v6 = temp_v13;
-      }
-      *(float *)(temp_v1 + 0x50c) = temp_v6;
-      temp_v6 = temp_v12;
-      if ((*(unsigned char *)(temp_v0 + 0x2a) & 2) == 0) {
-        temp_v6 = temp_v13;
-      }
-      temp_v8 = *(unsigned int *)(temp_v0 + 0x5c);
-      temp_v10 = *(unsigned int *)(temp_v0 + 0x60);
-      temp_v11 = *(unsigned int *)(temp_v0 + 100);
-      *(float *)(temp_v1 + 0x60c) = temp_v6;
-      *(unsigned int *)(temp_v1 + 0x600) = temp_v8;
-      *(unsigned int *)(temp_v1 + 0x604) = temp_v10;
-      *(unsigned int *)(temp_v1 + 0x608) = temp_v11;
-      temp_v6 = *(float *)(temp_v0 + 0x6c);
-      temp_v3 = temp_v6 < temp_v13;
-      temp_v4 = temp_v6 == temp_v13;
-      temp_v5 = (temp_v6 != temp_v6) || (temp_v13 != temp_v13);
-      if (!temp_v4 && !temp_v3) {
-        temp_v5 = SBORROW4(0x40490fdb,(int)temp_v6);
-        temp_v3 = 0x40490fdb - (int)temp_v6 < 0;
-        temp_v4 = temp_v6 == 3.1415927f;
-      }
-      if (!(temp_v4 || temp_v3 != temp_v5)) {
-        temp_v6 = temp_v6 * temp_v15;
-        temp_v8 = *(unsigned int *)(temp_v0 + 0x68);
-        temp_v7 = temp_v13;
-        FUN_001b63b0();
-        *(unsigned int *)(temp_v1 + 0x580) = temp_v8;
-        *(float *)(temp_v1 + 0x584) = temp_v6;
-        *(float *)(temp_v1 + 0x588) = temp_v13;
-        *(float *)(temp_v1 + 0x58c) = temp_v12;
-        temp_v13 = temp_v7;
-      }
-      else {
-        pfVar4 = (float *)(temp_v1 + 0x580);
-        *pfVar4 = *(float *)(temp_v0 + 0x68);
-        if (temp_v6 == temp_v13) {
-          *(unsigned int *)(temp_v1 + 0x584) = temp_v14;
-          pfVar4 = (float *)(temp_v1 + 0x588);
-          *pfVar4 = temp_v13;
-          *(float *)(temp_v1 + 0x58c) = temp_v12;
-        }
-        if (temp_v6 != temp_v13) {
-          pfVar4[1] = temp_v6;
-          pfVar4[2] = temp_v13;
-          pfVar4[3] = temp_v13;
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < (int)(unsigned int)*(unsigned char *)(param_1 + 0x700));
-  }
-  if (*(char *)(param_1 + 0x6a9) != '\0') {
-    FUN_0019cb50(param_1 + 0x6e0,param_2,param_1 + 0x6d0);
-    FUN_0019cb50(param_1 + 0x6f0,param_3,param_1 + 0x6d0);
-    *(unsigned int *)(param_1 + 0x6ec) = *(unsigned int *)(param_1 + 0x6dc);
-    *(unsigned int *)(param_1 + 0x6fc) = *(unsigned int *)(param_1 + 0x6dc);
-  }
-  return;
+    return m[3] + m[0] * x + (m[1] * y + m[2] * z);
 }
 
-} /* extern "C" */
+static __inline f32 transformY(const f32 *m, f32 x, f32 y, f32 z)
+{
+    return m[7] + m[4] * x + (m[5] * y + m[6] * z);
+}
+
+static __inline f32 transformZ(const f32 *m, f32 x, f32 y, f32 z)
+{
+    return m[11] + m[8] * x + (m[9] * y + m[10] * z);
+}
+
+static __inline f32 rotateX(const f32 *m, f32 x, f32 y, f32 z)
+{
+    return m[0] * x + m[1] * y + m[2] * z;
+}
+
+static __inline f32 rotateY(const f32 *m, f32 x, f32 y, f32 z)
+{
+    return m[4] * x + m[5] * y + m[6] * z;
+}
+
+static __inline f32 rotateZ(const f32 *m, f32 x, f32 y, f32 z)
+{
+    return m[8] * x + m[9] * y + m[10] * z;
+}
+
+/* Fills the shader light tables for both view matrices: transformed positions and directions,
+   the light colors and the spot-cone terms, then refreshes the secondary pair when enabled. */
+void FUN_00187230(u8 *state, const f32 *viewA, const f32 *viewB)
+{
+    ShaderLightState *lights = reinterpret_cast<ShaderLightState *>(state);
+    s32 i = 0;
+    if (lights->lightCount > 0) {
+        do {
+            ShaderLight *light = &lights->lights[i];
+            if (light->type != 5) {
+                f32 px = light->position[0];
+                f32 py = light->position[1];
+                f32 pz = light->position[2];
+                lights->positionA[i][0] = transformX(viewA, px, py, pz);
+                lights->positionA[i][1] = transformY(viewA, px, py, pz);
+                lights->positionA[i][2] = transformZ(viewA, px, py, pz);
+                px = light->position[0];
+                py = light->position[1];
+                pz = light->position[2];
+                lights->positionB[i][0] = transformX(viewB, px, py, pz);
+                lights->positionB[i][1] = transformY(viewB, px, py, pz);
+                lights->positionB[i][2] = transformZ(viewB, px, py, pz);
+                lights->positionA[i][3] = 1.0f;
+                lights->positionB[i][3] = 1.0f;
+            } else {
+                f32 dx = light->direction[0];
+                f32 dy = light->direction[1];
+                f32 dz = light->direction[2];
+                lights->positionA[i][0] = -(viewA[0] * dx) - viewA[1] * dy - viewA[2] * dz;
+                lights->positionA[i][1] = -(viewA[4] * dx) - viewA[5] * dy - viewA[6] * dz;
+                lights->positionA[i][2] = -(viewA[8] * dx) - viewA[9] * dy - viewA[10] * dz;
+                dx = light->direction[0];
+                dy = light->direction[1];
+                dz = light->direction[2];
+                lights->positionB[i][0] = -(viewB[0] * dx) - viewB[1] * dy - viewB[2] * dz;
+                lights->positionB[i][1] = -(viewB[4] * dx) - viewB[5] * dy - viewB[6] * dz;
+                lights->positionB[i][2] = -(viewB[8] * dx) - viewB[9] * dy - viewB[10] * dz;
+                lights->positionA[i][3] = 0.0f;
+                lights->positionB[i][3] = 0.0f;
+            }
+            f32 dx = light->direction[0];
+            f32 dy = light->direction[1];
+            f32 dz = light->direction[2];
+            lights->directionA[i][0] = rotateX(viewA, dx, dy, dz);
+            lights->directionA[i][1] = rotateY(viewA, dx, dy, dz);
+            lights->directionA[i][2] = rotateZ(viewA, dx, dy, dz);
+            dx = light->direction[0];
+            dy = light->direction[1];
+            dz = light->direction[2];
+            lights->directionB[i][0] = rotateX(viewB, dx, dy, dz);
+            lights->directionB[i][1] = rotateY(viewB, dx, dy, dz);
+            lights->directionB[i][2] = rotateZ(viewB, dx, dy, dz);
+            lights->directionA[i][3] = light->type == 7 ? 1.0f : 0.0f;
+            lights->directionB[i][3] = light->type == 7 ? 1.0f : 0.0f;
+            lights->color[i][0] = light->color[0];
+            lights->color[i][1] = light->color[1];
+            lights->color[i][2] = light->color[2];
+            lights->color[i][3] = (light->flags & 2) != 0 ? 1.0f : 0.0f;
+            f32 angle = light->coneAngle;
+            if (angle > 0.0f && angle < 3.1415927f) {
+                f32 term = FUN_001b63b0(angle * (256.0f / 6.2831855f));
+                lights->cone[i][0] = light->intensity;
+                lights->cone[i][1] = term;
+                lights->cone[i][2] = 0.0f;
+                lights->cone[i][3] = 1.0f;
+            } else {
+                lights->cone[i][0] = light->intensity;
+                if (angle == 0.0f) {
+                    lights->cone[i][1] = 1.0000005f;
+                    lights->cone[i][2] = 0.0f;
+                    lights->cone[i][3] = 1.0f;
+                } else {
+                    lights->cone[i][1] = angle;
+                    lights->cone[i][2] = 0.0f;
+                    lights->cone[i][3] = 0.0f;
+                }
+            }
+            i++;
+        } while (i < lights->lightCount);
+    }
+    if (state[0x6a9] != 0) {
+        FUN_0019cb50(reinterpret_cast<f32 *>(state + 0x6e0), viewA, reinterpret_cast<f32 *>(state + 0x6d0));
+        FUN_0019cb50(reinterpret_cast<f32 *>(state + 0x6f0), viewB, reinterpret_cast<f32 *>(state + 0x6d0));
+        *reinterpret_cast<u32 *>(state + 0x6ec) = *reinterpret_cast<u32 *>(state + 0x6dc);
+        *reinterpret_cast<u32 *>(state + 0x6fc) = *reinterpret_cast<u32 *>(state + 0x6dc);
+    }
+}
+}

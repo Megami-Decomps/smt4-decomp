@@ -5,16 +5,7 @@
 #include "common.h"
 #include <stddef.h>
 
-/* A stack of render states: the current state is entries[count], and `apply` re-applies it
- * whenever the top state changes (or `dirty` is set). */
-typedef struct RenderStateStack {
-    /* 0x00 */ s32 count;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ s32 entries[4];
-    /* 0x18 */ u8 dirty;
-    /* 0x19 */ u8 unk19[3];
-    /* 0x1C */ void (*apply)(int state);
-} RenderStateStack;
+#include "gfx/RenderStateStack.h"
 
 /* The draw context (IV layout), which holds several render-state stacks. */
 typedef struct RenderCtx {
@@ -47,8 +38,12 @@ typedef struct RenderCtx {
             /* 0x05F4 */ u8 type;
         } cameraSelection;
         struct {
-            u8 unk052C[0xCC0];
+            u8 unk052C[0xCB8];
+            /* 0x11E4 */ u32 selectedPreset; /* preset block FUN_002c1b64 keeps applied */
+            /* 0x11E8 */ u8 unk11E8[4];
             /* 0x11EC */ RenderStateStack stackD;
+            /* 0x120C */ RenderStateStack stackE;
+            /* 0x122C */ RenderStateStack stackF;
         } depthStacks;
     };
     /* 0x124C */ RenderStateStack stackA;
@@ -56,7 +51,7 @@ typedef struct RenderCtx {
         /* 0x126C */ u8 unk126C[0x40];
         struct {
             /* 0x126C */ RenderStateStack stackC;
-            /* 0x128C */ u8 unk128c[0x20];
+            /* 0x128C */ RenderStateStack stackG;
         } additional;
     };
     /* 0x12AC */ RenderStateStack stackB;
@@ -99,8 +94,12 @@ typedef struct RenderCtxA {
             /* 0x11E9 */ u8 unk11E9[0x6F];
         } color;
         struct {
-            u8 unk0700[0xAF8];
+            u8 unk0700[0xAF0];
+            /* 0x11F0 */ void *selectedPreset; /* preset block FUN_0016c4b8 keeps applied */
+            /* 0x11F4 */ u8 unk11F4[4];
             /* 0x11F8 */ RenderStateStack stackD;
+            /* 0x1218 */ RenderStateStack stackE;
+            /* 0x1238 */ RenderStateStack stackF;
         } depthStacks;
     };
     /* 0x1258 */ RenderStateStack stackA;
@@ -108,7 +107,7 @@ typedef struct RenderCtxA {
         /* 0x1278 */ u8 unk1278[0x40];
         struct {
             /* 0x1278 */ RenderStateStack stackC;
-            /* 0x1298 */ u8 unk1298[0x20];
+            /* 0x1298 */ RenderStateStack stackG;
         } additional;
     };
     /* 0x12B8 */ RenderStateStack stackB;
@@ -137,50 +136,6 @@ typedef char RenderCtxAStereoOffsetCheck[
 typedef char RenderCtxAColorScaleOffsetCheck[offsetof(RenderCtxA, color.colorScale) == 0x11D8 ? 1 : -1];
 typedef char RenderCtxAColorDirtyOffsetCheck[offsetof(RenderCtxA, color.colorScaleDirty) == 0x11E8 ? 1 : -1];
 typedef char RenderCtxAColorTargetOffsetCheck[offsetof(RenderCtxA, colorTarget.colorScaleTarget) == 0x530 ? 1 : -1];
-
-/* Whether a new top state has to be applied: the stack was marked dirty or the state changed. */
-static __inline bool renderStackNeedsApply(RenderStateStack *st, int prev, int state)
-{
-    return st->dirty != 0 || prev != state;
-}
-
-/* Pushes `state`; the state is re-applied if it differs from the previous top. */
-static __inline void renderStackPush(RenderStateStack *st, int state)
-{
-    int prev = st->entries[st->count];
-
-    st->count++;
-    st->entries[st->count] = state;
-    if (renderStackNeedsApply(st, prev, state)) {
-        st->apply(state);
-        st->dirty = 0;
-    }
-}
-
-/* Pops the top state; the state below is re-applied if it differs. */
-static __inline void renderStackPop(RenderStateStack *st)
-{
-    int top = st->entries[st->count];
-    int cur;
-
-    st->count--;
-    cur = st->entries[st->count];
-    if (st->dirty != 0 || top != cur) {
-        st->apply(cur);
-        st->dirty = 0;
-    }
-}
-
-/* Replaces the current state without changing the stack depth. */
-static __inline void renderStackSet(RenderStateStack *st, int state)
-{
-    int previous = st->entries[st->count];
-    st->entries[st->count] = state;
-    if (st->dirty != 0 || previous != state) {
-        st->apply(state);
-        st->dirty = 0;
-    }
-}
 
 /* Pushes `state` on the context's first stack; the stack is located after `state` is evaluated. */
 static __inline void renderCtxPushA(RenderCtx *context, int state)
@@ -230,6 +185,24 @@ static __inline void renderCtxSetB(RenderCtx *context, int state)
 static __inline void renderCtxSetB(RenderCtxA *context, int state)
 {
     renderStackSet(&context->stackB, state);
+}
+
+/* Pushes the evaluated state on the context's fifth stack. */
+static __inline void renderCtxPushE(RenderCtx *context, int state)
+{
+    renderStackPush(&context->depthStacks.stackE, state);
+}
+
+/* Pushes the evaluated state on the context's sixth stack. */
+static __inline void renderCtxPushF(RenderCtx *context, int state)
+{
+    renderStackPush(&context->depthStacks.stackF, state);
+}
+
+/* Pushes the evaluated state on the context's seventh stack. */
+static __inline void renderCtxPushG(RenderCtx *context, int state)
+{
+    renderStackPush(&context->additional.stackG, state);
 }
 
 #endif

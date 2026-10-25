@@ -1,4 +1,3 @@
-/* NON_MATCHING: all instructions match; aggregate snapshot copy calls __aeabi_memcpy4 instead of retail rt_memcpy_w. Explicit standard memcpy produces the same different helper symbol. */
 #include "common.h"
 
 struct ReadinessRecord {

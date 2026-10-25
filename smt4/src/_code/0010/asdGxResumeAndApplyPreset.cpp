@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reloads the global base for the final force-black byte query; compiler reuses saved R4, producing one fewer instruction. */
+/* NON_MATCHING: armcc emits `nop {0}` between the force-black getter's cmp and bne; retail has none. */
 #include "shard/W6_W6Match3_GxPresetResumeState.h"
 
 extern "C" {
@@ -6,6 +6,7 @@ extern GxPresetResumeState g_asdGxPresets;
 void asdFileWakeWorker(void);
 void asdGxSetTopScreenMode(u32 mode);
 void gxLcdClearForceBlack(void);
+u8 asdGxGetBlackForced(const GxPresetResumeState *presets);
 
 void asdGxResumeAndApplyPreset(void)
 {
@@ -23,7 +24,7 @@ void asdGxResumeAndApplyPreset(void)
             break;
         }
     }
-    if (!g_asdGxPresets.forceBlackCleared) {
+    if (!asdGxGetBlackForced(&g_asdGxPresets)) {
         gxLcdClearForceBlack();
         g_asdGxPresets.forceBlackCleared = 1;
     }

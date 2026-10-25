@@ -1,206 +1,225 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc248` (_code @ 0x3bc248, 0x428 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only (retail keeps a zero in r6 and the index in r5 across the record lookup, which it lays out of line) */
+#include "common.h"
+#include "gamedata/DataTable.h"
+#include "shard/W6_W6Match1_Table03Record.h"
+#include <stddef.h>
+
 struct AocSystem;
-struct Table03Record;
+
+/* A 0x1c-byte block copied verbatim from the record (word, five-word name, word). */
+struct SpriteBlock {
+    u32 id;
+    u32 name[5];
+    u32 tail;
+};
+
+/* One record of data table 03 (0x60 bytes), as the sprite initializer reads it. */
+struct SpriteTemplateRecord {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ s16 phase;
+    /* 0x06 */ u16 timer;
+    /* 0x08 */ u8 red;
+    /* 0x09 */ u8 green;
+    /* 0x0A */ u8 blue;
+    /* 0x0B */ u8 alpha;
+    /* 0x0C */ u8 scalePercent;
+    /* 0x0D */ s8 bank;
+    /* 0x0E */ s8 page;
+    /* 0x0F */ u8 unk0F;
+    /* 0x10 */ u32 resource;
+    /* 0x14 */ u16 values[6];
+    /* 0x20 */ u8 unk20[8];
+    /* 0x28 */ char name[16];
+    /* 0x38 */ u16 limits[4];
+    /* 0x40 */ s16 ratio;
+    /* 0x42 */ u16 ratioExtra;
+    /* 0x44 */ SpriteBlock block;
+};
+
+/* The sprite's state flag word. Fields are assigned one at a time, which is why every store
+   re-reads and masks the word. */
+struct SpriteFlagBits {
+    u32 unk0 : 16;
+    u32 additive : 1;
+    u32 subtractive : 1;
+    u32 noDepth : 1;
+    u32 sorted : 1;
+    u32 unk20 : 1;
+    u32 colorMask : 2;
+    u32 mirrorX : 1;
+    u32 mirrorY : 1;
+    u32 unk25 : 1;
+    u32 unk26 : 1;
+    u32 unk27 : 1;
+    u32 hasLimits : 1;
+    u32 unk29 : 1;
+    u32 unk30 : 1;
+    u32 unk31 : 1;
+};
+
+/* Bits 0-5 of the mode word, the part the initializer fills from the record. */
+struct SpriteModeBits {
+    u32 unk0 : 1;
+    u32 unk1 : 1;
+    u32 unk2 : 1;
+    u32 unk3 : 1;
+    u32 unk4 : 1;
+    u32 unk5 : 1;
+    u32 unk6 : 26;
+};
+
+/* A sprite descriptor (0x74 bytes) as initialized from a table 03 record. */
+struct SpriteDescriptor {
+    /* 0x00 */ u32 values[6];
+    /* 0x18 */ SpriteFlagBits flags;
+    union {
+        /* 0x1C */ SpriteModeBits mode;
+        struct {
+            /* 0x1C */ u16 unk1C;
+            /* 0x1E */ u8 format;
+            /* 0x1F */ s8 bank;
+        } info;
+    };
+    /* 0x20 */ s8 page;
+    /* 0x21 */ u8 unk21[3];
+    /* 0x24 */ u32 resource;
+    /* 0x28 */ s16 phase;
+    /* 0x2A */ u16 timer;
+    /* 0x2C */ u8 red;
+    /* 0x2D */ u8 green;
+    /* 0x2E */ u8 blue;
+    /* 0x2F */ u8 alpha;
+    /* 0x30 */ f32 scale[2];
+    /* 0x38 */ char name[16];
+    /* 0x48 */ u16 limits[4];
+    /* 0x50 */ u16 ratioPercent;
+    /* 0x52 */ s16 ratio;
+    /* 0x54 */ u16 ratioExtra;
+    /* 0x56 */ u8 hasBlock;
+    /* 0x57 */ u8 unk57;
+    /* 0x58 */ SpriteBlock block;
+};
 
 extern "C" {
+extern AocSystem *g_aocSystem;
+Table03Record *aocFindTable03RecordByKey(AocSystem *system, u32 index);
+void memClear(void *destination, s32 size);
+s32 libc_strcmp(const char *a, const char *b);
 
-int libc_strcmp(unsigned char *, unsigned int *);
-int memClear(unsigned int *, int);
-Table03Record *aocFindTable03RecordByKey(AocSystem *, unsigned int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-extern unsigned char LAB_003bc65c; /* 0x3bc65c */
-extern AocSystem *g_aocSystem; /* 0x433158 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: libc_strcmp. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int *dataTableGetEntries(unsigned int);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: memClear. */
-
-
-void FUN_003bc248(unsigned int *param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4)
-
+/* Initialize sprite descriptor `sprite` from record `index` of table 03; the bank and page
+   given here replace the record's own when it does not set both. */
+void FUN_003bc248(SpriteDescriptor *sprite, s32 index, u8 bank, u8 page)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  char temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  unsigned int *puVar6;
-  unsigned char *puVar7;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int in_fpscr;
-  float temp_v10;
-  
-  temp_v2 = dataTableGet(3,0);
-  puVar4 = (unsigned int *)dataTableGetEntries(temp_v2);
-  puVar6 = puVar4;
-  if (((-1 < (int)param_2) && (temp_v3 = dataTableGetCount(temp_v2), param_2 < temp_v3)) &&
-     (puVar6 = (unsigned int *)aocFindTable03RecordByKey(g_aocSystem,param_2), puVar6 == (unsigned int *)0x0)) {
-    puVar6 = puVar4 + param_2 * 0x18;
-  }
-  memClear(param_1,0x74);
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[0xc] = 0x3f800000;
-  param_1[0xd] = 0x3f800000;
-  temp_v0 = *(char *)((int)puVar6 + 0xd);
-  *(char *)((int)param_1 + 0x1f) = temp_v0;
-  if ('\0' < temp_v0) {
-    temp_v0 = *(char *)((int)puVar6 + 0xe);
-  }
-  *(char *)(param_1 + 8) = *(char *)((int)puVar6 + 0xe);
-  if (temp_v0 < '\x01') {
-    *(unsigned char *)((int)param_1 + 0x1f) = param_3;
-    *(unsigned char *)(param_1 + 8) = param_4;
-  }
-  param_1[9] = puVar6[4];
-  temp_v4 = param_1[6];
-  temp_v3 = (*puVar6 & 0x800) << 0x13;
-  param_1[6] = temp_v3 | (temp_v4 & 0xbfffffff);
-  temp_v3 = temp_v3 | (temp_v4 & 0x3fffffff) | ((*puVar6 & 0x1000) << 0x13);
-  param_1[6] = temp_v3;
-  *param_1 = (unsigned int)(unsigned short)puVar6[5];
-  param_1[1] = (unsigned int)*(unsigned short *)((int)puVar6 + 0x16);
-  param_1[2] = (unsigned int)(unsigned short)puVar6[6];
-  param_1[3] = (unsigned int)*(unsigned short *)((int)puVar6 + 0x1a);
-  param_1[4] = (unsigned int)(unsigned short)puVar6[7];
-  param_1[5] = (unsigned int)*(unsigned short *)((int)puVar6 + 0x1e);
-  if ((char)puVar6[10] == '0') {
-    *(unsigned char *)(param_1 + 0xe) = 0;
-  }
-  else {
-    temp_v4 = puVar6[0xb];
-    temp_v6 = puVar6[0xc];
-    temp_v9 = puVar6[0xd];
-    param_1[0xe] = puVar6[10];
-    param_1[0xf] = temp_v4;
-    param_1[0x10] = temp_v6;
-    param_1[0x11] = temp_v9;
-  }
-  if ((*puVar6 & 1) != 0) {
-    param_1[6] = temp_v3 | 0x10000;
-  }
-  if ((*puVar6 & 2) != 0) {
-    param_1[6] = param_1[6] | 0x20000;
-  }
-  if ((*puVar6 & 4) != 0) {
-    param_1[6] = param_1[6] | 0x600000;
-  }
-  if ((*puVar6 & 8) == 0) {
-    param_1[6] = param_1[6] | 0x40000;
-  }
-  temp_v3 = param_1[6];
-  if ((*puVar6 & 0x10) != 0) {
-    temp_v3 = temp_v3 | 0x80000;
-    param_1[6] = temp_v3;
-  }
-  temp_v7 = (*puVar6 & 0x100) << 0xf;
-  param_1[6] = (temp_v3 & 0xff7fffff) | temp_v7;
-  temp_v8 = (*puVar6 & 0x200) << 0xf;
-  param_1[6] = (temp_v3 & 0xfe7fffff) | temp_v7 | temp_v8;
-  temp_v4 = (*puVar6 & 0x20) << 0x14;
-  param_1[6] = (temp_v3 & 0xfc7fffff) | temp_v7 | temp_v8 | temp_v4;
-  temp_v6 = (*puVar6 & 0x40) << 0x14;
-  param_1[6] = (temp_v3 & 0xf87fffff) | temp_v7 | temp_v8 | temp_v4 | temp_v6;
-  temp_v9 = (*puVar6 & 0x80) << 0x14;
-  param_1[6] = (temp_v3 & 0xf07fffff) | temp_v7 | temp_v8 | temp_v4 | temp_v6 | temp_v9;
-  temp_v4 = (temp_v3 & 0xd07fffff) | temp_v7 | temp_v8 | temp_v4 | temp_v6 | temp_v9 |
-          ((*puVar6 & 0x400) << 0x13);
-  param_1[6] = temp_v4;
-  temp_v6 = param_1[7];
-  temp_v3 = (*puVar6 & 0x3fff) >> 0xd;
-  param_1[7] = (temp_v6 & 0xfffffffe) | temp_v3;
-  temp_v9 = (*puVar6 >> 0x16) & 2;
-  param_1[7] = (temp_v6 & 0xfffffffc) | temp_v3 | temp_v9;
-  temp_v7 = (*puVar6 >> 0x16) & 4;
-  param_1[7] = (temp_v6 & 0xfffffff8) | temp_v3 | temp_v9 | temp_v7;
-  *(short *)(param_1 + 10) = (short)puVar6[1];
-  *(unsigned short *)((int)param_1 + 0x2a) = *(unsigned short *)((int)puVar6 + 6);
-  temp_v8 = (*puVar6 >> 0x16) & 8;
-  param_1[7] = (temp_v6 & 0xfffffff0) | temp_v3 | temp_v9 | temp_v7 | temp_v8;
-  temp_v5 = (*puVar6 >> 0x16) & 0x10;
-  param_1[7] = (temp_v6 & 0xffffffe0) | temp_v3 | temp_v9 | temp_v7 | temp_v8 | temp_v5;
-  param_1[7] = (temp_v6 & 0xffffffc0) | temp_v3 | temp_v9 | temp_v7 | temp_v8 | temp_v5 |
-               ((*puVar6 >> 0x16) & 0x20);
-  *(unsigned char *)((int)param_1 + 0x1e) = (unsigned char)((*puVar6 << 0xf) >> 0x1d) - 1;
-  *(char *)(param_1 + 0xb) = (char)puVar6[2];
-  *(unsigned char *)((int)param_1 + 0x2d) = *(unsigned char *)((int)puVar6 + 9);
-  *(unsigned char *)((int)param_1 + 0x2e) = *(unsigned char *)((int)puVar6 + 10);
-  *(unsigned char *)((int)param_1 + 0x2f) = *(unsigned char *)((int)puVar6 + 0xb);
-  if ((short)puVar6[0xe] != 0) {
-    *(short *)(param_1 + 0x12) = (short)puVar6[0xe];
-    param_1[6] = temp_v4 | 0x10000000;
-  }
-  else {
-    *(unsigned short *)(param_1 + 0x12) = 0;
-  }
-  if (*(short *)((int)puVar6 + 0x3a) == 0) {
-    *(unsigned short *)((int)param_1 + 0x4a) = 0;
-  }
-  else {
-    *(short *)((int)param_1 + 0x4a) = *(short *)((int)puVar6 + 0x3a);
-    param_1[6] = param_1[6] | 0x10000000;
-  }
-  if ((short)puVar6[0xf] == 0) {
-    *(unsigned short *)(param_1 + 0x13) = 0;
-  }
-  else {
-    *(short *)(param_1 + 0x13) = (short)puVar6[0xf];
-    param_1[6] = param_1[6] | 0x10000000;
-  }
-  if (*(short *)((int)puVar6 + 0x3e) == 0) {
-    *(unsigned short *)((int)param_1 + 0x4e) = 0;
-  }
-  else {
-    *(short *)((int)param_1 + 0x4e) = *(short *)((int)puVar6 + 0x3e);
-    param_1[6] = param_1[6] | 0x10000000;
-  }
-  if ((unsigned char)puVar6[3] != 0) {
-    temp_v10 = (float)VectorUnsignedToFloat((unsigned int)(unsigned char)puVar6[3],(unsigned char)(in_fpscr >> 0x16) & 3);
-    param_1[0xd] = (unsigned int)(temp_v10 * 0.01f);
-  }
-  temp_v1 = 0;
-  if ((short)puVar6[0x10] != 0) {
-    temp_v1 = 100;
-  }
-  *(unsigned short *)(param_1 + 0x14) = temp_v1;
-  *(short *)((int)param_1 + 0x52) = (short)puVar6[0x10];
-  *(unsigned short *)(param_1 + 0x15) = *(unsigned short *)((int)puVar6 + 0x42);
-  puVar7 = &LAB_003bc65c;
-  libc_strcmp(&LAB_003bc65c,puVar6 + 0x12);
-  if (puVar7 == (unsigned char *)0x0) {
-    *(unsigned char *)((int)param_1 + 0x56) = 0;
-  }
-  else {
-    param_1[0x16] = puVar6[0x11];
-    temp_v3 = puVar6[0x12];
-    temp_v4 = puVar6[0x13];
-    temp_v6 = puVar6[0x14];
-    temp_v9 = puVar6[0x15];
-    temp_v7 = puVar6[0x16];
-    param_1[0x1c] = puVar6[0x17];
-    param_1[0x17] = temp_v3;
-    param_1[0x18] = temp_v4;
-    param_1[0x19] = temp_v6;
-    param_1[0x1a] = temp_v9;
-    param_1[0x1b] = temp_v7;
-  }
-  return;
-}
+    void *section = dataTableGet(3, 0);
+    Table03Record *records = static_cast<Table03Record *>(dataTableGetEntries(section));
+    Table03Record *found = records;
+    if (index >= 0 && static_cast<u32>(index) < dataTableGetCount(section)) {
+        found = aocFindTable03RecordByKey(g_aocSystem, index);
+        if (found == NULL) {
+            found = &records[index];
+        }
+    }
+    const SpriteTemplateRecord *record = reinterpret_cast<const SpriteTemplateRecord *>(found);
 
-} /* extern "C" */
+    memClear(sprite, sizeof(SpriteDescriptor));
+    for (s32 i = 0; i < 6; i++) {
+        sprite->values[i] = 0;
+    }
+    sprite->scale[0] = 1.0f;
+    sprite->scale[1] = 1.0f;
+    s8 selected = record->bank;
+    sprite->info.bank = selected;
+    if (selected > 0) {
+        selected = record->page;
+    }
+    sprite->page = selected;
+    if (selected <= 0) {
+        sprite->info.bank = bank;
+        sprite->page = page;
+    }
+    sprite->resource = record->resource;
+    sprite->flags.unk30 = (record->flags >> 11) & 1;
+    sprite->flags.unk31 = (record->flags >> 12) & 1;
+    for (s32 i = 0; i < 6; i++) {
+        sprite->values[i] = record->values[i];
+    }
+    if (record->name[0] == '0') {
+        sprite->name[0] = 0;
+    } else {
+        for (s32 i = 0; i < 16; i++) {
+            sprite->name[i] = record->name[i];
+        }
+    }
+    if (record->flags & 1) {
+        sprite->flags.additive = 1;
+    }
+    if (record->flags & 2) {
+        sprite->flags.subtractive = 1;
+    }
+    if (record->flags & 4) {
+        sprite->flags.colorMask = 3;
+    }
+    if ((record->flags & 8) == 0) {
+        sprite->flags.noDepth = 1;
+    }
+    if (record->flags & 0x10) {
+        sprite->flags.sorted = 1;
+    }
+    sprite->flags.mirrorX = (record->flags >> 8) & 1;
+    sprite->flags.mirrorY = (record->flags >> 9) & 1;
+    sprite->flags.unk25 = (record->flags >> 5) & 1;
+    sprite->flags.unk26 = (record->flags >> 6) & 1;
+    sprite->flags.unk27 = (record->flags >> 7) & 1;
+    sprite->flags.unk29 = (record->flags >> 10) & 1;
+
+    sprite->mode.unk0 = (record->flags >> 13) & 1;
+    sprite->mode.unk1 = (record->flags >> 23) & 1;
+    sprite->mode.unk2 = (record->flags >> 24) & 1;
+    sprite->phase = record->phase;
+    sprite->timer = record->timer;
+    sprite->mode.unk3 = (record->flags >> 25) & 1;
+    sprite->mode.unk4 = (record->flags >> 26) & 1;
+    sprite->mode.unk5 = (record->flags >> 27) & 1;
+    sprite->info.format = ((record->flags >> 14) & 7) - 1;
+    sprite->red = record->red;
+    sprite->green = record->green;
+    sprite->blue = record->blue;
+    sprite->alpha = record->alpha;
+
+    if (record->limits[0] != 0) {
+        sprite->limits[0] = record->limits[0];
+        sprite->flags.hasLimits = 1;
+    } else {
+        sprite->limits[0] = 0;
+    }
+    if (record->limits[1] != 0) {
+        sprite->limits[1] = record->limits[1];
+        sprite->flags.hasLimits = 1;
+    } else {
+        sprite->limits[1] = 0;
+    }
+    if (record->limits[2] != 0) {
+        sprite->limits[2] = record->limits[2];
+        sprite->flags.hasLimits = 1;
+    } else {
+        sprite->limits[2] = 0;
+    }
+    if (record->limits[3] != 0) {
+        sprite->limits[3] = record->limits[3];
+        sprite->flags.hasLimits = 1;
+    } else {
+        sprite->limits[3] = 0;
+    }
+    if (record->scalePercent != 0) {
+        sprite->scale[1] = (f32)record->scalePercent * 0.01f;
+    }
+    sprite->ratioPercent = record->ratio != 0 ? 100 : 0;
+    sprite->ratio = record->ratio;
+    sprite->ratioExtra = record->ratioExtra;
+    if (libc_strcmp("0", reinterpret_cast<const char *>(record->block.name)) == 0) {
+        sprite->hasBlock = 0;
+    } else {
+        sprite->block = record->block;
+    }
+}
+}

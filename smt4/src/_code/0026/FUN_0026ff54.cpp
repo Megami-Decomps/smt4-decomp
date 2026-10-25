@@ -8,7 +8,7 @@ void FUN_002ad8b4(u32 settings, void *backup);
 void asdMemFree(void *block);
 void titleConfigApplyAudio(void);
 void titleSynchronizeSavedConfig(void);
-void rt_memcpy_w(u32 destination, void *source, u32 size);
+void __aeabi_memcpy4(u32 destination, void *source, u32 size);
 u32 configGetSettings(void);
 u32 gameDataBlocksGetTable(void);
 u32 gameDataBlocksGetSaveData(void);
@@ -19,9 +19,9 @@ extern u32 g_aocSystem; /* 0x433158 */
 void FUN_0026ff54(void)
 {
     if (g_saveLoadUIFlags.backupTable != NULL) {
-        rt_memcpy_w(gameDataBlocksGetTable(), g_saveLoadUIFlags.backupTable, 0x80);
+        __aeabi_memcpy4(gameDataBlocksGetTable(), g_saveLoadUIFlags.backupTable, 0x80);
         FUN_002ad8b4(configGetSettings(), g_saveLoadUIFlags.backupConfig);
-        rt_memcpy_w(gameDataBlocksGetSaveData(), g_saveLoadUIFlags.backupSave, 0x24d28);
+        __aeabi_memcpy4(gameDataBlocksGetSaveData(), g_saveLoadUIFlags.backupSave, 0x24d28);
         titleSynchronizeSavedConfig();
         titleConfigApplyAudio();
         FUN_0026e324(g_aocSystem);

@@ -17,7 +17,7 @@ int randomGetUpperSixBits(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
-int rt_memcpy_w(unsigned char [104], int, int);
+int __aeabi_memcpy4(unsigned char [104], int, int);
 
 /* stack frame of param_5: 27 slot(s), 98 byte(s) */
 typedef struct {
@@ -72,7 +72,7 @@ extern int gameDataBlocksGetTableFlag(void);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: randomGetUpperSixBits. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x004a8ce8) */
@@ -182,7 +182,7 @@ unsigned int FUN_004a8750(unsigned int param_1,int param_2,int param_3,unsigned 
         }
         temp_v4 = 0;
 LAB_004a8864:
-        rt_memcpy_w(temp_v19,temp_v4,300);
+        __aeabi_memcpy4(temp_v19,temp_v4,300);
         temp_v20 = 0;
         temp_v21 = 0;
         temp_v22 = 0;

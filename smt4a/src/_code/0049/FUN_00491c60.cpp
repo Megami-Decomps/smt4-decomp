@@ -1,246 +1,179 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00491c60` (_code @ 0x491c60, 0x3e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only difference is the entry->type compare chain using r0 instead of retail's r1 (4 compares in loop 1, 2 in loop 2) */
+#include "map/mapDepart.h"
+
+/* One selectable entry of the map's destination lists. */
+struct LmapListEntry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 id;
+    /* 0x05 */ u8 type;       /* 0xff owned item, 0xfe/0xfc quest checks, 0xfd flag bit, else flag pair */
+    /* 0x06 */ s16 mapId;     /* map the entry belongs to */
+    /* 0x08 */ u16 unlockA;
+    /* 0x0a */ u16 unlockB;
+    /* 0x0c */ u8 unk0c[0x22];
+    /* 0x2e */ s16 checkId;
+    /* 0x30 */ s16 requiredFlag;
+    /* 0x32 */ s16 forbiddenFlag;
+    /* 0x34 */ u16 available;
+    /* 0x36 */ u8 unk36[0x16];
+    /* 0x4c */ u32 dataKey;
+    /* 0x50 */ u8 unk50[0x10];
+    /* 0x60 */ s32 requiredSubmode;
+};
+
+struct LmapList {
+    /* 0x0000 */ u8 unk0000[0x64];
+    /* 0x0064 */ s8 mapId;
+    /* 0x0065 */ u8 unk0065[0x1727];
+    /* 0x178c */ LmapListEntry entries[256];
+    /* 0x7b8c */ s32 entryCount;
+    /* 0x7b90 */ u8 dirty;
+    /* 0x7b91 */ u8 unk7b91[3];
+    /* 0x7b94 */ LmapListEntry extraEntries[24];
+    /* 0x84f4 */ s32 extraEntryCount;
+};
+
+typedef char LmapListLayoutCheck[sizeof(LmapListEntry) == 100 &&
+    offsetof(LmapList, entries) == 0x178c && offsetof(LmapList, entryCount) == 0x7b8c &&
+    offsetof(LmapList, extraEntries) == 0x7b94 && offsetof(LmapList, extraEntryCount) == 0x84f4 ? 1 : -1];
 
 extern "C" {
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
+s32 gameFlagIsSet(u32 id);
+s32 gameOwnedBitTest2(s32 id);
+s32 gameFlagsBitTest(s32 id);
+s32 gameFlagsGetWorkState(void);
+s32 dataTableHasMatchingEntry35(u32 key);
+s32 FUN_002e707c(u32 key);
+s32 FUN_00384d34(s32 id);
+s32 FUN_003bf5a8(s32 id);
+s32 FUN_004083a8(u8 id);
 
-extern int g_gameState; /* 0x5f15fc */
-extern unsigned int DAT_005f1600; /* 0x5f1600 */
-extern int DAT_005f1c5c; /* 0x5f1c5c */
+extern GameStateA g_gameState;
 
-extern int gameFlagIsSet(void);
-extern int dataTableHasMatchingEntry35(unsigned int);
-extern int FUN_002e707c(void);
-extern unsigned long long gameFlagsBitTest(int);
-extern int gameFlagsGetWorkState(void);
-extern int FUN_00384d34(int);
-extern int gameOwnedBitTest2(int);
-extern int FUN_003bf5a8(int);
-extern int FUN_004083a8(unsigned char);
-
-
-void FUN_00491c60(int param_1)
-
+/* Refresh the availability of every entry in the current map's destination lists. */
+void FUN_00491c60(LmapList *list)
 {
-/* irregular: 8 goto(s) */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int unaff_r11;
-  unsigned char temp_v6;
-  unsigned char temp_v7;
-  unsigned long long temp_v8;
-  
-  temp_v1 = *(int *)(param_1 + 0x7b8c);
-  if (0 < temp_v1) {
-    unaff_r11 = 0x1bd2;
-  }
-  temp_v5 = 0;
-  if (0 < temp_v1) {
-    do {
-      temp_v1 = param_1 + temp_v5 * 100;
-      if ((int)*(short *)(temp_v1 + 0x1792) == (int)*(char *)(param_1 + 100)) {
-        if (DAT_005f1c5c == 0) {
-          temp_v0 = *(char *)(temp_v1 + 0x1791);
-          if (temp_v0 != -1) {
-            if (temp_v0 == -2) {
-              temp_v2 = FUN_00384d34((int)*(short *)(temp_v1 + 0x17ba));
-              goto joined_r0x00491d8c;
-            }
-            if (temp_v0 != -3) {
-              if (temp_v0 == -4) {
-                temp_v2 = FUN_003bf5a8((int)*(short *)(temp_v1 + 0x17ba));
-                goto joined_r0x00491d8c;
-              }
-              temp_v2 = FUN_004083a8(*(unsigned char *)(temp_v1 + 0x1790));
-              if (temp_v2 != 0) {
-                temp_v6 = 0;
-                if (((*(short *)(temp_v1 + 0x17bc) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) ||
-                   ((*(short *)(temp_v1 + 0x17be) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
-                  temp_v6 = 1;
+    s32 i;
+
+    for (i = 0; i < list->entryCount; i++) {
+        LmapListEntry *entry = &list->entries[i];
+
+        if (entry->mapId == list->mapId) {
+            if (g_gameState.showAllEntries != 0) {
+                entry->available = 1;
+            } else if (entry->type == 0xff) {
+                if (gameOwnedBitTest2(entry->checkId) != 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
                 }
-                if ((((*(int *)(temp_v1 + 0x17d8) == 0) || (temp_v2 = FUN_002e707c(), temp_v2 != 0)) ||
-                    (temp_v2 = dataTableHasMatchingEntry35(*(unsigned int *)(temp_v1 + 0x17d8)), temp_v2 != 0)) && (!temp_v6)
-                   ) {
-                  *(unsigned short *)(temp_v1 + 0x17c0) = 1;
+            } else if (entry->type == 0xfe) {
+                if (FUN_00384d34(entry->checkId) != 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
                 }
-                else {
-                  *(unsigned short *)(temp_v1 + 0x17c0) = 0;
+            } else if (entry->type == 0xfd) {
+                if (gameFlagsBitTest(entry->checkId) != 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
                 }
-                if (g_gameState == 0x17) {
-                  if (DAT_005f1600 == 2) {
-                    temp_v0 = *(char *)(temp_v1 + 0x1790);
-                    temp_v6 = temp_v0 != 'z';
-                    if (!temp_v6) {
-                      temp_v0 = *(char *)(temp_v1 + 0x1791);
+                if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.submode) {
+                    entry->available = 0;
+                }
+            } else if (entry->type == 0xfc) {
+                if (FUN_003bf5a8(entry->checkId) != 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
+                }
+            } else if (FUN_004083a8(entry->id) == 0) {
+                entry->available = 0;
+            } else {
+                s32 blocked = 0;
+
+                if ((entry->requiredFlag != 0 && gameFlagIsSet(entry->requiredFlag) == 0) ||
+                    (entry->forbiddenFlag != 0 && gameFlagIsSet(entry->forbiddenFlag) != 0)) {
+                    blocked = 1;
+                }
+                if ((entry->dataKey == 0 || FUN_002e707c(entry->dataKey) != 0 ||
+                     dataTableHasMatchingEntry35(entry->dataKey) != 0) &&
+                    blocked == 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
+                }
+                if (g_gameState.mode == 0x17) {
+                    if (g_gameState.submode == 2 && entry->id == 0x7a && entry->type == 2) {
+                        entry->available = 0;
                     }
-                    if ((temp_v6 || temp_v0 != '\x02') ||
-                       (*(unsigned short *)(temp_v1 + 0x17c0) = 0, g_gameState != 0x17))
-                    goto LAB_00491eb4;
-                  }
-                  temp_v6 = DAT_005f1600 == 3;
-                  temp_v3 = DAT_005f1600;
-                  if (temp_v6) {
-                    temp_v3 = (unsigned int)*(unsigned char *)(temp_v1 + 0x1790);
-                  }
-                  temp_v7 = temp_v6 && temp_v3 == 0x7e;
-                  if (temp_v6 && temp_v3 == 0x7e) {
-                    temp_v7 = *(char *)(temp_v1 + 0x1791) == '\x02';
-                  }
-                  if (temp_v7) {
-                    *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-                  }
                 }
-              }
-              else {
-                *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-              }
-            }
-            else {
-              temp_v8 = gameFlagsBitTest((int)*(short *)(temp_v1 + 0x17ba));
-              if ((int)temp_v8 != 0) {
-                *(unsigned short *)(temp_v1 + 0x17c0) = 1;
-              }
-              else {
-                *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-              }
-              temp_v4 = *(unsigned int *)(temp_v1 + 0x17ec);
-              temp_v3 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
-              if (temp_v4 != 0) {
-                temp_v3 = DAT_005f1600;
-              }
-              if (!(temp_v4 == 0 || temp_v4 == temp_v3)) {
-                *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-              }
-            }
-          }
-          else {
-            temp_v2 = gameOwnedBitTest2((int)*(short *)(temp_v1 + 0x17ba));
-joined_r0x00491d8c:
-            if (temp_v2 == 0) {
-              *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-            }
-            else {
-              *(unsigned short *)(temp_v1 + 0x17c0) = 1;
-            }
-          }
-        }
-        else {
-          *(unsigned short *)(temp_v1 + 0x17c0) = 1;
-        }
-      }
-      else {
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x1794);
-        if ((temp_v3 == unaff_r11) || (*(unsigned short *)(temp_v1 + 0x1796) == 0x1bd4)) {
-          temp_v2 = gameFlagsGetWorkState();
-          if (temp_v2 != 0x17) {
-            *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-          }
-          else {
-            *(unsigned short *)(temp_v1 + 0x17c0) = 1;
-          }
-        }
-        else {
-          temp_v6 = temp_v3 != 0x1bd6;
-          if (temp_v6) {
-            temp_v3 = *(unsigned short *)(temp_v1 + 0x1796) - 0x1800;
-          }
-          if (!(!temp_v6 || temp_v3 == 0x3d8)) {
-            *(unsigned short *)(temp_v1 + 0x17c0) = 0;
-          }
-          else {
-            *(unsigned short *)(temp_v1 + 0x17c0) = 1;
-          }
-        }
-      }
-LAB_00491eb4:
-      temp_v5 = temp_v5 + 1;
-    } while (temp_v5 < *(int *)(param_1 + 0x7b8c));
-  }
-  temp_v1 = 0;
-  if (temp_v1 < *(int *)(param_1 + 0x84f4)) {
-    do {
-      temp_v5 = param_1 + temp_v1 * 100;
-      if ((int)*(short *)(temp_v5 + 0x7b9a) != (int)*(char *)(param_1 + 100)) goto LAB_00491fbc;
-      if (DAT_005f1c5c == 0) {
-        if (*(unsigned char *)(temp_v5 + 0x7b99) != 0xff) {
-          if (*(unsigned char *)(temp_v5 + 0x7b99) != 0xfd) {
-            temp_v2 = FUN_004083a8(*(unsigned char *)(temp_v5 + 0x7b98));
-            if (temp_v2 != 0) {
-              if (((*(short *)(temp_v5 + 0x7bc4) != 0) && (temp_v2 = gameFlagIsSet(), temp_v2 == 0)) ||
-                 ((*(short *)(temp_v5 + 0x7bc6) != 0 && (temp_v2 = gameFlagIsSet(), temp_v2 != 0)))) {
-                *(unsigned short *)(temp_v5 + 0x7bc8) = 0;
-              }
-              else {
-                *(unsigned short *)(temp_v5 + 0x7bc8) = 1;
-              }
-              if (g_gameState == 0x17) {
-                if (DAT_005f1600 == 2) {
-                  temp_v0 = *(char *)(temp_v5 + 0x7b98);
-                  temp_v6 = temp_v0 != 'z';
-                  if (!temp_v6) {
-                    temp_v0 = *(char *)(temp_v5 + 0x7b99);
-                  }
-                  if ((temp_v6 || temp_v0 != '\x02') ||
-                     (*(unsigned short *)(temp_v5 + 0x7bc8) = 0, g_gameState != 0x17)) goto LAB_00491fc0;
+                if (g_gameState.mode == 0x17) {
+                    if (g_gameState.submode == 3 && entry->id == 0x7e && entry->type == 2) {
+                        entry->available = 0;
+                    }
                 }
-                temp_v6 = DAT_005f1600 == 3;
-                temp_v3 = DAT_005f1600;
-                if (temp_v6) {
-                  temp_v3 = (unsigned int)*(unsigned char *)(temp_v5 + 0x7b98);
-                }
-                temp_v7 = temp_v6 && temp_v3 == 0x7e;
-                if (temp_v6 && temp_v3 == 0x7e) {
-                  temp_v7 = *(char *)(temp_v5 + 0x7b99) == '\x02';
-                }
-                if (temp_v7) {
-                  *(unsigned short *)(temp_v5 + 0x7bc8) = 0;
-                }
-              }
-              goto LAB_00491fc0;
             }
-          }
-          else {
-            temp_v8 = gameFlagsBitTest((int)*(short *)(temp_v5 + 0x7bc2));
-            if ((int)temp_v8 != 0) {
-              *(unsigned short *)(temp_v5 + 0x7bc8) = 1;
+        } else if (entry->unlockA == 0x1bd2 || entry->unlockB == 0x1bd4) {
+            if (gameFlagsGetWorkState() == 0x17) {
+                entry->available = 1;
+            } else {
+                entry->available = 0;
             }
-            else {
-              *(unsigned short *)(temp_v5 + 0x7bc8) = 0;
-            }
-            temp_v4 = *(unsigned int *)(temp_v5 + 0x7bf4);
-            temp_v3 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
-            if (temp_v4 != 0) {
-              temp_v3 = DAT_005f1600;
-            }
-            if (temp_v4 == 0 || temp_v4 == temp_v3) goto LAB_00491fc0;
-          }
+        } else if (entry->unlockA == 0x1bd6 || entry->unlockB == 0x1bd8) {
+            entry->available = 1;
+        } else {
+            entry->available = 0;
         }
-        else {
-          temp_v2 = gameOwnedBitTest2((int)*(short *)(temp_v5 + 0x7bc2));
-          if (temp_v2 != 0) goto LAB_00491f8c;
+    }
+
+    for (i = 0; i < list->extraEntryCount; i++) {
+        LmapListEntry *entry = &list->extraEntries[i];
+
+        if (entry->mapId == list->mapId) {
+            if (g_gameState.showAllEntries != 0) {
+                entry->available = 1;
+            } else if (entry->type == 0xff) {
+                if (gameOwnedBitTest2(entry->checkId) != 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
+                }
+            } else if (entry->type == 0xfd) {
+                if (gameFlagsBitTest(entry->checkId) != 0) {
+                    entry->available = 1;
+                } else {
+                    entry->available = 0;
+                }
+                if (entry->requiredSubmode != 0 && entry->requiredSubmode != g_gameState.submode) {
+                    entry->available = 0;
+                }
+            } else if (FUN_004083a8(entry->id) == 0) {
+                entry->available = 0;
+            } else {
+                if ((entry->requiredFlag != 0 && gameFlagIsSet(entry->requiredFlag) == 0) ||
+                    (entry->forbiddenFlag != 0 && gameFlagIsSet(entry->forbiddenFlag) != 0)) {
+                    entry->available = 0;
+                } else {
+                    entry->available = 1;
+                }
+                if (g_gameState.mode == 0x17) {
+                    if (g_gameState.submode == 2 && entry->id == 0x7a && entry->type == 2) {
+                        entry->available = 0;
+                    }
+                }
+                if (g_gameState.mode == 0x17) {
+                    if (g_gameState.submode == 3 && entry->id == 0x7e && entry->type == 2) {
+                        entry->available = 0;
+                    }
+                }
+            }
+        } else {
+            entry->available = 0;
         }
-LAB_00491fbc:
-        *(unsigned short *)(temp_v5 + 0x7bc8) = 0;
-      }
-      else {
-LAB_00491f8c:
-        *(unsigned short *)(temp_v5 + 0x7bc8) = 1;
-      }
-LAB_00491fc0:
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 0x84f4));
-  }
-  *(unsigned char *)(param_1 + 0x7b90) = 0;
-  return;
+    }
+    list->dirty = 0;
 }
 
 } /* extern "C" */

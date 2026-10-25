@@ -1,4 +1,3 @@
-/* NON_MATCHING: required-mask load uses an extra saved register; active-entry byte addressing differs. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -20,10 +19,9 @@ u32 FUN_0037fb04(void)
         FUN_00301a08(choice, &first, &count);
         for (s32 index = first; index < first + count; ++index) {
             BtlCombatantEntryA *entry = &reinterpret_cast<BtlCombatantEntryA *>(btlGetMainState()->entryView.entries)[index];
-            u64 flags = entry->flags;
-            if ((g_btlCandidateMasks.unavailable & flags) == 0 &&
-                (g_btlCandidateMasks.required & flags) != 0 &&
-                (flags & g_btlCandidateMasks.excluded) == 0 &&
+            if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+                (g_btlCandidateMasks.required & entry->flags) != 0 &&
+                (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
                 (entry->encodedStats.values[stat] & 0xfc00) == 0) {
                 scrSetResult(1);
                 return 1;

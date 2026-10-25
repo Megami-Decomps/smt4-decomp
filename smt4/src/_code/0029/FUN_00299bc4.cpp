@@ -1,4 +1,3 @@
-/* NON_MATCHING: all resource/control-flow instructions agree; source object and maximum count occupy opposite saved registers. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
@@ -19,8 +18,7 @@ void FUN_00299bc4(const void *unit, s32 mode)
     typedef char LabelsOffsets[offsetof(LabelsView, headings) == 0xe02 &&
         offsetof(LabelsView, extras) == 0xe08 && offsetof(LabelsView, entries) == 0xe0c ? 1 : -1];
     LabelsView *labels = reinterpret_cast<LabelsView *>(g_camp);
-    s32 maximum = FUN_0029ee54(unit);
-    if (FUN_0029d644(unit) < maximum) {
+    if (FUN_0029ee54(unit) > FUN_0029d644(unit)) {
         if (mode == 0) {
             labels->headings[0] = FUN_002b8584(0x1d, 0x572);
             labels->headings[1] = FUN_002b8584(0x1d, 0x570);

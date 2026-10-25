@@ -15,7 +15,7 @@ struct TokenEntryBlock {
 extern "C" {
 u8 *FUN_0016ccfc(void);
 u32 tokenResolveAddress(const u32 *owner, void **result, u32 token);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // Copy a bounded slice of the token's eight-byte records, preserving resolver failures.
 s32 FUN_00500350(const u32 *token, u32 *copied, TokenEntry *destination,
@@ -28,7 +28,7 @@ s32 FUN_00500350(const u32 *token, u32 *copied, TokenEntry *destination,
         const TokenEntryBlock *block = static_cast<const TokenEntryBlock *>(resolved);
         u32 available = block->count - start;
         requested = available <= requested ? available : requested;
-        rt_memcpy_w(destination, block->entries + start, requested * sizeof(TokenEntry));
+        __aeabi_memcpy4(destination, block->entries + start, requested * sizeof(TokenEntry));
         status = 0;
         *copied = requested;
     }

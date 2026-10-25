@@ -1,221 +1,62 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b7dc4` (_code @ 0x2b7dc4, 0x418 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packed-color float24 behavior restored; exponent extraction, argument spills and word-store scheduling differ (same family as FUN_002aff74). */
+#include "shard/W6_W6Match8_GpuDepth.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
-
-int gpuSubmitVectorCommand(unsigned int *, unsigned int *, unsigned int *);
-
-/* stack frame of param_4: 29 slot(s), 68 byte(s) */
-typedef struct {
-    unsigned char sp25; /* 0x25: local_25 */
-    unsigned char sp26; /* 0x26: local_26 */
-    unsigned char sp27; /* 0x27: local_27 */
-    unsigned char sp28; /* 0x28: local_28 */
-    unsigned char sp29; /* 0x29: local_29 */
-    unsigned char sp2A; /* 0x2a: local_2a */
-    unsigned char sp2B; /* 0x2b: local_2b */
-    unsigned char sp2C; /* 0x2c: local_2c */
-    unsigned char sp2D; /* 0x2d: local_2d */
-    unsigned char sp2E; /* 0x2e: local_2e */
-    unsigned char sp2F; /* 0x2f: local_2f */
-    unsigned char sp30; /* 0x30: local_30 */
-    unsigned char sp31; /* 0x31: local_31 */
-    unsigned char sp32; /* 0x32: local_32 */
-    unsigned char sp33; /* 0x33: local_33 */
-    unsigned char sp34; /* 0x34: local_34 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-    unsigned int sp7C; /* 0x7c: local_7c */
-    unsigned int sp80; /* 0x80: local_80 */
-    unsigned int sp94; /* 0x94: local_94 */
-    unsigned int sp9C; /* 0x9c: local_9c */
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA4; /* 0xa4: local_a4 */
-    unsigned int spAC; /* 0xac: local_ac */
-    unsigned int spB0; /* 0xb0: local_b0 */
-    unsigned int spB4; /* 0xb4: local_b4 */
-    unsigned int spB8; /* 0xb8: local_b8 */
-} param_4_stack;
-
-extern int DAT_004e339c; /* 0x4e339c */
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Supplied declaration required: gpuSubmitVectorCommand. */
-
-
-void FUN_002b7dc4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4, in_s5, in_s6, in_s7, in_s8; 10 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned int unaff_r8;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  float in_s0;
-  float temp_v8;
-  float in_s1;
-  float in_s2;
-  float temp_v9;
-  float in_s3;
-  float temp_v10;
-  float in_s4;
-  float in_s5;
-  float in_s6;
-  float in_s7;
-  unsigned int in_s8;
-  float temp_v11;
-  unsigned int temp_v12;
-  unsigned int temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned int temp_v17;
-  unsigned int temp_v18;
-  unsigned int temp_v19;
-  unsigned int temp_v20;
-  unsigned int temp_v21;
-  unsigned int temp_v22;
-  unsigned int temp_v23;
-  unsigned int temp_v24;
-  unsigned int temp_v25;
-  unsigned int temp_v26;
-  unsigned int temp_v27;
-  unsigned int temp_v28;
-  
-  if (romwright_fabs_4(in_s0) == 0.0f) {
-    unaff_r8 = ((unsigned int)in_s0 >> 0x1f) << 0x17;
-  }
-  temp_v11 = in_s0 + in_s2;
-  temp_v10 = in_s1 + in_s3;
-  temp_v9 = in_s4 + in_s6;
-  temp_v8 = in_s5 + in_s7;
-  if (romwright_fabs_4(in_s0) != 0.0f) {
-    unaff_r8 = *(unsigned int *)(((unsigned int)romwright_fabs_4(in_s0) >> 0x17) * 4 + 0x4e31a0) |
-               (((unsigned int)in_s0 & 0x7fffff) >> 7) | (((unsigned int)in_s0 >> 0x1f) << 0x17);
-  }
-  if (romwright_fabs_4(in_s1) == 0.0f) {
-    temp_v2 = ((unsigned int)in_s1 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v2 = *(unsigned int *)(((unsigned int)romwright_fabs_4(in_s1) >> 0x17) * 4 + 0x4e31a0) |
-            (((unsigned int)in_s1 & 0x7fffff) >> 7) | (((unsigned int)in_s1 >> 0x1f) << 0x17);
-  }
-  if (romwright_fabs_4(temp_v11) == 0.0f) {
-    temp_v6 = ((unsigned int)temp_v11 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v6 = *(unsigned int *)(((unsigned int)romwright_fabs_4(temp_v11) >> 0x17) * 4 + 0x4e31a0) |
-            (((unsigned int)temp_v11 & 0x7fffff) >> 7) | (((unsigned int)temp_v11 >> 0x1f) << 0x17);
-  }
-  if (romwright_fabs_4(temp_v10) == 0.0f) {
-    temp_v3 = ((unsigned int)temp_v10 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v3 = *(unsigned int *)(((unsigned int)romwright_fabs_4(temp_v10) >> 0x17) * 4 + 0x4e31a0) |
-            (((unsigned int)temp_v10 & 0x7fffff) >> 7) | (((unsigned int)temp_v10 >> 0x1f) << 0x17);
-  }
-  if ((in_s8 & 0x7fffffff) == 0) {
-    temp_v15 = (in_s8 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v15 = *(unsigned int *)(((in_s8 & 0x7fffffff) >> 0x17) * 4 + 0x4e31a0) |
-               ((in_s8 & 0x7fffff) >> 7) | ((in_s8 >> 0x1f) << 0x17);
-  }
-  if (romwright_fabs_4(in_s4) == 0.0f) {
-    temp_v7 = ((unsigned int)in_s4 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v7 = *(unsigned int *)(((unsigned int)romwright_fabs_4(in_s4) >> 0x17) * 4 + 0x4e31a0) |
-            (((unsigned int)in_s4 & 0x7fffff) >> 7) | (((unsigned int)in_s4 >> 0x1f) << 0x17);
-  }
-  if (romwright_fabs_4(in_s5) == 0.0f) {
-    temp_v4 = ((unsigned int)in_s5 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v4 = *(unsigned int *)(((unsigned int)romwright_fabs_4(in_s5) >> 0x17) * 4 + 0x4e31a0) |
-            (((unsigned int)in_s5 & 0x7fffff) >> 7) | (((unsigned int)in_s5 >> 0x1f) << 0x17);
-  }
-  if (romwright_fabs_4(temp_v9) == 0.0f) {
-    temp_v19 = ((unsigned int)temp_v9 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v19 = (((unsigned int)temp_v9 & 0x7fffff) >> 7) | (((unsigned int)temp_v9 >> 0x1f) << 0x17) |
-               *(unsigned int *)(((unsigned int)romwright_fabs_4(temp_v9) >> 0x17) * 4 + 0x4e31a0);
-  }
-  if (romwright_fabs_4(temp_v8) == 0.0f) {
-    temp_v5 = ((unsigned int)temp_v8 >> 0x1f) << 0x17;
-  }
-  else {
-    temp_v5 = *(unsigned int *)(((unsigned int)romwright_fabs_4(temp_v8) >> 0x17) * 4 + 0x4e31a0) |
-            (((unsigned int)temp_v8 & 0x7fffff) >> 7) | (((unsigned int)temp_v8 >> 0x1f) << 0x17);
-  }
-  temp_v14 = (DAT_004e339c << 8) | (temp_v15 >> 0x10);
-  temp_v17 = temp_v7 | (temp_v4 << 0x18);
-  temp_v15 = temp_v15 << 0x10;
-  temp_v12 = unaff_r8 | (temp_v2 << 0x18);
-  temp_v18 = temp_v4 >> 8;
-  temp_v13 = temp_v15 | (temp_v2 >> 8);
-  temp_v0 = *(unsigned int *)(((param_1 >> 0x10) & 0xff) * 4 + 0x4e35a0);
-  temp_v21 = *(unsigned int *)((param_1 >> 0x18) * 4 + 0x4e35a0) | (temp_v0 << 0x18);
-  temp_v1 = *(unsigned int *)(((param_1 >> 8) & 0xff) * 4 + 0x4e35a0);
-  temp_v22 = (temp_v1 << 0x10) | (temp_v0 >> 8);
-  temp_v23 = (*(int *)((param_1 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v1 >> 0x10);
-  temp_v16 = temp_v13;
-  temp_v20 = temp_v18;
-  temp_v24 = temp_v14;
-  temp_v25 = param_1;
-  temp_v26 = param_2;
-  temp_v27 = param_3;
-  temp_v28 = param_4;
-  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
-  temp_v12 = unaff_r8 | (temp_v3 << 0x18);
-  temp_v17 = temp_v7 | (temp_v5 << 0x18);
-  temp_v1 = temp_v15 | (temp_v3 >> 8);
-  temp_v14 = temp_v24;
-  temp_v7 = *(unsigned int *)(((temp_v26 >> 0x10) & 0xff) * 4 + 0x4e35a0);
-  temp_v21 = *(unsigned int *)((temp_v26 >> 0x18) * 4 + 0x4e35a0) | (temp_v7 << 0x18);
-  temp_v0 = *(unsigned int *)(((temp_v26 >> 8) & 0xff) * 4 + 0x4e35a0);
-  temp_v22 = (temp_v0 << 0x10) | (temp_v7 >> 8);
-  temp_v23 = (*(int *)((temp_v26 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v0 >> 0x10);
-  temp_v13 = temp_v1;
-  temp_v18 = temp_v5 >> 8;
-  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
-  temp_v12 = temp_v6 | (temp_v2 << 0x18);
-  temp_v17 = temp_v19 | (temp_v4 << 0x18);
-  temp_v13 = temp_v16;
-  temp_v14 = temp_v24;
-  temp_v18 = temp_v20;
-  temp_v2 = *(unsigned int *)(((temp_v27 >> 0x10) & 0xff) * 4 + 0x4e35a0);
-  temp_v21 = *(unsigned int *)((temp_v27 >> 0x18) * 4 + 0x4e35a0) | (temp_v2 << 0x18);
-  temp_v7 = *(unsigned int *)(((temp_v27 >> 8) & 0xff) * 4 + 0x4e35a0);
-  temp_v22 = (temp_v7 << 0x10) | (temp_v2 >> 8);
-  temp_v23 = (*(int *)((temp_v27 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v7 >> 0x10);
-  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
-  temp_v12 = temp_v6 | (temp_v3 << 0x18);
-  temp_v17 = temp_v19 | (temp_v5 << 0x18);
-  temp_v14 = temp_v24;
-  temp_v2 = *(unsigned int *)(((temp_v28 >> 0x10) & 0xff) * 4 + 0x4e35a0);
-  temp_v21 = *(unsigned int *)((temp_v28 >> 0x18) * 4 + 0x4e35a0) | (temp_v2 << 0x18);
-  temp_v6 = *(unsigned int *)(((temp_v28 >> 8) & 0xff) * 4 + 0x4e35a0);
-  temp_v22 = (temp_v6 << 0x10) | (temp_v2 >> 8);
-  temp_v23 = (*(int *)((temp_v28 & 0xff) * 4 + 0x4e35a0) << 8) | (temp_v6 >> 0x10);
-  temp_v13 = temp_v1;
-  temp_v18 = temp_v5 >> 8;
-  gpuSubmitVectorCommand(&temp_v12,&temp_v21,&temp_v17);
-  return;
+extern u32 DAT_004e31a0[256];
+extern u32 DAT_004e35a0[256];
+void gpuSubmitVectorCommand(const u32 *position, const u32 *color, const u32 *coordinates);
 }
 
-} /* extern "C" */
+static __forceinline u32 encodeGpuFloat24(f32 value)
+{
+    GpuFloatEncoding encoding;
+    encoding.value = value;
+    u32 magnitude = encoding.bits & 0x7fffffff;
+    if (magnitude == 0)
+        return (encoding.bits >> 31) << 23;
+    return DAT_004e31a0[magnitude >> 23] | ((encoding.bits & 0x7fffff) >> 7) | ((encoding.bits >> 31) << 23);
+}
+
+// Submit one vertex: position (with w = 1), the packed color and texture coordinates as float24 words.
+static __forceinline void submitVertex(u32 x, u32 y, u32 z, u32 u, u32 v, RgbaWord color)
+{
+    GpuFloat24Vectors packed;
+    packed.first[0] = x | (y << 24);
+    packed.first[1] = (y >> 8) | (z << 16);
+    packed.first[2] = (z >> 16) | (DAT_004e31a0[127] << 8);
+    packed.coordinates[0] = u | (v << 24);
+    packed.coordinates[1] = v >> 8;
+    u32 color0 = DAT_004e35a0[color.rgba.a];
+    u32 color1 = DAT_004e35a0[color.rgba.b];
+    packed.second[0] = color0 | (color1 << 24);
+    u32 color2 = DAT_004e35a0[color.rgba.g];
+    packed.second[1] = (color1 >> 8) | (color2 << 16);
+    u32 color3 = DAT_004e35a0[color.rgba.r];
+    packed.second[2] = (color2 >> 16) | (color3 << 8);
+    gpuSubmitVectorCommand(packed.first, packed.second, packed.coordinates);
+}
+
+// Submit a textured, per-corner colored quad at (x, y) of size (width, height) with texture
+// rectangle (u, v) of size (uWidth, vHeight) at depth z.
+extern "C" void FUN_002b7dc4(RgbaWord topLeft, RgbaWord bottomLeft, RgbaWord topRight, RgbaWord bottomRight,
+                             f32 x, f32 y, f32 width, f32 height, f32 u, f32 v, f32 uWidth, f32 vHeight, f32 z)
+{
+    f32 right = x + width;
+    f32 bottom = y + height;
+    f32 uRight = u + uWidth;
+    f32 vBottom = v + vHeight;
+    u32 left24 = encodeGpuFloat24(x);
+    u32 top24 = encodeGpuFloat24(y);
+    u32 right24 = encodeGpuFloat24(right);
+    u32 bottom24 = encodeGpuFloat24(bottom);
+    u32 depth24 = encodeGpuFloat24(z);
+    u32 u24 = encodeGpuFloat24(u);
+    u32 v24 = encodeGpuFloat24(v);
+    u32 uRight24 = encodeGpuFloat24(uRight);
+    u32 vBottom24 = encodeGpuFloat24(vBottom);
+    submitVertex(left24, top24, depth24, u24, v24, topLeft);
+    submitVertex(left24, bottom24, depth24, u24, vBottom24, bottomLeft);
+    submitVertex(right24, top24, depth24, uRight24, v24, topRight);
+    submitVertex(right24, bottom24, depth24, uRight24, vBottom24, bottomRight);
+}

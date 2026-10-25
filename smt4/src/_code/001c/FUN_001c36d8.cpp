@@ -21,7 +21,7 @@ int gameFlagIsSet(...);
 int FUN_00333edc(void);
 int FUN_0033f86c(int, int);
 int FUN_00394fd8(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 32 slot(s), 128 byte(s) */
 typedef struct {
@@ -82,7 +82,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_00333edc. */
 /* Supplied declaration required: FUN_0033f86c. */
 /* Supplied declaration required: FUN_00394fd8. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_001c36d8(int param_1)
@@ -252,7 +252,7 @@ void FUN_001c36d8(int param_1)
               temp_v2 = gameDataBlocksGetSaveData();
               temp_v3 = gameDataGetWorkBlock();
               *(unsigned int *)(temp_v2 + 0x1f458) = *(unsigned int *)(temp_v3 + 0x1f458);
-              rt_memcpy_w(temp_v2 + 0x1f45c,temp_v3 + 0x1f45c,0x400);
+              __aeabi_memcpy4(temp_v2 + 0x1f45c,temp_v3 + 0x1f45c,0x400);
               temp_v9 = *(unsigned int *)(temp_v3 + 0x1ec14);
               temp_v10 = *(unsigned int *)(temp_v3 + 0x1ec18);
               temp_v11 = *(unsigned int *)(temp_v3 + 0x1ec1c);
@@ -342,8 +342,8 @@ void FUN_001c36d8(int param_1)
               *(unsigned int *)(temp_v2 + 0x24b24) = *(unsigned int *)(temp_v3 + 0x24b24);
               *(unsigned int *)(temp_v2 + 0x24b1c) = temp_v9;
               *(unsigned int *)(temp_v2 + 0x24b20) = temp_v10;
-              rt_memcpy_w(temp_v2 + 0x2478c,temp_v3 + 0x2478c,0x390);
-              rt_memcpy_w(temp_v2 + 0x54,temp_v3 + 0x54,0x12);
+              __aeabi_memcpy4(temp_v2 + 0x2478c,temp_v3 + 0x2478c,0x390);
+              __aeabi_memcpy4(temp_v2 + 0x54,temp_v3 + 0x54,0x12);
               temp_v7 = 0;
               temp_v22 = 0;
               temp_v21 = temp_v3 + 0x97ec;
@@ -361,7 +361,7 @@ void FUN_001c36d8(int param_1)
                     *(unsigned int *)(temp_v2 + 0x1e) = *(unsigned int *)(temp_v3 + 0x1e);
                     *(unsigned short *)(temp_v2 + 0x22) = *(unsigned short *)(temp_v3 + 0x22);
                     *(unsigned int *)(temp_v2 + 0x38) = *(unsigned int *)(temp_v3 + 0x38);
-                    rt_memcpy_w(temp_v2 + 8,temp_v3 + 8,0xe);
+                    __aeabi_memcpy4(temp_v2 + 8,temp_v3 + 8,0xe);
                     temp_v9 = *(unsigned int *)(temp_v3 + 0x40);
                     temp_v10 = *(unsigned int *)(temp_v3 + 0x44);
                     temp_v11 = *(unsigned int *)(temp_v3 + 0x48);
@@ -380,7 +380,7 @@ void FUN_001c36d8(int param_1)
                     FUN_00394fd8(temp_v18,temp_v21,(int)*(char *)(temp_v29 + 3));
                     break;
                   case 2:
-                    rt_memcpy_w(temp_v20,temp_v19,0x10400);
+                    __aeabi_memcpy4(temp_v20,temp_v19,0x10400);
                     break;
                   case 4:
                     *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v3 + 4);
@@ -397,7 +397,7 @@ void FUN_001c36d8(int param_1)
                       if (temp_v4 != 0) {
                         FUN_0029c1c8(0,*(unsigned short *)(temp_v6 + 0xda));
                         temp_v6 = gameGetUnitRecord(0);
-                        rt_memcpy_w(temp_v6,temp_v8,0x604);
+                        __aeabi_memcpy4(temp_v6,temp_v8,0x604);
                         *(unsigned char *)(temp_v6 + 0x4a) = 0;
                         *(unsigned char *)(temp_v6 + 0x49) = 0;
                         *(unsigned char *)(temp_v6 + 0x4b) = 0;
@@ -414,7 +414,7 @@ void FUN_001c36d8(int param_1)
                     } while (temp_v0 < 0x18);
                     break;
                   case 7:
-                    rt_memcpy_w(temp_v20,temp_v19,0x10400);
+                    __aeabi_memcpy4(temp_v20,temp_v19,0x10400);
                     temp_v6 = 0;
                     temp_v0 = 0;
                     do {

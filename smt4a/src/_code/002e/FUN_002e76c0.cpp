@@ -1,4 +1,4 @@
-/* NON_MATCHING: aggregate copy uses __aeabi_memcpy4 rather than rt_memcpy_w; loop registers and memset lowering also differ. */
+/* NON_MATCHING: aggregate copy uses __aeabi_memcpy4 rather than __aeabi_memcpy4; loop registers and memset lowering also differ. */
 #include "common.h"
 #include <string.h>
 

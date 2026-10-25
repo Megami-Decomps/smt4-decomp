@@ -1,156 +1,132 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00240674` (_code @ 0x240674, 0x3ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: entry-field base-register CSE and register allocation differ (retail addresses the 0x28-byte entries from a 0x7800 base with the u64 loaded through a separate address; this build folds the offset into one base) */
+#include "common.h"
+
+/* The 16-bit gauge width an icon frame carries. */
+struct GaugeIcon {
+    /* 0x00 */ u8 unk00[0xc];
+    /* 0x0c */ u16 *width;
+};
+
+/* One experience-gauge entry of the result screen (0x28 bytes). */
+struct ExpGaugeEntry {
+    /* 0x00 */ u64 exp;          /* gained experience, 12-bit fixed point */
+    /* 0x08 */ u16 gauge;        /* gauge width shown */
+    /* 0x0a */ s16 levelOffset;  /* levels already gained, added to the base level */
+    /* 0x0c */ u8 unk0c[2];
+    /* 0x0e */ u8 maxed;         /* gauge is full */
+    /* 0x0f */ u8 unk0f;
+    /* 0x10 */ s16 expBonus;
+    /* 0x12 */ u8 unk12[0x16];
+};
+
+/* The result screen's work area; leader is the player, members[slot] a party member. */
+struct ExpResultWork {
+    /* 0x0000 */ u8 unk0000[0x7880];
+    /* 0x7880 */ ExpGaugeEntry leader;
+    /* 0x78a8 */ ExpGaugeEntry members[36];
+};
+
+/* The party slot table: the active order and the three party slots. */
+struct PartySlotTable {
+    /* 0x0000 */ u8 unk0000[0x1c88];
+    /* 0x1c88 */ s8 order[24];
+    /* 0x1ca0 */ s8 party[3];
+};
+
+/* A party member's record (only the fields read here). */
+struct PartyMemberRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 expCurve;
+    /* 0x64 */ u16 level;
+};
 
 extern "C" {
-
-int FUN_003e503c(void);
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int gameGetPlayerData(void);
-extern int FUN_001834a4(unsigned int, unsigned int);
-extern int gameGetSlotRecord(int);
-extern int gameGetSlotTable(void);
-extern float FUN_001b4874(unsigned int, unsigned int);
-extern int actorIsActive(void);
-extern int partySlotMatchesSelected(unsigned int);
-/* Supplied declaration required: FUN_003e503c. */
-extern unsigned int FUN_004ccbf0(int);
-extern unsigned int FUN_004ccdb8(unsigned short, int, int);
-
-
-void FUN_00240674(int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  int temp_v7;
-  unsigned short temp_v8;
-  unsigned int temp_v9;
-  int temp_v10;
-  unsigned int in_fpscr;
-  float temp_v11;
-  
-  temp_v1 = gameGetSlotTable();
-  temp_v2 = FUN_001834a4(0x1d,0x14);
-  temp_v3 = gameGetPlayerData();
-  temp_v4 = FUN_004ccbf0((unsigned int)*(unsigned short *)(temp_v3 + 0x62) + (int)*(short *)(param_1 + 0x788a));
-  if (*(char *)(param_1 + 0x788e) != '\0') {
-    temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
-  }
-  else {
-    temp_v5 = (float)FUN_001b4874((*(unsigned int *)(param_1 + 0x7884) << 0x14) |
-                                (*(unsigned int *)(param_1 + 0x7880) >> 0xc),
-                                *(unsigned int *)(param_1 + 0x7884) >> 0xc);
-    temp_v6 = (float)FUN_001b4874(temp_v4,0);
-    temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v2 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-  }
-  *(unsigned short *)(param_1 + 0x7888) = temp_v0;
-  temp_v3 = 0;
-  do {
-    temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x1ca0);
-    if ((-1 < temp_v10) && (temp_v7 = gameGetSlotRecord(temp_v10), temp_v7 != 0)) {
-      temp_v10 = param_1 + temp_v10 * 0x28;
-      temp_v4 = FUN_004ccdb8(*(unsigned short *)(temp_v7 + 0x62),
-                           (unsigned int)*(unsigned short *)(temp_v7 + 100) + (int)*(short *)(temp_v10 + 0x78b2),
-                           (int)*(short *)(temp_v10 + 0x78b8));
-      if (*(char *)(temp_v10 + 0x78b6) != '\0') {
-        temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
-      }
-      else {
-        temp_v5 = (float)FUN_001b4874((*(unsigned int *)(temp_v10 + 0x78a8) >> 0xc) |
-                                    (*(unsigned int *)(temp_v10 + 0x78ac) << 0x14),
-                                    *(unsigned int *)(temp_v10 + 0x78ac) >> 0xc);
-        temp_v6 = (float)FUN_001b4874(temp_v4,0);
-        temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v2 + 0xc),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-      }
-      *(unsigned short *)(temp_v10 + 0x78b0) = temp_v0;
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v2 = FUN_001834a4(0x1d,0x5f);
-  temp_v3 = 0;
-  do {
-    if (((((*(char *)(temp_v1 + 0x1ca0) < '\0') ||
-          (*(char *)(temp_v1 + 0x1ca0) != *(char *)(temp_v1 + temp_v3 + 0x1c88))) &&
-         ((*(char *)(temp_v1 + 0x1ca1) < '\0' ||
-          (*(char *)(temp_v1 + 0x1ca1) != *(char *)(temp_v1 + temp_v3 + 0x1c88))))) &&
-        (((*(char *)(temp_v1 + 0x1ca2) < '\0' ||
-          (*(char *)(temp_v1 + 0x1ca2) != *(char *)(temp_v1 + temp_v3 + 0x1c88))) &&
-         (temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x1c88), -1 < temp_v10)))) &&
-       (temp_v7 = gameGetSlotRecord(temp_v10), temp_v7 != 0)) {
-      temp_v10 = param_1 + temp_v10 * 0x28;
-      temp_v4 = FUN_004ccdb8(*(unsigned short *)(temp_v7 + 0x62),
-                           (unsigned int)*(unsigned short *)(temp_v7 + 100) + (int)*(short *)(temp_v10 + 0x78b2),
-                           (int)*(short *)(temp_v10 + 0x78b8));
-      if (*(char *)(temp_v10 + 0x78b6) != '\0') {
-        temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
-      }
-      else {
-        temp_v5 = (float)FUN_001b4874((*(unsigned int *)(temp_v10 + 0x78a8) >> 0xc) |
-                                    (*(unsigned int *)(temp_v10 + 0x78ac) << 0x14),
-                                    *(unsigned int *)(temp_v10 + 0x78ac) >> 0xc);
-        temp_v6 = (float)FUN_001b4874(temp_v4,0);
-        temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v2 + 0xc),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-      }
-      *(unsigned short *)(temp_v10 + 0x78b0) = temp_v0;
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x18);
-  temp_v9 = 0;
-  do {
-    temp_v8 = temp_v9;
-    FUN_003e503c();
-    temp_v1 = actorIsActive();
-    if (temp_v1 != 0) {
-      temp_v1 = temp_v9 + 0x19;
-      if (temp_v1 >= 0x25) {
-        temp_v1 = 0x24;
-      }
-      temp_v2 = param_1 + temp_v1 * 0x28;
-      temp_v4 = FUN_004ccbf0((int)*(short *)(temp_v2 + 0x788a) + (unsigned int)*(unsigned short *)(temp_v8 + 100));
-      temp_v1 = partySlotMatchesSelected(temp_v8);
-      if (temp_v1 != 0) {
-        temp_v1 = FUN_001834a4(0x1d,0x13b);
-      }
-      else {
-        temp_v1 = FUN_001834a4(0x1d,0x5f);
-      }
-      if (*(char *)(temp_v2 + 0x788e) != '\0') {
-        temp_v0 = **(unsigned short **)(temp_v1 + 0xc);
-      }
-      else {
-        temp_v5 = (float)FUN_001b4874((*(unsigned int *)(temp_v2 + 0x7880) >> 0xc) |
-                                    (*(unsigned int *)(temp_v2 + 0x7884) << 0x14),
-                                    *(unsigned int *)(temp_v2 + 0x7884) >> 0xc);
-        temp_v6 = (float)FUN_001b4874(temp_v4,0);
-        temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v1 + 0xc),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-      }
-      *(unsigned short *)(temp_v2 + 0x7888) = temp_v0;
-    }
-    temp_v9 = temp_v9 + 1;
-  } while ((int)temp_v9 < 0xc);
-  return;
+PartySlotTable *gameGetSlotTable(void);
+GaugeIcon *FUN_001834a4(u32 table, u32 sprite);
+PartyMemberRecord *gameGetPlayerData(void);
+PartyMemberRecord *gameGetSlotRecord(s32 slot);
+PartyMemberRecord *FUN_003e503c(u16 index);
+s32 actorIsActive(PartyMemberRecord *record);
+s32 partySlotMatchesSelected(PartyMemberRecord *record);
+u32 FUN_004ccbf0(s32 level);
+u32 FUN_004ccdb8(u16 expCurve, s32 level, s32 expBonus);
 }
 
-} /* extern "C" */
+/* The share of the next level's experience a gauge has gained. */
+static __inline f32 expGaugeRatio(const u64 *exp, u64 expForLevel)
+{
+    return (f32)(*exp >> 12) / (f32)expForLevel;
+}
+
+/* Refreshes the gauge widths of the player, the party, the stock and the remaining slots. */
+extern "C" void FUN_00240674(ExpResultWork *work)
+{
+    PartySlotTable *table = gameGetSlotTable();
+    GaugeIcon *icon = FUN_001834a4(0x1d, 0x14);
+    u64 needed = FUN_004ccbf0(gameGetPlayerData()->expCurve + work->leader.levelOffset);
+    if (work->leader.maxed) {
+        work->leader.gauge = *icon->width;
+    } else {
+        work->leader.gauge = (s32)(expGaugeRatio(&work->leader.exp, needed) * (f32)(s16)*icon->width);
+    }
+
+    for (s32 i = 0; i < 3; i++) {
+        s32 slot = table->party[i];
+        if (slot >= 0) {
+            PartyMemberRecord *record = gameGetSlotRecord(slot);
+            if (record != NULL) {
+                ExpGaugeEntry *entry = &work->members[slot];
+                needed = FUN_004ccdb8(record->expCurve, record->level + entry->levelOffset, entry->expBonus);
+                if (entry->maxed) {
+                    entry->gauge = *icon->width;
+                } else {
+                    entry->gauge = (s32)(expGaugeRatio(&entry->exp, needed) * (f32)(s16)*icon->width);
+                }
+            }
+        }
+    }
+
+    icon = FUN_001834a4(0x1d, 0x5f);
+    for (s32 i = 0; i < 24; i++) {
+        if ((table->party[0] >= 0 && table->party[0] == table->order[i]) ||
+            (table->party[1] >= 0 && table->party[1] == table->order[i]) ||
+            (table->party[2] >= 0 && table->party[2] == table->order[i])) {
+            continue;
+        }
+        s32 slot = table->order[i];
+        if (slot >= 0) {
+            PartyMemberRecord *record = gameGetSlotRecord(slot);
+            if (record != NULL) {
+                ExpGaugeEntry *entry = &work->members[slot];
+                needed = FUN_004ccdb8(record->expCurve, record->level + entry->levelOffset, entry->expBonus);
+                if (entry->maxed) {
+                    entry->gauge = *icon->width;
+                } else {
+                    entry->gauge = (s32)(expGaugeRatio(&entry->exp, needed) * (f32)(s16)*icon->width);
+                }
+            }
+        }
+    }
+
+    for (s32 i = 0; i < 12; i++) {
+        PartyMemberRecord *record = FUN_003e503c(i);
+        if (actorIsActive(record)) {
+            s32 index = i + 25;
+            if (index > 36) {
+                index = 36;
+            }
+            ExpGaugeEntry *entry = &(&work->leader)[index];
+            needed = FUN_004ccbf0(entry->levelOffset + record->level);
+            if (partySlotMatchesSelected(record)) {
+                icon = FUN_001834a4(0x1d, 0x13b);
+            } else {
+                icon = FUN_001834a4(0x1d, 0x5f);
+            }
+            if (entry->maxed) {
+                entry->gauge = *icon->width;
+            } else {
+                entry->gauge = (s32)(expGaugeRatio(&entry->exp, needed) * (f32)(s16)*icon->width);
+            }
+        }
+    }
+}

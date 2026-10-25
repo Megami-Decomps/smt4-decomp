@@ -12,7 +12,7 @@ void uniteBuildInheritedSkillCandidates(u32 id, const StatBlock *first, const St
 s32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
 s32 flagCountUnlockedSlots(const StatBlock *unit);
 void unitRecalculateEffectiveStats(StatBlock *unit);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
 {
@@ -63,7 +63,7 @@ u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
         if (parent == NULL) {
             return 0;
         }
-        rt_memcpy_w(result, parent, sizeof(*result));
+        __aeabi_memcpy4(result, parent, sizeof(*result));
         break;
     }
     case 2: {
@@ -71,7 +71,7 @@ u32 FUN_00257a50(StatBlock *result, s32 selection, s32 mode, u32)
         if (parent == NULL) {
             return 0;
         }
-        rt_memcpy_w(result, parent, sizeof(*result));
+        __aeabi_memcpy4(result, parent, sizeof(*result));
         break;
     }
     default:

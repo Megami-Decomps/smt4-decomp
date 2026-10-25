@@ -1,4 +1,4 @@
-/* NON_MATCHING: boolean argument moves, the second loop's counter initialization and its saved sprite-pointer setup are scheduled differently from retail. */
+/* NON_MATCHING: only the mode-flag move order, the second loop counter init (retail predicates it) and the sprite argument move order differ. */
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
@@ -35,8 +35,8 @@ extern "C" void FUN_00225238(SpriteBankUpdate *bank, s32 added, s32 removed)
     }
     for (s32 i = 0; i < bank->pending; ++i) {
         s32 index = bank->active - i - 1;
+        pairSetFirstResetSecond(&bank->second[index], 6);
         UiAnimatedSprite *sprite = &bank->second[index];
-        pairSetFirstResetSecond(sprite, 6);
         spriteStartAnimationByIndex(sprite, 1);
         spriteStartAnimationByIndex(&bank->third[index], 6);
         spriteStartAnimationByIndex(&bank->fourth[index], 4);

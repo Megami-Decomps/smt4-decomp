@@ -1,269 +1,108 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cbca8` (_code @ 0x2cbca8, 0x410 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the two target words in r5/r7 and ORs them once after the early checks, then repeats the slot/player test inside every effect case (jump table layout differs); the build hoists the OR and merges the cases */
+#include "common.h"
+
+/* The seven stats the preview tracks, as the current and maximum value of each (0xe bytes each). */
+struct PartyStatPair {
+    /* 0x00 */ s16 current[7];
+    /* 0x0e */ s16 maximum[7];
+};
+
+/* The party panel: the item being previewed and the copies of the player and slot records the
+   preview edits. */
+struct PartyPanelPreview {
+    /* 0x0000 */ u8 unk0000[0x36];
+    /* 0x0036 */ u16 item;
+    /* 0x0038 */ u8 unk0038[0x1056];
+    /* 0x108e */ PartyStatPair playerStats;
+    /* 0x10aa */ u8 unk10aa[0x3a];
+    /* 0x10e4 */ PartyStatPair slotStats;
+    /* 0x1100 */ u8 unk1100[0x1c];
+};
+
+/* An item record of data table 8. */
+struct ItemRecord {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u16 effect;
+    /* 0x32 */ u8 unk32[0x10];
+    /* 0x42 */ u8 flags;
+};
 
 extern "C" {
+extern PartyPanelPreview *g_partyPanel;
+ItemRecord *dataTable8FindRecord(s32 item);
+u32 gameGetPlayerData(void);
+u32 gameGetSlotRecord(s32 slot);
+void statusDisplayBindUnitRecord(u32 record, s32 a, s32 b);
+void objBInitBlock19D0(void *block, s32 value);
+void FUN_0033449c(s32 value);
+void gameGlobalsQueueValues(u32 player, s32 value);
+void FUN_00372100(void *block, s32 value);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
+s16 FUN_00480b10(u32 effect, s32 slot);
 
-int dataTable8FindRecord(void);
-int statusDisplayBindUnitRecord(unsigned int, int, int);
-int objBInitBlock19D0(int, int);
-int FUN_0033449c(int);
-int gameGlobalsQueueValues(unsigned int, int);
-int FUN_00372100(int, int);
-int rt_memcpy_w(int, unsigned int, int);
-
-typedef struct fn_002cbca8_arg0 fn_002cbca8_arg0;
-typedef struct fn_002cbca8_arg1 fn_002cbca8_arg1;
-typedef struct fn_002cbca8_arg2 fn_002cbca8_arg2;
-struct fn_002cbca8_arg0 {
-    undefined2 field_0x0; /* +0x0 */
-    undefined2 field_0x2; /* +0x2 */
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    undefined2 field_0x18; /* +0x18 */
-    ushort field_0x1a; /* +0x1a */
-    undefined2 field_0x1c; /* +0x1c */
-    unsigned char pad_0x1e[0x6];
-    short field_0x24; /* +0x24 */
-    unsigned char pad_0x26[0x2];
-    short field_0x28; /* +0x28 */
-    short field_0x2a; /* +0x2a */
-    undefined4 field_0x2c; /* +0x2c */
-    undefined4 field_0x30; /* +0x30 */
-    undefined4 field_0x34; /* +0x34 */
-    undefined2 field_0x38; /* +0x38 */
-    undefined1 field_0x3a; /* +0x3a */
-    undefined1 field_0x3b; /* +0x3b */
-    undefined1 field_0x3c; /* +0x3c */
-    undefined1 field_0x3d; /* +0x3d */
-    undefined1 field_0x3e; /* +0x3e */
-    undefined1 field_0x3f; /* +0x3f */
-    undefined1 field_0x40; /* +0x40 */
-    undefined1 field_0x41; /* +0x41 */
-    unsigned char pad_0x42[0xc];
-    undefined2 field_0x4e; /* +0x4e */
-    unsigned char pad_0x50[0x10];
-    undefined4 field_0x60; /* +0x60 */
-    undefined4 field_0x64; /* +0x64 */
-    undefined4 field_0x68; /* +0x68 */
-    undefined4 field_0x6c; /* +0x6c */
-    undefined4 field_0x70; /* +0x70 */
-    undefined4 field_0x74; /* +0x74 */
-    undefined4 field_0x78; /* +0x78 */
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    undefined4 field_0x84; /* +0x84 */
-    undefined4 field_0x88; /* +0x88 */
-    undefined4 field_0x8c; /* +0x8c */
-    undefined4 field_0x90; /* +0x90 */
-    undefined4 field_0x94; /* +0x94 */
-    undefined4 field_0x98; /* +0x98 */
-    undefined4 field_0x9c; /* +0x9c */
-    unsigned char pad_0xa0[0x500];
-    undefined4 field_0x5a0; /* +0x5a0 */
-    unsigned char pad_0x5a4[0x8a];
-    undefined1 field_0x62e; /* +0x62e */
-};
-struct fn_002cbca8_arg1 {
-    uint field_0x0; /* +0x0 */
-    uint field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    ushort field_0xc; /* +0xc */
-    unsigned char pad_0xe[0xc];
-    ushort field_0x1a; /* +0x1a */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    ushort field_0x28; /* +0x28 */
-    short field_0x2a; /* +0x2a */
-    short field_0x2c; /* +0x2c */
-    unsigned char pad_0x2e[0x2];
-    undefined4 field_0x30; /* +0x30 */
-    unsigned char pad_0x34[0x2a];
-    ushort field_0x5e; /* +0x5e */
-    unsigned char pad_0x60[0x2];
-    ushort field_0x62; /* +0x62 */
-};
-struct fn_002cbca8_arg2 {
-    undefined4 field_0x0; /* +0x0 */
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    byte field_0x14; /* +0x14 */
-};
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int g_partyPanel; /* 0x57f268 */
-
-extern unsigned int gameGetPlayerData(void);
-/* Supplied declaration required: dataTable8FindRecord. */
-extern unsigned int gameGetSlotRecord(fn_002cbca8_arg0 *);
-/* Supplied declaration required: statusDisplayBindUnitRecord. */
-/* Supplied declaration required: objBInitBlock19D0. */
-/* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: gameGlobalsQueueValues. */
-/* Supplied declaration required: FUN_00372100. */
-extern short FUN_00480b10(unsigned short, fn_002cbca8_arg0 *);
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_002cbca8(fn_002cbca8_arg0 *param_1,fn_002cbca8_arg1 *param_2,fn_002cbca8_arg2 *param_3)
-
+/* Adds `gain` to stat `stat` of the slot copy (when a target was given) or of the player copy. */
+static void addGain(PartyPanelPreview *panel, u32 hasTarget, s32 stat, s16 gain)
 {
-/* irregular: 6 goto(s); 7 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  short temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  fn_002cbca8_arg0 *pfVar7;
-  
-  temp_v2 = g_partyPanel;
-  temp_v4 = (unsigned int)*(unsigned short *)(g_partyPanel + 0x36);
-  if ((temp_v4 == 0) ||
-     (((int)param_1 < 0 &&
-      (param_2 != (fn_002cbca8_arg1 *)0x0 || param_3 != (fn_002cbca8_arg2 *)0x0)))) {
-    return;
-  }
-  dataTable8FindRecord();
-  if ((*(unsigned char *)(temp_v4 + 0x42) & 2) == 0) {
-    FUN_0033449c(0);
-    return;
-  }
-  if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-    temp_v5 = gameGetSlotRecord(param_1);
-    rt_memcpy_w(temp_v2 + 0x10e4,temp_v5,300);
-    temp_v0 = *(unsigned short *)(temp_v4 + 0x30);
-    pfVar7 = param_1;
-  }
-  else {
-    temp_v5 = gameGetPlayerData();
-    rt_memcpy_w(temp_v2 + 0x1080,temp_v5,100);
-    temp_v0 = *(unsigned short *)(temp_v4 + 0x30);
-    pfVar7 = (fn_002cbca8_arg0 *)0xffffffff;
-  }
-  temp_v3 = FUN_00480b10(temp_v0,pfVar7);
-  temp_v1 = *(unsigned short *)(temp_v4 + 0x30);
-  if (temp_v1 == 0x7b7) {
-    FUN_0033449c(0);
-    if (param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0) {
-      temp_v5 = gameGetPlayerData();
-      gameGlobalsQueueValues(temp_v5,0);
-      return;
+    PartyStatPair *stats = hasTarget != 0 ? &panel->slotStats : &panel->playerStats;
+    stats->current[stat] = stats->current[stat] + gain;
+    stats->maximum[stat] = stats->maximum[stat] + gain;
+}
+
+/* Previews the stat change of the party panel's item on `slot` (or the player when both
+   target words are zero): copies the record into the panel, adds the item's gain to the stats
+   its effect names and binds the result for display. */
+void FUN_002cbca8(s32 slot, u32 targetLow, u32 targetHigh)
+{
+    PartyPanelPreview *panel = g_partyPanel;
+    if (panel->item == 0) {
+        return;
     }
-    temp_v5 = gameGetSlotRecord(param_1);
-    statusDisplayBindUnitRecord(temp_v5,0,0);
-    return;
-  }
-  if (0x7b6 >= temp_v1) {
-    if (temp_v1 != 0x7a1) {
-      if (temp_v1 < 0x7a1) {
-        if (temp_v1 != 0x22) {
-          if (temp_v1 < 0x22) {
-            if (temp_v1 != 0x1f) {
-              if (temp_v1 == 0x20) goto LAB_002cbe5c;
-              if (temp_v1 != 0x21) goto LAB_002cbffc;
-              goto LAB_002cbea0;
-            }
-          }
-          else {
-            if (temp_v1 == 0x23) goto LAB_002cbf28;
-            if (temp_v1 != 0x7a0) goto LAB_002cbffc;
-          }
-          if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-            *(short *)(temp_v2 + 0x10e8) = *(short *)(temp_v2 + 0x10e8) + temp_v3;
-            *(short *)(temp_v2 + 0x10f6) = temp_v3 + *(short *)(temp_v2 + 0x10f6);
-          }
-          else {
-            *(short *)(temp_v2 + 0x1092) = *(short *)(temp_v2 + 0x1092) + temp_v3;
-            *(short *)(temp_v2 + 0x10a0) = temp_v3 + *(short *)(temp_v2 + 0x10a0);
-          }
-        }
-        else {
-LAB_002cbee4:
-          if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-            *(short *)(temp_v2 + 0x10ee) = *(short *)(temp_v2 + 0x10ee) + temp_v3;
-            *(short *)(temp_v2 + 0x10fc) = temp_v3 + *(short *)(temp_v2 + 0x10fc);
-          }
-          else {
-            *(short *)(temp_v2 + 0x1098) = *(short *)(temp_v2 + 0x1098) + temp_v3;
-            *(short *)(temp_v2 + 0x10a6) = temp_v3 + *(short *)(temp_v2 + 0x10a6);
-          }
-        }
-      }
-      else {
-        switch(temp_v1) {
-        default:
-          break;
-        case 0x7a2:
-LAB_002cbea0:
-          if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-            *(short *)(temp_v2 + 0x10ea) = *(short *)(temp_v2 + 0x10ea) + temp_v3;
-            *(short *)(temp_v2 + 0x10f8) = temp_v3 + *(short *)(temp_v2 + 0x10f8);
-          }
-          else {
-            *(short *)(temp_v2 + 0x1094) = *(short *)(temp_v2 + 0x1094) + temp_v3;
-            *(short *)(temp_v2 + 0x10a2) = temp_v3 + *(short *)(temp_v2 + 0x10a2);
-          }
-          break;
-        case 0x7a3:
-          goto LAB_002cbee4;
-        case 0x7a4:
-LAB_002cbf28:
-          if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-            *(short *)(temp_v2 + 0x10f0) = *(short *)(temp_v2 + 0x10f0) + temp_v3;
-            *(short *)(temp_v2 + 0x10fe) = temp_v3 + *(short *)(temp_v2 + 0x10fe);
-          }
-          else {
-            *(short *)(temp_v2 + 0x109a) = *(short *)(temp_v2 + 0x109a) + temp_v3;
-            *(short *)(temp_v2 + 0x10a8) = temp_v3 + *(short *)(temp_v2 + 0x10a8);
-          }
-          break;
-        case 0x7a5:
-          if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-            *(short *)(temp_v2 + 0x10e4) = *(short *)(temp_v2 + 0x10e4) + temp_v3;
-            *(short *)(temp_v2 + 0x10f2) = temp_v3 + *(short *)(temp_v2 + 0x10f2);
-          }
-          else {
-            *(short *)(temp_v2 + 0x108e) = *(short *)(temp_v2 + 0x108e) + temp_v3;
-            *(short *)(temp_v2 + 0x109c) = temp_v3 + *(short *)(temp_v2 + 0x109c);
-          }
-          break;
-        case 0x7a6:
-          if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-            *(short *)(temp_v2 + 0x10e6) = *(short *)(temp_v2 + 0x10e6) + temp_v3;
-            *(short *)(temp_v2 + 0x10f4) = temp_v3 + *(short *)(temp_v2 + 0x10f4);
-          }
-          else {
-            *(short *)(temp_v2 + 0x1090) = *(short *)(temp_v2 + 0x1090) + temp_v3;
-            *(short *)(temp_v2 + 0x109e) = temp_v3 + *(short *)(temp_v2 + 0x109e);
-          }
-        }
-      }
+    if (slot < 0 && (targetLow != 0 || targetHigh != 0)) {
+        return;
     }
-    else {
-LAB_002cbe5c:
-      if (!(param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0)) {
-        *(short *)(temp_v2 + 0x10ec) = *(short *)(temp_v2 + 0x10ec) + temp_v3;
-        *(short *)(temp_v2 + 0x10fa) = temp_v3 + *(short *)(temp_v2 + 0x10fa);
-      }
-      else {
-        *(short *)(temp_v2 + 0x1096) = *(short *)(temp_v2 + 0x1096) + temp_v3;
-        *(short *)(temp_v2 + 0x10a4) = temp_v3 + *(short *)(temp_v2 + 0x10a4);
-      }
+    ItemRecord *item = dataTable8FindRecord(panel->item);
+    if ((item->flags & 2) == 0) {
+        FUN_0033449c(0);
+        return;
     }
-  }
-  else {
-    switch(temp_v1) {
+    u32 hasTarget = targetLow | targetHigh;
+    s32 effectSlot;
+    if (hasTarget != 0) {
+        __aeabi_memcpy4(&panel->slotStats, (void *)gameGetSlotRecord(slot), 300);
+        effectSlot = slot;
+    } else {
+        __aeabi_memcpy4(&panel->playerStats, (void *)gameGetPlayerData(), 100);
+        effectSlot = -1;
+    }
+    s16 gain = FUN_00480b10(item->effect, effectSlot);
+    switch (item->effect) {
+    case 0x1f:
+    case 0x7a0:
+        addGain(panel, hasTarget, 2, gain);
+        break;
+    case 0x20:
+    case 0x7a1:
+        addGain(panel, hasTarget, 4, gain);
+        break;
+    case 0x21:
+    case 0x7a2:
+        addGain(panel, hasTarget, 3, gain);
+        break;
+    case 0x22:
+    case 0x7a3:
+        addGain(panel, hasTarget, 5, gain);
+        break;
+    case 0x23:
+    case 0x7a4:
+        addGain(panel, hasTarget, 6, gain);
+        break;
+    case 0x7a5:
+        addGain(panel, hasTarget, 0, gain);
+        break;
+    case 0x7a6:
+        addGain(panel, hasTarget, 1, gain);
+        break;
+    case 0x7b7:
     case 0x7b8:
     case 0x7b9:
     case 0x7ba:
@@ -275,29 +114,23 @@ LAB_002cbe5c:
     case 0x7c0:
     case 0x7c1:
     case 0x7c2:
-      FUN_0033449c(0);
-      if (param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0) {
-        temp_v5 = gameGetPlayerData();
-        gameGlobalsQueueValues(temp_v5,0);
+        FUN_0033449c(0);
+        if (hasTarget != 0) {
+            statusDisplayBindUnitRecord(gameGetSlotRecord(slot), 0, 0);
+        } else {
+            gameGlobalsQueueValues(gameGetPlayerData(), 0);
+        }
         return;
-      }
-      temp_v5 = gameGetSlotRecord(param_1);
-      statusDisplayBindUnitRecord(temp_v5,0,0);
-      return;
+    default:
+        break;
     }
-  }
-LAB_002cbffc:
-  FUN_0033449c(1);
-  if (param_2 == (fn_002cbca8_arg1 *)0x0 && param_3 == (fn_002cbca8_arg2 *)0x0) {
-    temp_v5 = gameGetPlayerData();
-    gameGlobalsQueueValues(temp_v5,0);
-    FUN_00372100(temp_v2 + 0x1080,0);
-    return;
-  }
-  temp_v5 = gameGetSlotRecord(param_1);
-  statusDisplayBindUnitRecord(temp_v5,0,0);
-  objBInitBlock19D0(temp_v2 + 0x10e4,0);
-  return;
+    FUN_0033449c(1);
+    if (hasTarget != 0) {
+        statusDisplayBindUnitRecord(gameGetSlotRecord(slot), 0, 0);
+        objBInitBlock19D0(&panel->slotStats, 0);
+    } else {
+        gameGlobalsQueueValues(gameGetPlayerData(), 0);
+        FUN_00372100(&panel->playerStats, 0);
+    }
 }
-
-} /* extern "C" */
+}

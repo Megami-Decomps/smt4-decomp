@@ -40,7 +40,7 @@ s32 FUN_00192718(u32 id);
 void FUN_002f0384(s32 mode);
 s32 objBStateAllowsAction(void);
 void FUN_0038b5fc(s32 kind, u16 id);
-void rt_memcpy_w(void *destination, const void *source, s32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, s32 bytes);
 void FUN_003df7c4(PlayerEquipmentBlock *block);
 void FUN_00372100(PlayerEquipmentBlock *block, s32 arg);
 
@@ -79,7 +79,7 @@ void FUN_00498de0(EquipMenu *menu)
     if (menu->previewEnabled != 0 && menu->previewedId != id) {
         menu->previewedId = id;
         PlayerEquipmentBlock preview;
-        rt_memcpy_w(&preview, gameGetPlayerData(), 100);
+        __aeabi_memcpy4(&preview, gameGetPlayerData(), 100);
         if (id != 0) {
             switch (FUN_00192718(id)) {
             case 2:

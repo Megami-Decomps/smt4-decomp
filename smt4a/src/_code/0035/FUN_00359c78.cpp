@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack push uses ip and stack-pop comparison/callback registers differ. */
+/* NON_MATCHING: stack push now matches (renderStackPushCounted); the stack-pop compare/callback registers differ (retail keeps the previous top in r0 and the new top in r1). */
 #include "ui/SpriteIndicator.h"
 #include "camp/RenderCtx.h"
 
@@ -18,7 +18,7 @@ void FUN_00359c78(SpriteLayerBlendState *blend, s32 x, s32 y)
     efctSetSpeed(blend->speed);
     RenderCtxA *context = g_renderCtx;
     s32 state = packNibblesAndByte(6, 1, 0);
-    renderStackPush(&context->stackB, state);
+    renderStackPushCounted(&context->stackB, state);
     FUN_00164b5c(2, 46, 12, x, y, 107);
     renderStackPop(&g_renderCtx->stackB);
     FUN_00183bb0();

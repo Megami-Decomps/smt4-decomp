@@ -48,7 +48,7 @@ void *fileLoadSync(const char *path, u32 *size, u32 flags);
 void *fileSlotGetBuffer(u32 slot);
 ScriptRunState *FUN_00297060(void *file, void *buffer);
 void memClear(void *data, u32 size);
-void rt_memcpy_w(void *output, const void *input, u32 size);
+void __aeabi_memcpy4(void *output, const void *input, u32 size);
 
 void FUN_00390038(AocPurchaseMenu *menu)
 {
@@ -78,6 +78,6 @@ void FUN_00390038(AocPurchaseMenu *menu)
     main->flags &= ~0x70u;
     reinterpret_cast<AocPurchaseMainView *>(main)->mode = 2;
     memClear(menu->prompt, sizeof(menu->prompt));
-    rt_memcpy_w(menu->prompt, "Please select content to purchase.", 0x23);
+    __aeabi_memcpy4(menu->prompt, "Please select content to purchase.", 0x23);
 }
 }

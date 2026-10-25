@@ -40,7 +40,7 @@ MapBlockView *gameGetMapBlock(void);
 PlayerLevelView *gameGetPlayerData(void);
 f32 mathDistanceBetweenPoints(MapVector from, MapVector to);
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
-f32 FUN_00287a78(MapVector from, f32 heading, MapVector to);
+f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
 f32 FUN_0028250c(f32 value);
 f32 FUN_00282390(f32 value);
 void FUN_00291e40(u32 sound, MapVector position);
@@ -49,7 +49,7 @@ void FUN_00291e40(u32 sound, MapVector position);
 static __inline bool isSourceApproaching(const MapVector &position)
 {
     return mathDistanceBetweenPoints(g_gameState.encounterSourcePosition, position) < 250.0f &&
-           FUN_00287a78(g_gameState.encounterSourcePosition, g_gameState.encounterSourceHeading, position) < 70.0f;
+           mathAbsHeadingErrorToPoint(g_gameState.encounterSourcePosition, g_gameState.encounterSourceHeading, position) < 70.0f;
 }
 
 /* Checks whether an encounter source is close enough to the enemy and starts the approach marker. */

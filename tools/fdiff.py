@@ -34,7 +34,8 @@ def objdump(game):
 def listing(tool, obj):
     """[text] for .text: one row per instruction or data word, relocations folded in. The
     objects' mapping symbols ($a/$t/$d) tell objdump ARM, Thumb and pool words apart."""
-    out = subprocess.run([tool, "-dr", "-j", ".text", "--no-show-raw-insn", str(obj)], capture_output=True, text=True).stdout
+    # -z: print zero words (a 0.0f pool word) instead of eliding them as "...".
+    out = subprocess.run([tool, "-drz", "-j", ".text", "--no-show-raw-insn", str(obj)], capture_output=True, text=True).stdout
     rows = []
     for line in out.splitlines():
         reloc = re.match(r"\s+[0-9a-f]+: (R_ARM_\w+)\s+(\S+)", line)

@@ -26,7 +26,7 @@ s32 devilCompareNonEmptyFirstB(const void*, const void*);
 s32 devilCompareNonEmptyFirst(const void*, const void*);
 s32 entryCompareByDataValueB(const void*, const void*);
 s32 FUN_002e45f8(const void*, const void*);
-s32 FUN_002e467c(const void*, const void*);
+s32 devilSlotCompareRaceThenLevel(const void*, const void*);
 
 void statusInventorySort(void)
 {
@@ -35,7 +35,7 @@ void statusInventorySort(void)
         &reinterpret_cast<const StatusSortOptions*>(FUN_002a0d0c())->inventory;
     if ((*options & 0x7F) == 1) {
         if (*options >> 7) {
-            FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), FUN_002e467c);
+            FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), devilSlotCompareRaceThenLevel);
         } else {
             FUN_002b7bca(status->entries, status->count, sizeof(status->entries[0]), devilCompareNonEmptyFirstB);
         }

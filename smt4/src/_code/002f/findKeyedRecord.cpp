@@ -9,16 +9,16 @@ struct KeyedRecord {
     /* 0x08 */ u8 unk08[0x54];
 };
 
-extern KeyedRecord DAT_00448e18[999];
+extern KeyedRecord g_textEntryTable[999];
 
 KeyedRecord *findKeyedRecord(s32 firstKey, s32 secondKey)
 {
     for (s32 i = 0; i < 999; i++) {
-        if (DAT_00448e18[i].firstKey == -1) {
+        if (g_textEntryTable[i].firstKey == -1) {
             break;
         }
-        if (DAT_00448e18[i].firstKey == firstKey && DAT_00448e18[i].secondKey == secondKey) {
-            return &DAT_00448e18[i];
+        if (g_textEntryTable[i].firstKey == firstKey && g_textEntryTable[i].secondKey == secondKey) {
+            return &g_textEntryTable[i];
         }
     }
     return NULL;

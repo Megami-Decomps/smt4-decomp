@@ -18,7 +18,7 @@ int slotFlagsClearState(void);
 int tableClearFlags300(void);
 int FUN_004bb880(void);
 int FUN_004cd960(void);
-int rt_memcpy_w(unsigned short *, unsigned short *, int);
+int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 
 extern int DAT_0057f69c; /* 0x57f69c */
 extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
@@ -37,7 +37,7 @@ extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 /* Supplied declaration required: tableClearFlags300. */
 /* Supplied declaration required: FUN_004bb880. */
 /* Supplied declaration required: FUN_004cd960. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0022838c(void)
@@ -117,7 +117,7 @@ void FUN_0022838c(void)
       puVar8[0x1b] = puVar8[0x1b] & 0xff00;
       *(unsigned char *)(puVar8 + 0xb) = *(unsigned char *)(puVar8 + 0xb) & 1;
       puVar8[0x27] = 0;
-      rt_memcpy_w(puVar8 + 0x1e,puVar3 + 0x50,0x12);
+      __aeabi_memcpy4(puVar8 + 0x1e,puVar3 + 0x50,0x12);
       temp_v4 = 0;
       do {
         temp_v1 = (unsigned int)(unsigned short)puVar8[temp_v4 + 0xe];

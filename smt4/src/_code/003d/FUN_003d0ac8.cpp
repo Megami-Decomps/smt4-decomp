@@ -6,7 +6,7 @@ extern "C" {
 u32 FUN_00229914(BtlMainState **, void *, s32);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 s32 questCurrentIsFlagged(void);
-s32 FUN_00227c30(s32, s32);
+s32 valueRangeSameSide(s32, s32);
 u16 btlEntryRollPassiveSkill(u32);
 void FUN_0023c154(BtlMainState *, s32, s32, s32, u32);
 
@@ -24,7 +24,7 @@ u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
     for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
         u32 status = (*state)->actions.records[i].status;
         if ((status & 1) != 0 && (status & 0x80) != 0 && i != subject &&
-            FUN_00227c30(i, subject)) {
+            valueRangeSameSide(i, subject)) {
             BtlEntry *candidate = btlMainFindEntryByListedId(*state, i);
             if ((candidate->groupMask & 0x1C0) == 0) {
                 u16 skill = btlEntryRollPassiveSkill(i);

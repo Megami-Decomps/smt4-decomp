@@ -21,10 +21,9 @@ void FUN_0038abbc(DrawParameterOwner *state, u32 resource, u8 enabled, u32 param
     state->control.frame = 0;
     state->enabled = enabled;
     state->control.resource = FUN_002347b8(g_aocMain, resource, state->unk014);
-    u32 flags = state->control.flags;
-    state->control.flags = flags & ~0x20u;
-    if ((flags & 0x10) == 0) {
-        state->control.flags = (flags & ~0x20u) | 0x10;
+    state->control.flags &= ~0x20u;
+    if ((state->control.flags & 0x10) == 0) {
+        state->control.flags |= 0x10;
         state->unk418 = 0;
         state->control.process = asdProcessCreateSimple(DAT_003ff778, 2, 0, 0,
                                                        FUN_0038a1e0, NULL, reinterpret_cast<u32>(state));

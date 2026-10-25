@@ -14,7 +14,7 @@ int sysMemClear(...);
 int asdOperatorDeleteC(int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -46,7 +46,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: asdOperatorDeleteC. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -179,11 +179,11 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
       asdOperatorNewD();
       sysMemClear();
       if (temp_v12 != 0) {
-        rt_memcpy_w(temp_v6,temp_v4,temp_v12 << 2);
+        __aeabi_memcpy4(temp_v6,temp_v4,temp_v12 << 2);
         temp_v13 = temp_v12;
       }
       else {
-        rt_memcpy_w(temp_v6,temp_v3,temp_v13 << 2);
+        __aeabi_memcpy4(temp_v6,temp_v3,temp_v13 << 2);
       }
       qsort(temp_v6,temp_v13,4,&LAB_0047e678);
       temp_v12 = temp_v12 << 2;

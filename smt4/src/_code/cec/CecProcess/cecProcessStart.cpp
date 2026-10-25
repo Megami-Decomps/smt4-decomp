@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail forwards an uninitialized incoming r5 into r1 before operator new, and the child constructor still has a C-form symbol. */
 #include "shard/W5_W5Match2_StatusQuery.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -11,7 +10,7 @@ extern "C" {
 extern CecProcessView* g_cecProcess;
 void* asdMemAlloc(s32 heap, s32 alignment, s32 mode, u32 size, s32 fromFront);
 void memClear(void* memory, u32 size);
-void* asdOperatorNew(u32 size);
+void* asdOperatorNew(u32 size, void* owner);
 CecProcessChild* _ZN9Obj420a1cC1Ev(CecProcessChild* child);
 
 // Allocate the cleared CEC process block and construct its child object.
@@ -21,7 +20,8 @@ void cecProcessStart()
     CecProcessView* process = (CecProcessView*)asdMemAlloc(0x100, 0x100, 0, 0x460, 1);
     memClear(process, 0x460);
     g_cecProcess = process;
-    CecProcessChild* child = (CecProcessChild*)asdOperatorNew(sizeof(CecProcessChild));
+    void* owner;
+    CecProcessChild* child = (CecProcessChild*)asdOperatorNew(sizeof(CecProcessChild), owner);
     if (child != NULL) {
         child = _ZN9Obj420a1cC1Ev(child);
     }

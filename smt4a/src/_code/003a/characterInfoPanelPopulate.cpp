@@ -40,14 +40,14 @@ typedef char CharacterInfoRecordASizeCheck[sizeof(CharacterInfoRecordA) == 0x64 
 
 extern "C" {
 void FUN_001654f8(const char *source, char *destination, u32 flags);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_aeabi_memclr(void *destination, u32 size);
 void FUN_0023723c(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *dataTable4AGetEntry2C(u32 id);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_0015f858(u32 equipment, u32 flags);
 const char *FUN_00180118(u32 demon);
-void FUN_0050d740(char *destination, const char *source);
+void ARM_common_memcpy4_7(char *destination, const char *source);
 const char *FUN_0014bf3c(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
 const char *FUN_0014bd84(u32 skill);
@@ -91,7 +91,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     FUN_0023723c(panel->name, 3, -1u, 0, 0, buffer);
     const char *title = dataTable4AGetEntry2C(record->title);
     if (record->flags & 2)
-        rt_memcpy_w(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
+        __aeabi_memcpy4(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
     else if (title)
         FUN_001654f8(title, buffer, 0);
     else
@@ -116,7 +116,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     if (record->owner)
         FUN_001654f8(FUN_00180118(record->demon), buffer, 0);
     else
-        FUN_0050d740(buffer, "\x81\x7c\x81\x7c\x81\x7c");
+        ARM_common_memcpy4_7(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     FUN_0023723c(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_00168594(buffer, 1, 0.0f);
     if (record->owner)

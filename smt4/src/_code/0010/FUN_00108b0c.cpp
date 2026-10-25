@@ -1,4 +1,3 @@
-/* NON_MATCHING: the first two flag tests are if-converted (ldrbne/cmpne); retail branches after each and jumps straight to the return when the second is 0. */
 #include "common.h"
 
 extern "C" {
@@ -26,12 +25,14 @@ u8 FUN_00108b0c(void)
 {
     JobWork *work = jobGetWork();
 
-    if (work->panel.shown != 0) {
-        if (work->panel.ready != 0) {
-            if (FUN_002bff10(0) == 0 && work->closeRequested != 0) {
-                FUN_0011340c(0);
-            }
-        }
+    if (work->panel.shown == 0) {
+        return 0;
+    }
+    if (work->panel.ready == 0) {
+        return 0;
+    }
+    if (FUN_002bff10(0) == 0 && work->closeRequested != 0) {
+        FUN_0011340c(0);
     }
     return 0;
 }

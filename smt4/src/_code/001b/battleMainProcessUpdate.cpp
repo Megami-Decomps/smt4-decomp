@@ -169,7 +169,7 @@ void wordTripleClear(u32 *values);
 void FUN_00294f64(void *resource);
 void listBoxClearSelectionAndReset(void *event);
 void FUN_0027de24(void *event);
-void FUN_0027dd9c(void *event);
+void modelSetResetSlots(void *event);
 void btlEventResetSlots(void *event);
 void mathVectorClear(void *main);
 void transformClearVectors(void *main);
@@ -186,7 +186,7 @@ s32 FUN_002896bc();
 void frameTexResetFlags();
 void soundChannelStopAll(u32 channels);
 void *gameGetSlotTable();
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void *rt_memcpy(void *destination, const void *source, u32 size);
 void *FUN_00282be4();
 void FUN_00338790(BattleTaskContext *work);
@@ -242,7 +242,7 @@ static inline BattleTaskOpening *findBattleTaskOpening(BattleTaskContext *work)
 static inline void restoreBattleTaskData()
 {
     if (g_btlMainState.savedSlots)
-        rt_memcpy_w(gameGetSlotTable(), g_btlMainState.savedSlots, 0x97e8);
+        __aeabi_memcpy4(gameGetSlotTable(), g_btlMainState.savedSlots, 0x97e8);
     if (g_btlMainState.savedData)
         rt_memcpy(FUN_00282be4(), g_btlMainState.savedData, 0x104a);
 }
@@ -287,7 +287,7 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
     }
     listBoxClearSelectionAndReset(DAT_00435d18);
     FUN_0027de24(DAT_00435d18);
-    FUN_0027dd9c(DAT_00435d18);
+    modelSetResetSlots(DAT_00435d18);
     btlEventResetSlots(DAT_00435d18);
     mathVectorClear(g_btlMain);
     transformClearVectors(g_btlMain);

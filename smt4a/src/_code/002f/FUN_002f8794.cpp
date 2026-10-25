@@ -1,4 +1,4 @@
-/* NON_MATCHING: global address and first component loads are scheduled in a different order from retail. */
+/* NON_MATCHING: retail computes the delta address before the values address; the natural values-then-delta source emits the ADDs and first VFP loads in the other order. */
 #include "shard/W6_W6Match5_ComponentIntegration.h"
 
 extern "C" ComponentIntegrationState DAT_006471dc;

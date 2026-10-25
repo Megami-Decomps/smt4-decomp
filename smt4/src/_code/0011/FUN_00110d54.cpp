@@ -1,6 +1,6 @@
 /* NON_MATCHING: delay validation and integer gains match; VFP load/arithmetic scheduling differs. */
 #include "sound/SoundEffectDelay.h"
-extern "C" void rt_memcpy_w(void *destination, const void *source, u32 size);
+extern "C" void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // Validate delay parameters and derive the fixed-point gains used by the effect.
 extern "C" u32 FUN_00110d54(SoundEffectDelay *effect, const SoundEffectDelayParameters *parameters)
@@ -25,6 +25,6 @@ extern "C" u32 FUN_00110d54(SoundEffectDelay *effect, const SoundEffectDelayPara
         damping = 0.95f;
     effect->directGain = (s32)((1.0f - damping) * 128.0f);
     effect->dampingGain = (s32)(damping * 128.0f);
-    rt_memcpy_w(&effect->parameters, parameters, 13);
+    __aeabi_memcpy4(&effect->parameters, parameters, 13);
     return 1;
 }

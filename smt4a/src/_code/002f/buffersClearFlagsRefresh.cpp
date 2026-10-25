@@ -11,14 +11,14 @@ typedef struct Buffers {
     u8 flagB;         /* 0x229 */
 } Buffers;
 
-extern void rt_memcpy_w(void *dst, const void *src, u32 size);
+extern void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 
 /* Clears both flags and refreshes the copy of the buffer. */
 void buffersClearFlagsRefresh(Buffers *buffers)
 {
     buffers->flagA = 0;
     buffers->flagB = 0;
-    rt_memcpy_w(buffers->copy, buffers->source, sizeof(buffers->copy));
+    __aeabi_memcpy4(buffers->copy, buffers->source, sizeof(buffers->copy));
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 u32 asdGxGetCommandCursor(void);
 u32 *FUN_00501084(Obj42072cState *cache, u32 *commands);
 u32 *FUN_00500fe4(u32 unused, u32 *commands, const TextureCommandSource *texture);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void asdModelCommitCommandRange(u32 begin, u32 end);
 }
 
@@ -51,7 +51,7 @@ extern "C" void FUN_00412678(u32 unused, Obj42072cState *cache, const TextureCom
         u32 *end = FUN_00501084(cache, cache->commands);
         cache->commandWordCount = end - cache->commands;
     }
-    rt_memcpy_w(commands, cache->commands, cache->commandWordCount * sizeof(u32));
+    __aeabi_memcpy4(commands, cache->commands, cache->commandWordCount * sizeof(u32));
     commands = FUN_00500fe4((u32)cache, commands + cache->commandWordCount, texture);
     commands = vertexResetCommandSlots(commands, cache);
     asdModelCommitCommandRange((u32)begin, (u32)commands);

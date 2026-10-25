@@ -10,7 +10,7 @@ void FUN_0033440c(u32 value);
 void FUN_0033449c(s32 value);
 void FUN_0034aac8(s32 enabled);
 void gameGlobalsQueueValues(void *player, s32 mode);
-void rt_memcpy_w(void *output, const void *input, u32 size);
+void __aeabi_memcpy4(void *output, const void *input, u32 size);
 void *gameDataBlocksGetSaveData(void);
 
 // Apply the highlighted save profile to the player preview and global name/options.
@@ -69,7 +69,7 @@ void FUN_0041fc24(void *context)
         const Profile *profile = &work->profiles[work->appliedSlot];
         player->equipment = profile->equipment;
         player->baseStats = profile->baseStats;
-        rt_memcpy_w(&player->maximumStats, &profile->maximumStats, sizeof(PackedSevenValues));
+        __aeabi_memcpy4(&player->maximumStats, &profile->maximumStats, sizeof(PackedSevenValues));
         player->hp = profile->hp;
         player->mp = profile->mp;
         player->experience = profile->experience;

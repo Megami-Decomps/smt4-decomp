@@ -27,7 +27,7 @@ typedef struct Menu {
 
 s32 sysPlaySe(u32 id);
 s32 FUN_0041f020(Menu *menu, s32 selected);
-s32 rt_memcpy_w(void *dest, void *src, s32 size);
+s32 __aeabi_memcpy4(void *dest, void *src, s32 size);
 s32 resourceRunOperationIfUnblocked(Entry *entry);
 s32 flaggedEntryGetValueA(Entry *entry);
 s32 FUN_0041fc24(Menu *menu);
@@ -51,11 +51,11 @@ void FUN_0041dbdc(Menu *menu, s32 selected)
     sysPlaySe(se);
     FUN_0041f020(menu, selected);
     if (selected != 0) {
-        rt_memcpy_w(&menu->entryA, &menu->current, 100);
-        rt_memcpy_w(&menu->current, &menu->entryB, 100);
+        __aeabi_memcpy4(&menu->entryA, &menu->current, 100);
+        __aeabi_memcpy4(&menu->current, &menu->entryB, 100);
     } else {
-        rt_memcpy_w(&menu->entryB, &menu->current, 100);
-        rt_memcpy_w(&menu->current, &menu->entryA, 100);
+        __aeabi_memcpy4(&menu->entryB, &menu->current, 100);
+        __aeabi_memcpy4(&menu->current, &menu->entryA, 100);
     }
     menu->extra = resourceRunOperationIfUnblocked(&menu->current);
     menu->value = flaggedEntryGetValueA(&menu->current);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: The two phase-completion stores use r0 and r1 in the opposite roles. */
 #include "shard/W8Match1_ScriptPhase.h"
 extern "C" {
 void scrScriptProcessStartEntry(u32, s32);
@@ -17,8 +16,8 @@ u32 FUN_003105f4(ScriptPhaseWork* work)
         break;
     case 1:
         if (scrRunOpcodesStub(work->scriptProcess) == 2) {
-            work->state = 6;
             work->scriptState = 0;
+            work->state = 6;
             result = 2;
         }
         break;

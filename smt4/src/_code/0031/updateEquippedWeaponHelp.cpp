@@ -1,14 +1,10 @@
-/* NON_MATCHING: only the initial global-address load is scheduled two instructions later; -O2 candidate. */
+/* NON_MATCHING: only the initial g_buttonHelp address load is scheduled two instructions later (retail loads it before `sub sp`). */
 #include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 struct EquipmentHelpPlayer { u16 equippedId; };
-struct EquipmentHelpHolder {
-    ButtonHelpGlobals prefix;
-    RelativeDirectory *defaultDirectory;
-};
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 const EquipmentHelpPlayer *gameGetPlayerData();
@@ -65,7 +61,7 @@ void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index)
     FUN_001f4568(1, 0, 0, text);
     textEncodeFontSlot(0x29, text);
     if (!directory)
-        directory = ((EquipmentHelpHolder *)&g_buttonHelp)->defaultDirectory;
+        directory = reinterpret_cast<RelativeDirectory *>(g_buttonHelp.mbm);
     asdTextDrawDirectoryEntry((AsdText *)help->unk558, 3, -1, 0, 3, directory, index);
 }
 }

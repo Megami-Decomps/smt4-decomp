@@ -4,7 +4,7 @@
 extern "C" {
 extern s32 g_keyedRecordCount;
 extern KeyedRecordStorage g_keyedRecords[];
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // Find the latest track or repeated effect endpoint in a keyed effect timeline.
 u32 FUN_002fdd9c(s32 index)
@@ -22,7 +22,7 @@ u32 FUN_002fdd9c(s32 index)
     const EffectTimelineEntry *timeline = storage->timeline;
     for (s32 entry = 0; entry < storage->timing.count; ++entry) {
         EffectTimelineRecord record;
-        rt_memcpy_w(&record, &storage->timing.templates[timeline[entry].recordIndex], sizeof(record));
+        __aeabi_memcpy4(&record, &storage->timing.templates[timeline[entry].recordIndex], sizeof(record));
         s16 repetitions = timeline[entry].repetitions;
         if (repetitions < 1)
             repetitions = 1;

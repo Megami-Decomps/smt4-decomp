@@ -1,4 +1,4 @@
-/* NON_MATCHING: Range-output stack slots, 64-bit mask loads, and special-flag addressing differ. */
+/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 

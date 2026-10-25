@@ -8,7 +8,7 @@ typedef int romwright_code(...);
 extern int FUN_0022fc5c(...); /* 0x22fc5c */
 extern int FUN_003a099c(...); /* 0x3a099c */
 extern int FUN_003a0b78(...); /* 0x3a0b78 */
-extern int FUN_003a0c5c(...); /* 0x3a0c5c */
+extern int sceneExitTransitionUpdate(...); /* 0x3a0c5c */
 extern int FUN_003a0d64(...); /* 0x3a0d64 */
 extern int FUN_003a186c(...); /* 0x3a186c */
 extern int FUN_003a18a0(...); /* 0x3a18a0 */
@@ -76,7 +76,7 @@ void FUN_003a4518(int param_1)
   *(unsigned int *)(param_1 + 0x9c) = 0;
   *(romwright_code **)(param_1 + 0xa0) = shopMenuUpdateInput;
   *(unsigned int *)(param_1 + 0xa4) = 0;
-  *(romwright_code **)(param_1 + 0xa8) = FUN_003a0c5c;
+  *(romwright_code **)(param_1 + 0xa8) = sceneExitTransitionUpdate;
   *(unsigned int *)(param_1 + 0xac) = 0;
   return;
 }

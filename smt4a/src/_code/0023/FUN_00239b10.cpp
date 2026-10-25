@@ -30,7 +30,7 @@ void *FUN_003fd478(void);
 void partyCopyRecord100(void *record);
 s32 gameFlagIsSet(u32 id);
 void gameFlagSetValue(u32 id, s32 value, s32 arg2);
-void rt_memcpy_w(void *dst, void *src, u32 size);
+void __aeabi_memcpy4(void *dst, void *src, u32 size);
 
 /* Copies the work block over the save data's game data, keeping the party record and the
  * values at 0x8c, 0x21e14 and 0x27ec5; when keep is 1, those and flags 0x556/0x557/0x421 are restored. */
@@ -46,7 +46,7 @@ void FUN_00239b10(s32 keep)
     f32 saved21e14 = data->unk21d8c;
     void *record = FUN_003fd478();
 
-    rt_memcpy_w(data, g_gameDataBlocks.workBlock, 0x2a71c);
+    __aeabi_memcpy4(data, g_gameDataBlocks.workBlock, 0x2a71c);
     data->unk21d8c = saved21e14;
     partyCopyRecord100(record);
     if (keep == 1) {

@@ -98,7 +98,7 @@ struct SaveBlockView {
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
 
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 bool gameFlagIsSet(u32 index);
 s32 FUN_00371f3c(void);
 u32 gameFlagsClassify(s32 id);
@@ -108,7 +108,7 @@ void FUN_002299b0(SummarySource *source)
 {
     SaveSummary *summary = &((SaveBlockView *)g_gameDataBlocks.saveBlock)->summary;
     summary->version = source->version;
-    rt_memcpy_w(summary, source->header, 0x12);
+    __aeabi_memcpy4(summary, source->header, 0x12);
     summary->unk10 = 0;
     summary->word12 = source->word08;
     summary->word16 = source->word0C;
@@ -117,7 +117,7 @@ void FUN_002299b0(SummarySource *source)
     summary->word20 = source->word38;
     summary->half24 = source->half32;
     summary->half26 = source->half34;
-    rt_memcpy_w(summary->name, source->name, 0xE);
+    __aeabi_memcpy4(summary->name, source->name, 0xE);
     summary->word3E = source->word16;
     summary->word42 = source->word1A;
     summary->word46 = source->word1E;
@@ -184,6 +184,6 @@ void FUN_002299b0(SummarySource *source)
         summary->byte6B = 0;
     }
     summary->word6C = ((SaveBlockView *)g_gameDataBlocks.saveBlock)->word5448;
-    rt_memcpy_w(((SaveBlockView *)g_gameDataBlocks.saveBlock)->savedSummary, summary, 0x80);
+    __aeabi_memcpy4(((SaveBlockView *)g_gameDataBlocks.saveBlock)->savedSummary, summary, 0x80);
 }
 }

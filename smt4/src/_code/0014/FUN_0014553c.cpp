@@ -17,7 +17,7 @@ struct TextHistoryTableView {
 
 extern "C" {
 extern RenderChannelState g_textRendererSettings;
-void *rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 // Make room for a new history record and reset its type marker.
 void FUN_0014553c()
@@ -29,7 +29,7 @@ void FUN_0014553c()
         if (history->selected >= 64) {
             for (s32 i = 0; i < 63; ++i) {
                 history = (TextHistoryTableView *)g_textRendererSettings.table;
-                rt_memcpy_w(&history->entries[i], &history->entries[i + 1], sizeof(history->entries[i]));
+                __aeabi_memcpy4(&history->entries[i], &history->entries[i + 1], sizeof(history->entries[i]));
             }
             ((TextHistoryTableView *)g_textRendererSettings.table)->selected = 63;
         }

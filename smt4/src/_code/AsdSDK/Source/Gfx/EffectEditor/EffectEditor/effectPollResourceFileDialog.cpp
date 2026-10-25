@@ -6,7 +6,7 @@ void FUN_002430c8(const char*, u32, FileDialogResult*);
 void* FUN_001e1a70(const char*);
 void registrationEntryInsert(u32, s32);
 char* libc_strcpy(char*, const char*);
-void rt_memcpy_w(void*, const void*, u32);
+void __aeabi_memcpy4(void*, const void*, u32);
 extern const u8 DAT_00400001;
 extern const u8 DAT_00400002;
 extern char DAT_004d8bd0[0x50];
@@ -27,7 +27,7 @@ u32 effectPollResourceFileDialog(void)
         libc_strcpy(DAT_004d8bd0, dialog.name);
         void* data = FUN_001e1a70(dialog.path);
         g_effectEditor.selection.list = data;
-        rt_memcpy_w(DAT_004d8c20, data, 0x80);
+        __aeabi_memcpy4(DAT_004d8c20, data, 0x80);
         state = (u32)&DAT_00400002;
         g_effectEditor.selection.index = 0;
         DAT_0044f858.object.indices.extraOffset = 0;

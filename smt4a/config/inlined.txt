@@ -17,3 +17,5 @@ selectOwnerGetActive = 0xe1d001d2; // 0x495554 (FUN_004954e8, after mov r0, r6)
 asdListBoxGetCursor = 0xe590001c; // 0x2a1b90 (asdListBoxAddItem, after add r0, r4, #12)
 shopResultGetSelection = 0xe2800f65; // 0x388900 (FUN_003888f8: add r0, r0, #404 then mov r4, r0 - a call result copied, not add r4, r0, #404)
 questUiGetList = 0xe2800f6b; // 0x24006c (FUN_0023ff10: add r0, r4, #0x800 passes the sub-object, mov r6, r0 keeps the result)
+scriptProcessSetMode = 0xe5801108; // 0x3e6e60 (FUN_003e6dc8) 0x47e568 (scriptHolderUpdateSimple): mov r1, #N sets the argument, r0 is the stored process, and r0 is reloaded from the holder right after the call
+asdGxGetBlackForced = 0xe5d001d0; // 0x13a420 (asdGxResumeAndApplyPreset: the presets address is loaded again into r0 as the argument although r4 holds it)

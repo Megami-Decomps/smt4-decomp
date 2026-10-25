@@ -64,7 +64,7 @@ extern UniteStateView* g_unite;
 
 extern "C" {
 PartyMemberView* partyMemberFindById(u32 id);
-void rt_memcpy_w(void* destination, const void* source, u32 size);
+void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void unitInitializeFromSavedRecord(u32 id, PartyMemberView* destination);
 int FUN_003c88f0(void* context, PartyMemberView* first, PartyMemberView* second);
 int FUN_003c92b8(void* context, u32 firstId,
@@ -103,7 +103,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
     const u32 firstId = selection->firstId;
     switch (selection->firstType) {
     case 1:
-        rt_memcpy_w(&first, partyMemberFindById(firstId), 0x604);
+        __aeabi_memcpy4(&first, partyMemberFindById(firstId), 0x604);
         break;
     case 3:
         unitInitializeFromSavedRecord(firstId, &first);
@@ -113,7 +113,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
     const u32 secondId = selection->secondId;
     switch (selection->secondType) {
     case 1:
-        rt_memcpy_w(&second, partyMemberFindById(secondId), 0x604);
+        __aeabi_memcpy4(&second, partyMemberFindById(secondId), 0x604);
         break;
     case 3:
         unitInitializeFromSavedRecord(secondId, &second);
@@ -147,7 +147,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         member = partyMemberFindById(generated.id);
         member->attributes = generated.attributes;
         member->secondaryAttributes = generated.secondaryAttributes;
-        rt_memcpy_w(member->extendedData, generated.extendedData, 0x500);
+        __aeabi_memcpy4(member->extendedData, generated.extendedData, 0x500);
 
         u16 candidates[32] = {0};
         for (int i = 0; i < 24; ++i)
@@ -230,9 +230,9 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         member = partyMemberFindById(state->savedMemberId);
         member->attributes = state->savedAttributes;
         member->secondaryAttributes = state->savedSecondary;
-        rt_memcpy_w(member->extendedData, state->savedExtended, 0x500);
+        __aeabi_memcpy4(member->extendedData, state->savedExtended, 0x500);
         const int unlocked = flagCountUnlockedSlots(member);
-        rt_memcpy_w(member->skills, state->savedSkills,
+        __aeabi_memcpy4(member->skills, state->savedSkills,
                     static_cast<u32>(unlocked) << 1);
         unitRecalculateEffectiveStats(member);
         state->resultIndex = FUN_0029c0c0(state->context, member);

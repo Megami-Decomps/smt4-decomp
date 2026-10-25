@@ -14,7 +14,7 @@ int FUN_001b4e80(void);
 int FUN_001b4eb8(...);
 int libc_strcpy(...);
 int sysMemClear(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
@@ -42,7 +42,7 @@ extern char s______________________005b3274[113]; /* 0x5b3274 */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int * FUN_001abbc4(unsigned int *param_1)
@@ -172,7 +172,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
         puVar6[2] = temp_v4;
         *(unsigned int **)(temp_v1 + 0x90) = puVar6;
       }
-      rt_memcpy_w(temp_v1,temp_v9,0x90);
+      __aeabi_memcpy4(temp_v1,temp_v9,0x90);
       libc_strcpy(temp_v1 + 0x9c,temp_v9 + 0x9c);
       *(unsigned int *)(temp_v1 + 0xac) = 0;
       if (puVar2[0x22] != 0) {
@@ -303,7 +303,7 @@ unsigned int * FUN_001abbc4(unsigned int *param_1)
             *(unsigned int **)(temp_v3 + 0x90) = puVar13;
           }
         }
-        rt_memcpy_w(temp_v3,temp_v10,0x90);
+        __aeabi_memcpy4(temp_v3,temp_v10,0x90);
         libc_strcpy(temp_v3 + 0x9c,temp_v10 + 0x9c);
         *(unsigned int *)(temp_v3 + 0xac) = 0;
         temp_v1 = temp_v1 + 1;

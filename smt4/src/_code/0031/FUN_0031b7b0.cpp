@@ -1,23 +1,18 @@
-/* NON_MATCHING: the two argument constants are materialised in the order r1, r0 (retail: r0, r1). */
-#include "common.h"
+#include "shard/W4_W4Match5_DataTable.h"
 
 extern "C" {
 
 typedef struct UnkTable {
     /* 0x000 */ u8 unk000[0x3F4];
-    /* 0x3F4 */ int value;
+    /* 0x3F4 */ s32 value;
 } UnkTable;
 
 extern UnkTable *g_aocSystem;
 
-int dataTableGetCount(void);
-int dataTableGet(int arg0, int arg1);
-
-/* Selects entry (0x23, 2), then returns dataTableGetCount() plus the value at offset 0x3f4 of the global table. */
-int FUN_0031b7b0(void)
+/* Entry count of data table 0x23's section 2 plus the add-on system's extra count. */
+s32 FUN_0031b7b0(void)
 {
-    dataTableGet(0x23, 2);
-    return dataTableGetCount() + g_aocSystem->value;
+    return dataTableGetCount(dataTableGetSection(0x23, 2)) + g_aocSystem->value;
 }
 
 } /* extern "C" */

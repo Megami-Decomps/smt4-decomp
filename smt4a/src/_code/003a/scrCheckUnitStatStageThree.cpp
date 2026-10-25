@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; mask-operation temporaries/save frame and final state-byte address splitting differ. */
+/* NON_MATCHING: register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

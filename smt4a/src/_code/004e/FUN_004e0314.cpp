@@ -68,7 +68,7 @@ void FUN_004fcf0c(s32 row, CommandMenu *menu, s32 first, s32 slot, s32 member, s
 s32 FUN_0019acdc(s32 id, s32 flag);
 void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 *sound);
 void FUN_0047f7ac(u32 index, u32 value);
-void FUN_004fdc9c(s32 row, CommandMenu *menu, u32 unitId, u32 effect);
+void btlReflectCreateKind44(s32 row, CommandMenu *menu, u32 unitId, u32 effect);
 
 /* Advances the party command menu after its delay: builds the member rows and sets the script unit's next command. */
 u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
@@ -125,7 +125,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         s32 unitKind = FUN_0019acdc(view->unit->unitId, 1);
         FUN_003f1b3c(owner->state, unitKind, 0xb, &effect, &sound);
         FUN_0047f7ac(0, sound);
-        FUN_004fdc9c(row + 15, menu, view->unit->unitId, effect);
+        btlReflectCreateKind44(row + 15, menu, view->unit->unitId, effect);
     }
     g_btlAction.scriptUnit[owner->state->unitRecord.currentSlot].command = 0x20;
     return 1;

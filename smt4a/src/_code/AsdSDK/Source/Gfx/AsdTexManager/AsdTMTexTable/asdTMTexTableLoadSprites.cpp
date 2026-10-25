@@ -10,7 +10,7 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
 void textFormatBuffer(char *dst, const char *format, ...);
-void rt_memcpy_w(void *dst, const void *src, s32 size);
+void __aeabi_memcpy4(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
 extern TexTable g_texTable;
@@ -70,7 +70,7 @@ TexFile *asdTMTexTableLoadSprites(s32 idx)
                     sprite->frames = NULL;
                 }
                 if (sprite->frameCount > 0) {
-                    rt_memcpy_w(sprite->frames, src + 0xc, sprite->frameCount * 0x14);
+                    __aeabi_memcpy4(sprite->frames, src + 0xc, sprite->frameCount * 0x14);
                 }
                 if (prev == NULL) {
                     entry->sprites->first = sprite;

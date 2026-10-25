@@ -23,7 +23,7 @@ int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00291e40(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(int [40], unsigned char *, int);
+int __aeabi_memcpy4(int [40], unsigned char *, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -74,7 +74,7 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: FUN_00291e40. */
 extern int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_002c8ce4(void)
@@ -111,10 +111,10 @@ void FUN_002c8ce4(void)
   unsigned int temp_v16;
   unsigned int temp_v17 [13];
   
-  rt_memcpy_w(aiStack_2e8,&DAT_00404504,0xa0);
-  rt_memcpy_w(aiStack_248,&DAT_004045a4,0xa0);
-  rt_memcpy_w(aiStack_1a8,&DAT_00404644,0xa0);
-  rt_memcpy_w(aiStack_108,&DAT_004046e4,0xa0);
+  __aeabi_memcpy4(aiStack_2e8,&DAT_00404504,0xa0);
+  __aeabi_memcpy4(aiStack_248,&DAT_004045a4,0xa0);
+  __aeabi_memcpy4(aiStack_1a8,&DAT_00404644,0xa0);
+  __aeabi_memcpy4(aiStack_108,&DAT_004046e4,0xa0);
   temp_v2 = g_lmapScene;
   temp_v14 = 0.33333334f;
   temp_v4 = *(int *)(g_lmapScene + 4);

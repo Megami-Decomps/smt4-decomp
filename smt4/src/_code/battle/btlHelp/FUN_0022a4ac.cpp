@@ -33,7 +33,7 @@ extern "C" {
 extern HelpList *DAT_00435d78;
 
 void *asdMemAlloc(s32 heap, s32 alignment, s32 flags, s32 size, s32 clear);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 /* Creates a help entry and appends it to the help list. */
 HelpNode *FUN_0022a4ac(u16 id, u16 style, u32 arg0, u32 arg1, const void *body, u8 flag, f32 duration)
@@ -47,7 +47,7 @@ HelpNode *FUN_0022a4ac(u16 id, u16 style, u32 arg0, u32 arg1, const void *body, 
     node->unk006 = 0;
     node->arg1 = arg1;
     if (body != NULL) {
-        rt_memcpy_w(node->body, body, sizeof(node->body));
+        __aeabi_memcpy4(node->body, body, sizeof(node->body));
     }
     node->flag = flag;
     node->duration = duration;

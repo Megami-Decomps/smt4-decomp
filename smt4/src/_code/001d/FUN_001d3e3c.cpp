@@ -148,7 +148,7 @@ int FUN_002bd158(void);
 int FUN_002be650(...);
 int FUN_002c29d8(...);
 int FUN_002e1230(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int questClassifyCompletionNotification(void);
 int FUN_0021bc04(unsigned int, unsigned int);
@@ -359,7 +359,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0026413c. */
 /* Supplied declaration required: FUN_00264444. */
 /* Supplied declaration required: FUN_002644a8. */
-extern int FUN_00264548(void);
+extern int lmapMainUpdateScriptTransition(void);
 /* Supplied declaration required: FUN_002646d4. */
 /* Supplied declaration required: FUN_00264794. */
 /* Supplied declaration required: mapTriggerMarkTable23Matches. */
@@ -546,7 +546,7 @@ extern char FUN_002fb7dc(void);
 /* Supplied declaration required: MapIf_Register. */
 /* Supplied declaration required: NaviMain_SetCurrentMap. */
 /* Supplied declaration required: NaviMain_Start. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -989,7 +989,7 @@ unsigned int FUN_001d3e3c(void)
       FUN_002be650(DAT_0049f9cc,1);
       FUN_002bd158();
       textEncodeFontSlot(0,temp_v30);
-      rt_memcpy_w(&DAT_0049f978,&LAB_001d5040,0x17);
+      __aeabi_memcpy4(&DAT_0049f978,&LAB_001d5040,0x17);
       return 0;
     }
     if (DAT_0049fa80 != 0) {
@@ -1199,7 +1199,7 @@ LAB_001d58a0:
                       if (*(char *)(temp_v4 + 0xdc8) != '\0') {
                         *(unsigned char *)(temp_v4 + 0xdc8) = 0;
                         DAT_0049f934 = 1;
-                        rt_memcpy_w(&DAT_0049f978,&LAB_001d5e04,0xe);
+                        __aeabi_memcpy4(&DAT_0049f978,&LAB_001d5e04,0xe);
                         puVar7[3] = 0x25;
                         puVar7[4] = 0;
                         navigationResetTimer();
@@ -1419,7 +1419,7 @@ joined_r0x001d535c:
             return 0;
           }
         }
-        rt_memcpy_w(&DAT_0049f978,&LAB_001d58f0,0x11);
+        __aeabi_memcpy4(&DAT_0049f978,&LAB_001d58f0,0x11);
         puVar7[3] = 0x25;
         puVar7[4] = 0;
         navigationResetTimer();
@@ -1777,7 +1777,7 @@ joined_r0x001d6448:
     FUN_00265f50(puVar7);
     FUN_0026493c(puVar7);
     FUN_00265bf8(puVar7);
-    temp_v6 = FUN_00264548();
+    temp_v6 = lmapMainUpdateScriptTransition();
     if (temp_v6 == 0) {
       return 0;
     }
@@ -2127,7 +2127,7 @@ LAB_001d6bd0:
   case 0x2d:
     lmapMainStep();
     puVar7[4] = puVar7[4] + 1;
-    temp_v6 = FUN_00264548();
+    temp_v6 = lmapMainUpdateScriptTransition();
     if (temp_v6 == 0) {
       return 0;
     }
@@ -2256,7 +2256,7 @@ LAB_001d6bd0:
     puVar7[4] = 0;
     break;
   case 0x33:
-    temp_v6 = FUN_00264548();
+    temp_v6 = lmapMainUpdateScriptTransition();
     if (temp_v6 != 0) {
       temp_v12 = DAT_0049f970 == 0;
       if (!temp_v12) {

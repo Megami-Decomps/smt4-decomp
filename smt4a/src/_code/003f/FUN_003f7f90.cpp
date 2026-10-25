@@ -17,6 +17,7 @@ s32 vec2GetXInt(const UiSpriteState *position);
 s32 vec2GetYInt(const UiSpriteState *position);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -31,7 +32,7 @@ u32 FUN_003f7f90(PositionedMenuDrawWork *work)
     renderStackPush(&context->stackA, state);
     s32 x = vec2GetXInt(&work->position);
     s32 y = vec2GetYInt(&work->position);
-    f32 speed = work->position.unk20;
+    f32 speed = vec2GetSpeed(&work->position);
     FUN_003f66dc(work, x, y, speed);
     switch (work->state) {
     case 0: case 1: case 2: case 3: case 9: case 10: case 11:

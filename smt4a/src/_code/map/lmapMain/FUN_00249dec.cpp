@@ -24,7 +24,7 @@ int FUN_0033abb4(void);
 int mathPositionHeadingDegrees(void);
 int gameFlagsBitSet(int, int);
 int FUN_003689d0(void);
-int FUN_00384830(void);
+int mathAbsHeadingErrorToPoint(void);
 int FUN_00385384(void);
 int gameFlagSetValue(int, int);
 int FUN_00408184(...);
@@ -134,7 +134,7 @@ extern int gameFlagsTestSecondBank(int);
 extern int mathCirclesOverlap(void);
 /* Supplied declaration required: FUN_00378964. */
 /* Supplied declaration required: FUN_00378a1c. */
-/* Supplied declaration required: FUN_00384830. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: FUN_00385384. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -221,7 +221,7 @@ unsigned int FUN_00249dec(void)
             temp_v4 = mathCirclesOverlap();
             if (temp_v4 == 0) break;
             temp_v4 = *(int *)(temp_v8 + 0xb0);
-            FUN_00384830();
+            mathAbsHeadingErrorToPoint();
             if (temp_v4 >= 0x42f00000) break;
             temp_v4 = *(int *)(temp_v8 + 0xb0);
             mathPositionHeadingDegrees();

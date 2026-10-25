@@ -9,7 +9,7 @@ int FUN_00243224(...);
 int FUN_00249678(void);
 int FUN_0024c418(void);
 int asdDebugLog(...);
-int FUN_0024dd80(...);
+int padAlternateButtonIndex(...);
 int effMenuListAppend(...);
 int FUN_0028836c(void);
 int FUN_002a2c00(void);
@@ -20,7 +20,7 @@ int padIsButtonPressed(...);
 int memAlloc(int, int, int, int, int, int);
 int FUN_003f6b88(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(void);
+int __aeabi_memcpy4(void);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
 typedef struct {
@@ -99,7 +99,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_0024c418. */
 /* Supplied declaration required: asdDebugLog. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_0028836c. */
 /* Supplied declaration required: FUN_002a2c00. */
@@ -109,7 +109,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_003f6b88. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00321cb4(void)
@@ -159,12 +159,12 @@ unsigned int FUN_00321cb4(void)
   asdDebugLog(8,0x20,0,&LAB_003220b0);
   temp_v10 = padIsButtonRepeat(5);
   if (temp_v10 == 0) {
-    FUN_0024dd80(5);
+    padAlternateButtonIndex(5);
     temp_v10 = padIsButtonRepeat();
     if (temp_v10 != 0) goto LAB_00321d34;
     temp_v10 = padIsButtonRepeat(6);
     if (temp_v10 == 0) {
-      FUN_0024dd80(6);
+      padAlternateButtonIndex(6);
       temp_v10 = padIsButtonRepeat();
       if (temp_v10 != 0) goto LAB_00321dd8;
     }
@@ -217,12 +217,12 @@ LAB_00321d34:
   }
   temp_v10 = padIsButtonRepeat(3);
   if (temp_v10 == 0) {
-    FUN_0024dd80(3);
+    padAlternateButtonIndex(3);
     temp_v10 = padIsButtonRepeat();
     if (temp_v10 != 0) goto LAB_00321e78;
     temp_v10 = padIsButtonRepeat(4);
     if (temp_v10 == 0) {
-      FUN_0024dd80(4);
+      padAlternateButtonIndex(4);
       temp_v10 = padIsButtonRepeat();
       if (temp_v10 != 0) goto LAB_00321ef0;
       goto LAB_00321ea4;
@@ -259,12 +259,12 @@ LAB_00321ea0:
 LAB_00321ea4:
       temp_v10 = padIsButtonRepeat(7);
       if (temp_v10 == 0) {
-        FUN_0024dd80(7);
+        padAlternateButtonIndex(7);
         temp_v10 = padIsButtonRepeat();
         if (temp_v10 == 0) {
           temp_v10 = padIsButtonRepeat(8);
           if (temp_v10 == 0) {
-            FUN_0024dd80(8);
+            padAlternateButtonIndex(8);
             temp_v10 = padIsButtonRepeat();
             if (temp_v10 == 0) goto LAB_00321f54;
           }
@@ -372,7 +372,7 @@ LAB_00321f54:
     effMenuListAppend(temp_v11,1);
     temp_v13 = 0x10000;
     memAlloc(0x10000,0x100,0,0x68,0x10,1);
-    rt_memcpy_w();
+    __aeabi_memcpy4();
     effMenuListAppend(temp_v13,2);
     temp_v10 = temp_v10 + 1;
   } while (temp_v10 < 9);
@@ -442,7 +442,7 @@ LAB_00321f54:
   DAT_004d8bca = DAT_0044ea84;
   temp_v10 = padIsButtonPressed(1);
   if (temp_v10 == 0) {
-    FUN_0024dd80(1);
+    padAlternateButtonIndex(1);
     temp_v10 = padIsButtonPressed();
     if (temp_v10 == 0) {
       return temp_v12 | 0x200000;

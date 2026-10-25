@@ -1,4 +1,3 @@
-/* NON_MATCHING: the three saved-receiver initialization moves after the prologue are scheduled in a different order from retail. */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include <stddef.h>
 
@@ -8,7 +7,7 @@ typedef char CheckRestoreSourceOffset[offsetof(EffRenderState, restoreSource) ==
 typedef char CheckRestoreCompletionOffset[offsetof(EffRenderState, completion) == 0x118c ? 1 : -1];
 typedef char CheckRestoreStateSize[sizeof(EffRenderState) == 0x1190 ? 1 : -1];
 
-extern "C" s32 FUN_002c5210(EffRenderState *state);
+extern "C" s32 FUN_002c5210(EffRenderState *state, EffRenderRestoreSource *source);
 extern "C" void FUN_002bbbc8(EffRenderState *state, const void *second, const void *first, void *snapshot);
 extern "C" void FUN_002bbb74(u32 resource, u32 *completion);
 
@@ -19,7 +18,7 @@ extern "C" void effectRestoreSavedRenderPairs(EffRenderState *state, EffRenderRe
         return;
     const void *second = NULL;
     const void *first = NULL;
-    if (FUN_002c5210(state) == 1) {
+    if (FUN_002c5210(state, source) == 1) {
         if (state->restore.selection == 0) {
             second = source->alternate.second;
             first = source->alternate.first;

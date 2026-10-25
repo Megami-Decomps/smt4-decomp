@@ -19,7 +19,7 @@ int mathAngleDeltaDegrees(void);
 int FUN_00303a5c(void);
 int effectSpawnTypeTen(void);
 int FUN_0033abb4(void);
-int FUN_00384830(void);
+int mathAbsHeadingErrorToPoint(void);
 int handleRegistryRegisterObject(...);
 int FUN_004bc420(...);
 int FUN_0050d8e4(void);
@@ -145,7 +145,7 @@ extern int mapEnemyIsNearestLocked(char *);
 /* Supplied declaration required: FUN_00353200. */
 /* Supplied declaration required: FUN_00353c20. */
 /* Supplied declaration required: FUN_0036d984. */
-/* Supplied declaration required: FUN_00384830. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 extern int FUN_003d21dc(void);
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: moriModelContentCopyBody. */
@@ -1906,7 +1906,7 @@ LAB_002d54c4:
               *(float *)(temp_v10 + 0x108) = temp_v17;
             }
             temp_v19 = *(unsigned int *)(temp_v4 + 0x14);
-            FUN_00384830();
+            mathAbsHeadingErrorToPoint();
             *(unsigned int *)(temp_v10 + 300) = temp_v19;
             temp_v17 = *(float *)(temp_v4 + 0x20) - *(float *)(temp_v10 + 0x108);
             *(float *)(temp_v10 + 0x110) = temp_v17;
@@ -2217,7 +2217,7 @@ LAB_002d62e4:
               *(float *)(temp_v10 + 0x108) = temp_v17;
             }
             temp_v19 = *(unsigned int *)(temp_v4 + 0x14);
-            FUN_00384830();
+            mathAbsHeadingErrorToPoint();
             *(unsigned int *)(temp_v10 + 300) = temp_v19;
             temp_v17 = *(float *)(temp_v4 + 0x20) - *(float *)(temp_v10 + 0x108);
             *(float *)(temp_v10 + 0x110) = temp_v17;

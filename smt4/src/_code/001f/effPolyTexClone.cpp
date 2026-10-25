@@ -7,14 +7,14 @@ void handleBlockRefDrop(void *resource);
 void *handleRefIncrement(void *resource);
 PolyGeom *FUN_00268fc4(PolyGeom *geometry);
 PolyTexObject *effPolyTexCreate(u32 flags);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Clones polygon geometry and parameters while retaining its referenced texture resource. */
 PolyTexObject *effPolyTexClone(const PolyTexObject *source)
 {
     PolyTexObject *clone = effPolyTexCreate(0);
     clone->geom = FUN_00268fc4(source->geom);
-    rt_memcpy_w(clone->params, source->params, sizeof(clone->params));
+    __aeabi_memcpy4(clone->params, source->params, sizeof(clone->params));
     if (source->resource2 != NULL) {
         if (clone->resource2 != NULL) {
             handleBlockRefDrop(clone->resource2);

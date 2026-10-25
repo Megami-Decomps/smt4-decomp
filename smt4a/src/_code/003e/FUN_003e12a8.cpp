@@ -1,5 +1,4 @@
-/* NON_MATCHING: retail fills the id buffer with __aeabi_memset4 (built: __aeabi_memset), swaps r0/r1 for the added-id store and stores the request fields in source order */
-#include <string.h>
+/* NON_MATCHING: retail stores the added id through r0/r1 swapped and keeps the request field stores in source order (the build reorders them). */
 #include "common.h"
 
 extern "C" {
@@ -24,6 +23,7 @@ typedef struct AocLoadRequest {
     /* 0x10 */ u32 unk10;
 } AocLoadRequest;
 
+void __aeabi_memset4(void *destination, s32 size, s32 value);
 void uiEntriesReset(AocUiList *list);
 s32 FUN_0039ba24(u32 *ids, s32 capacity, u32 source);
 s32 uiHasEntryId(AocUiList *list, u32 id);
@@ -43,7 +43,7 @@ void FUN_003e12a8(AocLoadRequest *request, AocUiList *list)
 
     uiEntriesReset(list);
     source = list->source;
-    memset(ids, -1, sizeof(ids));
+    __aeabi_memset4(ids, sizeof(ids), -1);
     count = FUN_0039ba24(ids, 42, source);
     added = 0;
     for (i = 0; i < count; i++) {

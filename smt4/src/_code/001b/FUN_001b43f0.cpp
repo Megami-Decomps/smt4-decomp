@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail addresses the key words and the text of the entry table from one base (text = base + 28); the built code needs the table defined in the same unit to do that */
 #include "common.h"
 
 struct TextEntry {
@@ -10,23 +9,22 @@ struct TextEntry {
 
 extern "C" {
 
-extern TextEntry g_textEntries[0x3E7]; /* 0x448e18 */
-extern char *g_categoryTexts[];        /* 0x44cd58 */
+extern TextEntry g_textEntryTable[0x3E7];
+extern char *g_textCategoryTexts[];
 
 /* Finds the text of entry (category, id); category 0x18 is indexed directly by id. NULL when absent. */
 char *FUN_001b43f0(s32 category, s32 id)
 {
     if (category == 0x18) {
-        return g_categoryTexts[id];
+        return g_textCategoryTexts[id];
     }
+    TextEntry *table = g_textEntryTable;
     for (s32 i = 0; i < 0x3E7; i++) {
-        TextEntry *entry = &g_textEntries[i];
-
-        if (entry->category == -1) {
+        if (table[i].category == -1) {
             return NULL;
         }
-        if (entry->category == category && entry->id == id) {
-            return entry->text;
+        if (table[i].category == category && table[i].id == id) {
+            return table[i].text;
         }
     }
     return NULL;

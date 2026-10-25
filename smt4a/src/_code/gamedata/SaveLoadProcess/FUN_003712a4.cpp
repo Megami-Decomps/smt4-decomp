@@ -17,7 +17,7 @@ int gameFlagsSetFlagsFromTaggedGroupEntries(unsigned int);
 int bitsAt60Clear(int, int);
 int FUN_004d0c4c(void);
 int FUN_004d0d70(void);
-int rt_memcpy_w(unsigned int, int, int);
+int __aeabi_memcpy4(unsigned int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -54,7 +54,7 @@ extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: FUN_004d0c4c. */
 /* Supplied declaration required: FUN_004d0d70. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003712a4(void)
@@ -98,11 +98,11 @@ unsigned int FUN_003712a4(void)
     if (temp_v4 == 0) {
       temp_v4 = *(int *)(temp_v1 + 8);
       temp_v6 = gameDataBlocksGetTable();
-      rt_memcpy_w(temp_v6,temp_v4,0x80);
+      __aeabi_memcpy4(temp_v6,temp_v4,0x80);
       temp_v6 = configGetSettings();
       wordPairCopy(temp_v6,temp_v4 + 0x80);
       temp_v6 = gameDataBlocksGetSaveData();
-      rt_memcpy_w(temp_v6,temp_v4 + 0x88,0x2a71c);
+      __aeabi_memcpy4(temp_v6,temp_v4 + 0x88,0x2a71c);
       gameApplyFlagTriggers();
       if (*(char *)(temp_v1 + 0x18) == '\0') {
         temp_v4 = gameFlagIsSet(0x595);

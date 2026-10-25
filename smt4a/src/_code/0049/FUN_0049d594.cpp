@@ -5,6 +5,7 @@ extern "C" {
 s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void efctSetSpeed(f32 scale);
+f32 vec2GetSpeed(const void *object);
 void FUN_001835b4(u32 type, u32 texture, s32 image, s32 x, s32 y, s32 layer);
 void FUN_00344cd0(void *controller, s32 x, s32 y, u32 texture,
     s32 firstImage, s32 secondImage, s32 thirdImage, s32 fourthImage,
@@ -28,7 +29,7 @@ void FUN_0049d594(void *panel)
     ListPanelDrawView *work = static_cast<ListPanelDrawView *>(panel);
     s32 x = vec2GetXInt(&work->sprite);
     s32 y = vec2GetYInt(&work->sprite);
-    f32 scale = work->sprite.unk20;
+    f32 scale = vec2GetSpeed(&work->sprite);
     efctSetSpeed(scale);
     for (s32 index = 0; index < 5; ++index)
         FUN_001835b4(2, 0x33, index + 0x39, x, y, index + 0xbf);

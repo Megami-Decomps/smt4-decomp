@@ -8,7 +8,7 @@ extern CampInventoryLists *g_camp;
 const StatBlock *gameGetPlayerData();
 s32 resourceRunOperationIfUnblocked(CampInventoryController *controller);
 s32 FUN_002a4894(CampInventoryController *controller);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void FUN_003df7c4(EquipmentPreview *preview);
 void FUN_00372100(const EquipmentPreview *preview, s32 mode);
 void FUN_003343c0(s32 mode);
@@ -44,7 +44,7 @@ void campPreviewSelectedEquipment(s32 category)
     s32 index = resourceRunOperationIfUnblocked(controller);
     index += FUN_002a4894(controller);
     EquipmentPreview preview;
-    rt_memcpy_w(&preview, player, sizeof(preview));
+    __aeabi_memcpy4(&preview, player, sizeof(preview));
     if (category == 0x13 || category == 0x48) preview.equipment[0] = items[index];
     if (category == 0x14 || category == 0x49) preview.equipment[1] = items[index];
     if (category == 0x15 || category == 0x4a) preview.equipment[2] = items[index];

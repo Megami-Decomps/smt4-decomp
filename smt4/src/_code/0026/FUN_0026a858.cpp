@@ -6,7 +6,7 @@ int bitsetSetBit(void *bits, int bit);
 int dataTable00FindById(int id);
 int devilGetRecord(int id);
 int memClear(void *ptr, int size);
-int rt_memcpy_w(void *dst, void *src, int size);
+int __aeabi_memcpy4(void *dst, void *src, int size);
 
 typedef struct SourceA {
     /* 0x00 */ u8 unk00[2];
@@ -80,7 +80,7 @@ void FUN_0026a858(int id, Record *record)
     record->unk0A = a->unk12;
     record->unk0C = a->unk14;
     record->unk06 = a->unk0E;
-    rt_memcpy_w(record->unk1C, record, 0xe);
+    __aeabi_memcpy4(record->unk1C, record, 0xe);
     record->unk0E = *(u32 *)&record->unk00;
     record->unk12 = *(u32 *)&record->unk04;
     record->unk16 = *(u32 *)&record->unk08;

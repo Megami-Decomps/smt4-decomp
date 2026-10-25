@@ -13,7 +13,7 @@ int FUN_003eba0c(int, int);
 int FUN_003edaf0(int, int);
 int FUN_003eebf4(int, int);
 int FUN_0050dda4(void);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_2: 18 slot(s), 72 byte(s) */
 typedef struct {
@@ -52,7 +52,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Supplied declaration required: FUN_003eebf4. */
 extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: FUN_0050dda4. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_003e0510(unsigned int *param_1,int param_2)
@@ -243,9 +243,9 @@ LAB_003e06c8:
           *(unsigned int *)(temp_v11 + 0xc) = temp_v12;
           temp_v30 = (unsigned int)*(unsigned short *)(temp_v8 + 0x6a);
           temp_v1 = *(unsigned short *)(temp_v7 + 0x6a);
-          rt_memcpy_w(temp_v29,temp_v7,0x1d0);
-          rt_memcpy_w(temp_v7,temp_v8,0x1d0);
-          rt_memcpy_w(temp_v8,temp_v29,0x1d0);
+          __aeabi_memcpy4(temp_v29,temp_v7,0x1d0);
+          __aeabi_memcpy4(temp_v7,temp_v8,0x1d0);
+          __aeabi_memcpy4(temp_v8,temp_v29,0x1d0);
           *(unsigned short *)(temp_v7 + 0x6a) = temp_v1;
           *(short *)(temp_v8 + 0x6a) = (short)temp_v30;
         }

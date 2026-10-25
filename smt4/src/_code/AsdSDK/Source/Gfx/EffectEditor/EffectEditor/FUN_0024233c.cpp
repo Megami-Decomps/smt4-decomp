@@ -9,7 +9,7 @@ int effBlockLoadClone(...);
 int taskRunWithObject(unsigned int, int, int);
 int effPartsSetData(void);
 int effEditorNodeChainApply(unsigned int *);
-int FUN_0024dd80(int);
+int padAlternateButtonIndex(int);
 int FUN_0024dd90(unsigned int *);
 int effBlockCreateFromBlock(void);
 int effectEditorApplyHandlerState(void);
@@ -25,7 +25,7 @@ int asdMemFree(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -76,7 +76,7 @@ extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
 extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: effectEditorApplyHandlerState. */
@@ -91,7 +91,7 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: asdMemFree. */
 extern int effPartAppend(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param_3)
@@ -158,13 +158,13 @@ unsigned char * FUN_0024233c(unsigned int param_1,int param_2,unsigned int param
   effEditorNodeChainApply(&DAT_0044f8c8);
   temp_v6 = padIsButtonPressed(0);
   if (temp_v6 == 0) {
-    FUN_0024dd80(0);
+    padAlternateButtonIndex(0);
     temp_v6 = padIsButtonPressed();
     if (temp_v6 != 0) goto LAB_002424b8;
 LAB_002426c4:
     temp_v6 = padIsButtonPressed(1);
     if (temp_v6 == 0) {
-      FUN_0024dd80(1);
+      padAlternateButtonIndex(1);
       temp_v6 = padIsButtonPressed();
       if (temp_v6 == 0) {
         puVar9 = &LAB_00200001;
@@ -219,7 +219,7 @@ LAB_002424b8:
     *(unsigned char *)(temp_v6 + 0x88) = 8;
     *(unsigned char *)(temp_v6 + 0x89) = 0;
     *(unsigned char *)(temp_v6 + 0x8a) = 0;
-    rt_memcpy_w(&DAT_004d8ca0,temp_v6,0x80);
+    __aeabi_memcpy4(&DAT_004d8ca0,temp_v6,0x80);
     DAT_0044ea9c = *(unsigned int *)(temp_v6 + 0x90);
     if (*(int *)(*piVar3 + 0xc) != 0) {
       effPartsSetData();

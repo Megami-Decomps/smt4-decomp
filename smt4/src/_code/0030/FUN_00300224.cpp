@@ -1,4 +1,4 @@
-/* NON_MATCHING: The actor flag updates use r1 instead of r2, with a different branch arrangement for mode two. */
+/* NON_MATCHING: the flag read-modify-write temp is r1 (retail r2, with the argument constant loaded before the OR). */
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
@@ -14,12 +14,15 @@ u32 FUN_00300224(void)
     s32 mode = scrGetArg(1);
     BtlUnitEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     if (entry != NULL) {
-        if (mode == 1) {
+        switch (mode) {
+        case 1:
             entry->flags |= 0x20000;
             FUN_00255180(id, 0x15, 1);
-        } else if (mode == 2) {
+            break;
+        case 2:
             entry->flags |= 0x40000;
             FUN_00255180(id, 0x15, 2);
+            break;
         }
     }
     return 1;

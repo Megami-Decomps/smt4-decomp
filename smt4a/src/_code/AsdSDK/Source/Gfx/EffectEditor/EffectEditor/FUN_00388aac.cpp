@@ -33,7 +33,7 @@ int rt_memclr(void);
 int linkedFindItemByIndex(...);
 int nodeChainCount(...);
 int asdEffectQueueRelease(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -133,7 +133,7 @@ extern u32 effResourceListHasActiveData(LinkedItems* resources);
 /* Supplied declaration required: FUN_003874ec. */
 /* Supplied declaration required: objectRegistryInsert. */
 /* Supplied declaration required: asdEffectQueueRelease. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00388aac(void)
@@ -292,7 +292,7 @@ LAB_00388d64:
   puVar11 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v8 * 0x18;
   temp_v3 = temp_v4;
-  rt_memcpy_w(&DAT_00634ca0,DAT_0059dbf4);
+  __aeabi_memcpy4(&DAT_00634ca0,DAT_0059dbf4);
   if (temp_v10 != 0) {
     unaff_r11 = 0x59e624;
   }
@@ -491,7 +491,7 @@ LAB_00388edc:
     temp_v7 = 0;
     DAT_0059e9b4 = 0;
   }
-  rt_memcpy_w(DAT_0059dbf4,&DAT_00634ca0,0x80);
+  __aeabi_memcpy4(DAT_0059dbf4,&DAT_00634ca0,0x80);
   temp_v3 = padButtonIsPressed(0x19);
   if (temp_v3 != 0) {
     DAT_0059dbe9 = DAT_0059dbe9 != 1;
@@ -586,7 +586,7 @@ LAB_003894e4:
       temp_v4 = *(int *)(temp_v3 + 0x90);
       FUN_00243c24();
       DAT_0059dc00 = temp_v4;
-      rt_memcpy_w(&DAT_00634d20,temp_v3,0x80);
+      __aeabi_memcpy4(&DAT_00634d20,temp_v3,0x80);
     }
     DAT_0059dbe6 = '\0';
   }

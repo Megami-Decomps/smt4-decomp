@@ -15,7 +15,7 @@ struct MenuVectorPayload {
 };
 extern "C" {
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 boundary, u32 track);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void effMenuListAppend(EffMenuNode *node, u32 list);
 
 // Queue the same vector effect for both menu display lists.
@@ -31,7 +31,7 @@ void FUN_00243224(const MenuVectorValue *first, const MenuVectorValue *second, u
     effMenuListAppend((EffMenuNode *)effect, 1);
     asdDebugTrace("../Source/Gfx/Effect/effMenu.h", 719);
     MenuVectorPayload *copy = (MenuVectorPayload *)memAlloc(0x10000, 0x100, 0, sizeof(MenuVectorPayload), 16, 1);
-    rt_memcpy_w(copy, effect, sizeof(MenuVectorPayload));
+    __aeabi_memcpy4(copy, effect, sizeof(MenuVectorPayload));
     effMenuListAppend((EffMenuNode *)copy, 2);
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: global-base/address ADD order and the first component's VFP load order differ. */
+/* NON_MATCHING: retail computes the factor address (&DAT.factor) before the color address; the natural color-then-factor source emits the ADDs in the other order and the first VFP load order differs. */
 #include "shard/W6_W6Match3_EffectColor.h"
 
 extern "C" EffectColorProductState DAT_004ea81c;

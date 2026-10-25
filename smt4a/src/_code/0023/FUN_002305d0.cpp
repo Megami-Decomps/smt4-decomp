@@ -78,7 +78,7 @@ void gameItemSetFlag(u32 id, s32 value);
 void FUN_002854d8(u32 id, s32 value);
 DevilInfo* FUN_00184310(u32 id);
 void gameDataCopySaveEntry(u32 id, SaveEntry* out);
-void rt_memcpy_w(void* dst, const void* src, u32 size);
+void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
 SkillRecord* dataTable04FindById(u32 id);
 void FUN_0031f190(u32 id, s32 arg);
@@ -123,7 +123,7 @@ void FUN_002305d0(DemonRecord* record, u8 slot, u16 id, s32 kind)
         record->curStat6 = info->stat[7];
         record->curStat3 = info->stat[4];
         for (s32 i = 0; i < 8; i++) record->skills[i] = info->skills[i];
-        rt_memcpy_w(record->growth, info->growth, 18);
+        __aeabi_memcpy4(record->growth, info->growth, 18);
         if (record != NULL && record->id != 0 && FUN_00184310(record->id) != NULL) {
             for (s32 i = 0; i < 8; i++) {
                 if (record->skills[i] == 0) continue;
@@ -158,7 +158,7 @@ void FUN_002305d0(DemonRecord* record, u8 slot, u16 id, s32 kind)
         record->extra = save.extra;
         *(reinterpret_cast<u8*>(record) + 299) = (save.flags >> 2) & 0xf;
         *reinterpret_cast<u64*>(record->affinityBonus) = *reinterpret_cast<u64*>(save.affinityBonus);
-        rt_memcpy_w(record->growth, save.growth, 18);
+        __aeabi_memcpy4(record->growth, save.growth, 18);
     }
     FUN_004bcd90(record);
     if (record != NULL) {

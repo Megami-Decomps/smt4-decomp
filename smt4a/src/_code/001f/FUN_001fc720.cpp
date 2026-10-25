@@ -29,7 +29,7 @@ int recordContainsPairedId(...);
 int FUN_004bcbb4(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(unsigned char [300], unsigned char *, int);
+int __aeabi_memcpy4(unsigned char [300], unsigned char *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 14 slot(s), 56 byte(s) */
@@ -98,7 +98,7 @@ extern int countUnlockedSlots(void);
 /* Supplied declaration required: FUN_004bcbb4. */
 extern int getUnlockedSlotCount(unsigned char *);
 /* Supplied declaration required: FUN_004bd6b0. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_001fc720(int param_1,int param_2)
@@ -182,7 +182,7 @@ void FUN_001fc720(int param_1,int param_2)
       if (temp_v3 != 5) {
         puVar15 = (unsigned char *)slotRecordFindById();
         if (puVar15 != (unsigned char *)0x0) {
-          rt_memcpy_w(temp_v19,puVar15,300);
+          __aeabi_memcpy4(temp_v19,puVar15,300);
         }
         else {
           unitRecordBuild(*(unsigned short *)(temp_v25 + 0x98),temp_v19);

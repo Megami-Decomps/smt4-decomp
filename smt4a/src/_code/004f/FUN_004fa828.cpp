@@ -21,7 +21,7 @@ int FUN_004f65d4(...);
 int FUN_004f7778(...);
 int battleCloneRoutedMaterialChannels(...);
 int FUN_004f8d90(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 3 slot(s), 9 byte(s) */
@@ -56,7 +56,7 @@ extern int FUN_0040ab8c(unsigned int);
 /* Supplied declaration required: FUN_004f7778. */
 /* Supplied declaration required: battleCloneRoutedMaterialChannels. */
 /* Supplied declaration required: FUN_004f8d90. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -248,7 +248,7 @@ LAB_004fab24:
   if ((temp_v1 & 0x200) != 0) {
     temp_v4 = 0;
     do {
-      rt_memcpy_w(temp_v10,param_1 + temp_v4 * 0x8c + 0x281c,0x8c);
+      __aeabi_memcpy4(temp_v10,param_1 + temp_v4 * 0x8c + 0x281c,0x8c);
       if (((temp_v13 & 1) != 0) && (temp_v11 == 0)) {
         FUN_004f65d4(param_1);
         if (*(unsigned int *)(param_1 + 0x33a4) < 0xffff) {

@@ -1,5 +1,7 @@
-/* NON_MATCHING: retail addresses the cache through an anchor 0x1000 past g_textureCache
- * (DAT_0047e200, as for globals defined in the same unit); the extern struct uses its base. */
+/* NON_MATCHING: retail addresses the cache through a literal 0x1000 past g_textureCache
+ * (DAT_0047e200: count/state at +0x300/+0x304, the entries at -0x1000). Defining the struct, or the
+ * entries/count/state as separate objects, in this unit does not reproduce that anchor (armcc keeps
+ * the object base, and orders small objects first). */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct TextureCacheEntry {

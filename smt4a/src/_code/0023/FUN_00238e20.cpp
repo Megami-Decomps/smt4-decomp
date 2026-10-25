@@ -7,7 +7,7 @@ extern "C" {
 void FUN_00213020();
 void *taskCreate(void (*entry)(), u32, u32, u32, u32, u32, u32, u32, u32);
 void sysMemClear(void *destination, u32 bytes);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void FUN_0034a16c(const PositionedLayoutData *layout,
                   void *firstPair, void *secondPair,
                   void *origin, void *dimensions);
@@ -21,8 +21,8 @@ InitializedLayoutTaskA *FUN_00238e20(
         taskCreate(FUN_00213020, 0, 0, 0, 0, 0x304, 3, 0, 0));
     if (task != 0) {
         sysMemClear(task, 0x304);
-        rt_memcpy_w(&task->parameters, parameters, 0x134);
-        rt_memcpy_w(&task->layout, layout, 0xB0);
+        __aeabi_memcpy4(&task->parameters, parameters, 0x134);
+        __aeabi_memcpy4(&task->layout, layout, 0xB0);
         task->parameter4 = parameter4;
         task->parameter8 = parameter8;
         task->parameter1 = parameter1;

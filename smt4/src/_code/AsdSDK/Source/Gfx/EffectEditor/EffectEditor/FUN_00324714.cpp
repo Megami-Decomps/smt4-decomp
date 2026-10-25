@@ -11,7 +11,7 @@ EffectSelectionItem *FUN_002f3208(void *owner, EffectSelectionBlock *block);
 EffectSelectionItem *nodeListFindByKey(void *owner, u32 key);
 void FUN_0025c650(void *owner, EffectSelectionItem *item, EffectSelectionItem *previous);
 void rt_memcpy_w144(void *destination, const void *source);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 EffectSelectionParts *FUN_00246854(EffectSelectionItem *item);
 char *libc_strcpy(char *destination, const char *source);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *block);
@@ -52,8 +52,8 @@ extern "C" u32 FUN_00324714()
     if (sourceView->flags & 2)
         previous = nodeListFindByKey(g_effectEditor.selection.list, sourceView->related);
     FUN_0025c650(g_effectEditor.selection.list, copy, previous);
-    rt_memcpy_w(DAT_004d8b40, copy, 0x90);
-    rt_memcpy_w(DAT_004d8ca0, copy, 0x80);
+    __aeabi_memcpy4(DAT_004d8b40, copy, 0x90);
+    __aeabi_memcpy4(DAT_004d8ca0, copy, 0x80);
     g_effectEditor.selection.block = copy->block;
     EffectSelectionParts *parts = FUN_00246854(copy);
     libc_strcpy(reinterpret_cast<ItemView *>(copy)->name, reinterpret_cast<const char *>(parts->unk00));

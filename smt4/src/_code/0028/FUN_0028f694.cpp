@@ -1,4 +1,3 @@
-/* NON_MATCHING: background-speed subobject addressing and one touch-mode scratch copy differ; the selected cold branch now agrees. */
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -22,6 +21,7 @@ extern "C" {
 extern CampHelpPrefixIV* g_camp;
 extern RenderCtx* g_titleScene;
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 s32 ifTouchGetSelectionModeForRegion(u32 region);
@@ -33,19 +33,15 @@ void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 void FUN_0028f694(s32 x, s32 y, u32 region)
 {
     CampButtonAnimationViewIV* camp = reinterpret_cast<CampButtonAnimationViewIV*>(g_camp);
-    efctSetSpeed(camp->background.unk20);
+    efctSetSpeed(vec2GetSpeed(&camp->background));
     FUN_002bf380(2, 0x1D, 6, x, y, 0x79);
     efctSetSpeed(1.0f);
     FUN_002bf288(2, 0x1D, 0x429, x, y, 0x7E);
-    switch (ifTouchGetSelectionModeForRegion(region)) {
-    case 1:
-    case 2:
-    case 6:
+    s32 mode = ifTouchGetSelectionModeForRegion(region);
+    if (mode == 1 || mode == 2 || mode == 6) {
         FUN_002bf288(2, 0x1D, 0x42B, x, y, 0x83);
-        break;
-    default:
+    } else {
         FUN_002bf288(2, 0x1D, 0x42A, x, y, 0x83);
-        break;
     }
     CampButtonSpriteView* sprite = reinterpret_cast<CampButtonSpriteView*>(FUN_002bf4f8(0x1D, 0x42A));
     s32 markerX = vec2GetXInt(&camp->marker);

@@ -6,7 +6,7 @@ extern const s32 DAT_0053cd64[5][4];
 extern QuadVectorState DAT_006306f8;
 void vectorSetAllOne(QuadVector *);
 void *__aeabi_vec_ctor_nocookie_nodtor(QuadVector *, void (*)(QuadVector *), u32 size, u32 count);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 // Reorder four quad vectors, optionally replacing their W components with the global default.
 void quadSetOrderedVectors(const QuadVector *a, const QuadVector *b, const QuadVector *c,
@@ -15,7 +15,7 @@ void quadSetOrderedVectors(const QuadVector *a, const QuadVector *b, const QuadV
     QuadVector vectors[4];
     __aeabi_vec_ctor_nocookie_nodtor(vectors, vectorSetAllOne, sizeof(QuadVector), 4);
     s32 order[5][4];
-    rt_memcpy_w(order, DAT_0053cd64, sizeof(order));
+    __aeabi_memcpy4(order, DAT_0053cd64, sizeof(order));
     if (preserveW) {
         vectors[0] = *a;
         vectors[1] = *b;

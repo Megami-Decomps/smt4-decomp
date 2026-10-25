@@ -6,7 +6,7 @@
 extern "C" {
 Table00Record *dataTable00FindById(u32 id);
 void sysMemClear(void *data, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // Initialize base, current, and maximum stats from the demon's table record.
 void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
@@ -33,7 +33,7 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
     unit->stats[5] = stats->agility;
     unit->stats[6] = stats->luck;
     unit->stats[3] = stats->magic;
-    rt_memcpy_w(&unit->unk1C, unit->stats, sizeof(unit->stats));
+    __aeabi_memcpy4(&unit->unk1C, unit->stats, sizeof(unit->stats));
     memcpy(unit->unk0E, unit->stats, sizeof(unit->stats));
     unit->skillList.skills[0] = table->skillList.ids[0];
     unit->skillList.skills[1] = table->skillList.ids[1];
@@ -44,7 +44,7 @@ void unitInitializeFromTemplate(u32 id, UnitRecord *unit)
     unit->skillList.skills[6] = table->skillList.ids[6];
     unit->skillList.skills[7] = table->skillList.ids[7];
     const DevilNameView *devil = reinterpret_cast<const DevilNameView *>(FUN_00184310(id));
-    rt_memcpy_w(unit->name, devil->name, sizeof(unit->name));
+    __aeabi_memcpy4(unit->name, devil->name, sizeof(unit->name));
     unit->unk2A = *reinterpret_cast<const u16 *>(unit->unk0E);
     unit->unk2C = unit->unk10;
 }

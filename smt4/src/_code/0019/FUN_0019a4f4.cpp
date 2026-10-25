@@ -36,7 +36,7 @@ int FUN_00338c38(void);
 int FUN_00190ab0(...);
 int FUN_0028d310(void);
 int FUN_0028d320(...);
-int FUN_0028d5ac(void);
+int touchMenuClose(void);
 int FUN_00292f4c(...);
 int FUN_002987d8(...);
 int useCounterRelease(void);
@@ -114,7 +114,7 @@ extern unsigned int listGetU16OrZero(unsigned int, int);
 /* Supplied declaration required: FUN_0028d310. */
 /* Supplied declaration required: FUN_0028d320. */
 extern int FUN_0028d594(void);
-/* Supplied declaration required: FUN_0028d5ac. */
+/* Supplied declaration required: touchMenuClose. */
 /* Supplied declaration required: partyStatusRefreshSlot. */
 extern int btlActorIsDown(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
@@ -501,7 +501,7 @@ joined_r0x0019aa34:
       temp_v5 = useCounterGetCurrentValue();
       if (temp_v5 != 9) {
         if (temp_v5 == 10) {
-          FUN_0028d5ac();
+          touchMenuClose();
           useCounterRelease();
           playSceneSetState(param_1,5,0);
         }
@@ -509,7 +509,7 @@ joined_r0x0019aa34:
       else {
         *(unsigned int *)(param_1 + 0x3050) = *(unsigned int *)(param_1 + 0x304c);
         playSceneSetState(param_1,7,0);
-        FUN_0028d5ac();
+        touchMenuClose();
         useCounterRelease();
       }
       break;

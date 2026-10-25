@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the cursor's confirmed flag with `ldrsb` through a register copy of the cursor pointer (mov r0, r5; ldrsb r0, [r0, #138]); the build emits `ldrb r0, [r5, #138]`. */
 #include "common.h"
 
 extern "C" {
@@ -26,6 +25,7 @@ extern int FUN_002b8ee0(PopupCursor *cursor, int arg);
 extern int FUN_0029e0f8(void);
 extern u32 vec2GetYInt(PopupCursor *cursor);
 extern u32 vec2GetXInt(PopupCursor *cursor);
+extern s8 recordGetSignedFlags(const PopupCursor *cursor);
 
 /* Per-frame update: step 0 starts the intro, step 1 follows the cursor and, once confirmed, picks the next state from the choice. */
 void FUN_003a0b78(PopupTask *task)
@@ -45,7 +45,7 @@ void FUN_003a0b78(PopupTask *task)
         y = vec2GetYInt(cursor);
         x = vec2GetXInt(cursor);
         pointConvertToFloat(task->panel, x, y);
-        if (cursor->confirmed != 0) {
+        if (recordGetSignedFlags(cursor) != 0) {
             switch (task->choice) {
             case 0:
             case 1:

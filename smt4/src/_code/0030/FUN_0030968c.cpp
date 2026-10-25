@@ -15,8 +15,7 @@ extern "C" void FUN_0030968c(u32 flags)
 {
     cursorResetFromParam();
     u32 *commands = DAT_004729e0;
-    const RenderStateStack *blend =
-        (const RenderStateStack *)g_titleScene->additional.unk128c;
+    const RenderStateStack *blend = &g_titleScene->additional.stackG;
     commands[DAT_004729e4] = blend->entries[blend->count] | (flags & ~0xF00);
     commands[DAT_004729e4 + 1] = 0xF0107;
     DAT_004729e4 += 2;

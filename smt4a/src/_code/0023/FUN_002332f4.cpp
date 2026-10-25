@@ -27,7 +27,7 @@ int FUN_00352e54(...);
 int FUN_00367fac(void);
 int FUN_00368374(int);
 int gameFlagWordSetBit(...);
-int FUN_00384830(void);
+int mathAbsHeadingErrorToPoint(void);
 int naviMainFinishRequest(void);
 int FUN_003d4ed8(...);
 int gameFlagSetValue(int, int);
@@ -95,7 +95,7 @@ extern int FUN_00367f98(void);
 /* Supplied declaration required: FUN_00368374. */
 extern int gameFlagsBitTest(int);
 /* Supplied declaration required: gameFlagWordSetBit. */
-/* Supplied declaration required: FUN_00384830. */
+/* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: entryTableFlagTargetsOfId203. */
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -175,7 +175,7 @@ unsigned int FUN_002332f4(void)
           }
           temp_v4 = DAT_005f17b0;
           distSpatial();
-          if (((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, FUN_00384830(), temp_v4 < 0x428c0000))
+          if (((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
              && (temp_v16 != 0)) {
             *(unsigned int *)(temp_v5 + 0x78) = 1;
             FUN_003d4ed8(0x10002a6);
@@ -220,7 +220,7 @@ unsigned int FUN_002332f4(void)
           temp_v0 = (unsigned char)(temp_v3 >> 0x18);
           if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
             temp_v11 = DAT_005f19d8;
-            FUN_00384830();
+            mathAbsHeadingErrorToPoint();
             temp_v4 = FUN_00367f98();
             if (temp_v4 != 3) {
               temp_v4 = FUN_00367f98();
@@ -247,7 +247,7 @@ unsigned int FUN_002332f4(void)
               }
             }
             temp_v12 = DAT_005f19d8;
-            FUN_00384830();
+            mathAbsHeadingErrorToPoint();
             if (*(int *)(g_lmapScene + 0x1d0) == 10) {
               temp_v4 = mapHasFacingBreakableInReach();
               if (temp_v4 != 0) {
@@ -296,7 +296,7 @@ unsigned int FUN_002332f4(void)
             mathPositionHeadingDegrees();
             temp_v4 = DAT_005f17b0;
             distSpatial();
-            if ((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, FUN_00384830(), temp_v4 < 0x428c0000))
+            if ((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, mathAbsHeadingErrorToPoint(), temp_v4 < 0x428c0000))
             {
               *(unsigned int *)(temp_v5 + 0x78) = 1;
               FUN_003d4ed8(0x10002a6);

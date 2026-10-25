@@ -71,11 +71,11 @@ int FUN_004bcd90(...);
 int FUN_004d0eec(void);
 int FUN_004da5c4(...);
 int FUN_004da6e0(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int slotRecordFindById(...);
 int FUN_00215bd0(void);
-int FUN_002174f4(void);
+int fusionSortPairs(void);
 int useCounterStart(void);
 int FUN_0023b45c(...);
 int ifTouchRegionAdd(...);
@@ -242,7 +242,7 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: uniteSortCandidateList. */
 /* Supplied declaration required: FUN_00215bbc. */
 /* Supplied declaration required: FUN_00215bd0. */
-/* Supplied declaration required: FUN_002174f4. */
+/* Supplied declaration required: fusionSortPairs. */
 extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned long long FUN_00229210(int);
@@ -403,7 +403,7 @@ extern int FUN_004dad8c(int);
 extern int FUN_004db65c(int, unsigned short, unsigned short, int *);
 /* Supplied declaration required: FUN_004dbdf8. */
 /* Supplied declaration required: wordAt1B0Clear. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_001f5294(void)
@@ -1873,7 +1873,7 @@ LAB_001f77ec:
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < (unsigned int)piVar3[0x172]);
       }
-      FUN_002174f4();
+      fusionSortPairs();
       if ('\0' < *(char *)(temp_v4 + 0x37)) {
         piVar3[0x1cfb] = 1;
       }
@@ -2356,7 +2356,7 @@ LAB_001f77ec:
                       }
                       else {
                         temp_v15 = slotRecordFindById(temp_v10);
-                        rt_memcpy_w(&temp_v25,temp_v15,300);
+                        __aeabi_memcpy4(&temp_v25,temp_v15,300);
                       }
                       temp_v7 = (piVar19[(unsigned int)temp_v1 * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
                       if ((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 3U) != 1) {
@@ -2366,7 +2366,7 @@ LAB_001f77ec:
                       }
                       else {
                         temp_v15 = slotRecordFindById(temp_v7);
-                        rt_memcpy_w(temp_v40,temp_v15,300);
+                        __aeabi_memcpy4(temp_v40,temp_v15,300);
                       }
                       FUN_0028a538((piVar19[(unsigned int)temp_v1 * 2 + 0x4ef] & 0x1ffffU) >> 2,&temp_v25,
                                    temp_v40);
@@ -2485,7 +2485,7 @@ LAB_001f8d58:
     else {
       temp_v4 = FUN_002c7c54();
       if (temp_v4 != 0x69) {
-        FUN_002174f4();
+        fusionSortPairs();
       }
     }
     piVar3[0xff] = piVar3[0xff] + 1;
@@ -2562,7 +2562,7 @@ LAB_001f8d58:
       }
       else {
         temp_v15 = slotRecordFindById(temp_v10);
-        rt_memcpy_w(temp_v40,temp_v15,300);
+        __aeabi_memcpy4(temp_v40,temp_v15,300);
       }
       temp_v7 = (piVar3[temp_v47[0] * 2 + 0x4ee] & 0x3fffffffU) >> 0xf;
       if ((piVar3[temp_v47[0] * 2 + 0x4ef] & 3U) != 1) {
@@ -2572,7 +2572,7 @@ LAB_001f8d58:
       }
       else {
         temp_v15 = slotRecordFindById(temp_v7);
-        rt_memcpy_w(asStack_170,temp_v15,300);
+        __aeabi_memcpy4(asStack_170,temp_v15,300);
       }
       temp_v25 = piVar3 + 0x19a7;
       FUN_004da6e0(*piVar3,temp_v40,asStack_170,0);
@@ -2977,7 +2977,7 @@ LAB_001f9868:
         if ((*(short *)((int)piVar19 + temp_v4 * 2 + 0x523a) != 0) &&
            (*(char *)((int)piVar19 + temp_v4 + 0x5252) == '\x01')) {
           temp_v15 = slotRecordFindById();
-          rt_memcpy_w(&temp_v25,temp_v15,300);
+          __aeabi_memcpy4(&temp_v25,temp_v15,300);
           temp_v7 = partyFindSlotById(temp_v38);
           if ((temp_v7 < 0x18) && (temp_v5 = gameGetSlotRecord(), temp_v5 != 0)) {
             bitsAt60Clear(temp_v5,4);
@@ -3797,7 +3797,7 @@ LAB_001fac1c:
                       }
                       else {
                         temp_v15 = slotRecordFindById(temp_v16);
-                        rt_memcpy_w(temp_v40,temp_v15,300);
+                        __aeabi_memcpy4(temp_v40,temp_v15,300);
                       }
                       temp_v5 = 0;
                       do {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: candidate maximum query mask/register scheduling differs from retail. */
+/* NON_MATCHING: register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "gamedata/BattleUnitSkills.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"

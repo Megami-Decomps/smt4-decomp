@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-void *rt_memcpy_w(void *, const void *, u32);
+void *__aeabi_memcpy4(void *, const void *, u32);
 
 u16 FUN_001932e0(u32 unused, u32 **cursor, const void *selection, const void *table, u32 previous)
 {
@@ -31,7 +31,7 @@ u16 FUN_001932e0(u32 unused, u32 **cursor, const void *selection, const void *ta
     out[3] = 0xF00E1;
     out += 4;
     if (index != previous && entry->enabled) {
-        rt_memcpy_w(out, entry->commands, sizeof(entry->commands));
+        __aeabi_memcpy4(out, entry->commands, sizeof(entry->commands));
         out += sizeof(entry->commands) / sizeof(u32);
     }
     *cursor = out;

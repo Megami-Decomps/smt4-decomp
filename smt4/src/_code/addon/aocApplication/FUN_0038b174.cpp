@@ -1,4 +1,4 @@
-/* NON_MATCHING: address CSE differs: retail keeps &app->buffer (+0x5ac) in r5 and addresses the decoder field directly; the built code keeps &app->decoder in r5 (same as FUN_0038b2fc) */
+/* NON_MATCHING: address CSE differs: retail keeps &app->buffer (+0x5ac) in r5 and addresses the decoder field directly; the built code keeps &app->decoder in r5 (same as aocApplicationRecreateDecoder) */
 /* Recreates the application's 128 KiB work buffer and the decoder object that runs on it. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"

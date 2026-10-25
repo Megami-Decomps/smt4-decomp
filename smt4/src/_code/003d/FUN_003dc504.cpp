@@ -34,7 +34,7 @@ struct LoadingWork {
 };
 
 extern "C" {
-void rt_memcpy_w(void *dest, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *dest, const void *source, u32 bytes);
 
 // Whether every slot in use has loaded its resource (nothing to check without a loading table).
 static inline bool slotsLoaded(void *table, const LoadingSlot *slots)
@@ -42,7 +42,7 @@ static inline bool slotsLoaded(void *table, const LoadingSlot *slots)
     if (table != NULL) {
         for (s32 i = 0; i < 4; i++) {
             LoadingSlot slot;
-            rt_memcpy_w(&slot, &slots[i], sizeof(LoadingSlot));
+            __aeabi_memcpy4(&slot, &slots[i], sizeof(LoadingSlot));
             if ((slot.flags & 1) && slot.resource == 0) {
                 return false;
             }

@@ -64,7 +64,7 @@ int FUN_0027fca0(...);
 int mapEaseSceneHeading(void);
 int FUN_002879dc(...);
 int mapEnemyAdvancePursuit(void);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int CONCAT44(...);
 float mathSnapHeading16(float angle);
@@ -292,7 +292,7 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: mapIfMarkModelDestroy. */
 /* Supplied declaration required: mapModelRequest. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00308944) */
@@ -828,10 +828,10 @@ void FUN_002712dc(void)
     goto LAB_0027142c;
   case 3:
     fStack_28 = temp_v36;
-    rt_memcpy_w(afStack_2e8,&DAT_00404504,0xa0);
-    rt_memcpy_w(afStack_248,&DAT_004045a4,0xa0);
-    rt_memcpy_w(&fStack_1a8,&DAT_00404644,0xa0);
-    rt_memcpy_w(afStack_108,&DAT_004046e4,0xa0);
+    __aeabi_memcpy4(afStack_2e8,&DAT_00404504,0xa0);
+    __aeabi_memcpy4(afStack_248,&DAT_004045a4,0xa0);
+    __aeabi_memcpy4(&fStack_1a8,&DAT_00404644,0xa0);
+    __aeabi_memcpy4(afStack_108,&DAT_004046e4,0xa0);
     piVar22 = g_lmapScene;
     temp_v17 = 0.33333334f;
     temp_v13 = g_lmapScene[1];
@@ -4164,7 +4164,7 @@ LAB_0027142c:
   case 0x23:
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    rt_memcpy_w(&fStack_1b0,
+    __aeabi_memcpy4(&fStack_1b0,
                 "਽㹗\xeb85㽑㵱㿪롒䁎\xf5c3䂠晦䃦휊䄛晦䅊轜䅾㵱䆜\xeb85䆻凬䇞긔䈁蔟䈕馚䈪\xeb85䉀炤䉘⣶䉱蔟䊅ԟ䊓ཛྷ䊡ꣶ䊯슏䊾慈䋎竡䋞ཛྷ䋯ཛྷ䌀콜䌈쨽䌑\xf852䌚尩䌤\xf333䌭뫡䌷댳䍁휊䍋♦䍖ꅈ䍠䊏䍫਽䍶竡䎀ʏ䎆髡䎋䊏䎑連䎖뵱䎜轜䎢殅䎨呻䎮䞮䎴䊏䎺䞮䏀匳䏆晦䏌纸䏒鰩䏘뵱䏞\xe148䏤ޮ䏫イ䏱塒䏷耀䏽폗䐁\xe5c3䐄\xf666䐇ԟ䐋ᅈ䐎ᨽ䐑₤䐔⊏䐗₤䐚ᦚ䐝ด䐠ﳍ䐢\xe51f䐥윊䐨ꊏ䐫癦䐮䇬䐱׃䐴셈䐶猳䐹ᮅ䐼릚䐾䵱䑁홦䑃呻䑆왦䑈⮅䑋葻䑍키䑏ຸ䑒㺸䑔悤䑖猳䑘癦䑚樽䑜䵱䑞₤䑠"
                 ,0x188);
     temp_v7 = piVar22[1];

@@ -33,7 +33,7 @@ int libc_strcpy(...);
 int FUN_002bf810(...);
 int __aeabi_memset4(...);
 int SBORROW4(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -90,7 +90,7 @@ extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: __aeabi_memset4. */
 extern int FUN_002e44a8(unsigned short);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x001ec654) */
@@ -223,8 +223,8 @@ unsigned int FUN_001ebedc(int param_1)
       *(int *)(temp_v7 + 0x38) = temp_v20[1];
       *(int *)(temp_v7 + 0x3c) = temp_v20[2];
       *(int *)(temp_v7 + 0x40) = temp_v20[3];
-      rt_memcpy_w(temp_v7 + 0x8c,param_1 + 0x16c,0x500);
-      rt_memcpy_w(param_1 + 0x6e4,temp_v7,0x604);
+      __aeabi_memcpy4(temp_v7 + 0x8c,param_1 + 0x16c,0x500);
+      __aeabi_memcpy4(param_1 + 0x6e4,temp_v7,0x604);
       unitRecalculateEffectiveStats(param_1 + 0x6e4);
       temp_v6 = 0;
       do {
@@ -353,7 +353,7 @@ LAB_001ec410:
       FUN_002595e0(g_campCec + 0x48);
     }
     else {
-      rt_memcpy_w(param_1 + 0x6e4,param_1 + 0xe0,0x604);
+      __aeabi_memcpy4(param_1 + 0x6e4,param_1 + 0xe0,0x604);
     }
 LAB_001ec4d0:
     temp_v1 = FUN_00262f78();

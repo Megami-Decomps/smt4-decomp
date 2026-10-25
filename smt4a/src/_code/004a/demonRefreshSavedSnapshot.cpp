@@ -3,7 +3,7 @@ extern "C" {
 DemonSaveRefreshSource *slotEntryFindById(u16 id);
 s32 gameDataCopySaveEntry(u16 id, DemonSaveSnapshot *snapshot);
 void gameDataStoreSavedRecord(u16 id, const DemonSaveSnapshot *snapshot);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Refresh an existing saved demon with its current level, stats, skills and inheritance. */
 void demonRefreshSavedSnapshot(u32 unused, u16 id)
@@ -21,7 +21,7 @@ void demonRefreshSavedSnapshot(u32 unused, u16 id)
         }
         snapshot.data = demon->data;
         snapshot.extra = demon->extra;
-        rt_memcpy_w(snapshot.inherited, demon->inherited, sizeof(snapshot.inherited));
+        __aeabi_memcpy4(snapshot.inherited, demon->inherited, sizeof(snapshot.inherited));
         snapshot.flags = demon->flags & 0xF;
         gameDataStoreSavedRecord(id, &snapshot);
     }

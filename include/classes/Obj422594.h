@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#include "classes/Obj422594Delete.h"
+
 extern "C" {
 int asdMemFreeNonNull(void *block);
 int ifTouchRegionRemove(void);
@@ -48,7 +50,7 @@ public:
     Obj422594();
     virtual ~Obj422594();
     virtual void initialize(const void *source); /* +0x08 */
-    static void operator delete(void *block) { asdMemFreeNonNull(block); }
+    static void operator delete(void *block) { obj422594FreeBlock(block); }
 
     /* 0x00: vtable pointer */
     /* 0x04 */ u16 state;

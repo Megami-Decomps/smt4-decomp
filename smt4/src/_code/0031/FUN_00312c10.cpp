@@ -27,7 +27,8 @@ u32 FUN_00312c10(void)
             index = requested;
         }
     }
-    scrSetResult(table[index - 1]);
+    int slot = index - 1;
+    scrSetResult(table[slot]);
     return 1;
 }
 

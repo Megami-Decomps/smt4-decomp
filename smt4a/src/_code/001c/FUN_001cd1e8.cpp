@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void rt_memcpy_w(void *dest, const void *source, s32 size);
+void __aeabi_memcpy4(void *dest, const void *source, s32 size);
 u8 *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetStreamSoundInfo(u32 body);
 
 typedef struct Holder {
@@ -16,7 +16,7 @@ u32 FUN_001cd1e8(Holder *object, void *dest)
     u8 *info;
 
     info = nw_snd_internal_StreamSoundFile_InfoBlockBody_GetStreamSoundInfo(object->infoBlock);
-    rt_memcpy_w(dest, info, 0x4C);
+    __aeabi_memcpy4(dest, info, 0x4C);
     return 1;
 }
 

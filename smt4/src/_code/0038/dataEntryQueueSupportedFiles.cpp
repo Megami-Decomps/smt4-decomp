@@ -1,4 +1,4 @@
-/* NON_MATCHING: only stack-prologue scheduling, null-row initialization and the count/iteration predicate choices differ; dispatch, request bodies and literals match. -O2 candidate. */
+/* NON_MATCHING: only the stack-pointer adjustment is scheduled before the first load and the null-row register is initialised conditionally instead of unconditionally. */
 #include "shard/W4_Match6_DataSet.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
@@ -43,9 +43,8 @@ extern "C" void dataEntryQueueSupportedFiles(DataEntry *entry)
     }
     const DataRow *rows = dataEntryRows(entry);
     u32 count = dataEntryRowCount(entry);
-    if (count > 0) {
-        u32 index = 0;
-        do {
+    {
+        for (u32 index = 0; index < count; ++index) {
             switch (rows[index].opcode) {
             case 0:
             case 1:
@@ -88,7 +87,6 @@ extern "C" void dataEntryQueueSupportedFiles(DataEntry *entry)
                 break;
             }
             }
-            ++index;
-        } while (index < count);
+        }
     }
 }

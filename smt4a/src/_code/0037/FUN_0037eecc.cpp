@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler emits an extra zero return-value move on the null/sentinel path. */
 #include "common.h"
 
 struct NamedTableEntry {
@@ -15,8 +14,12 @@ u32 FUN_00335660(u32, const char *, s32);
 u32 FUN_0037eecc(u32 selection, u16 id, s32 alternate)
 {
     NamedTableEntry *entry = dataTable8FindRecord(id);
-    if (entry != NULL && libc_strcmp(entry->name, "0") != 0)
-        return FUN_00335660(selection, entry->name, alternate);
-    return 0;
+    if (entry == NULL) {
+        return 0;
+    }
+    if (libc_strcmp(entry->name, "0") == 0) {
+        return 0;
+    }
+    return FUN_00335660(selection, entry->name, alternate);
 }
 }

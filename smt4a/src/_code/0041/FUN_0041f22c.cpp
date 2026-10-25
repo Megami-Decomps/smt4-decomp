@@ -60,7 +60,7 @@ void FUN_0041e450(SelectScreen *screen);
 void FUN_0041e7c0(SelectScreen *screen);
 void FUN_0041e9d4(SelectScreen *screen);
 void FUN_0041fc24(SelectScreen *screen);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void *gameGetPlayerData(void);
 }
 
@@ -111,7 +111,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         screen->opened = 0;
         if (screen->entryFlags[screen->selected] == 0)
             FUN_0023b45c(0);
-        rt_memcpy_w(gameGetPlayerData(), screen->playerCopy, 0xE);
+        __aeabi_memcpy4(gameGetPlayerData(), screen->playerCopy, 0xE);
         FUN_0038b5fc(1, screen->ids.idB);
         FUN_0038b5fc(2, screen->ids.idC);
         FUN_0038b5fc(0, screen->ids.idA);

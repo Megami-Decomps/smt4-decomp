@@ -28,7 +28,7 @@ GameSaveData *gameDataBlocksGetSaveData(void);
 const void *gameDataBlocksGetTable(void);
 const void *configGetSettings(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_002ad8b4(void *destination, const void *settings);
 void FUN_0026b4cc(void);
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
@@ -49,7 +49,7 @@ u32 FUN_002efba0(void)
         const void *settings = configGetSettings();
         FUN_002ad8b4(((SaveFilePayloadIV *)work->buffer)->settings, settings);
         SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;
-        rt_memcpy_w(body, gameDataBlocksGetSaveData(), 0x24D28);
+        __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), 0x24D28);
         body->version = 3;
         body->mode = *(const u8 *)&work->unk14;
         FUN_0026b4cc();

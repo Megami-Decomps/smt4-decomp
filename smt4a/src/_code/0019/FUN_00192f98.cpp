@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-void rt_memcpy_w(void* destination, const void* source, u32 byteCount);
+void __aeabi_memcpy4(void* destination, const void* source, u32 byteCount);
 
 // Pack register writes into command blocks, padding each block to an even word count.
 u32* FUN_00192f98(u32 unused, u32* output, u32 command, const u32* values, u32 count)
@@ -10,14 +10,14 @@ u32* FUN_00192f98(u32 unused, u32* output, u32 command, const u32* values, u32 c
     for (; count > 128; count -= 128) {
         output[0] = values[0];
         output[1] = command | 0x07ff0000;
-        rt_memcpy_w(output + 2, values + 1, 0x1fc);
+        __aeabi_memcpy4(output + 2, values + 1, 0x1fc);
         output[129] = 0xead0fead;
         values += 128;
         output += 130;
     }
     output[0] = values[0];
     output[1] = ((count - 1) << 20) | command | 0x000f0000;
-    rt_memcpy_w(output + 2, values + 1, (count - 1) * sizeof(u32));
+    __aeabi_memcpy4(output + 2, values + 1, (count - 1) * sizeof(u32));
     output += count + 1;
     if ((count & 1) == 0) {
         *output++ = 0xead0fead;

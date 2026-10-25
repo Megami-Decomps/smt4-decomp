@@ -12,7 +12,7 @@ int dataTable00FindById(void);
 int FUN_002b7bca(int *, int, int, unsigned char *);
 int FUN_002fe394(int, int, unsigned int, int);
 int FUN_00337f98(int, int);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_2: 15 slot(s), 60 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern int FUN_0027dab0(int, int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002fe394. */
 /* Supplied declaration required: FUN_00337f98. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00334228(unsigned int *param_1,int param_2)
@@ -219,9 +219,9 @@ LAB_003343b0:
           *(unsigned int *)(temp_v13 + 0xc) = temp_v9;
           temp_v1 = *(unsigned short *)(temp_v12 + 0x62);
           temp_v2 = *(unsigned short *)(temp_v6 + 0x62);
-          rt_memcpy_w(temp_v26,temp_v12,0x114);
-          rt_memcpy_w(temp_v12,temp_v6,0x114);
-          rt_memcpy_w(temp_v6,temp_v26,0x114);
+          __aeabi_memcpy4(temp_v26,temp_v12,0x114);
+          __aeabi_memcpy4(temp_v12,temp_v6,0x114);
+          __aeabi_memcpy4(temp_v6,temp_v26,0x114);
           *(unsigned short *)(temp_v12 + 0x62) = temp_v1;
           *(unsigned short *)(temp_v6 + 0x62) = temp_v2;
         }

@@ -1,9 +1,8 @@
-/* NON_MATCHING: retail copies the arguments as mov r5,r1 then mov r6,r0 (the build copies r0 first) */
 #include "common.h"
 
 extern "C" {
 
-u8 *gameFlagBlockGetEntry(void);
+u8 *gameFlagBlockGetEntry(u32 index);
 u32 FUN_001ada74(u32 id);
 
 /* Reads flag `which` (bits 0-4 of the game's flag entry; 5 asks FUN_001ada74 about id). */
@@ -12,7 +11,7 @@ u32 gameFlagEntryGetBit(u32 id, u32 which)
     u8 *entry;
     u32 value = 0;
 
-    entry = gameFlagBlockGetEntry();
+    entry = gameFlagBlockGetEntry(id);
 
     switch (which) {
     case 0:

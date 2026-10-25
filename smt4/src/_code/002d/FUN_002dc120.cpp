@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: the render-stack setters keep the slot address in r1 and the old state in r2, where retail uses r2 and r1; the FUN_0029a17c arguments are also loaded in a different order. */
+/* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the FUN_0029a17c argument loads are scheduled in a different order. */
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -84,12 +84,12 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     FUN_002bf288(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
     FUN_002bf288(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));
-    renderStackSet(&g_titleScene->stackE, 3);
+    renderStackSetCounted(&g_titleScene->stackE, 3);
     FUN_0029a17c(entry->x + x, entry->y + y, entry->size[0], entry->size[1] - amount, 1);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     FUN_002bf288(2, 0x15, 0x50, entry->x + x, payloadAt(entry->y + y));
     FUN_002bf288(2, 0x15, 0x51, entry->x + x, payloadAt(entry->y + y));
-    renderStackSet(&g_titleScene->stackE, 0);
+    renderStackSetCounted(&g_titleScene->stackE, 0);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
     efctSetSpeed(1.0f);
 }

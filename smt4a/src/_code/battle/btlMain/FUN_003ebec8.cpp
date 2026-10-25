@@ -17,7 +17,7 @@ int flagValueAdd(...);
 int dispatchIfFound(...);
 int bitsAt60Clear(...);
 int rt_memcpy(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -51,7 +51,7 @@ extern unsigned char partySlotFindIndex(void);
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_003ebec8(int param_1)
@@ -93,12 +93,12 @@ void FUN_003ebec8(int param_1)
   temp_v8 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
   temp_v3 = gameGetSlotTable();
-  rt_memcpy_w(temp_v8,temp_v3,0x2d30);
+  __aeabi_memcpy4(temp_v8,temp_v3,0x2d30);
   if (DAT_00573938 == 0) {
     temp_v5 = 0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x2d30,1);
     DAT_00573938 = temp_v5;
-    rt_memcpy_w();
+    __aeabi_memcpy4();
   }
   temp_v5 = gameGetSlotTable();
   sysMemClear(temp_v5 + 0x68,0x1c20);
@@ -117,7 +117,7 @@ void FUN_003ebec8(int param_1)
     else {
       dispatchIfFound(0,(int)*psVar11);
       temp_v3 = gameGetSlotRecord(0);
-      rt_memcpy_w(DAT_00573934,temp_v3,300);
+      __aeabi_memcpy4(DAT_00573934,temp_v3,300);
     }
   }
   else {
@@ -127,7 +127,7 @@ void FUN_003ebec8(int param_1)
     DAT_00573934 = temp_v5;
     dispatchIfFound(0,(int)*psVar11);
     temp_v3 = gameGetSlotRecord(0);
-    rt_memcpy_w(DAT_00573934,temp_v3,300);
+    __aeabi_memcpy4(DAT_00573934,temp_v3,300);
   }
   temp_v5 = gameGetSlotTable();
   sysMemClear(temp_v5 + 0x68,0x1c20);
@@ -147,7 +147,7 @@ void FUN_003ebec8(int param_1)
         temp_v3 = saveSlotFindById(temp_v2);
         temp_v1 = *(unsigned char *)(temp_v9 + 0x66);
         temp_v9 = gameGetSlotTable();
-        rt_memcpy_w((temp_v9 + temp_v5 * 300) - 0xc4,temp_v3,300);
+        __aeabi_memcpy4((temp_v9 + temp_v5 * 300) - 0xc4,temp_v3,300);
         temp_v9 = gameGetSlotTable();
         *(unsigned char *)((temp_v9 + temp_v5 * 300) - 0x5e) = temp_v1;
       }
@@ -177,11 +177,11 @@ void FUN_003ebec8(int param_1)
       } while (temp_v6 < (int)(unsigned int)*(unsigned char *)(temp_v5 + 0x1ca3));
     }
     temp_v3 = gameGetSlotTable();
-    rt_memcpy_w(DAT_0057392c,temp_v3,0x2d30);
+    __aeabi_memcpy4(DAT_0057392c,temp_v3,0x2d30);
   }
   else {
     temp_v3 = gameGetSlotTable();
-    rt_memcpy_w(temp_v3,DAT_0057392c,0x2d30);
+    __aeabi_memcpy4(temp_v3,DAT_0057392c,0x2d30);
     temp_v9 = 0;
     temp_v5 = gameGetSlotTable();
     if (*(char *)(temp_v5 + 0x1ca3) != '\0') {
@@ -200,10 +200,10 @@ void FUN_003ebec8(int param_1)
       } while (temp_v9 < (int)(unsigned int)*(unsigned char *)(temp_v5 + 0x1ca3));
     }
     temp_v3 = gameGetSlotTable();
-    rt_memcpy_w(DAT_0057392c,temp_v3,0x2d30);
+    __aeabi_memcpy4(DAT_0057392c,temp_v3,0x2d30);
   }
   temp_v3 = gameGetSlotTable();
-  rt_memcpy_w(temp_v3,temp_v8,0x2d30);
+  __aeabi_memcpy4(temp_v3,temp_v8,0x2d30);
   if (temp_v8 != 0) {
     asdMemFree();
   }

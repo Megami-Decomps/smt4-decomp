@@ -12,7 +12,7 @@ s32 lcgRandomRange(u16 maximum);
 void *FUN_0019acdc(u16 id, u32 kind);
 void FUN_003f1b3c(u32 request, void *record, s32 kind, s32 *value, u32 result[3]);
 void FUN_0047f7ac(s32 enabled, u32 result);
-void FUN_004fdc9c(s32 first, s32 second, s32 id, s32 value);
+void btlReflectCreateKind44(s32 first, s32 second, s32 id, s32 value);
 
 // Choose an eligible nonselected party member, falling back to the selected member.
 void FUN_003f0070(u32 request)
@@ -45,7 +45,7 @@ void FUN_003f0070(u32 request)
         void *record = FUN_0019acdc(selectedId, 1);
         FUN_003f1b3c(request, record, 6, &value, result);
         FUN_0047f7ac(1, result[0]);
-        FUN_004fdc9c(0, 0, selectedId, value);
+        btlReflectCreateKind44(0, 0, selectedId, value);
     }
 }
 }

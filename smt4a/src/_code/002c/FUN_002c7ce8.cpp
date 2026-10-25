@@ -1,6 +1,5 @@
-/* NON_MATCHING: owner/tab saved registers, memset versus memset4 selection, and final color constant scheduling differ. */
+/* NON_MATCHING: slot clear now uses __aeabi_memset4 like retail; the owner/tab saved registers are swapped (retail tab r7, owner r6) and the 0xf4f4f4ff color constant is loaded earlier than in retail. */
 #include "status/StatusDown.h"
-#include <string.h>
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
@@ -8,6 +7,7 @@ s32 FUN_0035db94();
 void FUN_00230b9c(u32 direction, u32 selection, s32 mode);
 void ifTouchRegionRemove();
 void FUN_0019de98(s32 channel, u32 color);
+void __aeabi_memset4(void *destination, s32 size, s32 value);
 
 // Change status tabs, clear their touch regions, and schedule the corresponding page state.
 void FUN_002c7ce8(u32 tab)
@@ -25,7 +25,7 @@ void FUN_002c7ce8(u32 tab)
     for (s32 region = 0; region < state->touchRegionCount; ++region)
         ifTouchRegionRemove();
     state->touchRegionCount = 0;
-    memset(state->slots, -1, sizeof(state->slots));
+    __aeabi_memset4(state->slots, sizeof(state->slots), -1);
     state = g_statusDown;
     state->timer = 0;
     u32 previous = state->track.state;

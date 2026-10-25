@@ -19,7 +19,7 @@ int wordRefsDiffer_002fd750(...);
 int FUN_002fda98(...);
 int FUN_002fdabe(...);
 int FUN_002fdafa(...);
-int rt_memcpy_w(unsigned int, unsigned int);
+int __aeabi_memcpy4(unsigned int, unsigned int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -55,7 +55,7 @@ extern unsigned int FUN_002fdaa0(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002fdabe. */
 /* Supplied declaration required: FUN_002fdafa. */
 extern int FUN_002fdb0c(unsigned char *);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00112e7c(int param_1)
@@ -97,7 +97,7 @@ void FUN_00112e7c(int param_1)
   temp_v6 = 0;
   do {
     temp_v3 = FUN_001127d8(temp_v16);
-    rt_memcpy_w(temp_v6 * 0x14 + param_1 + 0x370,temp_v3);
+    __aeabi_memcpy4(temp_v6 * 0x14 + param_1 + 0x370,temp_v3);
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 3);
   FUN_002e9acc(&temp_v9,0x9c4);

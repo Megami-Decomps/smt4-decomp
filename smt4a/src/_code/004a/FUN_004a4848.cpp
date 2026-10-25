@@ -42,7 +42,7 @@ Table00Record *dataTable00FindById(u32 id);
 s32 FUN_0026264c(u16 id);
 void FUN_004a8584(CampUnitComparison *record, u32 id, u32 flags);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
-void FUN_004a6610(Screen4A *work, s32 mode, s32 enabled);
+void itemListSelectVariant(Screen4A *work, s32 mode, s32 enabled);
 void FUN_004cfeb0(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
 u8 gaugePercent(InventoryListView *list, u32 mode);
 void *jyoucyuGetTableEntry(u32 index);
@@ -74,7 +74,7 @@ void FUN_004a4848(Screen4A *owner)
             }
         }
         reinterpret_cast<InventoryTotalView *>(owner)->total = total;
-        FUN_004a6610(owner, 1, 1);
+        itemListSelectVariant(owner, 1, 1);
         FUN_004cfeb0(&work->cursor, 10, work->list.count, 0, 1, 1);
         work->cursor.enabled = 1;
         work->percentage = gaugePercent(&work->list, 1);

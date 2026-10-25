@@ -7,7 +7,7 @@ extern UniteWork *g_unite;
 DevilRecordA *FUN_00184310(u32 id);
 void sysMemClear(void *memory, u32 size);
 u32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00203b40(void *cursor, s32 count, s32 visibleRows, s32 first, s32 second, s32 third);
 }
 
@@ -69,7 +69,7 @@ extern "C" void FUN_003bb710(u32 devilId)
     if (work->state == 28) {
         capacity = 96;
     }
-    rt_memcpy_w(inheritance->inherited, inheritance->merged, capacity * sizeof(u16));
+    __aeabi_memcpy4(inheritance->inherited, inheritance->merged, capacity * sizeof(u16));
     s32 count = 0;
     for (s32 index = 0; index < 96; ++index) {
         if (inheritance->inherited[index] == 0) {

@@ -21,7 +21,7 @@ void dataTableGet(s32 table, s32 index);
 DevilEffectRecord *dataTableGetEntries(void);
 s32 dataTableGetCount(void);
 DevilRaceRecord *devilGetRecord(u16 id);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 randRange(u16 maximum);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 group, s32 effect, u32 context, s32 mode, f32 xScale, f32 yScale);
@@ -44,7 +44,7 @@ void devilCreateRaceEffect(u32 devilId, s32 group)
                 }
             }
             DevilEffectRecord record;
-            rt_memcpy_w(&record, &records[selected], sizeof(record));
+            __aeabi_memcpy4(&record, &records[selected], sizeof(record));
             s32 *effects = NULL;
             s32 last = -1;
             if (group == 0)

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the final signed comparison is commuted (capacity > occupied instead of occupied < capacity), with corresponding condition codes. */
 #include "shard/Shard0031.h"
 
 struct PartySlotCapacity {
@@ -21,6 +20,7 @@ u8 FUN_004d0eec(void)
         }
         ++occupied;
     }
-    return occupied < party->capacity;
+    s32 capacity = party->capacity;
+    return occupied < capacity;
 }
 }

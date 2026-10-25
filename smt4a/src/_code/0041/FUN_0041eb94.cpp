@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_003fd7b4(u32, f32, f32, f32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 char *libc_strcpy(char *, const char *);
 void *gameDataBlocksGetSaveData();
 void FUN_0033440c(u32);
@@ -42,7 +42,7 @@ void FUN_0041eb94(SavedUnitSelection *work)
     UnitRestoreFields *unit = (UnitRestoreFields *)work->unit;
     unit->base = choice->base;
     unit->maximum = choice->maximum;
-    rt_memcpy_w(&unit->current, &choice->current, sizeof(UnitSevenStats));
+    __aeabi_memcpy4(&unit->current, &choice->current, sizeof(UnitSevenStats));
     unit->hp = choice->hp;
     unit->mp = choice->mp;
     unit->bits = choice->bits;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003177b0(unsigned int, int, int);
+int padGetCombinedButtonState(unsigned int, int, int);
 int SBORROW4(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_003177b0. */
+/* Supplied declaration required: padGetCombinedButtonState. */
 
 
 unsigned int FUN_002be8d0(unsigned int *param_1)
@@ -40,25 +40,25 @@ unsigned int FUN_002be8d0(unsigned int *param_1)
     *param_1 = *param_1 | 1;
   }
   temp_v0 = (unsigned int)(unsigned char)param_1[1];
-  FUN_003177b0(temp_v0,(char)param_1[2],0);
+  padGetCombinedButtonState(temp_v0,(char)param_1[2],0);
   temp_v1 = (unsigned int)*(unsigned char *)((int)param_1 + 5);
-  FUN_003177b0(temp_v1,*(unsigned char *)((int)param_1 + 9),0);
+  padGetCombinedButtonState(temp_v1,*(unsigned char *)((int)param_1 + 9),0);
   temp_v2 = (unsigned int)(unsigned char)param_1[1];
-  FUN_003177b0(temp_v2,(char)param_1[2],2);
+  padGetCombinedButtonState(temp_v2,(char)param_1[2],2);
   temp_v3 = (unsigned int)*(unsigned char *)((int)param_1 + 5);
-  FUN_003177b0(temp_v3,*(unsigned char *)((int)param_1 + 9),2);
+  padGetCombinedButtonState(temp_v3,*(unsigned char *)((int)param_1 + 9),2);
   temp_v4 = (unsigned int)(unsigned char)param_1[1];
-  FUN_003177b0(temp_v4,(char)param_1[2],1);
+  padGetCombinedButtonState(temp_v4,(char)param_1[2],1);
   temp_v5 = (unsigned int)*(unsigned char *)((int)param_1 + 5);
-  FUN_003177b0(temp_v5,*(unsigned char *)((int)param_1 + 9),1);
+  padGetCombinedButtonState(temp_v5,*(unsigned char *)((int)param_1 + 9),1);
   temp_v6 = (unsigned int)*(unsigned char *)((int)param_1 + 6);
-  FUN_003177b0(temp_v6,*(unsigned char *)((int)param_1 + 10),2);
+  padGetCombinedButtonState(temp_v6,*(unsigned char *)((int)param_1 + 10),2);
   temp_v7 = (unsigned int)*(unsigned char *)((int)param_1 + 7);
-  FUN_003177b0(temp_v7,*(unsigned char *)((int)param_1 + 0xb),2);
+  padGetCombinedButtonState(temp_v7,*(unsigned char *)((int)param_1 + 0xb),2);
   temp_v8 = (unsigned int)*(unsigned char *)((int)param_1 + 6);
-  FUN_003177b0(temp_v8,*(unsigned char *)((int)param_1 + 10),1);
+  padGetCombinedButtonState(temp_v8,*(unsigned char *)((int)param_1 + 10),1);
   temp_v9 = (unsigned int)*(unsigned char *)((int)param_1 + 7);
-  FUN_003177b0(temp_v9,*(unsigned char *)((int)param_1 + 0xb),1);
+  padGetCombinedButtonState(temp_v9,*(unsigned char *)((int)param_1 + 0xb),1);
   temp_v10 = 0;
   if (temp_v0 != 0) {
     if (((*param_1 & 4) != 0) || ((param_1[9] + param_1[8]) - param_1[7] != -1)) {

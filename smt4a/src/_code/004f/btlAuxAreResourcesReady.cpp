@@ -6,14 +6,14 @@ struct AuxiliaryResourceView {
     /* 0x2e20 */ BattleVersionResourceSlot slots[4];
 };
 
-extern "C" void rt_memcpy_w(void* destination, const void* source, u32 size);
+extern "C" void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 
 extern "C" u32 btlAuxAreResourcesReady(BtlAuxA* auxiliary)
 {
     AuxiliaryResourceView* resources = (AuxiliaryResourceView*)auxiliary;
     for (s32 index = 0; index < 4; ++index) {
         BattleVersionResourceSlot snapshot;
-        rt_memcpy_w(&snapshot, &resources->slots[index], sizeof(snapshot));
+        __aeabi_memcpy4(&snapshot, &resources->slots[index], sizeof(snapshot));
         if ((snapshot.readiness.flags & 1) && snapshot.data == NULL) {
             return 0;
         }

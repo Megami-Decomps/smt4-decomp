@@ -28,7 +28,7 @@ void gameFlagSetValue(u32 flag, s32 value, s32 update);
 void *FUN_0033f6d8(void);
 void flagBlockCopyRecord(void *snapshot);
 void asdMemFree(void *);
-void rt_memcpy_w(void *, const void *, u32 bytes);
+void __aeabi_memcpy4(void *, const void *, u32 bytes);
 
 // Restore the work save while preserving the requested mode's flags and selected state.
 void gameRestoreWorkSave(s32 mode)
@@ -47,7 +47,7 @@ void gameRestoreWorkSave(s32 mode)
     for (u32 index = 0; index < 5; ++index) {
         values[index] = gameFlagIsSet(flags.ids[index]);
     }
-    rt_memcpy_w(data, g_gameDataBlocks.workBlock, sizeof(RestoreSavePayload));
+    __aeabi_memcpy4(data, g_gameDataBlocks.workBlock, sizeof(RestoreSavePayload));
     data->preservedValue = preservedValue;
     flagBlockCopyRecord(snapshot);
     if (mode == 1) {

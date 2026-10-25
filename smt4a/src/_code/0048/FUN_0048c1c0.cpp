@@ -61,8 +61,8 @@ void FUN_0048c1c0(NaviCategorySelectionWork *work)
             work->selection = work->selectedIcon;
             work->refreshFirst = 1;
             work->refreshSecond = 1;
-            work->unk07B92[0] = 1;
-            work->unk07B92[1] = 1;
+            work->discovered = 1;
+            work->unk07B93[0] = 1;
             g_gameState.controllerFlags.primary = 0;
             g_gameState.navigation.alternateNaviMap = 0;
             g_gameState.unk034[0x42F] = 0;

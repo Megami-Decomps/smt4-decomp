@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail ldr r1, [r0, r1, lsl #3]! differs from recovered add r1, r0, r1, lsl #3. */
 #include "common.h"
 
 namespace {
@@ -37,9 +36,8 @@ u32 FUN_003180e0(void)
 
     for (s32 entryIndex = 0; entryIndex < 109; ++entryIndex) {
         BattleEntryView* entry = &btlGetMainState()->unk1FC0[entryIndex];
-        u32 flags = entry->flags;
-        if ((flags & 0x10) != 0 && (flags & 1) != 0 &&
-            (flags & 0x40) == 0 && entry->unk72[fieldIndex] <= -1) {
+        if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 &&
+            (entry->flags & 0x40) == 0 && entry->unk72[fieldIndex] <= -1) {
             scrSetResult(1);
             return 1;
         }

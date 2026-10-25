@@ -10,7 +10,7 @@ s32 objectGetSignedFlag(const UiAnimatedSprite *sprite);
 s32 byteTripleGetV0();
 s32 byteArr5Get3();
 const void *gameDataBlocksGetTable();
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void sysMemClear(void *destination, u32 size);
 
 // Cache the five save-slot headers, then wait for the final animation and script.
@@ -36,7 +36,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
                 return;
             }
             if (byteArr5Get3()) {
-                rt_memcpy_w(work->headers[index], gameDataBlocksGetTable(),
+                __aeabi_memcpy4(work->headers[index], gameDataBlocksGetTable(),
                             sizeof(work->headers[index]));
                 work->present[index] = 1;
             } else {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: enemy model placement register scheduling has not matched retail. */
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
@@ -15,8 +14,8 @@ void nodeSetTranslation(MaterialMergePose *pose, s32 node, const BattleVector3 *
 /* Position a battle model using its selected sprite placement and scaled anchor. */
 void FUN_0023c428(MaterialMergeOwner *owner, s32 index)
 {
+    MaterialMergeModel *model = owner->models.results[index].model;
     MaterialMergeResult *result = &owner->models.results[index];
-    MaterialMergeModel *model = result->model;
     if (model != NULL) {
         if (model->pose->state < 0)
             FUN_002a0428(model, 1);
@@ -33,9 +32,9 @@ void FUN_0023c428(MaterialMergeOwner *owner, s32 index)
                 break;
             }
         }
-        f32 position[4];
-        FUN_0023aa3c(&selected->placement, position, action->geometry.scale);
-        modelSetPosition(result->model->pose, 0, position);
+        BattleVector3 placementPosition;
+        FUN_0023aa3c(&selected->placement, &placementPosition.x, action->geometry.scale);
+        modelSetPosition(owner->models.results[index].model->pose, 0, &placementPosition.x);
         BattleVector3 translation;
         enemyDrawComputeSpriteAnchorOffset(&selected->placement, &translation, action->geometry.scale);
         translation.x += action->geometry.position[0];

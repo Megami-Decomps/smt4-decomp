@@ -57,7 +57,7 @@ void memClear(void *memory, s32 size);
 s32 dataTable9EntryOrZero(u8 index);
 s32 btlSourceGetMaxHp(DemonSaveRecord *record);
 s32 FUN_0029aafc(void);
-void rt_memcpy_w(void *destination, const void *source, s32 size);
+void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 u32 gameGetPlayerName(void);
 void libc_strcpy(void *destination, u32 source);
 void *dataTable08Sub2GetRecord(u16 skill);
@@ -82,7 +82,7 @@ void FUN_0024d94c(DemonSnapshot *snapshot, DemonSaveRecord *record)
     snapshot->stats = record->stats;
     snapshot->groupB = record->groupB;
     snapshot->skills = record->skills;
-    rt_memcpy_w((void *)snapshot->learned, (void *)record->learned, FUN_0029aafc() * 2);
+    __aeabi_memcpy4((void *)snapshot->learned, (void *)record->learned, FUN_0029aafc() * 2);
     libc_strcpy((void *)snapshot->playerName, gameGetPlayerName());
     if ((s16)snapshot->stats.values[2] >= 1000) {
         snapshot->stats.values[2] = 999;

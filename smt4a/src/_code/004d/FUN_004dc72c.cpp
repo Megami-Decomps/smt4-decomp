@@ -1,151 +1,187 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dc72c` (_code @ 0x4dc72c, 0x404 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: unit-slot address folding ([r0,#9] vs a register offset) and 64-bit mask load forms differ */
+#include "common.h"
+
+/* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
+struct BtlUnitSlot {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 phase;
+    /* 0x0a */ u8 unk0a[0x124a];
+};
+
+/* The battle action table: the unit slots and the button/menu masks the command menu tests. */
+struct BtlActionTable {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ BtlUnitSlot *units;
+    /* 0x008 */ u8 unk008[0x10];
+    /* 0x018 */ u64 chooseMask;     /* inputs that confirm the current choice */
+    /* 0x020 */ u8 unk020[8];
+    /* 0x028 */ u64 confirmMask;
+    /* 0x030 */ u8 unk030[0xb0];
+    /* 0x0e0 */ u64 attackMask;     /* inputs that open the attack menu */
+    /* 0x0e8 */ u8 unk0e8[8];
+    /* 0x0f0 */ u64 skillMask;      /* inputs that open the skill menu */
+    /* 0x0f8 */ u8 unk0f8[0x20];
+    /* 0x118 */ u64 closeMask;      /* inputs that close the menu */
+};
+
+/* The acting battle: its mask of held inputs and the acting unit's index. */
+struct BtlActingState {
+    /* 0x0000 */ u8 unk0000[0xa4];
+    /* 0x00a4 */ s32 unit;
+    /* 0x00a8 */ u8 unk00a8[0x44f8];
+    /* 0x45a0 */ u64 inputMask;
+};
+
+/* The command menu's result record. */
+struct BtlMenuResult {
+    /* 0x000 */ u8 unk000[0x1be];
+    /* 0x1be */ u16 command;
+    /* 0x1c0 */ u16 argument;
+};
+
+/* The menu state: flags, the choice mask and the result record. */
+struct BtlMenuState {
+    /* 0x00 */ u32 flags;      /* bit 7: confirm shown, bit 12: alternate shown */
+    /* 0x04 */ u8 unk04[0x1c];
+    /* 0x20 */ u64 *choiceMask;
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ BtlMenuResult *result;
+    /* 0x2c */ u16 helpId;
+    /* 0x2e */ u8 unk2e[0x57a];
+    /* 0x5a8 */ s32 selectedArgument;
+};
+
+struct BtlActingTask {
+    BtlActingState *battle;
+};
+
+struct Table04Row;
+struct Table8Row {
+    /* 0x00 */ u8 unk00[0x32];
+    /* 0x32 */ u16 linkedId;
+};
 
 extern "C" {
+extern BtlActionTable g_btlAction;
+extern u32 g_btlUiBlock;
+extern u32 g_btlActionReflect;
+Table04Row *dataTable04FindById(u32 id);
+Table8Row *dataTable8FindRecord(s32 id);
+s32 FUN_00333758(Table04Row *row);
+s32 FUN_003e7adc(BtlActingState *battle);
+s32 chainCountIdUnflagged(u32 chain, u32 flag);
+void FUN_004a96b8(u32 ui);
+s32 btlUiIsMenuReady(u32 ui);
+void FUN_004aa7c8(u32 ui);
+void FUN_004a92d0(u32 ui, s32 id, s32 mode);
+s32 btlUiPollWidgetResult(u32 ui);
+void FUN_004a9c40(u32 ui, u16 *command, u16 *argument);
+s32 FUN_004ffcd8(void);
+void FUN_004eb838(BtlActingTask *task, BtlMenuState *menu);
 
-int dataTable8FindRecord(void);
-int dataTable04FindById(...);
-int FUN_004a92d0(unsigned int, int, int);
-int FUN_004a96b8(unsigned int);
-int FUN_004a9c40(unsigned int, unsigned int, unsigned int);
-int FUN_004aa7c8(unsigned int);
-int FUN_004eb838(int *, unsigned int *);
-
-extern int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_00571150; /* 0x571150 */
-extern unsigned int DAT_00571154; /* 0x571154 */
-extern unsigned int DAT_00571160; /* 0x571160 */
-extern unsigned int DAT_00571164; /* 0x571164 */
-extern unsigned int DAT_00571218; /* 0x571218 */
-extern unsigned int DAT_0057121c; /* 0x57121c */
-extern unsigned int DAT_00571228; /* 0x571228 */
-extern unsigned int DAT_0057122c; /* 0x57122c */
-extern unsigned int DAT_00571250; /* 0x571250 */
-extern unsigned int DAT_00571254; /* 0x571254 */
-extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
-extern int FUN_00333758(void);
-extern int FUN_003e7adc(int);
-extern int chainCountIdUnflagged(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004a92d0. */
-/* Supplied declaration required: FUN_004a96b8. */
-/* Supplied declaration required: FUN_004a9c40. */
-extern int btlUiPollWidgetResult(unsigned int);
-/* Supplied declaration required: FUN_004aa7c8. */
-extern int btlUiIsMenuReady(unsigned int);
-/* Supplied declaration required: FUN_004eb838. */
-
-
-/* WARNING: Removing unreachable block (ram,0x004dc8e0) */
-/* WARNING: Removing unreachable block (ram,0x004dc918) */
-
-unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
-
+/* Drives the battle command menu for the acting unit: shows the confirm/alternate prompts the
+   input masks ask for, then turns the chosen command into the unit's next phase. Returns 1 once
+   a choice was made. */
+u32 FUN_004dc72c(BtlActingTask *task, BtlMenuState *menu)
 {
-/* irregular: 1 goto(s); 9 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  if ((*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571250) != 0 ||
-      (DAT_00571254 & *(unsigned int *)(*param_1 + 0x45a4)) != 0) {
-    temp_v1 = chainCountIdUnflagged(g_btlActionReflect,0);
-    if (0 < temp_v1) {
-      return 0;
+    u32 result = 0;
+    BtlActionTable *action = &g_btlAction;
+
+    if ((task->battle->inputMask & action->closeMask) != 0) {
+        if (chainCountIdUnflagged(g_btlActionReflect, 0) > 0) {
+            return 0;
+        }
+        task->battle->inputMask &= ~action->closeMask;
+        FUN_004a96b8(g_btlUiBlock);
     }
-    temp_v1 = *param_1;
-    temp_v2 = ~DAT_00571250;
-    *(unsigned int *)(temp_v1 + 0x45a4) = *(unsigned int *)(temp_v1 + 0x45a4) & ~DAT_00571254;
-    *(unsigned int *)(temp_v1 + 0x45a0) = *(unsigned int *)(temp_v1 + 0x45a0) & temp_v2;
-    FUN_004a96b8(g_btlUiBlock);
-  }
-  temp_v1 = btlUiIsMenuReady(g_btlUiBlock);
-  if (temp_v1 != 0) {
-    temp_v2 = *(unsigned int *)(*param_1 + 0x45a0);
-    temp_v3 = *(unsigned int *)(*param_1 + 0x45a4);
-    if (!((DAT_0057121c & temp_v3) == 0 && (DAT_00571218 & temp_v2) == 0)) {
-      if ((*param_2 & 0x80) == 0) {
-        *param_2 = *param_2 | 0x80;
-        FUN_004aa7c8(g_btlUiBlock);
-        FUN_004a92d0(g_btlUiBlock,(short)param_2[0xb],1);
-      }
+    if (btlUiIsMenuReady(g_btlUiBlock)) {
+        u64 mask = task->battle->inputMask;
+        if ((action->attackMask & mask) != 0) {
+            if ((menu->flags & 0x80) == 0) {
+                menu->flags |= 0x80;
+                FUN_004aa7c8(g_btlUiBlock);
+                FUN_004a92d0(g_btlUiBlock, menu->helpId, 1);
+            }
+        } else if ((action->skillMask & mask) != 0) {
+            if ((menu->flags & 0x1000) == 0) {
+                menu->flags |= 0x1000;
+                FUN_004aa7c8(g_btlUiBlock);
+                FUN_004a92d0(g_btlUiBlock, menu->helpId, 1);
+            }
+        }
     }
-    else if (((temp_v3 & DAT_0057122c) != 0 || (DAT_00571228 & temp_v2) != 0) &&
-            ((*param_2 & 0x1000) == 0)) {
-      *param_2 = *param_2 | 0x1000;
-      FUN_004aa7c8(g_btlUiBlock);
-      FUN_004a92d0(g_btlUiBlock,(short)param_2[0xb],1);
+    if (!btlUiPollWidgetResult(g_btlUiBlock)) {
+        return 0;
     }
-  }
-  temp_v1 = btlUiPollWidgetResult(g_btlUiBlock);
-  if (temp_v1 == 0) {
-    return 0;
-  }
-  FUN_004a9c40(g_btlUiBlock,param_2[10] + 0x1be,param_2[10] + 0x1c0);
-  if (((*param_2 & 0x80) != 0) || ((*param_2 & 0x1000) != 0)) {
-    *(unsigned short *)(param_2[10] + 0x1be) = 1;
-    *(unsigned short *)(param_2[10] + 0x1c0) = 1;
-  }
-  switch(*(unsigned short *)(param_2[10] + 0x1be)) {
-  case 1:
-  case 0xe:
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
-    break;
-  case 2:
-  case 3:
-    dataTable04FindById((int)*(short *)(param_2[10] + 0x1c0));
-    temp_v1 = FUN_00333758();
-joined_r0x004dca3c:
-    if (temp_v1 != 0) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
-      break;
+    FUN_004a9c40(g_btlUiBlock, &menu->result->command, &menu->result->argument);
+    if ((menu->flags & 0x80) != 0) {
+        if ((*menu->choiceMask & action->chooseMask) != 0 && FUN_004ffcd8()) {
+            menu->result->command = 6;
+            menu->result->argument = 0;
+        } else {
+            menu->result->command = 1;
+            menu->result->argument = 1;
+        }
+    } else if ((menu->flags & 0x1000) != 0) {
+        if ((*menu->choiceMask & action->chooseMask) != 0 && FUN_004ffcd8()) {
+            menu->result->command = 6;
+            menu->result->argument = 0;
+        } else {
+            menu->result->command = 1;
+            menu->result->argument = 1;
+        }
     }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
-    break;
-  case 4:
-  case 0xb:
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
-    break;
-  case 6:
-  case 0xf:
-    FUN_004eb838(param_1,param_2);
-    break;
-  case 7:
-    temp_v0 = *(short *)(param_2[10] + 0x1c0);
-    param_2[0x16a] = (int)temp_v0;
-    if ((int)temp_v0 == 4) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
-      break;
+
+    switch ((s16)menu->result->command) {
+    case 1:
+    case 0xe:
+        action->units[task->battle->unit].phase = 6;
+        break;
+    case 2:
+    case 3:
+        if (FUN_00333758(dataTable04FindById((s16)menu->result->argument))) {
+            action->units[task->battle->unit].phase = 6;
+        } else {
+            action->units[task->battle->unit].phase = 8;
+        }
+        break;
+    case 4:
+    case 0xb:
+        action->units[task->battle->unit].phase = 0xb;
+        break;
+    case 6:
+    case 0xf:
+        FUN_004eb838(task, menu);
+        break;
+    case 7:
+        menu->selectedArgument = (s16)menu->result->argument;
+        if (menu->selectedArgument == 4) {
+            action->units[task->battle->unit].phase = 0xb;
+        } else {
+            action->units[task->battle->unit].phase = 6;
+        }
+        break;
+    case 8: {
+        Table8Row *row = dataTable8FindRecord((s16)menu->result->argument);
+        if (row->linkedId != 0 && FUN_00333758(dataTable04FindById(row->linkedId))) {
+            action->units[task->battle->unit].phase = 6;
+        } else {
+            action->units[task->battle->unit].phase = 8;
+        }
+        break;
     }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 6;
-    break;
-  case 8:
-    temp_v1 = (int)*(short *)(param_2[10] + 0x1c0);
-    dataTable8FindRecord();
-    if (*(short *)(temp_v1 + 0x32) != 0) {
-      dataTable04FindById();
-      temp_v1 = FUN_00333758();
-      goto joined_r0x004dca3c;
+    case 9:
+    case 10:
+    case 0xd:
+        if (((action->chooseMask | action->confirmMask) & *menu->choiceMask) != 0 &&
+            FUN_003e7adc(task->battle) == 0) {
+            action->units[task->battle->unit].phase = 0xb;
+        } else {
+            action->units[task->battle->unit].phase = 8;
+        }
+        break;
     }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
-    break;
-  case 9:
-  case 10:
-  case 0xd:
-    if ((((DAT_00571150 | DAT_00571160) & *(unsigned int *)param_2[8]) != 0 ||
-         ((DAT_00571154 | DAT_00571164) & ((unsigned int *)param_2[8])[1]) != 0) &&
-       (temp_v1 = FUN_003e7adc(*param_1), temp_v1 == 0)) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0xb;
-      return 1;
-    }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 8;
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

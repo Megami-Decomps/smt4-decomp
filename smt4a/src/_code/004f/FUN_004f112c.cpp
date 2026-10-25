@@ -1,260 +1,116 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f112c` (_code @ 0x4f112c, 0x404 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: target/up vector copies are ldm/stm pairs here but ldr+ldrd in retail for the eye, the distance terms schedule differently, and the VFP constants are allocated differently */
+#include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
+#include <math.h>
+
+using nw::math::MTX34;
+using nw::math::MTX44;
 
 extern "C" {
+void FUN_0014f0dc(void *owner);
+void FUN_001aff14(MTX34 *matrix, s32 mode, f32 x, f32 y, f32 z);
+void FUN_0018a924(f32 *first, f32 *second, f32 angle);
+void FUN_00162330(void *destination, const MTX34 *source);
+void FUN_0015a1b4(AsdCamera *camera, const MTX34 *view);
+void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
+void nn_math_ARMv6_VEC3TransformAsm_2AD44C(AsdCameraVec3 *vector, const MTX34 *matrix);
+void nn_math_ARMv6_MTX44TransposeAsm(MTX44 *dest, const MTX44 *source);
 
-int FUN_0014f0dc(int);
-int FUN_0015a1b4(char *, char *);
-int FUN_00162330(char *, char *);
-int FUN_0018a924(float *, float [14]);
-int FUN_001aff14(unsigned char [48], int);
-int nn_math_ARMv6_MTX34CopyAsm(unsigned char [48], unsigned int *);
-int nn_math_ARMv6_MTX44TransposeAsm(char *, char *);
-int nn_math_ARMv6_VEC3TransformAsm_2AD44C(char *, unsigned char [48]);
-
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_6_stack;
-
-extern unsigned int _ZGVZN2nw4math5MTX348IdentityEvE8identity; /* 0x5c4c2c */
-extern unsigned int _ZZN2nw4math5MTX348IdentityEvE8identity; /* 0x64c054 */
-extern unsigned int DAT_0064c058; /* 0x64c058 */
-extern unsigned int DAT_0064c05c; /* 0x64c05c */
-extern unsigned int DAT_0064c060; /* 0x64c060 */
-extern unsigned int DAT_0064c064; /* 0x64c064 */
-extern unsigned int DAT_0064c068; /* 0x64c068 */
-extern unsigned int DAT_0064c06c; /* 0x64c06c */
-extern unsigned int DAT_0064c070; /* 0x64c070 */
-extern unsigned int DAT_0064c074; /* 0x64c074 */
-extern unsigned int DAT_0064c078; /* 0x64c078 */
-extern unsigned int DAT_0064c07c; /* 0x64c07c */
-extern unsigned int DAT_0064c080; /* 0x64c080 */
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+/* Points the camera from `eye` at `target`, keeps `up` (turned by `rotation`, in 1/256 turn units
+   per degree) as its up vector and rebuilds the view matrices; with no roll in `rotation` the
+   owner's plain handler runs instead. */
+void FUN_004f112c(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, const AsdCameraVec3 *target,
+                  const AsdCameraVec3 *up, const AsdCameraVec3 *rotation)
 {
-    return (float)sqrt((double)value);
+    if (rotation->z == 0.0f) {
+        FUN_0014f0dc(static_cast<u8 *>(owner) + 0x58);
+        return;
+    }
+    camera->eye = *eye;
+    camera->target = *target;
+    camera->up = *up;
+    camera->unk001 = 0;
+    if ((camera->eye.x - camera->target.x) * (camera->eye.x - camera->target.x) +
+            (camera->eye.y - camera->target.y) * (camera->eye.y - camera->target.y) +
+            (camera->eye.z - camera->target.z) * (camera->eye.z - camera->target.z) !=
+        0.0f) {
+        f32 dx = camera->eye.x - camera->target.x;
+        f32 dy = camera->eye.y - camera->target.y;
+        f32 dz = camera->eye.z - camera->target.z;
+        f32 (*view)[4] = camera->view.m;
+        if (dx == 0.0f && dz == 0.0f) {
+            view[0][0] = 1.0f;
+            view[0][1] = 0.0f;
+            view[0][2] = 0.0f;
+            view[0][3] = -camera->eye.x;
+            view[1][0] = 0.0f;
+            view[1][1] = 0.0f;
+            view[2][0] = 0.0f;
+            view[2][2] = 0.0f;
+            if (dy > 0.0f) {
+                view[1][2] = -1.0f;
+                view[1][3] = camera->eye.z;
+                view[2][1] = 1.0f;
+                view[2][3] = -camera->eye.y;
+            } else {
+                view[1][2] = 1.0f;
+                view[1][3] = -camera->eye.z;
+                view[2][1] = -1.0f;
+                view[2][3] = camera->eye.y;
+            }
+        } else {
+            f32 sine;
+            f32 cosine;
+            f32 inverse = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
+            f32 forwardY = dy * inverse;
+            f32 forwardX = dx * inverse;
+            f32 forwardZ = dz * inverse;
+            inverse = 1.0f / sqrtf(dz * dz + dx * dx);
+            f32 sideX = dz * inverse;
+            f32 sideZ = -(dx * inverse);
+            f32 upX = forwardZ * sideX - forwardX * sideZ;
+            f32 upY = forwardX * 0.0f - forwardY * sideX;
+            f32 upZ = forwardY * sideZ - forwardZ * 0.0f;
+            FUN_0018a924(&sine, &cosine, rotation->z * (256.0f / 360.0f));
+            f32 rowX0 = sine * upZ + cosine * sideX;
+            f32 rowX1 = cosine * upZ - sine * sideX;
+            f32 rowZ0 = sine * upY + cosine * sideZ;
+            f32 rowZ1 = cosine * upY - sine * sideZ;
+            f32 rowY0 = sine * upX;
+            f32 rowY1 = cosine * upX;
+            view[0][0] = rowX0;
+            view[0][1] = rowY0;
+            view[0][2] = rowZ0;
+            view[0][3] = -(camera->eye.x * rowX0 + camera->eye.y * rowY0 + camera->eye.z * rowZ0);
+            view[1][0] = rowX1;
+            view[1][1] = rowY1;
+            view[1][2] = rowZ1;
+            view[1][3] = -(camera->eye.x * rowX1 + camera->eye.y * rowY1 + camera->eye.z * rowZ1);
+            view[2][0] = forwardX;
+            view[2][1] = forwardY;
+            view[2][2] = forwardZ;
+            view[2][3] = -(camera->eye.x * forwardX + camera->eye.y * forwardY + camera->eye.z * forwardZ);
+        }
+        MTX34 turn;
+        nn_math_ARMv6_MTX34CopyAsm(&turn, &MTX34::Identity());
+        FUN_001aff14(&turn, 1, rotation->x * (256.0f / 360.0f), rotation->y * (256.0f / 360.0f), rotation->z * (256.0f / 360.0f));
+        nn_math_ARMv6_VEC3TransformAsm_2AD44C(&camera->up, &turn);
+        FUN_00162330(camera->unk128, &camera->view);
+        *reinterpret_cast<MTX34 *>(&camera->viewTransposed) = camera->view;
+        camera->viewTransposed.m[3][0] = 0.0f;
+        camera->viewTransposed.m[3][1] = 0.0f;
+        camera->viewTransposed.m[3][2] = 0.0f;
+        camera->viewTransposed.m[3][3] = 1.0f;
+        nn_math_ARMv6_MTX44TransposeAsm(&camera->viewTransposed, &camera->viewTransposed);
+        if (camera->enabled == 0) {
+            return;
+        }
+    } else {
+        if (camera->enabled == 0) {
+            return;
+        }
+        MTX34 turn;
+        nn_math_ARMv6_MTX34CopyAsm(&turn, &MTX34::Identity());
+    }
+    FUN_0015a1b4(camera, &camera->view);
 }
-#endif
-/* Supplied declaration required: FUN_0014f0dc. */
-/* Supplied declaration required: FUN_0015a1b4. */
-/* Supplied declaration required: FUN_00162330. */
-/* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_001aff14. */
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-/* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
-/* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
-
-
-void FUN_004f112c(int param_1,char *param_2,unsigned int *param_3,unsigned int *param_4,
-                 unsigned int *param_5,int param_6)
-
-{
-/* irregular: 8 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  float temp_v3;
-  float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  unsigned int temp_v15;
-  unsigned int temp_v16;
-  unsigned char temp_v17 [48];
-  float temp_v18;
-  float afStack_4c [14];
-  
-  temp_v15 = 0;
-  if (*(float *)(param_6 + 8) == 0.0f) {
-    FUN_0014f0dc(param_1 + 0x6c);
-    return;
-  }
-  temp_v0 = param_3[1];
-  temp_v2 = param_3[2];
-  *(unsigned int *)(param_2 + 4) = *param_3;
-  *(unsigned int *)(param_2 + 8) = temp_v0;
-  *(unsigned int *)(param_2 + 0xc) = temp_v2;
-  temp_v0 = param_4[1];
-  temp_v2 = param_4[2];
-  temp_v16 = 0x3f800000;
-  *(unsigned int *)(param_2 + 0x10) = *param_4;
-  *(unsigned int *)(param_2 + 0x14) = temp_v0;
-  *(unsigned int *)(param_2 + 0x18) = temp_v2;
-  temp_v0 = param_5[1];
-  temp_v2 = param_5[2];
-  *(unsigned int *)(param_2 + 0x1c) = *param_5;
-  *(unsigned int *)(param_2 + 0x20) = temp_v0;
-  *(unsigned int *)(param_2 + 0x24) = temp_v2;
-  param_2[1] = '\0';
-  temp_v3 = *(float *)(param_2 + 4) - *(float *)(param_2 + 0x10);
-  temp_v4 = *(float *)(param_2 + 0xc) - *(float *)(param_2 + 0x18);
-  if (temp_v3 * temp_v3 +
-      (*(float *)(param_2 + 8) - *(float *)(param_2 + 0x14)) *
-      (*(float *)(param_2 + 8) - *(float *)(param_2 + 0x14)) + temp_v4 * temp_v4 != 0.0f) {
-    temp_v4 = *(float *)(param_2 + 0xc) - *(float *)(param_2 + 0x18);
-    temp_v6 = *(float *)(param_2 + 4) - *(float *)(param_2 + 0x10);
-    temp_v3 = *(float *)(param_2 + 8) - *(float *)(param_2 + 0x14);
-    if ((temp_v6 == 0.0f) && (temp_v4 == 0.0f)) {
-      *(float *)(param_2 + 0x38) = 1.0f;
-      param_2[0x3c] = '\0';
-      param_2[0x3d] = '\0';
-      param_2[0x3e] = '\0';
-      param_2[0x3f] = '\0';
-      param_2[0x40] = '\0';
-      param_2[0x41] = '\0';
-      param_2[0x42] = '\0';
-      param_2[0x43] = '\0';
-      *(float *)(param_2 + 0x44) = -*(float *)(param_2 + 4);
-      param_2[0x48] = '\0';
-      param_2[0x49] = '\0';
-      param_2[0x4a] = '\0';
-      param_2[0x4b] = '\0';
-      param_2[0x4c] = '\0';
-      param_2[0x4d] = '\0';
-      param_2[0x4e] = '\0';
-      param_2[0x4f] = '\0';
-      param_2[0x58] = '\0';
-      param_2[0x59] = '\0';
-      param_2[0x5a] = '\0';
-      param_2[0x5b] = '\0';
-      param_2[0x60] = '\0';
-      param_2[0x61] = '\0';
-      param_2[0x62] = '\0';
-      param_2[99] = '\0';
-      if (0.0f >= temp_v3) {
-        param_2[0x50] = '\0';
-        param_2[0x51] = '\0';
-        param_2[0x52] = -0x80;
-        param_2[0x53] = '?';
-        *(float *)(param_2 + 0x54) = -*(float *)(param_2 + 0xc);
-        param_2[0x5c] = '\0';
-        param_2[0x5d] = '\0';
-        param_2[0x5e] = -0x80;
-        param_2[0x5f] = -0x41;
-        *(unsigned int *)(param_2 + 100) = *(unsigned int *)(param_2 + 8);
-      }
-      else {
-        param_2[0x50] = '\0';
-        param_2[0x51] = '\0';
-        param_2[0x52] = -0x80;
-        param_2[0x53] = -0x41;
-        *(unsigned int *)(param_2 + 0x54) = *(unsigned int *)(param_2 + 0xc);
-        param_2[0x5c] = '\0';
-        param_2[0x5d] = '\0';
-        param_2[0x5e] = -0x80;
-        param_2[0x5f] = '?';
-        *(float *)(param_2 + 100) = -*(float *)(param_2 + 8);
-      }
-    }
-    else {
-      temp_v7 = 1.0f / romwright_sqrt_4(temp_v6 * temp_v6 + temp_v3 * temp_v3 + temp_v4 * temp_v4);
-      temp_v3 = temp_v3 * temp_v7;
-      temp_v12 = temp_v6 * temp_v7;
-      temp_v7 = temp_v4 * temp_v7;
-      temp_v5 = 1.0f / romwright_sqrt_4(temp_v4 * temp_v4 + temp_v6 * temp_v6);
-      temp_v4 = temp_v4 * temp_v5;
-      temp_v11 = -(temp_v6 * temp_v5);
-      temp_v14 = temp_v12 * 0.0f - temp_v3 * temp_v4;
-      temp_v13 = temp_v7 * temp_v4 - temp_v12 * temp_v11;
-      temp_v5 = temp_v3 * temp_v11 - temp_v7 * 0.0f;
-      FUN_0018a924(&temp_v18,afStack_4c);
-      temp_v8 = *(float *)(param_2 + 4);
-      temp_v9 = *(float *)(param_2 + 8);
-      temp_v10 = *(float *)(param_2 + 0xc);
-      temp_v6 = temp_v18 * temp_v5 + afStack_4c[0] * temp_v4;
-      temp_v4 = afStack_4c[0] * temp_v5 - temp_v18 * temp_v4;
-      temp_v5 = temp_v18 * temp_v14 + afStack_4c[0] * temp_v11;
-      temp_v11 = afStack_4c[0] * temp_v14 - temp_v18 * temp_v11;
-      *(float *)(param_2 + 0x38) = temp_v6;
-      *(float *)(param_2 + 0x3c) = temp_v18 * temp_v13;
-      *(float *)(param_2 + 0x40) = temp_v5;
-      *(float *)(param_2 + 0x44) = -(temp_v8 * temp_v6 + temp_v9 * temp_v18 * temp_v13) + -(temp_v10 * temp_v5)
-      ;
-      *(float *)(param_2 + 0x48) = temp_v4;
-      *(float *)(param_2 + 0x4c) = afStack_4c[0] * temp_v13;
-      *(float *)(param_2 + 0x50) = temp_v11;
-      *(float *)(param_2 + 0x54) =
-           -(temp_v8 * temp_v4 + temp_v9 * afStack_4c[0] * temp_v13) + -(temp_v10 * temp_v11);
-      *(float *)(param_2 + 0x58) = temp_v12;
-      *(float *)(param_2 + 0x5c) = temp_v3;
-      *(float *)(param_2 + 0x60) = temp_v7;
-      *(float *)(param_2 + 100) = -(temp_v8 * temp_v12 + temp_v9 * temp_v3 + temp_v10 * temp_v7);
-    }
-    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v1 != 0)) {
-      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v16;
-      DAT_0064c058 = temp_v15;
-      DAT_0064c05c = temp_v15;
-      DAT_0064c060 = temp_v15;
-      DAT_0064c064 = temp_v15;
-      DAT_0064c068 = temp_v16;
-      DAT_0064c06c = temp_v15;
-      DAT_0064c070 = temp_v15;
-      DAT_0064c074 = temp_v15;
-      DAT_0064c078 = temp_v15;
-      DAT_0064c07c = temp_v16;
-      DAT_0064c080 = temp_v15;
-    }
-    nn_math_ARMv6_MTX34CopyAsm(temp_v17,&_ZZN2nw4math5MTX348IdentityEvE8identity);
-    FUN_001aff14(temp_v17,1);
-    nn_math_ARMv6_VEC3TransformAsm_2AD44C(param_2 + 0x1c,temp_v17);
-    FUN_00162330(param_2 + 0x128,param_2 + 0x38);
-    *(unsigned int *)(param_2 + 0x198) = *(unsigned int *)(param_2 + 0x38);
-    *(unsigned int *)(param_2 + 0x19c) = *(unsigned int *)(param_2 + 0x3c);
-    *(unsigned int *)(param_2 + 0x1a0) = *(unsigned int *)(param_2 + 0x40);
-    *(unsigned int *)(param_2 + 0x1a4) = *(unsigned int *)(param_2 + 0x44);
-    *(unsigned int *)(param_2 + 0x1a8) = *(unsigned int *)(param_2 + 0x48);
-    *(unsigned int *)(param_2 + 0x1ac) = *(unsigned int *)(param_2 + 0x4c);
-    *(unsigned int *)(param_2 + 0x1b0) = *(unsigned int *)(param_2 + 0x50);
-    *(unsigned int *)(param_2 + 0x1b4) = *(unsigned int *)(param_2 + 0x54);
-    *(unsigned int *)(param_2 + 0x1b8) = *(unsigned int *)(param_2 + 0x58);
-    *(unsigned int *)(param_2 + 0x1bc) = *(unsigned int *)(param_2 + 0x5c);
-    *(unsigned int *)(param_2 + 0x1c0) = *(unsigned int *)(param_2 + 0x60);
-    *(unsigned int *)(param_2 + 0x1c4) = *(unsigned int *)(param_2 + 100);
-    *(unsigned int *)(param_2 + 0x1c8) = temp_v15;
-    *(unsigned int *)(param_2 + 0x1cc) = temp_v15;
-    *(unsigned int *)(param_2 + 0x1d0) = temp_v15;
-    *(unsigned int *)(param_2 + 0x1d4) = temp_v16;
-    nn_math_ARMv6_MTX44TransposeAsm(param_2 + 0x198,param_2 + 0x198);
-    if (*param_2 == '\0') {
-      return;
-    }
-  }
-  else {
-    if (*param_2 == '\0') {
-      return;
-    }
-    if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v1 != 0)) {
-      _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v16;
-      DAT_0064c058 = temp_v15;
-      DAT_0064c05c = temp_v15;
-      DAT_0064c060 = temp_v15;
-      DAT_0064c064 = temp_v15;
-      DAT_0064c068 = temp_v16;
-      DAT_0064c06c = temp_v15;
-      DAT_0064c070 = temp_v15;
-      DAT_0064c074 = temp_v15;
-      DAT_0064c078 = temp_v15;
-      DAT_0064c07c = temp_v16;
-      DAT_0064c080 = temp_v15;
-    }
-    nn_math_ARMv6_MTX34CopyAsm(temp_v17,&_ZZN2nw4math5MTX348IdentityEvE8identity);
-  }
-  FUN_0015a1b4(param_2,param_2 + 0x38);
-  return;
 }
-
-} /* extern "C" */

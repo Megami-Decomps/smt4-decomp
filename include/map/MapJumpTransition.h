@@ -16,6 +16,14 @@ struct MapJumpDestination {
     u16 entrance;
     u16 object;
 };
+/* Resets a destination to map 0, entrance 0, object 0. */
+static __inline void mapJumpDestinationClear(MapJumpDestination *destination)
+{
+    destination->map = 0;
+    destination->entrance = 0;
+    destination->object = 0;
+}
+
 struct MapJumpTransition {
     u8 unk00[0x20];
     u32 flags;

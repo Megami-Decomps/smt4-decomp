@@ -64,7 +64,7 @@ extern "C" {
 
 DemonModelInfo *FUN_00184310(u32 id);
 void countersRaiseA(s32 counter, s32 amount);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Registers the demon with the given id in the compendium from the party member that currently
  * is that demon, then reports the percentage of listed demons that were seen. */
@@ -91,7 +91,7 @@ void FUN_002a5e7c(u32 id)
         s32 seen;
         s32 index;
 
-        rt_memcpy_w(&record, entry, sizeof(CompendiumRecord));
+        __aeabi_memcpy4(&record, entry, sizeof(CompendiumRecord));
         record.variant = demon->variant;
         record.skillBits = demon->skillBits;
         record.level = demon->level;
@@ -112,9 +112,9 @@ void FUN_002a5e7c(u32 id)
         record.affinities[3] = demon->affinities[3];
         record.resistances[0] = demon->resistances[0];
         record.resistances[1] = demon->resistances[1];
-        rt_memcpy_w(record.learned, demon->learned, sizeof(record.learned));
+        __aeabi_memcpy4(record.learned, demon->learned, sizeof(record.learned));
         record.flags = (record.flags & ~0x3C) | ((demon->temperament << 2) & 0x3C);
-        rt_memcpy_w(entry, &record, sizeof(CompendiumRecord));
+        __aeabi_memcpy4(entry, &record, sizeof(CompendiumRecord));
         entry->flags |= COMPENDIUM_FLAG_REGISTERED;
         listed = 0;
         seen = 0;

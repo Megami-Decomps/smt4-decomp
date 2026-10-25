@@ -42,7 +42,7 @@ void *asdOperatorNew(u32 size);
 void asdOperatorDelete(void *block);
 ShopList *FUN_0049c3c0(void *memory);
 void FUN_0019ea5c(ShopList *list);
-void FUN_00499338(void);
+void placeWindowRunStateHandler(void);
 void FUN_00499c84(void);
 void _ZN9Obj55ca08D1Ev(void *detail);
 void fileSlot17Acquire(s32 *slot);
@@ -98,7 +98,7 @@ s32 FUN_0027dda4(void)
     case SHOP_STATE_WAIT_LIST:
         if (shop == NULL || shop->list == NULL)
             return 0;
-        FUN_00499338();
+        placeWindowRunStateHandler();
         if ((shop->list->flags & 1) == 0)
             return 0;
         shop->state = SHOP_STATE_CLOSE;

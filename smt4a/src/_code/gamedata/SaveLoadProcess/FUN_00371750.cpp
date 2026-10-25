@@ -62,7 +62,7 @@ s32 campCecGet(void);
 s32 FUN_00229c9c(void);
 s32 byte1IsZero(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Frees the job's buffer and moves to `stage`. */
 static __inline void saveFinishWrite(SaveProcessJob *job, u32 stage)
@@ -135,7 +135,7 @@ u32 FUN_00371750(void)
         rt_memcpy(job->buffer, reinterpret_cast<void *>(gameDataBlocksGetTable()), SAVE_TABLE_SIZE);
         wordPairCopy(job->buffer + SAVE_TABLE_SIZE, configGetSettings());
         u8 *body = job->buffer + SAVE_BODY_OFFSET;
-        rt_memcpy_w(body, gameDataBlocksGetSaveData(), SAVE_FULL_BODY_SIZE);
+        __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), SAVE_FULL_BODY_SIZE);
         *reinterpret_cast<u16 *>(body) = 4;
         job->buffer[SAVE_BODY_OFFSET + 2] = job->flag;
         FUN_002c9104();

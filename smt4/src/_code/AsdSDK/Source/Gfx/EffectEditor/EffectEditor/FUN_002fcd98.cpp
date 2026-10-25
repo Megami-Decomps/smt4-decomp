@@ -23,7 +23,7 @@ int linkedFindItemByIndex(...);
 int effEditorNodeListCount(...);
 int asdDebugLog(...);
 int effEditorNodeChainApply(...);
-int FUN_0024dd80(...);
+int padAlternateButtonIndex(...);
 int registrationEntryInsert(...);
 int padIsButtonRepeat(...);
 int textFormatBuffer(...);
@@ -31,7 +31,7 @@ int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int rt_memclr(void);
 int asdMemFree(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -107,7 +107,7 @@ extern unsigned int FUN_0021a468(int);
 /* Supplied declaration required: effEditorNodeListCount. */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: eventDispatch. */
@@ -129,7 +129,7 @@ extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c79c4. */
 extern u32 effResourceListHasActiveData(LinkedItems* resources);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_002fcd98(void)
@@ -176,7 +176,7 @@ unsigned int FUN_002fcd98(void)
       if (DAT_0044f864 == 0x14) {
         temp_v3 = padIsButtonRepeat(6);
         if (temp_v3 == 0) {
-          FUN_0024dd80(6);
+          padAlternateButtonIndex(6);
           temp_v3 = padIsButtonRepeat();
           if (temp_v3 == 0) goto LAB_002fcedc;
         }
@@ -190,7 +190,7 @@ unsigned int FUN_002fcd98(void)
     else {
       temp_v3 = padIsButtonRepeat(5);
       if (temp_v3 == 0) {
-        FUN_0024dd80(5);
+        padAlternateButtonIndex(5);
         temp_v3 = padIsButtonRepeat();
         if (temp_v3 == 0) goto LAB_002fcedc;
       }
@@ -207,13 +207,13 @@ LAB_002fcedc:
       temp_v9 = *(unsigned int *)(temp_v3 + 0x80);
       temp_v4 = padIsButtonRepeat(4);
       if (temp_v4 == 0) {
-        FUN_0024dd80(4);
+        padAlternateButtonIndex(4);
         temp_v4 = padIsButtonRepeat();
         if (temp_v4 != 0) goto LAB_002fcf3c;
 LAB_002fcfbc:
         temp_v4 = padIsButtonRepeat(3);
         if (temp_v4 == 0) {
-          FUN_0024dd80(3);
+          padAlternateButtonIndex(3);
           temp_v4 = padIsButtonRepeat();
           if (temp_v4 == 0) goto LAB_002fd050;
         }
@@ -263,7 +263,7 @@ LAB_002fd050:
     }
     temp_v3 = padIsButtonPressed(10);
     if (temp_v3 == 0) {
-      FUN_0024dd80(10);
+      padAlternateButtonIndex(10);
       temp_v3 = padIsButtonPressed();
       if (temp_v3 != 0) {
         if (temp_v11 < temp_v2) {
@@ -288,7 +288,7 @@ LAB_002fd050:
   puVar12 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v9 * 0x18;
   temp_v3 = temp_v4;
-  rt_memcpy_w(&DAT_004d8c20,DAT_0044ea94);
+  __aeabi_memcpy4(&DAT_004d8c20,DAT_0044ea94);
   if (temp_v11 != 0) {
     unaff_r11 = 0x44f4d4;
   }
@@ -487,7 +487,7 @@ LAB_002fd1c8:
     temp_v8 = 0;
     DAT_0044f864 = 0;
   }
-  rt_memcpy_w(DAT_0044ea94,&DAT_004d8c20,0x80);
+  __aeabi_memcpy4(DAT_0044ea94,&DAT_004d8c20,0x80);
   temp_v3 = padIsButtonPressed(0x19);
   if (temp_v3 != 0) {
     DAT_0044ea89 = DAT_0044ea89 != 1;
@@ -495,7 +495,7 @@ LAB_002fd1c8:
   else {
     temp_v3 = padIsButtonPressed(0);
     if (temp_v3 == 0) {
-      FUN_0024dd80(0);
+      padAlternateButtonIndex(0);
       temp_v3 = padIsButtonPressed();
       if (temp_v3 != 0) {
         if (DAT_0044ea89 == 1) {
@@ -518,7 +518,7 @@ LAB_002fd1c8:
   if (DAT_0044eab4 != &DAT_0044f858) {
     temp_v3 = padIsButtonPressed(10);
     if (temp_v3 == 0) {
-      FUN_0024dd80(10);
+      padAlternateButtonIndex(10);
       temp_v3 = padIsButtonPressed();
       if (temp_v3 != 0) {
         DAT_0044ea86 = '\x01';
@@ -538,7 +538,7 @@ LAB_002fd1c8:
     }
     temp_v3 = padIsButtonPressed(9);
     if (temp_v3 == 0) {
-      FUN_0024dd80(9);
+      padAlternateButtonIndex(9);
       temp_v3 = padIsButtonPressed();
       if (temp_v3 != 0) {
         temp_v1 = 1;
@@ -582,7 +582,7 @@ LAB_002fd78c:
       temp_v4 = *(int *)(temp_v3 + 0x90);
       effBlockCreateFromBlock();
       DAT_0044eaa0 = temp_v4;
-      rt_memcpy_w(&DAT_004d8ca0,temp_v3,0x80);
+      __aeabi_memcpy4(&DAT_004d8ca0,temp_v3,0x80);
     }
     DAT_0044ea86 = '\0';
   }
@@ -607,7 +607,7 @@ LAB_002fd8ac:
       else {
         temp_v3 = padIsButtonPressed(1);
         if (temp_v3 == 0) {
-          FUN_0024dd80(1);
+          padAlternateButtonIndex(1);
           temp_v3 = padIsButtonPressed();
           if (temp_v3 != 0) {
             FUN_00281bb0(DAT_0044ea90);

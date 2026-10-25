@@ -66,7 +66,7 @@ void FUN_001b4ddc(void *part);
 EffPartNode *FUN_003007a0(void);
 void FUN_003c2df0(EffPartList *list, EffPartNode *node, EffPartNode *parent);
 EffBlock *FUN_00290edc(EffBlock *src);
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 char *libc_strcpy(char *destination, const char *source);
 void asdMemFree(void *block);
 
@@ -108,7 +108,7 @@ EffPartList *FUN_0029127c(const char *path)
             EffPartNode *source = effPartListNth(list, (s32)entry->block);
 
             node = FUN_003007a0();
-            rt_memcpy_w(node, source, 0xC0);
+            __aeabi_memcpy4(node, source, 0xC0);
             sysMemClear(node, 0x90);
             node->unk84 = 1;
             node->unk88 = 8;
@@ -146,7 +146,7 @@ EffPartList *FUN_0029127c(const char *path)
         if ((entry->flags & 2) != 0) {
             FUN_003c2df0(list, node, effPartListNth(list, entry->parentIndex));
         }
-        rt_memcpy_w(node, entry, 0x90);
+        __aeabi_memcpy4(node, entry, 0x90);
         libc_strcpy(node->name, entry->name);
         node->flags = entry->flags;
     }

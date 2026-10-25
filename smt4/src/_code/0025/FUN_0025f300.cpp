@@ -1,4 +1,3 @@
-/* NON_MATCHING: timer/speed subobject addressing and cached blend-state scratch registers differ. */
 #include "shard/PlayScene.h"
 #include "camp/RenderCtx.h"
 
@@ -10,6 +9,7 @@ extern RenderCtx* g_titleScene;
 s32 vec2GetXInt(UiSpriteState* animation);
 s32 vec2GetYInt(UiSpriteState* animation);
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 SpriteInfo* FUN_002bf4f8(u32 table, s32 id);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
@@ -17,10 +17,9 @@ void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 void FUN_0025f300(PlayScene* work)
 {
     if (!work->unk3084 && static_cast<s32>(work->unk305C) <= 3) {
-        UiSpriteState* animation = reinterpret_cast<UiSpriteState*>(work->timer);
-        s32 x = vec2GetXInt(animation);
-        s32 y = vec2GetYInt(animation);
-        efctSetSpeed(work->intro.animation.unk20);
+        s32 x = vec2GetXInt(reinterpret_cast<UiSpriteState*>(work->timer));
+        s32 y = vec2GetYInt(reinterpret_cast<UiSpriteState*>(work->timer));
+        efctSetSpeed(vec2GetSpeed(&work->intro.animation));
         SceneSpriteCoordinates* sprite = reinterpret_cast<SceneSpriteCoordinates*>(
             FUN_002bf4f8(0x15, static_cast<s32>(work->unk305C) + 0x52));
         RenderCtx* context = g_titleScene;

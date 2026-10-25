@@ -6,7 +6,7 @@ extern "C" {
 InitializedUnitStatsA *gameGetOptions(void);
 UnitRecord *gameGetPlayerData(void);
 u32 randRange(u16 maximum);
-s32 FUN_0036fd64(u32 categoryId, u16 playerId);
+s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *data, u32 size);
 const CategoryUnitStatsA *dataTableGetCategoryEntry(u32 categoryId, s32 variant);
 
@@ -37,7 +37,7 @@ void FUN_004da144(void)
     s32 variant = -1;
     for (s32 partyIndex = 0; partyIndex < 3; ++partyIndex) {
         if (unit->partyCategories[partyIndex] == static_cast<u32>(category)) {
-            variant = FUN_0036fd64(category, gameGetPlayerData()->id);
+            variant = equipmentTableFindIndexById(category, gameGetPlayerData()->id);
             break;
         }
     }

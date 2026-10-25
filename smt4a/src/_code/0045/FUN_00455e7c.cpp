@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00124db0(...);
 int nw_gfx_Material_CopyResFragmentLightingTable(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
@@ -24,7 +24,7 @@ extern int nw_gfx_res_ResTextureCoordinatorData_ResTextureCoordinatorData(...); 
 /* Supplied declaration required: FUN_00124db0. */
 extern int FUN_004515e4(romwright_code **, int *);
 /* Supplied declaration required: nw_gfx_Material_CopyResFragmentLightingTable. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00455e7c(unsigned int *param_1,int param_2,int *param_3,unsigned int param_4)
@@ -82,7 +82,7 @@ void FUN_00455e7c(unsigned int *param_1,int param_2,int *param_3,unsigned int pa
   puVar1[6] = puVar11[6];
   puVar1[7] = puVar11[7];
   puVar1[8] = puVar11[8];
-  rt_memcpy_w(puVar1 + 9,puVar11 + 9,0xe0);
+  __aeabi_memcpy4(puVar1 + 9,puVar11 + 9,0xe0);
   temp_v1 = puVar11[0x42];
   temp_v3 = puVar11[0x43];
   temp_v5 = puVar11[0x44];
@@ -92,7 +92,7 @@ void FUN_00455e7c(unsigned int *param_1,int param_2,int *param_3,unsigned int pa
   puVar1[0x43] = temp_v3;
   puVar1[0x44] = temp_v5;
   puVar1[0x45] = temp_v8;
-  rt_memcpy_w(puVar1 + 0x46,puVar11 + 0x46,0x50);
+  __aeabi_memcpy4(puVar1 + 0x46,puVar11 + 0x46,0x50);
   puVar1[0x5a] = puVar11[0x5a];
   temp_v13 = nw_gfx_res_ResTextureCoordinatorData_ResTextureCoordinatorData;
   puVar1 = puVar1 + 0x5b;
@@ -303,7 +303,7 @@ void FUN_00455e7c(unsigned int *param_1,int param_2,int *param_3,unsigned int pa
         *temp_v15 = (unsigned int)puVar14;
         return;
       }
-      rt_memcpy_w(temp_v9,temp_v7,0xf4);
+      __aeabi_memcpy4(temp_v9,temp_v7,0xf4);
       puVar1[0x47] = temp_v9 - (int)(puVar1 + 0x47);
       *(unsigned int *)(temp_v9 + 0x28) = 0;
       if ((~temp_v18 & 0x100) == 0) {

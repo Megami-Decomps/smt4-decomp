@@ -66,7 +66,7 @@ extern GameState g_gameState;
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathGetShortestAngleDelta(f32 first, f32 second);
 f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
-f32 FUN_00287a78(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
+f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
 u32 FUN_00291e40(u32 soundId, SoundActorQueuePosition position);
 void FUN_002df824(s32 id, s32 flag);
 void FUN_002879dc(s32 a, s32 b, s32 c);
@@ -94,7 +94,7 @@ u32 FUN_001a8cf8(void)
                 if (delta > -90.0f && delta < 90.0f)
                     facing = 1;
                 if (mathDistanceBetweenPoints(g_gameState.encounterSourcePosition, entry->position) < 300.0f
-                    && FUN_00287a78(g_gameState.encounterSourcePosition.x,
+                    && mathAbsHeadingErrorToPoint(g_gameState.encounterSourcePosition.x,
                                     g_gameState.encounterSourcePosition.y,
                                     g_gameState.encounterSourcePosition.z,
                                     g_gameState.encounterSourceHeading, entry->position.x,

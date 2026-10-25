@@ -13,15 +13,15 @@ typedef struct {
 } Record;
 
 int onlineObjectCopyValue(u8 *dest, u8 *source);
-int rt_memcpy_w(u8 *dest, u8 *source, int size);
+int __aeabi_memcpy4(u8 *dest, u8 *source, int size);
 
 /* Assignment: copies every part of `source` into `dest` and returns `dest`. */
 Record *FUN_00103674(Record *dest, Record *source)
 {
     onlineObjectCopyValue(dest->header, source->header);
     dest->unk34 = source->unk34;
-    rt_memcpy_w(dest->blockA, source->blockA, 0x78);
-    rt_memcpy_w(dest->blockB, source->blockB, 0x78);
+    __aeabi_memcpy4(dest->blockA, source->blockA, 0x78);
+    __aeabi_memcpy4(dest->blockB, source->blockB, 0x78);
     dest->unk128 = source->unk128;
     return dest;
 }

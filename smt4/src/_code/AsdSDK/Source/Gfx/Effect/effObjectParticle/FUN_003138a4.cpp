@@ -27,14 +27,14 @@ union ObjectParticleCreationView {
 struct ParticleModelRenderView { u8 unk00[0x28]; u32 enabled; };
 struct ParticleModelBindingView { u8 unk00[8]; ParticleModelRenderView *render; };
 struct ParticleModelGraphView { u8 unk000[0x220]; ParticleModelBindingView *binding; };
-struct ParticleModelNodeView { AsdMdlNode node; ParticleModelGraphView *graph; };
+struct ParticleModelNodeView { u8 unk00[0x2C]; ParticleModelGraphView *graph; };
 extern "C" {
 extern const char DAT_004102f4[], DAT_00410334[];
 ObjectParticleHeaderView *resourceResolveHeaderPointer(ObjectParticleResourceView *);
 const u8 *resourceResolveDataPointer(ObjectParticleResourceView *);
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void rt_memclr(void *, u32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 void memCopy(const void *, void *, u32);
 void FUN_00313760(EffObjectParticle *, u16, EffEmitterDesc *);
 void FUN_0031ce4c(EffObjectParticle *);
@@ -55,7 +55,7 @@ EffObjectParticle *FUN_003138a4(ObjectParticleResourceView *resource)
     particle->creation.previous = -1;
     particle->creation.maxCount = maximum;
     particle->creation.scale = 1.0f;
-    rt_memcpy_w(particle->creation.initialization, header, 0x44);
+    __aeabi_memcpy4(particle->creation.initialization, header, 0x44);
     FUN_00313760(&particle->object, resource->description.kind, &header->emission);
     if (particle->object.source->count) {
         const u8 *data = resourceResolveDataPointer(resource);

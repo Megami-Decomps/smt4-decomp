@@ -19,7 +19,7 @@ int MapNaviTable_GetCategoryCount(void);
 int NaviMain_GetCurrentMap(int);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -68,7 +68,7 @@ extern int MapNaviTable_GetCategoryRecord(unsigned char *, unsigned int);
 extern int MapNavi_SetDiscoveredCell(int, unsigned int);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 extern int NaviMain_GetPosY(int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void NaviMain_UpdateDiscovery(int param_1)
@@ -116,10 +116,10 @@ void NaviMain_UpdateDiscovery(int param_1)
   temp_v4 = FUN_002b8694();
   if ((((temp_v4 == 0) && ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0)) &&
       (*(char *)(param_1 + 0xc) != '\0')) && (DAT_0049f924 != 0xffffffff)) {
-    rt_memcpy_w(temp_v23,&DAT_00404b28,0x48);
-    rt_memcpy_w(temp_v24,&DAT_00404b70,0x48);
-    rt_memcpy_w(temp_v25,&DAT_00404bb8,0x48);
-    rt_memcpy_w(temp_v26,&DAT_00404c00,0x48);
+    __aeabi_memcpy4(temp_v23,&DAT_00404b28,0x48);
+    __aeabi_memcpy4(temp_v24,&DAT_00404b70,0x48);
+    __aeabi_memcpy4(temp_v25,&DAT_00404bb8,0x48);
+    __aeabi_memcpy4(temp_v26,&DAT_00404c00,0x48);
     puVar6 = (unsigned int *)lmapSceneGetObj();
     temp_v16 = romwright_piece_4_4(puVar6[2],*puVar6);
     temp_v4 = NaviMain_GetPosY(param_1 + 0x162);
@@ -169,22 +169,22 @@ LAB_0039f1cc:
       if (temp_v1 != 1) {
         if (temp_v1 != 2) {
           if (temp_v1 != 3) {
-            rt_memcpy_w(temp_v22,temp_v23,0x48);
+            __aeabi_memcpy4(temp_v22,temp_v23,0x48);
           }
           else {
-            rt_memcpy_w(temp_v22,temp_v26,0x48);
+            __aeabi_memcpy4(temp_v22,temp_v26,0x48);
           }
         }
         else {
-          rt_memcpy_w(temp_v22,temp_v25,0x48);
+          __aeabi_memcpy4(temp_v22,temp_v25,0x48);
         }
       }
       else {
-        rt_memcpy_w(temp_v22,temp_v24,0x48);
+        __aeabi_memcpy4(temp_v22,temp_v24,0x48);
       }
     }
     else {
-      rt_memcpy_w(temp_v22,temp_v23,0x48);
+      __aeabi_memcpy4(temp_v22,temp_v23,0x48);
     }
     temp_v20 = 1000.0f;
     temp_v21 = 0x44834000;

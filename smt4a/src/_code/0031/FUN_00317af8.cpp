@@ -5,7 +5,7 @@
 extern "C" {
 extern PadAnalogSample DAT_0063ffd0[2];
 extern PadAnalogSample DAT_0063fff0;
-void FUN_00226c70(f32 *value, f32 deadZone);
+void inputApplyDeadZone(f32 *value, f32 deadZone);
 
 // Read normalized analog axes, applying the configured dead zone when enabled.
 u32 FUN_00317af8(f32 *outX, f32 *outY, u32 index)
@@ -46,8 +46,8 @@ u32 FUN_00317af8(f32 *outX, f32 *outY, u32 index)
             f32 x = (f32)sample->x / range;
             f32 y = (f32)sample->y / range;
             if (state->deadZone != 0.0f) {
-                FUN_00226c70(&x, state->deadZone);
-                FUN_00226c70(&y, state->deadZone);
+                inputApplyDeadZone(&x, state->deadZone);
+                inputApplyDeadZone(&y, state->deadZone);
                 if (x == 0.0f && y == 0.0f)
                     return 0;
             }

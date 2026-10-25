@@ -12,7 +12,7 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 fr
 u32 asdFileEnqueueRead(const char *path, u8 flags, void (*callback)(void *), void *argument);
 void asdFileFinalizeCompletion(void *job);
 void asdFileRequestSetHeapKind(u32 handle, u8 flags);
-void FUN_001bceb8(u32 handle, u32 priority);
+void optionalParameterTrySet(u32 handle, u32 priority);
 
 // Start an asynchronous load and clear its optional completion result.
 void FUN_001bcfb4(const char *path, u32 *result, u32 flags, u32 arg, u32 arg2, u32 priority)
@@ -44,6 +44,6 @@ void FUN_001bcfb4(const char *path, u32 *result, u32 flags, u32 arg, u32 arg2, u
         heapKind |= 0x10;
     }
     asdFileRequestSetHeapKind(job->handle, heapKind);
-    FUN_001bceb8(job->handle, priority);
+    optionalParameterTrySet(job->handle, priority);
 }
 }

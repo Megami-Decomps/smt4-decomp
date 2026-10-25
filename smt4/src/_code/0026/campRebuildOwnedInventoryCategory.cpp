@@ -1,4 +1,4 @@
-/* NON_MATCHING: category/controller live ranges swap r8/r9 and move the initial category comparison; all list-building instructions otherwise match. */
+/* NON_MATCHING: only the initial category compare is scheduled after `mov r9, r0` and the first literal load (retail compares r0 first; 4 diff lines); the switch already gives retail's r8/r9 allocation. */
 #include "shard/W6_W6Match8_CampInventory.h"
 
 extern "C" {
@@ -14,22 +14,26 @@ void campRebuildOwnedInventoryCategory(s32 category)
     CampInventoryController *controller;
     s32 firstId;
     s32 lastId;
-    if (category == 11) {
+    switch (category) {
+    case 11:
         firstId = 1;
         lastId = 0x3c;
         ids = g_camp->inventory.firstIds;
         controller = &g_camp->controllers[0];
-    } else if (category == 12) {
+        break;
+    case 12:
         firstId = 0x3b7;
         lastId = 0x47e;
         ids = g_camp->inventory.secondIds;
         controller = &g_camp->controllers[1];
-    } else if (category == 13) {
+        break;
+    case 13:
         firstId = 0x33f;
         lastId = 0x3b6;
         ids = g_camp->inventory.thirdIds;
         controller = &g_camp->controllers[2];
-    } else {
+        break;
+    default:
         return;
     }
     if (ids == NULL || controller == NULL) {

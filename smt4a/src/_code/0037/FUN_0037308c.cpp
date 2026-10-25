@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial range-load scheduling, excluded-mask registers and fallback byte addressing differ. */
+/* NON_MATCHING: range loads and entries base/product registers differ, final exclusion-mask AND registers differ; active-entry byte now folds (s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

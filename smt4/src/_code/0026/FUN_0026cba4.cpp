@@ -37,7 +37,7 @@ extern PreviewPanel *g_partyPanel;
 ItemRecord *dataTable08Sub1GetRecord(u32 id);
 void *gameGetUnitRecord(s32 id);
 void *gameGetPlayerData(void);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void FUN_0029c4c8(s32 value);
 void FUN_0029c4e4(UnitPreview *unit, s32 arg);
 void FUN_0029a0cc(PlayerInitialRecordIV *player);
@@ -60,9 +60,9 @@ void FUN_0026cba4(s32 id, s32 isUnit, s32 variant)
     }
     isUnit |= variant;
     if (isUnit != 0) {
-        rt_memcpy_w(&panel->unit, gameGetUnitRecord(id), 0x604);
+        __aeabi_memcpy4(&panel->unit, gameGetUnitRecord(id), 0x604);
     } else {
-        rt_memcpy_w(&panel->player, gameGetPlayerData(), 0x8C);
+        __aeabi_memcpy4(&panel->player, gameGetPlayerData(), 0x8C);
     }
     switch (record->kind) {
     case 0x1F:

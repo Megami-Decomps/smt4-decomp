@@ -467,13 +467,18 @@ struct GameStateA {
         f32 destinationHeadingCopy;
     };
     /* 0x5C8 */ u8 unk5C8;
-    /* 0x5C9 */ u8 unk5C9[0xAD];
+    /* 0x5C9 */ u8 unk5C9[3];
+    /* 0x5CC */ s32 collisionDebugMode; /* 1: draw every collision shape, 2: only those near the player */
+    /* 0x5D0 */ u8 unk5D0[0x90];
+    /* 0x660 */ s32 showAllEntries; /* nonzero: every map-list entry is available */
+    /* 0x664 */ u8 unk664[0x12];
     /* 0x676 */ u8 scriptOverride;
     /* 0x677 */ u8 unk677[0x1E];
     /* 0x695 */ u8 transitionPending;
 };
 
 typedef char GameStateLayoutCheck[sizeof(GameState) == 0x678 && sizeof(GameStateA) == 0x698 ? 1 : -1];
+typedef char GameStateAShowAllEntriesOffset[offsetof(GameStateA, showAllEntries) == 0x660 ? 1 : -1];
 typedef char GameStateATrapCountOffsetCheck[
     offsetof(GameStateA, trapSetup.count) == 0x210 && sizeof(GameStateA) == 0x698 ? 1 : -1];
 typedef char GameStateAEnvironmentOffset[offsetof(GameStateA, environment.darkZone) == 0x25C ? 1 : -1];

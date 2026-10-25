@@ -70,13 +70,12 @@ void FUN_00117a70(s32 wide)
     }
 
     FrameSurface *surface = tex->surface;
+    f32 width = (f32)surface->width;
+    f32 height = (f32)surface->height;
     if (tex->filtered != 0) {
         surface->filterX = 1;
         surface->filterY = 1;
-    }
-    f32 width = (f32)surface->width;
-    f32 height = (f32)surface->height;
-    if (tex->filtered == 0) {
+    } else {
         surface->filterX = 0;
         surface->filterY = 0;
     }

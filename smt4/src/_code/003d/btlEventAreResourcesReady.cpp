@@ -15,14 +15,14 @@ struct PendingResourceOwner {
 };
 
 extern "C" {
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 // A requested slot is ready only once its data pointer is populated.
 u32 btlEventAreResourcesReady(const PendingResourceOwner *owner)
 {
     for (s32 index = 0; index < 5; ++index) {
         PendingResourceSlot slot;
-        rt_memcpy_w(&slot, &owner->slots[index], sizeof(slot));
+        __aeabi_memcpy4(&slot, &owner->slots[index], sizeof(slot));
         if ((slot.flags & 1) && slot.data == NULL)
             return 0;
     }

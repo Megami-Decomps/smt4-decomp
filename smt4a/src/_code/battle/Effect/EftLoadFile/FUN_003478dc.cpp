@@ -18,7 +18,7 @@ int FUN_003b6728(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 int rt_memcpy(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_2: 32 slot(s), 116 byte(s) */
 typedef struct {
@@ -75,7 +75,7 @@ extern unsigned int FUN_0031b53c(int);
 /* Supplied declaration required: FUN_00389cf0. */
 /* Supplied declaration required: FUN_003b6728. */
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003478dc(unsigned int param_1,char *param_2)
@@ -192,8 +192,8 @@ unsigned int FUN_003478dc(unsigned int param_1,char *param_2)
           puVar15[5] = temp_v20;
           puVar15[6] = temp_v21;
           puVar15[7] = temp_v22;
-          rt_memcpy_w(puVar15 + 8,pcVar6 + 0x20,0x134);
-          rt_memcpy_w(puVar15 + 0x55,pcVar6 + 0x154,0xb0);
+          __aeabi_memcpy4(puVar15 + 8,pcVar6 + 0x20,0x134);
+          __aeabi_memcpy4(puVar15 + 0x55,pcVar6 + 0x154,0xb0);
           temp_v5 = temp_v5 + 1;
           *(char *)(puVar15 + 0xd1) = pcVar6[0x224];
           *(unsigned char *)((int)puVar15 + 0x151) = 0;
@@ -360,7 +360,7 @@ LAB_00347c88:
   }
   temp_v12 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x140,1);
-  rt_memcpy_w(temp_v12,param_2 + 0xa4,*(int *)(param_2 + 0xc) * 0x14);
+  __aeabi_memcpy4(temp_v12,param_2 + 0xa4,*(int *)(param_2 + 0xc) * 0x14);
   if (temp_v2) {
     temp_v13 = 0;
     if (temp_v13 < *(int *)(param_2 + 0x10)) {

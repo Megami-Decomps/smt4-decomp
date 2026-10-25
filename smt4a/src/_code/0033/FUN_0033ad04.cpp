@@ -1,185 +1,174 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033ad04` (_code @ 0x33ad04, 0x3ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation: retail spills the slot pointer, spawn index and list pointer around the inlined spawn block (three more stack slots, extra live registers) */
+#include "common.h"
+
+/* A resource the enemy slot owns or only references. */
+class EnemyResource {
+public:
+    virtual ~EnemyResource();
+    /* 0x04 */ u32 *owner; /* its handle block; bit 0-1 of owner[1] mark it released */
+};
+
+/* One 0x188-byte map-enemy slot (only the fields touched here are named). */
+struct EnemySpawnSlot {
+    /* 0x000 */ u8 active;
+    /* 0x001 */ u8 unk001[0x2f];
+    /* 0x030 */ s32 unk030;
+    /* 0x034 */ s32 unk034;
+    /* 0x038 */ s32 unk038;
+    /* 0x03c */ u8 unk03c[0x34];
+    /* 0x070 */ s32 spawnId;
+    /* 0x074 */ u32 recordId;
+    /* 0x078 */ u8 unk078[5];
+    /* 0x07d */ u8 locked;
+    /* 0x07e */ u8 unk07e[6];
+    /* 0x084 */ s32 state;
+    /* 0x088 */ s32 stateTime;
+    /* 0x08c */ u8 unk08c[0xb0];
+    /* 0x13c */ u8 unk13c;
+    /* 0x13d */ u8 unk13d;
+    /* 0x13e */ u8 unk13e;
+    /* 0x13f */ u8 unk13f;
+    /* 0x140 */ u8 unk140;
+    /* 0x141 */ u8 unk141[0x33];
+    /* 0x174 */ u16 kindFlags;
+    /* 0x176 */ u8 unk176[5];
+    /* 0x17b */ u8 unk17b;
+    /* 0x17c */ s32 kind;
+    /* 0x180 */ EnemyResource *resource;
+    /* 0x184 */ u8 registered;
+    /* 0x185 */ u8 owned;
+    /* 0x186 */ u8 unk186[2];
+};
+
+struct EnemyAuxiliary {
+    /* 0x00 */ EnemyResource *resource;
+    /* 0x04 */ u8 registered;
+    /* 0x05 */ u8 state;
+    /* 0x06 */ u8 unk06[2];
+};
+
+/* The enemies that can appear in one area: ids, data records and kinds by spawn index. */
+struct EnemySpawnGroup {
+    /* 0x00 */ s32 area;
+    /* 0x04 */ s32 ids[16];
+    /* 0x44 */ u32 records[16];
+    /* 0x84 */ s32 kinds[16];
+};
+
+struct EnemySpawnList {
+    /* 0x0000 */ u8 unk0000[0x34];
+    /* 0x0034 */ EnemySpawnSlot slots[40];
+    /* 0x3d74 */ u8 unk3d74[4];
+    /* 0x3d78 */ s32 activeCount;
+    /* 0x3d7c */ u8 unk3d7c[8];
+    /* 0x3d84 */ s32 unk3d84;
+    /* 0x3d88 */ u8 unk3d88[4];
+    /* 0x3d8c */ EnemyAuxiliary auxiliary[21];
+    /* 0x3e34 */ EnemySpawnGroup groups[16];
+    /* 0x4a74 */ s32 spawnCount;
+};
+
+/* The selected area record. */
+struct EnemyAreaSelection {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ s16 unk84;
+    /* 0x86 */ s16 area;
+};
+
+/* The first words of a data-table row. */
+struct EnemyKindRow {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 flags;
+};
 
 extern "C" {
-
-int dataTable00FindById(void);
-int ptrListRemoveClearOwner(unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern unsigned int g_handleRegistry; /* 0x56fcc0 */
-extern int g_mapEnemy; /* 0x5806d4 */
-extern unsigned char DAT_005f17fc; /* 0x5f17fc */
-
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: ptrListRemoveClearOwner. */
-extern int FUN_004bb870(unsigned int);
-
-
-void FUN_0033ad04(void)
-
-{
-/* irregular: 3 goto(s); 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  char *pcVar3;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar7;
-  int temp_v5;
-  unsigned int *puVar9;
-  
-  temp_v0 = g_mapEnemy;
-  temp_v5 = 0;
-  puVar9 = (unsigned int *)(g_mapEnemy + 0x4a74);
-  *(unsigned int *)(g_mapEnemy + 0x3d84) = 0;
-  do {
-    temp_v1 = temp_v0 + temp_v5 * 0x188;
-    pcVar3 = (char *)(temp_v1 + 0x34);
-    temp_v3 = 0;
-    if (*pcVar3 != '\0') {
-      temp_v3 = *(int *)(temp_v1 + 0x1b0);
-    }
-    if ((((*pcVar3 != '\0' && temp_v3 != 0) && (temp_v3 < 0xb)) && (*(char *)(temp_v1 + 0xb1) == '\0')) &&
-       ((int)*puVar9 < 0x10)) {
-      temp_v3 = *(int *)(temp_v1 + 0xb8);
-      if (temp_v3 != 0) {
-        if (temp_v3 != 2) {
-          if (temp_v3 == 4 || temp_v3 == 5) goto LAB_0033ad90;
-        }
-        else {
-          *(unsigned int *)(temp_v1 + 0xb8) = 0x16;
-          *(unsigned int *)(temp_v1 + 0xbc) = 0;
-          temp_v3 = g_mapEnemy;
-          temp_v4 = 0;
-          temp_v2 = *puVar9;
-          do {
-            piVar7 = (int *)(g_mapEnemy + temp_v4 * 0xc4 + 0x3e34);
-            if (*piVar7 == (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x86))) {
-              if ((*(int *)(temp_v1 + 0x1b4) != 0) && (*(char *)(temp_v1 + 0x1b8) != '\0')) {
-                temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
-                if (*(char *)(temp_v1 + 0x1b9) != '\0') {
-                  if (temp_v4 != 0) {
-                    ptrListRemoveClearOwner(g_handleRegistry);
-                  }
-                  *(unsigned char *)(temp_v1 + 0x1b8) = 0;
-                }
-                else {
-                  *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) | 3;
-                  *(unsigned char *)(temp_v1 + 0x1b8) = 0;
-                  *(unsigned char *)(temp_v3 + *(int *)(temp_v1 + 0x1b0) * 8 + 0x3d91) = 0;
-                }
-              }
-              temp_v3 = g_mapEnemy;
-              if (*(int **)(temp_v1 + 0x1b4) != (int *)0x0) {
-                if (*(char *)(temp_v1 + 0x1b9) != '\0') {
-                  (**(romwright_code **)(**(int **)(temp_v1 + 0x1b4) + 4))();
-                  *(unsigned int *)(temp_v1 + 0x1b4) = 0;
-                }
-                *(unsigned int *)(temp_v1 + 0x1b4) = 0;
-                *pcVar3 = '\0';
-                *(unsigned int *)(temp_v1 + 100) = 0;
-                *(unsigned int *)(temp_v1 + 0x68) = 0xffffffff;
-                *(unsigned int *)(temp_v1 + 0x6c) = 1;
-                *(unsigned char *)(temp_v1 + 0x170) = 0;
-                *(unsigned char *)(temp_v1 + 0x171) = 0;
-                *(unsigned char *)(temp_v1 + 0x173) = 0;
-                *(unsigned char *)(temp_v1 + 0x174) = 0;
-                *(int *)(temp_v3 + 0x3d78) = *(int *)(temp_v3 + 0x3d78) - 1;
-              }
-              piVar7 = piVar7 + (temp_v2 & 0xff);
-              *(int *)(temp_v1 + 0xa4) = piVar7[1];
-              temp_v2 = piVar7[0x11];
-              *(unsigned int *)(temp_v1 + 0xa8) = temp_v2;
-              temp_v2 = temp_v2 & 0xffff;
-              dataTable00FindById();
-              *(unsigned short *)(temp_v1 + 0x1a8) = *(unsigned short *)(temp_v2 + 2) & 0x7fff;
-              temp_v3 = FUN_004bb870(*(unsigned int *)(temp_v1 + 0xa4));
-              if (temp_v3 != 0) {
-                *(char *)(temp_v1 + 0x1af) = (char)temp_v3;
-              }
-              *(int *)(temp_v1 + 0x1b0) = piVar7[0x21];
-              break;
-            }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < 0x10);
-LAB_0033b0d0:
-          *puVar9 = *puVar9 + 1;
-        }
-      }
-      else {
-LAB_0033ad90:
-        *(unsigned int *)(temp_v1 + 0xb8) = 0x14;
-        *(unsigned int *)(temp_v1 + 0xbc) = 0;
-        temp_v3 = g_mapEnemy;
-        temp_v4 = 0;
-        temp_v2 = *puVar9;
-LAB_0033adb8:
-        piVar7 = (int *)(g_mapEnemy + temp_v4 * 0xc4 + 0x3e34);
-        if (*piVar7 != (int)(*(short *)((unsigned char *)&DAT_005f17fc + 0x86))) break;
-        if ((*(int *)(temp_v1 + 0x1b4) != 0) && (*(char *)(temp_v1 + 0x1b8) != '\0')) {
-          temp_v4 = *(int *)(*(int *)(temp_v1 + 0x1b4) + 4);
-          if (*(char *)(temp_v1 + 0x1b9) != '\0') {
-            if (temp_v4 != 0) {
-              ptrListRemoveClearOwner(g_handleRegistry);
-            }
-            *(unsigned char *)(temp_v1 + 0x1b8) = 0;
-          }
-          else {
-            *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) | 3;
-            *(unsigned char *)(temp_v1 + 0x1b8) = 0;
-            *(unsigned char *)(temp_v3 + *(int *)(temp_v1 + 0x1b0) * 8 + 0x3d91) = 0;
-          }
-        }
-        temp_v3 = g_mapEnemy;
-        if (*(int **)(temp_v1 + 0x1b4) != (int *)0x0) {
-          if (*(char *)(temp_v1 + 0x1b9) != '\0') {
-            (**(romwright_code **)(**(int **)(temp_v1 + 0x1b4) + 4))();
-            *(unsigned int *)(temp_v1 + 0x1b4) = 0;
-          }
-          *(unsigned int *)(temp_v1 + 0x1b4) = 0;
-          *pcVar3 = '\0';
-          *(unsigned int *)(temp_v1 + 100) = 0;
-          *(unsigned int *)(temp_v1 + 0x68) = 0xffffffff;
-          *(unsigned int *)(temp_v1 + 0x6c) = 1;
-          *(unsigned char *)(temp_v1 + 0x170) = 0;
-          *(unsigned char *)(temp_v1 + 0x171) = 0;
-          *(unsigned char *)(temp_v1 + 0x173) = 0;
-          *(unsigned char *)(temp_v1 + 0x174) = 0;
-          *(int *)(temp_v3 + 0x3d78) = *(int *)(temp_v3 + 0x3d78) - 1;
-        }
-        piVar7 = piVar7 + (temp_v2 & 0xff);
-        *(int *)(temp_v1 + 0xa4) = piVar7[1];
-        temp_v2 = piVar7[0x11];
-        *(unsigned int *)(temp_v1 + 0xa8) = temp_v2;
-        temp_v2 = temp_v2 & 0xffff;
-        dataTable00FindById();
-        *(unsigned short *)(temp_v1 + 0x1a8) = *(unsigned short *)(temp_v2 + 2) & 0x7fff;
-        temp_v3 = FUN_004bb870(*(unsigned int *)(temp_v1 + 0xa4));
-        if (temp_v3 != 0) {
-          *(char *)(temp_v1 + 0x1af) = (char)temp_v3;
-        }
-        *(int *)(temp_v1 + 0x1b0) = piVar7[0x21];
-        *puVar9 = *puVar9 + 1;
-      }
-    }
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x28) {
-      return;
-    }
-  } while( 1 );
-  temp_v4 = temp_v4 + 1;
-  if (temp_v4 >= 0x10) goto LAB_0033b0d0;
-  goto LAB_0033adb8;
+extern EnemySpawnList *g_mapEnemy;
+extern u32 *g_handleRegistry;
+extern EnemyAreaSelection DAT_005f17fc;
+void ptrListRemoveClearOwner(u32 *registry, u32 *owner);
+const EnemyKindRow *dataTable00FindById(u16 id);
+s32 FUN_004bb870(s32 spawnId);
 }
 
-} /* extern "C" */
+/* Drops the slot's resource: unregisters it (or marks it released), then deletes it if the slot owns it. */
+static __inline void enemySlotReleaseResource(EnemySpawnSlot *slot)
+{
+    if (slot->resource != NULL && slot->registered != 0) {
+        u32 *owner = slot->resource->owner;
+        if (slot->owned != 0) {
+            if (owner != NULL) {
+                ptrListRemoveClearOwner(g_handleRegistry, owner);
+            }
+            slot->registered = 0;
+        } else {
+            owner[1] |= 3;
+            slot->registered = 0;
+            g_mapEnemy->auxiliary[slot->kind].state = 0;
+        }
+    }
+    EnemySpawnList *list = g_mapEnemy;
+    if (slot->resource != NULL) {
+        if (slot->owned != 0) {
+            delete slot->resource;
+            slot->resource = NULL;
+        }
+        slot->resource = NULL;
+        slot->active = 0;
+        slot->unk030 = 0;
+        slot->unk034 = -1;
+        slot->unk038 = 1;
+        slot->unk13c = 0;
+        slot->unk13d = 0;
+        slot->unk13f = 0;
+        slot->unk140 = 0;
+        list->activeCount--;
+    }
+}
+
+/* Puts the slot in `state` and fills it from the current area's next spawn entry. */
+static __inline void enemySlotSpawn(EnemySpawnSlot *slot, s32 state, s32 *spawnCount)
+{
+    slot->state = state;
+    slot->stateTime = 0;
+    u32 index = *spawnCount & 0xff;
+    for (s32 i = 0; i < 16; i++) {
+        EnemySpawnGroup *group = &g_mapEnemy->groups[i];
+        if (group->area == DAT_005f17fc.area) {
+            enemySlotReleaseResource(slot);
+            slot->spawnId = group->ids[index];
+            slot->recordId = group->records[index];
+            slot->kindFlags = dataTable00FindById((u16)slot->recordId)->flags & 0x7fff;
+            s32 variant = FUN_004bb870(slot->spawnId);
+            if (variant != 0) {
+                slot->unk17b = (u8)variant;
+            }
+            slot->kind = group->kinds[index];
+            break;
+        }
+    }
+    ++*spawnCount;
+}
+
+/* Assigns every idle enemy slot its next spawn entry for the current area. */
+extern "C" void FUN_0033ad04(void)
+{
+    EnemySpawnList *list = g_mapEnemy;
+    s32 *spawnCount = &list->spawnCount;
+    list->unk3d84 = 0;
+    for (s32 i = 0; i < 40; i++) {
+        EnemySpawnSlot *slot = &list->slots[i];
+        if (slot->active != 0 && slot->kind != 0 && slot->kind < 11 && slot->locked == 0 &&
+            *spawnCount < 16) {
+            switch (slot->state) {
+            case 0:
+            case 4:
+            case 5:
+                enemySlotSpawn(slot, 0x14, spawnCount);
+                break;
+            case 2:
+                enemySlotSpawn(slot, 0x16, spawnCount);
+                break;
+            }
+        }
+    }
+}

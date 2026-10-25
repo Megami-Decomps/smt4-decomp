@@ -1,4 +1,3 @@
-/* NON_MATCHING: the failed unlock-flag test returns through the r0 = 0 the call left (retail branches to its own "return 0" block), so "mov r0, #1" lands before "add sp". */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
 namespace {
@@ -23,10 +22,7 @@ s32 FUN_004da858(void *owner, u32 id)
     u16 requirement;
     s32 found;
 
-    if (record == NULL) {
-        return 0;
-    }
-    if (record->unlockFlag != 0 && !gameFlagIsSet(record->unlockFlag)) {
+    if (record == NULL || (record->unlockFlag != 0 && !gameFlagIsSet(record->unlockFlag))) {
         return 0;
     }
     requirement = record->saveRequirement;

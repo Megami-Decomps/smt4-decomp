@@ -1,5 +1,5 @@
-/* NON_MATCHING: Retail lsrs r1, r0, #31 differs from recovered tst r0, #-2147483648. */
-#include "common.h"
+/* NON_MATCHING: second failure test uses lsrs r1 (retail r2) and the loop test is cmp r0,r4/bhi (retail cmp r4,r0/bcc). */
+#include "nn/Result.h"
 
 namespace {
 
@@ -25,22 +25,18 @@ extern "C" s32 FUN_00428334(s32 handle, u32 selector, u32 expectedValue)
     EntryRecordView record;
 
     s32 result = FUN_00500254(handle, &countInfo);
-    if ((result & 0x80000000u) != 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
 
-    u32 index = 0;
-    if (countInfo.count != 0) {
-        do {
-            result = FUN_0050028c(handle, &record, selector, 1);
-            if ((result & 0x80000000u) != 0) {
-                return result;
-            }
-            if (record.unk06 != expectedValue) {
-                return -0x36bec740;
-            }
-            ++index;
-        } while (index < countInfo.count);
+    for (u32 index = 0; index < countInfo.count; ++index) {
+        result = FUN_0050028c(handle, &record, selector, 1);
+        if (nnResultIsFailure(result)) {
+            return result;
+        }
+        if (record.unk06 != expectedValue) {
+            return -0x36bec740;
+        }
     }
 
     return 0;

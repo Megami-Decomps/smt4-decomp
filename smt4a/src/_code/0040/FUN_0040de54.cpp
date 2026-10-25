@@ -24,7 +24,7 @@ int asdModelStartReferencedAnimation(...);
 int FUN_004d888c(...);
 int FUN_004e5f2c(...);
 int FUN_004f56cc(...);
-int FUN_004fbd5c(...);
+int btlReflectCreateKind19(...);
 
 int sysPlaySe(...);
 int scrScriptProcessStartEntry(...);
@@ -286,7 +286,7 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: FUN_004fb670. */
 /* Supplied declaration required: FUN_004fb798. */
-/* Supplied declaration required: FUN_004fbd5c. */
+/* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: FUN_004fe7e4. */
 /* Supplied declaration required: FUN_004fe900. */
@@ -1280,7 +1280,7 @@ LAB_0040f684:
                        *(int *)(temp_v3 + 0x1ed4) + (short)puVar6[2] * 0x1d0,0,temp_v12,0xffffffff,
                        0xffffffff,0,0,0,9,0,1,1);
           FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),0x1000267,0,1,0,0);
-          FUN_004fbd5c(0,*(unsigned int *)(psVar2 + 4),(int)*(short *)((int)puVar6 + 0x6e),
+          btlReflectCreateKind19(0,*(unsigned int *)(psVar2 + 4),(int)*(short *)((int)puVar6 + 0x6e),
                        puVar6[0x56]);
           FUN_004e5f2c(g_btlScriptUnit,temp_v8);
           psVar2[0x14] = 1;

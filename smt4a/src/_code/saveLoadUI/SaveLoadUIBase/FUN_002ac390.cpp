@@ -17,7 +17,7 @@ void *asdMemoryAlloc(u32 heap, u32 align, s32 flags, u32 size, s32 fromTop);
 void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
 void *gameDataBlocksGetSaveData(void);
-void rt_memcpy_w(void *dst, const void *src, u32 size);
+void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 void wordPairCopy(void *dst, const void *src);
 
 /* Snapshots the game data table, the config settings and the save data before the save/load UI edits them. */
@@ -37,11 +37,11 @@ void FUN_002ac390(void)
     asdDebugTrace(DAT_00533ec0, 174);
     g_saveLoadUIBase.saveDataBackup = asdMemoryAlloc(0x100, 0x100, 0, 0x2a71c, 1);
     gameData = gameDataBlocksGetTable();
-    rt_memcpy_w(g_saveLoadUIBase.gameDataBackup, gameData, 0x80);
+    __aeabi_memcpy4(g_saveLoadUIBase.gameDataBackup, gameData, 0x80);
     config = configGetSettings();
     wordPairCopy(g_saveLoadUIBase.configBackup, config);
     saveData = gameDataBlocksGetSaveData();
-    rt_memcpy_w(g_saveLoadUIBase.saveDataBackup, saveData, 0x2a71c);
+    __aeabi_memcpy4(g_saveLoadUIBase.saveDataBackup, saveData, 0x2a71c);
 }
 
 } /* extern "C" */

@@ -1,13 +1,37 @@
 /* NON_MATCHING: readable rebuild from asm of the search window's loading-dots draw (title-scene variant of FUN_0023a5f8); armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
-#include "gfx/TitleSceneStack.h"
+#include "gfx/RenderStateStack.h"
 
 /* The title scene (its state stacks live at 0x1258 and 0x12B8). */
 struct TitleScene {
     /* 0x0000 */ u8 unk0000[0x1258];
-    /* 0x1258 */ StateStack firstStack;
+    /* 0x1258 */ RenderStateStack firstStack;
     /* 0x1278 */ u8 unk1278[0x40];
-    /* 0x12B8 */ StateStack secondStack;
+    /* 0x12B8 */ RenderStateStack secondStack;
 };
+
+/* Pushes the evaluated state on the title scene's first stack. */
+static __inline void titleScenePushFirst(TitleScene *scene, s32 state)
+{
+    renderStackPushCounted(&scene->firstStack, state);
+}
+
+/* Pushes the evaluated state on the title scene's second stack. */
+static __inline void titleScenePushSecond(TitleScene *scene, s32 state)
+{
+    renderStackPushCounted(&scene->secondStack, state);
+}
+
+/* Pops the title scene's first stack. */
+static __inline void titleScenePopFirst(TitleScene *scene)
+{
+    renderStackPop(&scene->firstStack);
+}
+
+/* Pops the title scene's second stack. */
+static __inline void titleScenePopSecond(TitleScene *scene)
+{
+    renderStackPop(&scene->secondStack);
+}
 
 /* The run window (only the fields read here). */
 struct RunWin {
@@ -54,17 +78,15 @@ u8 FUN_0023a5f8(void)
     if (win->active != 0 && win->visible != 0) {
         FUN_00157558(g_renderCtx);
         TitleScene *first = g_renderCtx;
-        u32 firstState = FUN_001692ac(1, 0);
-        stateStackPush(&first->firstStack, firstState);
+        titleScenePushFirst(first, FUN_001692ac(1, 0));
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         FUN_00164b5c(2, 8, 0x14, x, y, 101);
         TitleScene *scene = g_renderCtx;
-        s32 state = packNibblesAndByte(6, 1, 0);
-        stateStackPush(&scene->secondStack, state);
+        titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         FUN_00164b5c(2, 8, 0x15, x, y, 102);
-        stateStackPop(&g_renderCtx->secondStack);
+        titleScenePopSecond(g_renderCtx);
         LayoutPoint *labelPoint = FUN_001834a4(8, 0x16F);
         FUN_00162790(4, 0x57D8FFFF, win->label, (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
@@ -87,7 +109,7 @@ u8 FUN_0023a5f8(void)
         }
         FUN_00183bb0();
         efctSetSpeed(1.0f);
-        stateStackPop(&g_renderCtx->firstStack);
+        titleScenePopFirst(g_renderCtx);
     }
     return 0;
 }

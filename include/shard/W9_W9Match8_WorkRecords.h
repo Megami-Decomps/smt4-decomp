@@ -819,7 +819,9 @@ struct SaveSlotTransitionPrefixA {
     u8 unk38b4;
     u8 zeroInputCase; /* 0x38b5 */
     u8 option; /* 0x38b6 */
-    u8 unk38b7[0x12f1];
+    u8 unk38b7[2];
+    s8 transitionBusy; /* 0x38b9 */
+    u8 unk38ba[0x12ee];
     u8 selectedSlotEligible; /* 0x4ba8 */
 };
 typedef char SaveSlotTransitionPrefixALayoutCheck[

@@ -14,7 +14,7 @@ extern AsdGfxContext g_asdGfxContext;
 extern u32 *g_commandBufferCursor;
 extern u32 *g_commandBufferEnd;
 
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void nngxLockEnter(void);
 void nngxLockLeave(void);
@@ -46,7 +46,7 @@ void FUN_001373f0(u32 handle, AsdCmdChunk *chunk)
     if (g_asdGfxContext.cmdBuffer == buffer) {
         buffer->writeOffset = (u8 *)g_commandBufferCursor - buffer->start;
     }
-    rt_memcpy_w(&buffer->entries[buffer->listCount], chunk->data + chunk->dataBytes, chunk->recordCount * sizeof(AsdCmdRecord));
+    __aeabi_memcpy4(&buffer->entries[buffer->listCount], chunk->data + chunk->dataBytes, chunk->recordCount * sizeof(AsdCmdRecord));
     for (i = 0; i < chunk->recordCount; i++) {
         AsdCmdRecord *record = &buffer->entries[buffer->listCount + i];
 

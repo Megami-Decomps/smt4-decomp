@@ -5,7 +5,7 @@ extern void *g_camp;
 PlayerInitialRecordIV *gameGetPlayerData();
 u32 FUN_0029efc0(const void *selector);
 u32 FUN_0029efa8(const void *selector);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00299370(PlayerInitialRecordIV *player);
 void FUN_0029a0cc(PlayerInitialRecordIV *player);
 void FUN_0029c4ac(s32 mode);
@@ -39,7 +39,7 @@ void campPreviewSelectedEquipment(s32 category)
     u32 selected = FUN_0029efc0(selector);
     selected += FUN_0029efa8(selector);
     PlayerInitialRecordIV preview;
-    rt_memcpy_w(&preview, player, sizeof(preview));
+    __aeabi_memcpy4(&preview, player, sizeof(preview));
     if (category == 17) preview.equipment[0] = choices[selected];
     else if (category == 18) preview.equipment[1] = choices[selected];
     else if (category == 19) preview.equipment[2] = choices[selected];

@@ -6,7 +6,7 @@ extern "C" {
 
 int asdDebugLog(...);
 int effEditorNodeChainApply(unsigned char *);
-int FUN_0024dd80(...);
+int padAlternateButtonIndex(...);
 int FUN_0024dd90(unsigned char *);
 int effMenuListAppend(void);
 int FUN_002826d4(int, int, int, int, unsigned int, unsigned int);
@@ -51,7 +51,7 @@ extern float DAT_004d92c0; /* 0x4d92c0 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002826d4. */
@@ -137,21 +137,21 @@ unsigned char * FUN_0024293c(unsigned int *param_1,int param_2)
     else {
       temp_v2 = padIsButtonRepeat(3);
       if (temp_v2 == 0) {
-        FUN_0024dd80(3);
+        padAlternateButtonIndex(3);
         temp_v2 = padIsButtonRepeat();
         if (temp_v2 != 0) goto LAB_00242a4c;
         temp_v2 = padIsButtonRepeat(4);
         if (temp_v2 == 0) {
-          FUN_0024dd80(4);
+          padAlternateButtonIndex(4);
           temp_v2 = padIsButtonRepeat();
           if (temp_v2 == 0) {
             temp_v2 = padIsButtonRepeat(5);
             puVar8 = &DAT_00400001;
             if (temp_v2 == 0) {
-              FUN_0024dd80(5);
+              padAlternateButtonIndex(5);
               temp_v2 = padIsButtonRepeat();
               if ((temp_v2 == 0) && (temp_v2 = padIsButtonRepeat(6), temp_v2 == 0)) {
-                FUN_0024dd80(6);
+                padAlternateButtonIndex(6);
                 temp_v2 = padIsButtonRepeat();
                 temp_v8 = DAT_004d92bc;
                 if (temp_v2 == 0) goto LAB_00242b34;
@@ -300,7 +300,7 @@ LAB_00242b34:
   asdDebugLog(0xa4,0x8c,8,&LAB_00242f8c,temp_v16);
   temp_v2 = padIsButtonPressed(1);
   if (temp_v2 == 0) {
-    FUN_0024dd80(1);
+    padAlternateButtonIndex(1);
     temp_v2 = padIsButtonPressed();
     if (temp_v2 == 0) {
       return puVar8;

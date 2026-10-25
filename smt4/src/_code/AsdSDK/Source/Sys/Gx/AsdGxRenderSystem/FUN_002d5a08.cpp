@@ -1,211 +1,169 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d5a08` (_code @ 0x2d5a08, 0x410 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation (retail does not spill the argument registers) and the format-classification branch layout differ */
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/AsdDebug.h"
+
+/* Memory heaps a render target's surfaces can live in. */
+#define ASD_HEAP_VRAM_A 0x10000
+#define ASD_HEAP_VRAM_B 0x20000
+#define ASD_HEAP_FCRAM 0x30000
+
+/* The pixel formats the surfaces are described with (OpenGL enumerators). */
+#define GL_DEPTH_COMPONENT16 0x81a5
+#define GL_RGBA4 0x8056
+#define GL_RGB5_A1 0x8057
+#define GL_RGBA8 0x8058
+#define GL_DEPTH24_STENCIL8 0x88f0
+#define GL_RGB565 0x8d62
+
+/* One surface of a render target: its format, mode, buffer and size. */
+struct RenderSurface {
+    /* 0x00 */ u32 format;
+    /* 0x04 */ u32 mode;
+    /* 0x08 */ void *buffer;
+    /* 0x0c */ u32 physicalAddress;
+    /* 0x10 */ s32 size;
+    /* 0x14 */ u32 extra;
+};
+
+/* The color and depth surfaces of a render target. */
+struct RenderSurfacePair {
+    RenderSurface color;
+    RenderSurface depth;
+};
+
+/* A render target: the surface pair, the depth view, the buffer and the texture. */
+struct RenderTarget {
+    /* 0x00 */ RenderSurfacePair *surfaces;
+    /* 0x04 */ RenderSurface *depth;
+    /* 0x08 */ void *buffer;
+    /* 0x0c */ AsdTexture *texture;
+    /* 0x10 */ u32 unk10;
+};
 
 extern "C" {
+extern const char DAT_00409a68[];
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
+void *asdMemoryAllocAligned(u32 heap, u32 alignment, u32 region, u32 size, u32 pageAlignment, u32 option);
+AsdTexture *asdTextureCreate(u32 option);
+void FUN_002a66e0(u32 format, u32 pixelType, u32 *hardwareFormat);
+u32 osVirtToPhysAddress(void *address);
 
-int FUN_002a66e0(int, int, int);
-int osVirtToPhysAddress(void);
-int asdTextureCreate(void);
-int asdMemoryAllocAligned(...);
-int asdMemoryAlloc(...);
-
-/* stack frame of param_7: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_7_stack;
-
-/* Supplied declaration required: FUN_002a66e0. */
-/* Supplied declaration required: osVirtToPhysAddress. */
-/* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-int * FUN_002d5a08(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
-                  int param_7)
-
+/* The internal pixel format a texture (format, type) pair is stored as, or 0. */
+static __inline u32 renderInternalFormat(u32 format, u32 pixelType)
 {
-/* irregular: 1 goto(s); 5 native warning(s); review required */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  
-  piVar1 = (int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x14,1);
-  piVar2 = (int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x30,1);
-  temp_v0 = 0;
-  asdTextureCreate();
-  piVar1[3] = temp_v0;
-  *(int *)(temp_v0 + 0x14) = param_1;
-  *(int *)(piVar1[3] + 0x18) = param_2;
-  *(unsigned int *)(piVar1[3] + 4) = 0xde1;
-  *(int *)(piVar1[3] + 8) = param_3;
-  *(unsigned int *)(piVar1[3] + 0xc) = 0x2000000;
-  FUN_002a66e0(param_4,param_5,piVar1[3] + 0x34);
-  temp_v1 = 0;
-  if (param_4 != 0x6752) {
-    if (param_4 < 0x6752) {
-      temp_v0 = param_4 - 0x1907;
-      if (temp_v0 != 0) {
-        if (temp_v0 == 1) goto LAB_002d5b24;
-        temp_v8 = temp_v0 != 3;
-        if (temp_v8) {
-          temp_v0 = param_4 - 0x6607;
+    if (format == 0x6752) {
+    } else if (format < 0x6752) {
+        u32 offset = format - 0x1907;
+        if (offset != 0) {
+            if (offset != 1) {
+                if (offset == 3 || format - 0x6607 == 0xf9) {
+                    return GL_RGBA4;
+                }
+                return 0;
+            }
+        } else {
+            if (pixelType == 0x8363) {
+                return GL_RGB565;
+            }
+            return 0;
         }
-        if (!temp_v8 || temp_v0 == 0xf9) {
-          temp_v1 = 0x8056;
+    } else if (format != 0x6754) {
+        if (format == 0x6758 || format == 0x6759) {
+            return GL_RGBA4;
         }
-      }
-      else if (param_5 == 0x8363) {
-        temp_v1 = 0x8d62;
-      }
-    }
-    else if (param_4 != 0x6754) {
-      if (!(param_4 != 0x6758 && param_4 != 0x6759)) {
-        temp_v1 = 0x8056;
-      }
-    }
-    else if (param_5 == 0x8363) {
-      temp_v1 = 0x8d62;
-    }
-  }
-  else {
-LAB_002d5b24:
-    if (param_5 == 0x1401) {
-      temp_v1 = 0x8058;
-    }
-    else if (param_5 != 0x8033) {
-      if (param_5 == 0x8034) {
-        temp_v1 = 0x8057;
-      }
-    }
-    else {
-      temp_v1 = 0x8056;
-    }
-  }
-  temp_v4 = 0;
-  temp_v6 = 0;
-  temp_v0 = param_1 * param_2 * 2;
-  temp_v7 = param_1 * param_2 * 4;
-  temp_v2 = temp_v0;
-  if (temp_v1 != 0x81a5) {
-    temp_v2 = 0;
-    if (temp_v1 < 0x81a5) {
-      if (temp_v1 == 0x8056) {
-        temp_v4 = 4;
-        temp_v2 = temp_v0;
-      }
-      else if (temp_v1 == 0x8057) {
-        temp_v4 = 2;
-        temp_v2 = temp_v0;
-      }
-      else if (temp_v1 == 0x8058) {
-        temp_v6 = 2;
-        temp_v2 = temp_v7;
-      }
-    }
-    else {
-      temp_v5 = temp_v7;
-      if ((temp_v1 == 0x88f0) || (temp_v5 = temp_v0, temp_v1 == 0x8d62)) {
-        temp_v4 = 3;
-        temp_v2 = temp_v5;
-      }
-    }
-  }
-  piVar2[1] = temp_v4;
-  piVar2[4] = temp_v2;
-  temp_v4 = 0;
-  *piVar2 = param_4;
-  if (param_3 != 0x10000) {
-    if (param_3 != 0x20000) {
-      if (param_3 == 0x30000) {
-        temp_v4 = 0x30000;
-        asdMemoryAlloc(temp_v4,0x100,0,temp_v2,1);
-      }
-    }
-    else {
-      temp_v4 = 0x20000;
-      asdMemoryAlloc(temp_v4,0x100,0,temp_v2,1);
-    }
-  }
-  else {
-    temp_v4 = 0x10000;
-    asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
-  }
-  piVar2[2] = temp_v4;
-  temp_v2 = osVirtToPhysAddress();
-  piVar2[3] = temp_v2;
-  piVar2[5] = temp_v6;
-  piVar1[2] = piVar2[2];
-  temp_v3 = osVirtToPhysAddress();
-  temp_v6 = 0;
-  *(unsigned int *)(piVar1[3] + 0x30) = temp_v3;
-  temp_v4 = 0;
-  temp_v2 = temp_v0;
-  if (param_6 != 0x81a5) {
-    if (param_6 < 0x81a5) {
-      if (param_6 == 0x8056) {
-        temp_v4 = 4;
-      }
-      else if (param_6 == 0x8057) {
-        temp_v4 = 2;
-      }
-      else {
-        temp_v2 = 0;
-        if (param_6 == 0x8058) {
-          temp_v6 = 2;
-          temp_v2 = temp_v7;
+        return 0;
+    } else {
+        if (pixelType == 0x8363) {
+            return GL_RGB565;
         }
-      }
+        return 0;
     }
-    else if ((param_6 == 0x88f0) || (temp_v2 = 0, temp_v7 = temp_v0, param_6 == 0x8d62)) {
-      temp_v4 = 3;
-      temp_v2 = temp_v7;
+    if (pixelType == 0x1401) {
+        return GL_RGBA8;
     }
-  }
-  piVar2[7] = temp_v4;
-  piVar2[6] = param_4;
-  piVar2[10] = temp_v2;
-  temp_v0 = 0;
-  if (param_7 != 0x10000) {
-    if (param_7 != 0x20000) {
-      if (param_7 != 0x30000) {
-        piVar2[8] = temp_v0;
-        temp_v0 = osVirtToPhysAddress();
-        piVar2[9] = temp_v0;
-        piVar2[0xb] = temp_v6;
-        piVar1[1] = (int)(piVar2 + 6);
-        *piVar1 = (int)piVar2;
-        return piVar1;
-      }
-      temp_v0 = 0x30000;
+    if (pixelType == 0x8033) {
+        return GL_RGBA4;
     }
-    else {
-      temp_v0 = 0x20000;
+    if (pixelType == 0x8034) {
+        return GL_RGB5_A1;
     }
-    asdMemoryAlloc(temp_v0,0x100,0,temp_v2,1);
-  }
-  else {
-    temp_v0 = 0x10000;
-    asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
-  }
-  piVar2[8] = temp_v0;
-  temp_v0 = osVirtToPhysAddress();
-  piVar2[9] = temp_v0;
-  piVar2[0xb] = temp_v6;
-  piVar1[1] = (int)(piVar2 + 6);
-  *piVar1 = (int)piVar2;
-  return piVar1;
+    return 0;
+}
+
+/* Fills the format-dependent parts of a surface for a width x height target. */
+static __inline void renderDescribeSurface(RenderSurface *surface, u32 internalFormat, s32 pixels)
+{
+    u32 mode = 0;
+    u32 extra = 0;
+    s32 size = pixels * 2;
+    if (internalFormat != GL_DEPTH_COMPONENT16) {
+        size = 0;
+        if (internalFormat < GL_DEPTH_COMPONENT16) {
+            if (internalFormat == GL_RGBA4) {
+                mode = 4;
+                size = pixels * 2;
+            } else if (internalFormat == GL_RGB5_A1) {
+                mode = 2;
+                size = pixels * 2;
+            } else if (internalFormat == GL_RGBA8) {
+                extra = 2;
+                size = pixels * 4;
+            }
+        } else if (internalFormat == GL_DEPTH24_STENCIL8 || internalFormat == GL_RGB565) {
+            mode = 3;
+            size = internalFormat == GL_DEPTH24_STENCIL8 ? pixels * 4 : pixels * 2;
+        }
+    }
+    surface->mode = mode;
+    surface->size = size;
+    surface->extra = extra;
+}
+
+/* Allocates a surface's pixel buffer from the heap the target lives in (none for other heaps). */
+static __inline void *renderAllocSurface(u32 heap, s32 size)
+{
+    if (heap == ASD_HEAP_VRAM_A) {
+        return asdMemoryAllocAligned(heap, 0x100, 0, size, 0x40, 1);
+    }
+    if (heap == ASD_HEAP_VRAM_B || heap == ASD_HEAP_FCRAM) {
+        return asdMemoryAlloc(heap, 0x100, 0, size, 1);
+    }
+    return NULL;
+}
+
+/* Creates a render target of width x height: a texture bound to a color surface and a depth
+   surface, both allocated from the given heaps. */
+RenderTarget *FUN_002d5a08(s32 width, s32 height, u32 heap, u32 format, u32 pixelType, u32 depthFormat,
+                           u32 depthHeap)
+{
+    asdDebugTrace(DAT_00409a68, 473);
+    RenderTarget *target = (RenderTarget *)asdMemoryAlloc(0x100, 0x100, 0, 0x14, 1);
+    asdDebugTrace(DAT_00409a68, 474);
+    RenderSurfacePair *surfaces = (RenderSurfacePair *)asdMemoryAlloc(0x100, 0x100, 0, 0x30, 1);
+    target->texture = asdTextureCreate(0);
+    target->texture->dimensions.width = width;
+    target->texture->dimensions.height = height;
+    target->texture->target = ASDTEXTURE_TARGET_2D;
+    target->texture->unk08 = heap;
+    target->texture->image.flags = 0x2000000;
+    FUN_002a66e0(format, pixelType, &target->texture->image.hardwareFormat);
+
+    s32 pixels = width * height;
+    u32 internalFormat = renderInternalFormat(format, pixelType);
+    renderDescribeSurface(&surfaces->color, internalFormat, pixels);
+    surfaces->color.format = format;
+    surfaces->color.buffer = renderAllocSurface(heap, surfaces->color.size);
+    surfaces->color.physicalAddress = osVirtToPhysAddress(surfaces->color.buffer);
+    target->buffer = surfaces->color.buffer;
+    target->texture->image.physicalAddress = osVirtToPhysAddress(target->buffer);
+
+    renderDescribeSurface(&surfaces->depth, depthFormat, pixels);
+    surfaces->depth.format = format;
+    surfaces->depth.buffer = renderAllocSurface(depthHeap, surfaces->depth.size);
+    surfaces->depth.physicalAddress = osVirtToPhysAddress(surfaces->depth.buffer);
+    target->depth = &surfaces->depth;
+    target->surfaces = surfaces;
+    return target;
 }
 
 } /* extern "C" */

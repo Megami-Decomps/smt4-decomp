@@ -10,7 +10,7 @@ struct EquipmentDetailGlyphTable {
 
 extern "C" {
 extern const EquipmentDetailPair DAT_00588ef0[];
-extern const EquipmentDetailPair DAT_00588f28[];
+extern const EquipmentDetailPair g_shopTabNeighbors[];
 extern const EquipmentDetailGlyphTable g_equipMenuStateHandlerInit;
 s32 gameFlagIsSet(u32);
 void FUN_0049368c(const AsdTextureRegion *, u32, s32, s32, u32, u32);
@@ -28,11 +28,11 @@ void FUN_00494574(EquipmentMenuState *work, s32 selection)
     if (work->sound.mode != 1) {
         pair = DAT_00588ef0[work->page];
     } else {
-        pair = DAT_00588f28[work->page];
+        pair = g_shopTabNeighbors[work->page];
         if (work->page == 0 && (work->sound.restricted || !gameFlagIsSet(0x410)))
-            pair = DAT_00588f28[8];
+            pair = g_shopTabNeighbors[8];
         else if (work->page == 3 && (work->sound.restricted || !gameFlagIsSet(0x410)))
-            pair = DAT_00588f28[9];
+            pair = g_shopTabNeighbors[9];
     }
     u32 glyphs[16];
     memcpy(glyphs, g_equipMenuStateHandlerInit.glyphs, sizeof(glyphs));

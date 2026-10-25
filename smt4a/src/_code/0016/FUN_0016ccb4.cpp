@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy_w(unsigned int *, unsigned char [152], int);
+int __aeabi_memcpy4(unsigned int *, unsigned char [152], int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int DAT_006428e4; /* 0x6428e4 */
 
 extern int *FUN_0016ccfc(void);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0016ccb4(void)
@@ -27,7 +27,7 @@ void FUN_0016ccb4(void)
   
   piVar1 = (int *)FUN_0016ccfc();
   *piVar1 = *piVar1 + 1;
-  rt_memcpy_w(&DAT_006428e4,temp_v0,0x9c);
+  __aeabi_memcpy4(&DAT_006428e4,temp_v0,0x9c);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

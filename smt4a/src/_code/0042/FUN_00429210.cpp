@@ -34,7 +34,7 @@ extern u8 DAT_0061b000[];
 s32 FUN_00427e68(u32 token, u32 operation);
 void *FUN_0016ccfc(void);
 s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 token);
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void sysFatalBreak(void);
 s32 FUN_00427e28(u32 *operation, void *packet, u32 flags);
@@ -53,7 +53,7 @@ WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *for
         AsyncTransferContext *context;
         result = tokenResolveAddress(FUN_0016ccfc(), &context, *token);
         if (!nnResultIsFailure(result)) {
-            rt_memcpy_w(&DAT_0061b030, context->metadata, sizeof(context->metadata));
+            __aeabi_memcpy4(&DAT_0061b030, context->metadata, sizeof(context->metadata));
             u32 encoding;
             switch (format->format) {
             case 0: encoding = 0x8C; break;

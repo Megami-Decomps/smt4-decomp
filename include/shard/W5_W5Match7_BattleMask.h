@@ -55,7 +55,7 @@ struct BattleMaskState {
         /* 0x45a8 */ u8 unk45a8[0x730];
         struct {
             /* 0x45a8 */ u8 unk45a8BeforeActive[0x729];
-            /* 0x4cd1 */ u8 present;
+            /* 0x4cd1 */ s8 present;
         } activeEntry;
         struct {
             /* 0x45a8 */ u8 unk45a8BeforeSelected[0x724];

@@ -28,7 +28,7 @@ extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
 BtlMainStateA *btlGetMainState(void);
 void *asdMemoryAllocTracked(u32 alignment, u32 granularity, s32 heap, u32 bytes, s32 clear);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 char *libc_strcpy(char *destination, const char *source);
 
 BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8 mode)
@@ -51,7 +51,7 @@ BtlHelpEntryA *FUN_004c9538(u32 id, const void *payload, const char *caption, u8
     entry->phase = 0;
     entry->id = id;
     entry->context = context;
-    rt_memcpy_w(entry->payload, payload, sizeof(entry->payload));
+    __aeabi_memcpy4(entry->payload, payload, sizeof(entry->payload));
     entry->mode = mode;
     entry->counter = 0;
     entry->row = 13;

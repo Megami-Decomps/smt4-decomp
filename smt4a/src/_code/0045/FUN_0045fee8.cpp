@@ -6,7 +6,7 @@ extern "C" {
 
 int listAppendNode(int, int);
 int objectCommandReserveWords(int, int);
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
 /* Supplied declaration required: objectCommandReserveWords. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0045fee8(int param_1,int param_2)
@@ -33,7 +33,7 @@ void FUN_0045fee8(int param_1,int param_2)
   *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
   *(unsigned char *)(temp_v1 + 4) = 0x27;
   *(int *)(temp_v1 + 0x10) = param_1 + 0x118;
-  rt_memcpy_w(temp_v1 + 0x14,param_2,0x50);
+  __aeabi_memcpy4(temp_v1 + 0x14,param_2,0x50);
   listAppendNode(temp_v0,temp_v1);
   return;
 }

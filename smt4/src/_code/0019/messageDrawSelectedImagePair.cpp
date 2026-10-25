@@ -1,7 +1,6 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 23 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: the owner/alpha parameter copies land in swapped callee-saved registers (r5/r6). */
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
-#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
@@ -34,6 +33,6 @@ void messageDrawSelectedImagePair(const MessageImageSelector *owner, const f32 *
     FUN_002bf288(2, 0x39, images.pairs[owner->selection].second, depth, 0, 12);
     renderStackPop(&g_titleScene->stackA);
     FUN_002c198c(g_titleScene);
-    FUN_002c18e4(static_cast<RenderCtx *>(asdDebugHookPass(g_titleScene)));
+    FUN_002c18e4(g_titleScene);
 }
 }

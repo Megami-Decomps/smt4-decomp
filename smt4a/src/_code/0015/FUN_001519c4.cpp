@@ -5,6 +5,7 @@
 extern "C" {
 extern MessageGlobalsA g_messageMain;
 void efctSetSpeed(f32);
+f32 vec2GetSpeed(const void *object);
 void FUN_001835b4(s32, s32, u32, s32, s32, s32);
 }
 
@@ -12,11 +13,11 @@ void FUN_001835b4(s32, s32, u32, s32, s32, s32);
 extern "C" void FUN_001519c4(u32 first, u32 second, u32 accent, u32 last)
 {
     MessagePanelA *panel = g_messageMain.panel;
-    f32 speed = ((const UiSpriteState *)panel->spritesCA4[20])->unk20;
+    f32 speed = vec2GetSpeed(panel->spritesCA4[20]);
     efctSetSpeed(speed);
     FUN_001835b4(2, 4, first, 0, 0, 241);
     FUN_001835b4(2, 4, second, 0, 0, 241);
-    efctSetSpeed(((const UiSpriteState *)panel->spritesCA4[16])->unk20 * speed);
+    efctSetSpeed(vec2GetSpeed(panel->spritesCA4[16]) * speed);
     FUN_001835b4(2, 4, accent, 0, 0, 241);
     efctSetSpeed(speed);
     FUN_001835b4(2, 4, last, 0, 0, 241);

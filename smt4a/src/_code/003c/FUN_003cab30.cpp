@@ -1,4 +1,3 @@
-/* NON_MATCHING: mask-load grouping and register pressure differ, changing saved registers and stack padding. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -30,7 +29,7 @@ u32 FUN_003cab30(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
-            !(entry->flags & g_btlCandidateMasks.excluded)) {
+            !(g_btlCandidateMasks.excluded & entry->flags)) {
             const BattleCandidateCounterView *counters = (const BattleCandidateCounterView *)entry;
             if (counters->primary > 0 || counters->secondary > 0) {
                 scrSetResult(1);

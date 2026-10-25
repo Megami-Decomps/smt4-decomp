@@ -3,7 +3,7 @@
 
 extern "C" {
 void rt_memcpy(void *destination, const void *source, u32 bytes);
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 }
 
 // Builds a fading vertex strip: one base strip with `segments + 1` vertices whose alpha ramps in and out, then copies
@@ -61,7 +61,7 @@ extern "C" void FUN_00326c0c(StripOwnerView *owner, StripParameters *params)
     for (u32 repeat = 1; repeat < repeatCount; repeat++) {
         rt_memcpy(color, baseColors, vertexCount * sizeof(StripColor));
         color += vertexCount;
-        rt_memcpy_w(coords, baseCoords, vertexCount * sizeof(StripCoords));
+        __aeabi_memcpy4(coords, baseCoords, vertexCount * sizeof(StripCoords));
         coords += vertexCount;
     }
 }

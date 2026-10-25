@@ -13,7 +13,7 @@ s32 FUN_00299fc0();
 s32 FUN_002ae3c0(u32);
 void FUN_0029963c(u32, u16);
 const PlayerEquipmentPreview *gameGetPlayerData();
-void *rt_memcpy_w(void *, const void *, u32);
+void *__aeabi_memcpy4(void *, const void *, u32);
 void FUN_00299370(PlayerEquipmentPreview *);
 void FUN_0029a0cc(PlayerEquipmentPreview *);
 
@@ -45,7 +45,7 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
     if (scene->state && scene->equipmentPreview.item != item) {
         scene->equipmentPreview.item = item;
         PlayerEquipmentPreview player;
-        rt_memcpy_w(&player, gameGetPlayerData(), sizeof(player));
+        __aeabi_memcpy4(&player, gameGetPlayerData(), sizeof(player));
         if (item) {
             switch (FUN_002ae3c0(item)) {
             case 2: player.equipment[0] = item; break;

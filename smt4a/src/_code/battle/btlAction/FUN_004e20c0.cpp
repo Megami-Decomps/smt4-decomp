@@ -32,8 +32,8 @@ void FUN_004fd1b8(int actor, unsigned int flags, unsigned int value,
                   unsigned int parameter, unsigned int auxiliary);
 int FUN_004fec2c(...);
 int btlReflectCreateKind41(...);
-int FUN_0050d740(...);
-int rt_memcpy_w(...);
+int ARM_common_memcpy4_7(...);
+int __aeabi_memcpy4(...);
 
 int FUN_003e8bb0(...);
 int FUN_003f21ec(void);
@@ -65,10 +65,10 @@ int FUN_003f2aac(...);
 int FUN_004bf348(...);
 int FUN_004bfa30(unsigned int *, unsigned int, int, int, int);
 int FUN_004bfcfc(unsigned int *, unsigned int, unsigned int, int, int, int);
-int FUN_004c0834(int);
+int mathScaleByCategory(int);
 int FUN_004c1598(int, int);
 int FUN_004c16c8(...);
-int FUN_004c3d78(...);
+int mathScaleByCategoryEnabled(...);
 int FUN_004c4604(...);
 int FUN_004e5a40(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -252,7 +252,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_004bf348. */
 /* Supplied declaration required: FUN_004bfa30. */
 /* Supplied declaration required: FUN_004bfcfc. */
-/* Supplied declaration required: FUN_004c0834. */
+/* Supplied declaration required: mathScaleByCategory. */
 /* Supplied declaration required: FUN_004c14c8. */
 /* Supplied declaration required: FUN_004c1598. */
 /* Supplied declaration required: FUN_004c16c8. */
@@ -261,7 +261,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: btlCombatantGetSummaryValues. */
-/* Supplied declaration required: FUN_004c3d78. */
+/* Supplied declaration required: mathScaleByCategoryEnabled. */
 /* Supplied declaration required: btlEntryGetSummaryRatio. */
 /* Supplied declaration required: FUN_004c4604. */
 /* Supplied declaration required: btlDowngradeRandomResistance. */
@@ -273,7 +273,7 @@ extern int btlGetPropertyMaximum(void);
 /* Supplied declaration required: FUN_004c5ec0. */
 /* Supplied declaration required: btlSelectActionTier. */
 extern int FUN_004c65e8(int);
-extern int FUN_004c6b5c(int, int);
+extern int valueRangeSameSide(int, int);
 extern int FUN_004c6b8c(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_004c8340. */
 /* Supplied declaration required: halfTable152TopIs2. */
@@ -304,8 +304,8 @@ extern int FUN_004f9ae4(int, unsigned int);
 /* Supplied declaration required: FUN_004fe764. */
 /* Supplied declaration required: FUN_004fec2c. */
 /* Supplied declaration required: btlReflectCreateKind41. */
-/* Supplied declaration required: FUN_0050d740. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: ARM_common_memcpy4_7. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsigned int *param_4,unsigned int param_5,
@@ -486,11 +486,11 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
   temp_v47 = puVar9;
   if (puVar9 != (unsigned int *)0x1) {
     if (puVar9 == (unsigned int *)0x2) {
-      FUN_004c0834(param_7);
+      mathScaleByCategory(param_7);
     }
   }
   else {
-    FUN_004c3d78(param_7,1);
+    mathScaleByCategoryEnabled(param_7,1);
   }
   if (param_2[0xc] == 4) {
     temp_v7 = param_2[0x160];
@@ -609,7 +609,7 @@ void FUN_004e20c0(unsigned int *param_1,unsigned int *param_2,int param_3,unsign
     temp_v88 = puVar13;
     if (temp_v47 == (unsigned int *)0x1) {
       temp_v18 = (unsigned int)temp_v20;
-      FUN_004c3d78(param_7,0);
+      mathScaleByCategoryEnabled(param_7,0);
       temp_v20 = romwright_piece_4_4((int)((unsigned long long)temp_v20 >> 0x20),temp_v18);
     }
     temp_v47 = (unsigned int *)0x0;
@@ -1194,7 +1194,7 @@ LAB_004e34b8:
           break;
         case (unsigned int)0x1:
           temp_v18 = 0x4e3f88;
-          FUN_0050d740(&temp_v61,temp_v18);
+          ARM_common_memcpy4_7(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x2:
           temp_v18 = 0x4e3f90;
@@ -1202,17 +1202,17 @@ LAB_004e34b8:
           break;
         case (unsigned int)0x3:
           temp_v18 = 0x4e3f9c;
-          FUN_0050d740(&temp_v61,temp_v18);
+          ARM_common_memcpy4_7(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x4:
           temp_v18 = 0x4e3fa4;
           ARM_common_memcpy4_9(&temp_v61,temp_v18);
           break;
         case (unsigned int)0x5:
-          rt_memcpy_w(&temp_v61,&LAB_004e3fb0,0xb);
+          __aeabi_memcpy4(&temp_v61,&LAB_004e3fb0,0xb);
           break;
         case (unsigned int)0x6:
-          rt_memcpy_w(&temp_v61,&LAB_004e3fbc,0xb);
+          __aeabi_memcpy4(&temp_v61,&LAB_004e3fbc,0xb);
           break;
         case (unsigned int)0x7:
           temp_v18 = 0x4e3fc8;
@@ -1282,7 +1282,7 @@ LAB_004e34b8:
         break;
       case (unsigned int)0x1:
         temp_v18 = 0x4e3f88;
-        FUN_0050d740(&temp_v23,temp_v18);
+        ARM_common_memcpy4_7(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x2:
         temp_v18 = 0x4e3f90;
@@ -1290,17 +1290,17 @@ LAB_004e34b8:
         break;
       case (unsigned int)0x3:
         temp_v18 = 0x4e3f9c;
-        FUN_0050d740(&temp_v23,temp_v18);
+        ARM_common_memcpy4_7(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x4:
         temp_v18 = 0x4e3fa4;
         ARM_common_memcpy4_9(&temp_v23,temp_v18);
         break;
       case (unsigned int)0x5:
-        rt_memcpy_w(&temp_v23,&LAB_004e3fb0,0xb);
+        __aeabi_memcpy4(&temp_v23,&LAB_004e3fb0,0xb);
         break;
       case (unsigned int)0x6:
-        rt_memcpy_w(&temp_v23,&LAB_004e3fbc,0xb);
+        __aeabi_memcpy4(&temp_v23,&LAB_004e3fbc,0xb);
         break;
       case (unsigned int)0x7:
         temp_v18 = 0x4e3fc8;
@@ -1435,7 +1435,7 @@ LAB_004e4280:
         if (temp_v47 == (unsigned int *)0x1 && puVar9 == (unsigned int *)0x1) {
           temp_v18 = (unsigned int)temp_v20;
           temp_v47 = (unsigned int *)0x0;
-          FUN_004c3d78(param_7,0);
+          mathScaleByCategoryEnabled(param_7,0);
           temp_v20 = romwright_piece_4_4((int)((unsigned long long)temp_v20 >> 0x20),temp_v18);
         }
       }
@@ -1753,7 +1753,7 @@ LAB_004e4cac:
   if (temp_v6 == 0) {
     if ((temp_v92 != 0) && (param_2[0xc] == 0)) {
       temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
-      if ((temp_v12 == 0) && (temp_v12 = FUN_004c6b5c(param_7,param_8), temp_v12 == 0)) {
+      if ((temp_v12 == 0) && (temp_v12 = valueRangeSameSide(param_7,param_8), temp_v12 == 0)) {
         temp_v13 = *param_1;
         FUN_003f0e20(temp_v13,param_8);
         if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
@@ -1764,7 +1764,7 @@ LAB_004e4cac:
         }
       }
       temp_v12 = FUN_004e83ac(param_1,param_2,param_7);
-      if ((temp_v12 == 0) && (temp_v12 = FUN_004c6b5c(param_7,param_8), temp_v12 == 0)) {
+      if ((temp_v12 == 0) && (temp_v12 = valueRangeSameSide(param_7,param_8), temp_v12 == 0)) {
         temp_v12 = 0;
         do {
           temp_v13 = *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v12 * 0x1d0 + 0x50);
@@ -1775,7 +1775,7 @@ LAB_004e4cac:
             temp_v5 = param_8;
           }
           if (((temp_v14 && temp_v15) && temp_v12 != param_8) &&
-             (temp_v5 = FUN_004c6b5c(temp_v12,temp_v5), temp_v5 != 0)) {
+             (temp_v5 = valueRangeSameSide(temp_v12,temp_v5), temp_v5 != 0)) {
             temp_v13 = *param_1;
             FUN_003f0e20(temp_v13,temp_v12);
             if (((*(unsigned short *)(temp_v13 + 0x274) & 0x11c0) == 0) &&
@@ -1898,7 +1898,7 @@ LAB_004e5308:
         if (temp_v107 != 3) {
           return;
         }
-        temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
+        temp_v12 = valueRangeSameSide(temp_v57,temp_v81);
         temp_v6 = param_2[4];
         if (temp_v12 != 0) goto joined_r0x004e5590;
         temp_v13 = 6;
@@ -1907,7 +1907,7 @@ LAB_004e5308:
         }
       }
       else {
-        temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
+        temp_v12 = valueRangeSameSide(temp_v57,temp_v81);
         temp_v6 = param_2[4];
         if (temp_v12 != 0) goto joined_r0x004e5558;
         temp_v13 = 8;
@@ -1917,7 +1917,7 @@ LAB_004e5308:
       }
     }
     else {
-      temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
+      temp_v12 = valueRangeSameSide(temp_v57,temp_v81);
       temp_v6 = param_2[4];
       if (temp_v12 != 0) goto joined_r0x004e5558;
       temp_v13 = 7;
@@ -1938,7 +1938,7 @@ joined_r0x004e5558:
       }
       break;
     case (unsigned int)0x1:
-      temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
+      temp_v12 = valueRangeSameSide(temp_v57,temp_v81);
       temp_v6 = param_2[4];
       if (temp_v12 != 0) goto joined_r0x004e5558;
       temp_v13 = 3;
@@ -1947,7 +1947,7 @@ joined_r0x004e5558:
       }
       break;
     case (unsigned int)0x2:
-      temp_v12 = FUN_004c6b5c(temp_v57,temp_v81);
+      temp_v12 = valueRangeSameSide(temp_v57,temp_v81);
       temp_v6 = param_2[4];
       if (temp_v12 != 0) {
 joined_r0x004e5590:

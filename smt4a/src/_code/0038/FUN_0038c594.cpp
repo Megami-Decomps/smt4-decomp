@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial range stack loads and special-combatant flag byte addressing differ. */
+/* NON_MATCHING: the selection range's stack slots and loads differ; entries base/product registers are swapped in the entry address (the active-entry byte already folds with the s8 flag). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

@@ -26325,12 +26325,12 @@
     },
     {
       "address": "0x145f5c",
-      "function": "FUN_00145f5c",
+      "function": "gameTestFlagBit32",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00145f5c.o",
+      "object": "build/obj/_code/0014/gameTestFlagBit32.o",
       "size": 56,
-      "source": "src/_code/0014/FUN_00145f5c.cpp",
-      "target": "orig/target/_code/0014/FUN_00145f5c.o",
+      "source": "src/_code/0014/gameTestFlagBit32.cpp",
+      "target": "orig/target/_code/0014/gameTestFlagBit32.o",
       "thumb": false
     },
     {
@@ -32873,12 +32873,12 @@
     },
     {
       "address": "0x16cba4",
-      "function": "FUN_0016cba4",
+      "function": "soundVoiceClearState",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_0016cba4.o",
+      "object": "build/obj/_code/0016/soundVoiceClearState.o",
       "size": 76,
-      "source": "src/_code/0016/FUN_0016cba4.cpp",
-      "target": "orig/target/_code/0016/FUN_0016cba4.o",
+      "source": "src/_code/0016/soundVoiceClearState.cpp",
+      "target": "orig/target/_code/0016/soundVoiceClearState.o",
       "thumb": false
     },
     {
@@ -46893,12 +46893,12 @@
     },
     {
       "address": "0x1b4874",
-      "function": "FUN_001b4874",
+      "function": "__aeabi_ul2f",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b4874.o",
+      "object": "build/obj/_code/001b/__aeabi_ul2f.o",
       "size": 8,
-      "source": "src/_code/001b/FUN_001b4874.cpp",
-      "target": "orig/target/_code/001b/FUN_001b4874.o",
+      "source": "src/_code/001b/__aeabi_ul2f.cpp",
+      "target": "orig/target/_code/001b/__aeabi_ul2f.o",
       "thumb": false
     },
     {
@@ -48335,12 +48335,12 @@
     },
     {
       "address": "0x1bceb8",
-      "function": "FUN_001bceb8",
+      "function": "optionalParameterTrySet",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001bceb8.o",
+      "object": "build/obj/_code/001b/optionalParameterTrySet.o",
       "size": 28,
-      "source": "src/_code/001b/FUN_001bceb8.cpp",
-      "target": "orig/target/_code/001b/FUN_001bceb8.o",
+      "source": "src/_code/001b/optionalParameterTrySet.cpp",
+      "target": "orig/target/_code/001b/optionalParameterTrySet.o",
       "thumb": false
     },
     {
@@ -55631,12 +55631,12 @@
     },
     {
       "address": "0x2174f4",
-      "function": "FUN_002174f4",
+      "function": "fusionSortPairs",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_002174f4.o",
+      "object": "build/obj/_code/0021/fusionSortPairs.o",
       "size": 576,
-      "source": "src/_code/0021/FUN_002174f4.cpp",
-      "target": "orig/target/_code/0021/FUN_002174f4.o",
+      "source": "src/_code/0021/fusionSortPairs.cpp",
+      "target": "orig/target/_code/0021/fusionSortPairs.o",
       "thumb": false
     },
     {
@@ -56455,12 +56455,12 @@
     },
     {
       "address": "0x226c70",
-      "function": "FUN_00226c70",
+      "function": "inputApplyDeadZone",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00226c70.o",
+      "object": "build/obj/_code/0022/inputApplyDeadZone.o",
       "size": 60,
-      "source": "src/_code/0022/FUN_00226c70.cpp",
-      "target": "orig/target/_code/0022/FUN_00226c70.o",
+      "source": "src/_code/0022/inputApplyDeadZone.cpp",
+      "target": "orig/target/_code/0022/inputApplyDeadZone.o",
       "thumb": false
     },
     {
@@ -60616,12 +60616,12 @@
     },
     {
       "address": "0x2686b8",
-      "function": "FUN_002686b8",
+      "function": "touchMenuClose",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_002686b8.o",
+      "object": "build/obj/_code/0026/touchMenuClose.o",
       "size": 176,
-      "source": "src/_code/0026/FUN_002686b8.cpp",
-      "target": "orig/target/_code/0026/FUN_002686b8.o",
+      "source": "src/_code/0026/touchMenuClose.cpp",
+      "target": "orig/target/_code/0026/touchMenuClose.o",
       "thumb": false
     },
     {
@@ -61341,12 +61341,12 @@
     },
     {
       "address": "0x27376c",
-      "function": "FUN_0027376c",
+      "function": "eplSlotStartRequest",
       "module": "_code",
-      "object": "build/obj/_code/0027/FUN_0027376c.o",
+      "object": "build/obj/_code/0027/eplSlotStartRequest.o",
       "size": 56,
-      "source": "src/_code/0027/FUN_0027376c.cpp",
-      "target": "orig/target/_code/0027/FUN_0027376c.o",
+      "source": "src/_code/0027/eplSlotStartRequest.cpp",
+      "target": "orig/target/_code/0027/eplSlotStartRequest.o",
       "thumb": false
     },
     {
@@ -69570,12 +69570,12 @@
     },
     {
       "address": "0x2ce15c",
-      "function": "FUN_002ce15c",
+      "function": "devilSlotCompareRaceThenLevel",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002ce15c.o",
+      "object": "build/obj/_code/002c/devilSlotCompareRaceThenLevel.o",
       "size": 124,
-      "source": "src/_code/002c/FUN_002ce15c.cpp",
-      "target": "orig/target/_code/002c/FUN_002ce15c.o",
+      "source": "src/_code/002c/devilSlotCompareRaceThenLevel.cpp",
+      "target": "orig/target/_code/002c/devilSlotCompareRaceThenLevel.o",
       "thumb": false
     },
     {
@@ -70582,12 +70582,12 @@
     },
     {
       "address": "0x2dddb4",
-      "function": "FUN_002dddb4",
+      "function": "engineRecordsUnregisterHandles",
       "module": "_code",
-      "object": "build/obj/_code/002d/FUN_002dddb4.o",
+      "object": "build/obj/_code/002d/engineRecordsUnregisterHandles.o",
       "size": 228,
-      "source": "src/_code/002d/FUN_002dddb4.cpp",
-      "target": "orig/target/_code/002d/FUN_002dddb4.o",
+      "source": "src/_code/002d/engineRecordsUnregisterHandles.cpp",
+      "target": "orig/target/_code/002d/engineRecordsUnregisterHandles.o",
       "thumb": false
     },
     {
@@ -73414,12 +73414,12 @@
     },
     {
       "address": "0x2e71b4",
-      "function": "rt_memcpy_w",
+      "function": "__aeabi_memcpy4",
       "module": "_code",
-      "object": "build/obj/_code/002e/rt_memcpy_w.o",
+      "object": "build/obj/_code/002e/__aeabi_memcpy4.o",
       "size": 116,
-      "source": "src/_code/002e/rt_memcpy_w.cpp",
-      "target": "orig/target/_code/002e/rt_memcpy_w.o",
+      "source": "src/_code/002e/__aeabi_memcpy4.cpp",
+      "target": "orig/target/_code/002e/__aeabi_memcpy4.o",
       "thumb": false
     },
     {
@@ -85672,12 +85672,12 @@
     },
     {
       "address": "0x3032a8",
-      "function": "FUN_003032a8",
+      "function": "pooledListErase",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_003032a8.o",
+      "object": "build/obj/_code/0030/pooledListErase.o",
       "size": 66,
-      "source": "src/_code/0030/FUN_003032a8.cpp",
-      "target": "orig/target/_code/0030/FUN_003032a8.o",
+      "source": "src/_code/0030/pooledListErase.cpp",
+      "target": "orig/target/_code/0030/pooledListErase.o",
       "thumb": true
     },
     {
@@ -94582,12 +94582,12 @@
     },
     {
       "address": "0x3177b0",
-      "function": "FUN_003177b0",
+      "function": "padGetCombinedButtonState",
       "module": "_code",
-      "object": "build/obj/_code/0031/FUN_003177b0.o",
+      "object": "build/obj/_code/0031/padGetCombinedButtonState.o",
       "size": 820,
-      "source": "src/_code/0031/FUN_003177b0.cpp",
-      "target": "orig/target/_code/0031/FUN_003177b0.o",
+      "source": "src/_code/0031/padGetCombinedButtonState.cpp",
+      "target": "orig/target/_code/0031/padGetCombinedButtonState.o",
       "thumb": false
     },
     {
@@ -97299,12 +97299,12 @@
     },
     {
       "address": "0x325af0",
-      "function": "FUN_00325af0",
+      "function": "modelGroupsMarkActiveDestroy",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_00325af0.o",
+      "object": "build/obj/_code/0032/modelGroupsMarkActiveDestroy.o",
       "size": 144,
-      "source": "src/_code/0032/FUN_00325af0.cpp",
-      "target": "orig/target/_code/0032/FUN_00325af0.o",
+      "source": "src/_code/0032/modelGroupsMarkActiveDestroy.cpp",
+      "target": "orig/target/_code/0032/modelGroupsMarkActiveDestroy.o",
       "thumb": false
     },
     {
@@ -108040,12 +108040,12 @@
     },
     {
       "address": "0x36fd64",
-      "function": "FUN_0036fd64",
+      "function": "equipmentTableFindIndexById",
       "module": "_code",
-      "object": "build/obj/_code/0036/FUN_0036fd64.o",
+      "object": "build/obj/_code/0036/equipmentTableFindIndexById.o",
       "size": 244,
-      "source": "src/_code/0036/FUN_0036fd64.cpp",
-      "target": "orig/target/_code/0036/FUN_0036fd64.o",
+      "source": "src/_code/0036/equipmentTableFindIndexById.cpp",
+      "target": "orig/target/_code/0036/equipmentTableFindIndexById.o",
       "thumb": false
     },
     {
@@ -109771,12 +109771,12 @@
     },
     {
       "address": "0x377edc",
-      "function": "FUN_00377edc",
+      "function": "mapGimicStartMotionById",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_00377edc.o",
+      "object": "build/obj/_code/0037/mapGimicStartMotionById.o",
       "size": 112,
-      "source": "src/_code/0037/FUN_00377edc.cpp",
-      "target": "orig/target/_code/0037/FUN_00377edc.o",
+      "source": "src/_code/0037/mapGimicStartMotionById.cpp",
+      "target": "orig/target/_code/0037/mapGimicStartMotionById.o",
       "thumb": false
     },
     {
@@ -111111,12 +111111,12 @@
     },
     {
       "address": "0x37d700",
-      "function": "FUN_0037d700",
+      "function": "scrComm_Sequence14Request",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_0037d700.o",
+      "object": "build/obj/_code/0037/scrComm_Sequence14Request.o",
       "size": 60,
-      "source": "src/_code/0037/FUN_0037d700.cpp",
-      "target": "orig/target/_code/0037/FUN_0037d700.o",
+      "source": "src/_code/0037/scrComm_Sequence14Request.cpp",
+      "target": "orig/target/_code/0037/scrComm_Sequence14Request.o",
       "thumb": false
     },
     {
@@ -112501,13 +112501,16 @@
     },
     {
       "address": "0x384830",
-      "function": "FUN_00384830",
+      "function": "mathAbsHeadingErrorToPoint",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00384830.o",
+      "object": "build/obj/_code/0038/mathAbsHeadingErrorToPoint.o",
       "size": 100,
-      "source": "src/_code/0038/FUN_00384830.cpp",
-      "target": "orig/target/_code/0038/FUN_00384830.o",
-      "thumb": false
+      "source": "src/_code/0038/mathAbsHeadingErrorToPoint.cpp",
+      "target": "orig/target/_code/0038/mathAbsHeadingErrorToPoint.o",
+      "thumb": false,
+      "multifile": [
+        "mathAngleDeltaDegrees"
+      ]
     },
     {
       "address": "0x3848a4",
@@ -113694,12 +113697,12 @@
     },
     {
       "address": "0x38b1cc",
-      "function": "FUN_0038b1cc",
+      "function": "scrComm_Sequence16Request",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_0038b1cc.o",
+      "object": "build/obj/_code/0038/scrComm_Sequence16Request.o",
       "size": 80,
-      "source": "src/_code/0038/FUN_0038b1cc.cpp",
-      "target": "orig/target/_code/0038/FUN_0038b1cc.o",
+      "source": "src/_code/0038/scrComm_Sequence16Request.cpp",
+      "target": "orig/target/_code/0038/scrComm_Sequence16Request.o",
       "thumb": false
     },
     {
@@ -117614,12 +117617,12 @@
     },
     {
       "address": "0x3a37f0",
-      "function": "FUN_003a37f0",
+      "function": "partyRestoreActiveSlots",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a37f0.o",
+      "object": "build/obj/_code/003a/partyRestoreActiveSlots.o",
       "size": 212,
-      "source": "src/_code/003a/FUN_003a37f0.cpp",
-      "target": "orig/target/_code/003a/FUN_003a37f0.o",
+      "source": "src/_code/003a/partyRestoreActiveSlots.cpp",
+      "target": "orig/target/_code/003a/partyRestoreActiveSlots.o",
       "thumb": false
     },
     {
@@ -126872,12 +126875,12 @@
     },
     {
       "address": "0x3dee58",
-      "function": "FUN_003dee58",
+      "function": "recordCategoryNineIsActiveInMode24",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003dee58.o",
+      "object": "build/obj/_code/003d/recordCategoryNineIsActiveInMode24.o",
       "size": 68,
-      "source": "src/_code/003d/FUN_003dee58.cpp",
-      "target": "orig/target/_code/003d/FUN_003dee58.o",
+      "source": "src/_code/003d/recordCategoryNineIsActiveInMode24.cpp",
+      "target": "orig/target/_code/003d/recordCategoryNineIsActiveInMode24.o",
       "thumb": false
     },
     {
@@ -132670,12 +132673,12 @@
     },
     {
       "address": "0x406798",
-      "function": "FUN_00406798",
+      "function": "resourceNameGroupFindIndex",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_00406798.o",
+      "object": "build/obj/_code/0040/resourceNameGroupFindIndex.o",
       "size": 156,
-      "source": "src/_code/0040/FUN_00406798.cpp",
-      "target": "orig/target/_code/0040/FUN_00406798.o",
+      "source": "src/_code/0040/resourceNameGroupFindIndex.cpp",
+      "target": "orig/target/_code/0040/resourceNameGroupFindIndex.o",
       "thumb": false
     },
     {
@@ -152401,12 +152404,12 @@
     },
     {
       "address": "0x46fa94",
-      "function": "FUN_0046fa94",
+      "function": "texBindBindTableNode",
       "module": "_code",
-      "object": "build/obj/_code/0046/FUN_0046fa94.o",
+      "object": "build/obj/_code/0046/texBindBindTableNode.o",
       "size": 200,
-      "source": "src/_code/0046/FUN_0046fa94.cpp",
-      "target": "orig/target/_code/0046/FUN_0046fa94.o",
+      "source": "src/_code/0046/texBindBindTableNode.cpp",
+      "target": "orig/target/_code/0046/texBindBindTableNode.o",
       "thumb": false
     },
     {
@@ -153223,12 +153226,12 @@
     {
       "address": "0x473b6c",
       "file": "addon/aocApplication",
-      "function": "FUN_00473b6c",
+      "function": "aocApplicationRecreateDecoder",
       "module": "_code",
-      "object": "build/obj/_code/addon/aocApplication/FUN_00473b6c.o",
+      "object": "build/obj/_code/addon/aocApplication/aocApplicationRecreateDecoder.o",
       "size": 180,
-      "source": "src/_code/addon/aocApplication/FUN_00473b6c.cpp",
-      "target": "orig/target/_code/addon/aocApplication/FUN_00473b6c.o",
+      "source": "src/_code/addon/aocApplication/aocApplicationRecreateDecoder.cpp",
+      "target": "orig/target/_code/addon/aocApplication/aocApplicationRecreateDecoder.o",
       "thumb": false
     },
     {
@@ -154218,12 +154221,12 @@
     },
     {
       "address": "0x47d5dc",
-      "function": "FUN_0047d5dc",
+      "function": "texTableEntryAttachStex",
       "module": "_code",
-      "object": "build/obj/_code/0047/FUN_0047d5dc.o",
+      "object": "build/obj/_code/0047/texTableEntryAttachStex.o",
       "size": 368,
-      "source": "src/_code/0047/FUN_0047d5dc.cpp",
-      "target": "orig/target/_code/0047/FUN_0047d5dc.o",
+      "source": "src/_code/0047/texTableEntryAttachStex.cpp",
+      "target": "orig/target/_code/0047/texTableEntryAttachStex.o",
       "thumb": false
     },
     {
@@ -157928,12 +157931,12 @@
     },
     {
       "address": "0x499338",
-      "function": "FUN_00499338",
+      "function": "placeWindowRunStateHandler",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00499338.o",
+      "object": "build/obj/_code/0049/placeWindowRunStateHandler.o",
       "size": 88,
-      "source": "src/_code/0049/FUN_00499338.cpp",
-      "target": "orig/target/_code/0049/FUN_00499338.o",
+      "source": "src/_code/0049/placeWindowRunStateHandler.cpp",
+      "target": "orig/target/_code/0049/placeWindowRunStateHandler.o",
       "thumb": false
     },
     {
@@ -159240,12 +159243,12 @@
     },
     {
       "address": "0x4a6610",
-      "function": "FUN_004a6610",
+      "function": "itemListSelectVariant",
       "module": "_code",
-      "object": "build/obj/_code/004a/FUN_004a6610.o",
+      "object": "build/obj/_code/004a/itemListSelectVariant.o",
       "size": 176,
-      "source": "src/_code/004a/FUN_004a6610.cpp",
-      "target": "orig/target/_code/004a/FUN_004a6610.o",
+      "source": "src/_code/004a/itemListSelectVariant.cpp",
+      "target": "orig/target/_code/004a/itemListSelectVariant.o",
       "thumb": false
     },
     {
@@ -162964,12 +162967,12 @@
     },
     {
       "address": "0x4c0834",
-      "function": "FUN_004c0834",
+      "function": "mathScaleByCategory",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c0834.o",
+      "object": "build/obj/_code/004c/mathScaleByCategory.o",
       "size": 20,
-      "source": "src/_code/004c/FUN_004c0834.cpp",
-      "target": "orig/target/_code/004c/FUN_004c0834.o",
+      "source": "src/_code/004c/mathScaleByCategory.cpp",
+      "target": "orig/target/_code/004c/mathScaleByCategory.o",
       "thumb": false
     },
     {
@@ -163164,12 +163167,12 @@
     },
     {
       "address": "0x4c3d78",
-      "function": "FUN_004c3d78",
+      "function": "mathScaleByCategoryEnabled",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c3d78.o",
+      "object": "build/obj/_code/004c/mathScaleByCategoryEnabled.o",
       "size": 44,
-      "source": "src/_code/004c/FUN_004c3d78.cpp",
-      "target": "orig/target/_code/004c/FUN_004c3d78.o",
+      "source": "src/_code/004c/mathScaleByCategoryEnabled.cpp",
+      "target": "orig/target/_code/004c/mathScaleByCategoryEnabled.o",
       "thumb": false
     },
     {
@@ -163434,12 +163437,12 @@
     },
     {
       "address": "0x4c6b5c",
-      "function": "FUN_004c6b5c",
+      "function": "valueRangeSameSide",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c6b5c.o",
+      "object": "build/obj/_code/004c/valueRangeSameSide.o",
       "size": 48,
-      "source": "src/_code/004c/FUN_004c6b5c.cpp",
-      "target": "orig/target/_code/004c/FUN_004c6b5c.o",
+      "source": "src/_code/004c/valueRangeSameSide.cpp",
+      "target": "orig/target/_code/004c/valueRangeSameSide.o",
       "thumb": false
     },
     {
@@ -168949,22 +168952,22 @@
     },
     {
       "address": "0x4fbd5c",
-      "function": "FUN_004fbd5c",
+      "function": "btlReflectCreateKind19",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fbd5c.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind19.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fbd5c.cpp",
-      "target": "orig/target/_code/004f/FUN_004fbd5c.o",
+      "source": "src/_code/004f/btlReflectCreateKind19.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind19.o",
       "thumb": false
     },
     {
       "address": "0x4fbd98",
-      "function": "FUN_004fbd98",
+      "function": "btlReflectCreateKind2e",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fbd98.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind2e.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fbd98.cpp",
-      "target": "orig/target/_code/004f/FUN_004fbd98.o",
+      "source": "src/_code/004f/btlReflectCreateKind2e.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind2e.o",
       "thumb": false
     },
     {
@@ -169081,12 +169084,12 @@
     },
     {
       "address": "0x4fcfc0",
-      "function": "FUN_004fcfc0",
+      "function": "btlReflectCreateKind15",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fcfc0.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind15.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fcfc0.cpp",
-      "target": "orig/target/_code/004f/FUN_004fcfc0.o",
+      "source": "src/_code/004f/btlReflectCreateKind15.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind15.o",
       "thumb": false
     },
     {
@@ -169182,12 +169185,12 @@
     },
     {
       "address": "0x4fda3c",
-      "function": "FUN_004fda3c",
+      "function": "btlReflectCreateKind34",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fda3c.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind34.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fda3c.cpp",
-      "target": "orig/target/_code/004f/FUN_004fda3c.o",
+      "source": "src/_code/004f/btlReflectCreateKind34.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind34.o",
       "thumb": false
     },
     {
@@ -169222,12 +169225,12 @@
     },
     {
       "address": "0x4fdc9c",
-      "function": "FUN_004fdc9c",
+      "function": "btlReflectCreateKind44",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fdc9c.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind44.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fdc9c.cpp",
-      "target": "orig/target/_code/004f/FUN_004fdc9c.o",
+      "source": "src/_code/004f/btlReflectCreateKind44.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind44.o",
       "thumb": false
     },
     {
@@ -169263,12 +169266,12 @@
     },
     {
       "address": "0x4fe5dc",
-      "function": "FUN_004fe5dc",
+      "function": "btlReflectCreateKind37",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fe5dc.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind37.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fe5dc.cpp",
-      "target": "orig/target/_code/004f/FUN_004fe5dc.o",
+      "source": "src/_code/004f/btlReflectCreateKind37.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind37.o",
       "thumb": false
     },
     {
@@ -169493,12 +169496,12 @@
     },
     {
       "address": "0x4fef70",
-      "function": "FUN_004fef70",
+      "function": "btlReflectCreateKind42",
       "module": "_code",
-      "object": "build/obj/_code/004f/FUN_004fef70.o",
+      "object": "build/obj/_code/004f/btlReflectCreateKind42.o",
       "size": 56,
-      "source": "src/_code/004f/FUN_004fef70.cpp",
-      "target": "orig/target/_code/004f/FUN_004fef70.o",
+      "source": "src/_code/004f/btlReflectCreateKind42.cpp",
+      "target": "orig/target/_code/004f/btlReflectCreateKind42.o",
       "thumb": false
     },
     {
@@ -173503,12 +173506,12 @@
     },
     {
       "address": "0x50d740",
-      "function": "FUN_0050d740",
+      "function": "ARM_common_memcpy4_7",
       "module": "_code",
-      "object": "build/obj/_code/0050/FUN_0050d740.o",
+      "object": "build/obj/_code/0050/ARM_common_memcpy4_7.o",
       "size": 28,
-      "source": "src/_code/0050/FUN_0050d740.cpp",
-      "target": "orig/target/_code/0050/FUN_0050d740.o",
+      "source": "src/_code/0050/ARM_common_memcpy4_7.cpp",
+      "target": "orig/target/_code/0050/ARM_common_memcpy4_7.o",
       "thumb": false
     },
     {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: range scratch layout and required-mask registers differ; the special-entry flag load also adds an extra address instruction, 91 versus retail 89 instructions. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -21,10 +20,9 @@ u32 FUN_003c1c00()
     FUN_00301a08(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        u64 flags = entry->flags;
-        if (!(g_btlCandidateMasks.unavailable & flags) &&
-            (flags & g_btlCandidateMasks.required) &&
-            !(flags & g_btlCandidateMasks.excluded) &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             entry->id == unitId && FUN_003248e4(entry)) {
             scrSetResult(1);
             return 1;

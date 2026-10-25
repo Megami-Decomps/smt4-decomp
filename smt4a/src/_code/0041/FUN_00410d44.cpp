@@ -33,7 +33,7 @@ typedef struct ShiftRange {
 
 BtlMainStateA *btlGetMainState(void);
 extern const ShiftRange DAT_005297d4[7]; /* the shift ranges (-6..6 mapped to -0.3..0.3) */
-void *rt_memcpy_w(void *destination, const void *source, u32 size);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 FUN_00163e84(s32 arg);
 s32 FUN_0013def0(s32 arg);
 void FUN_003d54f8(s32 arg, s32 value);
@@ -42,7 +42,7 @@ u32 FUN_00187168(PartySlotA *slot);
 u32 FUN_0019acdc(u16 id, u32 arg);
 void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *info, u32 *effectId);
 void FUN_0047f4cc(u32 effectId, f32 scale, f32 alphaA, f32 alphaB);
-void FUN_004fef70(s32 a, s32 b, s32 member, u32 info);
+void btlReflectCreateKind42(s32 a, s32 b, s32 member, u32 info);
 void btlReflectCreateKind43(s32 id, u32 index, u32 flags, u32 value, u32 parameter);
 
 /* Runs the shift-effect intro: waits for the prompt, finds the selected party member, looks up
@@ -75,7 +75,7 @@ void FUN_00410d44(ShiftEffectWork *work)
                     f32 value = work->members[member].value;
                     ShiftRange table[7];
 
-                    rt_memcpy_w(table, DAT_005297d4, sizeof(table));
+                    __aeabi_memcpy4(table, DAT_005297d4, sizeof(table));
                     f32 shift = 0.0f;
                     s32 found = 0;
                     f32 lowEdge;    /* never initialised in retail: the out-of-range fallback reads stale registers */
@@ -105,7 +105,7 @@ void FUN_00410d44(ShiftEffectWork *work)
                         }
                     }
                     FUN_0047f4cc(effectId, 0.70710677f, 1.0f + shift, 1.0f - shift);
-                    FUN_004fef70(0, 0, member, info);
+                    btlReflectCreateKind42(0, 0, member, info);
                     btlReflectCreateKind43(0, 30, 0, member, 1);
                     work->step++;
                     return;

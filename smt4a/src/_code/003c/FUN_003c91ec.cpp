@@ -22,7 +22,7 @@ extern u32 g_aocSystem;
 void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
 void *gameDataBlocksGetSaveData(void);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void wordPairCopy(void *dest, void *src);
 void FUN_00358cbc(void);
 void titleConfigApply(void);
@@ -34,9 +34,9 @@ void asdMemFree(void *ptr);
 void FUN_003c91ec(void)
 {
     if (g_saveLoadUIBase.snapshotA != NULL) {
-        rt_memcpy_w(gameDataBlocksGetTable(), g_saveLoadUIBase.snapshotA, 0x80);
+        __aeabi_memcpy4(gameDataBlocksGetTable(), g_saveLoadUIBase.snapshotA, 0x80);
         wordPairCopy(configGetSettings(), g_saveLoadUIBase.snapshotB);
-        rt_memcpy_w(gameDataBlocksGetSaveData(), g_saveLoadUIBase.snapshotC, 0x2a71c);
+        __aeabi_memcpy4(gameDataBlocksGetSaveData(), g_saveLoadUIBase.snapshotC, 0x2a71c);
         FUN_00358cbc();
         titleConfigApply();
         FUN_0046bd44(g_aocSystem);

@@ -53,7 +53,7 @@ extern "C" {
 
 extern const s32 DAT_00530e50[CARD_PLAYER_COUNT];
 
-void rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 FUN_00184964(s32 first, s32 second);
 void pairSetFirstResetSecond(void *pair);
 
@@ -87,7 +87,7 @@ void FUN_00169b30(CardOwner *owner, s32 player)
     s32 total3;
     s32 total5;
 
-    rt_memcpy_w(slotOrder, DAT_00530e50, sizeof(slotOrder));
+    __aeabi_memcpy4(slotOrder, DAT_00530e50, sizeof(slotOrder));
     oldFollowUp = table->followUp[player];
     oldPick = table->pick[player];
     total2 = cardCounterTotal(table, 2);

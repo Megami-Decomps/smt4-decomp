@@ -1,4 +1,4 @@
-/* NON_MATCHING: the idle guard (mode == 0, before the push) now matches; retail tests mode 1 then 2 as a compare chain, loads the 240.0f height from the pool and copies the colour through r3/r2/r1/r0, which armcc schedules differently. */
+/* NON_MATCHING: mode/baseColor temporaries swap r1/r2 (retail mode in r2), the float divisor lands in s0 not s2, and the 240.0f/320.0f pool loads are scheduled differently. */
 #include "ui/ByteScreenFade.h"
 
 extern "C" {
@@ -19,16 +19,14 @@ void FUN_003c28dc(ByteScreenFade* fade)
         duration = 1;
     }
     u32 baseColor = 0;
-    switch (mode) {
-    case 1:
+    if (mode == 1) {
         if (fade->frame > 0) {
             --fade->frame;
         } else {
             fade->flags &= ~1;
             return;
         }
-        break;
-    case 2:
+    } else if (mode == 2) {
         if (fade->frame < duration) {
             ++fade->frame;
         } else {
@@ -41,7 +39,6 @@ void FUN_003c28dc(ByteScreenFade* fade)
             baseColor = 0xFFFFFF00;
             break;
         }
-        break;
     }
     f32 alphaScale = 255.0f / (f32)duration;
     s16 alpha = (s16)((f32)fade->frame * alphaScale);

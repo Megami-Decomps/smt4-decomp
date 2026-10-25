@@ -39,7 +39,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371c3c(unsigned int, int);
 int devilIsTextureLoaded(...);
 int FUN_004bcd90(...);
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
@@ -92,7 +92,7 @@ extern int maskToCode(void);
 /* Supplied declaration required: devilIsTextureLoaded. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_004bcd90. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_003193a8(int param_1)
@@ -125,7 +125,7 @@ unsigned int FUN_003193a8(int param_1)
     if (temp_v3 == 0) {
       btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v6 + 0x62),1);
     }
-    rt_memcpy_w(param_1 + 0x218,temp_v6,300);
+    __aeabi_memcpy4(param_1 + 0x218,temp_v6,300);
     *(int *)(param_1 + 0x3bc) = *(int *)(param_1 + 0x3bc) + 1;
     break;
   case 1:

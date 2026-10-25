@@ -84,7 +84,7 @@ int FUN_0033b838(...);
 int unitApplyLevelGrowth(...);
 unsigned int devilCollectLevelGainSkills(void*, int levelGain, unsigned short* output);
 int demonApplyLevelGrowth(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int mapDepartAdvanceState(void);
 int FUN_00295f54(...);
@@ -274,7 +274,7 @@ extern int devilLevelUpsAffordable(unsigned short, unsigned char, int);
 extern int FUN_003c1de8(unsigned char, int);
 /* Supplied declaration required: demonApplyLevelGrowth. */
 extern int __aeabi_idivmod(unsigned int, unsigned int);
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_0018c0ec(void)
@@ -807,7 +807,7 @@ LAB_0018d058:
           *(unsigned char *)(temp_v2 + 0x3c72) = 0;
           *(unsigned int *)(temp_v2 + 0x3c6c) = 0;
           *(unsigned char *)(temp_v2 + 0x3654) = 0x7f;
-          rt_memcpy_w(temp_v2 + 0x3658,temp_v4,0x8c);
+          __aeabi_memcpy4(temp_v2 + 0x3658,temp_v4,0x8c);
           temp_v18 = FUN_00295cec();
           *(int *)(temp_v2 + 0xd54c) = temp_v18;
           *(int *)(temp_v2 + 0xd550) = temp_v18 << 0xc;
@@ -862,7 +862,7 @@ LAB_0018d058:
                                        ,temp_v17 + 0x30);
                 }
               }
-              rt_memcpy_w(temp_v18 + 0x3c78,temp_v17,0x604);
+              __aeabi_memcpy4(temp_v18 + 0x3c78,temp_v17,0x604);
               if (temp_v6 != 0) {
                 temp_v7 = (int)(char)temp_v6;
                 *(unsigned char *)(temp_v18 + 0x3c74) = *(unsigned char *)(temp_v8 + 0x90f0);

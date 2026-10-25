@@ -13,7 +13,7 @@ int FUN_00198848(unsigned int, float *);
 int FUN_001b4030(void);
 int libc_strcmp(int, int);
 int hardfp_floorf(void);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of param_2: 27 slot(s), 108 byte(s) */
 typedef struct {
@@ -58,7 +58,7 @@ extern int FUN_001a7a20(int, unsigned int, unsigned int);
 extern unsigned int wstrlen(unsigned int);
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: hardfp_floorf. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0016a438(int param_1,int param_2)
@@ -425,11 +425,11 @@ void FUN_0016a438(int param_1,int param_2)
             temp_v1 = FUN_001a7a20(temp_v1 + 0x40,temp_v8,temp_v4);
             temp_v1 = *(int *)(*(int *)(puVar14[0xc] + 0x3c) + temp_v1 * 4);
             if ((*(unsigned char *)(temp_v1 + 0x28) & 4) != 0) {
-              rt_memcpy_w(*temp_v30 + *piVar10 * 0x704 + temp_v11 * 0x70,temp_v1,0x70);
+              __aeabi_memcpy4(*temp_v30 + *piVar10 * 0x704 + temp_v11 * 0x70,temp_v1,0x70);
               temp_v11 = temp_v11 + 1;
             }
             else if (*(unsigned char *)(temp_v1 + 0x28) == 1) {
-              rt_memcpy_w(*temp_v30 + *piVar10 * 0x704 + 0x680,temp_v1,0x60);
+              __aeabi_memcpy4(*temp_v30 + *piVar10 * 0x704 + 0x680,temp_v1,0x60);
               temp_v32 = temp_v32 + 1;
             }
             temp_v0 = temp_v0 + 1;

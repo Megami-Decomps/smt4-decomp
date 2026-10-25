@@ -1,241 +1,181 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00365dcc` (_code @ 0x365dcc, 0x3fc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
+#include "map/mapDepart.h"
+
+/* The map scene as the overview camera drives it. */
+#define DEGREES_TO_RADIANS 0.017453292f
+
+struct OverviewScene {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 state;
+    /* 0x08 */ s32 stateTime;
+    /* 0x0c */ u8 unk0c[0x10];
+    /* 0x1c */ MapVector position;
+    /* 0x28 */ MapVector target;
+    /* 0x34 */ u8 unk34[0x18];
+    /* 0x4c */ f32 unk4c;
+    /* 0x50 */ f32 targetHeading;
+    /* 0x54 */ s32 cameraMode;
+    /* 0x58 */ f32 cameraSpeed;
+    /* 0x5c */ u8 unk5c[0x10];
+    /* 0x6c */ u8 unk6c;
+};
+
+/* The part of the game state that holds the overview's start pose. */
+struct OverviewGameState {
+    /* 0x000 */ u8 unk000[0xb0];
+    /* 0x0b0 */ s32 overviewRecord;
+    /* 0x0b4 */ MapVector overviewPosition;
+    /* 0x0c0 */ f32 overviewHeading;
+    /* 0x0c4 */ u8 unk0c4[0xc];
+    /* 0x0d0 */ f32 overviewDirection;
+    /* 0x0d4 */ u8 unk0d4[0x18a];
+    /* 0x25e */ u8 transitionCompleted;
+};
+
+/* The controller whose pose the overview hands back. */
+struct OverviewController {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ f32 heading;
+    /* 0x1c */ u8 unk1c[0x94];
+    /* 0xb0 */ s32 mode;
+};
 
 extern "C" {
+extern OverviewScene *g_lmapScene;
+extern OverviewController *g_lmapView;
+extern OverviewGameState g_gameState;
 
-int sysPlaySe(int);
-int FUN_001bbf0c(void);
-int FUN_001bc124(void);
-int mapIfSetMode1(void);
-int FUN_00233e10(int, unsigned int);
-int FUN_002342b8(void);
-int mapIfSpawnCaveAction(void);
-int mapIfReleasePanel(void);
-int mapEaseSceneHeading(void);
-int FUN_002e364c(int);
-int FUN_00303460(int);
-int mapIfReleaseSlot2(void);
-int mapSetSceneState(unsigned int);
-int FUN_00324e38(int);
-int FUN_00327ee8(void);
+void mapEaseSceneHeading(void);
+void mapIfSpawnCaveAction(f32 x, f32 y, f32 z, f32 direction);
+void mapIfReleasePanel(void);
+void mapIfReleaseSlot2(void);
+void FUN_00233e10(s32 mode, s32 record);
+s32 mapIfHasSelection(void);
+void FUN_002342b8(void);
+s32 inputIsQuestMenuPressed(void);
+void mapIfSetMode1(void);
+s32 FUN_004d0584(void);
+void mapSetSceneState(u32 id);
+void FUN_00303460(s32 mode);
+void FUN_00324e38(s32 mode);
+void FUN_00327ee8(f32 x, f32 z);
+void FUN_002e364c(MapVector *position);
+f32 FUN_001bbf0c(f32 angle);
+f32 FUN_001bc124(f32 angle);
+void sysPlaySe(s32 id);
+s32 padButtonIsPressed(u32 button);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern int g_lmapView; /* 0x5806a4 */
-extern int g_lmapScene; /* 0x581288 */
-extern unsigned int DAT_005f16ac; /* 0x5f16ac */
-extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
-extern unsigned int DAT_005f16b4; /* 0x5f16b4 */
-extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
-extern unsigned int DAT_005f16bc; /* 0x5f16bc */
-extern float DAT_005f16cc; /* 0x5f16cc */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
-
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001bbf0c. */
-/* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: mapIfSetMode1. */
-/* Supplied declaration required: FUN_00233e10. */
-/* Supplied declaration required: FUN_002342b8. */
-/* Supplied declaration required: mapIfSpawnCaveAction. */
-extern int mapIfHasSelection(void);
-/* Supplied declaration required: mapIfReleasePanel. */
-/* Supplied declaration required: mapEaseSceneHeading. */
-/* Supplied declaration required: FUN_002e364c. */
-/* Supplied declaration required: FUN_00303460. */
-/* Supplied declaration required: mapIfReleaseSlot2. */
-/* Supplied declaration required: mapSetSceneState. */
-/* Supplied declaration required: FUN_00324e38. */
-/* Supplied declaration required: FUN_00327ee8. */
-extern int inputIsQuestMenuPressed(void);
-extern int FUN_004d0584(void);
-
-
+/* One frame of the map overview: eases the scene toward its target, then steps the entry,
+   hold and exit states. */
 void FUN_00365dcc(void)
-
 {
-/* irregular: 15 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  float temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  
-  mapEaseSceneHeading();
-  temp_v1 = g_lmapScene;
-  *(float *)(g_lmapScene + 0x1c) =
-       *(float *)(g_lmapScene + 0x1c) +
-       (*(float *)(g_lmapScene + 0x28) - *(float *)(g_lmapScene + 0x1c)) * 0.33333334f;
-  *(float *)(temp_v1 + 0x20) =
-       *(float *)(temp_v1 + 0x20) + (*(float *)(temp_v1 + 0x2c) - *(float *)(temp_v1 + 0x20)) * 0.16666667f
-  ;
-  *(float *)(temp_v1 + 0x24) =
-       *(float *)(temp_v1 + 0x24) + (*(float *)(temp_v1 + 0x30) - *(float *)(temp_v1 + 0x24)) * 0.33333334f
-  ;
-  temp_v2 = *(int *)(temp_v1 + 4);
-  if (temp_v2 != 0xc) {
-    if (temp_v2 < 0xc) {
-      temp_v4 = 0x40a00000;
-      if (temp_v2 == 2) {
-        *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-        FUN_00233e10(1,DAT_005f16ac);
-        temp_v2 = FUN_004d0584();
-        temp_v1 = g_lmapScene;
-        if (temp_v2 != 0) {
-          *(unsigned int *)(g_lmapScene + 4) = 10;
-          *(unsigned int *)(temp_v1 + 8) = 0;
-        }
-        else {
-          temp_v1 = padButtonIsPressed(5);
-          if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-            temp_v1 = g_lmapView;
-            *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
-            *(unsigned int *)(temp_v1 + 0xb0) = 0;
-            FUN_00303460(0);
-            temp_v1 = g_lmapScene;
-            *(unsigned int *)(g_lmapScene + 0x54) = 0;
-            *(unsigned int *)(temp_v1 + 0x58) = temp_v4;
-            FUN_00233e10(0,DAT_005f16ac);
-            mapIfReleaseSlot2();
-            temp_v1 = g_lmapScene;
-            *(unsigned int *)(g_lmapScene + 4) = 0x5a;
-            *(unsigned int *)(temp_v1 + 8) = 0;
-          }
-        }
-        FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
-        return;
-      }
-      if (temp_v2 < 2) {
-        if (temp_v2 != 0) {
-          if (temp_v2 == 1) {
-            *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
-            FUN_00233e10(1,DAT_005f16ac);
-            temp_v1 = g_lmapScene;
-            if (*(int *)(g_lmapScene + 8) >= 3) {
-              temp_v2 = *(int *)(g_lmapScene + 4);
-              *(unsigned int *)(g_lmapScene + 0x54) = 0x1d;
-              *(unsigned int *)(temp_v1 + 0x58) = 0x40000000;
-              *(int *)(temp_v1 + 4) = temp_v2 + 1;
-              *(unsigned int *)(temp_v1 + 8) = 0;
-            }
-          }
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
-        }
-        *(unsigned int *)(temp_v1 + 0x54) = 0;
-        *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
-        *(unsigned char *)(temp_v1 + 0x6c) = 0;
-        temp_v0 = DAT_005f16b8;
-        temp_v4 = DAT_005f16b4;
-        temp_v5 = 0.017453292f;
-        *(unsigned int *)(temp_v1 + 0x28) = DAT_005f16b0;
-        *(unsigned int *)(temp_v1 + 0x2c) = temp_v4;
-        *(unsigned int *)(temp_v1 + 0x30) = temp_v0;
-        temp_v3 = DAT_005f16cc * 0.017453292f;
-        FUN_001bc124();
-        temp_v6 = 40.0f;
-        *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * 40.0f;
-        temp_v5 = DAT_005f16cc * temp_v5;
-        FUN_001bbf0c();
-        temp_v1 = g_lmapScene;
-        *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v6;
-        *(unsigned int *)(temp_v1 + 0x50) = DAT_005f16bc;
-        FUN_00303460(0xb);
-        *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffe;
+    mapEaseSceneHeading();
+    OverviewScene *scene = g_lmapScene;
+    scene->position.x = scene->position.x + (scene->target.x - scene->position.x) * 0.33333334f;
+    scene->position.y = scene->position.y + (scene->target.y - scene->position.y) * 0.16666667f;
+    scene->position.z = scene->position.z + (scene->target.z - scene->position.z) * 0.33333334f;
+
+    switch (scene->state) {
+    case 0:
+        scene->cameraMode = 0;
+        scene->cameraSpeed = 3.0f;
+        scene->unk6c = 0;
+        scene->target = g_gameState.overviewPosition;
+        g_lmapScene->target.x = g_lmapScene->target.x + FUN_001bc124(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->target.z = g_lmapScene->target.z + FUN_001bbf0c(g_gameState.overviewDirection * DEGREES_TO_RADIANS) * 40.0f;
+        g_lmapScene->targetHeading = g_gameState.overviewHeading;
+        FUN_00303460(11);
+        g_lmapView->mode = -2;
         sysPlaySe(0xdd);
-        FUN_00233e10(1,DAT_005f16ac);
-        FUN_001bc124();
-        FUN_001bbf0c();
-        mapIfSpawnCaveAction();
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
-      else if (temp_v2 != 10) {
-        if ((temp_v2 != 0xb) ||
-           (temp_v2 = *(int *)(temp_v1 + 8) + 1, *(int *)(temp_v1 + 8) = temp_v2, temp_v2 != 0x14)) {
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
+        FUN_00233e10(1, g_gameState.overviewRecord);
+        MapVector viewPosition = g_gameState.overviewPosition;
+        viewPosition.x = viewPosition.x + FUN_001bc124(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        viewPosition.z = viewPosition.z + FUN_001bbf0c(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
+        mapIfSpawnCaveAction(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.overviewDirection);
+        g_lmapScene->state = g_lmapScene->state + 1;
+        g_lmapScene->stateTime = 0;
+        break;
+    case 1:
+        scene->stateTime++;
+        FUN_00233e10(1, g_gameState.overviewRecord);
+        scene = g_lmapScene;
+        if (scene->stateTime > 2) {
+            scene->cameraMode = 29;
+            scene->cameraSpeed = 2.0f;
+            scene->state = scene->state + 1;
+            scene->stateTime = 0;
         }
-        FUN_002342b8();
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
-      else {
-        DAT_005f185a = 0;
-        *(unsigned int *)(temp_v1 + 0x54) = 8;
-        *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
+        break;
+    case 2:
+        scene->stateTime++;
+        FUN_00233e10(1, g_gameState.overviewRecord);
+        if (FUN_004d0584()) {
+            g_lmapScene->state = 10;
+            g_lmapScene->stateTime = 0;
+        } else if (padButtonIsPressed(5) || inputIsQuestMenuPressed()) {
+            g_lmapView->heading = g_lmapScene->targetHeading;
+            g_lmapView->mode = 0;
+            FUN_00303460(0);
+            g_lmapScene->cameraMode = 0;
+            g_lmapScene->cameraSpeed = 5.0f;
+            FUN_00233e10(0, g_gameState.overviewRecord);
+            mapIfReleaseSlot2();
+            g_lmapScene->state = 90;
+            g_lmapScene->stateTime = 0;
+        }
+        break;
+    case 10:
+        g_gameState.transitionCompleted = 0;
+        scene->cameraMode = 8;
+        scene->cameraSpeed = 5.0f;
         FUN_00324e38(1);
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
-    }
-    else {
-      if (temp_v2 == 0xd) {
-        temp_v2 = *(int *)(temp_v1 + 8) + 1;
-        *(int *)(temp_v1 + 8) = temp_v2;
-        if (temp_v2 != 0x14) {
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
+        g_lmapScene->state = g_lmapScene->state + 1;
+        g_lmapScene->stateTime = 0;
+        break;
+    case 11:
+        scene->stateTime++;
+        if (scene->stateTime == 20) {
+            FUN_002342b8();
+            g_lmapScene->state = g_lmapScene->state + 1;
+            g_lmapScene->stateTime = 0;
         }
-        mapIfReleasePanel();
-        mapIfSetMode1();
-        temp_v4 = 10;
-        mapSetSceneState(temp_v4);
-        FUN_002e364c(g_lmapScene + 0x28);
-        FUN_00327ee8();
-        return;
-      }
-      if (temp_v2 != 0x5a) {
-        if (temp_v2 != 0x5b) {
-          if ((temp_v2 != 0x5c) ||
-             (temp_v2 = *(int *)(temp_v1 + 8) + 1, *(int *)(temp_v1 + 8) = temp_v2, temp_v2 < 4)) {
-            FUN_002e364c(g_lmapScene + 0x28);
-            FUN_00327ee8();
-            return;
-          }
-          temp_v4 = 1;
-          mapSetSceneState(temp_v4);
-          FUN_002e364c(g_lmapScene + 0x28);
-          FUN_00327ee8();
-          return;
+        break;
+    case 12:
+        if (!mapIfHasSelection()) {
+            mapIfReleaseSlot2();
+            g_lmapView->heading = g_lmapScene->targetHeading;
+            g_lmapView->mode = 0;
+            FUN_00303460(0);
+            g_lmapScene->state = g_lmapScene->state + 1;
+            g_lmapScene->stateTime = 0;
         }
+        break;
+    case 13:
+        scene->stateTime++;
+        if (scene->stateTime == 20) {
+            mapIfReleasePanel();
+            mapIfSetMode1();
+            mapSetSceneState(10);
+        }
+        break;
+    case 90:
+        scene->state = scene->state + 1;
+        scene->stateTime = 0;
+        break;
+    case 91:
         mapIfReleasePanel();
-        temp_v2 = *(int *)(g_lmapScene + 4);
-        temp_v1 = g_lmapScene;
-      }
+        g_lmapScene->state = g_lmapScene->state + 1;
+        g_lmapScene->stateTime = 0;
+        break;
+    case 92:
+        scene->stateTime++;
+        if (scene->stateTime > 3) {
+            mapSetSceneState(1);
+        }
+        break;
     }
-  }
-  else {
-    temp_v1 = mapIfHasSelection();
-    if (temp_v1 != 0) {
-      FUN_002e364c(g_lmapScene + 0x28);
-      FUN_00327ee8();
-      return;
-    }
-    mapIfReleaseSlot2();
-    temp_v1 = g_lmapView;
-    *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
-    *(unsigned int *)(temp_v1 + 0xb0) = 0;
-    FUN_00303460(0);
-    temp_v2 = *(int *)(g_lmapScene + 4);
-    temp_v1 = g_lmapScene;
-  }
-  *(int *)(temp_v1 + 4) = temp_v2 + 1;
-  *(unsigned int *)(temp_v1 + 8) = 0;
-  FUN_002e364c(g_lmapScene + 0x28);
-  FUN_00327ee8();
-  return;
+    FUN_002e364c(&g_lmapScene->target);
+    FUN_00327ee8(g_lmapScene->position.x, g_lmapScene->position.z);
 }
 
 } /* extern "C" */

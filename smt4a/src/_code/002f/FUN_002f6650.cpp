@@ -10,7 +10,7 @@ int FUN_002ea668(...);
 int FUN_002ea6bc(...);
 int FUN_002ea6cc(...);
 int FUN_0030fc80(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 /* stack frame of void: 17 slot(s), 68 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern unsigned long long rt_lmul(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ea6bc. */
 /* Supplied declaration required: FUN_002ea6cc. */
 /* Supplied declaration required: FUN_0030fc80. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_002f6650(void)
@@ -71,7 +71,7 @@ unsigned int FUN_002f6650(void)
   unsigned int temp_v16;
   unsigned char temp_v17 [112];
   
-  rt_memcpy_w(&temp_v3,
+  __aeabi_memcpy4(&temp_v3,
               "킈砹趂ɏ\xf409袞ሷྃ獃襹禇ꬷD:\\home\\jenkins\\workspace\\Manual-Pack\\5129d543\\.\\OnlineCore/src/Core/InstantiationContext.h"
               ,0x18);
   FUN_0030fc80(&temp_v10);

@@ -23,7 +23,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_003de75c(void);
 extern int recordIsAvailable(int);
-extern int FUN_003dee58(int);
+extern int recordCategoryNineIsActiveInMode24(int);
 extern int FUN_003df004(int, int, int *);
 extern int partyEntryFlagsBit3(int);
 extern int partyEntryFlagsBit1(void);
@@ -107,7 +107,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
           FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
           return temp_v2;
         }
-        temp_v0 = FUN_003dee58(temp_v5);
+        temp_v0 = recordCategoryNineIsActiveInMode24(temp_v5);
         if (temp_v0 != 0) {
           FUN_001835b4(2,0x1e,0x91,temp_v6,param_3,param_4);
         }

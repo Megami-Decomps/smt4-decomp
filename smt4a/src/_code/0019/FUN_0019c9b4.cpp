@@ -4,7 +4,7 @@
 
 extern "C" {
 extern RenderChannelState g_inputResetState;
-void *rt_memcpy_w(void *destination, const void *source, u32 bytes);
+void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void FUN_0019c9b4()
 {
@@ -30,7 +30,7 @@ void FUN_0019c9b4()
         if (history->selected >= 64) {
             for (s32 i = 0; i < 63; ++i) {
                 history = (TextHistoryTableView *)g_inputResetState.table;
-                rt_memcpy_w(&history->entries[i], &history->entries[i + 1], sizeof(history->entries[i]));
+                __aeabi_memcpy4(&history->entries[i], &history->entries[i + 1], sizeof(history->entries[i]));
             }
             ((TextHistoryTableView *)g_inputResetState.table)->selected = 63;
         }

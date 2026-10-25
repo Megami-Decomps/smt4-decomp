@@ -27,7 +27,7 @@ extern u8 DAT_00490e3e;
 void FUN_0023ae1c(u32* destination, u32 value, u32 command);
 u32* FUN_0023bba0(s32* wordCount, u32* destination);
 void FUN_0023bb00(s32* wordCount, u32* destination, const void* data);
-void* rt_memcpy_w(void* destination, const void* source, u32 byteCount);
+void* __aeabi_memcpy4(void* destination, const void* source, u32 byteCount);
 }
 
 // Emit the selected record, generating and caching its command words on first use.
@@ -51,7 +51,7 @@ extern "C" void FUN_00349d88(CommandTableView* table, u32* destination,
         commandData->wordCount = end - commandData->words;
     }
 
-    rt_memcpy_w(destination, commandData->words,
+    __aeabi_memcpy4(destination, commandData->words,
                 static_cast<u32>(commandData->wordCount) * sizeof(u32));
     FUN_0023bb00(&commandData->wordCount,
                  destination + commandData->wordCount, record->unk7A0);

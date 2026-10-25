@@ -1,4 +1,3 @@
-/* NON_MATCHING: first-loop unit/flags registers prevent retail's writeback flags load; remaining code matches. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
@@ -19,8 +18,7 @@ u32 FUN_002ffa88()
     FUN_002499fc(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlUnitEntry *unit = &btlGetMainState()->units[i];
-        u32 flags = unit->flags;
-        if (!(flags & 0x10) && (flags & 1) && !(flags & 0x40) && unit->groupId == groupId &&
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == groupId &&
             (unit->values[status] >> 10) == 2) {
             scrSetResult(1);
             return 1;

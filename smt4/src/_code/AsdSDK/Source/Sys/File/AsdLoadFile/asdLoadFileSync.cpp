@@ -10,7 +10,7 @@ s32 asdLoadFileIsPatched(const char *path);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag);
 void asdFileRequestSetHeapKind(AsdFileRequest *request, u8 flags);
-void FUN_0014e834(AsdFileRequest *request, u32 priority);
+void optionalParameterTrySet(AsdFileRequest *request, u32 priority);
 void asdFileWait(AsdFileRequest *request);
 s32 asdFileRequestHasFailed(AsdFileRequest *request);
 void asdFileRequestRelease(AsdFileRequest *request);
@@ -34,7 +34,7 @@ void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 priority)
 
     request = asdFileQueueRequest(fullPath, 0);
     asdFileRequestSetHeapKind(request, ((flags & ASD_LOAD_FLAG_0) != 0) | (((flags & ASD_LOAD_FLAG_1) != 0) ? 0x10 : 0));
-    FUN_0014e834(request, priority);
+    optionalParameterTrySet(request, priority);
     asdFileWait(request);
     if (asdFileRequestHasFailed(request) != 0) {
         if (size != NULL) {

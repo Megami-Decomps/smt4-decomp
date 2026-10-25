@@ -62,7 +62,7 @@ extern "C" {
 
 UnitSlot *FUN_002561d8(SlotWorld *world, s32 index, u32 arg);
 UnitSlot *FUN_0033a5a0(void);
-void rt_memcpy_w(void *dest, const void *src, s32 size);
+void __aeabi_memcpy4(void *dest, const void *src, s32 size);
 void rt_memclr(void *dest, s32 size);
 void *gameGetPlayerData(void);
 void *gameGetUnitRecord(s32 index);
@@ -94,7 +94,7 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
     record->reset180 = 0;
     if (kind == 0) {
         slot = FUN_002561d8(world, index, 0);
-        rt_memcpy_w(&slot->record, record, sizeof(UnitRecordIn));
+        __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         if ((slot->record.flags & 1) != 0) {
             slot->state = 7;
             slot->unk004 = 0;
@@ -107,7 +107,7 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
         world->playerCount++;
     } else if (kind == 1) {
         slot = FUN_0033a5a0();
-        rt_memcpy_w(&slot->record, record, sizeof(UnitRecordIn));
+        __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         slot->state = 0x11;
         slot->unk004 = 0;
         slot->tableRecord = dataTable00FindById(*(u16 *)((u8 *)slot + 0xCE));
@@ -120,7 +120,7 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
         SlotTableData *data;
 
         slot = FUN_002561d8(world, index, 0);
-        rt_memcpy_w(&slot->record, record, sizeof(UnitRecordIn));
+        __aeabi_memcpy4(&slot->record, record, sizeof(UnitRecordIn));
         slot->state = 0x21;
         slot->unk004 = 0;
         table = gameGetSlotTable();

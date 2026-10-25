@@ -1,4 +1,3 @@
-/* NON_MATCHING: all instructions match, but the record address/value use r2/r0 rather than retail r0/r2. */
 #include "map/mapIf.h"
 #include "shard/Shard0036.h"
 
@@ -12,9 +11,8 @@ void FUN_002f3bc0(void)
     for (s32 index = 0; index < 128; ++index) {
         MapIfRecord &record = state->records[index];
         if (record.active != 0) {
-            s32 category = record.display.category;
-            if ((category == 0x1d || category == 0x26 ||
-                 category == 0x1e || category == 0x1f || category == 0x25) &&
+            if ((record.display.category == 0x1d || record.display.category == 0x26 ||
+                 record.display.category == 0x1e || record.display.category == 0x1f || record.display.category == 0x25) &&
                 record.state == 8)
                 record.state = 6;
         }

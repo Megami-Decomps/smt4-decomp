@@ -1,10 +1,11 @@
-/* NON_MATCHING: script-holder state dispatch saves extra registers and uses different branch sharing. */
+/* NON_MATCHING: retail merges the state-1 store into the state-0/state-1 tail (case 0 branches to case 1's `str r0, [r4]`); armcc here merges case 1 into case 2's store. Process mode goes through the inlined scriptProcessSetMode. */
 /* Loads the quest script and system images, runs its entry, and finalizes the screen on completion. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
 
 extern "C" {
 ScriptRunState *FUN_00275bc8(void *script, void *images);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void scrScriptProcessStartEntry(ScriptRunState *process, u32 entry);
 void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
 s32 scrRunOpcodesStub(ScriptRunState *process);
@@ -25,7 +26,7 @@ u32 scriptHolderUpdateSimple(ScriptHolder *holder)
     case 1:
         if (holder->buf0C != NULL && holder->buf10 != NULL) {
             holder->process = FUN_00275bc8(holder->buf0C, holder->buf10);
-            holder->process->mode = 2;
+            scriptProcessSetMode(holder->process, 2);
             scrScriptProcessStartEntry(holder->process, holder->phase.entry);
             holder->phase.state = 2;
         }

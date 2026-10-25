@@ -18,7 +18,7 @@ typedef struct Child {
 extern u8 DAT_00634bc0[0x90];
 
 void *linkedFindItemByIndex(u32 table, s32 index);
-void rt_memcpy_w(void *dest, const void *src, u32 size);
+void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 u32 FUN_003c0780(u8 *record, s32 arg);
 
 /* Runs FUN_003c0780 on a scratch copy of the table record for (owner, child) and writes the record back;
@@ -29,9 +29,9 @@ u32 FUN_003cd1d0(Owner *owner, Child *child)
     void *record = linkedFindItemByIndex(owner->table, child->offset + base);
     u32 result;
 
-    rt_memcpy_w(DAT_00634bc0, record, 0x90);
+    __aeabi_memcpy4(DAT_00634bc0, record, 0x90);
     result = FUN_003c0780(DAT_00634bc0, 1);
-    rt_memcpy_w(record, DAT_00634bc0, 0x90);
+    __aeabi_memcpy4(record, DAT_00634bc0, 0x90);
     if (result & 1) {
         result |= 0x800000;
     }

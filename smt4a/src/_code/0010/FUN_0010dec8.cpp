@@ -16,7 +16,7 @@ int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_002f8174(int, unsigned int, unsigned int, unsigned char *);
 int FUN_002f81c8(void);
-int rt_memcpy_w(int, unsigned int, int);
+int __aeabi_memcpy4(int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -47,7 +47,7 @@ extern int FUN_002eb5f4(void);
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_002f8174. */
 /* Supplied declaration required: FUN_002f81c8. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_0010dec8(int param_1)
@@ -68,7 +68,7 @@ void FUN_0010dec8(int param_1)
       temp_v0 = 0;
       do {
         temp_v1 = FUN_0010dfdc(temp_v3);
-        rt_memcpy_w(temp_v0 * 0x14 + param_1 + 0x118,temp_v1,0x14);
+        __aeabi_memcpy4(temp_v0 * 0x14 + param_1 + 0x118,temp_v1,0x14);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < 3);
       temp_v0 = FUN_002ea704(temp_v3);

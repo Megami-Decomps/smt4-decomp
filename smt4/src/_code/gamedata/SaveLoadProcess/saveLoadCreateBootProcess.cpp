@@ -17,7 +17,7 @@ void asdProcessClearSelectedFlags(u32 process, u32 flags, u32 mode);
 void taskCreateDraw(const char *name, u32 priority, u32 arg, u32 mode,
     void (*draw)(u32), void *work, u32 flags, u32 parent);
 s32 FUN_002ef8e4(u32 process);
-void FUN_003112ec(u32 process);
+void saveLoadDrawIndicator(u32 process);
 void jobTeardownFlagsAndWork(u32 process);
 extern SaveByteSettings g_byteSettings;
 
@@ -45,8 +45,8 @@ u32 saveLoadCreateBootProcess(void)
     work->process = asdProcessCreateSimple("Boot", 2, 0, 0,
         FUN_002ef8e4, jobTeardownFlagsAndWork, work);
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
-    taskCreateDraw("Boot UpDraw", 0x81, 0, 0, FUN_003112ec, NULL, 0, work->process);
-    taskCreateDraw("Boot UpDraw_R", 0xDF, 0, 0, FUN_003112ec, NULL, 0, work->process);
+    taskCreateDraw("Boot UpDraw", 0x81, 0, 0, saveLoadDrawIndicator, NULL, 0, work->process);
+    taskCreateDraw("Boot UpDraw_R", 0xDF, 0, 0, saveLoadDrawIndicator, NULL, 0, work->process);
     work->state = 8;
     return work->process;
 }

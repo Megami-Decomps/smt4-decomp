@@ -1,4 +1,3 @@
-/* NON_MATCHING: the two parameter copies at entry are emitted in the opposite order (r5 first in retail). */
 #include "common.h"
 
 extern "C" {
@@ -17,12 +16,12 @@ typedef struct {
     Slot slots[1];  /* 0x200 */
 } SlotTable;
 
-SlotTable *gameGetFlagBlock(void);
+SlotTable *gameGetFlagBlock(int index);
 
 /* Stores `value` into bit 1 of the flags of slot `index`. */
 void FUN_0028784c(int index, char value)
 {
-    Slot *slot = &gameGetFlagBlock()->slots[index];
+    Slot *slot = &gameGetFlagBlock(index)->slots[index];
 
     slot->flags = (slot->flags & ~2) | (value << 1);
 }

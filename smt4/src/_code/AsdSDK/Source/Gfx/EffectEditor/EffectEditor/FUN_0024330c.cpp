@@ -6,7 +6,7 @@ extern "C" {
 
 int asdDebugLog(...);
 int effEditorNodeChainApply(int);
-int FUN_0024dd80(...);
+int padAlternateButtonIndex(...);
 int FUN_0024dd90(int);
 int effMenuListAppend(void);
 int FUN_002826d4(...);
@@ -71,7 +71,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_0024dd80. */
+/* Supplied declaration required: padAlternateButtonIndex. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_002826d4. */
@@ -196,7 +196,7 @@ unsigned char * FUN_0024330c(unsigned int *param_1,int param_2,int param_3,int p
       if (DAT_0044eae8 == 1) {
         temp_v9 = padIsButtonRepeat(5);
         if (temp_v9 == 0) {
-          FUN_0024dd80(5);
+          padAlternateButtonIndex(5);
           temp_v9 = padIsButtonRepeat();
           if (temp_v9 != 0) {
             if ((*(unsigned int *)(temp_v31 + 0x10) & 0x20) != 0) {
@@ -207,7 +207,7 @@ unsigned char * FUN_0024330c(unsigned int *param_1,int param_2,int param_3,int p
           else {
             temp_v9 = padIsButtonRepeat(6);
             if (temp_v9 == 0) {
-              FUN_0024dd80(6);
+              padAlternateButtonIndex(6);
               temp_v9 = padIsButtonRepeat();
               if (temp_v9 != 0) {
                 if ((*(unsigned int *)(temp_v31 + 0x10) & 0x20) != 0) {
@@ -245,7 +245,7 @@ unsigned char * FUN_0024330c(unsigned int *param_1,int param_2,int param_3,int p
           else {
             temp_v9 = padIsButtonRepeat(3);
             if (temp_v9 == 0) {
-              FUN_0024dd80(3);
+              padAlternateButtonIndex(3);
               temp_v9 = padIsButtonRepeat();
               if (temp_v9 != 0) {
                 DAT_0044eaf0 = DAT_0044eaf0 + temp_v20;
@@ -253,7 +253,7 @@ unsigned char * FUN_0024330c(unsigned int *param_1,int param_2,int param_3,int p
               else {
                 temp_v9 = padIsButtonRepeat(4);
                 if (temp_v9 == 0) {
-                  FUN_0024dd80(4);
+                  padAlternateButtonIndex(4);
                   temp_v9 = padIsButtonRepeat();
                   if (temp_v9 == 0) goto LAB_00243564;
                 }
@@ -270,7 +270,7 @@ unsigned char * FUN_0024330c(unsigned int *param_1,int param_2,int param_3,int p
 LAB_00243564:
       temp_v9 = padIsButtonRepeat(5);
       if (temp_v9 == 0) {
-        FUN_0024dd80(5);
+        padAlternateButtonIndex(5);
         temp_v9 = padIsButtonRepeat();
         if (temp_v9 != 0) {
           if (0 < (int)DAT_0044eae4) {
@@ -280,7 +280,7 @@ LAB_00243564:
         else {
           temp_v9 = padIsButtonRepeat(6);
           if (temp_v9 == 0) {
-            FUN_0024dd80(6);
+            padAlternateButtonIndex(6);
             temp_v9 = padIsButtonRepeat();
             if (temp_v9 != 0) {
               if (DAT_0044eae4 < temp_v13) {
@@ -294,7 +294,7 @@ LAB_00243564:
             else {
               temp_v9 = padIsButtonPressed(0);
               if (temp_v9 == 0) {
-                FUN_0024dd80(0);
+                padAlternateButtonIndex(0);
                 temp_v9 = padIsButtonPressed();
                 if (temp_v9 != 0) {
                   DAT_0044eae0 = 1;
@@ -501,7 +501,7 @@ LAB_00243564:
   asdDebugLog(0xa4,0x6e,8,&LAB_00243d04,temp_v30);
   temp_v16 = padIsButtonPressed(1);
   if (temp_v16 == 0) {
-    FUN_0024dd80(1);
+    padAlternateButtonIndex(1);
     temp_v16 = padIsButtonPressed();
     if (temp_v16 != 0) goto LAB_00243c88;
     if (DAT_0044eae0 != 0) {

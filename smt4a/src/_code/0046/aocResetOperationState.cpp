@@ -1,49 +1,51 @@
-/* NON_MATCHING: only r2/r3 allocation for the display flag address and byte-one constant differs from retail. */
 #include "addon/aocMain.h"
 
-struct AocErrorDescriptor {
-    u32 code;
-    u32 messageId;
+struct MappedOperationStatus {
+    s32 code;   // 0x00
+    u32 detail; // 0x04
 };
 
-struct AocOperationStatus {
-    bool active;
-    u8 unk01[3];
-    AocErrorDescriptor error;
-    u32 state;
+struct OperationStatusState {
+    u8 enabled;                   // 0x00
+    u8 unk01[3];                  // 0x01
+    MappedOperationStatus result; // 0x04
+    u32 mode;                     // 0x0c
 };
 
-struct AocOperationView {
-    /* 0x000 */ u8 unk000[0x310];
-    /* 0x310 */ u32 unk310;
-    /* 0x314 */ u32 unk314;
-    /* 0x318 */ u8 unk318[4];
-    /* 0x31c */ AocOperationStatus status;
-    /* 0x32c */ u8 unk32c[0x18];
-    /* 0x344 */ u32 unk344;
-    /* 0x348 */ u8 unk348[8];
-    /* 0x350 */ u32 unk350;
-    /* 0x354 */ u8 unk354[0x110];
-    /* 0x464 */ u32 unk464;
-    /* 0x468 */ u32 unk468;
+struct AocOperationState {
+    u8 unk000[0x310];           // 0x000
+    u32 first;                   // 0x310
+    u32 second;                  // 0x314
+    u32 unk318;                  // 0x318
+    OperationStatusState status; // 0x31c
+    u8 unk32c[0x18];            // 0x32c
+    u32 pending;                 // 0x344
+    u8 unk348[8];               // 0x348
+    u32 count;                   // 0x350
+    u8 unk354[0x110];           // 0x354
+    u32 lastFirst;               // 0x464
+    u32 lastSecond;              // 0x468
 };
 
-extern "C" AocDisplay* g_aocDisplay;
-extern "C" AocErrorDescriptor* _ZN18WindowStatusResultC1Ej(AocErrorDescriptor* output, u32 code);
+extern "C" {
+extern AocDisplay* g_aocDisplay;
+MappedOperationStatus* _ZN18WindowStatusResultC1Ej(MappedOperationStatus* result, u32 code);
 
-extern "C" void aocResetOperationState(AocSystemA* system)
+// Clear the operation state, request the AOC display update and initialize a success result.
+void aocResetOperationState(AocOperationState* state)
 {
-    AocOperationView* work = (AocOperationView*)system;
-    work->unk344 = 0;
-    work->unk310 = 0;
-    work->unk314 = 0;
-    work->unk350 = 0;
-    work->unk464 = 0;
-    work->unk468 = 0;
-    g_aocDisplay->operationActive = 1;
-    AocOperationStatus* status = &work->status;
-    status->active = true;
-    status->state = 0;
-    AocErrorDescriptor success;
-    status->error = *_ZN18WindowStatusResultC1Ej(&success, 0);
+    state->pending = 0;
+    state->first = 0;
+    state->second = 0;
+    state->count = 0;
+    state->lastFirst = 0;
+    state->lastSecond = 0;
+    AocDisplay* display = g_aocDisplay;
+    display->operationActive = 1;
+    OperationStatusState* status = &state->status;
+    status->enabled = 1;
+    status->mode = 0;
+    MappedOperationStatus result;
+    status->result = *_ZN18WindowStatusResultC1Ej(&result, 0);
+}
 }

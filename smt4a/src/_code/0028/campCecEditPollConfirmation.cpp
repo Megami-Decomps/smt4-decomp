@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the persistent controller/result registers are swapped (retail r4/r5, compiled r5/r4). Natural switch reproduces both native NOPs. Candidate O2. */
 #include "common.h"
 
 struct CampCecCompletionState {
@@ -32,9 +31,8 @@ u32 campCecEditPollConfirmation(CampCecEditController* controller)
         if (FUN_002e2014() != 0) {
             stateAtF4Destroy();
             sysPlaySe(0x10d);
-            CampCecCompletionState* completion = &controller->completion;
-            completion->active = 1;
-            completion->counter = 0;
+            controller->completion.active = 1;
+            controller->completion.counter = 0;
             FUN_0031d890();
             result = 3;
         }

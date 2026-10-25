@@ -1,217 +1,235 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004de37c` (_code @ 0x4de37c, 0x418 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: 64-bit mask loads are ldm here but ldrd in retail, the unit-slot address folding differs, and retail keeps 12 more bytes of locals between the extra-target word and the confirm flag (the extra-target query result is larger than the u64 used here) */
+#include "common.h"
+
+/* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
+struct BtlUnitSlot {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ u8 phase;
+    /* 0x0a */ u8 unk0a[0x124a];
+};
+
+/* The battle action table: the unit slots and the input masks the target menu tests. */
+struct BtlActionTable {
+    /* 0x000 */ u32 unk000;
+    /* 0x004 */ BtlUnitSlot *units;
+    /* 0x008 */ u8 unk008[0x20];
+    /* 0x028 */ u64 confirmMask;    /* inputs that confirm a skill target */
+    /* 0x030 */ u8 unk030[0xb0];
+    /* 0x0e0 */ u64 attackMask;     /* inputs that open the attack menu */
+    /* 0x0e8 */ u8 unk0e8[8];
+    /* 0x0f0 */ u64 skillMask;      /* inputs that open the skill menu */
+};
+
+/* The acting battle: the acting unit, the extra target words and the held inputs. */
+struct BtlActingState {
+    /* 0x0000 */ u8 unk0000[0xa4];
+    /* 0x00a4 */ s32 unit;
+    /* 0x00a8 */ u8 unk00a8[0x1f60];
+    /* 0x2008 */ u64 extraTargets;
+    /* 0x2010 */ u8 unk2010[0x2590];
+    /* 0x45a0 */ u64 inputMask;
+};
+
+/* The command menu's result record. */
+struct BtlMenuResult {
+    /* 0x000 */ u8 unk000[0x1be];
+    /* 0x1be */ s16 command;
+    /* 0x1c0 */ s16 argument;
+};
+
+/* The menu state: flags, the choice mask, the result record and the per-target flags. */
+struct BtlMenuState {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ u8 unk04[0x1c];
+    /* 0x20 */ u64 *choiceMask;
+    /* 0x24 */ u8 unk24[4];
+    /* 0x28 */ BtlMenuResult *result;
+    /* 0x2c */ u8 unk2c[0xc];
+    /* 0x38 */ u8 targetFlags[0x80];
+};
+
+struct BtlActingTask {
+    BtlActingState *battle;
+};
+
+/* A skill row of data table 04. */
+struct Table04Row {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 kind;
+    /* 0x24 */ u8 unk24[0x14];
+    /* 0x38 */ u8 flags;
+};
+
+struct Table8Row {
+    /* 0x00 */ u8 unk00[0x32];
+    /* 0x32 */ u16 linkedId;
+};
+
+/* The target query the unit/menu code fills in (only its two read words are used here). */
+struct BtlTargetInfo {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 kind;
+    /* 0x06 */ u8 unk06[0xd];
+    /* 0x13 */ u8 subtype;
+    /* 0x14 */ u8 unk14[6];
+    /* 0x1a */ s16 record;
+    /* 0x1c */ u8 unk1c[0x18];
+};
 
 extern "C" {
+extern BtlActionTable g_btlAction;
+extern u32 g_btlUiBlock;
+Table04Row *dataTable04FindById(s32 id);
+Table8Row *dataTable8FindRecord(s32 id);
+s32 playerHasFlagBit(u32 bit);
+s32 FUN_003f0e94(BtlActingState *battle, s32 index);
+void FUN_003e8bb0(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
+s32 FUN_004aba9c(u32 ui);
+void FUN_004ab80c(u32 ui, u8 *confirmed, u64 *selected, u64 *extra);
+void btlUIClearWorkTables(u32 ui);
+void FUN_004e980c(BtlActingTask *task, BtlMenuState *menu);
+void FUN_004eb838(BtlActingTask *task, BtlMenuState *menu);
 
-int dataTable8FindRecord(void);
-int dataTable04FindById(void);
-int FUN_003e8bb0(unsigned char [4], int, unsigned int);
-int FUN_003f0e94(int, unsigned int);
-int btlUIClearWorkTables(unsigned int);
-int FUN_004ab80c(unsigned int, char [4], unsigned int *, int *);
-int FUN_004e980c(int *, unsigned int *);
-int FUN_004eb838(int *, unsigned int *);
-
-/* stack frame of param_2: 7 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned short sp3E; /* 0x3e: local_3e */
-    unsigned char sp45; /* 0x45: local_45 */
-    unsigned short sp54; /* 0x54: local_54 */
-    unsigned char sp5C; /* 0x5c: local_5c */
-    unsigned int sp70; /* 0x70: local_70 */
-    unsigned int sp74; /* 0x74: local_74 */
-    unsigned int sp78; /* 0x78: local_78 */
-} param_2_stack;
-
-extern int g_btlScriptUnit; /* 0x57113c */
-extern unsigned int DAT_00571160; /* 0x571160 */
-extern unsigned int DAT_00571164; /* 0x571164 */
-extern unsigned int DAT_00571218; /* 0x571218 */
-extern unsigned int DAT_0057121c; /* 0x57121c */
-extern unsigned int DAT_00571228; /* 0x571228 */
-extern unsigned int DAT_0057122c; /* 0x57122c */
-extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
-
-/* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: dataTable04FindById. */
-extern int playerHasFlagBit(unsigned int);
-/* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f0e94. */
-/* Supplied declaration required: btlUIClearWorkTables. */
-/* Supplied declaration required: FUN_004ab80c. */
-extern int FUN_004aba9c(unsigned int);
-/* Supplied declaration required: FUN_004e980c. */
-/* Supplied declaration required: FUN_004eb838. */
-
-
-unsigned int FUN_004de37c(int *param_1,unsigned int *param_2)
-
+/* Drives the target menu: raises the prompt flags for the attack/skill masks, then, once the
+   target UI confirms, turns the chosen targets into per-target flags and finishes the menu.
+   Returns 1 when the menu was finished or a prompt was raised. */
+u32 FUN_004de37c(BtlActingTask *task, BtlMenuState *menu)
 {
-/* irregular: 6 goto(s); 8 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  short temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int uStack_6c;
-  char temp_v9 [4];
-  unsigned char temp_v10 [4];
-  short temp_v11;
-  char temp_v12;
-  short temp_v13;
-  
-  temp_v3 = *(unsigned int *)(*param_1 + 0x45a0);
-  temp_v5 = *(unsigned int *)(*param_1 + 0x45a4);
-  if (!((DAT_00571218 & temp_v3) == 0 && (DAT_0057121c & temp_v5) == 0)) {
-    if ((*param_2 & 0x80) == 0) {
-      *param_2 = *param_2 | 0x880;
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-      return 1;
-    }
-  }
-  else if (((temp_v3 & DAT_00571228) != 0 || (temp_v5 & DAT_0057122c) != 0) &&
-          ((*param_2 & 0x1000) == 0)) {
-    *param_2 = *param_2 | 0x1800;
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-    return 1;
-  }
-  temp_v4 = FUN_004aba9c(g_btlUiBlock);
-  if (temp_v4 == 0) {
-    return 0;
-  }
-  temp_v9[0] = '\0';
-  temp_v6 = 0;
-  temp_v7 = 0;
-  temp_v8 = 0;
-  uStack_6c = 0;
-  FUN_004ab80c(g_btlUiBlock,temp_v9,&temp_v6,&temp_v8);
-  temp_v3 = param_2[10];
-  if (temp_v9[0] == '\0') {
-    if (*(short *)(temp_v3 + 0x1be) != 10) {
-      *param_2 = *param_2 | 0x800;
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-      return 1;
-    }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-    return 1;
-  }
-  temp_v2 = *(short *)(temp_v3 + 0x1be);
-  if (temp_v2 != 9) {
-    if (temp_v2 == 10) {
-      if (temp_v7 == 0 && temp_v6 == 0) {
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
-        return 1;
-      }
-      goto LAB_004de56c;
-    }
-    if (temp_v2 == 0xd) goto LAB_004de56c;
-    if (temp_v2 != 2 && temp_v2 != 3) {
-      if (temp_v2 == 8) {
-        temp_v4 = (int)*(short *)(temp_v3 + 0x1c0);
-        dataTable8FindRecord();
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x32);
-        if ((temp_v3 != 0) && (dataTable04FindById(), temp_v3 != 0)) {
-          temp_v0 = *(char *)(temp_v3 + 0x23);
-          temp_v1 = *(unsigned char *)(temp_v3 + 0x38);
-          goto LAB_004de5cc;
-        }
-      }
-LAB_004de6b0:
-      temp_v3 = 0;
-LAB_004de6b4:
-      do {
-        temp_v5 = 1 << (temp_v3 & 0xff);
-        if ((temp_v7 & ((int)temp_v5 >> 0x1f)) != 0 || (temp_v6 & temp_v5) != 0) {
-          if (temp_v3 != 0) {
-            temp_v4 = *param_1;
-            FUN_003f0e94(temp_v4,temp_v3 - 1);
-            if (temp_v4 < 0) {
-              temp_v4 = temp_v3 + 0x6c;
-            }
-            *(unsigned char *)((int)param_2 + temp_v4 + 0x38) = 1;
-          }
-          else {
-            *(unsigned char *)(param_2 + 0xe) = 1;
-            temp_v4 = playerHasFlagBit(1);
-            if (temp_v4 != 0) {
-              FUN_003e8bb0(temp_v10,*param_1,param_2[8]);
-              if (temp_v11 == 3) {
-                if (!((temp_v12 == '\x18' || temp_v12 == '\x1b') || temp_v12 == '\x01')) {
-                  temp_v4 = (int)temp_v13;
-                  dataTable8FindRecord();
-                  if ((temp_v4 != 0) && ((*(unsigned int *)(temp_v4 + 0x68) & 4) != 0)) {
-                    temp_v3 = 1;
-                    goto LAB_004de6b4;
-                  }
-                  *(unsigned char *)(param_2 + 0xe) = 0;
-                }
-              }
-              else {
-                *(unsigned char *)(param_2 + 0xe) = 0;
-              }
-            }
-          }
-        }
-        temp_v3 = temp_v3 + 1;
-      } while ((int)temp_v3 < 0x40);
-      btlUIClearWorkTables(g_btlUiBlock);
-      FUN_004eb838(param_1,param_2);
-      return 1;
-    }
-    temp_v4 = (int)*(short *)(temp_v3 + 0x1c0);
-    dataTable04FindById();
-    if (temp_v4 == 0) goto LAB_004de6b0;
-    temp_v0 = *(char *)(temp_v4 + 0x23);
-    temp_v1 = *(unsigned char *)(temp_v4 + 0x38);
-LAB_004de5cc:
-    if (temp_v0 != '\a') goto LAB_004de6b0;
-    if ((temp_v1 & 4) != 0) {
-      FUN_004e980c(param_1,param_2);
-      temp_v3 = *param_2;
-      *param_2 = temp_v3 | 0x4000;
-      if ((((unsigned int *)param_2[8])[1] & DAT_00571164) != 0 || (*(unsigned int *)param_2[8] & DAT_00571160) != 0
-         ) {
-        *param_2 = temp_v3 | 0x4004;
-      }
-      btlUIClearWorkTables(g_btlUiBlock);
-      FUN_004eb838(param_1,param_2);
-      return 1;
-    }
-    temp_v3 = 0;
-    temp_v4 = 0x40;
-    do {
-      temp_v5 = 1 << (temp_v3 & 0xff);
-      if ((temp_v5 & temp_v6) != 0 || (((int)temp_v5 >> 0x1f) & temp_v7) != 0) {
-        *(unsigned char *)((int)param_2 + temp_v3 + 0x38) = 1;
-      }
-      temp_v3 = temp_v3 + 1;
-      temp_v4 = temp_v4 - 1;
-    } while (temp_v4 != 0);
-  }
-  else {
-LAB_004de56c:
-    temp_v3 = 0;
-    temp_v4 = 0x40;
-    do {
-      temp_v5 = 1 << (temp_v3 & 0xff);
-      if ((temp_v5 & temp_v6) != 0 || (((int)temp_v5 >> 0x1f) & temp_v7) != 0) {
-        *(unsigned char *)((int)param_2 + temp_v3 + 0x38) = 1;
-      }
-      temp_v3 = temp_v3 + 1;
-      temp_v4 = temp_v4 - 1;
-    } while (temp_v4 != 0);
-  }
-  temp_v4 = *param_1;
-  *(unsigned int *)(temp_v4 + 0x2008) = temp_v8;
-  *(unsigned int *)(temp_v4 + 0x200c) = uStack_6c;
-  btlUIClearWorkTables(g_btlUiBlock);
-  FUN_004eb838(param_1,param_2);
-  return 1;
-}
+    BtlActionTable *action = &g_btlAction;
+    u64 inputs = task->battle->inputMask;
 
-} /* extern "C" */
+    if ((action->attackMask & inputs) != 0) {
+        if ((menu->flags & 0x80) == 0) {
+            menu->flags |= 0x880;
+            action->units[task->battle->unit].phase = 1;
+            return 1;
+        }
+    } else if ((action->skillMask & inputs) != 0 && (menu->flags & 0x1000) == 0) {
+        menu->flags |= 0x1800;
+        action->units[task->battle->unit].phase = 1;
+        return 1;
+    }
+
+    if (FUN_004aba9c(g_btlUiBlock) == 0) {
+        return 0;
+    }
+
+    u64 selected = 0;
+    u64 extra = 0;
+    u8 confirmed = 0;
+    s32 index;
+    FUN_004ab80c(g_btlUiBlock, &confirmed, &selected, &extra);
+
+    BtlMenuResult *result = menu->result;
+    if (confirmed == 0) {
+        if (result->command != 10) {
+            menu->flags |= 0x800;
+            action->units[task->battle->unit].phase = 1;
+            return 1;
+        }
+        action->units[task->battle->unit].phase = 0x1d;
+        return 1;
+    }
+
+    s32 isSkill = 0;
+    s32 isSpecial = 0;
+    s32 command = result->command;
+    if (command == 9) {
+        goto markSelected;
+    }
+    if (command == 10) {
+        if (selected == 0) {
+            action->units[task->battle->unit].phase = 0x1d;
+            return 1;
+        }
+        goto markSelected;
+    }
+    if (command == 13) {
+        goto markSelected;
+    }
+    if (command == 2 || command == 3) {
+        Table04Row *row = dataTable04FindById(result->argument);
+        if (row == NULL) {
+            goto scanTargets;
+        }
+        if (row->kind == 7) {
+            isSkill = 1;
+        }
+        if ((row->flags & 4) != 0) {
+            isSpecial = 1;
+        }
+    } else if (command == 8) {
+        Table8Row *linked = dataTable8FindRecord(result->argument);
+        if (linked->linkedId == 0) {
+            goto scanTargets;
+        }
+        Table04Row *row = dataTable04FindById(linked->linkedId);
+        if (row == NULL) {
+            goto scanTargets;
+        }
+        if (row->kind == 7) {
+            isSkill = 1;
+        }
+        if ((row->flags & 4) != 0) {
+            isSpecial = 1;
+        }
+    } else {
+        goto scanTargets;
+    }
+    if (isSkill == 0) {
+        goto scanTargets;
+    }
+    if (isSpecial != 0) {
+        FUN_004e980c(task, menu);
+        menu->flags |= 0x4000;
+        if (((menu->choiceMask[0] & action->confirmMask) != 0)) {
+            menu->flags |= 4;
+        }
+        goto finish;
+    }
+
+markSelected:
+    for (index = 0; index < 64; index++) {
+        if ((selected & ((u64)1 << index)) != 0) {
+            menu->targetFlags[index] = 1;
+        }
+    }
+    task->battle->extraTargets = extra;
+    goto finish;
+
+scanTargets:
+    for (index = 0; index < 64; index++) {
+        if ((selected & ((u64)1 << index)) == 0) {
+            continue;
+        }
+        if (index != 0) {
+            s32 slot = FUN_003f0e94(task->battle, index - 1);
+            if (slot < 0) {
+                slot = index + 0x6c;
+            }
+            menu->targetFlags[slot] = 1;
+        } else {
+            menu->targetFlags[0] = 1;
+            if (playerHasFlagBit(1) != 0) {
+                BtlTargetInfo info;
+                FUN_003e8bb0(&info, task->battle, menu->choiceMask);
+                if (info.kind == 3) {
+                    if (info.subtype != 24 && info.subtype != 27 && info.subtype != 1) {
+                        Table8Row *row = dataTable8FindRecord(info.record);
+                        if (row != NULL && (((u32 *)row)[26] & 4) != 0) {
+                            index = 1;
+                            continue;
+                        }
+                    }
+                    menu->targetFlags[0] = 0;
+                }
+            }
+        }
+    }
+
+finish:
+    btlUIClearWorkTables(g_btlUiBlock);
+    FUN_004eb838(task, menu);
+    return 1;
+}
+}

@@ -1,4 +1,3 @@
-/* NON_MATCHING: The required mask uses LDM instead of retail's two word loads. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
@@ -38,10 +37,9 @@ s32 FUN_003b8044(void)
     }
     for (s32 index = 0; index < 109; ++index) {
         EntryQueryView *entry = &((EntryQueryView *)btlGetMainState()->entries)[index];
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) != 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 &&
             entry->id == id && entry->categoryValues[valueIndex] >= 1) {
             scrSetResult(1);
             return 1;

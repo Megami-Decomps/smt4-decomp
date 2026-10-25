@@ -49,7 +49,7 @@ int obj4FSlots28Reset(...);
 int FUN_004f8fa0(...);
 int FUN_004fa01c(...);
 int rt_memcpy(...);
-int rt_memcpy_w(...);
+int __aeabi_memcpy4(...);
 
 int sysPlaySe(int);
 int asdMemFree(void);
@@ -272,7 +272,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: rt_memcpy. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -976,7 +976,7 @@ LAB_0024d284:
     if ((*puVar16 & DAT_00573a50) != 0 || (*(unsigned int *)(temp_v2 + 0x45a4) & DAT_00573a54) != 0) {
       if (DAT_00573924 != 0) {
         temp_v6 = gameGetSlotTable();
-        rt_memcpy_w(temp_v6,DAT_00573924,0x2d30);
+        __aeabi_memcpy4(temp_v6,DAT_00573924,0x2d30);
       }
       if (DAT_00573928 != 0) {
         temp_v6 = flagValueGetStorage();
@@ -987,7 +987,7 @@ LAB_0024d284:
        (*(int *)(temp_v2 + 0xa8) == 2)) {
       if (DAT_00573924 != 0) {
         temp_v6 = gameGetSlotTable();
-        rt_memcpy_w(temp_v6,DAT_00573924,0x2d30);
+        __aeabi_memcpy4(temp_v6,DAT_00573924,0x2d30);
       }
       if (DAT_00573928 != 0) {
         temp_v6 = flagValueGetStorage();
@@ -1108,7 +1108,7 @@ LAB_0024d284:
       if ((*(int *)(temp_v2 + 0xa8) == 2) && (*(int *)(temp_v2 + 0x4c80) == 1)) {
         if (DAT_00573924 != 0) {
           temp_v6 = gameGetSlotTable();
-          rt_memcpy_w(temp_v6,DAT_00573924,0x2d30);
+          __aeabi_memcpy4(temp_v6,DAT_00573924,0x2d30);
         }
         if (DAT_00573928 != 0) {
           temp_v6 = flagValueGetStorage();

@@ -38,7 +38,7 @@ int FUN_003d4ed8(...);
 int FUN_003e54b8(unsigned int);
 int FUN_004a01c8(int, int);
 int VectorSignedToFloat(...);
-int rt_memcpy_w(int [40], unsigned char *, int);
+int __aeabi_memcpy4(int [40], unsigned char *, int);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -114,7 +114,7 @@ extern int linkHolderCheckFirst(unsigned int);
 extern int partyAnyMemberHasFlagBit(unsigned int, unsigned int);
 extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0050d8e4. */
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 void FUN_00325d08(void)
@@ -161,10 +161,10 @@ void FUN_00325d08(void)
   temp_v21 = 0;
   temp_v0 = gameFlagsGetBlock();
   soundVolumeSettingGet();
-  rt_memcpy_w(aiStack_2e8,&DAT_00531c18,0xa0);
-  rt_memcpy_w(aiStack_248,&DAT_00531cb8,0xa0);
-  rt_memcpy_w(aiStack_1a8,&DAT_00531d58,0xa0);
-  rt_memcpy_w(aiStack_108,&DAT_00531df8,0xa0);
+  __aeabi_memcpy4(aiStack_2e8,&DAT_00531c18,0xa0);
+  __aeabi_memcpy4(aiStack_248,&DAT_00531cb8,0xa0);
+  __aeabi_memcpy4(aiStack_1a8,&DAT_00531d58,0xa0);
+  __aeabi_memcpy4(aiStack_108,&DAT_00531df8,0xa0);
   temp_v11 = *(float *)(g_lmapScene + 0x28);
   temp_v10 = romwright_piece_4_4(*(unsigned int *)(g_lmapScene + 0x2c),*(unsigned int *)(g_lmapScene + 0x30));
   mapEaseSceneHeading();

@@ -4,7 +4,7 @@
 extern "C" {
 extern IndexedRecordBuffer DAT_004d8b40;
 IndexedRecordBuffer *linkedFindItemByIndex(IndexedRecordList *, s32);
-void rt_memcpy_w(void *, const void *, u32);
+void __aeabi_memcpy4(void *, const void *, u32);
 u32 FUN_003224c0(IndexedRecordBuffer *, u32);
 
 // Edit an indexed record through scratch storage and mark flagged results.
@@ -12,9 +12,9 @@ u32 FUN_00328a28(IndexedRecordSource *source, const IndexedRecordSelection *sele
 {
     IndexedRecordBuffer *record = linkedFindItemByIndex(source->records,
                                             selection->index + source->baseIndex);
-    rt_memcpy_w(&DAT_004d8b40, record, sizeof(IndexedRecordBuffer));
+    __aeabi_memcpy4(&DAT_004d8b40, record, sizeof(IndexedRecordBuffer));
     u32 result = FUN_003224c0(&DAT_004d8b40, 1);
-    rt_memcpy_w(record, &DAT_004d8b40, sizeof(IndexedRecordBuffer));
+    __aeabi_memcpy4(record, &DAT_004d8b40, sizeof(IndexedRecordBuffer));
     if ((result & 1) != 0)
         result |= 0x800000;
     return result;

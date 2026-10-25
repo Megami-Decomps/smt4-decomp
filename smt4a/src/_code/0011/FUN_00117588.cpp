@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0030323c(void);
-int FUN_003032a8(int *, int, int *);
+int pooledListErase(int *, int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0030323c. */
-/* Supplied declaration required: FUN_003032a8. */
+/* Supplied declaration required: pooledListErase. */
 
 
 void FUN_00117588(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -28,7 +28,7 @@ void FUN_00117588(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   uStack_c = param_4;
   FUN_0030323c();
   temp_v0 = **(unsigned int **)(param_1 + 0x10);
-  FUN_003032a8(&uStack_c,param_1,&temp_v0);
+  pooledListErase(&uStack_c,param_1,&temp_v0);
   return;
 }
 

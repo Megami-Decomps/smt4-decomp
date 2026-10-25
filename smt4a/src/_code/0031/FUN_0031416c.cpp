@@ -51,7 +51,7 @@ extern float DAT_00610afc; /* 0x610afc */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00235bfc. */
 extern int sceneFindRecordByName(unsigned int, int, unsigned char *);
-extern short FUN_00406798(unsigned int, unsigned char *);
+extern short resourceNameGroupFindIndex(unsigned int, unsigned char *);
 
 
 void FUN_0031416c(int param_1,int param_2,int param_3)
@@ -74,7 +74,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
   temp_v7 = temp_v6;
   FUN_001bc124();
   FUN_001bbf0c();
-  temp_v0 = FUN_00406798(temp_v2,&LAB_00314518);
+  temp_v0 = resourceNameGroupFindIndex(temp_v2,&LAB_00314518);
   temp_v3 = (int)temp_v0;
   temp_v1 = sceneFindRecordByName(temp_v2,temp_v3,&LAB_00314518);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
@@ -122,7 +122,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
     *(float *)(temp_v1 + 0x50) = temp_v7;
     FUN_0016b034(temp_v2,temp_v3);
   }
-  temp_v0 = FUN_00406798(temp_v2,&LAB_00314534);
+  temp_v0 = resourceNameGroupFindIndex(temp_v2,&LAB_00314534);
   temp_v3 = (int)temp_v0;
   temp_v1 = sceneFindRecordByName(temp_v2,temp_v3,&LAB_00314534);
   if (!((param_1 == 0 && param_2 == 0) && param_3 == 0)) {
@@ -161,7 +161,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
     *(unsigned char *)(temp_v1 + 0x47) = 0xff;
     FUN_0016b034(temp_v2,temp_v3);
   }
-  temp_v0 = FUN_00406798(temp_v2,&LAB_00314544);
+  temp_v0 = resourceNameGroupFindIndex(temp_v2,&LAB_00314544);
   temp_v1 = (int)temp_v0;
   if (-1 < temp_v1) {
     temp_v3 = sceneFindRecordByName(temp_v2,temp_v1,&LAB_00314544);

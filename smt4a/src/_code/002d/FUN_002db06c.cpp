@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, int);
-int FUN_0027376c(...);
+int eplSlotStartRequest(...);
 int FUN_00294774(...);
 int controllerSetDestination(...);
 int animationSelectClip(...);
@@ -85,7 +85,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001f3f34. */
 /* Supplied declaration required: soundAllocateSpatialActor. */
 /* Supplied declaration required: FUN_0025ef68. */
-/* Supplied declaration required: FUN_0027376c. */
+/* Supplied declaration required: eplSlotStartRequest. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: FUN_00294774. */
 /* Supplied declaration required: distSpatial. */
@@ -737,7 +737,7 @@ LAB_002dc4e4:
       temp_v0 = FUN_004ff98c(temp_v2);
       if (temp_v0 == 5) {
         if (g_lmapScene[0x75] == 0x32) {
-          FUN_0027376c(3);
+          eplSlotStartRequest(3);
           FUN_00294774(3);
         }
         piVar2 = g_lmapScene;
@@ -751,7 +751,7 @@ LAB_002dc4e4:
       temp_v0 = FUN_004ff98c(temp_v2);
       if (temp_v0 == 0xb) {
         if (g_lmapScene[0x75] == 0x56) {
-          FUN_0027376c(3);
+          eplSlotStartRequest(3);
           FUN_00294774(3);
         }
         piVar2 = g_lmapScene;
@@ -765,7 +765,7 @@ LAB_002dc4e4:
       temp_v0 = FUN_004ff98c(temp_v2);
       if (temp_v0 == 2) {
         if (g_lmapScene[0x75] == 0x2d) {
-          FUN_0027376c(3);
+          eplSlotStartRequest(3);
         }
         piVar2 = g_lmapScene;
         if (g_lmapScene[0x75] >= 0x32) {
@@ -898,7 +898,7 @@ joined_r0x002dc288:
         soundAllocateSpatialActor(0x10002ec);
       }
       if (g_lmapScene[0x75] == 0x5a) {
-        FUN_0027376c(3);
+        eplSlotStartRequest(3);
         FUN_00294774(3);
       }
       piVar2 = g_lmapScene;
@@ -981,7 +981,7 @@ joined_r0x002dc288:
       temp_v0 = FUN_004ff98c(*(unsigned int *)(piVar2[0x60] + 4));
       if (temp_v0 == 2) {
         if (g_lmapScene[0x75] == 0x2d) {
-          FUN_0027376c(3);
+          eplSlotStartRequest(3);
         }
         piVar2 = g_lmapScene;
         if (g_lmapScene[0x75] >= 0x32) {
@@ -1170,7 +1170,7 @@ LAB_002dd03c:
     controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
     controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
     if (g_lmapScene[0x75] == 1) {
-      FUN_0027376c(1);
+      eplSlotStartRequest(1);
       FUN_00294774(1);
     }
     temp_v0 = FUN_004ffa14(*(unsigned int *)(g_lmapScene[0x60] + 4));
@@ -1196,7 +1196,7 @@ LAB_002dd03c:
          *(unsigned int *)(*(int *)(piVar2[0x60] + 4) + 4) & 0xfffffffc;
     *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) = *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) & 0xfffffffc;
     if (piVar2[0x75] == 0x11) {
-      FUN_0027376c(2);
+      eplSlotStartRequest(2);
       FUN_00294774(2);
     }
     temp_v0 = FUN_004ffa14(*(unsigned int *)(g_lmapScene[0x60] + 4));

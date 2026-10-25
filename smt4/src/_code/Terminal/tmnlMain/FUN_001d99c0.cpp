@@ -18,7 +18,7 @@ int FUN_002636b0(void);
 int FUN_002636d0(...);
 int mapDepartSetTarget(...);
 int mdlPartsRelease(void);
-int FUN_0028d5ac(void);
+int touchMenuClose(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_0029ae60(...);
@@ -152,7 +152,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: gameDataGetPlayerName. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_0028d5ac. */
+/* Supplied declaration required: touchMenuClose. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
@@ -943,7 +943,7 @@ LAB_001da638:
   else {
     temp_v6 = screenFadeIsBusy();
     if (temp_v6 == 0) {
-      FUN_0028d5ac();
+      touchMenuClose();
       useCounterRelease();
       FUN_002636d0(0);
       FUN_0029b8ec(puVar2[0xc]);

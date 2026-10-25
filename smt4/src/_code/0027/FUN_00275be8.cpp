@@ -62,10 +62,9 @@ void FUN_00275be8(s32 mode)
         s8 tileKinds[24] = {0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0,
                             0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0};
         for (s32 index = 0; index < 24; ++index) {
-            UiSpriteState *tile = &work->tiles[index];
-            FUN_002bd954(tile, 0x1D, tileKinds[index] + 0x7D1, &work->parameters, 0xB, 1.0f);
-            FUN_002a9fdc(tile, 0, 0);
-            FUN_00295eb0(tile, 0x1D, index + 0x7D5);
+            FUN_002bd954((&work->tiles[index]), 0x1D, tileKinds[index] + 0x7D1, &work->parameters, 0xB, 1.0f);
+            FUN_002a9fdc((&work->tiles[index]), 0, 0);
+            FUN_00295eb0((&work->tiles[index]), 0x1D, index + 0x7D5);
         }
         break;
     }

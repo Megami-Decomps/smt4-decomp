@@ -8,7 +8,7 @@
 /* The message window inside the message work area. */
 typedef struct MessageMainWindow {
     /* 0x00 */ u8 unk00[0xE8];
-    /* 0xE8 */ u8 state;
+    /* 0xE8 */ s8 state;
 } MessageMainWindow;
 
 typedef struct MessageMainWork {

@@ -1,183 +1,173 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b079c` (_code @ 0x1b079c, 0x3fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: block layout and register allocation differ (retail hoists menu + entry*2 into a stack slot and tests kinds 0/13 and 1 in separate chains) */
+#include "common.h"
+#include "shard/W7_W7Match2_PartyDamage.h"
+
+/* The filter menu's per-category id lists, each indexed by entry (entry 0 is "don't specify"). */
+struct FilterMenu {
+    /* 0x000 */ u8 unk000[0x5be];
+    /* 0x5be */ u16 firstIds[0x70];   /* kind 1 */
+    /* 0x69e */ u8 unk69e[0x882];
+    /* 0xf20 */ u16 secondIds[0x38];  /* kind 2 */
+    /* 0xf90 */ u16 thirdIds[0x38];   /* kind 3 */
+};
+
+/* The currently selected filter value of each kind. */
+struct FilterSelection {
+    /* 0x00 */ s16 partyFilter;     /* kind 0: slot of the chosen party member */
+    /* 0x02 */ s16 allyFilter;      /* kind 13 */
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s16 secondFilter;    /* kind 2 */
+    /* 0x0a */ u16 firstFilter;     /* kind 1 */
+    /* 0x0c */ u16 thirdFilter;     /* kind 3 */
+    /* 0x0e */ s16 fifthFilter;     /* kind 5 */
+    /* 0x10 */ u8 unk10[5];
+    /* 0x15 */ s8 fourthFilter;     /* kind 4 */
+};
+
+/* The filter settings record: the selection starts at 0x1c. */
+struct FilterSettings {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ FilterSelection selection;
+};
+
+struct StockUnit {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 id;
+};
 
 extern "C" {
+FilterSettings *FUN_002a0d0c(void);
+PartyDamageSlotsIV *gameGetSlotTable(void);
+StockUnit *gameGetUnitRecord(s32 slot);
+s32 flagWordTestBit(StockUnit *unit, u32 bit);
+void uiFormatIndexedDisplayName(FilterMenu *menu, s32 kind, s32 index, char *label);
 
-int uiFormatIndexedDisplayName(...);
-
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_4_stack;
-
-/* Supplied declaration required: uiFormatIndexedDisplayName. */
-extern int flagWordTestBit(int, unsigned int);
-extern int FUN_002a0d0c(void);
-extern int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-
-
-unsigned char FUN_001b079c(int param_1,int param_2,unsigned int param_3,int param_4)
-
+/* Formats the label of entry `entry` of filter kind `kind` into `label` and tells whether it is
+   the entry the settings currently have selected. */
+u8 FUN_001b079c(FilterMenu *menu, s32 kind, char *label, s32 entry)
 {
-/* irregular: 4 goto(s); 1 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  int temp_v10;
-  
-  temp_v6 = param_2;
-  temp_v10 = param_4;
-  temp_v1 = FUN_002a0d0c();
-  temp_v9 = 0;
-  temp_v2 = param_1 + param_4 * 2;
-  temp_v7 = param_4 - 1;
-  if (param_2 != 0) {
-    if (param_2 != 0xd) {
-LAB_001b0880:
-      if (param_2 != 1) goto LAB_001b0978;
-      if (param_4 != 0) {
-        uiFormatIndexedDisplayName(param_1,1,*(unsigned short *)(temp_v2 + 0x5be),param_3,temp_v2,param_1,temp_v6,param_3,
-                     temp_v10);
-        if (*(short *)(temp_v1 + 0x26) == *(short *)(temp_v2 + 0x5be)) {
-          return 1;
-        }
-        return temp_v9;
-      }
-      uiFormatIndexedDisplayName(param_1,1,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-      temp_v0 = *(short *)(temp_v1 + 0x26);
-    }
-    else {
-      if (param_4 == 0) {
-        uiFormatIndexedDisplayName(param_1,0xd,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-        temp_v0 = *(short *)(temp_v1 + 0x1e);
-        goto joined_r0x001b0854;
-      }
-      temp_v8 = 0;
-      temp_v5 = temp_v8;
-      do {
-        temp_v3 = gameGetSlotTable();
-        if (-1 < *(char *)(temp_v3 + temp_v8 + 0x90f0)) {
-          temp_v3 = gameGetSlotTable();
-          temp_v3 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v8 + 0x90f0));
-          temp_v4 = flagWordTestBit(temp_v3,10);
-          if ((temp_v4 == 0) && (temp_v4 = flagWordTestBit(temp_v3,2), temp_v4 == 0)) {
-            if (temp_v5 == temp_v7) {
-              uiFormatIndexedDisplayName(param_1,0xd,*(unsigned short *)(temp_v3 + 0x46),param_3);
-              temp_v5 = gameGetSlotTable();
-              temp_v9 = (int)*(char *)(temp_v5 + temp_v8 + 0x90f0) == (int)*(short *)(temp_v1 + 0x1e);
-              break;
+    FilterSelection *settings = &FUN_002a0d0c()->selection;
+    u8 selected = 0;
+
+    if (kind == 0) {
+        if (entry != 0) {
+            s32 count = 0;
+            for (s32 i = 0; i < 24; i++) {
+                if (gameGetSlotTable()->stock[i] >= 0) {
+                    StockUnit *unit = gameGetUnitRecord(gameGetSlotTable()->stock[i]);
+                    if (!flagWordTestBit(unit, 10) && !flagWordTestBit(unit, 2)) {
+                        if (count == entry - 1) {
+                            uiFormatIndexedDisplayName(menu, kind, unit->id, label);
+                            selected = gameGetSlotTable()->stock[i] == settings->partyFilter;
+                            break;
+                        }
+                        count++;
+                    }
+                }
             }
-            temp_v5 = temp_v5 + 1;
-          }
-        }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < 0x18);
-LAB_001b0978:
-      temp_v5 = param_1 + param_4 * 2;
-      if (param_2 == 2) {
-        if (param_4 == 0) {
-          uiFormatIndexedDisplayName(param_1,2,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-          if (*(short *)(temp_v1 + 0x24) < 1) {
-            return 1;
-          }
-          return temp_v9;
-        }
-        uiFormatIndexedDisplayName(param_1,2,*(unsigned short *)(temp_v5 + 0xf20),param_3,temp_v2,param_1,temp_v6,param_3,
-                     temp_v10);
-        if ((int)*(short *)(temp_v1 + 0x24) == (unsigned int)*(unsigned short *)(temp_v5 + 0xf20)) {
-          return 1;
-        }
-        return temp_v9;
-      }
-      if (param_2 != 3) {
-        if (param_2 == 4) {
-          if (param_4 == 0) {
-            uiFormatIndexedDisplayName(param_1,4,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-            if (*(char *)(temp_v1 + 0x31) < '\0') {
-              return 1;
+        } else {
+            uiFormatIndexedDisplayName(menu, kind, -1, label);
+            if (settings->partyFilter < 0) {
+                return 1;
             }
-            return temp_v9;
-          }
-          uiFormatIndexedDisplayName(param_1,4,param_4 - 1,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-          temp_v6 = (int)*(char *)(temp_v1 + 0x31);
-          if (temp_v6 == temp_v7) {
-            return 1;
-          }
-          return temp_v9;
+            return selected;
         }
-        if (param_2 != 5) {
-          return temp_v9;
-        }
-        if (param_4 != 0) {
-          uiFormatIndexedDisplayName(param_1,5,param_4 - 1,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-          temp_v6 = (int)*(short *)(temp_v1 + 0x2a);
-          if (temp_v6 == temp_v7) {
-            return 1;
-          }
-          return temp_v9;
-        }
-        uiFormatIndexedDisplayName(param_1,5,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-        temp_v0 = *(short *)(temp_v1 + 0x2a);
-        goto joined_r0x001b0854;
-      }
-      if (param_4 != 0) {
-        uiFormatIndexedDisplayName(param_1,3,*(unsigned short *)(temp_v5 + 0xf90),param_3,temp_v2,param_1,temp_v6,param_3,
-                     temp_v10);
-        if (*(short *)(temp_v1 + 0x28) == *(short *)(temp_v5 + 0xf90)) {
-          return 1;
-        }
-        return temp_v9;
-      }
-      uiFormatIndexedDisplayName(param_1,3,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-      temp_v0 = *(short *)(temp_v1 + 0x28);
-    }
-    if (temp_v0 != 0) {
-      return temp_v9;
-    }
-  }
-  else {
-    if (param_4 != 0) {
-      temp_v8 = 0;
-      temp_v5 = temp_v8;
-      do {
-        temp_v3 = gameGetSlotTable();
-        if (-1 < *(char *)(temp_v3 + temp_v8 + 0x90f0)) {
-          temp_v3 = gameGetSlotTable();
-          temp_v3 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v8 + 0x90f0));
-          temp_v4 = flagWordTestBit(temp_v3,10);
-          if ((temp_v4 == 0) && (temp_v4 = flagWordTestBit(temp_v3,2), temp_v4 == 0)) {
-            if (temp_v5 == temp_v7) {
-              uiFormatIndexedDisplayName(param_1,0,*(unsigned short *)(temp_v3 + 0x46),param_3);
-              temp_v5 = gameGetSlotTable();
-              temp_v9 = (int)*(char *)(temp_v5 + temp_v8 + 0x90f0) == (int)*(short *)(temp_v1 + 0x1c);
-              break;
+    } else if (kind == 13) {
+        if (entry != 0) {
+            s32 count = 0;
+            for (s32 i = 0; i < 24; i++) {
+                if (gameGetSlotTable()->stock[i] >= 0) {
+                    StockUnit *unit = gameGetUnitRecord(gameGetSlotTable()->stock[i]);
+                    if (!flagWordTestBit(unit, 10) && !flagWordTestBit(unit, 2)) {
+                        if (count == entry - 1) {
+                            uiFormatIndexedDisplayName(menu, kind, unit->id, label);
+                            selected = gameGetSlotTable()->stock[i] == settings->allyFilter;
+                            break;
+                        }
+                        count++;
+                    }
+                }
             }
-            temp_v5 = temp_v5 + 1;
-          }
+        } else {
+            uiFormatIndexedDisplayName(menu, kind, -1, label);
+            if (settings->allyFilter < 0) {
+                return 1;
+            }
+            return selected;
         }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < 0x18);
-      goto LAB_001b0880;
     }
-    uiFormatIndexedDisplayName(param_1,0,0xffffffff,param_3,temp_v2,param_1,temp_v6,param_3,temp_v10);
-    temp_v0 = *(short *)(temp_v1 + 0x1c);
-joined_r0x001b0854:
-    if (-1 < temp_v0) {
-      return temp_v9;
+
+    if (kind == 1) {
+        if (entry != 0) {
+            uiFormatIndexedDisplayName(menu, kind, menu->firstIds[entry], label);
+            if (settings->firstFilter == menu->firstIds[entry]) {
+                return 1;
+            }
+            return selected;
+        }
+        uiFormatIndexedDisplayName(menu, kind, -1, label);
+        if (settings->firstFilter == 0) {
+            return 1;
+        }
+        return selected;
     }
-  }
-  return 1;
+    if (kind == 2) {
+        if (entry != 0) {
+            uiFormatIndexedDisplayName(menu, kind, menu->secondIds[entry], label);
+            if (settings->secondFilter == menu->secondIds[entry]) {
+                return 1;
+            }
+            return selected;
+        }
+        uiFormatIndexedDisplayName(menu, kind, -1, label);
+        if (settings->secondFilter <= 0) {
+            return 1;
+        }
+        return selected;
+    }
+    if (kind == 3) {
+        if (entry != 0) {
+            uiFormatIndexedDisplayName(menu, kind, menu->thirdIds[entry], label);
+            if (settings->thirdFilter == menu->thirdIds[entry]) {
+                return 1;
+            }
+            return selected;
+        }
+        uiFormatIndexedDisplayName(menu, kind, -1, label);
+        if (settings->thirdFilter == 0) {
+            return 1;
+        }
+        return selected;
+    }
+    if (kind == 4) {
+        if (entry != 0) {
+            uiFormatIndexedDisplayName(menu, kind, entry - 1, label);
+            if (settings->fourthFilter == entry - 1) {
+                return 1;
+            }
+            return selected;
+        }
+        uiFormatIndexedDisplayName(menu, kind, -1, label);
+        if (settings->fourthFilter < 0) {
+            return 1;
+        }
+        return selected;
+    }
+    if (kind == 5) {
+        if (entry != 0) {
+            uiFormatIndexedDisplayName(menu, kind, entry - 1, label);
+            if (settings->fifthFilter == entry - 1) {
+                return 1;
+            }
+            return selected;
+        }
+        uiFormatIndexedDisplayName(menu, kind, -1, label);
+        if (settings->fifthFilter < 0) {
+            return 1;
+        }
+        return selected;
+    }
+    return selected;
 }
 
 } /* extern "C" */

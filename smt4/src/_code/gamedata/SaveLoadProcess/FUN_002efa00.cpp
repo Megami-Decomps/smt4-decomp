@@ -19,7 +19,7 @@ void *gameDataBlocksGetTable();
 void *configGetSettings();
 void FUN_002ad8b4(void *settings, const void *savedSettings);
 GameSaveData *gameDataBlocksGetSaveData();
-void rt_memcpy_w(void *destination, const void *source, u32 size);
+void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0026b4cc();
 extern SaveByteSettings g_byteSettings;
 
@@ -40,9 +40,9 @@ u32 FUN_002efa00()
                 work->state = 7;
             } else {
                 const SaveFilePayloadIV *payload = static_cast<const SaveFilePayloadIV *>(work->buffer);
-                rt_memcpy_w(gameDataBlocksGetTable(), payload->table, sizeof(payload->table));
+                __aeabi_memcpy4(gameDataBlocksGetTable(), payload->table, sizeof(payload->table));
                 FUN_002ad8b4(configGetSettings(), payload->settings);
-                rt_memcpy_w(gameDataBlocksGetSaveData(), payload->save, sizeof(payload->save));
+                __aeabi_memcpy4(gameDataBlocksGetSaveData(), payload->save, sizeof(payload->save));
                 gameDataBlocksGetSaveData()->metadata.option = work->option;
                 FUN_0026b4cc();
                 work->state = 6;

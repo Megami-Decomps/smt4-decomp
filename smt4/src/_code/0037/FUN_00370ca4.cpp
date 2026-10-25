@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_memcpy_w(int, int, int);
+int __aeabi_memcpy4(int, int, int);
 
 typedef struct fn_00370ca4_arg0 fn_00370ca4_arg0;
 typedef struct fn_00370ca4_arg0_p8 fn_00370ca4_arg0_p8;
@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-/* Supplied declaration required: rt_memcpy_w. */
+/* Supplied declaration required: __aeabi_memcpy4. */
 
 
 unsigned int FUN_00370ca4(fn_00370ca4_arg0 *param_1,int *param_2)
@@ -126,7 +126,7 @@ unsigned int FUN_00370ca4(fn_00370ca4_arg0 *param_1,int *param_2)
           temp_v2 = 0;
         }
         temp_v7 = temp_v4 + temp_v6 * 0x88;
-        rt_memcpy_w(temp_v7,temp_v2,0x84);
+        __aeabi_memcpy4(temp_v7,temp_v2,0x84);
         piVar6 = (int *)(temp_v7 + 0x20);
         if (param_1->field_0x8 != (fn_00370ca4_arg0_p8 *)0x0) {
           *piVar6 = (int)param_1->field_0x8 - (int)piVar6;

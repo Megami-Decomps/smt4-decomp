@@ -19,7 +19,7 @@ extern "C" {
 void FUN_002bc7f4(u32, u32 **);
 u32 *FUN_0023bba0(ModelShaderCommands *, u32 *);
 u32 *FUN_0023bb00(ModelShaderCommands *, u32 *, const void *);
-void *rt_memcpy_w(void *, const void *, u32);
+void *__aeabi_memcpy4(void *, const void *, u32);
 void asdModelAdvanceCommandCursor(u32);
 }
 
@@ -66,7 +66,7 @@ extern "C" void modelShaderSubmitCommands(void *, ModelShaderCommands *shader, c
         u32 *end = FUN_0023bba0(shader, shader->cached);
         shader->cachedCount = end - shader->cached;
     }
-    rt_memcpy_w(cursor, shader->cached, shader->cachedCount * sizeof(u32));
+    __aeabi_memcpy4(cursor, shader->cached, shader->cachedCount * sizeof(u32));
     cursor += shader->cachedCount;
     cursor = FUN_0023bb00(shader, cursor, draw);
     cursor = appendAttributeReset(cursor, shader);
