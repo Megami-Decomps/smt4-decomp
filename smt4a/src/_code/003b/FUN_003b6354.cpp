@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the 0.2 factor in s17 and the shared draw tail laid out differently (190 vs 184 rows); the row drawing logic is the same. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ typedef struct ListMenuWork {
     /* 0x8E88 */ s32 rowIds[1];
 } ListMenuWork;
 
-s32 FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 s32 objectApplyIfUnblocked(void *list);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 FUN_002a4894(void *list);

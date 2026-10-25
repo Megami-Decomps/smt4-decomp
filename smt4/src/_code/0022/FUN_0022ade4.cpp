@@ -1,5 +1,6 @@
 /* NON_MATCHING: row-sprite speed addressing, conditional label-coordinate loads and blink branch placement differ. */
 #include "shard/S3SceneWidget.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -8,7 +9,6 @@ void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 const UiLayoutEntryPrefixIV *FUN_002bf4f8(u32, u32);
 void FUN_002bf380(u32, u32, u32, s32, s32, s32);
-void FUN_002bf288(u32, u32, u32, s32, s32, s32);
 void FUN_002be5a4(u32, u32, const char *, f32, f32, f32, f32, f32);
 
 void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fade)

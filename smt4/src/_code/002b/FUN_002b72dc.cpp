@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP scheduling: retail loads the 40.743664f constant after the first multiply and allocates s2-s6 differently around the divides. */
+/* NON_MATCHING: VFP register numbering after the sine/cosine call (retail allocates s2-s6 one higher around the divides); the angle multiplies now match. */
 #include "common.h"
 
 /* A 4x4 matrix, row by row. */
@@ -19,7 +19,8 @@ ProjectionMtx *FUN_002b72dc(ProjectionMtx *mtx, f32 fovy, f32 aspect, f32 nearZ,
     f32 depthScale;
 
     /* The sine table angle unit: 256 per turn. */
-    FUN_002ad314(&sine, &cosine, fovy * 0.5f * 40.743664f);
+    f32 halfFov = fovy * 0.5f;
+    FUN_002ad314(&sine, &cosine, halfFov * 40.743664f);
     cotangent = cosine / sine;
     depthScale = 1.0f / (farZ - nearZ);
     mtx->m[3][2] = -1.0f;

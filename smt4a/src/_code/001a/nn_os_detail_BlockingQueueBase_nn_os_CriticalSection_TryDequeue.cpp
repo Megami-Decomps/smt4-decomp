@@ -1,4 +1,3 @@
-/* NON_MATCHING: the critical-section pointer and the `out` pointer swap callee-saved registers (r5/r6). */
 #include "common.h"
 
 extern "C" {

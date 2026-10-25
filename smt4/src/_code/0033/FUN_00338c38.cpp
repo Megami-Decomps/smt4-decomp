@@ -1,12 +1,12 @@
 /* NON_MATCHING: the final flags |= 0x8000000 uses r0 as its temporary; retail uses r1. */
 #include "battle/BattleUnitSlot.h"
 #include "shard/W4_Match6_BtlScript.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
 extern u32 g_btlScriptUnit; /* 0x43427c */
 
-extern int FUN_002b6ad0(void);
 extern int btlFindNthActiveSpecialEntry(BtlScript *script, int arg);
 extern u32 FUN_00245a7c(u32 arg, u32 pending);
 

@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fa4dc` (_code @ 0x2fa4dc, 0x204 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_001835b4(int, int, int, int, int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -20,7 +20,6 @@ extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
 
 
 void FUN_002fa4dc(int param_1,int param_2)

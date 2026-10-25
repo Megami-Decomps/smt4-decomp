@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "util/SlotRangeSelect.h"
 
 /* The shared entry's padding union starts at 0x0a and must not acquire s32 alignment. */
 struct BattleCandidateSignedValuesView {
@@ -12,7 +13,6 @@ struct BattleCandidateSignedValuesView {
 extern "C" {
 s32 scrGetArg(s32 argument);
 u32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(u32 group, s32 *first, s32 *count);
 void scrSetResult(s32 result);
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);

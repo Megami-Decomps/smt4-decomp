@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses ble 2c where the compiled block uses ble 30. */
 #include "shard/W5_W5Match5_TwinRecords.h"
 
 using namespace ResourceTableLookup;
@@ -13,5 +12,6 @@ extern "C" void* FUN_004ff4b0(ResourceTable* table, s32 index)
         return NULL;
     }
 
-    return table->records[table->indices[index].recordIndex].value;
+    u32 recordIndex = table->indices[index].recordIndex;
+    return table->records[recordIndex].value;
 }

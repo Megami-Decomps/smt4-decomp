@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState();
-s32 scrGetArg(u32 argument);
 void scrSetResult(s32 result);
 
 // Compare a script threshold with the average encoded value of eligible combatants.

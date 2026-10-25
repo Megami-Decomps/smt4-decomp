@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail is a hand-written ARM clearing routine with four zero registers, conditional STM writebacks, early LR restore, and carry/sign-driven tail stores. */
-#include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 // Clears an aligned destination and returns the byte immediately after the cleared range.
 extern "C" void* memClear(void* destination, u32 size)

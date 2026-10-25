@@ -1,5 +1,6 @@
 /* NON_MATCHING: counter badge draw; call sequence follows retail, float/int scheduling and the saved-register set are not compared */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 /* A placed sprite frame: offset and a pointer to its size words. */
 struct UiSpriteFrame {
@@ -15,7 +16,6 @@ extern void *g_renderCtx;
 f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 UiSpriteFrame *FUN_001834a4(u32 bank, u32 sprite);
 u32 FUN_00180114(u32 id);
 void textFormatBuffer(char *buffer, const char *format, ...);

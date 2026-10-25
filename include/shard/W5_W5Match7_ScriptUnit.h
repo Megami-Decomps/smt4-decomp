@@ -32,7 +32,7 @@ struct ScriptUnit {
 };
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 scrGetArg(u32 index);
+s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 }
 #endif

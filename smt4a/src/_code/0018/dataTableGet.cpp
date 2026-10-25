@@ -1,27 +1,21 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DataTableSlots.h"
 
 extern "C" {
 
-typedef struct Entry {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u32 value;
-    /* 0x08 */ u8 unk08[8];
-} Entry;                        /* 0x10 */
-extern Entry g_dataTableSlots[];
+void *dataTableFileGetTable(void *file, u32 index);
 
-u32 dataTableFileGetTable(u32 value, u32 arg);
-
-/* Looks up the value of entry `index` of the 0x50-entry table at 0x5E2214 (0 when out of range) and passes it, with `arg`, to dataTableFileGetTable. */
-u32 dataTableGet(u32 index, u32 arg)
+/* Looks up section `section` of the loaded file of table slot `table` (NULL data when out of range). */
+void *dataTableGet(int table, int section)
 {
-    u32 value;
+    void *file;
 
-    if (index < 0x50) {
-        value = g_dataTableSlots[index].value;
+    if ((u32)table < DATA_TABLE_SLOTS) {
+        file = g_dataTableSlots[table].data;
     } else {
-        value = 0;
+        file = 0;
     }
-    return dataTableFileGetTable(value, arg);
+    return dataTableFileGetTable(file, section);
 }
 
 } /* extern "C" */

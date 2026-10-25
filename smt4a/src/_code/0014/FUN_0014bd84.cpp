@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "util/CalleeContracts.h"
 
 
 extern "C" {

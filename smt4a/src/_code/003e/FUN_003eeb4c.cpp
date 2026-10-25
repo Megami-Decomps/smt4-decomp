@@ -1,4 +1,3 @@
-/* NON_MATCHING: call argument scheduling: retail computes the model pointer before storing the stacked 5. */
 #include "common.h"
 
 /* Battle unit as seen by this check: four slot indices, -1 when empty. */
@@ -39,7 +38,8 @@ void FUN_003eeb4c(BtlSlotContext *ctx, s32 entry)
     if (unit->slots[0] < 0 && unit->slots[1] < 0 && unit->slots[2] < 0 && unit->slots[3] < 0 && entry >= 0) {
         model = ctx->entries[entry].modelIndex;
         if (model >= 0) {
-            FUN_004fe764(0, 0, ctx->models + model, 8, 5);
+            BtlSlotModel *target = &ctx->models[model];
+            FUN_004fe764(0, 0, target, 8, 5);
         }
     }
 }

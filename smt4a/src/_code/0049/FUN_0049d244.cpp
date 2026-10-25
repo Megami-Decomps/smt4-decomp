@@ -1,5 +1,6 @@
 /* NON_MATCHING: native text-scale calculation folds to a constant; saved-register and outgoing argument scheduling differ. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 struct MenuCaptionText { u16 length; u16 unk02; u16 text[1]; };
 struct MenuCaptionView {
     u32 unk00;
@@ -12,7 +13,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
 SpriteInfo *FUN_001834a4(u32 group, u32 id);
 void FUN_00162790(u32 layer, u32 color, const u16 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
 

@@ -1,9 +1,9 @@
 /* NON_MATCHING: register allocation only: retail keeps the stat selector in r6 and the found flag in r5; built swaps them. */
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-extern BtlState *btlGetMainState(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 
@@ -26,7 +26,7 @@ u32 scrCommBtlUnitStatAllSet(void)
     }
     found = 0;
     for (index = 0; index < 0x6D; index++) {
-        BtlUnitEntry *unit = &btlGetMainState()->units[index];
+        BtlUnitEntry *unit = &btlGetMainStateExt()->units[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id) {
             found = 1;

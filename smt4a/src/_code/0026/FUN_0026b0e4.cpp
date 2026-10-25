@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026b0e4` (_code @ 0x26b0e4, 0x10ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
@@ -16,7 +17,6 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int FUN_001fc720(int, int);
@@ -61,7 +61,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(unsigned int);

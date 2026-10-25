@@ -1,10 +1,10 @@
 /* NON_MATCHING: work pointer and zero constant occupy exchanged saved registers; canonical render wrappers match stack scheduling. */
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-s32 FUN_002865c0(u32 mode, f32 alpha);
 s32 FUN_002c5d80(u32 mode, u32 flags);
 s32 packNibblesAndByte(u32 first, u32 second, u32 value);
 void FUN_0028186c(u32 handle);

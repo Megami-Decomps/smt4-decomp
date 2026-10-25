@@ -1,4 +1,4 @@
-/* NON_MATCHING: the unit loop keeps one &units[i] pointer where retail recomputes base+892 for each store and the call, and g_buttonHelp is reloaded instead of living in r9 */
+/* NON_MATCHING: g_buttonHelp now lives in a register through the function, but the paramsInit argument setup (retail derives the three data pointers from one base by chained subtraction) and register numbering still differ */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -32,19 +32,21 @@ s32 FUN_002109cc(u32 handle);
  * animations and the two display units, then bumps the reference count. */
 void buttonHelpCreate(void)
 {
-    if (g_buttonHelp.references <= 0) {
-        if (g_buttonHelp.work == NULL) {
+    ButtonHelpGlobals *globals = &g_buttonHelp;
+
+    if (globals->references <= 0) {
+        if (globals->work == NULL) {
             asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\ButtonHelp\\ButtonHelp.cpp", 832);
-            g_buttonHelp.work = (ButtonHelpWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(ButtonHelpWork), 1);
+            globals->work = (ButtonHelpWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(ButtonHelpWork), 1);
         }
-        ButtonHelpWork *work = g_buttonHelp.work;
+        ButtonHelpWork *work = globals->work;
         memClear(work, sizeof(ButtonHelpWork));
         work->jobs.process = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0,
                                                     FUN_001c0c38, buttonHelpNotifyNoop, 0);
         work->jobs.drawTask = taskCreateDraw((const s8 *)"ButtonHelp DRAW", 0xE6, 0, 0, FUN_002109cc,
                                              NULL, 0, work->jobs.process);
 
-        ButtonHelpWork *help = g_buttonHelp.work;
+        ButtonHelpWork *help = globals->work;
         drawParameterBlockClear(&help->ui.parameters);
         paramsInit(&help->ui.parameters, &DAT_00402550 - 0x4A, 0x30, &DAT_00402550 - 0x18, 0xC,
                    &DAT_00402550 - 0xC, 0xC, NULL, 0, &DAT_00402550, 0xA8);
@@ -55,16 +57,15 @@ void buttonHelpCreate(void)
         FUN_002bd954(&help->units[0], 0x12, 0, &help->ui.parameters, 0x10, 1.0f);
         FUN_002bd954(&help->units[1], 0x12, 1, &help->ui.parameters, 0x10, 1.0f);
 
-        ButtonHelpWork *units = g_buttonHelp.work;
+        ButtonHelpWork *units = globals->work;
         units->mode = 0;
         for (s32 i = 0; i < 2; i++) {
-            ButtonHelpDisplayUnit *unit = &units->units[i];
-            unit->value = 2;
-            FUN_00295eb0(unit, 0x12, 0);
-            unit->active = 1;
-            unit->unk0C = 0;
-            unit->unk10 = 0;
-            unit->unk14 = 0;
+            units->units[i].value = 2;
+            FUN_00295eb0(&units->units[i], 0x12, 0);
+            units->units[i].active = 1;
+            units->units[i].unk0C = 0;
+            units->units[i].unk10 = 0;
+            units->units[i].unk14 = 0;
         }
         help->unk4C5 = 0;
         help->unk04C6[0] = 1;
@@ -74,9 +75,9 @@ void buttonHelpCreate(void)
         work->unk558 = asdTextCreate(0);
         FUN_002bd82c(work->unk558, 0x323232FF);
         positionStateSet(work->unk558, 0, 0x646464FF, 0.0f);
-        work->unk560 = FUN_00297060(g_buttonHelp.bf, g_buttonHelp.mbm);
+        work->unk560 = FUN_00297060(globals->bf, globals->mbm);
     }
-    g_buttonHelp.references++;
+    globals->references++;
 }
 
 } /* extern "C" */

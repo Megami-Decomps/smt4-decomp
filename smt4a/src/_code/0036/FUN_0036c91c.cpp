@@ -1,5 +1,6 @@
 /* NON_MATCHING: The upper-arrow flag load and group argument are scheduled around stack stores differently. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 struct SegmentedScrollbarAnchor {
     /* 0x00 */ u32 unk00;
@@ -7,7 +8,6 @@ struct SegmentedScrollbarAnchor {
 };
 extern "C" {
 SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
-void FUN_001835b4(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 void FUN_00185dd4(s32 layer, u32 group, u32 sprite, s32 x, s32 y,
                   s32 width, s32 height, s32 priority);
 

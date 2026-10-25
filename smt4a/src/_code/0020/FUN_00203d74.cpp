@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 s32 FUN_001517b4(s32 category, s32 index);

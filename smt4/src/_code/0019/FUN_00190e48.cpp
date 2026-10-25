@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00190e48` (_code @ 0x190e48, 0x9e8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int fadeObjectResetIfActive(...);
 int quadSetOrderedVectors(...);
-int FUN_002bf288(...);
 int FUN_002bf380(...);
 int __aeabi_vec_ctor_nocookie_nodtor(float [24], unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -54,7 +54,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: quadSetOrderedVectors. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */

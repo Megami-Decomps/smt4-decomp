@@ -9,7 +9,7 @@ int FUN_001ab7dc(unsigned int, unsigned char [288], unsigned char [496], unsigne
 int nodeTreeReleaseGroup(...);
 int btlItemGroupRelease(...);
 int FUN_001ed268(...);
-int FUN_00211c90(...);
+int nodeReleaseOwnedItemsAndSelf(...);
 int rangeInit(...);
 int FUN_002544d8(...);
 int keyedGetEntryValue(...);
@@ -32,7 +32,7 @@ extern int keyedRecordCountGet(void);
 /* Supplied declaration required: nodeTreeReleaseGroup. */
 /* Supplied declaration required: btlItemGroupRelease. */
 /* Supplied declaration required: FUN_001ed268. */
-/* Supplied declaration required: FUN_00211c90. */
+/* Supplied declaration required: nodeReleaseOwnedItemsAndSelf. */
 /* Supplied declaration required: rangeInit. */
 /* Supplied declaration required: FUN_002544d8. */
 /* Supplied declaration required: keyedGetEntryValue. */
@@ -170,7 +170,7 @@ void FUN_00200c9c(unsigned int *param_1)
     temp_v2 = 0;
     if (temp_v2 < (int)param_1[4]) {
       do {
-        FUN_00211c90(param_1[temp_v2 + 0x24]);
+        nodeReleaseOwnedItemsAndSelf(param_1[temp_v2 + 0x24]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[4]);
     }

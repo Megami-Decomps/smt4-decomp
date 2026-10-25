@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses each marker as panel + i*16 with the fields at +4..+0x13 (no folded +4 base) and keeps the constants 0x41/2 in registers across the loop (179 vs 181 rows). */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern u32 g_renderCtx;
 
 f32 renderCtxCalculateStereoParallax(u32 context, f32 depth);
 void FUN_003d3020(u32 id, s32 a, s32 b, f32 x, f32 y, f32 scaleX, f32 scaleY);
-void FUN_001835b4(u32 a, u32 b, u32 icon, s32 x, s32 y, u32 tag);
 
 /* Draws the five map markers of the panel: the marker body, an icon picked from its kind and
  * flags, and the extra overlay icons for the kinds that have them. The x position is shifted by

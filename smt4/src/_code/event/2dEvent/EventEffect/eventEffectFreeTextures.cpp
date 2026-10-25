@@ -1,12 +1,11 @@
 /* NON_MATCHING: texture-array addressing, paired loads, and release-loop registers differ. */
 #include "event/2dEvent/EventEffectIV.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern EventEffectGlobalsIV g_eventEffect;
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void *textureGetIndexedResource(u32 table);
-void asdTMTexTableFreeEntry(u32 table);
 void jobStop(u32 job, s32 flags);
 void asdMemFree(void *memory);
 

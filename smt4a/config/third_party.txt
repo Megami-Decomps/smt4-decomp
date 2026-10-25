@@ -2255,6 +2255,9 @@
 0x00135b16 elemCopyForward callers
 0x00135b38 sysCopyByteRange callers
 0x00135b4a _ZSt4fillIP9Obj55aff4S0_EvT_S2_RKT0_ name
+0x00135b64 FUN_00135b64 callers
+0x00135c24 nn_os_ExitProcess name
+0x00135c28 svcExitProcess name
 0x0013b764 nn_pl_CTR_InitializeGameCoin name
 0x0013b790 FUN_0013b790 between
 0x0013b7e0 FUN_0013b7e0 between
@@ -3382,7 +3385,7 @@
 0x001b4874 __aeabi_ul2f name
 0x001b487c ll_sto_f callers
 0x001b48d4 frem between
-0x001b49fc FUN_001b49fc between
+0x001b49fc FUN_001b49fc callers
 0x001b4a00 FUN_001b4a00 between
 0x001b4a58 FUN_001b4a58 between
 0x001b4a74 FUN_001b4a74 between
@@ -3592,7 +3595,7 @@
 0x001c45fc FUN_001c45fc between
 0x001c4608 FUN_001c4608 between
 0x001c460c nw_ut_MoveArray_nn_math_MTX34_MoveArray_sub_object name
-0x001c4684 FUN_001c4684 between
+0x001c4684 FUN_001c4684 callers
 0x001c4b1c FUN_001c4b1c between
 0x001c4ba0 FUN_001c4ba0 between
 0x001c4c3c FUN_001c4c3c between
@@ -4975,7 +4978,7 @@
 0x002fc0a4 FUN_002fc0a4 between
 0x002fc0c8 FUN_002fc0c8 between
 0x002fd020 FUN_002fd020 library
-0x002fd02a FUN_002fd02a library
+0x002fd02a _ZN9Obj2fd02aD1Ev library
 0x002fd03a FUN_002fd03a library
 0x002fd078 stringRefEqual library
 0x002fd0a0 byteArrayEnsureAt library
@@ -6025,7 +6028,7 @@
 0x0042a16c FUN_0042a16c between
 0x0042a270 FUN_0042a270 between
 0x0042a438 FUN_0042a438 between
-0x0042a448 FUN_0042a448 between
+0x0042a448 _ZN9Obj536d04D1Ev between
 0x0042a44c FUN_0042a44c between
 0x0042a6cc FUN_0042a6cc between
 0x0042a6d8 FUN_0042a6d8 between
@@ -6411,7 +6414,7 @@
 0x00439fc4 nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object name
 0x0043a040 FUN_0043a040 between
 0x0043a08c FUN_0043a08c between
-0x0043a0c4 FUN_0043a0c4 between
+0x0043a0c4 _ZN9Obj55b39cD1Ev between
 0x0043a0c8 FUN_0043a0c8 between
 0x0043a198 FUN_0043a198 between
 0x0043a1d8 FUN_0043a1d8 between
@@ -7637,7 +7640,7 @@
 0x00515598 _ZN7VariantC1Ev between
 0x005155bc FUN_005155bc between
 0x00515618 FUN_00515618 between
-0x00515660 FUN_00515660 between
+0x00515660 _ZN9Obj55b39c6signalEv between
 0x00515668 nn_math_ARMv6_MTX33MultAsm_nn_math_MTX34 name
 0x005157dc FUN_005157dc between
 0x00515804 valueChainInit between

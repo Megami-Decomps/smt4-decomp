@@ -1,7 +1,7 @@
 #include "shard/W4_Match3_InfoWindow.h"
+#include "text/TextDraw.h"
 
 extern "C" {
-void FUN_001654f8(const char *text, char *buffer, s32 mode);
 f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
 void uiSpriteSetKeyframe(void *sprite, s32 track, s32 frame);
 void asdTextFormatStream(void *text, s32 font, u32 color, s32 mode, s32 alignment, const char *buffer);

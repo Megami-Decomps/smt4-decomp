@@ -1,4 +1,5 @@
 #include "sys/AllocationTracking.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 

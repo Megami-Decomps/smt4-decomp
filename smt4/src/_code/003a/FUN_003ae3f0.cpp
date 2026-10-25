@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the flag with ldrsb and has a push {r4, lr}/pop {r4, pc} frame; built uses ldrb and a plain bx lr */
 #include "common.h"
 
 extern "C" {
@@ -19,13 +18,14 @@ typedef struct BtlUi {
 } BtlUi;
 
 extern BtlUi g_btlUi;
+s8 uiSpriteGetCompletionState(const BtlUiPart *record);
 
 /* True while the battle UI workspace's part flag is set. */
 u8 FUN_003ae3f0(void)
 {
     BtlUiPart *part = &g_btlUi.workspace->part;
 
-    return part->flag != 0;
+    return uiSpriteGetCompletionState(part) != 0;
 }
 
 } /* extern "C" */

@@ -1,10 +1,10 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 void dataTableFree(int a);
 void asdTMTexTableReleaseNode(int a, int b);
-void asdTMTexTableFreeEntry(int index);
 
 void dataTableAndTexRelease(void)
 {

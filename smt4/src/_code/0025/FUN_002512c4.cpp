@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/PartyPanel.h"
 #include "shard/S3UiLookup.h"
 
@@ -9,7 +10,6 @@ const UiTextMetrics *FUN_002bf4f8(u32 bank, s32 entry);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-void FUN_002bf288(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 
 // Draw the normal or animated panel sprite inside the temporary alpha-blend state.
 void FUN_002512c4(s32 entry, s32 x, s32 y, u32 flags, s32 selected)

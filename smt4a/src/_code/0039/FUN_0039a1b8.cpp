@@ -1,9 +1,9 @@
 /* NON_MATCHING: first indicator state spills; retail retains it in fp, changing the remaining register allocation. */
 #include "gfx/UiControlDraw.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-void FUN_001835b4(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 void FUN_00185dd4(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
 

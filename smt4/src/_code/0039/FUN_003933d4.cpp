@@ -1,9 +1,9 @@
 /* NON_MATCHING: intrinsic-dimension cases are merged differently and resource constants occupy different literal-pool positions. */
 /* Draws an indexed resource record, using its intrinsic dimensions when requested. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-void *asdTMTexTableCallFileB(u32 bank, u32 id);
 void FUN_002a6d1c(void *parameters, u32 flags, u32 first, u32 second, u32 third);
 void FUN_003937e4(void *group, void *entry, const void *parameters);
 

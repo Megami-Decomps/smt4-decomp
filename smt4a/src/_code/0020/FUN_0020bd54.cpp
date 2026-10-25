@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020bd54` (_code @ 0x20bd54, 0xd8c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int fadeObjectResetIfActive(...);
 
 int FUN_00164b5c(...);
 int quadSetOrderedVectors(...);
-int FUN_001835b4(...);
 int __aeabi_vec_ctor_nocookie_nodtor(float [24], unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
@@ -60,7 +60,6 @@ extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: quadSetOrderedVectors. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern unsigned int dataTable0eSub1GetId(unsigned short);

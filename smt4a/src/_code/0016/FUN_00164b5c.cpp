@@ -3,7 +3,6 @@
 
 extern "C" {
 TexSprite *texTableFindNode(u32 bank, u32 node);
-TexFile *asdTMTexTableCallFileC(u32 bank, s32 sprite);
 void FUN_00184efc(TexFile *file, SpriteGeometryRecord *geometry,
                   const SpriteDrawParameters *parameters, u32 option);
 
@@ -20,7 +19,7 @@ u32 FUN_00164b5c(u32 flags, u32 bank, u32 node, s32 x, s32 y, s32 depth)
         s32 drawY = frame->y + y;
         s32 drawDepth = frame->depth + depth;
         s32 spriteId = frame->sprite + frame->file * 1000;
-        TexFile *file = asdTMTexTableCallFileC(bank, spriteId);
+        TexFile *file = (TexFile *)asdTMTexTableCallFileC(bank, spriteId);
         SpriteGeometryTable *table = reinterpret_cast<SpriteGeometryTable *>(file->image);
         SpriteGeometryRecord *geometry = &table->entries[spriteId % 1000];
         SpriteFrameAnchor *anchor = geometry->anchor;

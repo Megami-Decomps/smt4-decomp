@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023c8c0` (_code @ 0x23c8c0, 0x850 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_00164b5c(...);
 int gameGetPlayerData(void);
-int FUN_001835b4(...);
 int FUN_0023d150(...);
 int FUN_002ac470(...);
 int FUN_0034cfc0(...);
@@ -27,7 +27,6 @@ extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
 extern int resourceRunOperationIfUnblocked(int);

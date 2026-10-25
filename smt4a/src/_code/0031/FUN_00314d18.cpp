@@ -10,9 +10,9 @@ s32 FUN_00163e84(u32 screen);
 s32 FUN_00162ea4(void);
 void FUN_0022677c(u32 screen, u32 color);
 
-u32 FUN_00314d18(s32 durationIndex)
+u32 FUN_00314d18(void)
 {
-    s32 duration = scrGetArg(durationIndex);
+    s32 duration = scrGetArg(0);
     if (scrGetCommandFrame() == 0) {
         if (FUN_00203d74() && duration > 4)
             duration = 4;

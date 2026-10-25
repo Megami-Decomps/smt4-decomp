@@ -2,6 +2,7 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "ui/SceneWindowWork.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
@@ -12,7 +13,6 @@ void jobStopAndClearFlags(void *owner);
 void jobOwnerFreeSlotAndStop(u32 *job);
 void scrScriptProcessDestroy(void *script);
 void asdMemFreeSlot(u32 slot);
-void asdTMTexTableFreeEntry(s32 entry);
 void asdTMTexTableReleaseNode(s32 entry, s32 node);
 void asdMemFree(void *memory);
 void jobStop(u32 job, s32 mode);

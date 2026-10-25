@@ -1,13 +1,12 @@
-/* NON_MATCHING: compiler preserves r4 with lr while retail preserves only lr. */
 #include "common.h"
 
 
 extern "C" {
-/* Updates or returns the requested state. */
-f32 mathAngleDeltaDegrees(void);
-f32 FUN_0033abb4(void)
+f32 mathAngleDeltaDegrees(f32 from, f32 to);
+/* Returns the absolute angle difference in degrees. */
+f32 FUN_0033abb4(f32 from, f32 to)
 {
-    f32 value = mathAngleDeltaDegrees();
+    f32 value = mathAngleDeltaDegrees(from, to);
     return value < 0.0f ? -value : value;
 }
 }

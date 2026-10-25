@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 // The panel's effect state (observed fields).
 struct TitlePanelEffect {
@@ -33,7 +34,6 @@ s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_002c1b64(RenderCtx *context, s32 value);
 void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
-void FUN_002bf288(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 void FUN_00397db0(TitlePanel *panel, u8 frame, f32 speed);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);

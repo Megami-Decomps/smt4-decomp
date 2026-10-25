@@ -1,4 +1,5 @@
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 /* A list screen whose rows draw data-table entries (observed fields). */
 struct EntryListScreen {
@@ -15,7 +16,6 @@ s32 selectionGetValidatedField(void);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);
 void FUN_00164b5c(u32 layer, u32 group, s32 sprite, s32 x, s32 y, u32 priority);
-void FUN_001835b4(u32 layer, u32 group, s32 sprite, s32 x, s32 y, u32 priority);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 void FUN_0021b390(EntryListScreen *screen, u32 entry, s32 field, char *text);
 void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);

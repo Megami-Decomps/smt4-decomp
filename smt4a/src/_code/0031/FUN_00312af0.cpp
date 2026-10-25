@@ -1,4 +1,4 @@
-/* NON_MATCHING: popup-content branches merge calls, and the shared pending clear removes retail's redundant stores. */
+/* NON_MATCHING: retail keeps the shared pending-clear/return tail after the case-16 content calls (13 and 16 jump to it) and allocates r5=popup state, r6=zero; built merges the tail into case 13 and swaps r5/r6. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 // Pending requests lie beyond the published popup-state prefix.
@@ -45,13 +45,13 @@ void FUN_00312af0(void)
             if (!work->popup.state) {
                 work->popup.state = 16;
                 work->popup.phase = 0;
-                s32 content;
                 if (FUN_002c2758(6) != 1) {
-                    content = FUN_002d8b58(17, 0);
+                    s32 content = FUN_002d8b58(17, 0);
+                    g_popupState->popup.contentValue = content;
                 } else {
-                    content = FUN_002d8b58(24, 0);
+                    s32 content = FUN_002d8b58(24, 0);
+                    g_popupState->popup.contentValue = content;
                 }
-                g_popupState->popup.contentValue = content;
             } else if (work->popup.state != 16) {
                 popupQueueInsertUnique(16);
             }
@@ -60,6 +60,7 @@ void FUN_00312af0(void)
         }
         if (request == 18) {
             FUN_00295108(1);
+            g_popupState->pending[index] = 0;
         } else if (request == 19) {
             if (work->popup.state) {
                 if (work->popup.state != 19) {
@@ -71,6 +72,7 @@ void FUN_00312af0(void)
                 s32 content = FUN_002d8b58(20, 0);
                 g_popupState->popup.contentValue = content;
             }
+            g_popupState->pending[index] = 0;
         }
         g_popupState->pending[index] = 0;
     }

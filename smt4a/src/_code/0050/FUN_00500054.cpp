@@ -1,4 +1,3 @@
-/* NON_MATCHING: the zero-filled name buffer and the destination pointer swap registers (retail zero in r4, destination in r5) and the holder is loaded into r1 first. */
 #include "common.h"
 
 struct NameSource {

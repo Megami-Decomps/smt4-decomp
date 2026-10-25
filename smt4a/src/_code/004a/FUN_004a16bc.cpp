@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic and call sequence match; retail turns the final call of every path into a tail call (b after popping lr, `FUN_004d0680`, `uniteCreatePreviewModel`, `FUN_0032d0c8`, `sendEvent100020E`) and keeps the shared zero in r9, while the build keeps plain bl + pop {pc}. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 /* One row of the quest list: the quest id sits at +4. */
 struct QuestListRow {
@@ -47,7 +48,6 @@ const char *FUN_0014bf3c(u32 id, u32 option);
 char *libc_strcpy(char *destination, const char *source);
 void FUN_003180c4(u32 index, const char *text);
 void scrScriptProcessStartEntry(u32 job, u32 entry);
-void FUN_003343f0(s32 value);
 void sendEvent100020E(void);
 void screen4AEnter(QuestMenu *menu);
 void uniteCreatePreviewModel(void);

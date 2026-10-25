@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003e0064(...);
+int playerSetClampedStat(...);
 int recordSetClampedCurrent(...);
 
 int btlGetMainState(void);
@@ -98,7 +98,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: recordGetScaledMaximum. */
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_003e0064. */
+/* Supplied declaration required: playerSetClampedStat. */
 extern int FUN_003ea278(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: recordSetClampedCurrent. */
@@ -864,7 +864,7 @@ joined_r0x004c7570:
        (puVar3[0x97] = temp_v8, (int)temp_v8 < (int)puVar3[0x96])) {
       puVar3[0x96] = temp_v8;
       if (puVar3[0xfe] != 0) {
-        FUN_003e0064((int)(short)temp_v8);
+        playerSetClampedStat((int)(short)temp_v8);
       }
       else if (puVar3[0xff] != 0) {
         recordSetClampedCurrent(puVar3[0xff],(int)(short)temp_v8);

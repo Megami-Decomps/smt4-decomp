@@ -8,7 +8,7 @@ struct BtlActionContext {
 };
 
 extern "C" {
-extern u64 DAT_00571190;
+extern u64 g_btlTargetableMask;
 
 s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *candidates, s32 count, s32 force);
 u32 lcgRandomRange(s32 limit);
@@ -21,7 +21,7 @@ void FUN_004e5b5c(BtlActionContext *context)
     BtlMainStateA *battle = context->battle;
 
     for (s32 i = 0; i < 109; i++) {
-        if ((battle->entries[i].flags & DAT_00571190) != 0) {
+        if ((battle->entries[i].flags & g_btlTargetableMask) != 0) {
             candidates[count++] = battle->entries[i].indexView.selectionIndex;
         }
     }

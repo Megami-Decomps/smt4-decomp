@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the unit index in s17 (one vcvt) across all calls, builds the scale table addresses as (step + 3) * 4 instead of folding the +12 into the vldr, and orders the switch targets differently; the arithmetic and calls are the same. */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 namespace {
 /* A battle unit record (only the fields the damage scale reads). */
@@ -30,7 +31,6 @@ extern "C" {
 extern const f32 DAT_0057a6a8[7];       /* damage scale by affinity step, attacker side */
 extern const f32 DAT_0057a6c4[7];       /* damage scale by affinity step, defender side */
 extern u32 g_btlScriptUnit;
-void *btlGetMainState(void);
 BtlUnitView *FUN_003f0e20(void *state, s32 unit);
 u32 *btlUnitGet(u32 handle);
 void FUN_003e8bb0(BtlCommandView *command, void *state, BtlUnitView *unit);

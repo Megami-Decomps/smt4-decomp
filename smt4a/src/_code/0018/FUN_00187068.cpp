@@ -1,10 +1,10 @@
 /* NON_MATCHING: only the adjacent stack-base move and zero-register copy are scheduled in the opposite order. */
 #include "gamedata/PartySortRecord.h"
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 PartySlotTableA *gameGetSlotTable();
-u32 FUN_0019acdc(u16 id, u32 mode);
 s32 FUN_0019d4a4(const SortRecord *left, const SortRecord *right);
 void qsort(void *records, u32 count, u32 stride, s32 (*compare)(const SortRecord *, const SortRecord *));
 }

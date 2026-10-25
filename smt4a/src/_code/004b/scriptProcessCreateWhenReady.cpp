@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ScriptProcess004b {
     /* 0x000 */ u8 unk000[0x108];
@@ -15,7 +16,6 @@ struct ScriptProcessOwner004b {
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 ScriptProcess004b *FUN_00275bc8(void *heapA, void *heapB);
 
 /* Once the heaps, load slots 0x14 and 0x25 and the three textures of table 0x1d are ready, creates

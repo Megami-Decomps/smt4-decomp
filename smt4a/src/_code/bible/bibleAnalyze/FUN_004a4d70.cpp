@@ -1,5 +1,6 @@
 /* NON_MATCHING: completion signed load, fallback-name lifetime, and final selected-entry tail call differ. */
 #include "shard/Shard004A.h"
+#include "util/CalleeContracts.h"
 
 namespace {
 struct BibleAnalyzeTextGlobals {
@@ -14,7 +15,6 @@ s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 s32 buttonHelpIsNotActive();
-void FUN_003343f0(s32 value);
 s32 flaggedValueHolderGetTotal(const void *value);
 void FUN_0032d0c8(s32 channel, s32 kind, u32 id, s32 mode);
 const char *dataLookupDisplayName(void *storage, u32 id);

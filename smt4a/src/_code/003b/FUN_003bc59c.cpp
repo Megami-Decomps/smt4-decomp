@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "util/SlotRangeSelect.h"
 
 namespace {
 struct BattleActionDescriptor {
@@ -53,7 +54,6 @@ BtlMainStateA *btlGetMainState(void);
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 u32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(u32 choice, s32 range[8], s32 count[3]);
 const BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute);
 

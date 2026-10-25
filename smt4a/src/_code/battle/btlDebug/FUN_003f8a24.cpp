@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f8a24` (_code @ 0x3f8a24, 0x8d8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int effectDispatchSelector(...);
 int efctSetSpeed(void);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(void);
@@ -48,7 +48,6 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */

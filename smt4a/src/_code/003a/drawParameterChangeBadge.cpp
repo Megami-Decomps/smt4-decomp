@@ -1,10 +1,10 @@
 /* NON_MATCHING: amount and X saved registers are exchanged, and one icon-call argument move is scheduled differently. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 u32 requestKindToId(u32 kind);
 s32 textFormatBuffer(char *output, const char *format, ...);
-void FUN_001835b4(u32 screen, u32 table, s32 index, s32 x, s32 y, s32 layer);
 void FUN_0017ffa8(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
 const SpriteInfo *FUN_001834a4(u32 table, s32 index);

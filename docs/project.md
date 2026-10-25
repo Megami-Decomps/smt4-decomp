@@ -34,6 +34,12 @@ as members retain C linkage so their symbols keep the names objdiff and relink p
 Member signatures must account for ARM's hidden result storage. The window-status operations return
 `WindowStatusOperationResult` by value, and queue erasure returns a `SharedQueueIterator` with a
 nontrivial copy constructor; the first decompiled pointer can therefore be the output, not `this`.
+armcc only constructs a named by-value result directly in the hidden return storage (no stack local
+and block copy) when the class is non-trivial. `WindowStatusOperationResult` therefore has the native
+`(u32 status)` constructor (status, the default `WindowStatusResult`, zeroed reserved words, then
+`result = WindowStatusResult(0)`) and an empty destructor; write `WindowStatusOperationResult out(1);`,
+never an aggregate initialiser. `TableEntryRef` (`gamedata/TableEntryRef.h`) is a scoped item-table
+lookup whose destructor is a linker-NOPed debug hook.
 Some proven deleting wrappers and owner-destruction chains still use C declarations of destructor
 entry points: retail consumes the ABI's returned `this` directly, while a native explicit destructor
 call makes armcc save and restore the owner. Keep these documented exceptions when `fdiff` proves

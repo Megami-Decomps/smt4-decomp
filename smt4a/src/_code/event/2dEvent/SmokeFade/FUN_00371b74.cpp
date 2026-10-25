@@ -1,5 +1,7 @@
 /* NON_MATCHING: register allocation: retail keeps the module base in r8, computes the image base after the first free and indexes it from r9. */
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SmokeFadeWork {
     /* 0x00 */ u32 job;
@@ -25,10 +27,8 @@ extern "C" {
 extern SmokeFadeModule g_smokeFadeState;
 
 void asdMemFree(void *memory);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 s32 textureGetIndexedResource(u32 table);
-void asdTMTexTableFreeEntry(u32 table);
 void jobStop(u32 job, s32 arg);
 
 /* Frees the smoke fade's buffer, releases its texture nodes and entries, stops its job and frees the work. */

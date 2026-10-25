@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 62 diff lines remain, scheduling/register allocation only. */
 #include "camp/CommonBg.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
 
@@ -9,7 +10,6 @@ extern RenderCtxA *g_renderCtx;
 void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(s32 enabled, s32 mode);
 void FUN_00164b5c(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
-void FUN_001835b4(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second,
     const QuadVector *third, const QuadVector *fourth, s32 mode, s32 enabled);
 void skinObjectUpdateMatrices(RenderCtxA *context);

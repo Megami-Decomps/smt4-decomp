@@ -1,10 +1,10 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
 void FUN_00224ce0(u32 id, s32 *firstOut, s32 *secondOut, s32 flag);
-void FUN_002bf288(u32 kind, u32 layer, u32 spriteId, s32 x, s32 y, u32 order);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(void *vec);
 s32 vec2GetXInt(void *vec);

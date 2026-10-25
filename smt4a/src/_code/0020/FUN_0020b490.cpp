@@ -1,6 +1,7 @@
 /* NON_MATCHING: state-block and touch-region-count base registers r5/r6 are exchanged. */
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
+#include "util/CalleeContracts.h"
 
 struct ScriptRunState;
 extern "C" {
@@ -8,7 +9,6 @@ s32 ifTouchRegionRemove(void);
 void sysPlaySe(u16 sound);
 void FUN_00168980(s32 mode);
 void FUN_0019de98(s32 target, u32 color);
-void FUN_0023b45c(u8 value);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
 void statusDownSwitchTab(u8 value);
 void FUN_002c8538(u8 value);

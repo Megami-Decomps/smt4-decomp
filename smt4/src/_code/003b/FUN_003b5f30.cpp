@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b5f30` (_code @ 0x3b5f30, 0x674 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_0029a17c(int, int, int, int, int);
 int effectRenderTransformedInstance(int);
 int FUN_002bed3c(void);
-int FUN_002bf288(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
 int FUN_003b65a4(int, int, int, int, int, int, int, int, int, int);
@@ -38,7 +38,6 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);

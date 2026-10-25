@@ -1,10 +1,10 @@
 /* NON_MATCHING: hoisted next-key/texture addresses use swapped r6/r7 and queued-key reload scheduling differs. */
 #include "common.h"
 #include "shard/S3SceneWidget.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-s32 asdTMTexTableNodeIsLoaded(s32 table, s32 index);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
 void uiSpriteSetImageKeyframe(SceneSprite *sprite, s32 keyframe, s32 arg2);
 s32 FUN_002bf818(SceneSprite *sprite);

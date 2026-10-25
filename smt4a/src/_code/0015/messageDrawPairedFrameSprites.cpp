@@ -1,10 +1,10 @@
 #include "ui/MessageMain.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
-void FUN_001835b4(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
 void efctSetSpeed(f32 speed);
 
 void messageDrawPairedFrameSprites(u32 leftBase, u32 leftOverlay, u32 leftEdge,

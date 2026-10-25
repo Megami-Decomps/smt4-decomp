@@ -1,4 +1,3 @@
-/* NON_MATCHING: corrected body matches, but target includes ldr r0,[pc,#100] at +0x34 after tail branch and literal pool, apparently the next function's prologue. */
 #include "common.h"
 
 struct TransitionState {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the order of the two constant setups at entry differs (retail loads 0 into r6 before 5 into r5). */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 /* The healing counter scene of the quest center: its state and substate words, and the script it runs. */
 struct HealingScene199 {
@@ -20,7 +21,6 @@ s32 messageMainGetChoiceResult(void);
 s32 messageMainTargetIsClear(void);
 const s32 *gameGetSlotTable(void);
 s32 FUN_0029cc44(s32 value);
-void FUN_0029c43c(s32 amount, s32 flag);
 void FUN_00295c04(s32 amount);
 s32 questCenterGetHealingFee(void);
 }

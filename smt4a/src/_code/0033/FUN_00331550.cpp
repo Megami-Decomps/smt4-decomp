@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail recomputes the masked counter index (and #255) before each counter access instead of once; the nop{0} positions follow from that. */
 #include "common.h"
 
 extern "C" {
@@ -12,18 +11,29 @@ struct GameCounters {
 GameCounters *gameGetCounters(void);
 u32 scrGetArg(u32 index);
 
+static __inline u32 *counterCurrent(u8 counter)
+{
+    return &gameGetCounters()->current[counter];
+}
+
+static __inline u32 *counterMaximum(u8 counter)
+{
+    return &gameGetCounters()->maximum[counter];
+}
+
 /* Script command: raises counter #arg0 (and its maximum) to arg1 when it is lower. */
 u32 FUN_00331550(void)
 {
     u32 counter = scrGetArg(0);
     u32 value = scrGetArg(1);
 
-    if (gameGetCounters()->current[counter & 0xFF] < value) {
-        gameGetCounters()->current[counter & 0xFF] = value;
+    if (*counterCurrent(counter) < value) {
+        *counterCurrent(counter) = value;
     }
+    u8 index = counter;
     gameGetCounters();
-    if (gameGetCounters()->maximum[counter & 0xFF] < value) {
-        gameGetCounters()->maximum[counter & 0xFF] = value;
+    if (*counterMaximum(index) < value) {
+        *counterMaximum(index) = value;
     }
     return 1;
 }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int gameGlobalsSetSelected(int a);
 int messageStatesSetFirst(int a);
 int scrScriptProcessDestroy(void);
 int placeWinRelease(void);
-int asdTMTexTableFreeEntry(int table);
 int asdTMTexTableReleaseNode(int table, int index);
 int FUN_002bff50(void);
 int asdMemFree(void);

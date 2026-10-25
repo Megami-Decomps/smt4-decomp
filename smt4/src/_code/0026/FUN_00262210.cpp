@@ -1,4 +1,3 @@
-/* NON_MATCHING: output/first-record saved registers r4/r5 are exchanged; named coordinate snapshots recover retail x/y scratch registers. */
 #include "shard/W6_W6Match3_PointDifference.h"
 
 extern "C" const PointLookupRecord* FUN_002bf4f8(u32 bank, u32 index);

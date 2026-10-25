@@ -1,4 +1,5 @@
-/* NON_MATCHING: register allocation/instruction selection only: retail keeps a second copy of the node in r1 and unlinks it through `ldrd r2, [r1]` pairs, and saves the lock address in r6; built uses `ldm r4, {r1, r2}` and recomputes it. */
+/* NON_MATCHING: lock handling now matches (pointer-constructed ScopedCriticalLock); retail unlinks through a second copy of the node in r1 with `ldrd r2, [r1]` pair loads, built reloads fields separately / with ldm. */
+#include "shard/W6_W6Match1_CriticalSection.h"
 #include "common.h"
 
 extern "C" {
@@ -18,13 +19,9 @@ typedef struct NodeQueue {
     /* 0x0C */ u8 lock[1];  /* critical section */
 } NodeQueue;
 
-void nn_os_CriticalSection_Enter(u8 *lock);
-void nn_os_CriticalSection_Leave(u8 *lock);
-
-/* Unlinks `node` from the queue's circular list (clearing the head when it was the only node) and clears the node. */
-void FUN_001377a0(NodeQueue *queue, Node *node)
+/* Detaches `node` from the circular list, clearing the head when it was the only node. */
+static __inline void queueUnlink(NodeQueue *queue, Node *node)
 {
-    nn_os_CriticalSection_Enter(queue->lock);
     if (node->next == node) {
         queue->head = NULL;
     } else {
@@ -35,10 +32,16 @@ void FUN_001377a0(NodeQueue *queue, Node *node)
         node->next->prev = node->prev;
     }
     node->prev = NULL;
+}
+
+/* Unlinks `node` from the queue's circular list and clears the node. */
+void FUN_001377a0(NodeQueue *queue, Node *node)
+{
+    ScopedCriticalLock lock((CriticalSection *)queue->lock);
+    queueUnlink(queue, node);
     node->next = NULL;
     node->unk8 = 0;
     node->unkC = 0;
-    nn_os_CriticalSection_Leave(queue->lock);
 }
 
 } /* extern "C" */

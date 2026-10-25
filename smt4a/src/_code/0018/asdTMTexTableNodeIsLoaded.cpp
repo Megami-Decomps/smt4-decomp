@@ -1,4 +1,6 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 

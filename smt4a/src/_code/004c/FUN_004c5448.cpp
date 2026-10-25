@@ -1,4 +1,4 @@
-/* NON_MATCHING: mask word loads, native ID getter instructions and shared zero-modifier branches differ. */
+/* NON_MATCHING: retail reads the combatant id as ldrsh (add r7,r4,#256; ldrsh [r7,#102]) then uxth because FUN_00184310 takes a u16; the shared DevilRecordA.h declares u32 (194 users) so the build loads ldrh via a pooled offset; mask loads (ldr pair vs ldm) and shared zero-modifier branches also differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table04Record.h"
@@ -32,11 +32,17 @@ s32 FUN_0034a304(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_004bd098(IdOwner *owner, u32 id);
 DevilRecordA *FUN_00184310(u32 id);
 }
+/* The combatant's id as retail reads it: a signed halfword at 0x166, passed on as a u16. */
+struct BtlCombatantIdView {
+    u8 unk000[0x166];
+    s16 id;
+};
 static inline s32 nativeCategoryModifier(const BtlCombatantEntryA *entry, const BattleModifierSkillView *skill)
 {
     u16 category = skill->classification.category;
     if (category < 18) {
-        const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(FUN_00184310(entry->id));
+        const DevilTableRecordA *record = reinterpret_cast<const DevilTableRecordA *>(
+            FUN_00184310((u16)reinterpret_cast<const BtlCombatantIdView *>(entry)->id));
         if (record)
             return record->categoryModifiers.values[category];
     }

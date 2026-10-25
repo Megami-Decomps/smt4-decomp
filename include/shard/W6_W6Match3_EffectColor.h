@@ -10,6 +10,13 @@ struct EffectColor {
     /* 0x0C */ f32 alpha;
 };
 
+// Copies through pointers: armcc moves such a 16-byte value with VFP vldmia/vstmia, where a
+// direct member-to-member assignment of a global uses integer ldm/stm.
+static __inline void effectColorCopy(const EffectColor *source, EffectColor *destination)
+{
+    *destination = *source;
+}
+
 struct EffectRgb {
     f32 red;
     f32 green;

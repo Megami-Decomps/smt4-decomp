@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s32 DAT_00589390;
+extern s32 g_moduleValue;
 
 u8 FUN_00429d80(void)
 {
-    return DAT_00589390 != 0;
+    return g_moduleValue != 0;
 }
 
 } /* extern "C" */

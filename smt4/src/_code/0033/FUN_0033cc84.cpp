@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033cc84` (_code @ 0x33cc84, 0x274 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_00247f0c(void);
 int FUN_002b7638(int *);
 int FUN_002bc0e0(void);
-int FUN_002bf288(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_002c1b64(unsigned int, int);
 int FUN_0033c72c(...);
@@ -29,7 +29,6 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00247f0c. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: FUN_002bc0e0. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_0033c72c. */

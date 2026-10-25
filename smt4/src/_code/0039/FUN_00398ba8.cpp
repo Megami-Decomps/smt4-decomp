@@ -1,5 +1,6 @@
 /* NON_MATCHING: corrected fade base from0x394 to0x794, restored linker-inlined speed getter and three-byte glyph buffer; remaining stack operations and blink division registers differ. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -40,7 +41,6 @@ void FUN_002c39a4(RenderCtx *context);
 void FUN_002bed3c(void);
 s32 FUN_002c5d80(s32 a, s32 b);
 void FUN_002c1b64(RenderCtx *context, s32 arg);
-void FUN_002bf288(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 SlotLayout *FUN_002bf4f8(u32 group, u32 id);
 void FUN_002be5a4(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);

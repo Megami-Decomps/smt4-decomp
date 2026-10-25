@@ -2,11 +2,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 BtlMainStateA *btlGetMainState(void);
-s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 
 // Script command: result 1 when a combatant with flags of masks 3 and 0 and none of mask 5 is missing

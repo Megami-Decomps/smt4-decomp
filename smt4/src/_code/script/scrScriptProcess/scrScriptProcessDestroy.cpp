@@ -2,10 +2,10 @@
 /* Releases a script resource: frees its buffers, unlinks it from the resource list and frees it. */
 #include "common.h"
 #include "script/scrScriptProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-int asdMemFree(void *ptr);               /* heap free */
 
 extern ScriptResourceList g_scrScriptResources;
 

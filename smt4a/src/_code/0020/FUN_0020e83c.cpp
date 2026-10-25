@@ -5,10 +5,14 @@ extern "C" {
 
 s32 FUN_0020e83c(const s32 *leftSlot, const s32 *rightSlot)
 {
+    s32 result = 0;
     s32 leftIndex = *leftSlot;
     s32 rightIndex = *rightSlot;
     if (leftIndex < 0) {
-        return rightIndex >= 0 ? 1 : 0;
+        if (rightIndex >= 0) {
+            result = 1;
+        }
+        return result;
     }
     if (rightIndex < 0) {
         return -1;

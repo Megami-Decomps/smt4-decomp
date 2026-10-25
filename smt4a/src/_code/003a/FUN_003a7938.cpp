@@ -1,5 +1,6 @@
 /* NON_MATCHING: canonical render push and integer pixel conversion recovered; icon draw argument setup scheduling differs. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "saveLoadUI/SaveLoadState.h"
 
 extern "C" {
@@ -12,7 +13,6 @@ u32 FUN_001692ac(u32 state, u32 options);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 
 // Draw the animated save/load activity icon while its worker or job is active.
 u32 FUN_003a7938(void)

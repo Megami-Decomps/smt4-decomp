@@ -1,5 +1,7 @@
-/* NON_MATCHING: positional-sound cutover is pending recovery of the dropped sin/cos inputs/results used by forward-offset sound positions; legacy local sound declaration is intentionally retained. */
-#include "romwright_types.h"
+/* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
+#include "common.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 
@@ -7,8 +9,6 @@ int FUN_0019db68(void);
 int mapInterfaceSetStateTwo(void);
 int FUN_0027fae4(void);
 int FUN_0027fca0(...);
-int FUN_00282390(void);
-int FUN_00291e40(...);
 int buttonHelpSetPreset(int);
 
 int mapDestroyOverlayModel(void);
@@ -19,7 +19,6 @@ int FUN_0027fc14(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int mapEaseSceneHeading(void);
-int FUN_0028250c(void);
 int slotSetRequest(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -226,14 +225,9 @@ void FUN_002d424c(void)
       *(unsigned int *)(temp_v0 + 0x28) = DAT_0049f9a0;
       *(unsigned int *)(temp_v0 + 0x2c) = temp_v4;
       *(unsigned int *)(temp_v0 + 0x30) = temp_v1;
-      temp_v3 = DAT_0049f9bc * 0.017453292f;
-      FUN_0028250c();
-      temp_v5 = 25.0f;
-      *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * 25.0f;
-      temp_v6 = DAT_0049f9bc * temp_v6;
-      FUN_00282390();
+      *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c(DAT_0049f9bc * 0.017453292f) * 25.0f;
+      *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390(DAT_0049f9bc * 0.017453292f) * 25.0f;
       temp_v0 = g_lmapScene;
-      *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v6 * temp_v5;
       *(unsigned int *)(temp_v0 + 0x50) = DAT_0049f9ac;
       FUN_0027fc14(0xd);
       *(unsigned int *)(DAT_004474f4 + 0xac) = 1;
@@ -280,31 +274,33 @@ void FUN_002d424c(void)
       FUN_0027fae4();
       switch(DAT_0049f94a) {
       case 0:
-        FUN_00291e40(0x100021b);
+        FUN_00291e40(0x100021b, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 1:
         temp_v4 = 0x100021d;
-        FUN_00291e40(temp_v4);
+        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 2:
         temp_v4 = 0x100021f;
-        FUN_00291e40(temp_v4);
+        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 3:
         temp_v4 = 0x1000221;
-        FUN_00291e40(temp_v4);
+        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       case 4:
         temp_v4 = 0x1000223;
-        FUN_00291e40(temp_v4);
+        FUN_00291e40(temp_v4, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
         break;
       default:
       }
       FUN_0027fca0(0xffffffff);
-      FUN_0028250c();
-      FUN_00282390();
+      SoundActorQueuePosition position;
+      position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+      position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
       temp_v0 = randBetween(0,1);
-      FUN_00291e40(temp_v0 + 0x100023c);
+      FUN_00291e40(temp_v0 + 0x100023c, position);
       if ((DAT_0049f958 == 0x3303001) && (temp_v0 = gameFlagIsSet(0x292), temp_v0 != 0)) {
         slotSetRequest(0,0xf,0xff);
         temp_v1 = 0xf;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: identity and transform construction groups VFP stores differently and changes saved-register allocation. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
@@ -53,9 +54,6 @@ void efctSetSpeed(float speed);
 void cameraSetViewMatrix(TitleScene* scene, const Matrix44* matrix);
 
 void FUN_002bf380(
-    u32 flags, u32 resource, s32 index,
-    s32 argument3, s32 argument4, s32 parameter);
-void FUN_002bf288(
     u32 flags, u32 resource, s32 index,
     s32 argument3, s32 argument4, s32 parameter);
 

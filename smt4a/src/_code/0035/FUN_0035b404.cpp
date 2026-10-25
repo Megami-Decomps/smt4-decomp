@@ -1,5 +1,6 @@
 /* NON_MATCHING: allocation initialization branches instead of retail conditional stores, and the load-slot/state constant is hoisted. */
 #include "npc_shop/DevilMarket.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern DevilMarketWork *DAT_0058812c;
@@ -18,7 +19,6 @@ void loadSlotRequestAsync(u32 slot, u32 flags);
 void campButtonHelpAcquire(void);
 void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 enabled);
-void FUN_002c8538(s32 enabled);
 void FUN_003c607c(s32 enabled);
 
 // Allocate the devil-market work, launch its process and draw callback, and request resources.

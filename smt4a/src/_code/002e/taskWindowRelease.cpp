@@ -1,9 +1,9 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 void asdMemFree(void *memory);
-void asdTMTexTableFreeEntry(s32 entry);
 s32 jobStop(u32 job, s32 flag);
 
 typedef struct Task {

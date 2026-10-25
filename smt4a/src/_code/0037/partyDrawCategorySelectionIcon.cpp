@@ -1,5 +1,6 @@
 /* NON_MATCHING: category switch case order and shared high-ID/highlight branch placement differ from retail. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct PartyCategoryRecord {
     u8 unk00[6];
@@ -8,7 +9,6 @@ struct PartyCategoryRecord {
 
 extern "C" {
 s32 partyEntryFlagsBit3(s32 id);
-s32 FUN_001bd100(s32 id);
 s32 idIsAtLeast350(s32 id);
 PartyCategoryRecord *FUN_001ad9b4(s32 id);
 void drawSetColorFromRGBA8(u32 color);

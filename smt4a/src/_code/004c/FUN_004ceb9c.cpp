@@ -1,6 +1,6 @@
-/* NON_MATCHING: shared fountain exit tail and stripped-call NOP placement differ. */
 #include "common.h"
 #include <stddef.h>
+#include "util/CalleeContracts.h"
 
 namespace {
 struct FountainConfirmationMenuView {
@@ -29,7 +29,6 @@ void messageBannerRestartOrClear(void);
 s32 tableGroupFindEntryIndex(u32 tableGroup, const char *name);
 void scrScriptProcessStartEntry(u32 script, s32 index);
 s32 messageMainGetValue(void);
-s32 FUN_0034919c(void);
 void FUN_0037c8e4(s32 enabled, s32 mode);
 void panelSetTarget(s32 value, s32 mode);
 void FUN_004cdbd4(FountainConfirmationMenuView *menu);
@@ -44,6 +43,15 @@ static __inline void startFountainConfirmationEntry(FountainConfirmationMenuView
         scrScriptProcessStartEntry(menu->script, index);
 }
 
+static __inline void finishFountainConfirmation(FountainConfirmationMenuView *menu)
+{
+    if (scrRunOpcodesStub(menu->script) != 2)
+        return;
+    if (messageMainIsIdle() == 0)
+        messageDismissNumericBanner(0);
+    menu->scriptState = 4;
+}
+
 extern "C" void FUN_004ceb9c(FountainConfirmationMenuView *menu)
 {
     s32 scriptState = scrRunOpcodesStub(menu->script);
@@ -55,6 +63,7 @@ extern "C" void FUN_004ceb9c(FountainConfirmationMenuView *menu)
         messageBannerRestartOrClear();
         menu->state = 11;
         startFountainConfirmationEntry(menu, "fountian_end");
+        finishFountainConfirmation(menu);
     } else {
         messageBannerRestartOrClear();
         if (messageMainGetValue() == 0) {
@@ -71,10 +80,6 @@ extern "C" void FUN_004ceb9c(FountainConfirmationMenuView *menu)
         if (FUN_0034919c() != 0)
             messageDismissNumericBanner(0);
         menu->state = 11;
+        finishFountainConfirmation(menu);
     }
-    if (scrRunOpcodesStub(menu->script) != 2)
-        return;
-    if (messageMainIsIdle() == 0)
-        messageDismissNumericBanner(0);
-    menu->scriptState = 4;
 }

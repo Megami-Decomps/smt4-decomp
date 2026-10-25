@@ -1,12 +1,12 @@
 /* NON_MATCHING: texture table constants are rematerialized rather than retained in saved registers. */
 #include "status/StatusBustUp.h"
 #include "gamedata/DevilRecordA.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 extern StatusBustUpResources DAT_00588fd8;
 extern void *g_aocSystem;
 void *dataTable00FindById(u16 id);
 s32 gameFlagIsSet(u32 flag);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void FUN_001b2d54(void *system, u32 table, u32 node);
 

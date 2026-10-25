@@ -40,13 +40,8 @@ u32 FUN_003bcb64(void)
                     entry->thresholdView.unk27A <= actor->thresholdView.unk27A) {
                 if (!gameStockContainsEntry(entry->id) && entry->candidate.record &&
                         (entry->candidate.record->flags & 0x40) && actor->id != entry->id) {
-                    if (fallback) {
-                        if (FUN_002a4b28(actor->id))
-                            candidates[count++] = entry;
-                    } else {
-                        if (!FUN_002a4b28(actor->id))
-                            candidates[count++] = entry;
-                    }
+                    if (fallback ? FUN_002a4b28(actor->id) : !FUN_002a4b28(actor->id))
+                        candidates[count++] = entry;
                 }
             }
         }

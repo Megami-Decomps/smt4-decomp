@@ -1,7 +1,7 @@
 #include "gamedata/DevilModel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 DevilModelOverride* dataTable00FindById(u16);
-s32 asdTMTexTableNodeIsLoaded(u32, s32);
 
 // Resolves a demon's model texture and checks that its table node is loaded.
 s32 FUN_00293f10(s32 id, s32 mapped)

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int bgmFadeOut(int id);
 int soundChannelStopAll(int id);
 int fileSlotFree(int id);
 int scrScriptProcessDestroy(u32 process);
-int asdTMTexTableFreeEntry(int table);
 int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(u32 ptr);
 int jobStop(u32 job, int mode);

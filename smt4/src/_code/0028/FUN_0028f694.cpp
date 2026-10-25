@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -23,7 +24,6 @@ extern RenderCtx* g_titleScene;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
-void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 s32 ifTouchGetSelectionModeForRegion(u32 region);
 SpriteInfo* FUN_002bf4f8(u32 table, u32 id);
 s32 vec2GetXInt(UiSpriteState* animation);

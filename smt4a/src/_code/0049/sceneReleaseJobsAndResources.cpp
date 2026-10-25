@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ int asdMemFree(void);
 int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
 int FUN_002c85b0(int);
-int asdTMTexTableFreeEntry(int);
 int helpTexturesRelease(void);
 int FUN_00333f6c(void);
 int campCommonBgRelease(void);

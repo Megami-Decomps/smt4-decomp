@@ -1,6 +1,7 @@
 /* NON_MATCHING: two scheduling differences only: retail loads work->node (arg 2) before `mov r4, r0` and compares the model-set index in r1 (ours r0); the instruction multiset is identical (154 rows each). */
 #include "font/PlaceWin.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The record the info panel shows (observed prefix). */
 struct PanelRecord {
@@ -47,7 +48,6 @@ struct PanelWork {
 
 extern "C" {
 
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void FUN_003ba754(PanelWork *work);
 void textFormatBuffer(char *destination, const char *format, ...);
 s32 gameFlagIsSet(u32 flag);

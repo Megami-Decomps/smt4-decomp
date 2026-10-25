@@ -24,14 +24,14 @@ struct ResultState {
 
 extern ResultState *g_result;
 
-s32 scrGetArg(void);
+s32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 ResultUnitRecord *gameGetUnitRecord(s32 unit);
 
 /* Script command: the demon id of the current result entry, from its override id when the argument is non-zero, else from its unit's record. */
 u32 FUN_00324540(void)
 {
-    s32 useOverride = scrGetArg();
+    s32 useOverride = scrGetArg(0);
 
     if (g_result != NULL) {
         ResultEntry *entry = &g_result->entries[g_result->current];

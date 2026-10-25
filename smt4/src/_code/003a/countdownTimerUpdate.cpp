@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct {
 extern Countdown g_countdown;
 
 int FUN_002958f8(int id, int arg);
-int asdTMTexTableFreeEntry(int kind);
 int asdTMTexTableReleaseNode(int kind, int index);
 
 /* Ticks the countdown; when it runs out, triggers the record's id and clears kind 0x22. */

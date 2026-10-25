@@ -1,5 +1,8 @@
-/* NON_MATCHING: positional-sound cutover is pending recovery of the dropped sin/cos inputs/results used by forward-offset sound positions; legacy local sound declaration is intentionally retained. */
-#include "romwright_types.h"
+/* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail, but the draft merges several scene functions (built 8440 rows vs retail 2035; retail has 9 sin/cos pairs, the draft 61), so the body must be re-split against retail. */
+#include "common.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "map/MapActionMarker.h"
+#include "util/TrigF32.h"
 #include "shard/W6_W6Match3_ForwardEffect.h"
 
 extern "C" {
@@ -37,14 +40,12 @@ int mapDestroyInterfaceModel(void);
 int mapIfReleaseSlot1(void);
 int mapDestroySecondaryModel(...);
 int mapIfReleaseSlot2(void);
-int FUN_00248114(void);
 int mapIfReleaseSlot3(void);
 int FUN_0027d7b0(...);
 int slotSetRequest(...);
 int FUN_002bf810(...);
 int lmapFindNearestMatchingTargetPoint(...);
 
-int FUN_001b4478(void);
 int FUN_001fa760(void);
 int mapIfActivateRecord(...);
 int FUN_0025247c(...);
@@ -78,11 +79,8 @@ int lmapSetSceneId(...);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00281e34(void);
-int FUN_00282390(void);
-int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
-int FUN_00291e40(...);
 int gameCounterAddSaturating(...);
 int FUN_003a66c4(void);
 int FUN_003a6988(void);
@@ -632,16 +630,14 @@ void FUN_002712dc(void)
         temp_v17 = temp_v17 * 0.017453292f;
         *(unsigned char *)(piVar22 + 0x1b) = 1;
         piVar22[0x1f] = (int)((unsigned long long)temp_v32 >> 0x20);
-        FUN_0028250c();
         piVar22 = g_lmapScene;
         temp_v34 = (float)temp_v37;
         g_lmapScene[10] =
-             (int)((float)g_lmapScene[10] + temp_v17 * (float)((unsigned long long)temp_v32 >> 0x20));
+             (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v17) * (float)((unsigned long long)temp_v32 >> 0x20));
         temp_v19 = (float)piVar22[0x14] * temp_v19;
-        FUN_00282390();
         piVar22 = g_lmapScene;
         g_lmapScene[0xc] =
-             (int)((float)g_lmapScene[0xc] + temp_v19 * (float)((unsigned long long)temp_v32 >> 0x20));
+             (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v19) * (float)((unsigned long long)temp_v32 >> 0x20));
         piVar22[0x15] = 2;
       }
       temp_v7 = (int)temp_v32;
@@ -685,7 +681,7 @@ void FUN_002712dc(void)
           partyApplyNonlethalAilmentDamage(2,5);
           g_lmapScene[0x58] = temp_v13;
           FUN_002562e4(0xf,0x50);
-          temp_v13 = FUN_00291e40(0x1000186);
+          temp_v13 = FUN_00291e40(0x1000186, *(SoundActorQueuePosition *)(g_lmapScene + 7));
           piVar22 = g_lmapScene;
           g_lmapScene[99] = temp_v13;
           piVar22[100] = 0x14;
@@ -848,7 +844,7 @@ void FUN_002712dc(void)
             partyApplyNonlethalAilmentDamage(2,5);
             g_lmapScene[0x58] = 0x447a0000;
             FUN_002562e4(0xf,0x50);
-            temp_v13 = FUN_00291e40(0x1000186);
+            temp_v13 = FUN_00291e40(0x1000186, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             piVar22 = g_lmapScene;
             g_lmapScene[99] = temp_v13;
             piVar22[100] = 0x14;
@@ -1004,12 +1000,10 @@ joined_r0x002c99a8:
           }
           temp_v27 = (float)VectorSignedToFloat((int)romwright_subpiece_4_2_0(unaff_r5,0),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v36 = (float)g_lmapScene[0x14] * temp_v35;
-          FUN_0028250c();
           piVar22 = g_lmapScene;
-          g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v36 * temp_v27);
+          g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v36) * temp_v27);
           temp_v35 = (float)piVar22[0x14] * temp_v35;
-          FUN_00282390();
-          g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v35 * temp_v27);
+          g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v35) * temp_v27);
           FUN_0027f848();
           piVar22 = g_lmapScene;
           g_lmapScene[10] = (int)fStack_68;
@@ -1086,15 +1080,23 @@ joined_r0x002c99a8:
             if (DAT_0049fb34 != 2) {
               if (DAT_0049fb34 == 3) {
                 if (g_lmapScene[2] == 2) {
-                  FUN_0028250c();
-                  FUN_00282390();
+                  {
+                  SoundActorQueuePosition position;
+                  position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+                  position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+                  position.y = (float)g_lmapScene[8] + 150.0f;
                   temp_v13 = randBetween(0,2);
-                  FUN_00291e40(temp_v13 + 0x1000235);
+                  FUN_00291e40(temp_v13 + 0x1000235, position);
+                  }
                 }
                 if (g_lmapScene[2] == 3) {
-                  FUN_0028250c();
-                  FUN_00282390();
-                  FUN_00291e40(0x10001f3);
+                  {
+                  SoundActorQueuePosition position;
+                  position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+                  position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+                  position.y = (float)g_lmapScene[8] + 130.0f;
+                  FUN_00291e40(0x10001f3, position);
+                  }
                   FUN_0027fca0(0xffffffff);
                 }
                 if ((g_lmapScene[2] == 6) && (FUN_0025bc80(), g_lmapScene[2] == 6)) {
@@ -1106,15 +1108,23 @@ joined_r0x002c99a8:
             }
             else {
               if (g_lmapScene[2] == 2) {
-                FUN_0028250c();
-                FUN_00282390();
+                {
+                SoundActorQueuePosition position;
+                position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+                position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+                position.y = (float)g_lmapScene[8] + 150.0f;
                 temp_v13 = randBetween(0,2);
-                FUN_00291e40(temp_v13 + 0x1000232);
+                FUN_00291e40(temp_v13 + 0x1000232, position);
+                }
               }
               if (g_lmapScene[2] == 3) {
-                FUN_0028250c();
-                FUN_00282390();
-                FUN_00291e40(0x10001f2);
+                {
+                SoundActorQueuePosition position;
+                position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+                position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+                position.y = (float)g_lmapScene[8] + 130.0f;
+                FUN_00291e40(0x10001f2, position);
+                }
                 FUN_0027fca0(0xffffffff);
               }
               if (g_lmapScene[2] == 4) {
@@ -1124,13 +1134,21 @@ joined_r0x002c99a8:
           }
           else {
             if (g_lmapScene[2] == 3) {
-              FUN_0028250c();
-              FUN_00282390();
-              FUN_00291e40(0x10001f1);
-              FUN_0028250c();
-              FUN_00282390();
+              {
+              SoundActorQueuePosition position;
+              position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+              position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+              position.y = (float)g_lmapScene[8] + 130.0f;
+              FUN_00291e40(0x10001f1, position);
+              }
+              {
+              SoundActorQueuePosition position;
+              position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+              position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+              position.y = (float)g_lmapScene[8] + 150.0f;
               temp_v13 = randBetween(0,2);
-              FUN_00291e40(temp_v13 + 0x100022f);
+              FUN_00291e40(temp_v13 + 0x100022f, position);
+              }
               FUN_0027fca0(0xffffffff);
             }
             if (g_lmapScene[2] == 6) {
@@ -1140,13 +1158,21 @@ joined_r0x002c99a8:
         }
         else {
           if (g_lmapScene[2] == 3) {
-            FUN_0028250c();
-            FUN_00282390();
-            FUN_00291e40(0x10001f0);
-            FUN_0028250c();
-            FUN_00282390();
+            {
+            SoundActorQueuePosition position;
+            position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+            position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 150.0f;
+            position.y = (float)g_lmapScene[8] + 130.0f;
+            FUN_00291e40(0x10001f0, position);
+            }
+            {
+            SoundActorQueuePosition position;
+            position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+            position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 60.0f;
+            position.y = (float)g_lmapScene[8] + 150.0f;
             temp_v13 = randBetween(0,2);
-            FUN_00291e40(temp_v13 + 0x100022c);
+            FUN_00291e40(temp_v13 + 0x100022c, position);
+            }
             FUN_0027fca0(0xffffffff);
           }
           if ((g_lmapScene[2] == 6) && (FUN_0025bc80(), g_lmapScene[2] == 6)) {
@@ -1391,31 +1417,35 @@ LAB_002c9a70:
             FUN_0027fae4();
             switch(DAT_0049f94a) {
             case 0:
-              FUN_00291e40(0x100021c);
+              FUN_00291e40(0x100021c, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 1:
               temp_v6 = 0x100021e;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 2:
               temp_v6 = 0x1000220;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 3:
               temp_v6 = 0x1000222;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 4:
               temp_v6 = 0x1000224;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             default:
             }
             FUN_0027fca0(0xffffffff);
-            FUN_0028250c();
-            FUN_00282390();
+            {
+            SoundActorQueuePosition position;
+            position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+            position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+            position.y = (float)g_lmapScene[8] + 100.0f;
             temp_v7 = randBetween(0,1);
-            FUN_00291e40(temp_v7 + 0x100023e);
+            FUN_00291e40(temp_v7 + 0x100023e, position);
+            }
             piVar22 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar22[2] = 0;
@@ -1429,31 +1459,35 @@ LAB_002c9a70:
           FUN_0027fae4();
           switch(DAT_0049f94a) {
           case 0:
-            FUN_00291e40(0x100021b);
+            FUN_00291e40(0x100021b, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 1:
             temp_v6 = 0x100021d;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 2:
             temp_v6 = 0x100021f;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 3:
             temp_v6 = 0x1000221;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 4:
             temp_v6 = 0x1000223;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           default:
           }
           FUN_0027fca0(0xffffffff);
-          FUN_0028250c();
-          FUN_00282390();
+          {
+          SoundActorQueuePosition position;
+          position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.y = (float)g_lmapScene[8] + 150.0f;
           temp_v7 = randBetween(0,1);
-          FUN_00291e40(temp_v7 + 0x100023c);
+          FUN_00291e40(temp_v7 + 0x100023c, position);
+          }
           piVar22 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
           piVar22[2] = 0;
@@ -1527,13 +1561,11 @@ LAB_002c9a70:
               piVar22[0x48] = temp_v7;
               if ((int)temp_v18 < 0x42700000) {
                 temp_v18 = ((float)piVar22[0x13] + 180.0f) * 0.017453292f;
-                FUN_0028250c();
                 piVar22 = g_lmapScene;
-                g_lmapScene[0x46] = (int)((float)g_lmapScene[0x46] + temp_v18 * temp_v35);
+                g_lmapScene[0x46] = (int)((float)g_lmapScene[0x46] + FUN_0028250c(temp_v18) * temp_v35);
                 temp_v19 = ((float)piVar22[0x13] + temp_v34) * temp_v19;
-                FUN_00282390();
                 piVar22 = g_lmapScene + 0x49;
-                g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + temp_v19 * temp_v35);
+                g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + FUN_00282390(temp_v19) * temp_v35);
                 FUN_0025247c(piVar22);
                 piVar22 = g_lmapScene;
                 g_lmapScene[0x4c] = temp_v13;
@@ -1544,13 +1576,11 @@ LAB_002c9a70:
               }
               else {
                 temp_v18 = ((float)piVar22[0x14] + 180.0f) * 0.017453292f;
-                FUN_0028250c();
                 piVar22 = g_lmapScene;
-                g_lmapScene[0x46] = (int)((float)g_lmapScene[0x46] + temp_v18 * temp_v35);
+                g_lmapScene[0x46] = (int)((float)g_lmapScene[0x46] + FUN_0028250c(temp_v18) * temp_v35);
                 temp_v19 = ((float)piVar22[0x14] + temp_v34) * temp_v19;
-                FUN_00282390();
                 piVar22 = g_lmapScene + 0x49;
-                g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + temp_v19 * temp_v35);
+                g_lmapScene[0x48] = (int)((float)g_lmapScene[0x48] + FUN_00282390(temp_v19) * temp_v35);
                 FUN_0025247c(piVar22);
                 piVar22 = g_lmapScene;
                 g_lmapScene[0x4c] = temp_v13;
@@ -1746,21 +1776,24 @@ LAB_002c9a70:
               piVar22[0xb] = (int)temp_v18;
               piVar22[0xc] = temp_v7;
               temp_v18 = DAT_0049f9bc * 0.017453292f;
-              FUN_0028250c();
               temp_v19 = 40.0f;
-              g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * 40.0f);
+              g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v18) * 40.0f);
               temp_v17 = DAT_0049f9bc * temp_v17;
-              FUN_00282390();
               piVar22 = g_lmapScene;
-              g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v17 * temp_v19);
+              g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v17) * temp_v19);
               piVar22[0x14] = (int)DAT_0049f9ac;
               FUN_0027fc14(0xb);
               DAT_004474f4[0x2b] = -2;
               buttonHelpSetPreset(0xdb);
               mapIfActivateRecord(1,DAT_0049f99c);
-              FUN_0028250c();
-              FUN_00282390();
-              FUN_001b4478();
+              {
+              MapMarkerPosition marker;
+              marker.x = (float)DAT_0049f9a0 + FUN_0028250c(DAT_0049f9ac * 0.017453292f) * 80.0f;
+              marker.y = DAT_0049f9a4;
+              marker.z = (float)DAT_0049f9a8 + FUN_00282390(DAT_0049f9ac * 0.017453292f) * 80.0f;
+              marker.w = DAT_0049f9bc;
+              FUN_001b4478(marker);
+              }
               temp_v7 = g_lmapScene[1];
               piVar22 = g_lmapScene;
               piVar22[1] = temp_v7 + 1;
@@ -1951,22 +1984,22 @@ LAB_002c9a70:
             FUN_0027fae4();
             switch(DAT_0049f94a) {
             case 0:
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 1:
               temp_v6 = 0x100021d;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 2:
               temp_v6 = 0x100021f;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 3:
               temp_v6 = 0x1000221;
-              FUN_00291e40(temp_v6);
+              FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               break;
             case 4:
-              FUN_00291e40(0x1000223);
+              FUN_00291e40(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             }
             goto LAB_002e94f0;
           }
@@ -2068,9 +2101,14 @@ LAB_002c9a70:
         DAT_004474f4[0x2b] = -3;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1,DAT_0049f99c);
-        FUN_0028250c();
-        FUN_00282390();
-        FUN_00248114();
+        {
+        MapMarkerPosition marker;
+        marker.x = (float)DAT_0049f9a0 + FUN_0028250c(DAT_0049f9ac * 0.017453292f) * 150.0f;
+        marker.y = DAT_0049f9a4;
+        marker.z = (float)DAT_0049f9a8 + FUN_00282390(DAT_0049f9ac * 0.017453292f) * 150.0f;
+        marker.w = DAT_0049f9bc;
+        FUN_00248114(marker);
+        }
         piVar22 = g_lmapScene;
         temp_v7 = piVar22[1];
         piVar22[1] = temp_v7 + 1;
@@ -2098,15 +2136,13 @@ LAB_002c9a70:
           piVar22 = g_lmapScene;
           if (DAT_0049f968 != 0) {
             temp_v17 = (float)g_lmapScene[0x14] * temp_v18;
-            FUN_0028250c();
             piVar22 = g_lmapScene;
             temp_v19 = 250.0f;
-            g_lmapScene[0x28] = (int)((float)g_lmapScene[10] + temp_v17 * 250.0f);
+            g_lmapScene[0x28] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v17) * 250.0f);
             piVar22[0x29] = (int)((float)piVar22[0xb] - 500.0f);
             temp_v18 = (float)piVar22[0x14] * temp_v18;
-            FUN_00282390();
             piVar22 = g_lmapScene;
-            g_lmapScene[0x2a] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v19);
+            g_lmapScene[0x2a] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v18) * temp_v19);
             piVar22[0x2b] = piVar22[0x14];
             piVar22[1] = 0x32;
             piVar22[2] = 0;
@@ -2166,30 +2202,34 @@ LAB_002c9a70:
         FUN_0027fae4();
         switch(DAT_0049f94a) {
         case 0:
-          FUN_00291e40(temp_v6);
+          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
           break;
         case 1:
           temp_v6 = 0x100021d;
-          FUN_00291e40(temp_v6);
+          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
           break;
         case 2:
           temp_v6 = 0x100021f;
-          FUN_00291e40(temp_v6);
+          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
           break;
         case 3:
           temp_v6 = 0x1000221;
-          FUN_00291e40(temp_v6);
+          FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
           break;
         case 4:
-          FUN_00291e40(0x1000223);
+          FUN_00291e40(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         default:
         }
 LAB_002e94f0:
         FUN_0027fca0(0xffffffff);
-        FUN_0028250c();
-        FUN_00282390();
+        {
+        SoundActorQueuePosition position;
+        position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+        position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+        position.y = (float)g_lmapScene[8] + 150.0f;
         temp_v7 = randBetween(0,1);
-        FUN_00291e40(temp_v7 + 0x100023c);
+        FUN_00291e40(temp_v7 + 0x100023c, position);
+        }
         piVar22 = g_lmapScene;
         g_lmapScene[0x1a] = (int)temp_v17;
         piVar22[8] = (int)((float)piVar22[8] + temp_v17);
@@ -2266,29 +2306,33 @@ LAB_002e94f0:
           switch(DAT_0049f94a) {
           case 0:
             temp_v6 = 0x100021c;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 1:
             temp_v6 = 0x100021e;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 2:
             temp_v6 = 0x1000220;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 3:
             temp_v6 = 0x1000222;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 4:
-            FUN_00291e40(0x1000224);
+            FUN_00291e40(0x1000224, *(SoundActorQueuePosition *)(g_lmapScene + 7));
           default:
           }
           FUN_0027fca0(0xffffffff);
-          FUN_0028250c();
-          FUN_00282390();
+          {
+          SoundActorQueuePosition position;
+          position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.y = (float)g_lmapScene[8] + 100.0f;
           temp_v7 = randBetween(0,1);
-          FUN_00291e40(temp_v7 + 0x100023e);
+          FUN_00291e40(temp_v7 + 0x100023e, position);
+          }
         }
         if (g_lmapScene[2] != 6) break;
         if (g_lmapScene[0x2f] >= 0x24) {
@@ -2375,11 +2419,15 @@ LAB_002e94f0:
                 if (temp_v7 + 1 == 1) {
                   piVar22[0x15] = 0x10;
                   piVar22[0x16] = 0;
-                  FUN_00291e40();
+                  FUN_00291e40(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                   FUN_0027fca0(0xffffffff);
-                  FUN_0028250c();
-                  FUN_00282390();
-                  FUN_00291e40(0x1000240);
+                  {
+                  SoundActorQueuePosition position;
+                  position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+                  position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+                  position.y = (float)g_lmapScene[8] + 150.0f;
+                  FUN_00291e40(0x1000240, position);
+                  }
                 }
                 if (g_lmapScene[2] == 2) {
                   mapIfReleaseSlot2();
@@ -2431,13 +2479,11 @@ LAB_002e94f0:
                 piVar22[0xc] = (int)fStack_38;
                 temp_v17 = (fStack_34 + temp_v18) * temp_v19;
                 piVar22[0xb] = (int)(fStack_3c - 142.0f);
-                FUN_0028250c();
                 piVar22 = g_lmapScene;
                 temp_v34 = 35.0f;
-                g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v17 * 35.0f);
+                g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v17) * 35.0f);
                 temp_v19 = ((float)piVar22[0x14] + temp_v18) * temp_v19;
-                FUN_00282390();
-                g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v34);
+                g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v19) * temp_v34);
               }
               else {
                 temp_v7 = padIsButtonPressed(5);
@@ -2485,9 +2531,14 @@ LAB_002e94f0:
           DAT_004474f4[0x2b] = -3;
           buttonHelpSetPreset(0xdb);
           mapIfActivateRecord(1,DAT_0049f99c);
-          FUN_0028250c();
-          FUN_00282390();
-          FUN_00248114();
+          {
+          MapMarkerPosition marker;
+          marker.x = (float)DAT_0049f9a0 + FUN_0028250c(DAT_0049f9ac * 0.017453292f) * 150.0f;
+          marker.y = DAT_0049f9a4;
+          marker.z = (float)DAT_0049f9a8 + FUN_00282390(DAT_0049f9ac * 0.017453292f) * 150.0f;
+          marker.w = DAT_0049f9bc;
+          FUN_00248114(marker);
+          }
           piVar22 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
           piVar22[2] = 0;
@@ -2536,7 +2587,7 @@ LAB_002e94f0:
       piVar22[9] = temp_v7;
       piVar22[8] = (int)temp_v19;
       if ((temp_v5 == 1) || ((temp_v5 == 0xb || temp_v5 == 0x1c) || temp_v5 == 0x29)) {
-        FUN_00291e40((temp_v5 & 3) + 0x1000212,piVar22,temp_v5 & 3,temp_v19);
+        FUN_00291e40((temp_v5 & 3) + 0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         FUN_0027fca0(0xffffffff);
       }
       if (g_lmapScene[2] == 0x1e) {
@@ -2642,13 +2693,11 @@ LAB_002e94f0:
             piVar22[0xb] = (int)temp_v17;
             piVar22[0xc] = temp_v7;
             temp_v18 = ((float)piVar22[0x13] + 180.0f) * 0.017453292f;
-            FUN_0028250c();
             piVar22 = g_lmapScene;
-            g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v35);
+            g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v18) * temp_v35);
             temp_v19 = ((float)piVar22[0x13] + temp_v34) * temp_v19;
-            FUN_00282390();
             piVar22 = g_lmapScene;
-            g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v35);
+            g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v19) * temp_v35);
             temp_v7 = piVar22[10];
             mathPositionHeadingDegrees();
             g_lmapScene[0x14] = temp_v7;
@@ -2664,12 +2713,10 @@ LAB_002e94f0:
             piVar22[0xb] = (int)temp_v18;
             piVar22[0xc] = temp_v7;
             temp_v18 = (temp_v17 + temp_v34) * temp_v19;
-            FUN_0028250c();
             piVar22 = g_lmapScene;
-            g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v35);
+            g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v18) * temp_v35);
             temp_v19 = ((float)piVar22[0x14] + temp_v34) * temp_v19;
-            FUN_00282390();
-            g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v35);
+            g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v19) * temp_v35);
           }
           FUN_0027fc14(10);
           DAT_004474f4[0x2b] = -1;
@@ -2811,20 +2858,23 @@ LAB_002e94f0:
               piVar22[0xb] = (int)temp_v17;
               piVar22[0xc] = temp_v7;
               temp_v17 = (temp_v19 + 180.0f) * temp_v18;
-              FUN_0028250c();
               piVar22 = g_lmapScene;
               temp_v19 = 110.0f;
-              g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v17 * 110.0f);
+              g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v17) * 110.0f);
               temp_v18 = ((float)piVar22[0x14] + temp_v34) * temp_v18;
-              FUN_00282390();
-              g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v19);
+              g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v18) * temp_v19);
               FUN_0027fc14(10);
               DAT_004474f4[0x2b] = -1;
               buttonHelpSetPreset(0xdb);
               mapIfActivateRecord(1,DAT_0049f99c);
-              FUN_0028250c();
-              FUN_00282390();
-              FUN_00248114();
+              {
+              MapMarkerPosition marker;
+              marker.x = (float)DAT_0049f9a0 + FUN_0028250c((float)g_lmapScene[0x14] * 0.017453292f) * 20.0f;
+              marker.y = DAT_0049f9a4 + 10.0f;
+              marker.z = (float)DAT_0049f9a8 + FUN_00282390((float)g_lmapScene[0x14] * 0.017453292f) * 20.0f;
+              marker.w = (float)g_lmapScene[0x14] + 180.0f;
+              FUN_00248114(marker);
+              }
               temp_v7 = g_lmapScene[1];
               piVar22 = g_lmapScene;
               piVar22[1] = temp_v7 + 1;
@@ -2858,29 +2908,33 @@ LAB_002e94f0:
               switch(DAT_0049f94a) {
               case 0:
                 temp_v6 = 0x100021b;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 1:
                 temp_v6 = 0x100021d;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 2:
                 temp_v6 = 0x100021f;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 3:
                 temp_v6 = 0x1000221;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 4:
-                FUN_00291e40(0x1000223);
+                FUN_00291e40(0x1000223, *(SoundActorQueuePosition *)(g_lmapScene + 7));
               default:
               }
               FUN_0027fca0(0xffffffff);
-              FUN_0028250c();
-              FUN_00282390();
+              {
+              SoundActorQueuePosition position;
+              position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+              position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+              position.y = (float)g_lmapScene[8] + 150.0f;
               temp_v7 = randBetween(0,1);
-              FUN_00291e40(temp_v7 + 0x100023c);
+              FUN_00291e40(temp_v7 + 0x100023c, position);
+              }
               piVar22 = g_lmapScene;
               g_lmapScene[0x1a] = 0x41000000;
               piVar22[8] = (int)((float)piVar22[8] + 8.0f);
@@ -3063,13 +3117,11 @@ LAB_002e94f0:
               piVar22[0xb] = (int)temp_v17;
               piVar22[0xc] = temp_v7;
               temp_v17 = DAT_0049f9bc * 0.017453292f;
-              FUN_0028250c();
               temp_v19 = 25.0f;
-              g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v17 * 25.0f);
+              g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v17) * 25.0f);
               temp_v18 = DAT_0049f9bc * temp_v18;
-              FUN_00282390();
               piVar22 = g_lmapScene;
-              g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v19);
+              g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v18) * temp_v19);
               piVar22[0x14] = (int)DAT_0049f9ac;
               FUN_0027fc14(0xd);
               DAT_004474f4[0x2b] = 1;
@@ -3110,31 +3162,35 @@ LAB_002d472c:
               FUN_0027fae4();
               switch(DAT_0049f94a) {
               case 0:
-                FUN_00291e40(0x100021b);
+                FUN_00291e40(0x100021b, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 1:
                 temp_v6 = 0x100021d;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 2:
                 temp_v6 = 0x100021f;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 3:
                 temp_v6 = 0x1000221;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               case 4:
                 temp_v6 = 0x1000223;
-                FUN_00291e40(temp_v6);
+                FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                 break;
               default:
               }
               FUN_0027fca0(0xffffffff);
-              FUN_0028250c();
-              FUN_00282390();
+              {
+              SoundActorQueuePosition position;
+              position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+              position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+              position.y = (float)g_lmapScene[8] + 150.0f;
               temp_v7 = randBetween(0,1);
-              FUN_00291e40(temp_v7 + 0x100023c);
+              FUN_00291e40(temp_v7 + 0x100023c, position);
+              }
               if ((DAT_0049f958 == 0x3303001) && (temp_v7 = gameFlagIsSet(0x292), temp_v7 != 0)) {
                 slotSetRequest(0,0xf,0xff);
                 temp_v8 = 0xf;
@@ -3278,11 +3334,15 @@ LAB_002d472c:
                 if (temp_v7 + 1 == 1) {
                   piVar22[0x15] = 0xf;
                   piVar22[0x16] = 0;
-                  FUN_00291e40();
+                  FUN_00291e40(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 7));
                   FUN_0027fca0(0xffffffff);
-                  FUN_0028250c();
-                  FUN_00282390();
-                  FUN_00291e40(0x1000240);
+                  {
+                  SoundActorQueuePosition position;
+                  position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+                  position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+                  position.y = (float)g_lmapScene[8] + 150.0f;
+                  FUN_00291e40(0x1000240, position);
+                  }
                 }
                 if (g_lmapScene[2] == 2) {
                   DAT_0049fb46 = 0;
@@ -3329,12 +3389,10 @@ LAB_002d472c:
                 piVar22[0xc] = (int)fStack_38;
                 piVar22[0xb] = (int)(fStack_3c - 250.0f);
                 temp_v18 = ((float)piVar22[0x13] + 180.0f) * temp_v17;
-                FUN_0028250c();
                 piVar22 = g_lmapScene;
-                g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v19);
+                g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v18) * temp_v19);
                 temp_v17 = ((float)piVar22[0x13] + temp_v34) * temp_v17;
-                FUN_00282390();
-                g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v17 * temp_v19);
+                g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v17) * temp_v19);
               }
               else {
                 temp_v7 = padIsButtonPressed(6);
@@ -3378,12 +3436,10 @@ LAB_002d472c:
           piVar22[0xb] = (int)temp_v18;
           piVar22[0xc] = temp_v7;
           temp_v18 = DAT_0049f9bc * 0.017453292f;
-          FUN_0028250c();
-          g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * temp_v19);
+          g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v18) * temp_v19);
           temp_v17 = DAT_0049f9bc * temp_v17;
-          FUN_00282390();
           piVar22 = g_lmapScene;
-          g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v17 * temp_v19);
+          g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v17) * temp_v19);
           piVar22[0x14] = (int)DAT_0049f9ac;
           FUN_0027fc14(0xd);
           DAT_004474f4[0x2b] = 1;
@@ -3438,7 +3494,7 @@ LAB_002d472c:
       piVar22[9] = temp_v7;
       piVar22[8] = (int)temp_v17;
       if ((temp_v5 == 0xb) || (temp_v5 == 0x1c || temp_v5 == 0x29)) {
-        FUN_00291e40((temp_v5 & 3) + 0x1000212,piVar22,temp_v5 & 3,temp_v17);
+        FUN_00291e40((temp_v5 & 3) + 0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         FUN_0027fca0(0xffffffff);
       }
       if (g_lmapScene[2] == 0x1e) {
@@ -3483,31 +3539,35 @@ LAB_002d472c:
           FUN_002879dc(0x1e,0x32,0);
           switch(DAT_0049f94a) {
           case 0:
-            FUN_00291e40(0x100021c);
+            FUN_00291e40(0x100021c, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 1:
             temp_v6 = 0x100021e;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 2:
             temp_v6 = 0x1000220;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 3:
             temp_v6 = 0x1000222;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 4:
             temp_v6 = 0x1000224;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           default:
           }
           FUN_0027fca0(0xffffffff);
-          FUN_0028250c();
-          FUN_00282390();
+          {
+          SoundActorQueuePosition position;
+          position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.y = (float)g_lmapScene[8] + 100.0f;
           temp_v7 = randBetween(0,1);
-          FUN_00291e40(temp_v7 + 0x100023e);
+          FUN_00291e40(temp_v7 + 0x100023e, position);
+          }
         }
         piVar22 = g_lmapScene;
         if (g_lmapScene[2] >= 0x24) {
@@ -3553,31 +3613,35 @@ LAB_002d472c:
           FUN_002879dc(0x1e,0x32,0);
           switch(DAT_0049f94a) {
           case 0:
-            FUN_00291e40(0x100021c);
+            FUN_00291e40(0x100021c, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 1:
             temp_v6 = 0x100021e;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 2:
             temp_v6 = 0x1000220;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 3:
             temp_v6 = 0x1000222;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           case 4:
             temp_v6 = 0x1000224;
-            FUN_00291e40(temp_v6);
+            FUN_00291e40(temp_v6, *(SoundActorQueuePosition *)(g_lmapScene + 7));
             break;
           default:
           }
           FUN_0027fca0(0xffffffff);
-          FUN_0028250c();
-          FUN_00282390();
+          {
+          SoundActorQueuePosition position;
+          position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+          position.y = (float)g_lmapScene[8] + 100.0f;
           temp_v7 = randBetween(0,1);
-          FUN_00291e40(temp_v7 + 0x100023e);
+          FUN_00291e40(temp_v7 + 0x100023e, position);
+          }
         }
         if (g_lmapScene[2] >= 0x24) {
           FUN_0027fc14(9);
@@ -3683,25 +3747,29 @@ LAB_002d472c:
       fStack_24 = temp_v20;
       switch(DAT_0049f94a) {
       case 0:
-        FUN_00291e40(0x100021c);
+        FUN_00291e40(0x100021c, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         break;
       case 1:
-        FUN_00291e40(0x100021e);
+        FUN_00291e40(0x100021e, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         break;
       case 2:
-        FUN_00291e40(0x1000220);
+        FUN_00291e40(0x1000220, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         break;
       case 3:
-        FUN_00291e40(0x1000222);
+        FUN_00291e40(0x1000222, *(SoundActorQueuePosition *)(g_lmapScene + 7));
         break;
       case 4:
-        FUN_00291e40(0x1000224);
+        FUN_00291e40(0x1000224, *(SoundActorQueuePosition *)(g_lmapScene + 7));
       }
       FUN_0027fca0(0xffffffff);
-      FUN_0028250c();
-      FUN_00282390();
+      {
+      SoundActorQueuePosition position;
+      position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+      position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+      position.y = (float)g_lmapScene[8] + 100.0f;
       temp_v7 = randBetween(0,1);
-      FUN_00291e40(temp_v7 + 0x100023e);
+      FUN_00291e40(temp_v7 + 0x100023e, position);
+      }
     }
     goto code_r0x00272944;
   case 0x1c:
@@ -3909,9 +3977,13 @@ LAB_002d472c:
       piVar22[0xb] = (int)*(unsigned long long *)(piVar22 + 8);
       piVar22[0xc] = (int)((unsigned long long)*(unsigned long long *)(piVar22 + 8) >> 0x20);
       *(unsigned char *)(piVar22 + 0x1b) = 0;
-      FUN_0028250c();
-      FUN_00282390();
-      FUN_00291e40(0x100023a);
+      {
+      SoundActorQueuePosition position;
+      position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+      position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+      position.y = (float)g_lmapScene[8] + 150.0f;
+      FUN_00291e40(0x100023a, position);
+      }
       piVar22 = g_lmapScene;
       g_lmapScene[1] = g_lmapScene[1] + 1;
       piVar22[2] = 0;
@@ -3943,11 +4015,15 @@ LAB_002d472c:
       fStack_24 = temp_v20;
       FUN_002879dc(10,0x14,0);
       FUN_0027fca0(0);
-      FUN_00291e40(0x1000186);
-      FUN_0028250c();
-      FUN_00282390();
+      FUN_00291e40(0x1000186, *(SoundActorQueuePosition *)(g_lmapScene + 7));
+      {
+      SoundActorQueuePosition position;
+      position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+      position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 50.0f;
+      position.y = (float)g_lmapScene[8] + 150.0f;
       temp_v7 = randBetween(0,1);
-      FUN_00291e40(temp_v7 + 0x1000238);
+      FUN_00291e40(temp_v7 + 0x1000238, position);
+      }
       puVar5 = (unsigned int *)&g_gameState;
       if (g_gameState == (unsigned int *)0x5) {
         puVar5 = DAT_0049f920;
@@ -4240,9 +4316,13 @@ LAB_0027142c:
             fStack_28 = temp_v35;
             fStack_24 = temp_v20;
             FUN_0027fca0(0);
-            FUN_0028250c();
-            FUN_00282390();
-            FUN_00291e40(0x100023b);
+            {
+            SoundActorQueuePosition position;
+            position.x = (float)g_lmapScene[7] + FUN_0028250c(((float)g_lmapScene[0x13]) * 0.017453292f) * 10.0f;
+            position.z = (float)g_lmapScene[9] + FUN_00282390(((float)g_lmapScene[0x13]) * 0.017453292f) * 10.0f;
+            position.y = (float)g_lmapScene[8] + 150.0f;
+            FUN_00291e40(0x100023b, position);
+            }
           }
           piVar22 = g_lmapScene;
           g_lmapScene[7] =
@@ -4332,13 +4412,11 @@ LAB_0027142c:
     temp_v18 = temp_v18 * 0.017453292f;
     fStack_28 = temp_v35;
     fStack_24 = temp_v20;
-    FUN_0028250c();
     piVar22 = g_lmapScene;
-    g_lmapScene[10] = (int)((float)g_lmapScene[10] + temp_v18 * (float)g_lmapScene[0x1f]);
+    g_lmapScene[10] = (int)((float)g_lmapScene[10] + FUN_0028250c(temp_v18) * (float)g_lmapScene[0x1f]);
     temp_v19 = (float)piVar22[0x14] * temp_v19;
-    FUN_00282390();
     piVar22 = g_lmapScene;
-    g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * (float)g_lmapScene[0x1f]);
+    g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + FUN_00282390(temp_v19) * (float)g_lmapScene[0x1f]);
     piVar22[0xd] = temp_v31;
     piVar22[0xe] = (int)temp_v17;
     piVar22[0xf] = temp_v7;
@@ -4473,12 +4551,10 @@ LAB_0027142c:
       piVar22[0x15] = temp_v7;
       piVar22[0x14] = (int)(temp_v18 + 150.0f);
       temp_v18 = (float)piVar23[0x14] * 0.017453292f;
-      FUN_0028250c();
       temp_v19 = 600.0f;
-      DAT_004474f4[0x13] = (int)((float)DAT_004474f4[0x13] + temp_v18 * 600.0f);
+      DAT_004474f4[0x13] = (int)((float)DAT_004474f4[0x13] + FUN_0028250c(temp_v18) * 600.0f);
       temp_v17 = (float)g_lmapScene[0x14] * temp_v17;
-      FUN_00282390();
-      DAT_004474f4[0x15] = (int)((float)DAT_004474f4[0x15] + temp_v17 * temp_v19);
+      DAT_004474f4[0x15] = (int)((float)DAT_004474f4[0x15] + FUN_00282390(temp_v17) * temp_v19);
       break;
     case 7:
       temp_v18 = (float)g_lmapScene[0x13];
@@ -4491,23 +4567,19 @@ LAB_0027142c:
       }
       temp_v17 = (float)DAT_004474f4[0xa4] * 0.017453292f;
       if (!(temp_v31 != 0x5a && temp_v7 != 0xe)) {
-        FUN_0028250c();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xc] = (int)temp_v17;
+        DAT_004474f4[0xc] = (int)FUN_0028250c(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        FUN_00282390();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)temp_v18;
+        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[10] = 0;
       }
       else {
-        FUN_0028250c();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[10] = (int)temp_v17;
+        DAT_004474f4[10] = (int)FUN_0028250c(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        FUN_00282390();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)temp_v18;
+        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[0xc] = 0;
       }
       piVar22 = DAT_004474f4;
@@ -4529,23 +4601,19 @@ LAB_0027142c:
       }
       temp_v17 = (float)DAT_004474f4[0xa4] * 0.017453292f;
       if (!(temp_v31 != 0x5a && temp_v7 != 0xe)) {
-        FUN_0028250c();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xc] = (int)temp_v17;
+        DAT_004474f4[0xc] = (int)FUN_0028250c(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        FUN_00282390();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)temp_v18;
+        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[10] = 0;
       }
       else {
-        FUN_0028250c();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[10] = (int)temp_v17;
+        DAT_004474f4[10] = (int)FUN_0028250c(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        FUN_00282390();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)temp_v18;
+        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[0xc] = 0;
       }
       temp_v18 = (float)DAT_004474f4[0xa4];
@@ -4570,23 +4638,19 @@ LAB_0027142c:
       }
       temp_v17 = (float)DAT_004474f4[0xa4] * 0.017453292f;
       if (!(temp_v31 != 0x5a && temp_v7 != 0xe)) {
-        FUN_0028250c();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xc] = (int)temp_v17;
+        DAT_004474f4[0xc] = (int)FUN_0028250c(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        FUN_00282390();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)temp_v18;
+        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[10] = 0;
       }
       else {
-        FUN_0028250c();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[10] = (int)temp_v17;
+        DAT_004474f4[10] = (int)FUN_0028250c(temp_v17);
         temp_v18 = (float)piVar22[0xa4] * temp_v18;
-        FUN_00282390();
         piVar22 = DAT_004474f4;
-        DAT_004474f4[0xb] = (int)temp_v18;
+        DAT_004474f4[0xb] = (int)FUN_00282390(temp_v18);
         piVar22[0xc] = 0;
       }
       piVar22 = DAT_004474f4;
@@ -4616,13 +4680,11 @@ LAB_0027142c:
         temp_v36 = (float)g_lmapScene[0xb];
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v34 = (float)g_lmapScene[0xc];
-        FUN_0028250c();
         temp_v35 = 90.0f;
-        temp_v19 = temp_v19 + temp_v18 * 90.0f;
+        temp_v19 = temp_v19 + FUN_0028250c(temp_v18) * 90.0f;
         temp_v36 = temp_v36 + 75.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v17;
-        FUN_00282390();
-        fStack_78 = temp_v34 + temp_v18 * temp_v35;
+        fStack_78 = temp_v34 + FUN_00282390(temp_v18) * temp_v35;
         temp_v21 = 110.0f;
         temp_v34 = (float)g_lmapScene[10];
         temp_v20 = (float)g_lmapScene[0xb];
@@ -4630,13 +4692,11 @@ LAB_0027142c:
         temp_v18 = ((float)g_lmapScene[0x14] - 110.0f) * temp_v17;
         fStack_80 = temp_v19;
         fStack_7c = temp_v36;
-        FUN_0028250c();
         temp_v19 = 120.0f;
-        temp_v34 = temp_v34 + temp_v18 * 120.0f;
+        temp_v34 = temp_v34 + FUN_0028250c(temp_v18) * 120.0f;
         temp_v20 = temp_v20 + 210.0f;
         temp_v17 = ((float)g_lmapScene[0x14] - temp_v21) * temp_v17;
-        FUN_00282390();
-        fStack_6c = temp_v35 + temp_v17 * temp_v19;
+        fStack_6c = temp_v35 + FUN_00282390(temp_v17) * temp_v19;
         uStack_4c = romwright_piece_4_4((*(unsigned int *)((unsigned char *)&uStack_4c + 4)),8);
         uStack_54 = (unsigned long long)(unsigned int)uStack_54;
         fStack_2c = 0.0f;
@@ -4663,26 +4723,22 @@ LAB_0027142c:
           temp_v19 = (float)g_lmapScene[0xc];
           temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
           temp_v30 = *(unsigned long long *)(g_lmapScene + 10);
-          FUN_0028250c();
           temp_v36 = 90.0f;
-          temp_v34 = (float)temp_v30 + temp_v18 * 90.0f;
+          temp_v34 = (float)temp_v30 + FUN_0028250c(temp_v18) * 90.0f;
           temp_v35 = (float)((unsigned long long)temp_v30 >> 0x20) + 65.0f;
           temp_v18 = (float)g_lmapScene[0x14] * temp_v17;
-          FUN_00282390();
-          fStack_78 = temp_v19 + temp_v18 * temp_v36;
+          fStack_78 = temp_v19 + FUN_00282390(temp_v18) * temp_v36;
           temp_v36 = 110.0f;
           temp_v19 = (float)g_lmapScene[0xc];
           temp_v30 = *(unsigned long long *)(g_lmapScene + 10);
           temp_v18 = ((float)g_lmapScene[0x14] - 110.0f) * temp_v17;
           fStack_80 = temp_v34;
           fStack_7c = temp_v35;
-          FUN_0028250c();
           temp_v35 = 120.0f;
-          temp_v18 = (float)temp_v30 + temp_v18 * 120.0f;
+          temp_v18 = (float)temp_v30 + FUN_0028250c(temp_v18) * 120.0f;
           temp_v34 = (float)((unsigned long long)temp_v30 >> 0x20) + 250.0f;
           temp_v17 = ((float)g_lmapScene[0x14] - temp_v36) * temp_v17;
-          FUN_00282390();
-          fStack_6c = temp_v19 + temp_v17 * temp_v35;
+          fStack_6c = temp_v19 + FUN_00282390(temp_v17) * temp_v35;
           uStack_4c = romwright_piece_4_4((*(unsigned int *)((unsigned char *)&uStack_4c + 4)),300);
           uStack_54 = (unsigned long long)(unsigned int)uStack_54;
           fStack_2c = 0.0f;
@@ -4717,26 +4773,22 @@ LAB_0027142c:
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
         temp_v20 = (float)g_lmapScene[0xb];
-        FUN_0028250c();
         temp_v34 = 120.0f;
-        temp_v35 = temp_v35 + temp_v18 * 120.0f;
+        temp_v35 = temp_v35 + FUN_0028250c(temp_v18) * 120.0f;
         temp_v20 = temp_v20 + 70.0f;
         temp_v18 = (float)g_lmapScene[0x14] * temp_v17;
-        FUN_00282390();
-        fStack_78 = temp_v19 + temp_v18 * temp_v34;
+        fStack_78 = temp_v19 + FUN_00282390(temp_v18) * temp_v34;
         temp_v19 = (float)g_lmapScene[0xc];
         temp_v36 = (float)g_lmapScene[10];
         temp_v21 = (float)g_lmapScene[0xb];
         temp_v18 = ((float)g_lmapScene[0x14] - temp_v34) * temp_v17;
         fStack_80 = temp_v35;
         fStack_7c = temp_v20;
-        FUN_0028250c();
         temp_v35 = 140.0f;
-        temp_v36 = temp_v36 + temp_v18 * 140.0f;
+        temp_v36 = temp_v36 + FUN_0028250c(temp_v18) * 140.0f;
         temp_v21 = temp_v21 + 200.0f;
         temp_v17 = ((float)g_lmapScene[0x14] - temp_v34) * temp_v17;
-        FUN_00282390();
-        fStack_6c = temp_v19 + temp_v17 * temp_v35;
+        fStack_6c = temp_v19 + FUN_00282390(temp_v17) * temp_v35;
         uStack_4c = romwright_piece_4_4((*(unsigned int *)((unsigned char *)&uStack_4c + 4)),8);
         uStack_54 = (unsigned long long)(unsigned int)uStack_54;
         fStack_2c = 0.0f;
@@ -4764,26 +4816,22 @@ LAB_0027142c:
           temp_v20 = (float)g_lmapScene[0xb];
           temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
           temp_v34 = (float)g_lmapScene[0xc];
-          FUN_0028250c();
           temp_v35 = 120.0f;
-          temp_v19 = temp_v19 + temp_v18 * 120.0f;
+          temp_v19 = temp_v19 + FUN_0028250c(temp_v18) * 120.0f;
           temp_v20 = temp_v20 + 70.0f;
           temp_v18 = (float)g_lmapScene[0x14] * temp_v17;
-          FUN_00282390();
-          fStack_78 = temp_v34 + temp_v18 * temp_v35;
+          fStack_78 = temp_v34 + FUN_00282390(temp_v18) * temp_v35;
           temp_v34 = (float)g_lmapScene[10];
           temp_v21 = (float)g_lmapScene[0xb];
           temp_v36 = (float)g_lmapScene[0xc];
           temp_v18 = ((float)g_lmapScene[0x14] - temp_v35) * temp_v17;
           fStack_80 = temp_v19;
           fStack_7c = temp_v20;
-          FUN_0028250c();
           temp_v19 = 140.0f;
-          fStack_74 = temp_v34 + temp_v18 * 140.0f;
+          fStack_74 = temp_v34 + FUN_0028250c(temp_v18) * 140.0f;
           temp_v21 = temp_v21 + 200.0f;
           temp_v17 = ((float)g_lmapScene[0x14] - temp_v35) * temp_v17;
-          FUN_00282390();
-          fStack_6c = temp_v36 + temp_v17 * temp_v19;
+          fStack_6c = temp_v36 + FUN_00282390(temp_v17) * temp_v19;
           uStack_4c = romwright_piece_4_4((*(unsigned int *)((unsigned char *)&uStack_4c + 4)),300);
           uStack_54 = (unsigned long long)(unsigned int)uStack_54;
           fStack_2c = 0.0f;
@@ -4824,28 +4872,24 @@ LAB_0027142c:
         temp_v34 = (float)g_lmapScene[0xb];
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v19 = (float)g_lmapScene[0xc];
-        FUN_0028250c();
         temp_v36 = 40.0f;
         fStack_7c = temp_v34 + 20.0f;
-        fStack_80 = temp_v35 + temp_v18 * 40.0f;
+        fStack_80 = temp_v35 + FUN_0028250c(temp_v18) * 40.0f;
         if (g_gameState == (unsigned int *)0x16) {
           fStack_7c = fStack_7c + 20.0f;
         }
         temp_v18 = (float)g_lmapScene[0x14] * temp_v17;
-        FUN_00282390();
-        fStack_78 = temp_v19 + temp_v18 * temp_v36;
+        fStack_78 = temp_v19 + FUN_00282390(temp_v18) * temp_v36;
         temp_v35 = 160.0f;
         temp_v19 = (float)g_lmapScene[10];
         temp_v30 = *(unsigned long long *)(g_lmapScene + 0xb);
         temp_v18 = ((float)g_lmapScene[0x14] - 160.0f) * temp_v17;
-        FUN_0028250c();
         temp_v34 = 180.0f;
-        fStack_74 = temp_v19 + temp_v18 * 180.0f;
+        fStack_74 = temp_v19 + FUN_0028250c(temp_v18) * 180.0f;
         temp_v19 = (float)((unsigned long long)temp_v30 >> 0x20);
         temp_v18 = (float)temp_v30 + 220.0f;
         temp_v17 = ((float)g_lmapScene[0x14] - temp_v35) * temp_v17;
-        FUN_00282390();
-        fStack_6c = temp_v19 + temp_v17 * temp_v34;
+        fStack_6c = temp_v19 + FUN_00282390(temp_v17) * temp_v34;
         if (g_gameState == (unsigned int *)0x16) {
           temp_v18 = temp_v18 + 80.0f;
         }
@@ -4874,29 +4918,25 @@ LAB_0027142c:
           temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
           temp_v19 = (float)g_lmapScene[10];
           temp_v30 = *(unsigned long long *)(g_lmapScene + 0xb);
-          FUN_0028250c();
           temp_v34 = 40.0f;
           fStack_78 = (float)((unsigned long long)temp_v30 >> 0x20);
           fStack_7c = (float)temp_v30 + 20.0f;
-          fStack_80 = temp_v19 + temp_v18 * 40.0f;
+          fStack_80 = temp_v19 + FUN_0028250c(temp_v18) * 40.0f;
           if (g_gameState == (unsigned int *)0x16) {
             fStack_7c = fStack_7c + 20.0f;
           }
           temp_v18 = (float)g_lmapScene[0x14] * temp_v17;
-          FUN_00282390();
-          fStack_78 = fStack_78 + temp_v18 * temp_v34;
+          fStack_78 = fStack_78 + FUN_00282390(temp_v18) * temp_v34;
           temp_v36 = 170.0f;
           temp_v19 = (float)g_lmapScene[10];
           temp_v30 = *(unsigned long long *)(g_lmapScene + 0xb);
           temp_v18 = ((float)g_lmapScene[0x14] - 170.0f) * temp_v17;
-          FUN_0028250c();
           temp_v35 = 180.0f;
-          temp_v19 = temp_v19 + temp_v18 * 180.0f;
+          temp_v19 = temp_v19 + FUN_0028250c(temp_v18) * 180.0f;
           temp_v34 = (float)((unsigned long long)temp_v30 >> 0x20);
           temp_v18 = (float)temp_v30 + 221.0f;
           temp_v17 = ((float)g_lmapScene[0x14] - temp_v36) * temp_v17;
-          FUN_00282390();
-          fStack_6c = temp_v34 + temp_v17 * temp_v35;
+          fStack_6c = temp_v34 + FUN_00282390(temp_v17) * temp_v35;
           if (g_gameState == (unsigned int *)0x16) {
             temp_v18 = temp_v18 + 80.0f;
           }

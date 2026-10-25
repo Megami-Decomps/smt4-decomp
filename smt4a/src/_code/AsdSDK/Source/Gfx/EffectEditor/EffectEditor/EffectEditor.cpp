@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include <math.h>
+#include "util/CalleeContracts.h"
 
 namespace {
 /* The editor's scratch buffer is past the shared menu-state prefix. */
@@ -250,7 +251,6 @@ void FUN_002ffe14(const EffMenuPosition *position, u32 color,
     const EffMenuMatrix *matrix, u32 resource, f32 scale);
 void FUN_002b3ed8(const EffMenuPosition *first, const EffMenuPosition *second,
     u32 color, u32 resource);
-void *memAlloc(u32 heap, u32 category, u32 flags, u32 size, u32 alignment, u32 clear);
 void effMenuListAppend(EffMenuNode *node, u32 list);
 
 /* NON_MATCHING: aggregate copy shapes and vector temporary allocation differ. */

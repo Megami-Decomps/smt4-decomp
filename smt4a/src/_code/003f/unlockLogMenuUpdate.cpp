@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler folds keyframe-mode conversion, changes signed key loads and lays out state branches differently. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct UnlockLogUpdateWork {
     /* 0x000 */ u8 unk000[0x10];
@@ -41,7 +42,6 @@ void FUN_003f56ac(UnlockLogUpdateWork *work);
 void scrScriptProcessStartEntry(void *script, u32 entry);
 s32 scrRunOpcodesStub(void *script);
 void *textureGetIndexedResource(u32 group);
-s32 asdTMTexTableNodeIsLoaded(u32 group, s32 index);
 void FUN_003f6bc0(UnlockLogUpdateWork *work);
 void FUN_003f6f68(UnlockLogUpdateWork *work, u32 state);
 }

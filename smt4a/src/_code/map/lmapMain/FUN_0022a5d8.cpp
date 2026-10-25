@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a5d8` (_code @ 0x22a5d8, 0xcd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int fontMeasureLineAdvance(...);
 int FUN_00261468(...);
 int gameDataGetPlayerName(void);
@@ -62,7 +62,6 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);

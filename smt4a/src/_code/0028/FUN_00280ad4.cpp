@@ -1,9 +1,9 @@
 /* NON_MATCHING: Retail retains effect-free result-classification branches and release NOPs absent from the readable implementation. */
 #include "sys/ProcessResult.h"
 #include "common.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
-void *FUN_0013c174(const void *input, u32 info[2], s32 mode);
 unsigned long long FUN_00142b04(void);
 s32 FUN_00429fcc(unsigned long long context, unsigned long long titleId);
 s32 FUN_0042a068(u32 titleIdLow, u32 titleIdHigh, const void *data,
@@ -12,10 +12,10 @@ void asdMemFree(void *memory);
 extern u8 DAT_005b40c9;
 
 s32 FUN_00280ad4(u32 titleIdLow, u32 titleIdHigh, u32 option3,
-                 u32 option4, const void *input)
+                 u32 option4, const char *input)
 {
     u32 info[2];
-    void *preparedData = FUN_0013c174(input, info, 0);
+    void *preparedData = asdLoadFileWithSize(input, info, 0);
     s32 result = FUN_0042a068(titleIdLow, titleIdHigh, preparedData,
                              info[0], option4, option3);
     FUN_0013ebd8(result);

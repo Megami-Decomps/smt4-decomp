@@ -1,6 +1,7 @@
 /* NON_MATCHING: first portrait lookup spills the record pointer and second validation uses different scratch registers. */
 #include "gamedata/DevilRecord.h"
 #include "gamedata/Table00.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct PortraitClipBounds {
     s32 top;
@@ -15,7 +16,6 @@ struct PortraitImageDimensions {
 extern "C" {
 extern void *g_aocSystem;
 const Table00Record *dataTable00FindById(u16);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 recordPrepareLinkedOwner(void *, u32, s32);
 const PortraitImageDimensions *FUN_002bf4f8(u32, s32);
 void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);

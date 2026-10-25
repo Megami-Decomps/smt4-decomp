@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the reciprocal result uses S0 rather than retail's S1 in VDIV/VSTR; all other default-flag instructions match. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct JobBlendState {
     u8 unk00[0x0c];
@@ -8,7 +9,6 @@ struct JobBlendState {
 };
 
 extern "C" {
-u32 scrGetArg(s32 index);
 JobBlendState* jobGetWork(u32 job);
 
 u32 FUN_00211e88(void)

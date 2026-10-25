@@ -1,5 +1,6 @@
 /* NON_MATCHING: canonical render context, animation getter and native add-on menu member callbacks recovered; render-state pop expression/register order still differs. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "classes/AocMenu.h"
 
 
@@ -14,7 +15,6 @@ s32 FUN_002c5d80(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void FUN_002bf380(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
-void FUN_002bf288(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void effectRenderTransformedInstance(void* instance, f32 offset);
 void FUN_002c198c(RenderCtx* scene);
 void FUN_002c18e4(RenderCtx* scene);

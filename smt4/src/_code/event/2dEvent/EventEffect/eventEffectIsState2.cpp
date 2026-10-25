@@ -13,7 +13,10 @@ extern EventEffect *g_eventEffect; /* 0x43dee8 */
 /* Whether the event effect exists and is in state 2. */
 u32 eventEffectIsState2(void)
 {
-    return g_eventEffect != NULL && g_eventEffect->state == 2;
+    if (g_eventEffect != NULL) {
+        return g_eventEffect->state == 2;
+    }
+    return 0;
 }
 
 } /* extern "C" */

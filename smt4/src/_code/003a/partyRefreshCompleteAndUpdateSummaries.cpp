@@ -1,5 +1,6 @@
 /* NON_MATCHING: party-entry base is not hoisted and summary arithmetic/register scheduling differs; -O2 candidate. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct RefreshSkills { u16 ids[8]; };
 struct RefreshSummary {
@@ -54,7 +55,6 @@ void gameDataStoreRecord(u16, const RefreshSummary *);
 void FUN_0022d434(PartyRefresh *);
 s32 buttonHelpGetMode();
 void buttonHelpSetPreset(s32);
-void FUN_002a0cc8(s32);
 void FUN_0029cc44(s32);
 void FUN_0029ee6c(s32, u32);
 void beginStatusPanelClose();

@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState();
-s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
 
 /* Script command: sets whether the candidate combatants' combined HP is at most `argument 0` percent of their combined maximum. */

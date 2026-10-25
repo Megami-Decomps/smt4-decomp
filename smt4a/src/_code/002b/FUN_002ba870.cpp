@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler merges the two selected-item drawing cases unlike retail. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct BattleDebugMenu {
     s32 state;
@@ -19,7 +20,6 @@ struct BattleDebugDrawWork {
 };
 extern "C" {
 BattleDebugDrawWork *jobGetWork(void);
-void FUN_0014bd84(u32);
 void textDrawDefaultString(f32, f32);
 u32 asdListBoxGetSelectedItemId(u32);
 u32 FUN_003e83b4(BattleDebugDrawWork *, s32, s32);

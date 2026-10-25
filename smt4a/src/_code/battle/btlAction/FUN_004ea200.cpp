@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned int g_btlAction; /* 0x571138 */
 extern unsigned int DAT_00571150; /* 0x571150 */
 extern unsigned int DAT_00571154; /* 0x571154 */
-extern unsigned int *DAT_00571190; /* 0x571190 */
+extern unsigned int *g_btlTargetableMask; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 extern int gameGetPlayerData(void);
@@ -103,8 +103,8 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
     if (param_4 != 0) {
       do {
         puVar4 = *(unsigned int **)(param_3 + temp_v4 * 4);
-        puVar6 = DAT_00571190;
-        if ((*puVar4 & (unsigned int)DAT_00571190) != 0 || (puVar4[1] & DAT_00571194) != 0) {
+        puVar6 = g_btlTargetableMask;
+        if ((*puVar4 & (unsigned int)g_btlTargetableMask) != 0 || (puVar4[1] & DAT_00571194) != 0) {
           temp_v0 = FUN_0026264c(*(unsigned short *)((int)puVar4 + 0x166));
           if (temp_v0 == 0) {
             temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_3 + temp_v4 * 4) + 0x166);
@@ -145,7 +145,7 @@ LAB_004ea470:
     if ((temp_v8[3] & temp_v1) != 0) {
       *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 1;
       *(short *)(*(int *)(param_2 + 0x28) + 0x1c0) = (short)temp_v8[temp_v7];
-      puVar1 = DAT_00571190;
+      puVar1 = g_btlTargetableMask;
       temp_v1 = DAT_00571194;
       if (param_4 == 0) {
         temp_v4 = 0;
@@ -165,16 +165,16 @@ LAB_004ea470:
               *(unsigned char *)(*(short *)((int)puVar4 + 0x6e) + temp_v10) = 1;
             }
             temp_v0 = temp_v0 + 1;
-            puVar1 = DAT_00571190;
+            puVar1 = g_btlTargetableMask;
             temp_v1 = DAT_00571194;
           } while (temp_v0 < (int)temp_v4);
         }
       }
-      for (; temp_v2 = DAT_00571194, puVar6 = DAT_00571190, temp_v4 < param_4; temp_v4 = temp_v4 + 2) {
+      for (; temp_v2 = DAT_00571194, puVar6 = g_btlTargetableMask, temp_v4 < param_4; temp_v4 = temp_v4 + 2) {
         puVar4 = *(unsigned int **)(param_3 + temp_v4 * 4);
-        temp_v3 = *puVar4 & (unsigned int)DAT_00571190;
+        temp_v3 = *puVar4 & (unsigned int)g_btlTargetableMask;
         temp_v5 = puVar4[1] & DAT_00571194;
-        DAT_00571190 = puVar1;
+        g_btlTargetableMask = puVar1;
         DAT_00571194 = temp_v1;
         if (temp_v5 != 0 || temp_v3 != 0) {
           *(unsigned char *)(*(short *)((int)puVar4 + 0x6e) + temp_v10) = 1;
@@ -183,12 +183,12 @@ LAB_004ea470:
         if ((puVar4[1] & temp_v2) != 0 || (*puVar4 & (unsigned int)puVar6) != 0) {
           *(unsigned char *)(*(short *)((int)puVar4 + 0x6e) + temp_v10) = 1;
         }
-        puVar1 = DAT_00571190;
+        puVar1 = g_btlTargetableMask;
         temp_v1 = DAT_00571194;
         DAT_00571194 = temp_v2;
-        DAT_00571190 = puVar6;
+        g_btlTargetableMask = puVar6;
       }
-      DAT_00571190 = puVar1;
+      g_btlTargetableMask = puVar1;
       DAT_00571194 = temp_v1;
       return 1;
     }

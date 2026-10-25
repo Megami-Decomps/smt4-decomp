@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the camp menu's "new" marker for a menu id when the matching notification flag is set; written from the decompilation and the retail disassembly, the id dispatch and render-stack scheduling not compared with retail */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 struct CampNotice {
     /* 0x0000 */ u8 unk0000[0x1AB4];
@@ -26,7 +27,6 @@ extern RenderCtxA *g_renderCtx;
 
 s32 gameFlagIsSet(u32 flag);
 IconFrame *FUN_001834a4(u32 table, u32 index);
-void FUN_001835b4(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);

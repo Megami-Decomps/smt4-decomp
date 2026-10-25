@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the AOC table count and entries pointer as a pair (add #996; ldm); built loads them separately */
+/* NON_MATCHING: retail loads the AOC table count and entries pointer as a pair (add #996; ldm); built loads them as two separate ldr (both unconditional now) */
 #include "common.h"
 
 extern "C" {
@@ -32,8 +32,10 @@ Table23Entry *dataTable23Sub0GetEntry(u32 index)
     if (index < count) {
         return &entries[index];
     }
-    if (index < g_aocSystem->table23.count + count) {
-        return &g_aocSystem->table23.entries[index - count];
+    const AocTable23 *source = &g_aocSystem->table23;
+    AocTable23 aoc = *source;
+    if (index < aoc.count + count) {
+        return &aoc.entries[index - count];
     }
     return NULL;
 }

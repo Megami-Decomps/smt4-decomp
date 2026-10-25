@@ -1,12 +1,12 @@
 /* NON_MATCHING: instruction scheduling of the first field copy (retail moves the new entry into r7 before loading the source id) */
 #include "AsdSDK/AsdDebug.h"
 #include "shard/S1ModelEffect.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 extern const char DAT_00526044[]; /* ...\Model\MoriModelEffect.cpp: __FILE__ */
 
-void *asdMemoryAllocTracked(s32 heap, s32 align, s32 a, s32 size, s32 b);
 
 /* Collect the table's entries whose id is the model and which are not flagged, copying each into a
  * new entry of this model's list. */

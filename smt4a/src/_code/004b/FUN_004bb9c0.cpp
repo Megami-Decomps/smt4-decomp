@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed render-state expansion scheduling differs from retail. */
+/* NON_MATCHING: only the mode-word load is scheduled after the phase/timer stores here; retail hoists it above them. */
 #include "common.h"
 
 namespace {
@@ -35,26 +35,23 @@ struct ExpandedSpriteState {
 /* Expand a compact sprite record and reset its runtime animation state. */
 extern "C" void FUN_004bb9c0(ExpandedSpriteState *state, const PackedSpriteSource *source)
 {
-    state->values[0] = source->values[0];
-    state->values[1] = source->values[1];
-    state->values[2] = source->values[2];
-    state->values[3] = source->values[3];
-    state->values[4] = source->values[4];
-    state->values[5] = source->values[5];
+    for (s32 i = 0; i < 6; i++) {
+        state->values[i] = source->values[i];
+    }
     state->active = 0;
     state->variant = source->variant;
     state->kind = source->kind;
     state->resource = source->resource;
     state->flags |= 0x40000000;
-    state->mode.fields.format = static_cast<u8>(((source->flags << 27) >> 29) - 1);
+    u32 formatCode = (source->flags << 27) >> 29;
+    state->mode.fields.format = formatCode - 1;
     if ((source->flags & 1) != 0)
         state->flags |= 0x10000;
     if ((source->flags & 2) != 0)
         state->flags |= 0x20000;
-    state->bounds[0] = source->bounds[0];
-    state->bounds[1] = source->bounds[1];
-    state->bounds[2] = source->bounds[2];
-    state->bounds[3] = source->bounds[3];
+    for (s32 i = 0; i < 4; i++) {
+        state->bounds[i] = source->bounds[i];
+    }
     state->phase = 0;
     state->timer = 0;
     state->mode.word &= ~0x7E;

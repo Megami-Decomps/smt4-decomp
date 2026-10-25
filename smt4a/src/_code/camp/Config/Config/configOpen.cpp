@@ -1,6 +1,7 @@
 /* NON_MATCHING: zero-constant lifetimes, saved global/size registers and final state-store merging differ. */
 #include "camp/Config/Config.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern ConfigWorkA *g_config;
@@ -8,7 +9,6 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tr
 void sysMemClear(void *memory, u32 size);
 void *textureGetIndexedResource(u32 id);
 void asdTMTexTableLoadSprites(u32 id);
-s32 asdTMTexTableNodeIsLoaded(u32 id, u32 node);
 void asdTMTexLoadMainHeap(u32 id, u32 node);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
 void loadSlotEnsureLoaded(u32 id);

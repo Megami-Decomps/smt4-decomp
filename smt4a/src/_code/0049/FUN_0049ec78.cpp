@@ -1,6 +1,8 @@
 /* NON_MATCHING: retail hoists the marker ids 0x27/0x2f/0x28/0x30 into registers/stack (44-byte frame) and tests the u16 icon groups with a signed ble where this build emits beq; register allocation and the stm/strd argument packing differ. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* One texture id: group * 1000 + index. */
 struct IconRef {
@@ -40,9 +42,7 @@ struct IconCursor {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 IconTexture *FUN_001834a4(u32 file, s32 index);
-void FUN_001835b4(s32 layer, u32 file, u32 id, s32 x, s32 y, s32 z);
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
 

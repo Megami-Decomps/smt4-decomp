@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct {
 } Request;
 
 int efctSetSpeed(f32 scale);
-int FUN_001835b4(int a, int b, int c, u32 idA, u32 idB, int d);
 int FUN_00344cd0(u32 context, u32 idA, u32 idB, int a, int b, int c, int d, int e, int f, int g, int h, u32 w0, u32 w1, u32 w2, int i, int j);
 
 /* Submits the request when a context is given: applies its scale, issues the two FUN_001835b4/FUN_00344cd0 commands, then resets the scale to 1.0. */

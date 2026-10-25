@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed rectangle loads and boolean-output normalization fold more aggressively, and coordinate registers differ; an optimization flag may explain this. */
+/* NON_MATCHING: packed rectangle halfword loads fold into word loads (retail ORs a zero register and keeps halfword loads) and coordinate registers differ; boolean-output normalization now matches. */
 #include "shard/S1ListPanel.h"
 #include "classes/Obj422594.h"
 
@@ -24,7 +24,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
     ifTouchGetSelectionModeForRegion((s16)secondAction);
     ifTouchGetSelectionModeForRegion((s16)thirdAction);
     ifTouchGetSelectionModeForRegion((s16)firstAction);
-    bool special = false;
+    s32 special = 0;
     s32 selected = -1;
     s32 count = FUN_0029d644(owner);
     if (actions != NULL) {
@@ -33,7 +33,7 @@ u32 uiScrollHandleActionsOrTouch(FlaggedEntry *owner, const SpriteInfo *sprite, 
         for (s32 index = 0; index < count; ++index) {
             u8 state = ifTouchGetSelectionModeForRegion(actions[index]);
             if (state == 6) {
-                special = true;
+                special = 1;
                 break;
             }
             if (state == 1 || state == 2) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail tests the lookup with `cmp r0, #0` and copies it to r5 only on the non-null path (movne r5, r0); built uses movs r5, r0, and keeps the constant 4 in r0 instead of r1 */
+/* NON_MATCHING: retail materialises the request pointer after the device (movne r6,sp after movne r5,r0) and keeps the constant 4 in r1 for the stm; the null test itself now matches. */
 #include "common.h"
 
 extern "C" {
@@ -24,14 +24,15 @@ ArchiveDevice *FUN_00197c78(const u16 *path);
 /* Sends the path part after the "device:" prefix to the device named in `path`. */
 u32 FUN_00188444(const u16 *path)
 {
-    ArchiveDevice *device = FUN_00197c78(path);
+    ArchiveDevice *found = FUN_00197c78(path);
     u32 result;
 
-    if (device == NULL) {
+    if (found == NULL) {
         result = 0xc8804465;
     } else {
         ArchiveRequest request;
         ArchiveRequest *req = &request;
+        ArchiveDevice *device = found;
         while (*path++ != ':') {
         }
         req->kind = 4;

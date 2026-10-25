@@ -1,4 +1,5 @@
 #include "shard/Shard004B.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern void FUN_00168980(u32 id);
 extern void campButtonHelpRelease(void);
 extern void helpTexturesRelease(void);
 extern void campCommonBgRelease(void);
-extern void asdTMTexTableFreeEntry(s32 index);
 
 /* Tears the screen down: frees buffers and script processes, then the textures and helper state. */
 void owner4DDestroy(Owner4D *obj)

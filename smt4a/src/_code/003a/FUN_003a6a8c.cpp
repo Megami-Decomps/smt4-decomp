@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail has an extra literal-pool word (address 0x57f588) and loads the panel pointer before `mov r5, #1`; otherwise identical */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 struct CounterPanel {
@@ -15,22 +14,25 @@ struct CounterPanel {
     SpritePlaybackView sprite;    // 0xD30
 };
 
-struct CounterPanelOwner {
-    u8 unk00[8];          // 0x00
-    CounterPanel *panel;  // 0x08
+/* The message system's windows; the counter panel is the second window. */
+struct MessageMainView {
+    u32 unk00;                    // 0x00
+    void *main;                   // 0x04
+    CounterPanel *panel;          // 0x08
 };
 
 extern "C" {
 
+extern MessageMainView g_messageMain;
 u16 gameDataBlocksGetCounter(void);
 void FUN_0014e188(SpritePlaybackView *sprite, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
 void pairSetFirstResetSecond(SpritePlaybackView *sprite, s32 value);
 void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 group);
 
 /* Script command: opens the counter panel in mode 10 with the current counter value and starts its sprite animation. */
-u32 FUN_003a6a8c(u32 unused, CounterPanelOwner *owner)
+u32 FUN_003a6a8c(void)
 {
-    CounterPanel *panel = owner->panel;
+    CounterPanel *panel = g_messageMain.panel;
 
     panel->mode = 10;
     panel->state = 1;

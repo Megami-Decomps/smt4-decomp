@@ -32,7 +32,7 @@ int FUN_003d2a00(...);
 int FUN_0040c190(...);
 int candidateGetPreferredValue(...);
 
-int FUN_0013c174(...);
+int asdLoadFileWithSize(...);
 int FUN_00163aa4(...);
 int FUN_00167458(int, int);
 int FUN_00178b04(...);
@@ -77,7 +77,7 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0013c174. */
+/* Supplied declaration required: asdLoadFileWithSize. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
@@ -332,7 +332,7 @@ unsigned int FUN_003cf02c(void)
           FUN_0040aa6c();
           FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
           FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
-          FUN_0013c174(&LAB_003cf7b8,temp_v17,1);
+          asdLoadFileWithSize(&LAB_003cf7b8,temp_v17,1);
           temp_v6 = 0x48;
           FUN_00178b04(0x48,&LAB_003cf760,0x309);
         }
@@ -340,7 +340,7 @@ unsigned int FUN_003cf02c(void)
           FUN_0040aa6c();
           FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
           FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
-          FUN_0013c174(&LAB_003cf7f8,temp_v17,1);
+          asdLoadFileWithSize(&LAB_003cf7f8,temp_v17,1);
           temp_v6 = 0x48;
           FUN_00178b04(0x48,&LAB_003cf760,0x310);
         }
@@ -353,7 +353,7 @@ unsigned int FUN_003cf02c(void)
         FUN_0040aa6c(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf814);
         FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
         FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
-        FUN_0013c174(&LAB_003cf830,temp_v17,1);
+        asdLoadFileWithSize(&LAB_003cf830,temp_v17,1);
         temp_v6 = 0x48;
         FUN_00178b04(0x48,&LAB_003cf760,0x319);
         if (temp_v6 != 0) {
@@ -365,7 +365,7 @@ unsigned int FUN_003cf02c(void)
         FUN_0040aa6c(*(unsigned int *)(temp_v2 + 0x94),&LAB_003cf850);
         FUN_0040ab7c(*(unsigned int *)(temp_v2 + 0x94),0);
         FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x94),0);
-        FUN_0013c174(&LAB_003cf86c,temp_v17,1);
+        asdLoadFileWithSize(&LAB_003cf86c,temp_v17,1);
         temp_v6 = 0x48;
         FUN_00178b04(0x48,&LAB_003cf760,0x321);
         if (temp_v6 != 0) {

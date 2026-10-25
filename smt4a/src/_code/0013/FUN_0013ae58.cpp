@@ -1,6 +1,7 @@
 /* NON_MATCHING: voice flag load scheduling and duck-parameter stores differ from retail. */
 /* Initializes voice playback defaults and loads the voice panning table. */
 #include "shard/GlobalBlocks.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 s32 jyoucyuGetTableEntry(u32 index);
@@ -8,7 +9,6 @@ void FUN_00143800(void);
 void asdSoundSetHasStream(s32 enabled);
 void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames,
                        u32 mode, u32 fadeInFrames, u32 fadeOutFrames);
-void *FUN_0013c174(const char *path, u32 *size, s32 flags);
 
 void FUN_0013ae58(void)
 {
@@ -42,7 +42,7 @@ void FUN_0013ae58(void)
                           state->fadeInFrames, state->fadeOutFrames);
         u32 size = 0;
         if (state->panTable == NULL) {
-            state->panTable = FUN_0013c174("snd/voice_pan.tbl", &size, 0);
+            state->panTable = asdLoadFileWithSize("snd/voice_pan.tbl", &size, 0);
         }
     }
 }

@@ -2,6 +2,7 @@
 #include "result/ResultInput.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* Local view: process handles and result kind lie beyond ResultInputWork's recovered end. */
 struct ResultProcessWorkIV {
@@ -27,7 +28,6 @@ extern const char DAT_00405ddc[];
 extern const char DAT_00405dc8[];
 extern const char DAT_00405db8[];
 void FUN_002898e4(void);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 options, u32 size, u32 clear);
 s32 FUN_0018c0ec(u32 process);
 void scrResultDestroy(u32 process);
 s32 FUN_001a16c0(u32 process);

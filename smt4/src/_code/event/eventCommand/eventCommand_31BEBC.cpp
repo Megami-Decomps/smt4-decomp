@@ -1,11 +1,11 @@
 /* NON_MATCHING: the scale literal is loaded before the two integer arguments rather than after them; the remaining instructions match retail. */
 #include "event/EventTaskBuffer.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
 s32 FUN_002c1d5c(void);
-void *asdMemAlloc(u32 bytes, u32 alignment, u32 heap, u32 flags, u32 clear);
 void *FUN_00244e1c(u32 kind, EventTaskBuffer *buffer, u8 mode, u8 enabled,
                    f32 x, f32 y, f32 z, f32 scale);
 void scrSetResult(const void *result);

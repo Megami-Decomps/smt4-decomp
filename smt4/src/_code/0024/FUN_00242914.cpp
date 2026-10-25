@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

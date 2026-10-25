@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler keeps the zero-user texture-release branch inline rather than retail's cold tail. */
 #include "event/2dEvent/EventEffect.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* Local views extend the shared effect prefix and module block without changing their sizes. */
 struct EventEffectSlotWork {
@@ -22,9 +23,7 @@ extern EventEffectSlots DAT_0057f3c8;
 extern EventEffectGlobalsA g_eventEffect;
 void jobStop(u32, s32);
 void asdMemFree(void *);
-s32 asdTMTexTableNodeIsLoaded(u32, u32);
 void asdTMTexTableReleaseNode(u32, u32);
-void asdTMTexTableFreeEntry(u32);
 void *textureGetIndexedResource(u32);
 }
 

@@ -1,11 +1,11 @@
 /* NON_MATCHING: same calls and stores; retail sets the three trailing call arguments in ascending order (r1, r2, r3) where armcc sets them descending */
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern AsdFileHashPack *g_asdFileHashPack; /* the open pack */
 
 AsdFileHashPack *_ZN19ResourceVectorOwnerD1Ev(AsdFileHashPack *pack); /* the destructor: returns `this` */
-void asdOperatorDelete(AsdFileHashPack *pack);
 void *FUN_00178b04(u32 size, const char *file, int line);
 s32 asdFileHashPackLoad(AsdFileHashPack *pack, const char *path, const char *streamPath, u32 arg);
 

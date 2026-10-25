@@ -1,12 +1,12 @@
 /* NON_MATCHING: render-state stack address is computed before the packed-state call, and push/pop scratch registers differ. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
 void FUN_002bed3c(void);
 void FUN_002bf380(u32 layer, u32 group, u32 image, s32 x, u32 color, s32 order);
-void FUN_002bf288(u32 layer, u32 group, u32 image, s32 x, u32 color, s32 order);
 void efctSetSpeed(f32 speed);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 

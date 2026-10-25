@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00479b6c` (_code @ 0x479b6c, 0x658 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int efctSetSpeed(void);
 int FUN_0016c4b8(int, unsigned int);
 int FUN_0017ffa8(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int effectSubmitDefaultVectors(int, int);
 int sysMemClear(...);
 int FUN_00473754(...);
@@ -52,7 +52,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00473754. */

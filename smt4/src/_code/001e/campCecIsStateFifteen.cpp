@@ -8,7 +8,10 @@ extern CampCecWork *g_campCec;
 /* Test whether the camp communication work exists and is in state fifteen. */
 bool campCecIsStateFifteen(void)
 {
-    return g_campCec != NULL && g_campCec->state == 15;
+    if (g_campCec != NULL) {
+        return g_campCec->state == 15;
+    }
+    return 0;
 }
 
 }

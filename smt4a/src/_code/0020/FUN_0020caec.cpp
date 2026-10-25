@@ -1,8 +1,8 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
-void FUN_001835b4(s32 a, s32 b, s32 c, u32 d, u32 e, u32 f);
 s32 slotRecordFindById(u32 id);
 s32 FUN_002a4b28(u32 id);
 s32 bitsAt60Test(s32 record, u32 flag);

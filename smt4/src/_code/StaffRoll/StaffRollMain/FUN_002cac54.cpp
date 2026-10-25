@@ -3,11 +3,11 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern StaffRollWork *g_staffRoll;
 
-void *asdMemAlloc(s32 heap, s32 alignment, s32 option, u32 bytes, s32 fromFront);
 void asdTMTexTableLoadTmx(s32 type, s32 index);
 void FUN_002c58c8(s32 type, s32 index);
 void uiGetEntrySize(s32 type, s32 index, s32 *outWidth, s32 *outHeight);

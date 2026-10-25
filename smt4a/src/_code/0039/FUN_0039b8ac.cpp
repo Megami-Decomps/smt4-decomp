@@ -1,4 +1,4 @@
-/* NON_MATCHING: the texture subobject is addressed from the global base instead of a retained pointer. */
+/* NON_MATCHING: retail reads texture.requested through the retained texture pointer (r5), the build folds it into the global base (r6). */
 #include "event/2dEvent/EventEffect.h"
 
 extern "C" {
@@ -12,14 +12,13 @@ extern EventEffectGlobalsA g_eventEffect;
 
 void FUN_0039b8ac()
 {
+    EventFilterTexture *texture = &g_eventEffect.texture;
     EventEffectA *work = static_cast<EventEffectA *>(g_eventEffect.unk08);
-    if (g_eventEffect.texture.requested) {
-        if (asdTMTexTableNodeIsLoaded(g_eventEffect.texture.table,
-                                     g_eventEffect.texture.node)) {
-            asdTMTexTableReleaseNode(g_eventEffect.texture.table,
-                                     g_eventEffect.texture.node);
+    if (texture->requested) {
+        if (asdTMTexTableNodeIsLoaded(texture->table, texture->node)) {
+            asdTMTexTableReleaseNode(texture->table, texture->node);
         }
-        g_eventEffect.texture.requested = 0;
+        texture->requested = 0;
     }
     if (g_eventEffect.textureUsers > 0) {
         --g_eventEffect.textureUsers;

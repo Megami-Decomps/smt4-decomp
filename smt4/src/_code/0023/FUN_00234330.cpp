@@ -1,4 +1,3 @@
-/* NON_MATCHING: dest and the first ID trade callee-saved registers with the second name (r5/r7 vs r6/r5). */
 #include "common.h"
 
 extern "C" {

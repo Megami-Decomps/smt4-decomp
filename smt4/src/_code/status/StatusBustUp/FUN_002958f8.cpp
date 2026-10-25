@@ -1,12 +1,12 @@
 /* NON_MATCHING: texture table IDs become immediates instead of retained saved-register values. */
 #include "status/StatusBustUp.h"
 #include "gamedata/DevilRecord.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern StatusBustUpResources DAT_0044e158;
 extern void *g_aocSystem;
 void FUN_002a60cc(void *system, u32 table, u32 node);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 Table00Record *dataTable00FindById(u16 id);
 

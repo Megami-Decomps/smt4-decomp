@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail keeps command 8 in r4 across calls; built passes it directly and saves one fewer register. */
 #include "ui/MessageMain.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-u32 scrGetArg(s32 index);
 u32 FUN_002ba85c(void);
 u32 scrGetCommandFrame(void);
 void FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);

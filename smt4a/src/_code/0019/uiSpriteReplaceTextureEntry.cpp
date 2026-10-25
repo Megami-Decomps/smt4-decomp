@@ -1,10 +1,10 @@
 #include "shard/W6_W6Match8_TextureSwap.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern AocSystemA *g_aocSystem;
 void asdTMTexTableReleaseNode(u32 node, s32 entry);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void *asdTMTexLoadMainHeap(u32 node, s32 entry);
 void FUN_001b2d54(AocSystemA *system, u32 node, s32 entry);
 bool aocRunByName(AocSystemA *system, u32 node, u32 entry, s32 checked);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail hoists the camera field addresses (eye/target/keepScene base pointers) and allocates r8 for the draw callback; the allocation result is stored to the global before sysMemClear's argument setup here */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct EffectProcessInit {
 extern EffectProcessInit *g_effectProcessActive;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
-void sysMemClear(void *block, u32 size);
 void taskInitLists(void);
 void textureCacheReset(u32 mode);
 void FUN_003afc2c(void);

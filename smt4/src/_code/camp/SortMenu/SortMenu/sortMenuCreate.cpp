@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include <string.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The sort menu's image, scale, and animation parameter tables are compiled together. */
 struct SortMenuParameterData { u32 first[6], second[9], third[42]; };
@@ -22,7 +23,6 @@ extern "C" const SortMenuParameterData DAT_00402d1c = {
 
 extern "C" {
 extern SortMenuSingleton g_useCounter;
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);

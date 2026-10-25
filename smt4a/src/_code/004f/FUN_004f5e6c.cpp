@@ -1,9 +1,9 @@
 /* NON_MATCHING: direct resource-array accesses match; camera flag write still forms a split address. */
 #include "battle/btlCamera.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 void asdMemFree(void *allocation);
-void sysMemClear(void *buffer, u32 size);
 void textureCacheReleaseAll();
 void keyedRecordsFreeAll();
 void workOwnerRelease(void *owner);

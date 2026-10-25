@@ -1,55 +1,35 @@
-/* NON_MATCHING: Retail strb r1, [r0], #4 differs from recovered mov r4, r0. */
 #include "classes/WindowStatus.h"
-#include <new>
-
-// Private layout views; these declarations do not define a shared API.
+#include "nn/Result.h"
 
 namespace {
-
-struct AocStatusView {
-    u8 status;                  // 0x00
-    u8 unk01[3];                // 0x01
-    WindowStatusResult result;  // 0x04
-    u32 unk0C;                  // 0x0C
-    u32 unk10;                  // 0x10
-};
-
 struct AocMainView {
     u8 unk00[0x7C]; // 0x00
-    u8 unk7C;      // 0x7C; start of an opaque subobject
+    u8 service7c;   // 0x7C; start of an opaque subobject
 };
-
 }
 
 extern "C" {
-extern AocMainView* g_aocMain;
+extern AocMainView *g_aocMain;
 void FUN_00123934(void);
-void FUN_0035398c(WindowStatusResult* result, void* context);
-s32 legacyResourceIdRemap(WindowStatusResult* result);
-}
+WindowStatusResult FUN_0035398c(void *owner);
+s32 legacyResourceIdRemap(const WindowStatusResult *result);
 
-// Construct the stored result, query the AOC context, and classify its status.
-extern "C" void _ZN9Obj4221e47vfunc0cEv(AocStatusView* state)
+// Query the AOC service and classify its status. The object itself is not touched.
+WindowStatusOperationResult _ZN9Obj4221e47vfunc0cEv(Obj4221e4 *)
 {
-    state->status = 1;
-    new (&state->result) WindowStatusResult;
-    state->unk0C = 0;
-    state->unk10 = 0;
-
-    WindowStatusResult temporary(0);
-    state->result = temporary;
-
-    AocMainView* main = g_aocMain;
+    WindowStatusOperationResult output(1);
+    AocMainView *main = g_aocMain;
     FUN_00123934();
-    FUN_0035398c(&temporary, &main->unk7C);
-    state->result = temporary;
-
-    if ((legacyResourceIdRemap(&state->result) & 0x80000000u) == 0) {
-        state->status = 0;
-    } else if (legacyResourceIdRemap(&state->result) == -0x36DEC7FF) {
-        state->status = 103;
+    output.result = FUN_0035398c(&main->service7c);
+    bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&output.result));
+    if (succeeded) {
+        output.status = 0;
+    } else if (legacyResourceIdRemap(&output.result) == (s32)0xc9213801) {
+        output.status = 103;
     } else {
-        legacyResourceIdRemap(&state->result);
-        state->status = 100;
+        legacyResourceIdRemap(&output.result);
+        output.status = 100;
     }
+    return output;
+}
 }

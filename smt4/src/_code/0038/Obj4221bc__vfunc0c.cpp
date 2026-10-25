@@ -1,105 +1,59 @@
-/* NON_MATCHING: Retail instruction scheduling/register allocation differs (68 retail versus 74 compiled rows). */
+/* NON_MATCHING: only the request descriptor construction differs: retail stores `this` into the owner slot first, loads the storage through the queue pointer (add r0,#136; ldr r1,[r0,#12]) and reuses r4 for the pool constants; built orders and allocates them differently. */
 #include "classes/Obj4221bc.h"
-#include "romwright_types.h"
+#include "nn/Result.h"
 
+struct Obj4221bcQueue { u32 unk00[2]; u32 base; u32 offset; };
+struct Obj4221bcManager { u8 unk00[0x88]; u8 queue[0xc]; Obj4221bcQueue *storage; };
+struct Obj4221bcRequest {
+    u32 address, type, flags, reserved, size;
+    const void *first;
+    const void *second;
+    const void *third;
+};
 extern "C" {
-
-int FUN_002348a8(...);
-int _ZN18WindowStatusResultC1Ej(...);
-int FUN_002bcc60(...);
-int FUN_002c526c(...);
-
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern int FUN_0038ae30(...); /* 0x38ae30 */
-extern unsigned char LAB_003f6f04; /* 0x3f6f04 */
-extern unsigned char LAB_003f6fb0; /* 0x3f6fb0 */
-extern unsigned char LAB_003f7004; /* 0x3f7004 */
-extern int g_aocMain; /* 0x432fc8 */
-
-/* Supplied declaration required: FUN_002348a8. */
-extern int legacyResourceIdRemap(int);
-/* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
-extern unsigned int *_ZN18WindowStatusResultC1Ev(unsigned char *);
-/* Supplied declaration required: FUN_002bcc60. */
-/* Supplied declaration required: FUN_002c526c. */
-
-
-} /* extern "C" */
-
-WindowStatusOperationResult Obj4221bc::vfunc0c(const void *input)
-
-{
-    WindowStatusOperationResult output = {1, {0, 0, 0}, WindowStatusResult(0), 0, 0};
-    unsigned char *param_1 = (unsigned char *)&output;
-    int param_2 = (int)this;
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3 [5];
-  unsigned char *temp_v4;
-  unsigned char *temp_v5;
-  unsigned char *temp_v6;
-  int temp_v7;
-  
-  piVar2 = temp_v3;
-  puVar1 = (unsigned int *)_ZN18WindowStatusResultC1Ev(param_1 + 4);
-  _ZN18WindowStatusResultC1Ej(temp_v3,0);
-  temp_v2 = piVar2[1];
-  *puVar1 = *piVar2;
-  puVar1[1] = temp_v2;
-  temp_v0 = g_aocMain;
-  if (*(int *)(param_2 + 4) != 0) {
-    if (*(int *)(param_2 + 4) == 1) {
-      temp_v0 = g_aocMain + 0x88;
-      FUN_002348a8();
-      if (temp_v0 != 0) {
-        temp_v0 = legacyResourceIdRemap(param_2 + 0xc);
-        if (temp_v0 >= 0) {
-          *(unsigned char *)(puVar1 + -1) = 0;
-        }
-        else {
-          *(unsigned char *)(puVar1 + -1) = 100;
-          temp_v2 = *(unsigned int *)(param_2 + 0x10);
-          *puVar1 = *(unsigned int *)(param_2 + 0xc);
-          puVar1[1] = temp_v2;
-        }
-      }
-    }
-  }
-  else {
-    *(unsigned int *)(param_2 + 4) = 1;
-    temp_v1 = temp_v0 + 0x88;
-    temp_v0 = *(int *)(temp_v0 + 0x94);
-    temp_v3[4] = 4;
-    temp_v4 = &LAB_003f6f04;
-    temp_v5 = &LAB_003f7004;
-    temp_v6 = &LAB_003f6fb0;
-    temp_v3[3] = 0;
-    temp_v3[0] = *(int *)(temp_v0 + 0xc) + *(int *)(temp_v0 + 8);
-    temp_v3[1] = 0x11;
-    temp_v3[2] = 0xfffffffe;
-    temp_v7 = param_2;
-    FUN_002bcc60(temp_v1,temp_v3 + 4,FUN_0038ae30,&temp_v7);
-    if ((temp_v1 & 0x7e00000) != 0x600000) {
-      if ((int)temp_v1 < 0) {
-        FUN_002c526c();
-      }
-      return output;
-    }
-  }
-  return output;
+extern Obj4221bcManager *g_aocMain;
+void FUN_003f6f04();
+void FUN_003f7004();
+void FUN_003f6fb0();
+s32 FUN_002348a8(void *queue);
+s32 legacyResourceIdRemap(const WindowStatusResult *result);
+u32 FUN_002bcc60(void *queue, const u32 *descriptor, void (*callback)(), Obj4221bc **owner);
+void FUN_0038ae30();
+void FUN_002c526c(u32 status);
 }
 
+WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)
+{
+    WindowStatusOperationResult output(1);
+    Obj4221bcManager *manager = g_aocMain;
+    if (reserved != 0) {
+        if (reserved == 1 && FUN_002348a8(manager->queue) != 0) {
+            bool succeeded = !nnResultIsFailureBool(legacyResourceIdRemap(&result));
+            if (succeeded) {
+                output.status = 0;
+            } else {
+                output.status = 100;
+                output.result = result;
+            }
+        }
+    } else {
+        reserved = 1;
+        Obj4221bcRequest request;
+        request.size = 4;
+        request.first = reinterpret_cast<const void *>(FUN_003f6f04);
+        request.second = reinterpret_cast<const void *>(FUN_003f7004);
+        request.third = reinterpret_cast<const void *>(FUN_003f6fb0);
+        request.reserved = 0;
+        request.address = manager->storage->offset + manager->storage->base;
+        request.type = 0x11;
+        request.flags = -2;
+        Obj4221bc *owner = this;
+        u32 status = FUN_002bcc60(manager->queue, &request.size, FUN_0038ae30, &owner);
+        if ((status & 0x7e00000) != 0x600000) {
+            if (nnResultIsFailure(status)) {
+                FUN_002c526c(status);
+            }
+        }
+    }
+    return output;
+}

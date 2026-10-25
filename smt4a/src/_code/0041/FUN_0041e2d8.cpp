@@ -1,5 +1,6 @@
 /* NON_MATCHING: scheduling only: retail loads index before shownIndex and indexes selectable as [index, menu+0x2ec]; ours loads shownIndex first and adds menu+index. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ void *gameGetPlayerData(void);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void FUN_0038b5fc(s32 slot, u16 value);
 void FUN_0023b45c(s32 arg);
-void FUN_002c8538(s32 arg);
 
 /* When the cursor moves to a new entry, applies it to the player data if it is selectable. */
 void FUN_0041e2d8(SelectMenu *menu)

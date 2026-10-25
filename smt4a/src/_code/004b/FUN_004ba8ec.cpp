@@ -1,12 +1,13 @@
 /* NON_MATCHING: restored queued-node argument, linker-inlined signed flags getter and frame compare; sprite base still forms before cycle update. */
 #include "shard/S2UiTexLoader.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 #define UI_TEX_TABLE 31 /* the texture table the nodes belong to */
 #define UI_TEX_NONE (-1)
 
-extern s32 asdTMTexTableNodeIsLoaded(s32 table, s32 node);
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
 extern s32 flaggedValueHolderGetTotal(UiTexLoader *loader);
 extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);

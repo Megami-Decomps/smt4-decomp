@@ -10,6 +10,7 @@ struct HeapLinkNode {
 
 /* Unlinks each node without taking ownership of its storage. */
 struct HeapLinkList {
+    HeapLinkList() : first(NULL) {}
     ~HeapLinkList()
     {
         if (first != NULL) {
@@ -29,6 +30,7 @@ struct HeapLinkList {
 /* Abstract heap interface; all seven vtable entries are pure virtual. */
 class Obj420f70 {
 public:
+    Obj420f70() : unk04(0), unk08(0), outstanding(0) {}
     virtual ~Obj420f70() = 0;
     virtual void vfunc08() = 0;
     virtual void vfunc0c() = 0;

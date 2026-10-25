@@ -1,11 +1,11 @@
 /* NON_MATCHING: the duration argument MOV is scheduled after color selection instead of before the conditional color moves. */
 #include "event/eventCommand.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha);
 extern EventCommandGlobals g_eventCommand;
-s32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
 
 

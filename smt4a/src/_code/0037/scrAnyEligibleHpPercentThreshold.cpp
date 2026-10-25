@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "battle/BtlMainAccess.h"
 
 namespace {
 inline s32 hpPercent(s32 hp, s32 maxHp)
@@ -15,7 +16,6 @@ s32 scrGetArg(s32);
 void scrSetResult(s32);
 s32 btlResolveEntryChoice(s32);
 void FUN_00301a08(s32, u32*, u32*);
-BtlMainStateA* btlGetMainState(void);
 BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
 
 /* Check eligible HP percentages, preserving the special entry's opposite comparison. */

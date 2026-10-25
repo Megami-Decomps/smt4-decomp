@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail saves eight callee-saved registers (fp, plus ip as padding) and hoists the loop limits 4 and 54 into r6; here seven registers and immediate limits. Control flow, switch tables and bitfields match. */
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlMainAccess.h"
 
 /* The part of a skill record the target check reads. */
 struct SkillTargetRecord {
@@ -14,21 +15,9 @@ struct SkillTargetRecord {
     /* 0x38 */ u32 flags;
 };
 
-struct BtlCheckedUnit {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[0x284];
-};
-
-struct BtlCheckState {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ BtlCheckedUnit *units;
-    /* 0x1FC4 */ u8 unk1FC4[0x24E4];
-    /* 0x44A8 */ u32 flags;
-};
-
 struct BtlScriptUnit {
     /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ BtlCheckedUnit *unit;
+    /* 0x20 */ BtlUnitEntry *unit;
 };
 
 struct SlotTableCount {
@@ -39,9 +28,8 @@ struct SlotTableCount {
 extern "C" {
 extern u32 g_btlScriptUnit;
 SkillTargetRecord *dataTable40FindById(u32 skillId);
-BtlCheckState *btlGetMainState(void);
 SlotTableCount *gameGetSlotTable(void);
-s32 FUN_0023d488(BtlCheckedUnit *unit, SkillTargetRecord *skill, s32 mode);
+s32 FUN_0023d488(BtlUnitEntry *unit, SkillTargetRecord *skill, s32 mode);
 s32 FUN_0023d9b8(s32 slot, s32 flag, SkillTargetRecord *skill);
 
 /* Checks a skill against everything it could target: 0 = unusable, 1 = no skill, 2 = not checked, 3 = usable. */
@@ -66,8 +54,8 @@ u32 FUN_0028d320(u32 skillId)
     case 10:
         return 0;
     }
-    BtlCheckState *state = btlGetMainState();
-    if ((state->flags & 0x2000000) != 0) {
+    BtlMainStateExt *state = btlGetMainStateExt();
+    if ((state->stateFlags & 0x2000000) != 0) {
         return 0;
     }
     u8 front = 0;
@@ -103,7 +91,7 @@ u32 FUN_0028d320(u32 skillId)
     }
     if (front) {
         for (; i < 4; i++) {
-            BtlCheckedUnit *unit = &state->units[i];
+            BtlUnitEntry *unit = &state->units[i];
             if (((unit->flags & 2) != 0 || ((unit->flags & 1) != 0 && (unit->flags & 0x40) == 0)) &&
                 FUN_0023d488(unit, skill, 0) == 0) {
                 return 0;
@@ -112,7 +100,7 @@ u32 FUN_0028d320(u32 skillId)
     }
     if (back) {
         for (i = 4; i < 54; i++) {
-            BtlCheckedUnit *unit = &state->units[i];
+            BtlUnitEntry *unit = &state->units[i];
             if ((unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && FUN_0023d488(unit, skill, 0) == 0) {
                 return 0;
             }

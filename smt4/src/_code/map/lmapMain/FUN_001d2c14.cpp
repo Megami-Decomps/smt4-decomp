@@ -3,10 +3,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include "map/lmapMain.h"
 #include "shard/SaveWork.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(u32 heap, u32 tag, u32 mode, u32 size, u32 flags);
 SaveWork *gameGetMapBlock(void);
 void FUN_00280ac0(s32 value);
 void FUN_00396318(LmapObj *obj);

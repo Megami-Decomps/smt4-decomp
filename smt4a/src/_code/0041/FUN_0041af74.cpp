@@ -1,11 +1,11 @@
 /* NON_MATCHING: signed quotient/remainder temporaries and glyph-draw saved registers differ from retail. */
 #include "gfx/SpriteTextureRect.h"
+#include "shard/TextureDrawCall.h"
 
 struct NumericDrawPosition { s32 x, y; };
 extern "C" {
 extern const u8 DAT_00533f48[];
 void drawSetColorFromRGBA8(u32 color);
-void FUN_001835b4(u32 layer, u32 group, u32 id, s32 x, s32 y, u32 mode);
 SpriteTextureRect *FUN_001834a4(u32 group, u32 id);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const void *table, s32 value);
 void FUN_00183bb0();

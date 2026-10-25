@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-stack push schedules its second address add earlier; shared constants (1.0f, 1, 11) are kept in different registers and the overlay null test uses cmp instead of adds. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
 
 /* Sprite description returned by FUN_001834a4. */
@@ -35,7 +36,6 @@ void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
-void FUN_001835b4(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 const SpriteInfo *FUN_001834a4(u32 table, u32 frame);
 void FUN_0032cdc8(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags, const OverlayPivot *pivot);
 void skinObjectUpdateMatrices(RenderCtxA *context);

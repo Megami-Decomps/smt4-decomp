@@ -5,7 +5,7 @@
 
 extern "C" {
 
-void FUN_0022e2fc(void *table);
+void entryTableClear(void *table);
 int rectangleInitializeSelection(...);
 int FUN_00233240(...);
 int uiInitializeEightTimerSet(...);
@@ -36,7 +36,7 @@ extern unsigned char LAB_003ad068; /* 0x3ad068 */
 extern unsigned char LAB_003ad368; /* 0x3ad368 */
 extern int *DAT_0043d9f8; /* 0x43d9f8 */
 
-/* Supplied declaration required: FUN_0022e2fc. */
+/* Supplied declaration required: entryTableClear. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: uiInitializeEightTimerSet. */
@@ -62,7 +62,7 @@ void FUN_003ab550(int *param_1)
   param_1[6] = 0;
   *(unsigned char *)(param_1 + 0x25) = 0;
   *(unsigned char *)(param_1 + 0x296c) = 0;
-  FUN_0022e2fc(param_1 + 0x16a);
+  entryTableClear(param_1 + 0x16a);
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
   spriteTable22Acquire();
   piVar1 = (int *)0x100;

@@ -1,12 +1,12 @@
 /* NON_MATCHING: text base and mode setup recovered; record/index saved registers r4/r5 are exchanged. */
 #include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 struct BtlTextEntryFlags { u32 flags; };
 extern "C" {
 void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, u32 mode, u32 kind, const char *text);
 BtlTextEntryFlags *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 s32 FUN_0028299c(u32 context);
-BtlMainState *btlGetMainState(void);
 s32 libc_strcmp(const char *first, const char *second);
 u32 libc_strlen(const char *text);
 extern const char DAT_00400440[];

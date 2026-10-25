@@ -13,7 +13,7 @@ struct BattleMemberList {
 
 extern "C" {
 BattleMemberList *btlGetMainState(void);
-s32 scrGetArg(u32 index);
+s32 scrGetArg(s32 index);
 }
 
 #endif

@@ -1,5 +1,6 @@
-/* NON_MATCHING: frame selection, default point stores, color-vector copy, and packed-byte extraction lower differently. */
+/* NON_MATCHING: frame selection (retail `adds rX, rY, #0` + ldrne, built `cmp` + moveq), the default point stores' pool order and the packed-color reload (retail one vldmia {s1-s4} after the product stores, built vldr + vldmia) differ; the VFP factor copy, product multiply and REV byte getters match. */
 #include "shard/W6_W6Match8_ScreenEffect.h"
+#include "gfx/EffectColorMath.h"
 
 extern "C" {
 extern EffectColorProductState DAT_006471dc;
@@ -12,7 +13,12 @@ void FUN_00337cd0(ScreenEffectJob *job)
     ScreenEffectResource *resource = job->resource;
     ScreenEffectOutput *output = &resource->output;
     s32 duration = resource->duration;
-    s32 frame = duration != 0 ? job->frame : 0;
+    s32 frame;
+    if (duration == 0) {
+        frame = 0;
+    } else {
+        frame = job->frame;
+    }
     if (duration == 0 || frame == 0) {
         output->offset.x = 0.0f;
         output->offset.y = 0.0f;
@@ -28,18 +34,14 @@ void FUN_00337cd0(ScreenEffectJob *job)
     }
     u32 color = FUN_0038136c(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
-    DAT_006471dc.factor = DAT_006471dc.color;
+    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
     renderCtxSetPackedColor(color);
-    DAT_006471dc.color.red *= DAT_006471dc.factor.red;
-    DAT_006471dc.color.green *= DAT_006471dc.factor.green;
-    DAT_006471dc.color.blue *= DAT_006471dc.factor.blue;
-    DAT_006471dc.color.alpha *= DAT_006471dc.factor.alpha;
-    RgbaWord packed;
-    packed.word = screenEffectPackColor(DAT_006471dc.color);
-    output->color.r = packed.rgba.r;
-    output->color.g = packed.rgba.g;
-    output->color.b = packed.rgba.b;
-    output->color.a = packed.rgba.a;
+    effectColorMultiply(&DAT_006471dc.color, &DAT_006471dc.color, &DAT_006471dc.factor);
+    u32 packed = effectColorPack(DAT_006471dc.color);
+    output->color.r = __rev(packed) >> 24;
+    output->color.g = __rev(packed) >> 16;
+    output->color.b = __rev(packed) >> 8;
+    output->color.a = __rev(packed);
     output->scale = FUN_0034f8b4(resource->scaleCurve, frame, duration) + 1.0f;
     output->amount = FUN_0034f8b4(resource->amountCurve, frame, duration);
 }

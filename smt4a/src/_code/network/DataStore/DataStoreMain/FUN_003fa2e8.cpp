@@ -1,6 +1,7 @@
 /* NON_MATCHING: near miss: only instruction scheduling differs (store of the entry count, the picks/zero stores, the 100-byte copy argument setup) and the final reply reload before the delete. */
 #include "network/DataStore/DataStoreMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* A short-lived string produced by the reply (begin/end of its characters). */
 struct ReplyString {
@@ -10,7 +11,6 @@ struct ReplyString {
 
 extern "C" {
 extern const char DAT_00533030[];
-void *asdMemoryAllocTracked(u32, u32, s32, s32, s32);
 void asdMemFree(void *block);
 void asdOperatorDelete(void *object);
 void asdOperatorDeleteArray(void *array);

@@ -1,12 +1,12 @@
 /* Closes the staff roll: releases its resources, frees the work area. */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int FUN_00287728(int layer);
 int soundChannelStopAll(int id);
-int asdTMTexTableFreeEntry(int type);
 int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */
 int jobStop(u32 task, int flags);     /* kill a task */

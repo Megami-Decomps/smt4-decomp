@@ -1,4 +1,4 @@
-/* NON_MATCHING: Allocation-size computation is not spilled across debug tracing; priority narrowing and insertion/work-result registers differ. */
+/* NON_MATCHING: retail reloads task->priority (ldrh) in the insertion compares instead of reusing the narrowed argument; insertion/work-result registers differ. */
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -38,8 +38,9 @@ extern "C" void *taskCreate(TaskFunc update, TaskFunc phase0, TaskFunc phase1, T
     TaskFunc destroy, s32 workSize, s32 listIndex, u32 priority, s32 clearWork)
 {
     TaskList *list = &g_taskLists[listIndex];
+    u32 allocationSize = workSize + offsetof(Task, work);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\sys\\Task\\Task.c", 346);
-    Task *task = (Task *)asdMemoryAlloc(0x100, 0x100, 0, workSize + offsetof(Task, work), 1);
+    Task *task = (Task *)asdMemoryAlloc(0x100, 0x100, 0, allocationSize, 1);
     if (task == NULL) {
         return NULL;
     }

@@ -1,8 +1,8 @@
 /* NON_MATCHING: loop bound uses one LDRD instead of retail's two scalar loads; remaining instruction sequence matches. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
-void FUN_002499fc(u32 group, u32 *first, u32 *count);
 void scrSetResult(s32);
 BtlMainState *btlGetMainState(void);
 s32 scrGetArg(s32);

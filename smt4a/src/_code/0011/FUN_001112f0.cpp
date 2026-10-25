@@ -24,7 +24,7 @@ extern unsigned char g_onlineRegistry; /* 0x594a58 */
 extern int FUN_002f5966(int);
 /* Supplied declaration required: FUN_002fb244. */
 /* Supplied declaration required: FUN_002fb25c. */
-extern int FUN_002fd02a(int);
+extern int _ZN9Obj2fd02aD1Ev(int);
 /* Supplied declaration required: FUN_0043afa0. */
 extern int FUN_0043b044(int);
 
@@ -57,7 +57,7 @@ FUN_001112f0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   FUN_0043afa0(param_1 + 0xe);
   temp_v0 = vectorDestroyBytes(param_1 + 0x428);
   temp_v0 = FUN_002f5966(temp_v0 - 0x44);
-  temp_v0 = FUN_002fd02a(temp_v0 - 0x1014);
+  temp_v0 = _ZN9Obj2fd02aD1Ev(temp_v0 - 0x1014);
   temp_v0 = FUN_0043b044(temp_v0 - 0x10);
   return romwright_piece_4_4(uStack_20,temp_v0 - 0x38);
 }

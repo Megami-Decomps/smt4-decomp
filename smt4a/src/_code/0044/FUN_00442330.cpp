@@ -13,7 +13,7 @@ typedef struct {
 } param_6_stack;
 
 extern unsigned char DAT_00589380; /* 0x589380 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 /* Supplied declaration required: FUN_00426204. */
 extern unsigned int *FUN_00442280(void);
@@ -30,10 +30,10 @@ void FUN_00442330(int *param_1,unsigned int param_2,int param_3,int param_4,unsi
   unsigned int *puVar1;
   unsigned char temp_v0;
   
-  puVar1 = &DAT_0062d2a4;
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+  puVar1 = &g_moduleCriticalSection8;
+  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
   temp_v0 = (*(int *)((unsigned char *)&DAT_00589380 + 0x4)) != 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
   if ((((temp_v0) || (puVar1 = (unsigned int *)FUN_00442280(), puVar1 != (unsigned int *)0x0)) &&
       (FUN_00426204(), puVar1 != (unsigned int *)0x0)) &&
      (((param_1 != (int *)0x0 && param_3 != 0 && (param_4 != 0)) && (*param_1 != 0)))) {

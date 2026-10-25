@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 // Selects a four-entry range beginning at 0, 55, 59, or 63.
 extern "C" void FUN_002499fc(s32 kind, u32* first, u32* count)

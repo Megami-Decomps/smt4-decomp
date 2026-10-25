@@ -1,4 +1,5 @@
 #include "shard/PadState.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 struct ItemCategoryView { u8 prefix[0x53]; u8 category; };
@@ -20,7 +21,6 @@ const EquipmentCategoryView *dataTable08Sub1GetRecord(u32 id);
 u32 categoryIdFromIndex(u32 category);
 PadState *gameGetPlayerData();
 void FUN_002ae9ec(s32 layer, s32 group, u32 image, s32 x, s32 y, s32 priority);
-void FUN_002bf288(s32 layer, s32 group, u32 image, s32 x, s32 y, s32 priority);
 
 // Draw an item's category icon and optionally mark the currently equipped entry.
 void itemDrawCategoryBadge(u32 id, s32 x, s32 y, s32 priority, s32 markEquipped)

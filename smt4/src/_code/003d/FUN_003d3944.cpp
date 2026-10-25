@@ -121,7 +121,6 @@ static inline void chooseMusicKind(BtlSetupEntry *entry, s32 id)
 /* Resets a battle entry, picks the music kind of its unit and starts the entry's audio. */
 void FUN_003d3944(BtlState **battle, BtlSetupEntry *entry, u32 unused3, u32 unused4)
 {
-    s32 i;
 
     entry->unk570 = 0;
     entry->unk574 = 0;
@@ -131,7 +130,7 @@ void FUN_003d3944(BtlState **battle, BtlSetupEntry *entry, u32 unused3, u32 unus
     entry->unk58C = 0;
     entry->unk56C = 0;
     entry->unk01C = 0;
-    for (i = 0; i < 0x85; i++) {
+    for (s32 i = 0; i < 0x85; i++) {
         entry->slots[i].id = -1;
         entry->slots[i].value = 0;
     }

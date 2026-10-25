@@ -1,6 +1,7 @@
 /* NON_MATCHING: case-4 shared transition tail now matches; initial entry-address/state registers r0/r1 remain exchanged. */
 #include "common.h"
 #include <stddef.h>
+#include "util/CalleeContracts.h"
 
 extern "C" {
 struct StatusCursor;
@@ -9,7 +10,6 @@ void FUN_00233240(void *window, s32 enable);
 s32 flaggedValueHolderGetTotal(void *holder);
 void messageMainSetTargetFlags(s32 flags);
 void gameClearUnlockedSavedId(u32 id);
-void FUN_0029c43c(s32 id, s32 flag);
 void buttonHelpSetPreset(s32 preset);
 void FUN_002b8ee0(void *vec, s32 value);
 void FUN_002bf818(void *vec);

@@ -3,13 +3,13 @@
 
 extern "C" {
 extern BustupCutAnimA *g_bustupCutAnim;
-s32 scrGetArg(void);
+s32 scrGetArg(s32 index);
 void FUN_00164ce0(u32, u8);
 
 // Toggle the first bust-up animation slot's job state from the script argument.
 u32 FUN_003b6c50(void)
 {
-    s32 enabled = scrGetArg();
+    s32 enabled = scrGetArg(0);
     u32 job = g_bustupCutAnim->slots[0];
     if (job != 0) {
         if (enabled != 0)

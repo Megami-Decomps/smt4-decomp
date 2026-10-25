@@ -1,5 +1,6 @@
 /* NON_MATCHING: scissor-state reloads fold, stack addresses and coordinate operands schedule differently; alternate optimization may preserve the retail shape. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/SpriteDetailPanel.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ SpriteInfo* FUN_001834a4(u32 group, s32 sprite);
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void FUN_00404dd0(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 layer, u32 group, s32 sprite, s32 x, s32 y, s32 priority);
 u32 renderPopStateStacks(void);
 
 void drawSpriteDetailPanelClipped(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed)

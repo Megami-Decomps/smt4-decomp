@@ -1,8 +1,8 @@
 #include "shard/Shard003C.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-extern u8 asdTMTexTableNodeIsLoaded(s32 a, u32 b);
 extern u32 requestIdToCode(s32 index);
 
 /* True unless one of the nine entries is in state 2 while asdTMTexTableNodeIsLoaded says it is not set. */

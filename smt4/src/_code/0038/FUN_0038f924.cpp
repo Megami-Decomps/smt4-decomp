@@ -1,12 +1,12 @@
 /* NON_MATCHING: callback handle forwarding recovered; render-stack state, text lookup arguments and integer-to-float rendering remain decompiler-shaped. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_0023478c(unsigned int, unsigned int);
 int FUN_002347b8(unsigned int, unsigned int, unsigned char [1024]);
 int FUN_002be5a4(int, unsigned int, unsigned char [1024], int);
-int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(...);
 int FUN_002c39a4(int);
@@ -29,7 +29,6 @@ extern int curveEvaluateStandard(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 extern int jobGetWork(unsigned int task);

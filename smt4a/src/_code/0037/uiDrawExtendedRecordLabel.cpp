@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc uses four saved registers and an 88-byte frame instead of retail's five and 92 bytes; text-buffer arguments use separate stores instead of strd. */
 #include "common.h"
+#include "text/TextDraw.h"
 
 struct ExtendedRecordLabels {
     u32 handles[3]; // 0x00
@@ -14,7 +15,6 @@ struct ExtendedLabelledRecord {
     u16 message; // 0x60
 };
 extern "C" {
-const char *FUN_001654f8(const char *input, char *output, u32 flags);
 void asdTextFormatStream(u32 handle, s32 mode, s32 selection, u32 flags, u32 options, const char *text);
 const char *FUN_00180118(u16 message);
 void ARM_common_memcpy4_7(char *output, const char *text);

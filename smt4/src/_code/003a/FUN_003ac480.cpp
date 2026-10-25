@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the constant 0 to the function entry (r7) next to 1/2/3/4; built hoists it only in front of the second switch (one instruction shorter at the first switch) */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* An image key and the handle (low half) of the image loaded for it. */
 struct ImageRef {
@@ -41,7 +42,6 @@ extern CountdownGlobals g_countdown;
 s32 FUN_00293f10(s32 image, s32 arg);
 s32 FUN_002942c4(s32 image, s32 arg);
 s32 FUN_002958f8(s32 image, s32 arg);
-s32 asdTMTexTableNodeIsLoaded(u32 type, s32 index);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, ...);
 s32 FUN_002bf818(void *sprite);
 

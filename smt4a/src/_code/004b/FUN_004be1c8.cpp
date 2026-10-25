@@ -2,6 +2,7 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
+#include "util/CalleeContracts.h"
 
 struct UnitScreenReadyViewA {
     u32 unk00;
@@ -23,7 +24,6 @@ struct UnitScreenReadyViewA {
     u32 refresh;
 };
 extern "C" {
-s32 FUN_0023b3d0(void);
 ScriptRunState* FUN_00275bc8(void* resource, u32 infoWindow);
 void scriptProcessSetMode(ScriptRunState* process, s32 mode);
 void infoWinSetText(u32 window, s32 text);

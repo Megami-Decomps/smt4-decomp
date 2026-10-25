@@ -2,6 +2,7 @@
 #include "map/mapDepart.h"
 #include "map/mapEnemy.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "util/TrigF32.h"
 
 /* The map block's flag at +0xDC0 gates the approach-marker check. */
 struct MapBlockView {
@@ -42,8 +43,6 @@ PlayerLevelView *gameGetPlayerData(void);
 f32 mathDistanceBetweenPoints(MapVector from, MapVector to);
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
-f32 FUN_0028250c(f32 value);
-f32 FUN_00282390(f32 value);
 
 /* True when the encounter source is within range and facing `position`. */
 static __inline bool isSourceApproaching(const MapVector &position)

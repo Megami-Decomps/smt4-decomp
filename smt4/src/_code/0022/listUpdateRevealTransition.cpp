@@ -1,4 +1,5 @@
 #include "ui/UiSpriteState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ListTransitionWork {
     u8 unk00[8];
@@ -15,7 +16,6 @@ struct ListTransitionWork {
 };
 extern "C" {
 s32 rangeLimitMin(ListTransitionWork *);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void FUN_002bf818(UiSpriteState *);
 void FUN_002b8ee0(UiSpriteState *, s32);
 s8 uiSpriteGetCompletionState(const UiSpriteState *);

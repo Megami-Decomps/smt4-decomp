@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps `actor` in r0 through the queue scan and holds the context in r5; built moves actor to r5 and tests the flag with ands. */
 #include "battle/btlReflect.h"
+#include "battle/BtlMainAccess.h"
 
 /* The combatant fields the kind-47 reflect action reads. */
 struct ReflectSubject {
@@ -18,7 +19,6 @@ struct ReflectSubjectGroup {
 extern "C" {
 
 
-void *btlGetMainState(void);
 ReflectSubjectGroup *FUN_001568f8(void *state, s16 group);
 s32 idSetFindSubjectIndex(void *state, ReflectSubject *subject);
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 u32 nnosConvertVirtToPhysImpl(u32 address);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: task handle and signed rotating-marker remainder contract restored; message-ID initialization lifetime and marker-grid temporaries still differ. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -26,7 +27,6 @@ LoadingWork *jobGetWork(u32 job);
 void FUN_00157558(u8 *context);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 s32 FUN_00473910(u8 *aoc, u32 id);
 void FUN_00473754(u8 *aoc, s32 text, u8 buffer[1024]);
 s32 curveEvaluateStandard(u8 *buffer, u32 kind);

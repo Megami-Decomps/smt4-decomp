@@ -1,5 +1,6 @@
 /* NON_MATCHING: cleanup coalesces the original owner and resource-view registers. */
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // The touch-region count lies beyond the shared quest-menu prefix.
 struct QuestCleanupWorkView {
@@ -24,7 +25,6 @@ void ifTouchRegionRemove();
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *allocation);
 void asdTMTexTableReleaseNode(u32 index, u32 kind);
-void asdTMTexTableFreeEntry(u32 index);
 void fileSlotFree(u32 index);
 void uiFadeSetVisible(u32 visible);
 void jobStop(u32 job, u32 flags);

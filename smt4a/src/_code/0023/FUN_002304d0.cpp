@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of the cell-index additions and one register differ (retail adds slot into the (group*4-4) term before the row base). */
 #include "common.h"
 
 struct PartyPanelCell {
@@ -23,9 +22,9 @@ u32 FUN_002304d0(u32 unused, s32 slot, s32 group, s32 row)
 {
     u32 result = 0;
     if (group != 0) {
-        s32 first = (group - 1) * 4;
+        s32 index = (group - 1) * 4 + slot;
         s32 base = g_partyPanel->wideMode == 0 ? row * 12 : 0;
-        if (g_partyPanel->cells[first + slot + base].value != 0) {
+        if (g_partyPanel->cells[index + base].value != 0) {
             result = 1;
         }
     } else if (g_partyPanel->rowFlags[slot] != 0) {

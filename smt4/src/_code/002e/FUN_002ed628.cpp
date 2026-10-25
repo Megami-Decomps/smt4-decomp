@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ed628` (_code @ 0x2ed628, 0xdfc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int effectSpawnDefaultArguments(...);
 int FUN_0026e70c(...);
 int FUN_002b0750(...);
 int FUN_002b0800(...);
-int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
@@ -41,7 +41,6 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, unsig
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b0800. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */

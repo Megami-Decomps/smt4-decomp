@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation differs: retail keeps the name table in sl and the formatted buffer address in fp (saving r4-fp). */
+/* NON_MATCHING: retail keeps the formatted-buffer address in fp and the path address in r6 (pointer locals) and reserves 4 more stack bytes (260); name pointer now matches. */
 #include "common.h"
 
 extern "C" {
@@ -44,8 +44,9 @@ u32 FUN_003dadd8(BattleEffectOwner *owner)
         }
         slot->flags = 0;
         memClear(path, sizeof(path));
+        const char *effectName = DAT_00400804[i];
         memClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_004008c4, DAT_00400804[i]);
+        textFormatBuffer(formatted, DAT_004008c4, effectName);
         libc_strcpy(path, formatted);
         libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {

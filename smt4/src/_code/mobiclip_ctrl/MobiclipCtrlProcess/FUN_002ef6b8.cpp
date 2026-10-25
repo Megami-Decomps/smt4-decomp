@@ -2,6 +2,7 @@
 #include "mobiclip_ctrl/MobiclipCtrlProcess.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // IV allocates 0x74 bytes; the shared process-work view also describes a longer variant.
 struct MobiclipProcessCreateViewIV {
@@ -29,7 +30,6 @@ extern const char DAT_00404e64[]; // "Move NCR"
 extern const char DAT_00404ed8[]; // Movie directory.
 extern const char DAT_00404ec8[]; // Shared "%s/%s.moflex" format.
 extern const char* DAT_0044d060[];
-void* asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void memClear(void* data, s32 size);
 u32 asdProcessCreateSimple(const char* name, u32 priority, u32 size, u32 flags,
     TaskFunc update, TaskFunc destroy, void* data);

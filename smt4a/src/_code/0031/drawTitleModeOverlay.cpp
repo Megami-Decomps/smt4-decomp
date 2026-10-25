@@ -1,4 +1,5 @@
 #include "title/titleMain.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 struct TitleRenderState {
@@ -13,7 +14,6 @@ extern "C" {
 extern TitleMainGlobals g_titleMain;
 extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(u32, u32);
-void FUN_001835b4(s32, s32, s32, s32, s32, s32);
 void FUN_0036b21c();
 
 u32 drawTitleModeOverlay()

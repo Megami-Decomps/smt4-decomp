@@ -1,7 +1,10 @@
-/* NON_MATCHING: point initialization uses scalar integer copies instead of retail's four-register VFP transfer. */
+/* NON_MATCHING: the point's VFP store matches (vldmia/vstmia {s0-s3}); only its address register differs (retail forms it in r1 and the xRotation address in r0 before the store, built stores through r0 and forms the xRotation address after). */
 #include "shard/X14_ModelTransform.h"
 
-struct TransformPoint4 { f32 x, y, z, w; };
+struct TransformPoint4 {
+    f32 x, y, z, w;
+    TransformPoint4(f32 x, f32 y, f32 z, f32 w) : x(x), y(y), z(z), w(w) {}
+};
 extern "C" {
 const TransformMtx44 *_ZN2nw4math5MTX448IdentityEv();
 void mtx44Copy(TransformMtx44 *destination, const TransformMtx44 *source);
@@ -14,11 +17,7 @@ void FUN_003d2480(TransformVec3 *output, const TransformVec3 *input, s32 x, s32 
 {
     TransformMtx44 matrix, xRotation, yRotation, zRotation;
     mtx44Copy(&matrix, _ZN2nw4math5MTX448IdentityEv());
-    TransformPoint4 point;
-    point.x = input->x;
-    point.y = input->y;
-    point.z = input->z;
-    point.w = 1.0f;
+    TransformPoint4 point(input->x, input->y, input->z, 1.0f);
     FUN_001a1c28(&xRotation, (f32)x * 0.7111111f, 0.0f, 0.0f);
     FUN_0019a0fc(&matrix, &matrix, &xRotation);
     FUN_001a1c28(&yRotation, 0.0f, (f32)y * 0.7111111f, 0.0f);

@@ -3,6 +3,7 @@
 #include "font/GuestWin/GuestWin.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // The UI object extends past the shared guest-window prefix.
 struct GuestWinAllocationView {
@@ -17,7 +18,6 @@ struct GuestWinParameterDefaults {
 extern "C" {
 extern GuestWinWork* g_guestWin;
 extern const GuestWinParameterDefaults DAT_00403964;
-void* asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void memClear(void* memory, u32 size);
 u32 asdProcessCreateSimple(const char* name, u32 priority, u32 size, u32 flags,
                            TaskFunc update, TaskFunc destroy, void* work);

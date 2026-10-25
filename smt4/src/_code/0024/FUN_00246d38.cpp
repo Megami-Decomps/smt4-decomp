@@ -1,9 +1,9 @@
 /* NON_MATCHING: saved queue, actor, target and status registers differ despite matching action operations. */
 #include "battle/btlReflect.h"
+#include "battle/BtlMainAccess.h"
 
 struct ReflectedMemberStatus { u8 unk00[0xfa]; u16 flags; };
 extern "C" {
-void *btlGetMainState();
 ReflectedMemberStatus *FUN_0027da30(void *battle, s32 member);
 
 

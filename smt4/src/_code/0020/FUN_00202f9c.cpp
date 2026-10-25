@@ -1,5 +1,6 @@
 /* NON_MATCHING: the global base pointer is held in r6 (retail: r4); otherwise identical. */
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct ScriptResource;
 
@@ -41,7 +42,6 @@ int fileSlotFree(int arg);
 void scrScriptProcessDestroy(ScriptResource *resource);
 int asdMdlManagerDestroy(u32 handle);
 int ifTouchRegionRemove(void);
-int asdMemFree(void *block);
 int jobStop(void *context, int arg);
 
 /* Tears down the scene state: releases its buffers and handles, then frees the context. */

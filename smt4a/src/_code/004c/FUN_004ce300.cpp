@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail moves the slot table pointer to r1 and loads the price table through r0/r2; here the loads use r2/r3 (register allocation only). */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ s32 tableGroupFindEntryIndex(void *group, const u8 *label);
 void scrScriptProcessStartEntry(void *process, s32 index);
 s32 scrRunOpcodesStub(void *process);
 void partyAddMoneyClamped(s32 delta);
-s32 FUN_0034919c(void);
 void messageDismissNumericBanner(s32 arg);
 
 static __inline void shopStartScript(ShopWork *shop, const u8 *label)

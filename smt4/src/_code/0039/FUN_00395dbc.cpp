@@ -1,4 +1,3 @@
-/* NON_MATCHING: transform base matches; final Z velocity and position loads remain reversed. */
 #include "common.h"
 
 extern "C" {

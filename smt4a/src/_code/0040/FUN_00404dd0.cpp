@@ -1,5 +1,6 @@
 /* NON_MATCHING: fallback-size block is placed inline rather than out of line; coordinate arithmetic scheduling differs. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 struct CenteredSpriteOffsets {
     u8 unk00[0xc];
@@ -18,7 +19,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 SpriteInfo *FUN_001834a4(u32 group, s32 image);
-void FUN_001835b4(s32 layer, u32 group, s32 image, s32 x, s32 y, s32 priority);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 
 /* Center the selected sprite inside a reference sprite and apply stereo parallax. */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached-state push/pop scheduling, sprite-coordinate evaluation and color-literal placement differ from retail. */
+/* NON_MATCHING: only the g_renderCtx / text-array register pair (r9, r8) is swapped. */
 #include "shard/S1ListPanel.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include <stddef.h>
@@ -52,10 +52,13 @@ extern "C" s32 FUN_0047a298(u32 job)
         renderCtxPushA(context, FUN_001692ac(1, 0));
         FUN_00164b5c(2, 47, 6, x, y, 0x81);
         AocDrawText text[8];
+        u32 color = 0xfc4f46ff;
         s32 count = FUN_00473754(main, FUN_00473910(main, 101), text);
         for (s32 i = 0; i < count; ++i) {
             SpriteInfo *sprite = FUN_001834a4(47, 67 + i);
-            FUN_00162790(3, 0xfc4f46ff, &text[i], static_cast<f32>(sprite->x + x), static_cast<f32>(sprite->y + y), 0.5f, 0.0f, 1.0f);
+            s32 textX = sprite->x + x;
+            s32 textY = sprite->y + y;
+            FUN_00162790(3, color, &text[i], static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 0.0f, 1.0f);
         }
         renderStackPop(&g_renderCtx->stackA);
     }

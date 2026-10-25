@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, r6, lr}. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 namespace {
 
@@ -27,7 +28,6 @@ extern MessageMainView g_messageMain;
 void scrCommMessageSetMode(s32 mode);
 s32 scrGetCommandFrame(void);
 u32 FUN_002865f8(void);
-u32 scrGetArg(u32 index);
 void FUN_002866b4(u32 message, u32 argument, s32 frame, s32 mode,
                   s32 wait, s32 unused);
 }

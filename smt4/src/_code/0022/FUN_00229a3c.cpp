@@ -1,4 +1,3 @@
-/* NON_MATCHING: safe queue traversal recovers cached next link; kind/load comparison order still differs. */
 #include "battle/btlReflect.h"
 
 extern "C" void FUN_00229a3c(s32 actorId, u32 options, u32 value, u32 parameter, u32 checkDuplicates)

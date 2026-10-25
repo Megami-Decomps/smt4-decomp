@@ -9,7 +9,7 @@ int FUN_002485d4(int, unsigned short [30]);
 int padClearBits(int);
 int passiveSkillLookupRecord(void);
 int FUN_00283f30(unsigned short [30], int);
-int FUN_00333fc0(int);
+int playerSetClampedStat(int);
 int FUN_00333fec(int);
 int selectionStateSetClamped(int, int);
 int VectorSignedToFloat(...);
@@ -51,7 +51,7 @@ extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameGetPlayerData(void);
 extern short FUN_00333fb0(void);
-/* Supplied declaration required: FUN_00333fc0. */
+/* Supplied declaration required: playerSetClampedStat. */
 /* Supplied declaration required: FUN_00333fec. */
 extern unsigned int FUN_00334038(void);
 extern unsigned int FUN_00334048(void);
@@ -135,7 +135,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
       temp_v3 = FUN_00334038();
       temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v2 >> 0x16) & 3);
       temp_v6 = (int)(short)((short)(int)(temp_v9 * temp_v11 * (float)temp_v18) + temp_v1);
-      FUN_00333fc0(temp_v6);
+      playerSetClampedStat(temp_v6);
       if (temp_v6 == 0) {
         temp_v6 = gameGetPlayerData();
         *(unsigned short *)(temp_v6 + 0x2a) = 0;
@@ -232,7 +232,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
     return;
   }
   padClearBits(2);
-  FUN_00333fc0(1);
+  playerSetClampedStat(1);
   return;
 }
 

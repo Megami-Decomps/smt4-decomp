@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 scrGetArg(void);
+s32 scrGetArg(s32 index);
 void scrSetResult(u32 result);
 EngineUnitRecord *gameGetSlotRecord(void);
 EngineUnitRecord *FUN_003e503c(u16 index);
@@ -17,7 +17,7 @@ extern EngineUnitsRef g_engineCleanupOwner;
  * table, the selected record's id, or 0 when the flag is clear. */
 u32 FUN_003c4da8(void)
 {
-    s32 arg = scrGetArg();
+    s32 arg = scrGetArg(0);
     EngineUnits *table = g_engineCleanupOwner.instance;
     u32 result;
 

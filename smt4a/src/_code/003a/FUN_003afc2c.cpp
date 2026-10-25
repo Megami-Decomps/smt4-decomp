@@ -1,11 +1,11 @@
 /* NON_MATCHING: the table-address load is scheduled three instructions later than retail. */
 #include "battle/BattleEffectTextureCache.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 extern BattleEffectTextureSlot g_pendingTextures[26];
 AsdTexture* asdTextureCreate(u32 flags);
 s32 FUN_001028b8(char* buffer, u32 size, const char* format, ...);
-void* FUN_0013c174(const char* path, u32* size, u32 flags);
 void asdTexTgaLoadNw4c(AsdTexture* texture, const void* data, u32 size, u32 flags);
 void asdMemFree(void* memory);
 
@@ -20,7 +20,7 @@ void FUN_003afc2c(void)
         if (slot->requested != 1 && slot->texture == NULL) {
             slot->texture = asdTextureCreate(0);
             FUN_001028b8(path, sizeof(path), "%s%s.tga", "battle/effect/tex/", slot->name);
-            slot->file = FUN_0013c174(path, &size, 0);
+            slot->file = asdLoadFileWithSize(path, &size, 0);
             asdTexTgaLoadNw4c(slot->texture, slot->file, size, 0x20000);
             slot->texture->image.flags = 0x2000000;
             slot->texture->unk3c = 1;

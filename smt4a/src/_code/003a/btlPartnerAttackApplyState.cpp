@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `push {r4, r5, r6, lr}` where armcc emits `push {r4, lr}`. */
 #include "battle/btlPartnerAttack.h"
 
 extern "C" {
@@ -16,11 +15,12 @@ s32 btlPartnerAttackApplyState(void *job)
         return 0;
     }
     void *state = btlGetMainState();
+    s32 result = 0;
     if (state == NULL) {
-        return 0;
+        return result;
     }
     FUN_00411458(attack, state);
-    return 0;
+    return result;
 }
 
 } /* extern "C" */

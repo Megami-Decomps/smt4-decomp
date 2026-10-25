@@ -1,8 +1,8 @@
 /* NON_MATCHING: loader-state increment register and shared zero-return block differ. */
 #include "ui/SceneResourceWait.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 u32 jobIsValid(u32 job);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
 s32 eventTexJobSlotsDone(u32 job);
 void aocHandleButtons(u32 loader, u32 mode);
 s32 FUN_003fce08(u32 loader, u32 wait);

@@ -1,13 +1,12 @@
-#include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int asdMemFree(int ptr);
-
-void asdOperatorDelete(int ptr)
+void asdOperatorDelete(void *memory)
 {
-    if (ptr != 0) {
-        asdMemFree(ptr);
+    if (memory != 0) {
+        asdMemFree(memory);
         return;
     }
 }

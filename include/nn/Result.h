@@ -26,6 +26,12 @@ static __inline bool nnResultIsFailure(s32 result)
     return failed;
 }
 
+#ifdef __cplusplus
+/* The SDK's out-of-line failure test (`lsr r0, r0, #31`): armlink inlined its one instruction at
+   every call, so retail tests the returned bool instead of folding the shift into the branch. */
+extern "C" bool nnResultIsFailureBool(s32 result);
+#endif
+
 static __inline bool nnResultIsSuccess(s32 result)
 {
     return (s32)(result & 0x80000000) >= 0;

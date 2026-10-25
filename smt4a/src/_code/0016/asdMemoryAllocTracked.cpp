@@ -1,3 +1,4 @@
+#include "AsdSDK/AsdMemAlloc.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
 

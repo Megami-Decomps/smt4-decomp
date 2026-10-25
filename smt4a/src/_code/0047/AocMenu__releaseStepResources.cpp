@@ -1,6 +1,8 @@
 /* NON_MATCHING: global add-on flags are cached rather than reloaded, and final flags/state stores combine into one STM; candidate -O2. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct CountAt30;
 struct CountAt5A;
@@ -46,11 +48,9 @@ void jobFlagsWorkStop(JobFlagsWork *work);
 u32 jobIsValid(u32 job);
 u32 jobStop(u32 job, u16 mode);
 void ifTouchRegionRemove();
-void asdMemFreeSlot(void **slot);
 void scrScriptProcessDestroy(u32 process);
 void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-void asdTMTexTableFreeEntry(s32 table);
 void aocMenuSetReadyFlag(AocMainA *owner, u8 ready);
 
 void AocMenu::releaseStepResources()

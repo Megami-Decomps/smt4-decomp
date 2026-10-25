@@ -13,7 +13,6 @@ struct TexturedRectangleRequest {
     u16 columns, rows;
 };
 extern "C" {
-TexNode *asdTMTexTableCallFileC(u32 group, s32 id);
 void FUN_00184efc(TexNode *texture, const TexturedRectangleFrame *frame, const TexturedRectangleRequest *request, u32 flags);
 
 // Resolve the sprite frame and optionally override its rectangle before issuing the textured draw.

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b65a4` (_code @ 0x3b65a4, 0x4ac bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_002b0750(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002bf288(...);
 int efctSetSpeed(void);
 int FUN_003b6da4(...);
 int SBORROW4(...);
@@ -38,7 +38,6 @@ extern int categoryGetColor(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002bf288. */
 extern unsigned long long FUN_002bf4f8(unsigned int, int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_003b6da4. */

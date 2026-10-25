@@ -90,11 +90,7 @@ void AocMenu::runConfirmation()
             if (choice == 0) {
                 menu->step = 2;
                 FUN_0016ccb4((u8 *)g_aocMain + 0x80);
-                WindowStatusOperationResult operation;
-                operation.status = 0;
-                operation.reserved0c = 0;
-                operation.reserved10 = 0;
-                operation.result = WindowStatusResult(0);
+                WindowStatusOperationResult operation(0);
                 menu->result = operation;
                 FUN_00477d10(menu, 0xFFFFFFFF, 0);
                 FUN_0021c118(0x1000001, 10);

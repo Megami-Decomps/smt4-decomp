@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps label in r5, groupIndex in r7 and the item string in r6 (ours r6/r5/r7). */
 #include "common.h"
 
 extern "C" {

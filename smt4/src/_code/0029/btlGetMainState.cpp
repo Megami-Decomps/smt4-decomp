@@ -1,4 +1,4 @@
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 

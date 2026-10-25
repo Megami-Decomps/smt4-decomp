@@ -1,5 +1,6 @@
 /* NON_MATCHING: global-base loads are scheduled after the frame comparison and command index/base register roles differ. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct CommandEntryView {
     u8 unk00;       // 0x00
@@ -17,7 +18,6 @@ extern "C" {
 extern u32 DAT_0044e128;
 extern CommandStateView DAT_004c5634;
 
-s32 scrGetCommandFrame(void);
 s32 FUN_002bfc24(u32 selection, u32 value, u32 option, u32 flags,
                  f32 scaleX, f32 scaleY);
 

@@ -7,9 +7,9 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
-u32 FUN_002f70fc(u32 argument)
+u32 FUN_002f70fc(void)
 {
-    u32 index = scrGetArg(argument);
+    u32 index = scrGetArg(0);
     Unit *unit = reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     scrSetResult((unit->stats->values[index] >> 10) == 1);
     return 1;

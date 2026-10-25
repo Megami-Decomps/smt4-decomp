@@ -1,4 +1,4 @@
-#include "common.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -7,10 +7,10 @@ typedef struct Holder {
     /* 0x38 */ u32 value;
 } Holder;
 
-/* Stores `value` with its low byte cleared in the word at 0x38. */
-void FUN_001527d8(Holder *object, u32 value)
+/* Stores `color` with its low byte cleared in the word at 0x38 of the object. */
+void FUN_001527d8(u32 handle, u32 color)
 {
-    object->value = value & 0xFFFFFF00;
+    ((Holder *)handle)->value = color & 0xFFFFFF00;
 }
 
 } /* extern "C" */

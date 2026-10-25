@@ -3,6 +3,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The encounter allocation has an additional unrecovered word beyond its shared prefix. */
 struct BattleEncounterAllocation {
@@ -15,7 +16,6 @@ extern BtlEncount *g_btlEncount;
 void battleQueryEncounter(void *);
 void btlEncountDestroy(void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
 void gameCounterAddSaturating(s32, s32);
 void frameTexApplyMode(s32);

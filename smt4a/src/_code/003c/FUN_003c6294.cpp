@@ -3,11 +3,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
 s32 scrGetArg(s32);
-void scrSetResult(s32);
 
 // Test whether all eligible copies of a unit have a positive selected counter.
 s32 FUN_003c6294(void)

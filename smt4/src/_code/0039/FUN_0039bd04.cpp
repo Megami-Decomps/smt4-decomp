@@ -1,5 +1,6 @@
 /* NON_MATCHING: title scene loading ring draw (nine dots rotating around a centre, "Activating..." caption); written from the decompilation, float/int conversions and the local text copy not compared with retail */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 struct TitleLoadingScene {
     /* 0x000 */ u8 unk000[0x9ED];
@@ -37,7 +38,6 @@ void FUN_002bed3c(void);
 s32 vec2GetXInt(void *state);
 void FUN_002bf380(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 LoadingSpriteFrame *FUN_002bf4f8(u32 bank, u32 sprite);
-void FUN_002bf288(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
 void FUN_002bf818(void *state);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: scissor helper folds state reloads/conditions and uses different base addressing. */
 #include "ui/ClippedSprite.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ extern RenderCtxScissorA *g_renderCtx;
 const SpriteInfo *FUN_001834a4(u32, u32);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 void FUN_00168e00(s32, s32, s32, s32);
-void FUN_001835b4(s32, u32, u32, s32, s32, s32);
 void renderPopStateStacks(void);
 
 // Draw a clipped sprite with stereo parallax, temporarily suspending the outer scissor state.

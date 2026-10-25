@@ -1,11 +1,11 @@
 /* NON_MATCHING: right/left job, animation, and slot saved-register allocation differs. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 void FUN_00249c4c(u32 job, s32 position, s32 animate);
 void FUN_002fc5f8(u32 job, s32 position, s32 mode, u32 animation, u32 option, u32 value);
 s32 bustupCutAnimFindSlot(u32 job);
-u32 scrGetArg(u32 index);
 
 // Place a pair of bustups, animating the one that changes an occupied slot.
 u32 FUN_00328dec(void)

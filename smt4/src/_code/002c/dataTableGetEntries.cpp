@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -11,8 +11,9 @@ typedef struct DataTable {
 } DataTable;
 
 /* Address of the first entry of a 'TBL1' data table, or NULL. */
-u8 *dataTableGetEntries(DataTable *table)
+void *dataTableGetEntries(void *section)
 {
+    DataTable *table = (DataTable *)section;
     u8 *entries;
 
     if ((table != NULL) && (table->magic == 0x314c4254)) {

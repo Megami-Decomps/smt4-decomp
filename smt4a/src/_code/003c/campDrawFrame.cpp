@@ -1,11 +1,11 @@
 #include "camp/CampState.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern CampStateA *g_camp;
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 scale);
 f32 vec2GetSpeed(const void *vector);
-void FUN_001835b4(u32 style, u32 bank, u32 resource, u32 first, u32 second, u32 layer);
 
 void campDrawFrame(u32 first, u32 second, s32 alternate, f32 scale)
 {

@@ -12,9 +12,9 @@ void sub68OwnerCall3(void);
 void sysPlaySe(u32 id);
 
 /* Changes the navi/background display mode only when the requested flag differs. */
-u32 FUN_0038ae58(s32 argumentIndex)
+u32 FUN_0038ae58(void)
 {
-    s32 enabled = scrGetArg(argumentIndex);
+    s32 enabled = scrGetArg(0);
     if (enabled != 0) {
         if (g_gameState.mapFlags.unk295 == 0) {
             g_gameState.mapFlags.unk295 = 1;

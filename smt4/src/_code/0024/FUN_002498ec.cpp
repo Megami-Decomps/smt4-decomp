@@ -1,4 +1,5 @@
 #include "gamedata/Table8Type5Record.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

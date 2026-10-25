@@ -47,8 +47,8 @@ struct AudioLock {
 
 extern "C" {
 extern AudioDevice DAT_005880d0;
-extern AudioThread DAT_005880f0;
-extern AudioLock DAT_00618518;
+extern AudioThread g_threadRecordA;
+extern AudioLock g_soundVoiceCriticalSection;
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
@@ -79,7 +79,7 @@ inline void StackRegion::operator delete(void *block)
 static void audioFreeVoiceSlot(s32 index)
 {
     if (index >= 0 && (u32)index < DAT_005880d0.voiceCount) {
-        nn_os_CriticalSection_Enter(&DAT_00618518);
+        nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
         AudioVoiceSlot *slot = &DAT_005880d0.voices[index];
         if (slot->voice != 0) {
             nn_snd_CTR_FreeVoice(slot->voice);
@@ -89,7 +89,7 @@ static void audioFreeVoiceSlot(s32 index)
             DAT_005880d0.allocator->release(slot->data);
             slot->data = NULL;
         }
-        nn_os_CriticalSection_Leave(&DAT_00618518);
+        nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
     }
 }
 
@@ -100,26 +100,26 @@ extern "C" void FUN_00422ef8(void)
     if (DAT_005880d0.allocator == NULL) {
         return;
     }
-    nn_os_CriticalSection_Enter(&DAT_00618518);
+    nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
     for (u32 i = 0; DAT_005880d0.voiceCount > i; ++i) {
         if (DAT_005880d0.voices[i].voice != 0) {
             nn_snd_CTR_Voice_SetState(DAT_005880d0.voices[i].voice, 1);
         }
     }
-    nn_os_CriticalSection_Leave(&DAT_00618518);
+    nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
     DAT_005880d0.active = 0;
     if (DAT_005880d0.threadRunning != 0) {
-        u32 handle = DAT_005880f0.handle;
+        u32 handle = g_threadRecordA.handle;
         s32 result = svcWaitSynchronization1(handle, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             FUN_002e3140(result, failed);
         }
-        DAT_005880f0.joined = 1;
-        nn_os_Thread_FinalizeImpl(&DAT_005880f0.handle);
-        if (DAT_005880f0.handle != 0) {
-            svcCloseHandle(DAT_005880f0.handle);
-            DAT_005880f0.handle = 0;
+        g_threadRecordA.joined = 1;
+        nn_os_Thread_FinalizeImpl(&g_threadRecordA.handle);
+        if (g_threadRecordA.handle != 0) {
+            svcCloseHandle(g_threadRecordA.handle);
+            g_threadRecordA.handle = 0;
         }
     }
     FUN_001469a8(DAT_005880d0.stackRegion);
@@ -131,7 +131,7 @@ extern "C" void FUN_00422ef8(void)
     for (u32 i = 0; i < DAT_005880d0.voiceCount; ++i) {
         audioFreeVoiceSlot(i);
     }
-    DAT_00618518.owner = -1;
+    g_soundVoiceCriticalSection.owner = -1;
     DAT_005880d0.allocator->release(DAT_005880d0.voices);
     DAT_005880d0.allocator = NULL;
     sndSystemShutdown();

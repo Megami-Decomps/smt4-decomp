@@ -7,9 +7,9 @@ struct BattleCamera { u8 unk000[0x6a8]; u8 enabled; };
 extern BattleCamera *g_btlCamera;
 s32 scrGetArg(u32 index);
 
-s32 scrCommSetBattleCameraEnabled(u32 index)
+s32 scrCommSetBattleCameraEnabled(void)
 {
-    g_btlCamera->enabled = scrGetArg(index) != 0;
+    g_btlCamera->enabled = scrGetArg(0) != 0;
     return 1;
 }
 

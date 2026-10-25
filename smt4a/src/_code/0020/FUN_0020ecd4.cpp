@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "util/CalleeContracts.h"
 
 struct StatusEventRecord {
     u32 id;
@@ -34,7 +35,6 @@ struct GameStateView {
 extern "C" {
 extern GameStateView g_gameState;
 extern StatusPopupState *g_popupState;
-u32 FUN_00152f44(void);
 s32 playerHasFlagBit(u32 bit);
 s32 saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler rematerializes7/20 after jobGetWork instead of keeping them in r6/r5 across the lookup; optimization-flag candidate. */
 #include "shard/W6_W6Match2_JobBlend.h"
+#include "script/ScriptArgs.h"
 
 struct TransitionJobView {
     JobBlendWork base;
@@ -9,7 +10,6 @@ struct TransitionJobView {
 
 extern "C" {
 u32 scrGetCommandFrame(void);
-u32 scrGetArg(u32 index);
 void FUN_002a880c(JobBlendWork* work, u32 mode, s32 frames);
 
 u32 scrCommStartJobTransitionAndWait(void)

@@ -1,10 +1,10 @@
 /* NON_MATCHING: compiler rematerializes choice kind eleven at the final call instead of keeping it in a saved register. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 void scrCommMessageSetMode(s32);
 u32 FUN_002ba85c(void);
-u32 scrGetArg(u32);
 u32 scrGetCommandFrame(void);
 u32 FUN_0021bdac(u32, u32, u32, s32, s32, s32);
 

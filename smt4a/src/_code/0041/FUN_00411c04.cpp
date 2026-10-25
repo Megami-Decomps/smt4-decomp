@@ -1,18 +1,5 @@
 /* NON_MATCHING: in the custom-layout branch retail adds the slot part and the party-size part into r0 before two plain loads; this build folds them into a writeback load. */
-#include "common.h"
-
-/* The battle state's twelve party-panel slots. */
-struct BtlPanelSlot411c04 {
-    /* 0x0 */ u32 active;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
-    /* 0xC */ u8 unkC[0x4];
-};
-
-struct BtlPanelState411c04 {
-    /* 0x0000 */ u8 unk0000[0x4D78];
-    /* 0x4D78 */ BtlPanelSlot411c04 slots[12];
-};
+#include "battle/BtlMainAccess.h"
 
 /* Where a panel goes for a given number of active party slots. */
 struct PanelLayout411c04 {
@@ -37,7 +24,6 @@ struct PanelMenu411c04 {
 extern "C" {
 
 extern PanelLayout411c04 DAT_005e156c[][12];
-BtlPanelState411c04 *btlGetMainState(void);
 s32 partyCountActiveSlots(void);
 void FUN_00411e8c(PanelMenu411c04 *menu, PanelItem411c04 *item);
 
@@ -45,7 +31,7 @@ void FUN_00411e8c(PanelMenu411c04 *menu, PanelItem411c04 *item);
 // clears the slots' two values.
 void FUN_00411c04(PanelMenu411c04 *menu, s32 reset)
 {
-    BtlPanelState411c04 *state = btlGetMainState();
+    BtlMainStateExtA *state = btlGetMainStateExt();
     if (state == NULL) {
         return;
     }

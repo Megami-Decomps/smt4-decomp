@@ -1,12 +1,12 @@
 /* NON_MATCHING: register allocation: this build hoists the address of the stereo-mode field (one more live register, so the nibble spills to the stack) where retail reloads it from the context base */
 #include "camp/RenderCtx.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 u32 FUN_002c15ac(u32 mode);
 u32 asdGxPresetsGetByKind(u32 mode);
 void FUN_002c1b64(RenderCtx *context, u32 preset);
 s32 FUN_002c5d80(u32 kind, u8 enabled);
-s32 FUN_002865c0(u32 kind, f32 value);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 s32 FUN_00310578(u32 kind, u32 value, u32 alpha);

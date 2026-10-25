@@ -1,4 +1,5 @@
 #include "shard/Shard0049.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct TexOwner1480 {
 } TexOwner1480;
 
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
-extern void asdTMTexTableFreeEntry(s32 index);
 
 void texOwner1480Free(TexOwner1480 *obj)
 {

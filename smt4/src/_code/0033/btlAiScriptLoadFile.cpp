@@ -4,6 +4,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DevilRecord.h"
 #include "gamedata/SupportUnitRecord.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern AocSystem *g_aocSystem;
@@ -11,7 +12,6 @@ extern const char DAT_00400444[]; /* battle/AI/%s.bf */
 extern const char DAT_00400454[]; /* battle/AI/tmp.bf */
 void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
-s32 FUN_002b6ad0();
 SupportUnitRecord *supportUnitGetEntry(s32, s32);
 DevilRecord *dataTable00FindById(u32);
 void memClear(void *, u32);

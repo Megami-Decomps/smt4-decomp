@@ -1,6 +1,7 @@
-/* NON_MATCHING: the thread-pointer read and svc 0x32 now match through nn/svc.h; armcc pairs/orders the command-buffer stores (stm/strd, descriptor order) differently from retail. */
+/* NON_MATCHING: the flag byte and the push {r0-r3} spill match (memcpy of the parameter); armcc orders the count/descriptor stores differently from retail (stm vs singles) */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include <string.h>
 
 extern "C" {
 
@@ -13,12 +14,12 @@ s32 FUN_004269b4(void *output, u8 flag, const void *input, s32 count)
 {
     nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
     cmd->header = 0x10050084;
-    *(u8 *)&cmd->words[0] = flag;
+    memcpy(&cmd->words[0], &flag, sizeof(flag));
     cmd->words[1] = count;
     cmd->words[2] = (count << 7) | 10;
     cmd->words[3] = (u32)input;
-    cmd->words[4] = ((count * 3) << 7) | 12;
     cmd->words[5] = (u32)output;
+    cmd->words[4] = ((count * 3) << 7) | 12;
     s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
     if (nnResultIsSuccess(result)) {
         result = cmd->words[0];

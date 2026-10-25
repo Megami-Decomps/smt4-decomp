@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail conditionally executes the kind 1/2 arm (cmp, cmpne, moveq/strdeq) and falls through into the other arm; the build uses branches */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct ScenePart00469e1c {
 } ScenePart00469e1c;
 
 s32 scrRunOpcodesStub(u32 handle);
-s32 FUN_0013def0(s32 index);
 void FUN_003d54f8(s32 index, s32 value);
 void messageSetMode(s32 value);
 void FUN_003c1060(void);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail zeroes the result register after source4CCopyHalves and moves the roll to r1 before the mask test */
+/* NON_MATCHING: retail moves the roll to r1 before the mask test and loads the battle flag pair with ldrd (the build uses two ldr and keeps the roll in r0) */
 #include "battle/btlMain.h"
 
 struct ChanceSkillUnit {
@@ -31,10 +31,10 @@ u16 FUN_004c5ec0(u32 unitId)
     ChanceBattleFlags *battle = (ChanceBattleFlags *)btlGetMainState();
     ChanceSkillUnit *unit = FUN_003f0e20((BtlMainStateA *)battle, unitId);
     u16 skills[10] = {0};
-    u16 procced = 0;
     s32 i;
 
     source4CCopyHalves(unit, skills);
+    u16 procced = 0;
     for (i = 0; i < 9; i++) {
         if (skills[i] != 0) {
             const ChanceSkill *skill = dataTable41FindById(skills[i]);

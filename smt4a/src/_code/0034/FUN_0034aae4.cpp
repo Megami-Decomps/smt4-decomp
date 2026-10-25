@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free) and the g_uiQuest address in r8; the build coalesces them */
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -11,7 +13,6 @@ struct ScriptResource;
 void scrScriptProcessDestroy(ScriptResource *resource);
 int dataTableFree(int);
 int uiFadeSetVisible(int);
-int asdTMTexTableFreeEntry(int);
 
 typedef struct TouchRegions {
     /* 0x00 */ u8 unk00[0x44];

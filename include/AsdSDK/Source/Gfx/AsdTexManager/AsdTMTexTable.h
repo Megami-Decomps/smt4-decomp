@@ -85,4 +85,17 @@ typedef struct TexTable {
     /* 0x04 */ TexTableHeader *header;
 } TexTable;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Table entry helpers (smt4: CallFileA/B, smt4a: CallFileC/FreeEntry; NodeIsLoaded in both). */
+struct TexNode *asdTMTexTableCallFileA(s32 idx, s32 arg);
+struct TexNode *asdTMTexTableCallFileB(s32 idx, s32 arg);
+struct TexNode *asdTMTexTableCallFileC(s32 idx, u32 arg);
+void asdTMTexTableFreeEntry(s32 idx);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

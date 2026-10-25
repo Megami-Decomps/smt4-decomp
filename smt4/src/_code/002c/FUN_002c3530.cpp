@@ -1,4 +1,3 @@
-/* NON_MATCHING: local preset-system view fixes dispatch registers; parameter/id address and VFP load scheduling still differ. */
 #include "common.h"
 
 struct Vec3f {

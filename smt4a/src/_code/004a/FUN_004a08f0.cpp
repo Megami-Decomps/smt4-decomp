@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register allocation differs (retail keeps the base percentage and a zero constant in extra callee-saved registers). */
+/* NON_MATCHING: retail unrolls the 8-element skill copy, keeps the zero constant in sl and the base percentage/skill pointer in extra callee-saved registers; build keeps the copy loop rolled. */
 #include "common.h"
 
 struct StepPlayerData {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00487d6c` (_code @ 0x487d6c, 0x3c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int vec2GetYInt(int);
 int efctSetSpeed(void);
 int renderCtxPopState(...);
 int renderStackPushIndexed(int, int, unsigned int);
-int FUN_001835b4(int, int, int, int, int, unsigned int);
 int naviGetActiveStateValue(void);
 int lmapSceneGetObj(int);
 int naviMainSelectPair(int);
@@ -40,7 +40,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_001835b4. */
 extern int lmapSceneGetUnk0(void);
 extern int lmapMainGetUnkCC(void);
 extern int gameFlagsClassify(void);

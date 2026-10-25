@@ -1,5 +1,6 @@
 /* NON_MATCHING: grid slot detail draw (name, detail value and stat delta); written from the decompilation, scheduling not compared with retail */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 /* A placed sprite frame: offset of the sprite relative to its parent. */
 struct GridSpriteFrame {
@@ -22,7 +23,6 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *format, u32 value);
 GridSpriteFrame *FUN_001834a4(u32 bank, u32 sprite);
-void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 void FUN_00185e84(s32 id, s32 x, s32 y, u32 flags, s32 a, s32 b);
 void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot);
 void statDrawClampedDelta(void *owner, s32 id, s32 x, s32 y, u32 flags, s32 arg);

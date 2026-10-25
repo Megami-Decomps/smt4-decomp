@@ -62,7 +62,7 @@ int FUN_003e54b8(...);
 int linkedTargetSetFloat(...);
 int linkHolderSetFlag(...);
 
-int FUN_0013c174(...);
+int asdLoadFileWithSize(...);
 int asdCameraInitializeDefaults(...);
 int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
@@ -124,7 +124,7 @@ extern unsigned int DAT_005f1b7c; /* 0x5f1b7c */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: FUN_0013c174. */
+/* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: asdCameraInitializeDefaults. */
 /* Supplied declaration required: FUN_0013cab8. */
 extern int FUN_0013def0(unsigned int);
@@ -323,7 +323,7 @@ unsigned int FUN_00328838(void)
     FUN_003fe86c(temp_v3,0,1);
     controllerSetPosition(temp_v3);
     FUN_003fd7b4(temp_v3);
-    FUN_0013c174(&LAB_00328c6c,temp_v16,1);
+    asdLoadFileWithSize(&LAB_00328c6c,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c1);
     if (temp_v6 != 0) {
@@ -331,7 +331,7 @@ unsigned int FUN_00328838(void)
     }
     *(int *)(temp_v4 + 0x30) = temp_v6;
     controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v6), &temp_v9, 0);
-    FUN_0013c174(&LAB_00328c8c,temp_v16,1);
+    asdLoadFileWithSize(&LAB_00328c8c,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c5);
     if (temp_v6 != 0) {
@@ -339,7 +339,7 @@ unsigned int FUN_00328838(void)
     }
     *(int *)(temp_v4 + 0x34) = temp_v6;
     controllerApplyAtUnitScale(reinterpret_cast<void *>(temp_v6), &temp_v9, 0);
-    FUN_0013c174(&LAB_00328cac,temp_v16,1);
+    asdLoadFileWithSize(&LAB_00328cac,temp_v16,1);
     temp_v6 = 0x48;
     FUN_00178b04(0x48,&LAB_00328c18,0x1c9);
     if (temp_v6 != 0) {

@@ -1,9 +1,9 @@
 /* NON_MATCHING: paired bustup job selection uses different saved-register allocation. */
 /* Places two bustup jobs in opposite slots, preserving a job already on the other side. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
 s32 bustupCutAnimFindSlot(u32 job);
 void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y);
 

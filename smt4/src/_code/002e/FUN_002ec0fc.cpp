@@ -1,9 +1,9 @@
 /* NON_MATCHING: first cap selector spills to the stack; final segment-coordinate multiply is fused. */
 #include "ui/SegmentedTextureBar.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 order);
-void FUN_002bf288(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
 TexSprite *FUN_002bf4f8(u32 group, u32 sprite);
 
 // Draw a twelve-part vertical indicator with independent cap and fill variants.

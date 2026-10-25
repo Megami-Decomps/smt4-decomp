@@ -1,4 +1,5 @@
 #include "shard/JobWork.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct EventColorTransition {
     u32 job;
@@ -14,7 +15,6 @@ struct EventColorTransition {
 struct TextureSlot { u32 table, index; u8 unk08[8]; };
 extern "C" {
 extern TextureSlot DAT_0057f43c[4];
-s32 asdTMTexTableNodeIsLoaded(u32, u32);
 void FUN_0038a538(u32);
 
 s32 eventColorTransitionUpdate(u32 job)

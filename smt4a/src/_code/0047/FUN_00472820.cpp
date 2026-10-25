@@ -1,5 +1,6 @@
 /* NON_MATCHING: native draw callback handle restored; translator renderer/effect contracts still drop float inputs/results and render-state operations differ. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/JobWork.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
@@ -43,7 +43,6 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0023b4a4(unsigned int);

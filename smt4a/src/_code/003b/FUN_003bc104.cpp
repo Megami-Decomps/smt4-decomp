@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-void scrSetResult(s32 result);
 BtlMainStateA *btlGetMainState(void);
 
 // Script result: 1 when any battle entry passes all four candidate masks.

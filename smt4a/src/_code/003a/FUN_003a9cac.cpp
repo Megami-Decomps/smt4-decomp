@@ -1,5 +1,6 @@
 /* NON_MATCHING: the match store keeps the loaded id and the slot address in swapped scratch registers (ip/r3). */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 struct CategoryPair {
     u16 id;
@@ -8,7 +9,6 @@ struct CategoryPair {
 
 extern "C" {
 s32 scrGetArg(u32 index);
-void *btlGetMainState();
 void *btlGetTable(void *state, u32 table);
 u16 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);

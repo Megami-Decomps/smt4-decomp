@@ -1,5 +1,6 @@
 /* NON_MATCHING: float register allocation (retail keeps the 0.0/1.0 constants in s17/s18 across the calls) and the phase branch layout differ (179 vs 184 rows); the popup logic is the same. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -39,7 +40,6 @@ LayoutRecord *FUN_001834a4(u32 group, u32 id);
 s32 devilIsTextureLoaded(s32 id, s32 flag);
 s32 vec2GetXInt(const void *vector);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
 void devilDispatchTextureResource(s32 id, s32 x, s32 y, s32 kind, s32 flag);

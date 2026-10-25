@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps &g_renderCtx in r9, x in r6 and the record in r7 (x/record swapped here) and the icon in r8 instead of a stack slot */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 struct StatusRecord {
     /* 0x00 */ u8 unk00[0x64];
@@ -26,7 +27,6 @@ s16 FUN_0019e52c(u16 id);
 u32 FUN_00180114(void);
 void textFormatBuffer(char *buffer, const char *format, ...);
 LayoutPlacement *FUN_001834a4(u32 table, s32 id);
-void FUN_001835b4(s32 category, s32 group, s32 id, s32 x, s32 y, s32 index);
 void FUN_0018152c(s32 icon, s32 x, s32 y, s32 index, s32 flags);
 void drawSetColorFromRGBA8(u32 rgba);
 void FUN_00180310(s32 mode, s32 x, s32 y, s32 align, s32 digits, s32 index, const char *text);

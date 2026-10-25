@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail does not shrink-wrap the NULL case (`ldreq r0, =err; push; beq` to the shared pop); built returns it directly with `bxeq lr` before the push. */
 #include "common.h"
 
 extern "C" {
@@ -17,11 +16,11 @@ typedef struct Object00429d58 {
 /* Calls the object's virtual function at 0x30; returns 0, or the failure result 0xC8804465 for a NULL object. */
 u32 FUN_00429d58(Object00429d58 *object)
 {
-    if (object == NULL) {
-        return 0xC8804465;
+    if (object != NULL) {
+        object->vtbl->run(object);
+        return 0;
     }
-    object->vtbl->run(object);
-    return 0;
+    return 0xC8804465;
 }
 
 } /* extern "C" */

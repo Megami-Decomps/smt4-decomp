@@ -1,4 +1,5 @@
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelState.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ SpriteInfo *FUN_001834a4(u32 group, s32 id);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-void FUN_001835b4(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 color);
 
 void FUN_002ace4c(s32 index, s32 x, s32 y, u32 color, s32 animated, f32 speed)
 {

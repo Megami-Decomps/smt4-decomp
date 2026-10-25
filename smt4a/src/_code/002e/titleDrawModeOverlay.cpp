@@ -1,5 +1,6 @@
 /* NON_MATCHING: mode branch layout and render stack push scheduling differ; -O2 candidate. */
 #include "title/titleMain.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 struct TitleDrawState {
@@ -16,7 +17,6 @@ extern "C" {
 extern TitleMainGlobals g_titleMain;
 extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(u32, u32);
-void FUN_001835b4(s32, s32, s32, s32, s32, s32);
 void FUN_0036b21c();
 
 // Draw the title's mode-specific overlay while temporarily applying its render state.

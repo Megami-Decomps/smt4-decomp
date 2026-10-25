@@ -5,10 +5,10 @@ extern "C" {
 
 extern BtlUiGlobalsA g_btlUi; /* 0x57a9b8 */
 
-/* Whether the battle UI's flag byte at 0x74B3 is clear. */
+/* Whether the battle UI's sprite-active flag is clear. */
 u8 FUN_004aa2bc(void)
 {
-    return ((u8 *)g_btlUi.ui)[0x74B3] == 0;
+    return g_btlUi.ui->spriteActive == 0;
 }
 
 } /* extern "C" */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads r1=10 before the color select and lays out its literal pool as [g_eventCommand, 1.0f] one word closer; built schedules r1 last */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct EventCommandState {
 
 extern EventCommandState *g_eventCommand;
 s32 scrGetCommandFrame(void);
-s32 scrGetArg(u32 index);
 void eventSetUnderMessageFade(u32 color, s32 frames, s32 a, f32 scale);
 
 /* Script command: on the first frame starts a 10-frame fade (to 0xff or 0xffffffff by argument 0); finishes once the state's two counters match. */

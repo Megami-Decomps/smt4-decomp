@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the returned pointer into r1 before adding 0x100; built adds straight from r0 */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct BattleActor {
     /* 0x100 */ StatusFlags status;
 } BattleActor;
 
-extern void *btlGetMainState(void);
 extern BattleActor *FUN_001568f8(void *battle, u32 index);
 extern u32 scrGetArg(u32 index);
 extern void scrSetResult(s32 result);

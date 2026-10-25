@@ -35,7 +35,9 @@ typedef struct BtlUnitEntry {
     /* 0x0D6 */ u8 unk0D6[0xDE];
     /* 0x1B4 */ s16 hp;
     /* 0x1B6 */ s16 hpMax;
-    /* 0x1B8 */ u8 unk1B8[0xE];
+    /* 0x1B8 */ s16 mp;
+    /* 0x1BA */ s16 mpMax;
+    /* 0x1BC */ u8 unk1BC[0xA];
     /* 0x1C6 */ u16 flagMask;   /* bit n set: flag n is on */
     /* 0x1C8 */ u8 unk1C8[4];
     /* 0x1CC */ u16 level;      /* averaged by the script */

@@ -48,7 +48,7 @@ s32 FUN_0029a9d4(u32 id, s32 arg);
 s32 FUN_0029a924(u32 id);
 s32 FUN_002277d4(BattleBlock **block, AiState *state, SkillInfo *info, AiUnit **units, s32 count, s32 a, s32 b);
 s32 FUN_0029e9cc(u32 skillId);
-void FUN_00229998(BattleBlock **block);
+void btlMarkLowestHpUnit(BattleBlock **block);
 
 /* Tries the nine candidate skills in order: the first one the actor can afford and FUN_002277d4 accepts is used. */
 static s32 tryCandidates(BattleBlock **block, AiState *state, u16 *skills, AiUnit **units, s32 count, s32 a, s32 b)
@@ -121,7 +121,7 @@ void FUN_003d06e4(BattleBlock **block, AiState *state)
     }
     state->selection->kind = 1;
     state->selection->value = (*state->environment & 6) != 0;
-    FUN_00229998(block);
+    btlMarkLowestHpUnit(block);
 }
 
 } /* extern "C" */

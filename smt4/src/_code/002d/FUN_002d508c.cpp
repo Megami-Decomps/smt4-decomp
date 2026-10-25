@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 165 rows); register allocation and the stack frame (20 vs 24 bytes) differ */
 #include "common.h"
+#include "util/TrigF32.h"
 
 struct Vec3f {
     f32 x, y, z;
@@ -43,8 +44,6 @@ s32 FUN_00256540(void);
 void FUN_0027f958(f32* stickX, f32* stickY, s32 arg);
 void FUN_0026413c(void);
 f32 FUN_00281e34(f32 y, f32 x);
-f32 FUN_0028250c(f32 angle);
-f32 FUN_00282390(f32 angle);
 s32 FUN_002ed094(Vec3f* candidate, Vec3f* previous);
 
 // Moves the player on the field from the analog stick: accelerates while held,

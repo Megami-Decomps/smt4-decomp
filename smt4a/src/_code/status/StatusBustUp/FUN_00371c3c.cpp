@@ -2,6 +2,7 @@
 #include "status/StatusBustUp.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // The portrait ID is past the shared DevilRecordA prefix.  Apocalypse's table
 // override flags and model ID also differ from the SMT IV model override layout.
@@ -24,7 +25,6 @@ extern StatusBustUpResources DAT_00588fd8;
 extern AocSystem *g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
 PortraitOverrideAView *dataTable00FindById(u16 id);
-s32 asdTMTexTableNodeIsLoaded(s32 table, s32 entry);
 s32 aocRunByName(AocSystem *system, s32 table, s32 entry, s32 mode);
 void FUN_001a6568(AocSystem *system, s32 table, s32 entry, u32 options);
 void asdTMTexLoadMainHeap(s32 table, s32 entry);

@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct SoundHandleList {
     /* 0x00 */ AsdSndHandleNode *head; /* the registered sounds */
@@ -11,7 +12,6 @@ struct SoundHandleList {
 extern "C" {
 extern SoundHandleList g_soundHandleList;
 
-void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
 /* Registers sound `id` (with a flag byte) at the end of the list. Returns 0 if it is already registered. */
 u32 asdSoundHandleListAdd(s32 id, u8 flag)

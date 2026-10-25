@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the run window's loading-dots draw; armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
 #include "gfx/RenderStateStack.h"
+#include "shard/TextureDrawCall.h"
 
 /* The title scene (its second state stack lives at 0x12AC). */
 struct TitleScene {
@@ -32,7 +33,6 @@ extern RunWin *g_runWin;
 extern TitleScene *g_titleScene;
 
 void FUN_002c39a4(TitleScene *scene);
-void FUN_002bf288(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void FUN_002bf380(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
 void FUN_002be5a4(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);

@@ -1,4 +1,5 @@
 #include "ui/MessageMain.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;

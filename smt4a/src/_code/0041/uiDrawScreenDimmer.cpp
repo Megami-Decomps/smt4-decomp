@@ -1,6 +1,5 @@
-/* NON_MATCHING: the black alpha store is scheduled before its argument-address setup instead of after it. */
 #include "camp/RenderCtx.h"
-#include "gfx/EffectColorMath.h"
+#include "gfx/EffectColorUnpack.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
@@ -15,8 +14,8 @@ void uiDrawScreenDimmer(u32 unused, s32 topScreen)
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
     efctSetSpeed(0.5f);
-    EffectColor black = effectColorUnpack(0x000000ff);
-    FUN_001834e4(&black);
+    EffectColor black;
+    FUN_001834e4(effectColorUnpack(0x000000ff, &black));
     if (topScreen) {
         screenDrawShadedRect(0, 0, 400, 240, 245);
     } else {

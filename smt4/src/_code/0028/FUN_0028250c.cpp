@@ -1,5 +1,5 @@
 /* NON_MATCHING: sine polynomial and reduction restored; fast FP mode folds the invalid infinity division and VFP scheduling differs. */
-#include "common.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 s32 ARM_fpclassifyf(u32 bits);

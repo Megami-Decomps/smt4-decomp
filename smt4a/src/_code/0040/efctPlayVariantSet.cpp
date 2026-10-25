@@ -1,10 +1,10 @@
 /* Plays one of two three-part effect sets (ids 0x8e-0x90 or 0x9e-0xa0) at the given speed, then restores speed 1.0. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 category, s32 group, s32 id, u32 target, u32 slot, s32 index);
 
 void efctPlayVariantSet(u32 unused, u32 target, u32 slot, s32 index, s32 useFirstSet, s32 useSecondSet, f32 speed)
 {

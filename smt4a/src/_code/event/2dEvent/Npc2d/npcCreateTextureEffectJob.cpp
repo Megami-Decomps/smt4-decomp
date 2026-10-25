@@ -4,11 +4,11 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct TexNode;
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
-void sysMemClear(void *memory, u32 size);
 s32 FUN_00162ea4();
 bool aocRunByName(u32 system, u32 table, u32 node, s32 checked);
 s32 aocLoadTextureNode(u32 system, u32 table, u32 node, u32 kind);

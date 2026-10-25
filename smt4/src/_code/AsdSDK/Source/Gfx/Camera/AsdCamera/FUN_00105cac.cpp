@@ -1,13 +1,13 @@
 /* NON_MATCHING: default look-at anchoring retains an extra saved register; active-camera and process-argument stores differ. */
 #include "gfx/CameraManager.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_004092c8[];
 // The retail symbol anchors the up vector; eye and target immediately precede it.
 extern const CameraDefaultVector DAT_004d493c[];
 extern CameraManagerIV g_asdCamera;
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 void FUN_002c2044(ManagedCameraIV *, s32);
 void FUN_002c1edc(ManagedCameraIV *, const CameraDefaultVector *, const CameraDefaultVector *, const CameraDefaultVector *);

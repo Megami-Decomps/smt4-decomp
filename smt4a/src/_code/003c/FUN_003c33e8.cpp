@@ -1,6 +1,8 @@
 /* NON_MATCHING: count/color prologue scheduling, final variadic argument stores and literal string order differ. */
 #include "skill/SkillSlotScreen.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -8,11 +10,9 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
-void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);
 void statDrawClampedDelta(u32 unit, s16 id, s32 x, s32 y, u32 layer, u32 a);
 void FUN_004bd6b0(u32 unit, u16 id, s32 index);
-const char *FUN_0014bd84(u16 id);
 s32 recordContainsPairedId(u32 unit, u16 id);
 u32 FUN_004bcbb4(u32 unit, u16 id);
 

@@ -1,6 +1,8 @@
 /* NON_MATCHING: global work reload, texture-pair loads and cold texture-load branch are scheduled differently. */
 #include "event/2dEvent/EventEffect.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct EventFilterWork {
     u32 job;
@@ -16,7 +18,6 @@ struct EventFilterWork {
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f3e8[6];
-void *asdMemoryAllocTracked(s32 pool, s32 alignment, s32 flags, u32 size, s32 clear);
 u32 FUN_002a41a0(void *job);
 u32 FUN_002a3f54(void *job);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
@@ -25,7 +26,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
 void *textureGetIndexedResource(u32 index);
 void asdTMTexTableLoadTmx(u32 table, s32 flags);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 void eventFilterStart(u32 kind)

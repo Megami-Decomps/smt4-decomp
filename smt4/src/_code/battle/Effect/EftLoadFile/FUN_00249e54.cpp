@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_001ad228(...);
+int keyedRecordSetVectorPair2(...);
 int keyedRecordSetVectorPair3(...);
-int FUN_001ad2a0(...);
-int FUN_001ad484(...);
+int keyedRecordSetVectorPair0(...);
+int keyedRecordSetVectorPair1(...);
 int keyedCopyPayload(...);
 int libc_strcmp(int, unsigned char *);
 int asdMemFree(...);
@@ -61,10 +61,10 @@ extern unsigned char LAB_0024a638; /* 0x24a638 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001ad228. */
+/* Supplied declaration required: keyedRecordSetVectorPair2. */
 /* Supplied declaration required: keyedRecordSetVectorPair3. */
-/* Supplied declaration required: FUN_001ad2a0. */
-/* Supplied declaration required: FUN_001ad484. */
+/* Supplied declaration required: keyedRecordSetVectorPair0. */
+/* Supplied declaration required: keyedRecordSetVectorPair1. */
 /* Supplied declaration required: keyedCopyPayload. */
 extern unsigned int effectTextureFindOrReserve(int);
 /* Supplied declaration required: libc_strcmp. */
@@ -506,9 +506,9 @@ LAB_0024a200:
   effectAllocateSavedRenderRecords(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
   FUN_0031bae0(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
   keyedCopyPayload(temp_v49,param_2 + 0x14);
-  FUN_001ad2a0(temp_v49,temp_v47);
-  FUN_001ad484(temp_v49,&temp_v23);
-  FUN_001ad228(temp_v49,&temp_v31);
+  keyedRecordSetVectorPair0(temp_v49,temp_v47);
+  keyedRecordSetVectorPair1(temp_v49,&temp_v23);
+  keyedRecordSetVectorPair2(temp_v49,&temp_v31);
   keyedRecordSetVectorPair3(temp_v49,&temp_v39);
   asdMemFree(temp_v3);
   asdMemFree(temp_v12);

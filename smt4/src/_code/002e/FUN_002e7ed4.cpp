@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail materialises the zero constant (r7) before the first search loop, built after it; everything else is identical */
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "shard/Resource.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
-int asdMemFree(void *block);
 
 static LinkedItem *findSharer(LinkedItems *items, void *resource)
 {

@@ -1,9 +1,6 @@
 /* NON_MATCHING: only the first instructions are scheduled differently (retail loads g_mapIf into r2 after the constant moves) */
 #include "common.h"
-
-struct Vec4 {
-    f32 x, y, z, w;
-};
+#include "map/MapActionMarker.h"
 
 struct Vec3 {
     f32 x, y, z;
@@ -19,7 +16,7 @@ struct MapIfBlock {
     u8 unk01[3];     // 0x01
     u32 unk04;       // 0x04
     u32 unk08;       // 0x08
-    Vec4 position;   // 0x0C
+    MapMarkerPosition position;   // 0x0C
     MapModel *model; // 0x1C
 };
 
@@ -38,7 +35,7 @@ void nodeSetTranslation(void *node, s32 index, const Vec3 *translation);
 void FUN_0028c618(void *node, s32 index, Vec3 scale);
 
 /* Creates the map action-cave marker model at the given position (xyz, w) and starts it. */
-void FUN_001b4478(Vec4 position)
+void FUN_001b4478(MapMarkerPosition position)
 {
     MapIfBlock *block = &g_mapIf->block;
     Vec3 scale;

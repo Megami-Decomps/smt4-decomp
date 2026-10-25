@@ -1,4 +1,5 @@
 #include "title/titleMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -6,7 +7,6 @@ void asdMemFree(void *block);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void dataTableFree(s32 table);
 void frameTransitionSetMode(s32 arg);
-void asdTMTexTableFreeEntry(s32 table);
 void campButtonHelpRelease(void);
 s32 campButtonHelpIsActive(void);
 void freeTexTable24(void);

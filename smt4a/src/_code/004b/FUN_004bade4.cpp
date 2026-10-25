@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the 0x900 and 0xf88 sub-struct bases into registers (r9/sl, 8-byte frame); member layout of the menu object is not recovered. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_ScalarGetters.h"
 
 namespace {
@@ -30,7 +31,6 @@ extern void efctSetSpeed(f32);
 extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
 extern SpriteInfo *FUN_001834a4(u32, u32);
-extern void FUN_001835b4(s32, s32, u32, s32, s32, s32);
 extern void FUN_00164b5c(s32, s32, u32, s32, s32, s32);
 extern void FUN_0019de98(s32, u32);
 extern s32 FUN_002a482c(SlotMenu *);

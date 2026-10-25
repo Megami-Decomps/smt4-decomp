@@ -19,7 +19,10 @@ extern GlobalFUN_0035a094 g_campCec;
 s32 FUN_0035a094(void)
 {
     ObjFUN_0035a094 *obj = g_campCec.current;
-    return obj != NULL && obj->state == 13;
+    if (obj != NULL) {
+        return obj->state == 13;
+    }
+    return 0;
 }
 
 }

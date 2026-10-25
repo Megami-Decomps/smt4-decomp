@@ -1,10 +1,10 @@
 #include "shard/Shard003B.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 extern void asdMemFreeSlot(u32 handle);
 extern void FUN_0038b3f8(s32 a, s32 b);
-extern u8 asdTMTexTableNodeIsLoaded(s32 a, u32 b);
 extern u32 requestIdToCode(s32 index);
 extern void asdTMTexTableReleaseNode(s32 a, u32 b);
 extern void asdMemFree(void *ptr);

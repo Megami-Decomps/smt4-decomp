@@ -10,7 +10,7 @@ int FUN_004a9308(...);
 int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_004c9160(...);
-int FUN_004e5a90(...);
+int btlActionMarkRandomStatusTarget(...);
 int FUN_004e5b5c(...);
 int FUN_004e6880(...);
 int FUN_004e7c04(...);
@@ -44,7 +44,7 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004e5a90. */
+/* Supplied declaration required: btlActionMarkRandomStatusTarget. */
 /* Supplied declaration required: FUN_004e5b5c. */
 /* Supplied declaration required: FUN_004e6880. */
 /* Supplied declaration required: FUN_004e7c04. */
@@ -151,7 +151,7 @@ LAB_004ddb40:
             }
           }
           else {
-            FUN_004e5a90(param_1,4);
+            btlActionMarkRandomStatusTarget(param_1,4);
           }
         }
         else {

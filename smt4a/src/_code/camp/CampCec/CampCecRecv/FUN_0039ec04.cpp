@@ -13,9 +13,9 @@ void scrSetResult(s32 result);
 CampCecRecord* FUN_0031cf00(void);
 
 // Returns the screen value or the current received record's value to the script.
-u32 FUN_0039ec04(s32 argumentIndex)
+u32 FUN_0039ec04(void)
 {
-    s32 screenValue = scrGetArg(argumentIndex);
+    s32 screenValue = scrGetArg(0);
     if (g_campCecRecv == NULL) {
         scrSetResult(0);
     } else if (screenValue != 0) {

@@ -31,7 +31,6 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   int *piVar2;
   int temp_v1;
   int *piVar4;
-  int temp_v2;
   int temp_v3;
   int temp_v4;
   int temp_v5;
@@ -52,7 +51,7 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   temp_v1 = allocElements184(piVar4,temp_v3,0);
   *piVar4 = temp_v1;
   temp_v6 = temp_v0;
-  for (temp_v2 = temp_v4; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
+  for (int temp_v2 = temp_v4; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
     _ZN12AsdAllocatorI9Obj55950cE9constructEPS0_RKS0_(piVar4,temp_v1,temp_v6);
     temp_v1 = temp_v1 + 0xb8;
   }

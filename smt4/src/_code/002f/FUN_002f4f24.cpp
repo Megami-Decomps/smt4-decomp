@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the module address before the frame check and again for the cue table, and orders its two literals module-first. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct SoundCueModule {
 
 s32 FUN_002bfc24(s32 mode, u32 sound, u8 volume, u8 flags, f32 left, f32 right);
 u32 FUN_00100bd4(SoundCue *cue);
-s32 scrGetCommandFrame(void);
 
 extern SoundCueModule DAT_004c5634;
 extern u32 DAT_0044e128; /* channel of the cue started last */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: inlined texture readiness tests copied id in r1 rather than original id in r5; all other instructions match. */
 #include "gamedata/DevilRecord.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 struct DemonTextureDrawRecord {
     u8 prefix[3];
     u8 flags;
@@ -13,7 +14,6 @@ typedef char DemonTextureDrawRecordOffsets[offsetof(DemonTextureDrawRecord, alte
 extern "C" {
 extern u32 g_aocSystem;
 DemonTextureDrawRecord *dataTable00FindById(u32 id);
-s32 asdTMTexTableNodeIsLoaded(u32 category, u32 resource);
 s32 aocRunByName(u32 system, s32 category, s32 resource, s32 mode);
 void FUN_002ae9ec(s32 layer, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void FUN_002bf380(s32 layer, s32 category, s32 variant, u32 first, u32 second, u32 third);

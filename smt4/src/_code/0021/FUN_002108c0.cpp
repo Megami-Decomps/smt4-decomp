@@ -3,7 +3,6 @@
 
 extern "C" {
 TexSprite *texTableFindNode(TexTable *);
-TexNode *asdTMTexTableCallFileB(TexTable *, u32);
 void asdMemFree(void *);
 void asdTextureRelease(AsdTexture *);
 
@@ -15,8 +14,8 @@ u32 FUN_002108c0(TexTable *table)
         return 0;
     for (s32 index = 0; index < sprite->frameCount; ++index) {
         u32 *frame = reinterpret_cast<u32 *>(sprite->frames) + index * 5;
-        if (asdTMTexTableCallFileB(table, *frame)->loaded.state & 4) {
-            TexNode *node = asdTMTexTableCallFileB(table, *frame);
+        if (asdTMTexTableCallFileB((s32)table, *frame)->loaded.state & 4) {
+            TexNode *node = asdTMTexTableCallFileB((s32)table, *frame);
             if (node != NULL) {
                 if (node->loaded.data != NULL) {
                     asdMemFree(node->loaded.data);

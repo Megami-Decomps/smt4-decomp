@@ -1,11 +1,11 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 32 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "StaffRoll/StaffRollMain.h"
 
 extern "C" {
 void FUN_00157558(RenderCtxA *context);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
 void FUN_00183bb0();
 s32 FUN_001692ac(u32 kind, u32 flags);
 extern RenderCtxA *g_renderCtx;

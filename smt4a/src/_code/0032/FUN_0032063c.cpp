@@ -1,11 +1,11 @@
 /* NON_MATCHING: cache receiver offsets compute before packed-state calls; push/pop index scheduling differs. */
 #include "shard/S1ListPanel.h"
+#include "util/PackNibbles.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void *jobGetWork(void);
 u32 FUN_00387580(u32 compare, f32 reference);
 u32 FUN_001692ac(u32 mode, u32 flags);
-u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_00182540(u32 object);
 
 u32 FUN_0032063c(void)

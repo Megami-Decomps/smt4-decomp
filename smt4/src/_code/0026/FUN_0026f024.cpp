@@ -1,10 +1,9 @@
 /* NON_MATCHING: saved argument registers and VFP return-path scheduling differ. */
 #include "common.h"
 #include <math.h>
+#include "util/TrigF32.h"
 
 extern "C" {
-f32 FUN_00282390(f32 angle);
-f32 FUN_0028250c(f32 angle);
 
 // Ease an integer between endpoints, reporting when the destination is reached.
 u32 FUN_0026f024(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32 easeOut)

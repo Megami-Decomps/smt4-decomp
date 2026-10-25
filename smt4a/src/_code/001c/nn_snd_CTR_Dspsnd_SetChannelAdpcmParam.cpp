@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps `channel` in r5 and `flags` in r6 (swapped here) */
 /* Copies a 0x20-byte ADPCM parameter block into the channel's pending slot and marks the channel dirty. */
 #include "common.h"
 

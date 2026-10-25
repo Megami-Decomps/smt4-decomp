@@ -1,10 +1,10 @@
 /* NON_MATCHING: coordinate-pair loads and cached-state push/pop scheduling differ from retail. */
 #include "gfx/UiControlDraw.h"
 #include "shard/S1ListPanel.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0();
 void FUN_00164b5c(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);

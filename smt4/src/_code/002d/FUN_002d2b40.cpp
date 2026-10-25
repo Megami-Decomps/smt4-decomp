@@ -3,6 +3,7 @@
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
 #include <stddef.h>
+#include "util/TrigF32.h"
 
 struct EnemyEncounterMarker {
     s8 x, y;
@@ -30,8 +31,6 @@ void sequenceRequestDefer(s32 message, u32 argument);
 void sequenceRequestClearDeferred();
 void FUN_0027d8b4(u32 result);
 f32 mathDistanceBetweenPoints(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
-f32 FUN_0028250c(f32 angle);
-f32 FUN_00282390(f32 angle);
 void FUN_00253860(MapEnemyEncounterView *enemy, s32 state);
 f32 mathPositionHeadingDegrees(f32 x1, f32 y1, f32 z1, f32 x2, f32 y2, f32 z2);
 f32 FUN_0027eee0(f32 first, f32 second);

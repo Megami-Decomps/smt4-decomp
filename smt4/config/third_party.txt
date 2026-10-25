@@ -63,7 +63,8 @@
 0x00101208 FUN_00101208 callers
 0x00101232 FUN_00101232 between
 0x0010123c libc_printfFormatDispatch name
-0x001012fc svcExitProcess name
+0x001012fc nn_os_ExitProcess name
+0x00101300 svcExitProcess name
 0x00106de4 nn_pl_CTR_InitializeGameCoin name
 0x00106e10 FUN_00106e10 between
 0x00106e60 FUN_00106e60 between
@@ -1957,7 +1958,7 @@
 0x003573a4 FUN_003573a4 between
 0x00357488 registerObj8Holder between
 0x003574a8 _ZN2nn2os15CriticalSectionD1Ev name
-0x003574ac FUN_003574ac between
+0x003574ac _ZN9Obj3574acD1Ev between
 0x0035750c nn_os_TransferMemoryBlock_Initialize name
 0x003575a0 FUN_003575a0 between
 0x003575cc FUN_003575cc between
@@ -3062,7 +3063,7 @@
 0x003f700c FUN_003f700c between
 0x003f7010 FUN_003f7010 between
 0x003f7014 FUN_003f7014 between
-0x003f7044 expHeapDestroyA between
+0x003f7044 _ZN9Obj420eecD1Ev between
 0x003f706c FUN_003f706c between
 0x003f709c FUN_003f709c between
 0x003f70f8 expHeapDestroyB between

@@ -1,4 +1,4 @@
-/* NON_MATCHING: switch lowering and common sprite assignment differ from retail's duplicated branches. */
+/* NON_MATCHING: frame arguments are narrowed at the call (s16 prototypes) like retail; retail keeps two separate chains (member frame, then image frame) and duplicated tail branches, built merges them and saves extra registers. */
 #include "ui/PartyPanelState.h"
 
 // The Apocalypse image sprite is embedded inside animation padding in the shared state prefix.
@@ -11,14 +11,14 @@ struct PartyPanelSpriteViewA {
 };
 extern "C" {
 extern PartyPanelSpriteViewA *g_partyPanel;
-void uiSpriteSetImageKeyframe(void *sprite, s32 frame, u32 flags);
-void uiSpriteSetKeyframe(void *sprite, s32 frame, u32 flags);
+void uiSpriteSetImageKeyframe(void *sprite, s16 frame, u32 flags);
+void uiSpriteSetKeyframe(void *sprite, s16 frame, u32 flags);
 
 // Map party-panel modes to sprite frames and apply them to all four member displays.
-void FUN_00230ac0(s32 mode, s16 imageFrame, u32 flags, s32 resetAuxiliary)
+void FUN_00230ac0(s32 mode, s32 imageFrame, u32 flags, s32 resetAuxiliary)
 {
     PartyPanelSpriteViewA *panel = g_partyPanel;
-    s16 memberFrame = (s16)mode;
+    s32 memberFrame = mode;
     switch (mode) {
     case 4:
         memberFrame = 10;

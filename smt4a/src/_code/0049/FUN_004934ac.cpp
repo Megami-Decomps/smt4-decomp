@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 struct ScreenRect {
     f32 x;      // 0x00
@@ -10,7 +11,6 @@ struct ScreenRect {
 
 extern "C" {
 
-void FUN_001835b4(s32 kind, u32 value, u32 id, s32 x, s32 y, u32 extra);
 
 // Submit the rectangle's bottom-right corner, shifted by (dx, dy), together with its value.
 void FUN_004934ac(ScreenRect *rect, u32 id, s32 dx, s32 dy, u32 extra)

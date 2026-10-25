@@ -12,7 +12,7 @@ extern unsigned int DAT_005880e4; /* 0x5880e4 */
 extern unsigned int DAT_005880e8; /* 0x5880e8 */
 extern unsigned int DAT_005880ec; /* 0x5880ec */
 extern unsigned int DAT_005c0ad8; /* 0x5c0ad8 */
-extern int DAT_00618518; /* 0x618518 */
+extern int g_soundVoiceCriticalSection; /* 0x618518 */
 extern unsigned int DAT_0061851c; /* 0x61851c */
 extern int DAT_00618520; /* 0x618520 */
 
@@ -38,7 +38,7 @@ void FUN_00423144(unsigned int param_1)
     return;
   }
   if (param_1 < DAT_005880e4) {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_00618518);
+    nn_os_CriticalSection_Enter((unsigned int)&g_soundVoiceCriticalSection);
     puVar4 = (unsigned int *)(DAT_005880d8 + param_1 * 0x70);
     nn_snd_CTR_Voice_SetState(*puVar4,1);
     temp_v0 = DAT_005880ec;
@@ -77,13 +77,13 @@ void FUN_00423144(unsigned int param_1)
     if (DAT_00618520 == 0) {
       DAT_0061851c = 0;
       do {
-        temp_v2 = -DAT_00618518;
+        temp_v2 = -g_soundVoiceCriticalSection;
         temp_v3 = (unsigned char)hasExclusiveAccess(0x618518);
       } while (!temp_v3);
-      temp_v3 = DAT_00618518 != -1;
-      DAT_00618518 = temp_v2;
+      temp_v3 = g_soundVoiceCriticalSection != -1;
+      g_soundVoiceCriticalSection = temp_v2;
       if (temp_v3 && 0 < temp_v2) {
-        FUN_001b4a58(DAT_005c0ad8,&DAT_00618518,0,1,0,0,unaff_r4,in_lr);
+        FUN_001b4a58(DAT_005c0ad8,&g_soundVoiceCriticalSection,0,1,0,0,unaff_r4,in_lr);
       }
       return;
     }

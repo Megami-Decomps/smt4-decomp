@@ -4,13 +4,14 @@
 #include "common.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 
-/* Expands an RRGGBBAA word into four 0..1 components. */
-static __inline void effectColorUnpack(u32 packed, EffectColor *out)
+/* Expands an RRGGBBAA word into four 0..1 components; returns `out`. */
+static __inline EffectColor *effectColorUnpack(u32 packed, EffectColor *out)
 {
     out->red = (f32)(packed >> 24) * (1.0f / 255.0f);
     out->green = (f32)((packed >> 16) & 0xFF) * (1.0f / 255.0f);
     out->blue = (f32)((packed >> 8) & 0xFF) * (1.0f / 255.0f);
     out->alpha = (f32)(packed & 0xFF) * (1.0f / 255.0f);
+    return out;
 }
 
 /* Packs four 0..1 components into an RRGGBBAA word. */

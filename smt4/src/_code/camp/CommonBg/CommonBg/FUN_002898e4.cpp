@@ -1,6 +1,7 @@
 /* NON_MATCHING: native0xE0 work/module, unsigned wobble,102px extent and mode stores recovered; particle interior-base, constant lifetime and scheduling differ. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 #define COMMON_BG_DRIFT_COUNT 5
 #define COMMON_BG_RISE_COUNT 5
@@ -47,7 +48,6 @@ typedef char CommonBgModuleWorkOffsetCheck[
 extern "C" {
 extern CommonBgModule g_commonBg;
 
-void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
 void memClear(void *block, s32 size);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                            AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);

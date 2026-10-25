@@ -1,6 +1,7 @@
 /* NON_MATCHING: recovered scene-flag accessor and notification argument; state 6 is materialized at the final transition rather than held in r6, and guard-return sharing differs. */
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
+#include "util/CalleeContracts.h"
 struct BattleActionHistoryState;
 
 extern "C" {
@@ -17,7 +18,6 @@ typedef struct BtlEndTask {
 
 extern BtlMain *g_btlMain;
 
-s32 FUN_002c2a04(s32 index);
 BtlMainState *btlGetMainState(void);
 void FUN_0033a780(BattleActionHistoryState *state);
 void btlTalkBustUpDestroy(void);

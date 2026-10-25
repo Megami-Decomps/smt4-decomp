@@ -1,6 +1,7 @@
 /* NON_MATCHING: global/component base loads, signed modulus and movement VFP multiplication scheduling differ. */
 #include "map/lmapMain.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "util/CalleeContracts.h"
 
 struct AmbientMovementTransform {
     u32 unk00;
@@ -31,7 +32,6 @@ extern "C" {
 extern GameState g_gameState;
 extern LmapScene *g_lmapScene;
 void FUN_0039560c(AmbientMovementWork *work);
-u32 randNextInRange(u32 limit);
 f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 
 void FUN_0039568c(AmbientMovementWork *work)

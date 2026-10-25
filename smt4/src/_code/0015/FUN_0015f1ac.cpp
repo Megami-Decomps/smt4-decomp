@@ -30,7 +30,6 @@ void FUN_0015f1ac(unsigned int *param_1,unsigned int param_2,unsigned int param_
 /* irregular: 1 unstructured edge(s); 1 goto(s); 3 native warning(s); review required */
   short temp_v0;
   int temp_v1;
-  int temp_v2;
   unsigned int temp_v3;
   unsigned int temp_v4;
   unsigned char temp_v5;
@@ -74,7 +73,7 @@ LAB_0015f28c:
   }
   temp_v4 = param_1[0xc];
   temp_v1 = (int)(short)param_1[0xd];
-  for (temp_v2 = temp_v1; temp_v2 != 0 && temp_v4 != 0; temp_v2 = temp_v2 - 1) {
+  for (int temp_v2 = temp_v1; temp_v2 != 0 && temp_v4 != 0; temp_v2 = temp_v2 - 1) {
     temp_v4 = *(unsigned int *)(temp_v4 + 0x14);
   }
   for (; temp_v1 < 5; temp_v1 = temp_v1 + 1) {

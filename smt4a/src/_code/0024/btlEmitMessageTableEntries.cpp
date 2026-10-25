@@ -1,5 +1,6 @@
 /* NON_MATCHING: flag-pair load selection and loop register allocation differ from retail. */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 struct BattleMessageEntry {
     char text[0x10]; /* 0x00 */
@@ -24,7 +25,6 @@ struct BattleMessageMask {
 extern "C" {
 extern void *g_btlAux;
 extern BattleMessageMask g_btlMessageFlagMasks;
-void *btlGetMainState();
 s32 libc_strlen(const char *);
 s32 libc_strcmp(const char *, const char *);
 BattleMessageFlags *FUN_003f0e20(void *battle, s32 target);

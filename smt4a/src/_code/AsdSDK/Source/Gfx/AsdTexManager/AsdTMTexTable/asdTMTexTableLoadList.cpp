@@ -1,20 +1,20 @@
 /* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 67 vs built 61 rows, 81 diff lines. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 
 void *asdMemoryAllocTracked(int, int, int, s32 size, int);
-void *FUN_0013c174(u32 handle, u8 *size, u32 flags);
 void rt_memcpy(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
 extern TexTable g_texTable;
 
 /* Loads the texture list file: keeps its header and builds one empty table entry per name. */
-u32 asdTMTexTableLoadList(u32 handle)
+u32 asdTMTexTableLoadList(const char *path)
 {
-    u8 size[8];
-    u8 *file = (u8 *)FUN_0013c174(handle, size, 0);
+    u32 size[2];
+    u8 *file = (u8 *)asdLoadFileWithSize(path, size, 0);
     u32 *src;
     s32 i;
 

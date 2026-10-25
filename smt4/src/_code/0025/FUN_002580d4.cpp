@@ -1,9 +1,9 @@
 /* Logs one of two events (0x5b if the context lacks both properties 10 and 2, otherwise 0x5a when the target is valid). */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
-void FUN_002bf288(s32 category, s32 group, s32 id, u32 a, u32 b, u32 c);
 s32 FUN_0029ea68(u32 target);
 s32 flagWordTestBit(s32 context, u32 property);
 s32 partyMemberFindById(u32 target);

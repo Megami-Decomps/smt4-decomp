@@ -6,7 +6,7 @@ u32 scrGetArg(u32 argument);
 s32 scrGetCommandFrame();
 s32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, s32 value);
-void FUN_002f5eac(u32 unit, s32 mode);
+void stateSetBitFlag(u32 unit, s32 mode);
 void FUN_00295a18(u32 unit, s32 mode);
 void FUN_00250d84(u32 unit, s32 mode);
 void FUN_0028c040();
@@ -32,7 +32,7 @@ u32 scrComm_Battle_ShowStatusScreen()
     }
     switch (scrWorkGetValue(0)) {
     case 0:
-        FUN_002f5eac(unit, 1);
+        stateSetBitFlag(unit, 1);
         FUN_00295a18(unit, 1);
         FUN_00250d84(unit, 1);
         scrWorkSetValue(0, 1);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: query failure-check scheduling recovered; limit bytes and comparison operands still use swapped registers. */
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -42,10 +41,11 @@ u8 FUN_004310c0(void)
         nn_os_CriticalSection_Leave(&g_moduleCriticalSection5);
         return 0;
     }
-    u8 limitLow = DAT_0056c000.limit[0];
-    u8 limitHigh = DAT_0056c000.limit[1];
+    u32 limitLow = DAT_0056c000.limit[0];
+    u32 limitHigh = DAT_0056c000.limit[1];
     nn_os_CriticalSection_Leave(&g_moduleCriticalSection5);
-    return info.value >= (limitLow | (limitHigh << 8));
+    u32 limit = limitLow | (limitHigh << 8);
+    return info.value >= limit;
 }
 
 } /* extern "C" */

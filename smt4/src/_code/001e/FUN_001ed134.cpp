@@ -1,11 +1,11 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
 s32 FUN_002c5d80(u32 mode, u32 flags);
 void efctSetSpeed(f32 opacity);
-void FUN_002bf288(s32 layer, s32 resource, s32 sprite, s32 x, s32 y, s32 tag);
 
 /* Draw the common background while its transition has a visible contribution. */
 u32 FUN_001ed134(void)

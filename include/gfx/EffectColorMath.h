@@ -22,10 +22,7 @@ static inline void effectColorMultiply(EffectColor *output, const EffectColor *f
 
 static inline u32 effectColorPack(EffectColor color)
 {
-    u32 red = (u32)(color.red * 255.0f);
-    u32 green = (u32)(color.green * 255.0f);
-    u32 blue = (u32)(color.blue * 255.0f);
-    u32 alpha = (u32)(color.alpha * 255.0f);
-    return (red << 24) | ((green & 255) << 16) | ((blue & 255) << 8) | (alpha & 255);
+    return ((u32)(color.red * 255.0f) << 24) | (((u32)(color.green * 255.0f) & 255) << 16) |
+           (((u32)(color.blue * 255.0f) & 255) << 8) | ((u32)(color.alpha * 255.0f) & 255);
 }
 #endif

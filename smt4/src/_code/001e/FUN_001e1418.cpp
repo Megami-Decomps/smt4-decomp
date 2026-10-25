@@ -1,11 +1,11 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
 void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 kind, u32 flags);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
-void FUN_002bf288(u32 layer, u32 kind, u32 sprite, s32 x, s32 y, u32 flags);
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
 void FUN_002c198c(RenderCtx *context);

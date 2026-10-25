@@ -1,5 +1,6 @@
 /* NON_MATCHING: identical except the register pair (r2/r3) armcc picks for the unrolled layer-13 loop over the line windows. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "text/TextDraw.h"
 
 /* One message window's work area. */
 struct MessageWindowWork {
@@ -27,7 +28,6 @@ void asdTMTexTableLoadTmx(s32 table, s32 arg);
 void asdTMTexTableLoadSprites(s32 table);
 void FUN_0014afd0(s32 kind, s32 index);
 MessageWindowWork *FUN_00145280(void);
-void FUN_001527d8(u32 handle, s32 value);
 void infoWindowInitialize(void);
 void comWinInitialize(void);
 void FUN_001409e4(void);

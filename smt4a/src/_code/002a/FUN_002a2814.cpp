@@ -16,7 +16,10 @@ extern struct {
 /* True while the camp CEC work exists and is in state 12. */
 u32 FUN_002a2814(void)
 {
-    return g_campCec.work != NULL && g_campCec.work->state == 12;
+    if (g_campCec.work != NULL) {
+        return g_campCec.work->state == 12;
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 struct RenderCtx;
 
@@ -6,7 +7,6 @@ extern "C" {
 extern RenderCtx *g_renderCtx;
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void efctSetSpeed(f32 alpha);
-void FUN_001835b4(s32 layer, s32 font, s32 x, s32 y, u32 color, s32 glyph);
 
 /* Draws glyphs 0x65.. as a three-glyph row at firstX and a four-glyph row at secondX, faded by
  * alpha. */

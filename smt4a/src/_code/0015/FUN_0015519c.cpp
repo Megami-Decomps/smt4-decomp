@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015519c` (_code @ 0x15519c, 0x6a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
@@ -14,7 +15,6 @@ int efctSetSpeed(void);
 int FUN_00167860(...);
 int FUN_00168470(...);
 int skinObjectUpdateMatrices(...);
-int FUN_001835b4(...);
 int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(int);
 int camSetMatrixA(int, unsigned char [84]);
@@ -60,7 +60,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */

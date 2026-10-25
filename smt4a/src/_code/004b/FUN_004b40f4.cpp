@@ -1,5 +1,6 @@
 /* NON_MATCHING: saved panel register and numeric text coordinate/width load scheduling differ. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 // Observed prefix of the panel owning the packed numeric value.
 struct PackedNumberPanelView {
@@ -16,7 +17,6 @@ typedef char PackedNumberPanelValueOffsetCheck[offsetof(PackedNumberPanelView, p
 
 extern "C" {
 const SpriteInfo *FUN_001834a4(u32, u32);
-void FUN_001835b4(u32, u32, u32, s32, s32, u32);
 void FUN_002c0940(char *, u32);
 f32 FUN_00168594(const char *, u32, f32);
 void FUN_00162790(u32, u32, const char *, f32, f32, f32, f32, f32);

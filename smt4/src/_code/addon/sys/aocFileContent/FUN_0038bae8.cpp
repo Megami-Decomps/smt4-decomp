@@ -1,6 +1,7 @@
 /* NON_MATCHING: The result aggregate is constructed on the stack and copied instead of retail's direct return-storage construction. */
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
+#include "nn/Result.h"
 #include "AsdSDK/AsdDebug.h"
 
 struct AocFileContentBuffer {
@@ -28,13 +29,9 @@ WindowStatusOperationResult FUN_0038bae8(AocFileContentBuffer *content, u32 id)
         asdMemFree(content->buffer);
         content->buffer = NULL;
     }
-    WindowStatusOperationResult operation;
-    operation.status = 0;
-    operation.reserved0c = 0;
-    operation.reserved10 = 0;
-    operation.result = WindowStatusResult(0);
+    WindowStatusOperationResult operation(0);
     WindowStatusResult result(FUN_003550f4(&content->size, 0xE5C, id, 2, 2, 0));
-    if (legacyResourceIdRemap(&result) < 0) {
+    if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
         jyoucyuGetTableEntry(0);
         operation.status = 100;
         operation.result = result;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps the 0xffffffff text color/0x6b in sl/r9 (set after the null check) and the switch flag in r1 */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 /* A content list entry: kind selects the frame style, flag adds the badge overlay, name is the displayed text. */
 struct ContentEntry {
@@ -26,7 +27,6 @@ void efctSetSpeed(f32 speed);
 EffectPlacement *FUN_001834a4(u32 table, u32 id);
 s32 FUN_004038e0(u32 unused, u32 kind);
 void drawSetColorFromRGBA8(u32 rgba);
-void FUN_001835b4(s32 category, s32 group, s32 id, s32 x, s32 y, s32 index);
 void FUN_00183bb0(void);
 s32 libc_strcmp(const char *a, const char *b);
 void gameGetPlayerData(void);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: composite placement draw uses different stack packet and loop register allocation. */
+/* NON_MATCHING: loop register allocation differs (flags in r6, packet stored as two stm pairs, table reloaded into lr); result-1 spill now matches. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SpritePartPlacement {
@@ -27,11 +27,11 @@ struct SpritePartDraw {
 typedef char SpritePartPlacementSizeCheck[sizeof(SpritePartPlacement) == 0x14 ? 1 : -1];
 extern "C" {
 TexSprite *texTableFindNode(u32 table, u32 sprite);
-SpriteDrawFile *asdTMTexTableCallFileA(u32 table, s32 combinedId);
 s32 FUN_002af63c(SpriteDrawFile *file, TexSprite *sprite, SpritePartDraw *draw);
 
 u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z)
 {
+    u32 result = 1;
     TexSprite *sprite = texTableFindNode(table, spriteId);
     if (!sprite)
         return 0;
@@ -42,7 +42,7 @@ u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z)
         s32 partX = part.x + x;
         s32 partY = part.y + y;
         s32 partZ = part.z + z;
-        SpriteDrawFile *file = asdTMTexTableCallFileA(table, combinedId);
+        SpriteDrawFile *file = reinterpret_cast<SpriteDrawFile *>(asdTMTexTableCallFileA(table, combinedId));
         TexSprite *frame = *file->sprites + combinedId % 1000;
         const SpriteFrameAnchor *anchor = reinterpret_cast<const SpriteFrameAnchor *>(frame->frames);
         SpritePartDraw draw;
@@ -68,6 +68,6 @@ u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z)
         }
         FUN_002af63c(file, frame, &draw);
     }
-    return 1;
+    return result;
 }
 }

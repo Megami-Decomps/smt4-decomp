@@ -1,6 +1,7 @@
 /* NON_MATCHING: repeated key resolution keeps separate record/key registers, rematerializes the model limit, and emits strd rather than retail coordinate stm. */
 #include "addon/aocMain.h"
 #include "gamedata/DevilModel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct TextureKey {
@@ -11,7 +12,6 @@ struct TextureKey {
 
 extern "C" {
 DevilModelOverride* dataTable00FindById(u16 id);
-s32 asdTMTexTableNodeIsLoaded(u32 table, s32 node);
 s32 recordPrepareLinkedOwner(AocSystem*, u32 table, s32 node);
 void FUN_002ae9ec(u32 kind, u32 table, u32 file, s32 x, s32 y, u32 layer);
 void FUN_00388eb4(AocSystem*, s32 id, u32 kind, s32 node, s32 x, s32 y, u32 layer);

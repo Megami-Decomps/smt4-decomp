@@ -3,9 +3,9 @@
 #include "shard/Sys44de28.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 s32 FUN_001c8e28(u32 handle);

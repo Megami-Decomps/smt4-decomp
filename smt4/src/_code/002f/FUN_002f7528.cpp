@@ -9,6 +9,11 @@ BtlState *btlGetMainState(void);
 BtlUnitEntry *btlMainFindActiveEntry(BtlState *battle);
 void scrSetResult(s32 result);
 
+static inline bool valueKindIsZeroOrTwo(u16 value)
+{
+    return (value & 0xFC00) == 0 || value >> 10 == 2;
+}
+
 // Report whether a group member or the active entry has a value of encoded kind zero or two.
 u32 FUN_002f7528(void)
 {
@@ -20,22 +25,17 @@ u32 FUN_002f7528(void)
     for (s32 index = start; index < start + count; ++index) {
         BtlUnitEntry *entry = &btlGetMainState()->units[index];
         u32 flags = entry->flags;
-        if ((flags & 0x10) == 0 && (flags & 1) != 0 && (flags & 0x40) == 0) {
-            u16 value = entry->values[valueIndex];
-            if ((value & 0xFC00) == 0 || value >> 10 == 2) {
-                scrSetResult(1);
-                return 1;
-            }
+        if ((flags & 0x10) == 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
+            valueKindIsZeroOrTwo(entry->values[valueIndex])) {
+            scrSetResult(1);
+            return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         BtlUnitEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL) {
-            u16 value = entry->values[valueIndex];
-            if ((value & 0xFC00) == 0 || value >> 10 == 2) {
-                scrSetResult(1);
-                return 1;
-            }
+        if (entry != NULL && valueKindIsZeroOrTwo(entry->values[valueIndex])) {
+            scrSetResult(1);
+            return 1;
         }
     }
     scrSetResult(0);

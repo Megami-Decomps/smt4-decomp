@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelState.h"
 
 /* The information window's draw view. */
@@ -27,7 +28,6 @@ s32 FUN_002c5d80(u32 preset, u32 index);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 void *FUN_002bf4f8(u32 group, u32 image);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void FUN_002b75ec(u32 text, s32 x, s32 y, s32 layer, f32 scale, s32 mode, s32 index);

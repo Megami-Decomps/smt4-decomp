@@ -1,4 +1,3 @@
-/* NON_MATCHING: register naming only: retail keeps the status block in r4 and the list pointer (add r0; mov r5, r0) in r5; the build swaps them. */
 #include "status/StatusDown.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 
@@ -33,7 +32,6 @@ void FUN_0037dfb0(u32 argA, u32 argB)
 {
     StatusDownStateA *status = g_statusDown;
     u32 previous;
-    int i;
 
     status->selection = argA;
     *reinterpret_cast<u32 *>(status->unk658) = argB;
@@ -41,7 +39,7 @@ void FUN_0037dfb0(u32 argA, u32 argB)
     FUN_002a4964(statusDownGetSelectionList(status), objectApplyIfUnblocked(statusDownGetSelectionList(status)) - 1);
     status->inventoryDirty = 1;
     status = g_statusDown;
-    for (i = 0; i < status->touchRegionCount; i++) {
+    for (int i = 0; i < status->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }
     status->touchRegionCount = 0;

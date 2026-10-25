@@ -4,7 +4,7 @@ extern "C" {
 extern GlobalState DAT_005b3fa8;
 extern u32 DAT_005b3f9c;
 extern u8 entry;
-void FUN_002fd02a(void *object);
+void _ZN9Obj2fd02aD1Ev(void *object);
 void FUN_0042d200(void *object);
 s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
@@ -15,6 +15,6 @@ void FUN_0050df54(void)
     __aeabi_atexit(&DAT_005b3f9c, FUN_0042d200, &entry);
     DAT_005b3fa8.state = 0;
     DAT_005b3fa8.active = 1;
-    __aeabi_atexit(&DAT_005b3fa8, FUN_002fd02a, &entry);
+    __aeabi_atexit(&DAT_005b3fa8, _ZN9Obj2fd02aD1Ev, &entry);
 }
 }

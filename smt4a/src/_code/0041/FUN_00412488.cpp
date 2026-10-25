@@ -1,13 +1,13 @@
 /* NON_MATCHING: selected navigator and battle-state pointers take swapped r4/r5 registers. */
 #include "battle/btlMain.h"
 #include "gamedata/UnitStatInitialization.h"
+#include "util/CalleeContracts.h"
 extern "C" {
 InitializedUnitStatsA *FUN_003e4d68(u32 slot);
 s32 FUN_00187168(InitializedUnitStatsA *unit);
 InitializedUnitStatsA *saveSlotFindSelected(void);
 u32 lcgRandomRange(u32 maximum);
 BtlMainStateA *btlGetMainState(void);
-u32 FUN_0019acdc(u16 category, u32 kind);
 void FUN_003f1b3c(BtlMainStateA *state, u32 message, s32 kind, u32 *text, u32 *color);
 void FUN_0047f4cc(u32 color, f32 red, f32 green, f32 blue);
 void infoWinSetText(u32 window, u32 text);

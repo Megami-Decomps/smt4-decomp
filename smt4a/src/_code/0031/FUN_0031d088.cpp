@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps a second copy of the work pointer (`mov r7, r6`, read for jobStop)
  * and so saves r9/sl; everything else matches. */
 #include "shard/W5_W5Match6_CallbackController.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ void jobStop(u32 job, s32 arg);
 void ifTouchRegionRemove(void);
 void asdMemFree(void *block);
 void asdMemFreeSlot(void *slot);
-s32 asdTMTexTableNodeIsLoaded(s32 table, s32 node);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void asdTMTexTableFreeEntry(s32 table);
 void asdOperatorDelete(void *block);

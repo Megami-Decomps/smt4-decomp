@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00187114` (_code @ 0x187114, 0x1408 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
-int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(...);
@@ -84,7 +84,6 @@ extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */

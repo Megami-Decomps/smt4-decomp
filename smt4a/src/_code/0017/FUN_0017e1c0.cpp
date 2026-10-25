@@ -24,7 +24,7 @@ struct LockedList {
 /* Unlinks `node` from the circular list under the list's lock and clears the node. */
 void FUN_0017e1c0(LockedList *list, ListNode *node)
 {
-    ScopedCriticalLock lock(list->lock);
+    ScopedCriticalLock lock(&list->lock);
     if (node->prev == node) {
         list->head = NULL;
     } else {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036dff4` (_code @ 0x36dff4, 0xdfc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_0018098c(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int FUN_00185dd4(...);
 int FUN_001f3eec(...);
 int FUN_001f3f34(void);
@@ -44,7 +44,6 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_0018098c. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185dd4. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f3eec. */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc folds the entry adjustment into a negative STRB offset instead of retail's separate index arithmetic. */
 #include "shard/Block61a470.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 
@@ -14,8 +13,10 @@ void FUN_00123398(s32 index)
     if (index == -1) {
         pool->unk3C = 1;
     } else {
-        GraphicsPoolEntry *entries = (GraphicsPoolEntry *)pool->entries;
-        entries[index - 1].dirty = 1;
+        /* The dirty flag is the second byte of entry `index - 1`. */
+        s32 offset = (index - 1) * sizeof(GraphicsPoolEntry) + 1;
+        u8 *bytes = (u8 *)pool->entries;
+        bytes[offset] = 1;
     }
 }
 

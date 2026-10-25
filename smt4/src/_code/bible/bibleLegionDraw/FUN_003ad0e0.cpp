@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation debug-source hook is absent; resource packing and saved registers differ. */
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 struct LegionDrawState {
@@ -36,7 +37,6 @@ extern LegionDrawGlobals g_countdown;
 extern const u8 DAT_004023c4[];
 extern const u8 DAT_004023e8[];
 extern const u8 DAT_00402400[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s16 randNextInRange(u32 maximum);
 void memClear(void *memory, u32 size);
 u32 FUN_003ac480();

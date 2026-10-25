@@ -2,6 +2,7 @@
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct NpcPortraitSourceView {
     u8 unk00[0x22];
@@ -11,7 +12,6 @@ struct NpcPortraitSourceView {
 extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 NpcPortraitSourceView *dataTable25FindById(s32);
 s32 FUN_002c1d5c();

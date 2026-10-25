@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail derives the work pointer as texture-base - 24 (one pool word, two ldr); here the struct of globals is read with a post-incremented ldr. Everything else (switch layout, texture table walk, interpolation calls) matches. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct BlinkFadeWork {
     u32 job;
@@ -22,7 +23,6 @@ struct EventEffectGlobals {
 extern EventEffectGlobals g_eventEffect;
 s32 lerpIntSplitClamped(s32 start, s32 end, s32 duration, s32 frame);
 f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_002c1d5c(void);
 void FUN_00287728(s32 mode);
 

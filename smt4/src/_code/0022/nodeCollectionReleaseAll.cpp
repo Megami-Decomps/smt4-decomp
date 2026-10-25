@@ -4,7 +4,7 @@ extern "C" {
 
 int nodeTreeReleaseGroup(u32 item);
 int btlItemGroupRelease(u32 item);
-int FUN_00211c90(u32 item);
+int nodeReleaseOwnedItemsAndSelf(u32 item);
 int nodeTreeReleaseItemClearOwner(u32 item);
 
 typedef struct Collection {
@@ -38,7 +38,7 @@ void nodeCollectionReleaseAll(Collection *collection)
         i = 0;
         if (i < collection->countB) {
             do {
-                FUN_00211c90(collection->itemsB[i]);
+                nodeReleaseOwnedItemsAndSelf(collection->itemsB[i]);
                 i++;
             } while (i < collection->countB);
         }

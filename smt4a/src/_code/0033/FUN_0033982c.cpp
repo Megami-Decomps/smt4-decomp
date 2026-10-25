@@ -9,7 +9,7 @@ int FUN_001bc124(void);
 int mathAngleDeltaDegrees(void);
 int mapIfStart(...);
 int FUN_0030250c(void);
-int FUN_0033abb4(void);
+float FUN_0033abb4(float, float);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -300,7 +300,7 @@ void FUN_0033982c(void)
 LAB_00339bb4:
     temp_v15 = 12.0f;
     temp_v16 = *(float *)(g_lmapView + 0x18);
-    FUN_0033abb4();
+    FUN_0033abb4(*(float *)(g_lmapView + 0x18), *(float *)(g_lmapView + 0xc0));
     temp_v2 = g_lmapView;
     if (12.5f >= temp_v16) {
       *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapView + 0xc0);

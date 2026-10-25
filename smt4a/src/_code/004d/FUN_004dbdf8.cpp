@@ -2,6 +2,7 @@
 /* Counts unlocked content demons that meet their save requirement and availability test. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_ContentWordList.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 void *gameGetSlotTable(void);

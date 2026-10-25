@@ -1,9 +1,9 @@
 #include "shard/Shard004B.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
-extern void asdTMTexTableFreeEntry(s32 index);
 
 void freeTexEntry1F(void)
 {

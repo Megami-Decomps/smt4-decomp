@@ -1,5 +1,6 @@
 /* NON_MATCHING: one instruction: the render-stack push computes the new slot address into ip before the load of the old top; retail does it after the load into r3. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 struct SlotSprite {
     /* 0x00 */ u8 unk00[8];
@@ -22,7 +23,6 @@ void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 SlotSprite *FUN_001834a4(u32 group, u32 image);
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
-void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 
 // Draw the marker ring: nine slot sprites, then the highlight pairs that rotate around it.
 void FUN_0041c108(MarkerRing *ring)

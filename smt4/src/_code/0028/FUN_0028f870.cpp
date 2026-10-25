@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc builds the "held" sprite ids with ldrne instead of retail orrne x,x,x asr 9, and hoists the render-state constants (3/0) differently; rest identical */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ s32 ifTouchGetSelectionModeForRegion(s32 region);
 s32 FUN_0029ee54(u32 list);
 s32 FUN_0029d644(u32 list);
 s32 FUN_0029efc0(u32 list);
-void FUN_002bf288(s32 a, s32 bank, s32 sprite, s32 x, s32 y, s32 b);
 BankSprite *FUN_002bf4f8(s32 bank, s32 sprite);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);

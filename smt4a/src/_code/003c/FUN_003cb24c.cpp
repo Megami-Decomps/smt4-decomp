@@ -1,11 +1,18 @@
 /* NON_MATCHING: VFP register allocation and the scheduling of the per-vertex color stores differ from retail. */
 #include "common.h"
-#include "gfx/RenderSubmission.h"
 
 extern "C" {
 
 /* One RGBA texel of a vertex strip, written from a packed word through its byte channels. */
-typedef RenderSubmissionColor StripColor;
+union StripColor {
+    u32 value;
+    struct {
+        u32 red : 8;
+        u32 green : 8;
+        u32 blue : 8;
+        u32 alpha : 8;
+    } channels;
+};
 
 static __inline void stripColorSet(StripColor *color, u32 word)
 {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the entry's two mask words separately (ldr/ldr, found entry recomputed after the loop) rather than with ldm; register allocation differs. */
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/BattleFlagMasks.h"
 
 struct EntryWords {

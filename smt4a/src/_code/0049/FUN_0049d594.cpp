@@ -1,12 +1,12 @@
 /* NON_MATCHING: explicit states restore the retail jump table and named selection values restore field-load order; outgoing image arguments and speed/layer scheduling still differ. */
 #include "ui/UiSpriteState.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void efctSetSpeed(f32 scale);
 f32 vec2GetSpeed(const void *object);
-void FUN_001835b4(u32 type, u32 texture, s32 image, s32 x, s32 y, s32 layer);
 void FUN_00344cd0(void *controller, s32 x, s32 y, u32 texture,
     s32 firstImage, s32 secondImage, s32 thirdImage, s32 fourthImage,
     s32 fifthImage, s32 sixthImage, s32 seventhImage,

@@ -8,10 +8,10 @@ extern "C" {
 int dataTable8FindRecord(void);
 int FUN_003e8bb0(unsigned int [112], int);
 int FUN_004dffe4(int *);
-int FUN_004e5a90(...);
+int btlActionMarkRandomStatusTarget(...);
 int FUN_004e5b5c(...);
 int FUN_004e6ed8(int *, int);
-int FUN_004e6fb0(int *);
+int btlAiMarkLowestHpTarget(int *);
 int FUN_004e7c04(int *, unsigned int);
 void btlSelectMinimumPriorityTarget(BtlMainStateA *const *);
 int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int [2], int *);
@@ -38,7 +38,7 @@ extern unsigned int DAT_00571168; /* 0x571168 */
 extern unsigned int DAT_0057116c; /* 0x57116c */
 extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
-extern unsigned int DAT_00571190; /* 0x571190 */
+extern unsigned int g_btlTargetableMask; /* 0x571190 */
 extern int DAT_00571194; /* 0x571194 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -46,10 +46,10 @@ extern int lcgRandomRange(short);
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004dffe4. */
-/* Supplied declaration required: FUN_004e5a90. */
+/* Supplied declaration required: btlActionMarkRandomStatusTarget. */
 /* Supplied declaration required: FUN_004e5b5c. */
 /* Supplied declaration required: FUN_004e6ed8. */
-/* Supplied declaration required: FUN_004e6fb0. */
+/* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: btlActionClassifyTargetSide. */
 /* Supplied declaration required: FUN_004e9ae8. */
@@ -142,7 +142,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
   }
   FUN_004e7c04(param_1,temp_v11[0]);
   temp_v6 = DAT_00571194;
-  temp_v8 = DAT_00571190;
+  temp_v8 = g_btlTargetableMask;
   if (temp_v12 == 1 || temp_v12 == 2) {
     btlUnitMarkTargetCandidates(param_1,temp_v11[0]);
     return;
@@ -158,7 +158,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     FUN_004e5b5c(param_1);
     break;
   case 3:
-    FUN_004e6fb0(param_1);
+    btlAiMarkLowestHpTarget(param_1);
     break;
   case 4:
     FUN_004e6ed8(param_1,1);
@@ -171,7 +171,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     puVar14 = puVar7 + 0x98;
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      temp_v9 = (*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0;
+      temp_v9 = (*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0;
       temp_v4 = 0;
       temp_v6 = 0;
       if (temp_v9) {
@@ -200,7 +200,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     puVar14 = puVar7 + 0x98;
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      temp_v9 = (*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0;
+      temp_v9 = (*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0;
       temp_v4 = 0;
       temp_v6 = 0;
       if (temp_v9) {
@@ -231,7 +231,7 @@ joined_r0x004deccc:
     }
     break;
   case 7:
-    FUN_004e5a90(param_1,param_3);
+    btlActionMarkRandomStatusTarget(param_1,param_3);
     break;
   case 8:
     puVar7 = *(unsigned int **)(*param_1 + 0x1ffc);
@@ -240,7 +240,7 @@ joined_r0x004deccc:
     puVar14 = puVar7 + 0x9d;
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (((unsigned int)(unsigned short)*puVar14 & (1 << (param_3 & 0xff))) == 0)) {
         temp_v13[temp_v3 + 1] = (int)*psVar9;
         temp_v3 = temp_v3 + 1;
@@ -263,7 +263,7 @@ joined_r0x004deccc:
     psVar9 = (short *)((int)puVar14 + 0x6e);
     puVar7 = temp_v13 + 1;
     do {
-      if (((*puVar14 & DAT_00571190) != 0 || (puVar14[1] & DAT_00571194) != 0) &&
+      if (((*puVar14 & g_btlTargetableMask) != 0 || (puVar14[1] & DAT_00571194) != 0) &&
          (((unsigned int)(unsigned short)*puVar6 & (1 << (param_3 & 0xff))) != 0)) {
         puVar7[temp_v3] = (int)*psVar9;
         temp_v3 = temp_v3 + 1;
@@ -285,7 +285,7 @@ joined_r0x004deccc:
     puVar14 = puVar7 + 0x9d;
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (((unsigned int)(unsigned short)*puVar14 & (1 << (param_3 & 0xff))) == 0)) {
         temp_v13[temp_v3 + 1] = (int)*psVar9;
         temp_v3 = temp_v3 + 1;
@@ -306,7 +306,7 @@ joined_r0x004deccc:
     temp_v3 = 0x6d;
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      if (((puVar7[1] & DAT_00571194) != 0 || (*puVar7 & DAT_00571190) != 0) &&
+      if (((puVar7[1] & DAT_00571194) != 0 || (*puVar7 & g_btlTargetableMask) != 0) &&
          ((puVar7[1] & DAT_00571174) != 0 || (*puVar7 & DAT_00571170) != 0)) {
         temp_v13[temp_v5 + 1] = (int)*psVar9;
         temp_v5 = temp_v5 + 1;
@@ -327,7 +327,7 @@ joined_r0x004deccc:
     temp_v3 = 0x6d;
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      if (((puVar7[1] & DAT_00571194) != 0 || (*puVar7 & DAT_00571190) != 0) &&
+      if (((puVar7[1] & DAT_00571194) != 0 || (*puVar7 & g_btlTargetableMask) != 0) &&
          ((puVar7[1] & DAT_00571174) == 0 && (*puVar7 & DAT_00571170) == 0)) {
         temp_v13[temp_v5 + 1] = (int)*psVar9;
         temp_v5 = temp_v5 + 1;
@@ -348,7 +348,7 @@ joined_r0x004deccc:
     puVar5 = (unsigned short *)((int)puVar7 + 0x166);
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) && (*puVar5 == param_3)
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) && (*puVar5 == param_3)
          ) {
         temp_v13[temp_v3 + 1] = (int)*psVar9;
         temp_v3 = temp_v3 + 1;
@@ -370,7 +370,7 @@ joined_r0x004deccc:
     puVar5 = (unsigned short *)((int)puVar7 + 0x166);
     psVar9 = (short *)((int)puVar7 + 0x6e);
     do {
-      temp_v10 = (*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0;
+      temp_v10 = (*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0;
       temp_v8 = 0;
       if (temp_v10) {
         temp_v8 = (unsigned int)*puVar5;
@@ -401,7 +401,7 @@ joined_r0x004deccc:
     do {
       puVar7 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v3 * 0x408);
       temp_v4 = temp_v3;
-      if ((DAT_00571190 & *puVar7) != 0 || (puVar7[1] & DAT_00571194) != 0) {
+      if ((g_btlTargetableMask & *puVar7) != 0 || (puVar7[1] & DAT_00571194) != 0) {
         temp_v7 = btlUnitGet(param_1);
         temp_v8 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1ffc) + temp_v3 * 0x408 + 0x6e);
         if (*(unsigned short *)(temp_v7 + 0x2c) != temp_v8) {
@@ -422,7 +422,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 == 3)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -440,7 +440,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 == 4)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -458,7 +458,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 == 1)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -476,7 +476,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 == 2)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -494,7 +494,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 != 3)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -512,7 +512,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 != 4)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -530,7 +530,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 != 1)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -548,7 +548,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 != 2)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -568,7 +568,7 @@ joined_r0x004deccc:
     psVar9 = (short *)((int)puVar14 + 0x6e);
     puVar7 = temp_v13 + 1;
     do {
-      if (((*puVar14 & DAT_00571190) != 0 || (puVar14[1] & DAT_00571194) != 0) && (0 < (int)*puVar6)
+      if (((*puVar14 & g_btlTargetableMask) != 0 || (puVar14[1] & DAT_00571194) != 0) && (0 < (int)*puVar6)
          ) {
         puVar7[temp_v3] = (int)*psVar9;
         temp_v3 = temp_v3 + 1;
@@ -591,7 +591,7 @@ joined_r0x004deccc:
     psVar9 = (short *)((int)puVar14 + 0x6e);
     puVar7 = temp_v13 + 1;
     do {
-      if (((*puVar14 & DAT_00571190) != 0 || (puVar14[1] & DAT_00571194) != 0) &&
+      if (((*puVar14 & g_btlTargetableMask) != 0 || (puVar14[1] & DAT_00571194) != 0) &&
          (0x7fffffff < *puVar6)) {
         puVar7[temp_v3] = (int)*psVar9;
         temp_v3 = temp_v3 + 1;
@@ -613,7 +613,7 @@ joined_r0x004deccc:
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
       temp_v8 = puVar7[1] & DAT_00571194;
-      if ((*puVar7 & DAT_00571190) != 0 || temp_v8 != 0) {
+      if ((*puVar7 & g_btlTargetableMask) != 0 || temp_v8 != 0) {
         temp_v0 = *(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6);
         temp_v10 = temp_v0 >> 10 != 3;
         temp_v9 = temp_v0 >> 10 != 4;
@@ -638,7 +638,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (temp_v7 = temp_v3 * 0x408 + temp_v4,
          (int)param_3 <= *(int *)(temp_v7 + 0x25c) - *(int *)(temp_v7 + 600))) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
@@ -677,7 +677,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(char *)(temp_v3 * 0x408 + temp_v4 + param_3 + 0x2e0) != '\0')) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -696,7 +696,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar14 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar14 & DAT_00571190) != 0 || (puVar14[1] & DAT_00571194) != 0) &&
+      if (((*puVar14 & g_btlTargetableMask) != 0 || (puVar14[1] & DAT_00571194) != 0) &&
          (temp_v0 = *(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6),
          (temp_v0 & 0xfc00) == 0 || temp_v0 >> 10 == 2)) {
         puVar7[temp_v5] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
@@ -715,7 +715,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 == 5)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -733,7 +733,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          (*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) >> 10 != 5)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -751,7 +751,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          ((*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) & 0xfc00) == 0)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;
@@ -769,7 +769,7 @@ joined_r0x004deccc:
     do {
       temp_v4 = *(int *)(*param_1 + 0x1ffc);
       puVar7 = (unsigned int *)(temp_v4 + temp_v3 * 0x408);
-      if (((*puVar7 & DAT_00571190) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
+      if (((*puVar7 & g_btlTargetableMask) != 0 || (puVar7[1] & DAT_00571194) != 0) &&
          ((*(unsigned short *)(temp_v3 * 0x408 + temp_v4 + param_3 * 2 + 0x2b6) & 0xfc00) != 0)) {
         temp_v13[temp_v5 + 1] = (int)*(short *)(temp_v4 + temp_v3 * 0x408 + 0x6e);
         temp_v5 = temp_v5 + 1;

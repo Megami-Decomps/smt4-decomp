@@ -1,22 +1,16 @@
-/* NON_MATCHING: registers differ (the mask constant 1 is shared with the return value; retail keeps them apart). */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-typedef struct Player {
-    /* 0x0000 */ u8 unk0000[0x49BC];
-    /* 0x49BC */ u32 flags;
-} Player;
-
-Player *btlGetMainState(void);
 u32 scrGetArg(int index);
 
 /* Script command: sets flag bit (script argument 0) in the current player's flags. */
-u32 FUN_002e4320(int firstArg)
+u32 FUN_002e4320(void)
 {
-    u32 bit = scrGetArg(firstArg);
+    u32 bit = scrGetArg(0);
 
-    btlGetMainState()->flags |= 1 << (bit & 0xff);
+    btlGetMainStateExt()->flags49BC |= 1 << (bit & 0xff);
     return 1;
 }
 

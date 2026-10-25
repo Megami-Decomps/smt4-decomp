@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 BtlMainStateA *btlGetMainState(void);
 
 /* Script query: reports whether an eligible battle entry with id argument 0 has status bit argument 1 set. */

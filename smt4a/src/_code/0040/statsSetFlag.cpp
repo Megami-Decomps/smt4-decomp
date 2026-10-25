@@ -1,4 +1,4 @@
-/* NON_MATCHING: byte-flag address formation and mask allocation differ from retail. */
+/* NON_MATCHING: only the position of `cmp enabled` differs (retail issues it right after the mask and before the load; built after the writeback load). */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" StatsFlagView *gameDataBlocksGetStats(void);
@@ -8,9 +8,11 @@ extern "C" void statsSetFlag(u32 index, bool enabled)
 {
     if (index >= 32)
         return;
-    StatsFlagView *stats = gameDataBlocksGetStats();
+    u8 *flags = gameDataBlocksGetStats()->flags;
+    u8 *byte = &flags[index >> 3];
+    u8 mask = 1 << (index & 7);
     if (enabled)
-        stats->flags[index >> 3] |= (u8)(1 << (index & 7));
+        *byte |= mask;
     else
-        stats->flags[index >> 3] &= ~(u8)(1 << (index & 7));
+        *byte &= ~mask;
 }

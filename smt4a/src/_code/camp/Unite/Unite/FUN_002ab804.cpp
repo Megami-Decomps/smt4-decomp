@@ -9,7 +9,7 @@ extern "C" {
 int dataTableGetCount(...);
 int dataTableGetEntries(...);
 
-int FUN_0013c174(...);
+int asdLoadFileWithSize(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
@@ -71,7 +71,7 @@ extern unsigned char DAT_0052f034; /* 0x52f034 */
 extern int g_handleRegistry; /* 0x56fcc0 */
 extern int *g_unite; /* 0x57f290 */
 
-/* Supplied declaration required: FUN_0013c174. */
+/* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
@@ -263,7 +263,7 @@ void FUN_002ab804(void)
     temp_v7 = 0;
     FUN_0031416c(0,0,0,0,0,0,0xff,0,0,0xff);
   }
-  FUN_0013c174(&LAB_002abfa0,temp_v12,1);
+  asdLoadFileWithSize(&LAB_002abfa0,temp_v12,1);
   temp_v1 = 0x48;
   FUN_00178b04(0x48,&LAB_002abbd8,0x1d13);
   if (temp_v1 != 0) {

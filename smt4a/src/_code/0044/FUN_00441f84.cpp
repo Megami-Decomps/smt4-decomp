@@ -17,9 +17,9 @@ extern unsigned char DAT_00589380; /* 0x589380 */
 extern int DAT_00589384; /* 0x589384 */
 extern unsigned int DAT_00589388; /* 0x589388 */
 extern unsigned int DAT_005c0a98; /* 0x5c0a98 */
-extern unsigned int DAT_0062d28c; /* 0x62d28c */
-extern unsigned int DAT_0062d298; /* 0x62d298 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern unsigned int g_moduleDeferredCriticalSection0; /* 0x62d28c */
+extern unsigned int g_moduleDeferredCriticalSection1; /* 0x62d298 */
+extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 extern unsigned int FUN_0016f864(void);
 extern unsigned int FUN_0016f988(unsigned int *, unsigned char *, unsigned int, unsigned int);
@@ -43,15 +43,15 @@ unsigned int FUN_00441f84(void)
   unsigned char temp_v4 [8];
   unsigned int temp_v5;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
   temp_v0 = FUN_00442280();
   if (temp_v0 != 0) {
     temp_v2 = 0xd8a0c7f9;
   }
   else {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+    nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
     temp_v3 = DAT_00589384 == 0;
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+    nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
     if (!temp_v3) {
       temp_v2 = 0;
       DAT_00589384 = DAT_00589384 + 1;
@@ -64,12 +64,12 @@ unsigned int FUN_00441f84(void)
         if (-1 < (int)temp_v2) {
           DAT_00589384 = DAT_00589384 + 1;
           FUN_00442800(0xb0101c8);
-          nn_os_CriticalSection_Initialize(&DAT_0062d28c);
+          nn_os_CriticalSection_Initialize(&g_moduleDeferredCriticalSection0);
           DAT_00589380 = 0;
-          nn_os_CriticalSection_Initialize(&DAT_0062d298);
-          nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+          nn_os_CriticalSection_Initialize(&g_moduleDeferredCriticalSection1);
+          nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
           temp_v3 = DAT_00589384 == 0;
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+          nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
           if ((temp_v3) && (temp_v0 = FUN_00442280(), temp_v0 == 0)) {
             temp_v2 = 0xd8a0c7f8;
           }
@@ -83,7 +83,7 @@ unsigned int FUN_00441f84(void)
       }
     }
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
   return temp_v2;
 }
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps &field of each owned pointer in a saved register (add rN, work, #off) and the zero in r9, so every slot-clear store goes through that register; ours addresses the fields directly off the work pointer. */
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A loaded script and the two data files it ran from. */
 struct ScriptResources {
@@ -29,7 +30,6 @@ extern "C" {
 void placeWinRelease(void);
 void asdMemFreeSlot(void *slot);
 void asdTMTexTableReleaseNode(s32 id, s32 flag);
-void asdTMTexTableFreeEntry(s32 id);
 void FUN_002a46d0(void *scene);
 void FUN_0014ca50(void *scene);
 void FUN_0014ca58(void *scene);

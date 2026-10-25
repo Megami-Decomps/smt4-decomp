@@ -1,5 +1,6 @@
-/* NON_MATCHING: static-frame selection adds a move, factor copying uses integer LDM/STM, and packing retains VFP results/shift-based bytes instead of retail reloads/REV getters; -O2 candidate for lifetimes/copy. */
+/* NON_MATCHING: frame selection (retail `adds rX, rY, #0` + ldrne, built `cmp` + moveq) and the packed-color reload (retail one vldmia {s1-s4} after the product stores, built vldr + vldmia) differ; the VFP factor copy, product multiply and REV byte getters match. */
 #include "shard/W6_W6Match8_ColorQuadEffect.h"
+#include "gfx/EffectColorMath.h"
 
 static __inline void colorQuadSetRect(ColorQuadEffectOutput *output,
                                      f32 x, f32 y, f32 width, f32 height)
@@ -21,7 +22,12 @@ void colorQuadEffectUpdateLifetimeColor(ColorQuadEffectJob *job)
     ColorQuadEffectResource *resource = job->resource;
     ColorQuadEffectOutput *output = &resource->output;
     s32 duration = resource->duration;
-    s32 frame = duration != 0 ? job->frame : 0;
+    s32 frame;
+    if (duration == 0) {
+        frame = 0;
+    } else {
+        frame = job->frame;
+    }
     if (duration == 0 || frame == 0) {
         colorQuadSetRect(output, 0.0f, 0.0f, 400.0f, 240.0f);
         output->renderTag = resource->weight.renderTag;
@@ -33,17 +39,13 @@ void colorQuadEffectUpdateLifetimeColor(ColorQuadEffectJob *job)
     u32 sampledColor = FUN_0038136c(resource->colorCurve, &resource->weight,
                                    frame, duration);
     renderCtxSetPackedColor(job->color);
-    DAT_006471dc.factor = DAT_006471dc.color;
+    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
     renderCtxSetPackedColor(sampledColor);
-    DAT_006471dc.color.red *= DAT_006471dc.factor.red;
-    DAT_006471dc.color.green *= DAT_006471dc.factor.green;
-    DAT_006471dc.color.blue *= DAT_006471dc.factor.blue;
-    DAT_006471dc.color.alpha *= DAT_006471dc.factor.alpha;
-    RgbaWord packed;
-    packed.word = screenEffectPackColor(DAT_006471dc.color);
-    output->color.r = packed.rgba.r;
-    output->color.g = packed.rgba.g;
-    output->color.b = packed.rgba.b;
-    output->color.a = packed.rgba.a;
+    effectColorMultiply(&DAT_006471dc.color, &DAT_006471dc.color, &DAT_006471dc.factor);
+    u32 packed = effectColorPack(DAT_006471dc.color);
+    output->color.r = __rev(packed) >> 24;
+    output->color.g = __rev(packed) >> 16;
+    output->color.b = __rev(packed) >> 8;
+    output->color.a = __rev(packed);
 }
 }

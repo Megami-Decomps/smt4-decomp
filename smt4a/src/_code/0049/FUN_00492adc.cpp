@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail vldr s3, [r0, #4] differs from recovered vldr s1, [r0, #4]. */
+/* NON_MATCHING: retail keeps the zero Y component as a literal-pool constant in the length (vmla with a pooled 0.0f) and loads s3 for unk04; recovered code materializes zero with mov/vmov. */
 #include "common.h"
 #include <math.h>
 

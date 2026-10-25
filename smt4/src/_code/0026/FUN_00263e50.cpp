@@ -2,6 +2,8 @@
 #include "gfx/LightRegistry.h"
 #include "classes/AsdAllocatorObject.h"
 #include "shard/S1GfxModel.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* An object with a virtual destructor in slot 0 that is handed back to the allocator it came from. */
 struct OwnedObject {
@@ -32,8 +34,6 @@ extern "C" {
 extern GfxModelState g_gfxSettings;
 
 void sceneTraverserVisit(u32 traverser, u32 root);
-void asdMemFreeNonNull(void *memory);
-void asdMemFree(void *memory);
 void nw_gfx_res_ResGraphicsFile_Cleanup(s32 *file);
 
 /* Destroys an object in an owned-object array and clears its slot. */

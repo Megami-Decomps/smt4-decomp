@@ -1,4 +1,5 @@
 #include "shard/Shard0033.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ s32 FUN_001692ac(s32 kind, s32 value);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 sprite, f32 scale);
 void efctSetSpeed(f32 alpha);
 f32 vec2GetSpeed(const void *object);
-void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, s32 mode);
 
 u32 FUN_0026c1a8(void)
 {

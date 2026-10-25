@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 /* Packs a kind, an enabled flag (0 for kind 1) and a 0-255 alpha into one word. */

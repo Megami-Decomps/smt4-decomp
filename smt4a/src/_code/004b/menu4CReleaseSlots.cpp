@@ -1,8 +1,8 @@
 #include "shard/Shard004B.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-extern u8 asdTMTexTableNodeIsLoaded(u32 group, s32 index);
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
 
 /* Releases flagged slots whose asdTMTexTableNodeIsLoaded entry is set; returns 1 when no slot pair has any flag left. */

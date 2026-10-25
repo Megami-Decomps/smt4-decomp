@@ -1,5 +1,6 @@
 /* NON_MATCHING: the render-state push/pop, the text buffer frame and the float constant registers differ from retail (233 vs 235 rows); the quest screen drawing is the same. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -37,7 +38,6 @@ s32 vec2GetYInt(void *vector);
 f32 vec2GetSpeed(const void *vector);
 void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 QuestLayout *FUN_001834a4(u32 group, u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
 u32 FUN_00156850(u16 category, s32 arg);

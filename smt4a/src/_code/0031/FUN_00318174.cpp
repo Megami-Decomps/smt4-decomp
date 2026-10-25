@@ -82,7 +82,7 @@ void animationEvaluateCallback(u32 object);
 void faderSetValue(u32 object);
 s32 jobIsValid(u32 job);
 void jobSavePositionSnapshot(u32 job);
-void FUN_003ae9d8(u32 job, s32 index);
+void bustupCutAnimAssignSlot(u32 job, s32 index);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Refreshes every sub-node of a node head, last to first. */
@@ -123,7 +123,7 @@ void FUN_00318174(s32 id, s32 easeKind, s32 frames)
         anim->dirty = 0;
         if (anim->id == CUT_ID_SPECIAL) {
             anim->savedJob = anim->jobs[0];
-            FUN_003ae9d8(0, 0);
+            bustupCutAnimAssignSlot(0, 0);
         }
         anim->state = CUT_STATE_IDLE_START;
         anim->offsetA = anim->side == 0 ? 0.0f : CUT_OFFSET;
@@ -181,13 +181,13 @@ void FUN_00318174(s32 id, s32 easeKind, s32 frames)
 
     if (anim->id != CUT_ID_SPECIAL) {
         if (anim->previousId == CUT_ID_SPECIAL)
-            FUN_003ae9d8(anim->savedJob, 0);
+            bustupCutAnimAssignSlot(anim->savedJob, 0);
         return;
     }
     anim->savedJob = anim->jobs[0];
-    FUN_003ae9d8(0, 1);
-    FUN_003ae9d8(0, 2);
-    FUN_003ae9d8(0, 3);
+    bustupCutAnimAssignSlot(0, 1);
+    bustupCutAnimAssignSlot(0, 2);
+    bustupCutAnimAssignSlot(0, 3);
 }
 
 } /* extern "C" */

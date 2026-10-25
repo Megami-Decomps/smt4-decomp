@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the VFP register of the 1.0f/steps quotient differs (retail s1, built s0). */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct FadeRates {
     f32 in;  // 0x00
@@ -18,7 +19,6 @@ extern "C" {
 
 s32 scrGetArg(u32 index);
 FadeJob *jobGetWork(u32 job);
-s32 FUN_00203d74(void);
 
 // Script command: set a job's fade rates from a step count (clamped to 4 while FUN_00203d74 reports true).
 u32 FUN_002e5478(void)

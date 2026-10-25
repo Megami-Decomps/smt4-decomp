@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 /* 1 when at least 9 of the 5 + 4 sprites of tables 0x14 and 0x15 are loaded. */
 u8 spriteTablesLoadedEnough(void)

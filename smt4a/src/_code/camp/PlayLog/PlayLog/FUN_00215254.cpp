@@ -3,6 +3,7 @@
 #include "classes/Obj4221a4.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct PlayLogPageA { u32 count; u32 values[50]; u32 details[25]; };
 struct PlayLogScreenViewA {
@@ -27,7 +28,6 @@ struct PlayLogPlayerViewA { u8 unk00[0x66]; u16 id; };
 extern "C" {
 extern PlayLogWorkA *g_playLog;
 extern const PlayLogDrawDefaultsA DAT_0052dd98;
-void *asdMemoryAllocTracked(u32 alignment, u32 size, u32 heap, u32 category, s32 clear);
 void sysMemClear(void *memory, u32 size);
 void asdTMTexTableLoadSprites(u32 table);
 void asdTMTexLoadMainHeap(u32 table, s32 node);

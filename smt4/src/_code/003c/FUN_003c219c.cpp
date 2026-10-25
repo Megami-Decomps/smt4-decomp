@@ -1,9 +1,9 @@
 /* NON_MATCHING: cached stat register assignment, weight summation scheduling, and result narrowing differ. */
 #include "gamedata/UnitStats.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void FUN_003eb068(void *);
-u32 randNextInRange(u16);
 
 /* Increment one weighted base stat; capped stats are removed from the distribution. */
 u32 FUN_003c219c(StatBlock *unit, u8 *weights)

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011a434` (_code @ 0x11a434, 0x658 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int cameraSetViewMatrix(int, unsigned char [84]);
 int renderCtxCalculateStereoParallax(int);
 int itemDrawCategoryBadge(...);
 int FUN_002be5a4(...);
-int FUN_002bf288(...);
 int FUN_002bf380(...);
 int efctSetSpeed(void);
 int mtx44Copy(...);
@@ -72,7 +72,6 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */

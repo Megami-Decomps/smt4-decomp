@@ -1,6 +1,7 @@
 /* Closes the play log screen: releases what it acquired and frees the work area. */
 #include "common.h"
 #include "camp/PlayLog/PlayLog.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int ifTouchRegionRemove(void);
 int asdMemFree(void *ptr);               /* heap free */
 int asdTMTexTableReleaseNode(int type, int index);
 int dataTableFree(int id);
-int asdTMTexTableFreeEntry(int type);
 
 extern PlayLogWorkA *g_playLog;
 

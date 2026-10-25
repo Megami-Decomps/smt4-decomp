@@ -1,9 +1,9 @@
 /* NON_MATCHING: recovered all float arguments and the 16-byte name buffer; initial bit extraction scheduling and suffix literal-pool order still differ. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void textFormatBuffer(char* output, const char* format, ...);
-u32 FUN_0014af98(void);
 u32 FUN_001628c0(const char* name, u32 volume, s32 category, s32 flags, float gain, float pitch);
 extern const char DAT_0052a96c[];
 extern const char DAT_0052a978[];

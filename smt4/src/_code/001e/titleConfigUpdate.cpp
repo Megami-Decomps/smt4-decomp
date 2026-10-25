@@ -1,11 +1,11 @@
 /* NON_MATCHING: ARMCC merges input/navigation tails and retains the configuration work in r4 rather than retail's r5. */
 #include "title/titleConfig.h"
 #include "font/SearchWin/RunWin.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
 extern TitleConfigValues g_titleConfigValues;
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_002bf818(const void *window);
 u16 FUN_002b8584(u32 group, u32 item);
 s32 FUN_0029efc0(const void *cursor);

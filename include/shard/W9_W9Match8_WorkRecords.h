@@ -7,6 +7,7 @@
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 #include "shard/S1GfxModel.h"
+#include "shard/TextureDrawPayload.h"
 
 /* Apocalypse task work allocated by FUN_0031ba34.
  * Descriptive field meanings are provisional; the allocation size is explicit. */
@@ -860,11 +861,6 @@ typedef char SequentialAnimationPrefixAOffsetsCheck[
     offsetof(SequentialAnimationPrefixA, progress) == 0x1014 &&
     offsetof(SequentialAnimationPrefixA, textureId) == 0x1020 &&
     sizeof(SequentialAnimationPrefixA) == 0x1024 ? 1 : -1];
-
-/* Eight opaque argument bytes; the VFP copy does not identify float data. */
-struct TextureDrawPayloadIV {
-    u32 words[2];
-};
 
 /* Observed prefix only; sizeof is not a recovered placement-record stride. */
 struct TexturePlacementPrefixIV {

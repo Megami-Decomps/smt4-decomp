@@ -1,8 +1,8 @@
 /* Tests whether the textures required by the current screen mode have loaded. */
 #include "ui/TextureLoadState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
 
 u32 menuAreModeTexturesLoaded(const TextureLoadState *state)
 {

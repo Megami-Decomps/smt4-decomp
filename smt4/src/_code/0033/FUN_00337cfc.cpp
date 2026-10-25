@@ -1,5 +1,6 @@
 /* NON_MATCHING: same instruction stream except the zero constant and the 0xfc00 mask swap r8/r9 and the last skillsB upper-six-bits update keeps its result in r2 (extra mov) in retail */
 #include "gamedata/PackedSkillSlot.h"
+#include "util/CalleeContracts.h"
 
 /* The persistent unit record the battle unit is built from. */
 struct SourceUnit {
@@ -52,7 +53,6 @@ struct BattleUnit {
 struct DevilRecord;
 
 extern "C" {
-s32 FUN_002b6ad0(void);
 u32 randomGetLowerTenBits(const SourceUnit *unit, u32 index);
 u32 randomGetUpperSixBits(const SourceUnit *unit, u32 index);
 u32 FUN_003c8538(u32 index);

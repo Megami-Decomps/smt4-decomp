@@ -1,15 +1,14 @@
 /* NON_MATCHING: draw offsets use ldrd instead of retail's ldm; color-path registers and decimal-formatter layout also differ. */
 #include "saveLoadUI/saveLoadUI.h"
+#include "shard/TextureDrawCall.h"
 #include "font/SearchWin/RunWin.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 alpha);
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
-void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 const MessageDrawPosition *FUN_001834a4(u32 group, u32 index);
-void FUN_001527d8(void *text, u32 color);
-void FUN_0025cc78(void *text, s32 x, s32 y, s32 depth);
 const SaveSlotPortraitResource *FUN_00184310(u32 portrait);
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 void *FUN_0019acdc(u32 id, u32 mode);
@@ -55,13 +54,13 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
         }
     }
     const MessageDrawPosition *position = FUN_001834a4(0x2E, 0x75);
-    FUN_001527d8(texts->name, nameColor);
-    FUN_0025cc78(texts->name, position->x + x, position->y + y, 0x66);
+    FUN_001527d8((u32)texts->name, nameColor);
+    FUN_0025cc78(texts->name, position->x + x, position->y + y, 0x66, 1.0f);
     if ((record->flags & 2) != 0) {
         position = FUN_001834a4(0x2E, 0x76);
         u32 color = record->style == 0 ? 0x006E0000 : 0x00F33700;
-        FUN_001527d8(texts->optional, color);
-        FUN_0025cc78(texts->optional, position->x + x, position->y + y, 0x66);
+        FUN_001527d8((u32)texts->optional, color);
+        FUN_0025cc78(texts->optional, position->x + x, position->y + y, 0x66, 1.0f);
     }
     FUN_001835b4(2, 0x2E, 0x5A, x, y, 0x66);
     if (record->portrait != 0) {

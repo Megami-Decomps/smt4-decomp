@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the +8 base adjust separate and loads through +0x14; built folds the constants into one pre-indexed load */
 #include "common.h"
 
 extern "C" {
@@ -17,7 +16,10 @@ typedef struct VBaseOwner {
 /* Returns the value of the target object located `baseOffset` bytes past the owner's base. */
 u32 FUN_00129020(VBaseOwner *owner)
 {
-    return ((VBaseTarget *)(owner->base + owner->baseOffset))->value;
+    s32 offset = owner->baseOffset;
+    u8 *base = owner->base;
+    VBaseTarget *target = (VBaseTarget *)(base + offset);
+    return target->value;
 }
 
 } /* extern "C" */

@@ -21,14 +21,14 @@ struct FlagListOwner {
 };
 
 extern "C" {
-void FUN_002f5eac(u32, u32);
+void stateSetBitFlag(u32, u32);
 
 // Clear each listed flag and activate state twelve.
 void FUN_003ab948(FlagListOwner *owner)
 {
     ListedFlags *list = &owner->list;
     for (s32 index = 0; index < list->count; ++index)
-        FUN_002f5eac(list->entries[index].flag, 0);
+        stateSetBitFlag(list->entries[index].flag, 0);
     owner->active = 1;
     owner->state = 0xc;
     owner->timer = 0;

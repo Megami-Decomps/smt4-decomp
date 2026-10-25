@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP register assignment and the packing of the vertex colour differ (retail loads the half-size with one vldmia into s17/s18 and keeps the shift in s19/s16); same loads, conversions and the two FUN_0019e3d0 quads. */
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* A loaded texture object: only its pixel size is read. */
@@ -54,7 +55,6 @@ extern RenderCtxA *g_renderCtx;
 QuadWork *jobGetWork(void);
 s32 FUN_00162ea4(void);
 s32 engineCleanupIsDone(void);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void FUN_0016c4b8(RenderCtxA *context, void *texture);
 void FUN_0019e3d0(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,

@@ -1,13 +1,12 @@
-/* NON_MATCHING: handle extraction and group-table load use different registers and instruction order. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" AsdProcessState g_asdProcess;
 
 static __inline AsdProcess* findProcess(u32 handle)
 {
+    AsdProcess* process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
     u32 id = handle & ASD_PROC_ID_MASK;
-    for (AsdProcess* process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
-         process != NULL; process = process->next) {
+    for (; process != NULL; process = process->next) {
         if (process->id == id)
             return process;
     }

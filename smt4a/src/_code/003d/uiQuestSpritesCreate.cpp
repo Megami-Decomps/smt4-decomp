@@ -1,10 +1,10 @@
 #include "shard/W5_W5Match7_UiQuest.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
 u32 asdLoadFileSyncDefault(const char *path);
 u32 spriteHandleCreate(u32 type);
-void FUN_001527d8(u32 sprite, u32 color);
 void positionStateSet(u32 sprite, s32 mode, u32 color, f32 value);
 
 /* Loads the quest messages and creates the quest screen's four sprites (white, teal, white, white) each tinted 0x646464ff. */

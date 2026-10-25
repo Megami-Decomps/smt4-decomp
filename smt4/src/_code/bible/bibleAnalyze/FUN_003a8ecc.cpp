@@ -1,6 +1,7 @@
 /* NON_MATCHING: confirmation signed-byte load, fallback selection and description tail-call differ. */
 #include "common.h"
 #include <stddef.h>
+#include "util/CalleeContracts.h"
 
 /* This analysis screen extends beyond the shared BibleScreen work area. */
 struct BibleAnalyzeCursorView {
@@ -40,7 +41,6 @@ s32 vec2GetYInt(BibleAnalyzeCursorView *);
 s32 vec2GetXInt(BibleAnalyzeCursorView *);
 void pointConvertToFloat(void *, s32, s32);
 s32 buttonHelpIsNotActive(void);
-void FUN_002a0cc8(s32);
 s32 flaggedValueHolderGetTotal(void *);
 void FUN_0029da34(s32, s32, u16, s32);
 const char *dataLookupDisplayName(u8 *, u32);

@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 161 vs built 162 rows, 222 diff lines. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 
 void *asdMemoryAllocWithFlags(s32 size, u32 flags);
-void *FUN_0013c174(char *path, u8 *size, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
 void textFormatBuffer(char *dst, const char *format, ...);
@@ -26,7 +26,7 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
         char dir[0x80];
         char path[0x100];
         char *p;
-        u8 size[4];
+        u32 size;
         u8 mode;
         TmxHeader *tmx;
 
@@ -43,7 +43,7 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
         if (flags & 2) {
             mode |= 2;
         }
-        tmx = (TmxHeader *)FUN_0013c174(path, size, mode);
+        tmx = (TmxHeader *)asdLoadFileWithSize(path, &size, mode);
         if (tmx == NULL) {
             entry->file = NULL;
             texFile = NULL;

@@ -1,5 +1,7 @@
 /* NON_MATCHING: equipment-label zero caching, panel register lifetimes, and portrait-release guard/loop layout differ from retail. */
 #include "common.h"
+#include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct CharacterInfoPanelA {
     void *title, *name;
@@ -39,7 +41,6 @@ typedef char CharacterInfoPanelASizeCheck[sizeof(CharacterInfoPanelA) == 0xb8 ? 
 typedef char CharacterInfoRecordASizeCheck[sizeof(CharacterInfoRecordA) == 0x64 ? 1 : -1];
 
 extern "C" {
-void FUN_001654f8(const char *source, char *destination, u32 flags);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_aeabi_memclr(void *destination, u32 size);
 void asdTextFormatStream(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
@@ -60,7 +61,6 @@ void *FUN_0019acdc(u32 item, u32 flags);
 u16 FUN_0036fcd0(void *item, u32 flags);
 u32 FUN_0019e52c(u16 id);
 u32 requestIdToCode(u32 id);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 code);
 void asdTMTexTableReleaseNode(u32 table, u32 code);
 }
 

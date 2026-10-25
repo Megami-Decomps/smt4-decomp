@@ -2,8 +2,8 @@
 #include "battle/btlEvent.h"
 #include "battle/btlMain.h"
 #include "script/scrScriptProcess.h"
+#include "util/CalleeContracts.h"
 extern "C" {
-s32 FUN_002c2a04(u32 channel);
 void FUN_002898e4(void);
 void buttonHelpCreate(void);
 void FUN_00289880(void);

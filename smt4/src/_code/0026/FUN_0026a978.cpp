@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler keeps the packed buffer address in r3 and moves the source to ip before the guard. */
 #include "common.h"
 
 // The ID buffer starts two bytes past a word boundary.
@@ -21,10 +20,9 @@ void FUN_0026a978(const u16 *ids, s32 count)
 {
     if (count <= 8) {
         StatusIdState *state = g_statusDown;
-        state->ids.words[0] = 0;
-        state->ids.words[1] = 0;
-        state->ids.words[2] = 0;
-        state->ids.words[3] = 0;
+        for (s32 i = 0; i < 4; i++) {
+            state->ids.words[i] = 0;
+        }
         if (count >= 0) {
             state->enabled = 1;
             rt_memcpy(&state->ids, ids, count * sizeof(u16));

@@ -1,11 +1,11 @@
 /* NON_MATCHING: centered-width expression recovered; final VFP argument conversions and literal loads still differ. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern const char DAT_00536bc4[];
 void efctSetSpeed(f32 speed);
 const SpriteInfo *FUN_001834a4(u32 group, u32 id);
-void FUN_001835b4(u32 screen, u32 group, u32 id, s32 x, s32 y, s32 layer);
 s32 textFormatBuffer(u8 *destination, const char *format, ...);
 s32 fontMeasureLineAdvance(const u8 *text, u32 font);
 void FUN_00162790(u32 screen, u32 color, const u8 *text,

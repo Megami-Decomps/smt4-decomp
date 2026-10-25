@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of a state scene's draw (a tiled panel, its sprite table and the current state's handler); armcc here orders the render-state pushes and the float stereo offsets differently, and keeps the x offset and loop counters in other registers. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 
 struct LayoutPoint {
@@ -38,7 +39,6 @@ u32 FUN_001692ac(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 s32 textureGetIndexedResource(s32 index);
-void FUN_001835b4(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_001834a4(s32 group, s32 part);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);

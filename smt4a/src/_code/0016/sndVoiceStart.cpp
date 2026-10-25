@@ -4,7 +4,7 @@
 extern "C" {
 
 extern SoundVoicePool DAT_005880d0;
-extern u8 DAT_00618518;
+extern u8 g_soundVoiceCriticalSection;
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
@@ -24,7 +24,7 @@ void sndVoiceStart(s32 index)
     }
     u32 count = DAT_005880d0.count;
     if ((u32)index < count) {
-        nn_os_CriticalSection_Enter(&DAT_00618518);
+        nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
         SoundVoicePoolEntry *entry = &DAT_005880d0.entries[index];
         entry->startTick = svcGetSystemTick();
         FUN_0018a8a8(entry->voice, entry->second);
@@ -34,7 +34,7 @@ void sndVoiceStart(s32 index)
         nn_snd_CTR_Voice_SetPitch(entry->voice, 1.0f);
         FUN_001b6390(entry->voice, 1.0f);
         nn_snd_CTR_Voice_SetState(entry->voice, 0);
-        nn_os_CriticalSection_Leave(&DAT_00618518);
+        nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
     }
 }
 

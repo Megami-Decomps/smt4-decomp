@@ -1,5 +1,6 @@
 /* NON_MATCHING: title debug labels and float coordinates restored; render-stack scheduling and common text-argument hoisting differ. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 struct TitleDebugBackgroundView {
@@ -15,7 +16,6 @@ extern RenderCtx *g_titleScene;
 u32 FUN_002c5d80(u32 mode, u32 option);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
-void FUN_002bf288(s32 layer, s32 group, s32 sprite, s32 x, s32 y, s32 flags);
 void *jyoucyuGetTableEntry(u32 index);
 void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 scale, f32 opacity);
 void FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);

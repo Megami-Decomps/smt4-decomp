@@ -1,21 +1,16 @@
-/* NON_MATCHING: constant-mask load is scheduled after the battle flag pair load rather than before it. */
+/* NON_MATCHING: scrGetArg(0) and the prologue match; retail loads the 64-bit flag pair with ldm (lo r1, hi r2) after `mov r3, #1`, armcc loads the halves singly (hi first) */
 #include "common.h"
-
-struct BattleFlagState {
-    u8 unk0000[0x49d0];
-    u64 flags; // 0x49d0
-};
+#include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-u32 scrGetArg(u32 argument);
-BattleFlagState *btlGetMainState(void);
 void scrSetResult(s32 result);
 
 // Return whether the selected battle flag is set to the script interpreter.
-u32 FUN_002f78dc(u32 argument)
+u32 FUN_002f78dc(void)
 {
-    u32 bit = scrGetArg(argument);
-    u64 flags = btlGetMainState()->flags;
+    u32 bit = scrGetArg(0);
+    u64 flags = btlGetMainStateExt()->flags49D0;
     scrSetResult((flags & (s64)(1 << bit)) != 0);
     return 1;
 }

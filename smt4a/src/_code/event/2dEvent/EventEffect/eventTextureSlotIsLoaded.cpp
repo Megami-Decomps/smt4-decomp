@@ -1,10 +1,10 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 struct TextureSlot { u32 table, index; u8 unk08[8]; };
 extern TextureSlot DAT_0057f43c[4];
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
 
 s32 eventTextureSlotIsLoaded(u32 index)
 {

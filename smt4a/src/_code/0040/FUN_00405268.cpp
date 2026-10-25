@@ -1,5 +1,6 @@
 /* NON_MATCHING: ARMCC folds sprite-field addresses and merges transition tails differently; retail also retains extra branches in its animation-variant selection. */
 #include "ui/UiSpriteState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ContentTextureDescriptor {
     /* 0x00 */ u8 unk00[6];
@@ -37,9 +38,7 @@ s32 FUN_00163aa4(UiSpriteState* sprite, f32 speed);
 void FUN_004029f4(ContentListState* list, u32 state, u32 entry);
 void FUN_00403e2c(ContentListState* list);
 void* textureGetIndexedResource(u32 table);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void asdTMTexTableFreeEntry(u32 table);
 void uiSpriteSetKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
 void uiSpriteSetImageKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
 void FUN_00402f58(ContentListState* list);

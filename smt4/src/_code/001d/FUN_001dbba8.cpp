@@ -1,19 +1,22 @@
-/* NON_MATCHING: Process lookup merges its conditions and removes the retail redundant null-result move. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 extern "C" {
 extern AsdProcessState g_asdProcess;
 
+static __inline AsdProcess* findProcess(u32 handle)
+{
+    AsdProcess* process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
+    u32 id = handle & ASD_PROC_ID_MASK;
+    for (; process != NULL; process = process->next) {
+        if (process->id == id)
+            return process;
+    }
+    return NULL;
+}
+
 // Unlinks a process from its parent's child chain without removing it from its scheduler group.
 void FUN_001dbba8(u32 handle)
 {
-    u32 id = handle & ASD_PROC_ID_MASK;
-    AsdProcess* process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
-    while (process != NULL) {
-        if (process->id == id) {
-            break;
-        }
-        process = process->next;
-    }
+    AsdProcess* process = findProcess(handle);
     AsdProcess* parent = process->parent;
     if (parent != NULL) {
         AsdProcess* previous = parent->firstChild;

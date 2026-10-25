@@ -3,11 +3,11 @@
 #include "battle/btlEffect.h"
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
 extern RenderCtx *g_titleScene;
-s32 FUN_002865c0(u32 state, f32 value);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 

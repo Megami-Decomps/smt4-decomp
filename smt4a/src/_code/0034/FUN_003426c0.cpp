@@ -1,5 +1,7 @@
 /* NON_MATCHING: directory rows restored; backing sprite y/flags stack arguments use separate stores instead of the retail strd. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 namespace {
 struct DirectoryListPlacement {
@@ -10,12 +12,9 @@ struct DirectoryListPlacement {
 }
 extern "C" {
 SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
-void FUN_001835b4(s32 layer, s32 group, s32 sprite, s32 x, s32 y, s32 flags);
-u32 FUN_0035aa90(s32 index);
-const char *FUN_001654f8(u32 id, s32 section, s32 option);
+const char *FUN_0035aa90(s32 index);
 void asdTextFormatStream(u32 text, s32 layer, u32 color, s32 flags, s32 mode, const char *value);
 void asdTextDrawDirectoryEntry(u32 text, s32 layer, u32 color, s32 flags, s32 mode, u32 directory, s32 index);
-void FUN_0025cc78(u32 text, s32 x, s32 y, s32 style, f32 scale);
 
 // Fill the visible directory rows, then place their text and backing sprites.
 void FUN_003426c0(const DirectoryListPlacement *placement, u32 text, u32 directory,
@@ -37,7 +36,7 @@ void FUN_003426c0(const DirectoryListPlacement *placement, u32 text, u32 directo
                          FUN_001654f8(FUN_0035aa90(row + first + offset), 0, 0));
             break;
         }
-        FUN_0025cc78(text, position->x + anchor->x + x, position->y + anchor->y + y, 0x15, placement->scale);
+        FUN_0025cc78(reinterpret_cast<const void *>(text), position->x + anchor->x + x, position->y + anchor->y + y, 0x15, placement->scale);
         FUN_001835b4(2, 0x2E, 0xCE, position->x + x, position->y + y, 0xC);
     }
 }

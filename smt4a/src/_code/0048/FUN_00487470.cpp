@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00487470` (_code @ 0x487470, 0x8e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int CONCAT44(double, double);
 int gameFlagsGetBlock(void);
-int FUN_001835b4(...);
 int FUN_001849bc(...);
 int areaDiscoveryMarkCell(...);
 int FUN_00487d6c(...);
@@ -54,7 +54,6 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern unsigned long long campIsState85(void);
 /* Supplied declaration required: gameFlagsGetBlock. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001849bc. */
 extern unsigned long long gameFlagIsSet(unsigned int);
 /* Supplied declaration required: areaDiscoveryMarkCell. */

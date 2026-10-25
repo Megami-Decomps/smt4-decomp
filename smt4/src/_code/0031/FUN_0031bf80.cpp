@@ -1,8 +1,8 @@
 /* NON_MATCHING: register allocation only: retail keeps `first` in r4 and `firstSlot` in r6 (swapped here). */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
 s32 bustupCutAnimFindSlot(u32 id);
 void FUN_00249c4c(u32 id, s32 layer, s32 front);
 

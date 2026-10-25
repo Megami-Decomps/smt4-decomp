@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'ldr r1, [pc, #40]'; compiler emits 'ldr r1, [pc, #36]' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 struct Effect {
@@ -19,8 +18,8 @@ void FUN_0031caec(u32 request) {
     Effect *effect=g_eventEffect.first;
     if(effect) {
         effect->request=request;
-        effect->progress=0;
         effect->state=4;
+        effect->progress=0;
         effect->scale=1.0f;
     }
 }

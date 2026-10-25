@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the 8-byte offset pair through VFP registers (vldmia/vstmia) and keeps it at different stack slots; this build uses ldrd/strd, and the register assignment follows */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 /* A pair of screen coordinates. */
 struct ScreenOffset {
@@ -35,7 +36,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 getUnlockedSlotCount(u32 argument);
 IconPosition *FUN_001834a4(u32 table, u32 index);
-void FUN_001835b4(s32 layer, u32 table, u32 index, s32 x, s32 y, s32 alpha);
 void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,
                   s32 *x, s32 *y, u8 *extra);
 void FUN_003c33e8(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);

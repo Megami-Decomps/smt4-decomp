@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses ldr r4, [pc, #52] where the compiled block uses ldr r4, [pc, #56]. */
+/* NON_MATCHING: node/count pairs store with strd as retail does; armcc keeps the result in r2 and the state pointer in r3, retail swaps them */
 #include "common.h"
 
 struct AllocationNode {
@@ -7,11 +7,15 @@ struct AllocationNode {
     u32 unk24;            // 0x24
 };
 
+/* A node and the number of entries counted from it. */
+struct NodeSlot {
+    AllocationNode* node;  // 0x00
+    u32 count;             // 0x04
+};
+
 struct AllocationState {
-    AllocationNode* first; // 0x00
-    u32 firstCount;        // 0x04
-    AllocationNode* last;  // 0x08
-    u32 lastCount;         // 0x0C
+    NodeSlot first;        // 0x00
+    NodeSlot last;         // 0x08
 };
 
 extern "C" {
@@ -28,13 +32,14 @@ u32 FUN_001600b8(AllocationState* state)
     } else {
         node->unk20 = 0;
         node->unk24 = 0;
-
-        AllocationState* activeState = DAT_005b40e8;
-        activeState->first = node;
-        activeState->firstCount = 0;
-        activeState->last = node;
-        activeState->lastCount = 0;
         result = 0;
+
+        NodeSlot slot;
+        slot.node = node;
+        slot.count = 0;
+        AllocationState* activeState = DAT_005b40e8;
+        activeState->first = slot;
+        activeState->last = slot;
     }
     return result;
 }

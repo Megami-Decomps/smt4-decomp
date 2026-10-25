@@ -2,6 +2,7 @@
 #include "shard/X14_EngineUnits.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern EngineUnitsRef g_engineCleanupOwner;
@@ -11,7 +12,6 @@ extern const char DAT_00533cd4[];
 extern const char DAT_00533cc0[];
 extern const char DAT_00533cb0[];
 void campCommonBgAcquire();
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, s32 kind);
 s32 FUN_00204098(u32 job);
 void FUN_00267bf0(u32 job);
 s32 FUN_00229324(u32 task);

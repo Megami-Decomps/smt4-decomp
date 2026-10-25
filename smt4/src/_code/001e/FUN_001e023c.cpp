@@ -1,6 +1,7 @@
 /* NON_MATCHING: lane scaling and canonical render pushes now match their retail operation shapes; VFP conversion registers, draw-argument scheduling and the cleared early return differ. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "util/CalleeContracts.h"
 
 static __inline u32 packFadeColor(EffectColor color)
 {
@@ -38,7 +39,6 @@ extern RenderCtx *g_titleScene;
 FadeJob *jobGetWork(void);
 void FUN_001a79a8(FadeJob *job);
 s32 FUN_002c5d80(u32 slot, u32 flags);
-s32 FUN_002865c0(u32 state, f32 value);
 void FUN_0033e160(u32 handle, s32 zero, s32 level, u8 *params, u32 color, u32 flag, FadeVec2 origin);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);

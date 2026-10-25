@@ -1,5 +1,6 @@
 /* NON_MATCHING: initialization saves the new pointer earlier than retail's constructor sequence, and the sprite handle reload gets a separate base register. */
 #include "shard/W5_W5Match7_ResourceHandles.h"
+#include "text/TextDraw.h"
 
 struct HighwayInfo {
     /* 0x000 */ u32 process;
@@ -37,7 +38,6 @@ void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
 void asdTMTexLoadMainHeap(s32 table, s32 index);
 u32 spriteHandleCreate(u32 flags);
-void FUN_001527d8(u32 sprite, s32 value);
 void positionStateSet(u32 sprite, s32 mode, u32 color, f32 value);
 void FUN_003f84e8(HighwayInfo *);
 void dialogEnterState(HighwayInfo *, s32 state, s32 mode);

@@ -3,11 +3,11 @@
 #include "gamedata/Table00.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void memClear(void *memory, u32 size);
 Table00Record *dataTable00FindById(u16 id);
 u32 FUN_00294090(s32 portraitId, u32 mode);

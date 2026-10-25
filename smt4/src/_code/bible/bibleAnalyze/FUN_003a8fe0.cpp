@@ -86,7 +86,7 @@ typedef char BibleAnalyzeScreenLayoutCheck[
 extern "C" {
 extern u32 *DAT_0043d990;
 
-void FUN_0022e2fc(void *table);
+void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00240cec(s32 arg);
 void *asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
@@ -114,7 +114,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
     screen->flag94 = 0;
     screen->selectedSlot = 0xFFFF;
     screen->unkA6BE = 0xFF;
-    FUN_0022e2fc(screen->unk5A8);
+    entryTableClear(screen->unk5A8);
     screen->prepare();
     menuSetModeAndResetTransitions(6);
     if (screen->customMode == BIBLE_CUSTOM_ANALYSIS)

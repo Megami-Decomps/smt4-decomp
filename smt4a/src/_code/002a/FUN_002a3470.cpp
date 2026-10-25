@@ -1,9 +1,9 @@
 /* NON_MATCHING: explicit argument zero and semantic dispatcher recover ABI/setup; two final equality-chain comparisons retain command in r0 instead of saved r4. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-u32 scrGetArg(u32 index);
 void FUN_002378b8(s32 command, s32 target);
 void FUN_002a3518(s32 command, s32 target);
 

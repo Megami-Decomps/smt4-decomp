@@ -1,5 +1,6 @@
 /* NON_MATCHING: identical except for the push helper's address computation (retail keeps index+1 in r2 and reuses r3), the load order of two float constants and the operand order of the final vmul. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 
@@ -10,7 +11,6 @@ extern GameStateA g_gameState;
 
 u32 FUN_001692ac(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 kind, u32 layer, u32 sprite, u32 argument, s32 x, u32 order);
 void FUN_002bf0d4(u32 layer, u32 sprite, s32 *bounds);
 void FUN_001849bc(u32 kind, u32 layer, u32 sprite, u32 argument, s32 y, u32 order, s32 *bounds);
 

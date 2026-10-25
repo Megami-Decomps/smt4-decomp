@@ -1,6 +1,7 @@
 /* NON_MATCHING: identical except the register allocation of the padded-size arithmetic (retail accumulates size + alignment + alignment in r1 and negates the alignment into r0; the build swaps r0/r1 for the first add). */
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "util/CalleeContracts.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 struct AllocatorLock {

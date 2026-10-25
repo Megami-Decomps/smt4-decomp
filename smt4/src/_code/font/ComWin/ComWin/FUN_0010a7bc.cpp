@@ -2,9 +2,9 @@
 #include "ui/CommandWindow.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void *asdMemAlloc(s32 heap, s32 alignmentClass, u32 flags, u32 size, s32 fromFront);
 void memClear(void *memory, u32 size);
 void comWindowProcessUpdate(void *task);
 void FUN_0011a434(void *task);

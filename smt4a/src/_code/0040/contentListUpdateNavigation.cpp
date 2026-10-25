@@ -1,4 +1,3 @@
-/* NON_MATCHING: navigation loop is rotated instead of duplicated and top-row update scheduling differs; -O2 candidate. */
 #include "common.h"
 
 struct ContentGrid { u8 data[0x64]; };
@@ -15,7 +14,7 @@ s32 FUN_00228b04(ContentGrid *, u32);
 s32 FUN_001517b4(u32, u32);
 s32 flaggedEntryGetValueA(ContentGrid *);
 void eventQueueAddUniqueIfValid(u32);
-void scrollOwnerSetValue(ContentGrid *);
+void scrollOwnerSetValue(ContentGrid *, s32);
 
 void contentListUpdateNavigation(ContentNavigation *screen)
 {
@@ -25,11 +24,11 @@ void contentListUpdateNavigation(ContentNavigation *screen)
             resourceRunOperationIfUnblocked(&screen->grid);
             if (FUN_002a4894(&screen->grid) != 7 && FUN_002a4894(&screen->grid) != 0)
                 eventQueueAddUniqueIfValid(0x100020d);
-            while (resourceRunOperationIfUnblocked(&screen->grid) == previousRow &&
-                   (resourceRunOperationIfUnblocked(&screen->grid) != 0 || FUN_002a4894(&screen->grid) != 0)) {
-                s32 row = resourceRunOperationIfUnblocked(&screen->grid);
-                s32 count = objectApplyIfUnblocked(&screen->grid);
-                if (row == count - 8 && FUN_002a4894(&screen->grid) == 7)
+            while (resourceRunOperationIfUnblocked(&screen->grid) == previousRow) {
+                if (resourceRunOperationIfUnblocked(&screen->grid) == 0 && FUN_002a4894(&screen->grid) == 0)
+                    break;
+                if (resourceRunOperationIfUnblocked(&screen->grid) == objectApplyIfUnblocked(&screen->grid) - 8 &&
+                    FUN_002a4894(&screen->grid) == 7)
                     break;
                 FUN_00228b04(&screen->grid, 0);
             }
@@ -40,8 +39,7 @@ void contentListUpdateNavigation(ContentNavigation *screen)
         if (resourceRunOperationIfUnblocked(&screen->grid) == 0)
             return;
         eventQueueAddUniqueIfValid(0x100020d);
-        --screen->topRow;
-        scrollOwnerSetValue(&screen->grid);
+        scrollOwnerSetValue(&screen->grid, --screen->topRow);
     }
     if (FUN_001517b4(10, 0) && objectApplyIfUnblocked(&screen->grid) >= 8) {
         s32 row = resourceRunOperationIfUnblocked(&screen->grid);
@@ -49,8 +47,7 @@ void contentListUpdateNavigation(ContentNavigation *screen)
         if (row != count - 8 &&
             (flaggedEntryGetValueA(&screen->grid) || objectApplyIfUnblocked(&screen->grid) >= 8)) {
             eventQueueAddUniqueIfValid(0x100020d);
-            ++screen->topRow;
-            scrollOwnerSetValue(&screen->grid);
+            scrollOwnerSetValue(&screen->grid, ++screen->topRow);
         }
     }
 }

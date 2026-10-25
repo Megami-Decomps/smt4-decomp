@@ -1,4 +1,3 @@
-/* NON_MATCHING: register numbering only (retail: manager r5, lock r4; here the lock lands in r5) */
 /* Releases the delay and reverb effects attached to aux bus `bus` (under the manager's lock) and resets the bus. */
 #include "nn/os/CriticalSectionLock.h"
 

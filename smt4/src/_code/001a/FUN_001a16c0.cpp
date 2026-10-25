@@ -1,5 +1,6 @@
 /* NON_MATCHING: panel completion/speed getters and x/y evaluation match; remaining differences are render-stack set/pop operands and shared return-block layout. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -34,7 +35,6 @@ s32 modelPairTryBind(ResultScreen *result);
 void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(s32 a, s32 b);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
-void FUN_002bf288(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void efctSetSpeed(f32 speed);
 u32 vec2GetXInt(void *vector);
 u32 vec2GetYInt(void *vector);

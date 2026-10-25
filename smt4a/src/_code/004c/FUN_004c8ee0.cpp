@@ -2,9 +2,9 @@
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BtlMainAccess.h"
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA *btlGetMainState();
 s32 playerHasFlagBit(u32 flag);
 s32 btlFindEntryValue(s32 unit, u32 kind);
 u32 FUN_004c9160(u32 message, BtlCombatantEntryA *entry, s32 mode, u32 argument);

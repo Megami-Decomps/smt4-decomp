@@ -1,4 +1,5 @@
 #include "shard/Shard0048.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ extern void campButtonHelpRelease(void);
 extern void ifTouchRegionRemove(void);
 extern void __aeabi_memset4(u8 *block, u32 size, u32 value);
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
-extern void asdTMTexTableFreeEntry(s32 index);
 extern void scrScriptProcessDestroy(u32 process);
 extern void asdMemFree(u32 ptr);
 extern void FUN_001695a0(void);

@@ -49,7 +49,7 @@ void halves34Copy(RegenUnit *unit, u16 *words);
 s32 bitsAt60Test(RegenUnit *unit, u32 bit);
 s16 FUN_003e0024(void);
 s16 FUN_003e0034(void);
-s32 FUN_003e0064(s32 value);
+s32 playerSetClampedStat(s32 value);
 u32 FUN_003e0154(void);
 u32 FUN_003e0164(void);
 void playerSetClampedValue(s32 value);
@@ -112,7 +112,7 @@ void FUN_003ee734(RegenTurn *turn)
         if (playerHasFlagBit(1) == 0 && playerHasFlagBit(10) == 0) {
             s16 current = FUN_003e0024();
             s32 value = (s16)((s32)((f32)(s32)FUN_003e0154() * hp * 0.01f) + current);
-            FUN_003e0064(value);
+            playerSetClampedStat(value);
             if (value == 0) {
                 gameGetPlayerData()->currentHp = 0;
             }
@@ -155,7 +155,7 @@ void FUN_003ee734(RegenTurn *turn)
     }
     if (playerHasFlagBit(1) != 0) {
         playerClearFlagMask(2);
-        FUN_003e0064(1);
+        playerSetClampedStat(1);
     }
     partyResetAndRefreshSlotStats();
 }

@@ -34,8 +34,7 @@ WindowStatusOperationResult aocFileContentPrepareMountBuffer(void* context, u32 
         asdMemFree(work->buffer);
         work->buffer = NULL;
     }
-    WindowStatusOperationResult output = {0};
-    output.result = WindowStatusResult(0);
+    WindowStatusOperationResult output(0);
 
     WindowStatusResult result(FUN_0042a410(&work->bufferSize, 0x19A2, content, 2, 2, 0));
     if (nnResultIsFailure(legacyResourceIdRemap(&result))) {

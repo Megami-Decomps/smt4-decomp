@@ -2,10 +2,10 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern const u64 g_battleMaskPresets[];
-u32 scrGetArg(u32 index);
 BtlMainStateA* btlGetMainState(void);
 
 // Set or clear the marker flag on the first eligible, marked reserve entry with the script id.

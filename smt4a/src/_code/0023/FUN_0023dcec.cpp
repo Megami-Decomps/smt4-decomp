@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ s32 saveOptionIsEnabled(u32 option);
 void efctSetSpeed(f32 value);
 f32 vec2GetSpeed(const void *object);
 void FUN_00164b5c(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
-void FUN_001835b4(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
 PanelTextLayoutEntryPrefixA *FUN_001834a4(u32 group, u32 image);
 void FUN_00162790(u32 layer, u32 style, const char *text,
                   f32 x, f32 y, f32 depth, f32 spacing, f32 scale);

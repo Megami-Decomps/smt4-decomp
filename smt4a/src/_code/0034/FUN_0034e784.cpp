@@ -1,5 +1,7 @@
 /* NON_MATCHING: recovered signed panel flag, speed accessors and offset pair; clip-rectangle argument scheduling and cached-state scratch registers still differ. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 struct GaugePosition {
     u8 unk00[0x20];
@@ -40,11 +42,9 @@ static __inline RenderStateStack *renderCtxStackE(RenderCtxA *context)
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
 s32 vec2GetXInt(void *vector);
 s32 vec2GetYInt(void *vector);
-u32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 f32 vec2GetSpeed(const void *vector);
 struct GaugeSprite {
     u8 unk00[8];

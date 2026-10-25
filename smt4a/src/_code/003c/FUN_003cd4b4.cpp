@@ -1,6 +1,7 @@
 /* NON_MATCHING: extension metadata load pairing and count-sum scratch register differ from retail. */
 #include "gamedata/Table23Availability.h"
 #include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 extern AocSystemA* g_aocSystem;

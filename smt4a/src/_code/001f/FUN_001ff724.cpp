@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ff724` (_code @ 0x1ff724, 0x478 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int idIsAtLeast350(unsigned int);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: FUN_002a4964. */

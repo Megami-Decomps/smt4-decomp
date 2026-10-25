@@ -1,10 +1,10 @@
 /* NON_MATCHING: resource fallback comparison matches; suppression-mask scalar versus paired loads still differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 BtlMainStateA* btlGetMainState(void);
-void scrSetResult(s32 result);
 
 // Report whether an eligible combatant has a positive primary or fallback resource.
 u32 FUN_003bba04(void)
@@ -21,10 +21,9 @@ u32 FUN_003bba04(void)
     for (s32 i = 0; i < 0x6D; ++i) {
         BtlMainStateA* battle = btlGetMainState();
         ResourceEntry* entry = reinterpret_cast<ResourceEntry*>(battle->entries) + i;
-        u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) != 0 &&
-            (g_btlCandidateMasks.required & flags) != 0 &&
-            (flags & g_btlCandidateMasks.excluded) == 0) {
+        if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0) {
             s32 resource = entry->primary;
             if (resource <= 0) {
                 resource = entry->fallback;

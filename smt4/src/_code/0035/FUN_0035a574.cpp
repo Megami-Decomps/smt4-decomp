@@ -32,7 +32,6 @@ unsigned int FUN_0035a574(char *param_1,int *param_2,unsigned short *param_3,int
   char temp_v2;
   unsigned short temp_v3;
   unsigned int temp_v4;
-  int temp_v5;
   int temp_v6;
   int temp_v7;
   char *pcVar9;
@@ -160,7 +159,7 @@ LAB_0035a6f0:
                 temp_v1 = 2;
                 param_1[1] = ((unsigned char)(temp_v10 >> (((temp_v4 - 2) * 6) & 0xff)) & 0x3f) + 0x80;
               }
-              for (temp_v5 = (int)(temp_v4 - 1) >> 1; temp_v5 != 0; temp_v5 = temp_v5 - 1) {
+              for (int temp_v5 = (int)(temp_v4 - 1) >> 1; temp_v5 != 0; temp_v5 = temp_v5 - 1) {
                 temp_v7 = temp_v1 + 1;
                 pcVar9[1] = ((unsigned char)(temp_v10 >> ((((temp_v4 - temp_v1) - 1) * 6) & 0xff)) & 0x3f) + 0x80;
                 temp_v1 = temp_v1 + 2;

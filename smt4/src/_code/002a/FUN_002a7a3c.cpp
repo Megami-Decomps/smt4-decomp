@@ -1,4 +1,4 @@
-/* NON_MATCHING: sized-reference addressing materializes an extra constant 8 instead of retail's immediate-offset load, and the final FILE-body/offset additions are reversed. */
+/* NON_MATCHING: armcc hoists the entries[] header constant into a register instead of retail's single immediate-offset load ([r1,#8]). */
 #include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
@@ -18,7 +18,8 @@ const u8* FUN_002a7a3c(const WaveArchiveReader* reader, u32 index)
     u32 offset = reader->index->entries[index].offset;
     const WaveArchiveFileBlock* block =
         nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlock(reader->fileHeader);
-    return block->data + offset;
+    const u8* body = block->data;
+    return body + offset;
 }
 
 } /* extern "C" */

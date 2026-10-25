@@ -1,5 +1,7 @@
 /* NON_MATCHING: command-frame local recovers controller load timing; cleanup and job work pointers still coalesce. */
 #include "shard/W5_W5Match6_CallbackController.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct HowToWork {
     u32 job;
@@ -27,9 +29,7 @@ void dataTableFree(u32 table);
 void ifTouchRegionRemove();
 void asdMemFreeSlot(void **slot);
 void asdMemFree(void *buffer);
-u32 asdTMTexTableNodeIsLoaded(s32 table, s32 index);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
-void asdTMTexTableFreeEntry(s32 table);
 u32 jobStop(u32 job, u16 mode);
 void asdOperatorDelete(void *object);
 

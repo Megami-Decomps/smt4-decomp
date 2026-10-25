@@ -1,6 +1,7 @@
 /* NON_MATCHING: pre-advanced reflect traversal matches; incoming id and queue owner lifetimes and the unit flag test differ. */
 #include "battle/btlReflect.h"
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 struct ReflectUnit {
     /* 0x00 */ u8 unk00[0x50];
@@ -17,7 +18,6 @@ struct ReflectRecord {
 extern "C" {
 
 
-void *btlGetMainState(void);
 ReflectRecord *FUN_0027da30(void *battle, s16 id);
 s32 FUN_0027dab0(void *battle, ReflectUnit *unit);
 

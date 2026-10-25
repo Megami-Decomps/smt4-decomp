@@ -1,5 +1,6 @@
 /* NON_MATCHING: remaining native alpha argument and efctSetSpeed float arguments are absent from this draft; large render-stack and draw-expression differences remain. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int drawSetColorFromRGBA8(...);
 int textFormatBuffer(...);
 int FUN_002be90c(...);
 int FUN_002bed3c(void);
-int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
@@ -85,7 +85,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */

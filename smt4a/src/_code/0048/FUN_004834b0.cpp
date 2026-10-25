@@ -2,6 +2,7 @@
 #include "map/EnemySpawnState.h"
 #include "map/lmapMain.h"
 #include <math.h>
+#include "gamedata/DataTable.h"
 
 extern "C" {
 extern LmapSceneA *g_lmapScene;

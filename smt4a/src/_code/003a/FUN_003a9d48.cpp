@@ -1,11 +1,11 @@
 /* NON_MATCHING: zero is not kept in a saved register, changing row/weight registers and stack-frame allocation. */
 #include "battle/BattleChoiceWeights.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-void* btlGetMainState(void);
 void* btlGetTable(void* battle, s32 table);
 void wordPairCopy(BattleChoiceRow* destination, const BattleChoiceRow* source);
 s32 randRange(u16 maximum);

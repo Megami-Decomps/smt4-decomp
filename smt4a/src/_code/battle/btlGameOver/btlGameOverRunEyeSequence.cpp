@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include "battle/btlGameOver.h"
+#include "util/CalleeContracts.h"
 
 struct GameOverEyeTimeline {
     s32 panelFrame, fade0Frame;
@@ -24,7 +25,6 @@ void FUN_004fdcd8(u32, u32, u32, u32, u32, u32, u32, u32);
 void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32 actor, u32 flags, u32 value, u32 parameter,
                  u32 target, u32 first, u32 second, u32 third, u32 fourth);
-s32 FUN_0013def0(u32);
 void slotSetRequest(u32, u32, u32);
 BtlMainStateA *btlGetMainState();
 void FUN_003f14a0(BtlMainStateA *);

@@ -27,9 +27,8 @@ extern SparkleSet *g_activeTextureSlot;
 void FUN_00208cbc(void)
 {
     SparkleAlphaTable table = DAT_00404400;
-    s32 i;
 
-    for (i = 0; i < 64; i++) {
+    for (s32 i = 0; i < 64; i++) {
         SparkleSet *set = g_activeTextureSlot;
 
         if (set->life[i] > 0) {

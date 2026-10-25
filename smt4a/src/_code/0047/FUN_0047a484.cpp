@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-stack push schedules its second address add earlier and the last call's 0x81 is rematerialised in r7 instead of reusing fp. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
@@ -8,7 +9,6 @@ void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 kind, bool enabled);
 void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
-void FUN_001835b4(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 s32 FUN_002a482c(void *holder);
 s32 FUN_0031d174(void *holder);
 s32 flaggedValueHolderGetTotal(void *holder);

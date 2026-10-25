@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial source/context save order and data/header registers differ, so the compiler emits two scalar header stores instead of retail's writeback STM pair. */
+/* NON_MATCHING: the header/constant pair now stores with the retail STM; only the order of the two incoming-argument saves (retail mov r5, r0 before mov r4, r1) differs. */
 #include "common.h"
 
 struct UniformContext {
@@ -15,7 +15,8 @@ void FUN_0019f828(UniformContext* context, const u32 values[4])
 {
     u32* begin = asdGxGetCommandCursor(context);
     u32* command = begin;
-    *command++ = context->index | 0x80000000;
+    u32 header = context->index | 0x80000000;
+    *command++ = header;
     *command++ = 0x804f02c0;
     *command++ = values[3];
     *command++ = values[2];

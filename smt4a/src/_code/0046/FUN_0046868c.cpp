@@ -1,5 +1,6 @@
 /* NON_MATCHING: world-vector copy formation, projected-coordinate VFP scheduling and stack slots differ. */
 #include "map/NpcDummyBindings.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 
@@ -23,7 +24,6 @@ struct RenderCtxA;
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 SpriteInfo *FUN_001834a4(u32 group, s32 sprite);
-void FUN_001835b4(u32 display, u32 group, s32 sprite, s32 x, s32 y, u32 flags);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 depth);
 const ProjectionMatrices *FUN_00152f54();
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);

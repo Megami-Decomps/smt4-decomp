@@ -1,5 +1,7 @@
 /* NON_MATCHING: native mode dispatch and call operands restored; row/base/name lifetimes, zero x-offset and pulse VFP operands differ. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 struct LayoutEntry {
     u8 unk00[8];
@@ -10,14 +12,10 @@ struct LayoutEntry {
 extern "C" {
 
 LayoutEntry* FUN_001834a4(u32 group, u32 index);
-void FUN_001835b4(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void FUN_00164b5c(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void efctSetSpeed(f32 speed);
-void FUN_001527d8(u32 text, u32 color);
-void FUN_0025cc78(const void *text, s32 x, s32 y, s32 z, f32 scale);
 void asdTextDrawDirectoryEntry(u32 text, s32 a, u32 b, s32 c, s32 d, u32 name, s32 index);
 const char *FUN_0035aa90(s32 index);
-char *FUN_001654f8(const char *source, char *destination, s32 size);
 void asdTextFormatStream(u32 text, u32 a, u32 b, u32 c, u32 d, const char *format, ...);
 s32 FUN_00344bc8(s32 index);
 u32 FUN_0032ecac(s32 bit);

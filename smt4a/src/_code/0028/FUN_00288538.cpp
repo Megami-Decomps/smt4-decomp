@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00288538` (_code @ 0x288538, 0x5d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int jobGetScalarValue(void);
 int FUN_0037245c(...);
 void uiDrawItemListRow(int x, int y, int message, int category, unsigned int color, unsigned int id, float effect);
@@ -40,7 +40,6 @@ extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: jobGetScalarValue. */
 extern int resourceRunOperationIfUnblocked(void);

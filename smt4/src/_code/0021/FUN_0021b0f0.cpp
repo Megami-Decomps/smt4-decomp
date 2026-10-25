@@ -3,6 +3,7 @@
 #include "map/lmapMain.h"
 #include "shard/SaveWork.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 extern MapCameraGlobals DAT_004474f0;
@@ -10,8 +11,6 @@ extern GameState g_gameState;
 extern LmapScene *g_lmapScene;
 u8 mapCollisionGetStoredVectors(CollisionVector *, CollisionVector *, CollisionVector *, CollisionVector *);
 SaveWork *gameGetMapBlock(void);
-f32 FUN_0028250c(f32);
-f32 FUN_00282390(f32);
 f32 FUN_001e27f8(const f32 *, const f32 *, const f32 *, f32, f32);
 
 void FUN_0021b0f0(void)

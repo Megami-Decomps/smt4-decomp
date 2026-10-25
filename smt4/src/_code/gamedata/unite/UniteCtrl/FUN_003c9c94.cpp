@@ -3,6 +3,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/W5_W5Match2_ScalarRecord.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 #define UNITE_RACE_COUNT 0x38
 
@@ -42,7 +43,6 @@ struct UniteCtrl {
 };
 
 extern "C" {
-void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
 s32 recordCompareRankAndIndex(const RankedRecord *left, const RankedRecord *right);
 void FUN_002b7bca(void *base, s32 count, s32 elementSize, s32 (*compare)(const RankedRecord *, const RankedRecord *));
 

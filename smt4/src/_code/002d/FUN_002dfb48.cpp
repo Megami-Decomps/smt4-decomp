@@ -1,6 +1,7 @@
 /* NON_MATCHING: heading-offset arithmetic, radius branch layout, vector stack placement and VFP registers differ. */
 #include "map/mapEnemy.h"
 #include "shard/W6_W6Match6_CollisionQuad.h"
+#include "util/TrigF32.h"
 
 struct SpawnScenePose { u8 prefix[0x18]; f32 heading; CollisionVector position; };
 struct SpawnModePrefix { u8 prefix[0x44]; u16 mode; };
@@ -9,8 +10,6 @@ extern MapEnemy *g_mapEnemy;
 extern SpawnScenePose *g_lmapScene, *DAT_004474f4;
 extern SpawnModePrefix DAT_0049fb1c;
 u32 randNextInRange(u32 maximum);
-f32 FUN_0028250c(f32 angle);
-f32 FUN_00282390(f32 angle);
 s32 FUN_0025b4b0(const CollisionVector *start, const CollisionVector *end, CollisionVector *hit);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 

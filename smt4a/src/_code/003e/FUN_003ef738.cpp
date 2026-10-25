@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ extern u32 g_btlUiBlock;
 
 s32 FUN_00184310(u32 id);
 s32 dataTable04FindById(u32 id);
-s32 FUN_0019acdc(u16 id, u32 flag);
 s32 FUN_004aba3c(u32 block);
 BtlUnit *btlUnitGet(u32 unit);
 

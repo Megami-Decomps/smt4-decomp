@@ -9,14 +9,14 @@ typedef struct BattleMain {
 } BattleMain;
 
 extern BattleMain *btlGetMainState(void);
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(s32 index);
 
 #define BTL_FLAG_SCRIPT_LOCK 0x80000
 
 /* Script command: sets (argument > 0) or clears battle flag 0x80000. */
 u32 scrCommBtlScriptLockSet(void)
 {
-    s32 enable = scrGetArg();
+    s32 enable = scrGetArg(0);
     u32 *flags = &btlGetMainState()->flags;
 
     if (enable > 0) {

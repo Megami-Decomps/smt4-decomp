@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048d98c` (_code @ 0x48d98c, 0xa6c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_001692ac(...);
 int FUN_0016c4b8(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
-int FUN_001835b4(...);
 int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
 int effectSetByteSpeed(...);
@@ -43,7 +43,6 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */

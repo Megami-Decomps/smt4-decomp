@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads width/height with one ldrd and holds the constants in a different register set (push {r4}); loop and arithmetic match. */
+/* NON_MATCHING: width/height now load with one ldrd as in retail; retail holds the 0xcccccccd divisor in r4 (push {r4}) and reads records before first, the build keeps it in ip. */
 #include "common.h"
 
 struct GridRecord {
@@ -27,7 +27,7 @@ extern "C" {
 // Clear the value of every record in the block that `record` heads (width * height records per block).
 void FUN_0024b7bc(GridOwner *owner, GridRecord *record)
 {
-    u32 count = owner->shape->width * owner->shape->height;
+    u32 count = owner->shape->height * owner->shape->width;
     if (count != 0) {
         GridRecord *block = &owner->records[(u32)((u8 *)record - (u8 *)owner->records) / sizeof(GridRecord) * count + owner->first];
         for (s32 i = 0; i < (s32)count; i++) {

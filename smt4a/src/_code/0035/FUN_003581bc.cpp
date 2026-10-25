@@ -1,5 +1,6 @@
 /* NON_MATCHING: instruction scheduling only - retail interleaves the slot constants with the panel offset loads of the five element calls and loads the third scale constant from the pool; everything else matches. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -30,7 +31,6 @@ void FUN_00183bb0(void);
 s32 vec2GetXInt(const void *vector);
 s32 vec2GetYInt(const void *vector);
 LayoutEntry *FUN_001834a4(u32 table, u32 entry);
-void FUN_001835b4(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
 void FUN_002c0940(u8 text[64], s32 value);
 f32 FUN_00168594(u8 text[64], u32 style, f32 scale);
 void FUN_00162790(u32 layer, u32 color, u8 text[64], f32 x, f32 y, f32 a, f32 b, f32 c);

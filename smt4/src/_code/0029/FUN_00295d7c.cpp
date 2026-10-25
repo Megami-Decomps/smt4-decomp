@@ -23,9 +23,8 @@ static __inline s32 slotTableIndexOf(SlotUnit *unit)
 {
     if (unit != NULL) {
         SlotUnit *slot = gameGetSlotTable()->units;
-        s32 i;
 
-        for (i = 0; i < 24; i++, slot++) {
+        for (s32 i = 0; i < 24; i++, slot++) {
             if (slot == unit || slot->id == unit->id) {
                 return i;
             }

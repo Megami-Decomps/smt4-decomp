@@ -1,6 +1,7 @@
 /* NON_MATCHING: sound branch placement, paired state stores, and flags write-back addressing differ. */
 #include "classes/Obj55c8d0.h"
 #include "shard/S1ListMenu.h"
+#include "util/CalleeContracts.h"
 
 struct BibleSelectionEntry {
     Vec2Int position;
@@ -24,7 +25,6 @@ s32 vec2GetYInt(const Vec2Int *);
 void pointConvertToFloat(SelectionRectangle *, s32, s32);
 void sysPlaySe(u32);
 void FUN_0032cfe0(Obj55c8d0 *);
-void FUN_003343f0(u32);
 void FUN_004d05c4(Obj55ca08 *, s32, s32, s32);
 
 // Keep the cursor on the selected entry, then reopen touch regions after a selection changes.

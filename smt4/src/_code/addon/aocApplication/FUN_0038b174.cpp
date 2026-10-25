@@ -2,6 +2,8 @@
 /* Recreates the application's 128 KiB work buffer and the decoder object that runs on it. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -14,8 +16,6 @@ struct AocApplication {
 };
 
 void *FUN_00352f0c(void *decoder);
-void asdMemFreeNonNull(void *decoder);
-void asdMemFree(void *ptr);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void rt_memclr(void *buffer, u32 size);
 void *asdOperatorNew(u32 size);

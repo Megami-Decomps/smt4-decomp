@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 /* A menu entry's draw state: a mode, a selected row and an animation frame. */
 struct MenuEntryDraw {
@@ -13,7 +14,6 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 extern const s8 DAT_0043dc48[];
 void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
-void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 f32 FUN_0026e70c(f32 start, f32 end, f32 duration, f32 time);
 void efctSetSpeed(f32 speed);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);

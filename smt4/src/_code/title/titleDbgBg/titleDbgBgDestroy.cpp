@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct DebugBg {
 extern DebugBg *DAT_0044e2e8; /* 0x44e2e8 */
 
 extern int asdTMTexTableReleaseNode(int table, int node);
-extern int asdTMTexTableFreeEntry(int table);
 extern void asdMemFree(void *block);
 
 /* Hides the debug background, releases its texture table entry and frees its block. */

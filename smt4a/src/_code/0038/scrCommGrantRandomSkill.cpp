@@ -11,7 +11,7 @@ int nkmGrowthLearnRandomSkill(void);
 
 /* Supplied declaration required: btlGetMainState. */
 extern int gameGetSlotRecord(int);
-extern int scrGetArg(void);
+extern int scrGetArg(s32 index);
 /* Supplied declaration required: FUN_0023acdc. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -25,7 +25,7 @@ unsigned int scrCommGrantRandomSkill(void)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = scrGetArg();
+  temp_v0 = scrGetArg(0);
   if (temp_v0 < 0x6d) {
     btlGetMainState();
     temp_v1 = btlGetMainState();

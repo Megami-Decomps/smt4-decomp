@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail ldr r1, [r0, #4]; compiler ldr r0, [r0, #4]. */
 #include "common.h"
 
 struct GameWork {
@@ -17,10 +16,11 @@ extern GameGlobals g_gameGlobals;
 /* Returns the optional game-work status byte. */
 s32 FUN_001ddc00(void)
 {
-    if (g_gameGlobals.data == NULL) {
-        return 0;
+    s32 result = 0;
+    if (g_gameGlobals.data != NULL) {
+        result = g_gameGlobals.data->status;
     }
-    return g_gameGlobals.data->status;
+    return result;
 }
 
 } /* extern "C" */

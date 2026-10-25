@@ -14,13 +14,13 @@ typedef struct BtlUnit {
 } BtlUnit;
 
 extern u32 g_btlScriptUnit;
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(s32 index);
 extern s32 scrSetResult(s32 value);
 
 /* Script command: pushes whether value `arg` of the script unit has kind 3. */
 u32 scrCommBtlUnitValueKindIs3(void)
 {
-    s32 index = scrGetArg();
+    s32 index = scrGetArg(0);
 
     scrSetResult(reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->values[index] >> 10 == 3);
     return 1;

@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
@@ -9,7 +10,6 @@ u32 hasFlag80Or1000(u32 unit, u32 *flags);
 s32 FUN_003eebf4(const BtlMainStateA *battle, s32 ordinal);
 bool FUN_0047f78c();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
-u32 FUN_0019acdc(u16 id, u32 kind);
 void FUN_003f1b3c(BtlMainStateA *battle, u32 category, s32 kind, u32 *entry, u32 *sound);
 u32 FUN_0047f4cc(u32 sound, f32 volume, f32 gain, f32 pitch);
 

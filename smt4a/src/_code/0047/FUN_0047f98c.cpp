@@ -1,9 +1,9 @@
-/* NON_MATCHING: VFP argument preservation uses three scalar moves rather than retail's paired move and scalar move. */
+/* NON_MATCHING: VFP argument preservation uses three scalar moves rather than retail's paired move (d8 = d0) and scalar move; a by-value float-pair parameter did not reproduce it. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 s32 textFormatBuffer(char *destination, const char *format, ...);
-u32 FUN_0014af98();
 u32 FUN_001628c0(const char *text, u32 alpha, u32 flags, u32 options, f32 x, f32 y);
 
 // Draw the icon encoded by a packed resource id, including its optional variant suffix.

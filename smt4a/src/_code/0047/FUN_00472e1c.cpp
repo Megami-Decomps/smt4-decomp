@@ -1,5 +1,6 @@
 /* NON_MATCHING: native job handle and canonical context push restored; flags use tst instead of retail ands, and final return-zero/stack restoration order differs. */
 #include "gfx/DrawParameterOwner.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
 
@@ -17,7 +18,6 @@ extern RenderCtxA* g_renderCtx;
 s32 FUN_001692ac(u32 enabled, u32 option);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const EffectSpeedState* state);
-void FUN_001835b4(s32 layer, s32 category, s32 effect, s32 option, s32 flags, s32 mode);
 void FUN_00183bb0(void);
 void skinObjectUpdateMatrices(RenderCtxA* context);
 void renderCtxResetColorScale(RenderCtxA* context);

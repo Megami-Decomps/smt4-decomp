@@ -1,5 +1,6 @@
 /* NON_MATCHING: register assignment differs (retail keeps y in r6 and the unit in r5; built swaps them) and the notice text buffer frame is 8 bytes larger (200 vs 185 rows); the partner screen drawing is the same. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -34,7 +35,6 @@ PartnerLayout *FUN_001834a4(u32 group, u32 id);
 void FUN_004bde34(PartnerScreenView *screen, PartnerUnitView *unit, s32 index, s32 x, s32 y, f32 scale);
 void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 scale);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void textFormatBuffer(void *buffer, const char *format);
 s32 fontMeasureLineAdvance(void *text, u32 kind);
 void FUN_00162790(u32 first, u32 second, const u16 *text, f32 x, f32 y, f32 z, f32 width, f32 height);

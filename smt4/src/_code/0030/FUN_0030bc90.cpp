@@ -12,14 +12,14 @@ struct CecSavedEntry {
 
 extern "C" {
 extern CampCecCountState *g_campCec;
-s32 scrGetArg(void);
+s32 scrGetArg(s32 index);
 void scrSetResult(s32);
 CecSavedEntry *FUN_00262f94(void);
 
 // Return either the current StreetPass count or the selected saved entry's count.
 u32 FUN_0030bc90(void)
 {
-    s32 current = scrGetArg();
+    s32 current = scrGetArg(0);
     u16 count;
     if (g_campCec == NULL) {
         count = 0;

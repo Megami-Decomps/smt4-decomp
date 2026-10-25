@@ -1,10 +1,10 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int buttonHelpRelease(void);
 int scrScriptProcessDestroy(u32 process);
-int asdTMTexTableFreeEntry(int table);
 int asdTMTexTableReleaseNode(int table, int index);
 int ifTouchRegionRemove(void);
 int FUN_002bff50(void);

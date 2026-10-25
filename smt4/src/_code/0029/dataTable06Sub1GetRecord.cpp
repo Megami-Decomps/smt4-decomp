@@ -1,5 +1,6 @@
 /* Registers a 4-slot request for `id`, keyed by the table-6 handle, with the callback at 0x2DCA98. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

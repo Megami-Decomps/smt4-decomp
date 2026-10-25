@@ -1,10 +1,10 @@
 /* NON_MATCHING: The room-global literal load is scheduled before the prologue and its work load precedes index initialization. */
 #include "npc_room/NpcRoom.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 extern NpcRoomA *g_npcRoom;
 char *libc_strcpy(char *destination, const char *source);
-char *FUN_001654f8(const char *source, char *destination, s32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void FUN_003c1060(void);
 void FUN_0038892c(u32 text, u32 parameter);

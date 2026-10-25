@@ -6,9 +6,9 @@ namespace { struct Battle { u8 padding[0x49d0]; u64 flags; }; }
 extern "C" {
 u32 scrGetArg(u32 index);
 Battle *btlGetMainState(void);
-u32 scrBattleClearFlag(u32 argument)
+u32 scrBattleClearFlag(void)
 {
-    u32 bit = scrGetArg(argument);
+    u32 bit = scrGetArg(0);
     Battle *battle = btlGetMainState();
     battle->flags &= ~ (1ULL << (bit & 255));
     return 1;

@@ -11,7 +11,7 @@ extern unsigned int DAT_00589388; /* 0x589388 */
 extern int DAT_005c0a98; /* 0x5c0a98 */
 extern unsigned int DAT_0062d294; /* 0x62d294 */
 extern unsigned int DAT_0062d2a0; /* 0x62d2a0 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -25,10 +25,10 @@ int FUN_00442a94(void)
   int temp_v0;
   unsigned char temp_v1;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
+  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
   temp_v1 = DAT_00589384 != 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
   temp_v0 = DAT_005c0a98;
   if ((temp_v1) && (DAT_00589384 = DAT_00589384 - 1, DAT_00589384 == 0)) {
     DAT_0062d294 = 0xffffffff;
@@ -36,11 +36,11 @@ int FUN_00442a94(void)
     DAT_00589388 = 0;
     software_interrupt(0x23);
     if (DAT_005c0a98 < 0) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+      nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
       return temp_v0;
     }
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
   return 0;
 }
 

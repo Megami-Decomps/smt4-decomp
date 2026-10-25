@@ -1,11 +1,11 @@
 /* NON_MATCHING: ARMCC keeps x in r6 from entry instead of copying r4 to r6, and omits retail's nop before the member-speed call. */
 #include "ui/PartyPanel.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 u32 partyPanelGetFlag(void);
 PartyMember* partyPanelGetMember(s32 index);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 group, u32 table, s32 effect, u32 x, u32 y, s32 layer);
 }
 
 // Apply the panel effect speed to its main effect and three member effects.

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the clamp-policy pointer store is scheduled before the enabled-byte store; retail stores the byte first. */
 #include "classes/Obj421460.h"
 
 extern "C" {

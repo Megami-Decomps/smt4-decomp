@@ -1,4 +1,5 @@
 #include "shard/PlayScene.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 struct SpriteInfo;
@@ -12,7 +13,6 @@ void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 SpriteInfo* FUN_002bf4f8(u32 table, s32 id);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 
 void FUN_0025f300(PlayScene* work)
 {

@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail retains the first/second IDs in R4/R5 and stacked IDs in R6/R7; compiled code swaps these saved-register pairs despite otherwise identical instructions. */
 #include "battle/btlReflect.h"
+#include "battle/BtlMainAccess.h"
 extern "C" {
-void* btlGetMainState(void);
 
 
 // Enqueues a type-0x2d reflection action with four halfword IDs.

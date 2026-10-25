@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial left/right index loads use r1/r2 rather than retail r2/r1; component tie-break control flow now agrees. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 

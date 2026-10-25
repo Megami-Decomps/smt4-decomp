@@ -2,10 +2,10 @@
 #include "battle/btlUnit.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-u32 scrGetArg(u32 index);
 BtlMainState* btlGetMainState(void);
 
 // Install two script action ids and select up to two eligible reserve entries.

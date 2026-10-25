@@ -3,13 +3,13 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct NpcPortraitRecordView {
     u8 unk00[0x8c];
     s16 portraitId;
 };
 extern "C" {
-void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 void sysMemClear(void *memory, u32 size);
 const NpcPortraitRecordView *dataTable00FindById(u16 id);
 s32 FUN_00162ea4();

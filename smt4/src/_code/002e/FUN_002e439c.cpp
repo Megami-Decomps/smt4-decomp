@@ -1,4 +1,3 @@
-/* NON_MATCHING: first slot load is scheduled above the 0x307F/slotCount stores (retail keeps it after them) */
 #include "shard/PlayScene.h"
 
 extern "C" {
@@ -11,11 +10,10 @@ void playSceneSetState(PlayScene *scene, s32 state, s32 arg);
 /* Counts the scene's used slots, refreshes the button help and switches the scene to state 14. */
 void FUN_002e439c(PlayScene *scene)
 {
-    s32 i;
 
     scene->unk307F = 1;
     scene->slotCount = 0;
-    for (i = 0; i < 4; i++) {
+    for (s32 i = 0; i < 4; i++) {
         if (scene->slots[i] >= 0) {
             scene->slotCount++;
         }

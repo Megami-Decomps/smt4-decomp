@@ -1,6 +1,7 @@
 /* NON_MATCHING: ratio VFP division destination, selected table-row/count register allocation and threshold load order differ. */
 #include "common.h"
 #include "shard/W4_W4Match5_DataTable.h"
+#include "util/CalleeContracts.h"
 
 struct PopupState {
     s32 state;      // 0x00
@@ -29,7 +30,6 @@ extern "C" {
 extern PopupState* g_popupState;
 extern s32 g_gameState;
 
-void FUN_00152f44(void);
 SaveSlot* saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(s32 range);

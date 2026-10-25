@@ -16,13 +16,13 @@ typedef struct BtlUnit {
 
 extern u32 g_btlScriptUnit;
 
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(s32 index);
 extern void scrSetResult(s32 value);
 
 /* Script command: pushes whether the script unit's HP percentage is at most argument 0; returns 1. */
 s32 scrCommBtlUnitHpPercentWithin(void)
 {
-    s32 limit = scrGetArg();
+    s32 limit = scrGetArg(0);
     UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(stats->hp * 100 / stats->maxHp <= limit);

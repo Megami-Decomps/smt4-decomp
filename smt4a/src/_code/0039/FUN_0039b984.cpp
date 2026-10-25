@@ -1,4 +1,5 @@
 #include "gamedata/DataTable.h"
+#include "util/CalleeContracts.h"
 
 struct SoundRecord {
     u16 id;          // 0x00

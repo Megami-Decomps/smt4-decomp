@@ -1,5 +1,6 @@
 /* NON_MATCHING: queue initialization scheduling, positional conversion core registers and fixed-placement float loads differ. */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 extern SoundActorQueue *DAT_00448c20;

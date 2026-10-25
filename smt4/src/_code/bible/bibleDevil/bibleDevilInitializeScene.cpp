@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "classes/Obj42242c.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct BibleInitRow { u32 unk00; s16 id; u8 unk06[0x1a]; };
 struct BibleInitFields {
@@ -35,9 +36,8 @@ struct BibleDevilTaskWork { BibleScreen *screen; };
 struct BibleDevilTasks { BibleDevilTaskWork *work; s32 selected; };
 extern "C" {
 extern BibleDevilTasks DAT_0043d9c8;
-void FUN_0022e2fc(void *table);
+void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32);
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *, u32);
 s32 uiCallbackUpdate(u32);
@@ -62,7 +62,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     fields->changed = 0;
     fields->selected = 0xffff;
     fields->marked = 0;
-    FUN_0022e2fc(fields->rows);
+    entryTableClear(fields->rows);
     fields->vtable->initialize(screen);
     menuSetModeAndResetTransitions(2);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleDevil.cpp", 200);

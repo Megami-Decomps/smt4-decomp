@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail spills r0-r3 (push {r0-r3,r4-r6,lr}) and reloads the mode byte from the spill, and pairs the stores as strd/stm; built keeps args in registers and orders the stores differently (same family as FUN_004268f0) */
+/* NON_MATCHING: the mode byte and the push {r0-r3, r4-r6, lr} spill match (memcpy of the parameter); armcc orders/merges the command stores differently from retail (retail: strd first/second, stm count/descriptor/buffer) */
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include <string.h>
 
 extern "C" {
 extern u32 DAT_005c149c;
@@ -11,7 +12,7 @@ u32 FUN_0042687c(u32 handle, u8 mode, u32 first, u32 second, u32 buffer, s32 cou
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
 
     command->header = 0x10020104;
-    *reinterpret_cast<u8 *>(&command->words[0]) = mode;
+    memcpy(&command->words[0], &mode, sizeof(mode));
     command->words[1] = first;
     command->words[2] = second;
     command->words[3] = count;

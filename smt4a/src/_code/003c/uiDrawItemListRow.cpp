@@ -1,10 +1,10 @@
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 s32 recordGetModeForId(u32 id);
 void campDrawFrame(s32 x, s32 y, u32 special, f32 effect);
-void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 const char *FUN_0015f858(s32 message, u32 variant);
 void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 parameter, f32 rotation, f32 effect);

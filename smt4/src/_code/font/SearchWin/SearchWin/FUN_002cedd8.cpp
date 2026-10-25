@@ -2,6 +2,7 @@
 #include "font/SearchWin/SearchWin.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct SearchWindowDefaults {
     u8 primary[36];
@@ -16,7 +17,6 @@ extern const char DAT_00403ca0[];
 extern const char DAT_00403c88[];
 extern const char DAT_00403c70[];
 extern const SearchWindowDefaults DAT_00403b80;
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 s32 FUN_001ad180(u32);
 void FUN_001acdd8(u32);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: same loops and calls; retail hoists the zero constant into r9 at entry and caches begin/end with ldrd; registers and schedule differ */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct Owned406a1c {
     virtual ~Owned406a1c();
@@ -23,7 +24,6 @@ struct Obj406a1c {
 };
 
 extern "C" {
-int asdOperatorDelete(void *block);
 void asdOperatorDeleteB(void *block);
 int asdMemFree(void *block);
 

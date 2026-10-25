@@ -1,4 +1,5 @@
 #include "common.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -14,9 +15,8 @@ typedef struct Shop004989f0 {
 } Shop004989f0;
 
 void sysMemClear(void *buffer, s32 size);
-u32 dataTable17Type0GetEntry(u32 *out, s32 item);
-u32 FUN_001654f8(u32 entry, s32 a, s32 b);
-void textFormatBuffer(char *dst, const char *format, char *src, u32 entry);
+const char *dataTable17Type0GetEntry(u32 *out, s32 item);
+void textFormatBuffer(char *dst, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
 void scrScriptProcessStartEntry(u32 process, u32 index);
 void scrRunOpcodesStub(u32 process);
@@ -32,7 +32,7 @@ void shopStartSelectionScript(Shop004989f0 *shop, s32 second)
     sysMemClear(shop->text, 0x200);
     for (i = 0; i < shop->itemCount; i++) {
         s32 item = second == 0 ? shop->items[i] : shop->items[i] + 4;
-        u32 entry = dataTable17Type0GetEntry(&entryOut, item);
+        const char *entry = dataTable17Type0GetEntry(&entryOut, item);
 
         textFormatBuffer(shop->text, "%s%s<br>", shop->text, FUN_001654f8(entry, 0, 0));
     }

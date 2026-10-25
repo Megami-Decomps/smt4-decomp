@@ -9,7 +9,7 @@ int FUN_0027da30(...);
 int FUN_00229098(int *);
 int FUN_00229118(...);
 int FUN_002296dc(...);
-int FUN_00229998(int *);
+int btlMarkLowestHpUnit(int *);
 int FUN_00229a24(...);
 int FUN_00229b10(...);
 int bgmSwitchCurrent(...);
@@ -43,7 +43,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_00229098. */
 /* Supplied declaration required: FUN_00229118. */
 /* Supplied declaration required: FUN_002296dc. */
-/* Supplied declaration required: FUN_00229998. */
+/* Supplied declaration required: btlMarkLowestHpUnit. */
 /* Supplied declaration required: FUN_00229a24. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: bgmSwitchCurrent. */
@@ -257,7 +257,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
       FUN_003d0fcc(param_1,1);
     }
     else {
-      FUN_00229998(param_1);
+      btlMarkLowestHpUnit(param_1);
     }
     temp_v1 = 0;
     temp_v9 = 0x6d;

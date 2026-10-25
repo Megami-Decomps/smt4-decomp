@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-extern u64 DAT_00571190;
+extern u64 g_btlTargetableMask;
 u32 lcgRandomRange(u16 maximum);
 u16 FUN_004e9ae8(BtlMainStateA **context, s32 *candidates, s32 count, u32 mode);
 BattleActionUnit *btlUnitGet(BtlMainStateA **context);
@@ -16,7 +16,7 @@ void FUN_004e6880(BtlMainStateA **context, u32 status)
     s32 count = 0;
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &(*context)->entries[index];
-        if ((entry->flags & DAT_00571190) != 0) {
+        if ((entry->flags & g_btlTargetableMask) != 0) {
             if (status != 22) {
                 if (status != 28) {
                     u16 flags = entry->statusFlags;

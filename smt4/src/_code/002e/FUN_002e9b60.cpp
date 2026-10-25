@@ -1,12 +1,14 @@
-/* NON_MATCHING: positional-sound cutover is pending recovery of the dropped sin/cos inputs/results used by forward-offset sound positions; legacy local sound declaration is intentionally retained. */
-#include "romwright_types.h"
+/* NON_MATCHING: sin/cos arguments, results and the sound/marker positions built from them are restored from retail; the body is still the raw decompiler control-flow draft, so branch layout and register allocation differ. */
+#include "common.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "map/MapActionMarker.h"
+#include "util/TrigF32.h"
 #include "shard/S1Mover.h"
 
 extern "C" {
 
 int mapDestroySecondaryModel(...);
 int mapIfReleaseSlot2(void);
-int FUN_00248114(void);
 int mapIfActivateRecord(int, unsigned int);
 int mapInterfaceSetStateTwo(void);
 int lmapSetSceneId(unsigned int);
@@ -15,9 +17,6 @@ int FUN_0027fca0(unsigned int);
 int mapSelectContainingRegions(void);
 int FUN_002804ec(int);
 int mapEaseSceneHeading(void);
-int FUN_00282390(void);
-int FUN_0028250c(void);
-int FUN_00291e40(...);
 int buttonHelpSetPreset(int);
 void lmapFindNearestMatchingTargetPoint(s32, s32, s32, Vec3f *, f32 *, s32, Vec3f);
 
@@ -36,6 +35,7 @@ extern unsigned int DAT_0049f9a0; /* 0x49f9a0 */
 extern unsigned int DAT_0049f9a4; /* 0x49f9a4 */
 extern unsigned int DAT_0049f9a8; /* 0x49f9a8 */
 extern unsigned int DAT_0049f9ac; /* 0x49f9ac */
+extern float DAT_0049f9bc; /* 0x49f9bc */
 extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 
 /* Supplied declaration required: mapDestroySecondaryModel. */
@@ -106,11 +106,13 @@ void FUN_002e9b60(void)
               if (temp_v1 == 1) {
                 *(unsigned int *)(temp_v0 + 0x54) = 0x10;
                 *(unsigned int *)(temp_v0 + 0x58) = 0;
-                FUN_00291e40();
+                FUN_00291e40(0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
                 FUN_0027fca0(0xffffffff);
-                FUN_0028250c();
-                FUN_00282390();
-                FUN_00291e40(0x1000240);
+                SoundActorQueuePosition position;
+                position.x = *(float *)(g_lmapScene + 0x1c) + FUN_0028250c(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+                position.z = *(float *)(g_lmapScene + 0x24) + FUN_00282390(*(float *)(g_lmapScene + 0x4c) * 0.017453292f) * 50.0f;
+                position.y = *(float *)(g_lmapScene + 0x20) + 150.0f;
+                FUN_00291e40(0x1000240, position);
               }
               if (*(int *)(g_lmapScene + 8) == 2) {
                 mapIfReleaseSlot2();
@@ -155,15 +157,10 @@ void FUN_002e9b60(void)
               }
               *(float *)(g_lmapScene + 0x50) = nearestYaw;
               *(Vec3f *)(temp_v0 + 0x28) = nearestPoint;
-              temp_v6 = (nearestYaw + temp_v5) * temp_v4;
               *(float *)(temp_v0 + 0x2c) = nearestPoint.y - 142.0f;
-              FUN_0028250c();
+              *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + FUN_0028250c((nearestYaw + 180.0f) * 0.017453292f) * 35.0f;
               temp_v0 = g_lmapScene;
-              temp_v7 = 35.0f;
-              *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v6 * 35.0f;
-              temp_v4 = (*(float *)(temp_v0 + 0x50) + temp_v5) * temp_v4;
-              FUN_00282390();
-              *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v7;
+              *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + FUN_00282390((*(float *)(temp_v0 + 0x50) + 180.0f) * 0.017453292f) * 35.0f;
             }
             else {
               temp_v0 = padIsButtonPressed(5);
@@ -211,9 +208,12 @@ void FUN_002e9b60(void)
         *(unsigned int *)(DAT_004474f4 + 0xac) = 0xfffffffd;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1,DAT_0049f99c);
-        FUN_0028250c();
-        FUN_00282390();
-        FUN_00248114();
+        MapMarkerPosition marker;
+        marker.x = *(float *)&DAT_0049f9a0 + FUN_0028250c(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
+        marker.y = *(float *)&DAT_0049f9a4;
+        marker.z = *(float *)&DAT_0049f9a8 + FUN_00282390(*(float *)&DAT_0049f9ac * 0.017453292f) * 150.0f;
+        marker.w = DAT_0049f9bc;
+        FUN_00248114(marker);
         temp_v0 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v0 + 8) = 0;
@@ -263,7 +263,7 @@ void FUN_002e9b60(void)
     *(unsigned int *)(temp_v0 + 0x24) = temp_v8;
     *(float *)(temp_v0 + 0x20) = temp_v4;
     if ((temp_v2 == 1) || ((temp_v2 == 0xb || temp_v2 == 0x1c) || temp_v2 == 0x29)) {
-      FUN_00291e40((temp_v2 & 3) + 0x1000212,temp_v0,temp_v2 & 3,temp_v4);
+      FUN_00291e40((temp_v2 & 3) + 0x1000212, *(SoundActorQueuePosition *)(g_lmapScene + 0x1c));
       FUN_0027fca0(0xffffffff);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {

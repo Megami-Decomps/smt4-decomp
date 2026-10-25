@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps one more callee-saved register live (fp, stack frame 20 vs 16) and hoists the sprite pointers and float constants differently */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "title/titleMain.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
 
@@ -41,7 +42,6 @@ extern "C" {
 void FUN_00157558(RenderCtxA *context);
 u32 FUN_001692ac(u32 value, bool enabled);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 order);
 TitleTextureEntry *FUN_001834a4(u32 texture, u32 frame);
 void efctSetSpeed(f32 alpha);
 void FUN_0034dc3c(void *menu);

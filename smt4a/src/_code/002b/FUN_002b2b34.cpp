@@ -18,8 +18,8 @@ extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
     }
     left = FUN_001ad9b4(*leftId);
     right = FUN_001ad9b4(*rightId);
-    if (left != NULL && right != NULL) {
-        return left->ordering.sortKey - right->ordering.sortKey;
+    if (left == NULL || right == NULL) {
+        return 0;
     }
-    return 0;
+    return left->ordering.sortKey - right->ordering.sortKey;
 }

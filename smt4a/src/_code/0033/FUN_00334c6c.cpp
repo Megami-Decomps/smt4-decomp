@@ -1,5 +1,6 @@
 /* NON_MATCHING: recovered animation speed getters; alternate flag, owner and sprite-ID saved registers remain permuted. */
 #include "status/StatusDown.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 
 struct StatusPanelAnimationsView {
@@ -16,7 +17,6 @@ extern "C" {
 extern StatusDownStateA *g_statusDown;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);
-void FUN_001835b4(s32 layer, s32 group, s32 sprite, s32 x, s32 y, s32 flags);
 
 // Draw the normal or alternate status panel with independent background and accent timing.
 void FUN_00334c6c(s32 x, s32 y, s32 alternate)

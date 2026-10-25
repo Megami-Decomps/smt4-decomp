@@ -2,6 +2,7 @@
 #include "battle/DebugPanel.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "util/CalleeContracts.h"
 
 /* The debug menu's settings block at 0x5715f8; only the parts this panel reads are named. */
 struct BtlDebugMenuSettings {
@@ -37,7 +38,6 @@ extern s32 DAT_00573b80;
 s32 jobIsValid(u32 job);
 void FUN_003592dc(u32 job);
 void jobStop(u32 job, s32 mode);
-u32 asdListBoxCreateDefaultFlags(u32 parent, u32 id, u32 argument, u32 flags);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void asdListBoxSetByteValue(u32 job, u32 value);
 void jobSetText(u32 job, const char *text);

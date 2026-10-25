@@ -1,5 +1,6 @@
 /* NON_MATCHING: the control flow of the row loop and the scissor helpers compile differently */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 scale);
-void FUN_001835b4(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 z);
 SpriteInfo *FUN_001834a4(s32 group, s32 id);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 z, s32 a, s32 value);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);

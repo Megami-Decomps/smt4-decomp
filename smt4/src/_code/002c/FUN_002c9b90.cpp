@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail predicates the second lookup (cmp, then subcc/addcc/addcc/movcs) and loads the entries pointer before adding the counts; built branches around it. */
 #include "common.h"
 
 extern "C" {
@@ -29,10 +28,10 @@ DataTableEntry *FUN_002c9b90(u32 index)
     if (index < count) {
         return entries + index;
     }
-    if (index < g_aocSystem->entryCount + count) {
-        return g_aocSystem->entries + (index - count);
-    }
-    return NULL;
+    AocSystem *aoc = g_aocSystem;
+    u32 extra = aoc->entryCount;
+    DataTableEntry *extraEntries = aoc->entries;
+    return index < extra + count ? extraEntries + (index - count) : NULL;
 }
 
 } /* extern "C" */

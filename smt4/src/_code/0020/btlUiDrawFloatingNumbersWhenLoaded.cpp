@@ -1,9 +1,9 @@
 #include "battle/btlUI.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int btlDrawFloatingNumbers(void *obj, int arg);
-extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 extern BtlUiGlobals g_btlUi;
 

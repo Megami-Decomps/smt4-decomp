@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024e31c` (_code @ 0x24e31c, 0x8c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +17,6 @@ int FUN_00168e00(...);
 int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
 int skinObjectUpdateMatrices(...);
-int FUN_001835b4(int, int, int, int, int, int);
 int pairSetHalves(int, int, int);
 int renderCtxCalculateStereoParallax(...);
 int jobGetScalarValue(void);
@@ -60,9 +61,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */

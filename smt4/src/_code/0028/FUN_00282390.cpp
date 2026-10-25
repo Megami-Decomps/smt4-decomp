@@ -1,5 +1,5 @@
 /* NON_MATCHING: VFP scheduling differs and infinity's runtime invalid division folds to a NaN constant. */
-#include "common.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 void __set_errno(s32);

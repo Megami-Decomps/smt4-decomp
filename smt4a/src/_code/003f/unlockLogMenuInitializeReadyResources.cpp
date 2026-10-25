@@ -1,6 +1,7 @@
 /* NON_MATCHING: native unrolls nine neighbor writes and retains a redundant initial visible=4 store that this compiler removes. */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct UnlockLogEntry {
     u16 id;
@@ -43,7 +44,6 @@ struct UnlockLogWork {
 
 extern "C" {
 void *textureGetIndexedResource(u32 group);
-s32 asdTMTexTableNodeIsLoaded(u32 group, s32 index);
 UnlockLogScript *FUN_00275bc8(void *flow, u32 screen);
 void FUN_003f5bd8(UnlockLogWork *work, s32 count);
 void FUN_00203b40(ScrollSelection *list, s32 count, s32 visible, s32 columns, s32 enabled, s32 colors);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003909d0` (_code @ 0x3909d0, 0x628 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_002ae9ec(...);
 int FUN_002b7d30(int, int);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
-int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
@@ -50,7 +50,6 @@ extern int aocIsEntryIndexValid(int, int);
 /* Supplied declaration required: FUN_002b7d30. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */

@@ -14,7 +14,7 @@ int FUN_0047fa50(...);
 int btlUIClearWorkTables(...);
 int FUN_004aba84(unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_004abde4(...);
-int FUN_004e6fb0(int *);
+int btlAiMarkLowestHpTarget(int *);
 int FUN_004e7c04(int *, int);
 int FUN_004e8454(int *);
 int FUN_004e8668(int *, unsigned int *);
@@ -60,7 +60,7 @@ extern unsigned int FUN_004aba54(unsigned int);
 /* Supplied declaration required: FUN_004aba84. */
 extern int btlUiIsMenuReady(unsigned int);
 /* Supplied declaration required: FUN_004abde4. */
-/* Supplied declaration required: FUN_004e6fb0. */
+/* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
 /* Supplied declaration required: FUN_004e8668. */
@@ -263,7 +263,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
       btlUnitMarkTargetCandidates(param_1,1);
     }
     else {
-      FUN_004e6fb0(param_1);
+      btlAiMarkLowestHpTarget(param_1);
     }
     temp_v13 = 0;
     temp_v3 = 0x6d;

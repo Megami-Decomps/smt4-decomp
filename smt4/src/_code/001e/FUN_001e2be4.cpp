@@ -1,4 +1,4 @@
-/* NON_MATCHING: hint dispatch becomes a jump table; timer initialization combines stores and interval constants load differently. */
+/* NON_MATCHING: map block pointer/capacity register assignment (r5/r6) swapped and the timer init uses stm instead of retail's writeback stores. */
 #include "map/MapIfTimer.h"
 #include "map/mapDepart.h"
 
@@ -27,21 +27,26 @@ void FUN_001e2be4(void)
         return;
     }
     s32 hint = map->next;
-    switch (hint) {
-    case 1:
+    if (hint == 1) {
         if (gameCountUnits() < 1) {
             hint = 2;
         }
-        break;
+    } else switch (hint) {
     case 5:
-        if (gameCountersGetWord(32) != 0 && clockGetSecondsSinceStart() - 1800 <= 1800) {
-            break;
+        if (gameCountersGetWord(32) != 0) {
+            u32 seconds = clockGetSecondsSinceStart();
+            if (seconds >= 1800 && seconds <= 3600) {
+                break;
+            }
         }
         hint = 6;
         // fall through
     case 6:
-        if (gameCountersGetWord(32) != 0 && clockGetSecondsSinceStart() - 3600 <= 3600) {
-            break;
+        if (gameCountersGetWord(32) != 0) {
+            u32 seconds = clockGetSecondsSinceStart();
+            if (seconds >= 3600 && seconds <= 7200) {
+                break;
+            }
         }
         hint = 7;
         // fall through
@@ -51,18 +56,17 @@ void FUN_001e2be4(void)
         }
         hint = 8;
         // fall through
-    case 8: {
-        s32 capacity = FUN_00334038();
-        if (FUN_0028d310() >= capacity / 2) {
+    case 8:
+        if (FUN_00334038() / 2 <= FUN_0028d310()) {
             hint = 0;
         }
         break;
     }
-    }
+    MapIfTimer *timer = g_mapIfTimer;
     const MapHintRecord *record = &DAT_00447ab0[hint];
-    g_mapIfTimer->state = 2;
-    g_mapIfTimer->frames = 0;
-    g_mapIfTimer->hintLabel = record->label;
+    timer->state = 2;
+    timer->frames = 0;
+    timer->hintLabel = record->label;
     FUN_002bfc24(1, record->message, FUN_002bfdc4(), flags, 0.707f, 0.707f);
     ++hint;
     if (hint >= 9) {

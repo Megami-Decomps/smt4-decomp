@@ -12,7 +12,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char DAT_00589380; /* 0x589380 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 extern int FUN_00442280(void);
 /* Supplied declaration required: FUN_004427bc. */
@@ -30,9 +30,9 @@ FUN_00442218(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   int temp_v2;
   
   temp_v2 = param_4;
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
   temp_v1 = (*(int *)((unsigned char *)&DAT_00589380 + 0x4)) == 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
   if ((temp_v1) && (temp_v0 = FUN_00442280(), temp_v0 == 0)) {
     return 0;
   }

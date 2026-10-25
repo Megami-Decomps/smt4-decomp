@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

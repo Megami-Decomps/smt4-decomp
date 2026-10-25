@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the row-independent math into s16..s23 differently and shares the row draw call across the three layout cases (this version merges the two column-count cases into one); the same calls and floats. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 /* One row of the list (0x60 bytes). */
@@ -53,7 +54,6 @@ void FUN_00164034(PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomL
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_001692d4(void);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 a, s32 b, u32 id, s32 c, s32 d, s32 e);
 f32 FUN_001f3f34(f32 a, f32 b, f32 c, f32 d);
 FixedRect *FUN_001834a4(u32 group, u32 index);
 void FUN_003f8a24(void *panel, u32 id, RowEntry *row, f32 x, f32 y, f32 z);

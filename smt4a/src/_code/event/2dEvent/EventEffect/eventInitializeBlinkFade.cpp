@@ -1,6 +1,7 @@
 #include "event/2dEvent/EventEffect.h"
 #include <string.h>
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct BlinkFadeWorkA {
     u32 job;
@@ -29,7 +30,6 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 stack, u32 options,
                    u32 (*callback)(void), u32 context, u32 parameter, u32 parent);
 void *textureGetIndexedResource(u32 table);
 void asdTMTexTableLoadTmx(u32 table, u32 options);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 // Allocate the blink-fade controller, install its calculation/draw tasks and load textures.

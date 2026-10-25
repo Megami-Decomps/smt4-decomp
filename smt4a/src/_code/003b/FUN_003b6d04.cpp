@@ -1,5 +1,7 @@
 /* NON_MATCHING: register allocation only (r5-r9 rotated). Retail addresses the texture array as g_eventEffect+0x1c, likely a separate global of the original unit placed after it. */
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -25,10 +27,8 @@ typedef struct EventEffectState {
 
 extern EventEffectState g_eventEffect;
 
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void *textureGetIndexedResource(u32 table);
-void asdTMTexTableFreeEntry(u32 table);
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *ptr);
 

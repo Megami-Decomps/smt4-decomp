@@ -1,5 +1,11 @@
-/* NON_MATCHING: retail clears the offset through its address with an stm of two zero words plus one vstr; this build stores three vstr. */
+/* NON_MATCHING: retail clears the offset's two integer words with one stm of two zero registers (mov r2, r1), this build stores them with two str. */
 #include "common.h"
+
+struct SpriteOffset41e3a0 {
+    s32 x;
+    s32 y;
+    f32 z;
+};
 
 struct SpriteListMenu41e3a0 {
     /* 0x000 */ u8 unk000[0x18];
@@ -10,7 +16,7 @@ struct SpriteListMenu41e3a0 {
     /* 0x618 */ u8 unk618[0x8];
     /* 0x620 */ s32 shownCount;
     /* 0x624 */ u8 unk624[0xC8];
-    /* 0x6EC */ f32 offset[3];
+    /* 0x6EC */ SpriteOffset41e3a0 offset;
 };
 typedef char SpriteListMenu41e3a0Check[sizeof(SpriteListMenu41e3a0) == 0x6F8 ? 1 : -1];
 
@@ -30,9 +36,10 @@ void FUN_0041e3a0(SpriteListMenu41e3a0 *menu, s32 withCursor)
         uiSpriteSetKeyframe(menu->items[i], 8, 0);
         uiSpriteSetImageKeyframe(menu->items[i], 1, 0);
     }
-    menu->offset[0] = 0.0f;
-    menu->offset[1] = 0.0f;
-    menu->offset[2] = 0.0f;
+    SpriteOffset41e3a0 *offset = &menu->offset;
+    offset->x = 0;
+    offset->y = 0;
+    offset->z = 0.0f;
     menu->shownCount = menu->count;
 }
 

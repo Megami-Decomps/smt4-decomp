@@ -1,4 +1,5 @@
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 
@@ -9,13 +10,13 @@ typedef struct IdRecord {
 } IdRecord;
 
 IdRecord *dataTable41FindById(u32 id);
-BattleMaskEntry *FUN_003f0e20(BattleMaskState *battle, u32 id);
-void source4CCopyHalves(BattleMaskEntry *entry, u16 *output);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
+void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *output);
 
 /* Collects the entry's ids and returns the value of the first one whose record has a nonzero value, else 0. */
 s32 btlFindEntryNonzeroRecordValue(u32 id)
 {
-    BattleMaskEntry *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
     u16 ids[10] = {0};
 
     source4CCopyHalves(entry, ids);

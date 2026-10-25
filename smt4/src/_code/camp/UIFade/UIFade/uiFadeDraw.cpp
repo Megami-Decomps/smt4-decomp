@@ -1,11 +1,11 @@
 /* Draws the fade overlay while its alpha is above zero. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "camp/UIFade/UIFade.h"
 
 extern "C" {
 
-int FUN_002bf288(int a, int b, int c, int d, int e, u32 arg);
 int efctSetSpeed(f32 alpha);
 int FUN_002c18e4(RenderCtx *ctx);
 int FUN_002c39a4(RenderCtx *ctx);

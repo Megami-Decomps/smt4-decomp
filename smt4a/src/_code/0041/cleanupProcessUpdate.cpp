@@ -1,5 +1,6 @@
 /* NON_MATCHING: transition resets reuse the cached zero instead of retail's fresh zero registers; common-return layout also differs. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct CleanupProcessState {
     /* 0x00 */ u8 unk00[8];
@@ -24,7 +25,6 @@ void scrRunOpcodesStub(void *script);
 void FUN_00371ef4(void);
 void sysPlayVoice(u32 value);
 s32 stateHolderStateIsNot4(void);
-s32 FUN_0023b3d0(void);
 void FUN_0034a968(void);
 void sysPlaySe(u32 sound);
 void FUN_0022e774(void);

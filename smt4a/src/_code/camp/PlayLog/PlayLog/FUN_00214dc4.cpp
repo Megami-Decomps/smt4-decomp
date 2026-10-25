@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214dc4` (_code @ 0x214dc4, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int fontMeasureLineAdvance(...);
 int FUN_002c0940(...);
 int FUN_00344cd0(...);
@@ -41,7 +41,6 @@ extern int g_playLog; /* 0x57f278 */
 extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);

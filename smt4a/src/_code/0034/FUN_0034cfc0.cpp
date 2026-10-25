@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034cfc0` (_code @ 0x34cfc0, 0xa44 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ int FUN_00162790(...);
 int effectDispatchSelector(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int dataTable08Sub2GetRecord(void);
@@ -61,7 +61,6 @@ extern int g_camp; /* 0x57f108 */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */

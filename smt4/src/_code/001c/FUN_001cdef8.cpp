@@ -1,5 +1,6 @@
 /* NON_MATCHING: native animation speed getters and render-context push recovered; initial global/stack clears and final early-return epilogue schedule differ. */
 #include "shard/GameGlobals.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 /* Float aliases in the shared byte padding at +0x301 would shift its alignment. */
@@ -18,7 +19,6 @@ void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 flags);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 location, f32 depth);
 void efctSetSpeed(f32 speed);
-void FUN_002bf288(u32 flags, u32 table, u32 sprite, s32 x, s32 y, s32 z);
 f32 vec2GetSpeed(const void *object);
 
 u8 FUN_001cdef8(void)

@@ -1,10 +1,10 @@
 /* NON_MATCHING: selected/applied slot comparison recovered; occupied-slot address and save-name copy scheduling still differ. */
 #include "common.h"
 #include <stddef.h>
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void FUN_0023b45c(s32 enabled);
-void FUN_002c8538(s32 enabled);
 char *libc_strcpy(char *output, const char *input);
 void FUN_0033440c(u32 value);
 void FUN_0033449c(s32 value);

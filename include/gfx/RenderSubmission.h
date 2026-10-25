@@ -36,10 +36,10 @@ struct RenderSubmission {
 union RenderSubmissionColor {
     u32 value;
     struct {
-        u32 red : 8;
-        u32 green : 8;
-        u32 blue : 8;
-        u32 alpha : 8;
+        u8 red;
+        u8 green;
+        u8 blue;
+        u8 alpha;
     } channels;
 };
 typedef char RenderSubmissionOffsetsCheck[offsetof(RenderSubmission, owner) == 0x40 &&

@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 232 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 /* A layout record: its position at +8/+10. */
@@ -32,7 +33,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 LayoutRecord *FUN_001834a4(u32 group, u32 id);
-void FUN_001835b4(u32 layer, u32 group, u32 id, s32 x, s32 y, u32 slot);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void FUN_003f7164(ListMenu *menu, ListEntry *entry, s32 index, u32 kind, s32 x, s32 y, u32 slot, f32 speed);
 void FUN_003f6424(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);

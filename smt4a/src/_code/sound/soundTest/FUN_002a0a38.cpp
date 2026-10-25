@@ -2,6 +2,7 @@
  * later) and passes the new job straight from r0; armcc here works through r4 and r1 */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The sound test's work block (g_requestWork). */
 struct SoundTestWork {
@@ -17,7 +18,6 @@ extern "C" {
 
 extern SoundTestWork *g_requestWork;
 
-void *asdMemoryAllocTracked(s32 heap, s32 alignmentClass, s32 flags, u32 size, s32 fromFront);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                            AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (221 vs ~221 rows); frame size and register assignment of the helper-inlined ring operations differ */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 // Render-state stack: the current entry is slots[index]; the flush callback runs when the
 // value changed (or a flush is already pending).
@@ -44,7 +45,6 @@ f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
 s32 vec2GetXInt(void* vec);
 s32 vec2GetYInt(void* vec);
 void uiFadeDraw(u32 id);
-void FUN_002bf288(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 void* FUN_002bf4f8(u32 group, u32 index);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
 u32 FUN_002bcddc(u16 id, u32 arg);

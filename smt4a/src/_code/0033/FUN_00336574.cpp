@@ -1,11 +1,11 @@
 /* NON_MATCHING: native scalar-subobject accessors retain different VFP base calculations and no-op slots; final render-stack scratch registers also differ. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 
 void efctSetSpeed(float speed);
-int FUN_001835b4(...);
 
 
 extern int g_renderCtx; /* 0x59dbb4 */
@@ -14,7 +14,6 @@ extern int vec2GetXInt(int position);
 extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
 extern int FUN_002a4878(int);
 
 

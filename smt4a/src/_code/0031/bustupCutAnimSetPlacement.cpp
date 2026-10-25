@@ -40,7 +40,7 @@ void* jobGetWork(u32 job);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 void FUN_001b2d54(AocSystemA* system, u32 table, s32 node);
 void aocSlotRelease(AocSlot* slot);
-s32 FUN_003ae9d8(u32 job, s32 slot);
+s32 bustupCutAnimAssignSlot(u32 job, s32 slot);
 void FUN_0019d96c(BustupPlacementWork* work, s32 operation, s32 duration);
 u32 FUN_001ad1ac(Vec3f* position, s32 slot);
 
@@ -64,7 +64,7 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
     work->destination.x = (f32)x * 50.0f * 0.001953125f;
     work->destination.y = (f32)y * -50.0f * 0.001953125f;
 
-    const s32 result = FUN_003ae9d8(job, slot);
+    const s32 result = bustupCutAnimAssignSlot(job, slot);
     if (result != 0) {
         if (result == 1) {
             FUN_0019d96c(work, 2, 0);

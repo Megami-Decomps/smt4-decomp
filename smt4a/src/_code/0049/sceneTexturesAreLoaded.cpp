@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct GameMode {
 
 extern GameMode DAT_00587fdc; /* 0x587fdc */
 
-extern int asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 
 /* Whether the texture node the current scene (0x65-0x67) needs is loaded; other scenes need none. */
 u32 sceneTexturesAreLoaded(void)

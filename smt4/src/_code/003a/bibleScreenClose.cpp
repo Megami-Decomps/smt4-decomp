@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W4_Match6_BibleScreen.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ extern int gameReleaseDataReference(void);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_002a0cc8(int);
 extern int scrScriptProcessDestroy(BibleScript *script);
-extern int asdTMTexTableFreeEntry(int);
 extern int asdTMTexTableReleaseNode(int, int);
 extern int asdMemFree(void *ptr);
 

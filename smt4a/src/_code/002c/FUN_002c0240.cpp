@@ -1,5 +1,6 @@
 /* NON_MATCHING: ranking transitions and helper arguments are recovered; resource predicates, shared state commits, and switch branch placement differ. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct RankingScriptProcess {
     /* 0x000 */ u8 unk000[0x108];
@@ -25,7 +26,6 @@ struct RankingSavedState {
 
 extern "C" {
 extern RankingTransitionWork *g_campCecRanking;
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 RankingScriptProcess *FUN_00275bc8(void *heapA, void *heapB);
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 option);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 option);

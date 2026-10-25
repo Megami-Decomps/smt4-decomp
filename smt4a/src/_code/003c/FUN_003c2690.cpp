@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c2690` (_code @ 0x3c2690, 0x6c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int efctSetSpeed(void);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int pairSetHalves(...);
 int jobGetScalarValue(void);
 int fadeObjectResetIfActive(...);
@@ -28,7 +28,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: fadeObjectResetIfActive. */

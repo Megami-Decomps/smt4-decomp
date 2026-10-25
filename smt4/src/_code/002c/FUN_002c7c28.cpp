@@ -1,4 +1,4 @@
-/* NON_MATCHING: emitter count loads and parameter-pointer caching are scheduled differently. */
+/* NON_MATCHING: retail copies the descriptor into a second register before the kind load and loads the parameter pointer after storing the buffer. */
 /* Creates a particle emitter, its backing buffer and an independent copy of auxiliary data. */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
@@ -16,15 +16,15 @@ void effParticleParamCopy(EffParticleParam *destination, const EffParticleParam 
 EffEmitter *FUN_002c7c28(EmitterResourceRequest *request)
 {
     /* A pointer at the end of byte-aligned EmitterArguments cannot be added to its shared type. */
-    struct ParticleArguments {
-        u8 placement[0x20];
+    struct ParticleRequest {
+        u8 unk00[0x2C];
         EffParticleParam *parameter;
     };
-    ParticleArguments *arguments = (ParticleArguments *)&request->arguments;
+    ParticleRequest *arguments = (ParticleRequest *)request;
     EffEmitterDesc *descriptor = (EffEmitterDesc *)request->source->data;
     EffEmitter *emitter = effEmitterCreateSmall(descriptor);
     FUN_0024f8a4((ResourceEmitter *)emitter, request->source->id, &request->arguments);
-    u16 kind = request->source->id;
+    u32 kind = request->source->id;
     if (emitter->particle.buffer != NULL) {
         objectBufferFree(emitter->particle.buffer);
     }

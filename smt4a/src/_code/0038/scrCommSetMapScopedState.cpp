@@ -10,9 +10,9 @@ void FUN_00249ac4(s32 map, s32 section);
 extern s32 g_gameState[2];
 
 // Switch map-scoped state, creating it for the current map when absent.
-u32 scrCommSetMapScopedState(s32 argument)
+u32 scrCommSetMapScopedState(void)
 {
-    if (scrGetArg(argument) != 0) {
+    if (scrGetArg(0) != 0) {
         FUN_00249a08();
         return 1;
     }

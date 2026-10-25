@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation publication and 0x90-byte work extent recovered; process packet cursor uses r0 rather than retail ip. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct DebugBackgroundWork {
     u32 process; // 0x00
@@ -14,7 +15,6 @@ typedef char DebugBackgroundWorkSizeCheck[sizeof(DebugBackgroundWork) == 0x90 ? 
 extern "C" {
 extern DebugBackgroundWork *DAT_0044e2e8;
 extern const char DAT_00407dfa[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 option);
 void textFormatBuffer(char *output, const char *format, ...);
 void titleDbgBgDestroy();
 void FUN_001251d8();

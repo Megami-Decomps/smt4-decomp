@@ -1,4 +1,4 @@
-/* NON_MATCHING: final branch targets 0x101300; no function symbol names this call target. */
+/* NON_MATCHING: retail ends with a tail `b svcExitProcess` (no prologue); built calls it with bl, which the linker emulation turns into the inlined svc. */
 #include "common.h"
 
 extern "C" {
@@ -11,9 +11,10 @@ extern void FUN_00100cb8(void);
 extern void nninitCallStaticInitializers(void);
 extern void nninitSetup(void);
 extern void FUN_00101308(void);
+extern void svcExitProcess(void);
 
 /* Initializes runtime regions and services before entering the program. */
-void entry(void)
+__declspec(noreturn) void entry(void)
 {
     nninitRegion();
     FUN_0010236c();
@@ -23,6 +24,7 @@ void entry(void)
     nninitCallStaticInitializers();
     nninitSetup();
     FUN_00101308();
+    svcExitProcess();
 }
 
 } /* extern "C" */

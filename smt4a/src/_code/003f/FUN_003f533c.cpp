@@ -1,5 +1,6 @@
 /* NON_MATCHING: digit/coordinate saved registers and formatted-text stack argument scheduling differ. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
@@ -7,7 +8,6 @@ f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
 SpriteInfo* FUN_001834a4(u32 table, u32 id);
-void FUN_001835b4(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 void FUN_00180310(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,
     const char* format, ...);
 

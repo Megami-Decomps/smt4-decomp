@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b4f9c` (_code @ 0x4b4f9c, 0xe10 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 
@@ -37,7 +37,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int recordGetModeForId(int);

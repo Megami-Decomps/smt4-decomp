@@ -3,12 +3,12 @@
 extern "C" {
 
 void asdOperatorDeleteArray(void *memory);
-void FUN_002fd02a(void);
+void _ZN9Obj2fd02aD1Ev(void);
 
-/* Runs FUN_002fd02a, then frees `memory`. */
+/* Runs _ZN9Obj2fd02aD1Ev, then frees `memory`. */
 void FUN_002fb1c4(void *memory)
 {
-    FUN_002fd02a();
+    _ZN9Obj2fd02aD1Ev();
     asdOperatorDeleteArray(memory);
 }
 

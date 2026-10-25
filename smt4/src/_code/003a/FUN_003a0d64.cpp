@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "font/PlaceWin.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ScriptFile;
 struct ScriptProcessWork;
@@ -33,7 +34,6 @@ struct PlaceRecord {
 };
 
 extern "C" {
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
 ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);

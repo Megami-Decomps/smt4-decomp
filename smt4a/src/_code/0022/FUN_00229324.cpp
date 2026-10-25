@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations and keeps the scene pointer in other registers than retail. */
 #include "gfx/RenderStateStack.h"
+#include "shard/TextureDrawCall.h"
 
 /* The render context: two render-state stacks. */
 struct RenderCtx {
@@ -39,7 +40,6 @@ s32 scriptProcessCreateWhenReady(OverlayScene *scene);
 void FUN_00157558(RenderCtx *ctx);
 u32 FUN_001692ac(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
-void FUN_001835b4(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void efctSetSpeed(f32 speed);
 u32 vec2GetXInt(void *vec);
 u32 vec2GetYInt(void *vec);

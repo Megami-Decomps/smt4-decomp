@@ -1,5 +1,6 @@
 /* NON_MATCHING: item detail sprites restored; common indicator coordinate loads and conditional branch placement differ. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 struct ItemDetailDrawView {
@@ -13,7 +14,6 @@ extern "C" {
 void FUN_00169a1c(u32 sprite, s32 x, s32 y, s32 layer);
 void FUN_0018152c(s32 id, s32 x, s32 y, s32 style, s32 option);
 SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
-void FUN_001835b4(s32 layer, s32 group, s32 sprite, s32 x, s32 y, s32 flags);
 void FUN_003ca87c(s32 x, s32 y, s32 layer);
 
 // Draw item detail framing, the ownership indicator and up to three attached icons.

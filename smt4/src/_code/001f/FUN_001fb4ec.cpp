@@ -1,9 +1,9 @@
 /* NON_MATCHING: oscillation constant registers and phase-update scheduling differ. */
 #include "map/MapOscillation.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 extern MapOscillationState g_mapTable;
-f32 FUN_0028250c(f32 angle);
 
 // Advance one of three sine-wave speeds with the selected map displacement amplitude.
 void FUN_001fb4ec(void)

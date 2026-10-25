@@ -2,13 +2,13 @@
 /* Destroy callback of the whisper effect: releases its five resources and frees the effect. */
 #include "common.h"
 #include "result/WhisperEffect.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int jobGetWork(void);
 int asdTMTexTableReleaseNode(int type, int index);
-int asdTMTexTableFreeEntry(int type);
-int asdOperatorDelete(void *ptr);
 
 extern WhisperEffect *g_whisperEffect;
 

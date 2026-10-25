@@ -3,6 +3,7 @@
 #include "sys/Task.h"
 #include "shard/S1Mover.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 /* The shared entry's byte-aligned padding cannot be replaced with aligned vector fields. */
@@ -62,7 +63,6 @@ typedef char MapEnemyInitializationLayoutCheck[
 }
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 unknown, u32 size, u32 flags);
 u32 taskCreateDraw(const char *name, u16 priority, u8 list, u32 bytes,
                    TaskFunc update, TaskFunc destroy, void *work, u32 parent);
 s32 FUN_001d9294();

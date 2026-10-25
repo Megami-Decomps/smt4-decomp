@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail retains each release field's address across calls; built uses direct root-relative stores. */
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ScriptScreenBundleView {
     void *bytecode;
@@ -28,7 +29,6 @@ void FUN_002b827c(s32);
 void buttonHelpRelease();
 void buttonHelpTexturesUnref();
 void uiFadeRelease();
-void asdTMTexTableFreeEntry(s32);
 }
 
 static void releaseScript(ScriptRunState *&script)

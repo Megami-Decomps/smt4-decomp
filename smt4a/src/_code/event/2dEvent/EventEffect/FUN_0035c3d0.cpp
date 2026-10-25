@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild; retail zero-fills the work with integer stores (the float fields 0x14..0x20 and 0x2C are written as ints first, then as 0.0f), keeps the slot array base in r9 and tests the slot index against 2 after allocating, which armcc here orders differently. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* One slash effect of the 2D event layer (0x38 bytes). */
 struct EventSlash {
@@ -48,7 +49,6 @@ s32 eventColorTransitionUpdate(u32 handle);
 s32 FUN_002835f4(u32 handle);
 void *textureGetIndexedResource(u32 table);
 void asdTMTexTableLoadTmx(u32 table, u32 arg);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 /* Starts a slash effect in a free slot: allocates its work, creates its calc process and its two

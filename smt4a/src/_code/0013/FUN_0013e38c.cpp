@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the icon for an element/status index in one of three icon sets and returns its width; written from the decompilation, the case tables are written as data tables and the shared draw/return tail is merged */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 #define ICON_TABLE 0xB
 #define ICON_LAYER 2
@@ -21,7 +22,6 @@ struct IconEntry {
 
 extern "C" {
 IconFrameRecord *FUN_001834a4(u32 table, u32 sprite);
-void FUN_001835b4(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
 void FUN_00164b5c(u32 layer, u32 table, u32 composed);
 void efctSetSpeed(f32 speed);
 

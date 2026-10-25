@@ -2,6 +2,7 @@
 #include "shard/GameOptions.h"
 #include "gamedata/FusionRecipe.h"
 #include "gamedata/DevilRecord.h"
+#include "AsdSDK/AsdMemUtil.h"
 /* Ingredient sources extend past the shared recipe's ID list. */
 struct FusionParentSources {
     FusionRecipe recipe;
@@ -9,7 +10,6 @@ struct FusionParentSources {
 };
 typedef char FusionParentSourcesKindsCheck[offsetof(FusionParentSources, kinds) == 0x1A ? 1 : -1];
 extern "C" {
-void memClear(void *memory, u32 bytes);
 GameOptions *partyMemberFindById(u16 id);
 void FUN_0029dc74(u16 id, GameOptions *output);
 void unitInitializeFromSavedRecord(u16 id, GameOptions *output);

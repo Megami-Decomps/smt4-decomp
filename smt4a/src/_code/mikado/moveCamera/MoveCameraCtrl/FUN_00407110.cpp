@@ -1,10 +1,10 @@
 /* NON_MATCHING: movement camera resource and float arguments restored; vector field bases, saved registers and initial key copy scheduling differ. */
 #include "gfx/MoveCameraCtrl.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 extern void *g_handleRegistry;
 extern const char DAT_0053295c[];
-void *FUN_0013c174(u32 resource, u32 *entry, s32 flags);
 void *FUN_00178b04(u32 size, const char *source, u32 line);
 MoveCameraResource *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(MoveCameraResource *resource, void *data);
 void asdCameraInitializeDefaults(ManagedCamera *camera, s32 enabled);
@@ -15,14 +15,14 @@ void FUN_0036b824(ManagedCamera *camera);
 void FUN_00407598(MoveCameraCtrlWork *work);
 
 // Load a movement-camera track and initialize its native camera, projection and first key.
-void FUN_00407110(MoveCameraCtrlWork *work, u32 resourceId)
+void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
 {
     struct CurrentCameraView {
         u8 prefix[0xC];
         ManagedCamera *camera;
     };
     u32 entry;
-    void *data = FUN_0013c174(resourceId, &entry, 1);
+    void *data = asdLoadFileWithSize(name, &entry, 1);
     MoveCameraResource *resource = static_cast<MoveCameraResource *>(FUN_00178b04(sizeof(MoveCameraResource), DAT_0053295c, 0x29));
     if (resource != NULL)
         resource = _ZN9Obj557af8C1EPK21AsdAnimCameraResource(resource, data);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: last-primary-entry gating is preserved, but its address and the conditional decrements differ. */
 #include "shard/ResourceRegistration.h"
 
 extern "C" {
@@ -9,8 +8,10 @@ void resourceListDestroy(void *resource);
 
 void FUN_00105970()
 {
+    ResourceRegistration *entry;
+
     for (s32 index = 0; index < 64; ++index) {
-        ResourceRegistration *entry = &DAT_004d92f0[index];
+        entry = &DAT_004d92f0[index];
         if (entry->resource) {
             if (entry->referenceCount > 0) {
                 --entry->referenceCount;
@@ -21,13 +22,14 @@ void FUN_00105970()
         }
     }
     for (s32 index = 0; index < 64; ++index) {
-        ResourceRegistration *entry = &g_registrationEntries[index];
-        if (entry->resource) {
-            if (DAT_004d92f0[63].referenceCount > 0) {
-                --entry->referenceCount;
+        ResourceRegistration *registration = &g_registrationEntries[index];
+        if (registration->resource) {
+            /* Tests the last entry left over from the first loop, not this registration. */
+            if (entry->referenceCount <= 0) {
+                resourceListDestroy(registration->resource);
+                registration->resource = NULL;
             } else {
-                resourceListDestroy(entry->resource);
-                entry->resource = NULL;
+                --registration->referenceCount;
             }
         }
     }

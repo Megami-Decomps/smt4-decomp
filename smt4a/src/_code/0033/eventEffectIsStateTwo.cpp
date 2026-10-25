@@ -8,7 +8,10 @@ extern Effect *g_eventEffect;
 
 s32 eventEffectIsStateTwo(void)
 {
-    return g_eventEffect != NULL && g_eventEffect->state == 2;
+    if (g_eventEffect != NULL) {
+        return g_eventEffect->state == 2;
+    }
+    return 0;
 }
 
 } /* extern "C" */

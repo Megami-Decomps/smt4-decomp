@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (177 vs 166 rows); retail frame is 84 bytes with the label text buffer placed differently and the draw-state helper not inlined the same way */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 // Title/menu scene: the draw-state ring the config screen writes into.
 struct TitleScene {
@@ -32,7 +33,6 @@ extern TitleScene* g_titleScene;
 s32 FUN_0029efc0(ConfigMenu* menu);
 s32 FUN_0029efa8(ConfigMenu* menu);
 void FUN_002bf380(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
-void FUN_002bf288(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 LayoutEntry* FUN_002bf4f8(u32 group, u32 index);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 s32 gameFlagIsSet(u32 flag);

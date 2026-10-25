@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c8940` (_code @ 0x2c8940, 0x6bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int resourceRunOperationIfUnblocked(...);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
@@ -38,7 +38,6 @@ extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 extern int uniteGetWork(void);
 extern int recordGetModeForId(int);
 extern int FUN_002861fc(unsigned short);

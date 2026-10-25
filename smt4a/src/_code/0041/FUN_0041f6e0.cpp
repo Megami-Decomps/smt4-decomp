@@ -1,5 +1,7 @@
 /* NON_MATCHING: in state 0 retail builds the slot address (add r0,r4,r5 lsl #7; add r0,#108) after moving the table pointer into r1; built forms it first in r3 (state 1 matches). */
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -58,13 +60,11 @@ extern PlayerData *gameGetPlayerData(void);
 extern void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 extern void sysMemClear(void *block, s32 size);
 extern void wordPairCopy(void *dest, void *src);
-extern s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 extern s32 FUN_0040ab8c(u32 request);
 extern void saveLoadProcessCreate(s32 step, s32 arg);
 extern void FUN_00275bc8(void);
 extern void statusPanelSetOpen(s32 arg);
 extern void FUN_0023b45c(s32 arg);
-extern void FUN_002c8538(s32 arg);
 extern void FUN_002f0384(s32 arg);
 extern void FUN_0041eb94(SaveLoadTask *task);
 

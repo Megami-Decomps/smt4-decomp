@@ -3,7 +3,6 @@
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
-TexNode* asdTMTexTableCallFileB(s32 tableIndex, s32 nodeIndex);
 void FUN_002b9178(TexNode* node);
 
 // Prepare a table texture and mark its image as uploaded.

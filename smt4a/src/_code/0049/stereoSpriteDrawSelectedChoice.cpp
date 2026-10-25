@@ -1,13 +1,13 @@
 #include "gfx/StereoSpriteSelection.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 SpriteInfo* FUN_001834a4(s32 group, s32 id);
 f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 mode);
 
 static __inline s32 stereoSpriteGroupIsReady(s32 group)
 {

@@ -1,9 +1,9 @@
 /* NON_MATCHING: first indicator state spills to the stack; retail keeps it in fp. */
 #include "gfx/UiControlDraw.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-void FUN_002bf288(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 priority);
 SpriteInfo *FUN_002bf4f8(u32 group, u32 sprite);
 void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 priority);
 

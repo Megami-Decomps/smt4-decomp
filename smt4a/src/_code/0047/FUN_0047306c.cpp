@@ -1,12 +1,12 @@
 #include "common.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 u32 spriteHandleCreate(u32 kind);
 void asdMemFreeSlot(u32 handle);
 u32 FUN_0023b4a4(u32 index);
-void FUN_001527d8(u32 handle, u32 resource);
 void positionStateSet(u32 handle, s32 state, u32 color, f32 value);
 u32 FUN_00473910(AocMainA *main, u32 entry);
 void asdTextDrawDirectoryEntry(u32 handle, s32 mode, u32 entry,

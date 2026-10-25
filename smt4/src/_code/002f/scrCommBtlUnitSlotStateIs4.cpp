@@ -14,13 +14,13 @@ typedef struct BattleUnit {
 } BattleUnit;
 
 extern u32 g_btlScriptUnit;
-extern s32 scrGetArg(void);
+extern s32 scrGetArg(s32 index);
 extern void scrSetResult(s32 result);
 
 /* Script command: sets the result to whether the next argument of the script unit's status is in state 4 (bits 10-15). */
 u32 scrCommBtlUnitSlotStateIs4(void)
 {
-    s32 slot = scrGetArg();
+    s32 slot = scrGetArg(0);
 
     scrSetResult((reinterpret_cast<BattleUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->status->slots[slot] >> 10) == 4);
     return 1;

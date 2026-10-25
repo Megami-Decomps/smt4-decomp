@@ -1,8 +1,8 @@
 #include "shard/Shard003B.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 u32 requestIdToCode(s32 request);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void asdTMTexLoadMainHeap(u32 table, u32 node);
 

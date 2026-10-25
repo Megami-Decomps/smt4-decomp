@@ -1,4 +1,4 @@
-/* NON_MATCHING: payload stack loads and saved registers differ. */
+/* NON_MATCHING: actor selectors are now narrowed (s16) like retail; retail loads the two stack arguments with ldrd into r4/r5 and keeps the payload in r6-r8, built allocates r4-r8 in a different order. */
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -12,7 +12,7 @@ BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 value,
                  u32 parameter, s32 lookupId, s32 extraTarget)
 {
-    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, actorId, 0, secondaryId);
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actorId, 0, secondaryId);
     action->kind = 44;
     action->target = (u32)target;
     action->value = value;
@@ -20,7 +20,7 @@ u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 valu
     if (lookupId >= 0) {
         BtlUnitEntry *unit = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
         if (unit && extraTarget >= 0) {
-            action = btlQueueReflectAction(g_btlActionReflect, lookupId, 0, secondaryId);
+            action = btlQueueReflectAction(g_btlActionReflect, (s16)lookupId, 0, secondaryId);
             action->kind = 6;
             action->wordValues.unk18 = (u32)unit;
             action->value = extraTarget;

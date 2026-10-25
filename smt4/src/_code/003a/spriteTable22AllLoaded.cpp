@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 /* 1 when both entries of table 0x22 are loaded. */
 u32 spriteTable22AllLoaded(void)

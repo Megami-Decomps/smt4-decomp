@@ -6,7 +6,7 @@ extern "C" {
 
 int mathAngleDeltaDegrees(void);
 int mapIfStart(unsigned int);
-int FUN_0033abb4(void);
+float FUN_0033abb4(float, float);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -191,7 +191,7 @@ LAB_0033fda4:
 LAB_0033fcfc:
     temp_v10 = 15.0f;
     temp_v12 = *(float *)(g_lmapView + 0x18);
-    FUN_0033abb4();
+    FUN_0033abb4(*(float *)(g_lmapView + 0x18), *(float *)(g_lmapView + 0xc0));
     temp_v5 = g_lmapView;
     if (15.5f >= temp_v12) {
       *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapView + 0xc0);

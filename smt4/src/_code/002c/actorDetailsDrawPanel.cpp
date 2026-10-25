@@ -1,5 +1,6 @@
 /* NON_MATCHING: ARMCC spills record/transform arguments at entry and reloads layout coordinates where retail retains saved-register snapshots. */
 #include "shard/Shard0034.h"
+#include "shard/TextureDrawCall.h"
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
 
@@ -13,7 +14,6 @@ s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
-void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
 const MessageDrawItem *FUN_002bf4f8(u32 group, u32 index);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textureLoadOptionalDemonModel(s32 portrait, s32 x, s32 y, s32 depth, s32 mode);

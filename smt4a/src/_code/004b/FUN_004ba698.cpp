@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "ui/UiSpriteState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The row array occupies the opaque shared-prefix bytes up to progress. */
 struct SequentialAnimationRowsViewA {
@@ -13,7 +14,6 @@ typedef char SequentialAnimationRowsViewALayoutCheck[
     sizeof(SequentialAnimationRowsViewA) == offsetof(SequentialAnimationPrefixA, progress) ? 1 : -1];
 
 extern "C" {
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 rangeGetMinimumLimit(SequentialAnimationPrefixA *state);
 void FUN_00163aa4(void *work, f32 step);
 void FUN_00167458(void *work, s32 mode);

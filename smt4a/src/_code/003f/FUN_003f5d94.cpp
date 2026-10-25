@@ -1,12 +1,12 @@
 /* NON_MATCHING: native animation-alpha getters restored; frame-glyph lifetime and base-coordinate saved registers still differ. */
 #include "ui/AnimatedDigitPanel.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 alpha);
-void FUN_001835b4(s32 mode, s32 group, s32 x, s32 y, u32 color, s32 glyph);
 s32 vec2GetXInt(const SpritePlaybackView *position);
 s32 vec2GetYInt(const SpritePlaybackView *position);
 f32 vec2GetSpeed(const SpritePlaybackView *position);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: packed-result zero test, pair address folding and shared success-return allocation differ from retail. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/Shard0032.h"
+#include "util/CalleeContracts.h"
 
 // The packed pair uses a 64-bit allocation unit. Keep this view local so its
 // alignment does not change the published, partial UniteWork layout.
@@ -22,7 +23,6 @@ void __aeabi_memcpy4(void *out, const void *source, u32 size);
 void recordMergeByteMasks(void *context, UnitRecord *first, UnitRecord *second,
                   s32 option, UnitRecord *out);
 void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
-s32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
 s32 getUnlockedSlotCount(UnitRecord *unit);
 void FUN_004bcd90(UnitRecord *unit);
 

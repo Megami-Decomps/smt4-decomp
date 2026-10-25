@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022e9c8` (_code @ 0x22e9c8, 0x2f0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_00162790(...);
 int efctSetSpeed(void);
-int FUN_001835b4(...);
 int unitGetStereoScreenPosition(int *, int [3], int);
 void drawParameterChangeBadge(unsigned int, int, int, int, int);
 int VectorSignedToFloat(...);
@@ -30,7 +30,6 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: unitGetStereoScreenPosition. */
 extern int FUN_0026264c(unsigned short);
 extern unsigned int FUN_003a6f84(unsigned int);

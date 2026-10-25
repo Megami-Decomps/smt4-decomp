@@ -1,5 +1,6 @@
 /* NON_MATCHING: widget/opacity addressing, coordinate lifetimes and GPR allocation differ, and retail retains two opacity-load NOPs; optimization flags may explain them. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 struct PartyComparisonWidget {
     u8 position[0x20];
@@ -33,7 +34,6 @@ void efctSetSpeed(f32);
 s32 vec2GetXInt(const void *);
 s32 vec2GetYInt(const void *);
 SpriteInfo *FUN_002bf4f8(u32, s32);
-void FUN_002bf288(u32, u32, s32, s32, s32, s32);
 
 void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFull)
 {

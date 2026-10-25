@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ u32 eventTexGetCurrent(void);
 void eventTexSetCurrent(u32 handle);
 s32 jobIsValid(u32 handle);
 EventTexJobWork *jobGetWork(u32 handle);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_0039af04(void);
 u32 FUN_003b6820(u32 id, s32 mode, u32 arg);
 void eventInsertSortedTextureJob(u32 handle);

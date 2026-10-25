@@ -8,9 +8,13 @@ extern "C" void nn_os_CriticalSection_Initialize(void* section);
 
 namespace nn {
 namespace os {
+/* Selects the constructor that leaves the lock as it is before Initialize() has run. */
+enum CriticalSectionDeferred { CRITICAL_SECTION_DEFERRED };
+
 class CriticalSection {
 public:
     CriticalSection() : state(0) { nn_os_CriticalSection_Initialize(this); }
+    explicit CriticalSection(CriticalSectionDeferred) : state(0), owningThread(0), lockCount(-1) {}
     ~CriticalSection();
     /* 0x00 */ u32 state;
     /* 0x04 */ u32 owningThread;

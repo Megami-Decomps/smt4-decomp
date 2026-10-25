@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "event/2dEvent/EventEffect.h"
 
 struct EventOverlayWork {
@@ -20,7 +21,6 @@ void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_001835b4(u32 layer, u32 texture, s32 x, s32 y, u32 color, s32 frame);
 void FUN_00183bb0(void);
 
 /* Draws the running event overlay under a temporary render state and restores the previous state. */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved argument registers and VFP return-path scheduling differ. */
+/* NON_MATCHING: return-0 block is emitted inline instead of shared at the function end; float-operand and saved argument registers differ. */
 #include "common.h"
 #include <math.h>
 
@@ -20,10 +20,18 @@ u32 FUN_0039a2d8(s32 *output, s32 start, s32 end, s32 duration, s32 elapsed, s32
         }
         if (start < end) {
             *output = (s32)((f32)start + (f32)distance * progress);
-            if (*output < end) return 0;
+            if (*output >= end) {
+                *output = end;
+                return 1;
+            }
+            return 0;
         } else {
             *output = (s32)((f32)start - (f32)distance * progress);
-            if (*output > end) return 0;
+            if (*output <= end) {
+                *output = end;
+                return 1;
+            }
+            return 0;
         }
     }
     *output = end;

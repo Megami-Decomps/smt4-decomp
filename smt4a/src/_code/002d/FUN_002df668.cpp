@@ -1,9 +1,9 @@
 #include "battle/btlUI.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 void FUN_003210bc(void *object, s32 flag);
-s32 asdTMTexTableNodeIsLoaded(u32 table, s32 index);
 
 extern BtlUiGlobalsA g_btlUi;
 

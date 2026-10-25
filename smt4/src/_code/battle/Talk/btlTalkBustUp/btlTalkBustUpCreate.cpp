@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 // The allocation has additional presentation fields after the shared 0x2fc-byte prefix.
@@ -22,7 +23,6 @@ typedef char TalkBustUpWorkLayoutCheck[sizeof(TalkBustUpWork) == 0x30C &&
 extern "C" {
 extern TalkBustUpWork *g_btlTalkBustUp;
 extern const u8 DAT_003ffa6c[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void memClear(void *data, u32 size);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);

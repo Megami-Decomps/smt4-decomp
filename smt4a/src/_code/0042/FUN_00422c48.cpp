@@ -51,7 +51,7 @@ struct StreamState {
 extern "C" {
 extern StreamState DAT_005880d0;
 extern StreamRequest DAT_00618524[0x40];
-extern u8 DAT_00618518;               // critical section
+extern u8 g_soundVoiceCriticalSection;               // critical section
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
@@ -64,7 +64,7 @@ u32 FUN_00439e0c(u32 samples, u32 flag, u32 chunkFrames);
 // Retires the wave buffers the voices have finished, then feeds the queued requests into the voices' free buffers.
 void FUN_00422c48(void)
 {
-    nn_os_CriticalSection_Enter(&DAT_00618518);
+    nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
     if (DAT_005880d0.active != 0) {
         FUN_001cd5ac();
     }
@@ -110,6 +110,6 @@ void FUN_00422c48(void)
     if (DAT_005880d0.active != 0) {
         FUN_001c76b8();
     }
-    nn_os_CriticalSection_Leave(&DAT_00618518);
+    nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
 }
 }

@@ -1,8 +1,8 @@
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 const SpriteInfo *FUN_002bf4f8(u32 archive, s32 index);
-void FUN_002bf288(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 
 // Draw a three-by-three loading grid with two rotating bright dots and their trails.
 void uiDrawRotatingLoadingGrid(s32 firstPosition, s32 frame)

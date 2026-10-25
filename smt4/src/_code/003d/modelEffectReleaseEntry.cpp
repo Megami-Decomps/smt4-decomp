@@ -1,4 +1,3 @@
-/* NON_MATCHING: native virtual delete matches, but compiler keeps the entry-base pointer early instead of retail's separate owner/index and model-slot bases; -O2 also omits the retail alignment NOP. */
 #include "classes/Obj4208f8.h"
 
 struct ModelEffectEntry {
@@ -18,18 +17,17 @@ void asdMdlManagerDestroy(AsdMdlObject *model);
 
 void modelEffectReleaseEntry(ModelEffectOwner *owner, u32 index)
 {
-    ModelEffectEntry *entry = &owner->entries[index];
-    if (entry->effect != NULL) {
-        delete entry->effect;
-        entry->effect = NULL;
+    if (owner->entries[index].effect != NULL) {
+        delete owner->entries[index].effect;
+        owner->entries[index].effect = NULL;
     }
-    if (entry->model != NULL) {
-        if (entry->model->node->unk0c >= 0) {
-            asdMdlManagerMarkDestroy(entry->model);
+    if (owner->entries[index].model != NULL) {
+        if (owner->entries[index].model->node->unk0c >= 0) {
+            asdMdlManagerMarkDestroy(owner->entries[index].model);
         }
-        asdMdlManagerDestroy(entry->model);
-        entry->model = NULL;
+        asdMdlManagerDestroy(owner->entries[index].model);
+        owner->entries[index].model = NULL;
     }
-    entry->state = 0;
+    owner->entries[index].state = 0;
 }
 }

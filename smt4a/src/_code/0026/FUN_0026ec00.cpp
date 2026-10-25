@@ -1,11 +1,11 @@
 #include "camp/CampState.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern CampStateA *g_camp;
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 void FUN_00164b5c(s32, s32, s32, s32, s32, s32);
-void FUN_001835b4(s32, s32, s32, s32, s32, s32);
 
 // Draw one of two layered camp labels with independently animated opacity.
 void FUN_0026ec00(s32 x, s32 y, s32 alternate)

@@ -35,7 +35,6 @@ void FUN_002f6660(u32 first, u32 second)
     StatusDown *status = g_statusDown;
     void *list = status->list;
     StatusDown *current;
-    s32 i;
 
     status->unk544 = first;
     status->unk540 = second;
@@ -43,7 +42,7 @@ void FUN_002f6660(u32 first, u32 second)
     FUN_0029eb5c(list, FUN_0029ee54(list) - 1);
     status->unk410 = 1;
     current = g_statusDown;
-    for (i = 0; i < current->regionCount; i++) {
+    for (s32 i = 0; i < current->regionCount; i++) {
         ifTouchRegionRemove();
     }
     current->regionCount = 0;

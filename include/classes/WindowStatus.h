@@ -26,8 +26,14 @@ s32 FUN_004283cc(void *owner);
 s32 queryResultFailureOnly(const u32 *object);
 }
 
-/* Value returned through hidden result storage by each status operation. */
+/* Value returned through hidden result storage by each status operation. The empty destructor
+   makes the class non-trivial, so armcc constructs a named result directly in that storage. */
 struct WindowStatusOperationResult {
+    explicit WindowStatusOperationResult(u32 status) : status(status), reserved0c(0), reserved10(0)
+    {
+        result = WindowStatusResult(0);
+    }
+    ~WindowStatusOperationResult() {}
     /* 0x00 */ u8 status;
     /* 0x01 */ u8 unk01[3];
     /* 0x04 */ WindowStatusResult result;

@@ -3,6 +3,7 @@
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "script/ScriptArgs.h"
 
 struct BattleMessageTable;
 struct ChainOwner;

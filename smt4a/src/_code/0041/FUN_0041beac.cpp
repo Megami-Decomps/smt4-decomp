@@ -1,5 +1,6 @@
 /* NON_MATCHING: the reset flag and the byte clear are scheduled differently (retail zeroes r1 once and reuses it); the tail call then lands at another offset. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct PanelState {
     /* 0x000 */ u8 unk000[5];
@@ -23,7 +24,6 @@ struct PanelState {
 
 extern "C" {
 
-void FUN_0023b45c(u32 value);
 void FUN_002f0384(u32 value);
 void FUN_004087d8(void *block, u32 value);
 void uiDrawScreenDimmer(void *block, u32 value);

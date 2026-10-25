@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the initial button-help global address load follows stack allocation and the first argument save instead of preceding them. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 /* A skill record as the panel reads it. */
 struct PanelSkill {
@@ -40,7 +41,6 @@ void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003180c4(s32 slot, const char *text);
 void FUN_002ad414(s32 a, s32 b, s32 c, char *text);
-void FUN_00359974(s32 slot, u32 level, s32 a, s32 b);
 void battleAttributeFormatName(char *buffer, u32 attribute);
 void skillFormatTargetLabel(char *buffer, u32 target);
 void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e, u32 f);

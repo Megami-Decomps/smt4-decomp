@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the bsearch comparator literal load/store uses r1 instead of retail r0, changing its literal displacement by four bytes. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "gamedata/DataTable.h"
 
 struct MapNameRecord {
     /* 0x00 */ u16 id;
@@ -13,7 +14,6 @@ extern const char DAT_0052e1e4[], DAT_0052e24c[], DAT_0052e2b4[], DAT_0052e31c[]
 extern const char DAT_0052e384[], DAT_0052e3ec[], DAT_0052e454[], DAT_0052e4bc[];
 extern const char DAT_0052e524[], DAT_0052e58c[], DAT_0052e5f4[], DAT_0052e65c[];
 extern const char DAT_0052e6c4[], DAT_0052e72c[], DAT_0052e794[];
-void *dataTableGet(u32 table, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 s32 arrayCompareSignedHalfword(const void *, const void *);

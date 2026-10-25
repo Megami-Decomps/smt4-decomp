@@ -1,5 +1,6 @@
 /* NON_MATCHING: background rectangle width/height VFP setup is scheduled before packed-color argument moves. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "kernel/jyoucyu.h"
 #include "title/titleMain.h"
 
@@ -19,7 +20,6 @@ void efctSetSpeed(f32 speed);
 void FUN_002bed3c(void);
 void FUN_002c1b64(void *context, u32 state);
 void FUN_002c0944(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
-void FUN_002bf288(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 
 // Draw the startup background and resident sprite until the resident status reaches completion.
 u32 FUN_001e981c(void)

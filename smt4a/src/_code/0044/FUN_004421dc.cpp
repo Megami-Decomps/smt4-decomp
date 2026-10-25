@@ -5,7 +5,7 @@
 extern "C" {
 
 extern unsigned char DAT_00589380; /* 0x589380 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -16,9 +16,9 @@ unsigned char FUN_004421dc(void)
 {
   unsigned char temp_v0;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
   temp_v0 = (*(int *)((unsigned char *)&DAT_00589380 + 0x4)) != 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
   return temp_v0;
 }
 

@@ -59,7 +59,7 @@ struct Obj422448Mode {
 };
 
 extern "C" {
-void FUN_0022e2fc(void *list);
+void entryTableClear(void *list);
 u32 unlockFlagTest(u32 id);
 Obj422448Source *FUN_002498ec(u32 id);
 u32 aocIndexValueOrDefault(u32 index);
@@ -79,7 +79,7 @@ void Obj422448::buildList()
 
     void *list = &self->listCount;
 
-    FUN_0022e2fc(list);
+    entryTableClear(list);
     u16 id = 0x79F;
     s32 scanned = 0;
     do {

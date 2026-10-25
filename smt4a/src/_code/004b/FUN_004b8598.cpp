@@ -1,5 +1,6 @@
 /* NON_MATCHING: prologue order only - retail schedules `sub sp` after `ldr r1,[r0,#144]; mov r7,r0`, armcc emits it right after the push */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ typedef struct MikadoPanel {
 
 extern const char g_mikadoPathPrefix[];
 extern int textFormatBuffer(u8 *destination, const char *format, ...);
-extern int asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 extern int gameFlagIsSet(s32 flag);
 extern int placeWinStartText(u8 *name);
 extern void moveCameraCtrlCreateEntry(u32 handle, u8 *path, s32 index);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: file-load argument scheduling and sprite-handle address reuse differ. */
 #include "common.h"
+#include "text/TextDraw.h"
 
 struct PartnerTopicDialog {
     u8 unk00[0x28];
@@ -31,7 +32,6 @@ void asdLoadFileAsyncSimple(const char *, void **, u32);
 void asdTMTexTableLoadTmx(u32, u32);
 void asdTMTexLoadMainHeap(u32, s32);
 u32 spriteHandleCreate(u32);
-void FUN_001527d8(u32, s32);
 void positionStateSet(u32, u32, u32, f32);
 void FUN_003f84e8(PartnerTopicDialog *);
 void dialogEnterState(PartnerTopicDialog *, s32, s32);

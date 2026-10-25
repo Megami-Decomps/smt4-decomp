@@ -1,5 +1,6 @@
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 #include <stddef.h>
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct TitleDebugBackground {
     /* 0x00 */ u32 job;
@@ -18,7 +19,6 @@ struct BuildStamp {
 extern "C" {
 extern TitleDebugBackground *DAT_00589168;
 extern const char DAT_00536c58[];
-void *asdMemoryAllocTracked(u32 kind, u32 alignment, u32 flags, u32 size, s32 tracked);
 void textFormatBuffer(char *destination, const char *format, ...);
 void taskRunInitializationState();
 void titleDbgBgFree();

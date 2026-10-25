@@ -1,12 +1,12 @@
 /* NON_MATCHING: instructions match except the resource-address and zero-float literal pool entries are reversed. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 extern const u16 g_layeredSpriteEffectResource[];
 void efctSetSpeed(f32 speed);
 SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
-void FUN_001835b4(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
 void FUN_00162790(s32 layer, u32 color, const u16 *text, f32 x, f32 y,
                   f32 z, f32 width, f32 height);
 

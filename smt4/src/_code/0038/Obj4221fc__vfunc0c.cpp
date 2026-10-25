@@ -1,5 +1,7 @@
-/* NON_MATCHING: native hidden-result return is recovered; request-copy and call register scheduling still differ. */
+/* NON_MATCHING: native hidden-result return is recovered; retail keeps the table entry below the request copy in the frame (92 vs 84 bytes). */
 #include "classes/Obj4221fc.h"
+#include "gamedata/TableEntryRef.h"
+#include "nn/Result.h"
 
 struct Obj4221fcManager {
     u8 unk00[0x18];
@@ -7,34 +9,26 @@ struct Obj4221fcManager {
     u8 service7c[0x52c];
     u32 resourceId;
 };
-struct Obj4221fcRequest { u32 words[9]; };
+
 extern "C" {
 extern Obj4221fcManager *g_aocMain;
 void FUN_00123934();
-void FUN_00234624(u32 *entry, u32 table, u32 index);
-void FUN_003df244(Obj4221fcRequest *request, const u32 *entry);
-void FUN_003540d8(WindowStatusResult *result, void *service, void *context, const Obj4221fcRequest *request);
+void FUN_00234624(ItemPropertyResource **out, u32 table, u32 index);
+ItemCodeInfo FUN_003df244(ItemPropertyResource **resource);
+WindowStatusResult FUN_003540d8(void *owner, void *request, void *parameters);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 }
 
 WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
 {
-    WindowStatusOperationResult output;
-    output.status = 1;
-    output.reserved0c = 0;
-    output.reserved10 = 0;
-    output.result = WindowStatusResult(0);
+    WindowStatusOperationResult output(1);
     Obj4221fcManager *manager = g_aocMain;
     FUN_00123934();
-    u32 entry;
-    FUN_00234624(&entry, manager->resourceId, state);
-    Obj4221fcRequest request;
-    FUN_003df244(&request, &entry);
-    Obj4221fcRequest copiedRequest = request;
-    WindowStatusResult result;
-    FUN_003540d8(&result, manager->service7c, manager->service18, &copiedRequest);
-    output.result = result;
-    if (legacyResourceIdRemap(&output.result) >= 0) {
+    TableEntryRef ref;
+    FUN_00234624(&ref.entry, manager->resourceId, state);
+    ItemCodeInfo request = FUN_003df244(&ref.entry);
+    output.result = FUN_003540d8(manager->service7c, manager->service18, &request);
+    if (!nnResultIsFailure(legacyResourceIdRemap(&output.result))) {
         output.status = 0;
     } else if (legacyResourceIdRemap(&output.result) == (s32)0xc9213801) {
         output.status = 0x67;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00408c3c` (_code @ 0x408c3c, 0x658 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_001692d4(void);
 int FUN_00180310(...);
-int FUN_001835b4(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_003d3020(int, int, int);
 int drawFacingElbowSegments(int, float *, float *, unsigned int, int);
@@ -45,7 +45,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_001692d4. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003d3020. */
 /* Supplied declaration required: drawFacingElbowSegments. */

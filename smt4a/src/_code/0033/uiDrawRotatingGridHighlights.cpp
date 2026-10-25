@@ -1,8 +1,8 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 const PanelTextLayoutEntryPrefixA *FUN_001834a4(u32 resource, s32 index);
-void FUN_001835b4(s32 layer, u32 resource, u32 sprite, s32 x, s32 y, u32 tag);
 
 /* Draw the nine grid cells with two opposing highlights and their trailing frames. */
 void uiDrawRotatingGridHighlights(s32 firstEntry, s32 frame)

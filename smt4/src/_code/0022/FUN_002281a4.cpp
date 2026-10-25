@@ -1,5 +1,6 @@
 /* NON_MATCHING: only r0/r1 are swapped in the entry address computation (retail index in r0, base in r1). */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ struct EffectTable {
 };
 
 extern const char DAT_0040090c[]; /* "NOT_EFT" */
-void *btlGetMainState(void);
 s32 FUN_00293230(void);
 s32 libc_strcmp(const char *a, const char *b);
 

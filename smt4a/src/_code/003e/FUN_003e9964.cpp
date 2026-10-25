@@ -1,6 +1,7 @@
 /* NON_MATCHING: Inlined party checks hoist global subject loads; trigger-mask loads, request-field addresses and return registers differ. */
 #include "battle/btlMain.h"
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
@@ -23,7 +24,7 @@ static __inline u32 partyHasUnlockedSubject(s32 hasParty)
     return 0;
 }
 
-extern "C" u32 FUN_003e9964(BattleMaskState *state)
+extern "C" u32 FUN_003e9964(BtlMainStateA *state)
 {
     /* The request fields extend beyond the shared battle-mask prefix. */
     struct RequestView {
@@ -51,9 +52,9 @@ extern "C" u32 FUN_003e9964(BattleMaskState *state)
     }
     TriggerMasksView *masks = (TriggerMasksView *)&g_btlMain;
     u64 trigger = ((u64)masks->triggerHigh << 32) | masks->triggerLow;
-    if ((state->mask & trigger) != 0 && request->count != 0) {
+    if ((state->stateFlags64.bits & trigger) != 0 && request->count != 0) {
         u64 immediate = ((u64)masks->immediateHigh << 32) | masks->immediateLow;
-        if ((state->mask & immediate) != 0) {
+        if ((state->stateFlags64.bits & immediate) != 0) {
             return 1;
         }
         return partyHasUnlockedSubject(request->hasParty);

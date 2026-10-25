@@ -1,6 +1,7 @@
 /* NON_MATCHING: snow-noise allocation, stereo tasks and textures restored; compiler retains allocated work and lays out texture branches differently. */
 #include "event/2dEvent/SnowNoise.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
@@ -14,7 +15,6 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
                    u32 (*draw)(), u32 destroy, void *work, u32 parent);
 void *textureGetIndexedResource(u32 texture);
 void asdTMTexTableLoadTmx(u32 texture, u32 flags);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 // Initialize the snow-noise effect, its two stereo draw tasks and shared texture requests.

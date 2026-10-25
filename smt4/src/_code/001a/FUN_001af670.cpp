@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/PartyPanel.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ u32 dataTable24Sub0GetRecordS90X(u32);
 const u16 *dataTable24Sub0GetRecordS90(u32);
 s32 FUN_002240b4(u32);
 void FUN_002bf380(s32, s32, s32, s32, s32, s32);
-void FUN_002bf288(s32, s32, s32, s32, s32, s32);
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 void FUN_002be5a4(s32, u32, const u16 *, f32, f32, f32, f32, f32);

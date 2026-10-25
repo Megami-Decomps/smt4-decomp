@@ -1,9 +1,24 @@
-/* NON_MATCHING: the tail pointer reload uses r1 instead of retail's r2; all other instructions match. */
 #include "battle/btlReflect.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
 
 extern "C" void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
+
+/* Link a new action at the end of the context's list. */
+static __inline void reflectContextAppend(ReflectContext *context, ReflectAction *action)
+{
+    if (!context->head) {
+        context->head = action;
+    }
+    if (!context->tail) {
+        context->tail = action;
+    } else {
+        context->tail->next = action;
+        action->previous = context->tail;
+        context->tail = action;
+    }
+    ++context->count;
+}
 
 extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options)
 {
@@ -28,16 +43,6 @@ extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 act
     for (u32 index = 0; index < 16; ++index) {
         action->textWords[index] = 0;
     }
-    if (!context->head) {
-        context->head = action;
-    }
-    if (!context->tail) {
-        context->tail = action;
-    } else {
-        context->tail->next = action;
-        action->previous = context->tail;
-        context->tail = action;
-    }
-    ++context->count;
+    reflectContextAppend(context, action);
     return action;
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021ef10` (_code @ 0x21ef10, 0x374 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int dataTable2eSub2GetCount(...);
 int FUN_0025090c(int, int, int, unsigned char [144]);
 int forwardRecoveredCallback(void);
 int FUN_002be5a4(int, unsigned int, unsigned char [144]);
-int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002c0944(unsigned int);
 int FUN_002c1b64(int, int);
 int FUN_002c39a4(int);
@@ -30,7 +30,6 @@ extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_002be5a4. */
-/* Supplied declaration required: FUN_002bf288. */
 extern unsigned long long FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */

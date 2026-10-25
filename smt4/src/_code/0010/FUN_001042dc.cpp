@@ -1,4 +1,3 @@
-/* NON_MATCHING: literal pool orders 1.0f before the vector address; retail orders the address first. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {

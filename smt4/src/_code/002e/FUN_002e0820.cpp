@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-stack push registers and text-position VFP conversion scheduling differ. */
 #include "StaffRoll/StaffRollMain.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 /* The x column straddles the existing StaffRollWork padding/lineA boundary. */
@@ -14,7 +15,6 @@ extern RenderCtx *g_titleScene;
 void FUN_002bed3c(void);
 void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 type, u32 flags);
-void FUN_002bf288(s32 font, s32 text, u32 entry, s32 x, s32 y, s32 layer);
 void efctSetSpeed(f32 speed);
 
 /* Draw the twelve scrolling credit entries with a temporary render state. */

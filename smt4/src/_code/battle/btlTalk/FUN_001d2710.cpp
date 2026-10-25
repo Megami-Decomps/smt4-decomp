@@ -1,6 +1,7 @@
 /* NON_MATCHING: identical except -1 materialisation: retail builds two separate mvn constants (r0 for the selected index, r2 for the memset fill) and this build shares one register. */
 #include "battle/btlTalk.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ extern BtlTalk *g_btlTalk;
 extern u32 g_btlUiBlock;
 
 s32 jobIsValid(u32 job);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, s32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
 void *__aeabi_memset4(void *destination, u32 size, s32 value);
 void btlUiPlaySceneFadeOutWhenReady(u32 ui);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~205 rows); retail loads the render-context pointer before the ring-push value call and spills differently */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 // Render-state stack: the current entry is slots[index]; the flush callback runs when the
 // value changed (or a flush is already pending).
@@ -69,7 +70,6 @@ void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
 s32 vec2GetXInt(void* vec);
 s32 vec2GetYInt(void* vec);
-void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 SpriteRect* FUN_001834a4(s32 group, s32 index);
 void FUN_00164168(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);
 void FUN_00162790(s32 a, u32 spriteSet, void* label, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 scaleC);

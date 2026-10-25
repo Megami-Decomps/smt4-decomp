@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation-result and task-creation argument registers differ, changing literal-pool order. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct SoundTestWork {
     u32 process; // 0x00
@@ -12,7 +13,6 @@ struct SoundTestWork {
 };
 extern "C" {
 extern SoundTestWork *DAT_0044e110;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 track);
 u32 asdProcessCreateSimple(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument);
 u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument, u32 parent);
 void FUN_001e960c();

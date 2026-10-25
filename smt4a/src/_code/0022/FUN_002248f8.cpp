@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002248f8` (_code @ 0x2248f8, 0x14e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -104,7 +105,6 @@ extern unsigned int DAT_0057a9fc; /* 0x57a9fc */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
-extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframeThree. */

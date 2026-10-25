@@ -2,6 +2,7 @@
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "ui/UiSpriteState.h"
+#include "util/CalleeContracts.h"
 
 struct EquipmentMenuScriptViewA {
     u8 unk000[0x184];
@@ -23,7 +24,6 @@ void FUN_00167458(UiSpriteState *, s32);
 s32 vec2GetXInt(const UiSpriteState *);
 s32 vec2GetYInt(const UiSpriteState *);
 void pointConvertToFloat(AsdTextureRegion *, s32, s32);
-s32 FUN_0023b3d0();
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(void *, u32);
 void scrRunOpcodesStub(void *);

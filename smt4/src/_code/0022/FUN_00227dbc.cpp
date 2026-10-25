@@ -1,5 +1,6 @@
 /* NON_MATCHING: the entry address is computed as table + (0x58 + i*0x16) in retail (offset first, table loaded after); this build loads the table first */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ typedef struct BtlEffect {
 
 extern BtlEffect g_btlEffect;
 
-extern void *btlGetMainState(void);
 extern s32 FUN_00293230(void);
 extern s32 libc_strncmp(const char *a, const char *b, u32 count);
 extern u32 libc_strlen(const char *text);

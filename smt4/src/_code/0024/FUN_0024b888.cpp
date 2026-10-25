@@ -1,9 +1,9 @@
 /* NON_MATCHING: unit and four identifier arguments are assigned different saved registers from retail. */
 #include "battle/btlReflect.h"
+#include "battle/BtlMainAccess.h"
 struct BattleMainState;
 
 extern "C" {
-BattleMainState *btlGetMainState(void);
 
 
 // Queue reflection action thirty-five with four halfword identifiers.

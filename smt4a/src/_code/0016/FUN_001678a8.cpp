@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 #include "ui/MessageMain.h"
+#include "util/PackNibbles.h"
 
 struct MessageBoxCategoryViewA {
     u8 unk00[0x48];
@@ -39,7 +40,6 @@ void renderCtxPopState(RenderCtxA *, s32);
 void efctSetSpeed(f32);
 void FUN_00183bb0();
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
-s32 packNibblesAndByte(u32, u32, u32);
 void FUN_001634b4(UiSpriteState *, f32);
 void pairSetSecondResetFirst(UiSpriteState *, u32);
 

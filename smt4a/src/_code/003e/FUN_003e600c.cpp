@@ -1,6 +1,7 @@
 /* NON_MATCHING: The offer pair loads as LDM; offer-copy and item-count/final-state registers differ. */
 #include "gamedata/DataTable.h"
 #include "script/scrScriptProcess.h"
+#include "util/CalleeContracts.h"
 
 struct ItemExchangeOffer {
     u32 key;
@@ -23,7 +24,6 @@ extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
 ScriptRunState *FUN_00275bc8(void *resource, void *screen);
 u32 FUN_001ba3d4(u32 item);
-void FUN_00359974(s32 field, u32 value, u32 color, s32 flags);
 void screenStartOrClear(void *screen, s32 entry);
 
 /* Starts the loaded exchange script, collects up to three offers and publishes the three held-item counts. */

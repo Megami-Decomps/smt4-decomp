@@ -1,4 +1,3 @@
-/* NON_MATCHING: archive/id/kind/limit values use different callee-saved registers. */
 #include "shard/RomFsParentLookup.h"
 
 extern "C" {

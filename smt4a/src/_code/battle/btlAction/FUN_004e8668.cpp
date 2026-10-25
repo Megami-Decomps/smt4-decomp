@@ -7,7 +7,7 @@ extern "C" {
 int qsort(...);
 int dataTable04FindById(void);
 int source4CCopyHalves(unsigned int, unsigned short [10]);
-int FUN_004e6fb0(...);
+int btlAiMarkLowestHpTarget(...);
 int FUN_004e9bd0(...);
 int FUN_004ea200(...);
 
@@ -28,7 +28,7 @@ extern int btlSkillCompareBySortKey(...); /* 0x290af8 */
 extern int FUN_002fe144(...); /* 0x2fe144 */
 extern unsigned int DAT_00571150; /* 0x571150 */
 extern unsigned int DAT_00571154; /* 0x571154 */
-extern unsigned int DAT_00571190; /* 0x571190 */
+extern unsigned int g_btlTargetableMask; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 /* Supplied declaration required: qsort. */
@@ -39,7 +39,7 @@ extern int FUN_003df57c(unsigned short, unsigned int);
 extern int valueAtF0IsReady(int);
 extern int FUN_004bcbb4(unsigned int, unsigned short);
 /* Supplied declaration required: source4CCopyHalves. */
-/* Supplied declaration required: FUN_004e6fb0. */
+/* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e9bd0. */
 /* Supplied declaration required: FUN_004ea200. */
 
@@ -64,7 +64,7 @@ void FUN_004e8668(int *param_1,int param_2)
   temp_v4 = 0x6d;
   puVar2 = *(unsigned int **)(*param_1 + 0x1ffc);
   do {
-    if ((*puVar2 & DAT_00571190) != 0 || (puVar2[1] & DAT_00571194) != 0) {
+    if ((*puVar2 & g_btlTargetableMask) != 0 || (puVar2[1] & DAT_00571194) != 0) {
       aiStack_1ec[temp_v3] = *(int *)(*param_1 + 0x1ffc) + temp_v2 * 0x408;
       temp_v3 = temp_v3 + 1;
     }
@@ -173,7 +173,7 @@ LAB_004e89c4:
       if (temp_v1 < temp_v3) {
         do {
           puVar2 = (unsigned int *)aiStack_1ec[temp_v1];
-          if ((*puVar2 & DAT_00571190) != 0 || (puVar2[1] & DAT_00571194) != 0) {
+          if ((*puVar2 & g_btlTargetableMask) != 0 || (puVar2[1] & DAT_00571194) != 0) {
             temp_v2 = FUN_0026264c(*(unsigned short *)((int)puVar2 + 0x166));
             if (temp_v2 != 0) {
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 6;
@@ -198,7 +198,7 @@ LAB_004e89c4:
       *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1c0) =
            (unsigned short)(((*(unsigned int **)(param_2 + 0x20))[1] & DAT_00571154) != 0 ||
                    (**(unsigned int **)(param_2 + 0x20) & DAT_00571150) != 0);
-      FUN_004e6fb0(param_1);
+      btlAiMarkLowestHpTarget(param_1);
     }
   }
   return;

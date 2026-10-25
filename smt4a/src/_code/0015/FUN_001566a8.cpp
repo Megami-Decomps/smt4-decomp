@@ -1,4 +1,4 @@
-/* NON_MATCHING: queue-base hoisting, failure-result register lifetime and request-byte store scheduling differ. */
+/* NON_MATCHING: retail reloads the DAT_0061978c base (r1) after asdSoundGetObjectCount instead of keeping it in r4, and assigns group/flags to sl/r9 the other way round. */
 #include "sound/VoiceLoadQueue.h"
 
 extern "C" {
@@ -36,13 +36,17 @@ static inline s32 findFreeVoiceLoadRequest()
 extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
                              f32 leftGain, f32 rightGain)
 {
+    u32 failure = (u32)-1;
     char path[64], directory[64], number[64];
     rt_aeabi_memclr(path, sizeof(path));
     rt_aeabi_memclr(directory, sizeof(directory));
     rt_aeabi_memclr(number, sizeof(number));
-    if (jyoucyuGetTableEntry(1) != NULL || FUN_00162ea4() != 0 ||
-        DAT_0061978c.disabled != 0 || kind == 0)
-        return (u32)-1;
+    if (jyoucyuGetTableEntry(1) != NULL)
+        return failure;
+    if (FUN_00162ea4() != 0)
+        return failure;
+    if (DAT_0061978c.disabled != 0 || kind == 0)
+        return failure;
     textFormatBuffer(directory, DAT_0053629c);
     textFormatBuffer(number, DAT_00536294, id);
     libc_strcat(directory, number);
@@ -50,10 +54,10 @@ extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
     asdSoundGetObjectCount();
     s32 index = findFreeVoiceLoadRequest();
     if (index == -1)
-        return (u32)-1;
+        return failure;
     VoiceLoadRequest *request = voiceLoadRequestAt(index);
     if (request == NULL || !asdLoadFileExists(path))
-        return (u32)-1;
+        return failure;
     request->counter = 0;
     request->flags = flags;
     request->active = 1;

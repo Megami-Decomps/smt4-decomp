@@ -1,4 +1,5 @@
 #include "common.h"
+#include "text/TextDraw.h"
 
 struct TextSlotPanel {
     /* 0x00 */ u32 handles[10];
@@ -10,8 +11,7 @@ struct TextSlotPanel {
 };
 
 extern "C" {
-void *FUN_0015f858(u32 id, u32 section);
-const char *FUN_001654f8(void *entry, u32 first, u32 second);
+const char *FUN_0015f858(u32 id, u32 section);
 int textFormatBuffer(char *buffer, const char *format, ...);
 void asdTextFormatStream(u32 handle, u32 mode, u32 color, u32 first, u32 second, const char *text);
 
@@ -20,7 +20,7 @@ void uiSetEntrySlotText(TextSlotPanel *panel, u32 slot, u32 id, u32 value, u32 f
     if (!panel) {
         return;
     }
-    void *entry = FUN_0015f858(id, 0);
+    const char *entry = FUN_0015f858(id, 0);
     const char *text = FUN_001654f8(entry, 0, 0);
     char buffer[132];
     textFormatBuffer(buffer, "%s", text);

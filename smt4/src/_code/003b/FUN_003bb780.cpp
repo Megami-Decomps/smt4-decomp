@@ -1,12 +1,12 @@
 /* NON_MATCHING: register allocation (retail addresses the cursor flags through a base register at menu+0x600 and keeps constants in different registers) */
 #include "shard/S1ListMenu.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 f32 jobGetScalarValue(void);
 s32 vec2GetXInt(Vec2Int *v);
 s32 vec2GetYInt(Vec2Int *v);
-void FUN_002bf288(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 f32 *FUN_002bf4f8(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);

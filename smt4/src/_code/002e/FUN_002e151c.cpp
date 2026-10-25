@@ -2,7 +2,6 @@
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
-TexNode* asdTMTexTableCallFileB(s32 tableIndex, s32 nodeIndex);
 void FUN_002b9178(TexNode* node);
 
 static inline bool prepareTextureNode(TexNode* node, u32 imageMode, u32 stateFlag)

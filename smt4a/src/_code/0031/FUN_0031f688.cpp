@@ -13,16 +13,20 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown;
 
-/* Moves the status screen to state 6, remembering the previous state. */
+/* Moves the screen to `next`, remembering the previous state. */
+static inline void statusDownSetState(StatusDown *screen, s32 next)
+{
+    s32 previous = screen->state;
+    screen->state = next;
+    screen->prevState = previous;
+}
+
 void FUN_0031f688(void)
 {
     StatusDown *screen = g_statusDown;
-    s32 previous;
 
     screen->unk524 = 0;
-    previous = screen->state;
-    screen->state = 6;
-    screen->prevState = previous;
+    statusDownSetState(screen, 6);
 }
 
 } /* extern "C" */

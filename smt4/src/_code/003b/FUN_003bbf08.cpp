@@ -1,10 +1,10 @@
 /* NON_MATCHING: vptr constant is restored; recovered destructor member traversal and load scheduling differ. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int asdCecShutdown(void);
-int asdMemFreeNonNull(void *object);
 int asdMemFree(u32 ptr);
 
 typedef struct Obj {

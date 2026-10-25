@@ -1,5 +1,6 @@
 /* NON_MATCHING: indexed first-stack push and three-byte label restored; set/pop state registers, glyph coordinates and blink remainder allocation still differ. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -40,7 +41,6 @@ void FUN_00157558(RenderCtxA *context);
 void FUN_00183bb0(void);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_0016c4b8(RenderCtxA *context, s32 arg);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 SlotLayout *FUN_001834a4(u32 group, u32 id);
 void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);

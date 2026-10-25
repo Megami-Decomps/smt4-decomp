@@ -1,11 +1,11 @@
 /* NON_MATCHING: switch uses comparison tree rather than retail jump table; fade arithmetic scheduling differs. */
 #include "event/2dEvent/EventFilter.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
-s32 asdTMTexTableNodeIsLoaded(u32, u32);
 f32 FUN_001bbf0c(f32);
-s32 FUN_00203d74(void);
 
 // Advance the filter's texture loading, fade-in, pulse and fade-out phases.
 u32 FUN_002a41a0(void)

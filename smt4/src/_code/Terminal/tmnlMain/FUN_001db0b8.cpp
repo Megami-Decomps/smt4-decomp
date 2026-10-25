@@ -3,10 +3,10 @@
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
 #include "Terminal/tmnlMain.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(u32 size, u32 alignment, u32 flags, u32 memoryType, u32 mode);
 s32 questTestPackedFlag(u32 flag);
 void questSetPackedFlag(u32 index, s32 enabled);
 s32 gameFlagIsSet(u32 flag);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the arguments in single registers (s19/s16) and the quad size loaded together up front; ours copies the float pair as a double and schedules the corner math after the texture bind (161 rows against 151). */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A loaded texture the title scene can bind (handle at +8). */
 struct TitleTexture {
@@ -42,7 +43,6 @@ extern "C" {
 extern u32 g_titleScene;
 
 TitleFadeWork *jobGetWork(void);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_002c1d5c(void);
 s32 FUN_002b8660(void);
 void FUN_002c1b64(u32 scene, u32 texture);

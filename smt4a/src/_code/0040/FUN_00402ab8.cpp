@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 194 rows); retail interleaves the float conversions with the rect loads, repeats the parallax call per cell and unrolls the row/mark scans differently */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 // Placement record of a sprite part: position and a pointer to its extra metrics.
 struct SpriteRect {
@@ -47,7 +48,6 @@ void textFormatBuffer(char* out, const char* format, ...);
 s32 fontMeasureLineAdvance(const char* text, s32 font);
 SpriteRect* FUN_001834a4(s32 group, s32 index);
 void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 speed);
-void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
 
 // Draws the caption panel at (x, y): "<name>" and a second caption string side by side with

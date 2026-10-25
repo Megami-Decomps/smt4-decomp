@@ -42,8 +42,8 @@ struct AudioDeviceState {
 
 extern "C" {
 extern AudioDeviceState DAT_005880d0;
-extern u8 DAT_005880f0[];
-extern u8 DAT_00618518[];
+extern u8 g_threadRecordA[];
+extern u8 g_soundVoiceCriticalSection[];
 extern const char DAT_00532a54[];
 
 void FUN_00158f64();
@@ -85,7 +85,7 @@ u32 FUN_00422940(AudioAllocator *allocator, s32 ringCount, u8 loop)
     sysMemClear(DAT_005880d0.ring, DAT_005880d0.ringCount * 0x70);
     DAT_005880d0.unk18 = 0;
     DAT_005880d0.unk1C = 0;
-    nn_os_CriticalSection_Initialize(DAT_00618518);
+    nn_os_CriticalSection_Initialize(g_soundVoiceCriticalSection);
     if (DAT_005880d0.loop != 0) {
         asdDebugTrace(DAT_00532a54, 249);
         DAT_005880d0.threadStack = memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
@@ -105,7 +105,7 @@ u32 FUN_00422940(AudioAllocator *allocator, s32 ringCount, u8 loop)
         table.copyArgument = copyValueIfDestination;
         table.destroyArgument = emptyStub_0010032c;
         table.invoke = FUN_00100326;
-        s32 result = FUN_002fb0d4(DAT_005880f0, &table, FUN_00422bf0, &argument,
+        s32 result = FUN_002fb0d4(g_threadRecordA, &table, FUN_00422bf0, &argument,
                                   DAT_005880d0.thread->stackBase + DAT_005880d0.thread->stackSize, 2, -2, 0);
         if (nnResultIsFailure(result)) {
             FUN_002e3140(result);

@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

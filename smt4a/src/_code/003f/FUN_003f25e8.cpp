@@ -1,5 +1,6 @@
 /* NON_MATCHING: canonical accessor and form guards match; result normalization branches to the shared zero return instead of MOVNE. */
 #include "battle/BattleUnitSlot.h"
+#include "util/CalleeContracts.h"
 
 struct ScriptUnitForm {
     u8 unk000[0x12c]; // 0x000
@@ -18,7 +19,6 @@ struct ScriptBattleUnit {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 FUN_0019acdc(u16 formId, u32 flags);
 
 // Test whether the script's battle unit resolves to form category three.
 s32 FUN_003f25e8()

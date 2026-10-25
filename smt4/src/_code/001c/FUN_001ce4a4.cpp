@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ce4a4` (_code @ 0x1ce4a4, 0x5e8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ extern int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_002a4e18. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int aocRunByName(int, unsigned int, unsigned int, unsigned int);

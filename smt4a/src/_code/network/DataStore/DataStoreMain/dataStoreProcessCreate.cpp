@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail chains member-constructor return pointers and includes a removed weak call at work+0x2c; explicit initialization needs an extra saved register. */
 #include "network/DataStore/DataStoreMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 typedef void (*DataStoreCallback)(void *);
 extern "C" {
 extern DataStoreCtrl *g_dataStore;
 extern const char DAT_00533030[];
-void *asdMemoryAllocTracked(u32, u32, s32, s32, s32);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 void *FUN_002e9ff4(void *member);
 void FUN_00227ee8(void *);

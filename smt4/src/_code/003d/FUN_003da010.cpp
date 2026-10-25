@@ -1,9 +1,9 @@
 /* NON_MATCHING: slot address i * 0x8c is built in r0 throughout; retail puts the i * 35 step in r1 */
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-void *btlGetMainState(void);
 s32 FUN_00293230(void);
 u8 keyedRecordRegisterName(u8 *work);
 u8 FUN_00249e54(u8 state, u8 *name);

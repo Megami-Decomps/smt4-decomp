@@ -1,9 +1,9 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int asdTMTexTableReleaseNode(int table, int index);
-extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0xC78];

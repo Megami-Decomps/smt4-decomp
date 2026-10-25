@@ -1,4 +1,4 @@
-/* NON_MATCHING: origin/text stack placement, centered-text FP scheduling and completion-flag addressing differ. */
+/* NON_MATCHING: stack placement now matches (text buffer declared first); centered-text FP scheduling (retail uses separate vldr for origin.x/y, build uses vldm) and completion-flag addressing differ. */
 #include "shard/Shard0033.h"
 #include "shard/S1ListPanel.h"
 
@@ -33,6 +33,7 @@ void FUN_00163aa4(UiSpriteState* animation, f32 step);
 
 void FUN_0048b260(ObjB* work)
 {
+    char text[80];
     struct { f32 x, y; } origin;
     words2Copy(&work->spriteHeaders.headers[0].unk2C, &origin);
     u32 renderState = FUN_001692ac(1, 0);
@@ -43,7 +44,6 @@ void FUN_0048b260(ObjB* work)
     FUN_00164b5c(2, 0x13, 0x1C, static_cast<s32>(static_cast<f32>(vec2GetXInt(&hint->animation)) + origin.x),
         static_cast<s32>(origin.y), 0xD3);
     SpriteInfo* sprite = FUN_001834a4(0x13, 0x111B);
-    char text[80];
     __aeabi_memcpy4(text, DAT_00532728, 55);
     s32 textWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
     f32 centeredOffset = static_cast<f32>((sprite->size[0] - textWidth) / 2);

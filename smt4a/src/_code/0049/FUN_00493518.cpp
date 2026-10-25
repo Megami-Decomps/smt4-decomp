@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 /* A rectangle (position and size) followed by an effect parameter word. */
 struct EffectRect {
@@ -12,7 +13,6 @@ struct EffectRect {
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 kind, u32 parameter, u32 id, s32 x, s32 y, u32 last);
 
 /* Plays effect `id` at the far corner of `rect` offset by (dx, dy), at speed `speed`, then resets the speed to 1. */
 void FUN_00493518(f32 speed, const EffectRect *rect, u32 id, s32 dx, s32 dy, u32 last)

@@ -1,4 +1,5 @@
 #include "battle/BattleCommandMenu.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
 
@@ -18,7 +19,6 @@ f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *element);
-void FUN_002bf288(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 
 #define TITLE_LOGO_STEREO_SCALE 0.29f

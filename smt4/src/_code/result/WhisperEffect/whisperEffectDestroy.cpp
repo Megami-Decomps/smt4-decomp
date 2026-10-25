@@ -1,10 +1,10 @@
 /* Destroy callback of the whisper effect: releases its five resources and clears the global. */
 #include "common.h"
 #include "result/WhisperEffect.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int asdTMTexTableFreeEntry(int type);
 int asdTMTexTableReleaseNode(int type, int index);
 int jobGetWork(void);
 

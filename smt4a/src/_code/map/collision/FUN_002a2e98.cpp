@@ -1,5 +1,6 @@
 /* NON_MATCHING: prologue scheduling only (240 rows each, every other instruction agrees): retail loads the collision block address and the zero first and copies the map/second/area arguments to r4/r5/r7 after the field stores; ours copies them before. */
 #include "common.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "AsdSDK/AsdDebug.h"
 
 /* The map collision data in use (observed fields), at g_mapCollision. */
@@ -28,7 +29,6 @@ extern "C" {
 extern MapCollisionState g_mapCollision;
 
 void textFormatBuffer(char *destination, const char *format, ...);
-u8 *FUN_0013c174(char *path, u32 *size, u32 flags);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 enabled);
 void asdMemFree(void *block);
 void FUN_0025f954(s32 which);
@@ -75,7 +75,7 @@ void FUN_002a2e98(s32 map, u32 area, s32 second, u32 secondArea)
             textFormatBuffer(secondPath, "map/m%03d/a%03d_%02d.col", second, second, secondArea);
         }
     }
-    file = FUN_0013c174(path, &size, 0);
+    file = static_cast<u8 *>(asdLoadFileWithSize(path, &size, 0));
     g_mapCollision.file = file;
     g_mapCollision.fileCopy = file;
     g_mapCollision.table = (u32 *)(file + *(u32 *)(file + 12));
@@ -100,7 +100,7 @@ void FUN_002a2e98(s32 map, u32 area, s32 second, u32 secondArea)
     asdMemFree(g_mapCollision.file);
     g_mapCollision.file = NULL;
     if (hasSecond != 0) {
-        file = FUN_0013c174(secondPath, &size, 0);
+        file = static_cast<u8 *>(asdLoadFileWithSize(secondPath, &size, 0));
         g_mapCollision.file = file;
         g_mapCollision.fileCopy = file;
         g_mapCollision.table = (u32 *)(file + *(u32 *)(file + 12));

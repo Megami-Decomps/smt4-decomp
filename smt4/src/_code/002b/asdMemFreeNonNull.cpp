@@ -1,13 +1,12 @@
-#include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int asdMemFree(int ptr);
-
-void asdMemFreeNonNull(int ptr)
+void asdMemFreeNonNull(void *block)
 {
-    if (ptr != 0) {
-        asdMemFree(ptr);
+    if (block != 0) {
+        asdMemFree(block);
     }
 }
 

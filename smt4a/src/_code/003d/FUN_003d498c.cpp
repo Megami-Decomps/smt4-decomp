@@ -1,6 +1,7 @@
 /* NON_MATCHING: two instruction-order swaps remain in stack/global setup and fallback-name arguments. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "shard/W5_W5Match7_DataRecord.h"
+#include "text/TextDraw.h"
 struct AocSystemA;
 extern "C" {
 extern AocSystemA *g_aocSystem;
@@ -11,7 +12,6 @@ void *asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 type, const void *data, s32 entry);
 s32 partyEntryGetByte1(u32 id);
 s32 FUN_003de464(u32 id, u32 mode);
-char *FUN_001654f8(const char *name, char *output, s32 size);
 void asdTextFormatStream(u32 window, s32 mode, u32 color, u32 flags, s32 type, const char *format, const char *text);
 s32 questHasSpecialDetailPage(u32 id);
 s32 itemDataGetCategory(u32 id);

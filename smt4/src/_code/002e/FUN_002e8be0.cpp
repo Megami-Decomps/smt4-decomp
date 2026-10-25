@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP constant register allocation differs (retail reuses s16 for the degrees-to-radians factor in state 0 after hoisting 5.0f, this build allocates s18) */
 #include "map/mapDepart.h"
+#include "util/TrigF32.h"
 
 /* The map scene as the overview camera drives it. */
 #define DEGREES_TO_RADIANS 0.017453292f
@@ -60,8 +61,6 @@ void FUN_0027fc14(s32 mode);
 void FUN_0027fca0(s32 mode);
 void mapSelectContainingRegions(f32 x, f32 z);
 void FUN_002804ec(MapVector *position);
-f32 FUN_00282390(f32 angle);
-f32 FUN_0028250c(f32 angle);
 void buttonHelpSetPreset(s32 preset);
 s32 padIsButtonPressed(u32 button);
 

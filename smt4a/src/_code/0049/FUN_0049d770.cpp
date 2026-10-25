@@ -2,10 +2,10 @@
 #include "shard/W5_W5Match6_CallbackController.h"
 #include "gamedata/DataTable.h"
 #include <stdlib.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void *textureGetIndexedResource(u32 group);
-s32 asdTMTexTableNodeIsLoaded(u32 group, u32 image);
 u8 flagsAtGetBit0(s32 id);
 s32 gameFlagIsSet(u16 flag);
 void flagsAtSetBits01(s32 id);

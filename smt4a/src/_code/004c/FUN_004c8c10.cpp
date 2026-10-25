@@ -1,5 +1,6 @@
 /* NON_MATCHING: battle-state flag/context addressing and dispatch registers differ. */
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/btlHelp.h"
 
 // The request context is beyond the end of the shared battle-state view.

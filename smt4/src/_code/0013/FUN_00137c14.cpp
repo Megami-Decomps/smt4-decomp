@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail moveq r4, #0 differs from recovered mov r4, #0. */
+/* NON_MATCHING: loop constant register allocation (retail r3/ip/r1/r5 vs r5/r6/r3/r7) and address-computation order differ; the null-callback path now matches. */
 #include "common.h"
 
 struct GfxAttributeLocalView {
@@ -35,8 +35,10 @@ void memClear(void* destination, u32 size);
 // Allocate and clear the graphics state, then initialize its sixteen entry defaults.
 GfxStateLocalView* FUN_00137c14(void)
 {
-    GfxStateLocalView* state = 0;
-    if (g_gfxAllocateCallback) {
+    GfxStateLocalView* state;
+    if (!g_gfxAllocateCallback) {
+        state = 0;
+    } else {
         state = static_cast<GfxStateLocalView*>(
             g_gfxAllocateCallback(0x10000, 0x100, 0, 0x348));
         if (state) {

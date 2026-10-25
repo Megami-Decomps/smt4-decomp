@@ -1,5 +1,6 @@
 /* NON_MATCHING: only register allocation differs (retail keeps the base percentage and a zero constant in extra callee-saved registers, and the first side-unit clamp stores the limit register). */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct StepPlayerData {
     /* 0x00 */ u8 unk00[0x0C];
@@ -33,7 +34,6 @@ struct StepSlotTable {
 };
 
 extern "C" {
-s32 flagBitIsSet(u32 bit);
 StepPlayerData *gameGetPlayerData(void);
 StepSlotTable *gameGetSlotTable(void);
 StepUnitRecord *gameGetUnitRecord(s32 slot);

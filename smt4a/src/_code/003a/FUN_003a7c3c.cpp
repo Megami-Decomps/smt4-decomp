@@ -1,8 +1,8 @@
 /* NON_MATCHING: quest/id-list saved registers differ, and menu-state stores combine into STRD rather than retail's individual stores. */
 #include "shard/W5_W5Match7_UiQuest.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
-s32 FUN_001bd100(u32 quest);
 s32 objectApplyIfUnblocked(void *cursor);
 void FUN_002a4964(void *cursor, s32 selection);
 void uiQuestSpritesCreate(void);

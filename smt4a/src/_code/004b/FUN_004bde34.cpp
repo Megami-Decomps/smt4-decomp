@@ -1,5 +1,6 @@
 /* NON_MATCHING: saved draw arguments, numeric-call stack setup and HP coordinate temporaries use different registers; portrait conversion and cycling marker remainder now follow retail. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ typedef struct PartnerCardScreen {
 
 s32 FUN_002b4dcc(PartnerCardUnit *unit);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 PartnerCardLayout *FUN_001834a4(u32 group, u32 id);
 void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
 void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,

@@ -18,7 +18,7 @@ typedef struct {
 
 extern int DAT_00589384; /* 0x589384 */
 extern unsigned int *DAT_005c0a98; /* 0x5c0a98 */
-extern unsigned int DAT_0062d2a4; /* 0x62d2a4 */
+extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
 
 /* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -69,9 +69,9 @@ unsigned int * FUN_00442554(unsigned int *param_1)
       (**(romwright_code **)(*(int *)param_1[0xd] + 4))();
       param_1[0xd] = 0;
     }
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d2a4);
+    nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
     temp_v1 = DAT_00589384 == 0;
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d2a4);
+    nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
     if ((temp_v1) && (temp_v0 = FUN_00442280(), temp_v0 == 0)) {
       return (unsigned int *)0xd8a0c7f8;
     }

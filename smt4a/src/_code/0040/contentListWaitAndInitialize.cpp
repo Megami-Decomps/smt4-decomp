@@ -1,5 +1,6 @@
 /* NON_MATCHING: screen/system allocation, total-count and texture scheduling differ; -O2 candidate. */
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ContentListScroller { u8 data[0x6c]; };
 struct ContentListScreen {
@@ -29,7 +30,6 @@ extern "C" {
 extern AocSystemA *g_aocSystem;
 s32 FUN_00471960(AocSystemA *);
 s32 textureGetIndexedResource(u32);
-s32 asdTMTexTableNodeIsLoaded(u32, s32);
 void *dataTableGet(u32, u32);
 void *dataTableGetEntries(void *);
 s32 dataTableGetCount(void *);

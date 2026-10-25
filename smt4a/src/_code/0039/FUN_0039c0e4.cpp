@@ -1,12 +1,12 @@
 /* NON_MATCHING: memory-slot address retention and texture/resource release load scheduling differ. */
 #include "gfx/SecondaryResourceWork.h"
 #include "shard/W5_W5Match7_ResourceHandles.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void ifTouchRegionRemove(void);
 void asdMemFreeSlot(u32);
 void asdTMTexTableReleaseNode(s32, s32);
-void asdTMTexTableFreeEntry(s32);
 void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
 void jobStop(u32, s32);

@@ -19,11 +19,12 @@ FlaggedTableEntry *dataTable8FindRecord(u16);
 bool FUN_00481404(u16 id)
 {
     EntryCategory *category = FUN_0019c06c(id);
-    if (category == NULL || (category->type != 1 && category->type != 12))
-        return 0;
-    FlaggedTableEntry *entry = dataTable8FindRecord(id);
-    if (entry == NULL)
-        return 0;
-    return (entry->flags & 1) != 0;
+    if (category != NULL && (category->type == 1 || category->type == 12)) {
+        FlaggedTableEntry *entry = dataTable8FindRecord(id);
+        if (entry != NULL) {
+            return entry->flags & 1;
+        }
+    }
+    return 0;
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail's extra clock-value copy is not reproduced by the known output-pointer APIs; failure tails also merge and registers differ. */
+/* NON_MATCHING: stack layout (retail packs clock at sp+0, info, copy, date; built needs 136 bytes), failure tails merge differently (retail: inbox/outbox failures share a block with two NOPed hook calls), registers differ. */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 
@@ -72,8 +72,9 @@ s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag)
     state->info.infoB = 0;
     u64 clock;
     FUN_002c567c(&clock);
+    u64 now = clock;
     CecCalendarDate date;
-    FUN_002ad66c(&date, &clock);
+    FUN_002ad66c(&date, &now);
     state->info.openedAt = date;
     g_asdCecModuleFlags.open = 1;
     return 0;

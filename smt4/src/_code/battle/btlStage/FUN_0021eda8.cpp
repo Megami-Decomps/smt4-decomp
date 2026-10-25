@@ -2,6 +2,8 @@
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlStage.h"
 #include "nn/Result.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The work area of the job that owns the stage. */
 struct StageJobWork {
@@ -27,8 +29,6 @@ s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 tim
 void FUN_002c526c(s32 result, bool failed);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
-void asdMemFreeNonNull(void *block);
-void asdMemFree(void *block);
 }
 
 inline StackRegion::~StackRegion()

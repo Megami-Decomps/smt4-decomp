@@ -33,7 +33,6 @@ void FUN_002aa790(unsigned int param_1,unsigned int param_2,int param_3)
   unsigned int *puVar8;
   unsigned int temp_v4;
   unsigned int temp_v5;
-  int temp_v6;
   unsigned char temp_v7;
   
   if (g_commandBufferCursor + (param_2 & 0xfffffffe) + (param_2 >> 7) * 2 + 2 >= g_commandBufferEnd) {
@@ -96,7 +95,7 @@ void FUN_002aa790(unsigned int param_1,unsigned int param_2,int param_3)
         else {
           temp_v3 = 0;
           temp_v1 = (int)((-0xf - temp_v4) + ((unsigned int)((int)(-0xf - temp_v4) >> 0x1f) >> 0x1c)) >> 4;
-          for (temp_v6 = 0; -temp_v6 != temp_v1 && temp_v6 <= -temp_v1; temp_v6 = temp_v6 + 1) {
+          for (int temp_v6 = 0; -temp_v6 != temp_v1 && temp_v6 <= -temp_v1; temp_v6 = temp_v6 + 1) {
             puVar3 = puVar8 + (temp_v3 - 1);
             temp_v2 = 8;
             puVar7 = puVar6 + (temp_v3 - 1);

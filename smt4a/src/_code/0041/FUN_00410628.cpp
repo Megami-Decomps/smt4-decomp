@@ -6,7 +6,7 @@ struct BtlCameraA;
 
 extern "C" {
 
-int FUN_0013c174(unsigned char *, int);
+int asdLoadFileWithSize(unsigned char *, int);
 int asdMemFree(void);
 int dataTableFileGetTable(void);
 int __aeabi_memset4(void);
@@ -75,7 +75,7 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 #define ROMWRIGHT_ZEXT_4_8_DEFINED
 #define romwright_zext_4_8(value) ((unsigned long long)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_0013c174. */
+/* Supplied declaration required: asdLoadFileWithSize. */
 extern int FUN_0013def0(unsigned int);
 extern int btlGetMainState(void);
 extern int lcgRandomRange(unsigned int);
@@ -322,7 +322,7 @@ void FUN_00410628(int param_1)
           *(unsigned int *)(param_1 + 0x184) = 0;
         }
         puVar5 = &DAT_00529834;
-        FUN_0013c174(&DAT_00529834,0);
+        asdLoadFileWithSize(&DAT_00529834,0);
         *(unsigned char **)(param_1 + 0x184) = puVar5;
         dataTableFileGetTable();
         temp_v2 = dataTableGetEntries();

@@ -1,8 +1,8 @@
 #include "shard/X14_StatusDown.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 s32 FUN_00230544();
-void FUN_001835b4(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 
 // Draw both status indicators using the active or inactive image pair.
 void statusDownDrawIndicatorPairs(s32 x, s32 y)

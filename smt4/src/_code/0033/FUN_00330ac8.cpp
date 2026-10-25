@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00330ac8` (_code @ 0x330ac8, 0x488 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_00240d88(...);
 int fadeObjectResetIfActive(int);
 int vec2GetXInt(...);
-int FUN_002bf288(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
@@ -31,7 +31,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */

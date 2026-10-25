@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/Task.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct PlaceWindowTemplateResources {
     u8 first[0x18];
@@ -15,7 +16,6 @@ struct PlaceWindowTemplateResources {
 extern "C" {
 extern PlaceWindow *g_placeWin;
 extern const u8 DAT_00403a58[];
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 s32 FUN_0032a9fc(u32);
 void placeWindowDrawLabel(void *);

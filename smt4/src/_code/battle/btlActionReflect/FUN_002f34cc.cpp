@@ -1,4 +1,3 @@
-/* NON_MATCHING: after the allocation retail loads the global's address into r1 (then clears r1) where built uses r2 for it. */
 #include "battle/btlReflect.h"
 #include "AsdSDK/AsdDebug.h"
 

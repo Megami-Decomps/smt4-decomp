@@ -2,6 +2,7 @@
 #include "map/MapSelection.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "shard/W6_W6Match2_AocTable23.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 Table23Record *dataTableGetRecord23(s32 index);

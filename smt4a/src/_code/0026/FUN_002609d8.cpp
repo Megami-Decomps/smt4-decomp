@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W6_W6Match8_GpuDepth.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -88,7 +89,6 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00168e00. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001834e4. */
 /* Supplied declaration required: FUN_001835b4. */

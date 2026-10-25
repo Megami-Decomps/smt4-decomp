@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail spills r0-r3 (push {r0-r3,r4-r6,lr}), reloads the mode byte from the spill and builds the command with strd/stm of the stack arguments; built keeps the arguments in registers (same IPC family as FUN_004268f0) */
+/* NON_MATCHING: the mode byte and the push {r0-r3, r4-r6, lr} spill match (memcpy of the parameter); retail copies the three stack words with integer ldm/stm, armcc uses vldm/vstm for the 12-byte copy (the library's integer copy needs --fpu=none, which also changes the strd) */
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include <string.h>
 
 extern "C" {
 extern u32 DAT_005c149c;
@@ -12,7 +13,7 @@ s32 FUN_00426940(u32 *out, u32 handle, s32 count, u8 mode, u32 a, u32 b, u32 c)
 
     command->header = 0x10030142;
     command->words[0] = count;
-    *reinterpret_cast<u8 *>(&command->words[1]) = mode;
+    memcpy(&command->words[1], &mode, sizeof(mode));
     command->words[2] = a;
     command->words[3] = b;
     command->words[4] = c;

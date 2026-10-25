@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail saves registers before loading the lock directly into R4; compiled scoped-lock construction loads it into R0 before PUSH and then copies R0 to R4. Remaining instructions match. */
 #include "common.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 

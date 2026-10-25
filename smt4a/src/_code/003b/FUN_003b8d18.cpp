@@ -1,4 +1,4 @@
-/* NON_MATCHING: ARMCC keeps the three-choice loop instead of retail's unrolled checks. */
+/* NON_MATCHING: the three choices are now unrolled as in retail; only the id/constant register assignment differs (retail ldrh r1 / constant r0). */
 /* Selects a random nonempty demon id from a record's choices and the battle's extra table. */
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -19,11 +19,17 @@ u32 FUN_003b8d18(void)
     u32 candidates[128];
     sysMemClear(candidates, sizeof(candidates));
     u8 count = 0;
-    for (u32 i = 0; i < 3; ++i) {
-        u16 id = record->choices[i].value;
-        if (id != 0x7B6 && id != 0) {
-            candidates[count++] = id;
-        }
+    u16 id = record->choices[0].value;
+    if (id != 0x7B6 && id != 0) {
+        candidates[count++] = id;
+    }
+    id = record->choices[1].value;
+    if (id != 0x7B6 && id != 0) {
+        candidates[count++] = id;
+    }
+    id = record->choices[2].value;
+    if (id != 0x7B6 && id != 0) {
+        candidates[count++] = id;
     }
     void *table = btlGetTable(btlGetMainState(), 0x10);
     u16 *entries = (u16 *)dataTableGetEntries(table);

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern LockedResourcePool DAT_005880d0;
-extern u32 DAT_00618518;
+extern u32 g_soundVoiceCriticalSection;
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
 u32 FUN_001af874(u32, u32, u32);
@@ -20,9 +20,9 @@ u32 FUN_00422814(s32 width, s32 height, s32 capacity)
             if (DAT_005880d0.slots[index].elements == NULL) {
                 return 0;
             }
-            nn_os_CriticalSection_Enter(&DAT_00618518);
+            nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
             DAT_005880d0.slots[index].handle = FUN_001af874(0x80, 0, 0);
-            nn_os_CriticalSection_Leave(&DAT_00618518);
+            nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
             LockedResourceSlot *slot = &DAT_005880d0.slots[index];
             if (slot->handle == 0) {
                 allocator = DAT_005880d0.allocator;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: pulse-end order recovered; prologue constant scheduling and steady-state blink branch folding differ. */
 #include "event/2dEvent/SnowNoise.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f430;
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 
 u32 FUN_002a4488()
 {

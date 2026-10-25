@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail loads the mask 5 halves with two ldr (high into r3); this build uses one ldm. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 extern u64 g_btlMessageFlagMasks[6];
 BtlMainStateA *btlGetMainState(void);
-void scrSetResult(s32 result);
 
 // Script command: result is the unit index of the first combatant that has a flag of mask 1, none of
 // mask 5 and one of mask 4, or -1.

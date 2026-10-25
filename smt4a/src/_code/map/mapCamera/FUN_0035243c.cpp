@@ -1,5 +1,6 @@
 /* NON_MATCHING: the global camera-owner load and saved-register setup are scheduled differently in the prologue. */
 #include "map/lmapMain.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "classes/Obj557af8.h"
 #include "gfx/CameraAnimationApply.h"
 #include <new>
@@ -10,7 +11,6 @@ struct CameraPoseValues { f32 eyeX, eyeY, eyeZ, targetX, targetY, targetZ; };
 extern "C" {
 extern LmapExtraGlobalsA DAT_005806a0;
 s32 textFormatBuffer(char *destination, const char *format, ...);
-const AsdAnimCameraResource *FUN_0013c174(const char *path, u32 *size, u32 mode);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 s32 settings5BGetValue();
 void settings5BSetValue(s32 value);
@@ -41,7 +41,7 @@ void FUN_0035243c(s32 mapId, s32 variant)
     u32 size = 0;
     char path[64];
     textFormatBuffer(path, "map/m%03d/cam%03d_%02d.bch", mapId, mapId, variant);
-    const AsdAnimCameraResource *resource = FUN_0013c174(path, &size, 1);
+    const AsdAnimCameraResource *resource = static_cast<const AsdAnimCameraResource *>(asdLoadFileWithSize(path, &size, 1));
     void *storage = FUN_00178b04(sizeof(Obj557af8), "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCamera.cpp", 0x15ad);
     Obj557af8 *camera = static_cast<Obj557af8 *>(storage);
     if (camera != NULL)

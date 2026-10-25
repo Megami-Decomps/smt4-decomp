@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d939c` (_code @ 0x3d939c, 0xc94 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_001634b4(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
-int FUN_001835b4(...);
 int FUN_00358e94(...);
 int uiGetLayoutPointDifference(...);
 int FUN_0046ed8c(unsigned int, unsigned int, unsigned int, int);
@@ -34,7 +34,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
-/* Supplied declaration required: FUN_001835b4. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: uiGetLayoutPointDifference. */

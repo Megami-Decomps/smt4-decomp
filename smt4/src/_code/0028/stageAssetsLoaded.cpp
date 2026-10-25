@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct StageState {
 
 extern StageState DAT_0044cf60; /* 0x44cf60 */
 
-extern int asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 
 /* Whether the texture table node the current stage (0x65, 0x66 or 0x67) needs is loaded; true for any other stage. */
 u32 stageAssetsLoaded(void)

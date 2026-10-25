@@ -796,10 +796,20 @@
     },
     {
       "address": "0x1012fc",
+      "function": "nn_os_ExitProcess",
+      "module": "_code",
+      "object": "build/obj/_code/0010/nn_os_ExitProcess.o",
+      "size": 4,
+      "source": "src/_code/0010/nn_os_ExitProcess.cpp",
+      "target": "orig/target/_code/0010/nn_os_ExitProcess.o",
+      "thumb": false
+    },
+    {
+      "address": "0x101300",
       "function": "svcExitProcess",
       "module": "_code",
       "object": "build/obj/_code/0010/svcExitProcess.o",
-      "size": 12,
+      "size": 8,
       "source": "src/_code/0010/svcExitProcess.cpp",
       "target": "orig/target/_code/0010/svcExitProcess.o",
       "thumb": false
@@ -3422,12 +3432,12 @@
     },
     {
       "address": "0x10e7f0",
-      "function": "FUN_0010e7f0",
+      "function": "gxQueryCommandListParameters",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010e7f0.o",
+      "object": "build/obj/_code/0010/gxQueryCommandListParameters.o",
       "size": 200,
-      "source": "src/_code/0010/FUN_0010e7f0.cpp",
-      "target": "orig/target/_code/0010/FUN_0010e7f0.o",
+      "source": "src/_code/0010/gxQueryCommandListParameters.cpp",
+      "target": "orig/target/_code/0010/gxQueryCommandListParameters.o",
       "thumb": false
     },
     {
@@ -10503,7 +10513,18 @@
       "size": 64,
       "source": "src/_code/0013/nn_snd_CTR_StartSoundThread.cpp",
       "target": "orig/target/_code/0013/nn_snd_CTR_StartSoundThread.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x13a904",
@@ -14359,7 +14380,18 @@
       "size": 140,
       "source": "src/_code/0014/nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryDequeue.cpp",
       "target": "orig/target/_code/0014/nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryDequeue.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x14dad4",
@@ -15766,7 +15798,18 @@
       "size": 92,
       "source": "src/_code/0015/FUN_001532fc.cpp",
       "target": "orig/target/_code/0015/FUN_001532fc.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x15335c",
@@ -16487,7 +16530,18 @@
       "size": 116,
       "source": "src/_code/0015/nn_snd_CTR_Dspsnd_SetChannelAdpcmParam.cpp",
       "target": "orig/target/_code/0015/nn_snd_CTR_Dspsnd_SetChannelAdpcmParam.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x1565e4",
@@ -22123,12 +22177,12 @@
     },
     {
       "address": "0x1ad228",
-      "function": "FUN_001ad228",
+      "function": "keyedRecordSetVectorPair2",
       "module": "_code",
-      "object": "build/obj/_code/001a/FUN_001ad228.o",
+      "object": "build/obj/_code/001a/keyedRecordSetVectorPair2.o",
       "size": 52,
-      "source": "src/_code/001a/FUN_001ad228.cpp",
-      "target": "orig/target/_code/001a/FUN_001ad228.o",
+      "source": "src/_code/001a/keyedRecordSetVectorPair2.cpp",
+      "target": "orig/target/_code/001a/keyedRecordSetVectorPair2.o",
       "thumb": false
     },
     {
@@ -22143,12 +22197,12 @@
     },
     {
       "address": "0x1ad2a0",
-      "function": "FUN_001ad2a0",
+      "function": "keyedRecordSetVectorPair0",
       "module": "_code",
-      "object": "build/obj/_code/001a/FUN_001ad2a0.o",
+      "object": "build/obj/_code/001a/keyedRecordSetVectorPair0.o",
       "size": 52,
-      "source": "src/_code/001a/FUN_001ad2a0.cpp",
-      "target": "orig/target/_code/001a/FUN_001ad2a0.o",
+      "source": "src/_code/001a/keyedRecordSetVectorPair0.cpp",
+      "target": "orig/target/_code/001a/keyedRecordSetVectorPair0.o",
       "thumb": false
     },
     {
@@ -22173,12 +22227,12 @@
     },
     {
       "address": "0x1ad484",
-      "function": "FUN_001ad484",
+      "function": "keyedRecordSetVectorPair1",
       "module": "_code",
-      "object": "build/obj/_code/001a/FUN_001ad484.o",
+      "object": "build/obj/_code/001a/keyedRecordSetVectorPair1.o",
       "size": 52,
-      "source": "src/_code/001a/FUN_001ad484.cpp",
-      "target": "orig/target/_code/001a/FUN_001ad484.o",
+      "source": "src/_code/001a/keyedRecordSetVectorPair1.cpp",
+      "target": "orig/target/_code/001a/keyedRecordSetVectorPair1.o",
       "thumb": false
     },
     {
@@ -29881,12 +29935,12 @@
     },
     {
       "address": "0x211c90",
-      "function": "FUN_00211c90",
+      "function": "nodeReleaseOwnedItemsAndSelf",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_00211c90.o",
+      "object": "build/obj/_code/0021/nodeReleaseOwnedItemsAndSelf.o",
       "size": 108,
-      "source": "src/_code/0021/FUN_00211c90.cpp",
-      "target": "orig/target/_code/0021/FUN_00211c90.o",
+      "source": "src/_code/0021/nodeReleaseOwnedItemsAndSelf.cpp",
+      "target": "orig/target/_code/0021/nodeReleaseOwnedItemsAndSelf.o",
       "thumb": false
     },
     {
@@ -32536,7 +32590,18 @@
       "size": 140,
       "source": "src/_code/0022/FUN_002254e8.cpp",
       "target": "orig/target/_code/0022/FUN_002254e8.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x225574",
@@ -33138,7 +33203,10 @@
       "size": 80,
       "source": "src/_code/0022/FUN_00228930.cpp",
       "target": "orig/target/_code/0022/FUN_00228930.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "btlUnitGet"
+      ]
     },
     {
       "address": "0x228980",
@@ -33233,13 +33301,16 @@
     },
     {
       "address": "0x229998",
-      "function": "FUN_00229998",
+      "function": "btlMarkLowestHpUnit",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_00229998.o",
+      "object": "build/obj/_code/0022/btlMarkLowestHpUnit.o",
       "size": 136,
-      "source": "src/_code/0022/FUN_00229998.cpp",
-      "target": "orig/target/_code/0022/FUN_00229998.o",
-      "thumb": false
+      "source": "src/_code/0022/btlMarkLowestHpUnit.cpp",
+      "target": "orig/target/_code/0022/btlMarkLowestHpUnit.o",
+      "thumb": false,
+      "multifile": [
+        "btlUnitGet"
+      ]
     },
     {
       "address": "0x229a24",
@@ -34106,12 +34177,12 @@
     },
     {
       "address": "0x22e2fc",
-      "function": "FUN_0022e2fc",
+      "function": "entryTableClear",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022e2fc.o",
+      "object": "build/obj/_code/0022/entryTableClear.o",
       "size": 88,
-      "source": "src/_code/0022/FUN_0022e2fc.cpp",
-      "target": "orig/target/_code/0022/FUN_0022e2fc.o",
+      "source": "src/_code/0022/entryTableClear.cpp",
+      "target": "orig/target/_code/0022/entryTableClear.o",
       "thumb": false
     },
     {
@@ -35362,7 +35433,18 @@
       "size": 168,
       "source": "src/_code/0023/FUN_00234330.cpp",
       "target": "orig/target/_code/0023/FUN_00234330.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x23445c",
@@ -46299,7 +46381,10 @@
       "size": 28,
       "source": "src/_code/0027/FUN_0027eee0.cpp",
       "target": "orig/target/_code/0027/FUN_0027eee0.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "mathGetShortestAngleDelta"
+      ]
     },
     {
       "address": "0x27ef00",
@@ -54765,7 +54850,18 @@
       "size": 216,
       "source": "src/_code/002a/FUN_002adba8.cpp",
       "target": "orig/target/_code/002a/FUN_002adba8.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x2adc88",
@@ -69419,12 +69515,12 @@
     },
     {
       "address": "0x2f5eac",
-      "function": "FUN_002f5eac",
+      "function": "stateSetBitFlag",
       "module": "_code",
-      "object": "build/obj/_code/002f/FUN_002f5eac.o",
+      "object": "build/obj/_code/002f/stateSetBitFlag.o",
       "size": 56,
-      "source": "src/_code/002f/FUN_002f5eac.cpp",
-      "target": "orig/target/_code/002f/FUN_002f5eac.o",
+      "source": "src/_code/002f/stateSetBitFlag.cpp",
+      "target": "orig/target/_code/002f/stateSetBitFlag.o",
       "thumb": false
     },
     {
@@ -72629,12 +72725,12 @@
     },
     {
       "address": "0x30b1dc",
-      "function": "FUN_0030b1dc",
+      "function": "scrCommBtlActiveEntryRatioAtLeast",
       "module": "_code",
-      "object": "build/obj/_code/0030/FUN_0030b1dc.o",
+      "object": "build/obj/_code/0030/scrCommBtlActiveEntryRatioAtLeast.o",
       "size": 96,
-      "source": "src/_code/0030/FUN_0030b1dc.cpp",
-      "target": "orig/target/_code/0030/FUN_0030b1dc.o",
+      "source": "src/_code/0030/scrCommBtlActiveEntryRatioAtLeast.cpp",
+      "target": "orig/target/_code/0030/scrCommBtlActiveEntryRatioAtLeast.o",
       "thumb": false
     },
     {
@@ -78656,12 +78752,12 @@
     },
     {
       "address": "0x333fc0",
-      "function": "FUN_00333fc0",
+      "function": "playerSetClampedStat",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00333fc0.o",
+      "object": "build/obj/_code/0033/playerSetClampedStat.o",
       "size": 44,
-      "source": "src/_code/0033/FUN_00333fc0.cpp",
-      "target": "orig/target/_code/0033/FUN_00333fc0.o",
+      "source": "src/_code/0033/playerSetClampedStat.cpp",
+      "target": "orig/target/_code/0033/playerSetClampedStat.o",
       "thumb": false
     },
     {
@@ -84645,7 +84741,18 @@
       "size": 64,
       "source": "src/_code/0035/nn_fs_CTR_MPCore_detail_FileServerArchive_File_TryRead.cpp",
       "target": "orig/target/_code/0035/nn_fs_CTR_MPCore_detail_FileServerArchive_File_TryRead.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x356284",
@@ -85119,12 +85226,12 @@
     },
     {
       "address": "0x3574ac",
-      "function": "FUN_003574ac",
+      "function": "_ZN9Obj3574acD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_003574ac.o",
+      "object": "build/obj/_code/0035/Obj3574ac__dtor_Obj3574ac.o",
       "size": 44,
-      "source": "src/_code/0035/FUN_003574ac.cpp",
-      "target": "orig/target/_code/0035/FUN_003574ac.o",
+      "source": "src/_code/0035/Obj3574ac__dtor_Obj3574ac.cpp",
+      "target": "orig/target/_code/0035/Obj3574ac__dtor_Obj3574ac.o",
       "thumb": false
     },
     {
@@ -85945,7 +86052,18 @@
       "size": 116,
       "source": "src/_code/0035/FUN_00359f90.cpp",
       "target": "orig/target/_code/0035/FUN_00359f90.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x35a010",
@@ -103503,13 +103621,16 @@
     },
     {
       "address": "0x3cf7fc",
-      "function": "FUN_003cf7fc",
+      "function": "btlMarkHighestHpUnit",
       "module": "_code",
-      "object": "build/obj/_code/003c/FUN_003cf7fc.o",
+      "object": "build/obj/_code/003c/btlMarkHighestHpUnit.o",
       "size": 136,
-      "source": "src/_code/003c/FUN_003cf7fc.cpp",
-      "target": "orig/target/_code/003c/FUN_003cf7fc.o",
-      "thumb": false
+      "source": "src/_code/003c/btlMarkHighestHpUnit.cpp",
+      "target": "orig/target/_code/003c/btlMarkHighestHpUnit.o",
+      "thumb": false,
+      "multifile": [
+        "btlUnitGet"
+      ]
     },
     {
       "address": "0x3cf884",
@@ -105253,7 +105374,18 @@
       "size": 112,
       "source": "src/_code/003d/FUN_003df1d4.cpp",
       "target": "orig/target/_code/003d/FUN_003df1d4.o",
-      "thumb": false
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O3",
+        "-Otime",
+        "--fpu=none"
+      ]
     },
     {
       "address": "0x3df244",
@@ -109857,12 +109989,12 @@
     },
     {
       "address": "0x3f7044",
-      "function": "expHeapDestroyA",
+      "function": "_ZN9Obj420eecD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/003f/expHeapDestroyA.o",
+      "object": "build/obj/_code/003f/Obj420eec__dtor_Obj420eec.o",
       "size": 36,
-      "source": "src/_code/003f/expHeapDestroyA.cpp",
-      "target": "orig/target/_code/003f/expHeapDestroyA.o",
+      "source": "src/_code/003f/Obj420eec__dtor_Obj420eec.cpp",
+      "target": "orig/target/_code/003f/Obj420eec__dtor_Obj420eec.o",
       "thumb": false
     },
     {

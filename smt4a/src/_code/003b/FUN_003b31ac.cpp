@@ -1,4 +1,3 @@
-/* NON_MATCHING: color-vector copy uses integer registers instead of VFP; lifetime and packed-channel registers differ. */
 #include "gfx/RenderSubmission.h"
 
 extern "C" {
@@ -6,7 +5,7 @@ void FUN_00338330(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 
 void FUN_002f8a54(void);
 void asdGxSetEffectColorFromRGBA8(u32 color);
 void FUN_002b3c9c(RenderSubmissionPacket *, u32 mode);
-u32 FUN_0038136c(RenderSubmissionOwner *, const u32 *color);
+u32 FUN_0038136c(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
 u32 FUN_00221cb0(void);
 extern EffectColorProductState DAT_006471dc;
 
@@ -18,12 +17,9 @@ void FUN_003b31ac(RenderSubmission *submission)
     if (submission->frame > owner->frame && owner->frame != 0) {
         return;
     }
-    u32 ownerColor = FUN_0038136c(owner, &owner->color);
+    u32 ownerColor = FUN_0038136c(owner, &owner->color, submission->frame, owner->frame);
     asdGxSetEffectColorFromRGBA8(submission->color);
-    DAT_006471dc.factor.red = DAT_006471dc.color.red;
-    DAT_006471dc.factor.green = DAT_006471dc.color.green;
-    DAT_006471dc.factor.blue = DAT_006471dc.color.blue;
-    DAT_006471dc.factor.alpha = DAT_006471dc.color.alpha;
+    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
     asdGxSetEffectColorFromRGBA8(ownerColor);
     FUN_002f8a54();
     u32 color = FUN_00221cb0();

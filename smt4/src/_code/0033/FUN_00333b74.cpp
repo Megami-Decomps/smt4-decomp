@@ -1,6 +1,7 @@
 /* NON_MATCHING: reward-list/section registers are exchanged, pipelined loot-weight temporaries differ, and gold multiply operands are reversed. */
 #include "common.h"
 #include <stddef.h>
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -69,7 +70,6 @@ QuestRewardRecord *dataTable1bOr1cGetRecord(void *quest);
 QuestRuntimeStatus *questGetRuntimeStatus(void *quest);
 PlayerLevelView *gameGetPlayerData(void);
 u32 dataTable9EntryOrZero(u32 level);
-void *dataTableGet(u32 table, u32 section);
 void *dataTableGetEntries(void *section);
 u32 dataTableGetCount(void *section);
 u32 randNextInRange(s32 limit);

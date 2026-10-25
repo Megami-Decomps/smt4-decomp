@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push scheduling, saved registers and sprite-coordinate load order differ. */
+/* NON_MATCHING: only the two coordinate-offset saved registers (x/y in r6/r7) are swapped. */
 #include "camp/RenderCtx.h"
 struct SceneArrowDrawWork {
     u8 unk00[0x10];
@@ -39,18 +39,23 @@ void FUN_003a2f88(SceneArrowDrawWork *work)
     if (work->mode != 1) {
         FUN_003a37dc(work);
         if (placeWinGetValue()) {
+            s32 depth = 13;
             s32 x = FUN_001dd8f0();
             s32 y = FUN_001dd910();
             ArrowSpritePositions positions = DAT_00407540;
             u32 position = 0;
             if (work->firstArrow) {
                 const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(FUN_002bf4f8(0x2B, positions.ids[position]));
-                FUN_002bf380(2, 0x2B, 6, origin->x + x, origin->y + y, 13);
+                s32 arrowX = origin->x + x;
+                s32 arrowY = origin->y + y;
+                FUN_002bf380(2, 0x2B, 6, arrowX, arrowY, depth);
                 ++position;
             }
             if (work->secondArrow) {
                 const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(FUN_002bf4f8(0x2B, positions.ids[position]));
-                FUN_002bf380(2, 0x2B, 7, origin->x + x, origin->y + y, 13);
+                s32 arrowX = origin->x + x;
+                s32 arrowY = origin->y + y;
+                FUN_002bf380(2, 0x2B, 7, arrowX, arrowY, depth);
             }
         }
     }

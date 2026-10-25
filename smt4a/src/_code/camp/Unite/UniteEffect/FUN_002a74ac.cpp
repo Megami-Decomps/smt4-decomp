@@ -32,7 +32,7 @@ int FUN_00371c3c(...);
 int FUN_00387240(...);
 int paramsClearPacket(...);
 
-int FUN_0013c174(...);
+int asdLoadFileWithSize(...);
 int FUN_00178b04(...);
 int FUN_00184310(void);
 int FUN_001fc348(...);
@@ -69,7 +69,7 @@ extern const UniteEffectParameterTables DAT_0052f360;
 extern int DAT_0057f2c4; /* 0x57f2c4 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0013c174. */
+/* Supplied declaration required: asdLoadFileWithSize. */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: uiSpriteInitializeState. */
 /* Supplied declaration required: paramsInit. */
@@ -154,7 +154,7 @@ void FUN_002a74ac(void)
       FUN_0040aa6c();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
       FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-      FUN_0013c174(&LAB_002a7994,&temp_v5,1);
+      asdLoadFileWithSize(&LAB_002a7994,&temp_v5,1);
       temp_v3 = 0x48;
       FUN_00178b04(0x48,&LAB_002a7940,0x6ef);
     }
@@ -169,7 +169,7 @@ void FUN_002a74ac(void)
       FUN_0040aa6c();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
       FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-      FUN_0013c174(&LAB_002a79d0,&temp_v5,1);
+      asdLoadFileWithSize(&LAB_002a79d0,&temp_v5,1);
       temp_v3 = 0x48;
       FUN_00178b04(0x48,&LAB_002a7940,0x6f7);
     }
@@ -191,7 +191,7 @@ void FUN_002a74ac(void)
     FUN_0040aa6c();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
     FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-    FUN_0013c174(&LAB_002a7a14,&temp_v5,1);
+    asdLoadFileWithSize(&LAB_002a7a14,&temp_v5,1);
     temp_v3 = 0x48;
     FUN_00178b04(0x48,&LAB_002a7940,0x711);
     if (temp_v3 != 0) {
@@ -212,7 +212,7 @@ void FUN_002a74ac(void)
     FUN_0040aa6c();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
     FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-    FUN_0013c174(&LAB_002a7a4c,&temp_v5,1);
+    asdLoadFileWithSize(&LAB_002a7a4c,&temp_v5,1);
     temp_v3 = 0x48;
     FUN_00178b04(0x48,&LAB_002a7940,0x728);
     if (temp_v3 != 0) {

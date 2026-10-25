@@ -4,7 +4,6 @@
 extern "C" {
 
 
-extern TexNode *asdTMTexTableCallFileB(s32 table, s32 node);
 extern void asdTextureRelease(AsdTexture *texture);
 extern void asdMemFree(void *block);
 

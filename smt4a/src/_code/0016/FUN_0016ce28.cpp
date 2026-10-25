@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_4_stack;
 
-extern unsigned int DAT_0062d2d8; /* 0x62d2d8 */
+extern unsigned int g_moduleEventC; /* 0x62d2d8 */
 extern int DAT_0062d2e8; /* 0x62d2e8 */
 
 /* Supplied declaration required: FUN_0016cdd8. */
@@ -39,7 +39,7 @@ void FUN_0016ce28(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   nn_os_LightEvent_ClearSignal(param_1 + 8);
   FUN_0016cdd8(param_1);
   DAT_0062d2e8 = param_1 + 8;
-  temp_v0 = FUN_0016f9bc(&DAT_0062d2d8,0x207);
+  temp_v0 = FUN_0016f9bc(&g_moduleEventC,0x207);
   if (-(temp_v0 >> 0x1f) != 0) {
     FUN_0016e800(temp_v0,0x16ce8c,-(temp_v0 >> 0x1f),param_4,unaff_r4,in_lr);
   }

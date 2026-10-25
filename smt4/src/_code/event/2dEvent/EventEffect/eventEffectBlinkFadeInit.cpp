@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "event/2dEvent/BlinkFade.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 extern BlinkFadeWork *g_eventEffect;
 extern BlinkFadeTexture DAT_0043df00[2];
@@ -15,7 +16,6 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
 s32 FUN_00222520(u32 handle);
 s32 FUN_002222e8(u32 handle);
 void *textureGetIndexedResource(u32 table);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableLoadTmx(u32 table, s32 mode);
 void asdTMTexTableLoadEntryAsync(u32 table, u32 node);
 

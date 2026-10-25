@@ -1,5 +1,6 @@
 /* NON_MATCHING: root/loop register roles and shared-counter initialization differ; lower optimization may change allocation. */
 #include "shard/Shard0034.h"
+#include "util/CalleeContracts.h"
 
 namespace {
 union SkillIds {
@@ -59,7 +60,6 @@ PlayerData* gameGetPlayerData(void);
 s32 countUnlockedSlots(void);
 s32 getUnlockedSlotCount(const PlayerData*);
 void statusReplaceSkills(const u16*, u8);
-void FUN_003343f0(u32);
 
 void statusSkillsCommitOnDialogResult(void* object)
 {

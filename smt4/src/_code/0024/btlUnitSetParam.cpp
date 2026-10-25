@@ -5,11 +5,11 @@
 
 extern "C" {
 
-int FUN_00229998(int *);
+int btlMarkLowestHpUnit(int *);
 int FUN_00247478(unsigned int [110], int, unsigned int);
 int dataTable08Sub1GetRecord(void);
 int FUN_003cf1a8(int *);
-int FUN_003cf7fc(int *);
+int btlMarkHighestHpUnit(int *);
 int FUN_003d0160(int *, int);
 int FUN_003d0bec(int *, unsigned int, int, unsigned int *, int *);
 int FUN_003d0fcc(int *, unsigned int);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp1E8; /* 0x1e8: local_1e8 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00229998. */
+/* Supplied declaration required: btlMarkLowestHpUnit. */
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: btlUnitGet. */
@@ -30,7 +30,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int FUN_003c83e0(void);
 /* Supplied declaration required: FUN_003cf1a8. */
-/* Supplied declaration required: FUN_003cf7fc. */
+/* Supplied declaration required: btlMarkHighestHpUnit. */
 /* Supplied declaration required: FUN_003d0160. */
 /* Supplied declaration required: FUN_003d0bec. */
 /* Supplied declaration required: FUN_003d0fcc. */
@@ -175,13 +175,13 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       }
     }
   case 4:
-    FUN_003cf7fc(param_1);
+    btlMarkHighestHpUnit(param_1);
     return;
   case 2:
     FUN_003cf1a8(param_1);
     return;
   case 3:
-    FUN_00229998(param_1);
+    btlMarkLowestHpUnit(param_1);
     return;
   case 5:
     temp_v7 = 10000;

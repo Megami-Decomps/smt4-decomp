@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail passes a never-assigned register (r5) as a second argument of the operator new call. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct CecProcess {
 
 extern CecProcess *g_cecProcess;
 
-extern void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 extern void sysMemClear(void *block, u32 size);
 extern void *asdOperatorNew(u32 size);
 extern void *_ZN9Obj557ec0C1Ev(void *object);

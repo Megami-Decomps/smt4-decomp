@@ -1,4 +1,5 @@
 #include "ui/UiSpriteState.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 // Layout rectangle of a UI element: its offset inside the panel.
@@ -21,7 +22,6 @@ const char *dataTable24Sub0GetRecordS90(u32 index);
 s32 sceneSelectionGetSlotId(void);
 void efctSetSpeed(f32 speed);
 void FUN_002bf380(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
-void FUN_002bf288(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
 LayoutRect *FUN_002bf4f8(u32 group, u32 id);
 void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 shear, f32 speed);
 void uiFormatIndexedDisplayName(SlotPanel *panel, u32 name, s32 slot, char *buffer);

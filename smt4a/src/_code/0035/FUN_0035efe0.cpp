@@ -1,6 +1,7 @@
 /* NON_MATCHING: mask loads are reordered and the unit flags use LDM instead of LDRD. */
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 // Return a selected unit value, suppressing it for the masked special unit.
 extern "C" u32 FUN_0035efe0(void)

@@ -1,8 +1,8 @@
 #include "shard/Shard004A.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-extern u8 asdTMTexTableNodeIsLoaded(u32 group, s32 index);
 
 /* True when at least 11 of the 6+5 entries of groups 0xC and 0xD are set. */
 u8 flagGroupsCDAtLeast11(void)

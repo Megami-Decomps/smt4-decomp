@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b72e0` (_code @ 0x1b72e0, 0x6e8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -12,7 +14,6 @@ int effectRenderTransformedInstance(int);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
-int FUN_002bf288(...);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
@@ -53,14 +54,12 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: SUB84 (SUBPIECE). */
 /* Supplied declaration required: FUN_00218c50. */
 /* Supplied declaration required: btlDrawFloatingNumbers. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf288. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */

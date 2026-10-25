@@ -52,7 +52,9 @@ typedef struct BtlMainState {
     /* 0x002C */ u32 jobB;        /* second job */
     /* 0x0030 */ u8 unk0030[0x30];
     /* 0x0060 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
-    /* 0x0061 */ u8 unk0061[0x1E37];
+    /* 0x0061 */ u8 unk0061[0x1E23];
+    /* 0x1E84 */ s16 unitTotal;
+    /* 0x1E86 */ u8 unk1E86[0x12];
     union {
         /* 0x1E98 */ u32 unk1E98;
         /* 0x1E98 */ BtlActionRecord* actions;

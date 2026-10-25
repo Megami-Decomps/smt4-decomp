@@ -4,13 +4,13 @@
 extern "C" {
 
 extern s32 g_btlScriptUnit;
-extern u16 scrGetArg(void);
+extern u16 scrGetArg(s32 index);
 extern BtlUnit *btlUnitGet(s32 id);
 
 /* Script command: queues command 8 with the argument on the scripted unit. */
 u32 FUN_00372904(void)
 {
-    u16 arg = scrGetArg();
+    u16 arg = scrGetArg(0);
     BtlUnitWork *work = btlUnitGet(g_btlScriptUnit)->work;
 
     work->command = 8;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: texture-release helper forms the texture base after the buffer free; module/work/texture/index register assignment still differs. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct SmokeFadeWork {
     /* 0x00 */ u32 job;
@@ -25,10 +26,8 @@ extern "C" {
 extern SmokeFadeModule DAT_0043df28;
 
 void asdMemFree(void *memory);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 s32 textureGetIndexedResource(u32 table);
-void asdTMTexTableFreeEntry(u32 table);
 void jobStop(u32 job, s32 arg);
 
 static inline void smokeFadeReleaseTextures(SmokeFadeTexture *textures)

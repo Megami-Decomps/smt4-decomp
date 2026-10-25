@@ -1,9 +1,9 @@
 /* NON_MATCHING: capacity helper restores saved-register allocation; post-clamp zero comparison is predicated LE instead of unconditional. */
 #include "shard/PadState.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 PadState *gameGetPlayerData(void);
-s32 flagBitIsSet(u32);
 s32 FUN_001386f8(u32);
 
 static __inline s32 inventoryGetCapacity(void)

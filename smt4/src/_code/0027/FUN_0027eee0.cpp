@@ -1,13 +1,12 @@
-/* NON_MATCHING: compiler preserves r4 with lr while retail preserves only lr. */
 #include "common.h"
 
 
 extern "C" {
-/* Updates or returns the requested state. */
-f32 mathGetShortestAngleDelta(void);
-f32 FUN_0027eee0(void)
+f32 mathGetShortestAngleDelta(f32 from, f32 to);
+/* Returns the absolute shortest angular distance between two angles. */
+f32 FUN_0027eee0(f32 from, f32 to)
 {
-    f32 value = mathGetShortestAngleDelta();
+    f32 value = mathGetShortestAngleDelta(from, to);
     return value < 0.0f ? -value : value;
 }
 }

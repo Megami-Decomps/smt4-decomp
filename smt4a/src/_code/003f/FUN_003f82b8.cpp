@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic and call sequence match; retail keeps one more value live (constant 201 hoisted into r11 and x held in r6), so its register assignment and 12-byte frame differ from the build. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 struct SpriteFrame {
     /* 0x00 */ u8 unk00[8];
@@ -31,7 +32,6 @@ s32 vec2GetYInt(const void *position);
 f32 vec2GetSpeed(const void *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 SpriteFrame *FUN_001834a4(u32 group, s32 sprite);
 void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 alpha);
 void FUN_003f5d94(void *owner, s32 x, s32 y, f32 alpha);

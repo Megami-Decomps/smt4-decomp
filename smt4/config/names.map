@@ -1647,7 +1647,7 @@
 003c83b4 questGetCurrentRecordValue6
 003c85c8 questGetCurrentRecordValue8
 003c8850 questGetCurrentRecordHalf4
-003f7044 expHeapDestroyA
+003f7044 _ZN9Obj420eecD1Ev
 003f70f8 expHeapDestroyB
 003f64cc criticalSectionReadValue38Thunk
 003f5848 allocatorFreeBlock
@@ -4432,7 +4432,7 @@
 0027dd9c modelSetResetSlots
 001559ec rt_fpResultDispatch
 0010123c libc_printfFormatDispatch
-001012fc svcExitProcess
+001012fc nn_os_ExitProcess
 00390038 _ZN7AocMenu16openPurchaseListEv
 0038e2f8 _ZN7AocMenu18restartPreviousRunEv
 0038ea88 _ZN7AocMenu14runQuestDialogEv
@@ -4576,3 +4576,16 @@
 0014ed58 asdModelRebuildAttributeRecords
 00389ed8 aocDisplayQueueFormattedEntry
 00311be4 dataTableChooseWeightedId
+003574ac _ZN9Obj3574acD1Ev
+00101300 svcExitProcess
+00211c90 nodeReleaseOwnedItemsAndSelf
+0010e7f0 gxQueryCommandListParameters
+00333fc0 playerSetClampedStat
+00229998 btlMarkLowestHpUnit
+003cf7fc btlMarkHighestHpUnit
+002f5eac stateSetBitFlag
+001ad2a0 keyedRecordSetVectorPair0
+001ad228 keyedRecordSetVectorPair2
+001ad484 keyedRecordSetVectorPair1
+0030b1dc scrCommBtlActiveEntryRatioAtLeast
+0022e2fc entryTableClear

@@ -1,5 +1,7 @@
 /* NON_MATCHING: initial scissor-stack addressing/flush registers and blend-address scheduling differ. */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 namespace {
 struct MaskedSpriteWidget {
@@ -13,9 +15,7 @@ typedef char MaskedSpriteWidgetPositionCheck[
 extern "C" {
 extern RenderCtxScissorA *g_renderCtx;
 SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
-void FUN_001835b4(s32 display, u32 group, u32 sprite, s32 x, s32 y, u32 flags);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
-s32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 void renderPopStateStacks();

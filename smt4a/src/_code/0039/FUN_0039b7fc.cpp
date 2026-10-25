@@ -1,5 +1,7 @@
 /* NON_MATCHING: register allocation only (the global base, kind * 3 and the entry pointer land in r7/r5/r4 in retail, r8/r7/r5 here). */
 #include "event/2dEvent/EventEffect.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct EventFilterWork {
     u32 job;
@@ -17,10 +19,8 @@ extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void *textureGetIndexedResource(u32 index);
-void asdTMTexTableFreeEntry(u32 index);
 
 /* Stop the event filter: release its texture, drop the shared filter texture when unused, and free the work. */
 void FUN_0039b7fc(void)

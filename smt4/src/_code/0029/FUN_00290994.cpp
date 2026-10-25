@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws a list scroll bar (frame, the two arrow buttons with their pressed variants, then the proportional thumb clipped by the scissor state); written from the decompilation, the ratio/offset math is shared between the horizontal and vertical case through one helper and the integer-to-float conversions are written as casts */
 #include "shard/S1ListPanel.h"
+#include "shard/TextureDrawCall.h"
 
 #define SCROLL_LAYER 2
 #define SCROLL_LAYER_THUMB_OFFSET 5
@@ -27,7 +28,6 @@ extern "C" {
 extern ScrollScissorView *g_titleScene;
 
 s32 ifTouchGetSelectionModeForRegion(s32 region);
-void FUN_002bf288(s32 layer, u32 group, u32 id, s32 x, s32 y, s32 size);
 ScrollTrack *FUN_002bf4f8(u32 group, u32 id);
 s32 FUN_0029e958(void *list);   /* horizontal: total entries */
 s32 FUN_0028cfbc(void *list);   /* horizontal: visible entries */

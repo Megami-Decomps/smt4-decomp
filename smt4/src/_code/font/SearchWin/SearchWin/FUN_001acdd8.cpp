@@ -1,5 +1,6 @@
 /* NON_MATCHING: label-draw argument setup/literal ordering, frame /5 multiply operands, and final zero-return scheduling differ; loading-dot loop instructions agree. */
 #include "gfx/RenderStateStack.h"
+#include "shard/TextureDrawCall.h"
 
 /* The title scene (its state stacks live at 0x124C and 0x12AC). */
 struct TitleScene {
@@ -58,7 +59,6 @@ extern RunWin *DAT_0043e170;
 extern TitleScene *g_titleScene;
 
 void FUN_002c39a4(TitleScene *scene);
-void FUN_002bf288(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void FUN_002bf380(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
 void FUN_002be5a4(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);

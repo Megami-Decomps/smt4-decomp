@@ -2,10 +2,10 @@
 #include "event/eventCommand.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern EventCommandGlobals g_eventCommand;
-void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 bytes, s32 clear);
 s32 FUN_0035c0c8(u32 handle);
 s32 uiFadeQuadDrawJob(u32 handle);
 void eventCommandFreeWork(u32 handle);

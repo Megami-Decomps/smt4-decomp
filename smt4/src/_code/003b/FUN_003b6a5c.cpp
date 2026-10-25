@@ -1,5 +1,6 @@
 /* NON_MATCHING: near: 203 rows against 204; retail keeps the text colour in a callee-saved register and the work pointer in r7 (ours r8) and loads the frame/digit y offsets before the x offsets; the draw sequence and leading-zero logic agree. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 /* An image placement record (offsets 8 and 10 hold the position). */
 struct ImagePlacement {
@@ -21,7 +22,6 @@ struct CounterWork {
 extern "C" {
 
 ImagePlacement *FUN_002bf4f8(s32 group, s32 image);
-void FUN_002bf288(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
 void FUN_0025086c(u32 digit, char *text);
 void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
 void FUN_002bed3c(void);

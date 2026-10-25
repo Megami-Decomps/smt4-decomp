@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-context wrapper and conditional slide offset recovered; panel x-coordinate VFP conversion/register scheduling differs. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -29,7 +30,6 @@ void FUN_00183bb0(void);
 void FUN_00355428(void);
 void FUN_00164b5c(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
 LayoutEntry *FUN_001834a4(u32 table, u32 entry);
-void FUN_001835b4(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
 

@@ -1,4 +1,5 @@
 #include "ui/ButtonHelp.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct HelpTextureGlobalsView {
     u8 unk00;        // 0x00
@@ -14,7 +15,6 @@ extern ButtonHelpGlobalsA g_buttonHelp;
 void helpReleaseDataTable();
 void asdMemFree(void* memory);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-void asdTMTexTableFreeEntry(s32 table);
 
 // Release the shared help textures and allocations after the last reference.
 void helpTexturesRelease()

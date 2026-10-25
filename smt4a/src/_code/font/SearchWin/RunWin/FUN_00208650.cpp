@@ -1,5 +1,6 @@
 /* NON_MATCHING: corrected retail parallax (0.25f) and label color (0x57d8ffff); label coordinate conversion, signed /5 and %8 scheduling, and zero-result epilogue still differ. */
 #include "gfx/RenderStateStack.h"
+#include "shard/TextureDrawCall.h"
 
 /* The render context (its second state stack lives at 0x12B8). */
 struct TitleScene {
@@ -32,7 +33,6 @@ extern RunWin *g_runWin;
 extern TitleScene *g_renderCtx;
 
 void FUN_00157558(TitleScene *scene);
-void FUN_001835b4(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_001834a4(s32 group, s32 part);
 void FUN_00162790(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);

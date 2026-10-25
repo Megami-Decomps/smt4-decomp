@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only: retail loads the touch region count after the two byte stores; this source hoists it above them. */
 #include "common.h"
 
 /* A message window as closed here. */
@@ -46,14 +45,13 @@ static __inline void messageWindowClose(MessageWindow2f *window)
  * the banner and message windows. */
 void FUN_002f6208(void)
 {
-    s32 i;
 
     if (g_messageMain.banner == NULL || g_messageMain.banner->state == 0) {
         return;
     }
     g_messageMain.banner->unk30 = 0;
     g_messageMain.banner->unk31 = 0;
-    for (i = 0; i < g_messageMain.banner->touchRegionCount; i++) {
+    for (s32 i = 0; i < g_messageMain.banner->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }
     g_messageMain.banner->unk2F = 0;

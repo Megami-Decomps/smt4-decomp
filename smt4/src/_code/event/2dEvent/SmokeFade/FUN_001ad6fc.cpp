@@ -1,5 +1,6 @@
 /* NON_MATCHING: the three-case phase switch compiles to a compare chain instead of retail's jump table, the image loop uses ldrd instead of two ldr, and register allocation of the saved state/images pointers differs. */
 #include "event/2dEvent/SmokeFade.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* One fade timing row of event/smoke_fade.tbl. */
 struct SmokeFadeRow {
@@ -16,7 +17,6 @@ extern struct SmokeFadeGlobals {
     u32 unk04[5];
     SmokeFadeImage images[2];
 } DAT_0043df28;
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_002c1d5c(void);
 void FUN_002a03d8(s32 slot, s32 value);
 void slotSetRequest(s32 slot, s32 value, u32 mask);

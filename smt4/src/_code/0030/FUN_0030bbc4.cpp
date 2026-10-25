@@ -16,12 +16,12 @@ typedef struct BtlMainState {
 } BtlMainState;
 
 extern BtlMainState *btlGetMainState(void);
-extern u32 scrGetArg(void);
+extern u32 scrGetArg(s32 index);
 
 /* Script command: flags every active, visible unit with the argument's id (units 4..53) with 0x400000; returns 1. */
 u32 FUN_0030bbc4(void)
 {
-    u32 id = scrGetArg();
+    u32 id = scrGetArg(0);
     BtlMainState *state = btlGetMainState();
     s32 i;
 

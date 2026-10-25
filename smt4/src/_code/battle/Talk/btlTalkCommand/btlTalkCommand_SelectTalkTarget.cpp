@@ -3,6 +3,7 @@
 #include "shard/PadState.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct TalkDevilRecord {
     u16 id;
@@ -23,7 +24,6 @@ u32 partyHasStoredDemon(u32 id);
 Table01Record *FUN_002bd06c(u16 id);
 s32 randBetween(s32 low, s32 high);
 s32 randNextInRange(u32 maximum);
-void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 void asdMemFree(void *memory);
 
 u32 btlTalkCommand_SelectTalkTarget()

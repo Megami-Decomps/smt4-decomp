@@ -1,4 +1,4 @@
-/* NON_MATCHING: slot lookup omits retail's narrowed-index guard; rank-base caching, loop counters and clamp registers differ. */
+/* NON_MATCHING: parameter registers (r8/r9 swapped), rank-base hoisting in the learn loop and clamp temp differ. */
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/Shard004B.h"
 
@@ -10,11 +10,18 @@ s32 FUN_0035d89c(u32);
 void FUN_004cd0c8(PartySlotA *, s16, u16 *);
 void FUN_004cd4b8(PartySlotA *, s16);
 
+static __inline PartySlotA *getPartySlot(u16 index)
+{
+    if (index >= 12)
+        return NULL;
+    return &gameGetSlotTable()->slots[index];
+}
+
 u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease)
 {
     PartySlotA *slot = NULL;
     for (s32 index = 0; index < 12; ++index) {
-        PartySlotA *candidate = &gameGetSlotTable()->slots[index];
+        PartySlotA *candidate = getPartySlot((u16)index);
         if (candidate->id == id) {
             slot = candidate;
             break;
@@ -29,7 +36,7 @@ u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease)
     FUN_004cd0c8(slot, static_cast<s16>(increase), learned);
     ItemRankRecord *ranks = reinterpret_cast<ItemRankRecord *>(slot);
     s32 nextSlot = 0;
-    while (nextSlot < 8 && ranks->items[nextSlot])
+    for (s32 count = 0; count < 8 && ranks->items[count]; ++count)
         ++nextSlot;
     for (s32 index = 0; index < 8 && learned[index]; ++index, ++nextSlot) {
         u32 skill = learned[index];
@@ -41,9 +48,9 @@ u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease)
                 rank = ranks->categoryRanks[definition->category];
             s32 maximum = FUN_0035e458(skill);
             s32 minimum = FUN_0035d89c(skill);
-            if (maximum < rank)
+            if (rank > maximum)
                 rank = static_cast<s8>(maximum);
-            else if (rank < minimum)
+            else if (minimum > rank)
                 rank = static_cast<s8>(minimum);
             ranks->ranks[nextSlot] = rank;
         }

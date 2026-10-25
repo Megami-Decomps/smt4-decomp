@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains an unfolded 21-to-5 mode remapping and keeps the result in r4 across getters; direct mode-five source is folded and uses a smaller frame. */
+/* NON_MATCHING: retail keeps the 21-to-5 remap unfolded (mov r0,#21; cmp r0,#21; moveq r0,#5); armcc folds it to mov r4,#5 here. Mode held in r4 across the getters now matches. */
 #include "common.h"
 
 struct ScriptTransitionContext;
@@ -9,12 +9,21 @@ u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame();
 void FUN_0021bdac(ScriptTransitionContext* context, u32 argument, u32 frame, s32 mode, s32 first, s32 second);
 
+/* Maps the script's transition kind 21 to mode 5; other kinds pass through. */
+static __inline s32 transitionMode(s32 kind)
+{
+    if (kind == 21)
+        return 5;
+    return kind;
+}
+
 // Submit the script argument and frame to the mode-five transition.
 void FUN_002378b8()
 {
+    s32 mode = transitionMode(21);
     ScriptTransitionContext* context = FUN_002ba85c();
     u32 argument = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
-    FUN_0021bdac(context, argument, frame, 5, 0, 0);
+    FUN_0021bdac(context, argument, frame, mode, 0, 0);
 }
 }

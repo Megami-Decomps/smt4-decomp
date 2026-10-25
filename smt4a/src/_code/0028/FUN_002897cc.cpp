@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002897cc` (_code @ 0x2897cc, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -74,7 +75,6 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
 extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: eventQueueAddUnique. */
-extern unsigned long long asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: aocLoadTextureNode. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */

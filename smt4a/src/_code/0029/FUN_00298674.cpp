@@ -1,11 +1,11 @@
 /* NON_MATCHING: render-stack zero constant is initialized after the readiness test rather than before it. */
 #include "battle/btlUI.h"
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 extern RenderCtxA *g_renderCtx;
-s32 asdTMTexTableNodeIsLoaded(u32, s32);
 void FUN_00157558(RenderCtxA *);
 u32 FUN_001692ac(u32, u32);
 s32 FUN_00284e94(void);

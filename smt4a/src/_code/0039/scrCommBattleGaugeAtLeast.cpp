@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail materialises the constant 100 in r0 (the dead gauge pointer's register); the build uses r3 */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -16,18 +16,19 @@ typedef struct BattleGaugeOwner0039d35c {
 /* Fill of a gauge in percent. */
 static __inline s32 gaugePercent(Gauge0039d35c *gauge)
 {
-    return gauge->value * 100 / gauge->maxValue;
+    s32 value = gauge->value;
+    s32 maximum = gauge->maxValue;
+    return value * 100 / maximum;
 }
 
-s32 scrGetArg(void);
-void *btlGetMainState(void);
+s32 scrGetArg(s32 index);
 BattleGaugeOwner0039d35c *FUN_003eaf20(void *state);
 void scrSetResult(s32 value);
 
 /* Script command: true when the battle gauge is filled to at least arg0 percent. */
 s32 scrCommBattleGaugeAtLeast(void)
 {
-    s32 percent = scrGetArg();
+    s32 percent = scrGetArg(0);
     BattleGaugeOwner0039d35c *owner = FUN_003eaf20(btlGetMainState());
 
     if (owner != NULL && percent <= gaugePercent(&owner->gauge)) {

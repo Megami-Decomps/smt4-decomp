@@ -2,12 +2,12 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/S1Mover.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
 void idSetFindSubjectIndex(BtlMainStateA *, BattleRosterRecordA *);
 void *FUN_001568f8(BtlMainStateA *, s32);
-void *FUN_00152f54(void);
 Vec3f FUN_003ecab8(BtlMainStateA *, s32, s32);
 f32 sqrtf(f32);
 

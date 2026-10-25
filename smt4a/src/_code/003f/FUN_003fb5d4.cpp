@@ -8,7 +8,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int refIsNullOrZero(...);
-int FUN_0013c174(...);
+int asdLoadFileWithSize(...);
 int FUN_001883b0(...);
 int vcallSlot12IfValid(...);
 int sysFatalBreak(...);
@@ -51,7 +51,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_0013c174. */
+/* Supplied declaration required: asdLoadFileWithSize. */
 extern int FUN_0014afd0(void *, unsigned int);
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
@@ -184,7 +184,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
           temp_v0 = 0;
           asdTextureCreate();
           puVar9 = temp_v8;
-          FUN_0013c174(puVar9,temp_v7,0);
+          asdLoadFileWithSize(puVar9,temp_v7,0);
           FUN_001f4a98(temp_v0,puVar9,temp_v7[0]);
           if ((temp_v11 & 8) != 0) {
             *(unsigned int *)(temp_v0 + 8) = 0x20000;

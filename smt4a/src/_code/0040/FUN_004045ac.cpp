@@ -1,5 +1,6 @@
 /* NON_MATCHING: the stereo parallax is recomputed per call where retail reuses one value, the kind switch is a jump table and register assignment differs (225 vs 238 rows); the name plate drawing is the same. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ extern const char DAT_0052d134[];
 
 f32 renderCtxCalculateStereoParallax(u8 *context, f32 depth);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 u32 FUN_004038e0(TalkWindow *window, u16 id);
 void drawSetColorFromRGBA8(u32 color);
 TalkLayout *FUN_001834a4(u32 group, u32 id);

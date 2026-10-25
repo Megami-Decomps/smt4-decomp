@@ -6,7 +6,7 @@ extern "C" {
 
 int gameFlagsGetBlock(void);
 int FUN_0030250c(void);
-int FUN_0033abb4(void);
+float FUN_0033abb4(float, float);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -154,7 +154,7 @@ void FUN_00352568(void)
   if (*(char *)(g_lmapView + 0xb4) != '\0') {
     temp_v9 = 12.0f;
     temp_v10 = *(float *)(g_lmapView + 0x18);
-    FUN_0033abb4();
+    FUN_0033abb4(*(float *)(g_lmapView + 0x18), *(float *)(g_lmapView + 0xc0));
     temp_v0 = g_lmapView;
     if (12.5f >= temp_v10) {
       *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapView + 0xc0);

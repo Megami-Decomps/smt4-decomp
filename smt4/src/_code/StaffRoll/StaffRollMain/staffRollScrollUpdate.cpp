@@ -14,14 +14,13 @@ extern int FUN_002c15fc(u32 button);
 void staffRollScrollUpdate(void)
 {
     StaffRollWork *roll = g_staffRoll;
-    int i;
 
     if (g_staffRoll->lineA[11].y < g_staffRoll->endY) {
         g_staffRoll->skip = 1;
         roll->finished = 1;
     } else {
         g_staffRoll->frames++;
-        for (i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             roll->lineA[i].y -= roll->speed;
             roll->lineB[i].y -= roll->speed;
         }

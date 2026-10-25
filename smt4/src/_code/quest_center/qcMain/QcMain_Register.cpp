@@ -3,6 +3,7 @@
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 struct QuestCenterRegistrationWork {
@@ -21,7 +22,6 @@ struct QuestCenterRegistrationGlobals {
 extern "C" {
 extern QuestCenterRegistrationGlobals g_qcMain;
 void *jyoucyuGetTableEntry(u32 index);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void QcMain_SetFlag(s32 id, s32 value);
 
 s32 QuestCenterMainProcUpdate(u32 handle);

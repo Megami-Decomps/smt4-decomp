@@ -1,5 +1,6 @@
 /* NON_MATCHING: per-frame step of the lmap intro/exit scene (eases the camera, then a state machine: set up the camera behind the player, wait, hand to the map, and the exit steps that switch back to scene 1 / 0x10); written from the decompilation, the arguments of mathDistanceBetweenPoints / mathPositionHeadingDegrees / the trig helpers are not recovered (called with the angle where one is visible) and the u32 copies of the float targets are kept */
 #include "common.h"
+#include "util/TrigF32.h"
 
 #define LMAP_STATE_SETUP 0
 #define LMAP_STATE_SETTLE 1
@@ -64,8 +65,6 @@ void FUN_0027fca0(s32 mode);
 void mapSelectContainingRegions(void);
 void FUN_002804ec(f32 *position);
 void mapEaseSceneHeading(void);
-f32 FUN_00282390(f32 angle);
-f32 FUN_0028250c(f32 angle);
 f32 mathDistanceBetweenPoints(void);
 f32 mathPositionHeadingDegrees(void);
 void buttonHelpSetPreset(s32 preset);

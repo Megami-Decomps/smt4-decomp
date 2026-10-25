@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W4_Match3_AocMainA.h"
+#include "text/TextDraw.h"
 
 struct AocUiSprite {
     u8 data[0x8c];
@@ -31,7 +32,6 @@ void uiSpriteSetImageKeyframe(AocUiSprite *, s32 keyframe, s32 flags);
 void FUN_00387240(AocUiSprite *, s32 group, s32 image);
 void FUN_0015f258(void *panel);
 u32 spriteHandleCreate(s32 flags);
-void FUN_001527d8(u32 handle, u32 mask);
 void positionStateSet(u32 handle, s32 slot, u32 color, f32 duration);
 void FUN_004cf7cc(void *control);
 void aocMenuSetReadyFlag(AocMainA *owner, u8 ready);

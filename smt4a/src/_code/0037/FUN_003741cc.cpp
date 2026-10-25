@@ -1,4 +1,5 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 struct SaveSlotMarkerAnchorA {
@@ -20,7 +21,6 @@ void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
 s32 packNibblesAndByte(u32, u32, u32);
 const SaveSlotMarkerAnchorA *FUN_001834a4(u32, s32);
-void FUN_001835b4(s32, s32, s32, s32, s32, s32);
 
 void FUN_003741cc(SaveSlotTransitionPrefixA *work)
 {

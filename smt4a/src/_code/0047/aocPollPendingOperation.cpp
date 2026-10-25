@@ -1,4 +1,4 @@
-/* NON_MATCHING: canonical native result constructors and failure predicates recovered; output aggregate still uses a local copy without an explicit status constructor. */
+/* NON_MATCHING: NRVO now matches (95 rows); retail keeps the hoisted status constant 1 in r7 and the zero in r8 (built swaps them) and loads queryDetail into r1. */
 #include "shard/W6_W6Match8_AocPoll.h"
 #include "classes/ResourceLookup.h"
 #include "nn/Result.h"
@@ -15,10 +15,10 @@ s32 block88OwnerCheck(AocMain *main);
 // Poll an addon request and translate failures into the operation's result/status output.
 WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
 {
-    WindowStatusOperationResult output = {1};
-    output.result = WindowStatusResult(0);
+    WindowStatusOperationResult output(1);
     AocMain *main = g_aocMain;
-    if (step->phase == 0) {
+    switch (step->phase) {
+    case 0: {
         nn::Result queryCode;
         u32 queryDetail;
         if (FUN_0047d904(step->request, &queryCode, &queryDetail)) {
@@ -34,7 +34,7 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
             step->phase = 1;
             return output;
         }
-        if (nnResultIsFailure(queryCode)) {
+        if (!nnResultIsSuccess(queryCode)) {
             output.result = WindowStatusResult(queryCode);
             if (queryDetail == 0) {
                 output.status = 102;
@@ -43,16 +43,22 @@ WindowStatusOperationResult aocPollPendingOperation(AocPollStep *step)
                 output.status = 103;
             }
         }
-    } else if (step->phase == 1) {
+        break;
+    }
+    case 1:
         if (FUN_00473da0(main)) {
             step->phase = 2;
         } else {
             step->phase = 3;
             output.status = 0;
         }
-    } else if (step->phase == 2 && block88OwnerCheck(main)) {
-        step->phase = 3;
-        output.status = 0;
+        break;
+    case 2:
+        if (block88OwnerCheck(main)) {
+            step->phase = 3;
+            output.status = 0;
+        }
+        break;
     }
     return output;
 }

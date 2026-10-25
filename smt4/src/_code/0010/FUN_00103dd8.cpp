@@ -10,7 +10,7 @@ typedef struct TitleScene {
 
 extern TitleScene *g_titleScene; /* 0x44ea00 */
 
-extern int FUN_002c35b0(void);
+extern int FUN_002c35b0(int mode);
 extern int FUN_002bdb44(void);
 extern int FUN_002c3530(int a, int b);
 extern int FUN_002c3a14(TitleScene *scene);
@@ -18,7 +18,7 @@ extern int FUN_002c3a14(TitleScene *scene);
 /* Switches the title scene to phase 2 and refreshes it. */
 u32 FUN_00103dd8(void)
 {
-    FUN_002c35b0();
+    FUN_002c35b0(2);
     FUN_002bdb44();
     FUN_002c3530(2, 0);
     g_titleScene->phase = 2;

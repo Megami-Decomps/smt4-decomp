@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 6 diff lines remain, scheduling/register allocation only. */
 #include "kernel/jyoucyu.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 struct JyoucyuLoadingView {
@@ -16,7 +17,6 @@ void FUN_00183bb0();
 void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 void FUN_0014e314(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
-void FUN_001835b4(s32 bank, s32 group, s32 image, s32 x, s32 y, s32 flags);
 
 u32 jyoucyuDrawLoadingOverlay()
 {

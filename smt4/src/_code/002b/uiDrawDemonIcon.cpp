@@ -1,5 +1,6 @@
 /* NON_MATCHING: atlas-region address hoisting, top-field reload elimination and coordinate-store scheduling differ by three rows; -O2 may preserve the retail shape. */
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "addon/aocMain.h"
 
@@ -41,7 +42,6 @@ u32 categoryGetColor(s32 category);
 void drawSetColorFromRGBA8(u32 color);
 u32 FUN_0014143c(AocSystem* system, u32 image);
 void effectSubmitPackageRequest(AocSystem* system, u32 image, s32 x, s32 y, u32 style);
-void FUN_002bf288(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style);
 void FUN_002b04e8(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style,
                   const DemonIconRect* region);
 void FUN_002bed3c(void);

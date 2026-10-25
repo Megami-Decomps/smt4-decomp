@@ -3,6 +3,7 @@
 extern "C" {
 
 #include "shard/Shard0031.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern OverlayRef g_campCec;
 extern void messageSetMode(u8 value);
 extern void asdMemFree(void *ptr);
@@ -19,7 +20,6 @@ extern void cecProcessDestroy(void);
 extern u32 dataTableFree(u32 id);
 extern void btlTalkBustUpDestroy(void);
 extern void asdTMTexTableReleaseNode(s32 a, s32 b);
-extern void asdTMTexTableFreeEntry(s32 index);
 extern void statusSceneDestroy(StatusScene *scene);
 extern u8 *handles5Free(u32 handle);
 extern void soundChannelStopAll(s32 value);

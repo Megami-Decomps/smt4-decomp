@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler caches the filter-array address early and preserves the source in a different register. */
 #include "status/StatusDown.h"
 extern "C" StatusDownStateA *g_statusDown;
 
@@ -22,10 +21,9 @@ extern "C" void FUN_0035da20(const u16* entries, s32 count)
         return;
     }
     StatusDownFilterView* filter = (StatusDownFilterView*)g_statusDown;
-    filter->words[0] = 0;
-    filter->words[1] = 0;
-    filter->words[2] = 0;
-    filter->words[3] = 0;
+    for (s32 i = 0; i < 4; i++) {
+        filter->words[i] = 0;
+    }
     if (count >= 0) {
         filter->enabled = 1;
         rt_memcpy(filter->entries, entries, count * sizeof(u16));

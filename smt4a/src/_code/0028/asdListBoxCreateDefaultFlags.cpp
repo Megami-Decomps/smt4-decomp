@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 s32 asdListBoxCreate(u32 parent, u32 configuration, u32 items, u32 itemCount,

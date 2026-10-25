@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -44,7 +45,6 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignClass, u32 flags, u32 size, u32 f
 void sysMemClear(void *block, u32 size);
 void FUN_001692d4(void);
 u32 spriteHandleCreate(u32 kind);
-void FUN_001527d8(u32 sprite, s32 arg);
 void asdTextSetValueFlagsAndScalar(u32 sprite, u32 flags, u32 value, f32 scalar);
 void positionStateSet(u32 sprite, s32 a, s32 b, f32 value);
 void *asdProcessCreateSimple(const char *name, s32 group, s32 delay, s32 end, void (*update)(void *), void (*onEnd)(void *), void *work);

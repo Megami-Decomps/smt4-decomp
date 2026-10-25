@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct MapIfVec3 {
     f32 x, y, z;
@@ -61,7 +62,6 @@ struct MapIf {
 typedef char MapIfSizeCheck[sizeof(MapIf) == 0xCD30 ? 1 : -1];
 
 extern "C" {
-void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
 u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 parent);
 void FUN_002747dc(void);

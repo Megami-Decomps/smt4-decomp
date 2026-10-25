@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail preserves the enable/duration constants across jobGetWork in saved registers. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetCommandFrame();
-u32 scrGetArg(s32 index);
 void* jobGetWork(u32 job);
 void FUN_0019d96c(void* work, s32 enabled, s32 duration);
 

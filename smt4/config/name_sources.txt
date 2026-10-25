@@ -4117,3 +4117,20 @@
 0014ed58 asdModelRebuildAttributeRecords inferred [high] Releases/frees existing model attribute records and rebuilds the collection for a key.
 00389ed8 aocDisplayQueueFormattedEntry inferred [high] Formats kind16 into a128-byte buffer and queues the nonempty record on the AOC display.
 00311be4 dataTableChooseWeightedId inferred [high] Chooses a low-byte ID from section5/7 with24-bit weights packed into each table word.
+003f7044 _ZN9Obj420eecD1Ev evidence slot 0 of vtable _ZTV9Obj420eec (0x420eec)
+003574ac _ZN9Obj3574acD1Ev inferred handle record destructor FUN_003f20b0 registers (closes the handle at +0x14)
+004eabcc g_nnExpHeap inferred size:0x58 Obj420eec built by FUN_003f20b0
+004eac24 g_nnHandleRecord inferred size:0x1c Obj3574ac built by FUN_003f20b0
+001012fc nn_os_ExitProcess evidence nop-only wrapper whose tail call to the svc 0x03 stub at 0x101300 was NOPed (branch-to-next)
+00101300 svcExitProcess evidence svc 0x03; bx lr
+00211c90 nodeReleaseOwnedItemsAndSelf inferred [high] twin of smt4a nodeReleaseOwnedItemsAndSelf (IDENTICAL both games)
+0010e7f0 gxQueryCommandListParameters inferred [med] twin of smt4a FUN_001447b0 (queries the 14 command-list parameters, then copies the label table)
+00333fc0 playerSetClampedStat inferred [med] stores a value clamped to [1, max] into the player record (same shape as playerSetClampedValue)
+00229998 btlMarkLowestHpUnit inferred [med] marks the last eligible unit with the lowest HP in btlUnitGet(owner)->selectedUnits
+003cf7fc btlMarkHighestHpUnit inferred [med] same scan keeping the highest HP
+002f5eac stateSetBitFlag inferred [med] sets or clears bit (flag & 7) of byte flag >> 3 in the state returned by FUN_002a0d0c
+001ad2a0 keyedRecordSetVectorPair0 inferred [high] twin of smt4a keyedRecordSetVectorPair0; sibling of keyedRecordSetVectorPair3
+001ad228 keyedRecordSetVectorPair2 inferred [high] copies vector pair into keyed record pairs[2]; sibling of keyedRecordSetVectorPair3
+001ad484 keyedRecordSetVectorPair1 inferred [high] copies vector pair into keyed record pairs[1]
+0030b1dc scrCommBtlActiveEntryRatioAtLeast inferred [high] pushes whether the active entry current*100/maximum reaches arg0
+0022e2fc entryTableClear inferred [med] clears every 0x20-byte entry of the 0x500-entry table, head, count and sentinel

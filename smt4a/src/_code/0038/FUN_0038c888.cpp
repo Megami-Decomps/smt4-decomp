@@ -5,12 +5,12 @@
 #include "gamedata/BattleUnitSkills.h"
 #include "gamedata/Table00.h"
 #include "gamedata/Table04Record.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 u32 FUN_0027281c(BtlCombatantEntryA *unit);
-void FUN_00301a08(s32 kind, s32 *first, s32 *count);
 s32 btlResolveEntryChoice(s32 choice);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);

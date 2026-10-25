@@ -1,5 +1,6 @@
 /* NON_MATCHING: explicit vtable store loads its address after the push instead of into r1 before it. */
 #include "shard/Shard004B.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct OwnerBuf {
 
 extern void asdMemFree(u32 ptr);
 extern void asdCecShutdown(void);
-extern void asdOperatorDelete(OwnerBuf *obj);
 extern const u32 DAT_00557ec8[];
 
 void ownerBufDestroy(OwnerBuf *obj)

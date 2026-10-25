@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail builds the entry-table base (menu + 0x5a8) before the selection call and reads the id with ldrh + sxth/uxth; armcc here folds it into one ldrsh with a pooled offset. */
+/* NON_MATCHING: retail reads the id with ldrh + sxth and hoists uxth r6 before the slot call; armcc here folds it into one ldrsh. */
 #include "common.h"
 
 namespace {
@@ -40,7 +40,8 @@ void FUN_003a7de4(PurchaseMenu *menu)
 {
     if (messageMainTargetIsClear() == 1 && gameGlobalsFlagIsClear()) {
         messageMainSetTargetFlags(0);
-        PurchaseEntry *entry = &menu->entries[flaggedValueHolderGetTotal(menu->selection)];
+        PurchaseEntry *entries = menu->entries;
+        PurchaseEntry *entry = &entries[flaggedValueHolderGetTotal(menu->selection)];
         s16 id = entry->id;
         s32 slot = partyFindFreeStockSlot();
         if (slot != -1) {

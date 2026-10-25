@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail copies the 16-byte effect colour with vldmia/vstmia {s0-s3} where armcc writes an integer ldm/stm, and allocates the four __rev registers in a different order. */
 #include "gfx/RenderSubmission.h"
 
 extern "C" {
@@ -20,7 +19,7 @@ void FUN_003144cc(RenderSubmission *submission)
     }
     u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
-    DAT_004ea81c.factor = DAT_004ea81c.color;
+    effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
     asdSetNormalizedColorRgba(ownerColor);
     FUN_00246bd4();
     u32 color = FUN_00246c28();

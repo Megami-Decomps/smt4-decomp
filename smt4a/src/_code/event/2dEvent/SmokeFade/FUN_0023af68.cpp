@@ -1,5 +1,6 @@
 /* NON_MATCHING: the fade record selection is inlined per phase with different register allocation and the float constants sit in other registers (187 vs 185 rows); the fade logic is the same. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -38,7 +39,6 @@ typedef struct SmokeFadeGlobals {
 extern SmokeFadeGlobals g_smokeFadeState;
 extern SmokeFadeRecord DAT_0057f498;
 
-s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 FUN_00162ea4(void);
 s32 FUN_00203d74(void);
 f32 mathInterpolateTimed(f32 from, f32 to, s32 duration, s32 elapsed);

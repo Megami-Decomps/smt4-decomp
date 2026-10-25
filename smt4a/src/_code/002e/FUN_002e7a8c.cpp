@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e7a8c` (_code @ 0x2e7a8c, 0x1830 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
 int skinObjectUpdateMatrices(...);
 int FUN_00180310(...);
-int FUN_001835b4(...);
 int drawSetColorFromRGBA8(...);
 int fadeObjectResetIfActive(...);
 int FUN_002ace4c(...);
@@ -63,7 +63,6 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00180310. */
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameGetSlotTable(void);

@@ -13,9 +13,15 @@ class ScopedCriticalLock {
     ScopedCriticalLock(const ScopedCriticalLock&);
     ScopedCriticalLock& operator=(const ScopedCriticalLock&);
 public:
-    explicit ScopedCriticalLock(CriticalSection& section) : section(&section)
+    /* Named lock object: the section is loaded once and kept for both Enter and Leave. */
+    explicit ScopedCriticalLock(CriticalSection& lock) : section(&lock)
     {
-        nn_os_CriticalSection_Enter(&section);
+        nn_os_CriticalSection_Enter(section);
+    }
+    /* Lock passed by address (e.g. a member of a list): the address argument is built first, then kept. */
+    explicit ScopedCriticalLock(CriticalSection* lock) : section(lock)
+    {
+        nn_os_CriticalSection_Enter(lock);
     }
     ~ScopedCriticalLock()
     {

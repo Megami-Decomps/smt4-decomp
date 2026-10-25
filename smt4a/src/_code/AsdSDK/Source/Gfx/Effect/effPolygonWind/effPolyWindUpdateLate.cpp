@@ -1,9 +1,9 @@
 /* NON_MATCHING: register allocation only: retail moves obj into r0 before the late-update dispatch and loads the kind from it. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
-s32 effGetFrameStep(void);
 
 extern PolyWindKind g_polyWindKinds[];
 

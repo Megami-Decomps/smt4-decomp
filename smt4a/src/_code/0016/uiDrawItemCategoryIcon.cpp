@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "shard/TextureDrawCall.h"
 
 struct Entry00192690;
 struct ContentIconEntry {
@@ -26,7 +27,6 @@ u8 *dataTable8FindRecord(s32 id);
 u32 requestKindToId(u32 kind);
 u8 *gameGetPlayerData();
 void FUN_0017ffa8(u32, u32, s32, u32, u32, u32);
-void FUN_001835b4(u32, u32, s32, u32, u32, u32);
 
 void uiDrawItemCategoryIcon(u32 id, s32 x, s32 y, s32 layer, s32 showEquipped)
 {

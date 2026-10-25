@@ -1,4 +1,3 @@
-/* NON_MATCHING: command-entry post-indexed addressing and saved context/input registers differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {

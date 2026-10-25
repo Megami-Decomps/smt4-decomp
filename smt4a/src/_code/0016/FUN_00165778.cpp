@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (218 vs 210 rows); retail builds the translate/scale matrices with individual stores and a 16-word copy of the camera matrix, and keeps the scale-derived offsets in float registers */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 
 // Row-major 4x4 matrix.
@@ -43,7 +44,6 @@ void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, 
 void skinObjectUpdateMatrices(u8* ctx);
 SpriteRect* FUN_001834a4(s32 group, s32 index);
 s32 vec2GetXInt(void* vec);
-void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 d);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
 const Mtx44* _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(Mtx44* dst, const Mtx44* src);

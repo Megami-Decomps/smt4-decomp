@@ -1,4 +1,4 @@
-/* NON_MATCHING: signed division/modulo temporaries and mask/word registers differ, and the enabled comparison is scheduled later. */
+/* NON_MATCHING: retail evaluates the enabled test before the word/mask arithmetic and builds the mask in r2 after loading the word; scheduling and register assignment differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 struct GameFlagBitsView {
@@ -14,12 +14,14 @@ void gameFlagsSetIndexedBit(s32 flag, s32 enabled)
     if (flag > 0) {
         GameFlagBitsView *flags = (GameFlagBitsView *)block;
         u32 *word = &flags->words[flag / 32];
+        u32 bits = *word;
         u32 mask = 1u << (flag % 32);
         if (enabled != 0) {
-            *word |= mask;
+            bits |= mask;
         } else {
-            *word &= ~mask;
+            bits &= ~mask;
         }
+        *word = bits;
     }
 }
 }

@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049d938` (_code @ 0x49d938, 0x43c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_001834a4(...);
-int FUN_001835b4(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
@@ -23,7 +23,6 @@ typedef struct {
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
-/* Supplied declaration required: FUN_001835b4. */
 extern int recordGetModeForId(int);
 extern int flagsAtGetBit1(unsigned short);
 

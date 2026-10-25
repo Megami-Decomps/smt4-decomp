@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "ui/ButtonHelp.h"
+#include "text/TextDraw.h"
 
 namespace {
 /* Animation keys handed to paramsInit. */
@@ -60,7 +61,6 @@ void FUN_00387240(ButtonHelpUnit *sprite, u32 group, s32 arg);
 void spriteSetLayer(ButtonHelpUnit *sprite, u16 layer);
 void spriteSetVisible(ButtonHelpUnit *sprite, u8 visible);
 u32 spriteHandleCreate(u32 arg);
-void FUN_001527d8(u32 handle, u32 color);
 void positionStateSet(u32 handle, s32 arg, u32 color, f32 value);
 u32 FUN_00275bc8(s32 bf, s32 mbm);
 

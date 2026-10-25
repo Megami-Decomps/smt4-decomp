@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation of the flag mask/index in the loop (retail: index r5, mask r6) and the popup stores (retail uses post-increment `str r2,[r0],#4; str r1,[r0],#16`, the build emits stm and an offset store). */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ extern int g_gameState; /* 0x5f15fc */
 extern u8 DAT_0060a198; /* 0x60a198 */
 
 extern int textFormatBuffer(u8 *dst, u8 *src);
-extern int FUN_00152f44(void);
 extern FlagBlock *gameFlagsGetBlock(void);
 extern int gameFlagIsSet(u32 flag);
 extern int FUN_003e4230(u32 id);

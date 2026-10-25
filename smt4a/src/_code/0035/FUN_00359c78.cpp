@@ -1,14 +1,14 @@
 /* NON_MATCHING: canonical context push matches; pop still allocates previous/current values in exchanged registers and omits retail's callback-argument move. */
 #include "ui/SpriteIndicator.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void FUN_00183bb0(void);
 void FUN_00164b5c(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
-void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 void efctSetSpeed(f32 speed);
-s32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
 // Draw two blended background layers, then a horizontally shifted foreground sprite.
 void FUN_00359c78(SpriteLayerBlendState *blend, s32 x, s32 y)

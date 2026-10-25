@@ -1,10 +1,10 @@
 /* NON_MATCHING: active first-indicator branch remains inline instead of retail's out-of-line block and padding. */
 #include "status/StatusDown.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;
 s32 FUN_00288498(void);
-void FUN_002bf288(u32 layer, u32 kind, u32 sprite, s32 x, s32 y, u32 flags);
 
 // Draw paired status indicators using their active or inactive sprite variants.
 void FUN_0029ab54(s32 x, s32 y)

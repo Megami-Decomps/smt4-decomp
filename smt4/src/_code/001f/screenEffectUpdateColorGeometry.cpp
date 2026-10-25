@@ -1,6 +1,7 @@
-/* NON_MATCHING: static-frame selection has an extra conditional move; factor copying uses integer LDM/STM, and color packing/extraction and VFP live ranges differ from retail's reloads and REV-based byte getters. */
+/* NON_MATCHING: frame selection (retail `adds rX, rY, #0` + ldrne, built `cmp` + moveq) and the packed-color reload (retail one vldmia {s1-s4} after the product stores, built vldr + vldmia) differ; the VFP factor copy, product multiply and REV byte getters match. */
 #include "shard/W6_W6Match8_ScreenEffect.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/EffectColorMath.h"
 
 static __inline void screenEffectSetPoint(Point2 *point, f32 x, f32 y)
 {
@@ -22,7 +23,12 @@ void screenEffectUpdateColorGeometry(ScreenEffectJob *job)
     ScreenEffectResource *resource = job->resource;
     ScreenEffectOutput *output = &resource->output;
     s32 duration = resource->duration;
-    s32 frame = duration != 0 ? job->frame : 0;
+    s32 frame;
+    if (duration == 0) {
+        frame = 0;
+    } else {
+        frame = job->frame;
+    }
 
     if (duration == 0 || frame == 0) {
         screenEffectSetPoint(&output->offset, 0.0f, 0.0f);
@@ -38,19 +44,15 @@ void screenEffectUpdateColorGeometry(ScreenEffectJob *job)
     u32 curveColor = FUN_00269694(resource->colorCurve, &resource->weight,
                                  frame, duration);
     renderCtxSetPackedColor(job->color);
-    DAT_004ea81c.factor = DAT_004ea81c.color;
+    effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
     renderCtxSetPackedColor(curveColor);
-    DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
-    DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
-    DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
-    DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
+    effectColorMultiply(&DAT_004ea81c.color, &DAT_004ea81c.color, &DAT_004ea81c.factor);
 
-    RgbaWord packed;
-    packed.word = screenEffectPackColor(DAT_004ea81c.color);
-    output->color.r = packed.rgba.r;
-    output->color.g = packed.rgba.g;
-    output->color.b = packed.rgba.b;
-    output->color.a = packed.rgba.a;
+    u32 packed = effectColorPack(DAT_004ea81c.color);
+    output->color.r = __rev(packed) >> 24;
+    output->color.g = __rev(packed) >> 16;
+    output->color.b = __rev(packed) >> 8;
+    output->color.a = __rev(packed);
 
     output->scale = FUN_00269508(resource->scaleCurve, frame, duration) * 0.01f + 1.0f;
     output->amount = FUN_00269508(resource->amountCurve, frame, duration) * 0.01f;

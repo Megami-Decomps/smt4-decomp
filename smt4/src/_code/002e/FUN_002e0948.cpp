@@ -1,5 +1,6 @@
 /* NON_MATCHING: first-stack push count/previous-value register grouping differs; context wrapper fixes third-stack evaluation order. */
 #include "camp/RenderCtx.h"
+#include "util/CalleeContracts.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
 struct TerminalSlot {
@@ -19,7 +20,6 @@ typedef char TerminalScreenSlotsOffsetCheck[offsetof(TerminalScreen, slots) == 0
 extern "C" {
 extern TerminalScreen *g_tmnl;
 extern RenderCtx *g_titleScene;
-s32 FUN_002865c0(u32 mode, f32 alpha);
 s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 s32 FUN_0028186c(u32 handle);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the owner/alpha parameter copies land in swapped callee-saved registers (r5/r6). */
 #include "font/SearchWin/RunWin.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -11,7 +12,6 @@ s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void FUN_002bf380(s32 layer, s32 group, s32 image, s32 depth, u32 flags, s32 mode);
-void FUN_002bf288(s32 layer, s32 group, s32 image, s32 depth, u32 flags, s32 mode);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 

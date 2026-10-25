@@ -1,4 +1,3 @@
-/* NON_MATCHING: the two conditional set-ups before the skill loop (`skills` base and `j = 0`) are emitted in the opposite order. */
 #include "common.h"
 
 struct SkillRollUnit {
@@ -33,8 +32,6 @@ s32 FUN_003f3048(SkillRollUnit *unit, s32 tries, s32 force)
 {
     SkillRollRecord *record;
     s32 chance;
-    s32 i;
-    s32 j;
 
     if (tries <= 0) {
         return 0;
@@ -44,14 +41,14 @@ s32 FUN_003f3048(SkillRollUnit *unit, s32 tries, s32 force)
     if (gameDataFlagTestBit(5) != 0) {
         chance += 30;
     }
-    for (i = 0; i < tries; i++) {
+    for (s32 i = 0; i < tries; i++) {
         s32 roll = randRange(99);
         if (force != 0) {
             roll = -1;
         }
         if (roll < chance) {
             const u16 *skills = unit->skills;
-            for (j = 0; j < 8; j++) {
+            for (s32 j = 0; j < 8; j++) {
                 if (findSkillMetadataById(skills[j])->flags & 0x40) {
                     return 1;
                 }

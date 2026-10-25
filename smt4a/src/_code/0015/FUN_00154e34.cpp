@@ -1,18 +1,18 @@
-/* NON_MATCHING: The direct global address folds the retail singleton guard and moves the initial volume comparison. */
+/* NON_MATCHING: the singleton address is weak (retail keeps the null guard) and now matches; the per-handle fader call is built as a branch around mov+bl where retail predicates it (blne) after hoisting the volume copy. */
 #include "common.h"
 #include <stddef.h>
 struct Fader;
 extern "C" void FUN_0015e874(Fader*, u32, f32);
 
+static inline void audioFaderSetVolume(Fader* fader, f32 volume)
+{
+    if (fader != NULL) {
+        FUN_0015e874(fader, 0, volume);
+    }
+}
+
 struct AudioVolumeHandle {
     /* 0x00 */ Fader* fader;
-
-    void setVolume(f32 volume)
-    {
-        if (fader != NULL) {
-            FUN_0015e874(fader, 0, volume);
-        }
-    }
 };
 struct AudioVolumeState {
     /* 0x000 */ u8 unk000[0x8BC];
@@ -27,7 +27,7 @@ union VolumeScale {
 typedef char AudioVolumeStateLayoutCheck[sizeof(AudioVolumeHandle) == 4 &&
     offsetof(AudioVolumeState, handles) == 0x8BC && offsetof(AudioVolumeState, volume) == 0xA89 ? 1 : -1];
 extern "C" {
-extern AudioVolumeState DAT_0063ea3c;
+extern __weak AudioVolumeState DAT_0063ea3c;
 
 void FUN_00154e34(u32 volume)
 {
@@ -49,7 +49,7 @@ void FUN_00154e34(u32 volume)
         }
     }
     for (u8 index = 0; index < 4; ++index) {
-        system->handles[index].setVolume(scale.value);
+        audioFaderSetVolume(system->handles[index].fader, scale.value);
     }
 }
 }

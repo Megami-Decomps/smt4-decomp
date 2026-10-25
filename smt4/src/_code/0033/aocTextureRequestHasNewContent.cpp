@@ -1,10 +1,10 @@
 #include "shard/AocTextureRequest.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 extern u32 g_aocSystem;
 
-void asdTMTexTableCallFileB(u32 table, u32 file);
 s32 resourceIsReady(void);
 s32 FUN_0023e330(u32 aoc, u32 contentId, s32 arg2);
 s32 FUN_0023e3a4(u32 aoc, u32 contentId, s32 arg2);

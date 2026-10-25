@@ -1,4 +1,5 @@
 #include "ui/UiSpriteState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct EventRowTextures {
     /* 0x00 */ u8 unk00[0x36];
@@ -25,7 +26,6 @@ s32 FUN_00163aa4(EventRowSprite* sprite, f32 speed);
 void FUN_0049d140(EventRow* row, u32 state, u32 entry);
 void FUN_0049d770(EventRow* row);
 void FUN_0049df84(EventRow* row);
-s32 asdTMTexTableNodeIsLoaded(u32 table, s32 node);
 void updateNineRowListInput(EventRow* row);
 s32 FUN_001517b4(u32 button, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);

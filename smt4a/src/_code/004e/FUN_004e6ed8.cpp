@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail loads the 64-bit mask as two ldr from g_btlAction's base (pool word +0);
- * armcc here pools g_btlAction+0x58 and loads it with one ldm */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -32,9 +30,8 @@ void FUN_004e6ed8(BtlPickContext *context, s32 shuffle)
     s32 count = 0;
     s32 bestHp = 0;
     BtlCombatantEntryA *entry = context->state->entries;
-    s32 i;
 
-    for (i = 0; i < BTL_ENTRY_COUNT_A; i++, entry++) {
+    for (s32 i = 0; i < BTL_ENTRY_COUNT_A; i++, entry++) {
         if ((entry->flags & g_btlAction.strongestMask) && bestHp <= entry->hp) {
             candidates[count++] = entry->indexView.selectionIndex;
             bestHp = entry->hp;

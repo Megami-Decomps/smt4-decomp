@@ -1,6 +1,8 @@
 /* NON_MATCHING: retail loads the first thread-handle argument before copying `this`, takes &thread only after the inlined destructor and re-reads bufferA into r0 (moving it to r5 only inside the null test); this build keeps &thread and the buffer in r5 from the start. */
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* A model-streaming worker (as far as its shutdown touches it). */
 struct StreamWorker {
@@ -20,8 +22,6 @@ extern "C" {
 s32 FUN_002c40f8(s32 *index, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002c526c(s32 result);
 void FUN_002c3f5c(void);
-void asdMemFreeNonNull(void *block);
-void asdMemFree(void *block);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(StreamWorker *worker);
 

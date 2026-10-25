@@ -1,11 +1,11 @@
 /* NON_MATCHING: selected-option cold block placement, pulse multiply association and centered-text address scheduling differ. */
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
-void FUN_001835b4(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 const char *dataTableGetEntry24Member(u32 id);
 const SpriteInfo *FUN_001834a4(u32 table, u32 frame);
 s32 fontMeasureLineAdvance(const char *text, u32 screen);

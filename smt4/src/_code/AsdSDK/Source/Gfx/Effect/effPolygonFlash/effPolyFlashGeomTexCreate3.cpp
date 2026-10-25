@@ -28,9 +28,8 @@ PolyGeomBlock *effPolyFlashGeomTexCreate3(PolyParams *params, void *texture)
     }
     if (params->segments != 0) {
         PolyQuadUV *uv = block->geom->buf->uv;
-        u32 i;
 
-        for (i = 0; i < params->segments; i++) {
+        for (u32 i = 0; i < params->segments; i++) {
             if (i & 1) {
                 uv->u0 = 0.5f; uv->v0 = 0;
                 uv->u1 = 0;    uv->v1 = 0;

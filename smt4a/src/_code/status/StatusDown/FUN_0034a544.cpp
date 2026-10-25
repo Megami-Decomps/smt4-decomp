@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ void uiSpriteSelectAnim(void *sprite, u32 anim);
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 flag);
 void uiSpriteInitializeState(void *sprite, u32 group, s32 id, u32 size, void *owner, u32 anim, f32 scale);
 u32 spriteHandleCreate(u32 kind);
-void FUN_001527d8(u32 handle, s32 value);
 void positionStateSet(u32 handle, u32 a, u32 color, f32 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 void fillTwoWordsWithByte(u32 *words, s32 value);

@@ -1,11 +1,11 @@
 /* NON_MATCHING: highlight effect accessor/multiply scheduling, shared icon branch placement and text-coordinate conversion order differ. */
 #include "ui/PartyPanel.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S3UiLookup.h"
 #include <stddef.h>
 
 extern "C" {
 void FUN_002bf380(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
-void FUN_002bf288(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
 const u16 *dataTable24Sub0GetRecordS90(u32 id);
 const UiTextMetrics *FUN_002bf4f8(u32 bank, u32 entry);

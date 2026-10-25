@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ScriptProcess;
 
@@ -21,7 +22,6 @@ void FUN_002c85b0(s32 mode);
 void FUN_003343f0(s32 mode);
 void FUN_00333f6c(void);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-void asdTMTexTableFreeEntry(s32 table);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
 void campCommonBgRelease(void);

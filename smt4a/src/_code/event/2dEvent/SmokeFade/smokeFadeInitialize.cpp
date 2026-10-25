@@ -1,6 +1,7 @@
 #include "event/2dEvent/SmokeFade.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern SmokeFadeState *g_smokeFadeState;
@@ -12,7 +13,6 @@ u32 asdProcessCreateSimple(const char *, s32, s32, s32, s32 (*)(u32), void *, vo
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void *textureGetIndexedResource(u32);
 void asdTMTexTableLoadTmx(u32, s32);
-s32 asdTMTexTableNodeIsLoaded(u32, u32);
 void asdTMTexLoadMainHeap(u32, u32);
 void asdLoadFileAsyncSimple(const char *, void **, s32);
 

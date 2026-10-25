@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc hoists the constant 1 above the branch (mov r7, #1) where retail loads it separately in the lock block (r1) and after it (r4), so registers and one nop differ */
 #include "ui/MessageMain.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;
@@ -7,7 +8,6 @@ extern MessageGlobals g_messageMain;
 void scrCommMessageSetMode(int arg);
 int scrGetCommandFrame(void);
 u32 FUN_002865f8(void);
-u32 scrGetArg(int index);
 void FUN_002866b4(u32 a, u32 b, u32 frame, u8 state, int wait, int flags);
 
 /* Show a script message for a quest state, locking the message window first when no command frame is active. */

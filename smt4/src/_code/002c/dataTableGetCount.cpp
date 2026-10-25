@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -11,8 +11,10 @@ typedef struct DataTable {
 } DataTable;
 
 /* Number of entries of a 'TBL1' (0x314c4254) data table, or 0 when it is missing or malformed. */
-u32 dataTableGetCount(DataTable *table)
+u32 dataTableGetCount(void *section)
 {
+    DataTable *table = (DataTable *)section;
+
     if (((table != NULL) && (table->magic == 0x314c4254)) && (table->entrySize != 0)) {
         return table->byteSize / table->entrySize;
     }

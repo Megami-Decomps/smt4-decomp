@@ -1,9 +1,9 @@
 #include "shard/Sys43dc20.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int asdMemFreeSlot(u32 value);
-int asdTMTexTableFreeEntry(int table);
 int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(void *ptr);
 

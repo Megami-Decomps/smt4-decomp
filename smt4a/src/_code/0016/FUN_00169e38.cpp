@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic matches retail; armcc lays out the digit-2/digit-5 comma blocks and the zero case in a different order and emits strd for the glyph args */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ struct BankSprite {
 };
 
 BankSprite *FUN_001834a4(s32 bank, s32 sprite);
-void FUN_001835b4(s32 layer, s32 font, s32 glyph, s32 x, s32 y, s32 size);
 void FUN_00183bb0(void);
 void drawSetColorFromRGBA8(u32 packed);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);

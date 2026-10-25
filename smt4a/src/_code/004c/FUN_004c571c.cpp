@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation: retail keeps the old and new values in r2/r3 across the calls to FUN_004c53fc/btlGetPropertyMaximum (small functions of the same source file whose register use armcc knew); the build saves them in callee-saved registers. */
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 /* A battle entry; only its array of word properties at +0x74 is named. */
 struct BtlPropertyEntry {
@@ -9,7 +10,7 @@ struct BtlPropertyEntry {
 
 extern "C" {
 
-BtlPropertyEntry *FUN_003f0e20(BattleMaskState *battle, u32 id);
+BtlPropertyEntry *FUN_003f0e20(BtlMainStateA *battle, u32 id);
 s32 btlGetPropertyMaximum(s32 property);
 s32 FUN_004c53fc(s32 property);
 

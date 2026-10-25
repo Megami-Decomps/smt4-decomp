@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct ButtonHelpTextures {
 
 extern ButtonHelpTextures g_buttonHelp;
 
-int asdTMTexTableFreeEntry(int id);
 int asdTMTexTableReleaseNode(int id, int arg);
 int asdMemFree(void *block);
 int FUN_002d661c(void);

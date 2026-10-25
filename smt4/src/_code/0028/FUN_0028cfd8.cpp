@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the skill usefulness check; retail evaluates the need/have masks with conditional ORs on the same registers, which armcc here allocates differently. */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 /* A skill record as the check reads it. */
 struct SkillRecord {
@@ -15,26 +16,6 @@ struct SkillRecord {
     /* 0x6D */ u8 category;         /* 2 or 3: a healing skill */
 };
 
-/* A party member (0x288 bytes). */
-struct PartyMember {
-    /* 0x000 */ u32 flags;          /* 1: present, 0x40: unavailable */
-    /* 0x004 */ u8 unk004[0x1B0];
-    /* 0x1B4 */ s16 hp;
-    /* 0x1B6 */ s16 maxHp;
-    /* 0x1B8 */ s16 mp;
-    /* 0x1BA */ s16 maxMp;
-    /* 0x1BC */ u8 unk1BC[0xA];
-    /* 0x1C6 */ u16 ailments;
-    /* 0x1C8 */ u8 unk1C8[0xC0];
-};
-
-struct BattleParty {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ PartyMember *members;
-    /* 0x1FC4 */ u8 unk1FC4[0x24E4];
-    /* 0x44A8 */ u32 stateFlags;
-};
-
 struct SlotTable {
     /* 0x0000 */ u8 unk0000[0x910B];
     /* 0x910B */ s8 count;
@@ -42,7 +23,6 @@ struct SlotTable {
 
 extern "C" {
 SkillRecord *dataTable08Sub1GetRecord(u32 id);
-BattleParty *btlGetMainState(void);
 SlotTable *gameGetSlotTable(void);
 u32 FUN_0028d320(u32 amount);
 void FUN_0023dc38(u16 *mask, u32 group);
@@ -61,11 +41,11 @@ u32 FUN_0028cfd8(u32 skillId)
         return 2;
     if (skill->amount != 0)
         return FUN_0028d320(skill->amount);
-    BattleParty *battle = btlGetMainState();
+    BtlMainStateExt *battle = btlGetMainStateExt();
     if (battle->stateFlags & 0x2000000)
         return 0;
     for (s32 i = 0; i < 4; i++) {
-        PartyMember *member = &battle->members[i];
+        BtlUnitEntry *member = &battle->units[i];
         if (!(member->flags & 1) || (member->flags & 0x40))
             continue;
         u32 need = 0;
@@ -76,16 +56,16 @@ u32 FUN_0028cfd8(u32 skillId)
             need |= 2;
         if (skill->ailmentKind & 0x7F)
             need |= 4;
-        if ((need & 1) && !(member->ailments & 2) && member->hp != member->maxHp)
+        if ((need & 1) && !(member->flagMask & 2) && member->hp != member->hpMax)
             have = 1;
-        if ((need & 2) && member->mp != member->maxMp)
+        if ((need & 2) && member->mp != member->mpMax)
             have |= 2;
         if ((need & 1) && (need & 2) && (have & 3))
             have |= 3;
         if (need & 4) {
             u16 mask = 0;
             FUN_0023dc38(&mask, skill->ailmentKind & 0x7F);
-            if (mask & member->ailments)
+            if (mask & member->flagMask)
                 have |= 4;
         }
         if (need == have)

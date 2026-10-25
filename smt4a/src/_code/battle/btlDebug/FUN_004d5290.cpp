@@ -2,6 +2,7 @@
 #include "battle/DebugPanel.h"
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern BtlCameraA *g_btlCamera;
@@ -10,7 +11,6 @@ extern const char DAT_0052809c[];
 s32 jobIsValid(u32 job);
 void FUN_003592dc(u32 list);
 void jobStop(u32 job, s32 delay);
-u32 asdListBoxCreateDefaultFlags(u32 parent, s32 group, s32 x, s32 y);
 void asdListBoxAddItems(u32 list, const AsdListBoxEntry *items, s32 count);
 void asdListBoxSetByteValue(u32 list, u8 value);
 void jobSetText(u32 list, const char *title);

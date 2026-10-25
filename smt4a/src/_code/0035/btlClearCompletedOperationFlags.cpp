@@ -1,4 +1,5 @@
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 extern u64 DAT_00570de8;
@@ -10,8 +11,8 @@ bool btlClearCompletedOperationFlags()
     if (infoWinIsActive() != 0) {
         return false;
     }
-    BattleMaskState* state = btlGetMainState();
-    state->mask &= ~DAT_00570de8;
+    BtlMainStateA* state = btlGetMainState();
+    state->stateFlags64.bits &= ~DAT_00570de8;
     return true;
 }
 }

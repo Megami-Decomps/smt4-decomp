@@ -42,13 +42,4 @@ struct ScreenEffectJob {
     ScreenEffectResource *resource; // 0x24
 };
 
-// Scratch channel names are provisional; keep the engine's packed-word order.
-static __inline u32 screenEffectPackColor(const EffectColor &color)
-{
-    return ((u32)(color.red * 255.0f) << 24) |
-           (((u32)(color.green * 255.0f) & 0xff) << 16) |
-           (((u32)(color.blue * 255.0f) & 0xff) << 8) |
-           ((u32)(color.alpha * 255.0f) & 0xff);
-}
-
 #endif

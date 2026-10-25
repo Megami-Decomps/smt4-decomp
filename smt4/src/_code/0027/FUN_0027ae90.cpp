@@ -1,12 +1,11 @@
 /* NON_MATCHING: map request prefix and slot-relative fields are corrected; ambient-effect register scheduling still differs. */
 #include "map/mapObj.h"
 #include "map/mapDepart.h"
+#include "util/TrigF32.h"
 
 extern "C" {
 extern MapObjectState *g_mapObj;
 extern GameState g_gameState;
-f32 FUN_0028250c(f32 radians);
-f32 FUN_00282390(f32 radians);
 void FUN_002671f4(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
 }
 

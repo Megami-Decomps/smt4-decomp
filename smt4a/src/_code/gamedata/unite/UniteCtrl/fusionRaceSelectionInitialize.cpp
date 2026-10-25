@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_FusionSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct FusionSelectionScratch {
     u8 bytes[17];
@@ -28,7 +29,6 @@ struct FusionSelectionExtras {
 
 extern "C" {
 void sysMemClear(void *memory, u32 bytes);
-void *asdMemoryAllocTracked(u32 pool, u32 kind, u32 flags, u32 bytes, s32 enabled);
 s32 recordCompareRankAndIndex(const void *first, const void *second);
 void qsort(void *entries, u32 count, u32 stride, s32 (*compare)(const void *, const void *));
 

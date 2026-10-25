@@ -2,11 +2,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 BtlMainStateA *btlGetMainState(void);
-void scrSetResult(s32 value);
 
 /* Script result: whether any of the 109 combatant entries is a candidate under the masks. */
 u32 FUN_003c67c0(void)

@@ -47,7 +47,7 @@ void btlTalkBustUpCreate(void);
 CecMessageRecord *FUN_002bf520(void);
 void saveBuildSummary(void);
 u8 FUN_0031cee0(void);
-u8 FUN_002391e0(void);
+u8 gameSaveWorkGetState(void);
 u8 saveFlagGet27e1f(void);
 u32 FUN_002840ac(void);
 void ownerSetName(CecMessageRecord *record, u32 name);
@@ -79,7 +79,7 @@ void FUN_002a28c0(CecThreadWork *work)
             FUN_002bf520();
             saveBuildSummary();
             FUN_002bf520()->rankA = FUN_0031cee0();
-            FUN_002bf520()->rankB = FUN_002391e0();
+            FUN_002bf520()->rankB = gameSaveWorkGetState();
             FUN_002bf520()->rankC = saveFlagGet27e1f();
             ownerSetName(FUN_002bf520(), FUN_002840ac());
             s32 progress;

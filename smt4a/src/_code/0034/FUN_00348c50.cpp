@@ -1,5 +1,6 @@
-/* NON_MATCHING: process callback entry 0x348cd0 has no function symbol; its original eight-byte body returns zero. */
+/* NON_MATCHING: callback now freeCameraProcessUpdate with real process types; retail picks r1 for the pooled callback temp and copies the process id through r1 before the stm, built uses r0. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct FreeCameraWork {
     u32 process;
@@ -13,16 +14,17 @@ struct FreeCameraWork {
 
 extern "C" {
 extern FreeCameraWork* g_freeCamera;
-extern const u8 LAB_00348cd0[];
+s32 freeCameraProcessUpdate(u32 handle);
 void* asdOperatorNew(u32 size);
-u32 asdProcessCreateSimple(const char* name, s32 priority, u32 option, u32 argument,
-                           const void* callback, u32 first, u32 second);
+u32 asdProcessCreateSimple(const s8* name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
+                           AsdProcFunc onEnd, u32 work);
 
 void FUN_00348c50(u32 mode)
 {
     FreeCameraWork* work = static_cast<FreeCameraWork*>(asdOperatorNew(sizeof(FreeCameraWork)));
     g_freeCamera = work;
-    work->process = asdProcessCreateSimple("FreeCamera PROC", 4, 0, 0, LAB_00348cd0, 0, 0);
+    u32 process = asdProcessCreateSimple("FreeCamera PROC", 4, 0, 0, freeCameraProcessUpdate, 0, 0);
+    work->process = process;
     work->mode = mode;
     work->flag8 = 0;
     work->flag9 = 0;

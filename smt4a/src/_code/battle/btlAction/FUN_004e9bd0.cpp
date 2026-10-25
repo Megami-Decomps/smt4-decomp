@@ -55,7 +55,7 @@ typedef struct SkillOwner {
     /* 0x110 */ u32 flags;              /* 0x80: skip the progress check */
 } SkillOwner;
 
-extern u64 DAT_00571190;
+extern u64 g_btlTargetableMask;
 
 s32 FUN_0026264c(u16 recordId);
 s32 gameProgressIsAdvanced(void);
@@ -113,7 +113,7 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
     for (u32 i = 0; i < count; i++) {
         SkillTarget *target = targets[i];
 
-        if ((target->flags & DAT_00571190) == 0) {
+        if ((target->flags & g_btlTargetableMask) == 0) {
             continue;
         }
         if (FUN_0026264c(target->recordId) == 0) {
@@ -155,7 +155,7 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
     context->outcome->state = 2;
     context->outcome->skillId = skill->id;
     for (u32 i = 0; i < count; i++) {
-        if ((targets[i]->flags & DAT_00571190) != 0) {
+        if ((targets[i]->flags & g_btlTargetableMask) != 0) {
             context->marks[targets[i]->markIndex] = 1;
         }
     }

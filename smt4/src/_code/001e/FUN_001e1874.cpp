@@ -1,5 +1,6 @@
 /* NON_MATCHING: the global base address is loaded after the first call instead of before it. */
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ extern WorkspaceHolder g_btlUi;
 int FUN_00287188(void *buffer);
 int uiFadeRelease(void);
 int asdMemFreeNonNull(u32 handle);
-int asdMemFree(void *block);
 int jobStop(void *context, int arg);
 
 /* Tears down the global workspace: releases its buffer and handle, frees it, then frees the owner's context. */

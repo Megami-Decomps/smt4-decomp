@@ -1,6 +1,7 @@
 /* NON_MATCHING: controller stays in r5 rather than moving r4 to r5 at the touch-region loop, removing one MOV. */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "script/scrScriptProcess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The shared controller's padding starts at 0x13; pointer members there would change its alignment. */
 struct SaveLoadCleanupBuffersView {
@@ -27,7 +28,6 @@ extern HandleRegistry *g_handleRegistry;
 void asdMemFree(void *memory);
 void scrScriptProcessDestroy(ScriptResource *script);
 void asdTMTexTableReleaseNode(s32 table, s32 entry);
-void asdTMTexTableFreeEntry(s32 table);
 void FUN_002c1648(void);
 void dataTableFree(s32 table);
 void msgWindowReset(void);

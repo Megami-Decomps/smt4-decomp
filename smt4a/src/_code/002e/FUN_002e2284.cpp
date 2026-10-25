@@ -1,10 +1,10 @@
 /* NON_MATCHING: callback return-state branch placement and post-banner compiler hints differ; 62 built versus 64 retail rows. */
 #include "shard/W6_W6Match4_CampCecResumeState.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern CampCecSceneGlobals g_campCec;
 void *textureGetIndexedResource(u32 slot);
-s32 asdTMTexTableNodeIsLoaded(u32 slot, u32 node);
 s32 loadSlotIsLoaded(u32 slot);
 s32 bgmGetStateById(u32 id);
 s32 FUN_002e2114(u32 *holder);

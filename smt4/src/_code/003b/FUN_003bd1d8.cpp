@@ -2,12 +2,12 @@
 #include "common.h"
 #include "battle/btlMain.h"
 #include <stddef.h>
+#include "battle/BtlMainAccess.h"
 
 /* No canonical IV listed-entry layout is identified by this caller. */
 struct BattleEntry;
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BattleEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 void FUN_00247478(void *, BtlMainState *, BattleEntry *);
 u32 FUN_00246134(u32, u32, s32, u32);

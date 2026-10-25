@@ -6515,3 +6515,38 @@
 0029400c gameObjectKindIsAvailable inferred [high] Normalizes kinds44-47 to43 and checks class1 plus its enabled byte in the game flag block.
 0047d7f0 statusDecodeActivityState inferred [high] Decodes pending/active/alternate bytes into state0,1,2,or3.
 003ca9bc effectEditorApplySecondaryOwnerOptions inferred [med] Applies the second0x38-byte option entry to the nested owner's editor block, passing the table base as the fourth argument.
+0055b39c _ZTV9Obj55b39c evidence size:0xc vtable [0,0,signal] of the event holders FUN_0050e0b0 constructs (address point 0x55b3a4 in its pool)
+0043a0c4 _ZN9Obj55b39cD1Ev inferred empty destructor FUN_0050e0b0 registers for the four 0x14-byte holders at 0x62d2b0..0x62d2ec
+00515660 _ZN9Obj55b39c6signalEv evidence vtable 0x55b39c slot 0: tail-calls nn_os_LightEvent_Signal on the word at +0x10
+0042a448 _ZN9Obj536d04D1Ev inferred empty destructor FUN_0050e0b0 registers for the holder at 0x62d300 (vtable _ZTV9Obj536d04)
+00536cf0 g_moduleDefaultValue inferred size:0x4 rodata word FUN_0050e0b0 copies into g_moduleValue
+00589390 g_moduleValue inferred size:0x4 dynamic word FUN_0050e0b0 sets from g_moduleDefaultValue
+00589394 g_moduleFlags inferred size:0x4 word FUN_0050e0b0 clears (parameterised-constructor object)
+0062d2b0 g_moduleEventA inferred size:0x14 Obj55b39c built by FUN_0050e0b0
+0062d2c4 g_moduleEventB inferred size:0x14 Obj55b39c built by FUN_0050e0b0
+0062d2d8 g_moduleEventC inferred size:0x14 Obj55b39c built by FUN_0050e0b0
+0062d2ec g_moduleEventD inferred size:0x14 Obj55b39c built by FUN_0050e0b0
+0062d300 g_moduleStateHolder inferred size:0x10 Obj536d04 built by FUN_0050e0b0
+0062d2a4 g_moduleCriticalSection8 inferred size:0xc critical section FUN_0050fe84 constructs (guards the module reference count at 0x589384)
+0062d28c g_moduleDeferredCriticalSection0 inferred size:0xc deferred-initialize critical section (FUN_00441f84 calls nn_os_CriticalSection_Initialize on it later)
+0062d298 g_moduleDeferredCriticalSection1 inferred size:0xc deferred-initialize critical section (FUN_00441f84 calls nn_os_CriticalSection_Initialize on it later)
+002fd02a _ZN9Obj2fd02aD1Ev inferred thread record destructor (nn_os_Thread_FinalizeImpl then FUN_00103774); registered by FUN_005124e0, FUN_0050df54, FUN_0050f70c
+005880f0 g_threadRecordA inferred size:0x8 Obj2fd02a (state 0, active 1) built by FUN_005124e0
+00618518 g_soundVoiceCriticalSection inferred size:0xc critical section the sound voice code enters/leaves; FUN_005124e0 builds it with the deferred constructor
+00571190 g_btlTargetableMask inferred size:0x8 u64 entry-flag mask read by FUN_004e5a90 / FUN_004e5b5c as its own global (inside g_btlAction at +0x58)
+00135c24 nn_os_ExitProcess evidence nop-only wrapper whose tail call to the svc 0x03 stub was NOPed; twin of smt4 0x1012fc
+00135c28 svcExitProcess evidence svc 0x03; bx lr
+0013c174 asdLoadFileWithSize inferred [high] asdLoadFileSync(NULL,NULL,path,size,flags,4) wrapper returning the buffer
+001447b0 gxQueryCommandListParameters inferred [med] twin of smt4 FUN_0010e7f0
+003e0064 playerSetClampedStat inferred [med] twin of smt4 FUN_00333fc0
+004e6fb0 btlAiMarkLowestHpTarget inferred [med] marks one targetable entry with the lowest HP (FUN_004e9ae8 picks among ties)
+004e5a90 btlActionMarkRandomStatusTarget inferred [med] marks a random targetable entry that has the requested status bit
+002391e0 gameSaveWorkGetState inferred [med] reads the state byte of the save work image (GameSaveWork.state)
+0042679c ipcRequest04Forward inferred [med] forwards (mode, handle, buffer, size) to FUN_00426820 (IPC command 0x04)
+00138850 renderBeginSecondaryScreen inferred [high] sibling of renderBeginPrimaryScreen: target 2, stereo mode 2, starts the scene
+0034de78 btlScriptAnyCandidateHpAtMost inferred [high] script command: 1 when a candidate entry (unavailable+required, not excluded) has HP percent <= arg0
+00372ab0 btlScriptAnyCandidateHpAtLeast inferred [high] same scan as FUN_0034de78 with >= arg0
+0037f6c4 scrCommBattleGaugeAtMost inferred [high] sibling of scrCommBattleGaugeAtLeast, gauge percent <= arg0
+003ae9d8 bustupCutAnimAssignSlot inferred [med] moves a portrait job into a display slot and records it in the recent-job history
+00281178 jobDetachFromParent inferred [high] unlinks a process from its parent child chain (jobSetParent helper detachProcess)
+003b8684 btlScriptFindEligibleEntryValueById inferred [med] returns the signed value of the first eligible entry with the requested id or -1

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `sub r1, r4, #384` where armcc emits `add r4, r1, #384`. */
 #include "common.h"
 
 extern "C" {
@@ -8,17 +7,21 @@ struct Owner { u8 unk00[0xc]; Data *data; };
 struct WorkspaceBuffer { u8 bytes[0x180]; };
 struct Workspace { u8 unk00[0x14]; WorkspaceBuffer *data; u32 count; };
 extern Workspace DAT_0059edf8;
-void FUN_003465ec(Data *data, void *values, u32 count);
+s32 FUN_003465ec(Data *data, void *values, u32 count);
 
-void FUN_003c3734(Owner *owner)
+s32 FUN_003c3734(Owner *owner)
 {
     Data *data = owner->data;
-    WorkspaceBuffer *buffers = (WorkspaceBuffer *)&DAT_0059edf8;
-    DAT_0059edf8.data = &buffers[-1];
-    DAT_0059edf8.count = 8;
-    FUN_003465ec(data, data->values, data->count);
-    DAT_0059edf8.data = &buffers[-2];
-    DAT_0059edf8.count = 8;
+    Workspace *workspace = &DAT_0059edf8;
+    WorkspaceBuffer *buffers = reinterpret_cast<WorkspaceBuffer *>(workspace);
+    WorkspaceBuffer *frame = buffers - 1;
+    workspace->data = frame;
+    workspace->count = 8;
+    s32 result = FUN_003465ec(data, data->values, data->count);
+    frame = buffers - 2;
+    workspace->data = frame;
+    workspace->count = 8;
+    return result;
 }
 
 } /* extern "C" */

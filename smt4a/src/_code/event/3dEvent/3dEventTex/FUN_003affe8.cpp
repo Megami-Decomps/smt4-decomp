@@ -2,11 +2,11 @@
 #include "event/3dEvent/EventTextureJob.h"
 #include "gamedata/Table00.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const s8 DAT_0052f6a8[];
 extern const s8 DAT_0052f698[];
-void *asdMemoryAllocTracked(u32 category, u32 alignment, u32 flags, u32 size, s32 clear);
 void sysMemClear(void *memory, u32 size);
 Table00Record *dataTable00FindById(u32 id);
 s32 FUN_00162ea4();

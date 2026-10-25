@@ -1,5 +1,6 @@
 /* NON_MATCHING: The lookup key stack frame prevents the retail final tail delegation. */
 #include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 struct TextureReadinessEntry {
     /* 0x00 */ u16 id;
     /* 0x02 */ s16 textureIndex;
@@ -8,7 +9,6 @@ extern "C" {
 void* libc_bsearch(const void*, const void*, u32, u32, s32 (*)(const void*, const void*));
 s32 FUN_002321f8(const void*, const void*);
 void* textureGetIndexedResource(u32);
-s32 asdTMTexTableNodeIsLoaded(u32, u32);
 }
 
 static __inline const TextureReadinessEntry* textureFindReadinessEntry(u32 id)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: scroll-bar draw; retail keeps the list view pointer in r7 (built spills it) and reaches the render-state stack through base+0x1000+0x120 address arithmetic with a conditional restore; calls, float math and tail call efctSetSpeed match */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 /* Sprite frame of the scroll bar's thumb: its offset and a pointer to its size. */
 struct ScrollBarFrame {
@@ -20,7 +21,6 @@ extern RenderCtxA *g_renderCtx;
 
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 ScrollBarFrame *FUN_001834a4(u32 bank, u32 sprite);
 s32 objectApplyIfUnblocked(void *view);
 s32 uiSearchPrimary(void *view);

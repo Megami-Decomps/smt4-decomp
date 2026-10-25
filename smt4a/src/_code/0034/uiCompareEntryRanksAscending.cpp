@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses `mov r8, r0` where armcc emits `mov r6, r0`. */
+/* NON_MATCHING: saved-register assignment differs (retail keeps leftData/rightData in r8/r9 and the scores in r6/r5) and the rank load targets r0 instead of r1. */
 #include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
@@ -13,7 +13,7 @@ s32 uiCompareEntryRanksAscending(const SortItem *left, const SortItem *right)
     s32 rightScore = 0;
     s32 leftRank = DAT_0052b8ac[0].left;
     s32 rightRank = DAT_0052b8ac[0].right;
-    for (s32 i = 0; i < 8; i++) {
+    for (s32 i = 0; i <= 7; i++) {
         if (FUN_00345098(leftScore, leftData->ranks[i] >> 10) > 0) {
             leftRank = i;
             leftScore = leftData->ranks[i] >> 10;
@@ -29,7 +29,9 @@ s32 uiCompareEntryRanksAscending(const SortItem *left, const SortItem *right)
         if (order == 0) {
             leftData = dataTable08Sub2GetRecord(left->id);
             rightData = dataTable08Sub2GetRecord(right->id);
-            order = leftData->tieKey - rightData->tieKey;
+            s32 leftKey = leftData->tieKey;
+            s32 rightKey = rightData->tieKey;
+            order = leftKey - rightKey;
         }
     }
     return order;

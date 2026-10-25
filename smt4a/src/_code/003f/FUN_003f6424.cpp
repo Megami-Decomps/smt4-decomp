@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (171 vs 170 rows); retail spills the float scale and register args on entry (push {r0-r3}, vpush {d0}) with different register allocation */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 // Layout rectangle looked up by (group, index).
 struct LayoutEntry {
@@ -23,7 +24,6 @@ struct IconInfo {
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-void FUN_001835b4(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 LayoutEntry* FUN_001834a4(u32 group, u32 index);
 u32 FUN_0019e52c(u32 slot);
 IconInfo* FUN_00184310(u32 code);

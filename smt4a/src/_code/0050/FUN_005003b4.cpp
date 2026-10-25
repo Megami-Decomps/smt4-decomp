@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 FUN_00427bf0(u64 handle);
-u32 FUN_0042679c(u32 mode, u64 handle, void *buffer, u32 size);
+u32 ipcRequest04Forward(u32 mode, u64 handle, void *buffer, u32 size);
 
 // Execute a file operation and translate the service's two special failures to window status codes.
 WindowStatusResult FUN_005003b4(const u64 *handle, void *buffer, u32 size)
@@ -13,7 +13,7 @@ WindowStatusResult FUN_005003b4(const u64 *handle, void *buffer, u32 size)
     u32 result = FUN_00427bf0(*handle);
     if ((s32)result < 0)
         return WindowStatusResult(result);
-    result = FUN_0042679c(1, *handle, buffer, size);
+    result = ipcRequest04Forward(1, *handle, buffer, size);
     if (result == 0xd880803b)
         return WindowStatusResult(0xd8813889);
     if (result == 0xd900803e)

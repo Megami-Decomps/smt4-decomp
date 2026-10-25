@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 extern int gameSaveTestFlag(unsigned short, unsigned char);
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned short);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int dataTableGetCount(unsigned int);

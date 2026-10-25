@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-int asdTMTexTableFreeEntry(int table);
 int asdTMTexTableReleaseNode(int table, int index);
 
 void spriteTable2aFree(void)

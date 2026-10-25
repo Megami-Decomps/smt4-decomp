@@ -18,7 +18,7 @@ void FUN_0032128c(EffectPrimitiveWork *work)
         return;
     u32 color = FUN_00269694(emitter->colorCurve, &emitter->color, work->frame, emitter->duration);
     asdSetNormalizedColorRgba(work->color);
-    DAT_004ea81c.factor = DAT_004ea81c.color;
+    effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
     asdSetNormalizedColorRgba(color);
     FUN_00246bd4();
     primitive->color = FUN_00246c28();

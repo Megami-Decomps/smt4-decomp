@@ -1,4 +1,4 @@
-#include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 

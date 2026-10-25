@@ -1,8 +1,8 @@
 #include "shard/Shard004B.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-extern u8 asdTMTexTableNodeIsLoaded(u32 group, u32 index);
 
 u8 isFlag1F0Set(void)
 {

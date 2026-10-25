@@ -1,5 +1,6 @@
 /* NON_MATCHING: work/coordinate and zero saved registers differ, and the switch default branch uses a different layout. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 
 struct PositionedMenuDrawWork {
@@ -18,7 +19,6 @@ s32 vec2GetYInt(const UiSpriteState *position);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-void FUN_001835b4(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 

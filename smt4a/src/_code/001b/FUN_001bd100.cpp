@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 namespace { struct Record { u8 padding[7]; u8 flags; }; }
 

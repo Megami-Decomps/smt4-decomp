@@ -1,6 +1,7 @@
 /* NON_MATCHING: scheduling only: retail stores the entry count (r0) before loading screen->index; built stores the copy (r1) after the load */
 /* Opens the entry screen: validates the resources, loads the selected entry of table 0x46 and starts the intro sequence. */
 #include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ typedef struct Screen {
     /* 0x470 */ u32 index;
 } Screen;
 
-extern s32 asdTMTexTableNodeIsLoaded(s32 group, s32 id);
 extern void uiSpriteSelectAnim(void *widget, s32 arg);
 extern void asdTMTexLoadMainHeap(s32 group, s32 id);
 extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);

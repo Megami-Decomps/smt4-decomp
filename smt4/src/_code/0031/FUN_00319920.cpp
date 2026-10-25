@@ -1,4 +1,3 @@
-/* NON_MATCHING: color-vector copy uses integer registers rather than VFP; packed color channel registers differ. */
 #include "gfx/RenderSubmission.h"
 
 extern "C" {
@@ -6,7 +5,7 @@ void FUN_00246afc(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 
 void FUN_00246bd4(void);
 void asdSetNormalizedColorRgba(u32);
 void FUN_00256a50(RenderSubmissionPacket *, u32);
-u32 FUN_00269694(RenderSubmissionOwner *, const u32 *);
+u32 FUN_00269694(RenderSubmissionOwner *, const u32 *, u32, u32);
 u32 FUN_00246c28(void);
 extern EffectColorProductState DAT_004ea81c;
 
@@ -17,9 +16,9 @@ void FUN_00319920(RenderSubmission *submission)
     RenderSubmissionPacket *packet = submission->resource->packet;
     if (submission->frame > owner->frame && owner->frame != 0)
         return;
-    u32 ownerColor = FUN_00269694(owner, &owner->color);
+    u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
     asdSetNormalizedColorRgba(submission->color);
-    DAT_004ea81c.factor = DAT_004ea81c.color;
+    effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
     asdSetNormalizedColorRgba(ownerColor);
     FUN_00246bd4();
     u32 color = FUN_00246c28();

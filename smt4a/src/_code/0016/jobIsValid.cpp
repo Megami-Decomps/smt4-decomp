@@ -3,13 +3,14 @@
 
 
 extern "C" {
-extern AsdProcGroup *g_asdProcess;
+extern AsdProcessState g_asdProcess;
 u32 jobIsValid(u32 handle)
 {
-    AsdProcess *process = g_asdProcess[handle >> ASD_PROC_GROUP_SHIFT].head;
-    while (process != NULL) {
-        if (process->handle == handle) { return 1; }
-        process = process->next;
+    AsdProcess *process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
+    for (; process != NULL; process = process->next) {
+        if (process->handle == handle) {
+            return 1;
+        }
     }
     return 0;
 }

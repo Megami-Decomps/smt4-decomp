@@ -1,9 +1,9 @@
 #include "shard/X14_ModelPair.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 s32 resourceFindActiveIndex(s32 kind);
-s32 asdTMTexTableNodeIsLoaded(s32 table, s32 node);
 PairedModel *FUN_00297060(PairedModel *model, void *target);
 
 /* Binds the owner's model to its target once everything and both table 40 textures are loaded;

@@ -2,12 +2,12 @@
 #include "status/StatusBustUp.h"
 #include "gamedata/DevilModel.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern StatusBustUpResources DAT_0044e158;
 extern AocSystem *g_aocSystem;
 DevilModelOverride *dataTable00FindById(u16 id);
-s32 asdTMTexTableNodeIsLoaded(s32 table, s32 entry);
 void asdTMTexTableLoadEntryAsync(s32 table, s32 entry);
 s32 aocRunByName(AocSystem *system, s32 table, s32 entry, s32 mode);
 void FUN_002a5ee4(AocSystem *system, s32 table, s32 entry, u32 options);

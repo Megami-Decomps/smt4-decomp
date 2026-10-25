@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail tests the 3/4 kinds separately from 7/5 and loads entry masks as word pairs (ldm) with ldrd/strd on the battle mask; u64 mask ops compile differently. */
 #include "common.h"
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 /* One 0x24-byte event condition: a kind, a test on a battle unit and a table-group entry name. */
 struct EventCondition {
@@ -27,7 +28,6 @@ struct EventConditionSet {
 
 extern "C" {
 extern u64 DAT_005738a0[5];
-extern BattleMaskState *btlGetMainState(void);
 extern s32 tableGroupFindEntryIndex(void *, u8 *);
 extern u8 isOutsideRange4To53(s32);
 
@@ -43,7 +43,7 @@ u32 FUN_004d7a70(EventConditionSet *set, u32 kind, s32 unit, s32 dryRun)
             set->matchedIndex = -1;
             set->unk04 = 0;
         }
-        BattleMaskState *battle = btlGetMainState();
+        BtlMainStateA *battle = btlGetMainState();
         EventCondition *cond = set->conditions;
         for (s32 i = 0; i < set->conditionCount; i++, cond++) {
             if (cond->kind != kind) {
@@ -51,37 +51,37 @@ u32 FUN_004d7a70(EventConditionSet *set, u32 kind, s32 unit, s32 dryRun)
             }
             if (((kind == 3 || kind == 4) || (kind == 7 || kind == 5)) && unit >= 0) {
                 u8 outside = isOutsideRange4To53(unit);
-                BattleMaskEntry *entry = &battle->entryView.entries[unit];
+                BtlCombatantEntryA *entry = &battle->entries[unit];
                 switch (cond->test) {
                 case 1:
-                    if (outside != 0 || entry->unitId != cond->unitId) {
+                    if (outside != 0 || entry->id != cond->unitId) {
                         continue;
                     }
                     break;
                 case 2:
-                    if (outside == 0 || entry->unitId != cond->unitId) {
+                    if (outside == 0 || entry->id != cond->unitId) {
                         continue;
                     }
                     break;
                 case 3:
-                    if ((entry->mask & DAT_005738a0[1]) == 0) {
+                    if ((entry->flags & DAT_005738a0[1]) == 0) {
                         continue;
                     }
                     break;
                 case 4:
-                    if ((entry->mask & DAT_005738a0[3]) == 0) {
+                    if ((entry->flags & DAT_005738a0[3]) == 0) {
                         continue;
                     }
                     break;
                 case 5:
-                    if ((entry->mask & DAT_005738a0[2]) == 0) {
+                    if ((entry->flags & DAT_005738a0[2]) == 0) {
                         continue;
                     }
                     break;
                 }
             }
             if (dryRun == 0 && (kind == 0 || kind == 6 || kind == 7 || kind == 8)) {
-                battle->mask |= DAT_005738a0[4];
+                battle->stateFlags64.bits |= DAT_005738a0[4];
             }
             s32 index = tableGroupFindEntryIndex(set->tableGroup, cond->name);
             if (index >= 0) {

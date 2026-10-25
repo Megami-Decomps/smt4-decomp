@@ -1,5 +1,6 @@
 /* NON_MATCHING: scissor wrapper and coordinate operand order recovered; saved directory arguments and index arithmetic differ. */
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 struct SpriteInfo;
 // Coordinate-only view of a layout entry.
@@ -21,7 +22,6 @@ void FUN_002598f0(u32 text, s32 x, s32 y, u32 parameter, f32 scale);
 void asdTextDrawDirectoryEntry(u32 text, u32 a, s32 b, u32 c, u32 d, u32 e, s32 f);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
 void FUN_002bd82c(u32 text, u32 color);
-void FUN_002bf288(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 SpriteInfo* FUN_002bf4f8(u32 table, u32 id);
 

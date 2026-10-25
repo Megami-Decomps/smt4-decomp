@@ -1,5 +1,6 @@
 /* NON_MATCHING: only r0/r1 swapped in the slot address computation (base load vs offset) */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 struct EffectSlot {
     char name[0x10];  // 0x00
@@ -21,7 +22,6 @@ static const char g_noEffectName[] = "NOT_EFT";
 
 extern "C" {
 
-void *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(void);
 s32 libc_strcmp(const char *a, const char *b);
 

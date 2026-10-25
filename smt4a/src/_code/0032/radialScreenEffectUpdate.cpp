@@ -1,5 +1,6 @@
-/* NON_MATCHING: point/factor stores, VFP live ranges and shift-based packed-byte getters differ from retail's REV getters; alternate optimization may fix live ranges. */
+/* NON_MATCHING: duration/frame registers (r8/r7 in retail), the center/min/max stores (retail reloads x/y with two vldr and stores each, built vldmia/vstmia) and the packed-color reload (retail vldr + vldmia {s2-s3} + vldr) differ; the factor copy, product multiply and REV byte getters match. */
 #include "shard/W6_W6Match6_RadialScreenEffect.h"
+#include "gfx/EffectColorMath.h"
 
 extern "C" {
 extern EffectColorProductState DAT_006471dc;
@@ -45,18 +46,14 @@ void radialScreenEffectUpdate(RadialScreenEffectJob *job)
     }
     u32 sampledColor = FUN_0038136c(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
-    DAT_006471dc.factor = DAT_006471dc.color;
+    effectColorCopy(&DAT_006471dc.color, &DAT_006471dc.factor);
     renderCtxSetPackedColor(sampledColor);
-    DAT_006471dc.color.red *= DAT_006471dc.factor.red;
-    DAT_006471dc.color.green *= DAT_006471dc.factor.green;
-    DAT_006471dc.color.blue *= DAT_006471dc.factor.blue;
-    DAT_006471dc.color.alpha *= DAT_006471dc.factor.alpha;
-    RgbaWord packed;
-    packed.word = screenEffectPackColor(DAT_006471dc.color);
-    output->color.r = packed.rgba.r;
-    output->color.g = packed.rgba.g;
-    output->color.b = packed.rgba.b;
-    output->color.a = packed.rgba.a;
+    effectColorMultiply(&DAT_006471dc.color, &DAT_006471dc.color, &DAT_006471dc.factor);
+    u32 packed = effectColorPack(DAT_006471dc.color);
+    output->color.r = __rev(packed) >> 24;
+    output->color.g = __rev(packed) >> 16;
+    output->color.b = __rev(packed) >> 8;
+    output->color.a = __rev(packed);
     output->renderTag = resource->weight.renderTag;
 }
 }

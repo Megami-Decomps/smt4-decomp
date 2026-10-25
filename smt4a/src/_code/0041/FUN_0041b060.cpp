@@ -1,5 +1,6 @@
 /* NON_MATCHING: Centered text metric loads, integer-to-float conversion order and color/zero literal order differ. */
 #include "gfx/UiControlDraw.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S3UiLookup.h"
 
 struct FramedBadgeOwner {
@@ -8,7 +9,6 @@ struct FramedBadgeOwner {
 };
 extern "C" {
 void efctSetSpeed(f32 alpha);
-void FUN_001835b4(s32 layer, u32 texture, u32 frame, s32 x, s32 y, u32 mode);
 UiTextMetrics *FUN_001834a4(u32 texture, u32 frame);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
 void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);

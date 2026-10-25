@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler adds an alignment register to the call frame and allocates the scan index/base in different registers. */
 #include "shard/W6_W6Match4_UnitPairs.h"
 
 extern "C" {

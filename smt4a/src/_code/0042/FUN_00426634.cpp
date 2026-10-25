@@ -1,4 +1,3 @@
-/* NON_MATCHING: same IPC call; armcc saves/restores the 8-byte receive descriptor through VFP (vldmia/vstmia) where retail uses ldrd/strd in r6/r7. */
 #include "nn/Result.h"
 #include "nn/svc.h"
 

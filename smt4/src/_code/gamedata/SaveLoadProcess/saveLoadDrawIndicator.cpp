@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 #include "gamedata/SaveLoadProcessState.h"
 
 extern "C" {
@@ -10,7 +11,6 @@ s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
-void FUN_002bf288(s32 mode, s32 group, s32 image, s32 parallax, s32 first, s32 second);
 
 // Draw the animated save/load indicator while its worker is active.
 u32 saveLoadDrawIndicator()

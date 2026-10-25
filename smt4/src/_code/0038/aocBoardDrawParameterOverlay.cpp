@@ -1,4 +1,5 @@
 #include "gfx/DrawParameterOwner.h"
+#include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 
 namespace {
@@ -17,7 +18,6 @@ extern RenderCtx *g_titleScene;
 s32 FUN_002c5d80(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);
-void FUN_002bf288(s32 font, s32 text, u32 entry, s32 x, s32 y, s32 layer);
 void FUN_002bed3c(void);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);

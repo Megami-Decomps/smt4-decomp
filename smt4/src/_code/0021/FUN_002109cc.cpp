@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the title button-help draw; retail's inlined state push/pop uses pointer arithmetic on the stack top (`piVar[top + 2]`) in a different register assignment and the float x/y order of FUN_002be5a4 is inferred, not verified. */
 #include "gfx/RenderStateStack.h"
+#include "shard/TextureDrawCall.h"
 
 /* The title scene (its state stack lives at 0x124C). */
 struct TitleScene {
@@ -52,7 +53,6 @@ void FUN_001f40fc(void *icon, s32 x, s32 y);
 void fadeObjectResetIfActive(void *object);
 void FUN_002b75ec(u32 sprite, s32 x, s32 y, s32 a, s32 b, s32 c);
 void FUN_002be5a4(s32 a, u32 icon, void *object, f32 x, f32 y);
-void FUN_002bf288(s32 a, s32 b, s32 c, u32 x, u32 y, s32 d);
 LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
 void FUN_002c18e4(TitleScene *scene);
 void FUN_002c198c(TitleScene *scene);

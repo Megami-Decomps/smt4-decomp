@@ -21,14 +21,12 @@ struct ResourceContext {
     /* 0x10 */ ResourceSet set;
 };
 
-struct ResourceSetOwner {
-    ResourceContext *context;
-};
+extern ResourceContext *g_mapTrap;
 
-/* Releases and clears the three resources held by the owner's set. */
-void resourceSetRelease(ResourceSetOwner *owner)
+/* Releases and clears the three resources held by the map trap's set. */
+void resourceSetRelease(void)
 {
-    ResourceSet *set = &owner->context->set;
+    ResourceSet *set = &g_mapTrap->set;
 
     if (set->first != NULL) {
         set->first->release();

@@ -1,5 +1,6 @@
 /* NON_MATCHING: block layout: retail ends the top-entry path with the shared state store and return, and the no-healing path branches back to it; armcc places the store after both paths. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 struct FountainMenu {
     /* 0x000 */ u8 unk000[0x10];
@@ -17,7 +18,6 @@ extern const char DAT_00530cc8[]; /* "fountian_no_healing" */
 s32 scrRunOpcodesStub(u32 script);
 void messageBannerRestartOrClear(void);
 s32 messageMainGetValue(void);
-s32 FUN_0034919c(void);
 void messageDismissNumericBanner(s32 mode);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, s32 index);

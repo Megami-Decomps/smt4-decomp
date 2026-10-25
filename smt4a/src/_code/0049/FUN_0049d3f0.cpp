@@ -1,6 +1,7 @@
 /* NON_MATCHING: parameter-table root relocates as base+108 instead of its final-array symbol; one stack argument uses r0 instead of r2. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/HowToScreen.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 extern const char DAT_0052cf04[]; // event/HowTo/HowTo.mbm
@@ -8,7 +9,6 @@ extern const char DAT_0052cee8[]; // event/HowTo/HowToHelp.mbm
 extern const HowToDrawTables DAT_0052cd2c;
 void sysMemClear(void *memory, u32 size);
 u32 spriteHandleCreate(u32 argument);
-void FUN_001527d8(u32 handle, u32 color);
 void FUN_0049dd74(HowToScreenWork *work);
 void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);

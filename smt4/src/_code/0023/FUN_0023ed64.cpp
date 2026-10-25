@@ -1,12 +1,12 @@
 /* NON_MATCHING: alpha/scale pair transfers, VFP constant registers, and phase-one branch placement differ. */
 #include "ui/SplashAnimationState.h"
+#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 void asdTMTexTableLoadTmx(s32 group, s32 option);
 void asdTMTexTableLoadEntryAsync(s32 group, s32 index);
-s32 asdTMTexTableNodeIsLoaded(u32 group, u32 index);
 void asdTMTexTableReleaseNode(s32 group, s32 index);
-void asdTMTexTableFreeEntry(s32 group);
 s32 ifTouchRegionAdd(u16 x, u16 y, u16 width, u16 height);
 void ifTouchRegionRemove(void);
 s32 ifTouchGetSelectionMode(void);
@@ -14,7 +14,6 @@ s32 padIsButtonPressed(u32 button);
 s32 bgmGetStateById(u32 sound);
 void soundChannelRequestIfEnabled(u32 sound, u32 option, u32 fadeFrames);
 void soundChannelStopAll(s32 channel);
-s32 FUN_002c2a04(u32 slot);
 void FUN_002a03d8(s32 slot, s32 frames);
 void slotSetRequest(s32 slot, s32 group, s32 amount);
 

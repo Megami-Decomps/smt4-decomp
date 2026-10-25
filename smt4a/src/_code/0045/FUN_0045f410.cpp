@@ -34,7 +34,8 @@ void FUN_0045f410(CommandOwner* owner, u8 option)
     OwnerCommand* command = objectCommandReserveWords(queue, 6);
     command->token = queue->token;
     command->kind = 10;
-    command->owner = owner->vtable->getHandle(owner);
+    u32 handle = owner->vtable->getHandle(owner);
+    command->owner = handle;
     command->option = option;
     listAppendNode(queue, command);
 }

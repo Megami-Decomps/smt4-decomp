@@ -1,11 +1,11 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 u32 FUN_001692ac(u32 mode, u32 option);
-void FUN_001835b4(s32 group, s32 sprite, s32 x, s32 y, s32 layer, s32 color);
 
 // Draw the active common background at its current playback speed, restoring render state.
 s32 commonBackgroundDraw()

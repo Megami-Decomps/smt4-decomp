@@ -1,12 +1,12 @@
 /* NON_MATCHING: the reloaded previous list tail uses r1 instead of retail's r2. */
 #include "AsdSDK/AsdDebug.h"
 #include "battle/btlHelp.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 
 extern "C" {
 extern BtlHelpListIV *DAT_00435d78;
 
-void *asdMemAlloc(s32 heap, s32 alignment, s32 flags, s32 size, s32 clear);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 /* Creates a help entry and appends it to the help list. */

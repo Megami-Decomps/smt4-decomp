@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335b80` (_code @ 0x335b80, 0x564 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_002a34e8(...);
 int mathMatrixTranslateLocal(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
-int FUN_002bf288(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
 int FUN_002c198c(...);
@@ -50,7 +50,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c198c. */

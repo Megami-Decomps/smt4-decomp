@@ -1,5 +1,6 @@
 /* NON_MATCHING: resource setup register reuse, adjacent pointer loads, and mode dispatch lowering differ. */
 #include "map/PickObjectResources.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 PickObjectResource *FUN_00275bc8(void *, void *);
@@ -9,7 +10,6 @@ void messageSetMode(s32);
 void FUN_003c3e14(void);
 void sysPlaySe(s32);
 void pickObjStart(PickObjectResources *, const char *);
-s32 FUN_0013def0(u32);
 void FUN_003d54f8(s32, s32);
 
 /* Wait for both resource pairs, instantiate them, then select the initial state. */

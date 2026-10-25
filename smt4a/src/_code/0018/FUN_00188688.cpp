@@ -8,13 +8,13 @@ struct LazyValue {
     /* 0x04 */ s32 value;
 };
 
-extern s32 DAT_00589390;        /* the ready word */
+extern s32 g_moduleValue;        /* the ready word */
 extern LazyValue DAT_0058938c;  /* the same words seen as a record */
 void FUN_0016e800(u32 key, u32 address);
 
 s32 FUN_00188688(void)
 {
-    if (DAT_00589390 == 0) {
+    if (g_moduleValue == 0) {
         FUN_0016e800(0xE0A046DB, __current_pc());
     }
     return DAT_0058938c.value;

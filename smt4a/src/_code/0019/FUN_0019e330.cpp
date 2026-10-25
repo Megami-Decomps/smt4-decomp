@@ -24,12 +24,12 @@ struct RangeSelection {
 extern "C" void FUN_0019e330(RangeSelection* selection, s32 index, s32 reverse)
 {
     if (selection->ranges != NULL) {
-        selection->index = static_cast<s16>(index);
+        selection->index = index;
         selection->step = 0;
         selection->flag88 = 0;
         SelectionRange* range = &selection->ranges[index];
         selection->flag8a = 0;
-        selection->reverse = static_cast<u8>(reverse);
+        selection->reverse = reverse;
         u32 endpoint;
         if (reverse != 0) {
             endpoint = range->last;

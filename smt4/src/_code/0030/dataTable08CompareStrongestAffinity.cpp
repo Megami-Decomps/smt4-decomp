@@ -1,4 +1,4 @@
-/* NON_MATCHING: affinity-loop register allocation and comparison instruction selection differ from retail. */
+/* NON_MATCHING: loop bound now matches (element <= 7); callee-saved register numbering of the records, affinities and elements still differs from retail. */
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ s32 dataTable08CompareStrongestAffinity(const u16 *left, const u16 *right)
     s32 secondAffinity = 0;
     s32 firstElement = DAT_00402638[2];
     s32 secondElement = DAT_00402638[3];
-    for (s32 element = 0; element < 8; ++element) {
+    for (s32 element = 0; element <= 7; ++element) {
         if (FUN_0028886c(firstAffinity, first->elements.affinities[element] >> 10) > 0) {
             firstAffinity = first->elements.affinities[element] >> 10;
             firstElement = element;

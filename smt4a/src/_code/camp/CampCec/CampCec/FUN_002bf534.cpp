@@ -88,7 +88,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: bgmRestart. */
-extern unsigned char FUN_002391e0(void);
+extern unsigned char gameSaveWorkGetState(void);
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int FUN_002840ac(void);
 extern unsigned char cecQueryOptionalProcess(void);
@@ -244,7 +244,7 @@ void FUN_002bf534(int param_1)
   saveBuildSummary(DAT_0057f114 + 0x10);
   temp_v1 = FUN_0031cee0();
   *(unsigned char *)((int)DAT_0057f114 + 0x61) = temp_v1;
-  temp_v1 = FUN_002391e0();
+  temp_v1 = gameSaveWorkGetState();
   *(unsigned char *)((int)DAT_0057f114 + 0x62) = temp_v1;
   temp_v1 = saveFlagGet27e1f();
   *(unsigned char *)((int)DAT_0057f114 + 99) = temp_v1;
@@ -293,7 +293,7 @@ void FUN_002bf534(int param_1)
   saveNameBlockReset();
   temp_v1 = FUN_0031cee0();
   *(unsigned char *)((int)DAT_0057f114 + 0x61) = temp_v1;
-  temp_v1 = FUN_002391e0();
+  temp_v1 = gameSaveWorkGetState();
   *(unsigned char *)((int)DAT_0057f114 + 0x62) = temp_v1;
   temp_v1 = saveFlagGet27e1f();
   *(unsigned char *)((int)DAT_0057f114 + 99) = temp_v1;

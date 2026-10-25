@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "script/ScriptArgs.h"
 
 // These word fields fall inside an unaligned padding union in the shared combatant layout.
 struct CandidateValueView {
@@ -12,7 +13,6 @@ struct CandidateValueView {
 };
 extern "C" {
 BtlMainStateA *btlGetMainState();
-void scrSetResult(s32 result);
 
 // Report whether any eligible combatant has a positive primary or fallback value.
 u32 FUN_003caa2c()

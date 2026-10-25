@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the party member card draw; armcc here keeps the offset pairs and the 0.5664f speed in different registers (retail holds the speed in s16 and the VFP conversions in d8/d9 across the calls), and the layout positions come from calls the draft passed through unchanged. */
 #include "common.h"
+#include "shard/TextureDrawCall.h"
 
 /* A party card record (only the fields the draw reads). */
 struct CardRecord {
@@ -23,7 +24,6 @@ void sysMemClear(void *block, s32 bytes);
 void efctSetSpeed(f32 speed);
 u32 FUN_004038e0(u32 effect, u16 kind);
 CardPoint *FUN_001834a4(s32 group, s32 part);
-void FUN_001835b4(s32 a, s32 b, u32 sprite, s32 x, s32 y, s32 order);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00183bb0(void);
 s32 libc_strcmp(const char *a, const char *b);
