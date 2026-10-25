@@ -25,7 +25,6 @@ void FUN_0019a46c(void *destination, const void *source, u32 size);
 s32 FUN_00427e28(u32 *token, void *request, s32 mode);
 s32 appletIsExitRequested();
 s32 FUN_0015a410();
-WindowStatusResult nnAsyncMapOperationResult(void *request);
 extern AsyncMapPacket DAT_0061b030;
 extern u8 DAT_0061b000[];
 

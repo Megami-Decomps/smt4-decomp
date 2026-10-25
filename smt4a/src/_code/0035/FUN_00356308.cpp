@@ -1,25 +1,19 @@
 #include "addon/aocMain.h"
+#include "map/EnemySpawnState.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-typedef struct TableEntry {
-    /* 0x00 */ u8 data[0xC];
-} TableEntry;
-
-
 extern AocSystemA *g_aocSystem;
 
-u32 dataTableGet(u32 id, u32 section);
-u32 dataTableGetCount(u32 table);
-TableEntry *dataTableGetEntries(void);
 u32 FUN_0046c35c(AocSystemA *aoc, s32 id, s32 section);
-TableEntry *packageFindIndexedTripleRecord(AocSystemA *aoc, u32 index);
+EnemySpawnRecord *packageFindIndexedTripleRecord(AocSystemA *aoc, u32 index);
 
 /* Returns entry `index` of data table 0x29, continuing into the add-on content table past its end (NULL when out of range). */
-TableEntry *FUN_00356308(u32 index)
+const EnemySpawnRecord *FUN_00356308(u32 index)
 {
-    u32 table = dataTableGet(0x29, 0);
-    TableEntry *entries = dataTableGetEntries();
+    void *table = dataTableGet(0x29, 0);
+    EnemySpawnRecord *entries = static_cast<EnemySpawnRecord *>(dataTableGetEntries(table));
     u32 count = dataTableGetCount(table);
 
     if (index < count) {

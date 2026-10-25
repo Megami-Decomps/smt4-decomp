@@ -3,7 +3,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s16 actorId, s32 secondaryId, u32 options);
+
 BtlState *btlGetMainState(void);
 BtlUnitEntry *btlMainFindEntryByListedId(BtlState *state, s32 listedId);
 

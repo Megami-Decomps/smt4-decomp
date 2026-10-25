@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int wstrlen(void);
+int libc_strlen(void);
 
 extern int FUN_001a7a20(int, unsigned int);
-/* Supplied declaration required: wstrlen. */
+/* Supplied declaration required: libc_strlen. */
 
 
 unsigned int FUN_0045aca8(int *param_1,int param_2,int param_3)
@@ -35,7 +35,7 @@ unsigned int FUN_0045aca8(int *param_1,int param_2,int param_3)
         puVar4 = *(unsigned int **)(*(int *)(param_2 + 0xc) + temp_v5 * 4);
         if (*(short *)(puVar4 + 1) != 0x33) {
           temp_v2 = *puVar4;
-          wstrlen();
+          libc_strlen();
           temp_v3 = FUN_001a7a20(param_3 + 0x74,temp_v2);
           if (temp_v3 == 0xffff) {
             temp_v1 = 1;

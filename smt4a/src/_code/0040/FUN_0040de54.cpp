@@ -84,7 +84,7 @@ int btlReflectRequestPairScalar(...);
 
 int btlGetMainState(void);
 int asdMemFree(void);
-int wstrlen(short *);
+int libc_strlen(short *);
 int FUN_003e7840(unsigned int, int);
 int FUN_003f0e20(...);
 int btlResetSlot(...);
@@ -179,7 +179,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: wstrlen. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: buttonHelpGetValue. */
 extern int FUN_0034919c(void);
@@ -383,7 +383,7 @@ LAB_0040deb4:
       FUN_004f5238(g_btlAux,(int)psVar2[0x12],(int)psVar2[0x13],(int)psVar2[0x24],
                    (int)psVar2[0x25],*(unsigned int *)(psVar2 + 0x14),psVar2 + 0x34,
                    *(int *)(psVar2 + 0x28) != 0,*(int *)(psVar2 + 0x26) != 0);
-      wstrlen(psVar2 + 0x34);
+      libc_strlen(psVar2 + 0x34);
       if (temp_v3 != 0) {
         *(int *)(psVar2 + 0x20) = temp_v3;
         psVar2[1] = 1;

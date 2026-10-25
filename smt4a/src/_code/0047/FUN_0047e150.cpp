@@ -14,6 +14,7 @@ void sysPlaySe(u32);
 ScriptRunState *FUN_00275bc8(void *, void *);
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(ScriptRunState *, u32);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 u32 scrRunOpcodesStub(ScriptRunState *);
 
 u32 FUN_0047e150(ItemEventStartup *work)
@@ -48,7 +49,7 @@ u32 FUN_0047e150(ItemEventStartup *work)
         sysPlaySe(0x92);
         ScriptRunState *process = FUN_00275bc8(work->script, work->messages);
         work->process = process;
-        process->mode = 2;
+        scriptProcessSetMode(process, 2);
         textFormatBuffer(path, "e%03d_%02d", item->event.package, item->event.entry);
         u32 entry = tableGroupFindEntryIndex(work->script, path);
         scrScriptProcessStartEntry(work->process, entry);

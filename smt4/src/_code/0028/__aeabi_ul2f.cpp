@@ -1,0 +1,11 @@
+/* NON_MATCHING: branch target 0x282c4c has no function symbol; cannot call an invented placeholder. */
+/* romwright 0.5.0 decompilation of __aeabi_ul2f for reference (not compiled; its own view of the boundaries):
+
+void __aeabi_ul2f(unsigned int param_1,unsigned int param_2)
+
+{
+  func_0x00282c4c(param_1,param_2,0x3f800000);
+  return;
+}
+*/
+#include "common.h"

@@ -6352,3 +6352,62 @@
 002e2184 outfitPreviewConfigureEquipment inferred [high] Configure canonical preview pose and scale, cache equipment pointer, load models and mark holder
 0046bd44 aocActivateFileGroupFlags inferred [high] Activate pending flags attached to loaded file groups
 003a2f54 gameApplyCurrentFlagTableEntry inferred [high] Apply current table-2f entry flag and signed value
+0042ce3c _ZN2nn2os15CriticalSectionD1Ev inferred Empty nn::os::CriticalSection destructor registered by module initializers
+0047d834 _ZN14Obj422214OwnerC1Ev inferred Twin constructor clears owner buffers/date/flags and constructs Obj422214 member at 0x9bc.
+00474b18 _ZN9Obj422214C1Ev inferred Existing Obj422214 constructor twin; must use native member construction in Obj422214Owner.
+002f4370 __aeabi_atexit evidence empty __aeabi_atexit: only reached by 52 tail branches from static initialisers; every bl to it was inlined by armlink into a NOP
+00635300 g_effectEditorRotation inferred size:0x10 effect editor identity rotation reset by FUN_003c5bd8 and copied through handlers
+0061a5f0 g_moduleCriticalSection4 inferred size:0xc Critical section constructed by FUN_0050e078
+0061a638 g_moduleCriticalSection5 inferred size:0xc Critical section constructed by FUN_0050e450
+006426b4 g_moduleCriticalSection6 inferred size:0xc Critical section constructed by FUN_0050fdb0
+006430f4 g_moduleCriticalSection7 inferred size:0xc Critical section constructed by FUN_005119cc
+005448e8 g_textureResourceFormats evidence size:0x1c fourteen u16 GL texture formats copied by FUN_0044582c; first five 8058,8051,8057,8d62,8056 then zero.
+00642c6c g_asdCecMessageBoxStateCriticalSection inferred size:0xc Second native critical section constructed by FUN_00511778
+0064308c g_nngxInterruptCriticalSection inferred size:0xc Second native critical section constructed by FUN_00511a74
+0053f51c g_nngxDefaultCommandState inferred size:0x8 Source of default GPU command state
+005c0ab0 g_nngxCommandStates inferred size:0xc Three GPU command words dynamically initialized from defaults
+0016ea54 _ZN2nn3fnd8DateTimeC1Eiiiiiii evidence Twin native nn::fnd::DateTime seven-component constructor.
+00536ce4 g_moduleDefaultState inferred size:0x8 Default word read by FUN_0050e4c4
+0058936c g_moduleInitialState inferred size:0x4 Dynamic word initialized by FUN_0050e4c4
+0062d280 g_moduleStateCriticalSection inferred size:0xc Critical section constructed by FUN_0050e4c4
+001d25a0 _ZN21WindowOperationResultC1Eh inferred Twin of proven native smt4 operation-result constructor: status byte, translated result@4, two zero payload words; size0x14.
+005c0ab8 g_nngxCommandState3 inferred size:0x4 Third GPU state word initialized from default
+0043a20c _ZN9Obj55b3a8D1Ev inferred Native virtual destructor closes handle at offset0x14; object is constructed by FUN_005117f8
+006462a0 g_sharedHandleState inferred size:0x1c Native object with vptr, 0xc-byte CriticalSection and three words
+0043ca5c _ZN2nn6applet13SleepCallbackC1Ev inferred empty nn::applet::SleepCallback constructor passed to __aeabi_vec_ctor by FUN_005116a0
+0061a614 g_appletSleepCallbacks inferred size:0x18 Two 12-byte intrusive callback records constructed by FUN_005116a0
+0061a62c g_appletSleepCallbackCriticalSection inferred size:0xc Protects applet sleep notification callback list
+003f2c5c _ZN19ThreadedTextScannerD1Ev inferred Native owner destructor finalizes thread at0x3c and text-scanner member at8; twin already native in smt4
+002e3390 libc_strlen evidence Implementation at 0x2e3390 scans char bytes/aligned words for NUL, not 16-bit characters; identical size 0x5c to smt4 libc_strlen; required for NamedResourceBindings/NamedSubresourceSelection string contract correction
+003e329c _ZN9AsdCameraD1Ev inferred Native camera owner destructor invokes weak FloatState destructor at0x4a0 then recovers owner; baseline IDENTICAL
+00619a58 g_cameraState1 inferred size:0x50c First camera constructed by FUN_0050f960 via FloatState member0x619ef8
+00619f64 g_cameraState2 inferred size:0x50c Second camera constructed by FUN_0050f960 via FloatState member0x61a404
+005f15d8 g_localCameraPosition inferred size:0xc Default position (310,45,0) dynamically constructed after g_localCamera
+00426ac4 _ZN18WindowStatusResultC1Ejj inferred Native raw-result constructor: stores r1 code@0 and r2 description@4, leaves this in r0; nnAsyncMapOperationResult case -3 returns an existing result using this 2-word constructor, while other cases invoke known C1Ej
+003df478 _ZN13UnitTransformC1Ev inferred Native20-byte unit-scale constructor used by compiler array initialization; baseline IDENTICAL.
+00416378 _ZN13AnimationSlotC1Ev inferred Native0x20 animation-slot ctor: id=-1,index@6=ff; array initializer stride32 proves full extent, baseline IDENTICAL.
+005dee4c g_legacyAnimationDefaults inferred size:0xfc Zero origin vector + legacy animation template (six floats, four default words, ten20-byte transforms).
+005def48 g_animationSlotsA inferred size:0x12c0 Global array of150 animation slots, stride32, initialized by FUN00511420.
+005e0258 g_animationSlotsB inferred size:0x12c0 Second global array of150 animation slots, same constructor/stride.
+0042ce40 _ZN17MappedMemoryBlockD1Ev inferred Native mapped-block owner destructor finalizes mapping then closes handle at0x14
+00431fe0 _ZN10NnOsHandleD1Ev inferred Native owning-handle destructor (close and clear handle)
+00647610 g_addressSpaceMapping inferred size:0x1c Native mapped-region owner with ThreadStackStorage prefix18 and allocation flag18
+00640398 g_scopedHalfwordTarget inferred size:0x3a accessed prefix, minimum extent: g_allocationAddressRanges at0x5b4028 has initializer words0,0,0x640398; FUN001b4ba4/FUN001b4e80 access target halfword+0x38. Twin target lies beyond known0x18 g_asdSequence prefix.
+003ca9dc effectEditorResetVector inferred [high] Twin vector and mode reset
+003cc1ec effectEditorCopySettingsColor inferred [high] Twin RGB byte copy
+003c5bd8 effectEditorResetRotation inferred [high] Twin identity rotation and mode reset
+0035c158 scrCommNpcCreateDemonPortrait inferred [high] Reads portrait ID, position, alpha and style script arguments; creates and attaches the demon portrait texture job and sets script result
+00405574 contentListDraw inferred [high] Draws initialized content list with temporary draw state, restoring speed, blend state and color scale
+002c7c54 useCounterGetCurrentValue inferred [high] Returns inactive default 105, otherwise uses two subobject operation indices to select the current value byte
+003b6fe0 scrCommQuestCenterRefreshAndWait inferred [med] Marks the active quest-center entry on first frame, clears pending quest-center state, then returns when mode is not busy
+001801e4 indexedListErase inferred [high] Twin indexed-list erase operation
+004a2ee0 uiCursorEnterModeNine inferred [med] Enters cursor mode 9 and advances owner to state 14 when ready.
+00321b8c entryCompareClassThenDescendingValue inferred [med] Twin classification/descending-record-value comparator.
+0039d3b4 btlScriptCheckStatisticThreshold inferred [med] Reports whether the selected battle entity statistic meets the script threshold.
+004056a8 hunterDatabaseDrawWithState inferred [high] Draws the hunter database with temporary draw state then restores blend/color.
+00262614 gameDataIsFlagByteSet inferred [high] Tests indexed game-data flag byte for exact value 1.
+004a8584 campFillUnitComparison inferred [high] Fill metadata and two sets of level/maximum statistics, comparing the saved unit with the party member when requested.
+004b4e00 resultDrawRewardDetails inferred [med] Draw the result reward/detail sprite row using separate animated position speeds and alternate detail sprites.
+004282f0 windowGetOperationFailure inferred [med] Return the operation result only on SDK failure, otherwise zero.
+00494940 panelUpdatePageExitTransition inferred [med] Advance sprite motion and transition pages to states17/18 once animation completion and optional page gate allow it.
+00280068 uiSpriteGetCompletionState inferred [high] Twin of smt4 recordGetSignedFlags; UiSpriteState completion@0x8a is queried after motion in matched FUN_00494940.

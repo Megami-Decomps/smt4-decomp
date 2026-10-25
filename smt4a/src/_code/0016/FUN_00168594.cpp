@@ -3,7 +3,7 @@
 extern "C" {
 extern FontRecordPool DAT_005b3bc0;
 void FUN_001a64f4(NwFontGlyph *glyph);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 
 // Measure the decoded text, adding spacing for characters present in the selected font.
 f32 FUN_00168594(const char *text, u32 fontIndex, f32 spacing)
@@ -21,7 +21,7 @@ f32 FUN_00168594(const char *text, u32 fontIndex, f32 spacing)
     FontStringReader reader;
     callbackBindingInitFromKind(&reader, font, 0x30);
     reader.state = text;
-    s32 length = wstrlen(text);
+    s32 length = libc_strlen(text);
     s32 character = reader.next();
     while (static_cast<const char *>(reader.state) - text <= length) {
         if (font->vtable->hasGlyph(font, character)) {

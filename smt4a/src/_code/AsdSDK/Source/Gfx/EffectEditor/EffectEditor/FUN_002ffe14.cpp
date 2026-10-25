@@ -11,12 +11,12 @@ extern const char DAT_0053d0d8[];
 extern const EffMenuMatrix DAT_005c13f0;
 
 // Queue a matrix-bearing render entry and duplicate it for the stereo pass when active.
-void FUN_002ffe14(const EffMenuRectangle *rectangle, u32 color,
+void FUN_002ffe14(const EffMenuPosition *position, u32 color,
                   const EffMenuMatrix *transform, u32 resource, f32 scale)
 {
     asdDebugTrace(DAT_0053d0d8, 682);
     EffMenuMatrixNode *entry = static_cast<EffMenuMatrixNode *>(memAlloc(0x10000, 0x100, 0, 0x68, 16, 1));
-    entry->rectangle = *rectangle;
+    entry->position = *position;
     if (transform != NULL)
         entry->transform = *transform;
     else

@@ -59,7 +59,7 @@ extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
-extern float DAT_0049f8f8; /* 0x49f8f8 */
+extern float g_fixedCameraPosition; /* 0x49f8f8 */
 extern float DAT_0049f8fc; /* 0x49f8fc */
 extern float DAT_0049f900; /* 0x49f900 */
 
@@ -259,7 +259,7 @@ void FUN_0030860c(void)
     temp_v15 = romwright_fabs_4(DAT_0049f8fc * 0.7111111f);
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v24 <= DAT_0049f900 * 0.7111111f) << 0x1d);
     temp_v16 = romwright_fabs_4(DAT_0049f900 * 0.7111111f);
-    for (temp_v14 = romwright_fabs_4(DAT_0049f8f8 * 0.7111111f); (int)temp_v14 >= 0x47800000; temp_v14 = temp_v14 - 65536.0f
+    for (temp_v14 = romwright_fabs_4(g_fixedCameraPosition * 0.7111111f); (int)temp_v14 >= 0x47800000; temp_v14 = temp_v14 - 65536.0f
         ) {
     }
     for (; (int)temp_v15 >= 0x47800000; temp_v15 = temp_v15 - 65536.0f) {
@@ -287,7 +287,7 @@ void FUN_0030860c(void)
              (temp_v16 - temp_v20) * (float)(&DAT_00407ed8)[temp_v18 * 4];
     temp_v15 = (float)(&DAT_00407ed4)[temp_v18 * 4] +
              (temp_v16 - temp_v20) * (float)(&DAT_00407edc)[temp_v18 * 4];
-    if (DAT_0049f8f8 * 0.7111111f < temp_v24) {
+    if (g_fixedCameraPosition * 0.7111111f < temp_v24) {
       temp_v23 = -temp_v23;
     }
     if (DAT_0049f8fc * 0.7111111f < temp_v24) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: transition stores split instead of STRD; animation argument loads and ordered float comparison orientation differ. */
+/* NON_MATCHING: controller state reload after btlGetMainState uses r0 rather than retail's r1 and is scheduled after the result copy. */
 #include "shard/Shard0034.h"
 
 namespace {
@@ -28,10 +28,11 @@ f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 // Apply state transitions, advance looping animation slots and saturate the elapsed-frame count.
 u32 FUN_0041210c(BattleAnimationControllerView *controller)
 {
-    if (controller->state != controller->requested) {
-        s32 previous = controller->state;
-        controller->state = controller->requested;
-        controller->previous = previous;
+    s32 state = controller->state;
+    s32 requested = controller->requested;
+    if (state != requested) {
+        controller->previous = state;
+        controller->state = requested;
         FUN_00410f84(controller);
         controller->frames = 0;
         controller->unk10 = 0;
@@ -42,10 +43,12 @@ u32 FUN_0041210c(BattleAnimationControllerView *controller)
     if (controller->state != 1 && controller->state != 2) {
         for (s32 index = 0; index < 12; ++index) {
             LinkEntry10 *entry = &battle->entries4D78[index];
-            if (entry->obj != NULL) {
+            void *animation = entry->obj;
+            if (animation != NULL) {
                 entry->animation.frame += 2;
-                f32 lastFrame = asdAnimGetTrackLastFrame(entry->obj, entry->animation.track);
-                if (lastFrame <= (f32)entry->animation.frame) {
+                f32 lastFrame = asdAnimGetTrackLastFrame(animation, entry->animation.track);
+                f32 frame = (f32)entry->animation.frame;
+                if (lastFrame <= frame) {
                     entry->animation.frame = (s32)((f32)entry->animation.frame - lastFrame);
                 }
                 if ((f32)entry->animation.frame >= lastFrame) {

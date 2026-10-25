@@ -1,6 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00388aac` (_code @ 0x388aac, 0x1074 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gfx/EffectEditorStorage.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 
 extern "C" {
@@ -66,7 +66,6 @@ extern unsigned char LAB_00389b50; /* 0x389b50 */
 extern int FUN_003aa520(...); /* 0x3aa520 */
 extern int FUN_003c3654(...); /* 0x3c3654 */
 extern int effectPollResourceFileDialog(...); /* 0x3c58c4 */
-extern signed char g_effectEditor; /* 0x59dbe0 */
 extern unsigned char DAT_0059dbe1; /* 0x59dbe1 */
 extern signed char DAT_0059dbe6; /* 0x59dbe6 */
 extern signed char DAT_0059dbe7; /* 0x59dbe7 */
@@ -97,10 +96,6 @@ extern char s_LOAD_PARTS_0059eff0[11]; /* 0x59eff0 */
 extern char s_NEW__PARTS_0059effb[11]; /* 0x59effb */
 extern char s_SAVE_EPL__0059f006[10]; /* 0x59f006 */
 extern char s_LOAD_EPL__0059f010[10]; /* 0x59f010 */
-extern unsigned int g_effectEditorInitialVector; /* 0x634c90 */
-extern unsigned int g_effectEditorWorkingSnapshot; /* 0x634ca0 */
-extern unsigned int uRam00634d04; /* 0x634d04 */
-extern unsigned char g_effectEditorSavedSnapshot; /* 0x634d20 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00163fd4(unsigned int);
@@ -292,7 +287,7 @@ LAB_00388d64:
   puVar11 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v8 * 0x18;
   temp_v3 = temp_v4;
-  __aeabi_memcpy4(&g_effectEditorWorkingSnapshot,DAT_0059dbf4);
+  __aeabi_memcpy4(&g_effectEditorWorkingSnapshot,DAT_0059dbf4,0x80);
   if (temp_v10 != 0) {
     unaff_r11 = 0x59e624;
   }
@@ -566,7 +561,7 @@ LAB_00388edc:
       FUN_001acb48();
       FUN_001b4eb8(DAT_0059dbf0,&g_effectEditorInitialVector);
       FUN_001ac8ec(DAT_0059dbf0);
-      FUN_001b4c1c(DAT_0059dbf0,uRam00634d04);
+      FUN_001b4c1c(DAT_0059dbf0,g_effectEditorWorkingSnapshot.parameters.value);
     }
   }
   else {
@@ -606,7 +601,7 @@ LAB_00389604:
     }
   }
   swapSlotExchange(temp_v11);
-  if (g_effectEditor != '\0') {
+  if (g_effectEditor.unk00[0] != '\0') {
     asdDebugLog(0xaa,0,6,&LAB_00389790);
   }
   if (DAT_0059dbf0 != 0) {

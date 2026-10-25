@@ -6,14 +6,14 @@ extern "C" {
 extern u8 g_nngxCriticalSection[0xc];
 extern NngxState g_nngxState;
 extern NngxWork DAT_0056ec40;
-extern u8 DAT_0053f51c;
-extern u32 DAT_005c0ab0;
+extern u8 g_nngxDefaultCommandState;
+extern u32 g_nngxCommandState1;
 extern u8 g_nngxGpu;
 
 extern void nn_os_CriticalSection_Enter(void *lock);
 extern void nn_os_CriticalSection_Leave(void *lock);
 extern void FUN_0016f864(void);
-extern u32 wstrlen(const u16 *s);
+extern u32 libc_strlen(const u16 *s);
 extern void FUN_0016f988(void *buffer, const u16 *name, u32 length, s32 flag);
 extern void nn_gxlow_CTR_Gpu_AcquireRight(void *gpu, u32 a, s32 b);
 extern void FUN_0018b28c(void);
@@ -35,10 +35,10 @@ void FUN_00170054(void)
     {
         const u16 *name = g_nngxState.name;
 
-        FUN_0016f988(&DAT_0053f51c, name, wstrlen(name), 0);
+        FUN_0016f988(&g_nngxDefaultCommandState, name, libc_strlen(name), 0);
     }
     g_nngxState.unk14 = g_nngxState.unk10;
-    nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, DAT_005c0ab0, g_nngxState.gpuRightFlag);
+    nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, g_nngxCommandState1, g_nngxState.gpuRightFlag);
 
     DAT_0056ec40.unk00 = 0;
     DAT_0056ec40.unk08 = -1;

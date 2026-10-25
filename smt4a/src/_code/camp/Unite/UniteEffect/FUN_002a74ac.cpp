@@ -1,13 +1,27 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a74ac` (_code @ 0x2a74ac, 0x6c8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+
+struct UniteEffectParameterTables {
+    u32 first[9];
+    u32 second[12];
+    u32 third[3];
+    u32 fifth[56];
+};
+
+typedef char UniteEffectParameterTablesLayoutCheck[
+    offsetof(UniteEffectParameterTables, second) == 0x24 &&
+    offsetof(UniteEffectParameterTables, third) == 0x54 &&
+    offsetof(UniteEffectParameterTables, fifth) == 0x60 &&
+    sizeof(UniteEffectParameterTables) == 0x140 ? 1 : -1];
 
 extern "C" {
 
 int textFormatBuffer(...);
 int FUN_0014e188(...);
 int uiSpriteInitializeState(...);
-int paramsInit(...);
+
 int sysPlaySe(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
@@ -51,9 +65,7 @@ extern unsigned char LAB_002a7a14; /* 0x2a7a14 */
 extern unsigned char LAB_002a7a4c; /* 0x2a7a4c */
 extern unsigned char LAB_002a7a68; /* 0x2a7a68 */
 extern unsigned char LAB_002a7a7c; /* 0x2a7a7c */
-extern unsigned char DAT_0052f360; /* 0x52f360 */
-extern unsigned char DAT_0052f3b4; /* 0x52f3b4 */
-extern unsigned char DAT_0052f3c0; /* 0x52f3c0 */
+extern const UniteEffectParameterTables DAT_0052f360;
 extern int DAT_0057f2c4; /* 0x57f2c4 */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -100,11 +112,6 @@ void FUN_002a74ac(void)
   int temp_v4;
   int temp_v5;
   unsigned char *temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned char *temp_v10;
-  unsigned int temp_v11;
   unsigned char temp_v12 [76];
   
   temp_v0 = DAT_0057f2c4;
@@ -236,14 +243,11 @@ void FUN_002a74ac(void)
   FUN_00275bc8(temp_v2,puVar4);
   *(unsigned int *)(temp_v0 + 0x338) = temp_v2;
   paramsClearPacket(temp_v0 + 0x340);
-  temp_v6 = &DAT_0052f3b4;
-  temp_v10 = &DAT_0052f3c0;
-  temp_v7 = 0xc;
-  temp_v11 = 0xe0;
-  temp_v8 = 0;
-  temp_v9 = 0;
-  temp_v5 = 0x30;
-  paramsInit(temp_v0 + 0x340,&DAT_0052f360,0x24);
+  paramsInit(reinterpret_cast<UiResourceParameters *>(temp_v0 + 0x340),
+      DAT_0052f360.first, sizeof(DAT_0052f360.first),
+      DAT_0052f360.second, sizeof(DAT_0052f360.second),
+      DAT_0052f360.third, sizeof(DAT_0052f360.third),
+      NULL, 0, DAT_0052f360.fifth, sizeof(DAT_0052f360.fifth));
   temp_v3 = 0;
   do {
     temp_v4 = temp_v0 + temp_v3 * 0x8c;

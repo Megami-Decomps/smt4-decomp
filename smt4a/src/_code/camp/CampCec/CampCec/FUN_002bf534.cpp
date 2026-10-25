@@ -99,7 +99,7 @@ extern unsigned char saveFlagGet27e1f(void);
 /* Supplied declaration required: FUN_002a6480. */
 /* Supplied declaration required: FUN_002c0b10. */
 /* Supplied declaration required: cecProcessForward. */
-extern int wstrlen(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern int rt_memcmp(unsigned char *, unsigned int *, unsigned int);
@@ -262,7 +262,7 @@ void FUN_002bf534(int param_1)
   puVar2 = DAT_0057f114;
   psVar11 = (short *)(DAT_0057f114 + 0x10);
   if (psVar11 != (short *)0x0) {
-    temp_v2 = wstrlen((int)DAT_0057f114 + 0x4e);
+    temp_v2 = libc_strlen((int)DAT_0057f114 + 0x4e);
     temp_v0 = 0;
     if (temp_v2 != 0) {
       temp_v0 = *psVar11;

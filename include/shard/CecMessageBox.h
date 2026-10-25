@@ -10,10 +10,10 @@ typedef struct MessageBoxVtbl {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ void (*read)(struct MessageBox *box, u32 id, int a, int b, u32 *out);
     /* 0x0C */ u8 unk0C[0x18];
-    /* 0x24 */ u32 (*remove)(struct MessageBox *box, u32 id, u32 key, int a, int b, int c);
+    /* 0x24 */ u32 (*remove)(struct MessageBox *box, u32 id, u32 operation, s32 kind, const void *data, u32 size);
     union {
         /* 0x28 */ u8 unk28[8];
-        /* 0x28 */ u32 (*closeBox)(struct MessageBox *box, u32 id, s32 first, s32 second, s32 mode);
+        /* 0x28 */ u32 (*closeBox)(struct MessageBox *box, u32 id, const void *data, u32 size, s32 mode);
     };
     /* 0x30 */ u32 (*writeList)(struct MessageBox *box, void *list, int size, u32 id, int a, int b);
     /* 0x34 */ u32 (*writeListKeyed)(struct MessageBox *box, void *list, int size, u32 *key, u32 id, int a, int b);

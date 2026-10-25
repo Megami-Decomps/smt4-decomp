@@ -498,7 +498,8 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern int modelHasLoadedAttachment(void);
+struct ModelBoneAttachmentRoot;
+extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 /* Supplied declaration required: FUN_002aff0c. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b6b04(void);
@@ -813,7 +814,7 @@ unsigned int FUN_001d3e3c(void)
       if (g_lmapMainState != (unsigned int *)0x0) {
         temp_v6 = 0;
         do {
-          if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 == 0)) {
+          if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)puVar17[temp_v6 + 0x284]), temp_v4 == 0)) {
             return 0;
           }
           temp_v6 = temp_v6 + 1;
@@ -2599,7 +2600,7 @@ LAB_001d6bd0:
     if (g_lmapMainState != (unsigned int *)0x0) {
       temp_v6 = 0;
       do {
-        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 == 0)) {
+        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)puVar17[temp_v6 + 0x284]), temp_v4 == 0)) {
           return 0;
         }
         temp_v6 = temp_v6 + 1;
@@ -2924,7 +2925,7 @@ LAB_001d6bd0:
     if (g_lmapMainState != (unsigned int *)0x0) {
       temp_v6 = 0;
       do {
-        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment(), temp_v4 == 0)) {
+        if ((puVar17[temp_v6 + 0x284] != 0) && (temp_v4 = modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)puVar17[temp_v6 + 0x284]), temp_v4 == 0)) {
           return 0;
         }
         temp_v6 = temp_v6 + 1;

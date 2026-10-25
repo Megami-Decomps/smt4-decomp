@@ -10,7 +10,7 @@ extern AccelerometerRawState g_accelerometerRawSample;
 extern u8 entry[];
 s32 __cxa_guard_acquire(u32 *guard);
 __weak void __cxa_guard_release(u32 *guard);
-__weak s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
+s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
 u32 FUN_0015959c(void);
 AccelerometerFullState *FUN_0015976c(AccelerometerFullState *state, u32 handle);
 void FUN_001597f4(void *state);

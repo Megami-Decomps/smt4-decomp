@@ -1,8 +1,5 @@
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W4_Match3_AocMainA.h"
-
-struct AocSpriteParameters {
-    u8 data[0x20];
-};
 
 struct AocUiSprite {
     u8 data[0x8c];
@@ -14,7 +11,7 @@ struct AocSpriteLayout {
 
 struct AocMenuSprites {
     /* 0x0000 */ u8 unk0000[0x35c];
-    /* 0x035c */ AocSpriteParameters parameters;
+    /* 0x035c */ UiResourceParameters parameters;
     /* 0x037c */ AocUiSprite entries[24];
     /* 0x109c */ AocUiSprite header;
     /* 0x1128 */ u8 unk1128[0x88];
@@ -27,10 +24,9 @@ struct AocMenuSprites {
 
 extern "C" {
 extern const char DAT_00526308[];
-void paramsClearPacket(AocSpriteParameters *);
-void paramsInit(AocSpriteParameters *, s32, s32, const char *, s32,
-                s32, s32, s32, s32, s32, s32);
-void FUN_0014e188(AocUiSprite *, s32 group, s32 image, AocSpriteParameters *, s32 flags, f32 scale);
+void paramsClearPacket(UiResourceParameters *);
+
+void FUN_0014e188(AocUiSprite *, s32 group, s32 image, UiResourceParameters *, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(AocUiSprite *, s32 keyframe, s32 flags);
 void FUN_00387240(AocUiSprite *, s32 group, s32 image);
 void FUN_0015f258(void *panel);

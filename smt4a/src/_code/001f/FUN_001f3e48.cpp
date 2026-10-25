@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0050e68c's literal pool; not written yet. */
+/* NON_MATCHING: found outside every function: its address is in FUN_0050e684's literal pool; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_001f3e48 for reference (not compiled; its own view of the boundaries):
 
 /* WARNING: Globals starting with '_' overlap smaller symbols at the same address * /

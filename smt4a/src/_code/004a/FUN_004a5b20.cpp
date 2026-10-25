@@ -67,7 +67,7 @@ ItemRecord *FUN_004bb80c(u32 id);
 Table00Record *dataTable00FindById(u32 id);
 u16 *FUN_00184310(u32 id);
 s32 FUN_0026264c(u32 id);
-void FUN_004a8584(ListEntry *out, u32 id, s32 arg);
+void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
 void itemListSelectVariant(EntryListWork *work, s32 arg);
 void FUN_004cfeb0(void *header, s32 a, s32 b, s32 c, s32 d);
@@ -117,7 +117,7 @@ void FUN_004a5b20(EntryListWork *work)
                             ListEntry listEntry;
                             u32 value = 0;
 
-                            FUN_004a8584(&listEntry, *named, 0);
+                            campFillUnitComparison(&listEntry, *named, 0);
                             Table00Record *found = dataTable00FindById(*named);
                             if (found != NULL) {
                                 value = found->value;

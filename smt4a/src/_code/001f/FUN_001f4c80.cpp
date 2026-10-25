@@ -2,17 +2,8 @@
 #include "common.h"
 #include "map/mapDepart.h"
 
-struct CameraMatrixCache;
 
 extern "C" {
-
-/* A perspective projection: vertical field of view in degrees, clip planes and aspect ratio. */
-typedef struct CameraPerspective {
-    f32 fovy;
-    f32 nearZ;
-    f32 farZ;
-    f32 aspect;
-} CameraPerspective;
 
 /* The job work area's camera block (offsets within the work area). */
 typedef struct JobCameraWork {
@@ -22,16 +13,16 @@ typedef struct JobCameraWork {
     /* 0x524 */ f32 fovy;
 } JobCameraWork;
 
-JobCameraWork *jobGetWork(void);
+u32 jobGetWork(u32 handle);
 void FUN_0036f0a0(void);
 void FUN_0014f0dc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
-void FUN_001523b8(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
+void FUN_001523b8(JobCameraWork *camera, u32 pivot, f32 fovy, f32 nearZ, f32 farZ, f32 aspect);
 void taskUpdateOrderedPasses(u32 pass);
 
 /* Sets the work area camera to look from its eye at its target with a fixed perspective. */
-u32 FUN_001f4c80(void)
+s32 FUN_001f4c80(u32 job)
 {
-    JobCameraWork *work = jobGetWork();
+    JobCameraWork *work = reinterpret_cast<JobCameraWork *>(jobGetWork(job));
 
     FUN_0036f0a0();
     MapVector up;
@@ -39,12 +30,7 @@ u32 FUN_001f4c80(void)
     up.y = 1.0f;
     up.z = 0.0f;
     FUN_0014f0dc(work, &work->eye, &work->target, &up);
-    CameraPerspective perspective;
-    perspective.aspect = 5.0f / 3.0f;
-    perspective.fovy = work->fovy;
-    perspective.farZ = 25000.0f;
-    perspective.nearZ = 0.1f;
-    FUN_001523b8(work, 1, perspective);
+    FUN_001523b8(work, 1, work->fovy, 0.1f, 25000.0f, 5.0f / 3.0f);
     taskUpdateOrderedPasses(0);
     return 0;
 }

@@ -1,7 +1,7 @@
 /* NON_MATCHING: -O2 candidate; selector snapshot uses scalar word copies instead of LDM/STM, loop/zero scheduling differs, and a native pre-text-create no-op is absent. */
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <string.h>
 
@@ -10,12 +10,12 @@ struct AocPanelList {
     u8 flag414;
     u8 flag415;
     u8 unk416[0xa];
-    Params002c312c resources;
+    UiResourceParameters resources;
 };
 
 struct AocPanelWork {
     u8 unk0000[0x35c];
-    Params002c312c resources;
+    UiResourceParameters resources;
     UiAnimatedSprite sprites[24];
     UiAnimatedSprite background;
     u8 unk1128[0x88];
@@ -35,11 +35,10 @@ extern "C" {
 extern AocMain *g_aocMain;
 extern const u8 DAT_003ff12c[];
 extern const s8 DAT_003ff15c[24];
-void drawParameterBlockClear(Params002c312c *parameters);
-void paramsInit(Params002c312c *parameters, u32 w0c, u16 h0, u32 w10, u16 h2,
-                u32 w14, u16 h4, u32 w18, u16 h6, u32 w1c, u16 h8);
+void drawParameterBlockClear(UiResourceParameters *parameters);
+
 void FUN_002bd954(UiAnimatedSprite *sprite, u32 group, u32 id,
-                  Params002c312c *parameters, u16 flags, f32 speed);
+                  UiResourceParameters *parameters, u16 flags, f32 speed);
 void uiSpriteSetImageKeyframe(UiAnimatedSprite *sprite, s32 keyframe, s32 restart);
 void FUN_00295eb0(UiAnimatedSprite *sprite, u32 group, u32 id);
 void FUN_002ba78c(AocPanelList *list);
@@ -52,7 +51,7 @@ void aocMenuInitializePanelSprites(void *context)
 {
     AocPanelWork *work = (AocPanelWork *)context;
     drawParameterBlockClear(&work->resources);
-    paramsInit(&work->resources, 0, 0, (u32)DAT_003ff12c, 12, 0, 0, 0, 0, 0, 0);
+    paramsInit(&work->resources, 0, 0, DAT_003ff12c, 12, 0, 0, 0, 0, 0, 0);
     FUN_002bd954(&work->background, 0x1d, 2000, &work->resources, 11, 1.0f);
     uiSpriteSetImageKeyframe(&work->background, 0, 0);
     s8 imageKinds[24];

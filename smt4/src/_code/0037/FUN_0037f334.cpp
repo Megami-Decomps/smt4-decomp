@@ -23,7 +23,7 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 extern unsigned long long FUN_00235804(float);
-extern float FUN_00282c30(int, int, int);
+extern float __aeabi_ul2f(int, int, int);
 /* Supplied declaration required: linkListEraseManagerNode. */
 extern unsigned int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
 extern int FUN_0037d70c(int, unsigned int);
@@ -132,7 +132,7 @@ void FUN_0037f334(int param_1)
       } while (temp_v2 <= temp_v7 && (unsigned int)temp_v8 <= temp_v2 - temp_v7);
     }
     temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20);
-    temp_v11 = (float)FUN_00282c30((unsigned int)temp_v15 - temp_v6,
+    temp_v11 = (float)__aeabi_ul2f((unsigned int)temp_v15 - temp_v6,
                                  (int)((unsigned long long)temp_v15 >> 0x20) - (temp_v7 + ((unsigned int)temp_v15 < temp_v6))
                                  ,temp_v3);
     *(float *)(param_1 + 0x68) = temp_v11 * temp_v13 * 3.7297867e-09f;

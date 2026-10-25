@@ -26,7 +26,7 @@ int FUN_003def38(...);
 int FUN_003df0c4(...);
 int FUN_003df140(...);
 int FUN_003df1d4(...);
-int nn_fnd_DateTime_DateTime_sub_object(...);
+int _ZN2nn3fnd8DateTimeC1Eiiiiiii(...);
 
 /* stack frame of param_1: 31 slot(s), 124 byte(s) */
 typedef struct {
@@ -95,7 +95,7 @@ extern int FUN_003def24(unsigned char *);
 /* Supplied declaration required: FUN_003df0c4. */
 /* Supplied declaration required: FUN_003df140. */
 /* Supplied declaration required: FUN_003df1d4. */
-/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
+/* Supplied declaration required: _ZN2nn3fnd8DateTimeC1Eiiiiiii. */
 extern int nn_fnd_DateTime_DateToDays(int, int, int);
 extern int nn_fnd_DateTime_GetDay(unsigned int);
 extern int nn_fnd_DateTime_GetMonth(unsigned int);
@@ -458,11 +458,11 @@ int FUN_0038c224(int param_1)
           temp_v7 = static_cast<u16>(FUN_002c5e80(temp_v7,0,10));
           *(short *)(temp_v40 + 0xa8) = (short)temp_v7;
           if ((temp_v7 & 0xffff) != 0xffff) {
-            ValidationPair iconResult = archiveReadIcon(
+            WindowStatusResult iconResult = archiveReadIcon(
                 reinterpret_cast<const ArchiveIconSource *>(temp_v8 + 0x28),
                 reinterpret_cast<void *>(temp_v44), temp_v7);
-            *(int *)(temp_v46 + 0xc) = static_cast<s32>(iconResult.first);
-            *(unsigned int *)(temp_v46 + 0x10) = iconResult.second;
+            *(int *)(temp_v46 + 0xc) = static_cast<s32>(iconResult.code);
+            *(unsigned int *)(temp_v46 + 0x10) = iconResult.description;
             temp_v9 = legacyResourceIdRemap(temp_v46 + 0xc);
             if (temp_v9 < 0) {
               return temp_v9;
@@ -568,7 +568,7 @@ int FUN_0038c224(int param_1)
           temp_v15 = 0;
           temp_v16 = 0;
           temp_v17 = (unsigned char *)0x0;
-          nn_fnd_DateTime_DateTime_sub_object(puVar5,0x7b2,1);
+          _ZN2nn3fnd8DateTimeC1Eiiiiiii(puVar5,0x7b2,1);
           temp_v5 = puVar5[1];
           *(unsigned int *)(temp_v3 + 0x9a0) = *puVar5;
           *(unsigned int *)(temp_v3 + 0x9a4) = temp_v5;

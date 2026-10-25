@@ -53,7 +53,7 @@ extern unsigned char LAB_00314000; /* 0x314000 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-extern int FUN_00262614(int);
+extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: sceneRegisterBoxEffect. */
 extern short *dataTable4CGetEntry(fn_00313974_arg0 *);
@@ -175,7 +175,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
   if (psVar5[5] != 0) {
     if (psVar5[5] == 1) {
       if (*(int *)(temp_v2 + 0x15d0) != 0) {
-        temp_v6 = FUN_00262614((int)*psVar5);
+        temp_v6 = gameDataIsFlagByteSet((int)*psVar5);
         temp_v3 = (int)psVar5[7];
         temp_v4 = (int)psVar5[6];
         temp_v2 = (int)psVar5[8];
@@ -189,7 +189,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         temp_v5 = 0;
       }
       else {
-        temp_v2 = FUN_00262614((int)*psVar5);
+        temp_v2 = gameDataIsFlagByteSet((int)*psVar5);
         if (temp_v2 != 0) {
           sceneRegisterBoxEffect(0,0,&LAB_00314000,0x54,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                        (int)psVar5[7],(int)psVar5[8],0);

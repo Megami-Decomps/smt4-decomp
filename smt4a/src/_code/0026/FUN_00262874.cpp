@@ -213,7 +213,7 @@ extern unsigned int computeCountLimit(void);
 /* Supplied declaration required: objClearFlagPair. */
 extern int FUN_002c2c98(void);
 /* Supplied declaration required: FUN_002c39dc. */
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 extern int statusDownGetFlag(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_002c7cd4. */
@@ -2452,7 +2452,7 @@ LAB_00266850:
       FUN_0020b718(temp_v14,temp_v10);
       break;
     }
-    temp_v4 = FUN_002c7c54();
+    temp_v4 = useCounterGetCurrentValue();
     if (temp_v4 == 0x69) break;
     temp_v4 = 0;
     if (*(int *)(temp_v1 + 0x9bc) >= 0) {

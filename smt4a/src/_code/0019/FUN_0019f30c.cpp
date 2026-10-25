@@ -26,7 +26,7 @@ typedef struct JointOwner {
 } JointOwner;
 
 s32 FUN_001a7a20(u8 *table, u32 name, u32 length);
-u32 wstrlen(u32 name);
+u32 libc_strlen(u32 name);
 extern f32 __sqrtf(f32);
 
 /* Looks a joint up by name and converts its rotation matrix to a quaternion. Returns whether the
@@ -34,7 +34,7 @@ extern f32 __sqrtf(f32);
 u32 FUN_0019f30c(JointOwner *owner, u32 name, RotationQuaternion *rotation)
 {
     u8 *base = owner->names->member70;
-    u32 length = wstrlen(name);
+    u32 length = libc_strlen(name);
     s32 index = FUN_001a7a20(base + 4, name, length);
 
     if (index == 0xFFFF) {

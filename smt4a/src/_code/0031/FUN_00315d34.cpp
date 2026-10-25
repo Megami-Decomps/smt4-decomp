@@ -1,4 +1,4 @@
-/* NON_MATCHING: draws the map interface notice (slides in, holds, slides out; frame sprites and the entry text) and the optional overlay layer; written from the decompilation, the data table scan and float argument order are not compared with retail */
+/* NON_MATCHING: overlay/text argument contracts and the 128-byte text buffer match retail; cached zero/global registers, overlay scheduling and the early loop epilogue still differ. */
 #include "camp/RenderCtx.h"
 
 #define NOTICE_STATE_IDLE 0
@@ -10,9 +10,9 @@
 #define NOTICE_SLIDE_SPEED 40.0f
 #define NOTICE_SLIDE_START -400.0f
 #define NOTICE_LONG_START 0x32
-#define NOTICE_LONG_END 0x3D
+#define NOTICE_LONG_END 0x3C
 #define NOTICE_SHORT_START 10
-#define NOTICE_SHORT_END 0x15
+#define NOTICE_SHORT_END 0x14
 #define NOTICE_ENTRY_NONE -1
 #define NOTICE_ENTRY_SPECIAL 0x18
 #define NOTICE_FRAME_FIRST 0x107
@@ -47,36 +47,38 @@ extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(u32 a, u32 b);
 void FUN_00157558(RenderCtxA *context);
 void FUN_0016c4b8(RenderCtxA *context, void *surface);
-void FUN_0014e314(u32 id);
+void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
+                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002371b0(void);
 NoticeFrame *FUN_001834a4(u32 table, u32 index);
 void FUN_001835b4(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
 s32 dataTable2ECount(void);
 MapNoticeEntry *dataTable2EGetEntry(s32 index);
 s32 findKeyedRecord(s32 id, s32 sub);
-void FUN_003849cc(s32 id, s32 sub, s32 flag, u8 *buffer, u32 mask);
-void FUN_00162790(u32 layer, u32 mask, u8 *buffer, f32 x, f32 y);
+void FUN_003849cc(s32 id, s32 sub, s32 flag, char *buffer, s32 level);
+void FUN_00162790(u32 layer, u32 mask, const char *buffer,
+                  f32 x, f32 y, f32 depth, f32 width, f32 height);
 
-u32 FUN_00315d34(void)
+s32 FUN_00315d34(u32 handle)
 {
     MapInterface *screen = g_mapIf;
-    f32 offset = 0.0f;
 
     if (screen->overlayShown != 0) {
         u32 overlay = screen->overlayId;
         RenderCtxA *context = g_renderCtx;
         s32 state = FUN_001692ac(5, 1);
-        renderStackPush(&context->stackA, state);
+        renderCtxPushA(context, state);
         FUN_00157558(g_renderCtx);
         FUN_0016c4b8(g_renderCtx, NULL);
-        FUN_0014e314(overlay);
+        FUN_0014e314(overlay, overlay, overlay, overlay, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
         FUN_002371b0();
         renderStackPop(&g_renderCtx->stackA);
     }
 
     screen = g_mapIf;
     NoticeFrame *frame = FUN_001834a4(8, 0x10B);
-    s32 frameNumber = screen->state;
+    f32 offset = 0.0f;
+    s32 frameNumber;
     switch (screen->state) {
     case NOTICE_STATE_IDLE:
         return 0;
@@ -97,7 +99,7 @@ u32 FUN_00315d34(void)
         frameNumber = screen->frame;
         if (frameNumber >= NOTICE_LONG_START)
             offset = -(f32)((frameNumber - NOTICE_LONG_START) * (s32)NOTICE_SLIDE_SPEED);
-        if (frameNumber >= NOTICE_LONG_END) {
+        if (frameNumber > NOTICE_LONG_END) {
             screen->state = NOTICE_STATE_IDLE;
             screen->frame = 0;
             return 0;
@@ -108,7 +110,7 @@ u32 FUN_00315d34(void)
         frameNumber = screen->frame;
         if (frameNumber >= NOTICE_SHORT_START)
             offset = -(f32)((frameNumber - NOTICE_SHORT_START) * (s32)NOTICE_SLIDE_SPEED);
-        if (frameNumber >= NOTICE_SHORT_END) {
+        if (frameNumber > NOTICE_SHORT_END) {
             screen->state = NOTICE_STATE_IDLE;
             screen->frame = 0;
             return 0;
@@ -116,25 +118,24 @@ u32 FUN_00315d34(void)
         break;
     }
 
-    s32 entryCount = dataTable2ECount();
-    for (s32 i = 0; i < entryCount; i++) {
+    for (s32 i = 0; i < dataTable2ECount(); i++) {
         s32 id = dataTable2EGetEntry(i)->id;
         if (id == NOTICE_ENTRY_NONE)
             return 0;
-        if (id == screen->entryId)
+        if (screen->entryId == id)
             break;
-        entryCount = dataTable2ECount();
     }
 
     if (screen->entryId == NOTICE_ENTRY_SPECIAL || findKeyedRecord(screen->entryId, screen->entrySub) != 0) {
         RenderCtxA *context = g_renderCtx;
         s32 state = FUN_001692ac(1, 0);
-        renderStackPush(&context->stackA, state);
-        for (u32 sprite = NOTICE_FRAME_FIRST; sprite <= NOTICE_FRAME_LAST; sprite++)
+        renderCtxPushA(context, state);
+        for (s32 sprite = NOTICE_FRAME_FIRST; sprite <= NOTICE_FRAME_LAST; sprite++)
             FUN_001835b4(2, 8, sprite, (s32)offset, 0, 0xB);
-        u8 text[144];
-        FUN_003849cc(screen->entryId, screen->entrySub, 0, text, 0xFFFFFFFF);
-        FUN_00162790(3, 0xFFFFFFFF, text, (f32)frame->x, (f32)frame->y);
+        char text[128];
+        FUN_003849cc(screen->entryId, screen->entrySub, 0, text, -1);
+        FUN_00162790(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y,
+                      0.0f, 1.0f, 1.0f);
         renderStackPop(&g_renderCtx->stackA);
     }
     return 0;

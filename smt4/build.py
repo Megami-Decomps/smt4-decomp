@@ -221,10 +221,12 @@ def link_weak_calls(obj, unit=None):
     `veneer_stubs`): the relocation is retargeted at the stub's symbol, as in the retail objects.
     An unconditional `bl` stays: the linker turns it into a `blx`.
 
-    `__cxa_guard_release` and `__aeabi_atexit` count as weak: the retail program defines neither
-    (only `__cxa_guard_acquire`), and every call a function-local static's initialisation makes to
-    them is this NOP, so the retail objects referenced them weakly; armcc 4.1 b713 references them
-    strongly. `__dso_handle`, the atexit argument, is the image base: retail's pool holds `entry`."""
+    `__cxa_guard_release` and `__aeabi_atexit` count as weak: in the retail program the first is not
+    defined and the second is an empty function (`bx lr`), and every call a static's initialisation
+    makes to them is this NOP (armlink's --inline removed the calls to the empty function); armcc 4.1
+    b713 references them strongly. A tail branch to `__aeabi_atexit` (a file's last registration)
+    stays: armlink cannot inline a `b`. `__dso_handle`, the atexit argument, is the image base:
+    retail's pool holds `entry`."""
     import struct
     data = bytearray(Path(obj).read_bytes())
     shoff, = struct.unpack_from("<I", data, 0x20)
@@ -250,7 +252,8 @@ def link_weak_calls(obj, unit=None):
                 data[name_at:name_at + 6] = b"entry\0"
                 patched += 1
             weak_call = (kind in (28, 29, 10, 30) and shndx == 0
-                         and (sym_info >> 4 == 2 or symbol in ("__cxa_guard_release", "__aeabi_atexit")))
+                         and (sym_info >> 4 == 2 or symbol == "__cxa_guard_release"
+                              or (symbol == "__aeabi_atexit" and kind != 29)))
             next_call = (unit is not None and rel[7] == text and kind in (28, 29, 10, 30)
                          and symbol_addresses().get(symbol) == int(unit["address"], 16) + offset + 4)
             if kind == 28 and symbol in inlined_bodies() and struct.unpack_from("<I", data, code + offset)[0] >> 24 == 0xEB:
@@ -345,8 +348,9 @@ def carve(obj, unit):
     """Rewrite an object compiled with --split_sections to hold only the unit's function, as the one
     function per unit the retail objects are: its own section becomes `.text`; what it references in
     the dropped sections (the vtable, the other variants) becomes an undefined symbol, resolved like any
-    other at link time. Returns False (object untouched) when it references a dropped section by
-    section symbol, which has no name to resolve."""
+    other at link time; a pool word into the object's own data names the global it points into.
+    Returns False (object untouched) when it references a dropped section by section symbol that no
+    name resolves."""
     import struct
     sys.path.insert(0, str(ROOT / "tools"))
     import split
@@ -369,6 +373,16 @@ def carve(obj, unit):
                 key = f"{target['name']}@{target['value']:x}"
                 local_symbols[key] = (target["name"], target["value"])
                 relocs.append((offset, key, info & 0xFF))
+            elif target["type"] == 3 and info & 0xFF == 2 and sections[target["shndx"]]["name"].startswith((".data", ".bss", ".constdata")):
+                # A pool word into the object's own data (a global the unit defines): the named object
+                # it falls in, plus the rest of the offset, resolved by name like any other global.
+                word = struct.unpack_from("<I", code, offset)[0]
+                owner = max((s for s in symbols if s["shndx"] == target["shndx"] and s["type"] == 1 and s["name"]
+                             and s["value"] <= word), key=lambda s: s["value"], default=None)
+                if owner is None:
+                    return False
+                struct.pack_into("<I", code, offset, word - owner["value"])
+                relocs.append((offset, owner["name"], 2))
             elif not target["name"] or target["type"] == 3:  # a section symbol: nothing to resolve it by
                 return False
             else:
@@ -384,10 +398,32 @@ def carve(obj, unit):
     return True
 
 
+def name_static_initialiser(obj, unit):
+    """A unit that is a file's static initialiser: its source defines the file's global objects, and
+    armcc emits the function constructing them as the local `__sti___<n>_<file>` in `.text`. That
+    symbol takes the unit's name (in place: the generated name, which embeds the file's, is longer).
+    Returns whether it did."""
+    data = bytearray(Path(obj).read_bytes())
+    sections, symbols = read_elf(data)
+    if any(s["name"] == unit["function"] for s in symbols):
+        return False
+    initialisers = [s for s in symbols if s["name"].startswith("__sti__") and s["type"] == 2 and s["shndx"]
+                    and sections[s["shndx"]]["name"] == ".text"]
+    new = unit["function"].encode()
+    if len(initialisers) != 1 or len(new) > len(initialisers[0]["name"]):
+        return False
+    strtab = sections[next(s for s in sections if s["type"] == 2)["link"]]
+    old = initialisers[0]["name"].encode()
+    at = data.index(old + b"\0", strtab["offset"], strtab["offset"] + strtab["size"])
+    data[at:at + len(old)] = new + b"\0" * (len(old) - len(new))
+    Path(obj).write_bytes(data)
+    return True
+
+
 def finish_object(compiler, unit, source, obj):
     """What happens to a freshly compiled unit object: a destructor's or a file's extra functions and
     vtable are cut away (recompiling with --split_sections), then armlink's NOPs are applied."""
-    if needs_carving(obj, unit):
+    if not name_static_initialiser(obj, unit) and needs_carving(obj, unit):
         split_command = command(compiler, unit, source, obj)
         split_command.insert(split_command.index("-o"), "--split_sections")
         done = subprocess.run(split_command, capture_output=True, text=True, cwd=ROOT)

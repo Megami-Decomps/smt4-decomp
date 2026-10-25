@@ -1,10 +1,7 @@
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 extern "C" {
-
-typedef struct PanelSpriteParameters {
-    u8 data[0x20];
-} PanelSpriteParameters;
 
 /* A 0x8C-byte UI sprite; only the fields this initializer writes are named. */
 typedef struct PanelSprite {
@@ -13,7 +10,7 @@ typedef struct PanelSprite {
 } PanelSprite;
 
 typedef struct PanelSprites {
-    /* 0x000 */ u8 unk000[0x20];
+    /* 0x000 */ UiResourceParameters parameters;
     /* 0x020 */ PanelSprite frame;
     /* 0x0AC */ PanelSprite icon;
     /* 0x138 */ PanelSprite marker;
@@ -56,9 +53,8 @@ static const s32 sPanelKeysD[] = {
     0, -1, -1, 0, -1, 0,
 };
 
-void paramsClearPacket(PanelSpriteParameters *params);
-void paramsInit(PanelSpriteParameters *params, const void *first, u32 firstBytes, const void *second, u32 secondBytes,
-                const void *third, u32 thirdBytes, const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void paramsClearPacket(UiResourceParameters *params);
+
 void FUN_0014e188(PanelSprite *sprite, u32 group, u32 image, PanelSprites *owner, u16 id, f32 scale);
 void uiSpriteInitializeState(PanelSprite *sprite, u32 group, s32 image, u32 kind, PanelSprites *owner, u16 id, f32 scale);
 void FUN_00387240(PanelSprite *sprite, u32 group, u32 image);
@@ -73,8 +69,8 @@ void FUN_002cdad4(PanelSprites *panel)
 {
     panel->unk3F8 = 0;
     panel->unk3F4 = 0;
-    paramsClearPacket((PanelSpriteParameters *)panel);
-    paramsInit((PanelSpriteParameters *)panel, sPanelKeysA, sizeof(sPanelKeysA), sPanelKeysB, sizeof(sPanelKeysB), sPanelKeysC,
+    paramsClearPacket(&panel->parameters);
+    paramsInit(&panel->parameters, sPanelKeysA, sizeof(sPanelKeysA), sPanelKeysB, sizeof(sPanelKeysB), sPanelKeysC,
                sizeof(sPanelKeysC), NULL, 0, sPanelKeysD, sizeof(sPanelKeysD));
     FUN_0014e188(&panel->frame, 0xc, 0x29, panel, 0x33, 1.0f);
     spriteSetLayer(&panel->frame, 2);

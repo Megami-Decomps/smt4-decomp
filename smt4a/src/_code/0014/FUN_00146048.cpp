@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the manager in r6, owner/scene in r4/r5 and the override pointer in r7, and clears the stereo mode through a hoisted zero; the instruction stream otherwise follows retail (80 diff lines). */
+/* NON_MATCHING: first scene-update saved registers and animation/model argument evaluation order differ; the recovered reference argument, stereo setter and pending-list snapshot now match retail. */
 #include "camp/RenderCtx.h"
 
 struct SlotOwner {
@@ -35,6 +35,8 @@ struct FrameModel {
     /* 0xA8 */ u32 *firstValue;
 };
 
+struct CallbackSlot;
+
 /* The model manager the frame process drives (the part it touches). */
 struct HandleRegistry {
     /* 0x00 */ u8 unk00[4];
@@ -46,7 +48,7 @@ struct HandleRegistry {
     /* 0x18 */ u32 *pendingBegin;
     /* 0x1C */ u32 *pendingEnd;
     /* 0x20 */ u8 unk20[0x1C];
-    /* 0x3C */ u32 reference;
+    /* 0x3C */ CallbackSlot *reference;
 };
 
 /* A list of matrices built from a slot and an owner (0xB8 bytes). */
@@ -72,8 +74,8 @@ void FUN_0016bad8(MatrixSlotList *list);
 void FUN_00157520(MatrixSlotList *list);
 void FUN_0016d304(ModelSlot *model);
 void FUN_00157268(MatrixSlotList *list);
-void FUN_001582a8(u32 reference, u32 value);
-bool refValueIsSet(void);
+void FUN_001582a8(CallbackSlot *reference, u32 value);
+u8 refValueIsSet(s32 *valueRef);
 void gfxCommandSetFlushCursor(ModelSlot *model);
 void objectListsClearActive(SlotOwner *owner);
 void FUN_00144ab4(s32 value);
@@ -83,6 +85,7 @@ void FUN_00157558(RenderCtxA *context);
 s32 FUN_00157e98(ModelSlot *model, ModelAnimationSet *animations);
 u32 FUN_00152f54(void);
 void FUN_00145e24(RenderCtxA *context, u32 value);
+void renderCtxSetStereoMode(RenderCtxA *context, s32 mode);
 void holderFlushPending(u32 handle);
 
 /* The animation set in use: the override's embedded record when it is fully enabled, else the manager's own. */
@@ -126,28 +129,31 @@ u32 FUN_00146048(void)
         FUN_00157268(&list);
         FUN_00157520(&list);
         manager = g_handleRegistry;
-        if (manager->reference != 0 && refValueIsSet()) {
-            FUN_001582a8(manager->reference, *DAT_0056fcbc->firstValue);
+        if (manager->reference != NULL && refValueIsSet(reinterpret_cast<s32 *>(manager->reference))) {
+            u32 value = *DAT_0056fcbc->firstValue;
+            FUN_001582a8(manager->reference, value);
         }
         manager = g_handleRegistry;
         gfxCommandSetFlushCursor(manager->model);
         objectListsClearActive(manager->owner);
     }
     FUN_00144ab4(0);
-    g_renderCtx->stereoMode = 0;
+    renderCtxSetStereoMode(g_renderCtx, 0);
     FUN_0017dd80();
     FUN_001575cc(g_renderCtx);
     FUN_00157558(g_renderCtx);
     manager = g_handleRegistry;
     if (FUN_00158124(manager)) {
-        if (FUN_00157e98(manager->model, activeAnimations(manager)) == 0) {
+        ModelSlot *model = manager->model;
+        if (FUN_00157e98(model, activeAnimations(manager)) == 0) {
             FUN_001575cc(g_renderCtx);
         }
     } else {
         FUN_001575cc(g_renderCtx);
     }
     FUN_00145e24(g_renderCtx, FUN_00152f54());
-    for (u32 *pending = g_handleRegistry->pendingBegin; pending != g_handleRegistry->pendingEnd; pending++) {
+    u32 *pendingEnd = g_handleRegistry->pendingEnd;
+    for (u32 *pending = g_handleRegistry->pendingBegin; pending != pendingEnd; pending++) {
         holderFlushPending(*pending);
     }
     return 0;

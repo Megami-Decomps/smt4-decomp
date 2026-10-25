@@ -1,9 +1,5 @@
-/* NON_MATCHING: near (205 rows against 209): same switch cases, strings (SJIS), constants and calls; retail reaches the battle UI block as `ldr r4,[base]; ldr r4,[r4,#16]` (a field of a larger global at 0x57a9b8, not the standalone g_btlUiBlock pointer), keeps `partyMember`/`recordId`/`guard` in r8/sl/r7 after the loads and the list pointer in r4 itself, ours loads the pointer straight and uses r0 for the list address */
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef short s16;
-typedef unsigned int u32;
-typedef int s32;
+/* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
+#include "battle/btlUI.h"
 
 extern "C" {
 
@@ -33,7 +29,7 @@ struct DataRecord {
     u8 kind;                     /* 0x0C */
 };
 
-extern BtlUiBlock *g_btlUiBlock;   /* 0x57a9c8 */
+extern BtlUiGlobalsA g_btlUi;
 extern u32 g_btlScriptUnit;        /* 0x57113c */
 
 s32 resourceRunOperationIfUnblocked(u8 *list);
@@ -68,7 +64,7 @@ s32 menuStateStartSelect(s32 arg);
  * default variants. */
 void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId, s32 guard)
 {
-    BtlUiBlock *ui = g_btlUiBlock;
+    BtlUiBlock *ui = reinterpret_cast<BtlUiBlock *>(g_btlUi.ui);
     char text[64];
     s32 kindValue = 0;
     u8 flag = 0;

@@ -11,7 +11,7 @@ typedef struct {
 
 extern int *DAT_005891f8; /* 0x5891f8 */
 extern int DAT_005891fc; /* 0x5891fc */
-extern unsigned int DAT_0061a62c; /* 0x61a62c */
+extern unsigned int g_appletSleepCallbackCriticalSection; /* 0x61a62c */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -25,11 +25,11 @@ void FUN_0015a450(int *param_1)
   int *piVar3;
   int *piVar4;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a62c);
+  nn_os_CriticalSection_Enter((unsigned int)&g_appletSleepCallbackCriticalSection);
   piVar3 = DAT_005891f8;
   while( 1 ) {
     if (piVar3 == (int *)0x0) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+      nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
       return;
     }
     if (piVar3 == param_1) break;
@@ -50,7 +50,7 @@ void FUN_0015a450(int *param_1)
   DAT_005891fc = temp_v0;
   *piVar3 = 0;
   piVar3[1] = 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+  nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
   return;
 }
 

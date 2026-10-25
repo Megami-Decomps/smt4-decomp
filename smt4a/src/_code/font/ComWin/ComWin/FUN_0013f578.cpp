@@ -1,4 +1,5 @@
 /* NON_MATCHING: allocation debug-source hook is absent; resource-address packing and saved registers differ. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/MenuState.h"
 
 extern "C" {
@@ -16,8 +17,7 @@ u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 mode,
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 mode,
     u32 (*draw)(), u32 (*destroy)(), void *work, u32 parent);
 void paramsClearPacket(UiResourceParameters *parameters);
-void paramsInit(UiResourceParameters *, const void *, u32, const void *, u32,
-    const void *, u32, const void *, u32, const void *, u32);
+
 void uiSpriteInitializeState(UiSpriteState *, u32, u32, u32, UiSpriteSource *, u16, f32);
 void uiSpriteSelectAnim(UiSpriteState *, s32 animation);
 

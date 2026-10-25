@@ -1,6 +1,6 @@
 /* NON_MATCHING: block-copy address temporaries use r5 instead of retail's lr. */
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -10,14 +10,14 @@ u32 displayIsStereoActive(void);
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 
 // Append a vector payload to the first eye and duplicate it for stereo rendering.
-void FUN_002b3ed8(const Vector4* geometry, const Vector4* style, u32 resource, u32 options)
+void FUN_002b3ed8(const EffMenuPosition* geometry, const EffMenuPosition* style, u32 resource, u32 options)
 {
     // The second vector spans base-node unions; a kind-specific view avoids reshaping them.
     struct VectorNodeView {
         EffMenuNode* next;
         u32 kind;
-        Vector4 geometry;
-        Vector4 style;
+        EffMenuPosition geometry;
+        EffMenuPosition style;
         u32 resource;
         u32 options;
         u8 unk30[0x38];

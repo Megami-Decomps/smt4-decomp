@@ -43,7 +43,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_002296b0. */
-extern int FUN_00262614(int);
+extern int gameDataIsFlagByteSet(int);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_002c5468. */
 /* Supplied declaration required: FUN_002c553c. */
@@ -259,7 +259,7 @@ void FUN_00239c24(void)
       FUN_001bc124(temp_v4,temp_v5);
       FUN_001bbf0c();
       temp_v4 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
-      if ((((*(char *)(temp_v3 + 0xe09) == '\0') || (temp_v5 = FUN_00262614(temp_v4), temp_v5 != 0)) ||
+      if ((((*(char *)(temp_v3 + 0xe09) == '\0') || (temp_v5 = gameDataIsFlagByteSet(temp_v4), temp_v5 != 0)) ||
           (*(int *)(temp_v3 + 0x15d0) != 0)) || (temp_v3 = flagCategoryIsAvailable(temp_v4), temp_v3 != 0)) {
         FUN_003276f0(temp_v4 + 0x186,1);
       }

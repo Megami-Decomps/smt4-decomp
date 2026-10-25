@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f3044` (_code @ 0x1f3044, 0x614 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -15,7 +16,6 @@ int timerStart(...);
 int FUN_002bd954(...);
 int spriteStartAnimationByIndex(...);
 int asdOperatorNew(...);
-int paramsInit(...);
 int memAlloc(...);
 int __aeabi_memset4(...);
 int memClear(...);
@@ -210,8 +210,7 @@ void FUN_001f3044(void)
   __aeabi_memset4(piVar1 + 0x10e,0x80,0xffffffff);
   uniteRebuildFusionCatalog();
   drawParameterBlockClear(piVar1 + 1);
-  temp_v3 = (int *)0x16c;
-  paramsInit(piVar1 + 1,&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c);
+  paramsInit(reinterpret_cast<UiResourceParameters *>(piVar1 + 1),&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c,0x16c);
   FUN_002bd954(piVar1 + 9,0x24,0,piVar1 + 1,1);
   spriteStartAnimationByIndex(piVar1 + 9,0);
   FUN_002bd954(piVar1 + 0x2c,0x24,0,piVar1 + 1,1);

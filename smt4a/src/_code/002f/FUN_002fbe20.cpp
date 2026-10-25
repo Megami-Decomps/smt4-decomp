@@ -9,15 +9,15 @@ struct WideRequestContext {
 };
 
 extern "C" {
-u32 wstrlen(const u16 *);
+u32 libc_strlen(const u16 *);
 u32 FUN_0043b0dc(u32 *, s32, const u16 *, u32, const u16 *, u32);
 
 u32 FUN_002fbe20(WideRequestContext *context, const u16 *first, const u16 *second)
 {
     if (context->state <= 0)
         return 0xd8a0a064;
-    u32 secondLength = wstrlen(second) + 1;
-    u32 firstLength = wstrlen(first) + 1;
+    u32 secondLength = libc_strlen(second) + 1;
+    u32 firstLength = libc_strlen(first) + 1;
     return FUN_0043b0dc(&context->handle, context->state, first, firstLength,
                          second, secondLength);
 }

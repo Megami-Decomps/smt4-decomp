@@ -79,9 +79,7 @@ const char *FUN_002cdecc(s8 tone);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 FUN_00297060(u32 script, u32 messages);
 void drawParameterBlockClear(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
-    const void *chunk1, u16 count1, const void *chunk2, u16 count2,
-    const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+
 void FUN_002bd954(UniteSprite *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void uiSpriteInitializeState(UniteSprite *sprite, s32 kind, s32 count, s32 animation, UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(UniteSprite *sprite, s32 animation, s32 flags);

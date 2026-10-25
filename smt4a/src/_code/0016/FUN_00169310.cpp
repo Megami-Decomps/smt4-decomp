@@ -4,7 +4,7 @@
 extern "C" {
 char *libc_strcpy(char *dst, const char *src);
 char *libc_strcat(char *dst, const char *src);
-u32 wstrlen(const char *s);
+u32 libc_strlen(const char *s);
 u8 *FUN_001642e4(const char *path, s32 *size, u32 loadFlags, u32 alignment);
 StexHeader *asdTMSprDecompress(StexHeader *data, u32 mode, u32 alignment);
 s32 rt_memcmp(const void *first, const void *second, u32 bytes);
@@ -31,7 +31,7 @@ u32 FUN_00169310(TexTableEntry *entry)
         libc_strcat(path, ".stex");
     }
 
-    if (wstrlen(node->name) == 0) {
+    if (libc_strlen(node->name) == 0) {
         entry->state = 0;
     } else if ((entry->flags & ~TEXENTRY_RETRY) == 0) {
         u32 mode = 1;

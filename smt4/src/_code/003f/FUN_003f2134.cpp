@@ -14,7 +14,7 @@ extern unsigned char LAB_003574a8; /* 0x3574a8 */
 extern unsigned int DAT_004656e0; /* 0x4656e0 */
 extern unsigned int DAT_004656e4; /* 0x4656e4 */
 extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
-extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
+extern unsigned int g_asdCecMessageBoxStateCriticalSection; /* 0x4e62b4 */
 
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 
@@ -29,8 +29,8 @@ unsigned long long FUN_003f2134(unsigned int param_1,unsigned int param_2,int pa
   DAT_004656e4 = 0;
   g_asdCecMessageBoxCriticalSection = 0;
   nn_os_CriticalSection_Initialize(&g_asdCecMessageBoxCriticalSection);
-  DAT_004e62b4 = 0;
-  nn_os_CriticalSection_Initialize(&DAT_004e62b4,&LAB_003574a8,0x100000);
+  g_asdCecMessageBoxStateCriticalSection = 0;
+  nn_os_CriticalSection_Initialize(&g_asdCecMessageBoxStateCriticalSection,&LAB_003574a8,0x100000);
   return 0x3574a8004e62b4;
 }
 

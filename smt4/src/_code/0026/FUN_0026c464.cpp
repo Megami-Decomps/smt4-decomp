@@ -6,8 +6,8 @@
 extern "C" {
 s32 FUN_00258de0(s32 user, s32 target, Table04Record *skill, s32 preview, s32 mode);
 Table04Record *dataTable40FindById(u32 skill);
-s16 FUN_0029a924(u16 skill);
-s16 FUN_0029a9d4(u16 skill, u32 mode);
+s32 FUN_0029a924(u32 skill);
+s32 FUN_0029a9d4(u32 skill, s32 mode);
 BtlEquip *gameGetUnitRecord(s32 index);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 BtlEquip *gameGetPlayerData(void);
@@ -30,19 +30,16 @@ s32 FUN_0026c464(s32 user, u32 skillId, s32 preview)
         }
         if (applied) {
             if (preview == 0) {
-                BtlEquip *unit;
-                s16 remainingMp;
                 if (user < 0) {
-                    unit = gameGetPlayerData();
-                    remainingMp = unit->mp - FUN_0029a9d4(skill->identity.id, 1);
-                    unit->mp = remainingMp;
+                    BtlEquip *unit = gameGetPlayerData();
+                    unit->mp -= FUN_0029a9d4(skill->identity.id, 1);
+                    if (unit->mp < 0)
+                        unit->mp = 0;
                 } else {
-                    unit = gameGetUnitRecord(user);
-                    remainingMp = unit->mp - FUN_0029a924(skill->identity.id);
-                    unit->mp = remainingMp;
-                }
-                if (remainingMp < 0) {
-                    unit->mp = 0;
+                    BtlEquip *unit = gameGetUnitRecord(user);
+                    unit->mp -= FUN_0029a924(skill->identity.id);
+                    if (unit->mp < 0)
+                        unit->mp = 0;
                 }
             }
             return 0;

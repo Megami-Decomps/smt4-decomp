@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_0044e368; /* 0x44e368 */
-extern signed char DAT_0044e3b0; /* 0x44e3b0 */
+extern signed char g_appletSleepModuleState; /* 0x44e3b0 */
 extern romwright_code *DAT_0044e3e8; /* 0x44e3e8 */
 
 /* Supplied declaration required: FUN_00110180. */
@@ -43,9 +43,9 @@ void FUN_00106e60(void)
   char temp_v0;
   int temp_v1;
   
-  temp_v0 = DAT_0044e3b0;
-  if (DAT_0044e3b0 != '\0') {
-    DAT_0044e3b0 = '\0';
+  temp_v0 = g_appletSleepModuleState;
+  if (g_appletSleepModuleState != '\0') {
+    g_appletSleepModuleState = '\0';
     FUN_002c130c(3);
     nn_applet_CTR_detail_ReplySleepQueryToManager(0);
   }
@@ -66,7 +66,7 @@ void FUN_00106e60(void)
   if (temp_v0 == '\0') {
     return;
   }
-  DAT_0044e3b0 = 1;
+  g_appletSleepModuleState = 1;
   nn_applet_CTR_detail_SleepIfShellClosed();
   return;
 }

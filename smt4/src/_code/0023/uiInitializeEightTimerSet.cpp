@@ -10,9 +10,7 @@ struct UiEightTimerSet {
 extern "C" {
 extern PartyPanelState *g_partyPanel;
 void drawParameterBlockClear(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
-    const void *chunk1, u16 count1, const void *chunk2, u16 count2,
-    const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+
 void FUN_002bd954(TimerSlot *timer, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(TimerSlot *timer, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);

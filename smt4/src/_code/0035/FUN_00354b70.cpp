@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern int DAT_0044e644;
+extern int g_fsArchiveHandleWords;
 
 u8 FUN_00354b70(void)
 {
-    return DAT_0044e644 != 0;
+    return g_fsArchiveHandleWords != 0;
 }
 
 } /* extern "C" */

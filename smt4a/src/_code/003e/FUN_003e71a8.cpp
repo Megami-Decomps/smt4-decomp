@@ -42,7 +42,7 @@ void asdTMTexLoadMainHeap(u32 table, s32 node);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 void asdTMTexTableFreeEntry(u32 table);
 void campCommonBgInitializeCrazingSumaho(void);
-void ref208SetPair1C(s32 value);
+void ref208SetPair1C(u8 a, u8 b);
 void commonBgReleaseOwnedJob(void);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 height, s32 width);
 void ifTouchRegionRemove(void);
@@ -77,7 +77,7 @@ u32 FUN_003e71a8(SplashWork *splash)
             }
         }
         campCommonBgInitializeCrazingSumaho();
-        ref208SetPair1C(1);
+        ref208SetPair1C(1, 1);
         splash->touchRegion = 0;
         s32 region = ifTouchRegionAdd(0, 0, 0x140, 0xF0);
         splash->touchRegion = region;
@@ -145,7 +145,7 @@ u32 FUN_003e71a8(SplashWork *splash)
     }
 
     if (splash->state == SPLASH_STATE_WAIT_TOUCH && FUN_0013def0(0) == 3) {
-        ref208SetPair1C(0);
+        ref208SetPair1C(0, 0);
         commonBgReleaseOwnedJob();
         for (s32 node = 1; node < SPLASH_TEXTURE_COUNT; node++) {
             if (splash->flags[node] != 0) {

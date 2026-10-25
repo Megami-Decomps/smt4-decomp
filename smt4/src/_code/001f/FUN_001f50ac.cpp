@@ -113,9 +113,7 @@ static const u8 DAT_004013d4[0x39C] = {
 };
 
 void drawParameterBlockClear(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
-                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
-                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+
 void FUN_002bd954(SpriteSlot *sprite, s32 kind, s32 count, UiResourceParameters *resources, u16 flags, f32 speed);
 void FUN_00295eb0(SpriteSlot *sprite, s32 kind, s32 count);
 void FUN_002a9fdc(SpriteSlot *sprite, s32 arg, s32 flag);

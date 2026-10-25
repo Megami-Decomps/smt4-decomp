@@ -6,35 +6,26 @@
 #include <stddef.h>
 #include "nw/math/MTX34.h"
 #include "nw/math/MTX44.h"
+#include "classes/FloatState.h"
+#include "gfx/CameraVector3.h"
 
-/* A point or direction in camera space. */
-struct AsdCameraVec3 {
-    f32 x;
-    f32 y;
-    f32 z;
-};
 /* The stereo pair's parameters (0x6C bytes); initialized by FUN_0015a0e0. */
 struct AsdCameraStereo {
-    union {
-        /* 0x00 */ u8 unk00[0x64];
-        struct {
-            /* 0x00 */ f32 parameters[6];
-            /* 0x18 */ AsdCameraVec3 vectors[4];
-            /* 0x48 */ f32 calibration;
-            /* 0x4C */ f32 offsets[6];
-        } initial;
-    };
+    /* 0x00 */ FloatState state;
+    /* 0x60 */ f32 offset5;
     /* 0x64 */ f32 unk64;
     /* 0x68 */ f32 unk68;
 };
 typedef char AsdCameraStereoLayoutCheck[sizeof(AsdCameraStereo) == 0x6c &&
-    offsetof(AsdCameraStereo, initial.vectors) == 0x18 &&
-    offsetof(AsdCameraStereo, initial.calibration) == 0x48 &&
-    offsetof(AsdCameraStereo, initial.offsets) == 0x4c &&
+    offsetof(AsdCameraStereo, state) == 0 &&
+    offsetof(AsdCameraStereo, offset5) == 0x60 &&
     offsetof(AsdCameraStereo, unk64) == 0x64 && offsetof(AsdCameraStereo, unk68) == 0x68 ? 1 : -1];
 
 
 struct AsdCamera {
+    AsdCamera() {}
+    ~AsdCamera();
+
     /* 0x000 */ u8 enabled;
     /* 0x001 */ u8 unk001;
     /* 0x002 */ u8 unk002[2];

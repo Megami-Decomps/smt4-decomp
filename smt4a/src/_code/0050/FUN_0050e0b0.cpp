@@ -26,7 +26,7 @@ extern ModuleResourceBuffer DAT_0062d2ec;
 extern ModuleResourceState DAT_0062d300;
 extern u8 entry;
 void FUN_0043a0c4(void *);
-void emptyStub_002f4370(void *, void (*)(void *), void *);
+void __aeabi_atexit(void *, void (*)(void *), void *);
 
 /* Initializes each module container and registers its cleanup callback. */
 void FUN_0050e0b0(void)
@@ -36,22 +36,22 @@ void FUN_0050e0b0(void)
     DAT_0062d2b0.first = DAT_0062d2b0.second = DAT_0062d2b0.third = 0;
     DAT_0062d2b0.vtable = DAT_0055b3a4;
     DAT_0062d2b0.fourth = 0;
-    emptyStub_002f4370(&DAT_0062d2b0, FUN_0043a0c4, &entry);
+    __aeabi_atexit(&DAT_0062d2b0, FUN_0043a0c4, &entry);
     DAT_0062d2c4.first = DAT_0062d2c4.second = DAT_0062d2c4.third = 0;
     DAT_0062d2c4.vtable = DAT_0055b3a4;
     DAT_0062d2c4.fourth = 0;
-    emptyStub_002f4370(&DAT_0062d2c4, FUN_0043a0c4, &entry);
+    __aeabi_atexit(&DAT_0062d2c4, FUN_0043a0c4, &entry);
     DAT_0062d2d8.first = DAT_0062d2d8.second = DAT_0062d2d8.third = 0;
     DAT_0062d2d8.vtable = DAT_0055b3a4;
     DAT_0062d2d8.fourth = 0;
-    emptyStub_002f4370(&DAT_0062d2d8, FUN_0043a0c4, &entry);
+    __aeabi_atexit(&DAT_0062d2d8, FUN_0043a0c4, &entry);
     DAT_0062d2ec.first = DAT_0062d2ec.second = DAT_0062d2ec.third = 0;
     DAT_0062d2ec.vtable = DAT_0055b3a4;
     DAT_0062d2ec.fourth = 0;
-    emptyStub_002f4370(&DAT_0062d2ec, FUN_0043a0c4, &entry);
+    __aeabi_atexit(&DAT_0062d2ec, FUN_0043a0c4, &entry);
     DAT_0062d300.first = DAT_0062d300.second = 0;
     DAT_0062d300.vtable = DAT_00536d0c;
     DAT_0062d300.third = 0;
-    emptyStub_002f4370(&DAT_0062d300, reinterpret_cast<void (*)(void *)>(0x42a448), &entry);
+    __aeabi_atexit(&DAT_0062d300, reinterpret_cast<void (*)(void *)>(0x42a448), &entry);
 }
 }

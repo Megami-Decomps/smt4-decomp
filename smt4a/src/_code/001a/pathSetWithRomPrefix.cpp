@@ -9,14 +9,14 @@ typedef struct PathOwner {
 
 s32 libc_sprintf(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
-s32 wstrlen(const char *string);
+s32 libc_strlen(const char *string);
 
 extern const char DAT_0053d47c[]; /* "rom:/%s" */
 
 /* Whether a ':' within the path's first eight characters names a device. */
 static s32 pathHasDevice(const char *path)
 {
-    s32 len = wstrlen(path);
+    s32 len = libc_strlen(path);
     s32 i;
 
     if (len > 8) {

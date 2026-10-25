@@ -3,7 +3,7 @@
 
 extern "C" {
 void rt_aeabi_memclr(void *memory, u32 size);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 void FUN_002e59f8(const char *path, char *output, u32 length);
 void pathStripScheme(AsdFileHashPack *index, char *path, u32 length);
 s32 libc_toupper(s32 character);
@@ -39,9 +39,9 @@ extern "C" AsdHashPackEntry *FUN_001a70dc(AsdFileHashPack *index, const char *pa
     }
     char normalized[256];
     rt_aeabi_memclr(normalized, sizeof(normalized));
-    FUN_002e59f8(path, normalized, wstrlen(path));
-    pathStripScheme(index, normalized, wstrlen(normalized));
-    s32 length = wstrlen(normalized);
+    FUN_002e59f8(path, normalized, libc_strlen(path));
+    pathStripScheme(index, normalized, libc_strlen(normalized));
+    s32 length = libc_strlen(normalized);
     for (s32 position = 0; position < length; ++position) {
         normalized[position] = libc_toupper((s8)normalized[position]);
     }
@@ -55,7 +55,7 @@ extern "C" AsdHashPackEntry *FUN_001a70dc(AsdFileHashPack *index, const char *pa
         for (s32 position = 0; position < (s32)count; ++position) {
             AsdHashPackEntry *entry = &((AsdHashPackEntry *)index->entries)[first + position];
             const char *name = (const char *)index->names + entry->nameOffset;
-            if (wstrlen(name) == (u32)length && libc_strncmp(name, normalized, length) == 0) {
+            if (libc_strlen(name) == (u32)length && libc_strncmp(name, normalized, length) == 0) {
                 return entry;
             }
         }

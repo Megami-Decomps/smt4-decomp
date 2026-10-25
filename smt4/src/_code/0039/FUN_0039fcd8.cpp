@@ -7,8 +7,8 @@ typedef struct SortEntry {
     /* 0x00 */ u16 id;
 } SortEntry;
 
-extern int FUN_0028fb3c(u16 id);
-extern int FUN_00230f44(const SortEntry *entry);
+extern u16 FUN_0028fb3c(s32 id);
+extern u16 FUN_00230f44(const SortEntry *entry);
 
 /* Compare function for sorting entries: by the rank of their id, then by their secondary key. */
 int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
@@ -17,10 +17,12 @@ int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
     u16 idB = b->id;
     int diff = FUN_0028fb3c(idA) - FUN_0028fb3c(idB);
 
-    if (diff == 0) {
-        diff = FUN_00230f44(a) - FUN_00230f44(b);
+    if (diff != 0) {
+        return diff;
     }
-    return diff;
+    u16 orderA = FUN_00230f44(a);
+    u16 orderB = FUN_00230f44(b);
+    return orderA - orderB;
 }
 
 } /* extern "C" */

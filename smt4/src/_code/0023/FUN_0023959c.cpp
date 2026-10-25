@@ -35,7 +35,7 @@ struct CecModuleView {
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
-extern CriticalSection g_asdCecMessageBoxCriticalSection, DAT_004e62b4;
+extern CriticalSection g_asdCecMessageBoxCriticalSection, g_asdCecMessageBoxStateCriticalSection;
 u32 FUN_002399bc(u32 size, u32 alignment);
 void FUN_002399ec(u32 buffer);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
@@ -64,14 +64,14 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
             if (kind != 0) {
                 if (kind == 1 && flags->outboxOwned) {
                     header->count = 0;
-                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
                     if (flags->outboxOwned) {
                         FUN_002399ec(view->outboxBuffer);
                         flags->outboxOwned = 0;
                     }
-                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
                 }
-                nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
                 if (flags->outboxOwned) {
                     FUN_002399ec(view->outboxBuffer);
                     flags->outboxOwned = 0;
@@ -80,10 +80,10 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
                 if (view->outboxBuffer != 0) {
                     flags->outboxOwned = 1;
                     status = 0;
-                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
                 } else {
                     flags->outboxOwned = 0;
-                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
                 }
                 if (status < 0) {
                     header->count = 0;
@@ -96,14 +96,14 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
             } else {
                 if (flags->inboxOwned) {
                     header->count = 0;
-                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
                     if (flags->inboxOwned) {
                         FUN_002399ec(view->inboxBuffer);
                         flags->inboxOwned = 0;
                     }
-                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
                 }
-                nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
                 if (flags->inboxOwned) {
                     FUN_002399ec(view->inboxBuffer);
                     flags->inboxOwned = 0;
@@ -112,10 +112,10 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
                 if (view->inboxBuffer != 0) {
                     flags->inboxOwned = 1;
                     status = 0;
-                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
                 } else {
                     flags->inboxOwned = 0;
-                    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
                 }
                 if (status < 0) {
                     header->count = 0;
@@ -151,19 +151,19 @@ s32 FUN_0023959c(MessageBox *box, CecMessageIndexHeader *header, const void **en
             } else {
                 header->count = 0;
                 if (kind != 0) {
-                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
                     if (flags->outboxOwned) {
                         FUN_002399ec(view->outboxBuffer);
                         flags->outboxOwned = 0;
                     }
                 } else {
-                    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+                    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
                     if (flags->inboxOwned) {
                         FUN_002399ec(view->inboxBuffer);
                         flags->inboxOwned = 0;
                     }
                 }
-                nn_os_CriticalSection_Leave(&DAT_004e62b4);
+                nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
             }
         }
         result = CEC_ERROR_NO_DATA;

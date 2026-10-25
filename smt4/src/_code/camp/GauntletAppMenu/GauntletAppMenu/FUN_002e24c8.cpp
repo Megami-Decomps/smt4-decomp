@@ -1,5 +1,6 @@
 /* NON_MATCHING: paramsInit's stack-argument constant 48 uses r0 instead of r2; its third table relocates as DAT_004028f0 + 0x54 instead of DAT_00402944. */
 /* Creates the Gauntlet app menu: work area, processes, sprites and its resource files. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
@@ -19,8 +20,7 @@ u32 dataTableGet(u32 table, u32 index);
 const void *dataTableGetEntries(void);
 u32 dataTableGetCount(u32 table);
 void drawParameterBlockClear(u8 *block);
-s32 paramsInit(u8 *block, const u8 *a, s32 aSize, const u8 *b, s32 bSize, const u8 *c, s32 cSize, const u8 *d,
-               s32 dSize, const u8 *e, s32 eSize);
+
 void FUN_002bd954(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 scale, s32 layer);
 void timerStart(GauntletSprite *sprite, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
@@ -70,7 +70,7 @@ u32 FUN_002e24c8(void)
     menu->list.table = dataTableGetEntries();
     menu->list.tableCount = dataTableGetCount(table);
     drawParameterBlockClear(menu->list.params);
-    paramsInit(menu->list.params, DAT_004028f0.first, 0x24, DAT_004028f0.second, 0x30, NULL, 0, NULL, 0,
+    paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), DAT_004028f0.first, 0x24, DAT_004028f0.second, 0x30, NULL, 0, NULL, 0,
                DAT_004028f0.third, 0xC4);
     FUN_002bd954(&menu->list.sprites[0], 29, 0, menu->list.params, 1.0f, 201);
     timerStart(&menu->list.sprites[0], 0, 0);

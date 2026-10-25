@@ -19,6 +19,9 @@ struct HighwayInfo {
     /* 0x5dc */ u32 unk5dc;
     /* 0x5e0 */ u32 unk5e0;
     /* 0x5e4 */ u8 unk5e4[0xf4];
+
+    HighwayInfo();
+    static void *operator new(u32 bytes) throw();
 };
 
 typedef void (*HighwayCallback)(void *);
@@ -39,19 +42,26 @@ void positionStateSet(u32 sprite, s32 mode, u32 color, f32 value);
 void FUN_003f84e8(HighwayInfo *);
 void dialogEnterState(HighwayInfo *, s32 state, s32 mode);
 
+
+inline HighwayInfo::HighwayInfo()
+{
+    unk020 = 0;
+    unk024 = 0;
+    messages = NULL;
+    unk02c = 0;
+    unk030 = 0;
+    unk5e0 = 0;
+    table = NULL;
+}
+
+inline void *HighwayInfo::operator new(u32 bytes) throw()
+{
+    return asdOperatorNew(bytes);
+}
 // Create the highway topic window, loading its table, messages, textures and sprite.
 void newHighwayInfoCreate(u32 owner)
 {
-    HighwayInfo *info = static_cast<HighwayInfo *>(asdOperatorNew(sizeof(HighwayInfo)));
-    if (info) {
-        info->unk020 = 0;
-        info->unk024 = 0;
-        info->messages = NULL;
-        info->unk02c = 0;
-        info->unk030 = 0;
-        info->unk5e0 = 0;
-        info->table = NULL;
-    }
+    HighwayInfo *info = new HighwayInfo;
     g_engineResourceHandles.secondary = info;
     info->process = asdProcessCreateSimple(DAT_0052d468, 4, 0, 0, FUN_0035d080, NULL, NULL);
     taskCreateDraw(DAT_0052d454, 0x81, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, info->process);

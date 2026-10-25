@@ -56,7 +56,8 @@ extern int FUN_00299fc0(void);
 extern int ifTouchGetSelectionModeForRegion(int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-extern int modelHasLoadedAttachment(void);
+struct ModelBoneAttachmentRoot;
+extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 extern int gameFlagIsSet(unsigned int);
 
 
@@ -76,7 +77,7 @@ void FUN_003a18a0(int param_1)
       return;
     }
     if (*piVar3 != 0) {
-      temp_v0 = modelHasLoadedAttachment();
+      temp_v0 = modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)*piVar3);
       if (temp_v0 == 0) {
         return;
       }

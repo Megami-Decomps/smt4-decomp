@@ -6,7 +6,7 @@ extern "C" {
 BtlMainState *btlGetMainState(void);
 s32 FUN_00293230(BtlMainState *battle);
 void FUN_0023c1bc(s32 side, u32 options, u32 actor);
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 
 // Queue the paired reflect operations; the battle mode selects the second operation's flag.
 u32 FUN_002267b8(u32 actor, u32 options, u32 target)

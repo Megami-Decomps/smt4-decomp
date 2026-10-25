@@ -1,6 +1,6 @@
 /* NON_MATCHING: work and quest-ID saved registers are exchanged; parameter data relocations now agree. */
 #include "shard/W6_W6Match7_QuestInteraction.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 namespace {
 struct QuestParameterData {
@@ -17,7 +17,7 @@ struct QuestInitializationWork {
             u32 word14;
         } initial;
     };
-    Params002c312c parameters; // 0x1c
+    UiResourceParameters parameters; // 0x1c
     u8 unk03c[0x248];
     u32 resources[12]; // 0x284
     u8 unk2b4[0x118];
@@ -45,8 +45,8 @@ extern const QuestParameterData g_questCenterParameterData;
 void FUN_0046ba10(void* context);
 void sysMemClear(void* data, u32 size);
 u32 asdLoadFileAsyncSimple(const char* path, u32* destination, u32 flags);
-void paramsClearPacket(Params002c312c*);
-void paramsInit(Params002c312c*, u32, u16, u32, u16, u32, u16, u32, u16, u32, u16);
+void paramsClearPacket(UiResourceParameters*);
+
 void dataTable27Load(u8* state);
 void dataTable28Load(u8* state);
 void FUN_0031e198();
@@ -71,8 +71,8 @@ void questCenterInitEntry(void* context)
     asdLoadFileAsyncSimple("quest_center/common/qc_common.bf", &work->resources[0], 0);
     asdLoadFileAsyncSimple("quest_center/common/qc_common.mbm", &work->resources[1], 0);
     paramsClearPacket(&work->parameters);
-    paramsInit(&work->parameters, 0, 0, reinterpret_cast<u32>(g_questCenterParameterData.first), 0x18,
-               0, 0, 0, 0, reinterpret_cast<u32>(g_questCenterParameterData.second), 0xa8);
+    paramsInit(&work->parameters, 0, 0, g_questCenterParameterData.first, 0x18,
+               0, 0, 0, 0, g_questCenterParameterData.second, 0xa8);
     dataTable27Load(&work->interaction.entryToken);
     dataTable28Load(&work->interaction.entryToken);
     work->wordad4 = 0;

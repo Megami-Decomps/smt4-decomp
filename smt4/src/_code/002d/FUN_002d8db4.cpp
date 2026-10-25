@@ -1,21 +1,21 @@
-/* NON_MATCHING: the code is identical; retail has one extra, unreferenced literal word (0x38) in front of the pool that the built code does not emit */
-/* Script command: asks the sequence to switch to state 8 if the object is flagged or the global is not -1. Returns 1. */
+/* Request sequence state 8 when the game-state flag is set or the shared selector is present. */
 #include "common.h"
 
 extern "C" {
 
-struct Obj002d8db8 {
+struct SequenceConditionStateView {
     /* 0x000 */ u8 unk000[0x2f8];
     /* 0x2f8 */ u8 flagged;
 };
 
 extern s32 DAT_0049fd14;
+extern SequenceConditionStateView g_gameState;
 
 void asdSequenceRequest(s32 state, const void *arg, u32 size);
 
-u32 FUN_002d8db4(Obj002d8db8 *obj)
+u32 FUN_002d8db4(void)
 {
-    if (obj->flagged != 0 || DAT_0049fd14 != -1) {
+    if (g_gameState.flagged != 0 || DAT_0049fd14 != -1) {
         asdSequenceRequest(8, NULL, 0);
     }
     return 1;

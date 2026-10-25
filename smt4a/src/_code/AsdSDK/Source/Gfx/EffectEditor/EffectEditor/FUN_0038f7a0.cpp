@@ -1,7 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038f7a0` (_code @ 0x38f7a0, 0x814 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-
 extern "C" {
 
 int CONCAT44(...);

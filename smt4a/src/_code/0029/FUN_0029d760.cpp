@@ -10,7 +10,7 @@ void FUN_002cf8e4();
 void transitionDrawExpandingImages(u32 frame);
 extern MapIfGlobalsA g_mapIf;
 
-u32 FUN_0029d760()
+s32 FUN_0029d760(u32 handle)
 {
     MapIfStateA *state = g_mapIf.state;
     if (g_gameState.controllerFlags.secondary == 0) {

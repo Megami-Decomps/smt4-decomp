@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028a420` (_code @ 0x28a420, 0x504 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -30,7 +31,6 @@ int gameGetSlotTable(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int spriteStartAnimationByIndex(...);
-int paramsInit(...);
 int __aeabi_memset4(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
@@ -154,7 +154,7 @@ void FUN_0028a420(void)
   FUN_002d666c(0);
   puVar3 = puVar1 + 0x18a;
   drawParameterBlockClear();
-  paramsInit(puVar3,&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
+  paramsInit(reinterpret_cast<UiResourceParameters *>(puVar3),&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
   FUN_002bd954(puVar1 + 0x192,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x192,1,0);
   FUN_002bd954(puVar1 + 0x1b5,0x1d,0,puVar3,0xc9);

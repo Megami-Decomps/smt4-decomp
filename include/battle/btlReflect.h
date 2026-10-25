@@ -129,4 +129,8 @@ typedef char ReflectActionDeathFlagOffsetCheck[offsetof(ReflectAction, specialDe
 
 extern "C" ReflectContext *g_btlActionReflect;
 
+/* Actor selectors are narrowed by callers; the allocator stores their low halfwords. */
+extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context,
+    s32 actor, s32 secondary, u32 options);
+
 #endif

@@ -8,7 +8,7 @@ s32 FUN_0015f858(u32* handle, u32 original);
 void FUN_002c526c(s32 result);
 void nn_os_Thread_Thread_sub_object(void* object);
 void entry(void);
-void sceneNotifyNoop(void* object, void (*destroy)(void*), void* module);
+void __aeabi_atexit(void* object, void (*destroy)(void*), void* module);
 
 static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* thread)
 {
@@ -27,7 +27,7 @@ static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* th
 // Duplicate the current thread handle and register the thread object's cleanup.
 void sysRegisterCurrentThreadCleanup(void)
 {
-    sceneNotifyNoop(initializeCurrentThread(&DAT_0044e7b4),
+    __aeabi_atexit(initializeCurrentThread(&DAT_0044e7b4),
                     nn_os_Thread_Thread_sub_object, reinterpret_cast<void*>(entry));
 }
 }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the zero constant of the selected-sprite reset loop differs (retail materialises it with a fresh mov r0,#0 instead of reusing the register holding 0, shifting the literal pool by one word) and the stm base register of the process arguments. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -52,9 +53,7 @@ void FUN_002e1698(u32 job);
 s32 FUN_002e169c(u32 job);
 void FUN_0025ccc0(u32 job);
 void paramsClearPacket(UiResourceParameters *packet);
-void paramsInit(UiResourceParameters *packet, const void *first, u32 firstBytes,
-                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
-                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+
 void FUN_0014e188(ButtonHelpUnit *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void FUN_003872b8(ButtonHelpUnit *sprite, u32 group, u32 image, s32 kind);
 void FUN_00387240(ButtonHelpUnit *sprite, u32 group, s32 arg);

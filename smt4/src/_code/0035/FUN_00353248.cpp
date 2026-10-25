@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0035f808(void);
-int nn_fnd_DateTime_DateTime_sub_object(unsigned int *, int, int, int, int, int, int, int);
+int _ZN2nn3fnd8DateTimeC1Eiiiiiii(unsigned int *, int, int, int, int, int, int, int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 #define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
 #endif
 /* Supplied declaration required: FUN_0035f808. */
-/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
+/* Supplied declaration required: _ZN2nn3fnd8DateTimeC1Eiiiiiii. */
 
 
 void FUN_00353248(unsigned int param_1,int *param_2)
@@ -58,7 +58,7 @@ void FUN_00353248(unsigned int param_1,int *param_2)
   FUN_0035f808();
   if (-1 < (int)puVar5) {
     puVar5 = temp_v13;
-    nn_fnd_DateTime_DateTime_sub_object(puVar5,0x7b2,1,1,0,0,0,0);
+    _ZN2nn3fnd8DateTimeC1Eiiiiiii(puVar5,0x7b2,1,1,0,0,0,0);
     temp_v1 = (unsigned long long)temp_v11 * 1000000;
     temp_v6 = temp_v12 * 1000000 + (int)(temp_v1 >> 0x20);
     temp_v7 = *puVar5;

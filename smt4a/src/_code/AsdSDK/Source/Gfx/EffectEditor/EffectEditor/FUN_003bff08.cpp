@@ -1,7 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bff08` (_code @ 0x3bff08, 0x848 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "gfx/EffectEditorStorage.h"
 extern "C" {
 
 int CONCAT44(double, double);
@@ -60,21 +59,21 @@ extern unsigned int DAT_005c1420; /* 0x5c1420 */
 extern unsigned int DAT_005c1424; /* 0x5c1424 */
 extern unsigned int DAT_005c1428; /* 0x5c1428 */
 extern unsigned int DAT_005c142c; /* 0x5c142c */
-extern signed char DAT_00634c48; /* 0x634c48 */
-extern signed char DAT_00634c49; /* 0x634c49 */
-extern signed char DAT_00634c4a; /* 0x634c4a */
-extern unsigned int g_effectEditorInitialVector; /* 0x634c90 */
-extern unsigned int DAT_00634c94; /* 0x634c94 */
-extern unsigned int DAT_00634c98; /* 0x634c98 */
-extern unsigned int DAT_00634c9c; /* 0x634c9c */
-extern float g_effectEditorVector; /* 0x6352f0 */
-extern float DAT_006352f4; /* 0x6352f4 */
-extern unsigned int DAT_006352f8; /* 0x6352f8 */
-extern float DAT_006352fc; /* 0x6352fc */
-extern float DAT_00635300; /* 0x635300 */
-extern float DAT_00635304; /* 0x635304 */
-extern float DAT_00635308; /* 0x635308 */
-extern float DAT_0063530c; /* 0x63530c */
+ /* 0x634c48 */
+ /* 0x634c49 */
+ /* 0x634c4a */
+ /* 0x634c90 */
+ /* 0x634c94 */
+ /* 0x634c98 */
+ /* 0x634c9c */
+ /* 0x6352f0 */
+ /* 0x6352f4 */
+ /* 0x6352f8 */
+ /* 0x6352fc */
+ /* 0x635300 */
+ /* 0x635304 */
+ /* 0x635308 */
+ /* 0x63530c */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -281,14 +280,14 @@ LAB_003c00f8:
   }
   temp_v12 = temp_v12 | 2;
 LAB_003c01a8:
-  DAT_006472dc = g_effectEditorVector;
-  DAT_006472e0 = DAT_006352f4;
-  DAT_006472e4 = (float)DAT_006352f8;
-  DAT_006472e8 = DAT_006352fc;
-  DAT_006472ec = (float)g_effectEditorInitialVector;
-  DAT_006472f0 = (float)DAT_00634c94;
-  DAT_006472f4 = (float)DAT_00634c98;
-  DAT_006472f8 = (float)DAT_00634c9c;
+  DAT_006472dc = g_effectEditorVector.value.x;
+  DAT_006472e0 = g_effectEditorVector.value.y;
+  DAT_006472e4 = (float)g_effectEditorVector.value.z;
+  DAT_006472e8 = g_effectEditorVector.value.w;
+  DAT_006472ec = (float)g_effectEditorInitialVector.value.x;
+  DAT_006472f0 = (float)g_effectEditorInitialVector.value.y;
+  DAT_006472f4 = (float)g_effectEditorInitialVector.value.z;
+  DAT_006472f8 = (float)g_effectEditorInitialVector.value.w;
   FUN_002f8794();
   temp_v23 = 0.0f;
   temp_v28 = DAT_006472dc;
@@ -468,15 +467,15 @@ LAB_003c01a8:
     DAT_006472f0 = temp_v19;
     DAT_006472ec = temp_v18;
     FUN_001bc3e4();
-    DAT_0063530c = DAT_006472e8;
-    DAT_00635300 = DAT_006472dc;
-    DAT_00635304 = DAT_006472e0;
-    DAT_00635308 = DAT_006472e4;
+    g_effectEditorRotation.value.w = DAT_006472e8;
+    g_effectEditorRotation.value.x = DAT_006472dc;
+    g_effectEditorRotation.value.y = DAT_006472e0;
+    g_effectEditorRotation.value.z = DAT_006472e4;
   }
   asdDebugLog(8,0x30,0,&LAB_003c0768,DAT_0059dbe2 + 8,(int)DAT_0059dbe3,(int)DAT_0059dbe4);
-  DAT_00634c48 = DAT_0059dbe2;
-  DAT_00634c49 = DAT_0059dbe3;
-  DAT_00634c4a = DAT_0059dbe4;
+  g_effectEditorSettings.mode = DAT_0059dbe2;
+  g_effectEditorSettings.flagA = DAT_0059dbe3;
+  g_effectEditorSettings.flagB = DAT_0059dbe4;
   temp_v9 = padButtonIsPressed(1);
   if (temp_v9 == 0) {
     FUN_00202178(1);

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_001464cc(...);
+int lightSetIntensity(...);
 int FUN_002aa18c(...);
 int FUN_002aa200(unsigned int, unsigned int, int);
 int FUN_002aea44(unsigned char [4]);
@@ -43,7 +43,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_001464cc. */
+/* Supplied declaration required: lightSetIntensity. */
 /* Supplied declaration required: FUN_002aa18c. */
 /* Supplied declaration required: FUN_002aa200. */
 /* Supplied declaration required: FUN_002aea44. */
@@ -120,7 +120,7 @@ void FUN_002b2b88(unsigned int param_1,unsigned int *param_2,int param_3,int par
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;
   callbackBindingInitFromKind(reinterpret_cast<FontStringReader *>(&temp_v20), reinterpret_cast<FontEncodingSource *>(piVar13), 0x30);
-  FUN_001464cc(g_titleScene);
+  lightSetIntensity(g_titleScene);
   temp_v20 = param_3;
   temp_v14 = (unsigned long long)temp_v7 << 0x20;
   temp_v13 = (unsigned long long)temp_v2;
@@ -292,7 +292,7 @@ LAB_002b2f98:
       temp_v13 = (unsigned long long)(unsigned int)temp_v10;
     } while (param_4 >= temp_v20 - param_3);
   }
-  FUN_001464cc(g_titleScene);
+  lightSetIntensity(g_titleScene);
   return;
 }
 

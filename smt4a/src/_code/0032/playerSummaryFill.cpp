@@ -15,7 +15,7 @@ extern u32 gameDataBlocksGetWord27E90(void);
 extern u8 gameFlagIsSet(u32 id);
 extern Lookup62_64 *saveSlotFindSelected(void);
 extern Lookup62_64 *gameGetSaveSlotData(s32 index);
-extern s32 wstrlen(const u16 *str);
+extern s32 libc_strlen(const u16 *str);
 extern void FUN_002e59f8(const u16 *src, u16 *dst, u32 size);
 
 /* Fills the player summary from the party data; stats and name already set are kept. */
@@ -53,7 +53,7 @@ void playerSummaryFill(PlayerSummary *summary)
             summary->unk3C[i] = 0;
         }
     }
-    if (wstrlen(summary->name) == 0) {
+    if (libc_strlen(summary->name) == 0) {
         FUN_002e59f8(party->name, summary->name, 0x12);
     }
     if (summary->stats[0] == 0) {

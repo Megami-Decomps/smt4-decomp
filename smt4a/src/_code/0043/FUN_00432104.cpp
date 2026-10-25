@@ -7,7 +7,7 @@ extern "C" {
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 
-extern u8 DAT_006430f4[];  /* guards the session reference count */
+extern u8 g_moduleCriticalSection7[];  /* guards the session reference count */
 extern s32 DAT_005c0ac4;   /* session reference count */
 extern u32 g_ipcServiceSessionHandle;
 
@@ -29,7 +29,7 @@ extern "C" {
  * returns 0, the close error, or an error code when no reference is held. */
 s32 FUN_00432104(void)
 {
-    CriticalSectionLock lock(DAT_006430f4);
+    CriticalSectionLock lock(g_moduleCriticalSection7);
     if (DAT_005c0ac4 == 0) {
         return (s32)0xC8A06BF8;
     }

@@ -14,7 +14,7 @@ typedef struct EntryOwner {
 } EntryOwner;
 
 int textFormatBuffer(char *dst, const char *format, ...);
-extern u32 wstrlen(const char *s);
+extern u32 libc_strlen(const char *s);
 
 /* Copies the entry's name into `buffer` without its extension and returns the entry's id. */
 u32 FUN_003c4984(EntryOwner *owner, char *buffer)
@@ -23,7 +23,7 @@ u32 FUN_003c4984(EntryOwner *owner, char *buffer)
     u32 i;
 
     textFormatBuffer(buffer, "%s", owner->entry->name);
-    length = wstrlen(buffer);
+    length = libc_strlen(buffer);
     for (i = 0; i < length && buffer[i] != '.'; i++) {
     }
     if (length != i) {

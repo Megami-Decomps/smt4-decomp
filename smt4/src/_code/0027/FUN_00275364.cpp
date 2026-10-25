@@ -4,12 +4,6 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 namespace {
-// The node's motion id lives past the fields the shared header names.
-struct MotionNode {
-    AsdMdlNode node;
-    u8 unk30[8];
-    u32 motion;             // 0x38
-};
 
 // Three extra slots follow the shared state, as in the cleanup code.
 struct StateWithExtraSlots {
@@ -25,6 +19,7 @@ void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
 void FUN_0028c618(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 void modelSelectPrimaryMotion(AsdMdlNode *node, f32 blend);
 void modelSelectSecondaryMotion(AsdMdlNode *node, u32 motion, f32 blend);
+u32 modelGetCurrentMotion(AsdMdlNode *node);
 
 /* Per-frame update of every active map-state slot's model: show or hide it with the map range and push its pending transform and motion. */
 void FUN_00275364(void)
@@ -47,7 +42,7 @@ void FUN_00275364(void)
                     if (slot->motion.mode != 0) {
                         nodeSetTranslation(model->node, 0, slot->motion.position);
                         FUN_0028c618(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
-                        if (((MotionNode *)model->node)->motion != slot->motion.elapsed) {
+                        if (modelGetCurrentMotion(model->node) != slot->motion.elapsed) {
                             modelSelectPrimaryMotion(model->node, 0.0f);
                             modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
                         }
@@ -85,7 +80,7 @@ void FUN_00275364(void)
                 if (slot->motion.mode != 0) {
                     nodeSetTranslation(model->node, 0, slot->motion.position);
                     FUN_0028c618(model->node, 0, 0.0f, slot->motion.heading, 0.0f);
-                    if (((MotionNode *)model->node)->motion != slot->motion.elapsed) {
+                    if (modelGetCurrentMotion(model->node) != slot->motion.elapsed) {
                         modelSelectPrimaryMotion(model->node, 0.0f);
                         modelSelectSecondaryMotion(model->node, slot->motion.elapsed, 0.0f);
                     }

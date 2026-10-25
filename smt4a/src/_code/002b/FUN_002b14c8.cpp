@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (219 vs 161 rows); retail unrolls the sprite bank loops and the row-state clears */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 // UI sprite header (0x8c bytes each).
@@ -32,7 +33,7 @@ extern u8 DAT_0052a544;
 extern u8 DAT_0052a560;
 
 void paramsClearPacket(void* screen);
-void paramsInit(void* screen, u8* a, s32 sizeA, u8* b, s32 sizeB, u8* c, s32 sizeC, u8* d, s32 sizeD, u8* e, s32 sizeE);
+
 void FUN_0014e188(void* sprite, s32 a, s32 b, void* owner, s32 c);
 void FUN_00387240(void* sprite, s32 a, s32 index);
 void FUN_0019e330(void* sprite, s32 a, s32 b);
@@ -65,7 +66,7 @@ void FUN_002b14c8(ListScreen* screen)
         screen->rowValue[i] = 0;
     }
     paramsClearPacket(screen);
-    paramsInit(screen, &DAT_0052a40c, 0xc, &DAT_0052a418, 0x9c, &DAT_0052a4b4, 0x90, &DAT_0052a544, 0x1c,
+    paramsInit(reinterpret_cast<UiResourceParameters *>(screen), &DAT_0052a40c, 0xc, &DAT_0052a418, 0x9c, &DAT_0052a4b4, 0x90, &DAT_0052a544, 0x1c,
                &DAT_0052a560, 0x40c);
 
     for (s32 i = 0; i < 10; i++) {

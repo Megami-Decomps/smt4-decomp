@@ -4,7 +4,7 @@
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
-extern u32 g_asdCecMessageBoxCriticalSection, DAT_004e62b4;
+extern u32 g_asdCecMessageBoxCriticalSection, g_asdCecMessageBoxStateCriticalSection;
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 u32 nn_cec_CTR_MessageBox_WriteBoxInfo(MessageBox *box, s32 kind, const void *header, const void *data);
@@ -58,18 +58,18 @@ void FUN_00238f4c(MessageBox *box, s32 preserveOpen)
     memClear(work->outboxData, sizeof(work->outboxData));
     work->message.words[0] = work->message.words[1] = 0;
     memClear(work->messageData, sizeof(work->messageData));
-    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
     if (flags->inboxOwned) {
         FUN_002399ec(work->inboxHandle);
         flags->inboxOwned = 0;
     }
-    nn_os_CriticalSection_Leave(&DAT_004e62b4);
-    nn_os_CriticalSection_Enter(&DAT_004e62b4);
+    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
+    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxStateCriticalSection);
     if (flags->outboxOwned) {
         FUN_002399ec(work->outboxHandle);
         flags->outboxOwned = 0;
     }
-    nn_os_CriticalSection_Leave(&DAT_004e62b4);
+    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxStateCriticalSection);
     work->inbox.signature = 0x6262;
     work->outbox.signature = 0x6262;
     work->message.signature = 0x6767;

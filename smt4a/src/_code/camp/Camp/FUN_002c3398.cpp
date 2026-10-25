@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c3398` (_code @ 0x2c3398, 0x644 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -16,7 +17,6 @@ int FUN_003f5220(...);
 
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
@@ -173,7 +173,7 @@ void FUN_002c3398(void)
   FUN_003423e8(0);
   puVar4 = puVar2 + 0x18e;
   paramsClearPacket();
-  paramsInit(puVar4,&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
+  paramsInit(reinterpret_cast<UiResourceParameters *>(puVar4),&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
                0x4d0);
   FUN_0014e188(puVar2 + 0x196,0x14,0,puVar4,0xc9);
   FUN_0014e188(puVar2 + 0x1b9,0x14,0,puVar4,0xc9);

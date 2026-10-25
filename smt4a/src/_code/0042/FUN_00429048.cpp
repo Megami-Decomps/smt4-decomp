@@ -32,7 +32,6 @@ s32 tokenResolveAddress(u32 context, WindowRequestEntry **entry, u32 token);
 s32 FUN_00427e28(RequestScratch *scratch, u8 *request, u32 flags);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
-WindowStatusResult nnAsyncMapOperationResult(u8 *request);
 
 extern u8 DAT_0061b000[];
 extern WindowRequestBuffer DAT_0061b030;

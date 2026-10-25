@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the quest scene update; constructor/strd result copy now match retail, but the build hoists the jobStop mode argument and the zero move ahead of the flag clear, allocates the tick counters in r0/r1 the other way round and loads the step PTMF adjustment before the pointer test. */
+/* NON_MATCHING: jobStop mode and result-constructor argument scheduling, plus the fast-tick modulo scratch registers, differ. */
 #include "addon/aocMain.h"
 #include "classes/AocMenu.h"
 #include "classes/WindowOperation.h"
@@ -71,7 +71,7 @@ void FUN_0047c36c(QuestScene *scene)
             jobStop(scene->childJob, 0);
         }
         WindowOperationResult *operation = &scene->operation;
-        operation->succeeded = true;
+        operation->status = 1;
         operation->first = 0;
         operation->result = WindowStatusResult(operation->first);
         FUN_0016ccb4(&g_aocMain->operation.queryResult);
@@ -91,11 +91,11 @@ void FUN_0047c36c(QuestScene *scene)
     for (s32 index = 0; index < 25; index++) {
         FUN_00163aa4((PanelSprite *)&scene->panels[index], 1.0f);
     }
-    scene->slowTick = (scene->slowTick + 1) % 20;
+    ++scene->slowTick;
+    scene->slowTick %= 20;
     scene->fastTick = (scene->fastTick + 1) % 30;
-    QuestSceneStep step = scene->steps[scene->state];
-    if (step != NULL) {
-        (scene->*step)();
+    if (scene->steps[scene->state] != NULL) {
+        (scene->*scene->steps[scene->state])();
     }
 }
 }

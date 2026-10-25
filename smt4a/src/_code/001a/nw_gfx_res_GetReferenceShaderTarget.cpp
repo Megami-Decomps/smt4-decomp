@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001a90f0. */
-extern unsigned int wstrlen(int);
+extern unsigned int libc_strlen(int);
 /* Supplied declaration required: nw_gfx_res_GetReferenceShaderTarget. */
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
@@ -52,7 +52,7 @@ void nw_gfx_res_GetReferenceShaderTarget(int *param_1,int param_2,int param_3)
     temp_v5 = 0;
   }
   if (!(temp_v5 == 0 || unaff_r6 == 0)) {
-    temp_v1 = wstrlen(unaff_r6);
+    temp_v1 = libc_strlen(unaff_r6);
     temp_v0 = nw_ut_ResDicPatricia_Get(&temp_v5,unaff_r6,temp_v1);
     if (temp_v0 != 0) {
       temp_v2 = *(int *)(temp_v0 + 0xc);

@@ -32,7 +32,7 @@ extern "C" {
 extern SndVoiceManager g_nnSndVoiceManager;
 extern u8 entry;
 void FUN_00439cc0(void *object);
-s32 emptyStub_002f4370(void *object, void (*destructor)(void *), void *moduleHandle);
+s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
 
 // Constructs the global voice manager (every voice, its implementation, and the voice table)
 // and registers its destructor.
@@ -50,6 +50,6 @@ void FUN_00511b34(void)
         manager->voiceTable[i]->impl = new (impl) SndVoiceImpl(i);
         impl++;
     }
-    emptyStub_002f4370(manager, FUN_00439cc0, &entry);
+    __aeabi_atexit(manager, FUN_00439cc0, &entry);
 }
 }

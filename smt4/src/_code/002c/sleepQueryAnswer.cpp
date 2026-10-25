@@ -6,12 +6,12 @@ extern "C" {
 void FUN_002c130c(s32 value);
 void nn_applet_CTR_detail_ReplySleepQueryToManager(u32 reply);
 
-extern u8 DAT_0044e3b0; /* 0x44e3b0 */
+extern u8 g_appletSleepModuleState; /* 0x44e3b0 */
 
 /* Clears the sleep-pending flag; when asked to, answers the sleep query. */
 void sleepQueryAnswer(s32 answer)
 {
-    DAT_0044e3b0 = 0;
+    g_appletSleepModuleState = 0;
     if (answer != 0) {
         FUN_002c130c(3);
         nn_applet_CTR_detail_ReplySleepQueryToManager(0);

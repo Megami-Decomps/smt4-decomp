@@ -1,5 +1,7 @@
 /* NON_MATCHING: compiler preserves an extra r8 in the element loop. */
-#include "common.h"
+#include "shard/Shard0036.h"
+
+struct ShaderColorState;
 
 extern "C" {
 
@@ -13,16 +15,16 @@ typedef struct ElementList {
     /* 0x110 */ s32 count;
 } ElementList;
 
-void FUN_003fe298(Element *element, u32 arg0, u32 arg1);
+void FUN_003fe298(ShaderColorState *state, u32 index, RgbaWord color);
 
 /* Calls FUN_003fe298 on every element of the list. */
-void FUN_003fd8dc(ElementList *list, u32 arg0, u32 arg1)
+void FUN_003fd8dc(ElementList *list, u32 index, RgbaWord color)
 {
     Element *element = list->elements;
     Element *end = element + list->count;
 
     for (; element != end; element++) {
-        FUN_003fe298(element, arg0, arg1);
+        FUN_003fe298(reinterpret_cast<ShaderColorState *>(element), index, color);
     }
 }
 

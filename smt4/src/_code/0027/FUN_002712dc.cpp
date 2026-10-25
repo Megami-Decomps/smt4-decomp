@@ -117,7 +117,7 @@ extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_deferredMapModels; /* 0x447e58 */
 extern int *g_lmapScene; /* 0x447e88 */
 extern int iRam00447e8c; /* 0x447e8c */
-extern float DAT_0049f8f8; /* 0x49f8f8 */
+extern float g_fixedCameraPosition; /* 0x49f8f8 */
 extern float DAT_0049f8fc; /* 0x49f8fc */
 extern float DAT_0049f900; /* 0x49f900 */
 extern unsigned int *g_gameState; /* 0x49f91c */
@@ -5042,7 +5042,7 @@ LAB_0027142c:
       temp_v20 = romwright_fabs_4(DAT_0049f8fc * 0.7111111f);
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= DAT_0049f900 * 0.7111111f) << 0x1d);
       temp_v29 = romwright_fabs_4(DAT_0049f900 * 0.7111111f);
-      for (temp_v27 = romwright_fabs_4(DAT_0049f8f8 * 0.7111111f); (int)temp_v27 >= 0x47800000;
+      for (temp_v27 = romwright_fabs_4(g_fixedCameraPosition * 0.7111111f); (int)temp_v27 >= 0x47800000;
           temp_v27 = temp_v27 - 65536.0f) {
       }
       for (; (int)temp_v20 >= 0x47800000; temp_v20 = temp_v20 - 65536.0f) {
@@ -5070,7 +5070,7 @@ LAB_0027142c:
                (temp_v29 - temp_v21) * (float)(&DAT_00407ed8)[temp_v24 * 4];
       temp_v29 = (float)(&DAT_00407ed4)[temp_v24 * 4] +
                (temp_v29 - temp_v21) * (float)(&DAT_00407edc)[temp_v24 * 4];
-      if (DAT_0049f8f8 * 0.7111111f < temp_v18) {
+      if (g_fixedCameraPosition * 0.7111111f < temp_v18) {
         temp_v26 = -temp_v26;
       }
       if (DAT_0049f8fc * 0.7111111f < temp_v18) {

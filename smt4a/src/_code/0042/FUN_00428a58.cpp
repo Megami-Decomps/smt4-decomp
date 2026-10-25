@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00428a58` (_code @ 0x428a58, 0x5e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "classes/WindowStatus.h"
 
 extern "C" {
 
 int FUN_0016cd0c(int *);
 int sysFatalBreak(void);
 int _ZN18WindowStatusResultC1Ej(...);
-int nnAsyncMapOperationResult(unsigned int *, unsigned char *);
 int FUN_00427ac4(unsigned int *, unsigned int);
 int FUN_00428308(unsigned int *, int);
 int FUN_004287ec(unsigned int, unsigned int, unsigned int, int);
@@ -220,7 +220,9 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         _ZN18WindowStatusResultC1Ej(temp_v18,0xc9413891);
         return;
       }
-      nnAsyncMapOperationResult(&temp_v10,&DAT_0061b000);
+      WindowStatusResult operationResult = nnAsyncMapOperationResult(&DAT_0061b000);
+      temp_v10 = operationResult.code;
+      temp_v11 = reinterpret_cast<unsigned char *>(operationResult.description);
       temp_v14 = temp_v10;
       puStack_54 = temp_v11;
       temp_v5 = legacyResourceIdRemap(&temp_v14);

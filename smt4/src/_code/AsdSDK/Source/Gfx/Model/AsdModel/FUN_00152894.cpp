@@ -41,7 +41,7 @@ extern u8 DAT_004dae3c;
 extern u8 DAT_004dae48;
 
 void asdFileRequestRelease(s32 request);
-void FUN_002b26d4(u8* list, s32 node);
+void indexedListErase(u8* list, s32 node);
 void resourceListDestroy(u32 list);
 void asdMemFree(u32 block);
 void nw_gfx_res_ResGraphicsFile_Cleanup(s32* resource);
@@ -107,7 +107,7 @@ void FUN_00152894(u32* model, s32 request, u32 unused, s32 unused2)
             if (*reinterpret_cast<u8*>(&file[1]) == 0) asdMemFree(file[3]);
             file[2] = 0;
             file[5] = 0;
-            FUN_002b26d4(&DAT_004dae3c, node);
+            indexedListErase(&DAT_004dae3c, node);
         }
         asdMemFree(reinterpret_cast<u32>(file));
         DAT_00464b28--;
@@ -116,7 +116,7 @@ void FUN_00152894(u32* model, s32 request, u32 unused, s32 unused2)
     asdMemFree(model[9]);
     model[9] = 0;
     s32 node = lookupListFindByKey(&DAT_004dae48, model);
-    if (node != 0) FUN_002b26d4(&DAT_004dae48, node);
+    if (node != 0) indexedListErase(&DAT_004dae48, node);
     asdMemFree(reinterpret_cast<u32>(model));
     DAT_00464b2c--;
 }

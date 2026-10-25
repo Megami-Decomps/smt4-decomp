@@ -34,7 +34,7 @@ void slotSetRequest(s32 slot, s32 kind, s32 value);
 s32 screenFadeIsBusy(void);
 void FUN_0029cc44(s32 value);
 void asdLoadFileAsyncSimple(const char *path, void *destination, s32 flags);
-ScriptProcess *FUN_00297060(void);
+ScriptProcess *FUN_00297060(void *file, u32 owner);
 }
 
 /* Steps the shop-exit sequence: runs the exit script, then the result screen and its script. */
@@ -78,7 +78,8 @@ extern "C" void FUN_003a3130(ShopExit *exit)
         break;
     case 3:
         if (exit->resultData != NULL && exit->resultMessages != NULL) {
-            exit->resultProcess = FUN_00297060();
+            exit->resultProcess = FUN_00297060(exit->resultData,
+                reinterpret_cast<u32>(exit->resultMessages));
             exit->resultProcess->mode = 2;
             scrScriptProcessStartEntry(exit->resultProcess, tableGroupFindEntryIndex(exit->resultData, "ProcCharRequestSecond"));
             exit->state = 4;

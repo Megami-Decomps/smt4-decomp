@@ -1,17 +1,7 @@
 /* NON_MATCHING: same as the IV twin - block layout and the version arithmetic schedule differ; the same stores and calls. */
-#include "common.h"
+#include "gfx/AnimationTemplate.h"
 
 namespace {
-/* An animation slot (0x20 bytes) as stored in the animation file. */
-struct AnimSlot {
-    /* 0x00 */ u32 id;           /* -1: unused */
-    /* 0x04 */ u16 unk04;
-    /* 0x06 */ u8 index;         /* index of the matching entry in the entry table, 0xff: none */
-    /* 0x07 */ u8 unk07;
-    /* 0x08 */ u8 unk08[0xc];
-    /* 0x14 */ f32 timing;
-    /* 0x18 */ u8 unk18[8];
-};
 
 /* A row of the entry table the slots are matched against (0x48 bytes). */
 struct AnimEntry {
@@ -30,29 +20,16 @@ struct AnimFile {
     /* 0x0c */ s32 size;
 };
 
-/* One unit-scale element of the default template (0x14 bytes). */
-struct AnimUnitScale {
-    u8 unk00[0x14];
-};
-
-/* The template FUN_0038aa84 reads: six parameters, a header and ten unit-scale elements. */
-struct AnimTemplate {
-    /* 0x00 */ f32 values[6];
-    /* 0x18 */ u32 header[4];
-    /* 0x28 */ AnimUnitScale scales[10];
-};
 }
 
 extern "C" {
-void unitTransformReset(AnimUnitScale *scale);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
-void __aeabi_vec_ctor_nocookie_nodtor(void *array, void (*ctor)(void *), u32 size, u32 count);
-void animSlotsSetStartFrames(AnimSlot *slots, u32 count, u32 startFrame, const AnimEntry *entries, s32 entryCount);
-void FUN_0038aa84(AnimSlot *slots, s32 maxSlots, const void *record, const AnimEntry *entries, s32 entryCount);
+void animSlotsSetStartFrames(AnimationSlot *slots, u32 count, u32 startFrame, const AnimEntry *entries, s32 entryCount);
+void FUN_0038aa84(AnimationSlot *slots, s32 maxSlots, const void *record, const AnimEntry *entries, s32 entryCount);
 
 /* Loads the animation slots described by `file` into `slots` (at most `maxSlots`) and matches them with
    the entry table; returns the slot count (or `slots` for the formats FUN_0038aa84 parses). */
-u32 FUN_0038a7dc(AnimSlot *slots, s32 maxSlots, const AnimFile *file, const AnimEntry *entries, s32 entryCount)
+u32 FUN_0038a7dc(AnimationSlot *slots, s32 maxSlots, const AnimFile *file, const AnimEntry *entries, s32 entryCount)
 {
     s32 version = ((file->version[0] - '0') * 1000 + file->version[1] * 100 + file->version[2] * 10 +
                    file->version[3]) - 5328;
@@ -107,16 +84,11 @@ u32 FUN_0038a7dc(AnimSlot *slots, s32 maxSlots, const AnimFile *file, const Anim
     }
     if (version < 1300) {
         const u32 *record = reinterpret_cast<const u32 *>(reinterpret_cast<const u8 *>(file) + file->offset);
-        AnimTemplate legacy;
-        legacy.header[0] = 0;
-        legacy.header[1] = 1;
-        legacy.header[2] = 1;
-        legacy.header[3] = 1;
-        __aeabi_vec_ctor_nocookie_nodtor(legacy.scales, reinterpret_cast<void (*)(void *)>(unitTransformReset), 20, 10);
-        legacy.header[0] = record[0];
-        legacy.header[1] = record[1];
-        legacy.header[2] = record[2];
-        legacy.header[3] = record[3];
+        AnimationTemplate legacy;
+        legacy.header0 = record[0];
+        legacy.header1 = record[1];
+        legacy.header2 = record[2];
+        legacy.header3 = record[3];
         __aeabi_memcpy4(legacy.scales, record + 4, 200);
         legacy.values[0] = 0.0f;
         legacy.values[1] = 5.0f;

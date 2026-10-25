@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler retains mode value in R5 and shares the result return differently than retail. */
+/* NON_MATCHING: cleanup result return is shared at function end rather than before the completed-script branch. */
 #include "battle/btlEvent.h"
 #include "battle/btlMain.h"
 #include "script/scrScriptProcess.h"
@@ -10,6 +10,7 @@ void FUN_00289880(void);
 void buttonHelpSetPreset(s32 preset);
 ScriptRunState *FUN_00297060(void *data, void *context);
 void scrScriptProcessStartEntry(ScriptRunState *runner, s32 entry);
+void scriptProcessSetMode(ScriptRunState *runner, s32 mode);
 s32 scrRunOpcodesStub(ScriptRunState *runner);
 void uiFadeRelease(void);
 void buttonHelpRelease(void);
@@ -25,7 +26,7 @@ u32 FUN_0023f074(BtlEvent *event)
         FUN_00289880();
         buttonHelpSetPreset(0xA9);
         event->runner = FUN_00297060(event->dataB, event->process);
-        event->runner->mode = 1;
+        scriptProcessSetMode(event->runner, 1);
         scrScriptProcessStartEntry(event->runner, 0);
         event->state = 7;
         u32 result;

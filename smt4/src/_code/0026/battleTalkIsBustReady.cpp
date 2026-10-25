@@ -9,7 +9,7 @@ struct BustUpRecordView {
 extern "C" {
 
 extern BustUpReadyWork *g_btlTalkBustUp;
-s32 recordGetSignedFlags(const void *record);
+s32 uiSpriteGetCompletionState(const void *record);
 
 /* An absent bust-up or a record with nonzero flags reports ready. */
 s32 battleTalkIsBustReady(void)
@@ -17,7 +17,7 @@ s32 battleTalkIsBustReady(void)
     if (g_btlTalkBustUp == NULL) {
         return 1;
     }
-    return recordGetSignedFlags(reinterpret_cast<BustUpRecordView *>(g_btlTalkBustUp)->record) != 0;
+    return uiSpriteGetCompletionState(reinterpret_cast<BustUpRecordView *>(g_btlTalkBustUp)->record) != 0;
 }
 
 } /* extern "C" */

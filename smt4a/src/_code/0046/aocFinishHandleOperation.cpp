@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AocMain *g_aocMain;
-AocHandleJob *FUN_001d25a0(u32 id, u32 flags);
+AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 id, u32 flags);
 WindowStatusResult sdkCreateEncodedResourceDescriptor(void *parameters, AocHandleSource *source);
 WindowStatusResult FUN_00426fe4(void *destination, void *source);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
@@ -14,7 +14,7 @@ int jyoucyuGetTableEntry(s32 index);
 // Finish the pending add-on handle operation, retaining recoverable errors.
 void aocFinishHandleOperation(u32 id, AocHandleSource *source)
 {
-    AocHandleJob *job = FUN_001d25a0(id, 0);
+    AocHandleJob *job = _ZN21WindowOperationResultC1Eh(id, 0);
     job->result = sdkCreateEncodedResourceDescriptor(source->parameters, source);
     if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
         job->state = 100;

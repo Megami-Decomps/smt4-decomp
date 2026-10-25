@@ -5,7 +5,7 @@
 
 extern "C" {
 BtlMainState *btlGetMainState();
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 kind, u32 options);
+
 
 u32 FUN_003de9e4(s32 actor, u32 options, u32 value)
 {

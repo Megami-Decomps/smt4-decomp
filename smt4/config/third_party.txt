@@ -1255,6 +1255,7 @@
 0x002258e4 nw_gfx_SceneHelper_CalculateDepth name
 0x00225990 nw_gfx_Model_IsMeshVisible name
 0x00225c1c FUN_00225c1c between
+0x00225cbc __aeabi_atexit name
 0x00225cc0 FUN_00225cc0 between
 0x00225e10 nw_gfx_TransformAnimBlendOp_BlendTranslate name
 0x00225e9c FUN_00225e9c between
@@ -1365,6 +1366,7 @@
 0x0027f3fc FUN_0027f3fc linker
 0x0027f404 FUN_0027f404 linker
 0x0027f40c FUN_0027f40c linker
+0x00282c30 __aeabi_ul2f name
 0x00282c38 __aeabi_l2f name
 0x00286180 nn_math_ARMv6_MTX33CopyAsm name
 0x00286198 FUN_00286198 between
@@ -1553,7 +1555,7 @@
 0x002b5838 nn_applet_CTR_detail_CallUtility name
 0x002b5904 FUN_002b5904 between
 0x002b5954 FUN_002b5954 between
-0x002b59b0 nn_fnd_DateTime_DateTime_sub_object name
+0x002b59b0 _ZN2nn3fnd8DateTimeC1Eiiiiiii name
 0x002b59e8 nn_dsp_CTR_DSP_LoadComponent name
 0x002b5a48 wstrlenU16 name
 0x002b5a5c FUN_002b5a5c between
@@ -1954,7 +1956,7 @@
 0x003573a0 FUN_003573a0 between
 0x003573a4 FUN_003573a4 between
 0x00357488 registerObj8Holder between
-0x003574a8 FUN_003574a8 between
+0x003574a8 _ZN2nn2os15CriticalSectionD1Ev name
 0x003574ac FUN_003574ac between
 0x0035750c nn_os_TransferMemoryBlock_Initialize name
 0x003575a0 FUN_003575a0 between
@@ -3072,7 +3074,7 @@
 0x003f72b4 FUN_003f72b4 between
 0x003f72d0 FUN_003f72d0 between
 0x003f72e8 FUN_003f72e8 between
-0x003f7300 FUN_003f7300 between
+0x003f7300 _ZN9Obj420fd06notifyEv between
 0x003f7308 FUN_003f7308 between
 0x003f732c FUN_003f732c between
 0x003f7344 FUN_003f7344 between

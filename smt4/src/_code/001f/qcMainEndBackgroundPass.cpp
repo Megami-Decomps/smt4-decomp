@@ -15,7 +15,7 @@ extern QuestCenterGlobals g_qcMain;
 void renderCtxEndPass(TitleDbgBgObj *background);
 
 /* Finish the optional quest-center background pass. */
-s32 qcMainEndBackgroundPass(void)
+s32 qcMainEndBackgroundPass(u32 handle)
 {
     if (g_qcMain.work != NULL && g_qcMain.work->background != NULL) {
         renderCtxEndPass(g_qcMain.work->background);

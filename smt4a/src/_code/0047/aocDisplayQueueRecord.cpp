@@ -13,7 +13,7 @@ void FUN_001b9fe4(AocDisplay *display);
 void FUN_001ba0c8(AocDisplay *display, const FileQueueRequest *request);
 void FUN_001a6c40(FileQueueRequest *request);
 void FUN_0019a46c(u8 *destination, const char *path, u32 capacity);
-u32 wstrlen(const char *path);
+u32 libc_strlen(const char *path);
 
 /* Queues a file load for the display: one path, or two (the second is stored after the first). */
 void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *secondPath, u32 *completion,
@@ -21,8 +21,8 @@ void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *se
 {
     if (secondPath != NULL) {
         FileQueueRequest request;
-        wstrlen(path);
-        wstrlen(secondPath);
+        libc_strlen(path);
+        libc_strlen(secondPath);
         FUN_001a6c40(&request);
         FUN_0019a46c(request.path, path, 0x40);
         FUN_0019a46c(request.path + 0x40, secondPath, 0x40);
@@ -40,7 +40,7 @@ void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *se
         return;
     }
     FileQueueSingleRequest request;
-    wstrlen(path);
+    libc_strlen(path);
     FUN_001a6c40(&request);
     FUN_0019a46c(request.path, path, 0x40);
     request.mode = mode;

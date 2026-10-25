@@ -5,7 +5,7 @@ struct ReflectedMemberStatus { u8 unk00[0xfa]; u16 flags; };
 extern "C" {
 void *btlGetMainState();
 ReflectedMemberStatus *FUN_0027da30(void *battle, s32 member);
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s16 actor, s16 secondary, u32 options);
+
 
 // Queue a status clear and, when no blocking status remains, the follow-up recovery actions.
 u32 FUN_00246d38(s16 actor, u32 options, ReflectTarget *target, u32 mask)

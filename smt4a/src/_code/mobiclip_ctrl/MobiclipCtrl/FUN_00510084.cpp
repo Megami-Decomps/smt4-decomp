@@ -22,8 +22,7 @@ extern "C" {
 extern u8 g_mobiclipSlots[0x210];
 extern u8 entry;
 
-__weak s32 __aeabi_atexit(void* object, void (*destroy)(void*), void* module);
-void emptyStub_002f4370(void* object, void (*destroy)(void*), void* module);
+s32 __aeabi_atexit(void* object, void (*destroy)(void*), void* module);
 void expHeapBaseDestroyA(void* object);
 
 // Clears the six slot objects and registers their finalizers.

@@ -687,7 +687,7 @@ struct NngxInitializationPrefixIV {
     u8 configurationInitialized;
     const char *configuration;
     u8 unknown08[8];
-    u32 configuredGpu; /* DAT_00471a80 aliases this member. */
+    u32 configuredGpu; /* g_nngxCommandStates aliases this member. */
     u32 acquiredGpu;   /* g_nngxGpu aliases this member. */
     u8 unknown18[4];
     NngxCommandPrefixIV *commandState;

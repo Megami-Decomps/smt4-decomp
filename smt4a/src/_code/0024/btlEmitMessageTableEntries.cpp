@@ -25,7 +25,7 @@ extern "C" {
 extern void *g_btlAux;
 extern BattleMessageMask g_btlMessageFlagMasks;
 void *btlGetMainState();
-s32 wstrlen(const char *);
+s32 libc_strlen(const char *);
 s32 libc_strcmp(const char *, const char *);
 BattleMessageFlags *FUN_003f0e20(void *battle, s32 target);
 s32 btlUnitGetSkillValue(void *unit);
@@ -38,7 +38,7 @@ void btlEmitMessageTableEntries(s32 actor, u32 unused, BattleMessageTable *table
     void *battle = btlGetMainState();
     for (s32 index = 0; index < 4; ++index) {
         const char *text = table->entries[index].text;
-        if (wstrlen(text) != 0 && libc_strcmp(text, "0") != 0) {
+        if (libc_strlen(text) != 0 && libc_strcmp(text, "0") != 0) {
             u16 type = table->entries[index].type;
             s32 value = btlUnitGetSkillValue(g_btlAux) * multiplier;
             u32 side = 1;

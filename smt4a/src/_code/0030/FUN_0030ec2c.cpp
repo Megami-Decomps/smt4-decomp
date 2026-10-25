@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e4064(void);
-int emptyStub_002f4370(unsigned int, unsigned char *, int);
+int __aeabi_atexit(unsigned int, unsigned char *, int);
 
 extern unsigned char LAB_0030eb1d; /* 0x30eb1d */
 extern unsigned int DAT_005c4bf0; /* 0x5c4bf0 */
@@ -15,7 +15,7 @@ extern int DAT_005c4c00; /* 0x5c4c00 */
 
 /* Supplied declaration required: FUN_002e4064. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: emptyStub_002f4370. */
+/* Supplied declaration required: __aeabi_atexit. */
 extern unsigned int FUN_0030ebc0(unsigned char *, unsigned int);
 
 
@@ -31,7 +31,7 @@ unsigned char * FUN_0030ec2c(void)
   }
   if (((DAT_005c4bf0 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4bf0), temp_v0 != 0)) {
     temp_v1 = FUN_0030ebc0(&DAT_005c4bf4,DAT_005c4bf8);
-    emptyStub_002f4370(temp_v1,&LAB_0030eb1d,0x100000);
+    __aeabi_atexit(temp_v1,&LAB_0030eb1d,0x100000);
   }
   return &DAT_005c4bf4;
 }

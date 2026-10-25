@@ -36,7 +36,7 @@ struct TextureSlot {
 extern "C" {
 void FUN_002a4e18(u8 *state, s32 source);
 void aocSlotRelease(TextureSlot *slot);
-TextureEntry *FUN_002aecd8(s32 sprite, s32 index);
+TextureEntry *aocContentGetIndexedRecord(s32 sprite, s32 index);
 void uiSpriteReplaceTextureEntry(TextureSlot *slot, u16 id, s32 mode);
 
 // Starts the slot's effect `mode` (1..9) with `requested` frames (0 selects the mode's default), then queues the
@@ -138,7 +138,7 @@ void FUN_002a880c(TextureSlot *slot, u32 mode, s32 requested)
         break;
     }
     if (slot->active != 0 && slot->busy == 0 && slot->pending == -1 && slot->sprite != 0) {
-        TextureEntry *entry = FUN_002aecd8(slot->sprite, 1);
+        TextureEntry *entry = aocContentGetIndexedRecord(slot->sprite, 1);
         uiSpriteReplaceTextureEntry(slot, entry->id, -1);
     }
 }

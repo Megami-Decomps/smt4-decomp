@@ -59,7 +59,7 @@ struct MapHeading {
 extern "C" {
 extern MapEnvironmentState g_mapTable;
 extern MapEnvironmentGameView g_gameState;
-extern MapHeading DAT_0049f8f8;
+extern MapHeading g_fixedCameraPosition;
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void FUN_002c58c8(u32 table, u32 node);
 s32 FUN_002c1c0c(u32 table, u32 node);
@@ -134,9 +134,9 @@ void FUN_001e4284(u32 preset, s32 transition)
     g_gameState.unk3c0 = entry->unk28[5];
     g_gameState.unk3c4 = entry->unk28[6];
     g_gameState.unk3c8 = entry->unk28[7];
-    DAT_0049f8f8.degrees = (f32)entry->unk1A + 180.0f;
-    if (DAT_0049f8f8.degrees > 360.0f) {
-        DAT_0049f8f8.degrees -= 360.0f;
+    g_fixedCameraPosition.degrees = (f32)entry->unk1A + 180.0f;
+    if (g_fixedCameraPosition.degrees > 360.0f) {
+        g_fixedCameraPosition.degrees -= 360.0f;
     }
     g_mapTable.unk38 = 0;
     FUN_0025b754();

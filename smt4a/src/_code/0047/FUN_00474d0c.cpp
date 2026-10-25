@@ -19,7 +19,6 @@ int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int FUN_0037a728(...);
 int FUN_00426eb8(...);
-int FUN_00428060(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
 int holderOwnerFree(...);
@@ -29,7 +28,7 @@ int FUN_004fff5c(...);
 int FUN_004fffc0(...);
 int FUN_00500054(...);
 int table30GetEntryB(unsigned char [64], unsigned int, unsigned int);
-int nn_fnd_DateTime_DateTime_sub_object(...);
+int _ZN2nn3fnd8DateTimeC1Eiiiiiii(...);
 
 /* stack frame of param_1: 35 slot(s), 140 byte(s) */
 typedef struct {
@@ -105,7 +104,7 @@ extern int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: FUN_004fffc0. */
 /* Supplied declaration required: FUN_00500054. */
 /* Supplied declaration required: table30GetEntryB. */
-/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
+/* Supplied declaration required: _ZN2nn3fnd8DateTimeC1Eiiiiiii. */
 extern int nn_fnd_DateTime_GetDay(unsigned int);
 extern int nn_fnd_DateTime_GetMonth(unsigned int);
 extern int nn_fnd_DateTime_GetYear(unsigned int);
@@ -457,11 +456,11 @@ int FUN_00474d0c(int param_1)
           temp_v13 = static_cast<u16>(FUN_001029f4(temp_v13,0,10));
           *(short *)(temp_v45 + 0xa8) = (short)temp_v13;
           if ((temp_v13 & 0xffff) != 0xffff) {
-            ValidationPair iconResult = archiveReadIcon(
+            WindowStatusResult iconResult = archiveReadIcon(
                 reinterpret_cast<const ArchiveIconSource *>(temp_v8 + 0x28),
                 reinterpret_cast<void *>(temp_v48), temp_v13);
-            *(int *)(temp_v51 + 0xc) = static_cast<s32>(iconResult.first);
-            *(unsigned int *)(temp_v51 + 0x10) = iconResult.second;
+            *(int *)(temp_v51 + 0xc) = static_cast<s32>(iconResult.code);
+            *(unsigned int *)(temp_v51 + 0x10) = iconResult.description;
             temp_v9 = legacyResourceIdRemap(temp_v51 + 0xc);
             if (temp_v9 < 0) {
               return temp_v9;
@@ -496,7 +495,10 @@ int FUN_00474d0c(int param_1)
           uStack_1bdc = temp_v23;
           temp_v26 = temp_v24;
           uStack_1bd4 = uStack_1bf4;
-          FUN_00428060(&temp_v14,temp_v8 + 0x84,&uStack_1bc8,&temp_v25);
+          WindowStatusResult parsedResult = FUN_00428060(
+              reinterpret_cast<void *>(temp_v8 + 0x84), &uStack_1bc8, &temp_v25);
+          temp_v14 = static_cast<s32>(parsedResult.code);
+          temp_v15 = parsedResult.description;
           *(int *)(temp_v51 + 0xc) = temp_v14;
           *(unsigned int *)(temp_v51 + 0x10) = temp_v15;
           temp_v9 = legacyResourceIdRemap(temp_v51 + 0xc);
@@ -596,7 +598,7 @@ int FUN_00474d0c(int param_1)
           temp_v15 = 0;
           temp_v16 = 0;
           temp_v17 = (unsigned char *)0x0;
-          nn_fnd_DateTime_DateTime_sub_object(puVar13,0x7b2,1);
+          _ZN2nn3fnd8DateTimeC1Eiiiiiii(puVar13,0x7b2,1);
           temp_v6 = puVar13[1];
           *(unsigned int *)(temp_v4 + 0x9a0) = *puVar13;
           *(unsigned int *)(temp_v4 + 0x9a4) = temp_v6;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: Retail caches the next queue link before matching; native traversal reloads it after the condition. */
 #include "battle/btlReflect.h"
-extern "C" ReflectAction* btlQueueReflectAction(ReflectContext*, s16, u16, u32);
+extern "C" 
 
 extern "C" void FUN_00229a3c(s32 actorId, u32 options, u32 value, u32 parameter, u32 checkDuplicates)
 {

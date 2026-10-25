@@ -26,7 +26,7 @@ PolyWindBlock *effPolyWindGeomClone0(PolyObject *obj)
     block->data = block->payload;
     block->self = block;
     sides = params->sides;
-    if (sides < 4) {
+    if (sides <= 3) {
         sides = 3;
     }
     params->sides = sides;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037b7e4` (_code @ 0x37b7e4, 0x518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +8,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
-int paramsInit(...);
+
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_001654f8(...);
@@ -115,12 +116,9 @@ void FUN_0037b7e4(void)
   puVar2[1] = 0;
   asdTMTexLoadMainHeap(0x2e,1);
   paramsClearPacket(puVar2 + 0x26);
-  temp_v10 = &DAT_0052c284;
-  temp_v7 = 0x30;
-  temp_v11 = 0x4d0;
-  temp_v8 = (unsigned char *)0x0;
-  temp_v9 = 0;
-  paramsInit(puVar2 + 0x26,&DAT_0052c050,0xb4,&DAT_0052c104,0x150,&DAT_0052c254);
+  paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0x26),
+      &DAT_0052c050, 0xb4, &DAT_0052c104, 0x150, &DAT_0052c254, 0x30,
+      NULL, 0, &DAT_0052c284, 0x4d0);
   FUN_0014e188(puVar2 + 3,0x2e,1000,puVar2 + 0x26,0x65);
   temp_v5 = 0;
   do {

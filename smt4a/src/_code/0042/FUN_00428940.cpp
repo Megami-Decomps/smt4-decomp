@@ -4,9 +4,7 @@
 
 extern "C" {
 u32 FUN_00427ac4(void *archive, u32 mode);
-u32 FUN_004283cc(void *file);
 WindowStatusResult FUN_00429210(void *file, void *archive, const u16 *path, u32 flags);
-void recordValidatePair(void *file, WindowStatusResult result);
 
 WindowStatusResult FUN_00428940(void *file, void *archive, const u16 *path, u32 flags)
 {

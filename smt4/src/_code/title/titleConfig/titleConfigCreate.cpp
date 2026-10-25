@@ -44,9 +44,7 @@ s32 titleConfigUpdate(void);
 void titleConfigDestroy(void);
 s32 FUN_002cb054(void);
 void drawParameterBlockClear(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *first, u16 firstCount,
-                 const void *second, u16 secondCount, const void *third, u16 thirdCount,
-                 const void *fourth, u16 fourthCount, const void *fifth, u16 fifthCount);
+
 void FUN_002bd954(SpritePlaybackView *sprite, s32 kind, s32 count,
                    UiResourceParameters *resources, u16 flags, f32 speed);
 void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);

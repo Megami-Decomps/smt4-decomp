@@ -1,6 +1,6 @@
 /* NON_MATCHING: paramsInit length setup uses an extra MOV and grouped-default relocation differs. */
 #include "font/SearchWin/SearchWin.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 
 struct SearchWindowDefaults {
@@ -22,9 +22,9 @@ s32 FUN_001ad180(u32);
 void FUN_001acdd8(u32);
 u32 asdProcessCreateSimple(const char *, s32, s32, s32, s32 (*)(u32), void *, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
-void drawParameterBlockClear(Params002c312c *);
-void paramsInit(Params002c312c *, const void *, u32, const void *, u32, u32, u32, u32, u32, const void *, u32);
-void FUN_002bd954(void *, s32, s32, Params002c312c *, s32, f32);
+void drawParameterBlockClear(UiResourceParameters *);
+
+void FUN_002bd954(void *, s32, s32, UiResourceParameters *, s32, f32);
 void spriteStartAnimationByIndex(void *, s32);
 
 // Initialize the search-window process, both stereo draw jobs and its animated parameter block.
@@ -33,7 +33,7 @@ void FUN_002cedd8(void)
     // The shared byte padding starts at an unaligned offset, so retain a local aligned member view.
     struct DrawingView {
         u8 prefix[0x18];
-        Params002c312c parameters;
+        UiResourceParameters parameters;
         u8 animation[0xAC];
     };
     if (DAT_0043e170 == NULL) {

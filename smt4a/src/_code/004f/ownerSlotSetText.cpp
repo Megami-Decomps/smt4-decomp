@@ -23,7 +23,7 @@ typedef struct Owner {
 } Owner;
 
 int FUN_001a7a20(void *payload, u32 value, u32 arg);
-u32 wstrlen(u32 value);
+u32 libc_strlen(u32 value);
 
 /* Forwards `value` to the payload of the slot of the owner's holder (or of the owner's own embedded holder when it has none). */
 void ownerSlotSetText(Owner *owner, u32 value)
@@ -36,7 +36,7 @@ void ownerSlotSetText(Owner *owner, u32 value)
         holder = (Holder *)((u8 *)holder + 0xc);
     }
     slot = &holder->inner->slot;
-    arg = wstrlen(value);
+    arg = libc_strlen(value);
     FUN_001a7a20(slot->payload, value, arg);
 }
 

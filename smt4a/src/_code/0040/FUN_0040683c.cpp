@@ -4,7 +4,7 @@
 
 extern "C" {
 
-u32 wstrlen(const u16 *str);
+u32 libc_strlen(const u16 *str);
 u32 FUN_001a7a20(void *dictionary, const u16 *str, u32 length);
 void FUN_004064a8(UiLookupObj *obj, u32 slot, UiFoundEntry *entry, u32 handle);
 
@@ -30,7 +30,7 @@ void FUN_0040683c(UiLookupObj *obj)
         for (u32 i = 0; i < list->count; i++) {
             UiContext *context = owner->context;
             const u16 *name = list->names[i];
-            u32 key = FUN_001a7a20(context->dictionary, name, wstrlen(name));
+            u32 key = FUN_001a7a20(context->dictionary, name, libc_strlen(name));
 
             if (key != UILOOKUP_NOT_FOUND) {
                 UiFoundEntry *entry = owner->context->entries[key];

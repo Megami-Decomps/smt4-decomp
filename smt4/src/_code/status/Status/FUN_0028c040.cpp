@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028c040` (_code @ 0x28c040, 0x5a8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -8,7 +9,7 @@ int uiSpriteSetImageKeyframe(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int spriteStartAnimationByIndex(...);
-int paramsInit(...);
+
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -94,7 +95,7 @@ void FUN_0028c040(void)
     *(unsigned char *)(puVar1 + 0x79f) = 0;
     *(unsigned char *)((int)puVar1 + 0x1e7d) = 0;
     drawParameterBlockClear(puVar1 + 9);
-    paramsInit(puVar1 + 9,&DAT_00407728,0xb4,&DAT_004077dc,0x90,0,0,0,0,&DAT_0040786c,0x348);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(puVar1 + 9), &DAT_00407728,0xb4,&DAT_004077dc,0x90,0,0,0,0,&DAT_0040786c,0x348);
     FUN_002bd954(puVar1 + 0xe3,0x17,0,puVar1 + 9,1);
     timerStart(puVar1 + 0xe3,1,0);
     FUN_002bd954(puVar1 + 0x106,0x1a,1,puVar1 + 9,1);

@@ -423,11 +423,11 @@ int FUN_004760bc(int param_1)
         temp_v10 = static_cast<u16>(FUN_001029f4(temp_v10,0,10));
         *(short *)(temp_v39 + 0xa8) = (short)temp_v10;
         if ((temp_v10 & 0xffff) != 0xffff) {
-          ValidationPair iconResult = archiveReadIcon(
+          WindowStatusResult iconResult = archiveReadIcon(
               reinterpret_cast<const ArchiveIconSource *>(temp_v5 + 0x28),
               reinterpret_cast<void *>(temp_v40), temp_v10);
-          *(int *)(temp_v43 + 0xc) = static_cast<s32>(iconResult.first);
-          *(unsigned int *)(temp_v43 + 0x10) = iconResult.second;
+          *(int *)(temp_v43 + 0xc) = static_cast<s32>(iconResult.code);
+          *(unsigned int *)(temp_v43 + 0x10) = iconResult.description;
           temp_v6 = legacyResourceIdRemap(temp_v43 + 0xc);
           if (temp_v6 < 0) {
             return temp_v6;

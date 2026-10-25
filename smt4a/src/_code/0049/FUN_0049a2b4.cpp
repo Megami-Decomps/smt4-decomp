@@ -32,7 +32,7 @@ s32 useCounterGetValue(void);
 void FUN_003343f0(u8 value);
 void FUN_00498ff0(SortMenu *menu);
 u32 flaggedValueHolderGetTotal(const void *holder);
-u8 FUN_002c7c54(void);
+u8 useCounterGetCurrentValue(void);
 void arraySortQsort(void *entries, u32 count, u32 size, SortCompare compare);
 s32 FUN_004938d0(const void *, const void *);
 s32 halfDifference(const void *, const void *);
@@ -90,7 +90,7 @@ void FUN_0049a2b4(SortMenu *menu)
     } else {
         SortList *list = &menu->lists[menu->page];
         flaggedValueHolderGetTotal(menu->holders[menu->page]);
-        s32 order = FUN_002c7c54();
+        s32 order = useCounterGetCurrentValue();
         if (order == 0xf) {
             if (useCounterGetValue() == 0) {
                 arraySortQsort(list->entries, list->count, 4, FUN_004943bc);

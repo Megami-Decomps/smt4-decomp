@@ -25,12 +25,11 @@ void FUN_004ab8e4(void)
         slot->x = 0;
         slot->y = 0;
         slot->requested = 0;
-        if (index == 1)
-            slot->portrait = 669;
-        else if (index == 0)
-            slot->portrait = -1;
-        else
-            slot->portrait = 0;
+        switch ((u8)index) {
+        case 0: slot->portrait = -1; break;
+        case 1: slot->portrait = 669; break;
+        default: slot->portrait = 0; break;
+        }
         if (slot->portrait != 0 && !devilIsTextureLoaded((s16)slot->portrait, 1)) {
             FUN_00371c3c((s16)slot->portrait, 1);
             slot->requested = 1;

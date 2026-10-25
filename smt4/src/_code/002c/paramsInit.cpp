@@ -1,21 +1,24 @@
 /* NON_MATCHING: register allocation and store grouping only: retail loads the stack halfwords into r6,r5,ip,r4 and stores the two words with writeback (str [r0,#12]!; str [r0,#4]!), the build uses r4-r6 in order and stm */
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 extern "C" {
 
 /* Fills a parameter block from its arguments (interleaved halfwords, words). */
-void paramsInit(Params002c312c *params, u32 w0c, u16 h0, u32 w10, u16 h2, u32 w14, u16 h4, u32 w18, u16 h6, u32 w1c, u16 h8)
+void paramsInit(UiResourceParameters *parameters,
+    const void *first, u16 firstBytes, const void *second, u16 secondBytes,
+    const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes,
+    const void *fifth, u16 fifthBytes)
 {
-    params->h0 = h0;
-    params->h2 = h2;
-    params->h4 = h4;
-    params->h6 = h6;
-    params->h8 = h8;
-    params->w0c = w0c;
-    params->w10 = w10;
-    params->w14 = w14;
-    params->w18 = w18;
-    params->w1c = w1c;
+    parameters->counts[0] = firstBytes;
+    parameters->counts[1] = secondBytes;
+    parameters->counts[2] = thirdBytes;
+    parameters->counts[3] = fourthBytes;
+    parameters->counts[4] = fifthBytes;
+    parameters->chunks[0] = first;
+    parameters->chunks[1] = second;
+    parameters->chunks[2] = third;
+    parameters->chunks[3] = fourth;
+    parameters->chunks[4] = fifth;
 }
 
 } /* extern "C" */

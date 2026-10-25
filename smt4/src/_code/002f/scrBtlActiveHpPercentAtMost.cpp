@@ -1,21 +1,11 @@
-#include "common.h"
+#include "battle/EntryStats.h"
 
 extern "C" {
 
-typedef struct BtlEntryStats {
-    /* 0x00 */ u8 unk00[0xE8];
-    /* 0xE8 */ s16 hp;
-    /* 0xEA */ s16 maxHp;
-} BtlEntryStats;
-
-typedef struct BtlActiveEntry {
-    /* 0x00 */ u8 unk00[0xCC];
-    /* 0xCC */ BtlEntryStats stats;
-} BtlActiveEntry;
 
 extern s32 scrGetArg(u32 index);
-extern void btlGetMainState(void);
-extern BtlActiveEntry *btlMainFindActiveEntry(void);
+extern BtlMainState *btlGetMainState(void);
+extern BtlActiveEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern void scrSetResult(s32 value);
 
 /* Script command: 1 when the active entry's HP percentage is at most the argument, else 0. */
@@ -24,8 +14,7 @@ u32 scrBtlActiveHpPercentAtMost(void)
     s32 threshold = scrGetArg(0);
     BtlActiveEntry *entry;
 
-    btlGetMainState();
-    entry = btlMainFindActiveEntry();
+    entry = btlMainFindActiveEntry(btlGetMainState());
     if (entry != NULL) {
         BtlEntryStats *stats = &entry->stats;
 

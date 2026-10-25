@@ -17,7 +17,7 @@ struct SystemInfo {
     u16 unk02;
 };
 
-extern CriticalSection DAT_0061a638;
+extern CriticalSection g_moduleCriticalSection5;
 extern u8 DAT_0056a000;
 extern SettingsBlock DAT_0056c000;
 s32 FUN_00189738(void *out, u32 size, u32 operation);
@@ -33,15 +33,15 @@ u8 FUN_004310c0(void)
     if (nnResultIsFailure(result)) {
         FUN_0016e800(result, location);
     }
-    nn_os_CriticalSection_Enter(&DAT_0061a638);
+    nn_os_CriticalSection_Enter(&g_moduleCriticalSection5);
     s32 status = FUN_0042a44c(&DAT_0056a000);
     if ((s32)(status & 0x80000000) < 0) {
-        nn_os_CriticalSection_Leave(&DAT_0061a638);
+        nn_os_CriticalSection_Leave(&g_moduleCriticalSection5);
         return 0;
     }
     u32 limitLow = DAT_0056c000.limit[0];
     u32 limitHigh = DAT_0056c000.limit[1];
-    nn_os_CriticalSection_Leave(&DAT_0061a638);
+    nn_os_CriticalSection_Leave(&g_moduleCriticalSection5);
     return info.value >= (limitLow | (limitHigh << 8));
 }
 

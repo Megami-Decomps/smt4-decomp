@@ -1,5 +1,5 @@
 /* NON_MATCHING: final reset-store scheduling differs and grouped defaults use a base-plus-offset relocation. */
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "quest_center/QuestRuntime.h"
 
 struct QuestCenterScreenStateIV {
@@ -11,7 +11,7 @@ struct QuestCenterScreenStateIV {
     u32 unk018;
     s32 selectedQuest;
     u32 tableControl;
-    Params002c312c parameters;
+    UiResourceParameters parameters;
     u8 unk044[0x248];
     u32 texts[4];
     u8 unk29c[0x300];
@@ -40,8 +40,8 @@ extern const QuestCenterDrawDefaultsIV DAT_004057a8;
 void FUN_003852c8(void);
 void memClear(void *buffer, u32 size);
 void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 options);
-void drawParameterBlockClear(Params002c312c *parameters);
-void paramsInit(Params002c312c *, u32, u16, u32, u16, u32, u16, u32, u16, u32, u16);
+void drawParameterBlockClear(UiResourceParameters *parameters);
+
 void dataTable27Load(u32 *control);
 void FUN_00385aec(u32 *control);
 void FUN_00385af4(u32 *control);
@@ -75,8 +75,8 @@ void FUN_00381b8c(QuestCenterScreenStateIV *work)
     asdLoadFileAsyncSimple("quest_center/common/qc_common.bf", &work->messageFile, 0);
     asdLoadFileAsyncSimple("quest_center/common/qc_common.mbm", &work->modelFile, 0);
     drawParameterBlockClear(&work->parameters);
-    paramsInit(&work->parameters, 0, 0, reinterpret_cast<u32>(DAT_004057a8.first), sizeof(DAT_004057a8.first),
-               0, 0, 0, 0, reinterpret_cast<u32>(DAT_004057a8.second), sizeof(DAT_004057a8.second));
+    paramsInit(&work->parameters, 0, 0, DAT_004057a8.first, sizeof(DAT_004057a8.first),
+               0, 0, 0, 0, DAT_004057a8.second, sizeof(DAT_004057a8.second));
     dataTable27Load(&work->tableControl);
     FUN_00385aec(&work->tableControl);
     FUN_00385af4(&work->tableControl);

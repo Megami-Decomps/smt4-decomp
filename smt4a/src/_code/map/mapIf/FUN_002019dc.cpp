@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the three corner-quad tables differ: retail walks base, base+1584, base+1584*2 chained from one pointer and orders the stores differently; here each table is addressed from the global with its own offset. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct MapIfVec3 {
     f32 x, y, z;
@@ -61,14 +62,14 @@ typedef char MapIfSizeCheck[sizeof(MapIf) == 0xCD30 ? 1 : -1];
 
 extern "C" {
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
-u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 argument, void (*update)(), void (*draw)(),
-                   void *work, u32 parent);
+u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 parent);
 void FUN_002747dc(void);
-void FUN_00226538(void);
-void mapIfFree(void);
-void FUN_0029d760(void);
-void FUN_00315d34(void);
-void mapIfDrawWorldIndicators(void);
+s32 FUN_00226538(u32 handle);
+void mapIfFree(u32 handle);
+s32 FUN_0029d760(u32 handle);
+s32 FUN_00315d34(u32 handle);
+s32 mapIfDrawWorldIndicators(u32 handle);
 
 extern MapIf *g_mapIf;
 extern const char DAT_00201a50[];

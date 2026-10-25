@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern unsigned int wstrlen(int);
+extern unsigned int libc_strlen(int);
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
 
@@ -50,7 +50,7 @@ void FUN_0018df80(int *param_1,int param_2,int param_3)
     temp_v5 = 0;
   }
   if (!(temp_v5 == 0 || unaff_r6 == 0)) {
-    temp_v1 = wstrlen(unaff_r6);
+    temp_v1 = libc_strlen(unaff_r6);
     temp_v0 = nw_ut_ResDicPatricia_Get(&temp_v5,unaff_r6,temp_v1);
     if (temp_v0 != 0) {
       temp_v2 = *(int *)(temp_v0 + 0xc);
@@ -77,7 +77,7 @@ void FUN_0018df80(int *param_1,int param_2,int param_3)
       temp_v5 = 0;
     }
     if (!(temp_v5 == 0 || unaff_r7 == 0)) {
-      temp_v1 = wstrlen(unaff_r7);
+      temp_v1 = libc_strlen(unaff_r7);
       temp_v0 = nw_ut_ResDicPatricia_Get(&temp_v5,unaff_r7,temp_v1);
       if (temp_v0 != 0) {
         temp_v2 = *(int *)(temp_v0 + 0xc);

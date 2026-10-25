@@ -66,7 +66,7 @@ extern s32 DAT_005b3c74;
 extern TypeInfo DAT_005c0f18;
 extern TypeInfo DAT_005c0f34;
 
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 ShadowNode *nw_ut_ResDicPatricia_Get(void *dictionary, const char *name, u32 length);
 void FUN_001b5314(MeshObject *mesh, s32 mode, f32 depth);
 
@@ -116,7 +116,7 @@ u32 FUN_001acca0(TypedObject *object)
             ShadowNode *node = NULL;
 
             if (dictionary != NULL) {
-                ShadowNode *found = nw_ut_ResDicPatricia_Get(&dictionary, "shadow", wstrlen("shadow"));
+                ShadowNode *found = nw_ut_ResDicPatricia_Get(&dictionary, "shadow", libc_strlen("shadow"));
 
                 if (found != NULL) {
                     node = (ShadowNode *)resolveOffset((s32 *)((u8 *)found + 0xC));

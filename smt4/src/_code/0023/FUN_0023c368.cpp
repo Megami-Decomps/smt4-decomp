@@ -1,7 +1,7 @@
 /* NON_MATCHING: saved argument registers and the second action's constant/store schedule differ; packed float payloads now use VFP. */
 #include "battle/btlReflect.h"
 
-extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+extern "C" 
 
 /* Queue a start/end pair with separate scalar payloads. */
 extern "C" u32 FUN_0023c368(s32 actor, u32 options, u32 target, u32 parameter,

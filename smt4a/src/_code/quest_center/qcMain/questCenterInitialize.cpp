@@ -29,23 +29,22 @@ void questCenterInitialize(const s32 *arguments, u32 argumentBytes)
     work->done = 0;
     work->entry = NULL;
     work->mode = 0;
-    QcGlobalsA &opening = g_qcMain;
     if (arguments == NULL) {
-        opening.option0 = 0;
-        opening.option1 = 0;
+        g_qcMain.option0 = 0;
+        g_qcMain.option1 = 0;
     } else {
         if (argumentBytes == 3 * sizeof(s32)) {
             if (arguments[0] != -1) {
-                opening.entryId = arguments[0];
+                g_qcMain.entryId = arguments[0];
             }
-            opening.option0 = arguments[1];
-            opening.option1 = arguments[2];
+            g_qcMain.option0 = arguments[1];
+            g_qcMain.option1 = arguments[2];
         } else if (argumentBytes == sizeof(s32)) {
-            opening.entryId = arguments[0];
-            opening.option0 = 0;
-            opening.option1 = 0;
+            g_qcMain.entryId = arguments[0];
+            g_qcMain.option0 = 0;
+            g_qcMain.option1 = 0;
         }
-        statsSetAdditionalFlag(opening.entryId, 1);
+        statsSetAdditionalFlag(g_qcMain.entryId, 1);
     }
     work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"),
         4, 0, 0, FUN_00236110, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));

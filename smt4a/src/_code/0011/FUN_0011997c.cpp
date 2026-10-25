@@ -22,7 +22,7 @@ extern unsigned char LAB_00119a8c; /* 0x119a8c */
 extern unsigned char DAT_0055a1e4; /* 0x55a1e4 */
 
 extern int initVtable005593b0(int);
-extern int wstrlen(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: libc_strcpy. */
 extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
@@ -81,10 +81,10 @@ int FUN_0011997c(fn_0011997c_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 - 0x1a8) = 4;
   *(unsigned int *)(temp_v0 - 0x1a4) = 0;
   if (param_6 != 0) {
-    temp_v1 = wstrlen(param_6);
+    temp_v1 = libc_strlen(param_6);
     temp_v2 = FUN_002e784e(temp_v1 + 1,&LAB_00119a8c,0);
     *(unsigned int *)(temp_v0 - 0x194) = temp_v2;
-    temp_v1 = wstrlen(param_6);
+    temp_v1 = libc_strlen(param_6);
     if (temp_v1 != 0) {
       libc_strcpy(*(unsigned char **)(temp_v0 - 0x194),param_6);
     }

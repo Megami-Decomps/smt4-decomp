@@ -19,7 +19,7 @@ extern unsigned int DAT_0064c078; /* 0x64c078 */
 extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
-extern unsigned int wstrlen(int);
+extern unsigned int libc_strlen(int);
 extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcpy(int, int, unsigned int);
 
@@ -57,7 +57,7 @@ unsigned int * FUN_0018c99c(int *param_1,int param_2)
   piVar11 = (int *)(puVar6 + 3);
   puVar6[5] = 0;
   if (param_2 != 0) {
-    temp_v5 = wstrlen(param_2);
+    temp_v5 = libc_strlen(param_2);
     temp_v8 = 0x100;
     if (temp_v5 < 0x100) {
       temp_v8 = temp_v5;

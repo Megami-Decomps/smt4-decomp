@@ -40,7 +40,7 @@ void releaseEntriesA(InventoryHelpList *help);
 void slotPoolResetTrackedState(InventoryListView *list);
 Table00Record *dataTable00FindById(u32 id);
 s32 FUN_0026264c(u16 id);
-void FUN_004a8584(CampUnitComparison *record, u32 id, u32 flags);
+void campFillUnitComparison(CampUnitComparison *record, u32 id, u32 flags);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
 void itemListSelectVariant(Screen4A *work, s32 mode, s32 enabled);
 void FUN_004cfeb0(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
@@ -67,7 +67,7 @@ void FUN_004a4848(Screen4A *owner)
                 ++total;
                 if (FUN_0026264c(candidate->id) != 0) {
                     CampUnitComparison entry;
-                    FUN_004a8584(&entry, candidate->id, 0);
+                    campFillUnitComparison(&entry, candidate->id, 0);
                     entry.unk18[0] = 1;
                     inventoryListAppend(&work->list, &entry);
                 }

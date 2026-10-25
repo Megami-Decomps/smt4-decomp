@@ -2,6 +2,8 @@
 #define CLASSES_OBJ557ED0_H
 
 #include "common.h"
+#include "classes/FloatState.h"
+#include <stddef.h>
 
 extern "C" void *asdOperatorNew(u32 bytes);
 extern "C" int asdOperatorDelete(void *block);
@@ -26,7 +28,8 @@ public:
     /* 0x2C */ u32 unk2C;
     /* 0x30 */ u32 unk30;
     /* 0x34 */ u8 unk34[0x4A4];
-    /* 0x4D8 */ u8 floatPair[0x70];      /* constructed by _ZN10FloatStateC1Ev */
+    /* 0x4D8 */ FloatState floatPair;
+    /* 0x538 */ u8 unk538[0x10];
     /* 0x548 */ u32 params[4];           /* copied from the caller's parameters */
     /* 0x558 */ u8 unk558[4];
     /* 0x55C */ u32 unk55C;
@@ -50,5 +53,9 @@ public:
 };
 
 typedef char Obj557ed0LayoutCheck[sizeof(Obj557ed0) == 0x5A0 ? 1 : -1];
+typedef char Obj557ed0MemberOffsetsCheck[
+    offsetof(Obj557ed0, floatPair) == 0x4D8 &&
+    offsetof(Obj557ed0, params) == 0x548 &&
+    offsetof(Obj557ed0, unk58C) == 0x58C ? 1 : -1];
 
 #endif

@@ -8,8 +8,8 @@ struct ServiceStatus {
 };
 
 extern "C" {
-extern ServiceStatus DAT_0044e348;
-extern CriticalSection DAT_004c6410;
+extern ServiceStatus g_archiveModuleState;
+extern CriticalSection g_archiveModuleCriticalSection;
 s32 FUN_0010f50c(void);
 void FUN_00351db0(u32 index, s8* status);
 
@@ -18,8 +18,8 @@ s32 FUN_0023793c()
 {
     bool active;
     {
-        ScopedCriticalLock lock(DAT_004c6410);
-        active = DAT_0044e348.active != 0;
+        ScopedCriticalLock lock(g_archiveModuleCriticalSection);
+        active = g_archiveModuleState.active != 0;
     }
     if (!active && FUN_0010f50c() == 0) {
         return 0;

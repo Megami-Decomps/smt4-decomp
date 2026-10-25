@@ -8,7 +8,7 @@ char *libc_strtok(char *text, const char *delimiters, char **context);
 void FUN_0043bd0c(u16 *destination, u32 size, u32 format, s32 integral, s32 fraction);
 s32 stringFormatBounded(char *destination, u32 size, const char *format, ...);
 char *strncpy(char *destination, const char *source, u32 size);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 extern const char DAT_00536ccc[];
 extern const char DAT_00536cd0[];
 extern const NumericFractionDefaults DAT_00536cd4;
@@ -28,7 +28,7 @@ u32 FUN_004285d4(FormattedNumericEntry *entry, const char *text, const NumericEn
     if (*end == 0) {
         const char *padding;
         if (fractionText != NULL) {
-            padding = wstrlen(fractionText) == 1 ? DAT_00536cd0 : DAT_00536cd4.padding;
+            padding = libc_strlen(fractionText) == 1 ? DAT_00536cd0 : DAT_00536cd4.padding;
         } else {
             fractionText = const_cast<char *>(DAT_00536cd4.empty);
             padding = DAT_00536cd4.padding;

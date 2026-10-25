@@ -1,5 +1,5 @@
 /* NON_MATCHING: layout constants load after allocation and split retail's four-float store, with different saved registers; 76 built versus 74 retail rows. */
-#include "shard/W6_W6Match2_EffectEditor.h"
+#include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
@@ -41,7 +41,7 @@ u32 FUN_00242f94(f32 *selection, u32 value, EffectEditorOptions *options)
     effMenuListAppend(node, 3);
     if (padIsButtonPressed(1) || padIsButtonPressed(padAlternateButtonIndex(1))) {
         result = 0x400000;
-    } else if (options->unk10 & 8) {
+    } else if (options->flags & 8) {
         result = reinterpret_cast<u32>(&DAT_00400003);
     }
     return result;

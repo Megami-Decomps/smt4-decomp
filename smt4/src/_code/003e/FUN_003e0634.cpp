@@ -1,64 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e0634` (_code @ 0x3e0634, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains the key-construction address in r8, lays out the two key temporaries in reverse order, and copies with ldm/stm rather than ldrd/strd. */
+#include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "nn/cec/MessageKey.h"
 
 extern "C" {
+CecMessageKey *FUN_00238c80(CecMessageKey *destination, const CecMessageKey *source);
+CecMessageKey *FUN_002393a4(CecMessageKey *destination, const char *source);
+s32 FUN_003e0b90(const CecMessageKey *key, const CecMessageKey *candidate);
+CecMessageKeyHeader *nn_cec_CTR_MessageBox_GetMessHeader(AsdCecMessageBox *box, s32 kind, u32 index);
+extern const char DAT_004656f1[];
 
-int FUN_00238c80(int *, int);
-int FUN_002393a4(int *, char [9]);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-extern char s_ERROR____004656f1[9]; /* 0x4656f1 */
-
-/* Supplied declaration required: FUN_00238c80. */
-/* Supplied declaration required: FUN_002393a4. */
-extern int FUN_003e0b90(unsigned int, unsigned int *);
-extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
-
-
-unsigned int FUN_003e0634(int param_1,int param_2,unsigned int param_3)
-
+/* Find a message by its eight-byte key in the selected inbox or outbox. */
+u32 FUN_003e0634(AsdCecMessageBox *box, s32 kind, const CecMessageKey *key)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_2c;
-  int temp_v4;
-  unsigned int uStack_24;
-  
-  if (param_2 == 0) {
-    temp_v2 = *(unsigned int *)(param_1 + 0x210);
-  }
-  else {
-    temp_v2 = *(unsigned int *)(param_1 + 0x3c0);
-  }
-  temp_v1 = 0;
-  if (temp_v1 < temp_v2) {
-    do {
-      temp_v0 = nn_cec_CTR_MessageBox_GetMessHeader(param_1,param_2,temp_v1);
-      if (!(temp_v0 == 0 || temp_v0 == -0x20)) {
-        FUN_00238c80(&temp_v4,temp_v0 + 0x20);
-      }
-      else {
-        FUN_002393a4(&temp_v4,s_ERROR____004656f1);
-      }
-      temp_v3 = temp_v4;
-      uStack_2c = uStack_24;
-      temp_v0 = FUN_003e0b90(param_3,(unsigned int *)&temp_v3);
-      if (temp_v0 != 0) {
-        return temp_v1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < temp_v2);
-  }
-  return 0xffffffff;
+    u32 count = kind == 0 ? box->inboxCount : box->outboxCount;
+    for (u32 index = 0; index < count; ++index) {
+        CecMessageKey candidate;
+        CecMessageKeyHeader *header = nn_cec_CTR_MessageBox_GetMessHeader(box, kind, index);
+        if (header != NULL && (u32)header != 0xffffffe0) {
+            FUN_00238c80(&candidate, &header->key);
+        } else {
+            FUN_002393a4(&candidate, DAT_004656f1);
+        }
+        CecMessageKey copy = candidate;
+        if (FUN_003e0b90(key, &copy) != 0) {
+            return index;
+        }
+    }
+    return 0xffffffff;
 }
-
-} /* extern "C" */
+}

@@ -120,7 +120,7 @@ extern short resourceRunEmbeddedOperationIfUnblocked(int);
 extern int messageMainGetValue(void);
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: FUN_002c7ce8. */
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
@@ -945,7 +945,7 @@ joined_r0x002694c0:
       *(unsigned int *)(temp_v6 + 0x51c) = temp_v7;
     }
     else {
-      temp_v14 = FUN_002c7c54();
+      temp_v14 = useCounterGetCurrentValue();
       temp_v6 = g_statusDown;
       if (temp_v14 != 0x69) {
         temp_v14 = FUN_0026140c();
@@ -1110,7 +1110,7 @@ LAB_00269f7c:
       *(unsigned int *)(temp_v6 + 0x51c) = temp_v7;
     }
     else {
-      temp_v6 = FUN_002c7c54();
+      temp_v6 = useCounterGetCurrentValue();
       if (temp_v6 != 0x69) {
         FUN_003d4104();
         *(unsigned char *)(temp_v2 + 0x528) = 1;

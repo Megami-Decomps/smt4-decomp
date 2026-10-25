@@ -69,7 +69,7 @@ extern GfxShadowSettings g_gfxSettings;
 extern nw::ut::RuntimeTypeInfo DAT_005c0f18;
 extern nw::ut::RuntimeTypeInfo DAT_005c0f34;
 
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 void *nw_ut_ResDicPatricia_Get(void *dictionary, const char *name, u32 length);
 void FUN_001b5314(GfxMesh *mesh, s32 flag, f32 strength);
 
@@ -80,7 +80,7 @@ static inline GfxMaterialValue *findMaterialValue(GfxMesh *mesh, const char *nam
     if (dictionary == NULL || name == NULL) {
         return NULL;
     }
-    GfxDictionaryNode *node = static_cast<GfxDictionaryNode *>(nw_ut_ResDicPatricia_Get(&dictionary, name, wstrlen(name)));
+    GfxDictionaryNode *node = static_cast<GfxDictionaryNode *>(nw_ut_ResDicPatricia_Get(&dictionary, name, libc_strlen(name)));
     if (node == NULL) {
         return NULL;
     }

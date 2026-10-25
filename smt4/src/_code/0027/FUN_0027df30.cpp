@@ -1,4 +1,5 @@
 /* NON_MATCHING: register pressure - retail keeps the frame, actor and skill in registers and re-evaluates the frame offsets per use, while this version spills r0-r3 and the derived frames; the stack-argument layout (two skipped words, the speed passed as raw bits) and the calls are the same. */
+#include "battle/btlReflect.h"
 #include "common.h"
 
 namespace {
@@ -6,19 +7,6 @@ namespace {
 struct SkillRecord {
     /* 0x00 */ u8 unk00[0x62];
     /* 0x62 */ s16 id;
-};
-
-/* An entry of the reflect action queue the queue function returns (fields written after queuing). */
-struct ReflectAction {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u8 kind;
-    /* 0x05 */ u8 unk05[0xf];
-    /* 0x14 */ SkillRecord *skill;
-    /* 0x18 */ void *target;
-    /* 0x1c */ u8 unk1c[0xc];
-    /* 0x28 */ s32 side;
-    /* 0x2c */ u8 unk2c[0x20];
-    /* 0x4c */ s32 amount;
 };
 
 /* The battle unit entry found for a skill: its status flags are at +0xfa. */
@@ -29,11 +17,10 @@ struct BattleEntry {
 }
 
 extern "C" {
-extern ReflectAction *g_btlActionReflect;
 void *btlGetMainState(void);
 void FUN_002550d8(s32 id, s32 a, s32 b, s32 c);
 void *btlMainFindEntryByListedId(void *state, s32 id);
-ReflectAction *btlQueueReflectAction(ReflectAction *queue, s32 frame, s32 delay, u32 actor);
+
 void FUN_002268d0(s32 frame, s32 delay, u32 actor, SkillRecord *skill, s32 first, s32 second, s32 mode, s32 arg, f32 speed);
 u32 FUN_00293230(void *state);
 void FUN_002505c0(s32 a, s32 b, u32 sound, s32 c, s32 d, s32 e, s32 f);
@@ -59,11 +46,10 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
     if (preDelay >= 0) {
         void *entry = btlMainFindEntryByListedId(btlGetMainState(), skill->id);
         if (isReflect && entry != NULL && preSide >= 0) {
-            ReflectAction *action = g_btlActionReflect;
-            btlQueueReflectAction(g_btlActionReflect, preFrame, 0, actor);
+            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, preFrame, 0, actor);
             action->kind = 6;
-            action->target = entry;
-            action->side = preSide;
+            action->wordValues.unk18 = (u32)entry;
+            action->value = preSide;
         }
     }
     s16 effectFrame = (s16)frame + (s16)effectDelay;
@@ -74,29 +60,26 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
             if (isReflect && effectDelay >= 0) {
                 FUN_002268d0(frame, 0, actor, skill, firstAmount, secondAmount, 5, 1, effectSpeed);
             }
-            ReflectAction *action = g_btlActionReflect;
-            btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
             action->kind = 0x1c;
-            action->skill = skill;
-            action->side = 0;
-            action->amount = firstAmount;
-            action = g_btlActionReflect;
-            btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+            action->target = (u32)skill;
+            action->value = 0;
+            action->parameter = firstAmount;
+            action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
             action->kind = 0x1c;
-            action->skill = skill;
-            action->side = 1;
-            action->amount = secondAmount;
+            action->target = (u32)skill;
+            action->value = 1;
+            action->parameter = secondAmount;
             changed = FUN_00293230(btlGetMainState());
         } else {
             if (isReflect && effectDelay >= 0) {
                 FUN_002268d0(frame, 0, actor, skill, firstAmount, 0, 2, 1, effectSpeed);
             }
-            ReflectAction *action = g_btlActionReflect;
-            btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
             action->kind = 0x1c;
-            action->skill = skill;
-            action->side = 0;
-            action->amount = firstAmount;
+            action->target = (u32)skill;
+            action->value = 0;
+            action->parameter = firstAmount;
             changed = FUN_00293230(btlGetMainState()) & ~clearMask;
         }
         if (changed != 0) {
@@ -106,12 +89,11 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
         if (isReflect && effectDelay >= 0) {
             FUN_002268d0(frame, 0, actor, skill, secondAmount, 0, 3, 1, effectSpeed);
         }
-        ReflectAction *action = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, effectFrame, 0, actor);
         action->kind = 0x1c;
-        action->skill = skill;
-        action->side = 1;
-        action->amount = secondAmount;
+        action->target = (u32)skill;
+        action->value = 1;
+        action->parameter = secondAmount;
         changed = FUN_00293230(btlGetMainState());
         if (changed != 0) {
             FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
@@ -126,23 +108,20 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
                 flags = entry->statusFlags;
             }
         }
-        ReflectAction *action = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect, (s16)((s16)frame + 1), 0, actor);
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)((s16)frame + 1), 0, actor);
         action->kind = 0x1d;
-        action->skill = skill;
-        action->side = 0;
-        action->amount = statusMask;
+        action->target = (u32)skill;
+        action->value = 0;
+        action->parameter = statusMask;
         if (isReflect && (flags & ~statusMask & 0x586) == 0) {
             s16 lastFrame = (s16)((s16)frame + 2);
-            action = g_btlActionReflect;
-            btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
+            action = btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
             action->kind = 0x14;
-            action->skill = skill;
-            action = g_btlActionReflect;
-            btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
+            action->target = (u32)skill;
+            action = btlQueueReflectAction(g_btlActionReflect, lastFrame, 0, actor);
             action->kind = 10;
-            action->skill = skill;
-            action->side = statusMask;
+            action->target = (u32)skill;
+            action->value = statusMask;
         }
     }
     return 1;

@@ -8,7 +8,7 @@ s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 BtlMainStateA *btlGetMainState();
 u32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(u32 choice, s32 indices[8], s32 *count);
+void FUN_00301a08(u32 choice, s32 *first, s32 *count);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
 /* Test the chosen combatant range and optional special unit for an ID and threshold. */
@@ -17,10 +17,10 @@ u32 FUN_0038cab4()
     u32 unitId = scrGetArg(0);
     s32 threshold = scrGetArg(1);
     u32 choice = btlResolveEntryChoice(scrGetArg(2));
-    s32 indices[8];
+    s32 first;
     s32 count;
-    FUN_00301a08(choice, indices, &count);
-    for (s32 index = indices[0]; index < indices[0] + count; ++index) {
+    FUN_00301a08(choice, &first, &count);
+    for (s32 index = first; index < count + first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(g_btlCandidateMasks.unavailable & flags) &&

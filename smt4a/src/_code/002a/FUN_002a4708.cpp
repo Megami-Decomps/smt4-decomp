@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial controller-global and update-callback literal loads are scheduled in the opposite order; all task handles and arguments are restored. */
 #include "ui/HowToScreen.h"
 #include "shard/W5_W5Match6_CallbackController.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"

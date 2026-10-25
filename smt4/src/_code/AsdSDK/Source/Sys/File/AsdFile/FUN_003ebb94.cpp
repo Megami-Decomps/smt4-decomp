@@ -22,8 +22,7 @@ void nn_os_Thread_Thread_sub_object(void *object);
 void FUN_00357754(void *object);
 void FUN_003573a0(void *object);
 void entry();
-__weak s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
-void sceneNotifyNoop(void *object, void (*destroy)(void *), void *module);
+s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
 // Initialize the file loader's thread, mutex and wake event, registering cleanup.
 void FUN_003ebb94()
@@ -37,6 +36,6 @@ void FUN_003ebb94()
     __aeabi_atexit(&g_asdFileMutex, FUN_00357754, reinterpret_cast<void *>(entry));
     g_asdFileEvent.words[0] = 0;
     g_asdFileEvent.words[1] = 0;
-    sceneNotifyNoop(&g_asdFileEvent, FUN_003573a0, reinterpret_cast<void *>(entry));
+    __aeabi_atexit(&g_asdFileEvent, FUN_003573a0, reinterpret_cast<void *>(entry));
 }
 }

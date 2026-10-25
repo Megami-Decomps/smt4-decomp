@@ -7,7 +7,7 @@ s32 FUN_00174a00(NativeFileReader *reader, void *data, u32 size, u32 *bytesRead)
 void FUN_00175750(ArchiveFileHeader *header, const void *data);
 void FUN_001739d4(SoundArchiveDisk *archive, ArchiveFileHeader *header);
 void FUN_001739f8(SoundArchiveDisk *archive, const char *directory);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 
 // Open a CSAR stream, install its header and remember the containing directory.
 u32 FUN_0015ea28(SoundArchiveDisk *archive, const char *path)
@@ -32,7 +32,7 @@ u32 FUN_0015ea28(SoundArchiveDisk *archive, const char *path)
         FUN_00175750(&archive->header, data);
         FUN_001739d4(archive, &archive->header);
     }
-    s32 separator = wstrlen(path) - 1;
+    s32 separator = libc_strlen(path) - 1;
     while (separator >= 0 && path[separator] != '/' && path[separator] != '\\') {
         --separator;
     }

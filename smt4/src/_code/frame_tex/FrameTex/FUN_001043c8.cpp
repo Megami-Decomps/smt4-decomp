@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001043c8` (_code @ 0x1043c8, 0x5b0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int paramsInit(...);
+
 int asdGxIndexBufferCreate(...);
 int memClear(...);
 int asdMemAlloc(...);
@@ -63,7 +64,7 @@ extern int FUN_0010a03c(...); /* 0x10a03c */
 extern int FUN_0010a110(...); /* 0x10a110 */
 extern int titleBackdropRender(...); /* 0x10a3a4 */
 extern int titleCaptureHalfSizeSurfaceOnce(...); /* 0x10a450 */
-extern int FUN_0010b224(...); /* 0x10b224 */
+extern int titleCaptureReadySurfaceOnce(unsigned int job); /* 0x10b224 */
 extern int FUN_0010b2d0(...); /* 0x10b2d0 */
 extern unsigned char DAT_00404164; /* 0x404164 */
 extern unsigned char DAT_0040417c; /* 0x40417c */
@@ -112,7 +113,7 @@ void FUN_001043c8(void)
   puVar2[6] = 0;
   *(unsigned char *)(puVar2 + 7) = 0;
   drawParameterBlockClear(puVar2 + 0xd);
-  paramsInit(puVar2 + 0xd,&DAT_00404164,0x18,&DAT_0040417c,0xc,&DAT_00404188,0xc,0,0,&DAT_00404194
+  paramsInit(reinterpret_cast<UiResourceParameters *>(puVar2 + 0xd), &DAT_00404164,0x18,&DAT_0040417c,0xc,&DAT_00404188,0xc,0,0,&DAT_00404194
                ,0x70);
   puVar2[0xb] = 0x3e800000;
   puVar2[10] = 0x3e800000;
@@ -144,7 +145,7 @@ void FUN_001043c8(void)
   taskCreateDraw(&LAB_00104878,0xd5,0,0,titleCaptureHalfSizeSurfaceOnce,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104888,0x82,0,0,FUN_0010a03c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104898,0xe0,0,0,FUN_0010a110,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00104868,0x7e,0,0,FUN_0010b224,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00104868,0x7e,0,0,titleCaptureReadySurfaceOnce,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104878,0xdc,0,0,FUN_0010b2d0,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00104980,0x77,0,0,titlePartStart,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_0010498c,0xd5,0,0,titleCaptureSurfaceOnce,0,g_frameTex,*puVar2);

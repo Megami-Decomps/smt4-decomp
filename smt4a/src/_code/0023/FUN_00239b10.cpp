@@ -11,12 +11,14 @@ typedef struct GameData {
     /* 0x21d8c */ f32 unk21d8c;
     /* 0x21d90 */ u8 unk21d90[0x27e3d - 0x21d90];
     /* 0x27e3d */ u8 unk27e3d;
+    /* 0x27e3e */ u8 remaining[0x2a71c - 0x27e3e];
 } GameData;
 
 typedef struct SaveBlock {
     /* 0x00 */ u8 unk00[0x88];
     /* 0x88 */ GameData gameData;
 } SaveBlock;
+typedef char GameDataCopyExtent[sizeof(GameData) == 0x2a71c ? 1 : -1];
 
 typedef struct GameDataBlocks {
     /* 0x00 */ u32 unk00;

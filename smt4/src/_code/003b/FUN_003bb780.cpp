@@ -10,6 +10,7 @@ void FUN_002bf288(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 f32 *FUN_002bf4f8(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);
+f32 vec2GetSpeed(const void *animation);
 s32 FUN_0029e924(ListMenu *menu);
 s32 rangeLimitMin(ListMenu *menu);
 s32 FUN_00240d5c(ListMenu *menu);
@@ -42,7 +43,7 @@ void FUN_003bb780(ListMenu *menu)
     efctSetSpeed(1.0f);
     FUN_002bf380(2, 42, menu->iconA, iconX, iconY, 31);
     if (menu->iconB != -1) {
-        efctSetSpeed(menu->iconBAlpha);
+        efctSetSpeed(vec2GetSpeed(&menu->iconBAnimation));
         FUN_002bf380(2, 42, menu->iconB, iconX, iconY, 32);
     }
 

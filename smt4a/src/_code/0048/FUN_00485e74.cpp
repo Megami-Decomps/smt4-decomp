@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00485e74` (_code @ 0x485e74, 0x490 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +8,7 @@ extern "C" {
 int asdTMTexTableLoadTmx(int, int);
 int FUN_0014e188(...);
 int uiSpriteInitializeState(...);
-int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
+
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_001a90e0(unsigned char *);
@@ -96,7 +97,7 @@ void FUN_00485e74(unsigned char *param_1)
   *(unsigned int *)(param_1 + 0x4c4) = 0;
   *(unsigned int *)(param_1 + 0x4c8) = 0;
   paramsClearPacket(param_1 + 0xc20);
-  paramsInit(param_1 + 0xc20,&DAT_00532378,0x60,&DAT_005323d8,0x54,0,0,0,0,&DAT_0053242c,0x8c);
+  paramsInit(reinterpret_cast<UiResourceParameters *>(param_1 + 0xc20), &DAT_00532378,0x60,&DAT_005323d8,0x54,0,0,0,0,&DAT_0053242c,0x8c);
   temp_v2 = 0;
   do {
     FUN_0014e188(param_1 + temp_v2 * 0x8c + 0xc40,0x13,0xfa1,param_1 + 0xc20,0x15);

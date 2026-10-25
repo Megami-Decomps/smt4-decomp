@@ -32,7 +32,7 @@ extern int FUN_00219530(...); /* 0x219530 */
 extern int dataTable08Sub1CompareRank(...); /* 0x21963c */
 extern int FUN_002497f8(...); /* 0x2497f8 */
 extern int FUN_00257568(...); /* 0x257568 */
-extern int FUN_002c6d30(...); /* 0x2c6d30 */
+extern int entryCompareClassThenDescendingValue(...); /* 0x2c6d30 */
 extern int FUN_002dc594(...); /* 0x2dc594 */
 extern int FUN_002dc634(...); /* 0x2dc634 */
 extern int FUN_002dc72c(...); /* 0x2dc72c */
@@ -141,7 +141,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,8,FUN_002c6d30);
+        FUN_002b7bca(temp_v1,temp_v2,8,entryCompareClassThenDescendingValue);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x11) {

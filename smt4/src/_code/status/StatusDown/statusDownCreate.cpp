@@ -1,7 +1,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 /* A 0x8C-byte UI sprite; only the field this initializer writes is named. */
@@ -22,7 +22,7 @@ struct StatusKey {
 struct StatusDownWork {
     /* 0x0000 */ u32 job;
     /* 0x0004 */ u32 drawTask;
-    /* 0x0008 */ Params002c312c packet;
+    /* 0x0008 */ UiResourceParameters packet;
     /* 0x0028 */ StatusSprite sprites[7];
     /* 0x03fc */ u8 unk3fc[0x30];
     /* 0x042c */ u8 slots[0x29];      /* filled with 0xFF */
@@ -72,16 +72,14 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 FUN_001ca748(u32 handle);
 s32 FUN_001cca14(u32 handle);
-void drawParameterBlockClear(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
-                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
-                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
-void FUN_002bd954(StatusSprite *sprite, u32 group, u32 image, Params002c312c *owner, u16 id, f32 scale);
+void drawParameterBlockClear(UiResourceParameters *packet);
+
+void FUN_002bd954(StatusSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void FUN_002bd82c(u32 text, u32 value);
 void timerStart(StatusSprite *sprite, s32 id, s32 arg);
 void spriteStartAnimationByIndex(StatusSprite *sprite, s32 index);
 void uiSpriteInitializeState(StatusSprite *sprite, u32 group, s32 image, s32 kind,
-                             Params002c312c *owner, u16 id, f32 scale);
+                             UiResourceParameters *owner, u16 id, f32 scale);
 u32 asdTextCreate(u32 text);
 void positionStateSet(u32 text, s32 arg, u32 color, f32 value);
 void spriteSetLayer(StatusSprite *sprite, u16 layer);

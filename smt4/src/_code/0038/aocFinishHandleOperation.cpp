@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AocMain *g_aocMain;
-AocHandleJob *FUN_002a1130(u32 id, u32 flags);
+AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 id, u32 flags);
 WindowStatusResult FUN_00354608(void *parameters, AocHandleSource *source);
 WindowStatusResult archiveFileReplaceHandle(void *destination, void *source);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
@@ -14,7 +14,7 @@ int jyoucyuGetTableEntry(s32 index);
 // Finish the pending add-on handle operation, retaining recoverable errors.
 void aocFinishHandleOperation(u32 id, AocHandleSource *source)
 {
-    AocHandleJob *job = FUN_002a1130(id, 0);
+    AocHandleJob *job = _ZN21WindowOperationResultC1Eh(id, 0);
     job->result = FUN_00354608(source->parameters, source);
     if (nnResultIsFailure(legacyResourceIdRemap(&job->result))) {
         job->state = 100;

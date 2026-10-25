@@ -18,7 +18,7 @@ struct TextOwner {
     /* 0x20C */ TextStorageBlock *storage;
 };
 extern "C" {
-s32 wstrlen(const char *text);
+s32 libc_strlen(const char *text);
 s32 FUN_001a7a20(void *table, const char *text, u32 length);
 s32 FUN_001a79e8(TextOwner *owner, const char *text)
 {
@@ -26,6 +26,6 @@ s32 FUN_001a79e8(TextOwner *owner, const char *text)
     if (owner->storage != NULL) {
         storage = &owner->storage->data;
     }
-    return FUN_001a7a20(storage->table->records, text, wstrlen(text));
+    return FUN_001a7a20(storage->table->records, text, libc_strlen(text));
 }
 }

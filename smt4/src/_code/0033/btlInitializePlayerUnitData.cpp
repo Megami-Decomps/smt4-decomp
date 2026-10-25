@@ -1,5 +1,6 @@
 #include "battle/btlUnit.h"
 #include "gamedata/PlayerInitialization.h"
+#include "battle/UnitInitialization.h"
 
 extern "C" {
 u16 playerDataValueAt(u32 index);
@@ -8,33 +9,7 @@ s32 padGetStickHorizontalDirection();
 
 void btlInitializePlayerUnitData(u32, BtlUnitData *data, const PlayerInitialRecordIV *player)
 {
-    struct StatSet {
-        u16 hp, maximumHp, mp, maximumMp;
-        u16 stats[5];
-    };
-    struct EncodedStat { u16 value : 10; u16 kind : 6; };
-    // Initialization also owns the tail beyond the shared battle-data prefix.
-    struct InitializationView {
-        u8 active;
-        u8 padding01;
-        u16 status;
-        s16 selection[3];
-        u8 padding0A[0xCA];
-        u8 statMode;
-        u8 paddingD5;
-        StatSet current;
-        StatSet initial;
-        u16 points;
-        u16 pending[2];
-        u16 enabled;
-        EncodedStat encoded[18];
-        EncodedStat initialEncoded[18];
-        u8 percentage;
-        u8 direction;
-        u32 effects[14];
-        u32 counter;
-    };
-    InitializationView *unit = reinterpret_cast<InitializationView *>(data);
+    BtlUnitInitializationIV *unit = reinterpret_cast<BtlUnitInitializationIV *>(data);
     unit->active = 1;
     unit->selection[2] = -1;
     unit->status = 0;

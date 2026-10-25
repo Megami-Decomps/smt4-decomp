@@ -7,7 +7,7 @@ void FUN_00152c00(AsdMdlNode *node);
 void asdMdlListDestroyModels(AsdMdlObject *obj);
 void FUN_00152894(AsdMdlNode *node, void *data);
 s32 lookupListFindByKey(u32 *list, AsdMdlObject *obj);
-void FUN_002b26d4(u32 *list);
+void indexedListErase(u32 *list);
 void asdMemFree(void *block);
 
 extern u32 g_asdMdlList;
@@ -39,7 +39,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
     FUN_00152894(obj->node, obj->request);
     removed = lookupListFindByKey(&g_asdMdlList, obj);
     if (removed != 0) {
-        FUN_002b26d4(&g_asdMdlList);
+        indexedListErase(&g_asdMdlList);
     }
     asdMemFree(obj);
 }

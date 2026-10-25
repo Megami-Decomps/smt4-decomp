@@ -55,6 +55,14 @@ Every match must be one a programmer could have written for a reason.
   Check which class owns a tail field before extending a base: sibling classes can have
   different fields at the same offset. Assert both the base extent and each derived layout.
   Recheck every previously matching consumer of either affected header with `fdiff`.
+  UI sprite resource packets use `UiResourceParameters` and the shared `paramsInit` declaration in
+  `shard/W6_W6Match8_UiResourceParameters.h`: five `u16` byte counts followed by five resource
+  pointers, in a 0x20-byte block. Pass all five pointer/count pairs, including unused `NULL, 0`
+  pairs; do not redeclare the initializer with word-sized counts or variadic arguments.
+  Reflection queue creation likewise uses the shared `btlQueueReflectAction` declaration in
+  `battle/btlReflect.h`. Its actor selectors are word-sized arguments even though the allocator
+  stores their low halfwords; preserve the caller's explicit signed-halfword conversions and
+  consume the returned action, not the queue context, when filling a newly queued payload.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in
@@ -86,10 +94,14 @@ Every match must be one a programmer could have written for a reason.
     addresses it pc-relatively (armcc put the literal after the pool; `fdiff` and `relink.py` compare
     those bytes with the image). A weak function declared `__declspec(noreturn)` is reached with
     a plain `b`, so its NOP has no `pop` around it;
-  - **`__cxa_guard_release` and `__aeabi_atexit` after a function-local static's initialisation**:
-    the retail program links neither, so those calls are NOPs there (`ldr r0, [guard]; nop`).
-    armcc 4.1 b713 references them strongly; `build.py` treats them as the weak calls they were and
-    names atexit's `__dso_handle` argument `entry` (the image base). Write the `static` normally;
+  - **`__cxa_guard_release` and `__aeabi_atexit` after a static's initialisation**:
+    guard-release calls are weak and removed. Retail's `__aeabi_atexit` is an empty `bx lr`
+    function: armlink removes its `bl` calls, but preserves a final tail `b __aeabi_atexit`.
+    `build.py` reproduces that distinction and names the `__dso_handle` argument `entry`
+    (the image base); an explicit declaration of it must not be `__weak` (armcc never tail-calls a
+    weak function). Write function-local `static` objects normally. For a file initializer,
+    define the global objects with native constructors/destructors in retail order;
+    `build.py` gives armcc's generated `__sti___<n>_<file>` function the unit's name.
   - **a branch to the very next instruction** (armlink's `--branchnop`): a tail call into the
     function placed right after. Write the call as the last statement.
   - **an ARM `b` or conditional `bl` to a Thumb function** (`beq` tail call, `blne`): it cannot change
@@ -105,11 +117,15 @@ Every match must be one a programmer could have written for a reason.
   a pool word into the object's own data against retail's `DAT_x`/`_ZZ…` counts as equal and
   `IDENTICAL` carries `(data relocations by section: relink checks the address)`. Give the
   variables their real names when known.
-- **Compiler-generated global initialisers are not ordinary wrappers.** armcc emits
-  `__sti___<n>_<file>` functions in `i.` sections, with references to their own data sections.
-  The current unit carver does not extract those initialisers. Keep native global object
-  definitions, or report `BLOCKED: static initialiser: needs build.py support for __sti__ units`;
-  do not replace construction/destructor registration with explicit runtime-helper calls.
+- **Compiler-generated global initialisers are not ordinary wrappers.** Keep native object
+  definitions rather than explicit runtime-helper calls. Initialized objects and zero-initialized
+  objects can belong to different data sections: for example, parameterized module-state/counter
+  objects occupy `.data`, while default-constructed camera and critical-section objects occupy
+  `.bss`. Preserve the original object order and all pre-existing data bytes.
+  When taking an inline destructor's address emits its out-of-line COMDAT copy, its standalone
+  unit may use the same real source file as the initializer; the carver selects that native
+  destructor. An inline empty destructor can instead make armcc eliminate registration entirely,
+  so do not replace an out-of-line declaration with an inline empty body merely to remove calls.
 - **Linker-inlined calls.** armlink (`--inline`) replaced every ARM `bl` to a function whose body is
   one instruction and `bx lr` with that instruction: a getter's `ldr r0, [r0, #N]`, a setter's
   `vstr s0, [r0, #N]`, a `mov r0, #0` stub, an SDK svc wrapper's `svc N`. A lone instruction like

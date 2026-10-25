@@ -20,6 +20,7 @@ extern BtlMain *g_btlMain;
 
 extern void FUN_001ab998(void);
 
+
 /* Releases the owner's handle, resets its state to 12, clears its flag 2 and the battle flag 0x4000000. */
 void FUN_002276f8(Owner *owner)
 {
@@ -29,12 +30,9 @@ void FUN_002276f8(Owner *owner)
     }
     owner->state = 12;
     owner->flags &= ~2;
-    {
-        BtlMain *main = g_btlMain;
-
-        if (main != NULL) {
-            main->flags &= ~0x4000000;
-        }
+    BtlMain *main = g_btlMain;
+    if (main != NULL) {
+        main->flags &= ~0x04000000u;
     }
 }
 

@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ddee0` (_code @ 0x3ddee0, 0x6dc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/btlReflect.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_002266dc(...);
+int btlReflectQueueMemberAction(...);
 int FUN_002267b8(...);
-int btlQueueReflectAction(...);
+
 int FUN_0027da30(...);
 int FUN_0027e3e8(...);
 int btlMainFindEntryByListedId(...);
@@ -38,12 +39,11 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_6_stack;
 
-extern int g_btlActionReflect; /* 0x434290 */
 extern int g_btlMain; /* 0x4342c8 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int g_btlEvent; /* 0x435d48 */
 
-/* Supplied declaration required: FUN_002266dc. */
+/* Supplied declaration required: btlReflectQueueMemberAction. */
 /* Supplied declaration required: FUN_002267b8. */
 /* Supplied declaration required: btlQueueReflectAction. */
 /* Supplied declaration required: FUN_0027da30. */
@@ -82,7 +82,6 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
   temp_v2 = param_3->field_0x50;
   if ((temp_v2 & 0x200) == 0) {
     temp_v0 = (short)param_1;
-    temp_v3 = g_btlActionReflect;
     if ((temp_v2 & 0x800) == 0) {
       if (temp_v4 == 0) {
         param_3->field_0x50 = temp_v2 | 0x80000;
@@ -101,10 +100,9 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
           param_4 = 0xf;
           *(fn_003ddee0_arg2 **)(DAT_00435d18 + 0x3048) = param_3;
           *(unsigned int *)(temp_v9 + 0x3028) = *(unsigned int *)(temp_v9 + 0x3028) | 0x8000;
-          for (temp_v9 = *(int *)(g_btlActionReflect + 8); temp_v9 != 0; temp_v9 = *(int *)(temp_v9 + 0xc)) {
+          for (temp_v9 = (int)g_btlActionReflect->head; temp_v9 != 0; temp_v9 = *(int *)(temp_v9 + 0xc)) {
           }
-          temp_v9 = g_btlActionReflect;
-          btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0 + 2),0,param_2);
+          temp_v9 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0 + 2),0,param_2);
           *(unsigned char *)(temp_v9 + 4) = 0xb;
           *(unsigned int *)(temp_v9 + 0x28) = 2;
           *(unsigned int *)(temp_v9 + 0x4c) = 0xc0;
@@ -120,14 +118,12 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
       case 0:
       case 1:
         temp_v9 = 0;
-        temp_v3 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
+        temp_v3 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 0x13;
         *(fn_003ddee0_arg2 **)(temp_v3 + 0x14) = param_3;
         *(unsigned int *)(temp_v3 + 0x4c) = 0;
         FUN_002267b8(param_3->field_0x5c + param_1,param_2,param_3);
-        temp_v3 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,(int)(short)(temp_v0 + 5 + (short)param_3->field_0x5c),0,param_2);
+        temp_v3 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)(temp_v0 + 5 + (short)param_3->field_0x5c),0,param_2);
         *(unsigned char *)(temp_v3 + 4) = 0x1b;
         temp_v3 = btlGetMainState();
         if (temp_v4 != 0) {
@@ -142,15 +138,13 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
             if (((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) && (temp_v4 & 0x10) != 0) &&
                 (*(short *)(temp_v3 + 0x62) != param_3->field_0x62)) &&
                ((*(unsigned int *)(temp_v3 + 0xf8) & 2) == 0)) {
-              temp_v10 = g_btlActionReflect;
-              btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v3 + 0x5c) + temp_v0),0
+              temp_v10 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v3 + 0x5c) + temp_v0),0
                            ,param_2);
               *(unsigned char *)(temp_v10 + 4) = 0x13;
               *(int *)(temp_v10 + 0x14) = temp_v3;
               *(unsigned int *)(temp_v10 + 0x4c) = 0;
               FUN_002267b8(*(int *)(temp_v3 + 0x5c) + param_1,param_2,temp_v3);
-              temp_v10 = g_btlActionReflect;
-              btlQueueReflectAction(g_btlActionReflect,
+              temp_v10 = (int)btlQueueReflectAction(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(temp_v3 + 0x5c) + temp_v0 + 5),0,param_2)
               ;
               *(unsigned char *)(temp_v10 + 4) = 0x1b;
@@ -175,8 +169,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
       case 0xc:
       case 0xd:
       case 0xe:
-        temp_v9 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
+        temp_v9 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)param_3->field_0x5c + temp_v0),0,param_2);
         *(unsigned char *)(temp_v9 + 4) = 0x13;
         *(fn_003ddee0_arg2 **)(temp_v9 + 0x14) = param_3;
         *(unsigned int *)(temp_v9 + 0x4c) = 0;
@@ -184,13 +177,12 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
           FUN_003dddd0();
         }
         else {
-          FUN_002266dc(param_3->field_0x5c + param_1,param_2,param_3,9);
+          btlReflectQueueMemberAction(param_3->field_0x5c + param_1,param_2,param_3,9);
         }
         temp_v9 = btlGetMainState();
         *(char *)(temp_v9 + 0x2f04) = *(char *)(temp_v9 + 0x2f04) + '\x01';
         *(unsigned int *)&param_3[2].field_0x30 = *(unsigned int *)&param_3[2].field_0x30 | 2;
-        temp_v9 = g_btlActionReflect;
-        btlQueueReflectAction(g_btlActionReflect,
+        temp_v9 = (int)btlQueueReflectAction(g_btlActionReflect,
                      (int)(short)((short)param_3->field_0x5c + *(short *)(temp_v3 + 0x43996a) + temp_v0)
                      ,0,param_2);
         temp_v11 = temp_v4 != 0;
@@ -210,20 +202,18 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
             if (((((temp_v4 & 1) != 0 && (temp_v4 & 2) != 0) && (temp_v4 & 0x10) != 0) &&
                 (*(short *)(temp_v9 + 0x62) != param_3->field_0x62)) &&
                ((*(unsigned int *)(temp_v9 + 0xf8) & 2) == 0)) {
-              temp_v8 = g_btlActionReflect;
-              btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v9 + 0x5c) + temp_v0),
+              temp_v8 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(unsigned int *)(temp_v9 + 0x5c) + temp_v0),
                            0,param_2);
               *(unsigned char *)(temp_v8 + 4) = 0x13;
               *(int *)(temp_v8 + 0x14) = temp_v9;
               *(unsigned int *)(temp_v8 + 0x4c) = 0;
               if (param_4 != 9) {
                 if ((*(unsigned int *)(temp_v9 + 0x50) & 1) != 0) {
-                  temp_v8 = *(int *)(g_btlActionReflect + 8);
+                  temp_v8 = (int)g_btlActionReflect->head;
                   do {
                     if (temp_v8 == 0) {
-                      temp_v8 = g_btlActionReflect;
-                      btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v9 + 0x5c) + temp_v0)
-                                   ,0);
+                      temp_v8 = (int)btlQueueReflectAction(g_btlActionReflect,(int)(short)((short)*(int *)(temp_v9 + 0x5c) + temp_v0)
+                                   ,0,param_2);
                       temp_v5 = btlGetMainState();
                       FUN_0027da30(temp_v5,(int)*(short *)(temp_v9 + 0x62));
                       temp_v6 = btlGetMainState();
@@ -251,10 +241,9 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
                 }
               }
               else {
-                FUN_002266dc(*(int *)(temp_v9 + 0x5c) + param_1,param_2,temp_v9,9);
+                btlReflectQueueMemberAction(*(int *)(temp_v9 + 0x5c) + param_1,param_2,temp_v9,9);
               }
-              temp_v8 = g_btlActionReflect;
-              btlQueueReflectAction(g_btlActionReflect,
+              temp_v8 = (int)btlQueueReflectAction(g_btlActionReflect,
                            (int)(short)((short)*(unsigned int *)(temp_v9 + 0x5c) +
                                         *(short *)(temp_v3 + 0x43996a) + temp_v0),0,param_2);
               *(unsigned char *)(temp_v8 + 4) = 0x17;
@@ -269,8 +258,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
         break;
       case 0xf:
         if ((*puVar5 & 0x8000000) == 0) {
-          temp_v3 = g_btlActionReflect;
-          btlQueueReflectAction(g_btlActionReflect,(int)temp_v0,0,param_2);
+          temp_v3 = (int)btlQueueReflectAction(g_btlActionReflect,(int)temp_v0,0,param_2);
           temp_v9 = btlGetMainState();
           *(unsigned int *)(temp_v9 + 0x88) = 8;
           *(unsigned char *)(temp_v3 + 4) = 0x28;
@@ -278,11 +266,9 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
           *puVar5 = *puVar5 | 0x8000000;
         }
       }
-      temp_v3 = g_btlActionReflect;
     }
-    g_btlActionReflect = temp_v3;
     if ((param_5 != 0) && (temp_v1 == 0)) {
-      btlQueueReflectAction(temp_v3,(int)temp_v0,0,param_2);
+      temp_v3 = (int)btlQueueReflectAction(g_btlActionReflect,(int)temp_v0,0,param_2);
       *(unsigned char *)(temp_v3 + 4) = 0x33;
       *(fn_003ddee0_arg2 **)(temp_v3 + 0x14) = param_3;
     }

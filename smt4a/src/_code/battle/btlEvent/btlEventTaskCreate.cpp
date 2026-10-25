@@ -27,7 +27,7 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 arg2, u32 arg3, void (*dr
                    void (*destroy)(void *), void *work, u32 job);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 s32 libc_strcmp(const u16 *a, const u16 *b);
-s32 wstrlen(const u16 *text);
+s32 libc_strlen(const u16 *text);
 void FUN_002761fc(void *work);
 void btlEventDestroy(void *work);
 
@@ -41,7 +41,7 @@ void btlEventTaskCreate(BtlEventWork *work)
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlEvent.cpp", 0x29b);
         BtlEventState *state = g_btlEvent = (BtlEventState *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x30, 1);
         state->active = 0;
-        if (libc_strcmp(work->scriptName, DAT_005285d8) != 0 && wstrlen(work->scriptName) != 0) {
+        if (libc_strcmp(work->scriptName, DAT_005285d8) != 0 && libc_strlen(work->scriptName) != 0) {
             state->active = 1;
             state->unk2c = 0;
         }

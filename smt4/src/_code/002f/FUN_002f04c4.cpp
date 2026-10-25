@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail rebases the MP accesses at entry+0xcc (like btlScriptAnyEntryMpAtMost); the flat BtlEntry layout rebases at +0x100 and reorders the multiply */
-#include "shard/W4_Match6_BtlEntry.h"
+/* NON_MATCHING: grouped stats offsets match; percentage base, numerator and constant registers differ. */
+#include "battle/EntryStats.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -14,12 +14,17 @@ u32 FUN_002f04c4(void)
     s32 i;
 
     for (i = 0; i < BTL_ENTRY_COUNT; i++) {
-        BtlEntry *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
-            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->id == id &&
-            entry->mp * 100 / entry->maxMp <= percent) {
-            scrSetResult(1);
-            return 1;
+        BtlEntryStatsView *entry = &reinterpret_cast<BtlEntryStatsView *>(btlGetMainState()->entries)[i];
+        u32 flags = entry->flags;
+        if ((flags & BTL_ENTRY_FLAG_PRESENT) && (flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(flags & BTL_ENTRY_FLAG_BLOCKED) && entry->stats.id == id) {
+            BtlEntryMpStats *stats = &entry->stats;
+            s32 mp = stats->mp;
+            s32 maxMp = stats->maxMp;
+            if (mp * 100 / maxMp <= percent) {
+                scrSetResult(1);
+                return 1;
+            }
         }
     }
     scrSetResult(0);

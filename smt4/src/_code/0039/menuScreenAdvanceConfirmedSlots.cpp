@@ -22,7 +22,7 @@ typedef struct {
 int FUN_002bf818(Slot *slot);
 int flagBitIsSet(u32 flag);
 int gameFlagIsSet(u32 mask);
-s32 recordGetSignedFlags(const void *record);
+s32 uiSpriteGetCompletionState(const void *record);
 
 /* Advances the screen one step: updates every slot up to the current step and switches mode when the last slot is confirmed. */
 void menuScreenAdvanceConfirmedSlots(Screen *screen)
@@ -37,7 +37,7 @@ void menuScreenAdvanceConfirmedSlots(Screen *screen)
             }
             i++;
         } while (i < 5);
-        if (recordGetSignedFlags(&screen->slots[4]) != 0) {
+        if (uiSpriteGetCompletionState(&screen->slots[4]) != 0) {
             screen->mode = 2;
             screen->unk08 = 0;
         }

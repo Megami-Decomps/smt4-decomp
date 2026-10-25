@@ -18,8 +18,8 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_004c4b40; /* 0x4c4b40 */
-extern int DAT_0058936c; /* 0x58936c */
-extern unsigned int DAT_0062d280; /* 0x62d280 */
+extern int g_moduleInitialState; /* 0x58936c */
+extern unsigned int g_moduleStateCriticalSection; /* 0x62d280 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0019a300. */
@@ -41,10 +41,10 @@ void FUN_00189a80(unsigned char *param_1)
   int temp_v1 [2];
   
   do {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d280);
-    if (DAT_0058936c == 0) {
-      puVar1 = (unsigned int *)&DAT_0058936c;
-      FUN_0019a300(&DAT_0058936c,"err:f");
+    nn_os_CriticalSection_Enter((unsigned int)&g_moduleStateCriticalSection);
+    if (g_moduleInitialState == 0) {
+      puVar1 = (unsigned int *)&g_moduleInitialState;
+      FUN_0019a300(&g_moduleInitialState,"err:f");
       if (-1 < (int)puVar1) {
         puVar1 = (unsigned int *)0x0;
       }
@@ -54,13 +54,13 @@ void FUN_00189a80(unsigned char *param_1)
     }
     if (-1 < (int)puVar1) {
       FUN_001ab838(param_1 + 0xc,0xffff8001);
-      temp_v1[0] = DAT_0058936c;
+      temp_v1[0] = g_moduleInitialState;
       nn_err_CTR_FatalErr_Throw((unsigned int)temp_v1,(unsigned int)param_1);
-      if (DAT_0058936c != 0) {
+      if (g_moduleInitialState != 0) {
         software_interrupt(0x23);
-        DAT_0058936c = 0;
+        g_moduleInitialState = 0;
       }
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
+      nn_os_CriticalSection_Leave((unsigned int)&g_moduleStateCriticalSection);
       if (*param_1 != 2 && *param_1 != 5) {
         temp_v1[0] = 0;
         temp_v1[1] = 0;
@@ -74,7 +74,7 @@ void FUN_00189a80(unsigned char *param_1)
       puVar1 = (unsigned int *)(unsigned int)*param_1;
     }
     if (!temp_v0 || puVar1 != (unsigned int *)0x2) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
+      nn_os_CriticalSection_Leave((unsigned int)&g_moduleStateCriticalSection);
       if (*param_1 != 2 && *param_1 != 5) {
         temp_v1[0] = 0;
         temp_v1[1] = 0;
@@ -84,7 +84,7 @@ void FUN_00189a80(unsigned char *param_1)
       return;
     }
     svcSleepThread(&LAB_004c4b40,0);
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
+    nn_os_CriticalSection_Leave((unsigned int)&g_moduleStateCriticalSection);
   } while( 1 );
 }
 

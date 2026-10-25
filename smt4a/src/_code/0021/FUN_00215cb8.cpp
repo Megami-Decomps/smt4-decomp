@@ -74,7 +74,7 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: questMarkSelectedSpecialDetail. */
 extern int objectApplyIfUnblocked(int);
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f15f8. */
 /* Supplied declaration required: FUN_00320834. */
@@ -1017,7 +1017,7 @@ LAB_00217264:
   case 0x1e:
     temp_v5 = useCounterIsFinished();
     if (temp_v5 == 0) {
-      temp_v5 = FUN_002c7c54();
+      temp_v5 = useCounterGetCurrentValue();
       if (temp_v5 != 0x69) {
         uiQuestSortListByEntryKind((int)*(char *)(temp_v1 + 0x90c));
         if (*(char *)(temp_v1 + 0x90c) != '\0') {

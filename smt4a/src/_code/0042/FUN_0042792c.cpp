@@ -3,9 +3,7 @@
 #include "nn/Result.h"
 
 extern "C" {
-s32 FUN_004283cc(u32 handle);
 u32 FUN_004275f0(u32 handle, u32 second, u32 third, u32 fourth);
-void recordValidatePair(u32 handle, u32 code, u32 description);
 }
 
 extern "C" {
@@ -13,7 +11,7 @@ extern "C" {
 /* Runs the operation on `handle`; returns the failing status of the pre-check, or the operation's validated result. */
 WindowStatusResult FUN_0042792c(u32 handle, u32 second, u32 third, u32 fourth)
 {
-    s32 status = FUN_004283cc(handle);
+    s32 status = FUN_004283cc(reinterpret_cast<void *>(handle));
 
     bool failed = nnResultIsFailure(status);
 
@@ -21,7 +19,7 @@ WindowStatusResult FUN_0042792c(u32 handle, u32 second, u32 third, u32 fourth)
         return WindowStatusResult(status);
     }
     WindowStatusResult result(FUN_004275f0(handle, second, third, fourth));
-    recordValidatePair(handle, result.code, result.description);
+    recordValidatePair(reinterpret_cast<void *>(handle), result);
     return result;
 }
 

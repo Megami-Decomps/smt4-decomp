@@ -8,7 +8,7 @@ struct TextureFrameRecord {
 
 extern "C" {
 TextureSwap *jobGetWork(u32 job);
-ContentRecord *FUN_002aecd8(const ContentRecordKey *key, u32 index);
+ContentRecord *aocContentGetIndexedRecord(const ContentRecordKey *key, u32 index);
 void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition);
 
 void textureRequestIndexedFrame(u32 job, s32 index, s32 row, s32 column, s32 transition)
@@ -20,7 +20,7 @@ void textureRequestIndexedFrame(u32 job, s32 index, s32 row, s32 column, s32 tra
     s32 entry = 0;
     if (row > 0 && column > 0) {
         const TextureFrameRecord *record =
-            (const TextureFrameRecord *)FUN_002aecd8(work->content.key, index);
+            (const TextureFrameRecord *)aocContentGetIndexedRecord(work->content.key, index);
         entry = record->frames[row - 1][column - 1];
     }
     uiSpriteReplaceTextureEntry(work, entry, transition);

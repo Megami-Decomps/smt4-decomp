@@ -1,29 +1,28 @@
 /* NON_MATCHING: retail keeps the constant kind 12 in r7 across the memClear call (one more saved register and 4 more bytes of frame). */
 #include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-typedef struct Request {
-    u64 unk00;      /* 0x00 (8-byte aligned) */
-    u8 unk08[120];  /* 0x08 */
-} Request;
 
-extern void memClear(void *buffer, s32 size);
-extern u8 *FUN_002a6e7c(u32 owner, u32 kind, u32 key, Request *req);
-extern void FUN_002a4584(u32 context, Request *req, u32 arg0, u8 *entry8, s32 flag0, s32 flag1, u8 *entry);
-extern u32 g_aocDisplay; /* 0x433130 */
+struct FileQueue;
+extern void *memClear(void *buffer, u32 size);
+extern u8 *FUN_002a6e7c(AocSystem *system, s32 kind, s32 key, char *path);
+extern u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath,
+                      u32 *transferredBytes, u32 mode, u32 bytes, void *context);
+extern FileQueue *g_aocDisplay;
 
-/* Looks up the entry of kind 12 for `key`; when found, hands the request to the display queue. */
-void FUN_00387a08(u32 owner, u32 key, u32 arg0)
+/* Resolve the kind-12 add-on path and synchronously load it, optionally paired with a second path. */
+void *FUN_00387a08(AocSystem *system, s32 key, const char *secondPath)
 {
-    Request req;
-    u8 *entry;
-
-    memClear(&req, 0x80);
-    entry = FUN_002a6e7c(owner, 12, key, &req);
+    char path[128];
+    memClear(path, sizeof(path));
+    u8 *entry = FUN_002a6e7c(system, 12, key, path);
     if (entry != NULL) {
-        FUN_002a4584(g_aocDisplay, &req, arg0, entry + 8, 1, 0x80, entry);
+        return reinterpret_cast<void *>(FUN_002a4584(g_aocDisplay, path, secondPath,
+            reinterpret_cast<u32 *>(entry + 8), 1, sizeof(path), entry));
     }
+    return NULL;
 }
 
 }

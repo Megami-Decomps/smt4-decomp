@@ -1,4 +1,5 @@
 /* NON_MATCHING: contiguous template arguments use different stack-store grouping and base-relative arithmetic. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/PlaceWin.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -21,7 +22,7 @@ void placeWindowDrawLabel(void *);
 u32 asdProcessCreateSimple(const char *, s32, s32, s32, AsdProcUpdateFunc, AsdProcFunc, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 void drawParameterBlockClear(void *);
-void paramsInit(void *, const void *, u32, const void *, u32, const void *, u32, const void *, u32, const void *, u32);
+
 void FUN_002bd954(void *, u32, u32, void *, u32, f32);
 void spriteStartAnimationByIndex(void *, u32);
 
@@ -42,7 +43,7 @@ void FUN_002637c8()
     /* The retail symbol names the command member of this contiguous resource block. */
     const PlaceWindowTemplateResources *resources = reinterpret_cast<const PlaceWindowTemplateResources *>(
         DAT_00403a58 - offsetof(PlaceWindowTemplateResources, commands));
-    paramsInit(window->parameters.packet, resources->first, sizeof(resources->first),
+    paramsInit(reinterpret_cast<UiResourceParameters *>(window->parameters.packet), resources->first, sizeof(resources->first),
                resources->second, sizeof(resources->second), NULL, 0, NULL, 0,
                resources->commands, sizeof(resources->commands));
     FUN_002bd954(window->animation, 0xe, 0x87, window->parameters.packet, 1, 1.0f);

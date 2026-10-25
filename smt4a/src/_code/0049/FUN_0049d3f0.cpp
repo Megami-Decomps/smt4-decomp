@@ -1,4 +1,5 @@
 /* NON_MATCHING: parameter-table root relocates as base+108 instead of its final-array symbol; one stack argument uses r0 instead of r2. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/HowToScreen.h"
 
 extern "C" {
@@ -12,11 +13,9 @@ void FUN_0049dd74(HowToScreenWork *work);
 void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);
 void asdTMTexLoadMainHeap(u32 table, u32 mode);
-void paramsClearPacket(Params002c312c *parameters);
-void paramsInit(Params002c312c *parameters, const void *first, u32 firstSize,
-    const void *second, u32 secondSize, u32 third, u32 fourth, u32 fifth, u32 sixth,
-    const void *last, u32 lastSize);
-void FUN_0014e188(UiSpriteState *sprite, u32 table, u32 argument, Params002c312c *parameters, u32 order, f32 scale);
+void paramsClearPacket(UiResourceParameters *parameters);
+
+void FUN_0014e188(UiSpriteState *sprite, u32 table, u32 argument, UiResourceParameters *parameters, u32 order, f32 scale);
 void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 
 // Load tutorial message/texture resources and initialize the four tutorial UI sprites.

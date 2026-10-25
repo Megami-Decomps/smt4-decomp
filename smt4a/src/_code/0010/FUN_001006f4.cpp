@@ -4,7 +4,7 @@
 
 extern "C" {
 char* FUN_0010095c(char*, s32, s32, va_list);
-s32 wstrlen(const char*);
+s32 libc_strlen(const char*);
 char* asdOperatorNewC(s32);
 char* libc_strcpy(char*, const char*);
 char* libc_strcat(char*, const char*);
@@ -22,8 +22,8 @@ DiagnosticMessage* FUN_001006f4(DiagnosticMessage* message, s32 kind, va_list ar
         text = asdStringFormatGrow(NULL, 0, DAT_0054efb0[kind], arguments);
     }
     if (message->text != NULL) {
-        s32 length = wstrlen(message->text);
-        char* combined = asdOperatorNewC(length + wstrlen(text) + 1);
+        s32 length = libc_strlen(message->text);
+        char* combined = asdOperatorNewC(length + libc_strlen(text) + 1);
         combined = libc_strcat(libc_strcpy(combined, message->text), text);
         asdOperatorDeleteB(message->text);
         asdOperatorDeleteB(text);

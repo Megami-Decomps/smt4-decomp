@@ -1,11 +1,10 @@
 /* NON_MATCHING: adjacent program arrays need separate literal loads with the current declarations. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/DrawPacketPreset.h"
 
 extern "C" {
-void paramsClearPacket(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
-                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
-                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
+void paramsClearPacket(UiResourceParameters *packet);
+
 extern const u8 DAT_005265b4[];
 extern const u8 DAT_005266c8[];
 extern const u8 DAT_00526794[];

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail clears the many state fields through a handful of shared base registers (the large offsets are derived from one constant), and derives the three parameter-table addresses by subtracting from the last one; the field values and call sequence are the same. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -51,8 +52,7 @@ void *taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(
 void FUN_0014c01c(void *work);
 void FUN_0014f3f4(void *work);
 void paramsClearPacket(void *packet);
-void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
-                const void *f, u32 fSize);
+
 
 /* Creates the message window: its sprite, the update process, the two draw tasks and the
  * parameter packet, with every state field cleared. */
@@ -100,7 +100,7 @@ MessageWindow *FUN_00145280(void)
     taskCreateDraw("MESS_U LEFT", 0x86, 0, 0, FUN_0014f3f4, 0, window, window->process);
     taskCreateDraw("MESS_U RIGHT", 0xE2, 0, 0, FUN_0014f3f4, 0, window, window->process);
     paramsClearPacket(raw + 0x194);
-    paramsInit(raw + 0x194, DAT_0052fe6c, 0x114, DAT_0052ff80, 0xCC, DAT_0053004c, 0x54, 0, 0, DAT_005300a0, 0x94C);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(raw + 0x194), DAT_0052fe6c, 0x114, DAT_0052ff80, 0xCC, DAT_0053004c, 0x54, 0, 0, DAT_005300a0, 0x94C);
     return window;
 }
 

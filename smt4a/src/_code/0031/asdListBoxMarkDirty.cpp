@@ -22,7 +22,7 @@ struct ListBoxMetrics {
 extern "C" {
 
 ListBoxMetrics *jobGetWork(void);
-s32 wstrlen(const char *text);
+s32 libc_strlen(const char *text);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void ARM_common_memcpy4_7(char *destination, const char *source);
 
@@ -32,7 +32,7 @@ void asdListBoxMarkDirty(void)
 {
     char text[256];
     ListBoxMetrics *box = jobGetWork();
-    f32 width = (f32)(wstrlen(box->title) * box->charWidth);
+    f32 width = (f32)(libc_strlen(box->title) * box->charWidth);
 
     for (AsdListNode *node = box->items.first; node != NULL; node = node->next) {
         AsdListBoxItem *item = static_cast<AsdListBoxItem *>(node->item);
@@ -65,12 +65,12 @@ void asdListBoxMarkDirty(void)
                 break;
             }
         } else {
-            itemWidth = wstrlen(item->label) * box->charWidth;
+            itemWidth = libc_strlen(item->label) * box->charWidth;
             switch (item->type) {
             case ASD_LISTBOX_PLAIN:
                 break;
             case ASD_LISTBOX_TEXT:
-                itemWidth += (wstrlen(item->text) + 1) * box->charWidth;
+                itemWidth += (libc_strlen(item->text) + 1) * box->charWidth;
                 break;
             case ASD_LISTBOX_TOGGLE:
                 itemWidth += box->charWidth * 6;

@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 FUN_00426204(void);
-u32 wstrlen(const u16 *text);
+u32 libc_strlen(const u16 *text);
 s32 FUN_004397e4(const u16 *text, u32 length, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth, u32 seventh);
 
 s32 FUN_004395fc(const u16 *text, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth)
@@ -13,6 +13,6 @@ s32 FUN_004395fc(const u16 *text, u32 second, u32 third, u32 fourth, u32 fifth, 
     if (FUN_00426204() == 0) {
         return (s32)0xC8A0D018;
     }
-    return FUN_004397e4(text, wstrlen(text) + 1, second, third, fourth, fifth, fifth, sixth);
+    return FUN_004397e4(text, libc_strlen(text) + 1, second, third, fourth, fifth, fifth, sixth);
 }
 }

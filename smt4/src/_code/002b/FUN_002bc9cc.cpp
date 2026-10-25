@@ -19,7 +19,7 @@ static __inline void expandCameraMatrix(Matrix44 *output, const Matrix34Data *in
 void FUN_002bc9cc(CameraMatrixCache *work)
 {
     if (work->enabled) {
-        FUN_001296c0(work->parameters, &work->projection, &work->view, &work->secondaryProjection, &work->secondaryView, 1, work->stereoScale, work->stereoOffset);
+        FUN_001296c0(&work->parameters, &work->projection, &work->view, &work->secondaryProjection, &work->secondaryView, 1, work->stereoScale, work->stereoOffset);
         FUN_002b77f4(&work->viewNormals, &work->view);
         nn_math_ARMv6_MTX44TransposeAsm(&work->projectionTransposed, &work->projection);
         FUN_002b77f4(&work->secondaryNormals, &work->secondaryView);

@@ -14,7 +14,7 @@ typedef char BattleEffectVersionOffsets[offsetof(BattleEffectVersionOwnerView, v
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
 extern const char DAT_00528544[], DAT_0052853c[], DAT_005284c0[];
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 s32 libc_strcmp(const char *first, const char *second);
 s32 libc_strncmp(const char *first, const char *second, u32 bytes);
 void sysMemClear(void *memory, u32 bytes);
@@ -30,12 +30,12 @@ void FUN_004f7cd0(BtlEffectOwnerA *effect)
     BattleEffectVersionOwnerView *owner = reinterpret_cast<BattleEffectVersionOwnerView *>(effect);
     for (s32 index = 0; index < BTL_EFFECT_SLOTS; ++index) {
         const char *name = effect->slots->entries[index].name;
-        if (wstrlen(name) == 0 || libc_strcmp(name, DAT_00528544) == 0 ||
+        if (libc_strlen(name) == 0 || libc_strcmp(name, DAT_00528544) == 0 ||
             libc_strcmp(DAT_0052853c, name) == 0)
             continue;
-        if (libc_strncmp(name, g_btlEffect.prefix, wstrlen(g_btlEffect.prefix)) == 0 ||
+        if (libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)) == 0 ||
             libc_strcmp(name, g_btlEffect.reserved.name) == 0 ||
-            libc_strncmp(name, g_btlEffect.otherPrefix, wstrlen(g_btlEffect.otherPrefix)) == 0 ||
+            libc_strncmp(name, g_btlEffect.otherPrefix, libc_strlen(g_btlEffect.otherPrefix)) == 0 ||
             libc_strcmp(name, g_btlEffect.reserved.otherName) == 0)
             continue;
         char path[128], formatted[128];
@@ -43,7 +43,7 @@ void FUN_004f7cd0(BtlEffectOwnerA *effect)
         sysMemClear(formatted, sizeof(formatted));
         textFormatBuffer(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
-        if (wstrlen(path) != 0) {
+        if (libc_strlen(path) != 0) {
             BattleVersionResourceSlot *slot = &owner->versions[index];
             const u8 *version = slot->data;
             if (version[0] == 'V' && version[1] == 'E' && version[2] == 'R') {

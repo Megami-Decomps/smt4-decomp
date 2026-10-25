@@ -11,12 +11,12 @@ struct TextValue {
 
 extern "C" {
 char *libc_strcpy(char *destination, const char *source);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 
 /* Copies a text value and updates its stored length. */
 void effEditorSetTextValue(TextValue *value, const char *text)
 {
     libc_strcpy(value->text, text);
-    value->length = wstrlen(text);
+    value->length = libc_strlen(text);
 }
 }

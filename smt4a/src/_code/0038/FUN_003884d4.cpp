@@ -20,7 +20,7 @@ void msgBoxFlagsSetBit7(u32 box);
 void sortMenuAcquire(u32, s32);
 void FUN_0031f208(u8 label);
 void useCounterStart(void);
-s32 FUN_002c7c54(void);
+s32 useCounterGetCurrentValue(void);
 s32 useCounterIsFinished(void);
 void touchMenuClose(...);
 void useCounterRelease(void);
@@ -60,7 +60,7 @@ u32 FUN_003884d4(void)
             if (i != excluded && gameFlagIsSet(choices.flags[i])) FUN_0031f208(labels[i]);
         useCounterStart();
     }
-    s32 result = FUN_002c7c54();
+    s32 result = useCounterGetCurrentValue();
     if (useCounterIsFinished()) {
         scrSetResult(0);
         touchMenuClose();

@@ -6,7 +6,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 BtlMainState *btlGetMainState(void);
 BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 

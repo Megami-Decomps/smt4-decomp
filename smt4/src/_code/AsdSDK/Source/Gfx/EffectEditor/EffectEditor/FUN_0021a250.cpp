@@ -11,12 +11,12 @@ extern const char DAT_0040930c[];
 extern const EffMenuMatrix DAT_004728f0;
 
 // Queue matching matrix-render entries for the two menu passes.
-void FUN_0021a250(const EffMenuRectangle *rectangle, u32 color,
+void FUN_0021a250(const EffMenuPosition *position, u32 color,
                   const EffMenuMatrix *transform, u32 resource, f32 scale)
 {
     asdDebugTrace(DAT_0040930c, 680);
     EffMenuMatrixNode *entry = static_cast<EffMenuMatrixNode *>(memAlloc(0x10000, 0x100, 0, 0x68, 16, 1));
-    memcpy(&entry->rectangle, rectangle, sizeof(*rectangle));
+    memcpy(&entry->position, position, sizeof(*position));
     if (transform != NULL)
         entry->transform = *transform;
     else

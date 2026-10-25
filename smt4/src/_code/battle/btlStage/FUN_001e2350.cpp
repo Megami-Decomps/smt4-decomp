@@ -6,11 +6,11 @@
 extern "C" {
 extern BtlStageGlobals g_btlStage;
 s32 btlStageRunWork(void);
-void FUN_0021eda8(void);
+void FUN_0021eda8(u32 handle);
 void FUN_0027dc24(BtlMainState* battle, void* description, u32 mode);
 void* asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 mode);
 u32 taskCreateDraw(const char* name, u32 priority, u32 flags, u32 mode,
-                   s32 (*update)(void), void (*destroy)(void), void* work, u32 parent);
+                   s32 (*update)(void), void (*destroy)(u32), void* work, u32 parent);
 
 // Allocate the battle-stage job and resolve its requested stage identifiers.
 void FUN_001e2350(BtlMainState* battle)

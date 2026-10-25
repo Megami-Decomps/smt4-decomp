@@ -25,7 +25,7 @@ void slotSetRequest(u32 index, u32 value, u32 extra);
 void FUN_00212204(u32 index);
 /* Sets the sprite's visibility.active byte / reads its signed completion flag. */
 void workSetStateByte(UiSpriteState *sprite, u8 state);
-s32 objectGetSignedFlag(const UiSpriteState *sprite);
+s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 }
 
 static __inline PanelTimer panelStartState(s32 state)
@@ -55,8 +55,8 @@ extern "C" void FUN_002cdd18(SpritePanel *panel)
         FUN_00163aa4(&panel->sprites[0], 1.0f);
         FUN_00163aa4(&panel->sprites[1], 1.0f);
         FUN_00163aa4(&panel->sprites[3], 1.0f);
-        if (objectGetSignedFlag(&panel->sprites[0]) == 0 ||
-            objectGetSignedFlag(&panel->sprites[1]) == 0)
+        if (uiSpriteGetCompletionState(&panel->sprites[0]) == 0 ||
+            uiSpriteGetCompletionState(&panel->sprites[1]) == 0)
             break;
         workSetStateByte(&panel->sprites[0], 0);
         workSetStateByte(&panel->sprites[1], 0);

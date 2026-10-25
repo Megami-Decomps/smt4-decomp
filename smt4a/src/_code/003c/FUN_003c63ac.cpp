@@ -29,12 +29,12 @@ extern "C" u32 FUN_003c63ac(void)
     s32 choice = btlResolveEntryChoice(scrGetArg(0));
     struct EntryRange { s32 count; s32 first; } range;
     FUN_00301a08(choice, &range.first, &range.count);
-    for (s32 index = range.first; index < range.first + range.count; ++index) {
+    for (s32 index = range.first; index < range.count + range.first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
-            (g_btlCandidateMasks.excluded & flags) == 0 && candidateTimer(entry) > 0) {
+            (flags & g_btlCandidateMasks.excluded) == 0 && candidateTimer(entry) > 0) {
             scrSetResult(1);
             return 1;
         }

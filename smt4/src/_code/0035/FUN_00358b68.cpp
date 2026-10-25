@@ -12,7 +12,7 @@ extern signed char g_asdCecModuleFlags; /* 0x4656d0 */
 extern signed char DAT_004656d1; /* 0x4656d1 */
 extern signed char DAT_004656d3; /* 0x4656d3 */
 extern signed char DAT_004656d4; /* 0x4656d4 */
-extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
+extern unsigned int g_asdCecMessageBoxStateCriticalSection; /* 0x4e62b4 */
 
 /* Supplied declaration required: FUN_00238f4c. */
 /* Supplied declaration required: FUN_002399ec. */
@@ -29,18 +29,18 @@ unsigned int FUN_00358b68(int param_1)
   if (g_asdCecModuleFlags != '\0') {
     FUN_00238f4c(param_1,0);
   }
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxStateCriticalSection);
   if (DAT_004656d3 != '\0') {
     FUN_002399ec(*(unsigned int *)(param_1 + 0x3a8));
     DAT_004656d3 = '\0';
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxStateCriticalSection);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxStateCriticalSection);
   if (DAT_004656d4 != '\0') {
     FUN_002399ec(*(unsigned int *)(param_1 + 0x558));
     DAT_004656d4 = '\0';
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62b4);
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxStateCriticalSection);
   if (DAT_004656d1 != '\0') {
     FUN_0024ee68(0);
     DAT_004656d1 = '\0';

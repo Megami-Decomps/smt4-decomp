@@ -1,4 +1,3 @@
-/* NON_MATCHING: the particle-count computation schedules differently (retail loads the override and the multiplier together and conditionally multiplies; built loads them in sequence and keeps the count in r4/r5 swapped). */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -20,21 +19,27 @@ static __inline void *effAllocCleared(s32 size)
     return block;
 }
 
-/* Creates the smaller emitter object for `desc`, with room for count * multiplier particles
- * (capped at 100). */
-EffEmitter *effEmitterCreateSmall(EffEmitterDesc *desc)
+/* Resolve and clamp the descriptor's particle capacity. */
+static __inline u32 effEmitterGetCapacity(const EffEmitterDesc *desc)
 {
-    EffEmitter *emitter;
-    s32 count = desc->countOverride;
     u32 maxCount;
 
-    if (count == 0) {
-        count = desc->countDefault;
+    if (desc->countOverride == 0) {
+        maxCount = desc->countDefault * desc->multiplier;
+    } else {
+        maxCount = desc->countOverride * desc->multiplier;
     }
-    maxCount = count * desc->multiplier;
     if (maxCount > 100) {
         maxCount = 100;
     }
+    return maxCount;
+}
+
+/* Creates the smaller emitter object for `desc`. */
+EffEmitter *effEmitterCreateSmall(EffEmitterDesc *desc)
+{
+    u32 maxCount = effEmitterGetCapacity(desc);
+    EffEmitter *emitter;
     emitter = (EffEmitter *)effAllocCleared(sizeof(EffEmitter) - 0x24);
     emitter->unk04 = -1;
     emitter->maxCount = maxCount;

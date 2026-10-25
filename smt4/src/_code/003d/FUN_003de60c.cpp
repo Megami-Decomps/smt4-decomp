@@ -5,7 +5,7 @@
 extern "C" {
 extern ReflectContext *g_btlActionReflect;
 BtlMainState *btlGetMainState(void);
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 flags, u32 secondary);
+
 
 // Queue foreground/background overlays for other participating action records.
 u32 FUN_003de60c(s16 actorId, u32 secondary, u32 value, BtlActionRecord *reference)

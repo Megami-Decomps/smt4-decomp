@@ -1,5 +1,5 @@
-/* NON_MATCHING: only the final sign-bit test differs (retail: and #0x80000000 / cmp / movlt / movge; armcc here emits asr #31 / add #1). */
 #include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -30,7 +30,9 @@ u8 FUN_002f530c(s32 kind, s32 arg)
     } else if (kind == 2) {
         result = FUN_002e1458(arg);
     }
-    return (result & 0x80000000) == 0;
+    if (!nnResultIsSuccess(result))
+        return 0;
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail addresses the second cleared record through a base at DAT_005f1cbc+0xb8 and keeps the fourth key table's address in ip (stack-argument stm grouping differs); stores and calls otherwise identical. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 /* A 0x8C-byte UI sprite; only the data the initializers below pass around. */
 struct SceneSprite {
@@ -54,7 +54,7 @@ struct SceneWork {
     /* 0x0ad */ u8 unk0ad[3];
     /* 0x0b0 */ u32 unk0b0[20];
     /* 0x100 */ u8 unk100[0x28];
-    /* 0x128 */ Params002c312c packet;
+    /* 0x128 */ UiResourceParameters packet;
     /* 0x148 */ SceneSprite sprite;
     /* 0x1d4 */ SceneSprite sprites[5];
     /* 0x490 */ u32 unk490;
@@ -96,11 +96,9 @@ extern SceneRecords DAT_005f1cbc;
 FlagWorkBanks *gameFlagsGetBlock(void);
 void mapProbePositionDownward(MapVector *position);
 void FUN_00352eec(void);
-void paramsClearPacket(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
-                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
-                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
-void FUN_0014e188(SceneSprite *sprite, u32 group, u32 image, Params002c312c *owner, u16 id, f32 scale);
+void paramsClearPacket(UiResourceParameters *packet);
+
+void FUN_0014e188(SceneSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void uiSpriteSetKeyframe(SceneSprite *sprite, s32 keyframe, s32 restart);
 void uiSpriteSelectAnim(SceneSprite *sprite, s32 animation);
 

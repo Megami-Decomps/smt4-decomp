@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail address formation or grouped state stores differ. */
+/* NON_MATCHING: packed counter-base formation adds an extra 0x72; retail retains the aligned save-section base. */
 #include "common.h"
 __packed struct SaveCounters {
     u32 first;

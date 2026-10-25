@@ -17,7 +17,7 @@ struct NamedResourceBindingArray {
 };
 struct NamedResourceBindingRequest {
     /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ const u16** names;
+    /* 0x18 */ const char** names;
     /* 0x1C */ u32 count;
 };
 struct NamedResourceBindingOwner {
@@ -27,6 +27,8 @@ struct NamedResourceBindingOwner {
 typedef char NamedResourceBindingOffsetsCheck[
     offsetof(NamedResourceDirectory, data.resources) == 0x24 &&
     offsetof(NamedResourceDirectory, data.nameIndex) == 0x28 &&
+    offsetof(NamedResourceBindingRequest, names) == 0x18 &&
+    sizeof(NamedResourceBindingRequest) == 0x20 &&
     offsetof(NamedResourceBindingRequest, count) == 0x1C &&
     offsetof(NamedResourceBindingOwner, directory) == 0x30 ? 1 : -1];
 #endif

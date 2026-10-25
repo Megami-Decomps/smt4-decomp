@@ -20,7 +20,7 @@ typedef struct Menu {
     /* 0xFC */ Cursor cursor;
 } Menu;
 
-s8 recordGetSignedFlags(const Cursor *cursor);
+s8 uiSpriteGetCompletionState(const Cursor *cursor);
 int buttonHelpIsNotActive(void);
 int pointConvertToFloat(void *layout, u32 a, u32 b);
 int FUN_0029d960(Menu *menu);
@@ -40,7 +40,7 @@ void FUN_003a7834(Menu *menu)
     width = vec2GetYInt(cursor);
     height = vec2GetXInt(cursor);
     pointConvertToFloat(menu->layout, height, width);
-    if (recordGetSignedFlags(cursor) != 0 && buttonHelpIsNotActive() != 0) {
+    if (uiSpriteGetCompletionState(cursor) != 0 && buttonHelpIsNotActive() != 0) {
         FUN_002a0cc8(0);
         menu->state.first = 2;
         menu->state.second = 0;

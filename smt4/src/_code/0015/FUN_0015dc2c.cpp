@@ -7,7 +7,7 @@ s32 libc_strlen(const char *text);
 s32 libc_strcmp(const char *left, const char *right);
 void FUN_0015e6f4(void *output, AocSystem *system, const char *mountName,
                   u32 archive, u32 flags, u32 id);
-void FUN_002a1130(void *output, u32 found);
+void _ZN21WindowOperationResultC1Eh(void *output, u32 found);
 
 // Resolve an aoc-prefixed path to the mounted content package's archive.
 void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
@@ -18,7 +18,7 @@ void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
         if (length > 8) {
             length = 8;
         } else if (length <= 0) {
-            FUN_002a1130(output, 0);
+            _ZN21WindowOperationResultC1Eh(output, 0);
             return;
         }
         for (s32 index = 0; index < length; ++index) {
@@ -39,6 +39,6 @@ void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
             }
         }
     }
-    FUN_002a1130(output, 0);
+    _ZN21WindowOperationResultC1Eh(output, 0);
 }
 }

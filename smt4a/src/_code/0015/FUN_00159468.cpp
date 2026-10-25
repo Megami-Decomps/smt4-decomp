@@ -25,7 +25,7 @@ extern int FUN_0016f06c(unsigned int *, unsigned int *, unsigned int *, unsigned
 extern unsigned int FUN_0016f864(unsigned int);
 extern int FUN_0016f988(unsigned int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: sysFatalBreak. */
-extern unsigned int wstrlen(unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 /* Supplied declaration required: nn_os_SharedMemoryBlock_AttachAndMap. */
 
 
@@ -57,7 +57,7 @@ unsigned int FUN_00159468(unsigned int *param_1,unsigned int param_2)
     if ((temp_v1 & 0x3ff) != 0x3f9 && (int)temp_v1 < 0) {
       sysFatalBreak();
     }
-    temp_v0 = wstrlen(param_2);
+    temp_v0 = libc_strlen(param_2);
     temp_v2 = FUN_0016f988(&g_ipcServiceInitResult,param_2,temp_v0,0);
     if (temp_v2 < 0) {
       sysFatalBreak();

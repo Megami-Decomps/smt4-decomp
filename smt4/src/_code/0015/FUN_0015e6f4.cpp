@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0015e8c4(int, int, unsigned int, int);
-int FUN_002a1130(...);
+int _ZN21WindowOperationResultC1Eh(...);
 int libc_strcmp(int, unsigned int *);
 int _ZN18WindowStatusResultC1Ej(...);
 int _ZN18WindowStatusResultC1Ev(int *);
@@ -31,7 +31,7 @@ extern int g_aocMain; /* 0x432fc8 */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_0015e8c4. */
-/* Supplied declaration required: FUN_002a1130. */
+/* Supplied declaration required: _ZN21WindowOperationResultC1Eh. */
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: libc_strcmp. */
 extern int FUN_002ad1e0(int);
@@ -74,7 +74,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       temp_v1 = FUN_002c3dfc(temp_v0);
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
-        FUN_002a1130(temp_v8,0);
+        _ZN21WindowOperationResultC1Eh(temp_v8,0);
         _ZN18WindowStatusResultC1Ej(&temp_v2,temp_v1);
         temp_v6 = *puVar3;
         uStack_68 = puVar3[1];
@@ -102,7 +102,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
     uStack_54 = puVar3[1];
     temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);
     if (temp_v1 < 0) {
-      FUN_002a1130(&temp_v5,0);
+      _ZN21WindowOperationResultC1Eh(&temp_v5,0);
       temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);
       temp_v8[0] = temp_v5;
       uStack_44 = uStack_64;
@@ -131,7 +131,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
     }
     *(unsigned char *)(param_2 + 0x330) = 1;
   }
-  FUN_002a1130(param_1,0);
+  _ZN21WindowOperationResultC1Eh(param_1,0);
   return;
 }
 

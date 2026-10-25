@@ -1,6 +1,6 @@
 #include "battle/btlReflect.h"
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 mode, u32 source);
+
 
 // Create the target-object action and populate its four additional IDs.
 u32 FUN_0023f27c(s32 actor, u32 source, u32 value, u32 parameter, void *target,

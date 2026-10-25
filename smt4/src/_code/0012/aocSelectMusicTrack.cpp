@@ -6,7 +6,7 @@ extern "C" {
 extern AocSystem *g_aocSystem;
 
 AocMusicJob *jobGetWork(void);
-u16 *FUN_002aecd8(void *table, u32 index);
+u16 *aocContentGetIndexedRecord(void *table, u32 index);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, AocTrackId track, s32 arg);
 int FUN_002ae8e4(AocSystem *system, AocTrackId track, s32 arg);
@@ -26,7 +26,7 @@ void aocSelectMusicTrack(void *unused, u32 index, s32 queue)
     } else if (job->pending == 1) {
         return;
     }
-    entry = FUN_002aecd8(job->table, index);
+    entry = aocContentGetIndexedRecord(job->table, index);
     if (job->current.track == *entry) {
         return;
     }

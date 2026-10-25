@@ -26,7 +26,7 @@ extern const char DAT_0052853c[];           /* "NOT_EFT" */
 extern const char DAT_00528534[];           /* "%s%02d" */
 extern const char DAT_005284c0[];           /* "battle/effect/%s.eft" */
 
-u32 wstrlen(const char *s);
+u32 libc_strlen(const char *s);
 s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
 char *libc_strcpy(char *destination, const char *source);
@@ -49,7 +49,7 @@ u32 FUN_004f716c(EffectWork *work)
     char text[128];
     for (s32 i = 0; i < 4; i++) {
         const char *name = work->names[i];
-        if (wstrlen(name) == 0) {
+        if (libc_strlen(name) == 0) {
             continue;
         }
         if (libc_strcmp(name, "0") == 0) {
@@ -61,11 +61,11 @@ u32 FUN_004f716c(EffectWork *work)
         if (name != NULL && libc_strcmp(name, g_btlEffect[4]) == 0) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[3], wstrlen(g_btlEffect[3])) == 0) {
+        if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
             continue;
         }
         bool selected = false;
-        if (name != NULL && libc_strncmp(name, g_btlEffect[0], wstrlen(g_btlEffect[0])) == 0) {
+        if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
             for (u32 j = 0; j < 11; j++) {
                 textFormatBuffer(text, DAT_00528534, g_btlEffect[0], j);
                 if (libc_strcmp(text, name) == 0) {
@@ -87,13 +87,13 @@ u32 FUN_004f716c(EffectWork *work)
         sysMemClear(text, 0x80);
         textFormatBuffer(text, DAT_005284c0, name);
         libc_strcpy(path, text);
-        if (wstrlen(path) == 0) {
+        if (libc_strlen(path) == 0) {
             continue;
         }
         if (name != NULL) {
             bool reference = false;
             for (s32 j = 0; j < 11; j++) {
-                if (libc_strncmp(name, DAT_00528220[j], wstrlen(DAT_00528220[j])) == 0) {
+                if (libc_strncmp(name, DAT_00528220[j], libc_strlen(DAT_00528220[j])) == 0) {
                     reference = true;
                     break;
                 }

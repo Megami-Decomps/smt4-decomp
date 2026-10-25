@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char LAB_00102155; /* 0x102155 */
 
 extern int FUN_001c53f0(void);
-extern int wstrlen(void);
+extern int libc_strlen(void);
 /* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: FUN_002e3f68. */
 extern unsigned int FUN_002e5684(unsigned char *, unsigned char *);
@@ -72,7 +72,7 @@ int * FUN_002e4d84(int *param_1,int param_2,int param_3,int param_4)
   param_1[6] = 0;
   param_1[7] = temp_v9;
   if (temp_v8 != 0) {
-    temp_v0 = wstrlen();
+    temp_v0 = libc_strlen();
     asdOperatorNewC(temp_v0 + 1);
     temp_v0 = FUN_001c53f0();
     param_1[6] = temp_v0;

@@ -26,7 +26,7 @@ bool useCounterIsFinished();
 void useCounterRelease();
 void sysPlaySe(u32 sound);
 void FUN_003343f0(u32 mode);
-s32 FUN_002c7c54();
+s32 useCounterGetCurrentValue();
 ItemVariantStateView *FUN_0026140c();
 void FUN_004a84e8(ItemListSelectionEntry *selection, u8 animation);
 void FUN_004a3e04(ItemListSelectionOwner *owner);
@@ -40,7 +40,7 @@ void FUN_004a40f4(ItemListSelectionOwner *owner)
         ItemListFlowView *flow = (ItemListFlowView *)owner;
         flow->state = 2;
         flow->step = 0;
-    } else if (FUN_002c7c54() != 0x69) {
+    } else if (useCounterGetCurrentValue() != 0x69) {
         g_animatedPageSelection.selection = -1;
         if ((s16)owner->selection.value != 0) {
             u8 *variant = &FUN_0026140c()->variant;

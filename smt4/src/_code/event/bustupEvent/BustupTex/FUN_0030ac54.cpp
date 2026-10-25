@@ -9,7 +9,7 @@ extern const char DAT_004037b0[];
 extern const char DAT_004037a0[];
 s32 gameFlagIsSet(u32 flag);
 void *dataTable25FindById(u32 id);
-s32 FUN_002aecd8(void *definition, s32 enabled);
+s32 aocContentGetIndexedRecord(void *definition, s32 enabled);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void memClear(void *memory, u32 size);
 s32 FUN_002c1d5c(void);
@@ -23,7 +23,7 @@ u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endD
 /* Start a bustup texture process, subject to its game-flag visibility rule. */
 void FUN_0030ac54(u32 id, s32 keepPlacement)
 {
-    if (gameFlagIsSet(0x522) && !FUN_002aecd8(dataTable25FindById(id), 1))
+    if (gameFlagIsSet(0x522) && !aocContentGetIndexedRecord(dataTable25FindById(id), 1))
         return;
     asdDebugTrace(DAT_004037b0, 1156);
     BustupTextureWork *work = static_cast<BustupTextureWork *>(asdMemAlloc(0x100, 0x100, 0, sizeof(BustupTextureWork), 1));

@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 175 rows); retail spills r0-r3 and reloads the second argument from the stack and lays the per-kind cases out as shared tails */
+#include "battle/btlReflect.h"
 #include "common.h"
 
 // Battle main state: the cursor extents and the flag word are the only fields read here.
@@ -10,23 +11,12 @@ struct BtlMainState {
     s16 limit;              // 0x496a
 };
 
-// Queued reflect action descriptor: only the movement payload.
-struct ReflectAction {
-    u8 unk00[4];
-    u8 type;                // 0x04
-    u8 unk05[0x1f];
-    s16 moveX;              // 0x24
-    s16 moveY;              // 0x26
-    f32 speed;              // 0x28
-};
-
 extern "C" {
 
-extern ReflectAction* g_btlActionReflect;
 
 BtlMainState* btlGetMainState(void);
 s32 FUN_00293230(BtlMainState* state);
-ReflectAction* btlQueueReflectAction(ReflectAction* queue, s32 id, s32 flag, u32 arg);
+
 void FUN_002505c0(u32 a, u32 b, u32 event, s32 c, s32 d, s32 e, s32 f);
 
 // Menu cursor step for the given direction `kind`: works out how far the two cursors move
@@ -120,10 +110,10 @@ u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
     f32 stepX = (f32)moveX;
     f32 stepY = (f32)moveY;
     ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, arg);
-    action->type = 30;
-    action->moveX = (s16)(s32)stepX;
-    action->moveY = (s16)(s32)stepY;
-    action->speed = speed;
+    action->kind = 30;
+    action->first = (s16)(s32)stepX;
+    action->second = (s16)(s32)stepY;
+    action->scalar = speed;
     return 1;
 }
 

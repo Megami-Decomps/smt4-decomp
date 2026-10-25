@@ -80,7 +80,7 @@ void *QuestEntry::operator new(u32 size)
 
 /* Per-frame update of the quest center screen: opens the entry list (playing a start sequence if
    a row of the table asks for one), waits for it, then closes it again. Returns -1 once finished. */
-u32 QuestCenterMainProcUpdate(void)
+s32 QuestCenterMainProcUpdate(u32 handle)
 {
     QcWork *work = g_qcMain.work;
     switch (work->mode) {

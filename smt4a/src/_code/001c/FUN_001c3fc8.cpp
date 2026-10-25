@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern unsigned int wstrlen(int);
+extern unsigned int libc_strlen(int);
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
 
@@ -62,7 +62,7 @@ void FUN_001c3fc8(int param_1,int param_2,int param_3)
         temp_v7 = (int)piVar1 + temp_v1;
       }
       if (!(temp_v7 == 0 || temp_v3 == 0)) {
-        temp_v0 = wstrlen(temp_v3);
+        temp_v0 = libc_strlen(temp_v3);
         temp_v1 = nw_ut_ResDicPatricia_Get(&temp_v7,temp_v3,temp_v0);
         if (temp_v1 != 0) {
           temp_v2 = *(int *)(temp_v1 + 0xc);

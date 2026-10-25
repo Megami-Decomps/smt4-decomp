@@ -1,15 +1,14 @@
 /* NON_MATCHING: reset-array stores use an offset literal, packet arguments use strd, and sprite/bank pointers remain live; 92 versus retail 88 instructions. */
 #include "shard/Shard004B.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "ui/UiSpriteState.h"
 
 extern "C" {
 extern const u8 DAT_00532924[];
-void paramsClearPacket(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u16 firstBytes, const void *second, u16 secondBytes,
-                const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes, const void *fifth, u16 fifthBytes);
-void FUN_0014e188(UiSpriteState *sprite, s32 imageBank, s32 animation, Params002c312c *packet, s32 flags, f32 scale);
+void paramsClearPacket(UiResourceParameters *packet);
+
+void FUN_0014e188(UiSpriteState *sprite, s32 imageBank, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 flags);
 void FUN_004cf7cc(SpritePresetBank *bank);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, s32 preset);
@@ -21,7 +20,7 @@ void FUN_004ba1f4(Menu4C *menu)
     struct MenuSpriteParameters {
         u8 prefix[0x9ec];
         u8 active, completed, pending, unk9EF;
-        Params002c312c packet;
+        UiResourceParameters packet;
     };
     typedef char MenuSpriteParameterOffsets[offsetof(MenuSpriteParameters, active) == 0x9ec && offsetof(MenuSpriteParameters, packet) == 0x9f0 ? 1 : -1];
     MenuSpriteParameters *parameters = reinterpret_cast<MenuSpriteParameters *>(menu);

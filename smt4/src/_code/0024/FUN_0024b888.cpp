@@ -4,7 +4,7 @@ struct BattleMainState;
 
 extern "C" {
 BattleMainState *btlGetMainState(void);
-ReflectAction *btlQueueReflectAction(ReflectContext *, s16, s32, u32);
+
 
 // Queue reflection action thirty-five with four halfword identifiers.
 u32 FUN_0024b888(s32 unit, u32 argument, u16 first, u16 second, u16 third, u16 fourth)

@@ -1,3 +1,4 @@
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W4_Match3_InfoWindow.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -22,9 +23,9 @@ void FUN_00156478(void);
 void FUN_00155ca8(void);
 u32 asdProcessCreateSimple(const char*, u32, u32, u32, void (*)(void), void (*)(void), u32);
 u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
-void paramsClearPacket(Params002c312c* parameters);
-void paramsInit(Params002c312c*, const void*, u16, const void*, u16, const void*, u16, const void*, u16, const void*, u16);
-void FUN_0014e188(UiSpriteState*, u32 group, u32 id, const Params002c312c*, u16 flags, f32 speed);
+void paramsClearPacket(UiResourceParameters* parameters);
+
+void FUN_0014e188(UiSpriteState*, u32 group, u32 id, const UiResourceParameters*, u16 flags, f32 speed);
 void uiSpriteSetKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void uiSpriteSetImageKeyframe(UiSpriteState*, u32 keyframe, u32 flags);
 void* spriteHandleCreate(u32 flags);

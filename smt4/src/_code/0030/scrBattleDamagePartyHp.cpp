@@ -48,7 +48,8 @@ u32 scrBattleDamagePartyHp()
             if (target->hp <= damage)
                 damage = target->hp - 1;
             FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainState()));
-            DamageUnit *unit = &btlGetMainState()->units[target->unitIndex];
+            DamageUnit *unit = btlGetMainState()->units;
+            unit += target->unitIndex;
             s32 slotMask = slot << 3;
             FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->hp, target->maxHp,
                           0, 0, 0, 0, 1, 0, slotMask, slotMask, slotMask, slotMask, 1, 0, 1, 1, 0, 1);

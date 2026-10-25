@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_5_stack;
 
-extern int wstrlen(int);
+extern int libc_strlen(int);
 extern int FUN_0043b13c(int, unsigned int, int, int, unsigned char *, int, unsigned int *);
 
 
@@ -36,7 +36,7 @@ int FUN_0030eef0(int param_1,int param_2,unsigned char *param_3,int param_4,unsi
       param_3 = temp_v2;
       param_4 = 1;
     }
-    temp_v0 = wstrlen(param_2);
+    temp_v0 = libc_strlen(param_2);
     temp_v0 = FUN_0043b13c(param_1 + 0xc,*(unsigned int *)(param_1 + 4),param_2,temp_v0 + 1,param_3,
                          param_4,(unsigned int *)&temp_v1);
     if (-1 < temp_v0) {

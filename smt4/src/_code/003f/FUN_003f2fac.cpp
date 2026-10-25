@@ -32,7 +32,7 @@ extern "C" {
 extern SndVoiceManager g_nnSndVoiceManager;
 extern u8 entry;
 void FUN_0035ff14(void *object);
-s32 sceneNotifyNoop(void *object, void (*destructor)(void *), void *moduleHandle);
+s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
 
 // Constructs the global voice manager (every voice, its implementation, and the voice table)
 // and registers its destructor.
@@ -50,6 +50,6 @@ void FUN_003f2fac(void)
         manager->voiceTable[i]->impl = new (impl) SndVoiceImpl(i);
         impl++;
     }
-    sceneNotifyNoop(manager, FUN_0035ff14, &entry);
+    __aeabi_atexit(manager, FUN_0035ff14, &entry);
 }
 }

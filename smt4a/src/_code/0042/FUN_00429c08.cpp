@@ -18,9 +18,7 @@ extern "C" {
 extern const char DAT_005892a4[]; /* the record's path prefix */
 
 s32 libc_toupper(s32 character);
-s32 FUN_004283cc(StatusRecord *record);
 u32 FUN_004395fc(const s8 *name, const char *prefix, s32 mode, u32 *base, KeyPair key);
-void recordValidatePair(StatusRecord *record, WindowStatusResult result);
 s32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 FUN_00429a1c(StatusRecord *record);
 }

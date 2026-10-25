@@ -5,7 +5,7 @@
 extern "C" {
 
 int mapIfTimerStep(void);
-int FUN_0020d7f4(void);
+int mapFastMarkerCreate(void);
 int FUN_0021dfbc(void);
 int FUN_002648e8(int);
 int FUN_00274798(void);
@@ -55,7 +55,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Supplied declaration required: mapIfTimerStep. */
 extern int scrRunOpcodesStub(unsigned int);
-/* Supplied declaration required: FUN_0020d7f4. */
+/* Supplied declaration required: mapFastMarkerCreate. */
 /* Supplied declaration required: FUN_0021dfbc. */
 /* Supplied declaration required: FUN_002648e8. */
 /* Supplied declaration required: FUN_00274798. */
@@ -321,7 +321,7 @@ LAB_00264b84:
     case 0:
       DAT_0049fb45 = 0;
       naviRefreshMainBlock();
-      FUN_0020d7f4();
+      mapFastMarkerCreate();
       temp_v7 = g_lmapScene;
       puVar11 = (unsigned int *)(g_lmapScene + 0x20);
       temp_v4 = *(unsigned int *)(g_lmapScene + 0x24);

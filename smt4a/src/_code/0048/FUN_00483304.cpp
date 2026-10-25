@@ -1,24 +1,6 @@
 /* NON_MATCHING: transform constant-load scheduling, stack base preservation and owner/object saved registers differ. */
-#include "map/mapDepart.h"
+#include "map/EnemySpawnState.h"
 
-struct EnemySpawnRecord { u16 unk00; s16 x, y, z; u16 id, kind; };
-struct EnemySpawnOwner {
-    u32 unk00, id, variant;
-    u8 unk0C[0x8c];
-    u32 context;
-    u8 unk9C[0x806];
-    u16 registeredIds[32];
-};
-struct EnemySpawnObject {
-    u8 prefix[0x20];
-    u32 id, sourceIndex;
-    u8 unk28[0x3c];
-    u32 category, currentValue;
-    u8 unk6C[4];
-    u32 kind;
-};
-typedef char EnemySpawnOwnerOffsetsCheck[offsetof(EnemySpawnOwner, context) == 0x98 &&
-    offsetof(EnemySpawnOwner, registeredIds) == 0x8a2 ? 1 : -1];
 extern "C" {
 const EnemySpawnRecord *FUN_00356308(u32 index);
 s32 gameFlagIsSet(u32 flag);

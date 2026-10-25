@@ -3,22 +3,22 @@
 #include "addon/AocPackage.h"
 
 extern "C" {
-s32 wstrlen(const char *text);
+s32 libc_strlen(const char *text);
 s32 libc_strcmp(const char *left, const char *right);
 void FUN_001d23e0(void *output, AocSystemA *system, const char *mountName,
                   u32 archive, u32 flags, u32 id);
-void FUN_001d25a0(void *output, u32 found);
+void _ZN21WindowOperationResultC1Eh(void *output, u32 found);
 
 // Resolve an aoc-prefixed path to the mounted content package's archive.
 void FUN_001d0ea0(void *output, AocSystemA *system, const char *path)
 {
     if (system->packages.count != 0 && system->packages.entries != NULL) {
         char mountName[16] = {};
-        s32 length = wstrlen(path);
+        s32 length = libc_strlen(path);
         if (length > 8) {
             length = 8;
         } else if (length <= 0) {
-            FUN_001d25a0(output, 0);
+            _ZN21WindowOperationResultC1Eh(output, 0);
             return;
         }
         for (s32 index = 0; index < length; ++index) {
@@ -39,6 +39,6 @@ void FUN_001d0ea0(void *output, AocSystemA *system, const char *path)
             }
         }
     }
-    FUN_001d25a0(output, 0);
+    _ZN21WindowOperationResultC1Eh(output, 0);
 }
 }

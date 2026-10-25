@@ -4,7 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 
@@ -34,7 +34,7 @@ public:
     static void *operator new(u32 bytes, void *owner) throw() { return asdOperatorNew(bytes, owner); }
 
     /* 0x000 */ PartnerAttackEntry entries[PARTNER_ATTACK_ENTRY_COUNT];
-    /* 0x840 */ Params002c312c parameters;
+    /* 0x840 */ UiResourceParameters parameters;
 };
 
 typedef char PartnerAttackEntriesLayoutCheck[sizeof(PartnerAttackEntry) == 0xb0 &&

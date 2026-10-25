@@ -9,10 +9,10 @@ extern const u32 DAT_00558438[];
 extern u8 DAT_0056d6c0[0x100], DAT_0056d7c0[0x100], DAT_0056d8c0[0x80];
 extern u8 entry;
 void FUN_0042b478(void *);
-void FUN_0042ce3c(void *);
+void _ZN2nn2os15CriticalSectionD1Ev(void *);
 void FUN_001aa330(void *);
 void __aeabi_vec_ctor_nocookie_nodtor(void *, void (*)(void *), u32 size, u32 count);
-s32 emptyStub_002f4370(void *, UnitHeapModuleDestructor, void *module);
+s32 __aeabi_atexit(void *, UnitHeapModuleDestructor, void *module);
 
 // Initialize the record pool, module lock and three fixed-size unit heaps.
 void unitHeapModuleInitialize(void)
@@ -21,12 +21,12 @@ void unitHeapModuleInitialize(void)
     DAT_005893a8 = 0;
     DAT_0062d400 = 0;
     nn_os_CriticalSection_Initialize(&DAT_0062d400);
-    __aeabi_atexit(&DAT_0062d400, FUN_0042ce3c, &entry);
+    __aeabi_atexit(&DAT_0062d400, _ZN2nn2os15CriticalSectionD1Ev, &entry);
     unitHeapModuleInitialize(&DAT_0062d34c, DAT_00558438, 16, DAT_0056d6c0, 0x100);
-    __aeabi_atexit(&DAT_0062d34c, FUN_0042ce3c, &entry);
+    __aeabi_atexit(&DAT_0062d34c, _ZN2nn2os15CriticalSectionD1Ev, &entry);
     unitHeapModuleInitialize(&DAT_0062d388, DAT_00558438, 8, DAT_0056d7c0, 0x100);
     __aeabi_atexit(&DAT_0062d388, FUN_001aa330, &entry);
     unitHeapModuleInitialize(&DAT_0062d3c4, DAT_00558438, 8, DAT_0056d8c0, 0x80);
-    emptyStub_002f4370(&DAT_0062d3c4, FUN_001aa330, &entry);
+    __aeabi_atexit(&DAT_0062d3c4, FUN_001aa330, &entry);
 }
 }

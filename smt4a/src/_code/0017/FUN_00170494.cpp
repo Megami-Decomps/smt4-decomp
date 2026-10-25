@@ -59,7 +59,7 @@ extern unsigned int DAT_00589260; /* 0x589260 */
 extern unsigned int DAT_00589264; /* 0x589264 */
 extern unsigned int DAT_00589268; /* 0x589268 */
 extern unsigned int DAT_00589270; /* 0x589270 */
-extern unsigned int DAT_0061a62c; /* 0x61a62c */
+extern unsigned int g_appletSleepCallbackCriticalSection; /* 0x61a62c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0015a3c0. */
@@ -222,13 +222,13 @@ unsigned int FUN_00170494(void)
          (temp_v0 = FUN_0015a410(), temp_v0 == 0)) {
         (*DAT_0058921c)(DAT_0058925c);
       }
-      nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a62c);
+      nn_os_CriticalSection_Enter((unsigned int)&g_appletSleepCallbackCriticalSection);
       for (temp_v0 = DAT_005891f8; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 4)) {
         if (*(romwright_code **)(temp_v0 + 8) != (romwright_code *)0x0) {
           (**(romwright_code **)(temp_v0 + 8))();
         }
       }
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+      nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
       nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager();
     }
   }

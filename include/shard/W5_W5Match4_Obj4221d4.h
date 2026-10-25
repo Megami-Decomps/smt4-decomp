@@ -3,11 +3,13 @@
 
 #include "common.h"
 
+
 /* Buffer-owning object identified by its retail vtable. */
 class Obj4221d4 {
 public:
     Obj4221d4();
     virtual ~Obj4221d4();
+    static void *operator new[](u32 bytes) throw();
     virtual void vfunc08();
     virtual void vfunc0c();
     virtual void vfunc10();
@@ -25,5 +27,6 @@ private:
     /* 0x48 */ void *bufferB;
     /* 0x4c */ void *bufferC;
 };
+typedef char Obj4221d4SizeCheck[sizeof(Obj4221d4) == 0x50 ? 1 : -1];
 
 #endif

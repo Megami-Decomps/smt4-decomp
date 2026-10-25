@@ -7,7 +7,7 @@ void FUN_00297684(void *script);
 void FUN_0029ee6c(s32 mode, u32 color);
 void *lmapSceneGetScript(void);
 s32 FUN_002bf818(SceneSprite *animation);
-s8 recordGetSignedFlags(const void *record);
+s8 uiSpriteGetCompletionState(const void *record);
 s32 objSlotsAllEmpty(void *script);
 s32 vec2GetYInt(const SceneSprite *animation);
 s32 vec2GetXInt(const SceneSprite *animation);
@@ -30,7 +30,7 @@ void sceneExitTransitionUpdate(SceneExitTransition *work)
         s32 y = vec2GetYInt(animation);
         s32 x = vec2GetXInt(animation);
         pointConvertToFloat(work->position, x, y);
-        if (recordGetSignedFlags(animation) == 0)
+        if (uiSpriteGetCompletionState(animation) == 0)
             return;
         work->flags &= ~0xe00;
         if (lmapSceneGetScript() == NULL) {

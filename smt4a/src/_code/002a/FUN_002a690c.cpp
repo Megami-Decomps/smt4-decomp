@@ -2,6 +2,7 @@
 #include "shard/PassiveSkill.h"
 #include "shard/Shard0031.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "shard/Shard004B.h"
 
 extern "C" {
 const ActiveSkillRecord *dataTable04FindById(u32 id);
@@ -9,8 +10,8 @@ s32 FUN_0028809c(s32 source, s32 target, const ActiveSkillRecord *skill, s32 pre
 BtlEquip *gameGetPlayerData();
 BtlEquip *gameGetSlotRecord(s32 index);
 SlotTable *gameGetSlotTable();
-s16 FUN_003df57c(u16 costParameter, u32 mode);
-s16 FUN_004bcbb4(BtlEquip *unit, u16 costParameter);
+s32 FUN_003df57c(u32 costParameter, s32 mode);
+s32 FUN_004bcbb4(const ItemRankRecord *unit, u32 costParameter);
 
 // Apply a skill to the player and all occupied demon slots, charging MP once if it succeeds.
 u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
@@ -30,21 +31,16 @@ u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
         }
         if (applied != 0) {
             if (preview == 0) {
-                BtlEquip *unit;
-                s16 remainingMp;
                 if (source < 0) {
-                    unit = gameGetPlayerData();
-                    s16 cost = FUN_003df57c(skill->cost.costParameter, 1);
-                    remainingMp = unit->mp - cost;
-                    unit->mp = remainingMp;
+                    BtlEquip *unit = gameGetPlayerData();
+                    unit->mp -= FUN_003df57c(skill->cost.costParameter, 1);
+                    if (unit->mp < 0)
+                        unit->mp = 0;
                 } else {
-                    unit = gameGetSlotRecord(source);
-                    s16 cost = FUN_004bcbb4(unit, skill->cost.costParameter);
-                    remainingMp = unit->mp - cost;
-                    unit->mp = remainingMp;
-                }
-                if (remainingMp < 0) {
-                    unit->mp = 0;
+                    BtlEquip *unit = gameGetSlotRecord(source);
+                    unit->mp -= FUN_004bcbb4((const ItemRankRecord *)unit, skill->cost.costParameter);
+                    if (unit->mp < 0)
+                        unit->mp = 0;
                 }
             }
             return 0;

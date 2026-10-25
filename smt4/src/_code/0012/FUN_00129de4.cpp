@@ -33,7 +33,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned int DAT_0042c000; /* 0x42c000 */
-extern signed char DAT_0044e3b0; /* 0x44e3b0 */
+extern signed char g_appletSleepModuleState; /* 0x44e3b0 */
 extern int DAT_0044e3b4; /* 0x44e3b4 */
 extern romwright_code *DAT_0044e3bc; /* 0x44e3bc */
 extern romwright_code *DAT_0044e3c0; /* 0x44e3c0 */
@@ -59,7 +59,7 @@ extern unsigned int DAT_0044e41c; /* 0x44e41c */
 extern unsigned int DAT_0044e420; /* 0x44e420 */
 extern unsigned int DAT_0044e424; /* 0x44e424 */
 extern unsigned int DAT_0044e42c; /* 0x44e42c */
-extern unsigned int DAT_004c644c; /* 0x4c644c */
+extern unsigned int g_appletSleepCriticalSection; /* 0x4c644c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0013a354. */
@@ -223,13 +223,13 @@ unsigned int FUN_00129de4(void)
          (temp_v0 = FUN_002c55b4(), temp_v0 == 0)) {
         (*DAT_0044e3d8)(DAT_0044e418);
       }
-      nn_os_CriticalSection_Enter((unsigned int)&DAT_004c644c);
+      nn_os_CriticalSection_Enter((unsigned int)&g_appletSleepCriticalSection);
       for (temp_v0 = DAT_0044e3b4; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 4)) {
         if (*(romwright_code **)(temp_v0 + 8) != (romwright_code *)0x0) {
           (**(romwright_code **)(temp_v0 + 8))();
         }
       }
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_004c644c);
+      nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCriticalSection);
       nn_applet_CTR_detail_ReplySleepNotificationCompleteToManager();
     }
   }
@@ -242,7 +242,7 @@ unsigned int FUN_00129de4(void)
         if (DAT_0044e3d0 != (romwright_code *)0x0) {
           temp_v0 = (*DAT_0044e3d0)(DAT_0044e410);
         }
-        if ((DAT_0044e3b0 != '\0') || (temp_v1 = FUN_002bc7e4(), temp_v1 == 0)) goto LAB_00129f70;
+        if ((g_appletSleepModuleState != '\0') || (temp_v1 = FUN_002bc7e4(), temp_v1 == 0)) goto LAB_00129f70;
         temp_v0 = 0;
       }
       temp_v2 = 3;

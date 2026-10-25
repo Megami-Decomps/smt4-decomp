@@ -5,9 +5,7 @@
 struct DateTimeValue;
 
 extern "C" {
-s32 FUN_004283cc(void *owner);
 s32 FUN_00428104(void *owner, DateTimeValue *output);
-void recordValidatePair(void *owner, WindowStatusResult result);
 
 // Read the owner's current time and return its translated status, reporting a failed result to the owner.
 WindowStatusResult FUN_00427ff4(void *owner, DateTimeValue *output)

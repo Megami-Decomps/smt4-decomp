@@ -10,7 +10,7 @@ typedef struct {
 } param_4_stack;
 
 extern int libc_strncmp(unsigned int, int, int, unsigned int, int *, char *);
-extern int wstrlen(unsigned int);
+extern int libc_strlen(unsigned int);
 
 
 unsigned char
@@ -38,7 +38,7 @@ nn_gr_CTR_Shader_SearchBindSymbol(int *param_1,char *param_2,unsigned int param_
   temp_v4 = *(int *)(temp_v5 + 0x30);
   temp_v7 = *(int *)(temp_v5 + 0x38) + temp_v5;
   pcVar10 = param_2;
-  temp_v3 = wstrlen(param_3);
+  temp_v3 = libc_strlen(param_3);
   temp_v6 = 0;
   if (*(int *)(temp_v5 + 0x34) != 0) {
     do {

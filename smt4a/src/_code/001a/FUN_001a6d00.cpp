@@ -27,7 +27,7 @@ extern int g_aocDisplay; /* 0x57027c */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_001b2ebc. */
 /* Supplied declaration required: FUN_001ba204. */
-extern int wstrlen(unsigned int);
+extern int libc_strlen(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
 
@@ -60,7 +60,7 @@ unsigned int FUN_001a6d00(unsigned int param_1,int *param_2,unsigned int param_3
   else {
     libc_strcat(temp_v5,&LAB_001a6f4c);
   }
-  temp_v2 = wstrlen(*(unsigned int *)(temp_v2 + 8));
+  temp_v2 = libc_strlen(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {
     param_2[2] = 0;
   }

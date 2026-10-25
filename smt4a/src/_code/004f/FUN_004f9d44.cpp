@@ -9,7 +9,7 @@ struct EffectSlotTableA {
 extern "C" {
 void *btlGetMainState();
 s32 btlScriptUnitHasFlags();
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *left, const char *right, u32 length);
 s32 FUN_004f59b0(BtlEffectOwnerA *owner);
 extern BtlEffectGlobals g_btlEffect;
@@ -25,7 +25,7 @@ s32 FUN_004f9d44(BtlEffectOwnerA *owner)
         for (s32 i = 0; i < 4; ++i) {
             BtlEffectSlot *slot = &table->entries[i];
             const char *name = (const char *)slot->unk00;
-            if (name && libc_strncmp(name, g_btlEffect.prefix, wstrlen(g_btlEffect.prefix)) == 0)
+            if (name && libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)) == 0)
                 return slot->unk10;
         }
     }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `vldr s3, [r0, #92]` where armcc emits `vldr s3, [r0, #100]`. */
 #include "common.h"
 
 extern "C" {
@@ -11,7 +10,9 @@ f32 FUN_0050d8e4(f32 x, f32 y);
 f32 cameraGetHeadingDegrees(void)
 {
     CameraState *state = DAT_005806a0.state;
-    return FUN_0050d8e4(state->x - state->targetX, state->z - state->targetZ) * 57.3248405456543f;
+    f32 x = state->x - state->targetX;
+    f32 z = state->z - state->targetZ;
+    return FUN_0050d8e4(x, z) * 57.3248405456543f;
 }
 
 } /* extern "C" */

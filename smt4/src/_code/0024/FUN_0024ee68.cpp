@@ -17,7 +17,7 @@ typedef struct NetSessionFlags {
 } NetSessionFlags;
 
 extern NetSessionFlags DAT_004656ca;
-extern u8 DAT_004e629c[];
+extern u8 g_moduleCriticalSection2[];
 
 s32 FUN_00239a54(void);
 u32 FUN_003594f0(u32 arg);
@@ -33,28 +33,28 @@ u32 FUN_0024ee68(s32 request)
     if (!DAT_004656ca.initialized && !FUN_00239a54()) {
         return NET_RESULT_NOT_INITIALIZED;
     }
-    nn_os_CriticalSection_Enter(DAT_004e629c);
+    nn_os_CriticalSection_Enter(g_moduleCriticalSection2);
     if (request) {
         if (!FUN_00239a54() && !DAT_004656ca.available) {
             result = NET_RESULT_NOT_AVAILABLE;
-            nn_os_CriticalSection_Leave(DAT_004e629c);
+            nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
             return result;
         }
         result = FUN_003594f0(14);
     }
     if (!DAT_004656ca.connected) {
-        nn_os_CriticalSection_Leave(DAT_004e629c);
+        nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
         return NET_RESULT_NOT_INITIALIZED;
     }
     if (DAT_004656ca.dirty) {
         result = FUN_0035ae74(0);
         if (result & NET_RESULT_FAILURE_BIT) {
-            nn_os_CriticalSection_Leave(DAT_004e629c);
+            nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
             return result;
         }
         DAT_004656ca.dirty = 0;
     }
-    nn_os_CriticalSection_Leave(DAT_004e629c);
+    nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
     return result;
 }
 

@@ -9,7 +9,7 @@ void pointConvertToFloat(f32 *point, s32 x, s32 y);
 s32 FUN_002bf818(UiSpriteState *sprite);
 s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
-s32 recordGetSignedFlags(const void *record);
+s32 uiSpriteGetCompletionState(const void *record);
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void FUN_00289880(void);
@@ -63,7 +63,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
             work->state = 2;
         }
         pointConvertToFloat(work->origin, vec2GetXInt(outgoing), vec2GetYInt(outgoing));
-        if (recordGetSignedFlags(&work->lines[4]) != 0) {
+        if (uiSpriteGetCompletionState(&work->lines[4]) != 0) {
             return;
         }
         for (s32 i = 0; i < 5; i++) {
@@ -72,7 +72,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
             }
         }
     } else if (work->state == 2) {
-        if (recordGetSignedFlags(&work->lines[4]) != 0) {
+        if (uiSpriteGetCompletionState(&work->lines[4]) != 0) {
             work->flags &= ~0x1000000u;
             work->stage = 2;
             work->state = 0;

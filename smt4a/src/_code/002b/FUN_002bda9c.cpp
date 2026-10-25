@@ -67,7 +67,7 @@ extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_00182884. */
 /* Supplied declaration required: FUN_002be8d0. */
-extern int wstrlen(void);
+extern int libc_strlen(void);
 /* Supplied declaration required: asdListBoxFindItem. */
 /* Supplied declaration required: FUN_00317af8. */
 
@@ -313,7 +313,7 @@ joined_r0x002bdf80:
             default:
               break;
             case 1:
-              temp_v4 = wstrlen();
+              temp_v4 = libc_strlen();
               temp_v12 = (float)VectorUnsignedToFloat
                                         ((temp_v4 + 1) * piVar2[0x16],(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v19 = temp_v19 - temp_v12;

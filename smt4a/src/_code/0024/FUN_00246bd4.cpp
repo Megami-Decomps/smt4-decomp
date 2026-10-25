@@ -180,7 +180,7 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 extern int *g_lmapView; /* 0x5806a4 */
 extern int *g_lmapScene; /* 0x581288 */
 extern char s______________________00581290[67]; /* 0x581290 */
-extern float DAT_005f15d8; /* 0x5f15d8 */
+extern float g_localCameraPosition; /* 0x5f15d8 */
 extern float DAT_005f15dc; /* 0x5f15dc */
 extern float DAT_005f15e0; /* 0x5f15e0 */
 extern unsigned int *g_gameState; /* 0x5f15fc */
@@ -7835,7 +7835,7 @@ joined_r0x00397538:
       temp_v31 = romwright_fabs_4(DAT_005f15dc * 0.7111111f);
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v37 <= DAT_005f15e0 * 0.7111111f) << 0x1d);
       temp_v24 = romwright_fabs_4(DAT_005f15e0 * 0.7111111f);
-      for (temp_v20 = romwright_fabs_4(DAT_005f15d8 * 0.7111111f); (int)temp_v20 >= 0x47800000;
+      for (temp_v20 = romwright_fabs_4(g_localCameraPosition * 0.7111111f); (int)temp_v20 >= 0x47800000;
           temp_v20 = temp_v20 - 65536.0f) {
       }
       for (; (int)temp_v31 >= 0x47800000; temp_v31 = temp_v31 - 65536.0f) {
@@ -7855,7 +7855,7 @@ joined_r0x00397538:
                (temp_v20 - temp_v29) * (float)(&DAT_00536d1c)[temp_v10 * 4];
       temp_v20 = (float)(&DAT_00536d18)[temp_v10 * 4] +
                (temp_v20 - temp_v29) * (float)(&DAT_00536d20)[temp_v10 * 4];
-      if (DAT_005f15d8 * 0.7111111f < temp_v37) {
+      if (g_localCameraPosition * 0.7111111f < temp_v37) {
         temp_v30 = -temp_v30;
       }
       fStack_80 = (float)(&DAT_00536d14)[temp_v21 * 4] +

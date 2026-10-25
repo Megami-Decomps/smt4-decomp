@@ -5,7 +5,6 @@
 
 extern "C" {
 WindowStatusResult FUN_00427f6c(void *provider, void *identifier);
-WindowStatusResult FUN_00428060(void *provider, void *record, const void *identifier);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_0019a46c(char *destination, const char *source, u32 capacity);
 u32 FUN_00473c5c(void *owner, u16 *buffer, u32 length, const void *identifier);

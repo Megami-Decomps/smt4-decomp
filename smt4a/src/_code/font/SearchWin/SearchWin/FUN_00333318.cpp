@@ -1,4 +1,5 @@
 /* NON_MATCHING: parameter size argument registers and resource-pool relocation base differ. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/SearchWin/SearchWin.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/AsdDebug.h"
@@ -24,9 +25,7 @@ u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, void *work
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, void *work,
     u32 (*callback)(void *), u32 argument, u32 target, u32 parent);
 void paramsClearPacket(void *packet);
-void paramsInit(void *packet, const void *first, u32 firstBytes, const void *second,
-    u32 secondBytes, const void *third, u32 thirdBytes, const void *fourth,
-    u32 fourthBytes, const void *fifth, u32 fifthBytes);
+
 void FUN_0014e188(UiAnimatedSprite *sprite, u32 kind, u32 priority, void *packet, f32 scale, u32 enabled);
 void uiSpriteSelectAnim(UiAnimatedSprite *sprite, s32 animation);
 
@@ -50,7 +49,7 @@ void FUN_00333318(void)
     taskCreateDraw(DAT_0052fda8, 0xE2, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
     SearchWindowRenderView *render = reinterpret_cast<SearchWindowRenderView *>(window);
     paramsClearPacket(render->packet);
-    paramsInit(render->packet, DAT_0052fcb4.first, sizeof(DAT_0052fcb4.first),
+    paramsInit(reinterpret_cast<UiResourceParameters *>(render->packet), DAT_0052fcb4.first, sizeof(DAT_0052fcb4.first),
         DAT_0052fcb4.second, sizeof(DAT_0052fcb4.second),
         NULL, 0, NULL, 0, DAT_0052fcb4.fifth, sizeof(DAT_0052fcb4.fifth));
     FUN_0014e188(&render->sprite, 8, 0x87, render->packet, 1.0f, 1);

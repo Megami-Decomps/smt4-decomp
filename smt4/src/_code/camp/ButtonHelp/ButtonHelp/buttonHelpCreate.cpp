@@ -1,4 +1,5 @@
 /* NON_MATCHING: the unit loop keeps one &units[i] pointer where retail recomputes base+892 for each store and the call, and g_buttonHelp is reloaded instead of living in r9 */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "ui/ButtonHelp.h"
@@ -14,9 +15,7 @@ u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDel
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
-                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
-                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+
 void FUN_002bd954(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, UiResourceParameters *resources,
                   u16 flags, f32 speed);
 void FUN_00262210(ButtonHelpDisplayUnit *unit, s32 kind, s32 count, s32 mode);

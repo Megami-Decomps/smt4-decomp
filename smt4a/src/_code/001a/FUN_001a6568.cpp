@@ -11,7 +11,7 @@ u32 optionalWorkGetValue();
 void sysMemClear(void *buffer, u32 size);
 char *libc_strcpy(char *destination, const char *source);
 char *libc_strcat(char *destination, const char *source);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 void FUN_001b32a4(void *data);
 void FUN_001b3008(AocDisplay *display, const char *packagePath, const char *texturePath,
     s32 offset, u32 flags, void (*callback)(void *), TexTableEntry *entry, u32 size,
@@ -46,7 +46,7 @@ TexTableEntry *FUN_001a6568(AocSystem *system, u32 table, u32 id, u32 mode)
         libc_strcat(texturePath, ".cmp");
     else
         libc_strcat(texturePath, ".stex");
-    if (wstrlen(node->name) == 0) {
+    if (libc_strlen(node->name) == 0) {
         entry->state = 0;
         return entry;
     }

@@ -6,7 +6,7 @@ extern BtlEffectGlobals g_btlEffect;
 extern const char DAT_00528544[];
 extern const char DAT_0052853c[]; // NOT_EFT sentinel.
 extern const char DAT_005284c0[]; // Battle effect path format.
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 s32 libc_strcmp(const char *first, const char *second);
 s32 libc_strncmp(const char *first, const char *second, u32 length);
 char *libc_strcpy(char *destination, const char *source);
@@ -18,7 +18,7 @@ u32 FUN_003478dc(u32 id, const char *version);
 
 static inline bool effectNameHasPrefix(const char *name, const char *const &prefix)
 {
-    return name != NULL && libc_strncmp(name, prefix, wstrlen(prefix)) == 0;
+    return name != NULL && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
 }
 static inline bool effectNameEquals(const char *name, const char *const &reserved)
 {
@@ -50,7 +50,7 @@ extern "C" void FUN_004f9278(BtlEffectOwnerA *owner)
     for (s32 index = 0; index < 4; ++index) {
         const EffectTableView *table = reinterpret_cast<const EffectTableView *>(owner->slots);
         const char *name = table->entries[index].name;
-        if (wstrlen(name) == 0 || libc_strcmp(name, DAT_00528544) == 0 || libc_strcmp(DAT_0052853c, name) == 0)
+        if (libc_strlen(name) == 0 || libc_strcmp(name, DAT_00528544) == 0 || libc_strcmp(DAT_0052853c, name) == 0)
             continue;
         if (effectNameHasPrefix(name, g_btlEffect.prefix) ||
             effectNameEquals(name, g_btlEffect.reserved.name) ||
@@ -61,7 +61,7 @@ extern "C" void FUN_004f9278(BtlEffectOwnerA *owner)
         sysMemClear(formatted, sizeof(formatted));
         textFormatBuffer(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
-        if (wstrlen(path) == 0)
+        if (libc_strlen(path) == 0)
             continue;
         EffectRegistration *registration = &work->registrations[index];
         const char *version = registration->version;

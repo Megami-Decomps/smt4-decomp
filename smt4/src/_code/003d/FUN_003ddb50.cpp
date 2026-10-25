@@ -2,7 +2,7 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 
 /* Queues a tinted action: the color floats (0..1) become percent bytes. */
 void FUN_003ddb50(u32 actor, u32 options, u32 value, f32 red, f32 green, f32 blue)

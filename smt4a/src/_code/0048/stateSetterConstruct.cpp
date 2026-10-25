@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild of the name-entry state setter's constructor (handler table of function/adjust pairs, the name source by mode, the sprite and param packet setup); armcc here orders the handler-table stores and the unaligned 18-byte name copies differently. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 /* A name (18 bytes). */
@@ -35,8 +36,7 @@ void asdTMTexTableLoadSprites(s32 table);
 void FUN_0014afd0(s32 a, s32 b);
 void FUN_0014e188(u8 *sprite, s32 table, s32 a, u8 *packet, s32 b);
 void paramsClearPacket(u8 *packet);
-void paramsInit(u8 *packet, const u8 *a, s32 aSize, const u8 *b, s32 bSize, s32 c, s32 d, s32 e, s32 f, const u8 *g,
-                s32 gSize);
+
 void uiSpriteSelectAnim(u8 *sprite, s32 anim);
 void uiSpriteSetKeyframe(u8 *sprite, s32 frame);
 void uiSpriteSetImageKeyframe(u8 *sprite, s32 frame);
@@ -117,7 +117,7 @@ void stateSetterConstruct(u8 *setter, u8 source)
     *(u32 *)(setter + 0x26C) = FUN_00275bc8();
     u8 *packet = setter + 0x274;
     paramsClearPacket(packet);
-    paramsInit(packet, DAT_00532e94, 0x18, DAT_00532eac, 0x24, 0, 0, 0, 0, DAT_00532ed0, 0x70);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(packet), DAT_00532e94, 0x18, DAT_00532eac, 0x24, 0, 0, 0, 0, DAT_00532ed0, 0x70);
     FUN_0014e188(setter + 0x294, 0x23, 0, packet, 1);
     uiSpriteSelectAnim(setter + 0x294, 0);
     FUN_0014e188(setter + 0x320, 0x23, 0, packet, 1);

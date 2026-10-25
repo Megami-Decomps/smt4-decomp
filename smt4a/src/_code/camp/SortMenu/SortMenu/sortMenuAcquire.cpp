@@ -1,4 +1,5 @@
 /* NON_MATCHING: paramsInit's stack-argument scratch register and the aligned memset helper differ. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SortMenu.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -32,10 +33,9 @@ u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdPr
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 s32 FUN_0022a0a0(u32);
 s32 FUN_0022a5d8(u32);
-void paramsClearPacket(SortMenuParameters *);
-void paramsInit(SortMenuParameters *, const void *, u16, const void *, u16, const void *, u16,
-                const void *, u16, const void *, u16);
-void FUN_0014e188(SortMenuSprite *, u32, u32, SortMenuParameters *, u32, f32);
+void paramsClearPacket(UiResourceParameters *);
+
+void FUN_0014e188(SortMenuSprite *, u32, u32, UiResourceParameters *, u32, f32);
 void uiSpriteSetImageKeyframe(SortMenuSprite *, u32, u32);
 void uiSpriteSelectAnim(SortMenuSprite *, u32);
 

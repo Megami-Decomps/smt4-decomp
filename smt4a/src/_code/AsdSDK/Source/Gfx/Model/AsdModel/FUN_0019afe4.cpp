@@ -18,7 +18,7 @@ int FUN_001b4288(int *, int);
 int FUN_001b431c(int *, int);
 int FUN_001b451c(int *, int);
 int FUN_001b6d08(int *, int, int, unsigned int);
-int wstrlen(...);
+int libc_strlen(...);
 int nw_gfx_SceneNode_IsCircularReference(void);
 
 typedef int romwright_code(...);
@@ -70,7 +70,7 @@ extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b431c. */
 /* Supplied declaration required: FUN_001b451c. */
 /* Supplied declaration required: FUN_001b6d08. */
-/* Supplied declaration required: wstrlen. */
+/* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
@@ -308,7 +308,7 @@ LAB_0019b358:
           temp_v9 = 0;
         }
         do {
-          temp_v1 = wstrlen(*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4));
+          temp_v1 = libc_strlen(*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4));
           temp_v5 = libc_strncmp(temp_v9,*(unsigned int *)(s__V_V_V_005b3cc8 + temp_v7 * 4),temp_v1);
           if (temp_v5 == 0) {
             temp_v9 = *(int *)(s__V_V_V_005b3cc8 + temp_v7 * 4);
@@ -319,7 +319,7 @@ LAB_0019b358:
               temp_v11 = 0;
             }
             if (!(temp_v11 == 0 || temp_v9 == 0)) {
-              temp_v1 = wstrlen(temp_v9);
+              temp_v1 = libc_strlen(temp_v9);
               temp_v9 = nw_ut_ResDicPatricia_Get(&temp_v11,temp_v9,temp_v1);
               if (temp_v9 == 0) {
                 temp_v0 = 0xffff;

@@ -4000,3 +4000,56 @@
 001eb11c titleMainInitialize inferred [med] Allocate title state and start update/draw jobs
 0026e324 aocActivateFileGroupFlags inferred [high] Activate pending flags attached to loaded file groups
 001fc4f8 naviMainDrawFade inferred [high] NAVI FADE DRAW callback forwards live navigation settings to fade draw helper; returns0
+003574a8 _ZN2nn2os15CriticalSectionD1Ev inferred Empty nn::os::CriticalSection destructor registered by module initializers
+004c6458 g_moduleCriticalSection1 inferred size:0x4 Critical section constructed by FUN_003ec154
+004e629c g_moduleCriticalSection2 inferred size:0x4 Critical section constructed by FUN_003ef7e4
+004e6cd0 g_moduleCriticalSection3 inferred size:0x4 Critical section constructed by FUN_003f2988
+00394160 _ZN14Obj422214OwnerC1Ev inferred Constructor clears owner buffers/date/flags and constructs Obj422214 member at 0x9bc; matches existing native owner destructor.
+00225cbc __aeabi_atexit evidence empty __aeabi_atexit: only reached by 47 tail branches from static initialisers; every bl to it was inlined by armlink into a NOP
+004d9280 g_effectEditorRotation inferred size:0x10 effect editor identity rotation reset by FUN_00324970 and copied through handlers
+0046ec68 g_nngxInterruptCriticalSection inferred size:0xc Second native critical section constructed by FUN_003f2e48
+004e62b4 g_asdCecMessageBoxStateCriticalSection inferred size:0xc Second native critical section constructed by FUN_003f2134
+0040b740 g_nngxDefaultCommandState inferred size:0x8 Source of default GPU command state
+00471a80 g_nngxCommandStates inferred size:0xc Three GPU command words dynamically initialized from defaults
+002b59b0 _ZN2nn3fnd8DateTimeC1Eiiiiiii evidence Native nn::fnd::DateTime constructor: this pointer followed by year/month/day/hour/minute/second/millisecond; owner ctor uses returned this for 64-bit copy.
+002a1130 _ZN21WindowOperationResultC1Eh inferred Native 0x14 result owner constructor: sets status byte from r1, constructs WindowStatusResult@4, zeros two payload words and assigns WindowStatusResult(0).
+00471a88 g_nngxCommandState3 inferred size:0x4 Third GPU state word initialized from default
+00360260 _ZN9Obj420fd0D1Ev inferred Empty nonvirtual destructor registered by four Obj420fd0 globals in FUN003eb814; preserve proven body.
+003f7300 _ZN9Obj420fd06notifyEv inferred Sole virtual slot at420fd8 loads LightEvent pointer atthis+0x10 and tailcalls LightEventSignal.
+004d428c g_fsWaitNotification0 inferred size:0x14 Native Obj420fd0 global, fields4/8/c/event10 cleared by initializer.
+004d42a0 g_fsWaitNotification1 inferred size:0x14 Native Obj420fd0 global, adjacent same-layout notifier.
+004d42b4 g_fsWaitNotification2 inferred size:0x14 Native Obj420fd0 global, adjacent same-layout notifier.
+004d42c8 g_fsWaitNotification3 inferred size:0x14 Native Obj420fd0 global, adjacent same-layout notifier.
+0044e644 g_fsArchiveHandleWords inferred size:0x8 Two-word filesystem archive state initialized from invalid lowword andzero; lowword checked by fs startup helpers.
+00407eb8 g_fsInvalidArchiveWord inferred size:0x4 Readonly zero word loaded by filesystem archive global initializer.
+00334e04 _ZN17CameraMatrixCacheD1Ev inferred Native camera owner destructor invokes weak FloatState destructor at0x4a0 then recovers owner; baseline IDENTICAL
+004c5880 g_cameraState1 inferred size:0x508 First camera constructed by FUN_003eede4 via FloatState member0x4c5d20
+004c5d88 g_cameraState2 inferred size:0x508 Second camera constructed by FUN_003eede4 via FloatState member0x4c6228
+0049f8f8 g_fixedCameraPosition inferred size:0xc Default position (310,45,0) dynamically constructed after g_fixedCamera
+0044e348 g_archiveModuleState inferred size:0x10 Archive/service module initialized flag at0, reference count at4 and invalid archive ID at8
+0044e358 g_archiveModuleCounters inferred size:0x8 Two cleared module counters initialized by FUN_003eb734
+004c6410 g_archiveModuleCriticalSection inferred size:0xc Critical section protects archive module state/reference count
+0044e278 g_cameraModuleState inferred size:0x10 Zero-initialized module prefix with invalid 64-bit state at8 constructed by FUN_003eede4
+0044e288 g_cameraModuleCounters inferred size:0x8 Two cleared module words initialized before the two camera objects
+00464fd8 g_textScannerModuleState inferred size:0x10 Zero-initialized module prefix plus invalid 64-bit state at8 constructed by FUN_003eb514
+00464fe8 g_textScannerModuleCounters inferred size:0x8 Two cleared words initialized before g_asdNgc
+0044e3b0 g_appletSleepModuleState inferred size:0x98 Sleep-pending flag at0; zero-initialized module state; invalid 64-bit state at0x90
+0044e448 g_appletSleepModuleCounters inferred size:0x8 Two cleared words initialized by FUN_003f2028
+004c644c g_appletSleepCriticalSection inferred size:0xc Critical section constructed by FUN_003f2028
+00282c30 __aeabi_ul2f evidence same code as smt4a __aeabi_ul2f (mov r2,#1.0f; b to the shared conversion core); callers pass a u64 in r0:r1 and read the float from r0
+004e3f74 g_scopedHalfwordTarget inferred size:0x3a accessed prefix, minimum extent: ScopedHalfwordState at0x465120 has initializer words0,0,0x4e3f74; FUN00152e70/FUN00152ea0 read/write target halfword at+0x38.
+00327920 effectEditorResetVector inferred [high] Clears the independent editor vector and resets mode8 and its two flags
+003284a0 effectEditorCopySettingsColor inferred [high] Copies settings bytes0x88..0x8a into editor RGB bytes2..4
+00324970 effectEditorResetRotation inferred [high] Sets editor rotation to identity and resets settings mode8/flags
+002f0b38 btlScriptAnyEntryHpAtMost inferred [high] Tests active unblocked matching entries and active-entry fallback against a requested HP percentage
+002d6058 soundStopSlotWithFade inferred [high] Stops a populated slot among four sound handles with caller-provided fade frames and returns validity
+002b26d4 indexedListErase inferred [high] Unlinks a node, renumbers remaining entries, destroys its payload, frees the node, and returns its former successor
+001464cc lightSetIntensity inferred [high] Stores changed light intensity, submits light parameters when dirty or changed, then clears the dirty flag
+002266dc btlReflectQueueMemberAction inferred [high] Queues kind-38 member action unless an equivalent options/target entry is already pending; fills member IDs and value
+0020d7f4 mapFastMarkerCreate inferred [high] Initializes the fast-travel marker pose/model and starts its map cue.
+002c6d30 entryCompareClassThenDescendingValue inferred [med] Compares classification then descending record value before fallback comparator.
+002aecd8 aocContentGetIndexedRecord inferred [high] Resolves an add-on content record with one-based base-table fallback.
+0023aa3c effectComputeScaledImageBounds inferred [high] Takes maximum image dimension for scaled square extents and half scaled image width for the third bound.
+0010b224 titleCaptureReadySurfaceOnce inferred [high] Capture the ready title surface at 512x512, downsample dimensions and mark the capture complete.
+0037003c resourceReleaseRelativeMember inferred [high] Resolve the optional self-relative pointer at member offset 8 and release it through the resource helper.
+002499ac uiSpriteGetCompletionState inferred [high] Twin of smt4a objectGetSignedFlag; signed UiSpriteState completion@0x8a is used after cursor animation in FUN_003a099c; Main confirmed shared owner.

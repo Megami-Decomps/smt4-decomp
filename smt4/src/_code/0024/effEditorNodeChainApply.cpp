@@ -1,17 +1,14 @@
-#include "common.h"
+#include "AsdSDK/EffectEditorSelectionTransfer.h"
 
 extern "C" {
 
 int FUN_001b1b8c(void *node, int flag);
 
-typedef struct Node {
-    /* 0x00 */ u8 unk00[0x34];
-    /* 0x34 */ struct Node *next;
-} Node;
 
-void effEditorNodeChainApply(Node *node)
+void effEditorNodeChainApply(EffectEditorOptions *options)
 {
-    Node *child;
+    EffectEditorOptionNode *node = static_cast<EffectEditorOptionNode *>(options);
+    EffectEditorOptionNode *child;
 
     FUN_001b1b8c(node, 1);
     for (child = node->next; child != NULL; child = child->next) {

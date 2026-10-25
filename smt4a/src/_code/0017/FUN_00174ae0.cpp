@@ -32,7 +32,7 @@ extern u8 entry;
 
 s32 __cxa_guard_acquire(u32 *guard);
 __weak void __cxa_guard_release(u32 *guard);
-__weak s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
+s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *module);
 void FUN_001906cc(void *object);
 
 /* Returns the shared state, constructing it (and registering its destructor) on first use. */

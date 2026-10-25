@@ -67,13 +67,13 @@ extern u32 DAT_004738b4;
 extern u32 DAT_004738b8;
 
 void FUN_00361934(void *);
-void FUN_00360260(void *);
+void _ZN9Obj420fd0D1Ev(void *);
 void FUN_003573a0(void *);
 void nn_os_Thread_Thread_sub_object(void *);
 void entry(void);
 void __aeabi_vec_ctor_nocookie_nodtor(void *, void (*ctor)(void *), u32 elementSize, u32 count);
 void FUN_002ad314(f32 *numerator, f32 *denominator, u32 mode);
-__weak s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *handle);
+s32 __aeabi_atexit(void *object, void (*destructor)(void *), void *handle);
 
 // Initialises the timing globals: limits, parameter records, the atomic registry and its slots, two vtable objects and
 // the ticks-per-frame scale; registers their static destructors.
@@ -119,14 +119,14 @@ void FUN_003ee9bc(void)
     DAT_004ef960.unk04[1] = 0;
     DAT_004ef960.unk04[2] = 0;
     DAT_004ef960.unk04[3] = 0;
-    __aeabi_atexit(&DAT_004ef960, FUN_00360260, (void *)entry);
+    __aeabi_atexit(&DAT_004ef960, _ZN9Obj420fd0D1Ev, (void *)entry);
 
     DAT_004ef974.vtable = DAT_00420fd8;
     DAT_004ef974.unk04[0] = 0;
     DAT_004ef974.unk04[1] = 0;
     DAT_004ef974.unk04[2] = 0;
     DAT_004ef974.unk04[3] = 0;
-    __aeabi_atexit(&DAT_004ef974, FUN_00360260, (void *)entry);
+    __aeabi_atexit(&DAT_004ef974, _ZN9Obj420fd0D1Ev, (void *)entry);
 
     DAT_004738b4 = 0;
     DAT_004738b8 = 0;

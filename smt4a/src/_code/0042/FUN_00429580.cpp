@@ -50,7 +50,6 @@ u32 FUN_0016ccfc(void);
 s32 tokenResolveAddress(u32 token, u8 **resolved, s32 handle);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
-WindowStatusResult nnAsyncMapOperationResult(u8 *request);
 
 /* Builds and submits a request of up to 20 entries; returns its result, or the failing code. */
 WindowStatusResult FUN_00429580(s32 *handle, const RequestSettings *settings, const RequestSource *sources, u32 count,

@@ -3,6 +3,7 @@
 
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "shard/W6_W6Match8_EffectSelection.h"
+#include "shard/W6_W6Match4_EffectEditorSnapshot.h"
 
 struct EffectNode;
 
@@ -69,13 +70,22 @@ typedef char EffectEditorMenuStateLayoutCheck[
 
 /* The independently addressed editor record and its three mode bytes. */
 struct EffectEditorSettings {
-    /* 0x000 */ u8 unk000[0x88];
+    union {
+        /* 0x000 */ u8 unk000[0x88];
+        /* 0x000 */ EffectEditorSnapshot snapshot;
+        struct {
+            /* 0x000 */ u8 unk00[0x68];
+            /* 0x068 */ u32 flags;
+        } record;
+    };
     /* 0x088 */ u8 mode;
     /* 0x089 */ u8 flagA;
     /* 0x08A */ u8 flagB;
     /* 0x08B */ u8 unk08B[5];
 };
 typedef char EffectEditorSettingsLayoutCheck[
+    __INTADDR__(&((EffectEditorSettings *)0)->snapshot) == 0 &&
+    __INTADDR__(&((EffectEditorSettings *)0)->record.flags) == 0x68 &&
     __INTADDR__(&((EffectEditorSettings *)0)->mode) == 0x88 &&
     __INTADDR__(&((EffectEditorSettings *)0)->flagA) == 0x89 &&
     __INTADDR__(&((EffectEditorSettings *)0)->flagB) == 0x8a &&

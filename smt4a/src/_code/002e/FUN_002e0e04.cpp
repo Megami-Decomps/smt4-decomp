@@ -4,7 +4,7 @@
 extern "C" {
 extern const char *DAT_005b40b4[4];
 extern const char DAT_0053d8d8[];
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 void rt_aeabi_memclr(void *memory, u32 size);
 void textFormatBuffer(char *output, const char *format, ...);
 
@@ -12,7 +12,7 @@ void textFormatBuffer(char *output, const char *format, ...);
 u32 FUN_002e0e04(const char *input, u16 *output, s32 root)
 {
     if (root != 3) {
-        s32 length = wstrlen(input);
+        s32 length = libc_strlen(input);
         if (length >= 248)
             return 0;
         s32 componentLength = 0;
@@ -32,7 +32,7 @@ u32 FUN_002e0e04(const char *input, u16 *output, s32 root)
     case 2: textFormatBuffer(reinterpret_cast<char *>(path), DAT_0053d8d8, DAT_005b40b4[2], input); break;
     case 3: textFormatBuffer(reinterpret_cast<char *>(path), DAT_0053d8d8, DAT_005b40b4[3], input); break;
     }
-    u32 length = wstrlen(reinterpret_cast<const char *>(path));
+    u32 length = libc_strlen(reinterpret_cast<const char *>(path));
     if ((s32)length > 248)
         return 0;
     for (s32 index = 0; index < (s32)length; ++index)

@@ -37,7 +37,7 @@ struct ModelPosition {
 };
 
 extern "C" {
-void FUN_0023aa3c(void *transform, ModelPosition *position, f32 blend);
+void effectComputeScaledImageBounds(void *transform, ModelPosition *position, f32 blend);
 void enemyDrawComputeSpriteAnchorOffset(void *transform, AttachmentOffset *translation, f32 blend);
 void modelSetPosition(u32 model, s32 node, const ModelPosition *position);
 void nodeSetTranslation(u32 model, s32 node, const AttachmentOffset *translation);
@@ -64,7 +64,7 @@ u32 modelAttachmentsUpdateFromParents(AttachedModelState *state)
             for (parent = 0; parent < 50; ++parent) {
                 ModelParent *source = &state->parents[parent];
                 if (source->id == attachment->parentId) {
-                    FUN_0023aa3c(source->transform, &position, attachment->blend);
+                    effectComputeScaledImageBounds(source->transform, &position, attachment->blend);
                     modelSetPosition(attachment->object->model, 0, &position);
                     enemyDrawComputeSpriteAnchorOffset(source->transform, &translation, attachment->blend);
                     translation.x += attachment->offset.x;

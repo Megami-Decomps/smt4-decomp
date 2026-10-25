@@ -7,7 +7,7 @@ extern SoundCallbackBanks DAT_0061a644;
 extern const char DAT_00536c88[];
 extern u8 DAT_0061a6a4[];
 s32 FUN_0016f864(u32 mode);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 s32 FUN_0016f988(u32 *resource, const char *name, u32 length, u32 flags);
 void FUN_0017094c(void *queue);
 
@@ -22,7 +22,7 @@ s32 FUN_00158f64(void)
         return result;
     }
     result = FUN_0016f988(&g_callbackState.openedResource, DAT_00536c88,
-                        wstrlen(DAT_00536c88), 0);
+                        libc_strlen(DAT_00536c88), 0);
     if (result < 0) {
         return result;
     }

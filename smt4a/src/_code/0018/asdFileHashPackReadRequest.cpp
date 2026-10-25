@@ -5,7 +5,7 @@
 extern "C" {
 void rt_aeabi_memclr(void *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
-u32 wstrlen(const char *);
+u32 libc_strlen(const char *);
 void pathStripScheme(AsdFileHashPack *, char *, u32);
 s32 libc_toupper(s32);
 const AsdHashPackEntry *FUN_001a70dc(AsdFileHashPack *, const char *);
@@ -20,8 +20,8 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
     char path[ASD_FILE_PATH_LEN];
     rt_aeabi_memclr(path, sizeof(path));
     textFormatBuffer(path, request->path);
-    pathStripScheme(pack, path, wstrlen(path));
-    s32 length = wstrlen(path);
+    pathStripScheme(pack, path, libc_strlen(path));
+    s32 length = libc_strlen(path);
     for (s32 index = 0; index < length; ++index)
         path[index] = libc_toupper(static_cast<s8>(path[index]));
     const AsdHashPackEntry *entry = FUN_001a70dc(pack, path);

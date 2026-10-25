@@ -1,153 +1,85 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031ed60` (_code @ 0x31ed60, 0x278 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: semaphore/descriptor stack slots, result predicates, and launch-branch register scheduling differ. */
+#include "gamedata/SaveLoadThreadRequest.h"
+#include "AsdSDK/AsdDebug.h"
+#include "nn/Result.h"
 
 extern "C" {
-
-int FUN_0014a930(...);
-int memAlloc(...);
-int resultReportIfFailed(...);
-int FUN_0019a364(...);
-int FUN_002e3140(...);
-int FUN_002fb0d4(...);
-
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_2_stack;
-
-extern void saveLoadReadThreadWorker(unsigned int);
-extern int FUN_00349ca4(...); /* 0x349ca4 */
-extern int FUN_00349e60(...); /* 0x349e60 */
-extern int FUN_00371100(...); /* 0x371100 */
-extern unsigned char LAB_00514a34; /* 0x514a34 */
-extern unsigned char LAB_00514af0; /* 0x514af0 */
-extern unsigned char LAB_00514b78; /* 0x514b78 */
-
-/* Supplied declaration required: FUN_0014a930. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: resultReportIfFailed. */
-/* Supplied declaration required: FUN_0019a364. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002fb0d4. */
-extern int FUN_0032c8c8(unsigned int);
-
-
-unsigned char FUN_0031ed60(int param_1,int param_2)
-
-{
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int uStack_44;
-  unsigned int uStack_40;
-  unsigned int temp_v4 [2];
-  int temp_v5;
-  int temp_v6;
-  unsigned char *puStack_2c;
-  unsigned char *puStack_28;
-  unsigned char *puStack_24;
-  
-  piVar2 = &temp_v3;
-  *(char *)(param_1 + 1) = (char)param_2;
-  temp_v4[0] = 0;
-  temp_v2 = 0xe7e3ffff;
-  if (*(int *)(param_1 + 0x4c) != 0) {
-    puVar1 = (unsigned int *)0xe0a0183b;
-  }
-  else {
-    puVar1 = temp_v4;
-    FUN_0014a930(puVar1,0,1);
-    if (-1 < (int)puVar1) {
-      puVar1 = (unsigned int *)0x0;
-      *(unsigned int *)(param_1 + 0x4c) = temp_v4[0];
-    }
-  }
-  if ((int)puVar1 < 0) {
-    FUN_002e3140();
-  }
-  FUN_0019a364(&temp_v3,*(unsigned int *)(param_1 + 0x4c),1);
-  if ((int)piVar2 < 0) {
-    FUN_002e3140();
-  }
-  temp_v3 = 0x1000;
-  uStack_44 = 1;
-  temp_v0 = 0x100;
-  memAlloc(0x100,0x100,0,0x2000);
-  *(unsigned int *)(param_1 + 0x28) = temp_v0;
-  resultReportIfFailed(param_1 + 0x2c,temp_v0,0x2000);
-  if (param_2 != 1) {
-    if (!((param_2 == 0 || param_2 == 3) || param_2 == 5)) {
-      if (param_2 != 2) {
-        if (param_2 != 4) {
-          temp_v1 = FUN_0032c8c8(temp_v2);
-          return temp_v1 == 0;
-        }
-        temp_v6 = 4;
-        puStack_2c = &LAB_00514a34;
-        puStack_28 = &LAB_00514b78;
-        puStack_24 = &LAB_00514af0;
-        temp_v2 = param_1 + 0x44;
-        temp_v3 = *(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x38);
-        uStack_44 = 0x11;
-        uStack_40 = 0xfffffffe;
-        temp_v4[0] = 0;
-        temp_v5 = param_1;
-        FUN_002fb0d4(temp_v2,&temp_v6,FUN_00349e60,&temp_v5);
-      }
-      else {
-        temp_v6 = 4;
-        puStack_2c = &LAB_00514a34;
-        puStack_28 = &LAB_00514b78;
-        puStack_24 = &LAB_00514af0;
-        temp_v2 = param_1 + 0x44;
-        temp_v3 = *(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x38);
-        uStack_44 = 0x11;
-        uStack_40 = 0xfffffffe;
-        temp_v4[0] = 0;
-        temp_v5 = param_1;
-        FUN_002fb0d4(temp_v2,&temp_v6,FUN_00349ca4,&temp_v5);
-      }
-    }
-    else {
-      temp_v6 = 4;
-      puStack_2c = &LAB_00514a34;
-      puStack_28 = &LAB_00514b78;
-      puStack_24 = &LAB_00514af0;
-      temp_v2 = param_1 + 0x44;
-      temp_v3 = *(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x38);
-      uStack_44 = 0x11;
-      uStack_40 = 0xfffffffe;
-      temp_v4[0] = 0;
-      temp_v5 = param_1;
-      FUN_002fb0d4(temp_v2,&temp_v6,saveLoadReadThreadWorker,&temp_v5);
-    }
-  }
-  else {
-    temp_v6 = 4;
-    puStack_2c = &LAB_00514a34;
-    puStack_28 = &LAB_00514b78;
-    puStack_24 = &LAB_00514af0;
-    temp_v2 = param_1 + 0x44;
-    temp_v3 = *(int *)(param_1 + 0x34) + *(int *)(param_1 + 0x38);
-    uStack_44 = 0x11;
-    uStack_40 = 0xfffffffe;
-    temp_v4[0] = 0;
-    temp_v5 = param_1;
-    FUN_002fb0d4(temp_v2,&temp_v6,FUN_00371100,&temp_v5);
-  }
-  if (((temp_v2 & 0x7e00000) != 0x600000) && ((int)temp_v2 < 0)) {
-    FUN_002e3140(temp_v2);
-  }
-  temp_v1 = FUN_0032c8c8(temp_v2);
-  return temp_v1 == 0;
+s32 FUN_0014a930(u32 *handle, u32 initialCount, u32 maxCount);
+s32 FUN_0019a364(u32 *previousCount, u32 semaphore, u32 releaseCount);
+void FUN_002e3140(s32 result);
+void *memAlloc(u32 heap, u32 alignmentClass, u32 option, u32 size, u32 alignment, u32 fromFront);
+void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size);
+s32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
+    ThreadEntryPoint entry, const void *argument, u32 stackTop, u32 priority, s32 cpu, bool owned);
+void FUN_00514a34(const void *source, void *destination);
+void FUN_00514b78(void *argument);
+void FUN_00514af0(ThreadEntryPoint entry, void *argument);
+void saveLoadReadThreadWorker(void *request);
+void FUN_00371100(void *request);
+void FUN_00349ca4(void *request);
+void FUN_00349e60(void *request);
+s32 FUN_0032c8c8(s32 result);
 }
 
-} /* extern "C" */
+static inline s32 initializeSaveSemaphore(u32 *semaphore)
+{
+    u32 handle = 0;
+    if (*semaphore != 0)
+        return (s32)0xe0a0183b;
+    s32 result = FUN_0014a930(&handle, 0, 1);
+    if (nnResultIsSuccess(result)) {
+        *semaphore = handle;
+        result = 0;
+    }
+    return result;
+}
+
+static inline s32 releaseSaveSemaphore(u32 semaphore)
+{
+    u32 previousCount;
+    return FUN_0019a364(&previousCount, semaphore, 1);
+}
+
+static inline s32 startSaveLoadWorker(SaveLoadThreadRequest *request, ThreadEntryPoint worker)
+{
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(request);
+    descriptor.operations.copy = FUN_00514a34;
+    descriptor.operations.destroy = FUN_00514b78;
+    descriptor.operations.invoke = FUN_00514af0;
+    SaveLoadThreadRequest *argument = request;
+    s32 result = FUN_002fb0d4(&request->thread, &descriptor, worker, &argument,
+        request->stack.info.address + request->stack.info.size, 0x11, -2, false);
+    if (nnResultIsFailureExceptSummary(result, 3))
+        FUN_002e3140(result);
+    return result;
+}
+
+// Create the save worker's semaphore and aligned stack, then launch the requested operation.
+extern "C" bool FUN_0031ed60(SaveLoadThreadRequest *request, s32 mode)
+{
+    request->mode = (u8)mode;
+    s32 status = initializeSaveSemaphore(&request->semaphore);
+    bool creationFailed = nnResultIsFailure(status);
+    if (creationFailed)
+        FUN_002e3140(status);
+    status = releaseSaveSemaphore(request->semaphore);
+    bool releaseFailed = nnResultIsFailure(status);
+    if (releaseFailed)
+        FUN_002e3140(status);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoad_Thread.cpp", 938);
+    request->stackAllocation = memAlloc(0x100, 0x100, 0, 0x2000, 0x1000, 1);
+    resultReportIfFailed(&request->stack, request->stackAllocation, 0x2000);
+
+    s32 result = (s32)0xe7e3ffff;
+    if (mode == 1) {
+        result = startSaveLoadWorker(request, FUN_00371100);
+    } else if (mode == 0 || mode == 3 || mode == 5) {
+        result = startSaveLoadWorker(request, saveLoadReadThreadWorker);
+    } else if (mode == 2) {
+        result = startSaveLoadWorker(request, FUN_00349ca4);
+    } else if (mode == 4) {
+        result = startSaveLoadWorker(request, FUN_00349e60);
+    }
+    return FUN_0032c8c8(result) == 0;
+}

@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-extern "C" ReflectAction *btlQueueReflectAction(ReflectContext *, s16, s16, u32);
+extern "C" 
 
 // Set up a kind-two reflection action from its three integer payload words.
 extern "C" void FUN_003de874(s32 first, s32 second, u32 argument, u32 target,

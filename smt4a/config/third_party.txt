@@ -2517,7 +2517,7 @@
 0x0016e7c0 FUN_0016e7c0 between
 0x0016e830 nn_fnd_detail_CreateHeap name
 0x0016e8c4 FUN_0016e8c4 between
-0x0016ea54 nn_fnd_DateTime_DateTime_sub_object name
+0x0016ea54 _ZN2nn3fnd8DateTimeC1Eiiiiiii name
 0x0016ea8c nn_hid_CTR_AnalogStickClamper_SetClampParam name
 0x0016ea94 nn_hid_CTR_AnalogStickClamper_SetClampParamImpl name
 0x0016eadc nn_hid_CTR_AnalogStickClamper_ClampValueOfClamp name
@@ -3773,7 +3773,7 @@
 0x001d2384 voiceClearCallback between
 0x001d239c FUN_001d239c between
 0x001d23e0 FUN_001d23e0 between
-0x001d25a0 FUN_001d25a0 between
+0x001d25a0 _ZN21WindowOperationResultC1Eh between
 0x001d25dc FUN_001d25dc between
 0x001d2834 nw_snd_internal_StreamSoundFile_ChannelInfo_GetDspAdpcmChannelInfo name
 0x001d284c FUN_001d284c between
@@ -3968,7 +3968,7 @@
 0x002e3238 __aeabi_uidivmod name
 0x002e32a4 _ZN4__rw10__rw_throwEiz name
 0x002e3338 asdStringFormatGrow library
-0x002e3390 wstrlen name
+0x002e3390 libc_strlen name
 0x002e342c libc_strcpy name
 0x002e3534 scrSignExtendOperand library
 0x002e354a FUN_002e354a library
@@ -4681,6 +4681,7 @@
 0x002f42be onlineFormatWideString name
 0x002f42ec _ZN9Obj558cbcD1Ev library
 0x002f4364 FUN_002f4364 library
+0x002f4370 __aeabi_atexit name
 0x002f4424 FUN_002f4424 library
 0x002f4474 wordRefsDiffer_002f4474 library
 0x002f4484 FUN_002f4484 library
@@ -6116,8 +6117,8 @@
 0x0042cd08 FUN_0042cd08 between
 0x0042cd0c FUN_0042cd0c between
 0x0042ce1c registerObj8Holder between
-0x0042ce3c FUN_0042ce3c between
-0x0042ce40 FUN_0042ce40 between
+0x0042ce3c _ZN2nn2os15CriticalSectionD1Ev name
+0x0042ce40 _ZN17MappedMemoryBlockD1Ev between
 0x0042cea0 FUN_0042cea0 between
 0x0042cea4 FUN_0042cea4 between
 0x0042cfa8 nn_os_TransferMemoryBlock_Initialize name
@@ -6248,7 +6249,7 @@
 0x00431f04 FUN_00431f04 callers
 0x00431f0c FUN_00431f0c between
 0x00431f38 nn_hid_CTR_HidDevices_HidDevices_sub_object name
-0x00431fe0 FUN_00431fe0 between
+0x00431fe0 _ZN10NnOsHandleD1Ev between
 0x00432008 FUN_00432008 between
 0x00432040 FUN_00432040 between
 0x00432044 FUN_00432044 between
@@ -6414,7 +6415,7 @@
 0x0043a0c8 FUN_0043a0c8 between
 0x0043a198 FUN_0043a198 between
 0x0043a1d8 FUN_0043a1d8 between
-0x0043a20c FUN_0043a20c between
+0x0043a20c _ZN9Obj55b3a8D1Ev between
 0x0043a240 FUN_0043a240 between
 0x0043a270 FUN_0043a270 between
 0x0043a2e8 FUN_0043a2e8 between
@@ -6516,6 +6517,7 @@
 0x0043c958 FUN_0043c958 between
 0x0043c988 FUN_0043c988 between
 0x0043c994 FUN_0043c994 between
+0x0043ca5c _ZN2nn6applet13SleepCallbackC1Ev name
 0x0043ca60 FUN_0043ca60 between
 0x0043ca90 FUN_0043ca90 between
 0x0043caa4 nn_applet_CTR_detail_SendMessage name

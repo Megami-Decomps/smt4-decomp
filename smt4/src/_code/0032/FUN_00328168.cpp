@@ -14,10 +14,8 @@ extern "C" {
 Table2eSub3Entry *FUN_00328168(s32 first, s32 second)
 {
     for (s32 index = 0; index < (s32)dataTableGetCount(dataTableGet(0x2e, 3)); index++) {
-        void *section = dataTableGet(0x2e, 3);
-        Table2eSub3Entry *entries = static_cast<Table2eSub3Entry *>(dataTableGetEntries(section));
-        u32 count = dataTableGetCount(section);
-        Table2eSub3Entry *entry = (u32)index < count ? &entries[index] : NULL;
+        DataTableView<Table2eSub3Entry> table(0x2e, 3);
+        Table2eSub3Entry *entry = table.at(index);
         if (entry->first == first && entry->second == second) {
             return entry;
         }

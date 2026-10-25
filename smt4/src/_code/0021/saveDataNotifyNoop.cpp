@@ -3,7 +3,7 @@
 extern "C" {
 
 /* This callback intentionally performs no work. */
-void saveDataNotifyNoop(void)
+void saveDataNotifyNoop(u32 handle)
 {
 }
 

@@ -13,6 +13,7 @@ extern "C" {
 void objDestroyIfSet(void *object);
 extern BtlMainA *g_btlCamera;
 
+
 // Release the transition object and clear its pending battle-camera flag.
 void btlCameraFinishTransition(BattleCameraTransition *transition)
 {

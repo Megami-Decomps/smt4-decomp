@@ -11,7 +11,7 @@ typedef struct {
 
 extern int *DAT_005891f8; /* 0x5891f8 */
 extern int *DAT_005891fc; /* 0x5891fc */
-extern unsigned int DAT_0061a62c; /* 0x61a62c */
+extern unsigned int g_appletSleepCallbackCriticalSection; /* 0x61a62c */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -25,7 +25,7 @@ void FUN_0017094c(int *param_1)
   int *piVar3;
   unsigned char temp_v1;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0061a62c);
+  nn_os_CriticalSection_Enter((unsigned int)&g_appletSleepCallbackCriticalSection);
   temp_v0 = *param_1;
   temp_v1 = temp_v0 == 0;
   if (temp_v1) {
@@ -36,7 +36,7 @@ void FUN_0017094c(int *param_1)
       DAT_005891f8 = param_1;
       DAT_005891fc = param_1;
       *param_1 = 0;
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+      nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
       return;
     }
     piVar3 = DAT_005891f8;
@@ -52,7 +52,7 @@ void FUN_0017094c(int *param_1)
         }
         DAT_005891f8 = piVar1;
         *piVar3 = (int)param_1;
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+        nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
         return;
       }
       piVar3 = (int *)piVar3[1];
@@ -61,10 +61,10 @@ void FUN_0017094c(int *param_1)
     *param_1 = (int)DAT_005891fc;
     param_1[1] = 0;
     DAT_005891fc = param_1;
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+    nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
     return;
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0061a62c);
+  nn_os_CriticalSection_Leave((unsigned int)&g_appletSleepCallbackCriticalSection);
   return;
 }
 

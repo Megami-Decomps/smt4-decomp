@@ -20,7 +20,7 @@ struct ShaderUniformLookupView {
 };
 
 extern "C" {
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *first, const char *second, u32 count);
 
 u8 FUN_001c3bb8(NativeShaderPrefix *shader, ShaderBindSymbol *binding, const char *name)
@@ -30,7 +30,7 @@ u8 FUN_001c3bb8(NativeShaderPrefix *shader, ShaderBindSymbol *binding, const cha
     ShaderExecutableSymbolsView *binary = lookup->executables[executable];
     const char *strings = (const char *)binary + binary->stringsOffset;
     const ShaderUniformSymbolRecordView *symbols = (const ShaderUniformSymbolRecordView *)((const u8 *)binary + binary->symbolsOffset);
-    u32 length = wstrlen(name);
+    u32 length = libc_strlen(name);
     for (u32 i = 0; i < binary->symbolCount; ++i) {
         const ShaderUniformSymbolRecordView *entry = &symbols[i];
         if (!libc_strncmp(name, strings + entry->nameOffset, length) &&

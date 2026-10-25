@@ -51,7 +51,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0017efa4. */
 extern int FUN_001a7a20(int, unsigned char *, unsigned int);
-extern unsigned int wstrlen(unsigned char *);
+extern unsigned int libc_strlen(unsigned char *);
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -126,7 +126,7 @@ void FUN_003a2904(void)
         DAT_00580ca4 = DAT_00580ca4 + 1;
         temp_v4 = *(int *)(*(int *)(temp_v0 + 0xa8) + 4);
         temp_v0 = *(int *)(temp_v4 + 0x210);
-        temp_v1 = wstrlen(&LAB_003a2e90);
+        temp_v1 = libc_strlen(&LAB_003a2e90);
         temp_v0 = FUN_001a7a20(temp_v0 + 0x74,&LAB_003a2e90,temp_v1);
         temp_v5 = *(int *)(temp_v4 + 0x108);
         temp_v2 = *(int *)(temp_v5 + 0xc);
@@ -182,7 +182,7 @@ void FUN_003a2904(void)
         temp_v4 = *(int *)(*(int *)(temp_v0 + 0xa8) + 4);
         temp_v0 = *(int *)(temp_v4 + 0x210);
         temp_v7 = temp_v22;
-        temp_v1 = wstrlen(&LAB_003a2c30);
+        temp_v1 = libc_strlen(&LAB_003a2c30);
         temp_v0 = FUN_001a7a20(temp_v0 + 0x74,&LAB_003a2c30,temp_v1);
         temp_v5 = *(int *)(temp_v4 + 0x108);
         temp_v2 = *(int *)(temp_v5 + 0xc);

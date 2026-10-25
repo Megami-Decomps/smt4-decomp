@@ -10,7 +10,8 @@ EffectSelectionParts *FUN_00246854(const EffectSelectionItem *item)
 {
     u16 type = item->block->type;
     u16 id = item->block->id;
-    for (u16 group = 0; group < 13; ++group) {
+    u16 groupCount = sizeof(DAT_0044f4d4) / sizeof(DAT_0044f4d4[0]);
+    for (u16 group = 0; group < groupCount; ++group) {
         EffectSelectionCatalogEntry *entry = DAT_0044f4d4[group];
         if (entry != NULL) {
             for (; entry->parts != NULL; ++entry) {

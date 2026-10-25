@@ -9,9 +9,22 @@
 struct WindowStatusResult {
     WindowStatusResult();
     WindowStatusResult(u32 code);
+    WindowStatusResult(u32 code, u32 description);
     /* 0x00 */ u32 code;
     /* 0x04 */ u32 description;
 };
+typedef char WindowStatusResultLayoutCheck[
+    offsetof(WindowStatusResult, code) == 0 && offsetof(WindowStatusResult, description) == 4 &&
+    sizeof(WindowStatusResult) == 8 ? 1 : -1];
+
+extern "C" {
+void recordValidatePair(void *owner, WindowStatusResult result);
+WindowStatusResult nnAsyncMapOperationResult(const void *operation);
+WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifier);
+WindowStatusResult FUN_004288e0(void *owner);
+s32 FUN_004283cc(void *owner);
+s32 queryResultFailureOnly(const u32 *object);
+}
 
 /* Value returned through hidden result storage by each status operation. */
 struct WindowStatusOperationResult {

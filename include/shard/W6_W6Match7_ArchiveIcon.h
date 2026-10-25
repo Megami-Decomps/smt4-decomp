@@ -1,7 +1,7 @@
 #ifndef SHARD_W6_W6MATCH7_ARCHIVEICON_H
 #define SHARD_W6_W6MATCH7_ARCHIVEICON_H
 
-#include "shard/W5_W5Match2_ValidationPair.h"
+#include "classes/WindowStatus.h"
 
 struct ArchiveIconSource {
     u32 first;
@@ -25,8 +25,7 @@ struct ArchiveIconFile {
 };
 
 extern "C" {
-ValidationPair archiveReadIcon(const ArchiveIconSource *source, void *output, u32 iconId);
-ValidationPair archiveReadIcon(const ArchiveIconSource *source, void *output, u32 iconId);
+WindowStatusResult archiveReadIcon(const ArchiveIconSource *source, void *output, u32 iconId);
 }
 
 #endif

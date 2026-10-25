@@ -2,7 +2,7 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 
 /* Two floats passed by value (on the stack). */
 union FloatPair {

@@ -1,6 +1,6 @@
 #include "battle/btlReflect.h"
 extern "C" {
-ReflectAction* btlQueueReflectAction(ReflectContext* context, s32 id, s32 target, u32 flags);
+
 
 // Create a type-0x18 reflected action with two indices and a payload word.
 void btlReflectCreateKind18(s32 id, u32 flags, u16 first, u16 second, u32 value)

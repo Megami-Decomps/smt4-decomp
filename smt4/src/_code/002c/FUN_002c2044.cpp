@@ -44,7 +44,6 @@ static __inline void initializeSharedIdentity44(void)
 extern "C" void FUN_002c2044(CameraMatrixCache *camera, s32 enabled)
 {
     union InitialCameraView {
-        CameraMatrixCache base;
         struct {
             u8 unk000[0x38];
             Matrix34Data view;
@@ -67,7 +66,7 @@ extern "C" void FUN_002c2044(CameraMatrixCache *camera, s32 enabled)
     work->defaults.distance = 5.0f;
     camera->enabled = enabled;
     if (enabled) {
-        FUN_0011cfb4(camera->parameters);
+        FUN_0011cfb4(&camera->parameters);
         camera->stereoScale = 5.0f;
         camera->stereoOffset = 1.0f;
     }

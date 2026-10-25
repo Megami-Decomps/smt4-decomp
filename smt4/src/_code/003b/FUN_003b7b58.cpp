@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b7b58` (_code @ 0x3b7b58, 0x600 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -15,7 +16,7 @@ int asdTMTexTableLoadEntryAsync(int, int);
 int timerStart(...);
 int FUN_002bd954(...);
 int spriteStartAnimationByIndex(...);
-int paramsInit(...);
+
 int memClear(int, int);
 int FUN_002eb76c(...);
 int mapIfRequestResource(int);
@@ -118,7 +119,7 @@ void FUN_003b7b58(int param_1)
   *(unsigned char *)(param_1 + 0xd641) = 0;
   *(unsigned char *)(param_1 + 0xd642) = 0;
   drawParameterBlockClear(param_1);
-  paramsInit(param_1,&DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
+  paramsInit(reinterpret_cast<UiResourceParameters *>(param_1), &DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
                &DAT_00405a4c,0x32c);
   FUN_002bd954(param_1 + 0x20,0x28,0,param_1,1);
   timerStart(param_1 + 0x20,0);

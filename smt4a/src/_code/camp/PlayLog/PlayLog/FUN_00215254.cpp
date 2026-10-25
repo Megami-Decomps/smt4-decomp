@@ -2,11 +2,11 @@
 #include "camp/PlayLog/PlayLog.h"
 #include "classes/Obj4221a4.h"
 #include "ui/UiSpriteState.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct PlayLogPageA { u32 count; u32 values[50]; u32 details[25]; };
 struct PlayLogScreenViewA {
-    Params002c312c parameters;
+    UiResourceParameters parameters;
     UiSpriteState sprites[5];
     Obj4221a4 window;
     s32 state;
@@ -32,9 +32,9 @@ void sysMemClear(void *memory, u32 size);
 void asdTMTexTableLoadSprites(u32 table);
 void asdTMTexLoadMainHeap(u32 table, s32 node);
 void loadSlotEnsureLoaded(u32 slot);
-void paramsClearPacket(Params002c312c *parameters);
-void paramsInit(Params002c312c *, u32, u16, u32, u16, u32, u16, u32, u16, u32, u16);
-void FUN_0014e188(UiSpriteState *sprite, u32 table, s32 image, Params002c312c *parameters, s32 active, f32 scale);
+void paramsClearPacket(UiResourceParameters *parameters);
+
+void FUN_0014e188(UiSpriteState *sprite, u32 table, s32 image, UiResourceParameters *parameters, s32 active, f32 scale);
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 channel, s32 frame);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
 void FUN_0022feb0(void *work);
@@ -56,9 +56,7 @@ void FUN_00215254(void)
     asdTMTexLoadMainHeap(0x25, 0);
     loadSlotEnsureLoaded(0x37);
     paramsClearPacket(&work->parameters);
-    paramsInit(&work->parameters, reinterpret_cast<u32>(DAT_0052dd98.first), sizeof(DAT_0052dd98.first),
-               reinterpret_cast<u32>(DAT_0052dd98.second), sizeof(DAT_0052dd98.second), 0, 0, 0, 0,
-               reinterpret_cast<u32>(DAT_0052dd98.third), sizeof(DAT_0052dd98.third));
+    paramsInit(&work->parameters, DAT_0052dd98.first, sizeof(DAT_0052dd98.first), DAT_0052dd98.second, sizeof(DAT_0052dd98.second), 0, 0, 0, 0, DAT_0052dd98.third, sizeof(DAT_0052dd98.third));
     for (s32 index = 0; index < 5; ++index) {
         FUN_0014e188((&work->sprites[index]), 0x25, 0, &work->parameters, 1, 1.0f);
         uiSpriteSetKeyframe((&work->sprites[index]), 2, 0);

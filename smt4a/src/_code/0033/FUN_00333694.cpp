@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail shares one clamp store (placed after the player branch) between both
  * branches and passes the slot through "subs r0"; this build keeps a clamp per branch. */
 #include "shard/Shard0034.h"
+#include "shard/Shard004B.h"
 
 /* A skill record of data table 4. */
 struct SkillCostRecord {
@@ -13,8 +14,8 @@ SkillCostRecord *dataTable04FindById(u32 id);
 s32 FUN_0028809c(s32 slot, u32 target, SkillCostRecord *skill, s32 preview, s32 mode);
 PlayerData *gameGetPlayerData(void);
 PlayerData *gameGetSlotRecord(s32 slot);
-s16 FUN_003df57c(u16 cost, s32 mode);
-s16 FUN_004bcbb4(PlayerData *unit, u16 cost);
+s32 FUN_003df57c(u32 cost, s32 mode);
+s32 FUN_004bcbb4(const ItemRankRecord *unit, u32 cost);
 
 /* Uses skill `id` from party slot `slot` (the player when negative) on `target`; when it takes
  * effect outside preview, pays its cost from the user's MP. Returns 1 for an unknown skill. */
@@ -34,7 +35,7 @@ s32 FUN_00333694(s32 slot, u32 target, u32 id, s32 preview)
             }
         } else {
             PlayerData *unit = gameGetSlotRecord(slot);
-            unit->unk2C -= FUN_004bcbb4(unit, skill->cost);
+            unit->unk2C -= FUN_004bcbb4((const ItemRankRecord *)unit, skill->cost);
             if (unit->unk2C < 0) {
                 unit->unk2C = 0;
             }

@@ -41,7 +41,7 @@ void msgBoxFlagsSetBit7(u32 handle);
 void sortMenuAcquire(s32 a, s32 b);
 void FUN_0031f208(u8 key);
 void useCounterStart(void);
-u32 FUN_002c7c54(void);
+u32 useCounterGetCurrentValue(void);
 s32 useCounterIsFinished(void);
 void touchMenuClose(void);
 void useCounterRelease(void);
@@ -91,7 +91,7 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
         }
         useCounterStart();
     }
-    u32 key = FUN_002c7c54();
+    u32 key = useCounterGetCurrentValue();
 
     if (useCounterIsFinished() != 0) {
         g_gameState.menuOpen = 0;

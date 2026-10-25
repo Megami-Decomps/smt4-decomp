@@ -4,7 +4,7 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
-void FUN_0023aa3c(u32 key, u32 *output);
+void effectComputeScaledImageBounds(u32 key, u32 *output);
 void FUN_003108b0(void *output, void *source);
 void FUN_0032360c(void *destination, u32 key, void *work);
 
@@ -43,7 +43,7 @@ void FUN_0034d430(ParameterUpdatePrefixIV *state, u32 key, f32 amount)
     state->amount = amount;
 
     ScratchView scratch;
-    FUN_0023aa3c(key, scratch.parameters);
+    effectComputeScaledImageBounds(key, scratch.parameters);
     if (state->binding != 0) {
         SourceView *source = reinterpret_cast<SourceView *>(
             &scratch.words[0x208 / 4]);

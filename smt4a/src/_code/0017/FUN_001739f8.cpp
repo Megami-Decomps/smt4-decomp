@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int wstrlen(char *);
+extern unsigned int libc_strlen(char *);
 
 
 void FUN_001739f8(int param_1,char *param_2)
@@ -18,7 +18,7 @@ void FUN_001739f8(int param_1,char *param_2)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = wstrlen(param_2);
+  temp_v0 = libc_strlen(param_2);
   pcVar4 = (char *)(param_1 + 0xc);
   temp_v2 = 0;
   if ((temp_v0 >= 0xff) || (temp_v0 != 0)) {

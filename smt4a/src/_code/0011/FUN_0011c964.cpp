@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char LAB_0011c9d4; /* 0x11c9d4 */
 extern unsigned char DAT_00537f3c; /* 0x537f3c */
 
-extern int wstrlen(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002ea2e8. */
@@ -54,7 +54,7 @@ void FUN_0011c964(int param_1,unsigned int param_2)
   wideBufferAppend(temp_v0,&DAT_00537f3c);
   _ZN9Obj55aff4C1EPKt(temp_v5,temp_v4);
   FUN_002f6be2(temp_v5,&temp_v2);
-  temp_v1 = wstrlen(temp_v2);
+  temp_v1 = libc_strlen(temp_v2);
   FUN_002fbd0a(param_1,*(unsigned int *)(param_1 + 4),temp_v2,temp_v1 + temp_v2);
   operatorDeleteArrayNullable(temp_v2);
   _ZN9Obj55aff4D1Ev(temp_v5);

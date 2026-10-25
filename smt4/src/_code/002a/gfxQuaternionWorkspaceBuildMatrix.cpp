@@ -1,11 +1,5 @@
 #include "gfx/QuaternionWorkspace.h"
 
-/* The matrix lies beyond QuaternionWorkspace's recovered prefix. */
-struct QuaternionMatrixWorkspaceView {
-    QuaternionWorkspace workspace;
-    u8 unk110[0x30];
-    f32 matrix[4][4];
-};
 extern "C" QuaternionMatrixWorkspaceView DAT_004ea81c;
 
 /* Convert the workspace quaternion into its homogeneous rotation matrix. */

@@ -37,7 +37,7 @@ extern SoundEffectSmoothing DAT_0061963c;
 extern SoundEffectReverb DAT_0061975c;
 extern const u32 DAT_006306ec[];
 
-__weak int __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
+int __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
 void FUN_0045ec40(void *object);
 void FUN_0045f1f0(void *object);
 

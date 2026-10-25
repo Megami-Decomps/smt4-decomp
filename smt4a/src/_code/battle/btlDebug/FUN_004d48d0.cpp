@@ -42,7 +42,7 @@ void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void asdListBoxSetByteValue(u32 job, u32 value);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
-void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u32 flags);
+void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u8 flags);
 s32 dataTable3Type0Count(void);
 s32 dataTable22GetCount(void);
 

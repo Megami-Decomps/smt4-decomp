@@ -1,4 +1,3 @@
-/* NON_MATCHING: cursor signed-byte load/base calculation and switch NOP placement differ. */
 #include "classes/AocMenu.h"
 #include "ui/SceneWindowWork.h"
 
@@ -10,6 +9,7 @@ void FUN_0027e9c0(void *job);
 void jobOwnerFreeSlotAndStop(void *job);
 void eventQueueAddUniqueIfValid(u32 eventId);
 s32 buttonHelpHasEnabledEntryForId(u32);
+s8 uiSpriteGetCompletionState(const SceneWindowCursorView *cursor);
 
 /* Open the dialog, await confirmation, and finish its close transition. */
 void AocMenu::waitCloseAnimation()
@@ -25,7 +25,7 @@ void AocMenu::waitCloseAnimation()
         work->transition.phase = 1;
         break;
     case 1:
-        if (work->dialog.cursor.confirmed && buttonHelpHasEnabledEntryForId(0x10)) {
+        if (uiSpriteGetCompletionState(&work->dialog.cursor) && buttonHelpHasEnabledEntryForId(0x10)) {
             eventQueueAddUniqueIfValid(0x100016d);
             FUN_0027e9c0(job);
             FUN_0023392c(work, -1, 0);
@@ -33,7 +33,7 @@ void AocMenu::waitCloseAnimation()
         }
         break;
     case 2:
-        if (work->dialog.cursor.confirmed) {
+        if (uiSpriteGetCompletionState(&work->dialog.cursor)) {
             jobOwnerFreeSlotAndStop(job);
             work->transition.state = 0xf;
             work->transition.phase = 0;

@@ -1,14 +1,14 @@
-#include "common.h"
+#include "nn/os/ThreadLaunch.h"
 
 extern "C" {
 
-extern s32 FUN_0016dfe0(void);
+extern s32 FUN_0016dfe0(ThreadStackStorage *stack, void *buffer, u32 size);
 extern void FUN_002e3140(s32 error);
 
-/* Reports the error code of FUN_0016dfe0 to FUN_002e3140 when it is negative. */
-void resultReportIfFailed(void)
+/* Initializes the thread's stack mapping, reporting a failed result. */
+void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size)
 {
-    s32 result = FUN_0016dfe0();
+    s32 result = FUN_0016dfe0(stack, buffer, size);
     bool failed = result < 0;
 
     if (failed) {

@@ -19,7 +19,7 @@ u32 legacyResourceIdRemap(WindowStatusResult *result);
 void FUN_0038b420(AocMain *main, u32 low, u32 high);
 u32 FUN_002a1200(const u32 *result);
 u32 FUN_002a116c(const u32 *result);
-s32 queryResultFailureOnly(u32 *result);
+s32 queryResultFailureOnly(const u32 *object);
 void FUN_00234124(ScreenTransitionState *transition, const void *result);
 
 // Select the next transition state or dispatch recoverable addon errors.

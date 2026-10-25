@@ -4,7 +4,7 @@
 #include "battle/btlMain.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 BtlMainState *btlGetMainState(void);
 s16 battleGetEntryHalfword(s32 memberId, u32 field);
 s32 FUN_00293230(BtlMainState *battle);

@@ -2,14 +2,20 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/DataTable.h"
+#include "shard/Shard0032.h"
 
 namespace {
-struct DemonSaveEntryView { u8 prefix[0x36]; u16 flags; u8 tail[0x18]; };
 struct PartySlotIndexView { u8 prefix[0x1C88]; s8 slots[24]; };
+}
+
+static inline u16 saveRequirementFlags(const SavedUnitRecordA &saved)
+{
+    struct RequirementWord { u16 lower; u16 flags; };
+    return reinterpret_cast<const RequirementWord &>(saved.unk34).flags;
 }
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-u32 gameDataCopySaveEntry(u32 id, void *destination);
+u32 gameDataCopySaveEntry(u32 id, SavedUnitRecordA *destination);
 PartySlotIndexView *gameGetSlotTable();
 BattleSlotSourceRecordA *gameGetSlotRecord(s32 index);
 u32 randRange(u32 maximum);
@@ -19,7 +25,7 @@ u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)
 {
     u16 candidates[20] = {};
     u8 candidateCount = 0;
-    DemonSaveEntryView saved;
+    SavedUnitRecordA saved;
     void *table = dataTableGet(0, 0);
     dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
@@ -35,10 +41,10 @@ u32 FUN_0023e32c(u32 excludedA, u32 excludedB, u32 excludedC, u32 level)
         u16 requirement = record->saveRequirement;
         if ((requirement & 1) != 0) {
             if ((requirement & 0xFFFE) != 0) {
-                if (!gameDataCopySaveEntry(requirement >> 1, &saved) || (saved.flags & 0xFC) == 0)
+                if (!gameDataCopySaveEntry(requirement >> 1, &saved) || (saveRequirementFlags(saved) & 0xFC) == 0)
                     continue;
             } else {
-                if (!gameDataCopySaveEntry(record->id, &saved) || (saved.flags & 0xFC) == 0)
+                if (!gameDataCopySaveEntry(record->id, &saved) || (saveRequirementFlags(saved) & 0xFC) == 0)
                     continue;
             }
         }

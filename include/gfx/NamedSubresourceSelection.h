@@ -16,14 +16,15 @@ struct NamedSubresourceSelection {
     NamedSubresourceEntry *primary;
     NamedSubresourceEntry *secondary;
     u8 unk54[8];
-    const u16 *primaryGroup;
+    const char *primaryGroup;
     const char *primaryName;
-    const u16 *secondaryGroup;
+    const char *secondaryGroup;
     const char *secondaryName;
 };
 typedef char NamedSubresourceSelectionLayoutCheck[
     sizeof(NamedSubresourceEntry) == 0x10 &&
     offsetof(NamedSubresourceSelection, primary) == 0x4C &&
     offsetof(NamedSubresourceSelection, primaryGroup) == 0x5C &&
+    offsetof(NamedSubresourceSelection, secondaryGroup) == 0x64 &&
     sizeof(NamedSubresourceSelection) == 0x6C ? 1 : -1];
 #endif

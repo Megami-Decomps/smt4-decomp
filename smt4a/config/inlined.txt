@@ -22,3 +22,4 @@ asdGxGetBlackForced = 0xe5d001d0; // 0x13a420 (asdGxResumeAndApplyPreset: the pr
 aocMenuSetReadyFlag = 0xe5c01b81; // 0x478a04 0x47879c (aocMenuInitializeSprites, aocQuestSceneReleaseStepResources: mov r1, #0 sets the argument and g_aocMain is reloaded into r0 although the zero sits in r7)
 progressUnlockByteGet = 0xe5d00000; // 0x344c40 0x35aa70 (FUN_00344bc8, FUN_0035a9fc: the byte address is formed in full in r0, add #0x2ec unfolded, then read)
 devilGetVoiceCategory = 0xe5d00038; // 0x416dd4 (FUN_00416d30: the record FUN_00184310 returned in r0 is passed; the u8 result is then widened by sxtb, which a direct field read would fold into ldrsb)
+renderCtxSetStereoMode = 0xe580152c; // 0x14623c (FUN_00146048: mov r1, #0 sets the argument and the context is loaded into r0 just before)

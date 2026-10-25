@@ -1,6 +1,6 @@
 /* NON_MATCHING: only paramsInit argument preparation differs (literal register, paired stack stores and adjacent-table address arithmetic); 126 instructions each. */
 #include "ui/CommandWindow.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -10,17 +10,16 @@ void comWindowProcessUpdate(void *task);
 void FUN_0011a434(void *task);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 mode, s32 flags, void (*callback)(void *), u32 work, void *argument);
 void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags, void (*callback)(void *), u32 work, void *argument, u32 parent);
-void drawParameterBlockClear(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u16 firstBytes, const void *second, u16 secondBytes,
-                const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes, const void *fifth, u16 fifthBytes);
-void uiSpriteInitializeState(UiSpriteState *sprite, s32 bank, s32 image, s32 animation, Params002c312c *packet, s32 flags, f32 scale);
+void drawParameterBlockClear(UiResourceParameters *packet);
+
+void uiSpriteInitializeState(UiSpriteState *sprite, s32 bank, s32 image, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
 void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 image);
 extern const u8 DAT_0040384c[];
 
 // Create the command window's update/draw tasks and initialize both upper-screen sprites.
 void FUN_0010a7bc()
 {
-    struct ParameterView { u8 prefix[0x1c]; Params002c312c packet; };
+    struct ParameterView { u8 prefix[0x1c]; UiResourceParameters packet; };
     typedef char ParameterViewOffsetCheck[offsetof(ParameterView, packet) == 0x1c ? 1 : -1];
     if (!g_comWin) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\font\\ComWin\\ComWin.cpp", 0x122);

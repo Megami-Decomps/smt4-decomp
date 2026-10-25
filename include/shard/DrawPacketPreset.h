@@ -1,7 +1,7 @@
 #ifndef SHARD_DRAWPACKETPRESET_H
 #define SHARD_DRAWPACKETPRESET_H
 
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct DrawPacketPreset {
     /* 0x000 */ u32 unk000[5];
@@ -11,7 +11,7 @@ struct DrawPacketPreset {
     /* 0x416 */ u8 unk416[2];
     /* 0x418 */ u32 unk418;
     /* 0x41c */ u32 unk41c;
-    /* 0x420 */ Params002c312c packet;
+    /* 0x420 */ UiResourceParameters packet;
 };
 
 #endif

@@ -1,5 +1,5 @@
 #include "shard/X14_InfoWindowSmt4.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/UiSpriteState.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -13,10 +13,9 @@ u32 asdProcessCreateSimple(const s8 *name, s32 priority, u16 startDelay, u16 end
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, u32 parent);
-void drawParameterBlockClear(Params002c312c *parameters);
-void paramsInit(Params002c312c *parameters, const void *source, u32 value,
-    u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g, u32 h);
-void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 id, Params002c312c *parameters, s32 flags, f32 scale);
+void drawParameterBlockClear(UiResourceParameters *parameters);
+
+void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 id, UiResourceParameters *parameters, s32 flags, f32 scale);
 void timerStart(UiSpriteState *sprite, s32 mode, s32 frame);
 void *asdTextCreate(u32 flags);
 void FUN_002bd82c(void *text, u32 color);
@@ -29,7 +28,7 @@ void infoWindowCreate()
     struct InfoWindowSetupView {
         u32 process;
         u8 padding04[0x20];
-        Params002c312c parameters;
+        UiResourceParameters parameters;
         UiSpriteState background;
         UiSpriteState label;
     };

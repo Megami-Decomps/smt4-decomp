@@ -26,7 +26,7 @@ struct fn_00116498_arg0 {
 extern unsigned char LAB_0011653c; /* 0x11653c */
 extern unsigned char DAT_00559ce4; /* 0x559ce4 */
 
-extern int wstrlen(unsigned int);
+extern int libc_strlen(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 extern int strInit(int);
 extern unsigned int FUN_002e784e(int, unsigned char *, unsigned int);
@@ -64,7 +64,7 @@ int FUN_00116498(fn_00116498_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned int *)(temp_v0 - 0x11c) = param_3;
   *(unsigned int *)(temp_v0 - 0x120) = param_2;
   _ZN9Obj55aff4aSERKS_(temp_v0 - 0x98,param_5);
-  temp_v1 = wstrlen(param_6);
+  temp_v1 = libc_strlen(param_6);
   temp_v2 = FUN_002e784e(temp_v1 + 1,&LAB_0011653c,0);
   *(unsigned int *)(temp_v0 - 0x90) = temp_v2;
   libc_strcpy(temp_v2,param_6);

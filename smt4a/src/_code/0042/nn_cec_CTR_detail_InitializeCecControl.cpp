@@ -15,7 +15,7 @@ extern unsigned int g_nnCecdHandle; /* 0x5c1fc4 */
 
 extern int FUN_0016f864(void);
 /* Supplied declaration required: FUN_0016f988. */
-extern unsigned int wstrlen(char *);
+extern unsigned int libc_strlen(char *);
 
 
 void nn_cec_CTR_detail_InitializeCecControl(void)
@@ -27,7 +27,7 @@ void nn_cec_CTR_detail_InitializeCecControl(void)
   
   temp_v0 = FUN_0016f864();
   if (-1 < temp_v0) {
-    temp_v1 = wstrlen("cecd:u");
+    temp_v1 = libc_strlen("cecd:u");
     FUN_0016f988(&g_nnCecdHandle,"cecd:u",temp_v1,0);
     return;
   }

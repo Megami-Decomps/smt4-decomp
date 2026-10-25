@@ -1,4 +1,5 @@
 /* NON_MATCHING: the sprite grid loops are strength-reduced differently from retail (226 vs 234 rows: retail keeps separate row base registers per grid); the reset sequence is the same. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 extern "C" {
@@ -30,8 +31,7 @@ void FUN_002b14c8(void *state);
 void FUN_002cdad4(void *state);
 void FUN_0021c45c(void *state, BtlOwner *owner);
 void paramsClearPacket(void *packet);
-void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
-                const void *f, u32 fSize);
+
 void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
 void uiSpriteSelectAnim(void *sprite, u32 anim);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 flag);
@@ -64,7 +64,7 @@ void FUN_004a8ef4(void *unused, BtlOwner *owner)
     void *params = BTL_UI(ui, 0x7508);
 
     paramsClearPacket(params);
-    paramsInit(params, DAT_0052ac1c, 0x120, DAT_0052ad3c, 0x108, DAT_0052ae44, 0xC0, 0, 0, DAT_0052af04, 0x5B0);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(params), DAT_0052ac1c, 0x120, DAT_0052ad3c, 0x108, DAT_0052ae44, 0xC0, 0, 0, DAT_0052af04, 0x5B0);
     for (s32 row = 0; row < 16; row++) {
         u8 *base = ui + row * 0x400;
 

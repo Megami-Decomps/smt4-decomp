@@ -7,7 +7,7 @@ extern "C" {
 extern int DAT_005c0ae4; /* 0x5c0ae4 */
 
 extern int FUN_0016f988(unsigned int *, unsigned int, unsigned int, unsigned int);
-extern unsigned int wstrlen(unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 
 
 int FUN_0013b790(void)
@@ -17,7 +17,7 @@ int FUN_0013b790(void)
   int temp_v1;
   
   if (DAT_005c0ae4 == 0) {
-    temp_v0 = wstrlen(0x561cd4);
+    temp_v0 = libc_strlen(0x561cd4);
     temp_v1 = FUN_0016f988((unsigned int *)&DAT_005c0ae4,0x561cd4,temp_v0,0);
     if (temp_v1 < 0) {
       return temp_v1;

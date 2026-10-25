@@ -7,12 +7,12 @@ extern Listener DAT_0062d848;
 extern const u8 DAT_0055b02c, entry;
 void FUN_0012cec4(void *);
 s32 __cxa_guard_acquire(u64 *guard);
-void emptyStub_002f4370(void *, void (*)(void *), const void *);
+void __aeabi_atexit(void *, void (*)(void *), const void *);
 Listener *FUN_002f4424(void) {
     if (!(g_listenerTable.guard & 1) && __cxa_guard_acquire(&g_listenerTable.guard)) {
         for (u32 index = 0; index < 4; ++index) DAT_0062d848.values[index] = 0;
         DAT_0062d848.vtable = &DAT_0055b02c;
-        emptyStub_002f4370(&DAT_0062d848, FUN_0012cec4, &entry);
+        __aeabi_atexit(&DAT_0062d848, FUN_0012cec4, &entry);
         /* Retail contains an erased call using &g_listenerTable.guard here. */
     }
     return &DAT_0062d848;

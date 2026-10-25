@@ -1,7 +1,7 @@
 #ifndef UI_HOW_TO_SCREEN_H
 #define UI_HOW_TO_SCREEN_H
 #include "ui/UiSpriteState.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include <stddef.h>
 
 struct HowToDrawTables {
@@ -35,7 +35,7 @@ struct HowToScreenWork {
         } display;
     };
     /* 0x0E8 */ u8 unk0E8[0x134];
-    /* 0x21C */ Params002c312c parameters;
+    /* 0x21C */ UiResourceParameters parameters;
     /* 0x23C */ UiSpriteState sprites[4];
 };
 struct HowToScreenInstance : HowToScreenWork {

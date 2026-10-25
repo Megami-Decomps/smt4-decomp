@@ -2,11 +2,22 @@
 #define SHARD_W6_W6MATCH8_UI_RESOURCE_PARAMETERS_H
 
 #include "common.h"
+#include <stddef.h>
 
 struct UiResourceParameters {
-    u16 counts[5];
-    u16 unk0a;
-    const void *chunks[5];
+    /* 0x00 */ u16 counts[5];
+    /* 0x0A */ u16 unk0a;
+    /* 0x0C */ const void *chunks[5];
 };
+
+typedef char UiResourceParametersLayoutCheck[
+    offsetof(UiResourceParameters, counts) == 0 &&
+    offsetof(UiResourceParameters, chunks) == 0xc &&
+    sizeof(UiResourceParameters) == 0x20 ? 1 : -1];
+
+extern "C" void paramsInit(UiResourceParameters *parameters,
+    const void *first, u16 firstBytes, const void *second, u16 secondBytes,
+    const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes,
+    const void *fifth, u16 fifthBytes);
 
 #endif

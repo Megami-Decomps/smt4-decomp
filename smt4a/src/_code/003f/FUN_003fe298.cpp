@@ -1,5 +1,5 @@
 /* NON_MATCHING: compiler recognizes REV instead of retail's expanded byte swap and shares dirty-flag stores differently. */
-#include "common.h"
+#include "shard/Shard0036.h"
 
 struct ShaderColorState {
     u16 flags;
@@ -9,10 +9,10 @@ struct ShaderColorState {
 };
 
 // Store a byte-reversed color and mark the corresponding material or lighting block dirty.
-extern "C" void FUN_003fe298(ShaderColorState *state, u32 index, u32 color)
+extern "C" void FUN_003fe298(ShaderColorState *state, u32 index, RgbaWord color)
 {
-    u32 value = (color << 24) | ((u32)(u8)(color >> 8) << 16) |
-        ((u32)(u8)(color >> 16) << 8) | (color >> 24);
+    u32 value = (color.rgba.r << 24) | (color.rgba.g << 16) |
+        (color.rgba.b << 8) | color.rgba.a;
     switch (index) {
     case 0: state->material[0] = value; state->flags |= 0x400; return;
     case 1: state->material[1] = value; state->flags |= 0x400; return;

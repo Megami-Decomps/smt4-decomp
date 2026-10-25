@@ -6,7 +6,7 @@ u32 scrRunOpcodesStub(ScriptState *script);
 void saveLoadProcessCreate(s32 slot, s32 mode);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
 void FUN_00420a2c(SaveSlotHeaderWork *work);
-s32 objectGetSignedFlag(const UiAnimatedSprite *sprite);
+s32 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 s32 byteTripleGetV0();
 s32 byteArr5Get3();
 const void *gameDataBlocksGetTable();
@@ -58,7 +58,7 @@ void saveMenuCacheSlotHeadersStep(SaveSlotHeaderWork *work)
         if (work->scriptPending) {
             scrRunOpcodesStub(work->script);
         }
-        if (objectGetSignedFlag(&work->sprites[work->spriteCount]) != 0) {
+        if (uiSpriteGetCompletionState(&work->sprites[work->spriteCount]) != 0) {
             ++work->step;
             return;
         }

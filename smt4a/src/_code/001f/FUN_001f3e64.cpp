@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00512220's literal pool; not written yet. */
+/* NON_MATCHING: found outside every function: its address is in FUN_00512210's literal pool; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_001f3e64 for reference (not compiled; its own view of the boundaries):
 
 unsigned int FUN_001f3e64(void)

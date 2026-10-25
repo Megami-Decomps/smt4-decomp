@@ -6,7 +6,7 @@ extern "C" {
 
 int nn_os_CriticalSection_Initialize(...);
 int nn_os_LightEvent_Initialize(...);
-int emptyStub_002f4370(...);
+int __aeabi_atexit(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -38,7 +38,7 @@ extern unsigned int DAT_00646074; /* 0x646074 */
 
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
-/* Supplied declaration required: emptyStub_002f4370. */
+/* Supplied declaration required: __aeabi_atexit. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -73,7 +73,7 @@ void FUN_00511fb4(unsigned int *param_1)
   DAT_00646070 = 0;
   DAT_00646074 = 0;
   __aeabi_vec_ctor_nocookie_nodtor(&DAT_005c0b08,&LAB_0042d1c0,4,2);
-  emptyStub_002f4370(0,0x1f3ddc,0x100000);
+  __aeabi_atexit(0,0x1f3ddc,0x100000);
   return;
 }
 

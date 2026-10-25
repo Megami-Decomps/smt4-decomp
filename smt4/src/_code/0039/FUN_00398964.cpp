@@ -19,7 +19,7 @@ extern "C" {
 void FUN_002b8ee0(Part *part, s32 value);
 void FUN_002bf818(void);
 s32 vec2GetXInt(Part *part);
-s8 recordGetSignedFlags(const Part *part);
+s8 uiSpriteGetCompletionState(const Part *part);
 void messageOwnerSetState(PartOwner *owner, s32 mode);
 
 // Reset the first part, copy its x position into the owner and start mode 2 when both parts are flagged.
@@ -32,7 +32,7 @@ void FUN_00398964(PartOwner *owner)
     s32 x = vec2GetXInt(first);
     owner->xA4 = x;
     owner->xAC = x;
-    if (recordGetSignedFlags(first) != 0 && recordGetSignedFlags(second) != 0) {
+    if (uiSpriteGetCompletionState(first) != 0 && uiSpriteGetCompletionState(second) != 0) {
         messageOwnerSetState(owner, 2);
     }
 }

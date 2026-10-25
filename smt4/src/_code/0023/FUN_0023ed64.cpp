@@ -1,155 +1,100 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023ed64` (_code @ 0x23ed64, 0x2f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alpha/scale pair transfers, VFP constant registers, and phase-one branch placement differ. */
+#include "ui/SplashAnimationState.h"
 
 extern "C" {
+void asdTMTexTableLoadTmx(s32 group, s32 option);
+void asdTMTexTableLoadEntryAsync(s32 group, s32 index);
+s32 asdTMTexTableNodeIsLoaded(u32 group, u32 index);
+void asdTMTexTableReleaseNode(s32 group, s32 index);
+void asdTMTexTableFreeEntry(s32 group);
+s32 ifTouchRegionAdd(u16 x, u16 y, u16 width, u16 height);
+void ifTouchRegionRemove(void);
+s32 ifTouchGetSelectionMode(void);
+s32 padIsButtonPressed(u32 button);
+s32 bgmGetStateById(u32 sound);
+void soundChannelRequestIfEnabled(u32 sound, u32 option, u32 fadeFrames);
+void soundChannelStopAll(s32 channel);
+s32 FUN_002c2a04(u32 slot);
+void FUN_002a03d8(s32 slot, s32 frames);
+void slotSetRequest(s32 slot, s32 group, s32 amount);
 
-int soundChannelStopAll(int);
-int slotSetRequest(int, int, int);
-int ifTouchRegionAdd(void);
-int soundChannelRequestIfEnabled(int, int);
-int FUN_002a03d8(int, int);
-int asdTMTexTableLoadEntryAsync(int, int);
-int asdTMTexTableFreeEntry(int);
-int asdTMTexTableReleaseNode(int, int);
-int ifTouchRegionRemove(void);
-int asdTMTexTableLoadTmx(int, int);
-
-extern int bgmGetStateById(unsigned int);
-/* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: slotSetRequest. */
-/* Supplied declaration required: ifTouchRegionAdd. */
-/* Supplied declaration required: soundChannelRequestIfEnabled. */
-/* Supplied declaration required: FUN_002a03d8. */
-/* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-extern int ifTouchGetSelectionMode(void);
-extern int padIsButtonPressed(unsigned int);
-extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-
-
-unsigned int FUN_0023ed64(unsigned int *param_1)
-
+// Load the splash sprites, cycle their crossfade, and release them after dismissal.
+s32 FUN_0023ed64(SplashAnimationState *state)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  float temp_v2;
-  float temp_v3;
-  unsigned long long temp_v4;
-  float temp_v5;
-  unsigned int temp_v6;
-  unsigned long long temp_v7;
-  
-  temp_v6 = 0x42700000;
-  temp_v7 = 0x42700000;
-  temp_v4 = 0x3f80000000000000;
-  if (param_1[7] == 0) {
-    param_1[10] = 0;
-    param_1[0xd] = 0x3fc00000;
-    param_1[0xe] = 300;
-    param_1[9] = 0x42700000;
-    param_1[0xb] = 0x3f800000;
-    param_1[0xc] = 0x3f800000;
-    asdTMTexTableLoadTmx(0x2d,0);
-    temp_v1 = 1;
-    do {
-      asdTMTexTableLoadEntryAsync(0x2d,temp_v1);
-      temp_v6 = (unsigned int)temp_v7;
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 7);
-    temp_v0 = 0;
-    param_1[0xf] = 0;
-    ifTouchRegionAdd();
-    param_1[0xf] = temp_v0;
-    temp_v1 = bgmGetStateById(0x1000051);
-    if (temp_v1 != 1) {
-      soundChannelRequestIfEnabled(0x1000051,0);
+    if (state->phase == 0) {
+        state->firstAlpha = 0.0f;
+        state->secondScale = 1.5f;
+        state->wait = 300;
+        state->frame = 60.0f;
+        state->firstScale = 1.0f;
+        state->secondAlpha = 1.0f;
+        asdTMTexTableLoadTmx(0x2d, 0);
+        for (s32 index = 1; index < 7; ++index)
+            asdTMTexTableLoadEntryAsync(0x2d, index);
+        state->touchRegion = 0;
+        state->touchRegion = ifTouchRegionAdd(0, 0, 320, 240);
+        if (bgmGetStateById(0x1000051) != 1)
+            soundChannelRequestIfEnabled(0x1000051, 0, 60);
+        ++state->phase;
     }
-    param_1[7] = param_1[7] + 1;
-  }
-  temp_v1 = FUN_002c2a04(0);
-  if ((temp_v1 == 0) &&
-     ((temp_v1 = ifTouchGetSelectionMode(), temp_v1 == 6 || (temp_v1 = padIsButtonPressed(0), temp_v1 != 0)))) {
-    param_1[7] = 2;
-    param_1[0xe] = 0;
-  }
-  else if (param_1[7] == 0) {
-    return 0;
-  }
-  temp_v2 = (float)param_1[9];
-  temp_v5 = (float)((unsigned long long)temp_v4 >> 0x20);
-  param_1[9] = temp_v2 - temp_v5;
-  temp_v3 = (float)temp_v4;
-  if (temp_v2 - temp_v5 <= temp_v3) {
-    param_1[9] = temp_v6;
-    *(float *)&param_1[10] = temp_v3;
-    *(float *)&param_1[0xb] = temp_v5;
-  }
-  temp_v1 = param_1[9];
-  if ((temp_v1 < 0x41f00001) && ((float)param_1[0xc] <= temp_v3)) {
-    *(float *)&param_1[0xc] = temp_v3;
-    *(float *)&param_1[0xd] = temp_v5;
-  }
-  temp_v2 = 0.033333335f;
-  if (temp_v1 >= 0x41f00001) {
-    param_1[10] = (float)param_1[10] + 0.033333335f;
-    param_1[0xb] = (float)param_1[0xb] + 0.016666668f;
-    param_1[0xc] = (float)param_1[0xc] - 0.033333335f;
-    param_1[0xd] = (float)param_1[0xd] + 0.016666668f;
-  }
-  if (temp_v1 < 0x41f00000) {
-    param_1[10] = (float)param_1[10] - 0.033333335f;
-    param_1[0xb] = (float)param_1[0xb] + 0.016666668f;
-    param_1[0xc] = (float)param_1[0xc] + 0.033333335f;
-    param_1[0xd] = (float)param_1[0xd] + 0.016666668f;
-  }
-  if (param_1[7] == 1) {
-    temp_v1 = asdTMTexTableNodeIsLoaded(0x2d,6);
-    if (temp_v1 == 0) {
-      return 0;
+    if (FUN_002c2a04(0) == 0 &&
+        (ifTouchGetSelectionMode() == 6 || padIsButtonPressed(0))) {
+        state->phase = 2;
+        state->wait = 0;
+    } else if (state->phase == 0) {
+        return 0;
     }
-    temp_v1 = FUN_002c2a04(0);
-    if (temp_v1 == 3) {
-      FUN_002a03d8(0,0x1e);
-    }
-    temp_v1 = FUN_002c2a04(0);
-    if (temp_v1 == 2) {
-      return 0;
-    }
-    if ((int)param_1[8] < 0x3f800000) {
-      param_1[8] = (float)param_1[8] + temp_v2;
-    }
-    else {
-      param_1[0xe] = 300;
-    }
-  }
-  if (param_1[7] == 2) {
-    temp_v1 = param_1[0xe];
-    param_1[0xe] = temp_v1 - 1;
-    if (-1 < temp_v1 - 1) {
-      return 0;
-    }
-    param_1[7] = 3;
-    param_1[0xe] = 300;
-    slotSetRequest(0,0x2d,0xff);
-  }
-  if ((param_1[7] == 3) && (temp_v1 = FUN_002c2a04(0), temp_v1 == 3)) {
-    temp_v1 = 1;
-    do {
-      asdTMTexTableReleaseNode(0x2d,temp_v1);
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 7);
-    asdTMTexTableFreeEntry(0x2d);
-    ifTouchRegionRemove();
-    soundChannelStopAll(0xf);
-    *param_1 = 9;
-  }
-  return 0;
-}
 
-} /* extern "C" */
+    state->frame -= 1.0f;
+    if (state->frame <= 0.0f) {
+        state->frame = 60.0f;
+        state->firstAlpha = 0.0f;
+        state->firstScale = 1.0f;
+    }
+    // The original compares the raw words at these positive float thresholds.
+    if (state->frameBits <= 0x41f00000 && state->secondAlpha <= 0.0f) {
+        state->secondAlpha = 0.0f;
+        state->secondScale = 1.0f;
+    }
+    if (state->frameBits > 0x41f00000) {
+        state->firstAlpha += 0.033333335f;
+        state->firstScale += 0.016666668f;
+        state->secondAlpha -= 0.033333335f;
+        state->secondScale += 0.016666668f;
+    }
+    if (state->frameBits < 0x41f00000) {
+        state->firstAlpha -= 0.033333335f;
+        state->firstScale += 0.016666668f;
+        state->secondAlpha += 0.033333335f;
+        state->secondScale += 0.016666668f;
+    }
+    if (state->phase == 1) {
+        if (!asdTMTexTableNodeIsLoaded(0x2d, 6))
+            return 0;
+        if (FUN_002c2a04(0) == 3)
+            FUN_002a03d8(0, 30);
+        if (FUN_002c2a04(0) == 2)
+            return 0;
+        if (state->fadeBits < 0x3f800000)
+            state->fade += 0.033333335f;
+        else
+            state->wait = 300;
+    }
+    if (state->phase == 2) {
+        if (--state->wait >= 0)
+            return 0;
+        state->phase = 3;
+        state->wait = 300;
+        slotSetRequest(0, 0x2d, 0xff);
+    }
+    if (state->phase == 3 && FUN_002c2a04(0) == 3) {
+        for (s32 index = 1; index < 7; ++index)
+            asdTMTexTableReleaseNode(0x2d, index);
+        asdTMTexTableFreeEntry(0x2d);
+        ifTouchRegionRemove();
+        soundChannelStopAll(0xf);
+        state->scriptState = 9;
+    }
+    return 0;
+}
+}

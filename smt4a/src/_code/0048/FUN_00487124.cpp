@@ -29,7 +29,7 @@ void FUN_0048c394(PulsePanel *panel);
 s32 FUN_00485d1c(PulsePanel *panel);
 s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
 s32 uiSpriteGetMode(const UiSpriteState *sprite);
-s32 objectGetSignedFlag(const UiSpriteState *sprite);
+s32 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
 
 /* Per-frame update of the panel: advances its two sprite animations and the pulse timers. */
@@ -49,7 +49,7 @@ void FUN_00487124(PulsePanel *panel)
             FUN_0048c394(panel);
         }
         FUN_00163aa4(&panel->first, 1.0f);
-        if (objectGetSignedFlag(&panel->first) != 0) {
+        if (uiSpriteGetCompletionState(&panel->first) != 0) {
             if (uiSpriteGetMode(&panel->first) != 3) {
                 uiSpriteSetImageKeyframe(&panel->first, 3, 0);
             } else {
@@ -57,7 +57,7 @@ void FUN_00487124(PulsePanel *panel)
             }
         }
         FUN_00163aa4(&panel->second, 1.0f);
-        if (objectGetSignedFlag(&panel->second) != 0) {
+        if (uiSpriteGetCompletionState(&panel->second) != 0) {
             if (uiSpriteGetMode(&panel->second) != 5) {
                 uiSpriteSetImageKeyframe(&panel->second, 5, 0);
             } else {

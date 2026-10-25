@@ -1,119 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296474` (_code @ 0x296474, 0x2f0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stock-slot loads are reused and width-loop registers differ; natural u64 casts recover the retail __aeabi_ul2f ABI. */
+#include "status/ExperienceBars.h"
+#include "battle/UnitInitialization.h"
+#include "gamedata/PlayerInitialization.h"
+#include "shard/W7_W7Match2_PartyDamage.h"
+#include "shard/S1ListPanel.h"
+
+struct SavedUnitRecord;
 
 extern "C" {
-
-int VectorSignedToFloat(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern float FUN_00282c30(unsigned int, unsigned int);
-extern unsigned int devilCalculateRankCost(unsigned short, int, int);
-extern unsigned int dataTable9EntryOrZero(int);
-extern int gameGetUnitRecord(int);
-extern int gameGetSlotTable(void);
-extern int gameGetPlayerData(void);
-extern int FUN_002bf4f8(unsigned int, unsigned int);
-
-
-void FUN_00296474(int param_1)
-
-{
-/* irregular: irregular input(s): in_fpscr; 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  float temp_v5;
-  float temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  int temp_v10;
-  unsigned int in_fpscr;
-  float temp_v11;
-  
-  temp_v1 = gameGetSlotTable();
-  temp_v2 = FUN_002bf4f8(0x28,0x14);
-  temp_v3 = gameGetPlayerData();
-  temp_v4 = dataTable9EntryOrZero((unsigned int)*(unsigned char *)(temp_v3 + 0x76) + (int)*(short *)(param_1 + 0xd49a));
-  if (*(char *)(param_1 + 0xd4fe) != '\0') {
-    temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
-  }
-  else {
-    temp_v5 = (float)FUN_00282c30((*(unsigned int *)(param_1 + 0xd3a4) << 0x14) |
-                                (*(unsigned int *)(param_1 + 0xd3a0) >> 0xc),
-                                *(unsigned int *)(param_1 + 0xd3a4) >> 0xc);
-    temp_v6 = (float)FUN_00282c30(temp_v4,0);
-    temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v2 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3)
-    ;
-    temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-  }
-  *(unsigned short *)(param_1 + 0xd468) = temp_v0;
-  temp_v3 = 0;
-  do {
-    temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x9108);
-    if ((-1 < temp_v10) && (temp_v7 = gameGetUnitRecord(temp_v10), temp_v7 != 0)) {
-      temp_v9 = param_1 + temp_v10 * 2;
-      temp_v4 = devilCalculateRankCost(*(unsigned short *)(temp_v7 + 0x46),
-                           (unsigned int)*(unsigned char *)(temp_v7 + 0x48) + (int)*(short *)(temp_v9 + 0xd49c),
-                           (int)*(char *)(param_1 + temp_v10 + 0xd531));
-      if (*(char *)(param_1 + temp_v10 + 0xd4ff) != '\0') {
-        temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
-      }
-      else {
-        temp_v10 = param_1 + temp_v10 * 8;
-        temp_v8 = *(unsigned int *)(temp_v10 + 0xd3ac);
-        temp_v5 = (float)FUN_00282c30((*(unsigned int *)(temp_v10 + 0xd3a8) >> 0xc) | (temp_v8 << 0x14),
-                                    temp_v8 >> 0xc);
-        temp_v6 = (float)FUN_00282c30(temp_v4,0);
-        temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v2 + 0xc),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-      }
-      *(unsigned short *)(temp_v9 + 0xd46a) = temp_v0;
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 3);
-  temp_v2 = FUN_002bf4f8(0x28,0x5f);
-  temp_v3 = 0;
-  do {
-    if (((((*(char *)(temp_v1 + 0x9108) < '\0') ||
-          (*(char *)(temp_v1 + 0x9108) != *(char *)(temp_v1 + temp_v3 + 0x90f0))) &&
-         ((*(char *)(temp_v1 + 0x9109) < '\0' ||
-          (*(char *)(temp_v1 + 0x9109) != *(char *)(temp_v1 + temp_v3 + 0x90f0))))) &&
-        (((*(char *)(temp_v1 + 0x910a) < '\0' ||
-          (*(char *)(temp_v1 + 0x910a) != *(char *)(temp_v1 + temp_v3 + 0x90f0))) &&
-         (temp_v10 = (int)*(char *)(temp_v1 + temp_v3 + 0x90f0), -1 < temp_v10)))) &&
-       (temp_v7 = gameGetUnitRecord(temp_v10), temp_v7 != 0)) {
-      temp_v9 = param_1 + temp_v10 * 2;
-      temp_v4 = devilCalculateRankCost(*(unsigned short *)(temp_v7 + 0x46),
-                           (unsigned int)*(unsigned char *)(temp_v7 + 0x48) + (int)*(short *)(temp_v9 + 0xd49c),
-                           (int)*(char *)(param_1 + temp_v10 + 0xd531));
-      if (*(char *)(param_1 + temp_v10 + 0xd4ff) != '\0') {
-        temp_v0 = **(unsigned short **)(temp_v2 + 0xc);
-      }
-      else {
-        temp_v10 = param_1 + temp_v10 * 8;
-        temp_v8 = *(unsigned int *)(temp_v10 + 0xd3ac);
-        temp_v5 = (float)FUN_00282c30((*(unsigned int *)(temp_v10 + 0xd3a8) >> 0xc) | (temp_v8 << 0x14),
-                                    temp_v8 >> 0xc);
-        temp_v6 = (float)FUN_00282c30(temp_v4,0);
-        temp_v11 = (float)VectorSignedToFloat((int)**(short **)(temp_v2 + 0xc),
-                                            (unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v0 = (unsigned short)(int)((temp_v5 / temp_v6) * temp_v11);
-      }
-      *(unsigned short *)(temp_v9 + 0xd46a) = temp_v0;
-    }
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v3 < 0x18);
-  return;
+PartyDamageSlotsIV *gameGetSlotTable();
+const PlayerInitialRecordIV *gameGetPlayerData();
+SavedUnitRecord *gameGetUnitRecord(s32 index);
+SpriteInfo *FUN_002bf4f8(u32 table, u32 index);
+u32 dataTable9EntryOrZero(s32 rank);
+u32 devilCalculateRankCost(u32 id, s32 rank, s32 level);
 }
 
-} /* extern "C" */
+/* Progress is fixed-point with twelve fractional bits; the cached width is in sprite pixels. */
+static __inline s32 experienceBarWidth(u64 progress, u64 required, const SpriteInfo *sprite)
+{
+    f32 current = (f32)(progress >> 12);
+    f32 maximum = (f32)required;
+    return (s32)((current / maximum) * (f32)*sprite->size);
+}
+
+static __inline void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 index, const SpriteInfo *sprite)
+{
+    const SavedBattleInitialViewIV *unit = reinterpret_cast<const SavedBattleInitialViewIV *>(gameGetUnitRecord(index));
+    if (unit != NULL) {
+        u32 required = devilCalculateRankCost(unit->id,
+            unit->enabled + work->unitRankDelta[index], work->unitRankMode[index]);
+        if (work->unitFull[index] != 0) {
+            work->unitWidths[index] = (u16)*sprite->size;
+        } else {
+            work->unitWidths[index] = experienceBarWidth(work->unitProgress[index], required, sprite);
+        }
+    }
+}
+
+/* Refresh the player's bar, active demons, and stocked demons not already shown in the party. */
+extern "C" void FUN_00296474(ExperienceBarStateIV *work)
+{
+    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SpriteInfo *sprite = FUN_002bf4f8(0x28, 0x14);
+    const PlayerInitialRecordIV *player = gameGetPlayerData();
+    u32 required = dataTable9EntryOrZero(player->enabled + work->playerRankDelta);
+    if (work->playerFull != 0) {
+        work->playerWidth = (u16)*sprite->size;
+    } else {
+        work->playerWidth = experienceBarWidth(work->playerProgress, required, sprite);
+    }
+    for (s32 slot = 0; slot < 3; ++slot) {
+        s32 index = slots->active[slot];
+        if (index >= 0) {
+            experienceBarUpdateUnit(work, index, sprite);
+        }
+    }
+    sprite = FUN_002bf4f8(0x28, 0x5f);
+    for (s32 slot = 0; slot < 24; ++slot) {
+        s32 index = slots->stock[slot];
+        if ((slots->active[0] < 0 || slots->active[0] != index) &&
+            (slots->active[1] < 0 || slots->active[1] != index) &&
+            (slots->active[2] < 0 || slots->active[2] != index) && index >= 0) {
+            experienceBarUpdateUnit(work, index, sprite);
+        }
+    }
+}

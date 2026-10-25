@@ -8,9 +8,12 @@ void asdSoundObjectStop(void *work);
 s32 FUN_002e10ac(u32 slot)
 {
     SlotTable *table = g_asdSoundHandleState.table;
-    if (slot >= 16 || table == NULL) return 0;
-    if (table->slots[slot] != NULL)
-        asdSoundObjectStop(table->slots[slot]);
-    return 1;
+    s32 result = 0;
+    if (slot < 16 && table != NULL) {
+        if (table->slots[slot] != NULL)
+            asdSoundObjectStop(table->slots[slot]);
+        result = 1;
+    }
+    return result;
 }
 }

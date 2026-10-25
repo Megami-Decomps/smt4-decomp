@@ -12,7 +12,7 @@ void FUN_002b8454(u8 slot, u8 kind, u16 value, s32 defer);
 void FUN_002b8ee0(ButtonHelpDisplayUnit *unit, s32 flag);
 void FUN_002bf818(ButtonHelpDisplayUnit *unit);
 void buttonHelpSetPreset(u32 preset);
-s8 recordGetSignedFlags(const ButtonHelpDisplayUnit *record);
+s8 uiSpriteGetCompletionState(const ButtonHelpDisplayUnit *record);
 
 /* Per-frame update of the button help: runs the current state (1 opens, 2 idles, 3 closes), applies
  * a preset that was waiting and the queued selections, then advances the frame counter. */
@@ -39,7 +39,7 @@ u32 FUN_001c0c38(void)
                     last = i;
                 }
             }
-            if (work->transition.phase > last && recordGetSignedFlags(&selection->units[last]) != 0) {
+            if (work->transition.phase > last && uiSpriteGetCompletionState(&selection->units[last]) != 0) {
                 g_buttonHelp.prefix.work->state = 2;
                 g_buttonHelp.prefix.work->transition.phase = 0;
             }
@@ -56,7 +56,7 @@ u32 FUN_001c0c38(void)
                         last = i;
                     }
                 }
-                if (work->transition.phase > last && recordGetSignedFlags(&selection->units[last]) != 0) {
+                if (work->transition.phase > last && uiSpriteGetCompletionState(&selection->units[last]) != 0) {
                     for (s32 i = 0; i < 6; i++) {
                         selection->active[i] = 0;
                     }

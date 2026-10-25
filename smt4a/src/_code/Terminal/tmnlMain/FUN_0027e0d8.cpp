@@ -213,7 +213,7 @@ extern unsigned int gameDataGetPlayerName(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002bf4f4. */
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: naviMainSetFlagsAndActivate. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -665,7 +665,7 @@ LAB_0027edcc:
         msgWindowReset();
       }
       else {
-        temp_v7 = FUN_002c7c54();
+        temp_v7 = useCounterGetCurrentValue();
         if (temp_v7 != 0x69) {
           puVar8 = puVar3;
           FUN_0026edbc(puVar3,temp_v7);

@@ -38,7 +38,8 @@ extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 /* Supplied declaration required: ownerGetFloatValue. */
 /* Supplied declaration required: cameraExportParameters. */
-extern int modelHasLoadedAttachment(void);
+struct ModelBoneAttachmentRoot;
+extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdEnvResetModelBank. */
@@ -89,7 +90,7 @@ unsigned int FUN_002caea0(void)
     break;
   case 1:
     piVar4 = (int *)(temp_v0 + 0x558);
-    if ((*(int *)(temp_v0 + 0x558) == 0) || (temp_v1 = modelHasLoadedAttachment(), temp_v1 != 0)) {
+    if ((*(int *)(temp_v0 + 0x558) == 0) || (temp_v1 = modelHasLoadedAttachment((const ModelBoneAttachmentRoot *)*(int *)(temp_v0 + 0x558)), temp_v1 != 0)) {
       temp_v1 = *(int *)(temp_v0 + 0x558);
       *(unsigned int *)(temp_v0 + 0x574) = 1;
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {

@@ -195,10 +195,10 @@ code_r0x0019a5a0:
   DAT_0062d204 = puVar6;
   DAT_0062d208 = in_lr;
   do {
-    FUN_002f5970(&DAT_0062d280);
-    if (DAT_0058936c == 0) {
-      puVar4 = &DAT_0058936c;
-      FUN_0019a300(&DAT_0058936c,"err:f");
+    FUN_002f5970(&g_moduleStateCriticalSection);
+    if (g_moduleInitialState == 0) {
+      puVar4 = &g_moduleInitialState;
+      FUN_0019a300(&g_moduleInitialState,"err:f");
       if (-1 < (int)puVar4) {
         puVar4 = (unsigned int *)0x0;
       }
@@ -209,12 +209,12 @@ code_r0x0019a5a0:
     if (-1 < (int)puVar4) {
       FUN_001ab838(&DAT_0062d20c,0xffff8001);
       FUN_001af4a4(&uStack_20,&DAT_0062d200);
-      if (DAT_0058936c != 0) {
+      if (g_moduleInitialState != 0) {
         software_interrupt(0x23);
-        DAT_0058936c = 0;
+        g_moduleInitialState = 0;
       }
 LAB_00189b20:
-      FUN_002f59d8(&DAT_0062d280);
+      FUN_002f59d8(&g_moduleStateCriticalSection);
       puVar6 = (unsigned char *)(unsigned int)DAT_0062d200;
       if (puVar6 != (unsigned char *)0x2 && puVar6 != (unsigned char *)0x5) {
         FUN_001a089c(&uStack_20,1);
@@ -229,7 +229,7 @@ LAB_00189b20:
     }
     if (!bVar19 || puVar4 != (unsigned int *)0x2) goto LAB_00189b20;
     FUN_001bcd48(&LAB_004c4b40,0);
-    FUN_002f59d8(&DAT_0062d280);
+    FUN_002f59d8(&g_moduleStateCriticalSection);
   } while( 1 );
 }
 */

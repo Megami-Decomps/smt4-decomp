@@ -5,7 +5,7 @@
 extern "C" {
 
 extern s32 libc_strncmp(const char *a, const char *b, u32 len);
-extern u32 wstrlen(const char *s);
+extern u32 libc_strlen(const char *s);
 
 struct NameEntry {
     /* 0x00 */ u32 unk00;
@@ -36,7 +36,7 @@ static __inline NameEntry *nameTableGet(NameTable *table, u32 index)
 
 s32 nameTableFindValue(NameTable *table, const char *name, u32 *outValue)
 {
-    u32 len = wstrlen(name);
+    u32 len = libc_strlen(name);
     s32 i;
 
     for (i = 0; i < table->count; i++) {

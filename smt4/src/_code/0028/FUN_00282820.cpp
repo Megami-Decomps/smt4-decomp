@@ -5,7 +5,6 @@
 extern "C" {
 extern void *DAT_00435d18;
 u32 FUN_003d98a0(void *table, const char *name);
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
 s32 libc_strcmp(const char *first, const char *second);
 
 __softfp ReflectAction *FUN_00282820(s32 actor, u32 options, u16 first, s32 target,

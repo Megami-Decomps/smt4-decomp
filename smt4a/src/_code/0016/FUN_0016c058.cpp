@@ -77,7 +77,7 @@ extern "C" {
 
 extern const char DAT_00526038[];    /* "$shadowmap" */
 
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 u16 FUN_001a7a20(u8 *names, const char *text, u32 length);
 void FUN_001a063c(CommandHolder *commands, const u32 *data, u32 size);
 void FUN_0019a270(u32 *destination, const void *matrix, u32 header);
@@ -138,7 +138,7 @@ void FUN_0016c058(ShadowRenderer *renderer, ShadowDraw *draw)
     if (shadows == NULL) {
         return;
     }
-    u16 slot = FUN_001a7a20(shadows->names, DAT_00526038, wstrlen(DAT_00526038));
+    u16 slot = FUN_001a7a20(shadows->names, DAT_00526038, libc_strlen(DAT_00526038));
 
     if (slot == 0xFFFF) {
         return;

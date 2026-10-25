@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH6_CECMESSAGEBOX_H
 
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include <stddef.h>
 
 struct CecCalendarDate {
     u32 words[3];
@@ -21,10 +22,20 @@ struct CecMessageIndexHeader {
     u16 signature; // 0x00 (0x6262 when valid)
     u8 unk02[2];
     u32 size; // 0x04: bytes of the index data
-    u8 unk08[0xc];
+    union {
+        u8 unk08[0xc];
+        struct {
+            u32 unk08Value;
+            /* 0x0c */ u32 totalBytes;
+            u32 unk10Value;
+        } storage;
+    };
     u32 count; // 0x14
     u8 unk18[8];
 };
+typedef char CecMessageIndexHeaderLayout[
+    sizeof(CecMessageIndexHeader) == 0x20 &&
+    offsetof(CecMessageIndexHeader, storage.totalBytes) == 0xc ? 1 : -1];
 
 struct CecMessageIndex {
     CecMessageIndexHeader header;

@@ -25,13 +25,22 @@ static inline const QuestPageMetadata *questPageMetadata(s32 id)
 extern "C" void uiQuestRefreshDetailPages(s32 id)
 {
     UiQuestApoc *quest = g_uiQuest;
+    struct DetailPageFlagsView {
+        u8 prefix[0x90c];
+        s8 fixedPages;
+        u8 unk90d[0x37];
+        s8 hasSpecialPage;
+    };
+    typedef char DetailPageFlagsOffsets[
+        offsetof(DetailPageFlagsView, fixedPages) == 0x90c &&
+        offsetof(DetailPageFlagsView, hasSpecialPage) == 0x944 ? 1 : -1];
+    DetailPageFlagsView *flags = reinterpret_cast<DetailPageFlagsView *>(quest);
     if (id == 0) {
         return;
     }
-    u8 &hasSpecialPage = quest->unk942[2];
-    hasSpecialPage = 0;
+    flags->hasSpecialPage = 0;
     quest->listState.count = 1;
-    if (quest->unk90c != 0) {
+    if (flags->fixedPages != 0) {
         if ((questPageMetadata(id)->flags & 0x20) != 0) {
             ++quest->listState.count;
         }
@@ -39,7 +48,7 @@ extern "C" void uiQuestRefreshDetailPages(s32 id)
             ++quest->listState.count;
         }
     }
-    if (quest->unk90c == 0) {
+    if (flags->fixedPages == 0) {
         u32 unrestrictedDlc = 0;
         if (idIsAtLeast350(id) != 0 && questPageMetadata(id)->kind == 0) {
             unrestrictedDlc = 1;
@@ -54,13 +63,13 @@ extern "C" void uiQuestRefreshDetailPages(s32 id)
         }
         if (questHasSpecialDetailPage(id) != 0) {
             ++quest->listState.count;
-            hasSpecialPage = 1;
+            flags->hasSpecialPage = 1;
             if (quest->detailMode > 2) {
                 questMarkSelectedSpecialDetail();
             }
         }
     }
-    if (hasSpecialPage == 0) {
+    if (flags->hasSpecialPage == 0) {
         quest->listState.selection = 0;
     } else {
         for (s32 page = 0; page < quest->listState.count; ++page) {

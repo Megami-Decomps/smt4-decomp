@@ -24,7 +24,7 @@ typedef struct Owner {
     /* 0x20C */ Link *link;     /* when non-NULL, the link record starts at +0xC of it */
 } Owner;
 
-extern u32 wstrlen(u32 text);
+extern u32 libc_strlen(u32 text);
 extern void FUN_001a7a20(void *buffer, u32 text, u32 length);
 
 void FUN_004ffab8(Owner *owner, u32 text)
@@ -36,7 +36,7 @@ void FUN_004ffab8(Owner *owner, u32 text)
         link += 0xC;
     }
     sub = &((Link *)link)->manager->sub;
-    FUN_001a7a20(sub->buffer, text, wstrlen(text));
+    FUN_001a7a20(sub->buffer, text, libc_strlen(text));
 }
 
 }

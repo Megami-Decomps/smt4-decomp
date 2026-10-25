@@ -80,9 +80,7 @@ void FUN_001f50ac(void *pool);
 void uiInitializeFourTimerSet(void *timers);
 void FUN_00199b9c(void *detail, BtlSetupSource *source);
 void drawParameterBlockClear(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
-                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
-                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+
 void FUN_002bd954(BtlUiSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flags, f32 speed);
 void spriteStartAnimationByIndex(BtlUiSprite *sprite, s32 animation);
 void uiSpriteSetImageKeyframe(BtlUiSprite *sprite, s32 keyframe, s32 flag);

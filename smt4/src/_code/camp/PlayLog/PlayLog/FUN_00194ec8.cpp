@@ -1,4 +1,5 @@
 /* NON_MATCHING: one instruction - the out-of-range record NULL is `movcs r6, r9` (shared zero register) in retail, `movcs r6, #0` here */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -17,7 +18,7 @@ typedef struct PlayLogRecord {
 
 /* Local view of the play log work (0x488 bytes). */
 typedef struct PlayLogScreen {
-    /* 0x000 */ u8 unk000[0x20];
+    /* 0x000 */ UiResourceParameters parameters;
     /* 0x020 */ PlayLogSprite sprites[5];
     /* 0x2DC */ u8 list[0x68];
     /* 0x344 */ s32 state;
@@ -35,7 +36,6 @@ extern void asdTMTexTableLoadSprites(s32 table);
 extern void asdTMTexTableLoadEntryAsync(s32 table, s32 index);
 extern void fileSlotLoad(s32 id);
 extern void drawParameterBlockClear(void *params);
-extern void paramsInit(void *params, const u8 *first, u32 firstBytes, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h);
 extern void FUN_002bd954(PlayLogSprite *sprite, s32 group, s32 id, void *owner, s32 flags, f32 scale);
 extern void timerStart(PlayLogSprite *sprite, s32 animation, s32 flags);
 extern u32 dataTableGet(u32 group, u32 index);
@@ -80,7 +80,7 @@ void FUN_00194ec8(void)
     asdTMTexTableLoadEntryAsync(0x30, 0);
     fileSlotLoad(0x37);
     drawParameterBlockClear(log);
-    paramsInit(log, DAT_00402d04, 0x18, 0, 0, 0, 0, 0, 0, 0, 0);
+    paramsInit(&log->parameters, DAT_00402d04, 0x18, 0, 0, 0, 0, 0, 0, 0, 0);
     for (i = 0; i < 5; i++) {
         FUN_002bd954(&log->sprites[i], 0x30, 0, log, 1, 1.0f);
         timerStart(&log->sprites[i], 0, 0);

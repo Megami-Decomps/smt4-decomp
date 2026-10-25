@@ -1,11 +1,11 @@
 #include "common.h"
 
-extern "C" s32 wstrlen(const char *text);
+extern "C" s32 libc_strlen(const char *text);
 
 // A device prefix ends with a colon within the first eight path characters.
 extern "C" u32 asdLoadFileHasDevice(const char *path)
 {
-    s32 length = wstrlen(path);
+    s32 length = libc_strlen(path);
     if (length > 8)
         length = 8;
     for (s32 index = 0; index < length; ++index) {

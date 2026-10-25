@@ -18,7 +18,7 @@ static inline s64 multiplyHighSigned(s64 first, s64 second)
 extern "C" {
 s32 libc_strncmp(const char *first, const char *second, u32 length);
 s64 libc_strtoll(const char *text, char **end, s32 base);
-DateTimeValue *nn_fnd_DateTime_DateTime_sub_object(DateTimeValue *value,
+DateTimeValue *_ZN2nn3fnd8DateTimeC1Eiiiiiii(DateTimeValue *value,
     s32 year, s32 month, s32 day, s32 hour, s32 minute, s32 second, s32 millisecond);
 
 // Interpret NewSince relative to the Unix epoch, preserving the SDK's nanosecond-timespan conversion.
@@ -35,7 +35,7 @@ void FUN_003def38(DateTimeValue *output, const Archive *source)
     }
     s64 milliseconds = libc_strtoll(text, 0, 10);
     DateTimeValue epoch;
-    DateTimeValue *base = nn_fnd_DateTime_DateTime_sub_object(&epoch, 1970, 1, 1, 0, 0, 0, 0);
+    DateTimeValue *base = _ZN2nn3fnd8DateTimeC1Eiiiiiii(&epoch, 1970, 1, 1, 0, 0, 0, 0);
     s64 nanoseconds = (s64)((u64)milliseconds * 1000000ULL);
     // Reciprocal multiplication implements the SDK's truncating division by 1,000,000.
     s64 span = (multiplyHighSigned(nanoseconds, 0x431bde82d7b634dbLL) >> 18) +

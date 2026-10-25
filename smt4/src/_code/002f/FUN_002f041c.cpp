@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail addresses the HP pair from entry+0xCC (a sub-record holding id, value and maxHp), so the add/multiply schedule differs. */
-#include "shard/W4_Match6_BtlEntry.h"
+/* NON_MATCHING: grouped stats offsets match; percentage base, numerator and constant registers differ. */
+#include "battle/EntryStats.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -13,12 +13,17 @@ u32 FUN_002f041c(void)
     s32 percent = scrGetArg(1);
 
     for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
-        BtlEntry *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
-            !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) && entry->id == id &&
-            entry->value * 100 / entry->maxHp <= percent) {
-            scrSetResult(1);
-            return 1;
+        BtlEntryStatsView *entry = &reinterpret_cast<BtlEntryStatsView *>(btlGetMainState()->entries)[i];
+        u32 flags = entry->flags;
+        if ((flags & BTL_ENTRY_FLAG_PRESENT) && (flags & BTL_ENTRY_FLAG_ACTIVE) &&
+            !(flags & BTL_ENTRY_FLAG_BLOCKED) && entry->stats.id == id) {
+            BtlEntryStats *stats = &entry->stats;
+            s32 hp = stats->hp;
+            s32 maxHp = stats->maxHp;
+            if (hp * 100 / maxHp <= percent) {
+                scrSetResult(1);
+                return 1;
+            }
         }
     }
     scrSetResult(0);

@@ -1,7 +1,7 @@
 /* NON_MATCHING: the hoisted zero and one constants use exchanged callee-saved registers. */
 #include "battle/btlMain.h"
 #include "battle/btlTargetSelect.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -19,7 +19,7 @@ struct TargetSelectWork {
     /* 0x00 */ BtlTargetSelect base;
     /* 0x08 */ u8 mode;
     /* 0x09 */ u8 unk09[3];
-    /* 0x0C */ Params002c312c parameters;
+    /* 0x0C */ UiResourceParameters parameters;
     /* 0x2C */ TargetSelectDrawState draw;
 };
 
@@ -34,10 +34,10 @@ s32 FUN_002f4aec(u32 job);
 void btlTargetSelectDestroy(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
-void drawParameterBlockClear(Params002c312c *);
-void paramsInit(Params002c312c *, u32, u16, u32, u16, u32, u16, u32, u16, u32, u16);
+void drawParameterBlockClear(UiResourceParameters *);
+
 void FUN_002bd954(TargetSelectDrawState *, u32 first, u32 second,
-                   Params002c312c *, s32 flag, f32 scalar);
+                   UiResourceParameters *, s32 flag, f32 scalar);
 void FUN_002eb76c(TargetSelectDrawState *, u32 mode);
 }
 
@@ -65,8 +65,7 @@ extern "C" void btlTargetSelectCreate(BtlMainState *owner)
                    reinterpret_cast<void *>(owner->targetSelect.job));
 
     drawParameterBlockClear(&work->parameters);
-    paramsInit(&work->parameters, 0, 0, 0, 0, 0, 0,
-               reinterpret_cast<u32>(&DAT_004017f4), 0x10, 0, 0);
+    paramsInit(&work->parameters, 0, 0, 0, 0, 0, 0, &DAT_004017f4, 0x10, 0, 0);
     FUN_002bd954(&work->draw, 0x14, 0x71, &work->parameters, 1, 1.0f);
     FUN_002eb76c(&work->draw, 0);
 }

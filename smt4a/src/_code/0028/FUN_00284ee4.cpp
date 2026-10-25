@@ -1,4 +1,4 @@
-/* NON_MATCHING: the bool argument for FUN_00230ac0 is converted with cmp/movne/moveq; retail copies the flag byte with `adds r3, r0, #0` and sets 1 with movne */
+/* NON_MATCHING: integer flag normalization uses cmp/movne/moveq; retail copies the zero byte with adds and conditionally sets one. */
 #include "common.h"
 
 extern "C" {
@@ -16,7 +16,7 @@ typedef struct PartyPanel {
 extern PartyPanel *g_partyPanel;
 
 void FUN_0020b718(s32 a, s32 b);
-void FUN_00230ac0(s32 a, s32 b, s32 c, bool d);
+void FUN_00230ac0(s32 mode, s16 imageFrame, u32 flags, s32 resetAuxiliary);
 void FUN_0023fc38(void);
 
 /* Clears the party panel's two flags, optionally starts FUN_00230ac0, and runs FUN_0023fc38 unless the panel is in state 0 or 1. */

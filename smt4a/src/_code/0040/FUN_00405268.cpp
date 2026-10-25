@@ -45,7 +45,7 @@ void uiSpriteSetImageKeyframe(UiSpriteState* sprite, s16 frame, u32 flags);
 void FUN_00402f58(ContentListState* list);
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
-s32 FUN_002c7c54(void);
+s32 useCounterGetCurrentValue(void);
 void sortOwnerRun(ContentListState* list);
 ContentTextureDescriptor* FUN_0039b984(u32 id);
 }
@@ -124,7 +124,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         if (useCounterIsFinished()) {
             useCounterRelease();
             FUN_004029f4(list, 3, 0);
-        } else if (FUN_002c7c54() != 0x69) {
+        } else if (useCounterGetCurrentValue() != 0x69) {
             sortOwnerRun(list);
             list->texture = FUN_0039b984(list->itemIds[list->selection + list->scroll]);
         }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: Floating range guards use different condition codes and schedule the IEEE bit transfers before the comparisons. */
 #include "common.h"
 
 struct SoundStereoMix {
@@ -13,10 +12,11 @@ struct SoundVoiceMixWork {
     /* 0xD0 */ u8 unkD0[0x1C];
     /* 0xEC */ u32 mixMode;
 };
-union SoundMixFloatWord {
-    f32 value;
-    s32 bits;
-};
+
+static inline bool soundMixIsNormalized(f32 value)
+{
+    return 0.0f <= value && value <= 1.0f;
+}
 extern "C" {
 void nn_snd_CTR_Voice_SetMixParam(void *voice, const SoundStereoMix *parameters);
 
@@ -26,14 +26,10 @@ void FUN_0014375c(SoundVoiceMixWork *work, f32 left, f32 right)
     if (work == NULL) {
         return;
     }
-    SoundMixFloatWord rightWord;
-    rightWord.value = right;
-    if (!(0.0f <= right) || rightWord.bits > 0x3F800000) {
+    if (!soundMixIsNormalized(right)) {
         return;
     }
-    SoundMixFloatWord leftWord;
-    leftWord.value = left;
-    if (!(0.0f <= left) || leftWord.bits > 0x3F800000) {
+    if (!soundMixIsNormalized(left)) {
         return;
     }
     work->mix[0].left = left;

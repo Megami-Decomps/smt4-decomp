@@ -5,7 +5,7 @@ extern "C" void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 fra
 extern "C" void FUN_0048a378(SelectionNotificationState *work);
 extern "C" s32 buttonHelpIsNotActive(void);
 struct ObjectFlagState;
-extern "C" s32 objectGetSignedFlag(const ObjectFlagState *state);
+extern "C" s32 uiSpriteGetCompletionState(const ObjectFlagState *state);
 
 extern "C" void selectionNotificationAdvanceEntryAnimations(SelectionNotificationState *work)
 {
@@ -22,7 +22,7 @@ extern "C" void selectionNotificationAdvanceEntryAnimations(SelectionNotificatio
         }
         FUN_00163aa4(&work->auxiliary[1], 1.0f);
         FUN_00163aa4(&work->auxiliary[0], 1.0f);
-        if (objectGetSignedFlag(reinterpret_cast<const ObjectFlagState *>(&work->entries[5])) && buttonHelpIsNotActive()) {
+        if (uiSpriteGetCompletionState(reinterpret_cast<const ObjectFlagState *>(&work->entries[5])) && buttonHelpIsNotActive()) {
             work->state = 2;
             work->phase = 0;
         }

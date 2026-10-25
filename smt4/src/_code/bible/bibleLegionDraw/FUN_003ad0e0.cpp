@@ -42,8 +42,7 @@ void memClear(void *memory, u32 size);
 u32 FUN_003ac480();
 u32 asdProcessCreateSimple(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *);
 void drawParameterBlockClear(UiResourceParameters *parameters);
-void paramsInit(UiResourceParameters *, const void *, u32, const void *, u32,
-    const void *, u32, const void *, u32, const void *, u32);
+
 void FUN_002bd954(UiSpriteState *, u32, u32, UiSpriteSource *, u16, f32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32 image, s32 frame);
 

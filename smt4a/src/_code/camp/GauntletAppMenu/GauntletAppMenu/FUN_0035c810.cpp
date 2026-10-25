@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail anchors the three adjacent parameter tables on DAT_0052cb88 with chained subtractions (sub r3,r1,#96; sub r1,r3,#60) and keeps the sprite[3] pointer in r0 until after the call; armcc folds the offsets here */
 /* Creates the Gauntlet app menu: work area, process and draw task, unlock flags, sprites and script data. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
@@ -27,8 +28,7 @@ void *dataTableGet(u32 table, u32 index);
 const void *dataTableGetEntries(void *section);
 u32 dataTableGetCount(void *section);
 void paramsClearPacket(void *params);
-void paramsInit(void *params, u32 a, u16 aBytes, u32 b, u16 bBytes, u32 c, u16 cBytes, u32 d, u16 dBytes, u32 e,
-                u16 eBytes);
+
 void FUN_0014e188(GauntletSprite *sprite, s32 group, s32 image, void *params, s32 flags, f32 scale);
 void recordSetSecondaryValue(GauntletSprite *sprite, u16 value);
 void uiSpriteSetKeyframe(GauntletSprite *sprite, s32 keyframe, s32 flags);
@@ -73,7 +73,7 @@ u32 FUN_0035c810(void)
         menu->list.tableCount = dataTableGetCount(section);
     }
     paramsClearPacket(menu->list.params);
-    paramsInit(menu->list.params, (u32)DAT_0052cb88 - 0x60 - 0x3c, 0x3c, (u32)DAT_0052cb88 - 0x60, 0x60, 0, 0, 0, 0, (u32)DAT_0052cb88, 0x134);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), DAT_0052cb88 - 0x60 - 0x3c, 0x3c, DAT_0052cb88 - 0x60, 0x60, 0, 0, 0, 0, DAT_0052cb88, 0x134);
     FUN_0014e188(&menu->list.sprites[0], 20, 0, menu->list.params, 201, 1.0f);
     uiSpriteSetKeyframe(&menu->list.sprites[0], 3, 0);
     uiSpriteSetImageKeyframe(&menu->list.sprites[0], 6, 0);

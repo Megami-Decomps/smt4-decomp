@@ -31,8 +31,7 @@ void FUN_002b3178(RadialGradientWork *work)
     u32 rimColor = color & ~0xFF;
     FUN_0016c4b8(g_renderCtx, 0);
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     f32 width = work->lastX - work->firstX;
     f32 height = work->lastY - work->firstY;
     f32 centerX = work->firstX + width * 0.5f;

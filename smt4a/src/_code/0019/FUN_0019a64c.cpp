@@ -50,9 +50,12 @@ void FUN_0019a64c(TrackedAllocationHeader *allocation)
     state->bytes += allocation->bytes;
     if ((state->group & 0xff) < 8) {
         u32 category = FUN_0019c40c(allocation);
-        g_allocationAddressRanges.state->categoryBytes[category] += allocation->bytes;
+        state = g_allocationAddressRanges.state;
+        state->categoryBytes[category] = allocation->bytes + state->categoryBytes[category];
         category = FUN_0019c40c(allocation);
-        g_allocationAddressRanges.state->categoryPayloadBytes[category] += allocation->bytes - allocation->padding - sizeof(TrackedAllocationHeader);
+        state = g_allocationAddressRanges.state;
+        u32 payloadBytes = allocation->bytes - allocation->padding - sizeof(TrackedAllocationHeader);
+        state->categoryPayloadBytes[category] = payloadBytes + state->categoryPayloadBytes[category];
     }
     state = g_allocationAddressRanges.state;
     TrackedAllocationLink *link = &allocation->link;

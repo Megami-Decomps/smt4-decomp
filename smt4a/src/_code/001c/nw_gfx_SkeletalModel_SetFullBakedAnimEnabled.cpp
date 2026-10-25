@@ -15,7 +15,7 @@ struct fn_001c3f98_arg0 {
 };
 
 typedef int romwright_code(...);
-extern unsigned int wstrlen(int);
+extern unsigned int libc_strlen(int);
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
 
@@ -80,7 +80,7 @@ void nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(fn_001c3f98_arg0 *param_1,int 
         iStack_28 = (int)piVar1 + temp_v1;
       }
       if (!(iStack_28 == 0 || temp_v4 == 0)) {
-        temp_v0 = wstrlen(temp_v4);
+        temp_v0 = libc_strlen(temp_v4);
         temp_v1 = nw_ut_ResDicPatricia_Get(&iStack_28,temp_v4,temp_v0);
         if (temp_v1 != 0) {
           temp_v2 = *(int *)(temp_v1 + 0xc);

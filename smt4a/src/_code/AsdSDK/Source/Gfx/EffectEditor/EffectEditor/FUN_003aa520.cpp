@@ -1,8 +1,6 @@
-/* NON_MATCHING: retail keeps the label-text address in a saved register across menu-node creation. */
-#include "shard/W6_W6Match2_EffectEditor.h"
-
+/* NON_MATCHING: tail-call argument setup moves the resource-name pointer before reloading the label. */
+#include "gfx/EffectEditorStorage.h"
 extern "C" {
-extern const char g_effectEditorResourceName[];
 void engineFreeCallback(void* memory);
 void effEditorSetTextValue(EffMenuNode* node, const char* text);
 
@@ -13,10 +11,12 @@ void FUN_003aa520()
         engineFreeCallback(g_effectEditor.label);
         g_effectEditor.label = NULL;
     }
+    const char *name = g_effectEditorResourceName;
     EffMenuNode* label = effMenuNodeCreate(".EPL");
     g_effectEditor.label = label;
-    label->initialKind = 0xb6;
     label->unk04 = 100;
-    effEditorSetTextValue(g_effectEditor.label, g_effectEditorResourceName);
+    label->initialKind = 0xb6;
+    label = g_effectEditor.label;
+    effEditorSetTextValue(label, name);
 }
 }

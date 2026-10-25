@@ -30,7 +30,7 @@ struct BtlEffectView {
 extern "C" {
 BtlMainStateView *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(BtlMainStateView *state);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *left, const char *right, u32 length);
 extern BtlEffectView g_btlEffect;
 
@@ -42,7 +42,7 @@ s32 btlFindEffectValueByNamePrefix(EffectOwnerView *owner)
             for (s32 index = 0; index < 4; ++index) {
                 EffectEntryView *entry = &owner->unk1F54->entries[index];
                 if (entry != 0) {
-                    u32 length = wstrlen(g_btlEffect.unk0C);
+                    u32 length = libc_strlen(g_btlEffect.unk0C);
                     if (libc_strncmp(entry->name, g_btlEffect.unk0C, length) == 0) {
                         return entry->unk10;
                     }

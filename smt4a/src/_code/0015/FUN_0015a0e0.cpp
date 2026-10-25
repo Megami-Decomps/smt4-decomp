@@ -33,21 +33,21 @@ extern "C" void FUN_0015a0e0(AsdCameraStereo *stereo)
         FUN_001a0eb0();
         DAT_00589504 = 1;
     }
-    stereo->initial.calibration = DAT_0062d6d8.separation;
-    stereo->initial.offsets[0] = 0.0f;
-    stereo->initial.offsets[1] = 0.0f;
-    stereo->initial.offsets[2] = 0.0f;
-    stereo->initial.offsets[3] = 0.0f;
-    stereo->initial.offsets[4] = 0.0f;
-    stereo->initial.offsets[5] = 0.0f;
-    stereo->initial.parameters[0] = 0.0f;
-    stereo->initial.parameters[1] = 0.0f;
-    stereo->initial.parameters[2] = 0.0f;
-    stereo->initial.parameters[3] = 0.0f;
-    stereo->initial.parameters[4] = 0.0f;
-    stereo->initial.parameters[5] = 0.0f;
-    stereo->initial.vectors[0] = cameraFilledVector(0.0f);
-    stereo->initial.vectors[1] = cameraFilledVector(0.0f);
-    stereo->initial.vectors[2] = cameraFilledVector(0.0f);
-    stereo->initial.vectors[3] = cameraFilledVector(0.0f);
+    stereo->state.stereo.calibration = DAT_0062d6d8.separation;
+    stereo->state.stereo.offset = 0.0f;
+    stereo->state.first = 0.0f;
+    stereo->state.middleOffsets[0] = 0.0f;
+    stereo->state.middleOffsets[1] = 0.0f;
+    stereo->state.second = 0.0f;
+    stereo->offset5 = 0.0f;
+    stereo->state.stereo.parameters[0] = 0.0f;
+    stereo->state.stereo.parameters[1] = 0.0f;
+    stereo->state.stereo.parameters[2] = 0.0f;
+    stereo->state.stereo.parameters[3] = 0.0f;
+    stereo->state.stereo.parameters[4] = 0.0f;
+    stereo->state.stereo.parameters[5] = 0.0f;
+    stereo->state.stereo.vectors[0] = cameraFilledVector(0.0f);
+    stereo->state.stereo.vectors[1] = cameraFilledVector(0.0f);
+    stereo->state.stereo.vectors[2] = cameraFilledVector(0.0f);
+    stereo->state.stereo.vectors[3] = cameraFilledVector(0.0f);
 }

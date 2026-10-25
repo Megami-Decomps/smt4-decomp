@@ -1,6 +1,5 @@
 /* NON_MATCHING: instruction-identical; retail's literal pool holds two extra unreferenced words (0x634bc0) before the g_effectEditorSettings word that all three uses load. */
-#include "common.h"
-
+#include "gfx/EffectEditorStorage.h"
 extern "C" {
 
 typedef struct Owner {
@@ -15,11 +14,11 @@ typedef struct Child {
     /* 0x0C */ s32 offset;
 } Child;
 
-extern u8 g_effectEditorSettings[0x90];
+
 
 void *linkedFindItemByIndex(u32 table, s32 index);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-u32 FUN_003c0780(u8 *record, s32 arg);
+u32 FUN_003c0780(EffectEditorSnapshot *record, s32 arg);
 
 /* Runs FUN_003c0780 on a scratch copy of the table record for (owner, child) and writes the record back;
  * returns its result with bit 23 set when bit 0 is. */
@@ -29,9 +28,9 @@ u32 FUN_003cd1d0(Owner *owner, Child *child)
     void *record = linkedFindItemByIndex(owner->table, child->offset + base);
     u32 result;
 
-    __aeabi_memcpy4(g_effectEditorSettings, record, 0x90);
-    result = FUN_003c0780(g_effectEditorSettings, 1);
-    __aeabi_memcpy4(record, g_effectEditorSettings, 0x90);
+    __aeabi_memcpy4(&g_effectEditorSettings, record, 0x90);
+    result = FUN_003c0780(&g_effectEditorSettings.snapshot, 1);
+    __aeabi_memcpy4(record, &g_effectEditorSettings, 0x90);
     if (result & 1) {
         result |= 0x800000;
     }

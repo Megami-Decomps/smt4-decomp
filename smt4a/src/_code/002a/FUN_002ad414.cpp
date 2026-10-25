@@ -29,7 +29,7 @@ extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int wstrlen(char *);
+extern unsigned int libc_strlen(char *);
 extern int playerPackedEntryLow10(void);
 extern int playerPackedEntryHigh(unsigned char);
 /* Supplied declaration required: randomGetLowerTenBits. */
@@ -302,7 +302,7 @@ LAB_002ad990:
   if ((temp_v5 == 0 && temp_v7 == 0) && temp_v6 == 0) {
     libc_strcat(param_4,&LAB_002ada1c);
   }
-  temp_v4 = wstrlen(param_4);
+  temp_v4 = libc_strlen(param_4);
   if (temp_v4 >= 0x66) {
     param_4[0x66] = '\0';
     param_4[0x67] = '\0';

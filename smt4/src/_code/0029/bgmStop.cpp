@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail tests fadeFrames separately after the any-id and the matching-id checks;
- * armcc here folds the id test into one conditional compare */
 #include "common.h"
 
 #define BGM_SLOT_COUNT 2
@@ -54,13 +52,20 @@ void bgmStop(s32 id, u32 fadeFrames, s32 force)
         u32 flags = slot->flags;
 
         if ((flags & BGM_SLOT_PLAYING) != 0 && (flags & BGM_SLOT_SWITCHING) == 0) {
-            if (id != -1 && slot->id != id) {
-                continue;
-            }
-            if (fadeFrames != 0) {
-                slot->fadeFrames = fadeFrames;
-                slot->flags = flags | BGM_SLOT_FADING_OUT;
-                continue;
+            if (id != -1) {
+                if (slot->id != id)
+                    continue;
+                if (fadeFrames != 0) {
+                    slot->fadeFrames = fadeFrames;
+                    slot->flags = flags | BGM_SLOT_FADING_OUT;
+                    continue;
+                }
+            } else {
+                if (fadeFrames != 0) {
+                    slot->fadeFrames = fadeFrames;
+                    slot->flags = flags | BGM_SLOT_FADING_OUT;
+                    continue;
+                }
             }
         } else if (!force) {
             continue;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: value store at0x28 is scheduled after the kind/pair stores instead of before them; all other instructions match. */
 #include "battle/btlReflect.h"
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 mode, u32 flags);
+
 
 // Configure action22's value and pair, setting its option flag when first is nonzero.
 u32 btlReflectSetValuePair(s32 actor, u32 flags, u32 value, s32 first, u32 second)

@@ -38,9 +38,7 @@ s32 gameFlagIsSet(s32 flag);
 void FUN_00203b40(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_002a4964(ChoiceMenuWork *work, s32 selected);
 void paramsClearPacket(UiResourceParameters *resources);
-void paramsInit(UiResourceParameters *resources, const void *chunk0, u16 count0,
-                const void *chunk1, u16 count1, const void *chunk2, u16 count2,
-                const void *chunk3, u16 count3, const void *chunk4, u16 count4);
+
 void FUN_0014e188(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flag);
 void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe);
 void uiSpriteSetImageKeyframe(MenuSprite *sprite, s32 keyframe);

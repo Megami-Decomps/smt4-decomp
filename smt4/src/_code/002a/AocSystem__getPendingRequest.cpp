@@ -24,14 +24,14 @@ typedef struct Request {
     /* 0x331 */ NameBuffer name;
 } Request;
 
-extern Node *FUN_002a1130(u32 arg, s32 index);
+extern Node *_ZN21WindowOperationResultC1Eh(u32 arg, s32 index);
 extern s32 FUN_002c3dfc(NameBuffer *name);
 extern Pair *_ZN18WindowStatusResultC1Ej(Pair *out, s32 code);
 
 /* Consumes the request's pending name: clears it and, when its lookup code has the high bit set, copies the resulting pair into the node. */
 void _ZN9AocSystem17getPendingRequestEv(u32 arg, Request *request)
 {
-    Node *node = FUN_002a1130(arg, 0);
+    Node *node = _ZN21WindowOperationResultC1Eh(arg, 0);
 
     if (request->pending != 0) {
         s32 code = FUN_002c3dfc(&request->name);

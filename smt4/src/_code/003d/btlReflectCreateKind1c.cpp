@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-extern "C" ReflectAction* btlQueueReflectAction(ReflectContext* context, s32 id, s32 target, u32 flags);
+extern "C" 
 
 // Create a type-0x1c reflected action with a target, value and extra parameter.
 extern "C" void btlReflectCreateKind1c(s32 id, u32 flags, u32 target, u32 parameter, u32 value)

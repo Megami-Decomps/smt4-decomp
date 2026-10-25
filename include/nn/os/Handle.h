@@ -5,8 +5,10 @@
 
 #include "common.h"
 #include "nn/svc.h"
+#include <stddef.h>
 
 struct NnOsHandle {
+    NnOsHandle() : handle(0) {}
     /* 0x00 */ u32 handle;
 
     ~NnOsHandle()
@@ -17,5 +19,8 @@ struct NnOsHandle {
         }
     }
 };
+
+typedef char NnOsHandleLayoutCheck[
+    sizeof(NnOsHandle) == 4 && offsetof(NnOsHandle, handle) == 0 ? 1 : -1];
 
 #endif

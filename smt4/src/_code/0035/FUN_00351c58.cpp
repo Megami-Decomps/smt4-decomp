@@ -5,13 +5,13 @@ extern "C" {
 int FUN_0023a244(void);
 int FUN_00351eb4(void);
 int FUN_0035ae34(void);
-extern s8 DAT_0044e348;
+extern s8 g_archiveModuleState;
 
 void FUN_00351c58(void)
 {
-    if (DAT_0044e348 != 0) {
+    if (g_archiveModuleState != 0) {
         FUN_0035ae34();
-        DAT_0044e348 = 0;
+        g_archiveModuleState = 0;
         FUN_0023a244();
     }
     FUN_00351eb4();

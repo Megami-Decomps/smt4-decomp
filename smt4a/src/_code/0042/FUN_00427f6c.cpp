@@ -2,10 +2,8 @@
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 extern "C" {
-u32 FUN_004283cc(void*);
 u32 FUN_00439664(void*);
 void rt_memcpy(void*, const void*, u32);
-void recordValidatePair(void*, WindowStatusResult);
 
 // Retrieves a status block, copies its public half, and records the translated result.
 WindowStatusResult FUN_00427f6c(void* owner, void* destination)

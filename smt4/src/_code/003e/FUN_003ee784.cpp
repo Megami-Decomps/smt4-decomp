@@ -24,7 +24,7 @@ extern const char DAT_00407e34[];
 extern u32 DAT_0044e368;
 void FUN_00385b60(void* state);
 void entry(void);
-__weak s32 __aeabi_atexit(void* object, void (*destructor)(void*), void* handle);
+s32 __aeabi_atexit(void* object, void (*destructor)(void*), void* handle);
 
 // Initializes the shared state and registers its static destructor.
 void FUN_003ee784(u32 first, u32 second, InitializationArguments* arguments)

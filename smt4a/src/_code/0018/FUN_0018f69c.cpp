@@ -78,7 +78,7 @@ inline void applyTextureSampler(GrTextureUnit *unit, const NamedModelTexture *bo
 }
 
 extern "C" {
-u32 wstrlen(const u16 *text);
+u32 libc_strlen(const u16 *text);
 s32 FUN_001a7a20(void *names, const void *name, u32 length);
 s32 libc_strcmp(const char *first, const char *second);
 void gfxModelRebuildTextureCommands(ModelTextureBindings *model, MaterialTextureCommands *commands,
@@ -97,7 +97,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
         MaterialDefinition *material = static_cast<MaterialDefinition *>(binding->material);
         if (material != NULL) {
             if (material->resource == NULL) {
-                s32 index = FUN_001a7a20(owner->set->materialNames, material->name, wstrlen(material->name));
+                s32 index = FUN_001a7a20(owner->set->materialNames, material->name, libc_strlen(material->name));
                 if (index == NAME_NOT_FOUND)
                     result |= RESULT_MISSING_MATERIAL;
                 else
@@ -107,7 +107,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
                 if (material->entries[slot] == NULL && material->tableNames[slot] != NULL
                     && material->entryNames[slot] != NULL) {
                     s32 tableIndex = FUN_001a7a20(owner->set->entryNames, material->tableNames[slot],
-                                                  wstrlen(material->tableNames[slot]));
+                                                  libc_strlen(material->tableNames[slot]));
                     if (tableIndex == NAME_NOT_FOUND) {
                         result |= RESULT_MISSING_ENTRY_TABLE;
                     } else {
@@ -139,7 +139,7 @@ u32 FUN_0018f69c(ModelTextureBindings *model, ModelBindOwner *owner, u8 *replace
             NamedModelTexture *&bound = *references[slot];
             if (bound == NULL && binding->textureNames[slot] != NULL) {
                 s32 index = FUN_001a7a20(owner->set->textureNames, binding->textureNames[slot],
-                                         wstrlen(reinterpret_cast<const u16 *>(binding->textureNames[slot])));
+                                         libc_strlen(reinterpret_cast<const u16 *>(binding->textureNames[slot])));
                 if (index == NAME_NOT_FOUND) {
                     result |= RESULT_MISSING_TEXTURE;
                 } else {

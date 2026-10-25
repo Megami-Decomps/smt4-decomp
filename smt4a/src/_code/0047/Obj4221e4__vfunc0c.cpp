@@ -24,7 +24,6 @@ struct AocMainView {
 extern "C" {
 extern AocMainView* g_aocMain;
 void FUN_00161a10(void);
-void FUN_004288e0(WindowStatusResult* result, void* context);
 s32 legacyResourceIdRemap(WindowStatusResult* result);
 }
 
@@ -41,7 +40,7 @@ extern "C" void _ZN9Obj4221e47vfunc0cEv(AocStatusView* state)
 
     AocMainView* main = g_aocMain;
     FUN_00161a10();
-    FUN_004288e0(&temporary, &main->unk7C);
+    temporary = FUN_004288e0(&main->unk7C);
     state->result = temporary;
 
     if ((legacyResourceIdRemap(&state->result) & 0x80000000u) == 0) {

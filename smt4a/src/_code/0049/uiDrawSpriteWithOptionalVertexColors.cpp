@@ -2,14 +2,8 @@
 #include "shard/S1ListPanel.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
+#include "gfx/SpriteVertexColors.h"
 
-struct ItemSpriteExtension {
-    s16 width;
-    s16 height;
-    u16 mode;
-    u8 unk06[0xa];
-    QuadVector colors[4];
-};
 
 extern "C" {
 SpriteInfo *FUN_001834a4(u32, s32);

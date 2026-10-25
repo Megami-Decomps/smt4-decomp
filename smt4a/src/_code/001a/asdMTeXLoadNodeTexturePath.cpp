@@ -21,7 +21,7 @@ struct TextureLoadNode {
 extern "C" {
 char *libc_strcpy(char *destination, const char *source);
 char *libc_strcat(char *destination, const char *source);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 void FUN_001b5154();
 u32 FUN_001bcfb4(const char *path, u32 mode, u32 flags, void (*callback)(), TextureLoadNode *node, u32 alignment);
 }
@@ -42,7 +42,7 @@ extern "C" TextureLoadNode *asdMTeXLoadNodeTexturePath(TextureLoadNode *node, u3
         libc_strcat(path, ".cmp");
     else
         libc_strcat(path, ".stex");
-    if (wstrlen(descriptor->name) == 0) {
+    if (libc_strlen(descriptor->name) == 0) {
         node->handle = 0;
         return node;
     }

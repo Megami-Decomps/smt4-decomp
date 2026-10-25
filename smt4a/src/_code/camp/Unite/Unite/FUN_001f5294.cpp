@@ -290,7 +290,7 @@ extern unsigned int computeCountLimit(void);
 extern int widgetSubCallIfVisible(int *);
 /* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: FUN_002c39dc. */
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c8550. */
@@ -1965,7 +1965,7 @@ LAB_001f77ec:
   case 0xc:
     temp_v5 = useCounterIsFinished();
     if (temp_v5 == 0) {
-      temp_v5 = FUN_002c7c54();
+      temp_v5 = useCounterGetCurrentValue();
       if ((temp_v5 != 0x69) && (uniteSortCandidateList(), *(char *)(temp_v4 + 0x38) == '\0')) {
         FUN_00231574();
       }
@@ -2483,7 +2483,7 @@ LAB_001f8d58:
       *(unsigned char *)(piVar3 + 0x125) = 1;
     }
     else {
-      temp_v4 = FUN_002c7c54();
+      temp_v4 = useCounterGetCurrentValue();
       if (temp_v4 != 0x69) {
         fusionSortPairs();
       }

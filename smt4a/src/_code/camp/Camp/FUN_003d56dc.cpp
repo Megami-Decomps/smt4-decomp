@@ -245,7 +245,7 @@ extern int FUN_002c2bd0(void);
 /* Supplied declaration required: widgetSubCallIfVisible. */
 extern int objectApplyIfUnblocked(unsigned int *);
 /* Supplied declaration required: FUN_002c39dc. */
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: FUN_002c8538. */
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: dataTableAndTexRelease. */
@@ -1596,7 +1596,7 @@ LAB_003d6870:
       puVar12[8] = temp_v6;
     }
     else {
-      temp_v4 = FUN_002c7c54();
+      temp_v4 = useCounterGetCurrentValue();
       if (temp_v4 != 0x69) {
         FUN_003d0bc0(temp_v6);
       }

@@ -23,7 +23,7 @@ extern unsigned char LAB_00114dec; /* 0x114dec */
 extern unsigned char LAB_00114dfc; /* 0x114dfc */
 extern unsigned char DAT_00537f3c; /* 0x537f3c */
 
-extern int wstrlen(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: _ZN9Obj55aff4C1EPKt. */
 /* Supplied declaration required: _ZN9Obj55aff4D1Ev. */
 /* Supplied declaration required: FUN_002ea2e8. */
@@ -59,7 +59,7 @@ void FUN_00114d60(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   wideBufferAppend(temp_v0,&DAT_00537f3c);
   _ZN9Obj55aff4C1EPKt(temp_v5,temp_v4);
   FUN_002f6be2(temp_v5,&temp_v2);
-  temp_v1 = wstrlen(temp_v2);
+  temp_v1 = libc_strlen(temp_v2);
   FUN_002fbd0a(param_1,*(unsigned int *)(param_1 + 4),temp_v2,temp_v1 + temp_v2);
   operatorDeleteArrayNullable(temp_v2);
   _ZN9Obj55aff4D1Ev(temp_v5);

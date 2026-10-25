@@ -16,7 +16,7 @@ typedef struct Panel {
     /* 0xFC */ Widget widget;
 } Panel;
 
-extern s8 recordGetSignedFlags(const Widget *widget);
+extern s8 uiSpriteGetCompletionState(const Widget *widget);
 extern int FUN_002b8ee0(Widget *widget, int arg);
 extern int pointConvertToFloat(u8 *cursor, u32 x, u32 y);
 extern int buttonHelpIsNotActive(void);
@@ -36,7 +36,7 @@ void FUN_003ab348(Panel *panel)
     y = vec2GetYInt(widget);
     x = vec2GetXInt(widget);
     pointConvertToFloat(panel->cursor, x, y);
-    if (recordGetSignedFlags(widget) != 0 && buttonHelpIsNotActive() != 0 && FUN_00241a44() != 0 && FUN_0029e0f8() != 0) {
+    if (uiSpriteGetCompletionState(widget) != 0 && buttonHelpIsNotActive() != 0 && FUN_00241a44() != 0 && FUN_0029e0f8() != 0) {
         panel->state = 3;
         panel->stateArg = 0;
         pointConvertToFloat(panel->cursor, 0, 0);

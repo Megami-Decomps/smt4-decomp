@@ -11,7 +11,7 @@ struct ResourceSyncState {
 
 extern "C" {
 extern ResourceSyncState DAT_005b4486;
-extern u32 DAT_006426b4;
+extern u32 g_moduleCriticalSection6;
 s32 FUN_0042fbd4(void);
 u32 resourceDispatch2(u32);
 u32 FUN_004320c4(u32);
@@ -24,27 +24,27 @@ u32 FUN_0042d5b4(s32 dispatch)
     u32 result = 0;
     if (DAT_005b4486.enabled == 0 && FUN_0042fbd4() == 0)
         return 0xc8a10bf0;
-    nn_os_CriticalSection_Enter(&DAT_006426b4);
+    nn_os_CriticalSection_Enter(&g_moduleCriticalSection6);
     if (dispatch != 0) {
         if ((FUN_0042fbd4() | DAT_005b4486.available) == 0) {
-            nn_os_CriticalSection_Leave(&DAT_006426b4);
+            nn_os_CriticalSection_Leave(&g_moduleCriticalSection6);
             return 0xc8810bea;
         }
         result = resourceDispatch2(14);
     }
     if (DAT_005b4486.ready == 0) {
-        nn_os_CriticalSection_Leave(&DAT_006426b4);
+        nn_os_CriticalSection_Leave(&g_moduleCriticalSection6);
         return 0xc8a10bf0;
     }
     if (DAT_005b4486.pending != 0) {
         result = FUN_004320c4(0);
         if (result & 0x80000000) {
-            nn_os_CriticalSection_Leave(&DAT_006426b4);
+            nn_os_CriticalSection_Leave(&g_moduleCriticalSection6);
             return result;
         }
         DAT_005b4486.pending = 0;
     }
-    nn_os_CriticalSection_Leave(&DAT_006426b4);
+    nn_os_CriticalSection_Leave(&g_moduleCriticalSection6);
     return result;
 }
 }

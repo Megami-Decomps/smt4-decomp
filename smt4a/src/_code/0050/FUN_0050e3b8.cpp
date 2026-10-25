@@ -3,7 +3,7 @@
 
 extern "C" {
 
-int emptyStub_002f4370(char **, int, int);
+int __aeabi_atexit(char **, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ extern unsigned char DAT_00558414; /* 0x558414 */
 extern char *DAT_00647580; /* 0x647580 */
 extern unsigned int DAT_00647584; /* 0x647584 */
 
-/* Supplied declaration required: emptyStub_002f4370. */
+/* Supplied declaration required: __aeabi_atexit. */
 
 
 void FUN_0050e3b8(unsigned int *param_1)
@@ -34,7 +34,7 @@ void FUN_0050e3b8(unsigned int *param_1)
   param_1[0x17] = 0;
   DAT_00647580 = "䰬Q䯼QḘC";
   DAT_00647584 = 0;
-  emptyStub_002f4370(&DAT_00647580,0x431e18,0x100000);
+  __aeabi_atexit(&DAT_00647580,0x431e18,0x100000);
   return;
 }
 

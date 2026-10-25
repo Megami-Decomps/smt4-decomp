@@ -8,8 +8,9 @@ extern BtlState *g_btlMainState;
 s32 FUN_00269bf0(BtlUnitLink *record)
 {
     s32 maxHp = record->maxHp;
-    if (g_btlMainState != NULL && g_btlMainState->mode != 0x15) {
-        BtlUnitEntry *units = g_btlMainState->units;
+    BtlState *battle = g_btlMainState;
+    if (battle != NULL && battle->mode != 0x15) {
+        BtlUnitEntry *units = battle->units;
         for (s32 index = 0; index < 0x6d; ++index) {
             BtlUnitEntry *unit = &units[index];
             if ((unit->flags & 1) && !(unit->flags & 0x40) &&

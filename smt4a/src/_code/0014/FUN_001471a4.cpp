@@ -25,7 +25,7 @@ extern unsigned char LAB_00161d64; /* 0x161d64 */
 extern unsigned char LAB_00161d70; /* 0x161d70 */
 extern unsigned int *DAT_00646084; /* 0x646084 */
 extern unsigned char DAT_00646088; /* 0x646088 */
-extern unsigned int DAT_006462a0; /* 0x6462a0 */
+extern unsigned int g_sharedHandleState; /* 0x6462a0 */
 
 extern unsigned int FUN_00159f64(unsigned int **);
 /* Supplied declaration required: FUN_002e3140. */
@@ -57,7 +57,7 @@ unsigned int FUN_001471a4(void)
     puVar2 = &DAT_00646088;
     temp_v4 = 4;
     temp_v5 = &LAB_00161d54;
-    temp_v1 = &DAT_006462a0;
+    temp_v1 = &g_sharedHandleState;
     temp_v3 = &LAB_00159e68;
     temp_v6 = &LAB_00161d70;
     temp_v7 = &LAB_00161d64;

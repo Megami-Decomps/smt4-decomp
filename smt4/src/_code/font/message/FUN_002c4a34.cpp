@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 namespace {
 // The parameter block at 0xa4 lies in padding beginning at the unaligned offset 0x36
@@ -18,7 +18,7 @@ struct MessageInitializationView {
     u8 unk36[0x47];
     u8 unk7D, unk7E;
     u8 unk7F[0x25];
-    Params002c312c parameters;
+    UiResourceParameters parameters;
     u8 unkC4[0x94D];
     u8 displayMode;
     u8 unkA12[0x14];
@@ -48,10 +48,8 @@ u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDel
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
-void drawParameterBlockClear(Params002c312c *parameters);
-void paramsInit(Params002c312c *parameters, u32 first, u16 firstSize,
-    u32 second, u16 secondSize, u32 third, u16 thirdSize,
-    u32 fourth, u16 fourthSize, u32 fifth, u16 fifthSize);
+void drawParameterBlockClear(UiResourceParameters *parameters);
+
 
 // Allocate a message window, its text object and calculation/stereo drawing jobs.
 MessageWork *FUN_002c4a34(void)
@@ -83,9 +81,7 @@ MessageWork *FUN_002c4a34(void)
         FUN_00116a54, NULL, reinterpret_cast<u32>(work), reinterpret_cast<void *>(work->job));
     drawParameterBlockClear(&work->parameters);
     // Three contiguous parameter streams precede the final resource stream.
-    paramsInit(&work->parameters, reinterpret_cast<u32>(DAT_00403df8) - 0x54 - 0x48 - 0x78, 0x78,
-        reinterpret_cast<u32>(DAT_00403df8) - 0x54 - 0x48, 0x48,
-        reinterpret_cast<u32>(DAT_00403df8) - 0x54, 0x54, 0, 0, reinterpret_cast<u32>(DAT_00403df8), 0x310);
+    paramsInit(&work->parameters, DAT_00403df8 - 0x54 - 0x48 - 0x78, 0x78, DAT_00403df8 - 0x54 - 0x48, 0x48, DAT_00403df8 - 0x54, 0x54, 0, 0, DAT_00403df8, 0x310);
     return reinterpret_cast<MessageWork *>(work);
 }
 }

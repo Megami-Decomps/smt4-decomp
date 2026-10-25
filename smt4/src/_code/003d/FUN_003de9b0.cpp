@@ -3,8 +3,7 @@ struct ReflectContext;
 
 extern "C" {
 extern ReflectContext* g_btlActionReflect;
-ReflectAction* btlQueueReflectAction(ReflectContext* context, s32 actionId,
-                          s32 flags, u32 argument);
+
 
 void FUN_003de9b0(s32 actionId, u32 argument, u32 value)
 {

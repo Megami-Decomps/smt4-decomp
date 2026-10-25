@@ -5,7 +5,7 @@
 
 extern "C" {
 BtlMainState *btlGetMainState(void);
-ReflectAction *btlQueueReflectAction(ReflectContext *queue, s16 actor, s16 secondary, u32 options);
+
 
 /* Queue the pending color/opacity updates for active battle action records. */
 u32 FUN_003de758(u32 actor, u32 options, u32 value)

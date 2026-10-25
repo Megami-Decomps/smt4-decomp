@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail addresses the first link record as DAT_0062d2a4 - 24 (the three globals live in one translation-unit data block) and keeps the zero/-1 constants in r5/r4; built loads each global's address from its own pool word */
+/* NON_MATCHING: linker-folded empty destructors need native-class symbol aliases and relocation aliasing in fdiff/relink. */
 #include "common.h"
 
 extern "C" {
@@ -19,26 +19,25 @@ extern CriticalSection DAT_0062d2a4;
 extern u8 entry;
 
 void nn_os_CriticalSection_Initialize(CriticalSection *section);
-void FUN_0042ce3c(void *object);
-__weak int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
-void emptyStub_002f4370(void *object, void (*destroy)(void *), void *module);
+void _ZN2nn2os15CriticalSectionD1Ev(void *object);
+int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
 /* Initialises the module's critical section and two link records, registering each one's destructor. */
 void FUN_0050fe84(void)
 {
     DAT_0062d2a4.state = 0;
     nn_os_CriticalSection_Initialize(&DAT_0062d2a4);
-    __aeabi_atexit(&DAT_0062d2a4, FUN_0042ce3c, &entry);
+    __aeabi_atexit(&DAT_0062d2a4, _ZN2nn2os15CriticalSectionD1Ev, &entry);
 
     DAT_0062d28c.first = 0;
     DAT_0062d28c.index = -1;
     DAT_0062d28c.second = 0;
-    __aeabi_atexit(&DAT_0062d28c, FUN_0042ce3c, &entry);
+    __aeabi_atexit(&DAT_0062d28c, _ZN2nn2os15CriticalSectionD1Ev, &entry);
 
     DAT_0062d298.first = 0;
     DAT_0062d298.index = -1;
     DAT_0062d298.second = 0;
-    emptyStub_002f4370(&DAT_0062d298, FUN_0042ce3c, &entry);
+    __aeabi_atexit(&DAT_0062d298, _ZN2nn2os15CriticalSectionD1Ev, &entry);
 }
 
 } /* extern "C" */

@@ -15,7 +15,7 @@ extern int DAT_005b4480; /* 0x5b4480 */
 extern int FUN_0016f988(unsigned int *, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00170454. */
 /* Supplied declaration required: FUN_00189a38. */
-extern unsigned int wstrlen(void);
+extern unsigned int libc_strlen(void);
 
 
 int FUN_0015ac90(void)
@@ -35,7 +35,7 @@ int FUN_0015ac90(void)
     temp_v0 = DAT_005b446c;
     temp_v2 = temp_v3;
     if (DAT_005b4480 == 0) {
-      temp_v1 = wstrlen();
+      temp_v1 = libc_strlen();
       temp_v2 = FUN_0016f988((unsigned int *)&DAT_005b4480,temp_v0,temp_v1,0);
     }
     if (temp_v2 < 0) {
@@ -46,7 +46,7 @@ int FUN_0015ac90(void)
       }
       temp_v0 = DAT_005b446c;
       if (DAT_005b4480 == 0) {
-        temp_v1 = wstrlen();
+        temp_v1 = libc_strlen();
         temp_v3 = FUN_0016f988((unsigned int *)&DAT_005b4480,temp_v0,temp_v1,0);
       }
       temp_v2 = temp_v3;
@@ -61,7 +61,7 @@ int FUN_0015ac90(void)
   }
   temp_v0 = DAT_005b446c;
   if (DAT_005b4480 == 0) {
-    temp_v1 = wstrlen();
+    temp_v1 = libc_strlen();
     temp_v3 = FUN_0016f988((unsigned int *)&DAT_005b4480,temp_v0,temp_v1,0);
   }
   if (temp_v3 < 0) {

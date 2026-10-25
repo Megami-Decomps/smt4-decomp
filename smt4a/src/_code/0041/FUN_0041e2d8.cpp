@@ -23,7 +23,7 @@ typedef struct SelectMenu {
     /* 0x064 */ u8 unk064[4];
     /* 0x068 */ u8 unk068;
     /* 0x069 */ u8 unk069[0x283];
-    /* 0x2EC */ u8 selectable[0xC];
+    /* 0x2EC */ s8 selectable[0xC];
     /* 0x2F8 */ s32 index;
     /* 0x2FC */ u8 unk2FC[0x10];
     /* 0x30C */ u8 locked;
@@ -40,12 +40,14 @@ void FUN_002c8538(s32 arg);
 void FUN_0041e2d8(SelectMenu *menu)
 {
     s32 index = menu->index;
+    s32 shownIndex = menu->shownIndex;
 
-    if (index == menu->shownIndex || menu->locked || menu->applied) {
+    if (shownIndex == index || menu->locked || menu->applied) {
         return;
     }
+    const s8 *selectable = menu->selectable;
     menu->shownIndex = index;
-    if (menu->selectable[index]) {
+    if (selectable[index]) {
         menu->applied = 1;
         FUN_002f0384(0);
         menu->unk068 = 0;

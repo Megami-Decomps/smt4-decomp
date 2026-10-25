@@ -6,7 +6,7 @@
 extern "C" {
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
-u32 wstrlen(const char *);
+u32 libc_strlen(const char *);
 s32 FUN_00100348(char *, u32, const char *, va_list);
 void FUN_0036bea0(u32, u32, u32, u32, u32, const char *);
 
@@ -18,11 +18,11 @@ void FUN_0023723c(u32 first, u32 second, u32 third, u32 fourth, u32 fifth,
     char *buffer = static_cast<char *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1000, 0));
     va_list arguments;
     va_start(arguments, format);
-    wstrlen(format);
+    libc_strlen(format);
     FUN_00100348(buffer, 0x1000, format, arguments);
     va_end(arguments);
     buffer[0xfff] = 0;
-    u32 length = wstrlen(buffer);
+    u32 length = libc_strlen(buffer);
     if (length >= 0xffd) {
         buffer[0xffc] = -1;
         buffer[0xffd] = -1;

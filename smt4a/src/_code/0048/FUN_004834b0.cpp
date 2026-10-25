@@ -1,157 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004834b0` (_code @ 0x4834b0, 0x2e4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: early-return frame placement, candidate-reference address setup, and distance VFP registers differ. */
+#include "map/EnemySpawnState.h"
+#include "map/lmapMain.h"
+#include <math.h>
 
 extern "C" {
-
-int gameFlagIsSet(int);
-int FUN_00356308(void);
-int FUN_00483304(int, int);
-int VectorSignedToFloat(int, int);
-
-extern int g_lmapScene; /* 0x581288 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
-{
-    return (float)sqrt((double)value);
+extern LmapSceneA *g_lmapScene;
+const EnemySpawnRecord *FUN_00356308(u32 index);
+const EnemySpawnCondition *dataTable29GetEntry(u16 id);
+s32 gameFlagIsSet(u32 flag);
+s32 randRange(u32 maximum);
+void FUN_00483304(EnemySpawnOwner *owner, u32 sourceIndex);
 }
-#endif
-extern int randRange(unsigned int);
-/* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_00356308. */
-extern int dataTable29GetEntry(unsigned short);
-/* Supplied declaration required: FUN_00483304. */
 
-
-void FUN_004834b0(int param_1,int param_2)
-
+static inline bool enemySpawnStoryAllowed(const EnemySpawnRecord *record)
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned short *puVar3;
-  int temp_v2;
-  unsigned short temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  unsigned long long temp_v10;
-  unsigned long long temp_v11;
-  unsigned short temp_v12 [512];
-  unsigned short temp_v13 [536];
-  
-  temp_v3 = *(unsigned short *)(param_1 + 0xa0);
-  if (temp_v3 == 0) {
-    return;
-  }
-  temp_v5 = 0;
-  temp_v6 = temp_v5;
-  do {
-    temp_v0 = 0;
-    temp_v2 = param_1 + temp_v5 * 2;
-    do {
-      temp_v4 = *(int *)(param_1 + temp_v0 * 4 + 0x18);
-      if ((temp_v4 != 0) && ((unsigned int)*(unsigned short *)(temp_v2 + 0xa2) == *(unsigned int *)(temp_v4 + 0x24)))
-      goto LAB_00483524;
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x20);
-    puVar3 = temp_v12 + temp_v6;
-    temp_v6 = (temp_v6 + 1) & 0xffff;
-    *puVar3 = *(unsigned short *)(temp_v2 + 0xa2);
-LAB_00483524:
-    temp_v5 = temp_v5 + 1;
-  } while ((int)temp_v5 < (int)(unsigned int)temp_v3);
-  if (temp_v6 == 0) {
-    return;
-  }
-  temp_v3 = 0;
-  if (param_2 != 0) {
-    if (param_2 != 1 && param_2 != 2) {
-      if (param_2 == 3) {
-        temp_v0 = 0;
-        if (temp_v6 == 0) {
-          return;
-        }
-        do {
-          temp_v5 = (unsigned int)temp_v12[temp_v0];
-          FUN_00356308();
-          if ((((*(short *)(temp_v5 + 10) != 1) ||
-               ((temp_v2 = gameFlagIsSet(0x137), temp_v2 != 0 &&
-                (temp_v2 = gameFlagIsSet(0x147), temp_v2 == 0)))) &&
-              (temp_v2 = dataTable29GetEntry(*(unsigned short *)(temp_v5 + 8)), *(char *)(temp_v2 + 10) == '\x03'))
-             && (temp_v2 = gameFlagIsSet((int)*(short *)(temp_v2 + 0xc)), temp_v2 == 0)) {
-            FUN_00483304(param_1,temp_v12[temp_v0]);
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < (int)temp_v6);
+    return record->kind != 1 || (gameFlagIsSet(0x137) != 0 && gameFlagIsSet(0x147) == 0);
+}
+
+static inline bool enemySpawnAlreadyPresent(const EnemySpawnOwner *owner, const u16 &sourceIndex)
+{
+    for (s32 slot = 0; slot < 32; ++slot) {
+        const EnemySpawnObject *object = owner->objects[slot];
+        if (object != NULL && sourceIndex == object->sourceIndex)
+            return true;
+    }
+    return false;
+}
+
+// Exclude existing spawn objects, then choose by distance or spawn every unlocked special entry.
+extern "C" void FUN_004834b0(EnemySpawnOwner *owner, s32 mode)
+{
+    u16 count = owner->candidateCount;
+    if (count == 0)
         return;
-      }
-      FUN_00483304(param_1,temp_v3);
-      return;
+    u16 available[512];
+    u16 availableCount = 0;
+    for (s32 index = 0; index < count; ++index) {
+        if (!enemySpawnAlreadyPresent(owner, owner->candidates[index]))
+            available[availableCount++] = owner->candidates[index];
     }
-    temp_v5 = 0;
-    temp_v11 = (unsigned long long)*(unsigned int *)(g_lmapScene + 0x1c);
-    temp_v10 = romwright_piece_4_4(*(unsigned int *)(g_lmapScene + 0x20),*(unsigned int *)(g_lmapScene + 0x24));
-    temp_v0 = 0;
-    if (temp_v6 == 0) {
-      return;
-    }
-    do {
-      temp_v1 = (unsigned int)temp_v12[temp_v0];
-      FUN_00356308();
-      if (((*(short *)(temp_v1 + 10) != 1) ||
-          ((temp_v2 = gameFlagIsSet(0x137), temp_v2 != 0 && (temp_v2 = gameFlagIsSet(0x147), temp_v2 == 0))))
-         && ((temp_v2 = dataTable29GetEntry(*(unsigned short *)(temp_v1 + 8)), *(char *)(temp_v2 + 10) != '\x03' ||
-             (temp_v2 = gameFlagIsSet((int)*(short *)(temp_v2 + 0xc)), temp_v2 == 0)))) {
-        temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3)
-        ;
-        temp_v9 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3)
-        ;
-        temp_v7 = (float)temp_v11 - temp_v7;
-        temp_v8 = (float)((unsigned long long)temp_v10 >> 0x20) - temp_v8;
-        temp_v9 = (float)temp_v10 - temp_v9;
-        temp_v7 = romwright_sqrt_4(temp_v7 * temp_v7 + temp_v8 * temp_v8 + temp_v9 * temp_v9);
-        if (param_2 != 1) {
-          if ((param_2 == 2) && ((int)temp_v7 + 0xbc69ffffU < 0x1e3ffff)) {
-            puVar3 = temp_v13 + temp_v5;
-            temp_v5 = (temp_v5 + 1) & 0xffff;
-            *puVar3 = temp_v12[temp_v0];
-          }
-        }
-        else if ((int)temp_v7 + 0xbb9effffU < 0xda7fff) {
-          puVar3 = temp_v13 + temp_v5;
-          temp_v5 = (temp_v5 + 1) & 0xffff;
-          *puVar3 = temp_v12[temp_v0];
-        }
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < (int)temp_v6);
-    if (temp_v5 == 0) {
-      return;
-    }
-    temp_v0 = randRange((temp_v5 - 1) & 0xffff);
-    puVar3 = temp_v13 + temp_v0;
-  }
-  else {
-    temp_v0 = randRange((temp_v6 - 1) & 0xffff);
-    puVar3 = temp_v12 + temp_v0;
-  }
-  temp_v3 = *puVar3;
-  FUN_00483304(param_1,temp_v3);
-  return;
-}
+    if (availableCount == 0)
+        return;
 
-} /* extern "C" */
+    u16 selected = 0;
+    switch (mode) {
+    case 0:
+        selected = available[randRange((u16)(availableCount - 1))];
+        break;
+    case 3: {
+        for (s32 index = 0; index < availableCount; ++index) {
+            const EnemySpawnRecord *record = FUN_00356308(available[index]);
+            if (!enemySpawnStoryAllowed(record))
+                continue;
+            const EnemySpawnCondition *condition = dataTable29GetEntry(record->id);
+            if (condition->type == 3 && gameFlagIsSet(condition->flag) == 0)
+                FUN_00483304(owner, available[index]);
+        }
+        return;
+    }
+    case 1:
+    case 2: {
+        MapVector position;
+        position.x = g_lmapScene->transform.position[0];
+        position.y = g_lmapScene->transform.position[1];
+        position.z = g_lmapScene->transform.position[2];
+        u16 filtered[512];
+        u16 filteredCount = 0;
+        for (s32 index = 0; index < availableCount; ++index) {
+            const EnemySpawnRecord *record = FUN_00356308(available[index]);
+            if (!enemySpawnStoryAllowed(record))
+                continue;
+            const EnemySpawnCondition *condition = dataTable29GetEntry(record->id);
+            if (condition->type == 3 && gameFlagIsSet(condition->flag) != 0)
+                continue;
+            MapVector offset;
+            offset.x = position.x - (f32)record->x;
+            offset.y = position.y - (f32)record->y;
+            offset.z = position.z - (f32)record->z;
+            union { f32 value; u32 bits; } distance;
+            distance.value = sqrtf(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
+            // Retail tests strict positive-distance ranges using their IEEE word ordering.
+            if (mode == 1) {
+                if (distance.bits - 0x44610001u < 0x00da7fffu)
+                    filtered[filteredCount++] = available[index];
+            } else if (mode == 2 && distance.bits - 0x43960001u < 0x01e3ffffu) {
+                filtered[filteredCount++] = available[index];
+            }
+        }
+        if (filteredCount == 0)
+            return;
+        selected = filtered[randRange((u16)(filteredCount - 1))];
+        break;
+    }
+    default:
+        break;
+    }
+    FUN_00483304(owner, selected);
+}

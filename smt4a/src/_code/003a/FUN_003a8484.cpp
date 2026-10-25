@@ -30,9 +30,9 @@ u32 FUN_003a8484(void)
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
-            (entry->flags & g_btlCandidateMasks.required) &&
-            !(entry->flags & g_btlCandidateMasks.excluded) &&
-            ((CandidateValuesView *)entry)->values[column] > 0) {
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
+            ((CandidateValuesView *)entry)->values[column] >= 1) {
             scrSetResult(1);
             return 1;
         }

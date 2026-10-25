@@ -11,7 +11,7 @@ struct FsMount {
 extern "C" {
 
 extern FsMount DAT_0044e640;
-extern u32 DAT_0044e644; /* the mount's handle, as the first mount check sees it */
+extern u32 g_fsArchiveHandleWords; /* the mount's handle, as the first mount check sees it */
 extern const char DAT_00407ec3[]; /* "fs:USER" */
 
 s32 FUN_002c1398(void);
@@ -35,14 +35,14 @@ static __inline void reportIfFailed(s32 result, u32 location)
 // default priority; each failure is reported with its program counter.
 void FUN_0010f5dc(void)
 {
-    if (DAT_0044e644 != 0) {
+    if (g_fsArchiveHandleWords != 0) {
         return;
     }
     s32 result = FUN_002c1398();
     if (result != 0x08a067f9) {
         reportIfFailed(result, __current_pc());
     }
-    result = asdModelForwardChecked(&DAT_0044e644, DAT_00407ec3, libc_strlen(DAT_00407ec3), 0);
+    result = asdModelForwardChecked(&g_fsArchiveHandleWords, DAT_00407ec3, libc_strlen(DAT_00407ec3), 0);
     reportIfFailed(result, __current_pc());
     FUN_0011bb34(DAT_0044e640.handle);
     DAT_0044e640.self = &DAT_0044e640;

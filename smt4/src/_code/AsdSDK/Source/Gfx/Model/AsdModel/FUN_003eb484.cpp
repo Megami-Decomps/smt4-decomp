@@ -26,7 +26,7 @@ void* FUN_003f7308(void* element);
 void FUN_0017f6cc(void* object);
 void* __aeabi_vec_ctor_nocookie_nodtor(
     void* array, void* (*constructor)(void*), u32 elementSize, u32 elementCount);
-s32 sceneNotifyNoop(void* object, void (*destructor)(void*), void* module);
+s32 __aeabi_atexit(void* object, void (*destructor)(void*), void* module);
 
 s32 FUN_003eb484(u32 valueLow, u32 valueHigh, InitializationState* state)
 {
@@ -39,6 +39,6 @@ s32 FUN_003eb484(u32 valueLow, u32 valueHigh, InitializationState* state)
     __aeabi_vec_ctor_nocookie_nodtor(
         DAT_004dace0, FUN_003f7308, sizeof(ModelElementStorage), 2);
 
-    return sceneNotifyNoop(NULL, FUN_0017f6cc, &entry);
+    return __aeabi_atexit(NULL, FUN_0017f6cc, &entry);
 }
 }

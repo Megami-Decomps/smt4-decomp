@@ -7,7 +7,7 @@ BtlMainState *btlGetMainState(void);
 void FUN_002a0428(MaterialMergeModel *model, s32 mode);
 s32 FUN_0027dab0(BtlMainState *battle, BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *battle, s32 member);
-void FUN_0023aa3c(const BattleSpritePlacement *placement, f32 *output, f32 scale);
+void effectComputeScaledImageBounds(const BattleSpritePlacement *placement, f32 *output, f32 scale);
 void modelSetPosition(MaterialMergePose *pose, s32 node, const f32 *position);
 void nodeSetTranslation(MaterialMergePose *pose, s32 node, const BattleVector3 *translation);
 
@@ -33,7 +33,7 @@ void FUN_0023c428(MaterialMergeOwner *owner, s32 index)
             }
         }
         BattleVector3 placementPosition;
-        FUN_0023aa3c(&selected->placement, &placementPosition.x, action->geometry.scale);
+        effectComputeScaledImageBounds(&selected->placement, &placementPosition.x, action->geometry.scale);
         modelSetPosition(owner->models.results[index].model->pose, 0, &placementPosition.x);
         BattleVector3 translation;
         enemyDrawComputeSpriteAnchorOffset(&selected->placement, &translation, action->geometry.scale);

@@ -1,16 +1,15 @@
 /* NON_MATCHING: initial-state store scheduling, resource-address pooling and sprite-index multiply registers differ. */
 #include "shard/S3SceneWidget.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/UiSpriteState.h"
 #include <string.h>
 
 extern "C" {
 void uiInitializeEightTimerSet(void *timers);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
-void FUN_002bd954(UiSpriteState *sprite, u32 table, u32 image, Params002c312c *parameters, u32 flags, f32 scale);
-void paramsInit(Params002c312c *parameters, const void *first, u32 firstSize,
-    const void *second, u32 secondSize, u32 a, u32 b, u32 c, u32 d, const void *third, u32 thirdSize);
-void drawParameterBlockClear(Params002c312c *parameters);
+void FUN_002bd954(UiSpriteState *sprite, u32 table, u32 image, UiResourceParameters *parameters, u32 flags, f32 scale);
+
+void drawParameterBlockClear(UiResourceParameters *parameters);
 extern const u8 DAT_00404e08[];
 extern const u8 DAT_00404e14[];
 extern const u8 DAT_00404e2c[];
@@ -21,7 +20,7 @@ void FUN_003bb1f0(SceneWidget *widget)
     struct InitializationView {
         u8 prefix[0x630];
         u8 hidden, animate, cursorMarked, unk633;
-        Params002c312c parameters;
+        UiResourceParameters parameters;
         UiSpriteState buttons[10];
         UiSpriteState image;
         u32 initialFrame;

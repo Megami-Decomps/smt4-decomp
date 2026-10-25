@@ -26,7 +26,7 @@ extern const char DAT_0052853c[];  /* NOT_EFT */
 extern const char DAT_005284c0[];  /* battle/effect/%s.eft */
 extern const char DAT_00528220[];  /* table of the 11 reference effect names, 32 bytes each */
 
-s32 wstrlen(const char *text);
+s32 libc_strlen(const char *text);
 s32 libc_strcmp(const char *first, const char *second);
 s32 libc_strncmp(const char *first, const char *second, s32 count);
 void libc_strcpy(char *destination, const char *source);
@@ -58,16 +58,16 @@ void FUN_004f8790(BtlEffectWork *work)
         const char *script;
         s32 k;
 
-        if (wstrlen(name) == 0 || libc_strcmp(name, "0") == 0 || libc_strcmp(DAT_0052853c, name) == 0) {
+        if (libc_strlen(name) == 0 || libc_strcmp(name, "0") == 0 || libc_strcmp(DAT_0052853c, name) == 0) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[0], wstrlen(g_btlEffect[0])) == 0) {
+        if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
             continue;
         }
         if (nameIs(name, g_btlEffect[4])) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[3], wstrlen(g_btlEffect[3])) == 0) {
+        if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
             continue;
         }
         if (nameIs(name, g_btlEffect[5])) {
@@ -77,14 +77,14 @@ void FUN_004f8790(BtlEffectWork *work)
         sysMemClear(formatted, 0x80);
         textFormatBuffer(formatted, DAT_005284c0, name);
         libc_strcpy(path, formatted);
-        if (wstrlen(path) == 0) {
+        if (libc_strlen(path) == 0) {
             continue;
         }
         if (name != NULL) {
             for (k = 0; k < 11; k++) {
                 const char *reference = DAT_00528220 + k * 32;
 
-                if (libc_strncmp(name, reference, wstrlen(reference)) == 0) {
+                if (libc_strncmp(name, reference, libc_strlen(reference)) == 0) {
                     break;
                 }
             }

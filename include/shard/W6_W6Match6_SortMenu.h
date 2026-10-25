@@ -1,13 +1,12 @@
 #ifndef SHARD_W6_W6MATCH6_SORT_MENU_H
 #define SHARD_W6_W6MATCH6_SORT_MENU_H
 
-#include "common.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
-struct SortMenuParameters { u32 data[8]; };
 struct SortMenuSprite { u8 data[0x8c]; };
 struct SortMenuWork {
     u32 calculate, draw;
-    SortMenuParameters parameters;
+    UiResourceParameters parameters;
     SortMenuSprite sprites[13]; // 0x28
     u32 frame; // 0x744
     u8 unk748[5];
@@ -18,5 +17,9 @@ struct SortMenuWork {
     u8 unk786[0xf2];
 };
 struct SortMenuSingleton { s8 useCount; u8 unk01[3]; SortMenuWork *work; };
+
+typedef char SortMenuWorkPacketLayoutCheck[
+    offsetof(SortMenuWork, parameters) == 8 && offsetof(SortMenuWork, sprites) == 0x28 &&
+    offsetof(SortMenuWork, ids) == 0x76c && sizeof(SortMenuWork) == 0x878 ? 1 : -1];
 
 #endif

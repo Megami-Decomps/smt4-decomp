@@ -6,7 +6,7 @@
 /* The object whose vtable is at 0x422214 in smt4 and 0x55c71c in smt4a (named after the smt4
  * address until its real name is known): it owns a heap block holding a pair of buffers and frees
  * it when it is destroyed. Slot 0 is the destructor; the vtable is stored by smt4a _ZN9Obj422214D1Ev
- * (its destructor) and vtblPairInit55C724. */
+ * (its destructor) and _ZN9Obj422214C1Ev. */
 class Obj422214 {
 public:
     Obj422214();

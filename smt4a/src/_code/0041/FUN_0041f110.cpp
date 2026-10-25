@@ -3,7 +3,7 @@
 
 extern "C" {
 extern void *g_handleRegistry;
-s32 objectGetSignedFlag(const UiAnimatedSprite *sprite);
+s32 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
 void FUN_00420a2c(SaveSlotHeaderWork *work);
@@ -49,7 +49,7 @@ void FUN_0041f110(SaveSlotHeaderWork *work)
         return;
     case 2:
         FUN_00420a2c(work);
-        if (objectGetSignedFlag(&work->sprites[work->spriteCount]) == 0) {
+        if (uiSpriteGetCompletionState(&work->sprites[work->spriteCount]) == 0) {
             return;
         }
         enterMode(work, 6);

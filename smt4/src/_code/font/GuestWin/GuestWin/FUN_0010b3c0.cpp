@@ -1,4 +1,5 @@
 /* NON_MATCHING: paramsInit size-argument scheduling adds one move, shifting the literal pool. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/GuestWin/GuestWin.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
@@ -25,9 +26,7 @@ u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
 void guestWinUpdate(void* work);
 void FUN_0011aa94(void* work);
 void drawParameterBlockClear(void* parameters);
-void paramsInit(void* parameters, const void* first, u32 firstSize, const void* second,
-                u32 secondSize, const void* third, u32 thirdSize, const void* fourth,
-                u32 fourthSize, const void* fifth, u32 fifthSize);
+
 void FUN_002bd954(void* object, s32 category, s32 resource, void* parameters, u32 enabled, f32 scale);
 void spriteStartAnimationByIndex(void* object, s32 state);
 
@@ -46,7 +45,7 @@ void FUN_0010b3c0(void)
     taskCreateDraw("GuestWin DrawUpRight", 0xDF, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
     work = g_guestWin;
     drawParameterBlockClear(work->unk10);
-    paramsInit(work->unk10, DAT_00403964.first, sizeof(DAT_00403964.first),
+    paramsInit(reinterpret_cast<UiResourceParameters *>(work->unk10), DAT_00403964.first, sizeof(DAT_00403964.first),
         DAT_00403964.second, sizeof(DAT_00403964.second), NULL, 0, NULL, 0,
         DAT_00403964.geometry, sizeof(DAT_00403964.geometry));
     FUN_002bd954(work->ui, 14, 0x87, work->unk10, 1, 1.0f);

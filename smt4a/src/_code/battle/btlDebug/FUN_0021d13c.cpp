@@ -188,7 +188,7 @@ extern int FUN_00291e14(void);
 extern int FUN_002a6a24(unsigned short);
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: uiNavigatorStart. */
-extern int FUN_002c7c54(void);
+extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: screenSetContextHint. */
 /* Supplied declaration required: FUN_002cc9e0. */
 /* Supplied declaration required: FUN_002ccde8. */
@@ -708,7 +708,7 @@ joined_r0x0021db60:
       FUN_0020ad6c(param_1,*(int *)(param_1 + 0x3880),0);
     }
     else {
-      temp_v4 = FUN_002c7c54();
+      temp_v4 = useCounterGetCurrentValue();
       if ((temp_v4 == 9) || (temp_v4 == 0x59)) {
         *(unsigned int *)(param_1 + 0x3884) = *(unsigned int *)(param_1 + 0x3880);
         FUN_0020ad6c(param_1,7,0);

@@ -9,7 +9,7 @@ extern "C" {
 TokenTable* FUN_0016ccfc(void);
 u32 tokenResolveAddress(TokenTable* table, u32* address, u32 token);
 u32 FUN_00428220(u32 address);
-u32 FUN_004282f0(u32 address);
+u32 windowGetOperationFailure(u32 address);
 
 // Resolves a token and runs both address operations, preserving error results.
 u32 FUN_00428878(const AddressToken* token)
@@ -19,7 +19,7 @@ u32 FUN_00428878(const AddressToken* token)
     if (!nnResultIsFailure(result)) {
         result = FUN_00428220(address);
         if (!nnResultIsFailure(result)) {
-            result = FUN_004282f0(address);
+            result = windowGetOperationFailure(address);
             if (!nnResultIsFailure(result)) {
                 result = 0;
             }

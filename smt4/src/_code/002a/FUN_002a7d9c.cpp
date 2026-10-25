@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern signed char DAT_0044e3b0; /* 0x44e3b0 */
+extern signed char g_appletSleepModuleState; /* 0x44e3b0 */
 
 /* Supplied declaration required: FUN_0014ff04. */
 /* Supplied declaration required: threadSleepDuration. */
@@ -36,9 +36,9 @@ void FUN_002a7d9c(unsigned int param_1)
   char temp_v2 [4];
   char temp_v3 [12];
   
-  temp_v0 = DAT_0044e3b0;
-  if (DAT_0044e3b0 != '\0') {
-    DAT_0044e3b0 = '\0';
+  temp_v0 = g_appletSleepModuleState;
+  if (g_appletSleepModuleState != '\0') {
+    g_appletSleepModuleState = '\0';
     FUN_002c130c(3);
     nn_applet_CTR_detail_ReplySleepQueryToManager(0);
   }
@@ -49,7 +49,7 @@ void FUN_002a7d9c(unsigned int param_1)
   if (temp_v0 == '\0') {
     return;
   }
-  DAT_0044e3b0 = 1;
+  g_appletSleepModuleState = 1;
   nn_applet_CTR_detail_SleepIfShellClosed();
   return;
 }

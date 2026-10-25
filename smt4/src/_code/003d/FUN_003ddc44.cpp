@@ -2,7 +2,7 @@
 
 extern "C" {
 
-ReflectAction *btlQueueReflectAction(ReflectContext *state, u32 slot, u32 kind, u32 extra);
+
 /* Updates a battle reflection slot. */
 void FUN_003ddc44(u32 slot, u32 extra)
 {

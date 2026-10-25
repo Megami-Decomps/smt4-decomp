@@ -1,34 +1,25 @@
-/* NON_MATCHING: retail stores the work pointer at +4 of the global block at 0x44de28 and takes the first callback's address pc-relative (a function of this unit); the other callbacks are unnamed code in other units. */
-/* NON_MATCHING: the task callbacks are local code labels (LAB_*) that are not decompiled, so their addresses are built differently */
-/* Opens the save/load screen: allocates its work area and creates its task. */
-#include "common.h"
+/* NON_MATCHING: save-screen allocation and process-registration scheduling differ from retail. */
 #include "saveLoadUI/saveLoadUI.h"
+#include "shard/Sys44de28.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
+void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay,
+    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+s32 FUN_001c8e28(u32 handle);
+void saveDataNotifyNoop(u32 handle);
 
-typedef void (*VoidFunc)(void);
-
-void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
-u32 asdProcessCreateSimple(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, VoidFunc destroy, int arg6);
-void LAB_00192074(void);
-void LAB_001c8e28(void);
-void LAB_00214a5c(void);
-
-extern SaveLoadUIWork *g_saveLoadUI;
-
+// Allocate the save/load screen and start its controller process.
 void saveLoadUIOpen(void)
 {
-    SaveLoadUIWork *ui;
-
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\saveLoadUI\\saveLoadUI.cpp", 2814);
-    ui = (SaveLoadUIWork *)asdMemAlloc(0x10000, 0x100, 0, 0x388, 1);
-
-    g_saveLoadUI = ui;
+    SaveLoadUIWork *ui = (SaveLoadUIWork *)asdMemAlloc(0x10000, 0x100, 0, sizeof(SaveLoadUIWork), 1);
+    g_saveLoadUIFlags.worker = reinterpret_cast<Worker *>(ui);
     ui->unk04 = 0;
-    ui->task = asdProcessCreateSimple(LAB_00192074, 2, 0, 0, LAB_001c8e28, LAB_00214a5c, 0);
+    ui->task = asdProcessCreateSimple("BOOT C", 2, 0, 0, FUN_001c8e28, saveDataNotifyNoop, 0);
     ui->state = 0x11;
     ui->unk0C = 0;
 }
-
-} /* extern "C" */
+}

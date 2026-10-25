@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-push address scheduling, repeated color arguments and literal-pool ordering differ. */
+/* NON_MATCHING: repeated color argument moves and literal-pool ordering differ. */
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -19,10 +19,9 @@ u32 FUN_002df4b0(void)
         u8 unk0000[0x4D1C];
         u32 color;
     };
-    RenderCtxA *context = g_renderCtx;
     u32 color = static_cast<BattleBackgroundView *>(g_btlMain)->color;
-    s32 renderState = FUN_001692ac(1, 0);
-    renderStackPush(&context->stackA, renderState);
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     FUN_00157558(g_renderCtx);
     FUN_0016c4b8(g_renderCtx, 0);
     FUN_0014e314(color, color, color, color, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);

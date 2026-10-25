@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned int DAT_004d42c8; /* 0x4d42c8 */
+extern unsigned int g_fsWaitNotification3; /* 0x4d42c8 */
 extern unsigned int DAT_004d42d8; /* 0x4d42d8 */
 
 extern int FUN_00129584(unsigned int *, unsigned int);
@@ -26,7 +26,7 @@ void FUN_001270a8(unsigned int param_1)
   int temp_v0;
   
   DAT_004d42d8 = param_1;
-  temp_v0 = FUN_00129584(&DAT_004d42c8,0x209);
+  temp_v0 = FUN_00129584(&g_fsWaitNotification3,0x209);
   if (temp_v0 < 0) {
     FUN_002bbb2c(temp_v0,0x1270cc);
   }

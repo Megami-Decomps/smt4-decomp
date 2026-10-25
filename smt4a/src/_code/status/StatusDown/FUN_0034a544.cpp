@@ -1,4 +1,5 @@
 /* NON_MATCHING: the zeroed-field stores, the sprite setup scheduling and the pooled constants are laid out differently from retail (252 vs 249 rows); the screen setup is the same. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -54,8 +55,7 @@ void sysMemClear(void *block, u32 size);
 void *asdProcessCreateSimple(const char *name, u32 priority, u32 a, u32 b, void (*update)(void *), u32 c, u32 d);
 void *taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);
 void paramsClearPacket(void *packet);
-void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
-                const void *f, u32 fSize);
+
 void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
 void FUN_00230b9c(s32 a, s32 b);
 void uiSpriteSelectAnim(void *sprite, u32 anim);
@@ -89,7 +89,7 @@ void FUN_0034a544(void)
     down->drawTask = taskCreateDraw("TMD DDRAW", 0xEB, 0, 0, FUN_0026b0e4, 0, 0, process);
     down = g_statusDown;
     paramsClearPacket(down->params);
-    paramsInit(down->params, DAT_0053687c, 0xA8, DAT_00536924, 0x90, DAT_005369b4, 0x18, 0, 0, DAT_005369cc, 0x1A4);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(down->params), DAT_0053687c, 0xA8, DAT_00536924, 0x90, DAT_005369b4, 0x18, 0, 0, DAT_005369cc, 0x1A4);
     FUN_0014e188(down->sprite0, 0x12, 1000, down->params, 1, 1.0f);
     FUN_00230b9c(0, -1);
     FUN_0014e188(down->sprite1, 0x12, 1000, down->params, 1, 1.0f);

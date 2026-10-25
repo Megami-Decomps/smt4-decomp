@@ -47,7 +47,7 @@ typedef char ScriptLoadStateOffsets[offsetof(ScriptLoadState, loadState) == 0x7f
 
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result);
+void FUN_002e3140(s32 result, bool failed);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
@@ -80,15 +80,12 @@ extern "C" u32 FUN_0035a840(ScriptLoadState *state)
     if (state->loadState == 2) {
         state->stopRequested = 1;
         s32 result = svcWaitSynchronization1(state->thread.handle, -1);
-        if (nnResultIsFailure(result)) {
-            FUN_002e3140(result);
+        bool failed = nnResultIsFailure(result);
+        if (failed) {
+            FUN_002e3140(result, failed);
         }
         state->thread.joined = 1;
-        nn_os_Thread_FinalizeImpl(&state->thread.handle);
-        if (state->thread.handle != 0) {
-            svcCloseHandle(state->thread.handle);
-            state->thread.handle = 0;
-        }
+        state->thread.~NnOsThread();
         FUN_001469a8(state->stackRegion);
         delete state->stackRegion;
         state->stackRegion = NULL;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: tiled frame behavior restored; tile pointer scheduling differs and retail target contains only the first word of the 24-byte tile-kind literal. */
 #include "ui/FrameTex.h"
 #include "ui/UiSpriteState.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 namespace {
 struct TiledFrameView {
@@ -15,7 +15,7 @@ struct TiledFrameView {
     f32 scaleX;
     f32 scaleY;
     f32 duration;
-    Params002c312c parameters;
+    UiResourceParameters parameters;
     UiSpriteState tiles[24];
     UiSpriteState frame;
     UiSpriteState overlay;
@@ -23,7 +23,7 @@ struct TiledFrameView {
 }
 extern "C" {
 extern FrameWork *g_frameTex;
-void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 image, Params002c312c *parameters, s32 flags, f32 scale);
+void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 enabled);
 void FUN_002a9fdc(UiSpriteState *sprite, s32 key, s32 mode);

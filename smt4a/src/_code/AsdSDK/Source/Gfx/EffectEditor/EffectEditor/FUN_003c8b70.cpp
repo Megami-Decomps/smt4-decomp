@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation and constant scheduling only (retail keeps the zero vector components in a separate s-register copy and holds the work/camera pointers in r7/r8) */
-#include "common.h"
+#include "gfx/EffectEditorStorage.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <math.h>
 
@@ -26,7 +26,7 @@ struct EditorView {
 };
 
 extern "C" {
-extern EditorVector g_effectEditorVector;
+
 extern EditorMathWork DAT_006471dc;
 extern EditorView DAT_0059efe0;
 extern f32 DAT_0059f020[];
@@ -48,10 +48,10 @@ u32 FUN_003c8b70(void)
 
     f32 step = 10.0f;
     if (padButtonRepeat(5) || padButtonRepeat(FUN_00202178(5))) {
-        g_effectEditorVector.y = g_effectEditorVector.y - step;
+        g_effectEditorVector.value.y = g_effectEditorVector.value.y - step;
         changed = 3;
     } else if (padButtonRepeat(6) || padButtonRepeat(FUN_00202178(6))) {
-        g_effectEditorVector.y = g_effectEditorVector.y + step;
+        g_effectEditorVector.value.y = g_effectEditorVector.value.y + step;
         changed = 3;
     }
 
@@ -64,8 +64,8 @@ u32 FUN_003c8b70(void)
         step = 0.0f;
     }
 
-    f32 x = g_effectEditorVector.x;
-    f32 z = g_effectEditorVector.z;
+    f32 x = g_effectEditorVector.value.x;
+    f32 z = g_effectEditorVector.value.z;
     if (!(x == 0.0f && z == 0.0f)) {
         EditorMathWork *work = &DAT_006471dc;
         work->axis.x = x;
@@ -117,8 +117,8 @@ u32 FUN_003c8b70(void)
         DAT_0059efe0.direction[2] = work->axis.z;
         DAT_0059efe0.direction[3] = work->axis.w;
     }
-    g_effectEditorVector.x = x + DAT_0059f020[0] * step;
-    g_effectEditorVector.z = z + DAT_0059f020[2] * step;
+    g_effectEditorVector.value.x = x + DAT_0059f020[0] * step;
+    g_effectEditorVector.value.z = z + DAT_0059f020[2] * step;
 
     if (padButtonIsPressed(1) || padButtonIsPressed(FUN_00202178(1))) {
         return changed & ~1u;

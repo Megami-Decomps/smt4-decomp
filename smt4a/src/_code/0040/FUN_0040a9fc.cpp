@@ -9,15 +9,8 @@ struct LookupRequest {
     u32 step;     // 0x10
     u8 flag;      // 0x14
 
-    LookupRequest()
-    {
-        key = 0;
-        enabled = 0;
-        maxValue = 0x10000;
-        minValue = 0x30000;
-        step = 0x10000;
-        flag = 0;
-    }
+    LookupRequest() : key(0), enabled(0), minValue(0x30000),
+        maxValue(0x10000), step(0x10000), flag(0) {}
 };
 
 struct LookupOwner {

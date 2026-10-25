@@ -14,14 +14,14 @@ int software_interrupt(...);
 typedef int romwright_code(...);
 extern unsigned char LAB_004c4b40; /* 0x4c4b40 */
 extern romwright_code *DAT_00589280; /* 0x589280 */
-extern int DAT_0058936c; /* 0x58936c */
+extern int g_moduleInitialState; /* 0x58936c */
 extern signed char DAT_005894cc; /* 0x5894cc */
 extern unsigned char DAT_0062d200; /* 0x62d200 */
 extern unsigned char DAT_0062d201; /* 0x62d201 */
 extern unsigned short DAT_0062d202; /* 0x62d202 */
 extern unsigned int DAT_0062d204; /* 0x62d204 */
 extern unsigned int DAT_0062d208; /* 0x62d208 */
-extern unsigned int DAT_0062d280; /* 0x62d280 */
+extern unsigned int g_moduleStateCriticalSection; /* 0x62d280 */
 extern unsigned char bRam1ff80014; /* 0x1ff80014 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -83,10 +83,10 @@ unsigned char * FUN_00514428(unsigned int *param_1,int param_2)
   piVar3 = aiStack_20;
   DAT_0062d208 = in_lr;
   do {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d280);
-    if (DAT_0058936c == 0) {
-      puVar2 = (unsigned int *)&DAT_0058936c;
-      FUN_0019a300(&DAT_0058936c,"err:f");
+    nn_os_CriticalSection_Enter((unsigned int)&g_moduleStateCriticalSection);
+    if (g_moduleInitialState == 0) {
+      puVar2 = (unsigned int *)&g_moduleInitialState;
+      FUN_0019a300(&g_moduleInitialState,"err:f");
       if (-1 < (int)puVar2) {
         puVar2 = (unsigned int *)0x0;
       }
@@ -96,14 +96,14 @@ unsigned char * FUN_00514428(unsigned int *param_1,int param_2)
     }
     if (-1 < (int)puVar2) {
       FUN_001ab838(0x62d20c,0xffff8001);
-      aiStack_20[0] = DAT_0058936c;
+      aiStack_20[0] = g_moduleInitialState;
       nn_err_CTR_FatalErr_Throw((unsigned int)aiStack_20,(unsigned int)&DAT_0062d200);
-      if (DAT_0058936c != 0) {
+      if (g_moduleInitialState != 0) {
         software_interrupt(0x23);
-        DAT_0058936c = 0;
+        g_moduleInitialState = 0;
       }
 LAB_00189b20:
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
+      nn_os_CriticalSection_Leave((unsigned int)&g_moduleStateCriticalSection);
       puVar5 = (unsigned char *)(unsigned int)DAT_0062d200;
       if (puVar5 != (unsigned char *)0x2 && puVar5 != (unsigned char *)0x5) {
         aiStack_20[0] = 0;
@@ -120,7 +120,7 @@ LAB_00189b20:
     }
     if (!temp_v1 || puVar2 != (unsigned int *)0x2) goto LAB_00189b20;
     svcSleepThread(&LAB_004c4b40,0);
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d280);
+    nn_os_CriticalSection_Leave((unsigned int)&g_moduleStateCriticalSection);
   } while( 1 );
 }
 

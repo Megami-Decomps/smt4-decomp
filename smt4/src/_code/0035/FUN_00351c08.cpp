@@ -10,7 +10,7 @@ int FUN_00351e54(int, int);
 unsigned int FUN_00352008(unsigned int, unsigned int, unsigned char, unsigned char);
 int FUN_00359f90(void);
 
-extern signed char DAT_0044e348; /* 0x44e348 */
+extern signed char g_archiveModuleState; /* 0x44e348 */
 
 extern int FUN_0011c834(void);
 /* Supplied declaration required: FUN_001467a4. */
@@ -46,10 +46,10 @@ int FUN_00351c08(int param_1,unsigned int *param_2,unsigned int param_3,unsigned
       }
       else {
         temp_v0 = 0;
-        if ((DAT_0044e348 == '\0') && (temp_v0 = FUN_0011c834(), -1 < temp_v0)) {
+        if ((g_archiveModuleState == '\0') && (temp_v0 = FUN_0011c834(), -1 < temp_v0)) {
           temp_v0 = FUN_0035adf0(1);
           if (temp_v0 >= 0) {
-            DAT_0044e348 = '\x01';
+            g_archiveModuleState = '\x01';
           }
           else {
             FUN_0023a244();

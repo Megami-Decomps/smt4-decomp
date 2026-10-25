@@ -37,7 +37,7 @@ void spriteStartAnimationByIndex(JobSprite *sprite, s32 index);
 void FUN_00295eb0(JobSprite *sprite, u32 group, u32 image);
 void FUN_002bf818(JobSprite *sprite);
 void spriteSetVisible(JobSprite *sprite, u8 visible);
-s32 recordGetSignedFlags(JobSprite *sprite);
+s32 uiSpriteGetCompletionState(JobSprite *sprite);
 
 /* Per-frame update: plays the three sprites in sequence (fade in, hold, fade out). */
 u32 FUN_0038a1e0(void)
@@ -76,7 +76,7 @@ u32 FUN_0038a1e0(void)
     case 1:
         FUN_002bf818(&work->sprites[0]);
         FUN_002bf818(&work->sprites[2]);
-        if (recordGetSignedFlags(&work->sprites[0]) != 0) {
+        if (uiSpriteGetCompletionState(&work->sprites[0]) != 0) {
             work->flags |= 0x20;
             work->state = 2;
         }
@@ -89,7 +89,7 @@ u32 FUN_0038a1e0(void)
     case 3:
         FUN_002bf818(&work->sprites[0]);
         FUN_002bf818(&work->sprites[2]);
-        if (recordGetSignedFlags(&work->sprites[0]) != 0) {
+        if (uiSpriteGetCompletionState(&work->sprites[0]) != 0) {
             work->state = 4;
         }
         break;

@@ -2,8 +2,8 @@
 #include "gfx/NamedResourceBindings.h"
 
 extern "C" {
-u32 wstrlen(const u16* string);
-u32 FUN_001a7a20(const void* index, const u16* name, u32 length);
+u32 libc_strlen(const char* string);
+u32 FUN_001a7a20(const void* index, const char* name, u32 length);
 
 // Fill unresolved resource bindings, distinguishing complete failure from partial success.
 u32 FUN_0045b384(NamedResourceBindingArray* bindings,
@@ -19,8 +19,8 @@ u32 FUN_0045b384(NamedResourceBindingArray* bindings,
         if (bindings->resources[index] == NULL) {
             NamedResourceDirectoryData* directory = &owner->directory->data;
             void* resource = NULL;
-            const u16* name = request->names[index];
-            u32 resourceIndex = FUN_001a7a20(directory->nameIndex, name, wstrlen(name));
+            const char* name = request->names[index];
+            u32 resourceIndex = FUN_001a7a20(directory->nameIndex, name, libc_strlen(name));
             if (resourceIndex != 0xFFFF)
                 resource = owner->directory->data.resources[resourceIndex];
             if (resource == NULL)

@@ -5,7 +5,7 @@
 
 extern "C" {
 extern AocMain *g_aocMain;
-AocHandleJob *FUN_002a1130(u32 job, u32 kind);
+AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 job, u32 kind);
 WindowStatusResult FUN_003df5d0(u32 *parameters, AocEnumerationResult *enumeration,
                               AocContentRecord *records, s32 capacity, s32 offset);
 u32 legacyResourceIdRemap(WindowStatusResult *result);
@@ -16,7 +16,7 @@ s32 objGetFlagBit0(const AocContentRecord *record);
 // Enumerate installed content, retaining enabled entries and counting flagged ones.
 void FUN_00388f3c(u32 job, AocContentEnumeration *content)
 {
-    AocHandleJob *request = FUN_002a1130(job, 0);
+    AocHandleJob *request = _ZN21WindowOperationResultC1Eh(job, 0);
     AocContentRecord records[32];
     AocEnumerationResult enumeration;
     enumeration.count = 0;

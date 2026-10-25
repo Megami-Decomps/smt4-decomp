@@ -11,9 +11,9 @@ struct SlotMenu {
     u8 position[0x8];    // 0x0C8 (vec2)
     u8 unkD0[0x71C];
     s32 slotValue[0x80]; // 0x7EC
-    u8 unk9EC;           // 0x9EC hidden
-    u8 hasSelection;     // 0x9ED
-    u8 selectionMode;    // 0x9EE
+    s8 unk9EC;           // 0x9EC hidden
+    s8 hasSelection;     // 0x9ED
+    s8 selectionMode;    // 0x9EE
     u8 unk9EF[0x599];
     struct { u8 unk00[0x20]; f32 speed; } accent; // 0xF88
     u8 unkFAC[0x70];
@@ -27,6 +27,7 @@ extern "C" {
 extern int vec2GetXInt(void *);
 extern int vec2GetYInt(void *);
 extern void efctSetSpeed(f32);
+extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
 extern SpriteInfo *FUN_001834a4(u32, u32);
 extern void FUN_001835b4(s32, s32, u32, s32, s32, s32);
@@ -56,7 +57,7 @@ void FUN_004bade4(SlotMenu *menu)
         efctSetSpeed(1.0f);
         FUN_00164b5c(2, 0x1f, menu->spriteBase, sx, sy, 0x1f);
         if (menu->spriteAccent != -1) {
-            efctSetSpeed(menu->accent.speed);
+            efctSetSpeed(vec2GetSpeed(&menu->accent));
             FUN_00164b5c(2, 0x1f, menu->spriteAccent, sx, sy, 0x20);
         }
         s32 first = FUN_002a482c(menu);

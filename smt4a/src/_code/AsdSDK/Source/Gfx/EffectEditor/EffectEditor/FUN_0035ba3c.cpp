@@ -1,19 +1,20 @@
 /* NON_MATCHING: two native MOV-r0-r0 words and coordinate-vector register grouping differ. */
-#include "shard/W6_W6Match2_EffectEditor.h"
+#include "gfx/EffectEditorStorage.h"
+#include "AsdSDK/EffectEditorSelectionTransfer.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern Point2 DAT_0059dc7c;
 void FUN_002e59f8(void* destination, const void* source, u32 size);
-void FUN_00200bcc(EffectEditorMenuState* state);
-void effEditorNodeChainApply(EffectEditorMenuState* state);
+EffectEditorOptions *FUN_00200bcc(EffectEditorOptions* options);
+void effEditorNodeChainApply(EffectEditorOptions* options);
 void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);
 void effMenuListAppend(EffMenuNode* node, u32 list);
 u32 padButtonIsPressed(u32 buttons);
 u32 FUN_00202178(u32 mapping);
 
-u32 FUN_0035ba3c(Point2* coordinates, u32 value, EffectEditorMenuState* state)
+u32 FUN_0035ba3c(Point2* coordinates, u32 value, EffectEditorOptions* state)
 {
     // This coordinate vector spans the base node's layout/selection unions.
     struct CoordinateNodeView {
@@ -41,7 +42,7 @@ u32 FUN_0035ba3c(Point2* coordinates, u32 value, EffectEditorMenuState* state)
     effMenuListAppend(reinterpret_cast<EffMenuNode*>(node), 3);
     if (padButtonIsPressed(1) || padButtonIsPressed(FUN_00202178(1))) {
         result = 0x400000;
-    } else if (state->inputStatus.flags & 8) {
+    } else if (state->flags & 8) {
         result = 0x400003;
     }
     return result;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail keeps -1 in one register for the byte at +0xc and the halfword at +0x121c0, merges nothing in the 0xb7c..0xb84 stores (here two are fused into an stm), and refers to its key tables through DAT_00404a9c rather than .constdata; the same stores and calls in the same order. */
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 /* A 0x8C-byte UI sprite. */
@@ -42,7 +42,7 @@ struct NaviMainWork {
     /* 0x00162 */ u8 unk00162[0x2];
     /* 0x00164 */ u8 selection[0x14];
     /* 0x00178 */ u8 timers[0x480];
-    /* 0x005f8 */ Params002c312c packet;
+    /* 0x005f8 */ UiResourceParameters packet;
     /* 0x00618 */ NaviSprite sprites[5];
     /* 0x008d4 */ u8 unk008d4[0x118];
     /* 0x009ec */ u8 unk9ec[3];
@@ -103,16 +103,14 @@ void asdTMTexTableLoadTmx(s32 id, s32 arg);
 void rt_memclr(void *data, u32 size);
 void rectangleInitializeSelection(void *selection, s32 x, s32 y, s32 size);
 void FUN_003eb068(void *state);
-void drawParameterBlockClear(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u32 firstBytes,
-                const void *second, u32 secondBytes, const void *third, u32 thirdBytes,
-                const void *fourth, u32 fourthBytes, const void *fifth, u32 fifthBytes);
-void FUN_002bd954(NaviSprite *sprite, u32 group, u32 image, Params002c312c *owner, u16 id, f32 scale);
+void drawParameterBlockClear(UiResourceParameters *packet);
+
+void FUN_002bd954(NaviSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void timerStart(NaviSprite *sprite, s32 id, s32 arg);
 void uiInitializeEightTimerSet(void *timers);
 void memFill8(void *data, s32 value);
 void uiSpriteInitializeState(NaviSprite *sprite, u32 group, s32 image, s32 kind,
-                             Params002c312c *owner, u16 id, f32 scale);
+                             UiResourceParameters *owner, u16 id, f32 scale);
 
 /* Resets the navigation screen's work area: its callbacks and icon texture, the selection and timer sets,
    the five header sprites and the two animated sprites. */

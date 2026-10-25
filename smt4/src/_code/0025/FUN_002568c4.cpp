@@ -2,7 +2,7 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 
 /* Queues a kind-0x34 action; if the queue already holds one for the same actor, the new one's secondary id is cleared. */
 void FUN_002568c4(u32 actor, u32 options)

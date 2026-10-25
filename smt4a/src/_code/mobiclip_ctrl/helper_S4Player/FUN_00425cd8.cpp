@@ -1,4 +1,4 @@
-/* NON_MATCHING: svc 0x24 (wrapper), the thread destructor (nn/os/Thread.h) and the whole teardown match instruction for instruction except scheduling: retail stores the stop flag before computing the wake-event address, recomputes the thread address after the finalize call instead of keeping it in r5, keeps zero in r7 from the wait, and loads the stack region straight into r5 for the delete. */
+/* NON_MATCHING: stop/signal scheduling and native-thread pointer/zero-register lifetimes differ; teardown offsets and stack deletion match. */
 #include "common.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/Result.h"
@@ -46,7 +46,7 @@ struct MoviePlayer {
     /* 0x01c */ u8 unk01c[4];
     /* 0x020 */ u8 wakeEvent[8];
     /* 0x028 */ NnOsThread thread;
-    /* 0x02d */ u8 unk02d[0x12b];
+    /* 0x030 */ u8 unk030[0x128];
     /* 0x158 */ u8 deblocker[0x60];
     /* 0x1b8 */ MovieHeap *heap;
     /* 0x1bc */ u32 unk1bc;
@@ -55,6 +55,12 @@ struct MoviePlayer {
     /* 0x1c8 */ u8 unk1c8[0x10];
     /* 0x1d8 */ MovieStream streams[1];
 };
+typedef char MoviePlayerTeardownOffsetsCheck[
+    offsetof(MoviePlayer, thread) == 0x28 &&
+    offsetof(MoviePlayer, deblocker) == 0x158 &&
+    offsetof(MoviePlayer, heap) == 0x1B8 &&
+    offsetof(MoviePlayer, streamCount) == 0x1C4 &&
+    offsetof(MoviePlayer, streams) == 0x1D8 ? 1 : -1];
 
 /* The decoder-block, output-block and stream tables sit in the player's tail; shown as views. */
 struct MoviePlayerTables {
@@ -111,8 +117,7 @@ extern "C" void FUN_00425cd8(MoviePlayer *player)
         player->thread.joined = 1;
         player->thread.~NnOsThread();
         FUN_001469a8(DAT_00588100.region);
-        StackRegion *region = DAT_00588100.region;
-        delete region;
+        delete DAT_00588100.region;
         DAT_00588100.region = NULL;
         asdMemFree(DAT_00588100.memory);
         DAT_00588100.memory = NULL;

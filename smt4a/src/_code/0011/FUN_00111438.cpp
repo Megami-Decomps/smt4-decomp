@@ -18,7 +18,7 @@ typedef struct {
 } param_7_stack;
 
 /* Supplied declaration required: FUN_00111482. */
-extern unsigned int wstrlen(unsigned int);
+extern unsigned int libc_strlen(unsigned int);
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: strDestroy. */
@@ -42,7 +42,7 @@ FUN_00111438(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   uStack_1c = param_3;
   temp_v2 = param_4;
   strInit(temp_v1);
-  temp_v0 = wstrlen(param_3);
+  temp_v0 = libc_strlen(param_3);
   strAssign(temp_v1,param_3,temp_v0,0xffffffff);
   FUN_00111482(param_1,param_2,temp_v1,temp_v2,param_5,param_6,param_7);
   strDestroy(temp_v1);

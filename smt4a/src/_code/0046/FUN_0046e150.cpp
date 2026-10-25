@@ -1,24 +1,28 @@
-/* NON_MATCHING: retail has a 4-byte slot before the 132-byte path buffer (buffer at sp+16) and keeps the kind constant 12 in r7; built places the buffer at sp+12. */
+/* NON_MATCHING: the real 128-byte path and pointer-returning synchronous load contract are restored; retail retains kind 12 across the clear and aligns the path at sp+16. */
 #include "common.h"
+#include "addon/aocMain.h"
 
-struct AocDisplay;
+struct FileQueue;
 
 extern "C" {
 
 void sysMemClear(void *buffer, s32 size);
-u8 *FUN_001b2bd8(u32 id, u32 kind, u32 variant, char *path);
-void FUN_001b2ebc(AocDisplay *display, const char *path, u32 completion, u8 *data, s32 mode, s32 size, u8 *context);
-extern AocDisplay *g_aocDisplay; /* 0x57027c */
+u8 *FUN_001b2bd8(AocSystemA *system, s32 kind, s32 variant, char *path);
+u32 FUN_001b2ebc(FileQueue *queue, const char *path, const char *secondPath,
+                u32 *transferredBytes, u32 mode, u32 bytes, void *context);
+extern FileQueue *g_aocDisplay;
 
-// Resolve the file entry for the request and queue its 0x80-byte load on the add-on display.
-void FUN_0046e150(u32 id, u32 variant, u32 completion)
+// Resolve the kind-12 add-on path and synchronously load it, optionally paired with a second path.
+void *FUN_0046e150(AocSystemA *system, s32 variant, const char *secondPath)
 {
-    char path[132];
-    sysMemClear(path, 0x80);
-    u8 *entry = FUN_001b2bd8(id, 0xc, variant, path);
+    char path[128];
+    sysMemClear(path, sizeof(path));
+    u8 *entry = FUN_001b2bd8(system, 12, variant, path);
     if (entry != NULL) {
-        FUN_001b2ebc(g_aocDisplay, path, completion, entry + 8, 1, 0x80, entry);
+        return reinterpret_cast<void *>(FUN_001b2ebc(g_aocDisplay, path, secondPath,
+            reinterpret_cast<u32 *>(entry + 8), 1, sizeof(path), entry));
     }
+    return NULL;
 }
 
 } /* extern "C" */

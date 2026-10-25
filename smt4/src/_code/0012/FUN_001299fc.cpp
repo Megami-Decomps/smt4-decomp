@@ -6,8 +6,8 @@ extern "C" {
 extern NngxInitializationPrefixIV g_nngxState;
 extern u32 g_nngxGpu;
 extern u32 g_nngxCriticalSection;
-extern u32 DAT_00471a80;
-extern const u32 DAT_0040b740;
+extern u32 g_nngxCommandState1;
+extern const u32 g_nngxDefaultCommandState;
 extern NngxCommandPrefixIV DAT_00431c40;
 
 void nn_os_CriticalSection_Enter(u32 *criticalSection);
@@ -34,10 +34,10 @@ void FUN_001299fc(void)
     }
 
     const char *configuration = g_nngxState.configuration;
-    asdModelForwardChecked(&DAT_00471a80, configuration,
+    asdModelForwardChecked(&g_nngxCommandState1, configuration,
                            libc_strlen(configuration), 0);
     g_nngxState.acquiredGpu = g_nngxState.configuredGpu;
-    nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, DAT_0040b740,
+    nn_gxlow_CTR_Gpu_AcquireRight(&g_nngxGpu, g_nngxDefaultCommandState,
                                  g_nngxState.acquireMode);
 
     DAT_00431c40.word00 = 0;

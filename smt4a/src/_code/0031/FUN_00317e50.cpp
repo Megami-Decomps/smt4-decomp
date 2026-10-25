@@ -3,7 +3,7 @@
 
 extern "C" {
 bool FUN_002e0e04(const char *path, u16 *resolved, u32 mode);
-u32 wstrlen(const char *text);
+u32 libc_strlen(const char *text);
 void FUN_001886bc();
 s32 FUN_00188444(const u16 *path);
 s32 FUN_0042b32c(const u16 *path);
@@ -14,7 +14,7 @@ s32 FUN_00317e50(const char *path)
     u16 resolved[248];
     s32 result;
     if (FUN_002e0e04(path, resolved, 1)) {
-        u32 length = wstrlen(path);
+        u32 length = libc_strlen(path);
         if (length && path[length - 1] == '/') {
             FUN_001886bc();
             result = FUN_0042b32c(resolved);

@@ -3,12 +3,12 @@
 
 extern "C" {
 PartyBlockB* gameFlagBlockGet(void);
-u32 wstrlen(const char* text);
+u32 libc_strlen(const char* text);
 
 u32 partyEntryIsAvailable(u32 index)
 {
     const ItemDataRecord* record = FUN_001ad9b4(index);
-    u32 length = wstrlen(record->availability.token);
+    u32 length = libc_strlen(record->availability.token);
     if (length <= 1 && record->availability.token[0] == '0') {
         return 0;
     }

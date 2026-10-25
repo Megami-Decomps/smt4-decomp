@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail anchors the four adjacent parameter tables on the last one (chained subtractions from DAT_00529ac0) and loads each entry's slot after the field stores; armcc here subtracts each offset from the base, hoists the slot load, and numbers the first loop's registers differently. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "battle/PartnerAttackEntries.h"
 
 extern "C" {
 extern const u8 DAT_00529ac0[];
 void asdMemFreeSlot(void **slot);
-void paramsClearPacket(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, const void *first, u16 firstBytes, const void *second, u16 secondBytes,
-                const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes, const void *fifth, u16 fifthBytes);
+void paramsClearPacket(UiResourceParameters *packet);
+
 }
 
 PartnerAttackEntries::PartnerAttackEntries()

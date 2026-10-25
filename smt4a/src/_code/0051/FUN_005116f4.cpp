@@ -26,9 +26,8 @@ extern HeapRecord DAT_006475e4;
 extern u8 entry;
 
 void expHeapBaseDestroyA(HeapOwner *owner);
-void FUN_0042ce40(HeapRecord *record);
-__weak int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
-void emptyStub_002f4370(void *object, void (*destroy)(void *), void *module);
+void _ZN17MappedMemoryBlockD1Ev(HeapRecord *record);
+int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
 /* Resets a heap owner and the shared heap record, registering each one's destructor. */
 void FUN_005116f4(HeapOwner *owner)
@@ -50,7 +49,7 @@ void FUN_005116f4(HeapOwner *owner)
     DAT_006475e4.flagA = 0;
     DAT_006475e4.next = 0;
     DAT_006475e4.flagB = 0;
-    emptyStub_002f4370(&DAT_006475e4, (void (*)(void *))FUN_0042ce40, &entry);
+    __aeabi_atexit(&DAT_006475e4, (void (*)(void *))_ZN17MappedMemoryBlockD1Ev, &entry);
 }
 
 } /* extern "C" */

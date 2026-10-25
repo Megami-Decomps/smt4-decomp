@@ -3,7 +3,7 @@
 #define SHARD_W4_MATCH3_INFOWINDOW_H
 
 #include "common.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
 
@@ -34,7 +34,7 @@ typedef struct InfoWindow {
     /* 0x033 */ u8 style;
     union {
         /* 0x034 */ u8 unk034[0x20];
-        /* 0x034 */ Params002c312c parameters;
+        /* 0x034 */ UiResourceParameters parameters;
     };
     union {
         /* 0x054 */ u8 sprite[0x118];

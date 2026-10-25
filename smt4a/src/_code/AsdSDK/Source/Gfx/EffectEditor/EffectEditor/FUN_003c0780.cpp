@@ -1,7 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0780` (_code @ 0x3c0780, 0x57c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "gfx/EffectEditorStorage.h"
+#include "shard/W6_W6Match6_EffectRender.h"
 extern "C" {
 
 int padButtonIsPressed(...);
@@ -14,7 +14,7 @@ int FUN_002b3ed8(unsigned int *, float *, unsigned int, int);
 int FUN_002f8794(void);
 int effMenuListAppend(void);
 int FUN_0038b810(void);
-int FUN_00390038(int);
+void FUN_00390038(const EffectPositionControl *);
 
 /* stack frame of param_2: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -39,18 +39,18 @@ extern float DAT_005c1110; /* 0x5c1110 */
 extern float DAT_005c1114; /* 0x5c1114 */
 extern float DAT_005c1118; /* 0x5c1118 */
 extern float DAT_005c111c; /* 0x5c111c */
-extern float g_effectEditorInitialVector; /* 0x634c90 */
-extern float DAT_00634c94; /* 0x634c94 */
-extern float DAT_00634c98; /* 0x634c98 */
-extern float DAT_00634c9c; /* 0x634c9c */
-extern float g_effectEditorVector; /* 0x6352f0 */
-extern float DAT_006352f4; /* 0x6352f4 */
-extern float DAT_006352f8; /* 0x6352f8 */
-extern float DAT_006352fc; /* 0x6352fc */
-extern unsigned int DAT_00635300; /* 0x635300 */
-extern unsigned int DAT_00635304; /* 0x635304 */
-extern unsigned int DAT_00635308; /* 0x635308 */
-extern unsigned int DAT_0063530c; /* 0x63530c */
+ /* 0x634c90 */
+ /* 0x634c94 */
+ /* 0x634c98 */
+ /* 0x634c9c */
+ /* 0x6352f0 */
+ /* 0x6352f4 */
+ /* 0x6352f8 */
+ /* 0x6352fc */
+ /* 0x635300 */
+ /* 0x635304 */
+ /* 0x635308 */
+ /* 0x63530c */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -89,7 +89,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_00390038. */
 
 
-unsigned int FUN_003c0780(int param_1,int param_2)
+u32 FUN_003c0780(EffectEditorSnapshot *record, s32 param_2)
 
 {
 /* irregular: 11 native warning(s); review required */
@@ -141,45 +141,45 @@ unsigned int FUN_003c0780(int param_1,int param_2)
       temp_v4 = 0;
     }
   }
-  DAT_00635300 = *(unsigned int *)(param_1 + 0x50);
-  DAT_00635304 = *(unsigned int *)(param_1 + 0x54);
-  DAT_00635308 = *(unsigned int *)(param_1 + 0x58);
-  DAT_0063530c = *(unsigned int *)(param_1 + 0x5c);
+  g_effectEditorRotation.bits.words[0] = record->parameters.fallback.words[0];
+  g_effectEditorRotation.bits.words[1] = record->parameters.fallback.words[1];
+  g_effectEditorRotation.bits.words[2] = record->parameters.fallback.words[2];
+  g_effectEditorRotation.bits.words[3] = record->parameters.fallback.words[3];
   if (param_2 != 0) {
-    FUN_00390038(param_1);
+    FUN_00390038(reinterpret_cast<const EffectPositionControl *>(record));
   }
   else {
-    DAT_006472dc = *(float *)(param_1 + 0x40);
-    DAT_006472e0 = *(float *)(param_1 + 0x44);
-    DAT_006472e4 = *(float *)(param_1 + 0x48);
-    DAT_006472e8 = *(float *)(param_1 + 0x4c);
+    DAT_006472dc = record->parameters.position.x;
+    DAT_006472e0 = record->parameters.position.y;
+    DAT_006472e4 = record->parameters.position.z;
+    DAT_006472e8 = record->parameters.position.w;
   }
   temp_v17 = DAT_006472e8;
   temp_v15 = DAT_006472e4;
   temp_v14 = DAT_006472e0;
   temp_v1 = DAT_006472dc;
-  g_effectEditorVector = DAT_006472dc;
-  DAT_006352f4 = DAT_006472e0;
-  DAT_006352f8 = DAT_006472e4;
-  DAT_006352fc = DAT_006472e8;
+  g_effectEditorVector.value.x = DAT_006472dc;
+  g_effectEditorVector.value.y = DAT_006472e0;
+  g_effectEditorVector.value.z = DAT_006472e4;
+  g_effectEditorVector.value.w = DAT_006472e8;
   if (DAT_0059dbe9 == '\0') {
     FUN_00200bcc(&DAT_0059ea88);
   }
   effEditorNodeChainApply(&DAT_0059ea88);
-  temp_v0 = DAT_0063530c;
-  temp_v13 = DAT_00635308;
-  temp_v12 = DAT_00635304;
-  *(unsigned int *)(param_1 + 0x50) = DAT_00635300;
-  *(unsigned int *)(param_1 + 0x54) = temp_v12;
-  *(unsigned int *)(param_1 + 0x58) = temp_v13;
-  *(unsigned int *)(param_1 + 0x5c) = temp_v0;
+  temp_v0 = g_effectEditorRotation.bits.words[3];
+  temp_v13 = g_effectEditorRotation.bits.words[2];
+  temp_v12 = g_effectEditorRotation.bits.words[1];
+  record->parameters.fallback.words[0] = g_effectEditorRotation.bits.words[0];
+  record->parameters.fallback.words[1] = temp_v12;
+  record->parameters.fallback.words[2] = temp_v13;
+  record->parameters.fallback.words[3] = temp_v0;
   if ((DAT_0059ea98 & 8) != 0) {
     temp_v4 = temp_v4 | 2;
   }
-  DAT_006472ec = g_effectEditorInitialVector;
-  DAT_006472f0 = DAT_00634c94;
-  DAT_006472f4 = DAT_00634c98;
-  DAT_006472f8 = DAT_00634c9c;
+  DAT_006472ec = g_effectEditorInitialVector.value.x;
+  DAT_006472f0 = g_effectEditorInitialVector.value.y;
+  DAT_006472f4 = g_effectEditorInitialVector.value.z;
+  DAT_006472f8 = g_effectEditorInitialVector.value.w;
   DAT_006472dc = (float)temp_v1;
   DAT_006472e0 = (float)temp_v14;
   DAT_006472e4 = (float)temp_v15;
@@ -189,10 +189,10 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   uStack_8c = DAT_006472e0;
   uStack_88 = DAT_006472e4;
   temp_v28 = DAT_006472e8;
-  DAT_006472dc = *(float *)(param_1 + 0x50);
-  DAT_006472e0 = *(float *)(param_1 + 0x54);
-  DAT_006472e4 = *(float *)(param_1 + 0x58);
-  DAT_006472e8 = *(float *)(param_1 + 0x5c);
+  DAT_006472dc = record->parameters.rotation.x;
+  DAT_006472e0 = record->parameters.rotation.y;
+  DAT_006472e4 = record->parameters.rotation.z;
+  DAT_006472e8 = record->parameters.rotation.w;
   FUN_001bc460();
   temp_v10 = DAT_00647354;
   temp_v8 = DAT_00647350;
@@ -276,10 +276,10 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   DAT_00647320 = temp_v7;
   DAT_0064731c = temp_v5;
   temp_v12 = 0x3f800000;
-  DAT_006472ec = g_effectEditorInitialVector;
-  DAT_006472f0 = DAT_00634c94;
-  DAT_006472f4 = DAT_00634c98;
-  DAT_006472f8 = DAT_00634c9c;
+  DAT_006472ec = g_effectEditorInitialVector.value.x;
+  DAT_006472f0 = g_effectEditorInitialVector.value.y;
+  DAT_006472f4 = g_effectEditorInitialVector.value.z;
+  DAT_006472f8 = g_effectEditorInitialVector.value.w;
   DAT_0064734c = (float)temp_v1;
   DAT_00647358 = (float)temp_v17;
   DAT_00647350 = (float)temp_v14;
@@ -325,10 +325,10 @@ unsigned int FUN_003c0780(int param_1,int param_2)
   DAT_00647324 = temp_v10;
   DAT_00647320 = temp_v8;
   DAT_0064731c = temp_v6;
-  DAT_006472ec = g_effectEditorInitialVector;
-  DAT_006472f0 = DAT_00634c94;
-  DAT_006472f4 = DAT_00634c98;
-  DAT_006472f8 = DAT_00634c9c;
+  DAT_006472ec = g_effectEditorInitialVector.value.x;
+  DAT_006472f0 = g_effectEditorInitialVector.value.y;
+  DAT_006472f4 = g_effectEditorInitialVector.value.z;
+  DAT_006472f8 = g_effectEditorInitialVector.value.w;
   DAT_0064734c = (float)temp_v1;
   DAT_006472dc = 0.0f;
   DAT_006472e0 = 0.0f;

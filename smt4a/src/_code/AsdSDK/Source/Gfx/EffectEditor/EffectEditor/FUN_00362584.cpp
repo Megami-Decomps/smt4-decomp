@@ -1,8 +1,7 @@
 /* NON_MATCHING: layout and instruction sequence match; only register numbering differs: retail keeps &g_effectEditor in r7, the dir literal in r6 and the locals' base in r5 (loading &g_effectEditor and the result before allocating the frame) and reads the node state through r0, so it reloads the label before the inlined `mov r0, #0` stub; this build uses r6/r5/r7 and r1 and omits that reload. */
-#include "shard/W6_W6Match2_EffectEditor.h"
+#include "gfx/EffectEditorStorage.h"
 
 extern "C" {
-extern char g_effectEditorResourceName[0x50];
 void engineFreeCallback(void* memory);
 void FUN_00375ec8(EffMenuNode* node);
 void namedObjectFormatFullName(EffMenuNode* node, char* dest);

@@ -6,7 +6,7 @@ int FUN_00384ad8(void *target);
 
 extern QcGlobals g_qcMain;
 
-u32 FUN_001fe19c(void)
+s32 FUN_001fe19c(u32 handle)
 {
     QcWork *target = g_qcMain.work;
     void *sub;

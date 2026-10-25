@@ -15,8 +15,7 @@ typedef char SpritePanelResourceOffsets[
 extern "C" {
 extern const SpritePanelResourceBundle DAT_0052d140;
 void paramsClearPacket(UiResourceParameters *);
-void paramsInit(UiResourceParameters *, const void *, u32, const void *, u32,
-                const void *, u32, const void *, u32, const void *, u32);
+
 void FUN_0014e188(UiSpriteState *, u32, s32, UiResourceParameters *, u32, f32);
 void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);

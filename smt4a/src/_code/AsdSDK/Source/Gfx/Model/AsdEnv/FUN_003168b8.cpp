@@ -62,7 +62,7 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: sceneNodeAttachDeclaredChild. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
-extern short wstrlen(int);
+extern short libc_strlen(int);
 extern int asdModelGetSlotArray2(fn_003168b8_arg1 *);
 extern int asdModelGetSlotArray1(fn_003168b8_arg1 *);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -220,7 +220,7 @@ LAB_00316ab4:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v1 = wstrlen(temp_v6);
+        temp_v1 = libc_strlen(temp_v6);
         temp_v2 = *psVar22;
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
@@ -258,7 +258,7 @@ LAB_00316b80:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v2 = wstrlen(temp_v6);
+        temp_v2 = libc_strlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -296,7 +296,7 @@ LAB_00316c58:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v2 = wstrlen(temp_v6);
+        temp_v2 = libc_strlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }
@@ -335,7 +335,7 @@ LAB_00316d2c:
         if (temp_v6 != 0) {
           temp_v6 = temp_v6 + temp_v9 + 0xc;
         }
-        temp_v2 = wstrlen(temp_v6);
+        temp_v2 = libc_strlen(temp_v6);
         if (*(int *)(temp_v7 + 0xc) != 0) {
           temp_v9 = temp_v7 + 0xc + *(int *)(temp_v7 + 0xc);
         }

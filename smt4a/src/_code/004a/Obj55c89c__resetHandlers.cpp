@@ -16,7 +16,7 @@ extern int FUN_004a2064(...); /* 0x4a2064 */
 extern int _ZN13BibleItemMenu7confirmEv(...); /* 0x4a2238 */
 extern int FUN_004a2404(...); /* 0x4a2404 */
 extern int FUN_004a24a8(...); /* 0x4a24a8 */
-extern int FUN_004a2ee0(...); /* 0x4a2ee0 */
+extern int uiCursorEnterModeNine(...); /* 0x4a2ee0 */
 extern int demonScreenConfirmSaveRefresh(...); /* 0x4a2f8c */
 extern int FUN_004a3154(...); /* 0x4a3154 */
 extern int uiAnimatedPageToggleStep(...); /* 0x4a35e4 */
@@ -76,7 +76,7 @@ void Obj55c89c::resetHandlers()
   *(unsigned int *)(param_1 + 0xa8d4) = 0;
   *(romwright_code **)(param_1 + 0xa8d8) = FUN_004a15a0;
   *(unsigned int *)(param_1 + 0xa8dc) = 0;
-  *(romwright_code **)(param_1 + 0xa8e0) = FUN_004a2ee0;
+  *(romwright_code **)(param_1 + 0xa8e0) = uiCursorEnterModeNine;
   *(unsigned int *)(param_1 + 0xa8e4) = 0;
   *(unsigned int *)(param_1 + 0xa8e8) = 0x4a321c;
   *(unsigned int *)(param_1 + 0xa8ec) = 0;

@@ -9,7 +9,6 @@ s32 wstrlenU16(const u16 *text);
 s32 archiveTryOpenFile(void **file, u32 archiveFirst, u32 archiveSecond, const ArchiveIconPath *path, u32 mode);
 s32 nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(u32 *readSize, void *file, s64 offset, void *output, u32 size);
 void vcallSlot12IfValid(void *object);
-ValidationPair *_ZN18WindowStatusResultC1Ej(ValidationPair *result, s32 status);
 }
 
 inline ArchiveIconFile::ArchiveIconFile() : object(NULL)
@@ -33,17 +32,11 @@ inline s32 ArchiveIconFile::tryOpen(ArchiveIconSource source, const ArchiveIconP
     return archiveTryOpenFile(&object, source.first, source.second, &path, 1);
 }
 
-static inline ValidationPair iconReadResult(s32 status)
-{
-    ValidationPair result;
-    _ZN18WindowStatusResultC1Ej(&result, status);
-    return result;
-}
 
-extern "C" ValidationPair archiveReadIcon(const ArchiveIconSource *source, void *output, u32 iconId)
+extern "C" WindowStatusResult archiveReadIcon(const ArchiveIconSource *source, void *output, u32 iconId)
 {
     if ((source->first | source->second) == 0) {
-        return iconReadResult(static_cast<s32>(0xe0a13882));
+        return WindowStatusResult(0xe0a13882);
     }
     char path[48];
     u16 widePath[48];
@@ -53,15 +46,15 @@ extern "C" ValidationPair archiveReadIcon(const ArchiveIconSource *source, void 
     s32 status = file.tryOpen(*source, ArchiveIconPath(widePath));
     if (nnResultModule(status) == 17 &&
         nnResultDescription(status) >= 100 && nnResultDescription(status) <= 179) {
-        return iconReadResult(static_cast<s32>(0xd881388c));
+        return WindowStatusResult(0xd881388c);
     }
     if (nnResultIsFailure(status)) {
-        return iconReadResult(status);
+        return WindowStatusResult(static_cast<u32>(status));
     }
     u32 readSize;
     status = nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(&readSize, file.object, 0, output, 0x1200);
     if (nnResultIsFailure(status)) {
-        return iconReadResult(status);
+        return WindowStatusResult(static_cast<u32>(status));
     }
-    return iconReadResult(0);
+    return WindowStatusResult(0);
 }

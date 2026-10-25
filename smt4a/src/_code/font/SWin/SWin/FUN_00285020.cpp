@@ -1,13 +1,13 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 struct SWinWork {
     u32 process;
     u32 unk04;
     u32 values[8];
-    Params002c312c parameters;
+    UiResourceParameters parameters;
     UiAnimatedSprite sprite;
 };
 typedef char SWinWorkLayoutCheck[sizeof(SWinWork) == 0xD4 &&
@@ -25,10 +25,9 @@ u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDel
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
-void paramsClearPacket(Params002c312c *packet);
-void paramsInit(Params002c312c *packet, s32 x, s32 y, const void *first, s32 firstCount,
-    const void *second, s32 secondCount, u32 a, u32 b, u32 c, u32 d);
-void FUN_0014e188(UiAnimatedSprite *sprite, s32 group, s32 entry, Params002c312c *parameters,
+void paramsClearPacket(UiResourceParameters *packet);
+
+void FUN_0014e188(UiAnimatedSprite *sprite, s32 group, s32 entry, UiResourceParameters *parameters,
     s32 flags, f32 speed);
 
 void FUN_00285020(s32 raisedPriority)

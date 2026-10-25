@@ -23,7 +23,8 @@ struct Placement {
 
 extern BustupCutAnim *g_bustupCutAnim;
 extern u32 DAT_0043e048[];
-s32 modelHasLoadedAttachment(void);
+struct ModelBoneAttachmentRoot;
+s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 u32 FUN_002adde8(u32 handle, u32 mode, Placement *placement);
 
 /* Applies the bust-up animation `mode` to a placement (adding the cut offset in mode 0); 1 if unavailable. */
@@ -35,7 +36,7 @@ u32 FUN_002a4e18(Placement *placement, s32 mode)
     if (cut == NULL) {
         return 0;
     }
-    if (cut->anim == NULL || modelHasLoadedAttachment() == 0) {
+    if (cut->anim == NULL || modelHasLoadedAttachment(reinterpret_cast<const ModelBoneAttachmentRoot *>(cut->anim)) == 0) {
         return 1;
     }
     result = FUN_002adde8(cut->anim->handle, DAT_0043e048[mode], placement);

@@ -2,7 +2,7 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 s16 battleGetEntryHalfword(s32 entryIndex, u32 kind);
 
 // Queue a target action, advancing the entry sequence when a matching target is already queued.

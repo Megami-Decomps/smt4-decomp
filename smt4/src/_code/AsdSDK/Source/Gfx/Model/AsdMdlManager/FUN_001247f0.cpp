@@ -52,7 +52,7 @@ void FUN_00138d0c(u32 instance, MdlModel *model, s32 node, u32 index);
 void FUN_0014ed58(MdlBody *body, u32 argument);
 void asdMdlNodeInit(s32 owner, u32 index);
 void asdListAdd(MdlListEntry **list, MdlListEntry *entry, s32 flag);
-void FUN_002b26d4(MdlListEntry **list, MdlListEntry *entry);
+void indexedListErase(MdlListEntry **list, MdlListEntry *entry);
 void asdMdlObjectBuildBounds(MdlListEntry *entry);
 void FUN_002b2988(u32 result, s32 size);
 void FUN_002b2ae8(u32 owner, s32 node, s32 *out);
@@ -131,7 +131,7 @@ void FUN_001247f0(void)
         *reinterpret_cast<u32 *>(model->body->owner + 4) = result;
         asdMdlNodeInit(model->body->owner, *reinterpret_cast<u32 *>(model->body->owner + 8) & 0xFFFF);
         asdMdlObjectBuildBounds(entry);
-        FUN_002b26d4(&g_asdMdlList2, entry);
+        indexedListErase(&g_asdMdlList2, entry);
         asdListAdd(&g_asdMdlList, entry, 0);
         accepted++;
     }

@@ -73,7 +73,7 @@ EntryRecord *FUN_00184310(u16 index);
 EntryRecord *FUN_00389f0c(u16 index);
 s32 FUN_0032fbd0(void *slot);
 s32 FUN_002a4b28(u16 id);
-void FUN_004a8584(u8 *out, u16 id, s32 flag);
+void campFillUnitComparison(u8 *out, u16 id, s32 flag);
 u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
 void inventoryListAppend(EntryList *list, u8 *entry);
 u8 *FUN_0026140c(void);
@@ -109,7 +109,7 @@ void FUN_004a1958(EntryScreen *screen)
                 if (FUN_002a4b28(record->id) != 0 || screen->showUnowned != 0) {
                     u8 entry[8];
 
-                    FUN_004a8584(entry, record->id, 0);
+                    campFillUnitComparison(entry, record->id, 0);
                     FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
                     inventoryListAppend(&screen->list, entry);
                 }
@@ -162,7 +162,7 @@ void FUN_004a1958(EntryScreen *screen)
                     EntryRecord *record = FUN_00184310(slot->entryId);
                     u8 entry[8];
 
-                    FUN_004a8584(entry, record->id, 1);
+                    campFillUnitComparison(entry, record->id, 1);
                     FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
                     inventoryListAppend(&screen->list, entry);
                 }

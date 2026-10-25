@@ -1,65 +1,55 @@
-/* NON_MATCHING: near miss: only register allocation and constant load order differ (retail addresses the object relative to its active byte with writeback and loads the hoisted constants in another order). */
-#include "common.h"
-
-struct MapVec3 {
-    f32 x, y, z;
-};
-
-/* A map object slot (0x48 bytes, accessed fields). */
-struct MapObject {
-    u8 unk00[4];
-    MapVec3 position;       // 0x04
-    u8 unk10[4];
-    u8 active;              // 0x14
-    u8 unk15[7];
-    f32 heading;            // 0x1C (degrees)
-    u8 unk20[4];
-    s32 kind;               // 0x24
-    u8 unk28[0x20];
-};
+/* NON_MATCHING: map request prefix and slot-relative fields are corrected; ambient-effect register scheduling still differs. */
+#include "map/mapObj.h"
+#include "map/mapDepart.h"
 
 extern "C" {
-extern MapObject *g_mapObj;
-extern struct { s32 mode; s32 submode; } g_gameState;
+extern MapObjectState *g_mapObj;
+extern GameState g_gameState;
 f32 FUN_0028250c(f32 radians);
 f32 FUN_00282390(f32 radians);
-void FUN_002671f4(s32 slot, MapVec3 position, f32 heading, f32 a, f32 b, f32 c);
+void FUN_002671f4(s32 slot, MapVector position, f32 heading, f32 a, f32 b, f32 c);
+}
+
+static inline MapVector mapObjectPosition(const MapObjectSlot *object)
+{
+    MapVector position = { object->unk04, object->unk08, object->unk0c };
+    return position;
 }
 
 /* Spawn the effect of one map object kind, offset along its heading. */
-static __inline void spawnOffsetEffect(const MapObject *object, f32 height, f32 distance, f32 a, f32 b, f32 c)
+static __inline void spawnOffsetEffect(const MapObjectSlot *object, f32 height, f32 distance, f32 a, f32 b, f32 c)
 {
-    MapVec3 position = object->position;
-    position.y = object->position.y - height;
-    position.x += FUN_0028250c(object->heading * 0.017453292f) * distance;
-    position.z += FUN_00282390(object->heading * 0.017453292f) * distance;
-    FUN_002671f4(0, position, object->heading, a, b, c);
+    MapVector position = mapObjectPosition(object);
+    position.y -= height;
+    position.x += FUN_0028250c(object->unk1c * 0.017453292f) * distance;
+    position.z += FUN_00282390(object->unk1c * 0.017453292f) * distance;
+    FUN_002671f4(0, position, object->unk1c, a, b, c);
 }
 
 /* Spawn the ambient effects of every active map object, by kind. */
 extern "C" void FUN_0027ae90(void)
 {
     for (s32 i = 0; i < 24; i++) {
-        MapObject *object = &g_mapObj[i];
+        MapObjectSlot *object = &g_mapObj->slots[i];
         if (object->active == 0)
             continue;
-        if (g_gameState.mode != 4 || g_gameState.submode != 1) {
-            if (object->kind == 2)
+        if (g_gameState.unk000 != 4 || g_gameState.unk004Value != 1) {
+            if (object->state == 2)
                 spawnOffsetEffect(object, 400.0f, 20.0f, 80.0f, 350.0f, 50.0f);
-            if (object->kind == 10)
+            if (object->state == 10)
                 spawnOffsetEffect(object, 550.0f, 20.0f, 80.0f, 500.0f, 50.0f);
         }
-        if (object->kind == 7)
+        if (object->state == 7)
             spawnOffsetEffect(object, 0.0f, -17.5f, 200.0f, 300.0f, 50.0f);
-        if (object->kind == 9)
+        if (object->state == 9)
             spawnOffsetEffect(object, 0.0f, -17.5f, 150.0f, 300.0f, 50.0f);
-        if (object->kind == 11)
+        if (object->state == 11)
             spawnOffsetEffect(object, 0.0f, -17.5f, 200.0f, 300.0f, 50.0f);
-        if (object->kind == 15)
-            FUN_002671f4(0, object->position, object->heading, 50.0f, 50.0f, 50.0f);
-        if (object->kind == 16)
-            FUN_002671f4(0, object->position, object->heading, 50.0f, 50.0f, 50.0f);
-        if (object->kind == 17)
-            FUN_002671f4(0, object->position, object->heading, 100.0f, 50.0f, 60.0f);
+        if (object->state == 15)
+            FUN_002671f4(0, mapObjectPosition(object), object->unk1c, 50.0f, 50.0f, 50.0f);
+        if (object->state == 16)
+            FUN_002671f4(0, mapObjectPosition(object), object->unk1c, 50.0f, 50.0f, 50.0f);
+        if (object->state == 17)
+            FUN_002671f4(0, mapObjectPosition(object), object->unk1c, 100.0f, 50.0f, 60.0f);
     }
 }

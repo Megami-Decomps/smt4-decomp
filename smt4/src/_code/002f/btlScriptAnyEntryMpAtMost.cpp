@@ -1,5 +1,4 @@
-/* NON_MATCHING: retail rebases MP accesses at entry+0xcc; the flat layout rebases at +0x100 and changes multiply/divide register scheduling. */
-#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/EntryStats.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -21,16 +20,26 @@ u32 btlScriptAnyEntryMpAtMost(void)
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&
             !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
-            entry->id == id && entry->mp * 100 / entry->maxMp <= percent) {
-            scrSetResult(1);
-            return 1;
+            entry->id == id) {
+            BtlEntryMpStats *stats = btlEntryGetStats(entry);
+            s32 mp = stats->mp;
+            s32 maxMp = stats->maxMp;
+            if (mp * 100 / maxMp <= percent) {
+                scrSetResult(1);
+                return 1;
+            }
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry && entry->id == id && entry->mp * 100 / entry->maxMp <= percent) {
-            scrSetResult(1);
-            return 1;
+        if (entry && entry->id == id) {
+            BtlEntryMpStats *stats = btlEntryGetStats(entry);
+            s32 mp = stats->mp;
+            s32 maxMp = stats->maxMp;
+            if (mp * 100 / maxMp <= percent) {
+                scrSetResult(1);
+                return 1;
+            }
         }
     }
     scrSetResult(0);

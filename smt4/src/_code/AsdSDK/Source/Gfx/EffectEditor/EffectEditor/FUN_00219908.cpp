@@ -1,15 +1,8 @@
 /* NON_MATCHING: the stick values stay unwritten as in retail (its stub call was inlined away) but the argument setup for that call is not emitted, the phase samples are inlined in another order and register assignment differs (237 vs 234 rows); the free camera update is the same. */
-#include "shard/W6_W6Match6_PhaseTrig.h"
+#include "gfx/EffectEditorStorage.h"
 
 extern "C" {
 
-/* The editor's free camera: position and rotation (degrees), kept as two vectors. */
-extern PhaseVector DAT_004d924c;     /* camera position offset */
-extern PhaseVector DAT_004d9258;     /* camera rotation (degrees) */
-extern PhaseVector DAT_004d9240;     /* orbit centre */
-extern PhaseVector g_effectEditorCameraDefaults;     /* orbit anchor */
-extern PhaseVector DAT_004d9234;     /* up vector */
-extern u8 g_effectEditorCamera[];            /* the editor camera */
 extern const PhaseTrigEntry DAT_00407ed0[];
 
 s32 padIsButtonPressed(u32 button);
@@ -29,31 +22,31 @@ void FUN_00219908(void)
     PhaseVector eye;
 
     if (padIsButtonPressed(27) != 0) {
-        DAT_004d924c.x = 0.0f;
-        DAT_004d924c.y = 0.0f;
-        DAT_004d924c.z = 0.0f;
-        DAT_004d9258.x = 0.0f;
-        DAT_004d9258.y = 0.0f;
-        DAT_004d9258.z = 0.0f;
+        g_effectEditorCameraDefaults.offset.x = 0.0f;
+        g_effectEditorCameraDefaults.offset.y = 0.0f;
+        g_effectEditorCameraDefaults.offset.z = 0.0f;
+        g_effectEditorCameraDefaults.rotation.x = 0.0f;
+        g_effectEditorCameraDefaults.rotation.y = 0.0f;
+        g_effectEditorCameraDefaults.rotation.z = 0.0f;
     }
-    DAT_004d9258.y += stick[2] * 3.2f;
-    DAT_004d9258.x -= stick[3] * 3.2f;
+    g_effectEditorCameraDefaults.rotation.y += stick[2] * 3.2f;
+    g_effectEditorCameraDefaults.rotation.x -= stick[3] * 3.2f;
     if (FUN_002c15fc(28) == 0) {
-        DAT_004d924c.x += stick[0] * 10.0f;
-        DAT_004d924c.z -= stick[1] * 10.0f;
+        g_effectEditorCameraDefaults.offset.x += stick[0] * 10.0f;
+        g_effectEditorCameraDefaults.offset.z -= stick[1] * 10.0f;
     }
     if (FUN_002c15fc(23) != 0) {
-        DAT_004d924c.y -= 5.0f;
+        g_effectEditorCameraDefaults.offset.y -= 5.0f;
     }
     if (FUN_002c15fc(18) != 0) {
-        DAT_004d924c.y += 5.0f;
+        g_effectEditorCameraDefaults.offset.y += 5.0f;
     }
-    offset.x = g_effectEditorCameraDefaults.x - DAT_004d9240.x;
-    offset.y = g_effectEditorCameraDefaults.y - DAT_004d9240.y;
-    offset.z = g_effectEditorCameraDefaults.z - DAT_004d9240.z;
-    PhaseSinCos a = samplePhase(DAT_00407ed0, DAT_004d9258.x * 0.71111107f);
-    PhaseSinCos b = samplePhase(DAT_00407ed0, DAT_004d9258.y * 0.71111107f);
-    PhaseSinCos c = samplePhase(DAT_00407ed0, DAT_004d9258.z * 0.71111107f);
+    offset.x = g_effectEditorCameraDefaults.eye.x - g_effectEditorCameraDefaults.target.x;
+    offset.y = g_effectEditorCameraDefaults.eye.y - g_effectEditorCameraDefaults.target.y;
+    offset.z = g_effectEditorCameraDefaults.eye.z - g_effectEditorCameraDefaults.target.z;
+    PhaseSinCos a = samplePhase(DAT_00407ed0, g_effectEditorCameraDefaults.rotation.x * 0.71111107f);
+    PhaseSinCos b = samplePhase(DAT_00407ed0, g_effectEditorCameraDefaults.rotation.y * 0.71111107f);
+    PhaseSinCos c = samplePhase(DAT_00407ed0, g_effectEditorCameraDefaults.rotation.z * 0.71111107f);
 
     matrix[0] = c.cosine * b.cosine;
     matrix[1] = a.sine * c.cosine * b.sine - a.cosine * c.sine;
@@ -68,13 +61,13 @@ void FUN_00219908(void)
     matrix[10] = a.cosine * b.cosine;
     matrix[11] = 0.0f;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(&offset, matrix);
-    center.x = DAT_004d9240.x + DAT_004d924c.x;
-    center.y = DAT_004d9240.y + DAT_004d924c.y;
-    center.z = DAT_004d9240.z + DAT_004d924c.z;
+    center.x = g_effectEditorCameraDefaults.target.x + g_effectEditorCameraDefaults.offset.x;
+    center.y = g_effectEditorCameraDefaults.target.y + g_effectEditorCameraDefaults.offset.y;
+    center.z = g_effectEditorCameraDefaults.target.z + g_effectEditorCameraDefaults.offset.z;
     eye.x = center.x + offset.x;
     eye.y = center.y + offset.y;
     eye.z = center.z + offset.z;
-    FUN_002c1edc(g_effectEditorCamera, &eye, &center, &DAT_004d9234);
+    FUN_002c1edc(&g_effectEditorCamera, &eye, &center, &g_effectEditorCameraDefaults.up);
 }
 
 }

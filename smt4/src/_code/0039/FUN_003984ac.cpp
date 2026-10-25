@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 204 rows); retail copies the 12-entry handler table with unrolled ldrd/ldm pairs and reads the string/table addresses through literal-pool constants */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 // A player/partner name buffer: 16 bytes plus a terminator halfword, starts on a halfword.
@@ -80,7 +81,6 @@ void FUN_0029f848(void* grid, s32 a, s32 b, s32 c, s32 d, s32 e);
 u32 asdLoadFileSyncDefault(const char* path);
 u32 FUN_00297060(u32 scriptFile, u32 layoutFile);
 void drawParameterBlockClear(void);
-void paramsInit(void* block, void* a, s32 aSize, void* b, s32 bSize, s32 c, s32 d, s32 e, s32 f, void* g, s32 gSize);
 void FUN_002bd954(void* sprite, s32 sheet, s32 index, void* params, f32 scale, s32 flag);
 void spriteStartAnimationByIndex(void* sprite, s32 index);
 void timerStart(void* sprite, s32 a, s32 b);
@@ -124,7 +124,7 @@ void FUN_003984ac(NameForm* form, u8 mode)
     form->scriptFile = asdLoadFileSyncDefault("name/name.bf");
     form->resource = FUN_00297060(form->scriptFile, form->layoutFile);
     drawParameterBlockClear();
-    paramsInit(form->params, DAT_004055d0, 0x18, DAT_004055e8, 0x24, 0, 0, 0, 0, DAT_0040560c, 0x70);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(form->params), DAT_004055d0, 0x18, DAT_004055e8, 0x24, 0, 0, 0, 0, DAT_0040560c, 0x70);
     FUN_002bd954(form->cursorSprite, 0x2e, 0, form->params, 1.0f, 1);
     spriteStartAnimationByIndex(form->cursorSprite, 0);
     FUN_002bd954(form->blinkSprite, 0x2e, 0, form->params, 1.0f, 1);

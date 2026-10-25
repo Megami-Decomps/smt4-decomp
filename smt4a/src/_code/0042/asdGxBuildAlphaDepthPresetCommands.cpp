@@ -1,6 +1,7 @@
 /* NON_MATCHING: zero/five/six constants use different registers and alpha-function store is scheduled after the final argument setup. */
 #include "shard/W6_W6Match4_GxDrawSettings.h"
 
+
 extern "C" {
 void _ZN9SlotStateC1Ev(GxDrawSettings *settings);
 u32 *gxDrawSettingsMakeCommand(GxDrawSettings *settings, u32 *commands, s32 mode);

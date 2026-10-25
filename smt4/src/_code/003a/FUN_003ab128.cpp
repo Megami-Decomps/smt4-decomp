@@ -18,7 +18,7 @@ u32 statusDownGetValue(void);
 s32 statusScreenIsClosed(void);
 u32 vec2GetYInt(void *vec);
 u32 vec2GetXInt(void *vec);
-s32 recordGetSignedFlags(const void *record);
+s32 uiSpriteGetCompletionState(const void *record);
 
 // One selectable entry of the status list (0x20 bytes).
 struct StatusListEntry {
@@ -29,7 +29,7 @@ struct StatusListEntry {
     /* 0x10 */ u8 unk10[0x10];
 };
 
-// Selection cursor (0x8c bytes); its done flag is a signed byte at +0x8a read through recordGetSignedFlags.
+// Selection cursor (0x8c bytes); its done flag is a signed byte at +0x8a read through uiSpriteGetCompletionState.
 struct StatusCursor {
     /* 0x00 */ u8 body[0x8c];
 };
@@ -71,7 +71,7 @@ void FUN_003ab128(StatusFlow *flow)
         StatusCursor *cursor = &flow->cursorB;
         FUN_002bf818(cursor);
         pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
-        if (recordGetSignedFlags(cursor) != 0) {
+        if (uiSpriteGetCompletionState(cursor) != 0) {
             flow->state++;
         }
         return;
@@ -95,7 +95,7 @@ void FUN_003ab128(StatusFlow *flow)
         StatusCursor *cursor = &flow->cursorA;
         FUN_002b8ee0(cursor, 0);
         pointConvertToFloat(flow->pointer, vec2GetXInt(cursor), vec2GetYInt(cursor));
-        if (recordGetSignedFlags(cursor) == 0) {
+        if (uiSpriteGetCompletionState(cursor) == 0) {
             return;
         }
         if (buttonHelpIsNotActive() == 0) {

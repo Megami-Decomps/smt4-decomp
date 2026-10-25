@@ -1,7 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024233c` (_code @ 0x24233c, 0x4b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "gfx/EffectEditorStorage.h"
 extern "C" {
 
 int effBlockCreate(void);
@@ -62,10 +61,10 @@ extern unsigned int DAT_0044f8d0; /* 0x44f8d0 */
 extern unsigned int DAT_0044f8d4; /* 0x44f8d4 */
 extern int DAT_0044f8dc; /* 0x44f8dc */
 extern unsigned int DAT_0044f8e0; /* 0x44f8e0 */
-extern unsigned char g_effectEditorSavedSnapshot; /* 0x4d8ca0 */
-extern unsigned int uRam004d8ce0; /* 0x4d8ce0 */
-extern unsigned int uRam004d8ce4; /* 0x4d8ce4 */
-extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
+ /* 0x4d8ca0 */
+ /* 0x4d8ce0 */
+ /* 0x4d8ce4 */
+ /* 0x4d8ce8 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -266,9 +265,9 @@ LAB_002424b8:
           DAT_0044ea90 = 0;
         }
         FUN_002a3d58(&g_effectEditorSavedSnapshot);
-        uRam004d8ce0 = *(unsigned int *)(param_2 + 0xc);
-        uRam004d8ce4 = *(unsigned int *)(param_2 + 0x10);
-        uRam004d8ce8 = *(unsigned int *)(param_2 + 0x14);
+        g_effectEditorSavedSnapshot.payload.saved.words[0] = *(unsigned int *)(param_2 + 0xc);
+        g_effectEditorSavedSnapshot.payload.saved.words[1] = *(unsigned int *)(param_2 + 0x10);
+        g_effectEditorSavedSnapshot.payload.saved.words[2] = *(unsigned int *)(param_2 + 0x14);
         temp_v5 = effBlockLoadClone(*(unsigned int *)(param_2 + 8));
         temp_v6 = temp_v5;
         effBlockCreateFromBlock();

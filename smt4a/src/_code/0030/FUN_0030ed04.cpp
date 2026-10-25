@@ -8,7 +8,7 @@ int asdOperatorNewC(void);
 int libc_strcpy(void);
 int FUN_0030f220(...);
 
-extern int wstrlen(void);
+extern int libc_strlen(void);
 /* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_0030f220. */
@@ -25,7 +25,7 @@ FUN_0030ed04(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v0 = FUN_0030f220(param_3,0,param_3,param_4,param_4);
   param_1[1] = temp_v0;
   if (temp_v0 != 0) {
-    temp_v0 = wstrlen();
+    temp_v0 = libc_strlen();
     temp_v0 = temp_v0 + 1;
     asdOperatorNewC();
     libc_strcpy();

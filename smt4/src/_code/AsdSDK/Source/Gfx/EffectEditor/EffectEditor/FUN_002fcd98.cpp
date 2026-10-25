@@ -1,6 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fcd98` (_code @ 0x2fcd98, 0xfcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gfx/EffectEditorStorage.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 
 extern "C" {
@@ -64,7 +64,6 @@ extern unsigned char LAB_002fdd94; /* 0x2fdd94 */
 extern int FUN_00313704(...); /* 0x313704 */
 extern int FUN_003238d0(...); /* 0x3238d0 */
 extern int effectPollResourceFileDialog(...); /* 0x32465c */
-extern signed char g_effectEditor; /* 0x44ea80 */
 extern unsigned char DAT_0044ea81; /* 0x44ea81 */
 extern signed char DAT_0044ea86; /* 0x44ea86 */
 extern signed char DAT_0044ea87; /* 0x44ea87 */
@@ -95,10 +94,6 @@ extern char s_LOAD_PARTS_0044fe68[11]; /* 0x44fe68 */
 extern char s_NEW__PARTS_0044fe73[11]; /* 0x44fe73 */
 extern char s_SAVE_EPL__0044fe7e[10]; /* 0x44fe7e */
 extern char s_LOAD_EPL__0044fe88[10]; /* 0x44fe88 */
-extern unsigned int g_effectEditorInitialVector; /* 0x4d8c10 */
-extern unsigned int g_effectEditorWorkingSnapshot; /* 0x4d8c20 */
-extern unsigned int uRam004d8c84; /* 0x4d8c84 */
-extern unsigned char g_effectEditorSavedSnapshot; /* 0x4d8ca0 */
 
 /* Supplied declaration required: effPartCreate. */
 extern unsigned int FUN_0021a468(int);
@@ -288,7 +283,7 @@ LAB_002fd050:
   puVar12 = (unsigned char *)0x80;
   temp_v12 = temp_v4 + temp_v9 * 0x18;
   temp_v3 = temp_v4;
-  __aeabi_memcpy4(&g_effectEditorWorkingSnapshot,DAT_0044ea94);
+  __aeabi_memcpy4(&g_effectEditorWorkingSnapshot,DAT_0044ea94,0x80);
   if (temp_v11 != 0) {
     unaff_r11 = 0x44f4d4;
   }
@@ -562,7 +557,7 @@ LAB_002fd1c8:
       FUN_002a3958();
       FUN_002a3ab0(DAT_0044ea90,&g_effectEditorInitialVector);
       FUN_002a36fc(DAT_0044ea90);
-      FUN_002a353c(DAT_0044ea90,uRam004d8c84);
+      FUN_002a353c(DAT_0044ea90,g_effectEditorWorkingSnapshot.parameters.value);
     }
   }
   else {
@@ -587,7 +582,7 @@ LAB_002fd78c:
     DAT_0044ea86 = '\0';
   }
 LAB_002fd8ac:
-  if (g_effectEditor != '\0') {
+  if (g_effectEditor.unk00[0] != '\0') {
     asdDebugLog(0xaa,0,6,&LAB_002fd9d4);
   }
   if (DAT_0044ea90 != 0) {

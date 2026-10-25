@@ -8,7 +8,7 @@ int FUN_002b5c50(...);
 int SBORROW4(...);
 int coproc_moveto_Data_Memory_Barrier(...);
 int ll_sdiv(...);
-int nn_fnd_DateTime_DateTime_sub_object(unsigned int *, int, int, int, int, int, int, int);
+int _ZN2nn3fnd8DateTimeC1Eiiiiiii(unsigned int *, int, int, int, int, int, int, int);
 int software_interrupt(...);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
@@ -39,7 +39,7 @@ extern unsigned int uRam1ff81000; /* 0x1ff81000 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002b5c50. */
 /* Supplied declaration required: ll_sdiv. */
-/* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
+/* Supplied declaration required: _ZN2nn3fnd8DateTimeC1Eiiiiiii. */
 
 
 long long FUN_0011c95c(void)
@@ -77,16 +77,16 @@ long long FUN_0011c95c(void)
   unsigned int temp_v25 [3];
   
   puVar3 = temp_v24;
-  nn_fnd_DateTime_DateTime_sub_object(puVar3,2000,1,1,0,0,0,0);
+  _ZN2nn3fnd8DateTimeC1Eiiiiiii(puVar3,2000,1,1,0,0,0,0);
   temp_v1 = (unsigned long long)(*puVar3 - DAT_0044e630) * 1000000;
   temp_v22 = (unsigned int)temp_v1;
   temp_v23 = (puVar3[1] - (DAT_0044e634 + (unsigned int)(*puVar3 < DAT_0044e630))) * 1000000 +
              (int)((unsigned long long)temp_v1 >> 0x20);
   temp_v21 = FUN_002b5c50(&temp_v22,temp_v23,0xd7b634db,0x431bde82,0x12);
   puVar3 = temp_v24;
-  nn_fnd_DateTime_DateTime_sub_object(puVar3,0x834,1,1,0,0,0,0);
+  _ZN2nn3fnd8DateTimeC1Eiiiiiii(puVar3,0x834,1,1,0,0,0,0);
   puVar4 = temp_v25;
-  nn_fnd_DateTime_DateTime_sub_object(puVar4,2000,1,1,0,0,0,0);
+  _ZN2nn3fnd8DateTimeC1Eiiiiiii(puVar4,2000,1,1,0,0,0,0);
   temp_v1 = (unsigned long long)(*puVar3 - *puVar4) * 1000000;
   temp_v22 = (unsigned int)temp_v1;
   temp_v23 = (puVar3[1] - (puVar4[1] + (unsigned int)(*puVar3 < *puVar4))) * 1000000 +

@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-extern "C" ReflectAction* btlQueueReflectAction(ReflectContext*, s32, s32, u32);
+extern "C" 
 
 // Queue a word-valued command, optionally marking it as an immediate action.
 extern "C" void btlReflectCreateKind21(s32 id, u32 flags, u32 target,

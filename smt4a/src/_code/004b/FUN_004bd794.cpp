@@ -1,4 +1,5 @@
 /* NON_MATCHING: the entry-count quarter rounding, the partner-slot scan and the sound selection branches are scheduled and laid out differently; the setup sequence is the same. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 extern "C" {
@@ -51,8 +52,7 @@ void FUN_00215bd0(void);
 void sysPlaySe(u32 id);
 void FUN_00183f58(s32 a, s32 b, s32 c);
 void paramsClearPacket(void *packet);
-void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
-                const void *f, u32 fSize);
+
 void FUN_0014e188(void *sprite, s32 a, s32 b, void *packet, s32 c);
 void FUN_004be990(PartnerScreen *screen, s32 a, s32 b);
 u8 FUN_002857b8(void);
@@ -123,7 +123,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
             sysPlaySe(0x118);
         }
         paramsClearPacket(screen->params);
-        paramsInit(screen->params, DAT_0052d780, 0x60, DAT_0052d7e0, 0x18, NULL, 0, 0, 0, NULL, 0);
+        paramsInit(reinterpret_cast<UiResourceParameters *>(screen->params), DAT_0052d780, 0x60, DAT_0052d7e0, 0x18, NULL, 0, 0, 0, NULL, 0);
         for (s32 i = 0; i < 4; i++) {
             FUN_0014e188((u8 *)screen + 0x30 + i * 0x8C, 0x11, 0, screen->params, 0x6A);
         }

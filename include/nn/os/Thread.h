@@ -6,23 +6,24 @@
 #define NN_OS_THREAD_H
 
 #include "common.h"
-#include "nn/svc.h"
+#include "nn/os/Handle.h"
+#include <stddef.h>
 
 extern "C" void nn_os_Thread_FinalizeImpl(u32 *thread);
 
-struct NnOsThread {
-    /* 0x00 */ u32 handle;
+struct NnOsThread : NnOsHandle {
+    NnOsThread() : NnOsHandle(), joined(1) {}
     /* 0x04 */ u8 joined;
     /* 0x05 */ u8 unk05[3];
 
     ~NnOsThread()
     {
         nn_os_Thread_FinalizeImpl(&handle);
-        if (handle != 0) {
-            nn::svc::CloseHandle(handle);
-            handle = 0;
-        }
     }
 };
+
+typedef char NnOsThreadLayoutCheck[
+    sizeof(NnOsThread) == 8 && offsetof(NnOsThread, handle) == 0 &&
+    offsetof(NnOsThread, joined) == 4 ? 1 : -1];
 
 #endif

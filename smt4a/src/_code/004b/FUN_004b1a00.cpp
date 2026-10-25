@@ -15,7 +15,7 @@ int FUN_00185e84(...);
 int FUN_002685cc(void);
 int FUN_002a4894(...);
 int arrayContainsU16(...);
-int FUN_004b4e00(...);
+int resultDrawRewardDetails(...);
 int FUN_004bcbb4(...);
 int VectorSignedToFloat(...);
 
@@ -81,7 +81,7 @@ extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: arrayContainsU16. */
 extern int countUnlockedSlots(void);
 extern int FUN_003dfed4(unsigned short, int);
-/* Supplied declaration required: FUN_004b4e00. */
+/* Supplied declaration required: resultDrawRewardDetails. */
 /* Supplied declaration required: FUN_004bcbb4. */
 extern int getUnlockedSlotCount(int);
 
@@ -196,7 +196,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
         temp_v2 = 0xf5ff9fff;
         temp_v10 = 1;
       }
-      FUN_004b4e00(param_1,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,temp_v10);
+      resultDrawRewardDetails(param_1,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,temp_v10);
       temp_v3 = FUN_001834a4(0x1d,0xfe);
       temp_v8 = (int)*(short *)(temp_v3 + 10);
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v8 + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -345,7 +345,7 @@ LAB_004b1d78:
     else {
       temp_v10 = 0x9fe7ffff;
     }
-    FUN_004b4e00(param_1,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3);
+    resultDrawRewardDetails(param_1,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3);
     temp_v1 = param_1 + temp_v1 * 2;
     if (*(short *)(temp_v1 + 0x76a4) != 0) {
       FUN_001835b4(2,temp_v22,0xfb,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
@@ -499,7 +499,7 @@ LAB_004b1d78:
     else {
       temp_v10 = 0x9fe7ffff;
     }
-    FUN_004b4e00(param_1,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3);
+    resultDrawRewardDetails(param_1,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3);
     FUN_001835b4(2,temp_v22,0xfb,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                  0xc4);
     FUN_001835b4(2,temp_v22,0xfc,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,

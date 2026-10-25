@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include <stddef.h>
 
 namespace {
@@ -30,10 +30,8 @@ u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 FUN_00206528(u32 handle);
 s32 FUN_0022535c(u32 handle);
-void drawParameterBlockClear(Params002c312c *parameters);
-void paramsInit(Params002c312c *parameters, u32 first, u16 firstSize,
-    u32 second, u16 secondSize, u32 third, u16 thirdSize,
-    u32 fourth, u16 fourthSize, u32 fifth, u16 fifthSize);
+void drawParameterBlockClear(UiResourceParameters *parameters);
+
 
 void btlTalkBustUpCreate(void)
 {
@@ -56,12 +54,10 @@ void btlTalkBustUpCreate(void)
             FUN_0022535c, NULL, 0, reinterpret_cast<void *>(work->state.job));
         taskCreateDraw(reinterpret_cast<const s8 *>("TalkBustUp DrawRight"), 0xDB, 0, 0,
             FUN_0022535c, NULL, 0, reinterpret_cast<void *>(work->state.job));
-        Params002c312c *parameters = reinterpret_cast<Params002c312c *>(&work->state);
+        UiResourceParameters *parameters = reinterpret_cast<UiResourceParameters *>(&work->state);
         drawParameterBlockClear(parameters);
         // The three preceding parameter streams immediately precede the final resource stream.
-        paramsInit(parameters, reinterpret_cast<u32>(DAT_003ffa6c) - 0x90 - 0x144 - 0x60, 0x60,
-            reinterpret_cast<u32>(DAT_003ffa6c) - 0x90 - 0x144, 0x144,
-            reinterpret_cast<u32>(DAT_003ffa6c) - 0x90, 0x90, 0, 0, reinterpret_cast<u32>(DAT_003ffa6c), 0x9BC);
+        paramsInit(parameters, DAT_003ffa6c - 0x90 - 0x144 - 0x60, 0x60, DAT_003ffa6c - 0x90 - 0x144, 0x144, DAT_003ffa6c - 0x90, 0x90, 0, 0, DAT_003ffa6c, 0x9BC);
     }
 }
 }

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-extern int wstrlen(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: libc_strcmp. */
 
 
@@ -47,7 +47,7 @@ void FUN_00507c74(int param_1,int param_2,unsigned int param_3)
   temp_v4 = 0;
   if (*puVar7 < puVar7[1]) {
     puVar6 = puVar7 + *puVar7 * 5 + 2;
-    temp_v2 = wstrlen(param_2);
+    temp_v2 = libc_strlen(param_2);
     temp_v0 = (unsigned short)*puVar6;
     while ((temp_v0 & 1) == 0) {
       temp_v3 = (unsigned int)(*(unsigned short *)((int)puVar6 + 2) >> 3);

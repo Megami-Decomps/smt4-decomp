@@ -6,7 +6,7 @@
 
 extern "C" {
 BtlMainState *btlGetMainState();
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s16 actor, u16 secondary, u32 options);
+
 
 // Queue reflected records for a selected combatant, then its final state-change action.
 u32 FUN_00246454(s32 actor, u32 options, BtlUnitEntry *unit)

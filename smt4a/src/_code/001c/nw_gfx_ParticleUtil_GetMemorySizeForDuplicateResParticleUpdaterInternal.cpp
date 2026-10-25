@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int wstrlen(int);
+extern int libc_strlen(int);
 
 
 void nw_gfx_ParticleUtil_GetMemorySizeForDuplicateResParticleUpdaterInternal
@@ -90,7 +90,7 @@ LAB_001ce440:
       else {
         temp_v4 = 0;
       }
-      temp_v4 = wstrlen(temp_v4);
+      temp_v4 = libc_strlen(temp_v4);
       temp_v0 = puVar13[5];
       temp_v4 = temp_v4 + 1;
       puVar2 = puVar13 + 5;

@@ -20,7 +20,7 @@ typedef struct {
 extern signed char DAT_004656ca; /* 0x4656ca */
 extern signed char DAT_004656cb; /* 0x4656cb */
 extern signed char DAT_004656cc; /* 0x4656cc */
-extern unsigned int DAT_004e629c; /* 0x4e629c */
+extern unsigned int g_moduleCriticalSection2; /* 0x4e629c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int resourceDispatch(unsigned int);
@@ -52,15 +52,15 @@ int FUN_00238d3c(int param_1,int param_2)
   
   temp_v4 = -0x375ef410;
   if ((DAT_004656ca != '\0') || (temp_v0 = FUN_00239a54(), temp_v0 != 0)) {
-    nn_os_CriticalSection_Enter((unsigned int)&DAT_004e629c);
+    nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection2);
     if (DAT_004656cb == '\0') {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_004e629c);
+      nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection2);
       return -0x375ef410;
     }
     if (DAT_004656cc == '\0') {
       temp_v0 = FUN_0035ae94(0);
       if (temp_v0 < 0) {
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_004e629c);
+        nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection2);
         return temp_v0;
       }
       threadSleepDuration(16000000,0);
@@ -106,7 +106,7 @@ int FUN_00238d3c(int param_1,int param_2)
         software_interrupt(0x23);
       }
     }
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_004e629c);
+    nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection2);
     temp_v4 = temp_v1;
   }
   return temp_v4;

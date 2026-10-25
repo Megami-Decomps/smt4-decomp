@@ -29,6 +29,6 @@ u32 FUN_003161b4(void)
     u32 value = FUN_001692ac(1, 0);
     context->drawStateView.state.push(value);
     g_renderCtx->drawStateView.state.pop();
-    return 1;
+    return 0;
 }
 }

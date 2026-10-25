@@ -9,9 +9,9 @@ void FUN_003611d4(void)
   char acStack_28 [4];
   char acStack_24 [12];
   
-  cVar1 = DAT_0044e3b0;
-  if (DAT_0044e3b0 != '\0') {
-    DAT_0044e3b0 = '\0';
+  cVar1 = g_appletSleepModuleState;
+  if (g_appletSleepModuleState != '\0') {
+    g_appletSleepModuleState = '\0';
     FUN_002c130c(3);
     FUN_002c12e0(0);
   }
@@ -22,7 +22,7 @@ void FUN_003611d4(void)
   if (cVar1 == '\0') {
     return;
   }
-  DAT_0044e3b0 = 1;
+  g_appletSleepModuleState = 1;
   FUN_002b5838(4,0,0,0);
                     /* WARNING: Treating indirect jump as return * /
   return;

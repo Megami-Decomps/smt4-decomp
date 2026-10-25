@@ -22,7 +22,7 @@ extern void jyoucyuGetTableEntry(int index);
 extern EffectOwner g_qcMain;
 
 /* Marks the owner's effect finished and releases its handle. */
-void effectQcFinish(void)
+void effectQcFinish(u32 handle)
 {
     Effect *effect = g_qcMain.effect;
 

@@ -67,7 +67,7 @@ extern unsigned char LAB_003480c4; /* 0x3480c4 */
 /* Supplied declaration required: FUN_0023aa8c. */
 /* Supplied declaration required: FUN_0023aac8. */
 /* Supplied declaration required: FUN_0023aca0. */
-extern int wstrlen(int);
+extern int libc_strlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: keyedCopyPayload. */
 /* Supplied declaration required: libc_strcmp. */
@@ -323,7 +323,7 @@ LAB_00347c88:
       }
       do {
         temp_v11 = temp_v4 + temp_v12 * 0x28;
-        temp_v5 = wstrlen(temp_v11 + 0x204);
+        temp_v5 = libc_strlen(temp_v11 + 0x204);
         if (temp_v5 >= 3) {
           temp_v11 = temp_v11 + temp_v5;
           temp_v6 = temp_v11 + 0x201;

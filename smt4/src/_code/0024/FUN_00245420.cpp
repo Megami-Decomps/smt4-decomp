@@ -5,7 +5,7 @@
 
 struct BtlUnitEntry;
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s16 actorId, u32 flags, u32 secondaryId);
+
 BtlMainState *btlGetMainState();
 BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 

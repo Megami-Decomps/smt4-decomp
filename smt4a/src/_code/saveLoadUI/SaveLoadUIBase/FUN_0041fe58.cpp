@@ -1,4 +1,5 @@
 /* NON_MATCHING: the allocation/copy sequence and the slot-clearing loop are scheduled differently from retail; the screen setup is the same. */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 
 extern "C" {
@@ -83,8 +84,7 @@ void loadSlotRequestAsync(u32 slot, u32 arg);
 void FUN_003f86f0(void);
 void sysMemClear(void *block, u32 size);
 void paramsClearPacket(void *packet);
-void paramsInit(void *packet, const void *a, u32 aSize, const void *b, u32 bSize, const void *c, u32 cSize, u32 d, u32 e,
-                const void *f, u32 fSize);
+
 void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
 void uiSpriteInitializeState(void *sprite, u32 group, u32 id, u32 size, void *owner, u32 anim, f32 scale);
 u8 saveLoadProcessGetState(void);
@@ -135,7 +135,7 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     ui->unk2f4 = 0;
     ui->buffer = asdMemoryAlloc(0x100, 0x100, 0, 100, 1);
     paramsClearPacket(ui->params);
-    paramsInit(ui->params, DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(ui->params), DAT_00533d50, 0x78, DAT_00533dc8, 0x18, NULL, 0, 0, 0, DAT_00533de0, 0xE0);
     FUN_0014e188(ui->sprite0, 0x2B, 1, ui->params, 0xC9, 1.0f);
     uiSpriteInitializeState(ui->sprite1, 0x2B, 0x51, 2, ui->params, 2, 1.0f);
     uiSpriteInitializeState(ui->sprite2, 0x2B, 0x52, 2, ui->params, 2, 1.0f);

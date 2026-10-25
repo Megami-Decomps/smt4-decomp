@@ -1,4 +1,5 @@
 /* NON_MATCHING: the save-block byte reads (0x27E90..0x27E94) and the settings global take different registers/address forms (retail loads each offset from a literal, ours shares one base), and the frame needs r7 */
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "title/titleConfig.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0031.h"
@@ -26,9 +27,8 @@ u32 asdProcessCreateSimple(const char *name, s32 priority, u32 a, u32 b, void (*
                            void (*destroy)(void), void *owner);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void), void (*destroy)(void),
                    void *owner, u32 job);
-void paramsClearPacket(Params002c312c *params);
-void paramsInit(Params002c312c *params, const u8 *a, s32 aSize, const u8 *b, s32 bSize, s32, s32, s32, s32,
-                s32, s32);
+void paramsClearPacket(UiResourceParameters *params);
+
 void FUN_0014e188(void *sprite, s32 anim, s32 frame, void *source, f32 scale, s32 layer);
 void uiSpriteSetKeyframe(void *sprite, s32 key, s32 restart);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 restart);

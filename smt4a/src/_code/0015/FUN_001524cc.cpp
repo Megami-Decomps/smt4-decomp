@@ -13,7 +13,7 @@ void FUN_001524cc(CameraMatrixCache *camera)
     if (!camera->enabled)
         return;
     const CameraMatrixStereoCache *stereo = reinterpret_cast<const CameraMatrixStereoCache *>(camera);
-    FUN_0016fd04(camera->parameters, stereo->stereoParameter, camera->stereoScale,
+    FUN_0016fd04(&camera->parameters, stereo->stereoParameter, camera->stereoScale,
                   &camera->projection, &camera->view, &camera->secondaryProjection, &camera->secondaryView, 1, 1);
     FUN_00162330(&camera->viewNormals, &camera->view);
     nn_math_ARMv6_MTX44TransposeAsm(&camera->projectionTransposed, &camera->projection);

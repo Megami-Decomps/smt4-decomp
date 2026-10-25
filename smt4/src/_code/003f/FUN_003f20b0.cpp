@@ -27,8 +27,7 @@ extern u8 entry;
 
 void expHeapDestroyA(HeapOwner *owner);
 void FUN_003574ac(HeapRecord *record);
-__weak int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
-void sceneNotifyNoop(void *object, void (*destroy)(void *), void *module);
+int __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
 /* Resets a heap owner and the shared heap record, registering each one's destructor. */
 void FUN_003f20b0(HeapOwner *owner)
@@ -50,7 +49,7 @@ void FUN_003f20b0(HeapOwner *owner)
     DAT_004eac24.flagA = 0;
     DAT_004eac24.next = 0;
     DAT_004eac24.flagB = 0;
-    sceneNotifyNoop(&DAT_004eac24, (void (*)(void *))FUN_003574ac, &entry);
+    __aeabi_atexit(&DAT_004eac24, (void (*)(void *))FUN_003574ac, &entry);
 }
 
 } /* extern "C" */

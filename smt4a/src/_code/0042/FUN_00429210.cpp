@@ -40,7 +40,6 @@ void sysFatalBreak(void);
 s32 FUN_00427e28(u32 *operation, void *packet, u32 flags);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
-WindowStatusResult nnAsyncMapOperationResult(void *operation);
 
 // Validate a token, encode up to sixty-four halfwords and submit the asynchronous operation.
 WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *format,

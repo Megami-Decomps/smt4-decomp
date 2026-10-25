@@ -3,9 +3,7 @@
 #include "nn/Result.h"
 extern "C" {
 u32 FUN_00427ac4(void*, u32);
-u32 FUN_004283cc(void*);
 WindowStatusResult FUN_004293b0(void*, void*, const void*, const char*);
-void recordValidatePair(void*, WindowStatusResult);
 
 WindowStatusResult FUN_004289cc(void* owner, void* request, const void* metadata, const char* name)
 {

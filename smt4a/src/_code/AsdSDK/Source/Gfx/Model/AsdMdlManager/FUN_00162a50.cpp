@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001801e4(int *, int);
+int indexedListErase(int *, int);
 int FUN_001844f8(unsigned int, int, int *);
 void *asdMdlBuildNodeData(void *, void *);
 int asdMdlObjectBuildBounds(int);
@@ -26,7 +26,7 @@ extern int g_asdMdlList2; /* 0x636dec */
 extern int DAT_00636ea8; /* 0x636ea8 */
 
 extern unsigned int asdFileRequestGetResult(unsigned int, int *);
-/* Supplied declaration required: FUN_001801e4. */
+/* Supplied declaration required: indexedListErase. */
 extern int asdFileRequestIsFinished(void);
 extern unsigned int ownerGetFloatValue(unsigned int *);
 /* Supplied declaration required: FUN_001844f8. */
@@ -210,7 +210,7 @@ void FUN_00162a50(void)
     *(unsigned int *)(*(int *)(temp_v5 + 8) + 4) = temp_v2;
     asdMdlNodeInit(*(int *)(temp_v5 + 8),*(unsigned int *)(*(int *)(temp_v5 + 8) + 8) & 0xffff);
     asdMdlObjectBuildBounds(temp_v5);
-    FUN_001801e4(&g_asdMdlList2,temp_v6);
+    indexedListErase(&g_asdMdlList2,temp_v6);
     asdListAdd(&g_asdMdlList,temp_v5,0);
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < DAT_00636ea8);

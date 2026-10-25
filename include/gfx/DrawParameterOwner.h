@@ -1,6 +1,6 @@
 #ifndef GFX_DRAW_PARAMETER_OWNER_H
 #define GFX_DRAW_PARAMETER_OWNER_H
-#include "shard/W6_W6Match7_DrawParameters.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 #include <stddef.h>
 struct DrawParameterOwner {
     union {
@@ -19,7 +19,7 @@ struct DrawParameterOwner {
     u8 unk416[2]; // 0x416
     u32 unk418; // 0x418
     u32 unk41C; // 0x41C
-    Params002c312c parameters; // 0x420
+    UiResourceParameters parameters; // 0x420
 };
 typedef char DrawParameterOwnerControlLayoutCheck[sizeof(DrawParameterOwner) == 0x440 &&
     offsetof(DrawParameterOwner, control.flags) == 0 &&

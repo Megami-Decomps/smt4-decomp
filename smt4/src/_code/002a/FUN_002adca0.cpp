@@ -4,7 +4,7 @@
 extern "C" {
 SpriteTransitionWork *jobGetWork(u32);
 void aocSlotRelease(SpriteTransitionWork *);
-const SpriteTextureEntry *FUN_002aecd8(void *, u32);
+const SpriteTextureEntry *aocContentGetIndexedRecord(void *, u32);
 void uiSpriteReplaceTextureEntry(SpriteTransitionWork *, u32, u32);
 
 /* Configure a sprite's target/start vectors, timing, and initial texture state. */
@@ -27,7 +27,7 @@ void FUN_002adca0(u32 job, const Vec3f *target, const Vec3f *start,
         work->start = *start;
         if (work->textureHandle == 0 && work->textureIndex == -1 &&
             work->textureSource != NULL) {
-            const SpriteTextureEntry *entry = FUN_002aecd8(work->textureSource, 1);
+            const SpriteTextureEntry *entry = aocContentGetIndexedRecord(work->textureSource, 1);
             uiSpriteReplaceTextureEntry(work, entry->id, 0xFFFFFFFF);
         }
         work->velocity.x = 0.0f;

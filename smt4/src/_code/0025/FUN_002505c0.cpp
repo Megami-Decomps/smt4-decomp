@@ -2,7 +2,7 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-ReflectAction *btlQueueReflectAction(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 
 // Queue a keyed scalar change, invalidating its secondary ID when a duplicate already exists.
 void FUN_002505c0(s32 actor, u32 options, void *key, s32 mode, s32 checkDuplicates,

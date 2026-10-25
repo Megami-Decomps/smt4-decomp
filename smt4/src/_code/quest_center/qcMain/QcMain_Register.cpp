@@ -1,5 +1,7 @@
-/* NON_MATCHING: allocation debug-source hook is absent; first draw-task argument registers differ. */
+/* NON_MATCHING: first draw-task callback and work-pointer argument registers are swapped. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 namespace {
 struct QuestCenterRegistrationWork {
@@ -21,17 +23,18 @@ void *jyoucyuGetTableEntry(u32 index);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void QcMain_SetFlag(s32 id, s32 value);
 void gameFlagSetValue(u32 id, s32 mode, s32 value);
-u32 QuestCenterMainProcUpdate();
-u32 effectQcFinish();
-u32 qcMainEndBackgroundPass();
-u32 qcMainJobUpdateEntry();
-u32 FUN_001fe19c();
-u32 asdProcessCreateSimple(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *);
-u32 taskCreateDraw(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *, u32);
+s32 QuestCenterMainProcUpdate(u32 handle);
+void effectQcFinish(u32 handle);
+s32 qcMainEndBackgroundPass(u32 handle);
+s32 qcMainJobUpdateEntry(u32 handle);
+s32 FUN_001fe19c(u32 handle);
+u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
+u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 
 void QcMain_Register(const s32 *parameters, s32 mode)
 {
     jyoucyuGetTableEntry(0);
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\quest_center\\qcMain.cpp", 158);
     QuestCenterRegistrationWork *work = static_cast<QuestCenterRegistrationWork *>(
         asdMemAlloc(0x100, 0x100, 0, sizeof(QuestCenterRegistrationWork), 1));
     g_qcMain.work = work;
@@ -60,14 +63,14 @@ void QcMain_Register(const s32 *parameters, s32 mode)
         gameFlagSetValue(0x157, 1, 1);
     }
     work->process = asdProcessCreateSimple("QuestCenterMainProc", 2, 0, 0,
-        QuestCenterMainProcUpdate, effectQcFinish, g_qcMain.work);
+        QuestCenterMainProcUpdate, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));
     work->backgroundDraw = taskCreateDraw("QuestCenterDrawUp L", 0x6F, 1, 0,
-        qcMainEndBackgroundPass, NULL, g_qcMain.work, work->process);
+        qcMainEndBackgroundPass, NULL, reinterpret_cast<u32>(g_qcMain.work), work->process);
     taskCreateDraw("QuestCenterDrawUp L", 0x7D, 1, 0,
-        qcMainJobUpdateEntry, NULL, g_qcMain.work, work->process);
+        qcMainJobUpdateEntry, NULL, reinterpret_cast<u32>(g_qcMain.work), work->process);
     taskCreateDraw("QuestCenterDrawUp L", 0xDB, 1, 0,
-        qcMainJobUpdateEntry, NULL, g_qcMain.work, work->process);
+        qcMainJobUpdateEntry, NULL, reinterpret_cast<u32>(g_qcMain.work), work->process);
     work->foregroundDraw = taskCreateDraw("QuestCenterDrawDown", 0xE7, 1, 0,
-        FUN_001fe19c, NULL, g_qcMain.work, work->process);
+        FUN_001fe19c, NULL, reinterpret_cast<u32>(g_qcMain.work), work->process);
 }
 }

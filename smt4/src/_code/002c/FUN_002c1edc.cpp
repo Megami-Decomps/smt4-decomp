@@ -49,6 +49,6 @@ void FUN_002c1edc(CameraMatrixCache *camera, const MapVector *eye, const MapVect
     pose->transposed = pose->expanded;
     nn_math_ARMv6_MTX44TransposeAsm(&pose->transposed, &pose->transposed);
     if (camera->enabled)
-        FUN_0011d08c(camera->parameters, &pose->view);
+        FUN_0011d08c(&camera->parameters, &pose->view);
 }
 }

@@ -3,6 +3,7 @@
 #define BATTLE_EFFECT_EFFECTPROCESS_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* The job's work area, Shin Megami Tensei IV layout. */
 typedef struct EffectProcess {
@@ -18,7 +19,7 @@ typedef struct EffectProcess {
     };
     /* 0x528 */ u32 jobA;        /* sub-jobs stopped when the process is destroyed */
     /* 0x52C */ u32 jobB;
-    /* 0x530 */ u8 keepScene;    /* 0 = the scene setup is torn down on destroy */
+    /* 0x530 */ s8 keepScene;    /* 0 = the scene setup is torn down on destroy */
 } EffectProcess;
 
 /* The same work area in Apocalypse, which carries one more sub-job. */
@@ -29,5 +30,9 @@ typedef struct EffectProcessA {
     /* 0x534 */ u32 jobC;
     /* 0x538 */ u8 keepScene;
 } EffectProcessA;
+
+typedef char EffectProcessLayoutCheck[
+    offsetof(EffectProcess, keepScene) == 0x530 && sizeof(EffectProcess) == 0x534 &&
+    offsetof(EffectProcessA, keepScene) == 0x538 && sizeof(EffectProcessA) == 0x53c ? 1 : -1];
 
 #endif

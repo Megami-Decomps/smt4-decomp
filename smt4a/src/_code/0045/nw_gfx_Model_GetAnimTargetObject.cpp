@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned int wstrlen(int);
+extern unsigned int libc_strlen(int);
 extern int nw_ut_ResDicPatricia_Get(int *, int, unsigned int);
 
 
@@ -79,7 +79,7 @@ int nw_gfx_Model_GetAnimTargetObject(fn_004545e8_arg0 *param_1,int *param_2)
     temp_v4 = 0;
   }
   if (temp_v4 != 0 && unaff_r5 != 0) {
-    temp_v1 = wstrlen(unaff_r5);
+    temp_v1 = libc_strlen(unaff_r5);
     temp_v0 = nw_ut_ResDicPatricia_Get(&temp_v4,unaff_r5,temp_v1);
     if (temp_v0 != 0) {
       temp_v0 = ((temp_v0 - temp_v4) - 0x1c) >> 4;

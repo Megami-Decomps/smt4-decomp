@@ -20,14 +20,14 @@ struct NameLookupOwner {
 
 extern "C" {
 
-s32 wstrlen(const u16 *text);
+s32 libc_strlen(const u16 *text);
 u32 FUN_001a7a20(void *index, const u16 *text, s32 length);
 
 /* Finds the record whose name matches `name` and copies it to `out`; returns whether it exists. */
 bool FUN_003fda64(NameLookupOwner *owner, const u16 *name, NameRecord *out)
 {
     u8 *index = owner->index + 0x70;
-    u32 found = FUN_001a7a20(index + 4, name, wstrlen(name));
+    u32 found = FUN_001a7a20(index + 4, name, libc_strlen(name));
 
     if (found == 0xFFFF) {
         return false;

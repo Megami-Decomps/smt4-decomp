@@ -12,12 +12,12 @@ struct GuardedStateOwner {
     u8 unk00[0x2dc];
     GuardedState state; // 0x2dc
 };
-extern "C" s32 objectGetSignedFlag(GuardedState *state);
+extern "C" s32 uiSpriteGetCompletionState(GuardedState *state);
 
 // Delegate the query only while state three is enabled.
 extern "C" s32 FUN_0039ebcc(GuardedStateOwner *owner)
 {
     if (owner->state.getState() == 3 && owner->state.enabled)
-        return objectGetSignedFlag(&owner->state);
+        return uiSpriteGetCompletionState(&owner->state);
     return 1;
 }
