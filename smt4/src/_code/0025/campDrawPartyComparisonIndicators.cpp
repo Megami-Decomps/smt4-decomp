@@ -33,7 +33,7 @@ extern "C" {
 void efctSetSpeed(f32);
 s32 vec2GetXInt(const void *);
 s32 vec2GetYInt(const void *);
-SpriteInfo *FUN_002bf4f8(u32, s32);
+SpriteInfo *asdTMTexTableEntryAt(u32, s32);
 
 void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFull)
 {
@@ -46,7 +46,7 @@ void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFul
             continue;
         if (forceFull == 0 && scene->selected != row)
             efctSetSpeed(0.5f);
-        SpriteInfo *sprite = FUN_002bf4f8(0x15, row + 0x36);
+        SpriteInfo *sprite = asdTMTexTableEntryAt(0x15, row + 0x36);
         s32 localX = vec2GetXInt(scene->widgets[row].position) + sprite->x;
         s32 localY = vec2GetYInt(scene->widgets[row].position) + sprite->y;
         s32 x = vec2GetXInt(scene->origin) + localX + offsetX;

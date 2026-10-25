@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/byteIsAtLeast100.h"
 
 extern "C" {
 

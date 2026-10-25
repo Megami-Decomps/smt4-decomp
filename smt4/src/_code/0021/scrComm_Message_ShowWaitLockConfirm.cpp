@@ -1,12 +1,12 @@
 /* NON_MATCHING: the constant-one lifetime and mode-result register allocation differ. */
 #include "ui/MessageMain.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
+#include "script/ScriptArgs.h"
+#include "util/ScrGetCommandFrame.h"
+#include "shard/scrGetArg.h"
 
 extern "C" {
-s32 scrGetCommandFrame();
-u32 scrGetArg(u32 index);
 s32 FUN_0028660c();
-u32 FUN_002865f8();
 void FUN_002866b4(u32 context, u32 message, s32 frame, s32 mode, bool wait, u32 flags);
 extern MessageGlobals g_messageMain;
 
@@ -24,7 +24,7 @@ void scrComm_Message_ShowWaitLockConfirm()
     if (mode == 20) {
         mode = 5;
     }
-    u32 context = FUN_002865f8();
+    u32 context = scrGetCommandOwner();
     u32 message = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
     FUN_002866b4(context, message, frame, mode, true, 0);

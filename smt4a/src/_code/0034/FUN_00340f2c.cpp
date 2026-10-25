@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_00340f2c.h"
 
 namespace { struct Label { u16 value; u16 text; }; struct Labels { Label entries[4]; u8 flag; }; }
 

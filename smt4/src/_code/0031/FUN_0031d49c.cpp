@@ -2,6 +2,7 @@
 /* Recomputes the map's remaining entry budget: the limit minus the entries in use (a third of the active, slot and map
  * object counts plus the deferred models), never below the minimum. */
 #include "common.h"
+#include "shard/mapCountActiveEntries.h"
 
 extern "C" {
 /* The map's budget limits. */
@@ -32,7 +33,6 @@ extern CountedBlock *g_mapStateSlots;
 extern CountedBlock *g_mapObj;
 extern DeferredModels *g_deferredMapModels;
 extern BudgetState g_gameState;
-s32 mapCountActiveEntries(void);
 
 void FUN_0031d49c(void)
 {

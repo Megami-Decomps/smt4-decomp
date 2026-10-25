@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler allocates and schedules the scheduler-global load differently. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/jobIsValid.h"
 
 
 extern "C" {

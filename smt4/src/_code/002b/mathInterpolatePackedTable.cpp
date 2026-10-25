@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/mathInterpolatePackedTable.h"
 
 namespace {
 struct InterpolationEntry { f32 base; f32 unused; f32 step; f32 tail; };

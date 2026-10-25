@@ -1,6 +1,7 @@
 /* NON_MATCHING: O3 unrolls the four-character reset and partially unrolls the 24-slot reset; matched widget writes reuse sl instead of retail's fresh r1 constant. O2 may retain retail's loops. */
 #include "shard/W6_W6Match6_PartyPanel.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PartyFilterWidget {
     PartyPanelWidget transition;
@@ -25,14 +26,9 @@ struct PartyFilterState {
     /* 0xe84 */ s32 filterCount;
 };
 
-struct PartyFilterOrder {
-    u8 unk0000[0x1ca0];
-    s8 indices[3];
-};
 
 extern "C" {
 extern PartyFilterState *g_partyPanel;
-PartyFilterOrder *gameGetSlotTable(void);
 SlotRecord *slotRecordFindById(u16 id);
 void __aeabi_memset4(void *, u32 bytes, s32 value);
 
@@ -40,7 +36,7 @@ void __aeabi_memset4(void *, u32 bytes, s32 value);
 void partyPanelRefreshFilterMarks(void)
 {
     PartyFilterState *panel = g_partyPanel;
-    PartyFilterOrder *order = gameGetSlotTable();
+    SaveSlotTable *order = gameGetSlotTable();
     for (s32 index = 0; index < 4; ++index) {
         panel->characterFlags[index] = 0;
         panel->characters[index]->marked = 0;
@@ -66,7 +62,7 @@ void partyPanelRefreshFilterMarks(void)
             continue;
         }
         for (s32 index = 0; index < 3; ++index) {
-            s32 slot = order->indices[index];
+            s32 slot = order->reserve[index];
             if (slot >= 0 && gameGetSlotRecord(slot)->entryId == record->entryId) {
                 panel->characterFlags[index + 1] = 1;
                 panel->characters[index + 1]->marked = 1;

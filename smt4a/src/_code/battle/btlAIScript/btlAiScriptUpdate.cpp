@@ -1,8 +1,8 @@
 #include "battle/btlAIScript.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-void *jobGetWork(u32 job);
 void FUN_003e688c(void);
 
 extern BtlAiScript *g_btlAiScript;

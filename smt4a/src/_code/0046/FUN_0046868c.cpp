@@ -25,7 +25,7 @@ typedef char ProjectedNpcMarkerLayoutCheck[sizeof(ProjectedNpcMarker) == 10 &&
 struct RenderCtxA;
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-SpriteInfo *FUN_001834a4(u32 group, s32 sprite);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 sprite);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
 f32 messageGetActiveValue(u32 channel);
 void efctSetSpeed(f32 opacity);
@@ -38,7 +38,7 @@ void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
         ProjectedNpcMarker markers[4];
     };
     const MarkerView *view = reinterpret_cast<const MarkerView *>(owner);
-    SpriteInfo *sprite = FUN_001834a4(8, 0x18D);
+    SpriteInfo *sprite = asdTMTexTableEntryAt(8, 0x18D);
     s32 width = sprite->size[0];
     s32 height = sprite->size[1];
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.31f);

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct HistoryUnit {
@@ -13,7 +14,6 @@ struct HistoryEventMasks {
 
 extern "C" {
 extern HistoryEventMasks DAT_005713f0;
-BtlMainStateA *btlGetMainState(void);
 HistoryUnit *FUN_003f0e20(BtlMainStateA *state, u32 unitId);
 void battleRecordCombatantHistoryEvent(BtlMainStateA *state, HistoryUnit *unit, s32 kind);
 

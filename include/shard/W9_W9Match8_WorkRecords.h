@@ -753,7 +753,7 @@ typedef char GameOverWorkPrefixALayoutCheck[
     offsetof(GameOverWorkPrefixA, value1C) == 0x1C &&
     offsetof(GameOverWorkPrefixA, value20) == 0x20 ? 1 : -1];
 
-// Observed prefix returned by FUN_001834a4 for the selection layouts.
+// Observed prefix returned by asdTMTexTableEntryAt for the selection layouts.
 // Its end is not a recovered allocation size or table stride.
 struct UniteSelectionLayoutPrefixA {
     u8 unk00[8];

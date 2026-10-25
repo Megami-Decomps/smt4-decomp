@@ -5,7 +5,6 @@
 #include "shard/W9_W9Match7_ModifierLists.h"
 
 extern "C" {
-Table04Record *dataTable04FindById(u32 id);
 const PassiveSkillRecord *dataFindKeyedRecordWithOverrides(u32 id);
 s32 gameDataFlagTestBit(u32 bit);
 s32 FUN_0034a304(const AttributeModifierLists *record, s32 rank, s32 kind);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/distSpatial.h"
 
 
 extern "C" {

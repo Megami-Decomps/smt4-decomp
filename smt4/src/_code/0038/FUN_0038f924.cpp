@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0023478c(unsigned int, unsigned int);
 int FUN_002347b8(unsigned int, unsigned int, unsigned char [1024]);
-int FUN_002be5a4(int, unsigned int, unsigned char [1024], int);
+int textDrawString(int, unsigned int, unsigned char [1024], int);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(int, int);
 
@@ -28,9 +28,9 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int curveEvaluateStandard(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: FUN_002347b8. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int jobGetWork(unsigned int task);
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -83,11 +83,11 @@ int FUN_0038f924(unsigned int task)
   FUN_0023478c(temp_v2,temp_v14[*(int *)(temp_v3 + 0x179c)]);
   FUN_002347b8(temp_v2,temp_v5,temp_v13);
   temp_v6 = curveEvaluateStandard(temp_v13,3);
-  temp_v3 = FUN_002bf4f8(0x3a,0x2d);
+  temp_v3 = asdTMTexTableEntryAt(0x3a,0x2d);
   temp_v4 = (((int)*(short *)(temp_v3 + 8) + ((int)**(short **)(temp_v3 + 0xc) >> 1)) - (temp_v6 >> 1)) - 9;
   VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(3,0xf49800ff,temp_v13,(int)*(short *)(temp_v3 + 10));
+  textDrawString(3,0xf49800ff,temp_v13,(int)*(short *)(temp_v3 + 10));
   temp_v3 = 0;
   temp_v11 = temp_v11 / 5;
   temp_v12 = temp_v11 - (temp_v11 & 0xfffffff8);
@@ -98,9 +98,9 @@ int FUN_0038f924(unsigned int task)
     temp_v8 = 0;
     do {
       temp_v10 = temp_v3 * 3 + temp_v8;
-      temp_v9 = FUN_002bf4f8(0x3a,0x31);
+      temp_v9 = asdTMTexTableEntryAt(0x3a,0x31);
       temp_v0 = *(short *)(temp_v9 + 8);
-      temp_v9 = FUN_002bf4f8(0x3a,temp_v10 + 0x31);
+      temp_v9 = asdTMTexTableEntryAt(0x3a,temp_v10 + 0x31);
       temp_v7 = (int)*(short *)(temp_v9 + 10);
       temp_v9 = ((int)*(short *)(temp_v9 + 8) - (int)temp_v0) + temp_v4 + temp_v6 + 4;
       if (temp_v12 == temp_v10 || temp_v11 == temp_v10) {

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 namespace {
@@ -19,7 +20,6 @@ struct BattleMainStateView {
 extern "C" {
 s32 scrGetArg(u32 index);
 s32 scrSetResult(s32 result);
-BattleMainStateView* btlGetMainState(void);
 
 // Report whether an eligible battle entry has a selected value of -1 or less.
 u32 FUN_003180e0(void)
@@ -35,7 +35,7 @@ u32 FUN_003180e0(void)
     }
 
     for (s32 entryIndex = 0; entryIndex < 109; ++entryIndex) {
-        BattleEntryView* entry = &btlGetMainState()->unk1FC0[entryIndex];
+        BattleEntryView* entry = &reinterpret_cast<BattleMainStateView *>(btlGetMainState())->unk1FC0[entryIndex];
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 && entry->unk72[fieldIndex] <= -1) {
             scrSetResult(1);

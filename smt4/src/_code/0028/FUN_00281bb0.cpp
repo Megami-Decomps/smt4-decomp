@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP scheduling and local vector copies differ: retail keeps the saved orientation in s16-s19 and copies the position/offset vectors with ldm/stm, the build spills extra vector temporaries (larger frame). */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
 
 struct EffectVec4 {
     f32 x, y, z, w;
@@ -55,7 +56,6 @@ struct EffectNode {
 extern "C" {
 s32 FUN_0025c8f0(EffectNode *node, const EffectVec4 *position, f32 *matrix);
 void FUN_002a3958(EffectNode *node, const f32 *matrix);
-s32 effGetFrameCounter(void);
 }
 
 /* Advance an effect node one frame: place it, then update every child that has started. */

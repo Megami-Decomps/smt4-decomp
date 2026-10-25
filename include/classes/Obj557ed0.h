@@ -4,8 +4,8 @@
 #include "common.h"
 #include "classes/FloatState.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 extern "C" int asdOperatorDelete(void *block);
 
 /* The object whose vtable is at 0x557ed0 (named after it until its real name is known): the

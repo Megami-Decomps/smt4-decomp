@@ -1,6 +1,7 @@
 /* NON_MATCHING: zero/event constants occupy extra saved registers and toggle-event return blocks merge differently. */
 #include "ui/MessageMain.h"
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct MessageControlFlags {
     u8 prefix[0xC];
@@ -12,7 +13,6 @@ extern "C" {
 extern MessageGlobals g_messageMain;
 extern MessageControlFlags DAT_0049381c;
 s32 FUN_002c1658(u32, u32);
-s32 FUN_002c15fc(u32);
 s32 querySlotHasHandle(void);
 u32 FUN_002bfdd4(void);
 void workCommandRefreshActiveSlots(void);

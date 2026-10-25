@@ -23,7 +23,7 @@ s32 calcByteThresholdRank(u32 value);
 void eventQueueAddUnique(u32 event);
 void eventQueueAddUniqueIfValid(u32 event);
 s32 ifTouchGetActiveCounter(void);
-const MessageDrawItem *FUN_002bf4f8(u32 group, u32 item);
+
 s32 FUN_001c3688(void);
 s32 ifTouchGetRegionX(s32 widget);
 u8 indexedByteLookup(u32 step);
@@ -113,7 +113,7 @@ u32 titleConfigUpdate(void)
         } else {
             button = ifTouchGetSelectionModeForRegion(work->slider);
             if (button == 1 || button == 2) {
-                const MessageDrawItem *slider = FUN_002bf4f8(0x2F, 0x33);
+                const MessageDrawItem *slider = reinterpret_cast<const MessageDrawItem *>(asdTMTexTableEntryAt(0x2F, 0x33));
                 s32 position = FUN_001c3688() - ifTouchGetRegionX(work->slider);
                 value = position * 10 / slider->size->width;
             }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses the label table from a second anchor (the area names at DAT_00447580, the fixed labels at -0x30 from it): the original defined these tables in the same file, so this build loads one base and the string/array addressing differs */
 #include "common.h"
+#include "map/mapDepart.h"
 
 /* The map block (only the fields the label formatter reads). */
 struct LabelMapBlock {
@@ -27,7 +28,6 @@ extern PlaceLabels DAT_00447550;
 s32 gameFlagIsSet(u32 flag);
 LabelMapBlock *gameGetMapBlock(void);
 const char *dataTableFindRecordById(s32 kind);
-const char *FUN_001b43f0(s32 kind, s32 id);
 char *libc_strcpy(char *destination, const char *source);
 void textFormatBuffer(char *output, const char *format, ...);
 

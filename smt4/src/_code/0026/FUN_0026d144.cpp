@@ -1,7 +1,9 @@
 /* NON_MATCHING: same block-ordering difference as FUN_0026d3e0: retail lays out the stock and active-party `unk42 == 0` arms after the non-stock path; armcc here keeps each pair adjacent. */
+#include "battle/BtlMainAccess.h"
 #include "ui/PartyPanelState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "battle/BattleUnitSlot.h"
+#include "util/FUN_002621b4.h"
 
 namespace {
 struct BtlUnitExtra {
@@ -19,12 +21,10 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 extern u32 g_btlScriptUnit;
 PartyDamageSlotsIV *gameGetSlotTable();
-void *btlGetMainState(void);
 s32 FUN_0029a924(u16 item);
 s32 FUN_0029a9d4(u16 item, u32 flag);
 s32 FUN_0029efa8(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
-void FUN_002621b4(s32 selection, s32 unit, u16 item, s32 *value);
 void FUN_00298d28(s32 first, s32 second);
 void partyWidgetSetValue(PartyPanelWidget *widget, s32 value);
 void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);
@@ -40,7 +40,7 @@ void FUN_0026d144(void *selection, s32 stockOnly)
     s32 index;
 
     bool scripted = false;
-    if (panel->previewItem == 0x7d && btlGetMainState() != NULL && g_btlScriptUnit != 0) {
+    if (panel->previewItem == 0x7d && static_cast<void *>(btlGetMainState()) != NULL && g_btlScriptUnit != 0) {
         BtlUnitExtra *extra = reinterpret_cast<BtlUnitView *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->extra;
         scripted = extra != NULL && extra->kind == 8;
     }

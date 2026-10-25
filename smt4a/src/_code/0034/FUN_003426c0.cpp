@@ -11,7 +11,7 @@ struct DirectoryListPlacement {
 };
 }
 extern "C" {
-SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
+SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
 const char *FUN_0035aa90(s32 index);
 void asdTextFormatStream(u32 text, s32 layer, u32 color, s32 flags, s32 mode, const char *value);
 void asdTextDrawDirectoryEntry(u32 text, s32 layer, u32 color, s32 flags, s32 mode, u32 directory, s32 index);
@@ -22,9 +22,9 @@ void FUN_003426c0(const DirectoryListPlacement *placement, u32 text, u32 directo
 {
     s32 x = placement->x;
     s32 y = placement->y;
-    SpriteInfo *anchor = FUN_001834a4(0x2E, 0xCF);
+    SpriteInfo *anchor = asdTMTexTableEntryAt(0x2E, 0xCF);
     for (s32 row = 0; row < 11; ++row) {
-        SpriteInfo *position = FUN_001834a4(0x2E, row + 0xD1);
+        SpriteInfo *position = asdTMTexTableEntryAt(0x2E, row + 0xD1);
         if (count <= row)
             continue;
         switch (kind) {

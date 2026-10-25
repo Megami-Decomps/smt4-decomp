@@ -8,7 +8,6 @@ s32 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
 void FUN_00420a2c(SaveSlotHeaderWork *work);
-s32 FUN_0022e72c(void);
 void FUN_0022e774(void);
 
 /* Switches to another mode, remembering the one it leaves. */

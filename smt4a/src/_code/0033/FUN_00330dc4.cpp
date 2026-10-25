@@ -1,11 +1,12 @@
 /* NON_MATCHING: copied table load order, loop zero-choice branch, and saved-register selection differ. */
 #include "common.h"
+#include "script/ScriptArgs.h"
+#include "shard/scrGetArg.h"
 
 struct ScriptFlagChoices { u32 flags[7]; };
 extern "C" {
 extern const ScriptFlagChoices DAT_00531510;
 s32 gameFlagIsSet(u32 flag);
-s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 
 /* Counts available choices other than the one supplied by the script. */

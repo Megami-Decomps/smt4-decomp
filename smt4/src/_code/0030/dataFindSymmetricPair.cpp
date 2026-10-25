@@ -1,5 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table05Pair.h"
+#include "shard/dataFindSymmetricPair.h"
 
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,

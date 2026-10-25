@@ -3,8 +3,8 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 size);
 extern "C" void asdOperatorDelete(void *memory);
 
 // The nonvirtual source-handle prefix shared by application buffer requests.

@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 122 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "text/TextDraw.h"
 
 /* The movie-test job's work block: playback mode, fade, and the file list that mode 1 shows. */
 struct MovieTestWork {
@@ -24,7 +25,6 @@ u32 FUN_001692ac(u32 kind, bool enabled);
 void mobiclipRenderCurrentScreen(void);
 void FUN_00167618(const f32 *topLeft, const f32 *topRight, const f32 *bottomLeft, const f32 *bottomRight, f32 x, f32 y,
                   f32 width, f32 height, f32 depth);
-void FUN_00162790(u32 layer, u32 color, const u16 *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 int FUN_00102bbc(void *destination, const void *source, u32 size);
 
 static const u16 kMarker[] = {'>', 0};
@@ -76,12 +76,12 @@ u32 FUN_002c3038(u32 handle)
         for (s32 row = 0; row < shown; row++) {
             u32 color = 0xFFFFFFFF;
             if (work->selected == row + first) {
-                FUN_00162790(2, 0xFF00FF, kMarker, 8.0f, (f32)(row * 14), 0.1f, 0.0f, 1.0f);
+                textDrawString(2, 0xFF00FF, (const char *)kMarker, 8.0f, (f32)(row * 14), 0.1f, 0.0f, 1.0f);
                 color = 0xFF00FF;
             }
             u16 name[0x20];
             FUN_00102bbc(name, work->entries + (row + first) * 0x228, 0x40);
-            FUN_00162790(2, color, name, 20.0f, (f32)(row * 14), 0.1f, 1.0f, 1.0f);
+            textDrawString(2, color, (const char *)name, 20.0f, (f32)(row * 14), 0.1f, 1.0f, 1.0f);
         }
     }
     skinObjectUpdateMatrices(g_renderCtx);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: text-pointer load precedes slot resets, and projected-coordinate updates reuse the X sum instead of retail's store/reload sequence; message-debug hooks are restored. */
+#include "battle/BtlMainAccess.h"
 #include "ui/AnimatedMessageSlots.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
@@ -31,7 +32,6 @@ void FUN_0019e330(UiSpriteState *sprite, s32 mode, s32 state);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
 void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
-BtlMainStateA *btlGetMainState(void);
 TextMeasureState *spriteHandleCreate(u32 kind);
 void FUN_001527d8(TextMeasureState *text, u32 color);
 void positionStateSet(TextMeasureState *text, u32 first, u32 second, f32 scale);

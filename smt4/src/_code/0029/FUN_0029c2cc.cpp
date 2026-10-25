@@ -3,9 +3,9 @@
 #include "shard/S1GfxModel.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/settings5BClearFlags.h"
 
 extern "C" {
-void settings5BClearFlags(s32 flags);
 void FUN_00152fac(s32 slotIndex);
 
 void FUN_0029c2cc(ModelRemovalRequestPrefixIV *request, s32 slotIndex)

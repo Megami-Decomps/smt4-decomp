@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
 
-void *btlGetMainState(void);
 void *FUN_003ec77c(void *battle);
 void scrSetResult(s32 result);
 
@@ -11,7 +11,7 @@ u32 FUN_00380098(void)
 {
     s32 result;
 
-    if (FUN_003ec77c(btlGetMainState()) != NULL) {
+    if (FUN_003ec77c(static_cast<void *>(btlGetMainState())) != NULL) {
         result = 0;
     } else {
         result = 1;

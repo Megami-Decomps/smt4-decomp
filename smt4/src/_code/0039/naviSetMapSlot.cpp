@@ -1,5 +1,6 @@
 /* NON_MATCHING: typed slot addressing advances the base by 0x62; the compiler moves the clear branch inside the inlined category search and changes icon-result registers. */
 #include "common.h"
+#include "shard/MapNaviTable_GetCategoryCount.h"
 
 struct NavigationSlot {
     /* 0x00 */ s16 map;
@@ -36,7 +37,6 @@ struct NavigationIcon {
 struct NavigationTableContext {};
 
 extern "C" {
-s32 MapNaviTable_GetCategoryCount(NavigationTableContext *);
 NavigationCategory *MapNaviTable_GetCategoryRecord(NavigationTableContext *, u32 index);
 s32 dataTable2bSub1GetCount(NavigationTableContext *);
 NavigationIcon *dataTable2bSub1GetRecord(NavigationTableContext *, u32 index);

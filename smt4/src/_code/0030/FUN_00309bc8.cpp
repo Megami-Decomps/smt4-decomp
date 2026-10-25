@@ -1,11 +1,11 @@
 /* NON_MATCHING: only count-label/text stack placement, frame size and prologue global-load scheduling differ. */
 #include "ui/ButtonHelp.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
+#include "bible/bibleDevil.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 PlayerEquipmentAppearance *gameGetPlayerData();
-void FUN_0029ede8(u32 slot, u32 value, u32 color, s32 mode);
 void FUN_002907c4(char *buffer, u32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void textEncodeFontSlot(u32 slot, const char *text);

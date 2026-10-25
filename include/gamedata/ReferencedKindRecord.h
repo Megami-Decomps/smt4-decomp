@@ -12,4 +12,8 @@ struct KindComparisonKey {
     /* 0x04 */ u32 unk04;
 };
 
+extern "C" {
+u8 idIsAbove400(u32 value);
+}
+
 #endif

@@ -3,6 +3,9 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
+#include "text/TextDraw.h"
+#include "shard/JobWork.h"
+#include "shard/FUN_00473910.h"
 
 extern "C" {
 
@@ -23,21 +26,18 @@ typedef struct LoadingWork {
 
 extern u8 *g_aocMain;
 
-LoadingWork *jobGetWork(u32 job);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
-s32 FUN_00473910(u8 *aoc, u32 id);
 void FUN_00473754(u8 *aoc, s32 text, u8 buffer[1024]);
 s32 curveEvaluateStandard(u8 *buffer, u32 kind);
-LoadingLayout *FUN_001834a4(u32 group, u32 id);
-void FUN_00162790(u32 first, u32 second, const u16 *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+LoadingLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 
 /* Draws the loading message with its spinning marker: the message text for the current index,
  * centred in its frame, and a 3x3 grid of dots where the lit pair rotates every five frames.
  * Always returns 0. */
 s32 FUN_00478ac4(u32 job)
 {
-    LoadingWork *work = jobGetWork(job);
+    LoadingWork *work = (LoadingWork *)jobGetWork(job);
     u8 *aoc = g_aocMain;
     u32 frame = work->frame;
     u8 text[1024];
@@ -50,10 +50,10 @@ s32 FUN_00478ac4(u32 job)
 
     FUN_00473754(aoc, body, text);
     s32 width = curveEvaluateStandard(text, 3);
-    LoadingLayout *frameLayout = FUN_001834a4(0x2F, 0x2D);
+    LoadingLayout *frameLayout = asdTMTexTableEntryAt(0x2F, 0x2D);
     s32 left = (frameLayout->x + (frameLayout->size[0] >> 1) - (width >> 1)) - 9;
 
-    FUN_00162790(3, 0x57D8FFFF, (const u16 *)text, (f32)left, (f32)frameLayout->y, 0.5f, 0.0f, 1.0f);
+    textDrawString(3, 0x57D8FFFF, (const char *)text, (f32)left, (f32)frameLayout->y, 0.5f, 0.0f, 1.0f);
     s32 step = frame / 5;
     s32 first = step % 8;
     s32 second = (step + 4) % 8;
@@ -63,8 +63,8 @@ s32 FUN_00478ac4(u32 job)
     for (s32 row = 0; row < 3; row++) {
         for (s32 column = 0; column < 3; column++) {
             u32 index = row * 3 + column;
-            LoadingLayout *origin = FUN_001834a4(0x2F, 0x31);
-            LoadingLayout *dot = FUN_001834a4(0x2F, index + 0x31);
+            LoadingLayout *origin = asdTMTexTableEntryAt(0x2F, 0x31);
+            LoadingLayout *dot = asdTMTexTableEntryAt(0x2F, index + 0x31);
             s32 x = (dot->x - origin->x) + left + width + 4;
 
             if (index == first || index == second) {

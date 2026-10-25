@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d91cc` (_code @ 0x2d91cc, 0x5a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -29,8 +31,6 @@ extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1a4e; /* 0x5f1a4e */
 
-extern unsigned int FUN_0014af98(void);
-extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the sound voice update; retail walks the four voices with an inlined bounds-checked accessor and shares the voice-start tail by jumps (the draft's gotos), and keeps the group base and the voice pointers in different registers than armcc here. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 #define VOICE_PENDING 0x1
 #define VOICE_PLAYING 0x2
@@ -36,7 +37,6 @@ s32 jyoucyuGetTableEntry(s32 index);
 s32 FUN_002c1850(u32 handle);
 s32 FUN_002c1d5c(void);
 s32 FUN_002c1658(s32 a, s32 b);
-s32 FUN_002c15fc(s32 a);
 u32 asdSoundWaveVoiceCreate(void *data, u32 sourceId, s32 flag);
 void voiceSetMixParam(f32 a, f32 b);
 void FUN_0010b864(u32 handle, s32 volume, s32 flag);

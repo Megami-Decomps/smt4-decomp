@@ -1,4 +1,5 @@
 /* NON_MATCHING: initial animation phases are outlined after the shared return rather than before the timeline; -O2 candidate. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include "battle/btlGameOver.h"
@@ -26,7 +27,6 @@ void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32 actor, u32 flags, u32 value, u32 parameter,
                  u32 target, u32 first, u32 second, u32 third, u32 fourth);
 void slotSetRequest(u32, u32, u32);
-BtlMainStateA *btlGetMainState();
 void FUN_003f14a0(BtlMainStateA *);
 void btlTalkBustUpDestroy();
 void holderStopJob2(BtlMainStateA *);

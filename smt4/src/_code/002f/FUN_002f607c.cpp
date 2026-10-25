@@ -1,5 +1,6 @@
 /* NON_MATCHING: tail layout only: retail ends the third choice with `mov r6, r1; b <shared scrSetResult tail>`; built duplicates the scrSetResult/return sequence for it. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct GameOptions {
 
 s32 scrSetResult(s32 value);
 GameOptions *gameGetSupportUnitData(void);
-s32 gameGetOptionProgressStatus(void);
 s32 randNextInRange(u16 range);
 
 /* Script command: with gameGetOptionProgressStatus() == 1, picks one of the options' non-zero choices at random; the result defaults to 2. */

@@ -1,4 +1,5 @@
 /* NON_MATCHING: mask halves use different load and AND operand registers; the fallback-value test is if-converted differently. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -12,7 +13,6 @@ struct CandidateValueView {
     s32 secondary; // 0xb8
 };
 extern "C" {
-BtlMainStateA *btlGetMainState();
 
 // Report whether any eligible combatant has a positive primary or fallback value.
 u32 FUN_003caa2c()

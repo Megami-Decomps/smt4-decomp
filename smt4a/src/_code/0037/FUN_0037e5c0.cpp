@@ -3,6 +3,8 @@
 #include "shard/TextureDrawCall.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* A row of the status screen's demon list. */
@@ -42,13 +44,11 @@ extern StatusDownView *g_statusDown;
 void efctSetSpeed(f32 speed);
 s32 recordGetModeForId(s32 id);
 void statusDownCreatePanelEffects(s32 x, s32 y, s32 highlighted);
-LayoutEntry *FUN_001834a4(u32 table, u32 entry);
 void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
 void statDrawClampedDelta(u32 demon, s32 other, s32 x, s32 y, u32 slot, s32 a);
 u32 FUN_003df57c(u32 demon, u32 flag);
 u32 FUN_004bcbb4(u32 demon, u32 other);
 void textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 speed);
 void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 slot, const char *format, u32 value);
 
 /* Draws one demon row of the status list at (x, y): its panel, name, power and level readouts. */
@@ -74,14 +74,14 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
     statusDownCreatePanelEffects(x, y, special);
     efctSetSpeed(speed);
     if (demon == 0) {
-        LayoutEntry *name = FUN_001834a4(18, 0x579);
+        LayoutEntry *name = reinterpret_cast<LayoutEntry *>(asdTMTexTableEntryAt(18, 0x579));
         textFormatBuffer(text, "\x81| \x81| \x81|");
-        FUN_00162790(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+        textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
         return;
     }
     FUN_001835b4(2, 18, 0x576, x, y, 206);
     FUN_001835b4(2, 18, 0x577, x, y, 206);
-    LayoutEntry *icon = FUN_001834a4(18, 0x578);
+    LayoutEntry *icon = reinterpret_cast<LayoutEntry *>(asdTMTexTableEntryAt(18, 0x578));
     u32 power;
     if (status->compareCount <= 0) {
         FUN_00185e84(demon, icon->x + x, icon->y + y, 211, 1, 0);
@@ -91,10 +91,10 @@ void FUN_0037e5c0(s32 index, s32 x, s32 y, f32 speed)
         statDrawClampedDelta(list->compareDemon, demon, icon->x + x, icon->y + y, 211, 0);
         power = FUN_004bcbb4(list->compareDemon, demon);
     }
-    LayoutEntry *name = FUN_001834a4(18, 0x579);
+    LayoutEntry *name = reinterpret_cast<LayoutEntry *>(asdTMTexTableEntryAt(18, 0x579));
     textFormatBuffer(text, "%s", FUN_0014bd84(demon));
-    FUN_00162790(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
-    LayoutEntry *level = FUN_001834a4(18, 0x57d);
+    textDrawString(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+    LayoutEntry *level = reinterpret_cast<LayoutEntry *>(asdTMTexTableEntryAt(18, 0x57d));
     FUN_00180310(1, level->x + x, level->y + y, 1, 4, 221, "%d", power);
     efctSetSpeed(1.0f);
 }

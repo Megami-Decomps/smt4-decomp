@@ -1,9 +1,9 @@
 #include "gamedata/FusionRecipe.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include <string.h>
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-GameSlotTable *gameGetSlotTable(void);
 const FusionRecipe *contentEntryFindById(u32);
 s32 gameSlotTableFindFree(void);
 s32 bitsAt60Test(const SlotRecord *, u32);

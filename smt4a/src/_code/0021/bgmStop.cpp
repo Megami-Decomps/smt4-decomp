@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 #define BGM_SLOT_COUNT 2
 

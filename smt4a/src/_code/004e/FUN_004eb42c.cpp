@@ -1,5 +1,6 @@
 /* NON_MATCHING: battle target cursor step (next/previous candidate with wrap-around); written from the decompilation, retail unrolls the unit-flag clear loop by two and schedules differently */
 #include "common.h"
+#include "util/EventQueueAddUnique.h"
 
 #define BTL_TARGET_COUNT 0x6D
 #define BTL_UNIT_STRIDE 0x1D0
@@ -32,7 +33,6 @@ struct BtlTargetCommand {
 extern "C" {
 s32 padButtonRepeat(u32 button);
 s32 gameGlobalsGetState(void);
-void eventQueueAddUnique(u32 event);
 void sysMemClear(void *block, s32 size);
 
 static __inline void btlClearHighlights(BtlActorRefView *actor)

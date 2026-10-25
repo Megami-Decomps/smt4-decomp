@@ -2,6 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/FUN_0028f694.h"
 
 struct SpriteInfo;
 // Coordinate-only view avoids including a conflicting Apocalypse RenderCtx definition.
@@ -25,7 +26,7 @@ void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 s32 ifTouchGetSelectionModeForRegion(u32 region);
-SpriteInfo* FUN_002bf4f8(u32 table, u32 id);
+SpriteInfo* asdTMTexTableEntryAt(u32 table, u32 id);
 s32 vec2GetXInt(UiSpriteState* animation);
 s32 vec2GetYInt(UiSpriteState* animation);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
@@ -43,7 +44,7 @@ void FUN_0028f694(s32 x, s32 y, u32 region)
     } else {
         FUN_002bf288(2, 0x1D, 0x42A, x, y, 0x83);
     }
-    CampButtonSpriteView* sprite = reinterpret_cast<CampButtonSpriteView*>(FUN_002bf4f8(0x1D, 0x42A));
+    CampButtonSpriteView* sprite = reinterpret_cast<CampButtonSpriteView*>(asdTMTexTableEntryAt(0x1D, 0x42A));
     s32 markerX = vec2GetXInt(&camp->marker);
     s32 markerY = vec2GetYInt(&camp->marker);
     CampButtonRenderViewIV* context = reinterpret_cast<CampButtonRenderViewIV*>(g_titleScene);

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapRndMaze.h"
+#include "clear_save/clearSave.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int sysPlaySe(...);
 int FUN_0019de98(...);
 int uiAdjustIntegerFromRepeat(...);
 int slotSetRequest(...);
-int FUN_00212204(...);
 int FUN_00239b08(void);
 int FUN_00261a28(...);
 int scrScriptProcessStartEntry(...);

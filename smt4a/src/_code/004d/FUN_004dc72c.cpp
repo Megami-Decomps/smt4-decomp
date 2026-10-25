@@ -1,5 +1,6 @@
 /* NON_MATCHING: unit-slot address folding ([r0,#9] vs a register offset) and 64-bit mask load forms differ */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -55,7 +56,6 @@ struct BtlActingTask {
     BtlActingState *battle;
 };
 
-struct Table04Row;
 struct Table8Row {
     /* 0x00 */ u8 unk00[0x32];
     /* 0x32 */ u16 linkedId;
@@ -65,9 +65,7 @@ extern "C" {
 extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
 extern u32 g_btlActionReflect;
-Table04Row *dataTable04FindById(u32 id);
 Table8Row *dataTable8FindRecord(s32 id);
-s32 FUN_00333758(Table04Row *row);
 s32 FUN_003e7adc(BtlActingState *battle);
 s32 chainCountIdUnflagged(u32 chain, u32 flag);
 void FUN_004a96b8(u32 ui);

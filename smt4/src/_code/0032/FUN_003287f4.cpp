@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -23,7 +24,6 @@ typedef struct BattleState {
 } BattleState;
 
 s32 scrSetResult(s32 value);
-BattleState *btlGetMainState(void);
 u32 scrGetArg(u32 index);
 
 /* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has a positive stat. */
@@ -33,7 +33,7 @@ u32 FUN_003287f4(void)
     s32 i;
 
     for (i = 0; i < 109; i++) {
-        BattleUnit *unit = &btlGetMainState()->units[i];
+        BattleUnit *unit = &reinterpret_cast<BattleState *>(btlGetMainState())->units[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id) {
             BattleUnitStats *stats = (BattleUnitStats *)unit;

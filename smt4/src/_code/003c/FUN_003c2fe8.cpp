@@ -17,7 +17,6 @@ extern s32 DAT_00435dc0;
 extern const DebugHelpLabels DAT_004004a8;
 const char *FUN_002bd06c(u16 message);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
-void aocGetTableRecordOrFallback(s32 index);
 void FUN_003bc248(DebugHelpText *help, s32 index, s32 first, s32 second);
 void *dataTable02GetEntryByIndex(s32 index);
 void FUN_003bbfdc(DebugHelpText *help, void *entry);

@@ -1,8 +1,8 @@
 #ifndef CLASSES_OBJ4209D8_H
 #define CLASSES_OBJ4209D8_H
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 struct Obj4209d8Position {
     f32 x, y, z;

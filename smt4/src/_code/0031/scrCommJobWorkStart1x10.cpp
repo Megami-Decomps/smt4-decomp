@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the constants 1 and 10 in r5/r4 across the jobGetWork call; built propagates them as immediates (armcc leaves two nops in the slots) */
 #include "shard/JobWork.h"
 #include "util/CalleeContracts.h"
 
@@ -7,16 +6,27 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 FUN_002a880c(u32 work, s32 a, s32 b);
 
+static inline void startJobWorkCommand(u32 job, s32 first, s32 frames)
+{
+    FUN_002a880c(reinterpret_cast<u32>(jobGetWork(job)), first, frames);
+}
+
 /* Script command: on the first frame queues FUN_002a880c on the job work with (1, 10); finishes once the command frame reaches 10. */
 u32 scrCommJobWorkStart1x10(void)
 {
-    if (scrGetCommandFrame() != 0) {
+    switch (scrGetCommandFrame()) {
+    case 0: {
+        u32 job = scrGetArg(0);
+        s32 first = 1;
+        s32 frames = 10;
+        startJobWorkCommand(job, first, frames);
+        break;
+    }
+    default:
         if (scrGetCommandFrame() == 10) {
             return 1;
         }
-    } else {
-        u32 job = scrGetArg(0);
-        FUN_002a880c(reinterpret_cast<u32>(jobGetWork(job)), 1, 10);
+        break;
     }
     return 0;
 }

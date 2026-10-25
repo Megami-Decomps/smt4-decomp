@@ -1,10 +1,10 @@
 /* NON_MATCHING: stat-condition chain compiles with swapped compare operands and a different argument-register allocation (retail: second in fp, third in sl; shared miss tail). */
 #include "common.h"
+#include "shard/battleGetEntryHalfword.h"
 
 extern "C" {
 extern u32 FUN_0023dcfc(u32 kind);
 extern s32 FUN_00245cc0(u32 stat);
-extern s32 battleGetEntryHalfword(s32 entry, u32 stat);
 }
 
 /* A battle entry; its id selects the stat row. */

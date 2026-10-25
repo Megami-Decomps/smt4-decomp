@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shop/ShopScreen.h"
 
 union HelpSelectionPresets {
     u32 packed;

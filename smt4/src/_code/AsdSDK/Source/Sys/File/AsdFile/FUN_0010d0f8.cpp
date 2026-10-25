@@ -4,6 +4,7 @@
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 extern AsdFileGlobals g_asdFile;
@@ -11,7 +12,6 @@ extern const char DAT_00409764[];
 extern u8 g_asdFileThread[]; /* the worker thread's handle and joined flag */
 
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
-void *asdOperatorNew(u32 size, u32 owner);
 void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 size);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), void *argument,
                  u32 stackTop, s32 priority, s32 processor, u32 flags);
@@ -28,7 +28,7 @@ void FUN_0010d0f8(void)
     g_asdFile.stopRequested = 0;
     asdDebugTrace(DAT_00409764, 833);
     g_asdFile.unk18 = (u32)memAlloc(0x100, 0x100, 0, 0x1000, 0x1000, 1);
-    ThreadStackStorage *stack = (ThreadStackStorage *)asdOperatorNew(sizeof(ThreadStackStorage), owner);
+    ThreadStackStorage *stack = (ThreadStackStorage *)asdOperatorNew(sizeof(ThreadStackStorage), reinterpret_cast<void *>(owner));
     if (stack != NULL) {
         stack->info.unk00 = 0;
         stack->info.unk04 = 0;

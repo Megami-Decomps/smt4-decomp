@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation initialization uses a branch instead of predication; terminal-state tests and constant-one lifetime differ. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct SaintGermainScriptWork {
     u32 job;
@@ -21,7 +22,6 @@ extern const s8 DAT_00533364[], DAT_00533350[];
 extern const char DAT_0053328c[], DAT_00533264[];
 s32 scrGetCommandFrame();
 u32 scrGetArg(u32);
-void *asdOperatorNew(u32);
 s32 FUN_00349b14(u32);
 s32 FUN_003710f8(u32);
 u32 taskCreateDraw(const s8 *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);

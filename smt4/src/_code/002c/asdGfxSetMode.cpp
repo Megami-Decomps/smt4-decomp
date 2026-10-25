@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/asdGfxSetMode.h"
 
 extern "C" {
 

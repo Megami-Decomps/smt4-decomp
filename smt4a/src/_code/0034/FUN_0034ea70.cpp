@@ -38,7 +38,7 @@ typedef struct PartyPopup {
 
 extern u8 *g_renderCtx;
 
-LayoutRecord *FUN_001834a4(u32 group, u32 id);
+LayoutRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 vec2GetXInt(const void *vector);
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
@@ -52,7 +52,7 @@ void FUN_0034ea70(PartyPopup *popup)
     if (popup->active == 0) {
         return;
     }
-    LayoutRecord *frame = FUN_001834a4(13, 0x1DE);
+    LayoutRecord *frame = asdTMTexTableEntryAt(13, 0x1DE);
     s32 x = popup->x;
     s32 y = popup->y;
     s32 limit = popup->mode == 1 ? 14 : 11;
@@ -88,7 +88,7 @@ void FUN_0034ea70(PartyPopup *popup)
     }
     efctSetSpeed(speed);
     FUN_001835b4(2, 13, 0x1E0, x, y, 0x51);
-    LayoutRecord *window = FUN_001834a4(13, 0x1DD);
+    LayoutRecord *window = asdTMTexTableEntryAt(13, 0x1DD);
 
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 3);
     FUN_0035ae58(window->x + x, window->y + y, window->size[0], window->size[1] + y, 1);

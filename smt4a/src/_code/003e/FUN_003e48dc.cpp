@@ -1,8 +1,8 @@
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "ui/MessageMain.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartySlotTableA* gameGetSlotTable(void);
 
 static __inline PartySlotA* getPartySlot(u16 index)
 {

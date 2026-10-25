@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
 
-s32 btlGetMainState(void);
 s32 libc_strcmp(const char *a, const char *b);
 s32 FUN_00227668(void *unit);
 s32 FUN_00293230(void);
@@ -51,7 +51,7 @@ s32 FUN_003dcad0(BtlBonusUnit *unit)
     BtlNameBonus *entry;
     s32 value;
 
-    btlGetMainState();
+    reinterpret_cast<s32>(btlGetMainState());
     if (FUN_00293230() != 0) {
         return -1;
     }

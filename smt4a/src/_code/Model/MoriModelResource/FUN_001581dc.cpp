@@ -1,5 +1,6 @@
 #include "classes/Obj557d00.h"
 #include <new>
+#include "Model/MoriModelResource.h"
 extern "C" {
 void* FUN_00178b04(u32, const char*, u32);
 void FUN_0016c88c(void*, Obj557d00*);

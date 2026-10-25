@@ -7,12 +7,12 @@ extern "C" {
 
 int FUN_0025b670(unsigned int);
 int itemDrawCategoryBadge(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
@@ -37,12 +37,12 @@ extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -99,7 +99,7 @@ unsigned int FUN_002ca09c(void)
           temp_v10 = temp_v10 + -400.0f;
         }
         if (*(int *)(g_mapDepart + 0xc) == 0) {
-          temp_v2 = FUN_002bf4f8(0xe,0x10b);
+          temp_v2 = asdTMTexTableEntryAt(0xe,0x10b);
           temp_v11 = (unsigned long long)(unsigned int)(int)temp_v10;
           temp_v9 = 0x107;
           do {
@@ -111,7 +111,7 @@ unsigned int FUN_002ca09c(void)
           textFormatBuffer(temp_v13,&LAB_002ca4f8,temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002be5a4(3,0xffffffff,temp_v13);
+          textDrawString(3,0xffffffff,temp_v13);
         }
         if (*(int *)(temp_v14 + 0x24) < 10) {
           temp_v12 = (float)VectorSignedToFloat(*(int *)(temp_v14 + 0x24) * 0x28,
@@ -128,13 +128,13 @@ unsigned int FUN_002ca09c(void)
         temp_v2 = 0;
         if (temp_v2 < (*(short *)((unsigned char *)&DAT_0049fd38 + 0xa6))) {
           do {
-            temp_v1 = FUN_002bf4f8(0x1c,temp_v2 + 0x1105);
-            temp_v7 = FUN_002bf4f8(0x1c,temp_v2 + 0x110d);
-            temp_v8 = FUN_002bf4f8(0x1c,0x1101);
-            temp_v4 = FUN_002bf4f8(0x1c,0x1100);
-            temp_v16 = FUN_002bf4f8(0x1c,0x1104);
-            temp_v15 = FUN_002bf4f8(0x1c,0x1102);
-            temp_v5 = FUN_002bf4f8(0x1c,0x1103);
+            temp_v1 = asdTMTexTableEntryAt(0x1c,temp_v2 + 0x1105);
+            temp_v7 = asdTMTexTableEntryAt(0x1c,temp_v2 + 0x110d);
+            temp_v8 = asdTMTexTableEntryAt(0x1c,0x1101);
+            temp_v4 = asdTMTexTableEntryAt(0x1c,0x1100);
+            temp_v16 = asdTMTexTableEntryAt(0x1c,0x1104);
+            temp_v15 = asdTMTexTableEntryAt(0x1c,0x1102);
+            temp_v5 = asdTMTexTableEntryAt(0x1c,0x1103);
             temp_v9 = temp_v2 * 2;
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -163,7 +163,7 @@ unsigned int FUN_002ca09c(void)
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10),
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(2,0x323232ff,temp_v13,(int)*(short *)(temp_v8 + 8));
+            textDrawString(2,0x323232ff,temp_v13,(int)*(short *)(temp_v8 + 8));
             temp_v0 = *(short *)(temp_v9 + 0x49fdbc);
             temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);

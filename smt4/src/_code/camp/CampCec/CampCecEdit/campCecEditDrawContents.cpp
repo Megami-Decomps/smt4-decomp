@@ -59,7 +59,7 @@ extern "C" {
 extern CampCecEditWork *g_campCecEdit;
 extern RenderCtx *g_titleScene;
 
-ImagePlacement *FUN_002bf4f8(s32 group, s32 image);
+ImagePlacement *asdTMTexTableEntryAt(s32 group, s32 image);
 u32 FUN_0025981c(void);
 void uiDrawPanelWithValue(void *panel, s32 a, s32 b, u32 value, s32 c);
 void uiDrawCenteredResourceText(u32 text, void *area, s32 a, s32 b);
@@ -82,9 +82,9 @@ u32 campCecEditDrawContents(void)
     ImagePlacement *placement;
     s32 firstRow;
 
-    FUN_002bf4f8(0x39, 0xCF);
+    asdTMTexTableEntryAt(0x39, 0xCF);
     firstRow = work->firstRow;
-    placement = FUN_002bf4f8(0x39, 0x97);
+    placement = asdTMTexTableEntryAt(0x39, 0x97);
     CampCecEditVisibility *visibility = (CampCecEditVisibility *)((u8 *)work + 0x100);
 
     if (visibility->headerVisible != 0) {

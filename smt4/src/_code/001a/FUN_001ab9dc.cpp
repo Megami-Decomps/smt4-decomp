@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/UnitStats.h"
 
 extern "C" {
 
@@ -9,7 +10,7 @@ typedef struct Obj {
 
 extern Obj *g_infoWin;
 
-u32 FUN_001ab9dc(void)
+s32 FUN_001ab9dc(void)
 {
     return g_infoWin->unkC;
 }

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
 struct Entry {
     char work[104];

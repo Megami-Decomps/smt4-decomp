@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail reloads selection and exclusion masks inside the loop; the build hoists them and changes register allocation. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -7,7 +8,6 @@
 extern "C" {
 extern u64 g_battleMaskPresets[4];
 u32 scrGetArg(u32 index);
-BtlMainStateA *btlGetMainState();
 void asdModelStartReferencedAnimation(BattleMotionHandle **model, u32 animation);
 
 // Start an animation on the marked, eligible combatant with the requested ID.

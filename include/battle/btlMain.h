@@ -5,6 +5,7 @@
 
 #include "common.h"
 #include "battle/BattleRosterCache.h"
+#include "shard/W6_W6Match1_BattleCountSlot.h"
 #include <stddef.h>
 
 #define BTL_FLAG_NO_ENCOUNT 0x80000 /* BtlMain.flags: random encounters are suppressed */
@@ -52,7 +53,16 @@ typedef struct BtlMainState {
     /* 0x002C */ u32 jobB;        /* second job */
     /* 0x0030 */ u8 unk0030[0x30];
     /* 0x0060 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
-    /* 0x0061 */ u8 unk0061[0x1E23];
+    /* 0x0061 */ u8 unk0061[0x1F];
+    /* 0x0080 */ s8 firstBonus;
+    /* 0x0081 */ s8 secondBonus;
+    /* 0x0082 */ u8 unk0082[0x42];
+    /* 0x00C4 */ s32 selectionIndex;
+    /* 0x00C8 */ u8 unk00C8[0x18];
+    /* 0x00E0 */ u32 flagsE0;
+    /* 0x00E4 */ u8 unk00E4[0x74];
+    /* 0x0158 */ u32 selectedIds[1];
+    /* 0x015C */ u8 unk015C[0x1D28];
     /* 0x1E84 */ s16 unitTotal;
     /* 0x1E86 */ u8 unk1E86[0x12];
     union {
@@ -60,6 +70,9 @@ typedef struct BtlMainState {
         /* 0x1E98 */ BtlActionRecord* actions;
     };
 } BtlMainState;
+typedef char BtlMainStateLayoutCheck[
+    sizeof(BtlMainState) == 0x1E9C && offsetof(BtlMainState, selectionIndex) == 0xC4 && offsetof(BtlMainState, flagsE0) == 0xE0 && offsetof(BtlMainState, firstBonus) == 0x80 && offsetof(BtlMainState, secondBonus) == 0x81 &&
+    offsetof(BtlMainState, selectedIds) == 0x158 && offsetof(BtlMainState, unitTotal) == 0x1E84 ? 1 : -1];
 
 struct BtlCombatantEntryA;
 struct BattleRosterRecordA;
@@ -146,6 +159,15 @@ typedef struct BtlMainStateA {
         /* 0x008C */ u8 unk008C[0x1E34];
         /* 0x008C */ u32 phase;
         struct {
+            u8 prefix[0xC];
+            /* 0x0098 */ u32 frame;
+        } timing;
+        struct {
+            u8 prefix[0x14];
+            /* 0x00A0 */ s8 firstBonus;
+            /* 0x00A1 */ s8 secondBonus;
+        } statBonus;
+        struct {
             u8 unk008C[0x80];
             /* 0x010C */ u32 statusFlags;
             /* 0x0110 */ u32 controlFlags;
@@ -168,6 +190,17 @@ typedef struct BtlMainStateA {
             /* 0x008C */ u8 unk008C[0x18];
             /* 0x00A4 */ u32 currentSlot;
         } unitRecord;
+        struct {
+            u8 prefix[0x60];
+            /* 0x00EC */ s32 first;
+            /* 0x00F0 */ s32 currentAction;
+            u8 unk00F4[0x18];
+            /* 0x010C */ s32 second;
+        } activity;
+        struct {
+            u8 prefix[0x92];
+            /* 0x011E */ u16 devilId;
+        } devil;
         struct {
             u8 prefix[0x64];
             s32 secondaryId; /* 0xF0 */
@@ -222,6 +255,8 @@ typedef struct BtlMainStateA {
         struct {
             u8 prefix[0x2C70];
             /* 0x4C70 */ s16 counts[2];
+            /* 0x4C74 */ u8 unk4C74[4];
+            /* 0x4C78 */ s16 requested[2];
         } targetCapacity;
         struct {
             /* 0x2000 */ u8 unk2000BeforePending[0x410];
@@ -312,12 +347,48 @@ typedef struct BtlMainStateA {
             u8 prefix[0x25B9];
             u8 chanceBonus; /* 0x45B9 */
         } reinforcementChance;
+        struct {
+            u8 prefix[0x2554];
+            s32 result; /* 0x4554 */
+        } outcome;
+        struct {
+            u8 prefix[0x255C];
+            BattleCountSlot slots[16]; /* 0x455C */
+        } counters;
+        struct {
+            u8 prefix[0x25C0];
+            u8 records[0x600]; /* 0x45C0, 128 records of 0xC bytes */
+        } history;
+        struct {
+            u8 prefix[0x2CCC];
+            s32 index; /* 0x4CCC, 0xFF when none */
+        } selectedEntry;
+        struct {
+            u8 prefix[0x2C80];
+            s32 kind; /* 0x4C80 */
+        } gameOver;
+        struct {
+            u8 prefix[0x25BA];
+            u8 count; /* 0x45BA */
+        } escapes;
     };
     /* 0x4CD0 */ u8 unk4cd0;
     /* 0x4CD1 */ s8 unk4cd1;
-    /* 0x4CD2 */ u8 unk4cd2[0x1A];
+    /* 0x4CD2 */ u8 unk4cd2[6];
+    /* 0x4CD8 */ u64 scriptFlags;
+    /* 0x4CE0 */ u8 unk4ce0[0xC];
     /* 0x4CEC */ s32 specialEffect; /* effect handle for the special combatant, 0 = none */
 } BtlMainStateA;
+typedef char BtlMainStateABattleMaskViewOffsetCheck[
+    offsetof(BtlMainStateA, activity.first) == 0xEC && offsetof(BtlMainStateA, activity.currentAction) == 0xF0 &&
+    offsetof(BtlMainStateA, activity.second) == 0x10C && sizeof(BattleCountSlot) == 4 &&
+    offsetof(BtlMainStateA, outcome.result) == 0x4554 && offsetof(BtlMainStateA, counters.slots) == 0x455C &&
+    offsetof(BtlMainStateA, history.records) == 0x45C0 && offsetof(BtlMainStateA, selectedEntry.index) == 0x4CCC &&
+    offsetof(BtlMainStateA, targetCapacity.requested) == 0x4C78 && offsetof(BtlMainStateA, devil.devilId) == 0x11E &&
+    offsetof(BtlMainStateA, scriptFlags) == 0x4CD8 && offsetof(BtlMainStateA, timing.frame) == 0x98 &&
+    offsetof(BtlMainStateA, gameOver.kind) == 0x4C80 && offsetof(BtlMainStateA, escapes.count) == 0x45BA &&
+    offsetof(BtlMainStateA, statBonus.firstBonus) == 0xA0 && offsetof(BtlMainStateA, statBonus.secondBonus) == 0xA1 &&
+    sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateAUiDrawJobOffsetCheck[
     offsetof(BtlMainStateA, uiJobs.drawJob) == 0x78 && sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 typedef char BtlMainStateAAuxiliaryTaskOffsetCheck[

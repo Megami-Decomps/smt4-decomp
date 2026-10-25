@@ -1,8 +1,8 @@
 /* NON_MATCHING: only the first slot-id address/load sequence and its argument registers differ. */
 #include "shard/PlayScene.h"
+#include "util/FUN_002621b4.h"
 
 extern "C" {
-void FUN_002621b4(s32 member, s32 slot, s32 skill, s32 *target);
 void FUN_0028cb40(PlayScene *scene, u16 kind[2], s16 skill[2]);
 const void *dataTable40FindById(u32 skill);
 s32 objectPartRunUnlessLocked(PlayScenePart *part);

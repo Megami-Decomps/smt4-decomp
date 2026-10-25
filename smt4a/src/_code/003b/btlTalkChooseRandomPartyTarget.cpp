@@ -1,6 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct TalkCandidateParty {
     u8 unk0000[0x1c88];
@@ -22,11 +24,9 @@ extern "C" {
 extern TalkCandidateMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32);
 void scrSetResult(s32);
-u8 *gameGetSlotTable();
 u8 bitsAt60Test(BitsAt60 *, u8);
 u32 FUN_004bd0d8(SlotRecord *);
 u32 randRange(s32);
-BtlMainStateA *btlGetMainState();
 
 u32 btlTalkChooseRandomPartyTarget()
 {

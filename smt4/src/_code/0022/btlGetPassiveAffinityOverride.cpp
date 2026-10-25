@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 
 struct BtlEntry;
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
 void FUN_0022abe0(const BtlEntry *, u16 *);
 

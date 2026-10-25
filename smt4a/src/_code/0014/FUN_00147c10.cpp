@@ -89,7 +89,7 @@ static __inline void sortByPriority(ObjectList *list)
 /* Finishes the frame's object lists: updates the effects, orders the three render lists and releases the command queue. */
 extern "C" void FUN_00147c10(ObjectGroup *group)
 {
-    for (u32 i = 0; i < group->effectCount; i++) {
+    for (s32 i = 0; i < group->effectCount; i++) {
         FUN_00173818(group->effects + (i & 0xffffff) * 0x5C);
     }
     sortByPriority<FUN_00161d8c>(&group->first);

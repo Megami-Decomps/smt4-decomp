@@ -1,4 +1,5 @@
 /* NON_MATCHING: same phase logic and code layout as retail; the build schedules the 64-bit mask test, the sl/fp constants and the marker-layout loads differently (retail also folds the slot-pair offset into an ldrd with #8 and keeps the aux flag offset in a pool constant). */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlUiObjCQuery.h"
 
@@ -70,7 +71,6 @@ extern BattleAuxView *g_btlAux;
 extern UiMarkerLayout DAT_0057a634;
 extern u32 g_btlUiBlock;
 
-BattleStateView *btlGetMainState(void);
 void FUN_003e7ef0(BattleStateView *state);
 void FUN_003ed238(BattleStateView *state, u32 flags);
 s32 FUN_003f1534(BattleStateView *state, UnitRecordView *unit, u32 first, u32 second);
@@ -86,7 +86,7 @@ void FUN_004fe764(s32 x, u32 id, UnitRecordView *unit, u32 style, s32 flag);
 // waits for the UI. `result` tells the caller whether to call again.
 void FUN_0040c64c(u32 unused, UnitSelectStep *step)
 {
-    BattleStateView *state = btlGetMainState();
+    BattleStateView *state = reinterpret_cast<BattleStateView *>(btlGetMainState());
     if (step->phase == 0) {
         FUN_003e7ef0(state);
         btlPopulateSelectedSlot(step->mode, step->slot, step->unit, step->secondUnit);

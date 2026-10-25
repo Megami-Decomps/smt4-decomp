@@ -2,13 +2,13 @@
 #include "shard/Shard0033.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "ui/NumberAlignment.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 extern const char DAT_0052fa28[];
 s32 fontMeasureLineAdvance(const char *text, s32 font);
-NumberAlignmentMetric *FUN_001834a4(u32 group, u32 frame);
+NumberAlignmentMetric *asdTMTexTableEntryAt(u32 group, u32 frame);
 s32 fontMeasureFormattedText(s32 font, const char *format, ...);
-void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
 void FUN_00186008(s32 x, s32 y, s32 flags, s32 value);
 void FUN_00185e84(s32 frame, s32 x, s32 group, s32 flags, s32 first, s32 second);
 void effectDispatchSelector(s32 frame, s32 x, s32 group, s32 flags, f32 alpha);
@@ -39,17 +39,17 @@ void FUN_0016631c(MenuState *menu, const NumberAlignmentMetric *layout)
     if (caption->showSign) {
         showPlus = caption->value >= 0;
         if (showPlus)
-            signWidth = *FUN_001834a4(8, 0x1A3)->value + 12;
+            signWidth = *asdTMTexTableEntryAt(8, 0x1A3)->value + 12;
     }
     if (caption->value != 0) {
-        labelWidth += *FUN_001834a4(8, 0x19C)->value;
+        labelWidth += *asdTMTexTableEntryAt(8, 0x19C)->value;
         numberWidth = fontMeasureFormattedText(7, DAT_0052fa28, caption->value);
     }
     s32 left = (*layout->value - (labelWidth + numberWidth + 13 + signWidth)) / 2;
-    const NumberAlignmentMetric *labelMetric = FUN_001834a4(8, 0x68);
-    FUN_00162790(4, -1, caption->label, (f32)(left + 13 + signWidth),
+    const NumberAlignmentMetric *labelMetric = asdTMTexTableEntryAt(8, 0x68);
+    textDrawString(4, -1, caption->label, (f32)(left + 13 + signWidth),
         (f32)labelMetric->placement.y, 0.57f, 0.0f, caption->sprite.alpha);
-    const NumberAlignmentMetric *numberMetric = FUN_001834a4(8, 0x19D);
+    const NumberAlignmentMetric *numberMetric = asdTMTexTableEntryAt(8, 0x19D);
     FUN_00186008(left + labelWidth + 13 + signWidth, numberMetric->placement.y, 0x79, caption->value);
     FUN_00185e84(caption->icon, left + signWidth, 8, 0x79, 0, 0);
     if (showPlus)

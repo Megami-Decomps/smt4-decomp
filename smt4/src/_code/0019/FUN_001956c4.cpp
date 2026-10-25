@@ -80,7 +80,7 @@ extern int FUN_0029ee54(int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(unsigned int);
@@ -714,7 +714,7 @@ joined_r0x0019627c:
     temp_v7 = 0x12;
     break;
   case 0x12:
-    temp_v11 = FUN_002bf4f8(0x29,0x56);
+    temp_v11 = asdTMTexTableEntryAt(0x29,0x56);
     temp_v14 = 0x3dcccccd;
     temp_v5 = 0;
     do {

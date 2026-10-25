@@ -1,6 +1,7 @@
 /* Script command: starts a slot transition on a bust-up cut. Arguments: job, slot. When flag 0x522 is set the request is
  * also recorded for the UI. Always returns 1. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 /* The last slot transition request. */
@@ -17,13 +18,12 @@ struct BustupJobWork {
 
 extern SlotTransitionRequest DAT_0043e068;
 s32 scrGetArg(u32 index);
-BustupJobWork *jobGetWork(s32 jobId);
 void FUN_002bf6fc(void *cut, s32 slot, s32 first, s32 second, s32 third);
 s32 gameFlagIsSet(u32 flag);
 
 s32 FUN_0030a45c(void)
 {
-    void *cut = jobGetWork(scrGetArg(0))->cut;
+    void *cut = ((BustupJobWork *)jobGetWork(scrGetArg(0)))->cut;
     s32 slot = scrGetArg(1);
 
     FUN_002bf6fc(cut, slot, 1, 1, -1);

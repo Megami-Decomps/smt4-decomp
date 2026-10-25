@@ -1,6 +1,7 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "nn/os/IpcCommandBuffer.h"
+#include "shard/FUN_0010f548.h"
 
 extern "C" u32 DAT_004655f8;
 

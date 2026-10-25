@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -22,7 +23,6 @@ typedef struct {
 
 #define ENTITY_COUNT 109
 
-GameState *btlGetMainState(void);
 int scrSetResult(int found);
 u32 scrGetArg(u32 index);
 
@@ -34,7 +34,7 @@ u32 scrComm_Battle_EntityHasPositiveCounterA(void)
 
     i = 0;
     do {
-        Entity *entity = &btlGetMainState()->entities[i];
+        Entity *entity = &reinterpret_cast<GameState *>(btlGetMainState())->entities[i];
         u32 flags = entity->flags;
 
         if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 && entity->id == id) {

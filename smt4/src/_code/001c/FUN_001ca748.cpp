@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ca748` (_code @ 0x1ca748, 0x22a8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/FUN_002881a0.h"
 
 extern "C" {
 
@@ -26,7 +27,7 @@ int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
 int FUN_002b7bca(...);
 int eventQueueAddUnique(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int statusInventorySort(void);
 
 int FUN_0026adb4(void);
@@ -75,7 +76,6 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026ab64. */
 /* Supplied declaration required: FUN_0026adb4. */
 /* Supplied declaration required: FUN_0026ae68. */
-extern int FUN_002881a0(void);
 extern int FUN_00288498(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_0029212c. */
@@ -123,7 +123,7 @@ extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned int FUN_002bf810(unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(unsigned int);
@@ -759,7 +759,7 @@ LAB_001cb104:
         eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
-      temp_v7 = FUN_002bf4f8(0x1a,0x406);
+      temp_v7 = asdTMTexTableEntryAt(0x1a,0x406);
       temp_v15 = temp_v2 + 0xdcc;
       temp_v6 = temp_v15;
       uiScrollHandleActionsOrTouch(temp_v15,temp_v7,temp_v2 + 0x42c,(int)*(short *)(temp_v2 + 0x474),
@@ -838,7 +838,7 @@ LAB_001cb104:
       temp_v6 = FUN_0029efc0();
       temp_v15 = FUN_0029efa8(temp_v9);
       temp_v8 = objectPartRunUnlessLocked(temp_v9);
-      temp_v10 = FUN_002bf4f8(0x1a,0x406);
+      temp_v10 = asdTMTexTableEntryAt(0x1a,0x406);
       temp_v7 = *(unsigned int *)(temp_v10 + 8);
       temp_v12 = **(unsigned int **)(temp_v10 + 0xc);
       if (((*(char *)(temp_v2 + 0x411) == '\0') && (temp_v10 = FUN_00288498(), temp_v10 != 0)) &&
@@ -1002,7 +1002,7 @@ LAB_001cbbac:
         *(unsigned char *)(temp_v2 + 0x481) = temp_v3;
         break;
       }
-      temp_v7 = FUN_002bf4f8(0x1a,0x48c);
+      temp_v7 = asdTMTexTableEntryAt(0x1a,0x48c);
       temp_v8 = temp_v6;
       uiScrollHandleActionsOrTouch(temp_v6,temp_v7,0,(int)*(short *)(temp_v2 + 0x474),(int)*(short *)(temp_v2 + 0x476),
                    (int)*(short *)(temp_v2 + 0x478),temp_v2 + 0x2388,0,0);

@@ -32,7 +32,7 @@ extern int DAT_0057f280; /* 0x57f280 */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned int mapGetDisplayName(unsigned char);
@@ -145,7 +145,7 @@ unsigned int FUN_0022a0a0(void)
     }
     temp_v5 = resourceRunOperationIfUnblocked(temp_v8);
     temp_v6 = FUN_002a4894(temp_v8);
-    temp_v7 = FUN_001834a4(0x15,0x48);
+    temp_v7 = asdTMTexTableEntryAt(0x15,0x48);
     temp_v9 = temp_v8;
     FUN_003450d4(temp_v8,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
                  (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v10,0,1);

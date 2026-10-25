@@ -74,7 +74,6 @@ extern unsigned short DAT_0049fa94; /* 0x49fa94 */
 extern unsigned short DAT_0049fa96; /* 0x49fa96 */
 extern int DAT_0049fd14; /* 0x49fd14 */
 
-extern int FUN_0017fb54(void);
 /* Supplied declaration required: FUN_0022af9c. */
 /* Supplied declaration required: FUN_0022afb0. */
 /* Supplied declaration required: FUN_0022afc4. */

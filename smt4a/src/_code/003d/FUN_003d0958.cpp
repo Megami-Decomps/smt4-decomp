@@ -1,13 +1,13 @@
 /* NON_MATCHING: case 1's closing stores are tail-merged with case 3's (strne/strne then b), retail keeps all three stores in place */
 #include "gamedata/DataTable.h"
 #include "ui/SpriteWindow.h"
+#include "StaffRoll/StaffRollMain.h"
 
 extern "C" {
 
 extern SpriteWindow *g_sWin; /* 0x57f57c */
 s32 FUN_0028520c(s16 id);
 s32 FUN_001517b4(s32 first, s32 second);
-s32 slotIsActive(s32 id);
 s32 FUN_00163aa4(ByteStateWork *sprite, f32 speed);
 void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void FUN_0019e330(ByteStateWork *sprite, s32 keyframe, s32 frame);

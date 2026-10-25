@@ -1,4 +1,3 @@
-/* NON_MATCHING: large-offset flag addressing uses literal offsets rather than retail's shared 0x15d00 base. */
 #include "common.h"
 
 struct PrioritizedValues {
@@ -6,8 +5,8 @@ struct PrioritizedValues {
     u32 first; // 0x15d58
     u32 second; // 0x15d5c
     u32 fallback; // 0x15d60
-    u8 useFirst; // 0x15d64
-    u8 useSecond; // 0x15d65
+    s8 useFirst; // 0x15d64
+    s8 useSecond; // 0x15d65
 };
 
 extern "C" {

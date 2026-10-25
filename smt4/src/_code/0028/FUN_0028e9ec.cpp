@@ -21,7 +21,7 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
         if (command->kind == 2) {
             if (FUN_00293988(btlGetMainState()) == 0)
                 continue;
-            if ((btlGetMainState()->flags & 0x40000) != 0)
+            if ((btlGetMainStateExt()->flags44A0 & 0x40000) != 0)
                 continue;
         }
         if (command->kind == 6 || command->kind == 8 || FUN_0023dcb8() == 0)

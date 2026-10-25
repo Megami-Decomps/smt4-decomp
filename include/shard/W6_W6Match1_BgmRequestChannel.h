@@ -34,4 +34,8 @@ typedef char BgmRequestChannelLayoutCheck[
     offsetof(BgmRequestChannel, track.nextParam) == 0x18 &&
     offsetof(BgmRequestChannel, flags) == 0x1c ? 1 : -1];
 
+extern "C" {
+void bgmStop(s32 id, u32 fadeFrames, s32 force);
+}
+
 #endif

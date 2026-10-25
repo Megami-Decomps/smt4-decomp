@@ -14,7 +14,7 @@ int titleOverlayDraw(int);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int itemDrawCategoryBadge(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
 int FUN_002bed3c(void);
@@ -22,7 +22,7 @@ int vec2GetXInt(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
@@ -49,7 +49,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -58,7 +58,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -119,27 +119,27 @@ unsigned int FUN_0010a9c8(void)
     FUN_002bee04(g_titleScene,3,temp_v3);
     efctSetSpeed();
     FUN_002bed3c();
-    temp_v4 = FUN_002bf4f8(0xe,200);
+    temp_v4 = asdTMTexTableEntryAt(0xe,200);
     FUN_002bf380(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
     FUN_002be650(temp_v3,0);
     textFormatBuffer(temp_v9,&LAB_0010adb0,temp_v3);
-    temp_v5 = FUN_002bf4f8(0xe,0xc2);
+    temp_v5 = asdTMTexTableEntryAt(0xe,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,0xff,temp_v9,(int)*(short *)(temp_v5 + 10));
-    temp_v5 = FUN_002bf4f8(0xe,0xc1);
+    textDrawString(2,0xff,temp_v9,(int)*(short *)(temp_v5 + 10));
+    temp_v5 = asdTMTexTableEntryAt(0xe,0xc1);
     itemDrawCategoryBadge((int)(short)*(unsigned int *)(DAT_0043e190 + 0x68),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x10,0);
     drawSetColorFromRGBA8(0xff);
-    temp_v5 = FUN_002bf4f8(0xe,0xc6);
+    temp_v5 = asdTMTexTableEntryAt(0xe,0xc6);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4,0x10,
                  &LAB_0010adb8,*(unsigned int *)(DAT_0043e190 + 0x6c));
-    temp_v5 = FUN_002bf4f8(0xe,199);
+    temp_v5 = asdTMTexTableEntryAt(0xe,199);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
                  &LAB_0010adbc);
@@ -155,7 +155,7 @@ unsigned int FUN_0010a9c8(void)
     FUN_002bee04(g_titleScene,3,temp_v3);
     efctSetSpeed();
     FUN_002bed3c();
-    temp_v5 = FUN_002bf4f8(0xe,0xc0);
+    temp_v5 = asdTMTexTableEntryAt(0xe,0xc0);
     FUN_002bf380(2,0xe,0x11,*(short *)(temp_v5 + 8) + temp_v4,*(short *)(temp_v5 + 10) + temp_v2,0xb);
     FUN_002bdce0(*(unsigned short *)(temp_v1 + 0x90),*(short *)(temp_v5 + 8) + temp_v4,
                  *(short *)(temp_v5 + 10) + temp_v2,0);
@@ -175,10 +175,10 @@ unsigned int FUN_0010a9c8(void)
       temp_v7 = temp_v7 / 10;
     } while (temp_v7 != 0);
     if (temp_v1 >= 0) {
-      temp_v1 = FUN_002bf4f8(0xe,0x65 - temp_v1);
+      temp_v1 = asdTMTexTableEntryAt(0xe,0x65 - temp_v1);
     }
     else {
-      temp_v1 = FUN_002bf4f8(0xe,0x5d);
+      temp_v1 = asdTMTexTableEntryAt(0xe,0x5d);
     }
     drawSetColorFromRGBA8(0xff);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v4,

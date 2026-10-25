@@ -4,11 +4,11 @@ extern "C" QcGlobalsA g_qcMain;
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 
 
 extern "C" {
-void *jyoucyuGetTableEntry(s32 index);
 void statsSetAdditionalFlag(s32 entryId, s32 enabled);
 s32 FUN_00236110(u32 handle);
 void effectQcFinish(u32 handle);

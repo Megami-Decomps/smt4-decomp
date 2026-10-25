@@ -1,6 +1,7 @@
 /* NON_MATCHING: near (206 rows each): in the last help-text case retail tail-calls FUN_0019de98 straight from the add/movls result (ours routes it through r6), and in the demon branch retail keeps the record pointer in r3 (movs) while ours keeps it in r0 and loads the mode into r1. */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "shard/btlMainGetUnk14.h"
 
 #define HELP_TEXT_TABLE 0x39
 #define HELP_TEXT_COLOR 0xF4F4F4FF
@@ -26,7 +27,6 @@ extern PartyHelpPanel *g_partyPanel;
 void FUN_0019de98(u8 *text, u32 color);
 s32 FUN_002cad18(void);
 u32 partyPanelGetSelectedDemonId(void);
-void *btlMainGetUnk14(void);
 void FUN_003aeb18(s32 value, s32 other);
 HelpUnitRecord *slotRecordFindById(u16 id);
 void unitRecordBuild(u16 id, u8 *record);

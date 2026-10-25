@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail spills percentage constants; compiler uses SMULBB and different call-argument registers. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlAction.h"
+#include "shard/FUN_00229a3c.h"
 
 extern "C" {
-void FUN_00229a3c(s32, u32, s32, s32, s32);
 void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
 void FUN_00282820(s32, u32, s32, s32, s32, s32, s32, s32);
 

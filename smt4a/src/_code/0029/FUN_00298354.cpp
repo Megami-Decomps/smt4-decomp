@@ -31,7 +31,7 @@ static inline SlotProgressView *slotProgress(BattleUnitSlotState *slot)
 // Advance one unit's action state after the preceding job has reached a safe state.
 extern "C" s32 FUN_00298354(u32 handle)
 {
-    JobPool *job = reinterpret_cast<JobPool *>(jobGetWork(handle));
+    JobPool *job = (JobPool *)jobGetWork(handle);
     BattleUnitRecordState *work = (BattleUnitRecordState *)g_btlAction.data;
     SlotProgressView *slot = slotProgress(&work->slots[job->current]);
     bool canAdvance = true;

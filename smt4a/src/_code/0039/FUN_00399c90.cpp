@@ -1,9 +1,9 @@
 /* NON_MATCHING: simplified filesystem-result filtering, scratch-frame size and loop registers differ. */
 #include "shard/GlobalBlocks.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 u32 FUN_002e0e04(const char *, u16 *, u32);
-void FUN_002e59f8(const u16 *, u16 *, u32);
 void rt_aeabi_memclr(void *, u32);
 void FUN_001886bc();
 u32 FUN_0042b2c0(const u16 *);

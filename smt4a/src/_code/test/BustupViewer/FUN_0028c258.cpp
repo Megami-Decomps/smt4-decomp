@@ -1,5 +1,6 @@
 /* NON_MATCHING: the global-address load moves before the prologue push. */
 #include "test/BustupViewerState.h"
+#include "AsdSDK/asdTextFormatStream.h"
 
 extern "C" {
 extern const char DAT_00536bd4[];
@@ -7,7 +8,6 @@ extern const char DAT_00536bd8[];
 extern BustupViewerState *g_bustupViewer;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 const char *FUN_00180118(u16 id);
-void asdTextFormatStream(u32 text, s32 row, u32 color, s32 x, s32 y, const char *message);
 
 // Refresh the name line for the viewer's selected portrait, or show the empty-entry label.
 void FUN_0028c258(void)

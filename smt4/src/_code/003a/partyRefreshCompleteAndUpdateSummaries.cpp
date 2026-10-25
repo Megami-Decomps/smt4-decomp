@@ -55,7 +55,6 @@ s32 messageMainGetChoiceResult();
 s32 gameRecordCopy(u16, RefreshSummary *);
 void gameDataStoreRecord(u16, const RefreshSummary *);
 void FUN_0022d434(PartyRefresh *);
-s32 buttonHelpGetMode();
 void FUN_0029cc44(s32);
 void FUN_0029ee6c(s32, u32);
 void beginStatusPanelClose();

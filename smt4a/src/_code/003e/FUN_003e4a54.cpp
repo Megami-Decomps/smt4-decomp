@@ -1,8 +1,8 @@
 /* NON_MATCHING: second slot lookup adds a base-pointer MOV during index arithmetic, shifting the final branch-to-next NOP by one instruction. */
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartySlotTableA *gameGetSlotTable(void);
 u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease);
 }
 

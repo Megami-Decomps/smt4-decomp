@@ -15,10 +15,10 @@ int FUN_002c198c(...);
 int gameDataGetPlayerName(void);
 int libc_bsearch(...);
 int fontMeasureLineAdvance(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
 int tmnlGetEntryText(...);
@@ -56,12 +56,12 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -134,7 +134,7 @@ unsigned int FUN_001a26dc(void)
     }
     FUN_002bf288(2,0x1e,0x28,0,temp_v3,0xc9);
     FUN_002bf288(2,0x1e,0x29,0,temp_v3,0xc9);
-    temp_v7 = FUN_002bf4f8(0x1e,0x2a);
+    temp_v7 = asdTMTexTableEntryAt(0x1e,0x2a);
     temp_v8 = terminalGetCharacterDisplayName(*(unsigned int *)(temp_v2 + 0x7ec));
     if (temp_v8 != 0) {
       textFormatBuffer(temp_v11,&LAB_001a2aa8);
@@ -147,7 +147,7 @@ unsigned int FUN_001a26dc(void)
     temp_v8 = (int)*(short *)(temp_v7 + 8) + ((int)**(short **)(temp_v7 + 0xc) - (int)puVar6) / 2;
     VectorSignedToFloat(*(short *)(temp_v7 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,0xffffffff,temp_v11,temp_v8);
+    textDrawString(2,0xffffffff,temp_v11,temp_v8);
   }
   temp_v12 = temp_v2 + 0x788;
   temp_v3 = 0;
@@ -155,10 +155,10 @@ unsigned int FUN_001a26dc(void)
     if ((temp_v4 == 1) || (temp_v7 = FUN_0029efa8(temp_v12), temp_v7 != temp_v3)) {
       efctSetSpeed();
       if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-        temp_v7 = FUN_002bf4f8(0x1e,temp_v3 + 7);
+        temp_v7 = asdTMTexTableEntryAt(0x1e,temp_v3 + 7);
       }
       else {
-        temp_v7 = FUN_002bf4f8(0x1e,temp_v3 + 0x2b);
+        temp_v7 = asdTMTexTableEntryAt(0x1e,temp_v3 + 0x2b);
       }
       FUN_002bf380(2,0x1e,1,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10),0xd3);
       temp_v10 = 0xff;
@@ -218,7 +218,7 @@ unsigned int FUN_001a26dc(void)
           temp_v10 = 0x5a5a5aff;
         }
       }
-      temp_v8 = FUN_002bf4f8(0x1e,6);
+      temp_v8 = asdTMTexTableEntryAt(0x1e,6);
       puVar6 = temp_v11;
       fontMeasureLineAdvance(puVar6,2);
       temp_v9 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8) +
@@ -226,7 +226,7 @@ unsigned int FUN_001a26dc(void)
       VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10),
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be5a4(2,temp_v10,temp_v11,temp_v9);
+      textDrawString(2,temp_v10,temp_v11,temp_v9);
       efctSetSpeed();
     }
     temp_v3 = temp_v3 + 1;
@@ -240,10 +240,10 @@ unsigned int FUN_001a26dc(void)
   if (temp_v4 != 1) {
     temp_v4 = FUN_0029efa8(temp_v12);
     if (*(char *)(temp_v2 + 0x74e) != '\x02') {
-      temp_v3 = FUN_002bf4f8(0x1e,temp_v4 + 0x18);
+      temp_v3 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0x18);
     }
     else {
-      temp_v3 = FUN_002bf4f8(0x1e,temp_v4 + 0x35);
+      temp_v3 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0x35);
     }
     efctSetSpeed();
     FUN_002bf380(2,0x1e,2,(int)*(short *)(temp_v3 + 8),(int)*(short *)(temp_v3 + 10),0xdd);
@@ -306,7 +306,7 @@ unsigned int FUN_001a26dc(void)
         temp_v10 = 0x72e027ff;
       }
     }
-    temp_v4 = FUN_002bf4f8(0x1e,0x17);
+    temp_v4 = asdTMTexTableEntryAt(0x1e,0x17);
     puVar6 = temp_v11;
     fontMeasureLineAdvance(puVar6,3);
     temp_v7 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) +
@@ -314,8 +314,8 @@ unsigned int FUN_001a26dc(void)
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,temp_v10,temp_v11,temp_v7);
-    temp_v7 = FUN_002bf4f8(0x1e,0x14);
+    textDrawString(3,temp_v10,temp_v11,temp_v7);
+    temp_v7 = asdTMTexTableEntryAt(0x1e,0x14);
     temp_v4 = g_titleScene;
     piVar13 = (int *)(g_titleScene + 0x130c);
     temp_v8 = piVar13[*piVar13 + 2];

@@ -7,7 +7,7 @@ struct SegmentedScrollbarAnchor {
     /* 0x04 */ s32 x;
 };
 extern "C" {
-SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void FUN_00185dd4(s32 layer, u32 group, u32 sprite, s32 x, s32 y,
                   s32 width, s32 height, s32 priority);
 
@@ -22,7 +22,7 @@ void FUN_0036c91c(SegmentedScrollbarAnchor *anchor, s32 x, s32 y, u32 upEnabled,
         FUN_001835b4(2, 46, upEnabled != 0 ? 60 : 58, anchor->x + x, y, 101);
         FUN_001835b4(2, 46, downEnabled != 0 ? 61 : 59, anchor->x + x, y, 101);
         u32 thumb = thumbActive != 0 ? 64 : 63;
-        SpriteInfo *sprite = FUN_001834a4(46, thumb);
+        SpriteInfo *sprite = asdTMTexTableEntryAt(46, thumb);
         s32 height = sprite->size[1];
         s32 step = height / 32;
         FUN_00185dd4(2, 46, thumb, anchor->x + x, step * position + y,

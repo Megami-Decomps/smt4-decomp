@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map/mapDepart.h"
 
 struct TextEntry {
     s32 category;     // 0x00

@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c8340` (_code @ 0x4c8340, 0x384 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int dataTable41FindById(void);
 int FUN_003e8bb0(unsigned int [9], int, int);
 int FUN_003f0e20(...);
@@ -53,7 +53,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
   int temp_v14;
   
   temp_v6 = 0;
-  temp_v1 = btlGetMainState();
+  temp_v1 = (int)btlGetMainState();
   switch(param_4) {
   case 3:
   case 7:
@@ -74,7 +74,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
   temp_v1 = temp_v12;
   FUN_003f0e20(temp_v12,param_2);
   if (param_3 == 6 || param_3 == 7) {
-    temp_v2 = btlGetMainState();
+    temp_v2 = (int)btlGetMainState();
     FUN_003f0e20(temp_v2,param_2);
     temp_v3 = 0;
     if (temp_v2 != 0) {
@@ -83,7 +83,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     if ((temp_v2 != 0 && temp_v3 != 0) && -1 < temp_v3) {
       temp_v6 = 0x10000;
     }
-    temp_v2 = btlGetMainState();
+    temp_v2 = (int)btlGetMainState();
     FUN_003f0e20(temp_v2,param_2);
     temp_v3 = 0;
     if (temp_v2 != 0) {
@@ -96,7 +96,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
   if (param_3 != 0x14) {
     if (param_4 != 0) {
       if ((param_4 == 1) && ((-1 >= param_5 || (param_5 != 0x14)))) {
-        temp_v2 = btlGetMainState();
+        temp_v2 = (int)btlGetMainState();
         FUN_003f0e20(temp_v2,param_2);
         temp_v3 = 0;
         if (temp_v2 != 0) {
@@ -108,7 +108,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
       }
     }
     else {
-      temp_v3 = btlGetMainState();
+      temp_v3 = (int)btlGetMainState();
       FUN_003f0e20(temp_v3,param_2);
       if ((temp_v3 != 0) && (*(int *)(temp_v3 + 0xc4) >= 1)) {
         temp_v6 = temp_v6 | 0x20000;
@@ -138,7 +138,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
   if ((temp_v0 >> 10 != 2) || (temp_v0 >> 10 == *(unsigned short *)(temp_v3 + 0x28c) >> 10)) {
     temp_v8 = 0;
     temp_v13[0] = param_3;
-    temp_v4 = btlGetMainState();
+    temp_v4 = (unsigned int)btlGetMainState();
     FUN_003f0e20(temp_v4,param_2);
     temp_v10[0] = 0;
     temp_v10[1] = 0;
@@ -175,7 +175,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v6 = temp_v6 | temp_v8;
   }
   if ((temp_v6 & 0x800000) != 0) {
-    temp_v2 = btlGetMainState();
+    temp_v2 = (int)btlGetMainState();
     FUN_003f0e20(temp_v2,param_2);
     temp_v3 = 0;
     if (temp_v2 != 0) {

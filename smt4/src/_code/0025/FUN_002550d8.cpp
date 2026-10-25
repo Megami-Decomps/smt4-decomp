@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation: retail keeps the old and new values in r2/r3 across the calls to FUN_00245cc0/FUN_0023dcfc (they are small functions of the same source file whose register use armcc knew), the build saves them in callee-saved registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 /* A battle entry; only its array of halfword stats at +0x72 is named. */
@@ -9,7 +10,6 @@ struct BtlStatEntry {
 
 extern "C" {
 
-BtlMainState *btlGetMainState(void);
 BtlStatEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
 s32 FUN_00245cc0(s32 stat);
 s32 FUN_0023dcfc(s32 stat);

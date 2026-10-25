@@ -33,7 +33,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: uiGetLayoutPointDifference. */
@@ -151,7 +151,7 @@ void FUN_003d939c(int param_1)
             (**(romwright_code **)(temp_v9 + 0x12d4))();
             *(unsigned char *)(temp_v9 + 0x12d0) = 0;
           }
-          temp_v9 = FUN_001834a4(0x10,temp_v6 + 0x426d);
+          temp_v9 = asdTMTexTableEntryAt(0x10,temp_v6 + 0x426d);
           temp_v12 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 8),

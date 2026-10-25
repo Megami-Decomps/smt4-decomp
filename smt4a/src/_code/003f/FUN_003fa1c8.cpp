@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail does not hoist the constant 9 (only 1, in r5), reads the sign bit with `ands #0x80000000; bpl`, and shares the B/C return; control flow, loads and the virtual calls match. */
 #include "network/DataStore/DataStoreMain.h"
 #include "nn/Result.h"
+#include "network/Common/CTRNetInit.h"
 
 extern "C" {
 
-s32 FUN_00432acc(void);
 void _ZN18OnlineResultRecordaSERKS_(DataStoreWordTriple *dest, const DataStoreWordTriple *source);
 s32 _ZNK18OnlineResultRecord7isValidEv(const DataStoreWordTriple *header);
 void *FUN_00111800(DataStoreWordTriple *header);

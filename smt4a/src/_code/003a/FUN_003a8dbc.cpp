@@ -1,5 +1,6 @@
 #include "battle/btlScript.h"
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct Record {
     /* 0x28 */ u8 *table;
 } Record;
 
-int dataTable04FindById(u32 id);
 int scrSetResult(int value);
 int scrGetArg(u32 index);
 Record *btlUnitGet(u32 id);

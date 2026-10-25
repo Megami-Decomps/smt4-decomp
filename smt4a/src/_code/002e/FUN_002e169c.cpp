@@ -2,6 +2,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~205 rows); retail loads the render-context pointer before the ring-push value call and spills differently */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 // Render-state stack: the current entry is slots[index]; the flush callback runs when the
 // value changed (or a flush is already pending).
@@ -70,9 +71,8 @@ u32 FUN_001692ac(u32 a, u32 b);
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
 s32 vec2GetYInt(void* vec);
-SpriteRect* FUN_001834a4(s32 group, s32 index);
+SpriteRect* asdTMTexTableEntryAt(s32 group, s32 index);
 void FUN_00164168(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);
-void FUN_00162790(s32 a, u32 spriteSet, void* label, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 scaleC);
 void FUN_002acfc8(void* label, s32 x, s32 y);
 void skinObjectUpdateMatrices(RenderCtx* ctx);
 void renderCtxResetColorScale(RenderCtx* ctx);
@@ -126,19 +126,19 @@ u8 FUN_002e169c(void)
                 FUN_001835b4(2, 10, 164, x, y, 16);
             }
             if (help->shown != 0 && help->enabled != 0 && help->fadeBits >= 0x3f800000) {
-                SpriteRect* rect = FUN_001834a4(10, 29);
+                SpriteRect* rect = asdTMTexTableEntryAt(10, 29);
                 if (help->useIconSet != 0) {
                     FUN_00164168(help->iconSet, rect->x, rect->y, 21, 1.0f, 6, 0);
                 } else if (help->useIcons != 0) {
-                    FUN_00162790(2, help->spriteSet, help->labelA, (f32)rect->x, (f32)rect->y, 0.93f, 0.0f, 1.0f);
+                    textDrawString(2, help->spriteSet, (const char *)help->labelA, (f32)rect->x, (f32)rect->y, 0.93f, 0.0f, 1.0f);
                 } else {
                     FUN_002acfc8(help->labelA, rect->x, rect->y);
                 }
-                rect = FUN_001834a4(10, 30);
+                rect = asdTMTexTableEntryAt(10, 30);
                 if (help->useIconSet != 0) {
                     FUN_00164168(help->iconSet, rect->x, rect->y, 21, 1.0f, 6, 1);
                 } else if (help->useIcons != 1) {
-                    FUN_00162790(2, help->spriteSet, help->labelB, (f32)rect->x, (f32)rect->y, 0.93f, 0.0f, 1.0f);
+                    textDrawString(2, help->spriteSet, (const char *)help->labelB, (f32)rect->x, (f32)rect->y, 0.93f, 0.0f, 1.0f);
                 } else {
                     FUN_002acfc8(help->labelB, rect->x, rect->y);
                 }

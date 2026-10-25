@@ -1,6 +1,7 @@
 /* NON_MATCHING: draws the job's sprite with a grey level and alpha (special sprite ids draw twice, the second pass additive); written from the decompilation, render-stack push scheduling and the float to byte conversions not compared with retail */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "shard/JobWork.h"
 
 struct SpriteJobWork {
     /* 0x00 */ s32 spriteId;
@@ -25,7 +26,6 @@ struct SpriteJobWork {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 
-SpriteJobWork *jobGetWork(void);
 void FUN_00230038(SpriteJobWork *work);
 s32 FUN_001692ac(u32 a, u32 b);
 s32 FUN_00387580(u32 mode);
@@ -41,9 +41,9 @@ static __inline u32 spriteColorPack(f32 level, f32 alpha)
     return (((grey * 0x100 + grey) * 0x100) + grey) * 0x100 + a;
 }
 
-u32 FUN_00289f10(void)
+u32 FUN_00289f10(u32 job)
 {
-    SpriteJobWork *work = jobGetWork();
+    SpriteJobWork *work = (SpriteJobWork *)jobGetWork(job);
     if (work->blocked == 0 && work->visible != 0) {
         if (work->prepared == 0) {
             FUN_00230038(work);

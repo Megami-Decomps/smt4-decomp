@@ -3,6 +3,7 @@
 #include "battle/btlEvent.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "shard/FUN_00229a3c.h"
 
 struct BattleAction;
 struct BattleRetreatOwner { BtlScript *script; };
@@ -35,7 +36,6 @@ extern "C" {
 extern BtlMain *g_btlMain;
 extern BattleVersionResources *DAT_00435d18;
 extern BtlEvent *g_btlEvent;
-void FUN_00229a3c(s16, u32, u32, s32, s32);
 bool FUN_00256940(BtlMain *, const BtlScript *, s32);
 void btlReflectQueueKind34(s16, u32);
 BattleAction *FUN_00256898(s32, u32);

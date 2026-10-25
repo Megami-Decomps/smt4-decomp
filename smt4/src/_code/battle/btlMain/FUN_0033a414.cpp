@@ -3,11 +3,11 @@
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 extern "C" {
 extern const char DAT_00400b68[];
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(u32 heap, u32 alignment, u32 mode, u32 bytes, u32 pageSize, u32 flags);
-void *asdOperatorNew(u32 bytes);
 void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 bytes);
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, bool waitAll, s64 timeout);
 void FUN_002c526c(s32 result);

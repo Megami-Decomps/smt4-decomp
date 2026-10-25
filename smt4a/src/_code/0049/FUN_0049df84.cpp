@@ -65,7 +65,7 @@ void uiSpriteSelectAnim(void *sprite, s32 anim);
 s32 ifTouchGetSelectionMode(void);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 void asdTMTexLoadMainHeap(u32 table, s32 node);
-u32 FUN_001834a4(u32 table, u32 id);
+
 void FUN_00203b40(void *flags, u32 height, s32, s32, s32, s32);
 void FUN_00212724(void);
 void FUN_00228b04(void *listbox, s32 mode);
@@ -94,7 +94,7 @@ void FUN_0049df84(DirectoryScreenWork *work)
     work->definition = &work->definitions[work->index];
     result = 0;
     mode = ifTouchGetSelectionMode();
-    if (FUN_003450d4(work->listbox, FUN_001834a4(0x33, 0x57), work->touchPosition, work->touchWidth, work->touchX,
+    if (FUN_003450d4(work->listbox, reinterpret_cast<u32>(asdTMTexTableEntryAt(0x33, 0x57)), work->touchPosition, work->touchWidth, work->touchX,
                      work->touchY, &result, 0, 1) != 0) {
         return;
     }

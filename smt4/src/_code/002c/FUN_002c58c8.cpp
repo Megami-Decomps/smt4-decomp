@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail hoists the 0x10000 texture-kind constant into a saved register before preparation. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "shard/FUN_002c58c8.h"
 
 extern "C" {
 void FUN_002b9178(TexNode* node);

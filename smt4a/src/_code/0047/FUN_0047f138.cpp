@@ -1,5 +1,6 @@
-/* NON_MATCHING: Retail ldreq r2, [pc, #96] differs from recovered ldreq r2, [pc, #104]. */
+/* NON_MATCHING: retail materialises the zero for the three zero stack arguments in r3 right after the table test and compares the id through ip; the build zeroes r0 later and uses r3 for the id. */
 #include "common.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 // Private view of the 16-byte records referenced by this function.
 namespace {
@@ -16,23 +17,27 @@ struct TableEntryView {
 
 extern "C" {
 extern const TableEntryView DAT_0057a4c4[3];
-s32 jyoucyuGetTableEntry(u32 tableId);
 s32 FUN_004fb43c(u32 index, u32 argument, u32 entryValue, u32 flag,
                  u32 unkStack0, u32 unkStack4, u32 unkStack8);
+
+static __inline const TableEntryView* findFallbackEntry(u32 id)
+{
+    for (s32 index = 0; index < 3; ++index) {
+        const TableEntryView* entry = &DAT_0057a4c4[index];
+        if (entry->id == id) {
+            return entry;
+        }
+    }
+    return 0;
+}
 
 // Dispatches the first matching fallback entry when table 1 is unavailable.
 u32 FUN_0047f138(u32 id, u32 argument, s32 indexOffset)
 {
     if (jyoucyuGetTableEntry(1) == 0) {
-        for (s32 index = 0; index < 3; ++index) {
-            const TableEntryView* entry = &DAT_0057a4c4[index];
-            if (entry->id == id) {
-                if (entry != 0 && entry->unk08 != 0) {
-                    FUN_004fb43c(entry->unk0C + indexOffset, argument,
-                                 entry->unk08, 1, 0, 0, 0);
-                }
-                return 0;
-            }
+        const TableEntryView* entry = findFallbackEntry(id);
+        if (entry != 0 && entry->unk08 != 0) {
+            FUN_004fb43c(entry->unk0C + indexOffset, argument, entry->unk08, 1, 0, 0, 0);
         }
     }
     return 0;

@@ -1,12 +1,12 @@
 /* NON_MATCHING: duplicate retail trigonometric evaluations are absent; VFP scheduling and marker addressing differ. */
 #include "map/mapRndMaze.h"
 #include "Model/ModelList.h"
+#include "shard/FUN_003857c8.h"
 
 extern "C" {
 extern MapRndMazeA g_mapRndMaze;
 extern void *g_handleRegistry;
 void *gameFlagsGetBlock();
-void FUN_003857c8(s32 value);
 f32 mathPositionHeadingDegrees(f32 x, f32 y, f32 z, f32 targetX, f32 targetY, f32 targetZ);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
 f32 FUN_001bc124(f32 radians);

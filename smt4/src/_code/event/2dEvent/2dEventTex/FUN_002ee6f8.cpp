@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemAlloc.h"
 
 // Manager of the 2D event texture layer: the update process plus the jobs it owns.
 struct EventTexManager {
@@ -20,7 +21,6 @@ extern "C" {
 extern EventTexManager* g_eventTex;
 extern u32 g_eventTexHandles[4];
 
-void* asdMemAlloc(u32 size, u32 alignment, u32 arg, u32 memoryType, u32 flag);
 void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, s32 (*draw)(u32), s32 c,
                     void* owner, u32 parent);
 void eventTexUpdateScreenShake(void* owner);

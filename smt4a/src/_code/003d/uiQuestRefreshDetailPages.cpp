@@ -1,6 +1,7 @@
 /* NON_MATCHING: special-page reference uses a 0x944 base rather than grouped 0x900 byte loads; callback predication and page-selection success layout differ (105/107). */
 #include "shard/W5_W5Match7_DataRecord.h"
 #include "shard/W5_W5Match7_UiQuest.h"
+#include "shard/FUN_002f7730.h"
 
 struct QuestPageMetadata {
     u8 unk00[6];
@@ -14,7 +15,6 @@ u32 partyEntryFlagsBit1(s32 id);
 s32 partyEntryGetByte1(s32 id);
 u32 questHasSpecialDetailPage(u32 id);
 void questMarkSelectedSpecialDetail(void);
-s32 FUN_002f7730(s32 page, u32 id);
 }
 
 static inline const QuestPageMetadata *questPageMetadata(s32 id)

@@ -24,7 +24,7 @@ f32 FUN_00124c60(AsdText *text, s32 x, s32 y, f32 alpha)
         } else {
             opacity = (u8)(u32)(alpha * 255.0f);
         }
-        f32 right = FUN_002be5a4(text->unk50, g_asdTextDefaults.flags | opacity, text->text, left,
+        f32 right = textDrawString(text->unk50, g_asdTextDefaults.flags | opacity, text->text, left,
                                  top, 0.0f, text->scale, alpha);
         f32 drawn = right + left - left;
         if (drawn > 0.0f) {

@@ -1,7 +1,9 @@
 /* NON_MATCHING: readable rebuild of the menu frame effect draw; the remaining differences are the integer/float register split around the efct speed saves (retail keeps the speed in s16 and 1/256 alpha in s17 across the calls). */
 #include "common.h"
+#include "shard/effectSetByteSpeed.h"
+#include "text/TextDraw.h"
 
-/* A menu layout slot as FUN_001834a4 reports it: offsets of its parts. */
+/* A menu layout slot as asdTMTexTableEntryAt reports it: offsets of its parts. */
 struct LayoutRect {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ s16 x;
@@ -19,13 +21,11 @@ struct FrameMenu {
 };
 
 extern "C" {
-void FUN_00162790(f32 x, f32 y, f32 alpha, f32 unused, f32 speed, u32 mode, u32 mask, void *item);
 void FUN_00164b5c(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha);
 void efctSetSpeed(f32 speed);
-LayoutRect *FUN_001834a4(s32 group, s32 part);
+LayoutRect *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha, ...);
 void FUN_00183bb0(void);
-void effectSetByteSpeed(s32 speed);
 s32 FUN_002e5d88(u16 id);
 
 /* Draws a menu frame: the background part chosen by `style`, its two edge sprites, then the
@@ -38,7 +38,7 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
     s32 x;
     s32 y;
     if (style != 0) {
-        base = FUN_001834a4(0x1F, slot + 0x15);
+        base = asdTMTexTableEntryAt(0x1F, slot + 0x15);
         x = base->x;
         y = base->y;
         s32 edgeAlpha = alpha + 1;
@@ -55,7 +55,7 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
         }
         efctSetSpeed(menu->speed);
     } else {
-        base = FUN_001834a4(0x1F, slot + 5);
+        base = asdTMTexTableEntryAt(0x1F, slot + 5);
         x = base->x;
         y = base->y;
         FUN_00164b5c(2, 0x1F, 0, x, y, alpha);
@@ -67,8 +67,8 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
     u32 mode;
     u32 mask;
     if (style != 0) {
-        icon = FUN_001834a4(0x1F, 0x14);
-        offset = FUN_001834a4(0x1F, 0x2C);
+        icon = asdTMTexTableEntryAt(0x1F, 0x14);
+        offset = asdTMTexTableEntryAt(0x1F, 0x2C);
         mode = 3;
         mask = 0x57D8FFFF;
         if (menu->wide) {
@@ -78,8 +78,8 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
             mask = 0x9FE7FFFF;
         }
     } else {
-        icon = FUN_001834a4(0x1F, 4);
-        offset = FUN_001834a4(0x1F, 0x2B);
+        icon = asdTMTexTableEntryAt(0x1F, 4);
+        offset = asdTMTexTableEntryAt(0x1F, 0x2B);
         mode = 2;
         mask = 0xFFFFFFFF;
     }
@@ -96,7 +96,7 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
         FUN_001835b4(2, 0xB, itemId, x + offset->x, y + offset->y, alpha, icon->y);
         FUN_00183bb0();
     }
-    FUN_00162790((f32)(icon->x + x), (f32)(icon->y + y), fade, 0.0f, menu->speed, mode, mask, item);
+    textDrawString(mode, mask, (const char *)item, (f32)(icon->x + x), (f32)(icon->y + y), fade, 0.0f, menu->speed);
 }
 
 } /* extern "C" */

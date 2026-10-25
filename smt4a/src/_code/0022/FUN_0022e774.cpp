@@ -2,6 +2,7 @@
 #include "shard/Shard0033.h"
 #include "status/StatusCamera.h"
 #include "ui/UiSpriteState.h"
+#include "shard/FUN_003857b4.h"
 
 class StatusScreenModel {
 public:
@@ -23,7 +24,6 @@ extern HandleRegistry *g_handleRegistry;
 
 s32 lmapSceneGetScript(void);
 void linkHolderRunAll(StatusScreenModel *model, const Vec3 *position);
-void FUN_003857b4(s32 value);
 void resourceOwnerReleaseAll(StatusScreenModel *model);
 void resourceOwnerReleaseAndReset(HandleRegistry *registry);
 s32 lmapMainIsRunning(void);

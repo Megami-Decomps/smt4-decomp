@@ -13,7 +13,7 @@ void efctSetSpeed(float speed);
 extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int vec2GetYInt(int);
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int FUN_002a4878(int);
 
 
@@ -32,7 +32,7 @@ void FUN_00336574(int param_1,int param_2)
     temp_v1 = vec2GetYInt(param_1 + 0x12b8);
     const float opacity = *(float *)(param_1 + 0x12d8);
     efctSetSpeed(opacity);
-    temp_v2 = FUN_001834a4(0xd,*(int *)(param_1 + 0x3890) + 0x5a);
+    temp_v2 = asdTMTexTableEntryAt(0xd,*(int *)(param_1 + 0x3890) + 0x5a);
     renderCtxSetB(reinterpret_cast<RenderCtxA *>(g_renderCtx), packNibblesAndByte(6, 1, 0));
     FUN_001835b4(2,0xd,0x56,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x29);
     FUN_001835b4(2,0xd,0x57,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x29);
@@ -45,7 +45,7 @@ void FUN_00336574(int param_1,int param_2)
       temp_v6 = 0;
       do {
         if (*(char *)(param_1 + temp_v6 + 0x3c84) != '\0') {
-          temp_v3 = FUN_001834a4(0xd,temp_v6 + 0x52);
+          temp_v3 = asdTMTexTableEntryAt(0xd,temp_v6 + 0x52);
           renderCtxSetB(reinterpret_cast<RenderCtxA *>(g_renderCtx), packNibblesAndByte(6, 1, 0));
           efctSetSpeed(opacity);
           FUN_001835b4(2,0xd,0x1cb,*(short *)(temp_v3 + 8) + temp_v0,*(short *)(temp_v3 + 10) + temp_v1,0x2e
@@ -66,7 +66,7 @@ void FUN_00336574(int param_1,int param_2)
     }
     else {
       temp_v6 = FUN_002a4878(param_1 + 0x3bdc);
-      temp_v2 = FUN_001834a4(0xd,temp_v6 + 0x52);
+      temp_v2 = asdTMTexTableEntryAt(0xd,temp_v6 + 0x52);
       renderCtxSetB(reinterpret_cast<RenderCtxA *>(g_renderCtx), packNibblesAndByte(6, 1, 0));
       efctSetSpeed(opacity);
       FUN_001835b4(2,0xd,0x1cb,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);

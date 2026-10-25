@@ -20,7 +20,7 @@ int linkHolderApplyFlag(...);
 int FUN_00293f10(int, int);
 int statusCameraHandleControls(...);
 int FUN_0029ede8(int, unsigned int, unsigned int);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int FUN_002bf810(...);
 int uiPointerHitsRect(...);
 int FUN_002bffe0(...);
@@ -52,7 +52,7 @@ extern int FUN_0028d594(void);
 /* Supplied declaration required: statusCameraHandleControls. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int padIsButtonRepeat(unsigned int);
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: uiPointerHitsRect. */
 /* Supplied declaration required: FUN_002bffe0. */
@@ -354,7 +354,7 @@ LAB_001c1220:
     temp_v8 = 0;
     temp_v1 = -1;
     *(unsigned int *)(temp_v0 + 0x154) = 0;
-    temp_v7 = FUN_002bf4f8(0x39,0x42);
+    temp_v7 = asdTMTexTableEntryAt(0x39,0x42);
     temp_v17[0] = 0;
     temp_v3 = (int)*(short *)(temp_v7 + 8);
     uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
@@ -366,7 +366,7 @@ LAB_001c1220:
       temp_v4 = *(unsigned int *)(temp_v0 + 0x154) & 0xfffffffe;
     }
     *(unsigned int *)(temp_v0 + 0x154) = temp_v4;
-    temp_v7 = FUN_002bf4f8(0x39,0x43);
+    temp_v7 = asdTMTexTableEntryAt(0x39,0x43);
     temp_v17[0] = 0;
     temp_v3 = (int)*(short *)(temp_v7 + 8);
     uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
@@ -377,7 +377,7 @@ LAB_001c1220:
     else {
       *(unsigned int *)(temp_v0 + 0x154) = *(unsigned int *)(temp_v0 + 0x154) & 0xfffffffd;
     }
-    temp_v7 = FUN_002bf4f8(0x39,0x41);
+    temp_v7 = asdTMTexTableEntryAt(0x39,0x41);
     temp_v17[0] = 0;
     temp_v3 = (int)*(short *)(temp_v7 + 8);
     uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v7 + 10),(int)**(short **)(temp_v7 + 0xc),
@@ -391,7 +391,7 @@ LAB_001c1220:
     }
     do {
       if (temp_v7 < *(int *)(temp_v0 + 0x148)) {
-        temp_v3 = FUN_002bf4f8(0x39,temp_v7 + 0x96);
+        temp_v3 = asdTMTexTableEntryAt(0x39,temp_v7 + 0x96);
         temp_v17[0] = 0;
         temp_v5 = (int)*(short *)(temp_v3 + 8);
         uiPointerHitsRect(temp_v5,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
@@ -479,7 +479,7 @@ LAB_001c1220:
             temp_v7 = *(int *)(temp_v0 + 0x13c);
             temp_v3 = *(int *)(temp_v0 + 0x140);
             FUN_002bffe0(temp_v17 + 1,temp_v17,0);
-            temp_v1 = FUN_002bf4f8(0x39,0x41);
+            temp_v1 = asdTMTexTableEntryAt(0x39,0x41);
             temp_v17[0] = temp_v17[0] - *(short *)(temp_v1 + 10);
             temp_v5 = *(int *)(temp_v0 + 0x148);
             temp_v15 = (float)VectorSignedToFloat(temp_v17[0],(unsigned char)(in_fpscr >> 0x16) & 3);

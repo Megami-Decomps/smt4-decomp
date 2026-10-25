@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation in the rank comparison: retail keeps `a` in r6 and the first rank in r4. */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 /* A sortable entry: a unit id and its slot (negative when it has none). */
 struct UnitSortEntry {
@@ -25,7 +26,6 @@ struct UnitSlotRecord {
 extern "C" {
 s32 idIsAbove400(s32 id);
 UnitHighRecord *dataTable41FindById(s32 id);
-UnitLowRecord *dataTable04FindById(s32 id);
 UnitSlotRecord *gameGetSlotRecord(s32 slot);
 s32 FUN_003811ec(const UnitSortEntry *a, const UnitSortEntry *b);
 
@@ -34,7 +34,7 @@ static __inline u32 unitSortLevel(const UnitSortEntry *entry)
     if (idIsAbove400(entry->id)) {
         return dataTable41FindById(entry->id)->level;
     }
-    return dataTable04FindById(entry->id)->level;
+    return ((UnitLowRecord *)dataTable04FindById(entry->id))->level;
 }
 
 static __inline u32 unitSortRank(const UnitSortEntry *entry)

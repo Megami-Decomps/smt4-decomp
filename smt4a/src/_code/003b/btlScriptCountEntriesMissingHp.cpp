@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,7 +7,6 @@ extern "C" {
 
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 
 /* Script: counts the required, non-excluded battle entries missing at least arg 0 HP. */
 u32 btlScriptCountEntriesMissingHp(void)

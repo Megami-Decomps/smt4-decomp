@@ -1,5 +1,5 @@
 /* NON_MATCHING: the 64-bit flag mask uses different registers from retail. */
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
@@ -9,7 +9,7 @@ void scrSetResult(s32);
 u32 FUN_00380504(void)
 {
     u32 index = scrGetArg(0);
-    BattleMaskState *battle = btlGetMainState();
+    BtlMainStateA *battle = btlGetMainState();
     s32 mask = 1 << index;
     scrSetResult(((s64)mask & battle->scriptFlags) != 0);
     return 1;

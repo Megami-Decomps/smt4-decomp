@@ -17,7 +17,7 @@ typedef struct PlacementRow {
     /* 0x0A */ s16 y;
 } PlacementRow;
 
-extern PlacementRow *FUN_002bf4f8(s32 table, s32 row);
+extern PlacementRow *asdTMTexTableEntryAt(s32 table, s32 row);
 
 /* Looks up the screen position of the placement's slot; slots 4..15 are shifted by 400 px to one side, 16+ to the other. */
 void slotPlacementGetPosition(SlotPlacement *placement, s32 *x, s32 *y)
@@ -27,7 +27,7 @@ void slotPlacementGetPosition(SlotPlacement *placement, s32 *x, s32 *y)
     s32 shifted;
 
     if (placement->special != 0) {
-        row = FUN_002bf4f8(25, slot + 87);
+        row = asdTMTexTableEntryAt(25, slot + 87);
         *x = row->x;
         *y = row->y;
         return;
@@ -35,7 +35,7 @@ void slotPlacementGetPosition(SlotPlacement *placement, s32 *x, s32 *y)
     if (slot > 15) {
         slot = slot - 12;
     }
-    row = FUN_002bf4f8(25, slot + 45);
+    row = asdTMTexTableEntryAt(25, slot + 45);
     *x = row->x;
     *y = row->y;
     if (placement->mirrored == 0) {

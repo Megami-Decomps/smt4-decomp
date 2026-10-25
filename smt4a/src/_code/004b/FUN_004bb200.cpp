@@ -1,6 +1,7 @@
 /* NON_MATCHING: request and transport status mapping recovered; shared resource/string address grouping and result sign test still differ. */
 #include "common.h"
 #include "map/mapHakai.h"
+#include "util/CecSettingsSet.h"
 
 struct CecMessageRequest {
     /* 0x00 */ u32 unk00;
@@ -13,7 +14,6 @@ extern "C" {
 extern u32 g_resourceDispatchContext;
 extern const char DAT_0057f2ee[];
 extern const char DAT_0057f34a[];
-void cecSettingsSet(u32 mode, u32 flags, u32 mask, u32 option);
 u32 FUN_0042d694(u32 resource);
 void cecWriteMessageBoxNameAndData(u32 resource, u32 context, const char* title,
                                    const void* data, u32 size);

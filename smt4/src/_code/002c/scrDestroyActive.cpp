@@ -1,5 +1,6 @@
 /* Tears down the active screen: releases its resources and clears the global, then applies the manager's setting. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -25,13 +26,12 @@ void asdMemoryFreeLockedAlt(u32 resource);
 void gfxObjectDestroy(u32 effect);
 void cameraRegistryRemove(void *subObject);
 void FUN_0029c2cc(s32 effect, s32 value);
-ScreenManager *jobGetWork(void);
 void asdMemFree(ScreenState *screen);
 void jobStop(u32 setting, s32 value);
 
-void scrDestroyActive(void)
+void scrDestroyActive(u32 job)
 {
-    ScreenManager *manager = jobGetWork();
+    ScreenManager *manager = (ScreenManager *)jobGetWork(job);
     ScreenState *screen = g_btlMain;
 
     if (g_btlMain != NULL) {

@@ -2,6 +2,7 @@
 #define CLASSES_OBJ420708_H
 
 #include "classes/Obj420794.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* A filter child (vtable at 0x420708, named after it until its real name is known; 0x20 bytes):
  * a scalar parameter the filter pushes colour targets into. */

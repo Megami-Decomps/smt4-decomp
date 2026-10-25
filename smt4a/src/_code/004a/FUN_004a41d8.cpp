@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 209 rows); retail keeps the state byte pointer in a different register and does not spill fp */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/FUN_0031f208.h"
 
 // Selection state of the animated page UI.
 struct AnimatedPageSelection {
@@ -63,7 +64,6 @@ void FUN_003343f0(s32 arg);
 void screen4AEnter(StatusScreen* screen);
 void uniteCreatePreviewModel(void);
 void sortMenuAcquire(s32 a, s32 b);
-void FUN_0031f208(s32 index);
 void useCounterStart(void);
 void FUN_0019de98(s32 a, u32 color);
 

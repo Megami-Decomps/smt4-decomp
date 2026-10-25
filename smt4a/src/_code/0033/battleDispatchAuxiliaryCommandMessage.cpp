@@ -1,7 +1,7 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 u32 FUN_0027099c(u32 *command);
 u32 messageAuxDispatch(u32 message, u32 value);
 }

@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int uiAdjustIntegerFromRepeat(...);
 int FUN_001c36d8(...);
 int gameRestorePrimaryWorkSave(void);
-int FUN_00287728(...);
 int scrScriptProcessStartEntry(...);
 int slotSetRequest(...);
 int FUN_0029ee6c(...);

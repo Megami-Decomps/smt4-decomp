@@ -1,10 +1,10 @@
 /* NON_MATCHING: the zero float argument move is unpredicated and follows the range branch, shifting the constant pool; 59 built and retail rows. */
 #include "common.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern u8 g_soundVolumeSetting;
 extern u32 g_eventQueueEntries[32];
-void *jyoucyuGetTableEntry(u32 index);
 s32 FUN_00162ea4(void);
 void FUN_001448a8(u32 id, u32 volume, u32 flags);
 void FUN_00143b58(u32 id, u32 volume, u32 flags, f32 volumeScale, f32 pan);

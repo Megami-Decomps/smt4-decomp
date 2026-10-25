@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/mapDepart.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/MdlManagerDestroy.h"
 
 #define MAP_RANGE_ENTRY_COUNT 16
 
@@ -71,7 +72,6 @@ f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f3
 void FUN_002df824(s32 id, s32 flag);
 void FUN_002879dc(s32 a, s32 b, s32 c);
 void FUN_002878fc(s32 id);
-void asdMdlManagerMarkDestroy(s32 model);
 
 /* Advances every active map-range entry: it triggers when the encounter source is close and
  * faces it, plays its sound and effect, then retires its model. */

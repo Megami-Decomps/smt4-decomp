@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047e690` (_code @ 0x47e690, 0x5ec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -34,8 +36,6 @@ extern unsigned int DAT_00573cd4; /* 0x573cd4 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
-extern int btlGetMainState(void);
-extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
 extern int lcgRandomRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -199,7 +199,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
           temp_v10 = *(int *)(temp_v6 + temp_v1 * 4);
           if (*(short *)(temp_v10 + 0xc) != 0) {
             if (*(short *)(temp_v10 + 0xc) != 99) {
-              temp_v7 = btlGetMainState();
+              temp_v7 = reinterpret_cast<int>(btlGetMainState());
               if ((((DAT_00573cd4 & *(unsigned int *)(temp_v7 + 0x45a4)) == 0 &&
                     (*(unsigned int *)(temp_v7 + 0x45a0) & DAT_00573cd0) == 0) && (temp_v11 != 99)) &&
                  (temp_v11 <= *(short *)(temp_v10 + 0xc))) {
@@ -218,7 +218,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
               }
             }
             else {
-              temp_v7 = btlGetMainState();
+              temp_v7 = reinterpret_cast<int>(btlGetMainState());
               if (((DAT_00573cd4 & *(unsigned int *)(temp_v7 + 0x45a4)) == 0 &&
                    (*(unsigned int *)(temp_v7 + 0x45a0) & DAT_00573cd0) == 0) &&
                  (temp_v7 = gameFlagIsSet(*(unsigned short *)(temp_v10 + 6)), temp_v7 != 0)) {

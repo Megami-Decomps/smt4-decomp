@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlScript.h"
 #include "battle/BattleUnitSlot.h"
 
@@ -13,7 +14,6 @@ typedef struct MainState {
 } MainState;
 
 s32 scrGetArg(u32 index);
-MainState *btlGetMainState(void);
 int btlReflectCreateKind2d(s32 a, u32 caster, Unit *target, s32 b);
 
 /* Script command: runs btlReflectCreateKind2d from the script unit on the unit given by argument 0. */
@@ -22,7 +22,7 @@ u32 FUN_002f7884(void)
     s32 index = scrGetArg(0);
     u32 caster = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
 
-    btlReflectCreateKind2d(0, caster, &btlGetMainState()->units[index], 0);
+    btlReflectCreateKind2d(0, caster, &reinterpret_cast<MainState *>(btlGetMainState())->units[index], 0);
     return 1;
 }
 

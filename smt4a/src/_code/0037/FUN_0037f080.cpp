@@ -1,12 +1,11 @@
 /* NON_MATCHING: the two running sums swap registers (retail keeps the HP total in r6 and the maximum in r5). */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
-void scrSetResult(s32 value);
 
 /* Script command: sets whether the candidate combatants' combined HP is at most `argument 0` percent of their combined maximum. */
 u32 FUN_0037f080(void)

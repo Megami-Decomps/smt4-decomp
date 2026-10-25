@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps 0/1 results in r6 with one shared return, reloads the battle block per access and orders the switch's per-case stores differently; the logic and calls are the same. */
 #include "common.h"
+#include "shard/FUN_00229c5c.h"
 
 namespace {
 /* The battle state block: its flags and the index of the acting unit. */
@@ -50,7 +51,6 @@ s32 nodeListCountActiveById(u32 id, u32 arg);
 void FUN_003adc20(u32 block);
 s32 battleUiIsFadeAndFieldReady(u32 block);
 void btlUiAdvanceFadeInTransition(u32 block);
-void FUN_00229c5c(u32 block, u32 window, s32 arg);
 s32 btlUiAcceptSelection(u32 block);
 void btlUiGetAcceptedSelection(u32 block, s16 *kind, s16 *value);
 s32 FUN_0023dcb8(void);

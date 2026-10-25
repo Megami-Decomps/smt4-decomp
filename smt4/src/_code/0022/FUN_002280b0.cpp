@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct SelectedBattleParameter {
@@ -10,7 +11,6 @@ struct BattleParameterOwner {
 };
 
 extern "C" {
-void* btlGetMainState(void);
 s32 FUN_00293230(void);
 
 // Returns the selected nonnegative parameter, or zero while the script unit suppresses it.
@@ -19,7 +19,7 @@ s32 FUN_002280b0(BattleParameterOwner* owner)
     if (owner->selected == NULL || owner->selected->value < 0) {
         return -1;
     }
-    btlGetMainState();
+    static_cast<void *>(btlGetMainState());
     return FUN_00293230() != 0 ? 0 : owner->selected->value;
 }
 }

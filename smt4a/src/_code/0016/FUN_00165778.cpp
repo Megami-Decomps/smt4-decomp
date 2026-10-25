@@ -3,6 +3,7 @@
 #include "util/Vec2Fixed.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "text/TextDraw.h"
 
 // Row-major 4x4 matrix.
 struct Mtx44 {
@@ -41,9 +42,8 @@ extern "C" {
 extern u8* g_renderCtx;
 
 s32 fontMeasureLineAdvance(const char* text, s32 font);
-void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 alpha);
 void skinObjectUpdateMatrices(u8* ctx);
-SpriteRect* FUN_001834a4(s32 group, s32 index);
+SpriteRect* asdTMTexTableEntryAt(s32 group, s32 index);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
 const Mtx44* _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(Mtx44* dst, const Mtx44* src);
@@ -57,13 +57,13 @@ void FUN_00165778(ItemBadge* badge, SpriteRect* frame)
 {
     s32 captionWidth = fontMeasureLineAdvance(badge->caption, 4);
     s32 left = (*frame->extra - captionWidth) / 2;
-    FUN_00162790(4, -1, badge->caption, (f32)left, 6.0f, 0.57f, 0.0f, badge->textAlpha);
+    textDrawString(4, -1, badge->caption, (f32)left, 6.0f, 0.57f, 0.0f, badge->textAlpha);
     uiDrawItemCategoryIcon(badge->category, left - 13, 8, 121, 0);
     skinObjectUpdateMatrices(g_renderCtx);
 
-    SpriteRect* rect = FUN_001834a4(8, 427);
+    SpriteRect* rect = asdTMTexTableEntryAt(8, 427);
     FUN_001835b4(2, 8, 424, rect->x + vec2GetXInt(badge->anchor), rect->y, 101);
-    SpriteRect* countRect = FUN_001834a4(8, 426);
+    SpriteRect* countRect = asdTMTexTableEntryAt(8, 426);
     if (badge->mode != 3) {
         FUN_00180310(6, rect->x + countRect->x + vec2GetXInt(badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);
         return;
@@ -74,12 +74,12 @@ void FUN_00165778(ItemBadge* badge, SpriteRect* frame)
     f32 offsetY;
     s32 digits;
     if (badge->count < 10) {
-        countRect = FUN_001834a4(8, 425);
+        countRect = asdTMTexTableEntryAt(8, 425);
         digits = 1;
         offsetX = (8.0f - scale * 8.0f) * 0.5f;
         offsetY = (12.0f - scale * 12.0f) * 0.5f;
     } else {
-        countRect = FUN_001834a4(8, 426);
+        countRect = asdTMTexTableEntryAt(8, 426);
         digits = 2;
         offsetX = (16.0f - scale * 16.0f) * 0.5f;
         offsetY = (12.0f - scale * 12.0f) * 0.5f;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: independent zero/sentinel packet stores and the mode constant use different scheduling/registers. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct SequenceKindFivePacket {
     u8 mode; // 0x00
@@ -12,7 +13,6 @@ struct SequenceKindFivePacket {
 };
 
 extern "C" {
-void asdSequenceRequest(s32, const SequenceKindFivePacket *, u32);
 
 u32 FUN_00270c58(u16 id)
 {

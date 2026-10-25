@@ -1,4 +1,5 @@
 #include "battle/btlCamera.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct HandleRegistry {
 extern BtlCameraA *g_btlCamera;
 extern HandleRegistry *g_handleRegistry;
 
-extern BtlCameraJobA *jobGetWork(void);
 extern void jobStop(u32 job, s32 arg);
 extern void jobRefStopAndFree(void);
 extern void uiFreeCallback(u32 job);
@@ -22,9 +22,9 @@ extern void asdCameraResetScreenDefaults(s32 a, s32 b, f32 seconds);
 extern void asdMemFree(void *block);
 
 /* Tears down the battle camera (its job, gfx object, backend and registry entry) and stops the calling job. */
-void btlCameraDestroy(void)
+void btlCameraDestroy(u32 job)
 {
-    BtlCameraJobA *work = jobGetWork();
+    BtlCameraJobA *work = (BtlCameraJobA *)jobGetWork(job);
     BtlCameraA *camera = g_btlCamera;
     CameraBackend *backend;
 

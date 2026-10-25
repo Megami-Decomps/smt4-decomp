@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ typedef struct {
 } ValueRecord;
 
 u32 scrGetArg(u32 index);
-void *btlGetMainState(void);
 ValueRecord *btlMainFindEntryByListedId(void *context, u32 id);
 int scrSetResult(int value);
 
@@ -18,7 +18,7 @@ u32 FUN_0030018c(void)
 {
     u32 id = scrGetArg(0);
     int value = 0;
-    ValueRecord *record = btlMainFindEntryByListedId(btlGetMainState(), id);
+    ValueRecord *record = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
 
     if (record != NULL) {
         value = record->value;

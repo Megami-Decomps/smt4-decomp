@@ -4,9 +4,9 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "shard/FUN_002a6f48.h"
 
 extern "C" {
-s32 FUN_002a6f48(u32 table);
 AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 type, s32 id, char *path);
 TexTableEntry *asdTMTexTableCallFileB(u32 table, u32 id);
 u32 optionalWorkGetValue();

@@ -1,4 +1,5 @@
 /* NON_MATCHING: cleanup result return is shared at function end rather than before the completed-script branch. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlEvent.h"
 #include "battle/btlMain.h"
 #include "script/scrScriptProcess.h"
@@ -13,7 +14,6 @@ void scrScriptProcessStartEntry(ScriptRunState *runner, s32 entry);
 void scriptProcessSetMode(ScriptRunState *runner, s32 mode);
 void uiFadeRelease(void);
 void buttonHelpRelease(void);
-BtlMainState *btlGetMainState(void);
 u32 FUN_0023ed64(BtlEvent *event);
 
 /* Enter the battle event script once both fade channels are ready. */

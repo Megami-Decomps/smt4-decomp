@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/scrCommMessageSetMode.h"
 
 extern "C" {
 

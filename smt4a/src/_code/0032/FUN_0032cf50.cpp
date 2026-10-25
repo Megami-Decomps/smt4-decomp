@@ -1,5 +1,6 @@
 /* Per-frame update of a ramp value: while idle it is held at or above its floor; when the pending flag is set it is reset (rate 10, floor 0, value 0). */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -11,11 +12,10 @@ typedef struct {
     u8 reset;        /* 0x24 */
 } Ramp;
 
-Ramp *jobGetWork(void);
 
-void FUN_0032cf50(void)
+void FUN_0032cf50(u32 job)
 {
-    Ramp *ramp = jobGetWork();
+    Ramp *ramp = (Ramp *)jobGetWork(job);
 
     if (ramp != NULL) {
         if (ramp->reset == 0) {

@@ -10,7 +10,7 @@ s32 FUN_00184964(s32 minimum, s32 maximum);
 // returns -1 once the duration is over and the offset has been cleared.
 s32 FUN_002ac078(u32 job)
 {
-    ShakeJobWork *work = reinterpret_cast<ShakeJobWork *>(jobGetWork(job));
+    ShakeJobWork *work = (ShakeJobWork *)jobGetWork(job);
     f32 one = 1.0f;
     f32 amplitudeX = work->amplitudeX;
     f32 amplitudeY = work->amplitudeY;

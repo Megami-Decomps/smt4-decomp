@@ -1,5 +1,6 @@
 /* NON_MATCHING: only block layout and scheduling differ - retail lays the immediate (frames == 0) branch out of line after the tail and keeps the entry's third halfword and the float scale constants in different registers; every store and call is the same. */
 #include "map/MapEnvironment.h"
+#include "event/bustupEvent/BustupTex.h"
 
 namespace {
 /* One record of the map's record table (0x124 bytes each; only the first word is set here). */
@@ -61,7 +62,6 @@ extern MapEnvironmentState g_mapTable;
 extern MapEnvironmentGameView g_gameState;
 extern MapHeading g_localCameraPosition;
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void FUN_0014afd0(u32 table, u32 node);
 u32 asdTMTexTableGetHeaderValue(u32 table, u32 node);
 void FUN_00235bfc(u32 a, s32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i, f32 j);
 void FUN_00297024(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,

@@ -1,6 +1,7 @@
 /* NON_MATCHING: canonical stack-C wrapper matches its push; stack-A previous/count register grouping still differs. */
 #include "camp/RenderCtx.h"
 #include "util/CalleeContracts.h"
+#include "shard/packNibblesAndByte.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
 struct TerminalSlot {
@@ -21,7 +22,6 @@ extern "C" {
 extern TerminalScreen *g_tmnl;
 extern RenderCtx *g_titleScene;
 s32 FUN_002c5d80(u32 first, u32 second);
-s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 s32 FUN_0028186c(u32 handle);
 
 /* Draws the terminal's slot handles with the three render stacks pushed, for pages 1..98. */

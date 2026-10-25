@@ -17,14 +17,13 @@ u32 scrCommBattleGroupHpPercentAtMost()
     s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 totalHp = 0;
     s32 totalMaxHp = 0;
-    u32 first, count;
-    FUN_00301a08(kind, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 index = first; index < (s32)(first + count); ++index) {
-        const BtlCombatantEntryA *entries = btlGetMainState()->entries;
-        const BtlCombatantEntryA *entry = &entries[index];
-        u64 flags = entry->flags;
-        if (!(g_btlCandidateMasks.unavailable & flags) &&
-            (flags & g_btlCandidateMasks.required) && !(g_btlCandidateMasks.excluded & flags)) {
+    struct { s32 count; s32 first; } range;
+    FUN_00301a08(kind, &range.first, &range.count);
+    for (s32 index = range.first; index < range.count + range.first; ++index) {
+        const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0) {
             s32 hp = entry->hp;
             s32 maxHp = entry->maxHp;
             totalHp += hp;

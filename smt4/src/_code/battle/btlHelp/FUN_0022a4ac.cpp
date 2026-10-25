@@ -1,4 +1,3 @@
-/* NON_MATCHING: the reloaded previous list tail uses r1 instead of retail's r2. */
 #include "AsdSDK/AsdDebug.h"
 #include "battle/btlHelp.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -8,6 +7,22 @@ extern "C" {
 extern BtlHelpListIV *DAT_00435d78;
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
+
+/* Appends a help entry to the list. */
+static inline void btlHelpListAppend(BtlHelpListIV *list, BtlHelpEntryIV *node)
+{
+    if (list->head == NULL) {
+        list->head = node;
+    }
+    if (list->tail == NULL) {
+        list->tail = node;
+    } else {
+        list->tail->next = node;
+        node->previous = list->tail;
+        list->tail = node;
+    }
+    list->count++;
+}
 
 /* Creates a help entry and appends it to the help list. */
 BtlHelpEntryIV *FUN_0022a4ac(u16 id, s16 style, u32 argument, u32 resource, const void *body, u8 option, BtlHelpValue value)
@@ -29,18 +44,7 @@ BtlHelpEntryIV *FUN_0022a4ac(u16 id, s16 style, u32 argument, u32 resource, cons
     node->active = 1;
     node->next = NULL;
     node->previous = NULL;
-    BtlHelpListIV *list = DAT_00435d78;
-    if (list->head == NULL) {
-        list->head = node;
-    }
-    if (list->tail == NULL) {
-        list->tail = node;
-    } else {
-        list->tail->next = node;
-        node->previous = list->tail;
-        list->tail = node;
-    }
-    list->count++;
+    btlHelpListAppend(DAT_00435d78, node);
     return node;
 }
 }

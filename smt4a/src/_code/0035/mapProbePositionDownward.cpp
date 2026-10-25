@@ -1,4 +1,5 @@
 #include "shard/S1Mover.h"
+#include "shard/mapProbePositionDownward.h"
 
 extern "C" s32 FUN_0025ef68(Vec3f *position, const Vec3f *previous, u32 flags);
 

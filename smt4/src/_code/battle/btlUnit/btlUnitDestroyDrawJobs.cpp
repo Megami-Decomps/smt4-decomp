@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct DrawAllocator;
 struct DrawAllocatorVtbl {
@@ -55,7 +56,6 @@ extern "C" {
 extern DrawGlobals DAT_00439ce0;
 extern DrawSlot DAT_0049356c[2];
 
-DrawWork *jobGetWork(u32 job);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void FUN_001c0a44(DrawObject *light, s32 group);
@@ -64,7 +64,7 @@ void FUN_001c0a44(DrawObject *light, s32 group);
  * shuts the owner down. */
 void btlUnitDestroyDrawJobs(u32 job)
 {
-    DrawWork *work = jobGetWork(job);
+    DrawWork *work = (DrawWork *)jobGetWork(job);
     if (jobIsValid(work->calculationJob)) {
         jobStop(work->calculationJob, 0);
     }

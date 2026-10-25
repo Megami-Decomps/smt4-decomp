@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/effectSetByteSpeed.h"
 extern "C" {
 void efctSetSpeed(f32 speed);
 /* Normalize the unsigned byte-scale speed to floating point. */

@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (230 vs 306 rows); the compiler unrolls the stage-row search by two while retail keeps a straight loop, and retail zero-fills the name buffer with 16 word stores */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 // One BAM entry of a stage row: name, and three u16 position components stored as floats.
@@ -48,7 +49,6 @@ extern const char DAT_00527348[];
 u32 dataTableFileGetTable(u32 file, u32 index);
 StageRow* dataTableGetEntries(void);
 u32 dataTableGetCount(u32 table);
-void* btlGetMainState(void);
 void textFormatBuffer(char* out, const char* format, ...);
 s32 FUN_00240c34(const char* name);
 void resourceOwnerLoadNamed(ResourceOwner* owner, const char* name);
@@ -86,7 +86,7 @@ void FUN_00400d80(BtlStageModel* model, u32 stage, u32 substage)
     }
 
     char name[64] = { 0 };
-    btlGetMainState();
+    static_cast<void *>(btlGetMainState());
     ResourceOwner* owner = g_handleRegistry;
     textFormatBuffer(name, "%se%03d_%02d.bch", "battle/battle_map/", stage, substage);
     if (FUN_00240c34(name) == 0) {

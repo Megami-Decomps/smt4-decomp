@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "shard/aocHandleButtons.h"
 
 extern "C" {
 

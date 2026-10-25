@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00262874` (_code @ 0x262874, 0x534c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "event/2dEvent/SmokeFade.h"
 
@@ -131,7 +132,6 @@ extern int g_partyPanel; /* 0x57f268 */
 extern unsigned int DAT_0057f270; /* 0x57f270 */
 extern unsigned int DAT_0057f274; /* 0x57f274 */
 
-extern int btlGetMainState(void);
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
@@ -2851,9 +2851,9 @@ LAB_0026700c:
         FUN_00333694(temp_v14,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
         if (temp_v14 == 1) {
           *(unsigned char *)(temp_v1 + 0x9c0) = 0;
-          temp_v14 = btlGetMainState();
+          temp_v14 = reinterpret_cast<int>(btlGetMainState());
           if ((temp_v14 != 0) &&
-             (temp_v14 = btlGetMainState(),
+             (temp_v14 = reinterpret_cast<int>(btlGetMainState()),
              (*(unsigned int *)(temp_v14 + 0x45ac) & DAT_0057f274) != 0 ||
              (*(unsigned int *)(temp_v14 + 0x45a8) & DAT_0057f270) != 0)) {
             *(unsigned char *)(temp_v1 + 0x9c0) = 1;

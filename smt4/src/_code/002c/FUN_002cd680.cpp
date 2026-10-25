@@ -43,7 +43,7 @@ extern "C" u32 FUN_002cd680(void)
             return 0;
         }
     }
-    while (queue->produced != queue->consumed) {
+    while (queue->consumed != queue->produced) {
         ++queue->consumed;
     }
     return 1;

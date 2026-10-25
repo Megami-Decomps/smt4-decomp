@@ -1,6 +1,7 @@
 /* NON_MATCHING: message-tail pointer and byte tests use exchanged r0/r1 registers; count clamp now matches retail's movle. */
 #include "shard/Shard0033.h"
 #include "shard/PassiveSkill.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 extern MenuState *g_menuState;
@@ -11,7 +12,6 @@ void *gameGetSlotRecord(s32 index);
 s32 partyFindSlotById(u32 id);
 s32 FUN_004bd098(void *unit, s32 skillId);
 s32 FUN_004c6bd0(s16 id, const ActiveSkillRecord *skill);
-const ActiveSkillRecord *dataTable04FindById(s32 id);
 
 // Set the short menu message and refresh its skill-use count for the current unit.
 void FUN_00227af0(const char *text)
@@ -73,7 +73,7 @@ void FUN_00227af0(const char *text)
                     void *unit = gameGetSlotRecord(slot);
                     count = FUN_004bd098(unit, menu->skillId);
                 } else {
-                    const ActiveSkillRecord *skill = dataTable04FindById(menu->skillId);
+                    const ActiveSkillRecord *skill = (const ActiveSkillRecord *)dataTable04FindById(menu->skillId);
                     count = FUN_004c6bd0(static_cast<s16>(menu->tail.unitId), skill);
                 }
             }

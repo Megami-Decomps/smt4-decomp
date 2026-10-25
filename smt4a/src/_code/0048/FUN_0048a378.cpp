@@ -1,5 +1,6 @@
 /* NON_MATCHING: Background-reset and alternate-feedback cold blocks are placed differently from retail. */
 #include "map/mapDepart.h"
+#include "shard/FUN_00384cf4.h"
 
 struct NavigationFeedbackRequest {
     u8 unk00[0xC];
@@ -20,7 +21,6 @@ NavigationFeedbackMode *gameFlagsGetBlock(void);
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void FUN_003b61ec(void);
-s32 FUN_00384cf4(void);
 void FUN_00183e58(void);
 void sysPlaySe(s32 sound);
 void uiPlayGatedActionFeedback(void);

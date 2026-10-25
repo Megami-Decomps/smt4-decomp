@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -16,7 +17,6 @@ extern "C" {
 u32 scrGetArg(s32 argument);
 u32 btlResolveEntryChoice(u32 choice);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 
 /* Test eligible group entries and the special active entry for a positive counter. */

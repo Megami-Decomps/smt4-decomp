@@ -16,7 +16,7 @@ int FUN_00163aa4(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(...);
-int FUN_001834a4(int, int);
+int asdTMTexTableEntryAt(int, int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int dataTableGet(...);
@@ -51,7 +51,7 @@ extern int g_gameState; /* 0x5f15fc */
 extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: dataTableGet. */
@@ -146,7 +146,7 @@ void FUN_00202ea4(void)
       temp_v11 = 0;
       if (temp_v11 < temp_v6) {
         do {
-          temp_v1 = FUN_001834a4(0x24,temp_v3 + temp_v11);
+          temp_v1 = asdTMTexTableEntryAt(0x24,temp_v3 + temp_v11);
           temp_v2 = (int)*(short *)(temp_v1 + 8);
           ifTouchRegionAdd(temp_v2,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
                        (int)(*(short **)(temp_v1 + 0xc))[1]);
@@ -193,7 +193,7 @@ void FUN_00202ea4(void)
     break;
   case 2:
     temp_v12[0] = 0;
-    FUN_001834a4(0x24,0x59);
+    asdTMTexTableEntryAt(0x24,0x59);
     scrRunOpcodesStub(*(unsigned int *)(temp_v7 + 0x84));
     temp_v3 = ifTouchGetSelectionMode();
     temp_v6 = temp_v7;

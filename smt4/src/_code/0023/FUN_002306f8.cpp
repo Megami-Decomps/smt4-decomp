@@ -1,6 +1,7 @@
 /* NON_MATCHING: inlined price-return paths use fewer saved registers and reload constants on demand; common money-settlement block placement differs. */
 #include "gamedata/Table8Record.h"
 #include "gamedata/PartyMoney.h"
+#include "camp/Config/Config.h"
 
 struct InventoryTransactionItem {
     u16 id;
@@ -44,7 +45,6 @@ EquipmentTransactionPrices *dataTable08Sub2GetRecord(u32 id);
 ContentTransactionPrice *aocRecordLookup84(u32 id);
 void FUN_00250d84(u32 id, s32 quantity);
 void FUN_00295a18(u32 id, u32 quantity);
-s32 FUN_002973ec(void);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 }
 

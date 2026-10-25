@@ -1,5 +1,6 @@
 /* Tail call into the function that follows. */
 #include "common.h"
+#include "shard/asdModelCommitCommandRange.h"
 
 extern "C" {
 

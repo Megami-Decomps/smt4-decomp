@@ -1,6 +1,7 @@
 /* NON_MATCHING: field copies corrected; slot-store scheduling and duplicated learned-bit store tail still differ. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/gameDataSetItemFlag.h"
 
 /* A unit record (0x604 bytes, accessed fields). */
 struct UnitRecord {
@@ -60,7 +61,6 @@ struct DevilCopy {
 
 extern "C" {
 s8 *gameGetSlotTable(void);
-void gameDataSetItemFlag(u16 id, s32 value);
 void gameDataSlotSetFlag(u16 id, s32 value);
 DevilRecord *devilGetRecord(u16 id);
 void gameRecordCopy(u16 id, DevilCopy *copy);

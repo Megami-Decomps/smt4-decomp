@@ -1,11 +1,12 @@
 /* Tail call into the function that follows. */
 #include "common.h"
+#include "shard/FUN_0023ea64.h"
 
 extern "C" {
 
 void resourceFindActiveIndex(u32);
 
-void FUN_0023ea64(void)
+s32 FUN_0023ea64(u8 *arg0)
 {
     resourceFindActiveIndex(39);
 }

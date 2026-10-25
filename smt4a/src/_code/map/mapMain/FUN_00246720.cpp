@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/GameGlobals.h"
+#include "shard/asdMemoryAllocTracked.h"
 
 /* The part of g_gameState the map start-up clears. */
 struct MapGameState {
@@ -76,7 +77,6 @@ extern MapMainBlockA *g_mapMain;
 extern u32 g_handleRegistry;
 extern MapGameState g_gameState;
 
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 bytes, u32 option);
 u8 *gameFlagsGetBlock(void);
 void FUN_002c23cc(s32 mode);
 void mapEplAlloc(void);

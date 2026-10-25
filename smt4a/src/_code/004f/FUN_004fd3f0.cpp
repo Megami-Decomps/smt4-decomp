@@ -1,9 +1,9 @@
 /* NON_MATCHING: action stores lack retail writeback addressing and retain fewer zero-valued registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(BtlMainStateA *);
 void FUN_0047effc(s32, u32, u32);
 

@@ -1,4 +1,5 @@
 /* NON_MATCHING: effect-name initialization registers and final owner-load scheduling differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/btlEffect.h"
@@ -14,7 +15,6 @@ s32 scrGetArg(s32 index);
 s32 FUN_0027e3b8(u32 event);
 s32 FUN_0024550c(BtlEffectOwner *owner);
 void ARM_common_memcpy4_9(char *destination, const char *source);
-BtlMainState *btlGetMainState(void);
 void FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, s32 effect, s32 lookup, s32 extra);
 void FUN_001b1a48(s32 effect, u32 unit, BtlEffectSlotBlock *slots, s32 flags, s32 firstMember, s32 secondMember);
 

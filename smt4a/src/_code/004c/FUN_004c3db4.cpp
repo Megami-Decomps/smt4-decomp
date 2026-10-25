@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c3db4` (_code @ 0x4c3db4, 0x374 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -21,7 +22,6 @@ extern unsigned int DAT_0057144c; /* 0x57144c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int btlGetMainState(void);
 extern unsigned int randRange(unsigned int);
 extern int lcgRandomRange(unsigned int);
 extern int gameFlagIsSet(void);
@@ -62,7 +62,7 @@ void FUN_004c3db4(unsigned int *param_1)
   float temp_v14;
   float temp_v15;
   
-  temp_v1 = btlGetMainState();
+  temp_v1 = reinterpret_cast<int>(btlGetMainState());
   piVar12 = (int *)(temp_v1 + 0x1b0);
   temp_v2 = (unsigned int)*(unsigned short *)((int)param_1 + 0x166);
   dataTable00FindById();

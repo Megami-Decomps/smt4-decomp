@@ -10,7 +10,7 @@ int FUN_002a34e8(...);
 int mathMatrixTranslateLocal(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_002c198c(...);
 int VectorSignedToFloat(...);
@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -105,7 +105,7 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v6 = 0x3f800000;
     efctSetSpeed();
     FUN_002bed3c();
-    FUN_002bf4f8(0x2d,3000);
+    asdTMTexTableEntryAt(0x2d,3000);
     temp_v4 = 0.35f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -133,7 +133,7 @@ unsigned int FUN_00335b80(int *param_1)
     }
     efctSetSpeed();
     FUN_002bed3c();
-    temp_v1 = FUN_002bf4f8(0x2d,0x7d2);
+    temp_v1 = asdTMTexTableEntryAt(0x2d,0x7d2);
     temp_v9[0] = param_1[0xb];
     temp_v20 = 0;
     uStack_44 = VectorSignedToFloat(-(int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -159,7 +159,7 @@ unsigned int FUN_00335b80(int *param_1)
     mathMatrixTranslateLocal(temp_v9,temp_v9,&temp_v19);
     FUN_002a34e8(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
-    temp_v1 = FUN_002bf4f8(0x2d,2000);
+    temp_v1 = asdTMTexTableEntryAt(0x2d,2000);
     temp_v8 = 0.3f;
     temp_v4 = temp_v8;
     renderCtxCalculateStereoParallax(g_titleScene);
@@ -189,7 +189,7 @@ unsigned int FUN_00335b80(int *param_1)
     mathMatrixTranslateLocal(temp_v9,temp_v9,&temp_v19);
     FUN_002a34e8(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
-    temp_v1 = FUN_002bf4f8(0x2d,0x7d1);
+    temp_v1 = asdTMTexTableEntryAt(0x2d,0x7d1);
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v8 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -219,7 +219,7 @@ unsigned int FUN_00335b80(int *param_1)
     }
     efctSetSpeed();
     FUN_002bed3c();
-    FUN_002bf4f8(0x2d,1000);
+    asdTMTexTableEntryAt(0x2d,1000);
     temp_v4 = 0.28f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v4 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

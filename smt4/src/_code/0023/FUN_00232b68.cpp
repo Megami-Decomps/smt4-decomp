@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00232b68` (_code @ 0x232b68, 0x654 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -46,7 +47,6 @@ typedef struct {
 /* Supplied declaration required: btlSourceGetMaxHp. */
 /* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: FUN_00269bf0. */
-extern int btlGetMainState(void);
 extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
@@ -102,7 +102,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
   pfVar11 = (fn_00232b68_arg0 *)0x1;
   temp_v8 = 0;
   if (temp_v5 != 0) {
-    temp_v9 = btlGetMainState();
+    temp_v9 = reinterpret_cast<int>(btlGetMainState());
     if (temp_v9 == 0) {
       temp_v9 = (int)*(short *)(temp_v5 + 0x1c);
     }
@@ -112,7 +112,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
     }
   }
   if (temp_v6 != 0) {
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     if (temp_v8 == 0) {
       temp_v8 = (int)*(short *)(temp_v6 + 0xe);
     }

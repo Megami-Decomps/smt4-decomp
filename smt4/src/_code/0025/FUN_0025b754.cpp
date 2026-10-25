@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (207 rows against 204): same overlay kinds, blink offset easing (two steps towards 0/16/32/-16), colour packing and the +2.0 float offsets; retail expands the easing separately in every switch case with the target held in a register and switches through `__switch$$` with different register assignment (r4 colour, r5 mode, r6 selector, r7 state block), ours differs in register choice and case layout */
 #include "util/FUN_0024ac68.h"
+#include "shard/FUN_0024ac7c.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef short s16;
@@ -34,7 +35,6 @@ extern GameStateBlock g_gameState;   /* 0x49f91c */
 extern s32 DAT_00448c90;             /* 0x448c90: current blink offset */
 
 s32 frameTextureGetState(void);
-void FUN_0024ac7c(s32 enable);
 void FUN_001dd1e0(u32 target, u32 color, s32 flag, s32 mode, f32 x, f32 y);
 void FUN_001dd140(u32 target, u32 color, s32 flag, s32 mode, f32 x, f32 y);
 

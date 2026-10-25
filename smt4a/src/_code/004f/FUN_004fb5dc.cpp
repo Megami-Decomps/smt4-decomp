@@ -1,4 +1,5 @@
 /* NON_MATCHING: Optional follow-up parameters use an LDM pair and different saved registers instead of retail's LDRD pair. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -11,7 +12,6 @@ struct ReflectTargetA {
 }
 extern "C" {
 
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 listedId);
 
 /* Queues a target action and an optional follow-up for its corresponding battle unit. */

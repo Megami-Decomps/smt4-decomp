@@ -1,4 +1,5 @@
 #include "common.h"
+#include "bible/bibleDevil.h"
 
 extern "C" {
 

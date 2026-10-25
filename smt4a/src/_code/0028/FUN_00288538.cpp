@@ -8,10 +8,10 @@
 extern "C" {
 
 int FUN_0015f858(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int jobGetScalarValue(void);
 int FUN_0037245c(...);
 void uiDrawItemListRow(int x, int y, int message, int category, unsigned int color, unsigned int id, float effect);
@@ -35,11 +35,11 @@ extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015f858. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: jobGetScalarValue. */
 extern int resourceRunOperationIfUnblocked(void);
@@ -88,7 +88,7 @@ void FUN_00288538(int param_1)
       temp_v9 = 0;
       temp_v10 = 0;
       FUN_0037245c(temp_v2,&temp_v9,&temp_v10);
-      temp_v0 = FUN_001834a4(0x12,temp_v2 + 0x533);
+      temp_v0 = asdTMTexTableEntryAt(0x12,temp_v2 + 0x533);
       temp_v6 = 0xffffffff;
       temp_v8 = temp_v10 == 0x12d || temp_v10 == 0x1a5;
       if (temp_v10 != 0x12d && temp_v10 != 0x1a5) {
@@ -112,22 +112,22 @@ void FUN_00288538(int param_1)
       temp_v7 = *(short *)(temp_v0 + 8) + temp_v1;
       temp_v5 = *(short *)(temp_v0 + 10) + temp_v11;
       FUN_00164b5c(2,0x12,0xd,temp_v7,temp_v5,0xbf);
-      temp_v0 = FUN_001834a4(0x12,0xa0);
+      temp_v0 = asdTMTexTableEntryAt(0x12,0xa0);
       uiDrawItemCategoryIcon((int)(short)temp_v3,*(short *)(temp_v0 + 8) + temp_v7,*(short *)(temp_v0 + 10) + temp_v5,
                    0xc4,0);
-      temp_v0 = FUN_001834a4(0x12,0xa1);
+      temp_v0 = asdTMTexTableEntryAt(0x12,0xa1);
       if (temp_v4 >= 1) {
         FUN_0015f858(temp_v4,0);
         if (temp_v4 != 0) {
           VectorSignedToFloat(*(short *)(temp_v0 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v0 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(2,temp_v6);
+          textDrawString(2,temp_v6);
         }
       }
       else {
         VectorSignedToFloat(*(short *)(temp_v0 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v0 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_00162790(2,temp_v6,&DAT_0052bfdc);
+        textDrawString(2,temp_v6,&DAT_0052bfdc);
       }
       do {
         temp_v2 = temp_v2 + 1;
@@ -173,34 +173,34 @@ void FUN_00288538(int param_1)
           }
         }
       }
-      temp_v3 = FUN_001834a4(0x12,temp_v1 + 0x466);
+      temp_v3 = asdTMTexTableEntryAt(0x12,temp_v1 + 0x466);
       temp_v4 = temp_v10;
       temp_v2 = temp_v9;
       temp_v7 = *(short *)(temp_v3 + 8) + temp_v12;
       temp_v5 = *(short *)(temp_v3 + 10) + temp_v13;
       FUN_00164b5c(2,0x12,0xd,temp_v7,temp_v5,0xbf);
-      temp_v3 = FUN_001834a4(0x12,0x464);
+      temp_v3 = asdTMTexTableEntryAt(0x12,0x464);
       uiDrawItemCategoryIcon((int)(short)temp_v4,*(short *)(temp_v3 + 8) + temp_v7,*(short *)(temp_v3 + 10) + temp_v5,
                    0xc4,0);
-      temp_v4 = FUN_001834a4(0x12,0x465);
+      temp_v4 = asdTMTexTableEntryAt(0x12,0x465);
       if (temp_v2 >= 1) {
         FUN_0015f858(temp_v2,0);
         if (temp_v2 != 0) {
           VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(2,temp_v6);
+          textDrawString(2,temp_v6);
         }
       }
       else {
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_00162790(2,temp_v6,&DAT_0052bfdc);
+        textDrawString(2,temp_v6,&DAT_0052bfdc);
       }
     }
     do {
       temp_v1 = temp_v1 + 1;
       if (temp_v1 >= 7) {
-        temp_v1 = FUN_001834a4(0x12,temp_v0 + 0x477);
+        temp_v1 = asdTMTexTableEntryAt(0x12,temp_v0 + 0x477);
         FUN_0037245c(temp_v0,&temp_v9,&temp_v10);
         temp_v6 = 0x9b9b9bff;
         temp_v8 = temp_v10 == 0x12d || temp_v10 == 0x1a5;

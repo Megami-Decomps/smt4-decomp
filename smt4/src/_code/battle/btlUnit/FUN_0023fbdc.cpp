@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
+#include "battle/btlUnit.h"
 
 /* One battle unit (0x114 bytes); only the fields this state reads. */
 struct ReflectUnit {
@@ -65,7 +66,6 @@ s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
 void FUN_003ae720(u32 block, s32 mode);
 void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
-s32 FUN_003db7b4(ReflectMainState *state);
 void FUN_002b7bca(ReflectUnit **list, s32 count, s32 stride, void *compare);
 void FUN_0019d7d4(void);
 const u16 *FUN_0027da30(ReflectBattle *battle, s32 slot);

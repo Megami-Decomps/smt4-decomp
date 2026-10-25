@@ -9,7 +9,7 @@ int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 
 typedef int romwright_code(...);
@@ -36,7 +36,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -58,16 +58,16 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   int *piVar11;
   
   FUN_002bf380(2,0x28,4,param_2,param_3,0x65);
-  temp_v2 = FUN_002bf4f8(0x28,0x87);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0x87);
   drawSetColorFromRGBA8(0x7a4c00ff);
   temp_v3 = gameGetPlayerData();
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0,0,0x6a,
                &LAB_003b74ac,((unsigned int)*(unsigned char *)(temp_v3 + 0x76) - (int)*(char *)(param_1 + 0xd530)) * 5)
   ;
-  temp_v2 = FUN_002bf4f8(0x28,0x88);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0x88);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0,0,0x6a,
                &LAB_003b74b0);
-  temp_v2 = FUN_002bf4f8(0x28,0x8a);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0x8a);
   drawSetColorFromRGBA8(0xff);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0,0,0x6a,
                &LAB_003b74ac,*(unsigned int *)(param_1 + 0xcfcc));
@@ -76,15 +76,15 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   piVar11 = (int *)(param_1 + 0xcf78);
   temp_v0 = *(short *)(temp_v2 + 0x1c);
   temp_v1 = *(short *)(param_1 + *piVar11 * 0x620 + 0x3674);
-  temp_v2 = FUN_002bf4f8(0x28,0x9a);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0x9a);
   FUN_002bf380(2,0x28,5,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0x65);
   FUN_002bf288(2,0x28,0x8f,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0x6a);
   FUN_002bf288(2,0x28,0x91,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0x6a);
-  temp_v3 = FUN_002bf4f8(0x28,0x95);
+  temp_v3 = asdTMTexTableEntryAt(0x28,0x95);
   FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + param_2,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v2 + 10) + param_3,1,4,0x6a,
                &LAB_003b74ac,(int)temp_v1);
-  temp_v3 = FUN_002bf4f8(0x28,0x99);
+  temp_v3 = asdTMTexTableEntryAt(0x28,0x99);
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0x6a,
@@ -93,15 +93,15 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   temp_v2 = gameGetPlayerData();
   temp_v8 = (int)*(short *)(temp_v2 + 0x1e);
   temp_v9 = (int)*(short *)(param_1 + *piVar11 * 0x620 + 0x3676);
-  temp_v2 = FUN_002bf4f8(0x28,0x9b);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0x9b);
   FUN_002bf380(2,0x28,5,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0x65);
   FUN_002bf288(2,0x28,0x90,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0x6a);
   FUN_002bf288(2,0x28,0x91,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0x6a);
-  temp_v3 = FUN_002bf4f8(0x28,0x95);
+  temp_v3 = asdTMTexTableEntryAt(0x28,0x95);
   FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0x6a,
                &LAB_003b74ac,temp_v9);
-  temp_v3 = FUN_002bf4f8(0x28,0x99);
+  temp_v3 = asdTMTexTableEntryAt(0x28,0x99);
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + param_2,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0x6a,
@@ -137,17 +137,17 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
         temp_v8 = (int)*(short *)(temp_v3 + 0x28);
         temp_v9 = (int)*(short *)(param_1 + *piVar11 * 0x620 + 0x3680);
       }
-      temp_v3 = FUN_002bf4f8(0x28,temp_v2 + 0xba);
+      temp_v3 = asdTMTexTableEntryAt(0x28,temp_v2 + 0xba);
       FUN_002bf380(2,0x28,6,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x65);
       FUN_002bf288(2,0x28,temp_v2 + 0x9e,*(short *)(temp_v3 + 8) + param_2,
                    *(short *)(temp_v3 + 10) + param_3,0x6a);
-      temp_v4 = FUN_002bf4f8(0x28,0xb6);
+      temp_v4 = asdTMTexTableEntryAt(0x28,0xb6);
       drawSetColorFromRGBA8(0x5a5a5aff);
       FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,3,0x6a,
                    &LAB_003b74ac,temp_v9);
       FUN_002bed3c();
-      temp_v4 = FUN_002bf4f8(0x28,0xb9);
+      temp_v4 = asdTMTexTableEntryAt(0x28,0xb9);
       temp_v5 = *(short *)(temp_v3 + 10) + param_3;
       temp_v7 = *(short *)(temp_v3 + 8) + param_2;
       if (temp_v9 < temp_v8) {
@@ -171,7 +171,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 5);
   temp_v2 = FUN_0029efa8(param_1 + 0xcfd4);
-  temp_v3 = FUN_002bf4f8(0x28,temp_v2 + 0xba);
+  temp_v3 = asdTMTexTableEntryAt(0x28,temp_v2 + 0xba);
   switch(temp_v2) {
   case 0:
     temp_v8 = gameGetPlayerData();
@@ -204,11 +204,11 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x28,0xa9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a);
   FUN_002bf288(2,0x28,temp_v2 + 0xaa,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,
                0x6a);
-  temp_v2 = FUN_002bf4f8(0x28,0xb6);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0xb6);
   FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v2 + 10) + param_3,1,3,0x6f,
                &LAB_003b7b50,temp_v9);
-  temp_v2 = FUN_002bf4f8(0x28,0xb9);
+  temp_v2 = asdTMTexTableEntryAt(0x28,0xb9);
   if (temp_v9 < temp_v8) {
     temp_v6 = 0x72e027ff;
   }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: current C compilation omits the retail ARM hint NOP before the record lookup; the original source/inlining shape remains unrecovered. */
 #include "camp/CampCec/CampCecRecv.h"
+#include "script/ScriptArgs.h"
 
 struct CampCecRecord {
     u8 unk00[0x62]; // 0x00
@@ -8,8 +9,6 @@ struct CampCecRecord {
 
 extern "C" {
 extern CampCecRecv* g_campCecRecv;
-s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 CampCecRecord* FUN_0031cf00(void);
 
 // Returns the screen value or the current received record's value to the script.

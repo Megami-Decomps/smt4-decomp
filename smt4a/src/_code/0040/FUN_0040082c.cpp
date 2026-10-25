@@ -1,14 +1,14 @@
 /* NON_MATCHING: saved registers, mask loads and constant front-line loop bound differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/Table8Record.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 extern BattleCandidateMasks DAT_00573c90;
 Table8Record *dataTable8FindRecord(u32 id);
-BtlMainStateA *btlGetMainState();
-BtlPartyBlockA *gameGetSlotTable();
 s32 FUN_003ff73c(BtlCombatantEntryA *entry, const Table8Record *skill);
 s32 FUN_00400284(s32 index, s32 mode, const Table8Record *skill, u32 flags);
 s32 FUN_004009d0(u32 id, s32 mode);
@@ -47,7 +47,7 @@ s32 FUN_0040082c(u32 id)
             return 0;
     }
     if ((properties->target & 0x7F) == 1 || (properties->flags & 4)) {
-        BtlPartyBlockA *party = gameGetSlotTable();
+        SaveSlotTable *party = gameGetSlotTable();
         for (s32 index = -1; index < party->count; ++index) {
             if (FUN_00400284(index, 0, skill, 0) == 0)
                 return 0;

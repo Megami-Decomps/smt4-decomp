@@ -1,4 +1,5 @@
 /* NON_MATCHING: signed disabled flag base matches; 64-bit mask loads and icon-loop scratch registers differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
 #include "ui/UiSpriteState.h"
@@ -8,7 +9,6 @@ struct CommandPanelMasks { u8 prefix[0x20]; u64 blocked; };
 }
 extern "C" {
 extern CommandPanelMasks DAT_00573b88;
-BtlMainStateA *btlGetMainState();
 s32 btlScriptUnitHasFlags(BtlMainStateA *state);
 s32 ifTouchGetButtonHelpValue();
 void sysPlaySe(u32 sound);

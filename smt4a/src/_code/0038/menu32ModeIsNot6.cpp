@@ -1,4 +1,5 @@
 #include "shard/Shard0038.h"
+#include "shard/menu32ModeIsNot6.h"
 
 extern "C" {
 

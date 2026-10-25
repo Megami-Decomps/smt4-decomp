@@ -3,18 +3,18 @@
 #include "shard/TextureDrawCall.h"
 #include "font/SearchWin/RunWin.h"
 #include "camp/RenderCtx.h"
+#include "shard/FUN_00293f10.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
 extern const s32 g_actorDetailsStyleImages[2];
-void *FUN_00293f10(s32 portrait, u32 mode);
 void FUN_002bed3c(void);
 void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
-const MessageDrawItem *FUN_002bf4f8(u32 group, u32 index);
+const MessageDrawItem *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void textureLoadOptionalDemonModel(s32 portrait, s32 x, s32 y, s32 depth, s32 mode);
 void FUN_002b64b8(void);
@@ -45,8 +45,8 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     FUN_002bf380(2, 0x39, 3, x + offset, y, 0x71);
     if (texts->portrait != 0) {
         offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
-        const MessageDrawItem *portrait = FUN_002bf4f8(0x39, 0x23);
-        const MessageDrawItem *clip = FUN_002bf4f8(0x39, 0x22);
+        const MessageDrawItem *portrait = asdTMTexTableEntryAt(0x39, 0x23);
+        const MessageDrawItem *clip = asdTMTexTableEntryAt(0x39, 0x22);
         FUN_002b659c(clip->position.x + offset + x, clip->position.y + y,
                       clip->size->width, clip->size->height);
         textureLoadOptionalDemonModel(texts->portrait, portrait->position.x + offset + x,
@@ -63,7 +63,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     FUN_002bf288(2, 0x39, 0x0D, x + offset, y, 0x72);
     FUN_002bf288(2, 0x39, 0x0E, x + offset, y, 0x73);
-    const MessageDrawItem *position = FUN_002bf4f8(0x39, 0x10);
+    const MessageDrawItem *position = asdTMTexTableEntryAt(0x39, 0x10);
     char text[16];
     if (record->level >= 10) {
         textFormatBuffer(text, "%d", record->level);
@@ -75,9 +75,9 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     FUN_002bed3c();
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.32f);
     for (s32 index = 0; index < 8; ++index) {
-        const MessageDrawItem *row = FUN_002bf4f8(0x39, index + 0x2F);
+        const MessageDrawItem *row = asdTMTexTableEntryAt(0x39, index + 0x2F);
         FUN_002bf288(2, 0x39, 0x2D, row->position.x + offset + x, row->position.y + y, 0x71);
-        const MessageDrawItem *cell = FUN_002bf4f8(0x39, 0x2E);
+        const MessageDrawItem *cell = asdTMTexTableEntryAt(0x39, 0x2E);
         s32 inset = cell->position.x + (cell->size->width - texts->widths[index]) / 2;
         if (record->values[index] == 0) {
             inset -= 4;
@@ -95,14 +95,14 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             if (texts->skillIds[index] == 0) {
                 continue;
             }
-            const MessageDrawItem *row = FUN_002bf4f8(0x39, index + 0xAC);
+            const MessageDrawItem *row = asdTMTexTableEntryAt(0x39, index + 0xAC);
             s32 rowY = row->position.y + y;
             s32 rowX = row->position.x + transform->x + x;
             FUN_002bf380(2, 0x39, 0x11, rowX + offset, rowY, 0x71);
-            position = FUN_002bf4f8(0x39, 0xAA);
+            position = asdTMTexTableEntryAt(0x39, 0xAA);
             itemDrawCategoryBadge(texts->skillIds[index], position->position.x + rowX + offset,
                           position->position.y + rowY, 0x72, 0);
-            position = FUN_002bf4f8(0x39, 0xAB);
+            position = asdTMTexTableEntryAt(0x39, 0xAB);
             FUN_002bd82c(texts->skills[index], 0);
             FUN_002598f0(texts->skills[index], offset + rowX + position->position.x,
                           position->position.y + rowY, 0x72);
@@ -122,27 +122,27 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     if ((record->flags & 2) != 0) {
         nameColor = record->style == 0 ? 0x00F33700 : 0x00840000;
     }
-    position = FUN_002bf4f8(0x39, 8);
+    position = asdTMTexTableEntryAt(0x39, 8);
     FUN_002bd82c(texts->name, nameColor);
     FUN_002598f0(texts->name, position->position.x + x + offset, position->position.y + y, 0x72);
-    position = FUN_002bf4f8(0x39, 9);
+    position = asdTMTexTableEntryAt(0x39, 9);
     FUN_002bd82c(texts->secondaryName, labelColor);
     FUN_002598f0(texts->secondaryName, position->position.x + x + offset, position->position.y + y, 0x72);
-    position = FUN_002bf4f8(0x39, 10);
+    position = asdTMTexTableEntryAt(0x39, 10);
     FUN_002bd82c(texts->thirdLabel, labelColor);
     FUN_002598f0(texts->thirdLabel, position->position.x + x + offset, position->position.y + y, 0x72);
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
-    position = FUN_002bf4f8(0x39, 0x24);
+    position = asdTMTexTableEntryAt(0x39, 0x24);
     FUN_002bd82c(texts->centeredValue, valueColor);
     FUN_002598f0(texts->centeredValue,
         x + position->position.x + (position->size->width - texts->centeredWidth) / 2 + offset,
         y + position->position.y, 0x74);
-    position = FUN_002bf4f8(0x39, 0x25);
+    position = asdTMTexTableEntryAt(0x39, 0x25);
     FUN_002bd82c(texts->rightAlignedValue, valueColor);
     FUN_002598f0(texts->rightAlignedValue,
         x + position->size->width - texts->rightAlignedWidth + position->position.x + offset,
         y + position->position.y, 0x74);
-    position = FUN_002bf4f8(0x39, 0x27);
+    position = asdTMTexTableEntryAt(0x39, 0x27);
     if (record->specialValue != 0) {
         textFormatBuffer(text, "%d", record->specialValue);
     } else {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail call sites compiles (173 vs ~180 rows); scenario copy loops and register allocation differ from retail */
 #include "gamedata/DataTable.h"
+#include "shard/FUN_00282be4.h"
 
 // Row of the debug scenario table (0x74 bytes): the state the game is set to.
 struct ScenarioRow {
@@ -67,7 +68,6 @@ void __aeabi_memset4(void* block, u32 size, s32 value);
 void FUN_00333ef8(s32 kind, char* name, u16* look);
 void FUN_00334058(u32 id);
 u8 gameSlotFindByCategory(UnitRecord* record);
-void* FUN_00282be4(void);
 UnitRecord* gameGetUnitRecord(s32 index);
 SlotTable* gameGetSlotTable(void);
 void *dataTableFileGetTable(void *file, s32 arg);

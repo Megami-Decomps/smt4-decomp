@@ -35,7 +35,7 @@ struct GaugeWork {
 }
 
 extern "C" {
-GaugeSegmentSource *FUN_001834a4(u32 group, u32 index);
+GaugeSegmentSource *asdTMTexTableEntryAt(u32 group, u32 index);
 
 /* Advances the gauge one frame: its scroll and spin, the position approaching the target and the fill of
    the lit segments. */
@@ -78,7 +78,7 @@ void FUN_0040898c(GaugeWork *gauge)
     }
     gauge->position = gauge->target / gauge->duration + gauge->position;
     if (gauge->litCount != 0) {
-        GaugeSegmentSource *source = FUN_001834a4(12, 55);
+        GaugeSegmentSource *source = asdTMTexTableEntryAt(12, 55);
         if (gauge->litCount < 8) {
             f32 remaining = gauge->target - gauge->position;
             f32 reach = gauge->span - (f32)((source->widthAndFlag & ~0x8000) * gauge->litCount);

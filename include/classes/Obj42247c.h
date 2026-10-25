@@ -4,8 +4,8 @@
 #include "classes/SelectionState.h"
 #include "bible/bibleMain.h"
 #include "classes/Obj55ca08.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 extern "C" int asdMemFreeNonNull(void *block);
 
 /* IV selection-view base, whose touch interface precedes three state words. */

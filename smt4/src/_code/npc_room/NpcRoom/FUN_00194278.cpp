@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/FUN_00290d5c.h"
 
 extern "C" {
 
 int npcRoomDestroy(void);
-int FUN_00290d5c(...);
 
 int scrRunOpcodesStub(...);
 void bgmRequestSelectedChannelFade(unsigned int frames);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: marked-entry tests and roster halfword addressing use different registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 extern const u64 g_battleMaskPresets[];
-BtlMainStateA* btlGetMainState(void);
 
 // Set or clear the marker flag on the first eligible, marked reserve entry with the script id.
 u32 FUN_00380e34(void)

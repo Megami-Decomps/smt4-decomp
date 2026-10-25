@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 struct VariantRecord {
     u8 unk00[0x36];
@@ -7,7 +8,6 @@ struct VariantRecord {
 
 extern "C" {
 u32 flagSelectVariant(void);
-const VariantRecord *dataTable04FindById(u32 id);
 
 // Find the first table-four record for the currently selected flag variant.
 u32 FUN_0033896c(void)
@@ -23,7 +23,7 @@ u32 FUN_0033896c(void)
         break;
     }
     for (u32 id = 1; id <= 400; ++id) {
-        const VariantRecord *record = dataTable04FindById(id);
+        const VariantRecord *record = (const VariantRecord *)dataTable04FindById(id);
         if (record != NULL && record->variant == variant) {
             found = id;
             break;

@@ -78,4 +78,8 @@ typedef char ShaderUniformBindingStateLayoutCheck[
     offsetof(ShaderUniformBindingState, secondBinding) == 0x1A2 &&
     offsetof(ShaderUniformBindingState, values) == 0x1B4 &&
     offsetof(ShaderUniformRecord, binding) == 0 ? 1 : -1];
+extern "C" {
+u16 FUN_001a0538(f32 value);
+}
+
 #endif

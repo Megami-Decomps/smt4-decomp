@@ -1,5 +1,6 @@
 /* NON_MATCHING: control flow of the three passes differs from retail (shared tails, gotos). */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/FUN_001696f4.h"
 
 extern "C" {
 extern AsdProcessState g_asdProcess;
@@ -12,7 +13,6 @@ void FUN_001407cc(s32 locked);
 void asdProcessEnd(AsdProcess *proc);
 void asdGxCommandListBegin(u32 cmdList);
 void asdGxCommandListEnd(u32 cmdList, s32 unk);
-s32 FUN_001696f4(void);
 
 /* Tells a process to end: its children end with it, and a live process moves to the ending state. */
 static __inline void procBeginEnd(AsdProcess *proc)

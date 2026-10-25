@@ -28,7 +28,7 @@ extern "C" {
 extern ScrollScissorView *g_titleScene;
 
 s32 ifTouchGetSelectionModeForRegion(s32 region);
-ScrollTrack *FUN_002bf4f8(u32 group, u32 id);
+ScrollTrack *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 FUN_0029e958(void *list);   /* horizontal: total entries */
 s32 FUN_0028cfbc(void *list);   /* horizontal: visible entries */
 s32 FUN_0029e93c(void *list);   /* horizontal: first visible entry */
@@ -67,7 +67,7 @@ void FUN_00290994(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 trackId,
     FUN_002bf288(SCROLL_LAYER, group, arrowAPressed != 0 ? arrowAPressedId : arrowAId, x, y, layer);
     FUN_002bf288(SCROLL_LAYER, group, arrowBPressed != 0 ? arrowBPressedId : arrowBId, x, y, layer);
 
-    ScrollTrack *track = FUN_002bf4f8(group, trackId);
+    ScrollTrack *track = asdTMTexTableEntryAt(group, trackId);
     s32 offset = 0;
     s32 left, top, width, height;
     if (horizontal != 0) {

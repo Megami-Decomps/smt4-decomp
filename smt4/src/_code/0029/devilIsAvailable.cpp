@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/devilIsAvailable.h"
 
 /* The devil record fields the availability check reads. */
 struct DevilAvailabilityRecord {

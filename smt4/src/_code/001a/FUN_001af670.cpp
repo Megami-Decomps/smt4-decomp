@@ -9,14 +9,14 @@ s32 FUN_002240b4(u32);
 void FUN_002bf380(s32, s32, s32, s32, s32, s32);
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
-void FUN_002be5a4(s32, u32, const u16 *, f32, f32, f32, f32, f32);
+void textDrawString(s32, u32, const u16 *, f32, f32, f32, f32, f32);
 
 // Draw a highlighted or ordinary entry label with its availability indicator.
 void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 speed)
 {
     struct LabelOwnerView { u8 prefix[0x13C]; PartyMember effect; };
     struct LabelOffset { u8 prefix[8]; s16 x, y; };
-    extern const LabelOffset *FUN_002bf4f8(u32, u32);
+    extern const LabelOffset *asdTMTexTableEntryAt(u32, u32);
     u32 record = dataTable24Sub0GetRecordS90X(entryId);
     u32 color;
     if (highlighted != 0) {
@@ -41,7 +41,7 @@ void FUN_001af670(void *owner, u32 entryId, s32 x, s32 y, s32 highlighted, f32 s
         color = 0xFF;
     }
     const u16 *text = dataTable24Sub0GetRecordS90(entryId);
-    const LabelOffset *offset = FUN_002bf4f8(36, 0xA4);
-    FUN_002be5a4(2, color, text, (f32)(offset->x + x), (f32)(offset->y + y), 0.55f, 0.0f, speed);
+    const LabelOffset *offset = asdTMTexTableEntryAt(36, 0xA4);
+    textDrawString(2, color, text, (f32)(offset->x + x), (f32)(offset->y + y), 0.55f, 0.0f, speed);
 }
 }

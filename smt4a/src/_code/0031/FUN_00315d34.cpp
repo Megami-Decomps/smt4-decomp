@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
+#include "text/TextDraw.h"
 
 #define NOTICE_STATE_IDLE 0
 #define NOTICE_STATE_SLIDE_IN 1
@@ -50,13 +51,11 @@ void FUN_0016c4b8(RenderCtxA *context, void *surface);
 void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002371b0(void);
-NoticeFrame *FUN_001834a4(u32 table, u32 index);
+NoticeFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 s32 dataTable2ECount(void);
 MapNoticeEntry *dataTable2EGetEntry(s32 index);
 s32 findKeyedRecord(s32 id, s32 sub);
 void FUN_003849cc(s32 id, s32 sub, s32 flag, char *buffer, s32 level);
-void FUN_00162790(u32 layer, u32 mask, const char *buffer,
-                  f32 x, f32 y, f32 depth, f32 width, f32 height);
 
 s32 FUN_00315d34(u32 handle)
 {
@@ -75,7 +74,7 @@ s32 FUN_00315d34(u32 handle)
     }
 
     screen = g_mapIf;
-    NoticeFrame *frame = FUN_001834a4(8, 0x10B);
+    NoticeFrame *frame = asdTMTexTableEntryAt(8, 0x10B);
     f32 offset = 0.0f;
     s32 frameNumber;
     switch (screen->state) {
@@ -133,7 +132,7 @@ s32 FUN_00315d34(u32 handle)
             FUN_001835b4(2, 8, sprite, (s32)offset, 0, 0xB);
         char text[128];
         FUN_003849cc(screen->entryId, screen->entrySub, 0, text, -1);
-        FUN_00162790(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y,
+        textDrawString(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y,
                       0.0f, 1.0f, 1.0f);
         renderStackPop(&g_renderCtx->stackA);
     }

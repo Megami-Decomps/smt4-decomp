@@ -3,13 +3,13 @@
 #include "gfx/SpriteVertexColors.h"
 
 extern "C" {
-const SpriteInfo *FUN_001834a4(u32 group, u32 id);
+const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00492c98(u32 mode, u32 group, u32 id, s32 x, s32 y,
                   s32 width, s32 height, u32 first, u32 second);
 
 void FUN_0049325c(u32 id, s32 x, s32 y, u32 first, u32 second)
 {
-    const SpriteInfo *sprite = FUN_001834a4(0x13, id);
+    const SpriteInfo *sprite = asdTMTexTableEntryAt(0x13, id);
     s32 width;
     s32 height;
     const ItemSpriteExtension *extension = reinterpret_cast<const ItemSpriteExtension *>(sprite->size);

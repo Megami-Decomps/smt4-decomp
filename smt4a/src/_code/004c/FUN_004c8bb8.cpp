@@ -1,4 +1,5 @@
 /* NON_MATCHING: selector/argument saved-register roles and outgoing zero/-1 argument scheduling differ; compiled code emits one extra zero materialization. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleCreationState {
@@ -11,14 +12,13 @@ struct CreatedBattleObject {
 };
 
 extern "C" {
-BattleCreationState* btlGetMainState(void);
 CreatedBattleObject* FUN_00200a68(u32 first, u32 second, u32 kind, u32 context,
                                  u32 flags, u32 argument, s32 firstIndex, s32 secondIndex);
 
 // Creates a kind-six or kind-seven battle object and marks its low flag.
 void FUN_004c8bb8(s32 alternate, u32 argument)
 {
-    BattleCreationState* state = btlGetMainState();
+    BattleCreationState* state = reinterpret_cast<BattleCreationState *>(btlGetMainState());
     CreatedBattleObject* object = FUN_00200a68(0, 0, alternate != 0 ? 7 : 6,
                                              state->context, 0, argument, -1, -1);
     object->flags |= 1;

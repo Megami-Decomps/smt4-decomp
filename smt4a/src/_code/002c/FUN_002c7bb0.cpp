@@ -1,7 +1,7 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
-void *dataTable04FindById(u32 id);
 s32 FUN_0028809c(u32 user, s32 target, void *record, s32 apply, s32 *result);
 
 // Resolve table 4's record and apply it to the requested target.

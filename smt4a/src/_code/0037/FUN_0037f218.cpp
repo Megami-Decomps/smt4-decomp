@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -12,7 +13,6 @@ struct DemonRecordFamily {
 extern "C" {
 
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 DemonRecordFamily *FUN_00184310(u32 id);
 
 /* Script command: whether any eligible battle entry is a demon of family 5. */

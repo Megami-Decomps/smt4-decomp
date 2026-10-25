@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "AsdSDK/asdGxCommandListBegin.h"
 
 extern "C" {
 extern AsdGxState g_asdGxState;

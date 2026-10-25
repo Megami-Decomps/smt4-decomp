@@ -1,5 +1,6 @@
 /* NON_MATCHING: capacity helper fixes saved bases; clamp zero comparison is conditional and member-state update scratch registers are exchanged. */
 #include "common.h"
+#include "shard/dataTableCountRecordStages.h"
 
 struct PartyMemberList {
     u8 unk00[0x34];
@@ -9,7 +10,6 @@ struct PartyMemberList {
 extern "C" {
 PartyMemberList *gameGetPlayerData();
 s32 gameDataFlagTestBit(u32 flag);
-s32 dataTableCountRecordStages(u32 id);
 
 static __inline s32 partyMemberCapacity(void)
 {

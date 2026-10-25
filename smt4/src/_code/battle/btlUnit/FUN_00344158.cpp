@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00344158` (_code @ 0x344158, 0x4a0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -63,7 +64,6 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_0028a0d0. */
-extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: randBetween. */
 /* Supplied declaration required: FUN_003adb34. */
 
@@ -87,7 +87,7 @@ void FUN_00344158(unsigned int param_1,fn_00344158_arg1 *param_2)
   float temp_v9;
   unsigned int temp_v10;
   
-  puVar3 = (unsigned int *)btlGetMainState();
+  puVar3 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
   puVar4 = puVar3;
   btlMainFindEntryByListedId(puVar3,(int)*(short *)((int)param_2->field_0x14 + 0x62));
   if (puVar4 == (unsigned int *)0x0) {

@@ -13,7 +13,7 @@ s32 gameFlagIsSet(u32 flag);
 void scrSetResult(s32 result);
 void bustupCutAnimRequestStopSlots(void);
 void eventTexRequestStopAll(void);
-u32 FUN_002ba85c(void);
+u32 scrGetCommandOwner(void);
 void FUN_0021bdac(u32, u32, u32, s32, s32, s32);
 void asdTextFormatStream(u32, s32, u32, s32, s32, const u8 *, const u8 *);
 void msgBoxFlagsSetBit7(u32 box);
@@ -48,7 +48,7 @@ u32 FUN_0036dbd8(void)
         bustupCutAnimRequestStopSlots();
         eventTexRequestStopAll();
         if (g_messageMain.state) g_messageMain.state->displayMode = 0x15;
-        u32 message = FUN_002ba85c();
+        u32 message = scrGetCommandOwner();
         u32 argument = scrGetArg(0);
         u32 commandFrame = scrGetCommandFrame();
         FUN_0021bdac(message, argument, commandFrame, 6, 0, 0);

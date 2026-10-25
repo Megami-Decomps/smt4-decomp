@@ -1,8 +1,8 @@
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-void *jobGetWork(u32 job);
 s32 FUN_002865c0(u32 mode, f32 alpha);
 s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);

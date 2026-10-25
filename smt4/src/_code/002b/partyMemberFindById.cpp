@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/partyMemberFindById.h"
 
 extern "C" {
 

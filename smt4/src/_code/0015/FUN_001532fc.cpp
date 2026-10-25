@@ -1,5 +1,6 @@
 /* Releases the delay and reverb effects attached to aux bus `bus` (under the manager's lock) and resets the bus. */
-#include "nn/os/CriticalSectionLock.h"
+#include "common.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 /* The effects attached to one aux bus. */
@@ -21,7 +22,7 @@ void FUN_002a2ab0(void *manager, s32 bus, s32 enable);
 
 void FUN_001532fc(SoundFxManager *manager, s32 bus)
 {
-    CriticalSectionLock guard(manager->lock);
+    ScopedCriticalLock guard(manager->lock);
 
     if (manager->fx[bus].delay != NULL) {
         nn_snd_CTR_FxDelay_Finalize(manager->fx[bus].delay);

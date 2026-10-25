@@ -1,19 +1,19 @@
 /* NON_MATCHING: retail keeps the 0 it stores in callee-saved r5 (set before the loading test) and
  * places the FUN_003fa83c branch last, jumping back into the shared FUN_00442554 call. */
 #include "shard/X14_JobStateMachine.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-JobStateMachineWork *jobGetWork(void);
 void FUN_003e4070(void *load, u32 arg);
 void FUN_003fa010(JobStateMachine *machine);
 s32 FUN_003fa83c(JobStateMachine *machine);
 void FUN_00442554(JobStateMachine *machine);
 
 /* Steps the current job's state machine; returns -1 once it reaches state 15, else 0. */
-s32 FUN_00227ee8(void)
+s32 FUN_00227ee8(u32 job)
 {
-    JobStateMachineWork *work = jobGetWork();
+    JobStateMachineWork *work = (JobStateMachineWork *)jobGetWork(job);
     JobStateMachine *machine;
 
     if (work == NULL) {

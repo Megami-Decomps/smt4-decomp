@@ -113,7 +113,7 @@ extern int FUN_002b89a4(unsigned int);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -208,8 +208,8 @@ unsigned int FUN_00329b70(void)
   case 3:
     *(int *)(temp_v2 + 0x78) = *(int *)(temp_v2 + 0x78) + 1;
     temp_v7 = g_screenStateWork;
-    temp_v10 = FUN_002bf4f8(0x24,0x20b);
-    temp_v14[0] = FUN_002bf4f8(0x24,0x20e);
+    temp_v10 = asdTMTexTableEntryAt(0x24,0x20b);
+    temp_v14[0] = asdTMTexTableEntryAt(0x24,0x20e);
     temp_v0 = *(short *)(temp_v7 + 0x1e);
     pcVar14 = (char *)0x0;
     if (temp_v0 == 2) {

@@ -1,11 +1,12 @@
 #include "common.h"
+#include "shard/FUN_002886b0.h"
 
 extern "C" {
 
 extern u8 *questGetRuntimeStatus(void);
 
 /* Flag bit 6 of the first byte of the table entry. */
-u32 FUN_002886b0(void)
+u32 FUN_002886b0(unsigned arg0)
 {
     u8 *entry = questGetRuntimeStatus();
 

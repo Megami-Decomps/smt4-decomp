@@ -1,10 +1,10 @@
 /* NON_MATCHING: action argument spills and depth-branch placement differ from retail. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-BtlMainStateA* btlGetMainState(void);
 
 
 // Queue depth-dependent reflection actions for active roster entries outside the source group.

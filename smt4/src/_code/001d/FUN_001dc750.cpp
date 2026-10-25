@@ -3,10 +3,10 @@
 
 extern "C" {
 
-/* Script opcode: pushes the float constant the instruction's operand indexes. */
+/* Script opcode: pushes the float variable the instruction's operand indexes. */
 u32 FUN_001dc750(ScriptVmProcess *process)
 {
-    scriptVmPush(process, SCRIPT_VM_TAG_FLOAT, process->constants[process->code[process->pc].decoded.operand]);
+    scriptVmPush(process, SCRIPT_VM_TAG_FLOAT, process->floatVariables[process->code[process->pc].decoded.operand].u);
     process->pc++;
     return 1;
 }

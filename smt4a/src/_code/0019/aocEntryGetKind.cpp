@@ -1,4 +1,5 @@
 #include "common.h"
+#include "addon/AocEntryKind.h"
 
 struct Record { u32 first; u32 second; u8 kind; };
 

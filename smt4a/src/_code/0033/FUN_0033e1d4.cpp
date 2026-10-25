@@ -6,7 +6,6 @@
 extern "C" {
 extern MapDepartExtraA *DAT_00581280;
 extern void *g_handleRegistry;
-s32 flagPairCondition(s16, s16);
 void ptrListRemoveClearOwner(void *, u32);
 s32 FUN_00295e54(s16, s16, u32);
 

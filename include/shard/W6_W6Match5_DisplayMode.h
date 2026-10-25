@@ -77,4 +77,8 @@ typedef char DisplayModeContextCompletionSizeCheck[sizeof(((DisplayModeContext *
 
 extern "C" DisplayModeContext g_asdGfxContext;
 
+extern "C" {
+void globalCriticalSectionEnterForward(void);
+}
+
 #endif

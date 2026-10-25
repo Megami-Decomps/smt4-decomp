@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct BattleEntry {
     /* 0x270 */ s32 cursor;  /* next history slot */
 } BattleEntry;
 
-void *btlGetMainState(void);
 BattleEntry *btlMainFindEntryByListedId(void *state, u32 id);
 u32 scrGetArg(u32 index);
 
@@ -17,7 +17,7 @@ u32 btlEntryHistoryRecord(void)
 {
     u32 id = scrGetArg(0);
     u32 value = scrGetArg(1);
-    BattleEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+    BattleEntry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
     s32 *cursor;
 
     if (entry != NULL) {

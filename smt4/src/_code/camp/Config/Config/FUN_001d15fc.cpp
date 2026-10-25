@@ -28,7 +28,7 @@ s32 gameFlagIsSet(u32 flag);
 s32 dataTableGetCount(u32 table);
 s32 dataTableGetEntries(void);
 u32 dataTableGet(u32 table, u32 index);
-UiRect *FUN_002bf4f8(u32 table, u32 id);
+UiRect *asdTMTexTableEntryAt(u32 table, u32 id);
 
 extern ConfigScreen *g_config;
 
@@ -54,16 +54,16 @@ void FUN_001d15fc(void)
     u32 table = dataTableGet(0x36, 0);
     dataTableGetEntries();
     dataTableGetCount(table);
-    UiRect *frame = FUN_002bf4f8(0x2f, 0x20);
+    UiRect *frame = asdTMTexTableEntryAt(0x2f, 0x20);
     u16 count;
     if (config->extraButton != 0) {
-        config->regionX[0] = addButtonRegion(frame, FUN_002bf4f8(0x2f, 0x44));
-        config->regionX[1] = addButtonRegion(frame, FUN_002bf4f8(0x2f, 0x45));
-        config->regionX[2] = addButtonRegion(frame, FUN_002bf4f8(0x2f, 0x46));
+        config->regionX[0] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x44));
+        config->regionX[1] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x45));
+        config->regionX[2] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x46));
         count = config->regionCount + 3;
     } else {
-        config->regionX[0] = addButtonRegion(frame, FUN_002bf4f8(0x2f, 0x42));
-        config->regionX[1] = addButtonRegion(frame, FUN_002bf4f8(0x2f, 0x43));
+        config->regionX[0] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x42));
+        config->regionX[1] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x43));
         count = config->regionCount + 2;
     }
     config->regionCount = count;

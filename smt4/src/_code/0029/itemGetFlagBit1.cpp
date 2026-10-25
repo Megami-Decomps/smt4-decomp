@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/itemGetFlagBit1.h"
 
 extern "C" {
 

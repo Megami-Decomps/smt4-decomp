@@ -1,15 +1,15 @@
 /* NON_MATCHING: compiler calls the 64-bit shift helper instead of retail split-register variable shifts. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 namespace { struct Battle { u8 padding[0x49d0]; u64 flags; }; }
 
 extern "C" {
 u32 scrGetArg(u32 index);
-Battle *btlGetMainState(void);
 u32 scrBattleSetFlag(void)
 {
     u32 bit = scrGetArg(0);
-    Battle *battle = btlGetMainState();
+    Battle *battle = reinterpret_cast<Battle *>(btlGetMainState());
     battle->flags |= (1ULL << (bit & 255));
     return 1;
 }

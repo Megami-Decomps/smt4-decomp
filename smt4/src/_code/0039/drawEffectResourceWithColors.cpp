@@ -38,7 +38,7 @@ extern unsigned char LAB_00141adc; /* 0x141adc */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
@@ -87,7 +87,7 @@ void drawEffectResourceWithColors(unsigned int param_1,unsigned int param_2,unsi
   unsigned int uStack_40;
   unsigned int uStack_3c;
   
-  temp_v0 = FUN_002bf4f8(0x1c,param_1);
+  temp_v0 = asdTMTexTableEntryAt(0x1c,param_1);
   psVar3 = *(short **)(temp_v0 + 0xc);
   if ((psVar3 != (short *)0x0) && (psVar3[2] == 1)) {
     temp_v2 = (unsigned int)*psVar3;
@@ -98,7 +98,7 @@ void drawEffectResourceWithColors(unsigned int param_1,unsigned int param_2,unsi
     temp_v3 = *(unsigned short *)(temp_v0 + 6) & 0xffff7fff;
   }
   jobGetScalarValue();
-  temp_v0 = FUN_002bf4f8(0x1c,param_1);
+  temp_v0 = asdTMTexTableEntryAt(0x1c,param_1);
   temp_v1 = *(int *)(temp_v0 + 0xc);
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 4) == 1)) {
     FUN_002b0750(2,0x1c,param_1,param_2,param_3,temp_v2,temp_v3,param_4);

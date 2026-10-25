@@ -1,6 +1,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stdarg.h>
+#include "AsdSDK/asdTextFormatStream.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);

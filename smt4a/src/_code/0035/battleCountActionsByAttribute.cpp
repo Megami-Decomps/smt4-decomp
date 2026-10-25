@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/Table04Record.h"
 
 struct BattleActionDescriptor {
     u16 unk00;
@@ -40,7 +41,6 @@ struct EquipmentAttributeView {
 };
 
 extern "C" {
-BattleActionSkill *dataTable04FindById(u32 id);
 BattleActionItem *dataTable8FindRecord(s32 id);
 
 // Count candidate actions of one attribute, or only the selected action when restricted.
@@ -51,7 +51,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
     if ((combatant->flags & g_btlCandidateMasks.unavailable) ||
         (combatant->flags & g_btlCandidateMasks.singleAction)) {
         if (actions->selected.kind == 2 || actions->selected.kind == 3) {
-            const BattleActionSkill *skill = dataTable04FindById(actions->selected.id);
+            const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(actions->selected.id);
             if (skill != NULL && attribute == skill->attribute) {
                 ++count;
             }
@@ -59,7 +59,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
         if (actions->selected.kind == 8) {
             const BattleActionItem *item = dataTable8FindRecord(actions->selected.id);
             if (item != NULL && item->skillId != 0) {
-                const BattleActionSkill *skill = dataTable04FindById(item->skillId);
+                const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(item->skillId);
                 if (skill != NULL && attribute == skill->attribute) {
                     ++count;
                 }
@@ -68,7 +68,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
     } else {
         for (s32 index = 0; index < 10; ++index) {
             if (actions->candidates[index].kind == 2 || actions->candidates[index].kind == 3) {
-                const BattleActionSkill *skill = dataTable04FindById(actions->candidates[index].id);
+                const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(actions->candidates[index].id);
                 if (skill != NULL && attribute == skill->attribute) {
                     ++count;
                 }
@@ -76,7 +76,7 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
             if (actions->candidates[index].kind == 8) {
                 const BattleActionItem *item = dataTable8FindRecord(actions->candidates[index].id);
                 if (item != NULL && item->skillId != 0) {
-                    const BattleActionSkill *skill = dataTable04FindById(item->skillId);
+                    const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(item->skillId);
                     if (skill != NULL && attribute == skill->attribute) {
                         ++count;
                     }

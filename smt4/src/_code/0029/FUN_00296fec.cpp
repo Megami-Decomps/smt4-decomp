@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail pairs the stores to +4/+8 into one stm before the child check and writes +0x0C with write-back so the +0x238 store uses it as base; built orders the stores differently. */
 #include "common.h"
+#include "shard/gameDataBlocksAddFlags.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ typedef struct Obj296fec {
     /* 0x238 */ u32 unk238;
 } Obj296fec;
 
-void gameDataBlocksAddFlags(int a);
 void gameDataFlagsSetBits(int a);
 void messageMainSetEnabled(int a);
 

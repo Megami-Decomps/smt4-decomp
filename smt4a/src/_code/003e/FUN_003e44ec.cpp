@@ -1,4 +1,3 @@
-/* NON_MATCHING: the constant 1 is held in r1 (retail: r3). */
 #include "common.h"
 
 extern "C" {
@@ -10,7 +9,9 @@ bool FUN_003e44ec(u32 index)
 {
     u8 *flags = gameDataBlockGetArea28350();
 
-    return (flags[index >> 3] & (1 << (index & 7))) != 0;
+    s32 byte = index / 8;
+    s32 bit = index % 8;
+    return (flags[byte] & (1 << bit)) != 0;
 }
 
 } /* extern "C" */

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/aocRecordLookup84.h"
 
 extern "C" {
 

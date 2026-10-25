@@ -1,11 +1,11 @@
 #include "ones_room/onesRoom.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
 void scrScriptProcessDestroy(void *process);
-OnesRoomWork *jobGetWork(u32 job);
 s32 scrRunOpcodesStub(void *process);
 void uiFadeRelease(s32 arg);
 void buttonHelpRelease(void);
@@ -17,7 +17,7 @@ extern OnesRoom *g_onesRoom;
  * blocks and stops the room's job. Returns -1 when it did, 0 otherwise. */
 s32 onesRoomTeardown(u32 job)
 {
-    OnesRoomWork *work = jobGetWork(job);
+    OnesRoomWork *work = (OnesRoomWork *)jobGetWork(job);
     s32 state = scrRunOpcodesStub(work->process);
 
     if (state != 2) {

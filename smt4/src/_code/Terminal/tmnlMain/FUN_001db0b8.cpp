@@ -5,6 +5,7 @@
 #include "Terminal/tmnlMain.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ void questSetPackedFlag(u32 index, s32 enabled);
 s32 gameFlagIsSet(u32 flag);
 
 void messageStatesSetFirst(u32 state);
-void gameCounterAddSaturating(u32 counter, u32 amount);
 void FUN_00282bfc(u32 first, u32 second);
 u32 taskCreateDraw(const char *name, u16 priority, u32 workSize, void *update, void *draw, void *destroy, void *work, u32 value);
 void FUN_001d99c0(void);
@@ -23,6 +23,7 @@ void FUN_002e0948(void);
 void FUN_0021f354(void);
 
 extern TmnlWork *g_tmnl;
+
 
 // Open the terminal: allocate and reset its work area, unlock the first quest flags and start its processes.
 void FUN_001db0b8(const u32 *entry)

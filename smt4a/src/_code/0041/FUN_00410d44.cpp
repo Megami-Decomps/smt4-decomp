@@ -1,8 +1,10 @@
 /* NON_MATCHING: retail puts the 84-byte range table at the bottom of the frame (sp+0, with the outputs at sp+84/88) and keeps three extra float temporaries in d8-d10; armcc places the table above the outgoing-argument slot (sp+4) and uses fewer VFP registers. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "camp/Unite/UniteEffect.h"
 
 extern "C" {
 
@@ -32,10 +34,8 @@ typedef struct ShiftRange {
     f32 shift;
 } ShiftRange;
 
-BtlMainStateA *btlGetMainState(void);
 extern const ShiftRange DAT_005297d4[7]; /* the shift ranges (-6..6 mapped to -0.3..0.3) */
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
-s32 FUN_00163e84(s32 arg);
 u8 FUN_0013def0(s32 index);
 void FUN_003d54f8(s32 arg, s32 value);
 PartySlotA *FUN_003e503c(u32 index);

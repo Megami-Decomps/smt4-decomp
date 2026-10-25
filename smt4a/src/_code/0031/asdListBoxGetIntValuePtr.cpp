@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "shard/asdListBoxGetIntValuePtr.h"
 
 extern "C" {
 

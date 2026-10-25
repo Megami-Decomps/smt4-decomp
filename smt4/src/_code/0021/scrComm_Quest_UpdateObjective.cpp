@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Quest_UpdateObjective` (_code @ 0x213c20, 0x88c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/FUN_001a1648.h"
 
 extern "C" {
 
-int FUN_001a1648(void);
 int asdMemFreeIfNotNull(...);
 int FUN_00250d84(...);
 int messageForwardDefaultMode(...);

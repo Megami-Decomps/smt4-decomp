@@ -1,10 +1,10 @@
 /* NON_MATCHING: channel-selection branches and sound-state writeback registers differ. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern BgmChannelSelection g_resourceSharedFlag;
 extern BgmRequestChannel DAT_0061951c[2];
-s32 jyoucyuGetTableEntry(u32);
 }
 
 /* Queue a faded switch when needed; otherwise request the track directly. */

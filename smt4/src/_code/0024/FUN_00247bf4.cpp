@@ -1,5 +1,6 @@
 /* NON_MATCHING: same control flow, but armcc loads 1.0f into s0 and 0.0f into s1 (retail: 0.0f in s0, 1.0f in s1), so the literal pool order and the stores' registers are swapped. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -10,12 +11,11 @@ struct JobAxisWork {
     /* 0x28 */ f32 axisY;
 };
 
-JobAxisWork *jobGetWork(u32 handle);
 
 /* Sets the work area's axis from a signed extent: reciprocal slope, negated when `flip` is set. */
 void FUN_00247bf4(u32 handle, s32 extent, s32 flip)
 {
-    JobAxisWork *work = jobGetWork(handle);
+    JobAxisWork *work = (JobAxisWork *)jobGetWork(handle);
 
     if (flip != 0) {
         if (extent == 0) {

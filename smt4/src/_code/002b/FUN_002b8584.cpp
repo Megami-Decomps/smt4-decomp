@@ -1,12 +1,12 @@
 /* NON_MATCHING: compiler merges the two rectangle-source branches and their capacity checks; retail retains separate stores. */
 #include "ui/TouchRectangleRequest.h"
-extern "C" TouchRectangleRequest *FUN_002bf4f8();
+extern "C" TouchRectangleRequest *asdTMTexTableEntryAt();
 
 // Append the current requested touch rectangle, stripping the encoded dimension flags.
 extern "C" s32 FUN_002b8584()
 {
     IfTouchState *initialState = g_ifTouch.state;
-    TouchRectangleRequest *request = FUN_002bf4f8();
+    TouchRectangleRequest *request = asdTMTexTableEntryAt();
     IfTouchState *state = g_ifTouch.state;
     if (initialState->regionCount >= 200)
         return -1;

@@ -80,7 +80,7 @@ extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: uiPointerHitsRect. */
@@ -278,7 +278,7 @@ unsigned int FUN_003291dc(int *param_1)
     return 0;
   case 3:
     temp_v12[0] = '\0';
-    temp_v3 = FUN_002bf4f8(0x1d,0x575);
+    temp_v3 = asdTMTexTableEntryAt(0x1d,0x575);
     temp_v6 = temp_v7 + 0x10;
     uiScrollHandleActionsOrTouch(temp_v6,temp_v3,temp_v7 + 0x508,(int)*(short *)(temp_v7 + 0x522),
                  (int)*(short *)(temp_v7 + 0x51e),(int)*(short *)(temp_v7 + 0x520),temp_v12,0,1);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: explicit hidden-state branches match; only action-table index arithmetic register assignment differs. */
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match2_KeyedValueTable.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "battle/btlMain.h"
@@ -18,7 +19,6 @@ static inline void setModelHidden(NodeEnableNode *model, bool hidden)
 extern "C" {
 void modelSetAnimationChannels(NodeEnableNode *model, s32 channels, f32 frame);
 void animOwnerSetScale(NodeEnableNode *model, f32 speed);
-BtlMainState *btlGetMainState(void);
 
 // Start matching keyed models and reconcile their visibility with the associated action.
 void FUN_0023c24c(KeyedValueTable *table, s32 firstKey, s32 secondKey)

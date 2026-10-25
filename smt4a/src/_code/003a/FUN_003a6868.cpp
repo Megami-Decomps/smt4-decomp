@@ -1,24 +1,17 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
-/* A looked-up record: only its kind byte is used here. */
-struct KindRecord {
-    /* 0x00 */ u8 unk00[0x23];
-    /* 0x23 */ u8 kind;
-};
-
-KindRecord *dataTable04FindById(void *id);
-
 /* Maps an entry's kind to a category index (99 when there is no entry). */
-u32 FUN_003a6868(void *id)
+u32 FUN_003a6868(s32 id)
 {
-    if (id == NULL) {
+    if (id == 0) {
         return 99;
     }
-    KindRecord *record = dataTable04FindById(id);
+    Table04Record *record = dataTable04FindById(id);
     u32 category = 0;
-    switch (record->kind) {
+    switch (record->sort.category) {
     case 0:
     case 1:
     case 2:

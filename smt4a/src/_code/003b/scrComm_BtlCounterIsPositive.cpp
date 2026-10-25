@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ typedef struct BtlUnitState {
     /* 0x74 */ s32 counters[12];
 } BtlUnitState;
 
-extern void *btlGetMainState(void);
 extern BtlUnitState *FUN_003eaf20(void *mainState);
 extern int scrGetArg(u32 index);
 extern int scrSetResult(int value);
@@ -30,7 +30,7 @@ u32 scrComm_BtlCounterIsPositive(void)
     } else if (arg == 3) {
         index = 11;
     }
-    state = FUN_003eaf20(btlGetMainState());
+    state = FUN_003eaf20(static_cast<void *>(btlGetMainState()));
     if (state != NULL) {
         scrSetResult(state->counters[index] >= 1);
     } else {

@@ -3,12 +3,12 @@
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
 #include "util/FUN_0037d6e4.h"
+#include "util/FUN_003a7630.h"
 
 extern "C" {
 void messageSetMode(s32 mode);
 void placeWinStartText(const u8 *name);
 void messageBannerRestartOrClear(void);
-void FUN_003a7630(s32 mode);
 void FUN_003c1060(void);
 void FUN_003c3e14(void);
 

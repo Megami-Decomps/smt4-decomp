@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/packNibblesAndByte.h"
 
 extern "C" {
 

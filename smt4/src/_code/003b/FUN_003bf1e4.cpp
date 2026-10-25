@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail writes the four party entries out one by one (ours is a loop), keeps the flags word at 0x44A0 in a stack slot and has an extra zeroed term cleared when its bit 1 is set (`movne sl, #0` on an already zero register) that is not recoverable; the formula and branches agree */
+#include "battle/BtlMainAccess.h"
 #include "battle/BattleEntries.h"
 
 /* The battle main state (observed fields). */
@@ -17,7 +18,6 @@ struct BattleEscapeState {
 
 extern "C" {
 
-BattleEscapeState *btlGetMainState(void);
 s32 btlFindNthActiveSpecialEntry(BattleEscapeState *state, s32 flag);
 s32 FUN_002973ec(void);
 
@@ -25,7 +25,7 @@ s32 FUN_002973ec(void);
  * enemies', with a difficulty term and a penalty when the battle is a surprise one. */
 s32 FUN_003bf1e4(void)
 {
-    BattleEscapeState *state = btlGetMainState();
+    BattleEscapeState *state = reinterpret_cast<BattleEscapeState *>(btlGetMainState());
     if ((state->flags & 0x40000) != 0) {
         return 0;
     }

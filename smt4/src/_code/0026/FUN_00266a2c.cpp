@@ -3,6 +3,7 @@
 #include "map/lmapMain.h"
 #include "gamedata/Table1bOr1c.h"
 #include <stddef.h>
+#include "shard/bgmReleaseStopped.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
@@ -10,7 +11,6 @@ extern u32 DAT_0049f944;
 extern s8 DAT_0049fa39;
 extern s8 DAT_0049fa61;
 
-s32 bgmReleaseStopped(void);
 s32 bgmGetStateById(u32 id);
 s32 FUN_00287328(u32 id);
 u16 FUN_002903f0(void);

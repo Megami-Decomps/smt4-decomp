@@ -2,6 +2,7 @@
 #include "common.h"
 #include "quest_center/qcMain.h"
 #include "classes/SelectionState.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 /* The quest center's globals as the update reads them (qcMain.h's QcGlobals is the 8-byte head). */
 struct QcMainState {
@@ -51,7 +52,6 @@ s32 gameStateIsFlagSetAndLarge(void);
 s32 FUN_00287304(void);
 void FUN_00287328(u32 bgm);
 void FUN_00287528(s32 mode);
-u32 FUN_00287704(u32 mode);
 void FUN_00289880(void);
 void FUN_002898e4(void);
 s32 bgmGetStateById(u32 id);

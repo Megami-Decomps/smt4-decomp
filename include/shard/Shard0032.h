@@ -278,11 +278,6 @@ typedef struct ScriptState {
     /* 0xA8 */ u32 result;
 } ScriptState;
 
-typedef struct ScriptRef {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ ScriptState *state;
-} ScriptRef;
-
 typedef char CampCecEditALayoutCheck[sizeof(StateAtF4) == 0x18C ? 1 : -1];
 
 typedef char CampCecEditAOffsets[offsetof(StateAtF4, image) == 0x24 && offsetof(StateAtF4, imageActive) == 0x10E && offsetof(StateAtF4, unk10F) == 0x10F && offsetof(StateAtF4, unk14C) == 0x14C ? 1 : -1];

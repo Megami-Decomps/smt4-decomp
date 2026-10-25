@@ -1,5 +1,6 @@
 /* NON_MATCHING: the button state is kept in different registers and the turn start / hold-to-rotate paths are laid out in another order; the camera turn behaviour is the same. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ extern GameStateHead g_gameState;
 
 s32 inputIsQuestMenuPressed(void);
 s32 padIsButtonPressed(u32 button);
-s32 FUN_002c15fc(u32 button);
 f32 FUN_0027eee0(f32 angle, f32 target);
 f32 mathGetShortestAngleDelta(f32 angle, f32 target);
 

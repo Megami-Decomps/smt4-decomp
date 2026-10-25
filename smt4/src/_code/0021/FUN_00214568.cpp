@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 201 rows); retail also inlines a percent-bonus step on the gold whose percentage is constant 0 (folded away), and orders registers differently */
 #include "common.h"
+#include "gamedata/FlagBitTests.h"
 
 // Battle reward summary handed to the result screen (only the fields used here).
 struct RewardInput {
@@ -59,7 +60,6 @@ PlayerData* gameGetPlayerData(void);
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 s32 playerPadTestBit(s32 bit);
 UnitRecord* gameGetUnitRecord(s32 slot);
-s32 flagWordTestBit(UnitRecord* unit, u32 bit);
 PassiveRecord* passiveSkillLookupRecord(u32 skill);
 
 // Adds a battle's rewards to the result screen: gold, dropped items (merged by id), the

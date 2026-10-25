@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "shard/FUN_00180114.h"
 
 extern "C" {
 
@@ -74,11 +75,10 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -243,7 +243,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
       if (param_1->field_0x23 != 0) {
         efctSetSpeed();
       }
-      temp_v1 = FUN_001834a4(0x11,0x51);
+      temp_v1 = asdTMTexTableEntryAt(0x11,0x51);
       FUN_0018152c(temp_v10,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0x6a,0,
                    temp_v2,temp_v10,temp_v11);
       FUN_00183bb0();
@@ -265,12 +265,12 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           efctSetSpeed();
           textFormatBuffer(temp_v13,&LAB_003f4738,temp_v12);
           if ((int)temp_v12 >= 100) {
-            temp_v10 = FUN_001834a4(0x11,0x80);
+            temp_v10 = asdTMTexTableEntryAt(0x11,0x80);
             FUN_00180310(1,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,1,3,
                          0x79,temp_v13);
           }
           else {
-            temp_v10 = FUN_001834a4(0x11,0x53);
+            temp_v10 = asdTMTexTableEntryAt(0x11,0x53);
             FUN_00180310(1,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,1,2,
                          0x79,temp_v13);
           }
@@ -283,7 +283,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
                        param_2,param_3,0x75,0);
           FUN_003f3a90(param_1,param_2,param_3);
           if (param_1->field_0x29 != 0) {
-            temp_v10 = FUN_001834a4(0x11,0xbd);
+            temp_v10 = asdTMTexTableEntryAt(0x11,0xbd);
             FUN_001835b4(2,0x11,0xbb,*(short *)(temp_v10 + 8) + param_2,
                          *(short *)(temp_v10 + 10) + param_3,0x79);
           }
@@ -313,7 +313,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             }
           }
           efctSetSpeed();
-          temp_v10 = FUN_001834a4(0x11,0xb7);
+          temp_v10 = asdTMTexTableEntryAt(0x11,0xb7);
           FUN_003f3d90(param_1,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,
                        temp_v14);
           efctSetSpeed();
@@ -324,7 +324,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           efctSetSpeed();
           return;
         }
-        temp_v10 = FUN_001834a4(0x11,0xc5);
+        temp_v10 = asdTMTexTableEntryAt(0x11,0xc5);
         temp_v2 = 0xbb;
         param_3 = *(short *)(temp_v10 + 10) + param_3;
         temp_v9 = 0x79;
@@ -371,7 +371,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
         else {
           textFormatBuffer(temp_v13,&LAB_003f4738,temp_v5);
         }
-        temp_v10 = FUN_001834a4(0x11,0x19);
+        temp_v10 = asdTMTexTableEntryAt(0x11,0x19);
         FUN_00180310(10,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,1,4,0x79,
                      temp_v13);
         FUN_00183bb0();
@@ -380,12 +380,12 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           temp_v10 = temp_v7;
         }
         textFormatBuffer(temp_v13,&LAB_003f4738,temp_v10);
-        temp_v10 = FUN_001834a4(0x11,0x1d);
+        temp_v10 = asdTMTexTableEntryAt(0x11,0x1d);
         FUN_00180310(10,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,1,4,0x79,
                      temp_v13);
         FUN_003f3a90(param_1,param_2,param_3);
         if (param_1->field_0x29 != 0) {
-          temp_v10 = FUN_001834a4(0x11,0xbc);
+          temp_v10 = asdTMTexTableEntryAt(0x11,0xbc);
           FUN_001835b4(2,0x11,0xbb,*(short *)(temp_v10 + 8) + param_2,
                        *(short *)(temp_v10 + 10) + param_3,0x79);
         }
@@ -415,7 +415,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           }
         }
         efctSetSpeed();
-        temp_v10 = FUN_001834a4(0x11,0xb6);
+        temp_v10 = asdTMTexTableEntryAt(0x11,0xb6);
         FUN_003f3d90(param_1,*(short *)(temp_v10 + 8) + param_2,*(short *)(temp_v10 + 10) + param_3,
                      temp_v14);
         efctSetSpeed();
@@ -426,7 +426,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
         efctSetSpeed();
         return;
       }
-      temp_v10 = FUN_001834a4(0x11,0xbc);
+      temp_v10 = asdTMTexTableEntryAt(0x11,0xbc);
       temp_v2 = 0xbb;
       param_3 = *(short *)(temp_v10 + 10) + param_3;
       temp_v9 = 0x79;

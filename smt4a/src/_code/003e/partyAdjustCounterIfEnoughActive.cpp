@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PartyCounterView {
     /* 0x0000 */ u8 unk0000[0x2c4e];
@@ -7,7 +8,6 @@ struct PartyCounterView {
 
 extern "C" {
 bool gameFlagIsSet(u32 flag);
-PartySlotTableA *gameGetSlotTable();
 
 static __inline PartySlotA *partySlotGet(u16 index)
 {

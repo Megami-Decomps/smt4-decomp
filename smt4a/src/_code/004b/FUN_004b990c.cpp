@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/EventEffect.h"
+#include "shard/FUN_003b61ec.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ int commonBgStopChildAndReset(void);
 int FUN_00363c58(int);
 int clearFlags310To31F(void);
 int FUN_003b5064(void);
-int FUN_003b61ec(void);
 int FUN_003c91e8(void);
 int FUN_003d54f8(int, int);
 int FUN_004b6bc4(int, int, unsigned int);

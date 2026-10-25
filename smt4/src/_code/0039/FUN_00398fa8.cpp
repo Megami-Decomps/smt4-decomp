@@ -62,7 +62,7 @@ s32 FUN_0029ee54(PickList *list);
 s32 FUN_0029efa8(PickList *list);
 s32 FUN_0029efc0(PickList *list);
 void FUN_0029eb5c(PickList *list, s32 position);
-PickSliderInfo *FUN_002bf4f8(u32 group, u32 id);
+PickSliderInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 FUN_001c36a0(void);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
@@ -141,7 +141,7 @@ void FUN_00398fa8(PickScreen *screen)
                 FUN_0029eb5c(pagedList, next);
         } else if (screen->regions[PICK_REGION_SLIDER] == region) {
             s32 total = FUN_0029ee54(pagedList);
-            PickSliderInfo *slider = FUN_002bf4f8(0x2E, 0x14E);
+            PickSliderInfo *slider = asdTMTexTableEntryAt(0x2E, 0x14E);
             s32 offset = (s16)(FUN_001c36a0() - slider->first);
             if (offset >= 0 && offset < slider->range->count)
                 FUN_0029eb5c(pagedList, __aeabi_idivmod(offset * total, slider->range->count));

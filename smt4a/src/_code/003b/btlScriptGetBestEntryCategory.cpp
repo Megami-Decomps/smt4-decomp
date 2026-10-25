@@ -1,14 +1,13 @@
 /* Reports the table-four category of the highest-valued battle-list entry. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/Table8Record.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 s32 scrGetArg(u32 index);
 u32 FUN_001ba3d4(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
-Table04Record *dataTable04FindById(u32 id);
 void scrSetResult(u32 result);
 
 u32 btlScriptGetBestEntryCategory(void)

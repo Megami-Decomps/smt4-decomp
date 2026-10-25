@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct BattleUnit {
     /* 0x28 */ UnitData *data;
 } BattleUnit;
 
-void *dataTable04FindById(u32 id);
 s32 scrSetResult(s32 value);
 BattleUnit *btlUnitGet(u32 id);
 extern u32 g_btlScriptUnit;

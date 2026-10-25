@@ -12,7 +12,7 @@ int libc_strcat(...);
 int FUN_002b75ec(...);
 int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002bcf4c(void);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int FUN_002bed3c(void);
 int vec2GetXInt(...);
 int FUN_002bf380(...);
@@ -53,7 +53,7 @@ extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: vec2GetXInt. */
@@ -307,7 +307,7 @@ void FUN_0038368c(unsigned int *param_1)
       VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be5a4(2,temp_v8,temp_v21);
+      textDrawString(2,temp_v8,temp_v21);
       temp_v15 = temp_v15 + 1;
       if (temp_v15 >= 0x14) break;
       if (temp_v15 == 3) {

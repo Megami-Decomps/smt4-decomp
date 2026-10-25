@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "gamedata/SupportUnitRecord.h"
@@ -13,7 +14,6 @@ extern "C" {
 extern u64 g_btlStartFlags;  /* 0x570dd0 */
 extern u32 g_btlUiBlock;     /* 0x57a9c8 */
 
-BtlMainStateA *btlGetMainState(void);
 void FUN_003e87a8(BtlMainStateA *state);
 PartySlotA *gameGetOptions(void);
 SupportUnitRecordA *dataTableGetCategoryEntry(s32 category, u16 entry);

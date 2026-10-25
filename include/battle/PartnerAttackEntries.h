@@ -5,8 +5,8 @@
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 
 #define PARTNER_ATTACK_ENTRY_COUNT 12
 

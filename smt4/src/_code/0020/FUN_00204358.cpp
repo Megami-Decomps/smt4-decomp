@@ -25,7 +25,7 @@ int buttonHelpSetPreset(...);
 int FUN_002b8ee0(int, int);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
-int FUN_002bf4f8(int, int);
+int asdTMTexTableEntryAt(int, int);
 int FUN_002bf818(...);
 int FUN_002c1658(...);
 
@@ -70,7 +70,7 @@ extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -122,16 +122,16 @@ void FUN_00204358(int param_1)
     do {
       temp_v1 = FUN_002b8584(0x28,temp_v10 + 0xba);
       *(unsigned short *)(param_1 + temp_v10 * 2 + 0x357e) = temp_v1;
-      temp_v5 = FUN_002bf4f8(0x28,temp_v10 + 0xba);
-      temp_v4 = FUN_002bf4f8(0x28,0x117);
+      temp_v5 = asdTMTexTableEntryAt(0x28,temp_v10 + 0xba);
+      temp_v4 = asdTMTexTableEntryAt(0x28,0x117);
       temp_v2 = **(short **)(temp_v4 + 0xc);
       temp_v3 = (int)(short)(*(short *)(temp_v5 + 8) + *(short *)(temp_v4 + 8) + temp_v2 * -2);
       ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
                    (int)(short)(temp_v2 * 3),(int)(*(short **)(temp_v4 + 0xc))[1]);
       temp_v11 = param_1 + temp_v10 * 4;
       *(short *)(temp_v11 + 0x359e) = (short)temp_v3;
-      temp_v5 = FUN_002bf4f8(0x28,temp_v10 + 0xba);
-      temp_v4 = FUN_002bf4f8(0x28,0x116);
+      temp_v5 = asdTMTexTableEntryAt(0x28,temp_v10 + 0xba);
+      temp_v4 = asdTMTexTableEntryAt(0x28,0x116);
       temp_v3 = (int)(short)(*(short *)(temp_v5 + 8) + *(short *)(temp_v4 + 8));
       ifTouchRegionAdd(temp_v3,(int)(short)(*(short *)(temp_v5 + 10) + *(short *)(temp_v4 + 10)),
                    (int)(short)(**(short **)(temp_v4 + 0xc) * 3),(int)(*(short **)(temp_v4 + 0xc))[1]);

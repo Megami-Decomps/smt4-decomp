@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail moves the roll to r1 before the mask test and loads the battle flag pair with ldrd (the build uses two ldr and keeps the roll in r0) */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct ChanceSkillUnit {
@@ -19,7 +20,6 @@ struct ChanceSkillMasks {
 
 extern "C" {
 extern ChanceSkillMasks DAT_005713f0;
-BtlMainStateA *btlGetMainState(void);
 ChanceSkillUnit *FUN_003f0e20(BtlMainStateA *state, u32 unitId);
 void source4CCopyHalves(ChanceSkillUnit *unit, u16 *skills);
 const ChanceSkill *dataTable41FindById(u32 skillId);

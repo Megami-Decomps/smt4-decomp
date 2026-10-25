@@ -9,7 +9,7 @@ extern "C" {
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 alpha);
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 depth);
-const MessageDrawPosition *FUN_001834a4(u32 group, u32 index);
+const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
 const SaveSlotPortraitResource *FUN_00184310(u32 portrait);
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
@@ -53,11 +53,11 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
             nameColor = 0xE6C80000;
         }
     }
-    const MessageDrawPosition *position = FUN_001834a4(0x2E, 0x75);
+    const MessageDrawPosition *position = asdTMTexTableEntryAt(0x2E, 0x75);
     FUN_001527d8((u32)texts->name, nameColor);
     FUN_0025cc78(texts->name, position->x + x, position->y + y, 0x66, 1.0f);
     if ((record->flags & 2) != 0) {
-        position = FUN_001834a4(0x2E, 0x76);
+        position = asdTMTexTableEntryAt(0x2E, 0x76);
         u32 color = record->style == 0 ? 0x006E0000 : 0x00F33700;
         FUN_001527d8((u32)texts->optional, color);
         FUN_0025cc78(texts->optional, position->x + x, position->y + y, 0x66, 1.0f);
@@ -65,36 +65,36 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
     FUN_001835b4(2, 0x2E, 0x5A, x, y, 0x66);
     if (record->portrait != 0) {
         const SaveSlotPortraitResource *portrait = FUN_00184310(record->portrait);
-        position = FUN_001834a4(0x2E, 0x78);
+        position = asdTMTexTableEntryAt(0x2E, 0x78);
         FUN_00169a1c(portrait->image, position->x + x, position->y + y, 0x67);
     }
     if (record->secondaryPortrait != 0) {
         void *unit = reinterpret_cast<void *>(FUN_0019acdc(record->secondaryPortrait, 0));
         u16 id = FUN_0036fcd0(unit, 0);
         const SaveSlotPortraitResource *portrait = FUN_00184310(FUN_0019e52c(id));
-        position = FUN_001834a4(0x2E, 0x100);
+        position = asdTMTexTableEntryAt(0x2E, 0x100);
         FUN_00169a1c(portrait->image, position->x + x, position->y + y, 0x67);
     }
     char text[16];
     char time[12];
     drawSetColorFromRGBA8(textColor);
     textFormatBuffer(text, "%d", record->level);
-    position = FUN_001834a4(0x2E, 0x74);
+    position = asdTMTexTableEntryAt(0x2E, 0x74);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x6A, text);
     drawSetColorFromRGBA8(0xB9D7D700);
     u32 hours = record->playSeconds / 3600;
     u32 remainder = record->playSeconds % 3600;
     textFormatBuffer(time, "%02d", remainder % 60);
-    position = FUN_001834a4(0x2E, 0x7C);
+    position = asdTMTexTableEntryAt(0x2E, 0x7C);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     textFormatBuffer(time, "%c", ':');
-    position = FUN_001834a4(0x2E, 0x79);
+    position = asdTMTexTableEntryAt(0x2E, 0x79);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     textFormatBuffer(time, "%02d", remainder / 60);
-    position = FUN_001834a4(0x2E, 0x7E);
+    position = asdTMTexTableEntryAt(0x2E, 0x7E);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     textFormatBuffer(time, "%c", ':');
-    position = FUN_001834a4(0x2E, 0x7A);
+    position = asdTMTexTableEntryAt(0x2E, 0x7A);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
     for (s32 index = 0, place = 4; place >= 1; ++index, --place) {
         u32 digit = saveSlotDecimalDigit(hours, (u8)place);
@@ -105,9 +105,9 @@ void saveSlotDrawSummary(const SaveSlotTextObjects *texts, const SaveSlotDisplay
         }
     }
     time[4] = '\0';
-    position = FUN_001834a4(0x2E, 0x82);
+    position = asdTMTexTableEntryAt(0x2E, 0x82);
     FUN_00180310(0, position->x + x, position->y + y, 0, 5, 0x67, time);
-    position = FUN_001834a4(0x2E, 0x89);
+    position = asdTMTexTableEntryAt(0x2E, 0x89);
     FUN_002e1b64(record->location, position->x + x, position->y + y, 0x67);
     FUN_00183bb0();
     efctSetSpeed(1.0f);

@@ -2,6 +2,7 @@
 #include "battle/btlEncount.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemoryAllocTracked.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;
@@ -9,7 +10,6 @@ s32 btlEncounterUpdateFromJob(u32 job);
 void btlEncountDestroy(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
-void *asdMemoryAllocTracked(u32 category, u32 alignment, u32 flags, u32 size, s32 clear);
 void asdMemFree(void *memory);
 void FUN_00408184(s32 kind, s32 enabled);
 void FUN_002e5924(s32 state);

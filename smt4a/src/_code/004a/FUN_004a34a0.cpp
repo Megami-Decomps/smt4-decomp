@@ -1,8 +1,8 @@
 /* NON_MATCHING: validation result-code merging, predicate formation and register lifetimes differ. */
 #include "shard/Shard004A.h"
+#include "shard/FUN_00184310.h"
 
 extern "C" {
-void FUN_00184310(u16 id);
 u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
 s32 FUN_002a4b28(u32 id);
 u32 FUN_004d05b4();

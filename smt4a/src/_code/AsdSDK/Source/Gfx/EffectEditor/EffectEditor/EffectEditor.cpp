@@ -9,6 +9,7 @@
 #include <math.h>
 #include "util/CalleeContracts.h"
 #include "title/titleMain.h"
+#include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 
 namespace {
 /* The editor's scratch buffer is past the shared menu-state prefix. */
@@ -244,7 +245,6 @@ extern const char DAT_0053d0d8[];
 EffectEditorOptions *FUN_00200bcc(EffectEditorOptions *options);
 void effEditorNodeChainApply(EffectEditorOptions *options);
 s32 padButtonIsPressed(u32 button);
-u32 FUN_00202178(u32 button);
 __weak void effectEditorTransformPosition(const EffectPositionControl *control,
     const EffMenuPosition *position, EffMenuPosition *result);
 void FUN_002ffe14(const EffMenuPosition *position, u32 color,

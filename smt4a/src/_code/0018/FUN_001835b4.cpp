@@ -1,7 +1,7 @@
 /* NON_MATCHING: payload destination uses r4 instead of lr (register allocation only). */
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/AsdTMTexTableCallFileC.h"
-#include "util/AsdTMTexTableCallFileC.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* Local view: the Apocalypse placement flags are a halfword. */
 struct TexturePlacementViewA {

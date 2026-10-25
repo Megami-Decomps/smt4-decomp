@@ -1,0 +1,194 @@
+== smt4a/src/_code/0013/FUN_0013ef3c.cpp inc=False
+2: #include "common.h"
+3: #include "camp/RenderCtx.h"
+4: #include "shard/W9_W9Match8_WorkRecords.h"
+5: #include "Model/MoriModelShadowMap.h"
+8: SurfaceCaptureWorkPrefixA *jobGetWork(u32 process);
+9: s32 stateValuesGetBySelector(u32 selector);
+10: s32 FUN_00154edc(s32 mode, CaptureSurfacePrefixA *surface);
+11: s32 surfaceCopy(CaptureSurfacePrefixA *destination, CaptureSurfacePrefixA *source);
+13: u32 FUN_0013ef3c(u32 process)
+15:     SurfaceCaptureWorkPrefixA *work = jobGetWork(process);
+== smt4a/src/_code/0027/FUN_002761fc.cpp inc=False
+2: #include "common.h"
+8: JobWork* jobGetWork(void);
+10: u32 FUN_004d800c(BattleEvent* event, JobWork* work);
+12: u32 FUN_002761fc(void)
+14:     JobWork* work = jobGetWork();
+== smt4a/src/_code/battle/btlEditor/FUN_002984d4.cpp inc=False
+2: #include "common.h"
+9: JobWork* jobGetWork(void);
+10: u32 FUN_004f4a74(BattleEditor* editor, JobWork* work);
+12: u32 FUN_002984d4(void)
+14:     JobWork* work = jobGetWork();
+== smt4a/src/_code/battle/btlGameOver/FUN_002dedf0.cpp inc=False
+2: #include "battle/btlGameOver.h"
+16: GameOverBattleWorkA *jobGetWork();
+17: s32 asdProcessGetFrames(u32 job);
+18: s32 FUN_003e6f50(BtlGameOverA *state);
+21: s32 FUN_002dedf0()
+23:     GameOverBattleWorkA *work = jobGetWork();
+== smt4a/src/_code/0031/FUN_00314ef8.cpp inc=False
+3: #include "shard/X14_BtlUiClose.h"
+7: BtlUiCloseWork *jobGetWork(void);
+8: s32 jobIsValid(u32 job);
+9: void jobStop(u32 job, s32 arg);
+10: void asdMemFree(void *block);
+11: void FUN_003592dc(u32 job);
+18: void FUN_00314ef8(void)
+20:     BtlUiCloseWork *work = jobGetWork();
+== smt4a/src/_code/0031/FUN_0031bd24.cpp inc=False
+2: #include "battle/BattleStageLoadWork.h"
+3: #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+8: BattleStageLoadWork *jobGetWork(u32 handle);
+9: void FUN_001ffba8(OrbitScreen *screen);
+10: s32 FUN_00162ea4(void);
+11: s32 textFormatBuffer(char *buffer, const char *format, ...);
+12: void asdEnvResetModelBank(const char *file, s32 bank);
+13: s32 modelHasLoadedAttachment(AsdMdlObject *model);
+14: void lightOwnerRegister(AsdMdlObject *model, s32 enabled);
+15: void nodeSetTranslation3f(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
+16: void animPlayerSetLoopPolicy(AsdMdlNode *node, s32 loop);
+17: void FUN_003d502c(s32 bank);
+22: s32 FUN_0031bd24(u32 handle)
+24:     BattleStageLoadWork *work = jobGetWork(handle);
+== smt4a/src/_code/0031/FUN_0031bed8.cpp inc=False
+2: #include "common.h"
+3: #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+13: s32 scrGetArg(u32 index);
+14: SlideJob *jobGetWork(u32 job);
+26: u32 FUN_0031bed8(void)
+30:     SlideJob *work = jobGetWork(job);
+== smt4a/src/_code/0035/FUN_0035c0c8.cpp inc=False
+2: #include "sys/LinearFade.h"
+5: LinearFadeWork *jobGetWork(u32 job);
+6: s32 FUN_00162ea4(void);
+9: u32 FUN_0035c0c8(u32 job)
+11:     LinearFadeWork *work = jobGetWork(job);
+== smt4/src/_code/0010/FUN_001087f4.cpp inc=True
+2: #include "title/TitleJobWork.h"
+3: #include "camp/RenderCtx.h"
+6: u32 FUN_002bfadc(s32 mode, TitleJobSurface *surface);
+7: s32 FUN_002bff10(void);
+8: TitleJobWork *jobGetWork(u32 job);
+12: s32 FUN_001087f4(u32 job)
+14:     TitleJobWork *work = jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010949c.cpp inc=False
+2: #include "ui/FrameTex.h"
+4: FrameWork* jobGetWork(u32 job);
+5: void FUN_001132fc(s32);
+8: u8 FUN_0010949c(u32 job)
+10:     FrameWork* work = jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010a03c.cpp inc=False
+2: #include "common.h"
+3: #include "camp/RenderCtx.h"
+30: FrameTexFade *jobGetWork(void);
+31: void FUN_001137fc(s32 mode);
+34: u8 FUN_0010a03c(void)
+36:     FrameTexFade *tex = jobGetWork();
+== smt4/src/_code/0013/FUN_00138954.cpp inc=False
+2: #include "common.h"
+34: CameraMoveWork *jobGetWork(u32 job);
+35: void FUN_002a880c(CameraMoveWork *work, s32 arg1, s32 arg2);
+38: void FUN_00138954(u32 job, s32 target, s32 frames, f32 from, f32 to)
+40:     CameraMoveWork *work = jobGetWork(job);
+== smt4/src/_code/0017/FUN_0017fbe4.cpp inc=False
+2: #include "common.h"
+3: #include "map/mapDepart.h"
+25: JobCameraWork *jobGetWork(u32 job);
+26: void effectTextureRequestsPump(void);
+27: void FUN_002c1edc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
+28: void FUN_002c1e30(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
+29: void taskUpdateOrderedPasses(u32 pass);
+32: s32 FUN_0017fbe4(u32 job)
+34:     JobCameraWork *work = jobGetWork(job);
+== smt4/src/_code/001e/FUN_001e48d0.cpp inc=False
+2: #include "battle/btlAction.h"
+3: #include "battle/ActionStateChannels.h"
+6: ActionStateChannelOwner *jobGetWork(u32 job);
+7: s32 jobIsValid(u32 job);
+8: void FUN_003d2140(ActionStateChannels *channels);
+9: s32 FUN_003d28d0(ActionStateChannels *channels, s32 state);
+12: u32 FUN_001e48d0(u32 job)
+14:     s32 index = jobGetWork(job)->current;
+== smt4/src/_code/0021/FUN_00211e88.cpp inc=False
+2: #include "common.h"
+3: #include "script/ScriptArgs.h"
+12: JobBlendState* jobGetWork(u32 job);
+14: u32 FUN_00211e88(void)
+18:     JobBlendState* blend = jobGetWork(job);
+== smt4/src/_code/battle/btlDebug/FUN_0021ec34.cpp inc=False
+2: #include "shard/W6_W6Match8_BattleDebug.h"
+3: #include "map/mapDepart.h"
+10: extern BattleDebugOwnerView *jobGetWork(u32 handle);
+17: void FUN_0021ec34(u32 handle)
+19:     BattleDebugOwnerView *owner = jobGetWork(handle);
+== smt4/src/_code/0022/FUN_0022212c.cpp inc=False
+4: #include "common.h"
+14: s32 scrGetArg(u32 index);
+15: FadeWork *jobGetWork(s32 jobId);
+17: s32 FUN_0022212c(void)
+21:     FadeWork *work = jobGetWork(jobId);
+== smt4/src/_code/0024/FUN_00247bf4.cpp inc=False
+2: #include "common.h"
+13: JobAxisWork *jobGetWork(u32 handle);
+16: void FUN_00247bf4(u32 handle, s32 extent, s32 flip)
+18:     JobAxisWork *work = jobGetWork(handle);
+== smt4/src/_code/battle/btlEditor/FUN_002c9edc.cpp inc=False
+2: #include "battle/btlAction.h"
+3: #include "shard/W4_Match6_BtlEntry.h"
+4: #include "map/mapDepart.h"
+10: BtlMainState* jobGetWork(u32 job);
+11: void asdMemFree(void* memory);
+12: void jobStop(u32 job, u32 flags);
+15: void FUN_002c9edc(u32 job)
+17:     BtlMainState* battle = jobGetWork(job);
+== smt4/src/_code/002d/FUN_002db92c.cpp inc=False
+2: #include "common.h"
+19: TextureOwnerWork *jobGetWork(u32 job);
+20: void FUN_00294f64(void *resource);
+21: void asdTMTexTableReleaseNode(s32 table, s32 node);
+22: void asdMemFree(void *block);
+25: void FUN_002db92c(u32 job)
+27:     TextureOwnerWork *work = jobGetWork(job);
+== smt4/src/_code/002e/FUN_002e0730.cpp inc=False
+3: #include "common.h"
+28: TitleLogoWork *jobGetWork(u32 job);
+29: void FUN_002bf818(void *fade);
+30: void FUN_0034266c(TitleLogoModel *model);
+33: s32 FUN_002e0730(u32 job)
+35:     TitleLogoWork *work = jobGetWork(job);
+== smt4/src/_code/002e/FUN_002e2250.cpp inc=False
+2: #include "sys/LinearFade.h"
+5: LinearFadeWork *jobGetWork(u32 job);
+6: s32 FUN_002c1d5c(void);
+9: u32 FUN_002e2250(u32 job)
+11:     LinearFadeWork *work = jobGetWork(job);
+== smt4/src/_code/002f/FUN_002fc5f8.cpp inc=False
+2: #include "ui/SpriteTransition.h"
+4: s32 gameFlagIsSet(u32 flag);
+5: SpriteTransitionWork *jobGetWork(u32 job);
+6: void aocSlotRelease(SpriteTransitionWork *work);
+7: s32 FUN_0024ecc0(u32 job, u32 portrait);
+8: void FUN_002a880c(SpriteTransitionWork *work, u32 mode, u32 flags);
+9: void FUN_002a4e18(Vec3f *target, u32 portrait);
+10: void FUN_002bf6fc(u32 job, u32 first, u32 second, u32 third, u32 flags);
+12: void FUN_002fc5f8(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 third)
+16:     SpriteTransitionWork *work = jobGetWork(job);
+57:             SpriteTransitionWork *current = jobGetWork(job);
+== smt4/src/_code/0039/FUN_00391000.cpp inc=False
+2: #include "common.h"
+16: IntroWork *jobGetWork(u32 job);
+17: s32 FUN_002b8ee0(u8 *loader, s32 mode);
+18: u32 FUN_002aa024(s32 group, s32 id);
+19: s32 uiAnimationAdvanceChannel(u8 *animation, s32 channel);
+23: u32 FUN_00391000(u32 job)
+25:     IntroWork *work = jobGetWork(job);
+== smt4/src/_code/0025/asdListBoxMarkDirty.cpp inc=False
+2: #include "AsdSDK/Source/Util/AsdListBox.h"
+24: ListBoxMetrics *jobGetWork(u32 job);
+25: s32 libc_strlen(const char *text);
+26: void textFormatBuffer(char *buffer, const char *format, ...);
+27: void ARM_common_memcpy4_7(char *destination, const char *source);
+31: void asdListBoxMarkDirty(u32 job)
+34:     ListBoxMetrics *box = jobGetWork(job);

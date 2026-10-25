@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "shard/asdMemAlloc.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_002bd954(...);
 int spriteStartAnimationByIndex(...);
 
 int memClear(...);
-int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
 int statusDownCreate(...);

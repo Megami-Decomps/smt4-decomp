@@ -1,10 +1,10 @@
 /* NON_MATCHING: indexed placement address formation and saved registers differ across the two slot scans. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
-BtlMainState *btlGetMainState();
 s32 FUN_0027dab0(BtlMainState *state, BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *state, s32 member);
 u32 FUN_00337ba0(BtlMainState *state, s16 selection, u16 kind);

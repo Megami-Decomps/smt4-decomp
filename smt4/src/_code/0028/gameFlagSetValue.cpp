@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler uses different saved registers and folds the byte index into scaled memory accesses. */
+/* NON_MATCHING: instruction sequence matches; only the saved registers differ (retail: value r5, flag block r7; built swaps them). */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 
@@ -13,7 +13,8 @@ void gameFlagSetValue(u32 id, s32 value, s32 notify)
     if (notify != 0)
         FUN_0023ddbc(id, value);
     u32 mask = 1u << (id & 7);
-    u32 previous = flags[id >> 3];
-    flags[id >> 3] = value != 0 ? mask | previous : previous & ~mask;
+    u32 index = id >> 3;
+    u32 previous = flags[index];
+    flags[index] = value != 0 ? mask | previous : previous & ~mask;
 }
 }

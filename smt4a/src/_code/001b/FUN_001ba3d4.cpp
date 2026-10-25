@@ -1,4 +1,4 @@
-/* NON_MATCHING: halfword conditional-load/zero order differs; bit read folds ADD/LDRB into indexed LDRB. */
+/* NON_MATCHING: halfword conditional-load/zero order differs; (the bit read now matches). */
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "shard/ItemStackLimit.h"
 
@@ -30,9 +30,9 @@ u16 FUN_001ba3d4(s32 id)
         }
         id -= range->firstId;
         if (range->width == 0) {
-            const u8 byte = data[id / 8];
+            const u8 *flag = &data[id / 8];
             const s32 bit = id % 8;
-            return (byte & (1u << bit)) != 0;
+            return (*flag & (1u << bit)) != 0;
         }
         return range->width != 1 ? 0 : reinterpret_cast<u16 *>(data)[id];
     }

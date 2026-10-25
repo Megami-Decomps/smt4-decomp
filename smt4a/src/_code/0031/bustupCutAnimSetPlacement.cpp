@@ -1,6 +1,7 @@
 /* NON_MATCHING: transition-case block placement, job/coordinate register allocation and pair-copy store splitting differ; alternate optimization may explain these differences. */
 #include "shard/S1Mover.h"
 #include "addon/aocMain.h"
+#include "shard/JobWork.h"
 
 struct BustupOffset {
     f32 x;
@@ -36,7 +37,6 @@ struct AocSlot;
 extern "C" {
 extern AocSystemA* g_aocSystem;
 s32 gameFlagIsSet(u32 flag);
-void* jobGetWork(u32 job);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 void FUN_001b2d54(AocSystemA* system, u32 table, s32 node);
 void aocSlotRelease(AocSlot* slot);

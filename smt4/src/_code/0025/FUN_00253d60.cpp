@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail initialises the 18 slots in a one-per-iteration loop that reloads each halfword before storing 100; armcc unrolls the bitfield stores by two. */
 #include "common.h"
+#include "shard/affinityShouldReplaceState.h"
 
 namespace {
 /* A demon's elemental response: the resistance id and its affinity state. */
@@ -16,7 +17,6 @@ struct PassiveSkillAffinity {
 
 extern "C" {
 const PassiveSkillAffinity *passiveSkillLookupRecord(u32 id);
-u32 affinityShouldReplaceState(s32 current, s32 incoming);
 void FUN_00394edc(u32 devilId, AffinitySlot *slots);
 
 struct PassiveSkillSet {

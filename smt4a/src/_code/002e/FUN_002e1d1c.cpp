@@ -23,7 +23,7 @@ void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
 void efctSetSpeed(f32 speed);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
-void FUN_001834a4(u32 table, u32 frame);
+void asdTMTexTableEntryAt(u32 table, u32 frame);
 void FUN_00183bb0(void);
 void uiSpawnSlotMarkers(void *screen, s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_003426c0(void *screen, u32 a, u32 b, s32 c, s32 d, s32 e, s32 f);
@@ -37,7 +37,7 @@ void FUN_0039a1b8(void *screen, s32 a, s32 b, u32 c, u32 d, u32 e, u32 f, s32 g,
 extern "C" u32 FUN_002e1d1c(void)
 {
     CampCecEdit *edit = g_campCecEdit;
-    FUN_001834a4(0x2E, 0xCF);
+    asdTMTexTableEntryAt(0x2E, 0xCF);
     s32 height = CEC_AT(edit, s32, 0x124);
     if (CEC_AT(edit, u8, 0x114) == 0) {
         efctSetSpeed(1.0f);

@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ struct AocApplication {
 void *FUN_00352f0c(void *decoder);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void rt_memclr(void *buffer, u32 size);
-void *asdOperatorNew(u32 size);
 void *FUN_00352ee8(void *mem, u32 source, void *buffer, u32 size);
 void asdFatalError(void);
 

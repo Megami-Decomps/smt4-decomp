@@ -1,7 +1,7 @@
 /* NON_MATCHING: indexed slot update and cached member-pointer dispatch scheduling differ. */
 #include "gfx/InheritedValues.h"
+#include "shard/FUN_00183468.h"
 
-extern "C" u32 FUN_00183468(u32 slot);
 extern "C" InheritedValueCollection::Appender DAT_00544d14[2];
 
 // Apply inherited scalar values and replay the source's two append lists.

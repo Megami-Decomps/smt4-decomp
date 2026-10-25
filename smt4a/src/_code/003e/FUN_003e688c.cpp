@@ -1,11 +1,11 @@
 /* NON_MATCHING: The shared transition-to-cleanup block is placed after the load phase rather than the run phase. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
 #include "script/scrScriptProcess.h"
 #include "quest_center/qcCtrl.h"
 
 struct BtlMainStateA;
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 void asdMemFree(void *data);
 void scrScriptProcessDestroy(void *process);
 ScriptRunState *FUN_00275bc8(void *data, s32 mode);

@@ -1,13 +1,13 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern u8 *btlGetMainState(void);
 
 u32 FUN_0030b460(void)
 {
-    u8 *btl = btlGetMainState();
+    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
 
     scrSetResult((int)*(s16 *)(btl + 0x1fca));
     return 1;

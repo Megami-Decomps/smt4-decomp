@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -11,7 +12,6 @@ static inline s32 hpPercent(s32 hp, s32 maxHp)
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 
 /* Script check: whether the eligible battle entry with id argument 0 is at or below the HP
  * percentage of argument 1. */

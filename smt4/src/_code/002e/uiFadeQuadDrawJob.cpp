@@ -2,11 +2,11 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_FadeQuad.h"
+#include "shard/JobWork.h"
 
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-FadeQuadWork *jobGetWork(u32 job);
 u32 FUN_002c5d80(u32 state, u32 flags);
 void FUN_002c1b64(RenderCtx *context, s32 mode);
 u32 asdGxPresetsGetByKind(u32 target);
@@ -17,7 +17,7 @@ void FUN_002c0944(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
 // Draw a full-target fade quad with its stored alpha scaled by the job's fade amount.
 u32 uiFadeQuadDrawJob(u32 job)
 {
-    FadeQuadWork *work = jobGetWork(job);
+    FadeQuadWork *work = (FadeQuadWork *)jobGetWork(job);
     if (work->alpha != 0.0f) {
         u32 color = work->color;
         RenderCtx *context = g_titleScene;

@@ -3,6 +3,7 @@
 #define ASDSDK_SOURCE_GFX_EFFECT_EFFPARTS_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 
 /* A part object (0x90 bytes; the 0xC0-byte variant adds the fields after it). */
 typedef struct EffPart {
@@ -18,6 +19,10 @@ typedef struct EffPart {
 
 extern "C" {
 void asdModelSlotSetTranslation(s32 slot,u32 bank,f32 x,f32 y,f32 z);
+}
+
+extern "C" {
+void effBlockSetBlobB(EffBlock *block, const void *src, s32 size, u16 tag);
 }
 
 #endif

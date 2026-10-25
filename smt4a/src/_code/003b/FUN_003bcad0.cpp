@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BtlCombatantValueRingView {
@@ -8,7 +9,6 @@ struct BtlCombatantValueRingView {
 
 extern "C" {
 u32 scrGetArg(u32 index);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 
 // Append a script value to the selected combatant's six-entry cyclic buffer.

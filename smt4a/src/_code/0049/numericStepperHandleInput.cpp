@@ -5,7 +5,6 @@
 extern "C" {
 s32 ifTouchIsInitialSelection(s32 key);
 s32 recordGetModeForId(s32 key);
-s32 getMaskB6(u32 mode);
 s32 getMaskType3(u32 mode);
 s32 getMaskType4(u32 mode);
 s32 getMaskType5(u32 mode);

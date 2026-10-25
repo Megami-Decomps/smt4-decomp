@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the index range check as two signed compares and loads the u64 mask with different ldr/ldm forms per branch */
+/* NON_MATCHING: the index range check now matches (two signed compares); retail still loads the u64 mask with different ldr/ldm forms per branch */
 #include "shard/BattleFlagMasks.h"
 
 struct BattleEntryState {
@@ -16,16 +16,20 @@ extern "C" {
 /* Returns entry `index` when its flags intersect the entry mask (matches != 0) or do not (matches == 0); NULL otherwise or out of range. */
 BattleEntry *FUN_003e83b4(BattleEntryState *state, s32 index, s32 matches)
 {
-    if (index >= 0 && index < 109) {
-        BattleEntry *entry = (BattleEntry *)state->entries + index;
+    if (index < 0) {
+        return NULL;
+    }
+    if (index >= 109) {
+        return NULL;
+    }
+    BattleEntry *entry = (BattleEntry *)state->entries + index;
 
-        if (matches != 0) {
-            if ((g_btlMain.entryMask & entry->flags) != 0) {
-                return entry;
-            }
-        } else if ((entry->flags & g_btlMain.entryMask) == 0) {
+    if (matches != 0) {
+        if ((g_btlMain.entryMask & entry->flags) != 0) {
             return entry;
         }
+    } else if ((entry->flags & g_btlMain.entryMask) == 0) {
+        return entry;
     }
     return NULL;
 }

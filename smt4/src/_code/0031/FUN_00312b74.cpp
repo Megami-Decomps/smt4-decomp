@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleStateWord {
@@ -7,13 +8,12 @@ struct BattleStateWord {
 
 extern "C" {
 
-BattleStateWord *btlGetMainState(void);
 s32 scrGetArg(s32 index);
 
 /* Script command: stores the first argument in the battle state's word at 0x4978. */
 u32 FUN_00312b74(void)
 {
-    btlGetMainState()->value = scrGetArg(0);
+    reinterpret_cast<BattleStateWord *>(btlGetMainState())->value = scrGetArg(0);
     return 1;
 }
 

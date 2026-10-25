@@ -1,6 +1,6 @@
 /* NON_MATCHING: POD vector copies use integer transfers and camera/mask base allocation differs; -O2 candidate. */
 #include "shard/W6_W6Match6_BattleCamera.h"
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 struct BattleFormationCamera {
@@ -20,10 +20,10 @@ struct BattleFormationDemon {
 extern "C" {
 extern BattleActionCamera *g_btlCamera;
 extern BattleVector3 DAT_005e1554;
-s32 FUN_004f2708(BattleActionCamera *, BattleMaskState *, s32);
+s32 FUN_004f2708(BattleActionCamera *, BtlMainStateA *, s32);
 const BattleFormationDemon *FUN_00184310(u32);
 
-void btlCameraSetFormationSlot(BattleActionCamera *camera, BattleMaskState *battle, s32 slot)
+void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle, s32 slot)
 {
     BattleFormationCamera *formation = (BattleFormationCamera *)camera;
     camera->formation.position.x = camera->formation.position.y = camera->formation.position.z = 0.0f;
@@ -38,7 +38,7 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BattleMaskState *batt
     case 0:
         camera->formation.position.x = -12.0f;
         formation->offset = DAT_005e1554;
-        if (battle->mask & masks->wideFormation)
+        if (battle->stateFlags64.bits & masks->wideFormation)
             formation->offset.x = -1.5f;
         break;
     case 1:
@@ -52,13 +52,13 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BattleMaskState *batt
     case 3:
         camera->formation.position.x = 12.0f;
         formation->offset = DAT_005e1554;
-        if (battle->mask & masks->wideFormation)
+        if (battle->stateFlags64.bits & masks->wideFormation)
             formation->offset.x = 1.5f;
         break;
     default:
         return;
     }
-    BtlCombatantEntryA *entry = (BtlCombatantEntryA *)battle->entryMaskView.mask + slot;
+    BtlCombatantEntryA *entry = battle->entries + slot;
     if (entry->flags & masks->zeroHeight) {
         camera->formation.position.y = 0.0f;
     } else if (entry->flags & masks->demonHeight) {

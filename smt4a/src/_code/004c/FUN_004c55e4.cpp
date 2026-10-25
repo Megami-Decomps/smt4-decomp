@@ -1,4 +1,5 @@
 /* NON_MATCHING: mask-table loads, signed unit-ID load and response tail-merge differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleSkillResponseMasks.h"
 #include "gamedata/Table04Record.h"
@@ -6,9 +7,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
-Table04Record *dataTable04FindById(u32 id);
 u32 padGetMappedValue(u32 id);
 s32 FUN_002efc44(Table04Record *skill, u32 value, s32 mode);
 s32 FUN_0034a304(Table04Record *skill, s32 value, s32 mode);

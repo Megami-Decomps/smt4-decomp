@@ -1,5 +1,6 @@
 /* NON_MATCHING: global loads move later and signed halfword loads fold to unsigned before narrowing. */
 #include "battle/btlUI.h"
+#include "shard/FUN_003ae120.h"
 
 struct BattleUiChangeOwner {
     /* 0x0000 */ u8 unk0000[0x4968];
@@ -16,7 +17,6 @@ struct BattleUiChangeView {
 
 extern "C" {
 extern BtlUi *g_btlUiBlock;
-void FUN_003ae120(BtlUi *ui, s8 first, s8 second);
 void FUN_003aea90(BtlUi *ui, s8 first, s8 second);
 
 void FUN_00338060(BattleUiChangeOwner *owner, s32 mode)

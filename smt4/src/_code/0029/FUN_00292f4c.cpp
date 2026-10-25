@@ -1,4 +1,5 @@
 /* NON_MATCHING: the repeated page query and the nested help-selection branches are laid out differently from retail, and the local id table is built in another order; the help shown for each page is the same. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 
@@ -40,7 +41,6 @@ s32 FUN_0029efc0(u32 list);
 s32 FUN_0029efa8(u32 list);
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
 void FUN_0029212c(u32 id);
-BattleHelpView *btlGetMainState(void);
 u32 listGetU16OrZero(void *state, u32 index);
 u32 FUN_0028d24c(void);
 void buttonHelpShowSkillDetails(u32 id);
@@ -91,10 +91,10 @@ void FUN_00292f4c(SkillMenuWork *work)
             }
             return;
         }
-        if ((btlGetMainState()->flags & 0x40) != 0) {
-            index = listGetU16OrZero(btlGetMainState(), index);
+        if ((reinterpret_cast<BattleHelpView *>(btlGetMainState())->flags & 0x40) != 0) {
+            index = listGetU16OrZero(reinterpret_cast<BattleHelpView *>(btlGetMainState()), index);
         } else {
-            btlGetMainState();
+            reinterpret_cast<BattleHelpView *>(btlGetMainState());
             index = FUN_0028d24c();
         }
         if (index != 0) {
@@ -109,7 +109,7 @@ void FUN_00292f4c(SkillMenuWork *work)
             FUN_0029da34(*panel, 2, unit->id, partyMemberFindById(unit->id));
             return;
         }
-        if ((btlGetMainState()->flags & 0x40) != 0) {
+        if ((reinterpret_cast<BattleHelpView *>(btlGetMainState())->flags & 0x40) != 0) {
             buttonHelpShowSkillDetails(index);
             return;
         }
@@ -138,7 +138,7 @@ void FUN_00292f4c(SkillMenuWork *work)
         } else {
             adjust = -1;
         }
-        if ((btlGetMainState()->flags & 0x40) != 0) {
+        if ((reinterpret_cast<BattleHelpView *>(btlGetMainState())->flags & 0x40) != 0) {
             index = index + adjust + 1;
         } else {
             index = *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x341C);

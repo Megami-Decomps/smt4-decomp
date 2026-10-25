@@ -398,12 +398,6 @@ struct LookupList {
     LookupListNode *head;
 };
 
-struct ScriptBranchContext {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ s32 branch;
-    /* 0x1C */ u32 enabled;
-};
-
 struct GfxTargetParameters {
     /* 0x000 */ u8 unk000[0x15C];
     /* 0x15C */ u32 first;

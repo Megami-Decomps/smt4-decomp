@@ -1,9 +1,9 @@
 /* NON_MATCHING: actor, target and skill values occupy different saved registers; instruction shapes match. */
+#include "battle/BtlMainAccess.h"
 #include "battle/ActionEvaluation.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 actor);
 void FUN_003e8bb0(BattleActionEvaluation *result, BtlMainStateA *state, BtlCombatantEntryA *actor);
 u32 FUN_004c8340(u32 actor, u32 target, u32 skill, s32 kind, s32 flags);

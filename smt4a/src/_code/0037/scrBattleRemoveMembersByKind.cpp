@@ -1,4 +1,6 @@
-#include "battle/BattleMemberList.h"
+#include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
+#include "gamedata/Table04Record.h"
 
 /* A battle member's record (dataTable8FindRecord). */
 struct MemberRecord {
@@ -18,7 +20,6 @@ struct MemberLink {
 
 extern "C" {
 MemberRecord *dataTable8FindRecord(u32 id);
-MemberLink *dataTable04FindById(u32 id);
 }
 
 /* Script command: when the first argument is set, removes the battle members that fit the mode in
@@ -28,11 +29,11 @@ extern "C" u32 scrBattleRemoveMembersByKind(void)
 {
     s32 enabled = scrGetArg(0);
     s32 mode = scrGetArg(1);
-    BattleMemberList *battle = btlGetMainState();
+    BtlMainStateExtA *battle = btlGetMainStateExt();
     if (enabled != 0) {
         for (std::vector<u16>::iterator member = battle->members.begin(); member != battle->members.end();) {
             MemberRecord *record = dataTable8FindRecord(*member);
-            MemberLink *link = dataTable04FindById(record->linkId);
+            MemberLink *link = (MemberLink *)dataTable04FindById(record->linkId);
             bool remove = false;
             if (link != NULL) {
                 if (mode == 0) {

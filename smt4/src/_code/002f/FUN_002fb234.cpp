@@ -1,11 +1,11 @@
 /* NON_MATCHING: map owner global is restored; branch layout and unreachable retail literal decoding differ. */
 #include "romwright_types.h"
 #include "npc_room/NpcRoom.h"
+#include "shard/mapGimicUpdateVisualBounds.h"
 
 extern "C" {
 
 int FUN_00277d2c(unsigned int, unsigned int);
-int mapGimicUpdateVisualBounds(void);
 int FUN_0027ae90(void);
 int FUN_0027b1b4(void);
 int mapRangeEntriesRun(void);

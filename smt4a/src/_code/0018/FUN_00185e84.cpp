@@ -4,13 +4,12 @@
 
 extern "C" {
 bool idIsAbove400(u32 id);
-const Table04Record *dataTable04FindById(u32 id);
 u32 requestKindToId(u32 kind);
 void FUN_0017ffa8(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, s32 depth);
 s32 padGetMappedValue(u32 id);
 s32 dataTableCountRecordStages(u32 id);
 void drawSetColorFromRGBA8(u32 color);
-const UiTextMetrics *FUN_001834a4(u32 bank, u32 sprite);
+const UiTextMetrics *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 void FUN_00180310(u32 layer, s32 x, s32 y, u32 flags, u32 font, s32 depth, const char *format, ...);
 void FUN_00183bb0(void);
 
@@ -42,9 +41,9 @@ void FUN_00185e84(u32 id, s32 x, s32 y, s32 depth, s32 showUpgrade, s32 adjustme
             upgrade = maximum & 0xFF;
         if (upgrade > 1) {
             drawSetColorFromRGBA8((s32)upgrade >= maximum ? 0xFBEB39FF : 0x72E027FF);
-            const UiTextMetrics *position = FUN_001834a4(0xB, 0x402);
+            const UiTextMetrics *position = asdTMTexTableEntryAt(0xB, 0x402);
             FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, "+");
-            position = FUN_001834a4(0xB, 0x401);
+            position = asdTMTexTableEntryAt(0xB, 0x401);
             FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, "%d", upgrade - 1);
             FUN_00183bb0();
         }

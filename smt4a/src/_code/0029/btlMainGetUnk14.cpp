@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "shard/btlMainGetUnk14.h"
 
 extern "C" {
 

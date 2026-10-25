@@ -1,4 +1,3 @@
-/* NON_MATCHING: the four command stores are scheduled in a different order (retail: constants 1 and 0 first, then stores in field order). */
 #include "common.h"
 
 extern "C" {
@@ -7,7 +6,7 @@ typedef struct PendingCommand {
     u16 pending;     /* 1 = a command is queued */
     u16 flags;
     s16 id;
-    u16 arg;
+    s16 arg;
 } PendingCommand;
 
 typedef struct Globals {

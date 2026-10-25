@@ -8,9 +8,9 @@ extern "C" {
 void FUN_002bf380(s32 layer, s32 bank, s32 sprite, s32 x, s32 y, s32 depth);
 void efctSetSpeed(f32 speed);
 const u16 *dataTable24Sub0GetRecordS90(u32 id);
-const UiTextMetrics *FUN_002bf4f8(u32 bank, u32 entry);
+const UiTextMetrics *asdTMTexTableEntryAt(u32 bank, u32 entry);
 s32 fontMeasureLineAdvance(const u16 *text, s32 font);
-void FUN_002be5a4(s32 layer, u32 color, const u16 *text,
+void textDrawString(s32 layer, u32 color, const u16 *text,
                   f32 x, f32 y, f32 scale, f32 angle, f32 speed);
 
 // Draw a highlighted/ordinary selector background, availability icon and centered label.
@@ -38,9 +38,9 @@ void FUN_001a7810(void *owner, u32 id, s32 x, s32 y, s32 highlighted, s32 altern
     }
     efctSetSpeed(speed);
     const u16 *text = dataTable24Sub0GetRecordS90(id);
-    const UiTextMetrics *position = FUN_002bf4f8(0x24, 0xA4);
+    const UiTextMetrics *position = asdTMTexTableEntryAt(0x24, 0xA4);
     s32 textWidth = fontMeasureLineAdvance(text, 2);
     s32 textX = position->x + ((position->dimensions[0] - textWidth) / 2 + x);
-    FUN_002be5a4(2, color, text, (f32)textX, (f32)(position->y + y), 0.55f, 0.0f, speed);
+    textDrawString(2, color, text, (f32)textX, (f32)(position->y + y), 0.55f, 0.0f, speed);
 }
 }

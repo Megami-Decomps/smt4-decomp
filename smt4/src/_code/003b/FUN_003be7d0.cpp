@@ -1,4 +1,3 @@
-/* NON_MATCHING: highest-level maximum compares level/current in reversed order (HI rather than LS); all other instructions match. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include <stddef.h>
 
@@ -47,10 +46,7 @@ extern "C" void FUN_003be7d0(const BtlEntry *entry)
     if (record != NULL) {
         rewards->experience += record->experience;
         rewards->money += record->money;
-        u32 highestLevel = rewards->highestLevel;
-        if (highestLevel < record->level)
-            highestLevel = record->level;
-        rewards->highestLevel = highestLevel;
+        rewards->highestLevel = rewards->highestLevel > record->level ? rewards->highestLevel : record->level;
         s32 bonus = 0;
         if (reinterpret_cast<BattleRewardView *>(btlGetMainState())->bonusDrops)
             bonus = 50;

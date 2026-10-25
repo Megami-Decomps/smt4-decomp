@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "util/CalleeContracts.h"
+#include "camp/PartyPanel/PartyPanel.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ int sysPlayVoice(...);
 
 int sysPlaySe(...);
 int FUN_00180118(unsigned int);
-int FUN_00215bd0(void);
 int scrScriptProcessStartEntry(...);
 int gameDataGetRecordValue(void);
 int FUN_002a5e7c(...);

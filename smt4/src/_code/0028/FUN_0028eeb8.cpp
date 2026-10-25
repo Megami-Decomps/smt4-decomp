@@ -1,5 +1,6 @@
 /* NON_MATCHING: flag-store folding, two-byte counter clearing and active-slot address decomposition differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/FUN_00298f88.h"
 
 struct ActiveFlagEntrySlotView {
     u16 id;
@@ -18,7 +19,6 @@ typedef char ActiveFlagBlockViewOffsetsCheck[offsetof(ActiveFlagBlockView, slots
 extern "C" {
 GameFlagBlockPrefixIV *gameGetFlagBlock(void);
 s32 table1bOr1cGetRecordValue(u32 id);
-s32 FUN_00298f88(u32 id);
 void words3Clear(void *words);
 void FUN_0023ddbc(u32 flag, s32 value);
 

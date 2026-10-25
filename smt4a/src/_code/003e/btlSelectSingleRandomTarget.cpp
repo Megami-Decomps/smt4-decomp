@@ -25,7 +25,6 @@ struct RandomTargetMasks {
 };
 extern "C" {
 extern RandomTargetMasks g_btlMain;
-s32 hasAnyOf3DC2(u16);
 s32 lcgRandomRange(u32);
 void FUN_003f2aec(BtlMainStateA *, u32);
 

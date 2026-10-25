@@ -5,7 +5,6 @@
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 key);
 s32 ifTouchIsInitialSelection(s32 key);
-s32 FUN_003c2a84(u32 mode);
 s32 FUN_003c2b44(u32 mode);
 s32 FUN_003c2b14(u32 mode);
 s32 FUN_003c2ae4(u32 mode);

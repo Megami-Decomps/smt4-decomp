@@ -1,4 +1,5 @@
 #include "shard/PlayScene.h"
+#include "shard/FUN_0028bfe4.h"
 
 extern "C" {
 

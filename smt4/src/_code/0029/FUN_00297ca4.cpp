@@ -30,7 +30,7 @@ u32 FUN_00297ca4(BattleCommandMenu *menu, s32 confirm)
             if (command->kind == 2) {
                 if (FUN_00293988(btlGetMainState()) == 0)
                     continue;
-                if ((btlGetMainState()->flags & 0x40000) != 0)
+                if ((btlGetMainStateExt()->flags44A0 & 0x40000) != 0)
                     continue;
             }
             if (command->kind == 3) {

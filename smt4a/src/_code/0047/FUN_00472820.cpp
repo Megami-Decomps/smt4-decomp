@@ -5,13 +5,13 @@
 
 extern "C" {
 
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_001634b4(unsigned int *);
 int FUN_00164168(...);
 int efctSetSpeed(void);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_00183bb0(void);
 int renderCtxCalculateStereoParallax(int);
 int VectorSignedToFloat(...);
@@ -32,7 +32,7 @@ extern float DAT_00570284; /* 0x570284 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164168. */
 extern int vec2GetXInt(void);
@@ -42,7 +42,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_0023b4a4(unsigned int);
@@ -140,10 +140,10 @@ s32 FUN_00472820(u32 job)
         *(unsigned char *)(temp_v2 + 0x1270) = 0;
       }
       if ((int)puVar2[4] < 5) {
-        temp_v2 = FUN_001834a4(8,0xe1);
+        temp_v2 = asdTMTexTableEntryAt(8,0xe1);
       }
       else {
-        temp_v2 = FUN_001834a4(8,0xe0);
+        temp_v2 = asdTMTexTableEntryAt(8,0xe0);
       }
       if ((char)puVar2[0x105] != '\x01') {
         if ((char)puVar2[0x105] == '\x02') {
@@ -197,7 +197,7 @@ s32 FUN_00472820(u32 job)
         temp_v1 = 0;
         if (0 < (int)temp_v5) {
           do {
-            temp_v6 = FUN_001834a4(8,temp_v2 + temp_v1);
+            temp_v6 = asdTMTexTableEntryAt(8,temp_v2 + temp_v1);
             FUN_00164168(puVar2[0x107],*(short *)(temp_v6 + 8) + temp_v14,(int)*(short *)(temp_v6 + 10),
                          0x13,6,temp_v1);
             temp_v1 = temp_v1 + 1;
@@ -208,11 +208,11 @@ s32 FUN_00472820(u32 job)
         temp_v1 = 0;
         if (0 < (int)temp_v5) {
           do {
-            temp_v6 = FUN_001834a4(8,temp_v2 + temp_v1);
+            temp_v6 = asdTMTexTableEntryAt(8,temp_v2 + temp_v1);
             temp_v7 = *(short *)(temp_v6 + 8) + temp_v14;
             VectorSignedToFloat((int)*(short *)(temp_v6 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_00162790(3,temp_v4,puVar2 + temp_v1 * 0x20 + 5,temp_v7);
+            textDrawString(3,temp_v4,puVar2 + temp_v1 * 0x20 + 5,temp_v7);
             temp_v1 = temp_v1 + 1;
           } while (temp_v1 < (int)puVar2[4]);
         }

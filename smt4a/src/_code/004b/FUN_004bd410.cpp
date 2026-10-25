@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite with slot helpers compiles; inlined slot-search loops are shaped differently from retail (168 vs 194 rows) */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 // Party/demon slot (0x134 bytes): only the fields used here.
 struct PartySlot {
@@ -36,7 +37,6 @@ void battleRecordInitializeFromDefinition(PartySlot* slot, s32 mode);
 ParentLink* FUN_00370ecc(u32 id);
 void FUN_003e4b2c(u32 id);
 u32 dataTable0aSub0GetValueById(u32 id);
-DevilGrowth* dataTable04FindById(u32 id);
 s32 FUN_0035e458(u32 skill);
 s32 FUN_0035d89c(u32 skill);
 
@@ -111,7 +111,7 @@ void FUN_004bd410(u32 id)
     if (slot == NULL || empty >= 8) return;
     slot->skills[empty] = skill;
 
-    DevilGrowth* growth = dataTable04FindById(skill);
+    DevilGrowth *growth = (DevilGrowth *)dataTable04FindById(skill);
     s32 rank = 0;
     if (growth != NULL && growth->skillType < 0x12) {
         rank = (s8)slot->skillRank[8 + growth->skillType];

@@ -47,4 +47,8 @@ typedef char StaffRollWorkLayoutCheck[sizeof(StaffRollWork) == 0x764 &&
     __INTADDR__(&((StaffRollWork *)0)->handlers) == 0x12C &&
     __INTADDR__(&((StaffRollWork *)0)->endY) == 0x148 ? 1 : -1];
 
+extern "C" {
+u32 slotIsActive(u32 index);
+}
+
 #endif

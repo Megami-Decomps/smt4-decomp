@@ -20,7 +20,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int objectPartRunUnlessLocked(int);
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
-extern int FUN_002bf4f8(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -41,7 +41,7 @@ void FUN_0025ccac(int param_1,int param_2)
   if ((*(char *)(param_1 + 0x3084) == '\0') && (*(int *)(param_1 + 0x305c) < 4)) {
     temp_v0 = vec2GetXInt();
     temp_v1 = vec2GetYInt(param_1 + 0x12b8);
-    temp_v2 = FUN_002bf4f8(0x15,*(int *)(param_1 + 0x305c) + 0x5a);
+    temp_v2 = asdTMTexTableEntryAt(0x15,*(int *)(param_1 + 0x305c) + 0x5a);
     temp_v6 = g_titleScene;
     temp_v3 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v6 + 0x12ac);
@@ -70,7 +70,7 @@ void FUN_0025ccac(int param_1,int param_2)
       temp_v6 = 0;
       do {
         if (*(char *)(param_1 + temp_v6 + 0x345c) != '\0') {
-          temp_v3 = FUN_002bf4f8(0x15,temp_v6 + 0x52);
+          temp_v3 = asdTMTexTableEntryAt(0x15,temp_v6 + 0x52);
           temp_v2 = g_titleScene;
           temp_v4 = packNibblesAndByte(6,1,0);
           piVar7 = (int *)(temp_v2 + 0x12ac);
@@ -107,7 +107,7 @@ void FUN_0025ccac(int param_1,int param_2)
     }
     else {
       temp_v6 = objectPartRunUnlessLocked(param_1 + 0x33a8);
-      temp_v2 = FUN_002bf4f8(0x15,temp_v6 + 0x52);
+      temp_v2 = asdTMTexTableEntryAt(0x15,temp_v6 + 0x52);
       temp_v6 = g_titleScene;
       temp_v3 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v6 + 0x12ac);

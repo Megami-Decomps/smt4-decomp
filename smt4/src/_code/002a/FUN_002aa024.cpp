@@ -2,13 +2,13 @@
 #include "ui/TouchRectangleRequest.h"
 
 extern "C" {
-const TouchRectangleRequest* FUN_002bf4f8(void);
+const TouchRectangleRequest* asdTMTexTableEntryAt(void);
 
 // Append the active touch rectangle, using explicit extents when provided.
 s32 FUN_002aa024(void)
 {
     IfTouchState* state = g_ifTouch.state;
-    const TouchRectangleRequest* input = FUN_002bf4f8();
+    const TouchRectangleRequest* input = asdTMTexTableEntryAt();
     if (state->timer >= 10) {
         return -1;
     }

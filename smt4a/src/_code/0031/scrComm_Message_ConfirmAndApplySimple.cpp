@@ -1,13 +1,13 @@
 /* NON_MATCHING: early completion return layout and frame-counter temporaries differ from retail's shared return block. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/FUN_004186e0.h"
 
 extern "C" {
 s32 scrGetCommandFrame();
 void scrWorkSetValue(u32 index, s32 value);
 s32 scrWorkGetValue(u32 index);
 s32 dataTableValueOrZero(u32 index);
-u32 FUN_004186e0();
 void FUN_003dea6c(u32 member, s32 mode, s32 enabled);
 void FUN_001695a0();
 s32 messageForwardDefaultMode(s32 message, s32 mode, u32 frame, s32 style, s32 flags);

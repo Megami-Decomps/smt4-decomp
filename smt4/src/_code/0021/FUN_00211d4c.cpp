@@ -1,5 +1,6 @@
 /* Handles the pending request: returns 1 when it is consumed (or no handle), 0 when it must wait; sets a small backwards nudge on the handle's slot in the idle cases. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct Handle {
 
 extern s32 scrGetCommandFrame(void);
 extern s32 jobIsValid(void);
-extern Handle *jobGetWork(u32 id);
 extern void jobStop(u32 id, s32 arg);
 extern u32 eventTexGetCurrent(void);
 
@@ -26,7 +26,7 @@ u32 FUN_00211d4c(void)
     Handle *handle;
 
     if (jobIsValid() != 0) {
-        handle = jobGetWork(id);
+        handle = (Handle *)jobGetWork(id);
         if (handle->mode == 1) {
             jobStop(id, 0);
             return 1;

@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 
 extern "C" {
 
-BtlMainState *btlGetMainState(void);
 void FUN_00246d38(s32 side, ScriptUnit *unit, BtlActionRecord *action, u32 mask);
 void FUN_00246e24(s32 side, ScriptUnit *unit, BtlActionRecord *action, u32 mask, s32 arg);
 void FUN_002505c0(s32 side, ScriptUnit *unit, u32 message, s32 a3, s32 a4, s32 a5, s32 a6);

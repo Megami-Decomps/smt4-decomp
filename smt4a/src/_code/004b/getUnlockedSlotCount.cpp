@@ -1,11 +1,12 @@
 #include "shard/Shard004B.h"
+#include "shard/getUnlockedSlotCount.h"
 
 extern "C" {
 
 extern s32 gameDataFlagTestBit(u32 id);
 
 /* Number of unlocked slots: 4 base, +1 for each of four flags 0x7B..0x7E (the first counts 5), capped at 8. */
-s32 getUnlockedSlotCount(void)
+s32 getUnlockedSlotCount(void *arg0)
 {
     s32 count = 4;
 

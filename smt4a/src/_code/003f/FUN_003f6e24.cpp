@@ -1,6 +1,8 @@
 /* NON_MATCHING: the track alpha reads (including the retail dead read of the background track's speed) now go through vec2GetSpeed and everything from the content draw on matches; retail loads the glyph flags constant 0x8D into r6 before the efctSetSpeed call and keeps y in r7, ours loads it after the call (y in r6, constant in r7). */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/renderCtxCalculateStereoParallax.h"
+#include "shard/FUN_003f5b14.h"
 
 struct MenuLayerTrack {
     u8 unk00[0x20];
@@ -18,9 +20,7 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 vec2GetXInt(MenuLayerTrack *track);
 s32 vec2GetYInt(MenuLayerTrack *track);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 alpha);
-void FUN_003f5b14(MenuLayerComposition *owner, s32 x, s32 y, s32 first, s32 second, f32 alpha);
 void FUN_003f54c4(MenuLayerComposition *owner, s32 x, s32 y, f32 alpha);
 void FUN_003f61b4(MenuLayerComposition *owner, s32 x, s32 y, f32 alpha);
 f32 vec2GetSpeed(const void *track);

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
+#include "shard/FUN_002a21e8.h"
 
 extern "C" {
 
@@ -43,7 +44,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short ifTouchGetButtonHelpValue(void);
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: campChangeState. */
@@ -52,7 +53,6 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
-extern int FUN_002a21e8(void);
 extern int resourceRunOperationIfUnblocked(int);
 extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
@@ -106,7 +106,7 @@ void FUN_003daf0c(int param_1)
     return;
   case 1:
     temp_v8[0] = '\0';
-    temp_v2 = FUN_001834a4(0x14,0x56d);
+    temp_v2 = asdTMTexTableEntryAt(0x14,0x56d);
     temp_v6 = temp_v7;
     FUN_003450d4(temp_v7,temp_v2,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),
                  (int)*(short *)(temp_v5 + 0x1b36),(int)*(short *)(temp_v5 + 0x1b38),temp_v8,0,1);

@@ -41,4 +41,8 @@ extern "C" {
 u8 *FUN_002e2ec0(void);
 }
 
+extern "C" {
+void effCreateRegisteredPair(u32 param1, u32 param2);
+}
+
 #endif

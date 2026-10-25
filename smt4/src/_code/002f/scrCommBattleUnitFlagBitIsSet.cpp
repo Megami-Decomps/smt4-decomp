@@ -11,7 +11,6 @@ typedef struct MainEntry002f7cc4 {
     /* 0x1c6 */ u16 flagBits;
 } MainEntry002f7cc4;
 
-s32 scrGetArg(s32 index);
 MainEntry002f7cc4 *btlMainFindEntryByListedId(void *state, s32 id);
 void *gameGetUnitRecord(s32 index);
 

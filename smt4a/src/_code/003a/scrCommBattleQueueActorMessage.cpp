@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail duplicates return epilogues and schedules outgoing stack stores later; alternate optimization may fix these differences. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "battle/btlReflect.h"
@@ -24,7 +25,6 @@ struct BattlePendingUnit {
 extern "C" {
 extern BtlAuxA *g_btlAux;
 extern s32 *g_btlEvent;
-BtlMainStateA *btlGetMainState();
 u32 isEntryUsable(s32 *);
 u32 FUN_004f5a78(BtlAuxA *);
 void FUN_002980e4(s32, u32);

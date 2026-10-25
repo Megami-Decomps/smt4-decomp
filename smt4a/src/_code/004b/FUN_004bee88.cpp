@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -31,13 +32,12 @@ extern u8 *g_renderCtx;
 void FUN_00157558(u8 *context);
 s32 FUN_001692ac(s32 a, s32 b);
 PartnerUnitView *FUN_003e4d68(u16 index);
-PartnerLayout *FUN_001834a4(u32 group, u32 id);
+PartnerLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_004bde34(PartnerScreenView *screen, PartnerUnitView *unit, s32 index, s32 x, s32 y, f32 scale);
 void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 scale);
 void efctSetSpeed(f32 speed);
 void textFormatBuffer(void *buffer, const char *format);
 s32 fontMeasureLineAdvance(void *text, u32 kind);
-void FUN_00162790(u32 first, u32 second, const u16 *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 void skinObjectUpdateMatrices(u8 *context);
 void renderCtxResetColorScale(u8 *context);
 
@@ -53,7 +53,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
         PartnerUnitView *unit = FUN_003e4d68((u16)screen->partners[i]);
 
         if (unit != NULL && (unit->flags & 1) != 0) {
-            PartnerLayout *slot = FUN_001834a4(0x11, shown + 0xAE);
+            PartnerLayout *slot = asdTMTexTableEntryAt(0x11, shown + 0xAE);
 
             FUN_004bde34(screen, unit, i, slot->x + x, slot->y + y, scale);
             shown++;
@@ -66,7 +66,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
         for (s32 i = 0; i < 6; i++) {
             FUN_001835b4(2, 0x11, i + 0xBE, 0, 0, 0x6F);
         }
-        PartnerLayout *notice = FUN_001834a4(0x11, 0xC4);
+        PartnerLayout *notice = asdTMTexTableEntryAt(0x11, 0xC4);
         u8 text[76];
 
         textFormatBuffer(text,
@@ -75,7 +75,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
                          "\202\216\202\205\202\222\202\223\201\104");
         s32 width = fontMeasureLineAdvance(text, 3);
 
-        FUN_00162790(3, -1, (const u16 *)text, (f32)(x + notice->x + (notice->size[0] - width) / 2),
+        textDrawString(3, -1, (const char *)text, (f32)(x + notice->x + (notice->size[0] - width) / 2),
                      (f32)(notice->y + y), 0.0f, 0.0f, scale);
         efctSetSpeed(1.0f);
     }
@@ -85,7 +85,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
     }
     FUN_001835b4(2, 0x11, 0xAD, x, y, 0x97);
     if (screen->current >= 0) {
-        PartnerLayout *mark = FUN_001834a4(0x11, screen->current + 0xAE);
+        PartnerLayout *mark = asdTMTexTableEntryAt(0x11, screen->current + 0xAE);
 
         FUN_001835b4(2, 0x11, 0xAB, mark->x + x, mark->y + y, 0x97);
         efctSetSpeed(1.0f);

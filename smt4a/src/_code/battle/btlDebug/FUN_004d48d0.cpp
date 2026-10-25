@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "shard/dataTable3Type0Count.h"
 
 /* The debug menu's settings block at 0x5715f8; only the parts this panel reads are named. */
 struct BtlDebugMenuSettings {
@@ -43,7 +44,6 @@ void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
 void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u8 flags);
-s32 dataTable3Type0Count(void);
 s32 dataTable22GetCount(void);
 
 // Recreate the debug menu panel from the battle's marker masks and the menu settings.

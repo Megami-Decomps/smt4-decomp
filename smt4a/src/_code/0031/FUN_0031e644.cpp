@@ -1,11 +1,11 @@
 /* NON_MATCHING: explicit script-argument index and busy-result forwarding now match; retail predicates the early busy return while source shares a later return-one block. */
 #include "common.h"
+#include "shard/gameFlagSlotAdvanceCounter.h"
 
 extern "C" {
 
 s32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
-int gameFlagSlotAdvanceCounter(s32 arg);
 s32 FUN_00162ea4(void);
 int FUN_002f0c18(s32 arg);
 int FUN_002f1554(s32 arg);

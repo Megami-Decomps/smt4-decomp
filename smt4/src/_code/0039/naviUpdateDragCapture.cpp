@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler reuses the command argument stack slots for pointer coordinates and keeps the held-frame branch inline rather than after capture. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "AsdSDK/TexTableEntryRange.h"
 
 struct CursorPoint {
     f32 x, y;
@@ -21,7 +22,6 @@ struct NavigationDrag {
 };
 
 extern "C" {
-void FUN_00231434(s32 group, s32 command, s32 *, s32 *, s32 *, s32 *);
 s32 effectForwardModeOne(s32, s32, s32, s32);
 s32 FUN_002319c0(void);
 void FUN_003c2e0c(s32 *x, s32 *y);

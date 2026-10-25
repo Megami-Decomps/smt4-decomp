@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "shard/FUN_004abba8.h"
 
 extern "C" {
 
@@ -8,7 +9,7 @@ void saveSlotBeginTransition(BtlUiObjCA *obj, u32 value, s32 flag);
 
 extern BtlUiGlobalsA g_btlUi;
 
-void FUN_004abba8(u32 unused, u32 value)
+void FUN_004abba8(void*unused, u32 value)
 {
     BtlUiA *ui = g_btlUi.ui;
 

@@ -1,4 +1,5 @@
 /* NON_MATCHING: roster bounds-check merging, action payload spills and flag-mask loads differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -10,7 +11,6 @@ struct BattleReflectMarkingState {
 };
 extern "C" {
 extern BattleReflectMarkingState DAT_00573c08;
-BtlMainStateA* btlGetMainState(void);
 
 
 // Queue roster reflection commands followed by a marked-combatant command.

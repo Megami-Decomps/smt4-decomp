@@ -3,6 +3,7 @@
 #include "nn/Result.h"
 #include "addon/sys/aocThread.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* The worker's lock overlaps the shared stage model's trailing context field. */
 struct BattleStageWorkerView {
@@ -19,7 +20,6 @@ extern "C" {
 extern const char DAT_00401770[];
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(s32 heap, s32 category, s32 flags, s32 bytes, s32 alignment, s32 count);
-void *asdOperatorNew(u32 bytes);
 void resultReportIfFailed(AocThreadHandle *info, void *buffer, u32 size);
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 void FUN_002c526c(s32 result);

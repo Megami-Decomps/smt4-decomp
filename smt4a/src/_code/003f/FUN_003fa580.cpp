@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail does not hoist the constant 8 (loads it at each use, frame 12 with push {r4,r5,lr}) and keeps the three finishing sequences separate with the result store first; this build hoists 8 into r6 (frame 16) and merges/reorders them. Same as FUN_003fa1c8. */
 #include "network/DataStore/DataStoreMain.h"
 #include "classes/OnlineResult.h"
+#include "network/Common/CTRNetInit.h"
 
 extern "C" {
 
-s32 FUN_00432acc(void);
 OnlineResult FUN_00123bd8(DataStoreLink *link);
 void _ZN18OnlineResultRecordaSERKS_(DataStoreWordTriple *dest, const OnlineResult &source);
 s32 _ZNK18OnlineResultRecord7isValidEv(const DataStoreWordTriple *header);

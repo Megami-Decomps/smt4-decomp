@@ -1,5 +1,6 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "common.h"
+#include "shard/asdMemAlloc.h"
 
 extern "C" {
 

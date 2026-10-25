@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
+#include "shard/dataTable33TypeCount.h"
 
 extern "C" {
 
@@ -59,7 +60,6 @@ extern void FUN_00407eb0(u32 handle, s32 kind, s32 flag);
 extern void FUN_004080bc(u32 handle, s32 a, s32 b);
 extern void mapSceneInitializeScriptAndEntry(MikadoPanel *panel);
 extern MikadoMenuEntry *menu4CGetCurrentEntry(u8 *menu);
-extern s32 dataTable33TypeCount(u8 *scratch, s32 type);
 
 /* Once the panel's textures and scripts are loaded, enters state 3 and loads the current entry's images into the cache. */
 void FUN_004b8598(MikadoPanel *panel)

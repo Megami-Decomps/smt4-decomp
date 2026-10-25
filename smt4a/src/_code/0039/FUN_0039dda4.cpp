@@ -1,11 +1,11 @@
 /* NON_MATCHING: effect calls and arguments match; compiler orders the shared return and exceptional-effect blocks differently. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 u32 btlUnitGet(u32 unitId);
-BtlMainStateA *btlGetMainState(void);
 extern u32 g_btlScriptUnit;
 void FUN_004fb43c(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 void FUN_004fcffc(s32 kind, u32 unit, BattleRosterRecordA *record, u32 mask);

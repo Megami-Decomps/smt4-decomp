@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/NaviMain.h"
+#include "shard/FUN_004930e4.h"
 
 extern "C" {
 extern NaviMainA *g_naviMain;
@@ -17,7 +18,6 @@ void FUN_003b61ec(void);
 void commonBgReset(void);
 void FUN_00485e74(u8 *panel);
 void FUN_00490484(void *panel, u32 first, u32 third, u32 second, f32 x, f32 y);
-void FUN_004930e4(u32 argument);
 void requestBeginProcessing(u8 *request, s32 value, s32 type);
 void NaviMain_ResetFlags(u8 *request, u8 mode);
 s32 naviMenuStartIfIdle(u32 handle);

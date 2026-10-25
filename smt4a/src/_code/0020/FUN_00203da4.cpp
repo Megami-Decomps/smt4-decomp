@@ -1,5 +1,6 @@
 /* NON_MATCHING: register assignment of the stacked arguments and the branch layout of the close-mode / unk14 tail differ (retail tests the two flag pairs with separate predicated compares); the first handle copy uses ldr instead of vldr. */
 #include "common.h"
+#include "camp/Unite/UniteEffect.h"
 
 /* A one-word object handle passed by value. */
 struct ObjectHandle {
@@ -36,7 +37,6 @@ void objFlagsSetBits(ObjectHandle handle, s32 bits);
 void bustupCutAnimClearFlags(void);
 void eventTexClearFlagB8(void);
 s32 bustupCutAnimIsStateFive(void);
-s32 FUN_00163e84(u32 value);
 void asdTextFormatStream(ObjectHandle handle, u32 a, u32 b, u32 c, u32 d, const char *format, const char *text);
 void asdTextDrawDirectoryEntry(ObjectHandle handle, u32 kind, u32 textHandle, u32 a, u32 b,
                                const char *text, u32 arg);

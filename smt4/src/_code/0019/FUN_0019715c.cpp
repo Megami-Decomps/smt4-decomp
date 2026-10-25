@@ -16,11 +16,11 @@ int FUN_0028f870(...);
 int FUN_0028fc60(void);
 int FUN_002bdf94(...);
 int itemDrawCategoryBadge(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002be650(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -53,13 +53,13 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 
 
 void FUN_0019715c(int param_1,int param_2)
@@ -140,14 +140,14 @@ void FUN_0019715c(int param_1,int param_2)
           temp_v4 = FUN_0029efc0(temp_v12);
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);
           temp_v10 = (unsigned int)temp_v0;
-          temp_v4 = FUN_002bf4f8(0x1d,temp_v9 + 0x40d);
+          temp_v4 = asdTMTexTableEntryAt(0x1d,temp_v9 + 0x40d);
           FUN_002bf288(2,0x1d,0x46c,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
           FUN_002bf288(2,0x1d,0x46d,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
           FUN_002bf288(2,0x1d,0x46e,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,
                        0x6a);
-          temp_v5 = FUN_002bf4f8(0x1d,0x470);
+          temp_v5 = asdTMTexTableEntryAt(0x1d,0x470);
           temp_v6 = temp_v10;
           FUN_002be650(temp_v10,0);
           if (temp_v6 != 0) {
@@ -159,19 +159,19 @@ void FUN_0019715c(int param_1,int param_2)
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(2,temp_v11,temp_v6,(int)*(short *)(temp_v5 + 8));
+            textDrawString(2,temp_v11,temp_v6,(int)*(short *)(temp_v5 + 8));
           }
-          temp_v5 = FUN_002bf4f8(0x1d,0x473);
+          temp_v5 = asdTMTexTableEntryAt(0x1d,0x473);
           temp_v11 = FUN_0028fb40(temp_v10);
           textFormatBuffer(temp_v13,&LAB_001976e8,temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
                        temp_v13);
-          temp_v5 = FUN_002bf4f8(0x1d,0x474);
+          temp_v5 = asdTMTexTableEntryAt(0x1d,0x474);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,1,0x6f,
                        &LAB_001976f0);
-          temp_v5 = FUN_002bf4f8(0x1d,0x46f);
+          temp_v5 = asdTMTexTableEntryAt(0x1d,0x46f);
           itemDrawCategoryBadge((int)(short)temp_v0,
                        (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,0x6f,0);
@@ -184,11 +184,11 @@ void FUN_0019715c(int param_1,int param_2)
           temp_v0 = *(unsigned short *)(temp_v1 + (temp_v4 + temp_v9) * 2);
           temp_v10 = (unsigned int)temp_v0;
           temp_v1 = FUN_0029efa8(temp_v12);
-          temp_v1 = FUN_002bf4f8(0x1d,temp_v1 + 0x42e);
+          temp_v1 = asdTMTexTableEntryAt(0x1d,temp_v1 + 0x42e);
           temp_v9 = FUN_0029efa8(temp_v12);
           FUN_0028f694(*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
                        (int)*(short *)(temp_v8 + temp_v9 * 2 + 0xe0c));
-          temp_v8 = FUN_002bf4f8(0x1d,0x477);
+          temp_v8 = asdTMTexTableEntryAt(0x1d,0x477);
           temp_v6 = temp_v10;
           FUN_002be650(temp_v10,0);
           if (temp_v6 != 0) {
@@ -200,21 +200,21 @@ void FUN_0019715c(int param_1,int param_2)
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(3,temp_v11,temp_v6,(int)*(short *)(temp_v8 + 8));
+            textDrawString(3,temp_v11,temp_v6,(int)*(short *)(temp_v8 + 8));
           }
-          temp_v8 = FUN_002bf4f8(0x1d,0x47a);
+          temp_v8 = asdTMTexTableEntryAt(0x1d,0x47a);
           temp_v11 = FUN_0028fb40(temp_v10);
           textFormatBuffer(temp_v13,&LAB_001976e8,temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
                        temp_v13);
-          temp_v8 = FUN_002bf4f8(0x1d,0x47b);
+          temp_v8 = asdTMTexTableEntryAt(0x1d,0x47b);
           FUN_002bdf94(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,1,0x83,
                        &LAB_001976f0);
           FUN_002bf288(2,0x1d,0x475,*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
                        0x83);
-          temp_v8 = FUN_002bf4f8(0x1d,0x476);
+          temp_v8 = asdTMTexTableEntryAt(0x1d,0x476);
           itemDrawCategoryBadge((int)(short)temp_v0,
                        (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,0x88,0);

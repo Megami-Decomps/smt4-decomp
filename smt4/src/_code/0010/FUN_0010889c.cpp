@@ -35,7 +35,7 @@ s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
  * their widgets, and finishes by notifying the controller. Always returns 0. */
 s32 FUN_0010889c(u32 job)
 {
-    TransitionWork *work = reinterpret_cast<TransitionWork *>(jobGetWork(job));
+    TransitionWork *work = (TransitionWork *)jobGetWork(job);
 
     if (work->enabled == 0) {
         return 0;

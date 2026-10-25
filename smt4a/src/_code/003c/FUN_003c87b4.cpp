@@ -1,11 +1,11 @@
 /* NON_MATCHING: the final unk19FA read builds the address with two adds instead of reusing the 0x19FA pool literal. */
 #include "common.h"
 #include "ui/MessageMain.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 
 void uiSpriteSelectAnim(u8 *sprite, s32 animation);
-s32 scrGetCommandFrame(void);
 
 extern MessageGlobalsA g_messageMain;
 

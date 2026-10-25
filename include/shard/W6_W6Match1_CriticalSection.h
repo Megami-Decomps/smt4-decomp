@@ -23,6 +23,11 @@ public:
     {
         nn_os_CriticalSection_Enter(lock);
     }
+    /* Lock held as raw storage (a byte array or a word-typed global that is an nn::os::CriticalSection). */
+    explicit ScopedCriticalLock(void* lock) : section(static_cast<CriticalSection*>(lock))
+    {
+        nn_os_CriticalSection_Enter(section);
+    }
     ~ScopedCriticalLock()
     {
         nn_os_CriticalSection_Leave(section);

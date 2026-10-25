@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (156 vs 176 rows); the masks are now fields of the g_btlEncount block (one base, as retail), but retail keeps the 64-bit masks in a 60-byte frame (spilled) while the build reloads them from the block. */
 #include "common.h"
+#include "shard/btlUiIsPanelHolderReady.h"
 
 // Per-combatant record of the battle sides list (0x408 bytes each).
 struct BattleSideEntry {
@@ -49,7 +50,6 @@ extern u32 g_btlUiBlock;
 
 s32 chainCountIdUnflagged(u32 chain, u32* action);
 s32 recordAreAllCountsNonpositive(u32 record);
-s32 btlUiIsPanelHolderReady(u32 block);
 s32 FUN_004f2708(s32 camera, BattleState* state, u32 arg);
 s32 eventCommandRangeCheck(s32 camera);
 void stateFinishIfPresent(BattleState* state);

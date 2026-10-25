@@ -1,4 +1,5 @@
 #include "shard/W8X15_PackageList.h"
+#include "shard/packageFindFileRefByName.h"
 
 extern "C" {
 

@@ -1,13 +1,13 @@
 /* NON_MATCHING: retail 56 vs built 58 rows; paired eligibility-mask loads and battle-slot register allocation differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/partyFindSlotById.h"
 
 extern "C" {
 extern u64 DAT_005710e8;
 extern u64 DAT_005710f8;
 extern u64 DAT_00571108;
-BtlMainStateA *btlGetMainState(void);
-s32 partyFindSlotById(u16);
 u32 scrGetArg(u32);
 void scrSetResult(s32);
 

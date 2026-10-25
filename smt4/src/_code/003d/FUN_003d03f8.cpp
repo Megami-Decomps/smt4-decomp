@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail spills its argument words (push r0-r3, args read via stack) and evaluates the skill kind/amount tests with different register use; logic equivalent. */
 #include "common.h"
+#include "shard/FUN_00227d18.h"
 
 /* A battle unit (accessed fields). */
 struct BtlUnit {
@@ -20,7 +21,6 @@ struct BtlTarget {
 
 extern "C" {
 s32 btlShowListedActionMessage(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 other);
-void FUN_00227d18(s32 kind);
 void FUN_00227fac(void);
 void frameRangeExtend(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 a, s32 b);
 void FUN_0023c0d0(s32 *state, BtlUnit *unit, s32 kind, s32 amount);

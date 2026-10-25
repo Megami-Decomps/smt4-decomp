@@ -2,6 +2,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/W6_W6Match1_Table03Record.h"
 #include "gfx/PackedRenderState.h"
+#include "shard/FUN_002903f0.h"
 
 extern "C" {
 void spriteDescriptorInitFromTemplate(PackedRenderState *sprite, s32 index,
@@ -11,7 +12,6 @@ void FUN_003bbfdc(PackedRenderState *sprite, const PackedRenderParameters *param
 Table03Record *aocGetTableRecordOrFallback(s32 index);
 void FUN_003bc248(PackedRenderState *sprite, s32 index, s32 bank, s32 page);
 u8 FUN_0029022c(void);
-u32 FUN_002903f0(void);
 s32 idIsAtLeast350(u32 id);
 
 void FUN_0027dc24(BtlMainState *battle, PackedRenderState *sprite, s32 allowOverride)

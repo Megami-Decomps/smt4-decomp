@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlHelp.h"
 
@@ -8,12 +9,11 @@ typedef struct BattleMain {
     /* 0x44A0 */ u32 flags;
 } BattleMain;
 
-extern BattleMain *btlGetMainState(void);
 
 /* Starts the battle message FUN_0022a4ac for `id` unless battle flags 0x40 or 0x100 are set; returns 0 when skipped. */
 s32 btlMessageStartUnlessFlagged(s32 id, s32 arg)
 {
-    BattleMain *battle = btlGetMainState();
+    BattleMain *battle = reinterpret_cast<BattleMain *>(btlGetMainState());
     u32 flags = battle->flags;
     s32 mode;
 

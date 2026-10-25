@@ -1,5 +1,6 @@
 /* Returns entry `index` of the resident module's table. */
 #include "common.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 

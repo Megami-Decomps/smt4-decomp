@@ -1,17 +1,17 @@
 #include "battle/btlEncount.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
-BtlEncountOwner *jobGetWork(u32 job);
 
 extern BtlEncount *g_btlEncount;
 
 /* Frees the encounter state and stops the job that owns it. */
 void btlEncountDestroy(u32 job)
 {
-    BtlEncountOwner *owner = jobGetWork(job);
+    BtlEncountOwner *owner = (BtlEncountOwner *)jobGetWork(job);
     BtlEncount *encount = g_btlEncount;
 
     if (g_btlEncount != NULL) {

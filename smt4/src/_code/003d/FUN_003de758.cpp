@@ -1,10 +1,10 @@
 /* NON_MATCHING: reflection scan saved-register allocation differs from retail. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 
 
 /* Queue the pending color/opacity updates for active battle action records. */

@@ -66,4 +66,8 @@ extern "C" {
 void infoWinSetText(const char *entry, u32 arg);
 }
 
+extern "C" {
+s32 FUN_003b6fc4(void);
+}
+
 #endif

@@ -1,4 +1,5 @@
 /* NON_MATCHING: r0/r1 are exchanged for percentage operands, status bits and the reciprocal used by signed division; all other instructions match. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleMessageMasks.h"
@@ -10,7 +11,6 @@ extern u32 g_btlScriptUnit;
 extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 id);
-BtlMainStateA *btlGetMainState(void);
 void FUN_004fb798(s32 mode, BtlUnitA *unit, u32 effect, BattleRosterRecordA *target, s32 first,
     s32 hp, s32 mp, u32 color, u32 flags, s32 start, s32 end, s32 kind, s32 third, s32 fourth, s32 enabled);
 void FUN_004fb43c(s32 delay, BtlUnitA *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);

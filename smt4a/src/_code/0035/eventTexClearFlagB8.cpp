@@ -1,4 +1,5 @@
 #include "shard/Shard0035.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct WorkB8 {
     /* 0xB8 */ u8 flag;
 } WorkB8;
 
-extern WorkB8 *jobGetWork(u32 job);
 
 /* Clears the flag at +0xB8 in the work area of the current event texture job. */
 void eventTexClearFlagB8(void)
@@ -17,7 +17,7 @@ void eventTexClearFlagB8(void)
     u32 slot = eventTexGetCurrentOrInvalid();
 
     if (slot != -1 && jobIsValid(slot) != 0) {
-        jobGetWork(slot)->flag = 0;
+        ((WorkB8 *)jobGetWork(slot))->flag = 0;
     }
 }
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the zero register is hoisted above the phase dispatch and the voice-stop block is duplicated per path where retail shares one copy (the other path jumps back into it). */
 #include "map/lmapMain.h"
 #include <string.h>
+#include "shard/sysPlayVoice.h"
 
 namespace {
 // Idle-voice fields follow the canonical scene prefix; do not enlarge the shared type.
@@ -28,7 +29,6 @@ extern LmapSceneA *g_lmapScene;
 extern const LmapIdleVoiceTables DAT_00532018;
 s32 FUN_00184964(s32 minimum, s32 maximum);
 void FUN_002d1f40(s32 duration, s32 first, s32 second);
-u32 sysPlayVoice(u32 sound);
 void FUN_003d2158(u32 voice, s32 mode);
 void lmapClearExtraFlag(void);
 

@@ -1,6 +1,7 @@
 #include "shard/PlayScene.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "shard/FUN_0025f300.h"
 
 struct SpriteInfo;
 // Keep the common sprite coordinate prefix without importing a conflicting render-context variant.
@@ -11,7 +12,7 @@ s32 vec2GetXInt(UiSpriteState* animation);
 s32 vec2GetYInt(UiSpriteState* animation);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-SpriteInfo* FUN_002bf4f8(u32 table, s32 id);
+SpriteInfo* asdTMTexTableEntryAt(u32 table, s32 id);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
 void FUN_0025f300(PlayScene* work)
@@ -21,7 +22,7 @@ void FUN_0025f300(PlayScene* work)
         s32 y = vec2GetYInt(reinterpret_cast<UiSpriteState*>(work->timer));
         efctSetSpeed(vec2GetSpeed(&work->intro.animation));
         SceneSpriteCoordinates* sprite = reinterpret_cast<SceneSpriteCoordinates*>(
-            FUN_002bf4f8(0x15, static_cast<s32>(work->unk305C) + 0x52));
+            asdTMTexTableEntryAt(0x15, static_cast<s32>(work->unk305C) + 0x52));
         RenderCtx* context = g_titleScene;
         renderCtxSetB(context, packNibblesAndByte(6, 1, 0));
         FUN_002bf288(2, 0x15, 0x4B, sprite->x + x, sprite->y + y, 0x29);

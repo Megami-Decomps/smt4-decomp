@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "event/2dEvent/2dEventTex.h"
 #include "util/FUN_004da77c.h"
+#include "shard/entryDefIsAvailable.h"
 
 struct FusionCatalogCriteria {
     u8 unk00[8];
@@ -19,7 +20,6 @@ extern UniteWork *g_unite;
 extern const u32 DAT_0052f210[];
 void sysMemClear(void *, u32);
 void rt_memclr(void *, u32);
-u32 entryDefIsAvailable(void *, u16);
 u32 FUN_002a4b28(u32);
 u16 FUN_0026264c(u32);
 s32 arrayContainsU16(const u16 *, s32, u32);

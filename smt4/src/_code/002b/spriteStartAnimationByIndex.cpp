@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "font/ComWin/ComWin.h"
 
 extern "C" void spriteStartAnimation(SpritePlaybackView *sprite, const SpriteAnimationCommand *animation);
 

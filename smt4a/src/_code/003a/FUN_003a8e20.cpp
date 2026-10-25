@@ -1,5 +1,6 @@
 #include "battle/btlScript.h"
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -21,14 +22,13 @@ typedef struct SkillRecord {
 extern s32 scrGetArg(u32 index);
 extern void scrSetResult(s32 value);
 extern Unit *btlUnitGet(u32 unit);
-extern SkillRecord *dataTable04FindById(u32 id);
 
 /* Script command: result is the record byte for the script unit's skill in slot `argument`; 0 if it has none. */
 s32 FUN_003a8e20(void)
 {
     s32 slot = scrGetArg(0);
     UnitData *data = btlUnitGet(g_btlScriptUnit)->data;
-    SkillRecord *record = dataTable04FindById(data->skillIds[slot]);
+    SkillRecord *record = (SkillRecord *)dataTable04FindById(data->skillIds[slot]);
 
     if (record != NULL) {
         scrSetResult(record->value);

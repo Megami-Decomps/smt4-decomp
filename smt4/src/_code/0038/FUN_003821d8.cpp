@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "shard/FUN_00241990.h"
 
 extern "C" {
 
@@ -54,7 +55,6 @@ extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int uiQuestGetCurrentEntryId(void);
 /* Supplied declaration required: FUN_0023547c. */
 /* Supplied declaration required: scrScriptProcessStartMappedEntry. */
-extern int FUN_00241990(void);
 /* Supplied declaration required: FUN_00250d84. */
 extern int FUN_00250ec0(unsigned int);
 /* Supplied declaration required: FUN_00269dc8. */

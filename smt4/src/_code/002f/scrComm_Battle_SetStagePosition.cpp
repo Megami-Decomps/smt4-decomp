@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -20,7 +21,6 @@ typedef struct BattleManager {
 extern BattleManager *DAT_004398d4;
 
 void FUN_0027e760(BattleManager *battle);
-BattleUnit *btlGetMainState(void);
 int scrGetCommandFrame(void);
 u32 scrGetArg(int index);
 void FUN_003c7c84(BattleManager *battle, BattleUnit *unit);
@@ -29,7 +29,7 @@ void FUN_003c7f20(BattleManager *battle, BattleUnit *unit);
 /* Script command: moves a battle unit to the stage position given by script arguments 0 and 1 (returns whether phase 4 is active while one is busy). */
 bool scrComm_Battle_SetStagePosition(void)
 {
-    BattleUnit *unit = btlGetMainState();
+    BattleUnit *unit = reinterpret_cast<BattleUnit *>(btlGetMainState());
     s32 x = scrGetArg(0);
     s32 y = scrGetArg(1);
 

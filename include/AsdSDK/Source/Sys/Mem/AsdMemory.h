@@ -107,4 +107,10 @@ extern "C" {
 u32 partyEntryFlagsBit1(s32 index);
 }
 
+extern "C" {
+/* operator new: `size` bytes from the main heap. Some call sites pass the requesting owner as a second
+ * argument, which the allocator never reads. */
+void *asdOperatorNew(u32 size, ...);
+}
+
 #endif

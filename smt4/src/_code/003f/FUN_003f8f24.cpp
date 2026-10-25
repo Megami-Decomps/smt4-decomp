@@ -5,11 +5,11 @@ using namespace SampleValueDecoding;
 
 
 
-extern "C" EncodedValue* FUN_003f8940(ValueDecoder* decoder);
+extern "C" EncodedValue* FUN_003f8940(ValueDecoder* decoder, f32 time);
 
-extern "C" f32 FUN_003f8f24(ValueDecoder* decoder)
+extern "C" f32 FUN_003f8f24(ValueDecoder* decoder, f32 time)
 {
-    const EncodedValue* encoded = FUN_003f8940(decoder);
+    const EncodedValue* encoded = FUN_003f8940(decoder, time);
     u32 value = (u32)encoded->low + ((u32)encoded->high << 8);
     return (f32)value * decoder->scale + decoder->bias;
 }

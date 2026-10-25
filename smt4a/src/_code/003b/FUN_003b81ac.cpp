@@ -3,10 +3,10 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
+#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
-u32 btlResolveEntryChoice(s32 choice);
 s32 FUN_003248e4(BtlCombatantEntryA *entry);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 void scrSetResult(s32 result);

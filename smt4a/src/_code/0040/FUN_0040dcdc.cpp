@@ -1,11 +1,11 @@
 /* NON_MATCHING: direct RGB extraction omits native's redundant word swap; VFP scheduling differs. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlStage.h"
 
 extern "C" {
 extern BtlStage* g_btlStageModel;
 extern void* g_handleRegistry;
-BtlMainStateA* btlGetMainState(void);
 const u32* table108Owner(void* owner, s32 selection, s32 frame);
 void FUN_003e7840(BtlMainStateA* battle, f32 red, f32 green, f32 blue);
 

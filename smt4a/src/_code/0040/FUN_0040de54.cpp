@@ -1,9 +1,10 @@
 /* NON_MATCHING: restored help request option; signed mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_BattleCamera.h"
 #include "battle/btlMain.h"
 #include "battle/BattleCommandValue.h"
-struct BattleMaskState;
+struct BtlMainStateA;
 struct TransitionView;
 
 extern "C" {
@@ -72,7 +73,7 @@ int FUN_004cad84(void);
 void FUN_004cb8a0(TransitionView *state);
 int driftObjectStart(...);
 int uiStartRangeAnimationFromTable(...);
-void btlCameraSetFormationSlot(BattleActionCamera *, BattleMaskState *, int);
+void btlCameraSetFormationSlot(BattleActionCamera *, BtlMainStateA *, int);
 int flags64CSetTarget(...);
 int FUN_004f26cc(...);
 int FUN_004f41b0(...);
@@ -81,7 +82,6 @@ int btlQueueDuplicateSuppressedAction(...);
 int btlReflectSetValuePair(...);
 int btlReflectRequestPairScalar(...);
 
-int btlGetMainState(void);
 int asdMemFree(void);
 int libc_strlen(short *);
 int FUN_003e7840(unsigned int, int);
@@ -394,7 +394,7 @@ LAB_0040deb4:
     FUN_0040cd6c(param_1,psVar2);
     break;
   case '\x03':
-    puVar6 = (unsigned int *)btlGetMainState();
+    puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       if ((puVar6[1] & DAT_0057131c) == 0 && (*puVar6 & DAT_00571318) == 0) {
@@ -439,7 +439,7 @@ LAB_0040deb4:
     break;
   case '\x05':
     if (0 < *(int *)(psVar2 + 0x14)) {
-      temp_v8 = btlGetMainState();
+      temp_v8 = reinterpret_cast<int>(btlGetMainState());
       VectorSignedToFloat((int)(char)psVar2[0x10],(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(char *)((int)psVar2 + 0x21),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)(char)psVar2[0x11],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -470,7 +470,7 @@ LAB_0040deb4:
     FUN_0040d97c(param_1,psVar2);
     break;
   case '\t':
-    puVar6 = (unsigned int *)btlGetMainState();
+    puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       temp_v7 = *puVar6;
@@ -498,7 +498,7 @@ LAB_0040deb4:
   case '\f':
   case '\r':
   case '\x0e':
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     temp_v3 = g_btlAux;
     temp_v4 = psVar2[0x12];
     if (temp_v4 == 0) {
@@ -589,7 +589,7 @@ LAB_0040deb4:
     }
     break;
   case '\x0f':
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     temp_v4 = psVar2[0x12];
     if (temp_v4 == 0) {
       FUN_003f2280(temp_v8,0,(int)psVar2[0x13],*(unsigned int *)(psVar2 + 0x14),
@@ -631,7 +631,7 @@ LAB_0040e864:
     psVar2[1] = temp_v4;
     break;
   case '\x10':
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     temp_v0 = (char)psVar2[0x10];
     if (temp_v0 != '\0') {
       if (temp_v0 != '\x01') {
@@ -684,7 +684,7 @@ LAB_0040e864:
     }
     break;
   case '\x12':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (((DAT_00571358 | DAT_00571368) & *(unsigned int *)(temp_v3 + 0x45a0)) == 0 &&
         ((DAT_0057135c | DAT_0057136c) & *(unsigned int *)(temp_v3 + 0x45a4)) == 0) {
       if (psVar2[0x12] == 0) {
@@ -718,7 +718,7 @@ joined_r0x0040ec14:
     psVar2[1] = temp_v4;
     break;
   case '\x13':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (((DAT_0057136c | DAT_0057135c) & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 ||
         ((DAT_00571358 | DAT_00571368) & *(unsigned int *)(temp_v3 + 0x45a0)) != 0) {
       temp_v4 = 0;
@@ -740,7 +740,7 @@ joined_r0x0040ec14:
     temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x14':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (((DAT_0057135c | DAT_0057136c) & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 ||
         ((DAT_00571358 | DAT_00571368) & *(unsigned int *)(temp_v3 + 0x45a0)) != 0) {
       temp_v4 = 0;
@@ -765,7 +765,7 @@ joined_r0x0040ec14:
     FUN_0040ca18(param_1,psVar2);
     break;
   case '\x16':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (((DAT_0057136c | DAT_0057135c) & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 ||
         ((DAT_00571358 | DAT_00571368) & *(unsigned int *)(temp_v3 + 0x45a0)) != 0) {
       temp_v4 = 0;
@@ -787,7 +787,7 @@ joined_r0x0040ec14:
     temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x17':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (((DAT_0057136c | DAT_0057135c) & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 ||
         ((DAT_00571358 | DAT_00571368) & *(unsigned int *)(temp_v3 + 0x45a0)) != 0) {
       temp_v4 = 0;
@@ -809,7 +809,7 @@ joined_r0x0040ec14:
     temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x18':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (((DAT_0057136c | DAT_0057135c) & *(unsigned int *)(temp_v3 + 0x45a4)) != 0 ||
         ((DAT_00571368 | DAT_00571358) & *(unsigned int *)(temp_v3 + 0x45a0)) != 0) {
       temp_v4 = 0;
@@ -831,7 +831,7 @@ joined_r0x0040ec14:
     temp_v3 = infoWinIsActive();
     goto joined_r0x0040ec14;
   case '\x19':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (!(((DAT_0057136c | DAT_0057135c) & *(unsigned int *)(temp_v3 + 0x45a4)) == 0 &&
          ((DAT_00571358 | DAT_00571368) & *(unsigned int *)(temp_v3 + 0x45a0)) == 0)) {
       temp_v4 = 0;
@@ -843,7 +843,7 @@ joined_r0x0040ec14:
     break;
   case '\x1a':
   case '\x1b':
-    puVar5 = (unsigned int *)btlGetMainState();
+    puVar5 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     puVar6 = puVar5;
     FUN_003f0e20(puVar5,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
@@ -874,7 +874,7 @@ joined_r0x0040ec14:
     }
     break;
   case '\x1c':
-    puVar6 = (unsigned int *)btlGetMainState();
+    puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       if (!(((DAT_00571318 | DAT_00571330) & *puVar6) != 0 ||
@@ -882,7 +882,7 @@ joined_r0x0040ec14:
         FUN_004cab9c(*(unsigned int *)(psVar2 + 10));
         break;
       }
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       temp_v6 = 0;
       do {
         temp_v9 = (int)*(short *)((int)puVar6 + temp_v6 * 2 + 8);
@@ -894,7 +894,7 @@ joined_r0x0040ec14:
     }
     break;
   case '\x1d':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = FUN_003f0e20(temp_v3,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (temp_v3 != 0) {
       FUN_004cb8a0(reinterpret_cast<TransitionView *>(*(int *)(psVar2 + 10)));
@@ -904,7 +904,7 @@ joined_r0x0040ec14:
     FUN_0040d274(param_1,psVar2);
     break;
   case '\x1f':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     unaff_r8 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     temp_v8 = 0;
     temp_v6 = (int)(short)*(unsigned int *)(psVar2 + 0x14);
@@ -946,9 +946,9 @@ joined_r0x0040ec14:
     uiStartRangeAnimationFromTable(g_btlCamera,*(unsigned int *)(psVar2 + 0x14));
     break;
   case '!':
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     if (-1 < psVar2[0x12]) {
-      btlCameraSetFormationSlot((BattleActionCamera *)g_btlCamera,(BattleMaskState *)temp_v8,psVar2[0x12]);
+      btlCameraSetFormationSlot((BattleActionCamera *)g_btlCamera,(BtlMainStateA *)temp_v8,psVar2[0x12]);
     }
     if (psVar2[0x13] != 0) {
       FUN_004f41b0(g_btlCamera,0);
@@ -976,20 +976,20 @@ joined_r0x0040ec14:
       }
       else if (*(int *)(temp_v6 + 8) == *(int *)(psVar2 + 4)) goto LAB_0040e864;
     }
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (*(char *)(temp_v3 + 0x3004) >= '\x01') {
       temp_v4 = 1;
       psVar2[1] = temp_v4;
       break;
     }
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     stateFinishIfPresent();
     btlReflectSetValuePair(0,*(unsigned int *)(psVar2 + 4),0,1,1);
     temp_v4 = 0;
     psVar2[1] = temp_v4;
     break;
   case '$':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     *(char *)(temp_v3 + 0x3004) = *(char *)(temp_v3 + 0x3004) - '\x01';
     break;
   case '%':
@@ -1023,7 +1023,7 @@ LAB_0040f258:
     break;
   case '&':
     FUN_004c0850((int)*(short *)(*(int *)(psVar2 + 10) + 0x6a),*(int *)(psVar2 + 0x14) != 0);
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     if ((*(unsigned int *)(psVar2 + 0x26) & 0x10) != 0) {
       puVar6 = (unsigned int *)*param_1;
       if (*(int *)(psVar2 + 0x14) != 0) {
@@ -1117,7 +1117,7 @@ LAB_0040f258:
     break;
   case '.':
     FUN_004c9d04((int)*(short *)(*(int *)(psVar2 + 0xc) + 0x6e),0);
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     FUN_003e7ef0();
     break;
   case '/':
@@ -1140,7 +1140,7 @@ joined_r0x0040f750:
           break;
         }
       }
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       *(char *)(temp_v3 + 0x3004) = *(char *)(temp_v3 + 0x3004) - '\x01';
       temp_v4 = 0;
       psVar2[1] = temp_v4;
@@ -1177,16 +1177,16 @@ LAB_0040f684:
       temp_v5 = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50);
       goto joined_r0x0040f750;
     }
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     *(char *)(temp_v3 + 0x3004) = *(char *)(temp_v3 + 0x3004) - '\x01';
     temp_v4 = 0;
     psVar2[1] = temp_v4;
     break;
   case '2':
     temp_v4 = *(short *)(*(int *)(psVar2 + 10) + 0x68);
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(temp_v8),6,(int)temp_v4,0,reinterpret_cast<u32>(unaff_r8));
-    puVar6 = (unsigned int *)btlGetMainState();
+    puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(puVar6,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (puVar6 != (unsigned int *)0x0) {
       temp_v5 = ~DAT_00571338;
@@ -1205,7 +1205,7 @@ LAB_0040f684:
       temp_v3 = *(int *)(psVar2 + 0x14);
     }
     if (!((!temp_v11 && !temp_v1) || temp_v3 == 0)) {
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       temp_v6 = btlScriptUnitHasFlags();
       if (temp_v6 != 0) {
         FUN_004fd508(0,*(unsigned int *)(psVar2 + 4),0,0,1);
@@ -1252,7 +1252,7 @@ LAB_0040f684:
     }
     break;
   case '8':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v8 = btlUnitGet(g_btlScriptUnit);
     if (*(int *)(psVar2 + 0x14) != 0) {
       temp_v3 = *(int *)(psVar2 + 0x14) + 1;
@@ -1344,7 +1344,7 @@ LAB_0040fb78:
     }
     break;
   case ';':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     if (*(int *)(psVar2 + 0x14) != 0) {
       temp_v8 = FUN_003d214c(*(unsigned int *)(psVar2 + 0x16));
     }
@@ -1362,7 +1362,7 @@ LAB_0040fb78:
     btlApplyDirectionBucket(param_1,psVar2);
     break;
   case '=':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = *(int *)(temp_v3 + 0x4cf0);
     if ((0 < temp_v3) || ((temp_v3 == -1 && (temp_v3 = FUN_0047f5b8(), 0 < temp_v3)))) {
       FUN_004fb43c(0,*(unsigned int *)(psVar2 + 4),temp_v3,0,0,0,0);
@@ -1429,7 +1429,7 @@ LAB_0040fb78:
     FUN_00416960(temp_v8,*(unsigned int *)(psVar2 + 0x14));
     break;
   case 'C':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = temp_v3 + *(int *)(psVar2 + 0x14) * 0x10;
     if (*(int *)(temp_v3 + 0x4d78) != 0) {
       temp_v6 = controllerGetRecordValue();
@@ -1471,7 +1471,7 @@ LAB_0040fb78:
     }
     break;
   case 'F':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v5 = temp_v3 + 0x2200;
     temp_v11 = *(char *)(temp_v3 + 0x22cc) != '\0';
     if (temp_v11) {
@@ -1509,7 +1509,7 @@ LAB_0040fb78:
     }
     break;
   case 'G':
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     temp_v5 = temp_v3 + 0x2200;
     temp_v11 = *(char *)(temp_v3 + 0x22cc) != '\0';
     if (temp_v11) {

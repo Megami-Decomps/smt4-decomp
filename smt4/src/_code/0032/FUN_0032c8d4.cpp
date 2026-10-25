@@ -120,20 +120,20 @@ unsigned int FUN_0032c8d4(void)
             *(unsigned short *)((int)puVar17 + iVar7 * 6 + 0xe2c) = 0xffff;
             FUN_00257a50(puVar12,iVar7,0);
             if (puVar12 != (unsigned char *)0x0) {
-              iVar19 = FUN_002bf4f8(0x24,iVar7 + 0x87);
+              iVar19 = asdTMTexTableEntryAt(0x24,iVar7 + 0x87);
               uVar5 = FUN_002b8584(0x24,iVar7 + 0x87);
               *(unsigned short *)((int)puVar17 + iVar7 * 2 + 0xe22) = uVar5;
-              iVar13 = FUN_002bf4f8(0x24,0x7f);
+              iVar13 = asdTMTexTableEntryAt(0x24,0x7f);
               iVar14 = (int)(short)(*(short *)(iVar19 + 8) + *(short *)(iVar13 + 8));
               FUN_0029e054(iVar14,(int)(short)(*(short *)(iVar19 + 10) + *(short *)(iVar13 + 10)),
                            (int)**(short **)(iVar13 + 0xc),(int)(*(short **)(iVar13 + 0xc))[1]);
               *(short *)((int)puVar17 + iVar7 * 6 + 0xe28) = (short)iVar14;
-              iVar13 = FUN_002bf4f8(0x24,0x80);
+              iVar13 = asdTMTexTableEntryAt(0x24,0x80);
               iVar14 = (int)(short)(*(short *)(iVar19 + 8) + *(short *)(iVar13 + 8));
               FUN_0029e054(iVar14,(int)(short)(*(short *)(iVar19 + 10) + *(short *)(iVar13 + 10)),
                            (int)**(short **)(iVar13 + 0xc),(int)(*(short **)(iVar13 + 0xc))[1]);
               *(short *)((int)puVar17 + iVar7 * 6 + 0xe2a) = (short)iVar14;
-              iVar13 = FUN_002bf4f8(0x24,0x81);
+              iVar13 = asdTMTexTableEntryAt(0x24,0x81);
               iVar14 = (int)(short)(*(short *)(iVar19 + 8) + *(short *)(iVar13 + 8));
               FUN_0029e054(iVar14,(int)(short)(*(short *)(iVar13 + 10) + *(short *)(iVar19 + 10)),
                            (int)**(short **)(iVar13 + 0xc),(int)(*(short **)(iVar13 + 0xc))[1]);
@@ -679,7 +679,7 @@ code_r0x0032d518:
     iVar7 = FUN_0029efc0(DAT_0043da90 + 0x90);
     iVar19 = FUN_0029efa8(puVar17 + 0x90);
     acStack_634[0] = '\0';
-    uVar18 = FUN_002bf4f8(0x1d,0x56d);
+    uVar18 = asdTMTexTableEntryAt(0x1d,0x56d);
     uStack_654 = (unsigned int)*(short *)((int)puVar17 + 0xe06);
     pcStack_650 = acStack_634;
     uStack_648 = 1;

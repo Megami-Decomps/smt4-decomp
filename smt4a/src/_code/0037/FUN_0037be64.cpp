@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "shard/FUN_0019e52c.h"
 
 extern "C" {
 
@@ -35,7 +36,6 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: slotRecordFindById. */
-extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: gameDataCopySaveEntry. */
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: rt_aeabi_memclr. */

@@ -25,7 +25,7 @@ void renderCtxResetColorScale(RenderCtxA* context);
 // Draw the enabled effect with its own speed, restoring render state afterward.
 s32 FUN_00472e1c(u32 job)
 {
-    EffectDrawWorkView* work = reinterpret_cast<EffectDrawWorkView *>(jobGetWork(job));
+    EffectDrawWorkView* work = (EffectDrawWorkView *)jobGetWork(job);
     if (work->owner.dirty && (work->owner.control.flags & 0x10)) {
         RenderCtxA* context = g_renderCtx;
         s32 mode = FUN_001692ac(1, 0);

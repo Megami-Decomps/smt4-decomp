@@ -1,11 +1,11 @@
 /* NON_MATCHING: only the initial constant-table load, stack adjustment and level-register move are scheduled differently; 84 built and retail rows. */
 #include "shard/Shard0035.h"
 #include <string.h>
+#include "shard/gameDataGetTableValue.h"
 
 extern "C" {
 extern const char *const DAT_005321e8[10];
 Entry30 *dataTable4CGetEntry(u32 index);
-s32 gameDataGetTableValue(void);
 void textFormatBuffer(char *output, const char *format, ...);
 
 void FUN_0032725c(u32 index, char *output, s32 level)

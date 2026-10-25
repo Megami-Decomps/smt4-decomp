@@ -1,6 +1,7 @@
 /* NON_MATCHING: animation-key iteration and layer/line interpolation use different VFP and loop registers. */
 #include "result/WhisperEffect.h"
 #include <stddef.h>
+#include "shard/FUN_0021c118.h"
 
 typedef char CheckWhisperParticleSize[sizeof(WhisperParticleAnimation) == 0x20 ? 1 : -1];
 typedef char CheckWhisperLineSize[sizeof(WhisperLineAnimation) == 0x34 ? 1 : -1];
@@ -10,7 +11,6 @@ typedef char CheckWhisperViewSize[sizeof(WhisperAnimationView) == 0x1b8 ? 1 : -1
 extern "C" WhisperAnimationView *jobGetWork(u32 job);
 extern "C" f32 FUN_0025cb1c();
 extern "C" s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
-extern "C" void FUN_0021c118(u32 handle, s32 frames);
 
 static __inline void updateWhisperLine(WhisperLineAnimation *line)
 {

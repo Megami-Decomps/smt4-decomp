@@ -2,9 +2,9 @@
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/AsdSoundGetPlayerPriority.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-s32 jyoucyuGetTableEntry(u32 index);
 s32 FUN_002c1d5c(void);
 s32 asd3dSoundActorIsPlaying(s32 slot);
 void FUN_002cc1c0(u32 slot, const SoundActorQueuePosition *position);

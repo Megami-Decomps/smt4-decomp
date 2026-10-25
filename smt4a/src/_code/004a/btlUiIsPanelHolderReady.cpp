@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/btlUiIsPanelHolderReady.h"
 
 extern "C" {
 
@@ -17,7 +18,7 @@ extern BtlUiView g_btlUi;
 u8 FUN_00270bfc(void *holder);
 
 /* Returns 1 when there is no panel, otherwise FUN_00270bfc's result for the panel's holder. */
-u8 btlUiIsPanelHolderReady(void)
+u8 btlUiIsPanelHolderReady(u32 arg0)
 {
     BtlUiPanel *panel = g_btlUi.panel;
 

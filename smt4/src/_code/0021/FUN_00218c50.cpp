@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00218c50` (_code @ 0x218c50, 0x494 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int btlGetMainState(void);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int vec2GetXInt(int);
@@ -34,7 +34,7 @@ void FUN_00218c50(int param_1)
   float temp_v6;
   
   if ((*(int *)(param_1 + 0x2180) != 0) &&
-     (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x200) == 0)) {
+     (temp_v0 = reinterpret_cast<int>(btlGetMainState()), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x200) == 0)) {
     temp_v6 = 0.29f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v0 = vec2GetXInt(param_1 + 0x20f0);

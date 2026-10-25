@@ -1,5 +1,6 @@
 /* NON_MATCHING: recovered texture table/index release arguments; reset zeros remain hoisted across calls. */
 #include "common.h"
+#include "shard/FUN_002a60cc.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ extern BustUp *g_btlTalkBustUp;
 extern u32 g_aocSystem;
 
 void asdTMTexTableReleaseNode(s32 table, s32 node);
-s32 FUN_002a60cc(u32 aoc, s32 node, s32 slot);
 
 /* Releases the talk bust-up's texture slot (if it has one) and resets it to state 3. */
 void FUN_0028bf2c(void)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the schedule of the category extent loads in the centers computation and two load registers of the origin sum differ; everything else is identical. */
 #include "gamedata/MapNaviCategories.h"
+#include "event/bustupEvent/BustupTex.h"
 
 /* One 8-byte position pair of the navigation display. */
 struct NaviPoint {
@@ -31,7 +32,6 @@ extern "C" {
 s32 dataTable2ECount(void);
 NaviMapEntry *dataTable2EGetEntry(s32 index);
 s32 asdTMTexTableReleaseNode(s32 table, s32 node);
-void FUN_0014afd0(s32 table, s32 index);
 u8 *asdTMTexTableGetHeaderValue(s32 table, s32 index);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *table);
 MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *table, s32 index);

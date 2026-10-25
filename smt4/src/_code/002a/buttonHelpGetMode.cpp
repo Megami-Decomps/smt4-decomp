@@ -1,4 +1,5 @@
 #include "common.h"
+#include "bible/bibleLegionDraw.h"
 
 extern "C" {
 

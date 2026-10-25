@@ -3,6 +3,7 @@
 #include "shard/Shard0032.h"
 #include "shard/Shard004B.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTable.h"
 
 static __inline bool recoveryUnitHasSkill(const UnitRecord *unit, u16 skill)
 {
@@ -17,7 +18,6 @@ extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_003df57c(u32 skill, u32 mode);
 s32 gameSlotTableFindFree();
-SlotTable *gameGetSlotTable();
 UnitRecord *gameGetSlotRecord(s32 slot);
 s32 FUN_004bcbb4(UnitRecord *unit, u32 skill);
 
@@ -33,7 +33,7 @@ u32 FUN_004a0404()
             return 1;
     }
     s32 slotCount = gameSlotTableFindFree();
-    const s8 *slots = gameGetSlotTable()->slots;
+    const s8 *slots = gameGetSlotTable()->party;
     for (s32 slot = 0; slot < slotCount; ++slot) {
         if (slots[slot] < 0)
             continue;

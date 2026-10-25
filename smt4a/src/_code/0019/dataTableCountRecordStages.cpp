@@ -1,11 +1,11 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table04Record.h"
+#include "shard/dataTableCountRecordStages.h"
 
 struct AocSystemA;
 extern "C" {
 extern AocSystemA *g_aocSystem;
 Table04ExtraRecord *FUN_001b2e78(AocSystemA *system, u32 id);
-Table04Record *dataTable04FindById(u32 id);
 s32 FUN_001ac8dc(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));

@@ -1,11 +1,10 @@
-/* NON_MATCHING: retail branches after the null-owner test; built predicates the following portrait flag test, removing one branch. */
 #include "common.h"
 
 extern "C" {
 
 typedef struct BustUp {
     /* 0x000 */ u8 unk000[0x2F4];
-    /* 0x2F4 */ u8 hasPortrait;
+    /* 0x2F4 */ s8 hasPortrait;
     /* 0x2F5 */ u8 unk2F5[0x13];
     /* 0x308 */ u32 portraitHandle;
 } BustUp;

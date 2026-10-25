@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/PartyMoney.h"
 
 struct AocRecord {
     /* 0x00 */ u8 unk00[42];

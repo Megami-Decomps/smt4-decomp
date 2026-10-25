@@ -6,11 +6,11 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int effectDispatchSelector(...);
 int efctSetSpeed(void);
 int FUN_0018152c(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_00183bb0(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(void);
@@ -43,11 +43,11 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018152c. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -159,7 +159,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
   temp_v13 = 0x437f0000;
   temp_v14 = VectorFloatToUnsigned(temp_v12 * 255.0f,3);
   temp_v0 = (temp_v14 & 0xff) | 0xffffff00;
-  FUN_001834a4(0xc,0x9b);
+  asdTMTexTableEntryAt(0xc,0x9b);
   temp_v15 = (unsigned long long)temp_v14 << 0x20;
   temp_v20 = param_2 + 5;
   temp_v16 = 0;
@@ -169,7 +169,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     VectorSignedToFloat((int)(*(float *)(temp_v17 + 0x398) + in_s1),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(*(float *)(temp_v17 + 0x394) + in_s0) + temp_v8,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,temp_v0,*(unsigned int *)(temp_v16 * 4 + 0x5715b8));
+    textDrawString(2,temp_v0,*(unsigned int *)(temp_v16 * 4 + 0x5715b8));
     switch(temp_v16) {
     case 0:
       temp_v1 = (int)*(char *)(param_3 + 0x5a);
@@ -262,12 +262,12 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     else {
       temp_v22 = 1;
     }
-    temp_v1 = FUN_001834a4(0xc,temp_v16 + 0x94);
+    temp_v1 = asdTMTexTableEntryAt(0xc,temp_v16 + 0x94);
     temp_v23 = (int)**(short **)(temp_v1 + 0xc);
     puVar3 = temp_v19;
     fontMeasureLineAdvance(puVar3,2);
     temp_v6 = 0;
-    temp_v1 = FUN_001834a4(0xc,0x9b);
+    temp_v1 = asdTMTexTableEntryAt(0xc,0x9b);
     if (temp_v22 != 0) {
       temp_v6 = (int)**(short **)(temp_v1 + 0xc);
     }
@@ -280,7 +280,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_001835b4(temp_v21,0xc,0x9e,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                      (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-        temp_v1 = FUN_001834a4(0xc,0x9e);
+        temp_v1 = asdTMTexTableEntryAt(0xc,0x9e);
         temp_v1 = *(int *)(temp_v1 + 0xc);
         temp_v12 = (float)temp_v13;
         temp_v10 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -295,7 +295,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
         temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_001835b4(temp_v21,0xc,0x9d,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                      (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-        temp_v1 = FUN_001834a4(0xc,0x9d);
+        temp_v1 = asdTMTexTableEntryAt(0xc,0x9d);
         temp_v1 = *(int *)(temp_v1 + 0xc);
         temp_v12 = (float)temp_v13;
         temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -310,7 +310,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
       temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001835b4(temp_v21,0xc,0x9a,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                    (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-      temp_v1 = FUN_001834a4(0xc,0x9a);
+      temp_v1 = asdTMTexTableEntryAt(0xc,0x9a);
       temp_v1 = *(int *)(temp_v1 + 0xc);
       temp_v12 = (float)temp_v13;
       temp_v11 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -324,7 +324,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
       temp_v9 = (float)VectorSignedToFloat(temp_v22,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001835b4(temp_v21,0xc,0x99,(int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v9) + temp_v8,
                    (int)(*(float *)(temp_v17 + 0x3a0) + temp_v12 + in_s1),temp_v20);
-      temp_v1 = FUN_001834a4(0xc,0x99);
+      temp_v1 = asdTMTexTableEntryAt(0xc,0x99);
       temp_v1 = *(int *)(temp_v1 + 0xc);
       temp_v12 = (float)temp_v13;
       temp_v10 = VectorFloatToUnsigned(*(float *)(temp_v1 + 0x10) * temp_v12,3);
@@ -339,7 +339,7 @@ void FUN_003f8a24(int param_1,int param_2,int param_3)
     VectorSignedToFloat((int)(*(float *)(temp_v17 + 0x3a0) + in_s1),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(*(float *)(temp_v17 + 0x39c) + in_s0 + temp_v12 + temp_v9) + temp_v8,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,temp_v14,temp_v19);
+    textDrawString(2,temp_v14,temp_v19);
     temp_v16 = temp_v16 + 1;
     if (temp_v16 >= 5) {
       return;

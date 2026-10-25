@@ -1,5 +1,6 @@
 /* NON_MATCHING: picks a hint popup for a candidate from the list (level window, not yet known or recent) and records it in the recent list; written from the decompilation and the retail disassembly, loop structure and register allocation not compared with retail */
 #include "gamedata/DataTable.h"
+#include "util/CalleeContracts.h"
 
 struct PopupEntry {
     /* 0x00 */ s32 id;
@@ -57,7 +58,6 @@ extern PopupState *g_popupState;
 extern u32 DAT_005f18ec[HINT_RECENT_COUNT];   /* most recent first */
 extern u32 DAT_005f190c[HINT_KNOWN_COUNT];     /* ids already shown */
 
-void FUN_00152f44(void);
 SaveSlotView *saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);

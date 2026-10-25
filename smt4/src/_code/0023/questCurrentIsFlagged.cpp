@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/questCurrentIsFlagged.h"
 
 extern "C" {
 

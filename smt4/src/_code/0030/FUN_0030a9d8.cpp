@@ -10,7 +10,7 @@ struct SlotPositionRecord {
 };
 
 void FUN_00202ab4(s32 a, s32 b);
-SlotPositionRecord *FUN_002bf4f8(u32 table, u32 index);
+SlotPositionRecord *asdTMTexTableEntryAt(u32 table, u32 index);
 
 /* Resets the save/load UI to its first state: no slot loading, cursor on the first slot's position. */
 void FUN_0030a9d8(void)
@@ -22,7 +22,7 @@ void FUN_0030a9d8(void)
     g_saveLoadUIFlags.unk01 = 0;
     worker->isLoad = 0;
     worker->unk379 = 1;
-    SlotPositionRecord *position = FUN_002bf4f8(0x36, 3);
+    SlotPositionRecord *position = asdTMTexTableEntryAt(0x36, 3);
     worker->slotX = position->x;
     worker->slotY = position->y;
     worker->isLoad = 0;

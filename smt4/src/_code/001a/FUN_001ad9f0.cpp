@@ -46,7 +46,7 @@ f32 renderCtxCalculateStereoParallax(TitleScene* scene, f32 amount);
 s32 vec2GetXInt(void* vec);
 s32 vec2GetYInt(void* vec);
 void uiFadeDraw(u32 id);
-void* FUN_002bf4f8(u32 group, u32 index);
+void* asdTMTexTableEntryAt(u32 group, u32 index);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
 u32 FUN_002bcddc(u16 id, u32 arg);
 void textFormatBuffer(char* out, const char* format, ...);
@@ -124,12 +124,12 @@ u32 FUN_001ad9f0(void)
         FUN_002bf288(2, 0x29, 0x58, x, y, 0x97);
         FUN_002bf288(2, 0x29, 0x59, x, y, 0x97);
         FUN_002bf288(2, 0x29, 0x51, x, y, 0xa1);
-        SpriteRect* labelRect = static_cast<SpriteRect*>(FUN_002bf4f8(0x29, 0x54));
+        SpriteRect* labelRect = static_cast<SpriteRect*>(asdTMTexTableEntryAt(0x29, 0x54));
         drawSkillCategoryLabel(category, labelRect->x + x, labelRect->y + y, 0xa6);
-        SpriteRect* nameRect = static_cast<SpriteRect*>(FUN_002bf4f8(0x29, 0x55));
+        SpriteRect* nameRect = static_cast<SpriteRect*>(asdTMTexTableEntryAt(0x29, 0x55));
         char text[64];
         textFormatBuffer(text, "%s", FUN_002bcddc(category, 0));
-        FUN_002be5a4(3, -1, text, (f32)(nameRect->x + x), (f32)(nameRect->y + y), 0.375f, 0.0f, 1.0f);
+        textDrawString(3, -1, text, (f32)(nameRect->x + x), (f32)(nameRect->y + y), 0.375f, 0.0f, 1.0f);
         effectRenderTransformedInstance(pointer, (f32)(s32)renderCtxCalculateStereoParallax(g_titleScene, 0.28f));
         break;
     }

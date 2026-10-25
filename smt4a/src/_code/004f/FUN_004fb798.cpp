@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fb798` (_code @ 0x4fb798, 0x48c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int FUN_001568f8(...);
 int FUN_003f0e20(int, int);
 
@@ -57,7 +57,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
   }
   temp_v1 = (short)param_1 + (short)param_10;
   if (-1 < param_10) {
-    temp_v2 = btlGetMainState();
+    temp_v2 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v2,(int)*(short *)(param_4 + 0x6a));
     if (((temp_v0) && (temp_v2 != 0)) && (-1 < param_12)) {
       temp_v4 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,(int)temp_v1,0,param_2));
@@ -84,7 +84,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
       *(unsigned int *)(temp_v4 + 0x28) = 1;
       *(int *)(temp_v4 + 0x4c) = param_7;
       if (param_15 != 0) {
-        btlGetMainState();
+        reinterpret_cast<int>(btlGetMainState());
         temp_v3 = btlScriptUnitHasFlags();
         if (temp_v3 != 0) {
           FUN_004fb43c(0,0,0x1000263,0,1,0,0);
@@ -102,7 +102,7 @@ LAB_004fba00:
       *(unsigned int *)(temp_v4 + 0x28) = 0;
       *(int *)(temp_v4 + 0x4c) = param_6;
       if (param_15 == 0) goto LAB_004fbabc;
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       temp_v3 = btlScriptUnitHasFlags();
       temp_v3 = temp_v3 & ~param_14;
       if (temp_v3 != 0) {
@@ -120,7 +120,7 @@ LAB_004fba00:
     *(unsigned int *)(temp_v4 + 0x28) = 1;
     *(int *)(temp_v4 + 0x4c) = param_7;
     if (param_15 != 0) {
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       temp_v3 = btlScriptUnitHasFlags();
       if (temp_v3 != 0) {
         FUN_004fb43c(0,0,0x1000263,0,1,0,0);
@@ -136,7 +136,7 @@ LAB_004fbabc:
     temp_v3 = 0;
     temp_v0 = *(short *)(param_4 + 0x6a) < 0x6d;
     if (temp_v0) {
-      temp_v2 = btlGetMainState();
+      temp_v2 = reinterpret_cast<int>(btlGetMainState());
       FUN_001568f8(temp_v2,(int)*(short *)(param_4 + 0x6a));
       if (temp_v2 != 0) {
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v2 + 0x110);
@@ -164,7 +164,7 @@ LAB_004fbabc:
      ((0 < param_6 || (param_9 != 0)))) {
     temp_v2 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,0,0,0));
     *(unsigned char *)(temp_v2 + 4) = 0x41;
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     temp_v4 = FUN_003eb1cc();
     if (temp_v4 == 0) {
       *(unsigned int *)(temp_v2 + 0x28) = 1;

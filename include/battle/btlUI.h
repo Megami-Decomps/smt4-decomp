@@ -219,7 +219,7 @@ typedef struct BtlUiA {
     /* 0x748C */ u8 unk748C[0x14];
     /* 0x74A0 */ s32 state;
     /* 0x74A4 */ u8 unk74A4[0x0F];
-    /* 0x74B3 */ u8 spriteActive;
+    /* 0x74B3 */ s8 spriteActive;
     /* 0x74B4 */ u8 unk74B4[2];
     /* 0x74B6 */ u16 unk74B6;
     /* 0x74B8 */ u16 unk74B8;

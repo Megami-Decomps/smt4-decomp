@@ -5,6 +5,7 @@
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 #include "util/PackNibbles.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -41,8 +42,7 @@ f32 vec2GetSpeed(const void *object);
 void FUN_00183bb0(void);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_0016c4b8(RenderCtxA *context, s32 arg);
-SlotLayout *FUN_001834a4(u32 group, u32 id);
-void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+SlotLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
@@ -69,7 +69,7 @@ void FUN_00485718(SlotPicker *picker)
     char label[3] = {0, 0, 0};
 
     for (s32 i = 0; i < 8; i++) {
-        SlotLayout *slot = FUN_001834a4(0x23, i + 8);
+        SlotLayout *slot = asdTMTexTableEntryAt(0x23, i + 8);
 
         if (picker->mode != 4) {
             if (picker->slotText[i][0] == 0 && picker->slotText[i][1] == 0) {
@@ -87,11 +87,11 @@ void FUN_00485718(SlotPicker *picker)
                 FUN_001835b4(2, 0x23, 6, slot->x + parallax, slot->y, 0x10);
             }
         }
-        SlotLayout *text = FUN_001834a4(0x23, 7);
+        SlotLayout *text = asdTMTexTableEntryAt(0x23, 7);
 
         label[0] = picker->slotText[i][0];
         label[1] = picker->slotText[i][1];
-        FUN_00162790(4, color, label, (f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 0.0f,
+        textDrawString(4, color, label, (f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 0.0f,
                      scale);
     }
     efctSetSpeed(1.0f);

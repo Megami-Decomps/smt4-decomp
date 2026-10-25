@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 
 #include "battle/BattleUnitSlot.h"
@@ -15,7 +16,6 @@ struct UnitRequestView {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-BtlMainState *btlGetMainState();
 void FUN_00247478(UnitSummary *out, BtlMainState *state, const s16 *params);
 
 u32 scrCommSelectUnitRequestMode()

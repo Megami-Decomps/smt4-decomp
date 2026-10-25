@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the enemy target-candidate builder; the local action-info block (29 bytes in retail) and the duplicated candidate array are laid out differently by armcc, and retail's 0x85-entry clear loop pairs two stores per iteration. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/btlAction.h"
 
 /* The action a battle unit is about to use (as FUN_00247478 fills it). */
 struct BattleActionInfo {
@@ -28,25 +29,8 @@ struct EnemyTurnWork {
     /* 0x570 */ s32 disabled;
 };
 
-struct BattleUnitView {
-    /* 0x000 */ u32 flags;           /* 0x40: cannot be targeted, 0x100: guarding */
-    /* 0x004 */ u8 unk004[0x284];
-};
-
-struct BattleSideInfo {
-    /* 0x000 */ u8 unk000[0x80];
-    /* 0x080 */ s8 firstBonus;
-    /* 0x081 */ s8 secondBonus;
-    /* 0x082 */ u8 unk082[0x1E16];
-    /* 0x1E98 */ u8 *slotRecords;    /* 0x114-byte records, target slot at +0x60 */
-    /* 0x1E9C */ u8 unk1E9C[0x124];
-    /* 0x1FC0 */ BattleUnitView *units;
-    /* 0x1FC4 */ u8 unk1FC4[0x24DC];
-    /* 0x44A0 */ u32 stateFlags;
-};
-
 struct EnemyAiContext {
-    /* 0x00 */ BattleSideInfo *battle;
+    /* 0x00 */ BtlMainStateExt *battle;
 };
 
 struct SkillRecord40 {
@@ -60,8 +44,7 @@ struct SkillRecord40 {
 };
 
 extern "C" {
-BattleSideInfo *btlGetMainState(void);
-void FUN_00247478(BattleActionInfo *info, BattleSideInfo *battle, u32 unit);
+void FUN_00247478(BattleActionInfo *info, BtlMainState *battle, u32 unit);
 SkillRecord40 *dataTable40FindById(s16 id);
 s32 FUN_00229914(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 randRange(u32 limit);
@@ -73,7 +56,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
 {
     BattleActionInfo info;
     TargetCandidate scratch[0x85];
-    BattleSideInfo *battle = btlGetMainState();
+    BtlMainStateExt *battle = btlGetMainStateExt();
     FUN_00247478(&info, battle, work->unit);
     for (s32 i = 0; i < 0x85; i++) {
         out[i].id = -1;
@@ -102,9 +85,9 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     else if (info.kind == 1)
         favourGuarding = true;
     s32 power = info.powerMax;
-    if (!(context->battle->stateFlags & 0x40000) && info.powerMin < info.powerMax)
+    if (!(context->battle->flags44A0 & 0x40000) && info.powerMin < info.powerMax)
         power = info.powerMin + randRange((u16)(info.powerMax - info.powerMin));
-    else if (!(context->battle->stateFlags & 0x40000))
+    else if (!(context->battle->flags44A0 & 0x40000))
         power = info.powerMin;
     for (s32 target = 0; target < 0x6D; target++) {
         if (work->allowed[target] &&
@@ -136,9 +119,9 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
         if (!work->allowed[target])
             continue;
         bool guarding = false;
-        s32 slot = *(s16 *)(context->battle->slotRecords + target * 0x114 + 0x60);
+        s32 slot = context->battle->actions[target].participant.combatantIndex;
         if (slot >= 0) {
-            BattleUnitView *unit = &context->battle->units[slot];
+            BtlUnitEntry *unit = &context->battle->units[slot];
             if (unit != NULL && (unit->flags & 0x100))
                 guarding = true;
         }

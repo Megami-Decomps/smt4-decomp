@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail wraps the summary in a larger stack object; payload addressing and unit getter code differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "battle/btlAction.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
@@ -14,7 +15,6 @@ union BattleSummaryBuffer {
 };
 extern "C" {
 extern BtlUi *g_btlUiBlock;
-BtlMainState *btlGetMainState(void);
 DevilRecord *dataTable00FindById(u16 id);
 void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const DevilRecord *definition);
 PartyDamageSlotsIV *gameGetSlotTable(void);

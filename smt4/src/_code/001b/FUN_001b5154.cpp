@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (205 rows against 206): retail shares the `if (dialogIsActive()) infoWinStartTimer(1)` tail and the clear-and-return-0 stub between its early exits, and runs the bit-clear through r1/r2; ours repeats the tails inline and clears through r0. Conditions, order of checks and constants follow retail. */
 #include "battle/BattleUnitSlot.h"
+#include "shard/JobWork.h"
 
 #define PICK_ACTIVE_FLAGS 0x140
 #define PICK_FLAG_ARMED_A 0x40
@@ -38,7 +39,6 @@ extern s32 g_btlScriptUnit;
 extern u32 g_btlActionReflect;
 extern s32 g_btlUiBlock;
 
-BtlPickWork *jobGetWork(void);
 s32 dialogIsActive(void);
 void infoWinStartTimer(s32 value);
 s32 jobIsValid(u32 job);
@@ -54,9 +54,9 @@ void eventQueueAddUniqueIfValid(u32 event);
 /* Handles the battle pick buttons: while nothing blocks it, a press of the first button arms or disarms
  * the first selection, the second button the second; every block path clears both armed bits (and shows
  * the info window timer if a dialog is open). Always returns 0. */
-u32 FUN_001b5154(void)
+u32 FUN_001b5154(u32 job)
 {
-    BtlPickWork *work = jobGetWork();
+    BtlPickWork *work = (BtlPickWork *)jobGetWork(job);
     u32 *state;
 
     if ((work->blockFlags & PICK_BLOCK_FLAGS) != 0) {

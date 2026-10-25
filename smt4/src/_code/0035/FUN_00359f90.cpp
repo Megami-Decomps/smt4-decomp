@@ -1,6 +1,7 @@
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "shard/FUN_002bbb2c.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ extern CriticalSection g_moduleCriticalSection1;
 extern u8 DAT_0042d000;
 extern SettingsBlock DAT_0042f000;
 s32 FUN_0013a170(void *out, u32 size, u32 operation);
-void FUN_002bbb2c(s32 error, u32 site);
 s32 FUN_0035511c(void *object);
 
 static __inline void checkSystemQuery(s32 result, u32 site)

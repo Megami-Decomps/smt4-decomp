@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c39dc` (_code @ 0x2c39dc, 0x116c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -42,7 +43,6 @@ extern int g_partyPanel; /* 0x57f268 */
 extern unsigned int DAT_0057f270; /* 0x57f270 */
 extern unsigned int DAT_0057f274; /* 0x57f274 */
 
-extern int btlGetMainState(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: dataTable8FindRecord. */
@@ -414,9 +414,9 @@ LAB_002c4018:
         FUN_00333694(temp_v3,0xffffffff,temp_v5,1);
         if (temp_v3 == 1) {
           *(unsigned char *)(temp_v0 + 0x9c0) = 0;
-          temp_v3 = btlGetMainState();
+          temp_v3 = reinterpret_cast<int>(btlGetMainState());
           if ((temp_v3 != 0) &&
-             (temp_v3 = btlGetMainState(),
+             (temp_v3 = reinterpret_cast<int>(btlGetMainState()),
              (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_0057f274) != 0 ||
              (*(unsigned int *)(temp_v3 + 0x45a8) & DAT_0057f270) != 0)) {
             *(unsigned char *)(temp_v0 + 0x9c0) = 1;

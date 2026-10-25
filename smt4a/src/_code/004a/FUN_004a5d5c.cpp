@@ -2,10 +2,10 @@
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "shard/FUN_0023b3b8.h"
 
 extern "C" {
 void sysPlaySe(u32 sound);
-s32 FUN_0023b3b8();
 void FUN_0023b45c(s32 value);
 void statusPanelSetOpen(s32 open);
 s32 statusDownGetFlag();

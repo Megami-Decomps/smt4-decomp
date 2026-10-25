@@ -1,11 +1,11 @@
 /* NON_MATCHING: prefix-length argument setup adds an instruction; segment buffer/source and width saved registers differ. */
 #include "ui/ButtonHelp.h"
 #include <stddef.h>
+#include "text/TextDraw.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;
 void *rt_memcpy(void *destination, const void *source, u32 size);
-void FUN_00162790(u32 layer, u32 style, const char *text, f32 x, f32 y, f32 depth, f32 spacing, f32 scale);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
 }
 
@@ -27,14 +27,14 @@ extern "C" void FUN_002acfc8(const char *text, s32 x, s32 y)
     if (length != 0) {
         rt_memcpy(segment, text, length);
         segment[length] = '\0';
-        FUN_00162790(2, buttonHelpNormalTextStyle(work), segment, (f32)x, (f32)y, 0.93f, 0.0f, 1.0f);
+        textDrawString(2, buttonHelpNormalTextStyle(work), segment, (f32)x, (f32)y, 0.93f, 0.0f, 1.0f);
         prefixWidth = fontMeasureLineAdvance(segment, 2);
     }
     length = work->unk676;
     rt_memcpy(segment, text + work->unk675, length);
     segment[length] = '\0';
-    FUN_00162790(2, work->unk670, segment, (f32)(x + prefixWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+    textDrawString(2, work->unk670, segment, (f32)(x + prefixWidth), (f32)y, 0.93f, 0.0f, 1.0f);
     s32 highlightWidth = fontMeasureLineAdvance(segment, 2);
     rt_memcpy(segment, text + work->unk675 + work->unk676, 64 - work->unk675 - work->unk676);
-    FUN_00162790(2, buttonHelpNormalTextStyle(work), segment, (f32)(x + highlightWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+    textDrawString(2, buttonHelpNormalTextStyle(work), segment, (f32)(x + highlightWidth), (f32)y, 0.93f, 0.0f, 1.0f);
 }

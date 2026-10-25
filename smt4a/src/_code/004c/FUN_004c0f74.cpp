@@ -1,4 +1,5 @@
 /* NON_MATCHING: immediate boolean returns, wide-mask load grouping and unit-index lifetime differ from the retail shared-result exit. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table04Record.h"
@@ -32,9 +33,7 @@ typedef char CombatantAffinityPreviewLayout[sizeof(CombatantAffinityPreview) == 
     offsetof(CombatantAffinityPreview, skill) == 0x16 && offsetof(CombatantAffinityPreview, enabled) == 0x2B ? 1 : -1];
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 CombatantAffinityPreview FUN_003e8bb0(BtlMainStateA *battle, BtlCombatantEntryA *entry);
-Table04Record *dataTable04FindById(s32 id);
 Table04ExtraRecord *dataTable41FindById(u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);

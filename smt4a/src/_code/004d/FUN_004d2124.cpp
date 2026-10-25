@@ -5,6 +5,7 @@
 #include "shard/X14_BtlUiClose.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "shard/asdListBoxSetIntItem.h"
 
 extern "C" {
 extern BtlUiCloseState DAT_005715f8;
@@ -16,7 +17,6 @@ void jobStop(u32 job, s32 mode);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
-void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, u32 flags);
 
 // Recreate the negotiation debug controls from the current battle's UI flags and bust-up index.
 void FUN_004d2124(BattleDebugPanelWork *work, BtlMainStateA *battle)

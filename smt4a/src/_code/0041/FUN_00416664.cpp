@@ -32,7 +32,7 @@ void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void FUN_001634b4(UiAnimatedSprite *sprite, f32 offset);
-const BattleLabelAnchorA *FUN_001834a4(u32 bank, u32 sprite);
+const BattleLabelAnchorA *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 void FUN_00164168(u32 message, s32 x, s32 y, u32 color, s32 mode, s32 flags, f32 scale);
 
 void FUN_00416664(BattleLabelEntryViewA *entries)
@@ -49,7 +49,7 @@ void FUN_00416664(BattleLabelEntryViewA *entries)
         }
         if (entry->active) {
             s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
-            const BattleLabelAnchorA *anchor = FUN_001834a4(8, 142);
+            const BattleLabelAnchorA *anchor = asdTMTexTableEntryAt(8, 142);
             s32 centerX = anchor->x + anchor->dimensions->width / 2;
             s32 y = anchor->y;
             if (entry->kind == 2 && ((s8)entry->sprite.completion.channels[2] & (s8)entry->sprite.completion.channels[1])) {

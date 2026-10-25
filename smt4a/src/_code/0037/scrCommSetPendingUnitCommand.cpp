@@ -1,11 +1,11 @@
 /* NON_MATCHING: recovered no-argument script callback and explicit argument index zero; pending low/high stores still merge instead of retail's STR/ASR/STR sequence. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
 BtlUnitA* btlUnitGet(u32 id);
-BtlMainStateA* btlGetMainState(void);
 void btlSelectCandidateEntries(s32 enabled);
 
 static __inline void setUnitCommand(BtlUnitDataA* data, u16 command)

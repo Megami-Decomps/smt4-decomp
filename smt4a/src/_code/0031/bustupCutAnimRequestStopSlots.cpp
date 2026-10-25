@@ -1,4 +1,5 @@
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "shard/bustupCutAnimRequestStopSlots.h"
 
 extern "C" {
 
@@ -7,7 +8,7 @@ s32 jobIsValid(u32 handle);
 
 extern BustupCutAnimA *g_bustupCutAnim;
 
-void bustupCutAnimRequestStopSlots(void)
+void bustupCutAnimRequestStopSlots(s32 arg0)
 {
     BustupCutAnimA *anim = g_bustupCutAnim;
     s32 i;

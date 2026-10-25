@@ -1,10 +1,11 @@
 /* NON_MATCHING: the double `id & 0xFF` evaluation now matches row for row; retail keeps the id in r5 and the value in r4, ours the opposite. */
 #include "common.h"
 #include "event/2dEvent/Npc2d.h"
+#include "script/ScriptArgs.h"
+#include "shard/scrGetArg.h"
 
 extern "C" {
 
-u32 scrGetArg(u32 index);
 
 /* The counter at `slot`. */
 static __inline u32 *counterSlot(u32 slot)

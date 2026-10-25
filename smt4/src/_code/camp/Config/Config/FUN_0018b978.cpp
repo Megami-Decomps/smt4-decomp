@@ -18,7 +18,7 @@ int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973ec(void);
 int gameCounterAddSaturating(int, int);
 int FUN_0029ee6c(...);
-int FUN_002bf4f8(int, int);
+int asdTMTexTableEntryAt(int, int);
 int dataTableGetCount(...);
 int dataTableGetEntries(void);
 int FUN_002c1658(...);
@@ -51,7 +51,7 @@ extern int FUN_0029efc0(int);
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
@@ -210,7 +210,7 @@ LAB_0018bf50:
     *(unsigned int *)(temp_v8 + 100) = 1;
     return;
   }
-  FUN_002bf4f8(0x2f,0x59);
+  asdTMTexTableEntryAt(0x2f,0x59);
   scrRunOpcodesStub(*(unsigned int *)(temp_v8 + 0xb4));
   temp_v2 = g_config;
   temp_v3 = FUN_0029efc0(g_config);

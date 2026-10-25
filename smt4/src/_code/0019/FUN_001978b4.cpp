@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_0028f670.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern int g_titleScene; /* 0x44ea00 */
 
 extern int idListAnyValid(unsigned int);
 extern int uniteFlagIsClear(void);
-extern int FUN_0028f670(void);
 extern unsigned int FUN_00292844(unsigned int);
 extern unsigned int dataTable15GetUnlockedEntryId(int, unsigned int);
 extern int ifTouchGetSelectionModeForRegion(int);
@@ -37,7 +37,7 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029e958(int);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-extern int FUN_002bf4f8(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int gameFlagIsSet(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -117,7 +117,7 @@ void FUN_001978b4(void)
           if ((temp_v4 & 1) != 0) {
             temp_v11 = temp_v21;
           }
-          temp_v11 = FUN_002bf4f8(0x1d,temp_v11 + temp_v10);
+          temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v11 + temp_v10);
           FUN_002bf288(2,0x1d,0x22,*(short *)(temp_v11 + 8) + temp_v1,*(short *)(temp_v11 + 10) + temp_v2,
                        0xce);
           temp_v2 = *(short *)(temp_v11 + 10) + temp_v2;
@@ -170,7 +170,7 @@ void FUN_001978b4(void)
           temp_v9 = 0x1b;
         }
         temp_v8 = objectPartRunUnlessLocked(temp_v0 + 0x34);
-        temp_v7 = FUN_002bf4f8(0x1d,temp_v8 + temp_v9 + temp_v7 / 2);
+        temp_v7 = asdTMTexTableEntryAt(0x1d,temp_v8 + temp_v9 + temp_v7 / 2);
         temp_v12 = temp_v12 + temp_v2;
         temp_v1 = temp_v1 + temp_v11;
         FUN_002bf288(2,0x1d,0x23,*(short *)(temp_v7 + 8) + temp_v1,*(short *)(temp_v7 + 10) + temp_v12,0xd8)

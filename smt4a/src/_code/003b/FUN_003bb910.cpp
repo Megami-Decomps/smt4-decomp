@@ -1,12 +1,11 @@
 /* NON_MATCHING: combatant-array base and index arithmetic use r0/r1 opposite to retail; mask operands now agree. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
-void scrSetResult(s32);
 }
 
 /* Report whether an eligible combatant has the selected value below a threshold. */

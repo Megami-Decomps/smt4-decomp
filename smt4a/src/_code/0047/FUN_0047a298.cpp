@@ -3,6 +3,7 @@
 #include "shard/W4_Match3_AocMainA.h"
 #include <stddef.h>
 #include "Model/MoriModelShadowMap.h"
+#include "text/TextDraw.h"
 
 struct AocDrawPosition { f32 x, y; };
 struct AocDrawWork {
@@ -27,8 +28,7 @@ u32 FUN_001692ac(s32 mode, s32 option);
 void FUN_00164b5c(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
 s32 FUN_00473910(AocMainA *main, s32 id);
 s32 FUN_00473754(AocMainA *main, s32 id, AocDrawText *text);
-SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
-void FUN_00162790(s32 layer, u32 color, const AocDrawText *text, f32 x, f32 y, f32 scale, f32 depth, f32 opacity);
+SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
 }
 
 // Draw the expansion-content information panel at its mode-selected position.
@@ -54,10 +54,10 @@ extern "C" s32 FUN_0047a298(u32 job)
         u32 color = 0xfc4f46ff;
         s32 count = FUN_00473754(main, FUN_00473910(main, 101), text);
         for (s32 i = 0; i < count; ++i) {
-            SpriteInfo *sprite = FUN_001834a4(47, 67 + i);
+            SpriteInfo *sprite = asdTMTexTableEntryAt(47, 67 + i);
             s32 textX = sprite->x + x;
             s32 textY = sprite->y + y;
-            FUN_00162790(3, color, &text[i], static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 0.0f, 1.0f);
+            textDrawString(3, color, (const char *)&text[i], static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 0.0f, 1.0f);
         }
         renderStackPop(&g_renderCtx->stackA);
     }

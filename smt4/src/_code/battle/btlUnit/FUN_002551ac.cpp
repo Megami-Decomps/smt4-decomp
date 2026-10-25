@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002551ac` (_code @ 0x2551ac, 0xc34 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
@@ -14,7 +15,6 @@ int FUN_002505c0(...);
 int FUN_002550d8(...);
 int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
-int btlGetMainState(void);
 int gameCounterAddSaturating(...);
 int FUN_002b7bca(int [2], int, int, unsigned char *);
 int FUN_003ddee0(int, unsigned int, int, int);
@@ -114,7 +114,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   uStack_30 = param_2;
   iStack_2c = param_3;
   temp_v24 = param_4;
-  puVar5 = (unsigned int *)btlGetMainState();
+  puVar5 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v20 = param_1 + param_16;
   temp_v23 = &DAT_00439960 + param_13 * 0xc;
   temp_v19 = puVar5;
@@ -276,10 +276,10 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                                    (int)(short)((short)*(unsigned int *)(temp_v4 + 0x5c) +
                                                (short)temp_v20),0,param_2);
                       temp_v14[0] = temp_v6;
-                      temp_v6 = btlGetMainState();
+                      temp_v6 = reinterpret_cast<int>(btlGetMainState());
                       FUN_0027da30(temp_v6,(int)*(short *)(temp_v4 + 0x62));
                       temp_v17 = temp_v6;
-                      temp_v5 = btlGetMainState();
+                      temp_v5 = reinterpret_cast<int>(btlGetMainState());
                       temp_v6 = FUN_0027dab0(temp_v5,temp_v4);
                       if (temp_v6 < 0) {
                         temp_v6 = 0;

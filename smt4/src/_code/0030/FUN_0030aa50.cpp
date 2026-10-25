@@ -9,7 +9,7 @@ struct SlotRecord {
 };
 
 void FUN_00202ab4(s32 a, s32 b);
-SlotRecord *FUN_002bf4f8(s32 group, s32 index);
+SlotRecord *asdTMTexTableEntryAt(s32 group, s32 index);
 
 /* Resets the save/load worker for a load (isLoad = 1) and enters state 8 at the position of record 0x36/2. */
 void FUN_0030aa50(u8 arg)
@@ -21,7 +21,7 @@ void FUN_0030aa50(u8 arg)
     g_saveLoadUIFlags.unk01 = 0;
     worker->isLoad = 1;
     worker->unk379 = arg;
-    SlotRecord *record = FUN_002bf4f8(0x36, 2);
+    SlotRecord *record = asdTMTexTableEntryAt(0x36, 2);
     worker->slotX = record->x;
     worker->slotY = record->y;
     worker->isLoad = 1;

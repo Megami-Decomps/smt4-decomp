@@ -25,7 +25,7 @@ struct FramePanel {
 extern "C" {
 extern RenderCtx *g_renderCtx;
 void efctSetSpeed(f32 speed);
-SpritePlacement *FUN_001834a4(s32 sheet, s32 part);
+SpritePlacement *asdTMTexTableEntryAt(s32 sheet, s32 part);
 
 /* Draws the panel's frame sprites at (x, y), shifted for the stereo depth; the effect speed comes from the caller. */
 void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
@@ -51,27 +51,27 @@ void FUN_00404a8c(FramePanel *panel, s32 x, s32 y, f32 speed)
             FUN_001835b4(2, 50, icons[i], shift + x, y, 191);
     }
     if (panel->centerFrame != 0) {
-        SpritePlacement *edge = FUN_001834a4(50, 40);
+        SpritePlacement *edge = asdTMTexTableEntryAt(50, 40);
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 edgeY = edge->y + y;
         s32 edgeX = edge->x + (shift + x);
         FUN_001835b4(2, 50, 34, edgeX, edgeY, 191);
         FUN_001835b4(2, 50, 35, edgeX, edgeY, 191);
-        SpritePlacement *corner = FUN_001834a4(50, 41);
+        SpritePlacement *corner = asdTMTexTableEntryAt(50, 41);
         shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 cornerY = corner->y + y;
         s32 cornerX = corner->x + (shift + x);
         FUN_001835b4(2, 50, 37, cornerX, cornerY, 191);
         FUN_001835b4(2, 50, 39, cornerX, cornerY, 191);
     } else {
-        SpritePlacement *edge = FUN_001834a4(50, 40);
+        SpritePlacement *edge = asdTMTexTableEntryAt(50, 40);
         s32 shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
         s32 edgeY = edge->y + y;
         s32 edgeX = edge->x + (shift + x);
         FUN_001835b4(2, 50, 37, edgeX, edgeY, 191);
         FUN_001835b4(2, 50, 38, edgeX, edgeY, 191);
         if (panel->leftFrame) {
-            SpritePlacement *corner = FUN_001834a4(50, 41);
+            SpritePlacement *corner = asdTMTexTableEntryAt(50, 41);
             shift = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.27f));
             s32 cornerY = corner->y + y;
             s32 cornerX = corner->x + (shift + x);

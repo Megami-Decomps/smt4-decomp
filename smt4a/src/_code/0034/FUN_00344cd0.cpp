@@ -15,7 +15,7 @@ struct LayoutRecord {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 recordGetModeForId(s32 id);
-LayoutRecord *FUN_001834a4(u32 group, u32 id);
+LayoutRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 widgetSubCallIfVisible(void *widget);
 s32 uiSearchSecondary(void *widget);
 s32 resourceRunEmbeddedOperationIfUnblocked(void *widget);
@@ -43,7 +43,7 @@ void FUN_00344cd0(void *widget, s32 x, s32 y, u32 group, u32 backId, u32 thumbId
     FUN_001835b4(2, group, sideId, x, y, depth);
     FUN_001835b4(2, group, cornerId, x, y, depth);
     s32 offset = 0;
-    LayoutRecord *record = FUN_001834a4(group, thumbId);
+    LayoutRecord *record = asdTMTexTableEntryAt(group, thumbId);
     RenderStateStack *clipStack = reinterpret_cast<RenderStateStack *>(reinterpret_cast<u8 *>(g_renderCtx) + 0x1318);
     if (vertical != 0) {
         s32 total = widgetSubCallIfVisible(widget);

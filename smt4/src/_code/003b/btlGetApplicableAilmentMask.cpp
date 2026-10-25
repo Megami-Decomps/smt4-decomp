@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 
@@ -8,7 +9,6 @@ struct ItemAilmentView { u8 prefix[0x6A]; u8 effect; };
 extern "C" {
 const SkillAilmentView *dataTable40FindById(u32 id);
 const ItemAilmentView *dataTable08Sub1GetRecord(u32 id);
-BtlMainState *btlGetMainState();
 BtlUnitData *FUN_0027da30(BtlMainState *state, s32 index);
 PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 

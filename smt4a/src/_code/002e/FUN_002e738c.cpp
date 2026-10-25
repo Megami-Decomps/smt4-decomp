@@ -2,9 +2,9 @@
 /* Starts the partner process and its draw jobs unless the requested mode is nonvisual. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/CallbackOwner.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-void *asdOperatorNew(u32 bytes);
 
 struct PartnerWork {
     u32 process;

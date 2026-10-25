@@ -29,35 +29,35 @@ typedef char BattleUiLayoutOffsetsCheck[offsetof(BattleUiLayoutWork, pairedAncho
 }
 
 extern "C" {
-const PointLookupRecord *FUN_002bf4f8(s32 group, s32 index);
+const PointLookupRecord *asdTMTexTableEntryAt(s32 group, s32 index);
 
 void FUN_0033cf30(BattleUiLayoutWork *work)
 {
     for (s32 i = 0; i < 4; ++i) {
-        const PointLookupRecord *point = FUN_002bf4f8(0x14, i + 0x59);
+        const PointLookupRecord *point = asdTMTexTableEntryAt(0x14, i + 0x59);
         work->pairedAnchors[i].first.x = point->x;
         work->pairedAnchors[i].first.y = point->y;
-        point = FUN_002bf4f8(0x14, i + 0x5D);
+        point = asdTMTexTableEntryAt(0x14, i + 0x5D);
         work->pairedAnchors[i].second.x = point->x;
         work->pairedAnchors[i].second.y = point->y;
     }
-    const PointLookupRecord *origin = FUN_002bf4f8(0x14, 0x61);
+    const PointLookupRecord *origin = asdTMTexTableEntryAt(0x14, 0x61);
     work->origin.x = origin->x;
     work->origin.y = origin->y;
     for (s32 i = 0; i < 3; ++i) {
-        const PointLookupRecord *point = FUN_002bf4f8(0x14, 100 - i);
+        const PointLookupRecord *point = asdTMTexTableEntryAt(0x14, 100 - i);
         work->steps[i].x = point->x;
         work->steps[i].y = point->y;
     }
     work->steps[3].y = work->steps[2].y;
     work->steps[3].x = (work->steps[2].x - work->steps[1].x) + work->steps[2].x;
     for (s32 i = 0; i < 4; ++i) {
-        const PointLookupRecord *point = FUN_002bf4f8(0x14, i + 0x65);
+        const PointLookupRecord *point = asdTMTexTableEntryAt(0x14, i + 0x65);
         work->targets[i].x = point->x;
         work->targets[i].y = point->y;
     }
-    work->lowerY = FUN_002bf4f8(0x14, 0x6A)->y;
-    work->upperY = FUN_002bf4f8(0x14, 0x69)->y;
+    work->lowerY = asdTMTexTableEntryAt(0x14, 0x6A)->y;
+    work->upperY = asdTMTexTableEntryAt(0x14, 0x69)->y;
     memClear(work->drawData, sizeof(work->drawData));
     work->firstIndex = -1;
     work->state = 0;

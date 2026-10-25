@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
-BtlMainState* btlGetMainState(void);
 void FUN_00250720(BtlMainState* battle);
 u32 FUN_002551ac(s32 kind, BtlUnit* actor, BtlActionRecord* actions, s32 mode,
                  s32 first, u32 argument, s32 second, s32 selection, s32 variant,

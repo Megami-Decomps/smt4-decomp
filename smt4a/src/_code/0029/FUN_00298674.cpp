@@ -3,11 +3,11 @@
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "Model/MoriModelShadowMap.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 u32 FUN_001692ac(u32, u32);
-s32 FUN_00284e94(void);
 void FUN_0028cb88(BtlUiObjCA *);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);

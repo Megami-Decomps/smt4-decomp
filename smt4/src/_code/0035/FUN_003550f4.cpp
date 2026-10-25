@@ -1,4 +1,5 @@
 #include "common.h"
+#include "addon/sys/aocFileContent.h"
 
 extern "C" {
 void FUN_00354f50(u32 id, u32 mode, u32 reserved, u32 first, u32 second, u32 third, u32 fourth);

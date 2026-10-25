@@ -44,7 +44,7 @@ struct IconCursor {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 
-IconTexture *FUN_001834a4(u32 file, s32 index);
+
 void efctSetSpeed(f32 speed);
 
 /* Draws the two icons selected by the cursor and the marker below them, shifted by the stereo parallax. */
@@ -59,11 +59,11 @@ void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed,
     s32 group = panel->data->icons[index].group;
     s32 id = panel->data->icons[index].index;
     if (group > 0) {
-        IconTexture *texture = FUN_001834a4(0x33, id + group * 1000);
+        IconTexture *texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, id + group * 1000));
         if (texture->anchor->kind == 0xb6) {
-            texture = FUN_001834a4(0x33, 0x27);
+            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x27));
         } else if (texture->anchor->kind == 0x93) {
-            texture = FUN_001834a4(0x33, 0x2f);
+            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x2f));
         }
         efctSetSpeed(speed);
         FUN_001835b4(2, 0x33, id + group * 1000, texture->x + shiftedX, texture->y + y, z + 5);
@@ -73,11 +73,11 @@ void FUN_0049ec78(IconPanel *panel, IconCursor *cursor, s32 x, s32 y, f32 speed,
     group = panel->data->icons[index].group;
     id = panel->data->icons[index].index;
     if (group > 0) {
-        IconTexture *texture = FUN_001834a4(0x33, id + group * 1000);
+        IconTexture *texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, id + group * 1000));
         if (texture->anchor->kind == 0xb6) {
-            texture = FUN_001834a4(0x33, 0x28);
+            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x28));
         } else if (texture->anchor->kind == 0x93) {
-            texture = FUN_001834a4(0x33, 0x30);
+            texture = reinterpret_cast<IconTexture *>(asdTMTexTableEntryAt(0x33, 0x30));
         }
         efctSetSpeed(speed);
         FUN_001835b4(2, 0x33, id + group * 1000, shiftedX + texture->x, texture->y + y, z + 5);

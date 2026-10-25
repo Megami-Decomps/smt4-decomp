@@ -1,4 +1,5 @@
 #include "ui/MessageMain.h"
+#include "shard/FUN_001a1648.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;

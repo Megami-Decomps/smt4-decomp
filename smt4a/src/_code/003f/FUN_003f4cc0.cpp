@@ -5,12 +5,12 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
 int FUN_00180310(int, int, int, int);
 int FUN_0018152c(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_001835b4(...);
 int fontMeasureLineAdvance(int *, int);
 int drawSetColorFromRGBA8(...);
@@ -30,13 +30,13 @@ extern unsigned char LAB_003f5218; /* 0x3f5218 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int gameGetPlayerName(void);
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -105,7 +105,7 @@ LAB_003f510c:
               temp_v11 = 0x6f;
               temp_v10 = param_4;
               FUN_001835b4(2,0x11,0x7a,param_3);
-              temp_v5 = FUN_001834a4(0x11,0x7d);
+              temp_v5 = asdTMTexTableEntryAt(0x11,0x7d);
               temp_v10 = 3;
               temp_v11 = 0x79;
               FUN_00180310(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
@@ -116,7 +116,7 @@ LAB_003f510c:
           temp_v11 = 0x6f;
           temp_v10 = param_4;
           FUN_001835b4(2,0x11,3,param_3);
-          temp_v5 = FUN_001834a4(0x11,0x15);
+          temp_v5 = asdTMTexTableEntryAt(0x11,0x15);
           temp_v10 = 2;
           temp_v11 = 0x79;
           FUN_00180310(0,*(short *)(temp_v5 + 8) + param_3,*(short *)(temp_v5 + 10) + param_4,1);
@@ -139,7 +139,7 @@ LAB_003f510c:
             temp_v3 = gameGetPlayerName();
             textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
           }
-          temp_v5 = FUN_001834a4(0x11);
+          temp_v5 = asdTMTexTableEntryAt(0x11);
           fontMeasureLineAdvance(&temp_v10,1);
           temp_v0 = *(short *)(temp_v5 + 8);
           temp_v3 = 0xffffffff;
@@ -170,7 +170,7 @@ LAB_003f510c:
           VectorSignedToFloat(param_3 + (int)temp_v0 + ((int)temp_v1 - (int)piVar5) / 2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v5 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(1,temp_v3,&temp_v10);
+          textDrawString(1,temp_v3,&temp_v10);
         }
       }
       else {
@@ -234,7 +234,7 @@ LAB_003f510c:
           if (*(char *)(param_1 + 0x23) != '\0') {
             efctSetSpeed();
           }
-          temp_v4 = FUN_001834a4(0x11,0x13);
+          temp_v4 = asdTMTexTableEntryAt(0x11,0x13);
           temp_v10 = 0;
           FUN_0018152c(temp_v5,*(short *)(temp_v4 + 8) + param_3,*(short *)(temp_v4 + 10) + param_4,0x6a);
           if (*(char *)(param_1 + 0x23) != '\0') {

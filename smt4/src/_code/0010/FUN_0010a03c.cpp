@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail tests the three flags with separate branches (reaching 0xf60/0xf63 through a base+0xf00 register) and keeps the fade-in test unconditional; armcc chains them with conditional loads. */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 /* Frame texture fade state (Shin Megami Tensei IV layout). */
 struct FrameTexFade {
@@ -27,13 +28,12 @@ extern "C" {
 extern FrameTexFade *g_frameTex;
 extern u32 g_titleScene;
 
-FrameTexFade *jobGetWork(void);
 void FUN_001137fc(s32 mode);
 
 /* Job update of the frame texture fade: advances the fade-in or fade-out counter, and clears the state once a fade-out ends. */
-u8 FUN_0010a03c(void)
+u8 FUN_0010a03c(u32 job)
 {
-    FrameTexFade *tex = jobGetWork();
+    FrameTexFade *tex = (FrameTexFade *)jobGetWork(job);
 
     if (tex->captured != 0 && tex->shown != 0 && tex->enabled != 0) {
         renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));

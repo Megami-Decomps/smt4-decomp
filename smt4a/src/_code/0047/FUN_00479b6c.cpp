@@ -7,13 +7,13 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int mathInterpolateTimed(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(int, unsigned int);
 int FUN_0017ffa8(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int effectSubmitDefaultVectors(int, int);
 int sysMemClear(...);
 int FUN_00473754(...);
@@ -45,13 +45,13 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: mathInterpolateTimed. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0017ffa8. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: effectSubmitDefaultVectors. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00473754. */
@@ -90,7 +90,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v15 = param_4;
-  temp_v3 = FUN_001834a4(0x2f,param_2 + 0x88);
+  temp_v3 = asdTMTexTableEntryAt(0x2f,param_2 + 0x88);
   temp_v5 = g_aocMain;
   temp_v9 = (int)*(short *)(temp_v3 + 8);
   temp_v8 = (int)*(short *)(temp_v3 + 10);
@@ -100,11 +100,11 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
     sysMemClear(temp_v11,0x100);
     FUN_00164b5c(2,0x2f,8,temp_v9,temp_v8,0x81);
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
-      temp_v4 = FUN_001834a4(0x2f,0x5f);
+      temp_v4 = asdTMTexTableEntryAt(0x2f,0x5f);
       FUN_0017ffa8(2,0x2f,2000,temp_v9 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v8,0x81);
     }
     else {
-      temp_v4 = FUN_001834a4(0x2f,0x5f);
+      temp_v4 = asdTMTexTableEntryAt(0x2f,0x5f);
       temp_v1 = *(short *)(temp_v4 + 8);
       temp_v2 = *(short *)(temp_v4 + 10);
       FUN_0016c4b8(g_renderCtx,*(unsigned int *)(temp_v3 + 0x9c4));
@@ -125,17 +125,17 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v13 = 0xffffffff;
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
-      temp_v4 = FUN_001834a4(0x2f,0x61);
+      temp_v4 = asdTMTexTableEntryAt(0x2f,0x61);
       FUN_0017ffa8(2,0xb,0x41f,temp_v9 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v8,0x81);
     }
     else {
-      temp_v4 = FUN_001834a4(0x2f,0x61);
+      temp_v4 = asdTMTexTableEntryAt(0x2f,0x61);
       FUN_0017ffa8(2,0xb,0x41a,temp_v9 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v8,0x81);
     }
-    temp_v4 = FUN_001834a4(0x2f,0x62);
+    temp_v4 = asdTMTexTableEntryAt(0x2f,0x62);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,temp_v13,temp_v11);
+    textDrawString(3,temp_v13,temp_v11);
     if (*(char *)(temp_v3 + 0x9b3) == '\0') {
       if (*(char *)(temp_v3 + 0x9ac) != '\0') {
         if (*(char *)(temp_v3 + 0x9ad) != '\0') {
@@ -195,11 +195,11 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
           textFormatBuffer(temp_v11,&LAB_0047a1cc,temp_v5 + 0x5b8,temp_v12,temp_v5 + 0x5f8);
         }
         temp_v5 = curveEvaluateStandard(temp_v11,2);
-        temp_v4 = FUN_001834a4(0x2f,0x68);
+        temp_v4 = asdTMTexTableEntryAt(0x2f,0x68);
         temp_v5 = ((int)**(short **)(temp_v4 + 0xc) + (int)*(short *)(temp_v4 + 8) + temp_v9) - temp_v5;
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_00162790(2,temp_v13,temp_v11,temp_v5);
+        textDrawString(2,temp_v13,temp_v11,temp_v5);
       }
     }
     if (temp_v15 != 0) {

@@ -16,7 +16,7 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
     if (work->firstBuffer && work->firstArguments &&
         work->secondBuffer && work->secondArguments && asdTMTexTableNodeIsLoaded(0x31, 0)) {
         for (u32 index = 0; index < 23; ++index) {
-            TextureTableEntryIV *entry = reinterpret_cast<TextureTableEntryIV *>(FUN_002bf4f8(0x31, DAT_00405878[index]));
+            TextureTableEntryIV *entry = reinterpret_cast<TextureTableEntryIV *>(asdTMTexTableEntryAt(0x31, DAT_00405878[index]));
             const TextLayoutEntryPrefixIV *layout = (const TextLayoutEntryPrefixIV *)entry;
             work->current[index].x = work->rest[index].x = (f32)layout->x;
             work->current[index].y = work->rest[index].y = (f32)layout->y;

@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "util/AsdLoadFileHasDevice.h"
 
 extern "C" {
 extern const char DAT_00409814[]; /* __FILE__ */
@@ -9,7 +10,6 @@ extern const char DAT_00409800[]; /* "patch:/%s" */
 extern const char DAT_0040980c[]; /* "rom:/%s" */
 extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
-s32 asdLoadFileHasDevice(const char *path);
 s32 asdLoadFileIsPatched(const char *path);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);

@@ -1,16 +1,16 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-void *jobGetWork(void);
 void asdMemFree(void *block);
 
 extern u32 g_asdMdlWorker;
 
 /* Frees the model manager's block and clears its pointer. */
-void asdMdlManagerReleaseBlock(void)
+void asdMdlManagerReleaseBlock(u32 job)
 {
-    asdMemFree(jobGetWork());
+    asdMemFree(jobGetWork(job));
     g_asdMdlWorker = 0;
 }
 

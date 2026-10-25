@@ -49,10 +49,10 @@ void FUN_00290994(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
 void FUN_002907c4(char *out, u32 value);
 void FUN_002bf380(u32 layer, u32 table, u32 sprite, s32 x, s32 y, u32 flags);
-PlayLogFrame *FUN_002bf4f8(u32 table, u32 index);
+PlayLogFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 s32 vec2GetXInt(void *row);
 void textFormatBuffer(char *out, const char *format, ...);
-void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y);
+void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y);
 s32 fontMeasureLineAdvance(const char *text, u32 font);
 
 void FUN_00194b14(void)
@@ -65,7 +65,7 @@ void FUN_00194b14(void)
         if (FUN_0029d644(log->list) - 1 == row) {
             FUN_00290994(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
         }
-        PlayLogFrame *frame = FUN_002bf4f8(PLAYLOG_FONT_TABLE, row + 0x15);
+        PlayLogFrame *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);
         FUN_002bf380(2, PLAYLOG_FONT_TABLE, 1, frame->x + x, frame->y, 0xB);
 
         u32 entryId = *(s16 *)((u8 *)log + PLAYLOG_IDS_OFFSET + (FUN_0029efc0(log->list) + row) * 2);
@@ -76,12 +76,12 @@ void FUN_00194b14(void)
         if (entry == NULL)
             continue;
 
-        PlayLogFrame *nameFrame = FUN_002bf4f8(PLAYLOG_FONT_TABLE, 0x13);
+        PlayLogFrame *nameFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x13);
         char text[64];
         textFormatBuffer(text, "%s", entry->name);
-        FUN_002be5a4(2, PLAYLOG_NAME_COLOR, text, (f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y));
+        textDrawString(2, PLAYLOG_NAME_COLOR, text, (f32)(nameFrame->x + frame->x + x), (f32)(nameFrame->y + frame->y));
 
-        PlayLogFrame *valueFrame = FUN_002bf4f8(PLAYLOG_FONT_TABLE, 0x14);
+        PlayLogFrame *valueFrame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, 0x14);
         char first[16];
         char second[28];
         if (entry->kind != 1) {
@@ -101,7 +101,7 @@ void FUN_00194b14(void)
             textFormatBuffer(text, "%s\x82g\x81@%s\x82l", first, second);
         }
         s32 width = fontMeasureLineAdvance(text, 2);
-        FUN_002be5a4(2, PLAYLOG_VALUE_COLOR, text,
+        textDrawString(2, PLAYLOG_VALUE_COLOR, text,
                      (f32)(frame->x + x + (valueFrame->x + *valueFrame->size - width)),
                      (f32)(frame->y + valueFrame->y));
     }

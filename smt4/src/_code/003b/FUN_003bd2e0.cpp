@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bd2e0` (_code @ 0x3bd2e0, 0x6ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -15,7 +16,6 @@ int FUN_0027da30(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int FUN_00283ebc(...);
-int btlGetMainState(void);
 int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int VectorSignedToFloat(...);
@@ -143,7 +143,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
   uStack_30 = param_2;
   iStack_2c = param_3;
   temp_v40 = param_4;
-  temp_v32 = (unsigned int *)btlGetMainState();
+  temp_v32 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v1 = temp_v39;
   dataTable40FindById();
   temp_v37 = temp_v1;
@@ -178,9 +178,9 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
     }
   }
   temp_v14 = (float)VectorUnsignedToFloat((unsigned int)temp_v26,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = btlGetMainState();
+  temp_v2 = reinterpret_cast<int>(btlGetMainState());
   btlMainFindEntryByListedId(temp_v2,temp_v3);
-  temp_v3 = btlGetMainState();
+  temp_v3 = reinterpret_cast<int>(btlGetMainState());
   FUN_00247478(temp_v20,temp_v3,temp_v2);
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v28), 0x48));
   reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v31), 0x48));
@@ -310,7 +310,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             selectionCopySupportedValue(temp_v28[temp_v13],temp_v38);
             temp_v3 = temp_v40;
             temp_v8 = temp_v39;
-            puVar7 = (unsigned int *)btlGetMainState();
+            puVar7 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(puVar7,temp_v3);
             if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, dataTable40FindById(), temp_v6 != 0)) {
               temp_v3 = playerGetSkillRank(temp_v8);
@@ -328,7 +328,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             }
             temp_v8 = temp_v27[temp_v13] & 0xffff;
             temp_v16 = CONCAT44(temp_v2,temp_v14 + temp_v11 * (float)temp_v18 * temp_v14);
-            temp_v9 = btlGetMainState();
+            temp_v9 = reinterpret_cast<int>(btlGetMainState());
             btlMainFindEntryByListedId(temp_v9,param_5);
             if (temp_v9 == 0) {
               temp_v14 = (float)temp_v15;

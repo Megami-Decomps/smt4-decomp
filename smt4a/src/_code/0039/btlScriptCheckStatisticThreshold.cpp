@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleMainState;
@@ -8,7 +9,6 @@ struct BattleEntity {
 
 extern "C" {
 s32 scrGetArg(u32 index);
-BattleMainState *btlGetMainState(void);
 BattleEntity *FUN_003eaf20(BattleMainState *);
 void scrSetResult(s32);
 
@@ -16,7 +16,7 @@ void scrSetResult(s32);
 u32 btlScriptCheckStatisticThreshold(void)
 {
     s32 threshold = scrGetArg(0);
-    BattleEntity *entity = FUN_003eaf20(btlGetMainState());
+    BattleEntity *entity = FUN_003eaf20(reinterpret_cast<BattleMainState *>(btlGetMainState()));
     if (entity != NULL) {
         s32 statistic = entity->statistic;
         scrSetResult(threshold <= statistic);

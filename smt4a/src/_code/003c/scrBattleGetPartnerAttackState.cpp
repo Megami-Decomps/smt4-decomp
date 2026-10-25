@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlPartnerAttack.h"
 #include "shard/Shard003C.h"
 
 extern "C" {
 
 extern BtlPartnerAttackA *g_btlPartnerAttack;
-extern void *btlGetMainState(void);
 extern u8 FUN_003eb1cc(void *state);
 extern void scrSetResult(u32 value);
 
@@ -13,7 +13,7 @@ u32 scrBattleGetPartnerAttackState(void)
 {
     u32 value;
 
-    if (FUN_003eb1cc(btlGetMainState()) != 0) {
+    if (FUN_003eb1cc(static_cast<void *>(btlGetMainState())) != 0) {
         value = g_btlPartnerAttack->state;
     } else {
         value = 2;

@@ -1,6 +1,7 @@
 /* Destroy callback of the clear-save screen: releases its resources and frees what it allocated. */
 #include "common.h"
 #include "clear_save/clearSave.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -12,11 +13,10 @@ int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */
 
 extern u32 *g_clearSave;
-extern ClearSaveWork *jobGetWork(void);
 
-void clearSaveDestroy(void)
+void clearSaveDestroy(u32 job)
 {
-    ClearSaveWork *work = jobGetWork();
+    ClearSaveWork *work = (ClearSaveWork *)jobGetWork(job);
 
     asdTMTexTableReleaseNode(2, 0x83);
     fileSlotFree(0x3c);

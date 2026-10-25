@@ -1,6 +1,7 @@
 /* NON_MATCHING: signed-byte argument packing and 64-bit flag scheduling differ; -O2 candidate. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/FUN_004186e0.h"
 
 struct PreparedBattleAction {
     u32 values[5]; // 0x00
@@ -36,7 +37,6 @@ u32 FUN_004bb80c(s32);
 void FUN_004bb9c0(PreparedBattleAction *, u32);
 void aocGetTableRecordOrFallback(s32);
 void FUN_004bbc4c(PreparedBattleAction *, s32, s32, s32);
-u32 FUN_004186e0();
 s32 idIsAtLeast350(u32);
 
 // Prepare an action from a saved selection, a normal action, or an enemy definition.

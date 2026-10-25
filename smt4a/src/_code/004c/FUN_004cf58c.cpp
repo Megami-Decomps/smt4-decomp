@@ -14,7 +14,7 @@ extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 first, u32 second);
-void FUN_001834a4(u32 group, u32 image);
+void asdTMTexTableEntryAt(u32 group, u32 image);
 void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 color);
 void FUN_00183bb0(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
@@ -28,7 +28,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     efctSetSpeed(1.0f);
     FUN_00183bb0();
-    FUN_001834a4(0x22, 3000);
+    asdTMTexTableEntryAt(0x22, 3000);
     f32 wideOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
     FUN_001835b4(2, 0x22, 3000, wideOffset, 0, 2);
     renderStackPop(&g_renderCtx->stackA);
@@ -36,7 +36,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     efctSetSpeed(effect->speed);
     FUN_00183bb0();
-    FUN_001834a4(0x22, 1000);
+    asdTMTexTableEntryAt(0x22, 1000);
     f32 narrowOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
     FUN_001835b4(2, 0x22, 1000, narrowOffset, 0, 6);
     renderStackPop(&g_renderCtx->stackA);

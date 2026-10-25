@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlScript.h"
 #include "common.h"
 
@@ -25,7 +26,6 @@ typedef struct BtlState003b7f10 {
 
 u32 scrGetArg(u32 index);
 BtlUnit003b7f10 *btlUnitGet(u32 id);
-BtlState003b7f10 *btlGetMainState(void);
 void btlSelectCandidateEntries(s32 arg);
 
 /* Script command: sets the script unit's value to 12 and the main state's 64-bit flags to script argument 0 | 0x40000 (sign-extended). Returns 1. */
@@ -36,7 +36,7 @@ u32 FUN_003b7f0c(void)
     StatsPart003b7f10 *part = &btlUnitGet(g_btlScriptUnit)->stats->part;
 
     part->value = 12;
-    btlGetMainState()->flags = (s32)(arg | 0x40000);
+    reinterpret_cast<BtlState003b7f10 *>(btlGetMainState())->flags = (s32)(arg | 0x40000);
     btlSelectCandidateEntries(1);
     return 1;
 }

@@ -11,10 +11,10 @@ int FUN_001af670(...);
 int dataTable24Sub0GetRecord(...);
 int FUN_0029efc0(...);
 int FUN_002bdf94(...);
-int FUN_002be5a4(int, unsigned int, unsigned char [72]);
+int textDrawString(int, unsigned int, unsigned char [72]);
 int textFormatBuffer(unsigned char [72], unsigned char *);
 int FUN_002bf380(int, int, int, int, int, int);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(int, int);
 
@@ -47,10 +47,10 @@ extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 
 
@@ -88,12 +88,12 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     FUN_002bf380(2,0x24,1,param_1,param_2,0x65);
     FUN_002bf288(2,0x24,0x8a,param_1,param_2,0x65);
     FUN_002bf288(2,0x24,0x4a,param_1,param_2,0x65);
-    temp_v2 = FUN_002bf4f8(0x24,0x49);
+    temp_v2 = asdTMTexTableEntryAt(0x24,0x49);
     textFormatBuffer(temp_v13,&LAB_001de0f0);
     VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,0xffffffff,temp_v13);
-    temp_v2 = FUN_002bf4f8(0x24,0x4c);
+    textDrawString(2,0xffffffff,temp_v13);
+    temp_v2 = asdTMTexTableEntryAt(0x24,0x4c);
     temp_v3 = FUN_0029dde0();
     FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1,2,0x65,
                  &LAB_001de11c,temp_v3);
@@ -108,14 +108,14 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
           efctSetSpeed();
           temp_v6 = temp_v4 + temp_v10;
           temp_v7 = dataTable24Sub0GetRecord();
-          temp_v8 = FUN_002bf4f8(0x24,temp_v10 + 0xa9);
+          temp_v8 = asdTMTexTableEntryAt(0x24,temp_v10 + 0xa9);
           if (temp_v14 != 0) {
             if (temp_v14 != 1) {
               if (temp_v14 == 2) {
                 if ((4 >= *(int *)(temp_v0 + 0x3fc)) &&
                    (temp_v11 = FUN_0029efa8(temp_v2), temp_v10 > temp_v11)) {
                   temp_v11 = FUN_0029efa8(temp_v2);
-                  temp_v9 = FUN_002bf4f8(0x24,temp_v11 + 0xa9);
+                  temp_v9 = asdTMTexTableEntryAt(0x24,temp_v11 + 0xa9);
                   temp_v11 = ((int)*(short *)(temp_v9 + 8) - (int)*(short *)(temp_v8 + 8)) * 0x1000;
                   temp_v11 = (int)*(short *)(temp_v8 + 8) +
                            (((int)(temp_v11 + ((unsigned int)(temp_v11 >> 0x1f) >> 0x1e)) >> 2) *
@@ -134,7 +134,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
             else if ((*(int *)(temp_v0 + 0x3fc) < 5) &&
                     (temp_v11 = FUN_0029efa8(temp_v2), temp_v11 < temp_v10)) {
               temp_v11 = FUN_0029efa8(temp_v2);
-              temp_v9 = FUN_002bf4f8(0x24,temp_v11 + 0xa9);
+              temp_v9 = asdTMTexTableEntryAt(0x24,temp_v11 + 0xa9);
               temp_v11 = ((int)*(short *)(temp_v8 + 8) - (int)*(short *)(temp_v9 + 8)) * 0x1000;
               temp_v11 = (int)*(short *)(temp_v9 + 8) +
                        (((int)(temp_v11 + ((unsigned int)(temp_v11 >> 0x1f) >> 0x1e)) >> 2) *
@@ -190,7 +190,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     temp_v4 = temp_v4 + temp_v5;
     temp_v5 = dataTable24Sub0GetRecord(temp_v4);
     temp_v2 = FUN_0029efa8(temp_v2);
-    temp_v2 = FUN_002bf4f8(0x24,temp_v2 + 0xa9);
+    temp_v2 = asdTMTexTableEntryAt(0x24,temp_v2 + 0xa9);
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {
         if (temp_v5 == 2) {

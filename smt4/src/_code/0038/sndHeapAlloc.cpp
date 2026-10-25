@@ -1,5 +1,6 @@
 /* Allocates `size` bytes from the sound frame heap with the sound lock held (the heap also locks internally). */
-#include "nn/os/CriticalSectionLock.h"
+#include "common.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 void FUN_00380894(void);
@@ -13,13 +14,13 @@ struct SoundHeap {
 
     void *allocLocked(u32 size, void (*callback)(void), u32 flags)
     {
-        CriticalSectionLock guard(lock);
+        ScopedCriticalLock guard(lock);
         return nw_snd_internal_FrameHeap_Alloc(frameHeap, size, callback, flags);
     }
 
     void *alloc(u32 size)
     {
-        CriticalSectionLock guard(lock);
+        ScopedCriticalLock guard(lock);
         return allocLocked(size, FUN_00380894, 0);
     }
 };

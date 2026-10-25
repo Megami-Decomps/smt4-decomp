@@ -1,4 +1,5 @@
 #include "shard/Shard0035.h"
+#include "shard/dataTable4CGetEntry.h"
 
 extern "C" {
 

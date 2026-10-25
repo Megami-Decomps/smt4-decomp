@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-target selection and framebuffer dimension scheduling differ. */
 #include "gfx/RenderTargetState.h"
+#include "shard/asdGfxSetMode.h"
 
 extern "C" {
 extern RenderTargetSystemView g_asdGxPresets;
@@ -9,7 +10,6 @@ extern RenderTargetFramebuffer DAT_004e3aa4;
 extern RenderTargetFramebuffer DAT_004e3ae0;
 void FUN_0011a258(const void *color, const void *depth, s32 width, s32 height);
 void FUN_002bc644(s32 x, s32 y, s32 width, s32 height);
-void asdGfxSetMode(u32 mode);
 void FUN_002c2620(u32 buffer);
 
 /* Select the screen's framebuffer and apply its scaled viewport and buffer binding. */

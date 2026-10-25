@@ -32,7 +32,7 @@ s32 FUN_002bff10(s32 arg);
 /* Title job step: once idle and ready, renders the scene into the surface at half size and marks it captured. */
 s32 FUN_0010b2d0(u32 job)
 {
-    TitleWork *work = reinterpret_cast<TitleWork *>(jobGetWork(job));
+    TitleWork *work = (TitleWork *)jobGetWork(job);
     TitleState *state;
 
     if (FUN_002bff10(0) != 0) {

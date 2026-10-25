@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail has a constant-false guard (mov #0 / cmp / nop / bne) before the kind-9 test and re-tests the kind in the kind-3 chain (dead compare/branch pairs ours omits), loads the held-button word with ldrd/ldm differently and lays the kind-5/3 tails out of line (190 rows against 203). Counting logic follows retail. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlDebugMenuEntry.h"
 
@@ -36,7 +37,6 @@ extern BtlDebugBlockMask DAT_00573b88;
 BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
-BtlStateMasks *btlGetMainState(void);
 s32 FUN_002b24fc(void);
 s32 FUN_00291e14(void);
 s8 *gameGetSlotTable(void);
@@ -66,7 +66,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
         if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0) {
             continue;
         }
-        if (entry->needsBattleState != 0 && (btlGetMainState()->held & DAT_00573b88.blocked) != 0) {
+        if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & DAT_00573b88.blocked) != 0) {
             continue;
         }
         if (entry->kind == 2) {
@@ -100,7 +100,7 @@ void FUN_0020d3d4(BtlDebugMenuLists *menu)
                     if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0) {
                         continue;
                     }
-                    if (entry->needsBattleState != 0 && (btlGetMainState()->held & DAT_00573b88.blocked) != 0) {
+                    if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & DAT_00573b88.blocked) != 0) {
                         continue;
                     }
                     if (entry->kind == 5) {

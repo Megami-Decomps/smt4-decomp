@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlScript.h"
 #include "battle/btlMain.h"
 #include "shard/W4_W4Match6b_BtlUnitWork.h"
@@ -16,7 +17,6 @@ struct BtlUnitParametersView {
 extern "C" {
 
 BtlUnit *btlUnitGet(u32 id);
-BtlMainStateA *btlGetMainState(void);
 BattleActionInfo FUN_003e8bb0(BtlMainStateA *state, BtlCombatantEntryA *parameters);
 
 // Select the unit command argument from the queried action's target kind.

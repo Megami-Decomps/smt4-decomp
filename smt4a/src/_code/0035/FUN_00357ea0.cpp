@@ -21,7 +21,7 @@ static s32 floatRepresentation(f32 value)
 
 extern "C" u32 FUN_00357ea0(u32 process)
 {
-    JobAnimationWorkPrefixA *work = reinterpret_cast<JobAnimationWorkPrefixA *>(jobGetWork(process));
+    JobAnimationWorkPrefixA *work = (JobAnimationWorkPrefixA *)jobGetWork(process);
     FUN_00163aa4(work->unk2C, 1.0f);
 
     const bool enabled = (work->code != 0x71);

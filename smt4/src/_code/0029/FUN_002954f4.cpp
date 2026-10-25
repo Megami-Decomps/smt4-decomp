@@ -5,11 +5,11 @@
 #include "gamedata/DevilRecord.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/asdTMTexTableLoadEntryAsync.h"
 
 extern "C" {
 Table00Record *dataTable00FindById(s32 id);
 s32 FUN_002a5ee4(AocSystem *system, s32 table, u32 entry, s32 flags);
-s32 asdTMTexTableLoadEntryAsync(s32 table, u32 entry);
 s32 FUN_002c58c8(s32 table, u32 entry);
 s32 FUN_0032c3fc(BattleTalkBustUpPrefixIV *bustUp);
 s32 panelSetupButtons(BattleTalkBustUpPrefixIV *bustUp);

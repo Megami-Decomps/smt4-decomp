@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -14,7 +15,6 @@ typedef struct BtlState0030b080 {
 } BtlState0030b080;
 
 u32 scrGetArg(u32 index);
-BtlState0030b080 *btlGetMainState(void);
 s32 btlEntryHasActionSkillCategory(Entity0030b080 *entity, u32 arg);
 void scrSetResult(s32 value);
 
@@ -25,7 +25,7 @@ u32 FUN_0030b080(void)
     s32 i;
 
     for (i = 0; i < 109; i++) {
-        Entity0030b080 *entity = &btlGetMainState()->entities[i];
+        Entity0030b080 *entity = &reinterpret_cast<BtlState0030b080 *>(btlGetMainState())->entities[i];
 
         if ((entity->flags & 0x10) != 0 && (entity->flags & 1) != 0 && (entity->flags & 0x40) == 0 && btlEntryHasActionSkillCategory(entity, arg) != 0) {
             scrSetResult(1);

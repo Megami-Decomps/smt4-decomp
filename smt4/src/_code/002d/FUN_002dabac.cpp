@@ -1,6 +1,7 @@
 /* NON_MATCHING: snapshot copy grouping and packed-pair read/modify/write store combining differ. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <string.h>
+#include "shard/FUN_0029c4ac.h"
 
 extern "C" {
 extern UniteWork *g_unite;
@@ -8,7 +9,6 @@ void FUN_00257a50(void *cursor, s32 index, s32 mode);
 void FUN_0029c4c8(s32 enabled);
 void FUN_0029defc(s32 id, s32 mode);
 void FUN_0029c4e4(void *cursor, s32 mode);
-void FUN_0029c4ac(s32 enabled);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_0029e890(s32 first, s32 second);
 u32 FUN_002d96a4();

@@ -1,5 +1,6 @@
 /* NON_MATCHING: store order of the record update and the loop's scheduling differ from retail (150 rows against 147); the compendium percentage uses __aeabi_idivmod as retail does. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "shard/countersRaiseA.h"
 
 /* A party demon record (300 bytes each) as the compendium registration reads it. */
 struct PartyDemon {
@@ -63,7 +64,6 @@ struct PartyBlock {
 extern "C" {
 
 DemonModelInfo *FUN_00184310(u32 id);
-void countersRaiseA(s32 counter, s32 amount);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Registers the demon with the given id in the compendium from the party member that currently

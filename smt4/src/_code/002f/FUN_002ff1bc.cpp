@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 namespace {
@@ -18,7 +19,6 @@ struct BattleMainStateView {
 extern "C" {
 s32 scrGetArg(u32 index);
 s32 scrSetResult(s32 result);
-BattleMainStateView* btlGetMainState(void);
 
 // Report whether any eligible battle entry has category four in the selected field.
 u32 FUN_002ff1bc(void)
@@ -26,7 +26,7 @@ u32 FUN_002ff1bc(void)
     const s32 fieldIndex = scrGetArg(0);
 
     for (s32 entryIndex = 0; entryIndex < 109; ++entryIndex) {
-        BattleEntryView* entry = &btlGetMainState()->entries[entryIndex];
+        BattleEntryView* entry = &reinterpret_cast<BattleMainStateView *>(btlGetMainState())->entries[entryIndex];
 
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 &&

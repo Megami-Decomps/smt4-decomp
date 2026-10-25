@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00141f8c` (_code @ 0x141f8c, 0x8e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ extern unsigned char LAB_00142870; /* 0x142870 */
 #define romwright_piece_1_1(upper, lower) ((unsigned short)(((unsigned short)(unsigned char)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(unsigned short);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_0014f2a8. */

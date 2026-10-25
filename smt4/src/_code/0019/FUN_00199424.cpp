@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail counts the page's entries with a three-iteration unrolled pairs loop and addresses the page row through pool-loaded offsets, and keeps the battle-state word in r0 across the capture test; the same lists, counts and calls. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -50,7 +51,6 @@ extern s32 DAT_00435dec;
 u32 FUN_003bf1e4(void);
 void FUN_0028e9ec(PartyMenu *menu);
 void partyCaptureEligibleSkills(PartyMenu *menu);
-void *btlGetMainState(void);
 s32 gameFlagIsSet(u32 flag);
 PlayerData *gameGetPlayerData(void);
 void FUN_0029f848(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
@@ -82,7 +82,7 @@ void FUN_00199424(PartyMenu *menu)
     menu->owner = FUN_003bf1e4();
     FUN_0028e9ec(menu);
     partyCaptureEligibleSkills(menu);
-    u8 *battleState = (u8 *)btlGetMainState();
+    u8 *battleState = (u8 *)static_cast<void *>(btlGetMainState());
     s32 page = menu->page;
     ListBox *pageBox = &menu->pageBox;
     if ((*reinterpret_cast<u32 *>(battleState + 0x44a8) & 0x40) != 0) {
@@ -110,9 +110,9 @@ void FUN_00199424(PartyMenu *menu)
         FUN_0029f848(pageBox, count + entries, 6, 1, 0, 1);
     }
     ListBox *headerBox = &menu->headerBox;
-    u8 *state = (u8 *)btlGetMainState();
+    u8 *state = (u8 *)static_cast<void *>(btlGetMainState());
     if ((*reinterpret_cast<u32 *>(state + 0x44a8) & 0x40) != 0) {
-        FUN_0029f848(headerBox, *reinterpret_cast<s16 *>((u8 *)btlGetMainState() + 0xb4), 6, 1, 1, 1);
+        FUN_0029f848(headerBox, *reinterpret_cast<s16 *>((u8 *)static_cast<void *>(btlGetMainState()) + 0xb4), 6, 1, 1, 1);
         FUN_0029eb5c(headerBox, DAT_00435dec);
     } else {
         FUN_0029f848(headerBox, 1, 6, 1, 0, 1);

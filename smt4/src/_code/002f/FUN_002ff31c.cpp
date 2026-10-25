@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BtlMainState;
@@ -6,7 +7,6 @@ struct BtlEntry;
 
 extern "C" {
 s32 scrGetArg(u32 index);
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 void scrSetResult(s32 value);
 u32 FUN_002ff31c(void)

@@ -1,4 +1,3 @@
-/* NON_MATCHING: signed adjacent flags match; final list-insertion argument setup remains reversed. */
 #include "classes/Obj421aa4.h"
 #include "common.h"
 
@@ -67,6 +66,8 @@ void FUN_00380718(SoundLoadSlot *slot)
     SoundLoadManager *manager = slot->manager;
     nw_ut_internal_LinkListImpl_erase_2B743C(&manager->active, &slot->link);
     slot->vtable->vfunc10(slot);
-    nw_ut_internal_LinkListImpl_insert(&manager->free, &manager->free.root, &slot->link);
+    SoundPlayerList *list = &manager->free;
+    SoundListLink *position = &list->root;
+    nw_ut_internal_LinkListImpl_insert(list, position, &slot->link);
 }
 }

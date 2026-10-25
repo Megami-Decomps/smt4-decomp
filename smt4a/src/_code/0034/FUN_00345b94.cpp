@@ -1,6 +1,7 @@
 /* NON_MATCHING: the stereo-mode branch hint and overlay literal-pool ordering differ; render-context wrapper scheduling agrees. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/FUN_00300100.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
@@ -8,7 +9,6 @@ s32 FUN_001692ac(u32 kind, u32 flags);
 void FUN_0016c4b8(RenderCtxA *context, u32 mode);
 s32 getFloatPairValue(void);
 s32 displayIsStereoActive(void);
-void FUN_00300100(u32 layer, u32 mono);
 void FUN_00280840(u32 style, u32 firstColor, u32 secondColor,
                   f32 x, f32 y, f32 depth, f32 size);
 

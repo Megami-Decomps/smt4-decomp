@@ -1,10 +1,10 @@
 /* NON_MATCHING: effect branch layout, argument spill slots and constant lifetimes differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 extern "C" {
 extern ReflectContext *g_btlActionReflect;
-BtlMainState *btlGetMainState(void);
 
 
 // Queue foreground/background overlays for other participating action records.

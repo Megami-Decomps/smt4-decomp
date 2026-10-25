@@ -1,6 +1,7 @@
 #include "gfx/DrawParameterOwner.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 namespace {
 // The speed belongs beyond the canonical draw-owner prefix, whose size remains 0x440.
@@ -13,7 +14,6 @@ typedef char ParameterOverlayWorkSpeedOffsetCheck[
 }
 
 extern "C" {
-ParameterOverlayWorkView *jobGetWork(void);
 extern RenderCtx *g_titleScene;
 s32 FUN_002c5d80(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
@@ -23,9 +23,9 @@ void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 // Draw the enabled overlay at the owner's animation speed and restore render state.
-u32 aocBoardDrawParameterOverlay(void)
+u32 aocBoardDrawParameterOverlay(u32 job)
 {
-    ParameterOverlayWorkView *work = jobGetWork();
+    ParameterOverlayWorkView *work = (ParameterOverlayWorkView *)jobGetWork(job);
     if (work->owner.dirty == 0)
         return 0;
     u32 enabled = work->owner.control.flags & 0x10;

@@ -1,7 +1,7 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/PassiveSkill.h"
 
 extern "C" {
-void *btlGetMainState(void);
 void *btlMainFindEntryByListedId(void *, u32);
 void FUN_0022abe0(void *, u16 *);
 
@@ -9,7 +9,7 @@ void FUN_0022abe0(void *, u16 *);
 f32 battleGetPassiveAffinityMultiplier(u32 listedId, u32 affinity)
 {
     f32 multiplier = 1.0f;
-    void *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
+    void *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), listedId);
     u16 skills[10] = {0};
     FUN_0022abe0(entry, skills);
     for (s32 index = 0; index < 9; ++index) {

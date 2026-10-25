@@ -1,9 +1,9 @@
 /* NON_MATCHING: incrementing past reserved sprite six eliminates the retail reserved-slot loop's redundant backedge. */
 #include "common.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 sprite);
 extern s8 DAT_0057f234;
 
 // Load table eleven's supported sprites on its first acquisition.

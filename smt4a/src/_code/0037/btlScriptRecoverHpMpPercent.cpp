@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -6,7 +7,6 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
 void *btlUnitGet(u32 index);
-BtlMainStateA *btlGetMainState();
 void FUN_004fb798(s32, void *, s32, u32, s32, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
 void FUN_004fb43c(s32, void *, u32, s32, s32, s32, s32);
 

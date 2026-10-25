@@ -6,6 +6,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "nw/math/MTX44.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeomEngine.h"
 
 /* Vertex attribute flags and the bytes each adds to a vertex. */
 #define EFF_GEOM_POSITION 0x01  /* 12 */
@@ -42,5 +43,9 @@ struct EffGeomBuffer {
 typedef char EffGeomBufferLayoutCheck[offsetof(EffGeomBuffer, attr80) == 0x38 &&
     offsetof(EffGeomBuffer, color) == 0x64 && offsetof(EffGeomBuffer, transform) == 0x68 &&
     offsetof(EffGeomBuffer, owner) == 0xA8 && sizeof(EffGeomBuffer) == 0xB8 ? 1 : -1];
+
+extern "C" {
+EffGeomBuffer *effGeomBufferCreate(u32 count, u32 flags, u32 owner);
+}
 
 #endif

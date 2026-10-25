@@ -15,7 +15,6 @@ typedef struct BtlUnit {
 } BtlUnit;
 
 extern u32 g_btlScriptUnit;
-extern s32 scrGetArg(s32 index);
 
 /* Script command: pushes whether value `arg` of the script unit has kind 3. */
 u32 scrCommBtlUnitValueKindIs3(void)

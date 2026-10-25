@@ -1,11 +1,10 @@
 /* NON_MATCHING: paired mask loads and positive-value branch lowering differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
-void scrSetResult(s32);
 
 // Report whether any eligible combatant with the requested id has a positive value.
 u32 FUN_003c45ec(void)

@@ -1,4 +1,5 @@
 #include "shard/W8X15_ModelStatePlayer.h"
+#include "shard/FUN_00420f08.h"
 
 extern "C" {
 /* Enters state 5, then starts the current motion on the owner's model 2. */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bdab0` (_code @ 0x3bdab0, 0x878 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -47,7 +48,6 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283ebc. */
-extern unsigned int *btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern unsigned int playerGetSkillRank(unsigned int);
@@ -100,7 +100,7 @@ unsigned int FUN_003bdab0(int param_1,unsigned int param_2,int param_3,int param
   temp_v22 = param_2;
   temp_v23 = param_3;
   iStack_28 = param_4;
-  puVar3 = (unsigned int *)btlGetMainState();
+  puVar3 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
   temp_v2 = temp_v22;
   dataTable40FindById();
   dataTable08Sub1GetRecord();
@@ -299,7 +299,7 @@ LAB_003be190:
         temp_v12 = (float)(*(unsigned short *)(temp_v2 + 0x36) & 0xffff0fff);
         temp_v3 = VectorUnsignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v13 = romwright_piece_4_4(0x3f800000,temp_v3);
-        puVar6 = (unsigned int *)btlGetMainState();
+        puVar6 = (unsigned int *)reinterpret_cast<unsigned int *>(btlGetMainState());
         btlMainFindEntryByListedId(puVar6,param_5);
         if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, dataTable40FindById(), temp_v7 != 0)) {
           temp_v3 = playerGetSkillRank(temp_v1);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: callable/argument stack placement and result-failure branch predication differ. */
 #include "AsdSDK/Source/Net/Cec/AsdCecProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/asdCecInboxGetMessageCount.h"
 
 struct CecProcess;
 typedef void (*CecThreadEntry)(CecProcess*);
@@ -18,7 +19,6 @@ typedef char CecThreadCallDescriptorLayoutCheck[sizeof(CecThreadCallDescriptor) 
 extern "C" {
 extern const char DAT_0052f4b0[];
 void nn_os_CriticalSection_Initialize(void* section);
-u32 asdCecInboxGetMessageCount(void);
 void* memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option, u32 mode);
 void resultReportIfFailed(void* object, void* buffer, u32 size);
 void FUN_00514a44(CecProcess* const* source, CecProcess** destination);

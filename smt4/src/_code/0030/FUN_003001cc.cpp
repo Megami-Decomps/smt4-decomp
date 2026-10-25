@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleState;
@@ -9,14 +10,13 @@ struct BattleListedEntry {
 extern "C" {
 u32 scrGetArg(u32);
 void scrSetResult(s32);
-BattleState *btlGetMainState(void);
 BattleListedEntry *btlMainFindEntryByListedId(BattleState *, u32);
 
 u32 FUN_003001cc(void)
 {
     u32 id = scrGetArg(0);
     s32 index = scrGetArg(1);
-    BattleListedEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+    BattleListedEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<BattleState *>(btlGetMainState()), id);
     if (entry != NULL && index >= 0 && index < 9)
         scrSetResult(entry->values[index]);
     else

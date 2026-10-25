@@ -1,10 +1,10 @@
 /* NON_MATCHING: Comparator values use different saved registers and omit retail's extra pointer copy for the tie break. */
 #include "common.h"
 #include "addon/AocEntryKind.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 s32 contentGetUpgradedKindValue(u16 id);
-s32 FUN_0049c9a0(const u16 *entry);
 
 /* Sorts selected content kinds by ascending kind value, then by the entry's secondary key. */
 s32 FUN_00493d88(const u16 *left, const u16 *right)

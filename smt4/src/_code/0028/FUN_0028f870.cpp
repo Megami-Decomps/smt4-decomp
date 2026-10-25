@@ -41,7 +41,7 @@ s32 ifTouchGetSelectionModeForRegion(s32 region);
 s32 FUN_0029ee54(u32 list);
 s32 FUN_0029d644(u32 list);
 s32 FUN_0029efc0(u32 list);
-BankSprite *FUN_002bf4f8(s32 bank, s32 sprite);
+BankSprite *asdTMTexTableEntryAt(s32 bank, s32 sprite);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 
@@ -96,9 +96,9 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     FUN_002bf288(2, 0x1d, nextSprite, x, y, 0x6f);
     BankSprite *track;
     if (wide != 0) {
-        track = FUN_002bf4f8(0x1d, 0x41d);
+        track = asdTMTexTableEntryAt(0x1d, 0x41d);
     } else {
-        track = FUN_002bf4f8(0x1d, 0x424);
+        track = asdTMTexTableEntryAt(0x1d, 0x424);
     }
     s32 thumbHeight = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * FUN_0029d644(list) >> 12;
     if (thumbHeight < 1) {

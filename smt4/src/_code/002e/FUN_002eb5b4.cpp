@@ -1,6 +1,6 @@
 #include "battle/btlReflect.h"
+#include "shard/JobWork.h"
 extern "C" {
-void *jobGetWork(u32 job);
 u32 FUN_00344f5c(ReflectContext *reflection);
 
 /* Processes the battle reflection state when present. */

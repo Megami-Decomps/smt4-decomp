@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -19,7 +20,6 @@ typedef struct BattleState {
     /* 0x1FC0 */ BattleUnit *units;
 } BattleState;
 
-BattleState *btlGetMainState(void);
 s32 scrGetArg(s32 index);
 
 /* Script command: sets the result to 1 when the live, non-excluded unit with id `arg0` has state 2 in slot `arg1`. */
@@ -30,7 +30,7 @@ u32 scrUnitSlotHasState(void)
     s32 i;
 
     for (i = 0; i < 109; i++) {
-        BattleUnit *unit = &btlGetMainState()->units[i];
+        BattleUnit *unit = &reinterpret_cast<BattleState *>(btlGetMainState())->units[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && unit->id == id && unit->slots[arg] >> 10 == 2) {
             scrSetResult(1);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: zero/-1 lifetimes differ; retail passes an uninitialized r6 as an extra allocation operand, while the recovered allocation overload takes only size. */
 #include "mikado/mikadoMain.h"
 #include "bible/bibleLegionDraw.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 struct ContentTransition;
 struct Mover;
 
@@ -18,7 +19,6 @@ void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
 void FUN_00240cec(s32 arg);
 void spriteTable2aLoad(SelectionFlags *panel);
-void asdLoadFileAsyncSimple(const char *path, u32 *dest, s32 arg);
 void FUN_00282bfc(s32 slot, u32 value);
 void FUN_00235250(Mover *mover);
 void FUN_002637c8(void);

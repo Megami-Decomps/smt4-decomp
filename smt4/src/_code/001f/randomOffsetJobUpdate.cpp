@@ -8,7 +8,7 @@ s32 randBetween(s32 minimum, s32 maximum);
 
 s32 randomOffsetJobUpdate(u32 job)
 {
-    ShakeJobWorkIV *work = reinterpret_cast<ShakeJobWorkIV *>(jobGetWork(job));
+    ShakeJobWorkIV *work = (ShakeJobWorkIV *)jobGetWork(job);
     f32 amplitudeX = work->amplitudeX;
     f32 amplitudeY = work->amplitudeY;
     if (work->elapsed >= work->fadeStart && work->duration > work->fadeStart) {

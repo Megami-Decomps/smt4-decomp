@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022899c` (_code @ 0x22899c, 0x6e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -15,7 +16,6 @@ int FUN_00247478(...);
 int FUN_0027da30(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
-int btlGetMainState(void);
 int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int SBORROW4(...);
@@ -123,7 +123,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   uStack_30 = param_2;
   pfStack_2c = param_3;
   temp_v31 = param_4;
-  temp_v27 = (unsigned int *)btlGetMainState();
+  temp_v27 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v30 = 0;
   dataTable40FindById();
   if (param_1 != 0) {
@@ -174,9 +174,9 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v26 = puVar5;
   btlMainFindEntryByListedId(temp_v27,param_5);
   temp_v5 = temp_v31;
-  temp_v4 = btlGetMainState();
+  temp_v4 = reinterpret_cast<int>(btlGetMainState());
   btlMainFindEntryByListedId(temp_v4,temp_v5);
-  temp_v5 = btlGetMainState();
+  temp_v5 = reinterpret_cast<int>(btlGetMainState());
   FUN_00247478(&temp_v16,temp_v5,temp_v4);
   temp_v9 = temp_v16 >> 0x10;
   if (temp_v9 < 2) {
@@ -185,7 +185,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
   temp_v6 = param_5;
   FUN_00246134(param_5,temp_v9,(int)(short)temp_v17,0xffffffff);
   if (((temp_v6 & 0x80000000) != 0) && ((*(unsigned short *)((int)puVar6 + 0xfa) & 0x10) == 0)) {
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     temp_v16 = 0;
     temp_v17 = 0;
     temp_v18 = 0;
@@ -264,7 +264,7 @@ LAB_00228c48:
         temp_v25[temp_v8] = temp_v9 | temp_v7;
         if ((((temp_v9 | temp_v7) & 0x80000000) != 0) &&
            ((*(unsigned short *)((int)puVar6 + 0xfa) & 0x10) == 0)) {
-          btlGetMainState();
+          reinterpret_cast<int>(btlGetMainState());
           temp_v28[0] = 0;
           temp_v28[1] = 0;
           temp_v28[2] = 0;
@@ -334,7 +334,7 @@ LAB_00228de4:
           temp_v10 = 99;
         }
         temp_v15 = 0x3f800000;
-        temp_v8 = btlGetMainState();
+        temp_v8 = reinterpret_cast<int>(btlGetMainState());
         btlMainFindEntryByListedId(temp_v8,temp_v5);
         temp_v14 = (float)temp_v15;
         if (temp_v8 != 0) {
@@ -408,7 +408,7 @@ LAB_00228de4:
           return temp_v5;
         }
         temp_v3 = FUN_00245cc0(0x1a);
-        temp_v10 = btlGetMainState();
+        temp_v10 = reinterpret_cast<int>(btlGetMainState());
         btlMainFindEntryByListedId(temp_v10,temp_v5);
         if (temp_v10 != 0) {
           *(unsigned short *)(temp_v10 + 0xa6) = temp_v3;

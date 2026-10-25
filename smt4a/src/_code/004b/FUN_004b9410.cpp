@@ -1,11 +1,11 @@
 /* NON_MATCHING: map departure behavior restored; compiler merges exclusion masks and schedules transition stores differently. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "map/MapSelection.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern MapSelection g_mapSelection;
 s32 screenFadeIsBusy();
-void asdSequenceRequest(u32 sequence, u32 parameter, u32 flags);
 void mapPlaceSet(s32 map, s32 area, s32 place);
 void FUN_004a0bac(s32 option, s32 enabled);
 void FUN_003d54f8(s32 option, s32 frames);

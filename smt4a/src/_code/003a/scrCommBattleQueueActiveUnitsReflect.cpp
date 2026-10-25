@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
 
 void FUN_004fd204(s32 actor, u32 flags, u32 target, u32 parameter, u32 payload, s32 enabled);
-BtlMainStateA *btlGetMainState(void);
 s32 scrGetArg(u32 index);
 
 /* Script command: queues reflection action 44 for every active roster unit, with parameter 0xFF when argument 0 is set. */

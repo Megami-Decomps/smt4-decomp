@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "shard/btlSourceGetMaxHp.h"
 
 extern "C" {
 extern BtlState *g_btlMainState;

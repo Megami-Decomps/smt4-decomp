@@ -101,7 +101,7 @@ s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Looks up a table entry in the file of a layout (tail call to FUN_001834a4, linked as a nop). */
+/* Looks up a table entry in the file of a layout (tail call to asdTMTexTableEntryAt, linked as a nop). */
 u16 *layoutFindTableEntry(void *layout, s32 index);
 #ifdef __cplusplus
 }
@@ -122,6 +122,16 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 void FUN_00287728(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+struct TextureTableEntryIV;
+/* The table entry (0x14 bytes) of texture `index` in the TMX file of table `file`. */
+struct TextureTableEntryIV *asdTMTexTableEntryAt(u32 file, s32 index);
 #ifdef __cplusplus
 }
 #endif

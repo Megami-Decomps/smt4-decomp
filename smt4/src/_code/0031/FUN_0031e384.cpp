@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies its constant direction tables onto the stack with integer ldm/stm in six pieces (mine uses vldmia pairs), reaches the work pointer and step counter through one base symbol (+4/+0x1c), and schedules the float window tests differently; the sequence logic is the same. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
 /* The work block the toggle flag lives in (only the flags byte at 0x24baf is used). */
@@ -12,7 +13,6 @@ struct CheatFlagsWork {
 extern "C" {
 extern CheatFlagsWork *DAT_0043e2ac;
 extern s32 DAT_0043e2c4;                 /* how many steps of the input sequence have been entered */
-s32 FUN_002c15fc(u32 button);
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
 void FUN_0027f958(f32 *angle, u8 buffer[16], s32 stick);

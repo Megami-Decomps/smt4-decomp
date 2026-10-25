@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Sys/Save/AsdSaveCommon.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdSaveReadBlock.h"
 
 extern "C" {
 

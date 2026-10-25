@@ -1,5 +1,6 @@
 /* NON_MATCHING: lock and archive-state saved registers differ and retail's removed-hook NOPs are absent. */
 #include "common.h"
+#include "shard/FUN_0010f548.h"
 
 struct ArchiveReferenceState { u32 unk00; u32 references; };
 extern "C" {
@@ -13,7 +14,6 @@ u32 FUN_0010f50c();
 u32 FUN_002c1398();
 u32 libc_strlen(const char *text);
 u32 asdModelForwardChecked(void *archive, const char *name, u32 length, u32 flags);
-void FUN_0010f548(u32 flags);
 
 // Acquire the shared archive mount, mounting it on the first reference under the module lock.
 u32 FUN_00106c28()

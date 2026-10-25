@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -18,7 +19,6 @@ struct EffectSource {
     /* 0x50 */ u32 flags;
 };
 
-void *btlGetMainState(void);
 u32 FUN_0027d9e8(void *state, u32 id);
 
 /* Starts effect `id` in the first free slot (unless the source is flagged 0x20000) and records its handle. */
@@ -29,7 +29,7 @@ void effectSlotStart(EffectOwner *owner, EffectSource *source, u32 id)
     if ((source->flags & 0x20000) == 0) {
         for (i = 0; i < 50; i++) {
             if (owner->slots[i].id < 0) {
-                u32 handle = FUN_0027d9e8(btlGetMainState(), id);
+                u32 handle = FUN_0027d9e8(static_cast<void *>(btlGetMainState()), id);
 
                 owner->slots[i].id = id;
                 owner->slots[i].handle = handle;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: group-root loads and the traversal-bank selection are scheduled differently. */
 #include "common.h"
+#include "shard/asdLightActivate.h"
 
 struct SceneNode;
 struct SceneTraverser;
@@ -15,7 +16,6 @@ extern SceneNode *sceneGroup2Root[2];
 extern SceneTraverser *DAT_00464b7c[2];
 extern ModelTransformBuilder *g_asdModelTransformBuilder[2];
 extern SceneLightCounter g_asdLightCount[2];
-void asdLightActivate(u32 bank);
 void nw_gfx_SceneNode_AttachChild(SceneNode *parent, SceneNode *child);
 void sceneTraverserVisit(SceneTraverser *traverser, ModelTransformBuilder *builder);
 

@@ -1,10 +1,10 @@
 /* NON_MATCHING: reward multiplier operand order, clamp condition scheduling and saved table registers differ. */
 #include "shard/GameGlobals.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 s32 gameDataGetTableValue(void);
-const Table00Record *dataTable00FindById(u16 id);
 
 // Scale a unit's level and rewards by the current progression multiplier.
 void FUN_0034dae0(void *unitData, u32 id)

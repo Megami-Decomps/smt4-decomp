@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation only: when clearing the UI and active flags retail loads the flags word into r1 (and hoists the pool load of DAT_00435d18 between), built uses r0 */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "battle/btlEditor.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ extern u32 DAT_00435d18;
 extern s32 scrRunOpcodesStub(u32 job);
 extern s32 FUN_00256940(BtlMain *main, BtlState *state, s32 arg);
 extern void btlReflectQueueKind34(s32 a, s32 b);
-extern void FUN_00256898(s32 a, s32 b);
 extern void battleSelectButtonHelpPreset(s32 a);
 
 extern void battleResetCounterAndFlag(u32 arg);

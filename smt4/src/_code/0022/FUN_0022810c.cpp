@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail tests flag 2 with `and`/`movs` (the masked value stays in r0); built uses a single `tst`. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -14,13 +14,6 @@ typedef struct {
     Entry *entry;       /* 0x1cfc */
 } Owner;
 
-/* Game state with a flag word at 0x44ac. */
-typedef struct {
-    u8 unk00[0x44ac];
-    u32 flags;          /* 0x44ac */
-} GameState;
-
-GameState *btlGetMainState(void);
 int FUN_00293230(void);
 
 /* Returns the owner's entry index, 0 when the state's flag 2 is set, or -1 when there is no usable entry. */
@@ -31,7 +24,7 @@ int FUN_0022810c(Owner *owner, int strict)
     }
     btlGetMainState();
     if (FUN_00293230() != 0) {
-        u32 masked = btlGetMainState()->flags & 2;
+        u32 masked = btlGetMainStateExt()->flags44AC & 2;
 
         if (masked != 0) {
             return 0;

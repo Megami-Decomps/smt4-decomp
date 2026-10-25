@@ -1,6 +1,7 @@
 /* NON_MATCHING: explicit support-progress states and zero-health test now match; player clamps, unit-loop flag tests, and support reduction registers still differ. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct DamagePlayer {
     u8 unk00[0x1c];
@@ -28,7 +29,6 @@ DamagePlayer *gameGetPlayerData();
 s32 gameCountUnits();
 DamageSlots *gameGetSlotTable();
 DamageUnit *gameGetUnitRecord(s32 slot);
-s32 gameGetOptionProgressStatus();
 DamageUnit *gameGetSupportUnitData();
 u16 FUN_002903f0();
 s32 table1bOr1cGetRecordValue(u32 id);

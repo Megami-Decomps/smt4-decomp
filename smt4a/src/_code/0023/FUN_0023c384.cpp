@@ -32,7 +32,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUnique. */
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -191,7 +191,7 @@ void FUN_0023c384(int param_1)
                   uiSpriteSelectAnim(temp_v6,2);
                   pairSetFirstResetSecond(temp_v6,0x1a);
                   FUN_00387240(temp_v6,0x1d,0x2f);
-                  temp_v11 = FUN_001834a4(0x1d,temp_v12 + 0x31);
+                  temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v12 + 0x31);
                   temp_v1 = *(short *)(temp_v11 + 10);
                   temp_v2 = *(short *)(temp_v11 + 8);
                 }
@@ -214,7 +214,7 @@ void FUN_0023c384(int param_1)
                   uiSpriteSelectAnim(temp_v6,3);
                   pairSetFirstResetSecond(temp_v6,0x62);
                   FUN_00387240(temp_v6,0x1d,0x67);
-                  temp_v11 = FUN_001834a4(0x1d,temp_v14 + 0x68);
+                  temp_v11 = asdTMTexTableEntryAt(0x1d,temp_v14 + 0x68);
                   temp_v1 = *(short *)(temp_v11 + 10);
                   temp_v2 = *(short *)(temp_v11 + 8);
                 }

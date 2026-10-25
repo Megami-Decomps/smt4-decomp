@@ -48,11 +48,11 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
     unaff_r10 = 0x32323200;
     unaff_r11 = 0;
   }
-  iVar1 = FUN_002bf4f8(0x39,0x75);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x75);
   FUN_002bd82c(*param_1,unaff_r11);
   FUN_002598f0(*param_1,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
   if ((*(unsigned char *)(param_2 + 0x20) & 2) != 0) {
-    iVar1 = FUN_002bf4f8(0x39,0x76);
+    iVar1 = asdTMTexTableEntryAt(0x39,0x76);
     if (*(char *)(param_2 + 0x37) == '\0') {
       uVar5 = 0x840000;
     }
@@ -62,38 +62,38 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
     FUN_002bd82c(param_1[2],uVar5);
     FUN_002598f0(param_1[2],*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
   }
-  iVar1 = FUN_002bf4f8(0x39,0x77);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x77);
   FUN_002bd82c(param_1[1],unaff_r10);
   FUN_002598f0(param_1[1],*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
   FUN_002bf288(2,0x39,0x5a,param_4,param_5,0x70);
   uVar2 = (unsigned int)*(unsigned short *)(iStack_54 + 0x10);
   if (uVar2 != 0) {
     FUN_002b9024();
-    iVar1 = FUN_002bf4f8(0x39,0x78);
+    iVar1 = asdTMTexTableEntryAt(0x39,0x78);
     FUN_002b6940(*(unsigned short *)(uVar2 + 0x90),*(short *)(iVar1 + 8) + param_4,
                  *(short *)(iVar1 + 10) + param_5,0x71);
   }
   FUN_002be304(unaff_r10);
   FUN_002be624(auStack_40,0x1ebc78,*(unsigned char *)(param_2 + 0x36));
-  iVar1 = FUN_002bf4f8(0x39,0x74);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x74);
   FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x74,
                auStack_40);
   uVar2 = *(unsigned int *)(param_2 + 0x28) / 0xe10;
   uVar3 = *(unsigned int *)(param_2 + 0x28) % 0xe10;
   FUN_002be624(auStack_58,0x1ebc84,uVar3 % 0x3c);
-  iVar1 = FUN_002bf4f8(0x39,0x7c);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x7c);
   FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   FUN_002be624(auStack_58,0x1ebc8c,0x3a);
-  iVar1 = FUN_002bf4f8(0x39,0x79);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x79);
   FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   FUN_002be624(auStack_58,0x1ebc84,uVar3 / 0x3c);
-  iVar1 = FUN_002bf4f8(0x39,0x7e);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x7e);
   FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   FUN_002be624(auStack_58,0x1ebc8c,0x3a);
-  iVar1 = FUN_002bf4f8(0x39,0x7a);
+  iVar1 = asdTMTexTableEntryAt(0x39,0x7a);
   FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                auStack_58);
   iVar1 = 0;
@@ -137,10 +137,10 @@ LAB_001ebcbc:
     iVar1 = iVar1 + 1;
     if ((int)uVar3 < 1) {
       auStack_58[iVar1] = 0;
-      iVar1 = FUN_002bf4f8(0x39,0x82);
+      iVar1 = asdTMTexTableEntryAt(0x39,0x82);
       FUN_002bdf94(0,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0,5,0x71,
                    auStack_58);
-      iVar1 = FUN_002bf4f8(0x39,0x89);
+      iVar1 = asdTMTexTableEntryAt(0x39,0x89);
       FUN_00210d08(*(unsigned int *)(param_2 + 0x30),*(short *)(iVar1 + 8) + param_4,
                    *(short *)(iVar1 + 10) + param_5,0x71);
       FUN_002bed3c();

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses ldr r1, [pc, #28] where the compiled block uses ldr r1, [pc, #32]. */
 #include "common.h"
 
 struct Vector3 {
@@ -16,7 +15,8 @@ Vector3 FUN_00201984(u32 index)
         return DAT_005e1c68[index];
     }
 
-    Vector3 result = { 0.0f, 0.0f, 0.0f };
+    Vector3 result;
+    result.x = result.y = result.z = 0.0f;
     return result;
 }
 }

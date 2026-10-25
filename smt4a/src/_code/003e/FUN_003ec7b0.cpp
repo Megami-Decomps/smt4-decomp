@@ -1,10 +1,4 @@
-#include "shard/W5_W5Match7_BattleMask.h"
-
-struct BattleCountedMaskState {
-    BattleMaskState state;
-    u8 unk4CE0[0x8c];
-    s32 count;
-};
+#include "battle/BtlMainAccess.h"
 
 struct BattleExclusionMasks {
     u8 unk00[0xd0];
@@ -16,10 +10,10 @@ struct BattleExclusionMasks {
 extern "C" {
 extern BattleExclusionMasks g_btlMain;
 
-u32 FUN_003ec7b0(const BattleCountedMaskState* battle)
+u32 FUN_003ec7b0(const BtlMainStateExtA* battle)
 {
     if (battle->count > 0) {
-        if ((g_btlMain.first & battle->state.mask) == 0 && (battle->state.mask & g_btlMain.second) == 0) {
+        if ((g_btlMain.first & battle->stateFlags64.bits) == 0 && (battle->stateFlags64.bits & g_btlMain.second) == 0) {
             return 1;
         }
     }

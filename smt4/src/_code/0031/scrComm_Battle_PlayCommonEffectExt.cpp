@@ -1,4 +1,5 @@
 /* NON_MATCHING: compiler inlines the nine-byte name copy and retains separate name/argument stack storage; retail calls the copy helper and reuses slots. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "battle/btlEffect.h"
@@ -16,7 +17,6 @@ s32 scrGetArg(s32 index);
 s32 FUN_0027e3b8(BtlEvent *event);
 u32 FUN_0024550c(BtlEffectOwner *owner);
 void FUN_002454c4(BtlEffectOwner *owner, const char *name, u32 flags, s32 mode);
-BtlMainState *btlGetMainState(void);
 u32 FUN_00245420(s32 actor, u32 unit, BtlActionRecord *target, u32 value, u32 parameter, s32 lookupId, s32 extraTarget);
 void FUN_001b1a48(s32 amount, u32 unit, BtlEffectSlotBlock *slots, s32 mode, u32 first, s32 second);
 

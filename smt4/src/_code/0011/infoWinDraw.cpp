@@ -28,7 +28,7 @@ s32 FUN_002c5d80(u32 preset, u32 index);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-void *FUN_002bf4f8(u32 group, u32 image);
+void *asdTMTexTableEntryAt(u32 group, u32 image);
 void FUN_002b659c(s32 x, s32 y, s32 width, s32 height);
 void FUN_002b75ec(u32 text, s32 x, s32 y, s32 layer, f32 scale, s32 mode, s32 index);
 void FUN_002b64b8(void);
@@ -57,9 +57,9 @@ s32 infoWinDraw(u32 job)
     FUN_002bf288(2, 14, 135, x, y, 21);
     FUN_002bf288(2, 14, 136, x, y, 21);
     if (window->framed != 0) {
-        InfoWindowSprite *frame = (InfoWindowSprite *)FUN_002bf4f8(14, 135);
+        InfoWindowSprite *frame = (InfoWindowSprite *)asdTMTexTableEntryAt(14, 135);
         FUN_002b659c(frame->x + x, frame->y + y, frame->size[0], frame->size[1]);
-        InfoWindowSprite *textBox = (InfoWindowSprite *)FUN_002bf4f8(14, 137);
+        InfoWindowSprite *textBox = (InfoWindowSprite *)asdTMTexTableEntryAt(14, 137);
         if (window->timed != 0) {
             FUN_002b75ec(window->text, textBox->x + x, textBox->y + y, 201, 1.0f, 6, 0);
         } else {

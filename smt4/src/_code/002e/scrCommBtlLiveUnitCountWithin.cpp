@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
 extern s32 scrGetArg(s32 index);
 extern s32 btlScriptResolveGroupArg(s32 group);
@@ -23,14 +23,14 @@ s32 scrCommBtlLiveUnitCountWithin(void)
     live = 0;
     FUN_002499fc(group, &first, &count);
     for (i = first; i < first + count; i++) {
-        BtlUnitEntry *unit = &btlGetMainState()->units[i];
+        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[i];
 
         if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
             live++;
         }
     }
-    if (btlGetMainState()->hasActiveEntry != 0) {
-        if (btlMainFindActiveEntry(btlGetMainState()) != NULL) {
+    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
+        if (btlMainFindActiveEntry(reinterpret_cast<BtlState *>(btlGetMainState())) != NULL) {
             live++;
         }
     }

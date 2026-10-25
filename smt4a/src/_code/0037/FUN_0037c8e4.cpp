@@ -1,5 +1,5 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #144] differs from recovered ldr r1, [pc, #136]. */
 #include "common.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct MessageStateView {
     u8 unk00[0x7C];             // 0x000
@@ -29,7 +29,6 @@ struct MessageMainView {
 extern "C" {
 extern MessageMainView g_messageMain;
 u32 gameDataBlocks2GetWord4(void);
-u32* gameGetSlotTable(void);
 void FUN_0014e188(void* sprite, s32 kind, u32 flags, void* data,
                   s32 count, f32 scale);
 void pairSetFirstResetSecond(void* pair, s32 first);
@@ -43,14 +42,15 @@ extern "C" u32 FUN_0037c8e4(u8 messageId, s32 useDataBlock)
     state->unk8E = 1;
     state->unk8D = 1;
 
-    u32 value;
-    if (useDataBlock != 0) {
-        value = gameDataBlocks2GetWord4();
+    if (useDataBlock == 0) {
+        u32 value = gameGetSlotTable()->money;
+        state->unk7C = value;
+        state->unk88 = value;
     } else {
-        value = *gameGetSlotTable();
+        u32 value = gameDataBlocks2GetWord4();
+        state->unk7C = value;
+        state->unk88 = value;
     }
-    state->unk7C = value;
-    state->unk88 = value;
 
     state->unk92 = 0;
     state->unk17D = 0;

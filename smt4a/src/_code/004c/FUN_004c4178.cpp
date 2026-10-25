@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c4178` (_code @ 0x4c4178, 0x43c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int CONCAT44(...);
-int btlGetMainState(void);
 int FUN_001568f8(...);
 int dataTable04FindById(void);
 int FUN_00243d30(...);
@@ -136,7 +136,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
   iStack_30 = param_2;
   uStack_2c = param_3;
   iStack_28 = param_4;
-  pbVar2 = (unsigned char *)btlGetMainState();
+  pbVar2 = (unsigned char *)reinterpret_cast<int>(btlGetMainState());
   temp_v21 = pbVar2;
   FUN_001568f8(pbVar2,param_2);
   pbVar3 = temp_v21;
@@ -176,7 +176,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
   FUN_004c3bc0(param_2,param_3);
   temp_v16 = CONCAT44(temp_v15,temp_v9);
   temp_v10 = temp_v8;
-  temp_v1 = btlGetMainState();
+  temp_v1 = reinterpret_cast<int>(btlGetMainState());
   temp_v4 = temp_v1;
   FUN_003f0e20(temp_v1,param_2);
   if (temp_v4 != 0) {

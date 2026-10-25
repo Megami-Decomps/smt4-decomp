@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,7 +7,6 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 s32 btlFindEntryValue(s32 unitIndex, u32 kind);
 void scrSetResult(s32 value);

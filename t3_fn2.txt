@@ -1,0 +1,126 @@
+== _code/0016/FUN_00163ec4.cpp
+11: f32 FUN_00162790(u32 resource, u32 color, const char *text, f32 x, f32 y, f32 z, f32 scale, f32 opacity);
+39: const f32 advance = FUN_00162790(state->resource, color, state->text, drawX, drawY, 0.0f, state->scale, opacity);
+== _code/0016/FUN_00165778.cpp
+44: void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 alpha);
+60: FUN_00162790(4, -1, badge->caption, (f32)left, 6.0f, 0.57f, 0.0f, badge->textAlpha);
+== _code/0016/FUN_0016631c.cpp
+11: void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
+50: FUN_00162790(4, -1, caption->label, (f32)(left + 13 + signWidth), (f32)labelMetric->placement.y, 0.57f, 0.0f, caption->sprite.alpha);
+== _code/font/SearchWin/RunWin/FUN_00208650.cpp
+31: void FUN_00162790(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
+58: FUN_00162790(4, 0x57D8FFFF, win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f, win->alpha);
+== _code/font/SearchWin/SearchWin/FUN_0023a5f8.cpp
+55: void FUN_00162790(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
+82: FUN_00162790(4, 0x57D8FFFF, win->label, (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f, win->alpha);
+== _code/0023/FUN_0023b4cc.cpp
+44: void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+122: FUN_00162790(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
+== _code/002a/FUN_002acfc8.cpp
+8: void FUN_00162790(u32 layer, u32 style, const char *text, f32 x, f32 y, f32 depth, f32 spacing, f32 scale);
+30: FUN_00162790(2, buttonHelpNormalTextStyle(work), segment, (f32)x, (f32)y, 0.93f, 0.0f, 1.0f);
+36: FUN_00162790(2, work->unk670, segment, (f32)(x + prefixWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+39: FUN_00162790(2, buttonHelpNormalTextStyle(work), segment, (f32)(x + highlightWidth), (f32)y, 0.93f, 0.0f, 1.0f);
+== _code/002c/FUN_002ca878.cpp
+27: void FUN_00162790(u32 layer, u32 flags, const char *text, f32 x, f32 y);
+69: FUN_00162790(2, 0xFF, label, (f32)labelX, (f32)(frame->y + y));
+== _code/0031/FUN_00315d34.cpp
+58: void FUN_00162790(u32 layer, u32 mask, const char *buffer, f32 x, f32 y, f32 depth, f32 width, f32 height);
+136: FUN_00162790(3, 0xFFFFFFFF, text, (f32)frame->x + offset, (f32)frame->y, 0.0f, 1.0f, 1.0f);
+== _code/Terminal/tmnlMain/FUN_003161b4.cpp
+8: void FUN_00162790(u32 font, u32 color, const u8* text, f32 x, f32 y, f32 depth, f32 scaleX, f32 scaleY);
+25: FUN_00162790(3, 0xFFFFFFFF, DAT_0056df38[work->selection] + 7, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+== _code/0032/FUN_00329a90.cpp
+33: void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
+77: FUN_00162790(2, 0xffffffff, text, (f32)panel->x + offset + (f32)counter->x, (f32)(panel->y + counter->y), 0.0f, 1.0f, 1.0f);
+== _code/0035/FUN_003581bc.cpp
+35: void FUN_00162790(u32 layer, u32 color, u8 text[64], f32 x, f32 y, f32 a, f32 b, f32 c);
+65: FUN_00162790(3, 0x57d8ffff, text, panel->x + digits->x + x + (56 - (s32)width) / 2, panel->y + digits->y + y, 1.0f, 1.0f, 1.0f);
+== _code/0037/FUN_003721b0.cpp
+35: void FUN_00162790(s32 category, u32 color, const char *text, f32 x, f32 y, f32 scaleX, f32 scaleY, f32 speed);
+91: FUN_00162790(2, 0xff, name, (f32)frameX, (f32)(placement->y + y), 1.0f, 0.0f, speed);
+== _code/0037/FUN_0037e5c0.cpp
+51: void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 speed);
+79: FUN_00162790(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+96: FUN_00162790(3, color, text, name->x + x, name->y + y, 0.2f, 0.0f, speed);
+== _code/003c/FUN_003c33e8.cpp
+11: void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+29: FUN_00162790(2, 0xffffffff, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
+40: FUN_00162790(2, color, text, label->x + x, label->y + y, 0.0f, 0.0f, effect);
+== _code/003f/FUN_003f6424.cpp
+33: void FUN_00162790(s32 layer, u32 color, const char* text, f32 x, f32 y, f32 z, f32 a, f32 scale);
+87: FUN_00162790(2, 0xffffffff, text, (f32)nameX, (f32)nameY, (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
+92: FUN_00162790(2, 0xff, reinterpret_cast<const char*>(record) + 4, (f32)valueX, (f32)valueY, (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
+== _code/003f/FUN_003f7164.cpp
+39: void FUN_00162790(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 alpha, f32 a, f32 b);
+103: FUN_00162790(2, 0xFFFFFFFF, label, (f32)(labelX + offsetX), (f32)(labelY + offsetY), (f32)(0xFB - depth) * 0.00390625f, 0.0f, speed);
+106: FUN_00162790(2, 0xFF, (const char *)(entry + 2), (f32)(part->x + base->x + offsetX), (f32)(part->y + base->y + offsetY), (f32)(0xFB - depth) * 0.00390625f, 0.0f, speed);
+== _code/003f/FUN_003f757c.cpp
+12: void FUN_00162790(u32, s32, u32, f32, f32, f32, f32, f32);
+25: FUN_00162790(3, -1, text, f32(screenX), f32(sprite->y + y), f32(251 - depth) * 0.00390625f, 0.0f, speed);
+== _code/003f/FUN_003f7674.cpp
+26: void FUN_00162790(u32 layer, u32 flags, const char *text, f32 x, f32 y);
+72: FUN_00162790(3, 0xFF, name, (f32)nameX, (f32)(frame->y + y));
+== _code/003f/FUN_003f78f8.cpp
+27: void FUN_00162790(s32 a, s32 color, const char *text, f32 x, f32 y, f32 sx, f32 sy, f32 speed);
+58: FUN_00162790(3, 0xFF, tag, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
+63: FUN_00162790(3, -1, body, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);
+== _code/0040/FUN_00404050.cpp
+35: void FUN_00162790(s32 category, u32 color, const char *text, f32 x, f32 y, f32 scaleX, f32 scaleY, f32 speed);
+98: FUN_00162790(2, textColor, text, (f32)(placement->x + x), (f32)(placement->y + y), 0.56640625f, 0.0f, speed);
+== _code/0040/FUN_004045ac.cpp
+43: void FUN_00162790(u32 first, s32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+107: FUN_00162790(3, nameColor, text, (f32)labelX, (f32)(plate->y + y), (f32)(256 - depth) * 0.00390625f, 0.0f, scale);
+== _code/0040/FUN_00404f40.cpp
+33: void FUN_00162790(s32 a, u32 font, u8 *text, f32 x, f32 y);
+76: FUN_00162790(3, font, text, (f32)(nameX + x), (f32)(nameY + y));
+== _code/0040/FUN_004087d8.cpp
+21: void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
+37: FUN_00162790(4, 0xFFFFFFFF, first != 0 ? work->first : work->second, (f32)(offset + (availableWidth - width) / 2 + metrics->x), (f32)metrics->y, 0.0f, 0.0f, work->alpha);
+== _code/0041/FUN_0041b060.cpp
+14: void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
+31: FUN_00162790(4, 0x646464FF, text, (f32)((metrics->dimensions[0] - width) / 2 + (position->x + metrics->x)), (f32)(metrics->y + position->y), 0.0f, 0.0f, position->speed);
+== _code/0046/FUN_0046a108.cpp
+33: void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 depth, f32 scaleX, f32 scaleY);
+46: FUN_00162790(2, 0xFFFFFFFF, DAT_00533528, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
+51: FUN_00162790(2, 0xFFFFFFFF, text, 24.0f, (f32)(index * 14 + 8), 0.0f, 1.0f, 1.0f);
+54: FUN_00162790(2, 0xFFFFFFFF, DAT_00533560, 8.0f, (f32)(nextLine * 14 + 8), 0.0f, 1.0f, 1.0f);
+== _code/0047/FUN_0047a298.cpp
+31: void FUN_00162790(s32 layer, u32 color, const AocDrawText *text, f32 x, f32 y, f32 scale, f32 depth, f32 opacity);
+60: FUN_00162790(3, color, &text[i], static_cast<f32>(textX), static_cast<f32>(textY), 0.5f, 0.0f, 1.0f);
+== _code/0048/FUN_00485718.cpp
+45: void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+94: FUN_00162790(4, color, label, (f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 0.0f, scale);
+== _code/0048/FUN_0048b260.cpp
+30: void FUN_00162790(u32 kind, u32 font, const char* text, f32 x, f32 y, f32 depth, f32 rotation, f32 scale);
+53: FUN_00162790(2, g_uiTextFontSettings.font, text, textX, textY, 0.0f, 0.0f, 1.0f);
+== _code/0048/FUN_0048b514.cpp
+45: void FUN_00162790(s32 a, u32 font, char *text, f32 x, f32 y, f32 shear, f32 slant, f32 alpha);
+81: FUN_00162790(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt(anchor) - 20 + label->x), (f32)label->y, 0.0f, 0.0f, 1.0f);
+== _code/004b/FUN_004b40f4.cpp
+22: void FUN_00162790(u32, u32, const char *, f32, f32, f32, f32, f32);
+42: FUN_00162790(3, 0x9FDDDDFF, text, static_cast<f32>(textX), static_cast<f32>(textY), 0.0f, 1.0f, 1.0f);
+== _code/004b/FUN_004bdce0.cpp
+17: void FUN_00162790(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
+42: FUN_00162790(1, color, text, (f32)labelX, (f32)labelY, 0.0f, 0.0f, labelAlpha);
+== _code/004c/curveEvaluateStandard.cpp
+4: f32 FUN_00162790(u32 value,u32 mode,u32 argument,f32 first,f32 second,f32 third,f32 fourth,f32 scale);
+6: return (s32)FUN_00162790(value,1,argument,0.0f,-20.0f,0.0f,0.0f,1.0f);
+== _code/003d/placeWinDraw.cpp
+33: void FUN_00162790(s32 layer, u32 color, const void *text, f32 x, f32 y, f32 parameter, f32 offset, f32 speed);
+51: FUN_00162790(3, 0xffffffff, window->text, static_cast<f32>(sprite->x + translatedX), static_cast<f32>(sprite->y + y), 0.56640625f, 0.0f, 1.0f);
+== _code/0033/statusDownDrawEndBanner.cpp
+11: void FUN_00162790(u32 screen, u32 color, const u8 *text, f32 x, f32 y, f32 depth, f32 rotation, f32 alpha);
+30: FUN_00162790(2, ~0u, text, (f32)textX, (f32)textY, 0.2f, 0.0f, alpha);
+== _code/0048/textDrawEncodedGlyph.cpp
+6: void FUN_00162790(u32 layer, u32 color, const u8 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
+37: FUN_00162790(4, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
+39: FUN_00162790(3, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
+== _code/title/titleDbgBg/titleDbgBgDraw.cpp
+18: void FUN_00162790(s32 font, u32 color, const char *text, f32 x, f32 y, f32 depth, f32 scaleX, f32 scaleY);
+33: FUN_00162790(3, 0xffffffff, "\x82\x6f\x82\x62\x83\x8d\x81\x5b\x83\x68", 296.0f, 194.0f, 0.0f, 1.0f, 1.0f);
+37: FUN_00162790(3, 0xffffffff, "\x82\x71\x82\x6e\x82\x6c\x83\x8d\x81\x5b\x83\x68", 296.0f, 194.0f, 0.0f, 1.0f, 1.0f);
+41: FUN_00162790(3, 0xffffffff, "\x90\x5e\x81\x45\x8f\x97\x90\x5f\x93\x5d\x90\xb6\x87\x57\x82\x65", 268.0f, 208.0f, 0.0f, 1.0f, 1.0f);
+== _code/0048/uiDrawAnimatedMessage.cpp
+36: void FUN_00162790(s32 layer, u32 font, const char *text, f32 x, f32 y, f32 arg0, f32 arg1, f32 scale);
+57: FUN_00162790(2, g_uiTextFontSettings.font, text, x, y, 0.0f, 0.0f, 1.0f);

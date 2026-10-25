@@ -1,6 +1,7 @@
 /* NON_MATCHING: remaining native alpha argument and efctSetSpeed float arguments are absent from this draft; large render-stack and draw-expression differences remain. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_00288ddc.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_0025765c(...);
 int btlSourceGetMaxHp(int);
 int FUN_00269bf0(int);
 int FUN_002888a8(...);
-int FUN_00288ddc(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -16,7 +16,7 @@ int textFormatBuffer(...);
 int FUN_002be90c(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_0033c1bc(...);
 
@@ -86,7 +86,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002be90c. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033c1bc. */
@@ -218,7 +218,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       if (param_1->field_0x23 != 0) {
         efctSetSpeed();
       }
-      temp_v3 = FUN_002bf4f8(0x19,0x51);
+      temp_v3 = asdTMTexTableEntryAt(0x19,0x51);
       uiDrawDemonIcon(temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a,0);
       FUN_002bed3c();
       efctSetSpeed();
@@ -239,7 +239,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         FUN_002bf288(2,0x19,0x3f,param_2,param_3,0x6f);
         drawSetColorFromRGBA8(0x292929ff);
         textFormatBuffer(temp_v16,&LAB_00251c04,temp_v12);
-        temp_v9 = FUN_002bf4f8(0x19,0x53);
+        temp_v9 = asdTMTexTableEntryAt(0x19,0x53);
         FUN_002bdf94(1,*(short *)(temp_v9 + 8) + param_2,*(short *)(temp_v9 + 10) + param_3,1,2,0x79,
                      temp_v16);
         FUN_002bed3c();
@@ -313,12 +313,12 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         drawSetColorFromRGBA8(temp_v2);
       }
       textFormatBuffer(temp_v16,&LAB_00251c04,temp_v8);
-      temp_v7 = FUN_002bf4f8(0x19);
+      temp_v7 = asdTMTexTableEntryAt(0x19);
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);
       FUN_002bed3c();
       textFormatBuffer(temp_v16,&LAB_00251c04,temp_v13);
-      temp_v7 = FUN_002bf4f8(0x19,0x1d);
+      temp_v7 = asdTMTexTableEntryAt(0x19,0x1d);
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);
       FUN_0033c1bc(param_1,param_2,param_3);

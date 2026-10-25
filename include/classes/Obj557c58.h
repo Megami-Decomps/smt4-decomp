@@ -2,8 +2,8 @@
 #define CLASSES_OBJ557C58_H
 
 #include "classes/Obj557ae8.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 extern "C" void asdOperatorDelete(void *block);
 
 /* The status-screen model holder: an Obj557ae8 with its own vtable (0x557c58). It adds no data;

@@ -1,0 +1,176 @@
+== smt4a/src/_code/0013/FUN_0013c660.cpp
+20: FrameCaptureWorkA *job = reinterpret_cast<FrameCaptureWorkA *>(jobGetWork(handle));
+== smt4a/src/_code/0013/FUN_0013c6d4.cpp
+13: FrameTextureWork *work = reinterpret_cast<FrameTextureWork *>(jobGetWork(job));
+== smt4a/src/_code/0013/FUN_0013c7dc.cpp
+12: FrameWorkA *work = reinterpret_cast<FrameWorkA *>(jobGetWork(job));
+== smt4a/src/_code/0013/FUN_0013cd7c.cpp
+26: SurfaceReductionWork *work = reinterpret_cast<SurfaceReductionWork *>(jobGetWork(job));
+== smt4a/src/_code/0013/FUN_0013cf80.cpp
+13: JobWork *work = jobGetWork(job);
+== smt4a/src/_code/0013/FUN_0013d030.cpp
+14: JobWork *work = jobGetWork(job);
+== smt4a/src/_code/0013/FUN_0013dc70.cpp
+12: JobWork *work = reinterpret_cast<JobWork *>(jobGetWork(job));
+== smt4a/src/_code/0013/FUN_0013e9e4.cpp
+26: RenderJobWork *work = reinterpret_cast<RenderJobWork *>(jobGetWork(job));
+== smt4a/src/_code/0013/FUN_0013ef3c.cpp
+8: SurfaceCaptureWorkPrefixA *jobGetWork(u32 process);
+15: SurfaceCaptureWorkPrefixA *work = jobGetWork(process);
+== smt4a/src/_code/0014/FUN_00140618.cpp
+34: CaptureWorkViewA *work = (CaptureWorkViewA *)jobGetWork(job);
+== smt4a/src/_code/0018/FUN_00185830.cpp
+40: CameraMoveWork *work = reinterpret_cast<CameraMoveWork *>(jobGetWork(job));
+== smt4a/src/_code/0023/FUN_00238ff0.cpp
+32: Window *window = reinterpret_cast<Window *>(jobGetWork(scrGetArg(0)));
+== smt4a/src/_code/0027/FUN_002761fc.cpp
+8: JobWork* jobGetWork(void);
+14: JobWork* work = jobGetWork();
+== smt4a/src/_code/battle/btlDebug/FUN_002919b4.cpp
+== smt4a/src/_code/0029/FUN_00298354.cpp
+34: JobPool *job = reinterpret_cast<JobPool *>(jobGetWork(handle));
+== smt4a/src/_code/battle/btlEditor/FUN_002984d4.cpp
+9: JobWork* jobGetWork(void);
+14: JobWork* work = jobGetWork();
+== smt4a/src/_code/002a/FUN_002ac078.cpp
+13: ShakeJobWork *work = reinterpret_cast<ShakeJobWork *>(jobGetWork(job));
+== smt4a/src/_code/002a/FUN_002ad180.cpp
+37: EventDrawWork *work = reinterpret_cast<EventDrawWork *>(jobGetWork(job));
+== smt4a/src/_code/002b/FUN_002ba870.cpp
+34: BattleDebugDrawWork *work = reinterpret_cast<BattleDebugDrawWork *>(jobGetWork(job));
+== smt4a/src/_code/002d/FUN_002dece8.cpp
+37: jobGetWork(job);
+== smt4a/src/_code/battle/btlGameOver/FUN_002dedf0.cpp
+16: GameOverBattleWorkA *jobGetWork();
+23: GameOverBattleWorkA *work = jobGetWork();
+== smt4a/src/_code/002d/FUN_002df754.cpp
+27: BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(jobGetWork(job));
+== smt4a/src/_code/002e/FUN_002e5478.cpp
+31: FadeJob *work = reinterpret_cast<FadeJob *>(jobGetWork(job));
+== smt4a/src/_code/0031/FUN_00314ef8.cpp
+7: BtlUiCloseWork *jobGetWork(void);
+20: BtlUiCloseWork *work = jobGetWork();
+== smt4a/src/_code/0031/FUN_0031bca4.cpp
+18: JobAxisWork *work = reinterpret_cast<JobAxisWork *>(jobGetWork(handle));
+== smt4a/src/_code/0031/FUN_0031bd24.cpp
+8: BattleStageLoadWork *jobGetWork(u32 handle);
+24: BattleStageLoadWork *work = jobGetWork(handle);
+== smt4a/src/_code/0031/FUN_0031bed8.cpp
+14: SlideJob *jobGetWork(u32 job);
+30: SlideJob *work = jobGetWork(job);
+== smt4a/src/_code/0031/FUN_0031c080.cpp
+25: FadeWork *work = reinterpret_cast<FadeWork *>(jobGetWork(job));
+== smt4a/src/_code/0032/FUN_0032063c.cpp
+16: DrawWork *work = (DrawWork *)jobGetWork(job);
+== smt4a/src/_code/battle/btlEditor/FUN_003285dc.cpp
+41: BtlMainStateA *work = reinterpret_cast<BtlMainStateA *>(jobGetWork((u32)job));
+== smt4a/src/_code/0034/FUN_0034da3c.cpp
+27: TextureOwnerWork *work = reinterpret_cast<TextureOwnerWork *>(jobGetWork(job));
+== smt4a/src/_code/0035/FUN_00357ea0.cpp
+24: JobAnimationWorkPrefixA *work = reinterpret_cast<JobAnimationWorkPrefixA *>(jobGetWork(process));
+== smt4a/src/_code/0035/FUN_0035c0c8.cpp
+5: LinearFadeWork *jobGetWork(u32 job);
+11: LinearFadeWork *work = jobGetWork(job);
+== smt4a/src/_code/event/2dEvent/2dEventTex/FUN_0036f424.cpp
+== smt4a/src/_code/003a/FUN_003a6f38.cpp
+1: /* NON_MATCHING: retail preserves the enable/duration constants across jobGetWork in saved registers. */
+18: FUN_0019d96c(jobGetWork(scrGetArg(0)), 1, 10);
+== smt4a/src/_code/0047/FUN_00472568.cpp
+48: SpriteJobWork *work = reinterpret_cast<SpriteJobWork *>(jobGetWork(job));
+== smt4a/src/_code/0047/FUN_00472e1c.cpp
+28: EffectDrawWorkView* work = reinterpret_cast<EffectDrawWorkView *>(jobGetWork(job));
+== smt4a/src/_code/0031/asdListBoxMarkDirty.cpp
+34: ListBoxMetrics *box = reinterpret_cast<ListBoxMetrics *>(jobGetWork(listBox));
+== smt4a/src/_code/0029/battleDrawRosterMarkerRects.cpp
+41: BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(jobGetWork(job));
+== smt4a/src/_code/0013/renderSurfaceDownsampleJob.cpp
+36: DownsampleWork *work = (DownsampleWork *)jobGetWork(job);
+== smt4a/src/_code/003c/scrCommJobWorkStart8.cpp
+13: FUN_0019d96c(reinterpret_cast<TextureSwap *>(jobGetWork(job)), command, frames);
+== smt4a/src/_code/0039/scrCommStartJobTransitionAndWait.cpp
+1: /* NON_MATCHING: compiler rematerializes7/20 after jobGetWork instead of keeping them in r6/r5 across the lookup; optimization-flag candidate. */
+23: FUN_0019d96c(reinterpret_cast<JobBlendWork *>(jobGetWork(job)), 7, 20);
+24: ((TransitionJobView*)jobGetWork(job))->control = 2;
+== smt4a/src/_code/result/WhisperEffect/whisperEffectDestroy.cpp
+19: jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010812c.cpp
+12: FrameWork *work = reinterpret_cast<FrameWork *>(jobGetWork(job));
+== smt4/src/_code/0010/FUN_0010835c.cpp
+25: DownsampleView *work = (DownsampleView *)jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010854c.cpp
+35: FrameCopyWork *work = reinterpret_cast<FrameCopyWork *>(jobGetWork(job));
+== smt4/src/_code/0010/FUN_001087f4.cpp
+8: TitleJobWork *jobGetWork(u32 job);
+14: TitleJobWork *work = jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010889c.cpp
+38: TransitionWork *work = reinterpret_cast<TransitionWork *>(jobGetWork(job));
+== smt4/src/_code/0010/FUN_0010949c.cpp
+4: FrameWork* jobGetWork(u32 job);
+10: FrameWork* work = jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010a03c.cpp
+30: FrameTexFade *jobGetWork(void);
+36: FrameTexFade *tex = jobGetWork();
+== smt4/src/_code/0010/FUN_0010b2d0.cpp
+35: TitleWork *work = reinterpret_cast<TitleWork *>(jobGetWork(job));
+== smt4/src/_code/0013/FUN_00138954.cpp
+34: CameraMoveWork *jobGetWork(u32 job);
+40: CameraMoveWork *work = jobGetWork(job);
+== smt4/src/_code/0017/FUN_0017fbe4.cpp
+25: JobCameraWork *jobGetWork(u32 job);
+34: JobCameraWork *work = jobGetWork(job);
+== smt4/src/_code/001e/FUN_001e48d0.cpp
+6: ActionStateChannelOwner *jobGetWork(u32 job);
+14: s32 index = jobGetWork(job)->current;
+== smt4/src/_code/battle/btlGameOver/FUN_0020ef14.cpp
+13: BtlGameOverJobWork* work = reinterpret_cast<BtlGameOverJobWork *>(jobGetWork(job));
+== smt4/src/_code/0021/FUN_00211e88.cpp
+12: JobBlendState* jobGetWork(u32 job);
+18: JobBlendState* blend = jobGetWork(job);
+== smt4/src/_code/battle/btlDebug/FUN_0021ec34.cpp
+10: extern BattleDebugOwnerView *jobGetWork(u32 handle);
+19: BattleDebugOwnerView *owner = jobGetWork(handle);
+== smt4/src/_code/0022/FUN_0022212c.cpp
+15: FadeWork *jobGetWork(s32 jobId);
+21: FadeWork *work = jobGetWork(jobId);
+== smt4/src/_code/0022/FUN_002248b8.cpp
+21: DrawWork *work = (DrawWork *)jobGetWork(job);
+== smt4/src/_code/0024/FUN_00247bf4.cpp
+13: JobAxisWork *jobGetWork(u32 handle);
+18: JobAxisWork *work = jobGetWork(handle);
+== smt4/src/_code/battle/btlEditor/FUN_002c9edc.cpp
+10: BtlMainState* jobGetWork(u32 job);
+17: BtlMainState* battle = jobGetWork(job);
+== smt4/src/_code/002d/FUN_002db92c.cpp
+19: TextureOwnerWork *jobGetWork(u32 job);
+27: TextureOwnerWork *work = jobGetWork(job);
+== smt4/src/_code/002e/FUN_002e0730.cpp
+28: TitleLogoWork *jobGetWork(u32 job);
+35: TitleLogoWork *work = jobGetWork(job);
+== smt4/src/_code/002e/FUN_002e2250.cpp
+5: LinearFadeWork *jobGetWork(u32 job);
+11: LinearFadeWork *work = jobGetWork(job);
+== smt4/src/_code/002f/FUN_002fc5f8.cpp
+5: SpriteTransitionWork *jobGetWork(u32 job);
+16: SpriteTransitionWork *work = jobGetWork(job);
+57: SpriteTransitionWork *current = jobGetWork(job);
+== smt4/src/_code/0038/FUN_0038a1e0.cpp
+45: SpriteTrioWork *work = reinterpret_cast<SpriteTrioWork *>(jobGetWork(job));
+== smt4/src/_code/0039/FUN_00391000.cpp
+16: IntroWork *jobGetWork(u32 job);
+25: IntroWork *work = jobGetWork(job);
+== smt4/src/_code/0025/asdListBoxMarkDirty.cpp
+24: ListBoxMetrics *jobGetWork(u32 job);
+34: ListBoxMetrics *box = jobGetWork(job);
+== smt4/src/_code/001f/randomOffsetJobUpdate.cpp
+11: ShakeJobWorkIV *work = reinterpret_cast<ShakeJobWorkIV *>(jobGetWork(job));
+== smt4/src/_code/0022/scrCommJobStartAlphaFadeOut.cpp
+16: AlphaFadeJob* work = (AlphaFadeJob*)jobGetWork(job);
+== smt4/src/_code/0031/scrCommJobWorkStart1x10.cpp
+1: /* NON_MATCHING: retail keeps the constants 1 and 10 in r5/r4 across the jobGetWork call; built propagates them as immediates (armcc leaves two nops in the slot
+19: FUN_002a880c(reinterpret_cast<u32>(jobGetWork(job)), 1, 10);
+== smt4/src/_code/0021/scrCommSetBackgroundFadeDuration.cpp
+18: BackgroundFadeWork *work = reinterpret_cast<BackgroundFadeWork *>(jobGetWork(job));
+== smt4/src/_code/0030/scrCommStartJobTransitionAndWait.cpp
+1: /* NON_MATCHING: compiler rematerializes7/20 after jobGetWork instead of keeping them in r6/r5 across the lookup; optimization-flag candidate. */
+23: FUN_002a880c(reinterpret_cast<JobBlendWork *>(jobGetWork(job)), 7, 20);
+24: ((TransitionJobView*)jobGetWork(job))->control = 2;

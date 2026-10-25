@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlState* btlGetMainState(void);
 BtlUnitEntry* btlMainFindActiveEntry(BtlState* state);
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
@@ -17,15 +17,15 @@ u32 btlScriptAnyLiveUnitHasFlag(void)
     u32 group = btlScriptResolveGroupArg(scrGetArg(1));
     FUN_002499fc(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
-        BtlUnitEntry* unit = &btlGetMainState()->units[index];
+        BtlUnitEntry* unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) &&
             (unit->flagMask & (1u << flag))) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (btlGetMainState()->hasActiveEntry != 0) {
-        BtlUnitEntry* active = btlMainFindActiveEntry(btlGetMainState());
+    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
+        BtlUnitEntry* active = btlMainFindActiveEntry(reinterpret_cast<BtlState *>(btlGetMainState()));
         if (active != NULL && (active->flagMask & (1u << flag))) {
             scrSetResult(1);
             return 1;

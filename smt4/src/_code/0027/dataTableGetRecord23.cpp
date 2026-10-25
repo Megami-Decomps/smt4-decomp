@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match2_AocTable23.h"
+#include "shard/dataTableGetRecord23.h"
 
 extern "C" {
 extern AocSystem* g_aocSystem;

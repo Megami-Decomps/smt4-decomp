@@ -46,7 +46,7 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int campIsState85(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
@@ -130,7 +130,7 @@ void FUN_0023eaf8(void)
     temp_v4 = FUN_002a4894(temp_v11);
     temp_v1 = *(short *)(temp_v8 + (temp_v4 + temp_v3) * 2);
     temp_v15[0] = '\0';
-    temp_v5 = FUN_001834a4(0x1e,0xc1);
+    temp_v5 = asdTMTexTableEntryAt(0x1e,0xc1);
     temp_v3 = temp_v11;
     FUN_003450d4(temp_v11,temp_v5,temp_v2 + 0xd28,(int)*(short *)(temp_v2 + 0xd42),
                  (int)*(short *)(temp_v2 + 0xd3e),(int)*(short *)(temp_v2 + 0xd40),temp_v15,0,1);

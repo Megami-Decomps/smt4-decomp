@@ -23,7 +23,7 @@ void spriteStartAnimationByIndex(u8 *sprite, s32 animation);
 void FUN_00295eb0(u8 *sprite, s32 group, s32 part);
 void FUN_002963ec(u8 *sprite, s32 x, s32 y);
 void pairSetFirstResetSecond(u8 *sprite, s32 id);
-LayoutSize *FUN_002bf4f8(s32 group, u32 part);
+LayoutSize *asdTMTexTableEntryAt(s32 group, u32 part);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 /* Sets up popup slot `slot`: shows `value` as five digit sprites (the sprite set depends on
@@ -83,10 +83,10 @@ void FUN_003adca8(u32 unused1, s32 slot, s32 value, u32 unused2, f32 x, f32 y, f
     }
     FUN_00295eb0(first, 0x15, 0x419);
     FUN_00295eb0(second, 0x15, 0x418);
-    LayoutSize *size = FUN_002bf4f8(0x15, *(u32 *)(popup + 0x820C));
+    LayoutSize *size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x820C));
     FUN_002963ec(first, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
     FUN_002963ec(first, (s16)(s32)position[0], (s16)(s32)position[1]);
-    size = FUN_002bf4f8(0x15, *(u32 *)(popup + 0x8298));
+    size = asdTMTexTableEntryAt(0x15, *(u32 *)(popup + 0x8298));
     FUN_002963ec(second, -((size->width & 0x7FFF) >> 1), -((size->height & 0x7FFF) >> 1));
     FUN_002963ec(second, (s16)(s32)position[0], (s16)(s32)position[1]);
 }

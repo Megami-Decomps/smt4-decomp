@@ -1,6 +1,7 @@
 /* NON_MATCHING: callback now freeCameraProcessUpdate with real process types; retail picks r1 for the pooled callback temp and copies the process id through r1 before the stm, built uses r0. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct FreeCameraWork {
     u32 process;
@@ -15,7 +16,6 @@ struct FreeCameraWork {
 extern "C" {
 extern FreeCameraWork* g_freeCamera;
 s32 freeCameraProcessUpdate(u32 handle);
-void* asdOperatorNew(u32 size);
 
 void FUN_00348c50(u32 mode)
 {

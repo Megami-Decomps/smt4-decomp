@@ -1,10 +1,10 @@
 /* NON_MATCHING: parameter registers (r8/r9 swapped), rank-base hoisting in the learn loop and clamp temp differ. */
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/Shard004B.h"
+#include "gamedata/Table04Record.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartySlotTableA *gameGetSlotTable(void);
-const ItemRankDefinition *dataTable04FindById(u32);
 s32 FUN_0035e458(u32);
 s32 FUN_0035d89c(u32);
 void FUN_004cd0c8(PartySlotA *, s16, u16 *);
@@ -42,7 +42,7 @@ u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease)
         u32 skill = learned[index];
         if (slot && nextSlot < 8) {
             ranks->items[nextSlot] = skill;
-            const ItemRankDefinition *definition = dataTable04FindById(skill);
+            const ItemRankDefinition *definition = (const ItemRankDefinition *)dataTable04FindById(skill);
             s32 rank = 0;
             if (definition && definition->category < 18)
                 rank = ranks->categoryRanks[definition->category];

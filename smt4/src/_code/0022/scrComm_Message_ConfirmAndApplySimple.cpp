@@ -1,13 +1,13 @@
 /* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
 #include "common.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
+#include "shard/FUN_0029022c.h"
 
 extern "C" {
 
 s32 scrGetCommandFrame(void);
 s32 scrWorkGetValue(s32 index);
 int scrWorkSetValue(s32 index, s32 value);
-s32 FUN_0029022c(void);
 void *fileSlotGetBuffer(u32 slot);
 void *FUN_002903f0(void);
 int uiBindRecordRewardText(void *object, s32 arg0, s32 arg1);

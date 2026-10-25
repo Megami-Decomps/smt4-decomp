@@ -37,7 +37,7 @@ typedef struct {
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
-extern int FUN_002865f8(void);
+extern int scrGetCommandOwner(void);
 /* Supplied declaration required: FUN_0028784c. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: messageSlotSet. */
@@ -106,7 +106,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
     messageSlotSet(0);
     return 1;
   }
-  temp_v13 = FUN_002865f8();
+  temp_v13 = scrGetCommandOwner();
   temp_v1 = 0;
   temp_v11 = '\0';
   temp_v14 = 0;

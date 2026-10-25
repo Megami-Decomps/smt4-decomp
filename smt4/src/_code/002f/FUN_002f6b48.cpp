@@ -1,4 +1,5 @@
 /* NON_MATCHING: ARMCC merges flag tests and uses an immediate target limit with different saved registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BattleUnitSlot.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-BtlMainState* btlGetMainState(void);
 
 // Install two script action ids and select up to two eligible reserve entries.
 u32 FUN_002f6b48(void)

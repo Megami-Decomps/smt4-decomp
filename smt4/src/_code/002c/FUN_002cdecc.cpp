@@ -1,5 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match1_Table25Record.h"
+#include "shard/FUN_002cdecc.h"
 
 extern "C" Table25Record* FUN_002cdecc(s32 id)
 {

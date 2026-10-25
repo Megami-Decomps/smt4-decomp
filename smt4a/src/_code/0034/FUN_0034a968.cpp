@@ -1,25 +1,20 @@
-/* NON_MATCHING: scheduling only: retail materialises the constants 0 and 3 (r2, r1) before loading g_statusDown */
 #include "status/StatusDown.h"
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
 
-/* Changes the state, remembering the previous one. */
-static void stateTrackSet(StatusDownTrack *track, u32 state)
+/* Enters `state`, remembering the previous one and restarting the timer. */
+static void statusEnterState(StatusDownStateA *status, u32 state)
 {
-    u32 previous = track->state;
-
-    track->state = state;
-    track->previous = previous;
+    status->timer = 0;
+    status->track.previous = status->track.state;
+    status->track.state = state;
 }
 
-/* Enters state 3, remembering the previous state, and restarts the timer. */
+/* Enters state 3. */
 void FUN_0034a968(void)
 {
-    StatusDownStateA *status = g_statusDown;
-
-    status->timer = 0;
-    stateTrackSet(&status->track, 3);
+    statusEnterState(g_statusDown, 3);
 }
 
 } /* extern "C" */

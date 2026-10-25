@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -20,7 +21,6 @@ extern void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 extern s32 g_btlCamera;
 
 extern s32 FUN_0013def0(s32 arg);
-extern u32 btlGetMainState(void);
 extern void FUN_003f14a0(void);
 extern void btlTalkBustUpDestroy(void);
 extern void holderStopJob2(u32 state);
@@ -41,7 +41,7 @@ s32 talkEventStartScript(TalkEvent *event)
         return 0;
     }
     if (FUN_0013def0(0) == 3 && FUN_0013def0(1) == 3) {
-        u32 state = btlGetMainState();
+        u32 state = reinterpret_cast<u32>(btlGetMainState());
 
         FUN_003f14a0();
         btlTalkBustUpDestroy();

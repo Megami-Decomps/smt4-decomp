@@ -1,6 +1,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
+#include "shard/btlHasReserveReplacement.h"
 
 // The count lies beyond the existing party-slot prefix view.
 struct ReservePartyView {

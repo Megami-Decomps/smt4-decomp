@@ -1,6 +1,6 @@
 #include "shard/W6_W6Match3_PointDifference.h"
 
-extern "C" const PointLookupRecord* FUN_001834a4(u32 bank, u32 index);
+extern "C" const PointLookupRecord* asdTMTexTableEntryAt(u32 bank, u32 index);
 
 static inline void pointDeltaSetDifference(PointDeltaWork *output, const PointLookupRecord *first,
                                           const PointLookupRecord *second)
@@ -16,7 +16,7 @@ static inline void pointDeltaSetDifference(PointDeltaWork *output, const PointLo
 // Store the coordinate difference between two records in the same bank.
 extern "C" void uiGetLayoutPointDifference(PointDeltaWork* output, u32 bank, u32 firstIndex, u32 secondIndex)
 {
-    const PointLookupRecord* first = FUN_001834a4(bank, firstIndex);
-    const PointLookupRecord* second = FUN_001834a4(bank, secondIndex);
+    const PointLookupRecord* first = asdTMTexTableEntryAt(bank, firstIndex);
+    const PointLookupRecord* second = asdTMTexTableEntryAt(bank, secondIndex);
     pointDeltaSetDifference(output, first, second);
 }

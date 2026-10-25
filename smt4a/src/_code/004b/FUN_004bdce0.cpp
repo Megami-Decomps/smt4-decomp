@@ -2,6 +2,7 @@
 #include "shard/Shard0037.h"
 #include "shard/S3UiLookup.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "text/TextDraw.h"
 
 struct BattleRosterLabelMode {
     u8 unk00[4];
@@ -9,17 +10,16 @@ struct BattleRosterLabelMode {
 };
 extern "C" {
 extern const char DAT_0052d838[];
-UiTextMetrics *FUN_001834a4(u32 texture, u32 frame);
+UiTextMetrics *asdTMTexTableEntryAt(u32 texture, u32 frame);
 BattleRosterRecordA *FUN_003e4d68(u32 id);
 const char *FUN_00180114(u16 id);
 void textFormatBuffer(char *output, const char *format, ...);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
-void FUN_00162790(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 extra, f32 alpha);
 
 /* Centers each active roster member's label in its layout slot, dimming unselected members in mode two. */
 void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
 {
-    UiTextMetrics *origin = FUN_001834a4(0x11, 0x11);
+    UiTextMetrics *origin = asdTMTexTableEntryAt(0x11, 0x11);
     f32 dimAlpha = alpha * 0.5f;
     s32 visible = 0;
     for (s32 slot = 0; slot < 12; ++slot) {
@@ -31,7 +31,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
             }
             char text[64];
             textFormatBuffer(text, DAT_0052d838, FUN_00180114(record->label.nameId));
-            UiTextMetrics *placement = FUN_001834a4(0x11, visible + 0xAE);
+            UiTextMetrics *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
             s32 labelX = origin->x + (placement->x + (placement->dimensions[0] - width) / 2 + x);
             s32 labelY = placement->y + origin->y + y;
@@ -39,7 +39,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
             if ((record->label.flags & 2) != 0) {
                 color = 0xDC0F14FF;
             }
-            FUN_00162790(1, color, text, (f32)labelX, (f32)labelY, 0.0f, 0.0f, labelAlpha);
+            textDrawString(1, color, text, (f32)labelX, (f32)labelY, 0.0f, 0.0f, labelAlpha);
             ++visible;
         }
     }

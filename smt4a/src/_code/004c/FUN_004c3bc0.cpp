@@ -1,4 +1,5 @@
 /* NON_MATCHING: constant-return load placement and 64-bit sharing-mask register allocation differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -7,7 +8,6 @@ struct BattleValueShareMasks {
     u64 enabled;
 };
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
 void dataTable41FindById(u32);

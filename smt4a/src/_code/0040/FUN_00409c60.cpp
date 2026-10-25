@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reads the dirty flag through a 0x11E8 offset register (ldrb [r1, r0]) before using this+0x1000; ours addresses it from the hoisted base. Everything else matches. */
 #include "common.h"
 
 extern "C" {
@@ -13,7 +12,7 @@ struct CachedVectorOwner {
     /* 0x0530 */ u32 resource;
     /* 0x0534 */ u8 unk0534[0xCA4];
     /* 0x11D8 */ Vec4f cached;
-    /* 0x11E8 */ u8 dirty;
+    /* 0x11E8 */ s8 dirty;
 };
 
 void FUN_0019f828(u32 resource, Vec4f *vector);

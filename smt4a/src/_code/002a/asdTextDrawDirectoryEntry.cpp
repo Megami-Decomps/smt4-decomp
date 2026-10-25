@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "shard/asdTextDrawDirectoryEntry.h"
 
 extern "C" {
 void FUN_0036bea0(AsdText *text, u32 font, s32 mode, s32 x, s32 y, const char *message);

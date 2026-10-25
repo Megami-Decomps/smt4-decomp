@@ -1,4 +1,5 @@
 #include "gamedata/SupportUnitRecord.h"
+#include "gamedata/UnitStatInitialization.h"
 
 extern "C" {
 
@@ -8,7 +9,7 @@ SupportUnitRecordA *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 
 /* Entry `index` of the category's data table (table 10), or 0 past its end. The category picks the section: 5 -> 2, 4 -> 1, 0x5c -> 4, 0x5d -> 3, others 0. */
-SupportUnitRecordA *dataTableGetCategoryEntry(s32 category, u32 index)
+void *dataTableGetCategoryEntry(s32 category, u32 index)
 {
     s32 section = 0;
     void *table;

@@ -1,5 +1,6 @@
 /* Frees the context's primary and secondary handles, then runs the shared teardown. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -15,14 +16,13 @@ typedef struct Context {
 
 extern u32 g_aocSystem;
 
-extern Context *jobGetWork(void);
 extern void FUN_001b2d54(u32 table, u32 owner, u32 handle);
 extern void asdTMTexTableReleaseNode(u32 owner, u32 handle);
 extern void asdMemFree(Context *ctx);
 
-void asdMTeXReleaseJobContext(void)
+void asdMTeXReleaseJobContext(u32 job)
 {
-    Context *ctx = jobGetWork();
+    Context *ctx = (Context *)jobGetWork(job);
 
     if (ctx->hasPrimary != 0) {
         asdTMTexTableReleaseNode(ctx->owner, ctx->primary);

@@ -1,4 +1,5 @@
 #include "shard/Shard0040.h"
+#include "shard/countersRaiseA.h"
 
 extern "C" {
 

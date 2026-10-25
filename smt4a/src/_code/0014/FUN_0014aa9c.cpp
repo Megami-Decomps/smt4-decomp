@@ -32,7 +32,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int mapMainIsIdle(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -130,7 +130,7 @@ void FUN_0014aa9c(unsigned int param_1)
     temp_v6 = temp_v2 + 0xf18;
     temp_v5 = 0;
     do {
-      temp_v7 = FUN_001834a4(0x14,temp_v5 + 0x7d5);
+      temp_v7 = asdTMTexTableEntryAt(0x14,temp_v5 + 0x7d5);
       temp_v0 = *(short *)(temp_v7 + 8);
       temp_v1 = *(short *)(temp_v7 + 10);
       efctSetSpeed();

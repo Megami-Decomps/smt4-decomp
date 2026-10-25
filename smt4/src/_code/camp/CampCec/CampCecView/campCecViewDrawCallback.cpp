@@ -35,7 +35,7 @@ s32 FUN_002c5d80(u32, u32);
 void FUN_002c198c(RenderCtx *);
 u32 FUN_0025981c();
 CecViewSavedRecord *saveGetIndexedMapValue(u32);
-u16 *FUN_002bf4f8(u32, s32);
+u16 *asdTMTexTableEntryAt(u32, s32);
 void uiDrawPanelWithValue(CecViewWidget *, s32, s32, u32, s32);
 void FUN_001eb874(u32, CecViewSavedRecord *, CecViewWidget *, s32, s32, bool);
 void FUN_002e15f8(CecViewWidget *, s32, s32);
@@ -55,7 +55,7 @@ u32 campCecViewDrawCallback()
         CecViewSavedRecord *record = saveGetIndexedMapValue(fields->first + row);
         bool empty = record->value48 == 0;
         bool selected = fields->selected == fields->first + row;
-        const s16 *spriteWords = reinterpret_cast<const s16 *>(FUN_002bf4f8(0x39, row + 0x96));
+        const s16 *spriteWords = reinterpret_cast<const s16 *>(asdTMTexTableEntryAt(0x39, row + 0x96));
         s32 y = spriteWords[5];
         s32 x = spriteWords[4];
         FUN_001eb874(view->handle[row], record, &fields->widgets[row + 1], x, y, empty);

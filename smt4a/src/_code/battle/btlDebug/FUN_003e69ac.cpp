@@ -1,4 +1,5 @@
 /* NON_MATCHING: the 64-bit flag clears use per-word and/bic with mvn in retail (built folds the masks with orr+bic), the cases share one exit instead of duplicating the epilogue, and the stack setup assigns script mode via a separate register */
+#include "battle/BtlMainAccess.h"
 #include "script/scrScriptProcess.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -15,22 +16,12 @@ typedef struct BtlFlagWord {
     u64 whole;
 } BtlFlagWord;
 
-typedef struct BtlContinueView {
-    /* 0x0000 */ u8 unk0000[0x2268];
-    /* 0x2268 */ u32 entry;
-    /* 0x226C */ u8 unk226C[0x2334];
-    /* 0x45A0 */ BtlFlagWord flags;
-    /* 0x45A8 */ u8 unk45A8[0x6C8];
-    /* 0x4C70 */ u16 cursorA;
-    /* 0x4C72 */ u16 cursorB;
-} BtlContinueView;
 
 extern BtlFlagWord DAT_005715d0[5];
 extern const char DAT_0052801c[];
 extern u32 g_btlUiBlock;
 extern u32 g_btlAux;
 
-BtlContinueView *btlGetMainState(void);
 ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
 s32 dialogIsActive(void);
 void dialogClose(s32 arg);
@@ -40,7 +31,7 @@ void sysPlaySe(u32 id);
 s32 scrRunOpcodesStub(ScriptRunState *script);
 s32 gameFlagIsSet(u32 flag);
 void btlUiClearSelectionSlots(u32 block);
-void FUN_003ebc08(BtlContinueView *state, s32 arg);
+void FUN_003ebc08(BtlMainStateA *state, s32 arg);
 
 void FUN_003756c8(s32 arg);
 void btlStageResetAndClearCameraFlag(u32 aux);
@@ -62,10 +53,10 @@ u32 FUN_003e69ac(ContinueState *continueState)
         next = 2;
         break;
     case 2: {
-        BtlContinueView *battle = btlGetMainState();
-        continueState->script = FUN_00275bc8(continueState->resource, battle->entry);
+        BtlMainStateA *battle = btlGetMainState();
+        continueState->script = FUN_00275bc8(continueState->resource, battle->helpMessages.context);
         continueState->script->mode = 2;
-        battle->flags.whole = battle->flags.whole & ~DAT_005715d0[1].whole & ~DAT_005715d0[2].whole;
+        battle->stateFlags64.bits = battle->stateFlags64.bits & ~DAT_005715d0[1].whole & ~DAT_005715d0[2].whole;
         if (dialogIsActive() != 0) {
             dialogClose(1);
         }
@@ -83,13 +74,13 @@ u32 FUN_003e69ac(ContinueState *continueState)
             return 0;
         }
         if (gameFlagIsSet(0x590) != 0) {
-            BtlContinueView *battle = btlGetMainState();
-            if ((DAT_005715d0[0].whole & battle->flags.whole) == 0) {
-                battle->cursorA = 8;
-                battle->cursorB = 8;
+            BtlMainStateA *battle = btlGetMainState();
+            if ((DAT_005715d0[0].whole & battle->stateFlags64.bits) == 0) {
+                battle->targetCapacity.counts[0] = 8;
+                battle->targetCapacity.counts[1] = 8;
                 btlUiClearSelectionSlots(g_btlUiBlock);
                 FUN_003ebc08(battle, 1);
-                battle->flags.whole = battle->flags.whole & ~DAT_005715d0[3].whole & ~DAT_005715d0[4].whole;
+                battle->stateFlags64.bits = battle->stateFlags64.bits & ~DAT_005715d0[3].whole & ~DAT_005715d0[4].whole;
                 gameFlagSetValue(0x590, 0, 1);
                 return 0;
             }

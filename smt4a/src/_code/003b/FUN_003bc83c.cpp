@@ -1,4 +1,5 @@
 /* NON_MATCHING: vector/end-pointer registers and encoded-category loop strength reduction differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -9,9 +10,7 @@
 extern "C" {
 s32 scrGetArg(s32);
 void sysMemClear(void *, u32);
-BtlMainStateA *btlGetMainState();
 const Table8Record *dataTable8FindRecord(u32);
-const Table04Record *dataTable04FindById(u32);
 
 /* Keep only candidates whose skill category is supplied by a matching active combatant. */
 u32 FUN_003bc83c()

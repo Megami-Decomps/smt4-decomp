@@ -4614,3 +4614,8 @@
 0029e648 messageBannerInitSelection
 00324540 scrCommResultGetDemonId
 002dfe08 mapIfRequestRecordById
+002865f8 scrGetCommandOwner
+002a6d08 objHasFlagBit16
+002bf4f8 asdTMTexTableEntryAt
+002be5a4 textDrawString
+00248620 dataTableFindRecordWord

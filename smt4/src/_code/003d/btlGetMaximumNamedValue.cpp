@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail spells out four checks and retains an unused 9999 literal load; the readable loop is not unrolled by this compiler. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct NamedBattleValue {
@@ -13,7 +14,6 @@ struct NamedBattleValues {
 };
 
 extern "C" {
-void *btlGetMainState(void);
 s32 FUN_00293230(void *state);
 u32 libc_strlen(const char *);
 s32 libc_strcmp(const char *, const char *);
@@ -21,7 +21,7 @@ s32 libc_strcmp(const char *, const char *);
 // Return the largest valid value among the four named entries, or -1 when unavailable.
 s32 btlGetMaximumNamedValue(NamedBattleValues *values)
 {
-    if (values->entries == NULL || FUN_00293230(btlGetMainState()))
+    if (values->entries == NULL || FUN_00293230(static_cast<void *>(btlGetMainState())))
         return -1;
     s32 maximum = 0;
     for (s32 i = 0; i < 4; ++i) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: growth parameters initialize with byte/halfword stores rather than retail's packed-register construction and spill layout. */
 #include "common.h"
+#include "shard/flagBitIsSet.h"
 
 struct DemonGrowthRecord {
     /* 0x00 */ u16 id;
@@ -35,7 +36,6 @@ typedef char DemonLevelWorkSizeCheck[sizeof(DemonLevelWork) == 0x4a ? 1 : -1];
 extern "C" {
 DemonGrowthRecord *devilGetRecord(u16 id);
 u32 FUN_003c219c(DemonLevelWork *work, LevelGrowthParameters *parameters, u32 flags);
-s32 flagBitIsSet(u32 id);
 s32 FUN_00245768(u32 id);
 void FUN_0024571c(u32 id, s32 value);
 void unitRecalculateEffectiveStats(DemonLevelWork *work);

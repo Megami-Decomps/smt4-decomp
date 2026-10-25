@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail writes state/prevState with one stm (r1 = 14, r2 = old state); armcc here stores them as separate pre-indexed stores. */
 #include "common.h"
 
 extern "C" {
@@ -15,19 +14,23 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown; /* 0x44e190 */
 
+/* Enters `state`, remembering the previous one and restarting the state timer. */
+static __inline void statusDownEnter(StatusDown *status, u32 state)
+{
+    status->stateTime = 0;
+    status->prevState = status->state;
+    status->state = state;
+}
+
 /* Enters state 14 (remembering the previous one); resets the cursor when `keepCursor` is 0. */
 void FUN_0030ab34(s32 keepCursor)
 {
     StatusDown *status = g_statusDown;
-    u32 old;
 
     if (keepCursor == 0) {
         g_statusDown->cursor = -1;
     }
-    old = status->state;
-    status->stateTime = 0;
-    status->state = 14;
-    status->prevState = old;
+    statusDownEnter(status, 14);
 }
 
 }

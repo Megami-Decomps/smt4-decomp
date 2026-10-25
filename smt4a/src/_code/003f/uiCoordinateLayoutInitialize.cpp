@@ -25,13 +25,13 @@ struct UiCoordinateLayout {
     f32 offsetZ;
 };
 extern "C" {
-u16 *FUN_001834a4(u32 group, s32 index);
+u16 *asdTMTexTableEntryAt(u32 group, s32 index);
 void sysMemClear(void *memory, u32 size);
 }
 
 static __inline const SpriteInfo *layoutSprite(s32 index)
 {
-    return (const SpriteInfo *)FUN_001834a4(12, index);
+    return (const SpriteInfo *)asdTMTexTableEntryAt(12, index);
 }
 
 extern "C" void uiCoordinateLayoutInitialize(UiCoordinateLayout *layout)

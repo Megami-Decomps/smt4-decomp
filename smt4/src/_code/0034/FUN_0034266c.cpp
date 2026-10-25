@@ -1,7 +1,7 @@
 /* NON_MATCHING: near miss: retail loads phase/phaseEnd as one vldmia pair and orders the pool constants differently; the rest of the animation step is the same sequence. */
 #include "common.h"
 
-/* Sprite description returned by FUN_002bf4f8(group, id). */
+/* Sprite description returned by asdTMTexTableEntryAt(group, id). */
 struct SpriteInfo {
     u8 unk00[4];
     u16 width;      // 0x04 (bit 15 is a flag)
@@ -27,7 +27,7 @@ struct BannerAnim {
     f32 angle;              // 0x128
 };
 
-extern "C" SpriteInfo *FUN_002bf4f8(u32 group, u32 id);
+extern "C" SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 
 /* Advance the banner animation: the wave timers, the sliding phase and the per-letter fade-ins. */
 extern "C" void FUN_0034266c(BannerAnim *anim)
@@ -63,7 +63,7 @@ extern "C" void FUN_0034266c(BannerAnim *anim)
     }
     anim->position = anim->target / phaseEnd + anim->position;
     if (anim->revealed != 0) {
-        SpriteInfo *info = FUN_002bf4f8(20, 55);
+        SpriteInfo *info = asdTMTexTableEntryAt(20, 55);
         if (anim->revealed < 8 &&
             !(anim->progress - static_cast<f32>((info->width & 0x7FFF) * anim->revealed) < anim->target - anim->position)) {
             do {

@@ -56,7 +56,7 @@ int soundChannelStopAll(...);
 int FUN_003d54f8(...);
 int controllerGetSourceValue(...);
 int linkHolderApplyFirst(...);
-int FUN_003e54b8(...);
+int slotTargetApplyActiveValue(...);
 int linkHolderSetFlag(...);
 
 int textFormatBuffer(...);
@@ -241,7 +241,7 @@ extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderApplyFirst. */
-/* Supplied declaration required: FUN_003e54b8. */
+/* Supplied declaration required: slotTargetApplyActiveValue. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: FUN_003e5858. */
@@ -683,7 +683,7 @@ LAB_0027edcc:
     }
     temp_v7 = linkHolderCallFirst(puVar3[0xf]);
     if ((temp_v7 != 0x13) || (controllerGetSourceValue(puVar3[0xf]), in_s0 < 0x41a00000)) break;
-    FUN_003e54b8(puVar3[0xf]);
+    slotTargetApplyActiveValue(puVar3[0xf]);
     temp_v4 = puVar3[0xf];
     linkedTargetSetFloat(temp_v4);
     break;

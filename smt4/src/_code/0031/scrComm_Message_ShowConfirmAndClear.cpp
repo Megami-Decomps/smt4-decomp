@@ -27,7 +27,7 @@ extern MessageMainView g_messageMain;
 
 void bustupCutAnimRequestStopSlots(void);
 void eventTexRequestStopAll(void);
-u32 FUN_002865f8(void);
+u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 u32 FUN_002866b4(u32 message, u32 argument, s32 frame,
@@ -46,7 +46,7 @@ u32 scrComm_Message_ShowConfirmAndClear(void)
         currentState->unkA11 = 20;
     }
 
-    u32 message = FUN_002865f8();
+    u32 message = scrGetCommandOwner();
     u32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
     u32 result = FUN_002866b4(message, argument, frame, 6, 0, 0);

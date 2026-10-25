@@ -5,6 +5,8 @@
 #include "shard/W5_W5Match7_EntrySort.h"
 #include "util/DataTable08Sub2GetRecord.h"
 #include "util/SlotRangeSelect.h"
+#include "shard/btlResolveEntryChoice.h"
+#include "gamedata/Table04Record.h"
 
 namespace {
 struct BattleActionDescriptor {
@@ -49,11 +51,9 @@ struct BattleChoiceSpan {
 }
 
 extern "C" {
-BattleActionSkill *dataTable04FindById(u32 id);
 BattleActionItem *dataTable8FindRecord(s32 id);
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
-u32 btlResolveEntryChoice(s32 choice);
 const BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute);
 
@@ -75,7 +75,7 @@ s32 FUN_003bc59c(void)
             s32 found = 0;
             if ((flags & g_btlCandidateMasks.unavailable) != 0 || (flags & g_btlCandidateMasks.singleAction) != 0) {
                 if (actions->selected.kind == 2 || actions->selected.kind == 3) {
-                    const BattleActionSkill *skill = dataTable04FindById(actions->selected.id);
+                    const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(actions->selected.id);
                     if (skill != NULL && attribute == skill->attribute) {
                         found = 1;
                     }
@@ -83,7 +83,7 @@ s32 FUN_003bc59c(void)
                 if (actions->selected.kind == 8) {
                     const BattleActionItem *item = dataTable8FindRecord(actions->selected.id);
                     if (item != NULL && item->skillId != 0) {
-                        const BattleActionSkill *skill = dataTable04FindById(item->skillId);
+                        const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(item->skillId);
                         if (skill != NULL && attribute == skill->attribute) {
                             found++;
                         }
@@ -92,7 +92,7 @@ s32 FUN_003bc59c(void)
             } else {
                 for (s32 slot = 0; slot < 10; slot++) {
                     if (actions->candidates[slot].kind == 2 || actions->candidates[slot].kind == 3) {
-                        const BattleActionSkill *skill = dataTable04FindById(actions->candidates[slot].id);
+                        const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(actions->candidates[slot].id);
                         if (skill != NULL && attribute == skill->attribute) {
                             found++;
                         }
@@ -100,7 +100,7 @@ s32 FUN_003bc59c(void)
                     if (actions->candidates[slot].kind == 8) {
                         const BattleActionItem *item = dataTable8FindRecord(actions->candidates[slot].id);
                         if (item != NULL && item->skillId != 0) {
-                            const BattleActionSkill *skill = dataTable04FindById(item->skillId);
+                            const BattleActionSkill *skill = (const BattleActionSkill *)dataTable04FindById(item->skillId);
                             if (skill != NULL && attribute == skill->attribute) {
                                 found++;
                             }

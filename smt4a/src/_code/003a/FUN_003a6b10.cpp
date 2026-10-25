@@ -8,7 +8,7 @@ struct MessagePopupWindow {
     /* 0x174 */ u32 unk174;
     /* 0x178 */ s32 value;
     /* 0x17C */ u8 enabledA;
-    /* 0x17D */ u8 enabledB;
+    /* 0x17D */ s8 enabledB;
     /* 0x17E */ u8 unk17E[2];
     /* 0x180 */ s32 valueCopy;
     /* 0x184 */ f32 valueFloat;

@@ -1,4 +1,5 @@
 #include "ui/MessageMain.h"
+#include "shard/messageDismissNumericBanner.h"
 extern "C" MessageGlobalsA g_messageMain;
 
 struct MessageNumericBanner {

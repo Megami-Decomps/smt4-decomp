@@ -13,7 +13,7 @@ static __inline u32 lcgNext(void)
 // Draw an inclusive random integer, accepting the endpoints in either order.
 extern "C" s32 FUN_0034ef58(s32 minimum, s32 maximum)
 {
-    s32 upper = maximum;
+    u32 upper = maximum;
     if (minimum > maximum) {
         upper = minimum;
         minimum = maximum;

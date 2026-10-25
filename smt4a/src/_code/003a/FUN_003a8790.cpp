@@ -7,7 +7,6 @@
 
 extern "C" {
 const Table00Record *dataTable00FindById(u32);
-const Table04Record *dataTable04FindById(u32);
 void scrSetResult(u32);
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32);

@@ -34,7 +34,7 @@ struct PanelSizePairIndexSetsA {
 extern "C" {
 extern const PanelSizeIndexSetsA DAT_00530a4c;
 extern const PanelSizePairIndexSetsA DAT_0052fe4c;
-const SpriteSizeRecordA *FUN_001834a4(u32 table, u32 sprite);
+const SpriteSizeRecordA *asdTMTexTableEntryAt(u32 table, u32 sprite);
 void pairSetHalves(PanelSizeObjectA *object, s32 width, s32 height);
 
 // Apply the sprite dimensions chosen for a two-, three- or four-column panel.
@@ -46,23 +46,23 @@ void uiApplyIndexedPanelSpriteSizes(IndexedPanelSizeWorkA *work)
         switch (work->columns) {
         case 2: {
             SpriteIndices2 primary = DAT_0052fe4c.first;
-            first = FUN_001834a4(8, primary.ids[work->selection]);
+            first = asdTMTexTableEntryAt(8, primary.ids[work->selection]);
             SpriteIndices2 secondary = DAT_0052fe4c.second;
-            second = FUN_001834a4(8, secondary.ids[work->selection]);
+            second = asdTMTexTableEntryAt(8, secondary.ids[work->selection]);
             break;
         }
         case 3: {
             SpriteIndices3 primary = DAT_00530a4c.firstThree;
-            first = FUN_001834a4(8, primary.ids[work->selection]);
+            first = asdTMTexTableEntryAt(8, primary.ids[work->selection]);
             SpriteIndices3 secondary = DAT_00530a4c.secondThree;
-            second = FUN_001834a4(8, secondary.ids[work->selection]);
+            second = asdTMTexTableEntryAt(8, secondary.ids[work->selection]);
             break;
         }
         case 4: {
             SpriteIndices4 primary = DAT_00530a4c.firstFour;
-            first = FUN_001834a4(8, primary.ids[work->selection]);
+            first = asdTMTexTableEntryAt(8, primary.ids[work->selection]);
             SpriteIndices4 secondary = DAT_00530a4c.secondFour;
-            second = FUN_001834a4(8, secondary.ids[work->selection]);
+            second = asdTMTexTableEntryAt(8, secondary.ids[work->selection]);
             break;
         }
         }

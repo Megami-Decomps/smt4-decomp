@@ -1,4 +1,3 @@
-/* NON_MATCHING: the literal pool order differs: retail pools DAT_0044fce0 before g_effectEditor. */
 #include "common.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 
@@ -27,7 +26,8 @@ void FUN_00242f94(void *body, void *texture, const void *table);
 /* Forwards the effect's body (0x98) with the editor's texture and DAT_0044fce0. */
 void FUN_00328738(Object00328738 *object)
 {
-    FUN_00242f94(object->effect->body, reinterpret_cast<EditorTexture00328738 &>(g_effectEditor).texture, DAT_0044fce0);
+    u8 *table = DAT_0044fce0;
+    FUN_00242f94(object->effect->body, reinterpret_cast<EditorTexture00328738 &>(g_effectEditor).texture, table);
 }
 
 } /* extern "C" */

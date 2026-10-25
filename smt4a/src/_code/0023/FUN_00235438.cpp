@@ -9,7 +9,7 @@ int FUN_001ada74(...);
 int FUN_002466a8(void);
 int FUN_00295024(void);
 int FUN_00295108(...);
-int FUN_002c7b8c(...);
+int gameDataSetStatusFlag(...);
 int rt_aeabi_memclr(unsigned short [300], int);
 int mapIfDispatchCommand(...);
 int mapIfStartTransition(...);
@@ -51,7 +51,7 @@ extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_00295024. */
 /* Supplied declaration required: FUN_00295108. */
 extern int FUN_002c2758(unsigned short);
-/* Supplied declaration required: FUN_002c7b8c. */
+/* Supplied declaration required: gameDataSetStatusFlag. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: mapIfDispatchCommand. */
 /* Supplied declaration required: mapIfStartTransition. */
@@ -374,7 +374,7 @@ LAB_002359c4:
           temp_v2 = FUN_003de92c(temp_v1);
           if (((temp_v2 != 0) && (temp_v8 = FUN_002c2758(temp_v1), temp_v8 == 0)) &&
              ((int)(unsigned int)*(unsigned short *)(temp_v2 + 2) <= temp_v20)) {
-            FUN_002c7b8c(temp_v1,1);
+            gameDataSetStatusFlag(temp_v1,1);
             FUN_002466a8();
           }
           temp_v1 = temp_v1 + 1;

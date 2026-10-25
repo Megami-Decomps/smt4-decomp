@@ -2,13 +2,8 @@
 #define BATTLE_BATTLECOMMANDMENU_H
 
 #include "common.h"
+#include "battle/BtlMainAccess.h" /* Shin Megami Tensei IV only */
 #include <stddef.h>
-
-/* The part of the battle main state the command menu reads. */
-struct BattleCommandFlagsView {
-    u8 unk00[0x44A0];
-    u32 flags; // 0x44A0
-};
 
 /* One battle command table entry (0x60 bytes). */
 struct BattleCommandEntry {
@@ -54,7 +49,6 @@ typedef char BattleCommandMenuOffsets[
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 flagBitIsSet(u32 flag);
-BattleCommandFlagsView *btlGetMainState(void);
 }
 
 /* Whether a command is present in the table and available under the current flags. */
@@ -66,7 +60,7 @@ static __inline bool battleCommandIsAvailable(const BattleCommandEntry *command)
         return false;
     if (command->requiredFlagBit != 0 && flagBitIsSet(command->requiredFlagBit) == 0)
         return false;
-    if (command->hiddenInEvent != 0 && (btlGetMainState()->flags & 0x40000) != 0)
+    if (command->hiddenInEvent != 0 && (btlGetMainStateExt()->flags44A0 & 0x40000) != 0)
         return false;
     return true;
 }

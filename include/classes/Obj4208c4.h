@@ -2,8 +2,8 @@
 #define CLASSES_OBJ4208C4_H
 
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 /* Owns the three model-animation lists populated from a model owner. */
 class Obj4208c4 {

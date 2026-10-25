@@ -1,4 +1,5 @@
 #include "ui/ButtonHelp.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;

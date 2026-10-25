@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -7,12 +8,11 @@ struct BattleMainStateView {
 };
 
 extern "C" {
-BattleMainStateView *btlGetMainState(void);
 
 /* Script command: sets the result to the halfword at 0x1fc6 of the main battle state. */
 s32 FUN_002e3f0c(void)
 {
-    scrSetResult(btlGetMainState()->value);
+    scrSetResult(reinterpret_cast<BattleMainStateView *>(btlGetMainState())->value);
     return 1;
 }
 }

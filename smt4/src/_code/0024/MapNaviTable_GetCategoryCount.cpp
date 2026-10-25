@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "shard/MapNaviTable_GetCategoryCount.h"
 
 extern "C" {
 
@@ -14,7 +15,7 @@ typedef struct {
 /* Supplied declaration required: dataTableGet. */
 
 
-void MapNaviTable_GetCategoryCount(void)
+s32 MapNaviTable_GetCategoryCount(void *arg0)
 
 {
 /* irregular: 2 native warning(s); review required */

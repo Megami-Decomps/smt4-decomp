@@ -1,4 +1,5 @@
 #include "status/StatusDown.h"
+#include "bible/bibleDevil.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;

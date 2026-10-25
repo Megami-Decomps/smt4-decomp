@@ -1,11 +1,11 @@
 /* NON_MATCHING: native event-mask global and four-word argument ABI are recovered; OR/AND load grouping and the allocated action's constant-value lifetime still differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, s32);
 void *FUN_003f0254(BtlMainStateA *, BtlActionRecord *);
 void *FUN_003f06b4(BtlMainStateA *, BtlActionRecord *);

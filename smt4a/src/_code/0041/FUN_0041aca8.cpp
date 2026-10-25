@@ -2,6 +2,7 @@
 #include "classes/Obj557d90.h"
 #include "gfx/CameraMatrixCache.h"
 #include <new>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 
 /* How a particle emitter spawns its particles. */
@@ -21,7 +22,6 @@ struct ParticleEmitterSpec {
 extern "C" {
 f32 FUN_0025cb1c(void);
 void FUN_001aff14(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 z);
-void *asdOperatorNew(u32 bytes);
 }
 
 /* Creates a particle for the model from the emitter spec: a random start offset, a random

@@ -52,7 +52,7 @@ int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
 int sysPlayVoice(...);
 int FUN_003d4ed8(...);
-int FUN_003e54b8(...);
+int slotTargetApplyActiveValue(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -138,7 +138,7 @@ extern int dataTableGetRecord23(void);
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: playerSetClampedValue. */
 extern int linkHolderCallFirst(unsigned int);
-/* Supplied declaration required: FUN_003e54b8. */
+/* Supplied declaration required: slotTargetApplyActiveValue. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: flagValueSub. */
@@ -369,7 +369,7 @@ LAB_002da3cc:
               if (*(int *)(g_lmapScene + 0x270) == 1) {
                 *(unsigned int *)(g_lmapScene + 0x168) = 0xffffffff;
                 *(unsigned int *)(temp_v6 + 0x164) = 0;
-                FUN_003e54b8(*(unsigned int *)(temp_v6 + 0x1a8));
+                slotTargetApplyActiveValue(*(unsigned int *)(temp_v6 + 0x1a8));
                 DAT_005f17ac = 1;
               }
               temp_v6 = g_lmapScene;

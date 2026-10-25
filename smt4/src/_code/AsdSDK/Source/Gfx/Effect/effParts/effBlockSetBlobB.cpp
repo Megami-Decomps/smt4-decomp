@@ -1,6 +1,7 @@
 /* Replaces blob B of the block with a heap copy of `size` bytes at `src` (or empties it). */
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/effParts.h"
 
 extern "C" {
 

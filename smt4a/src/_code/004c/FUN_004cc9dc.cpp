@@ -1,9 +1,9 @@
 /* NON_MATCHING: Experience-loop block placement, saved registers, and high-level polynomial lowering differ. */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/gameGetUnlockedCountLimit.h"
 
 extern "C" {
-s32 gameGetUnlockedCountLimit(void);
 
 /* Consumes experience with a base-level scaling factor and returns the levels gained. */
 s32 FUN_004cc9dc(u32 id, s32 startingLevel, u32 *experience)

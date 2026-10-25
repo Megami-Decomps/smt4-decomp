@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct NkdwPreviewResource;
 struct AnimatedContentTaskWork {
@@ -16,7 +17,6 @@ struct AnimatedContentTaskWork {
     u8 animate;
 };
 extern "C" {
-AnimatedContentTaskWork *jobGetWork(u32 job);
 f32 asdAnimGetTrackLastFrame(NkdwPreviewResource *resource, s32 track);
 s32 FUN_002c1d5c(void);
 NkdwPreviewResource *FUN_00294090(u32 request, u32 mode);
@@ -28,7 +28,7 @@ void jobStop(u32 job, s32 mode);
 /* Loads the requested content, enables it, then advances its looping animation and opacity fade. */
 u32 uiStepAnimatedContentTask(u32 job)
 {
-    AnimatedContentTaskWork *work = jobGetWork(job);
+    AnimatedContentTaskWork *work = (AnimatedContentTaskWork *)jobGetWork(job);
     switch (work->state) {
     case 0:
         if (work->resource != NULL && work->animate != 0) {

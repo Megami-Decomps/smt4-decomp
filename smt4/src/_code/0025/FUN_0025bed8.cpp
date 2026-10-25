@@ -1,4 +1,5 @@
 #include "gamedata/GroupedFileTables.h"
+#include "shard/FUN_0025bed8.h"
 
 extern "C" {
 bool FUN_002ac12c(FileTableGroup *group);

@@ -9,7 +9,7 @@ s32 FUN_002bff10(u32 screen);
 // Process a prepared frame unless the screen or surface gates block it.
 s32 FUN_0010812c(u32 job)
 {
-    FrameWork *work = reinterpret_cast<FrameWork *>(jobGetWork(job));
+    FrameWork *work = (FrameWork *)jobGetWork(job);
     if (FUN_002bff10(0) == 0 && work->flags.active && work->flags.ready) {
         if (!work->flags.surfaceReady || work->frame.surface == NULL)
             return 0;

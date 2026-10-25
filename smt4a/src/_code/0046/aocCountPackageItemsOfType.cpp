@@ -1,5 +1,6 @@
 #include "addon/aocMain.h"
 #include "shard/W4_Match3_AocMainA.h"
+#include "shard/aocCountPackageItemsOfType.h"
 
 extern "C" {
 

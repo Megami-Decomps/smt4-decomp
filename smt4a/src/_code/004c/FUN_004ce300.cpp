@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail moves the slot table pointer to r1 and loads the price table through r0/r2; here the loads use r2/r3 (register allocation only). */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct PartyMoney {
 extern u8 DAT_00530ca0[];
 extern u8 DAT_00530cb4[];
 
-PartyMoney *gameGetSlotTable(void);
 void panelSetMode3(s32 delta, s32 arg);
 s32 tableGroupFindEntryIndex(void *group, const u8 *label);
 void scrScriptProcessStartEntry(void *process, s32 index);

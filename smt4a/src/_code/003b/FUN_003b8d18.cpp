@@ -1,13 +1,13 @@
 /* NON_MATCHING: the three choices are now unrolled as in retail; only the id/constant register assignment differs (retail ldrh r1 / constant r0). */
 /* Selects a random nonempty demon id from a record's choices and the battle's extra table. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlTables.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
-Table00Record *dataTable00FindById(u32 id);
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 result);
 void sysMemClear(void *memory, u32 size);

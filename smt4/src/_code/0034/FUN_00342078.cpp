@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail adds the group offset (+0x800) separately and uses a register-offset ldrb with writeback; built folds the constant into the load and orders the mask setup differently */
+/* NON_MATCHING: the group base now matches (group offset added separately, byte via writeback ldrb); retail loads the flag byte before the set/clear branch and shares one store, and recomputes the touched mask after its load. */
 #include "common.h"
 
 struct FlagBlock {
@@ -21,18 +21,17 @@ void FUN_00342078(u32 group, u32 bit, s32 set)
     if ((s32)group >= 100) {
         return;
     }
-    u8 *byte = &FUN_0023d2ec()->groups[group][0] + (bit >> 3);
-    u32 mask = (u8)(1 << (bit & 7));
-    u32 value;
+    u8 *bank = FUN_0023d2ec()->groups[group];
+    u8 mask = 1 << (bit & 7);
+    u8 *flag = &bank[bit >> 3];
 
     if (set != 0) {
-        *byte = mask | *byte;
-        byte = &FUN_0023d2ec()->touched[0] + (group >> 3);
-        value = (u8)(1 << (group & 7)) | *byte;
+        *flag |= mask;
+        u8 *touched = &FUN_0023d2ec()->touched[group >> 3];
+        *touched |= 1 << (group & 7);
     } else {
-        value = *byte & ~mask;
+        *flag &= ~mask;
     }
-    *byte = value;
 }
 
 } /* extern "C" */

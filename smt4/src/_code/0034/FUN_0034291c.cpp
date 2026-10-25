@@ -10,7 +10,7 @@ int FUN_002b659c(int, int, int, int);
 int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_002bc0e0(void);
 int FUN_002bdf94(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_0032b4f8(int, int, int);
 int FUN_00342e5c(int, float *, float *, unsigned int, int);
@@ -38,7 +38,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bc0e0. */
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0032b4f8. */
 /* Supplied declaration required: FUN_00342e5c. */
@@ -140,12 +140,12 @@ void FUN_0034291c(int param_1)
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x8c) + temp_v6),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x88) + temp_v9 + temp_v10),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(1,0xff,param_1 + 0x2c);
+  textDrawString(1,0xff,param_1 + 0x2c);
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x94) + temp_v6),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x90) + temp_v9 + temp_v10),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be5a4(1,0xffffffff,param_1 + 4);
+  textDrawString(1,0xffffffff,param_1 + 4);
   FUN_002b64b8();
   if (*(char *)(param_1 + 0x24) == '\0') {
     temp_v1 = 3;

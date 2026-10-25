@@ -36,7 +36,7 @@ SaveSlotEntry *saveSlotFindSelected(void);
 s32 FUN_001692ac(u32 a, u32 b);
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
-SaveRowFrame *FUN_001834a4(u32 table, u32 index);
+SaveRowFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 SaveSlotEntry *FUN_00187068(s32 index);
 s32 FUN_00187168(void);
 s32 gameFlagIsSet(u32 flag);
@@ -78,8 +78,8 @@ void FUN_00335060(SaveListWork *work)
     }
 
     if (gameFlagIsSet(0x4D0) != 0 || (flagSelectVariant() == 2 && gameFlagIsSet(0x4DB) != 0)) {
-        SaveRowFrame *rowFrame = FUN_001834a4(0x14, row + 0xBBA);
-        SaveRowFrame *footerFrame = FUN_001834a4(0x14, 0xC17);
+        SaveRowFrame *rowFrame = asdTMTexTableEntryAt(0x14, row + 0xBBA);
+        SaveRowFrame *footerFrame = asdTMTexTableEntryAt(0x14, 0xC17);
         s16 rowHeight = rowFrame->height;
         s16 footerOffset = footerFrame->image->offset;
         s16 rowOffset = rowFrame->image->offset;

@@ -28,8 +28,6 @@ struct MessageMainView {
 
 extern "C" {
 extern MessageMainView g_messageMain;
-void scrCommMessageSetMode(s32 mode);
-u32 FUN_002865f8(void);
 void FUN_002866b4(u32 message, u32 argument, s32 frame, s32 mode,
                   s32 wait, s32 unused);
 }
@@ -50,7 +48,7 @@ extern "C" void scrComm_Message_ShowConfirmWaitLock(void)
         g_messageMain.unk04->unkA11 = 0x14;
     }
 
-    u32 message = FUN_002865f8();
+    u32 message = scrGetCommandOwner();
     u32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
     FUN_002866b4(message, argument, frame, 6, 1, 0);

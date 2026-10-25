@@ -1,11 +1,11 @@
 /* NON_MATCHING: clear-mask load allocation and the halfword status-mask test differ. */
 /* Synchronizes a battle motion controller with its source status and rebuilds the condition list. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BattleMotionSubject *FUN_001568f8(BtlMainStateA *state, s32 group);
 void halfRecClear(BtlMainStateA *state, BattleMotionSubject *source);
 void flagSelectionRebuild(void *selection, u32 flags);

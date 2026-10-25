@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,7 +7,6 @@ extern "C" {
 
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 s32 battleUnitHasElementEntry(BtlCombatantEntryA *entry, u32 first, u32 second);
 
 /* Script command: count the eligible battle entries that pass battleUnitHasElementEntry with the two arguments. */

@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/Result.h"
+#include "shard/asdCecInboxGetMessageCount.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

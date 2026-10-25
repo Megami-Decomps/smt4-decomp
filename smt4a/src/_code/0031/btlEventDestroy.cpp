@@ -1,4 +1,5 @@
 #include "battle/btlEvent.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -6,14 +7,13 @@ void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(void *process);
 s32 jobIsValid(u32 job);
-BtlEventOwnerA *jobGetWork(u32 job);
 
 extern BtlEvent *g_btlEvent;
 
 /* Destroy callback of the battle event: frees its blocks and stops the owner job. */
 void btlEventDestroy(u32 job)
 {
-    BtlEventOwnerA *owner = jobGetWork(job);
+    BtlEventOwnerA *owner = (BtlEventOwnerA *)jobGetWork(job);
     BtlEvent *event = g_btlEvent;
 
     if (event != NULL) {

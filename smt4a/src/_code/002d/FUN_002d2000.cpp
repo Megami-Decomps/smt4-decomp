@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail places the request-1 switch table between the two branches and keeps constants 1/0x4d2|1 in callee-saved registers (more saved registers); block layout and the flag-or differ. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
+#include "util/FUN_002b945c.h"
 
 /* The game state fields the scene-advance step touches. */
 struct SceneAdvanceState {
@@ -51,7 +52,6 @@ FlagsBlock *gameFlagsGetBlock(void);
 u32 gameDataTableGetFlag(void);
 void sectionValueSetClamped(s32 value);
 void gameValueBlockSet(s32 index, s32 value);
-void FUN_002b945c(u32 value);
 void FUN_002c7ad8(void);
 
 s32 gameFlagIsSet(u32 flag);

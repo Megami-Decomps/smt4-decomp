@@ -2,6 +2,7 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
+#include "util/AsdLoadFileSyncDefault.h"
 
 // Battle resource loader: the step counter, its critical section and the resource slots.
 struct BattleLoader {
@@ -56,7 +57,6 @@ void nn_os_CriticalSection_Leave(void* section);
 void callJyoucyuGetTableEntry1B(void);
 void loadSlotEnsureLoaded(s32 slot);
 void FUN_00470e64(u32 aoc);
-void *asdLoadFileSyncDefault(const char* path);
 void btlStageLoadTable(void);
 void battleMapAccessoryLoad(void);
 s32 jyoucyuEnsureResidentEntry(void);

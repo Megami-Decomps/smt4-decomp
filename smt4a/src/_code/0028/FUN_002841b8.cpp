@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail saves r0-r2 in the prologue and copies the 20-byte key table with ldm from an offset into one shared data block (here a separate extern copied word by word); the menu logic is the same (202 vs 199 rows). */
 #include "common.h"
 #include "shard/X14_MessageMain.h"
+#include "AsdSDK/asdTextFormatStream.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void scrCommMessageSetMode(s32 mode);
 s32 gameFlagIsSet(u32 flag);
 void FUN_0021bdac(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
-void asdTextFormatStream(u32 handle, s32 a, s32 b, s32 c, s32 d, const char *format, const char *text);
 void msgBoxFlagsSetBit7(u32 handle);
 void sortMenuAcquire(s32 a, s32 b);
 void FUN_0031f208(u8 key);

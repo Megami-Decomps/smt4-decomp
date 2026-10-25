@@ -38,7 +38,7 @@ static __inline void battleDrawMarker(f32 x, f32 y, f32 width, f32 height, u32 c
 
 extern "C" u32 battleDrawRosterMarkerRects(u32 job)
 {
-    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(jobGetWork(job));
+    BtlMainStateA *state = (BtlMainStateA *)jobGetWork(job);
     if (++state->drawCounters.markerTimer >= 30) {
         state->drawCounters.markerTimer -= 30;
     }

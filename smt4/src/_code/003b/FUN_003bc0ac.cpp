@@ -1,5 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table02Record.h"
+#include "shard/FUN_003bc0ac.h"
 
 // Returns the requested occurrence of a table record matching both byte keys.
 extern "C" Table02Record* FUN_003bc0ac(u32 keyA, u32 keyB, s32 occurrence)

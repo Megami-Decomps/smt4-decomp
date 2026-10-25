@@ -14,7 +14,6 @@ s32 btlResolveEntryChoice(s32 choice);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 Table00Record *dataTable00FindById(u32 id);
-Table04Record *dataTable04FindById(u32 id);
 }
 
 /* Whether any of the unit's skill sources lists a category-three skill. */

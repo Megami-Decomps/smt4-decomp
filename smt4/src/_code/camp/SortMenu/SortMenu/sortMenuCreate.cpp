@@ -1,4 +1,4 @@
-/* NON_MATCHING: paramsInit's stack-argument scratch register and the aligned memset helper differ. */
+/* NON_MATCHING: paramsInit's stack-argument scratch register differs (retail keeps the second byte count 36 in r2, built uses r0). */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SortMenu.h"
 #include "AsdSDK/AsdDebug.h"
@@ -24,6 +24,7 @@ extern "C" const SortMenuParameterData DAT_00402d1c = {
 
 extern "C" {
 extern SortMenuSingleton g_useCounter;
+void __aeabi_memset4(void *destination, u32 bytes, s32 value);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 s32 FUN_001a1f8c(u32);
 s32 FUN_001a26dc(u32);
@@ -60,7 +61,7 @@ void sortMenuCreate(u32 owner, u8 option)
         timerStart(&current->sprites[11], 0, 0);
         FUN_002bd954(&current->sprites[12], 30, 0, &current->parameters, 1, 1.0f);
         spriteStartAnimationByIndex(&current->sprites[12], 1);
-        memset(current->ids, -1, sizeof(current->ids));
+        __aeabi_memset4(current->ids, sizeof(current->ids), -1);
         current->frame = 0;
         current->initialized = 1;
         work->option = option;

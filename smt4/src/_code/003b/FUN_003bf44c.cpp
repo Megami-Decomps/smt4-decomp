@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail preserves two additional integer registers and uses separate multiply/add scheduling. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 // The timer override is beyond the shared IV battle-state prefix.
@@ -15,7 +16,6 @@ struct BattleAmountScale {
     f32 multiplier; // 0x20
 };
 extern "C" {
-BattleAmountWork *btlGetMainState();
 void *gameGetSlotTable();
 u32 clockGetSecondsSinceStart();
 u32 FUN_002907a8();
@@ -26,7 +26,7 @@ BattleAmountScale *FUN_0023ea94();
 // Scale a level-derived battle amount by elapsed minutes and the active multiplier.
 s32 FUN_003bf44c()
 {
-    BattleAmountWork *battle = btlGetMainState();
+    BattleAmountWork *battle = reinterpret_cast<BattleAmountWork *>(btlGetMainState());
     gameGetSlotTable();
     u32 seconds = clockGetSecondsSinceStart();
     if (seconds == 0xffffffff)

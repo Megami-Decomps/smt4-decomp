@@ -1,10 +1,11 @@
 #include "common.h"
+#include "shard/FUN_003bbaa8.h"
 
 extern "C" {
 
 int resourceFindActiveIndex(int id);
 
-void FUN_003bbaa8(void)
+s32 FUN_003bbaa8(void *arg0)
 {
     resourceFindActiveIndex(0x33);
 }

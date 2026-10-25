@@ -557,4 +557,8 @@ u8 FUN_0027d98c(void);
 }
 #endif
 
+extern "C" {
+char *FUN_001b43f0(s32 category, s32 id);
+}
+
 #endif

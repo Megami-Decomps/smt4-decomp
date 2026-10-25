@@ -1,6 +1,7 @@
 /* NON_MATCHING: lookup-owned table contexts restore call setup; selected-section/refresh stores use swapped value/constant registers. */
 #include "map/NavigationInterpolation.h"
 #include "gamedata/MapNaviCategories.h"
+#include "shard/MapNaviTable_GetCategoryCount.h"
 struct MapNaviSectionRecord {
     s8 map;
     u8 category;
@@ -26,7 +27,6 @@ s32 NaviMain_GetPosX(const u8 *cursor);
 s32 NaviMain_GetPosY(const u8 *cursor);
 u32 dataTable2bSub1GetCount(MapNaviTableContext *context);
 const MapNaviSectionRecord *dataTable2bSub1GetRecord(MapNaviTableContext *context, u32 index);
-u32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context);
 const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 }
 static inline const MapNaviSectionRecord *findNaviSection(s32 map, u32 category)

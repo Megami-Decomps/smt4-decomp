@@ -1,5 +1,6 @@
 /* NON_MATCHING: separate 0x7de/0x7df literals and saved-register allocation differ; retail hoists and shares the bounds, candidate optimization flags. */
 #include "common.h"
+#include "shard/dataTable8FindRecord.h"
 
 struct ContentFlagsView {
     u8 unk00[0x68];
@@ -7,7 +8,6 @@ struct ContentFlagsView {
 };
 
 extern "C" {
-u8* dataTable8FindRecord(s32 id);
 u16 FUN_001ba3d4(s32 id);
 
 u32 contentGetFirstFlaggedValue(void)

@@ -1,4 +1,5 @@
 #include "battle/BattleEntries.h"
+#include "shard/btlFindNthActiveSpecialEntry.h"
 
 extern "C" {
 

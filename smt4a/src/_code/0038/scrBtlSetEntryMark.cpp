@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -13,7 +14,6 @@ extern "C" {
 
 extern BattleMarkMasks g_btlMessageFlagMasks;
 s32 scrGetArg(s32 index);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 void btlSlotSetStoreValue(u32 id, s32 slot, s32 value);
 

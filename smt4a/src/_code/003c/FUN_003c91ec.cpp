@@ -2,6 +2,7 @@
 /* Releases the saved-state buffers: copies them back to their owners, re-arms the pending requests, then frees the buffers. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
+#include "shard/gameFlagIsSet.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ void wordPairCopy(void *dest, void *src);
 void FUN_00358cbc(void);
 void titleConfigApply(void);
 void aocActivateFileGroupFlags(u32 system);
-bool gameFlagIsSet(u32 id);
 
 void asdMemFree(void *ptr);
 

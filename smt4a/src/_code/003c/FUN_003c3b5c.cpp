@@ -1,4 +1,3 @@
-/* NON_MATCHING: literal pool order: retail places the DAT_0059ee30 word before the g_effectEditor word. */
 #include "common.h"
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
 
@@ -27,6 +26,7 @@ u32 FUN_0035ba3c(f32 *selection, u32 value, EffectEditorOptions *options);
 /* Runs FUN_0035ba3c on the parent's selection with the editor's +0x30 value and the options table. */
 void FUN_003c3b5c(Obj323dd8 *obj)
 {
-    FUN_0035ba3c(obj->parent->selection, g_effectEditor.unk30, &DAT_0059ee30);
+    EffectEditorOptions *options = &DAT_0059ee30;
+    FUN_0035ba3c(obj->parent->selection, g_effectEditor.unk30, options);
 }
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the shown/next slots in stack slots, spills r0-r3 in the prologue and recomputes the cycle target per slot; the marker drawing is the same (180 vs 184 rows). */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "util/MessageKindForward.h"
 
 extern "C" {
 
@@ -14,9 +15,8 @@ typedef struct SlotCycleFrame {
 
 extern u8 *g_titleScene;
 
-SlotCycleFrame *FUN_002bf4f8(s32 a, s32 b);
+SlotCycleFrame *asdTMTexTableEntryAt(s32 a, s32 b);
 u16 *gameGetUnitRecord(s32 index);
-void messageKindForward(s32 slot, s32 x, s32 y, s32 color);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
 
 /* Draws the slot marker of party unit `unit`: with several slots owned it cycles between the
@@ -24,7 +24,7 @@ void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
  * just shows it. `work` holds the per-unit selection (0xD5E0) and cycle counter (0xD580). */
 void FUN_003b6da4(u8 *work, s32 unit, s32 x, s32 y)
 {
-    SlotCycleFrame *frame = FUN_002bf4f8(0x28, 300);
+    SlotCycleFrame *frame = asdTMTexTableEntryAt(0x28, 300);
     u32 mask = 0;
     s32 owned = 0;
     s32 shown = 0;

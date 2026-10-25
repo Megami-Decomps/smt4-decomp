@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00410628` (_code @ 0x410628, 0x700 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 
@@ -78,7 +79,6 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 #endif
 /* Supplied declaration required: asdLoadFileWithSize. */
 extern int FUN_0013def0(unsigned int);
-extern int btlGetMainState(void);
 extern int lcgRandomRange(unsigned int);
 extern int FUN_00163e84(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -148,7 +148,7 @@ void FUN_00410628(int param_1)
   unsigned int temp_v18;
   unsigned int uStack_48;
   
-  temp_v16 = btlGetMainState();
+  temp_v16 = reinterpret_cast<int>(btlGetMainState());
   switch(*(unsigned int *)(param_1 + 0x10)) {
   case 0:
     temp_v3 = FUN_00163e84(0);

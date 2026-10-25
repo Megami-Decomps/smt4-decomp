@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail preserves the original level in another saved register and schedules polynomial arithmetic differently. */
 #include "common.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DataTable.h"
 
 struct ExperienceDefinition { u8 unk00[6]; u16 level; };
 extern "C" {
 s32 gameGetUnlockedCountLimit();
-void *dataTableGet(u32 table, u32 subtable);
-const void *dataTableGetEntries(void *table);
 const ExperienceDefinition *FUN_00184310(u32 id);
 
 // Compute the capped level requirement, scaled by the distance from the definition's base level.

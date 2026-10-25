@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler rematerializes7/20 after jobGetWork instead of keeping them in r6/r5 across the lookup; optimization-flag candidate. */
 #include "shard/W6_W6Match2_JobBlend.h"
 #include "script/ScriptArgs.h"
 
@@ -12,6 +11,11 @@ extern "C" {
 u32 scrGetCommandFrame(void);
 void FUN_0019d96c(JobBlendWork* work, u32 mode, s32 frames);
 
+static inline void startJobBlend(u32 job, u32 mode, s32 frames)
+{
+    FUN_0019d96c((JobBlendWork *)jobGetWork(job), mode, frames);
+}
+
 u32 scrCommStartJobTransitionAndWait(void)
 {
     if (scrGetCommandFrame() != 0) {
@@ -19,8 +23,10 @@ u32 scrCommStartJobTransitionAndWait(void)
             return 1;
         }
     } else {
-        u32 job = scrGetArg(0);
-        FUN_0019d96c(reinterpret_cast<JobBlendWork *>(jobGetWork(job)), 7, 20);
+        s32 job = scrGetArg(0);
+        u32 mode = 7;
+        s32 frames = 20;
+        startJobBlend(job, mode, frames);
         ((TransitionJobView*)jobGetWork(job))->control = 2;
     }
     return 0;

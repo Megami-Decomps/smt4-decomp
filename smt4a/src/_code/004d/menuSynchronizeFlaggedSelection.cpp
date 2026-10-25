@@ -1,6 +1,7 @@
 /* NON_MATCHING: initialization constants change registers and move into the valid-input branch, the first count reload is coalesced, and offset-bound comparison/result scheduling differ; candidate -O2. */
 #include "shard/Shard0031.h"
 #include "util/EventQueueAddUnique.h"
+#include "shard/recordGetModeForId.h"
 
 struct MenuSelectionScan {
     u32 unk00;
@@ -24,7 +25,6 @@ struct FlaggedMenuList {
 };
 
 extern "C" {
-s32 recordGetModeForId(s16 id);
 s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
 u32 flaggedEntryGetValueA(FlaggedEntry *entry);

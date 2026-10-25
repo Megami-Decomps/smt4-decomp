@@ -14,7 +14,7 @@ struct SpriteFrame {
 };
 
 extern "C" {
-SpriteFrame *FUN_001834a4(u32 group, s32 sprite);
+SpriteFrame *asdTMTexTableEntryAt(u32 group, s32 sprite);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(u32 drawContext, s32 x, s32 y, u32 option0, u32 option1, u32 option2, const char *format, ...);
 void FUN_00183bb0(void);
@@ -22,7 +22,7 @@ void FUN_00183bb0(void);
 // Draw an elapsed time as hours:minutes:seconds, right-aligned against `position`.
 void FUN_0041b8e0(u32 unused, TimeSource *source, s32 *position)
 {
-    SpriteFrame *frame = FUN_001834a4(43, 35);
+    SpriteFrame *frame = asdTMTexTableEntryAt(43, 35);
     s32 time = source->seconds;
     drawSetColorFromRGBA8(0xb9d7d7ff);
     s32 hours = time / 3600;

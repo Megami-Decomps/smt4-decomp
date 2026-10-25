@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail initialises the handle with three separate stores (post-indexed) and the desc tail with stm {0, 1}; ours merges id/resource into one stm and swaps r5/r6. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ typedef struct AsdAmbientLight {
 } AsdAmbientLight;
 
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void *asdMemoryGetDefaultAllocator(void);
 AsdAmbientLightResource *_ZN9Obj4210946createEPvP18AsdAllocatorObject(const AsdAmbientLightDesc *desc, void *allocator);
 u32 nw_ut_FloatColor_ToPicaU32(const AsdFloatColor *color);
 

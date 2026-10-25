@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct UnitSlots {
 } UnitSlots;
 
 extern s32 scrGetArg(u32 index);
-extern void *btlGetMainState(void);
 extern UnitSlots *FUN_003eaf20(void);
 extern void scrSetResult(s32 value);
 
@@ -28,7 +28,7 @@ s32 scrCommBtlUnitSlotIsNegative(void)
     } else if (which == 3) {
         slot = 11;
     }
-    btlGetMainState();
+    static_cast<void *>(btlGetMainState());
     unit = FUN_003eaf20();
     if (unit != NULL) {
         scrSetResult(unit->slots[slot] <= -1);

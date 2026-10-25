@@ -32,7 +32,7 @@ s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 f32 vec2GetSpeed(const void *position);
 void efctSetSpeed(f32 speed);
-SpriteFrame *FUN_001834a4(u32 group, s32 sprite);
+SpriteFrame *asdTMTexTableEntryAt(u32 group, s32 sprite);
 void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 alpha);
 void FUN_003f5d94(void *owner, s32 x, s32 y, f32 alpha);
 void FUN_003f6e24(void *owner, s32 x, s32 y, f32 alpha);
@@ -75,7 +75,7 @@ void FUN_003f82b8(CampStatusScreen *screen)
         for (s32 i = 0; i < 8; i++) {
             s32 value = screen->scroll + i - screen->scrollBase;
             if (value >= 0) {
-                SpriteFrame *frame = FUN_001834a4(49, 252 + i);
+                SpriteFrame *frame = asdTMTexTableEntryAt(49, 252 + i);
                 FUN_00164168(screen->panel, frame->x + baseX + parallax, frame->y + y, 201, 6, value, speed);
             }
         }

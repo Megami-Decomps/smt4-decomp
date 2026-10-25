@@ -10,7 +10,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int fontMeasureLineAdvance(int [2], int);
 int FUN_002bdf94(int, int, int, int);
 int drawSetColorFromRGBA8(unsigned int);
-int FUN_002be5a4(int, unsigned int, int [2]);
+int textDrawString(int, unsigned int, int [2]);
 int textFormatBuffer(...);
 int FUN_002bf288(...);
 int efctSetSpeed(void);
@@ -54,10 +54,10 @@ extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf288. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 
 
@@ -104,7 +104,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
                 textFormatBuffer(temp_v10,&LAB_0025216c,temp_v5);
               }
             }
-            temp_v3 = FUN_002bf4f8(0x19,0x11);
+            temp_v3 = asdTMTexTableEntryAt(0x19,0x11);
             fontMeasureLineAdvance(temp_v10,1);
             temp_v1 = *(short *)(temp_v3 + 8);
             temp_v2 = **(short **)(temp_v3 + 0xc);
@@ -123,7 +123,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
             VectorSignedToFloat(param_3 + (int)temp_v1 + ((int)temp_v2 - (int)piVar7) / 2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(*(short *)(temp_v3 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(1,temp_v5,temp_v10);
+            textDrawString(1,temp_v5,temp_v10);
             return;
           }
           if (param_2 != 4) {
@@ -144,7 +144,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
             }
           }
           textFormatBuffer(temp_v11,&LAB_0025217c,temp_v8);
-          temp_v3 = FUN_002bf4f8(0x19,0x15);
+          temp_v3 = asdTMTexTableEntryAt(0x19,0x15);
           puStack_48 = temp_v11;
           temp_v10[0] = 2;
           temp_v10[1] = 0x79;
@@ -192,7 +192,7 @@ void FUN_00251d98(fn_00251d98_arg0 *param_1,int param_2,int param_3,int param_4)
         if (param_1->field_0x23 != '\0') {
           efctSetSpeed();
         }
-        temp_v6 = FUN_002bf4f8(0x19,0x13);
+        temp_v6 = asdTMTexTableEntryAt(0x19,0x13);
         uiDrawDemonIcon(temp_v3,*(short *)(temp_v6 + 8) + param_3,*(short *)(temp_v6 + 10) + param_4,0x6a,0);
         if (param_1->field_0x23 == '\0') {
           return;

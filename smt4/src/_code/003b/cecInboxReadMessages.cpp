@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/cecInboxReadMessages.h"
 
 extern "C" {
 

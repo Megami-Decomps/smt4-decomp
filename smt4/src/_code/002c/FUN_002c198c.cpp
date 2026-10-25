@@ -1,4 +1,5 @@
 #include "gfx/RenderTransformState.h"
+#include "shard/FUN_002c198c.h"
 
 extern "C" {
 void FUN_002bbe30(Matrix44 *matrix);

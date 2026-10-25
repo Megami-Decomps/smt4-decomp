@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -10,7 +11,6 @@ struct BattleRecord {
 };
 
 s32 scrGetArg(s32 index);
-void *btlGetMainState(void);
 BattleRecord *FUN_00338278(void *state, u16 id);
 
 /* Script command: pushes value `index` (0-3) of the battle record `id`, or -1. */
@@ -18,7 +18,7 @@ u32 FUN_003127f0(void)
 {
     s32 id = scrGetArg(0);
     s32 index = scrGetArg(1);
-    BattleRecord *record = FUN_00338278(btlGetMainState(), id);
+    BattleRecord *record = FUN_00338278(static_cast<void *>(btlGetMainState()), id);
     u32 result;
 
     if (record == NULL) {

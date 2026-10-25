@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
 
@@ -8,7 +9,6 @@ struct BattleMember {
     /* 0x0C */ u32 id;
 };
 
-void *btlGetMainState(void);
 
 BattleMember *FUN_0027da30(void *state, s32 memberId);
 
@@ -29,7 +29,7 @@ ReflectAction *btlActionQueueSourceReflect(s32 id, u32 argument, BtlActionRecord
             return NULL;
         }
     }
-    state = btlGetMainState();
+    state = static_cast<void *>(btlGetMainState());
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
     member = FUN_0027da30(state, source->memberId);
     action->kind = 0x27;

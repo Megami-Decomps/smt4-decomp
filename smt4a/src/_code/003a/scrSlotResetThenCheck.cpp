@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/Shard003A.h"
 
 extern "C" {
 
 extern u32 scrGetArg(s32 index);
-extern void *btlGetMainState(void);
 extern u32 slotTableStateIsActive(void *state, s32 index);
 extern u32 btlIsExtendedState(void *state, s32 index);
 extern void btlResetSlot(void *state, s32 index, u32 value);
@@ -12,7 +12,7 @@ extern void btlResetSlot(void *state, s32 index, u32 value);
 u8 scrSlotResetThenCheck(void)
 {
     u32 value = scrGetArg(0);
-    void *state = btlGetMainState();
+    void *state = static_cast<void *>(btlGetMainState());
 
     if (slotTableStateIsActive(state, 0) != 0) {
         return btlIsExtendedState(state, 0) != 0;

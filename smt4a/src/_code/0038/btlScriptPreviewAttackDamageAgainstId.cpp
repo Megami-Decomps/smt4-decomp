@@ -1,4 +1,5 @@
 /* NON_MATCHING: u64 mask hoisting causes different spills; retail also keeps an unused byte load and uses signed VFP conversion/constant preservation. */
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -19,7 +20,7 @@ extern "C" {
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
 void *dataTable00FindById(u16 id);
-void FUN_003e8bb0(BattleAttackPreview *out, BattleMaskState *battle, BtlCombatantEntryA *attacker);
+void FUN_003e8bb0(BattleAttackPreview *out, BtlMainStateA *battle, BtlCombatantEntryA *attacker);
 void kindIdStore(u32 kind, u32 *out);
 s32 FUN_004c58e0(void *context, s32 variant, s32 attacker, s32 target,
     s32 modifier, s32 preview, s32 flags, f32 multiplier, f32 affinity);
@@ -28,9 +29,9 @@ u32 btlScriptPreviewAttackDamageAgainstId(void)
 {
     s32 id = scrGetArg(0);
     s32 result = 9999;
-    BattleMaskState *battle = btlGetMainState();
+    BtlMainStateA *battle = btlGetMainState();
     if (dataTable00FindById(id) != NULL) {
-        BtlCombatantEntryA *entries = reinterpret_cast<BtlCombatantEntryA *>(battle->entryMaskView.mask);
+        BtlCombatantEntryA *entries = battle->entries;
         for (s32 index = 4; index < 54; ++index) {
             BtlCombatantEntryA *entry = &entries[index];
             u64 flags = entry->flags;

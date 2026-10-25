@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026fd50` (_code @ 0x26fd50, 0x3a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/FUN_003a6f84.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 extern unsigned int FUN_002b4dcc(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
-extern unsigned int FUN_003a6f84(int);
 extern int getUnlockedSlotCount(int);
 /* Supplied declaration required: randomGetUpperSixBits. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);

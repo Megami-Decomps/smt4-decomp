@@ -7,7 +7,7 @@ u32 requestKindToId(u32 kind);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_0017ffa8(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
-const SpriteInfo *FUN_001834a4(u32 table, s32 index);
+const SpriteInfo *asdTMTexTableEntryAt(u32 table, s32 index);
 void FUN_00180310(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer,
                   const char *format, ...);
 void FUN_00183bb0();
@@ -34,9 +34,9 @@ void drawParameterChangeBadge(u32 kind, s32 amount, s32 x, s32 y, s32 layer)
     FUN_001835b4(2, 11, 0x3f5, x, y, layer);
     FUN_0017ffa8(2, 11, icon, x, y, layer);
     drawSetColorFromRGBA8(color);
-    const SpriteInfo *info = FUN_001834a4(11, 0x402);
+    const SpriteInfo *info = asdTMTexTableEntryAt(11, 0x402);
     FUN_00180310(2, info->x + x, info->y + y, 0, 1, layer + 1, sign);
-    info = FUN_001834a4(11, 0x401);
+    info = asdTMTexTableEntryAt(11, 0x401);
     if (amount < 0) {
         amount = -(u32)amount;
     }

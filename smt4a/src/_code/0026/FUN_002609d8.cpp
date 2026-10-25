@@ -13,7 +13,7 @@ int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int skinObjectUpdateMatrices(...);
-int FUN_001834a4(int, int);
+
 int FUN_001834e4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
@@ -89,7 +89,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_001834e4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -202,7 +202,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
             FUN_001b4a00(&temp_v16,&temp_v36);
             renderCtxCallB(&temp_v16);
           }
-          FUN_001834a4(0x27,0xc);
+          reinterpret_cast<int>(asdTMTexTableEntryAt(0x27,0xc));
           if (-1 < *(int *)(temp_v2 + 0x48)) {
             efctSetSpeed();
             temp_v16 = (float)(*(int *)(temp_v2 + 0x14) + param_3);

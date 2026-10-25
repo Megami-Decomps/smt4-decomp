@@ -16,7 +16,7 @@ typedef struct ScriptOwner {
     /* 0x04 */ MessageBox *box;
 } ScriptOwner;
 
-extern u32 FUN_002865f8(void);
+extern u32 scrGetCommandOwner(void);
 extern s32 FUN_0028660c(void);
 extern u32 FUN_002866b4(u32 a, u32 b, u32 c, s32 style, s32 d, s32 e);
 extern s32 scrGetCommandFrame(void);
@@ -34,7 +34,7 @@ u32 FUN_002ed4d4(void)
     u32 third;
     u32 result;
 
-    first = FUN_002865f8();
+    first = scrGetCommandOwner();
     second = scrGetArg(0);
     third = scrGetCommandFrame();
     result = FUN_002866b4(first, second, third, style, 0, 0);

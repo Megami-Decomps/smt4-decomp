@@ -2,10 +2,10 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 
-void *asdOperatorNew(u32 size);
 u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay,
                    u16 endDelay, AsdProcUpdateFunc callback,
                    AsdProcFunc destroy, void *work, u32 parent);

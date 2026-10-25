@@ -4,12 +4,12 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
+#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
 u32 btlResolveEntryChoice(u32 choice);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
-s32 btlFindEntryValue(s32 unitIndex, u32 kind);
 void scrSetResult(s32 result);
 
 // Check whether any eligible combatant has a positive value in entry category 19.

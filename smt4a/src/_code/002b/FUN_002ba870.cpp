@@ -31,7 +31,7 @@ extern BattleDebugMenuGlobals DAT_005715f8;
 
 extern "C" u32 FUN_002ba870(u32 job)
 {
-    BattleDebugDrawWork *work = reinterpret_cast<BattleDebugDrawWork *>(jobGetWork(job));
+    BattleDebugDrawWork *work = (BattleDebugDrawWork *)jobGetWork(job);
     BattleDebugMenu *menu = DAT_005715f8.menu;
     if (menu != NULL) {
         switch (menu->state) {

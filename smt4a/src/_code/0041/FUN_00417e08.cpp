@@ -1,10 +1,10 @@
 /* NON_MATCHING: close: retail reloads the flag byte and clears bit 7 and the low bits of the second byte in a separate read-modify-write after the bit-6 update; built folds them into the same register. Also the literal pool order of 0x15E and the roster slot address computation differ */
 #include "gamedata/RosterView.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
-s32 FUN_001bd100(u32 id);
 s32 FUN_001bd118(u32 id);
 s32 FUN_001ada74(u32 id);
 u8 *FUN_001ad9b4(u32 id);

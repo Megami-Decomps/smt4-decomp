@@ -1,4 +1,5 @@
 /* NON_MATCHING: small-slot address uses pre-index writeback; attachment search retains its candidate address instead of recomputing it. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/HandlePools.h"
@@ -10,7 +11,6 @@ extern void *g_handleRegistry;
 void FUN_003fd7b4(u32 controller, f32 x, f32 y, f32 z);
 void FUN_003fe86c(u32 controller, u32 argument, s32 mode, f32 first, f32 second);
 void handleRegistryRegisterObject(void *registry, u32 controller);
-BtlMainStateA *btlGetMainState(void);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BattleRosterRecordA *record);
 JobPool *FUN_001568f8(BtlMainStateA *battle, s32 group);
 void FUN_004019c0(void *transform, Vec3 *value, f32 scale);

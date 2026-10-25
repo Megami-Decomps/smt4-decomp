@@ -281,4 +281,12 @@ extern "C" {
 void textEncodeFontSlot(s32 slot, const u8 *text);
 }
 
+extern "C" {
+u32 FUN_00171424(u32 arg);
+}
+
+extern "C" {
+void asdSoundSetHasStream(u8 hasStream);
+}
+
 #endif

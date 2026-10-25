@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "util/FileSlotFree.h"
 
 struct ScriptResource;
 
@@ -39,7 +40,6 @@ int gameReleaseDataReference(void);
 int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
 int FUN_0029ee6c(int arg0, int color);
-int fileSlotFree(int arg);
 void scrScriptProcessDestroy(ScriptResource *resource);
 int ifTouchRegionRemove(void);
 int jobStop(void *context, int arg);

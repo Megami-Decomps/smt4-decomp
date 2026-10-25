@@ -252,7 +252,7 @@ typedef struct MapIfStateA {
     /* 0xCCE8 */ s16 unkCCE8;
     /* 0xCCEA */ s16 unkCCEA;
     /* 0xCCEC */ u8 unkCCEC[0x1C];
-    /* 0xCD08 */ u8 unkCD08;
+    /* 0xCD08 */ s8 unkCD08;
     /* 0xCD09 */ u8 unkCD09[3];
     /* 0xCD0C */ u32 unkCD0C;
     /* 0xCD10 */ u8 unkCD10[8];

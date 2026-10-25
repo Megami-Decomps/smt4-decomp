@@ -1,5 +1,6 @@
 /* NON_MATCHING: the stack frame differs (retail 300 bytes with the 40-byte state above the 256-byte tile buffer, built 376) and the tile index arithmetic is scheduled differently (174 vs 185 rows). */
 #include "common.h"
+#include "shard/gfxTexFormatGetBitsPerPixel.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef void (*TexFormatHook)(TexTileState *state);
 
 extern TexFormatHook DAT_005c143c[4];
 
-s32 gfxTexFormatGetBitsPerPixel(u32 format, u32 type);
 void rt_memcpy(void *destination, const void *source, u32 size);
 s32 textureConvertLinearTile(u8 tile[256], u32 destination, s32 rows, TexTileState *state);
 s32 FUN_004191f0(u8 tile[256], s32 destination, s32 rows, TexTileState *state);

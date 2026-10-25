@@ -27,7 +27,7 @@ typedef struct {
 
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int recordGetModeForId(int);
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_00404050. */
@@ -76,7 +76,7 @@ void FUN_0040307c(int param_1)
     temp_v3 = tableFlagBit1();
     temp_v4 = tableFlagBit2(temp_v2);
     if (*(int *)(param_1 + 0xf4) == temp_v8) {
-      temp_v5 = FUN_001834a4(0x32,temp_v8 + 0x72);
+      temp_v5 = asdTMTexTableEntryAt(0x32,temp_v8 + 0x72);
       temp_v12 = 0x9fe7ffff;
       temp_v6 = recordGetModeForId((int)*(short *)(param_1 + temp_v8 * 2 + 0x10c));
       if ((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6) {
@@ -113,7 +113,7 @@ void FUN_0040307c(int param_1)
                    temp_v4,temp_v12);
     }
     else {
-      temp_v5 = FUN_001834a4(0x32,temp_v8 + 0x67);
+      temp_v5 = asdTMTexTableEntryAt(0x32,temp_v8 + 0x67);
       FUN_00404050(param_1,temp_v2,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,temp_v3,
                    temp_v4);
     }

@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_00248620(...);
+int dataTableFindRecordWord(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
@@ -27,7 +27,7 @@ typedef struct {
 
 extern int *g_unite; /* 0x43dd68 */
 
-/* Supplied declaration required: FUN_00248620. */
+/* Supplied declaration required: dataTableFindRecordWord. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
@@ -191,7 +191,7 @@ unsigned int FUN_003116c8(void)
         return 0;
       }
       puVar7 = (unsigned short *)
-               FUN_00248620((short)*(char *)((int)(char)g_unite[0x2571] + (int)piVar12));
+               dataTableFindRecordWord((short)*(char *)((int)(char)g_unite[0x2571] + (int)piVar12));
       temp_v3 = (unsigned int)*puVar7;
       FUN_002bd06c(temp_v3);
       libc_strcpy(temp_v10,temp_v3);
@@ -226,7 +226,7 @@ unsigned int FUN_003116c8(void)
   temp_v7 = 0;
   if (temp_v3 != 0) {
     do {
-      puVar5 = (unsigned short *)FUN_00248620(temp_v7 & 0xffff);
+      puVar5 = (unsigned short *)dataTableFindRecordWord(temp_v7 & 0xffff);
       if (puVar5 != (unsigned short *)0x0) {
         temp_v5 = *piVar3;
         devilIsUnlocked(temp_v5,*puVar5);

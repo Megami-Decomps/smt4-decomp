@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/ResultReport.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 typedef void (*CecHandler)(void);
 
@@ -77,7 +78,6 @@ s32 nn_cfg_CTR_IsRestrictP2pCec(void);
 s32 FUN_004310c0(void);
 s32 cecQueryOptionalProcess(void);
 s32 bitsAt60Test(u8* object, u32 bit);
-void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
 void sysPlaySe(s32 id);
 void runWinOpen(void);
 void runWinOpenState(void);

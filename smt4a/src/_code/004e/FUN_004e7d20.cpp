@@ -5,12 +5,12 @@
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/RankedSelection.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 s32 callbackCompareDescendingState(const void *left, const void *right);
 void qsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
-BtlUnitA *btlUnitGet(BtlMainStateA **owner);
 
 void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
 {

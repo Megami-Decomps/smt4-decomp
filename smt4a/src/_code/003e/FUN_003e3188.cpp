@@ -2,11 +2,11 @@
 #include "battle/btlMain.h"
 #include "battle/btlEncount.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "shard/btlRosterGroupAllInactive.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;
 void FUN_004caca0(BtlMainStateA *battle, s32 group, s32 enabled, s32 animate);
-s32 btlRosterGroupAllInactive(BtlMainStateA *battle, s32 group);
 void FUN_003ed238(BtlMainStateA *battle, u32 flags);
 void FUN_003e025c(BtlStep *step, BtlMainStateA *battle);
 

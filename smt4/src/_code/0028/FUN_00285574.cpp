@@ -1,4 +1,5 @@
 #include "shard/SaveWork.h"
+#include "map/MapSpawn.h"
 
 extern "C" {
 

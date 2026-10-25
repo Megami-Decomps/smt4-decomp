@@ -1,4 +1,5 @@
 #include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -6,7 +7,6 @@ s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 s32 partyFindSlotById(u32 id);
 u32 isPartySlotBit1Clear(s32 index);
-PartyStatusSlots *gameGetSlotTable(void);
 
 // Script command: put the demon with the argument's ID into the first free reserve slot;
 // the result is 0 when it isn't eligible or is already reserved.

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,14 +9,13 @@ typedef struct {
     s32 total;          /* 0x1f0 */
 } GameData;
 
-GameData *btlGetMainState(void);
 s32 scrGetArg(u32 index);
 
 /* Adds scrGetArg's value to the game data total; always reports success. */
 u32 FUN_0039ccdc(void)
 {
     s32 amount = scrGetArg(0);
-    GameData *data = btlGetMainState();
+    GameData *data = reinterpret_cast<GameData *>(btlGetMainState());
 
     s32 *total = &data->total;
 

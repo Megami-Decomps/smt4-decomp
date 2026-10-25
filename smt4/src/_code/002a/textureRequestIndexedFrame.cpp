@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_TextureSwap.h"
+#include "shard/JobWork.h"
 
 struct ContentRecord;
 struct TextureFrameRecord {
@@ -7,13 +8,12 @@ struct TextureFrameRecord {
 };
 
 extern "C" {
-TextureSwap *jobGetWork(u32 job);
 ContentRecord *aocContentGetIndexedRecord(const ContentRecordKey *key, u32 index);
 void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition);
 
 void textureRequestIndexedFrame(u32 job, s32 index, s32 row, s32 column, s32 transition)
 {
-    TextureSwap *work = jobGetWork(job);
+    TextureSwap *work = (TextureSwap *)jobGetWork(job);
     if (index <= 0) {
         index = 1;
     }

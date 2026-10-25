@@ -1,4 +1,5 @@
 #include "addon/PackageSelection.h"
+#include "util/FUN_00267144.h"
 
 extern "C" {
 
@@ -8,7 +9,7 @@ u32 FUN_0025bed8(void *aocSystem, s32 kind, u32 tableIndex);
 PackageIndexedRecord *packageFindIndexedRecord(void *aocSystem, u32 index);
 
 // Finds record `index` of the base type-40 table, continuing into the add-on packages' tables.
-PackageIndexedRecord *FUN_00267144(u32 index)
+void *FUN_00267144(u32 index)
 {
     void *section = dataTableGet(0x32, 0);
     PackageIndexedRecord *entries = (PackageIndexedRecord *)dataTableGetEntries(section);

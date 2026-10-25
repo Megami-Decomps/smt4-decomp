@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail spills battle state and retains path pointers, adding 16 bytes to the stack frame. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match6_ActionController.h"
 #include "util/FUN_003397b8.h"
 
 extern "C" {
-BtlMainState *btlGetMainState();
 char *libc_strcpy(char *destination, const char *source);
 void memClear(void *destination, u32 size);
 void asdMemFree(void *memory);

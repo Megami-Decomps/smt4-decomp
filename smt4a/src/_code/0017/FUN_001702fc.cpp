@@ -1,11 +1,10 @@
 /* NON_MATCHING: register allocation only (retail keeps the value in r4, the index in r5 and the block in r6, and loads the early-return zero before the compare). */
 #include "common.h"
 #include "shard/S3GxState.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 
-void nn_os_CriticalSection_Enter(void *cs);
-void nn_os_CriticalSection_Leave(void *cs);
 
 extern GxSlotState g_nngxState;
 
@@ -18,10 +17,9 @@ u32 FUN_001702fc(u32 value, u32 index)
     if (index >= GX_SLOT_COUNT) {
         return 0;
     }
-    nn_os_CriticalSection_Enter(block);
+    ScopedCriticalLock lock(block);
     u32 previous = block->slot[index];
     block->slot[index] = value;
-    nn_os_CriticalSection_Leave(block);
     return previous;
 }
 

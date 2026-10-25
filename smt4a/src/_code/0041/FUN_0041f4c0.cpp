@@ -5,6 +5,7 @@
 #include "event/2dEvent/SmokeFade.h"
 
 #include "util/FUN_002857dc.h"
+#include "StaffRoll/StaffRollMain.h"
 extern "C" {
 
 typedef struct {
@@ -33,7 +34,6 @@ typedef struct {
 s32 byteTripleGetV0(void);
 void FUN_0041e58c(ModeScreen *screen);
 void FUN_0041f020(ModeScreen *screen, s32 arg);
-s32 slotIsActive(s32 id);
 void FUN_002f0384(s32 arg);
 void FUN_0019de98(void *target, u32 color);
 

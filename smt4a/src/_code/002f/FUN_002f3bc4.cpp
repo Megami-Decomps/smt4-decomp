@@ -2,6 +2,7 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/Shard0032.h"
 #include "util/CalleeContracts.h"
+#include "shard/getUnlockedSlotCount.h"
 
 // The packed pair uses a 64-bit allocation unit. Keep this view local so its
 // alignment does not change the published, partial UniteWork layout.
@@ -23,7 +24,6 @@ void __aeabi_memcpy4(void *out, const void *source, u32 size);
 void recordMergeByteMasks(void *context, UnitRecord *first, UnitRecord *second,
                   s32 option, UnitRecord *out);
 void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
-s32 getUnlockedSlotCount(UnitRecord *unit);
 void FUN_004bcd90(UnitRecord *unit);
 
 u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)

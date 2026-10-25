@@ -1,8 +1,8 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModelProcess.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-AsdModelProcessSet *jobGetWork(void);
 s32 jobIsValid(u32 handle);
 void jobStop(u32 handle, s32 arg);
 void asdMemFree(void *block);
@@ -11,9 +11,9 @@ extern u32 g_asdModelProcess;
 
 /* Shuts down the model manager's workers: stops each one that is still running, frees the
  * process set and clears its pointer. */
-void asdModelProcessShutdown(void)
+void asdModelProcessShutdown(u32 job)
 {
-    AsdModelProcessSet *set = jobGetWork();
+    AsdModelProcessSet *set = (AsdModelProcessSet *)jobGetWork(job);
 
     if (jobIsValid(set->handle[0]) != 0) {
         jobStop(set->handle[0], 0);

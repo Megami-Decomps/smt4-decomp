@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `asdModelSlotRelease` (_code @ 0x1f42b0, 0x480 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/asdModelGetSlotArray1.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ extern unsigned int asdModelGetSlotArray3(int);
 /* Supplied declaration required: asdOperatorDelete. */
 extern int asdModelGetSlotArray2(int);
 extern unsigned int asdModelGetSlotHandle(int);
-extern int asdModelGetSlotArray1(int);
 /* Supplied declaration required: FUN_004491fc. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 

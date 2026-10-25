@@ -6,7 +6,6 @@
 
 extern "C" {
 Table00Record *dataTable00FindById(u32 id);
-Table04Record *dataTable04FindById(u32 id);
 
 u32 FUN_0027281c(BtlCombatantEntryA *unit)
 {

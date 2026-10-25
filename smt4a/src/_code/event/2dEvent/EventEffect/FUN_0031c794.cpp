@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "clear_save/clearSave.h"
 
 // Fade/slide banner shown over the event scene.
 struct EventEffect {
@@ -27,7 +28,6 @@ extern EventEffect* g_eventEffect;
 extern TexKey DAT_0057f3d0[2];
 
 s32 FUN_00162ea4(void);
-void FUN_00212204(s32 arg);
 f32 mathInterpolateTimed(s32 length, f32 from, f32 to, s32 time);
 s32 lerpIntSplitClamped(s32 from, s32 to, s32 length, s32 time);
 

@@ -59,12 +59,12 @@ typedef struct FrameWork {
     /* 0x0F66 */ u8 unk0F66[0x32];
     /* 0x0F98 */ u8 unkF98;
     /* 0x0F99 */ u8 unkF99;
-    /* 0x0F9A */ u8 fadeActive;
+    /* 0x0F9A */ s8 fadeActive;
     /* 0x0F9B */ union {
         u8 unk0F9B[1];
         u8 useStandardTextureExtent;
     };
-    /* 0x0F9C */ u8 fadeEnabled;
+    /* 0x0F9C */ s8 fadeEnabled;
     /* 0x0F9D */ u8 unkF9D;
     /* 0x0F9E */ u8 unkF9E;
     /* 0x0F9F */ u8 unk0F9F[0x29];

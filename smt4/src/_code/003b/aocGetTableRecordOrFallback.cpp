@@ -1,6 +1,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match1_Table03Record.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 extern AocSystem* g_aocSystem;

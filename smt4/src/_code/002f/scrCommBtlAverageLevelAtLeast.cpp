@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -14,7 +15,6 @@ typedef struct MainState {
     /* 0x1FC0 */ Unit *units;
 } MainState;
 
-MainState *btlGetMainState(void);
 s32 scrGetArg(u32 index);
 int scrSetResult(bool value);
 
@@ -27,7 +27,7 @@ u32 scrCommBtlAverageLevelAtLeast(void)
     s32 i;
 
     for (i = 0; i < 109; i++) {
-        Unit *unit = &btlGetMainState()->units[i];
+        Unit *unit = &reinterpret_cast<MainState *>(btlGetMainState())->units[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
             count++;

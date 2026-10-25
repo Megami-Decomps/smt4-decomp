@@ -30,7 +30,7 @@ struct LabelSprite {
 };
 
 extern "C" {
-LabelSprite *FUN_001834a4(u32 bank, u32 sprite);
+LabelSprite *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 
 /* Moves label `index` out of the way of the other shown labels vertically and returns the offset
  * that keeps its sprite inside the screen: (dx, dy, 0). */
@@ -38,7 +38,7 @@ LabelVec3 FUN_00416388(LabelNode *labels, s32 index, const LabelSpriteKey *key)
 {
     f32 x = labels[index].x;
     f32 y = labels[index].y;
-    LabelSprite *sprite = FUN_001834a4(key->bank, key->sprite);
+    LabelSprite *sprite = asdTMTexTableEntryAt(key->bank, key->sprite);
 
     f32 left = x - LABEL_HALF_WIDTH;
     f32 right = x + LABEL_HALF_WIDTH;

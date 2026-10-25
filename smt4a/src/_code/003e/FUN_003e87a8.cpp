@@ -1,9 +1,9 @@
 /* NON_MATCHING: State-mask word loads and scratch parameter-address reuse differ from retail. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-void *gameGetSlotTable(void);
 s32 gameOptionsClassifyMode(void);
 void FUN_003eb760(BtlMainStateA *battle, void *parameters, const BattleSlotSourceRecordA *source);
 void FUN_004ca63c(BtlMainStateA *battle, void *parameters, s32 kind, s32 index, s32 mode);

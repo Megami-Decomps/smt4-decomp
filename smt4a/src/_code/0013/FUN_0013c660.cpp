@@ -17,7 +17,7 @@ extern void FUN_001537b0(void);
 /* Per-frame check: when the job is active, ready and armed and has a target that is not locked, runs FUN_001537b0 (or FUN_001509fc(1) without the alternate flag); returns 0. */
 s32 FUN_0013c660(u32 handle)
 {
-    FrameCaptureWorkA *job = reinterpret_cast<FrameCaptureWorkA *>(jobGetWork(handle));
+    FrameCaptureWorkA *job = (FrameCaptureWorkA *)jobGetWork(handle);
 
     if (job->unkFA4 != 0 && job->unk0FA5[0] != 0 && job->unkFAD != 0 &&
         job->target != NULL && job->unk148C == 0) {

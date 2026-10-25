@@ -7,10 +7,10 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int resourceRunOperationIfUnblocked(...);
 int FUN_00344cd0(...);
 int VectorSignedToFloat(...);
@@ -33,11 +33,11 @@ extern unsigned char LAB_002c8db8; /* 0x2c8db8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int uniteGetWork(void);
 extern int recordGetModeForId(int);
 extern int FUN_002861fc(unsigned short);
@@ -78,22 +78,22 @@ void FUN_002c8940(int param_1,int param_2)
   if (0 < temp_v4) {
     do {
       if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = FUN_002a4894(temp_v2), temp_v4 != temp_v8)) {
-        temp_v4 = FUN_001834a4(0x1a,temp_v8 + 0x2e);
+        temp_v4 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x2e);
         temp_v5 = temp_v1 + (temp_v3 + temp_v8) * 2;
         temp_v6 = FUN_002861fc(*(unsigned short *)(temp_v5 + 0x90a8));
         if (temp_v6 != 0) {
           FUN_001835b4(2,0x1a,0x1d3,*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2
                        ,0x6a);
           textFormatBuffer(temp_v9,&LAB_002c8db8,temp_v6 + 8);
-          temp_v6 = FUN_001834a4(0x1a,0x1d5);
+          temp_v6 = asdTMTexTableEntryAt(0x1a,0x1d5);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(2,0xffffffff,temp_v9,(int)*(short *)(temp_v6 + 10));
+          textDrawString(2,0xffffffff,temp_v9,(int)*(short *)(temp_v6 + 10));
           temp_v5 = bitTableIndexIsClear(*(unsigned short *)(temp_v5 + 0x90a8));
           if (temp_v5 != 0) {
-            temp_v5 = FUN_001834a4(0x1a,0x1d4);
+            temp_v5 = asdTMTexTableEntryAt(0x1a,0x1d4);
             FUN_00164b5c(2,0x1a,7,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
                          (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0x6a);
           }
@@ -116,7 +116,7 @@ void FUN_002c8940(int param_1,int param_2)
     return;
   }
   temp_v8 = FUN_002a4894(temp_v2);
-  temp_v8 = FUN_001834a4(0x1a,temp_v8 + 0x3f);
+  temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v8 + 0x3f);
   efctSetSpeed();
   FUN_001835b4(2,0x1a,0x38,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79);
   FUN_001835b4(2,0x1a,0x39,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79);
@@ -165,20 +165,20 @@ void FUN_002c8940(int param_1,int param_2)
   efctSetSpeed();
   FUN_001835b4(2,0x1a,0x1d6,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x83);
   textFormatBuffer(temp_v9,&LAB_002c8db8,temp_v4 + 8);
-  temp_v4 = FUN_001834a4(0x1a,0x1d8);
+  temp_v4 = asdTMTexTableEntryAt(0x1a,0x1d8);
   temp_v6 = (int)*(short *)(temp_v4 + 10);
   VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v6 + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
-    FUN_00162790(3,0x9fe7ffff,temp_v9,temp_v6);
+    textDrawString(3,0x9fe7ffff,temp_v9,temp_v6);
   }
   else {
-    FUN_00162790(3,0xf5ff9fff,temp_v9,temp_v6);
+    textDrawString(3,0xf5ff9fff,temp_v9,temp_v6);
   }
   temp_v3 = bitTableIndexIsClear(*(unsigned short *)(temp_v3 + 0x90a8));
   if (temp_v3 != 0) {
-    temp_v3 = FUN_001834a4(0x1a,0x1d7);
+    temp_v3 = asdTMTexTableEntryAt(0x1a,0x1d7);
     FUN_00164b5c(2,0x1a,7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,0x83);
   }

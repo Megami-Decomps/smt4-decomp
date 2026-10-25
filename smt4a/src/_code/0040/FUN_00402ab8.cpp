@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 // Placement record of a sprite part: position and a pointer to its extra metrics.
 struct SpriteRect {
@@ -46,8 +47,7 @@ void gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
 void textFormatBuffer(char* out, const char* format, ...);
 s32 fontMeasureLineAdvance(const char* text, s32 font);
-SpriteRect* FUN_001834a4(s32 group, s32 index);
-void FUN_00162790(s32 a, s32 color, const char* text, f32 x, f32 y, f32 scaleA, f32 scaleB, f32 speed);
+SpriteRect* asdTMTexTableEntryAt(s32 group, s32 index);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 a, f32 speed, s32 b, s32 c);
 
 // Draws the caption panel at (x, y): "<name>" and a second caption string side by side with
@@ -65,15 +65,15 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
     }
     textFormatBuffer(text, "%s", name);
     s32 nameWidth = fontMeasureLineAdvance(text, 2);
-    SpriteRect* frame = FUN_001834a4(50, 9);
+    SpriteRect* frame = asdTMTexTableEntryAt(50, 9);
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    FUN_00162790(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
+    textDrawString(2, color, text, (f32)(frame->x - nameWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
 
     textFormatBuffer(text, "\x82\x60\x82\x95\x82\x94\x82\x88\x82\x8f\x82\x92");
     s32 suffixWidth = fontMeasureLineAdvance(text, 2);
-    SpriteRect* suffix = FUN_001834a4(50, 10);
+    SpriteRect* suffix = asdTMTexTableEntryAt(50, 10);
     s32 suffixOffset = *suffix->extra;
-    FUN_00162790(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
+    textDrawString(2, color, text, (f32)(frame->x - nameWidth - suffixOffset - suffixWidth + x + shift), (f32)(frame->y + y), 0.21484375f, 0.0f, speed);
     FUN_001835b4(2, 50, 10, frame->x - nameWidth - suffixOffset + x + shift, frame->y + y, 201);
 
     s32 baseX = shift + x;
@@ -99,12 +99,12 @@ void FUN_00402ab8(CaptionPanel* panel, s32 x, s32 y, f32 speed)
         SpriteRect* iconRect;
         s32 iconShift;
         if (found) {
-            SpriteRect* markRect = FUN_001834a4(50, 58 + i);
+            SpriteRect* markRect = asdTMTexTableEntryAt(50, 58 + i);
             FUN_001835b4(2, 50, 57, markRect->x + baseX, markRect->y + y, 201);
-            iconRect = FUN_001834a4(50, 66 + i);
+            iconRect = asdTMTexTableEntryAt(50, 66 + i);
             iconShift = 6;
         } else {
-            iconRect = FUN_001834a4(50, 18 + i);
+            iconRect = asdTMTexTableEntryAt(50, 18 + i);
             iconShift = 0;
         }
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);

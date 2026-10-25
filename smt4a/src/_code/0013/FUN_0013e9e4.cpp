@@ -23,7 +23,7 @@ void FUN_0014b01c(u32 value);
 
 bool FUN_0013e9e4(u32 job)
 {
-    RenderJobWork *work = reinterpret_cast<RenderJobWork *>(jobGetWork(job));
+    RenderJobWork *work = (RenderJobWork *)jobGetWork(job);
     RenderJobFrame *frame = &work->frame;
     if (!frame->ready)
         return false;

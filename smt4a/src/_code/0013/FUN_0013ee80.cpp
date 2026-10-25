@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct CaptureSurface {
     /* 0x00 */ u8 unk00[0x14];
@@ -26,7 +27,6 @@ struct CaptureJobWork {
 
 extern "C" {
 extern void *g_renderCtx;
-CaptureJobWork *jobGetWork(u32 job);
 void FUN_00157558(void *context);
 u8 FUN_00154edc(u32 mode, CaptureSurface *surface);
 void surfaceCopy(CaptureSurface *destination, CaptureSurface *source);
@@ -40,7 +40,7 @@ static __inline bool captureIsPending(const CaptureState *capture)
  * surface and then halves the surface's recorded size; runs only once. */
 u32 FUN_0013ee80(u32 job)
 {
-    CaptureJobWork *work = jobGetWork(job);
+    CaptureJobWork *work = (CaptureJobWork *)jobGetWork(job);
 
     if (!captureIsPending(&work->capture)) {
         return 0;

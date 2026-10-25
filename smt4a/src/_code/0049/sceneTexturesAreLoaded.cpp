@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/sceneTexturesAreLoaded.h"
 
 extern "C" {
 

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include <stddef.h>
@@ -28,7 +29,6 @@ void dialogClose(s32 mode);
 s32 btlUiIsIdleB(BtlUiA *ui);
 void slotSetRequest(s32 slot, s32 mode, s32 value);
 void btlStageResetAndClearCameraFlag(BtlAuxA *context);
-BtlMainStateA *btlGetMainState(void);
 void partyModelSlotsLoad(BtlMainStateA *battle);
 s32 btlStartEntries(BtlMainStateA *battle);
 

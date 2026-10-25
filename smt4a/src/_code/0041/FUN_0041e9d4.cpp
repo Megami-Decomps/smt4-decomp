@@ -1,5 +1,6 @@
 /* NON_MATCHING: slot-condition lowering, transition-store scheduling and constant register lifetimes differ. */
 #include "saveLoadUI/SaveLoadControllerA.h"
+#include "util/EventQueueAddUnique.h"
 
 struct SaveLoadScriptEntryViewA {
     u8 unk00[0x40];
@@ -18,7 +19,6 @@ extern "C" {
 extern SaveLoadResultFlagsViewA g_saveLoadUIBase;
 void ifTouchRegionRemove();
 void fillThreeWordsWithByte(u32 *, s32);
-void eventQueueAddUnique(u32);
 void FUN_0019de98(s32, u32);
 void scrScriptProcessStartEntry(void *, u32);
 

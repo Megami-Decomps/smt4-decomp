@@ -2,15 +2,15 @@
 #include "ui/AnimatedDigitPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "shard/renderCtxCalculateStereoParallax.h"
+#include "shard/FUN_003f5b14.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 vec2GetXInt(const SpritePlaybackView *position);
 s32 vec2GetYInt(const SpritePlaybackView *position);
 f32 vec2GetSpeed(const SpritePlaybackView *position);
-void FUN_003f5b14(DigitPanelDisplay *display, s32 x, s32 y, s32 first, s32 second, f32 alpha);
 void FUN_003f54c4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 void FUN_003f61b4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 

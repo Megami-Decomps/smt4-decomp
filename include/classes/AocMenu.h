@@ -5,8 +5,8 @@
 #include "shard/ScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "util/FUN_00233fcc.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 extern "C" void asdOperatorDelete(void *block);
 
 /* A window the menu owns and deletes when it moves on (slot 1 of its vtable is the deleting destructor). */

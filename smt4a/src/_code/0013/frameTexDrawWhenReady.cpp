@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 struct RenderReadinessFlags {
     u8 unk00[0x4e];
@@ -12,7 +13,6 @@ struct RenderReadinessWork {
 };
 
 extern "C" {
-RenderReadinessWork *jobGetWork(u32);
 s32 stateValuesGetBySelector(u32);
 void FUN_00157558(RenderCtxA *);
 void FUN_0014a960(u32);
@@ -21,7 +21,7 @@ extern RenderCtxA *g_renderCtx;
 // Submit the render context once this job's two readiness flags permit it.
 u8 frameTexDrawWhenReady(u32 job)
 {
-    RenderReadinessFlags *readiness = &jobGetWork(job)->readiness;
+    RenderReadinessFlags *readiness = &((RenderReadinessWork *)jobGetWork(job))->readiness;
     if (readiness->enabled == 0)
         return 0;
     if (readiness->ready == 0)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the target loops and the scope switch are laid out differently from retail (built 236 rows vs 228); the usability checks are the same. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -32,14 +33,6 @@ typedef struct BtlTarget {
     u8 unk08[0x400];
 } BtlTarget;
 
-typedef struct BattleState {
-    u8 unk0000[0x1FFC];
-    BtlTarget *targets;              /* 0x1FFC */
-    u8 unk2000[0x25A8];
-    u32 blockedLo;                   /* 0x45A8 */
-    u32 blockedHi;                   /* 0x45AC */
-} BattleState;
-
 typedef struct SlotTable {
     u8 unk0000[0x1CA3];
     u8 partyCount;                   /* 0x1CA3 */
@@ -55,8 +48,6 @@ extern u32 g_maskExcludeHi;          /* 0x573cac */
 extern u32 g_maskBlockedLo;          /* 0x573cb8 */
 extern u32 g_maskBlockedHi;          /* 0x573cbc */
 
-SkillRecord *dataTable04FindById(s32 id);
-BattleState *btlGetMainState(s32 arg);
 BtlUnitSlot *btlUnitGet(u32 id);
 SlotTable *gameGetSlotTable(void);
 s32 FUN_003ff998(void *target, SkillRecord *skill, s32 flag);
@@ -69,7 +60,7 @@ u32 FUN_004009d0(s32 id, s32 flag)
 {
     SkillRecord *skill;
 
-    if (id == 0 || (skill = dataTable04FindById(id)) == NULL) {
+    if (id == 0 || (skill = (SkillRecord *)dataTable04FindById(id)) == NULL) {
         return 1;
     }
     u32 bits = skill->bits;
@@ -78,19 +69,19 @@ u32 FUN_004009d0(s32 id, s32 flag)
     if (kind != 2 && kind != 3) {
         return 2;
     }
-    BattleState *state = btlGetMainState(bits << 21);
+    BtlMainStateA *state = btlGetMainState();
     BtlUnitSlot *slot = btlUnitGet(g_btlScriptUnit);
     BattleUnit *unit = slot != NULL ? slot->unit : NULL;
 
     if (slot != NULL && unit != NULL) {
         if (flag == 0 && (unit->status & 0x2000) != 0) {
-            if ((state->blockedLo & g_maskBlockedLo) == 0 && (g_maskBlockedHi & state->blockedHi) == 0) {
+            if ((state->markerMasks.words[0] & g_maskBlockedLo) == 0 && (g_maskBlockedHi & state->markerMasks.words[1]) == 0) {
                 return 4;
             }
             return 0;
         }
         if ((skill->flags39 & 0x40) != 0) {
-            if ((state->blockedLo & g_maskBlockedLo) != 0 || (state->blockedHi & g_maskBlockedHi) != 0) {
+            if ((state->markerMasks.words[0] & g_maskBlockedLo) != 0 || (state->markerMasks.words[1] & g_maskBlockedHi) != 0) {
                 return 0;
             }
             if ((unit->status & 0x10) == 0) {
@@ -110,7 +101,7 @@ u32 FUN_004009d0(s32 id, s32 flag)
             return 0;
         }
     }
-    if ((state->blockedHi & g_maskBlockedHi) != 0 || (state->blockedLo & g_maskBlockedLo) != 0) {
+    if ((state->markerMasks.words[1] & g_maskBlockedHi) != 0 || (state->markerMasks.words[0] & g_maskBlockedLo) != 0) {
         return 0;
     }
     u8 checkAllies = 0;
@@ -144,7 +135,7 @@ u32 FUN_004009d0(s32 id, s32 flag)
     }
     if (checkAllies) {
         for (s32 i = 0; i < 4; i++) {
-            BtlTarget *target = &state->targets[i];
+            BtlTarget *target = &reinterpret_cast<BtlTarget *>(state->entries)[i];
             u32 lo = target->flagsLo;
             u32 hi = target->flagsHi;
 
@@ -158,7 +149,7 @@ u32 FUN_004009d0(s32 id, s32 flag)
     }
     if (checkEnemies) {
         for (s32 i = 4; i < 54; i++) {
-            BtlTarget *target = &state->targets[i];
+            BtlTarget *target = &reinterpret_cast<BtlTarget *>(state->entries)[i];
 
             if ((((g_maskStatusLo & target->flagsLo) != 0 || (g_maskStatusHi & target->flagsHi) != 0) &&
                  ((target->flagsHi & g_maskExcludeHi) == 0 && (target->flagsLo & g_maskExcludeLo) == 0)) &&

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail retains a separate primary-skill base and different saved registers; refresh behavior is reconstructed. */
 #include "shard/GameGlobals.h"
+#include "shard/FUN_0026a978.h"
 
 namespace {
 struct StatusRefreshMemberView { u8 prefix[0x4B]; u8 available; };
@@ -20,7 +21,6 @@ void FUN_00215b5c(u16 *skills, u8 count);
 void FUN_002e2fb0(u16 *skills, u8 count);
 StatusRefreshMemberView *partyMemberFindById(u32 id);
 s32 FUN_0026a9cc(u16 memberId, u32 level, const u16 *skills, u32 *result, s32 skip);
-void FUN_0026a978(const u32 *result, s32 selection);
 void statusDownRestoreTabForMode();
 void FUN_00215a8c(const void *entry);
 void statusDownSetSelectedEntryDescription(s32 id);

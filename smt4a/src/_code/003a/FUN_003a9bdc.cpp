@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ int dataTableGetCount(unsigned int);
 int scrGetArg(int);
 int scrSetResult(unsigned int);
 
-extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: scrGetArg. */
@@ -26,7 +26,7 @@ unsigned int FUN_003a9bdc(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
+  temp_v2 = reinterpret_cast<unsigned int>(btlGetMainState());
   temp_v2 = btlGetTable(temp_v2,0xe);
   temp_v3 = dataTableGetEntries();
   dataTableGetCount(temp_v2);

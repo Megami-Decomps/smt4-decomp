@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler duplicates the success epilogue and aligns the shared result call differently from retail. */
+/* NON_MATCHING: retail calls scrSetResult separately for the current-count arm and branches to the shared epilogue; armcc predicates that arm into the shared call instead. */
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -13,7 +13,6 @@ struct CecSavedEntry {
 
 extern "C" {
 extern CampCecCountState *g_campCec;
-s32 scrGetArg(s32 index);
 CecSavedEntry *FUN_00262f94(void);
 
 // Return either the current StreetPass count or the selected saved entry's count.
@@ -23,11 +22,9 @@ u32 FUN_0030bc90(void)
     u16 count;
     if (g_campCec == NULL) {
         count = 0;
+    } else if (current != 0) {
+        count = g_campCec->count;
     } else {
-        if (current != 0) {
-            scrSetResult(g_campCec->count);
-            return 1;
-        }
         count = FUN_00262f94()->count;
     }
     scrSetResult(count);

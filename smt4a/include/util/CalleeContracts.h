@@ -20,7 +20,6 @@ u32 asdGxGetPhysicalAddress(u32 address);
 void FUN_0023b45c(s32 flag);
 bool devilIsTextureLoaded(s32 id, s32 resolve);
 void *memAlloc(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra);
-u32 FUN_002ba85c(void);
 u32 FUN_00387580(u32 kind, f32 value);
 s32 arrayContainsU16(const u16 *values, s32 count, u32 value);
 u32 FUN_00152f54(void);

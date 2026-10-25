@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BattleSelectionRecord {
@@ -10,7 +11,6 @@ struct BattleSelectionOwner {
 };
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(void);
 
 // Return the selected unit, zero when script-unit flags block it, or minus one if absent.

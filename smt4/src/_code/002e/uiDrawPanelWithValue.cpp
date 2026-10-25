@@ -18,7 +18,7 @@ void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
 void FUN_002bf380(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
 void drawSetColorFromRGBA8(u32 color);
-SpritePartInfo *FUN_002bf4f8(s32 sheet, s32 part);
+SpritePartInfo *asdTMTexTableEntryAt(s32 sheet, s32 part);
 void FUN_00210d08(u32 value, s32 x, s32 y, s32 priority);
 
 // Draw the panel frame (highlighted or not) and its number at an offset from the panel position.
@@ -34,7 +34,7 @@ void uiDrawPanelWithValue(PanelDrawPos *pos, s32 dx, s32 dy, u32 value, s32 high
         FUN_002bf380(2, 0x39, 8, x, y, 0x6f);
     }
     drawSetColorFromRGBA8(0xb4ff8200);
-    SpritePartInfo *part = FUN_002bf4f8(0x39, 0x53);
+    SpritePartInfo *part = asdTMTexTableEntryAt(0x39, 0x53);
     FUN_00210d08(value, part->x + x, part->y + y, 0x71);
     FUN_002bed3c();
     efctSetSpeed(1.0f);

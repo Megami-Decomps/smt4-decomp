@@ -1,4 +1,5 @@
 #include "ui/IfTouch.h"
+#include "shard/ifTouchRegionAdd.h"
 
 extern "C" {
 

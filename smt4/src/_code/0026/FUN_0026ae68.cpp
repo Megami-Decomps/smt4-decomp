@@ -15,7 +15,7 @@ extern int g_statusDown; /* 0x44e190 */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 
@@ -112,8 +112,8 @@ void FUN_0026ae68(void)
         temp_v4 = FUN_0029ee54(temp_v0 + 0x4d4);
       } while (temp_v2 < temp_v4 - 1);
     }
-    temp_v4 = FUN_002bf4f8(0x1a,0x4f1);
-    temp_v2 = FUN_002bf4f8(0x1a,0x41f);
+    temp_v4 = asdTMTexTableEntryAt(0x1a,0x4f1);
+    temp_v2 = asdTMTexTableEntryAt(0x1a,0x41f);
     temp_v5 = (int)*(short *)(temp_v4 + 8);
     ifTouchRegionAdd(temp_v5,(int)*(short *)(temp_v4 + 10),(int)**(short **)(temp_v2 + 0xc),
                  (int)*(short *)(*(int *)(temp_v4 + 0xc) + 2));

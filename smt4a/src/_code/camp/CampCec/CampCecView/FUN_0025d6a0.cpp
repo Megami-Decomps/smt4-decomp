@@ -9,13 +9,13 @@ int FUN_0036c7a8(...);
 int uiGetFloatValue(void);
 int textureRequestCacheGet(...);
 int gfxAdvanceTextureRequestQueue(...);
-int FUN_003e54b8(...);
+int slotTargetApplyActiveValue(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
 int uiPointerHitsRect(...);
 int FUN_00182054(void);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int linkHolderApplyFlag(...);
 int FUN_002e1c94(...);
 int FUN_002e207c(...);
@@ -49,7 +49,7 @@ extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
 /* Supplied declaration required: FUN_00182054. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e1c94. */
@@ -74,7 +74,7 @@ extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: gfxAdvanceTextureRequestQueue. */
 /* Supplied declaration required: FUN_003b60c0. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: FUN_003e54b8. */
+/* Supplied declaration required: slotTargetApplyActiveValue. */
 /* Supplied declaration required: resourceEntryMarkReleased. */
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: modelApplyNonzeroGroupRotation. */
@@ -416,7 +416,7 @@ LAB_0025dd50:
         temp_v8 = *(int *)(temp_v0 + 0x114);
         temp_v9 = -1;
         *(unsigned int *)(temp_v0 + 300) = 0;
-        temp_v1 = FUN_001834a4(0x2e,0x42);
+        temp_v1 = asdTMTexTableEntryAt(0x2e,0x42);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -428,7 +428,7 @@ LAB_0025dd50:
           temp_v6 = *(unsigned int *)(temp_v0 + 300) | 1;
         }
         *(unsigned int *)(temp_v0 + 300) = temp_v6;
-        temp_v1 = FUN_001834a4(0x2e,0x43);
+        temp_v1 = asdTMTexTableEntryAt(0x2e,0x43);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -440,7 +440,7 @@ LAB_0025dd50:
           temp_v6 = *(unsigned int *)(temp_v0 + 300) & 0xfffffffd;
         }
         *(unsigned int *)(temp_v0 + 300) = temp_v6;
-        temp_v1 = FUN_001834a4(0x2e,0x41);
+        temp_v1 = asdTMTexTableEntryAt(0x2e,0x41);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -455,7 +455,7 @@ LAB_0025dd50:
         *(unsigned int *)(temp_v0 + 300) = temp_v6;
         do {
           if (temp_v1 < *(int *)(temp_v0 + 0x120)) {
-            temp_v3 = FUN_001834a4(0x2e,temp_v1 + 0x96);
+            temp_v3 = asdTMTexTableEntryAt(0x2e,temp_v1 + 0x96);
             temp_v17[0] = 0;
             temp_v4 = (int)*(short *)(temp_v3 + 8);
             uiPointerHitsRect(temp_v4,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
@@ -548,7 +548,7 @@ LAB_0025dd50:
                 temp_v5 = *(int *)(temp_v0 + 0x114);
                 temp_v3 = *(int *)(temp_v0 + 0x118);
                 FUN_00167c14(temp_v17 + 1,temp_v17,0);
-                temp_v9 = FUN_001834a4(0x2e,0x41);
+                temp_v9 = asdTMTexTableEntryAt(0x2e,0x41);
                 temp_v17[0] = temp_v17[0] - *(short *)(temp_v9 + 10);
                 temp_v4 = *(int *)(temp_v9 + 0xc);
                 temp_v9 = *(int *)(temp_v0 + 0x120);
@@ -747,7 +747,7 @@ LAB_0025e63c:
   }
   if (temp_v5 != 0 && temp_v1 != 0) {
     uiGetFloatValue();
-    FUN_003e54b8(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c));
+    slotTargetApplyActiveValue(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c));
   }
   return 0;
 }

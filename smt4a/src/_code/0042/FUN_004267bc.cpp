@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_004267bc.h"
 extern "C" {
 u32 FUN_0042687c(u32 first, u32 second, u32 third, u32 fourth, u32 fifth, u32 sixth);
 /* Forwards the complete service request. */

@@ -1,9 +1,8 @@
 /* NON_MATCHING: retail uses `ldr r1, [r0, #40]` where armcc emits `ldr r0, [r0, #40]`. */
 #include "shard/W5_W5Match7_ScriptUnit.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-
-
 
 s32 scrCommTestUnitPackedValue(void)
 {

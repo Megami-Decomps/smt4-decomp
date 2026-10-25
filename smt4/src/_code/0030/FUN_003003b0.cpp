@@ -1,10 +1,10 @@
 /* NON_MATCHING: regular apply and remove blocks are laid out in the opposite order, changing branch and literal-pool offsets. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 u32 FUN_002463e8(u32 status);
 u32 FUN_00246134(s32 side, u32 status, s32 kind, u32 mask);
 void FUN_00246080(s32 side, s32 actor, ScriptUnit *source, BtlActionRecord *action, s32 kind);

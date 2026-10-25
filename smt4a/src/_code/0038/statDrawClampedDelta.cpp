@@ -7,7 +7,7 @@ s32 FUN_0035e458(u32 stat);
 s32 FUN_0035d89c(u32 stat);
 void textFormatBuffer(char *destination, const char *format, ...);
 void drawSetColorFromRGBA8(u32 color);
-const MessageDrawPosition *FUN_001834a4(u32 group, u32 index);
+const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 mode, s32 depth, const char *format, ...);
 void FUN_00183bb0(void);
 
@@ -43,9 +43,9 @@ void statDrawClampedDelta(void *owner, u32 stat, s32 x, s32 y, s32 depth, s32 de
             color = 0x72E027FF;
         }
         drawSetColorFromRGBA8(color);
-        const MessageDrawPosition *position = FUN_001834a4(11, 0x402);
+        const MessageDrawPosition *position = asdTMTexTableEntryAt(11, 0x402);
         FUN_00180310(2, position->x + x, position->y + y, 0, 1, depth + 1, text);
-        position = FUN_001834a4(11, 0x401);
+        position = asdTMTexTableEntryAt(11, 0x401);
         if (value < 0) {
             value = -value;
         }

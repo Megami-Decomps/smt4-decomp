@@ -1,5 +1,6 @@
 /* NON_MATCHING: 211 rows versus retail 209: successful selection shares its argument-setup tail with the final SELECT event instead of the common event-call tail. */
 #include "common.h"
+#include "shard/FUN_00299bc4.h"
 
 extern "C" {
 
@@ -51,7 +52,6 @@ s32 FUN_0028fc60(u32 id);
 void campReleaseScreenTouchRegions(CampList *list, s32 flag);
 s32 dataTable15GetUnlockedEntryId(s32 category, u32 part);
 void FUN_00299900(s32 arg);
-void FUN_00299bc4(CampList *list, s32 flag);
 void FUN_0029cc44(s32 arg);
 void FUN_0029e328(s32 id);
 void sortMenuCreate(s32 id, s32 arg);
@@ -65,7 +65,7 @@ void timerStart(u8 *timer, s32 kind, s32 arg);
 s32 FUN_002c1658(s32 button, s32 mode);
 u32 objectPartRunUnlessLocked(u8 *part);
 u8 buttonHelpGetStatus(void);
-u32 FUN_002bf4f8(u32 a, u32 b);
+u32 asdTMTexTableEntryAt(u32 a, u32 b);
 
 /* Switches the camp to `state`, remembering the previous one. */
 static void campChangeState(u32 state)
@@ -102,7 +102,7 @@ void FUN_00331158(s32 kind)
     }
 
     s8 touched = 0;
-    u32 text = FUN_002bf4f8(0x1D, 0x56D);
+    u32 text = asdTMTexTableEntryAt(0x1D, 0x56D);
     s32 confirmed = uiScrollHandleActionsOrTouch(list, text, camp->scrollState, camp->scrollTop, camp->scrollLines,
                                                  camp->scrollSpacing, &touched, 0, 1);
     if (confirmed != 0 || FUN_0029efd8(list, 1) != 0) {

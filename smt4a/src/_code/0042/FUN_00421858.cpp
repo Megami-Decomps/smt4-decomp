@@ -1,4 +1,5 @@
 #include "shard/VariantController.h"
+#include "shard/FUN_00421858.h"
 
 extern "C" {
 VariantEntry *FUN_0040619c(VariantCollection *variants, u32 index);

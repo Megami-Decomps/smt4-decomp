@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP callee-saved numbering only: retail keeps the incoming x/y pair in d8 (s16/s17) and z in s18, built uses s17/s18 and s16 */
 #include "common.h"
+#include "shard/FUN_00221b70.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct EffectOwner {
 } EffectOwner;
 
 s32 FUN_001c2b48(u32 effect);
-s32 FUN_00221b70(u32 effect);
 s32 FUN_00224ab0(f32 *value, s32 index, u32 arg);
 u32 FUN_00244e1c(u32 effect, u32 *slot, s32 flag, s32 mode, Vec3 position, f32 scale);
 void FUN_003947cc(u32 handle, s32 zero, s32 kind, Vec3 position);

@@ -2,10 +2,10 @@
 #include <algorithm>
 #include "shard/S1GfxModel.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/settings5BClearFlags.h"
 
 extern "C" {
 
-void settings5BClearFlags(s32 flags);
 void FUN_00152fac(s32 which);
 
 /* Drop the selected slot from the registered list and re-show the scene. */

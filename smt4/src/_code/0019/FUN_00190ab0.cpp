@@ -1,4 +1,5 @@
 /* NON_MATCHING: the page dispatch chain is laid out with the bodies inline in retail (compare-and-branch order differs) and the page-0 query result is tested differently; the opened list and scene state per page are the same. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -23,7 +24,6 @@ typedef struct SkillMenuWork {
 } SkillMenuWork;
 
 s32 FUN_00297ca4(SkillMenuWork *work, s32 arg);
-s32 btlGetMainState(void);
 u32 FUN_00293988(void *scene);
 s32 FUN_0029ee54(void);
 void playSceneSetState(SkillMenuWork *work, s32 state, s32 flag);
@@ -89,8 +89,8 @@ u32 FUN_00190ab0(SkillMenuWork *work)
                 resetSprites(work);
             }
         } else {
-            if ((*(u32 *)(btlGetMainState() + 0x44A8) & 0x40) == 0) {
-                if (FUN_00293988(reinterpret_cast<void *>(btlGetMainState())) == 0) {
+            if ((*(u32 *)(reinterpret_cast<s32>(btlGetMainState()) + 0x44A8) & 0x40) == 0) {
+                if (FUN_00293988(reinterpret_cast<void *>(reinterpret_cast<s32>(btlGetMainState()))) == 0) {
                     return 0;
                 }
             }

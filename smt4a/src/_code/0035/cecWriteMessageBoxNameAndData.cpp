@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/cecWriteMessageBoxNameAndData.h"
 
 struct AsdCecMessageBox;
 

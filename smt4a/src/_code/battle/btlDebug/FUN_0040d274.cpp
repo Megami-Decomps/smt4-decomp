@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040d274` (_code @ 0x40d274, 0x708 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "util/CalleeContracts.h"
 
@@ -41,7 +42,6 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_004f1b2c. */
@@ -84,7 +84,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
   temp_v8 = *(float *)(g_btlCamera + 0x584);
   if ((temp_v2 == 1 || temp_v2 == 5) || temp_v2 == 6) {
     if (*(unsigned int *)(g_btlCamera + 0x7cc) < 4) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       temp_v5 = FUN_004f2708(g_btlCamera,temp_v4,1);
       if ((temp_v5 != 0) && ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x1000000) == 0)) {
         btlQueueDuplicateSuppressedAction(0,*(unsigned int *)(param_2 + 8));
@@ -137,7 +137,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
   case 0xc:
   case 0xd:
     if (*(int *)(param_2 + 0x14) != 0) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
@@ -166,7 +166,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
     if (*(int *)(param_2 + 0x14) == 0) {
       return;
     }
-    temp_v4 = btlGetMainState();
+    temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
     FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
     if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
       in_s0 = *(float *)(g_btlCamera + 0x598);
@@ -294,7 +294,7 @@ LAB_0040d588:
     break;
   case 0x18:
     if (*(int *)(param_2 + 0x14) != 0) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
@@ -321,7 +321,7 @@ LAB_0040d588:
     return;
   case 0x19:
     if (*(int *)(param_2 + 0x14) != 0) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_003e7fa4(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x6a),0);
       if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
         in_s0 = *(float *)(g_btlCamera + 0x598);

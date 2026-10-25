@@ -17,12 +17,12 @@ typedef struct RectRec {
     /* 0x0C */ RectPair *rect;
 } RectRec;
 
-extern RectRec *FUN_001834a4(u32 a, u32 b);
+extern RectRec *asdTMTexTableEntryAt(u32 a, u32 b);
 
 /* Reads the record's two shorts (+8/+0xA) and its rect pair (from +0xC, or +4/+6 with bit 15 masked off). */
 void rectRecRead(u32 unused, u32 index, s32 *a, s32 *b, u32 *c, u32 *d)
 {
-    RectRec *rec = FUN_001834a4(unused, index);
+    RectRec *rec = asdTMTexTableEntryAt(unused, index);
     u32 second;
 
     *a = rec->unk08;

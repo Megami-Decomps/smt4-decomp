@@ -2,6 +2,7 @@
 #include "bible/bibleMain.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
+#include "shard/messageSetActiveMode.h"
 
 /* A compendium list entry: 0x20 bytes with the item id halfword at +4. */
 struct BibleItemEntry {
@@ -49,7 +50,6 @@ void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void FUN_0035ad50(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);
 void FUN_0037c8e4(s32 a, s32 b);
-void messageSetActiveMode(s32 mode);
 void FUN_004a3b48(BibleItemMenu *menu);
 s32 FUN_004a8750(u16 id, u8 flag, s32 a, s32 b, s32 c);
 s32 utilityReturnSuccess(u8 *object);

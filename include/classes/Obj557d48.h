@@ -2,8 +2,8 @@
 #define CLASSES_OBJ557D48_H
 
 #include "battle/TargetMarkerEntry.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 
 /* The battle target selection's marker group (vtable at 0x557d48): five cursor markers that pulse
  * and turn. The constructor installs the vtable first, so the object is deleted through slot 1. */

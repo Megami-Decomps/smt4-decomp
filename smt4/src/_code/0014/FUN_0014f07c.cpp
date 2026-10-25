@@ -1,9 +1,9 @@
 /* NON_MATCHING: null-result lifetime, mask-query operands and bind/create argument registers differ. */
 #include "gfx/ModelBoneAnimation.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 extern "C" {
 s32 nw_anim_res_ResAnim_IsFullBakedAnim(void **resource);
 void nw_gfx_SkeletalModel_SetFullBakedAnimEnabled(AsdTrackOwner *owner, s32 enabled);
-void *asdMemoryGetDefaultAllocator();
 ModelBoneAnimationInstance *FUN_00154080(ModelBoneAnimationCreateInfo *info, void *allocator);
 
 // Build an animation for the model's active skeleton target, then bind it.

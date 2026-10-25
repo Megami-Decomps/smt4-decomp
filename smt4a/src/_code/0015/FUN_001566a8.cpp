@@ -1,6 +1,7 @@
 #include "util/FUN_00168750.h"
 /* NON_MATCHING: retail reloads the DAT_0061978c base (r1) after asdSoundGetObjectCount instead of keeping it in r4, and assigns group/flags to sl/r9 the other way round. */
 #include "sound/VoiceLoadQueue.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern VoiceLoadQueue DAT_0061978c;
@@ -8,7 +9,6 @@ extern const char DAT_0053629c[];
 extern const char DAT_00536294[];
 extern const char DAT_00536288[];
 void rt_aeabi_memclr(void *memory, u32 size);
-void *jyoucyuGetTableEntry(u32 index);
 s32 FUN_00162ea4(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 char *libc_strcat(char *destination, const char *source);

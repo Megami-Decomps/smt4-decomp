@@ -1,10 +1,9 @@
 /* NON_MATCHING: the flag read-modify-write temp is r1 (retail r2, with the argument constant loaded before the OR). */
-#include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
-BtlState *btlGetMainState(void);
-BtlUnitEntry *btlMainFindEntryByListedId(BtlState *state, s32 id);
+BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 void FUN_00255180(u32 id, s32 kind, s32 value);
 
 /* Selects one of the actor's two special battle modes and queues its corresponding update. */

@@ -2,6 +2,7 @@
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
 #include "util/FUN_0039f860.h"
+#include "shard/NaviMain_GetCurrentMap.h"
 
 extern "C" {
 extern GameState g_gameState;
@@ -16,7 +17,6 @@ void commonBgReset(void);
 void FUN_00289880(void);
 void buttonHelpSelectMapPreset(void);
 void FUN_00233240(void *window, s32 enable);
-s32 NaviMain_GetCurrentMap(void);
 s32 NaviMain_GetPosX(u16 *state);
 void naviMainSetCurrentMap(u16 *state, s32 map);
 void FUN_002316e8(MapNaviDisplay *display, s32 map);

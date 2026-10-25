@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail predicates the capacity load and the zeroed total on the owner check (ldrbne/movne); this build branches first. */
 #include "common.h"
+#include "shard/FUN_0029a924.h"
 
 extern "C" {
 

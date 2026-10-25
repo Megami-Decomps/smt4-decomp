@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc hoists the mode/entry base differently (retail reads the mode through the menu once, then through a +0x800 base kept in r5) and orders the shared tail call differently */
 #include "common.h"
 #include "shard/Shard004A.h"
+#include "shard/sceneTexturesAreLoaded.h"
 
 struct SelectEntry {
     /* 0x00 */ u8 unk00[4];
@@ -43,7 +44,6 @@ struct SelectMenu {
 
 extern "C" {
 s32 utilityReturnSuccess(void *flags);
-s32 sceneTexturesAreLoaded(void);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_00202400(void);
 ItemRecord *FUN_00184310(u32 itemId);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: captured position vector restores paired y/z conversion; loop-index/record registers and x-conversion scheduling differ. */
 #include "common.h"
+#include "shard/FUN_0033aa6c.h"
 
 /* The engine record list as this function reads it: its 0x58-byte effect records with their kind word and
  * the navigation slot assigned to them. */
@@ -40,7 +41,6 @@ extern NaviRecordList *g_engineRecordList;
 
 void sub68OwnerCall5(void);
 s32 gameFlagsTestSecondBank(s32 flag);
-s32 FUN_0033aa6c(s32 flag);
 void FUN_00244c70(u32 a, u32 id, s32 b, s32 frame, Vec4F position);
 void naviConfigureEntry(s32 index, s32 mapId, s32 areaId, s32 x, s32 y, s32 z, s32 flag);
 

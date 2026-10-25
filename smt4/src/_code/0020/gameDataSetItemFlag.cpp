@@ -1,10 +1,11 @@
 #include "shard/GameDataBlocks.h"
+#include "shard/gameDataSetItemFlag.h"
 
 extern "C" {
 
 
 /* Stores `value` into flag bit 1 of item `index`; returns whether the index was valid. */
-u8 gameDataSetItemFlag(u32 index, s16 value)
+u8 gameDataSetItemFlag(u16 index, s32 value)
 {
     if (index <= 0x500) {
         GameSaveData *data = g_gameDataBlocks.saveBlock;

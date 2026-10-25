@@ -1,6 +1,7 @@
 /* NON_MATCHING: candidate/request registers differ, and the alternate-search return adds a branch-to-next NOP. */
 #include "common.h"
 #include "ui/MessageMain.h"
+#include "shard/FUN_003e4e4c.h"
 
 struct SaveSlotView {
     u8 unk00[0x12c];
@@ -12,7 +13,6 @@ u32 scrGetArg(u32 index);
 SaveSlotView* saveSlotFindSelected(void);
 SaveSlotView* FUN_003e4d68(u16 index);
 s32 FUN_00187168(SaveSlotView* slot);
-s32 FUN_003e4e4c(s32 value);
 
 static __inline s32 findEligibleAlternate(u32 requestedValue)
 {

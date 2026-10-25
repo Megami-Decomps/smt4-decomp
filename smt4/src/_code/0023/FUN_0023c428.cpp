@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 void FUN_002a0428(MaterialMergeModel *model, s32 mode);
 s32 FUN_0027dab0(BtlMainState *battle, BtlActionRecord *action);
 MaterialMergeVariants *FUN_0027da30(BtlMainState *battle, s32 member);

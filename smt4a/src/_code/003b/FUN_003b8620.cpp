@@ -1,4 +1,5 @@
 /* NON_MATCHING: only the scratch registers of the flags/mask AND pair differ (r1/r2/r3 versus retail r2/r3/r1); scrGetArg(0) argument now matches. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "script/ScriptArgs.h"
@@ -9,9 +10,7 @@ struct CombatantFlagFilter {
 };
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
-void scrSetResult(s32 result);
 extern CombatantFlagFilter g_btlMessageFlagMasks;
 
 // Return whether the requested combatant has any flags selected by the current filter.

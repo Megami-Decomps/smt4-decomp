@@ -22,9 +22,8 @@ void FUN_002bed3c(void);
 s32 FUN_002c5d80(u32 mode, u32 flags);
 void FUN_003a37dc(SceneArrowDrawWork *work);
 s32 placeWinGetValue(void);
-s32 FUN_001dd8f0(void);
 s32 FUN_001dd910(void);
-const SpriteInfo *FUN_002bf4f8(u32 table, u32 sprite);
+const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 sprite);
 u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
@@ -45,14 +44,14 @@ void FUN_003a2f88(SceneArrowDrawWork *work)
             ArrowSpritePositions positions = DAT_00407540;
             u32 position = 0;
             if (work->firstArrow) {
-                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(FUN_002bf4f8(0x2B, positions.ids[position]));
+                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
                 s32 arrowX = origin->x + x;
                 s32 arrowY = origin->y + y;
                 FUN_002bf380(2, 0x2B, 6, arrowX, arrowY, depth);
                 ++position;
             }
             if (work->secondArrow) {
-                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(FUN_002bf4f8(0x2B, positions.ids[position]));
+                const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
                 s32 arrowX = origin->x + x;
                 s32 arrowY = origin->y + y;
                 FUN_002bf380(2, 0x2B, 7, arrowX, arrowY, depth);

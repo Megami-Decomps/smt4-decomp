@@ -1,6 +1,7 @@
 /* NON_MATCHING: row-position base rebasing and VFP allocation differ from retail. */
 #include "shard/S1ListPanel.h"
 #include <stddef.h>
+#include "text/TextDraw.h"
 
 struct ItemRowEntry {
     s16 label; // 0x00
@@ -23,7 +24,7 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern const char DAT_0052b4b4[];
 extern const char DAT_0052b4c4[];
-SpriteInfo *FUN_001834a4(s32 group, s32 index);
+SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 index);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
@@ -33,7 +34,6 @@ void FUN_00185e84(s32 effect, s32 x, s32 y, s32 layer, s32 first, s32 second);
 const char *FUN_0014bd84(s32 effect);
 void uiDrawItemCategoryIcon(s32 category, s32 x, s32 y, s32 layer, s32 flags);
 const char *FUN_0015f858(s32 category, s32 variant);
-void FUN_00162790(s32 mode, u32 alpha, const char *text, f32 x, f32 y, f32 scale, f32 depth, f32 speed);
 }
 
 // Draw a row's label, effect or category icon, and description at its animated position.
@@ -43,8 +43,8 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
         return;
     if (entry->label == 0 || placementIndex <= 0)
         return;
-    s32 spacing = FUN_001834a4(12, 130)->bounds.height & 0x7fff;
-    SpriteInfo *placement = FUN_001834a4(12, placementIndex + 135);
+    s32 spacing = asdTMTexTableEntryAt(12, 130)->bounds.height & 0x7fff;
+    SpriteInfo *placement = asdTMTexTableEntryAt(12, placementIndex + 135);
     s32 horizontalOffset = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
     ItemRowAnimation *row = &context->rows[rowIndex];
     s32 rowX = vec2GetXInt(row->position);
@@ -57,7 +57,7 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
     if (entry->effect) {
         s16 effect = static_cast<s16>(entry->effect);
         efctSetSpeed(speed);
-        SpriteInfo *icon = FUN_001834a4(12, 134);
+        SpriteInfo *icon = asdTMTexTableEntryAt(12, 134);
         FUN_00185e84(effect, icon->x + x, icon->y + y, 26, 0, 0);
         if (effect == -1 || effect == -2)
             text = DAT_0052b4b4;
@@ -70,11 +70,11 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
         if (category == 0)
             return;
         efctSetSpeed(speed);
-        SpriteInfo *icon = FUN_001834a4(12, 134);
+        SpriteInfo *icon = asdTMTexTableEntryAt(12, 134);
         uiDrawItemCategoryIcon(static_cast<s16>(category), icon->x + x, icon->y + y, 26, 0);
         text = FUN_0015f858(category, 0);
     }
-    SpriteInfo *position = FUN_001834a4(12, 135);
-    FUN_00162790(2, 255, text, static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 0.0f, speed);
+    SpriteInfo *position = asdTMTexTableEntryAt(12, 135);
+    textDrawString(2, 255, text, static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 0.0f, speed);
     efctSetSpeed(1.0f);
 }

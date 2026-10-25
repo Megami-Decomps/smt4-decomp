@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "status/StatusCamera.h"
+#include "gamedata/FlagBitTests.h"
 
 /* The filter menu's per-category id lists, each indexed by entry (entry 0 is "don't specify"). */
 struct FilterMenu {
@@ -39,7 +40,6 @@ struct StockUnit {
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 StockUnit *gameGetUnitRecord(s32 slot);
-s32 flagWordTestBit(StockUnit *unit, u32 bit);
 void uiFormatIndexedDisplayName(FilterMenu *menu, s32 kind, s32 index, char *label);
 
 /* Formats the label of entry `entry` of filter kind `kind` into `label` and tells whether it is

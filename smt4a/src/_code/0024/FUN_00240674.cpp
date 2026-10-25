@@ -42,7 +42,7 @@ struct PartyMemberRecord {
 
 extern "C" {
 PartySlotTable *gameGetSlotTable(void);
-GaugeIcon *FUN_001834a4(u32 table, u32 sprite);
+GaugeIcon *asdTMTexTableEntryAt(u32 table, u32 sprite);
 PartyMemberRecord *gameGetPlayerData(void);
 PartyMemberRecord *gameGetSlotRecord(s32 slot);
 PartyMemberRecord *FUN_003e503c(u16 index);
@@ -62,7 +62,7 @@ static __inline f32 expGaugeRatio(const u64 *exp, u64 expForLevel)
 extern "C" void FUN_00240674(ExpResultWork *work)
 {
     PartySlotTable *table = gameGetSlotTable();
-    GaugeIcon *icon = FUN_001834a4(0x1d, 0x14);
+    GaugeIcon *icon = asdTMTexTableEntryAt(0x1d, 0x14);
     u64 needed = FUN_004ccbf0(gameGetPlayerData()->expCurve + work->leader.levelOffset);
     if (work->leader.maxed) {
         work->leader.gauge = *icon->width;
@@ -86,7 +86,7 @@ extern "C" void FUN_00240674(ExpResultWork *work)
         }
     }
 
-    icon = FUN_001834a4(0x1d, 0x5f);
+    icon = asdTMTexTableEntryAt(0x1d, 0x5f);
     for (s32 i = 0; i < 24; i++) {
         if ((table->party[0] >= 0 && table->party[0] == table->order[i]) ||
             (table->party[1] >= 0 && table->party[1] == table->order[i]) ||
@@ -118,9 +118,9 @@ extern "C" void FUN_00240674(ExpResultWork *work)
             ExpGaugeEntry *entry = &(&work->leader)[index];
             needed = FUN_004ccbf0(entry->levelOffset + record->level);
             if (partySlotMatchesSelected(record)) {
-                icon = FUN_001834a4(0x1d, 0x13b);
+                icon = asdTMTexTableEntryAt(0x1d, 0x13b);
             } else {
-                icon = FUN_001834a4(0x1d, 0x5f);
+                icon = asdTMTexTableEntryAt(0x1d, 0x5f);
             }
             if (entry->maxed) {
                 entry->gauge = *icon->width;

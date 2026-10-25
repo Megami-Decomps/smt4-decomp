@@ -6,7 +6,7 @@
 extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 scale);
-SpriteInfo *FUN_001834a4(u32 table, s32 index);
+SpriteInfo *asdTMTexTableEntryAt(u32 table, s32 index);
 void FUN_00185dd4(u32 flags, u32 table, s32 index, u32 second, u32 third,
     u32 firstExtra, u32 secondExtra, u32 fourth);
 void vectorSetAllOne(QuadVector *value);
@@ -20,7 +20,7 @@ void FUN_00492c98(u32 flags, u32 table, s32 index, u32 second, u32 third,
     u32 firstExtra, u32 secondExtra, u32 fourth, s32 useColors)
 {
     f32 previousScale = jobGetScalarValue();
-    SpriteInfo *sprite = FUN_001834a4(table, index);
+    SpriteInfo *sprite = asdTMTexTableEntryAt(table, index);
     ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
     if (extension != NULL && extension->mode == 1) {
         FUN_00185dd4(flags, table, index, second, third, firstExtra, secondExtra, fourth);

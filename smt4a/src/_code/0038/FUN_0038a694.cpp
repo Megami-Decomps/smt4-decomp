@@ -1,8 +1,8 @@
 /* NON_MATCHING: hunter allocation construction and process registration scheduling differ from retail. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "ui/HunterDatabaseWork.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 /* The allocation includes a tail not needed by the resource-loader view. */
 struct HunterDatabaseAllocation : HunterDatabaseWork {

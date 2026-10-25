@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -5,7 +6,6 @@ extern "C" {
 void btlReflectCreateKind37(s32 mode, u32 unit, u8 *entry, s32 flag);
 s32 scrGetArg(u32 index);
 u32 btlUnitGet(u32 unit);
-BtlMainStateA *btlGetMainState(void);
 
 extern u32 g_btlScriptUnit; /* 0x57113c */
 

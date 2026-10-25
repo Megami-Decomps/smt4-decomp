@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -7,14 +8,13 @@ typedef struct Player {
     /* 0x1B4 */ int counter;
 } Player;
 
-Player *btlGetMainState(void);
 int scrGetArg(int index);
 
 /* Script command: adds script argument 0 to the current player's counter. */
 u32 scrAddPlayerCounter(void)
 {
     int amount = scrGetArg(0);
-    Player *player = btlGetMainState();
+    Player *player = reinterpret_cast<Player *>(btlGetMainState());
     int *counter = &player->counter;
 
     *counter += amount;

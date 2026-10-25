@@ -1,12 +1,11 @@
 /* NON_MATCHING: channel pointer registers and fade/arbitration branch layout differ. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern BgmRequestChannel DAT_0061951c[2];
 extern BgmChannelSelection g_resourceSharedFlag;
-const void *jyoucyuGetTableEntry(u32);
 s32 FUN_00162ea4();
-void bgmStop(u32, s32, s32);
 
 /* Start or queue a track on the two BGM channels while preserving their fade state. */
 u32 soundChannelRequest(u32 track, s32 parameter)

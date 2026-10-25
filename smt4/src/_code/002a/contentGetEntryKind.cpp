@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
 

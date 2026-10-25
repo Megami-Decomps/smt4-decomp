@@ -1,10 +1,10 @@
 /* NON_MATCHING: action-building stack temporaries and cold branch placement differ; actor sign-extension and float payload recovered. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 
 
 // Queue changes requested by active battle roster records, clearing each pending flag.

@@ -47,7 +47,7 @@ extern RenderCtx* g_renderCtx;
 s32 vec2GetYInt(void* sprite);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void efctSetSpeed(f32 speed);
-LayoutEntry* FUN_001834a4(u32 group, u32 index);
+LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 void* saveSlotFindSelected(void);
 
 static void setDrawState(s32 value)
@@ -78,13 +78,13 @@ void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
 
     s32 cardX = vec2GetXInt(cardSprite);
     s32 cardY = vec2GetYInt(cardSprite);
-    LayoutEntry* frame = FUN_001834a4(0x14, 0xbd9);
+    LayoutEntry* frame = asdTMTexTableEntryAt(0x14, 0xbd9);
     s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
     s32 frameY = frame->y + cardY;
     setDrawState(packNibblesAndByte(6, 1, 0));
     for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
 
-    LayoutEntry* marker = FUN_001834a4(0x14, 0xc16);
+    LayoutEntry* marker = asdTMTexTableEntryAt(0x14, 0xc16);
     s32 markerX = marker->x + cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     s32 markerY = marker->y + cardY;
     efctSetSpeed(hud->haloSprite.scale * alpha);

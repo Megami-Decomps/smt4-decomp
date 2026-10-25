@@ -2,9 +2,10 @@
 #include "event/EventTaskBuffer.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "shard/scrGetArg.h"
+#include "shard/scrGetArg.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
 s32 FUN_002c1d5c(void);
 void *FUN_00244e1c(u32 kind, EventTaskBuffer *buffer, u8 mode, u8 enabled,
                    f32 x, f32 y, f32 z, f32 scale);

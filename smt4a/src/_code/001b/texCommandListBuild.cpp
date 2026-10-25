@@ -1,4 +1,5 @@
 #include "shard/S2GrTexture.h"
+#include "shard/texCommandListBuild.h"
 
 extern "C" {
 

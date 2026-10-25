@@ -1,4 +1,5 @@
 #include "shard/Shard004B.h"
+#include "shard/recordGetScaledMaximum.h"
 
 extern "C" s32 FUN_0018416c(u16 id);
 

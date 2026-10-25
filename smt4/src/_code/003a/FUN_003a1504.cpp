@@ -2,6 +2,7 @@
  * is a __switch$$ relocation in the build and raw words in retail. */
 #include "shard/S2Scene3a.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "shard/FUN_0029a084.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ extern void FUN_0029defc(u32 a, s32 b);
 extern void statusPanelSetOpen(s32 a);
 extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
 extern s32 contentGetEntryKind(u32 id);
-extern void FUN_0029a084(s32 kind, u16 id);
 extern void gameGlobalsSetSelected(s32 a);
 extern void gameReleaseDataReference(void);
 extern void FUN_002305e8(s32 a);

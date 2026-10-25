@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ typedef struct PartySlotTable {
 
 PlayerFlagData *gameGetPlayerData(void);
 SlotFlagRecord *gameGetSlotRecord(s32 slotIndex);
-PartySlotTable *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 
 /* Whether bit `bit` is set in the mask of the player (modes 0, 2, 3), the party (modes 0, 1) or the

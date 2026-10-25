@@ -1,7 +1,7 @@
 #include "battle/btlReflect.h"
+#include "shard/JobWork.h"
 extern "C" {
 
-void *jobGetWork(u32 job);
 void FUN_0040de54(void);
 
 

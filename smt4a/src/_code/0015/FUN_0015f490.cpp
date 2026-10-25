@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
+#include "shard/lcgRandomRange.h"
 
 #define LINE_TABLE 0x3E
 #define LINE_TABLE_OVERRIDES 1
@@ -37,7 +38,6 @@ struct LineOverride {
 
 extern "C" {
 u8 *FUN_00184310(u32 id);
-s32 lcgRandomRange(s32 max);
 void rt_memcpy(void *destination, const void *source, s32 size);
 void rt_aeabi_memclr(void *block, s32 size);
 void FUN_001628c0(const char *name, u32 value, s32 mode, u32 argument);

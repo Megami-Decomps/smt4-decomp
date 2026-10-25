@@ -2,6 +2,7 @@
 /* Reads from a file. In result-recording mode the result is stored in the file and the call reports success; otherwise a
  * failure is fatal. Returns 1 on success. */
 #include "nn/Result.h"
+#include "shard/FUN_0016e800.h"
 
 extern "C" {
 struct FileHandle {
@@ -12,7 +13,6 @@ struct FileHandle {
 };
 
 s32 nn_fs_detail_FileBase_TryRead(void *file, s32 *bytesRead, void *buffer, u32 size);
-void FUN_0016e800(s32 result, u32 address);
 
 static inline void throwFatalIfFailed(s32 result, u32 address)
 {

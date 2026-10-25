@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_00184b90.h"
 
 struct UiSpriteState;
 

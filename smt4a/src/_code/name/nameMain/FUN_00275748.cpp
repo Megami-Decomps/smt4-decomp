@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "name/NameEntryWorkA.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "name/nameMain.h"
 
 extern "C" {
 extern NameGlobals g_name;
@@ -12,7 +13,6 @@ extern const char DAT_00532f8c[];
 
 void *asdMemoryAllocTracked(u32 heap, u32 type, u32 flags, u32 bytes, u32 clear);
 void stateSetterConstruct(NameFormStateA *form, s32 mode);
-void stateSetterConstructDefault(NameFormStateA *form);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 argument, void *draw, void *unused, void *work,
                    u32 parent);
 u32 nameEntryUpdateTask(void);

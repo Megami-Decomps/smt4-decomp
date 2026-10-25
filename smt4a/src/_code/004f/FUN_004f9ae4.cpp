@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -13,7 +14,6 @@ typedef struct {
     Entry *entry;       /* 0x1f54 */
 } Owner;
 
-int btlGetMainState(void);
 int btlScriptUnitHasFlags(void);
 
 /* Returns the owner's entry index, 0 when btlScriptUnitHasFlags reports in the first check, or -1 when there is no usable entry. */
@@ -22,12 +22,12 @@ int FUN_004f9ae4(Owner *owner, int strict)
     if (owner->entry == NULL || owner->entry->index < 0) {
         return -1;
     }
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     if (btlScriptUnitHasFlags() != 0) {
         return 0;
     }
     if (strict != 0) {
-        btlGetMainState();
+        reinterpret_cast<int>(btlGetMainState());
         if (btlScriptUnitHasFlags() != 0) {
             return -1;
         }

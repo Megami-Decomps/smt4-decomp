@@ -34,7 +34,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 /* Draws the event's jobs under temporary render-state presets. */
 s32 FUN_002ad180(u32 job)
 {
-    EventDrawWork *work = reinterpret_cast<EventDrawWork *>(jobGetWork(job));
+    EventDrawWork *work = (EventDrawWork *)jobGetWork(job);
     RenderCtxA *context = g_renderCtx;
     s32 state = FUN_001692ac(1, 0);
     renderStackPush(&context->stackA, state);

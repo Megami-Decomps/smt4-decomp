@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct ListedBattleEntry {
@@ -15,13 +16,12 @@ struct ListedBattleState {
 };
 
 extern "C" {
-ListedBattleState* btlGetMainState();
 void devilCreateRaceEffect(s32 listedId, u32 value);
 
 // Update the selected listed entry when it has a valid ID and the required flag.
 void btlSetSelectedListedValue(u32 value)
 {
-    ListedBattleState* state = btlGetMainState();
+    ListedBattleState* state = reinterpret_cast<ListedBattleState *>(btlGetMainState());
     if (state->selected >= 0) {
         ListedBattleEntry* entry = &state->entries[state->selected];
         if ((entry->flags & 0x10) != 0 && entry->listedId >= 0) {

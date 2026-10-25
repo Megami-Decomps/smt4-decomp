@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BattleDialogFlagsView {
@@ -7,7 +8,6 @@ struct BattleDialogFlagsView {
 
 extern "C" {
 extern u64 DAT_00570de8;
-BtlMainStateA* btlGetMainState();
 void btlHelpFreeEntries();
 s32 dialogIsActive();
 void dialogClose(s32 immediate);

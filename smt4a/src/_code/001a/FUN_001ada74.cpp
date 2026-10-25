@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly (170 vs ~168 rows); differs in the slot-scan loop (retail keeps a loop-invariant flag in r6) and compare operand order */
 #include "common.h"
+#include "shard/bitArrayCountSet1to500.h"
 
 // One requirement of a goal: a kind and its argument/threshold.
 struct GoalCondition {
@@ -37,7 +38,6 @@ s32 gameSlotTableFindFree(void);
 SlotTable* gameGetSlotTable(void);
 u8* gameGetSlotRecord(s32 slot);
 s32 bitSetTest(u8* record, u16 bit);
-s32 bitArrayCountSet1to500(u8* bits);
 u32 gameCountersGetWord(u16 counter);
 u32 FUN_001ba3d4(u16 arg);
 s32 partyFindSlotById(u16 id);

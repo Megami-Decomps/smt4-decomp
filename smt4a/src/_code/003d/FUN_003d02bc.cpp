@@ -45,7 +45,7 @@ extern u8 *g_renderCtx;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_002321f8(const void *a, const void *b);
-TextureLayout *FUN_001834a4(u32 group, u32 id);
+TextureLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 FUN_001692ac(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *motion);
@@ -76,12 +76,12 @@ u32 FUN_003d02bc(void)
         return 0;
     }
     s32 texture = findIconTexture(window->item) * 1000;
-    TextureLayout *icon = FUN_001834a4(0x34, texture);
+    TextureLayout *icon = asdTMTexTableEntryAt(0x34, texture);
 
     renderCtxPushA(reinterpret_cast<RenderCtxA *>(g_renderCtx), FUN_001692ac(1, 0));
     u32 width = (u32)((f32)(icon->width & 0x7FFF) * window->scaleX);
     u32 height = (u32)((f32)(icon->height & 0x7FFF) * window->scaleY);
-    TextureLayout *frame = FUN_001834a4(0x27, 13);
+    TextureLayout *frame = asdTMTexTableEntryAt(0x27, 13);
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + (frame->x - (s32)(width >> 1)) + window->offsetX;
     s32 y = frame->y - (s32)(height >> 1);
 
@@ -91,7 +91,7 @@ u32 FUN_003d02bc(void)
     }
     if (window->pending != 0 && FUN_0028520c((s16)window->pending) != 0) {
         texture = findIconTexture(window->pending) * 1000;
-        FUN_001834a4(0x34, texture);
+        asdTMTexTableEntryAt(0x34, texture);
         efctSetSpeed((f32)(window->total - window->elapsed) / (f32)window->total);
         FUN_00185dd4(2, 0x34, texture, x, y, width, height, 21);
     }

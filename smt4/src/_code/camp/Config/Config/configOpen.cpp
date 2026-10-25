@@ -19,7 +19,6 @@ void LAB_0018b964(void);
 
 extern ConfigWork *g_config;
 
-extern int FUN_002973ec(void);
 extern int gameFlagIsSet(u32 flag);
 extern u32 dataTableGetCount(u32 value);
 extern u32 dataTableGet(u32 a, u32 b);

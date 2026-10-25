@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail ends with a tail `b svcExitProcess` (no prologue); built calls it with bl, which the linker emulation turns into the inlined svc. */
+/* NON_MATCHING: retail ends with a tail `b svcExitProcess` (no prologue); armcc emits `bl` in a noreturn function (inlined to svc) and `push/pop`+`b` in an ordinary one. */
 #include "common.h"
 
 extern "C" {

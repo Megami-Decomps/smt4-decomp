@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack saves, cold party branch placement and slot update scheduling differ; -O2 candidate. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleSlotCore { u8 data[0x2ac]; };
@@ -37,7 +38,6 @@ struct RecoverableSlot {
 };
 extern "C" {
 extern void *g_btlUiBlock;
-BattleSlotState *btlGetMainState();
 void *dataTable00FindById(u16);
 void FUN_003eb314(BattleSlotState *, BattleSlotCore *, void *);
 PartySlotMap *gameGetSlotTable();
@@ -54,7 +54,7 @@ void FUN_004ca63c(BattleSlotState *, BattleSlotCore *, s32, s32, s32);
 // Populate a battle slot from a table definition or a selected saved party member.
 void btlPopulateSelectedSlot(s32 kind, s32 slot, s32 destination, s32 animate)
 {
-    BattleSlotState *battle = btlGetMainState();
+    BattleSlotState *battle = reinterpret_cast<BattleSlotState *>(btlGetMainState());
     BattleSlotScratch scratch;
     if (kind != 0) {
         void *definition = dataTable00FindById((u16)battle->slots[slot].id);

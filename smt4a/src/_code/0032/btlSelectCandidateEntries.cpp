@@ -1,10 +1,11 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "shard/btlSelectCandidateEntries.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 BattleActionUnit *btlUnitGet(u32 id);
 extern u32 g_btlScriptUnit;
 

@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Gfx/Model/AsdScene.h"
 
 extern "C" {
 extern AsdMemory g_asdMemory;

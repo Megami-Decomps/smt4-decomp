@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlMainAccess.h"
+#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 u32 scrGetArg(u32 argument);
 void scrSetResult(s32 result);
-s32 btlFindEntryValue(s32 unit, u32 index);
 
 // Test whether an eligible combatant with the requested id has a positive entry value.
 u32 FUN_003cc218()

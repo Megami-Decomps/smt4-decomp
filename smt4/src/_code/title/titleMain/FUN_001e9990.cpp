@@ -142,7 +142,7 @@ extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002bc0e0. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int padIsButtonPressed(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
 extern int dataTableGetEntries(void);
@@ -194,22 +194,22 @@ int FUN_001e9990(unsigned int handle)
   case 0:
     fileSlotLoad(0x3a);
     FUN_002a5eb4();
-    temp_v4 = FUN_002bf4f8(0x11,0x12);
+    temp_v4 = asdTMTexTableEntryAt(0x11,0x12);
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     puVar13[0x10] = temp_v6;
     puVar13[0x11] = temp_v5;
-    temp_v4 = FUN_002bf4f8(0x11,0x13);
+    temp_v4 = asdTMTexTableEntryAt(0x11,0x13);
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     puVar13[0x12] = temp_v6;
     puVar13[0x13] = temp_v5;
-    temp_v4 = FUN_002bf4f8(0x11,0x16);
+    temp_v4 = asdTMTexTableEntryAt(0x11,0x16);
     temp_v5 = VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     puVar13[0x14] = temp_v5;
     puVar13[0x15] = temp_v6;
-    temp_v4 = FUN_002bf4f8(0x11,0x17);
+    temp_v4 = asdTMTexTableEntryAt(0x11,0x17);
     in_s0 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(float *)&puVar13[0x16] = in_s0;

@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
 int FUN_002499fc(u32 a, int *first, int *count);
-extern u8 *btlGetMainState(void);
 int scrGetArg(int index);
 extern u8 *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
@@ -32,7 +32,7 @@ u32 scrCommBattleHasAffectedGroupUnit(void)
     i = first;
     if (first < count + first) {
         do {
-            btl = btlGetMainState();
+            btl = reinterpret_cast<u8 *>(btlGetMainState());
             unit = (BtlUnit *)(*(u8 **)(btl + 0x1fc0) + i * 0x288);
             if (((((unit->flags & 0x10) == 0) && ((unit->flags & 1) != 0)) && ((unit->flags & 0x40) == 0)) &&
                 (unit->slots[slot] >> 10 == 4)) {
@@ -42,9 +42,9 @@ u32 scrCommBattleHasAffectedGroupUnit(void)
             i = i + 1;
         } while (i < first + count);
     }
-    btl = btlGetMainState() + 0x4900;
+    btl = reinterpret_cast<u8 *>(btlGetMainState()) + 0x4900;
     if (*(s8 *)(btl + 0xc5) != 0) {
-        btlGetMainState();
+        reinterpret_cast<u8 *>(btlGetMainState());
         extra = (BtlUnit *)btlMainFindActiveEntry();
         if ((extra != NULL) && (extra->slots[slot] >> 10 == 4)) {
             scrSetResult(1);

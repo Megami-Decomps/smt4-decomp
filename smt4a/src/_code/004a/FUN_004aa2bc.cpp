@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail splits the 0x74B3 offset as `add r0,#0x7400; ldrb r0,[r0,#179]`; the build adds both parts and loads with a zero offset (one instruction more). */
 #include "battle/btlUI.h"
 
 extern "C" {

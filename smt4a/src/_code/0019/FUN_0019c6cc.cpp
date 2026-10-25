@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct TextureFrameTable;
 struct TextureFrame {
@@ -11,14 +12,13 @@ struct TextureTransitionWork {
 };
 
 extern "C" {
-TextureTransitionWork *jobGetWork(u32);
 TextureFrame *dataTable19FindAddonWord(TextureFrameTable *, s32);
 void uiSpriteReplaceTextureEntry(TextureTransitionWork *, u32, s32);
 
 // Resolve a frame's texture and forward the transition request to the work object.
 void FUN_0019c6cc(u32 job, s32 frame, s32 enabled, s32 available, s32 transition)
 {
-    TextureTransitionWork *work = jobGetWork(job);
+    TextureTransitionWork *work = (TextureTransitionWork *)jobGetWork(job);
     if (frame <= 0)
         frame = 1;
     u32 texture = 0;

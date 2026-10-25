@@ -1,13 +1,18 @@
-/* NON_MATCHING: compiler keeps key values in different registers and adds a return branch. */
+/* NON_MATCHING: result-local form now matches all but one instruction (armcc adds a conditional branch to the earlier bx lr after the final movne). */
 #include "common.h"
 
 /* Orders nonempty halfword entries before empty entries. */
 extern "C" s32 FUN_002c6e38(const u16 *left, const u16 *right)
 {
-    u16 leftValue = *left;
-    u16 rightValue = *right;
-    if (leftValue != 0) {
-        return rightValue == 0 ? -1 : 0;
+    s32 result = 0;
+    if (*left != 0) {
+        if (*right == 0) {
+            return -1;
+        }
+        return result;
     }
-    return rightValue != 0 ? 1 : 0;
+    if (*right != 0) {
+        return 1;
+    }
+    return result;
 }

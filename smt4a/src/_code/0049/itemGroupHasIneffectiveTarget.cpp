@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct ItemSlotTable {
 
 s32 btlItemComputeValues(s32 unit, u32 item, s32 *first, s32 *second);
 s32 gameSlotTableFindFree(void);
-ItemSlotTable *gameGetSlotTable(void);
 
 /* Whether using the item on the target group (0/1: party, 2/3: reserve; 0/2/3 also check the user)
  * has no effect on someone. */

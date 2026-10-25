@@ -2,6 +2,7 @@
 #include "shop/shopMain.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern ShopCreateWork *g_shop;
@@ -9,7 +10,6 @@ extern const char DAT_00536180[];
 extern const char DAT_005361d4[];
 extern const char DAT_005361c4[];
 extern const char DAT_005361b0[];
-void *jyoucyuGetTableEntry(u32 index);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 tracked);
 s32 FUN_0027dda4(u32 process);
 void shopProcessMarkFinished(u32 process);

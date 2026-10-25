@@ -27,7 +27,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00185dd4. */
 
@@ -54,7 +54,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
   unsigned int temp_v10;
   unsigned int temp_v11;
   
-  temp_v0 = FUN_001834a4(param_5,param_6);
+  temp_v0 = asdTMTexTableEntryAt(param_5,param_6);
   psVar2 = *(short **)(temp_v0 + 0xc);
   temp_v1 = param_1;
   if (param_2 < param_1) {

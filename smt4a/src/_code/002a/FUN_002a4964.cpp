@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "shard/FUN_002a4964.h"
 
 extern "C" {
 s32 scrollListGetTop(ScrollSelection *list);

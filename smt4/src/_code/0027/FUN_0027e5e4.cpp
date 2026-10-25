@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail retains an unused pure getter call; FSM and flag-register scheduling also differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
@@ -17,7 +18,6 @@ typedef char BattleUnitStateWorkOffsets[offsetof(BattleUnitStateWork, state) == 
     offsetof(BattleUnitStateWork, actor) == 0x60 && offsetof(BattleUnitStateWork, step) == 0xA0 ? 1 : -1];
 
 extern "C" {
-BtlMainState* btlGetMainState(void);
 BtlUnitData* FUN_0027da30(BtlMainState* battle, s32 index);
 
 // Refresh the unit state machine and mirror its status mask onto the actor entry.

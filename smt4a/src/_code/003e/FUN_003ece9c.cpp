@@ -2,13 +2,13 @@
 #include "battle/btlMain.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "shard/btlUiHasSelection.h"
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
 extern void *g_btlUiBlock;
 s32 hasFlag80Or1000(u32 id, const ScriptCategoryUnit *unit);
 UnitCategoryState *FUN_003eaf20(BtlMainStateA *state);
-s32 btlUiHasSelection(void *ui);
 void FUN_0047f780(s32 category, s32 first, s32 second);
 
 /* Request the scripted unit's category effect unless the current battle selection blocks it. */

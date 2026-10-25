@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "shard/FUN_002c58c8.h"
 
 /* The loading task's work: its state word is at +8. */
 struct LoadTask {
@@ -29,7 +30,6 @@ void statusBustUpAcquire(void);
 void FUN_0026f824(s32 value);
 void buttonHelpAcquireResources(void);
 void FUN_002c5620(void);
-void FUN_002c58c8(s32 a, s32 b);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
 void FUN_002fc1a8(void);
 void FUN_00317e78(void);

@@ -2,6 +2,7 @@
 /* Script command: sets up a countdown fade on a job — full strength and a per-frame decrement of 1 / frames, or both
  * zero when the frame count is 0. Arguments: job id, frame count. Always returns 1. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 /* The part of a job's work area the fade uses. */
@@ -12,13 +13,12 @@ struct FadeWork {
 };
 
 s32 scrGetArg(u32 index);
-FadeWork *jobGetWork(s32 jobId);
 
 s32 FUN_0022212c(void)
 {
     s32 jobId = scrGetArg(0);
     s32 frames = scrGetArg(1);
-    FadeWork *work = jobGetWork(jobId);
+    FadeWork *work = (FadeWork *)jobGetWork(jobId);
 
     if (work != NULL) {
         if (frames != 0) {

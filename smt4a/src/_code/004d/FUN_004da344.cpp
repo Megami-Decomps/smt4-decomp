@@ -1,6 +1,7 @@
 /* NON_MATCHING: packed result ID is cached instead of retail's repeated cross-word extraction; branch layout differs. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct FusionAvailability {
     u8 available;
@@ -9,7 +10,6 @@ struct FusionAvailability {
     u16 resultId;
 };
 extern "C" {
-GameSlotTable *gameGetSlotTable(void);
 u32 computeCountLimit(void);
 s32 FUN_004da980(UniteWork *, u32, u32);
 s32 entryDefIsAvailable(UniteWork *, u32);

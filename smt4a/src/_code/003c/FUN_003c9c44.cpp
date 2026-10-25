@@ -1,12 +1,11 @@
 /* NON_MATCHING: property index and found-state registers are swapped (r5/r6); all other instructions match. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
-BtlMainStateA *btlGetMainState();
 
 // Report whether matching eligible units exist but none has a nonnegative selected property.
 u32 FUN_003c9c44()

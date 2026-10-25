@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "shard/asdListBoxSetFloatItem.h"
 
 extern "C" {
 AsdListBoxItem *asdListBoxFindItem(AsdListBox *, u32);

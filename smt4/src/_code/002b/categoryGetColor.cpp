@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/categoryGetColor.h"
 
 extern "C" {
 

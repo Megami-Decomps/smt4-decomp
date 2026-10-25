@@ -2,6 +2,9 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "util/CalleeContracts.h"
+#include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* Position record of an icon in the icon table (only the screen position). */
 struct SlotIconPosition {
@@ -27,13 +30,10 @@ struct SlotListScreen {
 extern "C" {
 s32 resourceRunOperationIfUnblocked(u32 *cursor);
 s32 FUN_002a4894(u32 *cursor);
-SlotIconPosition *FUN_001834a4(u32 table, u32 index);
 void efctSetSpeed(f32 speed);
 void largeGridDrawButtonStrip(SlotListScreen *screen, s32 x, s32 y, s32 row, f32 scale);
 s32 recordGetModeForId(s32 id);
-s32 arrayContainsU16(const u16 *array, s32 count, u16 value);
 void textFormatBuffer(char *output, const char *format, ...);
-void FUN_00162790(s32 mode, u32 color, const char *text, f32 x, f32 y, f32 z, f32 w, f32 scale);
 void FUN_00185e84(s32 id, s32 x, s32 y, s32 style, s32 a, s32 b);
 s32 recordContainsPairedId(u32 argument, u16 id);
 void FUN_004bd6b0(u32 argument, u16 id, s32 value);
@@ -48,7 +48,7 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     char text[64];
     s32 base = resourceRunOperationIfUnblocked(&screen->cursor);
     s32 entry = base + FUN_002a4894(&screen->cursor);
-    SlotIconPosition *frame = FUN_001834a4(0x1a, FUN_002a4894(&screen->cursor) + 0x1a7);
+    SlotIconPosition *frame = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, FUN_002a4894(&screen->cursor) + 0x1a7));
     efctSetSpeed(scale);
     s32 row = FUN_002a4894(&screen->cursor);
     largeGridDrawButtonStrip(screen, frame->x + x, frame->y + y, row, scale);
@@ -60,11 +60,11 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     if (filled) {
         FUN_001835b4(2, 0x1a, 0x1a0, frame->x + x, frame->y + y, 0x83);
     } else {
-        s32 offsetX = FUN_001834a4(0x1a, 0x1a7)->x - FUN_001834a4(0x1a, 0x185)->x + FUN_001834a4(0x1a, 0x1a0)->x -
-                      FUN_001834a4(0x1a, 0x176)->x;
-        s32 offsetY = FUN_001834a4(0x1a, 0x1a7)->y - FUN_001834a4(0x1a, 0x185)->y + FUN_001834a4(0x1a, 0x1a0)->y -
-                      FUN_001834a4(0x1a, 0x176)->y;
-        SlotIconPosition *marker = FUN_001834a4(0x1a, FUN_002a4894(&screen->cursor) + 0x234);
+        s32 offsetX = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a7))->x - reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x185))->x + reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a0))->x -
+                      reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x176))->x;
+        s32 offsetY = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a7))->y - reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x185))->y + reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a0))->y -
+                      reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x176))->y;
+        SlotIconPosition *marker = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, FUN_002a4894(&screen->cursor) + 0x234));
         FUN_001835b4(2, 0x1a, 0x233, marker->x + x + offsetX, marker->y + y + offsetY, 0x83);
     }
     s32 mode = recordGetModeForId(screen->slotIds[row]);
@@ -77,20 +77,20 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
         color = 0xf5ff9fff;
     }
     textFormatBuffer(text, "%s", FUN_0014bd84(screen->entryIds[entry]));
-    SlotIconPosition *nameBox = FUN_001834a4(0x1a, 0x1a2);
-    FUN_00162790(3, color, text, (f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 0.0f, scale);
-    SlotIconPosition *statBox = FUN_001834a4(0x1a, 0x1a1);
+    SlotIconPosition *nameBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a2));
+    textDrawString(3, color, text, (f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 0.0f, scale);
+    SlotIconPosition *statBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a1));
     FUN_00185e84((s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0, 0);
     if (!recordContainsPairedId(argument, screen->entryIds[entry])) {
         FUN_004bd6b0(argument, screen->entryIds[entry], FUN_002a4894(&screen->cursor));
     }
     statDrawClampedDelta(argument, (s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0);
     if (filled) {
-        SlotIconPosition *countBox = FUN_001834a4(0x1a, 0x1a6);
+        SlotIconPosition *countBox = reinterpret_cast<SlotIconPosition *>(asdTMTexTableEntryAt(0x1a, 0x1a6));
         FUN_00180310(1, frame->x + countBox->x + x, frame->y + countBox->y + y, 1, 4, 0x8d, "%d",
                      FUN_004bcbb4(argument, screen->entryIds[entry]));
     } else {
-        FUN_001834a4(0x1a, 0x19b);
+        asdTMTexTableEntryAt(0x1a, 0x19b);
     }
 }
 

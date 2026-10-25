@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
 
-extern BtlState *btlGetMainState(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 
@@ -13,7 +13,7 @@ u32 scrCommBtlEntryIdLive(void)
     s32 index;
 
     for (index = 0; index < 0x6D; index++) {
-        BtlUnitEntry *unit = &btlGetMainState()->units[index];
+        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id) {
             scrSetResult(1);

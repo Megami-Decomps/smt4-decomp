@@ -1,5 +1,6 @@
 #include "classes/WindowStatus.h"
 #include <new>
+#include "shard/FUN_00233fcc.h"
 
 extern "C" void *asdOperatorNew(u32);
 

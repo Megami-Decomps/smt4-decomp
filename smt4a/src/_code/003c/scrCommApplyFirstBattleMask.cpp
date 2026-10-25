@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
@@ -6,8 +7,8 @@ extern "C" {
 
 s32 scrCommApplyFirstBattleMask(void)
 {
-    BattleMaskState *state = btlGetMainState();
-    state->mask = state->mask | g_battleMaskPresets.first;
+    BtlMainStateA *state = btlGetMainState();
+    state->stateFlags64.bits = state->stateFlags64.bits | g_battleMaskPresets.first;
     return 1;
 }
 

@@ -1,13 +1,13 @@
 /* NON_MATCHING: sound/voice/lock registers differ and typed per-channel buffers enable strength reduction; -O2 candidate. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "shard/FUN_001af874.h"
 
 extern "C" {
 extern CriticalSection DAT_0063f4f0;
 void FUN_001b6390(u32, f32);
 void nn_snd_CTR_Voice_SetState(u32, u32);
 void nn_snd_CTR_FreeVoice(u32);
-u32 FUN_001af874(u32, u32, u32);
 void nn_snd_CTR_Voice_SetMixParam(u32, const void *);
 void nn_snd_CTR_Voice_SetPitch(u32, f32);
 void nn_snd_CTR_InitializeWaveBuffer(void *);

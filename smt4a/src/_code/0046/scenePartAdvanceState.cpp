@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail conditionally executes the kind 1/2 arm (cmp, cmpne, moveq/strdeq) and falls through into the other arm; the build uses branches */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/messageSetMode.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct ScenePart00469e1c {
 
 s32 scrRunOpcodesStub(u32 handle);
 void FUN_003d54f8(s32 index, s32 value);
-void messageSetMode(s32 value);
 void FUN_003c1060(void);
 
 /* Once the handle reports 2, picks the next state (0x10 for kinds 1 and 2, else 3 and resets finished slots), then refreshes. */

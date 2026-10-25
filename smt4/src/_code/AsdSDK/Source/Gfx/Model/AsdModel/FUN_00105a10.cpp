@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlConfig.h"
 #include "shard/S1Light.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 extern "C" {
 extern void *DAT_00471c40;
@@ -10,7 +11,6 @@ extern void *g_asdModelSlotArray3[2];
 extern void *DAT_00464b7c[2];
 extern LightCount g_asdLightCount[2];
 
-void *asdMemoryGetDefaultAllocator(void);
 void *FUN_00111724(void *allocator, const AsdModelSlotConfig *config);
 void *FUN_001113b0(void *allocator, const AsdModelLimits *limits);
 

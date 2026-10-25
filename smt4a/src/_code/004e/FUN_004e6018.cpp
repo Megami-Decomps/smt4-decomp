@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the 64-bit flag masks with ldm (4-aligned) and tests the skill's usable bits without CSE (tst, then and/cmp); the unit table is indexed through a u32 stride (lsl #2). */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -67,7 +68,6 @@ struct BtlActionMasks {
 
 s32 lcgRandomRange(u32 limit);
 s32 source4CCopyHalves(u32 set, u16 *out);
-SkillRecord *dataTable04FindById(u32 id);
 void qsort(void *base, s32 count, s32 size, s32 (*compare)(const void *, const void *));
 s32 compareHalfwordsDescending(const u16 *left, const u16 *right);
 s32 uiCompareHalfwordValuesDescending(const u16 *left, const u16 *right);
@@ -91,7 +91,7 @@ u32 FUN_004e6018(BtlUnitHandle *unit, BtlAiAction *action)
         source4CCopyHalves((u32)action->targets, skills);
         for (s32 i = 0; i < SKILL_SLOTS; i++) {
             if (skills[i] != 0) {
-                SkillRecord *record = dataTable04FindById(skills[i]);
+                SkillRecord *record = (SkillRecord *)dataTable04FindById(skills[i]);
 
                 if (record != NULL && (record->flags & SKILL_USABLE_MASK) != 0 &&
                     (record->flags & SKILL_USABLE_MASK) != SKILL_USABLE_NONE) {

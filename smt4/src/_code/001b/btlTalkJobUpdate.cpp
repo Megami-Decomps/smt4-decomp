@@ -1,9 +1,9 @@
 #include "battle/btlTalk.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 extern BtlTalk *g_btlTalk;
-extern void *jobGetWork(u32 job);
 extern void FUN_003c0880(BtlTalk *talk);
 
 /* Updates the active battle-talk work area when it exists. */

@@ -2,6 +2,8 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct BattleUnitDrawWork {
     u32 owner;
@@ -42,9 +44,7 @@ u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, 
 s32 FUN_001b7a0c(u32);
 void btlUnitDestroyDrawJobs(u32);
 s32 jobFrameCounterAdvance(u32);
-void *asdOperatorNew(u32);
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
-void *asdMemoryGetAllocatorA();
 BattleUnitDrawObject *_ZN9Obj4212b46createEPK16Obj4212b4RequestP18AsdAllocatorObject(const BattleUnitDrawDescription *, void *);
 void FUN_001c0998(BattleUnitDrawObject *, u32);
 

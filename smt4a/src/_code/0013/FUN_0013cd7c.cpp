@@ -23,7 +23,7 @@ static inline void reduceSurface(JobSurface *&source, JobSurface *&destination)
 }
 extern "C" s32 FUN_0013cd7c(u32 job)
 {
-    SurfaceReductionWork *work = reinterpret_cast<SurfaceReductionWork *>(jobGetWork(job));
+    SurfaceReductionWork *work = (SurfaceReductionWork *)jobGetWork(job);
     FrameTextureWork *frame = &work->frame;
     frame->unkFAE = 0;
     if (stateValuesGetBySelector(0) || !frame->unkFA4 || !frame->unkFA5 || !frame->unk1490 || frame->unk148C)

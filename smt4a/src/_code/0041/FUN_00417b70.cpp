@@ -1,6 +1,7 @@
 /* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result before copying it to r4, and hoists the constant 1 into r6; built differs in those three places and addresses the bitmap byte with `ldrb r0, [r5, r4, lsr #3]`. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct FlagBlock {
     /* 0x2A0 */ FlagEntry entries[1];
 } FlagBlock;
 
-s32 FUN_001bd118(s32 id);
 s32 itemDataIsFlagClear(s32 id);
 u32 itemDataGetValue(s32 id);
 s32 FUN_00417e08(s32 id);

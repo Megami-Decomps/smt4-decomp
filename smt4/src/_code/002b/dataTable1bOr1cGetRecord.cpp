@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/CalleeContracts.h"
+#include "shard/dataTable1bOr1cGetRecord.h"
 
 extern "C" {
 

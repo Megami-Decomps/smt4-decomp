@@ -1,14 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ab10c` (_code @ 0x4ab10c, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "romwright_types.h"
+#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 
 int qsort(...);
-int btlGetMainState(void);
 int FUN_003eebf4(int, int);
 int FUN_003f0e20(unsigned int *, int);
-int btlFindEntryValue(int, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -70,8 +71,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
   do {
     aiStack_8c0[temp_v6 * 2] = -1;
     temp_v9[temp_v6 * 2] = 0xffffffff;
-    temp_v2 = btlGetMainState();
-    piVar10 = (int *)(*(int *)(temp_v2 + 0x1ed4) + temp_v6 * 0x1d0);
+    piVar10 = (int *)(btlGetMainState()->roster + temp_v6);
     if (piVar10 != (int *)0x0) {
       puVar4 = (unsigned int *)btlGetMainState();
       FUN_003f0e20(puVar4,(int)*(short *)((int)piVar10 + 0x6a));
@@ -79,7 +79,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
           ((puVar4[1] & DAT_0057a9ec) != 0 || (*puVar4 & DAT_0057a9e8) != 0)) && (piVar10[0x41] < 0)
          ) {
         temp_v7 = 0;
-        temp_v2 = btlGetMainState();
+        temp_v2 = (int)btlGetMainState();
         FUN_003eebf4(temp_v2,1);
         if ((temp_v2 < 0) && ((char)piVar10[0xf] != '\x02')) {
           temp_v7 = 1;
@@ -122,8 +122,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
   temp_v6 = 0;
   temp_v10 = 0;
   do {
-    temp_v7 = btlGetMainState();
-    temp_v7 = *(int *)(temp_v7 + 0x1ed4) + temp_v6 * 0x1d0;
+    temp_v7 = (int)(btlGetMainState()->roster + temp_v6);
     if (temp_v7 != 0) {
       puVar4 = (unsigned int *)btlGetMainState();
       FUN_003f0e20(puVar4,(int)*(short *)(temp_v7 + 0x6a));
@@ -183,7 +182,7 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
               puVar11[3] = temp_v4;
             }
             else {
-              temp_v3 = btlGetMainState();
+              temp_v3 = (int)btlGetMainState();
               FUN_003eebf4(temp_v3,1);
               if ((temp_v3 < 0) && (*(char *)(temp_v7 + 0x3c) != '\x02')) {
                 puVar11[2] = 1;

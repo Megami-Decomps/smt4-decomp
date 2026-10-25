@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
 #include "util/FUN_002b950c.h"
+#include "shard/bgmReleaseStopped.h"
 
 /* The game state (only the fields read here). */
 struct GameStateView {
@@ -52,7 +53,6 @@ extern MapMusicFlags DAT_005f16fc;
 extern MusicSlot DAT_00582364[];
 
 u8 *FUN_003cb88c(s32 area, s32 sub);
-void bgmReleaseStopped(void);
 void FUN_002b9520(void);
 void FUN_00249ac4(s32 area, s32 sub);
 s32 slotFindByPair(s32 area, s32 sub);

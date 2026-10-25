@@ -1,12 +1,11 @@
 /* NON_MATCHING: argument local and <= -1 stat test recover selection setup; candidate-mask AND registers differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
-void scrSetResult(s32 result);
 
 u32 FUN_003b0bb8()
 {

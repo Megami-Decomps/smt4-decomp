@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
+#include "shard/FUN_00220d24.h"
 
 extern "C" {
 
-int FUN_00220d24(...);
 int FUN_00295214(...);
 int FUN_0029ee54(...);
 int FUN_0029ee6c(...);
@@ -45,7 +45,7 @@ extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -174,7 +174,7 @@ LAB_001a2150:
     }
     temp_v5 = FUN_0029efc0(temp_v9);
     temp_v6 = FUN_0029efa8(temp_v9);
-    temp_v7 = FUN_002bf4f8(0x1e,0x48);
+    temp_v7 = asdTMTexTableEntryAt(0x1e,0x48);
     puVar13 = (unsigned short *)0x0;
     temp_v10 = temp_v9;
     uiScrollHandleActionsOrTouch(temp_v9,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),

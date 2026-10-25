@@ -6,7 +6,7 @@
 extern "C" {
 extern PartyPanel *g_partyPanel;
 extern RenderCtx *g_titleScene;
-const UiTextMetrics *FUN_002bf4f8(u32 bank, s32 entry);
+const UiTextMetrics *asdTMTexTableEntryAt(u32 bank, s32 entry);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
@@ -15,7 +15,7 @@ s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_0025117c(s32 entry, s32 x, s32 y, u32 flags, s32 selected)
 {
     PartyPanel *panel = g_partyPanel;
-    const UiTextMetrics *position = FUN_002bf4f8(0x19, entry + 0x57);
+    const UiTextMetrics *position = asdTMTexTableEntryAt(0x19, entry + 0x57);
     if (selected != 0) {
         efctSetSpeed(vec2GetSpeed(&panel->members[3]));
         RenderCtx *context = g_titleScene;

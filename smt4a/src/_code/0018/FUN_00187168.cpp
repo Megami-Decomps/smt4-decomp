@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses beq 14 where the compiled block uses ldrne r0, [r0, #304]. */
 #include "common.h"
 
 struct FlagState {
@@ -6,10 +5,11 @@ struct FlagState {
     u32 flags;      // 0x130
 };
 
+// Whether bit 0 of the state's flags is set; a missing state counts as clear.
 extern "C" u32 FUN_00187168(const FlagState* state)
 {
     if (state == NULL)
         return 0;
-
-    return (state->flags & 1) != 0;
+    u32 bit = state->flags & 1;
+    return bit ? 1 : 0;
 }

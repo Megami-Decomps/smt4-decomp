@@ -4,6 +4,7 @@
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include <stddef.h>
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 extern AocSystemA *g_aocSystem;
@@ -14,7 +15,6 @@ void FUN_00441f54(void);
 void FUN_0016ccb4(void *query);
 void aocMenuInitializeSprites(AocMenu *menu);
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 index);
 u32 dataTableValueOrZero(s32 index);
 ScriptProcess *FUN_00275bc8(void *tableFile, u32 tableValue);
 void sysMemClear(void *buffer, u32 size);

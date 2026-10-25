@@ -3,15 +3,15 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-SpriteInfo *FUN_001834a4(AsdTexture *texture, u32 image);
+SpriteInfo *asdTMTexTableEntryAt(AsdTexture *texture, u32 image);
 void FUN_00492c98(u32 mode, AsdTexture *texture, u32 image, s32 x, s32 y, u32 width, u32 height, u32 color, u32 flags);
 
 void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 offsetX, s32 offsetY, u32 color, u32 flags)
 {
-    FUN_001834a4(region->texture, image);
+    asdTMTexTableEntryAt(region->texture, image);
     s32 x = (s32)(region->x + region->width + (f32)offsetX);
     s32 y = (s32)(region->y + region->height + (f32)offsetY);
-    SpriteInfo *info = FUN_001834a4(region->texture, image);
+    SpriteInfo *info = asdTMTexTableEntryAt(region->texture, image);
     u32 width;
     u32 height;
     if (info->size != NULL && info->size[2] == 1) {

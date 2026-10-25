@@ -1,6 +1,7 @@
 /* NON_MATCHING: quest selection completion omits linker-eliminated hooks. */
 #include "map/PickObjectResources.h"
 #include "ui/QuestSelectionState.h"
+#include "shard/FUN_00467df8.h"
 
 extern "C" {
 extern QuestSelectionNotification DAT_005f16fc;
@@ -20,7 +21,6 @@ void FUN_0037c8e4(s32, s32);
 void panelSetTarget(s32, s32);
 void messageMainSetTargetFlags(s32);
 void FUN_003a7630(s32);
-s32 FUN_00467df8();
 
 void FUN_00468e98(PickObjectResources *owner)
 {

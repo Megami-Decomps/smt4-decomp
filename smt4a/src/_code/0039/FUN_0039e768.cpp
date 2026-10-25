@@ -1,5 +1,5 @@
 /* NON_MATCHING: mask loads are hoisted across the combatant scan, changing saved registers and roster-holder addressing. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -16,7 +16,7 @@ u32 FUN_0039e768()
     u32 animation = scrGetArg(1);
     f32 duration = (f32)scrGetArg(2);
     s32 enabled = scrGetArg(3);
-    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(btlGetMainState());
+    BtlMainStateA *state = btlGetMainState();
     for (s32 index = 4; index < 54; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~208 rows); the 15-column glyph table DAT_00532b5c is referenced as an external array, retail inlines the type/advance sequence at two places and pushes r3 differently */
 #include "common.h"
+#include "shard/eventQueueAddUniqueIfValid.h"
 
 // Two-character slot of the name being typed (high byte first).
 struct NameSlot {
@@ -56,7 +57,6 @@ void FUN_00484be0(NameEntryScreen* screen);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
 void stateSetterEnterState(NameEntryScreen* screen, s32 state);
-s32 eventQueueAddUniqueIfValid(u32 event);
 
 // Types the chosen character (or the blank cell) at the cursor and advances it.
 static inline void typeCharacter(NameEntryScreen* screen, s32 character)

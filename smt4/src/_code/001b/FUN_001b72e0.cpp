@@ -12,7 +12,7 @@ int pairSetHalves(int, int, int);
 int FUN_002b7638(...);
 int effectRenderTransformedInstance(int);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
@@ -58,9 +58,9 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -179,8 +179,8 @@ int FUN_001b72e0(unsigned int job)
       }
       temp_v7 = 0;
       if (g_btlUi != '\0') {
-        FUN_002be5a4(3,0xffffffff,&LAB_001b77ac);
-        FUN_002be5a4(3,0xffffffff,&LAB_001b77d8);
+        textDrawString(3,0xffffffff,&LAB_001b77ac);
+        textDrawString(3,0xffffffff,&LAB_001b77d8);
       }
       if (*(int *)(temp_v1 + 0x7e38) == 0xe) {
         temp_v13 = 0x3eaaaaab;
@@ -195,26 +195,26 @@ int FUN_001b72e0(unsigned int job)
         temp_v6 = DAT_00439c98;
         renderCtxCalculateStereoParallax(g_titleScene);
         temp_v5 = (int)temp_v6;
-        temp_v1 = FUN_002bf4f8(0xe,0x43);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x43));
         FUN_002bf288(2,0xe,0,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2
                      ,(int)*(short *)(temp_v1 + 10) + (int)(*(short **)(temp_v1 + 0xc))[1] / 2,0xc9);
-        temp_v1 = FUN_002bf4f8(0xe,0x45);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x45));
         FUN_002bf288(2,0xe,2,(int)*(short *)(temp_v1 + 8) + temp_v5 + (int)**(short **)(temp_v1 + 0xc) / 2
                      ,(int)*(short *)(temp_v1 + 10) + (int)(*(short **)(temp_v1 + 0xc))[1],0xd3);
-        temp_v1 = FUN_002bf4f8(0xe,0x3d);
+        temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x3d));
         VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(3,0xff,&LAB_001b7808);
+        textDrawString(3,0xff,&LAB_001b7808);
         textFormatBuffer(temp_v9,&LAB_001b79c8,DAT_00439c90);
-        FUN_002be5a4(2,0xffffffff,temp_v9);
+        textDrawString(2,0xffffffff,temp_v9);
         textFormatBuffer(temp_v9,&LAB_001b79dc,SUB84((double)DAT_00439c94,0),
                      (int)((unsigned long long)(double)DAT_00439c94 >> 0x20));
-        FUN_002be5a4(2,0xffffffff,temp_v9);
+        textDrawString(2,0xffffffff,temp_v9);
         textFormatBuffer(temp_v9,&LAB_001b79f4,SUB84((double)DAT_00439c98,0),
                      (int)((unsigned long long)(double)DAT_00439c98 >> 0x20));
-        FUN_002be5a4(2,0xffffffff,temp_v9);
+        textDrawString(2,0xffffffff,temp_v9);
         VectorSignedToFloat(DAT_00439c8c * 0xc + 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(2,0xffffffff,&LAB_001b7a08);
+        textDrawString(2,0xffffffff,&LAB_001b7a08);
       }
       temp_v1 = g_titleScene;
       piVar5 = (int *)(g_titleScene + 0x124c);

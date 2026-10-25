@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/asdMemFree.h"
 
 /* A per-vertex colour buffer object: `colors` holds four floats per vertex. */
 struct TrackColorBuffer {
@@ -39,7 +40,6 @@ extern const u8 DAT_004737ce[];
 extern const u8 DAT_00472560[4]; /* vertex colour (rgba bytes) */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void asdMemFree(void *block);
 void bufferObjDestroy(TrackColorBuffer *buffer);
 TrackColorBuffer *FUN_002469ec(u32 count, u32 first, const u8 *layout, s32 attributes, s32 stride);
 TrackColorBuffer *FUN_002d1480(u32 count, s32 a, s32 b, s32 c, const u8 *layout, s32 stride);

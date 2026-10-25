@@ -1,4 +1,5 @@
 #include "battle/btlReflect.h"
+#include "shard/JobWork.h"
 
 namespace {
 struct ReflectCleanupWork {
@@ -7,14 +8,13 @@ struct ReflectCleanupWork {
 };
 }
 extern "C" {
-ReflectCleanupWork *jobGetWork(u32 job);
 void asdMemFree(void *memory);
 void jobStop(u32 job, s32 reason);
 
 /* Unlinks and frees the queued reflection actions, releases their owner, and stops the cleanup job. */
 void FUN_0030fa74(u32 job)
 {
-    ReflectCleanupWork *work = jobGetWork(job);
+    ReflectCleanupWork *work = (ReflectCleanupWork *)jobGetWork(job);
     ReflectContext *context = g_btlActionReflect;
     ReflectAction *action = context->head;
     while (action != NULL) {

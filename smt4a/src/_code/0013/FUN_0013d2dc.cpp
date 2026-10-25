@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -17,14 +18,13 @@ typedef struct {
     Extension ext;      /* 0x1000 */
 } Context;
 
-Context *jobGetWork(void);
 int stateValuesGetBySelector(int arg);
 int FUN_0014aa9c(int arg);
 
 /* Fires FUN_0014aa9c when both extension switches are on, stateValuesGetBySelector is idle and a request is pending; always returns 0. */
-u8 FUN_0013d2dc(void)
+u8 FUN_0013d2dc(u32 job)
 {
-    Context *context = jobGetWork();
+    Context *context = (Context *)jobGetWork(job);
 
     if (context->ext.enableA == 0) {
         return 0;

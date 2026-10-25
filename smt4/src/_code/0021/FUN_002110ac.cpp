@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild of the battle talk gift/result state machine; retail enters the shared script-wait tail of states 4/5 by goto and shares the state-store tail between cases, and the local item id pair is built by one 32-bit store, which armcc here lays out differently. */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "bible/bibleDevil.h"
 
 /* The battle talk work (only the fields this state machine drives). */
 struct BattleTalkWork {
@@ -28,7 +29,6 @@ void FUN_00295a18(u32 item, s32 amount);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 void messageMainSetEnabled(s32 enabled);
-void FUN_0029ede8(s32 a, s32 amount, u32 b, s32 c);
 void FUN_002be650(u32 item, s32 a);
 s32 gameDataBlocksGetFlagByteA(void);
 s32 battleTalkIsBustReady(void);

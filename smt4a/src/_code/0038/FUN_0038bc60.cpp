@@ -1,11 +1,10 @@
 /* NON_MATCHING: entry-address registers differ, and required mask uses two LDRs instead of one LDM. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 extern "C" {
-void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 
 /* Test whether an eligible combatant has the requested ID and property value. */
 u32 FUN_0038bc60(void)
@@ -30,7 +29,7 @@ u32 FUN_0038bc60(void)
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
-        if ((g_btlCandidateMasks.unavailable & flags) != 0 &&
+        if (flags & (g_btlCandidateMasks.unavailable) != 0 &&
             (g_btlCandidateMasks.required & flags) != 0 &&
             (flags & g_btlCandidateMasks.excluded) == 0 &&
             entry->id == unitId &&

@@ -1,4 +1,5 @@
 /* NON_MATCHING: register pressure - retail keeps the frame, actor and skill in registers and re-evaluates the frame offsets per use, while this version spills r0-r3 and the derived frames; the stack-argument layout (two skipped words, the speed passed as raw bits) and the calls are the same. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "common.h"
 
@@ -17,7 +18,6 @@ struct BattleEntry {
 }
 
 extern "C" {
-void *btlGetMainState(void);
 void FUN_002550d8(s32 id, s32 a, s32 b, s32 c);
 void *btlMainFindEntryByListedId(void *state, s32 id);
 
@@ -44,7 +44,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
     }
     s16 preFrame = (s16)preDelay + (s16)frame;
     if (preDelay >= 0) {
-        void *entry = btlMainFindEntryByListedId(btlGetMainState(), skill->id);
+        void *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), skill->id);
         if (isReflect && entry != NULL && preSide >= 0) {
             ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, preFrame, 0, actor);
             action->kind = 6;
@@ -70,7 +70,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
             action->target = (u32)skill;
             action->value = 1;
             action->parameter = secondAmount;
-            changed = FUN_00293230(btlGetMainState());
+            changed = FUN_00293230(static_cast<void *>(btlGetMainState()));
         } else {
             if (isReflect && effectDelay >= 0) {
                 FUN_002268d0(frame, 0, actor, skill, firstAmount, 0, 2, 1, effectSpeed);
@@ -80,7 +80,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
             action->target = (u32)skill;
             action->value = 0;
             action->parameter = firstAmount;
-            changed = FUN_00293230(btlGetMainState()) & ~clearMask;
+            changed = FUN_00293230(static_cast<void *>(btlGetMainState())) & ~clearMask;
         }
         if (changed != 0) {
             FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
@@ -94,7 +94,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
         action->target = (u32)skill;
         action->value = 1;
         action->parameter = secondAmount;
-        changed = FUN_00293230(btlGetMainState());
+        changed = FUN_00293230(static_cast<void *>(btlGetMainState()));
         if (changed != 0) {
             FUN_002505c0(0, 0, 0x10001c1, 0, 1, 0, 0);
         }
@@ -103,7 +103,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
         u32 flags = 0;
         isReflect = skill->id < 0x6d;
         if (isReflect) {
-            BattleEntry *entry = FUN_0027da30(btlGetMainState(), skill->id);
+            BattleEntry *entry = FUN_0027da30(static_cast<void *>(btlGetMainState()), skill->id);
             if (entry != NULL) {
                 flags = entry->statusFlags;
             }

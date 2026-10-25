@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable switch rewrite (171 vs 168 rows); register numbering and case-body ordering differ from retail */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct MenuList;
@@ -31,7 +32,6 @@ struct BattleMainState {
 
 extern "C" {
 
-BattleMainState* btlGetMainState(void);
 u32 FUN_00297ca4(CommandMenu* menu, u32 arg);
 s32 FUN_0029efc0(void* list);
 s32 FUN_0029efa8(void* list);
@@ -43,7 +43,7 @@ PlayerData* gameGetPlayerData(void);
 void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
 {
     s32 index = 0;
-    if ((btlGetMainState()->flags & 0x200) != 0) {
+    if ((reinterpret_cast<BattleMainState *>(btlGetMainState())->flags & 0x200) != 0) {
         *layout = 7;
         *cursor = 7;
         return;
@@ -80,7 +80,7 @@ void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
         break;
     case 3:
         *layout = 7;
-        if ((btlGetMainState()->flags3 & 0x1000) == 0) {
+        if ((reinterpret_cast<BattleMainState *>(btlGetMainState())->flags3 & 0x1000) == 0) {
             s32 slotIds[6] = { 0, 1, 2, 3, 4, 5 };
             for (s32 i = 0; i < 6; i++) {
                 if (flagBitIsSet(i + 0x2e)) {

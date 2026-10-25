@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/DataTableSections.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ void asdMemFree(void *allocation);
 int asdTMTexTableReleaseNode(int, int);
 struct ScriptResource;
 void scrScriptProcessDestroy(ScriptResource *resource);
-int dataTableFree(int);
 int uiFadeSetVisible(int);
 
 typedef struct TouchRegions {

@@ -15,4 +15,8 @@ struct RelativeDirectory {
     u32 recordsOffset; // 0x14
 };
 
+extern "C" {
+void FUN_0029e328(u8 value);
+}
+
 #endif

@@ -1,4 +1,5 @@
 /* NON_MATCHING: restored signed side index and selected-record reset argument; battle-mask loads and count-argument stack marshalling still differ. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleSide {
@@ -35,7 +36,6 @@ struct BattleMaskPresets {
 };
 extern BattleMaskPresets g_battleMaskPresets;
 
-BattleMain* btlGetMainState(void);
 s32 FUN_003e0154(void);
 s32 FUN_003e0164(void);
 void FUN_004fb798(s32 a, s32 b, s32 c, u8* unit, s32 d, u32 e, u32 f, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
@@ -53,7 +53,7 @@ void btlEffectsRelease(BattleMain* battle);
 // Refreshes the battle unit visuals after a state change and re-normalises the party records.
 u32 FUN_0035f2f4(void)
 {
-    BattleMain* battle = btlGetMainState();
+    BattleMain* battle = reinterpret_cast<BattleMain *>(btlGetMainState());
     s32 first = FUN_003e0154();
     s32 second = FUN_003e0164();
     FUN_004fb798(0, 0, 0, *reinterpret_cast<u8**>(reinterpret_cast<u8*>(battle) + 0x1ed4), 0, first, second, -1, 2, 0, 0, 9, 0, 0, 1);

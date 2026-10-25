@@ -18,7 +18,7 @@ extern RenderCtxA *g_renderCtx;
 u32 FUN_001692ac(u32 mode, u32 enabled);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
-SpriteInfo *FUN_001834a4(u32 group, u32 id);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 
 /* Draw the two parallax-shifted overlay sprites while the overlay task is in phase 9. */
 u32 FUN_003e7578(OverlayTask *task)
@@ -29,7 +29,7 @@ u32 FUN_003e7578(OverlayTask *task)
         renderCtxPushA(context, mode);
         efctSetSpeed(1.0f);
         FUN_00183bb0();
-        FUN_001834a4(0x22, 3000);
+        asdTMTexTableEntryAt(0x22, 3000);
         f32 shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
         FUN_001835b4(2, 0x22, 3000, (s32)shift, 0, 2);
         renderStackPop(&g_renderCtx->stackA);
@@ -39,7 +39,7 @@ u32 FUN_003e7578(OverlayTask *task)
         renderCtxPushA(context, mode);
         efctSetSpeed(task->fadeScale);
         FUN_00183bb0();
-        FUN_001834a4(0x22, 1000);
+        asdTMTexTableEntryAt(0x22, 1000);
         shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
         FUN_001835b4(2, 0x22, 1000, (s32)shift, 0, 6);
         renderStackPop(&g_renderCtx->stackA);

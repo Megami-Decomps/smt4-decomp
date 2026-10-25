@@ -1,9 +1,9 @@
 /* NON_MATCHING: Zero stack arguments are materialized at the call rather than shared across the lookup loop; return-block placement differs. */
 #include "battle/btlAction.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 void FUN_002505c0(s32 index, u32 value, void *resource, u32 mode, u32 unique, u32 options, u32 target);
-void *jyoucyuGetTableEntry(u32 index);
 extern BtlActionResourceEntry DAT_00435ea0[14];
 }
 

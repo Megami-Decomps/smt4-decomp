@@ -77620,13 +77620,13 @@
       "target_path": "orig/target/_code/0024/FUN_002485d4.o"
     },
     {
-      "base_path": "build/obj/_code/0024/FUN_00248620.o",
+      "base_path": "build/obj/_code/0024/dataTableFindRecordWord.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00248620",
+            "name": "dataTableFindRecordWord",
             "size": 80,
             "vram": "0x248620"
           }
@@ -77634,10 +77634,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0024/FUN_00248620.cpp"
+        "source_path": "src/_code/0024/dataTableFindRecordWord.cpp"
       },
-      "name": "_code/0024/FUN_00248620",
-      "target_path": "orig/target/_code/0024/FUN_00248620.o"
+      "name": "_code/0024/dataTableFindRecordWord",
+      "target_path": "orig/target/_code/0024/dataTableFindRecordWord.o"
     },
     {
       "base_path": "build/obj/_code/0024/recordPrepareLinkedOwner.o",
@@ -93376,13 +93376,13 @@
       "target_path": "orig/target/_code/0028/FUN_002865c0.o"
     },
     {
-      "base_path": "build/obj/_code/0028/FUN_002865f8.o",
+      "base_path": "build/obj/_code/0028/scrGetCommandOwner.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002865f8",
+            "name": "scrGetCommandOwner",
             "size": 16,
             "vram": "0x2865f8"
           }
@@ -93390,10 +93390,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0028/FUN_002865f8.cpp"
+        "source_path": "src/_code/0028/scrGetCommandOwner.cpp"
       },
-      "name": "_code/0028/FUN_002865f8",
-      "target_path": "orig/target/_code/0028/FUN_002865f8.o"
+      "name": "_code/0028/scrGetCommandOwner",
+      "target_path": "orig/target/_code/0028/scrGetCommandOwner.o"
     },
     {
       "base_path": "build/obj/_code/0028/FUN_0028660c.o",
@@ -105832,13 +105832,13 @@
       "target_path": "orig/target/_code/002a/packageFindRecordByName.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002a6d08.o",
+      "base_path": "build/obj/_code/002a/objHasFlagBit16.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002a6d08",
+            "name": "objHasFlagBit16",
             "size": 20,
             "vram": "0x2a6d08"
           }
@@ -105846,10 +105846,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002a6d08.cpp"
+        "source_path": "src/_code/002a/objHasFlagBit16.cpp"
       },
-      "name": "_code/002a/FUN_002a6d08",
-      "target_path": "orig/target/_code/002a/FUN_002a6d08.o"
+      "name": "_code/002a/objHasFlagBit16",
+      "target_path": "orig/target/_code/002a/objHasFlagBit16.o"
     },
     {
       "base_path": "build/obj/_code/002a/FUN_002a6d1c.o",
@@ -116050,13 +116050,13 @@
       "target_path": "orig/target/_code/002b/FUN_002be56c.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002be5a4.o",
+      "base_path": "build/obj/_code/002b/textDrawString.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002be5a4",
+            "name": "textDrawString",
             "size": 112,
             "vram": "0x2be5a4"
           }
@@ -116064,10 +116064,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002be5a4.cpp"
+        "source_path": "src/_code/002b/textDrawString.cpp"
       },
-      "name": "_code/002b/FUN_002be5a4",
-      "target_path": "orig/target/_code/002b/FUN_002be5a4.o"
+      "name": "_code/002b/textDrawString",
+      "target_path": "orig/target/_code/002b/textDrawString.o"
     },
     {
       "base_path": "build/obj/_code/002b/libc_sprintf.o",
@@ -116470,13 +116470,13 @@
       "target_path": "orig/target/_code/002b/FUN_002bf4f0.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bf4f8.o",
+      "base_path": "build/obj/_code/002b/asdTMTexTableEntryAt.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bf4f8",
+            "name": "asdTMTexTableEntryAt",
             "size": 60,
             "vram": "0x2bf4f8"
           }
@@ -116484,10 +116484,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bf4f8.cpp"
+        "source_path": "src/_code/002b/asdTMTexTableEntryAt.cpp"
       },
-      "name": "_code/002b/FUN_002bf4f8",
-      "target_path": "orig/target/_code/002b/FUN_002bf4f8.o"
+      "name": "_code/002b/asdTMTexTableEntryAt",
+      "target_path": "orig/target/_code/002b/asdTMTexTableEntryAt.o"
     },
     {
       "base_path": "build/obj/_code/002b/efctSetSpeed.o",

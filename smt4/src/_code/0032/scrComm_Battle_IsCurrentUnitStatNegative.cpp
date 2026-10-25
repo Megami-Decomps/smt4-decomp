@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 extern u8 *btlMainFindActiveEntry(void);
 extern int scrGetArg(int index);
 
@@ -23,7 +23,7 @@ u32 scrComm_Battle_IsCurrentUnitStatNegative(void)
     } else if (which == 2) {
         slot = 0xb;
     }
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     unit = btlMainFindActiveEntry();
     if (unit != NULL) {
         scrSetResult((int)*(s16 *)(unit + slot * 2 + 0x72) <= -1);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001517b4(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int sysMemClear(int, int);
 int FUN_0035e6d4(...);
 int soundChannelRequestIfEnabled(int, int, int);
@@ -18,7 +18,7 @@ int VectorSignedToFloat(...);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern unsigned long long slotIsReady(unsigned int);
 extern int menuAreModeTexturesLoaded(int);
 /* Supplied declaration required: sysMemClear. */
@@ -87,7 +87,7 @@ LAB_003c4fac:
       *(unsigned char *)(param_1 + 0x60) = 1;
       soundChannelRequestIfEnabled(0x1000001,0,0x3c);
       sysMemClear(param_1 + 0x9c,0x1c4);
-      temp_v2 = FUN_001834a4(0x2a,4);
+      temp_v2 = asdTMTexTableEntryAt(0x2a,4);
       *(unsigned int *)(param_1 + 0x104) = 4;
       *(unsigned int *)(param_1 + 0x100) = 0x2a;
       temp_v0 = **(short **)(temp_v2 + 0xc);
@@ -105,7 +105,7 @@ LAB_003c4fac:
       *(int *)(param_1 + 0xe0) = (int)temp_v0;
       *(unsigned int *)(param_1 + 0xe4) = 0;
       *(unsigned int *)(param_1 + 0xe8) = 0;
-      temp_v2 = FUN_001834a4(0x2a,0);
+      temp_v2 = asdTMTexTableEntryAt(0x2a,0);
       *(unsigned int *)(param_1 + 0xcc) = 0;
       *(unsigned int *)(param_1 + 200) = 0x2a;
       temp_v0 = **(short **)(temp_v2 + 0xc);
@@ -122,7 +122,7 @@ LAB_003c4fac:
       *(unsigned int *)(param_1 + 0xa8) = 0;
       *(unsigned int *)(param_1 + 0xac) = 0;
       *(unsigned int *)(param_1 + 0xb0) = 0;
-      FUN_001834a4(0x2a,1000);
+      asdTMTexTableEntryAt(0x2a,1000);
       *(unsigned int *)(param_1 + 0x134) = 1000;
       *(unsigned int *)(param_1 + 0x130) = 0x2a;
       *(unsigned int *)(param_1 + 0x11c) = 0x47;
@@ -193,7 +193,7 @@ LAB_003c4fac:
       *(unsigned int *)(param_1 + 0x1ec) = 0;
       *(unsigned int *)(param_1 + 0x1f0) = 0;
       *(unsigned int *)(param_1 + 500) = temp_v12;
-      temp_v2 = FUN_001834a4(0x2a,3);
+      temp_v2 = asdTMTexTableEntryAt(0x2a,3);
       *(unsigned int *)(param_1 + 0x24c) = 2;
       *(unsigned int *)(param_1 + 0x248) = 0x2a;
       temp_v0 = *(short *)(temp_v2 + 8);
@@ -321,7 +321,7 @@ LAB_003c4fac:
     FUN_0035e6d4(param_1 + 0x224);
     temp_v2 = FUN_0035e6d4(param_1 + 0x17c);
     if (temp_v2 == 0) {
-      temp_v2 = FUN_001834a4(0x2a,3);
+      temp_v2 = asdTMTexTableEntryAt(0x2a,3);
       temp_v0 = *(short *)(temp_v2 + 8);
       temp_v1 = *(short *)(temp_v2 + 10);
       *(int *)(param_1 + 0x230) = (int)temp_v0;

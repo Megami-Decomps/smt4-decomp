@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Gfx/Effect/AsdEffectTexture.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/asdEffectTextureCreate.h"
 
 extern "C" {
 

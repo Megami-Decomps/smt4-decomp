@@ -3,13 +3,13 @@
 
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "shard/asdMemAlloc.h"
 
 extern "C" {
 extern const char g_asdProcessSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Sys\Kernel\AsdProcess.cpp": __FILE__ */
 
 extern AsdProcessState g_asdProcess;
 
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void jobSetParent(void *owner, u32 handle);
 
 /* Creates a process named `name` in `group`, linked at the end of the group's list. It starts

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 #define BTL_NAMED_VALUE_COUNT 4
@@ -24,7 +25,6 @@ extern "C" {
 
 extern const char *g_btlEffect; /* name of the effect being played */
 
-void *btlGetMainState(void);
 s32 FUN_00293230(void *state);
 s32 FUN_00227668(BtlNamedValueOwner *owner);
 u32 libc_strlen(const char *text);
@@ -54,7 +54,7 @@ s32 btlLookupEffectValue(BtlNamedValueOwner *owner)
     BtlNamedValue *entry;
     s32 value;
 
-    if (FUN_00293230(btlGetMainState()) != 0) {
+    if (FUN_00293230(static_cast<void *>(btlGetMainState())) != 0) {
         return -1;
     }
     value = 0;

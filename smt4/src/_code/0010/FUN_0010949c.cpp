@@ -1,13 +1,13 @@
-/* NON_MATCHING: Adjacent flag loads do not share the retail high-offset base register. */
+/* NON_MATCHING: flag loads now share the high-offset base (s8 flags); retail's fadeEnabled==0 exit returns the zero in r0 directly (beq pop), armcc here predicates the second test and branches to a shared mov r0,#0. */
 #include "ui/FrameTex.h"
+#include "shard/JobWork.h"
 extern "C" {
-FrameWork* jobGetWork(u32 job);
 void FUN_001132fc(s32);
 
 // Advances the active white overlay toward transparent.
 u8 FUN_0010949c(u32 job)
 {
-    FrameWork* work = jobGetWork(job);
+    FrameWork *work = (FrameWork *)jobGetWork(job);
     if (work->fadeActive == 0) {
         return 0;
     }

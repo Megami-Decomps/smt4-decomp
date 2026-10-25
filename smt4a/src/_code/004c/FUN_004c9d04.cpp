@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c9d04` (_code @ 0x4c9d04, 0x744 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -66,7 +67,6 @@ extern unsigned int DAT_0057aa74; /* 0x57aa74 */
 extern unsigned int DAT_0057aa78; /* 0x57aa78 */
 extern unsigned int DAT_0057aa7c; /* 0x57aa7c */
 
-extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
@@ -111,7 +111,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
   unsigned char temp_v14;
   unsigned char temp_v15;
   
-  temp_v5 = btlGetMainState();
+  temp_v5 = reinterpret_cast<int>(btlGetMainState());
   puVar13 = (unsigned int *)(*(int *)(temp_v5 + 0x1ffc) + (int)param_1 * 0x408);
   temp_v6 = *puVar13;
   temp_v7 = puVar13[1];

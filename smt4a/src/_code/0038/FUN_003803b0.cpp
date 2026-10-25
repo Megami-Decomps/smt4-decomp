@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail loads the 0x3BE0 effect constant into r5 before the first btlGetMainState call (one more saved register, 48-byte frame); call arguments match. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -9,7 +10,6 @@ extern u32 g_btlScriptUnit;
 
 s32 scrGetArg(u32 index);
 u32 btlUnitGet(u32 unit);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 index);
 void FUN_004fb798(s32 a, u32 unit, s32 b, BattleRosterRecordA *target, s32 c, s32 damage, s32 d, s32 e,
                   s32 effect, s32 f, s32 g, s32 kind, s32 h, s32 i, s32 j);

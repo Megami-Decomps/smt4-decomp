@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `playSceneSetState` (_code @ 0x298140, 0x674 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ extern "C" {
 void battleSelectButtonHelpPreset(int);
 int flagBitIsSet(int);
 int FUN_00292f4c(void);
-int btlGetMainState(void);
 int FUN_00297b94(int, unsigned int, unsigned int);
 int objectPartRunUnlessLocked(int);
 int FUN_0029e958(...);
@@ -72,7 +72,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
   }
   temp_v1 = buttonHelpGetStatus();
   if (temp_v1 == 0x3d) {
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     temp_v1 = FUN_00293230();
     if (temp_v1 == 0) {
       buttonHelpGetMode();

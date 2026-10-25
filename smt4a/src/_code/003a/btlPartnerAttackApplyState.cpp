@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlPartnerAttack.h"
 
 extern "C" {
 
 void *jobGetWork(void *job);
 extern BtlPartnerAttackA *g_btlPartnerAttack;
-void *btlGetMainState(void);
 void FUN_00411458(void *attack, void *state);
 
 s32 btlPartnerAttackApplyState(void *job)
@@ -14,7 +14,7 @@ s32 btlPartnerAttackApplyState(void *job)
     if (attack == NULL) {
         return 0;
     }
-    void *state = btlGetMainState();
+    void *state = static_cast<void *>(btlGetMainState());
     s32 result = 0;
     if (state == NULL) {
         return result;

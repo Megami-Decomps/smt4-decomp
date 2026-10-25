@@ -1,4 +1,5 @@
 #include "shard/W8Match1_EntryDispatch.h"
+#include "shard/entryDispatchUpdate.h"
 extern "C" {
 u32 FUN_00163aa4(DispatchEntry*, f32);
 u32 FUN_00167458(DispatchEntry*, u32);

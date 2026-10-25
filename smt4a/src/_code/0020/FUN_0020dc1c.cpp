@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "camp/PartyPanel/PartyPanel.h"
 
 extern "C" {
 
@@ -23,9 +24,8 @@ int flagValueSub(...);
 int FUN_00163aa4(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_00203b40(int, int, int, int);
-int FUN_00215bd0(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int resourceRunOperationIfUnblocked(...);
@@ -75,7 +75,7 @@ extern unsigned int DAT_0057f10c; /* 0x57f10c */
 extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: campChangeState. */
@@ -166,7 +166,7 @@ void FUN_0020dc1c(void)
         if (temp_v6 >= 7) {
           temp_v6 = 0;
           do {
-            temp_v3 = FUN_001834a4(0x12,temp_v6 + 0x477);
+            temp_v3 = asdTMTexTableEntryAt(0x12,temp_v6 + 0x477);
             temp_v1 = (int)*(short *)(temp_v3 + 8);
             ifTouchRegionAdd(temp_v1,(int)(short)(*(short *)(temp_v3 + 10) + (short)DAT_0057f10c),
                          (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1]);
@@ -256,7 +256,7 @@ LAB_0020de28:
   case 2:
     temp_v17[0] = 0;
     temp_v5 = ifTouchGetSelectionMode();
-    temp_v2 = FUN_001834a4(0x12,0x461);
+    temp_v2 = asdTMTexTableEntryAt(0x12,0x461);
     temp_v11 = 1;
     temp_v9 = temp_v17;
     temp_v8 = 0;

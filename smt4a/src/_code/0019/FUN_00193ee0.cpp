@@ -6,7 +6,7 @@ struct PackedLightSource {
     u8 unk00[0x1C];
     Vec3 position;
     u8 kind;
-    u8 enabled;
+    s8 enabled;
     u8 unk2A[0x16];
     Vec3 direction;
 };
@@ -21,7 +21,6 @@ struct PackedLightUniform {
 };
 typedef char PackedLightUniformOffsets[(sizeof(PackedLightUniform) == 0x2C && offsetof(PackedLightSource, direction) == 0x40 && offsetof(PackedLightUniform, directionXY) == 0x24) ? 1 : -1];
 extern "C" {
-u32 FUN_001a0538(f32 value);
 u32 FUN_001a06d4(f32 value);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *out, const f32 (*matrix)[4], const f32 *position);
 }

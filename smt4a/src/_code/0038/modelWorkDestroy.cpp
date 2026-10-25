@@ -1,4 +1,5 @@
 #include "shard/Shard0038.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct ModelWork {
     /* 0x1C */ u8 active;
 } ModelWork;
 
-extern ModelWork *jobGetWork(u32 job);
 extern void asdModelSlotRelease(s32 value);
 extern void asdMdlManagerDestroy(void *manager);
 extern void asdCameraInitAreas(void);
@@ -17,7 +17,7 @@ extern void asdMemFree(void *ptr);
 /* Destroys the job's work area. */
 void modelWorkDestroy(u32 job)
 {
-    ModelWork *work = jobGetWork(job);
+    ModelWork *work = (ModelWork *)jobGetWork(job);
 
     if (work->active != 0) {
         asdModelSlotRelease(0);

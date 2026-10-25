@@ -1,11 +1,11 @@
 /* NON_MATCHING: compiler places the shared zero-HP store in the demon branch rather than the player branch. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/Shard0031.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
 void unitStateClearEventBits(u16 *flags);
 SlotTable *gameGetSlotTable();
-BtlEquip *gameGetPlayerData();
 BtlEquip *gameGetUnitRecord(s32 index);
 
 // Clear transient event state, retaining KO state and its zero-HP consequence.

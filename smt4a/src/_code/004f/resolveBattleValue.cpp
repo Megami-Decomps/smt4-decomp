@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/Shard004F.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ typedef struct HalfAt10Rec {
     /* 0x10 */ s16 unk10;
 } HalfAt10Rec;
 
-extern void btlGetMainState(void);
 extern u32 btlScriptUnitHasFlags(void);
 extern s32 FUN_004f59b0(u32 a);
 extern HalfAt10Rec *FUN_004f7aa4(u32 a, u32 b);

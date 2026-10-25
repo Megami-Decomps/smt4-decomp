@@ -2,6 +2,7 @@
 #include "camp/ScriptPanelResources.h"
 #include "shard/Shard004B.h"
 #include "shard/Shard004A.h"
+#include "shard/inputIsQuestConfirmPressed.h"
 
 /* The quest menu panel as FUN_004b7694 drives it: the focus animation and the selection tracker. */
 struct QuestPoint {
@@ -83,7 +84,6 @@ void mapRecordResumePoint(void);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
 bool gameFlagIsSet(u32 index);
-bool inputIsQuestConfirmPressed(void);
 bool inputIsQuestMenuPressed(void);
 
 /* Per-frame update of the quest menu: follow the selection with the focus animation and handle confirm/menu input. */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler forwards the cleared count and removes redundant cache stores; retail repeatedly computes the embedded source address and reloads each field. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 class ListJobSource {
     u8 unk00[0x1c]; // 0x00
@@ -24,13 +25,12 @@ struct ListJobWork {
 };
 
 extern "C" {
-ListJobWork* jobGetWork(void);
 void dlistFreeAll(ListJobWork* work);
 
 // Releases the job's list and resets its cached source endpoints and count.
-void FUN_0024ef90()
+void FUN_0024ef90(u32 job)
 {
-    ListJobWork* work = jobGetWork();
+    ListJobWork *work = (ListJobWork *)jobGetWork(job);
     dlistFreeAll(work);
     work->state = 0;
     work->count = 0;

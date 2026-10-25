@@ -1,6 +1,7 @@
 #include "battle/btlMain.h"
 #include "classes/Obj4209d8.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct ValueSource;
 
@@ -11,7 +12,6 @@ extern ValueSource *g_handleRegistry;
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 argument, void (*draw)(), void (*teardown)(),
                    void *work, u32 parent);
 void valueSourceStore(ValueSource *source, u32 value);
-void *asdOperatorNew(u32 bytes);
 void battleRosterMotionUpdate();
 void btlEffectSettingsReleaseTask();
 void battleDrawRosterMarkerRects();

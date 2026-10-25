@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/gfxCommandTemplateAppend.h"
 
 struct CommandTemplate {
     /* 0x00 */ u8 unk00[0xB0];

@@ -35,7 +35,7 @@ int mapSpawnRandomEventKindEffect(void);
 int FUN_00324e38(...);
 int FUN_00325998(int, int);
 int FUN_003d4ed8(...);
-int FUN_003e54b8(unsigned int);
+int slotTargetApplyActiveValue(unsigned int);
 int FUN_004a01c8(int, int);
 int VectorSignedToFloat(...);
 int __aeabi_memcpy4(int [40], unsigned char *, int);
@@ -106,7 +106,7 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003e54b8. */
+/* Supplied declaration required: slotTargetApplyActiveValue. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_00408184. */
@@ -306,7 +306,7 @@ LAB_00326fcc:
       DAT_005f17ac = '\x01';
       *(unsigned int *)(temp_v3 + 0x168) = 0xffffffff;
       *(unsigned int *)(temp_v3 + 0x164) = 0;
-      FUN_003e54b8(*(unsigned int *)(temp_v3 + 0x1a8));
+      slotTargetApplyActiveValue(*(unsigned int *)(temp_v3 + 0x1a8));
     }
     temp_v15 = 0.017453292f;
     temp_v3 = *(int *)(g_lmapScene + 8);

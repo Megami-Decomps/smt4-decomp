@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -12,7 +13,6 @@ typedef struct Owner {
     /* 0x1CFC */ Unit *unit;
 } Owner;
 
-int btlGetMainState(void);
 int FUN_00293230(void);
 
 /* Returns the current unit's value, or 0 if there is no unit or FUN_00293230 reports it unavailable. */
@@ -21,7 +21,7 @@ int FUN_00227630(Owner *owner)
     if (owner->unit == NULL) {
         return 0;
     }
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     if (FUN_00293230() == 0) {
         return owner->unit->value;
     }

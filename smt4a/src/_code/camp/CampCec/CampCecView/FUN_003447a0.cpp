@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/FUN_00182054.h"
 
 #define CEC_VIEW_ROWS 3
 #define CEC_VIEW_ENTRY_COUNT 32
@@ -55,7 +56,6 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 e
 void sysMemClear(void *memory, u32 size);
 void taskCreateDraw(const char *name, s32 layer, u32 a, u32 b, void *callback, u32 c, u32 d, u32 parent);
 void sysPlaySe(u32 id);
-s32 FUN_00182054(u8 icon);
 void asdLoadFileAsyncSimple(const char *path, u32 *file, u32 flags);
 void rt_aeabi_memclr(void *memory, u32 size);
 void FUN_00319aec(u32 value);

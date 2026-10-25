@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail zero-fills the 0x20-byte file buffer once before the search loop as well as in it, keeps the match pointer as the loop pointer, and compares the fixed lane thresholds as VFP floats (this build compares them as integers). */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
@@ -25,7 +26,6 @@ s32 libc_strcmp(const char *first, const char *second);
 void FUN_004fb43c(s32 actor, u32 options, void *payload, s32 initializeValue, s32 suppressDuplicate,
                   u32 parameterBits, s32 firstId);
 u32 jyoucyuGetTableEntry(s32 index);
-BtlMainStateA *btlGetMainState(void);
 
 extern BtlEffectSetEntry g_btlEffectSetTable[0x1F6];
 extern const char *g_btlAssistEffectSetNames[3]; /* "ef_Assist_03", "ef_Assist_06", "ef_Assist_07" */

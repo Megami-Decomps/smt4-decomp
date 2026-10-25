@@ -1,5 +1,6 @@
 /* NON_MATCHING: range predicate inlining folds the group shift and changes upper-bound comparisons and constant placement. */
 #include "common.h"
+#include "shard/FUN_002f530c.h"
 
 static inline bool eventIsInRange(u32 event, s32 group, s32 first, s32 last)
 {
@@ -15,7 +16,6 @@ static inline bool eventIsInRange(u32 event, s32 group, s32 first, s32 last)
 
 extern "C" {
 u32 FUN_001db8fc(void);
-void FUN_002f530c(s32 kind, s32 message);
 
 // Classify the current packed event and optionally display its restriction message.
 u32 FUN_00214950(u32 context, s32 message)

@@ -1,6 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs 212 rows); retail loads the g_ifTouch address before the prologue and shares base-address adds differently */
 #include "common.h"
 #include <math.h>
+#include "shard/uiPointerHitsRect.h"
+#include "shard/FUN_002bffe0.h"
 
 // Hit rectangle of one touch item (x, y, width, height); stored 8 bytes apart.
 struct TouchRect {
@@ -44,8 +46,6 @@ extern "C" {
 
 extern TouchOwner g_ifTouch;
 
-s32 uiPointerHitsRect(s32 x, s32 y, s32 w, s32 h, s32 arg);
-s32 FUN_002bffe0(s32* x, s32* y, s32 mode);
 
 static inline TouchRect* itemRect(TouchWidget* t, s32 index)
 {

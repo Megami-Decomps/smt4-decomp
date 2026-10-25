@@ -1,4 +1,5 @@
 /* NON_MATCHING: matches retail except the order the 0.2/0.4 constants are hoisted (s18/s19) and the load order of the two 64-bit mask words in the final doubling check. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -12,7 +13,7 @@ struct SkillRateRecord {
 /* The combatant's skill info block filled in by FUN_003e8bb0 (0x34 bytes). */
 struct SkillInfo {
     /* 0x00 */ u8 unk00[0x16];
-    /* 0x16 */ s16 skillId;
+    /* 0x16 */ u16 skillId;
     /* 0x18 */ u8 unk18[0x14];
     /* 0x2C */ u8 valid;
     /* 0x2D */ u8 unk2D[7];
@@ -20,7 +21,6 @@ struct SkillInfo {
 
 extern "C" {
 extern u64 DAT_00571408;
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 SkillRateRecord *dataTable41FindById(u32 skillId);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002caea0` (_code @ 0x2caea0, 0x3d8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "clear_save/clearSave.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int FUN_001ac2d4(...);
 int asdModelSlotRelease(...);
 int asdEnvResetModelBank(...);
 int asdMdlManagerDestroy(...);
-int FUN_00212204(...);
 int lightOwnerRegister(...);
 int asdMdlManagerMarkDestroy(...);
 int animationEvaluateCallback(...);

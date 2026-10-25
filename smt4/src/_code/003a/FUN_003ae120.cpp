@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "shard/FUN_003ae120.h"
 
 extern "C" {
 
@@ -6,7 +7,7 @@ void FUN_001e0de0(BtlUiObjA *obj);
 
 extern BtlUiGlobals g_btlUi;
 
-void FUN_003ae120(void)
+void FUN_003ae120(BtlUi *arg0, s8 arg1, s8 arg2)
 {
     FUN_001e0de0(&g_btlUi.ui->objA);
 }

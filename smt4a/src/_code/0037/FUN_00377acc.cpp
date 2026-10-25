@@ -1,6 +1,7 @@
 /* NON_MATCHING: signed ownership flags and record lookup shape recovered; saved pointer roles, registration guard and owned-model reset stores differ. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 
 namespace {
 struct EnemySelectionRecord {
@@ -57,7 +58,6 @@ extern "C" {
 extern void *g_mapEnemy;
 extern void *g_handleRegistry;
 void ptrListRemoveClearOwner(void *registry, u32 handle);
-Table00Record *dataTable00FindById(u32 id);
 u16 FUN_004bb870(s32 index);
 
 static __inline EnemySelectionRecord *enemySelectionRecordForKind(u32 kind, s32 index)

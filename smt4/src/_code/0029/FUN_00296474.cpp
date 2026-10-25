@@ -11,7 +11,7 @@ extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable();
 const PlayerInitialRecordIV *gameGetPlayerData();
 SavedUnitRecord *gameGetUnitRecord(s32 index);
-SpriteInfo *FUN_002bf4f8(u32 table, u32 index);
+SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 index);
 u32 dataTable9EntryOrZero(s32 rank);
 u32 devilCalculateRankCost(u32 id, s32 rank, s32 level);
 }
@@ -42,7 +42,7 @@ static __inline void experienceBarUpdateUnit(ExperienceBarStateIV *work, s32 ind
 extern "C" void FUN_00296474(ExperienceBarStateIV *work)
 {
     PartyDamageSlotsIV *slots = gameGetSlotTable();
-    SpriteInfo *sprite = FUN_002bf4f8(0x28, 0x14);
+    SpriteInfo *sprite = asdTMTexTableEntryAt(0x28, 0x14);
     const PlayerInitialRecordIV *player = gameGetPlayerData();
     u32 required = dataTable9EntryOrZero(player->enabled + work->playerRankDelta);
     if (work->playerFull != 0) {
@@ -56,7 +56,7 @@ extern "C" void FUN_00296474(ExperienceBarStateIV *work)
             experienceBarUpdateUnit(work, index, sprite);
         }
     }
-    sprite = FUN_002bf4f8(0x28, 0x5f);
+    sprite = asdTMTexTableEntryAt(0x28, 0x5f);
     for (s32 slot = 0; slot < 24; ++slot) {
         s32 index = slots->stock[slot];
         if ((slots->active[0] < 0 || slots->active[0] != index) &&

@@ -1,10 +1,9 @@
 /* NON_MATCHING: ARMCC merges highlighted/plain draw calls and does not reproduce retail's branch hints or final setter tail call. */
 #include "shard/W6_W6Match7_FontResource.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 FontGlyphResourceOwner *FUN_0019dc44(u32 index);
-void FUN_00162790(u32 layer, u32 color, const u8 *text,
-                  f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
 void efctSetSpeed(f32 alpha);
 
 /* Draw a two-byte glyph, substituting the fallback when the font lacks it. */
@@ -29,14 +28,14 @@ void textDrawEncodedGlyph(void *, u32 code, s32 x, s32 y, s32 dim, s32 highlight
             drawAlpha = 0.0f;
         }
     }
-    u8 text[3];
-    text[0] = (u8)(code >> 8);
-    text[1] = (u8)code;
+    char text[3];
+    text[0] = (char)(code >> 8);
+    text[1] = (char)code;
     text[2] = 0;
     if (highlighted != 0) {
-        FUN_00162790(4, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
+        textDrawString(4, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
     } else {
-        FUN_00162790(3, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
+        textDrawString(3, color, text, (f32)x, (f32)y, 0.0f, 0.0f, drawAlpha);
     }
     efctSetSpeed(alpha);
 }

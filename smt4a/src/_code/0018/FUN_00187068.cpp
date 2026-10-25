@@ -2,9 +2,9 @@
 #include "gamedata/PartySortRecord.h"
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartySlotTableA *gameGetSlotTable();
 s32 FUN_0019d4a4(const SortRecord *left, const SortRecord *right);
 void qsort(void *records, u32 count, u32 stride, s32 (*compare)(const SortRecord *, const SortRecord *));
 }

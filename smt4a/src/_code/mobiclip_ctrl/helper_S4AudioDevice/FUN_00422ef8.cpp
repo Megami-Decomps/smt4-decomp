@@ -4,6 +4,7 @@
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "mobiclip_ctrl/helper_S4AudioDevice.h"
 
 /* The memory mapped for the mixer thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -60,7 +61,6 @@ void nn_os_Thread_FinalizeImpl(u32 *thread);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
-void sndSystemShutdown(void);
 u32 dspUnloadIdleComponent(void);
 void dspCallbackShutdown(void);
 }

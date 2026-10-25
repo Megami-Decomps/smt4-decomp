@@ -1,6 +1,7 @@
 /* NON_MATCHING: event-script state machine; draft shape, fall-through between cases 0/3/6 and the shared tail is written as in the compiler's switch, register allocation not compared */
 #include "common.h"
 #include "sys/ResultReport.h"
+#include "shard/FUN_00103c9c.h"
 
 /* The event being played: its resources, state and script process. */
 struct EventRequest {
@@ -46,7 +47,6 @@ enum EventState {
 extern "C" {
 extern EventPlayerState g_saveLoadThread;
 
-void FUN_00103c9c(void);
 s32 FUN_00223898(EventRequest *request, s32 kind);
 s32 scrScriptProcessStartEntry(void *process, s32 entry);
 ScriptProcessState *FUN_00297060(void);

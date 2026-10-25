@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail lays the returns out differently (a shared `return 0` at the end, `return 1` right after the first branch); built branches the other way */
 #include "common.h"
+#include "shard/FUN_002b89a4.h"
 
 extern "C" {
 
 s32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
-s32 FUN_002b89a4(s32 arg);
 s32 FUN_002c1d5c(void);
 void FUN_002a03d8(s32 index, s32 value);
 

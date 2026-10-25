@@ -1,6 +1,7 @@
 #include "gamedata/GroupedFileTables.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/FlagValueIsPositive.h"
+#include "shard/aocActivateFileGroupFlags.h"
 
 extern "C" {
 s32 FUN_001b315c(FileTableGroup *);

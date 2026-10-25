@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only (svc 0x24 and 0x23 match through nn/svc.h): retail builds the -1 timeout in r2 then r3, hoists the zero into r6 before the wait and keeps &event/&thread in registers; the build orders those differently. */
+/* NON_MATCHING: only the schedule of the zero constant differs: retail hoists `mov r6, #0` between the thread-handle load and the timeout move before the svc; the build places it after the wait. */
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 
@@ -29,11 +29,12 @@ extern "C" {
 void FUN_001469a8(u8 *lock);
 void asdMemFree(void *block);
 void FUN_002e3140(s32 result);
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 
 /* Waits for the worker's thread to finish, then closes it, releases its lock and buffer and closes its event. */
-void FUN_0035d7bc(ThreadedWorker *worker, u32 skipped)
+void FUN_0035d7bc(ThreadedWorker *worker)
 {
-    s32 result = nn::svc::WaitSynchronization1(worker->thread.handle, skipped, 0xFFFFFFFF, 0xFFFFFFFF);
+    s32 result = svcWaitSynchronization1(worker->thread.handle, -1);
 
     if (nnResultIsFailure(result)) {
         FUN_002e3140(result);

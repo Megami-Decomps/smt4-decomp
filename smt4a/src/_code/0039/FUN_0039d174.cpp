@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -5,7 +6,6 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 s32 FUN_003020fc(BtlCombatantEntryA *entry, s32 arg);
 
 /* Script query: reports whether any marked, required, non-excluded battle entry passes

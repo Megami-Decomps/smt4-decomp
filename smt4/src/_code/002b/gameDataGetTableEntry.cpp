@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler combines the record base offsets and schedules address calculation differently. */
 #include "common.h"
 
 namespace {
@@ -21,7 +20,8 @@ u32 gameDataFindEntryIndex(void);
 u32 *gameDataGetTableEntry(void)
 {
     u32 index = gameDataFindEntryIndex();
-    RecordRegion *record = (RecordRegion *)&g_gameDataBlocks.data->records[index];
+    u32 *records = g_gameDataBlocks.data->records;
+    RecordRegion *record = (RecordRegion *)&records[index];
     return &record->value;
 }
 }

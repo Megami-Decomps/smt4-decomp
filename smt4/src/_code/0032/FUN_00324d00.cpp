@@ -1,15 +1,15 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/ListedEntry.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
 
-ListedState *btlGetMainState(void);
 
 // Script command: result 1 when a used, listed, non-excluded entry has a positive value.
 u32 FUN_00324d00(void)
 {
     for (s32 i = 0; i < 109; i++) {
-        ListedEntry *entry = &btlGetMainState()->entries[i];
+        ListedEntry *entry = &reinterpret_cast<ListedState *>(btlGetMainState())->entries[i];
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->value96 > 0) {
             scrSetResult(1);
             return 1;

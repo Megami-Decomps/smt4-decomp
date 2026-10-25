@@ -1,4 +1,5 @@
 /* NON_MATCHING: The battle-state masks and suppression masks load into different register pairs and combine in a different order. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 namespace {
@@ -10,7 +11,6 @@ struct BattleHelpMasks {
 }
 extern "C" {
 extern BattleHelpMasks g_btlHelp;
-BtlMainStateA *btlGetMainState(void);
 u32 FUN_004c9160(u32 kind, u32 subject, s32 unused, u32 parameter);
 
 /* Dispatches the help action selected by mode unless the battle state intersects a suppression mask. */

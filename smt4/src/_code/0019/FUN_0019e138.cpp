@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019e138` (_code @ 0x19e138, 0x1290 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "camp/CommonBg/CommonBg.h"
@@ -28,7 +29,7 @@ int asdTMTexTableLoadEntryAsync(...);
 int asdTMTexTableReleaseNode(...);
 int uiSpriteSetImageKeyframe(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bf4f8(...);
+
 int randNextInRange(...);
 int objectEntryAppend(...);
 int VectorSignedToFloat(...);
@@ -63,7 +64,6 @@ int playSceneFadeOutStart(unsigned int);
 int FUN_0028bfe4(int);
 int FUN_0028c028(...);
 int FUN_0028c040(void);
-int btlGetMainState(void);
 int gameGlobalsSetSelected(int);
 int spriteStartAnimationByIndex(int, int);
 int FUN_002bf818(...);
@@ -151,7 +151,7 @@ extern int gameGetSlotTable(void);
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int jobGetWork(unsigned int job);
 /* Supplied declaration required: randNextInRange. */
@@ -387,7 +387,7 @@ int FUN_0019e138(unsigned int job)
         }
       }
     }
-    temp_v12 = btlGetMainState();
+    temp_v12 = reinterpret_cast<int>(btlGetMainState());
     if ((*(unsigned int *)(temp_v12 + 0x44a8) & 0x2000) != 0) {
       temp_v12 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2268));
       if (temp_v12 == 0) {
@@ -407,7 +407,7 @@ int FUN_0019e138(unsigned int job)
           FUN_0028bf2c();
           FUN_002954f4(*puVar7,1);
           btlTalkBustUpSetUnk2F4(1);
-          temp_v12 = btlGetMainState();
+          temp_v12 = reinterpret_cast<int>(btlGetMainState());
           if ((*(unsigned int *)(temp_v12 + 0x44a8) & 0x40000) != 0) {
             FUN_001ed64c(*(char *)((int)puVar7 + 0xa3) + '\x02',*(unsigned int *)(temp_v4 + 0x2230),1);
           }
@@ -499,7 +499,7 @@ int FUN_0019e138(unsigned int job)
     }
     else {
 LAB_0019e7b8:
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       temp_v4 = FUN_00293230();
       if (temp_v4 == 0) break;
     }
@@ -718,7 +718,7 @@ LAB_0019ef1c:
           else if (temp_v4 == 4) {
             temp_v7 = 0x41f;
           }
-          temp_v4 = FUN_002bf4f8(0x15,temp_v7);
+          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v7));
           temp_v12 = (short)(temp_v3 - 0x14) + 0x11;
           temp_v17 = temp_v20;
           temp_v18 = 0;
@@ -746,7 +746,7 @@ LAB_0019ef1c:
           else if (iRam00439ca4 == 4) {
             temp_v7 = 0x1cc;
           }
-          temp_v12 = FUN_002bf4f8(0x15,temp_v7);
+          temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,temp_v7));
           if (temp_v4 != 4) {
             VectorSignedToFloat((int)*(short *)(temp_v12 + 10) + temp_v20,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -756,7 +756,7 @@ LAB_0019ef1c:
           else {
             temp_v19 = (int)*(short *)(temp_v12 + 8);
             temp_v20 = (unsigned int)*(short *)(temp_v12 + 10);
-            temp_v4 = FUN_002bf4f8(0x15,0x416);
+            temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x416));
             psVar10 = *(short **)(temp_v4 + 0xc);
             if (psVar10 != (short *)0x0) {
               temp_v12 = (int)*psVar10;
@@ -771,7 +771,7 @@ LAB_0019ef1c:
               temp_v12 = (int)*(short *)(temp_v4 + 8) + (temp_v9 >> 1);
               temp_v4 = (int)*(short *)(temp_v4 + 10) + (temp_v10 >> 1);
             }
-            temp_v11 = FUN_002bf4f8(0x15,0x71,temp_v9,temp_v10);
+            temp_v11 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x15,0x71));
             VectorSignedToFloat((temp_v20 - temp_v4) +
                                 (int)*(short *)(temp_v11 + 10) + (int)(short)(temp_v3 - 0x14),
                                 (unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,6 +1,7 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 u32 dataTableGetEntry24Byte0(u32 id);
@@ -9,9 +10,7 @@ s32 saveOptionIsEnabled(u32 option);
 void efctSetSpeed(f32 value);
 f32 vec2GetSpeed(const void *object);
 void FUN_00164b5c(u32 layer, u32 group, s32 image, s32 x, s32 y, s32 order);
-PanelTextLayoutEntryPrefixA *FUN_001834a4(u32 group, u32 image);
-void FUN_00162790(u32 layer, u32 style, const char *text,
-                  f32 x, f32 y, f32 depth, f32 spacing, f32 scale);
+PanelTextLayoutEntryPrefixA *asdTMTexTableEntryAt(u32 group, u32 image);
 
 /* The speed object the option pulse reads sits at 0x13C of the work; its speed is the f32 at +0x20. */
 struct OptionSpeedView {
@@ -48,8 +47,8 @@ void FUN_0023dcec(UniteWork *work, s32 row, s32 x, s32 y, s32 selected,
         style = ~0u;
     }
     const char *text = dataTableGetEntry24Member(work->optionNamesA.ids[row]);
-    const PanelTextLayoutEntryPrefixA *anchor = FUN_001834a4(0x1A, 0xA4);
-    FUN_00162790(2, style, text, (f32)(anchor->x + x), (f32)(anchor->y + y),
+    const PanelTextLayoutEntryPrefixA *anchor = asdTMTexTableEntryAt(0x1A, 0xA4);
+    textDrawString(2, style, text, (f32)(anchor->x + x), (f32)(anchor->y + y),
                  0.55f, 0.0f, scale);
 }
 }

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gfx/CameraMotion.h"
+#include "camp/Unite/UniteEffect.h"
 
 extern "C" {
 
@@ -81,12 +82,11 @@ extern int DAT_0057f2c4; /* 0x57f2c4 */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00180118. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -251,8 +251,8 @@ unsigned int FUN_003cf02c(void)
   case 3:
     *(int *)(temp_v2 + 0x84) = *(int *)(temp_v2 + 0x84) + 1;
     temp_v6 = DAT_0057f2c4;
-    temp_v10 = FUN_001834a4(0x1a,0x20b);
-    temp_v17[0] = FUN_001834a4(0x1a,0x20e);
+    temp_v10 = asdTMTexTableEntryAt(0x1a,0x20b);
+    temp_v17[0] = asdTMTexTableEntryAt(0x1a,0x20e);
     temp_v14 = (float)((unsigned long long)temp_v15 >> 0x20);
     temp_v13 = (float)temp_v18;
     temp_v0 = *(short *)(temp_v6 + 0x1e);

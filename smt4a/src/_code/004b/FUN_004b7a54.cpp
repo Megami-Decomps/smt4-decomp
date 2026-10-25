@@ -1,6 +1,6 @@
-/* NON_MATCHING: resource pointer and zero registers differ; large-offset flag loads reuse the resource base instead of literal offsets. */
 #include "camp/ScriptPanelResources.h"
 #include "map/mapDepart.h"
+#include "camp/Camp.h"
 extern "C" {
 extern GameStateA g_gameState;
 void asdMemFree(void *memory);
@@ -8,7 +8,6 @@ void scrScriptProcessDestroy(ScriptProcess *process);
 void asdTMTexTableReleaseNode(s32 table, u32 node);
 void FUN_0019f548(u32 handle);
 void FUN_00214da4(void);
-void *campGetState(void);
 
 /* Release both script panels and, unless retained globally, their cached data. */
 void FUN_004b7a54(CampScriptPanelResources *work)
@@ -43,8 +42,7 @@ void FUN_004b7a54(CampScriptPanelResources *work)
         u8 prefix[0x38];
         u8 retain;
     };
-    const CacheRetentionView *retention = reinterpret_cast<const CacheRetentionView *>(&g_gameState);
-    if (work->cacheLoaded && !retention->retain) {
+    if (work->cacheLoaded && !reinterpret_cast<const CacheRetentionView *>(&g_gameState)->retain) {
         work->cacheLoaded = 0;
         FUN_0019f548(work->cacheHandle);
         for (s32 index = 0; index < 10; ++index) {

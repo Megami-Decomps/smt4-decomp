@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/partyFindSlotById.h"
 
 struct PartySlotRecord {
     u8 unk00[0xca]; // 0x00

@@ -2,7 +2,6 @@
 #include "gamedata/ReferencedKindRecord.h"
 #include "gamedata/Table8Type5Lookup.h"
 extern "C" {
-u32 idIsAbove400(u32 id);
 s32 recordKindRank(u32 id);
 s32 FUN_00257568(const KindComparisonKey *left, const KindComparisonKey *right);
 

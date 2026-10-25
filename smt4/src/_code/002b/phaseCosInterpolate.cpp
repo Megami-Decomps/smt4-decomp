@@ -17,6 +17,6 @@ f32 phaseCosInterpolate(f32 angle)
     u16 whole = (u32)angle;
     const PhaseTrigEntry *entry = &DAT_00407ed0[(u8)whole];
     f32 fraction = angle - (f32)whole;
-    return entry->cosine + fraction * entry->cosineDelta;
+    return fraction + entry->cosine * entry->cosineDelta;
 }
 }

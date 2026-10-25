@@ -1,6 +1,7 @@
 /* NON_MATCHING: learned-rank search remains scalar instead of pair-unrolled, and branch-local discount accumulation differs. */
 #include "gamedata/Table04Record.h"
 #include "shard/Shard004B.h"
+#include "shard/FUN_0029a9d4.h"
 
 namespace {
 struct SkillCostDiscountView {

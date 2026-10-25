@@ -14,7 +14,6 @@ int ifTouchRegionClearAll(unsigned int);
 int beginStatusPanelClose(void);
 void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 context);
 int useCounterStart(void);
-int FUN_0029e328(int);
 int sortMenuCreate(int, int);
 int FUN_0029ee6c(int, int);
 int FUN_003a8aa0(int);

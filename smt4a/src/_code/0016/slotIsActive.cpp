@@ -1,4 +1,5 @@
 #include "common.h"
+#include "StaffRoll/StaffRollMain.h"
 
 extern "C" {
 

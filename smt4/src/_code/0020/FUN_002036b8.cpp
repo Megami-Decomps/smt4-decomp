@@ -2,16 +2,17 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_00200574.h"
 
 extern "C" {
 
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_0029efc0(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
@@ -33,7 +34,6 @@ extern unsigned char LAB_00203af4; /* 0x203af4 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00200574(unsigned short);
 extern int FUN_00254058(unsigned short);
 extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_00290994. */
@@ -42,12 +42,12 @@ extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 
 
@@ -79,22 +79,22 @@ void FUN_002036b8(int param_1,int param_2)
     if (0 < temp_v4) {
       do {
         if ((*(char *)(temp_v1 + 0x252) == '\0') || (temp_v4 = FUN_0029efa8(temp_v2), temp_v4 != temp_v8)) {
-          temp_v4 = FUN_002bf4f8(0x24,temp_v8 + 0x2e);
+          temp_v4 = asdTMTexTableEntryAt(0x24,temp_v8 + 0x2e);
           temp_v5 = temp_v1 + (temp_v3 + temp_v8) * 2;
           temp_v6 = FUN_00254058(*(unsigned short *)(temp_v5 + 0x9468));
           if (temp_v6 != 0) {
             FUN_002bf288(2,0x24,0x1d3,*(short *)(temp_v4 + 8) + param_1,
                          *(short *)(temp_v4 + 10) + param_2,0x6a);
             textFormatBuffer(temp_v9,&LAB_00203af4,temp_v6 + 8);
-            temp_v6 = FUN_002bf4f8(0x24,0x1d5);
+            temp_v6 = asdTMTexTableEntryAt(0x24,0x1d5);
             VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(2,0xff,temp_v9,(int)*(short *)(temp_v6 + 10));
+            textDrawString(2,0xff,temp_v9,(int)*(short *)(temp_v6 + 10));
             temp_v5 = FUN_00200574(*(unsigned short *)(temp_v5 + 0x9468));
             if (temp_v5 != 0) {
-              temp_v5 = FUN_002bf4f8(0x24,0x1d4);
+              temp_v5 = asdTMTexTableEntryAt(0x24,0x1d4);
               FUN_002bf380(2,0x24,7,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) +
                                     param_1,
                            (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,0x6a)
@@ -112,7 +112,7 @@ void FUN_002036b8(int param_1,int param_2)
     temp_v4 = FUN_00254058(*(unsigned short *)(temp_v3 + 0x9468));
     if (*(char *)(temp_v1 + 0x252) != '\0' && temp_v4 != 0) {
       temp_v8 = FUN_0029efa8(temp_v2);
-      temp_v8 = FUN_002bf4f8(0x24,temp_v8 + 0x3f);
+      temp_v8 = asdTMTexTableEntryAt(0x24,temp_v8 + 0x3f);
       efctSetSpeed();
       FUN_002bf288(2,0x24,0x38,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,0x79
                   );
@@ -133,7 +133,7 @@ void FUN_002036b8(int param_1,int param_2)
       else {
         FUN_002bf288(2,0x24,0x3d,temp_v7,temp_v6,0x7e);
       }
-      temp_v6 = FUN_002bf4f8(0x24,0x3c);
+      temp_v6 = asdTMTexTableEntryAt(0x24,0x3c);
       temp_v5 = g_titleScene;
       piVar10 = (int *)(g_titleScene + 0x130c);
       temp_v7 = piVar10[*piVar10 + 2];
@@ -161,15 +161,15 @@ void FUN_002036b8(int param_1,int param_2)
       FUN_002bf288(2,0x24,0x1d6,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,
                    0x83);
       textFormatBuffer(temp_v9,&LAB_00203af4,temp_v4 + 8);
-      temp_v4 = FUN_002bf4f8(0x24,0x1d8);
+      temp_v4 = asdTMTexTableEntryAt(0x24,0x1d8);
       VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be5a4(3,0xffffffff,temp_v9,(int)*(short *)(temp_v4 + 10));
+      textDrawString(3,0xffffffff,temp_v9,(int)*(short *)(temp_v4 + 10));
       temp_v3 = FUN_00200574(*(unsigned short *)(temp_v3 + 0x9468));
       if (temp_v3 != 0) {
-        temp_v3 = FUN_002bf4f8(0x24,0x1d7);
+        temp_v3 = asdTMTexTableEntryAt(0x24,0x1d7);
         FUN_002bf380(2,0x24,7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,0x83);
       }

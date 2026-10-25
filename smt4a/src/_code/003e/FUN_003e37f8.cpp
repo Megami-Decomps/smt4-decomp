@@ -1,6 +1,9 @@
 /* NON_MATCHING: shared script-entry symbol and cost/funds comparison now match; compiler places the shared substep-three store after the choice test instead of before it. */
 #include "common.h"
 #include "shard/Shard004A.h"
+#include "event/2dEvent/SmokeFade.h"
+#include "event/2dEvent/SmokeFade.h"
+#include "util/CalleeContracts.h"
 
 /* The shop scene: its mode, substep, the script and the item list. */
 struct ShopScene {
@@ -23,15 +26,12 @@ void sysPlaySe(u32 id);
 void FUN_0019de98(s32 a, u32 color);
 void FUN_00215bd0(void);
 void FUN_0022e774(void);
-s32 FUN_0023b3d0(void);
 void FUN_0023b45c(s32 arg);
-s32 FUN_0026c3a0(void);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 void FUN_00285774(void);
 s32 messageGetChoiceResult(void);
 void statusDownRestartTransition(void);
-void FUN_002c8538(s32 arg);
 void FUN_002c85b0(s32 arg);
 void FUN_00333dc8(s32 arg);
 void FUN_003e3a20(ShopScene *scene, void *item);

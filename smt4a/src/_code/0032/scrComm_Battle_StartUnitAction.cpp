@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 
 extern "C" {
 
 void FUN_003ee0c0(void);
-BtlMainStateA *btlGetMainState(void);
 BtlSkillA *FUN_003f0e20(BtlMainStateA *main, s32 index);
 void FUN_004fbc30(s32, BtlUnitA *, u32, s32);
 void FUN_004fc094(s32, BtlUnitA *, s32, u32, s32, u32, s32, s32, u32, u32, s32, s32, s32, s32, s32, s32, s32, s32, s32,

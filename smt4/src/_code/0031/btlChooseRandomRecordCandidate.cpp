@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "gamedata/DevilRecord.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlTables.h"
@@ -9,7 +10,6 @@ u32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
 DevilRecord* dataTable00FindById(u16 id);
 void memClear(void* memory, u32 size);
-BtlMainState* btlGetMainState(void);
 
 // Choose one nonzero record choice or battle-table candidate with equal probability.
 u32 btlChooseRandomRecordCandidate(void)

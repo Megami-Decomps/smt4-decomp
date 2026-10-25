@@ -1,10 +1,10 @@
 /* NON_MATCHING: default result is preserved correctly; forwarded fade argument is still shared before the family test rather than set in each tail-call branch. */
 #include "common.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 struct ResidentTableEntry;
 
 extern "C" {
-ResidentTableEntry* jyoucyuGetTableEntry(u32 index);
 s32 asdSoundApplyBankValue(u32 index, s32 frames);
 s32 asdSoundStopSlot(u32 index, s32 frames);
 

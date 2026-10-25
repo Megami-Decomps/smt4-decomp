@@ -1,4 +1,5 @@
 /* NON_MATCHING: the repeated page query, the 64-bit battle mask tests and the nested help-selection branches are laid out differently from retail (220 vs 227 rows); the help shown per page is the same. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -41,7 +42,6 @@ s32 resourceRunOperationIfUnblocked(u32 list);
 s32 FUN_002a4894(u32 list);
 s32 FUN_002cc9e0(SkillMenuWork *work, s32 arg);
 void screenShowMessage(u32 id);
-HelpBattleView *btlGetMainState(void);
 s32 gameDataFlagTestBit(u32 bit);
 u32 FUN_002f8e14(u32 index);
 void FUN_0019de98(u32 text, u32 color);
@@ -92,10 +92,10 @@ void FUN_00270104(SkillMenuWork *work)
                 return;
             }
         } else {
-            if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
-                index = halfTableGet(btlGetMainState(), index);
+            if ((reinterpret_cast<HelpBattleView *>(btlGetMainState())->flags & DAT_00573bc8) != 0) {
+                index = halfTableGet(reinterpret_cast<HelpBattleView *>(btlGetMainState()), index);
             } else {
-                btlGetMainState();
+                reinterpret_cast<HelpBattleView *>(btlGetMainState());
                 index = 0;
             }
             if (index == 0) {
@@ -112,7 +112,7 @@ void FUN_00270104(SkillMenuWork *work)
                 FUN_0032d0c8(*panel, 2, record->id, slotRecordFindById(record->id));
                 return;
             }
-            if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
+            if ((reinterpret_cast<HelpBattleView *>(btlGetMainState())->flags & DAT_00573bc8) != 0) {
                 skillHelpUpdateAttributeAndTarget(index);
                 return;
             }
@@ -141,7 +141,7 @@ void FUN_00270104(SkillMenuWork *work)
             } else {
                 adjust = -1;
             }
-            if ((btlGetMainState()->flags & DAT_00573bc8) != 0) {
+            if ((reinterpret_cast<HelpBattleView *>(btlGetMainState())->flags & DAT_00573bc8) != 0) {
                 index = index + adjust + 1;
             } else {
                 index = *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x3C44);

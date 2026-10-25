@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/entryDefIsAvailable.h"
 
 struct EntryDef4daf18 {
     /* 0x00 */ u16 id;
@@ -33,7 +34,7 @@ static inline u32 saveEntryIsActive(u32 index)
 }
 
 // Whether the entry with this ID is available: not excluded, its flag set and its save entry valid.
-u32 entryDefIsAvailable(u32 unused, u16 id)
+u32 entryDefIsAvailable(void *unused, u16 id)
 {
     EntryDef4daf18 *entry = FUN_00184310(id);
     if (entry != NULL && !(entry->attributes & 0x200000) &&

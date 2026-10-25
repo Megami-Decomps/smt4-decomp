@@ -1,4 +1,5 @@
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "shard/bustupCutStartSlotTransition.h"
 
 extern "C" {
 

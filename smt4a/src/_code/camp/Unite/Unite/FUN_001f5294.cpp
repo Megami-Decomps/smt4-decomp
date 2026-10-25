@@ -121,7 +121,7 @@ int entryDefIsAvailable(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int FUN_001643b4(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_00183f58(...);
 int FUN_0019de98(...);
 int FUN_00228b04(...);
@@ -220,7 +220,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -783,7 +783,7 @@ unsigned int FUN_001f5294(void)
         if (temp_v4 == 0xa0) {
           sysPlaySe(0x5e);
         }
-        temp_v15 = FUN_001834a4(0x1a,0x1f0);
+        temp_v15 = asdTMTexTableEntryAt(0x1a,0x1f0);
         temp_v26 = (int)(short)piVar3[0x11d];
         temp_v27 = temp_v39;
         temp_v29 = (int *)0x1;
@@ -1033,7 +1033,7 @@ unsigned int FUN_001f5294(void)
         eventQueueAddUniqueIfValid(temp_v15);
       }
       else {
-        temp_v15 = FUN_001834a4(0x1a,0x1f0);
+        temp_v15 = asdTMTexTableEntryAt(0x1a,0x1f0);
         temp_v26 = (int)(short)piVar3[0x11d];
         temp_v27 = temp_v39;
         temp_v28 = (int *)0x0;
@@ -1341,7 +1341,7 @@ LAB_001f6b9c:
       } while (temp_v5 < 8);
       temp_v18 = 1;
     }
-    temp_v15 = FUN_001834a4(0x1a,0x1f0);
+    temp_v15 = asdTMTexTableEntryAt(0x1a,0x1f0);
     temp_v26 = (int)(short)piVar3[0x11d];
     temp_v29 = (int *)0x1;
     temp_v27 = temp_v39;
@@ -1806,7 +1806,7 @@ LAB_001f732c:
       return 0;
     }
     if (*(char *)(temp_v4 + 0x38) == '\0') {
-      temp_v15 = FUN_001834a4(0x1a,0x1f9);
+      temp_v15 = asdTMTexTableEntryAt(0x1a,0x1f9);
       temp_v26 = (int)(short)piVar3[0x11d];
       temp_v27 = temp_v39;
       temp_v28 = (int *)0x1;
@@ -1827,7 +1827,7 @@ LAB_001f732c:
     }
     else {
 LAB_001f77ec:
-      temp_v15 = FUN_001834a4(0x1a,499);
+      temp_v15 = asdTMTexTableEntryAt(0x1a,499);
       temp_v26 = (int)(short)piVar3[0x11d];
       temp_v29 = (int *)0x1;
       temp_v27 = temp_v39;
@@ -2012,16 +2012,16 @@ LAB_001f77ec:
       do {
         temp_v6 = objectApplyIfUnblocked(temp_v40[0]);
         if (temp_v6 <= temp_v5) break;
-        temp_v6 = FUN_001834a4(0x1a,temp_v5 + 0x125);
+        temp_v6 = asdTMTexTableEntryAt(0x1a,temp_v5 + 0x125);
         temp_v16 = *(short *)(temp_v6 + 8);
         temp_v0 = *(short *)(temp_v6 + 10);
-        temp_v6 = FUN_001834a4(0x1a,0x11a);
+        temp_v6 = asdTMTexTableEntryAt(0x1a,0x11a);
         temp_v11 = (int)(short)(*(short *)(temp_v6 + 8) + temp_v16);
         ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v6 + 10) + temp_v0),
                      (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1]);
         temp_v32 = piVar3 + temp_v5 + 0x100;
         *(short *)((int)piVar3 + temp_v5 * 4 + 0x45e) = (short)temp_v11;
-        temp_v6 = FUN_001834a4(0x1a,0x11b);
+        temp_v6 = asdTMTexTableEntryAt(0x1a,0x11b);
         temp_v11 = (int)(short)(*(short *)(temp_v6 + 8) + temp_v16);
         ifTouchRegionAdd(temp_v11,(int)(short)(*(short *)(temp_v6 + 10) + temp_v0),
                      (int)**(short **)(temp_v6 + 0xc),(int)(*(short **)(temp_v6 + 0xc))[1]);
@@ -2244,7 +2244,7 @@ LAB_001f77ec:
       } while (temp_v6 < temp_v5);
     }
     if (temp_v28 == (int *)0x0) {
-      temp_v15 = FUN_001834a4(0x1a,499);
+      temp_v15 = asdTMTexTableEntryAt(0x1a,499);
       temp_v26 = (int)(short)piVar3[0x11d];
       temp_v29 = (int *)0x1;
       temp_v27 = temp_v39;
@@ -3321,7 +3321,7 @@ LAB_001f9868:
       }
     }
     if (*(char *)(temp_v4 + 0x38) == '\0') {
-      temp_v15 = FUN_001834a4(0x1a,0x1f9);
+      temp_v15 = asdTMTexTableEntryAt(0x1a,0x1f9);
       temp_v26 = (int)(short)piVar3[0x11d];
       temp_v27 = temp_v39;
       temp_v28 = (int *)0x1;
@@ -3345,7 +3345,7 @@ LAB_001f9868:
     }
     else {
 LAB_001fab44:
-      temp_v15 = FUN_001834a4(0x1a,499);
+      temp_v15 = asdTMTexTableEntryAt(0x1a,499);
       temp_v26 = (int)(short)piVar3[0x11d];
       temp_v29 = (int *)0x1;
       temp_v27 = temp_v39;
@@ -3536,7 +3536,7 @@ LAB_001fac1c:
       temp_v4 = 0;
       *(unsigned short *)(piVar3 + 0x117) = temp_v3;
       do {
-        temp_v5 = FUN_001834a4(0x1a,temp_v4 + 0x157);
+        temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v4 + 0x157);
         temp_v6 = (int)*(short *)(temp_v5 + 8);
         ifTouchRegionAdd(temp_v6,(int)*(short *)(temp_v5 + 10),(int)**(short **)(temp_v5 + 0xc),
                      (int)(*(short **)(temp_v5 + 0xc))[1]);

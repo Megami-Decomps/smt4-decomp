@@ -1,5 +1,6 @@
 /* NON_MATCHING: the polynomial now matches (level * 0x6DB * 2 + level * 2); retail outlines the table-lookup arm after the return and numbers the saved registers differently. */
 #include "gamedata/DataTable.h"
+#include "shard/gameGetUnlockedCountLimit.h"
 
 struct UnitGrowthCostRecord {
     u8 prefix[6];
@@ -7,7 +8,6 @@ struct UnitGrowthCostRecord {
 };
 
 extern "C" const UnitGrowthCostRecord *FUN_00184310(u32 unit);
-extern "C" s32 gameGetUnlockedCountLimit(void);
 
 static inline u32 unitBaseGrowthCost(s32 level)
 {

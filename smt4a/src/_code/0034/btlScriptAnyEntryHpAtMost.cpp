@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
+#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 
 static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
@@ -21,7 +21,7 @@ static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
 u32 btlScriptAnyEntryHpAtMost(void)
 {
     s32 percent = scrGetArg(0);
-    s32 choice = scrGetArg(1);
+    u32 choice = scrGetArg(1);
     s32 first, count;
     FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
     for (s32 i = first; i < first + count; ++i) {

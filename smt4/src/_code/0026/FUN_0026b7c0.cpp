@@ -8,7 +8,6 @@ void *gameGetSlotTable(void);
 s32 FUN_0029a924(u16 action);
 s32 FUN_0029a9d4(u16 action, u32 mode);
 s32 FUN_002621b4(u32 user, s32 target, u32 action, s32 *result);
-void FUN_00298d28(s32 value, s32 cost);
 
 void FUN_0026b7c0(void)
 {

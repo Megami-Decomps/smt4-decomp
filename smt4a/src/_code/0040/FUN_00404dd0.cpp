@@ -19,14 +19,14 @@ struct CenteredSpriteWork {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
-SpriteInfo *FUN_001834a4(u32 group, s32 image);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 image);
 
 /* Center the selected sprite inside a reference sprite and apply stereo parallax. */
 void FUN_00404dd0(CenteredSpriteWork *work, s32 x, s32 y, f32 speed)
 {
     efctSetSpeed(speed);
-    SpriteInfo *reference = FUN_001834a4(0x32, 0x35);
-    SpriteInfo *sprite = FUN_001834a4(work->group, work->index * 1000);
+    SpriteInfo *reference = asdTMTexTableEntryAt(0x32, 0x35);
+    SpriteInfo *sprite = asdTMTexTableEntryAt(work->group, work->index * 1000);
     s32 dx, dy;
     if (sprite->size) {
         dx = (reference->size[0] - sprite->size[0]) / 2;

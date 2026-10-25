@@ -1,5 +1,6 @@
 /* NON_MATCHING: common sysPlaySe block placement, conditional sound move order, and row-load scheduling differ. */
 #include "common.h"
+#include "util/FUN_002c7e24.h"
 
 /* The party panel as the cursor-sound code reads it. */
 struct PartyPanelSounds {
@@ -20,7 +21,6 @@ extern PartyPanelSounds *g_partyPanel;
 
 void sysPlaySe(u32 sound);
 void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
-void FUN_002c7e24(void);
 s32 FUN_002cad18(void);
 s32 partyPanelGetSelectedDemonId(void);
 s8 FUN_0022e714(void);

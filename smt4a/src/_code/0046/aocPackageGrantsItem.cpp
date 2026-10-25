@@ -1,4 +1,5 @@
 #include "shard/W4_Match6_DataSet.h"
+#include "shard/aocPackageGrantsItem.h"
 
 /* A content row that grants an item: kinds 7 and 8 name the item id in their last word. */
 struct AocItemRowView {

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/effectSpawnPositionDefault.h"
 extern "C" {
 void FUN_002aff74(f32 x, f32 y, f32 z, f32 first, f32 second);
 /* Forward the position with both additional values zeroed. */

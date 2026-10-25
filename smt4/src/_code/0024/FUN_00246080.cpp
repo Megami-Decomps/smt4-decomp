@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail contains a discarded queue traversal; omitted rather than retaining dead work. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 
 extern "C" {
 
-BtlMainState *btlGetMainState(void);
 s16 battleGetEntryHalfword(s32 memberId, u32 field);
 s32 FUN_00293230(BtlMainState *battle);
 

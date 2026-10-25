@@ -16,7 +16,7 @@ typedef char MaskedSpriteWidgetPositionCheck[
 
 extern "C" {
 extern RenderCtxScissorA *g_renderCtx;
-SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 s32 vec2GetYInt(const void *position);
 void renderPopStateStacks();
@@ -24,7 +24,7 @@ void renderPopStateStacks();
 void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
                   u32 foreground, u32 background)
 {
-    SpriteInfo *frame = FUN_001834a4(0x12, 0x6E);
+    SpriteInfo *frame = asdTMTexTableEntryAt(0x12, 0x6E);
     FUN_001835b4(2, 0x12, background, x, y, 0xDD);
     RenderCtxScissorA *context = g_renderCtx;
     bool scissored = false;

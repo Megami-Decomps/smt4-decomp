@@ -1,5 +1,6 @@
 /* NON_MATCHING: near miss: retail inlines the per-property change test as branch chains jumping to a shared set-bit tail (no bool result); register assignment differs. */
 #include "common.h"
+#include "shard/btlFindEntryValue.h"
 
 struct BtlEntryRef {
     u8 unk00[8];
@@ -7,7 +8,6 @@ struct BtlEntryRef {
 };
 
 extern "C" {
-s16 btlFindEntryValue(s32 entry, s32 property);
 s16 btlGetPropertyMaximum(s32 property);
 s16 FUN_004c53fc(s32 property);
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: switch table becomes a comparison chain, packed descriptor stores combine, and result-test registers differ; -O2 may preserve the retail SDK control flow. */
 #include "common.h"
+#include "shard/FUN_004269b0.h"
 
 struct SdkResourceOptions {
     u32 id;
@@ -13,7 +14,6 @@ extern "C" {
 void sysFatalBreak(void);
 void _ZN18WindowStatusResultC1Ej(u32 *result, u32 code);
 u32 FUN_00426800(u32 *scratch, u32 state[6], u32 count, u64 descriptor, u32 flags);
-u32 FUN_004269b0(u32 state[6], u8 mode, const u64 *descriptor, s32 count);
 
 void sdkCreateEncodedResourceDescriptor(u32 *result, u64 *outDescriptor, const SdkResourceOptions *options)
 {

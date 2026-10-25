@@ -1,6 +1,7 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
-struct JobWork {
+struct EventTexJobWork {
     /* 0x00 */ u8 unknown00[0x0C];
     /* 0x0C */ s32 state;
     /* 0x10 */ u8 unknown10[0x18];
@@ -12,7 +13,6 @@ struct JobWork {
 extern "C" {
 u32 scrGetArg(u32 index);
 s32 jobIsValid(u32 job);
-JobWork* jobGetWork(u32 job);
 void eventTexRemoveHandle(u32 job);
 void jobStop(u32 job, s32 mode);
 
@@ -20,7 +20,7 @@ u32 FUN_0028350c(void)
 {
     u32 job = scrGetArg(0);
     if (jobIsValid(job) != 0) {
-        JobWork* work = jobGetWork(job);
+        EventTexJobWork* work = (EventTexJobWork *)jobGetWork(job);
         eventTexRemoveHandle(job);
         if (work->state == 1) {
             jobStop(job, 0);

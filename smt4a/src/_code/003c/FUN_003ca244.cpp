@@ -1,5 +1,6 @@
 /* NON_MATCHING: collected-item buffer clearing and duplicate-scan loop scheduling differ. */
 #include "map/mapDepart.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 namespace {
 struct DepartureCollectedItems {
@@ -22,7 +23,6 @@ extern "C" {
 extern MapDepart *g_mapDepart;
 extern DepartureCollectedItems DAT_005f1d74;
 s32 FUN_00480a54(s32 item);
-void *jyoucyuGetTableEntry(s32 index);
 
 /* Collapse repeated collected items into a stable list with quantities and source attributes. */
 void FUN_003ca244(void)

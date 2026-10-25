@@ -1,12 +1,11 @@
 /* NON_MATCHING: caption VFP/load scheduling and cached-state push/pop register allocation differ. */
 #include "shard/S1ListPanel.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
 extern const void* DAT_0056fd38;
 extern const u8 DAT_0056df38[][60];
-void FUN_00162790(u32 font, u32 color, const u8* text,
-                  f32 x, f32 y, f32 depth, f32 scaleX, f32 scaleY);
 u32 FUN_001692ac(u32 mode, u32 options);
 
 u32 FUN_003161b4(void)
@@ -22,7 +21,7 @@ u32 FUN_003161b4(void)
         return 1;
     }
     if (work->state == 1) {
-        FUN_00162790(3, 0xFFFFFFFF, DAT_0056df38[work->selection] + 7,
+        textDrawString(3, 0xFFFFFFFF, (const char *)(DAT_0056df38[work->selection] + 7),
                       150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
     }
     RenderCtxA* context = g_renderCtx;

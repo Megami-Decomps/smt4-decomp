@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00318e84` (_code @ 0x318e84, 0x43c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/FUN_00215bbc.h"
 
 extern "C" {
 
 int uiPointerHitsRect(int, int, int, int, int);
 int sysPlaySe(...);
 int messageSetMode(int);
-int FUN_00215bbc(void);
 int linkHolderApplyFlag(...);
 int FUN_00284ee4(...);
 int FUN_002c39dc(...);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: uiPointerHitsRect. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_00215bbc. */
@@ -51,7 +51,7 @@ unsigned int FUN_00318e84(int param_1)
   unsigned int temp_v2;
   
   temp_v2 = 0;
-  temp_v0 = FUN_001834a4(0x2e,0x97);
+  temp_v0 = asdTMTexTableEntryAt(0x2e,0x97);
   temp_v1 = (int)*(short *)(temp_v0 + 8);
   uiPointerHitsRect(temp_v1,(int)*(short *)(temp_v0 + 10),(int)**(short **)(temp_v0 + 0xc),
                (int)(*(short **)(temp_v0 + 0xc))[1],0);

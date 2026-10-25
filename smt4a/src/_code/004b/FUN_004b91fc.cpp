@@ -1,5 +1,6 @@
 /* NON_MATCHING: work and its +0x1000 base trade r4/r5, the constant 2 is kept in r6, and the step/frame stores are not paired into strd. */
 #include "common.h"
+#include "shard/dataTable33IsLoaded.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ typedef struct SceneSetupWork {
     /* 0x1138 */ SceneScriptFile scripts[2];
 } SceneSetupWork;
 
-s32 dataTable33IsLoaded(void *table);
 s32 sceneTexturesAreLoaded(void);
 s32 isFlag1F0Set(void *flags);
 SceneScriptProcess *FUN_00275bc8(void *data, u32 size);

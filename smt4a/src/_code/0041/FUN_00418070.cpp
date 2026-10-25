@@ -1,4 +1,4 @@
-/* NON_MATCHING: the inlined flag clear folds the byte index into scaled ldrb/strb and keeps 0 as an immediate; retail computes id>>3 and ~(1<<bit) in registers (same issue as gameFlagSetValue). */
+/* NON_MATCHING: flag clear now matches retail (byte index + int keep-mask locals); retail keeps the constant 0 passed to the inlined writer in a callee-saved register (r6/r7 pair, push {r4-r8}) where armcc propagates the immediate. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
@@ -22,10 +22,12 @@ static inline void gameFlagWrite(u32 id, s32 value)
 {
     u8 *bits = reinterpret_cast<GameFlagBlock418070 *>(gameFlagBlockGet())->bits;
     FUN_004bb6d8(id, value);
+    u32 index = id >> 3;
     if (value) {
-        bits[id >> 3] |= 1 << (id & 7);
+        bits[index] |= 1 << (id & 7);
     } else {
-        bits[id >> 3] &= ~(1 << (id & 7));
+        s32 keep = ~(1 << (id & 7));
+        bits[index] &= keep;
     }
 }
 

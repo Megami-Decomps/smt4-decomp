@@ -1,6 +1,7 @@
 /* NON_MATCHING: transition-flag lifetime and secondary game-state literal relocation differ. */
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct MapSavedReturnPacket {
     u8 kind, map, area, object;
@@ -18,7 +19,6 @@ extern GameStateA g_gameState;
 const MapSavedReturnPacket *gameBlockGetArea27E98();
 s32 gameStateIsFlagSetAndLarge();
 s32 lmapMainGetUnk74();
-void asdSequenceRequest(u32, const void *, u32);
 void FUN_003d54f8(s32, s32);
 void mapPlaceSet(u32, u32, u32);
 void FUN_004731d8();

@@ -1,17 +1,17 @@
 /* NON_MATCHING: retail places case 3's flag clear after the return and shares case 0's final store; the loader call's argument setup is scheduled differently. */
 #include "shard/CampMenuJobWork.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-StagedOpenWork *jobGetWork(void);
 s32 FUN_00167458(void *loader, s32 arg);
 u32 FUN_0019d890(u32 group, u32 item);
 s32 entryDispatchUpdate(void *fade, s32 arg);
 
 /* Steps the job's open sequence: wait for the loader, then for the fade, then clear the busy flags. */
-s32 FUN_0047a1e0(void)
+s32 FUN_0047a1e0(u32 job)
 {
-    StagedOpenWork *work = jobGetWork();
+    StagedOpenWork *work = (StagedOpenWork *)jobGetWork(job);
 
     switch (work->state) {
     case 0:

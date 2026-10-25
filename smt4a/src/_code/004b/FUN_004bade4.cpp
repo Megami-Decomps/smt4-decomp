@@ -30,7 +30,7 @@ extern int vec2GetYInt(void *);
 extern void efctSetSpeed(f32);
 extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
-extern SpriteInfo *FUN_001834a4(u32, u32);
+extern SpriteInfo *asdTMTexTableEntryAt(u32, u32);
 extern void FUN_00164b5c(s32, s32, u32, s32, s32, s32);
 extern void FUN_0019de98(s32, u32);
 extern s32 FUN_002a482c(SlotMenu *);
@@ -49,7 +49,7 @@ void FUN_004bade4(SlotMenu *menu)
         s32 y = vec2GetYInt(pos);
         FUN_001835b4(2, 0x1f, 0x1f, x, y, 0x1f);
         FUN_001835b4(2, 0x1f, 0x20, x, y, 0x1f);
-        SpriteInfo *info = FUN_001834a4(0x1f, 0x21);
+        SpriteInfo *info = asdTMTexTableEntryAt(0x1f, 0x21);
         s32 dx = info->x;
         s32 dy = info->y;
         s32 sx = vec2GetXInt(pos) + dx;

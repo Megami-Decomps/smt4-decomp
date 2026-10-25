@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,7 +7,6 @@ extern "C" {
 
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 
 /* Script command: sets the result to 1 when an available, required, non-excluded combatant has
  * per-index flag `arg` set. */

@@ -97,7 +97,7 @@ int FUN_00303460(...);
 int FUN_003250ac(...);
 int FUN_0033abd4(...);
 int mathPositionHeadingDegrees(...);
-int FUN_003e54b8(...);
+int slotTargetApplyActiveValue(...);
 
 int soundVolumeSettingGet(...);
 int FUN_002b621c(...);
@@ -404,7 +404,7 @@ extern unsigned int FUN_003e0034(void);
 extern int linkHolderCallFirst(int);
 /* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: linkHolderApplyFirst. */
-/* Supplied declaration required: FUN_003e54b8. */
+/* Supplied declaration required: slotTargetApplyActiveValue. */
 extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: controllerGetSourceTiming. */
 /* Supplied declaration required: linkedTargetSetFloat. */
@@ -1425,7 +1425,7 @@ LAB_00326fcc:
         DAT_005f17ac = '\x01';
         piVar18[0x5a] = -1;
         piVar18[0x59] = 0;
-        FUN_003e54b8(piVar18[0x6a]);
+        slotTargetApplyActiveValue(piVar18[0x6a]);
       }
       temp_v37 = 0.017453292f;
       temp_v6 = g_lmapScene[2];
@@ -4730,7 +4730,7 @@ LAB_002da3cc:
                 if (g_lmapScene[0x9c] == 1) {
                   g_lmapScene[0x5a] = -1;
                   piVar18[0x59] = 0;
-                  FUN_003e54b8(piVar18[0x6a]);
+                  slotTargetApplyActiveValue(piVar18[0x6a]);
                   DAT_005f17ac = '\x01';
                 }
                 piVar18 = g_lmapScene;
@@ -6075,7 +6075,7 @@ code_r0x00313648:
         *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
         FUN_003fe86c(temp_v32,0,2);
         *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
-        FUN_003e54b8(g_lmapScene[0x6a]);
+        slotTargetApplyActiveValue(g_lmapScene[0x6a]);
         linkedTargetSetFloat(g_lmapScene[0x6a]);
       }
       if (g_lmapScene[2] >= 7) {
@@ -6088,7 +6088,7 @@ code_r0x00313648:
       controllerGetSourceValue(g_lmapScene[0x6a]);
       if (in_s0 >= 0x41500000) {
         FUN_003fe86c(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
-        FUN_003e54b8(g_lmapScene[0x6a]);
+        slotTargetApplyActiveValue(g_lmapScene[0x6a]);
       }
       piVar18 = g_lmapScene;
       if (g_lmapScene[2] < 0x1e) {
@@ -8175,7 +8175,7 @@ LAB_00246d70:
         *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
         FUN_003fe86c(temp_v32,0,2);
         *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
-        FUN_003e54b8(g_lmapScene[0x6a]);
+        slotTargetApplyActiveValue(g_lmapScene[0x6a]);
         linkedTargetSetFloat(g_lmapScene[0x6a]);
       }
       if (g_lmapScene[2] >= 7) {
@@ -8190,7 +8190,7 @@ LAB_00246d70:
         return;
       }
       FUN_003fe86c(*(unsigned int *)(g_lmapScene[0x61] + 4),0,2);
-      FUN_003e54b8(g_lmapScene[0x6a]);
+      slotTargetApplyActiveValue(g_lmapScene[0x6a]);
       return;
     }
     temp_v6 = g_lmapScene[2] + 1;

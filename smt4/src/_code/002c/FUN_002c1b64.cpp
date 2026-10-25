@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail reads forceReload first through a pooled 0x11e8 register offset; armcc
- * here hoists the owner + 0x1000 base and reads it as [r5, #488] */
 #include "common.h"
 
 struct Unk2c1b64Source {
@@ -16,7 +14,7 @@ struct Unk2c1b64Source {
 struct Unk2c1b64Owner {
     /* 0x0000 */ u8 unk0000[0x11E4];
     /* 0x11E4 */ Unk2c1b64Source *source;
-    /* 0x11E8 */ u8 forceReload;
+    /* 0x11E8 */ s8 forceReload;
     /* 0x11E9 */ u8 state;
 };
 

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
+#include "shard/FUN_00492c84.h"
 
 // Map selection screen: only the members this update touches.
 struct MapScreen {
@@ -33,7 +34,6 @@ void FUN_0048821c(MapScreen* screen, s32 mapIndex);
 void FUN_0048a378(MapScreen* screen);
 void FUN_0048d248(MapScreen* screen, u32 value);
 void naviMainSetCurrentMap(void* cursor, s32 mapIndex);
-u32 FUN_00492c84(void* cursor);
 u32 vec2GetXInt(void* sprite);
 u32 vec2GetYInt(void* sprite);
 void pointConvertToFloat(void* pointer, u32 x, u32 y);

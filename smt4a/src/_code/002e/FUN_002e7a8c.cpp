@@ -62,7 +62,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00180310. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameGetSlotTable(void);
@@ -597,11 +597,11 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       drawSetColorFromRGBA8(0x9fddddff);
       temp_v11 = gameGetSlotTable();
       textFormatBuffer(temp_v22,&LAB_002e87dc,*(unsigned char *)(temp_v11 + 0x1ca3));
-      temp_v11 = FUN_001834a4(0x11,0x2a);
+      temp_v11 = asdTMTexTableEntryAt(0x11,0x2a);
       FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,0,2,0x9c,
                    temp_v22);
       textFormatBuffer(temp_v22,&LAB_002e87dc,*(unsigned int *)(temp_v2 + 0x28));
-      temp_v11 = FUN_001834a4(0x11,0x2c);
+      temp_v11 = asdTMTexTableEntryAt(0x11,0x2c);
       FUN_00180310(2,*(short *)(temp_v11 + 8) + temp_v7,*(short *)(temp_v11 + 10) + temp_v8,1,2,0x9c,
                    temp_v22);
       FUN_00183bb0();

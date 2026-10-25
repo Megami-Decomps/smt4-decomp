@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/TexTableLoaded.h"
+#include "shard/MapNaviTable_GetCategoryCount.h"
 
 struct MapNaviPoint {
     s32 x;
@@ -49,7 +50,6 @@ s32 dataTable2eSub2GetCount(void);
 const MapNaviTextureRecord* dataTable2eSub2GetRecord(s32 index);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 TexNode* FUN_002c58c8(s32 table, s32 node);
-s32 MapNaviTable_GetCategoryCount(const MapNaviTable* table);
 const MapNaviCategoryRecord* MapNaviTable_GetCategoryRecord(const MapNaviTable* table, s32 index);
 void FUN_0039d69c(MapNaviDisplay* display, s32 map);
 

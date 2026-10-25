@@ -1,6 +1,7 @@
 /* NON_MATCHING: the 0x5A8 icon offset literal is loaded before the selection store instead of after it (pool order swaps). */
 #include "common.h"
 #include "status/StatusCamera.h"
+#include "bible/bibleDevil.h"
 
 extern "C" {
 
@@ -35,7 +36,6 @@ extern BibleCursor DAT_0043d9c8;
 
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
-s32 useCounterGetCurrentValue(void);
 void buttonHelpSetPreset(s32 preset);
 void FUN_0022e0fc(BibleDevilIcon *icon, s8 animation);
 void FUN_0022d1a8(BibleDevilScreen *screen);

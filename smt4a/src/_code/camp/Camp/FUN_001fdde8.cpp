@@ -80,7 +80,7 @@ extern int g_camp; /* 0x57f108 */
 extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: gameGetPlayerData. */
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
@@ -372,7 +372,7 @@ void FUN_001fdde8(int param_1)
       return;
     }
     temp_v14[0] = '\0';
-    temp_v3 = FUN_001834a4(0x14,0x572);
+    temp_v3 = asdTMTexTableEntryAt(0x14,0x572);
     temp_v8 = (int)*(short *)(temp_v5 + 0x1b36);
     temp_v4 = temp_v13;
     FUN_003450d4(temp_v13,temp_v3,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),temp_v8,

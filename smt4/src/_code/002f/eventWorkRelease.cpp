@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 namespace {
 struct EventWork {
@@ -9,14 +10,13 @@ struct EventWork {
 }
 
 extern "C" {
-EventWork *jobGetWork(u32 job);
 void resourceListDestroy(void *resources);
 void asdMemFree(void *memory);
 
 /* Destroys an event's resources and backing allocation. */
 void eventWorkRelease(u32 job)
 {
-    EventWork *work = jobGetWork(job);
+    EventWork *work = (EventWork *)jobGetWork(job);
     resourceListDestroy(work->resources);
     asdMemFree(work->allocation);
 }

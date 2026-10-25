@@ -1,6 +1,7 @@
 /* NON_MATCHING: saved draw arguments, numeric-call stack setup and HP coordinate temporaries use different registers; portrait conversion and cycling marker remainder now follow retail. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/markerKindGetColor.h"
 
 extern "C" {
 
@@ -32,14 +33,13 @@ typedef struct PartnerCardScreen {
 
 s32 FUN_002b4dcc(PartnerCardUnit *unit);
 void efctSetSpeed(f32 speed);
-PartnerCardLayout *FUN_001834a4(u32 group, u32 id);
+PartnerCardLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
 void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,
                   u32 c);
 s32 valueAtMostFifthOfTotal(s32 value, s32 total);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_00183bb0(void);
-u32 markerKindGetColor(s16 kind);
 void FUN_0018152c(s16 portrait, s32 x, s32 y, u32 id, u32 flag);
 void FUN_004bda84(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale);
 
@@ -66,14 +66,14 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     FUN_001835b4(2, 0x11, 0x99, x, y, 0x6F);
     FUN_001835b4(2, 0x11, 0x9A, x, y, 0x6F);
     FUN_001835b4(2, 0x11, 0x98, x, y, 0x6F);
-    PartnerCardLayout *levelBox = FUN_001834a4(0x11, 0x9D);
+    PartnerCardLayout *levelBox = asdTMTexTableEntryAt(0x11, 0x9D);
 
     FUN_00180310(0, levelBox->x + x, levelBox->y + y, 1, 3, 0x79, "%d", level);
     efctSetSpeed(scale);
     FUN_001835b4(2, 0x11, 0x9E, x, y, 0x6F);
     FUN_001835b4(2, 0x11, 0x77, x, y, 0x79);
     FUN_00183788(hp, maxHp, 0, 0, 0x11, 0x9F, 0xA2, 0xA0, 0xA1, x, y, 0x74, 0);
-    PartnerCardLayout *hpBox = FUN_001834a4(0x11, 0xAA);
+    PartnerCardLayout *hpBox = asdTMTexTableEntryAt(0x11, 0xAA);
     s32 hpX = hpBox->x + x;
     s32 hpY = hpBox->y + y;
 
@@ -83,7 +83,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     efctSetSpeed(scale);
     FUN_00180310(10, hpX, hpY, 1, 4, 0x79, "%d", hp);
     FUN_00183bb0();
-    PartnerCardLayout *markerBox = FUN_001834a4(0x11, 0xAC);
+    PartnerCardLayout *markerBox = asdTMTexTableEntryAt(0x11, 0xAC);
     s32 markerX = markerBox->x + x;
     s32 markerY = markerBox->y + y;
     u32 color = 0xFFFFFFFF;

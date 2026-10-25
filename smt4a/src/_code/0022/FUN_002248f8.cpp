@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002248f8` (_code @ 0x2248f8, 0x14e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -35,7 +36,6 @@ int FUN_004a9588(...);
 int FUN_004aa0b0(...);
 int VectorSignedToFloat(...);
 
-int btlGetMainState(void);
 int FUN_001517b4(void);
 int dataTable00FindById(void);
 int FUN_00284ee4(...);
@@ -105,7 +105,7 @@ extern unsigned int DAT_0057a9fc; /* 0x57a9fc */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobGetWork(void);
 extern int padButtonRepeat(unsigned int);
-extern int FUN_001834a4(unsigned int, unsigned int);
+
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframeThree. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
@@ -444,7 +444,7 @@ unsigned int FUN_002248f8(void)
         }
       }
     }
-    temp_v10 = btlGetMainState();
+    temp_v10 = reinterpret_cast<int>(btlGetMainState());
     if (((*(unsigned int *)(temp_v10 + 0x45ac) & DAT_0057a9fc) != 0 ||
          (*(unsigned int *)(temp_v10 + 0x45a8) & DAT_0057a9f8) != 0) &&
        (temp_v10 = btlTalkBustUpIsUnk2F8(*(unsigned int *)(temp_v4 + 0x2364)), temp_v10 == 0)) {
@@ -550,7 +550,7 @@ unsigned int FUN_002248f8(void)
     }
     else {
 LAB_00225054:
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       temp_v4 = btlScriptUnitHasFlags();
       if (temp_v4 == 0) break;
     }
@@ -706,7 +706,7 @@ LAB_002255d4:
           else if (temp_v4 == 4) {
             temp_v7 = 0x41f;
           }
-          temp_v4 = FUN_001834a4(0xd,temp_v7);
+          temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v7));
           temp_v10 = (short)(temp_v3 - 0x14) + 0x11;
           temp_v21 = (short)(temp_v2 - 0x14) + 0x27;
           temp_v16 = temp_v20;
@@ -735,7 +735,7 @@ LAB_002255d4:
             temp_v7 = 0x1cc;
           }
           temp_v19 = (int)(short)(temp_v2 - 0x14);
-          temp_v9 = FUN_001834a4(0xd,temp_v7);
+          temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,temp_v7));
           if (temp_v4 != 4) {
             VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + temp_v20,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -745,7 +745,7 @@ LAB_002255d4:
           else {
             temp_v16 = (unsigned int)*(short *)(temp_v9 + 8);
             temp_v20 = (unsigned int)*(short *)(temp_v9 + 10);
-            temp_v4 = FUN_001834a4(0xd,0x416);
+            temp_v4 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x416));
             psVar13 = *(short **)(temp_v4 + 0xc);
             if (psVar13 != (short *)0x0) {
               temp_v9 = (int)*(short *)(temp_v4 + 8) + (int)*psVar13 / 2;
@@ -758,10 +758,10 @@ LAB_002255d4:
             temp_v17 = -temp_v9;
             temp_v9 = FUN_0035fa18(temp_v10 + 0x28c4,temp_v9,temp_v4);
             if (temp_v9 != 0) {
-              temp_v9 = FUN_001834a4(0xd,0x71);
+              temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x71));
             }
             else {
-              temp_v9 = FUN_001834a4(0xd,0x70);
+              temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0x70));
             }
             temp_v5 = *(short *)(temp_v9 + 8) + temp_v19;
             VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)(short)(temp_v3 - 0x14) +

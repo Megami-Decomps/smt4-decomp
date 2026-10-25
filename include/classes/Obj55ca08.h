@@ -26,4 +26,8 @@ public:
     /* 0x38 */ u8 unk38[4];
 };
 
+extern "C" {
+void FUN_0022e500(u8 value);
+}
+
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: map snapshot globals and location stores use different scratch registers. */
 /* Saves the active map's location and, for a local map, its scene and camera state. */
 #include "map/lmapMain.h"
 #include "shard/SaveWork.h"
@@ -12,7 +11,7 @@ void FUN_002758d8(void)
 {
     /* The saved map id lies beyond the shared SaveWork prefix. */
     struct MapSnapshot {
-        u8 type;
+        s8 type;
         u8 mode;
         u8 area;
         u8 unk03;

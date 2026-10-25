@@ -1,11 +1,11 @@
 /* NON_MATCHING: as in FUN_001ad2a4, retail keeps the two arguments in the stack frame (push {r0, r1}) and reloads the file pointer for every container scan; the allocation and the scan order otherwise follow retail (about 240 diff lines). */
 #include "common.h"
 #include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 
 s32 rt_memcmp(const void *a, const void *b, u32 size);
-void FUN_002e59f8(const void *src, void *dst, s32 size);
 void *asdMemoryAllocTracked(u32 size, u32 align, u32 arg2, u32 arg3, u32 arg4);
 void *FUN_001abbc4(AsdEplTail *tail);
 

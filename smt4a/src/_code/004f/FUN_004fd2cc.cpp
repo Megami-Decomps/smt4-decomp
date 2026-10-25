@@ -1,9 +1,9 @@
 /* NON_MATCHING: argument homing adds stack saves; model flags fold into conditional loads and slot addresses differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 
 
 /* Queue scalar actions for the requested model slot, or every enabled model slot. */

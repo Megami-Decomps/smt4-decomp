@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (213 vs 259 rows); retail returns the position in s0-s2 keeping it in d8/s18 across the switch, this version builds it through a struct and does not reproduce that */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct Vec3 {
@@ -30,7 +31,6 @@ extern BattleMain* g_btlMain;
 Vec3 FUN_0023cd08(void* battle, u32 id, s32 mode);
 Vec3 FUN_0024d434(void* battle, u32 id, s32 mode);
 BattleEntry* btlMainFindEntryByListedId(void* battle, u32 id);
-void* btlGetMainState(void);
 
 // Position `distance` units along the camera direction from the main object's anchor.
 static Vec3 cameraRelativePoint()
@@ -48,7 +48,7 @@ static Vec3 cameraRelativePoint()
 static Vec3 entrySlotPoint(u32 listedId)
 {
     Vec3 point = { 0.0f, 0.0f, 0.0f };
-    BattleEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
+    BattleEntry* entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), listedId);
     if (entry != NULL) {
         if ((entry->flags & 0x20) != 0) {
             point.x = 0.0f;
@@ -77,19 +77,19 @@ Vec3 FUN_003dd680(u32 unused, u32 kind, u32 first, u32 second)
     Vec3 result = { 0.0f, 0.0f, 0.0f };
     switch (kind) {
     case 0:
-        result = FUN_0023cd08(btlGetMainState(), first, 0);
+        result = FUN_0023cd08(static_cast<void *>(btlGetMainState()), first, 0);
         break;
     case 1:
-        result = FUN_0024d434(btlGetMainState(), first, 0);
+        result = FUN_0024d434(static_cast<void *>(btlGetMainState()), first, 0);
         break;
     case 2:
         result = entrySlotPoint(first);
         break;
     case 3:
-        result = FUN_0023cd08(btlGetMainState(), second, 0);
+        result = FUN_0023cd08(static_cast<void *>(btlGetMainState()), second, 0);
         break;
     case 4:
-        result = FUN_0024d434(btlGetMainState(), second, 0);
+        result = FUN_0024d434(static_cast<void *>(btlGetMainState()), second, 0);
         break;
     case 5:
         result = entrySlotPoint(second);
@@ -108,7 +108,7 @@ Vec3 FUN_003dd680(u32 unused, u32 kind, u32 first, u32 second)
         result.y = 0.6f;
         break;
     case 13:
-        result = FUN_0023cd08(btlGetMainState(), second, 1);
+        result = FUN_0023cd08(static_cast<void *>(btlGetMainState()), second, 1);
         break;
     }
     return result;

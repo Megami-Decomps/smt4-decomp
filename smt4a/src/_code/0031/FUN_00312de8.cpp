@@ -19,7 +19,7 @@ MapTimerSlot* FUN_00312de8(s32 bankIndex, float duration)
     };
     // The slot's byte-aligned padding cannot acquire float members without shifting it.
     struct SlotView {
-        /* 0x00 */ u8 active;
+        /* 0x00 */ s8 active;
         /* 0x01 */ u8 mode;
         /* 0x02 */ u8 unk02[2];
         /* 0x04 */ s32 bank;

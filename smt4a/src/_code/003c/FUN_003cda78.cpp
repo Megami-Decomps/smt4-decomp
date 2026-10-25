@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler synthesizes the large current-index address with ADDs and hoists the entry base; retail uses a literal offset and different cold-return placement. */
+/* NON_MATCHING: the current-index literal (0x74c0) now matches; armcc folds the entry's +44 into the load displacement where retail adds it separately, and the cold-return placement/nop differ. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
 struct SlotSelectionEntry {
@@ -39,9 +39,10 @@ u32 FUN_003cda78(void)
     const SkillCommandWork *work = &g_engineCleanupOwner;
     u16 skill;
     if (work->selection != NULL) {
-        const SlotSelectionEntry *entries =
-            reinterpret_cast<const SlotSelectionEntry *>(work->selection->entries);
-        SlotRecord *record = gameGetSlotRecord(entries[work->selection->current].slot);
+        SlotSelectionView *selection = work->selection;
+        s32 current = selection->current;
+        SlotRecord *record = gameGetSlotRecord(
+            reinterpret_cast<const SlotSelectionEntry *>(selection->entries)[current].slot);
         u32 index = FUN_003a7b74();
         skill = slotSkillWords(record)[index];
     } else {

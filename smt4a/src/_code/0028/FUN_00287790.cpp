@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287790` (_code @ 0x287790, 0x904 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "mapnavi/naviMain.h"
 
@@ -51,7 +52,6 @@ typedef struct {
 } param_5_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int btlGetMainState(void);
 extern int btlMainIsRunning(void);
 /* Supplied declaration required: recordGetScaledMaximum. */
 extern int gameGetPlayerData(void);
@@ -140,7 +140,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v3 = 0;
       }
       else {
-        temp_v3 = btlGetMainState();
+        temp_v3 = reinterpret_cast<int>(btlGetMainState());
         if (temp_v3 == 0) {
           temp_v3 = (int)*(short *)(temp_v6 + 0x1c);
         }
@@ -153,7 +153,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v4 = 0;
       }
       else {
-        temp_v4 = btlGetMainState();
+        temp_v4 = reinterpret_cast<int>(btlGetMainState());
         if (temp_v4 != 0) {
           temp_v4 = FUN_002b4dcc();
         }
@@ -251,7 +251,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v3 = 0;
       }
       else {
-        temp_v3 = btlGetMainState();
+        temp_v3 = reinterpret_cast<int>(btlGetMainState());
         if (temp_v3 == 0) {
           temp_v3 = (int)*(short *)(temp_v6 + 0x1c);
         }
@@ -264,7 +264,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v4 = 0;
       }
       else {
-        temp_v4 = btlGetMainState();
+        temp_v4 = reinterpret_cast<int>(btlGetMainState());
         if (temp_v4 != 0) {
           temp_v4 = FUN_002b4dcc();
         }
@@ -470,7 +470,7 @@ LAB_00287fec:
       temp_v2 = 0;
     }
     else {
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       if (temp_v3 == 0) {
         temp_v2 = *(short *)(temp_v6 + 0x1c);
       }
@@ -484,7 +484,7 @@ LAB_00287fec:
       temp_v1 = 0;
     }
     else {
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       if (temp_v3 != 0) {
         temp_v1 = FUN_002b4dcc();
       }

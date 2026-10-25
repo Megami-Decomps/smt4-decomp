@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00205cc8` (_code @ 0x205cc8, 0x534 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 int FUN_002630e0(unsigned int *, int, unsigned int);
-int btlGetMainState(void);
 int FUN_00295eb0(...);
 int FUN_002963ec(...);
 int uiSpriteSetImageKeyframe(int, int, int);
@@ -25,7 +25,6 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_002630e0. */
 extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W4_Match6_BtlScript.h"
 
 extern "C" {
 

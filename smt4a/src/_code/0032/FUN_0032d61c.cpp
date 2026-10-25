@@ -18,7 +18,7 @@ int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
 int FUN_00180310(...);
-int FUN_001834a4(...);
+
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
@@ -60,7 +60,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -166,8 +166,8 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         }
         temp_v22 = temp_v13;
         renderCtxCalculateStereoParallax(g_renderCtx);
-        temp_v5 = FUN_001834a4(0x2e,0x23);
-        temp_v7 = FUN_001834a4(0x2e,0x22);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x23));
+        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x22));
         FUN_00168e00((int)*(short *)(temp_v7 + 8) + (int)temp_v13 + param_4,
                      *(short *)(temp_v7 + 10) + param_5,(int)**(short **)(temp_v7 + 0xc),
                      (int)(*(short **)(temp_v7 + 0xc))[1]);
@@ -209,7 +209,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       }
       FUN_001835b4(2,0x2e,temp_v6,param_4 + temp_v5,param_5,0x72);
       FUN_001835b4(2,0x2e,0xe,param_4 + temp_v5,param_5,0x73);
-      temp_v7 = FUN_001834a4(0x2e,0x10);
+      temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x10));
       if (*(unsigned short *)(param_2 + 0x36) >= 10) {
         textFormatBuffer(temp_v19,&LAB_0032de34);
       }
@@ -227,10 +227,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       temp_v5 = 0;
       temp_v22 = temp_v12;
       do {
-        temp_v7 = FUN_001834a4(0x2e,temp_v5 + 0x2f);
+        temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v5 + 0x2f));
         FUN_001835b4(2,0x2e,0x2d,(int)*(short *)(temp_v7 + 8) + (int)temp_v12 + param_4,
                      *(short *)(temp_v7 + 10) + param_5,0x71);
-        temp_v8 = FUN_001834a4(0x2e);
+        temp_v8 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x2e));
         effectSpawnDefaultArguments(param_1[temp_v5 + 0x14]);
         temp_v0 = *(short *)(temp_v8 + 10);
         temp_v15 = (float)VectorSignedToFloat((int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3)
@@ -255,15 +255,15 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
         temp_v5 = 0;
         do {
           if (*(short *)((int)param_1 + temp_v5 * 2 + 0x24) != 0) {
-            temp_v7 = FUN_001834a4(0x2e,temp_v5 + 0xac);
+            temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v5 + 0xac));
             temp_v9 = *(short *)(temp_v7 + 10) + param_5;
             temp_v11 = (int)*(short *)(temp_v7 + 8) + (int)param_3[1] + param_4;
             temp_v8 = temp_v11 + (int)temp_v22;
             FUN_00164b5c(2,0x2e,0x11,temp_v8,temp_v9,0x71);
-            temp_v7 = FUN_001834a4(0x2e,0xaa);
+            temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0xaa));
             uiDrawItemCategoryIcon((int)*(short *)((int)param_1 + temp_v5 * 2 + 0x24),
                          *(short *)(temp_v7 + 8) + temp_v8,*(short *)(temp_v7 + 10) + temp_v9,0x72,0);
-            temp_v7 = FUN_001834a4(0x2e,0xab);
+            temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0xab));
             temp_v0 = *(short *)(temp_v7 + 8);
             temp_v1 = *(short *)(temp_v7 + 10);
             FUN_001527d8(param_1[temp_v5 + 2],0xffffff00);
@@ -282,21 +282,21 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       if ((*(unsigned char *)(param_2 + 0x20) & 2) != 0) {
         temp_v6 = 0xf33700;
       }
-      temp_v5 = FUN_001834a4(0x2e,8);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,8));
       FUN_001527d8(*param_1,temp_v6);
       temp_v7 = param_4 + (int)temp_v13;
       FUN_0025cc78(*param_1,*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
-      temp_v5 = FUN_001834a4(0x2e,9);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,9));
       FUN_001527d8(param_1[1],temp_v18);
       FUN_0025cc78(param_1[1],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72);
-      temp_v5 = FUN_001834a4(0x2e,10);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,10));
       FUN_001527d8(param_1[0xd],0xffffff00);
       FUN_0025cc78(param_1[0xd],*(short *)(temp_v5 + 8) + temp_v7,*(short *)(temp_v5 + 10) + param_5,0x72)
       ;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)(int)temp_v22;
       temp_v22 = temp_v13;
-      temp_v5 = FUN_001834a4(0x2e,0x24);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x24));
       effectSpawnDefaultArguments(param_1[0xe]);
       temp_v0 = *(short *)(temp_v5 + 10);
       temp_v14 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -305,7 +305,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       FUN_001527d8(param_1[0xe],0x32323200);
       FUN_0025cc78(param_1[0xe],param_4 + (int)(temp_v14 + (temp_v12 - temp_v22) * temp_v16) + (int)temp_v13,
                    temp_v0 + param_5,0x74);
-      temp_v5 = FUN_001834a4(0x2e,0x25);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x25));
       temp_v7 = param_1[0x11];
       temp_v0 = **(short **)(temp_v5 + 0xc);
       temp_v1 = *(short *)(temp_v5 + 8);
@@ -313,7 +313,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       FUN_001527d8(param_1[0x10],0x32323200);
       FUN_0025cc78(param_1[0x10],param_4 + (temp_v0 - temp_v7) + (int)temp_v1 + (int)temp_v13,
                    param_5 + temp_v2,0x74);
-      temp_v5 = FUN_001834a4(0x2e,0x27);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x27));
       if ((*(short *)(param_2 + 0x62) != 0) && (*(short *)(param_2 + 0x34) != 0)) {
         textFormatBuffer(temp_v19,&LAB_0032de34);
       }
@@ -340,14 +340,14 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
           }
           temp_v10 = temp_v10 & 0xffff;
           FUN_00184310();
-          temp_v5 = FUN_001834a4(0x2e,0x106);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x106));
           FUN_00169a1c(*(unsigned short *)(temp_v10 + 0x9c),*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);
-          temp_v5 = FUN_001834a4(0x2e,0x105);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x105));
           textFormatBuffer(temp_v19,&LAB_0032de34,*(unsigned short *)(param_2 + 0x3a));
           FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                        temp_v19);
-          temp_v5 = FUN_001834a4(0x2e,0x107);
+          temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x107));
           FUN_001527d8(param_1[0x12],0xffffff00);
           FUN_0025cc78(param_1[0x12],*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);

@@ -50,7 +50,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -157,7 +157,7 @@ unsigned int FUN_002835f4(void)
     temp_v22 = temp_v14;
     temp_v26 = temp_v18;
   }
-  temp_v3 = FUN_001834a4(*(unsigned int *)(*(int *)(temp_v0 + 0x24) * 0x10 + 0x57f43c),temp_v1 * 1000);
+  temp_v3 = asdTMTexTableEntryAt(*(unsigned int *)(*(int *)(temp_v0 + 0x24) * 0x10 + 0x57f43c),temp_v1 * 1000);
   temp_v1 = *(int *)(temp_v0 + 0x24);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {

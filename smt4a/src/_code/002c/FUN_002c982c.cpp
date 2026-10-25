@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail does not hoist the cursor/timer addresses out of the marker loop (they are recomputed where used) and conditionally materialises the constant 1 at loop entry; built hoists both and spills them */
 #include "common.h"
 #include "util/FUN_002c7e24.h"
+#include "shard/FUN_0037e09c.h"
 
 /* A unit status record as filled by unitInitializeFromTemplate. */
 struct StatusUnitRecord {
@@ -44,7 +45,6 @@ struct MarkerPlayer {
 extern "C" {
 u32 markerKindGetColor(s32 kind);
 void FUN_003b076c(void);
-void FUN_0037e09c(s32 flag);
 s32 FUN_0024101c(const char *name, const u8 *source);
 void unitInitializeFromTemplate(u32 unitId, StatusUnitRecord *record);
 void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 a, s32 b, const char *name);

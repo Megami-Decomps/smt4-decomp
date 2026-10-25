@@ -1,6 +1,7 @@
 /* NON_MATCHING: descriptor packing/store width, format dispatch and result-bit/global-address scheduling differ. */
 #include "classes/WindowStatus.h"
 #include <stddef.h>
+#include "shard/FUN_00427e28.h"
 
 struct AsyncMapParameters { u32 id; u8 format, flags, storage; };
 struct AsyncMapHandleObject { u8 prefix[0x54]; u8 header[0x44]; };
@@ -22,7 +23,6 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void sysFatalBreak();
 s32 libc_toupper(s32 character);
 void FUN_0019a46c(void *destination, const void *source, u32 size);
-s32 FUN_00427e28(u32 *token, void *request, s32 mode);
 s32 appletIsExitRequested();
 s32 FUN_0015a410();
 extern AsyncMapPacket DAT_0061b030;

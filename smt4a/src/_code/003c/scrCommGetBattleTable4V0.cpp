@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/Shard003C.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct Row4 {
 } Row4;
 
 extern s32 scrGetArg(s32 index);
-extern void *btlGetMainState(void);
 extern void *btlGetTable(void *state, s32 index);
 extern Row4 *dataTableGetEntries(void *table);
 extern void scrSetResult(u32 value);
@@ -17,7 +17,7 @@ extern void scrSetResult(u32 value);
 u32 scrCommGetBattleTable4V0(void)
 {
     s32 row = scrGetArg(0);
-    void *state = btlGetMainState();
+    void *state = static_cast<void *>(btlGetMainState());
     Row4 *rows = dataTableGetEntries(btlGetTable(state, 4));
 
     scrSetResult(rows[row].v0);

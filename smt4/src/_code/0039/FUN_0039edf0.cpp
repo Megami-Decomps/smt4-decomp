@@ -7,7 +7,6 @@ extern "C" {
 extern GameState g_gameState;
 s32 saveTestFlagRow(u8 row);
 s32 gameFlagIsSet(s32 flag);
-s32 FUN_002fb094(s32 id);
 }
 
 static __inline bool transientSpriteIsUnlocked(const TransientSpriteEntry *entry, bool allowAlternate)

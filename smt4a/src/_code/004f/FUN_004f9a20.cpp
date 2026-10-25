@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail keeps `value` in r6 from the start, loads the table through &owner->table, and ends with a plain call instead of the tail call. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 /* A named bonus entry: up to four follow the table header. */
@@ -27,8 +28,7 @@ extern "C" {
 
 extern BtlEffectState g_btlEffect;
 
-void *btlGetMainState(void);
-s32 btlScriptUnitHasFlags(void);
+s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
 s32 libc_strcmp(const char *a, const char *b);
 s32 FUN_004f59b0(NamedBonusOwner *owner);
 
@@ -52,8 +52,7 @@ s32 FUN_004f9a20(NamedBonusOwner *owner)
 {
     s32 value = 0;
 
-    btlGetMainState();
-    if (btlScriptUnitHasFlags() != 0) {
+    if (btlScriptUnitHasFlags(btlGetMainState()) != 0) {
         return -1;
     }
     if (owner->table != NULL) {

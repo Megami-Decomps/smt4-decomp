@@ -56,4 +56,8 @@ typedef char ShopScreenOffsets[
     offsetof(ShopScreen, lists) == 0x880 && offsetof(ShopScreen, tables) == 0xC94 &&
     sizeof(ShopSlotTable) == 0x1002 && sizeof(ShopCategoryList) == 0x74 ? 1 : -1];
 
+extern "C" {
+void buttonHelpSelectMenuPreset(const void* owner);
+}
+
 #endif

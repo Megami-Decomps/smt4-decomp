@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025ee64` (_code @ 0x25ee64, 0x49c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 
@@ -7,7 +8,6 @@ extern "C" {
 
 int FUN_00218238(int, int, int, int, int);
 int FUN_00292960(char *, int);
-int btlGetMainState(void);
 int vec2GetXInt(...);
 int FUN_00330f80(int, int);
 
@@ -40,7 +40,7 @@ extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
-extern int FUN_002bf4f8(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_00330f80. */
 
@@ -91,10 +91,10 @@ void FUN_0025ee64(int param_1)
         temp_v11 = vec2GetYInt(temp_v11 + 0x138);
         temp_v8 = vec2GetYInt(temp_v3);
         if ((temp_v7 & 1) != 0) {
-          temp_v15 = FUN_002bf4f8(0x15,temp_v4 + (int)(7 - temp_v7) / 2 + 0xff);
+          temp_v15 = asdTMTexTableEntryAt(0x15,temp_v4 + (int)(7 - temp_v7) / 2 + 0xff);
         }
         else {
-          temp_v15 = FUN_002bf4f8(0x15,temp_v4 + (int)(8 - temp_v7) / 2 + 0x106);
+          temp_v15 = asdTMTexTableEntryAt(0x15,temp_v4 + (int)(8 - temp_v7) / 2 + 0x106);
         }
         temp_v0 = '\0';
         temp_v14 = 0;
@@ -112,12 +112,12 @@ void FUN_0025ee64(int param_1)
                ((*(short *)(pcVar11 + 0x5c) == 0 || (temp_v10 = gameFlagIsSet(), temp_v10 != 0)))) &&
               ((*(short *)(pcVar11 + 0x5e) == 0 || (temp_v10 = flagBitIsSet(), temp_v10 != 0)))) &&
              ((pcVar11[0x5b] == '\0' ||
-              (temp_v10 = btlGetMainState(), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) == 0)))) {
+              (temp_v10 = reinterpret_cast<int>(btlGetMainState()), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) == 0)))) {
             if (*pcVar11 != '\x05') {
               if (*pcVar11 == '\x02') {
-                temp_v10 = FUN_00293988(reinterpret_cast<void *>(btlGetMainState()));
+                temp_v10 = FUN_00293988(reinterpret_cast<void *>(reinterpret_cast<int>(btlGetMainState())));
                 if ((temp_v10 == 0) ||
-                   (temp_v10 = btlGetMainState(), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) != 0))
+                   (temp_v10 = reinterpret_cast<int>(btlGetMainState()), (*(unsigned int *)(temp_v10 + 0x44a0) & 0x40000) != 0))
                 goto LAB_0025f1b8;
               }
               if (*pcVar11 == '\x03') {
@@ -159,10 +159,10 @@ LAB_0025f1b8:
     temp_v6 = vec2GetYInt(temp_v6 + 0x138);
     temp_v3 = vec2GetYInt(temp_v3);
     if ((temp_v7 & 1) != 0) {
-      temp_v11 = FUN_002bf4f8(0x15,temp_v2 + (int)(7 - temp_v7) / 2 + 0x182);
+      temp_v11 = asdTMTexTableEntryAt(0x15,temp_v2 + (int)(7 - temp_v7) / 2 + 0x182);
     }
     else {
-      temp_v11 = FUN_002bf4f8(0x15,temp_v2 + (int)(8 - temp_v7) / 2 + 0x189);
+      temp_v11 = asdTMTexTableEntryAt(0x15,temp_v2 + (int)(8 - temp_v7) / 2 + 0x189);
     }
     temp_v8 = param_1;
     FUN_00330f80(param_1,temp_v2);

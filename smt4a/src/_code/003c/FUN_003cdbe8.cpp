@@ -1,11 +1,11 @@
 /* NON_MATCHING: right portrait, duration and left slot occupy different saved registers. */
 #include "common.h"
+#include "shard/bustupConfigureSlotTransition.h"
 
 extern "C" {
 u32 scrGetArg(u32);
 s32 bustupCutAnimFindSlot(u32);
 void bustupCutAnimSetPlacement(u32, s32, s32, s32, s32);
-void bustupConfigureSlotTransition(u32, s32, s32, u32, u32, u32);
 
 // Place a pair of cut-in portraits, transitioning whichever portrait needs to change slots.
 u32 FUN_003cdbe8(void)

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct UnitRecord {
 } UnitRecord;
 
 extern u32 scrGetArg(u32 index);
-extern UnitRecord *btlGetMainState(void);
 extern UnitRecord *FUN_0027da30(UnitRecord *state, u32 index);
 extern int scrSetResult(u32 value);
 
@@ -16,7 +16,7 @@ extern int scrSetResult(u32 value);
 u32 scrComm_BtlLookupResult(void)
 {
     u32 index = scrGetArg(0);
-    UnitRecord *state = btlGetMainState();
+    UnitRecord *state = reinterpret_cast<UnitRecord *>(btlGetMainState());
 
     scrSetResult(FUN_0027da30(state, index)->result);
     return 1;

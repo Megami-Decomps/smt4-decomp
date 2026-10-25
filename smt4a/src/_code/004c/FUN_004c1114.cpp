@@ -1,16 +1,11 @@
 /* NON_MATCHING: readable rebuild from asm of the status-ailment infliction roll; armcc here schedules the VFP chance formula (vmla chains on s16-s18) and the two copies of the property switch differently, and retail's 32-byte name buffer is zeroed by eight stores before the per-ailment textFormatBuffer call. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
 
 /* A battle unit (only the fields read here). */
 struct BattleUnit {
     /* 0x000 */ u8 unk000[0x74];
     /* 0x074 */ s32 properties[0x7F];     /* property values, indexed by property id */
     /* 0x270 */ s16 level;
-};
-
-struct BattleState {
-    /* 0x0000 */ u8 unk0000[0x45A0];
-    /* 0x45A0 */ u64 blockFlags;
 };
 
 /* The mask the flags are tested against (DAT_005713f0 + 0xA8). */
@@ -22,8 +17,7 @@ struct AilmentMasks {
 extern "C" {
 extern AilmentMasks DAT_005713f0;
 
-BattleState *btlGetMainState(void);
-BattleUnit *FUN_003f0e20(BattleState *battle, u32 id);
+BattleUnit *FUN_003f0e20(BtlMainStateA *battle, u32 id);
 s32 btlGetPropertyMaximum(s32 property);
 void textFormatBuffer(char *buffer, const char *text);
 u32 lcgRandomRange(u32 limit);
@@ -41,7 +35,7 @@ static s32 resistanceOf(u32 id, s32 property)
  * resistance above 3 is required. Returns 1 when it lands. */
 u32 FUN_004c1114(u32 id, s32 kind)
 {
-    BattleState *battle = btlGetMainState();
+    BtlMainStateA *battle = btlGetMainState();
     BattleUnit *unit = FUN_003f0e20(battle, id);
     f32 base = 0.0f;
     s32 property;
@@ -92,7 +86,7 @@ u32 FUN_004c1114(u32 id, s32 kind)
         return (s32)resistance > 0;
     if (kind == 4)
         return resistanceOf(id, property) == btlGetPropertyMaximum(property);
-    if ((battle->blockFlags & DAT_005713f0.preventMask) != 0)
+    if ((battle->stateFlags64.bits & DAT_005713f0.preventMask) != 0)
         return (s32)resistance > 3;
     f32 over = 0.0f;
     if ((s32)level > 100) {

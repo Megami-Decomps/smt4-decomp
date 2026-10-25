@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/listBoxItemHasOwner.h"
 
 extern "C" {
 
@@ -10,7 +11,7 @@ typedef struct ListBoxItem {
 extern ListBoxItem *asdListBoxFindItem(void);
 
 /* True when the found list box item exists and has an owner. */
-s32 listBoxItemHasOwner(void)
+s32 listBoxItemHasOwner(u32 arg0, u32 arg1)
 {
     ListBoxItem *item = asdListBoxFindItem();
 

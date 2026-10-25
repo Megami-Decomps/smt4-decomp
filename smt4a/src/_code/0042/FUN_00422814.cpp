@@ -1,12 +1,12 @@
 /* NON_MATCHING: slot field-address hoisting and paired-counter zero initialization differ. */
 #include "gfx/LockedResourcePool.h"
+#include "shard/FUN_001af874.h"
 
 extern "C" {
 extern LockedResourcePool DAT_005880d0;
 extern u32 g_soundVoiceCriticalSection;
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
-u32 FUN_001af874(u32, u32, u32);
 
 /* Allocate storage and a protected handle for the first unused pool slot. */
 u32 FUN_00422814(s32 width, s32 height, s32 capacity)

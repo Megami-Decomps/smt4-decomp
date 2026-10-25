@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail tests the nine ailment bits one by one (tst/tsteq chains after a bic of the alternate bit, repeated at both uses) and keeps the status as an unreduced halfword (uxth at each use); armcc folds our mask test into one bic/bics pair (174 rows against 206). Logic, offsets and the linked-record updates follow retail. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 #define STATUS_BIT_ALT 0x10
@@ -56,7 +57,6 @@ extern "C" {
 
 void btlTargetSetFlag10(BtlStateRecords *state, s32 id, s32 value);
 BtlEntry *btlMainFindEntryByListedId(BtlStateRecords *state, s32 id);
-BtlStateRecords *btlGetMainState(void);
 BtlStatusRecord *gameGetUnitRecord(s32 index);
 u16 FUN_00245cc0(s32 kind);
 void FUN_0033b1ac(BtlStateRecords *state, s32 value);
@@ -65,7 +65,7 @@ void FUN_0033b1ac(BtlStateRecords *state, s32 value);
  * to its linked records; entries past 0x6D are unit records. */
 void FUN_003bcdb0(s32 id, s32 set, u16 status)
 {
-    BtlStateRecords *state = btlGetMainState();
+    BtlStateRecords *state = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
     BtlEntry *entry = btlMainFindEntryByListedId(state, id);
 
     if (entry != NULL) {
@@ -107,7 +107,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 }
                 if ((status & STATUS_BIT_B) != 0) {
                     u16 value = FUN_00245cc0(22);
-                    BtlStateRecords *other = btlGetMainState();
+                    BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
@@ -116,7 +116,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 }
                 if ((status & STATUS_BIT_A) != 0) {
                     u16 value = FUN_00245cc0(23);
-                    BtlStateRecords *other = btlGetMainState();
+                    BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
@@ -125,7 +125,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 }
                 if ((status & STATUS_BIT_C) != 0) {
                     u16 value = FUN_00245cc0(24);
-                    BtlStateRecords *other = btlGetMainState();
+                    BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
@@ -134,7 +134,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 }
                 if ((status & STATUS_BIT_D) != 0) {
                     u16 value = FUN_00245cc0(25);
-                    BtlStateRecords *other = btlGetMainState();
+                    BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
                     BtlEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
@@ -145,7 +145,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                     u8 *record;
 
                     entry->flags |= ENTRY_FLAG_WOKEN;
-                    record = btlGetMainState()->records + id * 0x114;
+                    record = reinterpret_cast<BtlStateRecords *>(btlGetMainState())->records + id * 0x114;
                     *(u32 *)(record + 0x50) |= 0x81;
                     FUN_0033b1ac(state, *(s16 *)(record + 0x62));
                     state->woken++;

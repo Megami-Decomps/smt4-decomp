@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
@@ -5,7 +6,6 @@ s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
 u32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(u32 group, s32 *first, s32 *count);
-BtlState *btlGetMainState(void);
 BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
 
 // Test whether a matching group member or active unit has packed status kind four.
@@ -18,15 +18,15 @@ u32 FUN_003123a4(void)
     s32 count;
     FUN_002499fc(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
-        BtlUnitEntry *unit = &btlGetMainState()->units[index];
+        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id &&
             (unit->values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (btlGetMainState()->hasActiveEntry) {
-        BtlUnitEntry *unit = btlMainFindActiveEntry(btlGetMainState());
+    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry) {
+        BtlUnitEntry *unit = btlMainFindActiveEntry(reinterpret_cast<BtlState *>(btlGetMainState()));
         if (unit && unit->groupId == id && (unit->values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;

@@ -92,7 +92,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 /* Supplied declaration required: eventQueueAddUnique. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+
 /* Supplied declaration required: dataTableGet. */
 extern unsigned int gameFlagIsSet(unsigned int);
 extern int dataTableGetEntries(void);
@@ -285,27 +285,27 @@ joined_r0x0029f8b8:
       temp_v5 = jyoucyuGetLevel();
       if ((temp_v5 != 0) && (*(char *)(puVar4 + 0x24) == '\0')) {
         *(unsigned char *)(puVar4 + 0x24) = 1;
-        temp_v5 = FUN_001834a4(9,0x22);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x22));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[5] = temp_v6;
         puVar4[6] = temp_v8;
-        temp_v5 = FUN_001834a4(9,0x23);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x23));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[7] = temp_v6;
         puVar4[8] = temp_v8;
-        temp_v5 = FUN_001834a4(9,0x24);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x24));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[9] = temp_v6;
         puVar4[10] = temp_v8;
-        temp_v5 = FUN_001834a4(9,0x25);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x25));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[0xb] = temp_v6;
         puVar4[0xc] = temp_v8;
-        temp_v5 = FUN_001834a4(9,0x26);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x26));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[0xd] = temp_v6;
@@ -392,27 +392,27 @@ LAB_0029f848:
           break;
         }
         *(unsigned char *)(puVar4 + 0x24) = 1;
-        temp_v5 = FUN_001834a4(9,0x22);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x22));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[5] = temp_v6;
         puVar4[6] = temp_v8;
-        temp_v5 = FUN_001834a4(9,0x23);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x23));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[7] = temp_v6;
         puVar4[8] = temp_v8;
-        temp_v5 = FUN_001834a4(9,0x24);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x24));
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[9] = temp_v8;
         puVar4[10] = temp_v6;
-        temp_v5 = FUN_001834a4(9,0x25);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x25));
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[0xb] = temp_v8;
         puVar4[0xc] = temp_v6;
-        temp_v5 = FUN_001834a4(9,0x26);
+        temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(9,0x26));
         temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         puVar4[0xd] = temp_v6;
@@ -501,7 +501,7 @@ LAB_0029fb00:
   case 8:
     temp_v5 = menuAreModeTexturesLoaded(DAT_00589170);
     if (temp_v5 != 0) {
-      temp_v5 = FUN_001834a4(0x2a,4);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2a,4));
       puVar4[0x41] = 4;
       puVar4[0x40] = 0x2a;
       temp_v1 = **(short **)(temp_v5 + 0xc);
@@ -511,7 +511,7 @@ LAB_0029fb00:
       puVar4[0x39] = (int)temp_v1;
       puVar4[0x35] = 0;
       puVar4[0x36] = 0;
-      temp_v5 = FUN_001834a4(0x2a,0);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2a,0));
       puVar4[0x33] = 0;
       puVar4[0x32] = 0x2a;
       temp_v1 = **(short **)(temp_v5 + 0xc);
@@ -549,7 +549,7 @@ LAB_0029fb00:
       puVar4[0x7c] = 0;
       puVar4[0x7d] = 0x3f800000;
       puVar4[0x97] = 0;
-      temp_v5 = FUN_001834a4(0x2a,3);
+      temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2a,3));
       puVar4[0x93] = 2;
       puVar4[0x92] = 0x2a;
       temp_v1 = *(short *)(temp_v5 + 8);
@@ -1017,7 +1017,7 @@ LAB_002a0858:
   if (puVar4[0x1e] == 7) {
     return 0;
   }
-  temp_v5 = FUN_001834a4(0x2a,3);
+  temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2a,3));
   temp_v7 = puVar4[0x97];
   temp_v9 = (int)*(short *)(temp_v5 + 8);
   temp_v5 = (int)*(short *)(temp_v5 + 10);

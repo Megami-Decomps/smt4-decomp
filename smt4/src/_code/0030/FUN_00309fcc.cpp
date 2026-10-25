@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "shard/FUN_00309fcc.h"
 
 extern "C" {
 

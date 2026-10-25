@@ -37,7 +37,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int gameFlagIsSet(unsigned int);
 extern int uniteStateIsDone(void);
 extern int idListAnyValid(unsigned int);
@@ -134,7 +134,7 @@ void FUN_00217f14(void)
           if ((temp_v4 & 1) != 0) {
             temp_v11 = temp_v22;
           }
-          temp_v11 = FUN_001834a4(0x14,temp_v11 + temp_v10);
+          temp_v11 = asdTMTexTableEntryAt(0x14,temp_v11 + temp_v10);
           FUN_001835b4(2,0x14,0x22,*(short *)(temp_v11 + 8) + temp_v1,*(short *)(temp_v11 + 10) + temp_v2,
                        0xce);
           temp_v9 = *(short *)(temp_v11 + 8) + temp_v1;
@@ -192,7 +192,7 @@ void FUN_00217f14(void)
           temp_v12 = 0x1b;
         }
         temp_v8 = FUN_002a4878(temp_v0 + 0x40);
-        temp_v9 = FUN_001834a4(0x14,temp_v8 + temp_v12 + temp_v9 / 2);
+        temp_v9 = asdTMTexTableEntryAt(0x14,temp_v8 + temp_v12 + temp_v9 / 2);
         efctSetSpeed();
         temp_v7 = temp_v2 + temp_v7;
         temp_v1 = temp_v1 + temp_v11;

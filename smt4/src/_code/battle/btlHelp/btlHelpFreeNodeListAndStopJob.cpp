@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ typedef struct BtlHelpWork {
 } BtlHelpWork;
 
 extern BtlList *DAT_00435d78;
-BtlHelpWork *jobGetWork(void);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
@@ -42,9 +42,9 @@ static inline void btlListUnlink(BtlNode *node)
 }
 
 // Free every node of the list and the list itself, then stop the work's job.
-void btlHelpFreeNodeListAndStopJob(void)
+void btlHelpFreeNodeListAndStopJob(u32 job)
 {
-    BtlHelpWork *work = jobGetWork();
+    BtlHelpWork *work = (BtlHelpWork *)jobGetWork(job);
     BtlList *list = DAT_00435d78;
     if (list != NULL) {
         while (list->first != NULL) {

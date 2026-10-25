@@ -27,7 +27,7 @@ extern CampNotice *g_camp;
 extern RenderCtxA *g_renderCtx;
 
 s32 gameFlagIsSet(u32 flag);
-IconFrame *FUN_001834a4(u32 table, u32 index);
+IconFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 
@@ -80,12 +80,12 @@ void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
         return;
 
     if (plain != 0) {
-        IconFrame *frame = FUN_001834a4(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_PLAIN);
+        IconFrame *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_PLAIN);
         FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
         return;
     }
 
-    IconFrame *frame = FUN_001834a4(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
+    IconFrame *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
     FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
     u32 active = jobGetScalarValue() != 0.0f;
     efctSetSpeed(g_camp->iconSpeed * (f32)active);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the request builder; the 64-bit flag word construction (retail shifts mode<<28 as a 64-bit value: lsl/asr/orr pairs), the by-value result handling and the register assignment differ from armcc here. */
 #include "classes/WindowStatus.h"
+#include "shard/FUN_00427e28.h"
 
 /* The settings every entry of the request shares. */
 struct RequestSettings {
@@ -45,7 +46,6 @@ void sysFatalBreak(void);
 void FUN_0019a46c(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 s32 FUN_00427e68(s32 handle, u32 mode);
-s32 FUN_00427e28(u8 *scratch, u8 *request, u32 arg);
 u32 FUN_0016ccfc(void);
 s32 tokenResolveAddress(u32 token, u8 **resolved, s32 handle);
 s32 appletIsExitRequested(void);

@@ -7,10 +7,10 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_0023dedc(...);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
@@ -40,11 +40,11 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_0023dedc. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
@@ -116,24 +116,24 @@ void FUN_0022ecfc(void)
       if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = FUN_002a4894(temp_v3), temp_v4 != temp_v10)) {
         temp_v4 = resourceRunOperationIfUnblocked(temp_v3);
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v4 + temp_v10) * 2);
-        temp_v4 = FUN_001834a4(0x1e,temp_v10 + 0x9e);
+        temp_v4 = asdTMTexTableEntryAt(0x1e,temp_v10 + 0x9e);
         if (temp_v11 != 0) {
-          temp_v5 = FUN_001834a4(0x1e,0x9c);
+          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9c);
           temp_v6 = temp_v11;
           FUN_0023dedc(temp_v11,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0,0);
-          temp_v5 = FUN_001834a4(0x1e,0x9b);
+          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9b);
           temp_v7 = FUN_00156850(temp_v11,0);
           textFormatBuffer(temp_v16,&LAB_0022f064,temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(2,temp_v6,temp_v16,(int)*(short *)(temp_v4 + 8));
-          temp_v5 = FUN_001834a4(0x1e,0x9a);
+          textDrawString(2,temp_v6,temp_v16,(int)*(short *)(temp_v4 + 8));
+          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9a);
           partyDrawCategorySelectionIcon(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f);
-          temp_v5 = FUN_001834a4(0x1e,0x9d);
+          temp_v5 = asdTMTexTableEntryAt(0x1e,0x9d);
           temp_v8 = partyEntryGetBit5(temp_v11);
           if (temp_v8 != 0) {
             FUN_00164b5c(2,0x1e,0xf,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -167,7 +167,7 @@ void FUN_0022ecfc(void)
      (((temp_v4 = *(int *)(temp_v0 + 4), temp_v4 == 2 || temp_v4 == 6 || (temp_v4 == 7 || temp_v4 == 8)) ||
       (temp_v4 == 9 || temp_v4 == 10)))) {
     temp_v4 = FUN_002a4894(temp_v3);
-    temp_v10 = FUN_001834a4(0x1e,temp_v4 + 0xb5);
+    temp_v10 = asdTMTexTableEntryAt(0x1e,temp_v4 + 0xb5);
     temp_v5 = resourceRunOperationIfUnblocked(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);
     efctSetSpeed();
@@ -206,7 +206,7 @@ void FUN_0022ecfc(void)
       FUN_001835b4(2,0x1e,0xac,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0xa1);
       FUN_001835b4(2,0x1e,0xad,*(short *)(temp_v10 + 8) + temp_v1,*(short *)(temp_v10 + 10) + temp_v2,0xa1);
     }
-    temp_v4 = FUN_001834a4(0x1e,0xac);
+    temp_v4 = asdTMTexTableEntryAt(0x1e,0xac);
     temp_v5 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0x14c));
     temp_v8 = vec2GetYInt(temp_v0 + 0x14c);
     temp_v12 = g_renderCtx;
@@ -230,19 +230,19 @@ void FUN_0022ecfc(void)
       (**(romwright_code **)(temp_v12 + 0x1334))();
       *(unsigned char *)(temp_v12 + 0x1330) = 0;
     }
-    temp_v12 = FUN_001834a4(0x1e,0xb3);
+    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb3);
     temp_v6 = temp_v11;
     FUN_0023dedc(temp_v11,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xab,1,
                  (temp_v13 || temp_v14) || temp_v15);
-    temp_v12 = FUN_001834a4(0x1e,0xb2);
+    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb2);
     temp_v7 = FUN_00156850(temp_v6,0);
     textFormatBuffer(temp_v16,&LAB_0022f584,temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(3,temp_v11,temp_v16,(int)*(short *)(temp_v12 + 8));
+    textDrawString(3,temp_v11,temp_v16,(int)*(short *)(temp_v12 + 8));
     temp_v12 = partyEntryFlagsBit3(temp_v6);
     temp_v4 = *(short *)(temp_v10 + 10) + temp_v2;
     temp_v5 = *(short *)(temp_v10 + 8) + temp_v1;
@@ -252,10 +252,10 @@ void FUN_0022ecfc(void)
     else {
       FUN_001835b4(2,0x1e,0xaf,temp_v5,temp_v4,0xab);
     }
-    temp_v12 = FUN_001834a4(0x1e,0xb1);
+    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb1);
     partyDrawCategorySelectionIcon(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
-    temp_v12 = FUN_001834a4(0x1e,0xb4);
+    temp_v12 = asdTMTexTableEntryAt(0x1e,0xb4);
     temp_v4 = partyEntryGetBit5(temp_v6);
     if (temp_v4 != 0) {
       FUN_00164b5c(2,0x1e,0xf,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,

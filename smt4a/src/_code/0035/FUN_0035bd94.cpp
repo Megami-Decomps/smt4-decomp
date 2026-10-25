@@ -1,4 +1,3 @@
-/* NON_MATCHING: override-aware lookup helper restores shared result test/alignment; first bsearch comparator stack argument is still stored early. */
 #include "addon/aocMain.h"
 #include "gamedata/Table00.h"
 #include "gamedata/DataTable.h"
@@ -9,22 +8,25 @@ s32 FUN_001ab89c(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 
+static __inline Table00Record *searchTable00(const Table00Record *key, const void *records, u32 count,
+                                             s32 (*compare)(const void *, const void *))
+{
+    return static_cast<Table00Record *>(libc_bsearch(key, records, count, sizeof(Table00Record), compare));
+}
+
 static __inline Table00Record *findTable00RecordWithOverride(u16 id)
 {
     Table00Record key;
     key.id = id;
     Table00Record *record = NULL;
     if (g_aocSystem->table00.records != NULL) {
-        record = static_cast<Table00Record *>(libc_bsearch(&key,
-            g_aocSystem->table00.records, g_aocSystem->table00.count,
-            sizeof(Table00Record), FUN_001ab89c));
+        record = searchTable00(&key, g_aocSystem->table00.records, g_aocSystem->table00.count, FUN_001ab89c);
     }
     if (record == NULL) {
         void *table = dataTableGet(0, 1);
         void *entries = dataTableGetEntries(table);
         u32 entryCount = dataTableGetCount(table);
-        record = static_cast<Table00Record *>(libc_bsearch(&key, entries,
-            entryCount, sizeof(Table00Record), FUN_001ab89c));
+        record = searchTable00(&key, entries, entryCount, FUN_001ab89c);
     }
     return record;
 }

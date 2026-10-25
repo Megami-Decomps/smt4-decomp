@@ -1,4 +1,5 @@
 /* Checks whether any usable unit (or the fallback unit) has `value` in the stat slot selected by scrGetArg(1); always returns 1 and reports the result through scrSetResult. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -18,7 +19,6 @@ typedef struct UnitManager {
     /* 0x49C5 */ s8 hasFallback;
 } UnitManager;
 
-extern UnitManager *btlGetMainState(void);
 extern Unit *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
@@ -47,7 +47,7 @@ u32 FUN_002f08d4(void)
     value = scrGetArg(2);
     FUN_002499fc(owner, &first, &count);
     for (i = first; i < first + count; i++) {
-        Unit *unit = &btlGetMainState()->units[i];
+        Unit *unit = &reinterpret_cast<UnitManager *>(btlGetMainState())->units[i];
 
         if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
             && unit->stats[slot] == value) {
@@ -55,10 +55,10 @@ u32 FUN_002f08d4(void)
             return 1;
         }
     }
-    if (btlGetMainState()->hasFallback != 0) {
+    if (reinterpret_cast<UnitManager *>(btlGetMainState())->hasFallback != 0) {
         Unit *unit;
 
-        btlGetMainState();
+        reinterpret_cast<UnitManager *>(btlGetMainState());
         unit = btlMainFindActiveEntry();
         if (unit != NULL && unit->stats[slot] == value) {
             scrSetResult(1);

@@ -12,7 +12,7 @@ extern "C" {
 extern CampStateA *g_camp;
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 speed);
-const SpriteInfo *FUN_001834a4(u32 table, u32 image);
+const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 image);
 void FUN_00281000(CampSpritePivot *pivot, f32 depth, s32 horizontalMode, s32 verticalMode, s32 x, s32 y);
 void FUN_0032cdc8(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags, const CampSpritePivot *pivot);
 
@@ -26,8 +26,8 @@ void FUN_00227294(s32 x, s32 y, s32 scale)
         FUN_001835b4(2, 20, 0x5cb, x, y, 11);
         FUN_001835b4(2, 20, 0x5cc, x, y, 11);
         FUN_001835b4(2, 20, 0x5cd, x, y, 11);
-        const SpriteInfo *frame = FUN_001834a4(20, 0x5ca);
-        const SpriteInfo *anchor = FUN_001834a4(20, 0x5ce);
+        const SpriteInfo *frame = asdTMTexTableEntryAt(20, 0x5ca);
+        const SpriteInfo *anchor = asdTMTexTableEntryAt(20, 0x5ce);
         CampSpritePivot pivot;
         FUN_00281000(&pivot, -64.0f, 3, 3, anchor->x,
             static_cast<s16>(anchor->y + (frame->bounds.height & 0x7fff)));

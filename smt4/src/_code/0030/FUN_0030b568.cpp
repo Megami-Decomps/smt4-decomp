@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -7,14 +8,13 @@ struct BtlMainStateView {
 };
 
 extern "C" {
-BtlMainStateView *btlGetMainState(void);
 }
 
 extern "C" s32 FUN_0030b568(void)
 {
     s32 result;
 
-    if ((btlGetMainState()->flags & 0x80000) == 0) {
+    if ((reinterpret_cast<BtlMainStateView *>(btlGetMainState())->flags & 0x80000) == 0) {
         result = 1;
     } else {
         result = 0;

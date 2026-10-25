@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
@@ -28,7 +29,6 @@ typedef char BattleObjectBindingLayoutCheck[sizeof(BattleObjectBinding) == 0x28 
     offsetof(BattleObjectBinding, unitIndex) == 0x1C &&
     offsetof(BattleBoundObject, weight) == 0x1FC ? 1 : -1];
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 void FUN_003fe86c(BattleBoundObject *, s32, s32, f32, f32);
 }
 

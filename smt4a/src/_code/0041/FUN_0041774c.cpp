@@ -1,6 +1,7 @@
 /* NON_MATCHING: state machine matches except armcc cross-jumps the shared "close prompt" tail differently (retail: case 4 branches back into case 3 tail; one row more) and orders the hoisted constants r0/r6 differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/FUN_00180114.h"
 
 namespace {
 // A record of the player's party: skill ids at 0x34, a validity byte per skill at 0x44.
@@ -37,7 +38,6 @@ struct SkillLearnTask {
 extern "C" {
 s32 FUN_001517b4(s32 a, s32 b);
 void eventQueueAddUniqueIfValid(u32 event);
-u32 FUN_00180114(u16 demonId);
 PlayerParty *gameGetPlayerData(void);
 SaveSlot *saveSlotFindById(u32 id);
 void scrScriptProcessStartEntry(u32 script, s32 entry);

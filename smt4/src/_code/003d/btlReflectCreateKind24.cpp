@@ -1,5 +1,6 @@
 #include "battle/btlReflect.h"
 #include "common.h"
+#include "shard/btlReflectCreateKind24.h"
 
 extern "C" {
 /* Stores both parameters in a mode-thirty-six reflection entry. */

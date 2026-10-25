@@ -1,5 +1,5 @@
 /* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); the frame/saved-register set differs (the active-entry byte already folds with the s8 flag). */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -14,7 +14,6 @@ struct BattleCountActions {
 extern "C" {
 s32 scrGetArg(u32);
 s32 btlResolveEntryChoice(s32);
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 s32 FUN_003249c0(BtlCombatantEntryA *, s32);
 void scrSetResult(s32);

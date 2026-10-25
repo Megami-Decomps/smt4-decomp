@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_0032530c.h"
 extern "C" {
 struct Entry {
     u8 active;

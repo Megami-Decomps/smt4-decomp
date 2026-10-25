@@ -1,4 +1,5 @@
 #include "shard/GameDataBlocks.h"
+#include "camp/PlayLog/PlayLog.h"
 
 extern "C" {
 

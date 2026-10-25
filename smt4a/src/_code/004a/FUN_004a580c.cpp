@@ -4,6 +4,7 @@
 #include "ui/ItemListSelection.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/FUN_0031f208.h"
 
 struct QuestListEntry {
     /* 0x00 */ u8 unk00[4];
@@ -66,7 +67,6 @@ void uiSpriteBankApplyPreset(void *bank, u32 preset);
 void releaseEntriesB(u32 entries);
 void releaseEntriesA(void *entries);
 void sortMenuAcquire(s32 a, s32 b);
-void FUN_0031f208(s32 value);
 void useCounterStart(void);
 void FUN_003343f0(s32 value);
 void FUN_0019de98(s32 a, u32 color);

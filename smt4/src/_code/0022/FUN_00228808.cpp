@@ -1,4 +1,5 @@
 /* NON_MATCHING: initial guaranteed flag, saved unit/flags registers and final boolean branch layout differ. */
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 /* The packed BtlState padding has an odd extent; use a local flags view rather than realign it. */
@@ -13,7 +14,6 @@ struct BattleChanceModifiersView {
 };
 
 extern "C" {
-BtlState *btlGetMainState();
 BtlUnitEntry *btlMainFindEntryByListedId(BtlState *, s32);
 BattleChanceModifiersView *FUN_0023ea94();
 s32 randRange(u32);
@@ -21,7 +21,7 @@ s32 randRange(u32);
 /* Roll a unit-dependent chance, increasing it for enemies below forty percent HP. */
 u32 FUN_00228808(s32 listedId, u32 unused, s32 mode)
 {
-    BtlState *state = btlGetMainState();
+    BtlState *state = reinterpret_cast<BtlState *>(btlGetMainState());
     if (reinterpret_cast<BattleChanceStateView *>(state)->flags & 1)
         return 1;
     s32 chance = 40;

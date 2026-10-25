@@ -17,7 +17,7 @@ typedef struct Slot {
     /* 0x3C */ s32 shifted;
 } Slot;
 
-extern Position *FUN_001834a4(u32 table, s32 index);
+extern Position *asdTMTexTableEntryAt(u32 table, s32 index);
 
 /* Looks up the slot's screen position; slots 16 and up use the table's second page and are moved
  * by 400 horizontally (the left-shifted layout moves slots 4-15 the other way). */
@@ -28,7 +28,7 @@ void FUN_003f3e64(Slot *slot, s32 *x, s32 *y)
     s32 shifted;
 
     if (slot->override != 0) {
-        position = FUN_001834a4(0x11, index + 0x57);
+        position = asdTMTexTableEntryAt(0x11, index + 0x57);
         *x = position->x;
         *y = position->y;
         return;
@@ -36,7 +36,7 @@ void FUN_003f3e64(Slot *slot, s32 *x, s32 *y)
     if (index > 15) {
         index -= 12;
     }
-    position = FUN_001834a4(0x11, index + 0x2d);
+    position = asdTMTexTableEntryAt(0x11, index + 0x2d);
     *x = position->x;
     *y = position->y;
     if (slot->shifted == 0) {

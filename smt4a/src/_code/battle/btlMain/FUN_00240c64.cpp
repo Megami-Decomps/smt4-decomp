@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "sys/Task.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "gamedata/SaveSlotTable.h"
 
 /* The battle main state (only the fields the creation sets). */
 struct BattleMainState {
@@ -58,7 +59,6 @@ extern BattleMainGlobals g_btlMain;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 mode, u32 size, u32 tracked);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
-u8 *gameGetSlotTable(void);
 u8 *flagValueGetStorage(void);
 void __aeabi_memcpy4(void *dest, const void *source, u32 size);
 void rt_memcpy(void *dest, const void *source, u32 size);

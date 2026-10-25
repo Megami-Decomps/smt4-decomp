@@ -21,7 +21,7 @@ typedef struct MessageMain {
 extern MessageMain g_messageMain;
 
 extern u32 scrGetArg(s32 index);
-extern u32 FUN_002ba85c(void);
+extern u32 scrGetCommandOwner(void);
 extern u32 scrGetCommandFrame(void);
 extern u32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 extern void bustupCutAnimRequestStopSlots(void);
@@ -41,7 +41,7 @@ u32 FUN_003baa68(void)
     if (g_messageMain.window != NULL) {
         g_messageMain.window->mode = 0x15;
     }
-    first = FUN_002ba85c();
+    first = scrGetCommandOwner();
     second = scrGetArg(0);
     third = scrGetCommandFrame();
     result = FUN_0021bdac(first, second, third, 6, 0, 0);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/dataSubmitSelectedPresetBlock.h"
 
 struct ModeData32LocalView {
     u32 unk00[8]; // 0x00

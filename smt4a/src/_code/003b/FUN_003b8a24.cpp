@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail 59 vs built 58 rows; paired eligibility-mask loads and selected-holder branch layout differ. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W5_W5Match7_BattleMask.h"
@@ -12,7 +12,7 @@ s32 holderObjectCall(u32);
 u32 FUN_003b8a24(void)
 {
     u32 id = scrGetArg(0);
-    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(btlGetMainState());
+    BtlMainStateA *state = btlGetMainState();
     for (s32 index = 4; index < 54; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;

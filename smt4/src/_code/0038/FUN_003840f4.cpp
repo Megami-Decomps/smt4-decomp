@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "classes/FloatState.h"
 #include <new>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 struct Mover;
 
 struct QuestModelState {
@@ -58,9 +59,8 @@ struct QuestCounterScene {
 
 extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
-void *asdOperatorNew(u32 size, u32 alignment);
-void memClear(void *block, u32 size);
 void textFormatBuffer(char *out, const char *format, ...);
+void memClear(void *block, u32 size);
 QuestModel *asdMdlManagerCreateLoaded(const char *path, s32 flags);
 void FUN_002a0428(QuestModel *model, s32 flag);
 void FUN_002a09b4(const char *path, s32 flag);
@@ -137,7 +137,7 @@ void FUN_003840f4(QuestCounterScene *scene, s32 questId, u8 unused, u8 mode)
         FUN_002a09b4(path, 0);
     }
 
-    QuestTalkWork *talk = static_cast<QuestTalkWork *>(asdOperatorNew(0x17F0, 0));
+    QuestTalkWork *talk = static_cast<QuestTalkWork *>(asdOperatorNew(0x17F0, NULL));
     if (talk != NULL) {
         memClear(talk, 0x17F0);
         new (&talk->state) FloatState();

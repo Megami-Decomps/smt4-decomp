@@ -11,13 +11,13 @@ void rt_aeabi_memclr(void* memory, u32 size);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_0016c4b8(void* context, const void* selection);
 void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 depth);
-SpriteInfo* FUN_001834a4(u32 group, u32 id);
+SpriteInfo* asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00164168(const void* text, s32 x, s32 y, s32 fade, u32 start, s32 length, f32 scale);
 
 static inline void drawLoadSlotLabels(S4Load *work, s32 firstSprite, s32 slotCount, u32 textStyle, f32 scale)
 {
     for (s32 index = 0; index < slotCount; ++index) {
-        SpriteInfo *sprite = FUN_001834a4(8, firstSprite + index);
+        SpriteInfo *sprite = asdTMTexTableEntryAt(8, firstSprite + index);
         FUN_00164168(reinterpret_cast<const void *>(work->unk2B8), sprite->x - 10,
                      sprite->y - 10, 101, textStyle, index, scale);
     }

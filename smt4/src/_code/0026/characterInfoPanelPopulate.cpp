@@ -1,5 +1,6 @@
 /* NON_MATCHING: panel/record register allocation, equipment-label zero caching, and preview-reset branch sharing differ from retail. */
 #include "common.h"
+#include "shard/FUN_00293f10.h"
 
 struct CharacterInfoPanel {
     void *title, *name;
@@ -45,7 +46,6 @@ void FUN_002a7c80(char *destination, const char *source);
 const char *aocIndexValueOrDefault(u32 skill);
 void textFormatBuffer(char *destination, const char *format, ...);
 f32 FUN_0028f4b4(const char *text, u32 font, f32 spacing);
-s32 FUN_00293f10(s32 id, u32 kind);
 void FUN_002958f8(s32 id, u32 kind);
 void FUN_002942c4(s32 id, u32 kind);
 extern const char DAT_00402898[];

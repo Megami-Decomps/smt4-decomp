@@ -1,4 +1,5 @@
 /* NON_MATCHING: recovered slot/flag query arguments restore paired battle-state loads; retail retains a linker-inlined false guard and kind-three re-test whose original callee identity is unresolved, and branch/index-base layout differs. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/BtlDebugMenuEntry.h"
 
@@ -25,7 +26,6 @@ u32 gameGetSlotRecord(s32 slotIndex);
 BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
 s32 gameFlagIsSet(u32 flag);
 u8 gameDataFlagTestBit(u32 bit);
-BtlStateMasks *btlGetMainState(void);
 s32 idListHasFlaggedRecord(u32 record);
 s32 FUN_00291e14(void);
 s32 btlObjectHasEntryFlag(u32 record);
@@ -59,7 +59,7 @@ u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
         if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0) {
             continue;
         }
-        if (entry->needsBattleState != 0 && (btlGetMainState()->held & DAT_00573bd8.blocked) != 0) {
+        if (entry->needsBattleState != 0 && (reinterpret_cast<BtlStateMasks *>(btlGetMainState())->held & DAT_00573bd8.blocked) != 0) {
             continue;
         }
         if (entry->kind == 5) {

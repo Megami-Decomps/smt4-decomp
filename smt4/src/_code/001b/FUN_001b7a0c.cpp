@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7a0c` (_code @ 0x1b7a0c, 0x56c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,7 +10,6 @@ int randomGetNormalizedFloat(void);
 int FUN_0027da30(...);
 int FUN_00281e34(void);
 int btlMainFindEntryByListedId(unsigned char *, int);
-int btlGetMainState(void);
 int asdAnimGetTrackLastFrame(unsigned int, int);
 int FUN_002b70cc(void);
 int FUN_003c14e8(...);
@@ -151,11 +151,11 @@ unsigned int FUN_001b7a0c(void)
           *(unsigned int *)(temp_v10 + 0x10c) = 0;
           *(unsigned int *)(temp_v10 + 0x110) = 0;
           *(unsigned int *)(temp_v10 + 0x4c) = 0;
-          temp_v1 = btlGetMainState();
+          temp_v1 = reinterpret_cast<int>(btlGetMainState());
           FUN_0027da30(temp_v1,(int)*(short *)(temp_v10 + 0x62));
           if (temp_v1 != 0) {
             if ((*(unsigned short *)(temp_v1 + 0xfa) & 0x180) != 0) {
-              btlGetMainState();
+              reinterpret_cast<int>(btlGetMainState());
               *(unsigned int *)(temp_v10 + 0x48) = 3;
               *(unsigned int *)(temp_v10 + 0x4c) = 0;
               *(unsigned int *)(temp_v10 + 0xa0) = 0;
@@ -165,13 +165,13 @@ unsigned int FUN_001b7a0c(void)
               *(unsigned int *)(temp_v10 + 0x4c) = 0;
               *(unsigned int *)(temp_v10 + 0xa0) = 0;
               if (-1 < *(short *)(temp_v10 + 0x60)) {
-                temp_v3 = btlGetMainState();
+                temp_v3 = reinterpret_cast<int>(btlGetMainState());
                 puVar8 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + *(short *)(temp_v10 + 0x60) * 0x288);
                 *puVar8 = *puVar8 & 0xfff7ffff;
               }
             }
             if (-1 < *(short *)(temp_v10 + 0x60)) {
-              temp_v3 = btlGetMainState();
+              temp_v3 = reinterpret_cast<int>(btlGetMainState());
               puVar8 = (unsigned int *)(*(int *)(temp_v3 + 0x1fc0) + *(short *)(temp_v10 + 0x60) * 0x288);
               if (puVar8 != (unsigned int *)0x0) {
                 if ((*(unsigned short *)(temp_v1 + 0xfa) & 1000) == 0) {

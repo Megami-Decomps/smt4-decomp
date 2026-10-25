@@ -1,12 +1,12 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_Match6_BtlScript.h"
 
 extern "C" {
-BtlScript* btlGetMainState(void);
 u32 FUN_0022a5d8(u32 command, s32 target, u32 argument);
 
 u32 btlDispatchTargetActionKind(s32 target, s32 kind, u32 argument)
 {
-    BtlScript* battle = btlGetMainState();
+    BtlScript* battle = reinterpret_cast<BtlScript *>(btlGetMainState());
     if ((battle->flags & 0x40) != 0) {
         return 0;
     }

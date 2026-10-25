@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail 64 vs built 55 rows; scissor stack addressing, clamp branches, and output registers differ. */
 #include "camp/RenderCtx.h"
 #include "quest_center/qcMain.h"
+#include "shard/FUN_00169db4.h"
 
 extern "C" {
 s32 asdGxGetPresetIndex(void);
-u32 FUN_00169db4(s32);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 extern u32 *DAT_005b3fe4;

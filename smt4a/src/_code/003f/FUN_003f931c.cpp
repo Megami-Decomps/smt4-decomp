@@ -55,7 +55,7 @@ void FUN_00164034(PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomL
 void FUN_001692d4(void);
 void efctSetSpeed(f32 speed);
 f32 FUN_001f3f34(f32 a, f32 b, f32 c, f32 d);
-FixedRect *FUN_001834a4(u32 group, u32 index);
+FixedRect *asdTMTexTableEntryAt(u32 group, u32 index);
 void FUN_003f8a24(void *panel, u32 id, RowEntry *row, f32 x, f32 y, f32 z);
 
 /* Draws the panel: a translucent full-screen fade, its two effect sprites and then each row at its slot. */
@@ -95,7 +95,7 @@ void FUN_003f931c(PanelWork *panel)
         if (panel->firstColumns != 0 && panel->secondColumns != 0) {
             y = row->mode == 1 ? fade->firstY : fade->secondY;
         } else {
-            y = (f32)FUN_001834a4(12, 156)->height;
+            y = (f32)asdTMTexTableEntryAt(12, 156)->height;
         }
         FUN_003f8a24(panel, 0x24, row, x + scrollBase, y, rowZ);
     }

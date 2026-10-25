@@ -1,10 +1,10 @@
 /* NON_MATCHING: first help-status OR grouping combines 0x1C/0x1E where retail tests 0x1C alone before combining 0x1E/0xB8. */
 #include "ui/PartyPanelState.h"
+#include "shard/FUN_0029acb0.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;
 s32 FUN_0029e02c(void);
-void FUN_0029acb0(void);
 s32 buttonHelpGetStatus(void);
 s32 FUN_00282e70(void);
 s32 FUN_00282ccc(void);

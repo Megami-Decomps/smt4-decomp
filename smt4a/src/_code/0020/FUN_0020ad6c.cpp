@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ad6c` (_code @ 0x20ad6c, 0x6fc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int ifTouchRegionRemove(void);
 int FUN_001643b4(...);
 int sysPlaySe(void);
@@ -76,7 +76,7 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
   }
   temp_v1 = ifTouchGetButtonHelpValue();
   if (temp_v1 == 0x3f) {
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     temp_v1 = btlScriptUnitHasFlags();
     if (temp_v1 == 0) {
       buttonHelpGetValue();

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail places case 3's flag clear out of line after the epilogue; armcc folds it into the compare chain here. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct IntroWork {
     /* 0x0000 */ u32 flags;
@@ -13,7 +14,6 @@ struct IntroWork {
 
 extern "C" {
 
-IntroWork *jobGetWork(u32 job);
 s32 FUN_002b8ee0(u8 *loader, s32 mode);
 u32 FUN_002aa024(s32 group, s32 id);
 s32 uiAnimationAdvanceChannel(u8 *animation, s32 channel);
@@ -22,7 +22,7 @@ s32 uiAnimationAdvanceChannel(u8 *animation, s32 channel);
  * finally clears the busy flags. */
 u32 FUN_00391000(u32 job)
 {
-    IntroWork *work = jobGetWork(job);
+    IntroWork *work = (IntroWork *)jobGetWork(job);
 
     switch (work->state) {
     case 0:

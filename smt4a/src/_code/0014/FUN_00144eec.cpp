@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
 extern "C" {
 

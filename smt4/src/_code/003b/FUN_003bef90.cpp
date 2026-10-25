@@ -1,34 +1,19 @@
 /* NON_MATCHING: final battleFlags read/modify/write uses r1 rather than retail r2; all other instructions agree. */
+#include "battle/BtlMainAccess.h"
 #include "gamedata/UnitStats.h"
 
-/* Function-local views: these fields extend beyond the canonical recovered state/slot prefixes. */
-struct BattleReserveSelectionView {
-    u8 unk0000[0xC4];
-    s32 selectionIndex;
-    u8 unk00C8[0x90];
-    u32 selectedIds[1];
-    u8 unk015C[0x4344];
-    u32 battleFlags;
-    u32 unk44A4;
-    u32 controlFlags;
-};
+/* Function-local view: these fields extend beyond the canonical recovered slot prefix. */
 struct ReserveSlotSelectionView {
     u8 unk0000[0x90F0];
     s8 stock[24];
     s8 active[3];
     u8 count;
 };
-typedef char BattleReserveSelectionViewOffsets[
-    offsetof(BattleReserveSelectionView, selectionIndex) == 0xC4 &&
-    offsetof(BattleReserveSelectionView, selectedIds) == 0x158 &&
-    offsetof(BattleReserveSelectionView, battleFlags) == 0x44A0 &&
-    offsetof(BattleReserveSelectionView, controlFlags) == 0x44A8 ? 1 : -1];
 typedef char ReserveSlotSelectionViewOffsets[
     offsetof(ReserveSlotSelectionView, stock) == 0x90F0 &&
     offsetof(ReserveSlotSelectionView, count) == 0x910B ? 1 : -1];
 
 extern "C" {
-BattleReserveSelectionView *btlGetMainState(void);
 ReserveSlotSelectionView *gameGetSlotTable(void);
 StatBlock *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const void *flags, u32 bit);
@@ -53,7 +38,7 @@ u32 FUN_003bef90(void)
                     case 3: chance = 90; break;
                     default: chance = 99; break;
                     }
-                    if (btlGetMainState()->controlFlags & 0x10000)
+                    if (btlGetMainStateExt()->stateFlags & 0x10000)
                         chance = 100;
                     if (randRange(99) < chance && selected < 1) {
                         btlGetMainState()->selectedIds[selected] = unit->id;
@@ -63,7 +48,7 @@ u32 FUN_003bef90(void)
             }
         }
         if (selected > 0) {
-            btlGetMainState()->battleFlags |= 0x200;
+            btlGetMainStateExt()->flags44A0 |= 0x200;
             return 1;
         }
     }

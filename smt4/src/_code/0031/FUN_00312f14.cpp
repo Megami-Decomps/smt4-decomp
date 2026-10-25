@@ -7,7 +7,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 void FUN_002ad8b4(BattleChoiceRow* destination, const BattleChoiceRow* source);
 
 s32 FUN_00312f14(void)

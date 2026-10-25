@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the literal pool order and where the g_engineResourceHandles address is loaded differ */
 #include "shard/W5_W5Match7_ResourceHandles.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* The partner topic window's state. */
 class PartnerTopic {
@@ -34,7 +35,6 @@ public:
 typedef char PartnerTopicSize[sizeof(PartnerTopic) == 0x6D8 ? 1 : -1];
 
 typedef void (*TopicCallback)(void *);
-extern "C" void *asdOperatorNew(u32 size);
 void *PartnerTopic::operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
 
 extern "C" {

@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
+#include "AsdSDK/asdFileHashPackIsOpen.h"
 
 extern "C" {
 extern AsdFileHashPack *g_asdFileHashPack; /* the open pack */

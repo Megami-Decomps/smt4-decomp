@@ -1,13 +1,13 @@
 /* NON_MATCHING: register allocation and constant materialization (retail keeps 1 and 0 for the final stm and orders the literal pool differently) */
 #include "shard/S1ArousalSkill.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 
 extern ArousalSkillGlobals g_engineCleanupOwner;
 extern const char DAT_00533d3c[]; /* "ArousalSkill PROC" */
 
-void *asdOperatorNew(u32 size);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 a, s32 b, void (*onEnd)(void), void (*onRun)(void), s32 c);
 void sceneDestroyOwnedJobObject(void);
 void loadSlotRequestAsync(s32 slot, s32 flags);

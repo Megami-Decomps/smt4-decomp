@@ -2,15 +2,16 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int FUN_001834a4(...);
 int FUN_00185e84(...);
 int dataTable04FindById(void);
 int unitRecordBuild(...);
@@ -41,12 +42,11 @@ extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(int);
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int slotRecordFindById(void);
 /* Supplied declaration required: dataTable04FindById. */
@@ -96,7 +96,7 @@ void FUN_00288b20(int param_1,int param_2,int param_3,int param_4,unsigned int p
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v16 = param_4;
-  temp_v1 = FUN_001834a4(0x12,param_4);
+  temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,param_4));
   temp_v12 = temp_v0 + 0x5ec;
   temp_v2 = FUN_002a4894();
   temp_v10 = 0;
@@ -165,7 +165,6 @@ LAB_00288c34:
   else {
     temp_v5 = 0x9b9b9bff;
   }
-  temp_v3 = FUN_001834a4(0x12,0x42b);
   if ((param_7 == 0) || (param_3 != 0)) {
     if (param_6 != 0) {
       textFormatBuffer(temp_v13,&LAB_00288ef0);
@@ -183,7 +182,7 @@ LAB_00288c34:
                       (unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,temp_v5,temp_v13,(int)*(short *)(temp_v3 + 8));
+  textDrawString(3,temp_v5,temp_v13,(int)*(short *)(temp_v3 + 8));
   if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v3 = FUN_002c7e3c(), temp_v3 != 4)) {
     temp_v3 = FUN_002c7e3c();
     if (temp_v3 != 5) {
@@ -206,11 +205,11 @@ LAB_00288c34:
   if ((param_7 == 0) || (param_3 != 0)) {
     FUN_001835b4(2,0x12,0x425,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0xc4)
     ;
-    temp_v3 = FUN_001834a4(0x12,0x42a);
     temp_v2 = (int)(short)param_3;
     FUN_00185e84(temp_v2,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0xc9,param_5,0)
     ;
+    temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x42a));
     if ((-1 < *(short *)(temp_v0 + 0x598)) && (temp_v4 = FUN_002c7e3c(), temp_v4 != 4)) {
       if ((*(int *)(temp_v0 + 0x518) == 0xe) &&
          (temp_v4 = recordContainsPairedId(temp_v11,param_3), temp_v4 == 0)) {
@@ -225,7 +224,6 @@ LAB_00288c34:
     if (param_7 != 0) {
       FUN_001835b4(2,0x12,0x522,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0xc4);
-      temp_v3 = FUN_001834a4(0x12,0x52a);
       if (param_3 != 0) {
         temp_v5 = FUN_002a6a24(param_3);
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
@@ -242,6 +240,7 @@ LAB_00288c34:
     else {
       FUN_001835b4(2,0x12,0x423,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0xc4);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x52a));
       if (*(short *)(temp_v0 + 0x598) < 0) {
         temp_v10 = FUN_003df57c(param_3,1);
       }
@@ -257,12 +256,13 @@ LAB_00288c34:
           }
         }
       }
-      temp_v3 = FUN_001834a4(0x12,0x429);
+      temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x429));
       FUN_00180310(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,4,0xc9,
                    &LAB_00289298,temp_v10);
     }
   }
+  temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x42b));
   efctSetSpeed();
   return;
 }

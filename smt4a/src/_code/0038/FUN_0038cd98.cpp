@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -7,7 +8,6 @@ extern "C" {
 s32 scrGetArg(s32 argument);
 u32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 
 /* Test the selected encoded affinity on eligible group entries and the active special entry. */

@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Sys/Save/AsdSaveCommon.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdSaveWriteBlock.h"
 
 extern "C" {
 extern const char g_asdSaveCommonSourcePath[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\Save\\AsdSaveCommon.cpp": __FILE__ */

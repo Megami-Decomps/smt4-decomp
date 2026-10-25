@@ -1,5 +1,6 @@
 #include "ui/PartyPanelState.h"
 #include "shard/Shard003B.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;

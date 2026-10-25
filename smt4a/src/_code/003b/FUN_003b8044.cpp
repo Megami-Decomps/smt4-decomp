@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 
 /* Tests whether an eligible combatant has a positive value for the requested category. */
 s32 FUN_003b8044(void)

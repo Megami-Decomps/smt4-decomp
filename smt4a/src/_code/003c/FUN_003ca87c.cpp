@@ -1,5 +1,6 @@
 #include "shard/Shard003C.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_003ca87c.h"
 
 extern "C" {
 

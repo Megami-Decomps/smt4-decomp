@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "gamedata/DataTable.h"
 
@@ -8,7 +9,6 @@ struct CategoryPair {
 
 extern "C" {
 s32 scrGetArg(u32 index);
-void *btlGetMainState();
 void *btlMainGetDataTable(void *state, u32 table);
 u32 dataTableGetCount(void *table);
 s32 randNextInRange(u16 maximum);
@@ -18,7 +18,7 @@ void scrSetResult(s32 result);
 u32 scrBtlSelectRandomCategoryEntry()
 {
     u32 category = scrGetArg(0);
-    void *table = btlMainGetDataTable(btlGetMainState(), 8);
+    void *table = btlMainGetDataTable(static_cast<void *>(btlGetMainState()), 8);
     CategoryPair *pair = static_cast<CategoryPair *>(static_cast<void *>(reinterpret_cast<u16 *>(dataTableGetEntries(table))));
     s32 remaining = dataTableGetCount(table) >> 1;
     u16 matches[12];

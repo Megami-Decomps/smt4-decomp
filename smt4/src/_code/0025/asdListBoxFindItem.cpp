@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail outlines the next-node loop after the return block; compiled code keeps it before the found-item check. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "shard/asdListBoxFindItem.h"
 
 extern "C" AsdListBoxModel* jobGetWork(u32 job);
 

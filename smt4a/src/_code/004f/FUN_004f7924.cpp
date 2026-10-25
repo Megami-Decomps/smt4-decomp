@@ -1,4 +1,5 @@
 /* NON_MATCHING: Placement-entry rebasing and subject-id liveness differ from retail. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
@@ -10,7 +11,6 @@ struct ActionSubjectKeys {
     /* 0x0C */ s32 keys[1];
 };
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, BtlActionRecord *action);
 ActionSubjectKeys *FUN_001568f8(BtlMainStateA *battle, s32 member);
 u32 FUN_003eae20(BtlMainStateA *battle, s32 actor, u16 id);

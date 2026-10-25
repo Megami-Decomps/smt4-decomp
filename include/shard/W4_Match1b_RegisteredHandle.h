@@ -11,4 +11,8 @@ public:
     u32 id;
 };
 
+extern "C" {
+u32 flagPairCondition(s32 a, s32 b);
+}
+
 #endif

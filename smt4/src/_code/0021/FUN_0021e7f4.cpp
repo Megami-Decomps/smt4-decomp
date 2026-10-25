@@ -3,6 +3,7 @@
 #include "map/MapStateSlots.h"
 #include "addon/aocMain.h"
 #include "util/Random.h"
+#include "util/RecordPackedValue.h"
 
 namespace {
 struct MapRewardIndex {
@@ -26,7 +27,6 @@ extern MapStateSlots *g_mapStateSlots;
 extern AocSystem *g_aocSystem;
 MapRewardSet *FUN_00387c78(AocSystem *system, u32 id);
 s32 gameFlagIsSet(u32 flag);
-s32 recordPackedValue(u16 id);
 s32 FUN_0028fb40(u16 id);
 void FUN_00295a18(u16 id, s32 amount);
 

@@ -1,6 +1,7 @@
 /* Computes equal XY bounds from the larger image dimension, including its margins. */
 #include "AsdSDK/Source/Gfx/Effect/EffectBounds.h"
 #include <math.h>
+#include "shard/effectComputeScaledImageBounds.h"
 
 extern "C" void effectComputeScaledImageBounds(const EffectBoundsSource *source, f32 *bounds, f32 scale)
 {

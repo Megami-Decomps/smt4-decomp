@@ -1,10 +1,10 @@
 #include "battle/btlGameOver.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
-void *jobGetWork(u32 job);
 void scrScriptProcessDestroy(void *process);
 
 extern BtlGameOver *g_btlGameOver;

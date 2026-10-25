@@ -1,6 +1,7 @@
 /* NON_MATCHING: eligibility cold-block placement and field-load registers differ; the compact save record is placed at a different stack offset/frame size. */
 #include "shard/W6_W6Match8_FusionSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/entryDefIsAvailable.h"
 
 struct FusionSavedDemon {
     u8 unk00[0x36];
@@ -11,7 +12,6 @@ struct FusionSavedDemon {
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 u32 gameDataCopySaveEntry(u32 id, void *out);
-s32 entryDefIsAvailable(FusionRaceSelection *selection, u16 id);
 
 u32 uniteFindClosestEligibleCandidate(FusionRaceSelection *selection, s32 race, u32 level, s32 checkRecord)
 {

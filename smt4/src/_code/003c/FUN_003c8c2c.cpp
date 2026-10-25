@@ -2,13 +2,13 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/FusionRecipe.h"
 #include "camp/Unite/FusionCandidates.h"
+#include "shard/dataFindSymmetricPair.h"
 
 extern "C" {
 u32 dataTable05Sub4GetCount(void);
 FusionRecipe *dataTable54FindById(u16 index);
 void *dataTable05FindByPriorityAndKey(u8 firstRace, u8 secondRace);
 FusionRaceRule *dataTable5Sub3Lookup(u8 race, u16 id);
-void *dataFindSymmetricPair(u8 firstRace, u8 secondRace);
 
 // Distinguish special two-ingredient recipes, race exceptions and ordinary race-pair fusion.
 u8 FUN_003c8c2c(void *owner, u16 firstId, u16 secondId)

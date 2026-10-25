@@ -1,4 +1,5 @@
 #include "battle/Effect/EffectProcess.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -9,14 +10,13 @@ void textureCacheReleaseAll(void);
 void textureSlotsReleaseAll(void);
 void taskUpdateAll(void);
 s32 jobIsValid(u32 job);
-EffectProcessA *jobGetWork(u32 job);
 
 extern s32 g_effectProcessActive;
 
 /* Destroy callback of the effect process: stops its sub-jobs, tears the scene down and frees it. */
 void effectProcessDestroy(u32 job)
 {
-    EffectProcessA *process = jobGetWork(job);
+    EffectProcessA *process = (EffectProcessA *)jobGetWork(job);
 
     if (jobIsValid(process->jobA) != 0) {
         jobStop(process->jobA, 0);

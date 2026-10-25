@@ -1,4 +1,5 @@
 #include "shard/Shard004B.h"
+#include "shard/menu4CGetEntry.h"
 
 extern "C" {
 

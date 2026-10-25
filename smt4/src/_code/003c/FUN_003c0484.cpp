@@ -1,10 +1,10 @@
 /* NON_MATCHING: compiler combines independent battle flag tests and allocates different saved/argument registers. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlHelp.h"
+#include "shard/battleGetEntryHalfword.h"
 
 extern "C" {
 u32 FUN_0022a5d8(u32 message, BtlEntry *entry, u32 context);
-s32 battleGetEntryHalfword(s32 entry, u32 kind);
 BtlMainState *btlGetMainState();
 s32 playerPadTestBit(u32 bit);
 
@@ -14,7 +14,7 @@ u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u32 context)
     if ((flags & 0x40) != 0 || (flags & 0x100) != 0 || (flags & 0x200) != 0) {
         return 0;
     }
-    if ((entry->groupMask & 8) != 0 && (ignoredConditions & 8) == 0) {
+    if (8 & (entry->groupMask) != 0 && (ignoredConditions & 8) == 0) {
         return FUN_0022a5d8(0x24, entry, context);
     }
     if ((entry->groupMask & 0x200) != 0) {

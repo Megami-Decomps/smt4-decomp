@@ -29,4 +29,8 @@ void *asdTMTexLoadMainHeap(u32 table, u32 index);
 }
 #endif
 
+extern "C" {
+u32 FUN_002907a8(void);
+}
+
 #endif

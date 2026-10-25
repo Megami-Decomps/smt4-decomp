@@ -3,6 +3,7 @@
 #define ASDSDK_SOURCE_GFX_TEXT_ASDTEXT_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A text object (0xB4 bytes; smt4a appends an 8-entry table at 0xB4). */
 typedef struct AsdText {
@@ -26,10 +27,6 @@ typedef char AsdTextTextOffsetCheck[sizeof(AsdText) == 0xBC ? 1 : -1];
 
 extern "C" {
 unsigned int FUN_00287704(int param_1);
-}
-
-extern "C" {
-u16 *FUN_002bf4f8(u32 file, s32 index);
 }
 
 extern "C" {

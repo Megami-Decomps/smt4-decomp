@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the constants 1, 30 and 27 into r9/r7/sl, reads g_btlScriptUnit as the word after g_btlAction (r8 + 4), and shares the FUN_0022a5d8 call between the 0x80 and entry-flag branches while keeping the 0x100 branch's own call; this build gives each branch the same shape. */
 #include "common.h"
+#include "shard/battleGetEntryHalfword.h"
 
 /* The combatant record of an action: its id is at 0x62. */
 struct ActionRecord {
@@ -58,7 +59,6 @@ void FUN_00227b14(void *ui, u16 member, s32 mode);
 void FUN_0022a5d8(s32 effect, ActionEntry *entry, s32 mode);
 void FUN_0026beb4(s32 chance, ActionWork *work, s32 a, ActionRecord *record, s32 b);
 void frameRangeExtend(BattleTurn *turn, ActionWork *work, s32 id, s32 a, s32 b, s32 c);
-s32 battleGetEntryHalfword(s32 id, s32 index);
 void FUN_002550d8(s32 id, s32 stat, s32 delta, s32 preview);
 s32 randRange(s32 range);
 void FUN_003c0484(ActionEntry *entry, s32 conditions, s32 context);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail mov r4, #0 differs from recovered mov ip, #0. */
 #include "common.h"
 
 struct SortedNodeView {
@@ -31,7 +30,12 @@ extern "C" void FUN_0019c920(SortedListView* list, SortedNodeView* node)
             cursor = cursor->previous;
         } while (cursor != 0);
 
-        if (cursor != 0) {
+        if (cursor == 0) {
+            node->previous = 0;
+            node->next = list->head;
+            list->head = node;
+            node->next->previous = node;
+        } else {
             SortedNodeView* successor = cursor->next;
             cursor->next = node;
             node->previous = cursor;
@@ -41,11 +45,6 @@ extern "C" void FUN_0019c920(SortedListView* list, SortedNodeView* node)
             } else {
                 successor->previous = node;
             }
-        } else {
-            node->previous = 0;
-            node->next = list->head;
-            list->head = node;
-            node->next->previous = node;
         }
     }
     ++list->count;

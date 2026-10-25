@@ -1,9 +1,9 @@
 /* NON_MATCHING: compiler materializes the stateFlags address and mask halves differently, and folds the category assignment into conditional moves. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 u32 FUN_00200a68(s32 kind, s32 message, s32 arg2, s32 arg3, s32 mode, s32 arg5, s32 category, u32 options);
 extern BtlHelpGlobalsA g_btlHelp;
 

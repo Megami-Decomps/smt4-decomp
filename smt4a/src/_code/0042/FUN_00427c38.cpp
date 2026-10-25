@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail stores the last two words with one `stm` after the zero stores; armcc emits `str r1` first and a separate `str r2`. */
 #include "common.h"
 
 extern "C" {
@@ -11,8 +10,14 @@ typedef struct Record {
     /* 0x30 */ u32 second;
 } Record;
 
-/* Clears the record and stores the two values into it. */
-void FUN_00427c38(Record *record, u32 first, u32 second)
+static __inline void storePair(u32 *destination, u32 first, u32 second)
+{
+    destination[0] = first;
+    destination[1] = second;
+}
+
+/* Clears the record, stores the two values into it and returns it. */
+Record *FUN_00427c38(Record *record, u32 first, u32 second)
 {
     s32 i;
 
@@ -20,8 +25,8 @@ void FUN_00427c38(Record *record, u32 first, u32 second)
         record->words[i] = 0;
     }
     record->flag = 0;
-    record->first = first;
-    record->second = second;
+    storePair(&record->first, first, second);
+    return record;
 }
 
 }

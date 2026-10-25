@@ -1,6 +1,8 @@
 /* NON_MATCHING: one instruction: the render-stack push computes the new slot address into ip before the load of the old top; retail does it after the load into r3. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/efctSetSpeed.h"
+#include "shard/FUN_00164b5c.h"
 
 struct SlotSprite {
     /* 0x00 */ u8 unk00[8];
@@ -19,10 +21,8 @@ struct MarkerRing {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(s32 first, s32 second);
-void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
-SlotSprite *FUN_001834a4(u32 group, u32 image);
-void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
+SlotSprite *asdTMTexTableEntryAt(u32 group, u32 image);
 
 // Draw the marker ring: nine slot sprites, then the highlight pairs that rotate around it.
 void FUN_0041c108(MarkerRing *ring)
@@ -31,10 +31,10 @@ void FUN_0041c108(MarkerRing *ring)
     renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     efctSetSpeed(1.0f);
     FUN_00183bb0();
-    FUN_001834a4(43, ring->image);
+    asdTMTexTableEntryAt(43, ring->image);
     FUN_00164b5c(2, 43, ring->image, 0, 0, 211);
     for (s32 i = 0; i < 9; i++) {
-        SlotSprite *slot = FUN_001834a4(43, i + 98);
+        SlotSprite *slot = asdTMTexTableEntryAt(43, i + 98);
         positions[i][0] = slot->x;
         positions[i][1] = slot->y;
         FUN_001835b4(2, 43, 95, slot->x, slot->y, 211);

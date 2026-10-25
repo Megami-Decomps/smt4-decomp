@@ -1,4 +1,3 @@
-/* NON_MATCHING: enabled is compared after the byte load rather than before retail's mask-shift sequence. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
 
@@ -8,12 +7,14 @@ extern "C" void statsSetAdditionalFlag(u32 index, s32 enabled)
     if (index >= 32) {
         return;
     }
-    u8 *flags = reinterpret_cast<StatsAdditionalFlagView *>(gameDataBlocksGetStats())->flags;
-    u8 mask = (u8)(1 << (index & 7));
-    u8 *flag = &flags[index >> 3];
+    StatsAdditionalFlagView *stats = reinterpret_cast<StatsAdditionalFlagView *>(gameDataBlocksGetStats());
+    u8 *bank = stats->flags;
+    u8 mask = 1 << (index & 7);
     if (enabled) {
+        u8 *flag = &bank[index >> 3];
         *flag |= mask;
     } else {
+        u8 *flag = &bank[index >> 3];
         *flag &= ~mask;
     }
 }

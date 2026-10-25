@@ -1,4 +1,5 @@
 #include "status/StatusDown.h"
+#include "shard/FUN_002effbc.h"
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;

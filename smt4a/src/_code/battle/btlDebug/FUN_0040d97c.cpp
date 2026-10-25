@@ -14,24 +14,24 @@ struct BtlSide {
     u8 unk08[0x30 - 8];
     Vec3 position;              // 0x30
     u8 unk3c[0x6a - 0x3c];
-    s16 index;                  // 0x6a
+    u16 index;                  // 0x6a
     u8 unk6c[2];
-    s16 markerId;               // 0x6e
+    u16 markerId;               // 0x6e
 };
 
 // Marker step state.
 struct MarkerStep {
     u8 unk00[2];
-    u16 done;                   // 0x02
+    s16 done;                   // 0x02
     u8 unk04[0x10];
     BtlSide* actor;             // 0x14
     u8 unk18[8];
     s8 phase;                   // 0x20
     u8 unk21[5];
-    s16 handle;                 // 0x26
+    u16 handle;                 // 0x26
     s32 kind;                   // 0x28
     u8 unk2c[0x1c];
-    u16 doubled;                // 0x48
+    s16 doubled;                // 0x48
 };
 
 extern "C" {
@@ -67,7 +67,7 @@ void FUN_0040d97c(u32 unused, MarkerStep* step)
         return;
     }
 
-    s16 result;
+    u16 result;
     if ((side->flags & MASK64(0x28)) != 0) {
         Vec3 offset = FUN_003e7fa4(btlGetMainState(), step->actor->index, 0);
         Vec3 base = step->actor->position;

@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail evaluates the save-copy pointers straight into the call registers and rebuilds the per-unit masks with ldm pairs through shared bases; ours reloads pointers through scratch registers and walks the units separately (250 rows against 210). Copy layout, constants and logic follow retail. */
 #include "common.h"
+#include "shard/flagValueGetStorage.h"
+#include "gamedata/SaveSlotTable.h"
 
 #define BTL_SLOT_COUNT 4
 
@@ -70,8 +72,6 @@ extern "C" {
 
 extern BtlSaveCopies g_btlSaveCopies;
 
-void *gameGetSlotTable(void);
-void *flagValueGetStorage(void);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 

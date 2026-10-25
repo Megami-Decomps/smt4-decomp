@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail splits the type test into a binary if/switch tree with each code constant hoisted into a register and writes entry+value per branch; the single type-to-code switch compiles to a different tree and register use. */
 #include "common.h"
+#include "shard/FUN_0031f208.h"
 
 /* One menu entry: the item value and the code of the command it enables. */
 struct CommandEntry {
@@ -25,7 +26,6 @@ struct CommandMenu {
 extern "C" {
 void qsort(void *base, s32 count, s32 size, s32 (*compare)(const s32 *, const s32 *));
 void sysMemClear(void *buffer, s32 size);
-void FUN_0031f208(u32 code);
 s32 dataCompareSignedWordKeys(const s32 *left, const s32 *right);
 
 /* Build the sorted list of command codes the menu's items enable and register each one. */

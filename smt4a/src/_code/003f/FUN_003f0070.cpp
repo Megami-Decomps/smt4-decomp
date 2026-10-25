@@ -1,9 +1,9 @@
 /* NON_MATCHING: null fallback returns directly instead of retaining a zero selected ID; output stack slots and saved registers differ. */
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
-s32 FUN_003e48bc(void);
 s32 FUN_003e4978(void);
 PartySlotA *FUN_003e4d68(u16 slot);
 s32 FUN_00187168(PartySlotA *slot);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
 #include "camp/RenderCtx.h"
+#include "shard/packNibblesAndByte.h"
 
 struct FrameSurface {
     /* 0x00 */ u8 unk00[0x14];
@@ -40,7 +41,6 @@ extern RenderCtx *g_titleScene;
 
 s32 FUN_002bff10(s32 selector);
 s32 FUN_002c5d80(u32 a, u32 b);
-s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 f32 FUN_002b99b8(f32 base, f32 exponent);
 void FUN_002c1b64(RenderCtx *context, FrameSurface *surface);
 void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3,

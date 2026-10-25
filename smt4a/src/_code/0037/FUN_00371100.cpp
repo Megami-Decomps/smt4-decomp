@@ -2,6 +2,7 @@
 /* Starts the save/load thread's step for a request: marks the thread busy and, for a request in state 1, finishes the
  * pending query; the busy flag is cleared again unless the follow-up reports 1 or 2. */
 #include "common.h"
+#include "shard/FUN_001387c0.h"
 
 extern "C" {
 /* State of the save/load thread. */
@@ -18,7 +19,6 @@ struct SaveLoadRequest {
 
 extern SaveLoadThreadState g_saveLoadThread;
 s32 FUN_00138ca4(void);
-void FUN_001387c0(void);
 s32 processQueryAndFinish(s32 query, s32 first, s32 second);
 s32 FUN_002e0b5c(s32 query, s32 first, s32 second);
 

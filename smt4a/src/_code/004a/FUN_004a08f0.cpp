@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail unrolls the 8-element skill copy, keeps the zero constant in sl and the base percentage/skill pointer in extra callee-saved registers; build keeps the copy loop rolled. */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct StepPlayerData {
     /* 0x00 */ u8 unk00[0x0C];
@@ -28,15 +29,8 @@ struct StepUnitRecord {
     /* 0x60 */ u16 flags;
 };
 
-/* The save's slot table: the three side slots at 0x9108 (-1 = empty). */
-struct StepSlotTable {
-    /* 0x0000 */ u8 unk0000[0x1CA0];
-    /* 0x1CA0 */ s8 side[3];
-};
-
 extern "C" {
 s32 gameDataFlagTestBit(u32 bit);
-StepSlotTable *gameGetSlotTable(void);
 StepUnitRecord *gameGetSlotRecord(s32 slot);
 
 /* A percentage of max, never negative. */
@@ -72,7 +66,7 @@ static __inline void unitHealMpPercent(StepUnitRecord *unit, s32 percent)
 /* Heals every usable side unit by the percentage. */
 static __inline void healSideUnitsMp(s32 percent, s32 count)
 {
-    const s8 *side = gameGetSlotTable()->side;
+    const s8 *side = gameGetSlotTable()->reserve;
     for (s32 i = 0; i < count; ++i) {
         if (side[i] >= 0) {
             StepUnitRecord *unit = gameGetSlotRecord(side[i]);
@@ -85,7 +79,7 @@ static __inline void healSideUnitsMp(s32 percent, s32 count)
 /* Heals the usable side units that know the regeneration skill. */
 static __inline void healRegenSkillUnitsMp(s32 percent, s32 count)
 {
-    const s8 *side = gameGetSlotTable()->side;
+    const s8 *side = gameGetSlotTable()->reserve;
     for (s32 i = 0; i < count; ++i) {
         if (side[i] >= 0) {
             StepUnitRecord *unit = gameGetSlotRecord(side[i]);

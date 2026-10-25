@@ -3,16 +3,16 @@
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "Model/MoriModelShadowMap.h"
+#include "shard/JobWork.h"
 
 extern "C" {
-SurfaceCaptureWorkPrefixA *jobGetWork(u32 process);
 s32 stateValuesGetBySelector(u32 selector);
 s32 FUN_00154edc(s32 mode, CaptureSurfacePrefixA *surface);
 s32 surfaceCopy(CaptureSurfacePrefixA *destination, CaptureSurfacePrefixA *source);
 
 u32 FUN_0013ef3c(u32 process)
 {
-    SurfaceCaptureWorkPrefixA *work = jobGetWork(process);
+    SurfaceCaptureWorkPrefixA *work = (SurfaceCaptureWorkPrefixA *)jobGetWork(process);
 
     if (stateValuesGetBySelector(0) != 0) {
         work->captureSuppressed = 1;

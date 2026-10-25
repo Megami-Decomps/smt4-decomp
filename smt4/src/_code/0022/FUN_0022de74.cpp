@@ -1,6 +1,8 @@
 /* NON_MATCHING: the 0x604-byte unit copy and the cleared stat region schedule differently (retail zeroes sixteen words with individual stores, armcc keeps the temporary's layout in other registers) and the slot-table search keeps its pointers in different registers. */
 #include "gamedata/DevilRecord.h"
 #include "gamedata/UnitStats.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 /* A devil list entry (0x20 bytes): only its id is read. */
 struct DevilPreviewEntry {
@@ -41,12 +43,10 @@ union DevilPreviewUnit {
 
 extern "C" {
 s32 flaggedValueHolderGetTotal(void *cursor);
-s32 FUN_0029e0f8(void);
 void FUN_0029dfc0(s32 arg);
 void FUN_0029d8a0(u32 id);
 void statusPanelSetOpen(s32 open);
 void FUN_0022d1a8(DevilPreviewWork *work);
-void FUN_0029c4c8(s32 arg);
 void FUN_0029c4e4(StatBlock *unit, s32 arg);
 void FUN_00258a24(s32 arg);
 DevilPreviewSlots *gameGetSlotTable(void);

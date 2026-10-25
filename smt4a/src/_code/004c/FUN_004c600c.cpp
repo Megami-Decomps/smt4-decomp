@@ -1,4 +1,5 @@
 /* NON_MATCHING: required-mask load pairing and saved registers differ in candidate search. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -11,7 +12,6 @@ typedef char OpposingCandidateMasksOffsetCheck[offsetof(OpposingCandidateMasks, 
 
 extern "C" {
 extern OpposingCandidateMasks DAT_005713f0;
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 selection);
 
 s32 FUN_004c600c(s32 selection)

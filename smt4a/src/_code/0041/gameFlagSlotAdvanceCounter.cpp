@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/gameFlagSlotAdvanceCounter.h"
 struct FlagEntry {u8 flags;u8 counter;u8 unk02[2];};
 struct FlagBlock {u8 unk000[672];FlagEntry entries[1];};
 extern "C" {

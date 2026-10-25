@@ -14,7 +14,6 @@ typedef char UnitNotificationOffsets[offsetof(UnitNotificationView, current) == 
 extern "C" {
 s32 FUN_002b6b04();
 s32 dialogIsActive();
-s32 FUN_001ab9dc();
 s32 dialogGetTimer();
 void infoWinStartTimer(s32);
 const StatBlock *gameGetUnitRecord(s32);

@@ -1,7 +1,9 @@
 /* NON_MATCHING: register allocation only in the last 64-bit mask AND (retail writes the result over the loaded mask: and r0,r0,r2 / and r1,r1,r3). */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "gamedata/Table04Record.h"
 
 struct TableRecord {
     /* 0x00 */ u8 unk00[0x32];
@@ -24,9 +26,7 @@ typedef char BattleCandidateStateSizeCheck[sizeof(BattleCandidateState) == 0x4e6
 extern "C" {
 
 
-BtlMainStateA *btlGetMainState(void);
 TableRecord *dataTable8FindRecord(u16 id);
-TableEntry *dataTable04FindById(u16 id);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 
@@ -45,7 +45,7 @@ u32 FUN_0038b8b8(void)
                 for (s32 slot = 0; slot < 21; slot++) {
                     if (group == record->encodedStats.values[slot] >> 10) {
                         for (const u16 *id = state->idsBegin; id != state->idsEnd; id++) {
-                            TableEntry *entry = dataTable04FindById(dataTable8FindRecord(*id)->entry);
+                            TableEntry *entry = (TableEntry *)dataTable04FindById(dataTable8FindRecord(*id)->entry);
                             if (entry != NULL && (entry->flags << 16) >> 27 == slot) {
                                 scrSetResult(1);
                                 return 1;

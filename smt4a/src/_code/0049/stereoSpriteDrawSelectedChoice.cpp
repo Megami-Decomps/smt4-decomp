@@ -7,7 +7,7 @@
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
-SpriteInfo* FUN_001834a4(s32 group, s32 id);
+
 void efctSetSpeed(f32 speed);
 
 static __inline s32 stereoSpriteGroupIsReady(s32 group)
@@ -26,9 +26,9 @@ void stereoSpriteDrawSelectedChoice(const StereoSpriteOwner* owner, const Stereo
     if (stereoSpriteGroupIsReady(owner->resource->choices[0].group) &&
         stereoSpriteGroupIsReady(owner->resource->choices[1].group) && (s32)group > 0) {
         s32 spriteId = id + group * 1000;
-        s16 width = FUN_001834a4(0x33, spriteId)->size[0];
+        s16 width = reinterpret_cast<SpriteInfo *>(asdTMTexTableEntryAt(0x33, spriteId))->size[0];
         s32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
-        SpriteInfo* reference = FUN_001834a4(0x33, 29);
+        SpriteInfo* reference = reinterpret_cast<SpriteInfo *>(asdTMTexTableEntryAt(0x33, 29));
         s32 drawX = reference->x + x + parallax + (reference->size[0] - width) / 2;
         s32 drawY = reference->y + y;
         efctSetSpeed(speed);

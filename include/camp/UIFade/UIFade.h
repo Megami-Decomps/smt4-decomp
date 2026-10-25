@@ -24,4 +24,8 @@ extern "C" {
 void FUN_0020d700(void);
 }
 
+extern "C" {
+void uiFadeSetVisible(u8 visible);
+}
+
 #endif

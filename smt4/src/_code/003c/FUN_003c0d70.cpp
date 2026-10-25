@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_003369e0(int, unsigned int, int);
 int objectTotalAdd(int);
 int FUN_00337a34(int);
 int FUN_003390dc(int, int, int);
-int FUN_00394b0c(void);
 int FUN_003ae2d0(unsigned int, int, unsigned int, int);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
@@ -33,7 +33,6 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: recordClampCurrentCount. */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: objectFlagsClear. */
-extern int btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: rt_memclr. */
@@ -61,7 +60,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
   int unaff_r6;
   unsigned char temp_v6;
   
-  temp_v1 = btlGetMainState();
+  temp_v1 = reinterpret_cast<int>(btlGetMainState());
   puVar6 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1 * 0x288);
   if ((*puVar6 & 0x200000) != 0) {
     FUN_00337a34(temp_v1);
@@ -144,7 +143,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
       }
       *(short *)(temp_v1 + 0x1fc6) = *(short *)(temp_v1 + 0x1fc6) - 1;
     }
-    else if ((temp_v2 & 0x20) != 0) {
+    else if (0x20 & (temp_v2) != 0) {
       if (puVar6[0xa0] != 0 && param_3 != 0) {
         *(unsigned short *)(puVar6[0xa0] + 0x44) = 2;
         *(unsigned short *)(puVar6[0xa0] + 0x2a) = 0;

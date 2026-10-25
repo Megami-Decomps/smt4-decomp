@@ -1,7 +1,8 @@
 /* NON_MATCHING: Coordinate conversions and the zero component use separate scalar stores instead of the retail VSTM triple. */
 #include "map/mapDepart.h"
+#include "script/ScriptArgs.h"
+#include "shard/scrGetArg.h"
 extern "C" {
-s32 scrGetArg(u32);
 extern GameStateA g_gameState;
 // Retail references the embedded position through this existing data symbol.
 extern MapVector DAT_005f1a64;

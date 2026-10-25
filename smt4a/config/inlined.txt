@@ -31,3 +31,6 @@ shopListItemGetId = 0xe1d000b4; // FUN_004a3154 (after add r0, r5, r0, lsl #5; r
 nnResultIsFailureBool = 0xe1a00fa0; // 0x474684 (Obj4221e4 vfunc, on legacyResourceIdRemap's r0; caller tests teq r0,#1)
 partyWidgetSetTransitionActive = 0xe5c01025; // FUN_0020b718 (widget reloaded into r0, mov r1, #0 before each store)
 partyWidgetSetTransitionPending = 0xe5c01027; // FUN_0020b718 (widget reloaded into r0, mov r1, #0 before each store)
+slotTargetOwnerGetHolder = 0xe5900008; // 0x3e54c4 (FUN_003e54b8: on the owner in r0)
+slotTargetHolderGetTarget = 0xe5900004; // 0x3e54c8 (FUN_003e54b8: on the holder in r0; result tested with movs)
+uiSpriteGetOperationMode = 0xe1d005f0; // 0x34efec (FUN_0034efe0: after add r0, r0, #732; r4 keeps the state)

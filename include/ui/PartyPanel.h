@@ -16,4 +16,8 @@ struct PartyPanel {
 
 typedef char PartyMemberSizeCheck[sizeof(PartyMember) == 0x8C ? 1 : -1];
 
+extern "C" {
+void FUN_00298d28(u32 a, u32 b);
+}
+
 #endif

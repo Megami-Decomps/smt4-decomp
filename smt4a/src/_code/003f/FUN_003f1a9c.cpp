@@ -1,6 +1,7 @@
 /* NON_MATCHING: initial global mask uses add+ldm instead of retail's two immediate-offset ldrs; named flags now match the object load and return paths. */
 #include "common.h"
 #include "bible/bibleAnalyze.h"
+#include "gamedata/Table04Record.h"
 
 namespace {
 
@@ -24,7 +25,6 @@ struct BattleEntryView {
 extern "C" {
 extern BattleMaskView g_btlMain;
 BattleEntryView* FUN_003eaf20(BattleObjectView* object);
-void* dataTable04FindById(s32 id);
 
 // Resolve a valid table ID and optionally test and set the object's battle mask.
 s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)

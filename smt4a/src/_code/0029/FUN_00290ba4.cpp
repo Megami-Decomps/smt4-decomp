@@ -1,6 +1,7 @@
 /* NON_MATCHING: scheduling only: retail loads the g_btlUi address before calling campCommonBgRelease, built after */
 /* Tears down the session: resets its sub-state, releases its handle, frees the session itself and notifies the owner's window. */
 #include "common.h"
+#include "shard/asdMemFree.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ typedef struct Owner {
 extern SessionHolder g_btlUi;
 
 extern void jobStop(u32 window, s32 arg);
-extern void asdMemFree(Session *session);
 extern void asdOperatorDelete(u32 handle);
 extern void partyReleasePreviewResources(void *subState);
 extern void campCommonBgRelease(void);

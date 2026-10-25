@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SourceMetadata.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(const BtlCombatantEntryA *entry, u16 *values);
 SourceMetadataFlags *dataTable41FindById(u32 id);

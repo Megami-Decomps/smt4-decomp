@@ -13,7 +13,7 @@ extern "C" void FUN_0036a474(NodeTransform *transform, s32 useFallback,
                             const NodeTransform *fallback)
 {
     u32 flags = transform->flags;
-    if ((~flags & 0x10) == 0) {
+    if ((~0x10 & flags) == 0) {
         return;
     }
     if (basisLengthSquared(transform->m[0]) < g_nodeMinimumBasisLengthSquared ||

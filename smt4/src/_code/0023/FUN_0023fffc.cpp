@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (175 vs 168 rows); register allocation and frame size (12 vs 16 bytes) differ */
 #include "common.h"
+#include "shard/FUN_002896bc.h"
 
 // Saved battle block: a header with a four-digit ASCII version and the payload.
 struct BattleSaveBlock {
@@ -22,7 +23,7 @@ struct BattleSideEntry {
     u8 unk00[0x50];
     u32 flags;              // 0x50: bit 0 present, bit 1 active
     u32 flags2;             // 0x54: bit 3 pending refresh
-    u16 status;             // 0x58: bit 11 = inactive pair
+    s16 status;             // 0x58: bit 11 = inactive pair
     u8 unk5a[8];
     s16 listedId;           // 0x62
 };
@@ -58,7 +59,6 @@ s32 pairedEntryTableContains(BattleMain* battle, u16 id);
 void FUN_002505c0(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void frameTexApplyMode(s32 mode);
 SideRecord* FUN_0027da30(BattleMain* battle, s32 id);
-s32 FUN_002896bc(void);
 void FUN_002c29d8(s32 a, s32 b, s32 c);
 s32 FUN_002c2a04(s32 a);
 void FUN_00339e38(BattleMain* battle);

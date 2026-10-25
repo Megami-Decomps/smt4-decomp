@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -22,16 +23,15 @@ typedef struct Work00109f40 {
     /* 0xf00 */ Part00109f40 part;
 } Work00109f40;
 
-Work00109f40 *jobGetWork(void);
 void renderCtxSelectStereoLayout(u32 scene);
 u8 FUN_002bfadc(s32 mode, Canvas00109f40 *canvas);
 
 extern u32 g_titleScene; /* 0x44ea00 */
 
 /* Once the title part is ready and not yet started, sizes its canvas 512x512, runs FUN_002bfadc and marks it started. Always returns 0. */
-u32 titlePartStart(void)
+u32 titlePartStart(u32 job)
 {
-    Work00109f40 *work = jobGetWork();
+    Work00109f40 *work = (Work00109f40 *)jobGetWork(job);
     Part00109f40 *part = &work->part;
 
     if (part->ready == 0 || part->started != 0) {

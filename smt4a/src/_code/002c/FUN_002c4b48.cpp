@@ -47,7 +47,7 @@ extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageSlotSet. */
 extern int messageGetChoiceResult(void);
-extern int FUN_002ba85c(void);
+extern int scrGetCommandOwner(void);
 /* Supplied declaration required: scrCommMessageSetMode. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: libc_strcpy. */
@@ -107,7 +107,7 @@ unsigned int FUN_002c4b48(void)
     messageSlotSet(0);
     return 1;
   }
-  temp_v13 = FUN_002ba85c();
+  temp_v13 = scrGetCommandOwner();
   temp_v1 = 0;
   temp_v11 = '\0';
   temp_v14 = 0;

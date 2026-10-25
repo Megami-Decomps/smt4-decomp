@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlPartnerAttack.h"
 #include "battle/btlUnit.h"
+#include "shard/FUN_004abba8.h"
 
 // The queued command lies beyond the published BtlMainStateA extent.
 struct BattleTransitionStateView {
@@ -23,7 +24,6 @@ extern void* g_btlUiBlock;
 BattleTransitionSource* FUN_003eaf20(BtlMainStateA* battle);
 BtlUnitA* btlUnitGet(u32 id);
 s32 hasFlag80Or1000(u32 id, BtlUnitA* unit);
-void FUN_004abba8(void* ui, u32 enabled);
 
 // Begin the next partner-attack phase or queue the current unit's transition command.
 u32 FUN_003ed878(BattleTransitionStateView* state)

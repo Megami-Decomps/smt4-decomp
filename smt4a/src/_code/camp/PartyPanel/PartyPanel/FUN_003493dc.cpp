@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "camp/PartyPanel/PartyPanel.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int gameGetSlotTable(...);
 int FUN_00203b40(...);
-int FUN_00215bd0(...);
 int FUN_00230ac0(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_002c7e6c(...);

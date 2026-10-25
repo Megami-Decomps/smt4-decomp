@@ -1,11 +1,9 @@
 /* NON_MATCHING: text base and mode setup recovered; record/index saved registers r4/r5 are exchanged. */
-#include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 
-struct BtlTextEntryFlags { u32 flags; };
 extern "C" {
 void FUN_00282820(s32 position, u32 first, u32 second, s32 listedId, s32 layer, u32 mode, u32 kind, const char *text);
-BtlTextEntryFlags *btlMainFindEntryByListedId(BtlMainState *, s32 id);
+BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 s32 FUN_0028299c(u32 context);
 s32 libc_strcmp(const char *first, const char *second);
 u32 libc_strlen(const char *text);
@@ -35,7 +33,7 @@ void FUN_001b1a48(s32 side, u32 first, const void *configuration, s32 spacing, u
             switch (kind) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 12:
                 if (kind == 12 && listedId >= 0) {
-                    BtlTextEntryFlags *target = btlMainFindEntryByListedId(battle, listedId);
+                    BtlUnitEntry *target = btlMainFindEntryByListedId(battle, listedId);
                     if (target != NULL && (target->flags & 2) == 0)
                         break;
                 }

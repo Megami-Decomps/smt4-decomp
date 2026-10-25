@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail uses `push {r4, lr}` where armcc emits `b 0  [R_ARM_JUMP24 mapEnvironmentApplySelectedEntry]`. */
+/* NON_MATCHING: the callee takes no argument (retail passes none); retail calls it with `bl` inside a push {r4, lr} frame where armcc emits a tail `b`. */
 #include "common.h"
+#include "shard/mapEnvironmentApplySelectedEntry.h"
 
 extern "C" {
 
@@ -9,14 +10,13 @@ struct SelectionState {
     /* 0x5a */ s16 previous;
 };
 extern SelectionState DAT_005f17fc;
-void mapEnvironmentApplySelectedEntry(SelectionState *state);
 
 void uiSelectionRefresh(void)
 {
     if (DAT_005f17fc.selection != DAT_005f17fc.previous) {
         DAT_005f17fc.previous = DAT_005f17fc.selection;
     }
-    mapEnvironmentApplySelectedEntry(&DAT_005f17fc);
+    mapEnvironmentApplySelectedEntry();
 }
 
 } /* extern "C" */

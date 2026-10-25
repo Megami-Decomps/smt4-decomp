@@ -2,6 +2,7 @@
 #include "classes/Obj42242c.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemAlloc.h"
 
 class Obj42238c : public ObjBase3c2ef0 {
 public:
@@ -90,7 +91,6 @@ extern u32 *DAT_0043d990;
 void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00240cec(s32 arg);
-void *asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, void *work, u32 parent);
 void FUN_00233670(void *list, s32 a, s32 b, s32 count);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: battle-mask word addressing uses literal offsets instead of retail paired loads, and dispatch blocks are merged. */
 #include "battle/btlGameOver.h"
+#include "shard/JobWork.h"
 
 // Apocalypse's owning battle work extends past the shared game-over work prefix.
 struct GameOverBattleWorkA {
@@ -13,14 +14,13 @@ struct GameOverBattleWorkA {
 };
 extern "C" {
 extern BtlGameOverGlobalsA g_btlGameOver;
-GameOverBattleWorkA *jobGetWork();
 s32 asdProcessGetFrames(u32 job);
 s32 FUN_003e6f50(BtlGameOverA *state);
 
 // Advance the saturated game-over timer and dispatch once battle flags permit it.
-s32 FUN_002dedf0()
+s32 FUN_002dedf0(u32 job)
 {
-    GameOverBattleWorkA *work = jobGetWork();
+    GameOverBattleWorkA *work = (GameOverBattleWorkA *)jobGetWork(job);
     BtlGameOverA *state = g_btlGameOver.state;
     if (state == NULL)
         return 0;

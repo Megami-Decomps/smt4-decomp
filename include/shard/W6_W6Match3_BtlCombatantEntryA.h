@@ -75,6 +75,11 @@ struct BtlCombatantEntryA {
             /* 0x268 */ u8 unk268[6];
             /* 0x26E */ s16 value;
         } sortBase;
+        struct {
+            /* 0x268 */ u8 unk268BeforeLevel[6];
+            /* 0x26E */ s16 level;
+            /* 0x270 */ s16 agility;
+        } levelStats;
     };
     /* 0x274 */ u16 statusFlags;
     union {
@@ -114,6 +119,10 @@ struct BtlCombatantEntryA {
             /* 0x330 */ u8 unk330[8];
             /* 0x338 */ BtlCombatantActionA available[10];
         } actionList;
+        struct {
+            /* 0x276 */ u8 unk276BeforeState[0x17E];
+            /* 0x3F4 */ s8 state;
+        } unitState;
     };
     /* 0x3F8 */ BtlUnitRecordA *record; /* the unit record the combatant was built from */
     union {
@@ -155,6 +164,10 @@ typedef char BtlCombatantThresholdOffsetCheck[
 typedef char BtlCombatantActionListOffsetCheck[
     offsetof(BtlCombatantEntryA, actionList.single) == 0x328 &&
     offsetof(BtlCombatantEntryA, actionList.available) == 0x338 ? 1 : -1];
+typedef char BtlCombatantUnitStateOffsetCheck[
+    offsetof(BtlCombatantEntryA, unitState.state) == 0x3F4 ? 1 : -1];
+typedef char BtlCombatantLevelStatsOffsetCheck[
+    offsetof(BtlCombatantEntryA, levelStats.agility) == 0x270 ? 1 : -1];
 typedef char BtlCombatantSourceIdOffsetCheck[
     offsetof(BtlCombatantEntryA, sourceId) == 0x3FC ? 1 : -1];
 typedef char BtlCombatantSlotSourceOffsetCheck[
@@ -169,5 +182,9 @@ typedef char BtlCombatantParameterBlockOffsetCheck[
 typedef char BtlCombatantSpecialMaximumOffsetCheck[
     offsetof(BtlCombatantEntryA, specialMaximum.record) == 0x400 &&
     sizeof(BtlCombatantEntryA) == 0x408 ? 1 : -1];
+
+extern "C" {
+u8 hasAnyOf3DC2(u32 mask);
+}
 
 #endif

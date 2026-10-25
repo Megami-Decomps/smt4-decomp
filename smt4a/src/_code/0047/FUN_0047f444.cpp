@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail addresses the mask as DAT_00573cc0 + 8 (pool word has addend 0, two ldr) and loads the entry flags with ldm after it; the build folds +8 into the pool word and loads the mask with ldm; vldr s0 is also hoisted differently. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 
-BtlMainStateA *btlGetMainState(void);
 void FUN_0015f490(u32 id, u32 sound, s32 enabled, s32 flags, f32 volume);
 
 /* The battle sound masks at 0x573cc0. */

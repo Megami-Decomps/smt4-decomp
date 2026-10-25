@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
 
-extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
@@ -22,7 +22,7 @@ u32 scrCommBtlGroupUnitSlotKindIsThree(void)
     scrGetArg(2);
     FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < start + count; index++) {
-        BtlUnitEntry *unit = &btlGetMainState()->units[index];
+        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
 
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id
             && unit->values[slot] >> 10 == 3) {
@@ -30,10 +30,10 @@ u32 scrCommBtlGroupUnitSlotKindIsThree(void)
             return 1;
         }
     }
-    if (btlGetMainState()->hasActiveEntry != 0) {
+    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
         BtlUnitEntry *active;
 
-        btlGetMainState();
+        reinterpret_cast<BtlState *>(btlGetMainState());
         active = btlMainFindActiveEntry();
         if (active != NULL && active->groupId == id && active->values[slot] >> 10 == 3) {
             scrSetResult(1);

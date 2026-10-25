@@ -1,4 +1,5 @@
 /* NON_MATCHING: near-structure (172 rows against 203): same skip test, special-row cases, member/row loops and index maths from the asm; retail has extra armcc nops around calls (inlined stubs) and re-tests `target < 0` before the second special case, with the row pointer reloaded (ldr/rsb/str order) after each FUN_004bcbb4, which ours schedules differently */
+#include "battle/BtlMainAccess.h"
 #include "network/DataStore/DataStoreMain.h"
 typedef unsigned char u8;
 typedef signed char s8;
@@ -48,7 +49,6 @@ extern PartyPanel *g_partyPanel;   /* 0x57f268 */
 extern u32 g_btlScriptUnit;        /* 0x57113c */
 
 s32 gameGetSlotTable(void);
-s32 btlGetMainState(void);
 UnitState *btlUnitGet(u32 unit);
 u32 gameGetSlotRecord(u32 slot);
 s32 FUN_004bcbb4(u32 record, u32 skillId);
@@ -68,7 +68,7 @@ void FUN_0028c2ec(u32 id, s32 direct)
     s32 index;
 
     s32 skipPreview = 0;
-    if (panel->skillId == 125 && btlGetMainState() != 0 && g_btlScriptUnit != 0) {
+    if (panel->skillId == 125 && reinterpret_cast<s32>(btlGetMainState()) != 0 && g_btlScriptUnit != 0) {
         UnitState *unit = btlUnitGet(g_btlScriptUnit);
         if (unit->action != 0 && *(u16 *)(unit->action + 0x1BE) == 8) {
             skipPreview = 1;

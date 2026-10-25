@@ -15,7 +15,7 @@ struct ResourceTable27581c {
     /* 0x00 */ u8 unk00[0x4];
     /* 0x04 */ s32 count;
     /* 0x08 */ u8 released;
-    /* 0x09 */ u8 loaded;
+    /* 0x09 */ s8 loaded;
     /* 0x0A */ u8 unk0A[0x2];
     /* 0x0C */ ResourceSlot27581c slots[1];
 };

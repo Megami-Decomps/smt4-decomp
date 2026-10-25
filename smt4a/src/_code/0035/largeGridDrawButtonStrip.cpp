@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/Vec2Fixed.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/recordGetModeForId.h"
 
 struct GridButtonSlide {
     u8 unk00[0xc];
@@ -19,7 +20,6 @@ struct LargeGridButtonDraw {
 };
 extern "C" {
 void efctSetSpeed(f32);
-s32 recordGetModeForId(s32);
 s32 vec2GetYInt(GridButtonSlide *);
 
 void largeGridDrawButtonStrip(LargeGridButtonDraw *work, s32 x, s32 y, s32 button, f32 scale)

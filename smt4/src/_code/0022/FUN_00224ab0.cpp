@@ -1,4 +1,5 @@
 /* NON_MATCHING: Boolean status extraction, reference-vector loads and VFP distance-expression scheduling differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
@@ -11,7 +12,6 @@ struct BattleDistanceReference {
 };
 }
 extern "C" {
-BtlMainState *btlGetMainState();
 void FUN_0027dab0(BtlMainState *, BtlActionRecord *);
 void FUN_0027da30(BtlMainState *, s32 index);
 BattleDistanceReference *FUN_002c501c();

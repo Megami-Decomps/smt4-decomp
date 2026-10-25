@@ -5,7 +5,6 @@
 extern "C" {
 
 extern int contentGetKindValue(u16 id);
-extern int contentGetEntryKind(u16 id);
 
 /* Comparison of two entries: by sort key (contentGetKindValue for kinds 2, 3 and 8, else 0), then by FUN_00230f44. */
 int FUN_003a0078(u16 *a, u16 *b)

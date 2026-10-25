@@ -2,7 +2,7 @@
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-const PanelTextLayoutEntryPrefixA *FUN_001834a4(u32 resource, s32 index);
+const PanelTextLayoutEntryPrefixA *asdTMTexTableEntryAt(u32 resource, s32 index);
 
 /* Draw the nine grid cells with two opposing highlights and their trailing frames. */
 void uiDrawRotatingGridHighlights(s32 firstEntry, s32 frame)
@@ -14,7 +14,7 @@ void uiDrawRotatingGridHighlights(s32 firstEntry, s32 frame)
     for (s32 row = 0; row < 3; ++row) {
         for (s32 column = 0; column < 3; ++column) {
             s32 index = row * 3 + column;
-            const PanelTextLayoutEntryPrefixA *entry = FUN_001834a4(26, firstEntry + index);
+            const PanelTextLayoutEntryPrefixA *entry = asdTMTexTableEntryAt(26, firstEntry + index);
             if (firstHighlight == index || secondHighlight == index)
                 FUN_001835b4(2, 26, 0x1DE, entry->x, entry->y, 251);
             else if (firstTrailing == index || secondTrailing == index)

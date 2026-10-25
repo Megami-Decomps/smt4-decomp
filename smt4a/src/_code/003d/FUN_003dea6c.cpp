@@ -1,6 +1,7 @@
 /* NON_MATCHING: argument/count address sharing, saved frame, title cold-branch and switch tail layout differ. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/FUN_001654f0.h"
 
 struct DefinitionMessageArgument { u16 kind; u16 id; u32 count; };
 struct DefinitionMessageRecord {
@@ -19,7 +20,6 @@ const char* FUN_0015f858(u16 id, s32 converted);
 const char* FUN_00180118(u16 id);
 const char* dataTable0cFindByKey(u16 id);
 char* libc_strcpy(char* destination, const char* source);
-void FUN_001654f0(const char* input, char* output);
 void FUN_00359974(s32 parameter, u32 value, s32 width, u32 flags);
 s32 FUN_002ebda8(void);
 DefinitionMessageDescriptor* dataTableGetEntry37(s32 index);

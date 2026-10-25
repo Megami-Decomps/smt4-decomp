@@ -8,7 +8,7 @@ f32 jobGetScalarValue(void);
 s32 vec2GetXInt(Vec2Int *v);
 s32 vec2GetYInt(Vec2Int *v);
 void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
-f32 *FUN_002bf4f8(s32 group, s32 id);
+f32 *asdTMTexTableEntryAt(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);
 f32 vec2GetSpeed(const void *animation);
 s32 FUN_0029e924(ListMenu *menu);
@@ -34,7 +34,7 @@ void FUN_003bb780(ListMenu *menu)
     FUN_002bf288(2, 42, 31, x, y, 31);
     FUN_002bf288(2, 42, 32, x, y, 31);
 
-    s16 *frame = (s16 *)FUN_002bf4f8(42, 33);
+    s16 *frame = (s16 *)asdTMTexTableEntryAt(42, 33);
     s16 offsetX = frame[4];
     s16 offsetY = frame[5];
     s32 iconX = vec2GetXInt(position) + offsetX;

@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_ShiftRandom.h"
+#include "shard/randomAdvanceShiftRegister.h"
 extern "C" {
 extern ShiftRandomState DAT_004d9748;
 /* Advance the four-word shift-register random generator. */

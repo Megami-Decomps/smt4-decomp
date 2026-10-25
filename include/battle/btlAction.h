@@ -9,10 +9,15 @@ struct BtlActionRecord {
     union {
         /* 0x00 */ u8 unk00[0x48];
         /* 0x00 */ u32 restoredValue;
+        /* 0x00 */ u32 id;
         struct {
             u8 unk00BeforeKind[0x3c];
             /* 0x3c */ u8 kind;
         } animation;
+        struct {
+            u8 unk00BeforeTeam[0x3c];
+            /* 0x3c */ u8 team;        /* 2: the player's team */
+        } side;
         struct {
             u8 unk00BeforeIdentity[0x44];
             /* 0x44 */ s8 category;
@@ -52,6 +57,10 @@ struct BtlActionRecord {
             /* 0x64 */ u32 current;
             /* 0x68 */ u32 saved;
         } editorRestore;
+        struct {
+            /* 0x64 */ u8 unk64[0x8C];
+            /* 0xF0 */ s32 slot;       /* negative: not placed in a slot yet */
+        } placement;
     };
     /* 0xf8 */ u32 stateFlags;
     union {
@@ -83,6 +92,8 @@ typedef char BtlActionEditorRestoreOffsetCheck[
     offsetof(BtlActionRecord, editorRestore.saved) == 0x68 ? 1 : -1];
 typedef char BtlActionAnimationKindOffsetCheck[
     offsetof(BtlActionRecord, animation.kind) == 0x3c ? 1 : -1];
+typedef char BtlActionPlacementSlotOffsetCheck[
+    offsetof(BtlActionRecord, placement.slot) == 0xF0 ? 1 : -1];
 typedef char BtlActionPresentationOffsetCheck[
     offsetof(BtlActionRecord, presentationFlags) == 0x58 ? 1 : -1];
 

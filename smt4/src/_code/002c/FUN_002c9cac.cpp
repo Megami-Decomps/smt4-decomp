@@ -1,10 +1,10 @@
 /* NON_MATCHING: first-frame and resumed-frame wait branches are laid out differently. */
 #include "common.h"
+#include "shard/FUN_002b89a4.h"
 
 extern "C" {
 u32 scrGetArg(u32);
 s32 scrGetCommandFrame(void);
-s32 FUN_002b89a4(u32);
 s32 FUN_002c1d5c(void);
 void FUN_00282bfc(u32, u32);
 void slotSetRequest(u32, u32, u32);

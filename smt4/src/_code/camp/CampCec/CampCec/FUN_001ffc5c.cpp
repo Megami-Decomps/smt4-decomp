@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/ResultReport.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
@@ -67,7 +68,6 @@ s32 memAlloc(s32 size, s32 alignment, s32 a, s32 b, s32 c, s32 d);
 void taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void), s32 c, s32 d, u32 owner);
 void *asdOperatorNew(s32 size, void (*owner)(void));
 s32 resultReportIfFailed(void *object, void *memory, s32 size);
-s32 asdLoadFileAsyncSimple(const char *path, u32 *destination, s32 flag);
 void buttonHelpSetPreset(s32 preset);
 void FUN_002579bc(s32 arg);
 void campCecModelSceneInit(void *scene);

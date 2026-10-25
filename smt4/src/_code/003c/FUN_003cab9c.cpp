@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the result 1 in r6 and returns through one shared exit, reads the action kind with ldrsh and dispatches phases 0/1/2/5 through a different branch tree; this build returns from each path and uses ldrh. */
 #include "common.h"
+#include "battle/btlUnit.h"
 
 /* The record of a combatant's chosen action: its id is at 0x62. */
 struct TurnRecord {
@@ -62,7 +63,6 @@ s32 objSlotStateIsActiveRange(TurnOwner *owner, s32 slot);
 void slotResetIdle(TurnOwner *owner, s32 slot, u32 value);
 s32 FUN_003dc504(void);
 void FUN_003da010(void *resources);
-s32 FUN_003db7b4(void *resources);
 void FUN_003dcaac(void *resources, u32 value);
 DataTable40Record *dataTable40FindById(s32 id);
 void btlTargetSetFlag10(TurnOwner *owner, s32 targetId, s32 primary);

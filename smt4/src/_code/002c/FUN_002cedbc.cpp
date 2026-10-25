@@ -1,4 +1,5 @@
 #include "shard/Sys43e310.h"
+#include "gamedata/SaveLoadProcess.h"
 
 extern "C" {
 

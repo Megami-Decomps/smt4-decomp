@@ -1,11 +1,11 @@
 /* NON_MATCHING: only the null-model readiness branch differs: compiler skips the redundant second null check that retail preserves. */
 #include "battle/BattleStageLoadWork.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "shard/JobWork.h"
 
 struct OrbitScreen;
 
 extern "C" {
-BattleStageLoadWork *jobGetWork(u32 handle);
 void FUN_0018a104(OrbitScreen *screen);
 s32 FUN_002c1d5c(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -21,7 +21,7 @@ extern const char DAT_00403610[];
 // Load the battle stage environment/model, then register and initialize the ready model.
 s32 FUN_00221e1c(u32 handle)
 {
-    BattleStageLoadWork *work = jobGetWork(handle);
+    BattleStageLoadWork *work = (BattleStageLoadWork *)jobGetWork(handle);
     FUN_0018a104(reinterpret_cast<OrbitScreen *>(work));
     switch (work->state) {
     case 0:

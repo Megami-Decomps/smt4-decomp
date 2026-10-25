@@ -1,7 +1,7 @@
 /* NON_MATCHING: scoped critical-section guards and ordered message clears recovered; virtual-read result/guard stack layout and saved registers differ. */
 #include "shard/CecMessageBox.h"
 #include "shard/W6_W6Match6_CecMessageBox.h"
-#include "nn/os/CriticalSectionLock.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
@@ -32,7 +32,7 @@ void FUN_0042e870(MessageBox *box, s32 preserveOpen)
         offsetof(ResetView, outbox) == 0x3AC && offsetof(ResetView, message) == 0x55C &&
         offsetof(ModuleView, inboxOwned) == 3 ? 1 : -1];
     ResetView *work = reinterpret_cast<ResetView *>(box);
-    CriticalSectionLock lock(&g_asdCecMessageBoxCriticalSection);
+    ScopedCriticalLock lock(&g_asdCecMessageBoxCriticalSection);
     ModuleView *flags = reinterpret_cast<ModuleView *>(&g_asdCecModuleFlags);
     if (preserveOpen == 0) {
         if (box->id != 0) {
@@ -59,14 +59,14 @@ void FUN_0042e870(MessageBox *box, s32 preserveOpen)
     work->message.words[1] = 0;
     sysMemClear(work->messageData, sizeof(work->messageData));
     {
-        CriticalSectionLock stateLock(&g_asdCecMessageBoxStateCriticalSection);
+        ScopedCriticalLock stateLock(&g_asdCecMessageBoxStateCriticalSection);
         if (flags->inboxOwned) {
             FUN_00430e58(work->inboxHandle);
             flags->inboxOwned = 0;
         }
     }
     {
-        CriticalSectionLock stateLock(&g_asdCecMessageBoxStateCriticalSection);
+        ScopedCriticalLock stateLock(&g_asdCecMessageBoxStateCriticalSection);
         if (flags->outboxOwned) {
             FUN_00430e58(work->outboxHandle);
             flags->outboxOwned = 0;

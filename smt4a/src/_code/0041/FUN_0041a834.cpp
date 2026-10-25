@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail duplicates the modulo/index/draw tail in both pulse arms and divides by a loaded 5.0 (vdiv); ours merges the arms and folds the division to a multiply by 0.2 (133 rows against 151). */
 #include "camp/RenderCtx.h"
+#include "shard/FUN_004ab718.h"
 
 /* A battle UI icon strip (observed fields). */
 struct BtlIconStrip {
@@ -26,7 +27,6 @@ extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 s32 FUN_001692ac(u32 kind, bool enabled);
-s32 FUN_004ab718(void);
 void FUN_003c5de0(f32 scale, s32 handle, u32 id, s32 x, s32 y, s32 priority);
 
 /* Draws the selected icon of the strip at `position`, shifted by the stereo parallax and a phase wobble,

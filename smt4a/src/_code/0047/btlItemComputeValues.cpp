@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/btlItemComputeValues.h"
 
 extern "C" {
 const void* dataTable8FindRecord(u32 id);

@@ -1,8 +1,8 @@
 /* NON_MATCHING: encoded-character byte assembly and signed/unsigned literal sharing differ. */
 #include "shard/W6_W6Match3_NameFormStateA.h"
 #include "shard/W6_W6Match7_FontResource.h"
+#include "shard/FUN_0019dc44.h"
 
-extern "C" FontGlyphResourceOwner *FUN_0019dc44(u32 index);
 
 static __inline void nameFormSetCharacter(NameFormStateA *form, s8 index, s16 character)
 {

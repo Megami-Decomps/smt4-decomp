@@ -47,7 +47,6 @@ u32 playerGetMappedCategory();
 u32 gameGetSelectedSupportUnitTableId(void);
 s32 textFormatBuffer(char *output, const char *format, ...);
 u32 aocIndexValueOrDefault(u32 index);
-void FUN_00211868(s16 value, u8 flag);
 u32 FUN_002be650(u32 value, s32 mode);
 void FUN_002cd750(s16 value);
 void communicationSetResultPointer(void);

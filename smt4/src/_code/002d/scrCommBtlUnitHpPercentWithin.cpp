@@ -17,8 +17,6 @@ typedef struct BtlUnit {
 
 extern u32 g_btlScriptUnit;
 
-extern s32 scrGetArg(s32 index);
-
 /* Script command: pushes whether the script unit's HP percentage is at most argument 0; returns 1. */
 s32 scrCommBtlUnitHpPercentWithin(void)
 {

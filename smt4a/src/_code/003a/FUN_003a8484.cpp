@@ -1,12 +1,11 @@
 /* NON_MATCHING: candidate mask load grouping, value comparison, and saved registers differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
-void scrSetResult(s32 value);
 
 // Test whether an eligible combatant has a positive value in the selected candidate column.
 u32 FUN_003a8484(void)

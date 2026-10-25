@@ -24,7 +24,7 @@ void FUN_0041a834(void *marker, const BattleVector3 *position, f32 alpha);
 
 u32 FUN_002df754(u32 job)
 {
-    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(jobGetWork(job));
+    BtlMainStateA *state = (BtlMainStateA *)jobGetWork(job);
     FUN_00183bb0();
     f32 primaryDrawn = 0.0f;
     for (s32 i = 4; i < 54; ++i) {

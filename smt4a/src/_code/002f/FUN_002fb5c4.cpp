@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fb5c4` (_code @ 0x2fb5c4, 0x494 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "util/PackNibbles.h"
 
@@ -15,7 +16,6 @@ extern unsigned int DAT_00573c74; /* 0x573c74 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001634b4. */
 extern int vec2GetXInt(int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -36,7 +36,7 @@ void FUN_002fb5c4(int param_1)
   float temp_v6;
   
   if ((*(int *)(param_1 + 0x243c) != 0) &&
-     (temp_v0 = btlGetMainState(),
+     (temp_v0 = reinterpret_cast<int>(btlGetMainState()),
      (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00573c70) == 0 &&
      (*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00573c74) == 0)) {
     temp_v6 = 0.29f;

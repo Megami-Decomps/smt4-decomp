@@ -1,4 +1,3 @@
-/* NON_MATCHING: argument setup order only: retail computes `slot->sub` (add r0) before loading the constant 1 into r1; built loads r1 first */
 /* Releases every in-use slot of the manager and clears its active flag. */
 #include "common.h"
 
@@ -31,7 +30,8 @@ void btlTalkBustUpReleaseAllSlots(void)
             Slot *slot = &manager->slots[i];
 
             if (slot->inUse != 0) {
-                spriteStartAnimationByIndex(slot->sub, 1);
+                void *sub = slot->sub;
+                spriteStartAnimationByIndex(sub, 1);
             }
         }
         manager->active = 0;

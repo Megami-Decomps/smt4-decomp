@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -54,7 +54,7 @@ void FUN_002888a8(int param_1,int param_2,int param_3,int param_4,unsigned int p
   unsigned int temp_v10;
   unsigned int temp_v11;
   
-  temp_v0 = FUN_002bf4f8(param_5,param_6);
+  temp_v0 = asdTMTexTableEntryAt(param_5,param_6);
   psVar2 = *(short **)(temp_v0 + 0xc);
   temp_v1 = param_1;
   if (param_2 < param_1) {

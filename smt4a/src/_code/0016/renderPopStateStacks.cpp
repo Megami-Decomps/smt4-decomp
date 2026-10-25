@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/renderPopStateStacks.h"
 
 extern "C" RenderCtxA *g_renderCtx;
 

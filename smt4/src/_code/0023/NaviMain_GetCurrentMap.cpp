@@ -1,4 +1,5 @@
 #include "shard/NaviMain.h"
+#include "shard/NaviMain_GetCurrentMap.h"
 
 extern "C" {
 extern NaviMain *g_naviMain;

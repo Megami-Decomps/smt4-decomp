@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the callee-saved register assignment of the per-entry sort values differs (retail: a in r8/sl/r6, b in r7/r9/r1). */
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -9,15 +10,9 @@ typedef struct DevilListEntry {
     /* 0x04 */ s32 slot;
 } DevilListEntry;
 
-typedef struct Table04Record {
-    /* 0x00 */ u8 unk00[0x2C];
-    /* 0x2C */ u16 sortKey;
-} Table04Record;
-
 s32 idIsAbove400(s32 id);
 s32 itemGetCategorySortOrder(s32 id);
 s32 dataTable04GetCategoryOrder(s32 id);
-Table04Record *dataTable04FindById(s32 id);
 
 /* Sort comparator for demon list entries: by itemGetCategorySortOrder, then dataTable04GetCategoryOrder, then descending table 0x04 key,
  * then id, then the party slot's entry id (ids above 400 sort last). */
@@ -38,7 +33,7 @@ s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
     } else {
         aFirst = itemGetCategorySortOrder(a->id);
         aSecond = dataTable04GetCategoryOrder(a->id);
-        aKey = dataTable04FindById(a->id)->sortKey;
+        aKey = dataTable04FindById(a->id)->listing.sortKey;
     }
     if (idIsAbove400(b->id)) {
         bFirst = 99;
@@ -47,7 +42,7 @@ s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
     } else {
         bFirst = itemGetCategorySortOrder(b->id);
         bSecond = dataTable04GetCategoryOrder(b->id);
-        bKey = dataTable04FindById(b->id)->sortKey;
+        bKey = dataTable04FindById(b->id)->listing.sortKey;
     }
     diff = aFirst - bFirst;
     if (diff != 0) {

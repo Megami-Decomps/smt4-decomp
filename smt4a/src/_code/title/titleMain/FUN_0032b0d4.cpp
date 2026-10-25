@@ -9,7 +9,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_0014e314(...);
 int FUN_00157558(int);
-int FUN_00162790(...);
+int textDrawString(...);
 int efctSetSpeed(...);
 float FUN_00168594(const char *, unsigned int, float);
 int FUN_0016c4b8(...);
@@ -33,12 +33,12 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0014e314. */
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
@@ -129,7 +129,7 @@ unsigned int FUN_0032b0d4(void)
       if (*(char *)(temp_v2 + 0x3c) == '\0') {
         temp_v13 = 0x787878ff;
       }
-      temp_v1 = FUN_001834a4(9,0x11);
+      temp_v1 = asdTMTexTableEntryAt(9,0x11);
       temp_v12 = 0x3f000000;
       temp_v3 = 0;
       temp_v0 = **(short **)(temp_v1 + 0xc);
@@ -149,7 +149,7 @@ unsigned int FUN_0032b0d4(void)
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)(temp_v10 + temp_v9),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(4,temp_v13,temp_v5);
+          textDrawString(4,temp_v13,temp_v5);
         }
         else {
           efctSetSpeed(temp_v6);
@@ -191,7 +191,7 @@ unsigned int FUN_0032b0d4(void)
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)(temp_v10 + (float)temp_v11),(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(4,0xff,temp_v5);
+          textDrawString(4,0xff,temp_v5);
         }
         temp_v5 = g_renderCtx;
         temp_v3 = temp_v3 + 1;

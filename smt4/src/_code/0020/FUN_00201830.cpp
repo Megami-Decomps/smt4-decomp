@@ -30,7 +30,7 @@ void FUN_0032accc(void);
 void FUN_002b76d0(const EffectColor *first, const EffectColor *second, const EffectColor *third,
                   const EffectColor *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_0026281c(char *text, const u8 *item, s32 size);
-void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 a, f32 b);
+void textDrawString(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 a, f32 b);
 
 /* Draws the debug list job: a screen-wide fade overlay, or (in list mode) a window of up to ten item
  * names with the cursor row marked. */
@@ -79,11 +79,11 @@ u32 FUN_00201830(void)
             char text[64];
 
             if (work->cursor == i + first) {
-                FUN_002be5a4(2, 0xFF00FF, "> ", 8.0f, (f32)(i * 14), 0.1f, 0.0f, 1.0f);
+                textDrawString(2, 0xFF00FF, "> ", 8.0f, (f32)(i * 14), 0.1f, 0.0f, 1.0f);
                 color = 0xFF00FF;
             }
             FUN_0026281c(text, work->items + (i + first) * DEBUG_ITEM_SIZE, 0x40);
-            FUN_002be5a4(2, color, text, 20.0f, (f32)(i * 14), 0.1f, 1.0f, 1.0f);
+            textDrawString(2, color, text, 20.0f, (f32)(i * 14), 0.1f, 1.0f, 1.0f);
         }
     }
     FUN_002c198c(g_titleScene);

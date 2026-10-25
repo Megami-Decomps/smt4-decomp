@@ -1,13 +1,13 @@
 /* NON_MATCHING: compiler folds each released member's address into owner-relative stores; retail preserves a separate member pointer across release calls. */
 #include "camp/CampScriptCleanup.h"
 #include "map/mapDepart.h"
+#include "camp/Camp.h"
 
 extern "C" {
 extern GameState g_gameState;
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *buffer);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void *campGetState(void);
 void FUN_002a4bac(u32 list);
 void FUN_002636b0(void);
 }

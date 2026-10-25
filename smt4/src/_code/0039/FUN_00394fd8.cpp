@@ -1,6 +1,7 @@
-/* NON_MATCHING: the final 100-bit clear loop: retail steps a 1-based flag id (pool constant 0x79f, bit = id - 1) beside a separate down counter */
+/* NON_MATCHING: the final 100-bit clear loop now uses retail's 1-based flag id (pool constant 0x79f); armcc strength-reduces the down counter into an up counter (cmp #101) where retail keeps `subs`/bne */
 #include "common.h"
 #include <stddef.h>
+#include "util/RecordPackedValue.h"
 
 /* Counts of carried items: seven categories of 0x78 slots (the last is only 0x32 long), starting at item id 0x3d. */
 struct ItemBoxCounts {
@@ -16,7 +17,6 @@ typedef char ItemBoxCountsOffsets[offsetof(ItemBoxCounts, counts) == 0x168 &&
 
 extern "C" {
 
-s32 recordPackedValue(s32 itemId);
 void rt_memcpy(void *dst, const void *src, u32 bytes);
 
 /* Adds the item counts of one box into another, clamping each count to its stack limit. */
@@ -80,9 +80,10 @@ void FUN_00394fd8(ItemBoxCounts *dst, const ItemBoxCounts *src, s32 keepFlags)
     }
     rt_memcpy(dst->flags, src->flags, sizeof(dst->flags));
     if (keepFlags == 0) {
-        s32 bit = 0x79e;
+        s32 id = 0x79f;
 
-        for (slot = 100; slot != 0; slot--, bit++) {
+        for (slot = 100; slot != 0; slot--, id++) {
+            s32 bit = id - 1;
             dst->flags[bit >> 3] &= ~(1 << (bit & 7));
         }
     }

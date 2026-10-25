@@ -3,9 +3,9 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W6_W6Match3_ContentWordList.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-void *gameGetSlotTable(void);
 u32 dataTable5Count(void);
 Entry0035dd74 *contentEntryFindById(u32 id);
 u32 gameFlagIsSet(u32 flag);

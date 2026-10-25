@@ -1,7 +1,7 @@
 /* NON_MATCHING: Retail retains an inlined constant type-normalization comparison and an unused pool address. */
 #include "ui/MessageMain.h"
 extern "C" {
-void* FUN_002ba85c(s32);
+void* scrGetCommandOwner(s32);
 s32 scrGetArg(u32);
 s32 scrGetCommandFrame(void);
 s32 FUN_0021bdac(void*, s32, s32, s32, s32, s32);
@@ -22,7 +22,7 @@ s32 FUN_0036de98(void)
 {
     MessageWorkA* work = g_messageMain.state;
     s32 kind = requestKind(21);
-    void* context = FUN_002ba85c(kind);
+    void* context = scrGetCommandOwner(kind);
     s32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
     s32 result = FUN_0021bdac(context, argument, frame, kind, 0, 0);

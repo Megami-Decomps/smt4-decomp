@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 struct UnitRecord {
     u8 unk00[0x2c];
@@ -7,7 +8,6 @@ struct UnitRecord {
 
 extern "C" {
 
-void dataTable04FindById(u32 id);
 UnitRecord *gameGetPlayerData(void);
 UnitRecord *gameGetSlotRecord(s32 slot);
 s32 FUN_003df57c(u32 id, u32 kind);

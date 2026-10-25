@@ -1,5 +1,5 @@
 /* NON_MATCHING: entry-address operand registers and damage-call HP copy scheduling differ; remaining instructions match. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "util/FUN_003ee0c0.h"
 #include "util/FUN_003ee0c0.h"
 #include "shard/W5_W5Match7_BattleMask.h"
@@ -19,7 +19,7 @@ void FUN_004fbc30(s32 channel, ScriptUnit *unit, BattleRosterRecordA *record, s3
 // Queue staggered actions for every active, nonexcluded party combatant.
 u32 FUN_00335af4(void)
 {
-    BtlMainStateA *battle = reinterpret_cast<BtlMainStateA *>(btlGetMainState());
+    BtlMainStateA *battle = btlGetMainState();
     FUN_003ee0c0(battle);
     ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     s32 sequence = 0;

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 
 /* The 0x408-byte combatant entry as this script command sees it. */
@@ -20,12 +21,12 @@ s32 scrGetArg(u32 index);
 u32 scrBtlResetEligibleEntryById(void)
 {
     s32 id = scrGetArg(0);
-    BattleMaskState *battle = btlGetMainState();
+    BtlMainStateA *battle = btlGetMainState();
     u64 excluded = g_battleMaskPresets.eligibility.excluded;
     u64 required = g_battleMaskPresets.eligibility.required;
     u64 active = g_battleMaskPresets.eligibility.active;
     for (s32 index = 4; index < 54; ++index) {
-        ScriptResetEntry *entry = &reinterpret_cast<ScriptResetEntry *>(battle->entryMaskView.mask)[index];
+        ScriptResetEntry *entry = &reinterpret_cast<ScriptResetEntry *>(battle->entries)[index];
         u64 flags = entry->flags;
         if ((flags & active) != 0 && (flags & excluded) == 0 && (flags & required) != 0 &&
             entry->id == id) {

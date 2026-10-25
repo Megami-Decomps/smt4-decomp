@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
 
 int scrSetResult(int value);
 u32 btlMainGetDataTable(u32 obj, u32 arg);
-u32 btlGetMainState(void);
 int scrGetArg(u32 index);
 int dataTableGetCount(u32 arg);
 u16 *dataTableGetEntries(u32 table);
@@ -14,7 +14,7 @@ u16 *dataTableGetEntries(u32 table);
 u32 scrCommBtlTableValue(void)
 {
     int requested = scrGetArg(0);
-    u32 field = btlMainGetDataTable(btlGetMainState(), 0xd);
+    u32 field = btlMainGetDataTable(reinterpret_cast<u32>(btlGetMainState()), 0xd);
     u16 *table = dataTableGetEntries(field);
     int count = dataTableGetCount(field);
     int index;

@@ -22,7 +22,7 @@ struct PanelTextureTarget {
 };
 
 extern "C" {
-PanelTexture *FUN_002bf4f8(u32 table, s32 index);
+PanelTexture *asdTMTexTableEntryAt(u32 table, s32 index);
 PanelTextureTarget *asdTMTexTableGetNodeTexture(u32 table, s32 index);
 }
 
@@ -57,29 +57,29 @@ Obj420780::Obj420780()
     unk54[5] = 0;
     const s32 slotTextures[8] = {0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50};
     for (s32 i = 0; i < 8; i++) {
-        PanelTexture *texture = FUN_002bf4f8(0x14, slotTextures[i]);
+        PanelTexture *texture = asdTMTexTableEntryAt(0x14, slotTextures[i]);
         slots[i].x = (f32)texture->x;
         slots[i].y = (f32)texture->y;
     }
-    PanelTexture *texture = FUN_002bf4f8(0x14, 0x46);
+    PanelTexture *texture = asdTMTexTableEntryAt(0x14, 0x46);
     anchors[2].x = (f32)texture->x;
     anchors[2].y = (f32)texture->y;
-    texture = FUN_002bf4f8(0x14, 0x47);
+    texture = asdTMTexTableEntryAt(0x14, 0x47);
     anchors[3].x = (f32)texture->x;
     anchors[3].y = (f32)texture->y;
-    texture = FUN_002bf4f8(0x14, 0x48);
+    texture = asdTMTexTableEntryAt(0x14, 0x48);
     anchors[4].x = (f32)texture->x;
     anchors[4].y = (f32)texture->y;
-    texture = FUN_002bf4f8(0x14, 0x51);
+    texture = asdTMTexTableEntryAt(0x14, 0x51);
     anchors[0].x = (f32)texture->x;
     anchors[0].y = (f32)texture->y;
-    texture = FUN_002bf4f8(0x14, 0x52);
+    texture = asdTMTexTableEntryAt(0x14, 0x52);
     anchors[1].x = (f32)texture->x;
     anchors[1].y = (f32)texture->y;
     anchors[0].y = anchors[1].y;
     scale = (f32) * (s16 *)texture->record;
-    color = packColor((const ColorRecord *)FUN_002bf4f8(0x14, 0x6b)->record);
-    shadowColor = packColor((const ColorRecord *)FUN_002bf4f8(0x14, 0x6e)->record);
+    color = packColor((const ColorRecord *)asdTMTexTableEntryAt(0x14, 0x6b)->record);
+    shadowColor = packColor((const ColorRecord *)asdTMTexTableEntryAt(0x14, 0x6e)->record);
     asdTMTexTableGetNodeTexture(0x14, 3)->mode = 3;
     asdTMTexTableGetNodeTexture(0x14, 2)->mode = 2;
 }

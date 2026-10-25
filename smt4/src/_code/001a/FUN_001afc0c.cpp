@@ -65,7 +65,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
@@ -122,7 +122,7 @@ void FUN_001afc0c(void)
     temp_v3 = FUN_0029efa8(temp_v11);
     temp_v0 = *(short *)(temp_v9 + (temp_v3 + temp_v2) * 2);
     temp_v14[0] = '\0';
-    temp_v6 = FUN_002bf4f8(0x29,0xc1);
+    temp_v6 = asdTMTexTableEntryAt(0x29,0xc1);
     temp_v2 = temp_v11;
     uiScrollHandleActionsOrTouch(temp_v11,temp_v6,temp_v1 + 0x9dc,(int)*(short *)(temp_v1 + 0x9f6),
                  (int)*(short *)(temp_v1 + 0x9f2),(int)*(short *)(temp_v1 + 0x9f4),temp_v14,0,1);

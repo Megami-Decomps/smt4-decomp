@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/dialogIsActive.h"
 
 extern "C" {
 

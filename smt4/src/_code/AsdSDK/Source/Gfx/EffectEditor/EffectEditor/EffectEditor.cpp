@@ -10,6 +10,8 @@
 #include <math.h>
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 
 extern "C" {
@@ -248,14 +250,12 @@ extern const char DAT_0040930c[];
 EffectEditorOptions *FUN_0024dd90(EffectEditorOptions *options);
 void effEditorNodeChainApply(EffectEditorOptions *options);
 s32 padIsButtonPressed(u32 button);
-u32 padAlternateButtonIndex(u32 button);
 __weak void effectEditorTransformPosition(const EffectPositionControl *control,
     const EffMenuPosition *position, EffMenuPosition *result);
 void FUN_0021a250(const EffMenuPosition *position, u32 color,
     const EffMenuMatrix *matrix, u32 resource, f32 scale);
 void FUN_00243224(const EffMenuPosition *first, const EffMenuPosition *second,
     u32 color, u32 resource);
-void *memAlloc(u32 heap, u32 category, u32 flags, u32 size, u32 alignment, u32 clear);
 
 /* NON_MATCHING: aggregate copy shapes and vector temporary allocation differ. */
 // Edit the position vector, then draw its height, ground radius and transformed endpoint.

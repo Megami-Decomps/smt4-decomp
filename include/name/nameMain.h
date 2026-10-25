@@ -32,4 +32,8 @@ typedef char NameWorkPrefixLayoutCheck[sizeof(NameWork) == 0x10 &&
 typedef char NameGlobalsStatusOffsetCheck[offsetof(NameGlobals, status.active) == 0 &&
     offsetof(NameGlobals, status.restoreHelp) == 1 && sizeof(NameGlobals) == 8 ? 1 : -1];
 
+extern "C" {
+void stateSetterConstructDefault(void *a);
+}
+
 #endif

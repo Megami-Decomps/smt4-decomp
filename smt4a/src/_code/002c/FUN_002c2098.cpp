@@ -1,11 +1,11 @@
 /* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. */
 #include "event/eventCommand.h"
 #include "script/ScriptArgs.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 
 void eventSetUnderMessageFade(u32 a, u32 b, s32 c, f32 d);
-s32 scrGetCommandFrame(void);
 
 extern EventCommandGlobals g_eventCommand;
 

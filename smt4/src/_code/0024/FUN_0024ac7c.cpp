@@ -1,4 +1,5 @@
 #include "ui/FrameTex.h"
+#include "shard/FUN_0024ac7c.h"
 
 extern "C" {
 

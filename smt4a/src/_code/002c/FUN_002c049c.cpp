@@ -3,6 +3,7 @@
 #include "gamedata/GameFlags.h"
 #include "camp/CampCec/CampCecSetting.h"
 #include "script/scrScriptProcess.h"
+#include "shard/FUN_002bf520.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ s32 cecQueryOptionalProcess(void);
 void cecProcessCall2(void);
 void cecProcessCall4(void);
 s32 cecProcessForward(void);
-void FUN_002bf520(void);
 void playerSummaryFill(void);
 void FUN_002f4014(void);
 s32 FUN_002e2014(void);

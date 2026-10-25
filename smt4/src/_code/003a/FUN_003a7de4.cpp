@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/PartyMoney.h"
 #include "status/StatusCamera.h"
+#include "shard/FUN_0029c1c8.h"
 
 namespace {
 struct PurchaseEntry {
@@ -31,7 +32,6 @@ s32 gameGlobalsFlagIsClear(void);
 void messageMainSetTargetFlags(s32 flags);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFreeStockSlot(void);
-void FUN_0029c1c8(s32 slot, u16 id, bool discounted);
 s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 

@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "shard/aocFindPackageTable22Record.h"
 
 struct AocPackageFile {
     void *tableFile;

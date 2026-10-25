@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 extern "C" {
 extern const u64 g_battleMaskPresets[];
-BtlMainStateA* btlGetMainState(void);
 u32 scrGetArg(u32 index);
 
 // Set a parameter on eligible reserve combatants with the requested id.

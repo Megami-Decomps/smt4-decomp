@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "addon/aocMain.h"
+#include "bible/bibleDevil.h"
 
 struct RaceLabel {
     char primary[0x10];

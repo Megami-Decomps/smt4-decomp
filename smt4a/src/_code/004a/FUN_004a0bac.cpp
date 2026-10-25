@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation and scheduling only - retail spills the restored HP of the first inlined copy to the stack, hoists the 1.25f constant before the group dispatch and keeps the stock loop limit in r7; control flow and calls are identical. */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTable.h"
 
 namespace {
 /* The player's save record (only the fields the restore touches). */
@@ -28,15 +29,6 @@ struct SlotRecord {
     /* 0x62 */ u16 id;
 };
 
-/* The slot table: which slots are in the party and their records. */
-struct SlotTable {
-    /* 0x0000 */ u8 unk0000[0x1c88];
-    /* 0x1c88 */ s8 party[0x18];
-    /* 0x1ca0 */ s8 reserve[3];
-    /* 0x1ca3 */ u8 unk1ca3[0x139];
-    /* 0x1ddc */ SlotRecord stock[12];
-};
-
 const u16 STATUS_SKIP = 2;
 const u16 STATUS_KEEP = 4;
 const u16 STATUS_NEVER = 0x400;
@@ -44,7 +36,6 @@ const u16 STATUS_NEVER = 0x400;
 
 extern "C" {
 SlotRecord *gameGetSlotRecord(s32 slot);
-SlotTable *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 FUN_0018416c(u16 id);
 }
@@ -104,7 +95,7 @@ extern "C" void FUN_004a0bac(u32 mode, s32 force)
     }
     if (mode == 0) {
         for (s32 i = 0; i < 12; i++) {
-            SlotRecord *record = (u16)i < 12 ? &gameGetSlotTable()->stock[(u16)i] : NULL;
+            SlotRecord *record = (u16)i < 12 ? (SlotRecord *)&gameGetSlotTable()->slots[(u16)i] : NULL;
             if ((force != 0 || (record->status & STATUS_SKIP) == 0) && (record->status & STATUS_NEVER) == 0 &&
                 record != NULL) {
                 slotRestore(record);

@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "shard/buttonHelpGetEntryValue.h"
 
 extern "C" {
 

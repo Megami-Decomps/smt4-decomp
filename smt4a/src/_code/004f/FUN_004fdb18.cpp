@@ -1,4 +1,5 @@
 /* NON_MATCHING: reflected-action payload stores use different saved registers and writeback grouping. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -6,7 +7,6 @@
 
 extern "C" {
 
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, s32);
 }
 

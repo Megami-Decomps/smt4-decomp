@@ -1,7 +1,7 @@
 /* NON_MATCHING: identical except instruction scheduling of the literal-pool loads (retail loads the runner global's address after the constructor, this build hoists it before the process call). */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 /* The save/load screen's runner: its process handle, a running flag and the child it updates. */
 struct SaveLoadRunner {

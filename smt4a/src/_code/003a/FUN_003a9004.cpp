@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BtlMainStateView {
@@ -6,12 +7,11 @@ struct BtlMainStateView {
 };
 
 extern "C" {
-BtlMainStateView *btlGetMainState(void);
 void scrSetResult(s32 result);
 }
 
 extern "C" s32 FUN_003a9004(void)
 {
-    scrSetResult(btlGetMainState()->value);
+    scrSetResult(reinterpret_cast<BtlMainStateView *>(btlGetMainState())->value);
     return 1;
 }

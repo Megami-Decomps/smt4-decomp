@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_001634b4(int);
 int FUN_00164034(...);
 int FUN_00164b5c(...);
@@ -49,7 +49,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164034. */
 /* Supplied declaration required: FUN_00164b5c. */
@@ -61,7 +61,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
@@ -182,8 +182,8 @@ unsigned int FUN_0024e31c(void)
       }
       temp_v9 = 0;
       if (g_btlUi != '\0') {
-        FUN_00162790(3,0xffffffff,&LAB_0024e7b4);
-        FUN_00162790(3,0xffffffff,&LAB_0024e7e0);
+        textDrawString(3,0xffffffff,&LAB_0024e7b4);
+        textDrawString(3,0xffffffff,&LAB_0024e7e0);
       }
       if (*(int *)(temp_v1 + 0x74a0) != 6) {
         if ((*(int *)(temp_v1 + 0x74a0) == 0x13) &&
@@ -210,7 +210,7 @@ unsigned int FUN_0024e31c(void)
           temp_v7 = 0.29f;
           renderCtxCalculateStereoParallax(g_renderCtx);
           temp_v4 = (int)temp_v7;
-          temp_v6 = FUN_001834a4(0xd,0xbd0);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xbd0));
           FUN_00164b5c(2,0xd,0x10,temp_v4,*(unsigned int *)(temp_v1 + 0x12fdc),0x15);
           temp_v5 = *(int *)(temp_v1 + 0x12fec);
           temp_v3 = *(int *)(temp_v1 + 0x12fd8);
@@ -241,7 +241,7 @@ unsigned int FUN_0024e31c(void)
             *(unsigned char *)(temp_v6 + 0x12d0) = 0;
           }
           efctSetSpeed();
-          temp_v6 = FUN_001834a4(0xd,0xbe2);
+          temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xd,0xbe2));
           FUN_00164b5c(2,0xd,0x12,temp_v4,*(unsigned int *)(temp_v1 + 0x12ff8),0x15);
           temp_v5 = *(int *)(temp_v1 + 0x13008) + *(int *)(temp_v1 + 0x12ff4) + temp_v4;
           temp_v14 = *(int *)(temp_v1 + 0x1300c) + *(int *)(temp_v1 + 0x12ff8);

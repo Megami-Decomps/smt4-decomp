@@ -1,4 +1,5 @@
 /* NON_MATCHING: constant angle comparisons become integer-bit tests instead of retail VFP tests; in-memory -O2/-O1/-Ospace trials also differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BattleDirectionEntry {
@@ -20,7 +21,6 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BattleCameraAngle *g_btlCamera;
 f32 FUN_004fad68(BtlAuxA *, u32 kind, s32 x, s32 y);
-BtlMainStateA *btlGetMainState(void);
 void FUN_004fb43c(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
 
 // Choose one of five facing buckets using fixed or camera-relative angle thresholds.

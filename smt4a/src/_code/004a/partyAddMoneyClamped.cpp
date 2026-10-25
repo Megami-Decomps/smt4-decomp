@@ -1,9 +1,9 @@
 #include "shard/W6_W6Match4_PartyWallet.h"
 #include "gamedata/PartyMoney.h"
+#include "gamedata/SaveSlotTable.h"
 
 
 extern "C" {
-u8 *gameGetSlotTable();
 void FUN_00408184(s32 index, u32 amount);
 void countersRaiseA(s32 index, u32 value);
 

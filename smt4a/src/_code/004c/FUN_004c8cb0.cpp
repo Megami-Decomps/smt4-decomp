@@ -1,14 +1,11 @@
 /* NON_MATCHING: suppression-mask loads and call-stack argument registers differ from retail. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
-
-struct BattleMaskState;
-struct BattleMaskEntry;
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA* btlGetMainState(void);
-BattleMaskEntry *FUN_003eaf20(BattleMaskState *battle);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 BtlHelpEntryA *FUN_00200a68(u32 kind, u16 message, u32 object, u32 command,
                          const void *combatant, u8 option, u32 category, u32 resource);
 
@@ -31,7 +28,7 @@ u32 FUN_004c8cb0(u32 object, s32 index, u8 option)
     u32 command = reinterpret_cast<CommandView*>(battle)->command;
     if (index >= 0) {
         return reinterpret_cast<u32>(FUN_00200a68(1, 0, object, command,
-            FUN_003eaf20(reinterpret_cast<BattleMaskState *>(battle)), option, index, 0));
+            FUN_003eaf20(battle), option, index, 0));
     }
     return reinterpret_cast<u32>(FUN_00200a68(0, 0, object, command, NULL, option, -1, 0));
 }

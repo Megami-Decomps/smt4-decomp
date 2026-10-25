@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 namespace {
 /* Record of the equipment table (dataTable08Sub2). */
@@ -65,7 +66,6 @@ extern "C" {
 DemonRecord *FUN_00184310(u32 id);
 EquipRecord *dataTable08Sub2GetRecord(u32 id);
 SkillListRecord *dataTable00FindById(u32 id);
-SkillRecord *dataTable04FindById(u32 id);
 
 /* Whether the unit carries equipment or a skill of element `wanted` (12 also takes the "special" flag);
    with `restricted` set only skill-table entries of kind 2 count and the equipment itself is skipped. */
@@ -88,7 +88,7 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
             }
         }
         for (s32 i = 0; i < 8; i++) {
-            SkillRecord *skill = dataTable04FindById(unit->equipment->skills[i]);
+            SkillRecord *skill = (SkillRecord *)dataTable04FindById(unit->equipment->skills[i]);
             if (skill != NULL) {
                 if (restricted == 0) {
                     if (skill->element == wanted) {
@@ -117,7 +117,7 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
         }
         for (s32 i = 0; i < 8; i++) {
             u16 id = unit->demonSkills->skills[i];
-            SkillRecord *skill = dataTable04FindById(id);
+            SkillRecord *skill = (SkillRecord *)dataTable04FindById(id);
             if (skill != NULL) {
                 if (restricted == 0) {
                     if (skill->element == wanted) {
@@ -140,7 +140,7 @@ u32 battleUnitHasElementEntry(BattleUnit *unit, u32 wanted, s32 restricted)
     if (unit->skillList != NULL) {
         SkillListRecord *list = dataTable00FindById(unit->demonId);
         for (s32 i = 0; i < 8; i++) {
-            SkillRecord *skill = dataTable04FindById(list->skills[i]);
+            SkillRecord *skill = (SkillRecord *)dataTable04FindById(list->skills[i]);
             if (skill != NULL) {
                 if (restricted == 0) {
                     if (skill->element == wanted) {

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 // The unit the marker follows (observed fields).
@@ -32,7 +33,6 @@ extern "C" {
 extern u32 g_btlUiBlock;
 extern BattleVector3 DAT_00493560;
 
-void *btlGetMainState(void);
 MarkerEntry *btlMainFindEntryByListedId(void *state, s32 id);
 BattleVector3 FUN_0023cd08(void *state, s32 id, s32 flag);
 s32 FUN_00289fa8(u32 block, s32 kind, s32 flag, BattleVector3 position);
@@ -49,7 +49,7 @@ static inline BattleVector3 vectorAdd(BattleVector3 left, BattleVector3 right)
 // hidden unit, or a screen marker otherwise) and the step then waits for it to appear.
 void FUN_00344cf4(void *unused, MarkerRequest *request)
 {
-    MarkerEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), request->unit->id);
+    MarkerEntry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), request->unit->id);
     if (entry == NULL) {
         request->result = 0;
         return;
@@ -57,7 +57,7 @@ void FUN_00344cf4(void *unused, MarkerRequest *request)
     if (request->stage == 0) {
         u32 flags = entry->flags;
         if ((flags & 0x10) != 0) {
-            BattleVector3 position = vectorAdd(FUN_0023cd08(btlGetMainState(), request->unit->id, 0),
+            BattleVector3 position = vectorAdd(FUN_0023cd08(static_cast<void *>(btlGetMainState()), request->unit->id, 0),
                                                request->unit->offset);
             switch (request->kind) {
             case 1:

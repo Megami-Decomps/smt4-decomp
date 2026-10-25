@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f8edc` (_code @ 0x2f8edc, 0x160 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int FUN_003ee0c0(void);
 int FUN_003f0e20(int, int);
 int bitsAt60Set(...);
@@ -64,11 +64,11 @@ unsigned int FUN_002f8edc(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = btlUnitGet(g_btlScriptUnit);
   if (temp_v0 < 0x6d) {
-    temp_v2 = btlGetMainState();
+    temp_v2 = reinterpret_cast<int>(btlGetMainState());
     temp_v3 = *(int *)(temp_v2 + 0x1ed4) + temp_v0 * 0x1d0;
-    temp_v2 = btlGetMainState();
+    temp_v2 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v2,temp_v0);
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     FUN_003ee0c0();
     FUN_004fc094(0,temp_v1,0,temp_v3,0,*(unsigned int *)(temp_v2 + 0x25c),0xffffffff,0xffffffff,
                  *(unsigned int *)(temp_v2 + 600),*(unsigned int *)(temp_v2 + 0x25c),0,0,1,0,0,0,0,0,0,0,1,0

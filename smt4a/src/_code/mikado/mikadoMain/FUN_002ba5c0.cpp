@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 typedef void (*MikadoProcFunc)(void);
 
@@ -25,7 +26,6 @@ struct MikadoModule {
 extern "C" {
 extern MikadoModule g_mikado;
 
-void *jyoucyuGetTableEntry(u32 index);
 u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, MikadoProcFunc onUpdate,
                    MikadoProcFunc onEnd, MikadoWork *work, u32 owner);
 void FUN_002bd1f4(void);

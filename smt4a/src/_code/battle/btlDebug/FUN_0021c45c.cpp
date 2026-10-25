@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 
@@ -73,7 +74,6 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_00387240. */
 extern int gameDataFlagTestBit(int *);
-extern int FUN_003e48bc(void);
 extern int FUN_003e4d68(unsigned int);
 extern unsigned short FUN_003e53ec(void);
 /* Supplied declaration required: FUN_003eb200. */

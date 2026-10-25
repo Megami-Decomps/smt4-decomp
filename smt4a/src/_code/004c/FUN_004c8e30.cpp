@@ -1,4 +1,5 @@
 /* NON_MATCHING: mask-word scheduling and the help-submission stack arguments use different registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BattleHelpMaskView {
@@ -15,7 +16,6 @@ struct BattleHelpStateView {
 
 extern "C" {
 extern BattleHelpMaskView g_btlHelp;
-BtlMainStateA *btlGetMainState();
 u32 FUN_00200a68(u32 first, u32 second, u32 value, u32 resource,
                  u32 fifth, u32 sixth, s32 seventh, u32 eighth);
 

@@ -28,7 +28,7 @@ struct CecCardSprite {
 extern "C" {
 void FUN_00164b5c(s32 mode, u32 file, u32 sprite, s32 x, s32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
-CecCardSprite *FUN_001834a4(u32 file, u32 sprite);
+CecCardSprite *asdTMTexTableEntryAt(u32 file, u32 sprite);
 void FUN_002e1b64(u32 display, s32 x, s32 y, u32 layer);
 void FUN_00183bb0();
 }
@@ -47,12 +47,12 @@ extern "C" void FUN_0034248c(CecCardLabel *label, const CecCardEntry *entry,
                       placement->x + x, placement->y + y, 101);
     }
     drawSetColorFromRGBA8(0x82fff500);
-    const CecCardSprite *entrySprite = FUN_001834a4(46, 83);
+    const CecCardSprite *entrySprite = asdTMTexTableEntryAt(46, 83);
     FUN_002e1b64(entry->display, placement->x + entrySprite->x + x,
                   placement->y + entrySprite->y + y, 101);
     FUN_00183bb0();
     FUN_00164b5c(2, 46, 14, placement->x + x, placement->y + y, 101);
-    const CecCardSprite *labelSprite = FUN_001834a4(46, 158);
+    const CecCardSprite *labelSprite = asdTMTexTableEntryAt(46, 158);
     s32 center = 6 + (labelSprite->dimensions[0] - label->width) / 2;
     FUN_001527d8(label->text, 0xffffff00);
     FUN_0025cc78(reinterpret_cast<const void *>(label->text), labelSprite->x + placement->x + (x + center),

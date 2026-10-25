@@ -5,6 +5,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/fillTwoWordsWithByte.h"
 
 extern "C" {
 
@@ -66,7 +67,6 @@ void uiSpriteInitializeState(void *sprite, u32 group, s32 id, u32 size, void *ow
 u32 spriteHandleCreate(u32 kind);
 void positionStateSet(u32 handle, u32 a, u32 color, f32 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
-void fillTwoWordsWithByte(u32 *words, s32 value);
 void FUN_003e4140(void *state);
 void FUN_00268770(void *process);
 void FUN_0026b0e4(void *process);

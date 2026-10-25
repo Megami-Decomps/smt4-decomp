@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct ScriptUnitState {
@@ -22,7 +23,6 @@ extern u32 g_btlScriptUnit; /* 0x57113c */
 
 s32 scrGetArg(u32 index);
 ScriptUnitRef *btlUnitGet(u32 unit);
-BtlScriptState *btlGetMainState(void);
 void btlSelectCandidateEntries(s32 mode);
 
 /* Script command: puts the current unit in mode 12 and stores the two arguments (flagged 0x10000) as the battle's pending values. */
@@ -34,8 +34,8 @@ u32 FUN_0037ef44(void)
     ScriptUnitState *state = btlUnitGet(g_btlScriptUnit)->state;
 
     state->mode = 12;
-    btlGetMainState()->firstValue = first | 0x10000;
-    btlGetMainState()->secondValue = second | 0x10000;
+    reinterpret_cast<BtlScriptState *>(btlGetMainState())->firstValue = first | 0x10000;
+    reinterpret_cast<BtlScriptState *>(btlGetMainState())->secondValue = second | 0x10000;
     btlSelectCandidateEntries(2);
     return 1;
 }

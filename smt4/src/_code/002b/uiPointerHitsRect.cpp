@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/uiPointerHitsRect.h"
 
 extern "C" {
 

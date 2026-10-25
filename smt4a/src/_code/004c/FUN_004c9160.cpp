@@ -1,10 +1,10 @@
 /* NON_MATCHING: suppression and request arguments recovered; mask load grouping, frame size and current-command addressing still differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA* btlGetMainState(void);
 u32 FUN_00200a68(u32 kind, u32 flags, u32 object, u32 command,
                  s32 mode, u32 option, u32 category, u32 resource);
 u32 FUN_004c8e30(u32 object, u32 flags, u32 option);

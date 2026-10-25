@@ -6,9 +6,9 @@
 
 extern "C" {
 
-int FUN_00162790(...);
+int textDrawString(...);
 int efctSetSpeed(void);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_00240210(...);
 int resourceRunOperationIfUnblocked(...);
 int VectorSignedToFloat(...);
@@ -23,10 +23,10 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_00240210. */
 extern int recordGetModeForId(int);
@@ -66,14 +66,14 @@ void FUN_002aa038(int param_1,int param_2)
   temp_v4 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
   efctSetSpeed();
   temp_v2 = FUN_002a4894(temp_v1);
-  temp_v2 = FUN_001834a4(0x1a,temp_v2 + 0xb6);
+  temp_v2 = asdTMTexTableEntryAt(0x1a,temp_v2 + 0xb6);
   if (*(int *)(temp_v0 + 0x3fc) >= 4) {
     FUN_001835b4(2,0x1a,0xb5,param_1,param_2,0x97);
   }
   temp_v13 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = 0;
   do {
-    temp_v5 = FUN_001834a4(0x1a,temp_v3 + 0xb6);
+    temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v3 + 0xb6);
     temp_v7 = *(int *)(temp_v0 + 0x3fc);
     temp_v11 = (int)*(short *)(temp_v5 + 8);
     if (temp_v7 >= 4) {
@@ -91,7 +91,7 @@ void FUN_002aa038(int param_1,int param_2)
     temp_v7 = objectApplyIfUnblocked(temp_v0 + 0x560);
     temp_v8 = temp_v13 + temp_v3;
     if (temp_v8 < temp_v7) {
-      temp_v6 = FUN_001834a4(0x1a,0xb2);
+      temp_v6 = asdTMTexTableEntryAt(0x1a,0xb2);
       temp_v7 = temp_v0;
       FUN_00240210(temp_v0,temp_v4,temp_v12,temp_v8);
       if (temp_v7 == 0) {
@@ -104,16 +104,16 @@ void FUN_002aa038(int param_1,int param_2)
                          );
       VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + param_1 + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3
                          );
-      FUN_00162790(2,temp_v9,temp_v12);
+      textDrawString(2,temp_v9,temp_v12);
     }
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 8);
   temp_v1 = FUN_002a4894(temp_v1);
-  temp_v1 = FUN_001834a4(0x1a,temp_v1 + 200);
+  temp_v1 = asdTMTexTableEntryAt(0x1a,temp_v1 + 200);
   temp_v2 = resourceRunOperationIfUnblocked(temp_v0 + 0x560);
   temp_v3 = FUN_002a4894(temp_v0 + 0x560);
   temp_v5 = FUN_002a4894(temp_v0 + 0x560);
-  temp_v5 = FUN_001834a4(0x1a,temp_v5 + 200);
+  temp_v5 = asdTMTexTableEntryAt(0x1a,temp_v5 + 200);
   temp_v7 = *(int *)(temp_v0 + 0x3fc);
   if (temp_v7 >= 4) {
     temp_v11 = (int)*(short *)(temp_v5 + 8);
@@ -165,7 +165,7 @@ void FUN_002aa038(int param_1,int param_2)
     FUN_001835b4(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   efctSetSpeed();
-  temp_v5 = FUN_001834a4(0x1a,0xc5);
+  temp_v5 = asdTMTexTableEntryAt(0x1a,0xc5);
   FUN_00240210(temp_v0,temp_v4,temp_v12,temp_v2 + temp_v3);
   temp_v4 = temp_v10;
   if (temp_v0 != 0) {
@@ -179,7 +179,7 @@ void FUN_002aa038(int param_1,int param_2)
   if ((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6) {
     temp_v4 = 0xf5ff9fff;
   }
-  FUN_00162790(3,temp_v4,temp_v12);
+  textDrawString(3,temp_v4,temp_v12);
   efctSetSpeed();
   return;
 }

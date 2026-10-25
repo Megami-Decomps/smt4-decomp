@@ -1,6 +1,7 @@
 /* NON_MATCHING: steps the lazily started event script task (start, wait for the script, branch to the next entry, finish); written from the decompilation, the state switch and its fall-through are not compared with retail */
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "shard/FUN_001386b4.h"
 
 #define LAZY_STATE_START 0
 #define LAZY_STATE_RUN_ENTRY 1
@@ -48,7 +49,6 @@ void obj04Finish(void);
 void FUN_0031ed60(LazyScriptTask *task, s32 value);
 s32 FUN_0035d83c(LazyScriptTask *task);
 void FUN_0035d7bc(LazyScriptTask *task);
-void FUN_001386b4(void);
 void gameDataBlocksReleaseHold(s32 mask);
 void gameDataFlagsClearBits(s32 mask);
 void gameDataBlocksMaskClearBits(s32 mask);

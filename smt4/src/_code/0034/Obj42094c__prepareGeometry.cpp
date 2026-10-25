@@ -1,8 +1,8 @@
 /* NON_MATCHING: particle state and floating-point operations are recovered; VFP register and paired-store scheduling still differ. */
 #include "classes/Obj42094c.h"
+#include "util/Random.h"
 extern "C" {
 s32 randBetween(s32 minimum, s32 maximum);
-u32 randNextInRange(u32 limit);
 f32 FUN_002b70cc(f32 phase);
 f32 phaseCosInterpolate(f32 phase);
 }

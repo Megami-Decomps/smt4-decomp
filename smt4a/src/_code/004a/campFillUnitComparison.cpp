@@ -2,13 +2,14 @@
 #include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
 #include "gamedata/DevilRecordA.h"
+#include "shard/campFillUnitComparison.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PartyComparisonTable : PartyStatusSlots {
     s8 count;
 };
 typedef char PartyComparisonCountOffset[offsetof(PartyComparisonTable, count) == 0x1CA3 ? 1 : -1];
 
-extern "C" SlotTable *gameGetSlotTable();
 
 static inline UnitRecord *findComparisonPartyUnit(u32 id)
 {
@@ -29,7 +30,6 @@ extern "C" {
 Table01Record *FUN_00180118(u16);
 void FUN_0035ad50(u32, UnitRecord *);
 s32 recordGetScaledMaximum(const UnitRecord *);
-SlotTable *gameGetSlotTable();
 
 void campFillUnitComparison(CampUnitComparison *row, u32 id, s32 compareParty)
 {

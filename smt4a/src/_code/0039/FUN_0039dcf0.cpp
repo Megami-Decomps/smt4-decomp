@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleSelection {
@@ -6,14 +7,13 @@ struct BattleSelection {
 };
 extern "C" {
 s32 scrGetArg(u32 index);
-void *btlGetMainState();
 BattleSelection *FUN_001568f8(void *battle, s32 id);
 void scrSetResult(s32 result);
 /* Returns the selected battle entry's value to the script. */
 s32 FUN_0039dcf0()
 {
     s32 id = scrGetArg(0);
-    BattleSelection *entry = FUN_001568f8(btlGetMainState(), id);
+    BattleSelection *entry = FUN_001568f8(static_cast<void *>(btlGetMainState()), id);
     scrSetResult(entry->value);
     return 1;
 }

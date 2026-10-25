@@ -1,10 +1,10 @@
 /* NON_MATCHING: resumable voice loading uses different saved registers and table/gain load scheduling. */
 #include "shard/GlobalBlocks.h"
 #include <stddef.h>
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 extern u32 DAT_00588fcc;
-s32 scrGetCommandFrame();
 u32 FUN_001029da(const void *descriptor);
 u32 FUN_001566a8(u32 group, u32 id, u32 kind, u8 flags, u8 priority, f32 leftGain, f32 rightGain);
 

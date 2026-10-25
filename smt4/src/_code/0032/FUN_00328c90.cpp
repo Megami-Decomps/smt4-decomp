@@ -1,5 +1,6 @@
 /* NON_MATCHING: instructions identical to retail; the retail literal pool carries one extra unreferenced word ahead of 0xcf78. */
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct Party {
 } Party;
 
 int scrSetResult(int value);
-int FUN_00295408(void);
 u16 *gameGetUnitRecord(int id);
 
 /* Script command: looks up a value for the current party entry (from gameGetUnitRecord's table at FUN_00295408()) and passes it to scrSetResult. */

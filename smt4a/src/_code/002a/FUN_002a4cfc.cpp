@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "camp/PartyPanel/PartyPanel.h"
+#include "shard/FUN_00215bbc.h"
 
 extern "C" {
 
@@ -13,7 +15,6 @@ int obj48Arm(...);
 int pair40Set(...);
 
 int sysPlaySe(...);
-int FUN_00215bbc(void);
 int FUN_00230ac0(...);
 int campReleaseSlotTouchRegions(void);
 int bibleOpenMode0(...);
@@ -40,7 +41,6 @@ int slotSetRequest(int, int, int);
 int configOpen(...);
 int campChangeState(...);
 int FUN_00215254(void);
-int FUN_00215bd0(void);
 int FUN_0021b274(...);
 int bgmRestart(int);
 int uniteStartOrQueueRequest(...);

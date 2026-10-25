@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_002886b0.h"
 
 extern "C" {
 
@@ -9,10 +10,10 @@ int FUN_001af84c(...);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
 
@@ -36,7 +37,6 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001af84c. */
-extern int FUN_002886b0(unsigned int);
 extern int FUN_002886c8(unsigned int);
 /* Supplied declaration required: FUN_00290994. */
 extern int questIsCompleted(unsigned int);
@@ -47,12 +47,12 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern unsigned int FUN_002bcddc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 
 
@@ -109,24 +109,24 @@ void FUN_001a6d98(void)
       if ((*(int *)(temp_v0 + 4) != 2) || (temp_v4 = FUN_0029efa8(temp_v3), temp_v4 != temp_v10)) {
         temp_v4 = FUN_0029efc0(temp_v3);
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v4 + temp_v10) * 2);
-        temp_v4 = FUN_002bf4f8(0x29,temp_v10 + 0x9e);
+        temp_v4 = asdTMTexTableEntryAt(0x29,temp_v10 + 0x9e);
         if (temp_v11 != 0) {
-          temp_v5 = FUN_002bf4f8(0x29,0x9c);
+          temp_v5 = asdTMTexTableEntryAt(0x29,0x9c);
           temp_v6 = temp_v11;
           FUN_001af84c(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0);
-          temp_v5 = FUN_002bf4f8(0x29,0x9b);
+          temp_v5 = asdTMTexTableEntryAt(0x29,0x9b);
           temp_v7 = FUN_002bcddc(temp_v11,0);
           textFormatBuffer(temp_v13,&LAB_001a7270,temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002be5a4(2,temp_v6,temp_v13,(int)*(short *)(temp_v5 + 8));
-          temp_v5 = FUN_002bf4f8(0x29,0x9a);
+          textDrawString(2,temp_v6,temp_v13,(int)*(short *)(temp_v5 + 8));
+          temp_v5 = asdTMTexTableEntryAt(0x29,0x9a);
           drawSkillCategoryLabel(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f);
-          temp_v5 = FUN_002bf4f8(0x29,0x9d);
+          temp_v5 = asdTMTexTableEntryAt(0x29,0x9d);
           temp_v8 = FUN_002886c8(temp_v11);
           if (temp_v8 != 0) {
             FUN_002bf380(2,0x29,0xf,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -151,7 +151,7 @@ void FUN_001a6d98(void)
      (((temp_v4 = *(int *)(temp_v0 + 4), temp_v4 == 2 || temp_v4 == 6 || (temp_v4 == 7 || temp_v4 == 8)) ||
       (temp_v4 == 9 || temp_v4 == 10)))) {
     temp_v4 = FUN_0029efa8(temp_v3);
-    temp_v10 = FUN_002bf4f8(0x29,temp_v4 + 0xb5);
+    temp_v10 = asdTMTexTableEntryAt(0x29,temp_v4 + 0xb5);
     temp_v5 = FUN_0029efc0(temp_v3);
     temp_v11 = (unsigned int)*(unsigned short *)(temp_v12 + (temp_v5 + temp_v4) * 2);
     efctSetSpeed();
@@ -167,7 +167,7 @@ void FUN_001a6d98(void)
     else {
       FUN_002bf288(2,0x29,0xad,temp_v5,temp_v4,0xa1);
     }
-    temp_v4 = FUN_002bf4f8(0x29,0xac);
+    temp_v4 = asdTMTexTableEntryAt(0x29,0xac);
     temp_v5 = vec2GetXInt(temp_v0 + 0x14c);
     temp_v8 = vec2GetYInt(temp_v0 + 0x14c);
     temp_v12 = g_titleScene;
@@ -191,18 +191,18 @@ void FUN_001a6d98(void)
       (**(romwright_code **)(temp_v12 + 0x1328))();
       *(unsigned char *)(temp_v12 + 0x1324) = 0;
     }
-    temp_v12 = FUN_002bf4f8(0x29,0xb3);
+    temp_v12 = asdTMTexTableEntryAt(0x29,0xb3);
     temp_v6 = temp_v11;
     FUN_001af84c(temp_v11,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xab,1);
-    temp_v12 = FUN_002bf4f8(0x29,0xb2);
+    temp_v12 = asdTMTexTableEntryAt(0x29,0xb2);
     temp_v7 = FUN_002bcddc(temp_v6,0);
     textFormatBuffer(temp_v13,&LAB_001a7270,temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,temp_v11,temp_v13,(int)*(short *)(temp_v12 + 8));
+    textDrawString(3,temp_v11,temp_v13,(int)*(short *)(temp_v12 + 8));
     temp_v12 = questIsCompleted(temp_v6);
     temp_v4 = *(short *)(temp_v10 + 10) + temp_v2;
     temp_v5 = *(short *)(temp_v10 + 8) + temp_v1;
@@ -212,10 +212,10 @@ void FUN_001a6d98(void)
     else {
       FUN_002bf288(2,0x29,0xaf,temp_v5,temp_v4,0xab);
     }
-    temp_v12 = FUN_002bf4f8(0x29,0xb1);
+    temp_v12 = asdTMTexTableEntryAt(0x29,0xb1);
     drawSkillCategoryLabel(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
-    temp_v12 = FUN_002bf4f8(0x29,0xb4);
+    temp_v12 = asdTMTexTableEntryAt(0x29,0xb4);
     temp_v4 = FUN_002886c8(temp_v6);
     if (temp_v4 != 0) {
       FUN_002bf380(2,0x29,0xf,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,

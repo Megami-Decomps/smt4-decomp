@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ struct MenuState {
 
 extern MenuState *g_menuState;
 
-DataTable04Record *dataTable04FindById(u32 id);
 
 /* Opens the item prompt for `itemId`; it is usable only if requested and the item's record allows it. */
 void FUN_002e4308(s16 itemId, u8 arg, s32 usable)
@@ -37,7 +37,7 @@ void FUN_002e4308(s16 itemId, u8 arg, s32 usable)
     menu->unk11 = arg;
     menu->flagged = 0;
     if (usable != 0) {
-        DataTable04Record *record = dataTable04FindById(itemId);
+        DataTable04Record *record = (DataTable04Record *)dataTable04FindById(itemId);
         if (record == NULL) {
             usable = 0;
         } else {

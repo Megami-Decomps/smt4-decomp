@@ -2,6 +2,7 @@
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct ScriptRunState;
 extern "C" {
@@ -20,7 +21,6 @@ void buttonHelpSetMode(s32 mode);
 void FUN_003a7b2c(void);
 u32 gameDataBlocksGetWord(void);
 s32 aocDataBlockHasEntries(void);
-SlotTable *gameGetSlotTable(void);
 
 void FUN_0020b490(EngineUnits *result, s32 mode)
 {

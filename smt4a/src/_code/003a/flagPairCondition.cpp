@@ -1,4 +1,5 @@
 #include "shard/Shard003A.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
 
 extern "C" {
 

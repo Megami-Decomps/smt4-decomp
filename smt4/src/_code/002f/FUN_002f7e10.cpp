@@ -1,19 +1,19 @@
 /* NON_MATCHING: effect/zero constants are not hoisted into saved registers, and the effect path has a separate return epilogue. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "battle/BattleUnitSlot.h"
+#include "gamedata/FlagBitTests.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
-BtlMainState *btlGetMainState(void);
 GameUnitSortRecord *gameGetUnitRecord(s32 slot);
 u32 FUN_00246d38(s32 actor, u32 unit, BtlActionRecord *target, u32 mask);
 u32 FUN_00246e24(s32 actor, u32 unit, BtlActionRecord *target, u32 mask, s32 clearStatus);
 void objectFlagsClear(GameUnitSortRecord *unit, u16 mask);
 void objectFlagSetBit(GameUnitSortRecord *unit, u16 bit);
-u8 flagWordTestBit(GameUnitSortRecord *unit, u32 bit);
 void FUN_002505c0(s32 kind, u32 unit, u32 effect, s32, s32, s32, s32);
 
 // Set or clear a status bit on a battle target or stored unit, playing the status effect when set.

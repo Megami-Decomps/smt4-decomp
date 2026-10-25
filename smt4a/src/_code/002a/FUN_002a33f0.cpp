@@ -1,12 +1,10 @@
 /* NON_MATCHING: retail loads the constants 6 and 1 into callee-saved registers before the calls (build materializes them at the last call) and uses a wider register set. */
 #include "common.h"
+#include "script/ScriptArgs.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 
-void scrCommMessageSetMode(s32 arg0);
-u32 FUN_002ba85c(void);
-s32 scrGetArg(s32 index);
-u32 scrGetCommandFrame(void);
 void FUN_0021bdac(u32 arg0, s32 arg1, u32 frame, s32 arg3, s32 arg4, s32 arg5);
 
 typedef struct MessageMain {
@@ -26,7 +24,7 @@ void FUN_002a33f0(void)
     if (g_messageMain.window != NULL) {
         g_messageMain.window[MESSAGE_WINDOW_MODE] = 0x15;
     }
-    u32 owner = FUN_002ba85c();
+    u32 owner = scrGetCommandOwner();
     s32 arg = scrGetArg(0);
     u32 frame = scrGetCommandFrame();
 

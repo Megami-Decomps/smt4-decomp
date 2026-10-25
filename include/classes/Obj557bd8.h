@@ -3,8 +3,8 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 extern "C" int asdOperatorDelete(void *block);
 
 /* The battle target selection's information panel (vtable at 0x557bd8), 0xF4 bytes. */

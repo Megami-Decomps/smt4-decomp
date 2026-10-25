@@ -1,4 +1,5 @@
 /* NON_MATCHING: status-index predicate register, clear/apply block layout and merged message call differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleMessageMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -9,7 +10,6 @@ extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
 void *btlUnitGet(u32 id);
-BtlMainStateA *btlGetMainState();
 u32 FUN_004bf9a0(u32 status);
 u32 FUN_004c8340(s32 source, s32 target, u32 status, s32 mode, s32 flags);
 void FUN_004fda78(s32 mode, s32 flags, void *source, BattleRosterRecordA *target,

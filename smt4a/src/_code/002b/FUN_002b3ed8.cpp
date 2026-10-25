@@ -2,10 +2,10 @@
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
+#include "util/EffMenuListAppend.h"
 
 extern "C" {
 void* memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, u32 mode);
-void effMenuListAppend(EffMenuNode* node, u32 list);
 u32 displayIsStereoActive(void);
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 

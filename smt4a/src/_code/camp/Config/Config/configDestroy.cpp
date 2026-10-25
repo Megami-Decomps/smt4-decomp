@@ -5,13 +5,13 @@
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/DataTableSections.h"
 
 extern "C" {
 
 int asdTMTexTableReleaseNode(int type, u32 node);
 int scrScriptProcessDestroy(u32 resource);
 int ifTouchRegionRemove(void);
-int dataTableFree(int id);
 int obj04Finish(void);
 
 extern ConfigWorkA *g_config;

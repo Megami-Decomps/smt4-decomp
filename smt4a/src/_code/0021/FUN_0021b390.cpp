@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_0021b390.h"
 extern "C" {
 s32 libc_sprintf(char *destination, const char *format, ...);
 void textFormatBuffer(char *destination, const char *format, const char *text);

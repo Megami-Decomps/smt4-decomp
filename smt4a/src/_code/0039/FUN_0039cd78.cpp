@@ -1,4 +1,5 @@
 /* NON_MATCHING: the excluded-mask test's high-word AND takes its operands in the other order (and r0, r1, ip vs and r0, ip, r1). */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,8 +7,6 @@
 
 extern "C" {
 
-void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 
 /* Script command: result 1 when every candidate combatant has status bit `arg0`, else 0. */
 s32 FUN_0039cd78(void)

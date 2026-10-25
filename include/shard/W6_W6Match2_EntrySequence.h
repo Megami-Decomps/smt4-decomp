@@ -25,4 +25,12 @@ void libc_strcpy(unsigned int *param_1,unsigned int *param_2);
 void asdSequenceRequest(s32 state, const void *arg, u32 size);
 }
 
+extern "C" {
+bool FUN_0017fb54(void);
+}
+
+extern "C" {
+void FUN_00220ffc(void);
+}
+
 #endif

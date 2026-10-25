@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -30,12 +31,11 @@ extern u32 g_titleScene;
 s32 surfaceCopy(Surface *dest, Surface *src);
 s32 FUN_002bfadc(s32 arg, Surface *surface);
 s32 renderCtxSelectStereoLayout(u32 scene);
-TitleWork *jobGetWork(u32 job);
 
 /* Title job step: once active and ready, renders the scene into the surface at half size and marks it captured. */
 s32 titleCaptureReadySurfaceOnce(u32 job)
 {
-    TitleWork *work = jobGetWork(job);
+    TitleWork *work = (TitleWork *)jobGetWork(job);
     TitleState *state = &work->state;
 
     if (state->active == 0) {

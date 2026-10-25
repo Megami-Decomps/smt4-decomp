@@ -5,6 +5,12 @@
 #include "common.h"
 #include <stddef.h>
 
+/* A unit's detail record: bit 9 of the halfword at 0x16 marks an eligible unit. */
+struct BtlUnitDetail {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 flags;
+};
+
 /* The object a unit is linked to; its id at +0x46 is what a script refers to the unit by. */
 typedef struct BtlUnitLink {
     /* 0x00 */ u8 unk00[0xE];
@@ -38,7 +44,10 @@ typedef struct BtlUnitEntry {
     /* 0x1B8 */ s16 mp;
     /* 0x1BA */ s16 mpMax;
     /* 0x1BC */ u8 unk1BC[0xA];
-    /* 0x1C6 */ u16 flagMask;   /* bit n set: flag n is on */
+    union {
+        /* 0x1C6 */ u16 flagMask;       /* bit n set: flag n is on */
+        /* 0x1C6 */ u16 rosterLevel;    /* the same halfword, listed as the level column of the battle roster */
+    };
     /* 0x1C8 */ u8 unk1C8[4];
     /* 0x1CC */ u16 level;      /* averaged by the script */
     /* 0x1CE */ u8 unk1CE[0x24];
@@ -47,7 +56,8 @@ typedef struct BtlUnitEntry {
     /* 0x216 */ u8 unk216[0x62];
     /* 0x278 */ BtlUnitSource *source;
     /* 0x27C */ BtlUnitLink *link;
-    /* 0x280 */ u8 unk280[8];
+    /* 0x280 */ u8 unk280[4];
+    /* 0x284 */ BtlUnitDetail *detail;
 } BtlUnitEntry; /* 0x288 bytes */
 
 typedef struct BtlState {
@@ -86,6 +96,7 @@ typedef char BtlUnitEntrySizeCheck[sizeof(BtlUnitEntry) == 0x288 ? 1 : -1];
 typedef char BtlStateSizeCheck[sizeof(BtlState) == 0x49C8 ? 1 : -1];
 typedef char BtlStateModeOffsetCheck[offsetof(BtlState, mode) == 0x64 ? 1 : -1];
 typedef char BtlStateUnitsOffsetCheck[offsetof(BtlState, units) == 0x1FC0 ? 1 : -1];
+typedef char BtlUnitDetailOffsetCheck[offsetof(BtlUnitEntry, detail) == 0x284 && offsetof(BtlUnitDetail, flags) == 0x16 ? 1 : -1];
 typedef char BtlUnitSourceOffsetCheck[offsetof(BtlUnitEntry, source) == 0x278 ? 1 : -1];
 typedef char BtlUnitLinkIdOffsetCheck[offsetof(BtlUnitLink, id) == 0x46 ? 1 : -1];
 typedef char BattleActionUnitSizeCheck[sizeof(BattleActionUnit) == 0xF18 ? 1 : -1];

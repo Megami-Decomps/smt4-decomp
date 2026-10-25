@@ -1,15 +1,13 @@
-#include "common.h"
+#include "script/ScriptVm.h"
 
 extern "C" {
 
-struct ScriptState;
-
-u32 scrRunOpcodes(ScriptState *state);
+u32 scrRunOpcodes(ScriptVmProcess *process);
 
 /* Forwards to scrRunOpcodes, the function that follows it. */
-u32 scrRunOpcodesStub(ScriptState *state)
+u32 scrRunOpcodesStub(ScriptVmProcess *process)
 {
-    return scrRunOpcodes(state);
+    return scrRunOpcodes(process);
 }
 
 } /* extern "C" */

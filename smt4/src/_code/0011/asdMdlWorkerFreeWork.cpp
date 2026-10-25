@@ -1,9 +1,9 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 extern void *g_asdMdlWorker;
-extern void *jobGetWork(u32 job);
 extern void asdMemFree(void *memory);
 
 /* Frees the model worker's work area and clears its global pointer. */

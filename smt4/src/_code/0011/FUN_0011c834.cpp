@@ -1,6 +1,6 @@
 /* NON_MATCHING: only register allocation differs (retail reuses r5 for the refcount pointer and then the success result; built uses r6 for the pointer and r5 for the result) */
 #include "nn/Result.h"
-#include "nn/os/CriticalSectionLock.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 static const char g_ndmServiceName[] = "ndm:u";
 
@@ -17,7 +17,7 @@ s32 asdModelForwardChecked(u32 *session, const char *name, u32 length, u32 flags
 /* Opens the "ndm:u" service session on the first reference; returns the failure result or 0. */
 s32 FUN_0011c834(void)
 {
-    CriticalSectionLock guard(g_ndmLock);
+    ScopedCriticalLock guard(g_ndmLock);
 
     if (g_ndmRefCount == 0) {
         FUN_002c1398();

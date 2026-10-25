@@ -36,7 +36,7 @@ struct SlotScreen {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 getUnlockedSlotCount(u32 argument);
-IconPosition *FUN_001834a4(u32 table, u32 index);
+IconPosition *asdTMTexTableEntryAt(u32 table, u32 index);
 void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scale, s32 iconX, s32 iconY,
                   s32 *x, s32 *y, u8 *extra);
 void FUN_003c33e8(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
@@ -54,7 +54,7 @@ void FUN_0037c988(SlotScreen *screen, u32 argument, s32 drawExtra, s32 mode, u32
     s32 unlocked = getUnlockedSlotCount(argument);
     for (s32 slot = 0; slot < 8; slot++) {
         ScreenOffset position = offset;
-        IconPosition *icon = FUN_001834a4(0x1a, slot + 0x17d);
+        IconPosition *icon = asdTMTexTableEntryAt(0x1a, slot + 0x17d);
         if (slot >= unlocked) {
             FUN_001835b4(2, 0x1a, 0x229, icon->x + position.x, icon->y + position.y, 0x65);
             FUN_001835b4(2, 0x1a, 0x16f, icon->x + position.x, icon->y + position.y, 0x65);

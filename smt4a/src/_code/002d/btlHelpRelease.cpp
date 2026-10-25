@@ -1,4 +1,5 @@
 #include "battle/btlHelp.h"
+#include "shard/JobWork.h"
 
 /* The work area of the job that runs the help screens. */
 struct BtlHelpWorkA {
@@ -10,7 +11,6 @@ extern "C" {
 
 extern BtlHelpListA *g_btlHelp;
 
-BtlHelpWorkA *jobGetWork(void);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 mode);
 void asdMemFree(void *block);
@@ -33,9 +33,9 @@ static __inline BtlHelpEntryA *btlHelpListRemove(BtlHelpListA *list, BtlHelpEntr
 }
 
 /* Frees every help entry and the help list itself, then stops the job it runs. */
-void btlHelpRelease(void)
+void btlHelpRelease(u32 job)
 {
-    BtlHelpWorkA *work = jobGetWork();
+    BtlHelpWorkA *work = (BtlHelpWorkA *)jobGetWork(job);
     BtlHelpListA *list = g_btlHelp;
 
     if (list != NULL) {

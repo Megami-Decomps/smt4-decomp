@@ -115,4 +115,8 @@ extern "C" {
 u8 *gameDataBlockGetArea28350(void);
 }
 
+extern "C" {
+void bgmStopNoForce(u32 a, u32 b);
+}
+
 #endif

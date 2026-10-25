@@ -1,5 +1,6 @@
 /* NON_MATCHING: linked-action construction uses a smaller saved-register set and different target lookup scheduling. */
 /* Queues the linked reflection actions and optionally clears a target's status flag. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -7,7 +8,6 @@
 
 extern "C" {
 
-BtlMainState *btlGetMainState(void);
 BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 
 u32 FUN_00246e24(s32 actor, u32 options, BtlActionRecord *target, u32 value, s32 clearStatus)

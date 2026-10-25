@@ -1,5 +1,6 @@
 /* NON_MATCHING: exact 92-row control/instruction sequence except work base R7 and +0x100 view R8 are swapped from retail; alternate allocation/optimization candidate. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/FlagBitTests.h"
 
 namespace {
 struct RequestedUnitWork {
@@ -26,7 +27,6 @@ extern "C" {
 s32 partyPanelGetRequestedUnitId();
 u8* gameGetSlotTable();
 RequestedUnitRecord* gameGetUnitRecord(u32 index);
-u8 flagWordTestBit(const RequestedUnitRecord*, u32 bit);
 void FUN_002579bc(s32 index);
 
 s32 campCecClassifyRequestedUnit(void* context)

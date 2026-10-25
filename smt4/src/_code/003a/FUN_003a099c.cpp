@@ -2,6 +2,7 @@
 #include "shard/S2Scene3a.h"
 #include "ui/UiSpriteState.h"
 #include "util/FUN_00230df0.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct ScriptRunState;
 struct ModelBoneAttachmentRoot;
@@ -13,7 +14,6 @@ s32 vec2GetYInt(const UiSpriteState *animation);
 s32 vec2GetXInt(const UiSpriteState *animation);
 s32 uiSpriteGetCompletionState(const UiSpriteState *animation);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
-s32 FUN_0029e0f8(void);
 u32 tableGroupFindEntryIndex(void *resource, const char *name);
 void scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 s32 scrRunOpcodesStub(ScriptRunState *process);

@@ -3,7 +3,6 @@
 #include "camp/CampCec/CampCecSetting.h"
 
 extern "C" {
-s32 campCecSettingIsDone(void);
 void campCecSettingOpen(void);
 void campCecSettingDestroy(void);
 void buttonHelpSetPreset(s32 preset);

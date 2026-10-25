@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern u8 *FUN_002bf4f8(u32 file, s32 index);
+extern u8 *asdTMTexTableEntryAt(u32 file, s32 index);
 
 typedef struct Range {
     /* 0x0 */ s16 first;
@@ -22,7 +22,7 @@ typedef struct Entry {
 /* Reads the current entry's position and range (its own range, or the defaults with bit 15 masked off). */
 void FUN_00231434(u32 file, s32 index, int *x, int *y, int *first, int *second)
 {
-    Entry *entry = (Entry *)FUN_002bf4f8(file, index);
+    Entry *entry = (Entry *)asdTMTexTableEntryAt(file, index);
     u32 value;
 
     *x = entry->x;

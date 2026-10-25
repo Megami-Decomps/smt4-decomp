@@ -1,13 +1,14 @@
-/* NON_MATCHING: retail uses `mov r0, #0` where armcc emits `mov r0, #0`. */
 #include "common.h"
+#include "shard/gameDataBlocksSetWord.h"
 
 extern "C" {
 
-void gameDataBlocksSetWord(s32 value);
+s32 FUN_00284dbc(void);
 void scrSetResult(s32 value);
 
 s32 scrCommClearGameDataWord(void)
 {
+    FUN_00284dbc();
     gameDataBlocksSetWord(0);
     scrSetResult(0);
     return 1;

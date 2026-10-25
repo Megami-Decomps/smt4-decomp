@@ -3,10 +3,10 @@
 #include "gamedata/GameFlags.h"
 #include "shard/Shard0046.h"
 #include "util/FUN_003a7630.h"
+#include "shard/messageSetMode.h"
 
 extern "C" {
 void sysPlaySe(s32 id);
-void messageSetMode(s32 mode);
 void placeWinStartText(const u8 *name);
 void FUN_003c1060();
 void FUN_003c3e14();

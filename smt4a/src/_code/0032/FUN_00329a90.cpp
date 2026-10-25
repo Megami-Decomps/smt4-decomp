@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
+#include "text/TextDraw.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -28,9 +29,8 @@ void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 void FUN_00355428(void);
 void FUN_00164b5c(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
-LayoutEntry *FUN_001834a4(u32 table, u32 entry);
+LayoutEntry *asdTMTexTableEntryAt(u32 table, u32 entry);
 void textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_00162790(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 a, f32 b, f32 c);
 
 /* Draws the departure screen's panels under a temporary render-state preset; state 14 slides the
    result panel in and shows its counter. */
@@ -64,17 +64,17 @@ u32 FUN_00329a90(void)
                 offset = 0.0f;
             }
             FUN_00164b5c(2, 19, 30, (s32)offset, 0, 11);
-            LayoutEntry *panel = FUN_001834a4(19, 0x1105);
-            FUN_001834a4(19, 0x110d);
-            LayoutEntry *counter = FUN_001834a4(19, 0x1101);
-            LayoutEntry *frame = FUN_001834a4(19, 0x1100);
-            FUN_001834a4(19, 0x1104);
-            FUN_001834a4(19, 0x1102);
-            FUN_001834a4(19, 0x1103);
+            LayoutEntry *panel = asdTMTexTableEntryAt(19, 0x1105);
+            asdTMTexTableEntryAt(19, 0x110d);
+            LayoutEntry *counter = asdTMTexTableEntryAt(19, 0x1101);
+            LayoutEntry *frame = asdTMTexTableEntryAt(19, 0x1100);
+            asdTMTexTableEntryAt(19, 0x1104);
+            asdTMTexTableEntryAt(19, 0x1102);
+            asdTMTexTableEntryAt(19, 0x1103);
             FUN_001835b4(2, 19, 0x1242, (s32)((f32)panel->x + offset + (f32)frame->x), panel->y + frame->y, 11);
             char text[32];
             textFormatBuffer(text, "%d\201@\202l\202\201\202\203\202\203\202\201", depart->value);
-            FUN_00162790(2, 0xffffffff, text, (f32)panel->x + offset + (f32)counter->x,
+            textDrawString(2, 0xffffffff, text, (f32)panel->x + offset + (f32)counter->x,
                          (f32)(panel->y + counter->y), 0.0f, 1.0f, 1.0f);
         }
         renderStackPop(&g_renderCtx->stackA);

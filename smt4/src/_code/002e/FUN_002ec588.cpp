@@ -15,7 +15,6 @@ int buttonHelpSetPreset(...);
 int textFormatBuffer(...);
 
 int FUN_001db56c(void);
-int FUN_00220ffc(void);
 int runWinClose(void);
 int gameDataFlagsSetBits(int);
 int FUN_0025981c(void);

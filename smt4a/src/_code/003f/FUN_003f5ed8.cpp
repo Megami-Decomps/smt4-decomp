@@ -43,7 +43,7 @@ void FUN_00163aa4(void *state, f32 scale);
 void FUN_00228b04(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 ifTouchGetSelectionMode(void);
-u32 FUN_001834a4(u32 kind, u32 index);
+u32 asdTMTexTableEntryAt(u32 kind, u32 index);
 s32 FUN_003450d4(void *list, u32 layout, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
 s32 FUN_001517b4(s32 which, s32 arg);
 void eventQueueAddUniqueIfValid(u32 event);
@@ -89,7 +89,7 @@ void FUN_003f5ed8(DialogWork *work)
     u8 flag = 0;
     DialogWorkView *view = (DialogWorkView *)work;
 
-    if (FUN_003450d4(work->list, FUN_001834a4(0x31, 0xAB), work->panel, view->panelA, view->panelB, view->panelC, &flag, 0, 1) != 0) {
+    if (FUN_003450d4(work->list, asdTMTexTableEntryAt(0x31, 0xAB), work->panel, view->panelA, view->panelB, view->panelC, &flag, 0, 1) != 0) {
         return;
     }
     if ((FUN_001517b4(0, 1) != 0 || touchMode == 6) && *work->selected != 0) {

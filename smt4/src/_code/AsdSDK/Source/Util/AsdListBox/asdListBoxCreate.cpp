@@ -1,12 +1,12 @@
 /* NON_MATCHING: the process name is a .constdata literal in retail (DAT_00409d80) and a stripped debug call precedes the allocation. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemAlloc.h"
 
 extern "C" {
 s32 FUN_001fe640(u32 handle);
 void asdListBoxDestroy(u32 handle);
 
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
 void rowWidgetInit(void *widget, s32 rows, s32 unk);

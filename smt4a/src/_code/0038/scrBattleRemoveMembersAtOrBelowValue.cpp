@@ -1,4 +1,5 @@
-#include "battle/BattleMemberList.h"
+#include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" u32 FUN_001ba3d4(u16 id);
 
@@ -7,7 +8,7 @@ extern "C" u32 scrBattleRemoveMembersAtOrBelowValue(void)
 {
     s32 enabled = scrGetArg(0);
     s32 limit = scrGetArg(1);
-    BattleMemberList *battle = btlGetMainState();
+    BtlMainStateExtA *battle = btlGetMainStateExt();
     if (enabled != 0) {
         for (std::vector<u16>::iterator member = battle->members.begin(); member != battle->members.end();) {
             if (limit < (s32)(FUN_001ba3d4(*member) & 0xffff)) {

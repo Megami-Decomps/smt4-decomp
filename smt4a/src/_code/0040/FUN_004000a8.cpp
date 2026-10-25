@@ -1,4 +1,5 @@
 /* NON_MATCHING: canonical mask type and direct marker union remove one row; retail still pairs the marker loads as LDM instead of two LDRs (47 versus 48 rows). */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/Table8Record.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -7,7 +8,6 @@ extern "C" {
 
 extern BattleCandidateMasks DAT_00573c90;
 
-BtlMainStateA *btlGetMainState(void);
 u32 FUN_00400164(void *actor, u16 value);
 Table8Record *dataTable8FindRecord(u32 id);
 s32 FUN_00400284(void *actor, s32 arg1, Table8Record *record, s32 arg3);

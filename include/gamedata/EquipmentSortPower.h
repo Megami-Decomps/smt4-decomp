@@ -20,4 +20,8 @@ u16 FUN_00230f44(const u16 *entry);
 }
 #endif
 
+extern "C" {
+u32 contentGetEntryKind(u32 id);
+}
+
 #endif

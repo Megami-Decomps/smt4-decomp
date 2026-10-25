@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the zero path as an unpredicated block after the epilogue and loads both constants up front; built predicates the zero store and loads the constants late. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/JobWork.h"
 
 struct SlideJob {
     u8 unk00[0x24];
@@ -11,7 +12,6 @@ struct SlideJob {
 extern "C" {
 
 s32 scrGetArg(u32 index);
-SlideJob *jobGetWork(u32 job);
 
 // Step counts are limited to 4 while FUN_00203d74 reports true.
 static __inline s32 limitSteps(s32 steps)
@@ -27,7 +27,7 @@ u32 FUN_0031bed8(void)
 {
     u32 job = scrGetArg(0);
     s32 steps = limitSteps(scrGetArg(1));
-    SlideJob *work = jobGetWork(job);
+    SlideJob *work = (SlideJob *)jobGetWork(job);
     if (steps == 0) {
         work->start = 0.0f;
         return 1;

@@ -1,6 +1,7 @@
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
+#include "shard/mapMarkerSynchronizeModelState.h"
 
 
 extern "C" {

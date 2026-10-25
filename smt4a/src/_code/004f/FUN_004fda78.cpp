@@ -1,14 +1,13 @@
 /* NON_MATCHING: reflection flag branch layout omits retail's five compiler NOP hints. */
 /* Queues a reflection action for a battle actor and its entry group. */
 #include "battle/btlReflect.h"
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
+#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 
-BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
-s16 btlFindEntryValue(s32 group, u32 kind);
 
 ReflectAction *FUN_004fda78(s32 actor, s32 secondary, u32 options,
                           BattleRosterMotionA *target, s32 value, u16 extraId)

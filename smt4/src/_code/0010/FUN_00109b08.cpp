@@ -21,7 +21,7 @@ struct IconEntry {
 };
 
 extern "C" {
-IconFrameRecord *FUN_002bf4f8(u32 table, u32 sprite);
+IconFrameRecord *asdTMTexTableEntryAt(u32 table, u32 sprite);
 void FUN_002bf380(u32 layer, u32 table, u32 composed);
 void efctSetSpeed(f32 speed);
 
@@ -53,7 +53,7 @@ u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
             sprite = iconSetMain[index].sprite;
             composed = iconSetMain[index].composed;
         }
-        IconFrameRecord *frame = FUN_002bf4f8(ICON_TABLE, sprite);
+        IconFrameRecord *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
         if (frame != NULL && skip == 0) {
             if (composed >= 0)
                 FUN_002bf380(ICON_LAYER, ICON_TABLE, composed);
@@ -75,7 +75,7 @@ u16 FUN_00109b08(s32 set, u32 index, s32 skip, f32 x, f32 y)
         efctSetSpeed(1.0f);
         return width;
     }
-    IconFrameRecord *frame = FUN_002bf4f8(ICON_TABLE, sprite);
+    IconFrameRecord *frame = asdTMTexTableEntryAt(ICON_TABLE, sprite);
     if (frame == NULL || skip != 0) {
         efctSetSpeed(1.0f);
         return width;

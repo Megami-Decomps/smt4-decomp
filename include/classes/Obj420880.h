@@ -2,6 +2,7 @@
 #define CLASSES_OBJ420880_H
 
 #include "classes/Obj420794.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* A filter child (vtable at 0x420880, named after it until its real name is known; 0xC bytes):
  * a scalar parameter that starts at 1. */

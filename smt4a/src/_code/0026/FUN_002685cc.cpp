@@ -4,7 +4,6 @@
 extern "C" {
 extern void *g_aocSystem;
 Table04ExtraRecord *FUN_001b2e78(void *system, u32 id);
-Table04Record *dataTable04FindById(u32 id);
 void *dataTableGet(u32 type, u32 group);
 u32 dataTableGetCount(void *table);
 const void *dataTableGetEntries(void *table);

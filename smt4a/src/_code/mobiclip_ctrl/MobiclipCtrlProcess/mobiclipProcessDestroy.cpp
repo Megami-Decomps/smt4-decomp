@@ -2,6 +2,7 @@
  * and frees the work area. */
 #include "common.h"
 #include "mobiclip_ctrl/MobiclipCtrlProcess.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int asdGxPresetRequest(int arg);
 int asdMemFree(void *ptr);               /* heap free */
 int asdCameraInitAreas(void);
 int asdOperatorDeleteB(u32 movie);
-extern MobiclipProcessWork *jobGetWork(u32 arg);
 
 extern MobiclipProcessGlobals g_mobiclipProcess;
 
@@ -18,7 +18,7 @@ void mobiclipProcessDestroy(u32 arg)
     MobiclipProcessWork *work;
 
     asdCameraInitAreas();
-    work = jobGetWork(arg);
+    work = (MobiclipProcessWork *)jobGetWork(arg);
     if (work->unk79 != 0) {
         work->unk79 = 0;
         asdGxPresetRequest(1);

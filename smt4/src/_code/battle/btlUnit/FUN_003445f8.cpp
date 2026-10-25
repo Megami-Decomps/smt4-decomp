@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003445f8` (_code @ 0x3445f8, 0x6fc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -47,7 +48,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002630e0. */
-extern unsigned int btlGetMainState(void);
 extern unsigned int FUN_002c501c(void);
 /* Supplied declaration required: FUN_003d64dc. */
 /* Supplied declaration required: FUN_003d6b7c. */
@@ -84,7 +84,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
   temp_v8 = *(float *)(g_btlMain + 0x570);
   if ((temp_v2 == 1 || temp_v2 == 5) || temp_v2 == 6) {
     if (*(unsigned int *)(g_btlMain + 0x760) < 4) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       temp_v5 = FUN_00256940(g_btlMain,temp_v4,1);
       if ((temp_v5 != 0) && ((*(unsigned int *)(g_btlMain + 0x634) & 0x1000000) == 0)) {
         btlReflectQueueKind34(0,*(unsigned int *)(param_2 + 8));
@@ -137,7 +137,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
   case 0xc:
   case 0xd:
     if (*(int *)(param_2 + 0x14) != 0) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
@@ -166,7 +166,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
     if (*(int *)(param_2 + 0x14) == 0) {
       return;
     }
-    temp_v4 = btlGetMainState();
+    temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
     FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
     if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
       in_s0 = *(float *)(g_btlMain + 0x580);
@@ -294,7 +294,7 @@ LAB_00344904:
     break;
   case 0x18:
     if (*(int *)(param_2 + 0x14) != 0) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
       temp_v2 = *(short *)(param_2 + 0x48);
       temp_v4 = *(unsigned int *)(param_2 + 0x28);
@@ -321,7 +321,7 @@ LAB_00344904:
     return;
   case 0x19:
     if (*(int *)(param_2 + 0x14) != 0) {
-      temp_v4 = btlGetMainState();
+      temp_v4 = reinterpret_cast<unsigned int>(btlGetMainState());
       FUN_0023cd08(temp_v4,(int)*(short *)(*(int *)(param_2 + 0x14) + 0x62),0);
       if ((*(unsigned int *)(*(int *)(param_2 + 0x14) + 0x50) & 0x10) != 0) {
         in_s0 = *(float *)(g_btlMain + 0x580);

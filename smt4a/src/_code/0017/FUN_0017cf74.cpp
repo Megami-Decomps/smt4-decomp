@@ -3,7 +3,6 @@
 
 extern "C" {
 
-s32 globalCriticalSectionEnterForward(void);
 s32 globalCriticalSectionLeaveForward(void);
 void FUN_001963e0(void);
 

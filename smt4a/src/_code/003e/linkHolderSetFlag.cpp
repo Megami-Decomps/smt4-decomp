@@ -1,4 +1,5 @@
 #include "shard/Shard003E.h"
+#include "shard/linkHolderSetFlag.h"
 
 extern "C" {
 

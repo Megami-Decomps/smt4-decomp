@@ -1,11 +1,11 @@
 /* NON_MATCHING: reset-store scheduling, thread descriptor stack placement and saved-register allocation differ. */
 #include "mobiclip_ctrl/MoviePlayerInitialization.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 extern "C" {
 extern void *DAT_0044d158;
 extern ThreadStackStorage *DAT_0044d15c;
 void *memAlloc(u32 heap, u32 alignment, u32 mode, u32 bytes, u32 pageSize, u32 flags);
-void *asdOperatorNew(u32 bytes);
 void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 bytes);
 void mwmofilterDeblockerInit(void *queue);
 void nn_os_LightEvent_Initialize(void *event, bool manualReset);

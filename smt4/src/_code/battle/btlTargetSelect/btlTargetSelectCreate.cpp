@@ -28,7 +28,6 @@ extern BtlTargetSelect *g_btlTargetSelect;
 extern const u8 DAT_004017f4;
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 option, u32 bytes, s32 fromFront);
 /* This factory supplies an owner tag even though the allocator body ignores it. */
-void *asdOperatorNew(u32 bytes, void *owner);
 s32 FUN_002e0730(u32 job);
 s32 FUN_002f4aec(u32 job);
 void btlTargetSelectDestroy(u32 job);

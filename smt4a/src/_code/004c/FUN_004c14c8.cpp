@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail reads the 64-bit state flags with one ldrd; armcc here splits it into two
  * ldr and schedules the roll result in r0 instead of r1 */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 
@@ -15,7 +16,6 @@ extern "C" {
 
 extern BtlPassiveFlagMasks DAT_005713f0;
 
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skillIds);
 const PassiveSkillRecord *dataTable41FindById(u32 id);

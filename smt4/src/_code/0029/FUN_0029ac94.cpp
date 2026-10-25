@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "shard/FUN_0029ac94.h"
 
 extern "C" {
 

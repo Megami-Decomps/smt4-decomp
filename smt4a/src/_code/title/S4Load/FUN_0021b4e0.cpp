@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 struct LoadProfileLabels { const char *text[4]; };
 extern "C" {
@@ -11,7 +12,6 @@ extern S4Load *g_s4Load;
 extern const LoadProfileLabels DAT_00536bdc;
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
     RelativeDirectory *directory, u32 entry);
-void FUN_002e59f8(const char *source, char *destination, u32 size);
 void FUN_00359974(s32 slot, u32 value, s32 digits, s32 leadingZero);
 
 void FUN_0021b4e0(s32 selected)

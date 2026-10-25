@@ -2,8 +2,8 @@
 #define CLASSES_OBJ4208F8_H
 
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 extern "C" int asdMemFreeNonNull(void *block);
 
 /* A three-component vector (position / velocity / axis). */

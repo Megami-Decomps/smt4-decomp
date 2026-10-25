@@ -1,4 +1,5 @@
 /* NON_MATCHING: the third mask test and the marked-entry test are predicated here; retail branches (same as FUN_00380e34). */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -32,7 +33,6 @@ extern "C" {
 extern const u64 g_battleMaskPresets[];
 
 s32 scrGetArg(u32 index);
-BtlMainStateA *btlGetMainState(void);
 SkillHp *FUN_003f0e20(BtlMainStateA *battle, s32 index);
 EntryRef *FUN_003eca48(BtlMainStateA *battle, u32 id);
 s32 FUN_003ec668(BtlMainStateA *battle, s32 slot, s32 kind);

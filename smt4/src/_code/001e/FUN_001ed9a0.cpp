@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (209 rows against 209): same flow, constants, render-target push/pop and float maths; retail reads `visible` through a pointer to a 0x300 sub-block of the save/load UI (add r0,r4,#768; ldrb [r0,#84]) and the entry-lock byte as (ui+index)+844, keeps the zero constant in r7 instead of r6, and loads the three globals in a different order, which a flat struct does not reproduce */
 #include "gamedata/DataTable.h"
+#include "shard/FUN_0029dfc0.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -64,16 +65,15 @@ struct CaptionRecord {
 extern SaveLoadGlobals g_saveLoadUI;   /* 0x44de2c */
 extern TitleScene *g_titleScene;       /* 0x44ea00 */
 
-s32 FUN_0029dfc0(s32 arg);
 s32 FUN_002996d8(s32 arg);
 void FUN_002bed3c(void);
 u32 FUN_002c5d80(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
-TitleCaption *FUN_002bf4f8(s32 a, s32 b);
+TitleCaption *asdTMTexTableEntryAt(s32 a, s32 b);
 f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
 s32 FUN_002bf380(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
 s32 libc_strlen(const u8 *text);
-s32 FUN_002be5a4(s32 a, s32 b, const u8 *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
+s32 textDrawString(s32 a, s32 b, const u8 *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
 s32 FUN_002ae038(f32 *color);
 s32 screenDrawShadedRect(s32 x, s32 y, s32 w, s32 h, s32 depth);
 
@@ -118,8 +118,8 @@ u8 FUN_001ed9a0(void)
                 FUN_002bed3c();
                 renderTargetPush(g_titleScene, FUN_002c5d80(1, 0));
                 efctSetSpeed(1.0f);
-                FUN_002bf4f8(0x36, 0x56);
-                TitleCaption *caption = FUN_002bf4f8(0x36, 0x59);
+                asdTMTexTableEntryAt(0x36, 0x56);
+                TitleCaption *caption = asdTMTexTableEntryAt(0x36, 0x59);
                 s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.305f);
                 FUN_002bf380(2, 0x36, 7, parallax, 0, 0xF1);
                 s32 entry = cursorUi->hasCursor;
@@ -130,7 +130,7 @@ u8 FUN_001ed9a0(void)
                 s32 length = libc_strlen(text);
                 s32 half = (s32)((f32)(length * height) * 0.5f);
                 f32 x = (f32)caption->x + (f32)(width - half) * 0.5f + (f32)parallax;
-                FUN_002be5a4(4, -1, text, x, (f32)caption->y, 0.0f, 0.0f, 1.0f);
+                textDrawString(4, -1, text, x, (f32)caption->y, 0.0f, 0.0f, 1.0f);
                 renderTargetPop(g_titleScene);
                 efctSetSpeed(1.0f);
             }

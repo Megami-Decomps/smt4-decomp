@@ -1,11 +1,12 @@
 /* NON_MATCHING: retail uses `movne r1, #1` where armcc emits `movne r0, #1`. */
 #include "common.h"
+#include "script/ScriptArgs.h"
+#include "shard/scrGetArg.h"
 
 extern "C" {
 
 struct BattleCamera { u8 unk000[0x6a8]; u8 enabled; };
 extern BattleCamera *g_btlCamera;
-s32 scrGetArg(u32 index);
 
 s32 scrCommSetBattleCameraEnabled(void)
 {

@@ -4,6 +4,7 @@
 #include "common.h"
 #include "result/WhisperEffect.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdTMTexTableLoadEntryAsync.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef void (*VoidFunc)(void);
 int randBetween(int low, int high);                    /* random integer in [low, high] */
 int soundChannelStopAll(int id);
 int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
-int asdTMTexTableLoadEntryAsync(int type, int index);
 int devilGetRecord(void);
 int memClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);

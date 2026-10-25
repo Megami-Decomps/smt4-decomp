@@ -1,6 +1,7 @@
 /* NON_MATCHING: ranking transitions and helper arguments are recovered; resource predicates, shared state commits, and switch branch placement differ. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/campCecSetObjectValue.h"
 
 struct RankingScriptProcess {
     /* 0x000 */ u8 unk000[0x108];
@@ -38,7 +39,6 @@ s32 FUN_001517b4(u32 input, u32 mode);
 s32 padButtonIsPressed(u32 button);
 u32 gameDataBlocksGetWord27E90();
 void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
-void campCecSetObjectValue(u32 value);
 }
 
 // Drive the ranking screen's open, script, confirmation, and close transitions.

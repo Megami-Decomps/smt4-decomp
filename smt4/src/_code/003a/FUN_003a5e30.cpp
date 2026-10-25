@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 #include "util/FUN_002c58c8.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 inline void *operator new(unsigned int, void *place) { return place; }
 
@@ -66,7 +67,6 @@ s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
 void FUN_00343c0c(u32 id, s32 value);
 void gameCounterAddSaturating(s32 counter, s32 amount);
-void *asdOperatorNew(u32 bytes);
 
 /* Builds a selection scene: constructs its rectangles, entries and pages, clears its state, creates
  * its window and, when opened with `mode` 1, its button help; otherwise starts the background

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 struct BtlMainStateA;
@@ -5,7 +6,6 @@ struct BtlMainStateA;
 extern "C" {
 u32 scrGetArg(u32);
 void scrSetResult(s32);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 
 u32 FUN_003a8734(void)

@@ -4,7 +4,7 @@
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
+SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
 s32 FUN_0035fa18(BtlUiObjCA *widget);
 void FUN_004aa0b0(BtlUiA *ui, u32 alternate, u32 mode, f32 x, f32 y, f32 depth);
 
@@ -22,7 +22,7 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
         sprite = 0x415;
     else if (slot == 4)
         sprite = 0x1CC;
-    const SpriteInfo *layout = FUN_001834a4(13, sprite);
+    const SpriteInfo *layout = asdTMTexTableEntryAt(13, sprite);
     if (slot != 4) {
         FUN_004aa0b0(ui, alternate, 0, static_cast<f32>(layout->x + (x + 39)),
                      static_cast<f32>((y + 17) + layout->y) + (alternate ? 0.0f : -2.0f), 0.0f);
@@ -30,7 +30,7 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
     }
     s32 anchorX = layout->x;
     s32 anchorY = layout->y;
-    layout = FUN_001834a4(13, 0x416);
+    layout = asdTMTexTableEntryAt(13, 0x416);
     s32 centerOffsetX, centerOffsetY;
     if (layout->size) {
         centerOffsetX = -(layout->x + layout->size[0] / 2);
@@ -40,9 +40,9 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
         centerOffsetY = -(layout->y + ((layout->bounds.height & 0x7FFF) >> 1));
     }
     if (FUN_0035fa18(&ui->objC))
-        layout = FUN_001834a4(13, 0x71);
+        layout = asdTMTexTableEntryAt(13, 0x71);
     else
-        layout = FUN_001834a4(13, 0x70);
+        layout = asdTMTexTableEntryAt(13, 0x70);
     FUN_004aa0b0(ui, alternate, 0,
                  static_cast<f32>((layout->x + x) + (anchorX + centerOffsetX)),
                  static_cast<f32>((layout->y + y) + (anchorY + centerOffsetY)), 0.0f);

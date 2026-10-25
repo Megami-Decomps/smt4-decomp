@@ -1,17 +1,16 @@
-#include "shard/Shard0032.h"
+#include "script/ScriptVm.h"
 #include "script/ScriptArgs.h"
+#include "shard/scrSetResult.h"
 
 extern "C" {
-
-extern ScriptRef g_scrContext;
 
 /* Stores the script command's result and clears the waiting flag. */
 void scrSetResult(s32 value)
 {
-    ScriptState *state = g_scrContext.state;
+    ScriptVmProcess *process = g_scrContext.active;
 
-    state->unk3B = 0;
-    state->result = value;
+    process->tags[SCRIPT_VM_RESULT_SLOT] = SCRIPT_VM_TAG_INT;
+    process->values[SCRIPT_VM_RESULT_SLOT].i = value;
 }
 
 } /* extern "C" */

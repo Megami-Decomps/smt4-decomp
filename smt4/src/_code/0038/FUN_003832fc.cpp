@@ -1,5 +1,6 @@
 /* NON_MATCHING: duplicate-id scan: retail jumps from the inner loop straight to the outer loop's increment and does not unroll it; armcc unrolls this form */
 #include "common.h"
+#include "shard/FUN_0023ea64.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ typedef struct HunterCompany {
 } HunterCompany;
 
 extern s32 sortCompareEntryKey(const HunterPick *left, const HunterPick *right);
-extern s32 FUN_0023ea64(u8 *table);
 extern s32 FUN_00385afc(u8 *table);
 extern s32 FUN_00385b1c(u8 *table);
 extern HunterRecord *dataTable27Sub0GetRecord(u8 *table, s32 index);

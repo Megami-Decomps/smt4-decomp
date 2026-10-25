@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
@@ -11,7 +12,7 @@ typedef struct Object {
 extern Object *g_placeWin;
 
 /* Calls vec2GetXInt on the member at 0x34 of the object at 0x57F578, if there is one. */
-void FUN_00284f50(void)
+s32 FUN_00284f50(void)
 {
     if (g_placeWin != NULL) {
         vec2GetXInt(g_placeWin->member34);

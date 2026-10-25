@@ -1,4 +1,5 @@
 /* NON_MATCHING: command-menu cursor to (action, argument) mapping; retail loads the blocked-command masks with ldr/ldm pairs instead of ldrd, keeps a 36-byte frame (9 words) and the work pointer in r6, and lowers the switch with a different jump table order */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BtlMenuCursor {
@@ -45,7 +46,6 @@ struct PlayerCommandState {
 extern "C" {
 extern u32 DAT_00573b88[];   /* blocked-command masks; the entries used are at 8 and 18 */
 
-BtlStateFlags *btlGetMainState(void);
 PlayerCommandState *gameGetPlayerData(void);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 bit);
@@ -57,7 +57,7 @@ u32 FUN_002cc9e0(BtlMenuWork *work, u32 mode);
 void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
 {
     s32 index = 0;
-    BtlStateFlags *state = btlGetMainState();
+    BtlStateFlags *state = reinterpret_cast<BtlStateFlags *>(btlGetMainState());
     BtlBits bits = state->bitsA;
     if (((bits.low & DAT_00573b88[8]) | (bits.high & DAT_00573b88[9])) != 0) {
         *action = BTL_MENU_ACTION_BLOCKED;
@@ -97,7 +97,7 @@ void FUN_002ccde8(BtlMenuWork *work, u16 *action, s16 *argument)
         break;
     case 3: {
         *action = BTL_MENU_ACTION_BLOCKED;
-        state = btlGetMainState();
+        state = reinterpret_cast<BtlStateFlags *>(btlGetMainState());
         if ((state->bitsB.low & DAT_00573b88[18]) == 0 && (state->bitsB.high & DAT_00573b88[19]) == 0) {
             struct {
                 s32 flagBits[3];

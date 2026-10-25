@@ -10,3 +10,7 @@ extern RenderCtxA *g_renderCtx;
 void FUN_00157558(RenderCtxA *context);
 
 } /* extern "C" */
+
+extern "C" {
+s32 FUN_00284f50(void);
+}

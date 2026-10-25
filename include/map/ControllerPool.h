@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct ControllerChild;
 struct ControllerChildVtable {
@@ -68,7 +69,6 @@ typedef char ControllerLifecycleLayoutCheck[sizeof(ControllerVtable) == 0xc &&
     offsetof(Controller, lifecycle.kind) == 8 && offsetof(Controller, lifecycle.flags) == 0xc &&
     sizeof(ControllerPool) == 0xa0 ? 1 : -1];
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 /* The two controller classes this pool creates (0xa4 and 0xbc bytes); both begin with a Controller. */
 class ControllerFirstKind : public Controller {

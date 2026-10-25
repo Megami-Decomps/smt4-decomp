@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "Model/MoriModelShadowMap.h"
 
-/* Sprite description returned by FUN_001834a4. */
+/* Sprite description returned by asdTMTexTableEntryAt. */
 struct SpriteInfo {
     u8 unk00[8];
     s16 x;
@@ -35,7 +35,7 @@ extern "C" {
 s32 FUN_001692ac(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
-const SpriteInfo *FUN_001834a4(u32 table, u32 frame);
+const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 frame);
 void FUN_0032cdc8(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags, const OverlayPivot *pivot);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -46,7 +46,7 @@ static void drawOverlay(CommonBackgroundOverlay *overlay)
     s32 x = overlay->x;
     efctSetSpeed(overlay->fade);
     FUN_00164b5c(2, 9, 3, x, y, 11);
-    const SpriteInfo *info = FUN_001834a4(9, 0x35);
+    const SpriteInfo *info = asdTMTexTableEntryAt(9, 0x35);
     OverlayPivot pivot = {64.0f, 1, 1};
     FUN_0032cdc8(2, 9, 0x34, info->x + x + info->size[0] / 2, y + info->size[1] / 2 + info->y, 11, &pivot);
     efctSetSpeed(1.0f);

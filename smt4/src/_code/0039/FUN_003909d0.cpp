@@ -9,10 +9,10 @@ int FUN_0023478c(...);
 int FUN_002347b8(...);
 int FUN_002ae9ec(...);
 int FUN_002b7d30(int, int);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_002c1b64(int, unsigned int);
 int memClear(...);
@@ -48,10 +48,10 @@ extern int aocIsEntryIndexValid(int, int);
 /* Supplied declaration required: FUN_002347b8. */
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: FUN_002b7d30. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: memClear. */
@@ -90,7 +90,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v15 = param_4;
-  temp_v3 = FUN_002bf4f8(0x3a,param_2 + 0x88);
+  temp_v3 = asdTMTexTableEntryAt(0x3a,param_2 + 0x88);
   temp_v5 = g_aocMain;
   temp_v10 = (int)*(short *)(temp_v3 + 8);
   temp_v9 = (int)*(short *)(temp_v3 + 10);
@@ -100,11 +100,11 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
     memClear(temp_v12,0x100);
     FUN_002bf380(2,0x3a,8,temp_v10,temp_v9,0x81);
     if (*(char *)(temp_v3 + 0x9b3) != '\0') {
-      temp_v4 = FUN_002bf4f8(0x3a,0x5f);
+      temp_v4 = asdTMTexTableEntryAt(0x3a,0x5f);
       FUN_002ae9ec(2,0x3a,2000,temp_v10 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v9,0x81);
     }
     else {
-      temp_v4 = FUN_002bf4f8(0x3a,0x5f);
+      temp_v4 = asdTMTexTableEntryAt(0x3a,0x5f);
       temp_v1 = *(short *)(temp_v4 + 8);
       temp_v2 = *(short *)(temp_v4 + 10);
       FUN_002c1b64(g_titleScene,*(unsigned int *)(temp_v3 + 0x9c4));
@@ -124,14 +124,14 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       textFormatBuffer(temp_v12,&LAB_00390e14,temp_v3);
     }
     if (*(char *)(temp_v3 + 0x9b3) == '\0') {
-      temp_v4 = FUN_002bf4f8(0x3a,0x61);
+      temp_v4 = asdTMTexTableEntryAt(0x3a,0x61);
       FUN_002ae9ec(2,0x13,0x41a,temp_v10 + *(short *)(temp_v4 + 8),*(short *)(temp_v4 + 10) + temp_v9,0x81)
       ;
     }
-    temp_v4 = FUN_002bf4f8(0x3a,0x62);
+    temp_v4 = asdTMTexTableEntryAt(0x3a,0x62);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,0xffffffff,temp_v12);
+    textDrawString(3,0xffffffff,temp_v12);
     if (*(char *)(temp_v3 + 0x9b3) == '\0') {
       if (*(char *)(temp_v3 + 0x9ac) != '\0') {
         if (*(char *)(temp_v3 + 0x9ad) != '\0') {
@@ -190,11 +190,11 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           textFormatBuffer(temp_v12,&LAB_00390e2c,temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
         }
         temp_v5 = curveEvaluateStandard(temp_v12,2);
-        temp_v4 = FUN_002bf4f8(0x3a,0x68);
+        temp_v4 = asdTMTexTableEntryAt(0x3a,0x68);
         temp_v5 = ((int)**(short **)(temp_v4 + 0xc) + (int)*(short *)(temp_v4 + 8) + temp_v10) - temp_v5;
         VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(2,0xffffffff,temp_v12,temp_v5);
+        textDrawString(2,0xffffffff,temp_v12,temp_v5);
       }
     }
     if (temp_v15 != 0) {

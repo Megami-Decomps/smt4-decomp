@@ -17,13 +17,13 @@ typedef struct UiEntry {
     /* 0x0C */ SizePair *override;
 } UiEntry;
 
-extern UiEntry *FUN_002bf4f8(int kind, u32 id);
+extern UiEntry *asdTMTexTableEntryAt(int kind, u32 id);
 extern int FUN_00230fe4(int a, int kind, u32 id, u32 p0, u32 p1, u32 width, u32 height, u32 p2, u32 p3);
 
 /* Looks up the entry of kind 0x1C and forwards its size (the override if valid, else the entry's own size without the flag bit) with the caller's parameters. */
 void FUN_0039fb38(u32 id, u32 p0, u32 p1, u32 p2, u32 p3)
 {
-    UiEntry *entry = FUN_002bf4f8(0x1C, id);
+    UiEntry *entry = asdTMTexTableEntryAt(0x1C, id);
     SizePair *override;
     u32 width;
     u32 height;

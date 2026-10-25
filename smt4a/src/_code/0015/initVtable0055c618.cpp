@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Font/AsdFont.h"
 
 extern "C" {
 

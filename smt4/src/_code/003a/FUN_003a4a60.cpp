@@ -8,7 +8,6 @@ extern "C" {
 
 int scrRunOpcodesStub(...);
 int panelSetScrollPosition(...);
-int FUN_0022e500(...);
 int FUN_0022fcb8(...);
 int FUN_002306f8(...);
 int messageMainSetTargetFlags(...);

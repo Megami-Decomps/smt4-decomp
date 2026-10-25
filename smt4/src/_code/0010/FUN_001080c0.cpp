@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -15,14 +16,13 @@ struct JobPromptWork {
     /* 0xfe0 */ s8 confirm;
 };
 
-JobPromptWork *jobGetWork(void);
 void FUN_00117a70(s32 arg);
 void FUN_001192c8(s32 arg);
 
 /* Job step: when the prompt is active and ready with a target and not blocked, confirms or cancels it. */
-u32 FUN_001080c0(void)
+u32 FUN_001080c0(u32 job)
 {
-    JobPromptWork *work = jobGetWork();
+    JobPromptWork *work = (JobPromptWork *)jobGetWork(job);
 
     if (work->active && work->ready && work->hasTarget && work->target != 0 && !work->blocked) {
         if (work->confirm) {

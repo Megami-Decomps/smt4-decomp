@@ -1,4 +1,5 @@
 /* NON_MATCHING: actor selectors are now narrowed (s16) like retail; retail loads the two stack arguments with ldrd into r4/r5 and keeps the payload in r6-r8, built allocates r4-r8 in a different order. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -6,7 +7,6 @@
 struct BtlUnitEntry;
 extern "C" {
 
-BtlMainState *btlGetMainState();
 BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 
 u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 value,

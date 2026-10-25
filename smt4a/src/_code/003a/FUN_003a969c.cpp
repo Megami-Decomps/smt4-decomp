@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlEffect.h"
 #include "battle/BattleMessageMasks.h"
@@ -12,7 +13,6 @@ extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 s32 isEntryUsable(u32 event);
 s32 FUN_004f5a78(BtlEffectOwnerA *owner);
 void FUN_002980e4(s32 message, s32 enabled);
-BtlMainStateA *btlGetMainState();
 void FUN_004fb6f4(s32 slot, s32 mode, BattleRosterRecordA *record, u32 effect,
     s32 message, s32 target, u32 flags);
 void btlEmitMessageTableEntries(s32 message, ScriptUnit *unit, BtlEffectSlotBlock *slots,

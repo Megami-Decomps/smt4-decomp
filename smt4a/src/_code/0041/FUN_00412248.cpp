@@ -1,4 +1,5 @@
 /* NON_MATCHING: case 3 stores nextState before dataEntries via a pre-indexed str; retail stores dataEntries then tail-merges mov r0,#4/str (+4 bytes shift after) */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlCamera.h"
 #include "gamedata/DataTable.h"
 
@@ -21,7 +22,6 @@ extern u32 g_btlAux; /* 0x573808 */
 extern BtlCameraA *g_btlCamera; /* 0x571508 */
 extern u32 g_btlActionReflect; /* 0x5712f0 */
 
-extern int btlGetMainState(void);
 extern int dialogIsActive(void);
 extern void dialogClose(int);
 extern void *dataTableFileGetTable(void *file, u32 section);
@@ -110,7 +110,7 @@ void FUN_00412248(BtlIntroTask *task)
         if (chainCountIdUnflagged(g_btlActionReflect, 0) > 0) {
             break;
         }
-        btlGetMainState();
+        reinterpret_cast<int>(btlGetMainState());
         if (FUN_003ecd94() != 0) {
             for (i = 0; i < 4; i++) {
                 if (FUN_004aa768(g_btlUiBlock, i) == 0) {

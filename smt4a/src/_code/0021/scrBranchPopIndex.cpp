@@ -1,16 +1,14 @@
-#include "shard/W5_W5Match1_RecordKeys.h"
+#include "script/ScriptVm.h"
 
 extern "C" {
 
-extern s32 FUN_003d2004(ScriptBranchContext *context);
-
-/* Stores the script branch index after popping an integer. */
-s32 scrBranchPopIndex(ScriptBranchContext *context)
+/* Pops an integer and jumps to the instruction after it; does nothing while the stack is empty. */
+s32 scrBranchPopIndex(ScriptVmProcess *process)
 {
-    if (context->enabled == 0) {
+    if (process->depth == 0) {
         return 0;
     }
-    context->branch = FUN_003d2004(context) + 1;
+    process->pc = scrPopInt(process) + 1;
     return 1;
 }
 

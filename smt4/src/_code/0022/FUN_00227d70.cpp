@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 extern int FUN_00227668(u32 a);
 extern int FUN_00227ecc(u32 a, u32 b);
 extern int FUN_00293230(void);
@@ -17,7 +17,7 @@ int FUN_00227d70(u32 a, u32 b)
     int result;
     Entry *entry;
 
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     if (FUN_00293230() != 0) {
         result = 5;
     } else {

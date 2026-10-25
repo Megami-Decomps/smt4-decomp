@@ -3,10 +3,9 @@
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlTables.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 void wordPairCopy(BattleChoiceRow* destination, const BattleChoiceRow* source);
 s32 randRange(u16 maximum);
 

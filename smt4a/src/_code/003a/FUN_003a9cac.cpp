@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/BtlTables.h"
+#include "gamedata/DataTable.h"
 
 struct CategoryPair {
     u16 id;
@@ -10,7 +11,6 @@ struct CategoryPair {
 
 extern "C" {
 s32 scrGetArg(u32 index);
-u16 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 s32 randRange(u16 maximum);
 void scrSetResult(s32 result);

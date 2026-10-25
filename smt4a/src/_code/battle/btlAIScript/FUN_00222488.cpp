@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail schedules the g_btlAiScript pool load before `sub sp, sp, #132`; rest identical. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(void *process);
-void btlGetMainState(void);
 u8 *dataTable00FindById(u32 id);
 void sysMemClear(void *dst, u32 size);
 void textFormatBuffer(char *dst, const char *format, ...);

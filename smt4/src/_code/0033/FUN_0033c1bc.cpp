@@ -1,6 +1,7 @@
 /* NON_MATCHING: 171 vs 177 rows: retail calls __aeabi_idivmod for `% count` (unit built -Ospace-style; needs a cflags trial from Main) and keeps the loop counters in different registers */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "util/MessageKindForward.h"
 
 // Draw-state stack embedded in the title scene.
 struct DrawRing {
@@ -51,9 +52,8 @@ extern "C" {
 
 extern TitleScene* g_titleScene;
 
-LayoutEntry* FUN_002bf4f8(u32 group, u32 index);
+LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 UnitStatus* gameGetUnitRecord(s32 unit);
-void messageKindForward(s32 icon, s32 x, s32 y, s32 kind);
 void FUN_0029a17c(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
@@ -73,7 +73,7 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
-    LayoutEntry* layout = FUN_002bf4f8(0x19, slot);
+    LayoutEntry* layout = asdTMTexTableEntryAt(0x19, slot);
     s32 count = 0;
     s16 current = 0;
     s16 following = 0;

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_002bd068.h"
 
 extern "C" {
 
@@ -10,10 +11,10 @@ int FUN_0029a17c(...);
 int fontMeasureLineAdvance(...);
 int devilGetRecord(void);
 int FUN_002bdf94(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(...);
 int VectorSignedToFloat(...);
 
@@ -40,14 +41,13 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int demonGetRaceLabel(short, unsigned int);
-extern unsigned int FUN_002bd068(short);
 /* Supplied declaration required: FUN_002bdf94. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -98,7 +98,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
       temp_v13 = 0x311;
     }
   }
-  temp_v3 = FUN_002bf4f8(0x24,param_1 + 0xe3);
+  temp_v3 = asdTMTexTableEntryAt(0x24,param_1 + 0xe3);
   temp_v5 = g_titleScene;
   temp_v4 = packNibblesAndByte(6,1,0);
   piVar12 = (int *)(temp_v5 + 0x12ac);
@@ -131,7 +131,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     psVar7 = (short *)(unsigned int)*(unsigned short *)(temp_v14 + 0xe);
     devilGetRecord();
     if (temp_v16 == 0) {
-      temp_v4 = FUN_002bf4f8(0x24,0xd2);
+      temp_v4 = asdTMTexTableEntryAt(0x24,0xd2);
       temp_v5 = g_titleScene;
       piVar12 = (int *)(g_titleScene + 0x130c);
       temp_v8 = piVar12[*piVar12 + 2];
@@ -144,7 +144,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                    (int)**(short **)(temp_v4 + 0xc),
                    (int)(*(short **)(temp_v4 + 0xc))[1] + *(int *)(temp_v7 + param_1 * 4 + 0x68),1);
-      temp_v5 = FUN_002bf4f8(0x24,0xda);
+      temp_v5 = asdTMTexTableEntryAt(0x24,0xda);
       textureLoadOptionalDemonModel((int)*psVar7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x68,1);
       temp_v5 = g_titleScene;
@@ -158,7 +158,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     }
     FUN_002bf380(2,0x24,0xc,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
     FUN_002bf288(2,0x24,0xd8,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
-    temp_v5 = FUN_002bf4f8(0x24,0xdc);
+    temp_v5 = asdTMTexTableEntryAt(0x24,0xdc);
     temp_v6 = FUN_002bd068(*psVar7);
     textFormatBuffer(temp_v12,&LAB_00241174,temp_v6);
     puVar9 = temp_v12;
@@ -168,8 +168,8 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v3 + 8) +
                         temp_v1 + ((int)**(short **)(temp_v5 + 0xc) - (int)puVar9) / 2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(1,temp_v11,temp_v12);
-    temp_v5 = FUN_002bf4f8(0x24,0xdd);
+    textDrawString(1,temp_v11,temp_v12);
+    temp_v5 = asdTMTexTableEntryAt(0x24,0xdd);
     temp_v11 = demonGetRaceLabel(*psVar7,0);
     textFormatBuffer(temp_v12,&LAB_00241174,temp_v11);
     puVar9 = temp_v12;
@@ -179,8 +179,8 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     VectorSignedToFloat(((int)**(short **)(temp_v5 + 0xc) - (int)puVar9) + temp_v1 +
                         (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,0xffffffff,temp_v12,(int)*(short *)(temp_v3 + 8));
-    temp_v5 = FUN_002bf4f8(0x24,0xdf);
+    textDrawString(2,0xffffffff,temp_v12,(int)*(short *)(temp_v3 + 8));
+    temp_v5 = asdTMTexTableEntryAt(0x24,0xdf);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,2,0x6f,
                  &LAB_0024160c,*(unsigned short *)(temp_v14 + 0x16));
@@ -216,7 +216,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
                    (int)*(short *)(temp_v3 + 10) + temp_v2 + temp_v9,0x74);
       temp_v1 = temp_v7 + param_1 * 4;
       if (0 < *(int *)(temp_v1 + 0x58)) {
-        temp_v5 = FUN_002bf4f8(0x24,0x20b);
+        temp_v5 = asdTMTexTableEntryAt(0x24,0x20b);
         temp_v9 = g_titleScene;
         temp_v8 = *(int *)(temp_v1 + 0x68);
         temp_v2 = ((int)**(short **)(temp_v5 + 0xc) - *(int *)(temp_v1 + 0x58)) / 2;

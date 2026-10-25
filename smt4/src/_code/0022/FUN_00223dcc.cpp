@@ -2,6 +2,7 @@
 #include "common.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "camp/PlayLog/PlayLog.h"
 
 // Fusion (unite) screen object: only the members its teardown touches.
 struct UniteScreen {
@@ -38,7 +39,6 @@ void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(s32 object);
 void asdMemFreeNonNull(s32 object);
 void asdMemFree(s32 object);
-s32 FUN_002907a8(void);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 lmapSceneGetScript(void);
 s32 lmapMainIsRunning(void);

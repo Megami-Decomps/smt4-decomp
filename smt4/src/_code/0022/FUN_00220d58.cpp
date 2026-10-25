@@ -1,12 +1,12 @@
 /* NON_MATCHING: typed input/touch results recovered; control-flow and register allocation differ. */
 #include "status/StatusCamera.h"
 #include "shard/S1ListPanel.h"
+#include "shard/buttonHelpHasEnabledEntryForId.h"
 extern "C" {
-const SpriteInfo *FUN_002bf4f8(u32 group, u32 sprite);
+const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, s32 mode);
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
-s32 buttonHelpHasEnabledEntryForId(u32 id);
 void FUN_002bf810(u32 sound);
 void buttonHelpSetPreset(s32 preset);
 s32 FUN_0026f024(void *sprite, u32 id, s32 first, s32 second, u32 frame, s32 enabled);
@@ -32,7 +32,7 @@ u32 FUN_00220d58(void *base)
     InputView *work = static_cast<InputView *>(base);
     u32 result = 0;
     bool shortTap = false;
-    const SpriteInfo *button = FUN_002bf4f8(0x39, 0x97);
+    const SpriteInfo *button = asdTMTexTableEntryAt(0x39, 0x97);
     if (uiPointerHitsRect(button->x, button->y, button->size[0], button->size[1], 0)) {
         ++work->heldFrames;
     } else {

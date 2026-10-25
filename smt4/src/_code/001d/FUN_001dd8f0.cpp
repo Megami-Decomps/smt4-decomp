@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
@@ -11,7 +12,7 @@ typedef struct Obj {
 
 extern Obj *g_placeWin;
 
-void FUN_001dd8f0(void)
+s32 FUN_001dd8f0(void)
 {
     if (g_placeWin != NULL) {
         vec2GetXInt(g_placeWin->unk34);

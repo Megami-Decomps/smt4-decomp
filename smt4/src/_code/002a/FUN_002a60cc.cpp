@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_002a60cc.h"
 
 namespace { struct Record { u8 padding[13]; u8 enabled; }; }
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail frame order is wide path at 0, stream at 0x210, path at 0x228 (here path first), with the constant-1 hoist of its twin FUN_002402c4. Needs _ZTT9Obj420c60 rename applied. */
 #include "classes/Obj420c60.h"
+#include "util/AsdLoadFileHasDevice.h"
 
 struct MbState {
     u32 a, b;
@@ -11,7 +12,6 @@ extern const char DAT_00409800[];   /* "patch:/%s" */
 extern const char DAT_0040980c[];   /* "rom:/%s" */
 
 void rt_aeabi_memclr(void *block, u32 bytes);
-s32 asdLoadFileHasDevice(const char *name);
 s32 asdLoadFileIsPatched(const char *name);
 s32 textFormatBuffer(char *output, const char *format, ...);
 u32 refIsNullOrZero(s32 *object);

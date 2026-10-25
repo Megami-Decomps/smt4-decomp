@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct BtlActionState {
     /* 0x04 */ u32 unitId; /* acting unit */
 } BtlActionState;
 
-void *dataTable04FindById(u16 id);
 s32 FUN_003df574(u16 id);
 s32 FUN_004bcbb4(void *order, u16 id);
 BtlUnit *btlUnitGet(u32 id);

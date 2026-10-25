@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020a320` (_code @ 0x20a320, 0x434 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int FUN_0020ad6c(...);
@@ -120,10 +120,10 @@ unsigned int FUN_0020a320(int param_1)
       }
     }
     else {
-      temp_v0 = btlGetMainState();
+      temp_v0 = reinterpret_cast<int>(btlGetMainState());
       if ((*(unsigned int *)(temp_v0 + 0x45ac) & DAT_00573bcc) == 0 &&
           (DAT_00573bc8 & *(unsigned int *)(temp_v0 + 0x45a8)) == 0) {
-        btlGetMainState();
+        reinterpret_cast<int>(btlGetMainState());
         temp_v0 = FUN_003e98e0();
         if (temp_v0 == 0) {
           return 0;

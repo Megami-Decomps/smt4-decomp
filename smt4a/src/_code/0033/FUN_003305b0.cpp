@@ -16,7 +16,7 @@ s32 FUN_003305b0(void)
     s32 result = 1;
 
     for (s32 i = 0; g_battleSlotCount > i; i++) {
-        u32 value = FUN_0021bdac(state->unk4D64, i, frame, 13, 0, 0);
+        u32 value = FUN_0021bdac(state->infoWindow, i, frame, 13, 0, 0);
 
         if (value != 1) {
             result = value;

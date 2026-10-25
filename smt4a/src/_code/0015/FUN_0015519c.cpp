@@ -7,7 +7,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(...);
 int FUN_00165778(...);
 int FUN_0016631c(...);
@@ -49,7 +49,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: FUN_00165778. */
 /* Supplied declaration required: FUN_0016631c. */
@@ -59,7 +59,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
@@ -129,10 +129,10 @@ unsigned int FUN_0015519c(void)
       temp_v6 = -0x3c;
     }
     if (*(char *)(temp_v0 + 0x12) == '\0') {
-      unaff_r8 = FUN_001834a4(8,0xdc);
+      unaff_r8 = asdTMTexTableEntryAt(8,0xdc);
     }
     if (*(char *)(temp_v0 + 0x12) == '\x01') {
-      unaff_r8 = FUN_001834a4(8,0xdd);
+      unaff_r8 = asdTMTexTableEntryAt(8,0xdd);
     }
     temp_v2 = 0;
     temp_v10 = 0;
@@ -173,7 +173,7 @@ unsigned int FUN_0015519c(void)
     temp_v14 = temp_v8;
     temp_v19 = temp_v8;
     FUN_0019a0fc(temp_v24,temp_v24,&temp_v9);
-    temp_v1 = FUN_001834a4(8,0x15);
+    temp_v1 = asdTMTexTableEntryAt(8,0x15);
     temp_v10 = 0;
     temp_v12 = VectorSignedToFloat(-((int)**(short **)(temp_v1 + 0xc) / 2 + 4),
                                    (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -247,10 +247,10 @@ unsigned int FUN_0015519c(void)
     FUN_00164b5c(2,8,temp_v2,0,temp_v3,0x6a);
     if (*(char *)(temp_v0 + 0x10) != '\0') {
       if (*(char *)(temp_v0 + 0x12) == '\0') {
-        temp_v1 = FUN_001834a4(8,0xdc);
+        temp_v1 = asdTMTexTableEntryAt(8,0xdc);
       }
       if (*(char *)(temp_v0 + 0x12) == '\x01') {
-        temp_v1 = FUN_001834a4(8,0xdd);
+        temp_v1 = asdTMTexTableEntryAt(8,0xdd);
       }
       if (*(int *)(temp_v0 + 0x14) != 2) {
         if (*(int *)(temp_v0 + 0x14) != 6) {
@@ -259,7 +259,7 @@ unsigned int FUN_0015519c(void)
           temp_v1 = (**(short **)(temp_v1 + 0xc) - temp_v3) / 2;
           VectorSignedToFloat(temp_v6 + 6,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_00162790(4,0xffffffff,temp_v0 + 0x26c,temp_v6 + 6);
+          textDrawString(4,0xffffffff,temp_v0 + 0x26c,temp_v6 + 6);
           if (*(int *)(temp_v0 + 0x14) == 1) {
             FUN_001835b4(2,8,0xdf,temp_v1 - 0xd,7,0x6f);
             FUN_001835b4(2,8,0xde,temp_v1 - 0xd,7,0x74);

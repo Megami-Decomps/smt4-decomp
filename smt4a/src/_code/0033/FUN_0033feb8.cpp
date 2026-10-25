@@ -1,5 +1,6 @@
 /* NON_MATCHING: twin of smt4 FUN_002d508c; readable rewrite compiles (175 vs 165 rows); register allocation and stack frame differ */
 #include "common.h"
+#include "shard/FUN_0029202c.h"
 
 struct Vec3f {
     f32 x, y, z;
@@ -39,7 +40,6 @@ extern s8 DAT_005f1bc4;
 extern s8 DAT_005f1c48;
 
 GameFlagsBlock* gameFlagsGetBlock(void);
-s32 FUN_0029202c(void);
 void FUN_00317af8(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
 f32 FUN_0050d8e4(f32 y, f32 x);

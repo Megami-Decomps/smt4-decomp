@@ -11,7 +11,7 @@ struct BankSprite {
     /* 0x0A */ s16 y;
 };
 
-BankSprite *FUN_001834a4(s32 bank, s32 sprite);
+BankSprite *asdTMTexTableEntryAt(s32 bank, s32 sprite);
 void FUN_00183bb0(void);
 void drawSetColorFromRGBA8(u32 packed);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);
@@ -44,14 +44,14 @@ void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
                     firstDigit = digit;
                 }
                 s32 glyph = remaining / divisor;
-                sprite = FUN_001834a4(8, 100 - digit);
+                sprite = asdTMTexTableEntryAt(8, 100 - digit);
                 FUN_001835b4(2, 7, glyph, sprite->x + x, sprite->y + y, 16);
                 remaining -= divisor * glyph;
                 if (digit == 2) {
-                    sprite = FUN_001834a4(8, 0x67);
+                    sprite = asdTMTexTableEntryAt(8, 0x67);
                     FUN_001835b4(2, 7, 12, sprite->x + x, sprite->y + y, 16);
                 } else if (digit == 5) {
-                    sprite = FUN_001834a4(8, 0x66);
+                    sprite = asdTMTexTableEntryAt(8, 0x66);
                     FUN_001835b4(2, 7, 12, sprite->x + x, sprite->y + y, 16);
                 }
             }
@@ -59,12 +59,12 @@ void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
             divisor /= 10;
         } while (divisor > 0);
     } else {
-        sprite = FUN_001834a4(8, 0x5C);
+        sprite = asdTMTexTableEntryAt(8, 0x5C);
         FUN_001835b4(2, 7, 0, sprite->x + x, sprite->y + y, 16);
     }
     if (signedDisplay != 0) {
         if (firstDigit >= 0) {
-            sprite = FUN_001834a4(8, 0x65 - firstDigit);
+            sprite = asdTMTexTableEntryAt(8, 0x65 - firstDigit);
         }
         if (value < 0) {
             FUN_001835b4(2, 7, 11, sprite->x + x, sprite->y + y, 16);

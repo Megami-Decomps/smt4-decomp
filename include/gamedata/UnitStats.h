@@ -72,4 +72,8 @@ typedef char StatBlockSummaryOffsets[
     offsetof(StatBlock, experience) == 0x30 &&
     offsetof(StatBlock, skills) == 0x34 ? 1 : -1];
 
+extern "C" {
+s32 FUN_001ab9dc(void);
+}
+
 #endif

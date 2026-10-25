@@ -4,6 +4,7 @@
 #include "gamedata/Table00.h"
 #include "camp/UnitComparison.h"
 #include "ui/ItemListSelection.h"
+#include "shard/campFillUnitComparison.h"
 
 namespace {
 struct InventoryCursorState {
@@ -41,7 +42,6 @@ void releaseEntriesA(InventoryHelpList *help);
 void slotPoolResetTrackedState(InventoryListView *list);
 Table00Record *dataTable00FindById(u32 id);
 s32 FUN_0026264c(u16 id);
-void campFillUnitComparison(CampUnitComparison *record, u32 id, u32 flags);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
 void FUN_004cfeb0(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);
 u8 gaugePercent(InventoryListView *list, u32 mode);

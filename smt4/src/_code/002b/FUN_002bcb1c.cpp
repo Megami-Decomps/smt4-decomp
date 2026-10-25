@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #136] differs from recovered ldr r0, [pc, #128]. */
+/* NON_MATCHING: the bit-1 test now keeps retail's `and` + `lsrs` form (named flag local); retail returns before saving r4 when the count is not positive and lays the nested loops out differently. */
 #include "common.h"
 
 struct SoundStatusNodeView {
@@ -35,8 +35,11 @@ u32 FUN_002bcb1c(void)
             node = node->next;
         }
 
-        if (node != 0 && ((node->unk90 & 2u) >> 1) != 0) {
-            return 1;
+        if (node != 0) {
+            u32 flag = (node->unk90 & 2u) >> 1;
+            if (flag != 0) {
+                return 1;
+            }
         }
     }
     return 0;

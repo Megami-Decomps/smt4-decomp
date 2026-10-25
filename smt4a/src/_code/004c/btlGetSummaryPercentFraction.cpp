@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BattlePercentSummary {
@@ -9,7 +10,6 @@ struct BattlePercentSummary {
 };
 
 extern "C" {
-BtlMainStateA* btlGetMainState(void);
 BtlCombatantEntryA* FUN_003f0e20(BtlMainStateA* state, s32 index);
 void FUN_003e8bb0(BattlePercentSummary* summary, BtlMainStateA* state,
                   const BtlCombatantEntryA* entry);

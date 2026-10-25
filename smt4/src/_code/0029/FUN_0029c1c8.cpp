@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_0029c1c8.h"
 
 extern "C" {
 
@@ -6,7 +7,7 @@ int FUN_001a7dbc(...);
 extern int gameGetUnitRecord(u32 id);
 
 /* Forwards (record, id, a, b) to FUN_001a7dbc for the unit record of `id`, when there is one. */
-void FUN_0029c1c8(u32 id, u32 a, u32 b)
+void FUN_0029c1c8(s32 id, u16 a, bool b)
 {
     int owner = gameGetUnitRecord(id);
 

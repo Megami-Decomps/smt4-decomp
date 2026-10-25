@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and scheduling (retail shares r4 between the flag and the id, stores the search key after the count call and keeps 9 in a register for the loop); logic identical. */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ typedef struct AocItemEntry {
 u32 dataTableGet(u32 table, u32 arg1);
 void *dataTableGetEntries(u32 table);
 u32 dataTableGetCount(u32 table);
-AocItemEntry *dataTable04FindById(u32 id);
 s32 FUN_001b2e78(void *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
@@ -48,7 +48,7 @@ s32 FUN_0035e460(u32 id, s32 positive)
             libc_bsearch(&key, entries, dataTableGetCount(table), sizeof(AocTableEntry), (s32 (*)(const void *, const void *))&LAB_001ac8dc);
         }
     } else {
-        AocItemEntry *entry = dataTable04FindById(id);
+        AocItemEntry *entry = (AocItemEntry *)dataTable04FindById(id);
 
         if (entry != NULL) {
             s32 sign = positive != 0 ? 1 : -1;

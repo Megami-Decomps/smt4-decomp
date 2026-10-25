@@ -6,7 +6,6 @@
 #include "util/ScrGetCommandFrame.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
 u32 jobGetWork(u32 job);
 void FUN_002a880c(u32 work, u32 command, s32 frames);
 

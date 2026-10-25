@@ -1,24 +1,13 @@
-#include "common.h"
+#include "script/ScriptVm.h"
 
 extern "C" {
 
-typedef struct ScriptProcess {
-    /* 0x00 */ u8 unk00[0x18];
-    /* 0x18 */ s32 pc;          /* index of the current instruction (4 bytes each) */
-    /* 0x1C */ u8 unk1c[0xA0];
-    /* 0xBC */ u8 *code;
-} ScriptProcess;
-
-extern f32 g_scrFloatVars[];      /* script float variables */
-
-extern f32 scrPopFloat(void);
-
 /* Script command: pops a float into the variable the instruction's 16-bit operand names. */
-u32 scrOpPopFloatToVar(ScriptProcess *process)
+u32 scrOpPopFloatToVar(ScriptVmProcess *process)
 {
-    f32 value = scrPopFloat();
+    f32 value = scrPopFloat(process);
 
-    g_scrFloatVars[*(u16 *)(process->code + process->pc * 4 + 2)] = value;
+    g_scrFloatVars[process->code[process->pc].decoded.operand] = value;
     process->pc++;
     return 1;
 }

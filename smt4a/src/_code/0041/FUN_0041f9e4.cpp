@@ -23,7 +23,7 @@ struct MenuRowRefreshView {
 typedef char MenuRowRefreshLayoutCheck[offsetof(MenuRowRefreshView, records) == 0x6c && offsetof(MenuRowRefreshView, occupied) == 0x2ec && offsetof(MenuRowRefreshView, rows) == 0x664 && offsetof(MenuRowRefreshView, selection) == 0x6ec ? 1 : -1];
 }
 extern "C" {
-const void *FUN_001834a4(u32 archive, s32 index);
+const void *asdTMTexTableEntryAt(u32 archive, s32 index);
 void FUN_0041b360(MenuRowWidget *, MenuRowRecord *, const void *, s32, s32, s32);
 void FUN_0041c45c(void *, const void *);
 
@@ -35,7 +35,7 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
         baseIndex = 0x83;
     for (s32 row = 0; row < menu->visibleCount; ++row) {
         s32 recordIndex = menu->firstIndex + menu->pageOffset + row;
-        const void *layout = FUN_001834a4(0x2b, baseIndex + row);
+        const void *layout = asdTMTexTableEntryAt(0x2b, baseIndex + row);
         s32 selected = menu->selectedRow == row;
         if (menu->occupied[recordIndex]) {
             FUN_0041b360(&menu->rows[row], &menu->records[recordIndex], layout,
@@ -46,7 +46,7 @@ void FUN_0041f9e4(MenuRowRefreshView *menu)
                         recordIndex + 1, selected, enabled);
         }
     }
-    const void *layout = FUN_001834a4(0x2b, menu->selectedRow + baseIndex);
+    const void *layout = asdTMTexTableEntryAt(0x2b, menu->selectedRow + baseIndex);
     FUN_0041c45c(menu->selection, layout);
 }
 }

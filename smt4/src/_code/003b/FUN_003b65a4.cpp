@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/categoryGetColor.h"
 
 extern "C" {
 
@@ -33,12 +34,11 @@ extern int DAT_0044dc3c; /* 0x44dc3c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: gameGetUnitRecord. */
-extern int categoryGetColor(int);
 /* Supplied declaration required: FUN_002b0750. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-extern unsigned long long FUN_002bf4f8(unsigned int, int);
+extern unsigned long long asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_003b6da4. */
 
@@ -60,7 +60,7 @@ void FUN_003b65a4(int param_1,unsigned int param_2,int param_3,int param_4,int p
   unsigned long long temp_v8;
   
   temp_v1 = gameGetUnitRecord(param_3);
-  temp_v8 = FUN_002bf4f8(0x28,param_4 + 0x68);
+  temp_v8 = asdTMTexTableEntryAt(0x28,param_4 + 0x68);
   temp_v4 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
   temp_v2 = (int)temp_v8;
   switch(param_2) {

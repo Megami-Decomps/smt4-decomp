@@ -58,7 +58,7 @@ int FUN_003d54f8(...);
 int controllerGetSourceValue(...);
 int controllerTargetNodeStart(...);
 int linkHolderApplyFirst(...);
-int FUN_003e54b8(...);
+int slotTargetApplyActiveValue(...);
 int linkedTargetSetFloat(...);
 int linkHolderSetFlag(...);
 
@@ -183,7 +183,7 @@ extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: controllerTargetNodeStart. */
 /* Supplied declaration required: linkHolderApplyFirst. */
-/* Supplied declaration required: FUN_003e54b8. */
+/* Supplied declaration required: slotTargetApplyActiveValue. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: FUN_003e5858. */
@@ -484,7 +484,7 @@ unsigned int FUN_00328838(void)
     }
     temp_v4 = linkHolderCallFirst(*(unsigned int *)(temp_v0 + 0x28));
     if ((temp_v4 != 0x13) || (controllerGetSourceValue(*(unsigned int *)(temp_v0 + 0x28)), in_s0 < 0x41a00000)) break;
-    FUN_003e54b8(*(unsigned int *)(temp_v0 + 0x28));
+    slotTargetApplyActiveValue(*(unsigned int *)(temp_v0 + 0x28));
     temp_v3 = *(unsigned int *)(temp_v0 + 0x28);
     linkedTargetSetFloat(temp_v3);
     break;

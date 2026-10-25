@@ -10,12 +10,12 @@ int FUN_001978b4(void);
 int FUN_001f20b4(...);
 int dataTable15GetUnlockedEntryId(...);
 int itemDrawCategoryBadge(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int FUN_002be650(...);
 int vec2GetYInt(...);
 int vec2GetXInt(void);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int renderCtxSelectStereoLayout(int);
@@ -42,12 +42,12 @@ extern int uniteGetState(void);
 extern unsigned int objectPartRunUnlessLocked(int);
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: itemDrawCategoryBadge. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -174,13 +174,13 @@ LAB_001a03b8:
           temp_v10 = 0x3d;
           temp_v9 = (unsigned int)*puVar6;
         }
-        temp_v8 = FUN_002bf4f8(0x1a,temp_v7 + 0x533);
+        temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v7 + 0x533);
         FUN_002bf380(2,0x1a,0xd,*(short *)(temp_v8 + 8) + temp_v2,*(short *)(temp_v8 + 10) + temp_v3,0xbf)
         ;
-        temp_v5 = FUN_002bf4f8(0x1a,0xa0);
+        temp_v5 = asdTMTexTableEntryAt(0x1a,0xa0);
         itemDrawCategoryBadge(temp_v10,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,0xc4,0);
-        temp_v5 = FUN_002bf4f8(0x1a,0xa1);
+        temp_v5 = asdTMTexTableEntryAt(0x1a,0xa1);
         if (temp_v9 != 0) {
           FUN_002be650(temp_v9,0);
           if (temp_v9 != 0) {
@@ -188,7 +188,7 @@ LAB_001a03b8:
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(2,0xff,temp_v9,(int)*(short *)(temp_v8 + 10));
+            textDrawString(2,0xff,temp_v9,(int)*(short *)(temp_v8 + 10));
           }
         }
         else {
@@ -196,7 +196,7 @@ LAB_001a03b8:
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_002be5a4(2,0xff,&LAB_001a06b0,(int)*(short *)(temp_v8 + 10));
+          textDrawString(2,0xff,&LAB_001a06b0,(int)*(short *)(temp_v8 + 10));
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 7);

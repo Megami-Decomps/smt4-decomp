@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite of the map-interface registration (allocate and clear the state, create its four tasks, set up the three marker quads); retail also loads two debug arguments (a source-path string and a line number) that asdMemAlloc discards, and schedules the quad stores in a different order with the state fields interleaved. */
 #include "common.h"
+#include "shard/asdMemAlloc.h"
 
 // A map-interface marker quad: four corners of (x, y, z).
 struct MapIfQuad {
@@ -52,7 +53,6 @@ extern "C" {
 extern MapIfRegisterView *g_mapIf;
 extern MapIfMarkerSlot DAT_004b5d30[3];
 
-void *asdMemAlloc(s32 heap, s32 align, s32 flags, s32 size, s32 mode);
 u32 taskCreateDraw(const char *name, s32 priority, s32 workSize, s32 flags, void (*update)(void), void (*draw)(void),
                    void *owner, u32 parent);
 void mapRegisterDefaultInterface(void);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the two list-position counters use exchanged registers; resource compare order matches. */
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
+#include "shard/FUN_003c2df0.h"
 
 extern "C" {
 void asdMemFree(void *block);

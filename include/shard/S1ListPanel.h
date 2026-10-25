@@ -6,7 +6,7 @@
 #include <stddef.h>
 #include "camp/RenderCtx.h"
 
-/* Sprite description returned by FUN_001834a4(group, id). */
+/* Sprite description returned by asdTMTexTableEntryAt(group, id). */
 typedef struct SpriteInfo {
     union {
         /* 0x00 */ u8 unk00[8];

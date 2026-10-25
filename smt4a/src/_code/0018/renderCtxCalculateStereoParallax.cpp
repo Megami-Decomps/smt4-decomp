@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "shard/renderCtxCalculateStereoParallax.h"
 
 extern "C" {
 s32 FUN_001696f4(void);

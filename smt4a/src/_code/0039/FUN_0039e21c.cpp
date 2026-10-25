@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "util/FUN_003ee0c0.h"
 /* NON_MATCHING: only the scratch register for the hp/maxHp stack store differs (retail add ip, sp, #16; armcc reuses r4). */
 #include "battle/btlMain.h"
@@ -7,7 +8,6 @@
 extern "C" {
 
 extern u32 g_btlScriptUnit;
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 u32 btlUnitGet(u32 unit);
 u32 FUN_004fc094(s32 a0, u32 unit, s32 a2, BattleRosterRecordA *record, s32 a4, s32 maxHp, s32 a6, u32 a7,

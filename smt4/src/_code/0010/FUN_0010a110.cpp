@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -21,12 +22,11 @@ extern u32 g_titleScene;
 void FUN_001137fc(s32 arg);
 void renderCtxSelectStereoLayout(u32 scene);
 s32 FUN_002bff10(s32 arg);
-TitleWork *jobGetWork(void);
 
 /* When both flags are set, FUN_002bff10 is idle and the work is ready, runs the title scene step. Returns 0. */
-u8 FUN_0010a110(void)
+u8 FUN_0010a110(u32 job)
 {
-    TitleWork *work = jobGetWork();
+    TitleWork *work = (TitleWork *)jobGetWork(job);
     TitleFlags *flags = &work->flags;
 
     if (flags->flagA == 0) {

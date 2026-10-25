@@ -48,7 +48,7 @@ void efctSetSpeed(f32 speed);
 void FUN_002f752c(StatListWork *work, s32 *value, s32 *extra, s32 entry, s32 compare);
 void statRowDrawValue(StatListWork *work, s32 entry, s32 x, s32 y, s32 value, s32 difference);
 s32 FUN_0026264c(u32 selection);
-StatSprite *FUN_001834a4(s32 kind, s32 index);
+StatSprite *asdTMTexTableEntryAt(s32 kind, s32 index);
 void FUN_003c4250(StatListWork *work, s32 x, s32 y, s32 value, ...);
 void FUN_003b7960(StatListWork *work, s32 x, s32 y, s32 iconA, s32 iconB);
 void FUN_00183bb0(void);
@@ -84,7 +84,7 @@ void FUN_00334e1c(StatListWork *work, s32 entry)
     statRowDrawValue(work, entry, position.first, position.second, stat.first, valueDifference);
     if (work->mode != 14 && (work->mode != 7 || FUN_0026264c(work->selection) != 0) && work->mode != 16) {
         f32 outerSpeed = jobGetScalarValue();
-        StatSprite *sprite = FUN_001834a4(18, entry + STAT_SPRITE_BASE);
+        StatSprite *sprite = asdTMTexTableEntryAt(18, entry + STAT_SPRITE_BASE);
 
         if (stat.first < 200) {
             FUN_003c4250(work, position.first, sprite->yOffset + position.second, stat.first, stat.second, extraDifference);

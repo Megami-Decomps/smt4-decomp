@@ -1,10 +1,11 @@
 /* NON_MATCHING: action mask loads, caller registers and Boolean constant scheduling differ; -O2 candidate. */
 #include "battle/btlAction.h"
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W4_W4Match6b_BtlUnitWork.h"
+#include "gamedata/Table04Record.h"
 
-struct BattleUiOwner { BattleMaskState *battle; };
+struct BattleUiOwner { BtlMainStateA *battle; };
 struct BattleUiContext {
     u8 unk00[0x20];
     BtlCombatantEntryA *entry;
@@ -21,16 +22,11 @@ struct BattleUiActionMasks {
 };
 struct BattleUiQueryResult { u32 words[13]; };
 struct BattleUiItem { u8 unk00[0x32]; u16 skill; };
-struct BattleUiSkill {
-    u8 unk00[0x28];
-    struct { u32 lower : 5; u32 category : 4; u32 upper : 23; } kind;
-};
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 extern void *g_btlAux;
 const BattleUiItem *dataTable8FindRecord(s32);
-const BattleUiSkill *dataTable04FindById(u32);
-void FUN_003e8bb0(BattleUiQueryResult *, BattleMaskState *, BtlCombatantEntryA *);
+void FUN_003e8bb0(BattleUiQueryResult *, BtlMainStateA *, BtlCombatantEntryA *);
 void FUN_004f7724(void *, s32, u32, s32);
 void FUN_004f7ea8(void *, s32, u32, s32);
 void obj4FQueryPairB(void *, u32, u32, s32, u32);
@@ -66,7 +62,7 @@ void dispatchBattleCommandUiVariant(BattleUiOwner *owner, BattleUiContext *conte
         }
         id = skill;
     }
-    u32 category = dataTable04FindById(id)->kind.category;
+    u32 category = dataTable04FindById(id)->itemProperties.category;
     bool alternateAllowed = true;
     if (category == 2 || category == 3 || category == 4)
         alternateAllowed = false;

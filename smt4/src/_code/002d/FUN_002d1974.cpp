@@ -1,10 +1,10 @@
 /* NON_MATCHING: candidate status addressing folds the reserved-slot offset, changing saved registers and peeled-loop allocation. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 
 u32 FUN_002d1974(const BtlActionRecord *current, u32 directions)
 {

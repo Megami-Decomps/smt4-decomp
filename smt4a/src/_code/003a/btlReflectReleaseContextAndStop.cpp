@@ -1,16 +1,16 @@
 #include "battle/btlReflect.h"
+#include "shard/JobWork.h"
 struct ReflectJobWork {
     /* 0x00 */ u8 unk00[0x48];
     /* 0x48 */ u32 job;
 };
 extern "C" {
-ReflectJobWork* jobGetWork(void);
 void asdMemFree(void*);
 void jobStop(u32, u32);
 
-void btlReflectReleaseContextAndStop(void)
+void btlReflectReleaseContextAndStop(u32 job)
 {
-    ReflectJobWork* work = jobGetWork();
+    ReflectJobWork *work = (ReflectJobWork *)jobGetWork(job);
     ReflectContext* context = g_btlActionReflect;
     ReflectAction* action = context->head;
     while (action != NULL) {

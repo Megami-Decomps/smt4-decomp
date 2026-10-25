@@ -1,4 +1,5 @@
 #include "shard/JobWork.h"
+#include "shard/surfaceCopy.h"
 
 extern "C" {
 

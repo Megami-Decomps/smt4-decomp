@@ -4,6 +4,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/categoryGetColor.h"
 
 struct DemonIconRecord {
     DevilSortRecord key;
@@ -39,7 +40,6 @@ extern "C" {
 extern AocSystem* g_aocSystem;
 const DemonIconDefinition* dataTable00FindById(u16 id);
 BtlUnitLink* partyMemberFindById(u32 id);
-u32 categoryGetColor(s32 category);
 void drawSetColorFromRGBA8(u32 color);
 void effectSubmitPackageRequest(AocSystem* system, u32 image, s32 x, s32 y, u32 style);
 void FUN_002b04e8(s32 layer, u32 group, u32 image, s32 x, s32 y, u32 style,

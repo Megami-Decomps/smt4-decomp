@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a3354` (_code @ 0x3a3354, 0x488 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/FUN_00290e78.h"
 
 extern "C" {
 
@@ -39,7 +40,6 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-extern int FUN_00290e78(void);
 extern int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: messageMainFinishWindow. */

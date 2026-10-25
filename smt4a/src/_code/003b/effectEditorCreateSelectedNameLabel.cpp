@@ -1,11 +1,12 @@
 /* NON_MATCHING: node fields use three scalar stores instead of retail's paired origin store plus global reload; argument scheduling adds one instruction. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
+#include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
+#include "shard/linkedFindItemByIndex.h"
 
 extern "C" {
 extern EffectSelectionTemplate DAT_0059e9a8;
 void engineFreeCallback(void *memory);
-LinkedItem *linkedFindItemByIndex(LinkedItems *list, s32 index);
 void effEditorSetTextValue(EffMenuNode *node, const char *text);
 
 void effectEditorCreateSelectedNameLabel()

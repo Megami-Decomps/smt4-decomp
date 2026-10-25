@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail loads the entry flags as two words (ldr with writeback) into r1/r0; this source gets one ldrd. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 
 // Script result: 1 when any battle entry passes all four candidate masks.
 u32 FUN_003bc104(void)

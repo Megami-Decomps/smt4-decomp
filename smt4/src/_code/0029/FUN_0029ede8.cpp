@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "bible/bibleDevil.h"
 
 extern "C" {
 

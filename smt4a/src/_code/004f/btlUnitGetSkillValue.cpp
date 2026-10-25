@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -12,7 +13,6 @@ typedef struct BtlUnitRecord {
     /* 0x1F54 */ SkillData *skill;
 } BtlUnitRecord;
 
-extern void *btlGetMainState(void);
 extern int btlScriptUnitHasFlags(void *mainState);
 
 /* The unit's current skill value, or 0 when it has no skill or the battle check fails. */
@@ -21,7 +21,7 @@ int btlUnitGetSkillValue(BtlUnitRecord *unit)
     if (unit->skill == NULL) {
         return 0;
     }
-    if (btlScriptUnitHasFlags(btlGetMainState()) != 0) {
+    if (btlScriptUnitHasFlags(static_cast<void *>(btlGetMainState())) != 0) {
         return 0;
     }
     return unit->skill->value;

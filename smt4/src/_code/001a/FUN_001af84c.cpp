@@ -1,6 +1,7 @@
 /* NON_MATCHING: draws the status icon of a quest list row (new, in progress, done, locked, selected) and returns the row text colour; written from the decompilation, the dataTable1bOr1cGetRecord argument is inferred and branch layout not compared with retail */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_002903f0.h"
 
 #define QUEST_ICON_LAYER 2
 #define QUEST_ICON_TABLE 0x29
@@ -38,7 +39,6 @@ QuestRecord *dataTable1bOr1cGetRecord(s32 quest);
 s32 questPassesAvailabilityConditions(s32 quest);
 s32 questIsOfferable(u16 quest);
 s32 questIsCompleted(s32 quest);
-s32 FUN_002903f0(void);
 s32 FUN_00298dc8(void);
 s32 FUN_00298e00(s32 quest);
 s32 FUN_00298e40(s32 quest, s32 step, s32 *progress);

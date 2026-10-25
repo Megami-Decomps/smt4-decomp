@@ -1,4 +1,5 @@
 /* NON_MATCHING: skill-array zero scheduling, battle mask loads and tier flag updates differ; -O2 candidate. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct ActionTierUnit {
@@ -25,7 +26,6 @@ struct ActionTierMasks {
 };
 extern "C" {
 extern ActionTierMasks DAT_005713f0;
-BtlMainStateA *btlGetMainState();
 ActionTierUnit *FUN_003f0e20(BtlMainStateA *, u32);
 s32 btlAnyEventFilterMatches(BtlMainStateA *, ActionTierUnit *, u32);
 s32 lcgRandomRange(u32);

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BtlMainState;
@@ -24,7 +25,6 @@ static __inline EffectNameEntryView *effectNameTableGetEntry(EffectNameTableView
     return &table->entries[index];
 }
 extern "C" {
-BtlMainState *btlGetMainState(void);
 s32 FUN_00293230(BtlMainState *mainState);
 s32 libc_strcmp(const char* left, const char* right);
 extern BattleEffectView g_btlEffect;

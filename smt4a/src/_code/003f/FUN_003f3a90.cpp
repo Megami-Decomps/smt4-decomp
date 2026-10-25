@@ -50,7 +50,7 @@ extern "C" {
 
 extern RenderCtx* g_renderCtx;
 
-LayoutEntry* FUN_001834a4(u32 group, u32 index);
+LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
 PlayerStatus* gameGetPlayerData(void);
@@ -74,7 +74,7 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
-    LayoutEntry* layout = FUN_001834a4(0x11, slot);
+    LayoutEntry* layout = asdTMTexTableEntryAt(0x11, slot);
     s32 count = 0;
     s16 current = 0;
     s16 following = 0;

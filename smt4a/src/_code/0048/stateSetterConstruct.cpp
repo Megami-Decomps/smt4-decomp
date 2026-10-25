@@ -1,6 +1,8 @@
 /* NON_MATCHING: readable rebuild of the name-entry state setter's constructor (handler table of function/adjust pairs, the name source by mode, the sprite and param packet setup); armcc here orders the handler-table stores and the unaligned 18-byte name copies differently. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "shard/stateSetterConstruct.h"
+#include "event/bustupEvent/BustupTex.h"
 
 /* A name (18 bytes). */
 struct PlayerNameBuffer {
@@ -33,7 +35,6 @@ void FUN_004850c0(void *setter);
 void FUN_0048505c(void *setter);
 
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 a, s32 b);
 void FUN_0014e188(u8 *sprite, s32 table, s32 a, u8 *packet, s32 b);
 void paramsClearPacket(u8 *packet);
 

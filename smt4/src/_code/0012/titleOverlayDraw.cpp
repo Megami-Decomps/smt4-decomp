@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
+#include "shard/packNibblesAndByte.h"
 
 
 extern "C" {
@@ -11,7 +12,6 @@ void FUN_002bee04(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void effectRenderTransformedInstance(TitleDrawElement *element, f32 value);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
 }

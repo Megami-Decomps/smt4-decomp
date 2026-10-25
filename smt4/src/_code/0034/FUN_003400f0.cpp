@@ -1,4 +1,5 @@
 /* NON_MATCHING: compile-time directory constant restores owner registers; accessory vector construction and record-loop operand allocation still differ. */
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -19,7 +20,6 @@ typedef char BattleStageAccessoryLayout[sizeof(BattleStageAccessoryPart) == 0x24
 #define BATTLE_STAGE_DIRECTORY "battle/battle_map/"
 extern "C" {
 extern void *g_mapAccessoryTable;
-BtlMainState *btlGetMainState(void);
 s32 FUN_002402c4(BtlMainState *state, const char *path);
 void FUN_002a09b4(const char *path, u32 mode);
 void *dataTableFileGetTable(void *file, u32 section);

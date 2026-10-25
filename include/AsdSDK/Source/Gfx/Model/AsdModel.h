@@ -202,4 +202,8 @@ extern "C" {
 s32 aocLoadTextureNode(u32 a, u32 b, u32 c, u32 d);
 }
 
+extern "C" {
+void FUN_0014de4c(int *arg0, int *arg1, int arg2);
+}
+
 #endif

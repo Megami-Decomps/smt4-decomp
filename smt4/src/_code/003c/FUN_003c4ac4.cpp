@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4ac4` (_code @ 0x3c4ac4, 0x46c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/btlHelp.h"
 
@@ -23,7 +24,6 @@ extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int saveIsRecordValueBounded(unsigned short);
 extern unsigned int *FUN_002561d8(unsigned int, unsigned int, unsigned int);
 extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-extern unsigned int btlGetMainState(void);
 
 
 void FUN_003c4ac4(int param_1,unsigned int param_2)
@@ -48,7 +48,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
   case 0:
     puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
     *(unsigned int *)(param_1 + 0x1c) = *puVar4;
-    temp_v0 = btlGetMainState();
+    temp_v0 = reinterpret_cast<unsigned int>(btlGetMainState());
     puVar2 = (unsigned int *)FUN_002561d8(temp_v0,*(unsigned int *)(param_1 + 0x1c),1);
     if (puVar2 != (unsigned int *)0x0) {
       asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),1,(int)(short)puVar2[0x6d],1,9999,0);

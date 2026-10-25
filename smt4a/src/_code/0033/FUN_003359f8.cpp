@@ -1,4 +1,5 @@
 /* NON_MATCHING: free-slot search branches and party-count loads differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/Shard0031.h"
@@ -15,7 +16,6 @@ struct PartyInsertionSlots {
 };
 extern "C" {
 s32 scrGetArg(u32);
-BtlMainStateA *btlGetMainState(void);
 PartyInsertionSlots *gameGetSlotTable(void);
 void FUN_004fcf0c(s32, s32, s32, s32, s32, s32);
 }

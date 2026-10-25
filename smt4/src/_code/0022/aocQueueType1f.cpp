@@ -1,6 +1,7 @@
 /* Matches with -O1 (requested): the add-on content code was built at a lower optimisation level. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/aocQueueType1f.h"
 
 extern "C" {
 

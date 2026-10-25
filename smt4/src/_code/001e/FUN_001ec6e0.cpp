@@ -3,6 +3,7 @@
 #include "camp/CampCec/CampCecView.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "shard/FUN_00262f78.h"
 
 struct CecLoader {
     /* 0x000 */ u8 unk000[0xCEC];
@@ -41,7 +42,6 @@ void cecProcessStart(void);
 void cecProcessForward(void *block);
 void FUN_002597c0(void);
 u32 FUN_00259800(void);
-u32 FUN_00262f78(void);
 void btlTalkBustUpCreate(void);
 void fileSlotLoad(s32 slot);
 void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);

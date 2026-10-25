@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/asdMemoryGetAllocatorA.h"
 
 extern "C" {
 extern AsdMemoryApoc g_asdMemory;

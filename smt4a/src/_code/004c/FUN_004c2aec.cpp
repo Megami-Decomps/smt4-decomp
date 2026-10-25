@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail's identity FP products/addition are omitted and response-mask loads differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleSkillResponseMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/Shard004B.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);

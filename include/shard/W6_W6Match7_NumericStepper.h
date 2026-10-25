@@ -20,4 +20,12 @@ void numericStepperHandleInput(NumericStepper* stepper);
 void numericStepperHandleInput(NumericStepper* stepper);
 }
 
+extern "C" {
+u32 FUN_003c2a84(int alt);
+}
+
+extern "C" {
+u32 getMaskB6(s32 includeExtra);
+}
+
 #endif

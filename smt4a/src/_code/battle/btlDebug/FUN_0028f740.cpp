@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028f740` (_code @ 0x28f740, 0x588 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 
@@ -29,11 +30,10 @@ typedef struct {
 extern unsigned int DAT_00573be8; /* 0x573be8 */
 extern unsigned int DAT_00573bec; /* 0x573bec */
 
-extern int btlGetMainState(void);
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 extern int gameFlagIsSet(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
@@ -99,10 +99,10 @@ void FUN_0028f740(int param_1)
         temp_v12 = vec2GetYInt(temp_v12 + 0x138);
         temp_v9 = vec2GetYInt(temp_v4);
         if ((temp_v8 & 1) != 0) {
-          temp_v16 = FUN_001834a4(0xd,temp_v5 + (int)(7 - temp_v8) / 2 + 0xff);
+          temp_v16 = asdTMTexTableEntryAt(0xd,temp_v5 + (int)(7 - temp_v8) / 2 + 0xff);
         }
         else {
-          temp_v16 = FUN_001834a4(0xd,temp_v5 + (int)(8 - temp_v8) / 2 + 0x106);
+          temp_v16 = asdTMTexTableEntryAt(0xd,temp_v5 + (int)(8 - temp_v8) / 2 + 0x106);
         }
         temp_v1 = '\0';
         temp_v15 = 0;
@@ -121,7 +121,7 @@ void FUN_0028f740(int param_1)
               ((*(short *)(pcVar12 + 0x5c) == 0 || (temp_v11 = gameFlagIsSet(), temp_v11 != 0)))) &&
              (((*(short *)(pcVar12 + 0x5e) == 0 || (temp_v11 = gameDataFlagTestBit(), temp_v11 != 0)) &&
               ((pcVar12[0x5b] == '\0' ||
-               (temp_v11 = btlGetMainState(),
+               (temp_v11 = reinterpret_cast<int>(btlGetMainState()),
                (*(unsigned int *)(temp_v11 + 0x45a0) & DAT_00573be8) == 0 &&
                (*(unsigned int *)(temp_v11 + 0x45a4) & DAT_00573bec) == 0)))))) {
             temp_v0 = *pcVar12;
@@ -170,10 +170,10 @@ LAB_0028fb5c:
     temp_v7 = vec2GetYInt(temp_v7 + 0x138);
     temp_v4 = vec2GetYInt(temp_v4);
     if ((temp_v8 & 1) != 0) {
-      temp_v12 = FUN_001834a4(0xd,temp_v3 + (int)(7 - temp_v8) / 2 + 0x182);
+      temp_v12 = asdTMTexTableEntryAt(0xd,temp_v3 + (int)(7 - temp_v8) / 2 + 0x182);
     }
     else {
-      temp_v12 = FUN_001834a4(0xd,temp_v3 + (int)(8 - temp_v8) / 2 + 0x189);
+      temp_v12 = asdTMTexTableEntryAt(0xd,temp_v3 + (int)(8 - temp_v8) / 2 + 0x189);
     }
     temp_v9 = param_1;
     FUN_003da6ac(param_1,temp_v3);

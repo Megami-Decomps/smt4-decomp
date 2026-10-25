@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,12 +9,11 @@ typedef struct Player {
 } Player;
 
 int scrSetResult(bool value);
-Player *btlGetMainState(void);
 
 /* Script command: passes whether flag bit 1 of the current player is set to scrSetResult. */
 u32 scrGetPlayerFlagSet(void)
 {
-    Player *player = btlGetMainState();
+    Player *player = reinterpret_cast<Player *>(btlGetMainState());
 
     int set = 0;
     if (player->flags & 2) {

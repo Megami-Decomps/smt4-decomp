@@ -1,5 +1,6 @@
 /* NON_MATCHING: the shift count is built in r2 and the result via movne r0, #1 (retail: shift count in r3, movne r0, r1). */
 #include "common.h"
+#include "shard/gameFlagIsSet.h"
 
 extern "C" {
 

@@ -1,12 +1,12 @@
 /* NON_MATCHING: std::remove's find loop compares against a copy of the end in r0 (retail) and the build keeps the end in place; the build also merges the buffer/slot loads into an ldm and needs two more callee-saved registers. */
 #include "gfx/AsdLightSet.h"
 #include <algorithm>
+#include "shard/asdMemFree.h"
 
 extern "C" {
 extern s32 g_asdLightCount;
 void objectBufferFree(AsdLightBuffer *buffer);
 u32 asdLightSelectActive(s32 kind);
-void asdMemFree(void *memory);
 }
 
 /* Takes `light` out of the vector; true when it was registered. */

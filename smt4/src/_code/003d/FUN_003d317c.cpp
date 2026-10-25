@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/FUN_00229a24.h"
 
 extern "C" {
 
 int btlEntryValuesCopy(...);
-int FUN_00229a24(void);
 int FUN_00229b10(int *, unsigned int *);
 int btlReflectCreateKind18(int, unsigned int *, int, int, int);
 int FUN_00245cc0(...);

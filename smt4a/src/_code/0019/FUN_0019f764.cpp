@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail reads the force flag through a 0x11F4 offset register and copies the texture size pair with ldm rather than ldrd; the flag store also lands earlier. */
+/* NON_MATCHING: the force flag is now read through the 0x11F4 offset register (s8 field); retail still loads format, then the size pair with ldm (via ip), then address, where armcc loads the pair last with ldrd; the flag store also lands earlier. */
 #include "common.h"
 #include <stddef.h>
+#include "shard/dataSubmitSelectedPresetBlock.h"
 
 extern "C" {
 
@@ -23,11 +24,10 @@ struct TextureDesc {
 struct TextureState {
     /* 0x0000 */ u8 unk0000[0x11F0];
     /* 0x11F0 */ TextureDesc *texture;
-    /* 0x11F4 */ u8 forceUpdate;
+    /* 0x11F4 */ s8 forceUpdate;
     /* 0x11F5 */ u8 mode;
 };
 
-void dataSubmitSelectedPresetBlock(u32 mode);
 void FUN_001ac64c(TextureSize size, u32 format, u32 address);
 
 /* Binds a texture (skipped if unchanged and not forced) and selects the mode. */

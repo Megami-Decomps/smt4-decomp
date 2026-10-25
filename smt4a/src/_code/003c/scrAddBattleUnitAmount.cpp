@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct BtlUnit {
 } BtlUnit;
 
 extern s32 scrGetArg(s32 index);
-extern void *btlGetMainState(void);
 extern BtlUnit *FUN_003f0e20(void *state, s32 unit);
 
 /* Script command: adds the second argument to field 0x3B0 of the unit named by the first. */
@@ -16,7 +16,7 @@ s32 scrAddBattleUnitAmount(void)
 {
     s32 unitId = scrGetArg(0);
     s32 amount = scrGetArg(1);
-    BtlUnit *unit = FUN_003f0e20(btlGetMainState(), unitId);
+    BtlUnit *unit = FUN_003f0e20(static_cast<void *>(btlGetMainState()), unitId);
 
     if (unit != NULL) {
         unit->value += amount;

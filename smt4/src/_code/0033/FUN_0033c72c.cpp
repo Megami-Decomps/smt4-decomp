@@ -10,7 +10,7 @@ int categoryGetColor(int);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int renderCtxCalculateStereoParallax(int);
 int drawSetColorFromRGBA8(void);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int efctSetSpeed(void);
@@ -40,7 +40,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: categoryGetColor. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -171,7 +171,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(*(float *)(temp_v1 + 0x328) + (float)temp_v12) + temp_v9,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,temp_v8,*(unsigned int *)(s__B_B_B_B_00434378 + temp_v15 * 4));
+    textDrawString(2,temp_v8,*(unsigned int *)(s__B_B_B_B_00434378 + temp_v15 * 4));
     if (temp_v15 != 0) {
       if (temp_v15 != 1) {
         if (temp_v15 == 2) {
@@ -224,7 +224,7 @@ LAB_0033cbe4:
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(*(float *)(temp_v1 + 0x330) + (float)temp_v12) + temp_v9,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,temp_v6,temp_v18);
+    textDrawString(2,temp_v6,temp_v18);
     temp_v15 = temp_v15 + 1;
     if (temp_v15 >= 4) {
       return;

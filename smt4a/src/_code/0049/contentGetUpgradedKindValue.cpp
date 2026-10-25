@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/contentGetUpgradedKindValue.h"
 
 struct ContentUpgradeValueRecord {
     /* 0x00 */ u8 unk00[0x36];

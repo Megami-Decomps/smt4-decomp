@@ -1,9 +1,9 @@
 /* NON_MATCHING: folded roster-plus-four addressing changes saved registers/frame size and the first comparison-loop register allocation. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 void sysMemClear(void *, u32);
 
 u32 btlUnitCheckAgainstActivePeers(const BattleRosterRecordA *unit, u32 conditions)

@@ -2,6 +2,7 @@
 #include "event/2dEvent/SmokeFade.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/packNibblesAndByte.h"
 
 extern "C" {
 extern SmokeFadeState *DAT_0043df28;
@@ -11,7 +12,6 @@ void FUN_002bed3c();
 u32 FUN_002c5d80(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
-u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 
 s32 FUN_001ad4f4(u32)

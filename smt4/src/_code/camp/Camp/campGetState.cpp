@@ -1,5 +1,6 @@
 /* Returns the address of the camp's state block. */
 #include "common.h"
+#include "camp/Camp.h"
 
 extern "C" {
 

@@ -3,6 +3,8 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "util/CalleeContracts.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -11,9 +13,7 @@ int gameDataBlocksGetSaveData(void);
 int sysPlaySe(...);
 int wordPairCopy(unsigned int, unsigned int);
 int FUN_002299b0(void);
-int FUN_0023b45c(...);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002c8538(...);
 int FUN_002c9104(void);
 int libc_strcpy(...);
 int messageStateEndMode2(void);

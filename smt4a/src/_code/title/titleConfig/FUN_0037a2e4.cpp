@@ -5,6 +5,7 @@
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/campIsState85.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ void FUN_00203b40(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
 void fillTwoWordsWithByte(void *destination, u32 value);
 void sysPlaySe(s32 sound);
 void FUN_0019de98(s32 channel, u32 color);
-s32 campIsState85(void);
 GameDataBlock *gameDataBlocksGetSaveData(void);
 u32 categoryGetThresholdIndex(u8 value);
 u32 findByteThresholdTier(u8 value);

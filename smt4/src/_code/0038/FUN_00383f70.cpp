@@ -1,6 +1,7 @@
 /* NON_MATCHING: selection pointer is hoisted across row draws; saved registers and VFP argument scheduling differ. */
 #include "ui/DebugItemList.h"
 #include "camp/RenderCtx.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
@@ -9,7 +10,6 @@ extern const char DAT_004058c8[];
 void FUN_002c1b64(RenderCtx *context, s32 mode);
 void FUN_002c0944(u32 red, u32 green, u32 blue, u32 alpha, f32 x, f32 y, f32 width, f32 height, f32 scale);
 const char *FUN_002bcddc(u16 id, u32 category);
-void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 depth, f32 scaleX, f32 scaleY);
 u32 flaggedEntryGetValueByState(FlaggedValueHolder *selection);
 
 // Draw the visible item names and a cursor, or the empty-list message.
@@ -30,14 +30,14 @@ void FUN_00383f70(DebugItemList *work)
         count = bounds->visible;
     }
     if (count == 0) {
-        FUN_002be5a4(2, ~0u, DAT_00405890, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
+        textDrawString(2, ~0u, DAT_00405890, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
         return;
     }
     for (s32 row = 0; row < count; ++row) {
         const char *text = FUN_002bcddc(work->items[row].id, 0);
-        FUN_002be5a4(2, ~0u, text, 24.0f, (f32)(row * 14 + 8), 0.0f, 1.0f, 1.0f);
+        textDrawString(2, ~0u, text, 24.0f, (f32)(row * 14 + 8), 0.0f, 1.0f, 1.0f);
     }
     s32 selected = flaggedEntryGetValueByState(&work->selection);
-    FUN_002be5a4(2, ~0u, DAT_004058c8, 8.0f, (f32)(selected * 14 + 8), 0.0f, 1.0f, 1.0f);
+    textDrawString(2, ~0u, DAT_004058c8, 8.0f, (f32)(selected * 14 + 8), 0.0f, 1.0f, 1.0f);
 }
 }

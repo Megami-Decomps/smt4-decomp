@@ -1,11 +1,11 @@
 /* NON_MATCHING: the entry-table base and index arithmetic use R0/R1 in the opposite order. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA* btlGetMainState(void);
 
 // Report whether any eligible combatant's selected signed parameter exceeds the threshold.
 u32 FUN_003c1730(void)

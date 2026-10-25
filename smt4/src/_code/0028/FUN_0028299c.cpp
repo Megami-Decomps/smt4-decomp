@@ -1,4 +1,5 @@
 /* Returns the signed value at +0x194 of the object's current record, or 0 when there is none or FUN_00293230 reports busy. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -13,7 +14,6 @@ typedef struct Owner {
     /* 0x1CFC */ Record *record;
 } Owner;
 
-extern void btlGetMainState(void);
 extern s32 FUN_00293230(void);
 
 s32 FUN_0028299c(Owner *owner)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation: retail keeps entry in r6 and reuses the status+0x400 base register for the constant 1, so it saves one register fewer (8-byte frame vs our 12). */
 #include "common.h"
+#include "shard/FUN_0029ac94.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown;
 
-s32 FUN_0029ac94(void);
 void buttonHelpSetPreset(u32 preset);
 void FUN_0029f848(void *window, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 

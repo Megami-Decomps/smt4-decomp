@@ -4,10 +4,8 @@
 /* Scales a level-table cost by the demon's level difference, capped at ten steps. */
 extern "C" u32 FUN_00295c60(u16 devilId, s32 level)
 {
-    u32 cost;
-    if (level >= 99) {
-        cost = 0;
-    } else {
+    u32 cost = 0;
+    if (level < 99) {
         const u32 *costs = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
         s32 index = level;
         cost = costs[index - 1];

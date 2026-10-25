@@ -33,4 +33,8 @@ u8 campCecSettingExists(void);
 }
 #endif
 
+extern "C" {
+u8 campCecSettingIsDone(void);
+}
+
 #endif

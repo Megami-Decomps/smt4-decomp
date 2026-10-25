@@ -47,6 +47,19 @@ Every match must be one a programmer could have written for a reason.
   `shard/JobWork.h` declares the canonical `JobWork *jobGetWork(u32 job)` accessor:
   pass the incoming handle explicitly, use `s32 (u32 job)` for process/draw updates and
   `void (u32 job)` for destruction callbacks, and keep the registrar's declarations in sync.
+  Callers keep their own typed view of the work area with a C cast
+  (`MyWork *work = (MyWork *)jobGetWork(job);`) and never declare a local `JobWork` or prototype.
+  `text/TextDraw.h` declares `f32 FUN_00162790(layer, color, text, x, y, z, width, height)` (smt4's
+  `FUN_002be5a4`): the last three floats are depth, letter spacing and opacity and are always
+  passed (a caller with fewer arguments reuses retail's `s2`-`s4` values; check them in the
+  retail call site); the result is the drawn advance. Text held as bytes or `u16` is cast to `const char *`.
+  `gamedata/Table04Record.h` owns data table 4's 0x88-byte record (the search stride and the key
+  buffer prove it) and the `dataTable04FindById` declaration; callers that read other fields
+  cast the result to their own view. `gamedata/SaveSlotTable.h` owns the save block's slot table
+  returned by `gameGetSlotTable()` (money, party/reserve slot maps, player and 0x134-byte slot records).
+  `shard/W6_W6Match1_CriticalSection.h` has the only scoped critical-section lock
+  (`ScopedCriticalLock lock(section)`): near misses holding a section in a callee-saved register
+  across a body are this lock.
   `gamedata/GameFlags.h` declares `void gameFlagSetValue(u32 id, s32 value, s32 notify)`
   for both games. Pass the retail third argument explicitly: normal setters notify with `1`,
   while the flag-change handlers use `0` to avoid redispatch. The setter has no result;
@@ -89,6 +102,17 @@ Every match must be one a programmer could have written for a reason.
   for IV and `RenderCtxA` for Apocalypse, with the context push/set wrappers when the state
   argument is evaluated before locating the stack. `shard/S1ListPanel.h` supplies only the
   derived Apocalypse scissor extension; do not recreate the removed cached-state/context types.
+  The script interpreter has one definition: `script/ScriptVm.h` owns `ScriptVmProcess` (the
+  process every opcode and command receives: `pc`, `depth`, tags, `ScriptVmValue` stack,
+  `commandOwner`/`commandFrame`/`workValues`, variable tables) and `ScriptContext`/`g_scrContext`
+  (the operand registers of the binary operators plus `active`, the running process), with
+  `g_scrIntVars`/`g_scrFloatVars` and `scrPopInt`/`scrPopFloat`. `script/ScriptArgs.h` declares
+  `scrGetArg`, `scrSetResult`, `scrGetCommandOwner` and `scrCommMessageSetMode`; the frame counter
+  is `util/ScrGetCommandFrame.h`. Do not declare local process/context views or these callees.
+  Battle commands of IV take the battle block from `battle/BtlMainAccess.h`
+  (`btlGetMainState()` / `btlGetMainStateExt()`); add fields to `BtlMainState`/`BtlMainStateExt`
+  with offset asserts instead of writing a per-function view. The shard
+  `W4_Match6_BtlEntry.h` still carries a second `BtlMainState` that its includers cannot mix with it.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in

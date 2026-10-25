@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (173 vs ~166 rows); retail keeps the entry pointers in callee-saved registers instead of reloading, and orders the flag tests differently */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 // Battle list entry: only the fields read by the affinity lookup.
@@ -20,7 +21,6 @@ struct PassiveSkill {
 
 extern "C" {
 
-void* btlGetMainState(void);
 AffinityEntry* btlMainFindEntryByListedId(void* main, u32 id);
 void selectionCopySupportedValue(u32 skill, s32* out);
 void FUN_0022abe0(AffinityEntry* entry, u16* passiveIds);
@@ -28,7 +28,7 @@ PassiveSkill* passiveSkillLookupRecord(u16 id);
 
 static __inline AffinityEntry* findEntry(u32 unitId)
 {
-    return btlMainFindEntryByListedId(btlGetMainState(), unitId);
+    return btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), unitId);
 }
 
 // Builds the hit-result flag word of skill `skillId` against unit `unitId`:

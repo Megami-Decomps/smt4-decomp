@@ -1,11 +1,11 @@
 /* NON_MATCHING: the polynomial and the clamp match; remaining differences are the table-lookup block (retail places it after the epilogue instead of predicating it) and the literal-pool load order. */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "shard/gameGetUnlockedCountLimit.h"
 
 extern "C" {
 
 
-s32 gameGetUnlockedCountLimit(void);
 
 /* Experience needed for `level`: from table 9 below level 99, a polynomial above (capped at 999999), 0 at or past the unlocked limit. */
 u32 FUN_004ccbf0(s32 level)

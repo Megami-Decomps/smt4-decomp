@@ -20,11 +20,11 @@ int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int FUN_0031eba0(...);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(...);
@@ -80,13 +80,13 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: itemDrawCategoryBadge. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0031eba0. */
@@ -182,7 +182,7 @@ void FUN_003b3388(int param_1,int param_2,int param_3)
   temp_v5 = 0;
   do {
     acStack_e8[temp_v5] = '\0';
-    temp_v8 = FUN_002bf4f8(0x28,temp_v5 + 0x30);
+    temp_v8 = asdTMTexTableEntryAt(0x28,temp_v5 + 0x30);
     if (temp_v5 == 0) {
       temp_v12 = 0xffffffff;
       temp_v13 = temp_v12;
@@ -234,8 +234,8 @@ LAB_003b35ac:
     temp_v14 = temp_v14 + 1;
   } while (temp_v14 < 4);
   temp_v24 = 0;
-  temp_v26 = FUN_002bf4f8(0x28,7);
-  temp_v14 = FUN_002bf4f8(0x28,0x1d);
+  temp_v26 = asdTMTexTableEntryAt(0x28,7);
+  temp_v14 = asdTMTexTableEntryAt(0x28,0x1d);
   temp_v21 = 0;
   do {
     if (acStack_e8[temp_v21] != '\0') {
@@ -299,10 +299,10 @@ LAB_003b35ac:
           temp_v1 = *(unsigned short *)(temp_v8 + 0x44);
         }
         if (((unsigned int)temp_v1 & (1 << (temp_v13 & 0xff))) != 0) {
-          temp_v8 = FUN_002bf4f8(0x28,temp_v12 * 2 + 0x11e);
+          temp_v8 = asdTMTexTableEntryAt(0x28,temp_v12 * 2 + 0x11e);
           FUN_00288844(*(short *)(temp_v8 + 8) + temp_v5,
                        (int)*(short *)(temp_v8 + 10) + temp_v21 + param_3,0x24);
-          temp_v8 = FUN_002bf4f8(0x28,temp_v12 * 2 + 0x11d);
+          temp_v8 = asdTMTexTableEntryAt(0x28,temp_v12 * 2 + 0x11d);
           messageKindForward((int)(short)temp_v13,*(short *)(temp_v8 + 8) + temp_v5,
                        (int)*(short *)(temp_v8 + 10) + temp_v21 + param_3,0x24);
           temp_v12 = (temp_v12 + 1) & 0xffff;
@@ -335,7 +335,7 @@ LAB_003b35ac:
     temp_v13 = (unsigned int)temp_v16;
     temp_v14 = temp_v14 + 1;
   } while (temp_v14 < 4);
-  temp_v14 = FUN_002bf4f8(0x28,0x1e);
+  temp_v14 = asdTMTexTableEntryAt(0x28,0x1e);
   temp_v17 = (unsigned long long)temp_v13;
   temp_v21 = 0;
   do {
@@ -358,7 +358,7 @@ LAB_003b35ac:
       VectorSignedToFloat(temp_v5 + ((int)**(short **)(temp_v14 + 0xc) - (int)puVar9) / 2 +
                           aiStack_108[temp_v21] + (int)*(short *)(temp_v14 + 8),
                           (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be5a4(1,0xffffffff,temp_v23,(int)*(short *)(temp_v14 + 8));
+      textDrawString(1,0xffffffff,temp_v23,(int)*(short *)(temp_v14 + 8));
     }
     temp_v21 = temp_v21 + 1;
   } while (temp_v21 < 4);
@@ -392,7 +392,7 @@ LAB_003b35ac:
     }
     temp_v14 = temp_v14 + 1;
   } while (temp_v14 < 4);
-  temp_v14 = FUN_002bf4f8(0x28,0x27);
+  temp_v14 = asdTMTexTableEntryAt(0x28,0x27);
   drawSetColorFromRGBA8(0xff);
   temp_v21 = 0;
   do {
@@ -415,7 +415,7 @@ LAB_003b35ac:
     temp_v21 = temp_v21 + 1;
   } while (temp_v21 < 4);
   FUN_002bed3c();
-  temp_v14 = FUN_002bf4f8(0x28,0x25);
+  temp_v14 = asdTMTexTableEntryAt(0x28,0x25);
   drawSetColorFromRGBA8(0x72e027ff);
   temp_v21 = 0;
   do {
@@ -455,7 +455,7 @@ LAB_003b35ac:
     temp_v21 = temp_v21 + 1;
   } while (temp_v21 < 4);
   FUN_002bed3c();
-  temp_v14 = FUN_002bf4f8(0x28,0x11);
+  temp_v14 = asdTMTexTableEntryAt(0x28,0x11);
   temp_v17 = (unsigned long long)temp_v13;
   temp_v21 = 0;
   do {
@@ -490,7 +490,7 @@ LAB_003b35ac:
     }
     temp_v21 = temp_v21 + 1;
   } while (temp_v21 < 4);
-  FUN_002bf4f8(0x28,0x11);
+  asdTMTexTableEntryAt(0x28,0x11);
   temp_v14 = 0;
   do {
     if (acStack_e8[temp_v14] != '\0') {
@@ -558,7 +558,7 @@ LAB_003b35ac:
   temp_v14 = 0;
   do {
     if (acStack_e8[temp_v14] != '\0') {
-      temp_v21 = FUN_002bf4f8(0x28,temp_v14 + 0x30);
+      temp_v21 = asdTMTexTableEntryAt(0x28,temp_v14 + 0x30);
       if (temp_v14 != 0) {
         if (*(char *)(temp_v4 + temp_v14 + 0x9107) < '\0') goto LAB_003b4444;
         temp_v5 = gameGetUnitRecord();
@@ -616,30 +616,30 @@ LAB_003b4444:
         temp_v29 = param_1 + temp_v14 * 0x8c;
         temp_v5 = vec2GetXInt(temp_v29 + 0x2d84);
         efctSetSpeed();
-        temp_v8 = FUN_002bf4f8(0x28,temp_v14 + 0x47);
+        temp_v8 = asdTMTexTableEntryAt(0x28,temp_v14 + 0x47);
         temp_v5 = temp_v5 + temp_v4;
         FUN_002bf288(2,0x28,0x3e,*(short *)(temp_v8 + 8) + temp_v5,*(short *)(temp_v8 + 10) + param_3,
                      0x6a);
         temp_v6 = *piVar13;
         FUN_002be650(temp_v6,0);
         textFormatBuffer(temp_v23,&LAB_003b4818,temp_v6);
-        temp_v6 = FUN_002bf4f8(0x28,0x43);
+        temp_v6 = asdTMTexTableEntryAt(0x28,0x43);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v5,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002be5a4(2,0x323232ff,temp_v23,(int)*(short *)(temp_v8 + 8));
-        temp_v6 = FUN_002bf4f8(0x28,0x42);
+        textDrawString(2,0x323232ff,temp_v23,(int)*(short *)(temp_v8 + 8));
+        temp_v6 = asdTMTexTableEntryAt(0x28,0x42);
         itemDrawCategoryBadge((int)(short)*piVar13,
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v6 + 8) + temp_v5,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,0x6f,0);
-        temp_v6 = FUN_002bf4f8(0x28,0x46);
+        temp_v6 = asdTMTexTableEntryAt(0x28,0x46);
         FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v5,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,1,3,0x6f,
                      &LAB_003b4820,*(unsigned int *)(temp_v28 + 0x3630));
         temp_v8 = unlockFlagTest(*piVar13);
         if ((temp_v8 == 0) && (*(short *)(temp_v29 + 0x31b6) >= 0xe)) {
-          temp_v8 = FUN_002bf4f8(0x28,temp_v14 + 0x4d);
+          temp_v8 = asdTMTexTableEntryAt(0x28,temp_v14 + 0x4d);
           temp_v6 = *(int *)(temp_v28 + 0x3548) % 0x20;
           if (temp_v6 < 0x11) {
             VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -670,7 +670,7 @@ LAB_003b4444:
       (**(romwright_code **)(temp_v14 + 0x12c8))();
       *(unsigned char *)(temp_v14 + 0x12c4) = 0;
     }
-    temp_v14 = FUN_002bf4f8(0x28,0x119);
+    temp_v14 = asdTMTexTableEntryAt(0x28,0x119);
     temp_v21 = 0;
     do {
       temp_v5 = *(int *)(param_1 + 0x352c);
@@ -680,7 +680,7 @@ LAB_003b4444:
         temp_v6 = param_1 + temp_v21 * 0x8c;
         temp_v3 = vec2GetXInt(temp_v6 + 0x2d84);
         temp_v5 = temp_v6 + 0x3158;
-        temp_v8 = FUN_002bf4f8(0x28,temp_v21 + 0x47);
+        temp_v8 = asdTMTexTableEntryAt(0x28,temp_v21 + 0x47);
         temp_v19 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v14 + 0xc) + 2),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
         pairSetHalves(temp_v5,(int)(short)(*(short *)(temp_v8 + 8) + (short)temp_v4 + temp_v3),

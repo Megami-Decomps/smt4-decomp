@@ -1,44 +1,23 @@
-#include "common.h"
-
-// Private views of the script context and its typed value stack.
-union ScriptValueView {
-    s32 integer;
-    f32 real;
-};
-
-struct ScriptStackView {
-    u8 unk00[0x1c]; // 0x00
-    s32 count; // 0x1c
-    u8 valueTypes[0x1c]; // 0x20
-    ScriptValueView values[0x1c]; // 0x3c
-};
-
-struct ScriptContextView {
-    u8 unk00[0x20]; // 0x00
-    ScriptStackView* stack; // 0x20
-};
+#include "script/ScriptVm.h"
 
 extern "C" {
-extern ScriptContextView g_scrContext;
-extern s32 g_scrIntVars[];
-extern f32 g_scrFloatVars[];
 
-// Read a stack value relative to the top and convert its typed representation to float.
+// Read a stack value relative to the top and convert it to a float.
 f32 scriptReadStackValueAsFloat(s32 depth)
 {
-    ScriptStackView* stack = g_scrContext.stack;
-    s32 index = stack->count - depth - 1;
+    ScriptVmProcess* process = g_scrContext.active;
+    s32 index = process->depth - depth - 1;
 
-    switch (stack->valueTypes[index]) {
-    case 0:
-    case 4:
-        return static_cast<f32>(stack->values[index].integer);
-    case 1:
-        return stack->values[index].real;
-    case 2:
-        return static_cast<f32>(g_scrIntVars[stack->values[index].integer]);
-    case 3:
-        return g_scrFloatVars[stack->values[index].integer];
+    switch (process->tags[index]) {
+    case SCRIPT_VM_TAG_INT:
+    case SCRIPT_VM_TAG_RETURN_ADDRESS:
+        return static_cast<f32>(process->values[index].i);
+    case SCRIPT_VM_TAG_FLOAT:
+        return process->values[index].f;
+    case SCRIPT_VM_TAG_INT_VAR:
+        return static_cast<f32>(g_scrIntVars[process->values[index].i]);
+    case SCRIPT_VM_TAG_FLOAT_VAR:
+        return g_scrFloatVars[process->values[index].i];
     default:
         return 0.0f;
     }

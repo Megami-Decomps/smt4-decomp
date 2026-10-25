@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/effPartCreate.h"
 
 extern "C" {
 

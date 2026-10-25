@@ -43,13 +43,13 @@ void FUN_0025cfe4(int param_1,int param_2)
       iVar11 = iVar11 + 1;
     }
     if (iVar11 < 7) {
-      iVar11 = FUN_001834a4(0x2e,0x124);
-      iVar10 = FUN_001834a4(0x2e,0x14c);
+      iVar11 = asdTMTexTableEntryAt(0x2e,0x124);
+      iVar10 = asdTMTexTableEntryAt(0x2e,0x14c);
       iVar10 = (int)*(short *)(iVar10 + 10) - (int)*(short *)(iVar11 + 10);
     }
     else if (iVar11 < 9) {
-      iVar11 = FUN_001834a4(0x2e,0x124);
-      iVar10 = FUN_001834a4(0x2e,0x14d);
+      iVar11 = asdTMTexTableEntryAt(0x2e,0x124);
+      iVar10 = asdTMTexTableEntryAt(0x2e,0x14d);
       iVar10 = (int)*(short *)(iVar10 + 10) - (int)*(short *)(iVar11 + 10);
     }
     FUN_00164b5c(2,0x2e,0x24,*(unsigned int *)(param_2 + 4),*(int *)(param_2 + 8) + iVar10,0x65);
@@ -58,13 +58,13 @@ void FUN_0025cfe4(int param_1,int param_2)
     do {
       iVar12 = param_1 + iVar11 * 4;
       if (0 < *(int *)(iVar12 + 0x3c)) {
-        iVar2 = FUN_001834a4(0x2e,iVar11 + 0x138);
-        iVar3 = FUN_001834a4(0x2e,iVar11 + 0x142);
-        iVar4 = FUN_001834a4(0x2e,0x134);
-        iVar5 = FUN_001834a4(0x2e,0x133);
-        iVar6 = FUN_001834a4(0x2e,0x137);
-        iVar7 = FUN_001834a4(0x2e,0x135);
-        iVar8 = FUN_001834a4(0x2e,0x136);
+        iVar2 = asdTMTexTableEntryAt(0x2e,iVar11 + 0x138);
+        iVar3 = asdTMTexTableEntryAt(0x2e,iVar11 + 0x142);
+        iVar4 = asdTMTexTableEntryAt(0x2e,0x134);
+        iVar5 = asdTMTexTableEntryAt(0x2e,0x133);
+        iVar6 = asdTMTexTableEntryAt(0x2e,0x137);
+        iVar7 = asdTMTexTableEntryAt(0x2e,0x135);
+        iVar8 = asdTMTexTableEntryAt(0x2e,0x136);
         FUN_001689e8((int)*(short *)(param_1 + iVar11 * 2 + 0x28),
                      *(int *)(param_2 + 4) + (int)*(short *)(iVar2 + 8) + (int)*(short *)(iVar5 + 8)
                      ,*(short *)(iVar5 + 10) + iVar10 +

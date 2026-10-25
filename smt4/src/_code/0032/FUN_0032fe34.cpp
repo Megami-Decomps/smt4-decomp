@@ -34,7 +34,7 @@ extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
-extern int FUN_002bf4f8(unsigned int, int);
+extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003881b0. */
@@ -151,7 +151,7 @@ void FUN_0032fe34(int param_1)
             (**(romwright_code **)(temp_v9 + 0x12c8))();
             *(unsigned char *)(temp_v9 + 0x12c4) = 0;
           }
-          temp_v9 = FUN_002bf4f8(0x18,temp_v6 + 0x426d);
+          temp_v9 = asdTMTexTableEntryAt(0x18,temp_v6 + 0x426d);
           temp_v12 = (float)VectorSignedToFloat((int)((unsigned long long)temp_v14 >> 0x20),
                                               (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v9 + 8),

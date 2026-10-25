@@ -35,9 +35,9 @@ struct CampScriptPanelResources {
     /* 0x1154 */ void *messageFileB;
     /* 0x1158 */ ScriptProcess *scriptB;
     /* 0x115C */ u8 unk115C[0xC];
-    /* 0x1168 */ u8 keepUi;
+    /* 0x1168 */ s8 keepUi;
     /* 0x1169 */ u8 unk1169[0xAB];
-    /* 0x1214 */ u8 cacheLoaded;
+    /* 0x1214 */ s8 cacheLoaded;
     /* 0x1215 */ u8 unk1215[3];
     /* 0x1218 */ u32 cacheHandle;
     /* 0x121C */ void *cachedFiles[10];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps values in caller-saved VFP registers across the angle-difference call; separate compilation saves d8-d9. */
+/* NON_MATCHING: retail keeps the values in caller-saved VFP registers across the angle-difference call (needs multifile mathAngleDeltaDegrees), and uses s1 for the 0.0 constant. */
 #include "common.h"
 
 extern "C" f32 mathAngleDeltaDegrees(f32, f32);
@@ -7,7 +7,9 @@ extern "C" f32 mathAngleDeltaDegrees(f32, f32);
 extern "C" f32 FUN_00303a5c(f32 current, f32 target, f32 step)
 {
     f32 difference = mathAngleDeltaDegrees(current, target);
-    f32 distance = difference < 0.0f ? -difference : difference;
+    f32 distance = difference;
+    if (distance < 0.0f)
+        distance = -distance;
     if (distance <= step)
         return target;
     return difference < 0.0f ? current - step : current + step;

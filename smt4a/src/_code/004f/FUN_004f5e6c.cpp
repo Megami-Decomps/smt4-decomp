@@ -61,7 +61,7 @@ void FUN_004f5e6c(void *controller)
     keyedRecordsFreeAll();
     textureCacheReleaseAll();
     if (g_btlCamera != NULL) {
-        g_btlCamera->flags &= ~0x8000000;
+        g_btlCamera->flags = g_btlCamera->flags & ~0x8000000;
     }
     FUN_004f8fa0(controller);
     obj4FSlots28Reset(controller);

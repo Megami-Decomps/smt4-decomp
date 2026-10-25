@@ -8,9 +8,9 @@ extern "C" {
 int FUN_002b75ec(...);
 int effectRenderTransformedInstance(unsigned int *);
 int renderCtxCalculateStereoParallax(int);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int FUN_002bed3c(void);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
@@ -35,11 +35,11 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(unsigned int *);
 extern int vec2GetXInt(void);
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
@@ -137,10 +137,10 @@ unsigned int FUN_0038a478(void)
         *(unsigned char *)(temp_v1 + 0x1264) = 0;
       }
       if ((int)puVar2[4] < 5) {
-        temp_v1 = FUN_002bf4f8(0xe,0xe1);
+        temp_v1 = asdTMTexTableEntryAt(0xe,0xe1);
       }
       else {
-        temp_v1 = FUN_002bf4f8(0xe,0xe0);
+        temp_v1 = asdTMTexTableEntryAt(0xe,0xe0);
       }
       if ((char)puVar2[0x105] != '\x01') {
         if ((char)puVar2[0x105] == '\x02') {
@@ -193,7 +193,7 @@ unsigned int FUN_0038a478(void)
         temp_v4 = 0;
         if (0 < (int)temp_v6) {
           do {
-            temp_v2 = FUN_002bf4f8(0xe,temp_v1 + temp_v4);
+            temp_v2 = asdTMTexTableEntryAt(0xe,temp_v1 + temp_v4);
             FUN_002b75ec(puVar2[0x107],*(short *)(temp_v2 + 8) + temp_v11,(int)*(short *)(temp_v2 + 10),
                          0x13,6,temp_v4);
             temp_v4 = temp_v4 + 1;
@@ -207,11 +207,11 @@ unsigned int FUN_0038a478(void)
         temp_v2 = 0;
         if (0 < (int)temp_v6) {
           do {
-            temp_v3 = FUN_002bf4f8(0xe,temp_v1 + temp_v2);
+            temp_v3 = asdTMTexTableEntryAt(0xe,temp_v1 + temp_v2);
             temp_v7 = *(short *)(temp_v3 + 8) + temp_v11;
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002be5a4(3,temp_v4,puVar2 + temp_v2 * 0x20 + 5,temp_v7);
+            textDrawString(3,temp_v4,puVar2 + temp_v2 * 0x20 + 5,temp_v7);
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < (int)puVar2[4]);
         }

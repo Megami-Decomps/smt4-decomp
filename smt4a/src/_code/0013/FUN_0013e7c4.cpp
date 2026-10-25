@@ -1,5 +1,6 @@
 /* NON_MATCHING: address formation only: retail forms work+0x1400 once (add r0, r0, #5120) and uses +78/+80/+79 from it, with a separate base for the pending store; the build adds each displacement separately and keeps extra saved registers. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 /* A render target size record. */
 struct RenderTargetSize {
@@ -27,14 +28,13 @@ struct RenderJobWork {
 extern "C" {
 
 extern u32 g_renderCtx; /* 0x59dbb4 */
-RenderJobWork *jobGetWork(void);
 void FUN_00157558(u32 context);
 u8 FUN_00154edc(s32 mode, RenderTargetSize *target);
 
 /* Job step: when a render is pending and not done, sizes the target 512x512, renders it and marks the job done. */
-u32 FUN_0013e7c4(void)
+u32 FUN_0013e7c4(u32 job)
 {
-    RenderJobWork *work = jobGetWork();
+    RenderJobWork *work = (RenderJobWork *)jobGetWork(job);
 
     if (work->flags.pending != 0 && work->flags.done == 0) {
         FUN_00157558(g_renderCtx);

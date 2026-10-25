@@ -1,11 +1,11 @@
 /* NON_MATCHING: initial exclusion-mask AND/OR operands use different scratch registers; the paired flags load matches. */
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 #include "gamedata/Table04Record.h"
 
 struct Source4C;
 extern "C" {
 Table04ExtraRecord *dataTable41FindById(u32 skill);
-Source4C *FUN_003f0e20(BattleMaskState *battle, u32 unit);
+Source4C *FUN_003f0e20(BtlMainStateA *battle, u32 unit);
 void source4CCopyHalves(Source4C *source, u16 *skills);
 s32 lcgRandomRange(u32 maximum);
 
@@ -17,8 +17,8 @@ s32 FUN_004c5da4(u32 unit, s32 rollChance)
         u64 blockedStates; // 0xa0
     };
     extern TriggerMaskView DAT_005713f0;
-    BattleMaskState *battle = btlGetMainState();
-    u64 flags = battle->mask;
+    BtlMainStateA *battle = btlGetMainState();
+    u64 flags = battle->stateFlags64.bits;
     if ((flags & DAT_005713f0.blockedStates) != 0)
         return 0;
     Source4C *source = FUN_003f0e20(battle, unit);

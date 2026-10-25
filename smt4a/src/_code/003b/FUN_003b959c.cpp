@@ -1,5 +1,6 @@
 /* NON_MATCHING: same loads and arithmetic; armcc schedules the pool-constant loads (map/engine pointers, magic divisor) and the limit/result registers differently */
 #include "common.h"
+#include "shard/FUN_0032530c.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern StatRecord *g_mapObj;
 extern StatRecord *DAT_00581280;
 extern GameStateResult g_gameState;
 
-s32 FUN_0032530c(void);
 
 /* Recomputes the remaining allowance: the limit minus the base and the average of three stat values, floored at the minimum. */
 void FUN_003b959c(void)

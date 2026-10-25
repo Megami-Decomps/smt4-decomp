@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fc094` (_code @ 0x4fc094, 0xd48 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/btlReflect.h"
 
@@ -8,7 +9,6 @@ extern "C" {
 int countersRaiseA(...);
 
 int qsort(int [5], int, int, unsigned char *);
-int btlGetMainState(void);
 int FUN_001568f8(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_00408184(...);
@@ -127,7 +127,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   uStack_30 = param_2;
   temp_v24 = param_3;
   iStack_28 = param_4;
-  puVar5 = (unsigned int *)btlGetMainState();
+  puVar5 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v21 = param_1 + param_17;
   temp_v23 = &DAT_0057a574 + param_14 * 0xc;
   temp_v18 = puVar5;
@@ -280,10 +280,10 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                     if (temp_v5 == 0) {
                       temp_v5 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect, (int)(short)((short)*(int *)(temp_v4 + 100) + (short)temp_v21),0,param_2));
                       temp_v14[0] = temp_v5;
-                      temp_v5 = btlGetMainState();
+                      temp_v5 = reinterpret_cast<int>(btlGetMainState());
                       FUN_001568f8(temp_v5,(int)*(short *)(temp_v4 + 0x6a));
                       temp_v14[4] = temp_v5;
-                      temp_v13 = btlGetMainState();
+                      temp_v13 = reinterpret_cast<int>(btlGetMainState());
                       temp_v5 = idSetFindSubjectIndex(temp_v13,temp_v4);
                       if (temp_v5 < 0) {
                         temp_v5 = 0;
@@ -503,7 +503,7 @@ LAB_004fca64:
     if ((-1 < param_6) || (param_11 != 0)) {
       temp_v3 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,0,0,0));
       *(unsigned char *)(temp_v3 + 4) = 0x41;
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       temp_v4 = FUN_003eb1cc();
       if (temp_v4 == 0) {
         *(unsigned int *)(temp_v3 + 0x28) = 1;
@@ -512,7 +512,7 @@ LAB_004fca64:
     if (param_5 == 2) {
       temp_v3 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,0,0,0));
       *(unsigned char *)(temp_v3 + 4) = 0x41;
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       temp_v4 = FUN_003eb1cc();
       if (temp_v4 == 0) {
         *(unsigned int *)(temp_v3 + 0x28) = 1;

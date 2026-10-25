@@ -1,5 +1,6 @@
 /* NON_MATCHING: selection-sort loop arithmetic/branch orientation and local register allocation differ; -O2 candidate. */
 #include "common.h"
+#include "shard/dataTable2bSub1GetCount.h"
 
 struct CategoryTable { u32 reserved; };
 struct CategoryRecord {
@@ -20,7 +21,6 @@ struct CategoryGameFlags {
 };
 extern "C" {
 extern CategoryGameFlags g_gameState;
-s32 dataTable2bSub1GetCount(CategoryTable *);
 const CategoryRecord *dataTable2bSub1GetRecord(CategoryTable *, s32);
 s32 gameFlagIsSet(u32);
 s32 saveTestFlagRow(u8, u8);

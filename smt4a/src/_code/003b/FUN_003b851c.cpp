@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
@@ -8,11 +9,11 @@ s32 scrGetArg(u32 index);
 u32 FUN_003b851c(void)
 {
     s32 enable = scrGetArg(0);
-    BattleMaskState *state = btlGetMainState();
+    BtlMainStateA *state = btlGetMainState();
     if (enable > 0) {
-        state->mask |= g_battleMaskPresets.scriptMask;
+        state->stateFlags64.bits |= g_battleMaskPresets.scriptMask;
     } else {
-        state->mask &= ~g_battleMaskPresets.scriptMask;
+        state->stateFlags64.bits &= ~g_battleMaskPresets.scriptMask;
     }
     return 1;
 }

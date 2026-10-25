@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/randRange.h"
 
 extern "C" {
 

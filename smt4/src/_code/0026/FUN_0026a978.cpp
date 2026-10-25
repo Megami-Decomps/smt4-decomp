@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_0026a978.h"
 
 // The ID buffer starts two bytes past a word boundary.
 __packed struct StatusIdBlock {
@@ -16,7 +17,7 @@ extern StatusIdState *g_statusDown;
 void *rt_memcpy(void *, const void *, u32);
 
 // Replace up to eight status-screen IDs, or disable the list for a negative count.
-void FUN_0026a978(const u16 *ids, s32 count)
+void FUN_0026a978(const u32 *ids, s32 count)
 {
     if (count <= 8) {
         StatusIdState *state = g_statusDown;

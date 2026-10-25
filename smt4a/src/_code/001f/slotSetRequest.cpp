@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/slotSetRequest.h"
 
 namespace { struct Slot { f32 scale; u32 active; u32 value; u32 extra; u8 state; u8 padding[3]; }; }
 

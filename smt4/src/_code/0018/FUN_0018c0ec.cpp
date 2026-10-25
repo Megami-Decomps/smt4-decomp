@@ -106,7 +106,7 @@ int pairSetHalves(int, int, int);
 int gameGetPlayerData(void);
 int pairSetFirstResetSecond(...);
 int FUN_002b8ee0(...);
-int FUN_002bf4f8(...);
+int asdTMTexTableEntryAt(...);
 int FUN_002bf818(...);
 int mapMainCallIfActive2(void);
 int lmapMainCallIfActive2(void);
@@ -233,7 +233,7 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
@@ -403,7 +403,7 @@ LAB_0018c354:
         temp_v4 = temp_v4 + (unsigned int)(temp_v16 <= temp_v21);
         temp_v16 = temp_v16 * 10;
       } while ((int)temp_v16 < 1000000);
-      temp_v18 = FUN_002bf4f8(0x28,0x2e);
+      temp_v18 = asdTMTexTableEntryAt(0x28,0x2e);
       temp_v17 = 0;
       temp_v32 = (char *)((int)*(short *)(temp_v18 + 8) + (temp_v4 * -0xc + 0x54) / 2);
       temp_v28 = temp_v8 * 7;
@@ -414,9 +414,9 @@ LAB_0018c354:
           temp_v18 = temp_v2 + (temp_v4 + 0x24) * 0x8c;
           pairSetFirstResetSecond(temp_v18 + 0x20,temp_v27 + 0x80c);
           temp_v21 = temp_v21 - temp_v27 * temp_v20;
-          temp_v4 = FUN_002bf4f8(0x28,temp_v8 + 0x30);
+          temp_v4 = asdTMTexTableEntryAt(0x28,temp_v8 + 0x30);
           pairSetHalves(temp_v18 + 0x20,(int)*(short *)(temp_v4 + 8),(int)*(short *)(temp_v4 + 10));
-          temp_v4 = FUN_002bf4f8(0x28,0x2e);
+          temp_v4 = asdTMTexTableEntryAt(0x28,0x2e);
           FUN_002963ec(temp_v18 + 0x20,
                        (int)(short)((short)(int)temp_v32 + temp_v19 * 0xc + **(short **)(temp_v4 + 0xc) / 2),
                        (int)(short)(*(short *)(temp_v4 + 10) + (*(short **)(temp_v4 + 0xc))[1] / 2));
@@ -586,7 +586,7 @@ LAB_0018c354:
             spriteStartAnimationByIndex(temp_v4,2);
             pairSetFirstResetSecond(temp_v4,0x1a);
             FUN_00295eb0(temp_v4,0x28,0x2f);
-            temp_v8 = FUN_002bf4f8(0x28,0x30);
+            temp_v8 = asdTMTexTableEntryAt(0x28,0x30);
             FUN_002963ec(temp_v4,(int)*(short *)(temp_v8 + 8),(int)*(short *)(temp_v8 + 10));
             puVar12 = temp_v11;
           }
@@ -721,7 +721,7 @@ LAB_0018c354:
                     spriteStartAnimationByIndex(temp_v17,2);
                     pairSetFirstResetSecond(temp_v17,0x1a);
                     FUN_00295eb0(temp_v17,0x28,0x2f);
-                    temp_v8 = FUN_002bf4f8(0x28,temp_v5 + 0x31);
+                    temp_v8 = asdTMTexTableEntryAt(0x28,temp_v5 + 0x31);
                     temp_v19 = *(short *)(temp_v8 + 10);
                     temp_v3 = *(short *)(temp_v8 + 8);
                   }
@@ -744,7 +744,7 @@ LAB_0018c354:
                     spriteStartAnimationByIndex(temp_v17,3);
                     pairSetFirstResetSecond(temp_v17,0x62);
                     FUN_00295eb0(temp_v17,0x28,0x67);
-                    temp_v8 = FUN_002bf4f8(0x28,temp_v18 + 0x68);
+                    temp_v8 = asdTMTexTableEntryAt(0x28,temp_v18 + 0x68);
                     temp_v19 = *(short *)(temp_v8 + 10);
                     temp_v3 = *(short *)(temp_v8 + 8);
                   }

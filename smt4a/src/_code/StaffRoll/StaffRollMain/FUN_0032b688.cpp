@@ -3,13 +3,13 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 extern StaffRollWork *g_staffRoll;
 
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 option, u32 bytes, s32 fromFront);
 void asdTMTexTableLoadTmx(s32 type, s32 index);
-void FUN_0014afd0(s32 type, s32 index);
 void FUN_002e1208(s32 type, s32 index, s32 *outWidth, s32 *outHeight);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);

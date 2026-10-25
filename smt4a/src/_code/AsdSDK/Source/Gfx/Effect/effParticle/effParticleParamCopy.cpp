@@ -1,6 +1,7 @@
 /* Copies the part of the particle parameter block `src` that its type uses into `dst`: plain values, or fresh clones of the objects and handle arrays. */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/effParticleParamCopy.h"
 
 extern "C" {
 

@@ -32,7 +32,7 @@ extern u32 g_titleScene;
 /* Builds the successive half-size copies of the work's base surface (a chain through two further surfaces when `chained`). */
 s32 FUN_0010854c(u32 job)
 {
-    FrameCopyWork *work = reinterpret_cast<FrameCopyWork *>(jobGetWork(job));
+    FrameCopyWork *work = (FrameCopyWork *)jobGetWork(job);
     work->flags.surfaceReady = 0;
     if (FUN_002bff10(0) != 0) {
         return 0;

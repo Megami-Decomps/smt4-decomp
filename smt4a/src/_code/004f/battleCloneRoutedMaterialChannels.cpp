@@ -1,11 +1,11 @@
 /* NON_MATCHING: material channel/timing copies and kind-bit setters inline differently, changing the frame and loop-register allocation. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
 void handleSlotRelease(MaterialMergeOwner *owner, s32 slot);
-BtlMainStateA *btlGetMainState(void);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 const MaterialMergeVariants *FUN_001568f8(BtlMainStateA *battle, s32 group);
 MaterialMergeModel *FUN_00178b04(u32 bytes, const char *file, u32 line);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the two counter values use exchanged saved registers and different conditional-comparison scheduling. */
 #include "shard/Shard0031.h"
+#include "shard/flaggedEntryGetValueA.h"
 
 struct BoundedCounter {
     u8 kind;
@@ -11,7 +12,6 @@ struct BoundedCounter {
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
 s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
-s32 flaggedEntryGetValueA(FlaggedEntry *entry);
 s32 flaggedEntryGetValueB(FlaggedEntry *entry);
 void scrollOwnerSetValue(FlaggedEntry *entry, s32 value);
 void recordTrackDirtyValue(FlaggedEntry *entry, s32 value);

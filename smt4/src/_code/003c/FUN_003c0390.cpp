@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlHelp.h"
 
@@ -25,7 +26,6 @@ struct BattleMainStateView {
 }
 
 extern "C" {
-BtlMainState* btlGetMainState(void);
 BtlEntry* btlMainFindActiveEntry(BtlMainState *state);
 
 // Forward an uninhibited request, resolving the active entry for nonnegative indices.

@@ -1,6 +1,7 @@
 /* NON_MATCHING: result construction, staging and request calls are right (hidden-result WindowStatusResult returns); retail caches the resolved entry in r7 and shares one failure block with the token in r0, the scratch pair sits at sp+4 (armcc aligns it to sp+8), and the failure return is a bl rather than a tail call. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
+#include "shard/FUN_00427e28.h"
 
 /* A registered request: a 0x44-byte payload at +0x54 and a "confirmed" flag at +0x98. */
 struct WindowRequestEntry {
@@ -29,7 +30,6 @@ void FUN_0019a46c(void *dest, const char *src, u32 size);
 s32 FUN_00427e68(u32 token, u32 mode);
 u32 FUN_0016ccfc(void);
 s32 tokenResolveAddress(u32 context, WindowRequestEntry **entry, u32 token);
-s32 FUN_00427e28(RequestScratch *scratch, u8 *request, u32 flags);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
 

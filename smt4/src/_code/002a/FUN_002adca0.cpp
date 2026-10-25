@@ -1,8 +1,8 @@
 /* NON_MATCHING: saved-argument register allocation and target-vector store base differ. */
 #include "ui/SpriteTransition.h"
+#include "shard/JobWork.h"
 
 extern "C" {
-SpriteTransitionWork *jobGetWork(u32);
 void aocSlotRelease(SpriteTransitionWork *);
 const SpriteTextureEntry *aocContentGetIndexedRecord(void *, u32);
 void uiSpriteReplaceTextureEntry(SpriteTransitionWork *, u32, u32);
@@ -11,7 +11,7 @@ void uiSpriteReplaceTextureEntry(SpriteTransitionWork *, u32, u32);
 void FUN_002adca0(u32 job, const Vec3f *target, const Vec3f *start,
     u32 interpolation, s32 duration, s32 mode)
 {
-    SpriteTransitionWork *work = jobGetWork(job);
+    SpriteTransitionWork *work = (SpriteTransitionWork *)jobGetWork(job);
     work->interpolation = interpolation;
     work->duration = (f32)duration;
     work->state = 3;

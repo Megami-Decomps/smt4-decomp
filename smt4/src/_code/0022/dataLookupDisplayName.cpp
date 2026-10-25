@@ -1,4 +1,5 @@
 #include "gamedata/DisplayName.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 extern DisplayNameOverride DAT_0044ce08[999];

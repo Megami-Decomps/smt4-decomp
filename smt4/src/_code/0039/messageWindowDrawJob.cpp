@@ -13,8 +13,8 @@ s32 FUN_002c5d80(s32 first, s32 second);
 void FUN_002bf380(s32 layer, s32 group, s32 kind, s32 x, s32 y, u32 flags);
 const void *FUN_0023478c(void *table, u32 index);
 s32 FUN_002347b8(void *table, const void *entry, void *strings);
-const MessageDrawPosition *FUN_002bf4f8(u32 group, u32 index);
-void FUN_002be5a4(u32 layer, u32 color, const u16 *text,
+const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
+void textDrawString(u32 layer, u32 color, const u16 *text,
                   f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
 
 /* Draw the active message window and its formatted lines with a temporary render state. */
@@ -41,8 +41,8 @@ s32 messageWindowDrawJob(void *)
         const void *entry = FUN_0023478c(table, 0x65);
         s32 count = FUN_002347b8(table, entry, strings);
         for (s32 index = 0; index < count; ++index) {
-            const MessageDrawPosition *position = FUN_002bf4f8(0x3A, index + 0x43);
-            FUN_002be5a4(3, 0xFC4F46FF, strings[index],
+            const MessageDrawPosition *position = asdTMTexTableEntryAt(0x3A, index + 0x43);
+            textDrawString(3, 0xFC4F46FF, strings[index],
                           (f32)(position->x + x), (f32)(position->y + y),
                           0.5f, 0.0f, 1.0f);
         }

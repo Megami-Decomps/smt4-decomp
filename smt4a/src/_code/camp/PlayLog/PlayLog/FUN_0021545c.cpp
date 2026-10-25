@@ -27,7 +27,7 @@ extern int g_playLog; /* 0x57f278 */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -103,7 +103,7 @@ void FUN_0021545c(void)
       } while (temp_v6 < temp_v7);
     }
     temp_v9[0] = 0;
-    temp_v2 = FUN_001834a4(0x25,0x1c);
+    temp_v2 = asdTMTexTableEntryAt(0x25,0x1c);
     temp_v7 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
     temp_v6 = temp_v0 + 0x2dc;
     FUN_003450d4(temp_v6,temp_v2,0,(int)*(short *)(temp_v0 + 0x34c),(int)*(short *)(temp_v0 + 0x348),

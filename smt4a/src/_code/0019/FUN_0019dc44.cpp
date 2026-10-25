@@ -1,4 +1,5 @@
 #include "font/FontStringReader.h"
+#include "shard/FUN_0019dc44.h"
 extern "C" {
 extern FontRecordPool DAT_005b3bc0;
 /* Gets an indexed record when the pool is allocated and the index is valid. */

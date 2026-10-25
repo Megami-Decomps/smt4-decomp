@@ -16,7 +16,6 @@ extern "C" {
 extern BtlUiGlobals g_btlUi;
 const char *dataTable0BFindById(u32 id);
 void textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_001ecb54(s32 id);
 void communicationBeginTransition(s32 mode);
 
 /* Initializes a battle message request and begins displaying its selected text. */

@@ -1,4 +1,5 @@
 /* Sets the flag at +0x3F4 of the entry found for id scrGetArg(0) to whether scrGetArg(1) is nonzero; always returns 1. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -9,14 +10,13 @@ typedef struct Entry {
 } Entry;
 
 extern s32 scrGetArg(s32 index);
-extern void *btlGetMainState(void);
 extern Entry *FUN_003f0e20(void *owner, u32 id);
 
 u32 scrSetBattleEntryEnabled(void)
 {
     u32 id = scrGetArg(0);
     s32 enabled = scrGetArg(1);
-    Entry *entry = FUN_003f0e20(btlGetMainState(), id);
+    Entry *entry = FUN_003f0e20(static_cast<void *>(btlGetMainState()), id);
 
     if (entry != NULL) {
         entry->flag = enabled != 0;

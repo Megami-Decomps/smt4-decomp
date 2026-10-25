@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c16c8` (_code @ 0x4c16c8, 0x11dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int CONCAT44(...);
-int btlGetMainState(void);
 int FUN_00184310(void);
 int dataTable8FindRecord(void);
 int dataTable04FindById(void);
@@ -207,7 +207,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
   iStack_30 = param_2;
   temp_v53 = param_3;
   temp_v54 = param_4;
-  temp_v45 = (unsigned int *)btlGetMainState();
+  temp_v45 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   temp_v1 = temp_v52;
   dataTable04FindById();
   dataTable8FindRecord();
@@ -271,9 +271,9 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
     temp_v27 = temp_v25 >> 0x20;
   }
   temp_v3 = temp_v53;
-  temp_v5 = btlGetMainState();
+  temp_v5 = reinterpret_cast<int>(btlGetMainState());
   FUN_003f0e20(temp_v5,temp_v3);
-  temp_v6 = btlGetMainState();
+  temp_v6 = reinterpret_cast<int>(btlGetMainState());
   FUN_003e8bb0(&temp_v31,temp_v6,temp_v5);
   temp_v46 = (unsigned int *)(int)temp_v32;
   if ((temp_v1 != 0) && (*(short *)(temp_v1 + 0x86) == 1)) {
@@ -446,7 +446,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
       temp_v12 = temp_v37[temp_v11];
       if (((temp_v10 | temp_v8) & 0x170000) == 0) {
         temp_v34 = temp_v54;
-        temp_v7 = btlGetMainState();
+        temp_v7 = reinterpret_cast<int>(btlGetMainState());
         FUN_003f0e20(temp_v7,temp_v34);
         if ((temp_v7 != 0) && (*(int *)(temp_v7 + 0xd8) != 0)) {
           temp_v10 = 0;
@@ -635,7 +635,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v16 = (float)VectorUnsignedToFloat
                                     (temp_v44[temp_v19 + 0xe] & 0xffff,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v22 = CONCAT44(temp_v16 * temp_v17,temp_v18 + temp_v14 + temp_v15);
-          puVar11 = (unsigned int *)btlGetMainState();
+          puVar11 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
           FUN_003f0e20(puVar11,temp_v10);
           temp_v10 = *puVar11;
           temp_v8 = puVar11[1];
@@ -730,7 +730,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           temp_v25 = CONCAT44(temp_v26,temp_v16);
           temp_v10 = temp_v44[temp_v19] & 0xffff;
           temp_v22 = CONCAT44(temp_v6,temp_v18 + temp_v16 * temp_v17 * temp_v18);
-          temp_v20 = btlGetMainState();
+          temp_v20 = reinterpret_cast<int>(btlGetMainState());
           FUN_003f0e20(temp_v20,temp_v2);
           if (temp_v20 == 0) {
             temp_v18 = (float)((unsigned long long)temp_v21 >> 0x20);

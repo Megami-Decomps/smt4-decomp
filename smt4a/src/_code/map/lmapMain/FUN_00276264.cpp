@@ -117,7 +117,7 @@ int FUN_003adef4(...);
 int naviMainFinishRequest(void);
 int sysPlayVoice(...);
 int FUN_00482c04(void);
-int FUN_00325a74(void);
+int popupClearPendingEntries(void);
 int lmapSnapshotTransitionState(void);
 int gameDataEntrySetBit7(...);
 
@@ -625,7 +625,7 @@ extern int FUN_002dfa18(void);
 /* Supplied declaration required: popupRequest. */
 /* Supplied declaration required: FUN_00314b7c. */
 extern int FUN_00324c68(unsigned int);
-/* Supplied declaration required: FUN_00325a74. */
+/* Supplied declaration required: popupClearPendingEntries. */
 extern int FUN_00328200(void);
 extern int popupGetStateValue(void);
 /* Supplied declaration required: applyIfIdValid. */
@@ -1876,7 +1876,7 @@ LAB_00278b38:
                                     popupTryStartTimedPrompt();
                                   }
                                   FUN_002b80b8();
-                                  FUN_00325a74();
+                                  popupClearPendingEntries();
                                   DAT_005f18e8 = 0;
                                 }
                                 if (*(char *)((int)puVar2 + 0x9e2) == '\0') {

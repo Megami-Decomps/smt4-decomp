@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rebuild from asm of the battle damage/value estimate for a skill or an item-like record; armcc here orders the local action-info block and the spilled arguments differently (retail pushes r0-r3 and d0 and reloads the stack arguments), and the 0.01f/25% scaling and the random bonus are scheduled differently. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
 
 /* The skill record (only the fields read here). */
 struct SkillRecord {
@@ -37,15 +37,6 @@ struct BattleEntry {
     /* 0x1C6 */ u16 flags;         /* 8: value capped at 1, 0x80: takes 25% more, 0x200: deals 25% less */
 };
 
-struct BattleState {
-    /* 0x0000 */ u8 unk0000[0xE0];
-    /* 0x00E0 */ u32 flagsE0;
-    /* 0x00E4 */ u8 unk00E4[0x43BC];
-    /* 0x44A0 */ u32 flags44A0;
-    /* 0x44A4 */ u8 unk44A4[8];
-    /* 0x44AC */ u32 flags44AC;
-};
-
 struct UnitStats {
     /* 0x00 */ u8 unk00[0xEE];
     /* 0xEE */ u16 stat;
@@ -57,13 +48,12 @@ struct UnitRecord {
 };
 
 extern "C" {
-BattleState *btlGetMainState(void);
 SkillRecord *dataTable40FindById(s32 id);
 ValueRecord *dataTable08Sub1GetRecord(s32 id);
-BattleEntry *btlMainFindEntryByListedId(BattleState *battle, s32 id);
-void FUN_00247478(ActionInfo *info, BattleState *battle, BattleEntry *entry);
+BattleEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
+void FUN_00247478(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
 s32 FUN_003be918(s32 skill, s32 attacker, s32 target, s32 column, s32 row, f32 power, f32 multiplier);
-UnitStats *FUN_0027da30(BattleState *battle, s32 id);
+UnitStats *FUN_0027da30(BtlMainState *battle, s32 id);
 UnitRecord *gameGetUnitRecord(s32 index);
 s32 flagWordTestBit(void *record, u32 bit);
 s32 randRange(u32 limit);
@@ -73,7 +63,7 @@ s32 randRange(u32 limit);
  * or a fixed number) for the record. Returns -1 when nothing applies. */
 s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 multiplier, s32 attacker, s32 target)
 {
-    BattleState *battle = btlGetMainState();
+    BtlMainStateExt *battle = btlGetMainStateExt();
     SkillRecord *skill = dataTable40FindById(skillId);
     ValueRecord *record = dataTable08Sub1GetRecord(recordId);
     BattleEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);

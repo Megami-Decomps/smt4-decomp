@@ -1,10 +1,10 @@
 /* NON_MATCHING: channel-base retention and fade-transition register lifetimes differ. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern BgmRequestChannel DAT_0061951c[2];
 extern BgmChannelSelection g_resourceSharedFlag;
-const void *jyoucyuGetTableEntry(u32);
 void soundChannelRequest(u32, s32, s32);
 }
 

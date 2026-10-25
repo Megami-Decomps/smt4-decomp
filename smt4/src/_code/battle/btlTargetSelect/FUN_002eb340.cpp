@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail cmp r0, #5 differs from recovered cmp r0, #5. */
 #include "common.h"
+#include "util/FUN_0027db08.h"
 
 struct TargetWordsView {
     u32 unk00; // 0x00
@@ -36,7 +37,6 @@ struct TargetSelectView {
 extern "C" {
 extern TargetSelectView* g_btlTargetSelect;
 u8 FUN_0029e9cc(u32 value);
-u32 FUN_0027db08(u32 index);
 s32 FUN_002630e0(TargetValueView* value, s32 mode, u32 context,
                  const TargetValueView* source);
 

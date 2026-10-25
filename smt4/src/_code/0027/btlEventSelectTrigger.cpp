@@ -23,7 +23,6 @@ struct BattleEventController {
 };
 extern "C" {
 BtlMainState *btlGetMainState();
-s32 FUN_003bf570(s32);
 s32 tableGroupFindEntryIndex(void *, const char *);
 
 u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot, u32 queryOnly)

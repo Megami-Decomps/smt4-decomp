@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/aocJobIsValid.h"
 
 extern "C" {
 

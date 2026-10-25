@@ -1,7 +1,9 @@
 /* NON_MATCHING: marker-mask loads use separate LDRs instead of LDM, and activation-mask address/register allocation differs; candidate -O2. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PartyAssistSlotMap {
     u8 unk0000[0x1c88];
@@ -25,8 +27,6 @@ struct BattleAssistMasks {
     u64 guarantee;
 };
 extern "C" {
-BtlMainStateA *btlGetMainState();
-GameSlotTable *gameGetSlotTable();
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
 s32 lcgRandomRange(u32 maximum);
 

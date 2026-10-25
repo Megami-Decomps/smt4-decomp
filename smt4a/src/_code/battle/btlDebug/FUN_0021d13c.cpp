@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021d13c` (_code @ 0x21d13c, 0x45e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/FlagValueIsPositive.h"
@@ -35,7 +36,7 @@ int __aeabi_idivmod(...);
 
 int FUN_00167458(...);
 int sysPlaySe(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int dataTable8FindRecord(...);
 int FUN_0019de98(...);
 int gameGetSlotRecord(...);
@@ -70,7 +71,6 @@ int sortMenuAcquire(...);
 int useCounterRelease(void);
 int FUN_004009d0(...);
 
-int btlGetMainState(void);
 int FUN_00163aa4(...);
 int gameGetPlayerData(void);
 int uiSpriteSelectAnim(...);
@@ -151,7 +151,7 @@ extern short vec2GetYInt(int *);
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int gameFlagIsSet(unsigned int);
@@ -298,7 +298,7 @@ void FUN_0021d13c(int param_1)
   temp_v36 = (int *)0x0;
   temp_v30[0] = '\0';
   temp_v31[0] = '\0';
-  temp_v4 = btlGetMainState();
+  temp_v4 = reinterpret_cast<int>(btlGetMainState());
   temp_v34 = (int *)(param_1 + 0x3a4c);
   piVar16 = (int *)(param_1 + 0x3890);
   if (!((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0 &&
@@ -407,7 +407,7 @@ LAB_0021d1f4:
     }
     DAT_00573b88 = 0;
   }
-  temp_v4 = btlGetMainState();
+  temp_v4 = reinterpret_cast<int>(btlGetMainState());
   if (!((*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bd4) == 0 &&
        (DAT_00573bd0 & *(unsigned int *)(temp_v4 + 0x45a8)) == 0)) {
     if (DAT_00573b89 == '\0') {
@@ -792,21 +792,21 @@ LAB_0021e058:
               }
             }
             else {
-              temp_v7 = btlGetMainState();
+              temp_v7 = reinterpret_cast<int>(btlGetMainState());
               if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                    (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
-                temp_v10 = btlGetMainState();
+                temp_v10 = reinterpret_cast<int>(btlGetMainState());
                 temp_v10 = halfTableGet(temp_v10,temp_v4);
                 *(unsigned int *)(param_1 + 0x389c) = temp_v10;
                 DAT_00573b90 = temp_v4;
               }
               else {
-                btlGetMainState();
+                reinterpret_cast<int>(btlGetMainState());
                 *(unsigned int *)(param_1 + 0x389c) = 0;
               }
               temp_v9 = *(int *)(param_1 + 0x389c);
               dataTable04FindById();
-              temp_v4 = btlGetMainState();
+              temp_v4 = reinterpret_cast<int>(btlGetMainState());
               if ((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573bc8) == 0 &&
                   (*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0) {
                 piVar16 = (int *)gameGetSlotTable();
@@ -906,7 +906,7 @@ LAB_0021e5b0:
           else {
             if (*(short *)(param_1 + *piVar16 * 2 + 0x4210) != -1) {
               if (temp_v4 != 0) {
-                temp_v7 = btlGetMainState();
+                temp_v7 = reinterpret_cast<int>(btlGetMainState());
                 if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                      (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
                   DAT_00573b8c = temp_v4 - 1;
@@ -986,7 +986,7 @@ LAB_0021e5b0:
                 else {
                   temp_v9 = 1;
                 }
-                temp_v7 = btlGetMainState();
+                temp_v7 = reinterpret_cast<int>(btlGetMainState());
                 if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                      (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
                   DAT_00573b8c = temp_v4 - temp_v9;
@@ -1093,7 +1093,7 @@ LAB_0021e950:
               if (temp_v4 == 1) {
                 if (*(short *)(param_1 + *piVar16 * 2 + 0x4210) != -1) {
                   if (temp_v5 != 0) {
-                    temp_v4 = btlGetMainState();
+                    temp_v4 = reinterpret_cast<int>(btlGetMainState());
                     if ((DAT_00573bcc & *(unsigned int *)(temp_v4 + 0x45ac)) == 0 &&
                         (DAT_00573bc8 & *(unsigned int *)(temp_v4 + 0x45a8)) == 0) {
                       temp_v5 = (unsigned int)*(unsigned short *)(param_1 + *piVar16 * 0x10 + temp_v5 * 2 + 0x3c42);
@@ -1146,7 +1146,7 @@ LAB_0021e950:
                   else {
                     temp_v7 = 1;
                   }
-                  temp_v4 = btlGetMainState();
+                  temp_v4 = reinterpret_cast<int>(btlGetMainState());
                   if (!((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573bc8) == 0 &&
                        (*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bcc) == 0)) {
                     temp_v5 = (temp_v5 - temp_v7) + 1;
@@ -1189,7 +1189,7 @@ LAB_0021e950:
         eventQueueAddUniqueIfValid(temp_v8);
       }
       else {
-        temp_v10 = FUN_001834a4(0xd,200);
+        temp_v10 = asdTMTexTableEntryAt(0xd,200);
         temp_v26 = (int *)(int)*(short *)(param_1 + 0x4822);
         temp_v27 = (int *)temp_v30;
         temp_v28 = 0;
@@ -1220,7 +1220,7 @@ LAB_0021ed20:
     }
     temp_v10 = (unsigned int)temp_v23;
     if (*(char *)(param_1 + 0x38b0) != '\0') break;
-    temp_v10 = FUN_001834a4(0xd,200);
+    temp_v10 = asdTMTexTableEntryAt(0xd,200);
     temp_v26 = (int *)(int)*(short *)(param_1 + 0x4822);
     temp_v27 = (int *)temp_v30;
     temp_v28 = 0;
@@ -1372,7 +1372,7 @@ LAB_0021f098:
     FUN_00270104(param_1);
 LAB_0021f10c:
     if (*(char *)(param_1 + 0x38b0) != '\0') break;
-    temp_v8 = FUN_001834a4(0xd,200);
+    temp_v8 = asdTMTexTableEntryAt(0xd,200);
     temp_v26 = (int *)(int)*(short *)(param_1 + 0x4822);
     temp_v27 = (int *)temp_v30;
     temp_v28 = 0;
@@ -1743,7 +1743,7 @@ LAB_0021fbdc:
     }
     break;
   case 0x22:
-    temp_v4 = btlGetMainState();
+    temp_v4 = reinterpret_cast<int>(btlGetMainState());
     if ((temp_v4 != 0) && (*(short *)(temp_v4 + 0x2000) < 4)) {
       temp_v36 = (int *)0xffffffff;
       piVar16 = (int *)0x0;
@@ -2312,7 +2312,7 @@ LAB_00220b54:
     break;
   case 4:
     if (*(unsigned short *)(temp_v29 + 0x4b36) < 6) {
-      temp_v9 = FUN_001834a4(0xd,0xbba);
+      temp_v9 = asdTMTexTableEntryAt(0xd,0xbba);
       temp_v13 = param_1 + temp_v4 * 0x8c;
       temp_v20 = *(float *)(temp_v13 + 0x16b4);
       temp_v3 = *(unsigned short *)(temp_v9 + 6);
@@ -2405,7 +2405,7 @@ LAB_00220b54:
       }
       if (*temp_v27 == 0xf) {
         if (*(char *)(temp_v7 + 0x4b0a) == '\0') goto LAB_0022129c;
-        temp_v10 = btlGetMainState();
+        temp_v10 = reinterpret_cast<int>(btlGetMainState());
         FUN_003eeb4c(temp_v10,(int)(short)temp_v4);
       }
       if (*temp_v27 >= 0x25) {

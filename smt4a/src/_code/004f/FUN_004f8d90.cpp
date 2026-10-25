@@ -1,4 +1,5 @@
 /* NON_MATCHING: Battle source-model caching is reconstructed; duplicate/free-slot scans and retained work/source pointers allocate different registers and branch joins. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleCacheVector {
@@ -37,7 +38,6 @@ struct BattleCacheWork {
 extern "C" {
 void sysMemClear(void *buffer, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
-BattleCacheMain *btlGetMainState();
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 BattleCacheModel *modelListInit(BattleCacheModel *model);
 void FUN_001cd3ec(BattleCacheModel *model, const char *name);
@@ -55,7 +55,7 @@ extern "C" void FUN_004f8d90(BattleCacheWork *work, s32 kind)
     char name[128];
     sysMemClear(name, sizeof(name));
     textFormatBuffer(name, DAT_005284d8, kind);
-    BattleCacheMain *battle = btlGetMainState();
+    BattleCacheMain *battle = reinterpret_cast<BattleCacheMain *>(btlGetMainState());
     for (s32 i = 0; i < 109; ++i) {
         const BattleCacheSource *source = &battle->sources[i];
         if (source->first < 0 || source->second < 0) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register swap only: retail loads the group count into r1 and the zero bestId into r0 (ours r0/r1) in the prologue and first-level clamp. */
 #include "common.h"
+#include "shard/entryDefIsAvailable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct LevelTableSet {
     /* 0x44 */ LevelEntry *tables[1];
 } LevelTableSet;
 
-s32 entryDefIsAvailable(LevelTableSet *set, u16 id);
 
 /* Returns the usable id of `group` whose level is closest at or above `level` (clamped to the
  * group's first level), or 0 when there is none. */

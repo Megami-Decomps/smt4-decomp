@@ -1,8 +1,9 @@
 #include "ui/CommandWindow.h"
+#include "gamedata/SaveLoadProcess.h"
 
 extern "C" {
 
-void FUN_00211868(u16 value, u8 flag)
+void FUN_00211868(s16 value, u8 flag)
 {
     CommandWindow *obj = g_comWin;
 

@@ -17,7 +17,7 @@ extern MessageMainLocalView g_messageMain;
 
 s32 scrCommMessageSetMode(s32 mode);
 s32 scrGetCommandFrame(void);
-u32 FUN_002ba85c(void);
+u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 s32 FUN_0021bdac(u32 context, u32 argument, s32 frame, s32 mode,
                  s32 enabled, s32 flags);
@@ -34,7 +34,7 @@ void FUN_002e4930(void)
         state->unk31 = 1;
     }
 
-    u32 context = FUN_002ba85c();
+    u32 context = scrGetCommandOwner();
     u32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
     FUN_0021bdac(context, argument, frame, 5, 1, 0);

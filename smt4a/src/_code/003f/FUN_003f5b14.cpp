@@ -1,6 +1,7 @@
 #include "common.h"
 #include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/FUN_003f5b14.h"
 
 struct RenderCtx;
 

@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
+#include "shard/asdCameraInitializeDefaults.h"
 
 using nw::math::MTX34;
 using nw::math::MTX44;

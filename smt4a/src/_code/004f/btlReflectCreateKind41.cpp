@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 struct BattleUnit;
 
 extern "C" {
 
-BattleUnit* btlGetMainState();
 s32 FUN_003eb1cc(const BattleUnit* unit);
 
 // Create a type-0x41 reflected action and attach its value when battle masks permit.
@@ -11,7 +11,7 @@ ReflectAction* btlReflectCreateKind41(s32 id, u32 flags, u32 value)
 {
     ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, flags);
     action->kind = 0x41;
-    if (FUN_003eb1cc(btlGetMainState()) == 0) {
+    if (FUN_003eb1cc(reinterpret_cast<BattleUnit *>(btlGetMainState())) == 0) {
         action->value = value;
     }
     return action;

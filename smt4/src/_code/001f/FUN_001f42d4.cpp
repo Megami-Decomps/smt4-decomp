@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "util/CalleeContracts.h"
+#include "shard/JobWork.h"
 
 
 struct TitleJobOrigin {
@@ -27,7 +28,6 @@ extern "C" {
 extern EventTexState *g_eventTex; /* 0x43ded0 */
 extern RenderCtx *g_titleScene;   /* 0x44ea00 */
 
-TitleJobWork *jobGetWork(u32 job);
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
 s32 FUN_00285584(u32 job, s32 x, s32 y);
@@ -39,7 +39,7 @@ void FUN_002c18e4(RenderCtx *context);
 /* Draws the title scene's jobs with the three render stacks pushed. */
 s32 FUN_001f42d4(u32 job)
 {
-    TitleJobWork *work = jobGetWork(job);
+    TitleJobWork *work = (TitleJobWork *)jobGetWork(job);
     s32 i;
 
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));

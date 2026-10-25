@@ -1,4 +1,5 @@
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 
@@ -9,16 +10,16 @@ extern "C" {
 s32 btlResolveEntryChoice(s32 choice)
 {
     if (choice >= 1 && choice <= 4) {
-        btlGetMainState()->activeEntry.present = 0;
+        btlGetMainState()->unk4cd1 = 0;
         return choice;
     }
     if (choice == -1) {
-        btlGetMainState()->activeEntry.present = 0;
+        btlGetMainState()->unk4cd1 = 0;
         if (btlGetMainState()->selectedEntry.index == BTL_NO_SELECTED_ENTRY) {
             return 1;
         }
     } else if (choice == 0) {
-        btlGetMainState()->activeEntry.present = 1;
+        btlGetMainState()->unk4cd1 = 1;
         if (btlGetMainState()->selectedEntry.index == BTL_NO_SELECTED_ENTRY) {
             return 1;
         }

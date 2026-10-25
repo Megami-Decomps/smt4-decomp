@@ -1,4 +1,5 @@
 #include "shard/Shard0046.h"
+#include "shard/aocHasType36.h"
 
 extern "C" {
 

@@ -6582,3 +6582,13 @@
 003b0b58 scrCommBattleCheckFieldEquals inferred [med] pushes whether battle field 0xec/0xf0 equals the script argument
 003e5354 partyAdjustCounterIfEnoughActive inferred [med] with flag 0x533 set and 2+ active party slots adds delta to counter at 0x2c4e clamped to 0..8
 003bf3f0 mapOverlaySetOpen inferred [med] switches the map overlay (opening plays SE 0x92, closing restores background and plays 0x10E)
+003d2004 scrPopInt inferred twin of smt4 scrPopInt (0x297514): pops top script stack value as int; same body
+002ba85c scrGetCommandOwner inferred twin of smt4 FUN_002865f8: returns ScriptVmProcess::commandOwner (word 0xC0 of g_scrContext.active), the message commands context
+0040a42c statsSetSecondBankFlag inferred [high] sibling of statsSetFirstBankFlag/statsSetAdditionalFlag: sets/clears a flag in the second 32-bit stats bank
+003e54b8 slotTargetApplyActiveValue inferred [med] if owner->holder->target exists, takes its active slot value and applies value via FUN_003fe86c
+001834a4 asdTMTexTableEntryAt inferred [med] returns the 0x14-byte entry (index % 1000) of the TMX file of a texture table
+0035b0a4 gameDataClearSaveRecord inferred [med] clears the 100-byte record of index < 32 in the save work block
+00325a74 popupClearPendingEntries inferred [med] clears the popup request flag and the game state pending entry list (value + 0x80 bytes)
+002c7b8c gameDataSetStatusFlag inferred [med] writes byte `index` of the game-data status block (0x27FB8)
+00162790 textDrawString inferred [high] draws a string on a layer with colour, position, depth, spacing and opacity and returns the drawn advance (twin of smt4 FUN_002be5a4)
+00398464 naviMainEnterState6IfActive inferred [high] switches the navigation menu to state 6 when g_naviMain exists

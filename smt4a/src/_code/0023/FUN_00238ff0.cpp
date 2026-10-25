@@ -29,7 +29,7 @@ extern s32 scrGetArg(s32 index);
 /* Script command: gives the job's window a new target position (arguments 1 and 2, offset to its corner); when argument 3 is 0 it moves there at once. Returns 1. */
 u32 FUN_00238ff0(void)
 {
-    Window *window = reinterpret_cast<Window *>(jobGetWork(scrGetArg(0)));
+    Window *window = (Window *)jobGetWork(scrGetArg(0));
     if (window != NULL) {
         s32 x = scrGetArg(1);
         s32 y = scrGetArg(2);

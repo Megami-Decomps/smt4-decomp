@@ -5,6 +5,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "util/Random.h"
 
 namespace {
 struct LegionDrawState {
@@ -40,7 +41,6 @@ extern LegionDrawGlobals g_countdown;
 extern const u8 DAT_004023c4[];
 extern const u8 DAT_004023e8[];
 extern const u8 DAT_00402400[];
-s16 randNextInRange(u32 maximum);
 u32 FUN_003ac480();
 void drawParameterBlockClear(UiResourceParameters *parameters);
 

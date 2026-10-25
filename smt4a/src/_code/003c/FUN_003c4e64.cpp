@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail shares the final return after the value branch and keeps the candidate slot address unfolded (add #44; ldrsb [r0]). */
 #include "common.h"
+#include "shard/scrGetArg.h"
+#include "shard/scrGetArg.h"
 
 extern "C" {
 
@@ -31,7 +33,6 @@ typedef struct SlotRecordStats {
 
 extern SelectionScreenHolder g_engineCleanupOwner;
 
-s32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
 SlotRecordStats *gameGetSlotRecord(s32 slot);
 u8 flagAt4IsClearOrMissing(void);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: step function of the save-write process (stage 0: snapshot the extra block and write it to slot file 0x62; stage 2: build the full save image of 0x2a7a4 bytes and write it; stages 1 and 3 wait for the write and either advance, fail to stage 5 or animate the wait counter; stages 4/5 end with a result); written from the decompilation, the goto into the stage-3 wait is rebuilt as a shared helper and the allocation arguments follow gameDataAllocBlocks */
 #include "common.h"
+#include "gamedata/SaveLoadProcess.h"
 
 #define SAVE_STAGE_WRITE_EXTRA 0
 #define SAVE_STAGE_WAIT_EXTRA 1
@@ -60,7 +61,6 @@ u32 configGetSettings(void);
 void titleConfigWriteToSave(void);
 s32 campCecGet(void);
 s32 FUN_00229c9c(void);
-s32 byte1IsZero(void);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 

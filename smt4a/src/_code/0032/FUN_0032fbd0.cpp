@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail unrolls the live-skill search and keeps the rebuilt record base in r7 (156 vs 180 rows); the save-entry comparison is the same. */
 #include "common.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
@@ -78,7 +79,6 @@ typedef struct LiveUnit {
     /* 0x0AC */ u16 bonus[5];
 } LiveUnit;
 
-s32 gameDataCopySaveEntry(u16 id, void *destination);
 void FUN_00184310(u32 id);
 void sysMemClear(void *block, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);

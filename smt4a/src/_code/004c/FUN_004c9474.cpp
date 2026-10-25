@@ -1,11 +1,11 @@
 /* NON_MATCHING: the help-state mask base uses r2 instead of retail ip, with different stack argument grouping. */
 /* Starts a battle help action unless the current state suppresses help messages. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA *btlGetMainState(void);
 u32 FUN_00200a68(u32 kind, s32 id, void *owner, u32 command, s32 mode, u32 value, u32 route, u32 flags);
 u32 FUN_004c8e30(void *owner, s32 mode, u32 value);
 

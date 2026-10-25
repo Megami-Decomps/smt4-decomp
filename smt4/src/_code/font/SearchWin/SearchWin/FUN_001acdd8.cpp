@@ -6,6 +6,7 @@
 #include "text/TextDraw.h"
 #include "util/Vec2Fixed.h"
 #include "gfx/StereoParallax.h"
+#include "shard/packNibblesAndByte.h"
 
 /* The title scene (its state stacks live at 0x124C and 0x12AC). */
 struct TitleScene {
@@ -64,11 +65,10 @@ extern RunWin *DAT_0043e170;
 extern TitleScene *g_titleScene;
 
 void renderCtxSelectStereoLayout(TitleScene *scene);
-LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
+LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_002bed3c(void);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 alpha);
-s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 u32 FUN_002c5d80(s32 a, s32 b);
 
 /* Draws the run window's title, its loading dots (a 3x3 grid where two dots are lit and their
@@ -88,8 +88,8 @@ u8 FUN_001acdd8(void)
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         FUN_002bf380(2, 14, 0x15, x, y, 102);
         titleScenePopSecond(g_titleScene);
-        LayoutPoint *labelPoint = FUN_002bf4f8(14, 0x16F);
-        FUN_002be5a4(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
+        LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x16F);
+        textDrawString(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
         s32 lit = step % 8;
@@ -99,7 +99,7 @@ u8 FUN_001acdd8(void)
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {
                 s32 index = row * 3 + column;
-                LayoutPoint *dot = FUN_002bf4f8(14, 0x170 + index);
+                LayoutPoint *dot = asdTMTexTableEntryAt(14, 0x170 + index);
                 if (lit == index || lit2 == index)
                     FUN_002bf288(2, 14, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)

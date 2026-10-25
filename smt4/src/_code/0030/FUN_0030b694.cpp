@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct BattleUnit {
 } BattleUnit;
 
 u32 scrGetArg(u32 index);
-void *btlGetMainState(void);
 BattleUnit *FUN_0027da30(void *state, u32 unit);
 s32 scrSetResult(s32 value);
 
@@ -17,7 +17,7 @@ u32 FUN_0030b694(void)
 {
     u32 unit = scrGetArg(0);
     u32 bit = scrGetArg(1);
-    BattleUnit *target = FUN_0027da30(btlGetMainState(), unit);
+    BattleUnit *target = FUN_0027da30(static_cast<void *>(btlGetMainState()), unit);
 
     u32 mask = 1 << (bit & 0xFF);
 

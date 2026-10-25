@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler shares the global base and lays out the chord tests and zero-return paths differently. */
 #include "common.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 struct ChordFlagState {
     u8 unk00[0x1c];
@@ -8,7 +9,6 @@ struct ChordFlagState {
 
 extern "C" {
 extern ChordFlagState DAT_0061951c[2];
-void *jyoucyuGetTableEntry(u32);
 
 // Require both chord flags in either state, unless the resident table entry is active.
 u32 FUN_003ddfd8(void)

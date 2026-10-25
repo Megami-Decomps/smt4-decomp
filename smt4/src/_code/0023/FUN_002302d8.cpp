@@ -1,10 +1,10 @@
 /* NON_MATCHING: scene/tail register assignment, paired page-controller loads and controller flag-update addressing differ. */
 #include "shard/S2Scene3a.h"
+#include "shard/ifTouchRegionRemove.h"
 
 extern "C" {
 void ifTouchRegionClearAll(void *controller);
 void FUN_00233818(void *work);
-void ifTouchRegionRemove(void);
 void FUN_00233670(void *work, s32 kind, u32 sprite, u32 state);
 u16 FUN_002b8584(u32 bank, u32 entry);
 void buttonHelpSelectMenuPreset(Scene3a *scene);

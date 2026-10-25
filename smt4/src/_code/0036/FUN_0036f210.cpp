@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail shares one release-call block between the two (identical) flag branches and addresses the handle through a pointer (add r5, r4, #28); armcc lays out the two paths separately here. */
+/* NON_MATCHING: handle pointer (add r5, r4, #28) now matches; retail cross-jumps the two identical branches so the call block sits in the second path and branches back to the first path's owner clear, armcc here puts the clear last. */
 #include "common.h"
 
 extern "C" {
@@ -31,16 +31,18 @@ void FUN_0036f210(GfxResourceRef *ref)
                 return;
             }
             if (resource->context != 0) {
-                g_gfxReleaseCallback(resource->context, 0x102, resource->owner, resource->handle);
-                resource->handle = 0;
+                u32 *handle = &resource->handle;
+                g_gfxReleaseCallback(resource->context, 0x102, resource->owner, *handle);
+                *handle = 0;
             }
         } else {
             if (resource->owner == 0) {
                 return;
             }
             if (resource->context != 0) {
-                g_gfxReleaseCallback(resource->context, 0x102, resource->owner, resource->handle);
-                resource->handle = 0;
+                u32 *handle = &resource->handle;
+                g_gfxReleaseCallback(resource->context, 0x102, resource->owner, *handle);
+                *handle = 0;
             }
         }
         resource->owner = 0;

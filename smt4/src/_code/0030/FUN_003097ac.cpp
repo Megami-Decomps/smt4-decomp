@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail 64 vs built 55 rows; scissor stack addressing, clamp branches, and output registers differ. */
 #include "camp/RenderCtx.h"
+#include "shard/FUN_002ae210.h"
 
 extern "C" {
 s32 asdGxGetCurrentPresetKind(void);
-u32 FUN_002ae210(s32);
 u32 FUN_002ae1e8(u32 kind);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);

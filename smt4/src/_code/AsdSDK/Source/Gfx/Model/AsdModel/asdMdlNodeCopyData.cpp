@@ -1,6 +1,7 @@
 /* NON_MATCHING: only register assignment differs: retail builds the description through r1 and puts the constant 0 argument in r1 just before FUN_002b3acc, armcc here uses r0 and sets r1 early (and loads r8 later). */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
 
 /* How a model is built: the default is a two-flag description with four- and eight-byte units. */
 struct AsdMdlBuildDesc {
@@ -24,7 +25,6 @@ struct AsdGfxSettings {
 };
 extern AsdGfxSettings g_gfxSettings;
 
-void *asdMemoryGetAllocatorA(void);
 void *FUN_002b3acc(AsdMdlBuildDesc *desc, s32 mode, u32 value, void *allocator);
 void FUN_002fb604(void *model);
 void FUN_002a9244(AsdMdlNode *node);

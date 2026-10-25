@@ -1,9 +1,9 @@
 /* NON_MATCHING: context registers and duplicate-action kind/options load scheduling differ. */
 #include "battle/btlReflect.h"
+#include "shard/battleGetEntryHalfword.h"
 
 extern "C" {
 
-s16 battleGetEntryHalfword(s32 entryIndex, u32 kind);
 
 // Queue a target action, advancing the entry sequence when a matching target is already queued.
 ReflectAction *FUN_002268d0(s32 actor, s32 secondary, u32 options, ReflectTarget *target,

@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/asdMdlManagerClone.h"
 
 extern "C" {
 

@@ -1,0 +1,120 @@
+== smt4a/src/_code/0013/FUN_0013ef3c.cpp
++#include "shard/JobWork.h"
+-SurfaceCaptureWorkPrefixA *jobGetWork(u32 process);
+-    SurfaceCaptureWorkPrefixA *work = jobGetWork(process);
++    SurfaceCaptureWorkPrefixA *work = (SurfaceCaptureWorkPrefixA *)jobGetWork(process);
+== smt4a/src/_code/0027/FUN_002761fc.cpp
++#include "shard/JobWork.h"
+-JobWork* jobGetWork(void);
+== smt4a/src/_code/battle/btlEditor/FUN_002984d4.cpp
++#include "shard/JobWork.h"
+-JobWork* jobGetWork(void);
+== smt4a/src/_code/battle/btlGameOver/FUN_002dedf0.cpp
++#include "shard/JobWork.h"
+-GameOverBattleWorkA *jobGetWork();
+-    GameOverBattleWorkA *work = jobGetWork();
++    GameOverBattleWorkA *work = (GameOverBattleWorkA *)jobGetWork();
+== smt4a/src/_code/0031/FUN_00314ef8.cpp
++#include "shard/JobWork.h"
+-BtlUiCloseWork *jobGetWork(void);
+-    BtlUiCloseWork *work = jobGetWork();
++    BtlUiCloseWork *work = (BtlUiCloseWork *)jobGetWork();
+== smt4a/src/_code/0031/FUN_0031bd24.cpp
++#include "shard/JobWork.h"
+-BattleStageLoadWork *jobGetWork(u32 handle);
+-    BattleStageLoadWork *work = jobGetWork(handle);
++    BattleStageLoadWork *work = (BattleStageLoadWork *)jobGetWork(handle);
+== smt4a/src/_code/0031/FUN_0031bed8.cpp
++#include "shard/JobWork.h"
+-SlideJob *jobGetWork(u32 job);
+-    SlideJob *work = jobGetWork(job);
++    SlideJob *work = (SlideJob *)jobGetWork(job);
+== smt4a/src/_code/0035/FUN_0035c0c8.cpp
++#include "shard/JobWork.h"
+-LinearFadeWork *jobGetWork(u32 job);
+-    LinearFadeWork *work = jobGetWork(job);
++    LinearFadeWork *work = (LinearFadeWork *)jobGetWork(job);
+== smt4/src/_code/0010/FUN_001087f4.cpp
+-TitleJobWork *jobGetWork(u32 job);
+-    TitleJobWork *work = jobGetWork(job);
++    TitleJobWork *work = (TitleJobWork *)jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010949c.cpp
++#include "shard/JobWork.h"
+-FrameWork* jobGetWork(u32 job);
+-    FrameWork* work = jobGetWork(job);
++    FrameWork *work = (FrameWork *)jobGetWork(job);
+== smt4/src/_code/0010/FUN_0010a03c.cpp
++#include "shard/JobWork.h"
+-FrameTexFade *jobGetWork(void);
+-    FrameTexFade *tex = jobGetWork();
++    FrameTexFade *tex = (FrameTexFade *)jobGetWork();
+== smt4/src/_code/0013/FUN_00138954.cpp
++#include "shard/JobWork.h"
+-CameraMoveWork *jobGetWork(u32 job);
+-    CameraMoveWork *work = jobGetWork(job);
++    CameraMoveWork *work = (CameraMoveWork *)jobGetWork(job);
+== smt4/src/_code/0017/FUN_0017fbe4.cpp
++#include "shard/JobWork.h"
+-JobCameraWork *jobGetWork(u32 job);
+-    JobCameraWork *work = jobGetWork(job);
++    JobCameraWork *work = (JobCameraWork *)jobGetWork(job);
+== smt4/src/_code/001e/FUN_001e48d0.cpp
++#include "shard/JobWork.h"
+-ActionStateChannelOwner *jobGetWork(u32 job);
+== smt4/src/_code/0021/FUN_00211e88.cpp
++#include "shard/JobWork.h"
+-JobBlendState* jobGetWork(u32 job);
+-    JobBlendState* blend = jobGetWork(job);
++    JobBlendState *blend = (JobBlendState *)jobGetWork(job);
+== smt4/src/_code/battle/btlDebug/FUN_0021ec34.cpp
++#include "shard/JobWork.h"
+-extern BattleDebugOwnerView *jobGetWork(u32 handle);
+-    BattleDebugOwnerView *owner = jobGetWork(handle);
++    BattleDebugOwnerView *owner = (BattleDebugOwnerView *)jobGetWork(handle);
+== smt4/src/_code/0022/FUN_0022212c.cpp
++#include "shard/JobWork.h"
+-FadeWork *jobGetWork(s32 jobId);
+-    FadeWork *work = jobGetWork(jobId);
++    FadeWork *work = (FadeWork *)jobGetWork(jobId);
+== smt4/src/_code/0024/FUN_00247bf4.cpp
++#include "shard/JobWork.h"
+-JobAxisWork *jobGetWork(u32 handle);
+-    JobAxisWork *work = jobGetWork(handle);
++    JobAxisWork *work = (JobAxisWork *)jobGetWork(handle);
+== smt4/src/_code/battle/btlEditor/FUN_002c9edc.cpp
++#include "shard/JobWork.h"
+-BtlMainState* jobGetWork(u32 job);
+-    BtlMainState* battle = jobGetWork(job);
++    BtlMainState *battle = (BtlMainState *)jobGetWork(job);
+== smt4/src/_code/002d/FUN_002db92c.cpp
++#include "shard/JobWork.h"
+-TextureOwnerWork *jobGetWork(u32 job);
+-    TextureOwnerWork *work = jobGetWork(job);
++    TextureOwnerWork *work = (TextureOwnerWork *)jobGetWork(job);
+== smt4/src/_code/002e/FUN_002e0730.cpp
++#include "shard/JobWork.h"
+-TitleLogoWork *jobGetWork(u32 job);
+-    TitleLogoWork *work = jobGetWork(job);
++    TitleLogoWork *work = (TitleLogoWork *)jobGetWork(job);
+== smt4/src/_code/002e/FUN_002e2250.cpp
++#include "shard/JobWork.h"
+-LinearFadeWork *jobGetWork(u32 job);
+-    LinearFadeWork *work = jobGetWork(job);
++    LinearFadeWork *work = (LinearFadeWork *)jobGetWork(job);
+== smt4/src/_code/002f/FUN_002fc5f8.cpp
++#include "shard/JobWork.h"
+-SpriteTransitionWork *jobGetWork(u32 job);
+-    SpriteTransitionWork *work = jobGetWork(job);
++    SpriteTransitionWork *work = (SpriteTransitionWork *)jobGetWork(job);
+-            SpriteTransitionWork *current = jobGetWork(job);
++            SpriteTransitionWork *current = (SpriteTransitionWork *)jobGetWork(job);
+== smt4/src/_code/0039/FUN_00391000.cpp
++#include "shard/JobWork.h"
+-IntroWork *jobGetWork(u32 job);
+-    IntroWork *work = jobGetWork(job);
++    IntroWork *work = (IntroWork *)jobGetWork(job);
+== smt4/src/_code/0025/asdListBoxMarkDirty.cpp
++#include "shard/JobWork.h"
+-ListBoxMetrics *jobGetWork(u32 job);
+-    ListBoxMetrics *box = jobGetWork(job);
++    ListBoxMetrics *box = (ListBoxMetrics *)jobGetWork(job);

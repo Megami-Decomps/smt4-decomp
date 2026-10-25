@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_00157558(int);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
@@ -48,7 +48,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
@@ -56,7 +56,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: debugDrawText. */
 extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_00285b58. */
@@ -239,10 +239,10 @@ unsigned int FUN_0023b8b0(void)
     if (temp_v11 && temp_v6 != 0) {
       FUN_001835b4(2,0x1a,0x1d9,0,0,0xfb);
       FUN_00164b5c(2,0x1a,0x13,0,0,0xfb);
-      temp_v2 = FUN_001834a4(0x1a,0x1dc);
+      temp_v2 = asdTMTexTableEntryAt(0x1a,0x1dc);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00162790(4,0x57d8ffff,&LAB_0023c044);
+      textDrawString(4,0x57d8ffff,&LAB_0023c044);
       temp_v6 = (*(unsigned char *)(temp_v0 + 0x9278) + 1) & 0xff;
       temp_v7 = temp_v6 % 0x28;
       *(char *)(temp_v0 + 0x9278) = (char)temp_v7;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail schedules the far/near vldr after `mov r1, #1`; ours emits them before it. */
 #include "common.h"
 #include "map/mapDepart.h"
+#include "shard/JobWork.h"
 
 struct CameraMatrixCache;
 
@@ -22,7 +23,6 @@ typedef struct JobCameraWork {
     /* 0x520 */ f32 fovy;
 } JobCameraWork;
 
-JobCameraWork *jobGetWork(u32 job);
 void effectTextureRequestsPump(void);
 void FUN_002c1edc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
 void FUN_002c1e30(JobCameraWork *camera, u32 pivot, CameraPerspective perspective);
@@ -31,7 +31,7 @@ void taskUpdateOrderedPasses(u32 pass);
 /* Sets the work area camera to look from its eye at its target with a fixed perspective. */
 s32 FUN_0017fbe4(u32 job)
 {
-    JobCameraWork *work = jobGetWork(job);
+    JobCameraWork *work = (JobCameraWork *)jobGetWork(job);
 
     effectTextureRequestsPump();
     MapVector up;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: -O2 candidate; UI-root/true registers swap, common flag-set block placement differs, and field/widget addresses are cached instead of recomputed. */
 #include "battle/btlUI.h"
+#include "gamedata/Table04Record.h"
 
 struct Menu32;
 struct BattleTargetFlagView {
@@ -29,7 +30,6 @@ static inline bool commandRequiresTargetSelection(const CommandSkillRecord *skil
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 CommandItemRecord *dataTable8FindRecord(s32 id);
-CommandSkillRecord *dataTable04FindById(u32 id);
 void FUN_002ccde8(Menu32 *menu, s16 *kind, s16 *id);
 void FUN_002fa7a8(Menu32 *menu);
 void menu32EnterState27(Menu32 *menu);
@@ -49,7 +49,7 @@ void btlUiSelectCommandTargetState()
     switch (kind) {
     case 2:
     case 3: {
-        const CommandSkillRecord *skill = dataTable04FindById(id);
+        const CommandSkillRecord *skill = (const CommandSkillRecord *)dataTable04FindById(id);
         if (commandRequiresTargetSelection(skill)) {
             target->requiresTargetSelection = 1;
         }
@@ -58,7 +58,7 @@ void btlUiSelectCommandTargetState()
     case 8: {
         const CommandItemRecord *item = dataTable8FindRecord(id);
         if (item->skill != 0) {
-            const CommandSkillRecord *skill = dataTable04FindById(item->skill);
+            const CommandSkillRecord *skill = (const CommandSkillRecord *)dataTable04FindById(item->skill);
             if (commandRequiresTargetSelection(skill)) {
                 target->requiresTargetSelection = 1;
             }

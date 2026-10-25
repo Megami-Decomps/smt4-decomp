@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail preserves two action parameters on the stack; range checks and saved-register roles also differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
-BtlMainState *btlGetMainState();
 
 
 // Queue reflected records for a selected combatant, then its final state-change action.

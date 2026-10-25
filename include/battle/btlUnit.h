@@ -5,6 +5,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "battle/btlMain.h"
+#include "battle/btlUI.h"
 
 /* Halfword index of the per-slot table in a unit's data block (BtlUnitDataA.unk152). */
 #define BTL_UNIT_SLOT_TABLE 0xA9
@@ -88,6 +89,10 @@ typedef char BtlSkillAEffectRosterIndexOffsetCheck[
 
 extern "C" {
 void btlReflectCreateKind21(s32 id, u32 flags, u32 target, u32 parameter, u32 value, s32 enabled);
+}
+
+extern "C" {
+bool FUN_003db7b4(void *arg0);
 }
 
 #endif

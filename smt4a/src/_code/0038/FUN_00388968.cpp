@@ -1,10 +1,10 @@
 /* NON_MATCHING: panel tail-flag addressing and sprite initialization registers differ. */
 #include "ui/MessageMain.h"
 #include "script/ScriptArgs.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-s32 scrGetCommandFrame(void);
 void FUN_0014e188(void *, s32, s32, void *, s32, f32);
 void uiSpriteSelectAnim(void *, s32);
 

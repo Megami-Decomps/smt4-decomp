@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
+#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
 /* Test the chosen combatant range and optional special unit for an ID and threshold. */

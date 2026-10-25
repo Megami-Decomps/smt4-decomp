@@ -45,7 +45,7 @@ void spriteSetVisible(JobSprite *sprite, u8 visible);
 /* Advances the three-sprite banner: builds the sprites, plays them until the first one finishes, then ends. */
 s32 FUN_00472568(u32 job)
 {
-    SpriteJobWork *work = reinterpret_cast<SpriteJobWork *>(jobGetWork(job));
+    SpriteJobWork *work = (SpriteJobWork *)jobGetWork(job);
     work->frame = (work->frame + 1) % 40;
     switch (work->state) {
     case 0:

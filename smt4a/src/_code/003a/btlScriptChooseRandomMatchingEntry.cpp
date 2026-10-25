@@ -3,10 +3,10 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
+#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-u32 btlResolveEntryChoice(s32 side);
 s32 FUN_002b54a0(BtlCombatantEntryA *, u32 condition);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 u32 randRange(u16 maximum);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: same operations and call order as retail; retail keeps the 0.0f term in s22, the attacker/target ids in r6/r8 and the skill bonus in r8 across the attack-info copy, and moves base/rate with one vmov.f64; the build allocates r6-r9/fp and s17-s21 differently. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 // A combatant entry of the battle state (the part this formula reads).
@@ -26,7 +27,6 @@ struct AttackInfo {
 };
 
 extern "C" {
-BattleMainView *btlGetMainState(void);
 BattleEntryView *FUN_0027da30(BattleMainView *state, s32 id);
 void *btlMainFindEntryByListedId(BattleMainView *state, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
@@ -44,7 +44,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
 {
     f32 zero = 0.0f;
     f32 sideFactor = 1.0f;
-    BattleMainView *state = btlGetMainState();
+    BattleMainView *state = reinterpret_cast<BattleMainView *>(btlGetMainState());
     BattleEntryView *attacker = FUN_0027da30(state, attackerId);
     BattleEntryView *target = FUN_0027da30(state, targetId);
     f32 level = (f32)attacker->level;
@@ -60,7 +60,7 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     selectionCopySupportedValue(info.supportedValue, &supported);
 
     s32 skillBonus = 0;
-    if ((*(u32 *)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
+    if ((*(u32 *)btlMainFindEntryByListedId(reinterpret_cast<BattleMainView *>(btlGetMainState()), attackerId) & 2) != 0) {
         void *record = dataTable40FindById(player);
         if (record != NULL) {
             skillBonus = FUN_00283ebc(record, playerGetSkillRank(player), 1);

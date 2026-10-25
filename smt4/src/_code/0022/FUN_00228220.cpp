@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00228220` (_code @ 0x228220, 0x5e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -15,7 +16,6 @@ int FUN_00246134(...);
 int FUN_002463e8(...);
 int FUN_00247478(unsigned char [2], unsigned int, unsigned int *);
 int btlMainFindEntryByListedId(unsigned int *, unsigned int);
-int btlGetMainState(void);
 int dataTable40FindById(void);
 int VectorSignedToFloat(...);
 
@@ -89,7 +89,7 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
   uStack_30 = param_2;
   temp_v19 = param_3;
   temp_v20 = param_4;
-  temp_v2 = btlGetMainState();
+  temp_v2 = reinterpret_cast<int>(btlGetMainState());
   *param_8 = 0;
   switch(temp_v19) {
   case 0xb:
@@ -145,11 +145,11 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
       if ((*(unsigned int *)(temp_v2 + 0x44a8) & 0x80) != 0) {
         return;
       }
-      puVar6 = (unsigned int *)btlGetMainState();
+      puVar6 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
       btlMainFindEntryByListedId(puVar6,temp_v20);
-      puVar7 = (unsigned int *)btlGetMainState();
+      puVar7 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
       btlMainFindEntryByListedId(puVar7,param_5);
-      temp_v5 = btlGetMainState();
+      temp_v5 = reinterpret_cast<int>(btlGetMainState());
       FUN_00247478(temp_v14,temp_v5,puVar6);
       temp_v1 = temp_v15;
       if ((param_1 < 1) && (temp_v19 != 1)) {

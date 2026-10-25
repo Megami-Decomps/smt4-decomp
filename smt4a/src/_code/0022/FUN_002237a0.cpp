@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002237a0` (_code @ 0x2237a0, 0x800 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -23,9 +25,7 @@ extern int DAT_005f18e4; /* 0x5f18e4 */
 extern int DAT_005f1908; /* 0x5f1908 */
 extern unsigned char DAT_005f19ee; /* 0x5f19ee */
 
-extern unsigned int FUN_0014af98(void);
 extern int randRange(unsigned int);
-extern unsigned int FUN_00152f44(void);
 extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: eventQueueAddUnique. */

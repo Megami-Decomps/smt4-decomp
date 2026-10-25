@@ -1,10 +1,10 @@
 /* NON_MATCHING: compiler combines source-coordinate loads into VLDM and schedules interpolation arithmetic in different VFP registers. */
 #include "map/NavigationInterpolation.h"
 #include "map/mapDepart.h"
+#include "shard/FUN_002319c0.h"
 
 extern "C" {
 extern GameState g_gameState;
-s32 FUN_002319c0(void);
 void FUN_0039b648(NavigationInterpolation *state);
 u32 naviUpdateDragCapture(NavigationInterpolation *state);
 void NaviMain_SetCursorPos(void *cursor, const NavigationPoint *position);

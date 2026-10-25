@@ -53,4 +53,8 @@ struct EffectColorQuadState {
     /* 0x84 */ f32 alpha;
 };
 
+extern "C" {
+u32 FUN_00144eec(void);
+}
+
 #endif

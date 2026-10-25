@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "shard/JobWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 struct EventJobRequestPrefix { u32 id; s32 entry; char path[1]; };
 extern "C" {
@@ -12,7 +13,6 @@ void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
 void rt_aeabi_memclr(void *memory, u32 size);
 char *libc_strcpy(char *destination, const char *source);
-const void *jyoucyuGetTableEntry(u32 id);
 void dataTableReload(u32 table);
 void dataTableResolveEntryVariants();
 void FUN_00225ddc(JobWork *job);

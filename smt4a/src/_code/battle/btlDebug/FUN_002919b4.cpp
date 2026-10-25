@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "shard/jobSetText.h"
 
 /* The debug mask lies beyond the shared three-word global prefix. */
 struct BattleDebugInitializationGlobalsView {
@@ -31,7 +32,6 @@ void FUN_003592dc(u32 list);
 void jobStop(u32 job, s32 delay);
 void asdListBoxAddItems(u32 list, const AsdListBoxEntry *items, s32 count);
 void asdListBoxSetByteValue(u32 list, u8 value);
-void jobSetText(u32 list, const char *title);
 void FUN_004d48d0(BattleDebugWork *work, BtlMainStateA *battle);
 void FUN_004aa780(BtlUiA *ui, s32 enabled);
 

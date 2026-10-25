@@ -42,7 +42,7 @@ typedef char TitleScreenViewLayoutCheck[sizeof(TitleSprite) == 0x38 &&
 extern "C" {
 
 u32 FUN_001692ac(u32 value, bool enabled);
-TitleTextureEntry *FUN_001834a4(u32 texture, u32 frame);
+TitleTextureEntry *asdTMTexTableEntryAt(u32 texture, u32 frame);
 void efctSetSpeed(f32 alpha);
 void FUN_0034dc3c(void *menu);
 u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
@@ -92,7 +92,7 @@ u32 FUN_0036b21c(void)
     titleDrawSprite(&title->sprites[1], 0xb);
     titleDrawSprite(&title->sprites[0], 0x10);
     titleDrawSprite(&title->sprites[2], 0x10);
-    entry = FUN_001834a4(0x2a, 3);
+    entry = asdTMTexTableEntryAt(0x2a, 3);
     last = &title->sprites[5];
     width = entry->size->width;
     height = entry->size->height;

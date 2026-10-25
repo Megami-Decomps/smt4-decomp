@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "util/EffMenuListAppend.h"
 
 extern "C" {
 

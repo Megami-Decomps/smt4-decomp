@@ -1,7 +1,7 @@
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 
 // Finds an existing or empty ID slot and increments its saturating counter.
-extern "C" void btlIncrementSaturatingSlotCounter(BattleMaskState* state, s32 id)
+extern "C" void btlIncrementSaturatingSlotCounter(BtlMainStateA* state, s32 id)
 {
     for (s32 i = 0; i < 16; ++i) {
         BattleCountSlot* slot = &state->counters.slots[i];

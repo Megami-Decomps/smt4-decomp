@@ -2,9 +2,9 @@
 #include "shard/Shard0032.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include <string.h>
+#include "map/lmapMain.h"
 
 extern "C" {
-u32 gameDataCopySaveEntry(u32 id, SavedUnitRecordA *destination);
 void sysMemClear(void *destination, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_004bcd90(UnitRecord *unit);

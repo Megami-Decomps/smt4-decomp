@@ -1,4 +1,5 @@
 #include "shard/Shard0034.h"
+#include "shard/faderSetValue.h"
 
 extern "C" {
 

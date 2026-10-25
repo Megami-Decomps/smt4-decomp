@@ -10,7 +10,6 @@ void renderCtxResetColorScale(void *);
 void FUN_0016c4b8(void *, u32);
 void skinObjectUpdateMatrices(void *);
 extern void *g_renderCtx;
-s32 FUN_00144eec(void);
 u32 asdTMTexTableGetHeaderValue(u32, u32);
 
 // Fade the timed overlay in and out while reducing its remaining duration.

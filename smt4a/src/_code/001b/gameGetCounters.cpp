@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/gameGetCounters.h"
 
 extern "C" {
 

@@ -1,4 +1,5 @@
 /* NON_MATCHING: the request stride product (i * 35) lands in r1 in retail; armcc reuses r0. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct VersionLoadRequest {
@@ -14,7 +15,6 @@ struct VersionLoadSet {
 
 extern "C" {
 struct BtlMainStateA;
-BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(void);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const char *);

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "camp/UIFade/UIFade.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int gameGetSlotRecord(void);
 int campChangeState(...);
-int FUN_0020d700(void);
 int FUN_0021b274(...);
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
@@ -56,7 +56,7 @@ extern int g_camp; /* 0x57f108 */
 extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameGetPlayerData(void);
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -251,7 +251,7 @@ void FUN_001ffe84(void)
     }
   }
   temp_v9[0] = '\0';
-  temp_v7 = FUN_001834a4(0x14,0x56d);
+  temp_v7 = asdTMTexTableEntryAt(0x14,0x56d);
   temp_v4 = temp_v8 + 0x1ec;
   FUN_003450d4(temp_v4,temp_v7,temp_v8 + 0x1b3e,(int)*(short *)(temp_v8 + 0x1b34),
                (int)*(short *)(temp_v8 + 0x1b36),(int)*(short *)(temp_v8 + 0x1b38),temp_v9,0,1);

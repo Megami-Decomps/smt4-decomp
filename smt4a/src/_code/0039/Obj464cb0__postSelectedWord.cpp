@@ -1,9 +1,9 @@
 /* NON_MATCHING: This is a global command callback, not an evidenced class member; packet-write register scheduling still differs from retail. */
 #include "romwright_types.h"
+#include "shard/asdModelCommandBlockRelease.h"
 
 extern "C" {
 
-int asdModelCommandBlockRelease(void);
 int cursorResetFromParam(void);
 int FUN_003c8538(int);
 

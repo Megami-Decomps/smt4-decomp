@@ -5,6 +5,7 @@
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemoryAllocTracked.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_0014e188(void *ui, int a, int b, void *sound, int c);
 int uiSpriteSelectAnim(void *ui, int arg);
 
 int sysMemClear(void *ptr, int size);                  /* zero a block */
-void *asdMemoryAllocTracked(int heap, int align, int arg2, int size, int arg4);
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
 void paramsClearPacket(void *player);
 void FUN_00208650(void);

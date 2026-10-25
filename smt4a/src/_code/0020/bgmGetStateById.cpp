@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail shares constant-return tails and retains a single base for both BGM channels. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 static __inline u32 bgmQueryChannelTrackState(const BgmRequestChannel *channel, s32 trackId)
 {
@@ -16,7 +17,6 @@ static __inline u32 bgmQueryChannelTrackState(const BgmRequestChannel *channel, 
 
 extern "C" {
 extern BgmRequestChannel DAT_0061951c[2];
-s32 jyoucyuGetTableEntry(u32 entry);
 
 // Report whether a track is playing or pending on either BGM channel.
 u32 bgmGetStateById(s32 trackId)

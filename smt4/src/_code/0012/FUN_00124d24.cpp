@@ -21,7 +21,7 @@ void FUN_002bee04(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
-TitlePartInfo *FUN_002bf4f8(s32 sheet, s32 part);
+TitlePartInfo *asdTMTexTableEntryAt(s32 sheet, s32 part);
 void FUN_002bf380(s32 layer, s32 sheet, s32 part, s32 x, s32 y, s32 priority);
 void FUN_002bdce0(s32 value, s32 x, s32 y, s32 flag);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
@@ -43,19 +43,19 @@ void FUN_00124d24(s32 wide)
 
         TitlePartInfo *part;
         if (wide) {
-            part = FUN_002bf4f8(14, 148);
+            part = asdTMTexTableEntryAt(14, 148);
             x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
         } else {
-            part = FUN_002bf4f8(14, 192);
+            part = asdTMTexTableEntryAt(14, 192);
         }
         FUN_002bf380(2, 14, 0, part->x + x, part->y + y, 11);
         FUN_002bdce0(g_messageMain.banner->unk6C, part->x + x, part->y + y, 0);
 
         if (g_messageMain.banner->unk80) {
             if (wide)
-                part = FUN_002bf4f8(14, 256);
+                part = asdTMTexTableEntryAt(14, 256);
             else
-                part = FUN_002bf4f8(14, 287);
+                part = asdTMTexTableEntryAt(14, 287);
             FUN_002bf380(2, 14, 12, part->x + x, part->y + y, 11);
             FUN_002bdce0(g_messageMain.banner->unk74, part->x + x, part->y + y, 1);
         }
@@ -65,7 +65,7 @@ void FUN_00124d24(s32 wide)
             s32 bx = vec2GetXInt(banner->widget754);
             s32 by = vec2GetYInt(banner->widget754);
             s32 px = static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f) + bx);
-            part = FUN_002bf4f8(14, 256);
+            part = asdTMTexTableEntryAt(14, 256);
             FUN_002bf380(2, 14, 22, part->x + px, part->y + by, 11);
             FUN_002bdce0(-banner->unk9C, part->x + px, part->y + by, 1);
         }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitSetParam` (_code @ 0x24c614, 0xe18 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
 
@@ -26,7 +27,6 @@ typedef struct {
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: btlUnitGet. */
-extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int FUN_003c83e0(void);
 /* Supplied declaration required: FUN_003cf1a8. */
@@ -164,7 +164,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       }
     }
     else {
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       if (*(short *)(temp_v3 + 0x1fc4) != 2) {
         FUN_003cf1a8(param_1);
         return;

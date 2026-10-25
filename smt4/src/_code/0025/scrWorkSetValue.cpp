@@ -1,18 +1,13 @@
-#include "common.h"
+#include "script/ScriptVm.h"
 
 extern "C" {
 
-extern struct {
-    u8 unk00[0x20];
-    u32 *words;
-} g_scrContext;
-
-/* Stores `value` in word 0x36 + index of the block at +0x20. */
-void scrWorkSetValue(int index, u32 value)
+/* Stores `value` in work word `index` of the running script. */
+void scrWorkSetValue(s32 index, u32 value)
 {
-    u32 *words = g_scrContext.words;
+    ScriptVmProcess *process = g_scrContext.active;
 
-    words[index + 0x36] = value;
+    process->workValues[index] = value;
 }
 
 } /* extern "C" */

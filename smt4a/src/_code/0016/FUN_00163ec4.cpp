@@ -2,14 +2,13 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern TextDrawDefaultsPrefixA g_asdTextDefaults;
 
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 fraction);
-f32 FUN_00162790(u32 resource, u32 color, const char *text,
-                 f32 x, f32 y, f32 z, f32 scale, f32 opacity);
 }
 
 extern "C" f32 FUN_00163ec4(TextDrawStatePrefixA *state, s32 x, s32 y,
@@ -36,7 +35,7 @@ extern "C" f32 FUN_00163ec4(TextDrawStatePrefixA *state, s32 x, s32 y,
     if (g_asdTextDefaults.adjustmentEnabled != 0)
         drawX = renderCtxCalculateStereoParallax(g_renderCtx, fraction) + drawX;
 
-    const f32 advance = FUN_00162790(state->resource, color, state->text,
+    const f32 advance = textDrawString(state->resource, color, state->text,
                                     drawX, drawY, 0.0f, state->scale, opacity);
     const f32 displacement = (advance + drawX) - originalX;
     return displacement > 0.0f ? displacement : 0.0f;

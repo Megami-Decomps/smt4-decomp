@@ -15,7 +15,7 @@ int FUN_00163aa4(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameGetPlayerData(void);
-int FUN_001834a4(int, int);
+int asdTMTexTableEntryAt(int, int);
 int uiSpriteSetKeyframe(...);
 int FUN_0019de98(...);
 int dialogOpen(...);
@@ -53,7 +53,7 @@ extern int infoWinHasValue(void);
 extern unsigned short FUN_001643b4(unsigned int, int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
@@ -137,16 +137,16 @@ void FUN_002c9a8c(int param_1)
     do {
       temp_v11 = FUN_001643b4(0x1d,temp_v20 + 0xba);
       *(unsigned short *)(param_1 + temp_v20 * 2 + 0x43b6) = temp_v11;
-      temp_v14 = FUN_001834a4(0x1d,temp_v20 + 0xba);
-      temp_v13 = FUN_001834a4(0x1d,0x117);
+      temp_v14 = asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba);
+      temp_v13 = asdTMTexTableEntryAt(0x1d,0x117);
       temp_v0 = **(short **)(temp_v13 + 0xc);
       temp_v12 = (int)(short)(*(short *)(temp_v14 + 8) + *(short *)(temp_v13 + 8) + temp_v0 * -2);
       ifTouchRegionAdd(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
                    (int)(short)(temp_v0 * 3),(int)(*(short **)(temp_v13 + 0xc))[1]);
       temp_v21 = param_1 + temp_v20 * 4;
       *(short *)(temp_v21 + 0x43d8) = (short)temp_v12;
-      temp_v14 = FUN_001834a4(0x1d,temp_v20 + 0xba);
-      temp_v13 = FUN_001834a4(0x1d,0x116);
+      temp_v14 = asdTMTexTableEntryAt(0x1d,temp_v20 + 0xba);
+      temp_v13 = asdTMTexTableEntryAt(0x1d,0x116);
       temp_v12 = (int)(short)(*(short *)(temp_v14 + 8) + *(short *)(temp_v13 + 8));
       ifTouchRegionAdd(temp_v12,(int)(short)(*(short *)(temp_v14 + 10) + *(short *)(temp_v13 + 10)),
                    (int)(short)(**(short **)(temp_v13 + 0xc) * 3),(int)(*(short **)(temp_v13 + 0xc))[1])

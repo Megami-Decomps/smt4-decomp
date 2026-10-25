@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021a9e8` (_code @ 0x21a9e8, 0x52c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
 
@@ -28,7 +29,6 @@ extern unsigned int DAT_00573bc8; /* 0x573bc8 */
 extern unsigned int DAT_00573bcc; /* 0x573bcc */
 
 /* Supplied declaration required: qsort. */
-extern int btlGetMainState(void);
 extern unsigned int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 extern int gameGetSlotRecord(void);
@@ -66,7 +66,7 @@ void FUN_0021a9e8(int param_1)
   *(int *)(param_1 + 0x38a0) = temp_v1;
   FUN_0020d3d4(param_1);
   FUN_0023f788(param_1);
-  temp_v1 = btlGetMainState();
+  temp_v1 = reinterpret_cast<int>(btlGetMainState());
   piVar8 = (int *)(param_1 + 0x3890);
   temp_v2 = *piVar8;
   temp_v6 = param_1 + 0x3a4c;
@@ -160,11 +160,11 @@ void FUN_0021a9e8(int param_1)
     }
     FUN_00203b40(temp_v6,temp_v4,6,1,0,1);
   }
-  temp_v1 = btlGetMainState();
+  temp_v1 = reinterpret_cast<int>(btlGetMainState());
   temp_v2 = param_1 + 0x3ab0;
   if (!((*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573bcc) == 0 &&
        (*(unsigned int *)(temp_v1 + 0x45a8) & DAT_00573bc8) == 0)) {
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_00203b40(temp_v2,(int)*(short *)(temp_v1 + 0xe0),6,1,1,1);
     FUN_002a4964(temp_v2,DAT_00573b90);
   }

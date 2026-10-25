@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the dirty byte through a literal offset and merges both submission branches. */
 #include "common.h"
 
 struct PresetSelection {
@@ -14,7 +13,7 @@ struct PresetSelection {
 struct PresetSelectionController {
     u8 unk00[0x11f0];
     PresetSelection *selected;
-    u8 dirty;
+    s8 dirty;
     u8 submittedState;
 };
 
@@ -34,10 +33,17 @@ void FUN_0016c4b8(PresetSelectionController *controller, PresetSelection *select
         }
     }
     controller->dirty = 0;
-    u8 state = selected != NULL ? 1 : 0;
-    if (controller->submittedState != state) {
-        dataSubmitSelectedPresetBlock(state);
-        controller->submittedState = state;
+    u8 state;
+    if (selected != NULL) {
+        state = 1;
+        if (controller->submittedState == state)
+            return;
+    } else {
+        state = 0;
+        if (controller->submittedState == state)
+            return;
     }
+    dataSubmitSelectedPresetBlock(state);
+    controller->submittedState = state;
 }
 }

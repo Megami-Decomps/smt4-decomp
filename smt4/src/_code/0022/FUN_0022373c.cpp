@@ -6,7 +6,6 @@ extern LmapScene *g_lmapScene;
 extern MapHeadingState *DAT_004474f4;
 extern MapSpawnPoint DAT_00447f40[];
 MapSpawnGrid *gameGetMapBlock(void);
-s32 FUN_00285574(void);
 
 // Restore an explicit spawn point or place the actor at the map's starting cell.
 void FUN_0022373c(void)

@@ -1,5 +1,6 @@
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
+#include "camp/PartyPanel/PartyPanel.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;

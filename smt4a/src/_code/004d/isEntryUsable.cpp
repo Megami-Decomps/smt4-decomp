@@ -1,4 +1,5 @@
 #include "shard/Shard004D.h"
+#include "shard/isEntryUsable.h"
 
 extern "C" {
 

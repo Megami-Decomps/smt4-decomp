@@ -5,7 +5,6 @@
 
 extern "C" {
 void FUN_00408184(u32 kind, u32 amount);
-u32 aocGetContentFlags(u16 id);
 void gameDataAddCappedPoints(u32 points);
 void FUN_0049cd18(const Scene3aEntry *entry, s32 quantity, u32 flags);
 

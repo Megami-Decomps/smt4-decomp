@@ -1,12 +1,12 @@
 /* NON_MATCHING: zero-result exits and queued-skill mask scratch-register allocation differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 u32 FUN_004c5da4(s32 unitIndex, s32 markQueued);
-const void *dataTable04FindById(u32 skill);
 
 // Resolve the active actor's queued skill and optionally mark this queue as consumed.
 u32 FUN_003f0bd8(BtlMainStateA *state, s32 markQueued)

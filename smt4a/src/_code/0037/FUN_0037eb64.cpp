@@ -2,11 +2,12 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
+#include "shard/FUN_0037eb64.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_003e4978(void);
 void efctSetSpeed(f32 speed);
-const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
+const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 FUN_003e53ec(void);
 s32 FUN_003e48bc(void);
 void FUN_00183bb0(void);
@@ -32,20 +33,20 @@ void FUN_0037eb64(u32 mode, s32 x, s32 y, f32 speed)
             sprite = 0xBCB;
             placement = 0xC23;
         }
-        const SpriteInfo *origin = FUN_001834a4(0x14, placement + i);
+        const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, placement + i);
         s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
         FUN_001835b4(2, 0x14, sprite, spriteX, spriteY, 0xC9);
     }
     if (FUN_003e48bc()) {
         for (s32 i = 0; i < 8; ++i) {
-            const SpriteInfo *origin = FUN_001834a4(0x14, 0xC2B + i);
+            const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, 0xC2B + i);
             s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
         FUN_001835b4(2, 0x14, 0xC0D, spriteX, spriteY, 0xDD);
         }
         efctSetSpeed(speed);
-        const SpriteInfo *origin = FUN_001834a4(0x14, 0xC14);
+        const SpriteInfo *origin = asdTMTexTableEntryAt(0x14, 0xC14);
         s32 spriteX = origin->x + x;
         s32 spriteY = origin->y + y;
         FUN_001835b4(2, 0x14, 0xC0E, spriteX, spriteY, 0xDD);

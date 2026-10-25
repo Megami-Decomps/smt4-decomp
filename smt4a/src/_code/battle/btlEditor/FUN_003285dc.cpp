@@ -38,7 +38,7 @@ static __inline void battleEditorRestoreRosterColors(BtlMainStateA *work)
 // Restore roster display state and remove the editor's marker bits before freeing its buffer and stopping the job.
 void FUN_003285dc(void *job)
 {
-    BtlMainStateA *work = reinterpret_cast<BtlMainStateA *>(jobGetWork((u32)job));
+    BtlMainStateA *work = (BtlMainStateA *)jobGetWork((u32)job);
     if (g_btlUiBlock)
         FUN_004aa780(reinterpret_cast<u32>(g_btlUiBlock), 0);
     if (g_btlEditor.state) {

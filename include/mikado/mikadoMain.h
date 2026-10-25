@@ -8,8 +8,8 @@
 #include "classes/Obj55ca08.h"
 #include "classes/SelectionState.h"
 #include "classes/UShortVec3.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 /* The talk window's work object (0x17F0 bytes); a floating-point state sub-object sits at 0x4CC. */
 class MikadoTalkWork {

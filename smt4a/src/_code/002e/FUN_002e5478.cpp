@@ -28,7 +28,7 @@ u32 FUN_002e5478(void)
     if (FUN_00203d74() != 0 && steps > 4) {
         steps = 4;
     }
-    FadeJob *work = reinterpret_cast<FadeJob *>(jobGetWork(job));
+    FadeJob *work = (FadeJob *)jobGetWork(job);
     if (work != NULL) {
         if (steps == 0) {
             work->rates.in = 1.0f;

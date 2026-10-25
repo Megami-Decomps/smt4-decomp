@@ -6170,3 +6170,13 @@
 003b0b58 scrCommBattleCheckFieldEquals
 003e5354 partyAdjustCounterIfEnoughActive
 003bf3f0 mapOverlaySetOpen
+003d2004 scrPopInt
+002ba85c scrGetCommandOwner
+0040a42c statsSetSecondBankFlag
+003e54b8 slotTargetApplyActiveValue
+001834a4 asdTMTexTableEntryAt
+0035b0a4 gameDataClearSaveRecord
+00325a74 popupClearPendingEntries
+002c7b8c gameDataSetStatusFlag
+00162790 textDrawString
+00398464 naviMainEnterState6IfActive

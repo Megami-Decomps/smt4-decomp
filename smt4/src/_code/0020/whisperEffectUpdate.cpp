@@ -10,7 +10,6 @@ typedef char CheckWhisperViewSize[sizeof(WhisperAnimationView) == 0x1B8 ? 1 : -1
 extern "C" WhisperAnimationView *jobGetWork(u32 job);
 extern "C" f32 randomGetNormalizedFloat(void);
 extern "C" s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
-extern "C" void bgmStopNoForce(u32 handle, s32 frames);
 
 static __inline void updateWhisperLine(WhisperLineAnimation *line)
 {

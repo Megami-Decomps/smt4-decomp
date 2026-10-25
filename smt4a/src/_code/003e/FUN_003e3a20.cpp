@@ -1,6 +1,7 @@
 /* NON_MATCHING: stack aggregate placement, choice-record integer/VFP copying and saved pointer registers differ. */
 #include "shard/Shard0032.h"
 #include <stddef.h>
+#include "util/FUN_0033449c.h"
 
 struct InheritanceChoiceRecord {
     u32 unk00[2];
@@ -35,7 +36,6 @@ s32 FUN_004cc8d8(u16 id, u16 level);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 getUnlockedSlotCount(u32 mode);
 void FUN_004bd6b0(UnitRecord *record, u16 skill, s32 slot);
-void FUN_0033449c(u32 enabled);
 void statusDisplayBindUnitRecord(const UnitRecord *record, u32 option, u32 mode, u32 flags);
 void objBInitBlock19D0(const UnitRecord *record, u32 option, u32 flags);
 void statusPanelSetOpen(u32 open);
@@ -58,7 +58,7 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     u16 inherited[8] = {0};
     InheritanceChoiceRecord choice = work->choices()[work->selected];
     s32 unlocked = getUnlockedSlotCount(0);
-    s32 count = 0;
+    u32 count = 0;
     for (s32 index = 0; index < 8; ++index)
         FUN_004bd6b0(&preview, 0, index);
     for (s32 index = 0; index < 8; ++index) {

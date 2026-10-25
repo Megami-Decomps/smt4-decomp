@@ -1,11 +1,11 @@
 /* NON_MATCHING: mask-load merging and allocation/entry constant lifetimes retain fewer registers than retail. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA *btlGetMainState(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
 char *libc_strcpy(char *destination, const char *source);
 

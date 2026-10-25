@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -42,8 +43,7 @@ void FUN_002bed3c(void);
 s32 FUN_002c5d80(s32 a, s32 b);
 void FUN_002c1b64(RenderCtx *context, s32 arg);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
-SlotLayout *FUN_002bf4f8(u32 group, u32 id);
-void FUN_002be5a4(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+SlotLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
@@ -70,7 +70,7 @@ void FUN_00398ba8(SlotPicker *picker)
     char label[3] = {0, 0, 0};
 
     for (s32 i = 0; i < 8; i++) {
-        SlotLayout *slot = FUN_002bf4f8(0x2E, i + 8);
+        SlotLayout *slot = asdTMTexTableEntryAt(0x2E, i + 8);
 
         if (picker->mode != 4) {
             if (picker->slotText[i][0] == 0 && picker->slotText[i][1] == 0) {
@@ -88,11 +88,11 @@ void FUN_00398ba8(SlotPicker *picker)
                 FUN_002bf288(2, 0x2E, 6, slot->x + parallax, slot->y, 0x10);
             }
         }
-        SlotLayout *text = FUN_002bf4f8(0x2E, 7);
+        SlotLayout *text = asdTMTexTableEntryAt(0x2E, 7);
 
         label[0] = picker->slotText[i][0];
         label[1] = picker->slotText[i][1];
-        FUN_002be5a4(4, color, label, (f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 0.0f,
+        textDrawString(4, color, label, (f32)(slot->x + text->x + parallax), (f32)(slot->y + text->y), 0.91796875f, 0.0f,
                      scale);
     }
     efctSetSpeed(1.0f);

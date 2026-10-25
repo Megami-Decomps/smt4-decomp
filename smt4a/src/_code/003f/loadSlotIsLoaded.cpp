@@ -1,4 +1,5 @@
 #include "gamedata/DataTableSlots.h"
+#include "shard/loadSlotIsLoaded.h"
 
 extern "C" {
 

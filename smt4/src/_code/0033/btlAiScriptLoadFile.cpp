@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack reservation and initial zero register are scheduled before the process load/test. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlAIScript.h"
 #include "battle/btlMain.h"
 #include "addon/aocMain.h"
@@ -16,7 +17,6 @@ SupportUnitRecord *supportUnitGetEntry(s32, s32);
 DevilRecord *dataTable00FindById(u32);
 void memClear(void *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
-BtlMainState *btlGetMainState();
 s32 FUN_002402c4(BtlMainState *, char *);
 char *libc_strcpy(char *, const char *);
 s32 aocContentLookupSucceeds(AocSystem *, u16);

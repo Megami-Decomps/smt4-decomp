@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "util/Vec2Fixed.h"
 /* NON_MATCHING: dispatch guard peeling, sprite visibility getter, and mask/register loads differ. */
 #include "battle/btlUI.h"
@@ -9,7 +10,6 @@
 extern "C" {
 extern const u32 DAT_00573c70[2];
 extern RenderCtxA* g_renderCtx;
-BtlMainStateA* btlGetMainState(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void FUN_001634b4(UiSpriteState* sprite, f32 horizontalOffset);
 

@@ -3,10 +3,10 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
+#include "shard/FUN_0026d654.h"
 
 extern "C" {
 
-int FUN_0026d654(...);
 int FUN_0026d670(void);
 int FUN_002958f8(...);
 int FUN_0029c4ac(...);

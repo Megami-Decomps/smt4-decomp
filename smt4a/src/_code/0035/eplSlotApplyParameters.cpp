@@ -1,4 +1,5 @@
 #include "map/mapEplExt.h"
+#include "shard/eplSlotApplyParameters.h"
 
 extern "C" {
 

@@ -1,4 +1,5 @@
 #include "shard/Shard0037.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -8,14 +9,13 @@ typedef struct PayloadWork {
     /* 0x08 */ u8 kind;
 } PayloadWork;
 
-extern PayloadWork *jobGetWork(u32 job);
 extern void FUN_00418960(u32 payload);
 extern void FUN_00408c3c(u32 payload);
 
 /* Releases the job's payload according to its kind (1: first word, 2: second word). */
 u32 payloadWorkRelease(u32 job)
 {
-    PayloadWork *work = jobGetWork(job);
+    PayloadWork *work = (PayloadWork *)jobGetWork(job);
 
     if (work->kind != 0) {
         if (work->kind != 1) {

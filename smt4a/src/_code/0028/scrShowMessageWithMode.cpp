@@ -14,14 +14,14 @@ typedef struct MessageMain {
 
 extern MessageMain g_messageMain;
 
-u32 FUN_002ba85c(void);
+u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
 s32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
 static void showMessage(s32 mode)
 {
-    u32 a = FUN_002ba85c();
+    u32 a = scrGetCommandOwner();
     u32 b = scrGetArg(0);
     u32 c = scrGetCommandFrame();
 

@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
+#include "shard/FUN_0029a9d4.h"
+#include "shard/FUN_0029a924.h"
 
 extern "C" {
 
@@ -24,8 +26,6 @@ int campReleaseScreenTouchRegions(...);
 int dataTable15GetUnlockedEntryId(...);
 int FUN_00299900(...);
 int FUN_00299bc4(int, int);
-int FUN_0029a924(...);
-int FUN_0029a9d4(...);
 int FUN_0029acb0(void);
 int beginStatusPanelClose(void);
 int statusPanelSetOpen(...);
@@ -93,7 +93,7 @@ extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 
 
@@ -229,7 +229,7 @@ void FUN_0018a3e0(void)
     }
   }
   temp_v8[0] = '\0';
-  temp_v5 = FUN_002bf4f8(0x1d,0x56d);
+  temp_v5 = asdTMTexTableEntryAt(0x1d,0x56d);
   temp_v4 = temp_v6 + 0x1dc;
   uiScrollHandleActionsOrTouch(temp_v4,temp_v5,temp_v6 + 0xe0c,(int)*(short *)(temp_v6 + 0xe02),
                (int)*(short *)(temp_v6 + 0xe04),(int)*(short *)(temp_v6 + 0xe06),temp_v8,0,1);

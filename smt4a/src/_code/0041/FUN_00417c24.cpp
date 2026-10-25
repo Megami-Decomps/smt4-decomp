@@ -1,4 +1,3 @@
-/* NON_MATCHING: the flag-clear loop folds ~(1 << bit) into bic with a scaled byte address; retail builds the mask with mvn/and and a separate flag >> 3 index */
 #include "shard/Shard0041.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
@@ -12,10 +11,12 @@ static __inline void gameFlagWrite(u32 flag, s32 value)
     PartyBlockB *block = reinterpret_cast<PartyBlockB *>(gameFlagBlockGet());
 
     FUN_004bb6d8(flag, value);
+    u32 index = flag >> 3;
     if (value) {
-        block->unk00[flag >> 3] |= 1 << (flag & 7);
+        block->unk00[index] |= 1 << (flag & 7);
     } else {
-        block->unk00[flag >> 3] &= ~(1 << (flag & 7));
+        s32 keep = ~(1 << (flag & 7));
+        block->unk00[index] &= keep;
     }
 }
 
@@ -52,9 +53,11 @@ s32 FUN_00417c24(u32 index)
         if (entry->flags & 2) {
             partyEntryReleaseCurrent(index);
         }
-        entry->flags &= ~0xe3;
+        u8 flags = entry->flags;
+        u8 bits = entry->bits;
         entry->byte1 = 0;
-        entry->bits &= ~0x3d;
+        entry->flags = flags & ~0xe3;
+        entry->bits = bits & ~0x3d;
     }
     return 1;
 }

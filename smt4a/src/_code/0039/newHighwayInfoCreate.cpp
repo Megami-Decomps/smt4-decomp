@@ -3,6 +3,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct HighwayInfo {
     /* 0x000 */ u32 process;
@@ -31,7 +32,6 @@ typedef void (*HighwayCallback)(void *);
 extern "C" {
 extern const char DAT_0052d468[], DAT_0052d454[], DAT_0052d440[];
 extern const char DAT_0052d418[], DAT_0052d3f0[];
-void *asdOperatorNew(u32 size);
 void FUN_0035d080(void *);
 void engineResourceSetSecondaryValue(void *);
 void taskCreateDraw(const char *, s32, s32, s32, HighwayCallback, void *, void *, u32);

@@ -24,7 +24,7 @@ extern u8 *g_renderCtx;
 
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
-GaugeLayout *FUN_001834a4(u32 group, u32 id);
+GaugeLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
@@ -32,7 +32,7 @@ s32 __aeabi_idivmod(s32 a, s32 b);
  * with the part's height in `height`. */
 static __inline s32 gaugeWidth(u32 id, s32 value, s32 *height)
 {
-    GaugeLayout *layout = FUN_001834a4(0x12, id);
+    GaugeLayout *layout = asdTMTexTableEntryAt(0x12, id);
     s32 width = (__aeabi_idivmod(layout->size[0] << 12, 200) * value) >> 12;
 
     if (value > 0 && width < 1) {
@@ -80,8 +80,8 @@ void FUN_003c4250(GaugeOwner *owner, s32 x, s32 y, s32 target, s32 current, s32 
     } else if (target < current) {
         s32 partHeight;
         s32 part = gaugeWidth(0x71, (s16)(value - (s16)target), &partHeight);
-        GaugeLayout *bar = FUN_001834a4(0x12, 0x6E);
-        GaugeLayout *damage = FUN_001834a4(0x12, 0x71);
+        GaugeLayout *bar = asdTMTexTableEntryAt(0x12, 0x6E);
+        GaugeLayout *damage = asdTMTexTableEntryAt(0x12, 0x71);
 
         FUN_00185dd4(2, 0x12, 0x71, (width - part) + flash + x + (bar->x - damage->x), y, part, partHeight, 0xDD);
     }

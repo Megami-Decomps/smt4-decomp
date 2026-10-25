@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
+#include "event/bustupEvent/BustupTex.h"
 
 struct NpcTableRecord {
     u8 unk00[0x24];
@@ -21,9 +22,8 @@ extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 void sysMemClear(void *memory, u32 size);
 NpcTableRecord *FUN_00283498(u32 id);
-NpcTextureEntry *FUN_001834a4(u32 table, u32 index);
+
 s32 FUN_00162ea4();
-void *FUN_0014afd0(s32 table, s32 node);
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
 extern const char DAT_0052f4fc[];
@@ -57,7 +57,7 @@ u32 FUN_003c8fd4(u32 id)
     work->record = FUN_00283498(id);
     work->node = work->record->node;
     for (u32 i = 0; i < 3; ++i) {
-        NpcTextureEntry *entry = FUN_001834a4(0x27, DAT_0052f4ec[i]);
+        NpcTextureEntry *entry = reinterpret_cast<NpcTextureEntry *>(asdTMTexTableEntryAt(0x27, DAT_0052f4ec[i]));
         work->points[i].x = entry->x;
         work->points[i].y = entry->y;
         if (i == 0 && entry->extra != NULL) {

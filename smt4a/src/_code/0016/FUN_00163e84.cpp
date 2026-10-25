@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/Unite/UniteEffect.h"
 
 extern "C" {
 

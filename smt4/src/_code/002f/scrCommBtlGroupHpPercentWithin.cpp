@@ -1,13 +1,11 @@
 /* NON_MATCHING: register allocation and stack layout: retail keeps the maximum in r5 and the current value in r6 and places the range start at sp+4 (a larger out block); built swaps the accumulators. */
-#include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
 
 extern "C" {
 
-extern BtlState *btlGetMainState(void);
-extern BtlUnitEntry *btlMainFindActiveEntry(void);
-extern s32 scrGetArg(u32 index);
-extern s32 scrSetResult(s32 value);
+extern BtlUnitEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
 
 /* Script command: pushes whether the HP percentage of the present, non-excluded units of the current group (and the
@@ -29,7 +27,7 @@ u32 scrCommBtlGroupHpPercentWithin(void)
     index = start;
     if (index < count + start) {
         do {
-            BtlUnitEntry *unit = &btlGetMainState()->units[index];
+            BtlUnitEntry *unit = &btlGetMainStateExt()->units[index];
 
             if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
                 maxSum += unit->hpMax;
@@ -38,11 +36,10 @@ u32 scrCommBtlGroupHpPercentWithin(void)
             index++;
         } while (index < start + count);
     }
-    if (btlGetMainState()->hasActiveEntry != 0) {
+    if (btlGetMainStateExt()->hasActiveEntry != 0) {
         BtlUnitEntry *active;
 
-        btlGetMainState();
-        active = btlMainFindActiveEntry();
+        active = btlMainFindActiveEntry(btlGetMainState());
         if (active != NULL) {
             maxSum += active->hpMax;
             curSum += active->hp;

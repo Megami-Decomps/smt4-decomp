@@ -9,7 +9,6 @@ extern "C" {
 extern StaffRollWork *g_staffRoll;
 
 extern int gameFlagIsSet(u32 flag);
-extern int slotIsActive(u32 button);
 
 void staffRollScrollUpdate(void)
 {

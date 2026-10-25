@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/asdCecMessageBoxClose.h"
 
 extern "C" {
 

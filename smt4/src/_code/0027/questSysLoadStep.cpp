@@ -1,5 +1,6 @@
 /* NON_MATCHING: recovered script-mode setter matches; state-store tail merging differs. */
 #include "common.h"
+#include "shard/FUN_002903f0.h"
 
 struct QuestScriptProcess {
     u8 unk00[0x108];
@@ -23,7 +24,6 @@ void buttonHelpSetPreset(s32 preset);
 QuestScriptProcess *FUN_00297060(void *script, void *messages);
 void scrScriptProcessStartEntry(QuestScriptProcess *process, u32 entry);
 s32 scrRunOpcodesStub(QuestScriptProcess *process);
-u32 FUN_002903f0();
 s32 FUN_00298dc8();
 void FUN_0029016c(u32 selection, s32 flags);
 void FUN_002900d0();

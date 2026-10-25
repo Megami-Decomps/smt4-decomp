@@ -2,11 +2,11 @@
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "gfx/QuaternionWorkspace.h"
 #include <math.h>
+#include "shard/randomAdvanceShiftRegister.h"
 
 extern "C" {
 extern QuaternionWorkspace DAT_004ea81c;
 f32 shiftRandomNextFraction(u32 stream);
-u32 randomAdvanceShiftRegister(u32 stream);
 
 void FUN_003024d0(EffObjectParticle *emitter, EffObjectParticleState *particle)
 {

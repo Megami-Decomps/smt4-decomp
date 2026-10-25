@@ -1,5 +1,6 @@
 /* NON_MATCHING: first two 64-bit mask tests use different AND temporaries, omitting retail's r9 save and four frame bytes. */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -10,7 +11,7 @@ extern "C" {
 u32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BattleMaskState *battle);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 
 // Find the requested combatant with an encoded statistic whose high six bits equal one.
 u32 btlScriptGetEncodedCombatantStat()
@@ -22,8 +23,8 @@ u32 btlScriptGetEncodedCombatantStat()
     u32 count;
     FUN_00301a08(btlResolveEntryChoice(choice), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < static_cast<s32>(first + count); ++index) {
-        BattleMaskState *battle = btlGetMainState();
-        BtlCombatantEntryA *entry = &reinterpret_cast<BtlCombatantEntryA *>(battle->entryMaskView.mask)[index];
+        BtlMainStateA *battle = btlGetMainState();
+        BtlCombatantEntryA *entry = &battle->entries[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
@@ -33,7 +34,7 @@ u32 btlScriptGetEncodedCombatantStat()
             return 1;
         }
     }
-    if (btlGetMainState()->activeEntry.present) {
+    if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
         if (entry != NULL && entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {
             scrSetResult(1);

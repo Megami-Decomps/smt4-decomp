@@ -1,8 +1,8 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 extern "C" {
 
-extern BtlState *btlGetMainState(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 partyFindActiveSlotById(u32 id);
@@ -16,7 +16,7 @@ u32 scrCommBtlUnitMainIndexById(void)
     s32 index = 0;
 
     for (;;) {
-        BtlUnitEntry *unit = &btlGetMainState()->units[index];
+        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
 
         if ((unit->flags & 1) && !(unit->flags & 0x40) && (unit->flags & 8) && unit->mainIndex >= 0
             && unit->link != NULL && unit->link->id == id) {

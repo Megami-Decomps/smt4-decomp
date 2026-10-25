@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004eae30` (_code @ 0x4eae30, 0x5f4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int btlTargetSelectSetMode(...);
 int FUN_00368d74(...);
 int FUN_00368e10(...);
@@ -98,7 +98,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     FUN_003f0e20(temp_v1,(int)*(short *)(temp_v0 + param_3 * 0x1d0 + 0x6a));
     temp_v0 = __aeabi_idivmod(*(int *)(temp_v1 + 600) * 100,*(unsigned int *)(temp_v1 + 0x25c));
     temp_v11[2] = (unsigned int)(temp_v0 < 0x14);
-    temp_v2 = btlGetMainState();
+    temp_v2 = reinterpret_cast<int>(btlGetMainState());
     FUN_003e8bb0(temp_v13,temp_v2,*(unsigned int *)(param_4 + 0x20));
     switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x1be)) {
     case 7:
@@ -111,7 +111,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
       break;
     default:
       temp_v4 = 0;
-      temp_v0 = btlGetMainState();
+      temp_v0 = reinterpret_cast<int>(btlGetMainState());
       FUN_003f0e20(temp_v0,param_3);
       if (temp_v0 != 0) {
         temp_v9 = 0;
@@ -214,7 +214,7 @@ LAB_004eafdc:
       temp_v4 = __aeabi_idivmod(*(int *)(temp_v5 + 0xf4) * 100,*(unsigned int *)(temp_v5 + 0xf8));
       temp_v1 = temp_v9;
       temp_v15 = (unsigned int)(temp_v4 < 0x14);
-      temp_v2 = btlGetMainState();
+      temp_v2 = reinterpret_cast<int>(btlGetMainState());
       FUN_003e8bb0(&temp_v16,temp_v2,*(unsigned int *)(param_4 + 0x20));
       switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x1be)) {
       case 7:
@@ -227,7 +227,7 @@ LAB_004eafdc:
         break;
       default:
         temp_v7 = 0;
-        temp_v4 = btlGetMainState();
+        temp_v4 = reinterpret_cast<int>(btlGetMainState());
         FUN_003f0e20(temp_v4,temp_v1);
         if (temp_v4 != 0) {
           temp_v10 = 0;

@@ -7,7 +7,6 @@ extern "C" {
 UnitRecord *gameGetPlayerData();
 UnitRecord *gameGetSlotRecord(s32 slot);
 UnitRecord *btlMainGetUnk14();
-Table04Record *dataTable04FindById(u32 skill);
 s32 idIsAbove400(u32 skill);
 u32 FUN_0033896c();
 

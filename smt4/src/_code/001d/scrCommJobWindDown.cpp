@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct JobState {
 
 extern u32 scrGetArg(u32 index);
 extern s32 jobIsValid(u32 job);
-extern JobState *jobGetWork(u32 job);
 extern void jobStop(u32 job, s32 arg);
 
 /* Script command: stops the job in argument 0 when it is in phase 1, otherwise asks it to wind down at -0.25 speed; returns 1. */
@@ -22,7 +22,7 @@ s32 scrCommJobWindDown(void)
     u32 job = scrGetArg(0);
 
     if (jobIsValid(job) != 0) {
-        JobState *state = jobGetWork(job);
+        JobState *state = (JobState *)jobGetWork(job);
 
         if (state->phase == 1) {
             jobStop(job, 0);

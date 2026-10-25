@@ -1,6 +1,7 @@
 /* NON_MATCHING: the compiler places the shared successful return after the model query instead of before it and schedules the model-query arguments differently. */
 #include "gamedata/DevilModel.h"
 #include "addon/aocMain.h"
+#include "shard/aocJobIsValid.h"
 
 struct AocModelStatus {
     /* 0x00 */ u8 unk00[0x0D];
@@ -12,7 +13,6 @@ extern AocMain *g_aocMain;
 DevilModelOverride *dataTable00FindById(u16 id);
 s32 btlTalkBustUpGetValue(void);
 s32 objGetFlagBit16(AocMain *main);
-s32 aocJobIsValid(void);
 AocModelStatus *packageFindFileRefByName(void *owner, s32 category, s32 model);
 
 // Report whether the portrait mode or requested add-on model is ready.

@@ -1,6 +1,7 @@
 /* NON_MATCHING: battle AI command choice (roll against 10% / 40% bands); written from the decompilation, branch layout (retail jumps into the shared 0x2B/0x2C call) and scheduling not compared */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "shard/lcgRandomRange.h"
 
 #define BTL_UNIT_COUNT_ALL 0x6D
 #define BTL_UNIT_STRIDE 0x1D0
@@ -74,7 +75,6 @@ extern u32 DAT_00571170;
 extern u32 DAT_00571174;
 extern u32 g_btlUiBlock;
 
-s32 lcgRandomRange(u32 maximum);
 void FUN_004e8454(BtlActorView *actor);
 s32 FUN_004e933c(BtlActorView *actor, BtlCommandView *command);
 void FUN_004e7c04(BtlActorView *actor, s32 flag);

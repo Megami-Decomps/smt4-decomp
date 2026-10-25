@@ -9,7 +9,7 @@ void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int FUN_002b0750(int, int, int, int, int, int, int, int);
 int effectRenderTransformedInstance(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(...);
 int efctSetSpeed(void);
 int VectorSignedToFloat(...);
@@ -35,11 +35,11 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -116,7 +116,7 @@ void FUN_00186a48(void)
   temp_v13 = 0.295f;
   temp_v12 = temp_v13;
   renderCtxCalculateStereoParallax(g_titleScene);
-  temp_v7 = FUN_002bf4f8(0x29,0x4e);
+  temp_v7 = asdTMTexTableEntryAt(0x29,0x4e);
   if (*(int *)(temp_v1 + 4) != 0x13) {
     if ((*(int *)(temp_v1 + 4) == 0x11) && (temp_v2 = *(int *)(temp_v1 + 0x10), 5 >= temp_v2)) {
       temp_v3 = -8;
@@ -196,16 +196,16 @@ void FUN_00186a48(void)
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v8 = temp_v8 + temp_v11;
     FUN_002bf288(2,0x29,0x51,temp_v9 + temp_v10 + (int)temp_v12,temp_v8,0xa1);
-    temp_v11 = FUN_002bf4f8(0x29,0x54);
+    temp_v11 = asdTMTexTableEntryAt(0x29,0x54);
     temp_v10 = temp_v10 + (int)temp_v12;
     drawSkillCategoryLabel(temp_v0,*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,*(short *)(temp_v11 + 10) + temp_v8,
                  0xa6);
-    temp_v11 = FUN_002bf4f8(0x29,0x55);
+    temp_v11 = asdTMTexTableEntryAt(0x29,0x55);
     temp_v4 = FUN_002bcddc(temp_v0,0);
     textFormatBuffer(temp_v14,&LAB_0018710c,temp_v4);
     VectorSignedToFloat(*(short *)(temp_v11 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(3,0xff,temp_v14);
+    textDrawString(3,0xff,temp_v14);
     if (*(int *)(temp_v1 + 4) != 0x11) {
       return;
     }

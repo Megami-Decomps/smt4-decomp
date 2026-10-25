@@ -17,10 +17,10 @@ u32 FUN_0038dc84(void)
     }
     for (u32 bit = 0; bit < 32; ++bit) {
         s32 mask = 1 << bit;
-        if ((first & mask) != 0) {
+        if (mask & (first) != 0) {
             ++count;
         }
-        if ((second & mask) != 0) {
+        if (mask & (second) != 0) {
             ++count;
         }
     }

@@ -3,9 +3,6 @@
 
 extern "C" {
 
-extern s32 g_scrIntVars[];
-extern f32 g_scrFloatVars[];
-
 /* Script opcode: negates the value on top of the stack (through its variable for the variable tags). */
 u32 FUN_002376c0(ScriptVmProcess *process)
 {
@@ -13,16 +10,16 @@ u32 FUN_002376c0(ScriptVmProcess *process)
 
     switch (process->tags[top]) {
     case SCRIPT_VM_TAG_INT:
-        process->values[top] = -(s32)process->values[top];
+        process->values[top].i = -process->values[top].i;
         break;
     case SCRIPT_VM_TAG_FLOAT:
-        ((f32 *)process->values)[top] = -((f32 *)process->values)[top];
+        process->values[top].f = -process->values[top].f;
         break;
     case SCRIPT_VM_TAG_INT_VAR:
-        g_scrIntVars[process->values[top]] = -g_scrIntVars[process->values[top]];
+        g_scrIntVars[process->values[top].u] = -g_scrIntVars[process->values[top].u];
         break;
     case SCRIPT_VM_TAG_FLOAT_VAR:
-        g_scrFloatVars[process->values[top]] = -g_scrFloatVars[process->values[top]];
+        g_scrFloatVars[process->values[top].u] = -g_scrFloatVars[process->values[top].u];
         break;
     }
     process->pc++;

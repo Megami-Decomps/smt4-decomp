@@ -1,6 +1,7 @@
 /* NON_MATCHING: translation-copy addressing and child-vector growth allocate registers differently from retail. */
 #include "common.h"
 #include <stddef.h>
+#include "shard/FUN_00244d98.h"
 
 extern "C" {
 
@@ -94,7 +95,6 @@ extern float FUN_00155650(void*, float, float, float);
 extern int FUN_0024530c(SceneNode*, Animation*);
 extern SceneNode* asdModelGetSlotArray0(int);
 extern int nw_gfx_SceneNode_IsCircularReference(SceneNode*, SceneNode*);
-extern void* FUN_00244d98(int);
 extern ModelParameters* FUN_002c501c(void*);
 extern void FUN_002a8638(SceneNode*, float*, float*, float*, float*);
 extern void FUN_00341bec(ModelSelection*);

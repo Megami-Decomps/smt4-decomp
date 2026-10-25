@@ -1,4 +1,5 @@
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ void FUN_0029c2cc(s32 arg, s32 flag);
 void asdWorkAreaReset(void);
 void asdMdlManagerDestroy(u32 arg);
 void asdMemFree(void *block);
-BustupCutAnim *jobGetWork(u32 job);
 
 extern BustupCutAnim *g_bustupCutAnim;
 
@@ -18,7 +18,7 @@ void bustupCutAnimDestroy(u32 job)
     u32 i;
 
     asdWorkAreaReset();
-    anim = jobGetWork(job);
+    anim = (BustupCutAnim *)jobGetWork(job);
     if (anim->unk5E8 != 0 && anim->unk5EC != 5 && anim->unk5EC != 6) {
         FUN_0029c2cc(anim->unk5E8, 0);
     }

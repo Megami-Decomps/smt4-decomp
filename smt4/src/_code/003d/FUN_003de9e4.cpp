@@ -1,10 +1,10 @@
 /* NON_MATCHING: saved-register allocation and the parameter-sentinel constant lifetime differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
-BtlMainState *btlGetMainState();
 
 
 u32 FUN_003de9e4(s32 actor, u32 options, u32 value)

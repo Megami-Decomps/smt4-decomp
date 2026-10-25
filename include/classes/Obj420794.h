@@ -3,9 +3,9 @@
 
 #include "common.h"
 #include "classes/Obj420794Resources.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-void *asdOperatorNew(u32 bytes, ...);
 int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 int bufferHandleRelease(u32 handle);
@@ -45,7 +45,7 @@ public:
         }
     }
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
-    static void *operator new(u32 bytes, u32 owner) throw() { return asdOperatorNew(bytes, owner); }
+    static void *operator new(u32 bytes, u32 owner) throw() { return asdOperatorNew(bytes, reinterpret_cast<void *>(owner)); }
     static void operator delete(void *block) { obj420794FreeBlock(block); }
     void setBuffer(void *block) { buffer = block; }
     virtual void prepareGeometry() = 0; /* +0x08 */

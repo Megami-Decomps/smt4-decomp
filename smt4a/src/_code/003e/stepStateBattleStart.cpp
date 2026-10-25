@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/Shard003E.h"
 
 extern "C" {
@@ -17,7 +18,6 @@ extern void scrScriptProcessStartEntry(u32 job, s32 value);
 extern s32 scrRunOpcodesStub(u32 job);
 extern void campCommonBgRelease(void);
 extern void campButtonHelpRelease(void);
-extern BtlStateB *btlGetMainState(void);
 extern u32 FUN_003e71a8(StepState *step);
 
 /* Step: once both FUN_0013def0 inputs report 3, plays the sound, starts the job and moves on to state 9/10 when it finishes. */
@@ -35,7 +35,7 @@ u32 stepStateBattleStart(StepState *step)
         if (scrRunOpcodesStub(step->job) == 2) {
             campCommonBgRelease();
             campButtonHelpRelease();
-            if (btlGetMainState()->unk4C80 != 1) {
+            if (reinterpret_cast<BtlStateB *>(btlGetMainState())->unk4C80 != 1) {
                 step->state = 9;
                 result = FUN_003e71a8(step);
                 return result;

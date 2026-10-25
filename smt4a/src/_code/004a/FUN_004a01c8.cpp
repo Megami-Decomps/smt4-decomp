@@ -2,15 +2,9 @@
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
 #include "gamedata/PlayerDataBlock.h"
-
-struct DamagePartySlots {
-    /* 0x0000 */ u8 unk0000[0x1c88];
-    /* 0x1C88 */ s8 active[24];
-    /* 0x1CA0 */ s8 reserve[3];
-};
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-DamagePartySlots *gameGetSlotTable();
 s32 gameSlotTableFindFree();
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
 s32 FUN_0018416c(u16 id);
@@ -71,7 +65,7 @@ extern "C" void FUN_004a01c8(u32 group, u8 conditionBit, s32 percentage)
     const s8 *slots;
     if (group == 0 || group == 1) {
         count = gameSlotTableFindFree();
-        slots = gameGetSlotTable()->active;
+        slots = gameGetSlotTable()->party;
     } else if (group == 2 || group == 3) {
         count = 3;
         slots = gameGetSlotTable()->reserve;

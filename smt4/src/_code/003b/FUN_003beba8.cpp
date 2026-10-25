@@ -1,4 +1,5 @@
 /* NON_MATCHING: float register allocation differs (retail keeps scale in s16, power in s17) and the 0x44a0 flag word is addressed through a separate add. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleMain {
@@ -30,7 +31,6 @@ struct AffinityRates {
 
 extern "C" {
 
-BattleMain* btlGetMainState(void);
 BattleCombatant* FUN_0027da30(BattleMain* main, s32 id);
 BattleListEntry* btlMainFindEntryByListedId(BattleMain* main, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
@@ -49,7 +49,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
 {
     f32 adjust = 0.0f;
     f32 scale = 1.0f;
-    BattleMain* main = btlGetMainState();
+    BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());
     BattleCombatant* attacker = FUN_0027da30(main, attackerId);
     BattleCombatant* defender = FUN_0027da30(main, defenderId);
     if (attacker->flags & 4) scale = 0.8f;
@@ -65,7 +65,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     selectionCopySupportedValue(rates.skillId, &supported);
 
     s32 rankBonus = 0;
-    if ((*(u32*)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
+    if ((*(u32*)btlMainFindEntryByListedId(reinterpret_cast<BattleMain *>(btlGetMainState()), attackerId) & 2) != 0) {
         u32* record = dataTable40FindById(partyId);
         if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
     }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: battle command menu request handler; draft shape, the repeated btlGetMainState flag test is one inline helper here while retail expands it twice with different compare order */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BtlMenuPanel {
@@ -29,7 +30,6 @@ extern "C" {
 extern u32 DAT_00573ba8;   /* battle flag mask tested against flagsA */
 extern u32 DAT_00573bac;   /* battle flag mask tested against flagsB */
 
-BtlMenuMainState *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(void);
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_0020acd8(BtlMenuPanel *panel, u32 a, u32 b);
@@ -46,10 +46,10 @@ u32 FUN_002cc9e0(BtlMenuPanel *panel, u32 arg);
 /* Whether the current battle state blocks the menu (script flags, or either flag word masked). */
 static __inline bool btlMenuBlocked(void)
 {
-    btlGetMainState();
+    reinterpret_cast<BtlMenuMainState *>(btlGetMainState());
     if (btlScriptUnitHasFlags() != 0)
         return true;
-    BtlMenuMainState *state = btlGetMainState();
+    BtlMenuMainState *state = reinterpret_cast<BtlMenuMainState *>(btlGetMainState());
     return (state->flagsB & DAT_00573bac) != 0 || (DAT_00573ba8 & state->flagsA) != 0;
 }
 

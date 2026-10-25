@@ -1,4 +1,5 @@
 #include "gamedata/SupportUnitRecord.h"
+#include "shard/FUN_0022fcb8.h"
 
 extern "C" {
 

@@ -1,4 +1,5 @@
 /* NON_MATCHING: unaligned embedded status-view paired loads and saved-register allocation differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/Shard004B.h"
@@ -15,7 +16,6 @@ static inline s32 clampVital(s32 value, s32 maximum)
 }
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 BattleCombatantStatusKey *FUN_001568f8(BtlMainStateA *state, s32 id);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);

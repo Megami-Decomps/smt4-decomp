@@ -1,5 +1,6 @@
 /* Starts the countdown (30 frames) with the given mode byte: marks the object active and resets its timer. */
 #include "common.h"
+#include "util/DialogOpen.h"
 
 extern "C" {
 

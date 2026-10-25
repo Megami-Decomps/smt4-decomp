@@ -1,4 +1,5 @@
 /* NON_MATCHING: selected counter column and found flag use swapped r5/r6 registers. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -6,8 +7,6 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
-s32 scrGetArg(s32);
 
 // Test whether all eligible copies of a unit have a positive selected counter.
 s32 FUN_003c6294(void)

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/engineCleanupIsDone.h"
 
 extern "C" {
 

@@ -25,7 +25,7 @@ u8 *FUN_002bcfc0(const u8 *source, u8 *output)
             output[outputIndex++] = 0xf8;
             output[outputIndex++] = 0xff;
         } else {
-            output[outputIndex++] = DAT_00409f58[code * 2];
+            output[outputIndex++] = 2 * DAT_00409f58[code];
             output[outputIndex++] = DAT_00409f58[code * 2 + 1];
         }
     }

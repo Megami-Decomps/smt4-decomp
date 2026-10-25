@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "util/CalleeContracts.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 struct StatusCursor;
@@ -14,7 +15,6 @@ void buttonHelpSetPreset(s32 preset);
 void FUN_002b8ee0(void *vec, s32 value);
 void FUN_002bf818(void *vec);
 void statusOpenSkillSelection(u16 skill, s32 mode);
-s32 buttonHelpIsNotActive(void);
 u32 statusDownGetValue(void);
 s32 statusScreenIsClosed(void);
 u32 vec2GetYInt(void *vec);

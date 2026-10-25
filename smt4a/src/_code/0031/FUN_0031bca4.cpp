@@ -15,7 +15,7 @@ struct JobAxisWork {
 /* Sets the work area's axis from a signed extent: reciprocal slope, negated when `flip` is set. */
 void FUN_0031bca4(u32 handle, s32 extent, s32 flip)
 {
-    JobAxisWork *work = reinterpret_cast<JobAxisWork *>(jobGetWork(handle));
+    JobAxisWork *work = (JobAxisWork *)jobGetWork(handle);
 
     if (flip != 0) {
         if (extent == 0) {

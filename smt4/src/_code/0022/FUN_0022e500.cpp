@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "classes/Obj55ca08.h"
 
 extern "C" {
 

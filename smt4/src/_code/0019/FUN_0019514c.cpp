@@ -25,7 +25,7 @@ s32 FUN_0029efc0(void* list);
 s32 FUN_0029efa8(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
 u32 FUN_002907a8(void);
-u32 FUN_002bf4f8(u32 group, u32 index);
+u32 asdTMTexTableEntryAt(u32 group, u32 index);
 s32 uiScrollHandleActionsOrTouch(void* list, u32 a, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
 s32 eventQueueAddUniqueIfValid(u32 event);
 s32 FUN_002c1658(s32 a, s32 b);
@@ -66,7 +66,7 @@ void FUN_0019514c(u8** screenRef)
         }
         u8 flags = 0;
         s32 previous = FUN_0029efc0(list);
-        s32 handled = uiScrollHandleActionsOrTouch(list, FUN_002bf4f8(0x30, 0x1c), 0,
+        s32 handled = uiScrollHandleActionsOrTouch(list, asdTMTexTableEntryAt(0x30, 0x1c), 0,
             *reinterpret_cast<s16*>(screen + 0x34c), *reinterpret_cast<s16*>(screen + 0x348),
             *reinterpret_cast<s16*>(screen + 0x34a), &flags, 0, 0);
         if (handled == 0) {

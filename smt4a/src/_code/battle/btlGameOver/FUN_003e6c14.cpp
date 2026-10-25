@@ -1,8 +1,10 @@
 /* NON_MATCHING: timeline end comparison now matches; forced-state mask loads use LDRD and different scratch registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlGameOver.h"
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "Model/MoriModelManager.h"
 
 struct GameOverEyeTimeline;
 extern "C" {
@@ -15,8 +17,6 @@ void FUN_004fdcd8(u32, u32, u32, u32, u32, u32, u32, u32);
 void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32, u32, u32, u32, u32, u32, u32, u32, u32);
 void slotSetRequest(u32, u32, u32);
-BtlMainStateA *btlGetMainState();
-void *gameDataBlocksGetSaveData();
 u32 talkEventStartScript(BtlGameOverA *);
 u32 FUN_003e71a8(BtlGameOverA *);
 

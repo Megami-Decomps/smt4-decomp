@@ -14,4 +14,8 @@ u8 mapBlockBitTest(s32 index);
 
 } /* extern "C" */
 
+extern "C" {
+u32 FUN_002fb094(s32 bit);
+}
+
 #endif

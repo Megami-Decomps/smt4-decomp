@@ -4,7 +4,7 @@
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-const SpriteInfo *FUN_001834a4(u32 group, u32 image);
+const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 image);
 void efctSetSpeed(f32 speed);
 
 static inline s32 iconImageForKind(u32 kind)
@@ -34,7 +34,7 @@ void uiDrawStereoKindIcon(u32 context, s32 x, s32 y, u32 color, u32 kind, u32 an
         return;
     }
     s32 parallax = renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    const SpriteInfo *anchor = FUN_001834a4(49, anchorImage);
+    const SpriteInfo *anchor = asdTMTexTableEntryAt(49, anchorImage);
     s32 drawX = anchor->x + (x + parallax);
     s32 drawY = anchor->y + y;
     efctSetSpeed(speed);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ typedef struct RenderWork {
 
 extern u32 g_renderCtx; /* 0x59dbb4 */
 
-extern RenderWork *jobGetWork(u32 handle);
 extern int surfaceCopy(Surface *dst, Surface *src);
 extern int FUN_00154edc(int arg, Surface *surface);
 extern int FUN_00157558(u32 ctx);
@@ -33,7 +33,7 @@ extern int FUN_00157558(u32 ctx);
 /* Renders the scene into the backdrop surface once, then halves the surface size to mark it copied. */
 s32 frameTexRenderBackdropOnce(u32 handle)
 {
-    RenderWork *work = jobGetWork(handle);
+    RenderWork *work = (RenderWork *)jobGetWork(handle);
 
     if (work->backdrop.enabled == 0)
         return 0;

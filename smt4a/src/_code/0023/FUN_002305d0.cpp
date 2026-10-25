@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/DevilRecordA.h"
 #include "font/SWin/SWin.h"
+#include "gamedata/Table04Record.h"
 
 // Demon record in the party/compendium format (0x12c bytes).
 struct DemonRecord {
@@ -69,7 +70,6 @@ void gameItemSetFlag(u32 id, s32 value);
 void gameDataCopySaveEntry(u32 id, SaveEntry* out);
 void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
-SkillRecord* dataTable04FindById(u32 id);
 void FUN_0031f190(u32 id, s32 arg);
 void FUN_004bcd90(DemonRecord* record);
 s32 FUN_0018416c(u32 id);
@@ -118,7 +118,7 @@ void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
         if (record != NULL && record->id != 0 && FUN_00184310(record->id) != NULL) {
             for (s32 i = 0; i < 8; i++) {
                 if (record->skills[i] == 0) continue;
-                SkillRecord* skill = dataTable04FindById(record->skills[i]);
+                SkillRecord *skill = (SkillRecord *)dataTable04FindById(record->skills[i]);
                 if (skill == NULL || skill->affinity >= 18) continue;
                 s8 sum = record->growth[skill->affinity] + record->affinityBonus[i];
                 record->affinityBonus[i] = sum;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: restored s32(u32 handle) task callback and forwarded jobGetWork handle; icon rectangle argument scheduling and frameB modulo scratch register differ (204 rows each). */
 #include "common.h"
+#include "shard/FUN_002896bc.h"
 
 #define INTRO_STATE_APPEAR 0
 #define INTRO_STATE_WAIT_TOUCH 1
@@ -37,12 +38,11 @@ struct IntroIconRecord {
 extern "C" {
 u32 jobGetWork(u32 handle);
 void eventQueueAddUnique(u32 event);
-IntroIconRecord *FUN_002bf4f8(u32 table, s32 index);
+IntroIconRecord *asdTMTexTableEntryAt(u32 table, s32 index);
 s32 ifTouchGetSelectionModeForRegion(s32 id);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 height, s32 width);
 void ifTouchRegionRemove(void);
 void slotSetRequest(s32 slot, s32 frames, s32 value);
-s32 FUN_002896bc(void);
 
 /* Moves the job to `state` and clears its counters. */
 static __inline void introEnter(IntroWork *work, s32 state)
@@ -68,7 +68,7 @@ s32 FUN_00221310(u32 handle)
         }
         if (work->timer == 5) {
             introEnter(work, INTRO_STATE_WAIT_TOUCH);
-            IntroIconRecord *icon = FUN_002bf4f8(0x2D, 0x11);
+            IntroIconRecord *icon = asdTMTexTableEntryAt(0x2D, 0x11);
             work->touchId = ifTouchRegionAdd((s16)(icon->x - 0x10), (s16)(icon->y - 0x10),
                                              (s16)(icon->size->height + 0x20), (s16)(icon->size->width + 0x20));
         }

@@ -1,13 +1,14 @@
 /* NON_MATCHING: index/text arguments use different registers and the node pointer survives the state comparisons instead of being reloaded before free; both versions have25 rows. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
+#include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
+#include "shard/linkedFindItemByIndex.h"
 
 extern "C" {
 extern EffectSelectionTemplate DAT_0059e9a8;
 void FUN_00375ec8(EffMenuNode *node);
 void namedObjectFormatName(EffMenuNode *node, const char *text);
 void engineFreeCallback(void *memory);
-LinkedItem *linkedFindItemByIndex(LinkedItems *list, s32 index);
 
 u32 FUN_003b665c()
 {

@@ -1,4 +1,4 @@
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -8,7 +8,7 @@ void scrSetResult(s32 value);
 
 s32 scrCommTestBattleMaskClear(void)
 {
-    scrSetResult((btlGetMainState()->mask & g_btlCandidateMasks.mask) == 0);
+    scrSetResult((btlGetMainState()->stateFlags64.bits & g_btlCandidateMasks.mask) == 0);
     return 1;
 }
 

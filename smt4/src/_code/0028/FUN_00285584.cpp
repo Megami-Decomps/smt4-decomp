@@ -16,7 +16,7 @@ int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
-int FUN_002bf4f8(int, int);
+int asdTMTexTableEntryAt(int, int);
 int efctSetSpeed(void);
 int FUN_002c198c(...);
 int FUN_0033d3f8(...);
@@ -89,7 +89,7 @@ extern int FUN_002b8660(void);
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c198c. */
@@ -191,7 +191,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
             FUN_002a34e8(&temp_v13,&temp_v33);
             renderCtxCallB(&temp_v13);
           }
-          FUN_002bf4f8(0x32,0xc);
+          asdTMTexTableEntryAt(0x32,0xc);
           if (-1 < piVar2[0x11]) {
             efctSetSpeed();
             temp_v13 = (float)(piVar2[5] + param_3);

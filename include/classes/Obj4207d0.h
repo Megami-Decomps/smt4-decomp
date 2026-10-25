@@ -2,9 +2,9 @@
 #define CLASSES_OBJ4207D0_H
 
 #include "classes/Obj4206e8.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* The engine's allocator; some call sites pass the requesting owner as a second argument. */
-extern "C" void *asdOperatorNew(u32 bytes, ...);
 
 /* The player-model holder: an Obj4206e8 (handle plus three buffer slots) with its own vtable
  * (0x4207d0). It adds no data; its constructor only installs the vtable after the base's. */

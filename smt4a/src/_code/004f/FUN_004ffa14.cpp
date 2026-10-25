@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the target through the unrebased slot pointer (ldr [r0,#48]) and keeps a separate r0+36 base for mode/value, and compares with movhi/bls; built uses one base and movgt/ble. */
+/* NON_MATCHING: the target is read through the indexed slot as retail, but retail lays out the mode-2/limit tail differently (limit compare first with ls, shared return-1 exit) than the build. */
 #include "common.h"
 
 struct Threshold {
@@ -34,7 +34,7 @@ u32 FUN_004ffa14(SlotOwner *owner)
 {
     if ((owner->flags & 2) == 0) {
         Slot *slot = &owner->slots[owner->current];
-        Threshold *target = slot->target;
+        Threshold *target = owner->slots[owner->current].target;
         if (target != NULL) {
             if (slot->mode == 2) {
                 if ((target->flags & 1) != 0) {
@@ -43,9 +43,7 @@ u32 FUN_004ffa14(SlotOwner *owner)
             } else if (slot->mode == 1) {
                 return 1;
             }
-            if (slot->value < target->limit) {
-                return 0;
-            }
+            return target->limit <= slot->value ? 1 : 0;
         }
     }
     return 1;

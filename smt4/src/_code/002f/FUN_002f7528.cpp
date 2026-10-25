@@ -1,13 +1,11 @@
 /* NON_MATCHING: the group value-kind test is outlined after the epilogue; entry/flag registers differ. */
-#include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
 
 extern "C" {
-s32 scrGetArg(u32 index);
 u32 btlScriptResolveGroupArg(s32 group);
-BtlState *btlGetMainState(void);
-BtlUnitEntry *btlMainFindActiveEntry(BtlState *battle);
-void scrSetResult(s32 result);
+BtlUnitEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 static inline bool valueKindIsZeroOrTwo(u16 value)
 {
@@ -23,7 +21,7 @@ u32 FUN_002f7528(void)
     s32 count;
     FUN_002499fc(group, &start, &count);
     for (s32 index = start; index < start + count; ++index) {
-        BtlUnitEntry *entry = &btlGetMainState()->units[index];
+        BtlUnitEntry *entry = &btlGetMainStateExt()->units[index];
         u32 flags = entry->flags;
         if ((flags & 0x10) == 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
             valueKindIsZeroOrTwo(entry->values[valueIndex])) {
@@ -31,7 +29,7 @@ u32 FUN_002f7528(void)
             return 1;
         }
     }
-    if (btlGetMainState()->hasActiveEntry != 0) {
+    if (btlGetMainStateExt()->hasActiveEntry != 0) {
         BtlUnitEntry *entry = btlMainFindActiveEntry(btlGetMainState());
         if (entry != NULL && valueKindIsZeroOrTwo(entry->values[valueIndex])) {
             scrSetResult(1);

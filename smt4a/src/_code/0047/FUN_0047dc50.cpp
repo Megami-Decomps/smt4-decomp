@@ -1,5 +1,6 @@
 /* NON_MATCHING: STRD for the argument header now matches; retail clears `pending` (strb) before the strd and materialises the zero before the ~0, ours stores in the opposite order. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 __packed struct SequenceRequestState {
     /* 0x00 */ u8 unk00[26];
@@ -20,7 +21,6 @@ extern "C" {
 
 void sysClearCachedFlag();
 void FUN_00239b10(s32 mode);
-void asdSequenceRequest(s32 kind, const SequenceArguments *arguments, u32 size);
 
 /* Consumes a pending sequence request and forwards its packed arguments. */
 s32 FUN_0047dc50(SequenceRequestState *request)

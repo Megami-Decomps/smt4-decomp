@@ -7,13 +7,13 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_0014bf3c(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(...);
 int FUN_00180114(...);
 int FUN_00180310(...);
 int FUN_0018152c(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(...);
 int fontMeasureLineAdvance(...);
@@ -74,7 +74,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0014bf3c. */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetXInt(unsigned int *);
 extern int vec2GetYInt(unsigned int *);
@@ -82,7 +82,7 @@ extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: FUN_00180114. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -168,7 +168,7 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   FUN_001835b4(2,0x1a,0x4f,param_1,param_2,0x6a);
   puVar6 = (unsigned short *)(unsigned int)*(unsigned short *)(puVar2 + 0x148e);
   FUN_00184310();
-  temp_v2 = FUN_001834a4(0x1a,0x4d);
+  temp_v2 = asdTMTexTableEntryAt(0x1a,0x4d);
   temp_v8 = 0xffffffff;
   temp_v11 = 0xffffffff;
   temp_v1 = computeCountLimit();
@@ -195,22 +195,22 @@ void FUN_002f197c(fn_002f197c_arg0 *param_1,int param_2)
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v2 + 8),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,temp_v8,temp_v14);
-  temp_v7 = FUN_001834a4(0x1a,0x4e);
+  textDrawString(2,temp_v8,temp_v14);
+  temp_v7 = asdTMTexTableEntryAt(0x1a,0x4e);
   temp_v8 = FUN_0014bf3c(*puVar6,0);
   textFormatBuffer(temp_v14,&LAB_002f1f34,temp_v8);
   VectorSignedToFloat(*(short *)(temp_v7 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(2,0x57d8ffff,temp_v14);
+  textDrawString(2,0x57d8ffff,temp_v14);
   drawSetColorFromRGBA8(temp_v11);
   if ((unsigned short)puVar6[3] >= 100) {
-    temp_v7 = FUN_001834a4(0x1a,0x265);
+    temp_v7 = asdTMTexTableEntryAt(0x1a,0x265);
     FUN_00180310(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                  *(short *)(temp_v7 + 10) + param_2,1,3,0x6f,&LAB_002f1f40,puVar6[3]);
   }
   else {
-    temp_v7 = FUN_001834a4(0x1a,0x51);
+    temp_v7 = asdTMTexTableEntryAt(0x1a,0x51);
     FUN_00180310(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                  *(short *)(temp_v7 + 10) + param_2,1,2,0x6f,&LAB_002f1f40,puVar6[3]);
   }
@@ -299,7 +299,7 @@ LAB_002f2034:
     FUN_001835b4(2,0x1a,0x156,(int)&param_1->field_0x0 + temp_v2,temp_v7 + param_2,0x83);
   }
   efctSetSpeed();
-  temp_v7 = FUN_001834a4(0x1a,0x162);
+  temp_v7 = asdTMTexTableEntryAt(0x1a,0x162);
   puVar9 = puVar2 + 0x148e;
   puVar8 = puVar9;
   FUN_0026c4f0();
@@ -318,7 +318,7 @@ LAB_002f2034:
   temp_v1 = 0;
   if (*(short *)((int)temp_v17 + 0x7a) != 0) {
     do {
-      temp_v7 = FUN_001834a4(0x1a,temp_v1 + 0x157);
+      temp_v7 = asdTMTexTableEntryAt(0x1a,temp_v1 + 0x157);
       psVar10 = (short *)(unsigned int)*(unsigned short *)((int)puVar2 + temp_v1 * 2 + 0x523a);
       FUN_00184310();
       if ((temp_v1 & 1) != 0) {
@@ -329,7 +329,7 @@ LAB_002f2034:
         FUN_001835b4(2,0x1a,0x133,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                      *(short *)(temp_v7 + 10) + param_2,0x83);
       }
-      temp_v2 = FUN_001834a4(0x1a,0x139);
+      temp_v2 = asdTMTexTableEntryAt(0x1a,0x139);
       temp_v11 = 0xffffffff;
       if ((!((temp_v15[0] == '\x01' || temp_v15[0] == '\x02') || temp_v15[0] == '\x06')) &&
          (temp_v0 = temp_v15[temp_v1 + 1], !((temp_v0 == '\x01' || temp_v0 == '\x02') || temp_v0 == '\x06')))
@@ -358,8 +358,8 @@ LAB_002f2034:
       VectorSignedToFloat((int)&param_1->field_0x0 +
                           (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v2 + 8),
                           (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00162790(2,temp_v11,temp_v14,(int)*(short *)(temp_v2 + 8));
-      temp_v2 = FUN_001834a4(0x1a,0x13a);
+      textDrawString(2,temp_v11,temp_v14,(int)*(short *)(temp_v2 + 8));
+      temp_v2 = asdTMTexTableEntryAt(0x1a,0x13a);
       temp_v11 = FUN_0014bf3c(*psVar10,0);
       textFormatBuffer(temp_v14,&LAB_002f24ec,temp_v11);
       puVar11 = temp_v14;
@@ -370,7 +370,7 @@ LAB_002f2034:
                           (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v2 + 8) +
                           ((int)**(short **)(temp_v2 + 0xc) - (int)puVar11) / 2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00162790(2,0x57d8ffff,temp_v14,(int)*(short *)(temp_v7 + 8));
+      textDrawString(2,0x57d8ffff,temp_v14,(int)*(short *)(temp_v7 + 8));
       temp_v0 = *(char *)((int)puVar2 + temp_v1 + 0x5252);
       if (temp_v0 == '\0') {
         temp_v9 = psVar10[3];
@@ -387,7 +387,7 @@ LAB_002f2034:
       temp_v3 = (int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8);
       if (temp_v9 >= 100) {
         FUN_001835b4(2,0x1a,0x26a,temp_v3,temp_v2,0x88);
-        temp_v2 = FUN_001834a4(0x1a,0x26d);
+        temp_v2 = asdTMTexTableEntryAt(0x1a,0x26d);
         FUN_00180310(0,(int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v2 + 8),
                      (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,3,0x8d,
@@ -395,13 +395,13 @@ LAB_002f2034:
       }
       else {
         FUN_001835b4(2,0x1a,0x135,temp_v3,temp_v2,0x88);
-        temp_v2 = FUN_001834a4(0x1a,0x138);
+        temp_v2 = asdTMTexTableEntryAt(0x1a,0x138);
         FUN_00180310(0,(int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v2 + 8),
                      (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,2,0x8d,
                      &LAB_002f24f8,temp_v9);
       }
-      temp_v2 = FUN_001834a4(0x1a,0x136);
+      temp_v2 = asdTMTexTableEntryAt(0x1a,0x136);
       temp_v12 = *(char *)((int)puVar2 + temp_v1 + 0x5252) == '\0';
       if (!temp_v12) {
         temp_v6 = (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v2 + 10);

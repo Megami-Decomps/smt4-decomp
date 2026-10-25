@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00162790(...);
+int textDrawString(...);
 int efctSetSpeed(void);
 int unitGetStereoScreenPosition(int *, int [3], int);
 void drawParameterChangeBadge(unsigned int, int, int, int, int);
@@ -27,9 +27,9 @@ extern unsigned char LAB_0022ecd0; /* 0x22ecd0 */
 extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: unitGetStereoScreenPosition. */
 extern int FUN_0026264c(unsigned short);
 extern unsigned int FUN_003a6f84(unsigned int);
@@ -68,14 +68,14 @@ void FUN_0022e9c8(void)
     FUN_001835b4(2,0x12,0x119,temp_v11,temp_v12[0],0xdd);
     FUN_001835b4(2,0x12,0x11a,temp_v11,temp_v12[0],0xdd);
     FUN_001835b4(2,0x12,0x11b,temp_v11,temp_v12[0],0xdd);
-    temp_v3 = FUN_001834a4(0x12,0x11c);
-    temp_v4 = FUN_001834a4(0x12,0x11d);
+    temp_v3 = asdTMTexTableEntryAt(0x12,0x11c);
+    temp_v4 = asdTMTexTableEntryAt(0x12,0x11d);
     temp_v10 = (int)*(short *)(temp_v3 + 8);
     temp_v1 = **(short **)(temp_v3 + 0xc);
     temp_v13 = (int)*(short *)(temp_v3 + 10);
     if (temp_v0 >= 11) {
       temp_v2 = **(short **)(temp_v4 + 0xc);
-      temp_v10 = FUN_001834a4(0x12,0x11e);
+      temp_v10 = asdTMTexTableEntryAt(0x12,0x11e);
       temp_v10 = (int)((int)**(short **)(temp_v10 + 0xc) -
                     (((int)temp_v2 + (int)temp_v1) * (unsigned int)temp_v0 - (int)temp_v2)) / 2;
     }
@@ -108,10 +108,10 @@ void FUN_0022e9c8(void)
       FUN_001835b4(2,0x12,0x11f,temp_v11,temp_v12[0],0xdd);
       FUN_001835b4(2,0x12,0x120,temp_v11,temp_v12[0],0xdd);
       FUN_001835b4(2,0x12,0x121,temp_v11,temp_v12[0],0xdd);
-      temp_v7 = FUN_001834a4(0x12,0x122);
+      temp_v7 = asdTMTexTableEntryAt(0x12,0x122);
       VectorSignedToFloat(temp_v12[0] + *(short *)(temp_v7 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v11 + *(short *)(temp_v7 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_00162790(2,0xffffffff,&LAB_0022ecd0);
+      textDrawString(2,0xffffffff,&LAB_0022ecd0);
     }
   }
   return;

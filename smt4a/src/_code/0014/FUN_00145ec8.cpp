@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag-byte addressing differs: retail adds the four-byte header first; compiler folds it into the byte load. */
+/* NON_MATCHING: the flag base now matches (header added first); retail builds the mask in a separate register with a register-shift lsl then ands, this build folds it into `ands rX, rY, rZ, lsl rN`. */
 #include "common.h"
 
 struct BitFlagState {
@@ -17,8 +17,10 @@ bool FUN_00145ec8(u32 index)
         return false;
     }
     const BitFlagState *block = gameDataBlocksGetStats();
-    u8 mask = (u8)(1u << (index & 7));
-    return (block->flags[index >> 3] & mask) != 0;
+    const u8 *flags = block->flags;
+    u32 byte = index / 8;
+    u32 bit = index % 8;
+    return (flags[byte] & (u8)(1u << bit)) != 0;
 }
 
 } /* extern "C" */

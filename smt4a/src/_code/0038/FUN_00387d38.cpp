@@ -5,7 +5,6 @@
 #include "event/2dEvent/EventEffect.h"
 
 extern "C" {
-u16 FUN_003b6fc4();
 PartyStatusSlots *gameGetSlotTable();
 PartySlotA *gameGetSlotRecord(s32 index);
 void FUN_003c1060();

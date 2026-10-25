@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 namespace {
@@ -28,7 +29,6 @@ struct BtlEffectView {
 }
 
 extern "C" {
-BtlMainStateView *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(BtlMainStateView *state);
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *left, const char *right, u32 length);
@@ -38,7 +38,7 @@ extern BtlEffectView g_btlEffect;
 s32 btlFindEffectValueByNamePrefix(EffectOwnerView *owner)
 {
     if (owner->unk1F54 != 0) {
-        if (btlScriptUnitHasFlags(btlGetMainState()) == 0) {
+        if (btlScriptUnitHasFlags(reinterpret_cast<BtlMainStateView *>(btlGetMainState())) == 0) {
             for (s32 index = 0; index < 4; ++index) {
                 EffectEntryView *entry = &owner->unk1F54->entries[index];
                 if (entry != 0) {

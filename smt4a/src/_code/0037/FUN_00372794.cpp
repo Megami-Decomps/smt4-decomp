@@ -1,6 +1,7 @@
 /* NON_MATCHING: registers and logic match, but armcc places the playerHasFlagBit and btlMainGetUnk14 calls inline; retail moves both to out-of-line blocks after the return. */
 #include "common.h"
 #include "mapnavi/naviMain.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct SkillMenuWork {
 SkillUser *gameGetSlotRecord(s32 slot);
 SkillUser *btlMainGetUnk14(void);
 s32 bitsAt60Test(SkillUser *user, u32 bit);
-SkillTableEntry *dataTable04FindById(s32 id);
 s32 FUN_004bd098(SkillUser *user, s32 id);
 
 /* Returns whether the user under the menu cursor (flag bit 4 set) can use skill `id`; with no `user` only the player is accepted. */
@@ -44,7 +44,7 @@ u32 FUN_00372794(SkillMenuWork *work, s32 id, SkillUser *user)
     }
     u32 usable = 0;
     if (enabled) {
-        SkillTableEntry *entry = dataTable04FindById(id);
+        SkillTableEntry *entry = (SkillTableEntry *)dataTable04FindById(id);
         if (entry != NULL && entry->unk86 != 0 && (user == NULL || FUN_004bd098(user, id) >= 0)) {
             usable = 1;
         }

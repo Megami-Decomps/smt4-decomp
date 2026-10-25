@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028809c` (_code @ 0x28809c, 0x42c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "mapnavi/naviMain.h"
 
@@ -16,7 +17,6 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern int btlGetMainState(void);
 extern int btlMainIsRunning(void);
 extern int recordGetScaledMaximum(int);
 extern int gameGetPlayerData(void);
@@ -72,7 +72,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
   temp_v7 = 1;
   temp_v8 = 0;
   if (temp_v5 != 0) {
-    temp_v2 = btlGetMainState();
+    temp_v2 = reinterpret_cast<int>(btlGetMainState());
     if (temp_v2 == 0) {
       temp_v2 = (int)*(short *)(temp_v5 + 0x1c);
     }
@@ -82,7 +82,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
     }
   }
   if (temp_v6 != 0) {
-    temp_v8 = btlGetMainState();
+    temp_v8 = reinterpret_cast<int>(btlGetMainState());
     if (temp_v8 != 0) {
       temp_v8 = FUN_002b4dcc();
     }

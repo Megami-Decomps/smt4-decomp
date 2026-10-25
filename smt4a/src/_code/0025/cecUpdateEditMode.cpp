@@ -14,7 +14,7 @@ extern StateAtF4 *g_campCecEdit;
 void linkHolderApplyFlag(u32 holder, s32 flags);
 f32 uiGetFloatValue(u32 holder);
 void gfxAdvanceTextureRequestQueue(u32 handle, s32 selection);
-void FUN_003e54b8(u32 handle, f32 value);
+void slotTargetApplyActiveValue(u32 handle, f32 value);
 
 u32 cecUpdateEditMode(void)
 {
@@ -55,7 +55,7 @@ u32 cecUpdateEditMode(void)
     if (edit->unk04) {
         f32 value = uiGetFloatValue(edit->unk04);
         CecEditLinkHolder *holder = reinterpret_cast<CecEditLinkHolder *>(edit->unk04);
-        FUN_003e54b8(holder->valueHandle, value);
+        slotTargetApplyActiveValue(holder->valueHandle, value);
     }
     ++edit->frameCounter;
     return 0;

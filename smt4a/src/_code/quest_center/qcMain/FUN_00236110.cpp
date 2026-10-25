@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail reaches the quest-center globals (DAT_00588c30 block, +4/+8/+0x10 fields) through one base register and orders the flag-chain tests with shared branch targets; this version loads each global separately. The state machine, calls and stored values are the same. */
 #include "common.h"
+#include "shard/FUN_0021c118.h"
 
 namespace {
 /* The quest center's main block: its state, the active flag and the screen object. */
@@ -29,7 +30,6 @@ extern s32 DAT_005f1b74;
 void *asdOperatorNew(u32 size);
 void asdOperatorDelete(void *block);
 s32 bgmGetStateById(u32 id);
-void FUN_0021c118(u32 id, s32 arg);
 void FUN_003d4c68(u32 id);
 void FUN_003d54f8(s32 a, s32 b);
 void bgmStopWithoutEntry(void);

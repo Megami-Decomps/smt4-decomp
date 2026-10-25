@@ -45,7 +45,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned int FUN_001834a4(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -106,7 +106,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
   iStack_30 = param_1;
   temp_v18 = param_2;
   puStack_28 = param_3;
-  temp_v3 = FUN_001834a4(0x1a,0x1f6);
+  temp_v3 = asdTMTexTableEntryAt(0x1a,0x1f6);
   temp_v11 = (int)*(short *)(param_1 + 0x474);
   temp_v13 = 1;
   temp_v12 = (unsigned int *)&temp_v18;

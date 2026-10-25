@@ -24,7 +24,7 @@ void asdMemFree(void *block);
 /* Releases the work area's textures and frees it. */
 void FUN_0034da3c(u32 job)
 {
-    TextureOwnerWork *work = reinterpret_cast<TextureOwnerWork *>(jobGetWork(job));
+    TextureOwnerWork *work = (TextureOwnerWork *)jobGetWork(job);
 
     if (work->resource == NULL) {
         if (work->mode != 1) {

@@ -7,7 +7,6 @@ void FUN_002306f8(const Scene3aEntry* item, s32 quantity, u32 flags);
 void FUN_0026e630(u32 amount);
 void gameCounterAddSaturating(s32 index, u32 amount);
 s32 contentGetEntryKind(u32 id);
-u32 aocGetContentFlags(u32 id);
 
 // Apply the scene's total and item deltas, converting downloadable entries separately.
 void FUN_003a1378(Scene3a* scene)

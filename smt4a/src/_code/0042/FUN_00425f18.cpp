@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail inlines SVC 0x23 in the thread-handle destructor; no SDK wrapper exists here and added SVC intrinsics/assembly are prohibited. */
 #include "romwright_types.h"
+#include "shard/deblockerHandleRelease.h"
+#include "shard/mwmofilterDeblockerRelease.h"
 
 extern "C" {
 
 int nn_os_Thread_FinalizeImpl(int *);
-int deblockerHandleRelease(unsigned int *);
 int FUN_00425cd8(void);
-int mwmofilterDeblockerRelease(unsigned int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */

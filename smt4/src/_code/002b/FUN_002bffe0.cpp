@@ -1,11 +1,12 @@
 /* NON_MATCHING: retail assigns the down snapshot and X coordinate to r5 and r4 respectively; the build swaps them. */
 #include "shard/W9_W9Match1_TouchSample.h"
+#include "shard/FUN_002bffe0.h"
 
 extern "C" {
 extern TouchInputSample DAT_004e3cd4;
 
 // Read touch coordinates for held, pressed, triggered, or released input.
-u32 FUN_002bffe0(u32 *x, u32 *y, s32 mode)
+u32 FUN_002bffe0(s32*x, s32*y, s32 mode)
 {
     u32 result = 0;
     u8 down = DAT_004e3cd4.down;

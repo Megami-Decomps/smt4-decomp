@@ -1,8 +1,8 @@
 /* NON_MATCHING: stage comparison scheduling and strength-reduced Boolean constant loops differ. */
 #include "gfx/ShaderProgramLoad.h"
+#include "AsdSDK/gfxCommandTemplateAppend.h"
 extern "C" {
 extern u8 *g_commandBufferCursor;
-void gfxCommandTemplateAppend(s32 geometryEnabled);
 void nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
 static inline u32 shaderBooleanMask(const ShaderExecutable *program)

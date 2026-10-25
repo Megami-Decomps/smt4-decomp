@@ -2,8 +2,8 @@
 #define OBJ42242C_H
 
 #include "classes/ObjBase3c2ef0.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 
 /* The object whose vtable is at 0x42242c (named after it until its real name is known): another
  * window on the ObjBase3c2ef0 layer, like Obj4223ac. Its destructor (D0) only runs the base's. */

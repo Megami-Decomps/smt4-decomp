@@ -14,7 +14,7 @@ int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_00169a1c(...);
 int FUN_00180310(...);
-int FUN_001834a4(...);
+
 int FUN_00183bb0(void);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
@@ -43,7 +43,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -107,7 +107,7 @@ int FUN_00343e5c(void)
           temp_v16 = *(int *)(temp_v9 + 0x1b8);
           temp_v13 = temp_v16 == 0;
           temp_v10 = *(int *)(temp_v9 + 0x1bc);
-          temp_v9 = FUN_001834a4(0x2e,temp_v8 + 0x49e);
+          temp_v9 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v8 + 0x49e));
           temp_v11 = (int)*(short *)(temp_v9 + 8);
           temp_v9 = (int)*(short *)(temp_v9 + 10);
           if (temp_v12 == 0 || temp_v13) {
@@ -118,7 +118,7 @@ int FUN_00343e5c(void)
               if (temp_v10 != 2) {
                 if (temp_v10 != 3) {
                   FUN_00164b5c(2,0x2e,0x23,temp_v5 + temp_v11,temp_v4 + temp_v9,0x65);
-                  temp_v6 = FUN_001834a4(0x2e,0x43c);
+                  temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x43c));
                   FUN_001835b4(2,0x2e,temp_v10 + 0x421,temp_v5 + temp_v11 + (int)*(short *)(temp_v6 + 8),
                                temp_v4 + temp_v9 + (int)*(short *)(temp_v6 + 10),0x65);
                 }
@@ -167,7 +167,7 @@ int FUN_00343e5c(void)
             }
             if (temp_v12 != 0) {
               FUN_00184310();
-              temp_v6 = FUN_001834a4(0x2e,temp_v14);
+              temp_v6 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v14));
               FUN_00169a1c(*(unsigned short *)(temp_v12 + 0x9c),temp_v5 + *(short *)(temp_v6 + 8) + temp_v11,
                            temp_v4 + *(short *)(temp_v6 + 10) + temp_v9,0x65);
             }
@@ -183,7 +183,7 @@ int FUN_00343e5c(void)
             else {
               temp_v14 = 0xffffff00;
             }
-            temp_v12 = FUN_001834a4(0x2e,temp_v19);
+            temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v19));
             temp_v0 = *(short *)(temp_v12 + 8);
             temp_v1 = *(short *)(temp_v12 + 10);
             temp_v12 = temp_v2 + temp_v8 * 4;
@@ -191,12 +191,12 @@ int FUN_00343e5c(void)
             FUN_0025cc78(*(unsigned int *)(temp_v12 + 600),temp_v5 + temp_v0 + temp_v11,temp_v4 + temp_v1 + temp_v9
                          ,0x65);
             if (temp_v10 < 4) {
-              temp_v12 = FUN_001834a4(0x2e,temp_v18);
+              temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v18));
               FUN_001835b4(2,0x2e,0x4a5,temp_v5 + *(short *)(temp_v12 + 8) + temp_v11,
                            temp_v4 + *(short *)(temp_v12 + 10) + temp_v9,0x65);
             }
-            temp_v12 = FUN_001834a4(0x2e,temp_v17);
-            FUN_001834a4(0x2e,temp_v7);
+            temp_v12 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v17));
+            reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,temp_v7));
             temp_v0 = *(short *)(temp_v12 + 8);
             temp_v1 = *(short *)(temp_v12 + 10);
             drawSetColorFromRGBA8(0xffffffff);

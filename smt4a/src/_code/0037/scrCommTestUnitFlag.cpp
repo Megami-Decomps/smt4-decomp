@@ -1,9 +1,8 @@
 /* NON_MATCHING: retail uses `push {r4, r5, r6, lr}` where armcc emits `push {r4, lr}`. */
 #include "shard/W5_W5Match7_ScriptUnit.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-
-
 
 s32 scrCommTestUnitFlag(void)
 {

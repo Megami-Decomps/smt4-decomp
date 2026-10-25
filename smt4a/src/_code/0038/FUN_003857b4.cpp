@@ -1,4 +1,5 @@
 #include "map/lmapMain.h"
+#include "shard/FUN_003857b4.h"
 
 extern "C" {
 

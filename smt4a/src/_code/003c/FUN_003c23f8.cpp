@@ -1,8 +1,9 @@
 #include "util/FUN_003ee0c0.h"
 /* NON_MATCHING: mode/actor spill allocation, division constant hoisting and event-argument stores differ from retail. */
 #include "shard/W5_W5Match7_BattleMask.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 struct BtlUnitA;
 extern "C" {
@@ -23,10 +24,10 @@ u32 FUN_003c23f8(void)
     s32 mode = scrGetArg(1);
     BtlUnitA *actor = btlUnitGet(g_btlScriptUnit);
     for (s32 index = 0; index < 4; ++index) {
-        BattleMaskEntry *entry = &btlGetMainState()->entryView.entries[index];
-        if ((entry->mask & g_battleMaskPresets.eligibility.active) != 0 &&
-            (entry->mask & g_battleMaskPresets.eligibility.excluded) == 0 &&
-            entry->id >= 0) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
+            (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0 &&
+            entry->unitIndex >= 0) {
             s32 damage = 0;
             if (mode == 0)
                 damage = entry->maxHp * amount / 100;
@@ -37,7 +38,7 @@ u32 FUN_003c23f8(void)
             if (damage >= entry->hp)
                 damage = entry->hp - 1;
             FUN_003ee0c0(btlGetMainState());
-            BattleRosterRecordA *target = &btlGetMainState()->rosterView.roster[entry->id];
+            BattleRosterRecordA *target = &btlGetMainState()->roster[entry->unitIndex];
             s32 eventFlags = index << 3;
             FUN_004fc094(0, actor, 0, target, 0, damage, -1, ~0u,
                          entry->hp, entry->maxHp, 0, 0, 0, 0, 1, 0,

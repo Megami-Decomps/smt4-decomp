@@ -6,10 +6,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
 void memClear(void *memory, u32 size);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 argument, void (*update)(), void (*draw)(),
                    void *work, u32 parent);

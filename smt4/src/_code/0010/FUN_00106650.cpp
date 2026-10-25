@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r4, [pc, #140] differs from recovered bne 98. */
 #include "common.h"
+#include "shard/asdSoundSetVolumeIfEnabled.h"
 
 // Private record views for DAT_004c5634, not shared API types.
 struct SoundDuckSettingsView {
@@ -25,7 +26,6 @@ extern SoundStateView DAT_004c5634;
 
 s32 jyoucyuGetTableEntry(u32 index);
 void FUN_0010dd80(void);
-void asdSoundSetVolumeIfEnabled(s32 enabled);
 void asdSoundDuckSetup(s32 enabled, f32 volume, s32 attack,
                        s32 hold, s32 mode, s32 release);
 s32 fileLoadSync(const char* path, u32* size, u32 flags);

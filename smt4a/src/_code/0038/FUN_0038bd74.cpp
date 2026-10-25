@@ -1,4 +1,5 @@
 /* NON_MATCHING: eligibility mask registers and cached combatant-id address differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -7,8 +8,6 @@
 #include "gamedata/Table00Lookup.h"
 #include "gamedata/Table04Record.h"
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
-Table04Record *dataTable04FindById(u32 id);
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 

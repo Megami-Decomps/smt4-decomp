@@ -1,6 +1,7 @@
 /* NON_MATCHING: near (197 rows against 205): same control flow and calls; retail keeps the price in r7/menu flag in fp and tests the signed window/holder flag bytes with ldrsb, ours picks r8/sl and ldrb; retail also emits armcc nops around the calls */
 #include "common.h"
 #include "util/FUN_0020349c.h"
+#include "shard/FUN_00232848.h"
 
 extern "C" {
 
@@ -66,7 +67,6 @@ int FUN_0029cc44(...);
 int FUN_003ac468(void);
 int beginStatusPanelClose(void);
 int FUN_0029ee6c(...);
-int FUN_00232848(void);
 int sortMenuCreate(...);
 int FUN_0029e328(...);
 int useCounterStart(void);

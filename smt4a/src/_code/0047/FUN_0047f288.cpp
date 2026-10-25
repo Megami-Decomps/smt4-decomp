@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail preserves the volume in s16 across actor lookup; this source loads the constant afterward. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 u32 FUN_0014af98(s32 actor);
 void FUN_001628c0(const char *voice, u32 enabled, u32 kind, u32 flags, f32 leftVolume, f32 rightVolume);
 

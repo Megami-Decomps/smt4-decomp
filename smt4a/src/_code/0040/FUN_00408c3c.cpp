@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(double, int);
-int FUN_00162790(...);
+int textDrawString(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
@@ -38,13 +38,13 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 /* Supplied declaration required: FUN_001692d4. */
 /* Supplied declaration required: FUN_00180310. */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_003d3020. */
 /* Supplied declaration required: drawFacingElbowSegments. */
@@ -156,7 +156,7 @@ void FUN_00408c3c(int param_1)
   FUN_001835b4(2,0xc,0x36,(int)((float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
                (int)(float)((unsigned long long)temp_v9 >> 0x20),0x41);
   if (*(char *)(param_1 + 0xec) != '\0') {
-    temp_v1 = FUN_001834a4(0xc,0x7f);
+    temp_v1 = asdTMTexTableEntryAt(0xc,0x7f);
     temp_v11 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -173,13 +173,13 @@ void FUN_00408c3c(int param_1)
                            ),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x8c) + (float)((unsigned long long)temp_v9 >> 0x20)),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(1,0xff,param_1 + 0x2c);
+  textDrawString(1,0xff,param_1 + 0x2c);
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x90) + (float)((unsigned long long)temp_v12 >> 0x20) + temp_v13
                            ),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x94) + (float)((unsigned long long)temp_v9 >> 0x20)),
                       (unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(1,0xffffffff,param_1 + 4);
+  textDrawString(1,0xffffffff,param_1 + 4);
   temp_v1 = g_renderCtx;
   temp_v7 = (unsigned int)temp_v9;
   if (temp_v5) {

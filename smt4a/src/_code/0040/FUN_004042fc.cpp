@@ -21,7 +21,7 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
-ScrollBarFrame *FUN_001834a4(u32 bank, u32 sprite);
+ScrollBarFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 s32 objectApplyIfUnblocked(void *view);
 s32 uiSearchPrimary(void *view);
 s32 resourceRunOperationIfUnblocked(void *view);
@@ -40,7 +40,7 @@ void FUN_004042fc(u8 *list, s32 x, s32 y, f32 speed)
     FUN_001835b4(2, 0x32, 0xC, x, y, 0xC9);
 
     s32 thumbOffset = 0;
-    ScrollBarFrame *frame = FUN_001834a4(0x32, 0xD);
+    ScrollBarFrame *frame = asdTMTexTableEntryAt(0x32, 0xD);
     s32 thumbHeight;
     if (objectApplyIfUnblocked(view) > uiSearchPrimary(view)) {
         f32 ratio = (f32)frame->size[1] / (f32)objectApplyIfUnblocked(view);

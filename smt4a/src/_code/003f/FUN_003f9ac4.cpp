@@ -1,4 +1,3 @@
-/* NON_MATCHING: channel sampling methods now match; playback-duration VFP comparison operands and branch predicate still differ. */
 #include "gfx/CameraMotion.h"
 #include "shard/W6_W6Match2_AnimationPlayback.h"
 #include <string.h>
@@ -88,9 +87,8 @@ bool FUN_003f9ac4(AnimatedObject *object, CameraMotionOutput *output, s32 index,
     output->camera.projection.aspect = projection->aspect;
     output->camera.projection.fieldOfView = projection->fieldOfView * 57.295776f;
     FUN_0019eb14(&output->camera);
-    f32 frame = object->progress + delta;
-    object->progress = frame;
-    if (frame > clip->header.duration) {
+    object->progress = object->progress + delta;
+    if (object->progress > clip->header.duration) {
         active = false;
         object->progress = 0.0f;
     }

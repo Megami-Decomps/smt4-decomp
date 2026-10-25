@@ -3,7 +3,6 @@
 #include "shard/Shard004B.h"
 
 extern "C" {
-Table04Record *dataTable04FindById(u32 id);
 ItemRankRecord *gameGetPlayerData(void);
 s32 gameDataFlagTestBit(u32 flag);
 const void *dataFindKeyedRecordWithOverrides(u32 id);

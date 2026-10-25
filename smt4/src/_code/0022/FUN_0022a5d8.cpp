@@ -1,10 +1,10 @@
 /* NON_MATCHING: ARMCC combines the two flag tests and shares argument setup differently. */
 /* Submits a battle action, selecting the alternate route when a mode is supplied. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 
 u32 FUN_0022a5d8(u32 owner, s32 mode, u32 value)
 {

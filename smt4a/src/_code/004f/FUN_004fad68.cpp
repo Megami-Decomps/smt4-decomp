@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fad68` (_code @ 0x4fad68, 0x6d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/S1Mover.h"
 struct BtlMainStateA;
 
 extern "C" {
 
-int btlGetMainState(void);
 int FUN_001aff14(float *, int);
 int FUN_003e7fa4(...);
 int btlScriptUnitHasFlags(void);
@@ -109,15 +109,15 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   switch(param_2) {
   case 0:
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     FUN_003e7fa4(temp_v3,param_3,0);
     break;
   case 1:
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_3,0);
     break;
   case 2:
-    puVar2 = (unsigned int *)btlGetMainState();
+    puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(puVar2,param_3);
     if (puVar2 == (unsigned int *)0x0) {
       return;
@@ -130,31 +130,31 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
     }
     break;
   case 3:
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     FUN_003e7fa4(temp_v3,param_4,0);
     break;
   case 4:
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,0);
     break;
   case 5:
-    puVar2 = (unsigned int *)btlGetMainState();
+    puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(puVar2,param_4);
     if (puVar2 == (unsigned int *)0x0) {
       return;
     }
     if ((*puVar2 & DAT_00573810) != 0 || (puVar2[1] & DAT_00573814) != 0) {
-      temp_v1 = btlGetMainState();
+      temp_v1 = reinterpret_cast<int>(btlGetMainState());
       if ((DAT_00573818 & *(unsigned int *)(temp_v1 + 0x45a0)) != 0 ||
           (DAT_0057381c & *(unsigned int *)(temp_v1 + 0x45a4)) != 0) {
         return;
       }
-      temp_v1 = btlGetMainState();
+      temp_v1 = reinterpret_cast<int>(btlGetMainState());
       if ((*(unsigned int *)(temp_v1 + 0x45a0) & DAT_00573820) != 0 ||
           (DAT_00573824 & *(unsigned int *)(temp_v1 + 0x45a4)) != 0) {
         return;
       }
-      btlGetMainState();
+      reinterpret_cast<int>(btlGetMainState());
       btlScriptUnitHasFlags();
       return;
     }
@@ -201,11 +201,11 @@ void FUN_004fad68(unsigned int param_1,unsigned int param_2,unsigned int param_3
   case 0xc:
     break;
   case 0xd:
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     FUN_003e7fa4(temp_v3,param_4,1);
     break;
   case 0xe:
-    temp_v3 = btlGetMainState();
+    temp_v3 = reinterpret_cast<int>(btlGetMainState());
     FUN_003ecab8(reinterpret_cast<BtlMainStateA *>(temp_v3),param_4,1);
     break;
   case 0xf:

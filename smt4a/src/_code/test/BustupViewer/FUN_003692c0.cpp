@@ -1,12 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003692c0` (_code @ 0x3692c0, 0x5e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_001527d8(unsigned int, unsigned int);
-int FUN_0025cc78(unsigned int, int, int, int);
 int libc_strcpy(unsigned char [268], unsigned char *);
 int rt_aeabi_memclr(...);
 
@@ -204,7 +203,7 @@ LAB_00369690:
         textFormatBuffer(temp_v7,&LAB_003698ec,
                      *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x50) * 4 + 0x54));
         FUN_001527d8(*(unsigned int *)(temp_v0 + 0xa0),temp_v4);
-        FUN_0025cc78(*(unsigned int *)(temp_v0 + 0xa0),0x76,(int)temp_v5,0x65);
+        FUN_0025cc78((const void *)*(unsigned int *)(temp_v0 + 0xa0),0x76,(int)temp_v5,0x65,1.0f);
         break;
       case 6:
       case 0xb:

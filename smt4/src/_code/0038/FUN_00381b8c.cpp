@@ -51,7 +51,6 @@ void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 options);
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
 void dataTable27Load(u32 *control);
-void FUN_00385af4(u32 *control);
 void asdTMTexTableLoadEntryAsync(u32 table, s32 entry);
 u32 asdTextCreate(u32 options);
 void FUN_002637c8(void);

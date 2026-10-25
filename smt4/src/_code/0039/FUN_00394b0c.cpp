@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,14 +9,13 @@ struct BattleMainView {
     /* 0x1FC4 */ s16 count;
 };
 
-BattleMainView *btlGetMainState(void);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 a, u32 id, u32 value, s32 b, f32 x, f32 y);
 
 /* Plays one of two sounds, chosen by whether the battle count is at most 1. */
 void FUN_00394b0c(void)
 {
-    if (btlGetMainState()->count <= 1) {
+    if (reinterpret_cast<BattleMainView *>(btlGetMainState())->count <= 1) {
         FUN_002bfc24(1, 0x7A576, FUN_002bfdc4(), 4, 0.707f, 0.707f);
     } else {
         FUN_002bfc24(1, 0x7A5D0, FUN_002bfdc4(), 4, 0.707f, 0.707f);

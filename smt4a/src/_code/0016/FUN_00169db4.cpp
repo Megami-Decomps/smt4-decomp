@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_00169db4.h"
 
 namespace { struct Presets { u8 padding[0xb8]; u32 first; u8 gap[0x74]; u32 second; }; }
 

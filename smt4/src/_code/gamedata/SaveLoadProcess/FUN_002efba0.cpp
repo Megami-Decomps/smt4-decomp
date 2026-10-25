@@ -2,6 +2,7 @@
 #include "gamedata/SaveLoadProcessState.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
+#include "gamedata/SaveLoadProcess.h"
 
 struct SaveFilePayloadIV {
     u32 table[32];
@@ -20,7 +21,6 @@ typedef char SaveWriterPayloadLayoutCheck[
 extern "C" {
 SaveLoadProcessWork24 *jobGetWork(u32 process);
 s32 FUN_001a1d08(void);
-s32 FUN_002cedbc(void);
 void asdMemFree(void *memory);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void titleConfigStoreOptions(void);

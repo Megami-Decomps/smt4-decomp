@@ -31120,12 +31120,12 @@
     },
     {
       "address": "0x162790",
-      "function": "FUN_00162790",
+      "function": "textDrawString",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_00162790.o",
+      "object": "build/obj/_code/0016/textDrawString.o",
       "size": 112,
-      "source": "src/_code/0016/FUN_00162790.cpp",
-      "target": "orig/target/_code/0016/FUN_00162790.o",
+      "source": "src/_code/0016/textDrawString.cpp",
+      "target": "orig/target/_code/0016/textDrawString.o",
       "thumb": false
     },
     {
@@ -36546,12 +36546,12 @@
     },
     {
       "address": "0x1834a4",
-      "function": "FUN_001834a4",
+      "function": "asdTMTexTableEntryAt",
       "module": "_code",
-      "object": "build/obj/_code/0018/FUN_001834a4.o",
+      "object": "build/obj/_code/0018/asdTMTexTableEntryAt.o",
       "size": 60,
-      "source": "src/_code/0018/FUN_001834a4.cpp",
-      "target": "orig/target/_code/0018/FUN_001834a4.o",
+      "source": "src/_code/0018/asdTMTexTableEntryAt.cpp",
+      "target": "orig/target/_code/0018/asdTMTexTableEntryAt.o",
       "thumb": false
     },
     {
@@ -67467,12 +67467,12 @@
     },
     {
       "address": "0x2ba85c",
-      "function": "FUN_002ba85c",
+      "function": "scrGetCommandOwner",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002ba85c.o",
+      "object": "build/obj/_code/002b/scrGetCommandOwner.o",
       "size": 16,
-      "source": "src/_code/002b/FUN_002ba85c.cpp",
-      "target": "orig/target/_code/002b/FUN_002ba85c.o",
+      "source": "src/_code/002b/scrGetCommandOwner.cpp",
+      "target": "orig/target/_code/002b/scrGetCommandOwner.o",
       "thumb": false
     },
     {
@@ -69025,12 +69025,12 @@
     },
     {
       "address": "0x2c7b8c",
-      "function": "FUN_002c7b8c",
+      "function": "gameDataSetStatusFlag",
       "module": "_code",
-      "object": "build/obj/_code/002c/FUN_002c7b8c.o",
+      "object": "build/obj/_code/002c/gameDataSetStatusFlag.o",
       "size": 32,
-      "source": "src/_code/002c/FUN_002c7b8c.cpp",
-      "target": "orig/target/_code/002c/FUN_002c7b8c.o",
+      "source": "src/_code/002c/gameDataSetStatusFlag.cpp",
+      "target": "orig/target/_code/002c/gameDataSetStatusFlag.o",
       "thumb": false
     },
     {
@@ -97791,12 +97791,12 @@
     },
     {
       "address": "0x325a74",
-      "function": "FUN_00325a74",
+      "function": "popupClearPendingEntries",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_00325a74.o",
+      "object": "build/obj/_code/0032/popupClearPendingEntries.o",
       "size": 36,
-      "source": "src/_code/0032/FUN_00325a74.cpp",
-      "target": "orig/target/_code/0032/FUN_00325a74.o",
+      "source": "src/_code/0032/popupClearPendingEntries.cpp",
+      "target": "orig/target/_code/0032/popupClearPendingEntries.o",
       "thumb": false
     },
     {
@@ -105270,12 +105270,12 @@
     },
     {
       "address": "0x35b0a4",
-      "function": "FUN_0035b0a4",
+      "function": "gameDataClearSaveRecord",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_0035b0a4.o",
+      "object": "build/obj/_code/0035/gameDataClearSaveRecord.o",
       "size": 52,
-      "source": "src/_code/0035/FUN_0035b0a4.cpp",
-      "target": "orig/target/_code/0035/FUN_0035b0a4.o",
+      "source": "src/_code/0035/gameDataClearSaveRecord.cpp",
+      "target": "orig/target/_code/0035/gameDataClearSaveRecord.o",
       "thumb": false
     },
     {
@@ -115866,12 +115866,12 @@
     },
     {
       "address": "0x398464",
-      "function": "FUN_00398464",
+      "function": "naviMainEnterState6IfActive",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_00398464.o",
+      "object": "build/obj/_code/0039/naviMainEnterState6IfActive.o",
       "size": 32,
-      "source": "src/_code/0039/FUN_00398464.cpp",
-      "target": "orig/target/_code/0039/FUN_00398464.o",
+      "source": "src/_code/0039/naviMainEnterState6IfActive.cpp",
+      "target": "orig/target/_code/0039/naviMainEnterState6IfActive.o",
       "thumb": false
     },
     {
@@ -126358,12 +126358,12 @@
     },
     {
       "address": "0x3d2004",
-      "function": "FUN_003d2004",
+      "function": "scrPopInt",
       "module": "_code",
-      "object": "build/obj/_code/003d/FUN_003d2004.o",
+      "object": "build/obj/_code/003d/scrPopInt.o",
       "size": 144,
-      "source": "src/_code/003d/FUN_003d2004.cpp",
-      "target": "orig/target/_code/003d/FUN_003d2004.o",
+      "source": "src/_code/003d/scrPopInt.cpp",
+      "target": "orig/target/_code/003d/scrPopInt.o",
       "thumb": false
     },
     {
@@ -128587,12 +128587,12 @@
     },
     {
       "address": "0x3e54b8",
-      "function": "FUN_003e54b8",
+      "function": "slotTargetApplyActiveValue",
       "module": "_code",
-      "object": "build/obj/_code/003e/FUN_003e54b8.o",
+      "object": "build/obj/_code/003e/slotTargetApplyActiveValue.o",
       "size": 72,
-      "source": "src/_code/003e/FUN_003e54b8.cpp",
-      "target": "orig/target/_code/003e/FUN_003e54b8.o",
+      "source": "src/_code/003e/slotTargetApplyActiveValue.cpp",
+      "target": "orig/target/_code/003e/slotTargetApplyActiveValue.o",
       "thumb": false
     },
     {
@@ -133935,12 +133935,12 @@
     },
     {
       "address": "0x40a42c",
-      "function": "FUN_0040a42c",
+      "function": "statsSetSecondBankFlag",
       "module": "_code",
-      "object": "build/obj/_code/0040/FUN_0040a42c.o",
+      "object": "build/obj/_code/0040/statsSetSecondBankFlag.o",
       "size": 68,
-      "source": "src/_code/0040/FUN_0040a42c.cpp",
-      "target": "orig/target/_code/0040/FUN_0040a42c.o",
+      "source": "src/_code/0040/statsSetSecondBankFlag.cpp",
+      "target": "orig/target/_code/0040/statsSetSecondBankFlag.o",
       "thumb": false
     },
     {

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdGxCommandListAllocNode.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(s32 heap, s32 alignmentClass, s32 flags,

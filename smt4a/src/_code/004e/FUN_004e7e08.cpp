@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of a battle action's reflect-skill step machine (draft: the returned value of FUN_004f6d34 and the two effect names restored from the code pool); armcc here shares the property comparison and the state-store tail differently. */
 #include "common.h"
+#include "shard/FUN_004c8284.h"
 
 /* A script unit slot (0x1254 bytes each); byte +9 is its phase. */
 struct ScriptUnit {
@@ -38,7 +39,6 @@ extern u32 g_btlActionReflect;
 s32 btlScriptUnitHasFlags(ActionOwner *owner);
 s32 btlFindEntryValue(s32 entry, u32 property);
 s32 btlGetPropertyMaximum(u32 property);
-void FUN_004c8284(s32 entry, s32 a, s32 b, s32 c);
 s32 FUN_004f6d34(s32 aux);
 s32 chainCountIdUnflagged(u32 chain, ReflectAction *action);
 void FUN_004fdcd8(s32 a, ReflectAction *action, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);

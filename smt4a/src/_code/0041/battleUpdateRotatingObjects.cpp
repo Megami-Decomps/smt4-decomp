@@ -1,5 +1,5 @@
 /* NON_MATCHING: named frame thresholds recover comparison operand order; loop-bound compares still merge and global-frame modulo registers differ. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
 
 struct RotatingBattleObjectState {
     /* 0x00 */ s32 ids[14];
@@ -11,13 +11,8 @@ struct RotatingBattleObjectState {
     /* 0x4C */ s32 frames[14];
     /* 0x84 */ s32 pulse;
 };
-struct BattleObjectFrameState {
-    /* 0x00 */ u8 unk00[0x98];
-    /* 0x98 */ u32 frame;
-};
 
 extern "C" s32 engineLookupObjectById(s32 id);
-extern "C" BattleObjectFrameState *btlGetMainState(void);
 
 /* Advance the visible object counters and cycle their selection every 37 frames. */
 extern "C" void battleUpdateRotatingObjects(RotatingBattleObjectState *state)
@@ -41,7 +36,7 @@ extern "C" void battleUpdateRotatingObjects(RotatingBattleObjectState *state)
     }
     if (++state->pulse >= 30)
         state->pulse = 0;
-    f32 phase = (f32)(btlGetMainState()->frame % 37);
+    f32 phase = (f32)(btlGetMainState()->timing.frame % 37);
     if (phase < 5.0f) {
         state->phase = phase;
         state->rotating = 0;

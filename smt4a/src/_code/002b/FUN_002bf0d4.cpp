@@ -1,8 +1,8 @@
 /* NON_MATCHING: Texture region bounds and modulo-1000 selection are complete; preserved argument moves and signed-remainder instruction scheduling differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/AsdTMTexTableCallFileC.h"
-#include "util/AsdTMTexTableCallFileC.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct TextureRegion {
     /* 0x00 */ u16 x;

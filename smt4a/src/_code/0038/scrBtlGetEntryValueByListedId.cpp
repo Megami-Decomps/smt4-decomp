@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ typedef struct BtlEntry {
     /* 0x25C */ u32 value;
 } BtlEntry;
 
-extern void *btlGetMainState(void);
 extern BtlEntry *FUN_003f0e20(void *state, u32 id);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(u32 value);
@@ -17,7 +17,7 @@ u32 scrBtlGetEntryValueByListedId(void)
 {
     u32 id = scrGetArg(0);
     u32 result = 0;
-    BtlEntry *entry = FUN_003f0e20(btlGetMainState(), id);
+    BtlEntry *entry = FUN_003f0e20(static_cast<void *>(btlGetMainState()), id);
 
     if (entry != NULL) {
         result = entry->value;

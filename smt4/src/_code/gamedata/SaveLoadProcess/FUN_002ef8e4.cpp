@@ -1,4 +1,5 @@
 #include "gamedata/SaveLoadProcessState.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 void FUN_001a1f7c(s32);
@@ -11,13 +12,12 @@ void buttonHelpRelease(void);
 void uiFadeRelease(void);
 void messageMainSetEnabled(s32);
 s32 FUN_00193c50(void);
-SaveLoadProcessWork24 *jobGetWork(void);
 extern SaveByteSettings g_byteSettings;
 
 // Hide normal messages while waiting for the save UI, then restore its resources.
-u32 FUN_002ef8e4(void)
+u32 FUN_002ef8e4(u32 job)
 {
-    SaveLoadProcessWork24 *work = jobGetWork();
+    SaveLoadProcessWork24 *work = (SaveLoadProcessWork24 *)jobGetWork(job);
     switch (work->state) {
     case 8:
         buttonHelpAcquireResources();

@@ -3,6 +3,7 @@
 #include "nw/math/MTX44.h"
 #include "shard/W6_W6Match7_CombinerState.h"
 #include "quest_center/qcMain.h"
+#include "shard/FUN_00169db4.h"
 
 using nw::math::MTX44;
 
@@ -46,7 +47,6 @@ void FUN_00158b2c(CombinerStage *stage);
 u32 *asdGxGetCommandCursor(void);
 u32 *FUN_0015fcec(CombinerState *state, u32 *cursor);
 void asdModelCommitCommandRange(u32 *begin, u32 *end);
-s32 FUN_00169db4(u32 viewport);
 s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 height);
 
 static __inline bool sameValue(f32 value, f32 expected)

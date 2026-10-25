@@ -1,11 +1,11 @@
 /* NON_MATCHING: map block pointer/capacity register assignment (r5/r6) swapped and the timer init uses stm instead of retail's writeback stores. */
 #include "map/MapIfTimer.h"
 #include "map/mapDepart.h"
+#include "shard/SaveWork.h"
 
 extern "C" {
 extern GameState g_gameState;
 extern const MapHintRecord DAT_00447ab0[9];
-void *gameGetMapBlock(void);
 u32 FUN_002bfdd4(void);
 s32 gameFlagIsSet(u32 flag);
 s32 gameCountUnits(void);

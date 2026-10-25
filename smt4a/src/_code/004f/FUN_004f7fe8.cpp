@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct SourceEntry {
@@ -18,7 +19,6 @@ struct SourceOwner {
 
 extern "C" {
 
-void *btlGetMainState(void);
 s32 stateEntryFindById(void *battle, u32 id);
 
 // Register the id in the first free slot of the table, unless the owner forbids it.
@@ -27,7 +27,7 @@ void FUN_004f7fe8(SourceTable *table, SourceOwner *owner, u32 id)
     if ((owner->flags & 0x20000) == 0) {
         for (s32 i = 0; i < 50; i++) {
             if (table->entries[i].id < 0) {
-                s32 state = stateEntryFindById(btlGetMainState(), id);
+                s32 state = stateEntryFindById(static_cast<void *>(btlGetMainState()), id);
                 table->entries[i].id = id;
                 table->entries[i].state = state;
                 return;

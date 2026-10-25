@@ -2,6 +2,7 @@
 /* Applies every element of `elements` to the target and the owner's state, then records `result` and the follow-up
  * value in the owner's result slots. */
 #include "common.h"
+#include "shard/FUN_002c5be8.h"
 
 extern "C" {
 struct ResultSlots {
@@ -33,7 +34,6 @@ struct ElementList {
 
 void FUN_0036b3a0(u32 *element, u32 handle);
 void FUN_003681fc(OwnerState *state, u32 *element);
-u32 FUN_002c5be8(u32 slot);
 
 /* Stores `value` in result slot `slot`. */
 static inline void setResultSlot(OwnerState *state, s32 slot, u32 value)

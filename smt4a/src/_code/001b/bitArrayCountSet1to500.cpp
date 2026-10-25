@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/bitArrayCountSet1to500.h"
 
 extern "C" {
 

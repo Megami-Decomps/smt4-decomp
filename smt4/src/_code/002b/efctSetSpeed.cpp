@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/efctSetSpeed.h"
 
 namespace { struct Effects { u8 padding[0x38]; float first; u8 gap1[12]; float second; u8 gap2[12]; float third; u8 gap3[12]; float fourth; u8 gap4[0x11]; u8 changed; u8 gap5[6]; float speed; }; union Speed { float value; s32 bits; }; }
 

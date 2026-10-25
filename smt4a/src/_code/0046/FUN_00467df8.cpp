@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_00467df8.h"
 
 extern "C" {
 int gameFlagIsSet(u32 flag);

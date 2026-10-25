@@ -1,4 +1,5 @@
 /* NON_MATCHING: stack frame is 272 rather than 292 bytes; effect-ID offset and temporary path addresses are folded differently. */
+#include "battle/BtlMainAccess.h"
 #include "battle/BattleMovementEffects.h"
 #include "gfx/RangeAnimationSelection.h"
 
@@ -6,7 +7,6 @@ namespace {
 struct BattleEffectNameRecord { u32 id; char name[1]; };
 }
 extern "C" {
-void *btlGetMainState();
 BattleEffectNameRecord *FUN_003f01d0(void *battle, u32 id);
 char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *memory, u32 size);
@@ -30,7 +30,7 @@ u32 FUN_004f913c(RangeAnimationOwner *owner)
         BattleMovementEffectResource effects[3];
     };
     typedef char EffectViewOffsetCheck[offsetof(EffectPresetView, effects) == 0x7c && offsetof(EffectOwnerView, effects) == 0x33e4 ? 1 : -1];
-    void *battle = btlGetMainState();
+    void *battle = static_cast<void *>(btlGetMainState());
     char path[128];
     char formatted[128];
     for (s32 index = 0; index < 3; ++index) {

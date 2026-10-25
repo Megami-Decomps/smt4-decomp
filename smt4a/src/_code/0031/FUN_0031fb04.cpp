@@ -5,6 +5,7 @@
 #include "nn/os/Thread.h"
 #include <stddef.h>
 #include "camp/Config/Config.h"
+#include "gamedata/DataTableSections.h"
 
 /* The memory mapped for the loader thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -51,7 +52,7 @@ struct UniteShutdownState {
     /* 0x920c */ UnitePreview *secondModel;
     /* 0x9210 */ UniteCamera *camera;
     /* 0x9214 */ u8 unk9214[0x44];
-    /* 0x9258 */ u8 registered;
+    /* 0x9258 */ s8 registered;
     /* 0x9259 */ u8 unk9259[7];
     /* 0x9260 */ s32 frames;
     /* 0x9264 */ u8 stopRequested;
@@ -80,9 +81,8 @@ void uniteCameraDestroy(void);
 void ptrListRemoveClearOwner(u32 registry, u32 owner);
 void FUN_0038b3f8(s32 id, s32 flag);
 void scrScriptProcessDestroy(s32 process);
-void ptrTable44FreeAll(void);
+void *ptrTable44FreeAll(void *table);
 void jobStop(u32 job, s32 arg);
-void dataTableFree(s32 table);
 void mapSettings5BSetValueIfActive(s32 value);
 }
 
@@ -153,8 +153,7 @@ extern "C" void FUN_0031fb04(void)
     asdMemFree(unite->workMemory);
     asdMemFree(unite->scriptMemory);
     if (unite->table != NULL) {
-        ptrTable44FreeAll();
-        asdOperatorDelete(unite->table);
+        asdOperatorDelete(ptrTable44FreeAll(unite->table));
     }
     unite->table = NULL;
     jobStop(unite->job, 0);

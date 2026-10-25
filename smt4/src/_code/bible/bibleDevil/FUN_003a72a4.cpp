@@ -1,5 +1,6 @@
 /* NON_MATCHING: existing row-ID getter restores ldrh/sxth/uxth, but its clobber set delays mov r2,0; refresh stores also choose swapped scratch registers. */
 #include "common.h"
+#include "bible/bibleDevil.h"
 
 /* One animated cursor channel of the screen's widget. */
 struct BibleDevilChannel { u8 unk00[0x8c]; };
@@ -45,7 +46,6 @@ u32 vec2GetYInt(BibleDevilChannel *);
 u32 vec2GetXInt(BibleDevilChannel *);
 void pointConvertToFloat(void *, u32, u32);
 s32 gameGetNavigationState(void);
-s32 FUN_00293aac(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);

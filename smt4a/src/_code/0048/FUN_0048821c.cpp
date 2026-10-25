@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail retains separate read/write bases for the large texture flag; register allocation differs. */
 #include "shard/NaviMain.h"
+#include "event/bustupEvent/BustupTex.h"
 
 /* Local view: the resource flag is inside NaviMainA's opaque panel union. */
 struct NaviMapSelectionView {
@@ -12,7 +13,6 @@ struct NaviMapSelectionView {
 };
 extern "C" {
 u32 FUN_004931c4(void);
-void FUN_0014afd0(s32, s32);
 void asdTMTexTableReleaseNode(s32, s32);
 void FUN_0049105c(NaviMainA *, s32);
 void FUN_0048cee0(NaviMainA *, s32);

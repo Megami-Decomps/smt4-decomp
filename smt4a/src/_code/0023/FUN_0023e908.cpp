@@ -1,10 +1,10 @@
 /* NON_MATCHING: touch-count base address is hoisted before cleanup and the first-page population branch is laid out earlier. */
 #include "ui/PartyPanelState.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;
-GameSlotTable *gameGetSlotTable(void);
 void ifTouchRegionRemove(void);
 u16 FUN_001643b4(u32, s32);
 void __aeabi_memset4(void *, u32, s32);

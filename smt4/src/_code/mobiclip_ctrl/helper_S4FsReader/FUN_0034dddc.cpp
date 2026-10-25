@@ -4,8 +4,8 @@
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes);
 
 /* The storage that owns the reader thread's stack (nn::os::ThreadStackStorage). */
 struct ReaderStack {

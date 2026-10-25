@@ -1,6 +1,7 @@
 /* Shuts the sound system down when it is running: unregisters the sound callbacks, finalises the master and voice
  * managers and, unless the DSP is owned elsewhere, the DSP sound state. Always returns 0. */
 #include "common.h"
+#include "mobiclip_ctrl/helper_S4AudioDevice.h"
 
 extern "C" {
 /* Flags of the sound system. */

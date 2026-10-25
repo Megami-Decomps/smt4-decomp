@@ -9,7 +9,7 @@ int FUN_00231bcc(...);
 int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
 int FUN_00288f78(...);
-int FUN_002be5a4(...);
+int textDrawString(...);
 int textFormatBuffer(unsigned char [128], unsigned char *);
 int FUN_002bed3c(void);
 int FUN_002bedb0(...);
@@ -45,7 +45,7 @@ extern int DAT_0049f920; /* 0x49f920 */
 extern unsigned int curveEvaluateStandard(int, unsigned int);
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_00288f78. */
-/* Supplied declaration required: FUN_002be5a4. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern unsigned int vec2GetYInt(int);
@@ -53,7 +53,7 @@ extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: libc_strcpy. */
 extern int gameFlagIsSet(unsigned int);
@@ -132,7 +132,7 @@ void FUN_00231dec(int param_1)
   if (*(char *)(param_1 + 0x12268) != '\0') {
     temp_v3 = curveEvaluateStandard(temp_v9,2);
     temp_v14 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v5 = FUN_002bf4f8(0x1c,0xfb4);
+    temp_v5 = asdTMTexTableEntryAt(0x1c,0xfb4);
     temp_v12 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v12 = (float)VectorSignedToFloat((int)(temp_v12 + temp_v16) +
@@ -140,7 +140,7 @@ void FUN_00231dec(int param_1)
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(temp_v12 - temp_v14 * 0.5f),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(temp_v13 + temp_v17),(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002be5a4(2,0xffffffff,temp_v9);
+    textDrawString(2,0xffffffff,temp_v9);
   }
   temp_v3 = packNibblesAndByte(6,1,0);
   FUN_002bee04(g_titleScene,6,temp_v3);

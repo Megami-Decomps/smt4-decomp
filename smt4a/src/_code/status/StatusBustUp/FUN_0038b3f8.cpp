@@ -2,10 +2,10 @@
 #include "status/StatusBustUp.h"
 #include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/Table00Lookup.h"
 extern "C" {
 extern StatusBustUpResources DAT_00588fd8;
 extern void *g_aocSystem;
-void *dataTable00FindById(u16 id);
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void FUN_001b2d54(void *system, u32 table, u32 node);

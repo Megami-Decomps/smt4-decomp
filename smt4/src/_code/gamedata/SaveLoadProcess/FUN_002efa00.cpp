@@ -3,6 +3,7 @@
 #include "shard/JobWork.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
+#include "gamedata/SaveLoadProcess.h"
 
 struct SaveFilePayloadIV {
     u32 table[32];
@@ -12,7 +13,6 @@ struct SaveFilePayloadIV {
 typedef char SaveFilePayloadIVSizeCheck[sizeof(SaveFilePayloadIV) == 0x24db0 ? 1 : -1];
 extern "C" {
 s32 FUN_001a1d08();
-s32 FUN_002cedbc();
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *gameDataBlocksGetTable();

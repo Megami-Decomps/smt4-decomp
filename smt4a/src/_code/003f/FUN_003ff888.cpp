@@ -1,12 +1,12 @@
 /* NON_MATCHING: The filter countdown stays in r1 rather than retail's saved r4, adding an index initialization. */
 #include "shard/Shard0031.h"
 #include <stddef.h>
+#include "gamedata/SaveSlotTable.h"
 
 struct SlotRecord;
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 SlotRecord *gameGetSlotRecord(s32 slot);
-SlotTable *gameGetSlotTable(void);
 s32 FUN_004bd0d8(SlotRecord *record);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
 s32 FUN_004bd730(SlotRecord *record);

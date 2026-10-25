@@ -5,7 +5,7 @@ struct ScriptTransitionContext;
 
 extern "C" {
 void scrCommMessageSetMode(s32 mode);
-ScriptTransitionContext* FUN_002ba85c();
+ScriptTransitionContext* scrGetCommandOwner();
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame();
 void FUN_0021bdac(ScriptTransitionContext* context, u32 first, u32 frame, s32 mode, s32 flags, u32 second);
@@ -14,7 +14,7 @@ void FUN_0021bdac(ScriptTransitionContext* context, u32 first, u32 frame, s32 mo
 void FUN_002a32ec()
 {
     scrCommMessageSetMode(0);
-    ScriptTransitionContext* context = FUN_002ba85c();
+    ScriptTransitionContext* context = scrGetCommandOwner();
     u32 first = scrGetArg(0);
     u32 second = scrGetArg(1);
     u32 frame = scrGetCommandFrame();

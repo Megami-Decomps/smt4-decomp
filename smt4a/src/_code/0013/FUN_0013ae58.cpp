@@ -2,11 +2,11 @@
 /* Initializes voice playback defaults and loads the voice panning table. */
 #include "shard/GlobalBlocks.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 s32 jyoucyuGetTableEntry(u32 index);
 void FUN_00143800(void);
-void asdSoundSetHasStream(s32 enabled);
 void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames,
                        u32 mode, u32 fadeInFrames, u32 fadeOutFrames);
 

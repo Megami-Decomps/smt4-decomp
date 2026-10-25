@@ -2,7 +2,7 @@
 #include "gamedata/ProgressionUnlock.h"
 
 extern "C" {
-void FUN_002c7b8c(u16 id, s32 enabled);
+void gameDataSetStatusFlag(u16 id, s32 enabled);
 s32 FUN_002c2758(u16 id);
 s32 FUN_0041862c(u32 kind);
 
@@ -23,7 +23,7 @@ void FUN_003dec50(void)
             }
         }
         if (record != NULL && !FUN_002c2758(id) && record->threshold <= progress)
-            FUN_002c7b8c(id, 1);
+            gameDataSetStatusFlag(id, 1);
     }
 }
 }

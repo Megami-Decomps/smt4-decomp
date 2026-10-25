@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail saves a separate zero failure result in r5; compiler returns immediate zero and hoists r1 setup before the signed slot split. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
-u32 jyoucyuGetTableEntry(u32 index);
 s32 soundStopSlotWithFade(u32 index, s32 frames);
 s32 soundSlotApplyTransition(u32 index, s32 frames);
 

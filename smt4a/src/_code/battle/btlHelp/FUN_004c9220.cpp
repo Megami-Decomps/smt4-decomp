@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail keeps the 16 zeroed words and the list links in fp/sl-based stores scheduled after the second payload copy and loads the help context through a VFP register (vldr s16); the build orders the stores and registers differently. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA *btlGetMainState(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 BtlHelpEntryA *FUN_00200a68(u32 id, u16 message, u32 first, u32 second, const void *combatant, u8 mode,

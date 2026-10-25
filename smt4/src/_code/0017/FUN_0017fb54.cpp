@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 

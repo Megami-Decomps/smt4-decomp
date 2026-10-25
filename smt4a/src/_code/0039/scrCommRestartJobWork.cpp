@@ -1,4 +1,5 @@
 #include "shard/Shard0039.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct Work64 {
 
 extern u32 scrGetArg(s32 index);
 extern s32 jobIsValid(u32 job);
-extern Work64 *jobGetWork(u32 job);
 
 /* Script command: restarts the job work area's counter with argument 1. */
 u32 scrCommRestartJobWork(void)
@@ -23,7 +23,7 @@ u32 scrCommRestartJobWork(void)
     Work64 *work;
 
     if (jobIsValid(job) != 0) {
-        work = jobGetWork(job);
+        work = (Work64 *)jobGetWork(job);
         work->unk6C = work->unk10;
         work->unk64 = 0;
         work->unk68 = value;

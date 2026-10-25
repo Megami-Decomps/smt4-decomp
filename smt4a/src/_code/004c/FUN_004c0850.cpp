@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c0850` (_code @ 0x4c0850, 0x714 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int FUN_003f0e20(...);
 int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
@@ -54,7 +54,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  puVar2 = (unsigned int *)btlGetMainState();
+  puVar2 = (unsigned int *)reinterpret_cast<int>(btlGetMainState());
   puVar3 = puVar2;
   FUN_003f0e20(puVar2,param_1);
   if (puVar3 == (unsigned int *)0x0) {
@@ -178,7 +178,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x80) != 0) {
     temp_v3 = FUN_004c53fc(0x1b);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe0) = temp_v3;
@@ -186,7 +186,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x40) != 0) {
     temp_v3 = FUN_004c53fc(0x1c);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe4) = temp_v3;
@@ -194,7 +194,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x100) != 0) {
     temp_v3 = FUN_004c53fc(0x1d);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xe8) = temp_v3;
@@ -202,7 +202,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 8) != 0) {
     temp_v3 = FUN_004c53fc(0x1e);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xec) = temp_v3;
@@ -210,7 +210,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x800) != 0) {
     temp_v3 = FUN_004c53fc(0x1f);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf0) = temp_v3;
@@ -218,7 +218,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x1000) != 0) {
     temp_v3 = FUN_004c53fc(0x20);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf4) = temp_v3;
@@ -226,7 +226,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x2000) != 0) {
     temp_v3 = FUN_004c53fc(0x21);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xf8) = temp_v3;
@@ -234,7 +234,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
   }
   if ((param_3 & 0x10) != 0) {
     temp_v3 = FUN_004c53fc(0x22);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_003f0e20(temp_v1,param_1);
     if (temp_v1 != 0) {
       *(unsigned int *)(temp_v1 + 0xfc) = temp_v3;
@@ -249,7 +249,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     temp_v4 = temp_v4 | DAT_005713f4;
     *puVar3 = temp_v2 | DAT_005713f0;
     puVar3[1] = temp_v4;
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_1 * 0x1d0;
     *(unsigned int *)(temp_v1 + 0x50) = *(unsigned int *)(temp_v1 + 0x50) | 0x81;
     if ((puVar2[0x1169] & DAT_0057148c) != 0 || (puVar2[0x1168] & DAT_00571488) != 0) {
@@ -267,7 +267,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     temp_v4 = temp_v4 | DAT_005713f4;
     *puVar3 = temp_v2 | DAT_005713f0;
     puVar3[1] = temp_v4;
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_1 * 0x1d0;
     *(unsigned int *)(temp_v1 + 0x50) = *(unsigned int *)(temp_v1 + 0x50) | 0x81;
     if ((puVar2[0x1169] & DAT_0057148c) != 0 || (puVar2[0x1168] & DAT_00571488) != 0) {

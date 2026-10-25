@@ -7,7 +7,6 @@ s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
 s32 useCounterGetValue(void);
-void buttonHelpSelectMenuPreset(ShopScreen *screen);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 void FUN_0027f3dc(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_0039fcd8(const void *, const void *);

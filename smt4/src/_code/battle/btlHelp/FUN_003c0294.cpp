@@ -1,5 +1,6 @@
 /* NON_MATCHING: Unlinking keeps the list owner in r0 and moves the entry into the free argument only after updating the links. */
 #include "common.h"
+#include "shard/dialogIsActive.h"
 
 struct BtlHelpEntry {
     /* 0x000 */ u16 unk000;
@@ -16,7 +17,6 @@ struct BtlHelpEntryList {
 };
 extern "C" {
 extern BtlHelpEntryList *DAT_00435d78;
-s32 dialogIsActive(void);
 void infoWinStartTimer(u32 value);
 void asdMemFree(void *allocation);
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: instruction-for-instruction the same unrolled loops; only register allocation differs (retail keeps the -1 owner constant in ip and the entry address temporaries in r6/r7). */
 #include "common.h"
+#include "gamedata/SaveSlotTable.h"
 
 namespace {
 // A selectable entry in the camp's list: a skill id and the party slot that owns it (-1: the player).
@@ -20,16 +21,10 @@ struct SlotRecord {
     u16 skills[8];                  // 0x34
 };
 
-// The party slot table: one owner byte per slot.
-struct SlotTable {
-    u8 unk0000[0x1C88];
-    s8 owner[24];                   // 0x1C88
-};
 }
 
 extern "C" {
 extern CampWork *g_camp;
-SlotTable *gameGetSlotTable(void);
 SlotRecord *gameGetSlotRecord(s32 owner);
 void sysMemClear(void *memory, u32 size);
 void playerGetWords(u16 *words, s32 kind);
@@ -40,7 +35,7 @@ void FUN_003d0bc0(s32 mode);
 void FUN_0026f7f0(void)
 {
     CampWork *camp = g_camp;
-    SlotTable *slots = gameGetSlotTable();
+    SaveSlotTable *slots = gameGetSlotTable();
     u32 count = 0;
     sysMemClear(camp->entries, sizeof(camp->entries[0]) * 200);
     u16 words[8];
@@ -53,17 +48,17 @@ void FUN_0026f7f0(void)
         }
     }
     for (s32 slot = 0; slot < 24; slot++) {
-        if (slots->owner[slot] < 0) {
+        if (slots->party[slot] < 0) {
             continue;
         }
-        SlotRecord *record = gameGetSlotRecord(slots->owner[slot]);
+        SlotRecord *record = gameGetSlotRecord(slots->party[slot]);
         if (record == NULL) {
             continue;
         }
         for (s32 i = 0; i < 8; i++) {
             if (record->skills[i] != 0) {
                 camp->entries[count].id = record->skills[i];
-                camp->entries[count].owner = slots->owner[slot];
+                camp->entries[count].owner = slots->party[slot];
                 count++;
             }
         }

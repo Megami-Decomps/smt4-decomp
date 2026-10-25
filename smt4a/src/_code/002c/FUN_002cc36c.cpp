@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cc36c` (_code @ 0x2cc36c, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "util/CalleeContracts.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int FUN_00163aa4(int);
 int pairSetSecondResetFirst(int, int);
 int uiSpriteSelectAnim(...);
@@ -154,7 +154,7 @@ LAB_002cc580:
         }
       }
       else {
-        btlGetMainState();
+        reinterpret_cast<int>(btlGetMainState());
         temp_v2 = btlScriptUnitHasFlags();
         if (temp_v2 != 0) {
           if (*(int *)(temp_v5 + 0xb650) >= 0xc) {

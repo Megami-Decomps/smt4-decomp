@@ -3,9 +3,9 @@
 #include "shard/Shard0031.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/Shard004B.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
-const ActiveSkillRecord *dataTable04FindById(u32 id);
 s32 FUN_0028809c(s32 source, s32 target, const ActiveSkillRecord *skill, s32 preview, s32 flags);
 BtlEquip *gameGetPlayerData();
 BtlEquip *gameGetSlotRecord(s32 index);
@@ -17,7 +17,7 @@ s32 FUN_004bcbb4(const ItemRankRecord *unit, u32 costParameter);
 u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
 {
     u8 applied = 0;
-    const ActiveSkillRecord *skill = dataTable04FindById(skillId);
+    const ActiveSkillRecord *skill = (const ActiveSkillRecord *)dataTable04FindById(skillId);
     if (skill != NULL) {
         if (FUN_0028809c(source, -1, skill, preview, 0) == 0) {
             applied = 1;

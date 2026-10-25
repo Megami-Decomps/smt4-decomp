@@ -1,9 +1,9 @@
 /* NON_MATCHING: combatant flag loads and action-list branch placement differ. */
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
-void *dataTable04FindById(s32);
 s32 FUN_002a6a38(const void *);
 }
 

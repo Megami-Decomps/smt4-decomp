@@ -1,15 +1,18 @@
-/* NON_MATCHING: compiler reduces the flag test to bic rather than retail's tst and conditional moves. */
+/* NON_MATCHING: the clear-bit result is built with tst plus conditional moves as retail, but armcc orders movne r0, #0 before moveq r0, #1 where retail has moveq first. */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
-
-namespace { struct Battle { u8 padding[0x44a0]; u32 flags; }; }
 
 extern "C" {
 /* Reads or updates the requested task state. */
-Battle *btlGetMainState(void);
 u32 FUN_002f6d00(void)
 {
-    scrSetResult((btlGetMainState()->flags & 2) == 0);
+    s32 result;
+    if (btlGetMainStateExt()->flags44A0 & 2)
+        result = 0;
+    else
+        result = 1;
+    scrSetResult(result);
     return 1;
 }
 }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: controller state reload after btlGetMainState uses r0 rather than retail's r1 and is scheduled after the result copy. */
+#include "battle/BtlMainAccess.h"
 #include "shard/Shard0034.h"
 
 namespace {
@@ -22,7 +23,6 @@ extern "C" {
 void FUN_00410f84(BattleAnimationControllerView *controller);
 void FUN_00412248(BattleAnimationControllerView *controller);
 void FUN_00416840(void *argument);
-BtlStateB *btlGetMainState(void);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 
 // Apply state transitions, advance looping animation slots and saturate the elapsed-frame count.
@@ -39,7 +39,7 @@ u32 FUN_0041210c(BattleAnimationControllerView *controller)
         controller->unk14 = 0;
     }
     FUN_00412248(controller);
-    BtlStateB *battle = btlGetMainState();
+    BtlStateB *battle = reinterpret_cast<BtlStateB *>(btlGetMainState());
     if (controller->state != 1 && controller->state != 2) {
         for (s32 index = 0; index < 12; ++index) {
             LinkEntry10 *entry = &battle->entries4D78[index];

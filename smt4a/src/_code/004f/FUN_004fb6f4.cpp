@@ -1,4 +1,5 @@
 /* NON_MATCHING: the stack follow-up pair loads with LDM into r5/r6 instead of retail's LDRD into r4/r5; callee-saved registers rotate accordingly. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -11,7 +12,6 @@ struct ReflectTargetA {
 }
 extern "C" {
 
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 listedId);
 
 /* Queues a target action with an integer payload and an optional battle-unit follow-up. */

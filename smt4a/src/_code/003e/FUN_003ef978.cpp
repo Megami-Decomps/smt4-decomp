@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail grouped bit tests or aggregate-copy runtime selection differs. */
 #include "common.h"
 
 struct TargetFlags { u8 unk00[0x50]; u32 flags; };
@@ -9,9 +8,6 @@ extern "C" void FUN_003ef978(u32 unused, TargetFlags *target, s32 category)
         target->flags |= 0x200;
     else if (category < 54)
         target->flags |= 0x400;
-    else {
-        if (category >= 55)
-            return;
+    else if (category < 55)
         target->flags |= 0x800;
-    }
 }

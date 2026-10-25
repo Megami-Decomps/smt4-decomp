@@ -63,7 +63,7 @@ u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32
                 first = 0x1ad;
                 last = first;
             }
-            for (s32 i = 0; i < 24; ++i) {
+            for (u32 i = 0; i < 24; ++i) {
                 u16 skill = filter->skills[i];
                 if (!skill)
                     return 0;

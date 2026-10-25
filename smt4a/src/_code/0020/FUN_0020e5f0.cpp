@@ -1,6 +1,7 @@
 /* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, lr}. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct HolderView;
 
@@ -25,7 +26,6 @@ struct BootStateView {
 };
 
 extern "C" {
-void* asdOperatorNew(u32 size);
 void runnerShutdown();
 void FUN_002ef9ec();
 HolderView* vtblHolderInit557bbc(HolderView* self);

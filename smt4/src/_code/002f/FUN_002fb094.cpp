@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/FlagBitTests.h"
 
 namespace { struct Map { u8 padding[0xe58]; u32 flags[32]; }; }
 

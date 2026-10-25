@@ -1,9 +1,9 @@
 /* NON_MATCHING: canonical action stores do not use retail writeback addressing; zero values are coalesced into fewer saved registers. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 s32 FUN_00293230(BtlMainState *battle);
 void FUN_0023c1bc(s32 side, u32 options, u32 actor);
 

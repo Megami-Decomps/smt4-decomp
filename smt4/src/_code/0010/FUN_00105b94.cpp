@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail chains the three component initializer return-this values in R0; the current void helper API requires preserving the allocation and computing independent member addresses. */
 #include "title/titleMain.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 namespace {
 struct TitleSceneStorage {
@@ -13,7 +14,6 @@ struct TitleSceneStorage {
 }
 
 extern "C" {
-void* asdOperatorNew(u32);
 void _ZN10FloatStateC1Ev(void*);
 void FUN_0010f144(TitleScene*);
 extern TitleScene* g_titleScene;

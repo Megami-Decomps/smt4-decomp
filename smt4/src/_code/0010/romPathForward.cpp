@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/romPathForward.h"
 
 extern "C" {
 

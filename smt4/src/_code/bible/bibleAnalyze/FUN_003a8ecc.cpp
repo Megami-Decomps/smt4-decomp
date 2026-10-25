@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "util/CalleeContracts.h"
 #include "status/StatusCamera.h"
+#include "bible/bibleAnalyze.h"
 
 /* This analysis screen extends beyond the shared BibleScreen work area. */
 struct BibleAnalyzeCursorView {
@@ -41,7 +42,6 @@ void FUN_002b8ee0(BibleAnalyzeCursorView *, s32);
 s32 vec2GetYInt(BibleAnalyzeCursorView *);
 s32 vec2GetXInt(BibleAnalyzeCursorView *);
 void pointConvertToFloat(void *, s32, s32);
-s32 buttonHelpIsNotActive(void);
 s32 flaggedValueHolderGetTotal(void *);
 void FUN_0029da34(s32, s32, u16, s32);
 const char *dataLookupDisplayName(u8 *, u32);

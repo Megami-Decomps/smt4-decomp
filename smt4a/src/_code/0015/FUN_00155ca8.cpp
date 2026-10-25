@@ -10,7 +10,7 @@ int FUN_00164168(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(int, int, int, int);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int renderCtxCalculateStereoParallax(int);
 
 typedef int romwright_code(...);
@@ -32,7 +32,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
 
@@ -147,7 +147,7 @@ char FUN_00155ca8(void)
   FUN_001835b4(2,8,0x88,temp_v2,temp_v3,0x15);
   efctSetSpeed();
   if (*(char *)(temp_v1 + 0x31) != '\0') {
-    temp_v7 = FUN_001834a4(8,0x87);
+    temp_v7 = asdTMTexTableEntryAt(8,0x87);
     efctSetSpeed();
     temp_v6 = g_renderCtx;
     temp_v10 = 0;
@@ -163,7 +163,7 @@ char FUN_00155ca8(void)
     }
     FUN_00168e00(*(short *)(temp_v7 + 8) + temp_v2,*(short *)(temp_v7 + 10) + temp_v3,
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1]);
-    temp_v6 = FUN_001834a4(8,0x89);
+    temp_v6 = asdTMTexTableEntryAt(8,0x89);
     if (*(char *)(temp_v1 + 0x33) != '\0') {
       FUN_00164168(*(unsigned int *)(temp_v1 + 0x328),*(short *)(temp_v6 + 8) + temp_v2,
                    *(short *)(temp_v6 + 10) + temp_v3,0xc9,6,0);
@@ -198,7 +198,7 @@ char FUN_00155ca8(void)
     if (temp_v6 != 1) {
       if (temp_v6 != 2) {
         if (temp_v6 == 3) {
-          FUN_001834a4(8,0x89);
+          asdTMTexTableEntryAt(8,0x89);
           FUN_001835b4(2,8,0x102,temp_v2,temp_v3,0x1f);
         }
       }

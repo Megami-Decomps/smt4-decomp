@@ -2,13 +2,13 @@
 #include "gfx/ModelMatrixUpload.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "Model/MoriModelEffect.h"
+#include "shard/gpuCmdWriteCopy.h"
 
 extern "C" {
 void FUN_00177684(u32 program, u32 mode, u32 enabled);
 void FUN_0016d338(ModelCommandWriter *writer, u32 *begin);
 void FUN_0019a2ac(u32 *commands, const f32 *matrix, u32 header);
 void FUN_0019a270(u32 *commands, const f32 *matrix, u32 header);
-u32 *gpuCmdWriteCopy(u32 *commands, u32 **sizePatch, const u32 *source, u32 bytes);
 
 // Upload projection/model matrices and append a linked segment of model commands.
 void FUN_00157c3c(ModelMatrixUploadOwner *owner, ModelMatrixUploadSource *source,

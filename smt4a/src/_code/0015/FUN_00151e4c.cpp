@@ -13,7 +13,7 @@ int FUN_00168bec(...);
 int FUN_001696d4(void *, int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(unsigned int, int, unsigned int);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int FUN_00183bb0(void);
 int VectorSignedToFloat(...);
 
@@ -58,7 +58,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001696d4. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 
 
@@ -91,11 +91,11 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
       renderCtxPopState(g_renderCtx,3);
       return;
     }
-    temp_v1 = FUN_001834a4(0x2f,0x97);
+    temp_v1 = asdTMTexTableEntryAt(0x2f,0x97);
     temp_v3 = 0;
     if (temp_v3 < param_1->field_0x20) {
       do {
-        temp_v2 = FUN_001834a4(0x2f,temp_v3 + 0x98);
+        temp_v2 = asdTMTexTableEntryAt(0x2f,temp_v3 + 0x98);
         if (param_1->field_0x18 == temp_v3) {
           FUN_00164b5c(2,0x2f,0x12,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10),0xb);
           pvVar4 = param_1->field_0x4;
@@ -142,7 +142,7 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
     if (0 < temp_v1) {
       temp_v8 = 0xc0a0000043700000;
       do {
-        temp_v1 = FUN_001834a4(8,temp_v9[temp_v3 + temp_v4]);
+        temp_v1 = asdTMTexTableEntryAt(8,temp_v9[temp_v3 + temp_v4]);
         if (param_1->field_0x18 == temp_v4) {
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 10;
           positionStateSet(param_1->field_0x4,0,0xffffffff);

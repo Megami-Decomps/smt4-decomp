@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "shard/asdMemoryAllocTracked.h"
 
 struct SoundSystemStatusViewA {
     u8 unk0000[0x12fc];
@@ -11,7 +12,6 @@ struct SoundSystemStatusViewA {
 extern "C" {
 extern SoundSystemStatusViewA g_asdSoundSystem;
 extern const char DAT_0053d414[];
-void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 void nn_snd_CTR_FreeVoice(u32 voice);
 void sysMemClear(void *memory, u32 size);
 void FUN_00153cd0(AsdSndObject *sound, u32 data, u32 option, u32 kind, f32 gain0, f32 gain1);

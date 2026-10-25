@@ -1,4 +1,3 @@
-/* NON_MATCHING: selection uses a literal offset and stack arguments use STRD instead of retail short-offset loads and STR. */
 #include "common.h"
 
 extern "C" {
@@ -21,9 +20,10 @@ extern CampCecEdit *g_campCecEdit;
 void *FUN_0032d61c(u32 effectId, void *resource, void *parameters, u32 mode, u32 flags, s32 selection);
 s32 campCecEditCreateEffect(void)
 {
-    if (g_campCecEdit->options.enabled != 0) {
-        FUN_0032d61c(g_campCecEdit->effectId, g_campCecEdit->resource,
-                     g_campCecEdit->parameters, 0, 0, g_campCecEdit->options.selection);
+    CampCecEdit *edit = g_campCecEdit;
+    CampCecEditOptions *options = &edit->options;
+    if (options->enabled != 0) {
+        FUN_0032d61c(edit->effectId, edit->resource, edit->parameters, 0, 0, options->selection);
     }
     return 0;
 }

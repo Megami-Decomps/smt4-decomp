@@ -1,4 +1,5 @@
 /* NON_MATCHING: paired mask loads, chance comparison registers and chosen-ID lifetime differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct ReinforcementMasksView {
@@ -11,7 +12,6 @@ struct ReinforcementMasksView {
 };
 extern "C" {
 extern ReinforcementMasksView DAT_005713f0;
-BtlMainStateA *btlGetMainState();
 u32 lcgRandomRange(s32 limit);
 u16 FUN_004bc420(u32, u32, s32);
 

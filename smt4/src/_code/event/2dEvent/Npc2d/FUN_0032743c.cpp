@@ -2,6 +2,7 @@
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemAlloc.h"
 
 struct NpcTextureSource {
     u8 unk00[0x24];
@@ -21,10 +22,9 @@ typedef char NpcTextureRecordOffsets[
 extern "C" {
 extern const char DAT_0040357c[], DAT_00403570[];
 extern const u8 DAT_0040356c[3];
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void memClear(void *, u32);
 NpcTextureSource *dataTable25FindById(s32);
-NpcTextureImage *FUN_002bf4f8(u32, s32);
+NpcTextureImage *asdTMTexTableEntryAt(u32, s32);
 s32 FUN_002c1d5c();
 void FUN_002c58c8(s32, s32);
 s32 FUN_001dfc64(u32);
@@ -51,7 +51,7 @@ void FUN_0032743c(s32 npcId)
     work->npc.source = dataTable25FindById(npcId);
     work->textureNode = work->npc.source->textureId;
     for (u32 index = 0; index < 3; ++index) {
-        NpcTextureImage *image = FUN_002bf4f8(0x32, DAT_0040356c[index]);
+        NpcTextureImage *image = asdTMTexTableEntryAt(0x32, DAT_0040356c[index]);
         work->npc.sizes[index][0] = image->width;
         work->npc.sizes[index][1] = image->height;
         if (index == 0 && image->origin != NULL) {

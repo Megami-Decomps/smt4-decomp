@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/gameDataBlocksGetStats.h"
 
 extern "C" {
 

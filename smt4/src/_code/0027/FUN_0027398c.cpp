@@ -3,6 +3,7 @@
 #include "quest_center/QuestRuntime.h"
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
+#include "shard/FUN_002903f0.h"
 
 struct QuestAddonScriptWork {
     u32 state;
@@ -17,7 +18,6 @@ typedef char QuestAddonScriptWorkOffsets[offsetof(QuestAddonScriptWork, commands
 
 extern "C" {
 extern AocSystem *g_aocSystem;
-u32 FUN_002903f0();
 const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 id);
 s32 aocPackageGrantsItem(AocSystem *system, u16 id, u32 kind);
 void aocQueueType07(AocSystem *system, u32 id, void **output, u32 flags);

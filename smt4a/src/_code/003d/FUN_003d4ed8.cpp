@@ -1,8 +1,8 @@
 /* NON_MATCHING: one position-setter argument move uses r6 rather than retail r4; all other instructions match. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
-void *jyoucyuGetTableEntry(u32 table);
 s32 FUN_00162ea4();
 u32 asd3dSoundActorIsPlaying(u32 channel);
 void FUN_0032cc8c(u32 channel, const BattleVector3 *position);

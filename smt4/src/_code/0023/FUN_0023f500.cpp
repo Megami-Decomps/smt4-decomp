@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies query into r4 (mov r4, r9) around the arrangement load and uses r1 for the flags |= update; otherwise identical */
 #include "battle/BattleEncounter.h"
+#include "shard/FUN_002896bc.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ void FUN_00254f58(BattleEncounterContext *context);
 void btlSetSelectedListedValue(s32 value);
 s32 FUN_002c2a04(u32 channel);
 void FUN_002c29d8(u32 channel, u32 frames, u32 volume);
-s32 FUN_002896bc(void);
 
 /* Starts loading the arrangement file for the encounter. */
 static __inline void battleEncounterLoadArrangement(BattleEncounterQuery *query, BattleEncounterContext *context)

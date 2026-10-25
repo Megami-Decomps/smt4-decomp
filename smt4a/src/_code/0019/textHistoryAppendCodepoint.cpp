@@ -1,9 +1,9 @@
 /* NON_MATCHING: typed text-write accessor introduces an explicit halfword conversion and different per-mode increment tails. */
 #include "shard/W6_W6Match8_TextHistory.h"
+#include "shard/FUN_0019be8c.h"
 
 extern "C" {
 extern RenderChannelState g_inputResetState;
-u8 FUN_0019be8c(u32 codepoint);
 
 // Append text-history characters or capture byte-swapped text between the capture control codes.
 void textHistoryAppendCodepoint(u32 codepoint)

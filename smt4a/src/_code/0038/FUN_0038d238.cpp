@@ -1,22 +1,14 @@
-/* NON_MATCHING: compiler uses separate field bases and retains the target instead of retail's paired load/reload sequence. */
-#include "shard/Shard0034.h"
+/* NON_MATCHING: retail's first erase pass loads the member list's begin/end pair with one `ldm` (begin first); the build loads end then begin. */
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-BtlStateB *btlGetMainState(void);
 
-// Bring the current value within one of the target, in steps of two.
+// Empty the list of battle members (retail runs the erase pass twice).
 u32 FUN_0038d238(void)
 {
-    BtlStateB *battle = btlGetMainState();
-    s32 target = battle->unk4E58;
-    s32 current = battle->unk4E5C;
-    if (target != current) {
-        current -= (current - target) & ~1u;
-        battle->unk4E5C = current;
-    }
-    target = battle->unk4E58;
-    if (target != current)
-        battle->unk4E5C = current - ((current - target) & ~1u);
+    std::vector<u16> &members = btlGetMainStateExt()->members;
+    members.clear();
+    members.clear();
     return 1;
 }
 }

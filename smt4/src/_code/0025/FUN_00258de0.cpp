@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation differs (retail keeps the source and effect arguments in their stack home slots across the calls) */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 /* The player's pad-side record (only the fields used here). */
@@ -30,7 +31,6 @@ struct RestoreEffect {
 extern "C" {
 RestorePlayer *gameGetPlayerData(void);
 RestoreUnit *gameGetUnitRecord(s32 unit);
-s32 btlGetMainState(void);
 s32 btlSourceGetMaxHp(RestorePlayer *player);
 s32 FUN_00269bf0(RestoreUnit *unit);
 s32 flagWordTestBit(RestoreUnit *unit, u32 bit);
@@ -60,14 +60,14 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
     s32 playerMaximum = 0;
     s32 unitMaximum = 0;
     if (player != NULL) {
-        if (btlGetMainState() == 0) {
+        if (reinterpret_cast<s32>(btlGetMainState()) == 0) {
             playerMaximum = player->maximum;
         } else {
             playerMaximum = btlSourceGetMaxHp(player);
         }
     }
     if (unit != NULL) {
-        if (btlGetMainState() == 0) {
+        if (reinterpret_cast<s32>(btlGetMainState()) == 0) {
             unitMaximum = unit->maximum;
         } else {
             unitMaximum = FUN_00269bf0(unit);

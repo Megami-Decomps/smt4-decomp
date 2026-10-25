@@ -3,6 +3,7 @@
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
+#include "shard/loadSlotIsLoaded.h"
 
 struct HowToWork {
     u32 job;
@@ -23,7 +24,6 @@ struct HowToControllerView {
 extern "C" {
 u32 scrGetCommandFrame();
 u32 scrGetArg(u32 index);
-u32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, s32 flags);
 void FUN_00348d7c(s32 id);
 void ifTouchRegionRemove();

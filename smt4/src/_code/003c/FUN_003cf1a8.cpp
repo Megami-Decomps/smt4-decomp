@@ -2,6 +2,7 @@
 #include "battle/ListedEntry.h"
 #include "battle/BattleUnitSlot.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "shard/randRange.h"
 
 /* A battle entry seen through its flags (bit 10 marks it) and its index at +0x6e. */
 struct MarkedEntry {
@@ -18,7 +19,6 @@ struct MarkedState {
 
 extern "C" {
 
-s32 randRange(u32 count);
 
 /* Picks a random marked battle entry (flag 0x400) and sets byte 0x38 of its unit. */
 void FUN_003cf1a8(MarkedState **owner)

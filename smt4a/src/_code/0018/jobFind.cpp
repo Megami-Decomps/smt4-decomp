@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/jobFind.h"
 
 
 extern "C" {

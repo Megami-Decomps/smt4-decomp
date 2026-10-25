@@ -22,8 +22,8 @@ const char *dataTable24Sub0GetRecordS90(u32 index);
 s32 sceneSelectionGetSlotId(void);
 void efctSetSpeed(f32 speed);
 void FUN_002bf380(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 order);
-LayoutRect *FUN_002bf4f8(u32 group, u32 id);
-void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 shear, f32 speed);
+LayoutRect *asdTMTexTableEntryAt(u32 group, u32 id);
+void textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 shear, f32 speed);
 void uiFormatIndexedDisplayName(SlotPanel *panel, u32 name, s32 slot, char *buffer);
 
 /* Draw one slot entry: its frame sprites, the selection highlight, its name and its price line. */
@@ -59,10 +59,10 @@ void uiSlotEntryDraw(f32 speed, SlotPanel *panel, u32 id, s32 x, s32 y, s32 sele
         detailColor = 0xffffffff;
     }
     const char *title = dataTable24Sub0GetRecordS90(id);
-    LayoutRect *rect = FUN_002bf4f8(0x24, 0xa4);
-    FUN_002be5a4(2, nameColor, title, rect->x + x, rect->y + y, 0.55f, 0.0f, speed);
-    rect = FUN_002bf4f8(0x24, 0xa6);
+    LayoutRect *rect = asdTMTexTableEntryAt(0x24, 0xa4);
+    textDrawString(2, nameColor, title, rect->x + x, rect->y + y, 0.55f, 0.0f, speed);
+    rect = asdTMTexTableEntryAt(0x24, 0xa6);
     uiFormatIndexedDisplayName(panel, name, slot, text);
-    FUN_002be5a4(2, detailColor, text, rect->x + x, rect->y + y, 0.55f, 0.0f, speed);
+    textDrawString(2, detailColor, text, rect->x + x, rect->y + y, 0.55f, 0.0f, speed);
 }
 }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct Owner {
     /* 0x1F58 */ u32 second;
 } Owner;
 
-extern void *dataTable04FindById(u32 id);
 extern u32 FUN_00335660(u32 a, void *record, s32 flag);
 
 /* Stores the results of FUN_00335660 for the id's record with and without the flag at 0x1f54 and 0x1f58. */

@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
+#include "text/TextDraw.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -29,10 +30,9 @@ void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 s32 vec2GetXInt(const void *vector);
 s32 vec2GetYInt(const void *vector);
-LayoutEntry *FUN_001834a4(u32 table, u32 entry);
+LayoutEntry *asdTMTexTableEntryAt(u32 table, u32 entry);
 void FUN_002c0940(u8 text[64], s32 value);
 f32 FUN_00168594(u8 text[64], u32 style, f32 scale);
-void FUN_00162790(u32 layer, u32 color, u8 text[64], f32 x, f32 y, f32 a, f32 b, f32 c);
 
 /* Draws the departure screen's counter panel under a temporary render-state preset. */
 u32 FUN_003581bc(void)
@@ -48,7 +48,7 @@ u32 FUN_003581bc(void)
             s32 x = vec2GetXInt(depart->position);
             s32 y = vec2GetYInt(depart->position);
             depart = g_mapDepart;
-            LayoutEntry *panel = FUN_001834a4(29, 202);
+            LayoutEntry *panel = asdTMTexTableEntryAt(29, 202);
             FUN_001835b4(2, 29, 194, panel->x + x, panel->y + y, 101);
             FUN_001835b4(2, 29, 195, panel->x + x, panel->y + y, 106);
             FUN_001835b4(2, 29, 196, panel->x + x, panel->y + y, 111);
@@ -58,11 +58,11 @@ u32 FUN_003581bc(void)
             if (counter > 9999) {
                 counter = 9999;
             }
-            LayoutEntry *digits = FUN_001834a4(29, 203);
+            LayoutEntry *digits = asdTMTexTableEntryAt(29, 203);
             u8 text[64];
             FUN_002c0940(text, counter);
             f32 width = FUN_00168594(text, 3, 1.0f);
-            FUN_00162790(3, 0x57d8ffff, text,
+            textDrawString(3, 0x57d8ffff, (const char *)text,
                          panel->x + digits->x + x + (56 - (s32)width) / 2,
                          panel->y + digits->y + y, 1.0f, 1.0f, 1.0f);
             FUN_00183bb0();

@@ -1,5 +1,6 @@
 /* NON_MATCHING: close: retail forms the self-pointer slot as a separate address (add r1, r0, #8; str r0, [r1]; add r0, r1, #0), hoists the zero priority into r4 and ends with a pop/branch tail call instead of a conditional tail call; the build folds the slot address and uses blne. */
 #include "common.h"
+#include "shard/FUN_002bbb2c.h"
 
 /* The user file system mount: its handle and the pointer to itself handed to the file layer. */
 struct FsMount {
@@ -21,7 +22,6 @@ void FUN_0011bb34(u32 handle);
 void FUN_0011bb90(FsMount **mount);
 u32 FUN_002bbaf8(void);
 s32 nn_fs_ipc_FileSystem_SetPriority(u32 *session, s32 priority);
-void FUN_002bbb2c(s32 result, u32 location);
 
 static __inline void reportIfFailed(s32 result, u32 location)
 {

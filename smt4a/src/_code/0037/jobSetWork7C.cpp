@@ -1,4 +1,5 @@
 #include "shard/Shard0037.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -8,11 +9,10 @@ typedef struct Work7C {
     /* 0x80 */ u32 unk80;
 } Work7C;
 
-extern Work7C *jobGetWork(u32 job);
 
 void jobSetWork7C(u32 job, u32 a, u32 b)
 {
-    Work7C *work = jobGetWork(job);
+    Work7C *work = (Work7C *)jobGetWork(job);
 
     work->unk7C = a;
     work->unk80 = b;

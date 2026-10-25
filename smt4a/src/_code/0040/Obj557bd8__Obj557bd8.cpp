@@ -15,7 +15,7 @@ struct TexHeader {
 
 extern "C" {
 s32 textFormatBuffer(char *output, const char *format, ...);
-SpriteInfo *FUN_001834a4(u32 group, s32 id);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 id);
 TexHeader *asdTMTexTableGetHeaderValue(u32 group, s32 index);
 }
 
@@ -43,27 +43,27 @@ Obj557bd8::Obj557bd8()
     slotState[6] = 0;
     slotState[7] = 0;
 
-    SpriteInfo *sprite = FUN_001834a4(12, 70);
+    SpriteInfo *sprite = asdTMTexTableEntryAt(12, 70);
     iconPos[0][0] = sprite->x;
     iconPos[0][1] = sprite->y;
-    sprite = FUN_001834a4(12, 71);
+    sprite = asdTMTexTableEntryAt(12, 71);
     iconPos[1][0] = sprite->x;
     iconPos[1][1] = sprite->y;
-    sprite = FUN_001834a4(12, 72);
+    sprite = asdTMTexTableEntryAt(12, 72);
     iconPos[2][0] = sprite->x;
     iconPos[2][1] = sprite->y;
-    sprite = FUN_001834a4(12, 81);
+    sprite = asdTMTexTableEntryAt(12, 81);
     frameSize[0][0] = sprite->x;
     frameSize[0][1] = sprite->y;
-    sprite = FUN_001834a4(12, 82);
+    sprite = asdTMTexTableEntryAt(12, 82);
     frameSize[1][0] = sprite->x;
     frameSize[1][1] = sprite->y;
     frameSize[0][1] = frameSize[1][1];
     barWidth = sprite->size[0];
-    const ColorRecord *color = (const ColorRecord *)FUN_001834a4(12, 107)->size;
+    const ColorRecord *color = (const ColorRecord *)asdTMTexTableEntryAt(12, 107)->size;
     colorA = ((u32)(color->r * 255.0f) << 24) | ((u32)(color->g * 255.0f) << 16) | ((u32)(color->b * 255.0f) << 8) |
              (u32)(color->a * 255.0f);
-    color = (const ColorRecord *)FUN_001834a4(12, 110)->size;
+    color = (const ColorRecord *)asdTMTexTableEntryAt(12, 110)->size;
     colorB = ((u32)(color->r * 255.0f) << 24) | ((u32)(color->g * 255.0f) << 16) | ((u32)(color->b * 255.0f) << 8) |
              (u32)(color->a * 255.0f);
     asdTMTexTableGetHeaderValue(12, 3)->mode = 3;

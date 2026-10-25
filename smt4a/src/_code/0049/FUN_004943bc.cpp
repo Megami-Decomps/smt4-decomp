@@ -1,9 +1,9 @@
 /* NON_MATCHING: Comparator locals use a different saved-register allocation and omit retail's extra right-entry pointer copy on a tie. */
 #include "common.h"
 #include "addon/AocEntryKind.h"
+#include "shard/contentGetUpgradedKindValue.h"
 
 extern "C" {
-s32 contentGetUpgradedKindValue(u16 id);
 u16 FUN_0049c9a0(const u16 *entry);
 
 /* Sorts selected content kinds by descending kind value, then by the entry's secondary key. */

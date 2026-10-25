@@ -1,9 +1,9 @@
 /* NON_MATCHING: position register allocation and crop/argument store scheduling differ. */
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern u32 g_aocSystem;
-s32 FUN_0014143c(u32 package, s32 icon);
 void effectSubmitPackageRequest(u32 package, s32 icon, s32 x, s32 y, s32 z);
 void FUN_002b04e8(u32 flags, u32 table, s32 image, PositionedLayoutPosition position, const void *clip);
 

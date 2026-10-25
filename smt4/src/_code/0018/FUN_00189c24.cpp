@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/FUN_00298dc8.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: FUN_00298d98. */
-extern int FUN_00298dc8(unsigned short);
 extern int idIsAtLeast350(unsigned int);
 extern int FUN_00298e00(unsigned int);
 extern int questIsCompleted(unsigned int);

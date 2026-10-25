@@ -1,6 +1,8 @@
 /* NON_MATCHING: O3 retains validate/record values in registers instead of retail's argument homes and record-pointer spill; eligibility and acceptance blocks are placed differently. O2 may recover the spill strategy. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
+#include "shard/gameFlagIsSet.h"
+#include "shard/gameRecordCopy.h"
 
 struct DemonLevelEntry {
     u16 id, level;
@@ -24,8 +26,6 @@ struct DemonEligibilityRecord {
 
 extern "C" {
 s32 devilIsAvailable(DemonLevelTable *, u16 id);
-s32 gameFlagIsSet(u32 flag);
-bool gameRecordCopy(u32 recordIndex, RecordValue *);
 
 // Find the closest eligible table entry at or below the requested level.
 u32 demonFindClosestEligibleLevel(DemonLevelTable *table, s32 category, u32 level, s32 validate)

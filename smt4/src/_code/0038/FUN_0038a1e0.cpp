@@ -42,7 +42,7 @@ s32 uiSpriteGetCompletionState(JobSprite *sprite);
 /* Per-frame update: plays the three sprites in sequence (fade in, hold, fade out). */
 s32 FUN_0038a1e0(u32 job)
 {
-    SpriteTrioWork *work = reinterpret_cast<SpriteTrioWork *>(jobGetWork(job));
+    SpriteTrioWork *work = (SpriteTrioWork *)jobGetWork(job);
     work->frame = (work->frame + 1) % 40;
     switch (work->state) {
     case 0:

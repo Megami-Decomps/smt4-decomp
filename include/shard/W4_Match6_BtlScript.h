@@ -40,4 +40,8 @@ typedef char BtlScriptUnitStatusLayout[
     offsetof(BtlScript, unitStatus) == 0x44b8 &&
     sizeof(BtlScript) == 0x49e4 ? 1 : -1];
 
+extern "C" {
+u8 FUN_003bf570(int value);
+}
+
 #endif

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps zero in s16 across libc_strlen and x/y in d9; compiler materializes zero after the call and packs x/y into d8. Candidate O2. */
+/* NON_MATCHING: retail moves the strlen result into r3 right after the call and loads the font through r0 (the state address in r0, font into r1); the build keeps the length in r0 until the end and uses r1 for both. */
 #include "shard/W6_W6Match2_TextDrawState.h"
 
 extern "C" {
@@ -10,7 +10,7 @@ void FUN_00181ae0(TextRenderer*, TextFont*, const char*, u32,
 // Draw with the current font, black RGB and the supplied alpha.
 void debugDrawText(TextRenderer* renderer, const char* text, f32 x, f32 y, f32 alpha)
 {
-    FUN_00181ae0(renderer, DAT_005b3bc0.font, text, libc_strlen(text),
-                  x, y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, alpha);
+    f32 zero = 0.0f;
+    FUN_00181ae0(renderer, DAT_005b3bc0.font, text, libc_strlen(text), x, y, zero, 1.0f, zero, zero, zero, alpha);
 }
 }

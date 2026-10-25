@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ff998` (_code @ 0x3ff998, 0x708 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 
@@ -51,13 +53,11 @@ extern unsigned int DAT_00573ca4; /* 0x573ca4 */
 extern unsigned int DAT_00573cb0; /* 0x573cb0 */
 extern unsigned int DAT_00573cb4; /* 0x573cb4 */
 
-extern int btlGetMainState(void);
 extern int recordGetScaledMaximum(unsigned int);
 /* Supplied declaration required: FUN_003ff22c. */
 /* Supplied declaration required: FUN_003ff524. */
 extern int btlCanSelectReservePartyMember(unsigned int *);
 extern int FUN_003ff888(void);
-extern int btlFindEntryValue(int, unsigned int);
 extern int FUN_004c6b8c(int, int);
 extern int halfTable152TopIs2(unsigned int *, unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -89,6 +89,7 @@ unsigned int FUN_003ff998(unsigned int *param_1,fn_003ff998_arg1 *param_2)
   unsigned char temp_v10;
   unsigned int temp_v11;
   unsigned int temp_v12;
+  BtlMainStateA *battle;
   
   temp_v9 = 0;
   temp_v0 = param_2->field_0x33;
@@ -270,9 +271,9 @@ LAB_003ffb9c:
     }
   }
   if (((temp_v6 & 0x800000) != 0) &&
-     ((temp_v5 = btlGetMainState(),
-      (*(unsigned int *)(temp_v5 + 0x45a4) & DAT_00573cb4) != 0 ||
-      (DAT_00573cb0 & *(unsigned int *)(temp_v5 + 0x45a0)) != 0 || ((*(unsigned int *)(temp_v5 + 0x10c) & 0x40000) == 0)
+     ((battle = btlGetMainState(),
+      (battle->stateFlags.words[1] & DAT_00573cb4) != 0 ||
+      (DAT_00573cb0 & battle->stateFlags.words[0]) != 0 || ((battle->encounter.statusFlags & 0x40000) == 0)
       ))) {
     temp_v8 = temp_v8 | 0x800000;
   }
@@ -286,10 +287,10 @@ LAB_003ffb9c:
     temp_v8 = temp_v8 | 0x4000000;
   }
   if ((temp_v6 & 0x8000000) != 0) {
-    temp_v5 = btlGetMainState();
-    temp_v2 = *(short *)(temp_v5 + 0x4c70);
-    if (*(short *)(temp_v5 + 0x4c70) < *(short *)(temp_v5 + 0x4c72)) {
-      temp_v2 = *(short *)(temp_v5 + 0x4c72);
+    battle = btlGetMainState();
+    temp_v2 = battle->targetCapacity.counts[0];
+    if (battle->targetCapacity.counts[0] < battle->targetCapacity.counts[1]) {
+      temp_v2 = battle->targetCapacity.counts[1];
     }
     if (temp_v2 < 8) {
       temp_v8 = temp_v8 | 0x8000000;

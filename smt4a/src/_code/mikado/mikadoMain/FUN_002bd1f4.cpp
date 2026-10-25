@@ -5,10 +5,10 @@
 #include "shard/Shard004B.h"
 #include "shard/S2UiTexLoader.h"
 #include <new>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 extern MikadoGlobals g_mikado;
-void *asdOperatorNew(u32);
 void asdOperatorDelete(void *);
 void clearThreeHalfwords(u16 *);
 void FUN_004b6fc4(UiScreen *);

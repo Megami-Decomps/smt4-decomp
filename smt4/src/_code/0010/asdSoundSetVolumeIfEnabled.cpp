@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/asdSoundSetVolumeIfEnabled.h"
 
 extern "C" {
 

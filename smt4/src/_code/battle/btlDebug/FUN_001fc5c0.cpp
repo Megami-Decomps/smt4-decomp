@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the debug-state base in r1 and the state in r0, moves the work pointer after the NULL test, and ends the dispatch with bne/b; case layout matches. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct BtlDebugWork {
 
 extern BtlDebugState g_btlDebugState;
 
-BtlDebugWork *jobGetWork(u32 handle);
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 const char *aocIndexValueOrDefault(u32 index);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
@@ -35,7 +35,7 @@ void FUN_003c3238(BtlDebugMenu *menu, u32 value);
 /* Battle debug menu update: act on the selected list item for the menu's current state. */
 s32 FUN_001fc5c0(u32 handle)
 {
-    BtlDebugWork *work = jobGetWork(handle);
+    BtlDebugWork *work = (BtlDebugWork *)jobGetWork(handle);
     BtlDebugMenu *menu = g_btlDebugState.menu;
 
     if (menu == NULL) {

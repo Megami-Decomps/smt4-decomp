@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "shard/FUN_0029ac94.h"
 
 struct CampEquipmentGrid;
 struct StatusDownSelectionWorkIV {
@@ -22,7 +23,6 @@ struct StatusDownSelectionWorkIV {
 extern "C" {
 extern StatusDownSelectionWorkIV *g_statusDown;
 extern AocSystem *g_aocSystem;
-s32 FUN_0029ac94();
 void buttonHelpSetPreset(u32 preset);
 void *fileSlotGetBuffer(u32 slot);
 RelativeDirectory *FUN_00389084(AocSystem *system, s32 entry);

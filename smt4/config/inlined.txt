@@ -26,3 +26,5 @@ eventFlagForScene = 0xe2800b02; // 0x1ed510 (FUN_001ed4e0, after mov r0, r5; res
 asdMdlNodeGetCount = 0xe5900028; // asdMdlManagerDestroy, after ldr r0, [r5, #8]; result kept by subs r6, r0, #0
 shopResultGetText = 0xe2800e17; // 0x2591f0 (shopFormatCommandResult, on shopGetResult's r0; result moved to r4)
 nnResultIsFailureBool = 0xe1a00fa0; // 0x38bce0 (Obj4221e4, on legacyResourceIdRemap's r0; caller tests teq r0,#1)
+uiSpriteGetOperationMode = 0xe1d005f0; // 0x28be90 (FUN_0028be84: after add r0, r0, #452; r4 keeps the state)
+aocFindKindRecordById = 0xe3a00000; // 0x248620 (FUN_00248620: add-on record lookup stubbed in IV; smt4a implements it at 0x471bc8; the other return-0 functions belong to unrelated subsystems)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: mode-one/three label selection and shared override-tail layout differ from retail, changing switch targets and branch placement. */
 #include "common.h"
+#include "shard/dataTableHasMatchingEntry35.h"
 
 struct ResultListEntry {
     u8 unk00[0x20];
@@ -15,7 +16,6 @@ struct ResultList {
     ResultListEntry *entries[64]; // 0x7ec
     s32 labels[64]; // 0x8ec
 };
-extern "C" s32 dataTableHasMatchingEntry35(u16 id);
 
 static __inline s32 resultEntryLabel(const ResultListEntry *entry, s32 mode)
 {

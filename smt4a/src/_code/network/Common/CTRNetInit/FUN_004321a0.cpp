@@ -1,4 +1,5 @@
 #include "common.h"
+#include "network/Common/CTRNetInit.h"
 
 extern "C" {
 

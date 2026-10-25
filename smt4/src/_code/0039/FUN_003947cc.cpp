@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail zeroes the 32-byte name buffer twice per iteration (155 rows) and keeps the name pointer in r7 / table cursor in r5 across the search; ours zero-fills once and loads the entry address per iteration (148 rows). */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
 
 /* An entry of the battle effect name table (0x24 bytes): the effect's file name and up to two sub-effects. */
 struct BtlEffectEntry {
@@ -19,12 +19,6 @@ struct BtlMainPosition {
     /* 0x574 */ f32 centerX;
 };
 
-/* The battle state the chosen effect value is stored in (observed field). */
-struct BtlStateEffect {
-    /* 0x0000 */ u8 unk0000[0x49E4];
-    /* 0x49E4 */ u32 effectValue;
-};
-
 #define BTL_EFFECT_ENTRIES 0x191
 
 extern "C" {
@@ -35,7 +29,6 @@ extern BtlMainPosition *g_btlMain;
 s32 jyoucyuGetTableEntry(u32 index);
 void textFormatBuffer(char *destination, const char *format, ...);
 s32 libc_strcmp(const char *first, const char *second);
-BtlStateEffect *btlGetMainState(void);
 void FUN_002505c0(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 c);
 
 /* Starts the named battle effect for `owner`: finds its table entry by file name and plays its sub-effects
@@ -43,7 +36,7 @@ void FUN_002505c0(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 
 u32 FUN_003947cc(const char *effectName, s32 owner, u32 kind, f32 x)
 {
     BtlEffectEntry *entry = NULL;
-    BtlStateEffect *state;
+    BtlMainStateExt *state;
     s32 side;
     s32 i;
 
@@ -59,7 +52,7 @@ u32 FUN_003947cc(const char *effectName, s32 owner, u32 kind, f32 x)
             break;
         }
     }
-    state = btlGetMainState();
+    state = btlGetMainStateExt();
     switch (kind) {
     case 2:
     case 5:

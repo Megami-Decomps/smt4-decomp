@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the shop main's per-frame phase machine (create the selection scene, wait for its load, tear it down, then request the next sequence); armcc here orders the shop singleton's lazy allocation (inlined twice in retail) and the story-flag screen list differently. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 
 /* The shop main (only the fields read here). */
 struct ShopMain {
@@ -34,7 +35,6 @@ extern ShopSequence *DAT_0044df80;
 extern s32 DAT_0049fc18;
 
 s32 storyFlagRangeAnySet(void);
-s32 FUN_00343af0(void);
 void FUN_00343b48(void);
 void fileSlot17Acquire(s32 *slot);
 void fileSlot17Release(s32 *slot);

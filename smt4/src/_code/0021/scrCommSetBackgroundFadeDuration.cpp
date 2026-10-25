@@ -15,7 +15,7 @@ u32 scrCommSetBackgroundFadeDuration(void)
 {
     u32 job = scrGetArg(0);
     s32 duration = scrGetArg(1);
-    BackgroundFadeWork *work = reinterpret_cast<BackgroundFadeWork *>(jobGetWork(job));
+    BackgroundFadeWork *work = (BackgroundFadeWork *)jobGetWork(job);
     if (duration == 0) {
         work->progress = 1.0f;
         work->step = 0.0f;

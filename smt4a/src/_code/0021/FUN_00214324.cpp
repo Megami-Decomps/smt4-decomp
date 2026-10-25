@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/SavedUnitSelection.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int asdSequenceRequest(...);
 int jobStop(unsigned int, int);
 int jobSetIntensity(...);
 int sysPlaySe(...);
-int FUN_00168980(...);
 int gameFlagIsSet(...);
 int asdMemFree(...);
 int asdTMTexTableReleaseNode(int, int);

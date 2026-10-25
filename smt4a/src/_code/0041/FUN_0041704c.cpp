@@ -1,6 +1,8 @@
 /* NON_MATCHING: zero/final-state constant scheduling and next-state reset register reuse differ. */
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include <stddef.h>
+#include "event/2dEvent/SmokeFade.h"
+#include "util/CalleeContracts.h"
 
 struct UnitStatusOpenRequest {
     u16 selection;
@@ -9,9 +11,7 @@ struct UnitStatusOpenRequest {
 typedef char UnitStatusOpenRequestSize[sizeof(UnitStatusOpenRequest) == 16 ? 1 : -1];
 
 extern "C" {
-void FUN_002c8538(s32);
 void FUN_00215bd0();
-s32 FUN_0023b3d0();
 void FUN_002c85b0(s32);
 void FUN_0031f718(s32, s32, u32);
 const UnitCategoryRecord *saveSlotFindById(u32);

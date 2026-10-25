@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -33,15 +34,14 @@ static __inline int titleBackdropPending(TitleBackdrop *backdrop)
 
 extern u32 g_titleScene; /* 0x44ea00 */
 
-extern TitleWork *jobGetWork(void);
 extern int surfaceCopy(Surface *dst, Surface *src);
 extern int FUN_002bfadc(int arg, Surface *surface);
 extern int renderCtxSelectStereoLayout(u32 scene);
 
 /* Renders the title scene into the backdrop surface once, then halves the surface size to mark it copied. */
-u32 titleBackdropRender(void)
+u32 titleBackdropRender(u32 job)
 {
-    TitleWork *work = jobGetWork();
+    TitleWork *work = (TitleWork *)jobGetWork(job);
 
     if (!titleBackdropPending(&work->backdrop)) {
         return 0;

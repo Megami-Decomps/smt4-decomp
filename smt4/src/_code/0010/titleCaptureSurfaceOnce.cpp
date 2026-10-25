@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -26,15 +27,14 @@ typedef struct TitleWork {
 
 extern u32 g_titleScene;
 
-extern TitleWork *jobGetWork(void);
 extern s32 FUN_002bff10(s32 arg);
 extern void renderCtxSelectStereoLayout(u32 scene);
 extern u8 FUN_002bfadc(s32 arg, Surface *surface);
 
 /* Title screen step: captures the screen surface once the title is active. */
-s32 titleCaptureSurfaceOnce(void)
+s32 titleCaptureSurfaceOnce(u32 job)
 {
-    TitleWork *work = jobGetWork();
+    TitleWork *work = (TitleWork *)jobGetWork(job);
 
     if (FUN_002bff10(0) != 0) {
         work->state.unk9E = 1;

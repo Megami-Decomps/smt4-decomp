@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild from asm of the battle command menu's result selection; retail shares its skip/candidate tails by jumps (the draft's six gotos) and computes the work-block offsets from three base registers, which armcc here emits from the structured conditions. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "ui/PartyPanelCapacity.h"
 #include "util/FUN_002a4878.h"
@@ -60,7 +61,6 @@ MemberRecord *gameGetSlotRecord(s32 id);
 CommandEntry *FUN_002cc228(u32 index, s32 first);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
-BattleState *btlGetMainState(void);
 s32 idListHasFlaggedRecord(MemberRecord *member);
 s32 FUN_00291e14(void);
 EquipmentInfo *FUN_00184310(u32 equipment);
@@ -97,7 +97,7 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
         if (entry->flagB != 0 && gameDataFlagTestBit(entry->flagB) == 0)
             continue;
         if (entry->limitedByBattle) {
-            BattleState *battle = btlGetMainState();
+            BattleState *battle = reinterpret_cast<BattleState *>(btlGetMainState());
             if ((DAT_00573b88.maskA & battle->maskA) | (battle->maskB & DAT_00573b88.maskB))
                 continue;
         }

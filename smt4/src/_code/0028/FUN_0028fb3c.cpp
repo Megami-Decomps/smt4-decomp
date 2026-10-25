@@ -1,11 +1,12 @@
 #include "common.h"
+#include "shard/FUN_0028fb3c.h"
 
 extern "C" {
 
 extern void FUN_0028fb40(void);
 
 /* Forwards to the function that follows it in the binary. */
-void FUN_0028fb3c(void)
+u16 FUN_0028fb3c(s32 arg0)
 {
     FUN_0028fb40();
 }

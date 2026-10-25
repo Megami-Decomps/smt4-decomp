@@ -1,8 +1,8 @@
 /* NON_MATCHING: release-node argument recovered; snapshot store, cached-node clear register and immediate/queued tail placement differ. */
 #include "ui/SpriteTransition.h"
+#include "shard/JobWork.h"
 
 extern "C" {
-SpriteTransitionWork *jobGetWork(u32);
 s32 gameFlagIsSet(u32);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void FUN_002a60cc(void *, u32, s32);
@@ -27,7 +27,7 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
         offsetof(SpriteResourceView, node) == 0x84 ? 1 : -1];
     if (gameFlagIsSet(0x522) && !job)
         return;
-    SpriteTransitionWork *work = jobGetWork(job);
+    SpriteTransitionWork *work = (SpriteTransitionWork *)jobGetWork(job);
     SpriteResourceView *resource = reinterpret_cast<SpriteResourceView *>(work);
     if (resource->node != -1 && resource->active) {
         asdTMTexTableReleaseNode(work->unk10, resource->node);
@@ -61,7 +61,7 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
         break;
     case 3: {
         FUN_002a880c(work, 5, 0);
-        SpriteTransitionWork *current = jobGetWork(job);
+        SpriteTransitionWork *current = (SpriteTransitionWork *)jobGetWork(job);
         current->state = 1;
         current->start = reinterpret_cast<SpriteResourceView *>(current)->position;
         FUN_002a4e18(&work->target, work->unk08);

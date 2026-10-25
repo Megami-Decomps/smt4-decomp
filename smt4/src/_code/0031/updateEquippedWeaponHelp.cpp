@@ -3,12 +3,12 @@
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "bible/bibleDevil.h"
 
 struct EquipmentHelpPlayer { u16 equippedId; };
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 const EquipmentHelpPlayer *gameGetPlayerData();
-void FUN_0029ede8(u32, u32, s32, s32);
 void FUN_002907c4(char *, u32);
 s32 textFormatBuffer(char *, const char *, ...);
 void textEncodeFontSlot(u32, const char *);

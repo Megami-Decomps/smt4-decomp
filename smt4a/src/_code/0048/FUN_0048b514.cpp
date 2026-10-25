@@ -2,6 +2,7 @@
 /* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, and signed animation getter; font-settings ownership, stack layout and saved work/context registers still differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 /* The menu work block (only the fields the spinner uses). */
 struct SpinnerWork {
@@ -41,8 +42,7 @@ void renderCtxPopState(u32 context, s32 index);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-LayoutPoint *FUN_001834a4(s32 group, s32 part);
-void FUN_00162790(s32 a, u32 font, char *text, f32 x, f32 y, f32 shear, f32 slant, f32 alpha);
+LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_00163aa4(void *anchor, f32 alpha);
 s8 uiSpriteGetCompletionState(const void *animation);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
@@ -64,7 +64,7 @@ void FUN_0048b514(SpinnerWork *work)
     work->phase &= 7;
     s32 next = (work->phase + 1) & 7;
     for (s32 i = 0; i < 9; i++) {
-        LayoutPoint *point = FUN_001834a4(19, 0x1124 + i);
+        LayoutPoint *point = asdTMTexTableEntryAt(19, 0x1124 + i);
         points[i].x = (f32)point->x;
         points[i].y = (f32)point->y;
         FUN_001835b4(1, 19, 0x1121, vec2GetXInt(anchor) + point->x, point->y, 6);
@@ -75,10 +75,10 @@ void FUN_0048b514(SpinnerWork *work)
     s32 oppositeNext = (opposite + 1) & 7;
     FUN_001835b4(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[opposite].x), (s32)points[opposite].y, 6);
     FUN_001835b4(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[oppositeNext].x), (s32)points[oppositeNext].y, 6);
-    LayoutPoint *label = FUN_001834a4(19, 0x1120);
+    LayoutPoint *label = asdTMTexTableEntryAt(19, 0x1120);
     char text[27];
     __aeabi_memcpy4(text, "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44", sizeof(text));
-    FUN_00162790(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt(anchor) - 20 + label->x), (f32)label->y, 0.0f,
+    textDrawString(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt(anchor) - 20 + label->x), (f32)label->y, 0.0f,
                  0.0f, 1.0f);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);

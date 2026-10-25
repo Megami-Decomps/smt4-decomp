@@ -1,4 +1,3 @@
-/* NON_MATCHING: the bit test's shift count lands in r1; retail keeps it in r2 (clear sequence matches). */
 #include "common.h"
 
 extern "C" u8 *gameDataBlockGetArea2D68(void);
@@ -9,7 +8,10 @@ extern "C" s32 areaConsumeOneShotFlags(s32 index)
     if (index != 129 && index != 128) {
         return 0;
     }
-    if ((gameDataBlockGetArea2D68()[(u32)index >> 3] & (1U << ((u32)index & 7))) != 0) {
+    u8 *flags = gameDataBlockGetArea2D68();
+    s32 testByte = (u32)index / 8;
+    s32 testBit = (u32)index % 8;
+    if ((flags[testByte] & (1 << testBit)) != 0) {
         u8 *area = gameDataBlockGetArea2D68();
         s32 byte = index / 8;
         s32 bit = index % 8;

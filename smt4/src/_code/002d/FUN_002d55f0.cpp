@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "shard/FUN_002d55f0.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

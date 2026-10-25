@@ -1,6 +1,7 @@
 /* NON_MATCHING: built hoists the load of bufferA above the first stores; retail keeps the stores first. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/asdMemFree.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct {
 int buttonHelpCreate(void);
 int FUN_002a03d8(int index, int value);
 int scrScriptProcessDestroy(void *resource);
-int asdMemFree(void *buffer);
 
 /* Resets the task: frees its buffers and resource, then sets phase 12 and updates indices 0/1 whose state is 3. */
 void FUN_00289608(Task *task, u8 flag)

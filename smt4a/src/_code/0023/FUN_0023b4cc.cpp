@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
@@ -37,11 +38,10 @@ s32 vec2GetYInt(void *vector);
 f32 vec2GetSpeed(const void *vector);
 void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
-QuestLayout *FUN_001834a4(u32 group, u32 id);
+QuestLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
 u32 FUN_00156850(u16 category, s32 arg);
 void textFormatBuffer(void *buffer, const char *format, u32 value);
-void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 void FUN_001634b4(void *panel, f32 offset);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void skinObjectUpdateMatrices(RenderCtxA *context);
@@ -112,14 +112,14 @@ u32 FUN_0023b4cc(void)
         FUN_001835b4(2, 0x1E, 0x58, x, y, 0x97);
         FUN_001835b4(2, 0x1E, 0x59, x, y, 0x97);
         FUN_001835b4(2, 0x1E, 0x51, x, y, 0xA1);
-        QuestLayout *icon = FUN_001834a4(0x1E, 0x54);
+        QuestLayout *icon = asdTMTexTableEntryAt(0x1E, 0x54);
 
         partyDrawCategorySelectionIcon(category, icon->x + x, icon->y + y, 0xA6);
-        QuestLayout *label = FUN_001834a4(0x1E, 0x55);
+        QuestLayout *label = asdTMTexTableEntryAt(0x1E, 0x55);
         char text[64];
 
         textFormatBuffer(text, "%s", FUN_00156850(category, 0));
-        FUN_00162790(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
+        textDrawString(3, -1, text, (f32)(label->x + x), (f32)(label->y + y), 0.375f, 0.0f, speed);
         FUN_001634b4(ui->panel, (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f));
         efctSetSpeed(1.0f);
         break;

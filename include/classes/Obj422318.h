@@ -3,11 +3,11 @@
 
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 int asdMemFreeNonNull(void *block);
 int asdMdlManagerMarkDestroy(u32 handle);
-void *asdOperatorNew(u32 bytes);
 }
 
 /* The child an Obj422318 deletes on destruction. */

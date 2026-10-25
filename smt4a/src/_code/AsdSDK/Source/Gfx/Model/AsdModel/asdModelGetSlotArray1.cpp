@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/asdModelGetSlotArray1.h"
 
 extern "C" {
 

@@ -3,11 +3,11 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "test/BustupViewer.h"
+#include "shard/FUN_001695a0.h"
 
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_001695a0(void);
 int FUN_0019de98(int, unsigned int);
 int messageSetMode(int);
 int FUN_001ad9b4(void);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: roster-base arithmetic and command-argument registers differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -6,7 +7,6 @@
 extern "C" {
 u32 scrGetArg(u32);
 u32 btlUnitGet(u32);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
 void FUN_003ee0c0(void);
 void FUN_004fc094(s32, u32, s32, BattleRosterRecordA *, s32, u32, s32, s32,

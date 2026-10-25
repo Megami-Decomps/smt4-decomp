@@ -2,14 +2,15 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00162790(...);
+int textDrawString(...);
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int FUN_001834a4(...);
 int FUN_00185e84(...);
 int arrayContainsU16(...);
 int statDrawClampedDelta(...);
@@ -30,11 +31,10 @@ extern unsigned char LAB_003cc19c; /* 0x3cc19c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_0014bd84(unsigned short);
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int resourceRunOperationIfUnblocked(void);
 /* Supplied declaration required: arrayContainsU16. */
@@ -70,7 +70,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
   iStack_28 = param_4;
   temp_v1 = resourceRunOperationIfUnblocked();
   efctSetSpeed();
-  temp_v2 = FUN_001834a4(0x1a,param_2 + 0x185);
+  temp_v2 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,param_2 + 0x185));
   FUN_001835b4(2,0x1a,0x16f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
   FUN_001835b4(2,0x1a,0x170,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
   FUN_001835b4(2,0x1a,0x26f,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6,0x65);
@@ -118,7 +118,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
       }
     }
     else {
-      temp_v0 = FUN_001834a4(0x1a,param_2 + 0x234);
+      temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,param_2 + 0x234));
       FUN_001835b4(2,0x1a,0x233,*(short *)(temp_v0 + 8) + param_5,*(short *)(temp_v0 + 10) + param_6,
                    0x6f);
       temp_v6 = 0x9b9b9bff;
@@ -126,13 +126,13 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
     param_1 = param_1 + (temp_v1 + param_2) * 2;
     temp_v4 = FUN_0014bd84(*(unsigned short *)(param_1 + 0x8b70));
     textFormatBuffer(temp_v7,&LAB_003cc114,temp_v4);
-    temp_v0 = FUN_001834a4(0x1a,0x178);
+    temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x178));
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_00162790(2,temp_v6,temp_v7,(int)*(short *)(temp_v2 + 8));
-    temp_v0 = FUN_001834a4(0x1a,0x177);
+    textDrawString(2,temp_v6,temp_v7,(int)*(short *)(temp_v2 + 8));
+    temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x177));
     FUN_00185e84((int)*(short *)(param_1 + 0x8b70),
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,0x74,0,0);
@@ -141,7 +141,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
                  (int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,0x74,0);
     if (param_4 != 0) {
-      temp_v0 = FUN_001834a4(0x1a,0x17c);
+      temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x17c));
       temp_v6 = FUN_004bcbb4(temp_v8,*(unsigned short *)(param_1 + 0x8b70));
       FUN_00180310(1,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v0 + 8) + param_5,
                    (int)*(short *)(temp_v0 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,1,4,0x79,

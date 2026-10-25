@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct {
     u32 mask;           /* 0x4cc8 */
 } GameData;
 
-GameData *btlGetMainState(void);
 u32 scrGetArg(u32 index);
 
 static __inline void maskClear(u32 *word, u32 bit)
@@ -20,7 +20,7 @@ static __inline void maskClear(u32 *word, u32 bit)
 u32 scrClearBattleMaskBit(void)
 {
     u32 bit = scrGetArg(0);
-    GameData *data = btlGetMainState();
+    GameData *data = reinterpret_cast<GameData *>(btlGetMainState());
 
     maskClear(&data->mask, bit);
     return 1;

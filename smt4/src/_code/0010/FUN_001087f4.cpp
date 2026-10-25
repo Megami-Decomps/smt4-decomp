@@ -1,17 +1,17 @@
 /* NON_MATCHING: guard-address formation and early-return/store scheduling differ. */
 #include "title/TitleJobWork.h"
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 u32 FUN_002bfadc(s32 mode, TitleJobSurface *surface);
 s32 FUN_002bff10(void);
-TitleJobWork *jobGetWork(u32 job);
 extern void *g_titleScene;
 
 // Refresh the title overlay's render surface once its source is ready.
 s32 FUN_001087f4(u32 job)
 {
-    TitleJobWork *work = jobGetWork(job);
+    TitleJobWork *work = (TitleJobWork *)jobGetWork(job);
     work->overlayUpdated = 0;
     if (FUN_002bff10() == 0 && work->unkEDC && work->unkEDD && work->unkFDC != NULL &&
         !work->unkFD8 && !work->overlayShown) {

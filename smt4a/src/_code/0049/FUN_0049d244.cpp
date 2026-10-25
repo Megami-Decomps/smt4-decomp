@@ -2,6 +2,7 @@
 /* NON_MATCHING: native text-scale calculation folds to a constant; saved-register and outgoing argument scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 struct MenuCaptionText { u16 length; u16 unk02; u16 text[1]; };
 struct MenuCaptionView {
     u32 unk00;
@@ -13,8 +14,7 @@ typedef char MenuCaptionOffset[offsetof(MenuCaptionView, caption) == 0x84 ? 1 : 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
-SpriteInfo *FUN_001834a4(u32 group, u32 id);
-void FUN_00162790(u32 layer, u32 color, const u16 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
+SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 
 void FUN_0049d244(MenuCaptionView *view, s32 x, s32 y, f32 alpha)
 {
@@ -30,9 +30,9 @@ void FUN_0049d244(MenuCaptionView *view, s32 x, s32 y, f32 alpha)
     if (!view->caption || !view->caption->length)
         return;
     FUN_001835b4(2, 51, 3, x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f), y, 101);
-    SpriteInfo *info = FUN_001834a4(51, 4);
+    SpriteInfo *info = asdTMTexTableEntryAt(51, 4);
     s32 captionX = info->x + ((s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + x);
-    FUN_00162790(3, 0xFFFFFFFF, view->caption->text,
+    textDrawString(3, 0xFFFFFFFF, (const char *)view->caption->text,
         (f32)captionX, (f32)(info->y + y), (f32)150 * (1.0f / 256.0f), 0.0f, alpha);
 }
 }

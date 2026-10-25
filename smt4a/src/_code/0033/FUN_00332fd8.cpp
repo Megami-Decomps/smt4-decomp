@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses the grid fields through block+0xE00 held in a register and keeps constants in different s-registers; the build uses an extra saved register and frame word. Argument decode (position/size vectors, 20 integer arguments) taken from the retail asm. */
 #include "common.h"
+#include "shard/FUN_003857c8.h"
 
 struct MapPoint {
     f32 x, y, z;
@@ -22,7 +23,6 @@ struct MapFlagsBlock {
 
 extern "C" {
 MapFlagsBlock *gameFlagsGetBlock(void);
-s32 FUN_003857c8(s32 value);
 s32 FUN_002393cc(s32 scene);
 f32 mathPositionHeadingDegrees(MapPoint from, MapPoint to);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);

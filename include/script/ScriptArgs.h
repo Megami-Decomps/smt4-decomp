@@ -9,5 +9,10 @@ s32 scrGetArg(s32 index);
 /* Stores the script command's result and clears the waiting flag. */
 void scrSetResult(s32 result);
 
-} /* extern "C" */
+/* The running script's command owner word (the message commands' context). */
+u32 scrGetCommandOwner(void);
 
+/* Sets the message window mode; values outside -1..1 are ignored. */
+void scrCommMessageSetMode(s32 mode);
+
+} /* extern "C" */

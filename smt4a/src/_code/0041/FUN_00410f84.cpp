@@ -1,4 +1,6 @@
 /* NON_MATCHING: near (197 rows against 198): same switch cases, calls and constants; retail keeps the stage-mode index in r5 through a conditional move (cmp; movge; blt) where ours uses `subs`, hoists the party count/offset pair loads differently in case 4, copies the camera position as three plain words with swapped r0/r1, and holds the battle block in r8/r4 differently in case 6 */
+#include "battle/BtlMainAccess.h"
+#include "shard/FUN_004fea10.h"
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef short s16;
@@ -67,12 +69,10 @@ s32 btlStageGetModeIndex(u32 context);
 s32 FUN_00411c04(StageState *state, s32 flag);
 s32 partyCountActiveSlots(void);
 s32 controllerGroupSetPosition(u32 model, f32 x, f32 y, f32 z);
-BtlMainView *btlGetMainState(void);
 BattleUnitBlock *FUN_003eaf20(void);
 u32 partyFindActiveRecordById(u32 id);
 u32 saveSlotFindSelected(void);
 s32 FUN_003ecfb4(BtlMainView *mainState, void *unit, u32 record, s32 flag);
-s32 FUN_004fea10(s32 a, s32 b, s32 c);
 s32 FUN_004fe7e4(s32 a, s32 b, s32 c);
 s32 FUN_003f14a0(BtlMainView *mainState);
 u32 FUN_003e503c(u32 index);
@@ -129,7 +129,7 @@ void FUN_00410f84(StageState *state)
         return;
     }
     case 5: {
-        BtlMainView *mainState = btlGetMainState();
+        BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
         BattleUnitBlock *block = FUN_003eaf20();
         u32 record = partyFindActiveRecordById((u16)state->value);
         FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 1);
@@ -141,7 +141,7 @@ void FUN_00410f84(StageState *state)
         return;
     }
     case 6: {
-        BtlMainView *mainState = btlGetMainState();
+        BtlMainView *mainState = reinterpret_cast<BtlMainView *>(btlGetMainState());
         BattleUnitBlock *block = FUN_003eaf20();
         u32 record = saveSlotFindSelected();
         FUN_003ecfb4(mainState, (u8 *)block + 0x164, record, 0);

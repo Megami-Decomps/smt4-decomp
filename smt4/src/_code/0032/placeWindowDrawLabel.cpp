@@ -32,7 +32,7 @@ s32 vec2GetXInt(const PlaceWindowPosition *position);
 s32 vec2GetYInt(const PlaceWindowPosition *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void FUN_002bf380(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
-PlaceWindowFrame *FUN_002bf4f8(u32 group, u32 frame);
+PlaceWindowFrame *asdTMTexTableEntryAt(u32 group, u32 frame);
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
 
@@ -50,8 +50,8 @@ u32 placeWindowDrawLabel(void)
     x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
     s32 y = vec2GetYInt(&window->position);
     FUN_002bf380(2, 0xe, 0xe, x, y, 0x65);
-    PlaceWindowFrame *frame = FUN_002bf4f8(0xe, 0x10b);
-    FUN_002be5a4(3, 0xffffffff, window->text,
+    PlaceWindowFrame *frame = asdTMTexTableEntryAt(0xe, 0x10b);
+    textDrawString(3, 0xffffffff, window->text,
         static_cast<f32>(frame->offsetX + x), static_cast<f32>(frame->offsetY + y),
         0.56640625f, 0.0f, 1.0f);
     FUN_002bed3c();

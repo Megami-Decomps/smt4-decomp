@@ -70,7 +70,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: FUN_002bf380. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c18e4. */
@@ -583,11 +583,11 @@ unsigned int FUN_00212538(void)
     drawSetColorFromRGBA8(0xf49800ff);
     temp_v10 = gameGetSlotTable();
     textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned char *)(temp_v10 + 0x910b));
-    temp_v10 = FUN_002bf4f8(0x19,0x2a);
+    temp_v10 = asdTMTexTableEntryAt(0x19,0x2a);
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,0,2,0x9c,
                  temp_v19);
     textFormatBuffer(temp_v19,&LAB_00213184,*(unsigned int *)(temp_v1 + 0x28));
-    temp_v10 = FUN_002bf4f8(0x19,0x2c);
+    temp_v10 = asdTMTexTableEntryAt(0x19,0x2c);
     FUN_002bdf94(2,*(short *)(temp_v10 + 8) + temp_v6,*(short *)(temp_v10 + 10) + temp_v7,1,2,0x9c,
                  temp_v19);
     FUN_002bed3c();

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
+#include "shard/lcgRandomRange.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ void *sysMemClear(void *destination, u32 size);
 void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_00221c14(const void *a, const void *b);
 s32 gameFlagIsSet(u32 flag);
-s32 lcgRandomRange(u32 limit);
 u32 repackWord(u32 word);
 
 /* Picks a random effect of the given kind from table 10's section: the records of the kind are

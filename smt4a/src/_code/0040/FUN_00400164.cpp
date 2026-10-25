@@ -1,10 +1,9 @@
 /* NON_MATCHING: one marker-mask word load is scheduled before rather than after the paired combatant load. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
-const Table04Record *dataTable04FindById(u32 id);
-BtlMainStateA *btlGetMainState();
 s32 FUN_00400564(void *owner, s32 mode, const Table04Record *skill);
 extern u8 DAT_00573c90[];
 

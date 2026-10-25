@@ -1,6 +1,7 @@
 /* NON_MATCHING: float register allocation and the HP clamp's conditional-store layout differ (retail keeps the percent damage in s23 and the group count in r5); logic and calls are identical. */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTable.h"
 
 namespace {
 /* The player's save record (only the fields the damage touches). */
@@ -41,7 +42,6 @@ const u16 STATUS_NEVER = 0x400;
 
 extern "C" {
 SlotRecord *gameGetSlotRecord(s32 slot);
-SlotTable *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 FUN_0018416c(u16 id);
 void FUN_00408184(s32 kind, s32 amount);

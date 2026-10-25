@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/effPartCreate.h"
 
 extern "C" {
 extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */

@@ -1,7 +1,9 @@
 /* NON_MATCHING: help-entry allocation, payload copy and list-link register scheduling differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/asdMemoryAllocTracked.h"
 
 namespace {
 /* An aligned view avoids rounding the shared byte-padding union ending at 0x872. */
@@ -26,8 +28,6 @@ typedef char BtlHelpTextEntryOffsets[offsetof(BtlHelpTextEntryView, mode) == 0x8
 }
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
-BtlMainStateA *btlGetMainState(void);
-void *asdMemoryAllocTracked(u32 alignment, u32 granularity, s32 heap, u32 bytes, s32 clear);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 char *libc_strcpy(char *destination, const char *source);
 

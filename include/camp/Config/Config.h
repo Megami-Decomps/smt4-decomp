@@ -59,4 +59,8 @@ extern "C" {
 u32 FUN_002e50d4(void);
 }
 
+extern "C" {
+u8 FUN_002973ec(void);
+}
+
 #endif

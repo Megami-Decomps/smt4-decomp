@@ -9,7 +9,7 @@ u32 stateValuesGetBySelector(u32 selector);
 
 s32 FUN_0013c7dc(u32 job)
 {
-    FrameWorkA *work = reinterpret_cast<FrameWorkA *>(jobGetWork(job));
+    FrameWorkA *work = (FrameWorkA *)jobGetWork(job);
     if (stateValuesGetBySelector(0) == 0 && work->flags.active &&
         work->flags.ready && work->flags.surfaceReady && work->frame.surface != 0 &&
         !work->frame.blocked) {

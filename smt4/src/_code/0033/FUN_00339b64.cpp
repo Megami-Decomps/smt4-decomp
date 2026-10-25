@@ -1,5 +1,6 @@
 /* NON_MATCHING: the middle word of the three-word script-handle copy uses r1 instead of retail r2; all instructions otherwise agree. */
 #include "common.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 /* The resident handles the main battle state offers; the loader copies them over one by one. */
 struct BtlMainStateHandles {
@@ -45,8 +46,6 @@ extern "C" {
 
 extern BtlMainStateHandles g_btlMainState;
 
-void nn_os_CriticalSection_Enter(void *section);
-void nn_os_CriticalSection_Leave(void *section);
 void FUN_00394cc4(void);
 void *btlLoaderGetLock(BtlLoader *loader);
 s32 jyoucyuEnsureResidentEntry(void);
@@ -59,9 +58,7 @@ void FUN_00328fa4(void);
  * resource to arrive, requests the next, and the last steps finish the load. */
 void FUN_00339b64(BtlLoader *loader)
 {
-    void *lock = btlLoaderGetLock(loader);
-
-    nn_os_CriticalSection_Enter(lock);
+    ScopedCriticalLock lock(btlLoaderGetLock(loader));
     do {
         switch (loader->step) {
         case 0:
@@ -136,7 +133,6 @@ void FUN_00339b64(BtlLoader *loader)
             loader->flags |= LOADER_DONE;
         }
     } while ((loader->flags & LOADER_DONE) == 0);
-    nn_os_CriticalSection_Leave(lock);
 }
 
 } /* extern "C" */

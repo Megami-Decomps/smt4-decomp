@@ -1,4 +1,5 @@
 #include "battle/btlReflect.h"
+#include "battle/btlEditor.h"
 extern "C" {
 
 

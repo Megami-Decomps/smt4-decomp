@@ -4,7 +4,6 @@
 #include "shard/Shard0031.h"
 
 extern "C" {
-Table04Record *dataTable04FindById(u32 id);
 s32 FUN_002a690c(s32 target, s32 skill, s32 query);
 s32 FUN_00333694(s32 target, s32 slot, s32 skill, s32 query);
 SlotTable *gameGetSlotTable(void);

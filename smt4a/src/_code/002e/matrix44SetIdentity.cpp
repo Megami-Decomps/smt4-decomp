@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_PlainData.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
 // Set a four-by-four matrix to the identity transform.
 extern "C" void matrix44SetIdentity(Matrix44 *matrix)

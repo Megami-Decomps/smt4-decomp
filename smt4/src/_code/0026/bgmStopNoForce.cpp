@@ -1,4 +1,5 @@
 #include "common.h"
+#include "result/WhisperEffect.h"
 
 extern "C" {
 

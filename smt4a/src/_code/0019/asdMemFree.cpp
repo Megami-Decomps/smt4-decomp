@@ -2,6 +2,7 @@
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "shard/asdMemFree.h"
 
 extern "C" {
 

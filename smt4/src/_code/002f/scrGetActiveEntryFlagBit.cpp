@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ typedef struct Record {
 } Record;
 
 int scrSetResult(int value);
-int btlGetMainState(void);
 Record *btlMainFindActiveEntry(void);
 u32 scrGetArg(int index);
 
@@ -17,7 +17,7 @@ u32 scrGetActiveEntryFlagBit(void)
 {
     u32 bit = scrGetArg(0);
 
-    btlGetMainState();
+    reinterpret_cast<int>(btlGetMainState());
     Record *record = btlMainFindActiveEntry();
     if (record != NULL) {
         u32 flags = record->flags;

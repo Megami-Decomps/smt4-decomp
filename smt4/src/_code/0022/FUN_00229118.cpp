@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229118` (_code @ 0x229118, 0x5bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -12,7 +13,6 @@ int FUN_00246134(...);
 int FUN_00247478(...);
 int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(...);
-int btlGetMainState(void);
 int targetSelectChangeDisplayMode(...);
 int FUN_002eb340(...);
 int btlTargetSelectSetInfoPanel(...);
@@ -99,7 +99,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     FUN_0027da30(temp_v0,(int)*(short *)(temp_v3 + param_3 * 0x114 + 0x62));
     temp_v3 = __aeabi_idivmod(*(short *)(temp_v0 + 0xe8) * 100,(int)*(short *)(temp_v0 + 0xea));
     temp_v13[0] = (unsigned int)(temp_v3 < 0x14);
-    temp_v1 = btlGetMainState();
+    temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_00247478(temp_v13 + 5,temp_v1,*(unsigned int *)(param_4 + 0x20));
     switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x14c)) {
     case 7:
@@ -112,7 +112,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
       break;
     default:
       temp_v4 = 0;
-      temp_v3 = btlGetMainState();
+      temp_v3 = reinterpret_cast<int>(btlGetMainState());
       btlMainFindEntryByListedId(temp_v3,param_3);
       if (temp_v3 != 0) {
         temp_v9 = 0;
@@ -213,7 +213,7 @@ LAB_002292ac:
       temp_v3 = __aeabi_idivmod(*(short *)(temp_v4 + 0xe8) * 100,(int)*(short *)(temp_v4 + 0xea));
       temp_v8 = temp_v9;
       temp_v15 = (unsigned int)(temp_v3 < 0x14);
-      temp_v1 = btlGetMainState();
+      temp_v1 = reinterpret_cast<int>(btlGetMainState());
       FUN_00247478(&temp_v16,temp_v1,*(unsigned int *)(param_4 + 0x20));
       switch(*(unsigned short *)(*(int *)(param_4 + 0x28) + 0x14c)) {
       case 7:
@@ -226,7 +226,7 @@ LAB_002292ac:
         break;
       default:
         temp_v7 = 0;
-        temp_v3 = btlGetMainState();
+        temp_v3 = reinterpret_cast<int>(btlGetMainState());
         btlMainFindEntryByListedId(temp_v3,temp_v8);
         if (temp_v3 != 0) {
           temp_v10 = 0;

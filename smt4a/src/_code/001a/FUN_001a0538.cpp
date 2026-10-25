@@ -1,5 +1,6 @@
 /* Converts a float to IEEE half-precision bits; values too small for a half become a signed zero. */
 #include "common.h"
+#include "gfx/ShaderUniformUploads.h"
 
 extern "C" u16 FUN_001a0538(f32 value)
 {

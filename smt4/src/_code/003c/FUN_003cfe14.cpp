@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (211 vs 213 rows); register allocation of the action context and flag constants differs */
 #include "common.h"
+#include "shard/FUN_00227d18.h"
 
 struct ActionTarget {
     u8 unk00[0x50];
@@ -40,7 +41,6 @@ struct BattleSide {
 extern "C" {
 
 void btlShowListedActionMessage(s32* battle, ActionContext* ctx, s32 id, s32 value, s32 arg);
-void FUN_00227d18(s32 id);
 void FUN_00227fac(void);
 void frameRangeExtend(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
 s32 FUN_00229914(s32* battle, ActionContext* ctx, s32 id);

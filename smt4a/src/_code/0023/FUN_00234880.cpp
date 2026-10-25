@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PopupState {
     s32 state;      // 0x00
@@ -36,7 +37,6 @@ s32 randRange(s32 range);
 s32 FUN_003e0024(void);
 s32 FUN_003e0154(void);
 s32 gameSlotTableFindFree(void);
-s8* gameGetSlotTable(void);
 s32 gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(s32 record);
 
@@ -60,7 +60,7 @@ void FUN_00234880(void)
     s32 current = FUN_003e0024();
     s32 maximum = FUN_003e0154();
     s32 slotCount = gameSlotTableFindFree();
-    s8* status = gameGetSlotTable() + 0x1c88;
+    s8 *status = gameGetSlotTable()->party;
     for (s32 i = 0; i < slotCount; i++) {
         if (status[i] >= 0) {
             s32 record = gameGetSlotRecord(status[i]);

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -9,7 +10,6 @@ typedef struct Entry003004fc {
 } Entry003004fc;
 
 s32 scrGetArg(s32 index);
-void *btlGetMainState(void);
 Entry003004fc *btlMainFindEntryByListedId(void *state, s32 id);
 s32 gameGetUnitRecord(s32 index);
 s32 FUN_0033b960(s32 value);
@@ -24,8 +24,8 @@ u32 scrCommConvertEntryValue(void)
     s32 result;
 
     if (id < 0x6d) {
-        btlGetMainState();
-        value = btlMainFindEntryByListedId(btlGetMainState(), id)->value;
+        static_cast<void *>(btlGetMainState());
+        value = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id)->value;
     } else {
         value = gameGetUnitRecord(id - 0x6d);
     }

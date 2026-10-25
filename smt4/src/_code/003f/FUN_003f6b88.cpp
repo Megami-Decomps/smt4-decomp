@@ -20,7 +20,7 @@ extern "C" void FUN_003f6b88(f32 x, f32 y, f32 z)
     f32 cosZ = phaseCosInterpolate(halfZ);
     f32 sinZ = FUN_002b70cc(halfZ);
     RotationQuaternion rotation;
-    rotation.x = sinZ * sinY * cosX + cosZ * cosY * sinX;
+    rotation.x = sinY * sinZ * cosX + cosZ * sinX * cosY;
     rotation.y = cosZ * sinY * cosX - sinZ * cosY * sinX;
     rotation.z = sinZ * cosY * cosX + cosZ * sinY * sinX;
     rotation.w = cosZ * cosY * cosX - sinZ * sinY * sinX;

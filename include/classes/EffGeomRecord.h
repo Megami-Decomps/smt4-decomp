@@ -3,8 +3,8 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, s32 arg);
 extern "C" void *memClear(void *block, u32 size);
 extern "C" void nn_gr_CTR_Vertex_LoadArray_DisableAll(u32 *array);
 
@@ -114,7 +114,7 @@ public:
 class EffGeomRecord {
 public:
     EffGeomRecord();
-    static void *operator new(u32 bytes, s32 arg) throw() { return asdOperatorNew(bytes, arg); }
+    static void *operator new(u32 bytes, s32 arg) throw() { return asdOperatorNew(bytes, reinterpret_cast<void *>(arg)); }
 
     union {
         /* 0x00 */ u8 unk00[0x48];

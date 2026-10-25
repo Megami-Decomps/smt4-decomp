@@ -4,7 +4,6 @@
 
 extern "C" {
 void FUN_002b0750(s32 layer, s32 group, u32 sprite, s32 x, s32 y, s32 width, s32 height, s32 order);
-TexSprite *FUN_002bf4f8(u32 group, u32 sprite);
 
 // Draw a twelve-part vertical indicator with independent cap and fill variants.
 void FUN_002ec0fc(const SegmentedTextureBarOrigin *origin, s32 x, s32 y, u32 firstVariant,
@@ -16,7 +15,7 @@ void FUN_002ec0fc(const SegmentedTextureBarOrigin *origin, s32 x, s32 y, u32 fir
         FUN_002bf288(2, 0x39, firstVariant != 0 ? 0x3c : 0x3a, origin->x + x, y, 0x6f);
         FUN_002bf288(2, 0x39, secondVariant != 0 ? 0x3d : 0x3b, origin->x + x, y, 0x6f);
         u32 sprite = fillVariant != 0 ? 0x40 : 0x3f;
-        const TexSprite *texture = FUN_002bf4f8(0x39, sprite);
+        const TexSprite *texture = reinterpret_cast<TexSprite *>(asdTMTexTableEntryAt(0x39, sprite));
         const SegmentedTextureBarSize *size = reinterpret_cast<const SegmentedTextureBarSize *>(texture->frames);
         s32 segmentHeight = size->height / 12;
         FUN_002b0750(2, 0x39, sprite, origin->x + x, firstSegment * segmentHeight + y,

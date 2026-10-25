@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail loads g_uiQuest a second time for the first page test (ldr r0,[r0]); built reuses the first load. */
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "shard/FUN_002903f0.h"
 
 extern "C" {
 
 extern void buttonHelpSetPreset(s32 preset);
 extern void FUN_002b8454(s32 a, s32 b, s32 c, s32 d);
 extern u8 FUN_0029022c(void);
-extern u32 FUN_002903f0(void);
 extern s32 FUN_0029efa8(UiQuestCursor *cursor);
 extern s32 FUN_0029efc0(UiQuestCursor *cursor);
 

@@ -8,7 +8,7 @@ extern "C" {
 int dataTable2eSub2GetCount(...);
 int FUN_0025090c(int, int, int, unsigned char [144]);
 int forwardRecoveredCallback(void);
-int FUN_002be5a4(int, unsigned int, unsigned char [144]);
+int textDrawString(int, unsigned int, unsigned char [144]);
 int FUN_002c0944(unsigned int);
 int FUN_002c1b64(int, int);
 int renderCtxSelectStereoLayout(int);
@@ -29,8 +29,8 @@ extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: forwardRecoveredCallback. */
-/* Supplied declaration required: FUN_002be5a4. */
-extern unsigned long long FUN_002bf4f8(unsigned int, unsigned int);
+/* Supplied declaration required: textDrawString. */
+extern unsigned long long asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
@@ -86,7 +86,7 @@ unsigned int FUN_0021ef10(void)
     }
   }
   temp_v1 = g_mapIf;
-  temp_v10 = FUN_002bf4f8(0xe,0x10b);
+  temp_v10 = asdTMTexTableEntryAt(0xe,0x10b);
   temp_v4 = (int)((unsigned long long)temp_v10 >> 0x20);
   temp_v8 = temp_v8 & 0xffffffff;
   temp_v2 = (int)*(short *)(temp_v1 + 0xccb8);
@@ -166,7 +166,7 @@ unsigned int FUN_0021ef10(void)
       FUN_0025090c((int)*(short *)(temp_v1 + 0xccbc),(int)*(short *)(temp_v1 + 0xccbe),0,temp_v11);
       VectorSignedToFloat((int)*(short *)((int)temp_v10 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)((int)temp_v10 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002be5a4(3,0xffffffff,temp_v11);
+      textDrawString(3,0xffffffff,temp_v11);
       temp_v4 = g_titleScene;
       piVar7 = (int *)(g_titleScene + 0x124c);
       temp_v1 = *piVar7;

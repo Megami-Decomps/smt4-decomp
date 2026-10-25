@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BtlMainFUN_0030b49c {
@@ -8,13 +9,12 @@ struct BtlMainFUN_0030b49c {
 extern "C" {
 
 s32 scrGetArg(u32 index);
-BtlMainFUN_0030b49c *btlGetMainState(void);
 
 /* Script command: stores argument zero in the battle state at 0x49c0. */
 s32 FUN_0030b49c(void)
 {
     s32 value = scrGetArg(0);
-    btlGetMainState()->value = value;
+    reinterpret_cast<BtlMainFUN_0030b49c *>(btlGetMainState())->value = value;
     return 1;
 }
 

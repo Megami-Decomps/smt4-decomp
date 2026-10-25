@@ -1,6 +1,7 @@
 /* NON_MATCHING: initialization merges the index/object stores and pairs the first two direction components instead of retail's final two components. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Model/AsdScene.h"
 
 struct SceneLightColor {
     f32 r, g, b, a;
@@ -57,7 +58,6 @@ static __inline void setLightDirection(SceneLightData *data, f32 x, f32 y, f32 z
 
 extern "C" {
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
-void *asdMemoryGetDefaultAllocator(void);
 SceneLightObject *_ZN9Obj55b5a86createEPvP18AsdAllocatorObject(SceneLightDescription *, void *allocator);
 u32 FUN_001931d8(const SceneLightColor *);
 

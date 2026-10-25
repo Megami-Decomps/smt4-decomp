@@ -10,7 +10,7 @@ s32 stateValuesGetBySelector(u32 selector);
 /* Runs the selected frame-texture action only when all readiness gates permit it. */
 u32 FUN_0013c6d4(u32 job)
 {
-    FrameTextureWork *work = reinterpret_cast<FrameTextureWork *>(jobGetWork(job));
+    FrameTextureWork *work = (FrameTextureWork *)jobGetWork(job);
     if (stateValuesGetBySelector(0) == 0 && work->unkFA4 && work->unkFA5 &&
         work->unkFAE && work->unk1490 && !work->unk148C) {
         if (work->unk1494) {

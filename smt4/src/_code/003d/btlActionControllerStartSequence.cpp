@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match6_ActionController.h"
 #include "battle/btlMain.h"
 
@@ -19,7 +20,6 @@ struct ActionControllerEffects {
 
 extern "C" {
 void FUN_0022708c(ScreenOwner *owner);
-BtlMainState *btlGetMainState();
 ActionSequence *FUN_00337ba0(BtlMainState *battle, u32 firstId, u32 secondId);
 ActionTrack *FUN_003383a4(BtlMainState *battle, s16 kind);
 u32 shakeEffectAlloc();

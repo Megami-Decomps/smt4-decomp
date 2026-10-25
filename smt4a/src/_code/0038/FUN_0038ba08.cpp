@@ -1,10 +1,10 @@
 /* Tests whether a candidate combatant's auxiliary record has its selection flag set. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 void scrSetResult(s32 result);
 
 u32 FUN_0038ba08(void)

@@ -1,7 +1,7 @@
 #include "gamedata/SaveLoadProcessState.h"
+#include "shard/JobWork.h"
 
 extern "C" {
-SaveLoadProcessWork24 *jobGetWork(u32 job);
 s32 saveLoadGetValue(void);
 void saveLoadSetValue(s32 value);
 void FUN_00268250(s32 mode, u32 resource, s32 first, s32 second, s32 third);
@@ -25,7 +25,7 @@ s32 FUN_0037116c(u32 job)
         s32 timer; // 0x08
     };
     extern SaveLoadAnimationView g_saveLoadProcess;
-    SaveLoadProcessWork24 *work = jobGetWork(job);
+    SaveLoadProcessWork24 *work = (SaveLoadProcessWork24 *)jobGetWork(job);
     switch (work->state) {
     case 12:
         campButtonHelpLoad();

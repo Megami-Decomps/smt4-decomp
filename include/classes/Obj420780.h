@@ -2,8 +2,8 @@
 #define CLASSES_OBJ420780_H
 
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void *asdOperatorNew(u32 bytes, void *owner);
 
 struct Obj420780Point {
     f32 x, y;

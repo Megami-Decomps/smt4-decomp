@@ -1,9 +1,8 @@
 #pragma once
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-
-void scrCommMessageSetMode(int mode);
 
 void FUN_002900d0(void);
 

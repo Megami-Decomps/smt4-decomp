@@ -1,8 +1,8 @@
 /* NON_MATCHING: uniform-scale helper restores XYZ argument allocation; success-result materialization and shared return branches remain different. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 s32 scrGetCommandFrame(void);
 const char *scrGetArgString(u32 index);
 s32 textFormatBuffer(char *buffer, const char *format, ...);

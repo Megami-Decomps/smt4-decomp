@@ -1,6 +1,7 @@
 /* NON_MATCHING: ordinal and accepted-count values remain in registers instead of retail argument homing; scene gate folds to direct addressing and return tails differ. */
 #include "shard/PlayScene.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "shard/flagBitIsSet.h"
 
 struct ContextCommandDefinition {
     u8 kind, enabled;
@@ -14,7 +15,6 @@ void *gameGetSlotTable(void);
 void *gameGetUnitRecord(s32 index);
 s32 idOwnerHasActiveObject(void *unit);
 s32 gameFlagIsSet(u16 flag);
-s32 flagBitIsSet(u16 flag);
 BtlMainState *btlGetMainState(void);
 u32 FUN_00293988(void *battle);
 s32 FUN_0023dcb8(void);

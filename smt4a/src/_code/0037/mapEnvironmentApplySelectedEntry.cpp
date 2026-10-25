@@ -1,4 +1,5 @@
 #include "map/MapEnvironment.h"
+#include "shard/mapEnvironmentApplySelectedEntry.h"
 
 extern "C" {
 void FUN_00297024(u32 enabled, u32 arg14, u32 arg15, u32 arg16, u32 arg17,

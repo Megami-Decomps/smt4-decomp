@@ -1,14 +1,14 @@
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-extern ListBoxWork *jobGetWork(u32 job);
 extern void asdListBoxMarkDirty(u32 listBox);
 
 void asdListBoxSetByteValue(u32 listBox, u8 value)
 {
-    ListBoxWork *work = jobGetWork(listBox);
+    ListBoxWork *work = (ListBoxWork *)jobGetWork(listBox);
 
     asdListBoxMarkDirty(listBox);
     work->unk3D = value;

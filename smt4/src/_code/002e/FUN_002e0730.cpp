@@ -1,6 +1,7 @@
 /* NON_MATCHING: the two visibility flags are materialized in r0 (movne first) where retail uses r1
  * (moveq first) after reloading the model pointer into r0; the rest matches. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct TitleLogoModel {
     /* 0x000 */ u8 unk000[0x120];
@@ -25,14 +26,13 @@ struct TitleLogoWork {
 
 
 extern "C" {
-TitleLogoWork *jobGetWork(u32 job);
 void FUN_002bf818(void *fade);
 void FUN_0034266c(TitleLogoModel *model);
 
 /* Job update: steps the fade, shows the logo unless faded out, and animates it by mode. */
 s32 FUN_002e0730(u32 job)
 {
-    TitleLogoWork *work = jobGetWork(job);
+    TitleLogoWork *work = (TitleLogoWork *)jobGetWork(job);
     FUN_002bf818(work->fade);
     s32 fadeState = work->fadeState;
     work->model->visible = fadeState != 113;

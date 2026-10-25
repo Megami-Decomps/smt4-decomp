@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_00167618.h"
 
 extern "C" {
 extern u32 DAT_005b3ce8;

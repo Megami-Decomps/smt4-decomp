@@ -1,13 +1,14 @@
 /* NON_MATCHING: the scale literal is loaded before the two final integer-argument moves. */
 #include "event/EventTaskRequest.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/scrGetArg.h"
+#include "shard/scrGetArg.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 kind, u32 bytes, u32 flags);
 void *FUN_0031ba34(u32 kind, EventTaskRequest *request, u8 mode, u8 enabled,
                   f32 x, f32 y, f32 z, f32 scale);
 s32 FUN_00162ea4(void);
-u32 scrGetArg(u32 index);
 void scrSetResult(EventTaskRequest *request);
 
 // Create a tracked request for the selected event task when task creation is permitted.

@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-PartySlotTableA *gameGetSlotTable();
 void battleRecordInitializeFromDefinition(PartySlotA *record, u32 definition);
 }
 

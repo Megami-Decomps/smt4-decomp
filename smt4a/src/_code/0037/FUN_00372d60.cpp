@@ -1,12 +1,11 @@
 /* NON_MATCHING: one excluded-mask AND uses different source-register operands. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
-void scrSetResult(s32 result);
 
 // Compare a script threshold with the average encoded value of eligible combatants.
 u32 FUN_00372d60()

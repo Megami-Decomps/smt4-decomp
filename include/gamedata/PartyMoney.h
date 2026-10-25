@@ -27,4 +27,12 @@ void partyMoneyAddForward(s32 amount);
 }
 #endif
 
+extern "C" {
+s32 aocGetContentFlags(u32 id);
+}
+
+extern "C" {
+s32 aocGetContentFlags(u32 id);
+}
+
 #endif

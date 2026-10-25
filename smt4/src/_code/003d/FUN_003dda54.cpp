@@ -1,11 +1,10 @@
 /* NON_MATCHING: The target, value, and optional follow-up arguments use different saved registers and stack-pair loads. */
 #include "battle/btlReflect.h"
-#include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-BtlState *btlGetMainState(void);
-BtlUnitEntry *btlMainFindEntryByListedId(BtlState *state, s32 listedId);
+BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 
 /* Queues the target action and, when requested, a follow-up action for its listed battle unit. */
 u32 FUN_003dda54(u32 actorId, u32 options, u32 value, ReflectTarget *target, s32 followupActor, s32 followupValue)

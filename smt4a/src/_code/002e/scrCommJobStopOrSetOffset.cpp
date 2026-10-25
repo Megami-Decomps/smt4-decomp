@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct JobState {
 
 u32 scrGetArg(u32 index);
 s32 jobIsValid(u32 job);
-JobState *jobGetWork(u32 job);
 void jobStop(u32 job, s32 arg);
 
 /* Script command: stops the job named by the script argument if its state is 1, otherwise sets its offset to -0.25. */
@@ -22,7 +22,7 @@ u32 scrCommJobStopOrSetOffset(void)
     u32 job = scrGetArg(0);
 
     if (jobIsValid(job) != 0) {
-        JobState *work = jobGetWork(job);
+        JobState *work = (JobState *)jobGetWork(job);
 
         if (work->state == 1) {
             jobStop(job, 0);

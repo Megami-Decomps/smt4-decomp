@@ -1,9 +1,9 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 void asdMemFree(void *block);
-void *jobGetWork(u32 job);
 void asdWorkAreaReset(void);
 
 extern void *g_event3dOpening;

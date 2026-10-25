@@ -5,13 +5,13 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/AsdMemCopy.h"
+#include "util/EffMenuListAppend.h"
 
 extern "C" {
 extern Point2 DAT_0059dc7c;
 EffectEditorOptions *FUN_00200bcc(EffectEditorOptions* options);
 void effEditorNodeChainApply(EffectEditorOptions* options);
 void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);
-void effMenuListAppend(EffMenuNode* node, u32 list);
 u32 padButtonIsPressed(u32 buttons);
 u8 FUN_00202178(s32 mapping);
 

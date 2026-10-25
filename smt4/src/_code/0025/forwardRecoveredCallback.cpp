@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/forwardRecoveredCallback.h"
 
 extern "C" void submitDefaultFloatParameters(void *context);
 

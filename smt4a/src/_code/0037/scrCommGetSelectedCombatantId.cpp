@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 
 extern "C" {
-BtlMainStateA* btlGetMainState(void);
 s32 FUN_003eebf4(BtlMainStateA* state, s32 kind);
 void scrSetResult(s32 result);
 

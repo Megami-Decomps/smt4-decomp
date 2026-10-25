@@ -20,16 +20,16 @@ struct CenterTarget {
     /* 0x1A */ s16 centerY;
 };
 
-UiRect *FUN_001834a4(void *owner, u32 id);
+UiRect *asdTMTexTableEntryAt(void *owner, u32 id);
 
 /* Stores the center of the looked-up rectangle (its size override if present) in the target. */
 void FUN_00387240(CenterTarget *target, void *owner, u32 id)
 {
-    UiRect *rect = FUN_001834a4(owner, id);
+    UiRect *rect = asdTMTexTableEntryAt(owner, id);
     s16 *size = rect->size;
 
     if (size != NULL) {
-        s32 centerX = rect->x + size[0] / 2;
+        s32 centerX = size[0] + rect->x / 2;
         s32 centerY = rect->y + size[1] / 2;
         target->centerX = centerX;
         target->centerY = centerY;

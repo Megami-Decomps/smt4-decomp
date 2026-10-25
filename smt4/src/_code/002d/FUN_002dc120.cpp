@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the FUN_0029a17c argument loads are scheduled in a different order. */
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/packNibblesAndByte.h"
 
 /* A texture-table entry as the draw routine reads it. */
 struct IconTextureEntry {
@@ -49,10 +50,9 @@ s32 vec2GetXInt(FixedPosition *position);
 s32 vec2GetYInt(FixedPosition *position);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const IconFade *fade);
-IconTextureEntry *FUN_002bf4f8(u32 file, s32 index);
+IconTextureEntry *asdTMTexTableEntryAt(u32 file, s32 index);
 void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
 void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height, s32 useNarrowScreen);
-u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
 static __inline TextureDrawPayloadIV payloadAt(s32 y)
 {
@@ -80,7 +80,7 @@ void FUN_002dc120(IconScroller *scroller, s32 amount)
     x = x + scroller->offsetX;
     y = y + scroller->offsetY;
     efctSetSpeed(vec2GetSpeed(&scroller->fade));
-    IconTextureEntry *entry = FUN_002bf4f8(0x15, scroller->icon + 0x52);
+    IconTextureEntry *entry = asdTMTexTableEntryAt(0x15, scroller->icon + 0x52);
     renderCtxSetB(g_titleScene, packNibblesAndByte(6, 1, 0));
     FUN_002bf288(2, 0x15, 0x4f, entry->x + x, payloadAt(entry->y + y));
     FUN_002bf288(2, 0x15, 0x4e, entry->x + x, payloadAt(entry->y + y - amount));

@@ -1,5 +1,6 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/FUN_00289de4.h"
 
 extern "C" {
 

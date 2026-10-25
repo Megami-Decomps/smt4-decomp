@@ -1,7 +1,8 @@
 /* NON_MATCHING: unrolled predicated structure now matches retail; only the constant/value register pair (r3/r2) is swapped. */
 #include "gamedata/Table00.h"
+#include "script/ScriptArgs.h"
+#include "shard/scrGetArg.h"
 extern "C" {
-u32 scrGetArg(u32);
 Table00Record* dataTable00FindById(u16);
 u32 randRange(u16);
 void scrSetResult(s32);

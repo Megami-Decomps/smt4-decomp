@@ -8,7 +8,6 @@
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 Table8Record *dataTable8FindRecord(s32 id);
-Table04Record *dataTable04FindById(s32 id);
 
 // Select an action's camera mode unless battle-state or marked-target flags suppress it.
 void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)

@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_TouchRegions.h"
+#include "shard/touchRegisterFirstRegion.h"
 extern "C" {
 s16 ifTouchRegionAdd(s16 x,s16 y,s16 width,s16 height);
 /* Register the first touch rectangle and increment the region count. */

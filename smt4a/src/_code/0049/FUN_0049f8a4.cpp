@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the percent HP loss; retail tests the member's down/immune bits with `tst #2; tsteq #1024` (armcc here merges them into one bic/bics pair), spills new HP and max HP to the stack around the FUN_0018416c call and keeps 1.25f in s16. */
 #include "common.h"
+#include "gamedata/SaveSlotTable.h"
 
 /* The hero record (only the fields read here). */
 struct HeroRecord {
@@ -25,7 +26,6 @@ struct MemberRecord {
 extern "C" {
 HeroRecord *gameGetPlayerData(void);
 MemberRecord *gameGetSlotRecord(s32 id);
-u8 *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 MemberRecord *gameGetOptions(void);
 s32 gameOptionsClassifyMode(void);

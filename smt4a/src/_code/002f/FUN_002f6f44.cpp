@@ -21,7 +21,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 
@@ -44,7 +44,7 @@ void FUN_002f6f44(unsigned int param_1,unsigned int param_2,int param_3,int para
   
   temp_v1 = 0;
   temp_v2 = 0;
-  temp_v0 = FUN_001834a4(0x1e,param_1);
+  temp_v0 = asdTMTexTableEntryAt(0x1e,param_1);
   temp_v3 = 0.26f;
   renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v5 = (float)VectorSignedToFloat((int)**(short **)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);

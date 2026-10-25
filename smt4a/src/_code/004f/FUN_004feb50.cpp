@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 
 extern "C" {
@@ -15,7 +16,6 @@ struct BattleParty {
     /* 0x0C */ u32 ids[1];
 };
 
-void *btlGetMainState(void);
 BattleParty *FUN_001568f8(void *state, s32 memberId);
 s32 idSetFindSubjectIndex(void *state, BtlActionSourceA *source);
 
@@ -37,8 +37,8 @@ ReflectAction *FUN_004feb50(s32 id, u32 argument, BtlActionSourceA *source, u32 
         }
     }
     action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, argument);
-    party = FUN_001568f8(btlGetMainState(), source->memberId);
-    index = idSetFindSubjectIndex(btlGetMainState(), source);
+    party = FUN_001568f8(static_cast<void *>(btlGetMainState()), source->memberId);
+    index = idSetFindSubjectIndex(static_cast<void *>(btlGetMainState()), source);
     if (index < 0) {
         index = 0;
     }

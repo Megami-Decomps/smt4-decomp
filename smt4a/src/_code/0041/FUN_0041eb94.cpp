@@ -1,5 +1,6 @@
 /* NON_MATCHING: snapshot copy addressing and changed-state branch placement differ. */
 #include "gamedata/SavedUnitSelection.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void FUN_003fd7b4(u32, f32, f32, f32);
@@ -11,7 +12,6 @@ void gameGlobalsQueueValues(UnitRecord *, s32);
 void FUN_0034aac8(s32);
 void FUN_0033449c(s32);
 void FUN_0023b45c(s32);
-void FUN_002c8538(s32);
 void FUN_002f0384(s32);
 void objBSetWordByIndex(s32, u16);
 

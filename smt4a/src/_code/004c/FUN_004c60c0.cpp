@@ -1,11 +1,11 @@
 /* NON_MATCHING: clearing the skill snapshot uses r0 for zero, adding two source-pointer preservation MOVs. */
+#include "battle/BtlMainAccess.h"
 #include "gamedata/Table04Record.h"
 #include <string.h>
 
 struct BtlMainStateA;
 struct Source4C;
 extern "C" {
-BtlMainStateA *btlGetMainState();
 Source4C *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(Source4C *, u16 *);
 const Table04ExtraRecord *dataTable41FindById(u32);

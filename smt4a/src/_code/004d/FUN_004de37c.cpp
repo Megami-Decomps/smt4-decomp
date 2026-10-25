@@ -1,6 +1,7 @@
 /* NON_MATCHING: 64-bit mask loads are ldm here but ldrd in retail, the unit-slot address folding differs, and retail keeps 12 more bytes of locals between the extra-target word and the confirm flag (the extra-target query result is larger than the u64 used here) */
 #include "common.h"
 #include "mapnavi/naviMain.h"
+#include "gamedata/Table04Record.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -80,11 +81,9 @@ struct BtlTargetInfo {
 extern "C" {
 extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
-Table04Row *dataTable04FindById(s32 id);
 Table8Row *dataTable8FindRecord(s32 id);
 s32 FUN_003f0e94(BtlActingState *battle, s32 index);
 void FUN_003e8bb0(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
-s32 FUN_004aba9c(u32 ui);
 void FUN_004ab80c(u32 ui, u8 *confirmed, u64 *selected, u64 *extra);
 void btlUIClearWorkTables(u32 ui);
 void FUN_004e980c(BtlActingTask *task, BtlMenuState *menu);
@@ -148,7 +147,7 @@ u32 FUN_004de37c(BtlActingTask *task, BtlMenuState *menu)
         goto markSelected;
     }
     if (command == 2 || command == 3) {
-        Table04Row *row = dataTable04FindById(result->argument);
+        Table04Row *row = (Table04Row *)dataTable04FindById(result->argument);
         if (row == NULL) {
             goto scanTargets;
         }
@@ -163,7 +162,7 @@ u32 FUN_004de37c(BtlActingTask *task, BtlMenuState *menu)
         if (linked->linkedId == 0) {
             goto scanTargets;
         }
-        Table04Row *row = dataTable04FindById(linked->linkedId);
+        Table04Row *row = (Table04Row *)dataTable04FindById(linked->linkedId);
         if (row == NULL) {
             goto scanTargets;
         }

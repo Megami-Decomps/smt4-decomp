@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/asdMemoryAllocTracked.h"
 
 extern "C" {
 s32 FUN_002bda9c(u32 handle);
@@ -9,7 +10,6 @@ void asdListBoxDestroy(u32 handle);
 
 extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */
 extern const s8 DAT_0053d994[]; /* "AsdListBox" */
-void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
 void rowWidgetInit(void *widget, s32 rows, s32 unk);

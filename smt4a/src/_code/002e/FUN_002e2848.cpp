@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail homes r0-r3 at entry (push {r0-r3,...}) and reloads the list pointer from its home slot before every call, and sign-extends the three region ids at the call; ours keeps the pointer in a saved register and passes the ids unextended */
 #include "common.h"
+#include "shard/FUN_002618c8.h"
 
 /* Two halfwords passed together in one register. */
 struct ScrollPoint {
@@ -21,7 +22,6 @@ s32 FUN_002a4878(ScrollList *list);
 s32 FUN_002a4894(ScrollList *list);
 void scrollOwnerSelectIndex(ScrollList *list, s32 value);
 void FUN_002a4964(ScrollList *list, s32 value);
-s16 FUN_002618c8(void);
 s16 FUN_002618e0(void);
 void eventQueueAddUnique(u32 event);
 

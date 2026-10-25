@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "camp/PlayLog/PlayLog.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ extern u32 dataTableGet(u32 group, u32 index);
 extern void *dataTableGetEntries(u32 table);
 extern u32 dataTableGetCount(u32 table);
 extern s32 gameCountersGetWord(u32 counter);
-extern s32 FUN_002907a8(void);
 extern void FUN_0029f848(u8 *list, s32 count, s32 columns, s32 a, s32 b, s32 c);
 
 /* Looks a record up in data table 0x37, or NULL when out of range. */

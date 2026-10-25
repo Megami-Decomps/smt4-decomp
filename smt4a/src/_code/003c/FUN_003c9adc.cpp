@@ -3,10 +3,10 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 void scrSetResult(s32 result);
-s32 btlFindEntryValue(s32 unitIndex, s32 kind);
 
 // Script command: sets 1 when a candidate entry that is not excluded has a positive value of kind 0x13.
 u32 FUN_003c9adc(void)

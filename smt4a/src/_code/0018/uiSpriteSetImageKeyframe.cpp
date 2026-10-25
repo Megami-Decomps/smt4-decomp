@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses ldr ip, [r0, #88] where the compiled block uses ldr r3, [r0, #88]. */
+/* NON_MATCHING: retail multiplies the index by 3 in place (r1) and returns with bx lr; the build keeps the product in r4 (push/pop {r4}). */
 #include "common.h"
 
 struct SpriteImageKeyframe {
@@ -30,8 +30,7 @@ extern "C" void uiSpriteSetImageKeyframe(UiSprite* sprite, s32 keyframeIndex,
         sprite->unk87 = 0;
         sprite->unk8A = 0;
         sprite->alternateImage = (u8)alternateImage;
-        sprite->image = alternateImage != 0
-            ? sprite->keyframes[keyframeIndex].alternateImage
-            : sprite->keyframes[keyframeIndex].image;
+        const SpriteImageKeyframe* keyframe = &sprite->keyframes[keyframeIndex];
+        sprite->image = alternateImage != 0 ? keyframe->alternateImage : keyframe->image;
     }
 }

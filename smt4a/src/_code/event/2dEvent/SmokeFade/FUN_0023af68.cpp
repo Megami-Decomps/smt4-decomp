@@ -1,6 +1,7 @@
 /* NON_MATCHING: the fade record selection is inlined per phase with different register allocation and the float constants sit in other registers (187 vs 185 rows); the fade logic is the same. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/slotSetRequest.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ extern SmokeFadeRecord DAT_0057f498;
 
 s32 FUN_00162ea4(void);
 f32 mathInterpolateTimed(f32 from, f32 to, s32 duration, s32 elapsed);
-void slotSetRequest(s32 slot, s32 value, s32 flag);
 void FUN_003d54f8(s32 slot, s32 value);
 
 /* Whether both fade images are loaded. */

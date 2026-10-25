@@ -1,13 +1,13 @@
 /* NON_MATCHING: stock-demon action search uses fewer saved registers and different loop sharing. */
 /* Adds a stock demon to an available battle-party action slot. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "shard/gameGetSlotTable.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 s32 scrGetArg(u32 index);
-PartyDamageSlotsIV *gameGetSlotTable(void);
 void FUN_0024b888(s32 first, s32 second, s32 third, s32 stockIndex, s32 actionIndex, s32 enabled);
 
 u32 FUN_002cfdd0(void)

@@ -1,6 +1,7 @@
 /* NON_MATCHING: aligned-header pointer arithmetic is combined differently and the retail VRAM-branch NOP is absent. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include <stddef.h>
+#include "bible/bibleDevil.h"
 
 struct AlignedAllocationHeader { u32 size; u16 alignment, flags; };
 struct AlignedAllocationView {

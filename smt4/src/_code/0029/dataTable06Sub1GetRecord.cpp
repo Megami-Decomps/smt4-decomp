@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
+#include "shard/dataTable06Sub1GetRecord.h"
 
 extern "C" {
 

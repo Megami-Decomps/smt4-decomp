@@ -1,7 +1,7 @@
 /* NON_MATCHING: payload destination uses r5 instead of lr and optional-argument comparison is scheduled earlier. */
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/AsdTMTexTableCallFileC.h"
-#include "util/AsdTMTexTableCallFileC.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* Local views: the Apocalypse placement flags are a halfword, and the optional
  * request vector lies beyond the recovered IV request prefix. */

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match5_DisplayMode.h"
 
 extern "C" {
 

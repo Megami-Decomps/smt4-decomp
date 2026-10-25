@@ -1,5 +1,6 @@
 /* NON_MATCHING: for-loop counter lifetimes match; mode predicate grouping and sort/output scratch registers differ. */
 #include "map/mapDepart.h"
+#include "shard/dataTable2BType1Count.h"
 
 /* The destination list this function fills: entries of {active, id} followed by the entry count. */
 struct SelectableEntry {
@@ -27,7 +28,6 @@ extern "C" {
 
 extern GameStateA g_gameState;
 
-s32 dataTable2BType1Count(u32 *view);
 TableRecord *dataTable2BType1GetEntry(u32 *view, s32 index);
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_004083a8(s32 first, s32 second);

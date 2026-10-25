@@ -100,7 +100,7 @@ extern short *gameGetPlayerData(void);
 extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
@@ -317,7 +317,7 @@ void FUN_0018854c(unsigned int param_1)
       return;
     }
     temp_v13[0] = '\0';
-    temp_v2 = FUN_002bf4f8(0x1d,0x572);
+    temp_v2 = asdTMTexTableEntryAt(0x1d,0x572);
     temp_v4 = temp_v11;
     uiScrollHandleActionsOrTouch(temp_v11,temp_v2,temp_v5 + 0xe0c,(int)*(short *)(temp_v5 + 0xe02),
                  (int)*(short *)(temp_v5 + 0xe04),(int)*(short *)(temp_v5 + 0xe06),temp_v13,0,1);

@@ -17,7 +17,7 @@ extern "C" {
 extern void *g_aocSystem;
 const Table00Record *dataTable00FindById(u16);
 s32 recordPrepareLinkedOwner(void *, u32, s32);
-const PortraitImageDimensions *FUN_002bf4f8(u32, s32);
+
 void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);
 void FUN_00389f74(void *, s32, s32, s32, s32, s32, u32, s32, s32, s32, s32);
 }
@@ -64,7 +64,7 @@ extern "C" void FUN_0031eba0(s32 unit, s32 sourceX, s32 sourceY, u32 color, s32 
         return;
     if (!recordPrepareLinkedOwner(g_aocSystem, bank, image)) {
         s32 sprite = image * 1000 + 1;
-        const PortraitImageDimensions *dimensions = FUN_002bf4f8(bank, sprite);
+        const PortraitImageDimensions *dimensions = reinterpret_cast<const PortraitImageDimensions *>(asdTMTexTableEntryAt(bank, sprite));
         PortraitClipBounds clip;
         clip.left = dimensions->width + (x - sourceX);
         clip.right = clip.left + width;

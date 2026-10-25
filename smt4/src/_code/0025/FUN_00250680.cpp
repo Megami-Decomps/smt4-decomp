@@ -1,4 +1,5 @@
 /* NON_MATCHING: Retail mov r5, #1 differs from recovered mov r2, #0. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "common.h"
 
@@ -18,7 +19,6 @@ struct ReflectSourceView {
 };
 
 extern "C" {
-BattleMainState* btlGetMainState(void);
 ListedBattleEntryView* btlMainFindEntryByListedId(BattleMainState* state, s32 listedId);
 s32 FUN_0027e3e8(BattleEvent* event, ReflectSourceView* source, u32 mode);
 
@@ -29,7 +29,7 @@ u32 FUN_00250680(s32 actionId, u32 argument, ReflectSourceView* source)
 {
     if ((source->flags & 1) != 0 && (source->flags & 0x80) != 0) {
         ListedBattleEntryView* entry =
-            btlMainFindEntryByListedId(btlGetMainState(), source->listedId);
+            btlMainFindEntryByListedId(reinterpret_cast<BattleMainState *>(btlGetMainState()), source->listedId);
         entry->flags |= 0x240;
 
         if (FUN_0027e3e8(g_btlEvent, source, 1) == 0 ||

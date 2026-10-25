@@ -6,7 +6,7 @@
 
 
 extern "C" {
-SpriteInfo *FUN_001834a4(u32, s32);
+SpriteInfo *asdTMTexTableEntryAt(u32, s32);
 f32 jobGetScalarValue();
 void efctSetSpeed(f32);
 void FUN_00183bb0();
@@ -18,7 +18,7 @@ void FUN_00185dd4(u32, u32, s32, u32, u32, u32, u32, u32);
 
 void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer, s32 alpha, s32 useColors)
 {
-    SpriteInfo *sprite = FUN_001834a4(0x13, spriteId);
+    SpriteInfo *sprite = asdTMTexTableEntryAt(0x13, spriteId);
     ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
     u32 width, height;
     if (extension != NULL && extension->mode == 1) {
@@ -29,7 +29,7 @@ void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer,
         height = sprite->bounds.height & 0x7fff;
     }
     f32 previousAlpha = jobGetScalarValue();
-    sprite = FUN_001834a4(0x13, spriteId);
+    sprite = asdTMTexTableEntryAt(0x13, spriteId);
     extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
     if (extension != NULL && extension->mode == 1) {
         FUN_00185dd4(2, 0x13, spriteId, x, y, width, height, layer);

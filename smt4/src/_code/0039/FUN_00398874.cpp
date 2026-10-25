@@ -1,6 +1,7 @@
 /* NON_MATCHING: the restored cursor's store address goes to r0 instead of r3 (register allocation only). */
 #include "common.h"
 #include "util/TouchLayoutRebuildRegions.h"
+#include "quest_center/qcMain.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ typedef struct CursorMenu {
 
 s32 FUN_002bf818(void *timer);
 void FUN_00232848(void);
-void buttonHelpSetPreset(s32 preset);
 void messageOwnerSetState(CursorMenu *menu, s32 state);
 void timerStart(void *timer, s32 a, s32 b);
 s32 vec2GetXInt(void *timer);

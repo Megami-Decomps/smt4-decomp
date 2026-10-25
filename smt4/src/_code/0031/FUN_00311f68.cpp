@@ -1,9 +1,9 @@
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
 
 int scrSetResult(int);
-int btlGetMainState(void);
 
 extern unsigned long long btlMainFindActiveEntry(void);
 /* Supplied declaration required: scrSetResult. */
@@ -22,7 +22,7 @@ unsigned int FUN_00311f68(void)
   unsigned long long temp_v4;
   
   temp_v1 = scrGetArg(0);
-  btlGetMainState();
+  reinterpret_cast<int>(btlGetMainState());
   temp_v4 = btlMainFindActiveEntry();
   temp_v2 = (unsigned int)((unsigned long long)temp_v4 >> 0x20);
   if ((int)temp_v4 != 0) {

@@ -1,4 +1,5 @@
 #include "ui/ButtonHelp.h"
+#include "shard/FUN_002a21e8.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;

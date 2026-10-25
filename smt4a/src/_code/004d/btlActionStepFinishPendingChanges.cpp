@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match6_BattleCamera.h"
 #include "bible/bibleAnalyze.h"
+#include "battle/btlEditor.h"
 
 struct BattleActionStep {
     u32 state;        /* 0x00 */
@@ -26,7 +27,6 @@ extern void *g_btlUiBlock;
 extern void *g_btlAux;
 s32 FUN_004f2708(BattleActionCamera *camera, BtlMainStateA *battle, s32 flags);
 void btlQueueDuplicateSuppressedAction(s32, s32, s32);
-void FUN_004feecc(s32, s32);
 s32 scrRunOpcodesStub(u32 process);
 void FUN_003756c8(s32 mode);
 void btlStageResetAndClearCameraFlag(void *context);

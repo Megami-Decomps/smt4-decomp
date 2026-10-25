@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler merges cleanup exits; retail duplicates them and preserves the error code across cleanup. */
+/* NON_MATCHING: exits now duplicated as in retail; only the error constant's register differs (retail loads it into r0 and copies to r4, this build loads r4 directly). */
 #include "sys/ProcessResult.h"
 #include "common.h"
 
@@ -9,18 +9,21 @@ s32 FUN_00254884(const ResourceRequest* request, u8* scratch, s32 mode);
 void FUN_002ad888();
 u32 FUN_002a84e8(u8* scratch);
 
+/* Records `result` as the process result and hands it back. */
+static __inline u32 recordProcessResult(u32 result)
+{
+    FUN_002c3510(result);
+    return result;
+}
+
 // Process a resource request using a temporary work area, returning its result code.
 u32 FUN_00220438(const ResourceRequest* request)
 {
     u8 scratch[496];
-    u32 result;
     if (FUN_00254884(request, scratch, 1) != 0) {
         FUN_002ad888();
-        result = FUN_002a84e8(scratch);
-    } else {
-        result = 0xe0e046bc;
+        return recordProcessResult(FUN_002a84e8(scratch));
     }
-    FUN_002c3510(result);
-    return result;
+    return recordProcessResult(0xe0e046bc);
 }
 }

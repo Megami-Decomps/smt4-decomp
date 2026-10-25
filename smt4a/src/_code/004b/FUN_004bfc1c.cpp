@@ -1,4 +1,5 @@
 /* NON_MATCHING: compiler combines retail's separate status tests into one mask and does not preserve the default rate. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -8,7 +9,6 @@ struct BattleRateAnalysis {
     u16 unk32;
 };
 extern "C" {
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
 void FUN_003e8bb0(BattleRateAnalysis *analysis, BtlMainStateA *battle, BtlCombatantEntryA *source);
 

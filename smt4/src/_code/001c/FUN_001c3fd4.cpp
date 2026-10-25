@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c3fd4` (_code @ 0x1c3fd4, 0x48d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SaveLoadProcess.h"
@@ -163,7 +164,6 @@ extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_0029378c. */
 /* Supplied declaration required: objClearFlagPair. */
 /* Supplied declaration required: FUN_002937e0. */
-extern int btlGetMainState(void);
 extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: messageMainFinishWindow. */
@@ -2548,8 +2548,8 @@ LAB_001c7c50:
         FUN_0026c654(temp_v6,0xffffffff,*(unsigned short *)(temp_v1 + 0x36),1);
         if (temp_v6 == 1) {
           *(unsigned char *)(temp_v1 + 0x678) = 0;
-          temp_v6 = btlGetMainState();
-          if ((temp_v6 != 0) && (temp_v6 = btlGetMainState(), (*(unsigned int *)(temp_v6 + 0x44a8) & 0x2000000) != 0)
+          temp_v6 = reinterpret_cast<int>(btlGetMainState());
+          if ((temp_v6 != 0) && (temp_v6 = reinterpret_cast<int>(btlGetMainState()), (*(unsigned int *)(temp_v6 + 0x44a8) & 0x2000000) != 0)
              ) {
             *(unsigned char *)(temp_v1 + 0x678) = 1;
           }

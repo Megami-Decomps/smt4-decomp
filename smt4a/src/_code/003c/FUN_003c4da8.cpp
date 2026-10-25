@@ -1,11 +1,10 @@
 /* NON_MATCHING: branch layout: retail shares the `return 1` tail and the record->id load across
  * paths (branching back to them); the build duplicates them. Logic and registers match. */
 #include "shard/X14_EngineUnits.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-s32 scrGetArg(s32 index);
-void scrSetResult(u32 result);
 EngineUnitRecord *gameGetSlotRecord(void);
 EngineUnitRecord *FUN_003e503c(u16 index);
 u8 flagAt4IsClearOrMissing(void);

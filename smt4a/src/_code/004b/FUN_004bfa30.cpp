@@ -1,4 +1,5 @@
 /* NON_MATCHING: gate-mask base addressing, category dispatch and zero-result epilogues differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match1_PartySlot.h"
@@ -7,9 +8,7 @@
 
 extern "C" {
 extern const u8 DAT_005713f0[];
-Table04Record *dataTable04FindById(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 subject);
 void FUN_003e8bb0(void *snapshot, BtlMainStateA *battle, BtlCombatantEntryA *subject);
 s32 FUN_004bd098(u32 source, u32 item);

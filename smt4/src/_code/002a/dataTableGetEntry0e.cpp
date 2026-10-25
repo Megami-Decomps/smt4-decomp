@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/dataTableGetEntry0e.h"
 
 extern "C" {
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc keeps the constant 2 in a saved r5 (push r4-r6), loads the second resource
  * pair with ldm and stores step/stepTimer separately; retail rematerializes 2 and uses strd */
 #include "common.h"
+#include "shard/FUN_003bbaa8.h"
 
 #define UNK3BA2BC_FLAG_PENDING 0x10
 
@@ -31,7 +32,6 @@ struct Unk3ba2bcOwner {
 
 extern "C" {
 
-s32 FUN_003bbaa8(void *loader);
 s32 stageAssetsLoaded(void);
 s32 spriteTable2aIsLoaded(void *sprites);
 Unk3ba2bcPart *FUN_00297060(void *resourceA, void *resourceB);

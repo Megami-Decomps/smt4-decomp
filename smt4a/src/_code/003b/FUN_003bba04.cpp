@@ -1,10 +1,10 @@
 /* NON_MATCHING: resource fallback comparison matches; suppression-mask scalar versus paired loads still differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlMainStateA* btlGetMainState(void);
 
 // Report whether an eligible combatant has a positive primary or fallback resource.
 u32 FUN_003bba04(void)

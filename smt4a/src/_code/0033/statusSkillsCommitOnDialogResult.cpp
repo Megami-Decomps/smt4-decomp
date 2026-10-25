@@ -2,6 +2,7 @@
 #include "shard/Shard0034.h"
 #include "util/CalleeContracts.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "shard/getUnlockedSlotCount.h"
 
 namespace {
 union SkillIds {
@@ -58,7 +59,6 @@ extern "C" {
 s32 scrRunOpcodesStub(u32);
 s32 messageMainGetValue(void);
 s32 countUnlockedSlots(void);
-s32 getUnlockedSlotCount(const PlayerData*);
 void statusReplaceSkills(const u16*, u8);
 
 void statusSkillsCommitOnDialogResult(void* object)

@@ -6,7 +6,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [64], unsigned char *, unsigned int);
-int FUN_00162790(int, unsigned int, unsigned char [64]);
+int textDrawString(int, unsigned int, unsigned char [64]);
 int FUN_001634b4(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
@@ -35,13 +35,13 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_00156850(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00162790. */
+/* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: vec2GetXInt. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern int FUN_001834a4(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: jobGetScalarValue. */
@@ -100,15 +100,15 @@ void FUN_002f6048(int param_1)
   renderCtxCalculateStereoParallax(g_renderCtx);
   VectorSignedToFloat((int)temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001634b4(param_1 + 0x5ac);
-  temp_v3 = FUN_001834a4(0x1e,0x51);
+  temp_v3 = asdTMTexTableEntryAt(0x1e,0x51);
   temp_v8 = *(unsigned short *)(temp_v3 + 4) & 0xffff7fff;
-  temp_v3 = FUN_001834a4(0x1e,0x56);
+  temp_v3 = asdTMTexTableEntryAt(0x1e,0x56);
   temp_v0 = **(short **)(temp_v3 + 0xc);
   temp_v4 = FUN_00156850(temp_v13,0);
   textFormatBuffer(temp_v12,&LAB_002f64c4,temp_v4);
   puVar6 = temp_v12;
   fontMeasureLineAdvance(puVar6,3);
-  temp_v2 = FUN_001834a4(0x1e,0x55);
+  temp_v2 = asdTMTexTableEntryAt(0x1e,0x55);
   temp_v3 = ((int)**(short **)(temp_v2 + 0xc) - (int)(puVar6 + temp_v8 + (int)temp_v0)) / 2;
   renderCtxCalculateStereoParallax(g_renderCtx);
   temp_v10 = (int)temp_v9;
@@ -126,7 +126,7 @@ void FUN_002f6048(int param_1)
   temp_v5 = vec2GetYInt(temp_v14,temp_v6,temp_v7);
   VectorSignedToFloat(temp_v5 + *(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(temp_v6 + temp_v1 + temp_v3 + temp_v7 + (int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00162790(3,0xffffffff,temp_v12);
+  textDrawString(3,0xffffffff,temp_v12);
   temp_v3 = g_renderCtx;
   temp_v2 = packNibblesAndByte(6,1,0);
   piVar10 = (int *)(temp_v3 + 0x12b8);

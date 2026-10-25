@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "text/TextDraw.h"
 
 extern "C" {
 
 int positionStateSet(...);
 int taskCreateDraw(...);
-int FUN_001527d8(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int sysPlaySe(...);
 int FUN_00182054(void);

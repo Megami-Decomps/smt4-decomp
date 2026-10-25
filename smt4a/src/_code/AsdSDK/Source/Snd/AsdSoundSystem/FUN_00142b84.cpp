@@ -35,7 +35,6 @@ s32 FUN_00159030(void);
 s32 FUN_00159d60(void);
 void sysFatalBreak(void);
 void sndMasterManagerSetVolume(f32 volume);
-void FUN_00171424(u32 value);
 void FUN_00159e58(u32 mode);
 u32 FUN_0015e0c8(const SoundSystemInitParameters *parameters);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 options, u32 bytes, s32 clear);

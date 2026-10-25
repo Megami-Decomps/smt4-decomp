@@ -1,10 +1,10 @@
+#include "battle/BtlMainAccess.h"
 #include "util/FUN_003ee0c0.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 u32 FUN_004fc094(s32 mode, ScriptUnit *unit, s32 kind, BattleRosterRecordA *roster,
     s32 first, s32 damage, s32 target, u32 mask, u32 hp, u32 maxHp,
     s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h,

@@ -1,6 +1,7 @@
 /* NON_MATCHING: phase-load fallthrough merging, 64-bit mask scheduling, and switch/body placement differ from retail. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "util/CalleeContracts.h"
 
 struct EncounterTask {
     /* 0x00 */ u32 state;
@@ -32,7 +33,6 @@ extern void *g_btlAux;
 s32 isEntryUsable(BtlStep *event);
 s32 FUN_004d7a70(BtlStep *event, u32 kind, u32 value, u32 flags);
 void FUN_002e5924(u32 state);
-s32 FUN_0013def0(u32 index);
 void FUN_0013cab8(u32 index, u32 first, u32 second);
 void FUN_004d7fe4(BtlStep *event);
 s32 FUN_003e11ac(EncounterTask *task, EncounterTaskContext *context);

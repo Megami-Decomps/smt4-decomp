@@ -1,11 +1,7 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
-
-typedef struct DataRow {
-    /* 0x00 */ u8 unk00[0x2C];
-    /* 0x2C */ u16 order;
-} DataRow;
 
 typedef struct SlotRecord {
     /* 0x00 */ u8 unk00[0x62];
@@ -20,7 +16,6 @@ typedef struct SortItem {
 extern int idIsAbove400(int id);
 extern int itemGetCategorySortOrder(int id);
 extern int dataTable04GetCategoryOrder(int id);
-extern DataRow *dataTable04FindById(int id);
 extern SlotRecord *gameGetSlotRecord(int slot);
 
 /* Compare function for sorting items: by two ranks, the data row's order, the id, then the slot's sort key. */
@@ -43,7 +38,7 @@ int FUN_003811ec(SortItem *a, SortItem *b)
     } else {
         rankA = itemGetCategorySortOrder(a->id);
         subA = dataTable04GetCategoryOrder(a->id);
-        orderA = dataTable04FindById(a->id)->order;
+        orderA = dataTable04FindById(a->id)->listing.sortKey;
     }
     if (idIsAbove400(b->id) != 0) {
         rankB = 99;
@@ -52,7 +47,7 @@ int FUN_003811ec(SortItem *a, SortItem *b)
     } else {
         rankB = itemGetCategorySortOrder(b->id);
         subB = dataTable04GetCategoryOrder(b->id);
-        orderB = dataTable04FindById(b->id)->order;
+        orderB = dataTable04FindById(b->id)->listing.sortKey;
     }
     diff = rankB - rankA;
     if (diff == 0) {

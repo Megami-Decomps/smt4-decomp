@@ -2,6 +2,7 @@
 #include "addon/aocMain.h"
 #include "shard/W8X15_PackageList.h"
 #include "gamedata/TableEntryCache.h"
+#include "shard/aocCountPackageItemsOfType.h"
 
 struct AocPackageItemList : AocSystemA {
     u8 unk394[0xb4];
@@ -19,7 +20,6 @@ void asdOperatorDeleteB(void *items);
 void *asdOperatorNewE(u32 size);
 s32 asdFsIsSdCardDetected();
 u32 objGetFlagBit16(AocMain *main);
-s32 aocCountPackageItemsOfType(AocSystemA *system, u32 kind);
 void entryStateClear(EntryState *entry);
 void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void (*construct)(void *), u32 size, u32 count);
 void FUN_00471468(AocSystemA *system, s32 kind, s32 capacity, PackageFileRef *output);

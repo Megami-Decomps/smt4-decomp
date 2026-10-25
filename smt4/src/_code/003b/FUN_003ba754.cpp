@@ -3,6 +3,7 @@
 #include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
 #include "script/scrScriptProcess.h"
+#include "shard/FUN_0027db24.h"
 
 struct ScriptFile;
 struct ScriptProcessWork;
@@ -41,7 +42,6 @@ void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
 void bgmReleaseStopped(void);
 void mapDepartSetTarget(u32 first, u32 second);
 s32 FUN_0027d8c8(void);
-void FUN_0027db24(s32 flag);
 void gameRestoreWorkSave(s32 kind);
 u32 FUN_002903f0(void);
 ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);

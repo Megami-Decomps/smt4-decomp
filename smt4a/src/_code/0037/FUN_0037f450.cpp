@@ -1,12 +1,10 @@
-/* NON_MATCHING: the excluded-mask test allocates its AND results to the mask registers instead of the flag registers (r0/r1) */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
-BtlMainStateA *btlGetMainState(void);
 
 /* Script query: reports whether an eligible battle entry with id argument 0 has status bit argument 1 set. */
 u32 FUN_0037f450(void)
@@ -17,8 +15,8 @@ u32 FUN_0037f450(void)
 
     for (i = 0; i < 109; i++) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
+        if (g_btlCandidateMasks.unavailable & (entry->flags) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             entry->id == id && (entry->statusFlags & (1 << bit))) {
             scrSetResult(1);

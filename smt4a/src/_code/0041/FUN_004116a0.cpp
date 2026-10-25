@@ -1,4 +1,6 @@
 /* NON_MATCHING: readable rebuild; retail keeps no VFP register live across the calls (the colour constants are reloaded per call) and zeroes the 12-entry candidate array as six stack words in a fixed order, which armcc here schedules differently. */
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "common.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "event/2dEvent/EventEffect.h"
@@ -9,20 +11,6 @@ struct PartySlot {
     /* 0x12C */ u16 id;
 };
 
-/* A roster record (0x1D0 bytes) with its state flags at 0x50. */
-struct RosterRecord {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ u32 flags;
-    /* 0x54 */ u8 unk54[0x17C];
-};
-
-/* The battle state as this reads it. */
-struct BattleStateView {
-    /* 0x0000 */ u8 unk0000[0x1ED4];
-    /* 0x1ED4 */ RosterRecord *roster;
-    /* 0x1ED8 */ u8 unk1ED8[0x2E8C];
-    /* 0x4D64 */ u32 infoWindow;
-};
 
 struct BattleCameraView {
     /* 0x000 */ u8 unk000[0x64C];
@@ -49,8 +37,7 @@ PartySlot *FUN_003e4d68(u32 index);
 s32 FUN_00187168(PartySlot *slot);
 PartySlot *saveSlotFindSelected(void);
 s32 lcgRandomRange(s32 limit);
-BattleStateView *btlGetMainState(void);
-void FUN_003f1b3c(BattleStateView *battle, u32 voice, s32 kind, u32 *text, u32 *colorSet);
+void FUN_003f1b3c(BtlMainStateA *battle, u32 voice, s32 kind, u32 *text, u32 *colorSet);
 void FUN_0047f4cc(u32 handle, f32 red, f32 green, f32 blue);
 void uiNavigatorStart(s32 id, s32 a, s32 b, s32 c, s32 d);
 void infoWinSetTimer(s32 frames);
@@ -96,7 +83,7 @@ void FUN_004116a0(ScriptOwner *owner)
         pick = candidates[lcgRandomRange((u16)(count - 1))];
     }
 
-    BattleStateView *battle = btlGetMainState();
+    BtlMainStateExtA *battle = btlGetMainStateExt();
     u32 voice = FUN_0019acdc(pick, 1);
     u32 text;
     u32 colorSet;
@@ -107,8 +94,8 @@ void FUN_004116a0(ScriptOwner *owner)
     infoWinSetTimer(0x708);
     FUN_004fbdd4(0, 0, 5, 0.4f, 0.4f, 0.4f);
     for (s32 i = 4; i < 54; i++) {
-        RosterRecord *record = &battle->roster[i];
-        if (record != NULL && (record->flags & 1) && (record->flags & 2))
+        BattleRosterRecordA *record = &battle->roster[i];
+        if (record != NULL && (record->liveFlags.unk50 & 1) && (record->liveFlags.unk50 & 2))
             FUN_004fe618(0, 0, 5, 0.4f, 0.4f, 0.4f);
     }
     g_btlCamera->flags |= 0x4000;

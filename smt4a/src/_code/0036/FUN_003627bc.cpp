@@ -1,11 +1,11 @@
 /* NON_MATCHING: std::remove omits retail's copied end pointer in its find loop, and adjacent buffer/slot loads merge into ldm. */
 #include "gfx/AsdLightSet.h"
 #include <algorithm>
+#include "AsdSDK/asdLightSelectActive.h"
 
 extern "C" {
 extern s32 g_asdLightCount;
 void objectBufferFree(AsdLightBuffer *buffer);
-void asdLightSelectActive(s32 enable);
 void asdMemFree(void *memory);
 }
 

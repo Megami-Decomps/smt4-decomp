@@ -1,4 +1,5 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/FUN_00299bc4.h"
 
 extern "C" {
 extern CampHelpPrefixIV *g_camp;

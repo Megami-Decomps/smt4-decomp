@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail shares one state store between states 0 and 1 (case 0 branches to case 1's store); armcc merges case 1 into case 2's store. The process mode store uses the inlined scriptProcessSetMode. */
 #include "common.h"
+#include "shard/FUN_002903f0.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ ScriptProcess *FUN_00297060(void *script, void *messages);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 s32 scrRunOpcodesStub(ScriptProcess *process);
-u32 FUN_002903f0(void);
 void FUN_0029016c(u32 a, s32 b);
 void FUN_002900d0(void);
 void gameJumpRequestClear(void);

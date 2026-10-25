@@ -1,22 +1,22 @@
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SourceMetadata.h"
 #include "bible/bibleAnalyze.h"
 
 extern "C" {
-BtlCombatantEntryA *FUN_003f0e20(BattleMaskState *, u32);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
 SourceMetadataFlags *dataTable41FindById(u32);
-s32 FUN_003ec77c(BattleMaskState *);
+s32 FUN_003ec77c(BtlMainStateA *);
 s32 lcgRandomRange(u32);
 
 /* Pick the first source's triggered skill that passes the action and chance gates. */
 s32 btlSelectSourceTriggeredSkill(u32 id, s32 randomize)
 {
-    BattleMaskState *state = btlGetMainState();
+    BtlMainStateA *state = btlGetMainState();
     BtlCombatantEntryA *entry = FUN_003f0e20(state, id);
     /* This unknown byte at 0x45B9 overrides the current-action exclusions. */
-    if (!state->unk45a8[0x11]) {
+    if (!state->reinforcementChance.chanceBonus) {
         switch (state->activity.currentAction) {
         case 0x169:
         case 0x16A:

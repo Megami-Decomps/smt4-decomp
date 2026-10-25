@@ -1,5 +1,6 @@
 /* NON_MATCHING: addressing of the 0x14xx flag bytes: retail uses base+0x1400 loads and a pooled 0x1414 register offset for the clears; this source gets add/add pairs. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 /* Frame texture fade state (Apocalypse layout). */
 struct FrameTexFade {
@@ -26,14 +27,13 @@ extern "C" {
 extern FrameTexFade *g_frameTex;
 extern u32 g_renderCtx;
 
-FrameTexFade *jobGetWork(void);
 void FUN_00157558(u32 renderCtx);
 void FUN_0014b01c(s32 value);
 
 /* Job update: advances the frame texture's fade in or out, clearing it once a fade-out ends. */
-u8 FUN_0013e8f8(void)
+u8 FUN_0013e8f8(u32 job)
 {
-    FrameTexFade *work = jobGetWork();
+    FrameTexFade *work = (FrameTexFade *)jobGetWork(job);
 
     if (work->captured && work->shown && work->enabled) {
         FUN_00157558(g_renderCtx);

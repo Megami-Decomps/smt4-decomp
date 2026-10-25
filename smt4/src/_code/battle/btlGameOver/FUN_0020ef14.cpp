@@ -10,7 +10,7 @@ s32 FUN_00335950(BtlGameOver*);
 // Advances the game-over timer and runs its state machine when the job can update.
 s32 FUN_0020ef14(u32 job)
 {
-    BtlGameOverJobWork* work = reinterpret_cast<BtlGameOverJobWork *>(jobGetWork(job));
+    BtlGameOverJobWork* work = (BtlGameOverJobWork *)jobGetWork(job);
     BtlGameOver* state = g_btlGameOver;
     if (state == NULL) {
         return 0;

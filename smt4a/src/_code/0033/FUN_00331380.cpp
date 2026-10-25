@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r1, [pc, #128] differs from recovered ldr r1, [pc, #112]. */
 #include "common.h"
+#include "shard/buttonHelpGetEntryValue.h"
 
 struct PartyPanelLocalView {
     u8 unk00[0x1210]; // 0x0000
@@ -9,7 +10,6 @@ struct PartyPanelLocalView {
 extern "C" {
 extern PartyPanelLocalView* g_partyPanel;
 s32 FUN_00183f58(s32 group, s32 command, s32 value, s32 enabled);
-s32 buttonHelpGetEntryValue(u32 group);
 
 // Update the panel flag and issue the corresponding group-3 command.
 void FUN_00331380(s32 active)

@@ -153,7 +153,7 @@ code_r0x002a0df0:
         if (iVar4 != 0) goto code_r0x002a0ee4;
         iVar4 = recordGetModeForId((int)*(short *)(iVar6 + 0x22));
         if ((iVar4 == 1) || (iVar4 == 2)) {
-          iVar4 = FUN_001834a4(0x24,0x33);
+          iVar4 = asdTMTexTableEntryAt(0x24,0x33);
           iVar7 = FUN_002618c8();
           iVar5 = func_0x00284120((int)*(short *)(iVar6 + 0x22));
           uVar8 = FUN_002e4ea4((iVar7 - iVar5) * 10,(int)**(short **)(iVar4 + 0xc));

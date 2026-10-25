@@ -38,7 +38,7 @@ void efctSetSpeed(f32 speed);
 void FUN_002bed3c(void);
 s32 vec2GetXInt(void *state);
 void FUN_002bf380(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
-LoadingSpriteFrame *FUN_002bf4f8(u32 bank, u32 sprite);
+LoadingSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
 void FUN_002bf818(void *state);
 
@@ -63,7 +63,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
 
     LoadingDot dots[LOADING_DOT_COUNT];
     for (s32 i = 0; i < LOADING_DOT_COUNT; i++) {
-        LoadingSpriteFrame *frame = FUN_002bf4f8(0x1C, i + 0x1124);
+        LoadingSpriteFrame *frame = asdTMTexTableEntryAt(0x1C, i + 0x1124);
         dots[i].x = (f32)frame->x;
         dots[i].y = (f32)frame->y;
         FUN_002bf288(1, 0x1C, 0x1121, vec2GetXInt(origin) + frame->x, frame->y, 6);
@@ -75,9 +75,9 @@ void FUN_0039bd04(TitleLoadingScene *scene)
     FUN_002bf288(1, 0x1C, 0x1123, (s32)((f32)vec2GetXInt(origin) + dots[opposite].x), (s32)dots[opposite].y, 6);
     FUN_002bf288(1, 0x1C, 0x1122, (s32)((f32)vec2GetXInt(origin) + dots[oppositeNext].x), (s32)dots[oppositeNext].y, 6);
 
-    LoadingSpriteFrame *caption = FUN_002bf4f8(0x1C, 0x1120);
+    LoadingSpriteFrame *caption = asdTMTexTableEntryAt(0x1C, 0x1120);
     char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
-    FUN_002be5a4(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
+    textDrawString(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
     FUN_002bedb0(g_titleScene, 3);
     efctSetSpeed(1.0f);
     FUN_002bf818(origin);

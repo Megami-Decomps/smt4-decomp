@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match2_LightPair.h"
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
+#include "AsdSDK/asdLightSelectActive.h"
 
 extern "C" {
 extern LightObjectPair DAT_005b3c90;

@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 namespace {
@@ -21,7 +22,6 @@ struct BattleEffectView {
 }
 
 extern "C" {
-void* btlGetMainState(void);
 s32 btlScriptUnitHasFlags(void);
 s32 libc_strcmp(const char* left, const char* right);
 extern BattleEffectView g_btlEffect;
@@ -30,7 +30,7 @@ extern BattleEffectView g_btlEffect;
 // Find the first matching effect's signed field, unless unit flags block the search.
 extern "C" s32 FUN_004fa030(EffectOwnerView* owner)
 {
-    btlGetMainState();
+    static_cast<void *>(btlGetMainState());
     if (btlScriptUnitHasFlags() != 0) {
         return -1;
     }

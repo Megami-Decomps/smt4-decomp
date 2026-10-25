@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads 1.0f into s16 once and keeps r7/r8 for the constants 1/2, and lays the close step (step 2) out of line after the opening step; ours schedules the step-2 tail inline (147 rows against 150). */
 #include "common.h"
 #include "map/lmapMain.h"
+#include "shard/FUN_00492c84.h"
 
 #define NAVI_FLAG_SLIDE_DONE 0x02000000
 #define NAVI_FLAG_CLOSING 0x01000000
@@ -58,7 +59,6 @@ void FUN_0048a378(NaviMenu *menu);
 void FUN_0048d248(NaviMenu *menu, u32 value);
 void naviMainSetCurrentMap(void *state, u32 map);
 u32 naviMainGetRequestedMap(void *state);
-u32 FUN_00492c84(void *state);
 s32 NaviMain_GetCurrentMap(void);
 s32 vec2GetXInt(const void *vector);
 s32 vec2GetYInt(const void *vector);

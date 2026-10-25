@@ -22,7 +22,7 @@ s32 FUN_0031c080(void)
     if (FUN_00203d74() != 0 && steps > 4) {
         steps = 4;
     }
-    FadeWork *work = reinterpret_cast<FadeWork *>(jobGetWork(job));
+    FadeWork *work = (FadeWork *)jobGetWork(job);
     if (work != NULL) {
         if (steps == 0) {
             work->alpha = 0.0f;

@@ -53,7 +53,7 @@ struct GaugeSprite {
     s16 y;
     s16 *size;
 };
-GaugeSprite *FUN_001834a4(u32 table, s32 frame);
+GaugeSprite *asdTMTexTableEntryAt(u32 table, s32 frame);
 }
 
 /* Draw the two-part gauge frame at the slot position, with the lower part shortened by `shrink` rows. */
@@ -74,7 +74,7 @@ extern "C" void FUN_0034e784(u8 *panel, s32 rows)
     x += offset.x;
     y += offset.y;
     efctSetSpeed(vec2GetSpeed(&view->firstPosition) * scale);
-    GaugeSprite *sprite = FUN_001834a4(13, view->slot + 0x52);
+    GaugeSprite *sprite = asdTMTexTableEntryAt(13, view->slot + 0x52);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     FUN_001835b4(2, 13, 0x4F, sprite->x + x, sprite->y + y, 0x2E);
     FUN_001835b4(2, 13, 0x4E, sprite->x + x, sprite->y + y - shrink, 0x2E);

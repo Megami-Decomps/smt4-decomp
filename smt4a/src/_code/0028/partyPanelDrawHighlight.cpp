@@ -12,7 +12,7 @@ struct PanelSpriteOrigin {
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;
 extern RenderCtxA *g_renderCtx;
-PanelSpriteOrigin *FUN_001834a4(u32 table, s32 index);
+PanelSpriteOrigin *asdTMTexTableEntryAt(u32 table, s32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 
@@ -20,7 +20,7 @@ f32 vec2GetSpeed(const void *object);
 void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted, f32 speed)
 {
     PartyPanelStateA *panel = g_partyPanel;
-    PanelSpriteOrigin *origin = FUN_001834a4(0x11, index + 0x57);
+    PanelSpriteOrigin *origin = asdTMTexTableEntryAt(0x11, index + 0x57);
     if (highlighted) {
         efctSetSpeed(vec2GetSpeed(panel->animation.speedObject) * speed);
         RenderCtxA *context = g_renderCtx;

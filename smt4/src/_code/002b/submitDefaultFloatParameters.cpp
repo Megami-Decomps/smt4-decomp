@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/submitDefaultFloatParameters.h"
 
 struct SixFloatParameters {
     f32 values[6];

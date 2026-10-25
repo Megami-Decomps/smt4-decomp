@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (169 vs 170 rows); stack frame (84 vs 92 bytes) and register allocation differ */
+#include "battle/BtlMainAccess.h"
 #include "battle/BattleUnitSlot.h"
 
 // Effect request handed to the battle effect queue (32 bytes). It first carries the
@@ -53,7 +54,6 @@ void FUN_002454c4(BattleEffectState* state, EffectRequest* request, s32 a, s32 b
 s32 FUN_0024550c(void);
 void FUN_00282820(s32 value, u32 user, s32 target, s32 targetCopy);
 u32* btlMainFindEntryByListedId(BattleMain* main, s32 id);
-BattleMain* btlGetMainState(void);
 s32 scrGetArg(s32 index);
 s32 libc_strcmp(const char* a, const char* b);
 s32 libc_strlen(const char* s);
@@ -73,13 +73,13 @@ void scrComm_Battle_PlayPositionedEffect(void)
     ARM_common_memcpy4_9(&request, setName);
     FUN_002454c4(DAT_00435d18, &request, 1, 0);
 
-    BattleMain* main = btlGetMainState();
+    BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());
     u32 user = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     s32 placed = 0;
     u8* effectSlots = DAT_00435d18->effectSlots;
     BattleMain* mainForEntries = main;
     for (s32 unitIndex = 0; unitIndex < 4; unitIndex++) {
-        BattleUnitSlot* unit = reinterpret_cast<BattleUnitSlot*>(btlGetMainState()->units + unitIndex * 0x288);
+        BattleUnitSlot* unit = reinterpret_cast<BattleUnitSlot*>(reinterpret_cast<BattleMain *>(btlGetMainState())->units + unitIndex * 0x288);
         if ((unit->flags & 1) == 0 || (unit->flags & 0x40) != 0) continue;
         s16 entryIndex = (s16)unit->entryIndex;
         if (entryIndex < 0) continue;
@@ -91,7 +91,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
         request.user = user;
         request.target = *reinterpret_cast<s16*>(entry + 0x62);
         request.targetCopy = request.target;
-        BattleMain* current = btlGetMainState();
+        BattleMain* current = reinterpret_cast<BattleMain *>(btlGetMainState());
         for (s32 slot = 0; slot < 4; slot++) {
             BattleEffectSlot* effect = reinterpret_cast<BattleEffectSlot*>(effectSlots + slot * 0x16);
             if (libc_strlen(effect->name) == 0 || libc_strcmp(effect->name, DAT_00400440) == 0) continue;

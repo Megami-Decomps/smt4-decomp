@@ -10,7 +10,7 @@ u32 FUN_003f20f0(const BtlMainStateA *state)
 {
     for (s32 i = 0; i < 109; ++i) {
         const BtlCombatantEntryA *entry = &state->entries[i];
-        if ((entry->flags & g_btlMain.combatantMasks.required) != 0 &&
+        if ((g_btlMain.combatantMasks.required & entry->flags) != 0 &&
             (entry->flags & g_btlMain.exclusionMask) == 0 && entry->queryValue.unk334 != 0) {
             return 1;
         }

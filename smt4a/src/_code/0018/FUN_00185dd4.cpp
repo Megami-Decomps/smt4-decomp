@@ -1,8 +1,8 @@
 /* NON_MATCHING: corrected integral x/y/tag contract and removed softfp workaround; y/tag spill-register order still differs. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/AsdTMTexTableCallFileC.h"
-#include "util/AsdTMTexTableCallFileC.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 

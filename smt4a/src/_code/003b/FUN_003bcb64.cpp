@@ -1,4 +1,5 @@
 /* NON_MATCHING: rare-pass rejection shares the final failure block, and the ordinary-pass predicate is not outlined after success. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "util/GameStockContainsEntry.h"
@@ -11,7 +12,6 @@ struct RecruitmentMasks {
 };
 extern "C" {
 extern RecruitmentMasks g_btlMessageFlagMasks;
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
 u32 randRange(u32 maximum);
 void sysMemClear(void *memory, u32 bytes);

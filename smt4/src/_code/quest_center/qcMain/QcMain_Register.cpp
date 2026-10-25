@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 namespace {
 struct QuestCenterRegistrationWork {
@@ -21,7 +22,6 @@ struct QuestCenterRegistrationGlobals {
 }
 extern "C" {
 extern QuestCenterRegistrationGlobals g_qcMain;
-void *jyoucyuGetTableEntry(u32 index);
 void QcMain_SetFlag(s32 id, s32 value);
 
 s32 QuestCenterMainProcUpdate(u32 handle);

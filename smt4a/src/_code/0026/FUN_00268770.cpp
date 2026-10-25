@@ -27,7 +27,7 @@ int FUN_003d4104(void);
 int qsort(...);
 int FUN_0015f490(...);
 int eventQueueAddUnique(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int useCounterStart(void);
 int resourceRunOperationIfUnblocked(...);
 int FUN_002a4894(...);
@@ -93,7 +93,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern unsigned int FUN_00180114(unsigned short, short);
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
@@ -907,7 +907,7 @@ joined_r0x002694c0:
         eventQueueAddUniqueIfValid(temp_v7);
         break;
       }
-      temp_v7 = FUN_001834a4(0x12,0x406);
+      temp_v7 = asdTMTexTableEntryAt(0x12,0x406);
       temp_v9 = temp_v2 + 0xee4;
       temp_v6 = temp_v9;
       FUN_003450d4(temp_v9,temp_v7,temp_v2 + 0x544,(int)*(short *)(temp_v2 + 0x58c),
@@ -986,7 +986,7 @@ joined_r0x002694c0:
       temp_v6 = resourceRunOperationIfUnblocked();
       temp_v14 = FUN_002a4894(temp_v9);
       temp_v8 = FUN_002a4878(temp_v9);
-      temp_v10 = FUN_001834a4(0x12,0x406);
+      temp_v10 = asdTMTexTableEntryAt(0x12,0x406);
       temp_v7 = *(unsigned int *)(temp_v10 + 8);
       temp_v12 = **(unsigned int **)(temp_v10 + 0xc);
       if (((*(char *)(temp_v2 + 0x529) == '\0') && (temp_v10 = FUN_00230544(), temp_v10 != 0)) &&
@@ -1148,7 +1148,7 @@ LAB_00269f7c:
         *(unsigned char *)(temp_v2 + 0x59b) = temp_v3;
         break;
       }
-      temp_v7 = FUN_001834a4(0x12,0x48c);
+      temp_v7 = asdTMTexTableEntryAt(0x12,0x48c);
       temp_v14 = temp_v2 + 0x23c0;
       FUN_003450d4(temp_v14,temp_v7,0,(int)*(short *)(temp_v2 + 0x58c),(int)*(short *)(temp_v2 + 0x58e),
                    (int)*(short *)(temp_v2 + 0x590),temp_v2 + 0x24a0,0,0);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail repeats the "measure the text and add the width" tail in every item-type case (ours is merged into one tail) and keeps the buffer address in r8 for the ARM_common_memcpy4_7 call; the frame is 4 bytes larger here */
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "shard/JobWork.h"
 
 /* The list box work object as the size calculation sees it (observed fields). */
 struct ListBoxMetrics {
@@ -21,7 +22,6 @@ struct ListBoxMetrics {
 
 extern "C" {
 
-ListBoxMetrics *jobGetWork(u32 job);
 s32 libc_strlen(const char *text);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void ARM_common_memcpy4_7(char *destination, const char *source);
@@ -31,7 +31,7 @@ void ARM_common_memcpy4_7(char *destination, const char *source);
 void asdListBoxMarkDirty(u32 job)
 {
     char text[256];
-    ListBoxMetrics *box = jobGetWork(job);
+    ListBoxMetrics *box = (ListBoxMetrics *)jobGetWork(job);
     f32 width = (f32)(libc_strlen(box->title) * box->charWidth);
 
     for (AsdListNode *node = box->items.first; node != NULL; node = node->next) {

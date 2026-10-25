@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (171 vs 170 rows); retail spills the float scale and register args on entry (push {r0-r3}, vpush {d0}) with different register allocation */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 // Layout rectangle looked up by (group, index).
 struct LayoutEntry {
@@ -24,13 +25,12 @@ struct IconInfo {
 extern "C" {
 
 void efctSetSpeed(f32 speed);
-LayoutEntry* FUN_001834a4(u32 group, u32 index);
+LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 u32 FUN_0019e52c(u32 slot);
 IconInfo* FUN_00184310(u32 code);
 void FUN_00169a1c(s32 sprite, s32 x, s32 y, s32 z);
 const char* FUN_003f74a8(u32 id, PanelRecord* record);
 void textFormatBuffer(char* out, const char* format, ...);
-void FUN_00162790(s32 layer, u32 color, const char* text, f32 x, f32 y, f32 z, f32 a, f32 scale);
 void FUN_003f533c(u32 id, s32 x, s32 y, s32 z, u32 flags, s32 a, s32 b, s32 c, s32 d, s32 e, f32 scale);
 
 // Draws the panel row for one record at (x, y, z): frame, category icon, name and value.
@@ -39,7 +39,7 @@ void FUN_003f6424(f32 scale, u32 id, PanelRecord* record, u32 flags, s32 x, s32 
     efctSetSpeed(scale);
     FUN_001835b4(2, 0x31, 0x7b, x, y, z);
     FUN_001835b4(2, 0x31, 0x7c, x, y, z);
-    LayoutEntry* frame = FUN_001834a4(0x31, 0x7d);
+    LayoutEntry* frame = asdTMTexTableEntryAt(0x31, 0x7d);
     s32 iconX = frame->x + x;
     s32 iconY = frame->y + y;
 
@@ -79,17 +79,17 @@ void FUN_003f6424(f32 scale, u32 id, PanelRecord* record, u32 flags, s32 x, s32 
         FUN_001835b4(2, 0x31, 4, iconX, iconY, z + 5);
     }
 
-    LayoutEntry* nameBox = FUN_001834a4(0x31, 0x7e);
+    LayoutEntry* nameBox = asdTMTexTableEntryAt(0x31, 0x7e);
     s32 nameX = nameBox->x + x;
     s32 nameY = nameBox->y + y;
     char text[92];
     textFormatBuffer(text, "%s", FUN_003f74a8(id, record));
-    FUN_00162790(2, 0xffffffff, text, (f32)nameX, (f32)nameY, (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
+    textDrawString(2, 0xffffffff, text, (f32)nameX, (f32)nameY, (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
 
-    LayoutEntry* valueBox = FUN_001834a4(0x31, 0x83);
+    LayoutEntry* valueBox = asdTMTexTableEntryAt(0x31, 0x83);
     s32 valueX = valueBox->x + x;
     s32 valueY = valueBox->y + y;
-    FUN_00162790(2, 0xff, reinterpret_cast<const char*>(record) + 4, (f32)valueX, (f32)valueY,
+    textDrawString(2, 0xff, reinterpret_cast<const char*>(record) + 4, (f32)valueX, (f32)valueY,
                  (f32)(0xfb - z) * 0.00390625f, 0.0f, scale);
     FUN_003f533c(id, x, y, z + 5, flags, 0x84, 0x85, 0x86, 0xff, 0, scale);
 }

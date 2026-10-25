@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -8,12 +9,11 @@ struct BattleStateFlags {
 
 extern "C" {
 
-BattleStateFlags *btlGetMainState(void);
 
 /* Script command: reports whether the battle state's flag 0x40000 is clear. */
 u32 FUN_002f11ec(void)
 {
-    if (btlGetMainState()->flags & 0x40000) {
+    if (reinterpret_cast<BattleStateFlags *>(btlGetMainState())->flags & 0x40000) {
         scrSetResult(0);
     } else {
         scrSetResult(1);

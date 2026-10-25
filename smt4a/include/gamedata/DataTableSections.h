@@ -24,4 +24,8 @@ u32 dataTableFree(u32 index);
 } /* extern "C" */
 #endif
 
+extern "C" {
+u32 dataTableChooseWeightedByteId(void);
+}
+
 #endif

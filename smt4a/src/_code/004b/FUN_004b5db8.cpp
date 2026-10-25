@@ -8,7 +8,7 @@ extern "C" {
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
-int FUN_001834a4(...);
+int asdTMTexTableEntryAt(...);
 int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
 int FUN_003e503c(void);
@@ -32,7 +32,7 @@ extern int DAT_00588c50; /* 0x588c50 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
-/* Supplied declaration required: FUN_001834a4. */
+/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_003e503c. */
@@ -53,7 +53,7 @@ void FUN_004b5db8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   param_3 = param_3 & 0xffff;
   FUN_003e503c();
-  temp_v5 = FUN_001834a4(0x1d,param_4 + 0x152);
+  temp_v5 = asdTMTexTableEntryAt(0x1d,param_4 + 0x152);
   temp_v1 = (unsigned int)((unsigned long long)temp_v5 >> 0x20);
   temp_v0 = (int)temp_v5;
   switch(param_2) {
@@ -127,11 +127,11 @@ LAB_004b5ef4:
   case 4:
     temp_v3 = 2;
     if ((int)((unsigned int)*(unsigned short *)(param_3 + 100) + param_9) >= 100) {
-      DAT_00588c4c = FUN_001834a4(0x1d,0x177);
+      DAT_00588c4c = asdTMTexTableEntryAt(0x1d,0x177);
       temp_v3 = 3;
     }
     else {
-      DAT_00588c4c = FUN_001834a4(0x1d,0x66);
+      DAT_00588c4c = asdTMTexTableEntryAt(0x1d,0x66);
     }
     temp_v4 = param_9 == 0;
     temp_v2 = param_9;

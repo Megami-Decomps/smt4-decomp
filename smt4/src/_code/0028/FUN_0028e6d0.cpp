@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and block layout: retail keeps flags/variant in r8/r9 (loaded with ldrd), spills the box/task pair to the frame and reaches the shared asdTextDrawDirectoryEntry call through duplicated argument setups; built merges the tail differently */
 #include "ui/MessageMain.h"
+#include "shard/FUN_002b89a4.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ void FUN_002e20b4(void);
 void asdTextDrawDirectoryEntry(u32 box, u32 font, s32 color, s32 x, s32 y, const void *message, u32 index);
 void asdTextDrawFormatted(u32 box, u32 font, s32 color, s32 x, s32 y, const char *format, ...);
 s32 FUN_00309ba0(void);
-s32 FUN_002b89a4(s32 arg);
 
 /* Opens the message window on a directory message (or plain text for the `%s` variant) and picks its first state. */
 void FUN_0028e6d0(MessageWork *win, const void *message, u32 index, s32 kind, u32 flags, s32 variant, u32 initial)

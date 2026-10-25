@@ -1,5 +1,6 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/asdCecMessageBoxClose.h"
 
 extern "C" {
 

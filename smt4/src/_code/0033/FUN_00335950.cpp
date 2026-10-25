@@ -1,5 +1,7 @@
 /* NON_MATCHING: Battle transition resource/script state machine is reconstructed; switch return blocks, save-counter address setup, and final completion branch layout differ. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct BattleTransitionSelector {
     /* 0x00 */ s32 state;
@@ -28,7 +30,6 @@ extern const char DAT_004009ac[];
 void FUN_003db258(void *context, const char *name);
 s32 FUN_00246f18(void *context);
 s32 FUN_003357c0(BattleTransitionSelector *selector);
-void asdLoadFileAsyncSimple(const char *name, u32 *handle, s32 flags);
 BattleTransitionSave *gameDataBlocksGetSaveData();
 s32 FUN_0023f194(BattleTransitionSelector *selector);
 s32 jobIsValid(u32 job);
@@ -36,7 +37,6 @@ s32 FUN_0023f074(BattleTransitionSelector *selector);
 s32 scrRunOpcodesStub(void *process);
 void uiFadeRelease();
 void buttonHelpRelease();
-BattleTransitionMain *btlGetMainState();
 s32 FUN_0023ed64(BattleTransitionSelector *selector);
 }
 
@@ -80,7 +80,7 @@ extern "C" s32 FUN_00335950(BattleTransitionSelector *selector)
         if (scrRunOpcodesStub(selector->scriptProcess) != 2) return 0;
         uiFadeRelease();
         buttonHelpRelease();
-        BattleTransitionMain *battle = btlGetMainState();
+        BattleTransitionMain *battle = reinterpret_cast<BattleTransitionMain *>(btlGetMainState());
         if ((selector->flags & 1) || battle->complete == 1) {
             battle->complete = 1;
             selector->state = 9;

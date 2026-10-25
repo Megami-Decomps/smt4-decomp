@@ -1,4 +1,5 @@
 #include "gamedata/DataTable.h"
+#include "gamedata/DataTableSections.h"
 
 struct WeightedTableEntry {
     u32 id : 8;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: Battle-event resource loading and pending-mask stages are complete; the prologue, inline bytecode-load cases, and branch joins differ. */
 #include "gamedata/DataTable.h"
-#include "shard/W5_W5Match7_BattleMask.h"
+#include "battle/BtlMainAccess.h"
 
 struct BattleEventLoadStep {
     /* 0x00 */ s32 state;
@@ -37,10 +37,10 @@ void aocQueueType1e(void *system, u32 aocId, void **file, const char *path);
 void aocQueueType1f(void *system, u32 aocId, void **file, const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);
 void *dataTableFileGetTable(void *file, s32 index);
-u32 FUN_004d83b4(BattleEventLoadStep *step, BattleMaskState *battle);
-u32 FUN_004d7e20(BattleEventLoadStep *step, BattleMaskState *battle);
-u32 FUN_004d7ec0(BattleEventLoadStep *step, BattleMaskState *battle);
-u32 btlActionStepFinishPendingChanges(BattleEventLoadStep *step, BattleMaskState *battle);
+u32 FUN_004d83b4(BattleEventLoadStep *step, BtlMainStateA *battle);
+u32 FUN_004d7e20(BattleEventLoadStep *step, BtlMainStateA *battle);
+u32 FUN_004d7ec0(BattleEventLoadStep *step, BtlMainStateA *battle);
+u32 btlActionStepFinishPendingChanges(BattleEventLoadStep *step, BtlMainStateA *battle);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(u32 sound);
 }
@@ -53,7 +53,7 @@ static inline void battleEventReadProTable(BattleEventLoadStep *step)
     step->state = 3;
 }
 
-static inline u32 battleEventLoadBytecode(BattleEventLoadStep *step, BattleMaskState *battle)
+static inline u32 battleEventLoadBytecode(BattleEventLoadStep *step, BtlMainStateA *battle)
 {
     const BattleEventLoadIdentity *identity = reinterpret_cast<const BattleEventLoadIdentity *>(battle);
     char path[128];
@@ -73,7 +73,7 @@ static inline u32 battleEventLoadBytecode(BattleEventLoadStep *step, BattleMaskS
 }
 
 /* Load the event's table and bytecode, then advance its script and pending-change stages. */
-extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BattleMaskState *battle)
+extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BtlMainStateA *battle)
 {
     switch (step->state) {
     case 1: {
@@ -119,9 +119,9 @@ extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BattleMaskState *battle)
         scrScriptProcessStartEntry(step->scriptProcess, step->entry);
         step->state = 10;
         step->ticks = 0;
-        if (battle->mask & g_btlEvent.mask) sysPlaySe(223);
+        if (battle->stateFlags64.bits & g_btlEvent.mask) sysPlaySe(223);
         if (step->type == 5) {
-            battle->mask |= g_btlEvent.mask;
+            battle->stateFlags64.bits |= g_btlEvent.mask;
             sysPlaySe(223);
         }
         return btlActionStepFinishPendingChanges(step, battle);

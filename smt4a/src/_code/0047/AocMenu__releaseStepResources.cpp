@@ -3,6 +3,8 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/jobIsValid.h"
+#include "shard/jobStop.h"
 
 struct CountAt30;
 struct CountAt5A;
@@ -45,8 +47,6 @@ void releaseEntriesA(CountAt30 *entries);
 void releaseEntriesB(CountAt5A *entries);
 void jobOwnerFreeSlotAndStop(JobOwner *owner);
 void jobFlagsWorkStop(JobFlagsWork *work);
-u32 jobIsValid(u32 job);
-u32 jobStop(u32 job, u16 mode);
 void ifTouchRegionRemove();
 void scrScriptProcessDestroy(u32 process);
 void asdMemFree(void *buffer);

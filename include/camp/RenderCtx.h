@@ -236,4 +236,8 @@ extern "C" void renderCtxSelectStereoLayout(RenderCtx *context);
 #endif
 
 
+extern "C" {
+s32 FUN_001dd8f0(void);
+}
+
 #endif

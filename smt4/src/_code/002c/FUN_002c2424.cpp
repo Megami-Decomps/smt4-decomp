@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_002c2424.h"
 
 extern "C" {
 u32 FUN_00147918(u32 first, u32 second);

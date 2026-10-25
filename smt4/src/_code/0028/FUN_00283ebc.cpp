@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail merges the limit clamp with the loop-entry test (cmple) and keeps the element pointer in r4, the kind in ip; ours uses ip for the pointer. */
+/* NON_MATCHING: retail merges the limit clamp with the loop-entry test (cmple r3, #0) and keeps the element pointer in r4 and the kind in ip; the build swaps r4/ip and tests the limit separately. */
 #include "common.h"
 
 extern "C" {
@@ -21,17 +21,18 @@ struct AmountRecord {
 s32 FUN_00283ebc(AmountRecord *record, s32 slotCount, u32 kind)
 {
     if (record != NULL && (record->flags & 0x80000000) == 0) {
-        s32 limit = slotCount - 1 > 8 ? 8 : slotCount - 1;
+        s32 limit = slotCount - 1;
+        if (limit > 8) {
+            limit = 8;
+        }
         s32 total = 0;
-        s32 i = 0;
-        while (i < limit) {
+        for (s32 i = 0; i < limit; i++) {
             if (record->entries[i].kind == 0) {
                 break;
             }
             if (record->entries[i].kind == kind) {
                 total += record->entries[i].amount;
             }
-            i++;
         }
         return total;
     }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail loads the state into r0 (so it reloads g_effectEditor.object for the free) and sums the offsets in r0; the build keeps state in r1 / the offset in r2. */
 #include "common.h"
+#include "shard/asdMemoryFreeLocked.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ typedef struct EditorOffsets0031ba38 {
 void FUN_002f2aa8(EditorObject0031ba38 *object);
 s32 linkedFindItemByIndex(u32 source, s32 offset);
 void namedObjectFormatName(EditorObject0031ba38 *object, s32 offset);
-void asdMemoryFreeLocked(EditorObject0031ba38 *object);
 
 extern EffectEditor0031ba38 g_effectEditor; /* 0x44ea80 */
 extern EditorOffsets0031ba38 DAT_0044f858;  /* 0x44f858 */

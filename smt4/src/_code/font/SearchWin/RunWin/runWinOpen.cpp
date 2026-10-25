@@ -5,6 +5,7 @@
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdMemAlloc.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_002bd954(void *ui, int a, int b, void *sound, int c);
 int spriteStartAnimationByIndex(void *ui, int arg);
 
 int memClear(void *ptr, int size);                  /* zero a block */
-void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
 void drawParameterBlockClear(void *player);
 void FUN_0018f278(void);

@@ -16,7 +16,7 @@ u32 FUN_0021f354()
     TerminalDrawWork *work = g_tmnl;
     if ((u32)(work->state - 1) < 98) {
         if (work->state == 1)
-            FUN_002be5a4(3, -1, DAT_00432cf8[work->nameIndex].text, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+            textDrawString(3, -1, DAT_00432cf8[work->nameIndex].text, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
         RenderCtx *scene = g_titleScene;
         renderCtxPushA(scene, FUN_002c5d80(1, 0));
         renderStackPop(&g_titleScene->stackA);

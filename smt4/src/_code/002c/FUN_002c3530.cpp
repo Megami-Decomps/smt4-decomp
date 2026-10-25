@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/FUN_002c3530.h"
 
 struct Vec3f {
     f32 x, y, z;

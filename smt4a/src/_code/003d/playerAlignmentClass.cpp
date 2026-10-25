@@ -1,4 +1,5 @@
 #include "shard/Shard003D.h"
+#include "shard/playerAlignmentClass.h"
 
 extern "C" {
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the title button-help draw; retail's inlined state push/pop uses pointer arithmetic on the stack top (`piVar[top + 2]`) in a different register assignment and the float x/y order of FUN_002be5a4 is inferred, not verified. */
+/* NON_MATCHING: readable rebuild of the title button-help draw; retail's inlined state push/pop uses pointer arithmetic on the stack top (`piVar[top + 2]`) in a different register assignment and the float x/y order of textDrawString is inferred, not verified. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 
@@ -52,8 +52,8 @@ void FUN_00190e48(void);
 void FUN_001f40fc(void *icon, s32 x, s32 y);
 void fadeObjectResetIfActive(void *object);
 void FUN_002b75ec(u32 sprite, s32 x, s32 y, s32 a, s32 b, s32 c);
-void FUN_002be5a4(s32 a, u32 icon, void *object, f32 x, f32 y);
-LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
+void textDrawString(s32 a, u32 icon, void *object, f32 x, f32 y);
+LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_002c18e4(TitleScene *scene);
 void FUN_002c198c(TitleScene *scene);
 void renderCtxSelectStereoLayout(TitleScene *scene);
@@ -81,18 +81,18 @@ u8 FUN_002109cc(void)
                     FUN_002bf288(2, 0x12, 1, x, y, 0x10);
                 }
                 if (help->visible && help->showIcons && help->fade >= 1.0f) {
-                    LayoutPoint *first = FUN_002bf4f8(0x12, 0x1D);
+                    LayoutPoint *first = asdTMTexTableEntryAt(0x12, 0x1D);
                     if (help->spriteIcons)
                         FUN_002b75ec(help->iconSprite, first->x, first->y, 0x15, 6, 0);
                     else if (help->iconMode)
-                        FUN_002be5a4(3, help->icon, help->firstIcon, (f32)first->x, (f32)first->y);
+                        textDrawString(3, help->icon, help->firstIcon, (f32)first->x, (f32)first->y);
                     else
                         FUN_001f40fc(help->firstIcon, first->x, first->y);
-                    LayoutPoint *second = FUN_002bf4f8(0x12, 0x1E);
+                    LayoutPoint *second = asdTMTexTableEntryAt(0x12, 0x1E);
                     if (help->spriteIcons)
                         FUN_002b75ec(help->iconSprite, second->x, second->y, 0x15, 6, 1);
                     else if (help->iconMode != 1)
-                        FUN_002be5a4(3, help->icon, help->secondIcon, (f32)second->x, (f32)second->y);
+                        textDrawString(3, help->icon, help->secondIcon, (f32)second->x, (f32)second->y);
                     else
                         FUN_001f40fc(help->secondIcon, second->x, second->y);
                 }

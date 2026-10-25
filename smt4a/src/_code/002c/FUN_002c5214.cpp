@@ -1,5 +1,6 @@
 /* NON_MATCHING: kind/amount registers swapped (r4/r5) and the first saturating add uses r2/r3 instead of r0/r2 */
 #include "common.h"
+#include "shard/FUN_0040a378.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ GameCounters *gameGetCounters(void);
 s32 scrGetArg(u32 index);
 void FUN_0040a3c8(u32 amount);
 void questCenterAddPoints(u32 amount);
-void FUN_0040a378(u32 amount);
 void gameAddPointsClamped(u32 amount);
 
 /* Adds amount to a counter, saturating at 0xFFFFFFFF. */

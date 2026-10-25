@@ -2,6 +2,7 @@
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 #include "gamedata/DataTable.h"
+#include "shard/FUN_002903f0.h"
 
 namespace {
 struct QuestStatusLabel {
@@ -12,7 +13,6 @@ typedef char QuestStatusLabelSizeCheck[sizeof(QuestStatusLabel) == 0x4A ? 1 : -1
 }
 
 extern "C" {
-u32 FUN_002903f0();
 u32 FUN_00298dc8(s32 quest);
 u32 FUN_00298e00(u32 quest);
 u32 questIsCompleted(s32 quest);

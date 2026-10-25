@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 struct BattleFlags {
@@ -7,7 +8,6 @@ struct BattleFlags {
 
 extern "C" {
 
-BattleFlags *btlGetMainState(void);
 
 static __inline u32 btlFlagsSet(u32 *flags, u32 mask)
 {
@@ -18,7 +18,7 @@ static __inline u32 btlFlagsSet(u32 *flags, u32 mask)
 /* Script command: sets bit 17 of the battle's flag word at 0x44A0. */
 u32 FUN_00323398(void)
 {
-    return btlFlagsSet(&btlGetMainState()->flags, 0x20000);
+    return btlFlagsSet(&reinterpret_cast<BattleFlags *>(btlGetMainState())->flags, 0x20000);
 }
 
 } /* extern "C" */

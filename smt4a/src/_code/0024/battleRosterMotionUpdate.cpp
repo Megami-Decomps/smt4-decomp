@@ -1,4 +1,5 @@
 /* NON_MATCHING: ARMCC stack-spills the battle owner instead of keeping r9 and lowers motion-state branches and masked-color interpolation differently. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -15,7 +16,6 @@ extern CameraTransitionGlobals g_btlCamera;
 extern BattleEffectGlobals g_battleEffectSettings;
 extern u64 g_battleMotionCombatantClearMask;
 BtlMainStateA *jobGetWork(u32 job);
-BtlMainStateA *btlGetMainState(void);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 BattleMotionSubject *FUN_001568f8(BtlMainStateA *battle, s32 group);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);

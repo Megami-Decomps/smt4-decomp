@@ -2,6 +2,7 @@
 #include "addon/AocContentEnumeration.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
+#include "kernel/jyoucyuGetTableEntry.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
@@ -9,7 +10,6 @@ AocHandleJob *_ZN21WindowOperationResultC1Eh(u32 job, u32 kind);
 WindowStatusResult FUN_005004a8(u32 *parameters, AocEnumerationResult *enumeration,
                               AocContentRecord *records, s32 capacity, s32 offset);
 u32 legacyResourceIdRemap(WindowStatusResult *result);
-void *jyoucyuGetTableEntry(s32 index);
 s32 objGetFlagBit1(const AocContentRecord *record);
 s32 objGetFlagBit0(const AocContentRecord *record);
 

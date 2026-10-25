@@ -1,4 +1,5 @@
 /* NON_MATCHING: script-mode setter and phase switch match; state-7 tail merging and result-state store scheduling differ. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlGameOver.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
@@ -15,11 +16,6 @@ void scrScriptProcessStartEntry(void *process, s32 entry);
 s32 scrRunOpcodesStub(void *process);
 void campCommonBgRelease(void);
 void campButtonHelpRelease(void);
-struct BtlMainStateView {
-    u8 unk0000[0x4C80];
-    s32 gameOverKind;
-};
-BtlMainStateView *btlGetMainState(void);
 u32 FUN_003e6c14(BtlGameOverA *work);
 s32 talkEventStartScript(BtlGameOverA *work);
 u32 FUN_003e71a8(BtlGameOverA *work);
@@ -113,7 +109,7 @@ s32 FUN_003e6f50(BtlGameOverA *work)
         if (scrRunOpcodesStub(work->process) == 2) {
             campCommonBgRelease();
             campButtonHelpRelease();
-            if (btlGetMainState()->gameOverKind != 1) {
+            if (btlGetMainState()->gameOver.kind != 1) {
                 work->state = GAMEOVER_STATE_RESULT;
                 return FUN_003e71a8(work);
             }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335c6c` (_code @ 0x335c6c, 0x734 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
 
@@ -19,7 +20,6 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern unsigned short *_ZN4__rw13__rw_allocateEji(int, unsigned int);
 /* Supplied declaration required: _ZN4__rw15__rw_deallocateEPvji. */
-extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
@@ -56,7 +56,7 @@ void FUN_00335c6c(void)
   unsigned char temp_v13;
   int aiStack_78 [21];
   
-  temp_v6 = btlGetMainState();
+  temp_v6 = reinterpret_cast<int>(btlGetMainState());
   piVar22 = (int *)(temp_v6 + 0x4e58);
   temp_v9 = *(int *)(temp_v6 + 0x4e5c);
   if (*piVar22 != temp_v9) {
@@ -219,7 +219,7 @@ void FUN_00335c6c(void)
     temp_v4 = 0;
     temp_v9 = 0;
     do {
-      temp_v7 = btlGetMainState();
+      temp_v7 = reinterpret_cast<int>(btlGetMainState());
       puVar19 = (unsigned int *)(*(int *)(temp_v7 + 0x1ffc) + temp_v9 * 0x408);
       temp_v8 = *puVar19;
       temp_v11 = puVar19[1];
@@ -299,7 +299,7 @@ LAB_00336174:
       sysMemClear(aiStack_78,0x54);
       temp_v9 = 0;
       do {
-        temp_v7 = btlGetMainState();
+        temp_v7 = reinterpret_cast<int>(btlGetMainState());
         puVar19 = (unsigned int *)(*(int *)(temp_v7 + 0x1ffc) + temp_v9 * 0x408);
         temp_v8 = *puVar19;
         temp_v11 = puVar19[1];
@@ -335,7 +335,7 @@ LAB_00336174:
               }
             }
             else if (((temp_v11 & 0x1e0) != 0) ||
-                    (temp_v9 = btlGetMainState(), (int)*(short *)(temp_v9 + 0x2002) != aiStack_78[temp_v8]
+                    (temp_v9 = reinterpret_cast<int>(btlGetMainState()), (int)*(short *)(temp_v9 + 0x2002) != aiStack_78[temp_v8]
                     )) {
               puVar23 = puVar23 + 1;
               continue;

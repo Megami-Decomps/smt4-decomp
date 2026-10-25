@@ -1,5 +1,6 @@
 /* Initializes the effect resources and registers effect 0x2E/0xD with the given pair of parameters. */
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 

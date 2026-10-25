@@ -1,3 +1,4 @@
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -10,7 +11,6 @@ typedef struct DevilKindData {
 } DevilKindData;
 
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState(void);
 DevilKindData *FUN_00184310(u16 devilId);
 
 // Report whether any eligible battle entry is a devil of kind 1.

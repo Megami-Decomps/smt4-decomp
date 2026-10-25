@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail reads some 64-bit kind masks as two word loads and others with ldrd, and repeats the queued-action check in each branch without merging the tails; ours uses ldrd throughout and shares the check (164 rows against 203). Logic and constants agree with retail. */
+#include "battle/BtlMainAccess.h"
 #include "common.h"
 
 /* The action-kind masks the AI chance logic tests a unit's input word against (observed fields). */
@@ -50,7 +51,6 @@ extern "C" {
 
 extern BtlAiKinds DAT_005713f0;
 
-BtlAiState *btlGetMainState(void);
 s32 gameFlagIsSet(u32 flag);
 BtlAiUnit *FUN_003f0e20(BtlAiState *state, void *actor);
 BtlAiScales *FUN_0028cb6c(void);
@@ -59,7 +59,7 @@ s32 lcgRandomRange(u32 limit);
 /* Whether the actor's unit already has an action queued. */
 static __inline bool btlAiUnitHasQueuedAction(void *actor)
 {
-    BtlAiUnit *unit = FUN_003f0e20(btlGetMainState(), actor);
+    BtlAiUnit *unit = FUN_003f0e20(reinterpret_cast<BtlAiState *>(btlGetMainState()), actor);
 
     return unit != NULL && unit->queuedAction > 0;
 }
@@ -69,7 +69,7 @@ static __inline bool btlAiUnitHasQueuedAction(void *actor)
  * select the ally and aggressive variants. */
 u32 FUN_004bf348(void *actor, s32 mode, s32 flag)
 {
-    BtlAiState *state = btlGetMainState();
+    BtlAiState *state = reinterpret_cast<BtlAiState *>(btlGetMainState());
     BtlAiUnit *unit;
     s32 chance;
     s32 roll;

@@ -45,7 +45,7 @@ u32 FUN_0039b984(void);
 void FUN_004029f4(ListMenu *menu, s32 a, s32 b);
 void FUN_00404974(ListMenu *menu);
 s32 ifTouchGetSelectionMode(void);
-u32 FUN_001834a4(u32 a, u32 b);
+u32 asdTMTexTableEntryAt(u32 a, u32 b);
 s32 resourceRunOperationIfUnblocked(void *list);
 s32 FUN_002a4894(void *list);
 
@@ -62,7 +62,7 @@ void FUN_00403e2c(ListMenu *menu)
     ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = FUN_0039b984();
     u8 touched = 0;
     s32 mode = ifTouchGetSelectionMode();
-    u32 handle = FUN_001834a4(50, 139);
+    u32 handle = asdTMTexTableEntryAt(50, 139);
     if (FUN_003450d4(menu->list, handle, menu->area, menu->areaX, menu->areaY, menu->areaWidth, &touched, 0, 1))
         return;
     if (FUN_001517b4(0, 1) || mode == 6) {

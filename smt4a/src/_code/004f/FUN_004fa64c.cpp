@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail's placement search compares two entries per iteration and keeps a zero value in a saved register. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/BattleRosterCache.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -27,7 +28,6 @@ struct BattlePlacementTransitionViewA {
 struct BattleTransitionCommandA { u32 unk00; s16 kind; };
 struct BattleTransitionStatusViewA { u8 prefix[0x164]; BattleCombatantStatusKey status; };
 extern "C" {
-BtlMainStateA* btlGetMainState(void);
 BtlCombatantEntryA* FUN_003f0e20(BtlMainStateA* battle, s32 group);
 s32 state2CIsNot1(State2C* controller);
 void FUN_00421514(State2C* controller, BattleTransitionAssetA* asset, f32 scale);

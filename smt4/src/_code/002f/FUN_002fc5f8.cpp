@@ -1,8 +1,8 @@
 /* NON_MATCHING: saved job/portrait/mode registers and final mode branch polarity differ. */
 #include "ui/SpriteTransition.h"
+#include "shard/JobWork.h"
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-SpriteTransitionWork *jobGetWork(u32 job);
 void aocSlotRelease(SpriteTransitionWork *work);
 s32 FUN_0024ecc0(u32 job, u32 portrait);
 void FUN_002a880c(SpriteTransitionWork *work, u32 mode, u32 flags);
@@ -13,7 +13,7 @@ void FUN_002fc5f8(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 th
 {
     if (gameFlagIsSet(0x522) && job == 0)
         return;
-    SpriteTransitionWork *work = jobGetWork(job);
+    SpriteTransitionWork *work = (SpriteTransitionWork *)jobGetWork(job);
     work->initialized = 1;
     aocSlotRelease(work);
     work->unk08 = portrait;
@@ -54,7 +54,7 @@ void FUN_002fc5f8(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 th
     case 3:
         FUN_002a880c(work, 5, 0);
         {
-            SpriteTransitionWork *current = jobGetWork(job);
+            SpriteTransitionWork *current = (SpriteTransitionWork *)jobGetWork(job);
             // A naturally aligned local view avoids enlarging the byte-aligned padding union.
             struct PositionView { u8 prefix[0x34]; Vec3f position; };
             Vec3f position = ((const PositionView *)current)->position;

@@ -26,7 +26,7 @@ struct PanelRenderCtx : RenderCtxA {
 extern "C" {
 extern PanelRenderCtx *g_renderCtx;
 
-IconEntry *FUN_001834a4(u32 file, s32 index);
+IconEntry *asdTMTexTableEntryAt(u32 file, s32 index);
 SlotRecord *gameGetSlotRecord(s32 slotIndex);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 bottomScreen);
 void effectDispatchSelector(s32 icon, s32 x, s32 y, s32 z, f32 scale);
@@ -35,7 +35,7 @@ void effectDispatchSelector(s32 icon, s32 x, s32 y, s32 z, f32 scale);
 /* Draws the icon of slot `slot`'s current entry; with several entries it cycles through them with a short fade. */
 extern "C" void FUN_004b42b0(CyclingPanel *panel, s32 slot, s32 x, s32 y)
 {
-    IconEntry *entry = FUN_001834a4(0x1d, 300);
+    IconEntry *entry = asdTMTexTableEntryAt(0x1d, 300);
     u32 mask = 0;
     s32 count = 0;
     s32 nextIndex = 0;

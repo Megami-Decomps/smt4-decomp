@@ -1,6 +1,7 @@
 /* NON_MATCHING: shared phase helpers outline differently, state-null checks merge, and round-reset/effect aggregate scheduling differs from retail. */
 #include "battle/BattleUnitSlot.h"
 #include <stddef.h>
+#include "shard/FUN_002080e8.h"
 
 struct BattleTaskActor {
     u8 unk00[0x50];
@@ -200,7 +201,6 @@ s32 FUN_0039440c(void *controller);
 void FUN_00394508(void *controller);
 s32 gameStateIsFlagSetAndLarge();
 void asdSequenceRequest(u32 sequence, const void *parameters, u32 size);
-s32 FUN_002080e8();
 s32 FUN_00287800();
 s32 FUN_00287304();
 s32 tmnlHasSelection();

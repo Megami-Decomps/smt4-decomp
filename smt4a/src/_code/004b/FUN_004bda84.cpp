@@ -16,7 +16,7 @@ struct SelectorData {
     /* 0x60 */ u16 enabledMask;     /* bit i + 1 set: entry i is available */
 };
 
-/* Screen anchor of the selector, from FUN_001834a4. */
+/* Screen anchor of the selector, from asdTMTexTableEntryAt. */
 struct SelectorAnchor {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ s16 x;
@@ -34,7 +34,7 @@ extern "C" {
 
 extern RenderCtxSelector *g_renderCtx;
 
-SelectorAnchor *FUN_001834a4(u32 first, u32 second);
+SelectorAnchor *asdTMTexTableEntryAt(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void effectDispatchSelector(s16 entry, s32 x, s32 y, s32 kind, f32 scale);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
@@ -43,7 +43,7 @@ void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
  * past 20 frames, it also draws the next entry, sliding the pair together over a highlighted backdrop. */
 void FUN_004bda84(f32 scale, SelectorOwner *owner, SelectorData *data, s32 list, s32 x, s32 y)
 {
-    SelectorAnchor *anchor = FUN_001834a4(0x11, 0x12);
+    SelectorAnchor *anchor = asdTMTexTableEntryAt(0x11, 0x12);
     s32 current = 0;
     s32 next = 0;
     u16 mask = data->enabledMask;

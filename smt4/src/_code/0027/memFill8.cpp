@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/memFill8.h"
 
 extern "C" {
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: default switch lowering moves case5 out of line and reverses common return blocks (26 vs retail25 rows); optimization-flag candidate. */
 #include "common.h"
+#include "shard/affinityShouldReplaceState.h"
 
 extern "C" u32 affinityShouldReplaceState(s32 current, s32 incoming)
 {

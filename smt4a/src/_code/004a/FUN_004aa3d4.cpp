@@ -3,6 +3,9 @@
 #include "util/CalleeContracts.h"
 #include "mapnavi/naviMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "shard/gameGetOptions.h"
+#include "shard/FUN_0022fcb8.h"
+#include "gamedata/UnitStatInitialization.h"
 
 extern "C" {
 
@@ -41,9 +44,6 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 playerPrimaryGetKindValue(void);
 s32 playerSecondaryGetKindValue(void);
 s32 menuStateSetMode4(s32 mode);
-s32 gameGetOptions(void);
-s32 dataTableGetCategoryEntry(s32 category, u32 entry);
-s32 FUN_0022fcb8(void);
 DataRecord *FUN_00184310(u32 id);
 s32 dataRecordGetKindValue(u32 id);
 UnitState *btlUnitGet(u32 unit);

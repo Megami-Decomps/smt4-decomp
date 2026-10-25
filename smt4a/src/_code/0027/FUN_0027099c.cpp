@@ -1,9 +1,9 @@
 /* NON_MATCHING: the register set (percent/count/total/index in r4-r8) now matches; retail tests total != 0 and the 70% threshold in a nested form with the rating block placed after the shared return 5, and holds the record pointer in r0 while ours uses r1. */
+#include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState();
 void *FUN_001568f8(BtlMainStateA *battle, s32 group);
 
 /* Rates the share of live, flagged roster records against the battle's total: 5 when there is no

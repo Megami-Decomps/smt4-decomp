@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/buttonHelpHasEnabledEntryForId.h"
 
 struct ButtonHelpEntryView {
     u8 unk00;        // 0x00

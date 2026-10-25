@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/ReferencedKindRecord.h"
 
 extern "C" {
 

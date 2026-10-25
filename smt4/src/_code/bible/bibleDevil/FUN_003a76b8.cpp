@@ -2,12 +2,12 @@
 #include "classes/Obj42247c.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/UnitStats.h"
+#include "shard/flaggedValueHolderGetTotal.h"
 
 struct CompendiumPreviewHandle { u8 prefix[0x108]; s32 mode; };
 extern "C" {
 s32 utilityReturnSuccess(const void *input);
 CompendiumPreviewHandle *FUN_00297060(u32 first, u32 second);
-s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *selection);
 void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);

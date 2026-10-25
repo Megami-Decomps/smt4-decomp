@@ -4,10 +4,10 @@
 #include "gamedata/Table00.h"
 #include "gamedata/UnitPresentationInfo.h"
 #include <string.h>
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
-void *gameGetPlayerData();
 void FUN_002cb55c(UnitPresentationInfo *, void *, u32);
 void unitInitializeFromTemplate(u32, UnitRecord *);
 void unitRecordBuild(s32, UnitRecord *);

@@ -3,7 +3,6 @@
 #include <stddef.h>
 
 extern "C" {
-void* asdOperatorNew(u32 size);
 void FUN_002a65d8(void* file, u32 mask);
 void FUN_002a63d8(void* file, u32 mask);
 void FUN_002a6264(void* file, u32 mask);

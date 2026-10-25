@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the network session state machine; retail's shared tail (`state = next; return 1`) and the case-8 fallthrough into the wait state are arranged by armcc here with separate returns. */
 #include "common.h"
+#include "network/Common/CTRNetInit.h"
 
 /* A network object the session owns (slot 1 of its vtable is its deleting destructor). */
 class SessionObject {
@@ -65,7 +66,6 @@ s32 asyncOperationStartOrPoll(s32 operation, s32 *result, u32 *detail);
 void FUN_003fa1c8(NetSession *session);
 NetSession *FUN_003fa580(NetSession *session);
 void FUN_00414a24(void);
-void FUN_004321a0(void);
 s32 ctrNetInitialize(s32 *result);
 s32 FUN_00441f84(void);
 void FUN_00442630(void);

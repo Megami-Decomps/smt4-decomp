@@ -30,7 +30,7 @@ extern unsigned int categoryIdFromIndex(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
-extern int FUN_002bf4f8(unsigned int, unsigned int);
+extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 
 
 void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -76,10 +76,10 @@ void FUN_002b6c34(unsigned int param_1,int param_2,int param_3,int param_4,int p
     }
     if (temp_v2 >= 2) {
       drawSetColorFromRGBA8();
-      temp_v1 = FUN_002bf4f8(0x13,0x402);
+      temp_v1 = asdTMTexTableEntryAt(0x13,0x402);
       FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6da8);
-      temp_v1 = FUN_002bf4f8(0x13,0x401);
+      temp_v1 = asdTMTexTableEntryAt(0x13,0x401);
       FUN_002bdf94(2,*(short *)(temp_v1 + 8) + param_2,*(short *)(temp_v1 + 10) + param_3,0,1,
                    param_4 + 1,&LAB_002b6dac,temp_v2 - 1);
       FUN_002bed3c();

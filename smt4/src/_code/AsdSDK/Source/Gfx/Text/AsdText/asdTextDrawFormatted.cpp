@@ -1,5 +1,6 @@
 #include "AsdSDK/AsdDebug.h"
 #include <stdarg.h>
+#include "AsdSDK/asdTextDrawFormatted.h"
 
 extern "C" {
 

@@ -6,7 +6,7 @@ extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 void sysMemClear(void *memory, u32 size);
 void FUN_00371c3c(s16 portrait, s32 kind);
-BattlePortraitLayout *FUN_001834a4(u32 table, u32 index);
+BattlePortraitLayout *asdTMTexTableEntryAt(u32 table, u32 index);
 
 // Reset the two battle portrait slots and prepare their offscreen slide-in positions.
 void FUN_004ab8e4(void)
@@ -19,7 +19,7 @@ void FUN_004ab8e4(void)
     sysMemClear(panel, sizeof(*panel));
     panel->state = 0;
     panel->frame = 0;
-    for (s32 index = 0; index < 2; ++index) {
+    for (u32 index = 0; index < 2; ++index) {
         BattlePortraitSlot *slot = &panel->slots[index];
         slot->state = 0;
         slot->x = 0;
@@ -35,13 +35,13 @@ void FUN_004ab8e4(void)
             slot->requested = 1;
         }
     }
-    BattlePortraitLayout *layout = FUN_001834a4(13, 3024);
+    BattlePortraitLayout *layout = asdTMTexTableEntryAt(13, 3024);
     panel->slots[0].state = 0;
     panel->slots[0].x = layout->y + 256;
     panel->slots[0].targetX = layout->x - 267;
     panel->slots[0].y = -41;
     panel->slots[0].targetY = layout->y;
-    layout = FUN_001834a4(13, 3042);
+    layout = asdTMTexTableEntryAt(13, 3042);
     panel->slots[1].state = 0;
     panel->slots[1].x = layout->y - 256;
     panel->slots[1].targetX = layout->x - 272;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: debug menu values and toggles recovered; one extra saved pointer and flag-result register allocation differ. */
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
+#include "shard/listBoxItemHasOwner.h"
 
 struct BattleDebugList {
     /* 0x00 */ u8 unk00[0x10];
@@ -8,7 +9,6 @@ struct BattleDebugList {
 };
 
 extern "C" {
-s32 listBoxItemHasOwner(u32 list, u32 item);
 u32 asdListBoxGetSelectedItemId(u32 list);
 
 // Apply the selected battle debug-menu value or toggle its corresponding battle flag.

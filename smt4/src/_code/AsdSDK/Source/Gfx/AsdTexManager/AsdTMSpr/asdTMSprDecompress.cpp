@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMSpr.h"
 
 extern "C" {
 

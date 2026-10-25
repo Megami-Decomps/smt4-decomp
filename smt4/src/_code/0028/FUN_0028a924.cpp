@@ -1,5 +1,6 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028a924` (_code @ 0x28a924, 0xec8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -52,7 +53,6 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_00292be4. */
 /* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: FUN_0029378c. */
-extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 extern unsigned int objectPartRunUnlessLocked(void);
@@ -372,8 +372,8 @@ LAB_0028ad80:
         FUN_0026c654(temp_v3,0xffffffff,temp_v5,1);
         if (temp_v3 == 1) {
           *(unsigned char *)(temp_v0 + 0x678) = 0;
-          temp_v3 = btlGetMainState();
-          if ((temp_v3 != 0) && (temp_v3 = btlGetMainState(), (*(unsigned int *)(temp_v3 + 0x44a8) & 0x2000000) != 0)
+          temp_v3 = reinterpret_cast<int>(btlGetMainState());
+          if ((temp_v3 != 0) && (temp_v3 = reinterpret_cast<int>(btlGetMainState()), (*(unsigned int *)(temp_v3 + 0x44a8) & 0x2000000) != 0)
              ) {
             *(unsigned char *)(temp_v0 + 0x678) = 1;
           }

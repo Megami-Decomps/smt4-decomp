@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d3df0` (_code @ 0x4d3df0, 0x83c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+#include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
-int btlGetMainState(void);
 int asdListBoxSetIntItem(...);
 int FUN_0031f0f4(...);
 int asdListBoxSetToggleItem(...);
@@ -32,7 +33,6 @@ extern unsigned int FUN_0031cfd0(unsigned short);
 /* Supplied declaration required: FUN_0031f0f4. */
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetToggleItem. */
-extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetFloatItem. */
 extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int *FUN_003e83b4(unsigned int, unsigned int, unsigned int);
@@ -63,7 +63,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0:
     puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_1 + 0x1c) = *puVar6;
-    temp_v0 = btlGetMainState();
+    temp_v0 = reinterpret_cast<int>(btlGetMainState());
     puVar2 = (unsigned int *)FUN_003e83b4(temp_v0,*(unsigned int *)(param_1 + 0x1c),1);
     if (puVar2 != (unsigned int *)0x0) {
       asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),1,puVar2[0x96],1,9999,0);
@@ -90,7 +90,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
       asdListBoxSetIntItem(temp_v3,0xc,temp_v0,0,100,0);
       if ((-1 < (short)puVar2[2]) &&
          ((*puVar2 & DAT_00571618) != 0 || (puVar2[1] & DAT_0057161c) != 0)) {
-        btlGetMainState();
+        reinterpret_cast<int>(btlGetMainState());
         asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xd,0xffffffce,0x32);
         asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xe,0xffffffce,0x32);
       }
@@ -230,7 +230,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0xd:
     if (((puVar2 != (unsigned int *)0x0) && (-1 < (short)puVar2[2])) &&
        ((puVar2[1] & DAT_0057161c) != 0 || (*puVar2 & DAT_00571618) != 0)) {
-      temp_v2 = btlGetMainState();
+      temp_v2 = reinterpret_cast<int>(btlGetMainState());
       temp_v1 = puVar2[2];
       temp_v2 = *(int *)(temp_v2 + 0x1ed4);
       puVar6 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
@@ -241,7 +241,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   case 0xe:
     if (((puVar2 != (unsigned int *)0x0) && (-1 < (short)puVar2[2])) &&
        ((DAT_0057161c & puVar2[1]) != 0 || (*puVar2 & DAT_00571618) != 0)) {
-      temp_v2 = btlGetMainState();
+      temp_v2 = reinterpret_cast<int>(btlGetMainState());
       temp_v1 = puVar2[2];
       temp_v2 = *(int *)(temp_v2 + 0x1ed4);
       puVar6 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);

@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "map/mapDepart.h"
+#include "shard/FUN_00287800.h"
 
 /* One requirement of a quest record. */
 struct QuestRequirement {
@@ -34,7 +35,6 @@ struct UnitRecord {
 extern "C" {
 QuestRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 gameGetOptionProgressStatus(void);
-s32 FUN_00287800(void);
 s32 gameCountUnits(void);
 SlotTable *gameGetSlotTable(void);
 UnitRecord *gameGetUnitRecord(s32 slot);

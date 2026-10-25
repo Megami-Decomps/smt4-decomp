@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "shard/FUN_00384cf4.h"
 
 extern "C" {
 

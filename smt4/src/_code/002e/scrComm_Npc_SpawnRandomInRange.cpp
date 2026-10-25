@@ -1,6 +1,8 @@
 /* NON_MATCHING: a single compare - retail tests the upper level bound as `cmp max, level; strge` while armcc emits the operands the other way round (`cmp level, max; strle`); everything else is identical. */
 #include "common.h"
 #include "shard/JobWork.h"
+#include "bible/bibleDevil.h"
+#include "shard/demonGetRaceLabel.h"
 
 namespace {
 /* A demon record: only the fields the filter reads. */
@@ -39,7 +41,6 @@ void eventTexRegisterAndSortTask(u32 job);
 void FUN_00247bf4(u32 job, s32 frame, s32 flag);
 void *memClear(void *data, u32 size);
 const char *FUN_002bd06c(u32 id);
-const char *demonGetRaceLabel(u32 id, s32 kind);
 char *libc_strcpy(char *destination, const char *source);
 void textEncodeFontSlot(u32 slot, const char *text);
 u32 fileSlotGetBuffer(u32 slot);
